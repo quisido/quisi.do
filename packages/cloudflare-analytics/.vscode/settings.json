@@ -1,0 +1,6 @@
+{
+  "files.exclude": {
+    ".wrangler/": true,
+    "dist/": true
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/"],
+  "extends": "./tsconfig.json",
+  "include": ["src/"],
+  "compilerOptions": {
+    "declarationDir": "dist",
+    "jsx": "react-jsx",
+    "noEmit": false,
+    "outDir": "dist",
+    "rootDir": "src",
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/sentry-react/src/"
+  }
+}

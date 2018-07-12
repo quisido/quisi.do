@@ -1,0 +1,14 @@
+/.next/
+/.wrangler/
+/analyze/
+/certificates/
+/coverage/
+/cypress/downloads/
+/cypress/screenshots/
+/cypress/videos/
+/node_modules/
+/out/
+/lighthouse.report.*
+/lighthouse-0.devtoolslog.json
+/lighthouse-0.trace.json
+/localhost_*-*-*_*-*-*.report.*

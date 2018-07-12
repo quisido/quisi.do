@@ -1,0 +1,9 @@
+/.vscode/
+/node_modules/
+/.attw.json
+/.*ignore
+/.*rc.*
+/*.iml
+/*-*.*.*.tgz
+/tsconfig.*
+.DS_Store

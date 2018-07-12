@@ -1,0 +1,13 @@
+.root {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: stretch;
+  margin: -0.5em;
+
+  > * {
+    flex-grow: 1;
+    margin: 0.5em;
+  }
+}

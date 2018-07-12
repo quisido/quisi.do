@@ -1,0 +1,53 @@
+{
+  "name": "@monorepo-template/tree-logger",
+  "version": "2.0.0",
+  "author": "quisi.do <monorepo-template-tree-logger@quisi.do>",
+  "description": "a logger for hierarchical validation",
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/tree-logger#readme",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "repository": "github:quisido/quisi.do",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "bugs": {
+    "email": "monorepo-template-tree-logger@quisi.do",
+    "url": "https://github.com/quisido/quisi.do/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quisido"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "attw": "attw",
+    "clean": "rm -rf dist jest && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
+    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/monorepo-template--tree-logger.sarif",
+    "eslint:fix": "eslint '**/*' --fix",
+    "prepack": "yarn run tsc",
+    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint \"yarn run attw\" \"yarn run eslint\"",
+    "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json"
+  },
+  "dependencies": {
+    "ansi-styles": "^6.2.1"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.1",
+    "@microsoft/eslint-formatter-sarif": "^3.0.0",
+    "@monorepo-template/eslint-config": "^1.0.7",
+    "@types/node": "^20.11.28",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.2.5",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.2"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "files.exclude": {
+    ".wrangler/": true,
+    "dist/": true,
+    "node_modules/": true,
+    "jest.config.cjs": true
+  }
+}
