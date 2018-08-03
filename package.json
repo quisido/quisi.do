@@ -1,0 +1,23 @@
+{
+  "name": "charlesstover",
+  "version": "0.1.0",
+  "author": "Charles Stover",
+  "dependencies": {
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-portfolio": "^0.0.9",
+    "react-scripts": "1.1.4"
+  },
+  "homepage": "https://charlesstover.com/",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CharlesStover/charlesstover.git"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

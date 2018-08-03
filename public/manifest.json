@@ -1,0 +1,15 @@
+{
+  "display": "standalone",
+  "icons": [
+    {
+      "sizes": "16x16",
+      "src": "/favicon.ico",
+      "type": "image/x-icon"
+    }
+  ],
+  "name": "Charles Stover",
+  "short_name": "Charles Stover",
+  "start_url": "/",
+  "theme_color": "#161616",
+  "background_color": "#202020"
+}
