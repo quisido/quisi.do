@@ -1,5 +1,8 @@
 import React from 'react';
 import Portfolio from 'react-portfolio';
+import AboutMe from '../routes/about-me/about-me';
+
+const UPDATE_HUE_DELAY = 1000;
 
 const nav = [
   {
@@ -7,23 +10,22 @@ const nav = [
     title: 'About Me'
   },
   {
-    path: '/contact',
-    title: 'Contact'
-  },
-  {
-    path: '/donate',
-    title: 'Donate'
-  },
-  {
     path: '/portfolio',
     title: 'Portfolio'
+  }
+];
+
+const routes = [
+  {
+    component: AboutMe,
+    path: '/'
   }
 ];
 
 const social = {
   email: 'charlesstover@charlesstover.com',
   github: 'CharlesStover',
-  linkedIn: 'charles-stover',
+  linkedin: 'charles-stover',
   medium: 'Charles_Stover',
   npmjs: 'charlesstover',
   reddit: 'Charles_Stover',
@@ -37,20 +39,26 @@ export default class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      hue: 0
+      hue: 0.5
     };
     this.updateHue = this.updateHue.bind(this);
+    this.updateHueInterval = null;
   }
 
   componentDidMount() {
-    this.updateHue();
+    if (UPDATE_HUE_DELAY > 0) {
+      this.updateHueInterval = setInterval(this.updateHue, UPDATE_HUE_DELAY);
+    }
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(this.updateHueInterval);
   }
 
   updateHue() {
-    this.setState((state) => ({
+    this.setState(state => ({
       hue: (state.hue + 0.01) % 1
     }));
-    setTimeout(this.updateHue, 100);
   }
 
   render() {
@@ -59,6 +67,7 @@ export default class App extends React.PureComponent {
         copyright={2009}
         hue={this.state.hue}
         nav={nav}
+        routes={routes}
         social={social}
         title="Charles Stover"
       />
