@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import Quotes from 'react-quotes';
 import withStyles from './about-me-styles';
+import quotes from './quotes';
 
 const backEndYears = new Date().getFullYear() - 2006;
 const frontEndYears = new Date().getFullYear() - 2001;
@@ -12,7 +13,7 @@ class AboutMe extends React.PureComponent {
     return (
       <React.Fragment>
         <Paper className={this.props.classes.paper}>
-          <Quotes />
+          <Quotes quotes={quotes} />
         </Paper>
         <Paper className={this.props.classes.paper}>
           <Typography variant="headline">Coding Background</Typography>
