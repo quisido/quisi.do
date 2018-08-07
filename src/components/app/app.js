@@ -1,3 +1,4 @@
+import Konami from '@gamingmedley/konami.js';
 import React from 'react';
 import Portfolio from 'react-portfolio';
 import AboutMe from '../routes/about-me/about-me';
@@ -41,18 +42,28 @@ export default class App extends React.PureComponent {
     this.state = {
       hue: 0.5
     };
+    this.handleKonami = this.handleKonami.bind(this);
+    this.unsubscribeKonami = null;
     this.updateHue = this.updateHue.bind(this);
     this.updateHueInterval = null;
   }
 
   componentDidMount() {
-    if (UPDATE_HUE_DELAY > 0) {
-      this.updateHueInterval = setInterval(this.updateHue, UPDATE_HUE_DELAY);
-    }
+    this.unsubscribeKonami = Konami.add(this.handleKonami);
   }
 
   componentWillUnmount() {
+    this.unsubscribeKonami();
     window.clearInterval(this.updateHueInterval);
+  }
+
+  handleKonami() {
+    if (this.updateHueInterval === null) {
+      this.updateHueInterval = window.setInterval(this.updateHue, UPDATE_HUE_DELAY);
+    }
+    else {
+      window.clearInterval(this.updateHueInterval);
+    }
   }
 
   updateHue() {

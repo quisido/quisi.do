@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "author": "Charles Stover",
   "dependencies": {
+    "@gamingmedley/konami.js": "^1.0.2",
     "@material-ui/core": "^1.4.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
