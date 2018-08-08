@@ -13,7 +13,10 @@ class AboutMe extends React.PureComponent {
     return (
       <React.Fragment>
         <Paper className={this.props.classes.paper}>
-          <Quotes quotes={quotes} />
+          <Quotes
+            quotes={quotes}
+            shuffle
+          />
         </Paper>
         <Paper className={this.props.classes.paper}>
           <Typography variant="headline">Coding Background</Typography>
