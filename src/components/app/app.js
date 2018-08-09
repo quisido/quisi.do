@@ -1,9 +1,10 @@
 import Konami from '@gamingmedley/konami.js';
 import React from 'react';
-import Portfolio from 'react-portfolio';
+import ReactPortfolio from 'react-portfolio';
 import AboutMe from '../routes/about-me/about-me';
+import Portfolio from '../routes/portfolio/portfolio';
 
-const UPDATE_HUE_DELAY = 1000;
+const UPDATE_HUE_DELAY = 250;
 
 const nav = [
   {
@@ -20,6 +21,11 @@ const routes = [
   {
     component: AboutMe,
     path: '/'
+  },
+  {
+    component: Portfolio,
+    path: '/portfolio',
+    title: 'Portfolio'
   }
 ];
 
@@ -37,16 +43,11 @@ const social = {
 
 export default class App extends React.PureComponent {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      hue: 0.5
-    };
-    this.handleKonami = this.handleKonami.bind(this);
-    this.unsubscribeKonami = null;
-    this.updateHue = this.updateHue.bind(this);
-    this.updateHueInterval = null;
-  }
+  state = {
+    hue: 0.5
+  };
+  unsubscribeKonami = null;
+  updateHueInterval = null;
 
   componentDidMount() {
     this.unsubscribeKonami = Konami.add(this.handleKonami);
@@ -57,7 +58,7 @@ export default class App extends React.PureComponent {
     window.clearInterval(this.updateHueInterval);
   }
 
-  handleKonami() {
+  handleKonami = () => {
     if (this.updateHueInterval === null) {
       this.updateHueInterval = window.setInterval(this.updateHue, UPDATE_HUE_DELAY);
     }
@@ -66,7 +67,7 @@ export default class App extends React.PureComponent {
     }
   }
 
-  updateHue() {
+  updateHue = () => {
     this.setState(state => ({
       hue: (state.hue + 0.01) % 1
     }));
@@ -74,7 +75,7 @@ export default class App extends React.PureComponent {
 
   render() {
     return (
-      <Portfolio
+      <ReactPortfolio
         copyright={2009}
         hue={this.state.hue}
         nav={nav}

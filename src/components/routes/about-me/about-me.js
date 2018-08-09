@@ -19,7 +19,10 @@ class AboutMe extends React.PureComponent {
           />
         </Paper>
         <Paper className={this.props.classes.paper}>
-          <Typography variant="headline">Coding Background</Typography>
+          <Typography
+            children="Coding Background"
+            variant="headline"
+          />
           <Typography paragraph>
             My name is Charles Stover.
             I am a senior web development consultant currently employed with a focus in React and Node.
