@@ -9,7 +9,7 @@
     core-js "^2.5.7"
     regenerator-runtime "^0.12.0"
 
-"@charlesstover/hsl2rgb@^1.0.1":
+"@charlesstover/hsl2rgb@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@charlesstover/hsl2rgb/-/hsl2rgb-1.0.4.tgz#6bda4c13b11a3a3499794f08772b19f914ea993b"
 
@@ -2052,6 +2052,10 @@ delayed-stream@~1.0.0:
 delegates@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
+
+delimiter@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/delimiter/-/delimiter-1.0.0.tgz#2d8a25dfd29de7ea9be8b590fe947ef2a3727682"
 
 depd@1.1.1:
   version "1.1.1"
@@ -4546,6 +4550,10 @@ mem@^1.1.0:
   dependencies:
     mimic-fn "^1.0.0"
 
+memoize-one@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-4.0.0.tgz#fc5e2f1427a216676a62ec652cf7398cfad123db"
+
 memory-fs@^0.4.0, memory-fs@~0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.4.1.tgz#3a9a20b8462523e447cfbc7e8bb80ed667bfc552"
@@ -5793,23 +5801,23 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
 
-react-multi-context@^1.0.9:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/react-multi-context/-/react-multi-context-1.0.10.tgz#a5c41ff9c1aa443b8095e68c9f61d53c3feb38c1"
-  dependencies:
-    react "^16.0.0"
+react-multi-context@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-multi-context/-/react-multi-context-1.1.1.tgz#7b9e288b7be5bd36ce20449f78ada738c0275d98"
 
-react-object-prop@^1.0.3:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-object-prop/-/react-object-prop-1.0.4.tgz#1210660423f13a91ff0d36fd919665f56e3e2745"
+react-object-prop@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-object-prop/-/react-object-prop-1.0.5.tgz#c2239c249751766546949d43d9d0503a2ba86298"
 
-react-portfolio@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/react-portfolio/-/react-portfolio-0.0.9.tgz#9c5f7fbaa3b59b5d43fd49db0afd45245749f215"
+react-portfolio@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-portfolio/-/react-portfolio-1.0.3.tgz#10b6ed008f8b4118a0663f1b088a94530878bb14"
   dependencies:
-    "@charlesstover/hsl2rgb" "^1.0.1"
-    react-multi-context "^1.0.9"
-    react-object-prop "^1.0.3"
+    "@charlesstover/hsl2rgb" "^1.0.4"
+    delimiter "^1.0.0"
+    memoize-one "^4.0.0"
+    react-multi-context "^1.1.1"
+    react-object-prop "^1.0.5"
 
 react-router-dom@^4.3.1:
   version "4.3.1"
@@ -5888,7 +5896,7 @@ react-transition-group@^2.2.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react@^16.0.0, react@^16.4.2:
+react@^16.4.2:
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.4.2.tgz#2cd90154e3a9d9dd8da2991149fdca3c260e129f"
   dependencies:

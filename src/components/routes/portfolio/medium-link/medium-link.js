@@ -1,7 +1,7 @@
 import React from 'react';
-import withStyles from './medium-link-styles';
+import Link from '../link/portfolio-link';
 
-class MediumLink extends React.PureComponent {
+export default class MediumLink extends React.PureComponent {
 
   get href() {
     return 'https://medium.com/@Charles_Stover/' + this.titleHref + '-' + this.props.id;
@@ -18,15 +18,11 @@ class MediumLink extends React.PureComponent {
 
   render() {
     return (
-      <li className={this.props.classes.root}>
-        <a
-          children={this.props.title}
-          href={this.href}
-          rel="nofollow noopener noreferrer"
-        />
-      </li>
+      <Link
+        children={this.props.title}
+        href={this.href}
+        title={this.props.title + ' – Charles Stover – Medium'}
+      />
     );
   }
 }
-
-export default withStyles(MediumLink);
