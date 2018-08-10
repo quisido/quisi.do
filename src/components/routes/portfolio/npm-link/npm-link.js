@@ -1,5 +1,4 @@
 import React from 'react';
-import github from '../../../../assets/icons/github.png';
 import Link from '../link/portfolio-link';
 
 export default class NpmLink extends React.PureComponent {

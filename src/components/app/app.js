@@ -2,7 +2,9 @@ import Konami from '@gamingmedley/konami.js';
 import React from 'react';
 import ReactPortfolio from 'react-portfolio';
 import AboutMe from '../routes/about-me/about-me';
+import ElectronTransitions from '../routes/electron-transitions/electron-transitions';
 import Portfolio from '../routes/portfolio/portfolio';
+import Radix from '../routes/radix/radix';
 
 const UPDATE_HUE_DELAY = 250;
 
@@ -23,9 +25,19 @@ const routes = [
     path: '/'
   },
   {
+    component: ElectronTransitions,
+    path: '/electron-transitions',
+    title: 'Electron Transitions'
+  },
+  {
     component: Portfolio,
     path: '/portfolio',
     title: 'Portfolio'
+  },
+  {
+    component: Radix,
+    path: '/radix',
+    title: 'Radix Conversion'
   }
 ];
 

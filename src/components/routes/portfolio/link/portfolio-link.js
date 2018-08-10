@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'react-router-dom/Link';
 import withStyles from './portfolio-link-styles';
 
 class PortfolioLink extends React.PureComponent {
@@ -16,16 +17,23 @@ class PortfolioLink extends React.PureComponent {
   }
 
   render() {
+    const Component =
+      this.props.internal ?
+        Link :
+        'a';
     const props = {...this.props};
     delete props.classes;
     delete props.description;
     delete props.flair;
+    delete props.internal;
+    if (!this.props.internal) {
+      props.rel = 'nofollow noopener noreferrer';
+    }
     return (
       <li className={this.props.classes.root}>
-        <a
+        <Component
           children="[1]"
-          rel="nofollow noopener noreferrer"
-          {...this.props}
+          {...props}
         />
         {this.description}
       </li>

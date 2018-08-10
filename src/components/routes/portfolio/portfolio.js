@@ -1,5 +1,6 @@
 import React from 'react';
 import GitHubLink from './github-link/github-link';
+import Link from './link/portfolio-link';
 import MediumLink from './medium-link/medium-link';
 import NpmLink from './npm-link/npm-link';
 import Section from './section/portfolio-section';
@@ -97,6 +98,31 @@ class Portfolio extends React.PureComponent {
           <NpmLink
             description="A quotes carousel for React."
             package="react-quotes"
+          />
+        </Section>
+        <Section title="Projects">
+          <Link
+            children="Electron Transition Calculator"
+            description="A simple tool for calculating change during electron transitions."
+            internal
+            to="/electron-transitions"
+          />
+          <Link
+            children="Meditative Breathing"
+            description="A visual representation to guide meditative breathing."
+            to="/breathe"
+          />
+          <Link
+            children="Radix Conversion"
+            description="Convert between bases with this simple radix conversion tool."
+            internal
+            to="/radix"
+          />
+          <Link
+            children="Rainbow Text Generator"
+            description="Rainbowify your text."
+            internal
+            to="/rainbow-text"
           />
         </Section>
         <Section title="Publications">
