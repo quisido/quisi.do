@@ -102,6 +102,11 @@ class Portfolio extends React.PureComponent {
         </Section>
         <Section title="Projects">
           <Link
+            children="Dota 2 HUD Gallery"
+            description="View live demonstrations of the Dota 2 HUDs in your browser."
+            href="https://dota2.gamingmedley.com/hud_skins/"
+          />
+          <Link
             children="Electron Transition Calculator"
             description="A simple tool for calculating change during electron transitions."
             internal
@@ -123,6 +128,18 @@ class Portfolio extends React.PureComponent {
             description="Rainbowify your text."
             internal
             to="/rainbow-text"
+          />
+          <Link
+            children="Secure Password Generator"
+            description="Generates a random string for password use."
+            internal
+            to="/password-generator"
+          />
+          <Link
+            children="Sprite Sheet to GIF Converter"
+            description="Convert your sprite sheet files to animated GIFs with this simple online tool."
+            internal
+            to="/spritesheet2gif"
           />
         </Section>
         <Section title="Publications">
