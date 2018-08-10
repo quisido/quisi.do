@@ -1,0 +1,16 @@
+import React from 'react';
+import github from '../../../../assets/icons/github.png';
+import Link from '../link/portfolio-link';
+
+export default class NpmLink extends React.PureComponent {
+  render() {
+    return (
+      <Link
+        children={this.props.package}
+        description={this.props.description}
+        href={'https://www.npmjs.com/package/' + this.props.package}
+        title={this.props.package + ' - npm'}
+      />
+    );
+  }
+}
