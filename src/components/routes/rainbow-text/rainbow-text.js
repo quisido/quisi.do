@@ -47,6 +47,7 @@ class RainbowTextGenerator extends React.PureComponent {
         <Paper className={this.props.classes.paper}>
           <Typography
             children="Rainbow Text Generator"
+            gutterBottom
             variant="headline"
           />
           &ldquo;Rainbowify&rdquo; your text with this rainbow text generator.{' '}

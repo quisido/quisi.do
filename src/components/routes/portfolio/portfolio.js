@@ -123,7 +123,7 @@ class Portfolio extends React.PureComponent {
           <Link
             children="Meditative Breathing"
             description="A visual representation to guide meditative breathing."
-            to="/breathe"
+            href="/breathe"
           />
           <Link
             children="Radix Conversion"
