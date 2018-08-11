@@ -5700,6 +5700,12 @@ raf@3.4.0:
   dependencies:
     performance-now "^2.1.0"
 
+rainbow-gradient@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/rainbow-gradient/-/rainbow-gradient-1.0.0.tgz#921cf9a4b2def39b9e90d9aa764a8aefc268598d"
+  dependencies:
+    "@charlesstover/hsl2rgb" "^1.0.4"
+
 randomatic@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/randomatic/-/randomatic-3.0.0.tgz#d35490030eb4f7578de292ce6dfb04a91a128923"
@@ -5818,6 +5824,13 @@ react-portfolio@^1.0.3:
     memoize-one "^4.0.0"
     react-multi-context "^1.1.1"
     react-object-prop "^1.0.5"
+
+react-rainbow-text@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-rainbow-text/-/react-rainbow-text-1.0.2.tgz#745dea1b6d079d744ea12d21eb62df3585f0a609"
+  dependencies:
+    memoize-one "^4.0.0"
+    rainbow-gradient "^1.0.0"
 
 react-router-dom@^4.3.1:
   version "4.3.1"

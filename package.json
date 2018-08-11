@@ -5,9 +5,12 @@
   "dependencies": {
     "@gamingmedley/konami.js": "^1.0.2",
     "@material-ui/core": "^1.4.2",
+    "memoize-one": "^4.0.0",
+    "rainbow-gradient": "^1.0.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-portfolio": "^1.0.3",
+    "react-rainbow-text": "^1.0.2",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4"
   },

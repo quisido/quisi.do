@@ -80,6 +80,10 @@ class Portfolio extends React.PureComponent {
             package="mssql-query-builder"
           />
           <NpmLink
+            description="Generates a gradient of the colors of the rainbow."
+            package="rainbow-gradient"
+          />
+          <NpmLink
             description="Returns the innerText of a React JSX object."
             package="react-innertext"
           />
@@ -98,6 +102,10 @@ class Portfolio extends React.PureComponent {
           <NpmLink
             description="A quotes carousel for React."
             package="react-quotes"
+          />
+          <NpmLink
+            description="Generates rainbow-colored text in React."
+            package="react-rainbow-text"
           />
         </Section>
         <Section title="Projects">

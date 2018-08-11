@@ -5,6 +5,7 @@ import AboutMe from '../routes/about-me/about-me';
 import ElectronTransitions from '../routes/electron-transitions/electron-transitions';
 import Portfolio from '../routes/portfolio/portfolio';
 import Radix from '../routes/radix/radix';
+import RainbowText from '../routes/rainbow-text/rainbow-text';
 
 const UPDATE_HUE_DELAY = 250;
 
@@ -22,7 +23,8 @@ const nav = [
 const routes = [
   {
     component: AboutMe,
-    path: '/'
+    path: '/',
+    title: 'Charles Stover'
   },
   {
     component: ElectronTransitions,
@@ -32,12 +34,21 @@ const routes = [
   {
     component: Portfolio,
     path: '/portfolio',
-    title: 'Portfolio'
+    title: 'Charles Stover\'s Portfolio'
   },
   {
     component: Radix,
+    description: 'Convert between bases with this handy radix calculator.',
+    keywords: [ 'base converter', 'convert base 2 to base 8', 'convert base 2 to base 10', 'convert base 2 to base 16', 'convert base 8 to base 2', 'convert base 8 to base 10', 'convert base 8 to base 16', 'convert base 10 to base 2', 'convert base 10 to base 8', 'convert base 10 to base 16', 'convert base 16 to base 2', 'convert base 16 to base 8', 'convert base 16 to base 10', 'convert bases', 'convert binary to decimal', 'convert binary to hexadecimal', 'convert binary to octal', 'convert decimal to binary', 'convert decimal to hexadecimal', 'convert decimal to octal', 'convert hexadecimal to binary', 'convert hexadecimal to decimal', 'convert hexadecimal to octal', 'convert octal to binary', 'convert octal to decimal', 'convert octal to hexadecimal', 'radix conversion' ],
     path: '/radix',
     title: 'Radix Conversion'
+  },
+  {
+    component: RainbowText,
+    description: 'Generate rainbow-colored text in HTML or BB code for forums!',
+    keywords: [ 'rainbow color text generator', 'rainbow text bb code', 'rainbow text for forums', ' rainbow text generator', ' rainbow text html', ' rainbow text maker' ],
+    path: '/rainbow-text',
+    title: 'Rainbow Text Generator'
   }
 ];
 
