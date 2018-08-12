@@ -3,6 +3,7 @@ import React from 'react';
 import ReactPortfolio from 'react-portfolio';
 import AboutMe from '../routes/about-me/about-me';
 import ElectronTransitions from '../routes/electron-transitions/electron-transitions';
+import PasswordGenerator from '../routes/password-generator/password-generator';
 import Portfolio from '../routes/portfolio/portfolio';
 import Radix from '../routes/radix/radix';
 import RainbowText from '../routes/rainbow-text/rainbow-text';
@@ -28,11 +29,22 @@ const routes = [
   },
   {
     component: ElectronTransitions,
+    description: 'Calculcator for the energy, frequencies, wavelengths of electron transitions.',
+    keywords: [ 'electron transition calculator' ],
     path: '/electron-transitions',
     title: 'Electron Transitions'
   },
   {
+    component: PasswordGenerator,
+    description: 'Generate an automated, secure password with symbols.',
+    keywords: [ 'password generator', 'secure password generator', 'strong password generator' ],
+    path: '/password-generator',
+    title: 'Secure Password Generator'
+  },
+  {
     component: Portfolio,
+    description: 'View the web development portfolio of Charles Stover.',
+    keywords: [ 'Charles Stover', 'freelance web developer', 'freelance web development', 'web development consultant', 'web development portfolio' ],
     path: '/portfolio',
     title: 'Charles Stover\'s Portfolio'
   },
