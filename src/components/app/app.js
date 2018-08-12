@@ -7,6 +7,7 @@ import PasswordGenerator from '../routes/password-generator/password-generator';
 import Portfolio from '../routes/portfolio/portfolio';
 import Radix from '../routes/radix/radix';
 import RainbowText from '../routes/rainbow-text/rainbow-text';
+import SpriteSheetToGif from '../routes/spritesheet2gif/spritesheet2gif';
 
 const UPDATE_HUE_DELAY = 250;
 
@@ -61,6 +62,13 @@ const routes = [
     keywords: [ 'rainbow color text generator', 'rainbow text bb code', 'rainbow text for forums', ' rainbow text generator', ' rainbow text html', ' rainbow text maker' ],
     path: '/rainbow-text',
     title: 'Rainbow Text Generator'
+  },
+  {
+    component: SpriteSheetToGif,
+    description: 'Convert a sprite sheet to an animated GIF!',
+    keywords: [ 'animate sprite sheets', 'animate sprite sheets online', 'convert sprite sheets to animated gifs', 'convert sprite sheets to animated gifs online', 'online sprite sheet animator', 'online sprite sheet to animated gif converter', 'online sprite sheet to gif converter', 'online sprite sheet to gif maker', 'sprite sheet animator', 'sprite sheet to animated gif', 'sprite sheet to animated gif converter', 'sprite sheet to animated gif maker', 'sprite sheet to animated gif online', 'sprite sheet to gif', 'sprite sheet to gif converter', 'sprite sheet to gif maker', 'sprite sheet to gif online' ],
+    path: '/spritesheet2gif',
+    title: 'Sprite Sheet to GIF Converter'
   }
 ];
 
