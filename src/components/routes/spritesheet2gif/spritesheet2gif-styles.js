@@ -1,6 +1,14 @@
 import withStyles from '@material-ui/core/styles/withStyles';
 
 export default withStyles({
+  about: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  aboutText: {
+    flexBasis: 0,
+    flexGrow: 2
+  },
   dimension: {
     width: '4em'
   },
@@ -17,6 +25,9 @@ export default withStyles({
   paper: {
     margin: '1em',
     padding: '1em'
+  },
+  spriteContainer: {
+    flexGrow: 1
   },
   table: {
     width: '100%',

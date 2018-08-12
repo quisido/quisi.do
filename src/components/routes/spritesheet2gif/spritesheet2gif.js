@@ -136,6 +136,10 @@ class SpriteSheetToGif extends React.PureComponent {
     );
   }
 
+  get sprite() {
+    return null;
+  }
+
   get verticalText() {
     if (this.state.direction !== 'vertical') {
       return null;
@@ -190,13 +194,19 @@ class SpriteSheetToGif extends React.PureComponent {
   render() {
     return (
       <React.Fragment>
-        <Paper className={this.props.classes.paper}>
-          <Typography
-            children="Sprite Sheet Animator"
-            gutterBottom
-            variant="headline"
+        <Paper className={this.props.classes.paper + ' ' + this.props.classes.about}>
+          <div className={this.props.classes.aboutText}>
+            <Typography
+              children="Sprite Sheet Animator"
+              gutterBottom
+              variant="headline"
+            />
+            <Typography children="Convert your sprite sheet files to animated GIFs with this simple online tool. Browse your computer for a GIF, JPEG, or PNG sprite sheet, select the appropriate options for your animation, and click Convert!" />
+          </div>
+          <div
+            children={this.sprite}
+            className={this.props.classes.spriteContainer}
           />
-          <Typography children="Convert your sprite sheet files to animated GIFs with this simple online tool. Browse your computer for a GIF, JPEG, or PNG sprite sheet, select the appropriate options for your animation, and click Convert!" />
         </Paper>
         <Paper className={this.props.classes.paper}>
           <Typography
