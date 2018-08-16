@@ -88,6 +88,10 @@ class Portfolio extends React.PureComponent {
             package="react-innertext"
           />
           <NpmLink
+            description="A React tooltip similar to Material UI's design."
+            package="react-mui-tooltip"
+          />
+          <NpmLink
             description="Manage multiple contexts with a single React component."
             package="react-multi-context"
           />

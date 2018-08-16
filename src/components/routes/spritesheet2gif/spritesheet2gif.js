@@ -276,7 +276,7 @@ class SpriteSheetToGif extends React.PureComponent {
                   <Typography paragraph={this.state.info}>
                     <a
                       children={this.state.info ? '- Less Info' : '+ More Info'}
-                      href="#"
+                      href="/spritesheet2gif"
                       onClick={this.handleInfoClick}
                     />
                   </Typography>
