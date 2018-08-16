@@ -5825,6 +5825,12 @@ react-portfolio@^1.0.3:
     react-multi-context "^1.1.1"
     react-object-prop "^1.0.5"
 
+react-quotes@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-quotes/-/react-quotes-1.0.0.tgz#779dc6c8f99f71ac3256bfa11ab36b30cd990de9"
+  dependencies:
+    memoize-one "^4.0.0"
+
 react-rainbow-text@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-rainbow-text/-/react-rainbow-text-1.0.2.tgz#745dea1b6d079d744ea12d21eb62df3585f0a609"
