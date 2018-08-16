@@ -14,48 +14,58 @@ class Portfolio extends React.PureComponent {
             description="Play Tetris on your Nintendo 3DS!"
             org="GamingMedley"
             repo="3ds-tetris"
+            title="3DS Tetris"
           />
           <GitHubLink
             description="Automated webpage optimization utility that caches, compresses, concatenates, and otherwise optimizes HTML, CSS, JavaScript, and static file content distribution."
             repo="cspage-php"
+            title="CSPage"
           />
           <GitHubLink
             description="A 2D platformer engine implemented in the web browser."
             org="GamingMedley"
             repo="platformer-engine"
+            title="Platformer Engine"
           />
           <GitHubLink
             description="A tech demo for a browser-based, Pokemon-esque RPG overworld engine that even supports Internet Explorer 6."
             org="GamingMedley"
             repo="rpg-overworld-engine"
+            title="RPG Overworld Engine"
           />
           <GitHubLink
             description="A simple shopping list application."
             repo="shopping-list"
+            title="Shopping List"
           />
           <GitHubLink
             description="An artistic tribute to the Sonic the Hedgehog franchise."
             org="GamingMedley"
             repo="sonic-the-hedgehog-tribute"
+            title="Sonic the Hedgehog Tribute"
           />
           <GitHubLink
             description="Super Mario World engine in JavaScript"
             org="GamingMedley"
             repo="super-mario-world-js"
+            title="Super Mario World JS"
           />
           <GitHubLink
             description="Super Mario World engine in Python"
             org="GamingMedley"
             repo="super-mario-world-py"
+            title="Super Mario World PY"
           />
           <GitHubLink
             description="Open source JavaScript snippet that scans tabular data, appends arrow links to the header of sortable tables, and binary sorts the table by the data contained in that column when its sort link is clicked."
             repo="table-sort"
+            title="Table Sort"
           />
           <GitHubLink
             description="Mark your TF2 Bingo card as stereotypical situations unfold throughout your game!"
             org="GamingMedley"
             repo="tf2-bingo"
+            title="Team Fortress 2 Bingo"
           />
         </Section>
         <Section title="NPM Packages">

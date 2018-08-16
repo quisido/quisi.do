@@ -14,6 +14,8 @@ class AboutMe extends React.PureComponent {
       <React.Fragment>
         <Paper className={this.props.classes.paper}>
           <Quotes
+            animationDuration={2500}
+            delay={12500}
             quotes={quotes}
             shuffle
           />
@@ -25,7 +27,7 @@ class AboutMe extends React.PureComponent {
           />
           <Typography paragraph>
             My name is Charles Stover.
-            I am a senior web development consultant currently employed with a focus in React and Node.
+            I am a senior full-stack web development consultant currently employed with a focus in React and Node.
             I have over 15 years experience in web development languages such as JavaScript and PHP.
             My focus thus far has been in automated content generation, micro-optimization, SEO, and web security.
             All of my work strives for optimal UI/UX through modern design principles, optimized performance, and standardization.

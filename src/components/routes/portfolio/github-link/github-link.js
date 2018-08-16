@@ -18,7 +18,7 @@ export default class GitHubLink extends React.PureComponent {
   render() {
     return (
       <Link
-        children={this.props.repo}
+        children={this.props.title || this.props.repo}
         description={this.props.description}
         href={this.href}
         title={this.title}
