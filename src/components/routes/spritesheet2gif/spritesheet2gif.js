@@ -1,3 +1,6 @@
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
@@ -11,6 +14,8 @@ class SpriteSheetToGif extends React.PureComponent {
 
   dimensionInputProps = createObjectProp();
   durationInputProps = createObjectProp();
+  selectClasses = createObjectProp();
+  selectProps = createObjectProp();
 
   state = {
     dimension: 0,
@@ -33,18 +38,26 @@ class SpriteSheetToGif extends React.PureComponent {
       return null;
     }
     return (
-      <ul>
-        <li>
-          If the sprite sheet is wider than it is tall:
-          {this.automaticDimensionText('width')}
-          <p>The sprite's height {this.state.dimension === 0 ? 'and width ' : null} will be equal to the height of the sprite sheet.</p>
-        </li>
-        <li>
-          If the sprite sheet is taller than it is wide:
-          <p>The sprite's {this.state.dimension === 0 ? 'height and ' : null}width will be equal to the width of the sprite sheet.</p>
-          {this.automaticDimensionText('height')}
-        </li>
-      </ul>
+      <React.Fragment>
+        <ListItem>
+          <ListItemText>
+            <Typography children="If the sprite sheet is wider than it is tall:" />
+            {this.automaticDimensionText('width')}
+            <Typography>
+              The sprite's height {this.state.dimension === 0 ? 'and width ' : null} will be equal to the height of the sprite sheet.
+            </Typography>
+          </ListItemText>
+        </ListItem>
+        <ListItem>
+          <ListItemText>
+            <Typography children="If the sprite sheet is taller than it is wide:" />
+            <Typography>
+              The sprite's {this.state.dimension === 0 ? 'height and ' : null}width will be equal to the width of the sprite sheet.
+            </Typography>
+            {this.automaticDimensionText('height')}
+          </ListItemText>
+        </ListItem>
+      </React.Fragment>
     );
   }
 
@@ -62,7 +75,13 @@ class SpriteSheetToGif extends React.PureComponent {
     if (this.state.dimension === 0) {
       return null;
     }
-    return <Typography children="Set the width to 0 for square sprites." />;
+    return (
+      <ListItem>
+        <ListItemText>
+          <Typography children="Set the width to 0 for square sprites." />
+        </ListItemText>
+      </ListItem>
+    );
   }
 
   handleDimensionChange = e => {
@@ -114,58 +133,30 @@ class SpriteSheetToGif extends React.PureComponent {
     ) {
       return null;
     }
-    return <Typography children={'The sprite\'s width will be ' + this.state.dimension + 'px.'} />;
+    return (
+      <ListItem>
+        <ListItemText>
+          <Typography children={'The sprite\'s width will be ' + this.state.dimension + 'px.'} />
+        </ListItemText>
+      </ListItem>
+    );
   }
 
   get horizontalText() {
     if (this.state.direction !== 'horizontal') {
       return null;
     }
+    const andWidth =
+      this.state.dimension === 0 ?
+        'and width ' :
+        '';
     return (
-      <Typography
-        children={
-          'The sprite\'s height ' +
-          (
-            this.state.dimension === 0 ?
-              'and width ' :
-              ''
-          ) +
-          'will be equal to the height of the sprite sheet.'
-        }
-      />
+      <ListItem>
+        <ListItemText>
+          <Typography children={'The sprite\'s height ' + andWidth + 'will be equal to the height of the sprite sheet.'} />
+        </ListItemText>
+      </ListItem>
     );
-  }
-
-  get sprite() {
-    return null;
-  }
-
-  get verticalText() {
-    if (this.state.direction !== 'vertical') {
-      return null;
-    }
-    return (
-      <Typography
-        children={
-          'The sprite\'s ' + (
-            this.state.dimension === 0 ?
-              'height and ' :
-              ''
-           ) +
-           'width will be equal to the width of the sprite sheet.'
-        }
-      />
-    );
-  }
-
-  get verticalDimensionText() {
-    if (
-      this.state.dimension === 0 ||
-      this.state.direction !== 'vertical'
-    ) {
-      return null;
-    }
-    return <Typography children={'The sprite\'s height will be ' + this.state.dimension + 'px.'} />;
   }
 
   get info() {
@@ -191,7 +182,49 @@ class SpriteSheetToGif extends React.PureComponent {
     );
   }
 
+  get sprite() {
+    return null;
+  }
+
+  get verticalText() {
+    if (this.state.direction !== 'vertical') {
+      return null;
+    }
+    const heightAnd =
+      this.state.dimension === 0 ?
+        'height and ' :
+        '';
+    return (
+      <ListItem>
+        <ListItemText>
+          <Typography children={'The sprite\'s ' + heightAnd + 'width will be equal to the width of the sprite sheet.'} />
+        </ListItemText>
+      </ListItem>
+    );
+  }
+
+  get verticalDimensionText() {
+    if (
+      this.state.dimension === 0 ||
+      this.state.direction !== 'vertical'
+    ) {
+      return null;
+    }
+    return (
+      <ListItem>
+        <ListItemText>
+          <Typography children={'The sprite\'s height will be ' + this.state.dimension + 'px.'} />
+        </ListItemText>
+      </ListItem>
+    );
+  }
+
   render() {
+    const selectProps = this.selectProps({
+      classes: this.selectClasses({
+        select: this.props.classes.select
+      })
+    });
     return (
       <React.Fragment>
         <Paper className={this.props.classes.paper + ' ' + this.props.classes.about}>
@@ -246,6 +279,7 @@ class SpriteSheetToGif extends React.PureComponent {
                     onChange={this.handlePerChange}
                     required
                     select
+                    SelectProps={selectProps}
                     value={this.state.per ? 'per frame' : 'total'}
                   >
                     <MenuItem
@@ -291,6 +325,7 @@ class SpriteSheetToGif extends React.PureComponent {
                     onChange={this.handleDirectionChange}
                     required
                     select
+                    SelectProps={selectProps}
                     value={this.state.direction}
                   >
                     <MenuItem
@@ -318,12 +353,14 @@ class SpriteSheetToGif extends React.PureComponent {
                     value={this.state.dimension}
                   />
                   {this.dimensionSuffix}
-                  {this.automaticText}
-                  {this.horizontalDimensionText}
-                  {this.horizontalText}
-                  {this.verticalText}
-                  {this.verticalDimensionText}
-                  {this.dimensionText}
+                  <List className={this.props.classes.tileText}>
+                    {this.automaticText}
+                    {this.horizontalDimensionText}
+                    {this.horizontalText}
+                    {this.verticalText}
+                    {this.verticalDimensionText}
+                    {this.dimensionText}
+                  </List>
                 </td>
               </tr>
             </tbody>

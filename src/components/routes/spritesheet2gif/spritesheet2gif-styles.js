@@ -15,6 +15,9 @@ export default withStyles({
   duration: {
     width: '4em'
   },
+  list: {
+    padding: 0
+  },
   matte: {
     backgroundColor: '#404040',
     borderColor: '#202020',
@@ -25,6 +28,9 @@ export default withStyles({
   paper: {
     margin: '1em',
     padding: '1em'
+  },
+  select: {
+    paddingLeft: '0.5em'
   },
   spriteContainer: {
     flexGrow: 1
