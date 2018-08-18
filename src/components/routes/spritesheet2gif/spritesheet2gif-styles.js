@@ -50,7 +50,7 @@ export default withStyles({
     },
 
     '& tr:not(:first-child) td, & tr:not(:first-child) th': {
-      borderTop: '1px solid #F0F0F0'
+      borderTop: '1px solid #404040'
     }
   }
 });

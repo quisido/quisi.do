@@ -13,6 +13,14 @@
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@charlesstover/hsl2rgb/-/hsl2rgb-1.0.4.tgz#6bda4c13b11a3a3499794f08772b19f914ea993b"
 
+"@charlesstover/rainbow-text@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@charlesstover/rainbow-text/-/rainbow-text-1.0.0.tgz#dc7a7bc81e388e90e2aef2e9c47ebd6298e8d10e"
+  dependencies:
+    memoize-one "^4.0.0"
+    rainbow-gradient "^1.0.0"
+    react-rainbow-text "^1.0.2"
+
 "@gamingmedley/konami.js@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@gamingmedley/konami.js/-/konami.js-1.0.2.tgz#ed4cdfb4eadc7d7259ea3c77862a46ab2be13228"
@@ -5825,11 +5833,9 @@ react-portfolio@^1.0.3:
     react-multi-context "^1.1.1"
     react-object-prop "^1.0.5"
 
-react-quotes@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-quotes/-/react-quotes-1.0.0.tgz#779dc6c8f99f71ac3256bfa11ab36b30cd990de9"
-  dependencies:
-    memoize-one "^4.0.0"
+react-quotes@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-quotes/-/react-quotes-1.0.2.tgz#a7539b4d3010f0b3f82896501c77347308d57288"
 
 react-rainbow-text@^1.0.2:
   version "1.0.2"
