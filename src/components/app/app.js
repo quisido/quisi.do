@@ -1,13 +1,13 @@
 import ElectronTransitions from '@charlesstover/electron-transitions';
+import PasswordGenerator from '@charlesstover/password-generator';
 import Radix from '@charlesstover/radix';
 import RainbowText from '@charlesstover/rainbow-text';
+import SpriteSheetToGif from '@charlesstover/spritesheet2gif';
 import Konami from '@gamingmedley/konami.js';
 import React from 'react';
 import ReactPortfolio from 'react-portfolio';
 import AboutMe from '../routes/about-me/about-me';
-import PasswordGenerator from '../routes/password-generator/password-generator';
 import Portfolio from '../routes/portfolio/portfolio';
-import SpriteSheetToGif from '../routes/spritesheet2gif/spritesheet2gif';
 
 const UPDATE_HUE_DELAY = 250;
 
