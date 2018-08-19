@@ -1,5 +1,4 @@
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import Quotes from 'react-quotes';
 import withStyles from './about-me-styles';

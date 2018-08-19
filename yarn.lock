@@ -9,33 +9,34 @@
     core-js "^2.5.7"
     regenerator-runtime "^0.12.0"
 
-"@charlesstover/electron-transitions@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@charlesstover/electron-transitions/-/electron-transitions-1.0.0.tgz#0761af00542efba26b19c956b177713633dffb46"
+"@charlesstover/electron-transitions@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@charlesstover/electron-transitions/-/electron-transitions-1.0.1.tgz#471187ab211cc7a1d30fc99d0885bbbab626f08f"
 
 "@charlesstover/hsl2rgb@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@charlesstover/hsl2rgb/-/hsl2rgb-1.0.4.tgz#6bda4c13b11a3a3499794f08772b19f914ea993b"
 
-"@charlesstover/password-generator@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@charlesstover/password-generator/-/password-generator-1.0.0.tgz#1871f31ead2bea18cbd91dba7ae39f054d5ac2f9"
+"@charlesstover/password-generator@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@charlesstover/password-generator/-/password-generator-1.0.2.tgz#22ffaedca0e4b12d6ff23fcfaf58a7e6b3581230"
 
-"@charlesstover/radix@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@charlesstover/radix/-/radix-1.0.0.tgz#17fccb1d531bdb340b09a3ad2f0cb7700f00b480"
+"@charlesstover/radix@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@charlesstover/radix/-/radix-1.0.1.tgz#71f1334cc07e94f81fbfc91a737bad847b01c1fb"
 
-"@charlesstover/rainbow-text@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@charlesstover/rainbow-text/-/rainbow-text-1.0.0.tgz#dc7a7bc81e388e90e2aef2e9c47ebd6298e8d10e"
+"@charlesstover/rainbow-text@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@charlesstover/rainbow-text/-/rainbow-text-1.0.2.tgz#5503da5b024b64636857ce9fdfcf2ccb592e625b"
   dependencies:
     memoize-one "^4.0.0"
     rainbow-gradient "^1.0.0"
+    react-object-prop "^1.0.5"
     react-rainbow-text "^1.0.2"
 
-"@charlesstover/spritesheet2gif@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@charlesstover/spritesheet2gif/-/spritesheet2gif-1.0.0.tgz#1efa043e8f0e67c7cfc970f22dc45be3438aac9f"
+"@charlesstover/spritesheet2gif@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@charlesstover/spritesheet2gif/-/spritesheet2gif-1.0.4.tgz#1a3e6854cebb7de677272cab1e42513a3b6d007a"
 
 "@gamingmedley/konami.js@^1.0.2":
   version "1.0.2"
