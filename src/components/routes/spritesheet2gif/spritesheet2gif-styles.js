@@ -15,6 +15,9 @@ export default withStyles({
   duration: {
     width: '4em'
   },
+  file: {
+    display: 'none'
+  },
   list: {
     padding: 0
   },
@@ -32,8 +35,17 @@ export default withStyles({
   select: {
     paddingLeft: '0.5em'
   },
+  sprite: {
+    maxHeight: 'calc(2em + 64px)',
+    opacity: 0.667
+  },
   spriteContainer: {
-    flexGrow: 1
+    display: 'flex',
+    alignItems: 'center',
+    flexBasis: 0,
+    flexGrow: 1,
+    justifyContent: 'flex-end',
+    margin: '-1em 0'
   },
   table: {
     width: '100%',
@@ -52,5 +64,11 @@ export default withStyles({
     '& tr:not(:first-child) td, & tr:not(:first-child) th': {
       borderTop: '1px solid #404040'
     }
+  },
+  tfoot: {
+    textAlign: 'center'
+  },
+  upload: {
+    marginRight: '1em'
   }
 });

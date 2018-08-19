@@ -1,3 +1,4 @@
+import Radix from '@charlesstover/radix';
 import RainbowText from '@charlesstover/rainbow-text';
 import Konami from '@gamingmedley/konami.js';
 import React from 'react';
@@ -6,7 +7,6 @@ import AboutMe from '../routes/about-me/about-me';
 import ElectronTransitions from '../routes/electron-transitions/electron-transitions';
 import PasswordGenerator from '../routes/password-generator/password-generator';
 import Portfolio from '../routes/portfolio/portfolio';
-import Radix from '../routes/radix/radix';
 import SpriteSheetToGif from '../routes/spritesheet2gif/spritesheet2gif';
 
 const UPDATE_HUE_DELAY = 250;

@@ -1,3 +1,4 @@
+import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -23,7 +24,8 @@ class SpriteSheetToGif extends React.PureComponent {
     duration: 40,
     info: false,
     matte: '#202020',
-    perFrame: true
+    perFrame: true,
+    sheet: null
   };
 
   automaticDimensionText(dimension) {
@@ -103,7 +105,15 @@ class SpriteSheetToGif extends React.PureComponent {
   };
 
   handleFileChange = e => {
-    console.log(e);
+    this.setState({
+      sheet: e.target.files[0]
+    });
+  };
+
+  handleFormSubmit = e => {
+    e.preventDefault();
+    alert('yes');
+    return false;
   };
 
   handleInfoClick = e => {
@@ -182,6 +192,13 @@ class SpriteSheetToGif extends React.PureComponent {
     );
   }
 
+  get sheetName() {
+    if (this.state.sheet) {
+      return this.state.sheet.name;
+    }
+    return null;
+  }
+
   get sprite() {
     return null;
   }
@@ -239,7 +256,15 @@ class SpriteSheetToGif extends React.PureComponent {
           <div
             children={this.sprite}
             className={this.props.classes.spriteContainer}
-          />
+          >
+            <img
+              alt="Animated Sprite"
+              className={this.props.classes.sprite}
+              height={73}
+              src="https://i.imgur.com/MyiRdgH.gif"
+              width={85}
+            />
+          </div>
         </Paper>
         <Paper className={this.props.classes.paper}>
           <Typography
@@ -247,124 +272,158 @@ class SpriteSheetToGif extends React.PureComponent {
             gutterBottom
             variant="headline"
           />
-          <table
-            cellSpacing={0}
-            className={this.props.classes.table}
+          <form
+            onSubmit={this.handleFormSubmit}
+            method="POST"
           >
-            <tbody>
-              <tr>
-                <th children="File:" />
-                <td>
-                  <input
-                    onChange={this.handleFileChange}
-                    type="file"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <th children="Duration:" />
-                <td>
-                  <TextField
-                    className={this.props.classes.duration}
-                    inputProps={this.durationInputProps({
-                      min: 1
-                    })}
-                    onChange={this.handleDurationChange}
-                    required
-                    type="number"
-                    value={this.state.duration}
-                  />{' '}
-                  milliseconds{' '}
-                  <TextField
-                    onChange={this.handlePerChange}
-                    required
-                    select
-                    SelectProps={selectProps}
-                    value={this.state.per ? 'per frame' : 'total'}
+            <table
+              cellSpacing={0}
+              className={this.props.classes.table}
+            >
+              <tbody>
+                <tr>
+                  <th children="File:" />
+                  <td>
+                    <label>
+                      <input
+                        accept="image/*"
+                        className={this.props.classes.file}
+                        multiple
+                        onChange={this.handleFileChange}
+                        required
+                        type="file"
+                      />
+                      <Button
+                        children="Upload"
+                        className={this.props.classes.upload}
+                        component="span"
+                        variant="raised"
+                      />
+                    </label>
+                    {this.sheetName}
+                  </td>
+                </tr>
+                <tr>
+                  <th children="Duration:" />
+                  <td>
+                    <TextField
+                      className={this.props.classes.duration}
+                      inputProps={this.durationInputProps({
+                        min: 1
+                      })}
+                      onChange={this.handleDurationChange}
+                      required
+                      type="number"
+                      value={this.state.duration}
+                    />{' '}
+                    milliseconds{' '}
+                    <TextField
+                      onChange={this.handlePerChange}
+                      required
+                      select
+                      SelectProps={selectProps}
+                      value={this.state.per ? 'per frame' : 'total'}
+                    >
+                      <MenuItem
+                        children="per frame"
+                        value="per frame"
+                      />
+                      <MenuItem
+                        children="total"
+                        value="total"
+                      />
+                    </TextField>
+                  </td>
+                </tr>
+                <tr>
+                  <th children="Matte:" />
+                  <td>
+                    <input
+                      className={this.props.classes.matte}
+                      onChange={this.handleMatteChange}
+                      required
+                      type="color"
+                      value={this.state.matte}
+                    />
+                    <Typography
+                      children="The matte color for the image will be transparent in the animated GIF."
+                      paragraph
+                    />
+                    <Typography paragraph={this.state.info}>
+                      <a
+                        children={this.state.info ? '- Less Info' : '+ More Info'}
+                        href="/spritesheet2gif"
+                        onClick={this.handleInfoClick}
+                      />
+                    </Typography>
+                    {this.info}
+                  </td>
+                </tr>
+                <tr>
+                  <th children="Sprites:" />
+                  <td>
+                    Tile{' '}
+                    <TextField
+                      onChange={this.handleDirectionChange}
+                      required
+                      select
+                      SelectProps={selectProps}
+                      value={this.state.direction}
+                    >
+                      <MenuItem
+                        children="automatically"
+                        value="automatic"
+                      />
+                      <MenuItem
+                        children="horizontally"
+                        value="horizontal"
+                      />
+                      <MenuItem
+                        children="vertically"
+                        value="vertical"
+                      />
+                    </TextField>{' '}
+                    with{' '}
+                    <TextField
+                      className={this.props.classes.dimension}
+                      inputProps={this.dimensionInputProps({
+                        min: 0
+                      })}
+                      onChange={this.handleDimensionChange}
+                      required
+                      type="number"
+                      value={this.state.dimension}
+                    />
+                    {this.dimensionSuffix}
+                    <List className={this.props.classes.tileText}>
+                      {this.automaticText}
+                      {this.horizontalDimensionText}
+                      {this.horizontalText}
+                      {this.verticalText}
+                      {this.verticalDimensionText}
+                      {this.dimensionText}
+                    </List>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td
+                    className={this.props.classes.tfoot}
+                    colSpan={2}
                   >
-                    <MenuItem
-                      children="per frame"
-                      value="per frame"
+                    <Button
+                      children="Convert"
+                      color="primary"
+                      disabled={this.state.disabled}
+                      type="submit"
+                      variant="raised"
                     />
-                    <MenuItem
-                      children="total"
-                      value="total"
-                    />
-                  </TextField>
-                </td>
-              </tr>
-              <tr>
-                <th children="Matte:" />
-                <td>
-                  <input
-                    className={this.props.classes.matte}
-                    onChange={this.handleMatteChange}
-                    required
-                    type="color"
-                    value={this.state.matte}
-                  />
-                  <Typography
-                    children="The matte color for the image will be transparent in the animated GIF."
-                    paragraph
-                  />
-                  <Typography paragraph={this.state.info}>
-                    <a
-                      children={this.state.info ? '- Less Info' : '+ More Info'}
-                      href="/spritesheet2gif"
-                      onClick={this.handleInfoClick}
-                    />
-                  </Typography>
-                  {this.info}
-                </td>
-              </tr>
-              <tr>
-                <th children="Sprites:" />
-                <td>
-                  Tile{' '}
-                  <TextField
-                    onChange={this.handleDirectionChange}
-                    required
-                    select
-                    SelectProps={selectProps}
-                    value={this.state.direction}
-                  >
-                    <MenuItem
-                      children="automatically"
-                      value="automatic"
-                    />
-                    <MenuItem
-                      children="horizontally"
-                      value="horizontal"
-                    />
-                    <MenuItem
-                      children="vertically"
-                      value="vertical"
-                    />
-                  </TextField>{' '}
-                  with{' '}
-                  <TextField
-                    className={this.props.classes.dimension}
-                    inputProps={this.dimensionInputProps({
-                      min: 0
-                    })}
-                    onChange={this.handleDimensionChange}
-                    required
-                    type="number"
-                    value={this.state.dimension}
-                  />
-                  {this.dimensionSuffix}
-                  <List className={this.props.classes.tileText}>
-                    {this.automaticText}
-                    {this.horizontalDimensionText}
-                    {this.horizontalText}
-                    {this.verticalText}
-                    {this.verticalDimensionText}
-                    {this.dimensionText}
-                  </List>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </form>
         </Paper>
       </React.Fragment>
     );
