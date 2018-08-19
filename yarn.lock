@@ -9,6 +9,10 @@
     core-js "^2.5.7"
     regenerator-runtime "^0.12.0"
 
+"@charlesstover/electron-transitions@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@charlesstover/electron-transitions/-/electron-transitions-1.0.0.tgz#0761af00542efba26b19c956b177713633dffb46"
+
 "@charlesstover/hsl2rgb@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@charlesstover/hsl2rgb/-/hsl2rgb-1.0.4.tgz#6bda4c13b11a3a3499794f08772b19f914ea993b"

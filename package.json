@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "author": "Charles Stover",
   "dependencies": {
+    "@charlesstover/electron-transitions": "^1.0.0",
     "@charlesstover/radix": "^1.0.0",
     "@charlesstover/rainbow-text": "^1.0.0",
     "@gamingmedley/konami.js": "^1.0.2",
