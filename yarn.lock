@@ -33,9 +33,9 @@
     rainbow-gradient "^1.0.0"
     react-rainbow-text "^1.0.2"
 
-"@charlesstover/spritesheet2gif@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@charlesstover/spritesheet2gif/-/spritesheet2gif-0.1.0.tgz#d7d364aee6e0d44378b1471b35f95e778f012503"
+"@charlesstover/spritesheet2gif@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@charlesstover/spritesheet2gif/-/spritesheet2gif-1.0.0.tgz#1efa043e8f0e67c7cfc970f22dc45be3438aac9f"
 
 "@gamingmedley/konami.js@^1.0.2":
   version "1.0.2"

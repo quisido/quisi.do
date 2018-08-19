@@ -7,6 +7,7 @@ import Konami from '@gamingmedley/konami.js';
 import React from 'react';
 import ReactPortfolio from 'react-portfolio';
 import AboutMe from '../routes/about-me/about-me';
+import Donate from '../routes/donate/donate';
 import Portfolio from '../routes/portfolio/portfolio';
 
 const UPDATE_HUE_DELAY = 250;
@@ -27,6 +28,13 @@ const routes = [
     component: AboutMe,
     path: '/',
     title: 'Charles Stover'
+  },
+  {
+    component: Donate,
+    description: 'Make a donation to Charles Stover, keeping his free web services operational.',
+    keywords: [ 'Charles Stover,', 'donate to Charles Stover' ],
+    path: '/donate',
+    title: 'Donate to Charles Stover'
   },
   {
     component: ElectronTransitions,
