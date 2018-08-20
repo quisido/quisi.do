@@ -17,9 +17,11 @@
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@charlesstover/hsl2rgb/-/hsl2rgb-1.0.4.tgz#6bda4c13b11a3a3499794f08772b19f914ea993b"
 
-"@charlesstover/password-generator@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@charlesstover/password-generator/-/password-generator-1.0.2.tgz#22ffaedca0e4b12d6ff23fcfaf58a7e6b3581230"
+"@charlesstover/password-generator@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@charlesstover/password-generator/-/password-generator-1.0.3.tgz#49d5dce3deadbd5d6e649cc483dc491674c891d2"
+  dependencies:
+    react-object-prop "^1.0.5"
 
 "@charlesstover/radix@^1.0.1":
   version "1.0.1"
@@ -34,9 +36,9 @@
     react-object-prop "^1.0.5"
     react-rainbow-text "^1.0.2"
 
-"@charlesstover/spritesheet2gif@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@charlesstover/spritesheet2gif/-/spritesheet2gif-1.0.4.tgz#1a3e6854cebb7de677272cab1e42513a3b6d007a"
+"@charlesstover/spritesheet2gif@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@charlesstover/spritesheet2gif/-/spritesheet2gif-1.0.5.tgz#7fcc9d4343f1225c8f4b83df2e65223d37be1cee"
 
 "@gamingmedley/konami.js@^1.0.2":
   version "1.0.2"
