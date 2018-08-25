@@ -3,6 +3,7 @@ import GitHubLink from './github-link/github-link';
 import Link from './link/portfolio-link';
 import MediumLink from './medium-link/medium-link';
 import NpmLink from './npm-link/npm-link';
+import Popularity from './popularity/popularity';
 import Section from './section/portfolio-section';
 
 class Portfolio extends React.PureComponent {
@@ -69,6 +70,7 @@ class Portfolio extends React.PureComponent {
           />
         </Section>
         <Section title="NPM Packages">
+          <Popularity />
           <NpmLink
             description="Convert HSL to RGB."
             package="@charlesstover/hsl2rgb"

@@ -4,8 +4,9 @@ import Quotes from 'react-quotes';
 import withStyles from './about-me-styles';
 import quotes from './quotes';
 
-const backEndYears = new Date().getFullYear() - 2006;
-const frontEndYears = new Date().getFullYear() - 2001;
+const CURRENT_YEAR = new Date().getFullYear();
+const backEndYears = CURRENT_YEAR - 2005;
+const frontEndYears = CURRENT_YEAR - 2001;
 
 class AboutMe extends React.PureComponent {
   render() {
@@ -21,22 +22,17 @@ class AboutMe extends React.PureComponent {
         </Paper>
         <Paper className={this.props.classes.paper}>
           <Typography
-            children="Coding Background"
+            children="Background"
+            gutterBottom
             variant="headline"
           />
-          <Typography paragraph>
+          <Typography>
             My name is Charles Stover.
             I am a senior full-stack web development consultant currently employed with a focus in React and Node.
-            I have over 15 years experience in web development languages such as JavaScript and PHP.
-            My focus thus far has been in automated content generation, micro-optimization, SEO, and web security.
-            All of my work strives for optimal UI/UX through modern design principles, optimized performance, and standardization.
-          </Typography>
-          <Typography paragraph>
             I've been developing front end applications for {frontEndYears} years and server-side apps in PHP and MySQL for {backEndYears}.
-            During this time, I have released countless tools to the public and published multiple web development tutorials.
-          </Typography>
-          <Typography paragraph>
-            This website is merely a hub for my portfolio and e-mail as well as a demonstration of the art form known as optimization.
+            My expertise is in automated content generation, performance and search engine optimization, and security.
+            I strive for optimal <abbr title="User Interface">UI</abbr>/<abbr title="User Experience">UX</abbr> through{' '}
+            modern design principles and optimized performance.
           </Typography>
         </Paper>
       </React.Fragment> 

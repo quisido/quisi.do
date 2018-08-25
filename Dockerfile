@@ -1,5 +1,6 @@
 FROM node:alpine AS builder
 WORKDIR /var/www
+ENV REACT_APP_NPM_DOWNLOADS_API https://api.charlesstover.com/npm/downloads
 COPY package.json yarn.lock ./
 RUN yarn install
 COPY public public
