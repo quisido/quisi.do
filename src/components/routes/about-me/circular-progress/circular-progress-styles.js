@@ -4,14 +4,16 @@ export default withStyles({
   circularProgress: {
     transitionDuration: '0.25s',
     transitionProperty: 'color',
-    transitionTimingFunction: 'ease-in',
+    transitionTimingFunction: 'ease-in'
+  },
+  gray: {
     '&:not(:hover)': {
       color: '#808080'
     }
   },
   root: {
     display: 'inline-block',
-    margin: '0 0.5em',
+    margin: '0.5em',
     position: 'relative'
   },
   title: {

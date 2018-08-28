@@ -2,14 +2,55 @@ import { Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import Quotes from 'react-quotes';
 import withStyles from './about-me-styles';
-import CircularProgress from './circular-progress/circular-progress';
+import Assessment from './assessment/assessment';
+import PluralsightAssessment from './pluralsight-assessment/pluralsight-assessment';
 import quotes from './quotes';
 
 const CURRENT_YEAR = new Date().getFullYear();
+const DEFAULT_TEST_STATE = {
+  height: 0,
+  title: null,
+  width: 0
+};
+
 const backEndYears = CURRENT_YEAR - 2005;
 const frontEndYears = CURRENT_YEAR - 2001;
 
 class AboutMe extends React.PureComponent {
+
+  assessmentClickHandlers = {};
+
+  assessmentRef = null;
+
+  state = {
+    test: DEFAULT_TEST_STATE
+  };
+
+  handleAssessmentClick = (title, width, height) => {
+    if (!Object.prototype.hasOwnProperty.call(this.assessmentClickHandlers, title)) {
+      this.assessmentClickHandlers[title] = () => {
+        if (this.state.test.title === title) {
+          this.setState({
+            test: DEFAULT_TEST_STATE
+          });
+        }
+        else {
+          this.setState({
+            test: { height, title, width }
+          });
+          if (this.assessmentRef) {
+            this.assessmentRef.scrollIntoViewIfNeeded();
+          }
+        }
+      };
+    }
+    return this.assessmentClickHandlers[title];
+  };
+
+  handleAssessmentRef = ref => {
+    this.assessmentRef = ref;
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -39,69 +80,89 @@ class AboutMe extends React.PureComponent {
             <section>
               <Typography
                 children="Expertises"
-                gutterBottom
                 variant="subheading"
               />
-              <CircularProgress
-                max={5}
-                title="JS 1.8"
+              <Assessment
+                height={189}
+                onClick={this.handleAssessmentClick}
                 percentile={100}
-                score={4.78}
+                selected={this.state.test.title === 'JS 1.8'}
+                title="JS 1.8"
+                width={100}
               />
-              <CircularProgress
-                max={300}
-                title="CSS"
+              <Assessment
+                height={177}
+                onClick={this.handleAssessmentClick}
                 percentile={99}
-                score={279}
+                selected={this.state.test.title === 'CSS'}
+                title="CSS"
+                width={99.057}
               />
-              <CircularProgress
-                max={300}
-                title="JS"
+              <Assessment
+                height={163}
+                onClick={this.handleAssessmentClick}
                 percentile={97}
-                score={257}
+                selected={this.state.test.title === 'JS'}
+                title="JS"
+                width={96.792}
               />
-              <CircularProgress
-                max={300}
-                title="HTML5"
+              <Assessment
+                height={158}
+                onClick={this.handleAssessmentClick}
                 percentile={96}
-                score={250}
+                selected={this.state.test.title === 'HTML5'}
+                title="HTML5"
+                width={95.849}
               />
-              <CircularProgress
-                max={300}
-                title="jQuery"
+              <Assessment
+                height={152}
+                onClick={this.handleAssessmentClick}
                 percentile={94}
-                score={240}
+                selected={this.state.test.title === 'jQuery'}
+                title="jQuery"
+                width={93.774}
               />
-              <CircularProgress
-                max={300}
-                title="Node.js"
+              <Assessment
+                height={140}
+                onClick={this.handleAssessmentClick}
                 percentile={89}
-                score={221}
+                selected={this.state.test.title === 'Node.js'}
+                title="Node.js"
+                width={88.679}
               />
-              <CircularProgress
-                max={300}
-                title="React"
+              <Assessment
+                height={137}
+                onClick={this.handleAssessmentClick}
                 percentile={87}
-                score={217}
+                selected={this.state.test.title === 'React'}
+                title="React"
+                width={87.17}
               />
             </section>
+            <PluralsightAssessment
+              {...this.state.test}
+              onRef={this.handleAssessmentRef}
+            />
             <section>
               <Typography
                 children="Proficiencies"
-                gutterBottom
                 variant="subheading"
               />
-              <CircularProgress
-                max={5}
-                title="Java 8"
+              <Assessment
+                height={152}
+                onClick={this.handleAssessmentClick}
                 percentile={94}
-                score={4}
+                selected={this.state.test.title === 'Java 8'}
+                title="Java 8"
+                width={93.774}
               />
-              <CircularProgress
-                max={200}
-                title="Docker"
+              <Assessment
+                height={117}
+                onClick={this.handleAssessmentClick}
                 percentile={72}
-                score={184}
+                selected={this.state.test.title === 'Docker'}
+                title="Docker"
+                width={71.698}
               />
             </section>
           </div>
@@ -112,7 +173,7 @@ class AboutMe extends React.PureComponent {
             className={this.props.classes.icon}
           />
           <Quotes
-            animationDuration={2500}
+            animationDuration={1500}
             delay={12500}
             quotes={quotes}
             shuffle
