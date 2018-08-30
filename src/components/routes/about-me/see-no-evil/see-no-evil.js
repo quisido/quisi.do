@@ -1,6 +1,7 @@
 import { Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import createObjectProp from 'react-object-prop';
+import Link from 'react-router-dom/Link';
 import withStyles from './see-no-evil-styles';
 
 class SeeNoEvil extends React.PureComponent {
@@ -29,9 +30,10 @@ class SeeNoEvil extends React.PureComponent {
             variant="headline"
           />
         </div>
-        <div
+        <Link
           className={this.props.classes.color}
           style={this.backgroundImageStyle}
+          to={this.props.to}
         />
       </Paper>
     );

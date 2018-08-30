@@ -47,11 +47,13 @@ class AboutMe extends React.PureComponent {
           classes={this.seeNoEvilClasses}
           image={dota2huds}
           title="Dota 2 HUDs"
+          to="/about/dota2huds"
         />
         <SeeNoEvil
           classes={this.seeNoEvilClasses}
           image={rpgOverworldEngine}
           title="RPG Overworld Engine"
+          to="/about/rpg-overworld-engine"
         />
         <Paper className={this.props.classes.paper}>
           <span
