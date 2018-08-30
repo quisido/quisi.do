@@ -4,33 +4,60 @@ import background from './background';
 import foreground from './foreground';
 import withStyles from './pluralsight-assessment-styles';
 
-const BACKGROUND_INVISIBLE = {
-  width: 'calc(100% - 9px)'
-};
-
 const MAIN_VISIBLE = {
   height: 190,
   marginTop: '1em'
 };
 
+const percentile2height = percentile =>
+  (1 - Math.acos(percentile / 50 - 1) / Math.PI) * 190 - 1;
+
+// Dimension: 530x190
 class PluralsightAssessment extends React.PureComponent {
 
-  _backgroundStyle = createObjectProp();
   _graphStyle = createObjectProp();
+  animationFrame = null;
 
-  get backgroundStyle() {
-    if (this.props.title === null) {
-      return BACKGROUND_INVISIBLE;
+  state = {
+    percentile: 0
+  };
+
+  componentDidMount() {
+    this.componentDidUpdate({ percentile: 0 });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.percentile !== this.props.percentile) {
+      this.speed = (this.props.percentile - prevProps.percentile) / 30;
     }
-    return this._backgroundStyle({
-      width: 'calc(' + (10000 / this.props.width) + '% - 9px)'
-    });
+    window.cancelAnimationFrame(this.animationFrame);
+    if (this.props.percentile !== this.state.percentile) {
+      this.animationFrame = window.requestAnimationFrame(this.animate);
+    }
+  }
+
+  componentWillUnmount() {
+    window.cancelAnimationFrame(this.animationFrame);
+  }
+
+  animate = () => {
+    this.setState(state => ({
+      percentile:
+        Math[state.percentile > this.props.percentile ? 'max' : 'min'](
+          this.props.percentile,
+          state.percentile + this.speed
+        )
+    }));
+  }
+
+  get backgroundViewBox() {
+    return '0 0 ' + Math.round(this.state.percentile * 5.3) + ' 190';
   }
 
   get graphStyle() {
     return this._graphStyle({
-      height: this.props.height, // 190
-      width: this.props.width + '%' // 530
+      height: percentile2height(this.state.percentile),
+      width: 'calc(' + this.state.percentile + '% - 9px)'
     });
   }
 
@@ -73,8 +100,7 @@ class PluralsightAssessment extends React.PureComponent {
             <svg
               className={this.props.classes.background}
               preserveAspectRatio="none"
-              style={this.backgroundStyle}
-              viewBox="0 0 530 190"
+              viewBox={this.backgroundViewBox}
             >
               <path
                 d={background.novice}

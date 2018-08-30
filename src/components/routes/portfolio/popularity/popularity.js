@@ -27,7 +27,7 @@ class Popularity extends React.PureComponent {
 
     // Error
     if (this.state.error !== null) {
-      return <div children={this.state.error} />;
+      return <div children={this.state.error.message} />;
     }
 
     // Loading

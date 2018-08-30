@@ -9,7 +9,7 @@ class Assessment extends React.PureComponent {
   render() {
     return (
       <span
-        onClick={this.props.onClick(this.props.title, this.props.width, this.props.height)}
+        onClick={this.props.onClick(this.props.title, this.props.percentile, this.props.width, this.props.height)}
         style={style}
       >
         <CircularProgress

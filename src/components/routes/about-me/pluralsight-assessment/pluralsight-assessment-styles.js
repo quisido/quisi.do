@@ -3,31 +3,25 @@ import { withStyles } from '@material-ui/core/styles';
 const BORDER_COLOR = 'rgba(255, 255, 255, 0.1)'; // #303030
 const HEIGHT = 190;
 const LEVELS_WIDTH = 80;
-const TRANSITION_TIMING_FUNCTION = 'ease-out';
 
 export default withStyles({
   background: {
     bottom: 0,
     height: HEIGHT,
-    left: 9,
+    left: 0,
     opacity: 0.15,
     position: 'absolute',
-    transitionDuration: '0.5s',
-    transitionProperty: 'width',
-    transitionTimingFunction: TRANSITION_TIMING_FUNCTION,
-    width: 0
+    width: '100%'
   },
   graph: {
     borderTopColor: BORDER_COLOR,
     borderTopStyle: 'dashed',
     borderTopWidth: 1,
     bottom: 0,
-    left: 0,
+    left: 9,
     overflow: 'hidden',
     position: 'absolute',
-    transitionDuration: '0.5s',
-    transitionProperty: 'height, width',
-    transitionTimingFunction: TRANSITION_TIMING_FUNCTION
+    width: 0
   },
   chart: {
     borderBottomColor: BORDER_COLOR,
