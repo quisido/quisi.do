@@ -5,8 +5,7 @@ import Quotes from 'react-quotes';
 import dota2huds from '../../../assets/screenshots/dota2huds.jpg';
 import rpgOverworldEngine from '../../../assets/screenshots/rpg-overworld-engine.gif';
 import withStyles from './about-me-styles';
-import Assessment from './assessment/assessment';
-import PluralsightAssessment from './pluralsight-assessment/pluralsight-assessment';
+import Assessments from './assessments/assessments';
 import quotes from './quotes';
 import SeeNoEvil from './see-no-evil/see-no-evil';
 
@@ -18,40 +17,6 @@ const frontEndYears = CURRENT_YEAR - 2001;
 class AboutMe extends React.PureComponent {
 
   _seeNoEvilClasses = createObjectProp();
-  assessmentClickHandlers = {};
-  assessmentRef = null;
-
-  state = {
-    testPercentile: 0,
-    testTitle: null
-  };
-
-  handleAssessmentClick = (title, percentile) => {
-    if (!Object.prototype.hasOwnProperty.call(this.assessmentClickHandlers, title)) {
-      this.assessmentClickHandlers[title] = () => {
-        if (this.state.testTitle === title) {
-          this.setState({
-            testPercentile: 0,
-            testTitle: null
-          });
-        }
-        else {
-          this.setState({
-            testPercentile: percentile,
-            testTitle: title
-          });
-          if (this.assessmentRef) {
-            this.assessmentRef.scrollIntoViewIfNeeded();
-          }
-        }
-      };
-    }
-    return this.assessmentClickHandlers[title];
-  };
-
-  handleAssessmentRef = ref => {
-    this.assessmentRef = ref;
-  };
 
   get seeNoEvilClasses() {
     return this._seeNoEvilClasses({
@@ -76,79 +41,7 @@ class AboutMe extends React.PureComponent {
             I strive for optimal <abbr title="User Interface">UI</abbr>/<abbr title="User Experience">UX</abbr> through{' '}
             modern design principles and optimized performance.
           </Typography>
-          <div className={this.props.classes.tests}>
-            <section>
-              <Typography
-                children="Expertises"
-                variant="subheading"
-              />
-              <Assessment
-                onClick={this.handleAssessmentClick}
-                percentile={100}
-                selected={this.state.testTitle === 'JS 1.8'}
-                title="JS 1.8"
-              />
-              <Assessment
-                onClick={this.handleAssessmentClick}
-                percentile={99}
-                selected={this.state.testTitle === 'CSS'}
-                title="CSS"
-              />
-              <Assessment
-                onClick={this.handleAssessmentClick}
-                percentile={97}
-                selected={this.state.testTitle === 'JS'}
-                title="JS"
-              />
-              <Assessment
-                onClick={this.handleAssessmentClick}
-                percentile={96}
-                selected={this.state.testTitle === 'HTML5'}
-                title="HTML5"
-              />
-              <Assessment
-                onClick={this.handleAssessmentClick}
-                percentile={94}
-                selected={this.state.testTitle === 'jQuery'}
-                title="jQuery"
-              />
-              <Assessment
-                onClick={this.handleAssessmentClick}
-                percentile={89}
-                selected={this.state.testTitle === 'Node.js'}
-                title="Node.js"
-              />
-              <Assessment
-                onClick={this.handleAssessmentClick}
-                percentile={87}
-                selected={this.state.testTitle === 'React'}
-                title="React"
-              />
-            </section>
-            <PluralsightAssessment
-              onRef={this.handleAssessmentRef}
-              percentile={this.state.testPercentile}
-              title={this.state.testTitle}
-            />
-            <section>
-              <Typography
-                children="Proficiencies"
-                variant="subheading"
-              />
-              <Assessment
-                onClick={this.handleAssessmentClick}
-                percentile={94}
-                selected={this.state.testTitle === 'Java 8'}
-                title="Java 8"
-              />
-              <Assessment
-                onClick={this.handleAssessmentClick}
-                percentile={72}
-                selected={this.state.testTitle === 'Docker'}
-                title="Docker"
-              />
-            </section>
-          </div>
+          <Assessments />
         </Paper>
         <SeeNoEvil
           classes={this.seeNoEvilClasses}

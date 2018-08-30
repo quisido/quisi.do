@@ -1,4 +1,4 @@
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 
 const BORDER_COLOR = 'rgba(255, 255, 255, 0.1)'; // #303030
 const HEIGHT = 190;

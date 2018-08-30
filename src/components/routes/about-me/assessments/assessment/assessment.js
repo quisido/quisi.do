@@ -1,5 +1,5 @@
 import React from 'react';
-import CircularProgress from '../circular-progress/circular-progress';
+import CircularProgress from './circular-progress/circular-progress';
 
 const style = {
   cursor: 'pointer'

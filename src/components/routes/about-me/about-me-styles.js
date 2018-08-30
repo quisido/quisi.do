@@ -1,4 +1,4 @@
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 
 export default withStyles({
   icon: {
@@ -26,12 +26,6 @@ export default withStyles({
     },
     '&:last-child': {
       marginBottom: '1em'
-    }
-  },
-  tests: {
-    textAlign: 'center',
-    '& > section:not(:first-child)': {
-      paddingTop: '1em'
     }
   }
 });

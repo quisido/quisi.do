@@ -2,7 +2,7 @@ import React from 'react';
 import createObjectProp from 'react-object-prop';
 import background from './background';
 import foreground from './foreground';
-import withStyles from './pluralsight-assessment-styles';
+import withStyles from './pluralsight-score-styles';
 
 const MAIN_VISIBLE = {
   height: 190,
@@ -13,7 +13,7 @@ const percentile2height = percentile =>
   (1 - Math.acos(percentile / 50 - 1) / Math.PI) * 190 - 1;
 
 // Dimension: 530x190
-class PluralsightAssessment extends React.PureComponent {
+class PluralsightScore extends React.PureComponent {
 
   _graphStyle = createObjectProp();
   animationFrame = null;
@@ -144,4 +144,4 @@ class PluralsightAssessment extends React.PureComponent {
   }
 }
 
-export default withStyles(PluralsightAssessment);
+export default withStyles(PluralsightScore);
