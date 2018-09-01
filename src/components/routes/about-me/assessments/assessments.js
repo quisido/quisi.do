@@ -14,6 +14,16 @@ class Assessments extends React.PureComponent {
     title: null
   };
 
+  assessmentProps(title) {
+    return {
+      off:
+        this.state.title !== null &&
+        this.state.title !== title,
+      selected: this.state.title === title,
+      title
+    };
+  }
+
   handleAssessmentClick = (title, percentile) => {
     if (!Object.prototype.hasOwnProperty.call(this.assessmentClickHandlers, title)) {
       this.assessmentClickHandlers[title] = () => {
@@ -49,44 +59,37 @@ class Assessments extends React.PureComponent {
           <Assessment
             onClick={this.handleAssessmentClick}
             percentile={100}
-            selected={this.state.title === 'JS 1.8'}
-            title="JS 1.8"
+            {...this.assessmentProps('JS 1.8')}
           />
           <Assessment
             onClick={this.handleAssessmentClick}
             percentile={99}
-            selected={this.state.title === 'CSS'}
-            title="CSS"
+            {...this.assessmentProps('CSS')}
           />
           <Assessment
             onClick={this.handleAssessmentClick}
             percentile={97}
-            selected={this.state.title === 'JS'}
-            title="JS"
+            {...this.assessmentProps('JS')}
           />
           <Assessment
             onClick={this.handleAssessmentClick}
             percentile={96}
-            selected={this.state.title === 'HTML5'}
-            title="HTML5"
+            {...this.assessmentProps('HTML5')}
           />
           <Assessment
             onClick={this.handleAssessmentClick}
             percentile={94}
-            selected={this.state.title === 'jQuery'}
-            title="jQuery"
+            {...this.assessmentProps('jQuery')}
           />
           <Assessment
             onClick={this.handleAssessmentClick}
             percentile={89}
-            selected={this.state.title === 'Node.js'}
-            title="Node.js"
+            {...this.assessmentProps('Node.js')}
           />
           <Assessment
             onClick={this.handleAssessmentClick}
             percentile={87}
-            selected={this.state.title === 'React'}
-            title="React"
+            {...this.assessmentProps('React')}
           />
         </section>
         <PluralsightScore
@@ -102,14 +105,12 @@ class Assessments extends React.PureComponent {
           <Assessment
             onClick={this.handleAssessmentClick}
             percentile={94}
-            selected={this.state.title === 'Java 8'}
-            title="Java 8"
+            {...this.assessmentProps('Java 8')}
           />
           <Assessment
             onClick={this.handleAssessmentClick}
             percentile={72}
-            selected={this.state.title === 'Docker'}
-            title="Docker"
+            {...this.assessmentProps('Docker')}
           />
         </section>
       </div>

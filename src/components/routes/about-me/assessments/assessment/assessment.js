@@ -6,6 +6,23 @@ const style = {
 };
 
 class Assessment extends React.PureComponent {
+
+  state = {
+    percentile: 0
+  };
+
+  componentDidMount() {
+    this.componentDidUpdate();
+  }
+
+  componentDidUpdate() {
+    if (this.props.percentile !== this.state.percentile) {
+      this.setState({
+        percentile: this.props.percentile
+      });
+    }
+  }
+
   render() {
     return (
       <span
@@ -13,9 +30,15 @@ class Assessment extends React.PureComponent {
         style={style}
       >
         <CircularProgress
-          color={this.props.selected ? 'secondary' : 'gray'}
+          color={
+            this.props.off ?
+              'gray' :
+              this.props.selected ?
+                'secondary' :
+                'primary'
+          }
           title={this.props.title}
-          percentile={this.props.percentile}
+          percentile={this.state.percentile}
           score={this.props.score}
         />
       </span>

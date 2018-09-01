@@ -1,10 +1,16 @@
 import { withStyles } from '@material-ui/core';
 
-export default withStyles({
+export default withStyles(theme => ({
+  circleStatic: {
+    transitionDuration: '1.5s'
+  },
   circularProgress: {
     transitionDuration: '0.25s',
     transitionProperty: 'color',
-    transitionTimingFunction: 'ease-in'
+    transitionTimingFunction: 'ease-in',
+    '&:hover': {
+      color: theme.palette.secondary.main
+    }
   },
   gray: {
     '&:not(:hover)': {
@@ -24,4 +30,4 @@ export default withStyles({
     top: '50%',
     width: '100%'
   }
-});
+}));
