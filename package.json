@@ -26,9 +26,10 @@
     "url": "https://github.com/CharlesStover/charlesstover.git"
   },
   "scripts": {
-    "start": "set REACT_APP_NPM_DOWNLOADS_API=http://api.charlesstover.docker/npm/downloads&& react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "docker-build": "docker build --file Dockerfile --tag charlesstover/charlesstover .",
+    "eject": "react-scripts eject",
+    "start": "set REACT_APP_NPM_DOWNLOADS_API=http://api.charlesstover.docker/npm/downloads&& react-scripts start",
+    "test": "react-scripts test --env=jsdom"
   }
 }
