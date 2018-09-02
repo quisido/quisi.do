@@ -87,9 +87,9 @@ class AboutMe extends React.PureComponent {
         <section className={this.props.classes.section}>
           <SeeNoEvil
             description="Automated static file generation."
+            href="https://dota2huds.com/"
             images={dota2huds}
             title="Dota 2 HUDs"
-            to="/about/dota2huds"
           />
           <SeeNoEvil
             images={rpgOverworldEngine}
@@ -99,7 +99,7 @@ class AboutMe extends React.PureComponent {
           <SeeNoEvil
             images={rpgOverworldEngine}
             title="Sprite Sheet to GIF Converter"
-            to="/about/spritesheet2gif"
+            to="/spritesheet2gif"
           />
           <Link
             children="View more..."

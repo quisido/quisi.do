@@ -42,12 +42,18 @@ class SeeNoEvil extends React.PureComponent {
   };
 
   render() {
+    const Component =
+      this.props.href ?
+        'a' :
+        Link;
     return (
       <div className={this.props.classes.root}>
-        <Link
+        <Component
           className={this.props.classes.faded}
+          href={this.props.href || null}
           style={this.backgroundImageStyle}
-          to={this.props.to}
+          to={this.props.to || null}
+          title={this.props.title}
         >
           <div
             className={this.props.classes.color}
@@ -65,7 +71,7 @@ class SeeNoEvil extends React.PureComponent {
               variant="subheading"
             />
           </div>
-        </Link>
+        </Component>
       </div>
     );
   }

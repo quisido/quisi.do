@@ -6,8 +6,6 @@ import SpriteSheetToGif from '@charlesstover/spritesheet2gif';
 import Konami from '@gamingmedley/konami.js';
 import React from 'react';
 import ReactPortfolio from 'react-portfolio';
-import AboutDota2Huds from '../routes/about/dota2huds';
-import AboutRpgOverworldEngine from '../routes/about/rpg-overworld-engine';
 import AboutMe from '../routes/about-me/about-me';
 import Donate from '../routes/donate/donate';
 import Portfolio from '../routes/portfolio/portfolio';
@@ -30,20 +28,6 @@ const routes = [
     component: AboutMe,
     path: '/',
     title: 'Charles Stover'
-  },
-  {
-    component: AboutDota2Huds,
-    description: 'About Dota2HUDs.com.',
-    keywords: [ 'about dota2huds', 'about dota2huds.com', 'dota2huds', 'dota2huds.com' ],
-    path: '/about/dota2huds',
-    title: 'About Dota2HUDs.com'
-  },
-  {
-    component: AboutRpgOverworldEngine,
-    description: 'About Charles Stover\'s RPG Overworld Engine.',
-    keywords: [ 'gamingmedley rpg', 'gamingmedley rpg engine', 'gamingmedley rpg overworld engine', 'gaming medley rpg', 'gaming medley rpg engine', 'gaming medley rpg overworld engine', 'javascript rpg engine', 'javascript rpg overworld engine', 'js rpg engine', 'js rpg overworld engine', 'rpg engine', 'rpg overworld engine' ],
-    path: '/about/rpg-overworld-engine',
-    title: 'About RPG Overworld Engine'
   },
   {
     component: Donate,
