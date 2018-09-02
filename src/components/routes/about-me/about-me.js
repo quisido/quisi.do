@@ -11,6 +11,7 @@ import dota2huds1600 from '../../../assets/screenshots/dota2huds-1600.jpg';
 import rpgOverworldEngine320 from '../../../assets/screenshots/rpg-overworld-engine.gif';
 import withStyles from './about-me-styles';
 import Assessments from './assessments/assessments';
+import OtherTechnologies from './other-technologies/other-technologies';
 import quotes from './quotes';
 import SeeNoEvil from './see-no-evil/see-no-evil';
 
@@ -37,18 +38,39 @@ class AboutMe extends React.PureComponent {
     return (
       <React.Fragment>
         <Paper className={this.props.classes.paper}>
-          <Typography>
-            Hi, I'm Charles Stover.
-            I am a senior full-stack web development consultant currently employed with a focus in React and Node.
-            I've been developing front end applications for {frontEndYears} years and full-stack apps for {backEndYears}.
-            My expertise is in automated content generation, performance and search engine optimization, and security.
-            I strive for optimal <abbr title="User Interface">UI</abbr>/<abbr title="User Experience">UX</abbr> through{' '}
-            modern design principles and optimized performance.
+          <Typography className={this.props.classes.paragraph}>
+            Hi, I'm Charles Stover.{' '}
+            I am a{' '}
+            <span
+              children="senior full-stack web development consultant"
+              className={this.props.classes.highlight}
+            />{' '}
+            currently employed with a focus in React and Node.
+            My expertise is in automation, optimization, security, and{' '}
+            <abbr
+              children="UI"
+              title="User Interface"
+            />/
+            <abbr
+              children="UX"
+              title="User Experience"
+            />.
           </Typography>
+          <div className={this.props.classes.info}>
+            <Typography
+              children={'Front End: ' + frontEndYears + ' years'}
+              paragraph
+              variant="subheading"
+            />
+            <Typography
+              children={'Full-Stack: ' + backEndYears + ' years'}
+              variant="subheading"
+            />
+          </div>
         </Paper>
         <section className={this.props.classes.section}>
           <Typography
-            children="Placement Exams:"
+            children="Placement Exams"
             gutterBottom
             variant="headline"
           />
@@ -80,19 +102,17 @@ class AboutMe extends React.PureComponent {
             to="/about/spritesheet2gif"
           />
           <Link
-            children="View my entire portfolio."
+            children="View more..."
+            className={this.props.classes.viewPortfolio}
             to="/portfolio"
           />
         </section>
         <section className={this.props.classes.section}>
           <Typography
-            children="Other Technologies:"
+            children="Other Technologies"
             variant="headline"
           />
-          <Typography>
-            Apache, Babel, C++, Chai, ES6, Express, GitHub, Jest, LetsEncrypt, Material UI, Mocha, MySQL<br />
-            nginx, PHP, Python, React Native, SASS, SEO, SQL Server, SSL, TLS, TravisCI, TypeScript, Webpack
-          </Typography>
+          <OtherTechnologies />
         </section>
       </React.Fragment> 
     );

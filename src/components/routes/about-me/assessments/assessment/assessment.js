@@ -23,23 +23,26 @@ class Assessment extends React.PureComponent {
     }
   }
 
+  get color() {
+    return (
+      this.props.off ?
+      'gray' :
+      this.props.selected ?
+        'secondary' :
+        'primary'
+    );
+  }
+
   render() {
     return (
       <span
-        onClick={this.props.onClick(this.props.title, this.props.percentile, this.props.width, this.props.height)}
+        onClick={this.props.onClick}
         style={style}
       >
         <CircularProgress
-          color={
-            this.props.off ?
-              'gray' :
-              this.props.selected ?
-                'secondary' :
-                'primary'
-          }
-          title={this.props.title}
+          color={this.color}
           percentile={this.state.percentile}
-          score={this.props.score}
+          title={this.props.title}
         />
       </span>
     );

@@ -10,6 +10,7 @@
     "@charlesstover/spritesheet2gif": "^1.0.5",
     "@gamingmedley/konami.js": "^1.0.2",
     "@material-ui/core": "^3.0.0",
+    "pluralsight-score": "^1.0.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-object-prop": "^1.0.5",

@@ -1,7 +1,28 @@
+import { Typography } from '@material-ui/core';
+import PluralsightScore from 'pluralsight-score';
 import React from 'react';
 import Assessment from './assessment/assessment';
 import withStyles from './assessments-styles';
-import PluralsightScore from './pluralsight-score/pluralsight-score';
+
+const PLURALSIGHT =
+  <a
+    children="Pluralsight"
+    href="https://app.pluralsight.com/profile/CharlesStover"
+    rel="nofollow noopener noreferrer"
+    target="_blank"
+  />;
+
+const assessments = [
+  [ 'JS 1.8', 100, 'SHL® Online' ],
+  [ 'CSS', 99, PLURALSIGHT ],
+  [ 'JS', 97, PLURALSIGHT ],
+  [ 'HTML5', 96, PLURALSIGHT ],
+  [ 'Java 8', 94, 'SHL® Online' ],
+  [ 'jQuery', 94, PLURALSIGHT ],
+  [ 'Node.js', 89, PLURALSIGHT ],
+  [ 'React', 87, PLURALSIGHT ],
+  [ 'Docker', 72, PLURALSIGHT ]
+];
 
 class Assessments extends React.PureComponent {
 
@@ -10,30 +31,22 @@ class Assessments extends React.PureComponent {
 
   state = {
     percentile: 0,
+    source: null,
     title: null
   };
 
-  assessmentProps(title) {
-    return {
-      off:
-        this.state.title !== null &&
-        this.state.title !== title,
-      selected: this.state.title === title,
-      title
-    };
-  }
-
-  handleAssessmentClick = (title, percentile) => {
+  handleAssessmentClick = (title, percentile, source) => {
     if (!Object.prototype.hasOwnProperty.call(this.assessmentClickHandlers, title)) {
       this.assessmentClickHandlers[title] = () => {
         if (this.state.title === title) {
           this.setState({
             percentile: 0,
+            source: null,
             title: null
           });
         }
         else {
-          this.setState({ percentile, title });
+          this.setState({ percentile, source, title });
           if (this.scoreRef) {
             this.scoreRef.scrollIntoViewIfNeeded();
           }
@@ -47,61 +60,49 @@ class Assessments extends React.PureComponent {
     this.scoreRef = ref;
   };
 
+  isOff(title) {
+    return (
+      this.state.title !== null &&
+      this.state.title !== title
+    );
+  }
+
+  get source() {
+    if (this.state.source === null) {
+      return null;
+    }
+    return (
+      <Typography
+        className={this.props.classes.source}
+        variant="caption"
+      >
+        Source:{' '}
+        {this.state.source}
+      </Typography>
+    );
+  }
+
   render() {
     return (
       <div className={this.props.classes.root}>
-        <div>
-          <Assessment
-            onClick={this.handleAssessmentClick}
-            percentile={100}
-            {...this.assessmentProps('JS 1.8')}
-          />
-          <Assessment
-            onClick={this.handleAssessmentClick}
-            percentile={99}
-            {...this.assessmentProps('CSS')}
-          />
-          <Assessment
-            onClick={this.handleAssessmentClick}
-            percentile={97}
-            {...this.assessmentProps('JS')}
-          />
-          <Assessment
-            onClick={this.handleAssessmentClick}
-            percentile={96}
-            {...this.assessmentProps('HTML5')}
-          />
-          <Assessment
-            onClick={this.handleAssessmentClick}
-            percentile={94}
-            {...this.assessmentProps('Java 8')}
-          />
-          <Assessment
-            onClick={this.handleAssessmentClick}
-            percentile={94}
-            {...this.assessmentProps('jQuery')}
-          />
-          <Assessment
-            onClick={this.handleAssessmentClick}
-            percentile={89}
-            {...this.assessmentProps('Node.js')}
-          />
-          <Assessment
-            onClick={this.handleAssessmentClick}
-            percentile={87}
-            {...this.assessmentProps('React')}
-          />
-          <Assessment
-            onClick={this.handleAssessmentClick}
-            percentile={72}
-            {...this.assessmentProps('Docker')}
-          />
-        </div>
+        <div
+          children={assessments.map(([ title, percentile, source ]) =>
+            <Assessment
+              key={title}
+              off={this.isOff(title)}
+              onClick={this.handleAssessmentClick(title, percentile, source)}
+              percentile={percentile}
+              selected={this.state.title === title}
+              title={title}
+            />
+          )}
+        />
         <PluralsightScore
+          hidden={this.state.title === null}
           onRef={this.handleScoreRef}
           percentile={this.state.percentile}
-          title={this.state.title}
         />
+        {this.source}
       </div>
     );
   }
