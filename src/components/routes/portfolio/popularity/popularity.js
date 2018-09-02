@@ -5,6 +5,8 @@ let npmDownloads = null;
 
 class Popularity extends React.PureComponent {
 
+  mounted = true;
+
   state = {
     error: null
   };
@@ -14,13 +16,21 @@ class Popularity extends React.PureComponent {
       fetch(process.env.REACT_APP_NPM_DOWNLOADS_API)
         .then(response => response.json())
         .then(downloads => {
-          npmDownloads = Object.entries(downloads);;
-          this.forceUpdate();
+          if (this.mounted) {
+            npmDownloads = Object.entries(downloads);
+            this.forceUpdate();
+          }
         })
         .catch(error => {
-          this.setState({ error });
+          if (this.mounted) {
+            this.setState({ error });
+          }
         });
     }
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   render() {

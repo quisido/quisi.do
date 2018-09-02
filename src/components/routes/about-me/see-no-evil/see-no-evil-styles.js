@@ -1,5 +1,15 @@
 import { withStyles } from '@material-ui/core';
 
+const textShadow = i =>
+  '-' + i + 'px -' + i + 'px ' + i + 'px #000000, ' +
+  '-' + i + 'px      0       ' + i + 'px #000000, ' +
+  '-' + i + 'px  ' + i + 'px ' + i + 'px #000000, ' +
+  ' ' + i + 'px -' + i + 'px ' + i + 'px #000000, ' +
+  '     0       -' + i + 'px ' + i + 'px #000000, ' +
+  '     0        ' + i + 'px ' + i + 'px #000000, ' +
+  ' ' + i + 'px      0       ' + i + 'px #000000, ' +
+  ' ' + i + 'px  ' + i + 'px ' + i + 'px #000000';
+
 const BOX_SHADOW =
   '0 2px 4px -1px rgba(0, 0, 0, 0.4) inset, ' +
   '0 4px 5px 0 rgba(0, 0, 0, 0.28) inset, ' +
@@ -8,10 +18,11 @@ const HEIGHT = 252;
 
 export default withStyles({
   color: {
+    backgroundBlendMode: 'soft-light',
+    backgroundColor: '#303030',
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    boxShadow: BOX_SHADOW,
     height: HEIGHT,
     left: 0,
     opacity: 0,
@@ -20,25 +31,24 @@ export default withStyles({
     transitionDuration: '0.5s',
     transitionProperty: 'opacity',
     transitionTimingFunction: 'ease',
-    width: '100%',
-    '&:hover': {
-      opacity: 1
-    }
+    width: '100%'
   },
   description: {
     alignItems: 'center',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     height: HEIGHT,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    position: 'absolute',
+    textShadow: textShadow(3),
+    width: '100%'
   },
   faded: {
-    backgroundBlendMode: 'soft-light',
-    backgroundColor: '#303030',
+    backgroundBlendMode: 'multiply',
+    backgroundColor: '#404040',
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    boxShadow: BOX_SHADOW,
     height: HEIGHT,
     left: 0,
     position: 'absolute',
@@ -46,6 +56,11 @@ export default withStyles({
   },
   root: {
     height: HEIGHT,
-    margin: '1.25em 1em'
+    '&:first-child $color, &:first-child $faded': {
+      boxShadow: BOX_SHADOW
+    },
+    '&:hover $color': {
+      opacity: 1
+    }
   }
 });

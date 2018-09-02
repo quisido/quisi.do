@@ -1,6 +1,7 @@
-import { Paper, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import React from 'react';
 import createObjectProp from 'react-object-prop';
+import Link from 'react-router-dom/Link';
 import withStyles from './see-no-evil-styles';
 
 class SeeNoEvil extends React.PureComponent {
@@ -42,24 +43,30 @@ class SeeNoEvil extends React.PureComponent {
 
   render() {
     return (
-      <Paper className={this.props.classes.root}>
-        <div
+      <div className={this.props.classes.root}>
+        <Link
           className={this.props.classes.faded}
-          ref={this.handleWidthRef}
           style={this.backgroundImageStyle}
+          to={this.props.to}
         >
+          <div
+            className={this.props.classes.color}
+            ref={this.handleWidthRef}
+            style={this.backgroundImageStyle}
+          />
           <div className={this.props.classes.description}>
             <Typography
               children={this.props.title}
+              gutterBottom
               variant="headline"
             />
+            <Typography
+              children={this.props.description}
+              variant="subheading"
+            />
           </div>
-          <div
-            className={this.props.classes.color}
-            style={this.backgroundImageStyle}
-          />
-        </div>
-      </Paper>
+        </Link>
+      </div>
     );
   }
 }

@@ -128,7 +128,7 @@ class Portfolio extends React.PureComponent {
           <Link
             children="Dota 2 HUD Gallery"
             description="View live demonstrations of the Dota 2 HUDs in your browser."
-            href="https://dota2.gamingmedley.com/hud_skins/"
+            href="https://dota2huds.com/"
           />
           <Link
             children="Electron Transition Calculator"

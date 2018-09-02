@@ -1,6 +1,7 @@
 import { Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import Quotes from 'react-quotes';
+import Link from 'react-router-dom/Link';
 import dota2huds320 from '../../../assets/screenshots/dota2huds-320.jpg';
 import dota2huds768 from '../../../assets/screenshots/dota2huds-768.jpg';
 import dota2huds800 from '../../../assets/screenshots/dota2huds-800.jpg';
@@ -36,7 +37,7 @@ class AboutMe extends React.PureComponent {
     return (
       <React.Fragment>
         <Paper className={this.props.classes.paper}>
-          <Typography paragraph>
+          <Typography>
             Hi, I'm Charles Stover.
             I am a senior full-stack web development consultant currently employed with a focus in React and Node.
             I've been developing front end applications for {frontEndYears} years and full-stack apps for {backEndYears}.
@@ -44,24 +45,55 @@ class AboutMe extends React.PureComponent {
             I strive for optimal <abbr title="User Interface">UI</abbr>/<abbr title="User Experience">UX</abbr> through{' '}
             modern design principles and optimized performance.
           </Typography>
-          <Assessments />
         </Paper>
-        <SeeNoEvil
-          images={dota2huds}
-          title="Dota 2 HUDs"
-        />
-        <SeeNoEvil
-          images={rpgOverworldEngine}
-          title="RPG Overworld Engine"
-        />
-        <Paper className={this.props.classes.paper}>
+        <section className={this.props.classes.section}>
+          <Typography
+            children="Placement Exams:"
+            gutterBottom
+            variant="headline"
+          />
+          <Assessments />
+        </section>
+        <section className={this.props.classes.section}>
           <Quotes
             animationDuration={1500}
             delay={12500}
             quotes={quotes}
             shuffle
           />
-        </Paper>
+        </section>
+        <section className={this.props.classes.section}>
+          <SeeNoEvil
+            description="Automated static file generation."
+            images={dota2huds}
+            title="Dota 2 HUDs"
+            to="/about/dota2huds"
+          />
+          <SeeNoEvil
+            images={rpgOverworldEngine}
+            title="RPG Overworld Engine"
+            to="/about/rpg-overworld-engine"
+          />
+          <SeeNoEvil
+            images={rpgOverworldEngine}
+            title="Sprite Sheet to GIF Converter"
+            to="/about/spritesheet2gif"
+          />
+          <Link
+            children="View my entire portfolio."
+            to="/portfolio"
+          />
+        </section>
+        <section className={this.props.classes.section}>
+          <Typography
+            children="Other Technologies:"
+            variant="headline"
+          />
+          <Typography>
+            Apache, Babel, C++, Chai, ES6, Express, GitHub, Jest, LetsEncrypt, Material UI, Mocha, MySQL<br />
+            nginx, PHP, Python, React Native, SASS, SEO, SQL Server, SSL, TLS, TravisCI, TypeScript, Webpack
+          </Typography>
+        </section>
       </React.Fragment> 
     );
   }

@@ -1,8 +1,7 @@
-import { Typography } from '@material-ui/core';
 import React from 'react';
 import Assessment from './assessment/assessment';
-import PluralsightScore from './pluralsight-score/pluralsight-score';
 import withStyles from './assessments-styles';
+import PluralsightScore from './pluralsight-score/pluralsight-score';
 
 class Assessments extends React.PureComponent {
 
@@ -51,11 +50,7 @@ class Assessments extends React.PureComponent {
   render() {
     return (
       <div className={this.props.classes.root}>
-        <section>
-          <Typography
-            children="Expertises"
-            variant="subheading"
-          />
+        <div>
           <Assessment
             onClick={this.handleAssessmentClick}
             percentile={100}
@@ -79,6 +74,11 @@ class Assessments extends React.PureComponent {
           <Assessment
             onClick={this.handleAssessmentClick}
             percentile={94}
+            {...this.assessmentProps('Java 8')}
+          />
+          <Assessment
+            onClick={this.handleAssessmentClick}
+            percentile={94}
             {...this.assessmentProps('jQuery')}
           />
           <Assessment
@@ -91,28 +91,17 @@ class Assessments extends React.PureComponent {
             percentile={87}
             {...this.assessmentProps('React')}
           />
-        </section>
-        <PluralsightScore
-          onRef={this.handleScoreRef}
-          percentile={this.state.percentile}
-          title={this.state.title}
-        />
-        <section>
-          <Typography
-            children="Proficiencies"
-            variant="subheading"
-          />
-          <Assessment
-            onClick={this.handleAssessmentClick}
-            percentile={94}
-            {...this.assessmentProps('Java 8')}
-          />
           <Assessment
             onClick={this.handleAssessmentClick}
             percentile={72}
             {...this.assessmentProps('Docker')}
           />
-        </section>
+        </div>
+        <PluralsightScore
+          onRef={this.handleScoreRef}
+          percentile={this.state.percentile}
+          title={this.state.title}
+        />
       </div>
     );
   }

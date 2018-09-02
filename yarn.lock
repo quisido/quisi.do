@@ -5985,9 +5985,9 @@ react-portfolio@^1.0.3:
     react-multi-context "^1.1.1"
     react-object-prop "^1.0.5"
 
-react-quotes@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-quotes/-/react-quotes-1.0.4.tgz#d50ac0eec3c57f89349ff3f8e30d104fe5e25e77"
+react-quotes@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-quotes/-/react-quotes-1.0.7.tgz#c0bb270f8804353fd71d765200885cbc3a2cf732"
 
 react-rainbow-text@^1.0.2:
   version "1.0.2"
