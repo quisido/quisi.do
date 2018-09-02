@@ -53,7 +53,7 @@ class SeeNoEvil extends React.PureComponent {
           href={this.props.href || null}
           style={this.backgroundImageStyle}
           to={this.props.to || null}
-          title={this.props.title}
+          title=""
         >
           <div
             className={this.props.classes.color}

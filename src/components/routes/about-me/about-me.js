@@ -1,4 +1,4 @@
-import { Paper, Typography } from '@material-ui/core';
+import { Paper, Tooltip, Typography } from '@material-ui/core';
 import React from 'react';
 import Quotes from 'react-quotes';
 import Link from 'react-router-dom/Link';
@@ -8,6 +8,8 @@ import dota2huds800 from '../../../assets/screenshots/dota2huds-800.jpg';
 import dota2huds1024 from '../../../assets/screenshots/dota2huds-1024.jpg';
 import dota2huds1280 from '../../../assets/screenshots/dota2huds-1280.jpg';
 import dota2huds1600 from '../../../assets/screenshots/dota2huds-1600.jpg';
+import spritesheet2gif320 from '../../../assets/screenshots/spritesheet2gif-320.png';
+import spritesheet2gif1600 from '../../../assets/screenshots/spritesheet2gif-1600.png';
 import rpgOverworldEngine320 from '../../../assets/screenshots/rpg-overworld-engine.gif';
 import withStyles from './about-me-styles';
 import Assessments from './assessments/assessments';
@@ -31,6 +33,11 @@ const dota2huds = [
 
 const rpgOverworldEngine = [
   [ 320, rpgOverworldEngine320 ]
+];
+
+const spritesheet2gif = [
+  [ 320, spritesheet2gif320 ],
+  [ 1600, spritesheet2gif1600 ],
 ];
 
 class AboutMe extends React.PureComponent {
@@ -92,12 +99,14 @@ class AboutMe extends React.PureComponent {
             title="Dota 2 HUDs"
           />
           <SeeNoEvil
+            description="IE6-compatible HTML and CSS animations."
+            href="https://gamingmedley.github.io/rpg-overworld-engine/"
             images={rpgOverworldEngine}
             title="RPG Overworld Engine"
-            to="/about/rpg-overworld-engine"
           />
           <SeeNoEvil
-            images={rpgOverworldEngine}
+            description="Dynamic image manipulation."
+            images={spritesheet2gif}
             title="Sprite Sheet to GIF Converter"
             to="/spritesheet2gif"
           />
