@@ -51,7 +51,9 @@ class SeeNoEvil extends React.PureComponent {
         <Component
           className={this.props.classes.faded}
           href={this.props.href || null}
+          rel={this.props.rel}
           style={this.backgroundImageStyle}
+          target={this.props.target}
           to={this.props.to || null}
           title=""
         >

@@ -46,7 +46,10 @@ class AboutMe extends React.PureComponent {
       <React.Fragment>
         <Paper className={this.props.classes.paper}>
           <Typography className={this.props.classes.paragraph}>
-            Hi, I'm Charles Stover.{' '}
+            Hi, I'm <span
+              children="Charles Stover"
+              className={this.props.classes.highlight}
+            />.{' '}
             I am a{' '}
             <span
               children="senior full-stack web development consultant"
@@ -54,19 +57,17 @@ class AboutMe extends React.PureComponent {
             />{' '}
             currently employed with a focus in React and Node.
             My expertise is in automation, optimization, security, and{' '}
-            <abbr
-              children="UI"
-              title="User Interface"
-            />/
-            <abbr
-              children="UX"
-              title="User Experience"
-            />.
+            <Tooltip title="User Interface">
+              <abbr children="UI" />
+            </Tooltip>/
+            <Tooltip title="User Experience">
+              <abbr children="UX" />
+            </Tooltip>.
           </Typography>
           <div className={this.props.classes.info}>
             <Typography
               children={'Front End: ' + frontEndYears + ' years'}
-              paragraph
+              gutterBottom
               variant="subheading"
             />
             <Typography
@@ -96,12 +97,16 @@ class AboutMe extends React.PureComponent {
             description="Automated static file generation."
             href="https://dota2huds.com/"
             images={dota2huds}
+            rel="noopener noreferrer"
+            target="_blank"
             title="Dota 2 HUDs"
           />
           <SeeNoEvil
             description="IE6-compatible HTML and CSS animations."
             href="https://gamingmedley.github.io/rpg-overworld-engine/"
             images={rpgOverworldEngine}
+            rel="nofollow noopener noreferrer"
+            target="_blank"
             title="RPG Overworld Engine"
           />
           <SeeNoEvil
@@ -119,6 +124,7 @@ class AboutMe extends React.PureComponent {
         <section className={this.props.classes.section}>
           <Typography
             children="Other Technologies"
+            gutterBottom
             variant="headline"
           />
           <OtherTechnologies />
