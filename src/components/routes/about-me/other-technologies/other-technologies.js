@@ -36,7 +36,9 @@ class OtherTechnologies extends React.PureComponent {
         <a
           className={this.props.classes.technology}
           href={href}
+          rel="nofollow noopener noreferrer"
           style={style}
+          target="_blank"
         >
           <span
             children={technology}
