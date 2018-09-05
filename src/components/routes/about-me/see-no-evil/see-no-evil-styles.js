@@ -17,6 +17,9 @@ const BOX_SHADOW =
 const HEIGHT = 252;
 
 export default withStyles({
+  caption: {
+    fontSize: '1em'
+  },
   color: {
     backgroundBlendMode: 'soft-light',
     backgroundColor: '#303030',
@@ -63,5 +66,8 @@ export default withStyles({
     '&:hover $color': {
       opacity: 1
     }
+  },
+  title: {
+    fontSize: '2em'
   }
 });

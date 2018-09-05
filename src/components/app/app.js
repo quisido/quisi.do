@@ -1,13 +1,12 @@
-import ElectronTransitions from '@charlesstover/electron-transitions';
-import PasswordGenerator from '@charlesstover/password-generator';
-import Radix from '@charlesstover/radix';
-import RainbowText from '@charlesstover/rainbow-text';
 import SpriteSheetToGif from '@charlesstover/spritesheet2gif';
 import Konami from '@gamingmedley/konami.js';
 import React from 'react';
 import ReactPortfolio from 'react-portfolio';
 import AboutMe from '../routes/about-me/about-me';
 import Donate from '../routes/donate/donate';
+import GitHubPortfolio from '../routes/portfolio/github/github';
+import MediumPortfolio from '../routes/portfolio/medium/medium';
+import NpmPortfolio from '../routes/portfolio/npm/npm';
 import Portfolio from '../routes/portfolio/portfolio';
 
 const UPDATE_HUE_DELAY = 250;
@@ -37,39 +36,32 @@ const routes = [
     title: 'Donate to Charles Stover'
   },
   {
-    component: ElectronTransitions,
-    description: 'Calculcator for the energy, frequencies, wavelengths of electron transitions.',
-    keywords: [ 'electron transition calculator' ],
-    path: '/electron-transitions',
-    title: 'Electron Transitions'
-  },
-  {
-    component: PasswordGenerator,
-    description: 'Generate an automated, secure password with symbols.',
-    keywords: [ 'password generator', 'secure password generator', 'strong password generator' ],
-    path: '/password-generator',
-    title: 'Secure Password Generator'
-  },
-  {
     component: Portfolio,
     description: 'View the web development portfolio of Charles Stover.',
     keywords: [ 'Charles Stover', 'freelance web developer', 'freelance web development', 'web development consultant', 'web development portfolio' ],
     path: '/portfolio',
-    title: 'Charles Stover\'s Portfolio'
+    title: 'Portfolio - Charles Stover'
   },
   {
-    component: Radix,
-    description: 'Convert between bases with this handy radix calculator.',
-    keywords: [ 'base converter', 'convert base 2 to base 8', 'convert base 2 to base 10', 'convert base 2 to base 16', 'convert base 8 to base 2', 'convert base 8 to base 10', 'convert base 8 to base 16', 'convert base 10 to base 2', 'convert base 10 to base 8', 'convert base 10 to base 16', 'convert base 16 to base 2', 'convert base 16 to base 8', 'convert base 16 to base 10', 'convert bases', 'convert binary to decimal', 'convert binary to hexadecimal', 'convert binary to octal', 'convert decimal to binary', 'convert decimal to hexadecimal', 'convert decimal to octal', 'convert hexadecimal to binary', 'convert hexadecimal to decimal', 'convert hexadecimal to octal', 'convert octal to binary', 'convert octal to decimal', 'convert octal to hexadecimal', 'radix conversion' ],
-    path: '/radix',
-    title: 'Radix Conversion'
+    component: GitHubPortfolio,
+    description: 'View the GitHub repositories of Charles Stover.',
+    keywords: [ 'Charles Stover GitHub', 'Charles Stover repositories' ],
+    path: '/portfolio/github',
+    title: 'GitHub Repositories - Charles Stover'
   },
   {
-    component: RainbowText,
-    description: 'Generate rainbow-colored text in HTML or BB code for forums!',
-    keywords: [ 'rainbow color text generator', 'rainbow text bb code', 'rainbow text for forums', ' rainbow text generator', ' rainbow text html', ' rainbow text maker' ],
-    path: '/rainbow-text',
-    title: 'Rainbow Text Generator'
+    component: MediumPortfolio,
+    description: 'View the Medium publications of Charles Stover.',
+    keywords: [ 'Charles Stover Medium', 'Charles Stover publications' ],
+    path: '/portfolio/medium',
+    title: 'Medium Publications - Charles Stover'
+  },
+  {
+    component: NpmPortfolio,
+    description: 'View the NPM packages of Charles Stover.',
+    keywords: [ 'Charles Stover NPM', 'Charles Stover packages' ],
+    path: '/portfolio/npm',
+    title: 'NPM Packages - Charles Stover'
   },
   {
     component: SpriteSheetToGif,

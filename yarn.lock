@@ -94,32 +94,9 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@charlesstover/electron-transitions@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@charlesstover/electron-transitions/-/electron-transitions-1.0.1.tgz#471187ab211cc7a1d30fc99d0885bbbab626f08f"
-
 "@charlesstover/hsl2rgb@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@charlesstover/hsl2rgb/-/hsl2rgb-1.0.4.tgz#6bda4c13b11a3a3499794f08772b19f914ea993b"
-
-"@charlesstover/password-generator@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@charlesstover/password-generator/-/password-generator-1.0.3.tgz#49d5dce3deadbd5d6e649cc483dc491674c891d2"
-  dependencies:
-    react-object-prop "^1.0.5"
-
-"@charlesstover/radix@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@charlesstover/radix/-/radix-1.0.1.tgz#71f1334cc07e94f81fbfc91a737bad847b01c1fb"
-
-"@charlesstover/rainbow-text@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@charlesstover/rainbow-text/-/rainbow-text-1.0.2.tgz#5503da5b024b64636857ce9fdfcf2ccb592e625b"
-  dependencies:
-    memoize-one "^4.0.0"
-    rainbow-gradient "^1.0.0"
-    react-object-prop "^1.0.5"
-    react-rainbow-text "^1.0.2"
 
 "@charlesstover/spritesheet2gif@^1.0.5":
   version "1.0.5"
@@ -2668,7 +2645,7 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
 
-event-emitter@~0.3.5:
+event-emitter@^0.3.5, event-emitter@~0.3.5:
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/event-emitter/-/event-emitter-0.3.5.tgz#df8c69eef1647923c7157b9ce83840610b02cc39"
   dependencies:
@@ -5870,12 +5847,6 @@ raf@3.4.0:
   dependencies:
     performance-now "^2.1.0"
 
-rainbow-gradient@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/rainbow-gradient/-/rainbow-gradient-1.0.0.tgz#921cf9a4b2def39b9e90d9aa764a8aefc268598d"
-  dependencies:
-    "@charlesstover/hsl2rgb" "^1.0.4"
-
 randomatic@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/randomatic/-/randomatic-3.1.0.tgz#36f2ca708e9e567f5ed2ec01949026d50aa10116"
@@ -6008,13 +5979,6 @@ react-portfolio@^1.0.5:
 react-quotes@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/react-quotes/-/react-quotes-1.0.7.tgz#c0bb270f8804353fd71d765200885cbc3a2cf732"
-
-react-rainbow-text@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-rainbow-text/-/react-rainbow-text-1.0.2.tgz#745dea1b6d079d744ea12d21eb62df3585f0a609"
-  dependencies:
-    memoize-one "^4.0.0"
-    rainbow-gradient "^1.0.0"
 
 react-router-dom@^4.3.1:
   version "4.3.1"
