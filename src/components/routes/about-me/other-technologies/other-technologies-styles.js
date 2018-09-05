@@ -12,5 +12,8 @@ export default withStyles({
     height: SIZE,
     margin: '0.5em 1em',
     width: SIZE
+  },
+  title: {
+    display: 'none'
   }
 });

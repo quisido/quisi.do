@@ -49,13 +49,14 @@ export default withStyles({
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    display: 'block',
     height: HEIGHT,
-    left: 0,
-    position: 'absolute',
     width: '100%'
   },
   root: {
     height: HEIGHT,
+    position: 'relative',
+    width: '100%',
     '&:first-child $color, &:first-child $faded': {
       boxShadow: BOX_SHADOW
     },

@@ -1,7 +1,6 @@
 import { Paper, Tooltip, Typography } from '@material-ui/core';
 import React from 'react';
 import Quotes from 'react-quotes';
-import Link from 'react-router-dom/Link';
 import dota2huds320 from '../../../assets/screenshots/dota2huds-320.jpg';
 import dota2huds768 from '../../../assets/screenshots/dota2huds-768.jpg';
 import dota2huds800 from '../../../assets/screenshots/dota2huds-800.jpg';
@@ -9,13 +8,14 @@ import dota2huds1024 from '../../../assets/screenshots/dota2huds-1024.jpg';
 import dota2huds1280 from '../../../assets/screenshots/dota2huds-1280.jpg';
 import dota2huds1600 from '../../../assets/screenshots/dota2huds-1600.jpg';
 import spritesheet2gif320 from '../../../assets/screenshots/spritesheet2gif-320.png';
-import spritesheet2gif1600 from '../../../assets/screenshots/spritesheet2gif-1600.png';
+import spritesheet2gif1536 from '../../../assets/screenshots/spritesheet2gif-1536.png';
 import rpgOverworldEngine320 from '../../../assets/screenshots/rpg-overworld-engine.gif';
 import withStyles from './about-me-styles';
 import Assessments from './assessments/assessments';
 import OtherTechnologies from './other-technologies/other-technologies';
 import quotes from './quotes';
 import SeeNoEvil from './see-no-evil/see-no-evil';
+import ViewPortfolio from './view-portfolio/view-portfolio';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
@@ -37,10 +37,31 @@ const rpgOverworldEngine = [
 
 const spritesheet2gif = [
   [ 320, spritesheet2gif320 ],
-  [ 1600, spritesheet2gif1600 ],
+  [ 1538, spritesheet2gif1536 ],
 ];
 
 class AboutMe extends React.PureComponent {
+
+  __spritesheetToGifClasses = [ null, null ];
+  _spritesheetToGifClasses = {};
+
+  get spritesheetToGifClasses() {
+    if (
+      this.__spritesheetToGifClasses[0] !== this.props.classes.spritesheet2gifColor ||
+      this.__spritesheetToGifClasses[1] !== this.props.classes.spritesheet2gifFaded
+    ) {
+      this.__spritesheetToGifClasses = [
+        this.props.classes.spritesheet2gifColor,
+        this.props.classes.spritesheet2gifFaded
+      ];
+      this._spritesheetToGifClasses = {
+        color: this.props.classes.spritesheet2gifColor,
+        faded: this.props.classes.spritesheet2gifFaded
+      };
+    }
+    return this._spritesheetToGifClasses;
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -84,15 +105,23 @@ class AboutMe extends React.PureComponent {
           />
           <Assessments />
         </section>
-        <section className={this.props.classes.section}>
+        <Paper className={this.props.classes.paper + ' ' + this.props.classes.quotes}>
           <Quotes
             animationDuration={1500}
             delay={12500}
             quotes={quotes}
             shuffle
           />
-        </section>
+        </Paper>
         <section className={this.props.classes.section}>
+          <Typography
+            children="Other Skills"
+            gutterBottom
+            variant="headline"
+          />
+          <OtherTechnologies />
+        </section>
+        <Paper className={this.props.classes.paper + ' ' + this.props.classes.seeNoEvil}>
           <SeeNoEvil
             description="Automated static file generation."
             href="https://dota2huds.com/"
@@ -110,25 +139,14 @@ class AboutMe extends React.PureComponent {
             title="RPG Overworld Engine"
           />
           <SeeNoEvil
+            classes={this.spritesheetToGifClasses}
             description="Dynamic image manipulation."
             images={spritesheet2gif}
             title="Sprite Sheet to GIF Converter"
             to="/spritesheet2gif"
           />
-          <Link
-            children="View more..."
-            className={this.props.classes.viewPortfolio}
-            to="/portfolio"
-          />
-        </section>
-        <section className={this.props.classes.section}>
-          <Typography
-            children="Other Technologies"
-            gutterBottom
-            variant="headline"
-          />
-          <OtherTechnologies />
-        </section>
+          <ViewPortfolio />
+        </Paper>
       </React.Fragment> 
     );
   }

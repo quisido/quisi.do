@@ -1,9 +1,12 @@
+import { Tooltip } from '@material-ui/core';
 import React from 'react';
+import withStyles from './assessment-styles';
 import CircularProgress from './circular-progress/circular-progress';
 
-const style = {
-  cursor: 'pointer'
-};
+const ordinal = ((...suffixes) =>
+  n =>
+    n + (suffixes[(n % 100 - 20) % 10] || suffixes[n % 100] || suffixes[0])
+)('th', 'st', 'nd', 'rd');
 
 class Assessment extends React.PureComponent {
 
@@ -36,17 +39,25 @@ class Assessment extends React.PureComponent {
   render() {
     return (
       <span
+        className={this.props.classes.root}
         onClick={this.props.onClick}
-        style={style}
       >
-        <CircularProgress
-          color={this.color}
-          percentile={this.state.percentile}
-          title={this.props.title}
+        <span
+          children={this.props.title}
+          className={this.props.classes.title}
         />
+        <Tooltip
+          placement="bottom"
+          title={ordinal(this.props.percentile) + ' Percentile'}
+        >
+          <CircularProgress
+            color={this.color}
+            percentile={this.state.percentile}
+          />
+        </Tooltip>
       </span>
     );
   }
 }
 
-export default Assessment;
+export default withStyles(Assessment);
