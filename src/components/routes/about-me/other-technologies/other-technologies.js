@@ -7,7 +7,7 @@ const technologies =
     'Apache', 'Chai', 'C++', 'ES6', 'express', 'GitHub', 'Jest', 'SASS',
     'LetsEncrypt', 'Material UI', 'Mocha', 'MySQL', 'nginx', 'PHP', 'Python',
     'React Native', 'SQL Server', 'TravisCI', 'TypeScript', 'Webpack', 'Babel',
-    'Redux'
+    'Redux', 'Enzyme', 'Linux', 'Ubuntu'
   ]
   .map((technology, index) =>
     [

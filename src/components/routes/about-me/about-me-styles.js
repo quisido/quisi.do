@@ -58,6 +58,7 @@ export default withStyles({
   seeNoEvil: {
     display: 'flex',
     flexDirection: 'column',
+    marginBottom: '3em',
     overflow: 'hidden',
     padding: 0,
     textAlign: 'center'
