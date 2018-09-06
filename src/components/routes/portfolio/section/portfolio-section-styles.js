@@ -48,6 +48,7 @@ export default withStyles({
   },
   image: {
     ...transition,
+    backgroundColor: 'inherit',
     backgroundPosition: 'center 1em',
     backgroundRepeat: 'no-repeat',
     height: 250,
