@@ -17,10 +17,10 @@ class NpmLink extends React.PureComponent {
       .then(data => {
         if (
           this.mounted &&
-          Object.prototype.hasOwnProperty.call(data, this.props.package)
+          Object.prototype.hasOwnProperty.call(data, this.package)
         ) {
           this.setState({
-            downloads: data[this.props.package]
+            downloads: data[this.package]
           });
         }
       })
@@ -37,7 +37,21 @@ class NpmLink extends React.PureComponent {
     if (this.state.downloads === null) {
       return null;
     }
-    return ' - ' + this.state.downloads + ' downloads';
+    return (
+      (
+        this.props.description ?
+          ' - ' :
+          ''
+      ) +
+      this.state.downloads.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',') + ' downloads'
+    );
+  }
+
+  get href() {
+    if (this.props.package) {
+      return 'https://www.npmjs.com/package/' + this.props.package;
+    }
+    return 'https://www.npmjs.com/~charlesstover';
   }
 
   get listItemTextClasses() {
@@ -46,16 +60,31 @@ class NpmLink extends React.PureComponent {
     });
   }
 
+  get package() {
+    return this.props.package || '@';
+  }
+
+  get primary() {
+    return this.props.package || 'Other Packages';
+  }
+
+  get title() {
+    if (this.props.package) {
+      return this.props.package + ' - npm';
+    }
+    return '@charlesstover - npm';
+  }
+
   render() {
     return (
       <ListItem className={this.props.classes.root}>
         <Tooltip
           placement="left"
-          title={this.props.package + ' - npm'}
+          title={this.title}
         >
           <a
             className={this.props.classes.link}
-            href={'https://www.npmjs.com/package/' + this.props.package}
+            href={this.href}
             rel="nofollow noopener noreferrer"
             target="_blank"
           >
@@ -68,13 +97,8 @@ class NpmLink extends React.PureComponent {
             <ListItemText
               classes={this.listItemTextClasses}
               className={this.props.classes.text}
-              primary={
-                <React.Fragment>
-                  {this.props.package}
-                  {this.downloads}
-                </React.Fragment>
-              }
-              secondary={this.props.description}
+              primary={this.primary}
+              secondary={this.props.description + this.downloads}
             />
           </a>
         </Tooltip>

@@ -9,11 +9,19 @@ class Npm extends React.PureComponent {
   mounted = true;
 
   state = {
-    error: null
+    error: null,
+    misc: null
   };
 
   componentDidMount() {
     npmDownloads.fetch()
+      .then(data => {
+        if (this.mounted) {
+          this.setState({
+            misc: data['@']
+          });
+        }
+      })
       .catch(err => {
         if (this.mounted) {
           this.setState({
@@ -36,6 +44,18 @@ class Npm extends React.PureComponent {
         children={this.state.error}
         className={this.props.classes.error}
         variant="body1"
+      />
+    );
+  }
+
+  get misc() {
+    if (this.state.misc === null) {
+      return null;
+    }
+    return (
+      <Link
+        description=""
+        icon="❓"
       />
     );
   }
@@ -114,6 +134,7 @@ class Npm extends React.PureComponent {
             icon="🌈"
             package="react-rainbow-text"
           />
+          {this.misc}
         </List>
         {this.error}
       </Paper>

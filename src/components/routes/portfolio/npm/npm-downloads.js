@@ -33,7 +33,7 @@ class NpmDownloads extends EventEmitter {
     return fetch(process.env.REACT_APP_NPM_DOWNLOADS_API)
       .then(response => response.json())
       .then(data => {
-        this.data = Object.entries(data)
+        this.data = data;
         this.error = null;
         this.loading = false;
         this.emit('data', this.data);
