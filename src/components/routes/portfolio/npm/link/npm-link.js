@@ -1,4 +1,4 @@
-import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import React from 'react';
 import createObjectProp from 'react-object-prop';
 import npmDownloads from '../npm-downloads';
@@ -35,16 +35,9 @@ class NpmLink extends React.PureComponent {
 
   get downloads() {
     if (this.state.downloads === null) {
-      return null;
+      return '\u00A0';
     }
-    return (
-      (
-        this.props.description ?
-          ' - ' :
-          ''
-      ) +
-      this.state.downloads.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',') + ' downloads'
-    );
+    return this.state.downloads.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',') + ' downloads';
   }
 
   get href() {
@@ -94,7 +87,16 @@ class NpmLink extends React.PureComponent {
             classes={this.listItemTextClasses}
             className={this.props.classes.text}
             primary={this.primary}
-            secondary={this.props.description + this.downloads}
+            secondary={
+              <React.Fragment>
+                {this.props.description}
+                <Typography
+                  children={this.downloads}
+                  className={this.props.classes.downloads}
+                  variant="caption"
+                />
+              </React.Fragment>
+            }
           />
         </a>
       </ListItem>

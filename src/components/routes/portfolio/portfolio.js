@@ -1,5 +1,6 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import github from '../../../assets/portfolio/github.png';
 import medium from '../../../assets/portfolio/medium.png';
 import npm from '../../../assets/portfolio/npm.png';
@@ -38,6 +39,12 @@ class Portfolio extends React.PureComponent {
     return false;
   };
 
+  handleRouteRef = ref => {
+    if (ref) {
+      ReactDOM.findDOMNode(ref).scrollIntoView();
+    }
+  };
+
   get route() {
     const route = routes.find(route => this.props.location.pathname === '/portfolio/' + route.path);
     if (typeof route === 'undefined') {
@@ -46,7 +53,7 @@ class Portfolio extends React.PureComponent {
     const Component = route.component;
     return (
       <React.Fragment>
-        <Component />
+        <Component ref={this.handleRouteRef} />
         <Button
           children="Back to Top"
           className={this.props.classes.backToTop}
