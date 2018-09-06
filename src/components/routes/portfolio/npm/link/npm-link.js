@@ -1,4 +1,4 @@
-import { ListItem, ListItemIcon, ListItemText, Tooltip } from '@material-ui/core';
+import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import React from 'react';
 import createObjectProp from 'react-object-prop';
 import npmDownloads from '../npm-downloads';
@@ -78,30 +78,25 @@ class NpmLink extends React.PureComponent {
   render() {
     return (
       <ListItem className={this.props.classes.root}>
-        <Tooltip
-          placement="left"
-          title={this.title}
+        <a
+          className={this.props.classes.link}
+          href={this.href}
+          rel="nofollow noopener noreferrer"
+          target="_blank"
         >
-          <a
-            className={this.props.classes.link}
-            href={this.href}
-            rel="nofollow noopener noreferrer"
-            target="_blank"
-          >
-            <ListItemIcon>
-              <span
-                children={this.props.icon}
-                className={this.props.classes.icon}
-              />
-            </ListItemIcon>
-            <ListItemText
-              classes={this.listItemTextClasses}
-              className={this.props.classes.text}
-              primary={this.primary}
-              secondary={this.props.description + this.downloads}
+          <ListItemIcon>
+            <span
+              children={this.props.icon}
+              className={this.props.classes.icon}
             />
-          </a>
-        </Tooltip>
+          </ListItemIcon>
+          <ListItemText
+            classes={this.listItemTextClasses}
+            className={this.props.classes.text}
+            primary={this.primary}
+            secondary={this.props.description + this.downloads}
+          />
+        </a>
       </ListItem>
     );
   }

@@ -1,4 +1,4 @@
-import { ListItem, ListItemIcon, ListItemText, Tooltip } from '@material-ui/core';
+import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import React from 'react';
 import createObjectProp from 'react-object-prop';
 import withStyles from './medium-link-styles';
@@ -25,30 +25,25 @@ class MediumLink extends React.PureComponent {
   render() {
     return (
       <ListItem className={this.props.classes.root}>
-        <Tooltip
-          placement="left"
-          title={this.props.title + ' – Charles Stover – Medium'}
+        <a
+          className={this.props.classes.link}
+          href={'https://medium.com/@Charles_Stover/' + this.titleHref + '-' + this.props.id}
+          rel="nofollow noopener noreferrer"
+          target="_blank"
         >
-          <a
-            className={this.props.classes.link}
-            href={'https://medium.com/@Charles_Stover/' + this.titleHref + '-' + this.props.id}
-            rel="nofollow noopener noreferrer"
-            target="_blank"
-          >
-            <ListItemIcon>
-              <span
-                children={this.props.icon}
-                className={this.props.classes.icon}
-              />
-            </ListItemIcon>
-            <ListItemText
-              classes={this.listItemTextClasses}
-              className={this.props.classes.text}
-              primary={this.props.title}
-              secondary={this.props.description}
+          <ListItemIcon>
+            <span
+              children={this.props.icon}
+              className={this.props.classes.icon}
             />
-          </a>
-        </Tooltip>
+          </ListItemIcon>
+          <ListItemText
+            classes={this.listItemTextClasses}
+            className={this.props.classes.text}
+            primary={this.props.title}
+            secondary={this.props.description}
+          />
+        </a>
       </ListItem>
     );
   }

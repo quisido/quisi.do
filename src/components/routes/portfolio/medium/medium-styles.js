@@ -10,6 +10,10 @@ export default withStyles({
     margin: 0,
     padding: 0
   },
+  subheading: {
+    fontSize: '1em',
+    marginBottom: '0.667em'
+  },
   title: {
     padding: '1em',
     textAlign: 'center'
