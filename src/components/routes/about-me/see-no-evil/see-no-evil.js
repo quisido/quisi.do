@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
 import createObjectProp from 'react-object-prop';
-import Link from 'react-router-dom/Link';
+import { Link } from 'react-router-dom';
 import withStyles from './see-no-evil-styles';
 
 class SeeNoEvil extends React.PureComponent {

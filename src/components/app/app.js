@@ -4,9 +4,6 @@ import React from 'react';
 import ReactPortfolio from 'react-portfolio';
 import AboutMe from '../routes/about-me/about-me';
 import Donate from '../routes/donate/donate';
-import GitHubPortfolio from '../routes/portfolio/github/github';
-import MediumPortfolio from '../routes/portfolio/medium/medium';
-import NpmPortfolio from '../routes/portfolio/npm/npm';
 import Portfolio from '../routes/portfolio/portfolio';
 
 const UPDATE_HUE_DELAY = 250;
@@ -25,6 +22,8 @@ const nav = [
 const routes = [
   {
     component: AboutMe,
+    description: 'Portfolio of senior full-stack JavaScript developer Charles Stover.',
+    keywords: [ 'Charles Stover', 'Charles Stover\'s portfolio', 'full-stack JavaScript developer', 'JavaScript developer', 'senior full-stack JavaScript developer', 'senior JavaScript developer' ],
     path: '/',
     title: 'Charles Stover'
   },
@@ -43,21 +42,21 @@ const routes = [
     title: 'Portfolio - Charles Stover'
   },
   {
-    component: GitHubPortfolio,
+    component: Portfolio,
     description: 'View the GitHub repositories of Charles Stover.',
     keywords: [ 'Charles Stover GitHub', 'Charles Stover repositories' ],
     path: '/portfolio/github',
     title: 'GitHub Repositories - Charles Stover'
   },
   {
-    component: MediumPortfolio,
+    component: Portfolio,
     description: 'View the Medium publications of Charles Stover.',
     keywords: [ 'Charles Stover Medium', 'Charles Stover publications' ],
     path: '/portfolio/medium',
     title: 'Medium Publications - Charles Stover'
   },
   {
-    component: NpmPortfolio,
+    component: Portfolio,
     description: 'View the NPM packages of Charles Stover.',
     keywords: [ 'Charles Stover NPM', 'Charles Stover packages' ],
     path: '/portfolio/npm',

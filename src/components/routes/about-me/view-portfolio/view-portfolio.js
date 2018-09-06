@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'react-router-dom/Link';
+import { Link } from 'react-router-dom';
 import withStyles from './view-portfolio-styles.js';
 
 class ViewPortfolio extends React.PureComponent {
