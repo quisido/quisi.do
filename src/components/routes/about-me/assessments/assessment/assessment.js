@@ -1,7 +1,6 @@
 import { Tooltip } from '@material-ui/core';
 import React from 'react';
 import withStyles from './assessment-styles';
-import CircularProgress from './circular-progress/circular-progress';
 
 const ordinal = ((...suffixes) =>
   n =>
@@ -10,52 +9,28 @@ const ordinal = ((...suffixes) =>
 
 class Assessment extends React.PureComponent {
 
-  state = {
-    percentile: 0
-  };
-
-  componentDidMount() {
-    this.componentDidUpdate();
-  }
-
-  componentDidUpdate() {
-    if (this.props.percentile !== this.state.percentile) {
-      this.setState({
-        percentile: this.props.percentile
-      });
+  get className() {
+    if (this.props.selected) {
+      return (
+        this.props.classes.root + ' ' +
+        this.props.classes.selected
+      );
     }
-  }
-
-  get color() {
-    return (
-      this.props.off ?
-      'gray' :
-      this.props.selected ?
-        'secondary' :
-        'primary'
-    );
+    return this.props.classes.root;
   }
 
   render() {
     return (
-      <span
-        className={this.props.classes.root}
-        onClick={this.props.onClick}
+      <Tooltip
+        placement="top"
+        title={ordinal(this.props.percentile) + ' Percentile'}
       >
         <span
           children={this.props.title}
-          className={this.props.classes.title}
+          className={this.className}
+          onClick={this.props.onClick}
         />
-        <Tooltip
-          placement="bottom"
-          title={ordinal(this.props.percentile) + ' Percentile'}
-        >
-          <CircularProgress
-            color={this.color}
-            percentile={this.state.percentile}
-          />
-        </Tooltip>
-      </span>
+      </Tooltip>
     );
   }
 }

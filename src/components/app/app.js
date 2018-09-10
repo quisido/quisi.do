@@ -8,17 +8,6 @@ import Portfolio from '../routes/portfolio/portfolio';
 
 const UPDATE_HUE_DELAY = 250;
 
-const nav = [
-  {
-    path: '/',
-    title: 'About Me'
-  },
-  {
-    path: '/portfolio',
-    title: 'Portfolio'
-  }
-];
-
 const routes = [
   {
     component: AboutMe,
@@ -120,7 +109,6 @@ export default class App extends React.PureComponent {
       <ReactPortfolio
         copyright={2009}
         hue={this.state.hue}
-        nav={nav}
         routes={routes}
         social={social}
         title="Charles Stover"

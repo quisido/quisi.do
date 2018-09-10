@@ -5965,9 +5965,9 @@ react-object-prop@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-object-prop/-/react-object-prop-1.0.5.tgz#c2239c249751766546949d43d9d0503a2ba86298"
 
-react-portfolio@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-portfolio/-/react-portfolio-1.0.6.tgz#bb04907ede7b50bbd87c1db4985ef7129be9b6cb"
+react-portfolio@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-portfolio/-/react-portfolio-1.1.0.tgz#a5834ca502042db1f637d0915d45ea2e176d9357"
   dependencies:
     "@charlesstover/hsl2rgb" "^1.0.4"
     delimiter "^1.0.0"

@@ -65,18 +65,25 @@ class AboutMe extends React.PureComponent {
   render() {
     return (
       <React.Fragment>
-        <Paper className={this.props.classes.paper}>
+        <Paper className={this.props.classes.paper + ' ' + this.props.classes.aboutMe}>
+          <img
+            alt="Avatar"
+            className={this.props.classes.avatar}
+            height={100}
+            src="https://www.gravatar.com/avatar/4702bc684e908ea109e5a8046c71af5e.jpg"
+            width={100}
+          />
           <Typography className={this.props.classes.paragraph}>
             Hi, I'm <span
               children="Charles Stover"
               className={this.props.classes.highlight}
             />.{' '}
-            I am a{' '}
+            I'm a{' '}
             <span
-              children="senior full-stack web development consultant"
+              children="senior full-stack development consultant"
               className={this.props.classes.highlight}
             />{' '}
-            currently employed with a focus in React and Node.
+            with a focus in React and Node.
             My expertise is in automation, optimization, security, and{' '}
             <Tooltip title="User Interface">
               <abbr children="UI" />
@@ -99,11 +106,15 @@ class AboutMe extends React.PureComponent {
         </Paper>
         <section className={this.props.classes.section}>
           <Typography
-            children="Placement Exams"
+            children="Skills"
+            className={this.props.classes.sectionHeadline}
             gutterBottom
             variant="headline"
           />
-          <Assessments />
+          <div className={this.props.classes.sectionBody}>
+            <Assessments />
+            <OtherTechnologies />
+          </div>
         </section>
         <Paper className={this.props.classes.paper + ' ' + this.props.classes.quotes}>
           <Quotes
@@ -113,14 +124,6 @@ class AboutMe extends React.PureComponent {
             shuffle
           />
         </Paper>
-        <section className={this.props.classes.section}>
-          <Typography
-            children="Other Skills"
-            gutterBottom
-            variant="headline"
-          />
-          <OtherTechnologies />
-        </section>
         <Paper className={this.props.classes.paper + ' ' + this.props.classes.seeNoEvil}>
           <SeeNoEvil
             description="Automated static file generation."
