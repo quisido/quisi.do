@@ -2,6 +2,7 @@ import SpriteSheetToGif from '@charlesstover/spritesheet2gif';
 import Konami from '@gamingmedley/konami.js';
 import React from 'react';
 import ReactPortfolio from 'react-portfolio';
+import withStyles from './app-styles';
 import AboutMe from '../routes/about-me/about-me';
 import Donate from '../routes/donate/donate';
 import Portfolio from '../routes/portfolio/portfolio';
@@ -72,7 +73,7 @@ const social = {
   twitter: 'CharlesStover'
 };
 
-export default class App extends React.PureComponent {
+class App extends React.PureComponent {
 
   state = {
     hue: 0.5
@@ -111,8 +112,16 @@ export default class App extends React.PureComponent {
         hue={this.state.hue}
         routes={routes}
         social={social}
-        title="Charles Stover"
+        title={
+          <React.Fragment>
+            Charles Stover
+            <span className={this.props.classes.dot}> . </span>
+            com
+          </React.Fragment>
+        }
       />
     );
   }
 }
+
+export default withStyles(App);

@@ -122,7 +122,7 @@ class Npm extends React.PureComponent {
           <Link
             package="react-pluralsight-score"
             description="A mobile-responsive bell curve graph mimicking Pluralsight's assessment exam results."
-            icon="❓"
+            icon="📈"
           />
           <Link
             package="react-portfolio"
