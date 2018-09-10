@@ -70,69 +70,74 @@ class Npm extends React.PureComponent {
         />
         <List className={this.props.classes.list}>
           <Link
+            package="@charlesstover/hsl2rgb"
             description="Convert HSL to RGB."
             icon="🎨"
-            package="@charlesstover/hsl2rgb"
           />
           <Link
+            package="@gamingmedley/konami.js"
             description="Allows web developers to implement the Konami code on their webpages."
             icon="🎮"
-            package="@gamingmedley/konami.js"
           />
           <Link
+            package="delimiter"
             description="Places delimiters between items in an array."
             icon="🗂️"
-            package="delimiter"
           />
           <Link
+            package="fetch-action-creator"
             description="Fetches using standardized, four-part asynchronous actions for redux-thunk."
             icon="🎾"
-            package="fetch-action-creator"
           />
           <Link
+            package="mssql-query-builder"
             description="Dynamically build Microsoft SQL Server queries using JavaScript."
             icon="🏗️"
-            package="mssql-query-builder"
           />
           <Link
+            package="rainbow-gradient"
             description="Generates a gradient of the colors of the rainbow."
             icon="🌈"
-            package="rainbow-gradient"
           />
           <Link
+            package="react-innertext"
             description="Returns the innerText of a React JSX object."
             icon="📝"
-            package="react-innertext"
           />
           <Link
+            package="react-mui-tooltip"
             description="A React tooltip similar to Material UI's design."
             icon="💭"
-            package="react-mui-tooltip"
           />
           <Link
+            package="react-multi-context"
             description="Manage multiple contexts with a single React component."
             icon="💕"
-            package="react-multi-context"
           />
           <Link
+            package="react-object-prop"
             description="Caches Object props in React so as to prevent unnecessary re-rendering."
             icon="💡"
-            package="react-object-prop"
           />
           <Link
+            package="react-pluralsight-score"
+            description="A mobile-responsive bell curve graph mimicking Pluralsight's assessment exam results."
+            icon="❓"
+          />
+          <Link
+            package="react-portfolio"
             description="A sleek portfolio design created in React."
             icon="📁"
-            package="react-portfolio"
           />
           <Link
+            package="react-quotes"
             description="A quotes carousel for React."
             icon="💬"
-            package="react-quotes"
           />
           <Link
+            package="react-rainbow-text"
             description="Generates rainbow-colored text in React."
             icon="🌈"
-            package="react-rainbow-text"
           />
           {this.misc}
         </List>

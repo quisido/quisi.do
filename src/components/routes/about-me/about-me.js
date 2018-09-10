@@ -1,12 +1,6 @@
 import { Paper, Tooltip, Typography } from '@material-ui/core';
 import React from 'react';
 import Quotes from 'react-quotes';
-import dota2huds320 from '../../../assets/screenshots/dota2huds-320.jpg';
-import dota2huds768 from '../../../assets/screenshots/dota2huds-768.jpg';
-import dota2huds800 from '../../../assets/screenshots/dota2huds-800.jpg';
-import dota2huds1024 from '../../../assets/screenshots/dota2huds-1024.jpg';
-import dota2huds1280 from '../../../assets/screenshots/dota2huds-1280.jpg';
-import dota2huds1600 from '../../../assets/screenshots/dota2huds-1600.jpg';
 import spritesheet2gif320 from '../../../assets/screenshots/spritesheet2gif-320.png';
 import spritesheet2gif1536 from '../../../assets/screenshots/spritesheet2gif-1536.png';
 import rpgOverworldEngine320 from '../../../assets/screenshots/rpg-overworld-engine.gif';
@@ -21,15 +15,6 @@ const CURRENT_YEAR = new Date().getFullYear();
 
 const backEndYears = CURRENT_YEAR - 2005;
 const frontEndYears = CURRENT_YEAR - 2001;
-
-const dota2huds = [
-  [ 320, dota2huds320 ],
-  [ 768, dota2huds768 ],
-  [ 800, dota2huds800 ],
-  [ 1024, dota2huds1024 ],
-  [ 1280, dota2huds1280 ],
-  [ 1600, dota2huds1600 ],
-];
 
 const rpgOverworldEngine = [
   [ 320, rpgOverworldEngine320 ]
@@ -122,14 +107,6 @@ class AboutMe extends React.PureComponent {
           <OtherTechnologies />
         </section>
         <Paper className={this.props.classes.paper + ' ' + this.props.classes.seeNoEvil}>
-          <SeeNoEvil
-            description="Automated static file generation."
-            href="https://dota2huds.com/"
-            images={dota2huds}
-            rel="noopener noreferrer"
-            target="_blank"
-            title="Dota 2 HUDs"
-          />
           <SeeNoEvil
             description="IE6-compatible HTML and CSS animations."
             href="https://gamingmedley.github.io/rpg-overworld-engine/"
