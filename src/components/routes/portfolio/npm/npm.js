@@ -95,6 +95,11 @@ class Npm extends React.PureComponent {
             icon="🏗️"
           />
           <Link
+            package="pluralsight-score"
+            description="A mobile-responsive bell curve graph mimicking Pluralsight's assessment exam results."
+            icon="📈"
+          />
+          <Link
             package="rainbow-gradient"
             description="Generates a gradient of the colors of the rainbow."
             icon="🌈"
@@ -118,11 +123,6 @@ class Npm extends React.PureComponent {
             package="react-object-prop"
             description="Caches Object props in React so as to prevent unnecessary re-rendering."
             icon="💡"
-          />
-          <Link
-            package="react-pluralsight-score"
-            description="A mobile-responsive bell curve graph mimicking Pluralsight's assessment exam results."
-            icon="📈"
           />
           <Link
             package="react-portfolio"
