@@ -23,28 +23,28 @@ class Medium extends React.PureComponent {
           />
           <Link
             title="Fixing Volumes in Docker Toolbox"
-            date={date(2018, 9, 6)}
+            date={date(2018, 9, 5)}
             description="A tutorial on configuring Oracle Virtualbox to have access to your folders."
             icon="🐋"
             id="4ad5ace0e572"
           />
           <Link
             title="How to Make a Graphical News Slider in jQuery"
-            date={date(2011, 4, 1)}
+            date={date(2011, 4, 16)}
             description="The graphical news slider: something used often, everywhere, for everything. This jQuery slider will take images and associated text, put them in a navigation bar, and periodically scroll through the images with slide-in or fade-in effects."
             icon="🐵"
             id="9bb252d35aa3"
           />
           <Link
             title="Creating a Dynamic Vertical Gradient in PHP"
-            date={date(2010, 12, 1)}
+            date={date(2010, 12, 16)}
             description="Gradients are a necessary and simple tool of web design, providing the perfect transition from color to color. Starting at the basics, this tutorial shows how to create dynamic gradients for your templates."
             icon="🌈"
             id="ae855c63e6b3"
           />
           <Link
             title="Boost Your Page Speed: Reduce Parse Time"
-            date={date(2010, 12, 1)}
+            date={date(2010, 12, 2)}
             description={
               <React.Fragment>
                 <Typography
@@ -61,7 +61,7 @@ class Medium extends React.PureComponent {
           />
           <Link
             title="Boost Your Page Speed: Reduce Server Calls"
-            date={date(2010, 11, 1)}
+            date={date(2010, 11, 10)}
             description={
               <React.Fragment>
                 <Typography
@@ -78,7 +78,7 @@ class Medium extends React.PureComponent {
           />
           <Link
             title="Boost Your Page Speed: Reduce File Size"
-            date={date(2010, 11, 1)}
+            date={date(2010, 11, 3)}
             description={
               <React.Fragment>
                 <Typography
@@ -104,14 +104,14 @@ export default withStyles(Medium);
 /*
 <Link
   title="PHP's htmlspecialchars Implemented in JavaScript"
-  date={date(2011, 6, 1)}
+  date={date(2011, 6, 13)}
   description="Certain characters have special significance in HTML, and should be represented by HTML entities if they are to preserve their meanings. This function returns a string with some of these conversions made; the translations made are those most useful for everyday web programming."
   icon="👷"
   id="3da9ac36d481"
 />
 <Link
   title="Establishing a Secure Password Generator for Your User Base"
-  date={date(2012, 4, 1)}
+  date={date(2012, 4, 11)}
   description="An Elementary JavaScript Tutorial"
   icon="🔒"
   id="f7c0814b152a"
