@@ -1,5 +1,8 @@
 import { withStyles } from '@material-ui/core';
 
+const DESKTOP_MEDIA_QUERY =  '@media (min-width: 66rem)';
+const MOBILE_MEDIA_QUERY = '@media (max-width: 66rem)';
+
 const spritesheet2gifKeyframes = [{}, {}];
 for (let x = 0; x < 12; x++) {
   const p = Math.round(x / 11 * 100) + '%';
@@ -14,6 +17,38 @@ for (let x = 0; x < 12; x++) {
 export default withStyles({
   '@keyframes spritesheet2gif-mobile': spritesheet2gifKeyframes[0],
   '@keyframes spritesheet2gif-desktop': spritesheet2gifKeyframes[1],
+  aboutMe: {
+    alignItems: 'center',
+    display: 'flex',
+    flexGrow: 1,
+    justifyContent: 'center',
+    width: '100%',
+    '& > $avatar': {
+      [DESKTOP_MEDIA_QUERY]: {
+        marginRight: 0
+      },
+      [MOBILE_MEDIA_QUERY]: {
+        marginBottom: 0
+      }
+    },
+    [DESKTOP_MEDIA_QUERY]: {
+      flexDirection: 'row'
+    },
+    [MOBILE_MEDIA_QUERY]: {
+      flexDirection: 'column'
+    }
+  },
+  avatar: {
+    borderRadius: 50,
+    boxShadow:
+      '0 1px 5px 0 rgba(0, 0, 0, 0.2), ' +
+      '0 2px 2px 0 rgba(0, 0, 0, 0.14), ' +
+      '0 3px 1px -2px rgba(0, 0, 0, 0.12)',
+    margin: '1em'
+  },
+  email: {
+    padding: '1em 1em 0 1em'
+  },
   highlight: {
     color: '#FFFFFF'
   },
@@ -26,17 +61,9 @@ export default withStyles({
     textAlign: 'center'
   },
   paper: {
-    display: 'flex',
-    margin: '2em 1em',
-    '@media (max-width: 66rem)': {
-      flexDirection: 'column'
-    },
-    '@media (min-width: 66rem)': {
-      flexDirection: 'row'
-    }
+    margin: '2em 1em'
   },
   paragraph: {
-    alignSelf: 'flex-start',
     flexBasis: 0,
     flexGrow: 2,
     fontSize: 16,
@@ -52,7 +79,27 @@ export default withStyles({
     padding: '1.5em 1em'
   },
   section: {
+    backgroundColor: 'inherit',
+    display: 'flex',
     padding: '3em 1em',
+    [DESKTOP_MEDIA_QUERY]: {
+      alignItems: 'flex-start',
+      flexDirection: 'row'
+    },
+    [MOBILE_MEDIA_QUERY]: {
+      alignItems: 'center',
+      flexDirection: 'column'
+    }
+  },
+  sectionBody: {
+    backgroundColor: 'inherit',
+    flexBasis: 0,
+    flexGrow: 2,
+    maxWidth: '44rem'
+  },
+  sectionHeadline: {
+    flexBasis: 0,
+    flexGrow: 1,
     textAlign: 'center'
   },
   seeNoEvil: {

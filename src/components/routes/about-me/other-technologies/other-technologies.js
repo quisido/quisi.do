@@ -4,10 +4,9 @@ import withStyles from './other-technologies-styles';
 
 const technologies =
   [
-    'Apache', 'Chai', 'C++', 'ES6', 'express', 'GitHub', 'Jest', 'SASS',
-    'LetsEncrypt', 'Material UI', 'Mocha', 'MySQL', 'nginx', 'PHP', 'Python',
-    'React Native', 'SQL Server', 'TravisCI', 'TypeScript', 'Webpack', 'Babel',
-    'Redux', 'Enzyme', 'Linux', 'Ubuntu'
+    'Chai', 'ES6', 'express', 'GitHub', 'Jest', 'SASS', 'Material UI', 'Mocha',
+    'MySQL', 'nginx', 'React Native', 'SQL Server', 'TravisCI', 'TypeScript',
+    'Webpack', 'Babel', 'Redux', 'Enzyme'
   ]
   .map((technology, index) =>
     [
@@ -31,6 +30,7 @@ class OtherTechnologies extends React.PureComponent {
     return technologies.map(([ technology, { href, style } ]) =>
       <Tooltip
         key={technology}
+        placement="top"
         title={technology}
       >
         <a
@@ -40,10 +40,9 @@ class OtherTechnologies extends React.PureComponent {
           style={style}
           target="_blank"
         >
-          <span
-            children={technology}
-            className={this.props.classes.title}
-          />
+          <span>
+            <span children={technology} />
+          </span>
         </a>
       </Tooltip>
     );

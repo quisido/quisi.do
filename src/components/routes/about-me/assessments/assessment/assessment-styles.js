@@ -1,18 +1,16 @@
 import { withStyles } from '@material-ui/core';
 
-export default withStyles({
+export default withStyles(theme => ({
   root: {
     cursor: 'pointer',
-    display: 'inline-block',
-    margin: '0.5em',
-    position: 'relative'
+    transitionDuration: '0.25s',
+    transitionProperty: 'color',
+    transitionTimingFunction: 'ease-out',
+    '&:not($selected):hover': {
+      color: theme.palette.primary.light
+    }
   },
-  title: {
-    lineHeight: '1em',
-    marginTop: '-0.5em',
-    position: 'absolute',
-    textAlign: 'center',
-    top: '50%',
-    width: '100%'
+  selected: {
+    color: theme.palette.primary.main
   }
-});
+}));
