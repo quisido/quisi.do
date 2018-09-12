@@ -15,6 +15,13 @@ class Medium extends React.PureComponent {
         />
         <List className={this.props.classes.list}>
           <Link
+            title="Create a React Native App on an Android emulator."
+            date={date(2018, 9, 11)}
+            description="Bootstrap a React Native project with create-react-native-app and have it be live-testable on the same machine with an Android emulator."
+            icon="🤖"
+            id="1c0d94f288ae"
+          />
+          <Link
             title="Cache your React event listeners to improve performance."
             date={date(2018, 9, 10)}
             description="React has an intelligent way of saving processing time to boost performance: If a component's props and state have not changed, then the output of render must not have changed either. If React receives an identical function with a different memory address, it will re-render."
