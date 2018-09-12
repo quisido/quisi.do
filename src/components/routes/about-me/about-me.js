@@ -5,8 +5,8 @@ import spritesheet2gif320 from '../../../assets/screenshots/spritesheet2gif-320.
 import spritesheet2gif1536 from '../../../assets/screenshots/spritesheet2gif-1536.png';
 import rpgOverworldEngine320 from '../../../assets/screenshots/rpg-overworld-engine.gif';
 import withStyles from './about-me-styles';
-import Assessments from './assessments/assessments';
-import OtherTechnologies from './other-technologies/other-technologies';
+import Expert from './expert/expert';
+import Proficient from './proficient/proficient';
 import quotes from './quotes';
 import SeeNoEvil from './see-no-evil/see-no-evil';
 import ViewPortfolio from './view-portfolio/view-portfolio';
@@ -91,14 +91,24 @@ class AboutMe extends React.PureComponent {
         </Paper>
         <section className={this.props.classes.section}>
           <Typography
-            children="Skills"
+            children="Expert"
             className={this.props.classes.sectionHeadline}
             gutterBottom
             variant="headline"
           />
           <div className={this.props.classes.sectionBody}>
-            <Assessments />
-            <OtherTechnologies />
+            <Expert />
+          </div>
+        </section>
+        <section className={this.props.classes.section}>
+          <Typography
+            children="Proficient"
+            className={this.props.classes.sectionHeadline}
+            gutterBottom
+            variant="headline"
+          />
+          <div className={this.props.classes.sectionBody}>
+            <Proficient />
           </div>
         </section>
         <Paper className={this.props.classes.paper + ' ' + this.props.classes.quotes}>

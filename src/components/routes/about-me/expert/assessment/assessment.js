@@ -1,5 +1,5 @@
-import { Tooltip } from '@material-ui/core';
 import React from 'react';
+import Icon from '../../icon/icon';
 import withStyles from './assessment-styles';
 
 const ordinal = ((...suffixes) =>
@@ -19,18 +19,27 @@ class Assessment extends React.PureComponent {
     return this.props.classes.root;
   }
 
+  get tooltip() {
+    return (
+      <React.Fragment>
+        <div
+          children={this.props.title}
+          className={this.props.classes.title}
+        />
+        {ordinal(this.props.percentile)} Percentile
+      </React.Fragment>
+    );
+  }
+
   render() {
     return (
-      <Tooltip
-        placement="top"
-        title={ordinal(this.props.percentile) + ' Percentile'}
-      >
-        <span
-          children={this.props.title}
-          className={this.className}
-          onClick={this.props.onClick}
-        />
-      </Tooltip>
+      <Icon
+        children={this.props.title}
+        className={this.className}
+        index={this.props.index}
+        onClick={this.props.onClick}
+        tooltip={this.tooltip}
+      />
     );
   }
 }

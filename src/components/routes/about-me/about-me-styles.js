@@ -89,6 +89,9 @@ export default withStyles({
     [MOBILE_MEDIA_QUERY]: {
       alignItems: 'center',
       flexDirection: 'column'
+    },
+    '& + $section': {
+      paddingTop: '2em'
     }
   },
   sectionBody: {
@@ -98,9 +101,18 @@ export default withStyles({
     maxWidth: '44rem'
   },
   sectionHeadline: {
+    boxSizing: 'border-box',
     flexBasis: 0,
     flexGrow: 1,
-    textAlign: 'center'
+    lineHeight: '64px',
+    [DESKTOP_MEDIA_QUERY]: {
+      marginLeft: '3em',
+      marginRight: '-3em',
+      textAlign: 'left'
+    },
+    [MOBILE_MEDIA_QUERY]: {
+      textAlign: 'center'
+    }
   },
   seeNoEvil: {
     display: 'flex',

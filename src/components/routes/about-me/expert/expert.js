@@ -1,9 +1,8 @@
 import { Typography } from '@material-ui/core';
-import delimiter from 'delimiter';
 import PluralsightScore from 'pluralsight-score';
 import React from 'react';
 import Assessment from './assessment/assessment';
-import withStyles from './assessments-styles';
+import withStyles from './expert-styles';
 
 const PLURALSIGHT =
   <a
@@ -26,7 +25,7 @@ const assessments = [
   [ 'Docker', 72, PLURALSIGHT ]
 ];
 
-class Assessments extends React.PureComponent {
+class Expert extends React.PureComponent {
 
   assessmentClickHandlers = {};
   scoreRef = null;
@@ -87,19 +86,16 @@ class Assessments extends React.PureComponent {
   render() {
     return (
       <div className={this.props.classes.root}>
-        <div>
-          Expert in{' '}
-          {delimiter(
-            assessments.map(([ title, percentile, source ]) =>
-              <Assessment
-                key={title}
-                onClick={this.handleAssessmentClick(title, percentile, source)}
-                percentile={percentile}
-                selected={this.state.title === title}
-                title={title}
-              />
-          ))}.
-        </div>
+        {assessments.map(([ title, percentile, source ], index) =>
+          <Assessment
+            index={index}
+            key={title}
+            onClick={this.handleAssessmentClick(title, percentile, source)}
+            percentile={percentile}
+            selected={this.state.title === title}
+            title={title}
+          />
+        )}
         <PluralsightScore
           hidden={this.state.title === null}
           onRef={this.handleScoreRef}
@@ -111,4 +107,4 @@ class Assessments extends React.PureComponent {
   }
 }
 
-export default withStyles(Assessments);
+export default withStyles(Expert);
