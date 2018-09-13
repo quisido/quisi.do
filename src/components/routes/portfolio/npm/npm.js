@@ -131,8 +131,13 @@ class Npm extends React.PureComponent {
           />
           <Link
             package="react-quotes"
-            description="A quotes carousel for React."
+            description="A quotes accordion for React."
             icon="💬"
+          />
+          <Link
+            package="react-quotes-carousel"
+            description="A quotes carousel for React."
+            icon="🎠"
           />
           <Link
             package="react-rainbow-text"
