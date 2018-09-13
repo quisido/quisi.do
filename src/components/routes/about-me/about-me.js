@@ -1,6 +1,5 @@
 import { Paper, Tooltip, Typography } from '@material-ui/core';
 import React from 'react';
-import Quotes from 'react-quotes';
 import spritesheet2gif320 from '../../../assets/screenshots/spritesheet2gif-320.png';
 import spritesheet2gif1536 from '../../../assets/screenshots/spritesheet2gif-1536.png';
 import rpgOverworldEngine320 from '../../../assets/screenshots/rpg-overworld-engine.gif';
@@ -8,6 +7,7 @@ import withStyles from './about-me-styles';
 import Expert from './expert/expert';
 import Proficient from './proficient/proficient';
 import quotes from './quotes';
+import Quotes from './quotes/quotes';
 import SeeNoEvil from './see-no-evil/see-no-evil';
 import ViewPortfolio from './view-portfolio/view-portfolio';
 
