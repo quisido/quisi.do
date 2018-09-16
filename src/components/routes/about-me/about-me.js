@@ -1,15 +1,14 @@
-import { Paper, Tooltip, Typography } from '@material-ui/core';
+import { Button, Paper, Tooltip, Typography } from '@material-ui/core';
 import React from 'react';
-import spritesheet2gif320 from '../../../assets/screenshots/spritesheet2gif-320.png';
-import spritesheet2gif1536 from '../../../assets/screenshots/spritesheet2gif-1536.png';
+import { Link } from 'react-router-dom';
+import quotes from '../../../assets/quotes';
+import spritesheet2gif from '../../../assets/screenshots/spritesheet2gif.png';
 import rpgOverworldEngine320 from '../../../assets/screenshots/rpg-overworld-engine.gif';
 import withStyles from './about-me-styles';
 import Expert from './expert/expert';
 import Proficient from './proficient/proficient';
-import quotes from './quotes';
 import Quotes from './quotes/quotes';
 import SeeNoEvil from './see-no-evil/see-no-evil';
-import ViewPortfolio from './view-portfolio/view-portfolio';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
@@ -18,11 +17,6 @@ const frontEndYears = CURRENT_YEAR - 2001;
 
 const rpgOverworldEngine = [
   [ 320, rpgOverworldEngine320 ]
-];
-
-const spritesheet2gif = [
-  [ 320, spritesheet2gif320 ],
-  [ 1538, spritesheet2gif1536 ],
 ];
 
 class AboutMe extends React.PureComponent {
@@ -112,12 +106,7 @@ class AboutMe extends React.PureComponent {
           </div>
         </section>
         <Paper className={this.props.classes.paper + ' ' + this.props.classes.quotes}>
-          <Quotes
-            animationDuration={1500}
-            delay={12500}
-            quotes={quotes}
-            shuffle
-          />
+          <Quotes quotes={quotes} />
         </Paper>
         <Paper className={this.props.classes.paper + ' ' + this.props.classes.seeNoEvil}>
           <SeeNoEvil
@@ -135,7 +124,12 @@ class AboutMe extends React.PureComponent {
             title="Sprite Sheet to GIF Converter"
             to="/spritesheet2gif"
           />
-          <ViewPortfolio />
+          <Link
+            className={this.props.classes.viewMore}
+            to="/portfolio"
+          >
+            <Button children="View more..." />
+          </Link>
         </Paper>
       </React.Fragment> 
     );

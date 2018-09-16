@@ -2,6 +2,7 @@ import { withStyles } from '@material-ui/core';
 
 export default withStyles({
   root: {
+    cursor: 'pointer',
     textAlign: 'center'
   },
   source: {

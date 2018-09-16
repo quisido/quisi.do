@@ -12,6 +12,13 @@ class SeeNoEvil extends React.PureComponent {
   };
 
   get backgroundImageStyle() {
+
+    // If there's a single background image, use it.
+    if (!Array.isArray(this.props.images)) {
+      return this.createBackgroundImageStyle(this.props.images);
+    }
+
+    // If there are multiple background images, but we do not know which to use yet, do not use any.
     if (this.state.width === null) {
       return null;
     }
@@ -34,7 +41,10 @@ class SeeNoEvil extends React.PureComponent {
   }
 
   handleWidthRef = ref => {
-    if (ref) {
+    if (
+      ref &&
+      Array.isArray(this.props.images)
+    ) {
       this.setState({
         width: ref.getBoundingClientRect().width
       });

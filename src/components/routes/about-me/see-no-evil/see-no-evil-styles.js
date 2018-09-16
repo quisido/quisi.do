@@ -23,9 +23,9 @@ export default withStyles({
   color: {
     backgroundBlendMode: 'soft-light',
     backgroundColor: '#303030',
-    backgroundPosition: 'center center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
+    backgroundPosition: 'inherit',
+    backgroundRepeat: 'inherit',
+    backgroundSize: 'inherit',
     height: HEIGHT,
     left: 0,
     opacity: 0,

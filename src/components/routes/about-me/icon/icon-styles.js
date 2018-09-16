@@ -6,7 +6,6 @@ export default withStyles({
   root: {
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'auto 100%',
-    cursor: 'pointer',
     display: 'inline-block',
     filter: 'saturate(0%)',
     height: SIZE,

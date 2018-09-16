@@ -3,20 +3,15 @@ import { withStyles } from '@material-ui/core';
 const DESKTOP_MEDIA_QUERY =  '@media (min-width: 66rem)';
 const MOBILE_MEDIA_QUERY = '@media (max-width: 66rem)';
 
-const spritesheet2gifKeyframes = [{}, {}];
-for (let x = 0; x < 12; x++) {
-  const p = Math.round(x / 11 * 100) + '%';
-  spritesheet2gifKeyframes[0][p] = {
-    backgroundPosition: x * -64 + 'px center'
-  };
-  spritesheet2gifKeyframes[1][p] = {
-    backgroundPosition: x * -128 + 'px center'
-  };
-}
-
 export default withStyles({
-  '@keyframes spritesheet2gif-mobile': spritesheet2gifKeyframes[0],
-  '@keyframes spritesheet2gif-desktop': spritesheet2gifKeyframes[1],
+  '@keyframes spritesheet2gif': {
+    '0%': {
+      backgroundPosition: '0 center'
+    },
+    '100%': {
+      backgroundPosition: '-20664px center'
+    }
+  },
   aboutMe: {
     alignItems: 'center',
     display: 'flex',
@@ -75,9 +70,7 @@ export default withStyles({
       paddingBottom: '1em'
     }
   },
-  quotes: {
-    padding: '1.5em 1em'
-  },
+  quotes: { },
   section: {
     backgroundColor: 'inherit',
     display: 'flex',
@@ -122,22 +115,21 @@ export default withStyles({
     padding: 0,
     textAlign: 'center'
   },
-  spritesheet2gifColor: {
-    backgroundPosition: '0 center',
-    backgroundRepeat: 'repeat-x'
-  },
+  spritesheet2gifColor: { },
   spritesheet2gifFaded: {
+    backgroundBlendMode: 'soft-light',
+    backgroundColor: '#303030',
     backgroundPosition: '0 center',
+    backgroundRepeat: 'repeat-x',
+    backgroundSize: 'auto 126px',
     '&:hover $spritesheet2gifColor': {
-      animationDuration: '1.25s',
+      animationDuration: '10s',
       animationIterationCount: 'infinite',
-      animationTimingFunction: 'step-start',
-      '@media (max-width: 320px)': {
-        animationName: 'spritesheet2gif-mobile'
-      },
-      '@media (min-width: 321px)': {
-        animationName: 'spritesheet2gif-desktop'
-      }
+      animationName: 'spritesheet2gif',
+      animationTimingFunction: 'steps(123)'
     }
+  },
+  viewMore: {
+    margin: '1em'
   }
 });

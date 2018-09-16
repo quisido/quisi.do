@@ -2,11 +2,13 @@ import React from 'react';
 import Icon from '../icon/icon';
 import withStyles from './proficient-styles';
 
+/*
 const github = technology =>
   'https://github.com/CharlesStover?tab=repositories&q=topic%3A' +
     technology.toLowerCase()
       .replace(/\+/g, 'p')
       .replace(/\s/g, '-');
+*/
 
 const proficiencies = [
   'Babel', 'Chai', 'Enzyme', 'ES6', 'express', 'GitHub', 'Jest', 'Material UI',
@@ -19,19 +21,13 @@ class Proficient extends React.PureComponent {
     return (
       <div
         children={proficiencies.map((technology, index) =>
-          <a
-            href={github(technology)}
+          <Icon
+            children={technology}
+            className={this.props.classes.proficiency}
+            index={index}
             key={technology}
-            rel="nofollow noopener noreferrer"
-            target="_blank"
-          >
-            <Icon
-              children={technology}
-              className={this.props.classes.proficiency}
-              index={index}
-              tooltip={technology}
-            />
-          </a>
+            tooltip={technology}
+          />
         )}
         className={this.props.classes.root}
       />
