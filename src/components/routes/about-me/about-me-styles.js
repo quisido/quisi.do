@@ -4,7 +4,7 @@ const DESKTOP_MEDIA_QUERY =  '@media (min-width: 66rem)';
 const MOBILE_MEDIA_QUERY = '@media (max-width: 66rem)';
 
 export default withStyles({
-  '@keyframes spritesheet2gif': {
+  '@keyframes projects-spritesheet2gif': {
     '0%': {
       backgroundPosition: '0 center'
     },
@@ -17,15 +17,6 @@ export default withStyles({
     display: 'flex',
     flexGrow: 1,
     justifyContent: 'center',
-    width: '100%',
-    '& > $avatar': {
-      [DESKTOP_MEDIA_QUERY]: {
-        marginRight: 0
-      },
-      [MOBILE_MEDIA_QUERY]: {
-        marginBottom: 0
-      }
-    },
     [DESKTOP_MEDIA_QUERY]: {
       flexDirection: 'row'
     },
@@ -33,21 +24,24 @@ export default withStyles({
       flexDirection: 'column'
     }
   },
-  avatar: {
+  aboutMeAvatar: {
     borderRadius: 50,
     boxShadow:
       '0 1px 5px 0 rgba(0, 0, 0, 0.2), ' +
       '0 2px 2px 0 rgba(0, 0, 0, 0.14), ' +
       '0 3px 1px -2px rgba(0, 0, 0, 0.12)',
-    margin: '1em'
+    margin: '1em',
+    [DESKTOP_MEDIA_QUERY]: {
+      marginRight: 0
+    },
+    [MOBILE_MEDIA_QUERY]: {
+      marginBottom: 0
+    }
   },
-  email: {
-    padding: '1em 1em 0 1em'
-  },
-  highlight: {
+  aboutMeHighlight: {
     color: '#FFFFFF'
   },
-  info: {
+  aboutMeInfo: {
     alignSelf: 'center',
     flexBasis: 0,
     flexGrow: 1,
@@ -55,10 +49,7 @@ export default withStyles({
     padding: '1em',
     textAlign: 'center'
   },
-  paper: {
-    margin: '2em 1em'
-  },
-  paragraph: {
+  aboutMeParagraph: {
     flexBasis: 0,
     flexGrow: 2,
     fontSize: 16,
@@ -70,19 +61,41 @@ export default withStyles({
       paddingBottom: '1em'
     }
   },
-  quotes: { },
-  section: {
-    backgroundColor: 'inherit',
+  paper: {
+    margin: '2em 1em'
+  },
+  projects: {
     display: 'flex',
+    flexDirection: 'column',
+    marginBottom: '3em',
+    overflow: 'hidden',
+    padding: 0,
+    textAlign: 'center'
+  },
+  projectsSpritesheet2gifColor: { },
+  projectsSpritesheet2gifFaded: {
+    backgroundBlendMode: 'soft-light',
+    backgroundColor: '#303030',
+    backgroundPosition: '0 center',
+    backgroundRepeat: 'repeat-x',
+    backgroundSize: 'auto 126px',
+    '&:hover $projectsSpritesheet2gifColor': {
+      animationDuration: '10s',
+      animationIterationCount: 'infinite',
+      animationName: 'projects-spritesheet2gif',
+      animationTimingFunction: 'steps(123)'
+    }
+  },
+  projectsViewMore: {
+    marginBottom: '1em'
+  },
+  publicationsViewMore: {
+    display: 'inline-block',
+    marginTop: '1.5em'
+  },
+  section: {
     padding: '3em 1em',
-    [DESKTOP_MEDIA_QUERY]: {
-      alignItems: 'flex-start',
-      flexDirection: 'row'
-    },
-    [MOBILE_MEDIA_QUERY]: {
-      alignItems: 'center',
-      flexDirection: 'column'
-    },
+    textAlign: 'center',
     '& + $section': {
       paddingTop: '2em'
     }
@@ -92,6 +105,18 @@ export default withStyles({
     flexBasis: 0,
     flexGrow: 2,
     maxWidth: '44rem'
+  },
+  sectionContent: {
+    backgroundColor: 'inherit',
+    display: 'flex',
+    [DESKTOP_MEDIA_QUERY]: {
+      alignItems: 'flex-start',
+      flexDirection: 'row'
+    },
+    [MOBILE_MEDIA_QUERY]: {
+      alignItems: 'center',
+      flexDirection: 'column'
+    }
   },
   sectionHeadline: {
     boxSizing: 'border-box',
@@ -106,30 +131,5 @@ export default withStyles({
     [MOBILE_MEDIA_QUERY]: {
       textAlign: 'center'
     }
-  },
-  seeNoEvil: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: '3em',
-    overflow: 'hidden',
-    padding: 0,
-    textAlign: 'center'
-  },
-  spritesheet2gifColor: { },
-  spritesheet2gifFaded: {
-    backgroundBlendMode: 'soft-light',
-    backgroundColor: '#303030',
-    backgroundPosition: '0 center',
-    backgroundRepeat: 'repeat-x',
-    backgroundSize: 'auto 126px',
-    '&:hover $spritesheet2gifColor': {
-      animationDuration: '10s',
-      animationIterationCount: 'infinite',
-      animationName: 'spritesheet2gif',
-      animationTimingFunction: 'steps(123)'
-    }
-  },
-  viewMore: {
-    margin: '1em'
   }
 });

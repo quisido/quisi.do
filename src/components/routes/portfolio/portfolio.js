@@ -1,35 +1,9 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import github from '../../../assets/portfolio/github.png';
-import medium from '../../../assets/portfolio/medium.png';
-import npm from '../../../assets/portfolio/npm.png';
-import GitHubPortfolio from './github/github';
-import MediumPortfolio from './medium/medium';
-import NpmPortfolio from './npm/npm';
+import routes from './portfolio-routes';
 import withStyles from './portfolio-styles';
-import Section from './section/portfolio-section';
-
-const routes = [
-  {
-    component: GitHubPortfolio,
-    path: 'github',
-    src: github,
-    title: 'GitHub Repositories'
-  },
-  {
-    component: MediumPortfolio,
-    path: 'medium',
-    src: medium,
-    title: 'Medium Publications'
-  },
-  {
-    component: NpmPortfolio,
-    path: 'npm',
-    src: npm,
-    title: 'NPM Packages'
-  }
-];
+import Sections from './sections/portfolio-sections';
 
 class Portfolio extends React.PureComponent {
 
@@ -64,28 +38,12 @@ class Portfolio extends React.PureComponent {
     );
   }
 
-  mapRoutesToSection = route => {
-    return (
-      <Section
-        disabled={this.props.location.pathname === '/portfolio/' + route.path}
-        key={route.path}
-        src={route.src}
-        title={route.title}
-        to={'/portfolio/' + route.path}
-      />
-    );
-  };
-
-  get sections() {
-    return routes.map(this.mapRoutesToSection);
-  }
-
   render() {
     return (
       <div className={this.props.classes.root}>
-        <div
-          children={this.sections}
-          className={this.props.classes.sections}
+        <Sections
+          paper
+          pathname={this.props.location.pathname}
         />
         {this.route}
       </div>

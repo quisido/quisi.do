@@ -45,7 +45,10 @@ class Quote extends React.PureComponent {
             children={this.quote}
             className={this.props.classes.blockquote}
           />
-          <Tooltip title={this.props.company}>
+          <Tooltip
+            placement="right"
+            title={this.props.company}
+          >
             <cite
               children={this.props.author}
               className={this.props.classes.cite}

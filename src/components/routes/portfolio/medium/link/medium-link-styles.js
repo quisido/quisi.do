@@ -21,6 +21,10 @@ export default withStyles(theme => ({
   primary: {
     color: theme.palette.primary.light
   },
+  subtitle: {
+    fontSize: '1em',
+    marginBottom: '0.667em'
+  },
   text: {
     maxWidth: '44rem'
   }

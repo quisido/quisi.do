@@ -1,5 +1,8 @@
 import { withStyles } from '@material-ui/core';
 
+const DESKTOP_MEDIA_QUERY =  '@media (min-width: 66rem)';
+const MOBILE_MEDIA_QUERY = '@media (max-width: 66rem)';
+
 export default withStyles({
   '@keyframes quote-animate': {
     '0%': {
@@ -13,15 +16,19 @@ export default withStyles({
   },
   root: {
     display: 'flex',
-    flexDirection: 'row',
-    overflow: 'hidden',
-    padding: '1em 0 2em 0',
+    padding: '1.5em 0',
     width: '100%',
     '&:not(:first-child)': {
       borderTopColor: '#606060',
       borderTopStyle: 'solid',
-      borderTopWidth: 1,
-      paddingTop: '2em'
+      borderTopWidth: 1
+    },
+    [DESKTOP_MEDIA_QUERY]: {
+      flexDirection: 'row',
+    },
+    [MOBILE_MEDIA_QUERY]: {
+      alignItems: 'center',
+      flexDirection: 'column'
     }
   },
   animate: {
@@ -41,22 +48,20 @@ export default withStyles({
       content: '"\u2014 "'
     }
   },
+  image: {
+    flexGrow: 1,
+    padding: '0 1em 1em 1em',
+    textAlign: 'center'
+  },
   p: {
     fontSize: '1em',
     lineHeight: '1.5em'
   },
   quote: {
     display: 'flex',
-    flexBasis: 0,
     flexDirection: 'column',
     flexGrow: 2,
     maxWidth: '44rem',
-    padding: '0 1em'
-  },
-  image: {
-    flexBasis: 0,
-    flexGrow: 1,
-    padding: '0 1em',
-    textAlign: 'center'
+    padding: '0 1.5em'
   }
 });

@@ -1,6 +1,7 @@
-import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import React from 'react';
 import createObjectProp from 'react-object-prop';
+import mediumUrl from '../../../../../constants/medium-url';
 import withStyles from './medium-link-styles';
 
 class MediumLink extends React.PureComponent {
@@ -13,13 +14,21 @@ class MediumLink extends React.PureComponent {
     });
   }
 
-  get titleHref() {
-    return (
-      this.props.title
-        .toLowerCase()
-        .replace(/[^a-z\d\s-]+/g, '')
-        .replace(/\s+/g, '-')
-    );
+  get listItemTextSecondary() {
+    if (this.props.subtitle) {
+      return (
+        <React.Fragment>
+          <Typography
+            children={this.props.subtitle}
+            className={this.props.classes.subtitle}
+            component="span"
+            variant="subheading"
+          />
+          <span children={this.props.description} />
+        </React.Fragment>
+      );
+    }
+    return this.props.description;
   }
 
   render() {
@@ -27,7 +36,7 @@ class MediumLink extends React.PureComponent {
       <ListItem className={this.props.classes.root}>
         <a
           className={this.props.classes.link}
-          href={'https://medium.com/@Charles_Stover/' + this.titleHref + '-' + this.props.id}
+          href={mediumUrl(this.props.id, this.props.title)}
           rel="nofollow noopener noreferrer"
           target="_blank"
         >
@@ -41,7 +50,7 @@ class MediumLink extends React.PureComponent {
             classes={this.listItemTextClasses}
             className={this.props.classes.text}
             primary={this.props.title}
-            secondary={this.props.description}
+            secondary={this.listItemTextSecondary}
           />
         </a>
       </ListItem>

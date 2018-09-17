@@ -15,6 +15,12 @@ class PortfolioSection extends React.PureComponent {
     return null;
   }
 
+  get imageStyle() {
+    return this._imageStyle({
+      backgroundImage: 'url("' + this.props.src + '")'
+    });
+  }
+
   preventDefault = e => {
     e.preventDefault();
   };
@@ -30,19 +36,27 @@ class PortfolioSection extends React.PureComponent {
     );
   }
 
-  get imageStyle() {
-    return this._imageStyle({
-      backgroundImage: 'url("' + this.props.src + '")'
-    });
+  get rootComponent() {
+    return this.props.paper ? Paper : Link;
+  }
+
+  get rootProps() {
+    if (this.props.paper) {
+      return {
+        component: Link
+      };
+    }
+    return Object.create(null);
   }
 
   render() {
+    const RootComponent = this.rootComponent;
     return (
-      <Paper
+      <RootComponent
         className={this.rootClassName}
-        component={Link}
         onClick={this.handleLinkClick}
         to={this.props.to}
+        {...this.rootProps}
       >
         <div
           className={this.props.classes.image}
@@ -53,7 +67,7 @@ class PortfolioSection extends React.PureComponent {
           className={this.props.classes.headline}
           variant="headline"
         />
-      </Paper>
+      </RootComponent>
     );
   }
 }
