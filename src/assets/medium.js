@@ -57,6 +57,13 @@ export default [
     description: 'The graphical news slider: something used often, everywhere, for everything. This jQuery slider will take images and associated text, put them in a navigation bar, and periodically scroll through the images with slide-in or fade-in effects.',
     icon: '🐵',
     id: '9bb252d35aa3'
+  },
+  {
+    title: 'Making an Image Magnifier in jQuery',
+    date: new Date('17 Oct 2011 UTC'),
+    description: 'Given an image and its thumbnail, let the user magnify an area of that thumbnail.',
+    icon: '🔍',
+    id: '3a67491ba13a'
   }
   /*
   {
