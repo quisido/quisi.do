@@ -139,6 +139,11 @@ class Npm extends React.PureComponent {
             description="Generates rainbow-colored text in React."
             icon="🌈"
           />
+          <Link
+            package="rn-webview"
+            description="An implementation of React Native's WebView that allows for window.postMessage on iOS devices."
+            icon="🕸"
+          />
           {this.misc}
         </List>
         {this.error}
