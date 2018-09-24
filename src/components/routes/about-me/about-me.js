@@ -40,7 +40,7 @@ class AboutMe extends React.PureComponent {
             alt="Avatar"
             className={this.props.classes.aboutMeAvatar}
             height={100}
-            src="https://www.gravatar.com/avatar/4702bc684e908ea109e5a8046c71af5e.jpg"
+            src="https://www.gravatar.com/avatar/4702bc684e908ea109e5a8046c71af5e.jpg?s=100"
             width={100}
           />
           <Typography className={this.props.classes.aboutMeParagraph}>

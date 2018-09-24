@@ -42,11 +42,13 @@ export default withStyles({
     padding: 0
   },
   cite: {
-    cursor: 'help',
-    width: 'fit-content',
     '&:before': {
       content: '"\u2014 "'
     }
+  },
+  company: {
+    cursor: 'help',
+    width: 'fit-content'
   },
   image: {
     flexGrow: 1,
