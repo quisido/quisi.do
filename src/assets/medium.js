@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'The Fetch API and asynchronous redux state',
+    date: new Date('9 Oct 2018 UTC'),
+    description: 'An overview of the standardized states involved in an asynchronous API call, their relationship to the redux store, and a solution to automate this process.',
+    icon: '🐶',
+    id: '203270a540d4'
+  },
+  {
     title: 'Fixing React Native WebView’s postMessage for iOS.',
     date: new Date('23 Sep 2018 UTC'),
     description: 'In 2016, a GitHub user opened an issue on the React Native repository reporting the error. In the two years since then, nothing has been done to resolve it within the internal React Native implementation of WebView. I offer a JavaScript-only solution, supported by Expo, without ejecting.',
