@@ -140,9 +140,29 @@ class Npm extends React.PureComponent {
             icon="🌈"
           />
           <Link
+            package="reactn"
+            description="A React clone that extends components with built-in global state."
+            icon="🌎"
+          />
+          <Link
             package="rn-webview"
             description="An implementation of React Native's WebView that allows for window.postMessage on iOS devices."
             icon="🕸"
+          />
+          <Link
+            package="use-force-update"
+            description="A React 16.7 Hook allowing the forced update of a functional component."
+            icon="🆕"
+          />
+          <Link
+            package="use-react-router"
+            description="A React 16.7 Hook incorporating react-router's context and rerendering on history state change."
+            icon="🗺️"
+          />
+          <Link
+            package="with-router"
+            description="A pub-sub implementation of the react-router withRouter HOC."
+            icon="🔔"
           />
           {this.misc}
         </List>
