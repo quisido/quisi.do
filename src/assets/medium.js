@@ -1,5 +1,19 @@
 export default [
   {
+    title: 'How to convert withRouter to a React Hook',
+    date: new Date('30 Oct 2018 UTC'),
+    description: 'Converting react-router\'s withRouter HOC to a React 16.7 Hook as a tutorial for implementing hooks with pub-sub functionality.',
+    icon: '🎣',
+    id: '19bb02a29ed6'
+  },
+  {
+    title: 'No-boilerplate global state management in React',
+    date: new Date('29 Oct 2018 UTC'),
+    description: 'With the goal of no boilerplate and intuitive syntax, this article covers my open-source implementation of a global state management system for React.',
+    icon: '🔩',
+    id: '41e905944eb7'
+  },
+  {
     title: 'The Fetch API and asynchronous redux state',
     date: new Date('9 Oct 2018 UTC'),
     description: 'An overview of the standardized states involved in an asynchronous API call, their relationship to the redux store, and a solution to automate this process.',
