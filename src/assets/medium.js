@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'Replacing Redux with ReactN to reduce complexity and bundle size',
+    date: new Date('31 Oct 2018 UTC'),
+    description: 'Starting with a bare-bones example of a React application that harnesses Redux for global state management, it is converted to ReactN to showcase simpler code and a 15% reduction in bundle size.',
+    icon: '🔸',
+    id: 'aa7009cd1209'
+  },
+  {
     title: 'How to convert withRouter to a React Hook',
     date: new Date('30 Oct 2018 UTC'),
     description: 'Converting react-router\'s withRouter HOC to a React 16.7 Hook as a tutorial for implementing hooks with pub-sub functionality.',
