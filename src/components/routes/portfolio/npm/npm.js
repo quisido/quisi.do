@@ -90,6 +90,11 @@ class Npm extends React.PureComponent {
             icon="🎾"
           />
           <Link
+            package="fetch-suspense"
+            description="A Fetch API hook that supports the React 16.6 Suspense component implementation."
+            icon="😵"
+          />
+          <Link
             package="mssql-query-builder"
             description="Dynamically build Microsoft SQL Server queries using JavaScript."
             icon="🏗️"
