@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'React Suspense with the Fetch API',
+    date: new Date('31 Oct 2018 UTC'),
+    description: 'The logic behind React Suspense and how to integrate a compatible Fetch API React Hook.',
+    icon: '🔮',
+    id: 'a1b7369b0469'
+  },
+  {
     title: 'Replacing Redux with ReactN to reduce complexity and bundle size',
     date: new Date('31 Oct 2018 UTC'),
     description: 'Starting with a bare-bones example of a React application that harnesses Redux for global state management, it is converted to ReactN to showcase simpler code and a 15% reduction in bundle size.',
