@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'Manage global state with React hooks',
+    date: new Date('5 Nov 2018 UTC'),
+    description: 'Introduction to a React hook for accessing and managing global state in functional components.',
+    icon: '🌎',
+    id: '6065041b55b4'
+  },
+  {
     title: 'React Suspense with the Fetch API',
     date: new Date('31 Oct 2018 UTC'),
     description: 'The logic behind React Suspense and how to integrate a compatible Fetch API React Hook.',
