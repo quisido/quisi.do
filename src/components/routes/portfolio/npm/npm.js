@@ -80,6 +80,11 @@ class Npm extends React.PureComponent {
             icon="🎮"
           />
           <Link
+            package="deep-proxy-polyfill"
+            description="Recursively proxies an object."
+            icon="🔗"
+          />
+          <Link
             package="delimiter"
             description="Places delimiters between items in an array."
             icon="🗂️"
@@ -153,6 +158,11 @@ class Npm extends React.PureComponent {
             package="rn-webview"
             description="An implementation of React Native's WebView that allows for window.postMessage on iOS devices."
             icon="🕸"
+          />
+          <Link
+            package="use-dimensions"
+            description="A React hook for the React Native Dimensions API."
+            icon="📏"
           />
           <Link
             package="use-force-update"
