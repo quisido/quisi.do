@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'Variable length currying in JavaScript',
+    date: new Date('19 Nov 2018 UTC'),
+    description: 'How to write a curried function in JavaScript that can take any number of parameters.',
+    icon: '🍛',
+    id: '7f7bb7bdad8b'
+  },
+  {
     title: 'Manage global state with React hooks',
     date: new Date('5 Nov 2018 UTC'),
     description: 'Introduction to a React hook for accessing and managing global state in functional components.',
