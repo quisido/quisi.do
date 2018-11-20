@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'Implementing Quicksort in JavaScript',
+    date: new Date('20 Nov 2018 UTC'),
+    description: 'A walkthrough of the Quicksort algorithm with accompanying TypeScript implementation.',
+    icon: '🎩',
+    id: '8044a8e2bf39'
+  },
+  {
     title: 'Variable length currying in JavaScript',
     date: new Date('19 Nov 2018 UTC'),
     description: 'How to write a curried function in JavaScript that can take any number of parameters.',
