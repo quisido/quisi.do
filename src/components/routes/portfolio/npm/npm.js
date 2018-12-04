@@ -75,6 +75,11 @@ class Npm extends React.PureComponent {
             icon="🎨"
           />
           <Link
+            package="@charlesstover/quicksort"
+            description="An implementation of Quicksort in JavaScript."
+            icon="1️⃣"
+          />
+          <Link
             package="@gamingmedley/konami.js"
             description="Allows web developers to implement the Konami code on their webpages."
             icon="🎮"
