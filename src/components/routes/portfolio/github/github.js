@@ -17,7 +17,7 @@ export class GitHub extends React.PureComponent {
             repo="3ds-tetris"
             org="GamingMedley"
             title="3DS Tetris"
-            description="Play Tetris on your Nintendo 3DS!"
+            description="Play Tetris in your browser or on your Nintendo 3DS!"
             icon="⬜"
           />
           <Link
@@ -27,11 +27,32 @@ export class GitHub extends React.PureComponent {
             icon="⚡"
           />
           <Link
+            repo="dota2huds"
+            org="GamingMedley"
+            title="Dota 2 HUDs"
+            description="View a full resolution live render of any Dota 2 HUD in your browser."
+            icon="👾"
+          />
+          {/*<Link
             repo="electron-transition-calculator"
             title="Electron Transition Calculator"
             description="A simple tool for calculating change during electron transitions."
             icon="🔬"
-          />
+          />*/}
+          {/*<Link
+            repo="proxy"
+            org="mtgenius"
+            title="Magic: The Gathering Playtest Generator"
+            description="A print-friendly display of Magic: The Gathering cards."
+            icon="🎴"
+          />*/}
+          {/*<Link
+            repo="makeplayingcards"
+            org="mtgenius"
+            title="MakePlayingCards for Magic: The Gathering"
+            description="Dynamically extend and color card borders."
+            icon="⬜"
+          />*/}
           <Link
             repo="meditative-breathing"
             title="Meditative Breathing"
@@ -39,10 +60,23 @@ export class GitHub extends React.PureComponent {
             icon="🙏"
           />
           <Link
+            repo="react-native-meditative-breathing"
+            title="Meditative Breathing (React Native)"
+            description="A visual representation to guide meditative breathing in React Native."
+            icon="🙏"
+          />
+          {/*<Link
             repo="password-generator"
             title="Password Generator"
             description="Generates a random string for password use."
             icon="🔒"
+          />*/}
+          <Link
+            repo="planechase"
+            org="mtgenius"
+            title="Planechase - Magic: The Gathering"
+            description="A mobile-responsive React application mimicking the Planechase expansion for Magic: The Gathering."
+            icon="✨"
           />
           <Link
             repo="platformer-engine"
@@ -51,12 +85,12 @@ export class GitHub extends React.PureComponent {
             description="A 2D platformer engine implemented in the web browser."
             icon="🎮"
           />
-          <Link
+          {/*<Link
             repo="radix"
             title="Radix Conversion"
             description="Convert between bases with this simple radix conversion tool."
             icon="2️⃣"
-          />
+          />*/}
           <Link
             repo="rainbow-text"
             title="Rainbow Text Generator"
