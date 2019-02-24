@@ -30,7 +30,7 @@ class Quotes extends React.PureComponent {
   }
 
   get viewMore() {
-    if (this.state.length > this.props.quotes.length) {
+    if (this.state.length >= this.props.quotes.length) {
       return null;
     }
     return (
