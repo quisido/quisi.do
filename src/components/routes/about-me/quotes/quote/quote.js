@@ -25,10 +25,10 @@ class Quote extends React.PureComponent {
     />;
 
   get quote() {
-    if (typeof this.props.quote === 'string') {
-      return this.mapQuote(this.props.quote);
+    if (Array.isArray(this.props.quote)) {
+      return this.props.quote.map(this.mapQuote);
     }
-    return this.props.quote.map(this.mapQuote);
+    return this.mapQuote(this.props.quote);
   }
 
   render() {
@@ -45,18 +45,25 @@ class Quote extends React.PureComponent {
             children={this.quote}
             className={this.props.classes.blockquote}
           />
-          <Tooltip
-            placement="left"
-            title={this.props.title}
-          >
-            <span className={this.props.classes.company}>
+          {
+            this.props.company ?
+              <Tooltip
+                placement="left"
+                title={this.props.title}
+              >
+                <span className={this.props.classes.company}>
+                  <cite
+                    children={this.props.author}
+                    className={this.props.classes.cite}
+                  />,{' '}
+                  {this.props.company}
+                </span>
+              </Tooltip> :
               <cite
                 children={this.props.author}
                 className={this.props.classes.cite}
-              />,{' '}
-              {this.props.company}
-            </span>
-          </Tooltip>
+              />
+          }
         </div>
       </div>
     );
