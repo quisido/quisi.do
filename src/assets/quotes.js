@@ -3,6 +3,7 @@ import ellis from './quotes/ellis-gregory.jpg';
 import jin from './quotes/jin-haonan.png';
 import kelsey from './quotes/kelsey-lavigne.jpg';
 import malakai from './quotes/malakai-whitston.jpg';
+import sriram from './quotes/sriram-rudraraju.jpg';
 import quotesPackages from './quotes-packages';
 
 export default [
@@ -75,6 +76,13 @@ export default [
       </>
     ],
     title: 'Managing Director | Digital Marketing Consultant',
+  },
+  {
+    author: 'Sriram Rudraraju',
+    company: 'Walmart',
+    image: sriram,
+    quote: 'Charles is the best friendly mentor I have ever had. He always had an answer to my questions.',
+    title: 'Web Developer',
   },
 
   // Medium responses
