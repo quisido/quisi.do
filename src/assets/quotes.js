@@ -4,6 +4,7 @@ import jin from './quotes/jin-haonan.png';
 import kelsey from './quotes/kelsey-lavigne.jpg';
 import malakai from './quotes/malakai-whitston.jpg';
 import sriram from './quotes/sriram-rudraraju.jpg';
+import walter from './quotes/walter-sorto.jpg';
 import quotesPackages from './quotes-packages';
 
 export default [
@@ -76,6 +77,13 @@ export default [
       </>
     ],
     title: 'Managing Director | Digital Marketing Consultant',
+  },
+  {
+    author: 'Walter Sorto',
+    company: 'Walmart',
+    image: walter,
+    quote: 'Charles demonstrated a high level of expertise in JavaScript and was always willing to help out in the time we worked together.',
+    title: 'Software Engineer',
   },
   {
     author: 'Sriram Rudraraju',
