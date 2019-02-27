@@ -120,6 +120,14 @@ class AboutMe extends React.PureComponent {
         </section>
         <Paper className={this.props.classes.paper + ' ' + this.props.classes.projects}>
           <SeeNoEvil
+            description="Global state management, baked into React."
+            href="https://github.com/CharlesStover/reactn/"
+            images="https://user-images.githubusercontent.com/343837/53267742-fe3f4900-3698-11e9-82fd-3c3a1decb7fd.png"
+            rel="nofollow noopener noreferrer"
+            target="_blank"
+            title="ReactN"
+          />
+          <SeeNoEvil
             description="IE6-compatible HTML and CSS animations."
             href="https://gamingmedley.github.io/rpg-overworld-engine/"
             images={rpgOverworldEngine}
