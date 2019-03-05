@@ -56,7 +56,7 @@ export default [
         I am a huge fan of [Charles’s NPM package] {reactn}. I am using Relay
         Modern to handle all the GraphQL stuff, so I just needed a few
         key/value pairs to persist outside of that, and I was <em>dreading</em>
-        {' '}diving into Redux. ReactN does everything I need, and the
+        {' '}diving into Redux. ReactN does everything I need, and the{' '}
         <code>addCallback</code> function works like a charm for persisting
         things to <code>sessionStorage</code>! Thanks!
       </>
