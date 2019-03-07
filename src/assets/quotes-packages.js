@@ -2,6 +2,7 @@ import React from 'react';
 import aaron from './quotes/aaron-dalton.jpg';
 import ahmad from './quotes/ahmad-elsokkary.jpg';
 import blake from './quotes/blake-moore.jpg';
+import brian from './quotes/brian-barbour.jpg';
 import jacob from './quotes/jacob-sowles.jpg';
 import josh from './quotes/josh-sherman.jpg';
 import juan from './quotes/juan-lanus.jpg';
@@ -112,11 +113,26 @@ export default [
       <>
         For new developers, the Redux learning curve is a beast. I’ve met
         multiple senior level developers that all said Redux took 2–3 weeks to
-        grasp and then one day it just clicked. [Charles’s NPM package]
-        {' '}{reactn} is a great solution for managing global state in conjunction
+        grasp and then one day it just clicked. [Charles’s NPM package]{' '}
+        {reactn} is a great solution for managing global state in conjunction
         with the upcoming React Hooks implementation. I’m using the ReactN
         package on my new portfolio site with Next.js and so far it’s working
         awesome. I’m super impressed with how easy and fast both are so far.
+      </>
+    ),
+    title: null,
+  },
+  {
+    author: 'Brian Barbour',
+    company: null,
+    image: brian,
+    quote: (
+      <>
+        I am new to both JavaScript and React, having only used JavaScript for
+        four months. I was able to figure out [Charles’s NPM package]{' '}
+        {reactn} and use it within an hour. Redux was really overwhelming for
+        me and even Context was a bit confusing. I plan on playing with it so
+        much more.
       </>
     ),
     title: null,
