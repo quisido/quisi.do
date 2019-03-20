@@ -1,5 +1,9 @@
 import EventEmitter from 'event-emitter';
 
+const NPM_DOWNLOADS_API =
+  process.env.REACT_APP_NPM_DOWNLOADS_API ||
+  'https://api.charlesstover.com/npm/downloads';
+
 class NpmDownloads extends EventEmitter {
 
   data = null;
@@ -30,7 +34,7 @@ class NpmDownloads extends EventEmitter {
 
     // Instantiate
     this.loading = true;
-    return fetch(process.env.REACT_APP_NPM_DOWNLOADS_API)
+    return fetch(NPM_DOWNLOADS_API)
       .then(response => response.json())
       .then(data => {
         this.data = data;
