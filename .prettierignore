@@ -1,0 +1,9 @@
+/.git/
+/.vscode/settings.json
+/.yarn/
+/.pnp.*
+/.yarnrc.yml
+/LICENSE
+/yarn.lock
+node_modules/
+*.gz

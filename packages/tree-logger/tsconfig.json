@@ -1,0 +1,11 @@
+{
+  "exclude": ["dist/", "jest/"],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*.ts"],
+  "compilerOptions": {
+    "lib": ["DOM", "ESNext"],
+    "noEmit": true,
+    "rootDir": "src",
+    "sourceRoot": "src"
+  }
+}

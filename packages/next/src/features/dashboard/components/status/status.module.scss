@@ -1,0 +1,37 @@
+.icon {
+  align-items: center;
+  border-radius: 1em;
+  color: #202020;
+  display: inline-flex;
+  font-size: 0.9em;
+  height: 1.25em;
+  justify-content: center;
+  margin-left: 0.15em;
+  margin-right: 0.15em;
+  text-align: center;
+  width: 1.25em;
+}
+
+.message {
+  border-radius: 0.25em;
+  padding-bottom: 0.5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.5em;
+
+  &.error {
+    background-color: hsla(0deg 64% 55% / 15%);
+  }
+
+  &.info {
+    background-color: hsla(192deg 64% 55% / 15%);
+
+    .icon {
+      background-color: hsl(192deg 64% 55%);
+    }
+  }
+}
+
+.messages {
+  margin-top: 0.75em;
+}

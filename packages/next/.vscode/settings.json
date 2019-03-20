@@ -1,0 +1,21 @@
+{
+  "files.exclude": {
+    ".next/": true,
+    ".wrangler/": true,
+    "analyze/": true,
+    "certificates/": true,
+    "out/": true,
+    "cypress.config.cjs": true,
+    "jest.config.cjs": true,
+    "lighthouse-0.devtoolslog.json": true,
+    "lighthouse-0.trace.json": true,
+    "lighthouse.config.cjs": true,
+    "lighthouse.config.js": true,
+    "lighthouse.report.html": true,
+    "lighthouse.report.json": true,
+    "next-env.d.ts": true,
+    "next.config.cjs": true,
+    "next.config.js": true,
+    "nyc.config.cjs": true
+  }
+}

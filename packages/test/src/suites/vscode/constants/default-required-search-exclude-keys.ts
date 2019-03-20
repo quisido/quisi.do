@@ -1,0 +1,26 @@
+const DEFAULT_REQUIRED_SEARCH_EXCLUDE_KEYS: readonly string[] = [
+  '**/.git/',
+  '**/.idea/',
+  '**/.next/',
+  '**/.nyc_output/',
+  '**/.yarn/',
+  '**/build/',
+  '**/coverage/',
+  '**/cypress/coverage/',
+  '**/cypress/downloads/',
+  '**/cypress/screenshots/',
+  '**/cypress/videos/',
+  '**/dist/',
+  '**/jest/',
+  '**/node_modules/',
+  '**/sarif/',
+  '**/.attach_pid*',
+  '**/.pnp.*',
+  '**/*.cpuprofile',
+  '**/*.tsbuildinfo',
+  '**/lighthouse.report.*',
+  '**/yarn.lock',
+  '**/.yarn',
+];
+
+export default DEFAULT_REQUIRED_SEARCH_EXCLUDE_KEYS;

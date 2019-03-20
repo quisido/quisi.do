@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "dist/": true,
+    "jest/": true,
+    "jest.config.cjs": true,
+    "*.cpuprofile": true,
+    "*.tsbuildinfo": true
+  }
+}
