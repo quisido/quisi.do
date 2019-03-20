@@ -165,6 +165,11 @@ class Npm extends React.PureComponent {
             icon="🕸"
           />
           <Link
+            package="use-clippy"
+            description="A React hook for reading from and writing to the user's clipboard."
+            icon="📎"
+          />
+          <Link
             package="use-dimensions"
             description="A React hook for the React Native Dimensions API."
             icon="📏"
