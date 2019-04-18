@@ -1,8 +1,30 @@
 import { List, Paper, Typography } from '@material-ui/core';
 import React from 'react';
+import npm from '../../../../assets/npm';
 import Link from './link/npm-link';
 import npmDownloads from './npm-downloads';
 import withStyles from './npm-styles';
+
+const sortPackagesByDownloads = (
+  [ _icon1, pkg1, _description1, downloads1, _data1 ],
+  [ _icon2, pkg2, _description2, downloads2, _data2 ],
+) => {
+  if (downloads1 < downloads2) {
+    return 1;
+  }
+  if (downloads1 > downloads2) {
+    return -1;
+  }
+  if (pkg1 < pkg2) {
+    return 1;
+  }
+  return 1;
+};
+
+const sum = (total, iteration) => total + iteration;
+
+// Deep clone the NPM packages.
+const npmPackages = npm.map(pkg => [...pkg]);
 
 class Npm extends React.PureComponent {
 
@@ -10,22 +32,34 @@ class Npm extends React.PureComponent {
 
   state = {
     error: null,
-    misc: null
+    misc: null,
   };
 
   componentDidMount() {
     npmDownloads.fetch()
       .then(data => {
         if (this.mounted) {
+          for (const pkg of npmPackages) {
+            const PACKAGE_NAME = pkg[1];
+            pkg.push(
+              Object.prototype.hasOwnProperty.call(data, PACKAGE_NAME) ?
+                data[PACKAGE_NAME].reduce(sum, 0) :
+                0
+            );
+            pkg.push(data[PACKAGE_NAME] || [ ]);
+          }
+          npmPackages.sort(sortPackagesByDownloads);
           this.setState({
-            misc: data['@']
+            misc: data['@'],
           });
         }
       })
       .catch(err => {
         if (this.mounted) {
           this.setState({
-            error: 'An error occurred while determining the download count of the packages: ' + err.message
+            error:
+              'An error occurred while determining the download count of ' +
+              'the packages: ' + err.message,
           });
         }
       });
@@ -33,31 +67,6 @@ class Npm extends React.PureComponent {
 
   componentWillUnmount() {
     this.mounted = false;
-  }
-
-  get error() {
-    if (this.state.error === null) {
-      return null;
-    }
-    return (
-      <Typography
-        children={this.state.error}
-        className={this.props.classes.error}
-        variant="body1"
-      />
-    );
-  }
-
-  get misc() {
-    if (this.state.misc === null) {
-      return null;
-    }
-    return (
-      <Link
-        description=""
-        icon="❓"
-      />
-    );
   }
 
   render() {
@@ -69,129 +78,34 @@ class Npm extends React.PureComponent {
           variant="headline"
         />
         <List className={this.props.classes.list}>
-          <Link
-            package="@charlesstover/hsl2rgb"
-            description="Convert HSL to RGB."
-            icon="🎨"
-          />
-          <Link
-            package="@charlesstover/quicksort"
-            description="An implementation of Quicksort in JavaScript."
-            icon="1️⃣"
-          />
-          <Link
-            package="@gamingmedley/konami.js"
-            description="Allows web developers to implement the Konami code on their webpages."
-            icon="🎮"
-          />
-          <Link
-            package="deep-proxy-polyfill"
-            description="Recursively proxies an object."
-            icon="🔗"
-          />
-          <Link
-            package="delimiter"
-            description="Places delimiters between items in an array."
-            icon="🗂️"
-          />
-          <Link
-            package="fetch-action-creator"
-            description="Fetches using standardized, four-part asynchronous actions for redux-thunk."
-            icon="🎾"
-          />
-          <Link
-            package="fetch-suspense"
-            description="A Fetch API hook that supports the React 16.6 Suspense component implementation."
-            icon="😵"
-          />
-          <Link
-            package="mssql-query-builder"
-            description="Dynamically build Microsoft SQL Server queries using JavaScript."
-            icon="🏗️"
-          />
-          <Link
-            package="pluralsight-score"
-            description="A mobile-responsive bell curve graph mimicking Pluralsight's assessment exam results."
-            icon="📈"
-          />
-          <Link
-            package="rainbow-gradient"
-            description="Generates a gradient of the colors of the rainbow."
-            icon="🌈"
-          />
-          <Link
-            package="react-innertext"
-            description="Returns the innerText of a React JSX object."
-            icon="📝"
-          />
-          <Link
-            package="react-mui-tooltip"
-            description="A React tooltip similar to Material UI's design."
-            icon="💭"
-          />
-          <Link
-            package="react-multi-context"
-            description="Manage multiple contexts with a single React component."
-            icon="💕"
-          />
-          <Link
-            package="react-object-prop"
-            description="Caches Object props in React so as to prevent unnecessary re-rendering."
-            icon="💡"
-          />
-          <Link
-            package="react-portfolio"
-            description="A sleek portfolio design created in React."
-            icon="📁"
-          />
-          <Link
-            package="react-quotes-carousel"
-            description="A quotes carousel for React."
-            icon="💬"
-          />
-          <Link
-            package="react-rainbow-text"
-            description="Generates rainbow-colored text in React."
-            icon="🌈"
-          />
-          <Link
-            package="reactn"
-            description="A React clone that extends components with built-in global state."
-            icon="🌎"
-          />
-          <Link
-            package="rn-webview"
-            description="An implementation of React Native's WebView that allows for window.postMessage on iOS devices."
-            icon="🕸"
-          />
-          <Link
-            package="use-clippy"
-            description="A React hook for reading from and writing to the user's clipboard."
-            icon="📎"
-          />
-          <Link
-            package="use-dimensions"
-            description="A React hook for the React Native Dimensions API."
-            icon="📏"
-          />
-          <Link
-            package="use-force-update"
-            description="A React 16.7 Hook allowing the forced update of a functional component."
-            icon="🆕"
-          />
-          <Link
-            package="use-react-router"
-            description="A React 16.7 Hook incorporating react-router's context and rerendering on history state change."
-            icon="🗺️"
-          />
-          <Link
-            package="with-router"
-            description="A pub-sub implementation of the react-router withRouter HOC."
-            icon="🔔"
-          />
-          {this.misc}
+          {
+            npmPackages.map(([ icon, pkg, description, downloads = [] ]) =>
+              <Link
+                description={description}
+                downloads={downloads}
+                icon={icon}
+                key={pkg}
+                package={pkg}
+              />
+            )
+          }
+          {
+            this.state.misc &&
+            <Link
+              description=""
+              downloads={this.state.misc.reduce(sum, 0)}
+              icon="❓"
+            />
+          }
         </List>
-        {this.error}
+        {
+          this.state.error &&
+          <Typography
+            children={this.state.error}
+            className={this.props.classes.error}
+            variant="body1"
+          />
+        }
       </Paper>
     );
   }

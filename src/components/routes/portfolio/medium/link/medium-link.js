@@ -1,7 +1,7 @@
 import { ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import React from 'react';
 import createObjectProp from 'react-object-prop';
-import mediumUrl from '../../../../../constants/medium-url';
+import mediumUrl from '../../../../../utils/medium-url';
 import withStyles from './medium-link-styles';
 
 class MediumLink extends React.PureComponent {

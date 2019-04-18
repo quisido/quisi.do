@@ -2,7 +2,7 @@ import { List, ListItem, ListItemText, Tooltip, Typography } from '@material-ui/
 import React from 'react';
 import createObjectProp from 'react-object-prop';
 import medium from '../../../../assets/medium';
-import mediumUrl from '../../../../constants/medium-url';
+import mediumUrl from '../../../../utils/medium-url';
 import withStyles from './publications-styles';
 
 const months = [ 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.',  'Nov.', 'Dec.' ];

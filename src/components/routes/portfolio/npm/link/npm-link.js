@@ -1,81 +1,32 @@
 import { ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import React from 'react';
 import createObjectProp from 'react-object-prop';
-import npmDownloads from '../npm-downloads';
 import withStyles from './npm-link-styles';
+
+const COMMA_DELIMIT = /\B(?=(?:\d{3})+(?!\d))/g;
+const NO_BREAK_SPACE = '\u00A0';
 
 class NpmLink extends React.PureComponent {
 
   _listItemTextClasses = createObjectProp();
-  mounted = true;
-  state = {
-    downloads: null
-  };
-
-  componentDidMount() {
-    npmDownloads.fetch()
-      .then(data => {
-        if (
-          this.mounted &&
-          Object.prototype.hasOwnProperty.call(data, this.package)
-        ) {
-          this.setState({
-            downloads: data[this.package]
-          });
-        }
-      })
-
-      // Error handling is done in ../npm, so we can ignore them here.
-      .catch(() => {});
-  }
-
-  componentWillUnmount() {
-    this.mounted = false;
-  }
-
-  get downloads() {
-    if (this.state.downloads === null) {
-      return '\u00A0';
-    }
-    return this.state.downloads.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',') + ' downloads';
-  }
-
-  get href() {
-    if (this.props.package) {
-      return 'https://www.npmjs.com/package/' + this.props.package;
-    }
-    return 'https://www.npmjs.com/~charlesstover';
-  }
-
-  get listItemTextClasses() {
-    return this._listItemTextClasses({
-      primary: this.props.classes.primary
-    });
-  }
-
-  get package() {
-    return this.props.package || '@';
-  }
-
-  get primary() {
-    return this.props.package || 'Other Packages';
-  }
-
-  get title() {
-    if (this.props.package) {
-      return this.props.package + ' - npm';
-    }
-    return '@charlesstover - npm';
-  }
 
   render() {
     return (
       <ListItem className={this.props.classes.root}>
         <a
           className={this.props.classes.link}
-          href={this.href}
+          href={
+            this.props.package ?
+              `https://www.npmjs.com/package/${this.props.package}` :
+              'https://www.npmjs.com/~charlesstover'
+          }
           rel="nofollow noopener noreferrer"
           target="_blank"
+          title={
+            this.props.package ?
+              `${this.props.package} - npm` :
+              '@charlesstover - npm'
+          }
         >
           <ListItemIcon>
             <span
@@ -84,17 +35,27 @@ class NpmLink extends React.PureComponent {
             />
           </ListItemIcon>
           <ListItemText
-            classes={this.listItemTextClasses}
+            classes={this._listItemTextClasses({
+              primary: this.props.classes.primary
+            })}
             className={this.props.classes.text}
-            primary={this.primary}
+            primary={this.props.package || 'Other Packages'}
             secondary={
               <React.Fragment>
                 {this.props.description}
                 <Typography
-                  children={this.downloads}
                   className={this.props.classes.downloads}
                   variant="caption"
-                />
+                >
+                  {
+                    this.props.downloads === 0 ?
+                      NO_BREAK_SPACE :
+                      this.props.downloads
+                        .toString()
+                        .replace(COMMA_DELIMIT, ',') +
+                        ' downloads'
+                  }
+                </Typography>
               </React.Fragment>
             }
           />
