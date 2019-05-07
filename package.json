@@ -12,7 +12,7 @@
     "not op_mini all"
   ],
   "scripts": {
-    "build": "set REACT_APP_NPM_DOWNLOADS_API=http://api.charlesstover.com/npm/downloads&& set REACT_APP_SPRITESHEET2GIF_API=https://api.charlesstover.com/spritesheet2gif&& react-scripts build",
+    "build": "set REACT_APP_NPM_DOWNLOADS_API=http://api.charlesstover.com/npm/downloads&& react-scripts build",
     "docker-build": "docker build --file Dockerfile --tag charlesstover/charlesstover .",
     "eject": "react-scripts eject",
     "start": "set REACT_APP_NPM_DOWNLOADS_API=http://api.charlesstover.docker/npm/downloads&& react-scripts start",
