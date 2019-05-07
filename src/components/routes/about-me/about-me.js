@@ -66,11 +66,11 @@ class AboutMe extends React.PureComponent {
             <Typography
               children={'Front End: ' + frontEndYears + ' years'}
               gutterBottom
-              variant="subheading"
+              variant="subtitle1"
             />
             <Typography
               children={'Full-Stack: ' + backEndYears + ' years'}
-              variant="subheading"
+              variant="subtitle1"
             />
           </div>
         </Paper>
@@ -79,7 +79,7 @@ class AboutMe extends React.PureComponent {
             children="Expert"
             className={this.props.classes.sectionHeadline}
             gutterBottom
-            variant="headline"
+            variant="h5"
           />
           <div className={this.props.classes.sectionBody}>
             <Expert />
@@ -90,7 +90,7 @@ class AboutMe extends React.PureComponent {
             children="Proficient"
             className={this.props.classes.sectionHeadline}
             gutterBottom
-            variant="headline"
+            variant="h5"
           />
           <div className={this.props.classes.sectionBody}>
             <Proficient />
@@ -105,7 +105,7 @@ class AboutMe extends React.PureComponent {
               children="Publications"
               className={this.props.classes.sectionHeadline}
               gutterBottom
-              variant="headline"
+              variant="h5"
             />
             <div className={this.props.classes.sectionBody}>
               <Publications />

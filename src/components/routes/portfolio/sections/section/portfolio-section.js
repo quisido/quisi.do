@@ -65,7 +65,7 @@ class PortfolioSection extends React.PureComponent {
         <Typography
           children={this.props.title}
           className={this.props.classes.headline}
-          variant="headline"
+          variant="h5"
         />
       </RootComponent>
     );

@@ -59,7 +59,7 @@ class Donate extends React.PureComponent {
             children="Donate"
             name="submit"
             type="submit"
-            variant="raised"
+            variant="contained"
           />
         </form>
       </Paper>

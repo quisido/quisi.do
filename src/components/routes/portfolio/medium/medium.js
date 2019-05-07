@@ -17,7 +17,7 @@ class Medium extends React.PureComponent {
         <Typography
           children="Medium Publications"
           className={this.props.classes.title}
-          variant="headline"
+          variant="h5"
         />
         <List
           children={medium.map(mapLinks)}

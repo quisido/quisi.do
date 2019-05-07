@@ -1,11 +1,11 @@
-import SpriteSheetToGif from '@charlesstover/spritesheet2gif';
 import Konami from '@gamingmedley/konami.js';
 import React from 'react';
 import ReactPortfolio from 'react-portfolio';
 import withStyles from './app-styles';
-import AboutMe from '../routes/about-me/about-me';
-import Donate from '../routes/donate/donate';
-import Portfolio from '../routes/portfolio/portfolio';
+import AboutMe from '../routes/about-me';
+import Donate from '../routes/donate';
+import Portfolio from '../routes/portfolio';
+import SpriteSheetToGif from '../routes/spritesheet2gif';
 
 const UPDATE_HUE_DELAY = 250;
 

@@ -22,7 +22,7 @@ class MediumLink extends React.PureComponent {
             children={this.props.subtitle}
             className={this.props.classes.subtitle}
             component="span"
-            variant="subheading"
+            variant="subtitle1"
           />
           <span children={this.props.description} />
         </React.Fragment>

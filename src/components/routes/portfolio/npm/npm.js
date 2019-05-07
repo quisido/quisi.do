@@ -75,7 +75,7 @@ class Npm extends React.PureComponent {
         <Typography
           children="NPM Packages"
           className={this.props.classes.title}
-          variant="headline"
+          variant="h5"
         />
         <List className={this.props.classes.list}>
           {
@@ -103,7 +103,6 @@ class Npm extends React.PureComponent {
           <Typography
             children={this.state.error}
             className={this.props.classes.error}
-            variant="body1"
           />
         }
       </Paper>

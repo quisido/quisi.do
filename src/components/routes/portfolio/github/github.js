@@ -10,7 +10,7 @@ export class GitHub extends React.PureComponent {
         <Typography
           children="GitHub Repositories"
           className={this.props.classes.title}
-          variant="headline"
+          variant="h5"
         />
         <List className={this.props.classes.list}>
           <Link
