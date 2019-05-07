@@ -128,7 +128,7 @@ class SpriteSheetToGif extends React.PureComponent {
     body.append('matte', this.state.matte);
     body.append('perFrame', this.state.perFrame);
     body.append('sheet', this.state.sheet);
-    fetch(process.env.SPRITESHEET2GIF_API, {
+    fetch(process.env.REACT_APP_SPRITESHEET2GIF_API, {
       body,
       cache: 'no-cache',
       method: 'POST',
