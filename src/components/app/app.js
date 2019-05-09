@@ -113,11 +113,11 @@ class App extends React.PureComponent {
         routes={routes}
         social={social}
         title={
-          <React.Fragment>
+          <>
             Charles Stover
             <span className={this.props.classes.dot}> . </span>
             com
-          </React.Fragment>
+          </>
         }
       />
     );

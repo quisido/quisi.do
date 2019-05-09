@@ -15,14 +15,15 @@ class Medium extends React.PureComponent {
     return (
       <Paper className={this.props.classes.root}>
         <Typography
-          children="Medium Publications"
           className={this.props.classes.title}
           variant="h5"
-        />
-        <List
-          children={medium.map(mapLinks)}
-          className={this.props.classes.list}
-        />
+        >
+          Medium Publications
+        </Typography>
+        <List className={this.props.classes.list}>
+          {medium.map(mapLinks)}
+        </List>
+        {this.props.children}
       </Paper>
     );
   }

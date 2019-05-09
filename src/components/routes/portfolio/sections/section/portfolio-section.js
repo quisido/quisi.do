@@ -63,10 +63,11 @@ class PortfolioSection extends React.PureComponent {
           style={this.imageStyle}
         />
         <Typography
-          children={this.props.title}
           className={this.props.classes.headline}
           variant="h5"
-        />
+        >
+          {this.props.title}
+        </Typography>
       </RootComponent>
     );
   }

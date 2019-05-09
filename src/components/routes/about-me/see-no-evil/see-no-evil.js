@@ -74,16 +74,18 @@ class SeeNoEvil extends React.PureComponent {
           />
           <div className={this.props.classes.description}>
             <Typography
-              children={this.props.title}
               className={this.props.classes.title}
               gutterBottom
               variant="h6"
-            />
+            >
+              {this.props.title}
+            </Typography>
             <Typography
-              children={this.props.description}
               className={this.props.classes.caption}
               variant="h6"
-            />
+            >
+              {this.props.description}
+            </Typography>
           </div>
         </Component>
       </div>

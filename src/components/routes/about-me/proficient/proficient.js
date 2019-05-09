@@ -2,37 +2,27 @@ import React from 'react';
 import Icon from '../icon/icon';
 import withStyles from './proficient-styles';
 
-/*
-const github = technology =>
-  'https://github.com/CharlesStover?tab=repositories&q=topic%3A' +
-    technology.toLowerCase()
-      .replace(/\+/g, 'p')
-      .replace(/\s/g, '-');
-*/
-
 const proficiencies = [
   'Babel', 'Chai', 'Enzyme', 'ES6', 'express', 'GitHub', 'Jest', 'Material UI',
   'Mocha', 'MySQL', 'nginx', 'React Native', 'Redux', 'SASS', 'SQL Server',
   'TravisCI', 'TypeScript', 'Webpack'
 ];
 
-class Proficient extends React.PureComponent {
-  render() {
+export default withStyles(
+  function Proficient({ classes }) {
     return (
-      <div
-        children={proficiencies.map((technology, index) =>
+      <div className={classes.root}>
+        {proficiencies.map((technology, index) =>
           <Icon
-            children={technology}
-            className={this.props.classes.proficiency}
+            className={classes.proficiency}
             index={index}
             key={technology}
             tooltip={technology}
-          />
+          >
+            {technology}
+          </Icon>
         )}
-        className={this.props.classes.root}
-      />
+      </div>
     );
   }
-}
-
-export default withStyles(Proficient);
+);

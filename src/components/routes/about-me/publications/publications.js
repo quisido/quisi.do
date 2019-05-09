@@ -25,32 +25,34 @@ class Publications extends React.PureComponent {
       <ListItemText classes={this.linkItemTextClasses}>
         <span className={this.props.classes.link}>
           <a
-            children={article.title}
             href={mediumUrl(article.id, article.title)}
             rel="nofollow noopener noreferrer"
             target="_blank"
-          />{' '}
+          >
+            {article.title}
+          </a>{' '}
           <Typography
-            children={'(' + article.date.getFullYear() + ' ' + months[article.date.getMonth()] + ' ' + article.date.getDate() + ')'}
             className={this.props.classes.caption}
             variant="caption"
-          />
+          >
+            ({article.date.getFullYear()}{' '}
+            {months[article.date.getMonth()]}{' '}
+            {article.date.getDate()})
+          </Typography>
         </span>
         <Tooltip title={article.description}>
-          <span
-            children="?"
-            className={this.props.classes.help}
-          />
+          <span className={this.props.classes.help}>
+            ?
+          </span>
         </Tooltip>
       </ListItemText>
     </ListItem>;
 
   render() {
     return (
-      <List
-        children={medium.slice(0, 4).map(this.mapMedium)}
-        className={this.props.classes.list}
-      />
+      <List className={this.props.classes.list}>
+        {medium.slice(0, 4).map(this.mapMedium)}
+      </List>
     );
   }
 }

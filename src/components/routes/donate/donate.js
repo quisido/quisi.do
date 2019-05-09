@@ -10,18 +10,20 @@ class Donate extends React.PureComponent {
         <Typography className={this.props.classes.paragraph}>
           You might have found one of my{' '}
           <Link
-            children="free web apps"
             title="Charles Stover's Portfolio"
             to="/portfolio"
-          />{' '}
+          >
+            free web apps
+          </Link>{' '}
           useful. If so, you can use the form on this page to make a small donation with{' '}
           <a
-            children="PayPal"
             href="https://www.paypal.com/webapps/mpp/paypal-popup"
             rel="nofollow noopener noreferrer"
             target="_blank"
             title="How PayPal Works"
-          />.{' '}
+          >
+            PayPal
+          </a>.{' '}
           Your donation will help cover the hosting and miscellaneous fees required to keep this website operational.
         </Typography>
         <form
@@ -56,11 +58,12 @@ class Donate extends React.PureComponent {
             />
           </div>
           <Button
-            children="Donate"
             name="submit"
             type="submit"
             variant="contained"
-          />
+          >
+            Donate
+          </Button>
         </form>
       </Paper>
     );

@@ -5,9 +5,6 @@ export default withStyles(theme => ({
     marginBottom: 0,
     padding: 0,
   },
-  downloads: {
-    marginTop: '0.25em'
-  },
   icon: {
     fontSize: '2em',
     textAlign: 'center',

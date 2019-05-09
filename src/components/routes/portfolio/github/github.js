@@ -8,10 +8,11 @@ export class GitHub extends React.PureComponent {
     return (
       <Paper className={this.props.classes.root}>
         <Typography
-          children="GitHub Repositories"
           className={this.props.classes.title}
           variant="h5"
-        />
+        >
+          GitHub Repositories
+        </Typography>
         <List className={this.props.classes.list}>
           <Link
             repo="3ds-tetris"
@@ -21,13 +22,26 @@ export class GitHub extends React.PureComponent {
             icon="⬜"
           />
           <Link
+            repo="acealters.com"
+            org="mtgenius"
+            title="AceAlters"
+            description="AceAlters is a gallery of cards from the Magic: The Gathering collectible card game as altered by Ace Quisido."
+            icon="🃏"
+          />
+          <Link
+            repo="charlesstover.com"
+            title="CharlesStover.com"
+            description="This repository is a riddle, wrapped in a mystery, inside an enigma."
+            icon="🕸"
+          />
+          <Link
             repo="cspage-php"
             title="CSPage"
             description="Automated webpage optimization utility that caches, compresses, concatenates, and otherwise optimizes HTML, CSS, JavaScript, and static file content distribution."
             icon="⚡"
           />
           <Link
-            repo="dota2huds"
+            repo="dota2huds.com"
             org="GamingMedley"
             title="Dota 2 HUDs"
             description="View a full resolution live render of any Dota 2 HUD in your browser."
@@ -84,6 +98,12 @@ export class GitHub extends React.PureComponent {
             title="Platformer Engine"
             description="A 2D platformer engine implemented in the web browser."
             icon="🎮"
+          />
+          <Link
+            repo="quisido.com"
+            title="Quisido.com"
+            description="Quisido.com is the professional portfolio of designer Ace Quisido."
+            icon="🎨"
           />
           {/*<Link
             repo="radix"
@@ -145,6 +165,7 @@ export class GitHub extends React.PureComponent {
             icon="🎯"
           />
         </List>
+        {this.props.children}
       </Paper>
     );
   }

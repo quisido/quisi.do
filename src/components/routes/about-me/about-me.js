@@ -34,7 +34,7 @@ class AboutMe extends React.PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <Paper className={this.props.classes.paper + ' ' + this.props.classes.aboutMe}>
           <img
             alt="Avatar"
@@ -44,54 +44,55 @@ class AboutMe extends React.PureComponent {
             width={100}
           />
           <Typography className={this.props.classes.aboutMeParagraph}>
-            Hi, I'm <span
-              children="Charles Stover"
-              className={this.props.classes.aboutMeHighlight}
-            />.{' '}
+            Hi, I'm{' '}
+            <span className={this.props.classes.aboutMeHighlight}>
+              Charles Stover
+            </span>.{' '}
             I'm a{' '}
-            <span
-              children="senior full-stack development consultant"
-              className={this.props.classes.aboutMeHighlight}
-            />{' '}
-            with a focus in React and Node.
+            <span className={this.props.classes.aboutMeHighlight}>
+              senior full-stack JavaScript developer
+            </span>{' '}
+            with a focus in React and Node.{' '}
             My expertise is in automation, optimization, security, and{' '}
             <Tooltip title="User Interface">
-              <abbr children="UI" />
+              <abbr>UI</abbr>
             </Tooltip>/
             <Tooltip title="User Experience">
-              <abbr children="UX" />
+              <abbr>UX</abbr>
             </Tooltip>.
           </Typography>
           <div className={this.props.classes.aboutMeInfo}>
             <Typography
-              children={'Front End: ' + frontEndYears + ' years'}
               gutterBottom
               variant="subtitle1"
-            />
-            <Typography
-              children={'Full-Stack: ' + backEndYears + ' years'}
-              variant="subtitle1"
-            />
+            >
+              Front End: {frontEndYears} years
+            </Typography>
+            <Typography variant="subtitle1">
+              Full-Stack: {backEndYears} years
+            </Typography>
           </div>
         </Paper>
         <section className={this.props.classes.section + ' ' + this.props.classes.sectionContent}>
           <Typography
-            children="Expert"
             className={this.props.classes.sectionHeadline}
             gutterBottom
             variant="h5"
-          />
+          >
+            Expert
+          </Typography>
           <div className={this.props.classes.sectionBody}>
             <Expert />
           </div>
         </section>
         <section className={this.props.classes.section + ' ' + this.props.classes.sectionContent}>
           <Typography
-            children="Proficient"
             className={this.props.classes.sectionHeadline}
             gutterBottom
             variant="h5"
-          />
+          >
+            Proficient
+          </Typography>
           <div className={this.props.classes.sectionBody}>
             <Proficient />
           </div>
@@ -102,11 +103,12 @@ class AboutMe extends React.PureComponent {
         <section className={this.props.classes.section}>
           <div className={this.props.classes.sectionContent}>
             <Typography
-              children="Publications"
               className={this.props.classes.sectionHeadline}
               gutterBottom
               variant="h5"
-            />
+            >
+              Publications
+            </Typography>
             <div className={this.props.classes.sectionBody}>
               <Publications />
             </div>
@@ -115,7 +117,7 @@ class AboutMe extends React.PureComponent {
             className={this.props.classes.publicationsViewMore}
             to="/portfolio/medium"
           >
-            <Button children="View more..." />
+            <Button>View more</Button>
           </Link>
         </section>
         <Paper className={this.props.classes.paper + ' ' + this.props.classes.projects}>
@@ -142,14 +144,22 @@ class AboutMe extends React.PureComponent {
             title="Sprite Sheet to GIF Converter"
             to="/spritesheet2gif"
           />
-          <Link
-            className={this.props.classes.projectsViewMore}
-            to="/portfolio/github"
-          >
-            <Button children="View more..." />
-          </Link>
+          <div className={this.props.classes.projectsViewMore}>
+            <Link
+              className={this.props.classes.projectsViewMoreLink}
+              to="/portfolio/github"
+            >
+              <Button>View GitHub repositories</Button>
+            </Link>
+            <Link
+              className={this.props.classes.projectsViewMoreLink}
+              to="/portfolio/npm"
+            >
+              <Button>View NPM packages</Button>
+            </Link>
+          </div>
         </Paper>
-      </React.Fragment> 
+      </> 
     );
   }
 }

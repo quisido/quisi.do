@@ -1,10 +1,8 @@
-import { ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
+import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import React from 'react';
 import createObjectProp from 'react-object-prop';
 import withStyles from './npm-link-styles';
-
-const COMMA_DELIMIT = /\B(?=(?:\d{3})+(?!\d))/g;
-const NO_BREAK_SPACE = '\u00A0';
+import Secondary from './secondary';
 
 class NpmLink extends React.PureComponent {
 
@@ -29,10 +27,9 @@ class NpmLink extends React.PureComponent {
           }
         >
           <ListItemIcon>
-            <span
-              children={this.props.icon}
-              className={this.props.classes.icon}
-            />
+            <span className={this.props.classes.icon}>
+              {this.props.icon}
+            </span>
           </ListItemIcon>
           <ListItemText
             classes={this._listItemTextClasses({
@@ -41,22 +38,9 @@ class NpmLink extends React.PureComponent {
             className={this.props.classes.text}
             primary={this.props.package || 'Other Packages'}
             secondary={
-              <React.Fragment>
+              <Secondary downloads={this.props.downloads}>
                 {this.props.description}
-                <Typography
-                  className={this.props.classes.downloads}
-                  variant="caption"
-                >
-                  {
-                    this.props.downloads === 0 ?
-                      NO_BREAK_SPACE :
-                      this.props.downloads
-                        .toString()
-                        .replace(COMMA_DELIMIT, ',') +
-                        ' downloads'
-                  }
-                </Typography>
-              </React.Fragment>
+              </Secondary>
             }
           />
         </a>

@@ -73,13 +73,14 @@ class Npm extends React.PureComponent {
     return (
       <Paper className={this.props.classes.root}>
         <Typography
-          children="NPM Packages"
           className={this.props.classes.title}
           variant="h5"
-        />
+        >
+          NPM Packages
+        </Typography>
         <List className={this.props.classes.list}>
           {
-            npmPackages.map(([ icon, pkg, description, downloads = [] ]) =>
+            npmPackages.map(([ icon, pkg, description, downloads = 0 ]) =>
               <Link
                 description={description}
                 downloads={downloads}
@@ -100,11 +101,11 @@ class Npm extends React.PureComponent {
         </List>
         {
           this.state.error &&
-          <Typography
-            children={this.state.error}
-            className={this.props.classes.error}
-          />
+          <Typography className={this.props.classes.error}>
+            {this.state.error}
+          </Typography>
         }
+        {this.props.children}
       </Paper>
     );
   }

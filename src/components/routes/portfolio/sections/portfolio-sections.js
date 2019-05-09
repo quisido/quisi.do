@@ -27,10 +27,9 @@ class PortfolioSections extends React.PureComponent {
 
   render() {
     return (
-      <div
-        children={this.sections}
-        className={this.props.classes.root}
-      />
+      <div className={this.props.classes.root}>
+        {this.sections}
+      </div>
     )
   }
 }

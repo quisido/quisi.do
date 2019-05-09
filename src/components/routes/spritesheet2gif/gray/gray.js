@@ -21,10 +21,9 @@ class Gray extends React.PureComponent {
 
   render() {
     return (
-      <span
-        children={this.children}
-        className={this.className}
-      />
+      <span className={this.className}>
+        {this.children}
+      </span>
     );
   }
 }

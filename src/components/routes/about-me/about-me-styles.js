@@ -87,7 +87,14 @@ export default withStyles({
     }
   },
   projectsViewMore: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
     marginBottom: '1em'
+  },
+  projectsViewMoreLink: {
+    margin: '0 1em',
   },
   publicationsViewMore: {
     display: 'inline-block',

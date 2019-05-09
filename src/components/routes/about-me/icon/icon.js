@@ -7,32 +7,24 @@ class Icon extends React.PureComponent {
 
   _style = createObjectProp();
 
-  get className() {
+  render() {
     const classNames = [ this.props.classes.root ];
     if (this.props.className) {
       classNames.push(this.props.className);
     }
-    return classNames.join(' ');
-  }
-
-  get style() {
-    return this._style({
-      backgroundPosition: (-64 * this.props.index) + 'px center'
-    });
-  }
-
-  render() {
     return (
       <Tooltip
         placement="top"
         title={this.props.tooltip}
       >
         <span
-          className={this.className}
+          className={classNames.join(' ')}
           onClick={this.props.onClick || null}
-          style={this.style}
+          style={this._style({
+            backgroundPosition: (-64 * this.props.index) + 'px center'
+          })}
         >
-          <span children={this.props.children} />
+          <span>{this.props.children}</span>
         </span>
       </Tooltip>
     );

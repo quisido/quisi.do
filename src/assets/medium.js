@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'Are you under qualified to apply to a software development position?',
+    date: new Date('07 May 2019 UTC'),
+    description: 'There are a lot of misconceptions about what constitutes as “qualified.” I wanted to make one thing clear: You should always be under qualified.',
+    icon: '🎯',
+    id: '45c01079861a',
+  },
+  {
     title: 'Optimal file structure for React Applications',
     date: new Date('4 Mar 2019 UTC'),
     description: 'Despite absolute freedom, the question of optimal file structure still gains traction frequently in the React community. Developers are still uncomfortable with exploring new territories, and I think they have a point. It’s a lot of work to refactor a code base for a file structure change, and it takes a lot of trial and error to find one you like. It would be beneficial to know some ground rules before mapping out your expedition — what have those who came before you discovered?',

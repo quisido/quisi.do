@@ -41,7 +41,7 @@ class SpriteSheetToGif extends React.PureComponent {
       return null;
     }
     return (
-      <React.Fragment>
+      <>
         <ListItem>
           <ListItemText>
             <Typography children="If the sprite sheet is wider than it is tall:" />
@@ -60,7 +60,7 @@ class SpriteSheetToGif extends React.PureComponent {
             {this.automaticDimensionText('height')}
           </ListItemText>
         </ListItem>
-      </React.Fragment>
+      </>
     );
   }
 
@@ -217,7 +217,7 @@ class SpriteSheetToGif extends React.PureComponent {
       return null;
     }
     return (
-      <React.Fragment>
+      <>
         <Typography paragraph>
           If your sprite sheet has a <Gray /> background color, you would want to use a <Gray /> matte so that your animation is transparent.
         </Typography>
@@ -231,7 +231,7 @@ class SpriteSheetToGif extends React.PureComponent {
         <Typography
           children="For translucent PNG sprite sheets, this is the background color your animated GIF will fade into, as if your PNG were placed on top of this color."
         />
-      </React.Fragment>
+      </>
     );
   }
 
@@ -376,7 +376,7 @@ class SpriteSheetToGif extends React.PureComponent {
       })
     });
     return (
-      <React.Fragment>
+      <>
         <Paper className={this.props.classes.paper + ' ' + this.props.classes.about}>
           <div className={this.props.classes.aboutText}>
             <Typography
@@ -550,7 +550,7 @@ class SpriteSheetToGif extends React.PureComponent {
             </table>
           </form>
         </Paper>
-      </React.Fragment>
+      </>
     );
   }
 }

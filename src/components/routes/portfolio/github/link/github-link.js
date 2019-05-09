@@ -31,10 +31,9 @@ class GitHubLink extends React.PureComponent {
             target="_blank"
           >
             <ListItemIcon>
-              <span
-                children={this.props.icon}
-                className={this.props.classes.icon}
-              />
+              <span className={this.props.classes.icon}>
+                {this.props.icon}
+              </span>
             </ListItemIcon>
             <ListItemText
               classes={this.listItemTextClasses}

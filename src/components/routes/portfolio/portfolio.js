@@ -15,7 +15,8 @@ class Portfolio extends React.PureComponent {
 
   handleRouteRef = ref => {
     if (ref) {
-      ReactDOM.findDOMNode(ref).scrollIntoView();
+      document.body.scrollIntoView();
+      // ReactDOM.findDOMNode(ref).scrollIntoView();
     }
   };
 
@@ -26,15 +27,16 @@ class Portfolio extends React.PureComponent {
     }
     const Component = route.component;
     return (
-      <React.Fragment>
-        <Component ref={this.handleRouteRef} />
-        <Button
-          children="Back to Top"
-          className={this.props.classes.backToTop}
-          onClick={this.handleBackToTop}
-          variant="outlined"
-        />
-      </React.Fragment>
+      <>
+        <Component ref={this.handleRouteRef}>
+          <Button
+            className={this.props.classes.backToTop}
+            onClick={this.handleBackToTop}
+          >
+            Back to Top
+          </Button>
+        </Component>
+      </>
     );
   }
 

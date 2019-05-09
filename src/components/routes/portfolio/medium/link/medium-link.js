@@ -17,15 +17,18 @@ class MediumLink extends React.PureComponent {
   get listItemTextSecondary() {
     if (this.props.subtitle) {
       return (
-        <React.Fragment>
+        <>
           <Typography
-            children={this.props.subtitle}
             className={this.props.classes.subtitle}
             component="span"
             variant="subtitle1"
-          />
-          <span children={this.props.description} />
-        </React.Fragment>
+          >
+            {this.props.subtitle}
+          </Typography>
+          <span>
+            {this.props.description}
+          </span>
+        </>
       );
     }
     return this.props.description;
@@ -41,10 +44,9 @@ class MediumLink extends React.PureComponent {
           target="_blank"
         >
           <ListItemIcon>
-            <span
-              children={this.props.icon}
-              className={this.props.classes.icon}
-            />
+            <span className={this.props.classes.icon}>
+              {this.props.icon}
+            </span>
           </ListItemIcon>
           <ListItemText
             classes={this.listItemTextClasses}

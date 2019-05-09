@@ -5,24 +5,14 @@ import withStyles from './quote-styles';
 
 class Quote extends React.PureComponent {
 
-  get className() {
-    return (
-      this.props.classes.root + (
-        this.props.animate ?
-          ' ' + this.props.classes.animate :
-          ''
-      )
-    );
-  }
-
-
   mapQuote = (quote, index) =>
     <Typography
-      children={quote}
       className={this.props.classes.p}
       key={index}
       paragraph
-    />;
+    >
+      {quote}
+    </Typography>;
 
   get quote() {
     if (Array.isArray(this.props.quote)) {
@@ -32,8 +22,14 @@ class Quote extends React.PureComponent {
   }
 
   render() {
+    const className =
+      this.props.classes.root + (
+        this.props.animate ?
+          ' ' + this.props.classes.animate :
+          ''
+      );
     return (
-      <div className={this.className}>
+      <div className={className}>
         <div className={this.props.classes.image}>
           <Image
             alt={this.props.author}
@@ -41,10 +37,9 @@ class Quote extends React.PureComponent {
           />
         </div>
         <div className={this.props.classes.quote}>
-          <blockquote
-            children={this.quote}
-            className={this.props.classes.blockquote}
-          />
+          <blockquote className={this.props.classes.blockquote}>
+            {this.quote}
+          </blockquote>
           {
             this.props.company ?
               <Tooltip
@@ -52,17 +47,15 @@ class Quote extends React.PureComponent {
                 title={this.props.title}
               >
                 <span className={this.props.classes.company}>
-                  <cite
-                    children={this.props.author}
-                    className={this.props.classes.cite}
-                  />,{' '}
+                  <cite className={this.props.classes.cite}>
+                    {this.props.author}
+                  </cite>,{' '}
                   {this.props.company}
                 </span>
               </Tooltip> :
-              <cite
-                children={this.props.author}
-                className={this.props.classes.cite}
-              />
+              <cite className={this.props.classes.cite}>
+                {this.props.author}
+              </cite>
           }
         </div>
       </div>

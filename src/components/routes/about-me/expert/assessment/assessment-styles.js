@@ -8,7 +8,4 @@ export default withStyles({
   selected: {
     filter: 'saturate(100%)'
   },
-  title: {
-    textAlign: 'center'
-  }
 });

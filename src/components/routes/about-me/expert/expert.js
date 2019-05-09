@@ -6,11 +6,12 @@ import withStyles from './expert-styles';
 
 const PLURALSIGHT =
   <a
-    children="Pluralsight"
     href="https://app.pluralsight.com/profile/CharlesStover"
     rel="nofollow noopener noreferrer"
     target="_blank"
-  />;
+  >
+    Pluralsight
+  </a>;
 
 const assessments = [
   // [ 'JS 1.8', 100, 'SHL® Online' ],
