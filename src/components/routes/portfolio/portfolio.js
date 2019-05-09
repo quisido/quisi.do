@@ -1,9 +1,14 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import routes from './portfolio-routes';
 import withStyles from './portfolio-styles';
 import Sections from './sections/portfolio-sections';
+
+const handleRouteRef = ref => {
+  if (ref) {
+    document.body.scrollIntoView();
+  }
+};
 
 class Portfolio extends React.PureComponent {
 
@@ -11,13 +16,6 @@ class Portfolio extends React.PureComponent {
     e.preventDefault();
     document.body.scrollIntoView();
     return false;
-  };
-
-  handleRouteRef = ref => {
-    if (ref) {
-      document.body.scrollIntoView();
-      // ReactDOM.findDOMNode(ref).scrollIntoView();
-    }
   };
 
   get route() {
@@ -28,7 +26,7 @@ class Portfolio extends React.PureComponent {
     const Component = route.component;
     return (
       <>
-        <Component ref={this.handleRouteRef}>
+        <Component ref={handleRouteRef}>
           <Button
             className={this.props.classes.backToTop}
             onClick={this.handleBackToTop}
