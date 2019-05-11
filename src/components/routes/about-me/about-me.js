@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import quotes from '../../../assets/quotes';
 import spritesheet2gif from '../../../assets/screenshots/spritesheet2gif.png';
 import rpgOverworldEngine320 from '../../../assets/screenshots/rpg-overworld-engine.gif';
+import Resume from '../../resume';
 import withStyles from './about-me-styles';
 import Expert from './expert/expert';
 import Proficient from './proficient/proficient';
@@ -73,6 +74,7 @@ class AboutMe extends React.PureComponent {
             </Typography>
           </div>
         </Paper>
+        <Resume />
         <section className={this.props.classes.section + ' ' + this.props.classes.sectionContent}>
           <Typography
             className={this.props.classes.sectionHeadline}
