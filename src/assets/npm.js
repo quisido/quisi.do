@@ -17,6 +17,7 @@ export default [
   [ '💬', 'react-quotes-carousel', 'A quotes carousel for React.' ],
   [ '🌈', 'react-rainbow-text', 'Generates rainbow-colored text in React.' ],
   [ '🌎', 'reactn', 'A React clone that extends components with built-in global state.' ],
+  [ '🕵', 'reactn-devtools', 'ReactN DevTools allow you to view your ReactN state with your Redux DevTools browser extension.' ],
   [ '🕸', 'rn-webview', 'An implementation of React Native\'s WebView that allows for window.postMessage on iOS devices.' ],
   [ '📎', 'use-clippy', 'A React hook for reading from and writing to the user\'s clipboard.' ],
   [ '📏', 'use-dimensions', 'A React hook for the React Native Dimensions API.' ],
