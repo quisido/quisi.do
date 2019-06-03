@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import quotes from '../../../assets/quotes';
 import spritesheet2gif from '../../../assets/screenshots/spritesheet2gif.png';
 import rpgOverworldEngine320 from '../../../assets/screenshots/rpg-overworld-engine.gif';
-import Resume from '../../resume';
 import withStyles from './about-me-styles';
 import Expert from './expert/expert';
 import Proficient from './proficient/proficient';
@@ -74,7 +73,6 @@ class AboutMe extends React.PureComponent {
             </Typography>
           </div>
         </Paper>
-        <Resume />
         <section className={this.props.classes.section + ' ' + this.props.classes.sectionContent}>
           <Typography
             className={this.props.classes.sectionHeadline}
@@ -119,7 +117,12 @@ class AboutMe extends React.PureComponent {
             className={this.props.classes.publicationsViewMore}
             to="/portfolio/medium"
           >
-            <Button>View more</Button>
+            <Button
+              color="secondary"
+              variant="outlined"
+            >
+              View more
+            </Button>
           </Link>
         </section>
         <Paper className={this.props.classes.paper + ' ' + this.props.classes.projects}>
@@ -151,13 +154,23 @@ class AboutMe extends React.PureComponent {
               className={this.props.classes.projectsViewMoreLink}
               to="/portfolio/github"
             >
-              <Button>View GitHub repositories</Button>
+              <Button
+                color="secondary"
+                variant="outlined"
+              >
+                View GitHub repositories
+              </Button>
             </Link>
             <Link
               className={this.props.classes.projectsViewMoreLink}
               to="/portfolio/npm"
             >
-              <Button>View NPM packages</Button>
+              <Button
+                color="secondary"
+                variant="outlined"
+              >
+                View NPM packages
+              </Button>
             </Link>
           </div>
         </Paper>

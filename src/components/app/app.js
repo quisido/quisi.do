@@ -7,9 +7,9 @@ import Donate from '../routes/donate';
 import Portfolio from '../routes/portfolio';
 import SpriteSheetToGif from '../routes/spritesheet2gif';
 
-const UPDATE_HUE_DELAY = 250;
+const RESUME_VERSION = '2019-05';
 
-const routes = [
+const ROUTES = [
   {
     component: AboutMe,
     description: 'Portfolio of senior full-stack JavaScript developer Charles Stover.',
@@ -61,7 +61,7 @@ const routes = [
   }
 ];
 
-const social = {
+const SOCIAL = {
   email: 'charlesstover@charlesstover.com',
   github: 'CharlesStover',
   linkedin: 'charles-stover',
@@ -73,12 +73,31 @@ const social = {
   twitter: 'CharlesStover'
 };
 
+const THEME = {
+  overrides: {
+    MuiPaper: {
+      root: {
+        backgroundColor: '#303030',
+      },
+    },
+  },
+  palette: {
+    background: {
+      default: '#202020',
+    },
+  },
+};
+
+const UPDATE_HUE_DELAY = 250;
+
 class App extends React.PureComponent {
 
   state = {
     hue: 0.5
   };
+
   unsubscribeKonami = null;
+
   updateHueInterval = null;
 
   componentDidMount() {
@@ -96,22 +115,28 @@ class App extends React.PureComponent {
     }
     else {
       window.clearInterval(this.updateHueInterval);
+      this.updateHueInterval = null;
     }
-  }
+  };
 
   updateHue = () => {
     this.setState(state => ({
-      hue: (state.hue + 0.01) % 1
+      hue: (state.hue + 0.01) % 1,
     }));
-  }
+  };
 
   render() {
     return (
       <ReactPortfolio
         copyright={2009}
-        hue={this.state.hue}
-        routes={routes}
-        social={social}
+        lightness={0.5}
+        primary={this.state.hue}
+        resume={`/resume/${RESUME_VERSION}/charles-stover-resume.pdf`}
+        routes={ROUTES}
+        saturation={0.5}
+        secondary={this.state.hue}
+        social={SOCIAL}
+        theme={THEME}
         title={
           <>
             Charles Stover

@@ -34,7 +34,9 @@ class Quotes extends React.PureComponent {
           this.state.length < this.props.quotes.length &&
           <Button
             className={this.props.classes.viewMore}
+            color="secondary"
             onClick={this.handleClick}
+            variant="outlined"
           >
             View more
           </Button>

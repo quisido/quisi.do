@@ -34,7 +34,7 @@ export default withStyles({
   animate: {
     animationDuration: '1s',
     animationIterationCount: 1,
-    animationName: 'quote-animate',
+    animationName: '$quote-animate',
     animationTimingFunction: 'ease-in-out'
   },
   blockquote: {

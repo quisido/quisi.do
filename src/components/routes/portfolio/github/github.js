@@ -79,6 +79,29 @@ export class GitHub extends React.PureComponent {
             description="A visual representation to guide meditative breathing in React Native."
             icon="🙏"
           />
+          <Link
+            repo="npm-downloads-api"
+            title="NPM Downloads API"
+            description="A Docker image containing a backend API that tracks the total download count of NPM packages."
+            icon="📈"
+          />
+          <Link
+            repo="optimal-react-file-structure"
+            title="Optimal React File Structure"
+            description={<>
+              A living document for an optimal React file structure,
+              accompanying my{' '}
+              <a
+                href="https://medium.com/@Charles_Stover/optimal-file-structure-for-react-applications-f3e35ad0a145"
+                rel="nofollow noopener noreferrer"
+                target="_blank"
+              >
+                Optimal File Structure for React Applications
+              </a>{' '}
+              article on Medium.
+            </>}
+            icon="⚛"
+          />
           {/*<Link
             repo="password-generator"
             title="Password Generator"
@@ -118,24 +141,36 @@ export class GitHub extends React.PureComponent {
             icon="🌈"
           />
           <Link
+            repo="reroute"
+            title="Reroute"
+            description="Reroute is a Chrome extension for redirecting all connections from one route to another, useful for pointing production endpoints to their development alternatives."
+            icon="🔀"
+          />
+          <Link
             repo="rpg-overworld-engine"
             org="GamingMedley"
             title="RPG Overworld Engine"
             description="A tech demo for a browser-based, Pokemon-esque RPG overworld engine that even supports Internet Explorer 6."
             icon="🚶"
           />
-          <Link
+          {/*<Link
             repo="shopping-list"
             title="Shopping List"
             description="A simple shopping list application."
             icon="📝"
-          />
+          />*/}
           <Link
             repo="sonic-the-hedgehog-tribute"
             org="GamingMedley"
             title="Sonic the Hedgehog Tribute"
             description="An artistic tribute to the Sonic the Hedgehog franchise."
             icon="🐹"
+          />
+          <Link
+            repo="spritesheet2gif-api"
+            title="Spritesheet to GIF API"
+            description="A Docker image containing a back end API for converting sprite sheets to GIFs via PHP."
+            icon="🏃‍"
           />
           <Link
             repo="super-mario-world-js"
@@ -163,6 +198,12 @@ export class GitHub extends React.PureComponent {
             title="Team Fortress 2 Bingo"
             description="Mark your TF2 Bingo card as stereotypical situations unfold throughout your game!"
             icon="🎯"
+          />
+          <Link
+            repo="twitter-bot"
+            title="Twitter Bot"
+            description="A Docker image for updating a Twitter account periodically."
+            icon="🐤"
           />
         </List>
         {this.props.children}

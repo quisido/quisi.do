@@ -52,6 +52,7 @@ export default withStyles({
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    color: '#F0F0F0',
     display: 'block',
     height: HEIGHT,
     width: '100%'

@@ -21,14 +21,14 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@gamingmedley/konami.js": "^1.0.2",
-    "@material-ui/core": "^3.9.3",
+    "@material-ui/core": "^4.0.1",
     "event-emitter": "^0.3.5",
     "pluralsight-score": "^1.0.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-object-prop": "^1.0.5",
-    "react-portfolio": "^1.1.6",
-    "react-router-dom": "^4.3.1",
+    "react-portfolio": "^1.4.5",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.5"
   }
 }

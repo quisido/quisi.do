@@ -82,7 +82,7 @@ export default withStyles({
     '&:hover $projectsSpritesheet2gifColor': {
       animationDuration: '10s',
       animationIterationCount: 'infinite',
-      animationName: 'projects-spritesheet2gif',
+      animationName: '$projects-spritesheet2gif',
       animationTimingFunction: 'steps(123)'
     }
   },
