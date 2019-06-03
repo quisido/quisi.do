@@ -29,7 +29,9 @@ class Portfolio extends React.PureComponent {
         <Component ref={handleRouteRef}>
           <Button
             className={this.props.classes.backToTop}
+            color="secondary"
             onClick={this.handleBackToTop}
+            variant="outlined"
           >
             Back to Top
           </Button>
