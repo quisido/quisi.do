@@ -4,53 +4,43 @@ import routes from './portfolio-routes';
 import withStyles from './portfolio-styles';
 import Sections from './sections/portfolio-sections';
 
+const handleBackToTop = e => {
+  e.preventDefault();
+  document.body.scrollIntoView();
+  return false;
+};
+
 const handleRouteRef = ref => {
   if (ref) {
     document.body.scrollIntoView();
   }
 };
 
-class Portfolio extends React.PureComponent {
-
-  handleBackToTop = e => {
-    e.preventDefault();
-    document.body.scrollIntoView();
-    return false;
-  };
-
-  get route() {
-    const route = routes.find(route => this.props.location.pathname === '/portfolio/' + route.path);
-    if (typeof route === 'undefined') {
-      return null;
-    }
-    const Component = route.component;
-    return (
-      <>
-        <Component ref={handleRouteRef}>
-          <Button
-            className={this.props.classes.backToTop}
-            color="secondary"
-            onClick={this.handleBackToTop}
-            variant="outlined"
-          >
-            Back to Top
-          </Button>
-        </Component>
-      </>
+export default withStyles(
+  function Portfolio({ classes, location }) {
+    const route = routes.find(route =>
+      location.pathname === `/portfolio/${route.path}`,
     );
-  }
-
-  render() {
     return (
-      <div className={this.props.classes.root}>
+      <div className={classes.root}>
         <Sections
           paper
-          pathname={this.props.location.pathname}
+          pathname={location.pathname}
         />
-        {this.route}
+        {
+          typeof route !== 'undefined' &&
+          <route.component ref={handleRouteRef}>
+            <Button
+              className={classes.backToTop}
+              color="secondary"
+              onClick={handleBackToTop}
+              variant="outlined"
+            >
+              Back to Top
+            </Button>
+          </route.component>
+        }
       </div>
     );
-  }
-}
-
-export default withStyles(Portfolio);
+  },
+);

@@ -17,5 +17,5 @@ export default withStyles({
   title: {
     padding: '1em',
     textAlign: 'center'
-  }
+  },
 });

@@ -1,7 +1,8 @@
 import { withStyles } from '@material-ui/core';
 
-export default withStyles(theme => ({
+export default withStyles({
   root: {
-    marginTop: '0.25em'
+    display: 'block',
+    marginTop: '0.25em',
   },
-}));
+});
