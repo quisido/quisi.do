@@ -1,7 +1,7 @@
 import { List, Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import withStyles from './github-styles';
-import Link from './link/github-link';
+import Link from './link';
 
 export class GitHub extends React.PureComponent {
   render() {

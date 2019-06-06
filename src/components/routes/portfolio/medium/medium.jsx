@@ -1,7 +1,7 @@
 import { List, Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import medium from '../../../../assets/medium';
-import Link from './link/medium-link';
+import Link from './link';
 import withStyles from './medium-styles';
 
 const mapLinks = link =>

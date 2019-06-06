@@ -1,8 +1,8 @@
 import github from '../../../assets/portfolio/github.png';
 import medium from '../../../assets/portfolio/medium.png';
 import npm from '../../../assets/portfolio/npm.png';
-import GitHubPortfolio from './github/github';
-import MediumPortfolio from './medium/medium';
+import GitHubPortfolio from './github';
+import MediumPortfolio from './medium';
 import NpmPortfolio from './npm';
 
 export default [

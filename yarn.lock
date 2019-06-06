@@ -5530,6 +5530,11 @@ mem@^4.0.0:
     mimic-fn "^1.0.0"
     p-is-promise "^2.0.0"
 
+memoize-one@^5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.0.4.tgz#005928aced5c43d890a4dfab18ca908b0ec92cbc"
+  integrity sha512-P0z5IeAH6qHHGkJIXWw0xC2HNEgkx/9uWWBQw64FJj3/ol14VYdfVGWWr0fXfjhhv3TKVIqUq65os6O4GUNksA==
+
 memory-fs@^0.4.0, memory-fs@~0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.4.1.tgz#3a9a20b8462523e447cfbc7e8bb80ed667bfc552"
@@ -7276,7 +7281,7 @@ react-object-prop@^1.0.5:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/react-object-prop/-/react-object-prop-1.0.6.tgz#9f7657874ee0127d52ce41bfb5bf72fc62cad800"
 
-react-portfolio@^1.4.5:
+react-portfolio@~1.4.5:
   version "1.4.5"
   resolved "https://registry.yarnpkg.com/react-portfolio/-/react-portfolio-1.4.5.tgz#f6e233c3c7011437128f7d1e362996d24c7cf615"
   integrity sha512-hs5GYVPt6gngk0okMKr5UawG4dy+pRdxd0yKS4vjBHx4DeyBubN+wGhJU12zjj2wCCx4WeUKjKGuJOum53ueLQ==
@@ -8063,6 +8068,13 @@ space-separated-tokens@^1.0.0:
   resolved "https://registry.yarnpkg.com/space-separated-tokens/-/space-separated-tokens-1.1.2.tgz#e95ab9d19ae841e200808cd96bc7bd0adbbb3412"
   dependencies:
     trim "0.0.1"
+
+sparkline-svg@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/sparkline-svg/-/sparkline-svg-1.0.1.tgz#27370e12d19497bf19f87e1fa4fe0498a954b5a7"
+  integrity sha512-D1lGpR3XBJxu8PeIXGfKDeYldFDZHy9g6rYp8XMIPdr1UbCuOTucaQsRId8m6r586l79+quSRdZb8GnKkMHdNA==
+  dependencies:
+    memoize-one "^5.0.4"
 
 spdx-correct@^3.0.0:
   version "3.1.0"

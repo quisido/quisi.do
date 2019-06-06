@@ -1,8 +1,8 @@
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import React from 'react';
+import SparklineSvg from 'sparkline-svg';
 import withStyles from './npm-link-styles';
 import Secondary from './secondary';
-import Sparkline from '../../../../../utils/sparkline-svg';
 
 export default withStyles(
   function NpmLink({ classes, description, downloads, icon, package: pkg }) {
@@ -16,7 +16,9 @@ export default withStyles(
       sparklineValues[i] = (sparklineValues[i] + droppedValue) / 2;
       i = (i + 1) % (sparklineValues.length - 1);
     }
-    const sparkline = new Sparkline(sparklineValues);
+    const sparkline = new SparklineSvg(sparklineValues);
+    sparkline.setDesc(`${packageName} downloads over time`);
+    sparkline.setFill(`hsla(160, 50%, 50%, 25%)`);
     sparkline.setStroke(`hsla(160, 50%, 50%, 50%)`);
     sparkline.setTitle(`${packageName} downloads over time`);
 

@@ -12,7 +12,7 @@
     "not op_mini all"
   ],
   "scripts": {
-    "build": "set REACT_APP_NPM_DOWNLOADS_API=http://api.charlesstover.com/npm/downloads&& react-scripts build",
+    "build": "set REACT_APP_NPM_DOWNLOADS_API=https://api.charlesstover.com/npm/downloads&& react-scripts build",
     "docker-build": "docker build --file Dockerfile --tag charlesstover/charlesstover .",
     "eject": "react-scripts eject",
     "start": "set REACT_APP_NPM_DOWNLOADS_API=http://api.charlesstover.docker/npm/downloads&& react-scripts start",
@@ -27,8 +27,9 @@
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-object-prop": "^1.0.5",
-    "react-portfolio": "^1.4.5",
+    "react-portfolio": "~1.4.5",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "^2.1.5"
+    "react-scripts": "^2.1.5",
+    "sparkline-svg": "^1.0.1"
   }
 }
