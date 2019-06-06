@@ -1,6 +1,6 @@
 export default [
   [ '🎨', '@charlesstover/hsl2rgb', 'Convert HSL to RGB.' ],
-  [ '1️⃣', '@charlesstover/quicksort', 'An implementation of Quicksort in JavaScript.' ],
+  [ '🔀', '@charlesstover/quicksort', 'An implementation of Quicksort in JavaScript.' ],
   [ '🎮', '@gamingmedley/konami.js', 'Allows web developers to implement the Konami code on their webpages.' ],
   [ '🔗', 'deep-proxy-polyfill', 'Recursively proxies an object.' ],
   [ '🗂️', 'delimiter', 'Places delimiters between items in an array.' ],
@@ -20,6 +20,7 @@ export default [
   [ '🌎', 'reactn', 'A React clone that extends components with built-in global state.' ],
   [ '🕵', 'reactn-devtools', 'ReactN DevTools allow you to view your ReactN state with your Redux DevTools browser extension.' ],
   [ '🕸', 'rn-webview', 'An implementation of React Native\'s WebView that allows for window.postMessage on iOS devices.' ],
+  [ '🎇', 'sparkline-svg', 'Generate a Sparkline as an SVG, in HTML or as a data URI.' ],
   [ '📎', 'use-clippy', 'A React hook for reading from and writing to the user\'s clipboard.' ],
   [ '📏', 'use-dimensions', 'A React hook for the React Native Dimensions API.' ],
   [ '🆕', 'use-force-update', 'A React Hook allowing the forced update of a functional component.' ],

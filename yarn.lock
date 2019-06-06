@@ -8069,10 +8069,10 @@ space-separated-tokens@^1.0.0:
   dependencies:
     trim "0.0.1"
 
-sparkline-svg@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/sparkline-svg/-/sparkline-svg-1.0.1.tgz#27370e12d19497bf19f87e1fa4fe0498a954b5a7"
-  integrity sha512-D1lGpR3XBJxu8PeIXGfKDeYldFDZHy9g6rYp8XMIPdr1UbCuOTucaQsRId8m6r586l79+quSRdZb8GnKkMHdNA==
+sparkline-svg@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/sparkline-svg/-/sparkline-svg-1.0.3.tgz#d3636d656fde0db8d2e1a2852cceb757a8a1ca9f"
+  integrity sha512-9NSw39ej+1leniZjLCkB7HrPFEGpCPj+Xb/ARluRBlZZdQyNqQAckupScAE9EVM83MGaUHCk12Yk3vH88srsiQ==
   dependencies:
     memoize-one "^5.0.4"
 

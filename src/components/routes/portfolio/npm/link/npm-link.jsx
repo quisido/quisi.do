@@ -18,8 +18,8 @@ export default withStyles(
     }
     const sparkline = new SparklineSvg(sparklineValues);
     sparkline.setDesc(`${packageName} downloads over time`);
-    sparkline.setFill(`hsla(160, 50%, 50%, 25%)`);
-    sparkline.setStroke(`hsla(160, 50%, 50%, 50%)`);
+    sparkline.setFill(`hsla(0, 50%, 50%, 3.33%)`);
+    sparkline.setStroke(`hsla(0, 50%, 50%, 6.67%)`);
     sparkline.setTitle(`${packageName} downloads over time`);
 
     return (
