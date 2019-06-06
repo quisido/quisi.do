@@ -3,7 +3,7 @@ import medium from '../../../assets/portfolio/medium.png';
 import npm from '../../../assets/portfolio/npm.png';
 import GitHubPortfolio from './github/github';
 import MediumPortfolio from './medium/medium';
-import NpmPortfolio from './npm/npm';
+import NpmPortfolio from './npm';
 
 export default [
   {

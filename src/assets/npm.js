@@ -16,6 +16,7 @@ export default [
   [ '📁', 'react-portfolio', 'A sleek portfolio design created in React.' ],
   [ '💬', 'react-quotes-carousel', 'A quotes carousel for React.' ],
   [ '🌈', 'react-rainbow-text', 'Generates rainbow-colored text in React.' ],
+  [ '🎇', 'react-sparkline-svg', 'A React Component that renders a sparkline as an SVG.' ],
   [ '🌎', 'reactn', 'A React clone that extends components with built-in global state.' ],
   [ '🕵', 'reactn-devtools', 'ReactN DevTools allow you to view your ReactN state with your Redux DevTools browser extension.' ],
   [ '🕸', 'rn-webview', 'An implementation of React Native\'s WebView that allows for window.postMessage on iOS devices.' ],

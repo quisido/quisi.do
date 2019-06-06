@@ -93,7 +93,7 @@ const UPDATE_HUE_DELAY = 250;
 class App extends React.PureComponent {
 
   state = {
-    hue: 0.5
+    hue: 0.5,
   };
 
   unsubscribeKonami = null;

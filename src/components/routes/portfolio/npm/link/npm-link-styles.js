@@ -8,20 +8,23 @@ export default withStyles(theme => ({
   icon: {
     fontSize: '2em',
     textAlign: 'center',
-    width: '1em'
+    width: '1em',
   },
   link: {
+    backgroundPosition: 'center center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'calc(100% - 2rem) calc(100% - 2rem)',
     display: 'flex',
     padding: '1.5em 2em',
     width: '100%',
     '&:hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.05)'
-    }
+      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    },
   },
   primary: {
-    color: theme.palette.primary.light
+    color: theme.palette.primary.light,
   },
   text: {
-    maxWidth: '44rem'
-  }
+    maxWidth: '44rem',
+  },
 }));

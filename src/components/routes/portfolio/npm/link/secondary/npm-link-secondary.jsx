@@ -5,8 +5,11 @@ import withStyles from './npm-link-secondary-styles.js';
 const COMMA_DELIMIT = /\B(?=(?:\d{3})+(?!\d))/g;
 const NO_BREAK_SPACE = '\u00A0';
 
+const sum = (total, count) => total + count;
+
 export default withStyles(
   function NpmLinkSecondary({ children, classes, downloads }) {
+    const downloadsSum = downloads.reduce(sum, 0);
     return (
       <>
         {children}
@@ -15,9 +18,9 @@ export default withStyles(
           variant="caption"
         >
           {
-            downloads === 0 ?
+            downloadsSum === 0 ?
               NO_BREAK_SPACE :
-              downloads
+              downloadsSum
                 .toString()
                 .replace(COMMA_DELIMIT, ',') +
                 ' downloads'
