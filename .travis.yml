@@ -3,9 +3,14 @@ node_js: 11
 branches:
   only: master
 cache: yarn
-install: yarn
+install:
+- yarn
+- cd scripts/build-plus
+- yarn
+- cd ../..
 script:
 - yarn build
+- yarn build-plus
 deploy:
   github-token:
     secure: LuOqGpN55Gr3tCDybVVteBJKCj7oDm8quA0A5GO6xSEwyxCpSEA1V8sw6y43WPUuioBrorvMpkspHkewTyApx9X3rB7NgRDtVfK4MAJeajQQTGum6jYdFzAFzYimjJqTn8Gjrqm1JCtkLOtkYqXv9kYh2xNRXZnB34cgCs6aNxnKjUdFOyZSSgW4ubQjI1J2kGagu2WGIMHcoH9sEYgGXJXA4fu9QECSvnZFofML8VYeR+pVcWkP63W0PbZ+XfDNgrFpnJOahrlHwsYGpkPMF2OlQoBwdzeI6i2ZbKKhFOR+mO06bf+HbvaYe7i6lKa8x8tvBDRxAY5B5Zr5W9rMKU9rbYVRrI8AOBuB1U/MXEIlhw7wuo8/VlrTVCeasZEeN//rJKaDg6uXYjZq4IG+ZltnM3eGk7Av/BBkgO7wFgn0qCgRMM3xCuVTt6DbN3PEK0H8S8RNBKg+njHfIZCVqF+wkCaCjm70JzCKRQhkcmE+AR4GUAU0aFoVM5Z3KxN7TQDkuiROtJ+ZfqTxous/WrDFAcvrCRL/kI1vhSAbRsHuVuzi6U1jiA94W9DOWqUa3EhMDm5OVTci6nD7OC5UBhzL+NIcW06zMmGpevjo+gGu4PdkeDjFMtgyuXyDpSd3e6mcp0RTfNuyTIwD54Sb+0qpJNiPIlDIqqfmhlsgOoA=

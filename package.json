@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "build": "set REACT_APP_NPM_DOWNLOADS_API=https://api.charlesstover.com/npm/downloads&& react-scripts build",
+    "build-plus": "node scripts/build-plus/build-plus.js",
     "docker-build": "docker build --file Dockerfile --tag charlesstover/charlesstover .",
     "eject": "react-scripts eject",
     "start": "set REACT_APP_NPM_DOWNLOADS_API=http://api.charlesstover.docker/npm/downloads&& react-scripts start",
