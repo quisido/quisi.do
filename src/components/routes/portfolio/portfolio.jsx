@@ -19,7 +19,7 @@ const handleRouteRef = ref => {
 export default withStyles(
   function Portfolio({ classes, location }) {
     const route = routes.find(route =>
-      location.pathname === `/portfolio/${route.path}`,
+      location.pathname === `/portfolio/${route.path}/`,
     );
     return (
       <div className={classes.root}>

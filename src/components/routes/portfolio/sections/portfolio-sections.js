@@ -10,13 +10,13 @@ class PortfolioSections extends React.PureComponent {
       <Section
         disabled={
           this.props.pathname &&
-          this.props.pathname === '/portfolio/' + route.path
+          this.props.pathname === `/portfolio/${route.path}/`
         }
         key={route.path}
         paper={this.props.paper || false}
         src={route.src}
         title={route.title}
-        to={'/portfolio/' + route.path}
+        to={`/portfolio/${route.path}/`}
       />
     );
   };
