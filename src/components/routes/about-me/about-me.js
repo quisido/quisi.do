@@ -115,7 +115,7 @@ class AboutMe extends React.PureComponent {
           </div>
           <Link
             className={this.props.classes.publicationsViewMore}
-            to="/portfolio/medium"
+            to="/portfolio/medium/"
           >
             <Button
               color="secondary"
@@ -152,7 +152,7 @@ class AboutMe extends React.PureComponent {
           <div className={this.props.classes.projectsViewMore}>
             <Link
               className={this.props.classes.projectsViewMoreLink}
-              to="/portfolio/github"
+              to="/portfolio/github/"
             >
               <Button
                 color="secondary"
@@ -163,7 +163,7 @@ class AboutMe extends React.PureComponent {
             </Link>
             <Link
               className={this.props.classes.projectsViewMoreLink}
-              to="/portfolio/npm"
+              to="/portfolio/npm/"
             >
               <Button
                 color="secondary"

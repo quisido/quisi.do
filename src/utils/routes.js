@@ -13,31 +13,31 @@ export default [
   {
     ...metadata['/donate'],
     component: Donate,
-    path: '/donate',
+    path: '/donate/',
   },
   {
     ...metadata['/portfolio'],
     component: Portfolio,
-    path: '/portfolio',
+    path: '/portfolio/',
   },
   {
     ...metadata['/portfolio/github'],
     component: Portfolio,
-    path: '/portfolio/github',
+    path: '/portfolio/github/',
   },
   {
     ...metadata['/portfolio/medium'],
     component: Portfolio,
-    path: '/portfolio/medium',
+    path: '/portfolio/medium/',
   },
   {
     ...metadata['/portfolio/npm'],
     component: Portfolio,
-    path: '/portfolio/npm',
+    path: '/portfolio/npm/',
   },
   {
     ...metadata['/spritesheet2gif'],
     component: SpriteSheetToGif,
-    path: '/spritesheet2gif',
+    path: '/spritesheet2gif/',
   }
 ];

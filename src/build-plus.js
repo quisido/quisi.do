@@ -10,7 +10,7 @@ export default {
       }
       return {
         ...pages,
-        [path.substring(1)]: {
+        [path.replace(/^\//, '').replace(/\/$/, '')]: {
           description: metadata.description,
           keywords: metadata.keywords,
           title: metadata.title,

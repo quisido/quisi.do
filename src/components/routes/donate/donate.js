@@ -11,7 +11,7 @@ class Donate extends React.PureComponent {
           You might have found one of my{' '}
           <Link
             title="Charles Stover's Portfolio"
-            to="/portfolio"
+            to="/portfolio/"
           >
             free web apps
           </Link>{' '}

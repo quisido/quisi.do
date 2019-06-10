@@ -7,7 +7,7 @@ class ViewPortfolio extends React.PureComponent {
     return (
       <Link
         className={this.props.classes.root}
-        to="/portfolio"
+        to="/portfolio/"
       >
         View more
       </Link>
