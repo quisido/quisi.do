@@ -1,13 +1,13 @@
 export default [
   {
-    title: 'Are you under qualified to apply to a software development position?',
+    title: 'Are you underqualified to apply to a software development position?',
     date: new Date('07 May 2019 UTC'),
     description: 'There are a lot of misconceptions about what constitutes as “qualified.” I wanted to make one thing clear: You should always be under qualified.',
     icon: '🎯',
     id: '45c01079861a',
   },
   {
-    title: 'Optimal file structure for React Applications',
+    title: 'Optimal file structure for React applications',
     date: new Date('4 Mar 2019 UTC'),
     description: 'Despite absolute freedom, the question of optimal file structure still gains traction frequently in the React community. Developers are still uncomfortable with exploring new territories, and I think they have a point. It’s a lot of work to refactor a code base for a file structure change, and it takes a lot of trial and error to find one you like. It would be beneficial to know some ground rules before mapping out your expedition — what have those who came before you discovered?',
     icon: '👷',
@@ -28,14 +28,14 @@ export default [
     id: '8044a8e2bf39',
   },
   {
-    title: 'Variable length currying in JavaScript',
+    title: 'Variable Length Currying in JavaScript',
     date: new Date('19 Nov 2018 UTC'),
     description: 'How to write a curried function in JavaScript that can take any number of parameters.',
     icon: '🍛',
     id: '7f7bb7bdad8b',
   },
   {
-    title: 'Manage global state with React hooks',
+    title: 'Manage global state with React hooks.',
     date: new Date('5 Nov 2018 UTC'),
     description: 'Introduction to a React hook for accessing and managing global state in functional components.',
     icon: '🌎',
@@ -63,14 +63,14 @@ export default [
     id: '19bb02a29ed6',
   },
   {
-    title: 'No-boilerplate global state management in React',
+    title: 'No-Boilerplate Global State Management in React',
     date: new Date('29 Oct 2018 UTC'),
     description: 'With the goal of no boilerplate and intuitive syntax, this article covers my open-source implementation of a global state management system for React.',
     icon: '🔩',
     id: '41e905944eb7',
   },
   {
-    title: 'The Fetch API and asynchronous redux state',
+    title: 'The Fetch API and Asynchronous Redux State',
     date: new Date('9 Oct 2018 UTC'),
     description: 'An overview of the standardized states involved in an asynchronous API call, their relationship to the redux store, and a solution to automate this process.',
     icon: '🐶',
@@ -106,7 +106,7 @@ export default [
   },
   {
     title: 'Boost Your Page Speed: Reduce File Size',
-    subtitle: 'Six tips to reduce your website\'s size and boost its performance.',
+    // subtitle: 'Six tips to reduce your website\'s size and boost its performance.',
     date: new Date('3 Nov 2010 UTC'),
     description: 'Anyone who has been in the web design business knows that it is a constant uphill battle. Just learning the markup, stylesheets, and back end is not enough to make your website compete in today\'s market of services and applications. Years of experience can provide you with a beautiful, modern website; it can function in all browsers and even pass validation. Satisfied? Unfortunately, you are not done yet. All intended web development professionals need to be well-versed to optimizing speed.',
     icon: '⚡',
@@ -114,7 +114,7 @@ export default [
   },
   {
     title: 'Boost Your Page Speed: Reduce Server Calls',
-    subtitle: 'Improve your loading speed by reducing server requests.',
+    // subtitle: 'Improve your loading speed by reducing server requests.',
     date: new Date('10 Nov 2010 UTC'),
     description: 'How is it possible for the client to receive the same amount of information without connecting to a server to get it? This tutorial covers avoiding empty src and href attributes, reducing DNS lookups, using sprite sheets, using GET for Ajax requests, avoiding URL redirects, making JavaScript and CSS external, adding Expires headers (telling the client to cache the document), and making Ajax cacheable.',
     icon: '🚗',
@@ -122,7 +122,7 @@ export default [
   },
   {
     title: 'Boost Your Page Speed: Reduce Parse Time',
-    subtitle: 'Nine tips to make your website render quickly.',
+    // subtitle: 'Nine tips to make your website render quickly.',
     date: new Date('2 Dec 2010 UTC'),
     description: 'This final chapter deals with minimizing the time it takes for the browser to convert the document from markup to visual elements: why you should and how to reduce the number of DOM elements on the page, include the width and height attribute of images, use cookie-free domains, reduce cookie size, place JavaScript at the bottom of the page, place CSS at the top of the page, avoid CSS expressions, remove duplicate JavaScript and CSS, and avoid HTTP 404 errors.',
     icon: '🏃',
