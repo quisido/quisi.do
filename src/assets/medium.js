@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'Become the junior developer that companies want to hire.',
+    date: new Date('17 Jun 2019 UTC'),
+    description: 'Since entering an enterprise setting, I have been involved with as much interview training, sat on as many interview panels, and gathered as much employee feedback as possible. I have applied what I have learned to everyone I have come across who seeks it. This is my attempt to publicly document and share this knowledge, in hopes that talented and self-motivated developers receive the fair shot at success they deserve.',
+    icon: '💻',
+    id: 'c539f4c236d8',
+  },
+  {
     title: 'Are you underqualified to apply to a software development position?',
     date: new Date('07 May 2019 UTC'),
     description: 'There are a lot of misconceptions about what constitutes as “qualified.” I wanted to make one thing clear: You should always be under qualified.',
