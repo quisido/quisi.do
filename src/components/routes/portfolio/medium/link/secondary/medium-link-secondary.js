@@ -25,19 +25,27 @@ export default withStyles(
           variant="caption"
         >
           <span>
-            <span aria-label="View Count" role="img">👁️</span>
+            <span aria-label="View Count" role="img">
+              👁️
+            </span>{' '}
             {numberFormat(views)} Views
           </span>
           <span>
-            <span aria-label="Read Count" role="img">📖</span>
+            <span aria-label="Read Count" role="img">
+              📖
+            </span>{' '}
             {numberFormat(reads)} Reads
           </span>
           <span>
-            <span aria-label="Reader Applause" role="img">👏</span>
+            <span aria-label="Reader Applause" role="img">
+              👏
+            </span>{' '}
             {numberFormat(claps)} Claps
           </span>
           <span>
-            <span aria-label="Reading Time" role="img">⏲</span>
+            <span aria-label="Reading Time" role="img">
+              ⏲
+            </span>{' '}
             {numberFormat(readingTime)} minute read
           </span>
         </Typography>
