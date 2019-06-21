@@ -14,12 +14,13 @@ export default [
     id: '45c01079861a',
   },
   {
-    title: 'Optimal file structure for React applications',
+    title: 'Optimal File Structure for React Applications',
     date: new Date('4 Mar 2019 UTC'),
     description: 'Despite absolute freedom, the question of optimal file structure still gains traction frequently in the React community. Developers are still uncomfortable with exploring new territories, and I think they have a point. It’s a lot of work to refactor a code base for a file structure change, and it takes a lot of trial and error to find one you like. It would be beneficial to know some ground rules before mapping out your expedition — what have those who came before you discovered?',
     icon: '👷',
     id: 'f3e35ad0a145',
   },
+  /*
   {
     title: 'How ReactN hacks React Context',
     date: new Date('21 Feb 2019 UTC'),
@@ -27,6 +28,7 @@ export default [
     icon: '💻',
     id: '9d112397f003',
   },
+  */
   {
     title: 'Implementing Quicksort in JavaScript',
     date: new Date('20 Nov 2018 UTC'),
