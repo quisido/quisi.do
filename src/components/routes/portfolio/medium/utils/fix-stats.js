@@ -13,13 +13,15 @@ const titleFixes = {
     'Manage global state with React Hooks.',
   'No-boilerplate global state management in React':
     'No-Boilerplate Global State Management in React',
+  'Optimal file structure for React applications':
+    'Optimal File Structure for React Applications',
   'Solving an Ambiguous JS Interview Question on Curried Functions':
     'Variable Length Currying in JavaScript',
   'The Fetch API and asynchronous Redux state':
     'The Fetch API and Asynchronous Redux State',
   'The Fetch API and asynchronous redux state':
     'The Fetch API and Asynchronous Redux State',
-}
+};
 
 export default function fixStats(stats) {
   const fixedStats = {...stats};
@@ -31,17 +33,27 @@ export default function fixStats(stats) {
     if (Object.prototype.hasOwnProperty.call(titleFixes, title)) {
       const fixedTitle = titleFixes[title];
 
-      // For each stat belonging to this title,
-      for (const [ stat, value ] of Object.entries(article)) {
+      // If the correct title is published,
+      if (Object.prototype.hasOwnProperty.call(fixedStats, fixedTitle)) {
 
-        // Merge it with the correct title's stats, if it's a number.
-        if (
-          typeof value === 'number' &&
-          stat !== 'readingTime'
-        ) {
-          fixedStats[fixedTitle][stat] += value;
+        // For each stat belonging to this title,
+        for (const [ stat, value ] of Object.entries(article)) {
+
+          // Merge it with the correct title's stats, if it's a number.
+          if (
+            typeof value === 'number' &&
+            stat !== 'readingTime'
+          ) {
+            fixedStats[fixedTitle][stat] += value;
+          }
         }
       }
+
+      // If the correct title is not published,
+      else {
+        fixedStats[fixedTitle] = fixedStats[title];
+      }
+
       delete fixedStats[title];
     }
   }
