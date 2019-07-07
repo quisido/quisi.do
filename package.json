@@ -1,10 +1,10 @@
 {
-  "name": "charlesstover",
+  "name": "charlesstover.com",
   "version": "1.0.0",
   "author": "Charles Stover",
   "homepage": "https://charlesstover.com/",
   "private": true,
-  "repository": "github:CharlesStover/charlesstover",
+  "repository": "github:CharlesStover/charlesstover.com",
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -12,19 +12,19 @@
     "not op_mini all"
   ],
   "scripts": {
-    "build": "react-scripts build",
+    "build": "react-app-rewired build",
     "build-plus": "node scripts/build-plus/build-plus.js",
-    "docker-build": "docker build --file Dockerfile --tag charlesstover/charlesstover .",
-    "eject": "react-scripts eject",
-    "start": "react-scripts start",
-    "test": "react-scripts test --env=jsdom"
+    "start": "react-app-rewired start",
+    "test": "react-app-rewired test --env=jsdom"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@gamingmedley/konami.js": "^1.0.2",
     "@material-ui/core": "^4.0.1",
     "event-emitter": "^0.3.5",
+    "marked": "^0.6.3",
     "pluralsight-score": "^1.0.0",
+    "raw-loader": "^3.0.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-object-prop": "^1.0.5",
@@ -32,5 +32,8 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.5",
     "sparkline-svg": "^1.0.3"
+  },
+  "devDependencies": {
+    "react-app-rewired": "^2.1.3"
   }
 }

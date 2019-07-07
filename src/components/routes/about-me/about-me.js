@@ -115,7 +115,7 @@ class AboutMe extends React.PureComponent {
           </div>
           <Link
             className={this.props.classes.publicationsViewMore}
-            to="/portfolio/medium/"
+            to="/portfolio/articles/"
           >
             <Button
               color="secondary"

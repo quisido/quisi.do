@@ -1,12 +1,12 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
-import withStyles from './medium-link-secondary-styles';
+import withStyles from './article-link-secondary-styles';
 
 const numberFormat = n =>
   n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
 export default withStyles(
-  function MediumLinkSecondary({
+  function ArticleLinkSecondary({
     children,
     claps,
     classes,

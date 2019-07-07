@@ -21,14 +21,10 @@ class PortfolioSections extends React.PureComponent {
     );
   };
 
-  get sections() {
-    return routes.map(this.mapRoutesToSection);
-  }
-
   render() {
     return (
       <div className={this.props.classes.root}>
-        {this.sections}
+        {routes.map(this.mapRoutesToSection)}
       </div>
     )
   }

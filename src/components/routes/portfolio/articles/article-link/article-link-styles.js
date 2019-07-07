@@ -27,5 +27,5 @@ export default withStyles(theme => ({
   },
   text: {
     maxWidth: '44rem'
-  }
+  },
 }));

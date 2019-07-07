@@ -13,13 +13,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://charlesstover.com/portfolio/github</loc>
-    <lastmod>2018-09-05</lastmod>
+    <loc>https://charlesstover.com/portfolio/articles</loc>
+    <lastmod>2019-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://charlesstover.com/portfolio/medium</loc>
+    <loc>https://charlesstover.com/portfolio/github</loc>
     <lastmod>2018-09-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

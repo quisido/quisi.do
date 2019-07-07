@@ -1,15 +1,15 @@
 import { List, Paper, Typography } from '@material-ui/core';
 import React from 'react';
-import medium from '../../../../assets/medium';
-import Link from './link';
+import articles from '../../../../assets/articles';
+import ArticleLink from './article-link';
+import withStyles from './articles-styles';
 import mediumStats from './medium-stats';
-import withStyles from './medium-styles';
 import fixStats from './utils/fix-stats';
 import sortArticlesByViews from './utils/sort-articles-by-views';
 
 const EMPTY_STATS = Object.create(null);
 
-class Medium extends React.PureComponent {
+class Articles extends React.PureComponent {
 
   mounted = true;
 
@@ -44,14 +44,14 @@ class Medium extends React.PureComponent {
 
   get articles() {
     if (this.state.stats === EMPTY_STATS) {
-      return medium;
+      return articles;
     }
-    return medium.sort(sortArticlesByViews(this.state.stats));
+    return articles.sort(sortArticlesByViews(this.state.stats));
   }
 
   mapArticlesToLinks = link =>
-    <Link
-      key={link.id}
+    <ArticleLink
+      key={link.mediumId}
       {...this.state.stats[link.title]}
       {...link}
     />;
@@ -63,7 +63,7 @@ class Medium extends React.PureComponent {
           className={this.props.classes.title}
           variant="h5"
         >
-          Medium Publications
+          Publications
         </Typography>
         <List className={this.props.classes.list}>
           {this.articles.map(this.mapArticlesToLinks)}
@@ -74,4 +74,4 @@ class Medium extends React.PureComponent {
   }
 }
 
-export default withStyles(Medium);
+export default withStyles(Articles);

@@ -1,8 +1,8 @@
 import github from '../../../assets/portfolio/github.png';
 import medium from '../../../assets/portfolio/medium.png';
 import npm from '../../../assets/portfolio/npm.png';
+import ArticlesPortfolio from './articles';
 import GitHubPortfolio from './github';
-import MediumPortfolio from './medium';
 import NpmPortfolio from './npm';
 
 export default [
@@ -13,15 +13,15 @@ export default [
     title: 'GitHub Repositories'
   },
   {
-    component: MediumPortfolio,
-    path: 'medium',
-    src: medium,
-    title: 'Medium Publications'
-  },
-  {
     component: NpmPortfolio,
     path: 'npm',
     src: npm,
     title: 'NPM Packages'
-  }
+  },
+  {
+    component: ArticlesPortfolio,
+    path: 'articles',
+    src: medium,
+    title: 'Publications'
+  },
 ];

@@ -1,7 +1,8 @@
 import { List, ListItem, ListItemText, Tooltip, Typography } from '@material-ui/core';
 import React from 'react';
 import createObjectProp from 'react-object-prop';
-import medium from '../../../../assets/medium';
+import { Link } from 'react-router-dom';
+import articles from '../../../../assets/articles';
 import mediumUrl from '../../../../utils/medium-url';
 import withStyles from './publications-styles';
 
@@ -17,41 +18,59 @@ class Publications extends React.PureComponent {
     });
   }
 
-  mapMedium = article =>
-    <ListItem
-      className={this.props.classes.listItem}
-      key={article.id}
-    >
-      <ListItemText classes={this.linkItemTextClasses}>
-        <span className={this.props.classes.link}>
-          <a
-            href={mediumUrl(article.id, article.title)}
-            rel="nofollow noopener noreferrer"
-            target="_blank"
-          >
-            {article.title}
-          </a>{' '}
-          <Typography
-            className={this.props.classes.caption}
-            variant="caption"
-          >
-            ({article.date.getFullYear()}{' '}
-            {months[article.date.getMonth()]}{' '}
-            {article.date.getDate()})
-          </Typography>
-        </span>
-        <Tooltip title={article.description}>
-          <span className={this.props.classes.help}>
-            ?
+  mapArticles = article => {
+    let Component;
+    let href;
+    let rel;
+    let target;
+    let to;
+    if (article.path) {
+      Component = Link;
+      to = article.path;
+    } else {
+      Component = 'a';
+      href = mediumUrl(article.mediumId, article.title);
+      rel = 'nofollow noopener noreferrer';
+      target = '_blank';
+    }
+    return (
+      <ListItem
+        className={this.props.classes.listItem}
+        key={article.path || article.mediumId}
+      >
+        <ListItemText classes={this.linkItemTextClasses}>
+          <span className={this.props.classes.link}>
+            <Component
+              href={href}
+              rel={rel}
+              target={target}
+              to={to}
+            >
+              {article.title}
+            </Component>{' '}
+            <Typography
+              className={this.props.classes.caption}
+              variant="caption"
+            >
+              ({article.date.getFullYear()}{' '}
+              {months[article.date.getMonth()]}{' '}
+              {article.date.getDate()})
+            </Typography>
           </span>
-        </Tooltip>
-      </ListItemText>
-    </ListItem>;
+          <Tooltip title={article.description}>
+            <span className={this.props.classes.help}>
+              ?
+            </span>
+          </Tooltip>
+        </ListItemText>
+      </ListItem>
+    );
+  };
 
   render() {
     return (
       <List className={this.props.classes.list}>
-        {medium.slice(0, 4).map(this.mapMedium)}
+        {articles.slice(0, 4).map(this.mapArticles)}
       </List>
     );
   }
