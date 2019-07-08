@@ -1,7 +1,7 @@
 import { withStyles } from '@material-ui/core';
 
 const DESKTOP_MEDIA_QUERY =  '@media (min-width: 66rem)';
-// const MOBILE_MEDIA_QUERY = '@media (max-width: 66rem)';
+const MOBILE_MEDIA_QUERY = '@media (max-width: 66rem)';
 const MONOSPACE = 'Menlo, Monaco, "Courier New", Courier, monospace';
 const SANS_SERIF = '"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif';
 const SERIF = 'Georgia, Cambria, "Times New Roman", Times, serif';
@@ -29,18 +29,36 @@ export default withStyles({
       borderLeftStyle: 'solid',
       borderLeftWidth: 3,
       paddingBottom: 2,
-      paddingLeft: 20,
 
       [DESKTOP_MEDIA_QUERY]: {
         marginLeft: 'calc(10rem - 23px)',
         marginRight: '10rem',
+        marginTop: 38,
+        paddingLeft: 20,
+      },
+
+      [MOBILE_MEDIA_QUERY]: {
+
+        // This discrepency is probably due to the fact that we are 4px wider
+        //   than Medium.
+        marginLeft: -20 + 4,
+        marginRight: 0,
+        marginTop: 30,
+        paddingLeft: 17,
       },
 
       '& > p': {
         fontStyle: 'italic',
-        marginTop: 29,
         paddingLeft: 0,
         paddingRight: 0,
+
+        [DESKTOP_MEDIA_QUERY]: {
+          fontSize: 21,
+        },
+
+        [MOBILE_MEDIA_QUERY]: {
+          fontSize: 18,
+        },
       },
     },
 
@@ -53,12 +71,15 @@ export default withStyles({
 
     '& h1': {
       fontFamily: SERIF,
+      fontSize: 42,
       fontWeight: 400,
       letterSpacing: 0,
       lineHeight: 1.25,
       margin: 0,
       marginBottom: 16,
-      textAlign: 'center',
+      textAlign: 'left',
+      ...readingWidth,
+
       '& + p': {
         marginTop: 8,
       },
@@ -66,18 +87,35 @@ export default withStyles({
 
     '& h2': {
       fontFamily: SANS_SERIF,
-      fontSize: 34,
       fontWeight: 600,
       letterSpacing: '-0.015em',
       lineHeight: 1.15,
       margin: 0,
       marginTop: 56,
-      ...readingWidth,
-      '& + h3': {
-        marginTop: 31,
+
+      [DESKTOP_MEDIA_QUERY]: {
+        fontSize: 34,
+        ...readingWidth[DESKTOP_MEDIA_QUERY],
       },
+
+      [MOBILE_MEDIA_QUERY]: {
+        fontSize: 30,
+      },
+
+      '& + h3': {
+
+        [DESKTOP_MEDIA_QUERY]: {
+          marginTop: 23,
+        },
+
+        [MOBILE_MEDIA_QUERY]: {
+          marginTop: 31,
+        },
+      },
+
       '& + p': {
         marginTop: 8,
+
         '& > img': {
           marginTop: 44 - 8,
         },
@@ -91,8 +129,16 @@ export default withStyles({
       letterSpacing: '-0.012em',
       lineHeight: 1.22,
       margin: 0,
-      marginTop: 30,
-      ...readingWidth,
+
+      [DESKTOP_MEDIA_QUERY]: {
+        marginTop: 39,
+        ...readingWidth[DESKTOP_MEDIA_QUERY],
+      },
+
+      [MOBILE_MEDIA_QUERY]: {
+        marginTop: 31,
+      },
+
       '& + p': {
         marginTop: 6,
       },
@@ -118,28 +164,85 @@ export default withStyles({
 
     '& p': {
       fontFamily: SERIF,
-      fontSize: 21,
       fontWeight: 400,
-      letterSpacing: '-0.003em',
       lineHeight: 1.58,
       marginBottom: 0,
-      marginTop: 38,
-      ...readingWidth,
+
+      [DESKTOP_MEDIA_QUERY]: {
+        fontSize: 21,
+        letterSpacing: '-0.003em',
+        marginTop: 38,
+        ...readingWidth[DESKTOP_MEDIA_QUERY],
+      },
+
+      [MOBILE_MEDIA_QUERY]: {
+        fontSize: 18,
+        letterSpacing: '-0.004em',
+        marginTop: 30,
+      },
+
+      '& + blockquote': {
+
+        [DESKTOP_MEDIA_QUERY]: {
+          marginTop: 29,
+        },
+
+        [MOBILE_MEDIA_QUERY]: {
+          marginTop: 21,
+        },
+      },
+
+      '& + h2': {
+
+        [DESKTOP_MEDIA_QUERY]: {
+          marginTop: 56,
+        },
+
+        [MOBILE_MEDIA_QUERY]: {
+          marginTop: 28,
+        },
+      },
     },
 
     '& ul': {
-      marginTop: 29,
       paddingLeft: 0,
-      ...readingWidth,
+
+      [DESKTOP_MEDIA_QUERY]: {
+        marginTop: 29,
+        ...readingWidth[DESKTOP_MEDIA_QUERY],
+      },
+
+      [MOBILE_MEDIA_QUERY]: {
+        marginTop: 21,
+      },
 
       '& > li': {
         fontFamily: SERIF,
-        fontSize: 21,
-        letterSpacing: '-0.003em',
         lineHeight: 1.58,
         marginBottom: 14,
         marginLeft: 24,
         paddingLeft: 6,
+
+        [DESKTOP_MEDIA_QUERY]: {
+          fontSize: 21,
+          letterSpacing: '-0.003em',
+        },
+
+        [MOBILE_MEDIA_QUERY]: {
+          fontSize: 18,
+          letterSpacing: '-0.004em',
+        },
+      },
+
+      '& > p': {
+
+        [DESKTOP_MEDIA_QUERY]: {
+          marginTop: 29,
+        },
+
+        [MOBILE_MEDIA_QUERY]: {
+          marginTop: 21,
+        },
       },
     },
   },

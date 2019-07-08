@@ -28,10 +28,12 @@ export default withStyles(
         className={classes.root}
         ref={handleRef}
       >
-        <Markdown images={images}>
-          {children}
-        </Markdown>
-        <Markdown>{conclusion}</Markdown>
+        <article>
+          <Markdown images={images}>
+            {children}
+          </Markdown>
+          <Markdown>{conclusion}</Markdown>
+        </article>
       </Paper>
     );
   }
