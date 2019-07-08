@@ -1,8 +1,17 @@
 import { withStyles } from '@material-ui/core';
 
+const DESKTOP_MEDIA_QUERY =  '@media (min-width: 66rem)';
+// const MOBILE_MEDIA_QUERY = '@media (max-width: 66rem)';
 const MONOSPACE = 'Menlo, Monaco, "Courier New", Courier, monospace';
 const SANS_SERIF = '"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif';
 const SERIF = 'Georgia, Cambria, "Times New Roman", Times, serif';
+
+const readingWidth = {
+  [DESKTOP_MEDIA_QUERY]: {
+    paddingLeft: '10rem',
+    paddingRight: '10rem',
+  },
+};
 
 export default withStyles({
   root: {
@@ -19,10 +28,13 @@ export default withStyles({
       borderLeftColor: 'rgba(255, 255, 255, 0.84)',
       borderLeftStyle: 'solid',
       borderLeftWidth: 3,
-      marginLeft: 'calc(10rem - 23px)',
-      marginRight: '10rem',
       paddingBottom: 2,
       paddingLeft: 20,
+
+      [DESKTOP_MEDIA_QUERY]: {
+        marginLeft: 'calc(10rem - 23px)',
+        marginRight: '10rem',
+      },
 
       '& > p': {
         fontStyle: 'italic',
@@ -60,7 +72,7 @@ export default withStyles({
       lineHeight: 1.15,
       margin: 0,
       marginTop: 56,
-      padding: '0 10rem',
+      ...readingWidth,
       '& + h3': {
         marginTop: 31,
       },
@@ -80,7 +92,7 @@ export default withStyles({
       lineHeight: 1.22,
       margin: 0,
       marginTop: 30,
-      padding: '0 10rem',
+      ...readingWidth,
       '& + p': {
         marginTop: 6,
       },
@@ -89,19 +101,19 @@ export default withStyles({
     '& h4': {
       fontFamily: SANS_SERIF,
       margin: 0,
-      padding: '0 10rem',
+      ...readingWidth,
     },
 
     '& h5': {
       fontFamily: SANS_SERIF,
       margin: 0,
-      padding: '0 10rem',
+      ...readingWidth,
     },
 
     '& h6': {
       fontFamily: SANS_SERIF,
       margin: 0,
-      padding: '0 10rem',
+      ...readingWidth,
     },
 
     '& p': {
@@ -112,12 +124,13 @@ export default withStyles({
       lineHeight: 1.58,
       marginBottom: 0,
       marginTop: 38,
-      padding: '0 10rem',
+      ...readingWidth,
     },
 
     '& ul': {
       marginTop: 29,
-      padding: '0 10rem',
+      paddingLeft: 0,
+      ...readingWidth,
 
       '& > li': {
         fontFamily: SERIF,
