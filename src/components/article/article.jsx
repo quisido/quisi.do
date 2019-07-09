@@ -2,6 +2,7 @@ import { Paper } from '@material-ui/core';
 import React from 'react';
 import Markdown from '../markdown';
 import withStyles from './article-styles';
+// import Fallback from '../route-suspense-fallback';
 
 const conclusion = `
 ## Conclusion 🔚
@@ -23,6 +24,7 @@ const handleRef = ref => {
 
 export default withStyles(
   function Article({ children, classes, images }) {
+    // return <Fallback />;
     return (
       <Paper
         className={classes.root}
