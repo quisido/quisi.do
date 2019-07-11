@@ -6,10 +6,27 @@ const MONOSPACE = 'Menlo, Monaco, "Courier New", Courier, monospace';
 const SANS_SERIF = '"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif';
 const SERIF = 'Georgia, Cambria, "Times New Roman", Times, serif';
 
-const readingWidth = {
-  [DESKTOP_MEDIA_QUERY]: {
-    paddingLeft: '10rem',
-    paddingRight: '10rem',
+const HEADING = {
+  position: 'relative',
+
+  '&:hover > a': {
+    opacity: 0.5,
+  },
+
+  '& > a': {
+    alignItems: 'center',
+    display: 'inline-flex',
+    height: '100%',
+    left: -32,
+    opacity: 0,
+    paddingRight: 16,
+    position: 'absolute',
+    textDecoration: 'none',
+    top: 0,
+
+    '& > span': {
+      fontSize: 16,
+    },
   },
 };
 
@@ -19,6 +36,11 @@ export default withStyles({
     margin: '2em auto',
     padding: '2em 1em',
     textRendering: 'optimizeLegibility',
+
+    [DESKTOP_MEDIA_QUERY]: {
+      paddingLeft: '11rem',
+      paddingRight: '11rem',
+    },
 
     '& a': {
       textDecoration: 'underline',
@@ -78,7 +100,7 @@ export default withStyles({
       margin: 0,
       marginBottom: 16,
       textAlign: 'left',
-      ...readingWidth,
+      ...HEADING,
 
       '& + p': {
         marginTop: 8,
@@ -92,10 +114,10 @@ export default withStyles({
       lineHeight: 1.15,
       margin: 0,
       marginTop: 56,
+      ...HEADING,
 
       [DESKTOP_MEDIA_QUERY]: {
         fontSize: 34,
-        ...readingWidth[DESKTOP_MEDIA_QUERY],
       },
 
       [MOBILE_MEDIA_QUERY]: {
@@ -129,10 +151,10 @@ export default withStyles({
       letterSpacing: '-0.012em',
       lineHeight: 1.22,
       margin: 0,
+      ...HEADING,
 
       [DESKTOP_MEDIA_QUERY]: {
         marginTop: 39,
-        ...readingWidth[DESKTOP_MEDIA_QUERY],
       },
 
       [MOBILE_MEDIA_QUERY]: {
@@ -147,19 +169,19 @@ export default withStyles({
     '& h4': {
       fontFamily: SANS_SERIF,
       margin: 0,
-      ...readingWidth,
+      ...HEADING,
     },
 
     '& h5': {
       fontFamily: SANS_SERIF,
       margin: 0,
-      ...readingWidth,
+      ...HEADING,
     },
 
     '& h6': {
       fontFamily: SANS_SERIF,
       margin: 0,
-      ...readingWidth,
+      ...HEADING,
     },
 
     '& p': {
@@ -172,7 +194,6 @@ export default withStyles({
         fontSize: 21,
         letterSpacing: '-0.003em',
         marginTop: 38,
-        ...readingWidth[DESKTOP_MEDIA_QUERY],
       },
 
       [MOBILE_MEDIA_QUERY]: {
@@ -209,7 +230,6 @@ export default withStyles({
 
       [DESKTOP_MEDIA_QUERY]: {
         marginTop: 29,
-        ...readingWidth[DESKTOP_MEDIA_QUERY],
       },
 
       [MOBILE_MEDIA_QUERY]: {
