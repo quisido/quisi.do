@@ -403,7 +403,7 @@ the [S.T.A.R. format](https://en.wikipedia.org/wiki/Situation,_task,_action,_res
 When your interviewer asks you to describe an event, try your best to answer
 with S.T.A.R. This ensures you provide the information for which your
 interviewer is probing and that there is no miscommunication between the two of
-you. If your misinterpreted the question, it should become clear by the
+you. If you misinterpreted the question, it should become clear by the
 situation or task that you are answering the wrong question. If you are
 answering the right question, the interviewer may be looking for relevant
 experience (situation), problem identification or communication skills (task),
