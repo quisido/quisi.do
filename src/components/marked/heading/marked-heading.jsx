@@ -4,7 +4,7 @@ export default function MarkedHeading({ children, depth }) {
   const Component = `h${depth}`;
   const id = children.toLowerCase()
     .replace(/[^a-z]+/g, '-')
-    .replace(/(?:^\-|\-$)/g, '');
+    .replace(/(?:^-|-$)/g, '');
   return (
     <Component id={id}>
       <a
