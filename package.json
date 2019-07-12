@@ -22,7 +22,7 @@
     "@gamingmedley/konami.js": "^1.0.2",
     "@material-ui/core": "^4.0.1",
     "event-emitter": "^0.3.5",
-    "marked": "^0.6.3",
+    "marked": "^0.7.0",
     "pluralsight-score": "^1.0.0",
     "raw-loader": "^3.0.0",
     "react": "^16.8.3",
