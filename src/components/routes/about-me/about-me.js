@@ -136,7 +136,7 @@ class AboutMe extends React.PureComponent {
           />
           <SeeNoEvil
             description="IE6-compatible HTML and CSS animations."
-            href="https://gamingmedley.github.io/rpg-overworld-engine/"
+            href="https://charlesstover.github.io/rpg-overworld-engine/"
             images={rpgOverworldEngine}
             rel="nofollow noopener noreferrer"
             target="_blank"

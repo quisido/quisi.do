@@ -16,7 +16,6 @@ export class GitHub extends React.PureComponent {
         <List className={this.props.classes.list}>
           <Link
             repo="3ds-tetris"
-            org="GamingMedley"
             title="3DS Tetris"
             description="Play Tetris in your browser or on your Nintendo 3DS!"
             icon="⬜"
@@ -42,7 +41,6 @@ export class GitHub extends React.PureComponent {
           />
           <Link
             repo="dota2huds.com"
-            org="GamingMedley"
             title="Dota 2 HUDs"
             description="View a full resolution live render of any Dota 2 HUD in your browser."
             icon="👾"
@@ -117,7 +115,6 @@ export class GitHub extends React.PureComponent {
           />
           <Link
             repo="platformer-engine"
-            org="GamingMedley"
             title="Platformer Engine"
             description="A 2D platformer engine implemented in the web browser."
             icon="🎮"
@@ -148,7 +145,6 @@ export class GitHub extends React.PureComponent {
           />
           <Link
             repo="rpg-overworld-engine"
-            org="GamingMedley"
             title="RPG Overworld Engine"
             description="A tech demo for a browser-based, Pokemon-esque RPG overworld engine that even supports Internet Explorer 6."
             icon="🚶"
@@ -161,7 +157,6 @@ export class GitHub extends React.PureComponent {
           />*/}
           <Link
             repo="sonic-the-hedgehog-tribute"
-            org="GamingMedley"
             title="Sonic the Hedgehog Tribute"
             description="An artistic tribute to the Sonic the Hedgehog franchise."
             icon="🐹"
@@ -174,14 +169,12 @@ export class GitHub extends React.PureComponent {
           />
           <Link
             repo="super-mario-world-js"
-            org="GamingMedley"
             title="Super Mario World JS"
             description="Super Mario World engine in JavaScript"
             icon="🌼"
           />
           <Link
             repo="super-mario-world-py"
-            org="GamingMedley"
             title="Super Mario World PY"
             description="Super Mario World engine in Python"
             icon="🍄"
@@ -194,7 +187,6 @@ export class GitHub extends React.PureComponent {
           />
           <Link
             repo="tf2-bingo"
-            org="GamingMedley"
             title="Team Fortress 2 Bingo"
             description="Mark your TF2 Bingo card as stereotypical situations unfold throughout your game!"
             icon="🎯"
