@@ -6,7 +6,7 @@ import logan from './quotes/logan-mclain.jpg';
 import malakai from './quotes/malakai-whitston.jpg';
 import sriram from './quotes/sriram-rudraraju.jpg';
 import walter from './quotes/walter-sorto.jpg';
-import quotesPackages from './quotes-packages';
+// import quotesPackages from './quotes-packages';
 
 export default [
   // LinkedIn recommendations
