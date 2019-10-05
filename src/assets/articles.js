@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'Manage your customers’ clipboards with React Hooks.',
+    date: new Date('05 October 2019 UTC'),
+    description: 'Clipboard interactions are one of the oldest attempts to hijack a user’s system for their own good, and it is time that these APIs integrate with React.',
+    icon: '📋',
+    mediumId: '18486220d0d1',
+  },
+  {
     title: 'Become the junior developer that companies want to hire.',
     date: new Date('17 Jun 2019 UTC'),
     description: 'Since entering an enterprise setting, I have been involved with as much interview training, sat on as many interview panels, and gathered as much employee feedback as possible. I have applied what I have learned to everyone I have come across who seeks it. This is my attempt to publicly document and share this knowledge, in hopes that talented and self-motivated developers receive the fair shot at success they deserve.',
