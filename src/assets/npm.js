@@ -23,7 +23,8 @@ export default [
   [ '🎇', 'sparkline-svg', 'Generate a Sparkline as an SVG, in HTML or as a data URI.' ],
   [ '📎', 'use-clippy', 'A React hook for reading from and writing to the user\'s clipboard.' ],
   [ '📏', 'use-dimensions', 'A React hook for the React Native Dimensions API.' ],
-  [ '🆕', 'use-force-update', 'A React Hook allowing the forced update of a functional component.' ],
-  [ '🗺️', 'use-react-router', 'A React Hook incorporating react-router\'s context and rerendering on history state change.' ],
+  [ '🐌', 'use-async-function', 'A React hook that couples your asynchronous function state to your component.' ],
+  [ '🆕', 'use-force-update', 'A React hook allowing the forced update of a functional component.' ],
+  [ '🗺️', 'use-react-router', 'A React hook incorporating react-router\'s context and rerendering on history state change.' ],
   [ '🔔', 'with-router', 'A pub-sub implementation of the react-router withRouter HOC.' ],
 ];
