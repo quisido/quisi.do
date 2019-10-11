@@ -1,13 +1,13 @@
 import { List, Paper, Typography } from '@material-ui/core';
 import React from 'react';
-import npm from '../../../../assets/npm';
+import npm from '../../../../assets/npm.json';
 import Link from './link';
 import npmDownloads from './npm-downloads';
 import withStyles from './npm-styles';
 import sortPackagesByDownloads from './utils/sort-packages-by-downloads';
 
 // Deep clone the NPM packages.
-const npmPackages = npm.map(pkg => [...pkg]);
+const npmPackages = npm.packages.map(pkg => [...pkg]);
 
 class Npm extends React.PureComponent {
 
