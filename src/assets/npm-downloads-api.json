@@ -1,0 +1,35 @@
+{
+  "packages": [
+    [ "@charlesstover/hsl2rgb" ],
+    [ "@charlesstover/quicksort" ],
+    [ "@gamingmedley/konami.js" ],
+    [ "configure-webpack" ],
+    [ "deep-proxy-polyfill" ],
+    [ "delimiter" ],
+    [ "fetch-action-creator", "async-action", "thunk-action-creator" ],
+    [ "fetch-suspense" ],
+    [ "mssql-query-builder" ],
+    [ "pluralsight-score" ],
+    [ "rainbow-gradient" ],
+    [ "react-innertext", "jsx-inner-text" ],
+    [ "react-mui-tooltip" ],
+    [ "react-multi-context" ],
+    [ "react-object-prop" ],
+    [ "react-portfolio" ],
+    [ "react-quotes-carousel", "react-quotes" ],
+    [ "react-rainbow-text" ],
+    [ "react-sparkline-svg" ],
+    [ "reactn" ],
+    [ "reactn-devtools" ],
+    [ "rn-webview" ],
+    [ "sparkline-svg" ],
+    [ "use-async-function" ],
+    [ "use-aws-sdk" ],
+    [ "use-clippy" ],
+    [ "use-dimensions" ],
+    [ "use-force-update" ],
+    [ "use-react-router" ],
+    [ "with-router" ]
+  ]
+}
+
