@@ -3,8 +3,10 @@ import React from 'react';
 import articles from '../../../../assets/articles';
 import ArticleLink from './article-link';
 import withStyles from './articles-styles';
+import devStats from './dev-stats';
 import mediumStats from './medium-stats';
-import fixStats from './utils/fix-stats';
+import fixDevStats from './utils/fix-dev-stats';
+import fixMediumStats from './utils/fix-medium-stats';
 import sortArticlesByViews from './utils/sort-articles-by-views';
 
 const EMPTY_STATS = Object.create(null);
@@ -19,12 +21,27 @@ class Articles extends React.PureComponent {
   };
 
   componentDidMount() {
-    mediumStats.fetch()
-      .then(stats => {
+    devStats.fetch()
+      .then(devStats => {
+        this.setState(({ stats }) => ({
+          stats: fixDevStats(stats, devStats),
+        }));
+      })
+      .catch(err => {
         if (this.mounted) {
           this.setState({
-            stats: fixStats(stats),
+            error:
+              'An error occurred while determining the stats of the ' +
+              `DEV articles: ${err.message}`,
           });
+        }
+      });
+    mediumStats.fetch()
+      .then(mediumStats => {
+        if (this.mounted) {
+          this.setState(({ stats }) => ({
+            stats: fixMediumStats(stats, mediumStats),
+          }));
         }
       })
       .catch(err => {
@@ -32,7 +49,7 @@ class Articles extends React.PureComponent {
           this.setState({
             error:
               'An error occurred while determining the stats of the' +
-              `articles: ${err.message}`,
+              `Medium articles: ${err.message}`,
           });
         }
       });

@@ -8,15 +8,26 @@ const numberFormat = n =>
 export default withStyles(
   function ArticleLinkSecondary({
     children,
-    claps,
+    claps = 0,
     classes,
-    readingTime,
-    reads,
-    views
+    comments_count = 0,
+    positive_reactions_count = 0,
+    readingTime = 0,
+    reads = 0,
+    views = 0,
   }) {
-    if (typeof views === 'undefined') {
+    if (
+      claps === 0 &&
+      comments_count === 0 &&
+      positive_reactions_count === 0 &&
+      reads === 0 &&
+      views === 0
+    ) {
       return children;
     }
+
+    const likes = claps + comments_count + positive_reactions_count;
+
     return (
       <>
         {children}
@@ -38,9 +49,9 @@ export default withStyles(
           </span>
           <span>
             <span aria-label="Reader Applause" role="img">
-              👏
+              👍
             </span>{' '}
-            {numberFormat(claps)} Claps
+            {numberFormat(likes)} Likes
           </span>
           <span>
             <span aria-label="Reading Time" role="img">
