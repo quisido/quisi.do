@@ -1,7 +1,14 @@
 export default [
   {
+    title: 'A React hook for asynchronous state.',
+    date: new Date('02 Nov 2019 UTC'),
+    description: 'Modern day user interfaces are expected to handle asynchronous state changes. Be it server communication, offloaded computations, or permission-based browser APIs, developers need to convey to their customers what is happening, has happened, is going to happen, and what went wrong.',
+    icon: '⚙',
+    mediumId: '4dc24379be61',
+  },
+  {
     title: 'Manage your customers’ clipboards with React Hooks.',
-    date: new Date('05 October 2019 UTC'),
+    date: new Date('05 Oct 2019 UTC'),
     description: 'Clipboard interactions are one of the oldest attempts to hijack a user’s system for their own good, and it is time that these APIs integrate with React.',
     icon: '📋',
     mediumId: '18486220d0d1',
