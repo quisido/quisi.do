@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'Four tips to gain visibility as an introvert',
+    date: new Date('21 Nov 2019 UTC'),
+    description: 'Sometimes it’s difficult to voice your opinion at work, but it is important. These tips should help you ease into the integration with your team.',
+    icon: '🤐',
+    mediumId: 'cfaf26ca4ac2',
+  },
+  {
     title: 'A React hook for asynchronous state.',
     date: new Date('02 Nov 2019 UTC'),
     description: 'Modern day user interfaces are expected to handle asynchronous state changes. Be it server communication, offloaded computations, or permission-based browser APIs, developers need to convey to their customers what is happening, has happened, is going to happen, and what went wrong.',
