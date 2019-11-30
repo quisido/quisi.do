@@ -4,50 +4,57 @@ import React from 'react';
 import Assessment from './assessment/assessment';
 import withStyles from './expert-styles';
 
-const PLURALSIGHT =
+const PLURALSIGHT = (
   <a
     href="https://app.pluralsight.com/profile/CharlesStover"
     rel="nofollow noopener noreferrer"
     target="_blank"
   >
     Pluralsight
-  </a>;
+  </a>
+);
 
 const assessments = [
   // [ 'JS 1.8', 100, 'SHL® Online' ],
-  [ 'JavaScript', 100, 'SHL® Online' ],
-  [ 'CSS', 99, PLURALSIGHT ],
+  ['JavaScript', 100, 'SHL® Online'],
+  ['CSS', 99, PLURALSIGHT],
   // [ 'JS', 97, PLURALSIGHT ],
-  [ 'HTML5', 96, PLURALSIGHT ],
+  ['HTML5', 96, PLURALSIGHT],
+  ['TypeScript', 96, PLURALSIGHT],
+  ['ES6', 95, PLURALSIGHT],
   // [ 'Java 8', 94, 'SHL® Online' ],
   // [ 'jQuery', 94, PLURALSIGHT ],
-  [ 'Node.js', 89, PLURALSIGHT ],
-  [ 'React', 87, PLURALSIGHT ],
-  [ 'Docker', 72, PLURALSIGHT ]
+  ['Git', 93, PLURALSIGHT],
+  ['Node.js', 89, PLURALSIGHT],
+  ['NPM', 89, PLURALSIGHT],
+  ['React', 87, PLURALSIGHT],
+  ['Redux', 86, PLURALSIGHT],
+  ['Express', 82, PLURALSIGHT],
+  ['Docker', 72, PLURALSIGHT],
 ];
 
 class Expert extends React.PureComponent {
-
   assessmentClickHandlers = {};
   scoreRef = null;
 
   state = {
     percentile: 0,
     source: null,
-    title: null
+    title: null,
   };
 
   handleAssessmentClick = (title, percentile, source) => {
-    if (!Object.prototype.hasOwnProperty.call(this.assessmentClickHandlers, title)) {
+    if (
+      !Object.prototype.hasOwnProperty.call(this.assessmentClickHandlers, title)
+    ) {
       this.assessmentClickHandlers[title] = () => {
         if (this.state.title === title) {
           this.setState({
             percentile: 0,
             source: null,
-            title: null
+            title: null,
           });
-        }
-        else {
+        } else {
           this.setState({ percentile, source, title });
           if (this.scoreRef) {
             this.scoreRef.scrollIntoViewIfNeeded();
@@ -63,10 +70,7 @@ class Expert extends React.PureComponent {
   };
 
   isOff(title) {
-    return (
-      this.state.title !== null &&
-      this.state.title !== title
-    );
+    return this.state.title !== null && this.state.title !== title;
   }
 
   get source() {
@@ -74,12 +78,8 @@ class Expert extends React.PureComponent {
       return null;
     }
     return (
-      <Typography
-        className={this.props.classes.source}
-        variant="caption"
-      >
-        Source:{' '}
-        {this.state.source}
+      <Typography className={this.props.classes.source} variant="caption">
+        Source: {this.state.source}
       </Typography>
     );
   }
@@ -87,7 +87,7 @@ class Expert extends React.PureComponent {
   render() {
     return (
       <div className={this.props.classes.root}>
-        {assessments.map(([ title, percentile, source ], index) =>
+        {assessments.map(([title, percentile, source], index) => (
           <Assessment
             index={index}
             key={title}
@@ -96,7 +96,7 @@ class Expert extends React.PureComponent {
             selected={this.state.title === title}
             title={title}
           />
-        )}
+        ))}
         <PluralsightScore
           hidden={this.state.title === null}
           onRef={this.handleScoreRef}

@@ -4,7 +4,7 @@ import ReactPortfolio from 'react-portfolio';
 import withStyles from './app-styles';
 import ROUTES from '../../utils/routes';
 
-const RESUME_VERSION = '2019-05';
+const RESUME_VERSION = '2019-11';
 
 const SOCIAL = {
   email: 'charlesstover@charlesstover.com',
@@ -15,7 +15,7 @@ const SOCIAL = {
   reddit: 'Charles_Stover',
   skype: 'charles-stover',
   stackoverflow: '4856301/charles-stover',
-  twitter: 'CharlesStover'
+  twitter: 'CharlesStover',
 };
 
 const THEME = {
@@ -36,7 +36,6 @@ const THEME = {
 const UPDATE_HUE_DELAY = 250;
 
 class App extends React.PureComponent {
-
   state = {
     hue: 0.5,
   };
@@ -56,9 +55,11 @@ class App extends React.PureComponent {
 
   handleKonami = () => {
     if (this.updateHueInterval === null) {
-      this.updateHueInterval = window.setInterval(this.updateHue, UPDATE_HUE_DELAY);
-    }
-    else {
+      this.updateHueInterval = window.setInterval(
+        this.updateHue,
+        UPDATE_HUE_DELAY,
+      );
+    } else {
       window.clearInterval(this.updateHueInterval);
       this.updateHueInterval = null;
     }

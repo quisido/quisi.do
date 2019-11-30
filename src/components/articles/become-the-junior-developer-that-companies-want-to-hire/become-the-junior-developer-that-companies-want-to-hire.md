@@ -67,7 +67,7 @@ self-driven.
 McDowell is another powerful education supplement that I highly recommend. It
 covers many of the soft skills required by companies and ensures you know the
 hard skills. You will see it recommended time and time again online, and it is
-easily worth the $30 investment.
+easily worth the \$30 investment.
 
 I encourage anyone to at least read the data structures and algorithms
 discussed in that book. If you can already solve the problems, implement the
@@ -109,13 +109,13 @@ implementation is not doing you any favors on your hard drive. Your
 intro-to-programming video game may be embarrassingly inefficient, but you are
 selling it short. These beginner’s projects show:
 
-* You wanted to make something and have an interest in programming outside of
+- You wanted to make something and have an interest in programming outside of
   work.
-* You learned to make something and are both willing and capable of learning
+- You learned to make something and are both willing and capable of learning
   new technologies as needed.
-* You completed a project without giving up. You can see challenges through to
+- You completed a project without giving up. You can see challenges through to
   the end by overcoming obstacles instead of quitting.
-* You _did something_. If you do not publish your code, employers will assume
+- You _did something_. If you do not publish your code, employers will assume
   that you _never wrote it_. It is so much better to write something
   inefficient than to write nothing at all.
 
@@ -134,11 +134,11 @@ understanding of technologies improve my quality of work.
 
 For each project, I recommend adding the following to its `README.md`:
 
-* An actual name. `repository-name` is nice and automated, but try to give it a
+- An actual name. `repository-name` is nice and automated, but try to give it a
   description that differentiates you from other candidates. Every candidate
   has a “TODO App” and “Shopping List.” Why is yours better? Try “React TODO
   App” or “MongoDB Shopping List.”
-* An actual description. “TODO App” can mean a lot of things. It is obvious to
+- An actual description. “TODO App” can mean a lot of things. It is obvious to
   you, because you made it. What
   [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
   does it support? Does it use server-side code? Who is the target audience?
@@ -148,13 +148,13 @@ For each project, I recommend adding the following to its `README.md`:
   care aides. To support his declining memory, the application keeps track of
   past items so that they may be re-added with ease.” I have put the customer
   first, identified a problem, and executed on a solution.
-* The tech stack used. HTML, JavaScript, React, PHP, SQL, Docker? Let people
+- The tech stack used. HTML, JavaScript, React, PHP, SQL, Docker? Let people
   know what you have experience using. Even if your project is not the cleanest
   code or optimal implementation, you have demonstrated that you understand
   these technologies at least in concept. You know what problems they solve,
   and that’s the largest hurdle. Perfecting their use can be learned on the
   job.
-* Nobody, and I mean nobody, is going to clone your repository, install it,
+- Nobody, and I mean nobody, is going to clone your repository, install it,
   then run it locally just to see your work. Companies are often flooded with
   candidates (whether or not they are good candidates). They will just move on
   to the next candidate instead. At this point in time, to the company, you are
@@ -164,7 +164,7 @@ For each project, I recommend adding the following to its `README.md`:
   [GitHub Pages](https://pages.github.com/). If your project is not front end,
   consider adding screenshots of any GUI, linking to a live demonstration of
   any API, or documenting example inputs and outputs.
-* Document your API, if there is one. This is good experience and practice for
+- Document your API, if there is one. This is good experience and practice for
   when you are creating highly used, production-facing APIs in an enterprise
   setting. Companies want good documentation, even for APIs that are only used
   internally. Every time an internal customer references the documentation,
@@ -267,7 +267,7 @@ what tech stacks with which you are familiar.
 Keep your résumé to one page. If you think you need more than that because you
 have accomplished so much, _you are wrong_. For reference, my 17 years of
 experience is still
-[a one page résumé](https://charlesstover.com/resume/2019-05/charles-stover-resume.pdf).
+[a one page résumé](https://charlesstover.com/resume/2019-11/charles-stover-resume.pdf).
 It is more likely that you are including information that should not be in a
 résumé. Remember that a résumé gets you to the interview. The fine details come
 up in the interview itself.
@@ -425,11 +425,11 @@ Unfortunately, when asked to “name a time you had a disagreement with a
 superior,” you might not have an example at the ready. Your mind can go blank
 as you try to process this question.
 
->What if I’ve never had a disagreement? If I say I have not, do I sound
-inexperienced or like I’m lying? And if I have, will it sound like I am
-difficult to work with or oppositional? What counts as a disagreement? Who
-counts as a superior? I have little to no work history! How am I supposed to
-have disagreed with a superior?
+> What if I’ve never had a disagreement? If I say I have not, do I sound
+> inexperienced or like I’m lying? And if I have, will it sound like I am
+> difficult to work with or oppositional? What counts as a disagreement? Who
+> counts as a superior? I have little to no work history! How am I supposed to
+> have disagreed with a superior?
 
 Do be aware that behavioral questions do not typically mean _on the job_. In
 the previous question, a superior may be a professor or a mentor. A
@@ -446,8 +446,8 @@ skill that is both important and not on this list. For each leadership
 principle, I recommend associating it with one of your impressive projects. Add
 new projects or situations as needed.
 
-* Project A — I _learned_ something new.
-* Project B — I _invented_ a tool to aid the development process.
+- Project A — I _learned_ something new.
+- Project B — I _invented_ a tool to aid the development process.
 
 You may absolutely assign multiple principles to a single project, but I
 strongly recommend that you have a project or situation for each principle. If
@@ -490,7 +490,7 @@ that indicates that you will do the same on the job.
 
 For example, some data I collected prior to my last interview:
 
-* I reduced network traffic by 30% (gzipped) to 60% (non-gzipped) by
+- I reduced network traffic by 30% (gzipped) to 60% (non-gzipped) by
   implementing an opt-in (backwards compatible) compression algorithm on the
   API. This was not a complicated algorithm. I never had formal training in
   compression or data. I simply noticed that network traffic was being wasted
@@ -498,7 +498,7 @@ For example, some data I collected prior to my last interview:
   that
   [I was not the only one to seek this data conversion](https://stackoverflow.com/questions/37988451/convert-array-of-objects-to-an-object-of-arrays).
   I measured the packet sizes with and without this change, and viola — data.
-* I simplified an existing internal testing framework for a project. This
+- I simplified an existing internal testing framework for a project. This
   resulted in the development time for end-to-end testing decreasing from three
   days per path to just 1. This wasn’t rocket science. I was annoyed by how
   difficult the existing framework was to use, so I turned common commands into
