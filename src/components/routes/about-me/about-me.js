@@ -147,7 +147,7 @@ class AboutMe extends React.PureComponent {
             description="Dynamic image manipulation."
             images={spritesheet2gif}
             title="Sprite Sheet to GIF Converter"
-            to="/spritesheet2gif"
+            to="/spritesheet2gif/"
           />
           <div className={this.props.classes.projectsViewMore}>
             <Link
