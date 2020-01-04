@@ -1,5 +1,41 @@
 export default [
   {
+    title: 'The difference between create-react-app, server-side rendering, and Gatsby',
+    date: new Date('2 Jan 2020 UTC'),
+    description: 'It may not be obvious which rendering method you want to choose for your application. This article will teach you what the differences are so that you can make an informed decision when creating your next React application.',
+    icon: '📺',
+    mediumId: 'da78c177a14e',
+  },
+  {
+    title: 'Behavior-driven React development with Cucumber',
+    date: new Date('26 Dec 2019 UTC'),
+    description: 'A walkthrough for setting up Cucumber testing in your React project.',
+    icon: '🥒',
+    mediumId: 'faf596d9d71b',
+  },
+  },
+  {
+    title: 'Fixing certbot’s “parsefail” error during certificate renewal',
+    date: new Date('26 Dec 2019 UTC'),
+    description: 'A walkthrough for resolving certbot’s parsefail error when reading renewal configurations.',
+    icon: '🔐',
+    mediumId: '1e7718f8a492',
+  },
+  {
+    title: 'Update: Optimal file structure for React applications 1.1',
+    date: new Date('20 Dec 2019 UTC'),
+    description: 'This article will discuss the changes to the optimal file structure for React applications discovered over the nine months since its original publication.',
+    icon: '2️⃣',
+    mediumId: 'd24c50b94429',
+  },
+  {
+    title: 'Render sparklines as SVGs in React.',
+    date: new Date('8 Dec 2019 UTC'),
+    description: 'With just a few, customizable props, you can have beautiful SVG sparklines ready for your React application.',
+    icon: '📈',
+    mediumId: 'a09a3773f5cc',
+  },
+  {
     title: 'Four tips to gain visibility as an introvert',
     date: new Date('21 Nov 2019 UTC'),
     description: 'Sometimes it’s difficult to voice your opinion at work, but it is important. These tips should help you ease into the integration with your team.',
