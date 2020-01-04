@@ -13,7 +13,6 @@ export default [
     icon: '🥒',
     mediumId: 'faf596d9d71b',
   },
-  },
   {
     title: 'Fixing certbot’s “parsefail” error during certificate renewal',
     date: new Date('26 Dec 2019 UTC'),
