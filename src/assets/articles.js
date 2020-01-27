@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'Writing testable React components with hooks',
+    date: new Date('27 Jan 2020 UTC'),
+    description: 'With React hooks being such a new introduction to the library, not too many teams have established testable code design patterns. Extending my previous article on Optimal file structure for React applications, I am aiming to give this topic the focus and attention it deserves.',
+    icon: '🎣',
+    mediumId: '23441ee582d5',
+  },
+  {
     title: 'The difference between create-react-app, server-side rendering, and Gatsby',
     date: new Date('2 Jan 2020 UTC'),
     description: 'It may not be obvious which rendering method you want to choose for your application. This article will teach you what the differences are so that you can make an informed decision when creating your next React application.',
@@ -125,7 +132,7 @@ export default [
     title: 'How to convert withRouter to a React Hook',
     date: new Date('30 Oct 2018 UTC'),
     description: 'Converting react-router\'s withRouter HOC to a React 16.7 Hook as a tutorial for implementing hooks with pub-sub functionality.',
-    icon: '🎣',
+    icon: '🚦',
     mediumId: '19bb02a29ed6',
   },
   {
