@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'Conducting a front end interview 101',
+    date: new Date('16 Feb 2020 UTC'),
+    description: 'A guide to the foundations of good interviewing.',
+    icon: '💼',
+    mediumId: 'c66f91447be',
+  },
+  {
     title: 'Writing testable React components with hooks',
     date: new Date('27 Jan 2020 UTC'),
     description: 'With React hooks being such a new introduction to the library, not too many teams have established testable code design patterns. Extending my previous article on Optimal file structure for React applications, I am aiming to give this topic the focus and attention it deserves.',
