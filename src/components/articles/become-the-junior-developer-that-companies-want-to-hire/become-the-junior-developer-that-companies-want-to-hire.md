@@ -232,8 +232,8 @@ should include links to LinkedIn. Recruiters who are impressed by your work
 need a way to contact you. Developers who are impressed by your work may be
 willing to give you a job recommendation. For example, I end every Medium
 article with “Follow me on
-[LinkedIn](https://www.linkedin.com/in/charles-stover/).” At this time, these
-link shares have resulted in 300 connections.
+[LinkedIn](https://www.linkedin.com/in/charles-stover/).” As of February 2020,
+these link shares have resulted in over 700 connections.
 
 _Stand_, and allow yourself to be found.
 
@@ -243,8 +243,8 @@ Keep your Twitter account professional. It is okay to have personal tweets, but
 do not have anything controversial. Build a following by constantly tweeting
 what you have accomplished, and share your Twitter profile on your projects to
 build a following. For example, I end every Medium article with “Follow me on
-[Twitter](https://twitter.com/CharlesStover).” At this time, these link shares
-have resulted in 300 followers.
+[Twitter](https://twitter.com/CharlesStover).” As of February 2020, these link
+shares have resulted in nearly 500 followers.
 
 Twitter is free marketing. I have never made a social tweet. I maintain a
 strictly business Twitter account. If I post what I have made, people will see
@@ -257,7 +257,7 @@ audience.
 ![Photo by Staff Sgt. Kayla Rorick](#resume.jpg)
 
 The million dollar questions are, “How do you stand out from every other
-equally-education recent college graduate?” and “How do you show that your
+equally-educated recent college graduate?” and “How do you show that your
 self-taught education is equal to your accredited competitors?”
 
 First things first, actually write your résumé! Be sure to keep your portfolio
