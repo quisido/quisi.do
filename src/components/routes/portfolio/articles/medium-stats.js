@@ -1,11 +1,10 @@
 import EventEmitter from 'event-emitter';
 
 const MEDIUM_STATS_API =
-  process.env.REACT_APP_MEDIUM_STATS_API ||
-  'https://api.charlesstover.com/npm/downloads';
+  (process.env.REACT_APP_MEDIUM_STATS_API || 'https://medium.cscdn.net') +
+  '/Charles_Stover.json';
 
 class MediumStats extends EventEmitter {
-
   data = null;
 
   error = null;
@@ -13,7 +12,6 @@ class MediumStats extends EventEmitter {
   loading = false;
 
   fetch = () => {
-
     // Loaded
     if (this.data !== null) {
       return Promise.resolve(this.data);
@@ -50,6 +48,6 @@ class MediumStats extends EventEmitter {
         throw err;
       });
   };
-};
+}
 
 export default new MediumStats();
