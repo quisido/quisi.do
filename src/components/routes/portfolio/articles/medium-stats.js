@@ -1,8 +1,8 @@
 import EventEmitter from 'event-emitter';
 
 const MEDIUM_STATS_API =
-  (process.env.REACT_APP_MEDIUM_STATS_API || 'https://medium.cscdn.net') +
-  '/Charles_Stover.json';
+  process.env.REACT_APP_MEDIUM_STATS_API ||
+  'https://medium.cscdn.net/Charles_Stover.json';
 
 class MediumStats extends EventEmitter {
   data = null;
