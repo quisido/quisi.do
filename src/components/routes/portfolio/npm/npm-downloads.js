@@ -2,10 +2,9 @@ import EventEmitter from 'event-emitter';
 
 const NPM_DOWNLOADS_API =
   process.env.REACT_APP_NPM_DOWNLOADS_API ||
-  'https://api.charlesstover.com/npm/downloads';
+  'https://npm.cscdn.net/charlesstover.json';
 
 class NpmDownloads extends EventEmitter {
-
   data = null;
 
   error = null;
@@ -13,7 +12,6 @@ class NpmDownloads extends EventEmitter {
   loading = false;
 
   fetch = () => {
-
     // Loaded
     if (this.data !== null) {
       return Promise.resolve(this.data);
@@ -50,6 +48,6 @@ class NpmDownloads extends EventEmitter {
         throw err;
       });
   };
-};
+}
 
 export default new NpmDownloads();
