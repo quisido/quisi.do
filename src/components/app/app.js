@@ -13,7 +13,7 @@ const SOCIAL = {
   medium: 'Charles_Stover',
   npmjs: 'charlesstover',
   reddit: 'Charles_Stover',
-  skype: 'charles-stover',
+  // skype: 'charles-stover',
   stackoverflow: '4856301/charles-stover',
   twitter: 'CharlesStover',
 };
