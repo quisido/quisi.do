@@ -21,6 +21,8 @@
     "@gamingmedley/konami.js": "^1.0.2",
     "@material-ui/core": "^4.0.1",
     "event-emitter": "^0.3.5",
+    "logrocket": "^1.0.7",
+    "logrocket-react": "^4.0.1",
     "marked": "^0.7.0",
     "pluralsight-score": "^1.0.0",
     "raw-loader": "^3.0.0",
