@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'How to have a productive 1-on-1 with your manager',
+    date: new Date('08 Jun 2020 UTC'),
+    description: 'Your 1-on-1 conversations with your manager are some of the most important and productive opportunities for you to improve your career satisfaction and achieve career growth.',
+    icon: '1️⃣',
+    mediumId: 'ce76de166179',
+  },
+  {
     title: 'Conducting a front end interview 101',
     date: new Date('16 Feb 2020 UTC'),
     description: 'A guide to the foundations of good interviewing.',
