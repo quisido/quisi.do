@@ -1,16 +1,17 @@
 language: node_js
-node_js: 11
+node_js: 14
 branches:
   only: master
-cache: yarn
 install:
-- yarn
-- cd scripts/build-plus
-- yarn
-- cd ../..
+  - rm -rf ./.yarn/cache/
+  - rm -rf ./.yarn/sdks/
+  - rm -rf ./.yarn/unplugged/
+  - rm -rf ./.yarn/build-state.yml
+  - rm -rf ./.yarn/install-state.gz
+  - yarn
 script:
-- yarn build
-- yarn build-plus
+  - yarn test
+  - yarn build
 deploy:
   fqdn: charlesstover.com
   github-token:
