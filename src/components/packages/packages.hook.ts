@@ -1,4 +1,5 @@
 import { AlertProps } from '@awsui/components-react/alert';
+import { FlashbarProps } from '@awsui/components-react/flashbar';
 import { PieChartProps } from '@awsui/components-react/pie-chart';
 import { ChartDetailPair } from '@awsui/components-react/pie-chart/interfaces';
 import { TableProps } from '@awsui/components-react/table';
@@ -20,11 +21,9 @@ import reduceArrayOfArraysToSum from './utils/reduce-array-of-arrays-to-sum';
 interface State {
   columnDefinitions: TableProps.ColumnDefinition<Item>[];
   detailPopoverContent: PieChartProps<Item>['detailPopoverContent'];
-  error: null | string;
   filter: TableProps['filter'];
   handleAlertDismiss: AlertProps['onDismiss'];
   handleColumnWidthsChange: TableProps['onColumnWidthsChange'];
-  handleRetryClick(): void;
   handleRowClick: TableProps['onRowClick'];
   handleSortingChange: TableProps['onSortingChange'];
   handleUniqueDownloadsChange: ToggleProps['onChange'];
@@ -35,6 +34,7 @@ interface State {
   isUniqueDownloads: ToggleProps['checked'];
   isVisualization: ToggleProps['checked'];
   items: Item[];
+  notifications: FlashbarProps.MessageDefinition[];
   ref: MutableRefObject<HTMLDivElement | null>;
   segmentDescription: PieChartProps<Item>['segmentDescription'];
   sortingColumn: TableProps['sortingColumn'];
@@ -104,6 +104,23 @@ export default function usePackages(): State {
     const items: Item[] = entries.reduce(reduceDataToItems, []);
     return items.filter(filterItemsByMinimumTotalDownloads);
   }, [data, isUniqueDownloads]);
+
+  const notifications: FlashbarProps.MessageDefinition[] = useMemo((): FlashbarProps.MessageDefinition[] => {
+    const newNotifications: FlashbarProps.MessageDefinition[] = [];
+    if (error !== null) {
+      newNotifications.push({
+        content: mapUnknownToString(error),
+        buttonText: 'Retry',
+        dismissible: true,
+        header: 'An error occurred.',
+        onButtonClick(): void {
+          refetch();
+        },
+        type: 'error',
+      });
+    }
+    return newNotifications;
+  }, [error, refetch]);
 
   const totalDownloads: number = useMemo((): number => {
     if (typeof data === 'undefined') {
@@ -192,11 +209,9 @@ export default function usePackages(): State {
         },
       ];
     },
-    error: mapUnknownToString(error),
     filter,
     handleAlertDismiss,
     handleColumnWidthsChange,
-    handleRetryClick: refetch,
     handleRowClick,
     handleSortingChange,
     handleUniqueDownloadsChange,
@@ -207,6 +222,7 @@ export default function usePackages(): State {
     isUniqueDownloads,
     isVisualization,
     items,
+    notifications,
     ref,
     segmentDescription({
       totalDownloads: itemTotalDownloads,

@@ -1,7 +1,6 @@
 import Alert from '@awsui/components-react/alert';
 import { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
 import Cards from '@awsui/components-react/cards';
-// import Header from '@awsui/components-react/header';
 import SpaceBetween from '@awsui/components-react/space-between';
 import { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
@@ -21,10 +20,11 @@ export default function Publications(): ReactElement {
     isAlertVisible,
     items,
     loading,
+    notifications,
   } = usePublications();
 
   return (
-    <AppLayout breadcrumbs={BREADCRUMBS}>
+    <AppLayout breadcrumbs={BREADCRUMBS} notifications={notifications}>
       <SpaceBetween direction="vertical" size="m">
         {isAlertVisible && (
           <Alert
@@ -34,12 +34,11 @@ export default function Publications(): ReactElement {
             type="info"
             visible={true}
           >
-            Only publications with more than 2,500 views are shown.
+            Only publications with more than 5,000 views are shown.
           </Alert>
         )}
         <Cards
           cardDefinition={cardDefinition}
-          // header={<Header>Publications</Header>}
           items={items}
           loading={loading}
           loadingText="Loading publications"

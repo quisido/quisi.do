@@ -2,6 +2,7 @@ import Box from '@awsui/components-react/box';
 import { CardsProps } from '@awsui/components-react/cards';
 import ColumnLayout from '@awsui/components-react/column-layout';
 import Link from '@awsui/components-react/link';
+import StatusIndicator from '@awsui/components-react/status-indicator';
 import NumberFormat from 'number-format-react';
 import { ReactElement } from 'react';
 import Item from '../types/item';
@@ -20,6 +21,13 @@ const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
     {
       id: 'image',
       content({ image, title, url }: Item): ReactElement {
+        if (typeof image === 'undefined') {
+          return (
+            <StatusIndicator iconAriaLabel="Warning" type="warning">
+              Missing image
+            </StatusIndicator>
+          );
+        }
         return (
           <Box textAlign="center">
             <Link href={url}>

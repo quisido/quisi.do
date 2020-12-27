@@ -1,11 +1,13 @@
 import { AlertProps } from '@awsui/components-react/alert';
 import { CardsProps } from '@awsui/components-react/cards';
+import { FlashbarProps } from '@awsui/components-react/flashbar';
 import { useCallback, useMemo } from 'react';
 import ReactCapsule, { useCapsule } from 'react-capsule';
 import { useQuery } from 'react-query';
 import DevArticle from '../../types/dev-article';
 import MediumArticle from '../../types/medium-article';
 import CARD_DEFINITION from './constants/card-definition';
+import useNotifications from './hooks/use-notifications';
 import Item from './types/item';
 import filterItemsByMinimumViews from './utils/filter-items-by-minimum-views';
 import sortItemsByViews from './utils/sort-items-by-views';
@@ -16,6 +18,7 @@ interface State {
   isAlertVisible: boolean;
   items: CardsProps<Item>['items'];
   loading: CardsProps<Item>['loading'];
+  notifications: FlashbarProps.MessageDefinition[];
 }
 
 const IS_ALERT_VISIBLE_CAPSULE: ReactCapsule<boolean> = new ReactCapsule<boolean>(
@@ -78,7 +81,8 @@ export default function usePublications(): State {
       ] of Object.entries(mediumData)) {
         newItems.push({
           dateTime: firstPublishedAt,
-          image: `https://miro.medium.com/max/320/${previewImage}`,
+          image:
+            previewImage && `https://miro.medium.com/max/320/${previewImage}`,
           reactions: claps + updateNotificationSubscribers + upvotes,
           readingTime,
           reads,
@@ -105,6 +109,10 @@ export default function usePublications(): State {
     return newItems.filter(filterItemsByMinimumViews);
   }, [devData, mediumData]);
 
+  const notifications: FlashbarProps.MessageDefinition[] = useNotifications({
+    items,
+  });
+
   const handleAlertDismiss = useCallback((): void => {
     setIsAlertVisible(false);
   }, [setIsAlertVisible]);
@@ -115,5 +123,6 @@ export default function usePublications(): State {
     isAlertVisible,
     items,
     loading: isDevLoading || isMediumLoading,
+    notifications,
   };
 }

@@ -34,11 +34,9 @@ export default function Packages(): ReactElement {
   const {
     columnDefinitions,
     detailPopoverContent,
-    error,
     // filter,
     handleAlertDismiss,
     handleColumnWidthsChange,
-    handleRetryClick,
     handleRowClick,
     handleSortingChange,
     handleUniqueDownloadsChange,
@@ -49,6 +47,7 @@ export default function Packages(): ReactElement {
     isUniqueDownloads,
     isVisualization,
     items,
+    notifications,
     ref,
     segmentDescription,
     sortingColumn,
@@ -56,23 +55,7 @@ export default function Packages(): ReactElement {
   } = usePackages();
 
   return (
-    <AppLayout
-      breadcrumbs={BREADCRUMBS}
-      notifications={
-        error && (
-          <Alert
-            buttonText="Retry"
-            dismissible={false}
-            header="An error occurred."
-            onButtonClick={handleRetryClick}
-            type="error"
-            visible={true}
-          >
-            {error}
-          </Alert>
-        )
-      }
-    >
+    <AppLayout breadcrumbs={BREADCRUMBS} notifications={notifications}>
       <SpaceBetween direction="vertical" size="m">
         {/*
         <Toggle checked={isVisualization} onChange={handleVisualizationChange}>
