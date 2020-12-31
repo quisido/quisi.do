@@ -1,7 +1,7 @@
 .header {
   background-image: url('./images/example-sprite.gif'),
     url('./images/example-sprite-sheet-small.png');
-  background-position: right center, calc(100% - 50px) center;
+  background-position: right center, calc(100% - 36px) center;
   background-repeat: no-repeat, no-repeat;
-  background-size: auto 50px;
+  background-size: auto 36px;
 }

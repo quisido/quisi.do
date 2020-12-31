@@ -57,7 +57,7 @@ export default function usePackages(): State {
     async (): Promise<Record<string, number[]>> => {
       const response: Response = await fetch(
         process.env.REACT_APP_NPM_DOWNLOADS ||
-          'http://npm.cscdn.net/charlesstover.json',
+          'https://npm.cscdn.net/charlesstover.json',
       );
       return await response.json();
     },
