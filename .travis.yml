@@ -10,7 +10,6 @@ install:
   - rm -rf ./.yarn/install-state.gz
   - yarn
 script:
-  - yarn test
   - yarn build
 deploy:
   fqdn: charlesstover.com
