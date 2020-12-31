@@ -94,6 +94,9 @@ export default function usePublications(): State {
     }
     if (typeof devData !== 'undefined') {
       for (const article of devData) {
+        console.log(article);
+        /*
+        TODO: Merge with Medium articles.
         newItems.push({
           dateTime: 0,
           image: ``,
@@ -103,6 +106,7 @@ export default function usePublications(): State {
           url: '',
           views: 0,
         });
+        */
       }
     }
     newItems.sort(sortItemsByViews);

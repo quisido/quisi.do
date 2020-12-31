@@ -1,0 +1,19 @@
+.sideNavigation {
+  ul
+    > li
+    > div
+    > div[role='button']
+    + div
+    > ul
+    > li
+    > div
+    > div[role='button'] {
+    font-weight: normal !important;
+    margin-left: 1.25em !important;
+    margin-top: -1em;
+
+    + div {
+      margin-left: 1.25em;
+    }
+  }
+}

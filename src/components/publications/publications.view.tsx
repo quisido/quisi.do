@@ -24,7 +24,11 @@ export default function Publications(): ReactElement {
   } = usePublications();
 
   return (
-    <AppLayout breadcrumbs={BREADCRUMBS} notifications={notifications}>
+    <AppLayout
+      breadcrumbs={BREADCRUMBS}
+      notifications={notifications}
+      toolsHide
+    >
       <SpaceBetween direction="vertical" size="m">
         {isAlertVisible && (
           <Alert

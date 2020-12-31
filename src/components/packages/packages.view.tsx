@@ -3,7 +3,6 @@ import Box from '@awsui/components-react/box';
 import { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
 import PieChart, { PieChartProps } from '@awsui/components-react/pie-chart';
 import SpaceBetween from '@awsui/components-react/space-between';
-import Spinner from '@awsui/components-react/spinner';
 import Table from '@awsui/components-react/table';
 import Toggle from '@awsui/components-react/toggle';
 import { ReactElement } from 'react';
@@ -55,7 +54,11 @@ export default function Packages(): ReactElement {
   } = usePackages();
 
   return (
-    <AppLayout breadcrumbs={BREADCRUMBS} notifications={notifications}>
+    <AppLayout
+      breadcrumbs={BREADCRUMBS}
+      notifications={notifications}
+      toolsHide
+    >
       <SpaceBetween direction="vertical" size="m">
         {/*
         <Toggle checked={isVisualization} onChange={handleVisualizationChange}>
@@ -109,26 +112,22 @@ export default function Packages(): ReactElement {
           </>
         ) : (
           <div className={styles.table} ref={ref}>
-            {isLoading ? (
-              <Spinner />
-            ) : (
-              <Table
-                columnDefinitions={columnDefinitions}
-                // filter={filter}
-                items={items}
-                loading={isLoading}
-                loadingText="Loading packages."
-                onColumnWidthsChange={handleColumnWidthsChange}
-                onRowClick={handleRowClick}
-                onSortingChange={handleSortingChange}
-                resizableColumns
-                sortingColumn={sortingColumn}
-                sortingDescending={sortingDescending}
-                stickyHeader
-                trackBy="packageName"
-                wrapLines
-              />
-            )}
+            <Table
+              columnDefinitions={columnDefinitions}
+              // filter={filter}
+              items={items}
+              loading={isLoading}
+              loadingText="Loading packages"
+              onColumnWidthsChange={handleColumnWidthsChange}
+              onRowClick={handleRowClick}
+              onSortingChange={handleSortingChange}
+              resizableColumns
+              sortingColumn={sortingColumn}
+              sortingDescending={sortingDescending}
+              stickyHeader
+              trackBy="packageName"
+              wrapLines
+            />
           </div>
         )}
       </SpaceBetween>

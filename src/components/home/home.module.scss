@@ -3,8 +3,35 @@
 }
 
 .list {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   line-height: 1.75em;
   list-style-type: none;
   margin: 0;
   padding: 0;
+
+  > li {
+    padding: 0 1em;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+.resume {
+  display: inline-flex !important;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-top: calc((100px - 32px) / 2);
+
+  > span:first-child {
+    white-space: nowrap;
+  }
 }

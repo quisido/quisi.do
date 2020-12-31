@@ -6,6 +6,7 @@ import Home from '../../components/home';
 import Packages from '../../components/packages';
 import Publications from '../../components/publications';
 import Quotes from '../../components/quotes';
+import SpriteSheet2Gif from '../../components/spritesheet2gif';
 
 const queryClient: QueryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ export default function App(): ReactElement {
           <Route component={Packages} path="/packages" />
           <Route component={Publications} path="/publications" />
           <Route component={Quotes} path="/quotes" />
+          <Route component={SpriteSheet2Gif} path="/spritesheet2gif" />
           <Route component={Home} />
         </Switch>
       </QueryClientProvider>

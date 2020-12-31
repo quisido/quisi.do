@@ -14,7 +14,7 @@ const BREADCRUMBS: BreadcrumbGroupProps.Item[] = [
 
 export default function Publications(): ReactElement {
   return (
-    <AppLayout breadcrumbs={BREADCRUMBS}>
+    <AppLayout breadcrumbs={BREADCRUMBS} toolsHide>
       <Cards cardDefinition={CARD_DEFINITION} items={ITEMS} />
     </AppLayout>
   );
