@@ -128,6 +128,7 @@ export default function SpriteSheet2Gif(): ReactElement {
               label="Matte"
             >
               <Input
+                className={styles.matte}
                 onChange={handleMatteChange}
                 type={'color' as 'text'}
                 value={matte}

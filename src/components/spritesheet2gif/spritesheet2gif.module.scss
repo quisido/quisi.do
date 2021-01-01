@@ -5,3 +5,8 @@
   background-repeat: no-repeat, no-repeat;
   background-size: auto 36px;
 }
+
+.matte > input {
+  background-color: transparent !important;
+  border-width: 0 !important;
+}

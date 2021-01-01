@@ -76,13 +76,25 @@ export const backgroundButtonNormalDefaultVar =
   '--color-background-button-normal-default-2k-l2Z';
 export const backgroundButtonNormalHoverVar =
   '--color-background-button-normal-hover-yKNU8Y';
+export const backgroundDropdownItemSelectedVar =
+  '--color-background-dropdown-item-selected-36C5tw';
 export const backgroundLayoutPanelContentVar =
   '--color-background-layout-panel-content-3ogOy8';
+export const backgroundLayoutPanelHoverVar =
+  '--color-background-layout-panel-hover-p5fVsz';
 export const borderButtonNormalDefaultVar =
   '--color-border-button-normal-default-3MrzkF';
 export const borderButtonNormalHoverVar =
   '--color-border-button-normal-hover-2ZjSsg';
+export const borderLayoutVar = '--color-border-layout-1Theti';
 export const textBreadcrumbVar = '--color-text-breadcrumb-1UtnXw';
+export const textColumnHeaderVar = '--color-text-column-header-3MrzkF';
+export const textDropdownItemDefaultVar =
+  '--color-text-dropdown-item-default-2fNU47';
+export const textFormLabelVar = '--color-text-form-label-2fNU47';
+export const textIconCaretVar = '--color-text-icon-caret-18f9uV';
+export const textInteractiveActiveVar =
+  '--color-text-interactive-active-2ZjSsg';
 
 export const backgroundContainerContentVar: string = mapColorToVar(
   colorBackgroundContainerContent,

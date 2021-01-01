@@ -11,12 +11,14 @@ import {
   backgroundDropdownItemDefaultVar,
   backgroundDropdownItemFilterMatchVar,
   backgroundDropdownItemHoverVar,
+  backgroundDropdownItemSelectedVar,
   backgroundHomeHeaderVar,
   backgroundInputDefaultVar,
   backgroundInputDisabledVar,
   backgroundItemSelectedVar,
   backgroundLayoutMainVar,
   backgroundLayoutPanelContentVar,
+  backgroundLayoutPanelHoverVar,
   backgroundNotificationBlueVar,
   backgroundNotificationGreenVar,
   backgroundNotificationRedVar,
@@ -33,6 +35,7 @@ import {
   borderInputDefaultVar,
   borderItemFocusedVar,
   borderItemSelectedVar,
+  borderLayoutVar,
   borderStatusErrorVar,
   borderStatusInfoVar,
   borderStatusSuccessVar,
@@ -54,17 +57,22 @@ import {
   textBodyDefaultVar,
   textBodySecondaryVar,
   textBreadcrumbVar,
+  textColumnHeaderVar,
+  textDropdownItemDefaultVar,
   textDropdownItemFilterMatchVar,
   textDropdownItemHighlightedVar,
   textEmptyVar,
   textFormDefaultVar,
+  textFormLabelVar,
   textFormSecondaryVar,
   textHeadingDefaultVar,
   textHeadingSecondaryVar,
   textHomeHeaderDefaultVar,
   textHomeHeaderSecondaryVar,
+  textIconCaretVar,
   textInputDisabledVar,
   textInputPlaceholderVar,
+  textInteractiveActiveVar,
   textInteractiveDefaultVar,
   textInteractiveDisabledVar,
   textInteractiveHoverVar,
@@ -89,12 +97,14 @@ interface Props {
   backgroundDropdownItemDefault?: string;
   backgroundDropdownItemFilterMatch?: string;
   backgroundDropdownItemHover?: string;
+  backgroundDropdownItemSelected?: string;
   backgroundHomeHeader?: string;
   backgroundInputDefault?: string;
   backgroundInputDisabled?: string;
   backgroundItemSelected?: string;
   backgroundLayoutMain?: string;
   backgroundLayoutPanelContent?: string;
+  backgroundLayoutPanelHover?: string;
   backgroundNotificationBlue?: string;
   backgroundNotificationGreen?: string;
   backgroundNotificationRed?: string;
@@ -111,6 +121,7 @@ interface Props {
   borderInputDefault?: string;
   borderItemFocused?: string;
   borderItemSelected?: string;
+  borderLayout?: string;
   borderStatusError?: string;
   borderStatusInfo?: string;
   borderStatusSuccess?: string;
@@ -133,17 +144,22 @@ interface Props {
   textBodyDefault?: string;
   textBodySecondary?: string;
   textBreadcrumb?: string;
+  textColumnHeader?: string;
+  textDropdownItemDefault?: string;
   textDropdownItemFilterMatch?: string;
   textDropdownItemHighlighted?: string;
   textEmpty?: string;
   textFormDefault?: string;
+  textFormLabel?: string;
   textFormSecondary?: string;
   textHeadingDefault?: string;
   textHeadingSecondary?: string;
   textHomeHeaderDefault?: string;
   textHomeHeaderSecondary?: string;
+  textIconCaret?: string;
   textInputDisabled?: string;
   textInputPlaceholder?: string;
+  textInteractiveActive?: string;
   textInteractiveDefault?: string;
   textInteractiveDisabled?: string;
   textInteractiveHover?: string;
@@ -170,12 +186,14 @@ export default function AwsuiTheme({
   backgroundDropdownItemDefault,
   backgroundDropdownItemFilterMatch,
   backgroundDropdownItemHover,
+  backgroundDropdownItemSelected,
   backgroundHomeHeader,
   backgroundInputDefault,
   backgroundInputDisabled,
   backgroundItemSelected,
   backgroundLayoutMain,
   backgroundLayoutPanelContent,
+  backgroundLayoutPanelHover,
   backgroundNotificationBlue,
   backgroundNotificationGreen,
   backgroundNotificationRed,
@@ -192,6 +210,7 @@ export default function AwsuiTheme({
   borderInputDefault,
   borderItemFocused,
   borderItemSelected,
+  borderLayout,
   borderStatusError,
   borderStatusInfo,
   borderStatusSuccess,
@@ -214,17 +233,22 @@ export default function AwsuiTheme({
   textBodyDefault,
   textBodySecondary,
   textBreadcrumb,
+  textColumnHeader,
+  textDropdownItemDefault,
   textDropdownItemFilterMatch,
   textDropdownItemHighlighted,
   textEmpty,
   textFormDefault,
+  textFormLabel,
   textFormSecondary,
   textHeadingDefault,
   textHeadingSecondary,
   textHomeHeaderDefault,
   textHomeHeaderSecondary,
+  textIconCaret,
   textInputDisabled,
   textInputPlaceholder,
+  textInteractiveActive,
   textInteractiveDefault,
   textInteractiveDisabled,
   textInteractiveHover,
@@ -254,12 +278,14 @@ export default function AwsuiTheme({
       [backgroundDropdownItemDefaultVar]: backgroundDropdownItemDefault,
       [backgroundDropdownItemFilterMatchVar]: backgroundDropdownItemFilterMatch,
       [backgroundDropdownItemHoverVar]: backgroundDropdownItemHover,
+      [backgroundDropdownItemSelectedVar]: backgroundDropdownItemSelected,
       [backgroundHomeHeaderVar]: backgroundHomeHeader,
       [backgroundInputDefaultVar]: backgroundInputDefault,
       [backgroundInputDisabledVar]: backgroundInputDisabled,
       [backgroundItemSelectedVar]: backgroundItemSelected,
       [backgroundLayoutMainVar]: backgroundLayoutMain,
       [backgroundLayoutPanelContentVar]: backgroundLayoutPanelContent,
+      [backgroundLayoutPanelHoverVar]: backgroundLayoutPanelHover,
       [backgroundNotificationBlueVar]: backgroundNotificationBlue,
       [backgroundNotificationGreenVar]: backgroundNotificationGreen,
       [backgroundNotificationRedVar]: backgroundNotificationRed,
@@ -276,6 +302,7 @@ export default function AwsuiTheme({
       [borderInputDefaultVar]: borderInputDefault,
       [borderItemFocusedVar]: borderItemFocused,
       [borderItemSelectedVar]: borderItemSelected,
+      [borderLayoutVar]: borderLayout,
       [borderStatusErrorVar]: borderStatusError,
       [borderStatusInfoVar]: borderStatusInfo,
       [borderStatusSuccessVar]: borderStatusSuccess,
@@ -297,17 +324,22 @@ export default function AwsuiTheme({
       [textBodyDefaultVar]: textBodyDefault,
       [textBodySecondaryVar]: textBodySecondary,
       [textBreadcrumbVar]: textBreadcrumb,
+      [textColumnHeaderVar]: textColumnHeader,
+      [textDropdownItemDefaultVar]: textDropdownItemDefault,
       [textDropdownItemFilterMatchVar]: textDropdownItemFilterMatch,
       [textDropdownItemHighlightedVar]: textDropdownItemHighlighted,
       [textEmptyVar]: textEmpty,
       [textFormDefaultVar]: textFormDefault,
+      [textFormLabelVar]: textFormLabel,
       [textFormSecondaryVar]: textFormSecondary,
       [textHeadingDefaultVar]: textHeadingDefault,
       [textHeadingSecondaryVar]: textHeadingSecondary,
       [textHomeHeaderDefaultVar]: textHomeHeaderDefault,
       [textHomeHeaderSecondaryVar]: textHomeHeaderSecondary,
+      [textIconCaretVar]: textIconCaret,
       [textInputDisabledVar]: textInputDisabled,
       [textInputPlaceholderVar]: textInputPlaceholder,
+      [textInteractiveActiveVar]: textInteractiveActive,
       [textInteractiveDefaultVar]: textInteractiveDefault,
       [textInteractiveDisabledVar]: textInteractiveDisabled,
       [textInteractiveHoverVar]: textInteractiveHover,
@@ -342,12 +374,14 @@ export default function AwsuiTheme({
     backgroundDropdownItemDefault,
     backgroundDropdownItemFilterMatch,
     backgroundDropdownItemHover,
+    backgroundDropdownItemSelected,
     backgroundHomeHeader,
     backgroundInputDefault,
     backgroundInputDisabled,
     backgroundItemSelected,
     backgroundLayoutMain,
     backgroundLayoutPanelContent,
+    backgroundLayoutPanelHover,
     backgroundNotificationBlue,
     backgroundNotificationGreen,
     backgroundNotificationRed,
@@ -364,6 +398,7 @@ export default function AwsuiTheme({
     borderInputDefault,
     borderItemFocused,
     borderItemSelected,
+    borderLayout,
     borderStatusError,
     borderStatusInfo,
     borderStatusSuccess,
@@ -386,17 +421,22 @@ export default function AwsuiTheme({
     textBodyDefault,
     textBodySecondary,
     textBreadcrumb,
+    textColumnHeader,
+    textDropdownItemDefault,
     textDropdownItemFilterMatch,
     textDropdownItemHighlighted,
     textEmpty,
     textFormDefault,
+    textFormLabel,
     textFormSecondary,
     textHeadingDefault,
     textHeadingSecondary,
     textHomeHeaderDefault,
     textHomeHeaderSecondary,
+    textIconCaret,
     textInputDisabled,
     textInputPlaceholder,
+    textInteractiveActive,
     textInteractiveDefault,
     textInteractiveDisabled,
     textInteractiveHover,
