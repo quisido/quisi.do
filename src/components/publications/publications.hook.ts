@@ -40,7 +40,7 @@ export default function usePublications(): State {
     async (): Promise<Record<string, MediumArticle>> => {
       const response: Response = await fetch(
         process.env.REACT_APP_MEDIUM_STATS ||
-          'https://medium.cscdn.net/Charles_Stover.json',
+          'https://medium.cscdn.net/charles-stover.json',
       );
       return await response.json();
     },
