@@ -1,6 +1,5 @@
 import Box from '@awsui/components-react/box';
 import ellis from '../images/ellis-gregory.jpg';
-import jin from '../images/jin-haonan.png';
 import kelsey from '../images/kelsey-lavigne.jpg';
 import logan from '../images/logan-mclain.jpg';
 import malakai from '../images/malakai-whitston.jpg';
@@ -11,7 +10,7 @@ import Quote from '../types/quote';
 const QUOTES: Quote[] = [
   {
     author: 'Ellis Gregory',
-    company: 'Kitestring Technical Services',
+    company: 'Kitestring Technical Services | RevUnit',
     image: ellis,
     quote: (
       <>
@@ -34,11 +33,11 @@ const QUOTES: Quote[] = [
         </Box>
       </>
     ),
-    title: 'UI/UX Graphic | Web Development Consultant',
+    title: 'Senior Product Designer',
   },
   {
     author: 'Kelsey Lavigne',
-    company: 'University of Arkansas Career Development Center',
+    company: 'College of Engineering at University of Arkansas',
     image: kelsey,
     quote: (
       <Box variant="p">
@@ -55,7 +54,7 @@ const QUOTES: Quote[] = [
         recommend Charles to any employer - he is a real asset!
       </Box>
     ),
-    title: 'Career Advisor | Internship Coordinator | Student Affairs Educator',
+    title: 'Director of Employer Relations',
   },
   {
     author: 'Logan McLain',
@@ -77,7 +76,7 @@ const QUOTES: Quote[] = [
         <Box variant="p">I would happily work with Charles again!</Box>
       </>
     ),
-    title: 'Account Executive',
+    title: 'Vice President of Professional Services',
   },
   {
     author: 'Malakai Whitston',
@@ -104,7 +103,7 @@ const QUOTES: Quote[] = [
   },
   {
     author: 'Walter Sorto',
-    company: 'Walmart',
+    company: 'Brain Corp | Walmart',
     image: walter,
     quote: (
       <Box variant="p">
@@ -112,7 +111,7 @@ const QUOTES: Quote[] = [
         always willing to help out in the time we worked together.
       </Box>
     ),
-    title: 'Software Engineer',
+    title: 'Front End Web Developer',
   },
   {
     author: 'Sriram Rudraraju',
@@ -124,13 +123,12 @@ const QUOTES: Quote[] = [
         answer to my questions.
       </Box>
     ),
-    title: 'Web Developer',
+    title: 'Full Stack Developer',
   },
 
   // Medium responses
   {
     author: '金浩楠 (Jin Haonan)',
-    image: jin,
     quote: <Box variant="p">Charles is handsome and awesome.</Box>,
   },
 ];
