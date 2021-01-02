@@ -17,6 +17,10 @@ export default function App(): ReactElement {
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
           <Switch>
+            <Route
+              component={BecomeTheJuniorDeveloperThatCompaniesWantToHire}
+              path="/become-the-junior-developer-that-companies-want-to-hire/"
+            />
             <Route component={Packages} path="/packages" />
             <Route component={Publications} path="/publications" />
             <Route component={Quotes} path="/quotes" />
@@ -27,4 +31,10 @@ export default function App(): ReactElement {
       </BrowserRouter>
     </AwsuiDarkMode>
   );
+}
+
+function BecomeTheJuniorDeveloperThatCompaniesWantToHire(): null {
+  window.location.href =
+    'https://charles-stover.medium.com/become-the-junior-developer-that-companies-want-to-hire-c539f4c236d8';
+  return null;
 }
