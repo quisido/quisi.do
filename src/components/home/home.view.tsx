@@ -1,7 +1,7 @@
 import Box from '@awsui/components-react/box';
 import Button from '@awsui/components-react/button';
 import Container from '@awsui/components-react/container';
-import Grid, { GridProps } from '@awsui/components-react/grid';
+import Header from '@awsui/components-react/header';
 import SpaceBetween from '@awsui/components-react/space-between';
 import { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
@@ -10,24 +10,35 @@ import avatar from './images/avatar.jpg';
 
 const CURRENT_YEAR: number = new Date().getFullYear();
 
-const GRID_DEFINITION: GridProps.ElementDefinition[] = [
-  {
-    colspan: 2,
-  },
-  {
-    colspan: 7,
-  },
-  {
-    colspan: 3,
-  },
-];
-
 export default function Home(): ReactElement {
   return (
     <AppLayout toolsHide>
       <SpaceBetween size="m">
-        <Container>
-          <Grid gridDefinition={GRID_DEFINITION}>
+        <Container
+          header={
+            <Header
+              actions={
+                <Button
+                  href="/resume/2019-11/charles-stover-resume.pdf"
+                  iconAlign="right"
+                  iconAlt="external"
+                  iconName="external"
+                  target="_blank"
+                  variant="primary"
+                >
+                  View resum&eacute;
+                </Button>
+              }
+            >
+              About me
+            </Header>
+          }
+        >
+          <SpaceBetween
+            className={styles.content}
+            direction="horizontal"
+            size="xxl"
+          >
             <Box textAlign="center">
               <img
                 alt="Avatar"
@@ -37,7 +48,7 @@ export default function Home(): ReactElement {
                 width={100}
               />
             </Box>
-            <SpaceBetween direction="vertical" size="m">
+            <SpaceBetween className={styles.p} direction="vertical" size="m">
               <Box variant="p">
                 My name is <strong>Charles Stover</strong>. I am a{' '}
                 <strong>senior front end engineer</strong> with a focus in{' '}
@@ -51,20 +62,7 @@ export default function Home(): ReactElement {
                 <li>Full stack: {CURRENT_YEAR - 2005} years</li>
               </ul>
             </SpaceBetween>
-            <Box textAlign="center">
-              <Button
-                className={styles.resume}
-                href="/resume/2019-11/charles-stover-resume.pdf"
-                iconAlign="right"
-                iconAlt="external"
-                iconName="external"
-                target="_blank"
-                variant="primary"
-              >
-                View resum&eacute;
-              </Button>
-            </Box>
-          </Grid>
+          </SpaceBetween>
         </Container>
       </SpaceBetween>
     </AppLayout>
