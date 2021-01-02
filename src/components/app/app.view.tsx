@@ -1,8 +1,8 @@
+import AwsuiDarkMode from 'awsui-dark-mode';
 import { ReactElement } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import AwsuiDarkMode from '../../components/awsui-dark-mode';
 import Home from '../../components/home';
 import Packages from '../../components/packages';
 import Publications from '../../components/publications';
@@ -13,9 +13,9 @@ const queryClient: QueryClient = new QueryClient();
 
 export default function App(): ReactElement {
   return (
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <AwsuiDarkMode>
+    <AwsuiDarkMode>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
           <Switch>
             <Route component={Packages} path="/packages" />
             <Route component={Publications} path="/publications" />
@@ -23,8 +23,8 @@ export default function App(): ReactElement {
             <Route component={SpriteSheet2Gif} path="/spritesheet2gif" />
             <Route component={Home} />
           </Switch>
-        </AwsuiDarkMode>
-      </QueryClientProvider>
-    </BrowserRouter>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </AwsuiDarkMode>
   );
 }

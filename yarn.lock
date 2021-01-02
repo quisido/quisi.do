@@ -3406,6 +3406,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"awsui-dark-mode@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "awsui-dark-mode@npm:1.0.0"
+  dependencies:
+    awsui-theme: ^1.0.0
+  peerDependencies:
+    "@awsui/components-react": ^3.0.0
+    "@awsui/design-tokens": ^3.0.0
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  checksum: 11beceb7653dbff3460a93ca3c765ef3f736d8b76957241ac1b4ff145e50d435a831432980a99b3cac8ff7f6369605b434cb280fd7872dc2070373261fbed4db
+  languageName: node
+  linkType: hard
+
+"awsui-theme@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "awsui-theme@npm:1.0.0"
+  peerDependencies:
+    "@awsui/design-tokens": ^3.0.0
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  checksum: 1c4e71c9f6b34a573d29ee0343fd777ba7cea7a28a8ef60b99b816523985494a05de21450b7f28749a51b46520bbae640ebe39b17573e912fce76d328d03e7d5
+  languageName: node
+  linkType: hard
+
 "axe-core@npm:^4.0.2":
   version: 4.1.1
   resolution: "axe-core@npm:4.1.1"
@@ -4258,6 +4283,7 @@ __metadata:
     "@types/react-router-dom": ^5.1.6
     "@typescript-eslint/eslint-plugin": ^4.11.0
     "@typescript-eslint/parser": ^4.11.0
+    awsui-dark-mode: ^1.0.0
     eslint: ^7.16.0
     eslint-config-prettier: ^7.1.0
     eslint-plugin-prettier: ^3.3.0
