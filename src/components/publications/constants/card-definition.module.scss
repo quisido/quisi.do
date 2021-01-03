@@ -1,0 +1,45 @@
+.banner {
+  margin: 0 auto;
+  position: relative;
+  width: fit-content;
+}
+
+.dateTime {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+
+.popover > button {
+  border-bottom-width: 0 !important;
+}
+
+.reactions {
+  border-bottom-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.readingTime {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  bottom: 0;
+  position: absolute;
+  right: 0;
+}
+
+.views {
+  border-bottom-left-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  left: 0;
+  position: absolute;
+  top: 0;
+}

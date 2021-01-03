@@ -3406,28 +3406,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"awsui-dark-mode@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "awsui-dark-mode@npm:1.0.0"
+"awsui-dark-mode@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "awsui-dark-mode@npm:1.0.1"
   dependencies:
-    awsui-theme: ^1.0.0
+    awsui-theme: ^1.0.1
   peerDependencies:
     "@awsui/components-react": ^3.0.0
     "@awsui/design-tokens": ^3.0.0
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: 11beceb7653dbff3460a93ca3c765ef3f736d8b76957241ac1b4ff145e50d435a831432980a99b3cac8ff7f6369605b434cb280fd7872dc2070373261fbed4db
+  checksum: 6b2e4cffb4dcb4b651a5c6f0ca9d9261d3d4e62d1c196c4df57097b37222ba25302fddcaaa0abadc74557305e2f135c3ceddf2bd554a5e92c342f681c856ebf2
   languageName: node
   linkType: hard
 
-"awsui-theme@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "awsui-theme@npm:1.0.0"
+"awsui-theme@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "awsui-theme@npm:1.0.1"
   peerDependencies:
     "@awsui/design-tokens": ^3.0.0
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: 1c4e71c9f6b34a573d29ee0343fd777ba7cea7a28a8ef60b99b816523985494a05de21450b7f28749a51b46520bbae640ebe39b17573e912fce76d328d03e7d5
+  checksum: 2f9b548d5ceedbfc99ab9bab845f0fd636b3bfff0216ce4281b49208b1f4ae6403ba62a786a19aaa59a5859d1e3c05842911f5b1730b99a80c9c3eaa204401b6
   languageName: node
   linkType: hard
 
@@ -4283,7 +4283,7 @@ __metadata:
     "@types/react-router-dom": ^5.1.6
     "@typescript-eslint/eslint-plugin": ^4.11.0
     "@typescript-eslint/parser": ^4.11.0
-    awsui-dark-mode: ^1.0.0
+    awsui-dark-mode: ^1.0.1
     eslint: ^7.16.0
     eslint-config-prettier: ^7.1.0
     eslint-plugin-prettier: ^3.3.0

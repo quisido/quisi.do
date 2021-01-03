@@ -26,6 +26,9 @@
     "start": "react-scripts start",
     "test": "react-scripts test"
   },
+  "dependencies": {
+    "awsui-dark-mode": "^1.0.1"
+  },
   "devDependencies": {
     "@awsui/components-react": "^3.0.0",
     "@awsui/design-tokens": "^3.0.0",
@@ -57,8 +60,5 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
     "typescript": "^4.1.3"
-  },
-  "dependencies": {
-    "awsui-dark-mode": "^1.0.0"
   }
 }
