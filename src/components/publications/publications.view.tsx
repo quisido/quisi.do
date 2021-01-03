@@ -25,7 +25,7 @@ export default function Publications(): ReactElement {
     isAlertVisible,
     items,
     loading,
-    notifications,
+    // notifications,
     selectedSortOption,
     sortOptions,
   } = usePublications();
@@ -33,7 +33,7 @@ export default function Publications(): ReactElement {
   return (
     <AppLayout
       breadcrumbs={BREADCRUMBS}
-      notifications={notifications}
+      // notifications={notifications}
       toolsHide
     >
       <SpaceBetween direction="vertical" size="m">

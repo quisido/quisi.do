@@ -121,6 +121,8 @@ export default function usePublications(): State {
 
   const items: CardsProps<Item>['items'] = useMemo((): CardsProps<Item>['items'] => {
     const newItems: Item[] = [];
+    let totalReactions = 0;
+    let totalViews = 0;
     if (typeof mediumData !== 'undefined') {
       for (const [
         slug,
@@ -137,38 +139,58 @@ export default function usePublications(): State {
           views,
         },
       ] of Object.entries(mediumData)) {
+        const reactions: number =
+          claps + updateNotificationSubscribers + upvotes;
+        totalReactions += reactions;
+        totalViews += reads;
         newItems.push({
           dateTime: firstPublishedAt,
           image:
             previewImage && `https://miro.medium.com/max/320/${previewImage}`,
-          reactions: claps + updateNotificationSubscribers + upvotes,
+          reactions,
           readingTime,
-          reads,
           title,
+          type: 'medium',
           url: `https://charles-stover.medium.com/${slug}-${postId}`,
           views,
         });
       }
     }
+
+    const averageViewsPerReaction = totalViews / totalReactions;
     if (typeof devData !== 'undefined') {
-      for (const article of devData) {
-        console.log(article);
-        /*
-        TODO: Merge with Medium articles.
+      for (const {
+        canonical_url,
+        comments_count,
+        public_reactions_count,
+        published_timestamp,
+        social_image,
+        title,
+        url,
+      } of devData) {
+        const findExistingItem = ({ url: existingUrl }: Item): boolean =>
+          existingUrl === canonical_url;
+        const existingItem: Item | undefined = newItems.find(findExistingItem);
+        const reactions: number = comments_count + public_reactions_count;
+        const views: number = Math.round(reactions * averageViewsPerReaction);
+        if (typeof existingItem !== 'undefined') {
+          existingItem.reactions += reactions;
+          existingItem.views += views;
+          continue;
+        }
         newItems.push({
-          dateTime: 0,
-          image: ``,
-          reactions: 0,
-          reads: 0,
-          title: article.title,
-          url: '',
-          views: 0,
+          dateTime: new Date(published_timestamp).getTime(),
+          image: social_image,
+          reactions,
+          title,
+          type: 'dev',
+          url,
+          views,
         });
-        */
       }
     }
     newItems.sort(sortItems);
-    return newItems.filter(filterItemsByMinimumViews);
+    return newItems;
   }, [devData, mediumData, sortItems]);
 
   const notifications: FlashbarProps.MessageDefinition[] = useNotifications({
@@ -180,7 +202,9 @@ export default function usePublications(): State {
     handleAlertDismiss,
     handleSortChange,
     isAlertVisible,
-    items,
+    items: useMemo((): Item[] => {
+      return items.filter(filterItemsByMinimumViews);
+    }, [items]),
     loading: isDevLoading || isMediumLoading,
     notifications,
     selectedSortOption,

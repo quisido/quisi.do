@@ -3,8 +3,8 @@ export default interface Item {
   image?: string;
   reactions: number;
   readingTime?: number;
-  reads: number;
   title: string;
+  type: 'dev' | 'medium';
   url: string;
   views: number;
 }

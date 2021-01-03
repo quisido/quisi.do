@@ -36,51 +36,57 @@ const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
       }: Item): ReactElement {
         const date: Date = new Date(dateTime);
         return (
-          <Box className={styles.banner} textAlign="center">
-            <Link href={url}>
-              {image ? (
-                <img alt={title} src={image} width={320} />
-              ) : (
-                <StatusIndicator iconAriaLabel="Warning" type="warning">
-                  Missing image
-                </StatusIndicator>
-              )}
-            </Link>
-            <Badge className={styles.views}>
-              <Popover className={styles.popover} content="Views" size="small">
-                👁‍🗨 <NumberFormat>{views}</NumberFormat>
-              </Popover>
-            </Badge>
-            <Badge className={styles.reactions}>
-              <Popover
-                className={styles.popover}
-                content="Reactions"
-                size="small"
-              >
-                👏 <NumberFormat>{reactions}</NumberFormat>
-              </Popover>
-            </Badge>
-            <Badge className={styles.dateTime}>
-              <Popover
-                className={styles.popover}
-                content="Published date"
-                size="small"
-              >
-                📅 {date.getFullYear()}-{date.getMonth() + 1}-{date.getDate()}
-              </Popover>
-            </Badge>
-            {readingTime && (
-              <Badge className={styles.readingTime}>
+          <div className={styles.bannerHeight}>
+            <div className={styles.bannerWidth}>
+              <Link href={url}>
+                {image ? (
+                  <img alt={title} src={image} width={320} />
+                ) : (
+                  <StatusIndicator iconAriaLabel="Warning" type="warning">
+                    Missing image
+                  </StatusIndicator>
+                )}
+              </Link>
+              <Badge className={styles.views}>
                 <Popover
                   className={styles.popover}
-                  content="Reading time"
+                  content="Views"
                   size="small"
                 >
-                  ⏳<Minutes>{readingTime}</Minutes>
+                  👁‍🗨 <NumberFormat>{views}</NumberFormat>
                 </Popover>
               </Badge>
-            )}
-          </Box>
+              <Badge className={styles.reactions}>
+                <Popover
+                  className={styles.popover}
+                  content="Reactions"
+                  size="small"
+                >
+                  👏 <NumberFormat>{reactions}</NumberFormat>
+                </Popover>
+              </Badge>
+              <Badge className={styles.dateTime}>
+                <Popover
+                  className={styles.popover}
+                  content="Published date"
+                  size="small"
+                >
+                  📅 {date.getFullYear()}-{date.getMonth() + 1}-{date.getDate()}
+                </Popover>
+              </Badge>
+              {readingTime && (
+                <Badge className={styles.readingTime}>
+                  <Popover
+                    className={styles.popover}
+                    content="Reading time"
+                    size="small"
+                  >
+                    ⏳<Minutes>{readingTime}</Minutes>
+                  </Popover>
+                </Badge>
+              )}
+            </div>
+          </div>
         );
       },
     },
@@ -89,7 +95,7 @@ const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
       // header: 'Statistics',
       content({ dateTime, reactions, views }: Item): ReactElement {
         return (
-          <ColumnLayout columns={12}>
+          <ColumnLayout className={styles.columnLayout} columns={12}>
             <div>
               <Box color="text-label" fontSize="heading-s">
                 Reactions/day

@@ -1,7 +1,22 @@
-.banner {
+.bannerHeight {
+  align-items: center;
+  display: flex;
+  min-height: 220px;
+}
+
+.bannerWidth {
   margin: 0 auto;
+  opacity: 0.8;
   position: relative;
   width: fit-content;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.columnLayout > div {
+  justify-content: space-around;
 }
 
 .dateTime {
