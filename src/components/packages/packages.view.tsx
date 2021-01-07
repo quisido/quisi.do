@@ -5,8 +5,10 @@ import PieChart, { PieChartProps } from '@awsui/components-react/pie-chart';
 import SpaceBetween from '@awsui/components-react/space-between';
 import Table from '@awsui/components-react/table';
 import Toggle from '@awsui/components-react/toggle';
+import NumberFormat from 'number-format-react';
 import { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
+import MINIMUM_TOTAL_DOWNLOADS from './constants/minimum-total-downloads';
 import usePackages from './packages.hook';
 import styles from './packages.module.scss';
 
@@ -73,7 +75,9 @@ export default function Packages(): ReactElement {
             type="info"
             visible={true}
           >
-            Only packages with more than 2,500 downloads are shown.
+            Only packages with more than{' '}
+            <NumberFormat>{MINIMUM_TOTAL_DOWNLOADS}</NumberFormat> downloads are
+            shown.
           </Alert>
         )}
         {isVisualization ? (

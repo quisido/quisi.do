@@ -9,7 +9,7 @@ import {
   MutableRefObject,
   SetStateAction,
   useCallback,
-  useEffect,
+  useLayoutEffect,
   useState,
 } from 'react';
 import CellColors from '../types/cell-colors';
@@ -66,7 +66,7 @@ export default function useTableHighlight<Item>({
     [],
   );
 
-  useEffect((): void | VoidFunction => {
+  useLayoutEffect((): void | VoidFunction => {
     const rows: HTMLCollectionOf<HTMLTableRowElement> | null = mapRefToRows(
       ref,
     );

@@ -3,7 +3,7 @@ import {
   colorBackgroundItemSelected,
   colorBorderItemSelected,
 } from '@awsui/design-tokens';
-import { MutableRefObject, useEffect } from 'react';
+import { MutableRefObject, useLayoutEffect } from 'react';
 import CellColors from '../types/cell-colors';
 import getHighlightedDescriptionCells from '../utils/get-highlighted-description-cells';
 import mapRefToRows from '../utils/map-ref-to-rows';
@@ -20,7 +20,7 @@ export default function useTableItemDescriptionHighlight<Item>({
   ref,
   rowClickDetails,
 }: Props<Item>): void {
-  useEffect((): void | VoidFunction => {
+  useLayoutEffect((): void | VoidFunction => {
     if (!enabled) {
       return;
     }

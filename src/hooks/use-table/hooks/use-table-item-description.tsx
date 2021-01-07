@@ -1,5 +1,5 @@
 import { TableProps } from '@awsui/components-react/table';
-import { ComponentType, MutableRefObject, useEffect } from 'react';
+import { ComponentType, MutableRefObject, useLayoutEffect } from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import mapRefToTbody from '../utils/map-ref-to-tbody';
 import mapRowToCellClassName from '../utils/map-row-to-cell-class-name';
@@ -20,7 +20,7 @@ export default function useTableItemDescription<Item>({
   ref,
   rowClickDetails,
 }: Props<Item>): void {
-  useEffect((): void | VoidFunction => {
+  useLayoutEffect((): void | VoidFunction => {
     if (typeof Component === 'undefined') {
       return;
     }
