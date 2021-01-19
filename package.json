@@ -27,7 +27,8 @@
     "test": "react-scripts test"
   },
   "dependencies": {
-    "awsui-dark-mode": "^1.0.2"
+    "awsui-dark-mode": "^1.0.2",
+    "use-awsui": "^1.0.0"
   },
   "devDependencies": {
     "@awsui/components-react": "^3.0.9",

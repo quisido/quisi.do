@@ -27,6 +27,7 @@
     ["sparkline-svg"],
     ["use-async-function"],
     ["use-aws-sdk"],
+    ["use-awsui"],
     ["use-clippy"],
     ["use-dimensions"],
     ["use-force-update"],

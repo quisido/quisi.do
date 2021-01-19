@@ -3,10 +3,10 @@ import Box, { BoxProps } from '@awsui/components-react/box';
 import { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
 import { FlashbarProps } from '@awsui/components-react/flashbar';
 import { ComponentType, ReactElement, ReactNode } from 'react';
+import { useAppLayout } from 'use-awsui';
 import Breadcrumbs from '../../components/breadcrumbs';
 import Navigation from '../../components/navigation';
 import Notifications from '../../components/notifications';
-import useAppLayout from '../../hooks/use-app-layout';
 
 interface Props {
   Tools?: ComponentType<unknown>;
