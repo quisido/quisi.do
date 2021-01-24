@@ -1,6 +1,7 @@
 import { SideNavigationProps } from '@awsui/components-react/side-navigation';
 import { TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
+import Settings from '../../../components/settings';
 
 export default function useItems(): SideNavigationProps.Item[] {
   const translate: TranslateFunction = useTranslate();
@@ -14,6 +15,8 @@ export default function useItems(): SideNavigationProps.Item[] {
       },
       {
         defaultExpanded: true,
+        text: translate('Applications') || '...',
+        type: 'section',
         items: [
           {
             href: '/spritesheet2gif',
@@ -22,6 +25,8 @@ export default function useItems(): SideNavigationProps.Item[] {
           },
           {
             defaultExpanded: false,
+            text: translate('More applications') || '...',
+            type: 'section',
             items: [
               {
                 external: true,
@@ -60,15 +65,13 @@ export default function useItems(): SideNavigationProps.Item[] {
                 type: 'link',
               },
             ],
-            text: translate('More applications') || '...',
-            type: 'section',
           },
         ],
-        text: translate('Applications') || '...',
-        type: 'section',
       },
       {
         defaultExpanded: true,
+        text: translate('Portfolio') || '...',
+        type: 'section',
         items: [
           {
             href: '/packages',
@@ -86,11 +89,11 @@ export default function useItems(): SideNavigationProps.Item[] {
             type: 'link',
           },
         ],
-        text: translate('Portfolio') || '...',
-        type: 'section',
       },
       {
         defaultExpanded: true,
+        text: translate('Connect with me') || '...',
+        type: 'section',
         items: [
           {
             external: true,
@@ -117,14 +120,12 @@ export default function useItems(): SideNavigationProps.Item[] {
             text: 'NPM',
             type: 'link',
           },
-          */
           {
             external: true,
             href: 'https://www.reddit.com/user/Charles_Stover',
             text: 'Reddit',
             type: 'link',
           },
-          /*
           {
             external: true,
             href: 'https://stackoverflow.com/users/4856301/charles-stover',
@@ -139,8 +140,19 @@ export default function useItems(): SideNavigationProps.Item[] {
             type: 'link',
           },
         ],
-        text: translate('Connect with me') || '...',
+      },
+      {
+        defaultExpanded: false,
+        text: translate('Settings') || '...',
         type: 'section',
+        items: [
+          {
+            type: 'link',
+            text: '',
+            href: '/',
+            info: <Settings />,
+          },
+        ],
       },
     ],
     [translate],
