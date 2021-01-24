@@ -1,16 +1,17 @@
+import { NonCancelableCustomEvent } from '@awsui/components-react/internal/events';
 import { TableProps } from '@awsui/components-react/table';
 import { ComponentType, MutableRefObject, useLayoutEffect } from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import mapRefToTbody from '../utils/map-ref-to-tbody';
-import mapRowToCellClassName from '../utils/map-row-to-cell-class-name';
-import mapRowsToCellBorderBottomWidth from '../utils/map-rows-to-cell-border-bottom-width';
+import mapRefToTbody from './utils/map-ref-to-tbody';
+import mapRowToCellClassName from './utils/map-row-to-cell-class-name';
+import mapRowsToCellBorderBottomWidth from './utils/map-rows-to-cell-border-bottom-width';
 
 interface Props<Item> {
-  Component?: ComponentType<Item>;
+  Component: ComponentType<Item>;
   items: Item[];
-  onRowClick: Required<TableProps>['onRowClick'];
-  ref: MutableRefObject<HTMLDivElement | null>;
-  rowClickDetails: TableProps.OnRowClickDetail<Item>[];
+  onRowClick?: TableProps['onRowClick'];
+  ref: MutableRefObject<HTMLElement | null>;
+  visibleContentCount: number;
 }
 
 export default function useTableItemDescription<Item>({
@@ -18,13 +19,9 @@ export default function useTableItemDescription<Item>({
   onRowClick,
   items,
   ref,
-  rowClickDetails,
+  visibleContentCount,
 }: Props<Item>): void {
   useLayoutEffect((): void | VoidFunction => {
-    if (typeof Component === 'undefined') {
-      return;
-    }
-
     const tbody: HTMLTableSectionElement | null = mapRefToTbody(ref);
     if (tbody === null) {
       return;
@@ -65,16 +62,19 @@ export default function useTableItemDescription<Item>({
 
       const descriptionRow: HTMLTableRowElement = document.createElement('tr');
       descriptionRows.push(descriptionRow);
-      descriptionRow.addEventListener('click', (): void => {
-        onRowClick(
-          new CustomEvent('', {
+      if (typeof onRowClick === 'function') {
+        descriptionRow.addEventListener('click', (): void => {
+          const rowClickEvent: NonCancelableCustomEvent<
+            TableProps.OnRowClickDetail<Item>
+          > = new CustomEvent('', {
             detail: {
               item,
               rowIndex,
             },
-          }),
-        );
-      });
+          });
+          onRowClick(rowClickEvent);
+        });
+      }
       descriptionRow.className = itemRow.className;
 
       const descriptionCell: HTMLTableCellElement = document.createElement(
@@ -82,10 +82,7 @@ export default function useTableItemDescription<Item>({
       );
       descriptionCells.push(descriptionCell);
       descriptionCell.className = cellClassName;
-      descriptionCell.setAttribute(
-        'colspan',
-        itemRow.childNodes.length.toString(),
-      );
+      descriptionCell.setAttribute('colspan', visibleContentCount.toString());
       descriptionCell.style.setProperty('border-top-width', '0');
       descriptionCell.style.setProperty('padding-top', '0');
       render(<Component {...item} />, descriptionCell);
@@ -108,5 +105,5 @@ export default function useTableItemDescription<Item>({
         );
       }
     };
-  }, [Component, items, onRowClick, ref, rowClickDetails]);
+  }, [Component, items, onRowClick, ref, visibleContentCount]);
 }

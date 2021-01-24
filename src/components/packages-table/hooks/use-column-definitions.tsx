@@ -2,9 +2,9 @@ import { TableProps } from '@awsui/components-react/table';
 import { TranslateFunction, useTranslate } from 'lazy-i18n';
 import { ReactElement } from 'react';
 import { useMemo } from 'react';
+import ExplicitDownloads from '../components/explicit-downloads.view';
 import PackageName from '../components/package-name';
 import TotalDownloads from '../components/total-downloads.view';
-import UniqueDownloads from '../components/unique-downloads.view';
 import Item from '../types/item';
 
 interface Props {
@@ -40,14 +40,14 @@ export default function useColumnDefinitions({
         },
       },
       {
-        header: translate('Unique downloads') || '...',
-        id: 'uniqueDownloads',
+        header: translate('Explicit downloads') || '...',
+        id: 'explicitDownloads',
         maxWidth: 240,
         minWidth: 180,
-        sortingField: 'uniqueDownloads',
+        sortingField: 'explicitDownloads',
         width: 240,
         cell(item: Item): ReactElement {
-          return <UniqueDownloads {...item} />;
+          return <ExplicitDownloads {...item} />;
         },
       },
     ],

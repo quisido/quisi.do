@@ -4,7 +4,7 @@ import { PaginationProps } from '@awsui/components-react/pagination';
 import { TableProps } from '@awsui/components-react/table';
 import { TextFilterProps } from '@awsui/components-react/text-filter';
 import { TranslateFunction, useTranslate } from 'lazy-i18n';
-import { useCallback, useMemo } from 'react';
+import { MutableRefObject, useCallback, useMemo, useRef } from 'react';
 import {
   useCollectionPreferences,
   usePagination,
@@ -12,6 +12,8 @@ import {
   useTextFilter,
 } from 'use-awsui';
 import useNpmDownloads from '../../hooks/use-npm-downloads';
+import useTableItemDescription from '../../hooks/use-table-item-description';
+import PackageDescription from './components/package-description';
 import useColumnDefinitions from './hooks/use-column-definitions';
 import Item from './types/item';
 import filterDefaultPackage from './utils/filter-default-package';
@@ -33,6 +35,7 @@ interface State {
   pageSizePreference: CollectionPreferencesProps.PageSizePreference;
   pagesCount: number;
   preferences: CollectionPreferencesProps.Preferences;
+  ref: MutableRefObject<HTMLDivElement | null>;
   sortingColumn?: TableProps.SortingColumn<Item>;
   sortingDescending?: boolean;
   visibleContent?: readonly string[];
@@ -56,10 +59,12 @@ interface State {
 }
 
 const DEFAULT_PAGE_SIZE = 10;
+const DEFAULT_VISIBLE_CONTENT: string[] = ['packageName', 'totalDownloads'];
 const PAGE_SIZES: number[] = [5, 10, 20, 50];
 
 export default function usePackagesTable(): State {
   const { data, isLoading } = useNpmDownloads();
+  const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const translate: TranslateFunction = useTranslate();
 
   const {
@@ -70,7 +75,7 @@ export default function usePackagesTable(): State {
     wrapLines,
   } = useCollectionPreferences({
     defaultPageSize: DEFAULT_PAGE_SIZE,
-    defaultVisibleContent: ['packageName', 'totalDownloads'],
+    defaultVisibleContent: DEFAULT_VISIBLE_CONTENT,
   });
 
   const {
@@ -123,6 +128,12 @@ export default function usePackagesTable(): State {
     return items.filter(filter);
   }, [filter, items]);
 
+  const visibleItems: Item[] = useMemo((): Item[] => {
+    const newVisibleItems: Item[] = [...filteredItems];
+    newVisibleItems.sort(sort);
+    return paginate(newVisibleItems);
+  }, [filteredItems, paginate, sort]);
+
   const mapNumberToPageSizeOption = useCallback(
     (value: number): CollectionPreferencesProps.PageSizeOption => ({
       label: translate('$count packages', { count: value }) || value.toString(),
@@ -131,9 +142,16 @@ export default function usePackagesTable(): State {
     [translate],
   );
 
+  useTableItemDescription({
+    Component: PackageDescription,
+    items: visibleItems,
+    ref,
+    visibleContentCount: (visibleContent || DEFAULT_VISIBLE_CONTENT).length,
+  });
+
   const filteredItemsCount: number = filteredItems.length;
   return {
-    cancelLabel: translate('Confirm') || '...',
+    cancelLabel: translate('Cancel') || '...',
     collectionPreferencesTitle: translate('Preferences') || '...',
     columnDefinitions,
     confirmLabel: translate('Confirm') || '...',
@@ -145,10 +163,12 @@ export default function usePackagesTable(): State {
     handlePaginationChange,
     handleSortingChange,
     handleTextFilterChange,
+    items: visibleItems,
     loading: isLoading,
     loadingText: translate('Loading packages') || '...',
     pagesCount: Math.ceil(items.length / (pageSize || DEFAULT_PAGE_SIZE)),
     preferences,
+    ref,
     sortingColumn,
     sortingDescending,
     visibleContent,
@@ -164,11 +184,6 @@ export default function usePackagesTable(): State {
         translate('$count matches', { count: filteredItemsCount }) || '...'
       );
     }, [filteredItemsCount, translate]),
-    items: useMemo((): Item[] => {
-      const newItems: Item[] = [...filteredItems];
-      newItems.sort(sort);
-      return paginate(newItems);
-    }, [filteredItems, paginate, sort]),
     pageSizePreference: useMemo(
       (): CollectionPreferencesProps.PageSizePreference => ({
         title: translate('Select page size.') || '...',
@@ -192,8 +207,8 @@ export default function usePackagesTable(): State {
                 label: translate('Total downloads') || '...',
               },
               {
-                id: 'uniqueDownloads',
-                label: translate('Unique downloads') || '...',
+                id: 'explicitDownloads',
+                label: translate('Explicit downloads') || '...',
               },
             ],
           },

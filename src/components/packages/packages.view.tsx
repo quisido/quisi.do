@@ -46,7 +46,7 @@ export default function Packages(): ReactElement {
               checked={isUniqueDownloads}
               onChange={handleUniqueDownloadsChange}
             >
-              Unique downloads
+              Explicit downloads
             </Toggle>
           }
           ariaLabel="Donut chart"

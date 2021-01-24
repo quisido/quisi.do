@@ -15,11 +15,11 @@ const DEFAULT_CHILDREN: readonly BreadcrumbGroupProps.Item[] = Object.freeze(
 export default function Breadcrumbs({
   children = DEFAULT_CHILDREN,
 }: Props): ReactElement {
-  const { handleFollow, items } = useBreadcrumbs(children);
+  const { ariaLabel, handleFollow, items } = useBreadcrumbs(children);
 
   return (
     <BreadcrumbGroup
-      ariaLabel="Breadcrumbs"
+      ariaLabel={ariaLabel}
       items={items}
       onFollow={handleFollow}
     />

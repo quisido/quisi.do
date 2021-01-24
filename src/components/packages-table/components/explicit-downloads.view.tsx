@@ -3,12 +3,12 @@ import NumberFormat from 'number-format-react';
 import { ReactElement } from 'react';
 import Item from '../types/item';
 
-export default function UniqueDownloads({
-  uniqueDownloads,
+export default function ExplicitDownloads({
+  explicitDownloads,
 }: Item): ReactElement {
   return (
     <Box float="right">
-      <NumberFormat>{uniqueDownloads}</NumberFormat>
+      <NumberFormat>{explicitDownloads}</NumberFormat>
     </Box>
   );
 }

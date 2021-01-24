@@ -11,10 +11,10 @@ import reduceArrayOfArraysToSum from './utils/reduce-array-of-arrays-to-sum';
 interface State {
   breadcrumbs: BreadcrumbGroupProps.Item[];
   // detailPopoverContent: PieChartProps<Item>['detailPopoverContent'];
-  handleUniqueDownloadsChange: ToggleProps['onChange'];
+  handleExplicitDownloadsChange: ToggleProps['onChange'];
   innerMetricValue: string;
+  isExplicitDownloads: ToggleProps['checked'];
   isLoading: boolean;
-  isUniqueDownloads: ToggleProps['checked'];
   // items: Item[];
   notifications: FlashbarProps.MessageDefinition[];
   // segmentDescription: PieChartProps<Item>['segmentDescription'];
@@ -27,8 +27,8 @@ export default function usePackages(): State {
   const translate: TranslateFunction = useTranslate();
 
   const {
-    checked: isUniqueDownloads,
-    handleChange: handleUniqueDownloadsChange,
+    checked: isExplicitDownloads,
+    handleChange: handleExplicitDownloadsChange,
   } = useToggle({
     defaultChecked: false,
   });
@@ -106,7 +106,7 @@ export default function usePackages(): State {
           value: EN_US_NUMBER_FORMAT.format(itemTotalDownloads),
         },
         {
-          key: 'Unique downloads',
+          key: 'Explicit downloads',
           value: EN_US_NUMBER_FORMAT.format(uniqueDownloads),
         },
         {
@@ -114,16 +114,16 @@ export default function usePackages(): State {
           value: `${totalDownloadsPercent}%`,
         },
         {
-          key: 'Unique downloads (%)',
+          key: 'Explicit downloads (%)',
           value: `${uniqueDownloadsPercent}%`,
         },
       ];
     },
     */
-    handleUniqueDownloadsChange,
+    handleExplicitDownloadsChange,
     innerMetricValue: EN_US_NUMBER_FORMAT.format(totalDownloads),
+    isExplicitDownloads,
     isLoading,
-    isUniqueDownloads,
     notifications,
     /*
     segmentDescription({

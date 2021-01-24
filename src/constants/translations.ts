@@ -1,8 +1,9 @@
 import { Translations } from 'lazy-i18n';
-import en from '../translations/en.json';
+import english from '../translations/english.json';
 
 const TRANSLATIONS: Record<string, Translations> = {
-  en,
+  cebuano: () => import('../translations/cebuano.json'),
+  english,
 };
 
 export default TRANSLATIONS;

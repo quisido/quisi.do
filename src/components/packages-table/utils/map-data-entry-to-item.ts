@@ -10,7 +10,7 @@ export default function mapDataEntryToItem(
   entries: [string, number[]][],
 ): Item {
   const totalDownloads: number = downloads.reduce(reduceArrayToSum, 0);
-  let uniqueDownloads: number = totalDownloads;
+  let explicitDownloads: number = totalDownloads;
   for (const [
     dependentPackageName,
     dependencies,
@@ -30,17 +30,17 @@ export default function mapDataEntryToItem(
         break;
       }
       const [, dependentDownloads] = dependentEntry;
-      uniqueDownloads -= dependentDownloads.reduce(reduceArrayToSum, 0);
+      explicitDownloads -= dependentDownloads.reduce(reduceArrayToSum, 0);
       break;
     }
   }
   return {
     description: PACKAGE_DESCRIPTIONS.get(packageName),
     downloads,
+    explicitDownloads,
     isHighlighted: false,
     packageName,
     repositoryName: mapPackageNameToRepositoryName(packageName),
     totalDownloads,
-    uniqueDownloads,
   };
 }

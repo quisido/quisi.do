@@ -1,8 +1,10 @@
 import { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
+import { TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
-import useReactRouterBreadcrumbs from '../../hooks/use-react-router-breadcrumbs';
+import { useBreadcrumbGroup } from 'use-awsui-router';
 
 interface State {
+  ariaLabel?: string;
   handleFollow: BreadcrumbGroupProps['onFollow'];
   items: BreadcrumbGroupProps.Item[];
 }
@@ -17,7 +19,8 @@ const DEFAULT_ITEMS: BreadcrumbGroupProps.Item[] = [
 export default function useBreadcrumbs(
   breadcrumbs: readonly BreadcrumbGroupProps.Item[],
 ): State {
-  const { handleFollow } = useReactRouterBreadcrumbs();
+  const { handleFollow } = useBreadcrumbGroup();
+  const translate: TranslateFunction = useTranslate();
 
   const items: BreadcrumbGroupProps.Item[] = useMemo(
     (): BreadcrumbGroupProps.Item[] => [...DEFAULT_ITEMS, ...breadcrumbs],
@@ -25,6 +28,7 @@ export default function useBreadcrumbs(
   );
 
   return {
+    ariaLabel: translate('Breadcrumbs') || undefined,
     handleFollow,
     items,
   };

@@ -29,6 +29,7 @@ export default function PackagesTable(): ReactElement {
     pageSizePreference,
     pagesCount,
     preferences,
+    ref,
     sortingColumn,
     sortingDescending,
     visibleContent,
@@ -38,7 +39,7 @@ export default function PackagesTable(): ReactElement {
   } = usePackagesTable();
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} ref={ref}>
       <Table
         columnDefinitions={columnDefinitions}
         filter={

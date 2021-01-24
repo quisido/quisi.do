@@ -17,7 +17,7 @@ export default function App(): ReactElement {
   return (
     <AwsuiDarkMode root="body">
       <BrowserRouter>
-        <I18nProvider locale="en" translations={TRANSLATIONS}>
+        <I18nProvider locale="english" translations={TRANSLATIONS}>
           <QueryClientProvider client={queryClient}>
             <Switch>
               <Route
