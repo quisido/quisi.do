@@ -149,7 +149,7 @@ export default function useItems(): SideNavigationProps.Item[] {
           {
             type: 'link',
             text: '',
-            href: '/',
+            href: '#settings',
             info: <Settings />,
           },
         ],

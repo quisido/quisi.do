@@ -1,12 +1,12 @@
 import Box from '@awsui/components-react/box';
 import SideNavigation from '@awsui/components-react/side-navigation';
 import I18n from 'lazy-i18n';
-import { ReactElement } from 'react';
+import { ReactElement, memo } from 'react';
 import useNavigation from './navigation.hook';
 import styles from './navigation.module.scss';
 
-export default function Navigation(): ReactElement {
-  const { activeHref, handleFollow, items } = useNavigation();
+function Navigation(): ReactElement {
+  const { activeHref, handleChange, handleFollow, items } = useNavigation();
 
   return (
     <>
@@ -17,8 +17,11 @@ export default function Navigation(): ReactElement {
         activeHref={activeHref}
         className={styles.sideNavigation}
         items={items}
+        onChange={handleChange}
         onFollow={handleFollow}
       />
     </>
   );
 }
+
+export default memo(Navigation);
