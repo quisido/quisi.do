@@ -3,11 +3,15 @@ import { ReactElement } from 'react';
 import Item from '../../types/item';
 import usePackageName from './package-name.hook';
 
+interface Props extends Item {
+  filteringText: string;
+}
+
 export default function PackageName({
   filteringText,
   packageName,
   repositoryName,
-}: Item): ReactElement {
+}: Props): ReactElement {
   const { children, href, ref } = usePackageName({
     filteringText,
     packageName,

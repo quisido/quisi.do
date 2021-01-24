@@ -56,6 +56,7 @@ export default function SpriteSheet2Gif(): ReactElement {
     <AppLayout
       Tools={Tools}
       breadcrumbs={BREADCRUMBS}
+      contentType="wizard"
       notifications={notifications}
       onToolsChange={handleToolsChange}
       toolsHide={false}

@@ -6,6 +6,7 @@ import mapPackageNameToRepositoryName from '../utils/map-package-name-to-reposit
 
 export default function mapDataEntryToItem(
   [packageName, downloads]: [string, number[]],
+  _index: number,
   entries: [string, number[]][],
 ): Item {
   const totalDownloads: number = downloads.reduce(reduceArrayToSum, 0);
@@ -36,13 +37,10 @@ export default function mapDataEntryToItem(
   return {
     description: PACKAGE_DESCRIPTIONS.get(packageName),
     downloads,
-    filteringText: '',
     isHighlighted: false,
     packageName,
     repositoryName: mapPackageNameToRepositoryName(packageName),
-    title: packageName,
     totalDownloads,
     uniqueDownloads,
-    value: uniqueDownloads,
   };
 }

@@ -3530,29 +3530,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"awsui-dark-mode@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "awsui-dark-mode@npm:1.0.2"
+"awsui-dark-mode@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "awsui-dark-mode@npm:1.0.3"
   dependencies:
-    awsui-theme: ^1.0.3
+    awsui-theme: ^1.0.4
   peerDependencies:
     "@awsui/components-react": ^3.0.0
     "@awsui/design-tokens": ^3.0.0
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: f397309707a0dba317d9b38f649f83d8c552227af5188c507e68f601c36b3f3c7cbfb464a39538280485ee0fa2258df7c480bc617a1e0268c831234afbd0dd9a
+  checksum: bb03d15f51544d4b8d54c17220d28c8621a37e696a89282096cbbc944224e89326630a2bd7da82049e016b3c088e57c3fcd0301194a29a1e27d135a309a001f0
   languageName: node
   linkType: hard
 
-"awsui-theme@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "awsui-theme@npm:1.0.3"
+"awsui-theme@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "awsui-theme@npm:1.0.4"
   peerDependencies:
     "@awsui/components-react": ^3.0.9
     "@awsui/design-tokens": ^3.0.0
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: 56772bd5027a082b5d82379eeef0799850abe5fc2f6c9471af1ff8697d102bebdb0a189f96e7caf3d4c42447e025c7644ad136c932490537ab1d618a3e493e20
+  checksum: 624ab9844b7b22bd56b89e300dedcc86b8db4ead8fb03b48f8b631a4ef6436a4c429b328c80f256fc2b145ab4d1d9d5f784d5ee5cc8f22f6f47a1300a2bd7c44
   languageName: node
   linkType: hard
 
@@ -4408,13 +4408,14 @@ __metadata:
     "@types/react-router-dom": ^5.1.7
     "@typescript-eslint/eslint-plugin": ^4.12.0
     "@typescript-eslint/parser": ^4.12.0
-    awsui-dark-mode: ^1.0.2
+    awsui-dark-mode: ^1.0.3
     eslint: ^7.17.0
     eslint-config-prettier: ^7.1.0
     eslint-plugin-prettier: ^3.3.1
     eslint-plugin-react: ^7.22.0
     eslint-plugin-react-hooks: ^4.2.0
     history: ^5.0.0
+    lazy-i18n: ^1.0.1
     node-sass: ^4.0.0
     number-format-react: ^1.0.0
     prettier: ^2.2.1
@@ -4427,7 +4428,7 @@ __metadata:
     react-router-dom: ^5.2.0
     react-scripts: ^4.0.1
     typescript: ^4.1.3
-    use-awsui: ^1.0.0
+    use-awsui: ^1.0.1
   languageName: unknown
   linkType: soft
 
@@ -9651,6 +9652,16 @@ fsevents@~2.1.2:
     lodash: ^4.17.5
     webpack-sources: ^1.1.0
   checksum: aaa8255d4e1e9f20fd98aa6dd89af4e8efa27a516d4c3a183cd1b368c20ac4102f4ddb659010fce5ea1eaed66b59d88ea6cd1063b75c8db1e43ba129c64b68c4
+  languageName: node
+  linkType: hard
+
+"lazy-i18n@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "lazy-i18n@npm:1.0.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  checksum: f4463074440c3318cf6d901dc57e840c05feb8d50fa617c41f24ac135bb384774ddd9027ff374d3f33759945f59ef1adb69821a2e0d9e881ceb2190b5892b686
   languageName: node
   linkType: hard
 
@@ -15477,14 +15488,14 @@ typescript@^4.1.3:
   languageName: node
   linkType: hard
 
-"use-awsui@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "use-awsui@npm:1.0.0"
+"use-awsui@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "use-awsui@npm:1.0.1"
   peerDependencies:
     "@awsui/components-react": ^3.0.0
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: 90d63abdbd47506463646a1c994c7d1cfaf6707365e67f7d1391f4a769563682437fd788b539c562d40c5d3b542a82da3c3e856d6e1ce2284e3aa2eb3bf8a47e
+  checksum: 410e00f8e3bd3ac500f4c9154cfa6b2a35dfb7a77c502a6f60f03aef8fc7a44500d3155bd4b17f0e42a1e307b60b87e8d1f0ee187d7afa84cdcabf98c9c4ee15
   languageName: node
   linkType: hard
 
