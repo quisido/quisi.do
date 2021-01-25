@@ -1,30 +1,38 @@
 import Box from '@awsui/components-react/box';
-import { ReactElement } from 'react';
+import { PropsWithChildren, ReactElement, ReactNode } from 'react';
+import PACKAGE_DESCRIPTIONS from '../../../../constants/package-descriptions';
 import Item from '../../types/item';
 
+function Paragraph({ children }: PropsWithChildren<unknown>): ReactElement {
+  return (
+    <Box color="text-body-secondary" fontSize="body-s" variant="p">
+      {children}
+    </Box>
+  );
+}
+
 export default function PackageDescription({
-  description,
+  packageName,
 }: Item): null | ReactElement {
+  const description: ReactNode | undefined = PACKAGE_DESCRIPTIONS.get(
+    packageName,
+  );
+
   if (typeof description === 'undefined') {
     return null;
   }
 
-  return (
-    <>
-      {description.map(
-        (paragraph: string): ReactElement => {
-          return (
-            <Box
-              color="text-body-secondary"
-              fontSize="body-s"
-              key={paragraph}
-              variant="p"
-            >
-              {paragraph}
-            </Box>
-          );
-        },
-      )}
-    </>
-  );
+  if (Array.isArray(description)) {
+    return (
+      <>
+        {description.map(
+          (paragraph: ReactNode, index: number): ReactElement => {
+            return <Paragraph key={index}>{paragraph}</Paragraph>;
+          },
+        )}
+      </>
+    );
+  }
+
+  return <Paragraph>{description}</Paragraph>;
 }

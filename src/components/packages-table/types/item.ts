@@ -1,5 +1,4 @@
 export default interface Item {
-  description?: string[];
   downloads: number[];
   explicitDownloads: number;
   isHighlighted: boolean;

@@ -1,5 +1,4 @@
 import PACKAGE_DEPENDENCIES from '../../../constants/package-dependencies';
-import PACKAGE_DESCRIPTIONS from '../../../constants/package-descriptions';
 import reduceArrayToSum from '../../../utils/reduce-array-to-sum';
 import Item from '../types/item';
 import mapPackageNameToRepositoryName from '../utils/map-package-name-to-repository-name';
@@ -35,7 +34,6 @@ export default function mapDataEntryToItem(
     }
   }
   return {
-    description: PACKAGE_DESCRIPTIONS.get(packageName),
     downloads,
     explicitDownloads,
     isHighlighted: false,
