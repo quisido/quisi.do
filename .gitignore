@@ -1,6 +1,7 @@
 /.git/
 /.idea/
 /.vscode/
+/.yarn/
 /build/
 /dist/
 /jest/
@@ -17,3 +18,8 @@
 /yarn.lock
 /yarn-error.log
 .DS_Store
+!/.yarn/cache
+!/.yarn/releases
+!/.yarn/plugins
+!/.yarn/sdks
+!/.yarn/versions
