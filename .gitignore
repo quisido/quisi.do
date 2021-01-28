@@ -1,7 +1,9 @@
 /.git/
 /.idea/
 /.vscode/
-/.yarn/
+/.yarn/unplugged/
+/.yarn/build-state.yml
+/.yarn/install-state.gz
 /build/
 /dist/
 /jest/
@@ -18,8 +20,3 @@
 /yarn.lock
 /yarn-error.log
 .DS_Store
-!/.yarn/cache
-!/.yarn/releases
-!/.yarn/plugins
-!/.yarn/sdks
-!/.yarn/versions
