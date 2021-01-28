@@ -12,3 +12,5 @@ To install this repository to begin local development, use the following command
 - `yarn` to install the existing dependencies.
 - `yarn up * && yarn up @*/*` to upgrade to the latest dependencies.
 - `yarn dlx @yarnpkg/pnpify --sdk vscode` to integrate with VS Code.
+
+To run the website locally, use `yarn start`.

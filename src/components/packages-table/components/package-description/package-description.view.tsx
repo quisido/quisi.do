@@ -1,15 +1,7 @@
-import Box from '@awsui/components-react/box';
-import { PropsWithChildren, ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import PACKAGE_DESCRIPTIONS from '../../../../constants/package-descriptions';
+import Paragraph from '../../components/package-description-paragraph';
 import Item from '../../types/item';
-
-function Paragraph({ children }: PropsWithChildren<unknown>): ReactElement {
-  return (
-    <Box color="text-body-secondary" fontSize="body-s" variant="p">
-      {children}
-    </Box>
-  );
-}
 
 export default function PackageDescription({
   packageName,
