@@ -40,7 +40,6 @@ export default function PackagesTable(): ReactElement {
   return (
     <div ref={ref}>
       <Table
-        className={styles.table}
         columnDefinitions={columnDefinitions}
         filter={
           <TextFilter
