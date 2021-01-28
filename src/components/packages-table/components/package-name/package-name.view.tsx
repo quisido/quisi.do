@@ -20,11 +20,7 @@ export default function PackageName({
 
   return (
     <span ref={ref}>
-      <Link
-        // external
-        href={href}
-        target="_blank"
-      >
+      <Link href={href} target="_blank">
         {children}
       </Link>
     </span>

@@ -5,7 +5,6 @@ import Table from '@awsui/components-react/table';
 import TextFilter from '@awsui/components-react/text-filter';
 import I18n from 'lazy-i18n';
 import { ReactElement } from 'react';
-import styles from './packages-table.module.scss';
 import usePackagesTable from './packages-table.hook';
 
 export default function PackagesTable(): ReactElement {
@@ -39,8 +38,9 @@ export default function PackagesTable(): ReactElement {
   } = usePackagesTable();
 
   return (
-    <div className={styles.root} ref={ref}>
+    <div ref={ref}>
       <Table
+        className={styles.table}
         columnDefinitions={columnDefinitions}
         filter={
           <TextFilter
