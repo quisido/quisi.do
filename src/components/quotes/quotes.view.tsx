@@ -1,21 +1,29 @@
-import { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
-import Cards from '@awsui/components-react/cards';
+import Cards, { CardsProps } from '@awsui/components-react/cards';
+// import Header from '@awsui/components-react/header';
 import { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
 import CARD_DEFINITION from './constants/card-definition';
 import ITEMS from './constants/quotes';
+import useQuotes from './quotes.hook';
 
-const BREADCRUMBS: BreadcrumbGroupProps.Item[] = [
+const CARDS_PER_ROW: CardsProps.CardsLayout[] = [
   {
-    href: '/quotes',
-    text: 'Quotes',
+    cards: 3,
   },
 ];
 
-export default function Publications(): ReactElement {
+export default function Quotes(): ReactElement {
+  const { breadcrumbs } = useQuotes();
+
   return (
-    <AppLayout breadcrumbs={BREADCRUMBS} toolsHide>
-      <Cards cardDefinition={CARD_DEFINITION} items={ITEMS} />
+    <AppLayout breadcrumbs={breadcrumbs} toolsHide>
+      <Cards
+        cardDefinition={CARD_DEFINITION}
+        cardsPerRow={CARDS_PER_ROW}
+        // header={<Header>Quotes</Header>}
+        items={ITEMS}
+        trackBy="author"
+      />
     </AppLayout>
   );
 }
