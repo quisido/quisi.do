@@ -1,4 +1,7 @@
 {
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
+
   "env": {
     "jest": true,
     "node": true
@@ -14,21 +17,18 @@
     "prettier/react"
   ],
 
-  "parser": "@typescript-eslint/parser",
-
   "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": false
-    },
     "extraFileExtensions": [".json"],
     "project": ["./tsconfig.json", "./tsconfig.eslint.json"],
     "tsconfigRootDir": "./",
     "useJSXTextNode": true,
-    "warnOnUnsupportedTypeScriptVersion": false
-  },
+    "warnOnUnsupportedTypeScriptVersion": false,
 
-  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": false
+    }
+  },
 
   "rules": {
     "prettier/prettier": "error",
