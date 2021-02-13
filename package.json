@@ -24,7 +24,8 @@
   "scripts": {
     "build": "react-scripts build",
     "start": "react-scripts start",
-    "test": "jest"
+    "test": "eslint && jest",
+    "test-watch": "jest --watch"
   },
   "dependencies": {
     "awsui-dark-mode": "^1.0.3",

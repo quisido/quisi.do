@@ -12,7 +12,7 @@ interface Props {
   breadcrumbs?: BreadcrumbGroupProps.Item[];
   children: ReactNode;
   contentType?: AppLayoutProps.ContentType;
-  notifications?: FlashbarProps.MessageDefinition[] | null;
+  notifications?: FlashbarProps.MessageDefinition[];
   onToolsChange?: AppLayoutProps['onToolsChange'];
   toolsHide?: boolean;
   toolsOpen?: boolean;

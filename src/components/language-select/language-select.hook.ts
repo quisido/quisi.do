@@ -11,17 +11,15 @@ interface State {
   selectedOption: SelectProps.Option;
 }
 
-const ENGLISH_OPTION: SelectProps.Option = {
-  label: 'English',
-  value: Language.English,
-};
-
 export default function useLanguageSelect(): State {
   const [language, setLanguage] = useCapsule(LanguageCapsule);
 
   const options: SelectProps.Option[] = useMemo((): SelectProps.Option[] => {
     return [
-      ENGLISH_OPTION,
+      {
+        label: 'English',
+        value: Language.English,
+      },
       {
         label: 'Cebuano',
         value: Language.Cebuano,
@@ -31,16 +29,20 @@ export default function useLanguageSelect(): State {
 
   return {
     options,
+
     handleChange: useCallback(
       (event: NonCancelableCustomEvent<SelectProps.ChangeDetail>): void => {
         setLanguage(event.detail.selectedOption.value as Language);
       },
       [setLanguage],
     ),
+
     selectedOption: useMemo((): SelectProps.Option => {
       const findSelectedOption = ({ value }: SelectProps.Option): boolean =>
         value === language;
-      return options.find(findSelectedOption) || ENGLISH_OPTION;
+      // Since `language` is a Language enum value and all Language enum values
+      //   have a corresponding option, we can assert that an option was found.
+      return options.find(findSelectedOption) as SelectProps.Option;
     }, [language, options]),
   };
 }

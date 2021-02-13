@@ -47,6 +47,7 @@ export default function useNavigation(): State {
   return {
     activeHref,
     handleFollow,
+
     handleChange: useCallback(
       (e: NonCancelableCustomEvent<SideNavigationProps.ChangeDetail>): void => {
         setExpandedMap(
@@ -61,6 +62,7 @@ export default function useNavigation(): State {
       },
       [setExpandedMap],
     ),
+
     items: useMemo((): SideNavigationProps.Item[] => {
       return items.map(recursiveExpand);
     }, [items, recursiveExpand]),

@@ -4,7 +4,7 @@ import { PaginationProps } from '@awsui/components-react/pagination';
 import { TableProps } from '@awsui/components-react/table';
 import { TextFilterProps } from '@awsui/components-react/text-filter';
 import { TranslateFunction, useTranslate } from 'lazy-i18n';
-import { MutableRefObject, useCallback, useMemo, useRef } from 'react';
+import { MutableRefObject, useMemo, useRef } from 'react';
 import {
   useCollectionPreferences,
   usePagination,
@@ -15,6 +15,10 @@ import useNpmDownloads from '../../hooks/use-npm-downloads';
 import useTableItemDescription from '../../hooks/use-table-item-description';
 import PackageDescription from './components/package-description';
 import useColumnDefinitions from './hooks/use-column-definitions';
+import useCountText from './hooks/use-count-text';
+import usePageSizePreference from './hooks/use-page-size-preference';
+import useVisibleContentPreference from './hooks/use-visible-content-preference';
+import useWrapLinesPreference from './hooks/use-wrap-lines-preference';
 import Item from './types/item';
 import filterDefaultPackage from './utils/filter-default-package';
 import mapDataEntryToItem from './utils/map-data-entry-to-item';
@@ -60,13 +64,14 @@ interface State {
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_VISIBLE_CONTENT: string[] = ['packageName', 'totalDownloads'];
-const PAGE_SIZES: number[] = [5, 10, 20, 50];
 
 export default function usePackagesTable(): State {
+  // Contexts
   const { data, isLoading } = useNpmDownloads();
   const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const translate: TranslateFunction = useTranslate();
 
+  // States
   const {
     handleConfirm: handleCollectionPreferencesConfirm,
     pageSize,
@@ -103,12 +108,6 @@ export default function usePackagesTable(): State {
     handleChange: handleTextFilterChange,
   } = useTextFilter();
 
-  const columnDefinitions: TableProps.ColumnDefinition<Item>[] = useColumnDefinitions(
-    {
-      filteringText,
-    },
-  );
-
   const items: Item[] = useMemo((): Item[] => {
     if (typeof data === 'undefined') {
       return [];
@@ -117,30 +116,19 @@ export default function usePackagesTable(): State {
     return entries.map(mapDataEntryToItem).filter(filterDefaultPackage);
   }, [data]);
 
-  const filter = useCallback(
-    ({ packageName }: Item): boolean => {
-      return packageName.indexOf(filteringText) !== -1;
-    },
-    [filteringText],
-  );
-
   const filteredItems: Item[] = useMemo((): Item[] => {
+    const filter = ({ packageName }: Item): boolean => {
+      return packageName.indexOf(filteringText) !== -1;
+    };
+
     return items.filter(filter);
-  }, [filter, items]);
+  }, [filteringText, items]);
 
   const visibleItems: Item[] = useMemo((): Item[] => {
     const newVisibleItems: Item[] = [...filteredItems];
     newVisibleItems.sort(sort);
     return paginate(newVisibleItems);
   }, [filteredItems, paginate, sort]);
-
-  const mapNumberToPageSizeOption = useCallback(
-    (value: number): CollectionPreferencesProps.PageSizeOption => ({
-      label: translate('$count packages', { count: value }) || value.toString(),
-      value,
-    }),
-    [translate],
-  );
 
   useTableItemDescription({
     Component: PackageDescription,
@@ -153,8 +141,8 @@ export default function usePackagesTable(): State {
   return {
     cancelLabel: translate('Cancel') || '...',
     collectionPreferencesTitle: translate('Preferences') || '...',
-    columnDefinitions,
     confirmLabel: translate('Confirm') || '...',
+    countText: useCountText(filteredItemsCount),
     currentPageIndex,
     filteringAriaLabel: translate('Filter packages') || undefined,
     filteringPlaceholder: translate('Filter packages') || '...',
@@ -167,62 +155,18 @@ export default function usePackagesTable(): State {
     loading: isLoading,
     loadingText: translate('Loading packages') || '...',
     pagesCount: Math.ceil(items.length / (pageSize || DEFAULT_PAGE_SIZE)),
+    pageSizePreference: usePageSizePreference(),
     preferences,
     ref,
     sortingColumn,
     sortingDescending,
     visibleContent,
+    visibleContentPreference: useVisibleContentPreference(),
     wrapLines,
-    countText: useMemo((): string => {
-      if (filteredItemsCount === 0) {
-        return translate('No matches') || '...';
-      }
-      if (filteredItemsCount === 1) {
-        return translate('1 match') || '...';
-      }
-      return (
-        translate('$count matches', { count: filteredItemsCount }) || '...'
-      );
-    }, [filteredItemsCount, translate]),
-    pageSizePreference: useMemo(
-      (): CollectionPreferencesProps.PageSizePreference => ({
-        title: translate('Select page size.') || '...',
-        options: PAGE_SIZES.map(mapNumberToPageSizeOption),
-      }),
-      [mapNumberToPageSizeOption, translate],
-    ),
-    visibleContentPreference: useMemo(
-      (): CollectionPreferencesProps.VisibleContentPreference => ({
-        title: translate('Select visible columns.') || '...',
-        options: [
-          {
-            label: translate('Package properties') || '...',
-            options: [
-              {
-                id: 'packageName',
-                label: translate('Package name') || '...',
-              },
-              {
-                id: 'totalDownloads',
-                label: translate('Total downloads') || '...',
-              },
-              {
-                id: 'explicitDownloads',
-                label: translate('Explicit downloads') || '...',
-              },
-            ],
-          },
-        ],
-      }),
-      [translate],
-    ),
-    wrapLinesPreference: useMemo(
-      (): CollectionPreferencesProps.WrapLinesPreference => ({
-        description:
-          translate('Select to wrap lines and see all text.') || '...',
-        label: translate('Wrap lines') || '...',
-      }),
-      [translate],
-    ),
+    wrapLinesPreference: useWrapLinesPreference(),
+
+    columnDefinitions: useColumnDefinitions({
+      filteringText,
+    }),
   };
 }

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import createTestHistory from '../../test-utils/create-test-history';
-import App from '.';
+import createTestHistory from '../../../test-utils/create-test-history';
+import Routes from './routes.view';
 
 const { testHistory, TestRouter } = createTestHistory({ path: '/' });
 
@@ -18,7 +18,7 @@ describe('App', (): void => {
       pathname: '/become-the-junior-developer-that-companies-want-to-hire/',
     });
 
-    render(<App />, {
+    render(<Routes />, {
       wrapper: TestRouter,
     });
 

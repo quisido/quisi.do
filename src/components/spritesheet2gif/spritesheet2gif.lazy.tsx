@@ -1,5 +1,6 @@
 import Box from '@awsui/components-react/box';
 import Spinner from '@awsui/components-react/spinner';
+import I18n from 'lazy-i18n';
 import { ReactElement, Suspense, lazy } from 'react';
 
 // TODO: Lazy should only apply to the contents of <AppLayout />, so dynamic
@@ -14,7 +15,7 @@ export default function SpriteSheet2GifSuspense(): ReactElement {
       fallback={
         <Box>
           <Spinner />
-          Loading spritesheet to GIF converter
+          <I18n>Loading spritesheet to GIF converter</I18n>
         </Box>
       }
     >

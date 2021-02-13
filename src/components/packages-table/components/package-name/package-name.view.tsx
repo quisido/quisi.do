@@ -12,17 +12,15 @@ export default function PackageName({
   packageName,
   repositoryName,
 }: Props): ReactElement {
-  const { children, href, ref } = usePackageName({
+  const { children, href } = usePackageName({
     filteringText,
     packageName,
     repositoryName,
   });
 
   return (
-    <span ref={ref}>
-      <Link href={href} target="_blank">
-        {children}
-      </Link>
-    </span>
+    <Link href={href} target="_blank">
+      {children}
+    </Link>
   );
 }

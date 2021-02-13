@@ -41,6 +41,13 @@ export default function useCSAppLayout({
   return {
     handleNavigationChange,
     navigationOpen,
+    handleToolsChange:
+      typeof onToolsChange === 'function' ? onToolsChange : handleToolsChange,
+    toolsOpen:
+      typeof controlledToolsOpen === 'boolean'
+        ? controlledToolsOpen
+        : toolsOpen,
+
     ariaLabels: useMemo(
       (): AppLayoutProps.Labels => ({
         navigation: translate('Navigation') || undefined,
@@ -53,11 +60,5 @@ export default function useCSAppLayout({
       }),
       [translate],
     ),
-    handleToolsChange:
-      typeof onToolsChange === 'function' ? onToolsChange : handleToolsChange,
-    toolsOpen:
-      typeof controlledToolsOpen === 'boolean'
-        ? controlledToolsOpen
-        : toolsOpen,
   };
 }
