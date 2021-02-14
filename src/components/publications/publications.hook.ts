@@ -3,6 +3,7 @@ import { CardsProps } from '@awsui/components-react/cards';
 import { FlashbarProps } from '@awsui/components-react/flashbar';
 import { NonCancelableCustomEvent } from '@awsui/components-react/internal/events';
 import { SelectProps } from '@awsui/components-react/select';
+import { TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo, useState } from 'react';
 import ReactCapsule, { useCapsule } from 'react-capsule';
 import { useQuery } from 'react-query';
@@ -10,31 +11,26 @@ import DevArticle from '../../types/dev-article';
 import MediumArticle from '../../types/medium-article';
 import CARD_DEFINITION from './constants/card-definition';
 import Sort from './constants/sort';
-import SORT_BY_VIEWS_PER_DAY_OPTION from './constants/sort-by-views-per-day-option';
-import SORT_OPTIONS from './constants/sort-options';
+import useItems from './hooks/use-items';
 import useNotifications from './hooks/use-notifications';
+import useSortOptions from './hooks/use-sort-options';
+import mapSortToSortFunction from './map/map-sort-to-sort-function';
 import Item from './types/item';
 import filterItemsByMinimumViews from './utils/filter-items-by-minimum-views';
-import sortItemsByPublicationDate from './utils/sort-items-by-publication-date';
-import sortItemsByReactions from './utils/sort-items-by-reactions';
-import sortItemsByReactionsPerDay from './utils/sort-items-by-reactions-per-day';
-import sortItemsByReactionsPerView from './utils/sort-items-by-reactions-per-view';
-import sortItemsByReadingTime from './utils/sort-items-by-reading-time';
-import sortItemsByViews from './utils/sort-items-by-views';
-import sortItemsByViewsPerDay from './utils/sort-items-by-views-per-day';
-
-type SortFunction<Item> = (a: Item, b: Item) => -1 | 0 | 1;
 
 interface State {
   cardDefinition: CardsProps<Item>['cardDefinition'];
+  dismissAriaLabel?: string;
   handleAlertDismiss: AlertProps['onDismiss'];
   handleSortChange: SelectProps['onChange'];
   isAlertVisible: boolean;
   items: CardsProps<Item>['items'];
   loading: CardsProps<Item>['loading'];
+  loadingText?: string;
   notifications: FlashbarProps.MessageDefinition[];
   selectedSortOption: SelectProps.Option;
   sortOptions: SelectProps.Options;
+  sortPlaceholder?: string;
 }
 
 const IS_ALERT_VISIBLE_CAPSULE: ReactCapsule<boolean> = new ReactCapsule<boolean>(
@@ -42,6 +38,9 @@ const IS_ALERT_VISIBLE_CAPSULE: ReactCapsule<boolean> = new ReactCapsule<boolean
 );
 
 export default function usePublications(): State {
+  // Contexts
+  const translate: TranslateFunction = useTranslate();
+
   const [isAlertVisible, setIsAlertVisible] = useCapsule(
     IS_ALERT_VISIBLE_CAPSULE,
   );
@@ -77,137 +76,52 @@ export default function usePublications(): State {
     },
   );
 
+  // States
+  const sortOptions: SelectProps.Options = useSortOptions();
   const [sort, setSort] = useState(Sort.ViewsPerDay);
 
-  const selectedSortOption: SelectProps.Option = useMemo((): SelectProps.Option => {
-    const findSelectedSortOption = ({ value }: SelectProps.Option): boolean =>
-      value === sort;
-    const newSelectedSortOption:
-      | SelectProps.Option
-      | undefined = SORT_OPTIONS.find(findSelectedSortOption);
-    return newSelectedSortOption || SORT_BY_VIEWS_PER_DAY_OPTION;
-  }, [sort]);
-
-  const sortItems: SortFunction<Item> = useMemo((): SortFunction<Item> => {
-    switch (sort) {
-      case Sort.PublicationDate:
-        return sortItemsByPublicationDate;
-      case Sort.Reactions:
-        return sortItemsByReactions;
-      case Sort.ReactionsPerDay:
-        return sortItemsByReactionsPerDay;
-      case Sort.ReactionsPerView:
-        return sortItemsByReactionsPerView;
-      case Sort.ReadingTime:
-        return sortItemsByReadingTime;
-      case Sort.Views:
-        return sortItemsByViews;
-      case Sort.ViewsPerDay:
-        return sortItemsByViewsPerDay;
-    }
-  }, [sort]);
-
-  const handleAlertDismiss = useCallback((): void => {
-    setIsAlertVisible(false);
-  }, [setIsAlertVisible]);
-
-  const handleSortChange = useCallback(
-    (e: NonCancelableCustomEvent<SelectProps.ChangeDetail>): void => {
-      const newSort: Sort = e.detail.selectedOption.value as Sort;
-      setSort(newSort);
-    },
-    [],
-  );
-
-  const items: CardsProps<Item>['items'] = useMemo((): CardsProps<Item>['items'] => {
-    const newItems: Item[] = [];
-    let totalReactions = 0;
-    let totalViews = 0;
-    if (typeof mediumData !== 'undefined') {
-      for (const [
-        slug,
-        {
-          claps,
-          firstPublishedAt,
-          postId,
-          previewImage,
-          readingTime,
-          reads,
-          title,
-          updateNotificationSubscribers,
-          upvotes,
-          views,
-        },
-      ] of Object.entries(mediumData)) {
-        const reactions: number =
-          claps + updateNotificationSubscribers + upvotes;
-        totalReactions += reactions;
-        totalViews += reads;
-        newItems.push({
-          dateTime: firstPublishedAt,
-          image:
-            previewImage && `https://miro.medium.com/max/320/${previewImage}`,
-          reactions,
-          readingTime,
-          title,
-          type: 'medium',
-          url: `https://charles-stover.medium.com/${slug}-${postId}`,
-          views,
-        });
-      }
-    }
-
-    const averageViewsPerReaction = totalViews / totalReactions;
-    if (typeof devData !== 'undefined') {
-      for (const {
-        canonical_url,
-        comments_count,
-        public_reactions_count,
-        published_timestamp,
-        social_image,
-        title,
-        url,
-      } of devData) {
-        const findExistingItem = ({ url: existingUrl }: Item): boolean =>
-          existingUrl === canonical_url;
-        const existingItem: Item | undefined = newItems.find(findExistingItem);
-        const reactions: number = comments_count + public_reactions_count;
-        const views: number = Math.round(reactions * averageViewsPerReaction);
-        if (typeof existingItem !== 'undefined') {
-          existingItem.reactions += reactions;
-          existingItem.views += views;
-          continue;
-        }
-        newItems.push({
-          dateTime: new Date(published_timestamp).getTime(),
-          image: social_image,
-          reactions,
-          title,
-          type: 'dev',
-          url,
-          views,
-        });
-      }
-    }
-    newItems.sort(sortItems);
-    return newItems;
-  }, [devData, mediumData, sortItems]);
-
-  const notifications: FlashbarProps.MessageDefinition[] = useNotifications({
-    items,
+  const items: Item[] = useItems({
+    devData,
+    mediumData,
   });
 
   return {
     cardDefinition: CARD_DEFINITION,
-    handleAlertDismiss,
-    handleSortChange,
+    dismissAriaLabel: translate('Dimiss') || undefined,
     isAlertVisible,
-    items: useMemo((): Item[] => {
-      return items.filter(filterItemsByMinimumViews);
-    }, [items]),
     loading: isDevLoading || isMediumLoading,
-    notifications,
-    selectedSortOption,
-    sortOptions: SORT_OPTIONS,
+    loadingText: translate('Loading publications') || undefined,
+    sortOptions,
+    sortPlaceholder: translate('Sort by') || undefined,
+
+    handleAlertDismiss: useCallback((): void => {
+      setIsAlertVisible(false);
+    }, [setIsAlertVisible]),
+
+    handleSortChange: useCallback(
+      (e: NonCancelableCustomEvent<SelectProps.ChangeDetail>): void => {
+        const newSort: Sort = e.detail.selectedOption.value as Sort;
+        setSort(newSort);
+      },
+      [],
+    ),
+
+    items: useMemo((): Item[] => {
+      const newItems: Item[] = [...items];
+      newItems.sort(mapSortToSortFunction(sort));
+      return newItems.filter(filterItemsByMinimumViews);
+    }, [items, sort]),
+
+    notifications: useNotifications({
+      items,
+    }),
+
+    selectedSortOption: useMemo((): SelectProps.Option => {
+      const findSelectedSortOption = ({ value }: SelectProps.Option): boolean =>
+        value === sort;
+      // Since `sort` is a Sort enum value and all Sort enum values have a sort
+      //   option, we can assert that we found this sort option.
+      return sortOptions.find(findSelectedSortOption) as SelectProps.Option;
+    }, [sort, sortOptions]),
   };
 }

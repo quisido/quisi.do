@@ -1,8 +1,11 @@
 import { FlashbarProps } from '@awsui/components-react/flashbar';
+import { TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useMemo, useState } from 'react';
+import mapDevArticlesCountToHeader from '../map/map-dev-articles-count-to-header';
+import mapDevArticlesToContent from '../map/map-dev-articles-to-content';
+import mapMissingBannersCountToHeader from '../map/map-missing-banners-count-to-header';
+import mapMissingBannersToContent from '../map/map-missing-banners-to-content';
 import Item from '../types/item';
-import mapDevArticlesToContent from '../utils/map-dev-articles-to-content';
-import mapMissingBannersToContent from '../utils/map-missing-banners-to-content';
 
 interface Props {
   items: readonly Item[];
@@ -11,6 +14,10 @@ interface Props {
 export default function useNotifications({
   items,
 }: Props): FlashbarProps.MessageDefinition[] {
+  // Contexts
+  const translate: TranslateFunction = useTranslate();
+
+  // States
   const [isDevArticleFlashVisible, setIsDevArticleFlashVisible] = useState(
     true,
   );
@@ -30,31 +37,33 @@ export default function useNotifications({
         missingBanners.push(item);
       }
     }
+
     if (isDevArticleFlashVisible && devArticles.length > 0) {
       newNotifications.push({
         content: mapDevArticlesToContent(devArticles),
-        dismissLabel: 'Dismiss',
+        dismissLabel: translate('Dismiss') || 'undefined',
         dismissible: true,
-        header: devArticles.length !== 1 ? 'Dev.to articles' : 'Dev.to article',
+        header: mapDevArticlesCountToHeader(devArticles.length),
+        type: 'warning',
         onDismiss(): void {
           setIsDevArticleFlashVisible(false);
         },
-        type: 'warning',
       });
     }
+
     if (isMissingBannerFlashVisible && missingBanners.length > 0) {
       newNotifications.push({
         content: mapMissingBannersToContent(missingBanners),
-        dismissLabel: 'Dismiss',
+        dismissLabel: translate('Dismiss') || undefined,
         dismissible: true,
-        header:
-          missingBanners.length !== 1 ? 'Missing banners' : 'Missing banner',
+        header: mapMissingBannersCountToHeader(missingBanners.length),
+        type: 'warning',
         onDismiss(): void {
           setIsMissingBannerFlashVisible(false);
         },
-        type: 'warning',
       });
     }
+
     return newNotifications;
-  }, [isDevArticleFlashVisible, isMissingBannerFlashVisible, items]);
+  }, [isDevArticleFlashVisible, isMissingBannerFlashVisible, items, translate]);
 }

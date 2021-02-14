@@ -8,8 +8,8 @@ import StatusIndicator from '@awsui/components-react/status-indicator';
 import NumberFormat from 'number-format-react';
 import { ReactElement } from 'react';
 import Minutes from '../components/minutes';
+import mapTimeToDaysAgo from '../map/map-time-to-days-ago';
 import Item from '../types/item';
-import mapTimeToDaysAgo from '../utils/map-time-to-days-ago';
 import styles from './card-definition.module.scss';
 
 const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
