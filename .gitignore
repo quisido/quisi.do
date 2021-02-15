@@ -14,8 +14,6 @@
 /.env.development
 /.env.local
 /.eslintcache
-/.pnp.cjs
-/.pnp.js
 /.tsbuildinfo
 /yarn-error.log
 .DS_Store
