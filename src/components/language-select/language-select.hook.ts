@@ -20,10 +20,18 @@ export default function useLanguageSelect(): State {
         label: 'English',
         value: Language.English,
       },
+      // {
+      //   label: 'Arabic',
+      //   value: Language.Arabic,
+      // },
       {
         label: 'Cebuano',
         value: Language.Cebuano,
       },
+      // {
+      //   label: 'Japanese',
+      //   value: Language.Japanese,
+      // },
     ];
   }, []);
 
@@ -32,6 +40,8 @@ export default function useLanguageSelect(): State {
 
     handleChange: useCallback(
       (event: NonCancelableCustomEvent<SelectProps.ChangeDetail>): void => {
+        // We can assert the type to be a `Language` enum value, because we only
+        //   set the select values to be `Language` enum values.
         setLanguage(event.detail.selectedOption.value as Language);
       },
       [setLanguage],

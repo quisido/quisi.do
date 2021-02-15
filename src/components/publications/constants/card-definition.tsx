@@ -5,6 +5,7 @@ import ColumnLayout from '@awsui/components-react/column-layout';
 import Link from '@awsui/components-react/link';
 import Popover from '@awsui/components-react/popover';
 import StatusIndicator from '@awsui/components-react/status-indicator';
+import I18n from 'lazy-i18n';
 import NumberFormat from 'number-format-react';
 import { ReactElement } from 'react';
 import Minutes from '../components/minutes';
@@ -43,6 +44,7 @@ const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
                   <img alt={title} src={image} width={320} />
                 ) : (
                   <StatusIndicator iconAriaLabel="Warning" type="warning">
+                    {/* No translation needed. Only I should see this banner. */}
                     Missing image
                   </StatusIndicator>
                 )}
@@ -50,7 +52,7 @@ const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
               <Badge className={styles.views}>
                 <Popover
                   className={styles.popover}
-                  content="Views"
+                  content={<I18n>Views</I18n>}
                   size="small"
                 >
                   👁‍🗨 <NumberFormat>{views}</NumberFormat>
@@ -59,7 +61,7 @@ const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
               <Badge className={styles.reactions}>
                 <Popover
                   className={styles.popover}
-                  content="Reactions"
+                  content={<I18n>Reactions</I18n>}
                   size="small"
                 >
                   👏 <NumberFormat>{reactions}</NumberFormat>
@@ -68,7 +70,7 @@ const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
               <Badge className={styles.dateTime}>
                 <Popover
                   className={styles.popover}
-                  content="Published date"
+                  content={<I18n>Publication date</I18n>}
                   size="small"
                 >
                   📅 {date.getFullYear()}-{date.getMonth() + 1}-{date.getDate()}
@@ -78,7 +80,7 @@ const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
                 <Badge className={styles.readingTime}>
                   <Popover
                     className={styles.popover}
-                    content="Reading time"
+                    content={<I18n>Reading time</I18n>}
                     size="small"
                   >
                     ⏳<Minutes>{readingTime}</Minutes>
@@ -98,19 +100,19 @@ const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
           <ColumnLayout className={styles.columnLayout} columns={12}>
             <div>
               <Box color="text-label" fontSize="heading-s">
-                Reactions/day
+                <I18n>Reactions/day</I18n>
               </Box>
               {Math.round((reactions / mapTimeToDaysAgo(dateTime)) * 100) / 100}
             </div>
             <div>
               <Box color="text-label" fontSize="heading-s">
-                Reactions/view
+                <I18n>Reactions/view</I18n>
               </Box>
               {Math.round((reactions / views) * 10000) / 100}%
             </div>
             <div>
               <Box color="text-label" fontSize="heading-s">
-                Views/day
+                <I18n>Views/day</I18n>
               </Box>
               {Math.round((views / mapTimeToDaysAgo(dateTime)) * 100) / 100}
             </div>

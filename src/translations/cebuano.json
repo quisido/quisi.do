@@ -1,7 +1,9 @@
 {
   "$count matches": "$count ka pares",
   "$count packages": "$count ka putos",
+  "$n minutes": "$n mga minuto",
   "1 match": "1 ka pares",
+  "1 minute": "1 minuto",
   "About me": "Bahin nako",
   "Applications": "Mga aplikasyon",
   "Avatar": "Avatar",
@@ -12,6 +14,8 @@
   "Confirm": "Ipagmatuod",
   "Connect with me": "Pakigsulti kanako",
   "Dark mode": "Dark mode",
+  "Dev.to article": "Dev.to article",
+  "Dev.to articles": "Dev.to articles",
   "Dismiss": "Tangtanga",
   "Explicit downloads": "Tukmang downloads",
   "Filter packages": "Isala ang mga putos",
@@ -34,6 +38,8 @@
   "Publications": "Mga publikasyon",
   "Quotes": "Mga kinutlo",
   "Reactions": "Mga reaksyon",
+  "Reactions/day": "Mga reaksyon/adlaw",
+  "Reactions/view": "Mga reaksyon/lantaw",
   "Reactions per day": "Mga reaksyon kada adlaw",
   "Reactions per view": "Mga reaksyon kada lantaw",
   "Reading time": "Oras sa pagbasa",
@@ -50,6 +56,7 @@
   "Total downloads": "Tanang downloads",
   "View résumé": "Tan-awa ang résumé",
   "Views": "Mga lantaw",
+  "Views/day": "Mga lantaw/adlaw",
   "Views per day": "Mga lantaw kada adlaw",
   "Wrap lines": "Iputos ang mga linya"
 }
