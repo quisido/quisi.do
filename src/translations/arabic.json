@@ -3,6 +3,7 @@
   "$count packages": "الباقات $count",
   "$n minutes": "دقائق $n",
   "1 match": " تطابق ١",
+  "1 minute": "دقيقه ١",
   "About me": "عني",
   "Applications": "تطبيقات",
   "Avatar": "الصورة الرمزية",
@@ -35,6 +36,8 @@
   "Publications": "المنشورات",
   "Quotes": "أقتباسات",
   "Reactions": "تفاعلات",
+  "Reactions/day": "تفاعلات في اليوم",
+  "Reactions/view": "تفاعلات لكل مشاهدة",
   "Reactions per day": "تفاعلات في اليوم",
   "Reactions per view": "تفاعلات لكل مشاهدة",
   "Reading time": "وقت القراءة",
@@ -51,6 +54,7 @@
   "Total downloads": "إجمالي التنزيلات",
   "View résumé": "عرض السيرة الذاتية",
   "Views": "المشاهدات",
+  "Views/day": "المشاهدات في اليوم",
   "Views per day": "المشاهدات في اليوم",
   "Wrap lines": "التفاف النص"
 }
