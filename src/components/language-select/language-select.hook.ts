@@ -20,10 +20,10 @@ export default function useLanguageSelect(): State {
         label: 'English',
         value: Language.English,
       },
-      // {
-      //   label: 'Arabic',
-      //   value: Language.Arabic,
-      // },
+      {
+        label: 'Arabic',
+        value: Language.Arabic,
+      },
       {
         label: 'Cebuano',
         value: Language.Cebuano,
