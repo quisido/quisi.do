@@ -8,6 +8,6 @@ export default function useHome(): State {
   const translate: TranslateFunction = useTranslate();
 
   return {
-    avatarAlt: translate('Avatar') || undefined,
+    avatarAlt: translate('Avatar'),
   };
 }

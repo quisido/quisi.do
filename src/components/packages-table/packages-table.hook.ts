@@ -144,7 +144,7 @@ export default function usePackagesTable(): State {
     confirmLabel: translate('Confirm') || '...',
     countText: useCountText(filteredItemsCount),
     currentPageIndex,
-    filteringAriaLabel: translate('Filter packages') || undefined,
+    filteringAriaLabel: translate('Filter packages'),
     filteringPlaceholder: translate('Filter packages') || '...',
     filteringText,
     handleCollectionPreferencesConfirm,

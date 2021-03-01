@@ -41,7 +41,7 @@ export default function useNotifications({
     if (isDevArticleFlashVisible && devArticles.length > 0) {
       newNotifications.push({
         content: mapDevArticlesToContent(devArticles),
-        dismissLabel: translate('Dismiss') || 'undefined',
+        dismissLabel: translate('Dismiss'),
         dismissible: true,
         header: mapDevArticlesCountToHeader(devArticles.length),
         type: 'warning',
@@ -54,7 +54,7 @@ export default function useNotifications({
     if (isMissingBannerFlashVisible && missingBanners.length > 0) {
       newNotifications.push({
         content: mapMissingBannersToContent(missingBanners),
-        dismissLabel: translate('Dismiss') || undefined,
+        dismissLabel: translate('Dismiss'),
         dismissible: true,
         header: mapMissingBannersCountToHeader(missingBanners.length),
         type: 'warning',

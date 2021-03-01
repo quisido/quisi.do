@@ -50,13 +50,13 @@ export default function useCSAppLayout({
 
     ariaLabels: useMemo(
       (): AppLayoutProps.Labels => ({
-        navigation: translate('Navigation') || undefined,
-        navigationToggle: translate('Toggle navigation') || undefined,
-        navigationClose: translate('Close navigation') || undefined,
-        notifications: translate('Notifications') || undefined,
-        tools: translate('Tools') || undefined,
-        toolsToggle: translate('Toggle tools') || undefined,
-        toolsClose: translate('Close tools') || undefined,
+        navigation: translate('Navigation'),
+        navigationToggle: translate('Toggle navigation'),
+        navigationClose: translate('Close navigation'),
+        notifications: translate('Notifications'),
+        tools: translate('Tools'),
+        toolsToggle: translate('Toggle tools'),
+        toolsClose: translate('Close tools'),
       }),
       [translate],
     ),

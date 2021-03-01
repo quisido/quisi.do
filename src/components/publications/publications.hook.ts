@@ -87,12 +87,12 @@ export default function usePublications(): State {
 
   return {
     cardDefinition: CARD_DEFINITION,
-    dismissAriaLabel: translate('Dimiss') || undefined,
+    dismissAriaLabel: translate('Dimiss'),
     isAlertVisible,
     loading: isDevLoading || isMediumLoading,
-    loadingText: translate('Loading publications') || undefined,
+    loadingText: translate('Loading publications'),
     sortOptions,
-    sortPlaceholder: translate('Sort by') || undefined,
+    sortPlaceholder: translate('Sort by'),
 
     handleAlertDismiss: useCallback((): void => {
       setIsAlertVisible(false);

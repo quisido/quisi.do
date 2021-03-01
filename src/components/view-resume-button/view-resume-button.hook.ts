@@ -8,6 +8,6 @@ export default function useViewResumeButton(): State {
   const translate: TranslateFunction = useTranslate();
 
   return {
-    iconAlt: translate('external') || undefined,
+    iconAlt: translate('external'),
   };
 }

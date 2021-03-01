@@ -28,7 +28,7 @@ export default function useBreadcrumbs(
   );
 
   return {
-    ariaLabel: translate('Breadcrumbs') || undefined,
+    ariaLabel: translate('Breadcrumbs'),
     handleFollow,
     items,
   };

@@ -63,7 +63,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["history", "npm:4.10.1"],
             ["identity-obj-proxy", "npm:3.0.0"],
             ["jest", "npm:26.6.3"],
-            ["lazy-i18n", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.1"],
+            ["lazy-i18n", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:2.0.2"],
             ["node-sass", "npm:4.14.1"],
             ["number-format-react", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0"],
             ["prettier", "npm:2.2.1"],
@@ -9517,7 +9517,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["history", "npm:4.10.1"],
             ["identity-obj-proxy", "npm:3.0.0"],
             ["jest", "npm:26.6.3"],
-            ["lazy-i18n", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.1"],
+            ["lazy-i18n", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:2.0.2"],
             ["node-sass", "npm:4.14.1"],
             ["number-format-react", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0"],
             ["prettier", "npm:2.2.1"],
@@ -15586,17 +15586,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["lazy-i18n", [
-        ["npm:1.0.1", {
-          "packageLocation": "./.yarn/cache/lazy-i18n-npm-1.0.1-d6fbec5d1e-f446307444.zip/node_modules/lazy-i18n/",
+        ["npm:2.0.2", {
+          "packageLocation": "./.yarn/cache/lazy-i18n-npm-2.0.2-837c40529d-d2863023db.zip/node_modules/lazy-i18n/",
           "packageDependencies": [
-            ["lazy-i18n", "npm:1.0.1"]
+            ["lazy-i18n", "npm:2.0.2"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.1", {
-          "packageLocation": "./.yarn/$$virtual/lazy-i18n-virtual-49149d43f7/0/cache/lazy-i18n-npm-1.0.1-d6fbec5d1e-f446307444.zip/node_modules/lazy-i18n/",
+        ["virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:2.0.2", {
+          "packageLocation": "./.yarn/$$virtual/lazy-i18n-virtual-e905c28727/0/cache/lazy-i18n-npm-2.0.2-837c40529d-d2863023db.zip/node_modules/lazy-i18n/",
           "packageDependencies": [
-            ["lazy-i18n", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.1"],
+            ["lazy-i18n", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:2.0.2"],
             ["@types/react", "npm:17.0.0"],
             ["@types/react-dom", "npm:17.0.0"],
             ["react", "npm:17.0.1"],

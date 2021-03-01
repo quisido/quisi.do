@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "awsui-dark-mode": "^1.0.3",
-    "lazy-i18n": "^1.0.1",
+    "lazy-i18n": "^2.0.2",
     "use-awsui": "^1.0.2",
     "use-awsui-router": "^1.0.0"
   },
