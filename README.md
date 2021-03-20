@@ -14,7 +14,7 @@ commands in order:
 - `yarn set version latest` to keep Yarn up-to-date.
 - `yarn` to install the existing dependencies.
 - `yarn up * && yarn up @*/*` to upgrade to the latest dependencies.
-- `yarn dlx @yarnpkg/pnpify --sdk vscode` to integrate with VS Code.
+- `yarn dlx @yarnpkg/pnpify --sdk vscode` to integrate with Visual Studio Code.
 
 ### Development mode
 
@@ -22,6 +22,7 @@ To run the website locally, use `yarn start`.
 
 ### Testing
 
-To run the linter and unit tests, use `yarn test`.
+To run the linter and unit tests with coverage reports, use `yarn test`.
 
-To run the unit tests in watch mode, use `yarn test-watch`.
+To run the unit tests in watch mode without coverage reports, use
+`yarn test-watch`.
