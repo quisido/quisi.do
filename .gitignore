@@ -1,6 +1,8 @@
 /.git/
 /.idea/
 /.vscode/
+/.yarn/cache/
+/.yarn/sdks/
 /.yarn/unplugged/
 /.yarn/build-state.yml
 /.yarn/install-state.gz
@@ -14,6 +16,7 @@
 /.env.development
 /.env.local
 /.eslintcache
+/.pnp.cjs
 /.tsbuildinfo
 /yarn-error.log
 .DS_Store
