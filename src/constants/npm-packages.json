@@ -40,6 +40,7 @@
     [null, "use-aws-sdk"],
     ["use-awsui"],
     ["use-awsui-router"],
+    ["use-awsui-table-item-description"],
     ["use-clippy"],
     ["use-ctrl-key"],
     ["use-dimensions"],

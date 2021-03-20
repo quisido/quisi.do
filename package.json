@@ -31,7 +31,8 @@
     "awsui-dark-mode": "^1.0.3",
     "lazy-i18n": "^2.0.2",
     "use-awsui": "^1.0.2",
-    "use-awsui-router": "^1.0.0"
+    "use-awsui-router": "^1.0.0",
+    "use-awsui-table-item-description": "^1.0.0"
   },
   "devDependencies": {
     "@awsui/components-react": "^3.0.25",

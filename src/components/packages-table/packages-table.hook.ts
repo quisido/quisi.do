@@ -11,8 +11,8 @@ import {
   useTable,
   useTextFilter,
 } from 'use-awsui';
+import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
 import useNpmDownloads from '../../hooks/use-npm-downloads';
-import useTableItemDescription from '../../hooks/use-table-item-description';
 import PackageDescription from './components/package-description';
 import useColumnDefinitions from './hooks/use-column-definitions';
 import useCountText from './hooks/use-count-text';
@@ -130,11 +130,11 @@ export default function usePackagesTable(): State {
     return paginate(newVisibleItems);
   }, [filteredItems, paginate, sort]);
 
-  useTableItemDescription({
+  useAwsuiTableItemDescription({
     Component: PackageDescription,
+    colSpan: (visibleContent || DEFAULT_VISIBLE_CONTENT).length,
     items: visibleItems,
     ref,
-    visibleContentCount: (visibleContent || DEFAULT_VISIBLE_CONTENT).length,
   });
 
   const filteredItemsCount: number = filteredItems.length;

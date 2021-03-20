@@ -78,7 +78,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ts-jest", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:26.5.0"],
             ["typescript", "patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=cc6730"],
             ["use-awsui", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.2"],
-            ["use-awsui-router", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0"]
+            ["use-awsui-router", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0"],
+            ["use-awsui-table-item-description", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0"]
           ],
           "linkType": "SOFT",
         }]
@@ -9532,7 +9533,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ts-jest", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:26.5.0"],
             ["typescript", "patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=cc6730"],
             ["use-awsui", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.2"],
-            ["use-awsui-router", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0"]
+            ["use-awsui-router", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0"],
+            ["use-awsui-table-item-description", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0"]
           ],
           "linkType": "SOFT",
         }]
@@ -22468,6 +22470,36 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/react",
             "react-dom",
             "react-router",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["use-awsui-table-item-description", [
+        ["npm:1.0.0", {
+          "packageLocation": "./.yarn/cache/use-awsui-table-item-description-npm-1.0.0-170fe749cd-1889a08baf.zip/node_modules/use-awsui-table-item-description/",
+          "packageDependencies": [
+            ["use-awsui-table-item-description", "npm:1.0.0"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0", {
+          "packageLocation": "./.yarn/$$virtual/use-awsui-table-item-description-virtual-2126ca3f2e/0/cache/use-awsui-table-item-description-npm-1.0.0-170fe749cd-1889a08baf.zip/node_modules/use-awsui-table-item-description/",
+          "packageDependencies": [
+            ["use-awsui-table-item-description", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0"],
+            ["@awsui/components-react", "npm:3.0.25"],
+            ["@types/awsui__components-react", null],
+            ["@types/react", "npm:17.0.0"],
+            ["@types/react-dom", "npm:17.0.0"],
+            ["react", "npm:17.0.1"],
+            ["react-dom", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:17.0.1"]
+          ],
+          "packagePeers": [
+            "@awsui/components-react",
+            "@types/awsui__components-react",
+            "@types/react-dom",
+            "@types/react",
+            "react-dom",
             "react"
           ],
           "linkType": "HARD",
