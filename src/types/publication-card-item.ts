@@ -1,4 +1,4 @@
-export default interface Item {
+export default interface PublicationCardItem {
   dateTime: number;
   image?: string;
   reactions: number;

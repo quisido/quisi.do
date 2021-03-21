@@ -1,4 +1,4 @@
-enum Sort {
+enum PublicationCardsSort {
   PublicationDate = 'publication-date',
   Reactions = 'reactions',
   ReactionsPerDay = 'reactions-per-day',
@@ -8,4 +8,4 @@ enum Sort {
   ViewsPerDay = 'views-per-day',
 }
 
-export default Sort;
+export default PublicationCardsSort;

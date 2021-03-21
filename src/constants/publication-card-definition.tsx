@@ -10,11 +10,11 @@ import NumberFormat from 'number-format-react';
 import { ReactElement } from 'react';
 import Minutes from '../components/minutes';
 import mapTimeToDaysAgo from '../map/map-time-to-days-ago';
-import Item from '../types/item';
-import styles from './card-definition.module.scss';
+import PublicationCardItem from '../types/publication-card-item';
+import styles from './publication-card-definition.module.scss';
 
-const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
-  header({ title, url }: Item): ReactElement {
+const PUBLICATION_CARD_DEFINITION: CardsProps<PublicationCardItem>['cardDefinition'] = {
+  header({ title, url }: PublicationCardItem): ReactElement {
     return (
       <Link href={url}>
         <Box color="inherit" fontSize="heading-m">
@@ -34,7 +34,7 @@ const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
         title,
         url,
         views,
-      }: Item): ReactElement {
+      }: PublicationCardItem): ReactElement {
         const date: Date = new Date(dateTime);
         return (
           <div className={styles.bannerHeight}>
@@ -95,7 +95,11 @@ const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
     {
       id: 'stats',
       // header: 'Statistics',
-      content({ dateTime, reactions, views }: Item): ReactElement {
+      content({
+        dateTime,
+        reactions,
+        views,
+      }: PublicationCardItem): ReactElement {
         return (
           <ColumnLayout className={styles.columnLayout} columns={12}>
             <div>
@@ -123,4 +127,4 @@ const CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
   ],
 };
 
-export default CARD_DEFINITION;
+export default PUBLICATION_CARD_DEFINITION;

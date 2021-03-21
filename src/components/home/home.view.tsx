@@ -6,7 +6,7 @@ import I18n from 'lazy-i18n';
 import { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
 import ViewResumeButton from '../../components/view-resume-button';
-import avatar from '../../images/avatar.jpg';
+import avatar from '../../images/charles-stover.jpg';
 import useHome from './home.hook';
 import styles from './home.module.scss';
 

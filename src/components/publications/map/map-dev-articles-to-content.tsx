@@ -1,10 +1,10 @@
 import Box from '@awsui/components-react/box';
 import Link from '@awsui/components-react/link';
 import { ReactElement } from 'react';
-import Item from '../types/item';
+import PublicationCardItem from '../../../types/publication-card-item';
 
 export default function mapDevArticlesToContent(
-  devArticles: Item[],
+  devArticles: PublicationCardItem[],
 ): ReactElement {
   if (devArticles.length === 1) {
     const { title, url } = devArticles[0];
@@ -22,7 +22,7 @@ export default function mapDevArticlesToContent(
       </Box>
       <ul>
         {devArticles.map(
-          ({ title, url }: Item): ReactElement => {
+          ({ title, url }: PublicationCardItem): ReactElement => {
             return (
               <li key={title}>
                 <Link href={url}>{title}</Link>

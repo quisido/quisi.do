@@ -2,7 +2,7 @@ import Box, { BoxProps } from '@awsui/components-react/box';
 import { CardsProps } from '@awsui/components-react/cards';
 import { ReactElement } from 'react';
 import Quote from '../types/quote';
-import styles from './card-definition.module.scss';
+import styles from './quote-card-definition.module.scss';
 
 const IMAGE_SIZE = 100;
 
@@ -13,7 +13,7 @@ const IMAGE_MARGIN: BoxProps.Spacing = {
   // top: 'm',
 };
 
-const CARD_DEFINITION: CardsProps<Quote>['cardDefinition'] = {
+const QUOTE_CARD_DEFINITION: CardsProps<Quote>['cardDefinition'] = {
   header({ author, company, title }: Quote): ReactElement {
     return (
       <Box textAlign="center">
@@ -58,4 +58,4 @@ const CARD_DEFINITION: CardsProps<Quote>['cardDefinition'] = {
   ],
 };
 
-export default CARD_DEFINITION;
+export default QUOTE_CARD_DEFINITION;

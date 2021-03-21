@@ -1,14 +1,14 @@
 import { FlashbarProps } from '@awsui/components-react/flashbar';
 import { TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useMemo, useState } from 'react';
+import PublicationCardItem from '../../../types/publication-card-item';
 import mapDevArticlesCountToHeader from '../map/map-dev-articles-count-to-header';
 import mapDevArticlesToContent from '../map/map-dev-articles-to-content';
 import mapMissingBannersCountToHeader from '../map/map-missing-banners-count-to-header';
 import mapMissingBannersToContent from '../map/map-missing-banners-to-content';
-import Item from '../types/item';
 
 interface Props {
-  items: readonly Item[];
+  items: readonly PublicationCardItem[];
 }
 
 export default function useNotifications({
@@ -28,8 +28,8 @@ export default function useNotifications({
 
   return useMemo((): FlashbarProps.MessageDefinition[] => {
     const newNotifications: FlashbarProps.MessageDefinition[] = [];
-    const devArticles: Item[] = [];
-    const missingBanners: Item[] = [];
+    const devArticles: PublicationCardItem[] = [];
+    const missingBanners: PublicationCardItem[] = [];
     for (const item of items) {
       if (item.type === 'dev') {
         devArticles.push(item);

@@ -1,40 +1,40 @@
 import { SelectProps } from '@awsui/components-react/select';
 import { TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
-import Sort from '../constants/sort';
+import PublicationCardsSort from '../../constants/publication-cards-sort';
 
-export default function useSortOptions(): SelectProps.Options {
+export default function usePublicationCardsSortOptions(): SelectProps.Options {
   const translate: TranslateFunction = useTranslate();
 
   return useMemo(
     (): SelectProps.Options => [
       {
         label: translate('Publication date') || '...',
-        value: Sort.PublicationDate,
+        value: PublicationCardsSort.PublicationDate,
       },
       {
         label: translate('Reactions') || '...',
-        value: Sort.Reactions,
+        value: PublicationCardsSort.Reactions,
       },
       {
         label: translate('Reactions per day') || '...',
-        value: Sort.ReactionsPerDay,
+        value: PublicationCardsSort.ReactionsPerDay,
       },
       {
         label: translate('Reactions per view') || '...',
-        value: Sort.ReactionsPerView,
+        value: PublicationCardsSort.ReactionsPerView,
       },
       {
         label: translate('Reading time') || '...',
-        value: Sort.ReadingTime,
+        value: PublicationCardsSort.ReadingTime,
       },
       {
         label: translate('Views') || '...',
-        value: Sort.Views,
+        value: PublicationCardsSort.Views,
       },
       {
         label: translate('Views per day') || '...',
-        value: Sort.ViewsPerDay,
+        value: PublicationCardsSort.ViewsPerDay,
       },
     ],
     [translate],

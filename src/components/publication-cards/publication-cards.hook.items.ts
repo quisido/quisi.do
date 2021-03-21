@@ -1,16 +1,19 @@
 import { useMemo } from 'react';
-import DevArticle from '../../../types/dev-article';
-import MediumArticle from '../../../types/medium-article';
-import Item from '../types/item';
+import DevArticle from '../../types/dev-article';
+import MediumArticle from '../../types/medium-article';
+import PublicationCardItem from '../../types/publication-card-item';
 
 interface Props {
   devData?: DevArticle[];
   mediumData?: Record<string, MediumArticle>;
 }
 
-export default function useItems({ devData, mediumData }: Props): Item[] {
-  return useMemo((): Item[] => {
-    const newItems: Item[] = [];
+export default function usePublicationCardsItems({
+  devData,
+  mediumData,
+}: Props): PublicationCardItem[] {
+  return useMemo((): PublicationCardItem[] => {
+    const newItems: PublicationCardItem[] = [];
     let totalReactions = 0;
     let totalViews = 0;
     if (typeof mediumData !== 'undefined') {
@@ -58,9 +61,12 @@ export default function useItems({ devData, mediumData }: Props): Item[] {
         title,
         url,
       } of devData) {
-        const findExistingItem = ({ url: existingUrl }: Item): boolean =>
-          existingUrl === canonical_url;
-        const existingItem: Item | undefined = newItems.find(findExistingItem);
+        const findExistingItem = ({
+          url: existingUrl,
+        }: PublicationCardItem): boolean => existingUrl === canonical_url;
+        const existingItem: PublicationCardItem | undefined = newItems.find(
+          findExistingItem,
+        );
         const reactions: number = comments_count + public_reactions_count;
         const views: number = Math.round(reactions * averageViewsPerReaction);
         if (typeof existingItem !== 'undefined') {

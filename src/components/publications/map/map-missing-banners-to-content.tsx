@@ -1,10 +1,10 @@
 import Box from '@awsui/components-react/box';
 import Link from '@awsui/components-react/link';
 import { ReactElement } from 'react';
-import Item from '../types/item';
+import PublicationCardItem from '../../../types/publication-card-item';
 
 export default function mapMissingBannersToContent(
-  missingBanners: Item[],
+  missingBanners: PublicationCardItem[],
 ): ReactElement {
   if (missingBanners.length === 1) {
     const { title, url } = missingBanners[0];
@@ -20,7 +20,7 @@ export default function mapMissingBannersToContent(
       <Box variant="p">The following publications are misisng banners:</Box>
       <ul>
         {missingBanners.map(
-          ({ title, url }: Item): ReactElement => {
+          ({ title, url }: PublicationCardItem): ReactElement => {
             return (
               <li key={title}>
                 <Link href={url}>{title}</Link>
