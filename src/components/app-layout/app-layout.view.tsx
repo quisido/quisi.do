@@ -5,7 +5,7 @@ import { ComponentType, ReactElement, ReactNode } from 'react';
 import Breadcrumbs from '../../components/breadcrumbs';
 import Navigation from '../../components/navigation';
 import Notifications from '../../components/notifications';
-import useCSAppLayout from './app-layout.hook';
+import useCustomAppLayout from './app-layout.hook';
 
 interface Props {
   Tools?: ComponentType<unknown>;
@@ -18,7 +18,7 @@ interface Props {
   toolsOpen?: boolean;
 }
 
-export default function CSAppLayout({
+export default function CustomAppLayout({
   Tools,
   breadcrumbs,
   children,
@@ -34,7 +34,7 @@ export default function CSAppLayout({
     handleToolsChange,
     navigationOpen,
     toolsOpen,
-  } = useCSAppLayout({
+  } = useCustomAppLayout({
     controlledToolsOpen,
     onToolsChange,
   });

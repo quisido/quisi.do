@@ -1,48 +1,24 @@
 import { NonCancelableCustomEvent } from '@awsui/components-react/internal/events';
 import { SelectProps } from '@awsui/components-react/select';
 import { useCallback, useMemo } from 'react';
-import { useCapsule } from 'react-capsule';
-import LanguageCapsule from '../../capsules/language';
 import Language from '../../constants/language';
+import LANGUAGE_OPTIONS from '../../constants/language-options';
+import useLanguage from '../../hooks/use-language';
 
 interface State {
   handleChange(event: NonCancelableCustomEvent<SelectProps.ChangeDetail>): void;
-  options: SelectProps.Option[];
   selectedOption: SelectProps.Option;
 }
 
 export default function useLanguageSelect(): State {
-  const [language, setLanguage] = useCapsule(LanguageCapsule);
-
-  const options: SelectProps.Option[] = useMemo((): SelectProps.Option[] => {
-    return [
-      {
-        label: 'English',
-        value: Language.English,
-      },
-      {
-        label: 'Arabic',
-        value: Language.Arabic,
-      },
-      {
-        label: 'Cebuano',
-        value: Language.Cebuano,
-      },
-      // {
-      //   label: 'Japanese',
-      //   value: Language.Japanese,
-      // },
-    ];
-  }, []);
+  const [language, setLanguage] = useLanguage();
 
   return {
-    options,
-
     handleChange: useCallback(
-      (event: NonCancelableCustomEvent<SelectProps.ChangeDetail>): void => {
+      (e: NonCancelableCustomEvent<SelectProps.ChangeDetail>): void => {
         // We can assert the type to be a `Language` enum value, because we only
         //   set the select values to be `Language` enum values.
-        setLanguage(event.detail.selectedOption.value as Language);
+        setLanguage(e.detail.selectedOption.value as Language);
       },
       [setLanguage],
     ),
@@ -52,7 +28,7 @@ export default function useLanguageSelect(): State {
         value === language;
       // Since `language` is a Language enum value and all Language enum values
       //   have a corresponding option, we can assert that an option was found.
-      return options.find(findSelectedOption) as SelectProps.Option;
-    }, [language, options]),
+      return LANGUAGE_OPTIONS.find(findSelectedOption) as SelectProps.Option;
+    }, [language]),
   };
 }

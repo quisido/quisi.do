@@ -12,35 +12,35 @@ import {
   useTextFilter,
 } from 'use-awsui';
 import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
+import PackageDescription from '../../components/package-description';
+import filterDefaultPackage from '../../filter/filter-default-package';
 import useNpmDownloads from '../../hooks/use-npm-downloads';
-import PackageDescription from './components/package-description';
-import useColumnDefinitions from './hooks/use-column-definitions';
-import useCountText from './hooks/use-count-text';
-import usePageSizePreference from './hooks/use-page-size-preference';
-import useVisibleContentPreference from './hooks/use-visible-content-preference';
-import useWrapLinesPreference from './hooks/use-wrap-lines-preference';
-import Item from './types/item';
-import filterDefaultPackage from './utils/filter-default-package';
-import mapDataEntryToItem from './utils/map-data-entry-to-item';
+import mapNpmDownloadsEntryToPackagesTableItem from '../../map/map-npm-downloads-entry-to-packages-table-item';
+import PackagesTableItem from '../../types/packages-table-item';
+import useColumnDefinitions from './packages-table.hook.column-definitions';
+import useCountText from './packages-table.hook.count-text';
+import usePageSizePreference from './packages-table.hook.page-size-preference';
+import useVisibleContentPreference from './packages-table.hook.visible-content-preference';
+import useWrapLinesPreference from './packages-table.hook.wrap-lines-preference';
 
 interface State {
   cancelLabel: string;
   collectionPreferencesTitle: string;
-  columnDefinitions: TableProps.ColumnDefinition<Item>[];
+  columnDefinitions: TableProps.ColumnDefinition<PackagesTableItem>[];
   confirmLabel: string;
   countText: string;
   currentPageIndex: number;
   filteringAriaLabel?: string;
   filteringPlaceholder: string;
   filteringText: string;
-  items: Item[];
+  items: PackagesTableItem[];
   loading: boolean;
   loadingText: string;
   pageSizePreference: CollectionPreferencesProps.PageSizePreference;
   pagesCount: number;
   preferences: CollectionPreferencesProps.Preferences;
   ref: MutableRefObject<HTMLDivElement | null>;
-  sortingColumn?: TableProps.SortingColumn<Item>;
+  sortingColumn?: TableProps.SortingColumn<PackagesTableItem>;
   sortingDescending?: boolean;
   visibleContent?: readonly string[];
   visibleContentPreference: CollectionPreferencesProps.VisibleContentPreference;
@@ -55,7 +55,7 @@ interface State {
     event: NonCancelableCustomEvent<PaginationProps.ChangeDetail>,
   ): void;
   handleSortingChange(
-    event: NonCancelableCustomEvent<TableProps.SortingState<Item>>,
+    event: NonCancelableCustomEvent<TableProps.SortingState<PackagesTableItem>>,
   ): void;
   handleTextFilterChange(
     event: NonCancelableCustomEvent<TextFilterProps.ChangeDetail>,
@@ -108,24 +108,24 @@ export default function usePackagesTable(): State {
     handleChange: handleTextFilterChange,
   } = useTextFilter();
 
-  const items: Item[] = useMemo((): Item[] => {
+  const items: PackagesTableItem[] = useMemo((): PackagesTableItem[] => {
     if (typeof data === 'undefined') {
       return [];
     }
     const entries: [string, number[]][] = Object.entries(data);
-    return entries.map(mapDataEntryToItem).filter(filterDefaultPackage);
+    return entries
+      .map(mapNpmDownloadsEntryToPackagesTableItem)
+      .filter(filterDefaultPackage);
   }, [data]);
 
-  const filteredItems: Item[] = useMemo((): Item[] => {
-    const filter = ({ packageName }: Item): boolean => {
-      return packageName.indexOf(filteringText) !== -1;
-    };
-
+  const filteredItems: PackagesTableItem[] = useMemo((): PackagesTableItem[] => {
+    const filter = ({ packageName }: PackagesTableItem): boolean =>
+      packageName.indexOf(filteringText) !== -1;
     return items.filter(filter);
   }, [filteringText, items]);
 
-  const visibleItems: Item[] = useMemo((): Item[] => {
-    const newVisibleItems: Item[] = [...filteredItems];
+  const visibleItems: PackagesTableItem[] = useMemo((): PackagesTableItem[] => {
+    const newVisibleItems: PackagesTableItem[] = [...filteredItems];
     newVisibleItems.sort(sort);
     return paginate(newVisibleItems);
   }, [filteredItems, paginate, sort]);

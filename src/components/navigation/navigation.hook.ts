@@ -3,9 +3,9 @@ import { SideNavigationProps } from '@awsui/components-react/side-navigation';
 import { useCallback, useMemo } from 'react';
 import Capsule, { useCapsule } from 'react-capsule';
 import { useSideNavigation } from 'use-awsui-router';
-import useItems from './hooks/use-items';
-import hasItems from './utils/has-items';
-import isExpandable from './utils/is-expandable';
+import hasItems from '../../utils/has-items';
+import isExpandable from '../../utils/is-expandable';
+import useItems from './navigation.hook.items';
 
 interface State {
   activeHref: string;
@@ -20,8 +20,8 @@ const expandedMapCapsule: Capsule<Map<string, boolean>> = new Capsule(
 
 export default function useNavigation(): State {
   const [expandedMap, setExpandedMap] = useCapsule(expandedMapCapsule);
-  const { activeHref, handleFollow } = useSideNavigation();
   const items: SideNavigationProps.Item[] = useItems();
+  const { activeHref, handleFollow } = useSideNavigation();
 
   // TODO: Use nested indices, e.g. `5.0.1.3`, instead of text, since text is
   //   subject to change on translation.

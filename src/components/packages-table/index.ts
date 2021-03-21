@@ -1,1 +1,1 @@
-export { default } from './packages-table.view';
+export { default } from './packages-table.view.suspense';

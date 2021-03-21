@@ -6,9 +6,9 @@ import I18n from 'lazy-i18n';
 import { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
 import ViewResumeButton from '../../components/view-resume-button';
+import avatar from '../../images/avatar.jpg';
 import useHome from './home.hook';
 import styles from './home.module.scss';
-import avatar from './images/avatar.jpg';
 
 const CURRENT_YEAR: number = new Date().getFullYear();
 const FRONT_END_YOE: number = CURRENT_YEAR - 2001;

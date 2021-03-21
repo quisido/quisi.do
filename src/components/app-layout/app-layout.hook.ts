@@ -23,7 +23,7 @@ interface State {
   ): void;
 }
 
-export default function useCSAppLayout({
+export default function useCustomAppLayout({
   controlledToolsOpen,
   onToolsChange,
 }: Props): State {
@@ -41,12 +41,6 @@ export default function useCSAppLayout({
   return {
     handleNavigationChange,
     navigationOpen,
-    handleToolsChange:
-      typeof onToolsChange === 'function' ? onToolsChange : handleToolsChange,
-    toolsOpen:
-      typeof controlledToolsOpen === 'boolean'
-        ? controlledToolsOpen
-        : toolsOpen,
 
     ariaLabels: useMemo(
       (): AppLayoutProps.Labels => ({
@@ -60,5 +54,13 @@ export default function useCSAppLayout({
       }),
       [translate],
     ),
+
+    handleToolsChange:
+      typeof onToolsChange === 'function' ? onToolsChange : handleToolsChange,
+
+    toolsOpen:
+      typeof controlledToolsOpen === 'boolean'
+        ? controlledToolsOpen
+        : toolsOpen,
   };
 }

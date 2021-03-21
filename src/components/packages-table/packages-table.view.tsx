@@ -41,6 +41,18 @@ export default function PackagesTable(): ReactElement {
     <div ref={ref}>
       <Table
         columnDefinitions={columnDefinitions}
+        items={items}
+        loading={loading}
+        loadingText={loadingText}
+        // onRowClick={handleRowClick}
+        onSortingChange={handleSortingChange}
+        resizableColumns
+        sortingColumn={sortingColumn}
+        sortingDescending={sortingDescending}
+        stickyHeader
+        trackBy="packageName"
+        visibleColumns={visibleContent}
+        wrapLines={wrapLines}
         filter={
           <TextFilter
             countText={countText}
@@ -55,11 +67,6 @@ export default function PackagesTable(): ReactElement {
             <I18n>Packages</I18n>
           </Header>
         }
-        items={items}
-        loading={loading}
-        loadingText={loadingText}
-        // onRowClick={handleRowClick}
-        onSortingChange={handleSortingChange}
         pagination={
           <Pagination
             currentPageIndex={currentPageIndex}
@@ -79,13 +86,6 @@ export default function PackagesTable(): ReactElement {
             wrapLinesPreference={wrapLinesPreference}
           />
         }
-        resizableColumns
-        sortingColumn={sortingColumn}
-        sortingDescending={sortingDescending}
-        stickyHeader
-        trackBy="packageName"
-        visibleColumns={visibleContent}
-        wrapLines={wrapLines}
       />
     </div>
   );

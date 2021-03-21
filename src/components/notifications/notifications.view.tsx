@@ -11,5 +11,6 @@ export default function Notifications({
   if (typeof children === 'undefined' || children.length === 0) {
     return null;
   }
+
   return <Flashbar items={children} />;
 }
