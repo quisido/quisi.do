@@ -18,8 +18,6 @@ export default function usePackageName({
   repositoryName,
 }: Props): State {
   return {
-    href: `https://github.com/CharlesStover/${repositoryName}`,
-
     children: useMemo((): ReactNode => {
       if (filteringText === '') {
         return packageName;
@@ -30,5 +28,14 @@ export default function usePackageName({
       }
       return emphasizeString(packageName, index, filteringText.length);
     }, [filteringText, packageName]),
+
+    href: useMemo((): string => {
+      switch (repositoryName) {
+        case '@gamingmedley/konami.js':
+          return 'https://github.com/CharlesStover/konami-js';
+        default:
+          return `https://github.com/CharlesStover/${repositoryName}`;
+      }
+    }, [repositoryName]),
   };
 }
