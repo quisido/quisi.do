@@ -87,7 +87,7 @@ export default function usePublications(): State {
 
   return {
     cardDefinition: CARD_DEFINITION,
-    dismissAriaLabel: translate('Dimiss'),
+    dismissAriaLabel: translate('Dismiss'),
     isAlertVisible,
     loading: isDevLoading || isMediumLoading,
     loadingText: translate('Loading publications'),
