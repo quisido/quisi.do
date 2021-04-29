@@ -3271,6 +3271,99 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sentry/browser@npm:6.3.3":
+  version: 6.3.3
+  resolution: "@sentry/browser@npm:6.3.3"
+  dependencies:
+    "@sentry/core": 6.3.3
+    "@sentry/types": 6.3.3
+    "@sentry/utils": 6.3.3
+    tslib: ^1.9.3
+  checksum: 120d81b3a59e9de0eae47aa194cf837fcbad51412cc464f0a965f8c01e501de82d0882006262c6c7632f3ea29ca520205ec5d13c6f7a88aa77913c0102abad91
+  languageName: node
+  linkType: hard
+
+"@sentry/core@npm:6.3.3":
+  version: 6.3.3
+  resolution: "@sentry/core@npm:6.3.3"
+  dependencies:
+    "@sentry/hub": 6.3.3
+    "@sentry/minimal": 6.3.3
+    "@sentry/types": 6.3.3
+    "@sentry/utils": 6.3.3
+    tslib: ^1.9.3
+  checksum: 04c84033c5d9916545a831bf741eada787dce6e28fba730d42c6c3d885502d6fb01b5c0e04bf3daa75bc769a438aec91baf899e14156ad30d9cfef5451a87592
+  languageName: node
+  linkType: hard
+
+"@sentry/hub@npm:6.3.3":
+  version: 6.3.3
+  resolution: "@sentry/hub@npm:6.3.3"
+  dependencies:
+    "@sentry/types": 6.3.3
+    "@sentry/utils": 6.3.3
+    tslib: ^1.9.3
+  checksum: a6ca2f394fd410b2d0fc6cca96657407418fdd14b33f9478c16b7b6c1fd60c5ed01ae4d50770113ca4cfea8e0ec82bdcc0f6b1db9c3bc70ead597718c38ee4b6
+  languageName: node
+  linkType: hard
+
+"@sentry/minimal@npm:6.3.3":
+  version: 6.3.3
+  resolution: "@sentry/minimal@npm:6.3.3"
+  dependencies:
+    "@sentry/hub": 6.3.3
+    "@sentry/types": 6.3.3
+    tslib: ^1.9.3
+  checksum: 1cd1d4e3bacce44b33a24af9610e4991df293a2dfc3bc65b22cd8634d18946e17f3550fd9d9087c9edca5eda185ce5e310355de74aa16aea7c0c92b7d66a3c61
+  languageName: node
+  linkType: hard
+
+"@sentry/react@npm:^6.3.3":
+  version: 6.3.3
+  resolution: "@sentry/react@npm:6.3.3"
+  dependencies:
+    "@sentry/browser": 6.3.3
+    "@sentry/minimal": 6.3.3
+    "@sentry/types": 6.3.3
+    "@sentry/utils": 6.3.3
+    hoist-non-react-statics: ^3.3.2
+    tslib: ^1.9.3
+  peerDependencies:
+    react: 15.x || 16.x || 17.x
+  checksum: 8c8bb603ddce038b9506f0c828f2692e0d8431d8b131699c22e7b925f98a48067f7bfea30b26a2766b49432165f142d008c8733444d5d1251c901f117fb6cc39
+  languageName: node
+  linkType: hard
+
+"@sentry/tracing@npm:^6.3.3":
+  version: 6.3.3
+  resolution: "@sentry/tracing@npm:6.3.3"
+  dependencies:
+    "@sentry/hub": 6.3.3
+    "@sentry/minimal": 6.3.3
+    "@sentry/types": 6.3.3
+    "@sentry/utils": 6.3.3
+    tslib: ^1.9.3
+  checksum: 775b9053ddea45ccb30dc1a7bde65e94d800c0d14903f0ac87dce879b8bbebad5819f218ed8f48bee8477d2d303458beb7abea9e832b4afa5317ecc9aca0c872
+  languageName: node
+  linkType: hard
+
+"@sentry/types@npm:6.3.3":
+  version: 6.3.3
+  resolution: "@sentry/types@npm:6.3.3"
+  checksum: 38185c733fb71800ff767b723249cf943df396450338c49b8bdbc87b2748dac606367261a806f22486d1e94fe7964e7fd8715cd5041f7cc1304489d44606c4c7
+  languageName: node
+  linkType: hard
+
+"@sentry/utils@npm:6.3.3":
+  version: 6.3.3
+  resolution: "@sentry/utils@npm:6.3.3"
+  dependencies:
+    "@sentry/types": 6.3.3
+    tslib: ^1.9.3
+  checksum: df8290c2e32e0c78e41f66aa9545f3f0ba0404cbe4f1a863ad094853c170149063425eb8d32aaf2514dbd342a2135127212c48ec04a1987be03f92c3c97f7c28
+  languageName: node
+  linkType: hard
+
 "@sinonjs/commons@npm:^1.7.0":
   version: 1.8.1
   resolution: "@sinonjs/commons@npm:1.8.1"
@@ -5853,6 +5946,8 @@ __metadata:
     "@awsui/global-styles": ^1.0.7
     "@awsui/test-utils-core": ^1.0.9
     "@babel/preset-env": ^7.13.12
+    "@sentry/react": ^6.3.3
+    "@sentry/tracing": ^6.3.3
     "@testing-library/react": ^11.2.6
     "@testing-library/react-hooks": ^5.1.1
     "@types/history": ^4.7.8
@@ -9347,7 +9442,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.1.0":
+"hoist-non-react-statics@npm:^3.1.0, hoist-non-react-statics@npm:^3.3.2":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:
