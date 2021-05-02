@@ -3,7 +3,7 @@ import I18n from 'lazy-i18n';
 import { ReactElement } from 'react';
 import useViewResumeButton from './view-resume-button.hook';
 
-const RESUME_HREF = '/resume/2019-11/charles-stover-resume.pdf';
+const RESUME_HREF = '/resume/2021-05/charles-stover-resume.pdf';
 
 export default function ViewResumeButton(): ReactElement {
   const { iconAlt } = useViewResumeButton();

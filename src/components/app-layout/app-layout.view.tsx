@@ -33,6 +33,7 @@ export default function CustomAppLayout({
     handleNavigationChange,
     handleToolsChange,
     navigationOpen,
+    ref,
     toolsOpen,
   } = useCustomAppLayout({
     controlledToolsOpen,
@@ -40,19 +41,21 @@ export default function CustomAppLayout({
   });
 
   return (
-    <AppLayout
-      ariaLabels={ariaLabels}
-      breadcrumbs={<Breadcrumbs>{breadcrumbs}</Breadcrumbs>}
-      content={children}
-      contentType={contentType}
-      navigation={<Navigation />}
-      navigationOpen={navigationOpen}
-      notifications={<Notifications>{notifications}</Notifications>}
-      onNavigationChange={handleNavigationChange}
-      onToolsChange={handleToolsChange}
-      tools={Tools && <Tools />}
-      toolsHide={toolsHide}
-      toolsOpen={toolsOpen}
-    />
+    <div ref={ref}>
+      <AppLayout
+        ariaLabels={ariaLabels}
+        breadcrumbs={<Breadcrumbs>{breadcrumbs}</Breadcrumbs>}
+        content={children}
+        contentType={contentType}
+        navigation={<Navigation />}
+        navigationOpen={navigationOpen}
+        notifications={<Notifications>{notifications}</Notifications>}
+        onNavigationChange={handleNavigationChange}
+        onToolsChange={handleToolsChange}
+        tools={Tools && <Tools />}
+        toolsHide={toolsHide}
+        toolsOpen={toolsOpen}
+      />
+    </div>
   );
 }

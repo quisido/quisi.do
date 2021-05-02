@@ -35,6 +35,10 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
       'Support internationalization for multiple languages by asynchronously loading key-value pair translation files.',
     ],
     [
+      'logs-insights-hash',
+      'Given a list of log groups, generate the URL hash for CloudWatch Logs Insights.',
+    ],
+    [
       'mssql-query-builder',
       'Dynamically build Microsoft SQL Server queries using JavaScript.',
     ],
@@ -101,6 +105,10 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
     [
       'use-awsui-router',
       'In addition to managing the AWS UI component local state, these hooks bind to React Router.',
+    ],
+    [
+      'use-awsui-table-item-description',
+      'Append a full-width row to each item in an AWS UI table.',
     ],
     [
       'use-clippy',

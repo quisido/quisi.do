@@ -64,7 +64,7 @@ const PUBLICATION_CARD_DEFINITION: CardsProps<PublicationCardItem>['cardDefiniti
                   content={<I18n>Reactions</I18n>}
                   size="small"
                 >
-                  👏 <NumberFormat>{reactions}</NumberFormat>
+                  <NumberFormat>{reactions}</NumberFormat> 👏
                 </Popover>
               </Badge>
               <Badge className={styles.dateTime}>
@@ -83,7 +83,7 @@ const PUBLICATION_CARD_DEFINITION: CardsProps<PublicationCardItem>['cardDefiniti
                     content={<I18n>Reading time</I18n>}
                     size="small"
                   >
-                    ⏳<Minutes>{readingTime}</Minutes>
+                    <Minutes>{readingTime}</Minutes> ⏳
                   </Popover>
                 </Badge>
               )}

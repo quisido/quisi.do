@@ -1,4 +1,5 @@
 import Box from '@awsui/components-react/box';
+// import Cards from '@awsui/components-react/cards';
 import Container from '@awsui/components-react/container';
 import Header from '@awsui/components-react/header';
 import SpaceBetween from '@awsui/components-react/space-between';
@@ -6,6 +7,8 @@ import I18n from 'lazy-i18n';
 import { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
 import ViewResumeButton from '../../components/view-resume-button';
+// import PROJECT_CARD_DEFINITION from '../../constants/project-card-definition';
+// import PROJECTS from '../../constants/projects';
 import avatar from '../../images/charles-stover.jpg';
 import useHome from './home.hook';
 import styles from './home.module.scss';
@@ -19,7 +22,7 @@ export default function Home(): ReactElement {
 
   return (
     <AppLayout toolsHide>
-      <SpaceBetween size="m">
+      <SpaceBetween size="l">
         <Container
           header={
             <Header actions={<ViewResumeButton />}>
@@ -61,6 +64,17 @@ export default function Home(): ReactElement {
             </SpaceBetween>
           </SpaceBetween>
         </Container>
+        {/*
+        <Cards
+          cardDefinition={PROJECT_CARD_DEFINITION}
+          items={PROJECTS}
+          header={
+            <Header>
+              <I18n>Projects</I18n>
+            </Header>
+          }
+        />
+        */}
       </SpaceBetween>
     </AppLayout>
   );

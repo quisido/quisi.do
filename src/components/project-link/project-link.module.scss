@@ -1,0 +1,13 @@
+// @import '@awsui/design-tokens';
+$color-text-accent: rgb(68, 185, 214);
+
+.root {
+  display: block !important;
+
+  // CardInner, SpaceScaledL SpaceL SpaceS
+  margin: -2rem -2rem -1.2rem !important;
+
+  > div {
+    color: inherit !important;
+  }
+}
