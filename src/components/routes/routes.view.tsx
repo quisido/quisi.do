@@ -18,6 +18,7 @@ export default function AppRoutes(): ReactElement {
       <Route component={ElectronTransitions} path="/electron-transitions" />
       <Route component={Packages} path="/packages" />
       <Route component={PortfolioArticles} path="/portfolio/articles" />
+      <Route component={PortfolioNpm} path="/portfolio/npm" />
       <Route component={Publications} path="/publications" />
       <Route component={Quotes} path="/quotes" />
       <Route component={SpriteSheet2Gif} path="/spritesheet2gif" />
@@ -46,4 +47,8 @@ function ElectronTransitions(): null {
 
 function PortfolioArticles(): ReactElement {
   return <Redirect to="/publications" />;
+}
+
+function PortfolioNpm(): ReactElement {
+  return <Redirect to="/packages" />;
 }
