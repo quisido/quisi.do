@@ -6330,7 +6330,7 @@ __metadata:
     history: ^5.0.0
     identity-obj-proxy: ^3.0.0
     jest: ^26.6.3
-    lazy-i18n: ^2.0.8
+    lazy-i18n: ^2.0.9
     node-sass: ^5.0.0
     number-format-react: ^1.0.0
     prettier: ^2.2.1
@@ -11741,13 +11741,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"lazy-i18n@npm:^2.0.8":
-  version: 2.0.8
-  resolution: "lazy-i18n@npm:2.0.8"
+"lazy-i18n@npm:^2.0.9":
+  version: 2.0.9
+  resolution: "lazy-i18n@npm:2.0.9"
   peerDependencies:
     react: ^17.0.0
     react-dom: ^17.0.0
-  checksum: d5dc54c25a78e9cd7dcd521b7574d48a3dd9cf0a4b5f1e37398e0ec814320ab2e38771ebcee28d3fae1e69b100fac50e2aa9cf3fd71eb95c89d32524a1fe7867
+  checksum: 1e3292e0001888d1cebfbff07cfcdb53f72d2e0e0fd86add165bf09f8c34147b051dc9c69cb955e4c0e52486cc533a4a3ee885f8622834e3dd88db472422bec4
   languageName: node
   linkType: hard
 
