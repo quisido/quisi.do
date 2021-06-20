@@ -6,9 +6,8 @@ import Item from '../../types/packages-table-item';
 export default function PackageDescription({
   packageName,
 }: Item): null | ReactElement {
-  const description: ReactNode | undefined = PACKAGE_DESCRIPTIONS.get(
-    packageName,
-  );
+  const description: ReactNode | undefined =
+    PACKAGE_DESCRIPTIONS.get(packageName);
 
   if (typeof description === 'undefined') {
     return null;

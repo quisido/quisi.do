@@ -91,22 +91,16 @@ export default function usePackagesTable(): State {
     pageSize,
   });
 
-  const {
-    handleSortingChange,
-    sort,
-    sortingColumn,
-    sortingDescending,
-  } = useTable({
-    defaultSortingColumn: {
-      sortingField: 'totalDownloads',
-    },
-    defaultSortingDescending: true,
-  });
+  const { handleSortingChange, sort, sortingColumn, sortingDescending } =
+    useTable({
+      defaultSortingColumn: {
+        sortingField: 'totalDownloads',
+      },
+      defaultSortingDescending: true,
+    });
 
-  const {
-    filteringText,
-    handleChange: handleTextFilterChange,
-  } = useTextFilter();
+  const { filteringText, handleChange: handleTextFilterChange } =
+    useTextFilter();
 
   const items: PackagesTableItem[] = useMemo((): PackagesTableItem[] => {
     if (typeof data === 'undefined') {
@@ -118,11 +112,12 @@ export default function usePackagesTable(): State {
       .filter(filterDefaultPackage);
   }, [data]);
 
-  const filteredItems: PackagesTableItem[] = useMemo((): PackagesTableItem[] => {
-    const filter = ({ packageName }: PackagesTableItem): boolean =>
-      packageName.indexOf(filteringText) !== -1;
-    return items.filter(filter);
-  }, [filteringText, items]);
+  const filteredItems: PackagesTableItem[] =
+    useMemo((): PackagesTableItem[] => {
+      const filter = ({ packageName }: PackagesTableItem): boolean =>
+        packageName.indexOf(filteringText) !== -1;
+      return items.filter(filter);
+    }, [filteringText, items]);
 
   const visibleItems: PackagesTableItem[] = useMemo((): PackagesTableItem[] => {
     const newVisibleItems: PackagesTableItem[] = [...filteredItems];

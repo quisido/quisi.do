@@ -64,9 +64,8 @@ export default function usePublicationCardsItems({
         const findExistingItem = ({
           url: existingUrl,
         }: PublicationCardItem): boolean => existingUrl === canonical_url;
-        const existingItem: PublicationCardItem | undefined = newItems.find(
-          findExistingItem,
-        );
+        const existingItem: PublicationCardItem | undefined =
+          newItems.find(findExistingItem);
         const reactions: number = comments_count + public_reactions_count;
         const views: number = Math.round(reactions * averageViewsPerReaction);
         if (typeof existingItem !== 'undefined') {

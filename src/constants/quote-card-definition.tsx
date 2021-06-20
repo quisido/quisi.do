@@ -8,8 +8,8 @@ const IMAGE_SIZE = 100;
 
 const IMAGE_MARGIN: BoxProps.Spacing = {
   bottom: 'n',
-  left: 'm',
-  right: 'l',
+  left: 'l',
+  right: 'm',
   // top: 'm',
 };
 
@@ -36,11 +36,11 @@ const QUOTE_CARD_DEFINITION: CardsProps<Quote>['cardDefinition'] = {
   sections: [
     {
       id: 'quote',
-      content({ author, image, quote }: Quote): ReactElement {
+      content({ age, author, gender, image, quote }: Quote): ReactElement {
         return (
           <>
             {image && (
-              <Box float="left" margin={IMAGE_MARGIN}>
+              <Box float="right" margin={IMAGE_MARGIN}>
                 <img
                   alt={author}
                   className={styles.image}
@@ -50,7 +50,9 @@ const QUOTE_CARD_DEFINITION: CardsProps<Quote>['cardDefinition'] = {
                 />
               </Box>
             )}
-            {quote}
+            <span data-ssml-voice-age={age} data-ssml-voice-gender={gender}>
+              {quote}
+            </span>
           </>
         );
       },

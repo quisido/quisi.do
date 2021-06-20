@@ -96,9 +96,8 @@ const PER_FRAME_OPTIONS: SelectProps.Options = [
 ];
 
 export default function useSpriteSheet2Gif(): State {
-  const asyncConvertEffect: MutableRefObject<Promise<Response> | null> = useRef(
-    null,
-  );
+  const asyncConvertEffect: MutableRefObject<Promise<Response> | null> =
+    useRef(null);
 
   const [Tools, setTools] = useState((): ComponentType<unknown> => HeaderInfo);
   const [apiGifResponse, setApiGifResponse] = useState<ApiGifResponse | null>(
@@ -131,49 +130,50 @@ export default function useSpriteSheet2Gif(): State {
     }
   }, [direction]);
 
-  const notifications: FlashbarProps.MessageDefinition[] = useMemo((): FlashbarProps.MessageDefinition[] => {
-    const newNotifications: FlashbarProps.MessageDefinition[] = [];
-    if (error !== null) {
-      newNotifications.push({
-        content: error.message,
-        dismissLabel: 'Dismiss',
-        dismissible: true,
-        header: 'An error occurred.',
-        type: 'error',
-        onDismiss(): void {
-          setError(null);
-        },
-      });
-    }
-    return newNotifications;
-  }, [error]);
+  const notifications: FlashbarProps.MessageDefinition[] =
+    useMemo((): FlashbarProps.MessageDefinition[] => {
+      const newNotifications: FlashbarProps.MessageDefinition[] = [];
+      if (error !== null) {
+        newNotifications.push({
+          content: error.message,
+          dismissLabel: 'Dismiss',
+          dismissible: true,
+          header: 'An error occurred.',
+          type: 'error',
+          onDismiss(): void {
+            setError(null);
+          },
+        });
+      }
+      return newNotifications;
+    }, [error]);
 
-  const selectedDirectionOption: SelectProps.Option = useMemo((): SelectProps.Option => {
-    const findSelectedDirectionOption = ({
-      value,
-    }: SelectProps.Option): boolean => value === direction;
-    const newSelectedDirectionOption:
-      | SelectProps.Option
-      | undefined = DIRECTION_OPTIONS.find(findSelectedDirectionOption);
-    if (typeof newSelectedDirectionOption === 'undefined') {
-      throw new Error(`Cannot find direction: ${direction}`);
-    }
-    return newSelectedDirectionOption;
-  }, [direction]);
+  const selectedDirectionOption: SelectProps.Option =
+    useMemo((): SelectProps.Option => {
+      const findSelectedDirectionOption = ({
+        value,
+      }: SelectProps.Option): boolean => value === direction;
+      const newSelectedDirectionOption: SelectProps.Option | undefined =
+        DIRECTION_OPTIONS.find(findSelectedDirectionOption);
+      if (typeof newSelectedDirectionOption === 'undefined') {
+        throw new Error(`Cannot find direction: ${direction}`);
+      }
+      return newSelectedDirectionOption;
+    }, [direction]);
 
-  const selectedPerFrameOption: SelectProps.Option = useMemo((): SelectProps.Option => {
-    const perFrameStr: string = perFrame ? 'true' : 'false';
-    const findSelectedPerFrameOption = ({
-      value,
-    }: SelectProps.Option): boolean => value === perFrameStr;
-    const newSelectePerFrameOption:
-      | SelectProps.Option
-      | undefined = PER_FRAME_OPTIONS.find(findSelectedPerFrameOption);
-    if (typeof newSelectePerFrameOption === 'undefined') {
-      throw new Error(`Cannot find per frame value: ${perFrameStr}`);
-    }
-    return newSelectePerFrameOption;
-  }, [perFrame]);
+  const selectedPerFrameOption: SelectProps.Option =
+    useMemo((): SelectProps.Option => {
+      const perFrameStr: string = perFrame ? 'true' : 'false';
+      const findSelectedPerFrameOption = ({
+        value,
+      }: SelectProps.Option): boolean => value === perFrameStr;
+      const newSelectePerFrameOption: SelectProps.Option | undefined =
+        PER_FRAME_OPTIONS.find(findSelectedPerFrameOption);
+      if (typeof newSelectePerFrameOption === 'undefined') {
+        throw new Error(`Cannot find per frame value: ${perFrameStr}`);
+      }
+      return newSelectePerFrameOption;
+    }, [perFrame]);
 
   const handleConvertClick = useCallback(async (): Promise<void> => {
     if (spriteSheetImageFile === null) {

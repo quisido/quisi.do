@@ -5,7 +5,7 @@ import ITEMS from '../../constants/quotes';
 
 const CARDS_PER_ROW: CardsProps.CardsLayout[] = [
   {
-    cards: 3,
+    cards: 2,
   },
 ];
 

@@ -27,9 +27,8 @@ interface State {
   sortPlaceholder?: string;
 }
 
-const IS_ALERT_VISIBLE_CAPSULE: ReactCapsule<boolean> = new ReactCapsule<boolean>(
-  true,
-);
+const IS_ALERT_VISIBLE_CAPSULE: ReactCapsule<boolean> =
+  new ReactCapsule<boolean>(true);
 
 export default function usePublicationCards(): State {
   // Contexts

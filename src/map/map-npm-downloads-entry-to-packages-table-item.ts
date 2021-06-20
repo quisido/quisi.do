@@ -22,9 +22,8 @@ export default function mapNpmDownloadsEntryToPackagesTableItem(
         string,
         number[],
       ]): boolean => entryPackageName === dependentPackageName;
-      const dependentEntry: [string, number[]] | undefined = entries.find(
-        findDependentEntry,
-      );
+      const dependentEntry: [string, number[]] | undefined =
+        entries.find(findDependentEntry);
       if (typeof dependentEntry === 'undefined') {
         break;
       }
