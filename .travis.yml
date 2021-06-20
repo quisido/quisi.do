@@ -2,10 +2,10 @@ language: node_js
 node_js: 14
 branches:
   only: master
-install:
-  - yarn
-script:
-  - yarn build
+cache:
+  npm: false
+  directories:
+  - ".yarn/cache"
 deploy:
   fqdn: charlesstover.com
   keep-history: true
@@ -14,6 +14,10 @@ deploy:
   skip-cleanup: true
   target-branch: gh-pages
   github-token:
-    secure: LuOqGpN55Gr3tCDybVVteBJKCj7oDm8quA0A5GO6xSEwyxCpSEA1V8sw6y43WPUuioBrorvMpkspHkewTyApx9X3rB7NgRDtVfK4MAJeajQQTGum6jYdFzAFzYimjJqTn8Gjrqm1JCtkLOtkYqXv9kYh2xNRXZnB34cgCs6aNxnKjUdFOyZSSgW4ubQjI1J2kGagu2WGIMHcoH9sEYgGXJXA4fu9QECSvnZFofML8VYeR+pVcWkP63W0PbZ+XfDNgrFpnJOahrlHwsYGpkPMF2OlQoBwdzeI6i2ZbKKhFOR+mO06bf+HbvaYe7i6lKa8x8tvBDRxAY5B5Zr5W9rMKU9rbYVRrI8AOBuB1U/MXEIlhw7wuo8/VlrTVCeasZEeN//rJKaDg6uXYjZq4IG+ZltnM3eGk7Av/BBkgO7wFgn0qCgRMM3xCuVTt6DbN3PEK0H8S8RNBKg+njHfIZCVqF+wkCaCjm70JzCKRQhkcmE+AR4GUAU0aFoVM5Z3KxN7TQDkuiROtJ+ZfqTxous/WrDFAcvrCRL/kI1vhSAbRsHuVuzi6U1jiA94W9DOWqUa3EhMDm5OVTci6nD7OC5UBhzL+NIcW06zMmGpevjo+gGu4PdkeDjFMtgyuXyDpSd3e6mcp0RTfNuyTIwD54Sb+0qpJNiPIlDIqqfmhlsgOoA=
+    secure: gsLWTqoswbacN5IXXeT7Bt34+Jug/vTu5VsT0yv9/XKiEgmNkgxTXaaPUL+UcTPTRT3wOx6kSZ94qnHlNIlOaxcGHAsgAGN4UWC82U/2+J/HcmXsH6roRnVab0criEvXE/sLEgJiwukIwpy8Jk/2q8du60W0y4++McWdHexkg/UYoQDAIpGzeOz4HuabubZwwjrImZ1t6kgCpVinv5rnNElw/4ui3Uwz7y/70sQvolLmwfg0irrl/SdUp/4vpLCnvuYU5RBgqLcSR9qdCs7mp+07UBHzzqAJs/PAOVx9RRXYQgiy3CsDYeRKx3zhpvs0Wvk7KpTP4ufr67j1hfynuYnWZ9zg7vU0VwjWo5jLWA5ydmSVHp9dnS9IbKmqtX7DHmjv8cDk9ZzoZFyrhwmDYqPg8tSIhGw22FINy4PPDF1wpV13ZR6fBVPF3/JTd+Ifiv59kdWLaCqcKGPsN9rcKRjUuW3nMZdHHJ5hmljYYMZmPGEtlVutXyuKctnR357obCeodmtS/M58ZaiCGsZ6WBaMM63TND1Mlf7bd6dj53IIRjCd+9vGTu/4mMuPZ7jPUPhyNlZSwaN4OWmQPg3U8XRYdMbcusTz/D4ZbT89urPAaF8Z/WYvUq5ZnS9Q6SfpxmEtR89d5TUV/SDN8Ix95hpNF2fpEqr4p87vza9Bl5E=
   on:
     branch: master
+install:
+- yarn
+script:
+- yarn build
