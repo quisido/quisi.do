@@ -25,46 +25,44 @@ export default function PublicationCards(): ReactElement {
   } = usePublicationCards();
 
   return (
-    <>
-      <SpaceBetween direction="vertical" size="m">
-        {isAlertVisible && (
-          <Alert
-            dismissAriaLabel={dismissAriaLabel}
-            dismissible
-            onDismiss={handleAlertDismiss}
-            type="info"
-            visible={true}
+    <SpaceBetween direction="vertical" size="m">
+      {isAlertVisible && (
+        <Alert
+          dismissAriaLabel={dismissAriaLabel}
+          dismissible
+          onDismiss={handleAlertDismiss}
+          type="info"
+          visible={true}
+        >
+          Only publications with more than 5,000 views are shown.
+        </Alert>
+      )}
+      <Cards
+        cardDefinition={CARD_DEFINITION}
+        items={items}
+        loading={loading}
+        loadingText={loadingText}
+        header={
+          <Header
+            actions={
+              <FormField
+                className={styles.sort}
+                label={<I18n>Sort by</I18n>}
+                stretch
+              >
+                <Select
+                  onChange={handleSortChange}
+                  options={sortOptions}
+                  placeholder={sortPlaceholder}
+                  selectedOption={selectedSortOption}
+                />
+              </FormField>
+            }
           >
-            Only publications with more than 5,000 views are shown.
-          </Alert>
-        )}
-        <Cards
-          cardDefinition={CARD_DEFINITION}
-          items={items}
-          loading={loading}
-          loadingText={loadingText}
-          header={
-            <Header
-              actions={
-                <FormField
-                  className={styles.sort}
-                  label={<I18n>Sort by</I18n>}
-                  stretch
-                >
-                  <Select
-                    onChange={handleSortChange}
-                    options={sortOptions}
-                    placeholder={sortPlaceholder}
-                    selectedOption={selectedSortOption}
-                  />
-                </FormField>
-              }
-            >
-              <I18n>Publications</I18n>
-            </Header>
-          }
-        />
-      </SpaceBetween>
-    </>
+            <I18n>Publications</I18n>
+          </Header>
+        }
+      />
+    </SpaceBetween>
   );
 }

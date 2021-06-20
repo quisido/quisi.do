@@ -42,7 +42,12 @@ const PUBLICATION_CARD_DEFINITION: CardsProps<PublicationCardItem>['cardDefiniti
               <div className={styles.bannerWidth}>
                 <Link href={url}>
                   {image ? (
-                    <img alt={title} src={image} width={320} />
+                    <img
+                      alt={title}
+                      className={styles.image}
+                      src={image}
+                      width={320}
+                    />
                   ) : (
                     <StatusIndicator iconAriaLabel="Warning" type="warning">
                       {/* No translation needed. Only I should see this banner. */}
