@@ -15,6 +15,7 @@ const PACKAGE_DEPENDENCIES: Map<string, string[]> = new Map([
   ['react-rainbow-text', ['@charlesstover/hsl2rgb', 'rainbow-gradient']],
   ['react-sparkline-svg', ['sparkline-svg']],
   ['reactn', ['use-force-update']],
+  ['relative-timestamp', ['use-force-update']],
   ['use-react-router', ['use-force-update']],
 ]);
 

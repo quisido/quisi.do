@@ -11,6 +11,10 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
       'Attach event listeners for when users press ⬆, ⬆, ⬇, ⬇, ⬅, ➡, ⬅, ➡, 🅱, 🅰, Enter.',
     ],
     [
+      'absolute-timestamp',
+      'The absolute timestamp component provides human-readable time formatting to Unix timestamps.',
+    ],
+    [
       'awsui-dark-mode',
       'Ease your eyes by applying a dark mode theme to all child AWS UI components.',
     ],
@@ -89,6 +93,10 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
     [
       'reactn-devtools',
       "The ReactN DevTools display an application's ReactN global state in the Redux DevTools browser extension.",
+    ],
+    [
+      'relative-timestamp',
+      'The relative timestamp component provides human-readable time formatting to Unix timestamps relative to the current date, such as "1 month ago."',
     ],
     [
       'rn-webview',
