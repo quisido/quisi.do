@@ -141,6 +141,7 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
       'use-page-transition',
       'Listen for page transition (visibility and persistence) events with a React hook.',
     ],
+    ['use-params-memo', "React's `useMemo` hook with a parameterized function"],
     [
       'use-react-router',
       'This React hook reads the react-router state and re-renders on page navigation events.',

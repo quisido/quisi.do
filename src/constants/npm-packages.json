@@ -54,6 +54,7 @@
     ["use-mouse-move"],
     ["use-offline"],
     ["use-page-transition"],
+    ["use-params-memo"],
     ["use-react-router"],
     ["use-shift-key"],
     ["use-update-effect"],
