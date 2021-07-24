@@ -10,7 +10,7 @@ import type Item from './publication-cards.type.item';
 
 export default function mapPublicationCardsSortToFunction(
   sort: Sort,
-): (a: Item, b: Item) => number {
+): (a: Readonly<Item>, b: Readonly<Item>) => number {
   switch (sort) {
     case Sort.PublicationDate:
       return sortItemsByPublicationDate;
