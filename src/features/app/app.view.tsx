@@ -1,38 +1,25 @@
 import '@awsui/global-styles/index.css';
 import { ErrorBoundary, withProfiler } from '@sentry/react';
-import AwsuiDarkMode from 'awsui-dark-mode';
-import { I18nProvider } from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-import Routes from '../../components/routes';
 import HISTORY from '../../constants/history';
-import Language from '../../constants/language';
-import TRANSLATIONS from '../../constants/translations';
-import useDarkMode from '../../hooks/use-dark-mode';
-import useLanguage from '../../hooks/use-language';
+import STORE from '../../constants/redux-store';
+import Main from './app.view.main';
 
 const queryClient: QueryClient = new QueryClient();
 
 function App(): ReactElement {
-  const [isDarkModeEnabled] = useDarkMode();
-  const [language] = useLanguage();
-
   return (
     <ErrorBoundary fallback="An error occurred.">
-      <AwsuiDarkMode disabled={!isDarkModeEnabled} root="body">
-        <I18nProvider
-          fallbackLocale={Language.English}
-          locale={language}
-          translations={TRANSLATIONS}
-        >
-          <QueryClientProvider client={queryClient}>
-            <Router history={HISTORY}>
-              <Routes />
-            </Router>
-          </QueryClientProvider>
-        </I18nProvider>
-      </AwsuiDarkMode>
+      <Provider store={STORE}>
+        <QueryClientProvider client={queryClient}>
+          <Router history={HISTORY}>
+            <Main />
+          </Router>
+        </QueryClientProvider>
+      </Provider>
     </ErrorBoundary>
   );
 }

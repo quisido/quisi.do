@@ -1,10 +1,8 @@
-import type { Dispatch, SetStateAction } from 'react';
-import { useCapsule } from 'react-capsule';
-import DarkModeCapsule from '../capsules/dark-mode';
+import type ReduxState from '../types/redux-state';
+import useReduxSelector from './use-redux-selector';
 
-export default function useDarkMode(): [
-  boolean,
-  Dispatch<SetStateAction<boolean>>,
-] {
-  return useCapsule(DarkModeCapsule);
+export default function useDarkMode(): boolean {
+  return useReduxSelector(
+    (state: Readonly<ReduxState>): boolean => state.app.isDarkModeEnabled,
+  );
 }

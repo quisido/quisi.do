@@ -3,6 +3,7 @@ import { useCallback, useMemo } from 'react';
 import type Language from '../../constants/language';
 import LANGUAGE_OPTIONS from '../../constants/language-options';
 import useLanguage from '../../hooks/use-language';
+import useSetLanguage from '../../hooks/use-set-language';
 import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-event';
 
 interface State {
@@ -11,7 +12,8 @@ interface State {
 }
 
 export default function useLanguageSelect(): State {
-  const [language, setLanguage] = useLanguage();
+  const language: Language = useLanguage();
+  const setLanguage = useSetLanguage();
 
   return {
     handleChange: useCallback(

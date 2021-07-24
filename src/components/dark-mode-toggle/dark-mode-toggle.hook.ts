@@ -2,6 +2,7 @@ import type { CheckboxProps } from '@awsui/components-react/checkbox';
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import { useCallback } from 'react';
 import useDarkMode from '../../hooks/use-dark-mode';
+import useSetDarkMode from '../../hooks/use-set-dark-mode';
 
 interface State {
   readonly checked: boolean;
@@ -13,7 +14,8 @@ interface State {
 }
 
 export default function useDarkModeToggle(): State {
-  const [isDarkModeEnabled, setIsDarkModeEnabled] = useDarkMode();
+  const isDarkModeEnabled: boolean = useDarkMode();
+  const setIsDarkModeEnabled = useSetDarkMode();
 
   return {
     checked: isDarkModeEnabled,
