@@ -1,51 +1,42 @@
 import type { ReactElement } from 'react';
 import { Route, Switch } from 'react-router';
 import { Redirect } from 'react-router-dom';
-import Home from '../../components/home';
-import Packages from '../../components/packages';
 import Publications from '../../components/publications';
-import Quotes from '../../components/quotes';
 import SpriteSheet2Gif from '../../components/spritesheet2gif';
+import Home from '../../features/home';
+import Packages from '../../features/packages';
+import Quotes from '../../features/quotes';
+import externalRedirect from './routes.util.external-redirect';
 
 export default function AppRoutes(): ReactElement {
   return (
     <Switch>
       <Route
         path="/become-the-junior-developer-that-companies-want-to-hire/"
-        component={(): null => {
-          window.location.href =
-            'https://charles-stover.medium.com/become-the-junior-developer-that-companies-want-to-hire-c539f4c236d8';
-          return null;
-        }}
+        render={externalRedirect(
+          'https://charles-stover.medium.com/become-the-junior-developer-that-companies-want-to-hire-c539f4c236d8',
+        )}
       />
       <Route
         path="/breathe"
-        component={(): null => {
-          window.location.href =
-            'https://charlesstover.github.io/meditative-breathing/';
-          return null;
-        }}
+        render={externalRedirect(
+          'https://charlesstover.github.io/meditative-breathing/',
+        )}
       />
       <Route
         path="/electron-transitions"
-        component={(): null => {
-          window.location.href =
-            'https://charlesstover.github.io/electron-transition-calculator/';
-          return null;
-        }}
+        render={externalRedirect(
+          'https://charlesstover.github.io/electron-transition-calculator/',
+        )}
       />
       <Route component={Packages} path="/packages" />
       <Route
         path="/portfolio/articles"
-        component={(): ReactElement => {
-          return <Redirect to="/publications" />;
-        }}
+        component={(): ReactElement => <Redirect to="/publications" />}
       />
       <Route
         path="/portfolio/npm"
-        component={(): ReactElement => {
-          return <Redirect to="/packages" />;
-        }}
+        component={(): ReactElement => <Redirect to="/packages" />}
       />
       <Route component={Publications} path="/publications" />
       <Route component={Quotes} path="/quotes" />

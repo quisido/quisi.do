@@ -123,7 +123,7 @@ const QUOTES: Quote[] = [
     company: 'Amazon Web Services',
     gender: 'male',
     image: mustafa,
-    title: 'Principal Software Engineer for CloudWatch Logs',
+    title: 'Principal Software Engineer',
     quote: (
       <Box variant="p">
         I have observed Charles’s strengths over the years. I think Charles
