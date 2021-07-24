@@ -6,11 +6,11 @@ import Select from '@awsui/components-react/select';
 import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
-import CARD_DEFINITION from '../../constants/publication-card-definition';
-import usePublicationCards from './publication-cards.hook';
-import styles from './publication-cards.module.scss';
+import CARD_DEFINITION from './publications.constant.card-definition';
+import usePublicationsContents from './publications.hook.contents';
+import styles from './publications.view.contents.module.scss';
 
-export default function PublicationCards(): ReactElement {
+export default function PublicationsContents(): ReactElement {
   const {
     dismissAriaLabel,
     handleAlertDismiss,
@@ -22,7 +22,7 @@ export default function PublicationCards(): ReactElement {
     selectedSortOption,
     sortOptions,
     sortPlaceholder,
-  } = usePublicationCards();
+  } = usePublicationsContents();
 
   return (
     <SpaceBetween direction="vertical" size="m">

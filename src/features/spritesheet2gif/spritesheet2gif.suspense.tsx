@@ -3,19 +3,19 @@ import Spinner from '@awsui/components-react/spinner';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { Suspense } from 'react';
-import LazyPublicationCards from './publication-cards.view.lazy';
+import Lazy from './spritesheet2gif.lazy';
 
-export default function PublicationCardsSuspense(): ReactElement {
+export default function SpriteSheet2GifSuspense(): ReactElement {
   return (
     <Suspense
       fallback={
-        <Box textAlign="center">
+        <Box>
           <Spinner />
-          <I18n>Loading publications</I18n>
+          <I18n>Loading spritesheet to GIF converter</I18n>
         </Box>
       }
     >
-      <LazyPublicationCards />
+      <Lazy />
     </Suspense>
   );
 }

@@ -1,11 +1,11 @@
 import type { ReactElement } from 'react';
 import { Route, Switch } from 'react-router';
 import { Redirect } from 'react-router-dom';
-import Publications from '../../components/publications';
-import SpriteSheet2Gif from '../../components/spritesheet2gif';
 import Home from '../../features/home';
 import Packages from '../../features/packages';
+import Publications from '../../features/publications';
 import Quotes from '../../features/quotes';
+import SpriteSheet2Gif from '../../features/spritesheet2gif';
 import externalRedirect from './routes.util.external-redirect';
 
 export default function AppRoutes(): ReactElement {

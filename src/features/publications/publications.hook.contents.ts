@@ -8,12 +8,12 @@ import ReactCapsule, { useCapsule } from 'react-capsule';
 import useDevStats from '../../hooks/use-dev-stats';
 import useMediumStats from '../../hooks/use-medium-stats';
 import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-event';
-import Sort from './publication-cards.constant.sort';
-import filterItemsByMinimumViews from './publication-cards.filter.items-by-minimum-views';
-import useItems from './publication-cards.hook.items';
-import useSortOptions from './publication-cards.hook.sort-options';
-import mapSortToFunction from './publication-cards.map.sort-to-function';
-import type Item from './publication-cards.type.item';
+import Sort from './publications.constant.sort';
+import filterItemsByMinimumViews from './publications.filter.items-by-minimum-views';
+import useItems from './publications.hook.items';
+import useSortOptions from './publications.hook.sort-options';
+import mapSortToFunction from './publications.map.sort-to-function';
+import type Item from './publications.type.item';
 
 interface State {
   dismissAriaLabel?: string;
@@ -31,7 +31,7 @@ interface State {
 const IS_ALERT_VISIBLE_CAPSULE: ReactCapsule<boolean> =
   new ReactCapsule<boolean>(true);
 
-export default function usePublicationCards(): State {
+export default function usePublicationsContents(): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
 

@@ -1,4 +1,6 @@
-export default interface PublicationCardsItem {
+// Reactions and views are mutable when Dev.to and Medium article statistics are
+//   merged.
+export default interface PublicationsItem {
   readonly dateTime: number;
   readonly image?: string;
   reactions: number;

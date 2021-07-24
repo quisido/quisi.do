@@ -1,12 +1,12 @@
-import type PublicationCardItem from './publication-cards.type.item';
+import type Item from './publications.type.item';
 
 const NEXT = 1;
 const PREVIOUS = -1;
 const SAME = 0;
 
-export default function sortPublicationCardItemsByReadingTime(
-  { readingTime: a }: Readonly<PublicationCardItem>,
-  { readingTime: b }: Readonly<PublicationCardItem>,
+export default function sortPublicationItemsByReadingTime(
+  { readingTime: a }: Readonly<Item>,
+  { readingTime: b }: Readonly<Item>,
 ): number {
   if (typeof a === 'undefined') {
     if (typeof b === 'undefined') {

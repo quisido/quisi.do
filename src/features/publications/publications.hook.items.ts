@@ -1,19 +1,19 @@
 import { useMemo } from 'react';
 import type DevArticle from '../../types/dev-article';
 import type MediumArticle from '../../types/medium-article';
-import type PublicationCardItem from './publication-cards.type.item';
+import type Item from './publications.type.item';
 
 interface Props {
   readonly devData?: DevArticle[];
   readonly mediumData?: Record<string, MediumArticle>;
 }
 
-export default function usePublicationCardsItems({
+export default function usePublicationItems({
   devData,
   mediumData,
-}: Props): PublicationCardItem[] {
-  return useMemo((): PublicationCardItem[] => {
-    const newItems: PublicationCardItem[] = [];
+}: Props): readonly Item[] {
+  return useMemo((): readonly Item[] => {
+    const newItems: Item[] = [];
     let totalReactions = 0;
     let totalViews = 0;
     if (typeof mediumData !== 'undefined') {
@@ -63,10 +63,8 @@ export default function usePublicationCardsItems({
       } of devData) {
         const findExistingItem = ({
           url: existingUrl,
-        }: Readonly<PublicationCardItem>): boolean =>
-          existingUrl === canonicalUrl;
-        const existingItem: PublicationCardItem | undefined =
-          newItems.find(findExistingItem);
+        }: Readonly<Item>): boolean => existingUrl === canonicalUrl;
+        const existingItem: Item | undefined = newItems.find(findExistingItem);
         const reactions: number = commentsCount + publicReactionsCount;
         const views: number = Math.round(reactions * averageViewsPerReaction);
         if (typeof existingItem !== 'undefined') {

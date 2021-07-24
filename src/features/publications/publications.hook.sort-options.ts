@@ -2,9 +2,9 @@ import type { SelectProps } from '@awsui/components-react/select';
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
-import Sort from './publication-cards.constant.sort';
+import Sort from './publications.constant.sort';
 
-export default function usePublicationCardsSortOptions(): SelectProps.Options {
+export default function usePublicationsSortOptions(): SelectProps.Options {
   const translate: TranslateFunction = useTranslate();
 
   return useMemo(
