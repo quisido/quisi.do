@@ -1,3 +1,3 @@
 import { lazy } from 'react';
 
-export default lazy(() => import('./packages-table.view'));
+export default lazy(async () => import('./packages-table.view'));

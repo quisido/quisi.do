@@ -1,7 +1,8 @@
-import Box, { BoxProps } from '@awsui/components-react/box';
-import { CardsProps } from '@awsui/components-react/cards';
-import { ReactElement } from 'react';
-import Quote from '../types/quote';
+import type { BoxProps } from '@awsui/components-react/box';
+import Box from '@awsui/components-react/box';
+import type { CardsProps } from '@awsui/components-react/cards';
+import type { ReactElement } from 'react';
+import type Quote from '../types/quote';
 import styles from './quote-card-definition.module.scss';
 
 const IMAGE_SIZE = 100;
@@ -14,18 +15,18 @@ const IMAGE_MARGIN: BoxProps.Spacing = {
 };
 
 const QUOTE_CARD_DEFINITION: CardsProps<Quote>['cardDefinition'] = {
-  header({ author, company, title }: Quote): ReactElement {
+  header({ author, company, title }: Readonly<Quote>): ReactElement {
     return (
       <Box textAlign="center">
         <Box margin="xxxs" color="text-label">
           {author}
         </Box>
-        {title && (
+        {typeof title === 'string' && (
           <Box display="block" margin="xxxs" variant="small">
             {title}
           </Box>
         )}
-        {company && (
+        {typeof company === 'string' && (
           <Box display="block" margin="xxxs" variant="small">
             {company}
           </Box>
@@ -39,7 +40,7 @@ const QUOTE_CARD_DEFINITION: CardsProps<Quote>['cardDefinition'] = {
       content({ age, author, gender, image, quote }: Quote): ReactElement {
         return (
           <>
-            {image && (
+            {typeof image === 'string' && (
               <Box float="right" margin={IMAGE_MARGIN}>
                 <img
                   alt={author}

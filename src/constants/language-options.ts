@@ -1,4 +1,4 @@
-import { SelectProps } from '@awsui/components-react/select';
+import type { SelectProps } from '@awsui/components-react/select';
 import Language from '../constants/language';
 
 const LANGUAGE_OPTIONS: SelectProps.Option[] = [

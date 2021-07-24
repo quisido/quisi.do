@@ -1,16 +1,16 @@
 export default interface MediumArticle {
-  claps: number;
-  firstPublishedAt: number;
-  friendsLinkViews: number;
-  internalReferrerViews: number;
-  postId: string;
-  previewImage: string;
-  readingTime: number;
-  reads: number;
-  slug: string;
-  syndicatedViews: number;
-  title: string;
-  updateNotificationSubscribers: number;
-  upvotes: number;
-  views: number;
+  readonly claps: number;
+  readonly firstPublishedAt: number;
+  readonly friendsLinkViews: number;
+  readonly internalReferrerViews: number;
+  readonly postId: string;
+  readonly previewImage: string;
+  readonly readingTime: number;
+  readonly reads: number;
+  readonly slug: string;
+  readonly syndicatedViews: number;
+  readonly title: string;
+  readonly updateNotificationSubscribers: number;
+  readonly upvotes: number;
+  readonly views: number;
 }

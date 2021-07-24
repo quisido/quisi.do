@@ -1,5 +1,5 @@
 import Select from '@awsui/components-react/select';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import LANGUAGE_OPTIONS from '../../constants/language-options';
 import useLanguageSelect from './language-select.hook';
 

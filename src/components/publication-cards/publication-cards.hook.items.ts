@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
-import DevArticle from '../../types/dev-article';
-import MediumArticle from '../../types/medium-article';
-import PublicationCardItem from '../../types/publication-card-item';
+import type DevArticle from '../../types/dev-article';
+import type MediumArticle from '../../types/medium-article';
+import type PublicationCardItem from './publication-cards.type.item';
 
 interface Props {
-  devData?: DevArticle[];
-  mediumData?: Record<string, MediumArticle>;
+  readonly devData?: DevArticle[];
+  readonly mediumData?: Record<string, MediumArticle>;
 }
 
 export default function usePublicationCardsItems({
@@ -53,20 +53,21 @@ export default function usePublicationCardsItems({
     const averageViewsPerReaction = totalViews / totalReactions;
     if (typeof devData !== 'undefined') {
       for (const {
-        canonical_url,
-        comments_count,
-        public_reactions_count,
-        published_timestamp,
-        social_image,
+        canonical_url: canonicalUrl,
+        comments_count: commentsCount,
+        public_reactions_count: publicReactionsCount,
+        published_timestamp: publishedTimestamp,
+        social_image: socialImage,
         title,
         url,
       } of devData) {
         const findExistingItem = ({
           url: existingUrl,
-        }: PublicationCardItem): boolean => existingUrl === canonical_url;
+        }: Readonly<PublicationCardItem>): boolean =>
+          existingUrl === canonicalUrl;
         const existingItem: PublicationCardItem | undefined =
           newItems.find(findExistingItem);
-        const reactions: number = comments_count + public_reactions_count;
+        const reactions: number = commentsCount + publicReactionsCount;
         const views: number = Math.round(reactions * averageViewsPerReaction);
         if (typeof existingItem !== 'undefined') {
           existingItem.reactions += reactions;
@@ -74,8 +75,8 @@ export default function usePublicationCardsItems({
           continue;
         }
         newItems.push({
-          dateTime: new Date(published_timestamp).getTime(),
-          image: social_image,
+          dateTime: new Date(publishedTimestamp).getTime(),
+          image: socialImage,
           reactions,
           title,
           type: 'dev',

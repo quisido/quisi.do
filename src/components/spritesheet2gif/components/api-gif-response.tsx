@@ -1,12 +1,13 @@
 import Box from '@awsui/components-react/box';
 import Container from '@awsui/components-react/container';
 import Header from '@awsui/components-react/header';
-import { MutableRefObject, ReactElement, useEffect, useRef } from 'react';
+import type { MutableRefObject, ReactElement } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface Props {
-  height: number;
-  image: string;
-  width: number;
+  readonly height: number;
+  readonly image: string;
+  readonly width: number;
 }
 
 export default function ApiGifResponse({

@@ -1,26 +1,27 @@
-import { AlertProps } from '@awsui/components-react/alert';
-import { CardsProps } from '@awsui/components-react/cards';
-import { NonCancelableCustomEvent } from '@awsui/components-react/internal/events';
-import { SelectProps } from '@awsui/components-react/select';
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
+import type { AlertProps } from '@awsui/components-react/alert';
+import type { CardsProps } from '@awsui/components-react/cards';
+import type { SelectProps } from '@awsui/components-react/select';
+import type { TranslateFunction } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo, useState } from 'react';
 import ReactCapsule, { useCapsule } from 'react-capsule';
-import PublicationCardsSort from '../../constants/publication-cards-sort';
-import filterPublicationCardItemsByMinimumViews from '../../filter/filter-publication-card-items-by-minimum-views';
 import useDevStats from '../../hooks/use-dev-stats';
 import useMediumStats from '../../hooks/use-medium-stats';
-import mapPublicationCardsSortToFunction from '../../map/map-publication-cards-sort-to-function';
-import PublicationCardItem from '../../types/publication-card-item';
+import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-event';
+import Sort from './publication-cards.constant.sort';
+import filterItemsByMinimumViews from './publication-cards.filter.items-by-minimum-views';
 import useItems from './publication-cards.hook.items';
 import useSortOptions from './publication-cards.hook.sort-options';
+import mapSortToFunction from './publication-cards.map.sort-to-function';
+import type Item from './publication-cards.type.item';
 
 interface State {
   dismissAriaLabel?: string;
   handleAlertDismiss: AlertProps['onDismiss'];
   handleSortChange: SelectProps['onChange'];
   isAlertVisible: boolean;
-  items: CardsProps<PublicationCardItem>['items'];
-  loading: CardsProps<PublicationCardItem>['loading'];
+  items: CardsProps<Item>['items'];
+  loading: CardsProps<Item>['loading'];
   loadingText?: string;
   selectedSortOption: SelectProps.Option;
   sortOptions: SelectProps.Options;
@@ -54,9 +55,9 @@ export default function usePublicationCards(): State {
 
   // States
   const sortOptions: SelectProps.Options = useSortOptions();
-  const [sort, setSort] = useState(PublicationCardsSort.ViewsPerDay);
+  const [sort, setSort] = useState(Sort.ViewsPerDay);
 
-  const items: PublicationCardItem[] = useItems({
+  const items: readonly Item[] = useItems({
     devData,
     mediumData,
   });
@@ -73,26 +74,25 @@ export default function usePublicationCards(): State {
       setIsAlertVisible(false);
     }, [setIsAlertVisible]),
 
-    handleSortChange: useCallback(
-      (e: NonCancelableCustomEvent<SelectProps.ChangeDetail>): void => {
-        const newSort: PublicationCardsSort = e.detail.selectedOption
-          .value as PublicationCardsSort;
-        setSort(newSort);
-      },
-      [],
-    ),
+    handleSortChange: useCallback((e: ReadonlySelectChangeEvent): void => {
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      const newSort: Sort = e.detail.selectedOption.value as Sort;
+      setSort(newSort);
+    }, []),
 
-    items: useMemo((): PublicationCardItem[] => {
-      const newItems: PublicationCardItem[] = [...items];
-      newItems.sort(mapPublicationCardsSortToFunction(sort));
-      return newItems.filter(filterPublicationCardItemsByMinimumViews);
+    items: useMemo((): readonly Item[] => {
+      const newItems: Item[] = [...items];
+      newItems.sort(mapSortToFunction(sort));
+      return newItems.filter(filterItemsByMinimumViews);
     }, [items, sort]),
 
     selectedSortOption: useMemo((): SelectProps.Option => {
-      const findSelectedSortOption = ({ value }: SelectProps.Option): boolean =>
-        value === sort;
+      const findSelectedSortOption = ({
+        value,
+      }: Readonly<SelectProps.Option>): boolean => value === sort;
       // Since `sort` is a Sort enum value and all Sort enum values have a sort
       //   option, we can assert that we found this sort option.
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return sortOptions.find(findSelectedSortOption) as SelectProps.Option;
     }, [sort, sortOptions]),
   };

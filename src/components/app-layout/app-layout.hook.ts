@@ -1,27 +1,35 @@
-import { AppLayoutProps } from '@awsui/components-react/app-layout';
-import { NonCancelableCustomEvent } from '@awsui/components-react/internal/events';
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
-import { MutableRefObject, useLayoutEffect, useMemo, useRef } from 'react';
+import type { AppLayoutProps } from '@awsui/components-react/app-layout';
+import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
+import type { TranslateFunction } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
+import type { MutableRefObject } from 'react';
+import { useLayoutEffect, useMemo, useRef } from 'react';
 import { useAppLayout } from 'use-awsui';
 
 interface Props {
-  controlledToolsOpen?: boolean;
-  onToolsChange?(
-    event: NonCancelableCustomEvent<AppLayoutProps.ChangeDetail>,
-  ): void;
+  readonly controlledToolsOpen?: boolean;
+  readonly onToolsChange?: (
+    event: Readonly<
+      NonCancelableCustomEvent<Readonly<AppLayoutProps.ChangeDetail>>
+    >,
+  ) => void;
 }
 
 interface State {
-  ariaLabels: AppLayoutProps.Labels;
-  navigationOpen?: boolean;
-  ref: MutableRefObject<HTMLDivElement | null>;
-  toolsOpen?: boolean;
-  handleNavigationChange(
-    event: NonCancelableCustomEvent<AppLayoutProps.ChangeDetail>,
-  ): void;
-  handleToolsChange(
-    event: NonCancelableCustomEvent<AppLayoutProps.ChangeDetail>,
-  ): void;
+  readonly ariaLabels: AppLayoutProps.Labels;
+  readonly navigationOpen?: boolean;
+  readonly ref: MutableRefObject<HTMLDivElement | null>;
+  readonly toolsOpen?: boolean;
+  readonly handleNavigationChange: (
+    event: Readonly<
+      NonCancelableCustomEvent<Readonly<AppLayoutProps.ChangeDetail>>
+    >,
+  ) => void;
+  readonly handleToolsChange: (
+    event: Readonly<
+      NonCancelableCustomEvent<Readonly<AppLayoutProps.ChangeDetail>>
+    >,
+  ) => void;
 }
 
 export default function useCustomAppLayout({

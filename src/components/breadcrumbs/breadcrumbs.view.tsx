@@ -1,11 +1,10 @@
-import BreadcrumbGroup, {
-  BreadcrumbGroupProps,
-} from '@awsui/components-react/breadcrumb-group';
-import { ReactElement } from 'react';
+import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
+import BreadcrumbGroup from '@awsui/components-react/breadcrumb-group';
+import type { ReactElement } from 'react';
 import useBreadcrumbs from './breadcrumbs.hook';
 
 interface Props {
-  children?: readonly BreadcrumbGroupProps.Item[];
+  readonly children?: readonly BreadcrumbGroupProps.Item[];
 }
 
 const DEFAULT_CHILDREN: readonly BreadcrumbGroupProps.Item[] = Object.freeze(

@@ -1,7 +1,8 @@
 import Box from '@awsui/components-react/box';
 import SideNavigation from '@awsui/components-react/side-navigation';
 import I18n from 'lazy-i18n';
-import { ReactElement, memo } from 'react';
+import type { ReactElement } from 'react';
+import { memo } from 'react';
 import useNavigation from './navigation.hook';
 import styles from './navigation.module.scss';
 

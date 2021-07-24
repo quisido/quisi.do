@@ -1,7 +1,7 @@
 import { ErrorBoundary, withProfiler } from '@sentry/react';
 import AwsuiDarkMode from 'awsui-dark-mode';
 import { I18nProvider } from 'lazy-i18n';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Router } from 'react-router';
 import Routes from '../../components/routes';

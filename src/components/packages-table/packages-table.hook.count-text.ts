@@ -1,16 +1,20 @@
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
+import type { TranslateFunction } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
+
+const NONE = 0;
+const SINGLE = 1;
 
 export default function useCountText(count: number): string {
   const translate: TranslateFunction = useTranslate();
 
   return useMemo((): string => {
-    if (count === 0) {
-      return translate('No matches') || '...';
+    if (count === NONE) {
+      return translate('No matches') ?? '...';
     }
-    if (count === 1) {
-      return translate('1 match') || '...';
+    if (count === SINGLE) {
+      return translate('1 match') ?? '...';
     }
-    return translate('$count matches', { count }) || '...';
+    return translate('$count matches', { count }) ?? '...';
   }, [count, translate]);
 }

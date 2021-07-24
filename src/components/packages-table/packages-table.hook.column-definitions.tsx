@@ -1,24 +1,26 @@
-import { TableProps } from '@awsui/components-react/table';
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
-import { ReactElement, useMemo } from 'react';
+import type { TableProps } from '@awsui/components-react/table';
+import type { TranslateFunction } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
+import type { ReactElement } from 'react';
+import { useMemo } from 'react';
 import ExplicitDownloads from '../../components/packages-table-explicit-downloads-cell';
 import PackageName from '../../components/packages-table-name-cell';
 import TotalDownloads from '../../components/packages-table-total-downloads-cell';
-import PackagesTableItem from '../../types/packages-table-item';
+import type PackagesTableItem from '../../types/packages-table-item';
 
 interface Props {
-  filteringText: string;
+  readonly filteringText: string;
 }
 
 export default function useColumnDefinitions({
   filteringText,
-}: Props): TableProps.ColumnDefinition<PackagesTableItem>[] {
+}: Props): readonly TableProps.ColumnDefinition<PackagesTableItem>[] {
   const translate: TranslateFunction = useTranslate();
 
   return useMemo(
     (): TableProps.ColumnDefinition<PackagesTableItem>[] => [
       {
-        header: translate('Package name') || '...',
+        header: translate('Package name') ?? '...',
         id: 'packageName',
         minWidth: 240,
         sortingField: 'packageName',
@@ -29,7 +31,7 @@ export default function useColumnDefinitions({
       },
 
       {
-        header: translate('Total downloads') || '...',
+        header: translate('Total downloads') ?? '...',
         id: 'totalDownloads',
         maxWidth: 240,
         minWidth: 180,
@@ -41,7 +43,7 @@ export default function useColumnDefinitions({
       },
 
       {
-        header: translate('Explicit downloads') || '...',
+        header: translate('Explicit downloads') ?? '...',
         id: 'explicitDownloads',
         maxWidth: 240,
         minWidth: 180,

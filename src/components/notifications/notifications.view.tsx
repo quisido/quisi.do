@@ -1,14 +1,17 @@
-import Flashbar, { FlashbarProps } from '@awsui/components-react/flashbar';
-import { ReactElement } from 'react';
+import type { FlashbarProps } from '@awsui/components-react/flashbar';
+import Flashbar from '@awsui/components-react/flashbar';
+import type { ReactElement } from 'react';
 
 interface Props {
-  children?: FlashbarProps.MessageDefinition[];
+  readonly children?: readonly FlashbarProps.MessageDefinition[];
 }
+
+const EMPTY = 0;
 
 export default function Notifications({
   children,
-}: Props): null | ReactElement {
-  if (typeof children === 'undefined' || children.length === 0) {
+}: Props): ReactElement | null {
+  if (typeof children === 'undefined' || children.length === EMPTY) {
     return null;
   }
 

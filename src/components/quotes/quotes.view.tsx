@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
 import QuoteCards from '../../components/quote-cards';
 import useQuotes from './quotes.hook';

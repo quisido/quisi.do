@@ -1,30 +1,30 @@
-import { FlashbarProps } from '@awsui/components-react/flashbar';
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
+import type { FlashbarProps } from '@awsui/components-react/flashbar';
+import type { TranslateFunction } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
 import { useMemo, useState } from 'react';
-import PublicationCardItem from '../../../types/publication-card-item';
+import type PublicationCardItem from '../../../components/publication-cards/publication-cards.type.item';
 import mapDevArticlesCountToHeader from '../map/map-dev-articles-count-to-header';
 import mapDevArticlesToContent from '../map/map-dev-articles-to-content';
 import mapMissingBannersCountToHeader from '../map/map-missing-banners-count-to-header';
 import mapMissingBannersToContent from '../map/map-missing-banners-to-content';
 
 interface Props {
-  items: readonly PublicationCardItem[];
+  readonly items: readonly Readonly<PublicationCardItem>[];
 }
+
+const EMPTY = 0;
 
 export default function useNotifications({
   items,
-}: Props): FlashbarProps.MessageDefinition[] {
+}: Props): readonly FlashbarProps.MessageDefinition[] {
   // Contexts
   const translate: TranslateFunction = useTranslate();
 
   // States
-  const [isDevArticleFlashVisible, setIsDevArticleFlashVisible] = useState(
-    true,
-  );
-  const [
-    isMissingBannerFlashVisible,
-    setIsMissingBannerFlashVisible,
-  ] = useState(true);
+  const [isDevArticleFlashVisible, setIsDevArticleFlashVisible] =
+    useState(true);
+  const [isMissingBannerFlashVisible, setIsMissingBannerFlashVisible] =
+    useState(true);
 
   return useMemo((): FlashbarProps.MessageDefinition[] => {
     const newNotifications: FlashbarProps.MessageDefinition[] = [];
@@ -38,7 +38,7 @@ export default function useNotifications({
       }
     }
 
-    if (isDevArticleFlashVisible && devArticles.length > 0) {
+    if (isDevArticleFlashVisible && devArticles.length > EMPTY) {
       newNotifications.push({
         content: mapDevArticlesToContent(devArticles),
         dismissLabel: translate('Dismiss'),
@@ -51,7 +51,7 @@ export default function useNotifications({
       });
     }
 
-    if (isMissingBannerFlashVisible && missingBanners.length > 0) {
+    if (isMissingBannerFlashVisible && missingBanners.length > EMPTY) {
       newNotifications.push({
         content: mapMissingBannersToContent(missingBanners),
         dismissLabel: translate('Dismiss'),

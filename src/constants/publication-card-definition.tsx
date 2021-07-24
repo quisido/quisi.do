@@ -1,21 +1,31 @@
 import Badge from '@awsui/components-react/badge';
 import Box from '@awsui/components-react/box';
-import { CardsProps } from '@awsui/components-react/cards';
+import type { CardsProps } from '@awsui/components-react/cards';
 import ColumnLayout from '@awsui/components-react/column-layout';
 import Link from '@awsui/components-react/link';
 import Popover from '@awsui/components-react/popover';
 import StatusIndicator from '@awsui/components-react/status-indicator';
 import I18n from 'lazy-i18n';
 import NumberFormat from 'number-format-react';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import Minutes from '../components/minutes';
+import type PublicationCardItem from '../components/publication-cards/publication-cards.type.item';
 import mapTimeToDaysAgo from '../map/map-time-to-days-ago';
-import PublicationCardItem from '../types/publication-card-item';
 import styles from './publication-card-definition.module.scss';
+
+const BASE = 10;
+const BASE_POW = 2;
+const MONTH_OFFSET = 1;
+const PERCENT = 100;
+const TWO = 2;
+const ZERO = 0;
+
+const ratio = (a: number, b: number, decimals: number = ZERO): number =>
+  Math.round((a / b) * Math.pow(BASE, BASE_POW + decimals)) / PERCENT;
 
 const PUBLICATION_CARD_DEFINITION: CardsProps<PublicationCardItem>['cardDefinition'] =
   {
-    header({ title, url }: PublicationCardItem): ReactElement {
+    header({ title, url }: Readonly<PublicationCardItem>): ReactElement {
       return (
         <Link href={url}>
           <Box color="inherit" fontSize="heading-m">
@@ -35,13 +45,13 @@ const PUBLICATION_CARD_DEFINITION: CardsProps<PublicationCardItem>['cardDefiniti
           title,
           url,
           views,
-        }: PublicationCardItem): ReactElement {
+        }: Readonly<PublicationCardItem>): ReactElement {
           const date: Date = new Date(dateTime);
           return (
             <div className={styles.bannerHeight}>
               <div className={styles.bannerWidth}>
                 <Link href={url}>
-                  {image ? (
+                  {typeof image === 'string' ? (
                     <img
                       alt={title}
                       className={styles.image}
@@ -79,11 +89,11 @@ const PUBLICATION_CARD_DEFINITION: CardsProps<PublicationCardItem>['cardDefiniti
                     content={<I18n>Publication date</I18n>}
                     size="small"
                   >
-                    📅 {date.getFullYear()}-{date.getMonth() + 1}-
+                    📅 {date.getFullYear()}-{date.getMonth() + MONTH_OFFSET}-
                     {date.getDate()}
                   </Popover>
                 </Badge>
-                {readingTime && (
+                {typeof readingTime === 'number' && (
                   <Badge className={styles.readingTime}>
                     <Popover
                       className={styles.popover}
@@ -106,27 +116,26 @@ const PUBLICATION_CARD_DEFINITION: CardsProps<PublicationCardItem>['cardDefiniti
           dateTime,
           reactions,
           views,
-        }: PublicationCardItem): ReactElement {
+        }: Readonly<PublicationCardItem>): ReactElement {
           return (
             <ColumnLayout className={styles.columnLayout} columns={12}>
               <div>
                 <Box color="text-label" fontSize="heading-s">
                   <I18n>Reactions/day</I18n>
                 </Box>
-                {Math.round((reactions / mapTimeToDaysAgo(dateTime)) * 100) /
-                  100}
+                {ratio(reactions, mapTimeToDaysAgo(dateTime))}
               </div>
               <div>
                 <Box color="text-label" fontSize="heading-s">
                   <I18n>Reactions/view</I18n>
                 </Box>
-                {Math.round((reactions / views) * 10000) / 100}%
+                {ratio(reactions, views, TWO)}%
               </div>
               <div>
                 <Box color="text-label" fontSize="heading-s">
                   <I18n>Views/day</I18n>
                 </Box>
-                {Math.round((views / mapTimeToDaysAgo(dateTime)) * 100) / 100}
+                {ratio(views, mapTimeToDaysAgo(dateTime))}
               </div>
             </ColumnLayout>
           );

@@ -1,5 +1,5 @@
-import { NonCancelableCustomEvent } from '@awsui/components-react/internal/events';
-import { SideNavigationProps } from '@awsui/components-react/side-navigation';
+import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
+import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
 import { useCallback, useMemo } from 'react';
 import Capsule, { useCapsule } from 'react-capsule';
 import { useSideNavigation } from 'use-awsui-router';
@@ -15,7 +15,7 @@ interface State {
 }
 
 const expandedMapCapsule: Capsule<Map<string, boolean>> = new Capsule(
-  new Map(),
+  new Map<string, boolean>(),
 );
 
 export default function useNavigation(): State {
@@ -49,9 +49,15 @@ export default function useNavigation(): State {
     handleFollow,
 
     handleChange: useCallback(
-      (e: NonCancelableCustomEvent<SideNavigationProps.ChangeDetail>): void => {
+      (
+        e: Readonly<
+          NonCancelableCustomEvent<Readonly<SideNavigationProps.ChangeDetail>>
+        >,
+      ): void => {
         setExpandedMap(
-          (oldExpandedMap: Map<string, boolean>): Map<string, boolean> => {
+          (
+            oldExpandedMap: Readonly<Map<string, boolean>>,
+          ): Map<string, boolean> => {
             const newExpandedMap: Map<string, boolean> = new Map(
               oldExpandedMap,
             );

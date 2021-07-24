@@ -1,8 +1,8 @@
 export default interface PackagesTableItem {
-  downloads: number[];
-  explicitDownloads: number;
-  isHighlighted: boolean;
-  packageName: string;
-  repositoryName: string;
-  totalDownloads: number;
+  readonly downloads: readonly number[];
+  readonly explicitDownloads: number;
+  readonly isHighlighted: boolean;
+  readonly packageName: string;
+  readonly repositoryName: string;
+  readonly totalDownloads: number;
 }

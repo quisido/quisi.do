@@ -1,7 +1,7 @@
-import { CardsProps } from '@awsui/components-react/cards';
-import { ReactElement } from 'react';
+import type { CardsProps } from '@awsui/components-react/cards';
+import type { ReactElement } from 'react';
 import ProjectLink from '../components/project-link';
-import Project from '../types/project';
+import type Project from '../types/project';
 
 const mapNameToTo = (name: string): string =>
   `/${name.toLowerCase().replace(/[^a-z]/g, '-')}`;

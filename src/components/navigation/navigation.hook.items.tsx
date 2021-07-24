@@ -1,5 +1,6 @@
-import { SideNavigationProps } from '@awsui/components-react/side-navigation';
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
+import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
+import type { TranslateFunction } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import Settings from '../../components/settings';
 
@@ -10,22 +11,22 @@ export default function useItems(): SideNavigationProps.Item[] {
     (): SideNavigationProps.Item[] => [
       {
         href: '/',
-        text: translate('Home') || '...',
+        text: translate('Home') ?? '...',
         type: 'link',
       },
       {
         defaultExpanded: true,
-        text: translate('Applications') || '...',
+        text: translate('Applications') ?? '...',
         type: 'section',
         items: [
           {
             href: '/spritesheet2gif',
-            text: translate('Sprite sheet to GIF') || '...',
+            text: translate('Sprite sheet to GIF') ?? '...',
             type: 'link',
           },
           {
             defaultExpanded: false,
-            text: translate('More applications') || '...',
+            text: translate('More applications') ?? '...',
             type: 'section',
             items: [
               {
@@ -61,7 +62,7 @@ export default function useItems(): SideNavigationProps.Item[] {
               {
                 external: true,
                 href: 'https://charlesstover.github.io/rpg-overworld-engine/',
-                text: translate('RPG overworld engine') || '...',
+                text: translate('RPG overworld engine') ?? '...',
                 type: 'link',
               },
             ],
@@ -70,29 +71,29 @@ export default function useItems(): SideNavigationProps.Item[] {
       },
       {
         defaultExpanded: true,
-        text: translate('Portfolio') || '...',
+        text: translate('Portfolio') ?? '...',
         type: 'section',
         items: [
           {
             href: '/packages',
-            text: translate('Packages') || '...',
+            text: translate('Packages') ?? '...',
             type: 'link',
           },
           {
             href: '/publications',
-            text: translate('Publications') || '...',
+            text: translate('Publications') ?? '...',
             type: 'link',
           },
           {
             href: '/quotes',
-            text: translate('Quotes') || '...',
+            text: translate('Quotes') ?? '...',
             type: 'link',
           },
         ],
       },
       {
         defaultExpanded: true,
-        text: translate('Connect with me') || '...',
+        text: translate('Connect with me') ?? '...',
         type: 'section',
         items: [
           {
@@ -143,7 +144,7 @@ export default function useItems(): SideNavigationProps.Item[] {
       },
       {
         defaultExpanded: false,
-        text: translate('Settings') || '...',
+        text: translate('Settings') ?? '...',
         type: 'section',
         items: [
           {

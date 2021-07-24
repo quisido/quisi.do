@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
   [
@@ -20,7 +20,7 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
     ],
     [
       'awsui-theme',
-      "Easily apply your brand's theme to your AWS UI components.",
+      'Easily apply your brand’s theme to your AWS UI components.',
     ],
     [
       'deep-proxy-polyfill',
@@ -92,7 +92,7 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
     ],
     [
       'reactn-devtools',
-      "The ReactN DevTools display an application's ReactN global state in the Redux DevTools browser extension.",
+      'The ReactN DevTools display an application’s ReactN global state in the Redux DevTools browser extension.',
     ],
     [
       'relative-timestamp',
@@ -108,7 +108,7 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
     ],
     [
       'use-awsui',
-      "By instantiating your components' local state with this library, you can save repetitive boilerplate surrounding state instantiation and event handlers.",
+      'By instantiating your components’ local state with this library, you can save repetitive boilerplate surrounding state instantiation and event handlers.',
     ],
     [
       'use-awsui-router',
@@ -120,7 +120,7 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
     ],
     [
       'use-clippy',
-      "Allowing components to read from and write to the user's clipboard produces convenient UI components, like Copy buttons, with intelligent and responsive features.",
+      'Allowing components to read from and write to the user’s clipboard produces convenient UI components, like Copy buttons, with intelligent and responsive features.',
     ],
     ['use-ctrl-key', 'Listen to Ctrl key events with React hooks.'],
     [
@@ -141,7 +141,7 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
       'use-page-transition',
       'Listen for page transition (visibility and persistence) events with a React hook.',
     ],
-    ['use-params-memo', "React's `useMemo` hook with a parameterized function"],
+    ['use-params-memo', 'React’s `useMemo` hook with a parameterized function'],
     [
       'use-react-router',
       'This React hook reads the react-router state and re-renders on page navigation events.',

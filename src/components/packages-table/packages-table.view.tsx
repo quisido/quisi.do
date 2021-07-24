@@ -4,7 +4,7 @@ import Pagination from '@awsui/components-react/pagination';
 import Table from '@awsui/components-react/table';
 import TextFilter from '@awsui/components-react/text-filter';
 import I18n from 'lazy-i18n';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import usePackagesTable from './packages-table.hook';
 
 export default function PackagesTable(): ReactElement {

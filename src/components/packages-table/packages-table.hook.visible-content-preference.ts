@@ -1,5 +1,6 @@
-import { CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
+import type { CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
+import type { TranslateFunction } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 
 export default function useVisibleContentPreference(): CollectionPreferencesProps.VisibleContentPreference {
@@ -7,22 +8,22 @@ export default function useVisibleContentPreference(): CollectionPreferencesProp
 
   return useMemo(
     (): CollectionPreferencesProps.VisibleContentPreference => ({
-      title: translate('Select visible columns.') || '...',
+      title: translate('Select visible columns.') ?? '...',
       options: [
         {
-          label: translate('Package properties') || '...',
+          label: translate('Package properties') ?? '...',
           options: [
             {
               id: 'packageName',
-              label: translate('Package name') || '...',
+              label: translate('Package name') ?? '...',
             },
             {
               id: 'totalDownloads',
-              label: translate('Total downloads') || '...',
+              label: translate('Total downloads') ?? '...',
             },
             {
               id: 'explicitDownloads',
-              label: translate('Explicit downloads') || '...',
+              label: translate('Explicit downloads') ?? '...',
             },
           ],
         },

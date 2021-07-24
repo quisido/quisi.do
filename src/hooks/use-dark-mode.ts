@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { useCapsule } from 'react-capsule';
 import DarkModeCapsule from '../capsules/dark-mode';
 

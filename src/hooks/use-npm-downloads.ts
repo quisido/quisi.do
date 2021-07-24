@@ -4,7 +4,7 @@ interface State {
   data?: Record<string, number[]>;
   error: unknown;
   isLoading: boolean;
-  refetch(): void;
+  refetch: () => void;
 }
 
 export default function useNpmDownloads(): State {
@@ -12,10 +12,10 @@ export default function useNpmDownloads(): State {
     'npm',
     async (): Promise<Record<string, number[]>> => {
       const response: Response = await fetch(
-        process.env.REACT_APP_NPM_DOWNLOADS ||
+        process.env.REACT_APP_NPM_DOWNLOADS ??
           'https://npm.cscdn.net/charlesstover.json',
       );
-      return await response.json();
+      return response.json();
     },
   );
 

@@ -11,7 +11,7 @@ import qian from '../images/qian-zhang.png';
 import sriram from '../images/sriram-rudraraju.jpg';
 import walter from '../images/walter-sorto.jpg';
 import xinhe from '../images/xinhe-gao.png';
-import Quote from '../types/quote';
+import type Quote from '../types/quote';
 
 const QUOTES: Quote[] = [
   // AWS

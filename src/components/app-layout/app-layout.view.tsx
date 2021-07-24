@@ -1,24 +1,27 @@
-import AppLayout, { AppLayoutProps } from '@awsui/components-react/app-layout';
-import { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
-import { FlashbarProps } from '@awsui/components-react/flashbar';
-import { ComponentType, ReactElement, ReactNode } from 'react';
+import type { AppLayoutProps } from '@awsui/components-react/app-layout';
+import AppLayout from '@awsui/components-react/app-layout';
+import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
+import type { FlashbarProps } from '@awsui/components-react/flashbar';
+import type { ComponentType, ReactElement, ReactNode } from 'react';
 import Breadcrumbs from '../../components/breadcrumbs';
 import Navigation from '../../components/navigation';
 import Notifications from '../../components/notifications';
 import useCustomAppLayout from './app-layout.hook';
 
 interface Props {
-  Tools?: ComponentType<unknown>;
-  breadcrumbs?: BreadcrumbGroupProps.Item[];
-  children: ReactNode;
-  contentType?: AppLayoutProps.ContentType;
-  notifications?: FlashbarProps.MessageDefinition[];
-  onToolsChange?: AppLayoutProps['onToolsChange'];
-  toolsHide?: boolean;
-  toolsOpen?: boolean;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  readonly Tools?: ComponentType<unknown>;
+  readonly breadcrumbs?: readonly BreadcrumbGroupProps.Item[];
+  readonly children: ReactNode;
+  readonly contentType?: AppLayoutProps.ContentType;
+  readonly notifications?: readonly FlashbarProps.MessageDefinition[];
+  readonly onToolsChange?: AppLayoutProps['onToolsChange'];
+  readonly toolsHide?: boolean;
+  readonly toolsOpen?: boolean;
 }
 
 export default function CustomAppLayout({
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   Tools,
   breadcrumbs,
   children,

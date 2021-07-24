@@ -1,5 +1,6 @@
-import { CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
+import type { CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
+import type { TranslateFunction } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 
 export default function useWrapLinesPreference(): CollectionPreferencesProps.WrapLinesPreference {
@@ -7,8 +8,8 @@ export default function useWrapLinesPreference(): CollectionPreferencesProps.Wra
 
   return useMemo(
     (): CollectionPreferencesProps.WrapLinesPreference => ({
-      description: translate('Select to wrap lines and see all text.') || '...',
-      label: translate('Wrap lines') || '...',
+      description: translate('Select to wrap lines and see all text.') ?? '...',
+      label: translate('Wrap lines') ?? '...',
     }),
     [translate],
   );

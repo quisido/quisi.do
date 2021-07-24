@@ -1,11 +1,11 @@
-import { ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import Paragraph from '../../components/package-description-paragraph';
 import PACKAGE_DESCRIPTIONS from '../../constants/package-descriptions';
-import Item from '../../types/packages-table-item';
+import type Item from '../../types/packages-table-item';
 
 export default function PackageDescription({
   packageName,
-}: Item): null | ReactElement {
+}: Item): ReactElement | null {
   const description: ReactNode | undefined =
     PACKAGE_DESCRIPTIONS.get(packageName);
 

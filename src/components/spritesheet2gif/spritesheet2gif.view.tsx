@@ -1,4 +1,4 @@
-import { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
+import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
 import Button from '@awsui/components-react/button';
 import Container from '@awsui/components-react/container';
 import FormField from '@awsui/components-react/form-field';
@@ -7,7 +7,7 @@ import Input from '@awsui/components-react/input';
 import Link from '@awsui/components-react/link';
 import Select from '@awsui/components-react/select';
 import SpaceBetween from '@awsui/components-react/space-between';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
 import ApiGifResponse from './components/api-gif-response';
 import useSpriteSheet2Gif from './spritesheet2gif.hook';
@@ -22,6 +22,7 @@ const BREADCRUMBS: BreadcrumbGroupProps.Item[] = [
 
 export default function SpriteSheet2Gif(): ReactElement {
   const {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     Tools,
     apiGifResponse,
     dimension,
@@ -131,6 +132,7 @@ export default function SpriteSheet2Gif(): ReactElement {
               <Input
                 className={styles.matte}
                 onChange={handleMatteChange}
+                // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                 type={'color' as 'text'}
                 value={matte}
               />

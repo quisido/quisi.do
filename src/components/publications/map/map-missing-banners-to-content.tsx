@@ -1,13 +1,16 @@
 import Box from '@awsui/components-react/box';
 import Link from '@awsui/components-react/link';
-import { ReactElement } from 'react';
-import PublicationCardItem from '../../../types/publication-card-item';
+import type { ReactElement } from 'react';
+import type PublicationCardItem from '../../../components/publication-cards/publication-cards.type.item';
+
+const FIRST = 0;
+const SINGLE = 1;
 
 export default function mapMissingBannersToContent(
-  missingBanners: PublicationCardItem[],
+  missingBanners: readonly Readonly<PublicationCardItem>[],
 ): ReactElement {
-  if (missingBanners.length === 1) {
-    const { title, url } = missingBanners[0];
+  if (missingBanners.length === SINGLE) {
+    const { title, url } = missingBanners[FIRST];
     return (
       <>
         <Link href={url}>{title}</Link> is missing its banner.
@@ -20,7 +23,7 @@ export default function mapMissingBannersToContent(
       <Box variant="p">The following publications are misisng banners:</Box>
       <ul>
         {missingBanners.map(
-          ({ title, url }: PublicationCardItem): ReactElement => {
+          ({ title, url }: Readonly<PublicationCardItem>): ReactElement => {
             return (
               <li key={title}>
                 <Link href={url}>{title}</Link>

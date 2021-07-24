@@ -1,7 +1,7 @@
 import Box from '@awsui/components-react/box';
 import NumberFormat from 'number-format-react';
-import { ReactElement } from 'react';
-import Item from '../../types/packages-table-item';
+import type { ReactElement } from 'react';
+import type Item from '../../types/packages-table-item';
 
 export default function PackagesTableTotalDownloadsCell({
   totalDownloads,

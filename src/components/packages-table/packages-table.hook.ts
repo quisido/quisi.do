@@ -1,10 +1,12 @@
-import { CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
-import { NonCancelableCustomEvent } from '@awsui/components-react/internal/events';
-import { PaginationProps } from '@awsui/components-react/pagination';
-import { TableProps } from '@awsui/components-react/table';
-import { TextFilterProps } from '@awsui/components-react/text-filter';
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
-import { MutableRefObject, useMemo, useRef } from 'react';
+import type { CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
+import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
+import type { PaginationProps } from '@awsui/components-react/pagination';
+import type { TableProps } from '@awsui/components-react/table';
+import type { TextFilterProps } from '@awsui/components-react/text-filter';
+import type { TranslateFunction } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
+import type { MutableRefObject } from 'react';
+import { useMemo, useRef } from 'react';
 import {
   useCollectionPreferences,
   usePagination,
@@ -16,7 +18,8 @@ import PackageDescription from '../../components/package-description';
 import filterDefaultPackage from '../../filter/filter-default-package';
 import useNpmDownloads from '../../hooks/use-npm-downloads';
 import mapNpmDownloadsEntryToPackagesTableItem from '../../map/map-npm-downloads-entry-to-packages-table-item';
-import PackagesTableItem from '../../types/packages-table-item';
+import type PackagesTableItem from '../../types/packages-table-item';
+import type ReadonlyTableSortingEvent from '../../types/readonly-table-sorting-event';
 import useColumnDefinitions from './packages-table.hook.column-definitions';
 import useCountText from './packages-table.hook.count-text';
 import usePageSizePreference from './packages-table.hook.page-size-preference';
@@ -24,42 +27,48 @@ import useVisibleContentPreference from './packages-table.hook.visible-content-p
 import useWrapLinesPreference from './packages-table.hook.wrap-lines-preference';
 
 interface State {
-  cancelLabel: string;
-  collectionPreferencesTitle: string;
-  columnDefinitions: TableProps.ColumnDefinition<PackagesTableItem>[];
-  confirmLabel: string;
-  countText: string;
-  currentPageIndex: number;
-  filteringAriaLabel?: string;
-  filteringPlaceholder: string;
-  filteringText: string;
-  items: PackagesTableItem[];
-  loading: boolean;
-  loadingText: string;
-  pageSizePreference: CollectionPreferencesProps.PageSizePreference;
-  pagesCount: number;
-  preferences: CollectionPreferencesProps.Preferences;
-  ref: MutableRefObject<HTMLDivElement | null>;
-  sortingColumn?: TableProps.SortingColumn<PackagesTableItem>;
-  sortingDescending?: boolean;
-  visibleContent?: readonly string[];
-  visibleContentPreference: CollectionPreferencesProps.VisibleContentPreference;
-  wrapLines?: boolean;
-  wrapLinesPreference: CollectionPreferencesProps.WrapLinesPreference;
-  handleCollectionPreferencesConfirm(
-    event: NonCancelableCustomEvent<
-      CollectionPreferencesProps.Preferences<void>
+  readonly cancelLabel: string;
+  readonly collectionPreferencesTitle: string;
+  readonly columnDefinitions: readonly TableProps.ColumnDefinition<PackagesTableItem>[];
+  readonly confirmLabel: string;
+  readonly countText: string;
+  readonly currentPageIndex: number;
+  readonly filteringAriaLabel?: string;
+  readonly filteringPlaceholder: string;
+  readonly filteringText: string;
+  readonly items: readonly PackagesTableItem[];
+  readonly loading: boolean;
+  readonly loadingText: string;
+  readonly pageSizePreference: CollectionPreferencesProps.PageSizePreference;
+  readonly pagesCount: number;
+  readonly preferences: CollectionPreferencesProps.Preferences;
+  readonly ref: MutableRefObject<HTMLDivElement | null>;
+  readonly sortingColumn?: TableProps.SortingColumn<PackagesTableItem>;
+  readonly sortingDescending?: boolean;
+  readonly visibleContent?: readonly string[];
+  readonly visibleContentPreference: CollectionPreferencesProps.VisibleContentPreference;
+  readonly wrapLines?: boolean;
+  readonly wrapLinesPreference: CollectionPreferencesProps.WrapLinesPreference;
+  readonly handleCollectionPreferencesConfirm: (
+    event: Readonly<
+      NonCancelableCustomEvent<
+        Readonly<CollectionPreferencesProps.Preferences<void>>
+      >
     >,
-  ): void;
-  handlePaginationChange(
-    event: NonCancelableCustomEvent<PaginationProps.ChangeDetail>,
-  ): void;
-  handleSortingChange(
-    event: NonCancelableCustomEvent<TableProps.SortingState<PackagesTableItem>>,
-  ): void;
-  handleTextFilterChange(
-    event: NonCancelableCustomEvent<TextFilterProps.ChangeDetail>,
-  ): void;
+  ) => void;
+  readonly handlePaginationChange: (
+    event: Readonly<
+      NonCancelableCustomEvent<Readonly<PaginationProps.ChangeDetail>>
+    >,
+  ) => void;
+  readonly handleSortingChange: (
+    event: ReadonlyTableSortingEvent<PackagesTableItem>,
+  ) => void;
+  readonly handleTextFilterChange: (
+    event: Readonly<
+      NonCancelableCustomEvent<Readonly<TextFilterProps.ChangeDetail>>
+    >,
+  ) => void;
 }
 
 const DEFAULT_PAGE_SIZE = 10;
@@ -92,11 +101,11 @@ export default function usePackagesTable(): State {
   });
 
   const { handleSortingChange, sort, sortingColumn, sortingDescending } =
-    useTable({
+    useTable<PackagesTableItem>({
+      defaultSortingDescending: true,
       defaultSortingColumn: {
         sortingField: 'totalDownloads',
       },
-      defaultSortingDescending: true,
     });
 
   const { filteringText, handleChange: handleTextFilterChange } =
@@ -112,35 +121,37 @@ export default function usePackagesTable(): State {
       .filter(filterDefaultPackage);
   }, [data]);
 
-  const filteredItems: PackagesTableItem[] =
-    useMemo((): PackagesTableItem[] => {
-      const filter = ({ packageName }: PackagesTableItem): boolean =>
-        packageName.indexOf(filteringText) !== -1;
+  const filteredItems: readonly PackagesTableItem[] =
+    useMemo((): readonly PackagesTableItem[] => {
+      const filter = ({ packageName }: Readonly<PackagesTableItem>): boolean =>
+        packageName.includes(filteringText);
       return items.filter(filter);
     }, [filteringText, items]);
 
-  const visibleItems: PackagesTableItem[] = useMemo((): PackagesTableItem[] => {
-    const newVisibleItems: PackagesTableItem[] = [...filteredItems];
-    newVisibleItems.sort(sort);
-    return paginate(newVisibleItems);
-  }, [filteredItems, paginate, sort]);
+  const visibleItems: readonly PackagesTableItem[] =
+    useMemo((): readonly PackagesTableItem[] => {
+      const newVisibleItems: PackagesTableItem[] = [...filteredItems];
+      newVisibleItems.sort(sort);
+      return paginate(newVisibleItems);
+    }, [filteredItems, paginate, sort]);
 
   useAwsuiTableItemDescription({
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     Component: PackageDescription,
-    colSpan: (visibleContent || DEFAULT_VISIBLE_CONTENT).length,
+    colSpan: (visibleContent ?? DEFAULT_VISIBLE_CONTENT).length,
     items: visibleItems,
     ref,
   });
 
   const filteredItemsCount: number = filteredItems.length;
   return {
-    cancelLabel: translate('Cancel') || '...',
-    collectionPreferencesTitle: translate('Preferences') || '...',
-    confirmLabel: translate('Confirm') || '...',
+    cancelLabel: translate('Cancel') ?? '...',
+    collectionPreferencesTitle: translate('Preferences') ?? '...',
+    confirmLabel: translate('Confirm') ?? '...',
     countText: useCountText(filteredItemsCount),
     currentPageIndex,
     filteringAriaLabel: translate('Filter packages'),
-    filteringPlaceholder: translate('Filter packages') || '...',
+    filteringPlaceholder: translate('Filter packages') ?? '...',
     filteringText,
     handleCollectionPreferencesConfirm,
     handlePaginationChange,
@@ -148,8 +159,8 @@ export default function usePackagesTable(): State {
     handleTextFilterChange,
     items: visibleItems,
     loading: isLoading,
-    loadingText: translate('Loading packages') || '...',
-    pagesCount: Math.ceil(items.length / (pageSize || DEFAULT_PAGE_SIZE)),
+    loadingText: translate('Loading packages') ?? '...',
+    pagesCount: Math.ceil(items.length / (pageSize ?? DEFAULT_PAGE_SIZE)),
     pageSizePreference: usePageSizePreference(),
     preferences,
     ref,

@@ -1,23 +1,26 @@
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 interface Props {
-  children: string;
-  index: number;
-  length: number;
+  readonly children: string;
+  readonly index: number;
+  readonly length: number;
 }
+
+const NOT_FOUND = -1;
+const START = 0;
 
 export default function EmphasizeSubstring({
   children,
   index,
   length,
 }: Props): ReactElement {
-  if (index === -1) {
+  if (index === NOT_FOUND) {
     return <>{children}</>;
   }
 
   return (
     <>
-      {children.substring(0, index)}
+      {children.substring(START, index)}
       <strong>{children.substring(index, index + length)}</strong>
       {children.substring(index + length)}
     </>

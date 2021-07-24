@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
 import PackagesTable from '../../components/packages-table';
 import usePackages from './packages.hook';

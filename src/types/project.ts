@@ -1,4 +1,4 @@
 export default interface Project {
-  icon: string;
-  name: string;
+  readonly icon: string;
+  readonly name: string;
 }

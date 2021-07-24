@@ -1,5 +1,6 @@
-import Cards, { CardsProps } from '@awsui/components-react/cards';
-import { ReactElement } from 'react';
+import type { CardsProps } from '@awsui/components-react/cards';
+import Cards from '@awsui/components-react/cards';
+import type { ReactElement } from 'react';
 import CARD_DEFINITION from '../../constants/quote-card-definition';
 import ITEMS from '../../constants/quotes';
 

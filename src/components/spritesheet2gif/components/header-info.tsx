@@ -1,6 +1,6 @@
 import Box from '@awsui/components-react/box';
 import HelpPanel from '@awsui/components-react/help-panel';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 export default function HeaderInfo(): ReactElement {
   return (

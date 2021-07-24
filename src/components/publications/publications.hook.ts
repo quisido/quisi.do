@@ -1,9 +1,10 @@
-import { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
+import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
+import type { TranslateFunction } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 
 interface State {
-  breadcrumbs: BreadcrumbGroupProps.Item[];
+  readonly breadcrumbs: readonly BreadcrumbGroupProps.Item[];
 }
 
 export default function usePublications(): State {
@@ -11,10 +12,10 @@ export default function usePublications(): State {
 
   return {
     breadcrumbs: useMemo(
-      (): BreadcrumbGroupProps.Item[] => [
+      (): readonly BreadcrumbGroupProps.Item[] => [
         {
           href: '/publications',
-          text: translate('Publications') || '...',
+          text: translate('Publications') ?? '...',
         },
       ],
       [translate],

@@ -1,14 +1,16 @@
-import { LinkProps } from '@awsui/components-react/link';
-import { History } from 'history';
+import type { LinkProps } from '@awsui/components-react/link';
+import type { History } from 'history';
 import { useCallback } from 'react';
 import { useHistory } from 'react-router';
 
 interface Props {
-  to: string;
+  readonly to: string;
 }
 
 interface State {
-  handleFollow(event: CustomEvent<LinkProps.FollowDetail>): void;
+  readonly handleFollow: (
+    event: Readonly<CustomEvent<Readonly<LinkProps.FollowDetail>>>,
+  ) => void;
 }
 
 export default function useProjectLink({ to }: Props): State {
@@ -16,7 +18,7 @@ export default function useProjectLink({ to }: Props): State {
 
   return {
     handleFollow: useCallback(
-      (e: CustomEvent<LinkProps.FollowDetail>): void => {
+      (e: Readonly<CustomEvent<Readonly<LinkProps.FollowDetail>>>): void => {
         e.preventDefault();
         history.push(to);
       },

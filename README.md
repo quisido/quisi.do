@@ -6,23 +6,12 @@ the professional portfolio of Charles Stover
 
 ## Contributing
 
-### First install
-
 To install this repository to begin local development, use the following
 commands in order:
 
 - `yarn set version latest` to keep Yarn up-to-date.
-- `yarn` to install the existing dependencies.
-- `yarn up * && yarn up @*/*` to upgrade to the latest dependencies.
-- `yarn dlx @yarnpkg/pnpify --sdk vscode` to integrate with Visual Studio Code.
-
-### Development mode
+- `yarn up * @*/* history@^4.10.1 node-sass@^5.0.0` to install and upgrade
+  dependencies.
+- `yarn sdks vscode` to integrate with Visual Studio Code.
 
 To run the website locally, use `yarn start`.
-
-### Testing
-
-To run the linter and unit tests with coverage reports, use `yarn test`.
-
-To run the unit tests in watch mode without coverage reports, use
-`yarn test-watch`.

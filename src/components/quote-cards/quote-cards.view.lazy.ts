@@ -1,3 +1,3 @@
 import { lazy } from 'react';
 
-export default lazy(() => import('./quote-cards.view'));
+export default lazy(async () => import('./quote-cards.view'));

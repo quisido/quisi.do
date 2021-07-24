@@ -1,5 +1,6 @@
-import { History, createMemoryHistory } from 'history';
-import {
+import type { History } from 'history';
+import { createMemoryHistory } from 'history';
+import type {
   ComponentType,
   PropsWithChildren,
   ReactElement,
@@ -8,13 +9,14 @@ import {
 import { Route, Router } from 'react-router';
 
 interface Props {
-  initialEntries?: string[];
-  path: string;
+  readonly initialEntries?: string[];
+  readonly path: string;
 }
 
 interface State {
-  testHistory: History<unknown>;
-  TestRouter: ComponentType<PropsWithChildren<unknown>>;
+  readonly testHistory: History<unknown>;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  readonly TestRouter: ComponentType<PropsWithChildren<unknown>>;
 }
 
 export default function createTestHistory({
@@ -26,9 +28,10 @@ export default function createTestHistory({
   });
 
   return {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     TestRouter: function TestRouter({
       children,
-    }: PropsWithChildren<unknown>): ReactElement {
+    }: Readonly<PropsWithChildren<unknown>>): ReactElement {
       return (
         <Router history={testHistory}>
           <Route path={path} render={(): ReactNode => children} />

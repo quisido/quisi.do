@@ -1,3 +1,3 @@
 import { lazy } from 'react';
 
-export default lazy(() => import('./publication-cards.view'));
+export default lazy(async () => import('./publication-cards.view'));

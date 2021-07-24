@@ -5,7 +5,7 @@ import Header from '@awsui/components-react/header';
 import Select from '@awsui/components-react/select';
 import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import CARD_DEFINITION from '../../constants/publication-card-definition';
 import usePublicationCards from './publication-cards.hook';
 import styles from './publication-cards.module.scss';

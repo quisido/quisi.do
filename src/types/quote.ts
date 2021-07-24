@@ -1,11 +1,11 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export default interface Quote {
-  age?: number;
-  author: string;
-  company?: string;
-  gender?: 'female' | 'male' | 'neutral';
-  image?: string;
-  quote: ReactNode;
-  title?: string;
+  readonly age?: number;
+  readonly author: string;
+  readonly company?: string;
+  readonly gender?: 'female' | 'male' | 'neutral';
+  readonly image?: string;
+  readonly quote: ReactNode;
+  readonly title?: string;
 }

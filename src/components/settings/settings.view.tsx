@@ -1,5 +1,5 @@
 import SpaceBetween from '@awsui/components-react/space-between';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import DarkModeToggle from '../../components/dark-mode-toggle';
 import LanguageSelect from '../../components/language-select';
 

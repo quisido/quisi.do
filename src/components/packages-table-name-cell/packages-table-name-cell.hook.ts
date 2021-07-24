@@ -1,15 +1,17 @@
 import { useMemo } from 'react';
 
 interface Props {
-  filteringText: string;
-  packageName: string;
-  repositoryName: string;
+  readonly filteringText: string;
+  readonly packageName: string;
+  readonly repositoryName: string;
 }
 
 interface State {
-  href: string;
-  index: number;
+  readonly href: string;
+  readonly index: number;
 }
+
+const NOT_FOUND = -1;
 
 export default function usePackagesTableNameCell({
   filteringText,
@@ -21,7 +23,7 @@ export default function usePackagesTableNameCell({
 
     index: useMemo((): number => {
       if (filteringText === '') {
-        return -1;
+        return NOT_FOUND;
       }
       return packageName.indexOf(filteringText);
     }, [filteringText, packageName]),

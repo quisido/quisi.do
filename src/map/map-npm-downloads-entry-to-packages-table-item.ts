@@ -1,14 +1,16 @@
 import PACKAGE_DEPENDENCIES from '../constants/package-dependencies';
 import mapPackageNameToRepositoryName from '../map/map-package-name-to-repository-name';
 import reduceArrayToSum from '../reduce/reduce-array-to-sum';
-import PackagesTableItem from '../types/packages-table-item';
+import type PackagesTableItem from '../types/packages-table-item';
+
+const NONE = 0;
 
 export default function mapNpmDownloadsEntryToPackagesTableItem(
-  [packageName, downloads]: [string, number[]],
+  [packageName, downloads]: readonly [string, readonly number[]],
   _index: number,
-  entries: [string, number[]][],
+  entries: readonly (readonly [string, readonly number[]])[],
 ): PackagesTableItem {
-  const totalDownloads: number = downloads.reduce(reduceArrayToSum, 0);
+  const totalDownloads: number = downloads.reduce(reduceArrayToSum, NONE);
   let explicitDownloads: number = totalDownloads;
   for (const [
     dependentPackageName,
@@ -18,17 +20,17 @@ export default function mapNpmDownloadsEntryToPackagesTableItem(
       if (dependency !== packageName) {
         continue;
       }
-      const findDependentEntry = ([entryPackageName]: [
+      const findDependentEntry = ([entryPackageName]: readonly [
         string,
-        number[],
+        readonly number[],
       ]): boolean => entryPackageName === dependentPackageName;
-      const dependentEntry: [string, number[]] | undefined =
+      const dependentEntry: readonly [string, readonly number[]] | undefined =
         entries.find(findDependentEntry);
       if (typeof dependentEntry === 'undefined') {
         break;
       }
       const [, dependentDownloads] = dependentEntry;
-      explicitDownloads -= dependentDownloads.reduce(reduceArrayToSum, 0);
+      explicitDownloads -= dependentDownloads.reduce(reduceArrayToSum, NONE);
       break;
     }
   }

@@ -1,4 +1,4 @@
-import PackagesTableItem from '../types/packages-table-item';
+import type PackagesTableItem from '../types/packages-table-item';
 
 export default function filterDefaultPackage({
   packageName,

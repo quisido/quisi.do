@@ -4,7 +4,7 @@ import Container from '@awsui/components-react/container';
 import Header from '@awsui/components-react/header';
 import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
 import ViewResumeButton from '../../components/view-resume-button';
 // import PROJECT_CARD_DEFINITION from '../../constants/project-card-definition';
@@ -14,8 +14,11 @@ import useHome from './home.hook';
 import styles from './home.module.scss';
 
 const CURRENT_YEAR: number = new Date().getFullYear();
-const FRONT_END_YOE: number = CURRENT_YEAR - 2001;
-const FULL_STACK_YOE: number = CURRENT_YEAR - 2005;
+const FRONT_END_START_YEAR = 2001;
+const FULL_STACK_START_YEAR = 2005;
+
+const FRONT_END_YOE: number = CURRENT_YEAR - FRONT_END_START_YEAR;
+const FULL_STACK_YOE: number = CURRENT_YEAR - FULL_STACK_START_YEAR;
 
 export default function Home(): ReactElement {
   const { avatarAlt } = useHome();

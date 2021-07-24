@@ -1,11 +1,11 @@
 import Link from '@awsui/components-react/link';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import EmphasizeSubstring from '../../components/emphasize-substring';
-import Item from '../../types/packages-table-item';
+import type Item from '../../types/packages-table-item';
 import usePackagesTableNameCell from './packages-table-name-cell.hook';
 
 interface Props extends Item {
-  filteringText: string;
+  readonly filteringText: string;
 }
 
 export default function PackagesTableNameCell({
