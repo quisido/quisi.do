@@ -5,8 +5,10 @@ import Header from '@awsui/components-react/header';
 import Select from '@awsui/components-react/select';
 import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
+import NumberFormat from 'number-format-react';
 import type { ReactElement } from 'react';
 import CARD_DEFINITION from './publications.constant.card-definition';
+import MINIMUM_VIEWS from './publications.constant.minimum-views';
 import usePublicationsContents from './publications.hook.contents';
 import styles from './publications.view.contents.module.scss';
 
@@ -34,7 +36,9 @@ export default function PublicationsContents(): ReactElement {
           type="info"
           visible={true}
         >
-          Only publications with more than 5,000 views are shown.
+          <I18n count={<NumberFormat>{MINIMUM_VIEWS}</NumberFormat>}>
+            Only publications with more than $count views are shown.
+          </I18n>
         </Alert>
       )}
       <Cards

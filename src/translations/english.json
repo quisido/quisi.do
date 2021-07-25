@@ -30,6 +30,7 @@
   "Navigation": "Navigation",
   "No matches": "No matches",
   "Notifications": "Notifications",
+  "Only publications with more than $count views are shown.": "Only publications with more than $count views are shown.",
   "Package name": "Package name",
   "Package properties": "Package properties",
   "Packages": "Packages",
