@@ -1,16 +1,13 @@
 import Alert from '@awsui/components-react/alert';
 import Cards from '@awsui/components-react/cards';
-import FormField from '@awsui/components-react/form-field';
-import Header from '@awsui/components-react/header';
-import Select from '@awsui/components-react/select';
 import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
-import NumberFormat from 'number-format-react';
 import type { ReactElement } from 'react';
+import NumberFormat from '../../components/number-format';
 import CARD_DEFINITION from './publications.constant.card-definition';
 import MINIMUM_VIEWS from './publications.constant.minimum-views';
 import usePublicationsContents from './publications.hook.contents';
-import styles from './publications.view.contents.module.scss';
+import Header from './publications.view.header';
 
 export default function PublicationsContents(): ReactElement {
   const {
@@ -21,9 +18,7 @@ export default function PublicationsContents(): ReactElement {
     items,
     loading,
     loadingText,
-    selectedSortOption,
-    sortOptions,
-    sortPlaceholder,
+    sort,
   } = usePublicationsContents();
 
   return (
@@ -46,26 +41,7 @@ export default function PublicationsContents(): ReactElement {
         items={items}
         loading={loading}
         loadingText={loadingText}
-        header={
-          <Header
-            actions={
-              <FormField
-                className={styles.sort}
-                label={<I18n>Sort by</I18n>}
-                stretch
-              >
-                <Select
-                  onChange={handleSortChange}
-                  options={sortOptions}
-                  placeholder={sortPlaceholder}
-                  selectedOption={selectedSortOption}
-                />
-              </FormField>
-            }
-          >
-            <I18n>Publications</I18n>
-          </Header>
-        }
+        header={<Header onSortChange={handleSortChange} sort={sort} />}
       />
     </SpaceBetween>
   );

@@ -11,21 +11,18 @@ import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-e
 import Sort from './publications.constant.sort';
 import filterItemsByMinimumViews from './publications.filter.items-by-minimum-views';
 import useItems from './publications.hook.items';
-import useSortOptions from './publications.hook.sort-options';
 import mapSortToFunction from './publications.map.sort-to-function';
 import type Item from './publications.type.item';
 
 interface State {
-  dismissAriaLabel?: string;
-  handleAlertDismiss: AlertProps['onDismiss'];
-  handleSortChange: SelectProps['onChange'];
-  isAlertVisible: boolean;
-  items: CardsProps<Item>['items'];
-  loading: CardsProps<Item>['loading'];
-  loadingText?: string;
-  selectedSortOption: SelectProps.Option;
-  sortOptions: SelectProps.Options;
-  sortPlaceholder?: string;
+  readonly dismissAriaLabel?: string;
+  readonly handleAlertDismiss: AlertProps['onDismiss'];
+  readonly handleSortChange: SelectProps['onChange'];
+  readonly isAlertVisible: boolean;
+  readonly items: CardsProps<Item>['items'];
+  readonly loading: CardsProps<Item>['loading'];
+  readonly loadingText?: string;
+  readonly sort: Sort;
 }
 
 const IS_ALERT_VISIBLE_CAPSULE: ReactCapsule<boolean> =
@@ -54,7 +51,6 @@ export default function usePublicationsContents(): State {
   } = useMediumStats();
 
   // States
-  const sortOptions: SelectProps.Options = useSortOptions();
   const [sort, setSort] = useState(Sort.ViewsPerDay);
 
   const items: readonly Item[] = useItems({
@@ -67,8 +63,7 @@ export default function usePublicationsContents(): State {
     isAlertVisible,
     loading: isDevLoading || isMediumLoading,
     loadingText: translate('Loading publications'),
-    sortOptions,
-    sortPlaceholder: translate('Sort by'),
+    sort,
 
     handleAlertDismiss: useCallback((): void => {
       setIsAlertVisible(false);
@@ -85,15 +80,5 @@ export default function usePublicationsContents(): State {
       newItems.sort(mapSortToFunction(sort));
       return newItems.filter(filterItemsByMinimumViews);
     }, [items, sort]),
-
-    selectedSortOption: useMemo((): SelectProps.Option => {
-      const findSelectedSortOption = ({
-        value,
-      }: Readonly<SelectProps.Option>): boolean => value === sort;
-      // Since `sort` is a Sort enum value and all Sort enum values have a sort
-      //   option, we can assert that we found this sort option.
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      return sortOptions.find(findSelectedSortOption) as SelectProps.Option;
-    }, [sort, sortOptions]),
   };
 }

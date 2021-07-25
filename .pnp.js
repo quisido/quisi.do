@@ -86,7 +86,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["typescript", "patch:typescript@npm%3A4.3.5#builtin<compat/typescript>::version=4.3.5&hash=ddfc1b"],
             ["use-awsui", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.6"],
             ["use-awsui-router", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.2.0"],
-            ["use-awsui-table-item-description", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.5"]
+            ["use-awsui-table-item-description", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.5"],
+            ["use-params-memo", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0"]
           ],
           "linkType": "SOFT",
         }]
@@ -12987,7 +12988,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["typescript", "patch:typescript@npm%3A4.3.5#builtin<compat/typescript>::version=4.3.5&hash=ddfc1b"],
             ["use-awsui", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.6"],
             ["use-awsui-router", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.2.0"],
-            ["use-awsui-table-item-description", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.5"]
+            ["use-awsui-table-item-description", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.5"],
+            ["use-params-memo", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0"]
           ],
           "linkType": "SOFT",
         }]
@@ -27668,6 +27670,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/use-force-update-npm-1.0.7-391b7f1cae-2146df593b.zip/node_modules/use-force-update/",
           "packageDependencies": [
             ["use-force-update", "npm:1.0.7"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["use-params-memo", [
+        ["npm:1.0.0", {
+          "packageLocation": "./.yarn/cache/use-params-memo-npm-1.0.0-b8c9cdc270-90542cbff2.zip/node_modules/use-params-memo/",
+          "packageDependencies": [
+            ["use-params-memo", "npm:1.0.0"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0", {
+          "packageLocation": "./.yarn/$$virtual/use-params-memo-virtual-e19b557303/0/cache/use-params-memo-npm-1.0.0-b8c9cdc270-90542cbff2.zip/node_modules/use-params-memo/",
+          "packageDependencies": [
+            ["use-params-memo", "virtual:6241e8b08098ab65ba6324de11f4f3f588a81e0ff5ad028b301505f59d10102ccce6066aaad5d97f3c03d68e4cb8d4e3ab249d9438e5a44406b0655156d9ac6a#npm:1.0.0"],
+            ["@types/react", "npm:17.0.14"],
+            ["react", "npm:17.0.2"]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
           ],
           "linkType": "HARD",
         }]
