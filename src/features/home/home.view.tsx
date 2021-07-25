@@ -1,5 +1,4 @@
 import Box from '@awsui/components-react/box';
-// import Cards from '@awsui/components-react/cards';
 import Container from '@awsui/components-react/container';
 import Header from '@awsui/components-react/header';
 import SpaceBetween from '@awsui/components-react/space-between';
@@ -7,15 +6,18 @@ import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
 import ViewResumeButton from '../../components/view-resume-button';
-// import PROJECT_CARD_DEFINITION from '../../constants/project-card-definition';
-// import PROJECTS from '../../constants/projects';
+import PROJECTS from '../../constants/projects';
 import avatar from '../../images/charles-stover.jpg';
+import mapComponentToPropMapper from '../../map/map-component-to-prop-mapper';
 import useHome from './home.hook';
 import styles from './home.module.scss';
+import mapProjectToAttributes from './home.util.map-project-to-attributes';
+import ProjectListItem from './home.view.project-list-item';
 
 const CURRENT_YEAR: number = new Date().getFullYear();
 const FRONT_END_START_YEAR = 2001;
 const FULL_STACK_START_YEAR = 2005;
+const mapProjectToListItem = mapComponentToPropMapper(ProjectListItem);
 
 const FRONT_END_YOE: number = CURRENT_YEAR - FRONT_END_START_YEAR;
 const FULL_STACK_YOE: number = CURRENT_YEAR - FULL_STACK_START_YEAR;
@@ -50,9 +52,10 @@ export default function Home(): ReactElement {
             <SpaceBetween className={styles.p} direction="vertical" size="m">
               <Box variant="p">
                 My name is <strong>Charles Stover</strong>. I am a{' '}
-                <strong>senior front end engineer</strong> with a focus in{' '}
-                <strong>JavaScript and React</strong>. My expertise is in
-                leading projects for large teams, application monitoring, and{' '}
+                <strong>staff-level front end engineer</strong> with an
+                expertise in <strong>JavaScript and React</strong>. I gravitate
+                towards long-term product visions, impact across teams,
+                operational health, application monitoring, and{' '}
                 <abbr title="user interface">UI</abbr>/
                 <abbr title="user experience">UX</abbr>.
               </Box>
@@ -67,17 +70,18 @@ export default function Home(): ReactElement {
             </SpaceBetween>
           </SpaceBetween>
         </Container>
-        {/*
-        <Cards
-          cardDefinition={PROJECT_CARD_DEFINITION}
-          items={PROJECTS}
+
+        <Container
           header={
             <Header>
               <I18n>Projects</I18n>
             </Header>
           }
-        />
-        */}
+        >
+          <ul className={styles.projectList}>
+            {PROJECTS.map(mapProjectToAttributes).map(mapProjectToListItem)}
+          </ul>
+        </Container>
       </SpaceBetween>
     </AppLayout>
   );

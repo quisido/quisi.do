@@ -21,6 +21,10 @@ const PROJECTS: Project[] = [
     icon: '⚛',
     name: 'ReactN',
   },
+  {
+    icon: '💸',
+    name: 'Walmart Asset Protection Hub',
+  },
 ];
 
 export default PROJECTS;

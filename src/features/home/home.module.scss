@@ -31,3 +31,16 @@
 .p {
   max-width: 640px;
 }
+
+.projectList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-position: outside;
+  margin-left: -2em;
+
+  > li {
+    font-size: 1.5em;
+    margin-left: 2em;
+  }
+}
