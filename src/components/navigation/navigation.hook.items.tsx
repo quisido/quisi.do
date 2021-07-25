@@ -37,19 +37,19 @@ export default function useItems(): SideNavigationProps.Item[] {
               },
               {
                 external: true,
-                href: 'https://charlesstover.github.io/3ds-tetris',
+                href: 'https://charlesstover.github.io/3ds-tetris/',
                 text: '3DS Tetris',
                 type: 'link',
               },
               {
                 external: true,
-                href: 'https://dota2huds.com/',
-                text: 'Dota2HUDs.com',
+                href: 'https://charlesstover.github.io/dota2huds/',
+                text: 'Dota 2 HUD gallery',
                 type: 'link',
               },
               {
                 external: true,
-                href: 'https://mtgenius.github.io/planechase',
+                href: 'https://mtgenius.github.io/planechase/',
                 text: 'MTG Planechase',
                 type: 'link',
               },
