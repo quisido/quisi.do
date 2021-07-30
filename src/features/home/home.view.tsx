@@ -15,10 +15,12 @@ import mapProjectToAttributes from './home.util.map-project-to-attributes';
 import ProjectListItem from './home.view.project-list-item';
 
 const CURRENT_YEAR: number = new Date().getFullYear();
+const ENTERPRISE_START_YEAR = 2016;
 const FRONT_END_START_YEAR = 2001;
 const FULL_STACK_START_YEAR = 2005;
 const mapProjectToListItem = mapComponentToPropMapper(ProjectListItem);
 
+const ENTERPRISE_YOE: number = CURRENT_YEAR - ENTERPRISE_START_YEAR;
 const FRONT_END_YOE: number = CURRENT_YEAR - FRONT_END_START_YEAR;
 const FULL_STACK_YOE: number = CURRENT_YEAR - FULL_STACK_START_YEAR;
 
@@ -60,6 +62,9 @@ export default function Home(): ReactElement {
                 <abbr title="user experience">UX</abbr>.
               </Box>
               <ul className={styles.list}>
+                <li>
+                  <I18n n={ENTERPRISE_YOE}>Enterprise: $n years</I18n>
+                </li>
                 <li>
                   <I18n n={FRONT_END_YOE}>Front end: $n years</I18n>
                 </li>
