@@ -12,7 +12,7 @@ const queryClient: QueryClient = new QueryClient();
 
 function App(): ReactElement {
   return (
-    <ErrorBoundary fallback="An error occurred.">
+    <ErrorBoundary fallback={<>An error occurred.</>}>
       <Provider store={STORE}>
         <QueryClientProvider client={queryClient}>
           <Router history={HISTORY}>

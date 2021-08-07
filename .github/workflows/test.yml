@@ -1,0 +1,16 @@
+name: Test
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          cache: 'yarn'
+          check-latest: true
+          node-version: 'lts/*'
+      - run: yarn
+      - run: yarn test
+on:
+  pull_request:
+    branches: [main]
