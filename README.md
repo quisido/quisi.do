@@ -1,5 +1,6 @@
 # [CharlesStover.com](https://charlesstover.com/)
 
+[![Cypress](https://img.shields.io/endpoint?label=end-to-end&style=flat&url=https://dashboard.cypress.io/badge/simple/fahz48/main)](https://dashboard.cypress.io/projects/fahz48/runs)
 [![travis](https://img.shields.io/travis/com/CharlesStover/charlesstover.com.svg)](https://travis-ci.com/CharlesStover/charlesstover.com)
 
 the professional portfolio of Charles Stover

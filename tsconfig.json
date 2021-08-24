@@ -52,6 +52,7 @@
     "/types/",
     "**/test-utils/*.ts",
     "**/test-utils/*.tsx",
+    "**/*.e2e.ts",
     "**/*.test.ts",
     "**/*.test.tsx"
   ]
