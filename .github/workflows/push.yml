@@ -1,0 +1,44 @@
+name: Push
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cypress
+        uses: cypress-io/github-action@v2
+        with:
+          start: yarn start
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: 'yarn'
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install
+        run: yarn
+      - name: ESLint
+        run: yarn eslint
+  jest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: 'yarn'
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install
+        run: yarn
+      - name: Jest
+        run: yarn jest
+on:
+  push:
+    branches: [main]
