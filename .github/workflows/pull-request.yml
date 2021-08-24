@@ -20,14 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          cache: 'yarn'
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn
       - name: Cypress
         uses: cypress-io/github-action@v2
         env:
@@ -35,9 +27,12 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          command: yarn cypress
+          install-command: yarn
           record: true
           start: yarn start
           tag: ${{ github.event_name }}
+          wait-on: 'http://localhost:3000'
 
   eslint:
     needs: install
