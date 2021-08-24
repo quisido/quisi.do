@@ -30,7 +30,7 @@
 
   "parserOptions": {
     "extraFileExtensions": [".json"],
-    "project": ["./tsconfig.json", "./tsconfig.eslint.json"],
+    "project": ["./tsconfig.eslint.json"],
     "tsconfigRootDir": "./",
     "useJSXTextNode": true,
     "warnOnUnsupportedTypeScriptVersion": false,
@@ -215,7 +215,7 @@
         "trailingUnderscore": "forbid"
       },
       {
-        "format": ["camelCase", "UPPER_CASE"],
+        "format": ["camelCase", "PascalCase", "UPPER_CASE"],
         "leadingUnderscore": "allow",
         "selector": "variable",
         "trailingUnderscore": "allow"
