@@ -7,14 +7,13 @@
 /.yarn/build-state.yml
 /.yarn/install-state.gz
 /build/
+/cypress/
 /dist/
 /jest/
 /node_modules/
 /types/
 /*.iml
 /.env
-/.env.development
-/.env.local
 /.eslintcache
 /.pnp.cjs
 /.tsbuildinfo

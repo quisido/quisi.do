@@ -1,6 +1,6 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
+  "plugins": ["chai-friendly", "cypress", "prettier", "react", "react-hooks"],
 
   "env": {
     "jest": true,
@@ -12,6 +12,7 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:cypress/recommended",
     "plugin:prettier/recommended",
     "plugin:react/recommended"
   ],
@@ -132,8 +133,14 @@
     "@typescript-eslint/typedef": "error",
     "@typescript-eslint/unified-signatures": "error",
     "brace-style": "off",
+    "chai-friendly/no-unused-expressions": "error",
     "comma-dangle": "off",
     "comma-spacing": "off",
+    "cypress/assertion-before-screenshot": "error",
+    "cypress/no-assigning-return-values": "error",
+    "cypress/no-async-tests": "error",
+    "cypress/no-force": "error",
+    "cypress/no-unnecessary-waiting": "error",
     "default-param-last": "off",
     "dot-notation": "off",
     "func-call-spacing": "off",

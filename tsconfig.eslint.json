@@ -1,6 +1,16 @@
 {
-  "exclude": ["/.yarn/", "/build/", "/jest/", "/node_modules/", "/types/"],
   "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "exclude": [
+    "/.yarn/",
+    "/build/",
+    "/cypress/",
+    "/jest/",
+    "/node_modules/",
+    "/types/"
+  ],
   "include": [
     "**/*.cjs",
     "**/*.d.ts",
