@@ -26,6 +26,8 @@ jobs:
           cache: 'yarn'
           check-latest: true
           node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn
       - name: Cypress
         uses: cypress-io/github-action@v2
         env:
@@ -49,6 +51,8 @@ jobs:
           cache: 'yarn'
           check-latest: true
           node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn
       - name: ESLint
         run: yarn eslint
 
@@ -64,6 +68,8 @@ jobs:
           cache: 'yarn'
           check-latest: true
           node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn
       - name: Jest
         run: yarn jest
 
