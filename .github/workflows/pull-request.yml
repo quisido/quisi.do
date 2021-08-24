@@ -1,21 +1,42 @@
 name: Pull request
 jobs:
-  cypress:
+  install:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: 'yarn'
+          check-latest: true
+          node-version: 'lts/*'
+
+  cypress:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: 'yarn'
+          check-latest: true
+          node-version: 'lts/*'
       - name: Cypress
         uses: cypress-io/github-action@v2
         env:
+          CYPRESS_INSTALL_BINARY: true
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          install-command: yarn
           record: true
           start: yarn start
           tag: ${{ github.event_name }}
+
   eslint:
+    needs: install
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,11 +47,11 @@ jobs:
           cache: 'yarn'
           check-latest: true
           node-version: 'lts/*'
-      - name: Install
-        run: yarn
       - name: ESLint
         run: yarn eslint
+
   jest:
+    needs: install
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -41,10 +62,9 @@ jobs:
           cache: 'yarn'
           check-latest: true
           node-version: 'lts/*'
-      - name: Install
-        run: yarn
       - name: Jest
         run: yarn jest
+
 on:
   pull_request:
     branches: [main]
