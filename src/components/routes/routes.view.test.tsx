@@ -4,6 +4,7 @@ import Routes from './routes.view';
 
 const { testHistory, TestRouter } = createTestHistory({ path: '/' });
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 global.window = Object.create(window);
 Object.defineProperty(window, 'location', {
   writable: true,
@@ -22,6 +23,7 @@ describe('App', (): void => {
       wrapper: TestRouter,
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     expect(window.location.href).toBe(
       'https://charles-stover.medium.com/become-the-junior-developer-that-companies-want-to-hire-c539f4c236d8',
     );

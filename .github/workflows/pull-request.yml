@@ -7,8 +7,14 @@ jobs:
         uses: actions/checkout@v2
       - name: Cypress
         uses: cypress-io/github-action@v2
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          install-command: yarn
+          record: true
           start: yarn start
+          tag: ${{ github.event_name }}
   eslint:
     runs-on: ubuntu-latest
     steps:
