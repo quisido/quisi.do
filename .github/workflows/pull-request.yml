@@ -11,6 +11,8 @@ jobs:
           cache: 'yarn'
           check-latest: true
           node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn
 
   cypress:
     needs: install
