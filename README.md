@@ -13,6 +13,7 @@ commands in order:
 - `yarn set version latest` to keep Yarn up-to-date.
 - `yarn up * @*/* history@^4.10.1 node-sass@^5.0.0` to install and upgrade
   dependencies.
+- `yarn up -R caniuse-lite` to upgrade cross-browser support.
 - `yarn sdks vscode` to integrate with Visual Studio Code.
 
 To run the website locally, use `yarn start`.
