@@ -7,8 +7,9 @@ const DSN = `https://${SENTRY_KEY}@o592283.ingest.sentry.io/5740642`;
 export default function initSentry(): void {
   init({
     dsn: DSN,
+    environment: process.env.NODE_ENV,
+    integrations: [browserTracing],
     release: `charlesstover.com@${process.env.npm_package_version ?? '0.0.1'}`,
     tracesSampleRate: 1.0,
-    integrations: [browserTracing],
   });
 }

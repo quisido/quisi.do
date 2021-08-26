@@ -69,6 +69,20 @@ jobs:
       - name: Jest
         run: yarn jest
 
+  sentry:
+    needs: [cypress, eslint, jest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Sentry release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        with:
+          environment: production
+
 on:
   push:
     branches: [main]
