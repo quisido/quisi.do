@@ -22,7 +22,7 @@
     "access": "restricted"
   },
   "scripts": {
-    "build": "CI=false react-scripts build",
+    "build": "react-scripts build",
     "cypress": "cypress run --record",
     "eslint": "eslint src",
     "jest": "jest",

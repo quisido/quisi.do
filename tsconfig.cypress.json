@@ -4,6 +4,7 @@
   "compilerOptions": {
     "isolatedModules": false,
     "noEmit": true,
+    "sourceMap": false,
     "types": ["cypress"]
   }
 }
