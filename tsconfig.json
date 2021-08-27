@@ -13,7 +13,7 @@
     "declarationMap": false,
     "downlevelIteration": true,
     "esModuleInterop": true,
-    "exactOptionalPropertyTypes": true,
+    // "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": false,
     "inlineSourceMap": false,
@@ -45,8 +45,8 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "suppressImplicitAnyIndexErrors": false,
-    "target": "ES5",
-    "useUnknownInCatchVariables": true
+    "target": "ES5"
+    // "useUnknownInCatchVariables": true
   },
   "exclude": [
     "/.yarn/",
