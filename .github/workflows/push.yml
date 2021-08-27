@@ -82,11 +82,16 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn
+      - name: Set version
+        run: echo "REACT_APP_VERSION=$(yarn get-version)" >> $GITHUB_ENV
       - name: Build
         run: yarn build
         env:
           # Ignore warnings from `mini-css-extract-plugin`.
           CI: false
+          REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
+          REACT_APP_GITHUB_SERVER_URL: ${{ env.GITHUB_SERVER_URL }}
+          REACT_APP_GITHUB_SHA: ${{ github.sha }}
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:

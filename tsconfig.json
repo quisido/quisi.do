@@ -59,5 +59,10 @@
     "**/*.e2e.ts",
     "**/*.test.ts",
     "**/*.test.tsx"
-  ]
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }

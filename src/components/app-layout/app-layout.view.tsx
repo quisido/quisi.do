@@ -4,6 +4,7 @@ import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-gr
 import type { FlashbarProps } from '@awsui/components-react/flashbar';
 import type { ComponentType, ReactElement, ReactNode } from 'react';
 import Breadcrumbs from '../../components/breadcrumbs';
+import Footer from '../../components/footer';
 import Navigation from '../../components/navigation';
 import Notifications from '../../components/notifications';
 import useCustomAppLayout from './app-layout.hook';
@@ -48,7 +49,6 @@ export default function CustomAppLayout({
       <AppLayout
         ariaLabels={ariaLabels}
         breadcrumbs={<Breadcrumbs>{breadcrumbs}</Breadcrumbs>}
-        content={children}
         contentType={contentType}
         navigation={<Navigation />}
         navigationOpen={navigationOpen}
@@ -58,6 +58,12 @@ export default function CustomAppLayout({
         tools={Tools && <Tools />}
         toolsHide={toolsHide}
         toolsOpen={toolsOpen}
+        content={
+          <>
+            {children}
+            <Footer />
+          </>
+        }
       />
     </div>
   );
