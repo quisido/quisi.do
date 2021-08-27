@@ -31,6 +31,9 @@ jobs:
         run: yarn
       - name: Build
         run: yarn build
+        env:
+          # Ignore warnings from `mini-css-extract-plugin`.
+          CI: false
 
   cypress:
     needs: install
