@@ -15,6 +15,26 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+  build:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: 'yarn'
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn
+      - name: Build
+        run: yarn build
+        env:
+          # Ignore warnings from `mini-css-extract-plugin`.
+          CI: false
+
   cypress:
     needs: install
     runs-on: ubuntu-latest

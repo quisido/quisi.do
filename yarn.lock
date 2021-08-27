@@ -23,9 +23,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@awsui/components-react@npm:^3.0.232":
-  version: 3.0.232
-  resolution: "@awsui/components-react@npm:3.0.232"
+"@awsui/components-react@npm:^3.0.236":
+  version: 3.0.236
+  resolution: "@awsui/components-react@npm:3.0.236"
   dependencies:
     "@awsui/collection-hooks": ^1.0.0
     "@awsui/test-utils-core": ^1.0.0
@@ -48,14 +48,14 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17
     react-dom: ^16.8 || ^17
-  checksum: 8a0987f78e4e6df37e37d6fea56c9521e5ee56d718e0a3d567a05bec171703c4168a7780e1515f91e144e1dab535eb11aafa17c01c3992aedc54bf643dd1c160
+  checksum: 98c7bffd2d72aeecb84a0c576153a5c71623f0ab44a26c1ec9215d057fe81ef6a7f628367ab39d8f56ecdb7cd84ecc15366543342cb494f97c4e128fd1fc9708
   languageName: node
   linkType: hard
 
-"@awsui/design-tokens@npm:^3.0.12":
-  version: 3.0.12
-  resolution: "@awsui/design-tokens@npm:3.0.12"
-  checksum: 659812d8df064a8bfdef4098af3ef0dc7f9daf61dee74d2e4ed49fa73cfa9d51614cb3aab11e7aeb9af79aa1e4ae8a2b6baeff95b49c24daeb2751806908adb8
+"@awsui/design-tokens@npm:^3.0.13":
+  version: 3.0.13
+  resolution: "@awsui/design-tokens@npm:3.0.13"
+  checksum: 57da5dfe0dc001f958346335e4045aba8e0df696a062920ea1712aebff346d77f7255ed82b6451cf789db8375b2cbda1e74e5fb5443ef6063a7156bba71fc720
   languageName: node
   linkType: hard
 
@@ -5357,10 +5357,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^16.7.1":
-  version: 16.7.1
-  resolution: "@types/node@npm:16.7.1"
-  checksum: fcf1a2c7b1f19c2201574b2110176b49c6efd824a39b2ed8ac3e6688740e2a35bef95a3334dfa345f4bd4873fd8b79d8ac8cfcc9fcd3d2f4f8f993c2c37ce4ab
+"@types/node@npm:^16.7.2":
+  version: 16.7.2
+  resolution: "@types/node@npm:16.7.2"
+  checksum: aef77c109e2fd93b5dc6ec0a57a0878aaaa58adf0e63d9618d67b116ad3f2a3eb2589a99deaf9fda4a0805068b2533e3d2cf8e8dc3572251c498ec3dc929a76c
   languageName: node
   linkType: hard
 
@@ -7930,9 +7930,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30000981, caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001125, caniuse-lite@npm:^1.0.30001165, caniuse-lite@npm:^1.0.30001181, caniuse-lite@npm:^1.0.30001219":
-  version: 1.0.30001251
-  resolution: "caniuse-lite@npm:1.0.30001251"
-  checksum: 918e1b1662c26c11291206146bc305d7fd1ca351aa9231c2e21cb1526d87b444830e2d8dc54416ebb8ecf7e0addea12d66a1c41493476229987e5e6922f0c14b
+  version: 1.0.30001252
+  resolution: "caniuse-lite@npm:1.0.30001252"
+  checksum: 0d25a2795ca224c1a689b08fe37a5dc6c4c79d80720f927bf7df70ed30c1b1b62c3cc51429eac01902d3fc298d9531b85efec331c2a051e42615c76fa348f118
   languageName: node
   linkType: hard
 
@@ -8028,8 +8028,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "charlesstover.com@workspace:."
   dependencies:
-    "@awsui/components-react": ^3.0.232
-    "@awsui/design-tokens": ^3.0.12
+    "@awsui/components-react": ^3.0.236
+    "@awsui/design-tokens": ^3.0.13
     "@awsui/global-styles": ^1.0.9
     "@awsui/test-utils-core": ^1.0.13
     "@babel/core": ^7.15.0
@@ -8043,7 +8043,7 @@ __metadata:
     "@types/history": ^4.7.9
     "@types/jest": ^27.0.1
     "@types/mocha": ^9.0.0
-    "@types/node": ^16.7.1
+    "@types/node": ^16.7.2
     "@types/react": ^17.0.19
     "@types/react-dom": ^17.0.9
     "@types/react-redux": ^7.1.18
@@ -8081,7 +8081,7 @@ __metadata:
     react-router-dom: ^5.2.0
     react-scripts: ^4.0.3
     ts-jest: ^27.0.5
-    typescript: ^4.3.5
+    typescript: ~4.3.0
     use-awsui: ^1.0.6
     use-awsui-router: ^1.2.1
     use-awsui-table-item-description: ^1.0.5
@@ -21209,23 +21209,23 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-typescript@^4.3.5:
-  version: 4.3.5
-  resolution: "typescript@npm:4.3.5"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: bab033b5e2b0790dd35b77fd005df976ef80b8d84fd2c6e63cc31808151875beae9216e5a315fe7068e8499905c3c354248fe83272cdfc13b7705635f0c66c97
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^4.3.5#~builtin<compat/typescript>":
+"typescript@patch:typescript@~4.3.0#~builtin<compat/typescript>":
   version: 4.3.5
   resolution: "typescript@patch:typescript@npm%3A4.3.5#~builtin<compat/typescript>::version=4.3.5&hash=d8b4e7"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: bc2c4fdf0f1557fdafe4ef74848c72ebd9c8c60829568248f869121aea2bb20e16649a252431d0acb185ec118143be22bed73d08f64379557810d82756afedde
+  languageName: node
+  linkType: hard
+
+typescript@~4.3.0:
+  version: 4.3.5
+  resolution: "typescript@npm:4.3.5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: bab033b5e2b0790dd35b77fd005df976ef80b8d84fd2c6e63cc31808151875beae9216e5a315fe7068e8499905c3c354248fe83272cdfc13b7705635f0c66c97
   languageName: node
   linkType: hard
 

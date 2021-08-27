@@ -68,12 +68,43 @@ jobs:
       - name: Jest
         run: yarn jest
 
-  sentry:
+  build:
     needs: [cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: 'yarn'
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn
+      - name: Build
+        run: yarn build
+        env:
+          # Ignore warnings from `mini-css-extract-plugin`.
+          CI: false
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          if-no-files-found: error
+          name: build
+          path: build
+
+  sentry-release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
       - name: Sentry release
         uses: getsentry/action-release@v1
         env:
@@ -82,6 +113,7 @@ jobs:
           SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         with:
           environment: production
+          sourcemaps: build
 
 on:
   push:
