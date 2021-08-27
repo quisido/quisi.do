@@ -75,6 +75,8 @@ const DEFAULT_DURATION = 80;
 const FIRST = 0;
 const ZERO = 0;
 
+const getDefaultTools = (): ComponentType<unknown> => HeaderInfo;
+
 const isApiErrorResponse = (value: unknown): value is ApiErrorResponse =>
   typeof value === 'object' &&
   value !== null &&
@@ -118,7 +120,7 @@ export default function useSpriteSheet2Gif(): State {
     useRef(null);
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const [Tools, setTools] = useState((): ComponentType<unknown> => HeaderInfo);
+  const [Tools, setTools] = useState(getDefaultTools);
   const [apiGifResponse, setApiGifResponse] = useState<ApiGifResponse | null>(
     null,
   );
@@ -134,23 +136,197 @@ export default function useSpriteSheet2Gif(): State {
   );
   const [toolsOpen, setToolsOpen] = useState(false);
 
-  const dimensionDescription: string = useMemo((): string => {
-    return 'Use zero for square sprites.';
-  }, []);
+  return {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    Tools,
+    apiGifResponse,
+    asyncConvertEffect,
+    dimension: dimension.toString(),
+    directionOptions: DIRECTION_OPTIONS,
+    duration: duration.toString(),
+    isConvertButtonLoading: isLoading,
+    isDimensionInfo: direction === Direction.Automatic,
+    isDirectionInfo: direction === Direction.Automatic,
+    matte,
+    perFrameOptions: PER_FRAME_OPTIONS,
+    toolsOpen,
 
-  const dimensionLabel: string = useMemo((): string => {
-    switch (direction) {
-      case Direction.Automatic:
-        return 'Sprite dimension in pixels';
-      case Direction.Horizontal:
-        return 'Sprite width in pixels';
-      case Direction.Vertical:
-        return 'Sprite height in pixels';
-    }
-  }, [direction]);
+    dimensionDescription: useMemo((): string => {
+      return 'Use zero for square sprites.';
+    }, []),
 
-  const notifications: FlashbarProps.MessageDefinition[] =
-    useMemo((): FlashbarProps.MessageDefinition[] => {
+    dimensionLabel: useMemo((): string => {
+      switch (direction) {
+        case Direction.Automatic:
+          return 'Sprite dimension in pixels';
+        case Direction.Horizontal:
+          return 'Sprite width in pixels';
+        case Direction.Vertical:
+          return 'Sprite height in pixels';
+      }
+    }, [direction]),
+
+    handleConvertClick: useCallback(async (): Promise<void> => {
+      if (spriteSheetImageFile === null) {
+        return;
+      }
+      setIsLoading(true);
+      const body: FormData = new FormData();
+      body.append('dimension', dimension.toString());
+      body.append('direction', direction);
+      body.append('duration', duration.toString());
+      body.append('matte', matte);
+      body.append('perFrame', perFrame ? 'true' : 'false');
+      body.append('sheet', spriteSheetImageFile);
+      const responsePromise: Promise<Response> = fetch(
+        process.env.REACT_APP_SPRITESHEET2GIF ??
+          'https://api.charlesstover.com/spritesheet2gif',
+        {
+          body,
+          cache: 'no-cache',
+          method: 'POST',
+          mode: 'cors',
+          redirect: 'follow',
+          referrer: 'no-referrer',
+        },
+      );
+      asyncConvertEffect.current = responsePromise;
+      try {
+        const response: Response = await responsePromise;
+        const apiResponse: unknown = await response.json();
+        if (isApiErrorResponse(apiResponse)) {
+          throw new Error(apiResponse.message);
+        }
+        if (!isApiGifResponse(apiResponse)) {
+          throw new Error('Invalid API response.');
+        }
+        setApiGifResponse(apiResponse);
+        setError(null);
+      } catch (err: unknown) {
+        setApiGifResponse(null);
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        setError(err as Error);
+      } finally {
+        setIsLoading(false);
+      }
+    }, [dimension, direction, duration, matte, perFrame, spriteSheetImageFile]),
+
+    handleDimensionChange: useCallback(
+      (
+        e: Readonly<
+          NonCancelableCustomEvent<Readonly<InputProps.ChangeDetail>>
+        >,
+      ): void => {
+        const newDimension: number = parseInt(e.detail.value, 10);
+        if (newDimension >= ZERO) {
+          setDimension(newDimension);
+        } else {
+          setDimension(ZERO);
+        }
+      },
+      [],
+    ),
+
+    handleDimensionInfoFollow: useCallback((): void => {
+      if (direction === Direction.Automatic) {
+        setTools((): ComponentType<unknown> => AutomaticDimensionInfo);
+        setToolsOpen(true);
+      }
+    }, [direction]),
+
+    handleDirectionChange: useCallback(
+      (e: ReadonlySelectChangeEvent): void => {
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+        const newDirection: Direction = e.detail.selectedOption
+          .value as Direction;
+        setDirection(newDirection);
+        if (
+          newDirection !== Direction.Automatic &&
+          (Tools === AutomaticDirectionInfo || Tools === AutomaticDimensionInfo)
+        ) {
+          setToolsOpen(false);
+        }
+      },
+      [Tools],
+    ),
+
+    handleDirectionInfoFollow: useCallback((): void => {
+      if (direction === Direction.Automatic) {
+        setTools((): ComponentType<unknown> => AutomaticDirectionInfo);
+        setToolsOpen(true);
+      }
+    }, [direction]),
+
+    handleDurationChange: useCallback(
+      (
+        e: Readonly<
+          NonCancelableCustomEvent<Readonly<InputProps.ChangeDetail>>
+        >,
+      ): void => {
+        const newDuration: number = parseInt(e.detail.value, 10);
+        if (newDuration >= ZERO) {
+          setDuration(newDuration);
+        } else {
+          setDuration(ZERO);
+        }
+      },
+      [],
+    ),
+
+    handleHeaderInfoFollow: useCallback((): void => {
+      setTools((): ComponentType<unknown> => HeaderInfo);
+      setToolsOpen(true);
+    }, []),
+
+    handleMatteChange: useCallback(
+      (
+        e: Readonly<
+          NonCancelableCustomEvent<Readonly<InputProps.ChangeDetail>>
+        >,
+      ): void => {
+        setMatte(e.detail.value);
+      },
+      [],
+    ),
+
+    handleMatteInfoFollow: useCallback((): void => {
+      setTools((): ComponentType<unknown> => MatteInfo);
+      setToolsOpen(true);
+    }, []),
+
+    handlePerFrameChange: useCallback((e: ReadonlySelectChangeEvent): void => {
+      setPerFrame(e.detail.selectedOption.value === 'true');
+    }, []),
+
+    handleSpriteSheetImageFileChange: useCallback(
+      // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
+      (e: ChangeEvent<HTMLInputElement>): void => {
+        if (e.target.files === null) {
+          setSpriteSheetImageFile(null);
+          return;
+        }
+        const firstFile: File | undefined = e.target.files[FIRST];
+        if (typeof firstFile === 'undefined') {
+          setSpriteSheetImageFile(null);
+          return;
+        }
+        setSpriteSheetImageFile(firstFile);
+      },
+      [],
+    ),
+
+    handleToolsChange: useCallback(
+      (
+        e: Readonly<
+          NonCancelableCustomEvent<Readonly<AppLayoutProps.ChangeDetail>>
+        >,
+      ): void => {
+        setToolsOpen(e.detail.open);
+      },
+      [],
+    ),
+
+    notifications: useMemo((): FlashbarProps.MessageDefinition[] => {
       const newNotifications: FlashbarProps.MessageDefinition[] = [];
       if (error !== null) {
         newNotifications.push({
@@ -165,10 +341,9 @@ export default function useSpriteSheet2Gif(): State {
         });
       }
       return newNotifications;
-    }, [error]);
+    }, [error]),
 
-  const selectedDirectionOption: SelectProps.Option =
-    useMemo((): SelectProps.Option => {
+    selectedDirectionOption: useMemo((): SelectProps.Option => {
       const findSelectedDirectionOption = ({
         value,
       }: Readonly<SelectProps.Option>): boolean => value === direction;
@@ -178,10 +353,9 @@ export default function useSpriteSheet2Gif(): State {
         throw new Error(`Cannot find direction: ${direction}`);
       }
       return newSelectedDirectionOption;
-    }, [direction]);
+    }, [direction]),
 
-  const selectedPerFrameOption: SelectProps.Option =
-    useMemo((): SelectProps.Option => {
+    selectedPerFrameOption: useMemo((): SelectProps.Option => {
       const perFrameStr: string = perFrame ? 'true' : 'false';
       const findSelectedPerFrameOption = ({
         value,
@@ -192,190 +366,6 @@ export default function useSpriteSheet2Gif(): State {
         throw new Error(`Cannot find per frame value: ${perFrameStr}`);
       }
       return newSelectePerFrameOption;
-    }, [perFrame]);
-
-  const handleConvertClick = useCallback(async (): Promise<void> => {
-    if (spriteSheetImageFile === null) {
-      return;
-    }
-    setIsLoading(true);
-    const body: FormData = new FormData();
-    body.append('dimension', dimension.toString());
-    body.append('direction', direction);
-    body.append('duration', duration.toString());
-    body.append('matte', matte);
-    body.append('perFrame', perFrame ? 'true' : 'false');
-    body.append('sheet', spriteSheetImageFile);
-    const responsePromise: Promise<Response> = fetch(
-      process.env.REACT_APP_SPRITESHEET2GIF ??
-        'https://api.charlesstover.com/spritesheet2gif',
-      {
-        body,
-        cache: 'no-cache',
-        method: 'POST',
-        mode: 'cors',
-        redirect: 'follow',
-        referrer: 'no-referrer',
-      },
-    );
-    asyncConvertEffect.current = responsePromise;
-    try {
-      const response: Response = await responsePromise;
-      const apiResponse: unknown = await response.json();
-      if (isApiErrorResponse(apiResponse)) {
-        throw new Error(apiResponse.message);
-      }
-      if (!isApiGifResponse(apiResponse)) {
-        throw new Error('Invalid API response.');
-      }
-      setApiGifResponse(apiResponse);
-      setError(null);
-    } catch (err: unknown) {
-      setApiGifResponse(null);
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      setError(err as Error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [dimension, direction, duration, matte, perFrame, spriteSheetImageFile]);
-
-  const handleDimensionChange = useCallback(
-    (
-      e: Readonly<NonCancelableCustomEvent<Readonly<InputProps.ChangeDetail>>>,
-    ): void => {
-      const newDimension: number = parseInt(e.detail.value, 10);
-      if (newDimension >= ZERO) {
-        setDimension(newDimension);
-      } else {
-        setDimension(ZERO);
-      }
-    },
-    [],
-  );
-
-  const handleDimensionInfoFollow = useCallback((): void => {
-    if (direction === Direction.Automatic) {
-      setTools((): ComponentType<unknown> => AutomaticDimensionInfo);
-      setToolsOpen(true);
-    }
-  }, [direction]);
-
-  const handleDirectionChange = useCallback(
-    (e: ReadonlySelectChangeEvent): void => {
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      const newDirection: Direction = e.detail.selectedOption
-        .value as Direction;
-      setDirection(newDirection);
-      if (
-        newDirection !== Direction.Automatic &&
-        (Tools === AutomaticDirectionInfo || Tools === AutomaticDimensionInfo)
-      ) {
-        setToolsOpen(false);
-      }
-    },
-    [Tools],
-  );
-
-  const handleDirectionInfoFollow = useCallback((): void => {
-    if (direction === Direction.Automatic) {
-      setTools((): ComponentType<unknown> => AutomaticDirectionInfo);
-      setToolsOpen(true);
-    }
-  }, [direction]);
-
-  const handleDurationChange = useCallback(
-    (
-      e: Readonly<NonCancelableCustomEvent<Readonly<InputProps.ChangeDetail>>>,
-    ): void => {
-      const newDuration: number = parseInt(e.detail.value, 10);
-      if (newDuration >= ZERO) {
-        setDuration(newDuration);
-      } else {
-        setDuration(ZERO);
-      }
-    },
-    [],
-  );
-
-  const handleHeaderInfoFollow = useCallback((): void => {
-    setTools((): ComponentType<unknown> => HeaderInfo);
-    setToolsOpen(true);
-  }, []);
-
-  const handleMatteChange = useCallback(
-    (
-      e: Readonly<NonCancelableCustomEvent<Readonly<InputProps.ChangeDetail>>>,
-    ): void => {
-      setMatte(e.detail.value);
-    },
-    [],
-  );
-
-  const handleMatteInfoFollow = useCallback((): void => {
-    setTools((): ComponentType<unknown> => MatteInfo);
-    setToolsOpen(true);
-  }, []);
-
-  const handlePerFrameChange = useCallback(
-    (e: ReadonlySelectChangeEvent): void => {
-      setPerFrame(e.detail.selectedOption.value === 'true');
-    },
-    [],
-  );
-
-  const handleSpriteSheetImageFileChange = useCallback(
-    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-    (e: ChangeEvent<HTMLInputElement>): void => {
-      if (e.target.files === null) {
-        setSpriteSheetImageFile(null);
-        return;
-      }
-      setSpriteSheetImageFile(e.target.files[FIRST]);
-    },
-    [],
-  );
-
-  const handleToolsChange = useCallback(
-    (
-      e: Readonly<
-        NonCancelableCustomEvent<Readonly<AppLayoutProps.ChangeDetail>>
-      >,
-    ): void => {
-      setToolsOpen(e.detail.open);
-    },
-    [],
-  );
-
-  return {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    Tools,
-    apiGifResponse,
-    asyncConvertEffect,
-    dimension: dimension.toString(),
-    dimensionDescription,
-    dimensionLabel,
-    directionOptions: DIRECTION_OPTIONS,
-    duration: duration.toString(),
-    handleConvertClick,
-    handleDimensionChange,
-    handleDimensionInfoFollow,
-    handleDirectionChange,
-    handleDirectionInfoFollow,
-    handleDurationChange,
-    handleHeaderInfoFollow,
-    handleMatteChange,
-    handleMatteInfoFollow,
-    handlePerFrameChange,
-    handleSpriteSheetImageFileChange,
-    handleToolsChange,
-    isConvertButtonLoading: isLoading,
-    isDimensionInfo: direction === Direction.Automatic,
-    isDirectionInfo: direction === Direction.Automatic,
-    matte,
-    notifications,
-    perFrameOptions: PER_FRAME_OPTIONS,
-    selectedDirectionOption,
-    selectedPerFrameOption,
-    toolsOpen,
+    }, [perFrame]),
   };
 }
