@@ -20,4 +20,4 @@ deploy:
 install:
   - yarn
 script:
-  - yarn build
+  - CI=false yarn build
