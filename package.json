@@ -4,6 +4,7 @@
   "author": "Charles Stover <charlesstover.com@charlesstover.com>",
   "description": "the professional portfolio of Charles Stover",
   "homepage": "https://charlesstover.com/",
+  "packageManager": "yarn@3.0.1",
   "private": true,
   "repository": "github:CharlesStover/charlesstover.com",
   "type": "commonjs",
