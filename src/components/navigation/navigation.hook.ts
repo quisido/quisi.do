@@ -8,10 +8,16 @@ import isExpandable from '../../utils/is-expandable';
 import useItems from './navigation.hook.items';
 
 interface State {
-  activeHref: string;
-  handleChange: Required<SideNavigationProps>['onChange'];
-  handleFollow: Required<SideNavigationProps>['onFollow'];
-  items: SideNavigationProps.Item[];
+  readonly activeHref: string;
+  readonly items: readonly SideNavigationProps.Item[];
+  readonly handleChange: (
+    event: Readonly<
+      NonCancelableCustomEvent<Readonly<SideNavigationProps.ChangeDetail>>
+    >,
+  ) => void;
+  readonly handleFollow: (
+    event: Readonly<CustomEvent<Readonly<SideNavigationProps.FollowDetail>>>,
+  ) => void;
 }
 
 const expandedMapCapsule: Capsule<Map<string, boolean>> = new Capsule(
@@ -29,7 +35,12 @@ export default function useNavigation(): State {
     (item: SideNavigationProps.Item): SideNavigationProps.Item => {
       const newItem: SideNavigationProps.Item = { ...item };
       if (isExpandable(newItem) && expandedMap.has(newItem.text)) {
-        newItem.defaultExpanded = expandedMap.get(newItem.text);
+        const newDefaultExpanded: boolean | undefined = expandedMap.get(
+          newItem.text,
+        );
+        if (typeof newDefaultExpanded === 'boolean') {
+          newItem.defaultExpanded = newDefaultExpanded;
+        }
       }
       if (hasItems(newItem)) {
         const newSubItems: SideNavigationProps.Item[] = [];

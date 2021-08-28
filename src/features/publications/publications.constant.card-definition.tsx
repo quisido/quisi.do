@@ -10,14 +10,24 @@ import NumberFormat from 'number-format-react';
 import type { ReactElement } from 'react';
 import Minutes from '../../components/minutes';
 import mapTimeToDaysAgo from '../../map/map-time-to-days-ago';
+import validateString from '../../utils/validate-string';
 import styles from './publications.constant.card-definition.module.scss';
 import type Item from './publications.type.item';
 
+const bannerHeightClassName: string = validateString(styles.bannerHeight);
+const bannerWidthClassName: string = validateString(styles.bannerWidth);
 const BASE = 10;
 const BASE_POW = 2;
+const columnLayoutClassName: string = validateString(styles.columnLayout);
+const dateTimeClassName: string = validateString(styles.dateTime);
+const imageClassName: string = validateString(styles.image);
 const MONTH_OFFSET = 1;
 const PERCENT = 100;
+const popoverClassName: string = validateString(styles.popover);
+const reactionsClassName: string = validateString(styles.reactions);
+const readingTimeClassName: string = validateString(styles.readingTime);
 const TWO = 2;
+const viewsClassName: string = validateString(styles.views);
 const ZERO = 0;
 
 const ratio = (a: number, b: number, decimals: number = ZERO): number =>
@@ -47,13 +57,13 @@ const PUBLICATION_CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
       }: Readonly<Item>): ReactElement {
         const date: Date = new Date(dateTime);
         return (
-          <div className={styles.bannerHeight}>
-            <div className={styles.bannerWidth}>
+          <div className={bannerHeightClassName}>
+            <div className={bannerWidthClassName}>
               <Link href={url}>
                 {typeof image === 'string' ? (
                   <img
                     alt={title}
-                    className={styles.image}
+                    className={imageClassName}
                     src={image}
                     width={320}
                   />
@@ -64,27 +74,27 @@ const PUBLICATION_CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
                   </StatusIndicator>
                 )}
               </Link>
-              <Badge className={styles.views}>
+              <Badge className={viewsClassName}>
                 <Popover
-                  className={styles.popover}
+                  className={popoverClassName}
                   content={<I18n>Views</I18n>}
                   size="small"
                 >
                   👁‍🗨 <NumberFormat>{views}</NumberFormat>
                 </Popover>
               </Badge>
-              <Badge className={styles.reactions}>
+              <Badge className={reactionsClassName}>
                 <Popover
-                  className={styles.popover}
+                  className={popoverClassName}
                   content={<I18n>Reactions</I18n>}
                   size="small"
                 >
                   <NumberFormat>{reactions}</NumberFormat> 👏
                 </Popover>
               </Badge>
-              <Badge className={styles.dateTime}>
+              <Badge className={dateTimeClassName}>
                 <Popover
-                  className={styles.popover}
+                  className={popoverClassName}
                   content={<I18n>Publication date</I18n>}
                   size="small"
                 >
@@ -93,9 +103,9 @@ const PUBLICATION_CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
                 </Popover>
               </Badge>
               {typeof readingTime === 'number' && (
-                <Badge className={styles.readingTime}>
+                <Badge className={readingTimeClassName}>
                   <Popover
-                    className={styles.popover}
+                    className={popoverClassName}
                     content={<I18n>Reading time</I18n>}
                     size="small"
                   >
@@ -113,7 +123,7 @@ const PUBLICATION_CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
       // header: 'Statistics',
       content({ dateTime, reactions, views }: Readonly<Item>): ReactElement {
         return (
-          <ColumnLayout className={styles.columnLayout} columns={12}>
+          <ColumnLayout className={columnLayoutClassName} columns={12}>
             <div>
               <Box color="text-label" fontSize="heading-s">
                 <I18n>Reactions/day</I18n>

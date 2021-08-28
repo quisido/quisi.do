@@ -2,7 +2,7 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 
 interface State {
-  iconAlt?: string;
+  iconAlt: string | undefined;
 }
 
 export default function useViewResumeButton(): State {

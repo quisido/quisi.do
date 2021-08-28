@@ -12,7 +12,7 @@ interface Props {
 interface State {
   readonly selectedSortOption: Readonly<SelectProps.Option>;
   readonly sortOptions: SelectProps.Options;
-  readonly sortPlaceholder?: string;
+  readonly sortPlaceholder: string | undefined;
 }
 
 export default function usePublicationsHeader({ sort }: Props): State {

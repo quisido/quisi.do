@@ -4,14 +4,18 @@ import type { SelectProps } from '@awsui/components-react/select';
 import Select from '@awsui/components-react/select';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
+import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-event';
+import validateString from '../../utils/validate-string';
 import type Sort from './publications.constant.sort';
 import usePublicationsHeader from './publications.hook.header';
 import styles from './publications.view.header.module.scss';
 
 interface Props {
-  readonly onSortChange: SelectProps['onChange'];
+  readonly onSortChange: (event: ReadonlySelectChangeEvent) => void;
   readonly sort: Sort;
 }
+
+const sortClassName: string = validateString(styles.sort);
 
 export default function PublicationsHeader({
   onSortChange,
@@ -20,15 +24,26 @@ export default function PublicationsHeader({
   const { selectedSortOption, sortOptions, sortPlaceholder } =
     usePublicationsHeader({ sort });
 
+  // Workaround until AWS UI supports TypeScript 4.4 exact optional properties.
+  // https://github.com/aws/awsui-documentation/issues/14
+  const optionalSelectProps: Pick<SelectProps, 'placeholder'> = {};
+  if (typeof sortPlaceholder !== 'undefined') {
+    optionalSelectProps.placeholder = sortPlaceholder;
+  }
+
   return (
     <Header
       actions={
-        <FormField className={styles.sort} label={<I18n>Sort by</I18n>} stretch>
+        <FormField
+          className={sortClassName}
+          label={<I18n>Sort by</I18n>}
+          stretch
+        >
           <Select
             onChange={onSortChange}
             options={sortOptions}
-            placeholder={sortPlaceholder}
             selectedOption={selectedSortOption}
+            {...optionalSelectProps}
           />
         </FormField>
       }

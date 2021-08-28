@@ -1,9 +1,11 @@
 {
   "extends": "./tsconfig.json",
+
   "compilerOptions": {
     "noEmit": true,
     "sourceMap": false
   },
+
   "exclude": [
     "/.yarn/",
     "/build/",
@@ -12,11 +14,13 @@
     "/node_modules/",
     "/types/"
   ],
+
   "include": [
     "**/*.cjs",
     "**/*.d.ts",
     "**/*.js",
     "**/*.json",
+    "**/*.mjs",
     "**/*.ts",
     "**/*.tsx",
     "**/*.yml"

@@ -3,8 +3,11 @@ import SideNavigation from '@awsui/components-react/side-navigation';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { memo } from 'react';
+import validateString from '../../utils/validate-string';
 import useNavigation from './navigation.hook';
 import styles from './navigation.module.scss';
+
+const sideNavigationClassName: string = validateString(styles.sideNavigation);
 
 function Navigation(): ReactElement {
   const { activeHref, handleChange, handleFollow, items } = useNavigation();
@@ -16,7 +19,7 @@ function Navigation(): ReactElement {
       </Box>
       <SideNavigation
         activeHref={activeHref}
-        className={styles.sideNavigation}
+        className={sideNavigationClassName}
         items={items}
         onChange={handleChange}
         onFollow={handleFollow}

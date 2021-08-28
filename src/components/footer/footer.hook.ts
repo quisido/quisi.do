@@ -2,7 +2,7 @@ import GITHUB_COMMIT_URL from '../../constants/github-commit-url';
 import GITHUB_REPOSITORY_URL from '../../constants/github-repository-url';
 
 interface State {
-  readonly versionHref?: string;
+  readonly versionHref: string | undefined;
 }
 
 export default function useFooter(): State {

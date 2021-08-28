@@ -1,4 +1,6 @@
+import type { AlertProps } from '@awsui/components-react/alert';
 import Alert from '@awsui/components-react/alert';
+import type { CardsProps } from '@awsui/components-react/cards';
 import Cards from '@awsui/components-react/cards';
 import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
@@ -21,15 +23,26 @@ export default function PublicationsContents(): ReactElement {
     sort,
   } = usePublicationsContents();
 
+  // Workaround until AWS UI supports TypeScript 4.4 exact optional properties.
+  // https://github.com/aws/awsui-documentation/issues/14
+  const optionalAlertProps: Pick<AlertProps, 'dismissAriaLabel'> = {};
+  if (typeof dismissAriaLabel !== 'undefined') {
+    optionalAlertProps.dismissAriaLabel = dismissAriaLabel;
+  }
+  const optionalCardsProps: Pick<CardsProps, 'loadingText'> = {};
+  if (typeof loadingText !== 'undefined') {
+    optionalCardsProps.loadingText = loadingText;
+  }
+
   return (
     <SpaceBetween direction="vertical" size="m">
       {isAlertVisible && (
         <Alert
-          dismissAriaLabel={dismissAriaLabel}
           dismissible
           onDismiss={handleAlertDismiss}
           type="info"
           visible={true}
+          {...optionalAlertProps}
         >
           <I18n count={<NumberFormat>{MINIMUM_VIEWS}</NumberFormat>}>
             Only publications with more than $count views are shown.
@@ -38,10 +51,10 @@ export default function PublicationsContents(): ReactElement {
       )}
       <Cards
         cardDefinition={CARD_DEFINITION}
+        header={<Header onSortChange={handleSortChange} sort={sort} />}
         items={items}
         loading={loading}
-        loadingText={loadingText}
-        header={<Header onSortChange={handleSortChange} sort={sort} />}
+        {...optionalCardsProps}
       />
     </SpaceBetween>
   );

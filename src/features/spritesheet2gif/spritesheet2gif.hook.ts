@@ -34,12 +34,9 @@ interface State {
   readonly duration: string;
   readonly handleConvertClick: () => void;
   readonly handleDimensionInfoFollow: () => void;
-  readonly handleDirectionChange: SelectProps['onChange'];
   readonly handleDirectionInfoFollow: () => void;
   readonly handleHeaderInfoFollow: () => void;
   readonly handleMatteInfoFollow: () => void;
-  readonly handlePerFrameChange: SelectProps['onChange'];
-  readonly handleToolsChange: AppLayoutProps['onToolsChange'];
   readonly isConvertButtonLoading: boolean;
   readonly isDimensionInfo: boolean;
   readonly isDirectionInfo: boolean;
@@ -54,6 +51,7 @@ interface State {
       NonCancelableCustomEvent<Readonly<InputProps.ChangeDetail>>
     >,
   ) => void;
+  readonly handleDirectionChange: (event: ReadonlySelectChangeEvent) => void;
   readonly handleDurationChange: (
     event: Readonly<
       NonCancelableCustomEvent<Readonly<InputProps.ChangeDetail>>
@@ -64,9 +62,15 @@ interface State {
       NonCancelableCustomEvent<Readonly<InputProps.ChangeDetail>>
     >,
   ) => void;
+  readonly handlePerFrameChange: (event: ReadonlySelectChangeEvent) => void;
   readonly handleSpriteSheetImageFileChange: (
     // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     event: ChangeEvent<HTMLInputElement>,
+  ) => void;
+  readonly handleToolsChange: (
+    event: Readonly<
+      NonCancelableCustomEvent<Readonly<AppLayoutProps.ChangeDetail>>
+    >,
   ) => void;
 }
 

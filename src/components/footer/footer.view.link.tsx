@@ -3,7 +3,7 @@ import type { ReactElement } from 'react';
 import VERSION from '../../constants/version';
 
 interface Props {
-  readonly children?: string;
+  readonly children: string | undefined;
 }
 
 export default function FooterLink({ children }: Props): ReactElement {

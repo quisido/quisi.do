@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "include": ["src/**/*.e2e.ts"],
+
   "compilerOptions": {
     "isolatedModules": false,
     "noEmit": true,

@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
 interface State {
-  data?: Record<string, number[]>;
+  data?: Record<string, number[]> | undefined;
   error: unknown;
   isLoading: boolean;
   refetch: () => void;

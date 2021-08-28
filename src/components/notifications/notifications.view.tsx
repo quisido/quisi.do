@@ -3,7 +3,7 @@ import Flashbar from '@awsui/components-react/flashbar';
 import type { ReactElement } from 'react';
 
 interface Props {
-  readonly children?: readonly FlashbarProps.MessageDefinition[];
+  readonly children?: undefined | readonly FlashbarProps.MessageDefinition[];
 }
 
 const EMPTY = 0;

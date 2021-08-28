@@ -33,7 +33,7 @@ interface State {
   readonly confirmLabel: string;
   readonly countText: string;
   readonly currentPageIndex: number;
-  readonly filteringAriaLabel?: string;
+  readonly filteringAriaLabel: string | undefined;
   readonly filteringPlaceholder: string;
   readonly filteringText: string;
   readonly items: readonly Item[];
@@ -43,11 +43,11 @@ interface State {
   readonly pagesCount: number;
   readonly preferences: CollectionPreferencesProps.Preferences;
   readonly ref: MutableRefObject<HTMLDivElement | null>;
-  readonly sortingColumn?: TableProps.SortingColumn<Item>;
-  readonly sortingDescending?: boolean;
-  readonly visibleContent?: readonly string[];
+  readonly sortingColumn: TableProps.SortingColumn<Item> | undefined;
+  readonly sortingDescending: boolean | undefined;
+  readonly visibleContent: readonly string[] | undefined;
   readonly visibleContentPreference: CollectionPreferencesProps.VisibleContentPreference;
-  readonly wrapLines?: boolean;
+  readonly wrapLines: boolean | undefined;
   readonly wrapLinesPreference: CollectionPreferencesProps.WrapLinesPreference;
   readonly handleCollectionPreferencesConfirm: (
     event: Readonly<

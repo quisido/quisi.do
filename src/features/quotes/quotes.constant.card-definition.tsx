@@ -3,9 +3,11 @@ import Box from '@awsui/components-react/box';
 import type { CardsProps } from '@awsui/components-react/cards';
 import type { ReactElement } from 'react';
 import type Quote from '../../types/quote';
+import validateString from '../../utils/validate-string';
 import styles from './quotes.constant.card-definition.module.scss';
 
 const IMAGE_SIZE = 100;
+const imageClassName: string = validateString(styles.image);
 
 const IMAGE_MARGIN: BoxProps.Spacing = {
   bottom: 'n',
@@ -44,7 +46,7 @@ const QUOTE_CARD_DEFINITION: CardsProps<Quote>['cardDefinition'] = {
               <Box float="right" margin={IMAGE_MARGIN}>
                 <img
                   alt={author}
-                  className={styles.image}
+                  className={imageClassName}
                   height={IMAGE_SIZE}
                   src={image}
                   width={IMAGE_SIZE}

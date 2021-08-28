@@ -5,9 +5,17 @@ import { useMemo } from 'react';
 import { useBreadcrumbGroup } from 'use-awsui-router';
 
 interface State {
-  ariaLabel?: string;
-  handleFollow: BreadcrumbGroupProps['onFollow'];
-  items: BreadcrumbGroupProps.Item[];
+  readonly ariaLabel: string | undefined;
+  readonly items: BreadcrumbGroupProps.Item[];
+  readonly handleFollow: (
+    event: Readonly<
+      CustomEvent<
+        Readonly<
+          BreadcrumbGroupProps.ClickDetail<Readonly<BreadcrumbGroupProps.Item>>
+        >
+      >
+    >,
+  ) => void;
 }
 
 const DEFAULT_ITEMS: BreadcrumbGroupProps.Item[] = [
@@ -20,17 +28,19 @@ const DEFAULT_ITEMS: BreadcrumbGroupProps.Item[] = [
 export default function useBreadcrumbs(
   breadcrumbs: readonly Readonly<BreadcrumbGroupProps.Item>[],
 ): State {
-  const { handleFollow } = useBreadcrumbGroup();
+  // Contexts
   const translate: TranslateFunction = useTranslate();
 
-  const items: BreadcrumbGroupProps.Item[] = useMemo(
-    (): BreadcrumbGroupProps.Item[] => [...DEFAULT_ITEMS, ...breadcrumbs],
-    [breadcrumbs],
-  );
+  // States
+  const { handleFollow } = useBreadcrumbGroup();
 
   return {
     ariaLabel: translate('Breadcrumbs'),
     handleFollow,
-    items,
+
+    items: useMemo(
+      (): BreadcrumbGroupProps.Item[] => [...DEFAULT_ITEMS, ...breadcrumbs],
+      [breadcrumbs],
+    ),
   };
 }

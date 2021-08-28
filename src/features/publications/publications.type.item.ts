@@ -2,9 +2,9 @@
 //   merged.
 export default interface PublicationsItem {
   readonly dateTime: number;
-  readonly image?: string;
+  readonly image?: string | undefined;
   reactions: number;
-  readonly readingTime?: number;
+  readonly readingTime?: number | undefined;
   readonly title: string;
   readonly type: 'dev' | 'medium';
   readonly url: string;

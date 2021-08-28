@@ -9,7 +9,7 @@ import type {
 import { Route, Router } from 'react-router';
 
 interface Props {
-  readonly initialEntries?: string[];
+  readonly initialEntries?: string[] | undefined;
   readonly path: string;
 }
 

@@ -9,16 +9,22 @@ import ViewResumeButton from '../../components/view-resume-button';
 import PROJECTS from '../../constants/projects';
 import avatar from '../../images/charles-stover.jpg';
 import mapComponentToPropMapper from '../../map/map-component-to-prop-mapper';
+import validateString from '../../utils/validate-string';
 import useHome from './home.hook';
 import styles from './home.module.scss';
 import mapProjectToAttributes from './home.util.map-project-to-attributes';
 import ProjectListItem from './home.view.project-list-item';
 
+const avatarClassName: string = validateString(styles.avatar);
+const contentClassName: string = validateString(styles.content);
 const CURRENT_YEAR: number = new Date().getFullYear();
 const ENTERPRISE_START_YEAR = 2016;
 const FRONT_END_START_YEAR = 2001;
 const FULL_STACK_START_YEAR = 2005;
+const listClassName: string = validateString(styles.list);
 const mapProjectToListItem = mapComponentToPropMapper(ProjectListItem);
+const paragraphClassName: string = validateString(styles.p);
+const projectListClassName: string = validateString(styles.projectList);
 
 const ENTERPRISE_YOE: number = CURRENT_YEAR - ENTERPRISE_START_YEAR;
 const FRONT_END_YOE: number = CURRENT_YEAR - FRONT_END_START_YEAR;
@@ -38,20 +44,24 @@ export default function Home(): ReactElement {
           }
         >
           <SpaceBetween
-            className={styles.content}
+            className={contentClassName}
             direction="horizontal"
             size="xxl"
           >
             <Box textAlign="center">
               <img
                 alt={avatarAlt}
-                className={styles.avatar}
+                className={avatarClassName}
                 height={100}
                 src={avatar}
                 width={100}
               />
             </Box>
-            <SpaceBetween className={styles.p} direction="vertical" size="m">
+            <SpaceBetween
+              className={paragraphClassName}
+              direction="vertical"
+              size="m"
+            >
               <Box variant="p">
                 My name is <strong>Charles Stover</strong>. I am a{' '}
                 <strong>staff-level front end engineer</strong> with an
@@ -61,7 +71,7 @@ export default function Home(): ReactElement {
                 <abbr title="user interface">UI</abbr>/
                 <abbr title="user experience">UX</abbr>.
               </Box>
-              <ul className={styles.list}>
+              <ul className={listClassName}>
                 <li>
                   <I18n n={ENTERPRISE_YOE}>Enterprise: $n years</I18n>
                 </li>
@@ -83,7 +93,7 @@ export default function Home(): ReactElement {
             </Header>
           }
         >
-          <ul className={styles.projectList}>
+          <ul className={projectListClassName}>
             {PROJECTS.map(mapProjectToAttributes).map(mapProjectToListItem)}
           </ul>
         </Container>

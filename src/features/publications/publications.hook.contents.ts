@@ -1,6 +1,5 @@
-import type { AlertProps } from '@awsui/components-react/alert';
+import type { NonCancelableCustomEvent } from '@awsui/components-react';
 import type { CardsProps } from '@awsui/components-react/cards';
-import type { SelectProps } from '@awsui/components-react/select';
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo, useState } from 'react';
@@ -15,14 +14,16 @@ import mapSortToFunction from './publications.map.sort-to-function';
 import type Item from './publications.type.item';
 
 interface State {
-  readonly dismissAriaLabel?: string;
-  readonly handleAlertDismiss: AlertProps['onDismiss'];
-  readonly handleSortChange: SelectProps['onChange'];
+  readonly dismissAriaLabel: string | undefined;
+  readonly handleSortChange: (event: ReadonlySelectChangeEvent) => void;
   readonly isAlertVisible: boolean;
   readonly items: CardsProps<Item>['items'];
-  readonly loading: CardsProps<Item>['loading'];
-  readonly loadingText?: string;
+  readonly loading: boolean;
+  readonly loadingText: string | undefined;
   readonly sort: Sort;
+  readonly handleAlertDismiss: (
+    event: Readonly<NonCancelableCustomEvent<unknown>>,
+  ) => void;
 }
 
 const IS_ALERT_VISIBLE_CAPSULE: ReactCapsule<boolean> =

@@ -9,9 +9,13 @@ import Select from '@awsui/components-react/select';
 import SpaceBetween from '@awsui/components-react/space-between';
 import type { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
+import validateString from '../../utils/validate-string';
 import ApiGifResponse from './components/api-gif-response';
 import useSpriteSheet2Gif from './spritesheet2gif.hook';
 import styles from './spritesheet2gif.module.scss';
+
+const headerClassName: string = validateString(styles.header);
+const matteClassName: string = validateString(styles.matte);
 
 const BREADCRUMBS: BreadcrumbGroupProps.Item[] = [
   {
@@ -75,7 +79,7 @@ export default function SpriteSheet2Gif(): ReactElement {
             </Button>
           }
           header={
-            <Header className={styles.header}>
+            <Header className={headerClassName}>
               Animate a sprite sheet{' '}
               <Link
                 ariaLabel="Info"
@@ -130,7 +134,7 @@ export default function SpriteSheet2Gif(): ReactElement {
               label="Matte"
             >
               <Input
-                className={styles.matte}
+                className={matteClassName}
                 onChange={handleMatteChange}
                 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                 type={'color' as 'text'}

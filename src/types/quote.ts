@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react';
 
 export default interface Quote {
-  readonly age?: number;
+  readonly age?: number | undefined;
   readonly author: string;
-  readonly company?: string;
-  readonly gender?: 'female' | 'male' | 'neutral';
-  readonly image?: string;
+  readonly company?: string | undefined;
+  readonly gender?: 'female' | 'male' | 'neutral' | undefined;
+  readonly image?: string | undefined;
   readonly quote: ReactNode;
-  readonly title?: string;
+  readonly title?: string | undefined;
 }
