@@ -3,7 +3,7 @@ import leftPad from '../utils/left-pad';
 const DATE: Date = new Date();
 const MONTH_OFFSET = 1;
 
-const DAY: string = leftPad(DATE.getDay());
+const DAY: string = leftPad(DATE.getDate());
 const HOURS: string = leftPad(DATE.getHours());
 const MINUTES: string = leftPad(DATE.getMinutes());
 const MONTH: string = leftPad(DATE.getMonth() + MONTH_OFFSET);
