@@ -84,6 +84,7 @@ jobs:
         run: yarn
       - name: Set version
         run: |
+          mkdir ~/version/
           echo $(yarn get-version) > ~/version/index.txt
       - name: Upload version
         uses: actions/upload-artifact@v2
