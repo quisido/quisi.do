@@ -80,6 +80,8 @@ jobs:
           cache: yarn
           check-latest: true
           node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn
       - name: Set version
         run: echo $(yarn get-version) > ~/version.txt
       - name: Upload version
