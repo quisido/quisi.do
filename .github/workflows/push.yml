@@ -9,7 +9,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          cache: 'yarn'
+          cache: yarn
           check-latest: true
           node-version: 'lts/*'
       - name: Install dependencies
@@ -43,7 +43,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          cache: 'yarn'
+          cache: yarn
           check-latest: true
           node-version: 'lts/*'
       - name: Install dependencies
@@ -60,7 +60,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          cache: 'yarn'
+          cache: yarn
           check-latest: true
           node-version: 'lts/*'
       - name: Install dependencies
@@ -68,8 +68,8 @@ jobs:
       - name: Jest
         run: yarn jest
 
-  build:
-    needs: [cypress, eslint, jest]
+  set-version:
+    needs: install
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -77,13 +77,38 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          cache: 'yarn'
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Set version
+        run: echo $(yarn get-version) > ~/version.txt
+      - name: Upload version
+        uses: actions/upload-artifact@v2
+          with:
+            name: version
+            path: '~/version.txt'
+
+  build:
+    needs: set-version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: yarn
           check-latest: true
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn
+      - name: Download version
+        uses: actions/download-artifact@v2
+        with:
+          name: version
+          path: '~/version.txt'
       - name: Set version
-        run: echo "REACT_APP_VERSION=$(yarn get-version)" >> $GITHUB_ENV
+        run: echo "REACT_APP_VERSION=$(cat ~/version.txt)" >> $GITHUB_ENV
       - name: Build
         run: yarn build
         env:
@@ -92,7 +117,7 @@ jobs:
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
           REACT_APP_GITHUB_SERVER_URL: ${{ env.GITHUB_SERVER_URL }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
-      - name: Upload artifact
+      - name: Upload build
         uses: actions/upload-artifact@v2
         with:
           if-no-files-found: error
@@ -105,11 +130,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Download artifact
+      - name: Download build
         uses: actions/download-artifact@v2
         with:
           name: build
           path: build
+      - name: Download version
+        uses: actions/download-artifact@v2
+        with:
+          name: version
+          path: '~/version.txt'
+      - name: Set version
+        run: echo "SENTRY_VERSION=$(cat ~/version.txt)" >> $GITHUB_ENV
       - name: Sentry release
         uses: getsentry/action-release@v1
         env:
@@ -119,6 +151,7 @@ jobs:
         with:
           environment: production
           sourcemaps: build
+          version: ${{ env.SENTRY_VERSION }}
 
 on:
   push:
