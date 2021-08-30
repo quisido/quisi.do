@@ -1,3 +1,3 @@
-import VERSION from '../src/constants/version';
+import getDefaultVersion from '../src/utils/get-default-version';
 
-process.stdout.write(VERSION);
+process.stdout.write(getDefaultVersion());
