@@ -136,6 +136,8 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
+          REACT_APP_GITHUB_SHA: ${{ github.sha }}
         with:
           command: yarn cypress
           record: true
