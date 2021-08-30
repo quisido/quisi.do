@@ -3,7 +3,11 @@ import type Project from '../types/project';
 const PROJECTS: Project[] = [
   {
     icon: '🌲',
-    name: 'Amazon CloudWatch Logs console',
+    name: 'CloudWatch Logs console',
+  },
+  {
+    icon: '💸',
+    name: 'Coalition, Inc.',
   },
   {
     icon: '📈',
@@ -22,7 +26,7 @@ const PROJECTS: Project[] = [
     name: 'ReactN',
   },
   {
-    icon: '💸',
+    icon: '🦹‍♂️',
     name: 'Walmart Asset Protection Hub',
   },
 ];

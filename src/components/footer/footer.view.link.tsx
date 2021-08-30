@@ -1,19 +1,25 @@
 import { Link } from '@awsui/components-react';
+import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import VERSION from '../../constants/version';
+import useFooterLink from './footer.hook.link';
 
-interface Props {
-  readonly children: string | undefined;
-}
+export default function FooterLink(): ReactElement {
+  const { versionHref } = useFooterLink();
 
-export default function FooterLink({ children }: Props): ReactElement {
-  if (typeof children === 'undefined') {
+  if (typeof versionHref === 'undefined') {
     return <>v{VERSION}</>;
   }
 
   return (
-    <Link external href={children} target="_blank">
-      v{VERSION}
-    </Link>
+    <I18n
+      version={
+        <Link href={versionHref} target="_blank">
+          {VERSION}
+        </Link>
+      }
+    >
+      version: $version
+    </I18n>
   );
 }

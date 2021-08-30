@@ -5,7 +5,7 @@ interface State {
   readonly versionHref: string | undefined;
 }
 
-export default function useFooter(): State {
+export default function useFooterLink(): State {
   return {
     versionHref: GITHUB_COMMIT_URL ?? GITHUB_REPOSITORY_URL,
   };

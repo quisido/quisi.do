@@ -35,7 +35,6 @@ jobs:
           # Ignore warnings from `mini-css-extract-plugin`.
           CI: false
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
-          REACT_APP_GITHUB_SERVER_URL: ${{ env.GITHUB_SERVER_URL }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
 
   cypress:

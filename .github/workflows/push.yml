@@ -120,7 +120,6 @@ jobs:
           # Ignore warnings from `mini-css-extract-plugin`.
           CI: false
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
-          REACT_APP_GITHUB_SERVER_URL: ${{ env.GITHUB_SERVER_URL }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
       - name: Upload build
         uses: actions/upload-artifact@v2
@@ -130,7 +129,7 @@ jobs:
           path: build
 
   sentry-release:
-    needs: build
+    needs: [build, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -160,7 +159,7 @@ jobs:
           version: ${{ env.SENTRY_VERSION }}
 
   deploy:
-    needs: [cypress, eslint, jest, sentry-release]
+    needs: [build, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
