@@ -1,5 +1,4 @@
 import getDefaultVersion from '../utils/get-default-version';
-import leftPad from '../utils/left-pad';
 
 export default function getVersion(): string {
   // Production environments
@@ -8,14 +7,21 @@ export default function getVersion(): string {
     return version;
   }
 
-  // Test environments
   const defaultVersion: string = getDefaultVersion();
+
+  // Manual test environments
+  // If we were deploying to production, we would have set a version.
+  // Since we are building for production and the version is not set, we must be
+  //   deploying to a beta environment.
+  if (process.env.NODE_ENV === 'production') {
+    return `${defaultVersion}-beta`;
+  }
+
+  // Automated test environments, e.g. Cypress
   if (process.env.CI === 'true') {
     return `${defaultVersion}-test`;
   }
 
-  // Development environments
-  const DATE: Date = new Date();
-  const SECONDS: string = leftPad(DATE.getSeconds());
-  return `${defaultVersion}-alpha-${SECONDS}`;
+  // Development environments, e.g. `yarn start`
+  return `${defaultVersion}-alpha`;
 }
