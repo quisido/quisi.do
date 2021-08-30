@@ -1,7 +1,9 @@
+import GitHubEventName from '../constants/github-event-name-enum';
+import GITHUB_EVENT_NAME from '../constants/github-event-name-env';
 import getDefaultVersion from '../utils/get-default-version';
 
 export default function getVersion(): string {
-  // Production environments
+  // Live production environment
   const version: string | undefined = process.env.REACT_APP_VERSION;
   if (typeof version === 'string') {
     return version;
@@ -9,11 +11,13 @@ export default function getVersion(): string {
 
   const defaultVersion: string = getDefaultVersion();
 
-  // Manual test environments
-  // If we were deploying to production, we would have set a version.
-  // Since we are building for production and the version is not set, we must be
-  //   deploying to a beta environment.
   if (process.env.NODE_ENV === 'production') {
+    // Build production environment
+    if (GITHUB_EVENT_NAME === GitHubEventName.Push) {
+      return defaultVersion;
+    }
+
+    // Manual test environments (e.g. pull requests)
     return `${defaultVersion}-beta`;
   }
 

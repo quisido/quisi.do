@@ -120,6 +120,7 @@ jobs:
         env:
           # Ignore warnings from `mini-css-extract-plugin`.
           CI: false
+          REACT_APP_GITHUB_EVENT_NAME: ${{ github.event_name }}
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
       - name: Upload build
