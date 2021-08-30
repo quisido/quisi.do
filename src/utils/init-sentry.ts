@@ -10,7 +10,7 @@ export default function initSentry(): void {
     dsn: DSN,
     environment: process.env.NODE_ENV,
     integrations: [browserTracing],
-    release: `charlesstover.com@${VERSION}`,
+    release: VERSION,
     tracesSampleRate: 1.0,
   });
 }
