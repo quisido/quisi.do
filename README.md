@@ -1,6 +1,6 @@
 # [CharlesStover.com](https://charlesstover.com/)
 
-[![Cypress](https://img.shields.io/endpoint?label=end-to-end&style=flat&url=https://dashboard.cypress.io/badge/simple/fahz48/main)](https://dashboard.cypress.io/projects/fahz48/runs)
+[![Cypress](https://img.shields.io/endpoint?label=Cypress&style=flat&url=https://dashboard.cypress.io/badge/simple/fahz48/main)](https://dashboard.cypress.io/projects/fahz48/runs)
 [![GitHub Action: Push](https://github.com/CharlesStover/charlesstover.com/actions/workflows/push.yml/badge.svg)](https://github.com/CharlesStover/charlesstover.com/actions/workflows/push.yml)
 
 the professional portfolio of Charles Stover
