@@ -145,6 +145,25 @@ jobs:
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000'
 
+  deploy:
+    needs: [build, cypress, eslint, jest]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Download build
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          clean: true
+          folder: build
+          single-commit: true
+
   sentry-release:
     needs: [build, cypress, eslint, jest]
     runs-on: ubuntu-latest
@@ -174,25 +193,6 @@ jobs:
           environment: production
           sourcemaps: build
           version: ${{ env.SENTRY_VERSION }}
-
-  deploy:
-    needs: [build, cypress, eslint, jest]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Download build
-        uses: actions/download-artifact@v2
-        with:
-          name: build
-          path: build
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.5
-        with:
-          branch: gh-pages
-          clean: true
-          folder: build
-          single-commit: true
 
 on:
   push:
