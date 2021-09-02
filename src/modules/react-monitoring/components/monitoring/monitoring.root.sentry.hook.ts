@@ -38,6 +38,7 @@ interface Props {
   readonly history: History<unknown> | undefined;
   readonly ignoreErrors: readonly (RegExp | string)[] | undefined;
   readonly initialScope: CaptureContext | undefined;
+  readonly isFullStoryEnabled: boolean;
   readonly logLevel: LogLevel | undefined;
   readonly maxBreadcrumbs: number | undefined;
   readonly maxValueLength: number | undefined;
@@ -101,6 +102,7 @@ export default function useMonitoringSentry({
   ignoreErrors,
   initialScope,
   integrations,
+  isFullStoryEnabled,
   logLevel,
   maxBreadcrumbs,
   maxValueLength,
@@ -123,7 +125,7 @@ export default function useMonitoringSentry({
       newIntegrations.push(mapHistoryToBrowserTracing(history));
     }
 
-    if (typeof org !== 'undefined') {
+    if (isFullStoryEnabled && typeof org !== 'undefined') {
       const options: SentryFullStoryOptions = {};
       if (typeof baseSentryUrl !== 'undefined') {
         options.baseSentryUrl = baseSentryUrl;
@@ -254,6 +256,7 @@ export default function useMonitoringSentry({
     ignoreErrors,
     initialScope,
     integrations,
+    isFullStoryEnabled,
     logLevel,
     maxBreadcrumbs,
     maxValueLength,

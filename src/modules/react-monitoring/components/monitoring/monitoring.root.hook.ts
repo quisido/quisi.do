@@ -158,6 +158,7 @@ export default function useMonitoring({
     ignoreErrors: sentryIgnoreErrors,
     initialScope: sentryInitialScope,
     integrations: sentryIntegrations,
+    isFullStoryEnabled: typeof fullStoryOrgId !== 'undefined',
     logLevel: sentryLogLevel,
     maxBreadcrumbs: sentryMaxBreadcrumbs,
     maxValueLength: sentryMaxValueLength,
