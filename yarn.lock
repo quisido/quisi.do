@@ -4137,6 +4137,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fullstory/browser@npm:^1.4.9":
+  version: 1.4.9
+  resolution: "@fullstory/browser@npm:1.4.9"
+  checksum: e7aafab188057fec94fb4851f343f4b2869ecbb5a7f14370b921fcd6b47d479cc4057dadd52d3b7d899c1c46103e656ed34982e28bcf70a3061d466888b64e4e
+  languageName: node
+  linkType: hard
+
 "@hapi/address@npm:2.x.x":
   version: 2.1.4
   resolution: "@hapi/address@npm:2.1.4"
@@ -4810,6 +4817,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sentry/fullstory@npm:^1.1.5":
+  version: 1.1.5
+  resolution: "@sentry/fullstory@npm:1.1.5"
+  peerDependencies:
+    "@fullstory/browser": ">=1.0.0"
+    "@sentry/browser": ">=4.0.0"
+  checksum: f796781f8d57a79132e33621331d4984efe65d004e9f6b298624fa7a28e6b782018284f2d5d93d314c8c4ea13c00b3fe449041bda1bf4c1736ebb9219fdb679b
+  languageName: node
+  linkType: hard
+
 "@sentry/hub@npm:6.11.0":
   version: 6.11.0
   resolution: "@sentry/hub@npm:6.11.0"
@@ -4865,6 +4882,13 @@ __metadata:
   version: 6.11.0
   resolution: "@sentry/types@npm:6.11.0"
   checksum: b3a8cb4a4d0150b2515bc7bcfb05c8f6f496490991152eae7fab815a81cb3295503c6124f44a09bda4c516d7adfdbe9610348927615edb537ece3d5add9924e6
+  languageName: node
+  linkType: hard
+
+"@sentry/types@npm:^6.12.0":
+  version: 6.12.0
+  resolution: "@sentry/types@npm:6.12.0"
+  checksum: f70b5d0507a9ee13b22ace5548f2cb1fb2b5defacbbfe12225ac66fed456d59843fa9ef4e72f9f9c21d5f94240d167e0ef0a0ad98f5c39055ab5e354843e179d
   languageName: node
   linkType: hard
 
@@ -8116,9 +8140,12 @@ __metadata:
     "@awsui/test-utils-core": ^1.0.13
     "@babel/core": ^7.15.0
     "@babel/preset-env": ^7.15.0
+    "@fullstory/browser": ^1.4.9
     "@reduxjs/toolkit": ^1.6.1
+    "@sentry/fullstory": ^1.1.5
     "@sentry/react": ^6.11.0
     "@sentry/tracing": ^6.11.0
+    "@sentry/types": ^6.12.0
     "@testing-library/react": ^12.0.0
     "@testing-library/react-hooks": ^7.0.1
     "@types/chai": ^4.2.21

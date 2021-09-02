@@ -1,44 +1,35 @@
 import '@awsui/global-styles/index.css';
-import { ErrorBoundary, withProfiler } from '@sentry/react';
 import type { ReactElement } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
+import FULLSTORY_ORG_ID from '../../constants/fullstory-org-id';
 import HISTORY from '../../constants/history';
+import QUERY_CLIENT from '../../constants/query-client';
 import STORE from '../../constants/redux-store';
+import SENTRY_DSN from '../../constants/sentry-dsn';
+import SENTRY_ORG from '../../constants/sentry-org';
+import VERSION from '../../constants/version';
+import Monitoring from '../../modules/react-monitoring';
 import Main from './app.view.main';
 
-interface FallbackRenderParams {
-  readonly componentStack: string | null;
-  readonly error: Readonly<Error>;
-  readonly eventId: string | null;
-  readonly resetError: () => void;
-}
-
-const queryClient: QueryClient = new QueryClient();
-
-const errorBoundaryFallback = ({
-  error,
-  resetError,
-}: FallbackRenderParams): ReactElement => (
-  <>
-    <strong>An error occurred while rendering the application:</strong>
-    <span>{error.message}</span> <button onClick={resetError}>Retry</button>
-  </>
-);
-
-function App(): ReactElement {
+export default function App(): ReactElement {
   return (
-    <ErrorBoundary fallback={errorBoundaryFallback}>
+    <Monitoring
+      environment={process.env.NODE_ENV}
+      fullStoryOrgId={FULLSTORY_ORG_ID}
+      history={HISTORY}
+      sentryDsn={SENTRY_DSN}
+      sentryOrg={SENTRY_ORG}
+      version={VERSION}
+    >
       <Provider store={STORE}>
-        <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={QUERY_CLIENT}>
           <Router history={HISTORY}>
             <Main />
           </Router>
         </QueryClientProvider>
       </Provider>
-    </ErrorBoundary>
+    </Monitoring>
   );
 }
-
-export default withProfiler(App);
