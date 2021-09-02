@@ -147,12 +147,12 @@ jobs:
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000'
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy
-        run: echo "Deploy is currently a placeholder job."
+  # deploy:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Deploy
+  #       run: echo "Deploy is currently a placeholder job."
 
   sentry-release:
     needs: build

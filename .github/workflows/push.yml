@@ -147,7 +147,7 @@ jobs:
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000'
 
-  deploy:
+  github-pages:
     needs: [build, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
