@@ -1,3 +1,3 @@
-const SENTRY_ORG: string | undefined = process.env.REACT_APP_SENTRY_ORG;
+const SENTRY_ORG = 'charles-stover';
 
 export default SENTRY_ORG;

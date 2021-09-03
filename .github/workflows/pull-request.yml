@@ -102,7 +102,6 @@ jobs:
           CI: false
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
-          REACT_APP_SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
@@ -139,7 +138,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
-          REACT_APP_SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
         with:
           command: yarn cypress
           record: true
@@ -178,7 +176,7 @@ jobs:
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_LOG_LEVEL: info
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_ORG: charles-stover
           SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         with:
           environment: beta
