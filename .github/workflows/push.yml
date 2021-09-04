@@ -199,23 +199,26 @@ jobs:
     needs: github-pages
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn
       - name: Verify Cloudflare API token
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          curl -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
-            -H "Content-Type:application/json" \
-            -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" \
-            -s > \
-          yarn verify-cloudflare-api-token
+          curl -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type:application/json" -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" -s > yarn verify-cloudflare-api-token
       - name: Purge Cloudflare files
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          curl -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
-            -H "Content-Type:application/json" \
-            -X GET "https://api.cloudflare.com/client/v4/zones/charlesstover.com/purge_cache" \
-            --data '{"files":["https://charlesstover.com","https://charlesstover.com/index.html"]}'
+          curl -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type:application/json" -X GET "https://api.cloudflare.com/client/v4/zones/charlesstover.com/purge_cache" --data '{"files":["https://charlesstover.com","https://charlesstover.com/index.html"]}'
 
 on:
   push:
