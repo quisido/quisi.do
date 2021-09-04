@@ -29,7 +29,8 @@
     "get-version": "ts-node ./scripts/get-version",
     "jest": "jest",
     "jest-watch": "jest --coverage=false --watch",
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "verify-cloudflare-api-token": "ts-node ./scripts/verify-cloudflare-api-token"
   },
   "devDependencies": {
     "@awsui/components-react": "^3.0.239",

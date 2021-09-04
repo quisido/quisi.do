@@ -195,6 +195,28 @@ jobs:
           sourcemaps: build
           version: ${{ env.SENTRY_VERSION }}
 
+  purge-cloudflare:
+    needs: github-pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify Cloudflare API token
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          curl -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            -H "Content-Type:application/json" \
+            -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" \
+            -s > \
+          yarn verify-cloudflare-api-token
+      - name: Purge Cloudflare files
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          curl -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            -H "Content-Type:application/json" \
+            -X GET "https://api.cloudflare.com/client/v4/zones/charlesstover.com/purge_cache" \
+            --data '{"files":["https://charlesstover.com","https://charlesstover.com/index.html"]}'
+
 on:
   push:
     branches: [main]
