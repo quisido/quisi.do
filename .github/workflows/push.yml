@@ -196,7 +196,7 @@ jobs:
           version: ${{ env.SENTRY_VERSION }}
 
   cloudflare-purge:
-    needs: install
+    needs: github-pages
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
