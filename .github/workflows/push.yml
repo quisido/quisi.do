@@ -224,11 +224,11 @@ jobs:
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
         run: >
           curl \
-            -d '{ \
-              "files": [ \
-                "https://charlesstover.com", \
-                "https://charlesstover.com/index.html" \
-              ] \
+            -d '{
+              "files": [
+                "https://charlesstover.com",
+                "https://charlesstover.com/index.html"
+              ]
             }' \
             -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
             -H "Content-Type:application/json" \
