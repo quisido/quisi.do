@@ -218,8 +218,8 @@ jobs:
             --header "Content-Type:application/json" \
             --request GET \
             --silent \
-            "https://api.cloudflare.com/client/v4/user/tokens/verify" > \
-          yarn verify-cloudflare-api-token
+            "https://api.cloudflare.com/client/v4/user/tokens/verify" \
+          > yarn verify-cloudflare-api-token
       - name: Purge Cloudflare files
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
