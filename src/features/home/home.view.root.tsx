@@ -10,10 +10,10 @@ import PROJECTS from '../../constants/projects';
 import avatar from '../../images/charles-stover.jpg';
 import mapComponentToPropMapper from '../../map/map-component-to-prop-mapper';
 import validateString from '../../utils/validate-string';
-import useHome from './home.hook';
-import styles from './home.module.scss';
 import mapProjectToAttributes from './home.util.map-project-to-attributes';
 import ProjectListItem from './home.view.project-list-item';
+import useHome from './home.view.root.hook';
+import styles from './home.view.root.module.scss';
 
 const avatarClassName: string = validateString(styles.avatar);
 const contentClassName: string = validateString(styles.content);

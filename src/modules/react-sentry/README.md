@@ -1,4 +1,4 @@
-# React Monitoring
+# React Sentry
 
 ## FullStory + Sentry
 
