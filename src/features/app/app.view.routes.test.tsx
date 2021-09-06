@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import createTestHistory from '../../test-utils/create-test-history';
-import Routes from './routes.view';
+import Routes from './app.view.routes';
 
 const { testHistory, TestRouter } = createTestHistory({ path: '/' });
 

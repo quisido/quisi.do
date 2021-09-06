@@ -7,13 +7,13 @@ interface Props {
   readonly devMode: boolean | undefined;
   readonly host: string | undefined;
   readonly namespace: string | undefined;
-  readonly orgId: string | undefined;
+  readonly orgId: string;
   readonly recordCrossDomainIFrames: boolean | undefined;
   readonly recordOnlyThisIFrame: boolean | undefined;
   readonly script: string | undefined;
 }
 
-export default function useMonitoringFullStory({
+export default function useFullStory({
   debug,
   devMode,
   host,
@@ -24,14 +24,13 @@ export default function useMonitoringFullStory({
   script,
 }: Props): void {
   useEffect((): void => {
-    if (typeof orgId === 'undefined') {
-      return;
-    }
-
     const options: SnippetOptions = {
       orgId,
     };
 
+    // This can be simplified when `SnippetOptions` is refactored to support
+    //   TypeScript 4.4's `exactOptionalPropertyTypes`.
+    // https://github.com/fullstorydev/fullstory-browser-sdk/pull/105
     if (typeof debug !== 'undefined') {
       options.debug = debug;
     }
