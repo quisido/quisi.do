@@ -3,7 +3,9 @@ import { Integrations } from '@sentry/tracing';
 import type { Integration } from '@sentry/types';
 import type { History, Location } from 'history';
 
-export default function mapHistoryToBrowserTracing<HistoryLocationState>(
+export default function mapHistoryToSentryBrowserTracingIntegration<
+  HistoryLocationState,
+>(
   history: Omit<Readonly<History<HistoryLocationState>>, 'location'> & {
     readonly location: Readonly<Location<HistoryLocationState>>;
   },

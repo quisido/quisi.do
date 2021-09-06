@@ -1,4 +1,3 @@
-import SentryFullStory from '@sentry/fullstory';
 import type {
   Breadcrumb,
   BreadcrumbHint,
@@ -18,15 +17,12 @@ import type {
   TransportClass,
   TransportOptions,
 } from '@sentry/types';
-import type { History } from 'history';
 import { useEffect } from 'react';
-import mapHistoryToBrowserTracing from '../../utils/map-history-to-browser-tracing';
 
 interface Props {
   readonly allowUrls: readonly (RegExp | string)[] | undefined;
   readonly attachStacktrace: boolean | undefined;
   readonly autoSessionTracking: boolean | undefined;
-  readonly baseSentryUrl: string | undefined;
   readonly debug: boolean | undefined;
   readonly defaultIntegrations: false | undefined | readonly Integration[];
   readonly denyUrls: readonly (RegExp | string)[] | undefined;
@@ -35,10 +31,8 @@ interface Props {
   readonly enabled: boolean | undefined;
   readonly environment: string | undefined;
   readonly experiments: Record<string, unknown> | undefined;
-  readonly history: History<unknown> | undefined;
   readonly ignoreErrors: readonly (RegExp | string)[] | undefined;
   readonly initialScope: CaptureContext | undefined;
-  readonly isFullStoryEnabled: boolean;
   readonly logLevel: LogLevel | undefined;
   readonly maxBreadcrumbs: number | undefined;
   readonly maxValueLength: number | undefined;
@@ -79,15 +73,10 @@ interface Props {
       ) => number | boolean);
 }
 
-interface SentryFullStoryOptions {
-  baseSentryUrl?: string;
-}
-
-export default function useMonitoringSentry({
+export default function useSentry({
   allowUrls,
   attachStacktrace,
   autoSessionTracking,
-  baseSentryUrl,
   beforeBreadcrumb,
   beforeSend,
   debug,
@@ -98,11 +87,9 @@ export default function useMonitoringSentry({
   enabled,
   environment,
   experiments,
-  history,
   ignoreErrors,
   initialScope,
   integrations,
-  isFullStoryEnabled,
   logLevel,
   maxBreadcrumbs,
   maxValueLength,
@@ -119,34 +106,12 @@ export default function useMonitoringSentry({
   tunnel,
 }: Props): void {
   useEffect((): void => {
-    const newIntegrations: Integration[] = [];
+    const options: BrowserOptions = {};
 
-    if (typeof history !== 'undefined') {
-      newIntegrations.push(mapHistoryToBrowserTracing(history));
-    }
-
-    if (isFullStoryEnabled && typeof org !== 'undefined') {
-      const options: SentryFullStoryOptions = {};
-      if (typeof baseSentryUrl !== 'undefined') {
-        options.baseSentryUrl = baseSentryUrl;
-      }
-      newIntegrations.push(new SentryFullStory(org, options));
-    }
-
-    const getIntegrations = (): Integration[] => {
-      if (typeof integrations === 'function') {
-        return [...integrations(newIntegrations)];
-      }
-      if (typeof integrations !== 'undefined') {
-        return [...integrations, ...newIntegrations];
-      }
-      return newIntegrations;
-    };
-
-    const options: BrowserOptions = {
-      integrations: getIntegrations(),
-    };
-
+    // This can be simplified when `SnippetOptions` is refactored to support
+    //   TypeScript 4.4's `exactOptionalPropertyTypes`.
+    // https://github.com/getsentry/sentry-javascript/pull/3958
+    // https://github.com/getsentry/sentry-javascript/pull/3959
     if (typeof allowUrls !== 'undefined') {
       options.allowUrls = [...allowUrls];
     }
@@ -196,6 +161,15 @@ export default function useMonitoringSentry({
     if (typeof initialScope !== 'undefined') {
       options.initialScope = initialScope;
     }
+    if (typeof integrations !== 'undefined') {
+      if (typeof integrations === 'function') {
+        options.integrations = (
+          oldIntegrations: readonly Readonly<Integration>[],
+        ): Integration[] => [...integrations(oldIntegrations)];
+      } else {
+        options.integrations = [...integrations];
+      }
+    }
     if (typeof logLevel !== 'undefined') {
       options.logLevel = logLevel;
     }
@@ -241,7 +215,6 @@ export default function useMonitoringSentry({
     allowUrls,
     attachStacktrace,
     autoSessionTracking,
-    baseSentryUrl,
     beforeBreadcrumb,
     beforeSend,
     debug,
@@ -252,11 +225,9 @@ export default function useMonitoringSentry({
     enabled,
     environment,
     experiments,
-    history,
     ignoreErrors,
     initialScope,
     integrations,
-    isFullStoryEnabled,
     logLevel,
     maxBreadcrumbs,
     maxValueLength,

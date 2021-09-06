@@ -6,7 +6,7 @@ import Packages from '../../features/packages';
 import Publications from '../../features/publications';
 import Quotes from '../../features/quotes';
 import SpriteSheet2Gif from '../../features/spritesheet2gif';
-import externalRedirect from './routes.util.external-redirect';
+import externalRedirect from './app.util.external-redirect';
 
 export default function AppRoutes(): ReactElement {
   return (
