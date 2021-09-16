@@ -35,6 +35,15 @@ jobs:
   jest:
     needs: install
     runs-on: ubuntu-latest
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -48,6 +57,8 @@ jobs:
         run: yarn
       - name: Jest
         run: yarn jest
+        env:
+          DD_ENV: ci
 
   set-version:
     needs: install

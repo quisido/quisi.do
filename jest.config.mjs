@@ -6,7 +6,7 @@ export default {
   resetModules: true,
   restoreMocks: true,
   roots: ['<rootDir>/src'],
-  testEnvironment: 'jsdom',
+  testEnvironment: '<rootDir>/jest/test-environment.mjs',
   testURL: 'https://charlesstover.com',
   transformIgnorePatterns: ['node_modules/(?!@awsui/components-react)/'],
   collectCoverageFrom: [
@@ -31,7 +31,7 @@ export default {
     '\\.(?:gif|jpg|png)$': '<rootDir>/src/test-utils/mock-image.ts',
   },
   transform: {
-    '.+\\.js$': 'babel-jest',
+    '@awsui-.+\\.[cm]?js$': 'babel-jest',
     '^.+\\.tsx?$': 'ts-jest',
   },
 };
