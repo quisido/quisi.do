@@ -1,0 +1,3 @@
+const DATADOG_CLIENT_TOKEN = 'pubf0c07bd5003d0c4a65a9f129d9e83a3d';
+
+export default DATADOG_CLIENT_TOKEN;
