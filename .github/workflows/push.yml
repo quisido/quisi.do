@@ -264,7 +264,7 @@ jobs:
         run: yarn
       - name: Run Synthetics tests
         run: >
-          datadog-ci synthetics run-tests \
+          yarn datadog-synthetics \
             --apiKey "$DD_API_KEY" \
             --appKey "$DD_APP_KEY" \
             --files "/src/features/**/*.synthetics.json"

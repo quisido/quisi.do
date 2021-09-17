@@ -25,6 +25,7 @@
   "scripts": {
     "build": "react-scripts build",
     "cypress": "cypress run --record",
+    "datadog-synthetics": "datadog-ci synthetics run-tests",
     "eslint": "eslint src",
     "get-version": "ts-node ./scripts/get-version",
     "jest": "jest",
