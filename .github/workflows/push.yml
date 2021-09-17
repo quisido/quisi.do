@@ -35,6 +35,15 @@ jobs:
   jest:
     needs: install
     runs-on: ubuntu-latest
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -48,6 +57,8 @@ jobs:
         run: yarn
       - name: Jest
         run: yarn jest
+        env:
+          DD_ENV: ci
 
   set-version:
     needs: install
@@ -236,6 +247,30 @@ jobs:
             --header "Content-Type:application/json" \
             --request POST \
             "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache"
+
+  datadog-synthetics:
+    needs: cloudflare-purge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn
+      - name: Run Synthetics tests
+        run: >
+          datadog-ci synthetics run-tests \
+            --apiKey "$DD_API_KEY" \
+            --appKey "$DD_APP_KEY" \
+            --files "/src/features/**/*.synthetics.json"
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_APP_KEY: charlesstover.com
 
 on:
   push:
