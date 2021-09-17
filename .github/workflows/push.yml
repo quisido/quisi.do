@@ -248,6 +248,30 @@ jobs:
             --request POST \
             "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache"
 
+  datadog-synthetics:
+    needs: cloudflare-purge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn
+      - name: Run Synthetics tests
+        run: >
+          datadog-ci synthetics run-tests \
+            --apiKey "$DD_API_KEY" \
+            --appKey "$DD_APP_KEY" \
+            --files "/src/features/**/*.synthetics.json"
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_APP_KEY: charlesstover.com
+
 on:
   push:
     branches: [main]
