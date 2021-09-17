@@ -2,7 +2,7 @@ export default function mapTrackingIdToScriptElement(
   trackingId: string,
 ): HTMLScriptElement {
   const script: HTMLScriptElement = document.createElement('script');
-  script.setAttribute('async', 'true');
+  script.setAttribute('async', '');
   script.setAttribute('type', 'text/javascript');
   script.setAttribute(
     'src',
