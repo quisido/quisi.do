@@ -6155,7 +6155,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-@typescript-eslint/types@npm:4.31.1":
+"@typescript-eslint/types@npm:4.31.1":
   version: 4.31.1
   resolution: "@typescript-eslint/types@npm:4.31.1"
   checksum: 08b5cf0d02fbf946a4b10e93279e3253287e4826ee744e7d3f38d7da241aaa6fce2743e448f9cdf36d93c20259e17248e50b9fffdff59e1c878289acca0c2d65
