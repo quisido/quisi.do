@@ -44,6 +44,7 @@
     "@datadog/datadog-ci": "^0.16.2",
     "@fullstory/browser": "^1.4.9",
     "@reduxjs/toolkit": "^1.6.1",
+    "@sentry/browser": "^6.13.2",
     "@sentry/fullstory": "^1.1.5",
     "@sentry/react": "^6.13.2",
     "@sentry/tracing": "^6.13.2",
