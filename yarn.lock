@@ -8528,6 +8528,7 @@ __metadata:
     prettier: ^2.4.1
     react: ^17.0.2
     react-capsule: ^1.0.3
+    react-datadog: ^1.0.0
     react-dom: ^17.0.2
     react-query: ^3.24.4
     react-redux: ^7.2.5
@@ -8535,7 +8536,7 @@ __metadata:
     react-router: ^5.2.1
     react-router-dom: ^5.3.0
     react-scripts: ^4.0.3
-    sentry-react: ^1.0.0
+    sentry-react: ^1.0.1
     ts-jest: ^27.0.5
     ts-node: ^10.2.1
     typescript: ^4.4.3
@@ -19231,6 +19232,18 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"react-datadog@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "react-datadog@npm:1.0.0"
+  dependencies:
+    "@datadog/browser-rum": ^3.6.1
+  peerDependencies:
+    react: ^17.0.0
+    react-dom: ^17.0.0
+  checksum: 130b882981f37ae5e3021aa0a262f6e44835866a1565a954f7141db55c27042b4dd6dd54805856970eb268cbfde2aa199a462f808d2ab13ea6b242a9e181e570
+  languageName: node
+  linkType: hard
+
 "react-dev-utils@npm:^11.0.3":
   version: 11.0.4
   resolution: "react-dev-utils@npm:11.0.4"
@@ -20620,16 +20633,16 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sentry-react@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "sentry-react@npm:1.0.0"
+"sentry-react@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "sentry-react@npm:1.0.1"
   dependencies:
     "@sentry/react": ^6.13.2
     "@sentry/types": ^6.13.2
   peerDependencies:
     react: ^17.0.0
     react-dom: ^17.0.0
-  checksum: 8a06a94bf44bee36079a786b9d4aa68970899f46b3c96d702ee254005c025ec1af9c4c983b09f204380d65d6423bfbaaa6501ddfbe3577ad8b130fe19ed0404c
+  checksum: 0af64eeb11dab539359ddec1c0037f60a7709321de8de5be28b96622644436f014506da0e17c1748845ec7ebf553fd8f9764d4bd176bf930df882d7533a3eed6
   languageName: node
   linkType: hard
 
