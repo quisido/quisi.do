@@ -36,9 +36,9 @@ export default function DataDog({
   beforeSend,
   children,
   clientToken,
+  defaultPrivacyLevel,
   enableExperimentalFeatures,
   env,
-  initialPrivacyLevel,
   intakeApiVersion,
   internalMonitoringApiKey,
   proxyUrl,
@@ -74,6 +74,9 @@ export default function DataDog({
     if (typeof beforeSend !== 'undefined') {
       config.beforeSend = beforeSend;
     }
+    if (typeof defaultPrivacyLevel !== 'undefined') {
+      config.defaultPrivacyLevel = defaultPrivacyLevel;
+    }
     if (typeof enableExperimentalFeatures !== 'undefined') {
       config.enableExperimentalFeatures = [...enableExperimentalFeatures];
     }
@@ -82,9 +85,6 @@ export default function DataDog({
     }
     if (typeof internalMonitoringApiKey !== 'undefined') {
       config.internalMonitoringApiKey = internalMonitoringApiKey;
-    }
-    if (typeof initialPrivacyLevel !== 'undefined') {
-      config.initialPrivacyLevel = initialPrivacyLevel;
     }
     if (typeof intakeApiVersion !== 'undefined') {
       config.intakeApiVersion = intakeApiVersion;
@@ -129,9 +129,9 @@ export default function DataDog({
     applicationId,
     beforeSend,
     clientToken,
+    defaultPrivacyLevel,
     enableExperimentalFeatures,
     env,
-    initialPrivacyLevel,
     intakeApiVersion,
     internalMonitoringApiKey,
     proxyUrl,
