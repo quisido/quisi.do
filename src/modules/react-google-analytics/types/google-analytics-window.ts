@@ -1,4 +1,4 @@
 export default interface GoogleAnalyticsWindow extends Window {
-  dataLayer?: (readonly unknown[])[] | undefined;
+  dataLayer?: IArguments[] | undefined;
   gtag?: (...args: readonly unknown[]) => void;
 }

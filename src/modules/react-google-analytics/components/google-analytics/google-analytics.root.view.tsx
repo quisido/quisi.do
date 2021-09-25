@@ -56,6 +56,7 @@ export default function GoogleAnalytics({
     if (typeof GOOGLE_ANALYTICS_WINDOW.gtag === 'undefined') {
       return;
     }
+
     GOOGLE_ANALYTICS_WINDOW.gtag('config', trackingId);
   }, [trackingId]);
 
