@@ -5061,7 +5061,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/browser@npm:6.13.2, @sentry/browser@npm:^6.13.2":
+"@sentry/browser@npm:6.13.2":
   version: 6.13.2
   resolution: "@sentry/browser@npm:6.13.2"
   dependencies:
@@ -8493,9 +8493,7 @@ __metadata:
     "@datadog/datadog-ci": ^0.16.2
     "@fullstory/browser": ^1.4.9
     "@reduxjs/toolkit": ^1.6.1
-    "@sentry/browser": ^6.13.2
     "@sentry/fullstory": ^1.1.5
-    "@sentry/react": ^6.13.2
     "@sentry/tracing": ^6.13.2
     "@sentry/types": ^6.13.2
     "@testing-library/react": ^12.1.0
