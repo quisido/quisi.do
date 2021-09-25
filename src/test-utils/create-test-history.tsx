@@ -15,7 +15,6 @@ interface Props {
 
 interface State {
   readonly testHistory: History<unknown>;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   readonly TestRouter: ComponentType<PropsWithChildren<unknown>>;
 }
 
@@ -28,7 +27,6 @@ export default function createTestHistory({
   });
 
   return {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     TestRouter: function TestRouter({
       children,
     }: Readonly<PropsWithChildren<unknown>>): ReactElement {

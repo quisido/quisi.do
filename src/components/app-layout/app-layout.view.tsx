@@ -11,7 +11,6 @@ import Notifications from '../../components/notifications';
 import useCustomAppLayout from './app-layout.hook';
 
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   readonly Tools?: ComponentType<unknown>;
   readonly breadcrumbs?: readonly BreadcrumbGroupProps.Item[];
   readonly children: ReactNode;
@@ -27,7 +26,6 @@ interface Props {
 }
 
 export default function CustomAppLayout({
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   Tools,
   breadcrumbs,
   children,

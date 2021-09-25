@@ -3,6 +3,7 @@ import type { ReactElement } from 'react';
 import { QueryClientProvider } from 'react-query';
 import { Provider as ReduxProvider } from 'react-redux';
 import { Router } from 'react-router';
+import Sentry from 'sentry-react';
 import DATADOG_APPLICATION_ID from '../../constants/datadog-application-id';
 import DATADOG_CLIENT_TOKEN from '../../constants/datadog-client-token';
 import DATADOG_SERVICE from '../../constants/datadog-service';
@@ -12,12 +13,10 @@ import QUERY_CLIENT from '../../constants/query-client';
 import STORE from '../../constants/redux-store';
 import SENTRY_DSN from '../../constants/sentry-dsn';
 import SENTRY_INTEGRATIONS from '../../constants/sentry-integrations';
-import SENTRY_ORG from '../../constants/sentry-org';
 import VERSION from '../../constants/version';
 import DataDog from '../../modules/react-datadog';
 import FullStory from '../../modules/react-fullstory';
 import GoogleAnalytics from '../../modules/react-google-analytics';
-import Sentry from '../../modules/react-sentry';
 import Main from './app.view.main';
 
 /*
@@ -46,7 +45,6 @@ export default function App(): ReactElement {
                   dsn={SENTRY_DSN}
                   environment={process.env.NODE_ENV}
                   integrations={SENTRY_INTEGRATIONS}
-                  org={SENTRY_ORG}
                   release={VERSION}
                 >
                   <Main />

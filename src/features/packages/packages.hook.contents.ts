@@ -132,7 +132,6 @@ export default function usePackagesContents(): State {
   }, [filteredItems, paginate, sort]);
 
   useAwsuiTableItemDescription({
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     Component: PackageDescription,
     colSpan: (visibleContent ?? DEFAULT_VISIBLE_CONTENT).length,
     items: visibleItems,

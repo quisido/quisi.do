@@ -26,7 +26,6 @@ const BREADCRUMBS: BreadcrumbGroupProps.Item[] = [
 
 export default function SpriteSheet2Gif(): ReactElement {
   const {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     Tools,
     apiGifResponse,
     dimension,

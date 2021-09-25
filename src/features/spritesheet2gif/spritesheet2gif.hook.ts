@@ -23,7 +23,6 @@ interface ApiGifResponse {
 }
 
 interface State {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   readonly Tools: ComponentType<unknown>;
   readonly apiGifResponse: ApiGifResponse | null;
   readonly asyncConvertEffect: MutableRefObject<Promise<Response> | null>;
@@ -123,7 +122,6 @@ export default function useSpriteSheet2Gif(): State {
   const asyncConvertEffect: MutableRefObject<Promise<Response> | null> =
     useRef(null);
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   const [Tools, setTools] = useState(getDefaultTools);
   const [apiGifResponse, setApiGifResponse] = useState<ApiGifResponse | null>(
     null,
@@ -141,7 +139,6 @@ export default function useSpriteSheet2Gif(): State {
   const [toolsOpen, setToolsOpen] = useState(false);
 
   return {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     Tools,
     apiGifResponse,
     asyncConvertEffect,
