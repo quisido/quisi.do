@@ -1,4 +1,5 @@
 import '@awsui/global-styles/index.css';
+import FullStory from 'fullstory-react';
 import type { ReactElement } from 'react';
 import DataDog from 'react-datadog';
 import { QueryClientProvider } from 'react-query';
@@ -15,7 +16,6 @@ import STORE from '../../constants/redux-store';
 import SENTRY_DSN from '../../constants/sentry-dsn';
 import SENTRY_INTEGRATIONS from '../../constants/sentry-integrations';
 import VERSION from '../../constants/version';
-import FullStory from '../../modules/react-fullstory';
 import GoogleAnalytics from '../../modules/react-google-analytics';
 import Main from './app.view.main';
 
