@@ -3,8 +3,8 @@ import type { SideNavigationProps } from '@awsui/components-react/side-navigatio
 import { useCallback, useMemo } from 'react';
 import Capsule, { useCapsule } from 'react-capsule';
 import { useSideNavigation } from 'use-awsui-router';
-import hasItems from '../../utils/has-items';
-import isExpandable from '../../utils/is-expandable';
+import filterSideNavigationItemsByExpandable from '../../utils/filter-side-navigation-items-by-expandable';
+import filterSideNavigationItemsByHasItems from '../../utils/filter-side-navigation-items-by-has-items';
 import useItems from './navigation.hook.items';
 
 interface State {
@@ -34,7 +34,10 @@ export default function useNavigation(): State {
   const recursiveExpand = useCallback(
     (item: SideNavigationProps.Item): SideNavigationProps.Item => {
       const newItem: SideNavigationProps.Item = { ...item };
-      if (isExpandable(newItem) && expandedMap.has(newItem.text)) {
+      if (
+        filterSideNavigationItemsByExpandable(newItem) &&
+        expandedMap.has(newItem.text)
+      ) {
         const newDefaultExpanded: boolean | undefined = expandedMap.get(
           newItem.text,
         );
@@ -42,7 +45,7 @@ export default function useNavigation(): State {
           newItem.defaultExpanded = newDefaultExpanded;
         }
       }
-      if (hasItems(newItem)) {
+      if (filterSideNavigationItemsByHasItems(newItem)) {
         const newSubItems: SideNavigationProps.Item[] = [];
         for (const subItem of newItem.items) {
           const newSubItem: SideNavigationProps.Item = recursiveExpand(subItem);

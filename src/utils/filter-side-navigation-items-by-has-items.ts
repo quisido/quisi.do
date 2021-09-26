@@ -1,6 +1,6 @@
 import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
 
-export default function hasItems(
+export default function filterSideNavigationItemsByHasItems(
   item: SideNavigationProps.Item,
 ): item is
   | SideNavigationProps.ExpandableLinkGroup
