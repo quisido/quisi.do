@@ -1,9 +1,11 @@
 import { render } from '@testing-library/react';
+import expect from 'expect';
 import GOOGLE_ANALYTICS_WINDOW from '../../constants/google-analytics-window';
 import GoogleAnalytics from './google-analytics.root.view';
 
 const FIRST = 0;
 const TEST_TRACKING_ID = 'UA-123456789-1';
+const TWO = 2;
 
 describe('GoogleAnalytics', (): void => {
   it('should render children', (): void => {
@@ -44,6 +46,6 @@ describe('GoogleAnalytics', (): void => {
     );
 
     expect(GOOGLE_ANALYTICS_WINDOW.dataLayer).toBeDefined();
-    expect(GOOGLE_ANALYTICS_WINDOW.dataLayer).toHaveLength(2);
+    expect(GOOGLE_ANALYTICS_WINDOW.dataLayer).toHaveLength(TWO);
   });
 });

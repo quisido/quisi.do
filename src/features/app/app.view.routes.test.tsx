@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import expect from 'expect';
 import createTestHistory from '../../test-utils/create-test-history';
 import Routes from './app.view.routes';
 
@@ -23,7 +24,6 @@ describe('App', (): void => {
       wrapper: TestRouter,
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     expect(window.location.href).toBe(
       'https://charles-stover.medium.com/become-the-junior-developer-that-companies-want-to-hire-c539f4c236d8',
     );

@@ -1,3 +1,4 @@
+import expect from 'expect';
 import mapTrackingIdToScriptElement from './map-tracking-id-to-script-element';
 
 const TEST_TRACKING_ID = 'UA-123456789-1';
