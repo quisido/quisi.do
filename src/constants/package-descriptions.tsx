@@ -136,6 +136,10 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
     ],
     ['use-key-down', 'Listen to key down events with React hooks.'],
     ['use-mouse-move', 'Listen to mouse move events with a React hook.'],
+    [
+      'use-mui',
+      'By instantiating your components’ local state with this library, you can save repetitive boilerplate surrounding state instantiation and event handlers.',
+    ],
     ['use-offline', 'Listen to network connectivity events with a React hook.'],
     [
       'use-page-transition',

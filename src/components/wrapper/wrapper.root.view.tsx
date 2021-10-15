@@ -8,7 +8,7 @@ import Footer from '../../components/footer';
 import Navigation from '../../components/navigation';
 import Notifications from '../../components/notifications';
 import type Breadcrumb from '../../types/breadcrumb';
-import useCustomAppLayout from './app-layout.hook';
+import useWrapper from './wrapper.root.hook';
 
 interface Props {
   readonly Tools?: ComponentType<unknown>;
@@ -27,7 +27,7 @@ interface Props {
 
 const DEFAULT_BREADCRUMBS: readonly Breadcrumb[] = Object.freeze([]);
 
-export default function CustomAppLayout({
+export default function Wrapper({
   Tools,
   breadcrumbs = DEFAULT_BREADCRUMBS,
   children,
@@ -44,7 +44,7 @@ export default function CustomAppLayout({
     navigationOpen,
     ref,
     toolsOpen,
-  } = useCustomAppLayout({
+  } = useWrapper({
     controlledToolsOpen,
     onToolsChange,
   });

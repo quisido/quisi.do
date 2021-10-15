@@ -4,8 +4,8 @@ import Header from '@awsui/components-react/header';
 import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
-import AppLayout from '../../components/app-layout';
 import ViewResumeButton from '../../components/view-resume-button';
+import Wrapper from '../../components/wrapper';
 import PROJECTS from '../../constants/projects';
 import avatar from '../../images/charles-stover.jpg';
 import mapComponentToPropMapper from '../../map/map-component-to-prop-mapper';
@@ -34,7 +34,7 @@ export default function Home(): ReactElement {
   const { avatarAlt } = useHome();
 
   return (
-    <AppLayout toolsHide>
+    <Wrapper toolsHide>
       <SpaceBetween size="l">
         <Container
           header={
@@ -98,6 +98,6 @@ export default function Home(): ReactElement {
           </ul>
         </Container>
       </SpaceBetween>
-    </AppLayout>
+    </Wrapper>
   );
 }

@@ -7,7 +7,7 @@ import Link from '@awsui/components-react/link';
 import Select from '@awsui/components-react/select';
 import SpaceBetween from '@awsui/components-react/space-between';
 import type { ReactElement } from 'react';
-import AppLayout from '../../components/app-layout';
+import Wrapper from '../../components/wrapper';
 import type Breadcrumb from '../../types/breadcrumb';
 import validateString from '../../utils/validate-string';
 import ApiGifResponse from './components/api-gif-response';
@@ -57,7 +57,7 @@ export default function SpriteSheet2Gif(): ReactElement {
   } = useSpriteSheet2Gif();
 
   return (
-    <AppLayout
+    <Wrapper
       Tools={Tools}
       breadcrumbs={BREADCRUMBS}
       contentType="wizard"
@@ -189,6 +189,6 @@ export default function SpriteSheet2Gif(): ReactElement {
         </Container>
         {apiGifResponse && <ApiGifResponse {...apiGifResponse} />}
       </SpaceBetween>
-    </AppLayout>
+    </Wrapper>
   );
 }

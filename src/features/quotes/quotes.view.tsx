@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import AppLayout from '../../components/app-layout';
+import Wrapper from '../../components/wrapper';
 import useQuotes from './quotes.hook';
 import Contents from './quotes.suspense.contents';
 
@@ -7,8 +7,8 @@ export default function Quotes(): ReactElement {
   const { breadcrumbs } = useQuotes();
 
   return (
-    <AppLayout breadcrumbs={breadcrumbs} toolsHide>
+    <Wrapper breadcrumbs={breadcrumbs} toolsHide>
       <Contents />
-    </AppLayout>
+    </Wrapper>
   );
 }
