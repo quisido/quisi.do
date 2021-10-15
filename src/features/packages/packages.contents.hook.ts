@@ -16,15 +16,15 @@ import {
 import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
 import useNpmDownloads from '../../hooks/use-npm-downloads';
 import type ReadonlyTableSortingEvent from '../../types/readonly-table-sorting-event';
+import useColumnDefinitions from './packages.contents.hook.column-definitions';
+import useCountText from './packages.contents.hook.count-text';
+import usePageSizePreference from './packages.contents.hook.page-size-preference';
+import useVisibleContentPreference from './packages.contents.hook.visible-content-preference';
+import useWrapLinesPreference from './packages.contents.hook.wrap-lines-preference';
+import PackageDescription from './packages.description.view';
 import filterDefaultPackage from './packages.filter.default-package';
-import useColumnDefinitions from './packages.hook.column-definitions';
-import useCountText from './packages.hook.count-text';
-import usePageSizePreference from './packages.hook.page-size-preference';
-import useVisibleContentPreference from './packages.hook.visible-content-preference';
-import useWrapLinesPreference from './packages.hook.wrap-lines-preference';
 import mapNpmDownloadsEntryToItem from './packages.map.npm-downloads-entry-to-item';
 import type Item from './packages.type.item';
-import PackageDescription from './packages.view.description';
 
 interface State {
   readonly cancelLabel: string;

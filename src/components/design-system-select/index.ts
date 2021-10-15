@@ -1,1 +1,1 @@
-export { default } from './design-system-select.view';
+export { default } from './design-system-select.root.view';

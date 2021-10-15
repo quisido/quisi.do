@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import NumberFormat from 'number-format-react';
-import useNumberFormat from './number-format.hook';
+import useNumberFormat from './number-format.root.hook';
 
 interface Props {
   readonly children: number;

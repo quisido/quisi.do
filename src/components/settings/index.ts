@@ -1,1 +1,1 @@
-export { default } from './settings.view';
+export { default } from './settings.root.view';

@@ -1,1 +1,1 @@
-export { default } from './footer.view';
+export { default } from './footer.root.view';

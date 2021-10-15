@@ -1,7 +1,7 @@
 import type { ReactElement, ReactNode } from 'react';
 import PACKAGE_DESCRIPTIONS from '../../constants/package-descriptions';
+import Paragraph from './packages.description-paragraph.view';
 import type Item from './packages.type.item';
-import Paragraph from './packages.view.description-paragraph';
 
 const mapParagraphToElement = (
   paragraph: ReactNode,

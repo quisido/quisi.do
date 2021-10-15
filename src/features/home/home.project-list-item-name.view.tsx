@@ -10,13 +10,13 @@ export default function HomeProjectListItemName({
   children,
   url,
 }: Props): ReactElement {
-  if (typeof url === 'string') {
-    return (
-      <Link external fontSize="heading-l" href={url} target="_blank">
-        {children}
-      </Link>
-    );
+  if (typeof url !== 'string') {
+    return <>{children}</>;
   }
 
-  return <>{children}</>;
+  return (
+    <Link external fontSize="heading-l" href={url} target="_blank">
+      {children}
+    </Link>
+  );
 }

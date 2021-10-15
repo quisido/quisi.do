@@ -1,1 +1,1 @@
-export { default } from './view-resume-button.view';
+export { default } from './view-resume-button.root.view';

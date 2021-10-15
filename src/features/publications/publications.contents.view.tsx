@@ -8,8 +8,8 @@ import type { ReactElement } from 'react';
 import NumberFormat from '../../components/number-format';
 import CARD_DEFINITION from './publications.constant.card-definition';
 import MINIMUM_VIEWS from './publications.constant.minimum-views';
-import usePublicationsContents from './publications.hook.contents';
-import Header from './publications.view.header';
+import usePublicationsContents from './publications.contents.hook';
+import Header from './publications.header.view';
 
 export default function PublicationsContents(): ReactElement {
   const {

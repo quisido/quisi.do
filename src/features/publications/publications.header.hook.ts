@@ -3,7 +3,7 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import type Sort from './publications.constant.sort';
-import useSortOptions from './publications.hook.sort-options';
+import useSortOptions from './publications.header.hook.sort-options';
 
 interface Props {
   readonly sort: Sort;

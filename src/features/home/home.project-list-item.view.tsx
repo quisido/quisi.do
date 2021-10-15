@@ -1,8 +1,8 @@
 import Box from '@awsui/components-react/box';
 import type { ReactElement } from 'react';
 import type Project from '../../types/project';
-import useProjectListItem from './home.view.project-list-item.hook';
-import Name from './home.view.project-list-item-name';
+import useProjectListItem from './home.project-list-item.hook';
+import Name from './home.project-list-item-name.view';
 
 export default function HomeProjectListItem({
   icon,

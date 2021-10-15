@@ -1,1 +1,1 @@
-export { default } from './language-select.view';
+export { default } from './language-select.root.view';

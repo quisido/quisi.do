@@ -11,6 +11,6 @@ export default function Design<P>({
   components,
   props,
 }: Readonly<Props<P>>): ReactElement {
-  const Component = useDesign(components);
+  const Component: ComponentType<P> = useDesign(components);
   return <Component {...props} />;
 }

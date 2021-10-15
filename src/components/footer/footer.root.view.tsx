@@ -2,8 +2,8 @@ import type { BoxProps } from '@awsui/components-react/box';
 import Box from '@awsui/components-react/box';
 import type { ReactElement } from 'react';
 import validateString from '../../utils/validate-string';
-import styles from './footer.module.scss';
-import Link from './footer.view.link';
+import styles from './footer.root.module.scss';
+import Link from './footer.link.view';
 
 const rootClassName: string = validateString(styles.root);
 

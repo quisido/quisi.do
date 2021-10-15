@@ -1,1 +1,1 @@
-export { default } from './emphasize-substring.view';
+export { default } from './emphasize-substring.root.view';

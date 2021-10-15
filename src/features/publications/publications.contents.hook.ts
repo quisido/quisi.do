@@ -8,8 +8,8 @@ import useDevStats from '../../hooks/use-dev-stats';
 import useMediumStats from '../../hooks/use-medium-stats';
 import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-event';
 import Sort from './publications.constant.sort';
+import useItems from './publications.contents.hook.items';
 import filterItemsByMinimumViews from './publications.filter.items-by-minimum-views';
-import useItems from './publications.hook.items';
 import mapSortToFunction from './publications.map.sort-to-function';
 import type Item from './publications.type.item';
 

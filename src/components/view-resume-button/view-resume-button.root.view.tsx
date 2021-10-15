@@ -2,7 +2,7 @@ import type { ButtonProps } from '@awsui/components-react/button';
 import Button from '@awsui/components-react/button';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
-import useViewResumeButton from './view-resume-button.hook';
+import useViewResumeButton from './view-resume-button.root.hook';
 
 const RESUME_HREF = '/resume/2021-07/charles-stover-resume.pdf';
 

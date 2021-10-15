@@ -18,11 +18,12 @@ export default function EmphasizeSubstring({
     return <>{children}</>;
   }
 
+  const end: number = index + length;
   return (
     <>
       {children.substring(START, index)}
-      <strong>{children.substring(index, index + length)}</strong>
-      {children.substring(index + length)}
+      <strong>{children.substring(index, end)}</strong>
+      {children.substring(end)}
     </>
   );
 }

@@ -1,7 +1,7 @@
 import Box from '@awsui/components-react/box';
 import type { PropsWithChildren, ReactElement } from 'react';
 import validateString from '../../utils/validate-string';
-import styles from './packages.view.description-paragraph.module.scss';
+import styles from './packages.description-paragraph.module.scss';
 
 const className: string = validateString(styles.root);
 

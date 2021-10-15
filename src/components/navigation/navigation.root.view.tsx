@@ -4,8 +4,8 @@ import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { memo } from 'react';
 import validateString from '../../utils/validate-string';
-import useNavigation from './navigation.hook';
-import styles from './navigation.module.scss';
+import useNavigation from './navigation.root.hook';
+import styles from './navigation.root.module.scss';
 
 const sideNavigationClassName: string = validateString(styles.sideNavigation);
 

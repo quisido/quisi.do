@@ -7,8 +7,8 @@ import type { ReactElement } from 'react';
 import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-event';
 import validateString from '../../utils/validate-string';
 import type Sort from './publications.constant.sort';
-import usePublicationsHeader from './publications.hook.header';
-import styles from './publications.view.header.module.scss';
+import usePublicationsHeader from './publications.header.hook';
+import styles from './publications.header.module.scss';
 
 interface Props {
   readonly onSortChange: (event: ReadonlySelectChangeEvent) => void;
