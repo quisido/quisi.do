@@ -3,7 +3,7 @@ import type { FlashbarProps } from '@awsui/components-react/flashbar';
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { ComponentType } from 'react';
 import { useCallback, useMemo, useState } from 'react';
-import HeaderInfo from './components/header-info';
+import HeaderInfo from './spritesheet2gif.header-info.view';
 
 interface State {
   readonly Help: ComponentType<unknown>;
@@ -41,7 +41,7 @@ export default function useSpritesheet2Gif(): State {
     }, []),
 
     handleHelpRequest: useCallback((NewHelp: ComponentType<unknown>): void => {
-      setHelp(NewHelp);
+      setHelp((): ComponentType<unknown> => NewHelp);
       setHelpOpen(true);
     }, []),
 

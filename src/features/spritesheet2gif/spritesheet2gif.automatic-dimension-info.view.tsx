@@ -2,7 +2,7 @@ import Box from '@awsui/components-react/box';
 import HelpPanel from '@awsui/components-react/help-panel';
 import type { ReactElement } from 'react';
 
-export default function AutomaticDimensionInfo(): ReactElement {
+export default function Spritesheet2GifAutomaticDimensionInfo(): ReactElement {
   return (
     <HelpPanel header="Automatic dimension">
       <Box variant="p">

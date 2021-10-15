@@ -4,11 +4,11 @@ import type { SelectProps } from '@awsui/components-react/select';
 import type { ChangeEvent, ComponentType, MutableRefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-event';
-import AutomaticDimensionInfo from './components/automatic-dimension-info';
-import AutomaticDirectionInfo from './components/automatic-direction-info';
-import HeaderInfo from './components/header-info';
-import MatteInfo from './components/matte-info';
-import Direction from './constants/direction';
+import AutomaticDimensionInfo from './spritesheet2gif.automatic-dimension-info.view';
+import AutomaticDirectionInfo from './spritesheet2gif.automatic-direction-info.view';
+import Direction from './spritesheet2gif.constant.direction';
+import HeaderInfo from './spritesheet2gif.header-info.view';
+import MatteInfo from './spritesheet2gif.matte-info.view';
 
 interface ApiErrorResponse {
   readonly message: string;

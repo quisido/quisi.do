@@ -2,7 +2,7 @@ import Box from '@awsui/components-react/box';
 import HelpPanel from '@awsui/components-react/help-panel';
 import type { ReactElement } from 'react';
 
-export default function AutomaticDirectionInfo(): ReactElement {
+export default function Spritesheet2GifAutomaticDirectionInfo(): ReactElement {
   return (
     <HelpPanel header="Automatic direction">
       <Box variant="p">

@@ -2,7 +2,7 @@ import Box from '@awsui/components-react/box';
 import HelpPanel from '@awsui/components-react/help-panel';
 import type { ReactElement } from 'react';
 
-export default function MatteInfo(): ReactElement {
+export default function Spritesheet2GifMatteInfo(): ReactElement {
   return (
     <HelpPanel header="Matte">
       <Box variant="p">
