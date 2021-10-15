@@ -5,7 +5,7 @@ interface State {
   readonly language: Language;
 }
 
-export default function useAppMain(): State {
+export default function useI18nProvider(): State {
   return {
     language: useLanguage(),
   };

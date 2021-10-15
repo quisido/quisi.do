@@ -6,6 +6,7 @@ import { QueryClientProvider } from 'react-query';
 import { Provider as ReduxProvider } from 'react-redux';
 import { Router } from 'react-router';
 import Sentry from 'sentry-react';
+import Theme from '../../components/theme';
 import DATADOG_APPLICATION_ID from '../../constants/datadog-application-id';
 import DATADOG_CLIENT_TOKEN from '../../constants/datadog-client-token';
 import DATADOG_SERVICE from '../../constants/datadog-service';
@@ -17,7 +18,8 @@ import SENTRY_DSN from '../../constants/sentry-dsn';
 import SENTRY_INTEGRATIONS from '../../constants/sentry-integrations';
 import VERSION from '../../constants/version';
 import GoogleAnalytics from '../../modules/react-google-analytics';
-import Main from './app.main.view';
+import I18nProvider from './app.i18n-provider.view';
+import Routes from './app.routes.view';
 
 /*
 The App root component mounts context providers for the whole application.
@@ -40,16 +42,20 @@ export default function App(): ReactElement {
         <GoogleAnalytics trackingId="UA-5966978-4">
           <QueryClientProvider client={QUERY_CLIENT}>
             <ReduxProvider store={REDUX_STORE}>
-              <Router history={HISTORY}>
-                <Sentry
-                  dsn={SENTRY_DSN}
-                  environment={process.env.NODE_ENV}
-                  integrations={SENTRY_INTEGRATIONS}
-                  release={VERSION}
-                >
-                  <Main />
-                </Sentry>
-              </Router>
+              <I18nProvider>
+                <Router history={HISTORY}>
+                  <Sentry
+                    dsn={SENTRY_DSN}
+                    environment={process.env.NODE_ENV}
+                    integrations={SENTRY_INTEGRATIONS}
+                    release={VERSION}
+                  >
+                    <Theme>
+                      <Routes />
+                    </Theme>
+                  </Sentry>
+                </Router>
+              </I18nProvider>
             </ReduxProvider>
           </QueryClientProvider>
         </GoogleAnalytics>
