@@ -1,4 +1,3 @@
-import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
 import Button from '@awsui/components-react/button';
 import Container from '@awsui/components-react/container';
 import FormField from '@awsui/components-react/form-field';
@@ -9,6 +8,7 @@ import Select from '@awsui/components-react/select';
 import SpaceBetween from '@awsui/components-react/space-between';
 import type { ReactElement } from 'react';
 import AppLayout from '../../components/app-layout';
+import type Breadcrumb from '../../types/breadcrumb';
 import validateString from '../../utils/validate-string';
 import ApiGifResponse from './components/api-gif-response';
 import useSpriteSheet2Gif from './spritesheet2gif.hook';
@@ -17,10 +17,10 @@ import styles from './spritesheet2gif.module.scss';
 const headerClassName: string = validateString(styles.header);
 const matteClassName: string = validateString(styles.matte);
 
-const BREADCRUMBS: BreadcrumbGroupProps.Item[] = [
+const BREADCRUMBS: Breadcrumb[] = [
   {
-    href: '/spritesheet2gif',
-    text: 'Sprite sheet to GIF converter',
+    children: 'Sprite sheet to GIF converter',
+    path: '/spritesheet2gif',
   },
 ];
 

@@ -1,1 +1,1 @@
-export { default } from './breadcrumbs.view';
+export { default } from './breadcrumbs.root.view';

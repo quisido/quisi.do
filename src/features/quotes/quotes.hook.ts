@@ -1,10 +1,10 @@
-import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
+import type Breadcrumb from '../../types/breadcrumb';
 
 interface State {
-  readonly breadcrumbs: readonly BreadcrumbGroupProps.Item[];
+  readonly breadcrumbs: readonly Breadcrumb[];
 }
 
 export default function useQuotes(): State {
@@ -12,10 +12,10 @@ export default function useQuotes(): State {
 
   return {
     breadcrumbs: useMemo(
-      (): readonly BreadcrumbGroupProps.Item[] => [
+      (): readonly Breadcrumb[] => [
         {
-          href: '/quotes',
-          text: translate('Quotes') ?? '...',
+          children: translate('Quotes') ?? '...',
+          path: '/quotes',
         },
       ],
       [translate],

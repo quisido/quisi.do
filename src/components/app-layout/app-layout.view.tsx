@@ -1,6 +1,5 @@
 import type { AppLayoutProps } from '@awsui/components-react/app-layout';
 import AppLayout from '@awsui/components-react/app-layout';
-import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
 import type { FlashbarProps } from '@awsui/components-react/flashbar';
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { ComponentType, ReactElement, ReactNode } from 'react';
@@ -8,11 +7,12 @@ import Breadcrumbs from '../../components/breadcrumbs';
 import Footer from '../../components/footer';
 import Navigation from '../../components/navigation';
 import Notifications from '../../components/notifications';
+import type Breadcrumb from '../../types/breadcrumb';
 import useCustomAppLayout from './app-layout.hook';
 
 interface Props {
   readonly Tools?: ComponentType<unknown>;
-  readonly breadcrumbs?: readonly BreadcrumbGroupProps.Item[];
+  readonly breadcrumbs?: readonly Breadcrumb[];
   readonly children: ReactNode;
   readonly contentType?: AppLayoutProps.ContentType;
   readonly notifications?: readonly FlashbarProps.MessageDefinition[];
@@ -25,9 +25,11 @@ interface Props {
   ) => void;
 }
 
+const DEFAULT_BREADCRUMBS: readonly Breadcrumb[] = Object.freeze([]);
+
 export default function CustomAppLayout({
   Tools,
-  breadcrumbs,
+  breadcrumbs = DEFAULT_BREADCRUMBS,
   children,
   contentType,
   notifications,

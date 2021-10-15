@@ -1,20 +1,17 @@
 import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
 import BreadcrumbGroup from '@awsui/components-react/breadcrumb-group';
 import type { ReactElement } from 'react';
-import useBreadcrumbs from './breadcrumbs.hook';
+import type Breadcrumb from '../../types/breadcrumb';
+import useAwsBreadcrumbs from './breadcrumbs.aws.hook';
 
 interface Props {
-  readonly children: readonly BreadcrumbGroupProps.Item[] | undefined;
+  readonly children: readonly Readonly<Breadcrumb>[];
 }
 
-const DEFAULT_CHILDREN: readonly BreadcrumbGroupProps.Item[] = Object.freeze(
-  [],
-);
-
-export default function Breadcrumbs({
-  children = DEFAULT_CHILDREN,
-}: Props): ReactElement {
-  const { ariaLabel, handleFollow, items } = useBreadcrumbs(children);
+export default function AwsBreadcrumbs({
+  children,
+}: Readonly<Props>): ReactElement {
+  const { ariaLabel, handleFollow, items } = useAwsBreadcrumbs(children);
 
   // Workaround until AWS UI supports TypeScript 4.4 exact optional properties.
   // https://github.com/aws/awsui-documentation/issues/14

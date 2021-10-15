@@ -1,12 +1,14 @@
 import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
-import { useMemo } from 'react';
 import { useBreadcrumbGroup } from 'use-awsui-router';
+import useParamsMemo from 'use-params-memo';
+import type Breadcrumb from '../../types/breadcrumb';
+import mapBreadcrumbsToAwsBreadcrumbs from './breadcrumbs.util.map-breadcrumbs-to-aws-breadcrumbs';
 
 interface State {
   readonly ariaLabel: string | undefined;
-  readonly items: BreadcrumbGroupProps.Item[];
+  readonly items: readonly BreadcrumbGroupProps.Item[];
   readonly handleFollow: (
     event: Readonly<
       CustomEvent<
@@ -18,15 +20,8 @@ interface State {
   ) => void;
 }
 
-const DEFAULT_ITEMS: BreadcrumbGroupProps.Item[] = [
-  {
-    text: 'CharlesStover.com',
-    href: '/',
-  },
-];
-
-export default function useBreadcrumbs(
-  breadcrumbs: readonly Readonly<BreadcrumbGroupProps.Item>[],
+export default function useAwsBreadcrumbs(
+  breadcrumbs: readonly Readonly<Breadcrumb>[],
 ): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
@@ -37,10 +32,6 @@ export default function useBreadcrumbs(
   return {
     ariaLabel: translate('Breadcrumbs'),
     handleFollow,
-
-    items: useMemo(
-      (): BreadcrumbGroupProps.Item[] => [...DEFAULT_ITEMS, ...breadcrumbs],
-      [breadcrumbs],
-    ),
+    items: useParamsMemo(mapBreadcrumbsToAwsBreadcrumbs, [breadcrumbs]),
   };
 }

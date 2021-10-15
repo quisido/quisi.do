@@ -1,13 +1,13 @@
-import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
 import type { FlashbarProps } from '@awsui/components-react/flashbar';
 import type { TranslateFunction } from 'lazy-i18n';
 import I18n, { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import useNpmDownloads from '../../hooks/use-npm-downloads';
 import mapUnknownToString from '../../map/map-unknown-to-string';
+import type Breadcrumb from '../../types/breadcrumb';
 
 interface State {
-  readonly breadcrumbs: readonly BreadcrumbGroupProps.Item[];
+  readonly breadcrumbs: readonly Breadcrumb[];
   readonly notifications: readonly FlashbarProps.MessageDefinition[];
 }
 
@@ -18,10 +18,10 @@ export default function usePackages(): State {
 
   return {
     breadcrumbs: useMemo(
-      (): BreadcrumbGroupProps.Item[] => [
+      (): readonly Breadcrumb[] => [
         {
-          href: '/packages',
-          text: translate('Packages') ?? '...',
+          children: translate('Packages') ?? '...',
+          path: '/packages',
         },
       ],
       [translate],
