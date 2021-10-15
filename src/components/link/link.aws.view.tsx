@@ -1,4 +1,5 @@
-import Link, { LinkProps } from '@awsui/components-react/link';
+import type { LinkProps } from '@awsui/components-react/link';
+import Link from '@awsui/components-react/link';
 import type { ReactElement, ReactNode } from 'react';
 
 interface Props extends Omit<LinkProps, 'href'> {
@@ -10,7 +11,7 @@ export default function AwsLink({
   children,
   path,
   ...props
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   return (
     <Link {...props} href={path}>
       {children}
