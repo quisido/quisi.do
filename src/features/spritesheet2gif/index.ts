@@ -1,1 +1,1 @@
-export { default } from './spritesheet2gif.suspense';
+export { default } from './spritesheet2gif.root.view';

@@ -1,5 +1,3 @@
-import type { AppLayoutProps } from '@awsui/components-react/app-layout';
-import type { FlashbarProps } from '@awsui/components-react/flashbar';
 import type { InputProps } from '@awsui/components-react/input';
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { SelectProps } from '@awsui/components-react/select';
@@ -22,8 +20,14 @@ interface ApiGifResponse {
   readonly width: number;
 }
 
+interface Props {
+  readonly onError: (error: Readonly<Error>) => void;
+  readonly onErrorDismiss: () => void;
+  readonly onHelpDismiss: () => void;
+  readonly onHelpRequest: (Help: ComponentType<unknown>) => void;
+}
+
 interface State {
-  readonly Tools: ComponentType<unknown>;
   readonly apiGifResponse: ApiGifResponse | null;
   readonly asyncConvertEffect: MutableRefObject<Promise<Response> | null>;
   readonly dimension: string;
@@ -40,11 +44,9 @@ interface State {
   readonly isDimensionInfo: boolean;
   readonly isDirectionInfo: boolean;
   readonly matte: string;
-  readonly notifications: FlashbarProps.MessageDefinition[];
   readonly perFrameOptions: SelectProps.Options;
   readonly selectedDirectionOption: SelectProps.Option;
   readonly selectedPerFrameOption: SelectProps.Option;
-  readonly toolsOpen: boolean;
   readonly handleDimensionChange: (
     event: Readonly<
       NonCancelableCustomEvent<Readonly<InputProps.ChangeDetail>>
@@ -66,19 +68,12 @@ interface State {
     // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     event: ChangeEvent<HTMLInputElement>,
   ) => void;
-  readonly handleToolsChange: (
-    event: Readonly<
-      NonCancelableCustomEvent<Readonly<AppLayoutProps.ChangeDetail>>
-    >,
-  ) => void;
 }
 
 const DEFAULT_DIMENSION = 0;
 const DEFAULT_DURATION = 80;
 const FIRST = 0;
 const ZERO = 0;
-
-const getDefaultTools = (): ComponentType<unknown> => HeaderInfo;
 
 const isApiErrorResponse = (value: unknown): value is ApiErrorResponse =>
   typeof value === 'object' &&
@@ -118,28 +113,29 @@ const PER_FRAME_OPTIONS: SelectProps.Options = [
   },
 ];
 
-export default function useSpriteSheet2Gif(): State {
+export default function useSpriteSheet2GifContents({
+  onError,
+  onErrorDismiss,
+  onHelpDismiss,
+  onHelpRequest,
+}: Readonly<Props>): State {
   const asyncConvertEffect: MutableRefObject<Promise<Response> | null> =
     useRef(null);
 
-  const [Tools, setTools] = useState(getDefaultTools);
   const [apiGifResponse, setApiGifResponse] = useState<ApiGifResponse | null>(
     null,
   );
   const [dimension, setDimension] = useState(DEFAULT_DIMENSION);
   const [direction, setDirection] = useState<Direction>(Direction.Automatic);
   const [duration, setDuration] = useState(DEFAULT_DURATION);
-  const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [matte, setMatte] = useState('#000000');
   const [perFrame, setPerFrame] = useState(true);
   const [spriteSheetImageFile, setSpriteSheetImageFile] = useState<File | null>(
     null,
   );
-  const [toolsOpen, setToolsOpen] = useState(false);
 
   return {
-    Tools,
     apiGifResponse,
     asyncConvertEffect,
     dimension: dimension.toString(),
@@ -150,7 +146,6 @@ export default function useSpriteSheet2Gif(): State {
     isDirectionInfo: direction === Direction.Automatic,
     matte,
     perFrameOptions: PER_FRAME_OPTIONS,
-    toolsOpen,
 
     dimensionDescription: useMemo((): string => {
       return 'Use zero for square sprites.';
@@ -202,15 +197,26 @@ export default function useSpriteSheet2Gif(): State {
           throw new Error('Invalid API response.');
         }
         setApiGifResponse(apiResponse);
-        setError(null);
+        onErrorDismiss();
       } catch (err: unknown) {
         setApiGifResponse(null);
-        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-        setError(err as Error);
+        if (!(err instanceof Error)) {
+          throw new Error(`Expected an error, but received ${typeof err}`);
+        }
+        onError(err);
       } finally {
         setIsLoading(false);
       }
-    }, [dimension, direction, duration, matte, perFrame, spriteSheetImageFile]),
+    }, [
+      dimension,
+      direction,
+      duration,
+      matte,
+      onError,
+      onErrorDismiss,
+      perFrame,
+      spriteSheetImageFile,
+    ]),
 
     handleDimensionChange: useCallback(
       (
@@ -229,11 +235,11 @@ export default function useSpriteSheet2Gif(): State {
     ),
 
     handleDimensionInfoFollow: useCallback((): void => {
-      if (direction === Direction.Automatic) {
-        setTools((): ComponentType<unknown> => AutomaticDimensionInfo);
-        setToolsOpen(true);
+      if (direction !== Direction.Automatic) {
+        return;
       }
-    }, [direction]),
+      onHelpRequest(AutomaticDimensionInfo);
+    }, [direction, onHelpRequest]),
 
     handleDirectionChange: useCallback(
       (e: ReadonlySelectChangeEvent): void => {
@@ -241,22 +247,24 @@ export default function useSpriteSheet2Gif(): State {
         const newDirection: Direction = e.detail.selectedOption
           .value as Direction;
         setDirection(newDirection);
+        onHelpDismiss();
+        /*
         if (
           newDirection !== Direction.Automatic &&
-          (Tools === AutomaticDirectionInfo || Tools === AutomaticDimensionInfo)
+          (Help === AutomaticDirectionInfo || Help === AutomaticDimensionInfo)
         ) {
-          setToolsOpen(false);
+          onHelpDismiss();
         }
+        */
       },
-      [Tools],
+      [onHelpDismiss],
     ),
 
     handleDirectionInfoFollow: useCallback((): void => {
       if (direction === Direction.Automatic) {
-        setTools((): ComponentType<unknown> => AutomaticDirectionInfo);
-        setToolsOpen(true);
+        onHelpRequest(AutomaticDirectionInfo);
       }
-    }, [direction]),
+    }, [direction, onHelpRequest]),
 
     handleDurationChange: useCallback(
       (
@@ -275,9 +283,8 @@ export default function useSpriteSheet2Gif(): State {
     ),
 
     handleHeaderInfoFollow: useCallback((): void => {
-      setTools((): ComponentType<unknown> => HeaderInfo);
-      setToolsOpen(true);
-    }, []),
+      onHelpRequest(HeaderInfo);
+    }, [onHelpRequest]),
 
     handleMatteChange: useCallback(
       (
@@ -291,9 +298,8 @@ export default function useSpriteSheet2Gif(): State {
     ),
 
     handleMatteInfoFollow: useCallback((): void => {
-      setTools((): ComponentType<unknown> => MatteInfo);
-      setToolsOpen(true);
-    }, []),
+      onHelpRequest(MatteInfo);
+    }, [onHelpRequest]),
 
     handlePerFrameChange: useCallback((e: ReadonlySelectChangeEvent): void => {
       setPerFrame(e.detail.selectedOption.value === 'true');
@@ -315,34 +321,6 @@ export default function useSpriteSheet2Gif(): State {
       },
       [],
     ),
-
-    handleToolsChange: useCallback(
-      (
-        e: Readonly<
-          NonCancelableCustomEvent<Readonly<AppLayoutProps.ChangeDetail>>
-        >,
-      ): void => {
-        setToolsOpen(e.detail.open);
-      },
-      [],
-    ),
-
-    notifications: useMemo((): FlashbarProps.MessageDefinition[] => {
-      const newNotifications: FlashbarProps.MessageDefinition[] = [];
-      if (error !== null) {
-        newNotifications.push({
-          content: error.message,
-          dismissLabel: 'Dismiss',
-          dismissible: true,
-          header: 'An error occurred.',
-          type: 'error',
-          onDismiss(): void {
-            setError(null);
-          },
-        });
-      }
-      return newNotifications;
-    }, [error]),
 
     selectedDirectionOption: useMemo((): SelectProps.Option => {
       const findSelectedDirectionOption = ({
