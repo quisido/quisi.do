@@ -102,7 +102,6 @@
     "@typescript-eslint/no-unnecessary-type-constraint": "error",
     "@typescript-eslint/no-unused-expressions": "error",
     "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-unused-vars-experimental": "error",
     "@typescript-eslint/no-use-before-define": "error",
     "@typescript-eslint/no-useless-constructor": "error",
     "@typescript-eslint/no-var-requires": "error",

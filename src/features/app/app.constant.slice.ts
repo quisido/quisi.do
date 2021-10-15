@@ -10,4 +10,4 @@ const APP_SLICE = createSlice({
 
 export default APP_SLICE;
 
-export const { setDarkMode, setLanguage } = APP_SLICE.actions;
+export const { setDarkMode, setDesignSystem, setLanguage } = APP_SLICE.actions;

@@ -11,8 +11,14 @@ To install this repository to begin local development, use the following
 commands in order:
 
 - `yarn set version latest` to keep Yarn up-to-date.
-- `yarn up * @*/* history@^4.10.1 node-sass@^5.0.0 && yarn up -R caniuse-lite`
+- `yarn up "*" "@*/*" history@^4.10.1 node-sass@^5.0.0 && yarn up -R caniuse-lite`
   to install and upgrade dependencies.
 - `yarn sdks vscode` to integrate with Visual Studio Code.
 
 To run the website locally, use `yarn start`.
+
+### Debugging
+
+#### `Node Sass does not yet support your current environment: OS X 64-bit with Unsupported runtime (93)`
+
+Downgrade from Node 16 to Node 15.

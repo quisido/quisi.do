@@ -1,7 +1,9 @@
+import DesignSystem from '../../constants/design-system';
 import Language from '../../constants/language';
 import type AppState from './app.type.state';
 
 const INITIAL_APP_STATE: AppState = {
+  designSystem: DesignSystem.Aws,
   isDarkModeEnabled: true,
   language: Language.English,
 };

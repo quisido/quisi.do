@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import expect from 'expect';
 import createTestHistory from '../../test-utils/create-test-history';
-import Routes from './app.view.routes';
+import Routes from './app.routes.view';
 
 const { testHistory, TestRouter } = createTestHistory({ path: '/' });
 

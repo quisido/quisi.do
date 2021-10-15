@@ -12,12 +12,12 @@ import DATADOG_SERVICE from '../../constants/datadog-service';
 import FULLSTORY_ORG_ID from '../../constants/fullstory-org-id';
 import HISTORY from '../../constants/history';
 import QUERY_CLIENT from '../../constants/query-client';
-import STORE from '../../constants/redux-store';
+import REDUX_STORE from '../../constants/redux-store';
 import SENTRY_DSN from '../../constants/sentry-dsn';
 import SENTRY_INTEGRATIONS from '../../constants/sentry-integrations';
 import VERSION from '../../constants/version';
 import GoogleAnalytics from '../../modules/react-google-analytics';
-import Main from './app.view.main';
+import Main from './app.main.view';
 
 /*
 The App root component mounts context providers for the whole application.
@@ -39,7 +39,7 @@ export default function App(): ReactElement {
       <FullStory orgId={FULLSTORY_ORG_ID}>
         <GoogleAnalytics trackingId="UA-5966978-4">
           <QueryClientProvider client={QUERY_CLIENT}>
-            <ReduxProvider store={STORE}>
+            <ReduxProvider store={REDUX_STORE}>
               <Router history={HISTORY}>
                 <Sentry
                   dsn={SENTRY_DSN}
