@@ -3,7 +3,7 @@ import type { NonCancelableCustomEvent } from '@awsui/components-react/interface
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import type { MutableRefObject } from 'react';
-import { useLayoutEffect, useMemo, useRef } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useRef } from 'react';
 import { useAppLayout } from 'use-awsui';
 
 interface Props {
@@ -19,7 +19,9 @@ interface Props {
 
 interface State {
   readonly ariaLabels: AppLayoutProps.Labels;
-  readonly navigationOpen: boolean | undefined;
+  readonly handleNavigationClose: () => void;
+  readonly handleNavigationOpen: () => void;
+  readonly isNavigationOpen: boolean | undefined;
   readonly ref: MutableRefObject<HTMLDivElement | null>;
   readonly toolsOpen: boolean | undefined;
   readonly handleNavigationChange: (
@@ -45,11 +47,14 @@ export default function useCustomAppLayout({
   const {
     handleNavigationChange,
     handleToolsChange,
-    navigationOpen,
+    navigationOpen: isNavigationOpen,
+    setNavigationOpen,
     toolsOpen,
   } = useAppLayout({
     defaultToolsOpen: false,
   });
+
+  // const [isNavigationOpen, setIsNavigationOpen] = useState(false);
 
   const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
@@ -63,7 +68,7 @@ export default function useCustomAppLayout({
 
   return {
     handleNavigationChange,
-    navigationOpen,
+    isNavigationOpen: isNavigationOpen,
     ref,
 
     ariaLabels: useMemo((): AppLayoutProps.Labels => {
@@ -109,6 +114,14 @@ export default function useCustomAppLayout({
 
       return newAriaLabels;
     }, [translate]),
+
+    handleNavigationClose: useCallback((): void => {
+      setNavigationOpen(false);
+    }, [setNavigationOpen]),
+
+    handleNavigationOpen: useCallback((): void => {
+      setNavigationOpen(true);
+    }, [setNavigationOpen]),
 
     handleToolsChange:
       typeof onToolsChange === 'function' ? onToolsChange : handleToolsChange,

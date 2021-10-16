@@ -107,6 +107,7 @@
     "use-awsui": "^1.0.7",
     "use-awsui-router": "^1.2.2",
     "use-awsui-table-item-description": "^1.0.5",
+    "use-mui": "^1.0.5",
     "use-params-memo": "^1.0.0"
   }
 }

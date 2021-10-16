@@ -1,37 +1,22 @@
-import SideNavigation from '@awsui/components-react/side-navigation';
-import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
-import { memo } from 'react';
-import Box from '../../components/box';
-import validateString from '../../utils/validate-string';
-import useNavigation from './navigation.root.hook';
-import styles from './navigation.root.module.scss';
+import { Suspense, lazy } from 'react';
+import Design from '../../components/design';
+import DesignSystem from '../../constants/design-system';
+import type Props from './navigation.type.props';
 
-const sideNavigationClassName: string = validateString(styles.sideNavigation);
+const AwsNavigation = lazy(async () => import('./navigation.aws.view'));
+const MuiNavigation = lazy(async () => import('./navigation.mui.view'));
 
-function Navigation(): ReactElement {
-  const { activeHref, handleChange, handleFollow, items } = useNavigation();
-
+export default function Navigation(props: Readonly<Props>): ReactElement {
   return (
-    <>
-      <Box
-        element="h2"
-        marginBottom="medium"
-        marginLeft="medium"
-        marginRight="medium"
-        marginTop="medium"
-      >
-        <I18n>Navigation</I18n>
-      </Box>
-      <SideNavigation
-        activeHref={activeHref}
-        className={sideNavigationClassName}
-        items={items}
-        onChange={handleChange}
-        onFollow={handleFollow}
+    <Suspense fallback={null}>
+      <Design
+        props={props}
+        components={{
+          [DesignSystem.Aws]: AwsNavigation,
+          [DesignSystem.Material]: MuiNavigation,
+        }}
       />
-    </>
+    </Suspense>
   );
 }
-
-export default memo(Navigation);

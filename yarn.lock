@@ -9087,6 +9087,7 @@ __metadata:
     use-awsui: ^1.0.7
     use-awsui-router: ^1.2.2
     use-awsui-table-item-description: ^1.0.5
+    use-mui: ^1.0.5
     use-params-memo: ^1.0.0
   languageName: unknown
   linkType: soft
@@ -23452,6 +23453,17 @@ typescript@^4.4.4:
   version: 1.0.7
   resolution: "use-force-update@npm:1.0.7"
   checksum: f94c19f76f921b70ebc8b4b81e7d945402f0256174ffeeadc73af7e8692c7c161437b4200af0b418a6f3c3797a38b76f0a3035b1f3d3561b79ac3238a8b0168c
+  languageName: node
+  linkType: hard
+
+"use-mui@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "use-mui@npm:1.0.5"
+  peerDependencies:
+    "@mui/material": ^5.0.0
+    react: ^17.0.0
+    react-dom: ^17.0.0
+  checksum: c87955f3115fea4d60b58e859192f0800b9797e31f476dbc29b00add33614f862ae8e27f12b69cc23f503957a116ad25654a66b0d939a3759f741784a274120c
   languageName: node
   linkType: hard
 

@@ -40,8 +40,10 @@ export default function Wrapper({
   const {
     ariaLabels,
     handleNavigationChange,
+    handleNavigationClose,
+    handleNavigationOpen,
     handleToolsChange,
-    navigationOpen,
+    isNavigationOpen,
     ref,
     toolsOpen,
   } = useWrapper({
@@ -58,8 +60,8 @@ export default function Wrapper({
   if (typeof contentType !== 'undefined') {
     optionalProps.contentType = contentType;
   }
-  if (typeof navigationOpen !== 'undefined') {
-    optionalProps.navigationOpen = navigationOpen;
+  if (typeof isNavigationOpen !== 'undefined') {
+    optionalProps.navigationOpen = isNavigationOpen;
   }
   if (typeof toolsHide !== 'undefined') {
     optionalProps.toolsHide = toolsHide;
@@ -73,7 +75,13 @@ export default function Wrapper({
       <AppLayout
         ariaLabels={ariaLabels}
         breadcrumbs={<Breadcrumbs>{breadcrumbs}</Breadcrumbs>}
-        navigation={<Navigation />}
+        navigation={
+          <Navigation
+            onClose={handleNavigationClose}
+            onOpen={handleNavigationOpen}
+            open={isNavigationOpen}
+          />
+        }
         notifications={<Notifications>{notifications}</Notifications>}
         onNavigationChange={handleNavigationChange}
         onToolsChange={handleToolsChange}

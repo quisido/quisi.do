@@ -8,16 +8,22 @@ export default function MuiBox({
   children,
   className,
   element,
+  margin,
   marginBottom,
   marginLeft,
   marginRight,
   marginTop,
+  marginX,
+  marginY,
 }: Readonly<Props>): ReactElement {
   const { mb, ml, mr, mt } = useMuiBox({
+    margin,
     marginBottom,
     marginLeft,
     marginRight,
     marginTop,
+    marginX,
+    marginY,
   });
 
   const optionalProps: BoxProps = {};
