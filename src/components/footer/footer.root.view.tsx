@@ -1,28 +1,19 @@
-import type { BoxProps } from '@awsui/components-react/box';
-import Box from '@awsui/components-react/box';
 import type { ReactElement } from 'react';
+import Box from '../../components/box';
+import Color from '../../components/color';
 import validateString from '../../utils/validate-string';
 import styles from './footer.root.module.scss';
 import Link from './footer.link.view';
 
 const rootClassName: string = validateString(styles.root);
 
-const MARGIN: BoxProps.Spacing = {
-  top: 'l',
-};
-
 export default function Footer(): ReactElement {
   return (
-    <Box
-      className={rootClassName}
-      color="text-label"
-      margin={MARGIN}
-      textAlign="center"
-    >
-      <span>&copy; Charles Stover</span>
-      <span>
+    <Box className={rootClassName} marginTop="large">
+      <Color value="label">&copy; Charles Stover</Color>
+      <Color value="label">
         <Link />
-      </span>
+      </Color>
     </Box>
   );
 }
