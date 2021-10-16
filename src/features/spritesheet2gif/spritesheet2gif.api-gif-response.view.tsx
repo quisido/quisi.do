@@ -10,7 +10,7 @@ interface Props {
   readonly width: number;
 }
 
-export default function ApiGifResponse({
+export default function Spritesheet2GifApiGifResponse({
   height,
   image,
   width,

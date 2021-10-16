@@ -8,7 +8,7 @@ import Select from '@awsui/components-react/select';
 import SpaceBetween from '@awsui/components-react/space-between';
 import type { ReactElement } from 'react';
 import validateString from '../../utils/validate-string';
-import ApiGifResponse from './components/api-gif-response';
+import ApiGifResponse from './spritesheet2gif.api-gif-response.view';
 import useSpriteSheet2GifContents from './spritesheet2gif.contents.hook';
 import styles from './spritesheet2gif.contents.module.scss';
 import type ContentsProps from './spritesheet2gif.type.contents-props';
