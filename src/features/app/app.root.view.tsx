@@ -1,4 +1,3 @@
-import '@awsui/global-styles/index.css';
 import FullStory from 'fullstory-react';
 import type { ReactElement } from 'react';
 import DataDog from 'react-datadog';

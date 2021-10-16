@@ -1,3 +1,4 @@
+import '@awsui/global-styles/index.css';
 import type { ReactElement, ReactNode } from 'react';
 import useAwsTheme from './theme.aws.hook';
 
