@@ -1,11 +1,13 @@
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
+import type { TranslateFunction } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo } from 'react';
 import Capsule, { useCapsule } from 'react-capsule';
 import { useSideNavigation } from 'use-awsui-router';
 import filterSideNavigationItemsByExpandable from '../../utils/filter-side-navigation-items-by-expandable';
 import filterSideNavigationItemsByHasItems from '../../utils/filter-side-navigation-items-by-has-items';
-import useItems from './navigation.aws.hook.items';
+import mapTranslationFunctionToAwsSideNavigationItems from './navigation.util.map-translation-function-to-aws-side-navigation-items';
 
 interface State {
   readonly activeHref: string;
@@ -25,8 +27,11 @@ const expandedMapCapsule: Capsule<Map<string, boolean>> = new Capsule(
 );
 
 export default function useNavigation(): State {
+  // Contexts
+  const translate: TranslateFunction = useTranslate();
+
+  // States
   const [expandedMap, setExpandedMap] = useCapsule(expandedMapCapsule);
-  const items: SideNavigationProps.Item[] = useItems();
   const { activeHref, handleFollow } = useSideNavigation();
 
   // TODO: Use nested indices, e.g. `5.0.1.3`, instead of text, since text is
@@ -83,8 +88,12 @@ export default function useNavigation(): State {
       [setExpandedMap],
     ),
 
-    items: useMemo((): SideNavigationProps.Item[] => {
-      return items.map(recursiveExpand);
-    }, [items, recursiveExpand]),
+    items: useMemo(
+      (): SideNavigationProps.Item[] =>
+        mapTranslationFunctionToAwsSideNavigationItems(translate).map(
+          recursiveExpand,
+        ),
+      [recursiveExpand, translate],
+    ),
   };
 }
