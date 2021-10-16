@@ -2,7 +2,7 @@ import type { SideNavigationProps } from '@awsui/components-react/side-navigatio
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
-import Settings from '../../components/settings';
+import Settings from './navigation.settings.view';
 
 export default function useItems(): SideNavigationProps.Item[] {
   const translate: TranslateFunction = useTranslate();

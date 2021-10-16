@@ -1,7 +1,7 @@
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Checkbox from '../../components/checkbox';
-import useDarkModeToggle from './dark-mode-toggle.root.hook';
+import useDarkModeToggle from './navigation.dark-mode-toggle.hook';
 
 export default function DarkModeToggle(): ReactElement {
   const { checked, handleChange } = useDarkModeToggle();
