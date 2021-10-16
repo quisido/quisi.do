@@ -1,7 +1,7 @@
-import type { SelectProps } from '@awsui/components-react/select';
 import Language from '../constants/language';
+import type SelectOption from '../types/select-option';
 
-const LANGUAGE_OPTIONS: SelectProps.Option[] = [
+const LANGUAGE_OPTIONS: readonly SelectOption[] = [
   {
     label: 'English',
     value: Language.English,

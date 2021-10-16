@@ -7,18 +7,29 @@ import type Props from './box.type.props';
 export default function AwsBox({
   children,
   className,
+  element,
+  marginBottom,
+  marginLeft,
+  marginRight,
   marginTop,
 }: Readonly<Props>): ReactElement {
-  const { margin } = useAwsBox({ marginTop });
+  const { margin } = useAwsBox({
+    marginBottom,
+    marginLeft,
+    marginRight,
+    marginTop,
+  });
 
   const optionalProps: BoxProps = {};
   if (typeof className === 'string') {
     optionalProps.className = className;
   }
+  if (typeof margin !== 'undefined') {
+    optionalProps.margin = margin;
+  }
+  if (typeof element === 'string') {
+    optionalProps.variant = element;
+  }
 
-  return (
-    <Box {...optionalProps} margin={margin}>
-      {children}
-    </Box>
-  );
+  return <Box {...optionalProps}>{children}</Box>;
 }

@@ -7,13 +7,34 @@ import type Props from './box.type.props';
 export default function MuiBox({
   children,
   className,
+  element,
+  marginBottom,
+  marginLeft,
+  marginRight,
   marginTop,
 }: Readonly<Props>): ReactElement {
-  const { mt } = useMuiBox({ marginTop });
+  const { mb, ml, mr, mt } = useMuiBox({
+    marginBottom,
+    marginLeft,
+    marginRight,
+    marginTop,
+  });
 
   const optionalProps: BoxProps = {};
   if (typeof className === 'string') {
     optionalProps.className = className;
+  }
+  if (typeof element === 'string') {
+    optionalProps.component = element;
+  }
+  if (typeof mb !== 'undefined') {
+    optionalProps.mb = mb;
+  }
+  if (typeof ml !== 'undefined') {
+    optionalProps.ml = ml;
+  }
+  if (typeof mr !== 'undefined') {
+    optionalProps.mr = mr;
   }
   if (typeof mt !== 'undefined') {
     optionalProps.mt = mt;

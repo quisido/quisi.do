@@ -1,8 +1,8 @@
-import Box from '@awsui/components-react/box';
 import SideNavigation from '@awsui/components-react/side-navigation';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { memo } from 'react';
+import Box from '../../components/box';
 import validateString from '../../utils/validate-string';
 import useNavigation from './navigation.root.hook';
 import styles from './navigation.root.module.scss';
@@ -14,7 +14,13 @@ function Navigation(): ReactElement {
 
   return (
     <>
-      <Box margin="m" variant="h2">
+      <Box
+        element="h2"
+        marginBottom="medium"
+        marginLeft="medium"
+        marginRight="medium"
+        marginTop="medium"
+      >
         <I18n>Navigation</I18n>
       </Box>
       <SideNavigation

@@ -1,7 +1,7 @@
-import type { SelectProps } from '@awsui/components-react/select';
 import DesignSystem from '../constants/design-system';
+import type SelectOption from '../types/select-option';
 
-const DESIGN_SYSTEM_OPTIONS: SelectProps.Option[] = [
+const DESIGN_SYSTEM_OPTIONS: readonly SelectOption[] = [
   {
     label: 'AWS',
     value: DesignSystem.Aws,

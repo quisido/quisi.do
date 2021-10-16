@@ -3,8 +3,12 @@ const MEDIUM = 1.75;
 const SMALL = 1;
 
 export default function mapSizeToSystemValue(
-  size: 'large' | 'medium' | 'small',
-): number {
+  size: 'large' | 'medium' | 'small' | undefined,
+): number | undefined {
+  if (typeof size === 'undefined') {
+    return;
+  }
+
   switch (size) {
     case 'large':
       return LARGE;

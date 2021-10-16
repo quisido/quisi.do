@@ -9,13 +9,12 @@ const MuiBox: ComponentType<Props> = lazy(async () => import('./box.mui.view'));
 
 export default function Box({
   children,
-  className,
-  marginTop,
+  ...props
 }: Readonly<Props>): ReactElement {
   return (
     <Suspense fallback={<>{children}</>}>
       <Design
-        props={{ children, className, marginTop }}
+        props={{ children, ...props }}
         components={{
           [DesignSystem.Aws]: AwsBox,
           [DesignSystem.Material]: MuiBox,
