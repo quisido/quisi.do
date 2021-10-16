@@ -1,19 +1,14 @@
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactElement } from 'react';
 import useMuiCheckbox from './checkbox.mui.hook';
-
-interface Props {
-  readonly checked: boolean;
-  readonly children: ReactNode;
-  readonly onChange: (checked: boolean) => void;
-}
+import type Props from './checkbox.type.props';
 
 export default function MuiCheckbox({
   checked,
   children,
   onChange,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   const { handleChange } = useMuiCheckbox({ onChange });
 
   return (

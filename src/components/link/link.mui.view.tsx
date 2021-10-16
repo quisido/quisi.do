@@ -1,11 +1,7 @@
 import Link from '@mui/material/Link';
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactElement } from 'react';
 import useMuiLink from './link.mui.hook';
-
-interface Props {
-  readonly children: ReactNode;
-  readonly path: string;
-}
+import type Props from './link.type.props';
 
 export default function MuiLink({
   children,

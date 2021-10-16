@@ -1,18 +1,13 @@
 import Checkbox from '@awsui/components-react/checkbox';
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactElement } from 'react';
 import useAwsCheckbox from './checkbox.aws.hook';
-
-interface Props {
-  readonly checked: boolean;
-  readonly children: ReactNode;
-  readonly onChange: (checked: boolean) => void;
-}
+import type Props from './checkbox.type.props';
 
 export default function AwsCheckbox({
   checked,
   children,
   onChange,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   const { handleChange } = useAwsCheckbox({ onChange });
 
   return (

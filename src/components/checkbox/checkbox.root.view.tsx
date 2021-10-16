@@ -1,22 +1,22 @@
-import type { ReactElement, ReactNode } from 'react';
+import type { ComponentType, ReactElement } from 'react';
 import { Suspense, lazy } from 'react';
 import Design from '../../components/design';
 import DesignSystem from '../../constants/design-system';
+import type Props from './checkbox.type.props';
 
-interface Props {
-  readonly checked: boolean;
-  readonly children: ReactNode;
-  readonly onChange: (checked: boolean) => void;
-}
+const AwsCheckbox: ComponentType<Props> = lazy(
+  async () => import('./checkbox.aws.view'),
+);
 
-const AwsCheckbox = lazy(async () => import('./checkbox.aws.view'));
-const MuiCheckbox = lazy(async () => import('./checkbox.mui.view'));
+const MuiCheckbox: ComponentType<Props> = lazy(
+  async () => import('./checkbox.mui.view'),
+);
 
 export default function Checkbox({
   checked,
   children,
   onChange,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   return (
     <Suspense fallback={<>{children}</>}>
       <Design

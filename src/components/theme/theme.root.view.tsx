@@ -1,16 +1,18 @@
-import type { ReactElement, ReactNode } from 'react';
+import type { ComponentType, ReactElement } from 'react';
 import { Suspense, lazy } from 'react';
 import DesignSystem from '../../constants/design-system';
 import Design from '../design';
+import type Props from './theme.type.props';
 
-interface Props {
-  readonly children: ReactNode;
-}
+const AwsTheme: ComponentType<Props> = lazy(
+  async () => import('./theme.aws.view'),
+);
 
-const AwsTheme = lazy(async () => import('./theme.aws.view'));
-const MuiTheme = lazy(async () => import('./theme.mui.view'));
+const MuiTheme: ComponentType<Props> = lazy(
+  async () => import('./theme.mui.view'),
+);
 
-export default function Theme({ children }: Props): ReactElement {
+export default function Theme({ children }: Readonly<Props>): ReactElement {
   return (
     <Suspense fallback={<>{children}</>}>
       <Design
