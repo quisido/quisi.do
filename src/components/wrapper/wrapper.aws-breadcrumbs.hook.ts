@@ -4,7 +4,7 @@ import { useTranslate } from 'lazy-i18n';
 import { useBreadcrumbGroup } from 'use-awsui-router';
 import useParamsMemo from 'use-params-memo';
 import type Breadcrumb from '../../types/breadcrumb';
-import mapBreadcrumbsToAwsBreadcrumbs from './breadcrumbs.util.map-breadcrumbs-to-aws-breadcrumbs';
+import mapBreadcrumbsToAwsBreadcrumbGroupItems from './utils/map-breadcrumbs-to-aws-breadcrumb-group-items';
 
 interface State {
   readonly ariaLabel: string | undefined;
@@ -32,6 +32,9 @@ export default function useAwsBreadcrumbs(
   return {
     ariaLabel: translate('Breadcrumbs'),
     handleFollow,
-    items: useParamsMemo(mapBreadcrumbsToAwsBreadcrumbs, [breadcrumbs]),
+
+    items: useParamsMemo(mapBreadcrumbsToAwsBreadcrumbGroupItems, [
+      breadcrumbs,
+    ]),
   };
 }

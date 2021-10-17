@@ -1,19 +1,16 @@
 import type { AppLayoutProps } from '@awsui/components-react/app-layout';
 import AppLayout from '@awsui/components-react/app-layout';
 import type { ReactElement } from 'react';
-import Breadcrumbs from '../../components/breadcrumbs';
 import Footer from '../../components/footer';
-import type Breadcrumb from '../../types/breadcrumb';
 import type Props from './types/props';
 import useAwsWrapper from './wrapper.aws.hook';
+import Breadcrumbs from './wrapper.aws-breadcrumbs.view';
 import Navigation from './wrapper.aws-navigation.view';
 import Notifications from './wrapper.aws-notifications.view';
 
-const DEFAULT_BREADCRUMBS: readonly Breadcrumb[] = Object.freeze([]);
-
 export default function AwsWrapper({
   Tools,
-  breadcrumbs = DEFAULT_BREADCRUMBS,
+  breadcrumbs,
   children,
   contentType,
   notifications,

@@ -6,10 +6,10 @@ import type Notification from '../../../types/notification';
 
 export default interface Props {
   readonly Tools?: ComponentType<unknown>;
-  readonly breadcrumbs?: readonly Breadcrumb[];
+  readonly breadcrumbs: readonly Readonly<Breadcrumb>[];
   readonly children: ReactNode;
   readonly contentType?: AppLayoutProps.ContentType;
-  readonly notifications?: undefined | readonly Notification[];
+  readonly notifications?: undefined | readonly Readonly<Notification>[];
   readonly toolsHide?: boolean;
   readonly toolsOpen?: boolean;
   readonly onToolsChange?: (
