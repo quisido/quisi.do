@@ -5,16 +5,16 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { Link as ReactRouterLink } from 'react-router-dom';
 import type Breadcrumb from '../../types/breadcrumb';
-import useMuiBreadcrumbs from './breadcrumbs.mui.hook';
+import useWrapperMuiBreadcrumbs from './wrapper.mui-breadcrumbs.hook';
 
 interface Props {
   readonly children: readonly Readonly<Breadcrumb>[];
 }
 
-export default function MuiBreadcrumbs({
+export default function WrapperMuiBreadcrumbs({
   children: breadcrumbs,
 }: Readonly<Props>): ReactElement {
-  const { expandText, lastIndex } = useMuiBreadcrumbs(breadcrumbs);
+  const { expandText, lastIndex } = useWrapperMuiBreadcrumbs(breadcrumbs);
 
   // Workaround until MUI supports TypeScript 4.4 exact optional properties.
   const optionalProps: Pick<BreadcrumbsProps, 'expandText'> = {};

@@ -8,7 +8,7 @@ interface State {
 
 const LAST_INDEX_OFFSET = -1;
 
-export default function useMuiBreadcrumbs(
+export default function useWrapperMuiBreadcrumbs(
   breadcrumbs: readonly unknown[],
 ): State {
   const translate: TranslateFunction = useTranslate();
