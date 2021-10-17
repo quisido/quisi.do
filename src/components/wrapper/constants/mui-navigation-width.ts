@@ -1,0 +1,3 @@
+const MUI_NAVIGATION_WIDTH = 240;
+
+export default MUI_NAVIGATION_WIDTH;

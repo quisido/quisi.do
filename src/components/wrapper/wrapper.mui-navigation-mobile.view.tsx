@@ -9,7 +9,7 @@ export default function MobileMuiNavigation({
   children,
   onClose,
   onOpen,
-  open,
+  open = false,
 }: Readonly<PropsWithChildren<Props>>): ReactElement {
   return (
     <SwipeableDrawer
@@ -18,7 +18,7 @@ export default function MobileMuiNavigation({
       disableBackdropTransition={DISABLE_BACKDROP_TRANSITION}
       onClose={onClose}
       onOpen={onOpen}
-      open={open ?? false}
+      open={open}
       variant="temporary"
     >
       {children}
