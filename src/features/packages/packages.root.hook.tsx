@@ -1,14 +1,15 @@
-import type { FlashbarProps } from '@awsui/components-react/flashbar';
 import type { TranslateFunction } from 'lazy-i18n';
-import I18n, { useTranslate } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
+import RetryAction from '../../components/retry-action';
 import useNpmDownloads from '../../hooks/use-npm-downloads';
 import mapUnknownToString from '../../map/map-unknown-to-string';
 import type Breadcrumb from '../../types/breadcrumb';
+import type Notification from '../../types/notification';
 
 interface State {
   readonly breadcrumbs: readonly Breadcrumb[];
-  readonly notifications: readonly FlashbarProps.MessageDefinition[];
+  readonly notifications: readonly Notification[];
 }
 
 export default function usePackages(): State {
@@ -27,15 +28,13 @@ export default function usePackages(): State {
       [translate],
     ),
 
-    notifications: useMemo((): FlashbarProps.MessageDefinition[] => {
-      const newNotifications: FlashbarProps.MessageDefinition[] = [];
+    notifications: useMemo((): readonly Notification[] => {
+      const newNotifications: Notification[] = [];
       if (error !== null) {
         newNotifications.push({
-          content: mapUnknownToString(error),
-          buttonText: <I18n>Retry</I18n>,
-          dismissible: true,
-          header: <I18n>An error occurred.</I18n>,
-          onButtonClick: refetch,
+          CallToAction: RetryAction,
+          message: mapUnknownToString(error),
+          onAction: refetch,
           type: 'error',
         });
       }

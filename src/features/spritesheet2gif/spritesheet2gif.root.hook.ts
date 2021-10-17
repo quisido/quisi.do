@@ -1,8 +1,8 @@
 import type { AppLayoutProps } from '@awsui/components-react/app-layout';
-import type { FlashbarProps } from '@awsui/components-react/flashbar';
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { ComponentType } from 'react';
 import { useCallback, useMemo, useState } from 'react';
+import type Notification from '../../types/notification';
 import HeaderInfo from './spritesheet2gif.header-info.view';
 
 interface State {
@@ -12,7 +12,7 @@ interface State {
   readonly handleHelpDismiss: () => void;
   readonly handleHelpRequest: (Help: ComponentType<unknown>) => void;
   readonly helpOpen: boolean;
-  readonly notifications: FlashbarProps.MessageDefinition[];
+  readonly notifications: readonly Notification[];
   readonly handleHelpChange: (
     event: Readonly<
       NonCancelableCustomEvent<Readonly<AppLayoutProps.ChangeDetail>>
@@ -56,14 +56,11 @@ export default function useSpritesheet2Gif(): State {
       [],
     ),
 
-    notifications: useMemo((): FlashbarProps.MessageDefinition[] => {
-      const newNotifications: FlashbarProps.MessageDefinition[] = [];
+    notifications: useMemo((): readonly Notification[] => {
+      const newNotifications: Notification[] = [];
       if (error !== null) {
         newNotifications.push({
-          content: error.message,
-          dismissLabel: 'Dismiss',
-          dismissible: true,
-          header: 'An error occurred.',
+          message: error.message,
           type: 'error',
           onDismiss(): void {
             setError(null);
