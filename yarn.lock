@@ -30,9 +30,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@awsui/components-react@npm:^3.0.299":
-  version: 3.0.299
-  resolution: "@awsui/components-react@npm:3.0.299"
+"@awsui/components-react@npm:^3.0.302":
+  version: 3.0.302
+  resolution: "@awsui/components-react@npm:3.0.302"
   dependencies:
     "@awsui/collection-hooks": ^1.0.0
     "@awsui/test-utils-core": ^1.0.0
@@ -55,7 +55,7 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17
     react-dom: ^16.8 || ^17
-  checksum: 585fa46fb69962ee69125c73ea732ba70a445152947ea9eb775037e492030c7f261878ffef868b759ce1ac779f769c3b1ce0c754d2a326f4d322858469831567
+  checksum: c8f262b06a0d4b4a9021338b8e1d33a4bad23807d70ea7a760eb92695a00269bd0aa213cbc533b603d77d2a5c72603b4fe3a76905c8faf00d486d2ecc60d0046
   languageName: node
   linkType: hard
 
@@ -6203,10 +6203,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^16.11.0":
-  version: 16.11.0
-  resolution: "@types/node@npm:16.11.0"
-  checksum: 194ae80ec72f664e15e03c33f116be96aa1e85b167a19e31003c53ddfc36dabd65744e9a76c1d46b7ce2e5981d2ccb8e84a85c3ec9ac89f1471daaa885bdcfd0
+"@types/node@npm:^16.11.1":
+  version: 16.11.1
+  resolution: "@types/node@npm:16.11.1"
+  checksum: 22cea470b89292810733b8b9fc1b6a1873bc3ed4d4cdf2f25e777dc607994bd7c12e64166d1a66dd5924734192b0a891b6aeb6813aa935f731345f4086234375
   languageName: node
   linkType: hard
 
@@ -8906,19 +8906,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30000981, caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001125, caniuse-lite@npm:^1.0.30001165, caniuse-lite@npm:^1.0.30001181, caniuse-lite@npm:^1.0.30001219":
-  version: 1.0.30001260
-  resolution: "caniuse-lite@npm:1.0.30001260"
-  dependencies:
-    nanocolors: ^0.1.0
-  checksum: a3a61073204636e02bc3972bfdcd8b3c3a2fb56f29b5ffa95fad7e5a01e2eece2ed92f1246728185992618a04f9221cbd83ddd96d2ef68083353d55ffe660e29
-  languageName: node
-  linkType: hard
-
-"caniuse-lite@npm:^1.0.30001265":
-  version: 1.0.30001267
-  resolution: "caniuse-lite@npm:1.0.30001267"
-  checksum: 1a84f792a17a7819d42bed24eafe2a4832ab1f58937b6d65a9f43e9cdd2a3b10308e8bc2bbb3808f1df6b60940b1770b185c42370fa9dac2c8bc5c8a0363c158
+"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30000981, caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001125, caniuse-lite@npm:^1.0.30001165, caniuse-lite@npm:^1.0.30001181, caniuse-lite@npm:^1.0.30001219, caniuse-lite@npm:^1.0.30001265":
+  version: 1.0.30001269
+  resolution: "caniuse-lite@npm:1.0.30001269"
+  checksum: 23a6bd029c4120a084056dae4eeecc552eba55c434035306e7ee4060aed1b6babed5f6d832f6ba359f13376356464a1673bc6c625c2932e376156f7f7fa1a3c0
   languageName: node
   linkType: hard
 
@@ -9014,7 +9005,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "charlesstover.com@workspace:."
   dependencies:
-    "@awsui/components-react": ^3.0.299
+    "@awsui/components-react": ^3.0.302
     "@awsui/design-tokens": ^3.0.15
     "@awsui/global-styles": ^1.0.9
     "@awsui/test-utils-core": ^1.0.14
@@ -9038,7 +9029,7 @@ __metadata:
     "@types/history": ^4.7.9
     "@types/jest": ^27.0.2
     "@types/mocha": ^9.0.0
-    "@types/node": ^16.11.0
+    "@types/node": ^16.11.1
     "@types/react": ^17.0.30
     "@types/react-dom": ^17.0.9
     "@types/react-redux": ^7.1.19
@@ -9066,7 +9057,7 @@ __metadata:
     jest-environment-jsdom: ^27.2.5
     lazy-i18n: ^2.0.9
     lodash: ^4.17.21
-    mocha: ^9.1.2
+    mocha: ^9.1.3
     node-sass: ^5.0.0
     number-format-react: ^1.0.0
     prettier: ^2.4.1
@@ -9074,14 +9065,14 @@ __metadata:
     react-capsule: ^1.0.3
     react-datadog: ^1.0.0
     react-dom: ^17.0.2
-    react-query: ^3.26.0
+    react-query: ^3.27.0
     react-redux: ^7.2.5
     react-refresh: ^0.10.0
     react-router: ^5.2.1
     react-router-dom: ^5.3.0
     react-scripts: ^4.0.3
     sentry-react: ^1.0.1
-    ts-jest: ^27.0.6
+    ts-jest: ^27.0.7
     ts-node: ^10.3.0
     typescript: ^4.4.4
     use-awsui: ^1.0.7
@@ -17136,9 +17127,9 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"mocha@npm:^9.1.2":
-  version: 9.1.2
-  resolution: "mocha@npm:9.1.2"
+"mocha@npm:^9.1.3":
+  version: 9.1.3
+  resolution: "mocha@npm:9.1.3"
   dependencies:
     "@ungap/promise-all-settled": 1.1.2
     ansi-colors: 4.1.1
@@ -17167,7 +17158,7 @@ fsevents@~2.1.2:
   bin:
     _mocha: bin/_mocha
     mocha: bin/mocha
-  checksum: 6e8ecd836db41d0c529592f8437ddcfed10a992f064ba56a6790e3539b0de8435be38b8d7d8f76a74260c942db72fc3594784fc755cbe3ed59edc5e454142c3b
+  checksum: 4185038f1d49c7c5ab2f8d77e42c182a77ed78f08f0ce713cc34919bc89b618ed9d6d4f24cbb92049f0d2ed03fb1a2a5b20e0fb07f8cf4a86ba83eb99dacde99
   languageName: node
   linkType: hard
 
@@ -17279,13 +17270,6 @@ fsevents@~2.1.2:
   dependencies:
     big-integer: ^1.6.16
   checksum: eef8548546cc1020625f8e44751a7263e9eddf0412a6a1a6c80a8d2be2ea7973622804a977cdfe796807b85b20ff6c8ba340e8dd20effcc7078193ed5edbb5d4
-  languageName: node
-  linkType: hard
-
-"nanocolors@npm:^0.1.0":
-  version: 0.1.12
-  resolution: "nanocolors@npm:0.1.12"
-  checksum: 2ce58f57006ddd1d2680d05fe21f54d858db8ba81bd13381598ddc546f7637e33c4407da2ea7da40ea1c96794250e7c14a4d00358b48eeae4d917d6a92bafe4c
   languageName: node
   linkType: hard
 
@@ -20062,9 +20046,9 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"react-query@npm:^3.26.0":
-  version: 3.26.0
-  resolution: "react-query@npm:3.26.0"
+"react-query@npm:^3.27.0":
+  version: 3.27.0
+  resolution: "react-query@npm:3.27.0"
   dependencies:
     "@babel/runtime": ^7.5.5
     broadcast-channel: ^3.4.1
@@ -20076,7 +20060,7 @@ fsevents@~2.1.2:
       optional: true
     react-native:
       optional: true
-  checksum: 601d10b0a32abe300e2e33df8882efdf5380e4793a2891ca88ed803152d7086f5f90eca04bf4c27bd16a42a25a704988ccd6c5dc99044464858c4f16ce42f782
+  checksum: a6be975ff938fb464067e56557a6f1b4e39389033aae7feb48906736d14615b3a8faa05d7681a3e8504202c21f940c5998c50750ac8abee4508178a2c87b915a
   languageName: node
   linkType: hard
 
@@ -22868,9 +22852,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^27.0.6":
-  version: 27.0.6
-  resolution: "ts-jest@npm:27.0.6"
+"ts-jest@npm:^27.0.7":
+  version: 27.0.7
+  resolution: "ts-jest@npm:27.0.7"
   dependencies:
     bs-logger: 0.x
     fast-json-stable-stringify: 2.x
@@ -22895,7 +22879,7 @@ resolve@^2.0.0-next.3:
       optional: true
   bin:
     ts-jest: cli.js
-  checksum: bbca6486a632c99340f37f0e266335d3763a978274c9a0ece4bb2f451b2e243c5c210870d7092c453463c856d1329ec5ebbf1bdfa19303a9babd6ada5423aaf5
+  checksum: 3711361cb5ae54aac547b00f8ad118ec88333c391af4bff0420497e9faa296eace4e8272c627ecbf4be675af9f68c437e4c2ccc5693c6d744796ec7da6dda131
   languageName: node
   linkType: hard
 
