@@ -17,7 +17,9 @@ export default function Wrapper({
   breadcrumbs: breadcrumbsProp,
   children,
   ...props
-}: Readonly<Props>): ReactElement {
+}: Readonly<
+  Omit<Props, 'breadcrumbs'> & Partial<Pick<Props, 'breadcrumbs'>>
+>): ReactElement {
   const { breadcrumbs: breadcrumbsState } = useWrapper({
     breadcrumbs: breadcrumbsProp,
   });
