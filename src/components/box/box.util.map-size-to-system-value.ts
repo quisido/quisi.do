@@ -1,5 +1,5 @@
-const LARGE = 2.5;
-const MEDIUM = 1.75;
+const LARGE = 3;
+const MEDIUM = 2;
 const SMALL = 1;
 
 export default function mapSizeToSystemValue(

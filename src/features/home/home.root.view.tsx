@@ -1,9 +1,9 @@
-import Box from '@awsui/components-react/box';
 import Container from '@awsui/components-react/container';
 import Header from '@awsui/components-react/header';
 import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
+import Box from '../../components/box';
 import ViewResumeButton from '../../components/view-resume-button';
 import Wrapper from '../../components/wrapper';
 import PROJECTS from '../../constants/projects';
@@ -48,26 +48,20 @@ export default function Home(): ReactElement {
             direction="horizontal"
             size="xxl"
           >
-            <Box textAlign="center">
-              <img
-                alt={avatarAlt}
-                className={avatarClassName}
-                height={100}
-                src={avatar}
-                width={100}
-              />
-            </Box>
+            <div className={avatarClassName}>
+              <img alt={avatarAlt} height={100} src={avatar} width={100} />
+            </div>
             <SpaceBetween
               className={paragraphClassName}
               direction="vertical"
               size="m"
             >
-              <Box variant="p">
+              <Box element="p">
                 My name is <strong>Charles Stover</strong>. I am a{' '}
                 <strong>staff-level front end engineer</strong> with an
-                expertise in <strong>JavaScript and React</strong>. I gravitate
-                towards long-term product visions, impact across teams,
-                operational health, application monitoring, and{' '}
+                expertise in <strong>JavaScript and React</strong>. My focus is
+                on long-term product visions, impact across teams, operational
+                health, application monitoring, and{' '}
                 <abbr title="user interface">UI</abbr>/
                 <abbr title="user experience">UX</abbr>.
               </Box>

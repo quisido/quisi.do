@@ -1,5 +1,9 @@
 .avatar {
-  border-radius: 50%;
+  text-align: center;
+
+  > img {
+    border-radius: 50%;
+  }
 }
 
 .content {

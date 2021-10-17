@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import mapSizeToSpacingSize from './box.util.map-size-to-spacing-size';
 
 interface Props {
-  readonly element: 'h2' | undefined;
+  readonly element: 'h2' | 'p' | undefined;
   readonly margin: 'large' | 'medium' | 'small' | undefined;
   readonly marginBottom: 'large' | 'medium' | 'small' | undefined;
   readonly marginLeft: 'large' | 'medium' | 'small' | undefined;
@@ -15,7 +15,7 @@ interface Props {
 
 interface State {
   readonly margin: BoxProps.Spacing | undefined;
-  readonly variant: 'h2' | undefined;
+  readonly variant: 'h2' | 'p' | undefined;
 }
 
 export default function useAwsBox({

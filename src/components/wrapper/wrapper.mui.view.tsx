@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react';
+import Footer from '../../components/footer';
 import validateString from '../../utils/validate-string';
 import useMuiWrapper from './wrapper.mui.hook';
 import Breadcrumbs from './wrapper.mui-breadcrumbs.view';
@@ -7,6 +8,7 @@ import Notifications from './wrapper.mui-notifications.view';
 import type Props from './types/props';
 import styles from './wrapper.mui.module.scss';
 
+const mainClassName: string = validateString(styles.main);
 const rootClassName: string = validateString(styles.root);
 
 export default function MuiWrapper({
@@ -29,9 +31,10 @@ export default function MuiWrapper({
         open={isNavigationOpen}
       />
       <Notifications>{notifications}</Notifications>
-      <main style={mainStyle}>
+      <main className={mainClassName} style={mainStyle}>
         <Breadcrumbs>{breadcrumbs}</Breadcrumbs>
         {children}
+        <Footer />
       </main>
     </div>
   );

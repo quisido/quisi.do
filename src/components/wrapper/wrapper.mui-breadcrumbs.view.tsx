@@ -36,6 +36,7 @@ export default function WrapperMuiBreadcrumbs({
               </Typography>
             );
           }
+
           return (
             <MuiLink
               color="inherit"

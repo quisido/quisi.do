@@ -13,7 +13,7 @@ export default function MuiSelect({
   const { handleChange } = useMuiSelect({ onChange });
 
   return (
-    <Select onChange={handleChange} value={selectValue}>
+    <Select onChange={handleChange} size="small" value={selectValue}>
       {options.map(
         ({
           label,
