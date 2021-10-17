@@ -11,7 +11,7 @@ export default function mapNpmDownloadsEntryToPackagesItem(
   entries: readonly (readonly [string, readonly number[]])[],
 ): Item {
   const totalDownloads: number = downloads.reduce(reduceArrayToSum, NONE);
-  let explicitDownloads: number = totalDownloads;
+  let directDownloads: number = totalDownloads;
   for (const [
     dependentPackageName,
     dependencies,
@@ -30,13 +30,13 @@ export default function mapNpmDownloadsEntryToPackagesItem(
         break;
       }
       const [, dependentDownloads] = dependentEntry;
-      explicitDownloads -= dependentDownloads.reduce(reduceArrayToSum, NONE);
+      directDownloads -= dependentDownloads.reduce(reduceArrayToSum, NONE);
       break;
     }
   }
   return {
+    directDownloads,
     downloads,
-    explicitDownloads,
     isHighlighted: false,
     packageName,
     repositoryName: mapPackageNameToRepositoryName(packageName),

@@ -3,7 +3,7 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { useMemo } from 'react';
-import ExplicitDownloads from './packages.explicit-downloads-cell.view';
+import DirectDownloads from './packages.direct-downloads-cell.view';
 import PackageName from './packages.name-cell.view';
 import TotalDownloads from './packages.total-downloads-cell.view';
 import type Item from './packages.type.item';
@@ -43,14 +43,14 @@ export default function usePackagesColumnDefinitions({
       },
 
       {
-        header: translate('Explicit downloads') ?? '...',
-        id: 'explicitDownloads',
+        header: translate('Direct downloads') ?? '...',
+        id: 'directDownloads',
         maxWidth: 240,
         minWidth: 180,
-        sortingField: 'explicitDownloads',
+        sortingField: 'directDownloads',
         width: 240,
         cell(item: Item): ReactElement {
-          return <ExplicitDownloads {...item} />;
+          return <DirectDownloads {...item} />;
         },
       },
     ],

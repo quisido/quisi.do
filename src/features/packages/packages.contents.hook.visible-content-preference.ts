@@ -22,8 +22,8 @@ export default function usePackagesVisibleContentPreference(): CollectionPrefere
               label: translate('Total downloads') ?? '...',
             },
             {
-              id: 'explicitDownloads',
-              label: translate('Explicit downloads') ?? '...',
+              id: 'directDownloads',
+              label: translate('Direct downloads') ?? '...',
             },
           ],
         },

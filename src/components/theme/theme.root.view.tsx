@@ -14,7 +14,8 @@ const MuiTheme: ComponentType<Props> = lazy(
 
 export default function Theme({ children }: Readonly<Props>): ReactElement {
   return (
-    <Suspense fallback={<>{children}</>}>
+    // fallback={<>{children}</>}
+    <Suspense fallback={null}>
       <Design
         props={{ children }}
         components={{
