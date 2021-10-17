@@ -5,9 +5,9 @@ import { useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo } from 'react';
 import Capsule, { useCapsule } from 'react-capsule';
 import { useSideNavigation } from 'use-awsui-router';
-import filterSideNavigationItemsByExpandable from '../../utils/filter-side-navigation-items-by-expandable';
-import filterSideNavigationItemsByHasItems from '../../utils/filter-side-navigation-items-by-has-items';
-import mapTranslationFunctionToAwsSideNavigationItems from './wrapper.util.map-translation-function-to-aws-side-navigation-items';
+import filterSideNavigationItemsByExpandable from './utils/filter-side-navigation-items-by-expandable';
+import filterSideNavigationItemsByHasItems from './utils/filter-side-navigation-items-by-has-items';
+import mapTranslationFunctionToAwsSideNavigationItems from './utils/map-translation-function-to-aws-side-navigation-items';
 
 interface State {
   readonly activeHref: string;

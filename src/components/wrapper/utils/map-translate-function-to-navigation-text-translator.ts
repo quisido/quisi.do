@@ -1,5 +1,5 @@
 import type { TranslateFunction } from 'lazy-i18n';
-import NavigationText from './constants/navigation-text';
+import NavigationText from '../constants/navigation-text';
 
 export default function mapTranslateFunctionToNavigationTextTranslator(
   translate: TranslateFunction,

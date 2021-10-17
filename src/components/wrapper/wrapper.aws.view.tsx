@@ -3,11 +3,11 @@ import AppLayout from '@awsui/components-react/app-layout';
 import type { ReactElement } from 'react';
 import Breadcrumbs from '../../components/breadcrumbs';
 import Footer from '../../components/footer';
-import Notifications from '../../components/notifications';
 import type Breadcrumb from '../../types/breadcrumb';
+import type Props from './types/props';
 import useAwsWrapper from './wrapper.aws.hook';
 import Navigation from './wrapper.aws-navigation.view';
-import type Props from './types/props';
+import Notifications from './wrapper.aws-notifications.view';
 
 const DEFAULT_BREADCRUMBS: readonly Breadcrumb[] = Object.freeze([]);
 

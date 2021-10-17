@@ -8,7 +8,7 @@ interface Props {
 
 const EMPTY = 0;
 
-export default function Notifications({
+export default function AwsNotifications({
   children,
 }: Props): ReactElement | null {
   if (typeof children === 'undefined' || children.length === EMPTY) {

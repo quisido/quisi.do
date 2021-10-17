@@ -1,16 +1,16 @@
 import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
 import type { TranslateFunction } from 'lazy-i18n';
-import NAVIGATION_ITEMS from './constants/navigation-items';
-import type NavigationText from './constants/navigation-text';
-import type NavigationCategory from './types/navigation-category';
-import type NavigationComponent from './types/navigation-component';
-import type NavigationExternalLink from './types/navigation-external-link';
-import type NavigationLink from './types/navigation-link';
-import filterByNavigationCategory from './wrapper.util.filter-by-navigation-category';
-import filterByNavigationComponent from './wrapper.util.filter-by-navigation-component';
-import filterByNavigationExternalLink from './wrapper.util.filter-by-navigation-external-link';
-import mapComponentToElement from './wrapper.util.map-component-to-element';
-import mapTranslateFunctionToNavigationTextTranslator from './wrapper.util.map-translate-function-to-navigation-text-translator';
+import NAVIGATION_ITEMS from '../constants/navigation-items';
+import type NavigationText from '../constants/navigation-text';
+import type NavigationCategory from '../types/navigation-category';
+import type NavigationComponent from '../types/navigation-component';
+import type NavigationExternalLink from '../types/navigation-external-link';
+import type NavigationLink from '../types/navigation-link';
+import filterByNavigationCategory from '../utils/filter-by-navigation-category';
+import filterByNavigationComponent from '../utils/filter-by-navigation-component';
+import filterByNavigationExternalLink from '../utils/filter-by-navigation-external-link';
+import mapComponentToElement from '../utils/map-component-to-element';
+import mapTranslateFunctionToNavigationTextTranslator from '../utils/map-translate-function-to-navigation-text-translator';
 
 export default function mapTranslationFunctionToAwsSideNavigationItems(
   translate: TranslateFunction,
