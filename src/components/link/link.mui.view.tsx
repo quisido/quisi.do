@@ -5,12 +5,12 @@ import type Props from './link.type.props';
 
 export default function MuiLink({
   children,
-  path,
+  href,
 }: Readonly<Props>): ReactElement {
-  const { handleClick } = useMuiLink(path);
+  const { handleClick, rel } = useMuiLink(href);
 
   return (
-    <Link color="inherit" href={path} onClick={handleClick}>
+    <Link color="inherit" href={href} onClick={handleClick} rel={rel}>
       {children}
     </Link>
   );

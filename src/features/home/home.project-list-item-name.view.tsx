@@ -1,5 +1,5 @@
-import Link from '@awsui/components-react/link';
 import type { ReactElement } from 'react';
+import Link from '../../components/link';
 
 interface Props {
   readonly children: string;
@@ -14,9 +14,5 @@ export default function HomeProjectListItemName({
     return <>{children}</>;
   }
 
-  return (
-    <Link external fontSize="heading-l" href={url} target="_blank">
-      {children}
-    </Link>
-  );
+  return <Link href={url}>{children}</Link>;
 }

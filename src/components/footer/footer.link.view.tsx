@@ -14,7 +14,7 @@ export default function FooterLink(): ReactElement {
   }
 
   return (
-    <I18n version={<Link path={VERSION_HREF}>{VERSION}</Link>}>
+    <I18n version={<Link href={VERSION_HREF}>{VERSION}</Link>}>
       version: $version
     </I18n>
   );

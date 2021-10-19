@@ -15,14 +15,14 @@ const MuiLink: ComponentType<Props> = lazy(
 
 export default function Link({
   children,
-  path,
+  href,
 }: Readonly<Props>): ReactElement {
   return (
     <Suspense
-      fallback={<ReactRouterLink to={path}>{children}</ReactRouterLink>}
+      fallback={<ReactRouterLink to={href}>{children}</ReactRouterLink>}
     >
       <Design
-        props={{ children, path }}
+        props={{ children, href }}
         components={{
           [DesignSystem.Aws]: AwsLink,
           [DesignSystem.Material]: MuiLink,

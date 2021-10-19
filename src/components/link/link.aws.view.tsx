@@ -1,19 +1,22 @@
 import type { LinkProps } from '@awsui/components-react/link';
 import Link from '@awsui/components-react/link';
-import type { ReactElement, ReactNode } from 'react';
-
-interface Props extends Omit<LinkProps, 'href'> {
-  readonly children: ReactNode;
-  readonly path: string;
-}
+import type { ReactElement } from 'react';
+import useAwsLink from './link.aws.hook';
+import type Props from './link.type.props';
 
 export default function AwsLink({
   children,
-  path,
-  ...props
+  href,
 }: Readonly<Props>): ReactElement {
+  const { external, rel, target } = useAwsLink({ href });
+
+  const optionalProps: Pick<LinkProps, 'rel'> = {};
+  if (typeof rel !== 'undefined') {
+    optionalProps.rel = rel;
+  }
+
   return (
-    <Link {...props} href={path}>
+    <Link {...optionalProps} external={external} href={href} target={target}>
       {children}
     </Link>
   );

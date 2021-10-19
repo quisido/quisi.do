@@ -1,6 +1,6 @@
-import Link from '@awsui/components-react/link';
 import type { ReactElement } from 'react';
 import EmphasizeSubstring from '../../components/emphasize-substring';
+import Link from '../../components/link';
 import usePackagesNameCell from './packages.name-cell.hook';
 import type Item from './packages.type.item';
 
@@ -20,7 +20,7 @@ export default function PackagesNameCell({
   });
 
   return (
-    <Link href={href} target="_blank">
+    <Link href={href}>
       <EmphasizeSubstring index={index} length={filteringText.length}>
         {packageName}
       </EmphasizeSubstring>

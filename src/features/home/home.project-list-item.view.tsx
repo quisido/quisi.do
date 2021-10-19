@@ -1,5 +1,5 @@
-import Box from '@awsui/components-react/box';
 import type { ReactElement } from 'react';
+import Box from '../../components/box';
 import type Project from '../../types/project';
 import useProjectListItem from './home.project-list-item.hook';
 import Name from './home.project-list-item-name.view';
@@ -13,7 +13,7 @@ export default function HomeProjectListItem({
 
   return (
     <li style={style}>
-      <Box fontSize="heading-l" margin="s">
+      <Box margin="small">
         <Name url={url}>{name}</Name>
       </Box>
     </li>

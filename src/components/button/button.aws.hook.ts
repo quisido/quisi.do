@@ -2,7 +2,7 @@ import type { IconProps } from '@awsui/components-react/icon';
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
-import filterHrefByBlank from './utils/filter-href-by-blank';
+import filterHrefByBlank from '../../utils/filter-href-by-blank';
 
 interface Props {
   readonly href: string | undefined;

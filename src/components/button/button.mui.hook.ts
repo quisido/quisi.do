@@ -2,7 +2,7 @@ import type { History } from 'history';
 import type { MouseEvent } from 'react';
 import { useMemo } from 'react';
 import { useHistory } from 'react-router';
-import filterHrefByBlank from './utils/filter-href-by-blank';
+import filterHrefByBlank from '../../utils/filter-href-by-blank';
 
 interface Props {
   readonly href: string | undefined;
