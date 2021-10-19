@@ -1,14 +1,17 @@
-import Box from '@awsui/components-react/box';
-import Container from '@awsui/components-react/container';
-import Header from '@awsui/components-react/header';
+import I18n from 'lazy-i18n';
 import type { MutableRefObject, ReactElement } from 'react';
 import { useEffect, useRef } from 'react';
+import Display from '../../components/display';
+import validateString from '../../utils/validate-string';
+import styles from './spritesheet2gif.api-gif-response.module.scss';
 
 interface Props {
   readonly height: number;
   readonly image: string;
   readonly width: number;
 }
+
+const centerClassName: string = validateString(styles.center);
 
 export default function Spritesheet2GifApiGifResponse({
   height,
@@ -25,10 +28,10 @@ export default function Spritesheet2GifApiGifResponse({
   }, [image]);
 
   return (
-    <Container header={<Header>Result</Header>}>
-      <Box textAlign="center">
+    <Display header={<I18n>Result</I18n>}>
+      <div className={centerClassName}>
         <img height={height} ref={ref} src={image} width={width} />
-      </Box>
-    </Container>
+      </div>
+    </Display>
   );
 }

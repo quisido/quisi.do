@@ -1,12 +1,11 @@
 import Button from '@awsui/components-react/button';
-import Container from '@awsui/components-react/container';
 import FormField from '@awsui/components-react/form-field';
-import Header from '@awsui/components-react/header';
 import Input from '@awsui/components-react/input';
 import Link from '@awsui/components-react/link';
 import Select from '@awsui/components-react/select';
 import SpaceBetween from '@awsui/components-react/space-between';
 import type { ReactElement } from 'react';
+import Display from '../../components/display';
 import validateString from '../../utils/validate-string';
 import ApiGifResponse from './spritesheet2gif.api-gif-response.view';
 import useSpriteSheet2GifContents from './spritesheet2gif.contents.hook';
@@ -56,7 +55,8 @@ export default function SpriteSheet2GifContents({
 
   return (
     <SpaceBetween direction="vertical" size="m">
-      <Container
+      <Display
+        headerClassName={headerClassName}
         footer={
           <Button
             loading={isConvertButtonLoading}
@@ -67,7 +67,7 @@ export default function SpriteSheet2GifContents({
           </Button>
         }
         header={
-          <Header className={headerClassName}>
+          <>
             Animate a sprite sheet{' '}
             <Link
               ariaLabel="Info"
@@ -76,7 +76,7 @@ export default function SpriteSheet2GifContents({
             >
               Info
             </Link>
-          </Header>
+          </>
         }
       >
         <SpaceBetween direction="vertical" size="m">
@@ -175,7 +175,7 @@ export default function SpriteSheet2GifContents({
             />
           </FormField>
         </SpaceBetween>
-      </Container>
+      </Display>
       {apiGifResponse && <ApiGifResponse {...apiGifResponse} />}
     </SpaceBetween>
   );

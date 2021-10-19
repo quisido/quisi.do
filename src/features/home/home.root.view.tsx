@@ -1,9 +1,8 @@
-import Container from '@awsui/components-react/container';
-import Header from '@awsui/components-react/header';
 import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Box from '../../components/box';
+import Display from '../../components/display';
 import ViewResumeButton from '../../components/view-resume-button';
 import Wrapper from '../../components/wrapper';
 import PROJECTS from '../../constants/projects';
@@ -36,13 +35,7 @@ export default function Home(): ReactElement {
   return (
     <Wrapper toolsHide>
       <SpaceBetween size="l">
-        <Container
-          header={
-            <Header actions={<ViewResumeButton />}>
-              <I18n>About me</I18n>
-            </Header>
-          }
-        >
+        <Display actions={<ViewResumeButton />} header={<I18n>About me</I18n>}>
           <SpaceBetween
             className={contentClassName}
             direction="horizontal"
@@ -78,19 +71,13 @@ export default function Home(): ReactElement {
               </ul>
             </SpaceBetween>
           </SpaceBetween>
-        </Container>
+        </Display>
 
-        <Container
-          header={
-            <Header>
-              <I18n>Projects</I18n>
-            </Header>
-          }
-        >
+        <Display header={<I18n>Projects</I18n>}>
           <ul className={projectListClassName}>
             {PROJECTS.map(mapProjectToAttributes).map(mapProjectToListItem)}
           </ul>
-        </Container>
+        </Display>
       </SpaceBetween>
     </Wrapper>
   );
