@@ -1,0 +1,9 @@
+.root {
+  font-size: 2em;
+
+  // Shift text (but not icon) up by 0.333em
+  > * {
+    position: relative;
+    top: -0.333em;
+  }
+}

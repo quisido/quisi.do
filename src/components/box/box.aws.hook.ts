@@ -4,6 +4,7 @@ import mapSizeToSpacingSize from './box.util.map-size-to-spacing-size';
 
 interface Props {
   readonly element: 'h2' | 'p' | undefined;
+  readonly fontSize: 'large' | 'medium' | 'small' | undefined;
   readonly margin: 'large' | 'medium' | 'small' | undefined;
   readonly marginBottom: 'large' | 'medium' | 'small' | undefined;
   readonly marginLeft: 'large' | 'medium' | 'small' | undefined;
@@ -14,12 +15,14 @@ interface Props {
 }
 
 interface State {
+  readonly fontSize: BoxProps.FontSize | undefined;
   readonly margin: BoxProps.Spacing | undefined;
   readonly variant: 'h2' | 'p' | undefined;
 }
 
 export default function useAwsBox({
   element,
+  fontSize,
   margin,
   marginBottom,
   marginLeft,
@@ -39,6 +42,20 @@ export default function useAwsBox({
 
   return {
     variant: element,
+
+    fontSize: useMemo((): BoxProps.FontSize | undefined => {
+      if (typeof fontSize === 'undefined') {
+        return;
+      }
+      switch (fontSize) {
+        case 'large':
+          return 'display-l';
+        case 'medium':
+          return 'body-m';
+        case 'small':
+          return 'body-s';
+      }
+    }, [fontSize]),
 
     margin: useMemo((): BoxProps.Spacing | undefined => {
       if (

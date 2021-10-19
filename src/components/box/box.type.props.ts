@@ -4,6 +4,7 @@ interface BaseProps {
   readonly children: ReactNode;
   readonly className?: string | undefined;
   readonly element?: 'h2' | 'p' | undefined;
+  readonly fontSize?: 'large' | 'medium' | 'small' | undefined;
 }
 
 interface MarginProp {

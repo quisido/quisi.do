@@ -8,6 +8,7 @@ export default function AwsBox({
   children,
   className,
   element,
+  fontSize: fontSizeProp,
   margin: marginProp,
   marginBottom,
   marginLeft,
@@ -16,8 +17,13 @@ export default function AwsBox({
   marginX,
   marginY,
 }: Readonly<Props>): ReactElement {
-  const { margin: marginState, variant } = useAwsBox({
+  const {
+    fontSize: fontSizeState,
+    margin: marginState,
+    variant,
+  } = useAwsBox({
     element,
+    fontSize: fontSizeProp,
     margin: marginProp,
     marginBottom,
     marginLeft,
@@ -30,6 +36,9 @@ export default function AwsBox({
   const optionalProps: BoxProps = {};
   if (typeof className === 'string') {
     optionalProps.className = className;
+  }
+  if (typeof fontSizeState !== 'undefined') {
+    optionalProps.fontSize = fontSizeState;
   }
   if (typeof marginState !== 'undefined') {
     optionalProps.margin = marginState;

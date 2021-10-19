@@ -8,6 +8,7 @@ export default function MuiBox({
   children,
   className,
   element,
+  fontSize: fontSizeProp,
   margin,
   marginBottom,
   marginLeft,
@@ -16,7 +17,14 @@ export default function MuiBox({
   marginX,
   marginY,
 }: Readonly<Props>): ReactElement {
-  const { mb, ml, mr, mt } = useMuiBox({
+  const {
+    fontSize: fontSizeState,
+    mb,
+    ml,
+    mr,
+    mt,
+  } = useMuiBox({
+    fontSize: fontSizeProp,
     margin,
     marginBottom,
     marginLeft,
@@ -32,6 +40,9 @@ export default function MuiBox({
   }
   if (typeof element === 'string') {
     optionalProps.component = element;
+  }
+  if (typeof fontSizeState !== 'undefined') {
+    optionalProps.fontSize = fontSizeState;
   }
   if (typeof mb !== 'undefined') {
     optionalProps.mb = mb;
