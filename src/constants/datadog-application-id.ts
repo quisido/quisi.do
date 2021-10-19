@@ -1,3 +1,0 @@
-const DATADOG_APPLICATION_ID = 'e29eb164-e193-4380-b512-ebd70bbfaeb6';
-
-export default DATADOG_APPLICATION_ID;
