@@ -1,21 +1,23 @@
 import type { BreadcrumbsProps } from '@mui/material/Breadcrumbs';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import MuiLink from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import { Link as ReactRouterLink } from 'react-router-dom';
 import Box from '../../components/box';
-import type Breadcrumb from '../../types/breadcrumb';
+import mapComponentToPropMapper from '../../map/map-component-to-prop-mapper';
+import type BreadcrumbType from '../../types/breadcrumb';
+import BreadcrumbComponent from './wrapper.mui-breadcrumb.view';
 import useWrapperMuiBreadcrumbs from './wrapper.mui-breadcrumbs.hook';
 
 interface Props {
-  readonly children: readonly Readonly<Breadcrumb>[];
+  readonly children: readonly Readonly<BreadcrumbType>[];
 }
+
+const mapBreadcrumbPropsToBreadcrumb =
+  mapComponentToPropMapper(BreadcrumbComponent);
 
 export default function WrapperMuiBreadcrumbs({
   children: breadcrumbs,
 }: Readonly<Props>): ReactElement {
-  const { ariaLabel, expandText, lastIndex } =
+  const { ariaLabel, breadcrumbProps, expandText } =
     useWrapperMuiBreadcrumbs(breadcrumbs);
 
   // Workaround until MUI supports TypeScript 4.4 exact optional properties.
@@ -27,32 +29,7 @@ export default function WrapperMuiBreadcrumbs({
   return (
     <Box marginY="small">
       <Breadcrumbs aria-label={ariaLabel} {...optionalProps}>
-        {breadcrumbs.map(
-          (
-            { children, path }: Readonly<Breadcrumb>,
-            index: number,
-          ): ReactElement => {
-            if (index === lastIndex) {
-              return (
-                <Typography color="text.primary" key={index}>
-                  {children}
-                </Typography>
-              );
-            }
-
-            return (
-              <MuiLink
-                color="inherit"
-                component={ReactRouterLink}
-                key={index}
-                to={path}
-                underline="hover"
-              >
-                {children}
-              </MuiLink>
-            );
-          },
-        )}
+        {breadcrumbProps.map(mapBreadcrumbPropsToBreadcrumb)}
       </Breadcrumbs>
     </Box>
   );
