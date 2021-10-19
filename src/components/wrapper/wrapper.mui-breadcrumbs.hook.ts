@@ -2,6 +2,7 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 
 interface State {
+  readonly ariaLabel: string | undefined;
   readonly expandText: string | undefined;
   readonly lastIndex: number;
 }
@@ -14,6 +15,7 @@ export default function useWrapperMuiBreadcrumbs(
   const translate: TranslateFunction = useTranslate();
 
   return {
+    ariaLabel: translate('breadcrumb'),
     expandText: translate('Show path'),
     lastIndex: breadcrumbs.length + LAST_INDEX_OFFSET,
   };

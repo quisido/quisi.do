@@ -7,10 +7,8 @@ interface State {
   readonly handleNavigationClose: () => void;
   readonly handleNavigationOpen: () => void;
   readonly isNavigationOpen: boolean | undefined;
-  readonly mainStyle: CSSProperties;
+  readonly mainStyle: CSSProperties | undefined;
 }
-
-const NONE = 0;
 
 export default function useMuiWrapper(): State {
   const isMobile: boolean = useMuiMobile();
@@ -30,11 +28,15 @@ export default function useMuiWrapper(): State {
       setIsNavigationOpen(true);
     }, []),
 
-    mainStyle: useMemo(
-      (): CSSProperties => ({
-        marginLeft: isMobile ? NONE : MUI_NAVIGATION_WIDTH,
-      }),
-      [isMobile],
-    ),
+    mainStyle: useMemo((): CSSProperties | undefined => {
+      if (isMobile) {
+        return;
+      }
+      return {
+        marginLeft: MUI_NAVIGATION_WIDTH,
+        paddingLeft: '60px',
+        paddingRight: '60px',
+      };
+    }, [isMobile]),
   };
 }

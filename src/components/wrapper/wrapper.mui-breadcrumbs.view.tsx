@@ -4,6 +4,7 @@ import MuiLink from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { Link as ReactRouterLink } from 'react-router-dom';
+import Box from '../../components/box';
 import type Breadcrumb from '../../types/breadcrumb';
 import useWrapperMuiBreadcrumbs from './wrapper.mui-breadcrumbs.hook';
 
@@ -14,7 +15,8 @@ interface Props {
 export default function WrapperMuiBreadcrumbs({
   children: breadcrumbs,
 }: Readonly<Props>): ReactElement {
-  const { expandText, lastIndex } = useWrapperMuiBreadcrumbs(breadcrumbs);
+  const { ariaLabel, expandText, lastIndex } =
+    useWrapperMuiBreadcrumbs(breadcrumbs);
 
   // Workaround until MUI supports TypeScript 4.4 exact optional properties.
   const optionalProps: Pick<BreadcrumbsProps, 'expandText'> = {};
@@ -23,33 +25,35 @@ export default function WrapperMuiBreadcrumbs({
   }
 
   return (
-    <Breadcrumbs {...optionalProps}>
-      {breadcrumbs.map(
-        (
-          { children, path }: Readonly<Breadcrumb>,
-          index: number,
-        ): ReactElement => {
-          if (index === lastIndex) {
-            return (
-              <Typography color="text.primary" key={index}>
-                {children}
-              </Typography>
-            );
-          }
+    <Box marginY="small">
+      <Breadcrumbs aria-label={ariaLabel} {...optionalProps}>
+        {breadcrumbs.map(
+          (
+            { children, path }: Readonly<Breadcrumb>,
+            index: number,
+          ): ReactElement => {
+            if (index === lastIndex) {
+              return (
+                <Typography color="text.primary" key={index}>
+                  {children}
+                </Typography>
+              );
+            }
 
-          return (
-            <MuiLink
-              color="inherit"
-              component={ReactRouterLink}
-              key={index}
-              to={path}
-              underline="hover"
-            >
-              {children}
-            </MuiLink>
-          );
-        },
-      )}
-    </Breadcrumbs>
+            return (
+              <MuiLink
+                color="inherit"
+                component={ReactRouterLink}
+                key={index}
+                to={path}
+                underline="hover"
+              >
+                {children}
+              </MuiLink>
+            );
+          },
+        )}
+      </Breadcrumbs>
+    </Box>
   );
 }
