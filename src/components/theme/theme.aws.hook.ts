@@ -1,9 +1,12 @@
 import { Mode, applyMode } from '@awsui/global-styles';
 import { useLayoutEffect } from 'react';
 import useDarkMode from '../../hooks/use-dark-mode';
+import useGlobalStyles from './theme.aws.hook.global-styles';
 
 export default function useAwsTheme(): void {
   const isDarkModeEnabled: boolean = useDarkMode();
+
+  useGlobalStyles();
 
   useLayoutEffect((): undefined | VoidFunction => {
     if (isDarkModeEnabled) {
