@@ -1,29 +1,25 @@
-import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import type { ReactElement } from 'react';
-import type SelectOption from '../../types/select-option';
+import mapComponentToPropMapper from '../../map/map-component-to-prop-mapper';
 import useMuiSelect from './select.mui.hook';
+import MenuItem from './select.mui-menu-item';
 import type Props from './select.type.props';
+
+const mapMenuItemPropsToMenuItem = mapComponentToPropMapper(MenuItem);
 
 export default function MuiSelect({
   onChange,
   options,
   value: selectValue,
-}: Props): ReactElement {
-  const { handleChange } = useMuiSelect({ onChange });
+}: Readonly<Props>): ReactElement {
+  const { handleChange, menuItemProps } = useMuiSelect({
+    onChange,
+    options,
+  });
 
   return (
     <Select onChange={handleChange} size="small" value={selectValue}>
-      {options.map(
-        ({
-          label,
-          value: optionValue,
-        }: Readonly<SelectOption>): ReactElement => (
-          <MenuItem key={optionValue} value={optionValue}>
-            {label}
-          </MenuItem>
-        ),
-      )}
+      {menuItemProps.map(mapMenuItemPropsToMenuItem)}
     </Select>
   );
 }
