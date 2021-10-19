@@ -1,5 +1,5 @@
 import type { Attributes } from 'react';
-import type Project from '../../types/project';
+import type Project from '../../../types/project';
 
 export default function mapProjectToAttributes(
   project: Project,
