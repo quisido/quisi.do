@@ -1,8 +1,8 @@
 import type { ButtonProps } from '@awsui/components-react/button';
 import Button from '@awsui/components-react/button';
 import type { ReactElement } from 'react';
-import type Props from './button.type.props';
 import useAwsButton from './button.aws.hook';
+import type Props from './types/props';
 
 export default function AwsButton({
   children,

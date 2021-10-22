@@ -1,4 +1,4 @@
-import type SelectOption from '../../types/select-option';
+import type SelectOption from '../../../types/select-option';
 
 export default interface Props {
   readonly onChange: (value: string | undefined) => void;

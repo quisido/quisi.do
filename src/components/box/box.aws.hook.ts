@@ -1,6 +1,6 @@
 import type { BoxProps } from '@awsui/components-react';
 import { useMemo } from 'react';
-import mapSizeToSpacingSize from './box.util.map-size-to-spacing-size';
+import mapSizeToSpacingSize from './utils/map-size-to-spacing-size';
 
 interface Props {
   readonly element: 'h2' | 'p' | undefined;

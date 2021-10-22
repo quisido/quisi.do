@@ -1,8 +1,8 @@
 import type { ButtonProps } from '@mui/material/Button';
 import Button from '@mui/material/Button';
 import type { ReactElement } from 'react';
-import type Props from './button.type.props';
 import useMuiButton from './button.mui.hook';
+import type Props from './types/props';
 
 export default function MuiButton({
   children,

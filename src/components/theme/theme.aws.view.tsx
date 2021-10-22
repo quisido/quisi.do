@@ -1,9 +1,6 @@
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactElement } from 'react';
 import useAwsTheme from './theme.aws.hook';
-
-interface Props {
-  readonly children: ReactNode;
-}
+import type Props from './types/props';
 
 export default function AwsTheme({ children }: Props): ReactElement {
   useAwsTheme();

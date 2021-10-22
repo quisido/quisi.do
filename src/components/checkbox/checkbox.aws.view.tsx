@@ -1,7 +1,7 @@
 import Checkbox from '@awsui/components-react/checkbox';
 import type { ReactElement } from 'react';
 import useAwsCheckbox from './checkbox.aws.hook';
-import type Props from './checkbox.type.props';
+import type Props from './types/props';
 
 export default function AwsCheckbox({
   checked,

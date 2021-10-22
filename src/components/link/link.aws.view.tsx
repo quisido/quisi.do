@@ -2,7 +2,7 @@ import type { LinkProps } from '@awsui/components-react/link';
 import Link from '@awsui/components-react/link';
 import type { ReactElement } from 'react';
 import useAwsLink from './link.aws.hook';
-import type Props from './link.type.props';
+import type Props from './types/props';
 
 export default function AwsLink({
   children,

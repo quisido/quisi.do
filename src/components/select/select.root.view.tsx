@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { lazy } from 'react';
 import Design from '../../components/design';
 import DesignSystem from '../../constants/design-system';
-import type Props from './select.type.props';
+import type Props from './types/props';
 
 const AwsSelect = lazy(async () => import('./select.aws.view'));
 const MuiSelect = lazy(async () => import('./select.mui.view'));

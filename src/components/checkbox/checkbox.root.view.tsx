@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { lazy } from 'react';
 import Design from '../../components/design';
 import DesignSystem from '../../constants/design-system';
-import type Props from './checkbox.type.props';
+import type Props from './types/props';
 
 const AwsCheckbox = lazy(async () => import('./checkbox.aws.view'));
 const MuiCheckbox = lazy(async () => import('./checkbox.mui.view'));

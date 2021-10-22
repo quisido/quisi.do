@@ -1,4 +1,4 @@
-import mapSizeToSystemValue from './box.util.map-size-to-system-value';
+import mapSizeToSystemValue from './utils/map-size-to-system-value';
 
 interface Props {
   readonly fontSize: 'large' | 'medium' | 'small' | undefined;

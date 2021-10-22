@@ -1,7 +1,7 @@
 import type { SelectProps } from '@awsui/components-react';
 import { useCallback, useMemo } from 'react';
 import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-event';
-import type Props from './select.type.props';
+import type Props from './types/props';
 
 interface State {
   readonly handleChange: (event: ReadonlySelectChangeEvent) => void;

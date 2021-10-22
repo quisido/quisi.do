@@ -2,7 +2,7 @@ import type { BoxProps } from '@mui/material/Box';
 import Box from '@mui/material/Box';
 import type { ReactElement } from 'react';
 import useMuiBox from './box.mui.hook';
-import type Props from './box.type.props';
+import type Props from './types/props';
 
 export default function MuiBox({
   children,

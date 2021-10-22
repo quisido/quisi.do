@@ -145,6 +145,7 @@ jobs:
       - name: Cypress
         uses: cypress-io/github-action@v2
         env:
+          CHOKIDAR_USEPOLLING: true
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}

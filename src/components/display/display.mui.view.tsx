@@ -3,7 +3,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import type { ReactElement } from 'react';
-import type Props from './display.type.props';
+import type Props from './types/props';
 
 export default function MuiDisplay({
   actions,

@@ -2,7 +2,7 @@ import type { BoxProps } from '@awsui/components-react/box';
 import Box from '@awsui/components-react/box';
 import type { ReactElement } from 'react';
 import useAwsBox from './box.aws.hook';
-import type Props from './box.type.props';
+import type Props from './types/props';
 
 export default function AwsBox({
   children,
