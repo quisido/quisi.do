@@ -122,7 +122,7 @@ jobs:
 
   cypress:
     needs: set-version
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os || 'ubuntu' }}-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -153,7 +153,7 @@ jobs:
         with:
           command: yarn cypress
           browser: ${{ matrix.browser }}
-          group: ${{ matrix.browser }}
+          group: ${{ matrix.os }}-${{ matrix.browser }}
           record: true
           start: yarn start
           tag: ${{ github.event_name }}
@@ -162,6 +162,9 @@ jobs:
       fail-fast: false
       matrix:
         browser: [edge, firefox, chrome]
+        include:
+          - browser: edge
+            os: windows
 
   sentry-release:
     needs: build
