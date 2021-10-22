@@ -152,10 +152,16 @@ jobs:
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
         with:
           command: yarn cypress
+          browser: ${{ matrix.browser }}
+          group: ${{ matrix.browser }}
           record: true
           start: yarn start
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000'
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [edge, firefox, chrome]
 
   github-pages:
     needs: [build, cypress, eslint, jest]
