@@ -17,6 +17,13 @@ commands in order:
 
 To run the website locally, use `yarn start`.
 
+### Commands
+
+- `yarn build` to build the production application.
+- `yarn cypress` to run end-to-end tests.
+- `yarn jest` to run unit tests.
+- `yarn start` to start the development application.
+
 ### Debugging
 
 #### `Node Sass does not yet support your current environment: OS X 64-bit with Unsupported runtime (93)`

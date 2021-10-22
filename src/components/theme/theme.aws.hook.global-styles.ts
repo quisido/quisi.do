@@ -1,4 +1,3 @@
-import '@awsui/global-styles/index.css';
 import { useLayoutEffect } from 'react';
 import getAwsuiGlobalStyleElement from './utils/get-awsui-global-style-element';
 import mapElementToParentNode from './utils/map-element-to-parent-node';
