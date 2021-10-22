@@ -60,7 +60,7 @@ jobs:
         env:
           DD_ENV: ci
 
-  set-version:
+  version:
     needs: install
     runs-on: ubuntu-latest
     steps:
@@ -74,10 +74,10 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn
-      - name: Set version
+      - name: Version
         run: |
           mkdir ~/version/
-          echo $(yarn get-version) > ~/version/index.txt
+          echo $(yarn version) > ~/version/index.txt
       - name: Upload version
         uses: actions/upload-artifact@v2
         with:
@@ -85,7 +85,7 @@ jobs:
           path: '~/version/'
 
   build:
-    needs: set-version
+    needs: version
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -121,7 +121,7 @@ jobs:
           path: build
 
   cypress:
-    needs: set-version
+    needs: version
     runs-on: ${{ matrix.os || 'ubuntu' }}-latest
     steps:
       - name: Checkout
@@ -132,8 +132,6 @@ jobs:
           cache: yarn
           check-latest: true
           node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn
       - name: Download version
         uses: actions/download-artifact@v2
         with:
@@ -152,7 +150,9 @@ jobs:
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
         with:
           browser: ${{ matrix.browser }}
+          ci-build-id: ${{ github.event_name }}-${{ github.sha }}
           group: ${{ matrix.os }}-${{ matrix.browser }}
+          install-command: yarn
           record: true
           start: yarn start
           tag: ${{ github.event_name }}

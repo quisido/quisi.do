@@ -27,11 +27,11 @@
     "cypress": "cypress run --record",
     "datadog-synthetics": "datadog-ci synthetics run-tests",
     "eslint": "eslint src",
-    "get-version": "ts-node ./scripts/get-version",
     "jest": "jest",
     "jest-watch": "jest --coverage=false --watch",
     "start": "react-scripts start",
-    "verify-cloudflare-api-token": "ts-node ./scripts/verify-cloudflare-api-token"
+    "verify-cloudflare-api-token": "ts-node ./scripts/verify-cloudflare-api-token",
+    "version": "ts-node ./scripts/version"
   },
   "devDependencies": {
     "@awsui/components-react": "^3.0.312",
