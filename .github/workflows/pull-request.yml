@@ -151,7 +151,6 @@ jobs:
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
         with:
-          command: yarn cypress
           browser: ${{ matrix.browser }}
           group: ${{ matrix.os }}-${{ matrix.browser }}
           record: true
