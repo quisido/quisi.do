@@ -155,6 +155,7 @@ jobs:
           command-prefix: yarn dlx
           group: ${{ matrix.os }}-${{ matrix.browser }}
           install-command: yarn
+          parallel: true
           record: true
           start: yarn start
           tag: ${{ github.event_name }}
@@ -165,6 +166,7 @@ jobs:
       matrix:
         browser: [edge, firefox, chrome]
         os: [ubuntu, windows]
+        parallel: [1, 2, 3, 4, 5]
         exclude:
           - browser: edge
             os: ubuntu
