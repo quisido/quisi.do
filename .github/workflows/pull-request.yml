@@ -165,8 +165,8 @@ jobs:
       fail-fast: false
       matrix:
         browser: [edge, firefox, chrome]
-        features: [home, packages, publications, quotes, spritesheet2gif]
         os: [ubuntu, windows]
+        parallel: [1, 2, 3, 4, 5]
         exclude:
           - browser: edge
             os: ubuntu
