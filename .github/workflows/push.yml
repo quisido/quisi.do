@@ -165,7 +165,7 @@ jobs:
       matrix:
         browser: [edge, firefox, chrome]
         os: [ubuntu, windows]
-        parallel: [1, 2, 3, 4, 5]
+        parallel: [1, 2, 3]
         exclude:
           - browser: edge
             os: ubuntu
