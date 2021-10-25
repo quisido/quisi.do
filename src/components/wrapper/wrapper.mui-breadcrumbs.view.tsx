@@ -2,8 +2,8 @@ import type { BreadcrumbsProps } from '@mui/material/Breadcrumbs';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import type { ReactElement } from 'react';
 import Box from '../../components/box';
-import mapComponentToPropMapper from '../../map/map-component-to-prop-mapper';
 import type BreadcrumbType from '../../types/breadcrumb';
+import mapComponentToPropMapper from '../../utils/map-component-to-prop-mapper';
 import BreadcrumbComponent from './wrapper.mui-breadcrumb.view';
 import useWrapperMuiBreadcrumbs from './wrapper.mui-breadcrumbs.hook';
 

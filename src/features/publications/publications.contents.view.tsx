@@ -6,8 +6,8 @@ import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import NumberFormat from '../../components/number-format';
-import CARD_DEFINITION from './publications.constant.card-definition';
-import MINIMUM_VIEWS from './publications.constant.minimum-views';
+import CARD_DEFINITION from './constants/publications-card-definition';
+import MINIMUM_VIEWS from './constants/minimum-publications-views';
 import usePublicationsContents from './publications.contents.hook';
 import Header from './publications.header.view';
 

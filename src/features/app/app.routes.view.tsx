@@ -5,8 +5,8 @@ import Packages from '../../features/packages';
 import Publications from '../../features/publications';
 import Quotes from '../../features/quotes';
 import SpriteSheet2Gif from '../../features/spritesheet2gif';
-import externalRedirect from './app.util.external-redirect';
-import mapPathToRedirect from './app.util.map-path-to-redirect';
+import externalRedirect from './utils/external-redirect';
+import mapPathToRedirect from './utils/map-path-to-redirect';
 
 const PackagesRedirect = mapPathToRedirect('/packages');
 const PublicationsRedirect = mapPathToRedirect('/publications');

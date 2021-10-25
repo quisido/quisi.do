@@ -1,5 +1,5 @@
-import MINIMUM_VIEWS from './publications.constant.minimum-views';
-import type Item from './publications.type.item';
+import MINIMUM_VIEWS from '../constants/minimum-publications-views';
+import type Item from '../types/publications-item';
 
 export default function filterPublicationItemsByMinimumViews({
   views,

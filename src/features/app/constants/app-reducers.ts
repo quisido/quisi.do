@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/prefer-readonly-parameter-types */
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type DesignSystem from '../../constants/design-system';
-import type Language from '../../constants/language';
-import type Mutable from '../../types/mutable';
-import type AppState from './app.type.state';
+import type DesignSystem from '../../../constants/design-system';
+import type Language from '../../../constants/language';
+import type Mutable from '../../../types/mutable';
+import type AppState from '../types/app-state';
 
 const APP_REDUCERS = {
   setDarkMode: (

@@ -1,6 +1,6 @@
 import type { Dispatch } from 'react';
 import { useCallback } from 'react';
-import { setDarkMode } from '../features/app/app.constant.slice';
+import { setDarkMode } from '../features/app/constants/app-slice';
 import useReduxDispatch from './use-redux-dispatch';
 
 export default function useSetDarkMode(): Dispatch<boolean> {

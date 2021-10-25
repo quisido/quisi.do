@@ -3,9 +3,9 @@ import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import RetryAction from '../../components/retry-action';
 import useNpmDownloads from '../../hooks/use-npm-downloads';
-import mapUnknownToString from '../../map/map-unknown-to-string';
 import type Breadcrumb from '../../types/breadcrumb';
 import type Notification from '../../types/notification';
+import mapUnknownToString from '../../utils/map-unknown-to-string';
 
 interface State {
   readonly breadcrumbs: readonly Breadcrumb[];

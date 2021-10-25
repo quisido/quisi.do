@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import REDUCERS from './app.constant.reducers';
-import INITIAL_STATE from './app.constant.initial-state';
+import REDUCERS from '../constants/app-reducers';
+import INITIAL_STATE from '../constants/initial-app-state';
 
 const APP_SLICE = createSlice({
   initialState: INITIAL_STATE,

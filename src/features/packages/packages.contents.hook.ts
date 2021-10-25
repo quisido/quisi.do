@@ -22,9 +22,9 @@ import usePageSizePreference from './packages.contents.hook.page-size-preference
 import useVisibleContentPreference from './packages.contents.hook.visible-content-preference';
 import useWrapLinesPreference from './packages.contents.hook.wrap-lines-preference';
 import PackageDescription from './packages.description.view';
-import filterDefaultPackage from './packages.filter.default-package';
-import mapNpmDownloadsEntryToItem from './packages.map.npm-downloads-entry-to-item';
-import type Item from './packages.type.item';
+import type Item from './types/packages-item';
+import filterDefaultPackage from './utils/filter-default-package';
+import mapNpmDownloadsEntryToItem from './utils/map-npm-downloads-entry-to-item';
 
 interface State {
   readonly cancelLabel: string;

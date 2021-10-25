@@ -4,9 +4,9 @@ import type { SelectProps } from '@awsui/components-react/select';
 import type { ChangeEvent, ComponentType, MutableRefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-event';
+import Direction from './constants/direction';
 import AutomaticDimensionInfo from './spritesheet2gif.automatic-dimension-info.view';
 import AutomaticDirectionInfo from './spritesheet2gif.automatic-direction-info.view';
-import Direction from './spritesheet2gif.constant.direction';
 import HeaderInfo from './spritesheet2gif.header-info.view';
 import MatteInfo from './spritesheet2gif.matte-info.view';
 

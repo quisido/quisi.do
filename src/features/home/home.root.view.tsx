@@ -6,7 +6,7 @@ import Display from '../../components/display';
 import Wrapper from '../../components/wrapper';
 import PROJECTS from '../../constants/projects';
 import avatar from '../../images/charles-stover.jpg';
-import mapComponentToPropMapper from '../../map/map-component-to-prop-mapper';
+import mapComponentToPropMapper from '../../utils/map-component-to-prop-mapper';
 import validateString from '../../utils/validate-string';
 import ProjectListItem from './home.project-list-item.view';
 import useHome from './home.root.hook';

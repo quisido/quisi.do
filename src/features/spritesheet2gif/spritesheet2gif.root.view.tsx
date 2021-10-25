@@ -6,7 +6,7 @@ import { Suspense, lazy } from 'react';
 import Wrapper from '../../components/wrapper';
 import type Breadcrumb from '../../types/breadcrumb';
 import useSpriteSheet2Gif from './spritesheet2gif.root.hook';
-import type ContentsProps from './spritesheet2gif.type.contents-props';
+import type ContentsProps from './types/contents-props';
 
 const BREADCRUMBS: readonly Breadcrumb[] = [
   {

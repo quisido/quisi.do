@@ -6,7 +6,7 @@ import { useMemo } from 'react';
 import DirectDownloads from './packages.direct-downloads-cell.view';
 import PackageName from './packages.name-cell.view';
 import TotalDownloads from './packages.total-downloads-cell.view';
-import type Item from './packages.type.item';
+import type Item from './types/packages-item';
 
 interface Props {
   readonly filteringText: string;

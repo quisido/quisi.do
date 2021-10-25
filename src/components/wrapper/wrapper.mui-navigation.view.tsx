@@ -1,6 +1,6 @@
 import List from '@mui/material/List';
 import type { ReactElement } from 'react';
-import mapComponentToPropMapper from '../../map/map-component-to-prop-mapper';
+import mapComponentToPropMapper from '../../utils/map-component-to-prop-mapper';
 import ROOT_ITEM_PROPS from './constants/mui-navigation-root-item-props';
 import type Props from './types/mui-navigation-props';
 import useMuiNavigation from './wrapper.mui-navigation.hook';

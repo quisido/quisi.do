@@ -8,11 +8,11 @@ import StatusIndicator from '@awsui/components-react/status-indicator';
 import I18n from 'lazy-i18n';
 import NumberFormat from 'number-format-react';
 import type { ReactElement } from 'react';
-import Minutes from '../../components/minutes';
-import mapTimeToDaysAgo from '../../map/map-time-to-days-ago';
-import validateString from '../../utils/validate-string';
-import styles from './publications.constant.card-definition.module.scss';
-import type Item from './publications.type.item';
+import Minutes from '../../../components/minutes';
+import mapTimeToDaysAgo from '../../../utils/map-time-to-days-ago';
+import validateString from '../../../utils/validate-string';
+import type Item from '../types/publications-item';
+import styles from './publications-card-definition.module.scss';
 
 const bannerHeightClassName: string = validateString(styles.bannerHeight);
 const bannerWidthClassName: string = validateString(styles.bannerWidth);

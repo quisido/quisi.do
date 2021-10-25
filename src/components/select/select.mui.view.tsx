@@ -1,6 +1,6 @@
 import Select from '@mui/material/Select';
 import type { ReactElement } from 'react';
-import mapComponentToPropMapper from '../../map/map-component-to-prop-mapper';
+import mapComponentToPropMapper from '../../utils/map-component-to-prop-mapper';
 import useMuiSelect from './select.mui.hook';
 import MenuItem from './select.mui-menu-item';
 import type Props from './types/props';

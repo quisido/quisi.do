@@ -6,7 +6,7 @@ import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-event';
 import validateString from '../../utils/validate-string';
-import type Sort from './publications.constant.sort';
+import type Sort from './constants/publications-sort';
 import usePublicationsHeader from './publications.header.hook';
 import styles from './publications.header.module.scss';
 

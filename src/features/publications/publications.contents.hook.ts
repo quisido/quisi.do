@@ -7,11 +7,11 @@ import ReactCapsule, { useCapsule } from 'react-capsule';
 import useDevStats from '../../hooks/use-dev-stats';
 import useMediumStats from '../../hooks/use-medium-stats';
 import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-event';
-import Sort from './publications.constant.sort';
+import Sort from './constants/publications-sort';
 import useItems from './publications.contents.hook.items';
-import filterItemsByMinimumViews from './publications.filter.items-by-minimum-views';
-import mapSortToFunction from './publications.map.sort-to-function';
-import type Item from './publications.type.item';
+import type Item from './types/publications-item';
+import filterItemsByMinimumViews from './utils/filter-publications-items-by-minimum-views';
+import mapSortToFunction from './utils/map-publications-sort-to-function';
 
 interface State {
   readonly dismissAriaLabel: string | undefined;

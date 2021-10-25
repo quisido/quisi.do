@@ -1,6 +1,6 @@
-import DesignSystem from '../../constants/design-system';
-import Language from '../../constants/language';
-import type AppState from './app.type.state';
+import DesignSystem from '../../../constants/design-system';
+import Language from '../../../constants/language';
+import type AppState from '../types/app-state';
 
 const INITIAL_APP_STATE: AppState = {
   designSystem: DesignSystem.Aws,

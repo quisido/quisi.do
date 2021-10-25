@@ -10,7 +10,7 @@ import validateString from '../../utils/validate-string';
 import ApiGifResponse from './spritesheet2gif.api-gif-response.view';
 import useSpriteSheet2GifContents from './spritesheet2gif.contents.hook';
 import styles from './spritesheet2gif.contents.module.scss';
-import type ContentsProps from './spritesheet2gif.type.contents-props';
+import type ContentsProps from './types/contents-props';
 
 const headerClassName: string = validateString(styles.header);
 const matteClassName: string = validateString(styles.matte);

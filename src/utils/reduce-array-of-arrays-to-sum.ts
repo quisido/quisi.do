@@ -1,4 +1,4 @@
-import reduceArrayToSum from '../reduce/reduce-array-to-sum';
+import reduceArrayToSum from '../utils/reduce-array-to-sum';
 
 const NONE = 0;
 

@@ -1,7 +1,7 @@
-import PACKAGE_DEPENDENCIES from '../../constants/package-dependencies';
-import mapPackageNameToRepositoryName from '../../map/map-package-name-to-repository-name';
-import reduceArrayToSum from '../../reduce/reduce-array-to-sum';
-import type Item from './packages.type.item';
+import PACKAGE_DEPENDENCIES from '../../../constants/package-dependencies';
+import mapPackageNameToRepositoryName from '../../../utils/map-package-name-to-repository-name';
+import reduceArrayToSum from '../../../utils/reduce-array-to-sum';
+import type Item from '../types/packages-item';
 
 const NONE = 0;
 

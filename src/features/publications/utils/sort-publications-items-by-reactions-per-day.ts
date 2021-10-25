@@ -1,4 +1,4 @@
-import type Item from './publications.type.item';
+import type Item from '../types/publications-item';
 
 const NEXT = 1;
 const NOW: number = Date.now();
