@@ -2,8 +2,8 @@ import type { BoxProps } from '@awsui/components-react/box';
 import Box from '@awsui/components-react/box';
 import type { CardsProps } from '@awsui/components-react/cards';
 import type { ReactElement } from 'react';
-import type Quote from '../../../types/quote';
 import validateString from '../../../utils/validate-string';
+import type Quote from '../types/quote';
 import styles from './quotes-card-definition.module.scss';
 
 const IMAGE_SIZE = 100;
