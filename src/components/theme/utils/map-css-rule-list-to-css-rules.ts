@@ -1,4 +1,4 @@
-export default function mapCssRuleListToCssStyleRules(
+export default function mapCssRuleListToCssRules(
   list: Readonly<CSSRuleList>,
 ): Set<CSSRule> {
   const rules: Set<CSSRule> = new Set();
