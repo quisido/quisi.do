@@ -1,7 +1,7 @@
 import SentryFullStory from '@sentry/fullstory';
 import type { Integration } from '@sentry/types';
 import { useMemo } from 'react';
-import useReactRouterV6SentryBrowserTracingIntegration from '../../modules/react-router-v6-instrumentation';
+import useReactRouterV6SentryBrowserTracingIntegration from 'react-router-v6-instrumentation';
 
 interface State {
   readonly integrations: readonly Integration[];
