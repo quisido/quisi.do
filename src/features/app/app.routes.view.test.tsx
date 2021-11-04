@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import expect from 'expect';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import Routes from './app.routes.view';
@@ -14,7 +15,9 @@ Object.defineProperty(global.window, 'location', {
 describe('App', (): void => {
   it('should reroute "Become the junior developer that companies want to hire" to Medium', (): void => {
     render(<Routes />, {
-      wrapper({ children }: PropsWithChildren<unknown>): ReactElement {
+      wrapper({
+        children,
+      }: Readonly<PropsWithChildren<unknown>>): ReactElement {
         return (
           <MemoryRouter
             initialEntries={[
