@@ -15,6 +15,51 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+  build:
+    needs: install-yarn
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install
+      - name: Build
+        run: yarn build
+        env:
+          # Ignore warnings from `mini-css-extract-plugin`.
+          CI: false
+          REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
+          REACT_APP_GITHUB_SHA: ${{ github.sha }}
+      - name: Upload build
+        uses: actions/upload-artifact@v2
+        with:
+          if-no-files-found: error
+          name: build
+          path: build
+
+  eslint:
+    needs: install-yarn
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install
+      - name: ESLint
+        run: yarn eslint
+
   install-cypress:
     needs: install-yarn
     runs-on: ${{ matrix.os }}-latest
@@ -36,23 +81,6 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu, windows]
-
-  eslint:
-    needs: install-yarn
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install
-      - name: ESLint
-        run: yarn eslint
 
   jest:
     needs: install-yarn
@@ -81,34 +109,12 @@ jobs:
         run: yarn jest
         env:
           DD_ENV: ci
-
-  build:
-    needs: install-yarn
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install
-      - name: Build
-        run: yarn build
-        env:
-          # Ignore warnings from `mini-css-extract-plugin`.
-          CI: false
-          REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
-          REACT_APP_GITHUB_SHA: ${{ github.sha }}
-      - name: Upload build
+      - name: Upload coverage
         uses: actions/upload-artifact@v2
         with:
           if-no-files-found: error
-          name: build
-          path: build
+          name: jest-coverage
+          path: jest/coverage
 
   cypress:
     needs: install-cypress
