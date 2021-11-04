@@ -3,7 +3,7 @@ import mapCssRulesToAwsuiGlobalStyleSheetElement from '../utils/map-css-rules-to
 import mapCssStyleSheetToCssRules from '../utils/map-css-style-sheet-to-css-rules';
 
 export default function mapCssStyleSheetsToAwsuiGlobalStyleSheetElement(
-  sheets: Set<CSSStyleSheet>,
+  sheets: Readonly<Set<CSSStyleSheet>>,
 ): Element | ProcessingInstruction {
   for (const sheet of sheets) {
     const rules: Set<CSSRule> = mapCssStyleSheetToCssRules(sheet);

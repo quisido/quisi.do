@@ -1,7 +1,7 @@
-import type { History } from 'history';
 import type { MouseEvent } from 'react';
 import { useMemo } from 'react';
-import { useHistory } from 'react-router';
+import type { NavigateFunction } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import filterHrefByBlank from '../../utils/filter-href-by-blank';
 
 interface Props {
@@ -16,9 +16,9 @@ interface State {
 }
 
 export default function useMuiButton({ href }: Readonly<Props>): State {
-  const history: History<unknown> = useHistory();
-
   const isBlank: boolean = filterHrefByBlank(href);
+  const navigate: NavigateFunction = useNavigate();
+
   return {
     variant: 'contained',
 
@@ -33,12 +33,12 @@ export default function useMuiButton({ href }: Readonly<Props>): State {
         // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
         return (e: Readonly<MouseEvent<HTMLButtonElement>>): void => {
           e.preventDefault();
-
           if (isBlank) {
             window.open(href, '_blank');
+            return;
           }
-          history.push(href);
+          navigate(href);
         };
-      }, [history, isBlank, href]),
+      }, [href, isBlank, navigate]),
   };
 }

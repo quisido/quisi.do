@@ -3,7 +3,7 @@ import MISSING_AWSUI_GLOBAL_STYLESHEET_OWNER_NODE_ERROR from '../constants/missi
 import filterCssRuleByAwsuiCssFontFaceRule from '../utils/filter-css-rule-by-awsui-css-font-face-rule';
 
 export default function mapCssRulesToAwsuiGlobalStyleSheetElement(
-  rules: Set<CSSRule>,
+  rules: Readonly<Set<CSSRule>>,
 ): Element | ProcessingInstruction | null {
   for (const rule of rules) {
     if (!filterCssRuleByAwsuiCssFontFaceRule(rule)) {

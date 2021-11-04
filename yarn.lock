@@ -3868,15 +3868,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.7.6":
-  version: 7.16.0
-  resolution: "@babel/runtime@npm:7.16.0"
-  dependencies:
-    regenerator-runtime: ^0.13.4
-  checksum: bfbca3ec52c94de262a3932473bceeead1a088b50194108fa1ff6eda447333f0f7d43fa4e9c5937c6e5d45bf838da8480905d0a227589b257c51f954ea060bac
-  languageName: node
-  linkType: hard
-
 "@babel/runtime@npm:^7.12.13":
   version: 7.15.3
   resolution: "@babel/runtime@npm:7.15.3"
@@ -3901,6 +3892,15 @@ __metadata:
   dependencies:
     regenerator-runtime: ^0.13.4
   checksum: 9229c12ad2b0ba28f64fb920ef132a04742ad860939cc2a163dd2472831e40b4a72aba2b9eb3bcf02e3f03c773a06a6a8d829440d3888c1493f81198133f2152
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:^7.7.6":
+  version: 7.16.0
+  resolution: "@babel/runtime@npm:7.16.0"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: bfbca3ec52c94de262a3932473bceeead1a088b50194108fa1ff6eda447333f0f7d43fa4e9c5937c6e5d45bf838da8480905d0a227589b257c51f954ea060bac
   languageName: node
   linkType: hard
 
@@ -5440,7 +5440,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/browser@npm:6.14.0":
+"@sentry/browser@npm:6.14.0, @sentry/browser@npm:^6.14.0":
   version: 6.14.0
   resolution: "@sentry/browser@npm:6.14.0"
   dependencies:
@@ -6018,7 +6018,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/history@npm:*, @types/history@npm:^4.7.9":
+"@types/history@npm:^4.7.9":
   version: 4.7.9
   resolution: "@types/history@npm:4.7.9"
   checksum: 556b062adb92795839301965776b0418e9ca32798bd8a6031345a6a84d7512771107143a497b7e3ff826d0b0d4456e962c6450485dda6f55c7dd33371e840529
@@ -6262,37 +6262,6 @@ __metadata:
     hoist-non-react-statics: ^3.3.0
     redux: ^4.0.0
   checksum: 5e0405d0d312f1b5e2dd48ab5833d3226295931fe8d276bd0891fafe4dd7ba9efbc74b1e8b30685ba96e9dc1a63d57444ae335785ce6fda96900d5fc9f800dcf
-  languageName: node
-  linkType: hard
-
-"@types/react-router-dom@npm:^5.3.2":
-  version: 5.3.2
-  resolution: "@types/react-router-dom@npm:5.3.2"
-  dependencies:
-    "@types/history": "*"
-    "@types/react": "*"
-    "@types/react-router": "*"
-  checksum: 90f052dc5a43a77edaf41d2afa781c8ed2164cd7922b3cdf5daae446b02a2f279382425e6efc338260782c0a24d25a6101e3658acb41c8a053695968a351ea96
-  languageName: node
-  linkType: hard
-
-"@types/react-router@npm:*":
-  version: 5.1.8
-  resolution: "@types/react-router@npm:5.1.8"
-  dependencies:
-    "@types/history": "*"
-    "@types/react": "*"
-  checksum: 9204d43701ae96a61a97b869fa8d6ec6ff65ede7f7f729e0b9b8e8c31eeb27c12ac0584a78acf697bf7038b534cbdff9adc35869caab80bebca00ceb0ab09ce1
-  languageName: node
-  linkType: hard
-
-"@types/react-router@npm:^5.1.17":
-  version: 5.1.17
-  resolution: "@types/react-router@npm:5.1.17"
-  dependencies:
-    "@types/history": "*"
-    "@types/react": "*"
-  checksum: b9d1c7b6ce073652c39712d2b02aeec7640036e369c04be2e57e4b0eb049b64ec9f34fb91cad680ab3f794e89576f77aacadb015b61eb21500a1779e5c955b86
   languageName: node
   linkType: hard
 
@@ -8976,6 +8945,7 @@ __metadata:
     "@mui/material": ^5.0.6
     "@mui/system": ^5.0.6
     "@reduxjs/toolkit": ^1.6.2
+    "@sentry/browser": ^6.14.0
     "@sentry/fullstory": ^1.1.6
     "@sentry/react": ^6.14.0
     "@sentry/tracing": ^6.14.0
@@ -8990,8 +8960,6 @@ __metadata:
     "@types/react": ^17.0.34
     "@types/react-dom": ^17.0.11
     "@types/react-redux": ^7.1.20
-    "@types/react-router": ^5.1.17
-    "@types/react-router-dom": ^5.3.2
     "@typescript-eslint/eslint-plugin": ^5.3.0
     "@typescript-eslint/parser": ^5.3.0
     "@yarnpkg/sdks": ^2.5.0
@@ -9008,7 +8976,7 @@ __metadata:
     eslint-plugin-react-hooks: ^4.2.0
     expect: ^27.3.1
     fullstory-react: ^1.0.2
-    history: 4.10.1
+    history: latest
     identity-obj-proxy: ^3.0.0
     jest: ^27.3.1
     jest-environment-jsdom: ^27.3.1
@@ -9033,7 +9001,7 @@ __metadata:
     ts-node: ^10.4.0
     typescript: ^4.4.4
     use-awsui: ^1.0.7
-    use-awsui-router: ^1.2.2
+    use-awsui-router: ^2.0.0
     use-awsui-table-item-description: ^1.0.5
     use-mui: ^1.0.5
     use-params-memo: ^1.0.0
@@ -13510,21 +13478,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"history@npm:4.10.1":
-  version: 4.10.1
-  resolution: "history@npm:4.10.1"
-  dependencies:
-    "@babel/runtime": ^7.1.2
-    loose-envify: ^1.2.0
-    resolve-pathname: ^3.0.0
-    tiny-invariant: ^1.0.2
-    tiny-warning: ^1.0.0
-    value-equal: ^1.0.1
-  checksum: addd84bc4683929bae4400419b5af132ff4e4e9b311a0d4e224579ea8e184a6b80d7f72c55927e4fa117f69076a9e47ce082d8d0b422f1a9ddac7991490ca1d0
-  languageName: node
-  linkType: hard
-
-"history@npm:^5.0.3":
+"history@npm:^5.0.3, history@npm:latest":
   version: 5.1.0
   resolution: "history@npm:5.1.0"
   dependencies:
@@ -16576,7 +16530,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"loose-envify@npm:^1.1.0, loose-envify@npm:^1.2.0, loose-envify@npm:^1.4.0":
+"loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
   dependencies:
@@ -20699,13 +20653,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"resolve-pathname@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "resolve-pathname@npm:3.0.0"
-  checksum: 6147241ba42c423dbe83cb067a2b4af4f60908c3af57e1ea567729cc71416c089737fe2a73e9e79e7a60f00f66c91e4b45ad0d37cd4be2d43fec44963ef14368
-  languageName: node
-  linkType: hard
-
 "resolve-url-loader@npm:^3.1.2":
   version: 3.1.2
   resolution: "resolve-url-loader@npm:3.1.2"
@@ -22629,20 +22576,6 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tiny-invariant@npm:^1.0.2":
-  version: 1.2.0
-  resolution: "tiny-invariant@npm:1.2.0"
-  checksum: e09a718a7c4a499ba592cdac61f015d87427a0867ca07f50c11fd9b623f90cdba18937b515d4a5e4f43dac92370498d7bdaee0d0e7a377a61095e02c4a92eade
-  languageName: node
-  linkType: hard
-
-"tiny-warning@npm:^1.0.0":
-  version: 1.0.3
-  resolution: "tiny-warning@npm:1.0.3"
-  checksum: da62c4acac565902f0624b123eed6dd3509bc9a8d30c06e017104bedcf5d35810da8ff72864400ad19c5c7806fc0a8323c68baf3e326af7cb7d969f846100d71
-  languageName: node
-  linkType: hard
-
 "tinylogic@npm:^1.0.3":
   version: 1.0.3
   resolution: "tinylogic@npm:1.0.3"
@@ -23343,15 +23276,15 @@ typescript@^4.4.4:
   languageName: node
   linkType: hard
 
-"use-awsui-router@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "use-awsui-router@npm:1.2.2"
+"use-awsui-router@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "use-awsui-router@npm:2.0.0"
   peerDependencies:
     "@awsui/components-react": ^3.0.0
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-    react-router: ^5.0.0
-  checksum: 306374c0520d6552dc99be76ec31f5285d785e394aea7f4e16a29930e97cd732b4116383cdeee457a32f777aa62dbb46681913c18ca31cb7af9ccd83d0dabb31
+    react-router: ^6.0.0
+  checksum: 4655889ecc61ade1e84a5f331360948a5a250c70db4052d67b6d361156af1711ac797ce990f6511b8bb6ddf46a1a071a4689b420e83336fbd553d1ee35bc2895
   languageName: node
   linkType: hard
 
@@ -23560,13 +23493,6 @@ typescript@^4.4.4:
     spdx-correct: ^3.0.0
     spdx-expression-parse: ^3.0.0
   checksum: 35703ac889d419cf2aceef63daeadbe4e77227c39ab6287eeb6c1b36a746b364f50ba22e88591f5d017bc54685d8137bc2d328d0a896e4d3fd22093c0f32a9ad
-  languageName: node
-  linkType: hard
-
-"value-equal@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "value-equal@npm:1.0.1"
-  checksum: bb7ae1facc76b5cf8071aeb6c13d284d023fdb370478d10a5d64508e0e6e53bb459c4bbe34258df29d82e6f561f874f0105eba38de0e61fe9edd0bdce07a77a2
   languageName: node
   linkType: hard
 

@@ -2,7 +2,7 @@ import mapCssStyleSheetsToAwsuiGlobalStyleSheetElement from '../utils/map-css-st
 import mapStyleSheetListToCssStyleSheets from '../utils/map-stylesheet-list-to-css-stylesheets';
 
 export default function mapStyleSheetListToAwsuiGlobalStyleSheetElement(
-  list: StyleSheetList,
+  list: Readonly<StyleSheetList>,
 ): Element | ProcessingInstruction {
   const sheets: Set<CSSStyleSheet> = mapStyleSheetListToCssStyleSheets(list);
   return mapCssStyleSheetsToAwsuiGlobalStyleSheetElement(sheets);

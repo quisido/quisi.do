@@ -1,8 +1,7 @@
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Button from '../../components/button';
-
-const RESUME_HREF = '/resume/2021-07/charles-stover-resume.pdf';
+import RESUME_HREF from '../../constants/resume-href';
 
 export default function ViewResumeButton(): ReactElement {
   return (

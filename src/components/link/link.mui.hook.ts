@@ -1,7 +1,7 @@
-import type { History } from 'history';
 import type { MouseEvent } from 'react';
 import { useCallback } from 'react';
-import { useHistory } from 'react-router';
+import type { NavigateFunction } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import filterHrefByBlank from '../../utils/filter-href-by-blank';
 
 interface State {
@@ -13,7 +13,7 @@ interface State {
 }
 
 export default function useMuiLink(href: string): State {
-  const history: History<unknown> = useHistory();
+  const navigate: NavigateFunction = useNavigate();
 
   const isBlank: boolean = filterHrefByBlank(href);
   return {
@@ -27,9 +27,9 @@ export default function useMuiLink(href: string): State {
           window.open(href, '_blank');
           return;
         }
-        history.push(href);
+        navigate(href);
       },
-      [history, href, isBlank],
+      [href, isBlank, navigate],
     ),
   };
 }
