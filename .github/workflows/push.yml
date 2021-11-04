@@ -1,7 +1,7 @@
 name: Push
 
 jobs:
-  install:
+  install-yarn:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,8 +15,30 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+  install-cypress:
+    needs: install-yarn
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install
+      - name: Install Cypress
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+    strategy:
+      matrix:
+        os: [ubuntu, windows]
+
   eslint:
-    needs: install
+    needs: install-yarn
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,7 +55,7 @@ jobs:
         run: yarn eslint
 
   jest:
-    needs: install
+    needs: install-yarn
     runs-on: ubuntu-latest
     services:
       datadog-agent:
@@ -61,7 +83,7 @@ jobs:
           DD_ENV: ci
 
   build:
-    needs: install
+    needs: install-yarn
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -89,7 +111,7 @@ jobs:
           path: build
 
   cypress:
-    needs: install
+    needs: install-cypress
     runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout
@@ -124,8 +146,8 @@ jobs:
       fail-fast: false
       matrix:
         browser: [edge, firefox, chrome]
+        containers: [1, 2, 3]
         os: [ubuntu, windows]
-        parallel: [1, 2, 3]
         exclude:
           - browser: edge
             os: ubuntu
