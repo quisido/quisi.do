@@ -147,8 +147,8 @@ jobs:
       fail-fast: false
       matrix:
         browser: [edge, firefox, chrome]
-        containers: [1, 2, 3]
         os: [ubuntu, windows]
+        _containers: [1, 2, 3]
         exclude:
           - browser: edge
             os: ubuntu
