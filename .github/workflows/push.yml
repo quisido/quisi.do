@@ -135,7 +135,7 @@ jobs:
           ci-build-id: ${{ github.event_name }}-${{ github.sha }}
           command-prefix: yarn dlx
           group: ${{ matrix.os }}-${{ matrix.browser }}
-          install-command: yarn
+          install-command: yarn install
           parallel: true
           record: true
           start: yarn start
