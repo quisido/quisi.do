@@ -5,9 +5,9 @@ import { QueryClientProvider } from 'react-query';
 import { Provider as ReduxProvider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Theme from '../../components/theme';
+import GITHUB_SHA from '../../constants/github-sha';
 import QUERY_CLIENT from '../../constants/query-client';
 import REDUX_STORE from '../../constants/redux-store';
-import VERSION from '../../constants/version';
 import GoogleAnalytics from '../../modules/react-google-analytics';
 import I18nProvider from './app.i18n-provider.view';
 import Routes from './app.routes.view';
@@ -29,7 +29,7 @@ export default function App(): ReactElement {
         env={process.env.NODE_ENV}
         service="charlesstover.com"
         sessionReplayRecording
-        version={VERSION}
+        version={GITHUB_SHA ?? 'unknown'}
       >
         <FullStory orgId="150TVM">
           <GoogleAnalytics trackingId="UA-5966978-4">

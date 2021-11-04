@@ -13,7 +13,7 @@ jobs:
           check-latest: true
           node-version: 'lts/*'
       - name: Install dependencies
-        run: yarn
+        run: yarn install
 
   eslint:
     needs: install
@@ -28,7 +28,7 @@ jobs:
           check-latest: true
           node-version: 'lts/*'
       - name: Install dependencies
-        run: yarn
+        run: yarn install
       - name: ESLint
         run: yarn eslint
 
@@ -54,13 +54,13 @@ jobs:
           check-latest: true
           node-version: 'lts/*'
       - name: Install dependencies
-        run: yarn
+        run: yarn install
       - name: Jest
         run: yarn jest
         env:
           DD_ENV: ci
 
-  version:
+  build:
     needs: install
     runs-on: ubuntu-latest
     steps:
@@ -73,39 +73,7 @@ jobs:
           check-latest: true
           node-version: 'lts/*'
       - name: Install dependencies
-        run: yarn
-      - name: Version
-        run: |
-          mkdir ~/version/
-          echo $(yarn version) > ~/version/index.txt
-      - name: Upload version
-        uses: actions/upload-artifact@v2
-        with:
-          name: version
-          path: '~/version/'
-
-  build:
-    needs: version
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn
-      - name: Download version
-        uses: actions/download-artifact@v2
-        with:
-          name: version
-          path: '~/version/'
-      - name: Set version
-        run: |
-          echo "REACT_APP_VERSION=$(cat ~/version/index.txt)-beta" >> $GITHUB_ENV
+        run: yarn install
       - name: Build
         run: yarn build
         env:
@@ -121,7 +89,7 @@ jobs:
           path: build
 
   cypress:
-    needs: version
+    needs: install
     runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout
@@ -132,14 +100,6 @@ jobs:
           cache: yarn
           check-latest: true
           node-version: 'lts/*'
-      - name: Download version
-        uses: actions/download-artifact@v2
-        with:
-          name: version
-          path: '~/version/'
-      - name: Set version
-        run: |
-          echo "REACT_APP_VERSION=$(cat ~/version/index.txt)-beta" >> $GITHUB_ENV
       - name: Cypress
         uses: cypress-io/github-action@v2
         env:
@@ -182,14 +142,6 @@ jobs:
         with:
           name: build
           path: build
-      - name: Download version
-        uses: actions/download-artifact@v2
-        with:
-          name: version
-          path: '~/version/'
-      - name: Set version
-        run: |
-          echo "SENTRY_VERSION=$(cat ~/version/index.txt)-beta" >> $GITHUB_ENV
       - name: Sentry release
         uses: getsentry/action-release@v1
         env:
@@ -200,7 +152,7 @@ jobs:
         with:
           environment: beta
           sourcemaps: build
-          version: ${{ env.SENTRY_VERSION }}
+          version: ${{ github.sha }}
 
 on:
   pull_request:

@@ -63,13 +63,5 @@
     "**/*.e2e.ts",
     "**/*.test.ts",
     "**/*.test.tsx"
-  ],
-
-  "ts-node": {
-    "include": ["scripts/**/*.ts", "src/**/*"],
-    "compilerOptions": {
-      "module": "CommonJS",
-      "rootDir": "."
-    }
-  }
+  ]
 }
