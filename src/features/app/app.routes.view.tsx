@@ -8,6 +8,7 @@ import SpriteSheet2Gif from '../../features/spritesheet2gif';
 import mapHrefToRedirectComponent from './utils/map-href-to-redirect-component';
 import mapPathToRedirectComponent from './utils/map-path-to-redirect-component';
 
+const BtjdtcwthPath = 'become-the-junior-developer-that-companies-want-to-hire';
 const HomeRedirect = mapPathToRedirectComponent('/');
 const PackagesRedirect = mapPathToRedirectComponent('/packages');
 const PublicationsRedirect = mapPathToRedirectComponent('/publications');
@@ -19,9 +20,6 @@ const Breathe = mapHrefToRedirectComponent(
 const BtjdtcwthComponent = mapHrefToRedirectComponent(
   'https://charles-stover.medium.com/become-the-junior-developer-that-companies-want-to-hire-c539f4c236d8',
 );
-
-const BtjdtcwthPath =
-  'become-the-junior-developer-that-companies-want-to-hire/';
 
 const ElectronTransitions = mapHrefToRedirectComponent(
   'https://charlesstover.github.io/electron-transition-calculator/',

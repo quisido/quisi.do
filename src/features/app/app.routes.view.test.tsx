@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
-import expect from 'expect';
-import mapPathToTestRouter from '../../test-utils/map-path-to-test-router';
+import type { PropsWithChildren, ReactElement } from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import Routes from './app.routes.view';
 
-global.window = Object.create(global.window);
+global.window = { ...global.window };
 Object.defineProperty(global.window, 'location', {
   writable: true,
   value: {
@@ -14,9 +14,17 @@ Object.defineProperty(global.window, 'location', {
 describe('App', (): void => {
   it('should reroute "Become the junior developer that companies want to hire" to Medium', (): void => {
     render(<Routes />, {
-      wrapper: mapPathToTestRouter(
-        '/become-the-junior-developer-that-companies-want-to-hire/',
-      ),
+      wrapper({ children }: PropsWithChildren<unknown>): ReactElement {
+        return (
+          <MemoryRouter
+            initialEntries={[
+              '/become-the-junior-developer-that-companies-want-to-hire/',
+            ]}
+          >
+            {children}
+          </MemoryRouter>
+        );
+      },
     });
 
     expect(global.window.location.href).toBe(
