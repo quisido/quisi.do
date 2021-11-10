@@ -39,7 +39,6 @@ jobs:
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
-          if-no-files-found: error
           name: build
           path: build
 
@@ -112,7 +111,6 @@ jobs:
       - name: Upload coverage
         uses: actions/upload-artifact@v2
         with:
-          if-no-files-found: error
           name: jest-coverage
           path: jest/coverage
 
