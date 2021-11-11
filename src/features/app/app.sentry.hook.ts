@@ -1,5 +1,5 @@
 import SentryFullStory from '@sentry/fullstory';
-import { ReactRouterInstrumentation } from '@sentry/react/dist/types';
+import type { ReactRouterInstrumentation } from '@sentry/react/dist/types';
 import { Integrations } from '@sentry/tracing';
 import type { Integration } from '@sentry/types';
 import { useMemo } from 'react';
