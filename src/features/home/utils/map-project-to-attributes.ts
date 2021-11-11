@@ -3,7 +3,7 @@ import type Project from '../../../types/project';
 
 export default function mapProjectToAttributes(
   project: Project,
-): Required<Attributes> & Project {
+): Attributes & Project {
   return {
     ...project,
     key: project.name,

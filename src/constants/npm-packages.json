@@ -14,8 +14,7 @@
       "react-object-prop",
       "react-portfolio",
       "thunk-action-creator",
-      "use-async-function",
-      "use-aws-sdk"
+      "use-async-function"
     ],
     ["@charlesstover/hsl2rgb"],
     ["@gamingmedley/konami.js"],
@@ -40,8 +39,6 @@
     ["react-multi-context"],
     ["react-quotes-carousel", "react-quotes"],
     ["react-rainbow-text"],
-    ["react-router-v6-instrumentation"],
-    ["react-segment-analytics"],
     ["react-sparkline-svg"],
     ["reactn"],
     ["reactn-devtools"],
@@ -49,6 +46,7 @@
     ["rn-webview"],
     ["sentry-react"],
     ["sparkline-svg"],
+    [null, "use-aws-sdk"],
     ["use-awsui"],
     ["use-awsui-router"],
     ["use-awsui-table-item-description"],
