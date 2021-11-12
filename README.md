@@ -11,7 +11,7 @@ To install this repository to begin local development, use the following
 commands in order:
 
 - `yarn set version latest` to keep Yarn up-to-date.
-- `yarn up "*" "@*/*" "node-sass@^5.0.0" && yarn up -R caniuse-lite`
+- `yarn up "*" "@*/*" "node-sass@5.0.0" && yarn up -R caniuse-lite`
   to install and upgrade dependencies.
 - `yarn sdks vscode` to integrate with Visual Studio Code.
 
