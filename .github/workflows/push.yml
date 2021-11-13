@@ -233,4 +233,4 @@ jobs:
 
 on:
   push:
-    branches: [main]
+    branches: [7]
