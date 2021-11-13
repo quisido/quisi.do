@@ -1,23 +1,27 @@
 import SentryFullStory from '@sentry/fullstory';
+import type { ReactRouterInstrumentation } from '@sentry/react/dist/types';
+import { Integrations } from '@sentry/tracing';
 import type { Integration } from '@sentry/types';
 import { useMemo } from 'react';
-import useReactRouterV6SentryBrowserTracingIntegration from 'react-router-v6-instrumentation';
+import useRoutingInstrumentation from 'react-router-v6-instrumentation';
 
 interface State {
   readonly integrations: readonly Integration[];
 }
 
 export default function useAppSentry(): State {
-  const browserTracing: Integration =
-    useReactRouterV6SentryBrowserTracingIntegration();
+  const routingInstrumentation: ReactRouterInstrumentation =
+    useRoutingInstrumentation();
 
   return {
     integrations: useMemo(
       (): readonly Integration[] => [
-        browserTracing,
+        new Integrations.BrowserTracing({
+          routingInstrumentation,
+        }),
         new SentryFullStory('charles-stover'),
       ],
-      [browserTracing],
+      [routingInstrumentation],
     ),
   };
 }

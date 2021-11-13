@@ -14,7 +14,7 @@ export default function MuiCheckbox({
   return (
     <FormControlLabel
       control={<Checkbox checked={checked} onChange={handleChange} />}
-      label={children}
+      label={<>{children}</>}
     />
   );
 }

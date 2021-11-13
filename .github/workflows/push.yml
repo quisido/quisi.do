@@ -39,7 +39,6 @@ jobs:
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
-          if-no-files-found: error
           name: build
           path: build
 
@@ -112,7 +111,6 @@ jobs:
       - name: Upload coverage
         uses: actions/upload-artifact@v2
         with:
-          if-no-files-found: error
           name: jest-coverage
           path: jest/coverage
 
@@ -152,7 +150,12 @@ jobs:
       fail-fast: false
       matrix:
         browser: [edge, firefox, chrome]
-        os: [ubuntu, windows]
+        # Re-add `windows` when GitHub Actions fixes the bug:
+        #   Could not find a Cypress configuration file, exiting.
+        #   We looked but did not find a "cypress.json" file in this folder:
+        #     D:\a\charlesstover.com\charlesstover.com
+        # https://github.com/CharlesStover/charlesstover.com/runs/4183485790?check_suite_focus=true
+        os: [ubuntu]
         _containers: [1, 2, 3]
         exclude:
           - browser: edge

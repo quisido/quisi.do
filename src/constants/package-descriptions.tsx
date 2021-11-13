@@ -11,6 +11,10 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
       'Attach event listeners for when users press ⬆, ⬆, ⬇, ⬇, ⬅, ➡, ⬅, ➡, 🅱, 🅰, Enter.',
     ],
     [
+      '@glossary/build',
+      'Generates a glossary application using only JSON definition files.',
+    ],
+    [
       'absolute-timestamp',
       'The absolute timestamp component provides human-readable time formatting to Unix timestamps.',
     ],
@@ -33,6 +37,10 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
     [
       'fetch-suspense',
       'The fetch-suspense package integrates React Suspense with the Fetch API.',
+    ],
+    [
+      'fullstory-react',
+      'Easily instantiate FullStory session monitoring for your React application.',
     ],
     [
       'lazy-i18n',
@@ -63,6 +71,10 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
       'Share your global React state between components without managing yet another React context.',
     ],
     [
+      'react-datadog',
+      'Easily instantiate DataDog real user monitoring for your React application.',
+    ],
+    [
       'react-innertext',
       'Dynamically converting the visible text of any JSX element or React node to a string allows the automation of stricter component values, such as HTML alt and title attributes.',
     ],
@@ -83,6 +95,14 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
       'This component displays a text string that gradients in color.',
     ],
     [
+      'react-router-v6-instrumentation',
+      'Instrument browser tracing with React Router 6.x and Sentry.',
+    ],
+    [
+      'react-segment-analytics',
+      'Easily instantiate Segment analytics for your React application.',
+    ],
+    [
       'react-sparkline-svg',
       'Render sparklines as SVGs with a React component.',
     ],
@@ -101,6 +121,10 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
     [
       'rn-webview',
       'This alternative to the React Native WebView component fixes window.postMessage on iOS devices.',
+    ],
+    [
+      'sentry-react',
+      'Easily instantiate Sentry event monitoring for your React application.',
     ],
     [
       'sparkline-svg',
