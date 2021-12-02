@@ -1,10 +1,10 @@
 import { useQuery } from 'react-query';
 
 interface State {
-  data?: Record<string, number[]> | undefined;
-  error: unknown;
-  isLoading: boolean;
-  refetch: () => void;
+  readonly data?: Record<string, number[]> | undefined;
+  readonly error: unknown;
+  readonly isLoading: boolean;
+  readonly refetch: () => void;
 }
 
 export default function useNpmDownloads(): State {
