@@ -3,8 +3,17 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-magic-numbers
-const PAGE_SIZES: number[] = [5, 10, 20, 50];
+const BASE_PAGE_SIZE = 5;
+const MULTIPLIER = 2;
+const SQUARED = 2;
+
+// 5, 10, 20, 50
+const PAGE_SIZES: number[] = [
+  BASE_PAGE_SIZE,
+  BASE_PAGE_SIZE * MULTIPLIER,
+  BASE_PAGE_SIZE * Math.pow(MULTIPLIER, SQUARED),
+  Math.pow(BASE_PAGE_SIZE, SQUARED) * MULTIPLIER,
+];
 
 export default function usePackagesPageSizePreference(): CollectionPreferencesProps.PageSizePreference {
   const translate: TranslateFunction = useTranslate();

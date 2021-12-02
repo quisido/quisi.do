@@ -4,10 +4,10 @@ import I18n from 'lazy-i18n';
 import type { ComponentType, ReactElement } from 'react';
 import { Suspense, lazy } from 'react';
 import Wrapper from '../../components/wrapper';
-import usePackages from './packages.root.hook';
+import usePackages from './packages.hook';
 
 const Contents: ComponentType<unknown> = lazy(
-  async () => import('./packages.contents.view'),
+  async () => import('./components/contents'),
 );
 
 export default function Packages(): ReactElement {

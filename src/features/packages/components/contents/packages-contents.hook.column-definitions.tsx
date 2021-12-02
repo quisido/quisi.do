@@ -3,10 +3,10 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { useMemo } from 'react';
-import DirectDownloads from './packages.direct-downloads-cell.view';
-import PackageName from './packages.name-cell.view';
-import TotalDownloads from './packages.total-downloads-cell.view';
-import type Item from './types/packages-item';
+import DirectDownloads from '../../components/direct-downloads-cell';
+import PackageName from '../../components/name-cell';
+import TotalDownloads from '../../components/total-downloads-cell';
+import type Item from '../../types/packages-item';
 
 interface Props {
   readonly filteringText: string;

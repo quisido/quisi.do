@@ -14,17 +14,17 @@ import {
   useTextFilter,
 } from 'use-awsui';
 import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
-import useNpmDownloads from '../../hooks/use-npm-downloads';
-import type ReadonlyTableSortingEvent from '../../types/readonly-table-sorting-event';
-import useColumnDefinitions from './packages.contents.hook.column-definitions';
-import useCountText from './packages.contents.hook.count-text';
-import usePageSizePreference from './packages.contents.hook.page-size-preference';
-import useVisibleContentPreference from './packages.contents.hook.visible-content-preference';
-import useWrapLinesPreference from './packages.contents.hook.wrap-lines-preference';
-import PackageDescription from './packages.description.view';
-import type Item from './types/packages-item';
-import filterDefaultPackage from './utils/filter-default-package';
-import mapNpmDownloadsEntryToItem from './utils/map-npm-downloads-entry-to-item';
+import useNpmDownloads from '../../../../hooks/use-npm-downloads';
+import type ReadonlyTableSortingEvent from '../../../../types/readonly-table-sorting-event';
+import PackageDescription from '../../components/description';
+import type Item from '../../types/packages-item';
+import filterDefaultPackage from '../../utils/filter-default-package';
+import mapNpmDownloadsEntryToItem from '../../utils/map-npm-downloads-entry-to-item';
+import useColumnDefinitions from './packages-contents.hook.column-definitions';
+import useCountText from './packages-contents.hook.count-text';
+import usePageSizePreference from './packages-contents.hook.page-size-preference';
+import useVisibleContentPreference from './packages-contents.hook.visible-content-preference';
+import useWrapLinesPreference from './packages-contents.hook.wrap-lines-preference';
 
 interface State {
   readonly cancelLabel: string;

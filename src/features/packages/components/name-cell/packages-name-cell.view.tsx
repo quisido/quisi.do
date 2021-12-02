@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
-import EmphasizeSubstring from '../../components/emphasize-substring';
-import Link from '../../components/link';
-import usePackagesNameCell from './packages.name-cell.hook';
-import type Item from './types/packages-item';
+import EmphasizeSubstring from '../../../../components/emphasize-substring';
+import Link from '../../../../components/link';
+import type Item from '../../types/packages-item';
+import usePackagesNameCell from './packages-name-cell.hook';
 
 interface Props extends Item {
   readonly filteringText: string;

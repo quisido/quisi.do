@@ -7,8 +7,8 @@ import type { TextFilterProps } from '@awsui/components-react/text-filter';
 import TextFilter from '@awsui/components-react/text-filter';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
-import usePackagesContents from './packages.contents.hook';
-import type Item from './types/packages-item';
+import type Item from '../../types/packages-item';
+import usePackagesContents from './packages-contents.hook';
 
 export default function PackagesContents(): ReactElement {
   const {

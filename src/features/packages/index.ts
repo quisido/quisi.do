@@ -1,1 +1,1 @@
-export { default } from './packages.root.view';
+export { default } from './packages.view';
