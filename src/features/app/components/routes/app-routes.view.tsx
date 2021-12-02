@@ -1,12 +1,12 @@
 import type { ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from '../../features/home';
-import Packages from '../../features/packages';
-import Publications from '../../features/publications';
-import Quotes from '../../features/quotes';
-import SpriteSheet2Gif from '../../features/spritesheet2gif';
-import mapHrefToRedirectComponent from './utils/map-href-to-redirect-component';
-import mapPathToRedirectComponent from './utils/map-path-to-redirect-component';
+import Home from '../../../../features/home';
+import Packages from '../../../../features/packages';
+import Publications from '../../../../features/publications';
+import Quotes from '../../../../features/quotes';
+import SpriteSheet2Gif from '../../../../features/spritesheet2gif';
+import mapHrefToRedirectComponent from '../../utils/map-href-to-redirect-component';
+import mapPathToRedirectComponent from '../../utils/map-path-to-redirect-component';
 
 const BtjdtcwthPath = 'become-the-junior-developer-that-companies-want-to-hire';
 const HomeRedirect = mapPathToRedirectComponent('/');
@@ -30,13 +30,13 @@ export default function AppRoutes(): ReactElement {
     <Routes>
       <Route element={<Home />} index />
 
+      {/* Applications */}
+      <Route element={<SpriteSheet2Gif />} path="spritesheet2gif" />
+
       {/* Portfolio */}
       <Route element={<Packages />} path="packages" />
       <Route element={<Publications />} path="publications" />
       <Route element={<Quotes />} path="quotes" />
-
-      {/* Applications */}
-      <Route element={<SpriteSheet2Gif />} path="spritesheet2gif" />
 
       {/* Redirects */}
       <Route element={<Breathe />} path="breathe" />

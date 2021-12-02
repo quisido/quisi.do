@@ -9,9 +9,9 @@ import GITHUB_SHA from '../../constants/github-sha';
 import QUERY_CLIENT from '../../constants/query-client';
 import REDUX_STORE from '../../constants/redux-store';
 import GoogleAnalytics from '../../modules/react-google-analytics';
-import I18nProvider from './app.i18n-provider.view';
-import Routes from './app.routes.view';
-import Sentry from './app.sentry.view';
+import I18nProvider from './components/i18n-provider';
+import Routes from './components/routes';
+import Sentry from './components/sentry';
 
 /*
 The App root component mounts context providers for the whole application.

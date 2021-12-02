@@ -1,5 +1,5 @@
-import type Language from '../../constants/language';
-import useLanguage from '../../hooks/use-language';
+import type Language from '../../../../constants/language';
+import useLanguage from '../../../../hooks/use-language';
 
 interface State {
   readonly language: Language;

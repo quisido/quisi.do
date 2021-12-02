@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import expect from 'expect';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import Routes from './app.routes.view';
+import Routes from './app-routes.view';
 
 global.window = { ...global.window };
 Object.defineProperty(global.window, 'location', {
