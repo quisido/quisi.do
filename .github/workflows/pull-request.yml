@@ -13,7 +13,7 @@ jobs:
           check-latest: true
           node-version: 'lts/*'
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable
 
   build:
     needs: install-yarn
@@ -28,7 +28,7 @@ jobs:
           check-latest: true
           node-version: 'lts/*'
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable
       - name: Build
         run: yarn build
         env:
@@ -55,7 +55,7 @@ jobs:
           check-latest: true
           node-version: 'lts/*'
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable
       - name: ESLint
         run: yarn eslint
 
@@ -72,7 +72,7 @@ jobs:
           check-latest: true
           node-version: 'lts/*'
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable
       - name: Install Cypress
         uses: cypress-io/github-action@v2
         with:
@@ -103,7 +103,7 @@ jobs:
           check-latest: true
           node-version: 'lts/*'
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable
       - name: Jest
         run: yarn jest
         env:
@@ -140,12 +140,12 @@ jobs:
           ci-build-id: ${{ github.event_name }}-${{ github.sha }}
           command-prefix: yarn dlx
           group: ${{ matrix.os }}-${{ matrix.browser }}
-          install-command: yarn install
+          install-command: yarn install --immutable
           parallel: true
           record: true
           start: yarn start
           tag: ${{ github.event_name }}
-          wait-on: 'http://localhost:3000'
+          wait-on: 'http://localhost:3000/'
           wait-on-timeout: 120
     strategy:
       fail-fast: false
