@@ -95,7 +95,7 @@
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "react-router-v6-instrumentation": "^2.0.1",
-    "react-scripts": "^5.0.0",
+    "react-scripts": "4.0.3",
     "sass": "^1.45.1",
     "sentry-react": "^1.0.3",
     "ts-jest": "^27.1.2",

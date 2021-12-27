@@ -11,8 +11,12 @@ To install this repository to begin local development, use the following
 commands in order:
 
 - `yarn set version latest` to keep Yarn up-to-date.
-- `yarn up "*" "@*/*" && yarn up -R caniuse-lite`
+- `yarn up "*" "@*/*" && yarn add --dev react-scripts@4.0.3 && yarn up -R caniuse-lite`
   to install and upgrade dependencies.
+  - `react-scripts` is locked at 4.0.3 awaiting
+    [pull request #11797](https://github.com/facebook/create-react-app/pull/11797)
+    to resolve
+    [issue #11769](https://github.com/facebook/create-react-app/issues/11769).
 - `yarn sdks vscode` to integrate with Visual Studio Code.
 
 To run the website locally, use `yarn start`.
