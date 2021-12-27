@@ -136,7 +136,7 @@ jobs:
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
         with:
           browser: ${{ matrix.browser }}
-          ci-build-id: ${{ github.event_name }}-${{ github.sha }}
+          ci-build-id: ${{ github.run_id }}-${{ github.run_attempt }}
           command-prefix: yarn dlx
           group: ${{ matrix.os }}-${{ matrix.browser }}
           install-command: yarn install --immutable
