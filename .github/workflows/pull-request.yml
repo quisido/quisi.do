@@ -11,7 +11,7 @@ jobs:
         with:
           cache: yarn
           check-latest: true
-          node-version: lts/16
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
 
@@ -26,7 +26,7 @@ jobs:
         with:
           cache: yarn
           check-latest: true
-          node-version: lts/16
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
       - name: Build
@@ -53,7 +53,7 @@ jobs:
         with:
           cache: yarn
           check-latest: true
-          node-version: lts/16
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
       - name: ESLint
@@ -70,7 +70,7 @@ jobs:
         with:
           cache: yarn
           check-latest: true
-          node-version: lts/16
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
       - name: Install Cypress
@@ -101,7 +101,7 @@ jobs:
         with:
           cache: yarn
           check-latest: true
-          node-version: lts/16
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
       - name: Jest
@@ -125,7 +125,7 @@ jobs:
         with:
           cache: yarn
           check-latest: true
-          node-version: lts/16
+          node-version: latest
       - name: Cypress
         uses: cypress-io/github-action@v2
         env:
