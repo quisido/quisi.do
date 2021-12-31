@@ -13,6 +13,9 @@ commands in order:
 - `yarn set version latest` to keep Yarn up-to-date.
 - `yarn up "*" "@*/*" && yarn add --dev react-scripts@4.0.3 && yarn up -R caniuse-lite`
   to install and upgrade dependencies.
+  - `react-error-overlay` is locked at 6.0.9 in `yarn.lock` awaiting
+    [issue #11771](https://github.com/facebook/create-react-app/issues/11771) to
+    be resolved.
   - `react-scripts` is locked at 4.0.3 awaiting
     [pull request #11797](https://github.com/facebook/create-react-app/pull/11797)
     to resolve
