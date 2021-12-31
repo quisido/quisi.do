@@ -1,12 +1,12 @@
 import type { AppLayoutProps } from '@awsui/components-react/app-layout';
 import AppLayout from '@awsui/components-react/app-layout';
 import type { ReactElement } from 'react';
-import Footer from '../../components/footer';
+import Breadcrumbs from './components/aws-breadcrumbs';
+import Navigation from './components/aws-navigation';
+import Notifications from './components/aws-notifications';
+import Footer from './components/footer';
 import type Props from './types/props';
 import useAwsWrapper from './wrapper.aws.hook';
-import Breadcrumbs from './wrapper.aws-breadcrumbs.view';
-import Navigation from './wrapper.aws-navigation.view';
-import Notifications from './wrapper.aws-notifications.view';
 
 export default function AwsWrapper({
   Tools,

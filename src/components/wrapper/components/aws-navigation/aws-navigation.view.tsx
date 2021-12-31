@@ -2,15 +2,16 @@ import SideNavigation from '@awsui/components-react/side-navigation';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { memo } from 'react';
-import Box from '../../components/box';
-import validateString from '../../utils/validate-string';
-import useAwsNavigation from './wrapper.aws-navigation.hook';
-import styles from './wrapper.aws-navigation.module.scss';
+import Box from '../../../../components/box';
+import validateString from '../../../../utils/validate-string';
+import useAwsWrapperNavigation from './aws-navigation.hook';
+import styles from './aws-navigation.module.scss';
 
 const sideNavigationClassName: string = validateString(styles.sideNavigation);
 
-function AwsNavigation(): ReactElement {
-  const { activeHref, handleChange, handleFollow, items } = useAwsNavigation();
+function AwsWrapperNavigation(): ReactElement {
+  const { activeHref, handleChange, handleFollow, items } =
+    useAwsWrapperNavigation();
 
   return (
     <>
@@ -28,4 +29,4 @@ function AwsNavigation(): ReactElement {
   );
 }
 
-export default memo(AwsNavigation);
+export default memo(AwsWrapperNavigation);

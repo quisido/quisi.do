@@ -1,9 +1,9 @@
 import type { ReactElement } from 'react';
-import Box from '../../components/box';
-import Color from '../../components/color';
-import validateString from '../../utils/validate-string';
-import styles from './footer.root.module.scss';
-import Link from './footer.link.view';
+import Box from '../../../../components/box';
+import Color from '../../../../components/color';
+import validateString from '../../../../utils/validate-string';
+import Link from '../../components/footer-link';
+import styles from './footer.module.scss';
 
 const rootClassName: string = validateString(styles.root);
 

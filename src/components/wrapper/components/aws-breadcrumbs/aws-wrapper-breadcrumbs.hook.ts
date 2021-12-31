@@ -3,8 +3,8 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useBreadcrumbGroup } from 'use-awsui-router';
 import useParamsMemo from 'use-params-memo';
-import type Breadcrumb from '../../types/breadcrumb';
-import mapBreadcrumbsToAwsBreadcrumbGroupItems from './utils/map-breadcrumbs-to-aws-breadcrumb-group-items';
+import type Breadcrumb from '../../../../types/breadcrumb';
+import mapBreadcrumbsToAwsBreadcrumbGroupItems from '../../utils/map-breadcrumbs-to-aws-breadcrumb-group-items';
 
 interface State {
   readonly ariaLabel: string | undefined;
@@ -20,7 +20,7 @@ interface State {
   ) => void;
 }
 
-export default function useAwsBreadcrumbs(
+export default function useAwsWrapperBreadcrumbs(
   breadcrumbs: readonly Readonly<Breadcrumb>[],
 ): State {
   // Contexts

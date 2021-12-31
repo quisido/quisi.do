@@ -1,8 +1,8 @@
 import type { FlashbarProps } from '@awsui/components-react/flashbar';
 import Flashbar from '@awsui/components-react/flashbar';
 import type { ReactElement } from 'react';
-import type Notification from '../../types/notification';
-import useAwsNotifications from './wrapper.aws-notifications.hook';
+import type Notification from '../../../../types/notification';
+import useAwsNotifications from './aws-notifications.hook';
 
 interface Props {
   readonly children?: undefined | readonly Notification[];
@@ -10,7 +10,7 @@ interface Props {
 
 const EMPTY = 0;
 
-export default function AwsNotifications({
+export default function AwsWrapperNotifications({
   children,
 }: Props): ReactElement | null {
   const items: readonly FlashbarProps.MessageDefinition[] =

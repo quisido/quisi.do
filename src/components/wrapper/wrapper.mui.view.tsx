@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
-import Footer from '../../components/footer';
 import validateString from '../../utils/validate-string';
+import Footer from './components/footer';
 import useMuiWrapper from './wrapper.mui.hook';
 import Breadcrumbs from './wrapper.mui-breadcrumbs.view';
 import Navigation from './wrapper.mui-navigation.view';
