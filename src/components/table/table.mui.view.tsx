@@ -1,28 +1,21 @@
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import type { SxProps } from '@mui/system';
 import type { ReactElement } from 'react';
 import type TableColumn from '../../types/table-column';
 import EmptyRows from './components/mui-empty-rows';
+import TableCell from './components/mui-table-cell';
+import TableRow from './components/mui-table-row';
 import useMuiTable from './table.mui.hook';
 import type Props from './types/props';
 
 const ARRAY_INDEX_OFFSET = 1;
 const FIRST_INDEX = 0;
-
-const TABLE_ROW_SX: SxProps = {
-  '&:last-child td, &:last-child th': {
-    borderWidth: 0,
-  },
-};
 
 export default function MuiTable<Item>({
   Description,
@@ -84,7 +77,7 @@ export default function MuiTable<Item>({
         </Tooltip>
         */}
       </Toolbar>
-      <Table size="small">
+      <Table size="small" stickyHeader>
         <TableHead>
           <TableRow>
             {columns.map(
@@ -105,7 +98,7 @@ export default function MuiTable<Item>({
         <TableBody>
           {rows.map(
             (row: Item, rowIndex: number): ReactElement => (
-              <TableRow key={rowIndex} sx={TABLE_ROW_SX}>
+              <TableRow key={rowIndex}>
                 {columns.map(
                   (
                     { Cell }: TableColumn<Item>,
