@@ -6,6 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import type { SxProps } from '@mui/system';
 import type { ReactElement } from 'react';
 import type TableColumn from '../../types/table-column';
@@ -17,7 +19,9 @@ const ARRAY_INDEX_OFFSET = 1;
 const FIRST_INDEX = 0;
 
 const TABLE_ROW_SX: SxProps = {
-  '&:last-child td, &:last-child th': { border: 0 },
+  '&:last-child td, &:last-child th': {
+    borderWidth: 0,
+  },
 };
 
 export default function MuiTable<Item>({
@@ -56,14 +60,11 @@ export default function MuiTable<Item>({
     Description,
     filter,
     filterPlaceholder,
-    header,
     loading,
     onFilterChange,
     onSort,
     onVisibleColumnsChange,
-    page,
     rows,
-    rowsPerPage,
     sortAscending,
     sortColumnIndex,
     visibleColumnIndices,
@@ -71,6 +72,18 @@ export default function MuiTable<Item>({
 
   return (
     <TableContainer component={Paper}>
+      <Toolbar>
+        <Typography component="div" sx={{ flex: '1 1 100%' }} variant="h6">
+          {header}
+        </Typography>
+        {/*
+        <Tooltip title="Filter list">
+          <IconButton>
+            <FilterListIcon />
+          </IconButton>
+        </Tooltip>
+        */}
+      </Toolbar>
       <Table size="small">
         <TableHead>
           <TableRow>
