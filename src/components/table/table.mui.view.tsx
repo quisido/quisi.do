@@ -4,8 +4,11 @@ import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
+import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import visuallyHidden from '@mui/utils/visuallyHidden';
+import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import type TableColumn from '../../types/table-column';
 import EmptyRows from './components/mui-empty-rows';
@@ -58,8 +61,6 @@ export default function MuiTable<Item>({
     onSort,
     onVisibleColumnsChange,
     rows,
-    sortAscending,
-    sortColumnIndex,
     visibleColumnIndices,
   );
 
@@ -83,15 +84,62 @@ export default function MuiTable<Item>({
             {columns.map(
               (
                 { header: columnHeader }: TableColumn<Item>,
-                index: number,
-              ): ReactElement => (
-                <TableCell
-                  align={index === FIRST_INDEX ? 'left' : 'right'}
-                  key={index}
-                >
-                  {columnHeader}
-                </TableCell>
-              ),
+                columnIndex: number,
+              ): ReactElement => {
+                const active: boolean = sortColumnIndex === columnIndex;
+
+                const getDirection = (): 'asc' | 'desc' => {
+                  if (!active) {
+                    return 'asc';
+                  }
+                  if (sortAscending) {
+                    return 'asc';
+                  }
+                  return 'desc';
+                };
+
+                const getSortDirection = (): 'asc' | 'desc' | false => {
+                  if (!active) {
+                    return false;
+                  }
+                  if (sortAscending) {
+                    return 'asc';
+                  }
+                  return 'desc';
+                };
+
+                const direction: 'asc' | 'desc' = getDirection();
+                return (
+                  <TableCell
+                    align={columnIndex === FIRST_INDEX ? 'left' : 'right'}
+                    key={columnIndex}
+                    sortDirection={getSortDirection()}
+                  >
+                    <TableSortLabel
+                      active={active}
+                      direction={direction}
+                      onClick={(): void => {
+                        if (active) {
+                          onSort(columnIndex, !sortAscending);
+                        } else {
+                          onSort(columnIndex, true);
+                        }
+                      }}
+                    >
+                      {columnHeader}
+                      {active && (
+                        <span style={visuallyHidden}>
+                          {direction === 'asc' ? (
+                            <I18n>sorted ascending</I18n>
+                          ) : (
+                            <I18n>sorted descending</I18n>
+                          )}
+                        </span>
+                      )}
+                    </TableSortLabel>
+                  </TableCell>
+                );
+              },
             )}
           </TableRow>
         </TableHead>
