@@ -1,6 +1,6 @@
 // import MenuItem from '@mui/material/MenuItem';
 import type { ReactElement } from 'react';
-import type Props from './types/mui-menu-item-props';
+import type Props from '../../types/mui-menu-item-props';
 
 /**
  * `option` should be a `MenuItem` component, but `MenuItem` fails to fire the

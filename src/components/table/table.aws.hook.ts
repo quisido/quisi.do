@@ -12,7 +12,7 @@ import useParamsMemo from 'use-params-memo';
 import type ReadonlyTableSortingEvent from '../../types/readonly-table-sorting-event';
 import type TableColumn from '../../types/table-column';
 import type TableRowsPerPageOption from '../../types/table-rows-per-page-option';
-import useCountText from './table.aws.hook.count-text';
+import useCountText from './hooks/use-aws-count-text';
 import mapColumnToVisibleContentOption from './utils/map-column-to-visible-content-option';
 import mapColumnsToDefinitions from './utils/map-columns-to-definitions';
 import mapNumberDispatchToPaginationChangeHandler from './utils/map-number-dispatch-to-pagination-change-handler';

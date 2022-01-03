@@ -7,7 +7,7 @@ import type {
 } from 'react';
 import { Suspense } from 'react';
 import type DesignSystem from '../../constants/design-system';
-import useDesign from './design.root.hook';
+import useDesign from './design.hook';
 
 interface Props<P> {
   readonly props: Readonly<Attributes> & PropsWithRef<P>;

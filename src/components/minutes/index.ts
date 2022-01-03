@@ -1,1 +1,1 @@
-export { default } from './minutes.root.view';
+export { default } from './minutes.view';

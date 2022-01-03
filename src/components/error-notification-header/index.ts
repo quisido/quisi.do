@@ -1,1 +1,1 @@
-export { default } from './error-notification-header.root.view';
+export { default } from './error-notification-header.view';
