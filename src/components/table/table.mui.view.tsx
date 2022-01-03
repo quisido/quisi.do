@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import type { SxProps } from '@mui/system';
 import type { ReactElement } from 'react';
 import type TableColumn from '../../types/table-column';
+import EmptyRows from './components/mui-empty-rows';
 import useMuiTable from './table.mui.hook';
 import type Props from './types/props';
 
@@ -108,6 +109,12 @@ export default function MuiTable<Item>({
               </TableRow>
             ),
           )}
+          <EmptyRows
+            colSpan={columns.length}
+            page={page}
+            rowsCount={rowsCount}
+            rowsPerPage={rowsPerPage}
+          />
         </TableBody>
       </Table>
       <TablePagination
