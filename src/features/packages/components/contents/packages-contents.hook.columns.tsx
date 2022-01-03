@@ -19,7 +19,7 @@ export default function usePackageContentsColumns(
         header: translate('Package name') ?? '...',
         minWidth: 240,
         width: 320,
-        Cell(item: Readonly<Item>): ReactElement {
+        CellContent(item: Readonly<Item>): ReactElement {
           return <PackageName {...item} filter={filter} />;
         },
         sort(a: Item, b: Item): number {
@@ -32,7 +32,7 @@ export default function usePackageContentsColumns(
         maxWidth: 240,
         minWidth: 180,
         width: 240,
-        Cell(item: Item): ReactElement {
+        CellContent(item: Item): ReactElement {
           return <TotalDownloads {...item} />;
         },
         sort(a: Item, b: Item): number {
@@ -45,7 +45,7 @@ export default function usePackageContentsColumns(
         maxWidth: 240,
         minWidth: 180,
         width: 240,
-        Cell(item: Item): ReactElement {
+        CellContent(item: Item): ReactElement {
           return <DirectDownloads {...item} />;
         },
         sort(a: Item, b: Item): number {

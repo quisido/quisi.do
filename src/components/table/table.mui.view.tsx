@@ -1,185 +1,112 @@
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableSortLabel from '@mui/material/TableSortLabel';
+import Body from '@mui/material/TableBody';
+import Cell from '@mui/material/TableCell';
+import Container from '@mui/material/TableContainer';
+import Head from '@mui/material/TableHead';
+import Pagination from '@mui/material/TablePagination';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import visuallyHidden from '@mui/utils/visuallyHidden';
-import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import type TableColumn from '../../types/table-column';
+import mapComponentToPropMapper from '../../utils/map-component-to-prop-mapper';
 import EmptyRows from './components/mui-empty-rows';
-import TableCell from './components/mui-table-cell';
-import TableRow from './components/mui-table-row';
+import HeadCell from './components/mui-head-cell';
+import Row from './components/mui-row';
 import useMuiTable from './table.mui.hook';
 import type Props from './types/props';
 
-const ARRAY_INDEX_OFFSET = 1;
 const FIRST_INDEX = 0;
+const mapHeadCellPropsToComponent = mapComponentToPropMapper(HeadCell);
 
+/*
+Description,
+filter,
+filterPlaceholder,
+loading,
+onFilterChange,
+onVisibleColumnsChange,
+visibleColumnIndices,
+*/
 export default function MuiTable<Item>({
-  Description,
   columns,
-  filter,
-  filterPlaceholder,
   header,
-  loading,
-  onFilterChange,
   onPageChange,
   onRowsPerPageChange,
   onSort,
-  onVisibleColumnsChange,
-  page,
+  page: pageProp,
   rows,
   rowsCount,
   rowsPerPage,
   rowsPerPageOptions: rowsPerPageOptionsProp,
   sortAscending,
   sortColumnIndex,
-  visibleColumnIndices,
 }: Readonly<Props<Item>>): ReactElement {
   const {
     handlePageChange,
     handleRowsPerPageChange,
+    headCellProps,
+    page: pageState,
     rowsPerPageOptions: rowsPerPageOptionsState,
   } = useMuiTable({
     columns,
     onPageChange,
     onRowsPerPageChange,
+    onSort,
+    page: pageProp,
     rowsPerPageOptions: rowsPerPageOptionsProp,
+    sortAscending,
+    sortColumnIndex,
   });
 
-  console.log(
-    Description,
-    filter,
-    filterPlaceholder,
-    loading,
-    onFilterChange,
-    onSort,
-    onVisibleColumnsChange,
-    rows,
-    visibleColumnIndices,
-  );
-
   return (
-    <TableContainer component={Paper}>
+    <Container component={Paper}>
       <Toolbar>
-        <Typography component="div" sx={{ flex: '1 1 100%' }} variant="h6">
+        <Typography component="div" variant="h6">
           {header}
         </Typography>
-        {/*
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-        */}
       </Toolbar>
       <Table size="small" stickyHeader>
-        <TableHead>
-          <TableRow>
-            {columns.map(
-              (
-                { header: columnHeader }: TableColumn<Item>,
-                columnIndex: number,
-              ): ReactElement => {
-                const active: boolean = sortColumnIndex === columnIndex;
-
-                const getDirection = (): 'asc' | 'desc' => {
-                  if (!active) {
-                    return 'asc';
-                  }
-                  if (sortAscending) {
-                    return 'asc';
-                  }
-                  return 'desc';
-                };
-
-                const getSortDirection = (): 'asc' | 'desc' | false => {
-                  if (!active) {
-                    return false;
-                  }
-                  if (sortAscending) {
-                    return 'asc';
-                  }
-                  return 'desc';
-                };
-
-                const direction: 'asc' | 'desc' = getDirection();
-                return (
-                  <TableCell
-                    align={columnIndex === FIRST_INDEX ? 'left' : 'right'}
-                    key={columnIndex}
-                    sortDirection={getSortDirection()}
-                  >
-                    <TableSortLabel
-                      active={active}
-                      direction={direction}
-                      onClick={(): void => {
-                        if (active) {
-                          onSort(columnIndex, !sortAscending);
-                        } else {
-                          onSort(columnIndex, true);
-                        }
-                      }}
-                    >
-                      {columnHeader}
-                      {active && (
-                        <span style={visuallyHidden}>
-                          {direction === 'asc' ? (
-                            <I18n>sorted ascending</I18n>
-                          ) : (
-                            <I18n>sorted descending</I18n>
-                          )}
-                        </span>
-                      )}
-                    </TableSortLabel>
-                  </TableCell>
-                );
-              },
-            )}
-          </TableRow>
-        </TableHead>
-        <TableBody>
+        <Head>
+          <Row>{headCellProps.map(mapHeadCellPropsToComponent)}</Row>
+        </Head>
+        <Body>
           {rows.map(
             (row: Item, rowIndex: number): ReactElement => (
-              <TableRow key={rowIndex}>
+              <Row key={rowIndex}>
                 {columns.map(
                   (
-                    { Cell }: TableColumn<Item>,
+                    { CellContent }: TableColumn<Item>,
                     columnIndex: number,
                   ): ReactElement => (
-                    <TableCell
+                    <Cell
                       align={columnIndex === FIRST_INDEX ? 'left' : 'right'}
                       key={columnIndex}
                     >
-                      <Cell {...row} />
-                    </TableCell>
+                      <CellContent {...row} />
+                    </Cell>
                   ),
                 )}
-              </TableRow>
+              </Row>
             ),
           )}
           <EmptyRows
             colSpan={columns.length}
-            page={page}
+            page={pageProp}
             rowsCount={rowsCount}
             rowsPerPage={rowsPerPage}
           />
-        </TableBody>
+        </Body>
       </Table>
-      <TablePagination
+      <Pagination
         component="div"
         count={rowsCount}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleRowsPerPageChange}
-        page={page - ARRAY_INDEX_OFFSET}
+        page={pageState}
         rowsPerPage={rowsPerPage}
         rowsPerPageOptions={rowsPerPageOptionsState}
       />
-    </TableContainer>
+    </Container>
   );
 }

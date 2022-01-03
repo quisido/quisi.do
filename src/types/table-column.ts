@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
 
 export default interface TableColumn<Item> {
-  readonly Cell: ComponentType<Item>;
+  readonly CellContent: ComponentType<Item>;
   readonly header: string;
   readonly maxWidth?: number | undefined;
   readonly minWidth?: number | undefined;

@@ -4,7 +4,7 @@ import type TableColumn from '../../../types/table-column';
 import mapIndexToColumnDefinitionId from '../utils/map-index-to-column-definition-id';
 
 export default function mapColumnToDefinition<Item>(
-  { Cell, header, maxWidth, minWidth, width }: TableColumn<Item>,
+  { CellContent, header, maxWidth, minWidth, width }: TableColumn<Item>,
   index: number,
 ): TableProps.ColumnDefinition<Item> {
   const optionalProperties: Pick<
@@ -27,7 +27,7 @@ export default function mapColumnToDefinition<Item>(
     id: mapIndexToColumnDefinitionId(index),
     sortingField: index.toString(),
     cell(item: Item): ReactElement {
-      return <Cell {...item} />;
+      return <CellContent {...item} />;
     },
   };
 }
