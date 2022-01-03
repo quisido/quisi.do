@@ -18,7 +18,6 @@ import mapColumnsToDefinitions from './utils/map-columns-to-definitions';
 import mapNumberDispatchToPaginationChangeHandler from './utils/map-number-dispatch-to-pagination-change-handler';
 import mapRowsPerPageOptionToPageSizeOption from './utils/map-rows-per-page-option-to-page-size-option';
 import mapSortingColumnToIndex from './utils/map-sorting-column-to-index';
-import mapStringDispatchToTextFilterChangeHandler from './utils/map-string-dispatch-to-text-filter-change-handler';
 
 interface Props<Item> {
   readonly Description?: ComponentType<Item> | undefined;
@@ -77,6 +76,8 @@ interface State<Item> {
     >,
   ) => void;
 }
+
+const FIRST_PAGE = 1;
 
 export default function useAwsTableHook<Item>({
   Description,
@@ -152,6 +153,7 @@ export default function useAwsTableHook<Item>({
         >,
       ): void => {
         if (typeof e.detail.pageSize !== 'undefined') {
+          onPageChange(FIRST_PAGE);
           onRowsPerPageChange(e.detail.pageSize);
         }
 
@@ -181,7 +183,12 @@ export default function useAwsTableHook<Item>({
           setWrapLines(e.detail.wrapLines);
         }
       },
-      [columnDefinitions, onRowsPerPageChange, onVisibleColumnsChange],
+      [
+        columnDefinitions,
+        onPageChange,
+        onRowsPerPageChange,
+        onVisibleColumnsChange,
+      ],
     ),
 
     handlePaginationChange: useParamsMemo(
@@ -199,9 +206,16 @@ export default function useAwsTableHook<Item>({
       [onSort],
     ),
 
-    handleTextFilterChange: useParamsMemo(
-      mapStringDispatchToTextFilterChangeHandler,
-      [onFilterChange],
+    handleTextFilterChange: useCallback(
+      (
+        e: Readonly<
+          NonCancelableCustomEvent<Readonly<TextFilterProps.ChangeDetail>>
+        >,
+      ): void => {
+        onFilterChange(e.detail.filteringText);
+        onPageChange(FIRST_PAGE);
+      },
+      [onFilterChange, onPageChange],
     ),
 
     pageSizePreference: useMemo(

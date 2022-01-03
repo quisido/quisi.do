@@ -1,1 +1,1 @@
-export { default } from './packages-total-downloads-cell.view';
+export { default } from './total-downloads-cell.view';
