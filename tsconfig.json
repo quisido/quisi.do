@@ -16,7 +16,7 @@
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "incremental": false,
+    "incremental": true,
     "inlineSourceMap": false,
     "inlineSources": true,
     "isolatedModules": true,
@@ -33,7 +33,7 @@
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "dist",
+    "outDir": ".",
     "removeComments": true,
     "resolveJsonModule": true,
     "rootDir": "src",
@@ -47,6 +47,7 @@
     "strictPropertyInitialization": true,
     "suppressImplicitAnyIndexErrors": false,
     "target": "ES5",
+    "tsBuildInfoFile": ".tsbuildinfo",
     "useUnknownInCatchVariables": true
   },
 

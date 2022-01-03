@@ -7,8 +7,8 @@ import type Props from './types/props';
 export default function AwsBox({
   children,
   className,
+  color,
   element,
-  fontSize: fontSizeProp,
   margin: marginProp,
   marginBottom,
   marginLeft,
@@ -16,14 +16,15 @@ export default function AwsBox({
   marginTop,
   marginX,
   marginY,
+  size,
 }: Readonly<Props>): ReactElement {
   const {
-    fontSize: fontSizeState,
+    fontSize,
     margin: marginState,
     variant,
   } = useAwsBox({
+    color,
     element,
-    fontSize: fontSizeProp,
     margin: marginProp,
     marginBottom,
     marginLeft,
@@ -31,14 +32,15 @@ export default function AwsBox({
     marginTop,
     marginX,
     marginY,
+    size,
   });
 
   const optionalProps: BoxProps = {};
   if (typeof className === 'string') {
     optionalProps.className = className;
   }
-  if (typeof fontSizeState !== 'undefined') {
-    optionalProps.fontSize = fontSizeState;
+  if (typeof fontSize !== 'undefined') {
+    optionalProps.fontSize = fontSize;
   }
   if (typeof marginState !== 'undefined') {
     optionalProps.margin = marginState;

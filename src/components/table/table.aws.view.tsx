@@ -31,6 +31,7 @@ export default function AwsTable<Item>({
   visibleColumnIndices,
 }: Readonly<Props<Item>>): ReactElement {
   const {
+    DescriptionPortal,
     cancelLabel,
     collectionPreferencesTitle,
     columnDefinitions,
@@ -144,6 +145,7 @@ export default function AwsTable<Item>({
           />
         }
       />
+      <DescriptionPortal />
     </div>
   );
 }

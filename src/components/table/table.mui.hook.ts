@@ -1,27 +1,32 @@
-import type { Attributes, ChangeEvent, MouseEvent } from 'react';
+import type { Attributes, ChangeEvent, ComponentType, MouseEvent } from 'react';
 import { useCallback, useMemo } from 'react';
 import useParamsMemo from 'use-params-memo';
 import type Column from '../../types/table-column';
 import type RowsPerPageOption from '../../types/table-rows-per-page-option';
-import type MuiHeadCellProps from './types/mui-head-cell-props';
+import useRowProps from './hooks/use-mui-row-props';
+import type HeadCellProps from './types/mui-head-cell-props';
+import type RowProps from './types/mui-row-props';
 import type MuiRowsPerPageOption from './types/mui-rows-per-page-option';
 import mapColumnToHeadCellPartialProps from './utils/map-column-to-head-cell-partial-props';
 import mapRowsPerPageOptionsToMuiRowsPerPageOptions from './utils/map-rows-per-page-options-to-mui-rows-per-page-options';
 
 interface Props<Item> {
+  readonly Description?: ComponentType<Item> | undefined;
   readonly columns: readonly Column<Item>[];
   readonly onPageChange: (page: number) => void;
   readonly onRowsPerPageChange: (rowsPerPage: number) => void;
   readonly onSort: (columnIndex: number, ascending: boolean) => void;
   readonly page: number;
+  readonly rows: readonly Item[];
   readonly rowsPerPageOptions: readonly RowsPerPageOption[];
   readonly sortAscending: boolean;
   readonly sortColumnIndex: number | undefined;
 }
 
 interface State {
-  readonly headCellProps: (Required<Attributes> & MuiHeadCellProps)[];
+  readonly headCellProps: (Required<Attributes> & HeadCellProps)[];
   readonly page: number;
+  readonly rowProps: readonly (Required<Attributes> & RowProps)[];
   readonly rowsPerPageOptions: MuiRowsPerPageOption[];
   readonly handlePageChange: (
     event: MouseEvent<HTMLButtonElement> | null,
@@ -39,11 +44,13 @@ const FIRST_PAGE = 0;
 const MUI_PAGE_OFFSET = 1;
 
 export default function useMuiTable<Item>({
+  Description,
   columns,
   onPageChange,
   onRowsPerPageChange,
   onSort,
   page,
+  rows,
   rowsPerPageOptions,
   sortAscending,
   sortColumnIndex,
@@ -68,11 +75,11 @@ export default function useMuiTable<Item>({
       [onPageChange, onRowsPerPageChange],
     ),
 
-    headCellProps: useMemo((): (Required<Attributes> & MuiHeadCellProps)[] => {
+    headCellProps: useMemo((): (Required<Attributes> & HeadCellProps)[] => {
       const mapColumnToHeadCellProps = (
         column: Column<Item>,
         columnIndex: number,
-      ): Required<Attributes> & MuiHeadCellProps => ({
+      ): Required<Attributes> & HeadCellProps => ({
         ...mapColumnToHeadCellPartialProps(column, columnIndex),
         active: columnIndex === sortColumnIndex,
         ascending: sortAscending,
@@ -83,6 +90,12 @@ export default function useMuiTable<Item>({
 
       return columns.map(mapColumnToHeadCellProps);
     }, [columns, onSort, sortAscending, sortColumnIndex]),
+
+    rowProps: useRowProps({
+      Description,
+      columns,
+      items: rows,
+    }),
 
     rowsPerPageOptions: useParamsMemo(
       mapRowsPerPageOptionsToMuiRowsPerPageOptions,

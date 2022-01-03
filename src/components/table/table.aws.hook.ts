@@ -39,6 +39,7 @@ interface Props<Item> {
 }
 
 interface State<Item> {
+  readonly DescriptionPortal: ComponentType<Record<string, never>>;
   readonly cancelLabel: string;
   readonly collectionPreferencesTitle: string;
   readonly columnDefinitions: readonly TableProps.ColumnDefinition<Item>[];
@@ -124,14 +125,16 @@ export default function useAwsTableHook<Item>({
   }, [columnDefinitions, visibleColumnIndices]);
 
   // Effects
-  useAwsuiTableItemDescription({
-    Component: Description,
-    colSpan: visibleColumnIndices.length,
-    items: rows,
-    ref,
-  });
+  const DescriptionPortal: ComponentType<Record<string, never>> =
+    useAwsuiTableItemDescription({
+      Component: Description,
+      colSpan: visibleColumnIndices.length,
+      items: rows,
+      ref,
+    });
 
   return {
+    DescriptionPortal,
     cancelLabel: translate('Cancel') ?? '...',
     collectionPreferencesTitle: translate('Preferences') ?? '...',
     columnDefinitions,

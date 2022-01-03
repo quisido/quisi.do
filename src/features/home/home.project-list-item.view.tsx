@@ -17,7 +17,7 @@ export default function HomeProjectListItem({
 
   return (
     <li className={rootClassName} style={style}>
-      <Box fontSize="medium" margin="small">
+      <Box margin="small" size="medium">
         <Name url={url}>{name}</Name>
       </Box>
     </li>

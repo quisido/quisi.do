@@ -1,7 +1,9 @@
+import mapColorToMuiColor from './utils/map-color-to-mui-color';
+import mapSizeToFontSize from './utils/map-size-to-mui-font-size';
 import mapSizeToSystemValue from './utils/map-size-to-system-value';
 
 interface Props {
-  readonly fontSize: 'large' | 'medium' | 'small' | undefined;
+  readonly color: 'label' | 'secondary-body' | undefined;
   readonly margin: 'large' | 'medium' | 'small' | undefined;
   readonly marginBottom: 'large' | 'medium' | 'small' | undefined;
   readonly marginLeft: 'large' | 'medium' | 'small' | undefined;
@@ -9,9 +11,11 @@ interface Props {
   readonly marginTop: 'large' | 'medium' | 'small' | undefined;
   readonly marginX: 'large' | 'medium' | 'small' | undefined;
   readonly marginY: 'large' | 'medium' | 'small' | undefined;
+  readonly size: 'large' | 'medium' | 'small' | undefined;
 }
 
 interface State {
+  readonly color: 'text.secondary' | undefined;
   readonly fontSize: number | undefined;
   readonly mb: number | undefined;
   readonly ml: number | undefined;
@@ -19,28 +23,8 @@ interface State {
   readonly mt: number | undefined;
 }
 
-const LARGE = 32;
-const MEDIUM = 16;
-const SMALL = 8;
-
-const mapSizeToFontSize = (
-  size: 'large' | 'medium' | 'small' | undefined,
-): number | undefined => {
-  if (typeof size === 'undefined') {
-    return;
-  }
-  switch (size) {
-    case 'large':
-      return LARGE;
-    case 'medium':
-      return MEDIUM;
-    case 'small':
-      return SMALL;
-  }
-};
-
 export default function useAwsBox({
-  fontSize,
+  color,
   margin,
   marginBottom,
   marginLeft,
@@ -48,9 +32,11 @@ export default function useAwsBox({
   marginTop,
   marginX,
   marginY,
+  size,
 }: Readonly<Props>): State {
   return {
-    fontSize: mapSizeToFontSize(fontSize),
+    color: color && mapColorToMuiColor(color),
+    fontSize: size && mapSizeToFontSize(size),
     mb: mapSizeToSystemValue(marginBottom ?? marginY ?? margin),
     ml: mapSizeToSystemValue(marginLeft ?? marginX ?? margin),
     mr: mapSizeToSystemValue(marginRight ?? marginX ?? margin),

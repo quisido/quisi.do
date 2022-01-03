@@ -1,10 +1,12 @@
 import type { BoxProps } from '@awsui/components-react';
 import { useMemo } from 'react';
+import mapColorToAwsColor from './utils/map-color-to-aws-color';
+import mapSizeToAwsFontSize from './utils/map-size-to-aws-font-size';
 import mapSizeToSpacingSize from './utils/map-size-to-spacing-size';
 
 interface Props {
+  readonly color: 'label' | 'secondary-body' | undefined;
   readonly element: 'h2' | 'p' | undefined;
-  readonly fontSize: 'large' | 'medium' | 'small' | undefined;
   readonly margin: 'large' | 'medium' | 'small' | undefined;
   readonly marginBottom: 'large' | 'medium' | 'small' | undefined;
   readonly marginLeft: 'large' | 'medium' | 'small' | undefined;
@@ -12,17 +14,19 @@ interface Props {
   readonly marginTop: 'large' | 'medium' | 'small' | undefined;
   readonly marginX: 'large' | 'medium' | 'small' | undefined;
   readonly marginY: 'large' | 'medium' | 'small' | undefined;
+  readonly size: 'large' | 'medium' | 'small' | undefined;
 }
 
 interface State {
+  readonly color: BoxProps.Color | undefined;
   readonly fontSize: BoxProps.FontSize | undefined;
   readonly margin: BoxProps.Spacing | undefined;
   readonly variant: 'h2' | 'p' | undefined;
 }
 
 export default function useAwsBox({
+  color,
   element,
-  fontSize,
   margin,
   marginBottom,
   marginLeft,
@@ -30,6 +34,7 @@ export default function useAwsBox({
   marginTop,
   marginX,
   marginY,
+  size,
 }: Readonly<Props>): State {
   const marginBottomSize: 'large' | 'medium' | 'small' | undefined =
     marginBottom ?? marginY ?? margin;
@@ -41,21 +46,9 @@ export default function useAwsBox({
     marginTop ?? marginY ?? margin;
 
   return {
+    color: color && mapColorToAwsColor(color),
+    fontSize: size && mapSizeToAwsFontSize(size),
     variant: element,
-
-    fontSize: useMemo((): BoxProps.FontSize | undefined => {
-      if (typeof fontSize === 'undefined') {
-        return;
-      }
-      switch (fontSize) {
-        case 'large':
-          return 'display-l';
-        case 'medium':
-          return 'body-m';
-        case 'small':
-          return 'body-s';
-      }
-    }, [fontSize]),
 
     margin: useMemo((): BoxProps.Spacing | undefined => {
       if (

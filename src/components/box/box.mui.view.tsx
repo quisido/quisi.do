@@ -7,8 +7,8 @@ import type Props from './types/props';
 export default function MuiBox({
   children,
   className,
+  color: colorProps,
   element,
-  fontSize: fontSizeProp,
   margin,
   marginBottom,
   marginLeft,
@@ -16,15 +16,17 @@ export default function MuiBox({
   marginTop,
   marginX,
   marginY,
+  size,
 }: Readonly<Props>): ReactElement {
   const {
-    fontSize: fontSizeState,
+    color: colorState,
+    fontSize,
     mb,
     ml,
     mr,
     mt,
   } = useMuiBox({
-    fontSize: fontSizeProp,
+    color: colorProps,
     margin,
     marginBottom,
     marginLeft,
@@ -32,17 +34,21 @@ export default function MuiBox({
     marginTop,
     marginX,
     marginY,
+    size,
   });
 
   const optionalProps: BoxProps = {};
   if (typeof className === 'string') {
     optionalProps.className = className;
   }
+  if (typeof colorState === 'string') {
+    optionalProps.color = colorState;
+  }
   if (typeof element === 'string') {
     optionalProps.component = element;
   }
-  if (typeof fontSizeState !== 'undefined') {
-    optionalProps.fontSize = fontSizeState;
+  if (typeof fontSize !== 'undefined') {
+    optionalProps.fontSize = fontSize;
   }
   if (typeof mb !== 'undefined') {
     optionalProps.mb = mb;
@@ -57,5 +63,9 @@ export default function MuiBox({
     optionalProps.mt = mt;
   }
 
-  return <Box {...optionalProps}>{children}</Box>;
+  return (
+    <Box margin={0} padding={0} {...optionalProps}>
+      {children}
+    </Box>
+  );
 }

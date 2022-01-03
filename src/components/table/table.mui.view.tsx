@@ -1,14 +1,13 @@
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import Body from '@mui/material/TableBody';
-import Cell from '@mui/material/TableCell';
 import Container from '@mui/material/TableContainer';
 import Head from '@mui/material/TableHead';
 import Pagination from '@mui/material/TablePagination';
+import MuiRow from '@mui/material/TableRow';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import type TableColumn from '../../types/table-column';
 import mapComponentToPropMapper from '../../utils/map-component-to-prop-mapper';
 import EmptyRows from './components/mui-empty-rows';
 import HeadCell from './components/mui-head-cell';
@@ -16,11 +15,10 @@ import Row from './components/mui-row';
 import useMuiTable from './table.mui.hook';
 import type Props from './types/props';
 
-const FIRST_INDEX = 0;
 const mapHeadCellPropsToComponent = mapComponentToPropMapper(HeadCell);
+const mapRowPropsToComponent = mapComponentToPropMapper(Row);
 
 /*
-Description,
 filter,
 filterPlaceholder,
 loading,
@@ -29,6 +27,7 @@ onVisibleColumnsChange,
 visibleColumnIndices,
 */
 export default function MuiTable<Item>({
+  Description,
   columns,
   header,
   onPageChange,
@@ -48,12 +47,15 @@ export default function MuiTable<Item>({
     headCellProps,
     page: pageState,
     rowsPerPageOptions: rowsPerPageOptionsState,
+    rowProps,
   } = useMuiTable({
+    Description,
     columns,
     onPageChange,
     onRowsPerPageChange,
     onSort,
     page: pageProp,
+    rows,
     rowsPerPageOptions: rowsPerPageOptionsProp,
     sortAscending,
     sortColumnIndex,
@@ -68,28 +70,10 @@ export default function MuiTable<Item>({
       </Toolbar>
       <Table size="small" stickyHeader>
         <Head>
-          <Row>{headCellProps.map(mapHeadCellPropsToComponent)}</Row>
+          <MuiRow>{headCellProps.map(mapHeadCellPropsToComponent)}</MuiRow>
         </Head>
         <Body>
-          {rows.map(
-            (row: Item, rowIndex: number): ReactElement => (
-              <Row key={rowIndex}>
-                {columns.map(
-                  (
-                    { CellContent }: TableColumn<Item>,
-                    columnIndex: number,
-                  ): ReactElement => (
-                    <Cell
-                      align={columnIndex === FIRST_INDEX ? 'left' : 'right'}
-                      key={columnIndex}
-                    >
-                      <CellContent {...row} />
-                    </Cell>
-                  ),
-                )}
-              </Row>
-            ),
-          )}
+          {rowProps.map(mapRowPropsToComponent)}
           <EmptyRows
             colSpan={columns.length}
             page={pageProp}
