@@ -4,22 +4,43 @@ import mapComponentToPropMapper from '../../utils/map-component-to-prop-mapper';
 import useMuiSelect from './select.mui.hook';
 import MenuItem from './select.mui-menu-item';
 import type Props from './types/props';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 
+/**
+ * The `Select` component should not have to have a `native` prop, but the
+ *   `onChange` handler will not fire without it.
+ */
+
+let idNumber = 1;
 const mapMenuItemPropsToMenuItem = mapComponentToPropMapper(MenuItem);
 
 export default function MuiSelect({
+  label,
   onChange,
   options,
-  value: selectValue,
+  value,
 }: Readonly<Props>): ReactElement {
   const { handleChange, menuItemProps } = useMuiSelect({
     onChange,
     options,
   });
 
+  idNumber++;
+  const idString = `select-${idNumber}`;
   return (
-    <Select onChange={handleChange} size="small" value={selectValue}>
-      {menuItemProps.map(mapMenuItemPropsToMenuItem)}
-    </Select>
+    <FormControl fullWidth>
+      <InputLabel id={idString}>{label}</InputLabel>
+      <Select
+        label={label}
+        labelId={idString}
+        native
+        onChange={handleChange}
+        size="small"
+        value={value}
+      >
+        {menuItemProps.map(mapMenuItemPropsToMenuItem)}
+      </Select>
+    </FormControl>
   );
 }

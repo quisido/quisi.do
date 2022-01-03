@@ -130,8 +130,6 @@ export default function useAwsTableHook<Item>({
     ref,
   });
 
-  console.log(columnDefinitions);
-
   return {
     cancelLabel: translate('Cancel') ?? '...',
     collectionPreferencesTitle: translate('Preferences') ?? '...',

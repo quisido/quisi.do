@@ -10,7 +10,7 @@ const BLUE_DARK_400 = '#265d97';
 const BLUE_DARK_500 = '#1e4976';
 const BLUE_DARK_600 = '#173a5e';
 const BLUE_DARK_700 = '#132f4c';
-const BLUE_DARK_800 = '#004c99';
+// const BLUE_DARK_800 = '#004c99';
 const BLUE_DARK_900 = '#0a1929';
 const DEFAULT_THEME: Theme = createTheme();
 
@@ -38,7 +38,7 @@ const MUI_DARK_THEME_BASE: Theme = createTheme({
     grey,
     mode: 'dark',
     background: {
-      default: BLUE_DARK_800,
+      default: BLUE_DARK_900, // BLUE_DARK_800,
       paper: BLUE_DARK_900,
     },
     common: {
@@ -242,6 +242,16 @@ const MUI_DARK_THEME: Theme = deepmerge(MUI_DARK_THEME_BASE, {
       styleOverrides: {
         root: {
           borderColor: BLUE_DARK_700,
+        },
+      },
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+          '& .MuiListItemButton-root': {
+            borderRadius: '0 !important',
+          },
         },
       },
     },
