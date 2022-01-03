@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 const NONE = 0;
 const SINGLE = 1;
 
-export default function usePackagesCountText(count: number): string {
+export default function useAwsTableCountText(count: number): string {
   const translate: TranslateFunction = useTranslate();
 
   return useMemo((): string => {

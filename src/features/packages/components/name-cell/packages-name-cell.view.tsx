@@ -5,23 +5,23 @@ import type Item from '../../types/packages-item';
 import usePackagesNameCell from './packages-name-cell.hook';
 
 interface Props extends Item {
-  readonly filteringText: string;
+  readonly filter: string;
 }
 
 export default function PackagesNameCell({
-  filteringText,
+  filter,
   packageName,
   repositoryName,
 }: Props): ReactElement {
   const { href, index } = usePackagesNameCell({
-    filteringText,
+    filter,
     packageName,
     repositoryName,
   });
 
   return (
     <Link href={href}>
-      <EmphasizeSubstring index={index} length={filteringText.length}>
+      <EmphasizeSubstring index={index} length={filter.length}>
         {packageName}
       </EmphasizeSubstring>
     </Link>

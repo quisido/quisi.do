@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 interface Props {
-  readonly filteringText: string;
+  readonly filter: string;
   readonly packageName: string;
   readonly repositoryName: string;
 }
@@ -14,7 +14,7 @@ interface State {
 const NOT_FOUND = -1;
 
 export default function usePackagesNameCell({
-  filteringText,
+  filter,
   packageName,
   repositoryName,
 }: Props): State {
@@ -22,10 +22,10 @@ export default function usePackagesNameCell({
     href: `https://github.com/CharlesStover/${repositoryName}`,
 
     index: useMemo((): number => {
-      if (filteringText === '') {
+      if (filter === '') {
         return NOT_FOUND;
       }
-      return packageName.indexOf(filteringText);
-    }, [filteringText, packageName]),
+      return packageName.indexOf(filter);
+    }, [filter, packageName]),
   };
 }

@@ -1,59 +1,58 @@
-import type { TableProps } from '@awsui/components-react/table';
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { useMemo } from 'react';
+import type TableColumn from '../../../../types/table-column';
 import DirectDownloads from '../../components/direct-downloads-cell';
 import PackageName from '../../components/name-cell';
 import TotalDownloads from '../../components/total-downloads-cell';
 import type Item from '../../types/packages-item';
 
-interface Props {
-  readonly filteringText: string;
-}
-
-export default function usePackagesColumnDefinitions({
-  filteringText,
-}: Props): readonly TableProps.ColumnDefinition<Item>[] {
+export default function usePackageContentsColumns(
+  filter: string,
+): readonly TableColumn<Item>[] {
   const translate: TranslateFunction = useTranslate();
 
   return useMemo(
-    (): TableProps.ColumnDefinition<Item>[] => [
+    (): readonly TableColumn<Item>[] => [
       {
         header: translate('Package name') ?? '...',
-        id: 'packageName',
         minWidth: 240,
-        sortingField: 'packageName',
         width: 320,
-        cell(item: Item): ReactElement {
-          return <PackageName {...item} filteringText={filteringText} />;
+        Cell(item: Readonly<Item>): ReactElement {
+          return <PackageName {...item} filter={filter} />;
+        },
+        sort(a: Item, b: Item): number {
+          return a.packageName.localeCompare(b.packageName);
         },
       },
 
       {
         header: translate('Total downloads') ?? '...',
-        id: 'totalDownloads',
         maxWidth: 240,
         minWidth: 180,
-        sortingField: 'totalDownloads',
         width: 240,
-        cell(item: Item): ReactElement {
+        Cell(item: Item): ReactElement {
           return <TotalDownloads {...item} />;
+        },
+        sort(a: Item, b: Item): number {
+          return a.totalDownloads - b.totalDownloads;
         },
       },
 
       {
         header: translate('Direct downloads') ?? '...',
-        id: 'directDownloads',
         maxWidth: 240,
         minWidth: 180,
-        sortingField: 'directDownloads',
         width: 240,
-        cell(item: Item): ReactElement {
+        Cell(item: Item): ReactElement {
           return <DirectDownloads {...item} />;
+        },
+        sort(a: Item, b: Item): number {
+          return a.directDownloads - b.directDownloads;
         },
       },
     ],
-    [filteringText, translate],
+    [filter, translate],
   );
 }

@@ -13,7 +13,10 @@ interface Props<P> {
   readonly props: Readonly<Attributes> & PropsWithRef<P>;
   readonly fallback?: ReactNode | undefined;
   readonly components: Readonly<
-    Record<DesignSystem, LazyExoticComponent<(props: P) => ReactElement>>
+    Record<
+      DesignSystem,
+      LazyExoticComponent<(props: Readonly<P>) => ReactElement>
+    >
   >;
 }
 

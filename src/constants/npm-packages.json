@@ -3,6 +3,8 @@
     [
       null,
       "@charlesstover/electron-transitions",
+      "@charlesstover/hsl2rgb",
+      "@gamingmedley/konami.js",
       "@charlesstover/password-generator",
       "@charlesstover/quicksort",
       "@charlesstover/radix",
@@ -17,8 +19,6 @@
       "use-async-function",
       "use-aws-sdk"
     ],
-    ["@charlesstover/hsl2rgb"],
-    ["@gamingmedley/konami.js"],
     ["@glossary/build", "@glossary/react"],
     ["absolute-timestamp"],
     ["awsui-dark-mode"],
