@@ -11,13 +11,13 @@ interface Props {
 
 interface State {
   readonly handleChange: (event: SelectChangeEvent<string | undefined>) => void;
-  readonly menuItemProps: readonly (Required<Attributes> & MenuItemProps)[];
+  readonly menuItemProps: readonly (MenuItemProps & Required<Attributes>)[];
 }
 
 const mapOptionToProps = ({
   label,
   value,
-}: Readonly<SelectOption>): Required<Attributes> & MenuItemProps => ({
+}: Readonly<SelectOption>): MenuItemProps & Required<Attributes> => ({
   children: label,
   key: value,
   value,
@@ -35,8 +35,8 @@ export default function useMuiSelect({
       [onChange],
     ),
 
-    menuItemProps: useMemo((): readonly (Required<Attributes> &
-      MenuItemProps)[] => {
+    menuItemProps: useMemo((): readonly (MenuItemProps &
+      Required<Attributes>)[] => {
       return options.map(mapOptionToProps);
     }, [options]),
   };

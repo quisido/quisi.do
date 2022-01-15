@@ -41,7 +41,7 @@ export default function PublicationsContents(): ReactElement {
           dismissible
           onDismiss={handleAlertDismiss}
           type="info"
-          visible={true}
+          visible
           {...optionalAlertProps}
         >
           <I18n count={<NumberFormat>{MINIMUM_VIEWS}</NumberFormat>}>

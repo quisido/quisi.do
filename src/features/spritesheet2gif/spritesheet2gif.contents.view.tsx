@@ -1,4 +1,3 @@
-import Button from '@awsui/components-react/button';
 import FormField from '@awsui/components-react/form-field';
 import Input from '@awsui/components-react/input';
 import Link from '@awsui/components-react/link';
@@ -7,6 +6,9 @@ import SpaceBetween from '@awsui/components-react/space-between';
 import type { ReactElement } from 'react';
 import Display from '../../components/display';
 import validateString from '../../utils/validate-string';
+import Footer from './components/footer';
+import ImageFileInput from './components/image-file-input';
+import Header from './components/header';
 import ApiGifResponse from './spritesheet2gif.api-gif-response.view';
 import useSpriteSheet2GifContents from './spritesheet2gif.contents.hook';
 import styles from './spritesheet2gif.contents.module.scss';
@@ -56,41 +58,18 @@ export default function SpriteSheet2GifContents({
   return (
     <SpaceBetween direction="vertical" size="m">
       <Display
-        headerClassName={headerClassName}
         footer={
-          <Button
+          <Footer
             loading={isConvertButtonLoading}
-            onClick={handleConvertClick}
-            variant="primary"
-          >
-            Convert
-          </Button>
+            onSubmit={handleConvertClick}
+          />
         }
-        header={
-          <>
-            Animate a sprite sheet{' '}
-            <Link
-              ariaLabel="Info"
-              onFollow={handleHeaderInfoFollow}
-              variant="info"
-            >
-              Info
-            </Link>
-          </>
-        }
+        header={<Header onInfoFollow={handleHeaderInfoFollow} />}
+        headerClassName={headerClassName}
       >
         <SpaceBetween direction="vertical" size="m">
-          <FormField
-            description="Only GIF, JPEG, and PNG images are supported."
-            label="Sprite sheet image file"
-          >
-            <input
-              accept="image/*"
-              onChange={handleSpriteSheetImageFileChange}
-              required
-              type="file"
-            />
-          </FormField>
+          <ImageFileInput onChange={handleSpriteSheetImageFileChange} />
+
           <FormField label="Duration in milliseconds">
             <SpaceBetween direction="horizontal" size="m">
               <Input

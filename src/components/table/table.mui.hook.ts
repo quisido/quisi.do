@@ -24,7 +24,7 @@ interface Props<Item> {
 }
 
 interface State {
-  readonly headCellProps: (Required<Attributes> & HeadCellProps)[];
+  readonly headCellProps: (HeadCellProps & Required<Attributes>)[];
   readonly page: number;
   readonly rowProps: readonly (Required<Attributes> & RowProps)[];
   readonly rowsPerPageOptions: MuiRowsPerPageOption[];
@@ -75,11 +75,11 @@ export default function useMuiTable<Item>({
       [onPageChange, onRowsPerPageChange],
     ),
 
-    headCellProps: useMemo((): (Required<Attributes> & HeadCellProps)[] => {
+    headCellProps: useMemo((): (HeadCellProps & Required<Attributes>)[] => {
       const mapColumnToHeadCellProps = (
         column: Column<Item>,
         columnIndex: number,
-      ): Required<Attributes> & HeadCellProps => ({
+      ): HeadCellProps & Required<Attributes> => ({
         ...mapColumnToHeadCellPartialProps(column, columnIndex),
         active: columnIndex === sortColumnIndex,
         ascending: sortAscending,

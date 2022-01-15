@@ -7,8 +7,8 @@ const FIRST_INDEX = 0;
 export default function mapColumnToHeadCellPartialProps<Item>(
   { header }: Column<Item>,
   index: number,
-): Required<Attributes> &
-  Omit<MuiHeadCellProps, 'active' | 'ascending' | 'onSort'> {
+): Omit<MuiHeadCellProps, 'active' | 'ascending' | 'onSort'> &
+  Required<Attributes> {
   return {
     align: index === FIRST_INDEX ? 'left' : 'right',
     header,

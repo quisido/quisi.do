@@ -1,4 +1,5 @@
-import I18n from 'lazy-i18n';
+import type { TranslateFunction } from 'lazy-i18n';
+import I18n, { useTranslate } from 'lazy-i18n';
 import type { MutableRefObject, ReactElement } from 'react';
 import { useEffect, useRef } from 'react';
 import Display from '../../components/display';
@@ -18,8 +19,14 @@ export default function Spritesheet2GifApiGifResponse({
   image,
   width,
 }: Props): ReactElement {
-  const ref: MutableRefObject<HTMLImageElement | null> = useRef(null);
+  // Contexts
+  const translate: TranslateFunction = useTranslate();
 
+  // States
+  const ref: MutableRefObject<HTMLImageElement | null> = useRef(null);
+  const alt: string = translate('Result') ?? '';
+
+  // Effects
   useEffect((): void => {
     if (ref.current === null) {
       return;
@@ -30,7 +37,7 @@ export default function Spritesheet2GifApiGifResponse({
   return (
     <Display header={<I18n>Result</I18n>}>
       <div className={centerClassName}>
-        <img height={height} ref={ref} src={image} width={width} />
+        <img alt={alt} height={height} ref={ref} src={image} width={width} />
       </div>
     </Display>
   );

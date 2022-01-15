@@ -19,8 +19,17 @@ export default function usePackageContentsColumns(
         header: translate('Package name') ?? '...',
         minWidth: 240,
         width: 320,
-        CellContent(item: Readonly<Item>): ReactElement {
-          return <PackageName {...item} filter={filter} />;
+        CellContent({
+          packageName,
+          repositoryName,
+        }: Readonly<Item>): ReactElement {
+          return (
+            <PackageName
+              filter={filter}
+              packageName={packageName}
+              repositoryName={repositoryName}
+            />
+          );
         },
         sort(a: Item, b: Item): number {
           return a.packageName.localeCompare(b.packageName);
@@ -28,26 +37,22 @@ export default function usePackageContentsColumns(
       },
 
       {
+        CellContent: TotalDownloads,
         header: translate('Total downloads') ?? '...',
         maxWidth: 240,
         minWidth: 180,
         width: 240,
-        CellContent(item: Item): ReactElement {
-          return <TotalDownloads {...item} />;
-        },
         sort(a: Item, b: Item): number {
           return a.totalDownloads - b.totalDownloads;
         },
       },
 
       {
+        CellContent: DirectDownloads,
         header: translate('Direct downloads') ?? '...',
         maxWidth: 240,
         minWidth: 180,
         width: 240,
-        CellContent(item: Item): ReactElement {
-          return <DirectDownloads {...item} />;
-        },
         sort(a: Item, b: Item): number {
           return a.directDownloads - b.directDownloads;
         },

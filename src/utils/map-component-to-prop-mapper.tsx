@@ -2,9 +2,9 @@ import type { Attributes, ComponentType, ReactElement } from 'react';
 
 export default function mapComponentToPropMapper<P>(
   Component: ComponentType<P>,
-): (props: Readonly<Required<Attributes>> & P) => ReactElement {
+): (props: P & Readonly<Required<Attributes>>) => ReactElement {
   return function MappedPropsComponent(
-    props: Readonly<Required<Attributes>> & P,
+    props: P & Readonly<Required<Attributes>>,
   ): ReactElement {
     return <Component {...props} />;
   };

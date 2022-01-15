@@ -9,7 +9,7 @@ export default interface Props {
   readonly breadcrumbs: readonly Readonly<Breadcrumb>[];
   readonly children: ReactNode;
   readonly contentType?: AppLayoutProps.ContentType;
-  readonly notifications?: undefined | readonly Readonly<Notification>[];
+  readonly notifications?: readonly Readonly<Notification>[] | undefined;
   readonly toolsHide?: boolean;
   readonly toolsOpen?: boolean;
   readonly onToolsChange?: (

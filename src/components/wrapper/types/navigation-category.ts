@@ -5,11 +5,11 @@ import type NavigationLink from '../types/navigation-link';
 
 export default interface NavigationCategory {
   readonly defaultExpanded: boolean;
+  readonly text: NavigationText;
   readonly children: readonly (
     | NavigationCategory
     | NavigationComponent
     | NavigationExternalLink
     | NavigationLink
   )[];
-  readonly text: NavigationText;
 }

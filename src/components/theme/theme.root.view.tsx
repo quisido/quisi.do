@@ -10,11 +10,11 @@ const MuiTheme = lazy(async () => import('./theme.mui.view'));
 export default function Theme({ children }: Readonly<Props>): ReactElement {
   return (
     <Design
-      props={{ children }}
       components={{
         [DesignSystem.Aws]: AwsTheme,
         [DesignSystem.Material]: MuiTheme,
       }}
+      props={{ children }}
     />
   );
 }

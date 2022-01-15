@@ -10,11 +10,11 @@ const MuiSelect = lazy(async () => import('./select.mui.view'));
 export default function Select(props: Readonly<Props>): ReactElement {
   return (
     <Design
-      props={props}
       components={{
         [DesignSystem.Aws]: AwsSelect,
         [DesignSystem.Material]: MuiSelect,
       }}
+      props={props}
     />
   );
 }

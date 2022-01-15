@@ -10,7 +10,7 @@ import type DesignSystem from '../../constants/design-system';
 import useDesign from './design.hook';
 
 interface Props<P> {
-  readonly props: Readonly<Attributes> & PropsWithRef<P>;
+  readonly props: PropsWithRef<P> & Readonly<Attributes>;
   readonly fallback?: ReactNode | undefined;
   readonly components: Readonly<
     Record<

@@ -11,11 +11,11 @@ const MuiButton = lazy(async () => import('./button.mui.view'));
 export default function Button(props: Readonly<Props>): ReactElement {
   return (
     <Design
-      props={props}
       components={{
         [DesignSystem.Aws]: AwsButton,
         [DesignSystem.Material]: MuiButton,
       }}
+      props={props}
     />
   );
 }

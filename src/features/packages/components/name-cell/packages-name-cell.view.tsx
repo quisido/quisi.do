@@ -4,7 +4,7 @@ import Link from '../../../../components/link';
 import type Item from '../../types/packages-item';
 import usePackagesNameCell from './packages-name-cell.hook';
 
-interface Props extends Item {
+interface Props extends Pick<Item, 'packageName' | 'repositoryName'> {
   readonly filter: string;
 }
 

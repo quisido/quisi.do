@@ -10,11 +10,11 @@ const MuiCheckbox = lazy(async () => import('./checkbox.mui.view'));
 export default function Checkbox(props: Readonly<Props>): ReactElement {
   return (
     <Design
-      props={props}
       components={{
         [DesignSystem.Aws]: AwsCheckbox,
         [DesignSystem.Material]: MuiCheckbox,
       }}
+      props={props}
     />
   );
 }

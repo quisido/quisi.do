@@ -20,7 +20,7 @@ const QUOTE_CARD_DEFINITION: CardsProps<Quote>['cardDefinition'] = {
   header({ author, company, title }: Readonly<Quote>): ReactElement {
     return (
       <Box textAlign="center">
-        <Box margin="xxxs" color="text-label">
+        <Box color="text-label" margin="xxxs">
           {author}
         </Box>
         {typeof title === 'string' && (

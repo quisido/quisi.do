@@ -22,10 +22,8 @@ export default function WrapperMuiNavigationLinkItem({
   });
 
   return (
-    <>
-      <ListItemButton dense onClick={handleClick} selected={selected}>
-        <ListItemText primary={<Text>{text}</Text>} sx={sx} />
-      </ListItemButton>
-    </>
+    <ListItemButton dense onClick={handleClick} selected={selected}>
+      <ListItemText primary={<Text>{text}</Text>} sx={sx} />
+    </ListItemButton>
   );
 }

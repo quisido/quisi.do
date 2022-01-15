@@ -8,7 +8,7 @@ export default function useAwsTheme(): void {
 
   useGlobalStyles();
 
-  useLayoutEffect((): undefined | VoidFunction => {
+  useLayoutEffect((): VoidFunction | undefined => {
     if (isDarkModeEnabled) {
       applyMode(Mode.Dark, document.body);
     } else {
