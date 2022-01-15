@@ -22,7 +22,7 @@ export default function GoogleAnalytics({
     };
   }, [trackingId]);
 
-  useEffect((): undefined | VoidFunction => {
+  useEffect((): VoidFunction | undefined => {
     if (typeof GOOGLE_ANALYTICS_WINDOW.dataLayer !== 'undefined') {
       return;
     }
@@ -33,7 +33,7 @@ export default function GoogleAnalytics({
     };
   }, []);
 
-  useEffect((): undefined | VoidFunction => {
+  useEffect((): VoidFunction | undefined => {
     if (typeof GOOGLE_ANALYTICS_WINDOW.gtag !== 'undefined') {
       return;
     }

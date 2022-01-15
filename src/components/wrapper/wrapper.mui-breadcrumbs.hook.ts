@@ -9,7 +9,7 @@ interface State {
   readonly ariaLabel: string | undefined;
   readonly expandText: string | undefined;
   readonly breadcrumbProps: readonly Readonly<
-    Required<Attributes> & BreadcrumbProps
+    BreadcrumbProps & Required<Attributes>
   >[];
 }
 
@@ -25,7 +25,7 @@ export default function useWrapperMuiBreadcrumbs(
     expandText: translate('Show path'),
 
     breadcrumbProps: useMemo((): readonly Readonly<
-      Required<Attributes> & BreadcrumbProps
+      BreadcrumbProps & Required<Attributes>
     >[] => {
       const breadcrumbCount: number = breadcrumbs.length;
       const lastIndex: number = breadcrumbCount + LAST_INDEX_OFFSET;
@@ -33,7 +33,7 @@ export default function useWrapperMuiBreadcrumbs(
       const mapBreadcrumbToProps = (
         { children, path }: Readonly<Breadcrumb>,
         index: number,
-      ): Readonly<Required<Attributes> & BreadcrumbProps> => ({
+      ): Readonly<BreadcrumbProps & Required<Attributes>> => ({
         children,
         current: index === lastIndex,
         key: path,

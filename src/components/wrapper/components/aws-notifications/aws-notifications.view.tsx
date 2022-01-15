@@ -5,7 +5,7 @@ import type Notification from '../../../../types/notification';
 import useAwsNotifications from './aws-notifications.hook';
 
 interface Props {
-  readonly children?: undefined | readonly Notification[];
+  readonly children: readonly Notification[] | undefined;
 }
 
 const EMPTY = 0;

@@ -22,7 +22,7 @@ export default function useMuiTableRowProps<Item>({
       const mapColumnToCellProps = (
         { CellContent }: Column<Item>,
         columnIndex: number,
-      ): Required<Attributes> & CellProps => {
+      ): CellProps & Required<Attributes> => {
         return {
           align: columnIndex === FIRST_INDEX ? 'left' : 'right',
           key: columnIndex,

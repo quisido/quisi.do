@@ -3,7 +3,7 @@ import type Breadcrumb from '../../types/breadcrumb';
 import ROOT_BREADCRUMBS from './constants/root-breadcrumbs';
 
 interface Props {
-  readonly breadcrumbs: undefined | readonly Readonly<Breadcrumb>[];
+  readonly breadcrumbs: readonly Readonly<Breadcrumb>[] | undefined;
 }
 
 interface State {

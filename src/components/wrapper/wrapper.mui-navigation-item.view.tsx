@@ -30,22 +30,25 @@ export default function WrapperMuiNavigationItem({
   // Navigation category
   if (filterByNavigationCategory(item)) {
     const { children, defaultExpanded, text } = item;
+
+    const mapChildToComponent = (
+      childItem:
+        | NavigationCategory
+        | NavigationComponent
+        | NavigationExternalLink
+        | NavigationLink,
+    ): ReactElement => (
+      <WrapperMuiNavigationItem
+        depth={depth + DEPTH_OFFSET}
+        key={childItem.text}
+      >
+        {childItem}
+      </WrapperMuiNavigationItem>
+    );
+
     return (
       <CategoryItem defaultExpanded={defaultExpanded} depth={depth} text={text}>
-        {children.map(
-          (
-            childItem:
-              | NavigationCategory
-              | NavigationComponent
-              | NavigationExternalLink
-              | NavigationLink,
-            index: number,
-          ) => (
-            <WrapperMuiNavigationItem depth={depth + DEPTH_OFFSET} key={index}>
-              {childItem}
-            </WrapperMuiNavigationItem>
-          ),
-        )}
+        {children.map(mapChildToComponent)}
       </CategoryItem>
     );
   }

@@ -14,12 +14,12 @@ export default function Link({
 }: Readonly<Props>): ReactElement {
   return (
     <Design
-      fallback={<ReactRouterLink to={href}>{children}</ReactRouterLink>}
-      props={{ children, href }}
       components={{
         [DesignSystem.Aws]: AwsLink,
         [DesignSystem.Material]: MuiLink,
       }}
+      fallback={<ReactRouterLink to={href}>{children}</ReactRouterLink>}
+      props={{ children, href }}
     />
   );
 }

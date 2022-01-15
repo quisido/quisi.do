@@ -14,11 +14,11 @@ export default function Display({
   return (
     <Suspense fallback={<>{children}</>}>
       <Design
-        props={{ children, ...props }}
         components={{
           [DesignSystem.Aws]: AwsDisplay,
           [DesignSystem.Material]: MuiDisplay,
         }}
+        props={{ children, ...props }}
       />
     </Suspense>
   );

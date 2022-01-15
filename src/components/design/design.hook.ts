@@ -13,7 +13,7 @@ import type DesignSystem from '../../constants/design-system';
 import useDesignSystem from '../../hooks/use-design-system';
 
 interface Props<P> {
-  readonly props: Readonly<Attributes> & PropsWithRef<P>;
+  readonly props: PropsWithRef<P> & Readonly<Attributes>;
   readonly components: Readonly<
     Record<DesignSystem, LazyExoticComponent<(props: P) => ReactElement>>
   >;

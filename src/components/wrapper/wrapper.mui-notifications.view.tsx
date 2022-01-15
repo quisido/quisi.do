@@ -7,12 +7,36 @@ import type { ReactElement } from 'react';
 import type Notification from '../../types/notification';
 
 interface Props {
-  readonly children: undefined | readonly Notification[];
+  readonly children: readonly Notification[] | undefined;
 }
 
 const ANCHOR_ORIGIN: SnackbarOrigin = {
   horizontal: 'center',
   vertical: 'top',
+};
+
+const mapChildToSnackbar = (
+  { CallToAction, message, onAction, onDismiss, type }: Readonly<Notification>,
+  index: number,
+): ReactElement => {
+  const alertProps: AlertProps = {};
+  if (typeof CallToAction === 'function' && typeof onAction === 'function') {
+    alertProps.action = (
+      <Button onClick={onAction}>
+        <CallToAction />
+      </Button>
+    );
+  }
+  if (typeof onDismiss === 'function') {
+    alertProps.onClose = onDismiss;
+  }
+  return (
+    <Snackbar anchorOrigin={ANCHOR_ORIGIN} key={index} open>
+      <Alert {...alertProps} severity={type} sx={{ width: '100%' }}>
+        {message}
+      </Alert>
+    </Snackbar>
+  );
 };
 
 export default function MuiWrapperNotifications({
@@ -22,42 +46,5 @@ export default function MuiWrapperNotifications({
     return null;
   }
 
-  return (
-    <>
-      {children.map(
-        (
-          {
-            CallToAction,
-            message,
-            onAction,
-            onDismiss,
-            type,
-          }: Readonly<Notification>,
-          index: number,
-        ): ReactElement => {
-          const alertProps: AlertProps = {};
-          if (
-            typeof CallToAction === 'function' &&
-            typeof onAction === 'function'
-          ) {
-            alertProps.action = (
-              <Button onClick={onAction}>
-                <CallToAction />
-              </Button>
-            );
-          }
-          if (typeof onDismiss === 'function') {
-            alertProps.onClose = onDismiss;
-          }
-          return (
-            <Snackbar anchorOrigin={ANCHOR_ORIGIN} key={index} open>
-              <Alert {...alertProps} severity={type} sx={{ width: '100%' }}>
-                {message}
-              </Alert>
-            </Snackbar>
-          );
-        },
-      )}
-    </>
-  );
+  return <>{children.map(mapChildToSnackbar)}</>;
 }

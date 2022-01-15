@@ -22,10 +22,8 @@ export default function WrapperMuiNavigationExternalLinkItem({
   });
 
   return (
-    <>
-      <ListItemButton dense onClick={handleClick}>
-        <ListItemText primary={<Text>{text}</Text>} sx={sx} />
-      </ListItemButton>
-    </>
+    <ListItemButton dense onClick={handleClick}>
+      <ListItemText primary={<Text>{text}</Text>} sx={sx} />
+    </ListItemButton>
   );
 }

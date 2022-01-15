@@ -10,11 +10,11 @@ const MuiBox = lazy(async () => import('./box.mui.view'));
 export default function Box(props: Readonly<Props>): ReactElement {
   return (
     <Design
-      props={props}
       components={{
         [DesignSystem.Aws]: AwsBox,
         [DesignSystem.Material]: MuiBox,
       }}
+      props={props}
     />
   );
 }
