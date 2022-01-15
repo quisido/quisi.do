@@ -22,6 +22,7 @@
     "@monorepo-template/react-fixable",
     "@monorepo-template/react-strict",
     "@monorepo-template/react-typescript",
+    "@monorepo-template/react-typescript/react-scripts-4",
     "prettier"
   ],
 
@@ -77,6 +78,7 @@
   ],
 
   "rules": {
+    "@typescript-eslint/member-ordering": "off",
     "react/forbid-component-props": "off",
     "react/jsx-max-depth": "off",
     "react/jsx-props-no-spreading": "off",
