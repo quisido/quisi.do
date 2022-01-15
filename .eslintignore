@@ -11,6 +11,7 @@
 /jest/cache/
 /jest/coverage/
 /node_modules/
+/public/CNAME
 /**/*.css
 /**/*.gz
 /**/*.html
@@ -21,6 +22,5 @@
 /**/*.png
 /**/*.scss
 /**/*.txt
-/CNAME
 /LICENSE
 /yarn.lock
