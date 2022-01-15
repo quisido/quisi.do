@@ -1,15 +1,15 @@
 import ListItem from '@mui/material/ListItem';
 import type { ReactElement } from 'react';
-import type NavigationCategory from './types/navigation-category';
-import type NavigationComponent from './types/navigation-component';
-import type NavigationExternalLink from './types/navigation-external-link';
-import type NavigationLink from './types/navigation-link';
-import filterByNavigationCategory from './utils/filter-by-navigation-category';
-import filterByNavigationComponent from './utils/filter-by-navigation-component';
-import filterByNavigationExternalLink from './utils/filter-by-navigation-external-link';
-import CategoryItem from './wrapper.mui-navigation-category-item.view';
-import ExternalLinkItem from './wrapper.mui-navigation-external-link-item.view';
-import LinkItem from './wrapper.mui-navigation-link-item.view';
+import CategoryItem from '../../components/mui-navigation-category-item';
+import ExternalLinkItem from '../../components/mui-navigation-external-link-item';
+import LinkItem from '../../components/mui-navigation-link-item';
+import type NavigationCategory from '../../types/navigation-category';
+import type NavigationComponent from '../../types/navigation-component';
+import type NavigationExternalLink from '../../types/navigation-external-link';
+import type NavigationLink from '../../types/navigation-link';
+import filterByNavigationCategory from '../../utils/filter-by-navigation-category';
+import filterByNavigationComponent from '../../utils/filter-by-navigation-component';
+import filterByNavigationExternalLink from '../../utils/filter-by-navigation-external-link';
 
 interface Props {
   readonly children:

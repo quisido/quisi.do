@@ -5,9 +5,9 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import type { ReactElement, ReactNode } from 'react';
-import type NavigationText from './constants/navigation-text';
-import useWrapperMuiNavigationCategoryItem from './wrapper.mui-navigation-category-item.hook';
-import Text from './wrapper.navigation-text.view';
+import Text from '../../components/navigation-text';
+import type NavigationText from '../../constants/navigation-text';
+import useWrapperMuiNavigationCategoryItem from './mui-navigation-category-item.hook';
 
 interface Props {
   readonly children: ReactNode;

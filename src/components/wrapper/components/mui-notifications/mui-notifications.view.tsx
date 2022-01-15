@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import type { SnackbarOrigin } from '@mui/material/Snackbar';
 import Snackbar from '@mui/material/Snackbar';
 import type { ReactElement } from 'react';
-import type Notification from '../../types/notification';
+import type Notification from '../../../../types/notification';
 
 interface Props {
   readonly children: readonly Notification[] | undefined;

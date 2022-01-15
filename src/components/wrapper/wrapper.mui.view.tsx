@@ -1,11 +1,11 @@
 import type { ReactElement } from 'react';
 import validateString from '../../utils/validate-string';
 import Footer from './components/footer';
-import useMuiWrapper from './wrapper.mui.hook';
-import Breadcrumbs from './wrapper.mui-breadcrumbs.view';
-import Navigation from './wrapper.mui-navigation.view';
-import Notifications from './wrapper.mui-notifications.view';
+import Breadcrumbs from './components/mui-breadcrumbs';
+import Navigation from './components/mui-navigation';
+import Notifications from './components/mui-notifications';
 import type Props from './types/props';
+import useMuiWrapper from './wrapper.mui.hook';
 import styles from './wrapper.mui.module.scss';
 
 const mainClassName: string = validateString(styles.main);

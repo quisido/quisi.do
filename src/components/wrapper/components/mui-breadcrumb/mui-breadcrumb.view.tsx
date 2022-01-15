@@ -2,8 +2,7 @@ import MuiLink from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { Link as ReactRouterLink } from 'react-router-dom';
-
-import type Props from './types/mui-breadcrumb-props';
+import type Props from '../../types/mui-breadcrumb-props';
 
 export default function MuiWrapperBreadcrumb({
   children,
