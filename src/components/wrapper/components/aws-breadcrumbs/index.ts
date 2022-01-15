@@ -1,1 +1,1 @@
-export { default } from './aws-wrapper-breadcrumbs.view';
+export { default } from './aws-breadcrumbs.view';

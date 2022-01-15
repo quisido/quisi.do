@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
-import Language from '../../constants/language';
-import useLanguage from '../../hooks/use-language';
-import useSetLanguage from '../../hooks/use-set-language';
-import filterByLanguage from '../../utils/filter-by-language';
+import Language from '../../../../constants/language';
+import useLanguage from '../../../../hooks/use-language';
+import useSetLanguage from '../../../../hooks/use-set-language';
+import filterByLanguage from '../../../../utils/filter-by-language';
 
 interface State {
   readonly language: Language;

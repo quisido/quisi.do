@@ -1,5 +1,5 @@
-import useDarkMode from '../../hooks/use-dark-mode';
-import useSetDarkMode from '../../hooks/use-set-dark-mode';
+import useDarkMode from '../../../../hooks/use-dark-mode';
+import useSetDarkMode from '../../../../hooks/use-set-dark-mode';
 
 interface State {
   readonly checked: boolean;

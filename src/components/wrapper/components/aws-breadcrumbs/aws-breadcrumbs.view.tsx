@@ -2,7 +2,7 @@ import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-gr
 import BreadcrumbGroup from '@awsui/components-react/breadcrumb-group';
 import type { ReactElement } from 'react';
 import type Breadcrumb from '../../../../types/breadcrumb';
-import useAwsWrapperBreadcrumbs from './aws-wrapper-breadcrumbs.hook';
+import useAwsWrapperBreadcrumbs from './aws-breadcrumbs.hook';
 
 interface Props {
   readonly children: readonly Readonly<Breadcrumb>[];
