@@ -1,9 +1,9 @@
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import type { ReactElement } from 'react';
-import type NavigationText from './constants/navigation-text';
-import useWrapperMuiNavigationExternalLinkItem from './wrapper.mui-navigation-external-link-item.hook';
-import Text from './wrapper.navigation-text.view';
+import Text from '../../components/navigation-text';
+import type NavigationText from '../../constants/navigation-text';
+import useWrapperMuiNavigationExternalLinkItem from './mui-navigation-external-link-item.hook';
 
 interface Props {
   readonly depth: number;

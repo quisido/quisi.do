@@ -1,7 +1,7 @@
 import Divider from '@mui/material/Divider';
 import type { ReactElement } from 'react';
-import type Props from './types/mui-navigation-root-item-props';
-import Item from './wrapper.mui-navigation-item.view';
+import Item from '../../components/mui-navigation-item';
+import type Props from '../../types/mui-navigation-root-item-props';
 
 export default function WrapperMuiNavigationRootItem({
   divider,

@@ -1,10 +1,10 @@
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import type { ComponentType, PropsWithChildren } from 'react';
-import useMuiMobile from './hooks/use-mui-mobile';
-import type Props from './types/mui-navigation-props';
-import Desktop from './wrapper.mui-navigation-desktop.view';
-import Mobile from './wrapper.mui-navigation-mobile.view';
+import Desktop from '../../components/mui-navigation-desktop';
+import Mobile from '../../components/mui-navigation-mobile';
+import useMuiMobile from '../../hooks/use-mui-mobile';
+import type Props from '../../types/mui-navigation-props';
 
 interface State {
   readonly Drawer: ComponentType<PropsWithChildren<Props>>;

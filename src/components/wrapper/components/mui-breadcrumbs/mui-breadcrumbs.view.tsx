@@ -1,11 +1,11 @@
 import type { BreadcrumbsProps } from '@mui/material/Breadcrumbs';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import type { ReactElement } from 'react';
-import Box from '../../components/box';
-import type BreadcrumbType from '../../types/breadcrumb';
-import mapComponentToPropMapper from '../../utils/map-component-to-prop-mapper';
-import BreadcrumbComponent from './wrapper.mui-breadcrumb.view';
-import useWrapperMuiBreadcrumbs from './wrapper.mui-breadcrumbs.hook';
+import Box from '../../../../components/box';
+import type BreadcrumbType from '../../../../types/breadcrumb';
+import mapComponentToPropMapper from '../../../../utils/map-component-to-prop-mapper';
+import BreadcrumbComponent from '../../components/mui-breadcrumb';
+import useWrapperMuiBreadcrumbs from './mui-breadcrumbs.hook';
 
 interface Props {
   readonly children: readonly Readonly<BreadcrumbType>[];
