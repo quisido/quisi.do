@@ -2,9 +2,9 @@ import type { TranslateFunction } from 'lazy-i18n';
 import I18n, { useTranslate } from 'lazy-i18n';
 import type { MutableRefObject, ReactElement } from 'react';
 import { useEffect, useRef } from 'react';
-import Display from '../../components/display';
-import validateString from '../../utils/validate-string';
-import styles from './spritesheet2gif.api-gif-response.module.scss';
+import Display from '../../../../components/display';
+import validateString from '../../../../utils/validate-string';
+import styles from './api-gif-response.module.scss';
 
 interface Props {
   readonly height: number;
