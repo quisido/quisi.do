@@ -59,8 +59,7 @@
     "/jest/",
     "/node_modules/",
     "/types/",
-    "**/test-utils/*.ts",
-    "**/test-utils/*.tsx",
+    "/src/test/**.*",
     "**/*.e2e.ts",
     "**/*.test.ts",
     "**/*.test.tsx"
