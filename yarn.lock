@@ -9387,7 +9387,7 @@ __metadata:
     typescript: ^4.5.4
     use-awsui: ^1.0.7
     use-awsui-router: ^2.0.0
-    use-awsui-table-item-description: ^2.0.0-alpha.1
+    use-awsui-table-item-description: ^2.0.1
     use-mui: ^1.0.5
     use-params-memo: ^1.0.0
   languageName: unknown
@@ -22916,14 +22916,14 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"use-awsui-table-item-description@npm:^2.0.0-alpha.1":
-  version: 2.0.0-alpha.1
-  resolution: "use-awsui-table-item-description@npm:2.0.0-alpha.1"
+"use-awsui-table-item-description@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "use-awsui-table-item-description@npm:2.0.1"
   peerDependencies:
     "@awsui/components-react": ^3.0.0
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: 62a4b8af6e6b4fe56840b4dbe4919e63aec14c2022e547651672f8c723b53719f5243ee91c653c020a41f9e7384f91f7afadfb8d635c745318ce882dfb6e3d72
+  checksum: 70b16c6791dab02e046f173ef6855b886416d128a637fe0a1e3c1a76fe47947bf7557c0a3887c1ab5c4fc4d767e54451159f73c75edc5d91660978866b75c48c
   languageName: node
   linkType: hard
 

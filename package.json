@@ -110,7 +110,7 @@
     "typescript": "^4.5.4",
     "use-awsui": "^1.0.7",
     "use-awsui-router": "^2.0.0",
-    "use-awsui-table-item-description": "^2.0.0-alpha.1",
+    "use-awsui-table-item-description": "^2.0.1",
     "use-mui": "^1.0.5",
     "use-params-memo": "^1.0.0"
   }

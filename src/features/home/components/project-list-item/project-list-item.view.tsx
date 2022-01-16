@@ -1,10 +1,10 @@
 import type { ReactElement } from 'react';
-import Box from '../../components/box';
-import type Project from '../../types/project';
-import useProjectListItem from './home.project-list-item.hook';
-import Name from './home.project-list-item-name.view';
-import styles from './home.project-list-item.module.scss';
-import validateString from '../../utils/validate-string';
+import Box from '../../../../components/box';
+import type Project from '../../../../types/project';
+import validateString from '../../../../utils/validate-string';
+import Name from '../../components/project-list-item-name';
+import styles from './project-list-item.module.scss';
+import useProjectListItem from './project-list-item.hook';
 
 const rootClassName: string = validateString(styles.root);
 
