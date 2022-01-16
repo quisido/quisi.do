@@ -5,7 +5,7 @@ import type { ComponentType, ReactElement } from 'react';
 import { Suspense, lazy } from 'react';
 import Wrapper from '../../components/wrapper';
 import type Breadcrumb from '../../types/breadcrumb';
-import useSpriteSheet2Gif from './spritesheet2gif.root.hook';
+import useSpriteSheet2Gif from './spritesheet2gif.hook';
 import type ContentsProps from './types/contents-props';
 
 const BREADCRUMBS: readonly Breadcrumb[] = [
@@ -16,7 +16,7 @@ const BREADCRUMBS: readonly Breadcrumb[] = [
 ];
 
 const Contents: ComponentType<ContentsProps> = lazy(
-  async () => import('./spritesheet2gif.contents.view'),
+  async () => import('./components/contents'),
 );
 
 export default function SpriteSheet2Gif(): ReactElement {

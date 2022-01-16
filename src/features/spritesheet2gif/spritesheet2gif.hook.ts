@@ -3,7 +3,7 @@ import type { NonCancelableCustomEvent } from '@awsui/components-react/interface
 import type { ComponentType } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 import type Notification from '../../types/notification';
-import HeaderInfo from './spritesheet2gif.header-info.view';
+import HeaderInfo from './components/header-info';
 
 interface State {
   readonly Help: ComponentType<unknown>;
