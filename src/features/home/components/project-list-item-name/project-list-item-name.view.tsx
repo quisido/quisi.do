@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import Link from '../../components/link';
+import Link from '../../../../components/link';
 
 interface Props {
   readonly children: string;
