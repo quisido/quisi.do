@@ -4,10 +4,10 @@ import I18n from 'lazy-i18n';
 import type { ComponentType, ReactElement } from 'react';
 import { Suspense, lazy } from 'react';
 import Wrapper from '../../components/wrapper';
-import useQuotes from './quotes.root.hook';
+import useQuotes from './quotes.hook';
 
 const Contents: ComponentType<unknown> = lazy(
-  async () => import('./quotes.contents.view'),
+  async () => import('./components/contents'),
 );
 
 export default function Quotes(): ReactElement {
