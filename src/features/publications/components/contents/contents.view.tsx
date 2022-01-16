@@ -5,11 +5,11 @@ import Cards from '@awsui/components-react/cards';
 import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
-import NumberFormat from '../../components/number-format';
-import CARD_DEFINITION from './constants/publications-card-definition';
-import MINIMUM_VIEWS from './constants/minimum-publications-views';
-import usePublicationsContents from './publications.contents.hook';
-import Header from './publications.header.view';
+import NumberFormat from '../../../../components/number-format';
+import Header from '../../components/header';
+import CARD_DEFINITION from '../../constants/publications-card-definition';
+import MINIMUM_VIEWS from '../../constants/minimum-publications-views';
+import usePublicationsContents from './contents.hook';
 
 export default function PublicationsContents(): ReactElement {
   const {

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import type DevArticle from '../../types/dev-article';
-import type MediumArticle from '../../types/medium-article';
-import type Item from './types/publications-item';
+import type DevArticle from '../../../../types/dev-article';
+import type MediumArticle from '../../../../types/medium-article';
+import type Item from '../../types/publications-item';
 
 interface Props {
   readonly devData: DevArticle[] | undefined;

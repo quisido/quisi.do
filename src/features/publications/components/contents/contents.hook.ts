@@ -4,14 +4,14 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo, useState } from 'react';
 import ReactCapsule, { useCapsule } from 'react-capsule';
-import useDevStats from '../../hooks/use-dev-stats';
-import useMediumStats from '../../hooks/use-medium-stats';
-import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-event';
-import Sort from './constants/publications-sort';
-import useItems from './publications.contents.hook.items';
-import type Item from './types/publications-item';
-import filterItemsByMinimumViews from './utils/filter-publications-items-by-minimum-views';
-import mapSortToFunction from './utils/map-publications-sort-to-function';
+import useDevStats from '../../../../hooks/use-dev-stats';
+import useMediumStats from '../../../../hooks/use-medium-stats';
+import type ReadonlySelectChangeEvent from '../../../../types/readonly-select-change-event';
+import Sort from '../../constants/publications-sort';
+import type Item from '../../types/publications-item';
+import filterItemsByMinimumViews from '../../utils/filter-publications-items-by-minimum-views';
+import mapSortToFunction from '../../utils/map-publications-sort-to-function';
+import useItems from './contents.hook.items';
 
 interface State {
   readonly dismissAriaLabel: string | undefined;
