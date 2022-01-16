@@ -4,11 +4,11 @@ import type { SelectProps } from '@awsui/components-react/select';
 import Select from '@awsui/components-react/select';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
-import type ReadonlySelectChangeEvent from '../../types/readonly-select-change-event';
-import validateString from '../../utils/validate-string';
-import type Sort from './constants/publications-sort';
-import usePublicationsHeader from './publications.header.hook';
-import styles from './publications.header.module.scss';
+import type ReadonlySelectChangeEvent from '../../../../types/readonly-select-change-event';
+import validateString from '../../../../utils/validate-string';
+import type Sort from '../../constants/publications-sort';
+import usePublicationsHeader from './header.hook';
+import styles from './header.module.scss';
 
 interface Props {
   readonly onSortChange: (event: ReadonlySelectChangeEvent) => void;

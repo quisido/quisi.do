@@ -1,1 +1,1 @@
-export { default } from './publications.root.view';
+export { default } from './publications.view';

@@ -2,8 +2,8 @@ import type { SelectProps } from '@awsui/components-react/select';
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
-import type Sort from './constants/publications-sort';
-import useSortOptions from './publications.header.hook.sort-options';
+import type Sort from '../../constants/publications-sort';
+import useSortOptions from './header.hook.sort-options';
 
 interface Props {
   readonly sort: Sort;
