@@ -11,10 +11,10 @@ export default {
   transformIgnorePatterns: ['node_modules/(?!@awsui/components-react)/'],
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
+    '!<rootDir>/src/test/**/*',
     '!<rootDir>/src/**/*.d.ts',
     '!<rootDir>/src/**/*.e2e.ts',
     '!<rootDir>/src/**/*.test.{ts,tsx}',
-    '!<rootDir>/src/**/test-utils/*.{ts,tsx}',
     '!<rootDir>/src/**/types/*.{ts,tsx}',
   ],
   coverageThreshold: {
@@ -27,8 +27,8 @@ export default {
   },
   moduleNameMapper: {
     '^.+\\.module\\.s?css$': 'identity-obj-proxy',
-    '(?<!\\.module)\\.s?css$': '<rootDir>/src/test-utils/mock-css.ts',
-    '\\.(?:gif|jpg|png)$': '<rootDir>/src/test-utils/mock-image.ts',
+    '(?<!\\.module)\\.s?css$': '<rootDir>/src/test/utils/mock-css.ts',
+    '\\.(?:gif|jpg|png)$': '<rootDir>/src/test/utils/mock-image.ts',
   },
   transform: {
     '@awsui-.+\\.[cm]?js$': 'babel-jest',
