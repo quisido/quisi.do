@@ -6,8 +6,10 @@ import juneHo from '../images/june-ho-park.png';
 import kelsey from '../images/kelsey-lavigne.jpg';
 import logan from '../images/logan-mclain.jpg';
 import malakai from '../images/malakai-whitston.jpg';
+import mihir from '../images/mihir-patel.jpg';
 import mustafa from '../images/mustafa-torun.jpg';
 import qian from '../images/qian-zhang.png';
+import rongdi from '../images/rongdi-lin.jpg';
 import sriram from '../images/sriram-rudraraju.jpg';
 import walter from '../images/walter-sorto.jpg';
 import xinhe from '../images/xinhe-gao.png';
@@ -118,6 +120,26 @@ const QUOTES: readonly Quote[] = [
     ),
   },
   {
+    author: 'Mihir Patel',
+    company: 'Amazon Web Services',
+    gender: 'male',
+    image: mihir,
+    title: 'Engineering Leader',
+    quote: (
+      <Box variant="p">
+        Charles is exceptional at UI development and leading teams as a senior
+        technical leader. During our collaboration, Charles helped us expand our
+        service portfolio to add multiple new AWS services (Lambda and Container
+        Insights). During these projects, Charles did an exceptional job leading
+        his team and building a product that is well-received by our customers.
+        I’ve really appreciated Charles’ technical leadership for our teams and
+        have learned a lot from him. I would highly recommend Charles for senior
+        technical leader roles. Given a chance, I would love to collaborate with
+        him again.
+      </Box>
+    ),
+  },
+  {
     age: 35,
     author: 'Mustafa Torun',
     company: 'Amazon Web Services',
@@ -157,6 +179,27 @@ const QUOTES: readonly Quote[] = [
           confusion that may happen for customers.
         </Box>
       </>
+    ),
+  },
+  {
+    age: 25,
+    author: 'Rongdi Lin',
+    company: 'Amazon Web Services',
+    gender: 'male',
+    image: rongdi,
+    title: 'Front end engineer',
+    quote: (
+      <Box variant="p">
+        Charles is an expert in front end areas and a reliable tech lead in the
+        team. He always makes a solid design to build a high-performance web
+        application. Meanwhile, he always shares his perspicacious insights when
+        making the trade-off between business goal and engineering excellence,
+        so as to help the team make the right decision. Also, he always provides
+        the useful guidance with detailed explanation. Definitely a great guy to
+        work with. Last but not the least, he is always passionate about the
+        tech in the community. He shows his curiosity and impacts everyone
+        around him.
+      </Box>
     ),
   },
   {
