@@ -5,11 +5,9 @@ import { MemoryRouter } from 'react-router-dom';
 import WRITABLE_WINDOW from '../../../../test/constants/writable-window';
 import Routes from './routes.view';
 
-describe('App', (): void => {
-  beforeEach((): void => {
-    global.window = WRITABLE_WINDOW;
-  });
+global.window = WRITABLE_WINDOW;
 
+describe('App', (): void => {
   it('should reroute "Become the junior developer that companies want to hire" to Medium', (): void => {
     render(<Routes />, {
       wrapper({
