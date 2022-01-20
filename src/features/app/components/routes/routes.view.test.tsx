@@ -2,10 +2,15 @@ import { render } from '@testing-library/react';
 import expect from 'expect';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import WRITABLE_WINDOW from '../../../../test/constants/writable-window';
 import Routes from './routes.view';
 
-global.window = WRITABLE_WINDOW;
+global.window = { ...global.window };
+Object.defineProperty(global.window, 'location', {
+  writable: true,
+  value: {
+    href: 'https://charlesstover.com/',
+  },
+});
 
 describe('App', (): void => {
   it('should reroute "Become the junior developer that companies want to hire" to Medium', (): void => {
