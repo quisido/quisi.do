@@ -1,8 +1,10 @@
-import type ReduxState from '../types/redux-state';
-import useReduxSelector from './use-redux-selector';
+import type { Dispatch, SetStateAction } from 'react';
+import { useContext } from 'react';
+import DarkModeContext from '../contexts/dark-mode';
 
-export default function useDarkMode(): boolean {
-  return useReduxSelector(
-    (state: Readonly<ReduxState>): boolean => state.app.isDarkModeEnabled,
-  );
+export default function useDarkMode(): [
+  boolean,
+  Dispatch<SetStateAction<boolean>>,
+] {
+  return useContext(DarkModeContext);
 }

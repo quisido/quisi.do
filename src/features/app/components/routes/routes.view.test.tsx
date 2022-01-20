@@ -2,13 +2,13 @@ import { render } from '@testing-library/react';
 import expect from 'expect';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import Routes from './app-routes.view';
+import Routes from './routes.view';
 
 global.window = { ...global.window };
 Object.defineProperty(global.window, 'location', {
   writable: true,
   value: {
-    href: 'https://charlesstover.com',
+    href: 'https://charlesstover.com/',
   },
 });
 

@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import DesignSystem from '../../../../constants/design-system';
 import useDesignSystem from '../../../../hooks/use-design-system';
-import useSetDesignSystem from '../../../../hooks/use-set-design-system';
 import filterByDesignSystem from '../../../../utils/filter-by-design-system';
 
 interface State {
@@ -10,8 +9,7 @@ interface State {
 }
 
 export default function useWrapperDesignSystemSelect(): State {
-  const designSystem: DesignSystem = useDesignSystem();
-  const setDesignSystem = useSetDesignSystem();
+  const [designSystem, setDesignSystem] = useDesignSystem();
 
   return {
     designSystem,

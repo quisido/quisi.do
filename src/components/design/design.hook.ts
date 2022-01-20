@@ -37,7 +37,7 @@ export default function useDesign<P>({
   props,
 }: Readonly<Props<P>>): State<P> {
   // Contexts
-  const designSystem: DesignSystem = useDesignSystem();
+  const [designSystem] = useDesignSystem();
 
   // States
   const [showFallback, setShowFallback] = useState(false);

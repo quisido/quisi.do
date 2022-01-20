@@ -4,7 +4,7 @@ import MUI_DARK_THEME from './constants/mui-dark-theme';
 import MUI_LIGHT_THEME from './constants/mui-light-theme';
 
 export default function useMuiTheme(): Theme {
-  const isDarkModeEnabled: boolean = useDarkMode();
+  const [isDarkModeEnabled] = useDarkMode();
 
   if (isDarkModeEnabled) {
     return MUI_DARK_THEME;
