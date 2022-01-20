@@ -1,5 +1,4 @@
 import useParamsMemo from 'use-params-memo';
-import type Language from '../../constants/language';
 import useLanguage from '../../hooks/use-language';
 import mapLanguageToLocale from '../../utils/map-language-to-locale';
 
@@ -8,7 +7,7 @@ interface State {
 }
 
 export default function useNumberFormat(): State {
-  const language: Language = useLanguage();
+  const [language] = useLanguage();
 
   return {
     locale: useParamsMemo(mapLanguageToLocale, [language]),

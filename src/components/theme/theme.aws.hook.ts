@@ -4,7 +4,7 @@ import useDarkMode from '../../hooks/use-dark-mode';
 import useGlobalStyles from './hooks/use-aws-global-styles';
 
 export default function useAwsTheme(): void {
-  const isDarkModeEnabled: boolean = useDarkMode();
+  const [isDarkModeEnabled] = useDarkMode();
 
   useGlobalStyles();
 

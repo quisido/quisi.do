@@ -2,7 +2,7 @@ import { I18nProvider } from 'lazy-i18n';
 import type { ReactElement, ReactNode } from 'react';
 import Language from '../../../../constants/language';
 import TRANSLATIONS from '../../../../constants/translations';
-import useI18nProvider from './app-i18n-provider.hook';
+import useI18nProvider from './i18n-provider.hook';
 
 interface Props {
   readonly children: ReactNode;

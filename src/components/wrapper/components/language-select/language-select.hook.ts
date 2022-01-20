@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import Language from '../../../../constants/language';
 import useLanguage from '../../../../hooks/use-language';
-import useSetLanguage from '../../../../hooks/use-set-language';
 import filterByLanguage from '../../../../utils/filter-by-language';
 
 interface State {
@@ -10,8 +9,7 @@ interface State {
 }
 
 export default function useWrapperLanguageSelect(): State {
-  const language: Language = useLanguage();
-  const setLanguage = useSetLanguage();
+  const [language, setLanguage] = useLanguage();
 
   return {
     language,

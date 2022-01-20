@@ -1,9 +1,11 @@
+import type { Dispatch, SetStateAction } from 'react';
+import { useContext } from 'react';
 import type Language from '../constants/language';
-import type ReduxState from '../types/redux-state';
-import useReduxSelector from './use-redux-selector';
+import LanguageContext from '../contexts/language';
 
-export default function useLanguage(): Language {
-  return useReduxSelector(
-    (state: Readonly<ReduxState>): Language => state.app.language,
-  );
+export default function useLanguage(): [
+  Language,
+  Dispatch<SetStateAction<Language>>,
+] {
+  return useContext(LanguageContext);
 }

@@ -1,5 +1,4 @@
 import useDarkMode from '../../../../hooks/use-dark-mode';
-import useSetDarkMode from '../../../../hooks/use-set-dark-mode';
 
 interface State {
   readonly checked: boolean;
@@ -7,8 +6,10 @@ interface State {
 }
 
 export default function useWrapperDarkModeToggle(): State {
+  const [isDarkModeEnabled, setIsDarkModeEnabled] = useDarkMode();
+
   return {
-    checked: useDarkMode(),
-    handleChange: useSetDarkMode(),
+    checked: isDarkModeEnabled,
+    handleChange: setIsDarkModeEnabled,
   };
 }

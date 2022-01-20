@@ -6,7 +6,9 @@ interface State {
 }
 
 export default function useI18nProvider(): State {
+  const [language] = useLanguage();
+
   return {
-    language: useLanguage(),
+    language,
   };
 }

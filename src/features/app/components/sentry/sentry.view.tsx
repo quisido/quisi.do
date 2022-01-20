@@ -1,7 +1,7 @@
 import type { ReactElement, ReactNode } from 'react';
 import Sentry from 'sentry-react';
 import GITHUB_SHA from '../../../../constants/github-sha';
-import useAppSentry from './app-sentry.hook';
+import useAppSentry from './sentry.hook';
 
 interface Props {
   readonly children: ReactNode;

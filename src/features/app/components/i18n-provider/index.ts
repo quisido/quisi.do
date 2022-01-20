@@ -1,1 +1,1 @@
-export { default } from './app-i18n-provider.view';
+export { default } from './i18n-provider.view';

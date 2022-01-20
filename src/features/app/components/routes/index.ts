@@ -1,1 +1,1 @@
-export { default } from './app-routes.view';
+export { default } from './routes.view';
