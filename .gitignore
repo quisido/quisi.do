@@ -1,5 +1,6 @@
 /.git/
 /.idea/
+/.nyc_output/
 /.vscode/
 /.yarn/cache/
 /.yarn/sdks/

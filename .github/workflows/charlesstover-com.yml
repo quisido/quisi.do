@@ -127,7 +127,7 @@ jobs:
           cache: yarn
           check-latest: true
           node-version: 'lts/*'
-      - name: Cypress
+      - name: End-to-end test
         uses: cypress-io/github-action@v2
         env:
           CHOKIDAR_USEPOLLING: true
@@ -141,7 +141,6 @@ jobs:
           ci-build-id: ${{ github.run_id }}-${{ github.run_attempt }}
           command-prefix: yarn dlx
           group: ${{ matrix.os }}-${{ matrix.browser }}
-          install-command: yarn install --immutable
           parallel: true
           record: true
           start: yarn cypress:start
