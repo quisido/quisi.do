@@ -2,7 +2,7 @@ import SideNavigation from '@awsui/components-react/side-navigation';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { memo } from 'react';
-import Box from '../../../../components/box';
+import Div from '../../../../components/div';
 import validateString from '../../../../utils/validate-string';
 import useAwsWrapperNavigation from './aws-navigation.hook';
 import styles from './aws-navigation.module.scss';
@@ -15,9 +15,9 @@ function AwsWrapperNavigation(): ReactElement {
 
   return (
     <>
-      <Box element="h2" margin="medium">
+      <Div element="h2" margin="medium">
         <I18n>Navigation</I18n>
-      </Box>
+      </Div>
       <SideNavigation
         activeHref={activeHref}
         className={sideNavigationClassName}

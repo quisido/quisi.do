@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
-import Box from '../../../../components/box';
+import Div from '../../../../components/div';
+import Span from '../../../../components/span';
 import type Project from '../../../../types/project';
 import validateString from '../../../../utils/validate-string';
 import Name from '../../components/project-list-item-name';
@@ -17,9 +18,11 @@ export default function HomeProjectListItem({
 
   return (
     <li className={rootClassName} style={style}>
-      <Box margin="small" size="medium">
-        <Name url={url}>{name}</Name>
-      </Box>
+      <Div margin="small">
+        <Span size="medium">
+          <Name url={url}>{name}</Name>
+        </Span>
+      </Div>
     </li>
   );
 }

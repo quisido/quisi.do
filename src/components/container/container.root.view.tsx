@@ -4,10 +4,10 @@ import Design from '../../components/design';
 import DesignSystem from '../../constants/design-system';
 import type Props from './types/props';
 
-const AwsDisplay = lazy(async () => import('./display.aws.view'));
-const MuiDisplay = lazy(async () => import('./display.mui.view'));
+const AwsContainer = lazy(async () => import('./container.aws.view'));
+const MuiContainer = lazy(async () => import('./container.mui.view'));
 
-export default function Display({
+export default function Container({
   children,
   ...props
 }: Readonly<Props>): ReactElement {
@@ -15,8 +15,8 @@ export default function Display({
     <Suspense fallback={<>{children}</>}>
       <Design
         components={{
-          [DesignSystem.Aws]: AwsDisplay,
-          [DesignSystem.Material]: MuiDisplay,
+          [DesignSystem.Aws]: AwsContainer,
+          [DesignSystem.Material]: MuiContainer,
         }}
         props={{ children, ...props }}
       />

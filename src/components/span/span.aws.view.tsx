@@ -1,37 +1,19 @@
 import type { BoxProps } from '@awsui/components-react/box';
 import Box from '@awsui/components-react/box';
 import type { ReactElement } from 'react';
-import useAwsBox from './box.aws.hook';
+import useAwsSpan from './span.aws.hook';
 import type Props from './types/props';
 
-export default function AwsBox({
+export default function AwsSpan({
   children,
   className,
   color,
   element,
-  margin: marginProp,
-  marginBottom,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginX,
-  marginY,
   size,
 }: Readonly<Props>): ReactElement {
-  const {
-    fontSize,
-    margin: marginState,
-    variant,
-  } = useAwsBox({
+  const { fontSize, variant } = useAwsSpan({
     color,
     element,
-    margin: marginProp,
-    marginBottom,
-    marginLeft,
-    marginRight,
-    marginTop,
-    marginX,
-    marginY,
     size,
   });
 
@@ -41,9 +23,6 @@ export default function AwsBox({
   }
   if (typeof fontSize !== 'undefined') {
     optionalProps.fontSize = fontSize;
-  }
-  if (typeof marginState !== 'undefined') {
-    optionalProps.margin = marginState;
   }
   if (typeof variant === 'string') {
     optionalProps.variant = variant;
