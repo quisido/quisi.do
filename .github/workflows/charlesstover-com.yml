@@ -147,6 +147,14 @@ jobs:
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000/'
           wait-on-timeout: 120
+      - name: List files
+        run: >
+          echo "NYC" &&
+          ls .nyc_output/ &&
+          echo "Coverage" &&
+          ls cypress/coverage &&
+          echo "Specific coverage" &&
+          ls cypress/coverage/${{ matrix.os }}-${{ matrix.browser }}-${{ matrix.container }}
       - name: Upload coverage
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
