@@ -133,6 +133,7 @@ jobs:
           CHOKIDAR_USEPOLLING: true
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }}-${{ matrix.container }}
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
         with:
@@ -168,9 +169,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [edge, firefox, chrome]
         os: [ubuntu] # , windows
-        _containers: [1, 2, 3]
+        browser: [edge, firefox, chrome]
+        container: [1, 2, 3]
         exclude:
           - browser: edge
             os: ubuntu
