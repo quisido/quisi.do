@@ -113,7 +113,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: jest--coverage
-          path: packages/application/jest/coverage
+          path: jest/coverage
 
   cypress:
     needs: install-cypress
