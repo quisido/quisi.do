@@ -2,6 +2,7 @@ import type { BoxProps } from '@awsui/components-react/box';
 import Box from '@awsui/components-react/box';
 import type { CardsProps } from '@awsui/components-react/cards';
 import type { ReactElement } from 'react';
+import Div from '../../../components/div';
 import validateString from '../../../utils/validate-string';
 import type Quote from '../types/quote';
 import styles from './quotes-card-definition.module.scss';
@@ -19,7 +20,7 @@ const IMAGE_MARGIN: BoxProps.Spacing = {
 const QUOTE_CARD_DEFINITION: CardsProps<Quote>['cardDefinition'] = {
   header({ author, company, title }: Readonly<Quote>): ReactElement {
     return (
-      <Box textAlign="center">
+      <Div textAlign="center">
         <Box color="text-label" margin="xxxs">
           {author}
         </Box>
@@ -33,7 +34,7 @@ const QUOTE_CARD_DEFINITION: CardsProps<Quote>['cardDefinition'] = {
             {company}
           </Box>
         )}
-      </Box>
+      </Div>
     );
   },
   sections: [

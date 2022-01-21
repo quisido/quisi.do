@@ -4,7 +4,7 @@ import Link from '@awsui/components-react/link';
 import Select from '@awsui/components-react/select';
 import SpaceBetween from '@awsui/components-react/space-between';
 import type { ReactElement } from 'react';
-import Display from '../../../../components/display';
+import Container from '../../../../components/container';
 import validateString from '../../../../utils/validate-string';
 import ApiGifResponse from '../../components/api-gif-response';
 import Footer from '../../components/footer';
@@ -57,7 +57,7 @@ export default function SpriteSheet2GifContents({
 
   return (
     <SpaceBetween direction="vertical" size="m">
-      <Display
+      <Container
         footer={
           <Footer
             loading={isConvertButtonLoading}
@@ -154,7 +154,7 @@ export default function SpriteSheet2GifContents({
             />
           </FormField>
         </SpaceBetween>
-      </Display>
+      </Container>
       {apiGifResponse && <ApiGifResponse {...apiGifResponse} />}
     </SpaceBetween>
   );

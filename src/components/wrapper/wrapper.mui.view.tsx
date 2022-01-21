@@ -1,5 +1,7 @@
 import type { ReactElement } from 'react';
+import { Suspense } from 'react';
 import validateString from '../../utils/validate-string';
+import Fallback from './components/fallback';
 import Footer from './components/footer';
 import Breadcrumbs from './components/mui-breadcrumbs';
 import Navigation from './components/mui-navigation';
@@ -12,8 +14,9 @@ const mainClassName: string = validateString(styles.main);
 const rootClassName: string = validateString(styles.root);
 
 export default function MuiWrapper({
-  children,
   breadcrumbs,
+  children,
+  fallback,
   notifications,
 }: Readonly<Props>): ReactElement {
   const {
@@ -33,7 +36,9 @@ export default function MuiWrapper({
       <Notifications>{notifications}</Notifications>
       <main className={mainClassName} style={mainStyle}>
         <Breadcrumbs>{breadcrumbs}</Breadcrumbs>
-        {children}
+        <Suspense fallback={<Fallback>{fallback}</Fallback>}>
+          {children}
+        </Suspense>
         <Footer />
       </main>
     </div>

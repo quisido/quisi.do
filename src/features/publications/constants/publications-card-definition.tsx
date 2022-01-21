@@ -9,6 +9,7 @@ import I18n from 'lazy-i18n';
 import NumberFormat from 'number-format-react';
 import type { ReactElement } from 'react';
 import Minutes from '../../../components/minutes';
+import Span from '../../../components/span';
 import mapTimeToDaysAgo from '../../../utils/map-time-to-days-ago';
 import validateString from '../../../utils/validate-string';
 import type Item from '../types/publications-item';
@@ -125,20 +126,26 @@ const PUBLICATION_CARD_DEFINITION: CardsProps<Item>['cardDefinition'] = {
         return (
           <ColumnLayout className={columnLayoutClassName} columns={12}>
             <div>
-              <Box color="text-label" fontSize="heading-s">
-                <I18n>Reactions/day</I18n>
+              <Box fontSize="heading-s">
+                <Span color="label">
+                  <I18n>Reactions/day</I18n>
+                </Span>
               </Box>
               {ratio(reactions, mapTimeToDaysAgo(dateTime))}
             </div>
             <div>
-              <Box color="text-label" fontSize="heading-s">
-                <I18n>Reactions/view</I18n>
+              <Box fontSize="heading-s">
+                <Span color="label">
+                  <I18n>Reactions/view</I18n>
+                </Span>
               </Box>
               {ratio(reactions, views, TWO)}%
             </div>
             <div>
-              <Box color="text-label" fontSize="heading-s">
-                <I18n>Views/day</I18n>
+              <Box fontSize="heading-s">
+                <Span color="label">
+                  <I18n>Views/day</I18n>
+                </Span>
               </Box>
               {ratio(views, mapTimeToDaysAgo(dateTime))}
             </div>

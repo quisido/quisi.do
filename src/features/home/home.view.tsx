@@ -1,8 +1,8 @@
 import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
-import Box from '../../components/box';
-import Display from '../../components/display';
+import Container from '../../components/container';
+import Span from '../../components/span';
 import Wrapper from '../../components/wrapper';
 import PROJECTS from '../../constants/projects';
 import mapComponentToPropMapper from '../../utils/map-component-to-prop-mapper';
@@ -35,7 +35,10 @@ export default function Home(): ReactElement {
   return (
     <Wrapper toolsHide>
       <SpaceBetween size="l">
-        <Display actions={<ViewResumeButton />} header={<I18n>About me</I18n>}>
+        <Container
+          actions={<ViewResumeButton />}
+          header={<I18n>About me</I18n>}
+        >
           <SpaceBetween
             className={contentClassName}
             direction="horizontal"
@@ -49,7 +52,7 @@ export default function Home(): ReactElement {
               direction="vertical"
               size="m"
             >
-              <Box element="p">
+              <Span element="p">
                 My name is <strong>Charles Stover</strong>. I am a{' '}
                 <strong>staff-level front end engineer</strong> with an
                 expertise in <strong>JavaScript and React</strong>. My focus is
@@ -57,7 +60,7 @@ export default function Home(): ReactElement {
                 health, application monitoring, and{' '}
                 <abbr title="user interface">UI</abbr>/
                 <abbr title="user experience">UX</abbr>.
-              </Box>
+              </Span>
               <ul className={listClassName}>
                 <li>
                   <I18n n={ENTERPRISE_YOE}>Enterprise: $n years</I18n>
@@ -71,13 +74,13 @@ export default function Home(): ReactElement {
               </ul>
             </SpaceBetween>
           </SpaceBetween>
-        </Display>
+        </Container>
 
-        <Display header={<I18n>Projects</I18n>}>
+        <Container header={<I18n>Projects</I18n>}>
           <ul className={projectListClassName}>
             {PROJECTS.map(mapProjectToAttributes).map(mapProjectToListItem)}
           </ul>
-        </Display>
+        </Container>
       </SpaceBetween>
     </Wrapper>
   );

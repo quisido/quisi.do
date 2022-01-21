@@ -1,11 +1,15 @@
 import type { ReactNode } from 'react';
 
+/*
+Consider `BaseProps extends SpanProps` from `src/components/span` and nesting a
+  `<Span />` element that receives the `SpanProps`.
+*/
+
 interface BaseProps {
   readonly children: ReactNode;
   readonly className?: string | undefined;
-  readonly color?: 'label' | 'secondary-body' | undefined;
   readonly element?: 'h2' | 'p' | undefined;
-  readonly size?: 'large' | 'medium' | 'small' | undefined;
+  readonly textAlign?: 'center' | 'left' | 'right' | undefined;
 }
 
 interface MarginProp {

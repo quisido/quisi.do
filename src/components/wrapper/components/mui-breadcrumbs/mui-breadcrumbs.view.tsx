@@ -1,7 +1,7 @@
 import type { BreadcrumbsProps } from '@mui/material/Breadcrumbs';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import type { ReactElement } from 'react';
-import Box from '../../../../components/box';
+import Div from '../../../../components/div';
 import type BreadcrumbType from '../../../../types/breadcrumb';
 import mapComponentToPropMapper from '../../../../utils/map-component-to-prop-mapper';
 import BreadcrumbComponent from '../../components/mui-breadcrumb';
@@ -27,10 +27,10 @@ export default function WrapperMuiBreadcrumbs({
   }
 
   return (
-    <Box marginY="small">
+    <Div marginY="small">
       <Breadcrumbs aria-label={ariaLabel} {...optionalProps}>
         {breadcrumbProps.map(mapBreadcrumbPropsToBreadcrumb)}
       </Breadcrumbs>
-    </Box>
+    </Div>
   );
 }

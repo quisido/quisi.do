@@ -2,7 +2,7 @@ import type { TranslateFunction } from 'lazy-i18n';
 import I18n, { useTranslate } from 'lazy-i18n';
 import type { MutableRefObject, ReactElement } from 'react';
 import { useEffect, useRef } from 'react';
-import Display from '../../../../components/display';
+import Container from '../../../../components/container';
 import validateString from '../../../../utils/validate-string';
 import styles from './api-gif-response.module.scss';
 
@@ -35,10 +35,10 @@ export default function Spritesheet2GifApiGifResponse({
   }, [image]);
 
   return (
-    <Display header={<I18n>Result</I18n>}>
+    <Container header={<I18n>Result</I18n>}>
       <div className={centerClassName}>
         <img alt={alt} height={height} ref={ref} src={image} width={width} />
       </div>
-    </Display>
+    </Container>
   );
 }

@@ -5,7 +5,7 @@ import CardHeader from '@mui/material/CardHeader';
 import type { ReactElement } from 'react';
 import type Props from './types/props';
 
-export default function MuiDisplay({
+export default function MuiContainer({
   actions,
   children,
   footer,

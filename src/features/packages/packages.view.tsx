@@ -1,8 +1,6 @@
-import Box from '@awsui/components-react/box';
-import Spinner from '@awsui/components-react/spinner';
 import I18n from 'lazy-i18n';
 import type { ComponentType, ReactElement } from 'react';
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 import Wrapper from '../../components/wrapper';
 import usePackages from './packages.hook';
 
@@ -17,19 +15,11 @@ export default function Packages(): ReactElement {
     <Wrapper
       breadcrumbs={breadcrumbs}
       contentType="table"
+      fallback={<I18n>Loading packages</I18n>}
       notifications={notifications}
       toolsHide
     >
-      <Suspense
-        fallback={
-          <Box textAlign="center">
-            <Spinner />
-            <I18n>Loading packages</I18n>
-          </Box>
-        }
-      >
-        <Contents />
-      </Suspense>
+      <Contents />
     </Wrapper>
   );
 }

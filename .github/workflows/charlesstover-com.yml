@@ -109,9 +109,10 @@ jobs:
         env:
           DD_ENV: ci
       - name: Upload coverage
+        if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
-          name: jest-coverage
+          name: jest--coverage
           path: jest/coverage
 
   cypress:
@@ -132,6 +133,7 @@ jobs:
           CHOKIDAR_USEPOLLING: true
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }}-${{ matrix.container }}
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
         with:
@@ -142,23 +144,82 @@ jobs:
           install-command: yarn install --immutable
           parallel: true
           record: true
-          start: yarn start
+          start: yarn cypress:start
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000/'
           wait-on-timeout: 120
+      - name: Upload coverage
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress--coverage
+          path: cypress/coverage
+      - name: Upload screenshots
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress--screenshots
+          path: cypress/screenshots
+      - name: Upload videos
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress--videos
+          path: cypress/videos
     strategy:
       fail-fast: false
       matrix:
-        browser: [edge, firefox, chrome]
         os: [ubuntu] # , windows
-        _containers: [1, 2, 3]
+        browser: [edge, firefox, chrome]
+        container: [1, 2, 3]
         exclude:
           - browser: edge
             os: ubuntu
 
+  coverage:
+    if: ${{ always() }}
+    needs: [cypress, jest]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Download Cypress coverage
+        uses: actions/download-artifact@v2
+        with:
+          name: cypress--coverage
+          path: cypress/coverage
+      - name: Download Jest coverage
+        uses: actions/download-artifact@v2
+        with:
+          name: jest--coverage
+          path: jest/coverage
+      - name: Report coverage
+        run: yarn coverage
+        env:
+          BRANCHES_COVERAGE_THRESHOLD: 1
+          FUNCTIONS_COVERAGE_THRESHOLD: 1
+          LINES_COVERAGE_THRESHOLD: 1
+          STATEMENTS_COVERAGE_THRESHOLD: 1
+      - name: Upload coverage
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: |
+            .nyc_output
+            coverage
+
   github-pages:
     if: ${{ github.event_name == 'push' }}
-    needs: [build, cypress, eslint, jest]
+    needs: [build, coverage, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -178,7 +239,7 @@ jobs:
 
   sentry-release:
     if: ${{ github.event_name == 'push' }}
-    needs: [build, cypress, eslint, jest]
+    needs: [build, coverage, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

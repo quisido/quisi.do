@@ -1,9 +1,11 @@
 import type { AppLayoutProps } from '@awsui/components-react/app-layout';
 import AppLayout from '@awsui/components-react/app-layout';
 import type { ReactElement } from 'react';
+import { Suspense } from 'react';
 import Breadcrumbs from './components/aws-breadcrumbs';
 import Navigation from './components/aws-navigation';
 import Notifications from './components/aws-notifications';
+import Fallback from './components/fallback';
 import Footer from './components/footer';
 import type Props from './types/props';
 import useAwsWrapper from './wrapper.aws.hook';
@@ -13,6 +15,7 @@ export default function AwsWrapper({
   breadcrumbs,
   children,
   contentType,
+  fallback,
   notifications,
   onToolsChange,
   toolsHide,
@@ -62,7 +65,9 @@ export default function AwsWrapper({
         {...optionalProps}
         content={
           <>
-            {children}
+            <Suspense fallback={<Fallback>{fallback}</Fallback>}>
+              {children}
+            </Suspense>
             <Footer />
           </>
         }
