@@ -25,7 +25,7 @@
   "scripts": {
     "build": "react-scripts build",
     "coverage": "monorepo-template-coverage",
-    "cypress": "cypress run --record",
+    "cypress": "cypress run",
     "eslint": "eslint '**/*'",
     "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest",
