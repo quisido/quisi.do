@@ -15,6 +15,7 @@ export default function AwsDiv({
   marginTop,
   marginX,
   marginY,
+  textAlign,
 }: Readonly<Props>): ReactElement {
   const { margin: marginState, variant } = useAwsDiv({
     element,
@@ -33,6 +34,9 @@ export default function AwsDiv({
   }
   if (typeof marginState !== 'undefined') {
     optionalProps.margin = marginState;
+  }
+  if (typeof textAlign === 'string') {
+    optionalProps.textAlign = textAlign;
   }
   if (typeof variant === 'string') {
     optionalProps.variant = variant;

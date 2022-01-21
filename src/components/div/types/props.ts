@@ -9,6 +9,7 @@ interface BaseProps {
   readonly children: ReactNode;
   readonly className?: string | undefined;
   readonly element?: 'h2' | 'p' | undefined;
+  readonly textAlign?: 'center' | 'left' | 'right' | undefined;
 }
 
 interface MarginProp {

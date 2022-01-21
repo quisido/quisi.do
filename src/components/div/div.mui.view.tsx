@@ -15,6 +15,7 @@ export default function MuiDiv({
   marginTop,
   marginX,
   marginY,
+  textAlign,
 }: Readonly<Props>): ReactElement {
   const { mb, ml, mr, mt } = useMuiDiv({
     margin,
@@ -47,7 +48,7 @@ export default function MuiDiv({
   }
 
   return (
-    <Box margin={0} padding={0} {...optionalProps}>
+    <Box margin={0} padding={0} textAlign={textAlign} {...optionalProps}>
       {children}
     </Box>
   );

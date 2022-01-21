@@ -1,9 +1,9 @@
 import type { AppLayoutProps } from '@awsui/components-react/app-layout';
 import AppLayout from '@awsui/components-react/app-layout';
-import Box from '@awsui/components-react/box';
 import Spinner from '@awsui/components-react/spinner';
 import type { ReactElement } from 'react';
 import { Suspense } from 'react';
+import Div from '../../components/div';
 import Breadcrumbs from './components/aws-breadcrumbs';
 import Navigation from './components/aws-navigation';
 import Notifications from './components/aws-notifications';
@@ -68,10 +68,10 @@ export default function AwsWrapper({
           <>
             <Suspense
               fallback={
-                <Box textAlign="center">
+                <Div textAlign="center">
                   <Spinner />
                   {fallback}
-                </Box>
+                </Div>
               }
             >
               {children}
