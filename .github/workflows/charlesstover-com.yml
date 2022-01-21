@@ -158,7 +158,7 @@ jobs:
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
-          name: cypress-screenshots
+          name: cypress--screenshots
           path: cypress/screenshots
       - name: Upload videos
         if: ${{ always() }}
