@@ -5873,6 +5873,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@monorepo-template/nyc-config@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@monorepo-template/nyc-config@npm:0.1.0"
+  checksum: 94c2b69b8be5e2809baa6a1502c3e7bcf0ea167c9c2898cf9adcf38aab8a007c86adf11b92f60fe60a50269012178e816e05a667305bf17b97c8dd64357fcfaf
+  languageName: node
+  linkType: hard
+
 "@monorepo-template/tsconfig@npm:^0.1.1":
   version: 0.1.1
   resolution: "@monorepo-template/tsconfig@npm:0.1.1"
@@ -9938,6 +9945,7 @@ __metadata:
     "@monorepo-template/eslint-config-typescript-fixable": ^0.2.2
     "@monorepo-template/eslint-config-typescript-strict": ^0.1.0
     "@monorepo-template/jest-application-preset": ^0.1.4
+    "@monorepo-template/nyc-config": ^0.1.0
     "@monorepo-template/tsconfig": ^0.1.1
     "@mui/icons-material": ^5.2.5
     "@mui/material": ^5.2.8

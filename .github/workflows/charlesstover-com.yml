@@ -79,7 +79,7 @@ jobs:
           runTests: false
     strategy:
       matrix:
-        os: [ubuntu, windows]
+        os: [ubuntu] # windows
 
   jest:
     needs: install-yarn
