@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "react-scripts build",
-    "cypress": "cypress run --record",
+    "cypress": "cypress run",
     "eslint": "eslint '**/*'",
     "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest",
