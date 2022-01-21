@@ -54,6 +54,7 @@
     "@monorepo-template/eslint-config-typescript-fixable": "^0.2.2",
     "@monorepo-template/eslint-config-typescript-strict": "^0.1.0",
     "@monorepo-template/jest-application-preset": "^0.1.4",
+    "@monorepo-template/tsconfig": "^0.1.1",
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.8",
     "@mui/system": "^5.2.8",

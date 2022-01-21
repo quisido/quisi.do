@@ -1,11 +1,22 @@
 {
+  "compileOnSave": false,
   "extends": "./tsconfig.json",
-  "include": ["src/**/*.e2e.ts"],
 
   "compilerOptions": {
-    "isolatedModules": false,
-    "noEmit": true,
-    "sourceMap": false,
+    "importHelpers": true,
+    "inlineSourceMap": true,
+    "sourceMap": true,
     "types": ["cypress"]
-  }
+  },
+
+  "exclude": [
+    "build",
+    "coverage",
+    "cypress/coverage",
+    "cypress/screenshots",
+    "cypress/videos",
+    "jest/cache",
+    "jest/coverage",
+    "node_modules"
+  ]
 }

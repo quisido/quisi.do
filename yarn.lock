@@ -5873,6 +5873,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@monorepo-template/tsconfig@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@monorepo-template/tsconfig@npm:0.1.1"
+  checksum: 4856675899aee25afcd4831ea69354b8be4ab16c6f5656b679c3145653557c71748911b4448320c6443a4ab7ba8079e57cd49fe223641ca6b2dcd6492e4f6ada
+  languageName: node
+  linkType: hard
+
 "@mui/base@npm:5.0.0-alpha.64":
   version: 5.0.0-alpha.64
   resolution: "@mui/base@npm:5.0.0-alpha.64"
@@ -9931,6 +9938,7 @@ __metadata:
     "@monorepo-template/eslint-config-typescript-fixable": ^0.2.2
     "@monorepo-template/eslint-config-typescript-strict": ^0.1.0
     "@monorepo-template/jest-application-preset": ^0.1.4
+    "@monorepo-template/tsconfig": ^0.1.1
     "@mui/icons-material": ^5.2.5
     "@mui/material": ^5.2.8
     "@mui/system": ^5.2.8
