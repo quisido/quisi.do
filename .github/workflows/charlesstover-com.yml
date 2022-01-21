@@ -144,7 +144,7 @@ jobs:
           install-command: yarn install --immutable
           parallel: true
           record: true
-          start: yarn start
+          start: yarn cypress:start
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000/'
           wait-on-timeout: 120
