@@ -109,10 +109,11 @@ jobs:
         env:
           DD_ENV: ci
       - name: Upload coverage
+        if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
-          name: jest-coverage
-          path: jest/coverage
+          name: jest--coverage
+          path: packages/application/jest/coverage
 
   cypress:
     needs: install-cypress
@@ -146,6 +147,24 @@ jobs:
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000/'
           wait-on-timeout: 120
+      - name: Upload coverage
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress--coverage
+          path: cypress/coverage
+      - name: Upload screenshots
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - name: Upload videos
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress--videos
+          path: cypress/videos
     strategy:
       fail-fast: false
       matrix:
@@ -156,9 +175,50 @@ jobs:
           - browser: edge
             os: ubuntu
 
+  coverage:
+    if: ${{ always() }}
+    needs: [cypress, jest]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Download Cypress coverage
+        uses: actions/download-artifact@v2
+        with:
+          name: cypress--coverage
+          path: cypress/coverage
+      - name: Download Jest coverage
+        uses: actions/download-artifact@v2
+        with:
+          name: jest--coverage
+          path: jest/coverage
+      - name: Report coverage
+        run: yarn coverage
+        env:
+          BRANCHES_COVERAGE_THRESHOLD: 1
+          FUNCTIONS_COVERAGE_THRESHOLD: 1
+          LINES_COVERAGE_THRESHOLD: 1
+          STATEMENTS_COVERAGE_THRESHOLD: 1
+      - name: Upload coverage
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: |
+            .nyc_output
+            coverage
+
   github-pages:
     if: ${{ github.event_name == 'push' }}
-    needs: [build, cypress, eslint, jest]
+    needs: [build, coverage, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -178,7 +238,7 @@ jobs:
 
   sentry-release:
     if: ${{ github.event_name == 'push' }}
-    needs: [build, cypress, eslint, jest]
+    needs: [build, coverage, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
