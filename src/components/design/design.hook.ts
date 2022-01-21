@@ -1,7 +1,6 @@
 import type {
   Attributes,
   LazyExoticComponent,
-  PropsWithChildren,
   PropsWithRef,
   ReactChild,
   ReactElement,
@@ -11,6 +10,7 @@ import type {
 import { useEffect, useState } from 'react';
 import type DesignSystem from '../../constants/design-system';
 import useDesignSystem from '../../hooks/use-design-system';
+import filterByPropsWithChildren from './utils/filter-by-props-with-children';
 
 interface Props<P> {
   readonly props: PropsWithRef<P> & Readonly<Attributes>;
@@ -26,11 +26,6 @@ interface State<P> {
 }
 
 const SHOW_FALLBACK_DELAY = 333;
-
-const filterByPropsWithChildren = <P>(
-  props: P,
-): props is PropsWithChildren<P> =>
-  Object.prototype.hasOwnProperty.call(props, 'children');
 
 export default function useDesign<P>({
   components,

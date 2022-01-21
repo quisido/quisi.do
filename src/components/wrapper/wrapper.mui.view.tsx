@@ -1,8 +1,7 @@
-import CircularProgress from '@mui/material/CircularProgress';
 import type { ReactElement } from 'react';
 import { Suspense } from 'react';
 import validateString from '../../utils/validate-string';
-import Div from '../../components/div';
+import Fallback from './components/fallback';
 import Footer from './components/footer';
 import Breadcrumbs from './components/mui-breadcrumbs';
 import Navigation from './components/mui-navigation';
@@ -37,15 +36,7 @@ export default function MuiWrapper({
       <Notifications>{notifications}</Notifications>
       <main className={mainClassName} style={mainStyle}>
         <Breadcrumbs>{breadcrumbs}</Breadcrumbs>
-
-        <Suspense
-          fallback={
-            <Div textAlign="center">
-              <CircularProgress />
-              {fallback}
-            </Div>
-          }
-        >
+        <Suspense fallback={<Fallback>{fallback}</Fallback>}>
           {children}
         </Suspense>
         <Footer />

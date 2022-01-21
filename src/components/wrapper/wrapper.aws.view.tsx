@@ -1,12 +1,11 @@
 import type { AppLayoutProps } from '@awsui/components-react/app-layout';
 import AppLayout from '@awsui/components-react/app-layout';
-import Spinner from '@awsui/components-react/spinner';
 import type { ReactElement } from 'react';
 import { Suspense } from 'react';
-import Div from '../../components/div';
 import Breadcrumbs from './components/aws-breadcrumbs';
 import Navigation from './components/aws-navigation';
 import Notifications from './components/aws-notifications';
+import Fallback from './components/fallback';
 import Footer from './components/footer';
 import type Props from './types/props';
 import useAwsWrapper from './wrapper.aws.hook';
@@ -66,14 +65,7 @@ export default function AwsWrapper({
         {...optionalProps}
         content={
           <>
-            <Suspense
-              fallback={
-                <Div textAlign="center">
-                  <Spinner />
-                  {fallback}
-                </Div>
-              }
-            >
+            <Suspense fallback={<Fallback>{fallback}</Fallback>}>
               {children}
             </Suspense>
             <Footer />
