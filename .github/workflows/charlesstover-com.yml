@@ -238,7 +238,7 @@ jobs:
 
   sentry-release:
     if: ${{ github.event_name == 'push' }}
-    needs: [build, coverage, cypress, eslint, jest]
+    needs: [build, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
