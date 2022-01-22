@@ -149,8 +149,6 @@ jobs:
           wait-on-timeout: 120
       - name: List files
         run: >
-          echo "NYC" &&
-          ls .nyc_output/ &&
           echo "Coverage" &&
           ls cypress/coverage &&
           echo "Specific coverage" &&
