@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Charles Stover <charlesstover.com@charlesstover.com>",
   "description": "the professional portfolio of Charles Stover",
-  "homepage": "https://charlesstover.com/",
+  "homepage": ".",
   "packageManager": "yarn@3.1.1",
   "private": true,
   "repository": "github:CharlesStover/charlesstover.com",
@@ -15,10 +15,6 @@
   "directories": {
     "lib": "src"
   },
-  "files": [
-    "dist",
-    "types"
-  ],
   "publishConfig": {
     "access": "restricted"
   },
@@ -54,6 +50,7 @@
     "@monorepo-template/eslint-config-typescript-fixable": "^0.2.2",
     "@monorepo-template/eslint-config-typescript-strict": "^0.1.0",
     "@monorepo-template/jest-application-preset": "^0.1.4",
+    "@monorepo-template/nyc-config": "^0.1.0",
     "@monorepo-template/tsconfig": "^0.1.1",
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.8",
@@ -78,7 +75,7 @@
     "@yarnpkg/sdks": "^2.6.0-rc.2",
     "babel-jest": "^27.4.6",
     "chai": "^4.3.4",
-    "cypress": "^9.2.1",
+    "cypress": "^9.3.1",
     "dd-trace": "^1.6.0",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
