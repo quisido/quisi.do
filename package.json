@@ -75,7 +75,7 @@
     "@yarnpkg/sdks": "^2.6.0-rc.2",
     "babel-jest": "^27.4.6",
     "chai": "^4.3.4",
-    "cypress": "^9.2.1",
+    "cypress": "^9.3.1",
     "dd-trace": "^1.6.0",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
