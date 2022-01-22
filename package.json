@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Charles Stover <charlesstover.com@charlesstover.com>",
   "description": "the professional portfolio of Charles Stover",
-  "homepage": "https://charlesstover.com/",
+  "homepage": ".",
   "packageManager": "yarn@3.1.1",
   "private": true,
   "repository": "github:CharlesStover/charlesstover.com",
