@@ -5785,64 +5785,64 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/eslint-config-react-fixable@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "@monorepo-template/eslint-config-react-fixable@npm:0.1.2"
-  checksum: 19134927879d6da15c17bb72fdb7c8b58e3a0b8f6adab597b6d0fe9650224f7868a683fe66b5ad4354bc28456912f540602122c1a307feb9dcfa74c304130bb6
+"@monorepo-template/eslint-config-react-fixable@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@monorepo-template/eslint-config-react-fixable@npm:1.0.0"
+  checksum: 7d0f1dcad944c3d3aa016834485e099609cfc46e7a1cb71c099d29e3161b5ea9269680927202f6ef9cf2d7f9d6321c0ae5f8acee5789a209c2b82ef1f998a794
   languageName: node
   linkType: hard
 
-"@monorepo-template/eslint-config-react-strict@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "@monorepo-template/eslint-config-react-strict@npm:0.1.3"
-  checksum: ed18454e0a9ccd7ab6d5f590205e841a2b1acd261e9363a9d1b042f581e3b056d2ba3c745176562ea4edd7214643a5bfcd99aeba1a37f6439c55c8bc063f651a
+"@monorepo-template/eslint-config-react-strict@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@monorepo-template/eslint-config-react-strict@npm:1.0.0"
+  checksum: 683b56b78d461cd3fba65d3164834028474fea255a030ac05bfe696f0a214bcca044a1aedc3ccf7027d474f0ff86317198d3d1337533ce3d4e994fd2e744e9ee
   languageName: node
   linkType: hard
 
-"@monorepo-template/eslint-config-react-typescript@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "@monorepo-template/eslint-config-react-typescript@npm:0.1.3"
-  checksum: 1eca74b7bf262957bd45d29519174f67ef4181a917bf85ed72a0ff5626d348499dc06115f64345bc99b280ac81cf9562fa73291b8ee690db98dc762d5618cc89
+"@monorepo-template/eslint-config-react-typescript@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@monorepo-template/eslint-config-react-typescript@npm:1.0.0"
+  checksum: d5bc49a21a6a3f4186923b1c4aa9701a8644f4d31338ca06930d07bddead24e883fb0a7e7d166d914f1eb438ac45dbad6b414eef7eedd8d50210929db7879cd3
   languageName: node
   linkType: hard
 
-"@monorepo-template/eslint-config-typescript-fixable@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "@monorepo-template/eslint-config-typescript-fixable@npm:0.2.2"
-  checksum: 26cc933561c8b6b7de3a21101e35859dedc176638c0d155ae07611ee8162f8c73c6e6a6873617dcbb2a60e6c2b02d249f5237f30290d8fb79ad046db93e16907
+"@monorepo-template/eslint-config-typescript-fixable@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@monorepo-template/eslint-config-typescript-fixable@npm:1.0.0"
+  checksum: bdcf257b8ef0e81793ae93e3f807b1f4674984144fca341ccd1c7fa867c4d7816a9ef6c3f1bd17d24e28981c34d2ce357ea3d6b111c849be8c6703cbee795068
   languageName: node
   linkType: hard
 
-"@monorepo-template/eslint-config-typescript-strict@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@monorepo-template/eslint-config-typescript-strict@npm:0.1.0"
-  checksum: 0dd7365107921d8831710665abd334e549c9240f2a08b33da28cbfe37a432364b59ba6f7540caa27afb9a091013c60228b276280fe4f09dd3fe0b1c5714445e9
+"@monorepo-template/eslint-config-typescript-strict@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@monorepo-template/eslint-config-typescript-strict@npm:1.0.0"
+  checksum: 8f103b32c6b0514d02887370785c8cc643a748c205c6751445d74cabcec53d26edf76cdb6d6f18129d6e43c835868118c8646a1a8bc407c965917cfa2888354e
   languageName: node
   linkType: hard
 
-"@monorepo-template/eslint-config-typescript@npm:^0.1.4":
-  version: 0.1.4
-  resolution: "@monorepo-template/eslint-config-typescript@npm:0.1.4"
-  checksum: 48e47d635bd0cd08ba7837d2742f1d9b8663c7d8ba4ebeb529748c1d12ae0460dc764ac614e2b62da08ba75f60567deb327964c988dc3b7edcb8eb00bc05ab45
+"@monorepo-template/eslint-config-typescript@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@monorepo-template/eslint-config-typescript@npm:1.0.0"
+  checksum: 755a1e72a1874e38501cf6a394aeb2e90b6534d7a0823682298a22917c0d8fb73d4a325d3dd153054843411d212404d44db7c0a26c0795746b15102e5e73ca5a
   languageName: node
   linkType: hard
 
-"@monorepo-template/jest-application-preset@npm:^0.1.4":
-  version: 0.1.4
-  resolution: "@monorepo-template/jest-application-preset@npm:0.1.4"
+"@monorepo-template/jest-application-preset@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@monorepo-template/jest-application-preset@npm:1.0.0"
   dependencies:
-    "@monorepo-template/jest-preset": ^0.1.0
-  checksum: 1f71671b6ea3ab25a5bd4a3dc57df0bcf770368ae636df636cb71b8c3757acf26187c5a37ad767deb600d3239b3d027ddd35fc990bb194334f642865f0cf8637
+    "@monorepo-template/jest-preset": ^1.0.0
+  checksum: 1e7eb9d39595ded01d9e74f37d67717ba7346a2903c5480342dd43f5a8a18f3ff99302f1153cd344eb27508e335eb322b5a4871ed582e083b48ae6def89d33b8
   languageName: node
   linkType: hard
 
-"@monorepo-template/jest-preset@npm:^0.1.0":
-  version: 0.1.2
-  resolution: "@monorepo-template/jest-preset@npm:0.1.2"
+"@monorepo-template/jest-preset@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "@monorepo-template/jest-preset@npm:1.0.1"
   dependencies:
     "@monorepo-template/jest-transformer": ^0.1.3
     identity-obj-proxy: ^3.0.0
-  checksum: 997235a8e68297dcca3721d7aef78303da793ef7572d3b47aa6ae14f668a2509429adda290d997d2becdc47da9fb97f69464a8daebd64857807dcced673583e9
+  checksum: 5080d80f165af7b261863c0350f52d88cc25f32b0351a7b1f40ef345fd20f29d7c5953134a39b553002a924755d62fdb013c33abaed041ce9b615c1319f7c2b7
   languageName: node
   linkType: hard
 
@@ -5873,17 +5873,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/nyc-config@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@monorepo-template/nyc-config@npm:0.1.0"
-  checksum: 94c2b69b8be5e2809baa6a1502c3e7bcf0ea167c9c2898cf9adcf38aab8a007c86adf11b92f60fe60a50269012178e816e05a667305bf17b97c8dd64357fcfaf
+"@monorepo-template/nyc-config@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@monorepo-template/nyc-config@npm:1.0.1"
+  checksum: 76665dbb072c91e52982151c52cd9e2b1cb035a02d29c45a1f899a20e39c2bdb48d605c5086ededd5a9957f0153cd167df3acf79d61517cf102793d790da960d
   languageName: node
   linkType: hard
 
-"@monorepo-template/tsconfig@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "@monorepo-template/tsconfig@npm:0.1.1"
-  checksum: 4856675899aee25afcd4831ea69354b8be4ab16c6f5656b679c3145653557c71748911b4448320c6443a4ab7ba8079e57cd49fe223641ca6b2dcd6492e4f6ada
+"@monorepo-template/tsconfig@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@monorepo-template/tsconfig@npm:1.0.0"
+  peerDependencies:
+    "@types/node": ^17.0.0
+  checksum: 0a3b598567cfc4004f0e09d3a05e2dce765bb1e944baa09516747795c70c6efdad2e6514ab6b26857e62a35757a3493eafd373ecb1a579fdb7d615f011da0509
   languageName: node
   linkType: hard
 
@@ -9948,15 +9950,15 @@ __metadata:
     "@fullstory/browser": ^1.4.10
     "@monorepo-template/coverage": ^1.0.1
     "@monorepo-template/cypress-coverage-config-override": ^1.0.0
-    "@monorepo-template/eslint-config-react-fixable": ^0.1.2
-    "@monorepo-template/eslint-config-react-strict": ^0.1.3
-    "@monorepo-template/eslint-config-react-typescript": ^0.1.3
-    "@monorepo-template/eslint-config-typescript": ^0.1.4
-    "@monorepo-template/eslint-config-typescript-fixable": ^0.2.2
-    "@monorepo-template/eslint-config-typescript-strict": ^0.1.0
-    "@monorepo-template/jest-application-preset": ^0.1.4
-    "@monorepo-template/nyc-config": ^0.1.0
-    "@monorepo-template/tsconfig": ^0.1.1
+    "@monorepo-template/eslint-config-react-fixable": ^1.0.0
+    "@monorepo-template/eslint-config-react-strict": ^1.0.0
+    "@monorepo-template/eslint-config-react-typescript": ^1.0.0
+    "@monorepo-template/eslint-config-typescript": ^1.0.0
+    "@monorepo-template/eslint-config-typescript-fixable": ^1.0.0
+    "@monorepo-template/eslint-config-typescript-strict": ^1.0.0
+    "@monorepo-template/jest-application-preset": ^1.0.0
+    "@monorepo-template/nyc-config": ^1.0.1
+    "@monorepo-template/tsconfig": ^1.0.0
     "@mui/icons-material": ^5.2.5
     "@mui/material": ^5.2.8
     "@mui/system": ^5.2.8

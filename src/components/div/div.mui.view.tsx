@@ -7,7 +7,9 @@ import type Props from './types/props';
 export default function MuiDiv({
   children,
   className,
+  display,
   element,
+  flexDirection,
   margin,
   marginBottom,
   marginLeft,
@@ -30,6 +32,12 @@ export default function MuiDiv({
   const optionalProps: BoxProps = {};
   if (typeof className === 'string') {
     optionalProps.className = className;
+  }
+  if (typeof display === 'string') {
+    optionalProps.display = display;
+  }
+  if (typeof flexDirection === 'string') {
+    optionalProps.flexDirection = flexDirection;
   }
   if (typeof element === 'string') {
     optionalProps.component = element;

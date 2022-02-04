@@ -8,8 +8,15 @@ Consider `BaseProps extends SpanProps` from `src/components/span` and nesting a
 interface BaseProps {
   readonly children: ReactNode;
   readonly className?: string | undefined;
+  readonly display?: 'block' | 'flex' | undefined;
   readonly element?: 'h2' | 'p' | undefined;
   readonly textAlign?: 'center' | 'left' | 'right' | undefined;
+  readonly flexDirection?:
+    | 'column-reverse'
+    | 'column'
+    | 'row-reverse'
+    | 'row'
+    | undefined;
 }
 
 interface MarginProp {

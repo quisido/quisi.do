@@ -6,8 +6,10 @@ import type Props from './types/props';
 
 export default function AwsDiv({
   children,
-  className,
+  className: classNameProp,
+  display: displayProp,
   element,
+  flexDirection,
   margin: marginProp,
   marginBottom,
   marginLeft,
@@ -17,8 +19,16 @@ export default function AwsDiv({
   marginY,
   textAlign,
 }: Readonly<Props>): ReactElement {
-  const { margin: marginState, variant } = useAwsDiv({
+  const {
+    className: classNameState,
+    display: displayState,
+    margin: marginState,
+    variant,
+  } = useAwsDiv({
+    className: classNameProp,
+    display: displayProp,
     element,
+    flexDirection,
     margin: marginProp,
     marginBottom,
     marginLeft,
@@ -29,8 +39,11 @@ export default function AwsDiv({
   });
 
   const optionalProps: BoxProps = {};
-  if (typeof className === 'string') {
-    optionalProps.className = className;
+  if (typeof classNameState === 'string') {
+    optionalProps.className = classNameState;
+  }
+  if (typeof displayState === 'string') {
+    optionalProps.display = displayState;
   }
   if (typeof marginState !== 'undefined') {
     optionalProps.margin = marginState;
