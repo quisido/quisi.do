@@ -5,10 +5,10 @@ import useNpmDownloads from '../../../../hooks/use-npm-downloads';
 import type TableColumn from '../../../../types/table-column';
 import type TableRowsPerPageOption from '../../../../types/table-rows-per-page-option';
 import Paginator from '../../../../utils/paginator';
+import useColumns from '../../hooks/use-content-columns';
 import type Item from '../../types/packages-item';
 import filterDefaultPackage from '../../utils/filter-default-package';
 import mapNpmDownloadsEntryToItem from '../../utils/map-npm-downloads-entry-to-item';
-import useColumns from './packages-contents.hook.columns';
 
 interface State {
   readonly columns: readonly TableColumn<Item>[];
@@ -51,7 +51,7 @@ const PAGE_SIZES: number[] = [
   Math.pow(BASE_PAGE_SIZE, SQUARED) * MULTIPLIER,
 ];
 
-export default function usePackagesContents(): State {
+export default function usePackagesContent(): State {
   // Contexts
   const { data, isLoading } = useNpmDownloads();
   const translate: TranslateFunction = useTranslate();

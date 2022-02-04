@@ -3,9 +3,9 @@ import type { ReactElement } from 'react';
 import Table from '../../../../components/table';
 import Description from '../../components/description';
 import type Item from '../../types/packages-item';
-import usePackagesContents from './packages-contents.hook';
+import usePackagesContents from './content.hook';
 
-export default function PackagesContents(): ReactElement {
+export default function PackagesContent(): ReactElement {
   const {
     columns,
     filter,

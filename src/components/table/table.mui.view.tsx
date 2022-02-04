@@ -8,8 +8,6 @@ import Footer from '@mui/material/TableFooter';
 import Head from '@mui/material/TableHead';
 import Pagination from '@mui/material/TablePagination';
 import MuiRow from '@mui/material/TableRow';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import Div from '../../components/div';
 import Span from '../../components/span';
@@ -26,6 +24,7 @@ const mapRowPropsToComponent = mapComponentToPropMapper(Row);
 /*
 filter,
 filterPlaceholder,
+header,
 onFilterChange,
 onVisibleColumnsChange,
 visibleColumnIndices,
@@ -33,7 +32,6 @@ visibleColumnIndices,
 export default function MuiTable<Item>({
   Description,
   columns,
-  header,
   loading,
   onPageChange,
   onRowsPerPageChange,
@@ -67,51 +65,64 @@ export default function MuiTable<Item>({
   });
 
   return (
-    <Container component={Paper}>
-      <Toolbar>
+    <>
+      {/*
+      Technical debt: We only want to display the `Toolbar` when `Wrapper`'s
+        `contentType` prop is set to `"table"`. We currently have no way of
+        knowing the value of `Wrapper`'s `contentType` prop, but all tables are
+        presently mounted in the `contenType="table"` variant, so we can just
+        remove all instances of the `Toolbar`. This won't scale, but it works
+        for the current features of the application.
+
+      import Toolbar from '@mui/material/Toolbar';
+      import Typography from '@mui/material/Typography';
+      <Toolbar variant="dense">
         <Div display="flex" flexDirection="column" textAlign="left">
           <Typography component="div" variant="h6">
             {header}
           </Typography>
         </Div>
       </Toolbar>
-      <Table size="small" stickyHeader>
-        <Head>
-          <MuiRow>{headCellProps.map(mapHeadCellPropsToComponent)}</MuiRow>
-        </Head>
-        <Body>
-          {typeof loading === 'string' ? (
-            <MuiRow>
-              <Cell colSpan={columns.length}>
-                <Div textAlign="center">
-                  <Span color="label" size="medium">
-                    {loading}
-                  </Span>
-                </Div>
-              </Cell>
-            </MuiRow>
-          ) : (
-            <>
-              {rowProps.map(mapRowPropsToComponent)}
-              <EmptyRows
-                colSpan={columns.length}
-                page={pageProp}
-                rowsCount={rowsCount}
-                rowsPerPage={rowsPerPage}
-              />
-            </>
+      */}
+      <Container component={Paper}>
+        <Table size="small" stickyHeader>
+          <Head>
+            <MuiRow>{headCellProps.map(mapHeadCellPropsToComponent)}</MuiRow>
+          </Head>
+          <Body>
+            {typeof loading === 'string' ? (
+              <MuiRow>
+                <Cell colSpan={columns.length}>
+                  <Div textAlign="center">
+                    <Span color="label" size="medium">
+                      {loading}
+                    </Span>
+                  </Div>
+                </Cell>
+              </MuiRow>
+            ) : (
+              <>
+                {rowProps.map(mapRowPropsToComponent)}
+                <EmptyRows
+                  colSpan={columns.length}
+                  page={pageProp}
+                  rowsCount={rowsCount}
+                  rowsPerPage={rowsPerPage}
+                />
+              </>
+            )}
+          </Body>
+          {typeof loading === 'string' && (
+            <Footer>
+              <MuiRow>
+                <Cell colSpan={columns.length}>
+                  <LinearProgress />
+                </Cell>
+              </MuiRow>
+            </Footer>
           )}
-        </Body>
-        {typeof loading === 'string' && (
-          <Footer>
-            <MuiRow>
-              <Cell colSpan={columns.length}>
-                <LinearProgress />
-              </Cell>
-            </MuiRow>
-          </Footer>
-        )}
-      </Table>
+        </Table>
+      </Container>
       {typeof loading !== 'string' && (
         <Pagination
           component="div"
@@ -123,6 +134,6 @@ export default function MuiTable<Item>({
           rowsPerPageOptions={rowsPerPageOptionsState}
         />
       )}
-    </Container>
+    </>
   );
 }

@@ -2,13 +2,13 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { useMemo } from 'react';
-import type TableColumn from '../../../../types/table-column';
-import DirectDownloads from '../../components/direct-downloads-cell';
-import PackageName from '../../components/name-cell';
-import TotalDownloads from '../../components/total-downloads-cell';
-import type Item from '../../types/packages-item';
+import type TableColumn from '../../../types/table-column';
+import DirectDownloads from '../components/direct-downloads-cell';
+import PackageName from '../components/name-cell';
+import TotalDownloads from '../components/total-downloads-cell';
+import type Item from '../types/packages-item';
 
-export default function usePackageContentsColumns(
+export default function usePackagesContentColumns(
   filter: string,
 ): readonly TableColumn<Item>[] {
   const translate: TranslateFunction = useTranslate();

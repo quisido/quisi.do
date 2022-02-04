@@ -4,8 +4,8 @@ import { lazy } from 'react';
 import Wrapper from '../../components/wrapper';
 import usePackages from './packages.hook';
 
-const Contents: ComponentType<unknown> = lazy(
-  async () => import('./components/contents'),
+const Content: ComponentType<unknown> = lazy(
+  async () => import('./components/content'),
 );
 
 export default function Packages(): ReactElement {
@@ -19,7 +19,7 @@ export default function Packages(): ReactElement {
       notifications={notifications}
       toolsHide
     >
-      <Contents />
+      <Content />
     </Wrapper>
   );
 }
