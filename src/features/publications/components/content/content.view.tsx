@@ -8,9 +8,9 @@ import NumberFormat from '../../../../components/number-format';
 import Header from '../../components/header';
 import CARD_DEFINITION from '../../constants/publications-card-definition';
 import MINIMUM_VIEWS from '../../constants/minimum-publications-views';
-import usePublicationsContents from './contents.hook';
+import usePublicationsContent from './content.hook';
 
-export default function PublicationsContents(): ReactElement {
+export default function PublicationsContent(): ReactElement {
   const {
     handleAlertDismiss,
     handleSortChange,
@@ -19,7 +19,7 @@ export default function PublicationsContents(): ReactElement {
     loading,
     loadingText,
     sort,
-  } = usePublicationsContents();
+  } = usePublicationsContent();
 
   const optionalCardsProps: Pick<CardsProps, 'loadingText'> = {};
   if (typeof loadingText !== 'undefined') {

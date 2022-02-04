@@ -4,8 +4,8 @@ import { lazy } from 'react';
 import Wrapper from '../../components/wrapper';
 import usePublications from './publications.hook';
 
-const Contents: ComponentType<unknown> = lazy(
-  async () => import('./components/contents'),
+const Content: ComponentType<unknown> = lazy(
+  async () => import('./components/content'),
 );
 
 export default function Publications(): ReactElement {
@@ -17,7 +17,7 @@ export default function Publications(): ReactElement {
       fallback={<I18n>Loading publications</I18n>}
       toolsHide
     >
-      <Contents />
+      <Content />
     </Wrapper>
   );
 }

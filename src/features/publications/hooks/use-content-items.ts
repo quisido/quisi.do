@@ -1,14 +1,14 @@
 import { useMemo } from 'react';
-import type DevArticle from '../../../../types/dev-article';
-import type MediumArticle from '../../../../types/medium-article';
-import type Item from '../../types/publications-item';
+import type DevArticle from '../../../types/dev-article';
+import type MediumArticle from '../../../types/medium-article';
+import type Item from '../types/publications-item';
 
 interface Props {
   readonly devData: DevArticle[] | undefined;
   readonly mediumData: Record<string, MediumArticle> | undefined;
 }
 
-export default function usePublicationItems({
+export default function usePublicationsContentItems({
   devData,
   mediumData,
 }: Props): readonly Item[] {
