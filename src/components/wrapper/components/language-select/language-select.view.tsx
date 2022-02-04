@@ -1,3 +1,4 @@
+import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Select from '../../../../components/select';
 import LANGUAGE_OPTIONS from '../../constants/language-options';
@@ -8,6 +9,7 @@ export default function WrapperLanguageSelect(): ReactElement {
 
   return (
     <Select
+      label={<I18n>Language</I18n>}
       onChange={handleChange}
       options={LANGUAGE_OPTIONS}
       value={language}
