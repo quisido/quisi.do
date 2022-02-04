@@ -1,4 +1,3 @@
-import type { NonCancelableCustomEvent } from '@awsui/components-react';
 import type { CardsProps } from '@awsui/components-react/cards';
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
@@ -14,16 +13,13 @@ import mapSortToFunction from '../../utils/map-publications-sort-to-function';
 import useItems from './contents.hook.items';
 
 interface State {
-  readonly dismissAriaLabel: string | undefined;
+  readonly handleAlertDismiss: VoidFunction;
   readonly handleSortChange: (event: ReadonlySelectChangeEvent) => void;
-  readonly isAlertVisible: boolean;
+  readonly isBannerVisible: boolean;
   readonly items: CardsProps<Item>['items'];
   readonly loading: boolean;
   readonly loadingText: string | undefined;
   readonly sort: Sort;
-  readonly handleAlertDismiss: (
-    event: Readonly<NonCancelableCustomEvent<unknown>>,
-  ) => void;
 }
 
 const IS_ALERT_VISIBLE_CAPSULE: ReactCapsule<boolean> =
@@ -33,7 +29,7 @@ export default function usePublicationsContents(): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
 
-  const [isAlertVisible, setIsAlertVisible] = useCapsule(
+  const [isBannerVisible, setIsBannerVisible] = useCapsule(
     IS_ALERT_VISIBLE_CAPSULE,
   );
 
@@ -60,15 +56,14 @@ export default function usePublicationsContents(): State {
   });
 
   return {
-    dismissAriaLabel: translate('Dismiss'),
-    isAlertVisible,
+    isBannerVisible,
     loading: isDevLoading || isMediumLoading,
     loadingText: translate('Loading publications'),
     sort,
 
     handleAlertDismiss: useCallback((): void => {
-      setIsAlertVisible(false);
-    }, [setIsAlertVisible]),
+      setIsBannerVisible(false);
+    }, [setIsBannerVisible]),
 
     handleSortChange: useCallback((e: ReadonlySelectChangeEvent): void => {
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions

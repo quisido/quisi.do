@@ -4,10 +4,10 @@ import Design from '../../components/design';
 import DesignSystem from '../../constants/design-system';
 import type Props from './types/props';
 
-const AwsButton = lazy(async () => import('./button.aws.view'));
-const MuiButton = lazy(async () => import('./button.mui.view'));
+const AwsButton = lazy(async () => import('./banner.aws.view'));
+const MuiButton = lazy(async () => import('./banner.mui.view'));
 
-export default function Button(props: Readonly<Props>): ReactElement {
+export default function Banner(props: Readonly<Props>): ReactElement {
   return (
     <Design
       components={{
