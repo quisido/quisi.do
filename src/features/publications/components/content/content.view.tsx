@@ -3,7 +3,6 @@ import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Banner from '../../../../components/banner';
 import CardContent from '../../components/card-content';
-import CardFooter from '../../components/card-footer';
 import CardHeader from '../../components/card-header';
 import Cards from '../../../../components/cards';
 import NumberFormat from '../../../../components/number-format';
@@ -32,7 +31,6 @@ export default function PublicationsContent(): ReactElement {
       )}
       <Cards
         CardContent={CardContent}
-        CardFooter={CardFooter}
         CardHeader={CardHeader}
         header={<Header onSortChange={handleSortChange} sort={sort} />}
         items={items}

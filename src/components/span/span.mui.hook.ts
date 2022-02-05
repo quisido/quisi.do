@@ -3,7 +3,13 @@ import mapSizeToFontSize from './utils/map-size-to-mui-font-size';
 
 interface Props {
   readonly color: 'inherit' | 'label' | 'secondary-body' | undefined;
-  readonly size: 'large' | 'medium-heading' | 'medium' | 'small' | undefined;
+  readonly size:
+    | 'large'
+    | 'medium-heading'
+    | 'medium'
+    | 'small-heading'
+    | 'small'
+    | undefined;
 }
 
 interface State {

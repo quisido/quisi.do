@@ -1,7 +1,7 @@
 import type { BoxProps } from '@awsui/components-react/box';
 
 export default function mapSizeToAwsFontSize(
-  size: 'large' | 'medium-heading' | 'medium' | 'small',
+  size: 'large' | 'medium-heading' | 'medium' | 'small-heading' | 'small',
 ): BoxProps.FontSize {
   switch (size) {
     case 'large':
@@ -12,5 +12,7 @@ export default function mapSizeToAwsFontSize(
       return 'heading-m';
     case 'small':
       return 'body-s';
+    case 'small-heading':
+      return 'heading-s';
   }
 }

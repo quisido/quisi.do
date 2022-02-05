@@ -5,7 +5,13 @@ import mapSizeToAwsFontSize from './utils/map-size-to-aws-font-size';
 interface Props {
   readonly color: 'inherit' | 'label' | 'secondary-body' | undefined;
   readonly element: 'h2' | 'p' | undefined;
-  readonly size: 'large' | 'medium-heading' | 'medium' | 'small' | undefined;
+  readonly size:
+    | 'large'
+    | 'medium-heading'
+    | 'medium'
+    | 'small-heading'
+    | 'small'
+    | undefined;
 }
 
 interface State {
