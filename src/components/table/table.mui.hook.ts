@@ -40,7 +40,7 @@ interface State {
 
 const ARRAY_INDEX_OFFSET = 1;
 const BASE = 10;
-const FIRST_PAGE = 0;
+const FIRST_PAGE = 1;
 const MUI_PAGE_OFFSET = 1;
 
 export default function useMuiTable<Item>({

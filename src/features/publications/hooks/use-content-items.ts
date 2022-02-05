@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import type DevArticle from '../../../types/dev-article';
 import type MediumArticle from '../../../types/medium-article';
-import type Item from '../types/publications-item';
+import filterByDefined from '../../../utils/filter-by-defined';
+import type Publication from '../types/publication';
 
 interface Props {
   readonly devData: DevArticle[] | undefined;
@@ -11,12 +12,12 @@ interface Props {
 export default function usePublicationsContentItems({
   devData,
   mediumData,
-}: Props): readonly Item[] {
-  return useMemo((): readonly Item[] => {
-    const newItems: Item[] = [];
+}: Props): readonly Publication[] {
+  return useMemo((): readonly Publication[] => {
+    const newItems: Publication[] = [];
     let totalReactions = 0;
     let totalViews = 0;
-    if (typeof mediumData !== 'undefined') {
+    if (filterByDefined(mediumData)) {
       for (const [
         slug,
         {
@@ -51,7 +52,7 @@ export default function usePublicationsContentItems({
     }
 
     const averageViewsPerReaction = totalViews / totalReactions;
-    if (typeof devData !== 'undefined') {
+    if (filterByDefined(devData)) {
       for (const {
         canonical_url: canonicalUrl,
         comments_count: commentsCount,
@@ -63,11 +64,12 @@ export default function usePublicationsContentItems({
       } of devData) {
         const findExistingItem = ({
           url: existingUrl,
-        }: Readonly<Item>): boolean => existingUrl === canonicalUrl;
-        const existingItem: Item | undefined = newItems.find(findExistingItem);
+        }: Readonly<Publication>): boolean => existingUrl === canonicalUrl;
+        const existingItem: Publication | undefined =
+          newItems.find(findExistingItem);
         const reactions: number = commentsCount + publicReactionsCount;
         const views: number = Math.round(reactions * averageViewsPerReaction);
-        if (typeof existingItem !== 'undefined') {
+        if (filterByDefined(existingItem)) {
           existingItem.reactions += reactions;
           existingItem.views += views;
           continue;

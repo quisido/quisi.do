@@ -1,7 +1,9 @@
 export default function mapColorToMuiColor(
-  color: 'label' | 'secondary-body',
-): 'text.secondary' {
+  color: 'inherit' | 'label' | 'secondary-body',
+): 'inherit' | 'text.secondary' {
   switch (color) {
+    case 'inherit':
+      return 'inherit';
     case 'label':
     case 'secondary-body':
       return 'text.secondary';

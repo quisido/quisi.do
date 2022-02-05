@@ -1,5 +1,5 @@
 import Sort from '../constants/publications-sort';
-import type Item from '../types/publications-item';
+import type Publication from '../types/publication';
 import sortItemsByPublicationDate from '../utils/sort-publications-items-by-publication-date';
 import sortItemsByReactions from '../utils/sort-publications-items-by-reactions';
 import sortItemsByReactionsPerDay from '../utils/sort-publications-items-by-reactions-per-day';
@@ -10,7 +10,7 @@ import sortItemsByViewsPerDay from '../utils/sort-publications-items-by-views-pe
 
 export default function mapPublicationsSortToFunction(
   sort: Sort,
-): (a: Readonly<Item>, b: Readonly<Item>) => number {
+): (a: Readonly<Publication>, b: Readonly<Publication>) => number {
   switch (sort) {
     case Sort.PublicationDate:
       return sortItemsByPublicationDate;

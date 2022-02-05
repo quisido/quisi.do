@@ -1,5 +1,7 @@
+import filterByUndefined from '../utils/filter-by-undefined';
+
 export default function mapUnknownToString(unknown: unknown): string | null {
-  if (typeof unknown === 'undefined' || unknown === null) {
+  if (filterByUndefined(unknown) || unknown === null) {
     return null;
   }
   if (typeof unknown === 'number') {

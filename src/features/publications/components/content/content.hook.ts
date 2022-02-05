@@ -8,17 +8,16 @@ import useMediumStats from '../../../../hooks/use-medium-stats';
 import type ReadonlySelectChangeEvent from '../../../../types/readonly-select-change-event';
 import Sort from '../../constants/publications-sort';
 import useItems from '../../hooks/use-content-items';
-import type Item from '../../types/publications-item';
+import type Publication from '../../types/publication';
 import filterItemsByMinimumViews from '../../utils/filter-publications-items-by-minimum-views';
 import mapSortToFunction from '../../utils/map-publications-sort-to-function';
 
 interface State {
-  readonly handleAlertDismiss: VoidFunction;
+  readonly handleBannerDismiss: VoidFunction;
   readonly handleSortChange: (event: ReadonlySelectChangeEvent) => void;
   readonly isBannerVisible: boolean;
-  readonly items: CardsProps<Item>['items'];
-  readonly loading: boolean;
-  readonly loadingText: string | undefined;
+  readonly items: CardsProps<Publication>['items'];
+  readonly loading: string | undefined;
   readonly sort: Sort;
 }
 
@@ -50,18 +49,16 @@ export default function usePublicationsContents(): State {
   // States
   const [sort, setSort] = useState(Sort.ViewsPerDay);
 
-  const items: readonly Item[] = useItems({
+  const items: readonly Publication[] = useItems({
     devData,
     mediumData,
   });
 
   return {
     isBannerVisible,
-    loading: isDevLoading || isMediumLoading,
-    loadingText: translate('Loading publications'),
     sort,
 
-    handleAlertDismiss: useCallback((): void => {
+    handleBannerDismiss: useCallback((): void => {
       setIsBannerVisible(false);
     }, [setIsBannerVisible]),
 
@@ -71,10 +68,17 @@ export default function usePublicationsContents(): State {
       setSort(newSort);
     }, []),
 
-    items: useMemo((): readonly Item[] => {
-      const newItems: Item[] = [...items];
+    items: useMemo((): readonly Publication[] => {
+      const newItems: Publication[] = [...items];
       newItems.sort(mapSortToFunction(sort));
       return newItems.filter(filterItemsByMinimumViews);
     }, [items, sort]),
+
+    loading: useMemo((): string | undefined => {
+      if (!isDevLoading && !isMediumLoading) {
+        return;
+      }
+      return translate('Loading publications') ?? '...';
+    }, [isDevLoading, isMediumLoading, translate]),
   };
 }

@@ -1,6 +1,7 @@
 import type { BoxProps } from '@awsui/components-react/box';
 import Box from '@awsui/components-react/box';
 import type { ReactElement } from 'react';
+import filterByDefined from '../../utils/filter-by-defined';
 import useAwsDiv from './div.aws.hook';
 import type Props from './types/props';
 
@@ -39,19 +40,19 @@ export default function AwsDiv({
   });
 
   const optionalProps: BoxProps = {};
-  if (typeof classNameState === 'string') {
+  if (filterByDefined(classNameState)) {
     optionalProps.className = classNameState;
   }
-  if (typeof displayState === 'string') {
+  if (filterByDefined(displayState)) {
     optionalProps.display = displayState;
   }
-  if (typeof marginState !== 'undefined') {
+  if (filterByDefined(marginState)) {
     optionalProps.margin = marginState;
   }
-  if (typeof textAlign === 'string') {
+  if (filterByDefined(textAlign)) {
     optionalProps.textAlign = textAlign;
   }
-  if (typeof variant === 'string') {
+  if (filterByDefined(variant)) {
     optionalProps.variant = variant;
   }
 

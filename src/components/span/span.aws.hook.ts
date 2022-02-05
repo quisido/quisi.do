@@ -3,9 +3,9 @@ import mapColorToAwsColor from './utils/map-color-to-aws-color';
 import mapSizeToAwsFontSize from './utils/map-size-to-aws-font-size';
 
 interface Props {
-  readonly color: 'label' | 'secondary-body' | undefined;
+  readonly color: 'inherit' | 'label' | 'secondary-body' | undefined;
   readonly element: 'h2' | 'p' | undefined;
-  readonly size: 'large' | 'medium' | 'small' | undefined;
+  readonly size: 'large' | 'medium-heading' | 'medium' | 'small' | undefined;
 }
 
 interface State {

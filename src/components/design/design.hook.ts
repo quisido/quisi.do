@@ -10,6 +10,7 @@ import type {
 import { useEffect, useState } from 'react';
 import type DesignSystem from '../../constants/design-system';
 import useDesignSystem from '../../hooks/use-design-system';
+import filterByDefined from '../../utils/filter-by-defined';
 import filterByPropsWithChildren from './utils/filter-by-props-with-children';
 
 interface Props<P> {
@@ -52,7 +53,7 @@ export default function useDesign<P>({
     showFallback,
 
     fallback:
-      filterByPropsWithChildren(props) && typeof props.children !== 'undefined'
+      filterByPropsWithChildren(props) && filterByDefined(props.children)
         ? props.children
         : null,
   };

@@ -1,6 +1,7 @@
 import type { BoxProps } from '@mui/material/Box';
 import Box from '@mui/material/Box';
 import type { ReactElement } from 'react';
+import filterByDefined from '../../utils/filter-by-defined';
 import useMuiDiv from './div.mui.hook';
 import type Props from './types/props';
 
@@ -30,28 +31,28 @@ export default function MuiDiv({
   });
 
   const optionalProps: BoxProps = {};
-  if (typeof className === 'string') {
+  if (filterByDefined(className)) {
     optionalProps.className = className;
   }
-  if (typeof display === 'string') {
+  if (filterByDefined(display)) {
     optionalProps.display = display;
   }
-  if (typeof flexDirection === 'string') {
+  if (filterByDefined(flexDirection)) {
     optionalProps.flexDirection = flexDirection;
   }
-  if (typeof element === 'string') {
+  if (filterByDefined(element)) {
     optionalProps.component = element;
   }
-  if (typeof mb !== 'undefined') {
+  if (filterByDefined(mb)) {
     optionalProps.mb = mb;
   }
-  if (typeof ml !== 'undefined') {
+  if (filterByDefined(ml)) {
     optionalProps.ml = ml;
   }
-  if (typeof mr !== 'undefined') {
+  if (filterByDefined(mr)) {
     optionalProps.mr = mr;
   }
-  if (typeof mt !== 'undefined') {
+  if (filterByDefined(mt)) {
     optionalProps.mt = mt;
   }
 

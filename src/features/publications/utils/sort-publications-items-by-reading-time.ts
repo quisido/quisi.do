@@ -1,20 +1,21 @@
-import type Item from '../types/publications-item';
+import filterByUndefined from '../../../utils/filter-by-undefined';
+import type Publication from '../types/publication';
 
 const NEXT = 1;
 const PREVIOUS = -1;
 const SAME = 0;
 
 export default function sortPublicationItemsByReadingTime(
-  { readingTime: a }: Readonly<Item>,
-  { readingTime: b }: Readonly<Item>,
+  { readingTime: a }: Readonly<Publication>,
+  { readingTime: b }: Readonly<Publication>,
 ): number {
-  if (typeof a === 'undefined') {
-    if (typeof b === 'undefined') {
+  if (filterByUndefined(a)) {
+    if (filterByUndefined(b)) {
       return SAME;
     }
     return NEXT;
   }
-  if (typeof b === 'undefined') {
+  if (filterByUndefined(b)) {
     return PREVIOUS;
   }
   if (a < b) {

@@ -3,6 +3,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import type { ReactElement } from 'react';
+import filterByDefined from '../../utils/filter-by-defined';
 import type Props from './types/props';
 
 export default function MuiContainer({
@@ -15,7 +16,7 @@ export default function MuiContainer({
     <Card>
       <CardHeader action={actions} title={header} />
       <CardContent>{children}</CardContent>
-      {typeof footer !== 'undefined' && <CardActions>{footer}</CardActions>}
+      {filterByDefined(footer) && <CardActions>{footer}</CardActions>}
     </Card>
   );
 }

@@ -1,5 +1,6 @@
 import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
 import type { TranslateFunction } from 'lazy-i18n';
+import filterByUndefined from '../../../utils/filter-by-undefined';
 import mapComponentToElement from '../../../utils/map-component-to-element';
 import NAVIGATION_ITEMS from '../constants/navigation-items';
 import type NavigationText from '../constants/navigation-text';
@@ -42,7 +43,7 @@ export default function mapTranslationFunctionToAwsSideNavigationItems(
     if (filterByNavigationComponent(item)) {
       // Static navigation component
       const { Component, defaultExpanded, text } = item;
-      if (typeof defaultExpanded === 'undefined') {
+      if (filterByUndefined(defaultExpanded)) {
         return {
           href: '#',
           info: mapComponentToElement(Component),

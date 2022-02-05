@@ -1,6 +1,7 @@
 import type { Attributes, ComponentType, ReactElement } from 'react';
 import { useCallback, useMemo } from 'react';
 import type Column from '../../../types/table-column';
+import filterByUndefined from '../../../utils/filter-by-undefined';
 import type CellProps from '../types/mui-cell-props';
 import type RowProps from '../types/mui-row-props';
 
@@ -37,7 +38,7 @@ export default function useMuiTableRowProps<Item>({
         key: itemIndex,
       };
 
-      if (typeof Description === 'undefined') {
+      if (filterByUndefined(Description)) {
         return props;
       }
 

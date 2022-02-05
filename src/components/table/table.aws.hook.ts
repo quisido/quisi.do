@@ -12,6 +12,8 @@ import useParamsMemo from 'use-params-memo';
 import type ReadonlyTableSortingEvent from '../../types/readonly-table-sorting-event';
 import type TableColumn from '../../types/table-column';
 import type TableRowsPerPageOption from '../../types/table-rows-per-page-option';
+import filterByDefined from '../../utils/filter-by-defined';
+import filterByUndefined from '../../utils/filter-by-undefined';
 import useCountText from './hooks/use-aws-count-text';
 import mapColumnToVisibleContentOption from './utils/map-column-to-visible-content-option';
 import mapColumnsToDefinitions from './utils/map-columns-to-definitions';
@@ -110,11 +112,11 @@ export default function useAwsTableHook<Item>({
     const mapColumnIndexToContent = (columnIndex: number): string => {
       const columnDefinition: TableProps.ColumnDefinition<Item> | undefined =
         columnDefinitions[columnIndex];
-      if (typeof columnDefinition === 'undefined') {
+      if (filterByUndefined(columnDefinition)) {
         throw new Error(`Expected column definition #${columnIndex} to exist.`);
       }
       const content: string | undefined = columnDefinition.id;
-      if (typeof content === 'undefined') {
+      if (filterByUndefined(content)) {
         throw new Error(
           `Expected column definition #${columnIndex} to have an ID.`,
         );
@@ -155,12 +157,12 @@ export default function useAwsTableHook<Item>({
           >
         >,
       ): void => {
-        if (typeof e.detail.pageSize !== 'undefined') {
+        if (filterByDefined(e.detail.pageSize)) {
           onPageChange(FIRST_PAGE);
           onRowsPerPageChange(e.detail.pageSize);
         }
 
-        if (typeof e.detail.visibleContent !== 'undefined') {
+        if (filterByDefined(e.detail.visibleContent)) {
           const mapContentItemToColumn = (item: string): number => {
             const findColumnDefinition = ({
               id,
@@ -182,7 +184,7 @@ export default function useAwsTableHook<Item>({
           onVisibleColumnsChange(newVisibleColumns);
         }
 
-        if (typeof e.detail.wrapLines !== 'undefined') {
+        if (filterByDefined(e.detail.wrapLines)) {
           setWrapLines(e.detail.wrapLines);
         }
       },
@@ -239,7 +241,7 @@ export default function useAwsTableHook<Item>({
     ),
 
     sortingColumn: useMemo((): TableProps.SortingColumn<Item> | undefined => {
-      if (typeof sortColumnIndex === 'undefined') {
+      if (filterByUndefined(sortColumnIndex)) {
         return;
       }
 

@@ -1,5 +1,6 @@
 {
   "extends": "./tsconfig.json",
+  "include": [".eslintrc.json", "**/*", "**/*.json"],
 
   "compilerOptions": {
     "noEmit": true,
@@ -13,17 +14,5 @@
     "/jest/",
     "/node_modules/",
     "/types/"
-  ],
-
-  "include": [
-    "**/*.cjs",
-    "**/*.d.ts",
-    "**/*.js",
-    "**/*.json",
-    "**/*.mjs",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.yml",
-    ".eslintrc.json"
   ]
 }

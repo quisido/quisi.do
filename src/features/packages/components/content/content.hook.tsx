@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from 'react';
 import useNpmDownloads from '../../../../hooks/use-npm-downloads';
 import type TableColumn from '../../../../types/table-column';
 import type TableRowsPerPageOption from '../../../../types/table-rows-per-page-option';
+import filterByUndefined from '../../../../utils/filter-by-undefined';
 import Paginator from '../../../../utils/paginator';
 import useColumns from '../../hooks/use-content-columns';
 import type Item from '../../types/packages-item';
@@ -69,7 +70,7 @@ export default function usePackagesContent(): State {
   );
 
   const items: readonly Item[] = useMemo((): readonly Item[] => {
-    if (typeof data === 'undefined') {
+    if (filterByUndefined(data)) {
       return [];
     }
     const entries: [string, number[]][] = Object.entries(data);
@@ -121,7 +122,7 @@ export default function usePackagesContent(): State {
 
       const sortColumn: TableColumn<Item> | undefined =
         columns[sortColumnIndex];
-      if (typeof sortColumn === 'undefined') {
+      if (filterByUndefined(sortColumn)) {
         throw new Error(`Expected column at index ${sortColumnIndex}.`);
       }
 

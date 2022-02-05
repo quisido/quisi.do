@@ -9,7 +9,8 @@ interface Props {
   readonly rowsPerPage: number;
 }
 
-const SMALL_SIZE_HEIGHT = 33;
+const BORDER_WIDTH = 1;
+const HEIGHT = 54;
 
 export default function MuiTableEmptyRows({
   colSpan,
@@ -28,12 +29,13 @@ export default function MuiTableEmptyRows({
   }
 
   return (
-    <TableRow
-      style={{
-        height: SMALL_SIZE_HEIGHT * emptyRowCount,
-      }}
-    >
-      <TableCell colSpan={colSpan} />
+    <TableRow>
+      <TableCell
+        colSpan={colSpan}
+        style={{
+          height: HEIGHT * emptyRowCount + BORDER_WIDTH,
+        }}
+      />
     </TableRow>
   );
 }

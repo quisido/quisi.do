@@ -5,6 +5,7 @@ import Select from '@awsui/components-react/select';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import type ReadonlySelectChangeEvent from '../../../../types/readonly-select-change-event';
+import filterByDefined from '../../../../utils/filter-by-defined';
 import validateString from '../../../../utils/validate-string';
 import type Sort from '../../constants/publications-sort';
 import usePublicationsHeader from './header.hook';
@@ -27,7 +28,7 @@ export default function PublicationsHeader({
   // Workaround until AWS UI supports TypeScript 4.4 exact optional properties.
   // https://github.com/aws/awsui-documentation/issues/14
   const optionalSelectProps: Pick<SelectProps, 'placeholder'> = {};
-  if (typeof sortPlaceholder !== 'undefined') {
+  if (filterByDefined(sortPlaceholder)) {
     optionalSelectProps.placeholder = sortPlaceholder;
   }
 

@@ -57,9 +57,8 @@
   ],
 
   "parserOptions": {
-    "extraFileExtensions": [".cjs", ".json", ".mjs", ".scss"],
+    "extraFileExtensions": [".cjs", ".json", ".mjs"],
     "project": "./tsconfig.eslint.json",
-    "tsconfigRootDir": "./",
     "useJSXTextNode": true,
     "warnOnUnsupportedTypeScriptVersion": false,
 

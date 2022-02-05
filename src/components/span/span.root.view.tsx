@@ -4,15 +4,15 @@ import Design from '../../components/design';
 import DesignSystem from '../../constants/design-system';
 import type Props from './types/props';
 
-const AwsBox = lazy(async () => import('./span.aws.view'));
-const MuiBox = lazy(async () => import('./span.mui.view'));
+const AwsSpan = lazy(async () => import('./span.aws.view'));
+const MuiSpan = lazy(async () => import('./span.mui.view'));
 
-export default function Box(props: Readonly<Props>): ReactElement {
+export default function Span(props: Readonly<Props>): ReactElement {
   return (
     <Design
       components={{
-        [DesignSystem.Aws]: AwsBox,
-        [DesignSystem.Material]: MuiBox,
+        [DesignSystem.Aws]: AwsSpan,
+        [DesignSystem.Material]: MuiSpan,
       }}
       props={props}
     />

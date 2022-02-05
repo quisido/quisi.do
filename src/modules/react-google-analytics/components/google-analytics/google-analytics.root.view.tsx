@@ -1,5 +1,7 @@
 import type { ReactElement, ReactNode } from 'react';
 import { useEffect } from 'react';
+import filterByDefined from '../../../../utils/filter-by-defined';
+import filterByUndefined from '../../../../utils/filter-by-undefined';
 import GOOGLE_ANALYTICS_WINDOW from '../../constants/google-analytics-window';
 import HEAD from '../../constants/head';
 import gtag from '../../utils/gtag';
@@ -23,7 +25,7 @@ export default function GoogleAnalytics({
   }, [trackingId]);
 
   useEffect((): VoidFunction | undefined => {
-    if (typeof GOOGLE_ANALYTICS_WINDOW.dataLayer !== 'undefined') {
+    if (filterByDefined(GOOGLE_ANALYTICS_WINDOW.dataLayer)) {
       return;
     }
 
@@ -34,7 +36,7 @@ export default function GoogleAnalytics({
   }, []);
 
   useEffect((): VoidFunction | undefined => {
-    if (typeof GOOGLE_ANALYTICS_WINDOW.gtag !== 'undefined') {
+    if (filterByDefined(GOOGLE_ANALYTICS_WINDOW.gtag)) {
       return;
     }
 
@@ -45,7 +47,7 @@ export default function GoogleAnalytics({
   }, []);
 
   useEffect((): void => {
-    if (typeof GOOGLE_ANALYTICS_WINDOW.gtag === 'undefined') {
+    if (filterByUndefined(GOOGLE_ANALYTICS_WINDOW.gtag)) {
       return;
     }
 
@@ -53,7 +55,7 @@ export default function GoogleAnalytics({
   }, []);
 
   useEffect((): void => {
-    if (typeof GOOGLE_ANALYTICS_WINDOW.gtag === 'undefined') {
+    if (filterByUndefined(GOOGLE_ANALYTICS_WINDOW.gtag)) {
       return;
     }
 

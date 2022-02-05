@@ -6,6 +6,7 @@ import Table from '@awsui/components-react/table';
 import type { TextFilterProps } from '@awsui/components-react/text-filter';
 import TextFilter from '@awsui/components-react/text-filter';
 import type { ReactElement } from 'react';
+import filterByDefined from '../../utils/filter-by-defined';
 import useAwsTable from './table.aws.hook';
 import type Props from './types/props';
 
@@ -79,25 +80,25 @@ export default function AwsTable<Item>({
     | 'visibleColumns'
     | 'wrapLines'
   > = {};
-  if (typeof loading === 'string') {
+  if (filterByDefined(loading)) {
     optionalTableProps.loadingText = loading;
   }
-  if (typeof sortingColumn !== 'undefined') {
+  if (filterByDefined(sortingColumn)) {
     optionalTableProps.sortingColumn = sortingColumn;
   }
-  if (typeof sortingDescending !== 'undefined') {
+  if (filterByDefined(sortingDescending)) {
     optionalTableProps.sortingDescending = sortingDescending;
   }
-  if (typeof visibleContent !== 'undefined') {
+  if (filterByDefined(visibleContent)) {
     optionalTableProps.visibleColumns = visibleContent;
   }
-  if (typeof wrapLines !== 'undefined') {
+  if (filterByDefined(wrapLines)) {
     optionalTableProps.wrapLines = wrapLines;
   }
 
   const optionalTextFilterProps: Pick<TextFilterProps, 'filteringAriaLabel'> =
     {};
-  if (typeof filteringAriaLabel !== 'undefined') {
+  if (filterByDefined(filteringAriaLabel)) {
     optionalTextFilterProps.filteringAriaLabel = filteringAriaLabel;
   }
 
@@ -111,7 +112,7 @@ export default function AwsTable<Item>({
         columnDefinitions={columnDefinitions}
         header={<Header>{header}</Header>}
         items={rows}
-        loading={typeof loading === 'string'}
+        loading={filterByDefined(loading)}
         onSortingChange={handleSortingChange}
         resizableColumns
         stickyHeader

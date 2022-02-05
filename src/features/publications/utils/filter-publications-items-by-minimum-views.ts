@@ -1,8 +1,8 @@
 import MINIMUM_VIEWS from '../constants/minimum-publications-views';
-import type Item from '../types/publications-item';
+import type Publication from '../types/publication';
 
 export default function filterPublicationItemsByMinimumViews({
   views,
-}: Readonly<Item>): boolean {
+}: Readonly<Publication>): boolean {
   return views >= MINIMUM_VIEWS;
 }

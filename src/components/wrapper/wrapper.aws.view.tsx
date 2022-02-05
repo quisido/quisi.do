@@ -2,6 +2,7 @@ import type { AppLayoutProps } from '@awsui/components-react/app-layout';
 import AppLayout from '@awsui/components-react/app-layout';
 import type { ReactElement } from 'react';
 import { Suspense } from 'react';
+import filterByDefined from '../../utils/filter-by-defined';
 import Breadcrumbs from './components/aws-breadcrumbs';
 import Navigation from './components/aws-navigation';
 import Notifications from './components/aws-notifications';
@@ -39,16 +40,16 @@ export default function AwsWrapper({
     AppLayoutProps,
     'contentType' | 'navigationOpen' | 'toolsHide' | 'toolsOpen'
   > = {};
-  if (typeof contentType !== 'undefined') {
+  if (filterByDefined(contentType)) {
     optionalProps.contentType = contentType;
   }
-  if (typeof navigationOpen !== 'undefined') {
+  if (filterByDefined(navigationOpen)) {
     optionalProps.navigationOpen = navigationOpen;
   }
-  if (typeof toolsHide !== 'undefined') {
+  if (filterByDefined(toolsHide)) {
     optionalProps.toolsHide = toolsHide;
   }
-  if (typeof toolsOpen !== 'undefined') {
+  if (filterByDefined(toolsOpen)) {
     optionalProps.toolsOpen = toolsOpen;
   }
 

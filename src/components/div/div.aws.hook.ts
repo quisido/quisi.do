@@ -3,6 +3,8 @@ import { useMemo } from 'react';
 import validateString from '../../utils/validate-string';
 import mapSizeToSpacingSize from './utils/map-size-to-spacing-size';
 import styles from './div.aws.module.scss';
+import filterByDefined from '../../utils/filter-by-defined';
+import filterByUndefined from '../../utils/filter-by-undefined';
 
 interface Props {
   readonly className: string | undefined;
@@ -117,25 +119,25 @@ export default function useAwsDiv({
 
     margin: useMemo((): BoxProps.Spacing | undefined => {
       if (
-        typeof marginBottomSize === 'undefined' &&
-        typeof marginLeftSize === 'undefined' &&
-        typeof marginRightSize === 'undefined' &&
-        typeof marginTopSize === 'undefined'
+        filterByUndefined(marginBottomSize) &&
+        filterByUndefined(marginLeftSize) &&
+        filterByUndefined(marginRightSize) &&
+        filterByUndefined(marginTopSize)
       ) {
         return;
       }
 
       const newMargin: BoxProps.Spacing = {};
-      if (typeof marginBottomSize !== 'undefined') {
+      if (filterByDefined(marginBottomSize)) {
         newMargin.bottom = mapSizeToSpacingSize(marginBottomSize);
       }
-      if (typeof marginLeftSize !== 'undefined') {
+      if (filterByDefined(marginLeftSize)) {
         newMargin.left = mapSizeToSpacingSize(marginLeftSize);
       }
-      if (typeof marginRightSize !== 'undefined') {
+      if (filterByDefined(marginRightSize)) {
         newMargin.right = mapSizeToSpacingSize(marginRightSize);
       }
-      if (typeof marginTopSize !== 'undefined') {
+      if (filterByDefined(marginTopSize)) {
         newMargin.top = mapSizeToSpacingSize(marginTopSize);
       }
 

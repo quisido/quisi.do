@@ -2,6 +2,7 @@ import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-gr
 import BreadcrumbGroup from '@awsui/components-react/breadcrumb-group';
 import type { ReactElement } from 'react';
 import type Breadcrumb from '../../../../types/breadcrumb';
+import filterByDefined from '../../../../utils/filter-by-defined';
 import useAwsWrapperBreadcrumbs from './aws-breadcrumbs.hook';
 
 interface Props {
@@ -16,7 +17,7 @@ export default function AwsWrapperBreadcrumbs({
   // Workaround until AWS UI supports TypeScript 4.4 exact optional properties.
   // https://github.com/aws/awsui-documentation/issues/14
   const optionalProps: Pick<BreadcrumbGroupProps, 'ariaLabel'> = {};
-  if (typeof ariaLabel !== 'undefined') {
+  if (filterByDefined(ariaLabel)) {
     optionalProps.ariaLabel = ariaLabel;
   }
 

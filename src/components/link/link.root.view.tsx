@@ -10,7 +10,9 @@ const MuiLink = lazy(async () => import('./link.mui.view'));
 
 export default function Link({
   children,
+  className,
   href,
+  title,
 }: Readonly<Props>): ReactElement {
   return (
     <Design
@@ -18,8 +20,12 @@ export default function Link({
         [DesignSystem.Aws]: AwsLink,
         [DesignSystem.Material]: MuiLink,
       }}
-      fallback={<ReactRouterLink to={href}>{children}</ReactRouterLink>}
-      props={{ children, href }}
+      fallback={
+        <ReactRouterLink className={className} title={title} to={href}>
+          {children}
+        </ReactRouterLink>
+      }
+      props={{ children, className, href, title }}
     />
   );
 }
