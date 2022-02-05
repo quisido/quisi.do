@@ -37,6 +37,11 @@
 .link {
   display: inline-block !important;
   line-height: 0 !important;
+
+  // AWS UI's external icon
+  > span {
+    display: none !important;
+  }
 }
 
 .popover > button {

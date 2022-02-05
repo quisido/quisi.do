@@ -1,10 +1,10 @@
 import Badge from '@awsui/components-react/badge';
-import Link from '@awsui/components-react/link';
 import Popover from '@awsui/components-react/popover';
 import StatusIndicator from '@awsui/components-react/status-indicator';
 import I18n from 'lazy-i18n';
 import NumberFormat from 'number-format-react';
 import type { ReactElement } from 'react';
+import Link from '../../../../components/link';
 import Minutes from '../../../../components/minutes';
 import validateString from '../../../../utils/validate-string';
 import styles from './banner.module.scss';
