@@ -1,4 +1,3 @@
-import type { CardsProps } from '@awsui/components-react/cards';
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo, useState } from 'react';
@@ -16,7 +15,7 @@ interface State {
   readonly handleBannerDismiss: VoidFunction;
   readonly handleSortChange: (event: ReadonlySelectChangeEvent) => void;
   readonly isBannerVisible: boolean;
-  readonly items: CardsProps<Publication>['items'];
+  readonly items: readonly Publication[];
   readonly loading: string | undefined;
   readonly sort: Sort;
 }
