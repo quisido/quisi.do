@@ -4,15 +4,15 @@ import Design from '../../components/design';
 import DesignSystem from '../../constants/design-system';
 import type Props from './types/props';
 
-const AwsContainer = lazy(async () => import('./container.aws.view'));
-const MuiContainer = lazy(async () => import('./container.mui.view'));
+const AwsChip = lazy(async () => import('./chip.aws.view'));
+const MuiChip = lazy(async () => import('./chip.mui.view'));
 
-export default function Container(props: Readonly<Props>): ReactElement {
+export default function Chip(props: Readonly<Props>): ReactElement {
   return (
     <Design
       components={{
-        [DesignSystem.Aws]: AwsContainer,
-        [DesignSystem.Material]: MuiContainer,
+        [DesignSystem.Aws]: AwsChip,
+        [DesignSystem.Material]: MuiChip,
       }}
       props={props}
     />

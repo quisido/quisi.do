@@ -1,3 +1,41 @@
+@mixin chip($x, $y) {
+  $border-color: #404040;
+  background-color: rgba(64, 64, 64, 0.85) !important;
+  border-bottom-color: $border-color !important;
+  border-left-color: $border-color !important;
+  border-top-color: $border-color !important;
+  border-style: solid !important;
+  border-width: 0 !important;
+  line-height: 1em;
+  position: absolute;
+
+  @if $x == 'left' {
+    border-right-color: $border-color !important;
+    border-right-width: 1px !important;
+    left: 0;
+    padding-right: 1em !important;
+  }
+
+  @if $x == 'right' {
+    border-left-color: $border-color !important;
+    border-left-width: 1px !important;
+    padding-left: 1em !important;
+    right: 0;
+  }
+
+  @if $y == 'bottom' {
+    border-top-color: $border-color !important;
+    border-top-width: 1px !important;
+    bottom: 0;
+  }
+
+  @if $y == 'top' {
+    border-bottom-color: $border-color !important;
+    border-bottom-width: 1px !important;
+    top: 0;
+  }
+}
+
 .bannerHeight {
   align-items: center;
   display: flex;
@@ -21,17 +59,10 @@
 }
 
 .dateTime {
+  @include chip(left, bottom);
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   border-top-left-radius: 0 !important;
-  bottom: 0;
-  left: 0;
-  padding-right: 1em !important;
-  position: absolute;
-}
-
-.image {
-  max-width: 100%;
 }
 
 .link {
@@ -44,36 +75,23 @@
   }
 }
 
-.popover > button {
-  border-bottom-width: 0 !important;
-}
-
 .reactions {
+  @include chip(right, top);
   border-bottom-right-radius: 0 !important;
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
-  padding-left: 1em !important;
-  position: absolute;
-  right: 0;
-  top: 0;
 }
 
 .readingTime {
+  @include chip(right, bottom);
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   border-top-right-radius: 0 !important;
-  bottom: 0;
-  padding-left: 1em !important;
-  position: absolute;
-  right: 0;
 }
 
 .views {
+  @include chip(left, top);
   border-bottom-left-radius: 0 !important;
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
-  left: 0;
-  padding-right: 1em !important;
-  position: absolute;
-  top: 0;
 }
