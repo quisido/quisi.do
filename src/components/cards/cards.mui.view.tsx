@@ -13,12 +13,14 @@ export default function MuiCards<Item>({
   CardContent,
   CardFooter,
   CardHeader,
+  cardKey,
   items,
 }: Readonly<Props<Item>>): ReactElement {
   const { cardProps } = useMuiCards({
     CardContent,
     CardFooter,
     CardHeader,
+    cardKey,
     items,
   });
 

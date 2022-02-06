@@ -11,6 +11,7 @@ export default function MuiDiv({
   display,
   element,
   flexDirection,
+  float,
   margin,
   marginBottom,
   marginLeft,
@@ -20,7 +21,8 @@ export default function MuiDiv({
   marginY,
   textAlign,
 }: Readonly<Props>): ReactElement {
-  const { mb, ml, mr, mt } = useMuiDiv({
+  const { mb, ml, mr, mt, style } = useMuiDiv({
+    float,
     margin,
     marginBottom,
     marginLeft,
@@ -54,6 +56,9 @@ export default function MuiDiv({
   }
   if (filterByDefined(mt)) {
     optionalProps.mt = mt;
+  }
+  if (filterByDefined(style)) {
+    optionalProps.style = style;
   }
 
   return (

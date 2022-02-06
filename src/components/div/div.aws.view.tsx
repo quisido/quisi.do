@@ -11,6 +11,7 @@ export default function AwsDiv({
   display: displayProp,
   element,
   flexDirection,
+  float,
   margin: marginProp,
   marginBottom,
   marginLeft,
@@ -45,6 +46,9 @@ export default function AwsDiv({
   }
   if (filterByDefined(displayState)) {
     optionalProps.display = displayState;
+  }
+  if (filterByDefined(float)) {
+    optionalProps.float = float;
   }
   if (filterByDefined(marginState)) {
     optionalProps.margin = marginState;

@@ -34,6 +34,7 @@ export default function PublicationsContent(): ReactElement {
       <Cards
         CardContent={CardContent}
         CardHeader={CardHeader}
+        cardKey="url"
         header={<Header onSortChange={handleSortChange} sort={sort} />}
         items={items}
         loading={loading}

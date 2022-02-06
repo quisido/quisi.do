@@ -4,8 +4,8 @@ import { lazy } from 'react';
 import Wrapper from '../../components/wrapper';
 import useQuotes from './quotes.hook';
 
-const Contents: ComponentType<unknown> = lazy(
-  async () => import('./components/contents'),
+const Content: ComponentType<unknown> = lazy(
+  async () => import('./components/content'),
 );
 
 export default function Quotes(): ReactElement {
@@ -17,7 +17,7 @@ export default function Quotes(): ReactElement {
       fallback={<I18n>Loading quotes</I18n>}
       toolsHide
     >
-      <Contents />
+      <Content />
     </Wrapper>
   );
 }

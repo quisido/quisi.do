@@ -6,6 +6,7 @@ interface Props<Item> {
   readonly CardContent: ComponentType<Item>;
   readonly CardFooter: ComponentType<Item> | undefined;
   readonly CardHeader: ComponentType<Item> | undefined;
+  readonly cardKey: keyof Item;
   readonly items: readonly Item[];
 }
 
@@ -17,6 +18,7 @@ export default function useMuiCards<Item>({
   CardContent,
   CardFooter,
   CardHeader,
+  cardKey,
   items,
 }: Readonly<Props<Item>>): State<Item> {
   return {
@@ -29,10 +31,10 @@ export default function useMuiCards<Item>({
         Footer: CardFooter,
         Header: CardHeader,
         item,
-        key: JSON.stringify(item),
+        key: JSON.stringify(item[cardKey]),
       });
 
       return items.map(mapItemToCardProps);
-    }, [CardContent, CardFooter, CardHeader, items]),
+    }, [CardContent, CardFooter, CardHeader, cardKey, items]),
   };
 }

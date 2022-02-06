@@ -1,6 +1,10 @@
+import type { CSSProperties } from 'react';
+import { useMemo } from 'react';
+import filterByUndefined from '../../utils/filter-by-undefined';
 import mapSizeToSystemValue from './utils/map-size-to-system-value';
 
 interface Props {
+  readonly float: 'left' | 'right' | undefined;
   readonly margin: 'large' | 'medium' | 'small' | undefined;
   readonly marginBottom: 'large' | 'medium' | 'small' | undefined;
   readonly marginLeft: 'large' | 'medium' | 'small' | undefined;
@@ -15,9 +19,11 @@ interface State {
   readonly ml: number | undefined;
   readonly mr: number | undefined;
   readonly mt: number | undefined;
+  readonly style: CSSProperties | undefined;
 }
 
 export default function useAwsDiv({
+  float,
   margin,
   marginBottom,
   marginLeft,
@@ -31,5 +37,15 @@ export default function useAwsDiv({
     ml: mapSizeToSystemValue(marginLeft ?? marginX ?? margin),
     mr: mapSizeToSystemValue(marginRight ?? marginX ?? margin),
     mt: mapSizeToSystemValue(marginTop ?? marginY ?? margin),
+
+    style: useMemo((): CSSProperties | undefined => {
+      if (filterByUndefined(float)) {
+        return;
+      }
+
+      return {
+        float,
+      };
+    }, [float]),
   };
 }

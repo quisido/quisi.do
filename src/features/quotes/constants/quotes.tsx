@@ -1,4 +1,3 @@
-import Box from '@awsui/components-react/box';
 import ben from '../images/benjamin-tsai.png';
 import carson from '../images/carson-stack.jpg';
 import ellis from '../images/ellis-gregory.jpg';
@@ -26,7 +25,7 @@ const QUOTES: readonly Quote[] = [
     title: 'Front End Engineer',
     quote: (
       <>
-        <Box variant="p">
+        <p>
           Charles has always been a great mentor for me. He knows a lot about
           good coding practices and industrial development. Most importantly,
           Charles is willing to share his advices and provide explanations
@@ -37,16 +36,16 @@ const QUOTES: readonly Quote[] = [
           where the solution is already being used in our code so that I could
           better understand how it works and solves the problem under the given
           scenario.
-        </Box>
-        <Box variant="p">
+        </p>
+        <p>
           Charles is knowledgeable about the systems and tools our team is
           using. Almost every time, if I’m not sure about a tool we are using or
           how to resolve an issue in our system, I can reach out to him and get
           some direction. Even without context about a specific issue, he
           explains possible solutions to help me understand the subject matter
           better.
-        </Box>
-        <Box variant="p">
+        </p>
+        <p>
           Charles is able to demonstrate mentorship through shared packages he
           created and documentations he has written. He created several utility
           packages that our team and other teams can use and also wrote good
@@ -54,7 +53,7 @@ const QUOTES: readonly Quote[] = [
           unnecessary communication. These packages and documentations are good
           examples to me for how one can show ownership and improve the
           development environment.
-        </Box>
+        </p>
       </>
     ),
   },
@@ -66,7 +65,7 @@ const QUOTES: readonly Quote[] = [
     image: carson,
     title: 'Front End Engineer',
     quote: (
-      <Box variant="p">
+      <p>
         Since joining the frontend team this year, I have benefited greatly from
         Charles’s mentorship. His ability to develop the engineers around him
         stems from his eagerness to help others and his technical acumen.
@@ -91,7 +90,7 @@ const QUOTES: readonly Quote[] = [
         testing my feature down the road. He takes seriously his role in
         coaching others, and I can personally say that I have grown as an
         engineer as a result.
-      </Box>
+      </p>
     ),
   },
   {
@@ -102,7 +101,7 @@ const QUOTES: readonly Quote[] = [
     image: juneHo,
     title: 'Front End Engineer',
     quote: (
-      <Box variant="p">
+      <p>
         I am a front end engineer with no prior front end engineering
         experience. I have little experience in writing large-scale applications
         in JavaScript and no experience with React. Charles has been extremely
@@ -116,7 +115,7 @@ const QUOTES: readonly Quote[] = [
         tools to tackle issues on my own in the future. Charles also provides
         detailed comments on code reviews, including best coding practices and
         example code.
-      </Box>
+      </p>
     ),
   },
   {
@@ -126,7 +125,7 @@ const QUOTES: readonly Quote[] = [
     image: mihir,
     title: 'Engineering Leader',
     quote: (
-      <Box variant="p">
+      <p>
         Charles is exceptional at UI development and leading teams as a senior
         technical leader. During our collaboration, Charles helped us expand our
         service portfolio to add multiple new AWS services (Lambda and Container
@@ -136,7 +135,7 @@ const QUOTES: readonly Quote[] = [
         have learned a lot from him. I would highly recommend Charles for senior
         technical leader roles. Given a chance, I would love to collaborate with
         him again.
-      </Box>
+      </p>
     ),
   },
   {
@@ -147,7 +146,7 @@ const QUOTES: readonly Quote[] = [
     image: mustafa,
     title: 'Principal Software Engineer',
     quote: (
-      <Box variant="p">
+      <p>
         I have observed Charles’s strengths over the years. I think Charles
         exhibits a very strong Customer Obsession. When we launched the new
         console for CloudWatch Logs, he stayed on top of the Reddit thread,
@@ -156,7 +155,7 @@ const QUOTES: readonly Quote[] = [
         to respond customers on social media. I was very impressed with Charles’
         output of Container Insights console dashboards. It is evident that
         Charles is technically strong in his domain.
-      </Box>
+      </p>
     ),
   },
   {
@@ -168,16 +167,16 @@ const QUOTES: readonly Quote[] = [
     title: 'UX Designer',
     quote: (
       <>
-        <Box variant="p">
+        <p>
           Charles is always happy to provide insights regarding my UX design. He
           is able to give input from an engineering perspective, like which
           steps need further clarification, where the edge cases may occur, and
           when to communicate errors to customers, etc.
-        </Box>
-        <Box variant="p">
+        </p>
+        <p>
           His input helps to complete UX workflows and minimize potential
           confusion that may happen for customers.
-        </Box>
+        </p>
       </>
     ),
   },
@@ -189,7 +188,7 @@ const QUOTES: readonly Quote[] = [
     image: rongdi,
     title: 'Front end engineer',
     quote: (
-      <Box variant="p">
+      <p>
         Charles is an expert in front end areas and a reliable tech lead in the
         team. He always makes a solid design to build a high-performance web
         application. Meanwhile, he always shares his perspicacious insights when
@@ -199,7 +198,7 @@ const QUOTES: readonly Quote[] = [
         work with. Last but not the least, he is always passionate about the
         tech in the community. He shows his curiosity and impacts everyone
         around him.
-      </Box>
+      </p>
     ),
   },
   {
@@ -210,7 +209,7 @@ const QUOTES: readonly Quote[] = [
     image: xinhe,
     title: 'Front End Engineer',
     quote: (
-      <Box variant="p">
+      <p>
         I really appreciate the comments Charles leaves on my pull requests.
         They help me align my code with the rest of the projects. I consider
         Charles to be a good mentor. He is willing to share skills, knowledge,
@@ -227,7 +226,7 @@ const QUOTES: readonly Quote[] = [
         forth comments. Sometimes I was inspired with a better idea based on
         that feedback. Overall, I’m glad I can have Charles in the team to offer
         mentoring.
-      </Box>
+      </p>
     ),
   },
 
@@ -241,7 +240,7 @@ const QUOTES: readonly Quote[] = [
     title: 'Senior Product Designer',
     quote: (
       <>
-        <Box variant="p">
+        <p>
           Charles has been extremely effective in collaboration and
           brainstorming design solutions and then translating them into fully
           developed products. His full-stack knowledge and expertise help guide
@@ -251,13 +250,13 @@ const QUOTES: readonly Quote[] = [
           again that he is reliable, adaptive and intuitive while offering
           constructive feedback and the necessary positive friction that results
           in the creation of a high quality product.
-        </Box>
-        <Box variant="p">
+        </p>
+        <p>
           Charles is passionate about his work and never fails to meet whatever
           challenge comes his way. His leadership and “Nothing is impossible”
           mentality towards development is infectious and inspires myself and
           the others within the team to do their best.
-        </Box>
+        </p>
       </>
     ),
   },
@@ -270,7 +269,7 @@ const QUOTES: readonly Quote[] = [
     title: 'Vice President of Professional Services',
     quote: (
       <>
-        <Box variant="p">
+        <p>
           I was very privileged to be Charles’ manager for a brief period of
           time. During that time, Charles demonstrated that he is an extremely
           gifted JavaScript developer; but beyond that, he demonstrated that he
@@ -280,8 +279,8 @@ const QUOTES: readonly Quote[] = [
           to others and a good teammate. The thing that impressed me most about
           Charles is that he always sought feedback and he always wanted to get
           better, both as a person and a developer.
-        </Box>
-        <Box variant="p">I would happily work with Charles again!</Box>
+        </p>
+        <p>I would happily work with Charles again!</p>
       </>
     ),
   },
@@ -294,11 +293,11 @@ const QUOTES: readonly Quote[] = [
     title: 'Managing Director | Digital Marketing Consultant',
     quote: (
       <>
-        <Box variant="p">
+        <p>
           In short: Charles is an efficient, knowledgeable and trustworthy
           individual.
-        </Box>
-        <Box variant="p">
+        </p>
+        <p>
           To elaborate: I’ve had the pleasure of employing Charles’s services
           many times over the past 15 years on projects requiring skills ranging
           from Frontend and Backend Development to SEO and Technical Writing. He
@@ -306,7 +305,7 @@ const QUOTES: readonly Quote[] = [
           perform but also advise on any task put before him and can lead a team
           as exceptionally as he can be part of one. Charles receives my highest
           recommendation and any company would be lucky to have him.
-        </Box>
+        </p>
       </>
     ),
   },
@@ -318,10 +317,10 @@ const QUOTES: readonly Quote[] = [
     image: walter,
     title: 'Front End Web Developer',
     quote: (
-      <Box variant="p">
+      <p>
         Charles demonstrated a high level of expertise in JavaScript and was
         always willing to help out in the time we worked together.
-      </Box>
+      </p>
     ),
   },
   {
@@ -332,10 +331,10 @@ const QUOTES: readonly Quote[] = [
     image: sriram,
     title: 'Full Stack Developer',
     quote: (
-      <Box variant="p">
+      <p>
         Charles is the best friendly mentor I have ever had. He always had an
         answer to my questions.
-      </Box>
+      </p>
     ),
   },
 
@@ -348,7 +347,7 @@ const QUOTES: readonly Quote[] = [
     image: kelsey,
     title: 'Director of Employer Relations',
     quote: (
-      <Box variant="p">
+      <p>
         When Charles started working for the Career Development Center, I knew
         quickly that we had gotten very lucky in hiring him. Charles has a lot
         of experience working in web development; for us, this translated to him
@@ -360,7 +359,7 @@ const QUOTES: readonly Quote[] = [
         His desire to improve the website and his ability to communicate complex
         technical issues to non-technical people really impressed me. I would
         recommend Charles to any employer - he is a real asset!
-      </Box>
+      </p>
     ),
   },
 ];
@@ -368,24 +367,14 @@ const QUOTES: readonly Quote[] = [
 export default QUOTES;
 
 /*
-  {
-    author: 'Luke Brassard',
-    company: 'Amazon Web Services',
-    image: luke,
-    title: 'UX Designer | Software Engineer',
-    quote: (
-      <Box variant="p">
-        Charles’ thorough work and attention to detail is evident in the shared
-        UI components that he has been responsible for producing and
-        maintaining. Specifically, the AWS UI date/time range component is
-        well-documented with a Wiki page, 239-line README, and working Storybook
-        demos. In my own experience using the work that Charles has developed,
-        he has supported me with timely and knowledgeable responses that allowed
-        me to incorporate the shared libraries into the Amazon Detective
-        console.
-      </Box>
-    ),
-  },
+Charles’ thorough work and attention to detail is evident in the shared UI
+components that he has been responsible for producing and maintaining.
+Specifically, the AWS UI date/time range component is well-documented with a
+Wiki page, 239-line README, and working Storybook demos. In my own experience
+using the work that Charles has developed, he has supported me with timely and
+knowledgeable responses that allowed me to incorporate the shared libraries into
+the Amazon Detective console. - Luke Brassard, UX Designer | Software Engineer,
+Amazon Web Services
 
 My team is building a new EMR studio user interface in addition to what we have
 in AWS console. The AWS UI date/time range component is a great component to

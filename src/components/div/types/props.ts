@@ -10,6 +10,7 @@ interface BaseProps {
   readonly className?: string | undefined;
   readonly display?: 'block' | 'flex' | undefined;
   readonly element?: 'h2' | 'p' | undefined;
+  readonly float?: 'left' | 'right' | undefined;
   readonly textAlign?: 'center' | 'left' | 'right' | undefined;
   readonly flexDirection?:
     | 'column-reverse'
