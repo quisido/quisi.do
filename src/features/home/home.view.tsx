@@ -1,8 +1,7 @@
-import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Container from '../../components/container';
-import Span from '../../components/span';
+import Div from '../../components/div';
 import Wrapper from '../../components/wrapper';
 import PROJECTS from '../../constants/projects';
 import mapComponentToPropMapper from '../../utils/map-component-to-prop-mapper';
@@ -34,54 +33,46 @@ export default function Home(): ReactElement {
 
   return (
     <Wrapper toolsHide>
-      <SpaceBetween size="l">
-        <Container
-          actions={<ViewResumeButton />}
-          header={<I18n>About me</I18n>}
-        >
-          <SpaceBetween
-            className={contentClassName}
-            direction="horizontal"
-            size="xxl"
+      <Container actions={<ViewResumeButton />} header={<I18n>About me</I18n>}>
+        <Div className={contentClassName} display="flex" flexDirection="row">
+          <Div className={avatarClassName} marginRight="large">
+            <img alt={avatarAlt} height={100} src={avatar} width={100} />
+          </Div>
+          <Div
+            className={paragraphClassName}
+            display="flex"
+            flexDirection="column"
           >
-            <div className={avatarClassName}>
-              <img alt={avatarAlt} height={100} src={avatar} width={100} />
-            </div>
-            <SpaceBetween
-              className={paragraphClassName}
-              direction="vertical"
-              size="m"
-            >
-              <Span element="p">
-                My name is <strong>Charles Stover</strong>. I am a{' '}
-                <strong>staff-level front end engineer</strong> with an
-                expertise in <strong>JavaScript and React</strong>. My focus is
-                on long-term product visions, impact across teams, operational
-                health, application monitoring, and{' '}
-                <abbr title="user interface">UI</abbr>/
-                <abbr title="user experience">UX</abbr>.
-              </Span>
-              <ul className={listClassName}>
-                <li>
-                  <I18n n={ENTERPRISE_YOE}>Enterprise: $n years</I18n>
-                </li>
-                <li>
-                  <I18n n={FRONT_END_YOE}>Front end: $n years</I18n>
-                </li>
-                <li>
-                  <I18n n={FULL_STACK_YOE}>Full stack: $n years</I18n>
-                </li>
-              </ul>
-            </SpaceBetween>
-          </SpaceBetween>
-        </Container>
+            <Div element="p" marginBottom="medium">
+              My name is <strong>Charles Stover</strong>. I am a{' '}
+              <strong>staff-level front end engineer</strong> with an expertise
+              in <strong>JavaScript and React</strong>. My focus is on long-term
+              product visions, impact across teams, operational health,
+              application monitoring, and <abbr title="user interface">UI</abbr>
+              /<abbr title="user experience">UX</abbr>.
+            </Div>
+            <ul className={listClassName}>
+              <li>
+                <I18n n={ENTERPRISE_YOE}>Enterprise: $n years</I18n>
+              </li>
+              <li>
+                <I18n n={FRONT_END_YOE}>Front end: $n years</I18n>
+              </li>
+              <li>
+                <I18n n={FULL_STACK_YOE}>Full stack: $n years</I18n>
+              </li>
+            </ul>
+          </Div>
+        </Div>
+      </Container>
 
+      <Div marginTop="large">
         <Container header={<I18n>Projects</I18n>}>
           <ul className={projectListClassName}>
             {PROJECTS.map(mapProjectToAttributes).map(mapProjectToListItem)}
           </ul>
         </Container>
-      </SpaceBetween>
+      </Div>
     </Wrapper>
   );
 }

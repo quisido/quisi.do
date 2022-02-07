@@ -1,4 +1,4 @@
-import type { BoxProps } from '@awsui/components-react';
+import type { BoxProps } from '@awsui/components-react/box';
 import mapColorToAwsColor from './utils/map-color-to-aws-color';
 import mapSizeToAwsFontSize from './utils/map-size-to-aws-font-size';
 

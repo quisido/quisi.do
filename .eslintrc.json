@@ -13,6 +13,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:cypress/recommended",
+    "plugin:import/typescript",
     "plugin:jsx-a11y/strict",
     "plugin:prettier/recommended",
     "plugin:react/recommended",
@@ -71,6 +72,7 @@
   "plugins": [
     "@typescript-eslint",
     "cypress",
+    "import",
     "jsx-a11y",
     "prettier",
     "react",
@@ -83,10 +85,39 @@
     "react/jsx-max-depth": "off",
     "react/jsx-props-no-spreading": "off",
     "react/no-array-index-key": "off",
-    "react/no-multi-comp": "off"
+    "react/no-multi-comp": "off",
+
+    "import/no-restricted-paths": [
+      "error",
+      {
+        "zones": [
+          {
+            "from": "./.yarn/**/node_modules/@awsui/components-react/**/*",
+            "message": "Features may not import from AWSUI directly. Import from src/components instead.",
+            "target": "./src/features/!(spritesheet2gif)/**/*"
+          },
+          {
+            "from": "./.yarn/**/node_modules/@mui/material/**/*",
+            "message": "Features may not import from MUI directly. Import from src/components instead.",
+            "target": "./src/features/!(spritesheet2gif)/**/*"
+          },
+          {
+            "from": "./.yarn/**/node_modules/@awsui/components-react/index.js",
+            "message": "You may not import from AWSUI directly. Import from @awsui/components-react/component-name instead.",
+            "target": "**/*"
+          },
+          {
+            "from": "./.yarn/**/node_modules/@mui/material/index.js",
+            "message": "You may not import from MUI directly. Import from @mui/material/ComponentName instead.",
+            "target": "**/*"
+          }
+        ]
+      }
+    ]
   },
 
   "settings": {
+    "import/external-module-folders": ["./.yarn/__virtual__", "./.yarn/cache"],
     "react": {
       "version": "detect"
     }

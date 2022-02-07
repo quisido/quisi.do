@@ -15,7 +15,7 @@ export default function MuiContainer({
   return (
     <Card>
       <CardHeader action={actions} title={header} />
-      <CardContent>{children}</CardContent>
+      {filterByDefined(children) && <CardContent>{children}</CardContent>}
       {filterByDefined(footer) && <CardActions>{footer}</CardActions>}
     </Card>
   );
