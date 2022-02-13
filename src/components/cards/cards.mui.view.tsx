@@ -14,6 +14,7 @@ export default function MuiCards<Item>({
   CardFooter,
   CardHeader,
   cardKey,
+  header,
   items,
 }: Readonly<Props<Item>>): ReactElement {
   const { cardProps } = useMuiCards({
@@ -30,6 +31,11 @@ export default function MuiCards<Item>({
   const mapCardPropsToElement =
     mapComponentToPropMapper<CardProps<Item>>(MuiCard);
   return (
-    <div className={rootClassName}>{cardProps.map(mapCardPropsToElement)}</div>
+    <>
+      {header}
+      <div className={rootClassName}>
+        {cardProps.map(mapCardPropsToElement)}
+      </div>
+    </>
   );
 }

@@ -1,14 +1,14 @@
-import type { SelectProps } from '@awsui/components-react/select';
+import type SelectOption from '../../../types/select-option';
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
-import Sort from '../../constants/publications-sort';
+import Sort from '../constants/publications-sort';
 
-export default function usePublicationsSortOptions(): SelectProps.Options {
+export default function usePublicationsSortOptions(): readonly SelectOption[] {
   const translate: TranslateFunction = useTranslate();
 
   return useMemo(
-    (): SelectProps.Options => [
+    (): readonly SelectOption[] => [
       {
         label: translate('Publication date') ?? '...',
         value: Sort.PublicationDate,

@@ -12,16 +12,16 @@ export default function AwsContainer({
   header,
   headerClassName,
 }: Readonly<Props>): ReactElement {
-  const headerProps: HeaderProps = {};
+  const optionalHeaderProps: HeaderProps = {};
   if (filterByDefined(headerClassName)) {
-    headerProps.className = headerClassName;
+    optionalHeaderProps.className = headerClassName;
   }
 
   return (
     <Container
       footer={footer}
       header={
-        <Header actions={actions} {...headerProps}>
+        <Header actions={actions} {...optionalHeaderProps}>
           {header}
         </Header>
       }

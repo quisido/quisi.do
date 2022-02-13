@@ -13,6 +13,7 @@
 /node_modules/
 /public/CNAME
 /**/*.css
+/**/*.dot
 /**/*.gz
 /**/*.html
 /**/*.ico
@@ -21,6 +22,7 @@
 /**/*.pdf
 /**/*.png
 /**/*.scss
+/**/*.svg
 /**/*.txt
 /LICENSE
 /yarn.lock

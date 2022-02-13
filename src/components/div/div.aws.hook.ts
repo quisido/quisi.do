@@ -1,4 +1,4 @@
-import type { BoxProps } from '@awsui/components-react';
+import type { BoxProps } from '@awsui/components-react/box';
 import { useMemo } from 'react';
 import validateString from '../../utils/validate-string';
 import mapSizeToSpacingSize from './utils/map-size-to-spacing-size';

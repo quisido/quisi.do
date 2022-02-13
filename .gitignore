@@ -19,5 +19,7 @@
 /.eslintcache
 /.pnp.cjs
 /.tsbuildinfo
+/depcruise.dot
+/depcruise.svg
 /yarn-error.log
 .DS_Store
