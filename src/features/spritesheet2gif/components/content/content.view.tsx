@@ -10,14 +10,14 @@ import ApiGifResponse from '../../components/api-gif-response';
 import Footer from '../../components/footer';
 import ImageFileInput from '../../components/image-file-input';
 import Header from '../../components/header';
-import type ContentsProps from '../../types/contents-props';
-import useSpriteSheet2GifContents from './contents.hook';
-import styles from './contents.module.scss';
+import type ContentsProps from '../../types/content-props';
+import useSpriteSheet2GifContent from './content.hook';
+import styles from './content.module.scss';
 
 const headerClassName: string = validateString(styles.header);
 const matteClassName: string = validateString(styles.matte);
 
-export default function SpriteSheet2GifContents({
+export default function SpriteSheet2GifContent({
   onError,
   onErrorDismiss,
   onHelpDismiss,
@@ -48,7 +48,7 @@ export default function SpriteSheet2GifContents({
     perFrameOptions,
     selectedDirectionOption,
     selectedPerFrameOption,
-  } = useSpriteSheet2GifContents({
+  } = useSpriteSheet2GifContent({
     onError,
     onErrorDismiss,
     onHelpDismiss,

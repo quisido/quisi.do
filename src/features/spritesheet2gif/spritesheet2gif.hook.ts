@@ -1,12 +1,16 @@
 import type { AppLayoutProps } from '@awsui/components-react/app-layout';
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
+import type { TranslateFunction } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
 import type { ComponentType } from 'react';
 import { useCallback, useMemo, useState } from 'react';
+import type Breadcrumb from '../../types/breadcrumb';
 import type Notification from '../../types/notification';
 import HeaderInfo from './components/header-info';
 
 interface State {
   readonly Help: ComponentType<unknown>;
+  readonly breadcrumbs: readonly Breadcrumb[];
   readonly handleError: (error: Readonly<Error>) => void;
   readonly handleErrorDismiss: () => void;
   readonly handleHelpDismiss: () => void;
@@ -23,6 +27,10 @@ interface State {
 const getDefaultTools = (): ComponentType<unknown> => HeaderInfo;
 
 export default function useSpritesheet2Gif(): State {
+  // Contexts
+  const translate: TranslateFunction = useTranslate();
+
+  // States
   const [Help, setHelp] = useState(getDefaultTools);
   const [error, setError] = useState<Error | null>(null);
   const [helpOpen, setHelpOpen] = useState(false);
@@ -31,6 +39,16 @@ export default function useSpritesheet2Gif(): State {
     Help,
     handleError: setError,
     helpOpen,
+
+    breadcrumbs: useMemo(
+      (): readonly Breadcrumb[] => [
+        {
+          children: translate('Sprite sheet to GIF') ?? '...',
+          path: '/spritesheet2gif',
+        },
+      ],
+      [translate],
+    ),
 
     handleErrorDismiss: useCallback((): void => {
       setError(null);

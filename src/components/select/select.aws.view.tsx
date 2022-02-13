@@ -7,6 +7,7 @@ import useAwsSelect from './select.aws.hook';
 import type Props from './types/props';
 
 export default function AwsSelect({
+  disabled = false,
   label,
   labelDirection,
   onChange,
@@ -28,6 +29,7 @@ export default function AwsSelect({
   return (
     <FormField label={label} stretch {...optionalFormFieldProps}>
       <Select
+        disabled={disabled}
         onChange={handleChange}
         options={options}
         selectedOption={selectedOption}

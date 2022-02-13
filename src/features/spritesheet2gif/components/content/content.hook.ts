@@ -114,7 +114,7 @@ const PER_FRAME_OPTIONS: SelectProps.Options = [
   },
 ];
 
-export default function useSpriteSheet2GifContents({
+export default function useSpriteSheet2GifContent({
   onError,
   onErrorDismiss,
   onHelpDismiss,

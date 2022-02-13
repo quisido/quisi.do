@@ -12,28 +12,27 @@ import type Props from './types/props';
  *   `onChange` handler will not fire without it.
  */
 
-let idNumber = 1;
 const mapMenuItemPropsToMenuItem = mapComponentToPropMapper(MenuItem);
 
 export default function MuiSelect({
+  disabled = false,
   label,
   onChange,
   options,
   value,
 }: Readonly<Props>): ReactElement {
-  const { handleChange, menuItemProps } = useMuiSelect({
+  const { handleChange, id, menuItemProps } = useMuiSelect({
     onChange,
     options,
   });
 
-  idNumber++;
-  const idString = `select-${idNumber}`;
   return (
-    <FormControl fullWidth>
-      <InputLabel id={idString}>{label}</InputLabel>
+    <FormControl disabled={disabled} fullWidth>
+      <InputLabel id={id}>{label}</InputLabel>
       <Select
+        disabled={disabled}
         label={label}
-        labelId={idString}
+        labelId={id}
         native
         onChange={handleChange}
         size="small"

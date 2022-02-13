@@ -2,24 +2,17 @@ import I18n from 'lazy-i18n';
 import type { ComponentType, ReactElement } from 'react';
 import { lazy } from 'react';
 import Wrapper from '../../components/wrapper';
-import type Breadcrumb from '../../types/breadcrumb';
 import useSpriteSheet2Gif from './spritesheet2gif.hook';
-import type ContentsProps from './types/contents-props';
+import type ContentProps from './types/content-props';
 
-const BREADCRUMBS: readonly Breadcrumb[] = [
-  {
-    children: 'Sprite sheet to GIF converter',
-    path: '/spritesheet2gif',
-  },
-];
-
-const Contents: ComponentType<ContentsProps> = lazy(
-  async () => import('./components/contents'),
+const Content: ComponentType<ContentProps> = lazy(
+  async () => import('./components/content'),
 );
 
 export default function SpriteSheet2Gif(): ReactElement {
   const {
     Help,
+    breadcrumbs,
     handleError,
     handleErrorDismiss,
     handleHelpDismiss,
@@ -32,7 +25,7 @@ export default function SpriteSheet2Gif(): ReactElement {
   return (
     <Wrapper
       Tools={Help}
-      breadcrumbs={BREADCRUMBS}
+      breadcrumbs={breadcrumbs}
       contentType="wizard"
       fallback={<I18n>Loading spritesheet to GIF converter</I18n>}
       notifications={notifications}
@@ -40,7 +33,7 @@ export default function SpriteSheet2Gif(): ReactElement {
       toolsHide={false}
       toolsOpen={helpOpen}
     >
-      <Contents
+      <Content
         onError={handleError}
         onErrorDismiss={handleErrorDismiss}
         onHelpDismiss={handleHelpDismiss}

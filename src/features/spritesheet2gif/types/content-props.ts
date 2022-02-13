@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
 
-export default interface ContentsProps {
+export default interface ContentProps {
   readonly onError: (error: Readonly<Error>) => void;
   readonly onErrorDismiss: () => void;
   readonly onHelpDismiss: () => void;

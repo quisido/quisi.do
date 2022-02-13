@@ -1,5 +1,6 @@
 import type { Dispatch, SetStateAction } from 'react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useLocation } from 'react-router';
 import DesignSystem from '../../../../constants/design-system';
 import Language from '../../../../constants/language';
 
@@ -10,9 +11,28 @@ interface State {
 }
 
 export default function useAppContexts(): State {
+  // Contexts
+  const { pathname } = useLocation();
+
+  // States
+  const [designSystem, setDesignSystem] = useState<DesignSystem>(
+    DesignSystem.Aws,
+  );
+
+  const isSpriteSheet2GifRoute = pathname === '/spritesheet2gif';
   return {
     isDarkModeEnabled: useState<boolean>(true),
-    designSystem: useState<DesignSystem>(DesignSystem.Aws),
     language: useState<Language>(Language.English),
+
+    designSystem: useMemo((): [
+      DesignSystem,
+      Dispatch<SetStateAction<DesignSystem>>,
+    ] => {
+      // Technical debt: The "Spritesheet 2 GIF" route only supports AWS UI.
+      if (isSpriteSheet2GifRoute) {
+        return [DesignSystem.Aws, setDesignSystem];
+      }
+      return [designSystem, setDesignSystem];
+    }, [designSystem, isSpriteSheet2GifRoute]),
   };
 }
