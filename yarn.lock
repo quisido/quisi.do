@@ -4478,6 +4478,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.11.2":
+  version: 7.17.2
+  resolution: "@babel/runtime@npm:7.17.2"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: a48702d271ecc59c09c397856407afa29ff980ab537b3da58eeee1aeaa0f545402d340a1680c9af58aec94dfdcbccfb6abb211991b74686a86d03d3f6956cacd
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.12.13":
   version: 7.15.3
   resolution: "@babel/runtime@npm:7.15.3"
@@ -5785,6 +5794,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@monorepo-template/cypress-coverage-plugin@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@monorepo-template/cypress-coverage-plugin@npm:1.0.0"
+  dependencies:
+    "@cypress/code-coverage": ^3.9.12
+    "@monorepo-template/cypress-nyc-config": ^1.0.0
+  checksum: e36d741e032b9bd6bbb89a973fb966f549cf5d9cf23d60b8c3a186429637b725837ee51349b994292017a11feaa19f44388d829cc74e43dc6ce3fe88259dc05b
+  languageName: node
+  linkType: hard
+
+"@monorepo-template/cypress-nyc-config@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@monorepo-template/cypress-nyc-config@npm:1.0.0"
+  checksum: 54086b89bb2cd4d106c98d5d4f511837a8e484d1a0dfe52226d81ef156a3dd0f68fb10f20c5b5a2e310546ca740dfb5656c0b1091569a1e5d998fa9ecf1511ec
+  languageName: node
+  linkType: hard
+
 "@monorepo-template/eslint-config-react-fixable@npm:^1.0.0":
   version: 1.0.0
   resolution: "@monorepo-template/eslint-config-react-fixable@npm:1.0.0"
@@ -6222,6 +6248,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react95/core@npm:^5.7.3":
+  version: 5.7.3
+  resolution: "@react95/core@npm:5.7.3"
+  dependencies:
+    "@react95/icons": ^2.0.4
+    "@testing-library/react-hooks": ^3.2.1
+    "@types/react-virtualized": ^9.21.10
+    "@xstyled/styled-components": ^1.17.1
+    csstype: ^3.0.3
+    nanoid: ^3.1.22
+    react-draggable: ^4.3.1
+    styled-system: ^5.1.5
+    typescript: ^3.9.7
+  peerDependencies:
+    react: ^16.14.0
+    react-dom: ^16.14.0
+    styled-components: ^5.1.0
+  checksum: 3a91c24ce1962a218cff872cda441283a1660be20be78a2fcc7ac3508ea3b637e436fa8b63cc0420a5d4455b95994dfe7d4d17a23b871ff5794eac39bfab1b3f
+  languageName: node
+  linkType: hard
+
+"@react95/icons@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "@react95/icons@npm:2.0.4"
+  checksum: 5cdb0e19b87711fe8ec2334cdb99703d0297a8c42c23e85da1f3f3721a8697995e31c44c46ae881922d70f036521c1ec474e2e339e32d328da4d02db87c5cd4b
+  languageName: node
+  linkType: hard
+
 "@rollup/plugin-node-resolve@npm:^7.1.1":
   version: 7.1.3
   resolution: "@rollup/plugin-node-resolve@npm:7.1.3"
@@ -6486,6 +6540,122 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@styled-system/background@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@styled-system/background@npm:5.1.2"
+  dependencies:
+    "@styled-system/core": ^5.1.2
+  checksum: 2f5af340239d02310f95831e12a1acf2408194fc7e46b691db9ec6f105879455b5a128d863396654b8859c7d5f4a40fcfa4abd11111a3208d3de45f80ebbf2fc
+  languageName: node
+  linkType: hard
+
+"@styled-system/border@npm:^5.1.5":
+  version: 5.1.5
+  resolution: "@styled-system/border@npm:5.1.5"
+  dependencies:
+    "@styled-system/core": ^5.1.2
+  checksum: ff09e59b89b0ba62de7817025dd1f627187b1ce6fe6153eedaf31a402441a53f70763ce1fc8f9bf5796e973da60b910a043e37a0ff89f1360fb9d0bc13b1195c
+  languageName: node
+  linkType: hard
+
+"@styled-system/color@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@styled-system/color@npm:5.1.2"
+  dependencies:
+    "@styled-system/core": ^5.1.2
+  checksum: 3ab7ee7284a5e8ab5df28ef0355aa45b7c5a27d7665dc77d31ecde2d8a619e7eff064c88d0498a4c416a5f30a0abdd955aba811398d83a3155e9b7540574cd28
+  languageName: node
+  linkType: hard
+
+"@styled-system/core@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@styled-system/core@npm:5.1.2"
+  dependencies:
+    object-assign: ^4.1.1
+  checksum: fac6b7d6b04790b2972bf877b77e0b6dba0addc54ecc39c12be659201ba1e1d4c260dee86d5048084d1745b800f3efd528c32ff2f9ee3f2661f683088672ffb6
+  languageName: node
+  linkType: hard
+
+"@styled-system/css@npm:^5.1.5":
+  version: 5.1.5
+  resolution: "@styled-system/css@npm:5.1.5"
+  checksum: 0d3579ae82f5f53412c22e675aec9f77fa17b52deddc03d680340d8187006f1698ef0577db30a3c57ee0204f83ec61bb8a01105c3f0d60ca5c925a70175b5358
+  languageName: node
+  linkType: hard
+
+"@styled-system/flexbox@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@styled-system/flexbox@npm:5.1.2"
+  dependencies:
+    "@styled-system/core": ^5.1.2
+  checksum: adfecfd6d969174d0d2b7aa33c82709d1a8c4f1eedc295dfe0f966fa1075ed5e2573addfae849a604820c13db5589284a207f04acbdba195f9c7dd03d2d58db1
+  languageName: node
+  linkType: hard
+
+"@styled-system/grid@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@styled-system/grid@npm:5.1.2"
+  dependencies:
+    "@styled-system/core": ^5.1.2
+  checksum: 7e29e96677f7fdd6edb4e019f7521a80b79521d5d768d6f94943f2026b369d1020d410f8b4abb7ec291bc17ab5bad84ba6aafc65f20f741f017ff32a885c358c
+  languageName: node
+  linkType: hard
+
+"@styled-system/layout@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@styled-system/layout@npm:5.1.2"
+  dependencies:
+    "@styled-system/core": ^5.1.2
+  checksum: 318e388a2ab072a0654c732777779453c9d3d8677e22a984d0ef42a10b9fbd0296207af258edbf110ecb6e5e0701ba969d8d3f3eb87641c8c984c6388bd38723
+  languageName: node
+  linkType: hard
+
+"@styled-system/position@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@styled-system/position@npm:5.1.2"
+  dependencies:
+    "@styled-system/core": ^5.1.2
+  checksum: 6e3d1b8cc21b4863ba507e15b299c6a54406055269abf8a9721eae4803597a53de7bebea64646298f1122e7aca0aacbbf877565d9539ecd2b6a32e7507fe9b15
+  languageName: node
+  linkType: hard
+
+"@styled-system/shadow@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@styled-system/shadow@npm:5.1.2"
+  dependencies:
+    "@styled-system/core": ^5.1.2
+  checksum: bfb45737e9375a976b1e0ec2c4b548b0d4bcc3c78ab4cb69558a5d8c145adcf5fb623abb3c5e7704652c65bf2b7c0d8a80447adbda99d88be65517ab7c2367e4
+  languageName: node
+  linkType: hard
+
+"@styled-system/space@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@styled-system/space@npm:5.1.2"
+  dependencies:
+    "@styled-system/core": ^5.1.2
+  checksum: 959b6b69cf8226d798c38e2036fa2bccc3d9917f764322c4a3cf15adcc3c31aeb93fe34cfb826927116fc39b75185f6ed0bb720af3e19e028fb76308aecfa566
+  languageName: node
+  linkType: hard
+
+"@styled-system/typography@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@styled-system/typography@npm:5.1.2"
+  dependencies:
+    "@styled-system/core": ^5.1.2
+  checksum: ae78eefb14e93b77c328e325f8b45f0052632a0642472ed29a1928f9180d3f8bde5d99ee01f1d976f8e2b11b6991464b3c34c3e88413cfeec2ba2b887c77f281
+  languageName: node
+  linkType: hard
+
+"@styled-system/variant@npm:^5.1.5":
+  version: 5.1.5
+  resolution: "@styled-system/variant@npm:5.1.5"
+  dependencies:
+    "@styled-system/core": ^5.1.2
+    "@styled-system/css": ^5.1.5
+  checksum: becddaa0269004bd788e25d6b5c6f92af1c87009fe31844b4c19bba5233d54e59cfc4c007f8825d812db84c8d1bade5f8a99eb744db41c9124e0c145db64b5b5
+  languageName: node
+  linkType: hard
+
 "@surma/rollup-plugin-off-main-thread@npm:^1.1.1":
   version: 1.4.2
   resolution: "@surma/rollup-plugin-off-main-thread@npm:1.4.2"
@@ -6649,6 +6819,19 @@ __metadata:
     lz-string: ^1.4.4
     pretty-format: ^27.0.2
   checksum: 8d3778b59c08dba4f1ba62823c0dad0990d2fcbd0396fcf0b8a2c4ce7420f8c5adbcae708f8f58a75ead749bd06d9ef4285187763abb18ac464ed47c2f8e332b
+  languageName: node
+  linkType: hard
+
+"@testing-library/react-hooks@npm:^3.2.1":
+  version: 3.7.0
+  resolution: "@testing-library/react-hooks@npm:3.7.0"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+    "@types/testing-library__react-hooks": ^3.4.0
+  peerDependencies:
+    react: ">=16.9.0"
+    react-test-renderer: ">=16.9.0"
+  checksum: 7ada35cb4114056908990250033527ffd554d055eced797083aca752fb9789b3bc70291077f1d57b8cf64ab5eb7b3827f9de3bcaa38655f2b975c65a33a418d6
   languageName: node
   linkType: hard
 
@@ -6841,6 +7024,16 @@ __metadata:
   version: 4.7.10
   resolution: "@types/history@npm:4.7.10"
   checksum: 6cd70136a086cac4e1e7832769b1d3952ac3adb73a1b34d7adc0dce87ea7a2707a86b855fac5b74dfa02b17251a79320402c3e079f7a03c24d65e0460fdeba64
+  languageName: node
+  linkType: hard
+
+"@types/hoist-non-react-statics@npm:*":
+  version: 3.3.1
+  resolution: "@types/hoist-non-react-statics@npm:3.3.1"
+  dependencies:
+    "@types/react": "*"
+    hoist-non-react-statics: ^3.3.0
+  checksum: 2c0778570d9a01d05afabc781b32163f28409bb98f7245c38d5eaf082416fdb73034003f5825eb5e21313044e8d2d9e1f3fe2831e345d3d1b1d20bcd12270719
   languageName: node
   linkType: hard
 
@@ -7062,6 +7255,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-test-renderer@npm:*":
+  version: 17.0.1
+  resolution: "@types/react-test-renderer@npm:17.0.1"
+  dependencies:
+    "@types/react": "*"
+  checksum: ecaae8df36cd8cfeb89080d52534856acc3789bad9a6e369ff5119426377c827b4e5b5daa638507f2c1c2fd6c994bf45de288a698143178cd4049c2cd8b77b35
+  languageName: node
+  linkType: hard
+
 "@types/react-test-renderer@npm:>=16.9.0":
   version: 17.0.0
   resolution: "@types/react-test-renderer@npm:17.0.0"
@@ -7077,6 +7279,16 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: 86e9ff9731798e12bc2afe0304678918769633b531dcf6397f86af81718fb7930ef8648e894eeb3718fc6eab6eb885cfb9b82a44d1d74e10951ee11ebc4643ae
+  languageName: node
+  linkType: hard
+
+"@types/react-virtualized@npm:^9.21.10":
+  version: 9.21.20
+  resolution: "@types/react-virtualized@npm:9.21.20"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/react": "*"
+  checksum: 70fd77d9a0fc498b4eb29a195f218fd10f6ca935025813d53d3937e1464580bfbfd3a0c84806530f21cf810c1f6cf1789656052a9714b23de46702b1ac1b73c5
   languageName: node
   linkType: hard
 
@@ -7171,10 +7383,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/styled-components@npm:*, @types/styled-components@npm:^5.1.24":
+  version: 5.1.24
+  resolution: "@types/styled-components@npm:5.1.24"
+  dependencies:
+    "@types/hoist-non-react-statics": "*"
+    "@types/react": "*"
+    csstype: ^3.0.2
+  checksum: 158c69085ad899622f558426c623d3052f7b521ede01c0fd342280c93ef2ac462a39c4c3b2374e7c7e2630fcc64dfcfd8f4446c8d4809cbac9a7b962a73357c0
+  languageName: node
+  linkType: hard
+
 "@types/tapable@npm:^1, @types/tapable@npm:^1.0.5":
   version: 1.0.8
   resolution: "@types/tapable@npm:1.0.8"
   checksum: b4b754dd0822c407b8f29ef6b766490721c276880f9e976d92ee2b3ef915f11a05a2442ae36c8978bcd872ad6bc833b0a2c4d267f2d611590668a366bad50652
+  languageName: node
+  linkType: hard
+
+"@types/testing-library__react-hooks@npm:^3.4.0":
+  version: 3.4.1
+  resolution: "@types/testing-library__react-hooks@npm:3.4.1"
+  dependencies:
+    "@types/react-test-renderer": "*"
+  checksum: f32a5659330a7c2e555bffa74807f7331b1d2fcdd5fe4c08cc9130a0a12826f5f1c5bdf3210e7b2b4c9b774bddecc283171a347f78dc98d28836b0f773583a03
   languageName: node
   linkType: hard
 
@@ -7216,6 +7448,27 @@ __metadata:
     anymatch: ^3.0.0
     source-map: ^0.6.0
   checksum: e594a1357cbbc2f7c6ca47785c5a11adb5591a774a69afaeab07cd6f6bff6c6aea2030bd37b32bdd19d0ec2336a346db754e8d8d236ba8effeab542716fb32b7
+  languageName: node
+  linkType: hard
+
+"@types/xstyled__styled-components@npm:^1.19.2":
+  version: 1.19.2
+  resolution: "@types/xstyled__styled-components@npm:1.19.2"
+  dependencies:
+    "@types/react": "*"
+    "@types/styled-components": "*"
+    "@types/xstyled__system": "*"
+  checksum: d974ea04231bd2b3890b3427171640ab0ac3e1e9b491f532e02861290104a45939bd428674cc0a6a1398416b26bc8859b77b6b43be08ddb52fd0b3c4c6e35cac
+  languageName: node
+  linkType: hard
+
+"@types/xstyled__system@npm:*":
+  version: 1.19.3
+  resolution: "@types/xstyled__system@npm:1.19.3"
+  dependencies:
+    "@types/react": "*"
+    csstype: ^3.0.2
+  checksum: 622ef9d8a5ab232c9ac6420ea0473ffdb0a7f16957ae4431eb5727c958752cb547f4d54ccb51b508751a701010a295e4f6efd180eab8ebe07e148f4663754b44
   languageName: node
   linkType: hard
 
@@ -7705,6 +7958,49 @@ __metadata:
     "@webassemblyjs/wast-parser": 1.9.0
     "@xtuc/long": 4.2.2
   checksum: 3d1e1b2e84745a963f69acd1c02425b321dd2e608e11dabc467cae0c9a808962bc769ec9afc46fbcea7188cc1e47d72370da762d258f716fb367cb1a7865c54b
+  languageName: node
+  linkType: hard
+
+"@xstyled/core@npm:^1.19.1":
+  version: 1.19.1
+  resolution: "@xstyled/core@npm:1.19.1"
+  dependencies:
+    "@babel/runtime": ^7.11.2
+    "@xstyled/system": ^1.19.1
+  checksum: d0245f60c0b0486889fbe599d6301ae50f4ab7713f89e24b5b5e56c5e70c64ba6c62fab90e9dd71860971cbe5f5c865eabda151e28db457ed58944c8c35eeb5f
+  languageName: node
+  linkType: hard
+
+"@xstyled/styled-components@npm:^1.17.1":
+  version: 1.19.1
+  resolution: "@xstyled/styled-components@npm:1.19.1"
+  dependencies:
+    "@babel/runtime": ^7.11.2
+    "@xstyled/core": ^1.19.1
+    "@xstyled/system": ^1.19.1
+    "@xstyled/util": ^1.19.0
+  peerDependencies:
+    styled-components: ^4.0.0 || ^5.0.0
+  checksum: 3c9b332bdd2c33e716ca9a73e3b01a683e882726a4a4840f9779f625020a94940034d7afc021d2136e617724650092092ba8495a84d6fb244e86d2d3ee5343eb
+  languageName: node
+  linkType: hard
+
+"@xstyled/system@npm:^1.19.1":
+  version: 1.19.1
+  resolution: "@xstyled/system@npm:1.19.1"
+  dependencies:
+    "@babel/runtime": ^7.11.2
+    "@xstyled/util": ^1.19.0
+  checksum: 043045bf0ebc93b66e08df31622d696bce70cfd7b1bb1664f27e68f714228785ece27038cf8bd4c14fbd83c4f93d61a4d65de6c7ca3657feb3d058c5b442d83f
+  languageName: node
+  linkType: hard
+
+"@xstyled/util@npm:^1.19.0":
+  version: 1.19.0
+  resolution: "@xstyled/util@npm:1.19.0"
+  dependencies:
+    "@babel/runtime": ^7.11.2
+  checksum: 9b94e051d7715aaf9cae1c43d31d5a0d6007d2c598c4aadc5dafb9fa67337551c894f8d7d20f2e7795132761f9f6747b13b4106c493ec291c9377c7f23a44750
   languageName: node
   linkType: hard
 
@@ -10012,6 +10308,7 @@ __metadata:
     "@fullstory/browser": ^1.4.10
     "@monorepo-template/coverage": ^1.0.1
     "@monorepo-template/cypress-coverage-config-override": ^1.0.0
+    "@monorepo-template/cypress-coverage-plugin": ^1.0.0
     "@monorepo-template/eslint-config-react-fixable": ^1.0.0
     "@monorepo-template/eslint-config-react-strict": ^1.0.0
     "@monorepo-template/eslint-config-react-typescript": ^1.0.0
@@ -10025,6 +10322,8 @@ __metadata:
     "@mui/material": ^5.2.8
     "@mui/system": ^5.2.8
     "@mui/utils": ^5.2.3
+    "@react95/core": ^5.7.3
+    "@react95/icons": ^2.0.4
     "@sentry/browser": ^6.16.1
     "@sentry/fullstory": ^1.1.7
     "@sentry/react": ^6.16.1
@@ -10039,6 +10338,8 @@ __metadata:
     "@types/node": ^17.0.8
     "@types/react": ^17.0.38
     "@types/react-dom": ^17.0.11
+    "@types/styled-components": ^5.1.24
+    "@types/xstyled__styled-components": ^1.19.2
     "@typescript-eslint/eslint-plugin": ^5.9.1
     "@typescript-eslint/parser": ^5.9.1
     "@yarnpkg/sdks": ^2.6.0-rc.2
@@ -11306,6 +11607,13 @@ __metadata:
   version: 3.0.5
   resolution: "csstype@npm:3.0.5"
   checksum: bf6a7c84c246b09e4ac21c4890f3e9f7cd203e819fa5f59fee4b642e6a11d403abc5e5fb611367737caec69dec9ccaaa92397d4d528dd99ff0f03791687dd136
+  languageName: node
+  linkType: hard
+
+"csstype@npm:^3.0.3":
+  version: 3.0.11
+  resolution: "csstype@npm:3.0.11"
+  checksum: 95e56abfe9ca219ae065acb4e43f61771a03170eed919127f558dfa168240867aba7629c8d98a201a0dd06d9a5ce82686f0570031c928516c61816adbc7c877f
   languageName: node
   linkType: hard
 
@@ -14607,7 +14915,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.3.1, hoist-non-react-statics@npm:^3.3.2":
+"hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.1, hoist-non-react-statics@npm:^3.3.2":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:
@@ -18453,6 +18761,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^3.1.22":
+  version: 3.3.1
+  resolution: "nanoid@npm:3.3.1"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 4ef0969e1bbe866fc223eb32276cbccb0961900bfe79104fa5abe34361979dead8d0e061410a5c03bc3d47455685adf32c09d6f27790f4a6898fb51f7df7ec86
+  languageName: node
+  linkType: hard
+
 "nanoid@npm:^3.1.30":
   version: 3.1.30
   resolution: "nanoid@npm:3.1.30"
@@ -21131,6 +21448,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-draggable@npm:^4.3.1":
+  version: 4.4.4
+  resolution: "react-draggable@npm:4.4.4"
+  dependencies:
+    clsx: ^1.1.1
+    prop-types: ^15.6.0
+  peerDependencies:
+    react: ">= 16.3.0"
+    react-dom: ">= 16.3.0"
+  checksum: b8258a58938c261a79f1b9ffd67774283c1ac732423c1c9c9f5fe4d17a06886edd659891e445ba089828ca59f1885e5b909262e24cf60640b8ed05c8499c88bb
+  languageName: node
+  linkType: hard
+
 "react-error-boundary@npm:^3.1.0":
   version: 3.1.0
   resolution: "react-error-boundary@npm:3.1.0"
@@ -23429,6 +23759,27 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"styled-system@npm:^5.1.5":
+  version: 5.1.5
+  resolution: "styled-system@npm:5.1.5"
+  dependencies:
+    "@styled-system/background": ^5.1.2
+    "@styled-system/border": ^5.1.5
+    "@styled-system/color": ^5.1.2
+    "@styled-system/core": ^5.1.2
+    "@styled-system/flexbox": ^5.1.2
+    "@styled-system/grid": ^5.1.2
+    "@styled-system/layout": ^5.1.2
+    "@styled-system/position": ^5.1.2
+    "@styled-system/shadow": ^5.1.2
+    "@styled-system/space": ^5.1.2
+    "@styled-system/typography": ^5.1.2
+    "@styled-system/variant": ^5.1.5
+    object-assign: ^4.1.1
+  checksum: e1345f88e0962ad785a500b656c9b7120d87e12ab16b7c107cf745d676190918b169a849eacdf3b09b2f765d9e22838c00211200f6ebbb3cde8eaddce3535054
+  languageName: node
+  linkType: hard
+
 "stylehacks@npm:^4.0.0":
   version: 4.0.3
   resolution: "stylehacks@npm:4.0.3"
@@ -24223,6 +24574,16 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"typescript@npm:^3.9.7":
+  version: 3.9.10
+  resolution: "typescript@npm:3.9.10"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 46c842e2cd4797b88b66ef06c9c41dd21da48b95787072ccf39d5f2aa3124361bc4c966aa1c7f709fae0509614d76751455b5231b12dbb72eb97a31369e1ff92
+  languageName: node
+  linkType: hard
+
 "typescript@npm:^4.5.4":
   version: 4.5.4
   resolution: "typescript@npm:4.5.4"
@@ -24230,6 +24591,16 @@ resolve@^2.0.0-next.3:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 59f3243f9cd6fe3161e6150ff6bf795fc843b4234a655dbd938a310515e0d61afd1ac942799e7415e4334255e41c2c49b7dd5d9fd38a17acd25a6779ca7e0961
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^3.9.7#~builtin<compat/typescript>":
+  version: 3.9.10
+  resolution: "typescript@patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=493e53"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: dc7141ab555b23a8650a6787f98845fc11692063d02b75ff49433091b3af2fe3d773650dea18389d7c21f47d620fb3b110ea363dab4ab039417a6ccbbaf96fc2
   languageName: node
   linkType: hard
 

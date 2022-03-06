@@ -8,7 +8,9 @@
 /.yarn/build-state.yml
 /.yarn/install-state.gz
 /build/
-/cypress/
+/cypress/coverage/
+/cypress/screenshots/
+/cypress/videos/
 /dist/
 /jest/cache/
 /jest/coverage/

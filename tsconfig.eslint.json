@@ -8,11 +8,15 @@
   },
 
   "exclude": [
-    "/.yarn/",
-    "/build/",
-    "/cypress/",
-    "/jest/",
-    "/node_modules/",
-    "/types/"
+    ".git/",
+    ".idea/",
+    ".yarn/",
+    "build/",
+    "coverage/",
+    "cypress/coverage/",
+    "cypress/screenshots/",
+    "cypress/videos/",
+    "jest/",
+    "node_modules/"
   ]
 }
