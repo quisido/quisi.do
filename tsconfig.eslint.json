@@ -16,7 +16,8 @@
     "cypress/coverage/",
     "cypress/screenshots/",
     "cypress/videos/",
-    "jest/",
+    "jest/cache/",
+    "jest/coverage/",
     "node_modules/"
   ]
 }
