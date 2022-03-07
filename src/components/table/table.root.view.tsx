@@ -18,6 +18,7 @@ export default function Table<Item>(
       components={{
         [DesignSystem.Aws]: AwsTable,
         [DesignSystem.Material]: MuiTable,
+        [DesignSystem.React95]: AwsTable,
       }}
       props={props as Readonly<Props<unknown>>}
     />

@@ -7,6 +7,7 @@ import type Props from './types/props';
 
 const AwsLink = lazy(async () => import('./link.aws.view'));
 const MuiLink = lazy(async () => import('./link.mui.view'));
+const React95Link = lazy(async () => import('./link.react95.view'));
 
 export default function Link({
   children,
@@ -19,6 +20,7 @@ export default function Link({
       components={{
         [DesignSystem.Aws]: AwsLink,
         [DesignSystem.Material]: MuiLink,
+        [DesignSystem.React95]: React95Link,
       }}
       fallback={
         <ReactRouterLink className={className} title={title} to={href}>

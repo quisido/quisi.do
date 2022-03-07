@@ -10,6 +10,10 @@ const DESIGN_SYSTEM_OPTIONS: readonly SelectOption[] = [
     label: 'Material',
     value: DesignSystem.Material,
   },
+  {
+    label: 'React95',
+    value: DesignSystem.React95,
+  },
 ];
 
 export default DESIGN_SYSTEM_OPTIONS;

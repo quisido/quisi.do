@@ -1,6 +1,6 @@
 {
   "extends": "@monorepo-template/tsconfig",
-  "include": ["src"],
+  "include": ["**/*"],
 
   "compilerOptions": {
     "jsx": "react-jsx",

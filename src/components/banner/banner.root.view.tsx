@@ -6,6 +6,7 @@ import type Props from './types/props';
 
 const AwsBanner = lazy(async () => import('./banner.aws.view'));
 const MuiBanner = lazy(async () => import('./banner.mui.view'));
+const React95Banner = lazy(async () => import('./banner.react95.view'));
 
 export default function Banner(props: Readonly<Props>): ReactElement {
   return (
@@ -13,6 +14,7 @@ export default function Banner(props: Readonly<Props>): ReactElement {
       components={{
         [DesignSystem.Aws]: AwsBanner,
         [DesignSystem.Material]: MuiBanner,
+        [DesignSystem.React95]: React95Banner,
       }}
       props={props}
     />

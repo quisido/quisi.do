@@ -33,6 +33,7 @@ export default function Wrapper({
       components={{
         [DesignSystem.Aws]: AwsWrapper,
         [DesignSystem.Material]: MuiWrapper,
+        [DesignSystem.React95]: MuiWrapper,
       }}
       fallback={<Fallback>{fallback}</Fallback>}
       props={{

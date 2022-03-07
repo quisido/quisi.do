@@ -6,6 +6,7 @@ import type Props from './types/props';
 
 const AwsHeader = lazy(async () => import('./header.aws.view'));
 const MuiHeader = lazy(async () => import('./header.mui.view'));
+const React95Header = lazy(async () => import('./header.react95.view'));
 
 export default function Header(props: Readonly<Props>): ReactElement {
   return (
@@ -13,6 +14,7 @@ export default function Header(props: Readonly<Props>): ReactElement {
       components={{
         [DesignSystem.Aws]: AwsHeader,
         [DesignSystem.Material]: MuiHeader,
+        [DesignSystem.React95]: React95Header,
       }}
       props={props}
     />

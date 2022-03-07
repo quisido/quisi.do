@@ -6,6 +6,7 @@ import type Props from './types/props';
 
 const AwsSelect = lazy(async () => import('./select.aws.view'));
 const MuiSelect = lazy(async () => import('./select.mui.view'));
+const React95Select = lazy(async () => import('./select.react95.view'));
 
 export default function Select(props: Readonly<Props>): ReactElement {
   return (
@@ -13,6 +14,7 @@ export default function Select(props: Readonly<Props>): ReactElement {
       components={{
         [DesignSystem.Aws]: AwsSelect,
         [DesignSystem.Material]: MuiSelect,
+        [DesignSystem.React95]: React95Select,
       }}
       props={props}
     />

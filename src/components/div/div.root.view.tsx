@@ -6,6 +6,7 @@ import type Props from './types/props';
 
 const AwsDiv = lazy(async () => import('./div.aws.view'));
 const MuiDiv = lazy(async () => import('./div.mui.view'));
+const React95Div = lazy(async () => import('./div.react95.view'));
 
 export default function Div(props: Readonly<Props>): ReactElement {
   return (
@@ -13,6 +14,7 @@ export default function Div(props: Readonly<Props>): ReactElement {
       components={{
         [DesignSystem.Aws]: AwsDiv,
         [DesignSystem.Material]: MuiDiv,
+        [DesignSystem.React95]: React95Div,
       }}
       props={props}
     />

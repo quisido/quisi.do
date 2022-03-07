@@ -6,6 +6,7 @@ import type Props from './types/props';
 
 const AwsCards = lazy(async () => import('./cards.aws.view'));
 const MuiCards = lazy(async () => import('./cards.mui.view'));
+const React95Cards = lazy(async () => import('./cards.react95.view'));
 
 export default function Cards<Item>(
   props: Readonly<Props<Item>>,
@@ -18,6 +19,7 @@ export default function Cards<Item>(
       components={{
         [DesignSystem.Aws]: AwsCards,
         [DesignSystem.Material]: MuiCards,
+        [DesignSystem.React95]: React95Cards,
       }}
       props={props as Readonly<Props<unknown>>}
     />

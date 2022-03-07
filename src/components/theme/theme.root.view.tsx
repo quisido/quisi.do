@@ -6,6 +6,7 @@ import type Props from './types/props';
 
 const AwsTheme = lazy(async () => import('./theme.aws.view'));
 const MuiTheme = lazy(async () => import('./theme.mui.view'));
+const React95Theme = lazy(async () => import('./theme.react95.view'));
 
 export default function Theme({ children }: Readonly<Props>): ReactElement {
   return (
@@ -13,6 +14,7 @@ export default function Theme({ children }: Readonly<Props>): ReactElement {
       components={{
         [DesignSystem.Aws]: AwsTheme,
         [DesignSystem.Material]: MuiTheme,
+        [DesignSystem.React95]: React95Theme,
       }}
       props={{ children }}
     />
