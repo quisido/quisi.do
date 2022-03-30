@@ -2,10 +2,7 @@ import FormField from '@awsui/components-react/form-field';
 import type { ChangeEvent, ReactElement } from 'react';
 
 interface Props {
-  readonly onChange: (
-    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-    event: ChangeEvent<HTMLInputElement>,
-  ) => void;
+  readonly onChange: (event: Readonly<ChangeEvent<HTMLInputElement>>) => void;
 }
 
 export default function SpriteSheet2GifImageFileInput({

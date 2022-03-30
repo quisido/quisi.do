@@ -21,21 +21,20 @@ const describedClassNames: readonly string[] = [
 
 const describedClassName: string = describedClassNames.join(' ');
 
-// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
 const DescribedStyledRow = styled(TableRow)(({ theme }) => ({
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   '&:nth-of-type(4n), &:nth-of-type(4n - 1)': {
     backgroundColor: theme.palette.action.hover,
   },
 }));
 
-// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
 const StyledRow = styled(TableRow)(({ theme }) => ({
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
 }));
 
-// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
 export default function MuiTableRow({
   Description,
   cellProps,

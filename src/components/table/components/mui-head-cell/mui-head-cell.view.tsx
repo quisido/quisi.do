@@ -8,24 +8,27 @@ import type { ReactElement } from 'react';
 import type Props from '../../types/mui-head-cell-props';
 import useMuiTableHeadCell from './mui-head-cell.hook';
 
-// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-const mapPaletteToBackgroundColor = ({ mode, primary }: Palette): string => {
+const mapPaletteToBackgroundColor = ({
+  mode,
+  primary,
+}: Readonly<Palette>): string => {
   if (mode === 'dark') {
     return primary.dark;
   }
   return primary.light;
 };
 
-// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
 const StyledCell = styled(Cell)(({ theme }) => ({
   root: {
     backgroundColor: mapPaletteToBackgroundColor(theme.palette),
     color: theme.palette.common.white,
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     '& .Mui-active, & .Mui-active svg': {
       color: theme.palette.common.white,
     },
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     '& .MuiTableSortLabel-root:hover, & .MuiTableSortLabel-root:hover svg': {
       color: theme.palette.common.white,
     },

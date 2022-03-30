@@ -1,10 +1,13 @@
+import type { QueryObserverResult } from 'react-query';
 import { useQuery } from 'react-query';
 
 interface State {
   readonly data?: Record<string, number[]> | undefined;
   readonly error: unknown;
   readonly isLoading: boolean;
-  readonly refetch: () => void;
+  readonly refetch: () => Promise<
+    QueryObserverResult<Record<string, number[]>>
+  >;
 }
 
 export default function useNpmDownloads(): State {

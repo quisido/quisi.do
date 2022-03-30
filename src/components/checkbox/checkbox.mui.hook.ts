@@ -7,7 +7,6 @@ interface Props {
 
 interface State {
   readonly handleChange: (
-    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     event: Readonly<ChangeEvent<Readonly<HTMLInputElement>>>,
   ) => void;
 }
@@ -15,7 +14,6 @@ interface State {
 export default function useMuiCheckbox({ onChange }: Readonly<Props>): State {
   return {
     handleChange: useCallback(
-      // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
       (e: Readonly<ChangeEvent<Readonly<HTMLInputElement>>>): void => {
         onChange(e.target.checked);
       },

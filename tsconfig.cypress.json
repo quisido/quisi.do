@@ -1,14 +1,5 @@
 {
-  "compileOnSave": false,
-  "extends": "./tsconfig.json",
-
-  "compilerOptions": {
-    "importHelpers": true,
-    "inlineSourceMap": true,
-    "sourceMap": true,
-    "types": ["cypress"]
-  },
-
+  "extends": "@monorepo-template/react-application-tsconfig/cypress",
   "exclude": [
     "build",
     "coverage",

@@ -33,7 +33,6 @@ interface State {
     page: number,
   ) => void;
   readonly handleRowsPerPageChange: (
-    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 }
@@ -66,7 +65,6 @@ export default function useMuiTable<Item>({
     ),
 
     handleRowsPerPageChange: useCallback(
-      // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
       (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         const newRowsPerPage: number = parseInt(e.target.value, BASE);
         onRowsPerPageChange(newRowsPerPage);

@@ -11,8 +11,9 @@ interface Props {
 
 interface State {
   readonly variant: 'contained';
-  readonly handleClick: // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-  ((event: Readonly<MouseEvent<HTMLButtonElement>>) => void) | undefined;
+  readonly handleClick:
+    | ((event: Readonly<MouseEvent<HTMLButtonElement>>) => void)
+    | undefined;
 }
 
 export default function useMuiButton({ href }: Readonly<Props>): State {
@@ -22,23 +23,21 @@ export default function useMuiButton({ href }: Readonly<Props>): State {
   return {
     variant: 'contained',
 
-    handleClick:
-      useMemo((): // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
+    handleClick: useMemo(():
       | ((event: Readonly<MouseEvent<HTMLButtonElement>>) => void)
-        | undefined => {
-        if (typeof href !== 'string') {
+      | undefined => {
+      if (typeof href !== 'string') {
+        return;
+      }
+
+      return (e: Readonly<MouseEvent<HTMLButtonElement>>): void => {
+        e.preventDefault();
+        if (isBlank) {
+          window.open(href, '_blank');
           return;
         }
-
-        // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-        return (e: Readonly<MouseEvent<HTMLButtonElement>>): void => {
-          e.preventDefault();
-          if (isBlank) {
-            window.open(href, '_blank');
-            return;
-          }
-          navigate(href);
-        };
-      }, [href, isBlank, navigate]),
+        navigate(href);
+      };
+    }, [href, isBlank, navigate]),
   };
 }
