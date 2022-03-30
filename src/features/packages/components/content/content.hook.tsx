@@ -1,6 +1,6 @@
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useDeferredValue, useMemo, useState } from 'react';
 import useNpmDownloads from '../../../../hooks/use-npm-downloads';
 import type TableColumn from '../../../../types/table-column';
 import type TableRowsPerPageOption from '../../../../types/table-rows-per-page-option';
@@ -69,6 +69,14 @@ export default function usePackagesContent(): State {
     DEFAULT_VISIBLE_COLUMN_INDICES,
   );
 
+  const deferredFilter: string = useDeferredValue(filter);
+  const deferredPage: number = useDeferredValue(page);
+  const deferredRowsPerPage: number = useDeferredValue(rowsPerPage);
+  const deferredSortAscending: boolean = useDeferredValue(sortAscending);
+  const deferredSortColumnIndex: number = useDeferredValue(sortColumnIndex);
+
+  const columns: readonly TableColumn<Item>[] = useColumns(deferredFilter);
+
   const items: readonly Item[] = useMemo((): readonly Item[] => {
     if (filterByUndefined(data)) {
       return [];
@@ -77,17 +85,19 @@ export default function usePackagesContent(): State {
     return entries.map(mapNpmDownloadsEntryToItem).filter(filterDefaultPackage);
   }, [data]);
 
-  const columns: readonly TableColumn<Item>[] = useColumns(filter);
-
   const filteredItems: readonly Item[] = useMemo((): readonly Item[] => {
     const filterByFilter = ({ packageName }: Readonly<Item>): boolean =>
-      packageName.includes(filter);
+      packageName.includes(deferredFilter);
     return items.filter(filterByFilter);
-  }, [filter, items]);
+  }, [deferredFilter, items]);
 
   const paginator: Paginator = useMemo(
-    (): Paginator => new Paginator({ page, rowsPerPage }),
-    [page, rowsPerPage],
+    (): Paginator =>
+      new Paginator({
+        page: deferredPage,
+        rowsPerPage: deferredRowsPerPage,
+      }),
+    [deferredPage, deferredRowsPerPage],
   );
 
   return {
@@ -121,18 +131,24 @@ export default function usePackagesContent(): State {
       const newRows: Item[] = [...filteredItems];
 
       const sortColumn: TableColumn<Item> | undefined =
-        columns[sortColumnIndex];
+        columns[deferredSortColumnIndex];
       if (filterByUndefined(sortColumn)) {
-        throw new Error(`Expected column at index ${sortColumnIndex}.`);
+        throw new Error(`Expected column at index ${deferredSortColumnIndex}.`);
       }
 
       newRows.sort(sortColumn.sort);
-      if (!sortAscending) {
+      if (!deferredSortAscending) {
         newRows.reverse();
       }
 
       return paginator.paginate(newRows);
-    }, [columns, filteredItems, paginator, sortAscending, sortColumnIndex]),
+    }, [
+      columns,
+      deferredSortAscending,
+      deferredSortColumnIndex,
+      filteredItems,
+      paginator,
+    ]),
 
     rowsPerPageOptions: useMemo((): readonly TableRowsPerPageOption[] => {
       const mapNumberToPageSizeOption = (

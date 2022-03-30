@@ -1,6 +1,6 @@
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useDeferredValue, useMemo, useState } from 'react';
 import useDevStats from '../../../../hooks/use-dev-stats';
 import useMediumStats from '../../../../hooks/use-medium-stats';
 import filterByUndefined from '../../../../utils/filter-by-undefined';
@@ -44,6 +44,8 @@ export default function usePublicationsContents(): State {
   const [isBannerVisible, setIsBannerVisible] = useState(true);
   const [sort, setSort] = useState<Sort>(DEFAULT_SORT);
 
+  const deferredSort: Sort = useDeferredValue(sort);
+
   const items: readonly Publication[] = useItems({
     devData,
     mediumData,
@@ -72,9 +74,9 @@ export default function usePublicationsContents(): State {
 
     items: useMemo((): readonly Publication[] => {
       const newItems: Publication[] = [...items];
-      newItems.sort(mapSortToFunction(sort));
+      newItems.sort(mapSortToFunction(deferredSort));
       return newItems.filter(filterItemsByMinimumViews);
-    }, [items, sort]),
+    }, [deferredSort, items]),
 
     loading: useMemo((): string | undefined => {
       if (!isDevLoading && !isMediumLoading) {
