@@ -3,7 +3,6 @@ import type { SideNavigationProps } from '@awsui/components-react/side-navigatio
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo } from 'react';
-import Capsule, { useCapsule } from 'react-capsule';
 import { useSideNavigation } from 'use-awsui-router';
 import filterSideNavigationItemsByExpandable from '../../utils/filter-side-navigation-items-by-expandable';
 import filterSideNavigationItemsByHasItems from '../../utils/filter-side-navigation-items-by-has-items';
@@ -22,50 +21,67 @@ interface State {
   ) => void;
 }
 
-const expandedMapCapsule: Capsule<Map<string, boolean>> = new Capsule(
-  new Map<string, boolean>(),
-);
+const EXPANDED: Map<string, boolean> = new Map();
+
+const mapIndexPrefixToItemToExpandedMapper = (
+  indexPrefix: string,
+): ((
+  item: SideNavigationProps.Item,
+  index: number,
+) => SideNavigationProps.Item) => {
+  const mapIndexToId = (index: number): string => {
+    if (indexPrefix === '') {
+      return index.toString();
+    }
+    return `${indexPrefix}.${index}`;
+  };
+
+  return function mapItemToExpanded(
+    item: SideNavigationProps.Item,
+    index: number,
+  ): SideNavigationProps.Item {
+    const id: string = mapIndexToId(index);
+    const newItem: SideNavigationProps.Item = { ...item };
+
+    // If this item is expandable, check for an expanded state.
+    if (filterSideNavigationItemsByExpandable(newItem)) {
+      const newDefaultExpanded: boolean | undefined = EXPANDED.get(id);
+      if (typeof newDefaultExpanded === 'boolean') {
+        newItem.defaultExpanded = newDefaultExpanded;
+      }
+    }
+
+    // If this item has children, check them for expanded state.
+    if (filterSideNavigationItemsByHasItems(newItem)) {
+      const mapSubItemToExpanded = mapIndexPrefixToItemToExpandedMapper(id);
+      const newSubItems: SideNavigationProps.Item[] =
+        newItem.items.map(mapSubItemToExpanded);
+      newItem.items = newSubItems;
+    }
+    return newItem;
+  };
+};
+
+const mapItemToExpanded = mapIndexPrefixToItemToExpandedMapper('');
 
 export default function useAwsWrapperNavigation(): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
 
   // States
-  const [expandedMap, setExpandedMap] = useCapsule(expandedMapCapsule);
   const { activeHref, handleFollow } = useSideNavigation();
 
-  // TODO: Use nested indices, e.g. `5.0.1.3`, instead of text, since text is
-  //   subject to change on translation.
-  const recursiveExpand = useCallback(
-    (item: SideNavigationProps.Item): SideNavigationProps.Item => {
-      const newItem: SideNavigationProps.Item = { ...item };
-      if (
-        filterSideNavigationItemsByExpandable(newItem) &&
-        expandedMap.has(newItem.text)
-      ) {
-        const newDefaultExpanded: boolean | undefined = expandedMap.get(
-          newItem.text,
-        );
-        if (typeof newDefaultExpanded === 'boolean') {
-          newItem.defaultExpanded = newDefaultExpanded;
-        }
-      }
-      if (filterSideNavigationItemsByHasItems(newItem)) {
-        const newSubItems: SideNavigationProps.Item[] = [];
-        for (const subItem of newItem.items) {
-          const newSubItem: SideNavigationProps.Item = recursiveExpand(subItem);
-          newSubItems.push(newSubItem);
-        }
-        newItem.items = newSubItems;
-      }
-      return newItem;
-    },
-    [expandedMap],
-  );
+  const items: SideNavigationProps.Item[] =
+    useMemo((): SideNavigationProps.Item[] => {
+      const sideNavigationItems: readonly SideNavigationProps.Item[] =
+        mapTranslationFunctionToAwsSideNavigationItems(translate);
+      return sideNavigationItems.map(mapItemToExpanded);
+    }, [translate]);
 
   return {
     activeHref,
     handleFollow,
+    items,
 
     handleChange: useCallback(
       (
@@ -73,27 +89,21 @@ export default function useAwsWrapperNavigation(): State {
           NonCancelableCustomEvent<Readonly<SideNavigationProps.ChangeDetail>>
         >,
       ): void => {
-        setExpandedMap(
-          (
-            oldExpandedMap: Readonly<Map<string, boolean>>,
-          ): Map<string, boolean> => {
-            const newExpandedMap: Map<string, boolean> = new Map(
-              oldExpandedMap,
-            );
-            newExpandedMap.set(e.detail.item.text, e.detail.expanded);
-            return newExpandedMap;
-          },
-        );
+        let id = '';
+        let itemsPointer: readonly SideNavigationProps.Item[] = items;
+        for (const item of [...e.detail.expandableParents, e.detail.item]) {
+          const findItem = (i: SideNavigationProps.Item): boolean => i === item;
+          const itemIndex: number = itemsPointer.findIndex(findItem);
+          if (id === '') {
+            id = itemIndex.toString();
+          } else {
+            id = `${id}.${itemIndex}`;
+          }
+          itemsPointer = item.items;
+        }
+        EXPANDED.set(id, e.detail.expanded);
       },
-      [setExpandedMap],
-    ),
-
-    items: useMemo(
-      (): SideNavigationProps.Item[] =>
-        mapTranslationFunctionToAwsSideNavigationItems(translate).map(
-          recursiveExpand,
-        ),
-      [recursiveExpand, translate],
+      [items],
     ),
   };
 }
