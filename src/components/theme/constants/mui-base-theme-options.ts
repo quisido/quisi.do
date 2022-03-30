@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import ArrowDropDownRounded from '@mui/icons-material/ArrowDropDownRounded';
 import type { ThemeOptions } from '@mui/material/styles';

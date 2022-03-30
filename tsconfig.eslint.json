@@ -1,10 +1,9 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "@monorepo-template/react-application-tsconfig/eslint",
   "include": [".eslintrc.json", "**/*", "**/*.json"],
 
   "compilerOptions": {
-    "noEmit": true,
-    "sourceMap": false
+    "types": ["react/next", "react-dom/next"]
   },
 
   "exclude": [

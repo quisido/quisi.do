@@ -6,7 +6,7 @@ import { useMemo } from 'react';
 import useRoutingInstrumentation from 'react-router-v6-instrumentation';
 
 interface State {
-  readonly integrations: readonly Integration[];
+  readonly integrations: Integration[];
 }
 
 export default function useAppSentry(): State {
@@ -15,7 +15,7 @@ export default function useAppSentry(): State {
 
   return {
     integrations: useMemo(
-      (): readonly Integration[] => [
+      (): Integration[] => [
         new Integrations.BrowserTracing({
           routingInstrumentation,
         }),

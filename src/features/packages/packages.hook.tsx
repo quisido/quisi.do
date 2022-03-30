@@ -34,8 +34,10 @@ export default function usePackages(): State {
         newNotifications.push({
           CallToAction: RetryAction,
           message: mapUnknownToString(error),
-          onAction: refetch,
           type: 'error',
+          onAction: (): void => {
+            void refetch();
+          },
         });
       }
       return newNotifications;

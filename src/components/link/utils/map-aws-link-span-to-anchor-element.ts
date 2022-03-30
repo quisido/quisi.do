@@ -1,7 +1,6 @@
 const FIRST = 0;
 
 export default function mapAwsLinkSpanToAnchorElement(
-  // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
   span: Readonly<HTMLSpanElement>,
 ): HTMLAnchorElement {
   const a: HTMLAnchorElement | null = span

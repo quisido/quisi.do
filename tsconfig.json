@@ -1,12 +1,9 @@
 {
-  "extends": "@monorepo-template/tsconfig",
+  "extends": "@monorepo-template/react-application-tsconfig",
   "include": ["src"],
 
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "sourceMap": true,
-    "target": "ES5",
-    "types": ["jest"]
+    "types": ["react/next", "react-dom/next"]
   },
 
   "exclude": [

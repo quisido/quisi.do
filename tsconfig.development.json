@@ -1,8 +1,6 @@
 {
-  "extends": "./tsconfig.json",
-
+  "extends": "@monorepo-template/react-application-tsconfig/development",
   "compilerOptions": {
-    "jsx": "react-jsxdev",
-    "sourceMap": true
+    "types": ["react/next", "react-dom/next"]
   }
 }

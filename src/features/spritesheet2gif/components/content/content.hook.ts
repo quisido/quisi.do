@@ -66,7 +66,6 @@ interface State {
   ) => void;
   readonly handlePerFrameChange: (event: ReadonlySelectChangeEvent) => void;
   readonly handleSpriteSheetImageFileChange: (
-    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     event: ChangeEvent<HTMLInputElement>,
   ) => void;
 }
@@ -136,6 +135,62 @@ export default function useSpriteSheet2GifContent({
     null,
   );
 
+  const handleConvertClick = useCallback(async (): Promise<void> => {
+    if (spriteSheetImageFile === null) {
+      return;
+    }
+    setIsLoading(true);
+    const body: FormData = new FormData();
+    body.append('dimension', dimension.toString());
+    body.append('direction', direction);
+    body.append('duration', duration.toString());
+    body.append('matte', matte);
+    body.append('perFrame', perFrame ? 'true' : 'false');
+    body.append('sheet', spriteSheetImageFile);
+    const responsePromise: Promise<Response> = fetch(
+      process.env.REACT_APP_SPRITESHEET2GIF ??
+        'https://api.charlesstover.com/spritesheet2gif',
+      {
+        body,
+        cache: 'no-cache',
+        method: 'POST',
+        mode: 'cors',
+        redirect: 'follow',
+        referrer: 'no-referrer',
+      },
+    );
+    asyncConvertEffect.current = responsePromise;
+    try {
+      const response: Response = await responsePromise;
+      const apiResponse: unknown = await response.json();
+      if (isApiErrorResponse(apiResponse)) {
+        throw new Error(apiResponse.message);
+      }
+      if (!isApiGifResponse(apiResponse)) {
+        throw new Error('Invalid API response.');
+      }
+      setApiGifResponse(apiResponse);
+      onErrorDismiss();
+    } catch (err: unknown) {
+      setApiGifResponse(null);
+      if (!(err instanceof Error)) {
+        throw new Error(`Expected an error, but received ${typeof err}`);
+      }
+      onError(err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [
+    dimension,
+    direction,
+    duration,
+    matte,
+    onError,
+    onErrorDismiss,
+    perFrame,
+    spriteSheetImageFile,
+  ]);
+
   return {
     apiGifResponse,
     asyncConvertEffect,
@@ -163,61 +218,9 @@ export default function useSpriteSheet2GifContent({
       }
     }, [direction]),
 
-    handleConvertClick: useCallback(async (): Promise<void> => {
-      if (spriteSheetImageFile === null) {
-        return;
-      }
-      setIsLoading(true);
-      const body: FormData = new FormData();
-      body.append('dimension', dimension.toString());
-      body.append('direction', direction);
-      body.append('duration', duration.toString());
-      body.append('matte', matte);
-      body.append('perFrame', perFrame ? 'true' : 'false');
-      body.append('sheet', spriteSheetImageFile);
-      const responsePromise: Promise<Response> = fetch(
-        process.env.REACT_APP_SPRITESHEET2GIF ??
-          'https://api.charlesstover.com/spritesheet2gif',
-        {
-          body,
-          cache: 'no-cache',
-          method: 'POST',
-          mode: 'cors',
-          redirect: 'follow',
-          referrer: 'no-referrer',
-        },
-      );
-      asyncConvertEffect.current = responsePromise;
-      try {
-        const response: Response = await responsePromise;
-        const apiResponse: unknown = await response.json();
-        if (isApiErrorResponse(apiResponse)) {
-          throw new Error(apiResponse.message);
-        }
-        if (!isApiGifResponse(apiResponse)) {
-          throw new Error('Invalid API response.');
-        }
-        setApiGifResponse(apiResponse);
-        onErrorDismiss();
-      } catch (err: unknown) {
-        setApiGifResponse(null);
-        if (!(err instanceof Error)) {
-          throw new Error(`Expected an error, but received ${typeof err}`);
-        }
-        onError(err);
-      } finally {
-        setIsLoading(false);
-      }
-    }, [
-      dimension,
-      direction,
-      duration,
-      matte,
-      onError,
-      onErrorDismiss,
-      perFrame,
-      spriteSheetImageFile,
-    ]),
+    handleConvertClick: useCallback((): void => {
+      void handleConvertClick();
+    }, [handleConvertClick]),
 
     handleDimensionChange: useCallback(
       (
@@ -307,8 +310,7 @@ export default function useSpriteSheet2GifContent({
     }, []),
 
     handleSpriteSheetImageFileChange: useCallback(
-      // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-      (e: ChangeEvent<HTMLInputElement>): void => {
+      (e: Readonly<ChangeEvent<HTMLInputElement>>): void => {
         if (e.target.files === null) {
           setSpriteSheetImageFile(null);
           return;

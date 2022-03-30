@@ -1,7 +1,6 @@
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo, useState } from 'react';
-import ReactCapsule, { useCapsule } from 'react-capsule';
 import useDevStats from '../../../../hooks/use-dev-stats';
 import useMediumStats from '../../../../hooks/use-medium-stats';
 import filterByUndefined from '../../../../utils/filter-by-undefined';
@@ -23,16 +22,9 @@ interface State {
 
 const DEFAULT_SORT: Sort = Sort.ViewsPerDay;
 
-const IS_ALERT_VISIBLE_CAPSULE: ReactCapsule<boolean> =
-  new ReactCapsule<boolean>(true);
-
 export default function usePublicationsContents(): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
-
-  const [isBannerVisible, setIsBannerVisible] = useCapsule(
-    IS_ALERT_VISIBLE_CAPSULE,
-  );
 
   const {
     data: devData,
@@ -49,6 +41,7 @@ export default function usePublicationsContents(): State {
   } = useMediumStats();
 
   // States
+  const [isBannerVisible, setIsBannerVisible] = useState(true);
   const [sort, setSort] = useState<Sort>(DEFAULT_SORT);
 
   const items: readonly Publication[] = useItems({

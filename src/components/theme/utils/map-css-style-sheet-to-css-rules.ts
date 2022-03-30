@@ -3,7 +3,6 @@ import mapCssRuleListToCssRules from '../utils/map-css-rule-list-to-css-rules';
 const EMPTY_CSS_RULES: Set<CSSRule> = new Set();
 
 export default function mapCssStyleSheetToCssRules(
-  // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
   sheet: Readonly<CSSStyleSheet>,
 ): Set<CSSRule> {
   try {
