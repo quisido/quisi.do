@@ -148,8 +148,7 @@ export default function useSpriteSheet2GifContent({
     body.append('perFrame', perFrame ? 'true' : 'false');
     body.append('sheet', spriteSheetImageFile);
     const responsePromise: Promise<Response> = fetch(
-      process.env.REACT_APP_SPRITESHEET2GIF ??
-        'https://api.charlesstover.com/spritesheet2gif',
+      'https://api.charlesstover.com/spritesheet2gif',
       {
         body,
         cache: 'no-cache',

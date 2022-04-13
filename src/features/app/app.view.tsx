@@ -1,13 +1,12 @@
 import FullStory from 'fullstory-react';
 import type { ReactElement } from 'react';
-import { QueryClientProvider } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
 import Theme from '../../components/theme';
-import QUERY_CLIENT from '../../constants/query-client';
 import GoogleAnalytics from '../../modules/react-google-analytics';
 import Contexts from './components/contexts';
 import Datadog from './components/datadog';
 import I18nProvider from './components/i18n-provider';
+import QueryClientProvider from './components/query-client-provider';
 import Routes from './components/routes';
 import Sentry from './components/sentry';
 
@@ -25,15 +24,15 @@ export default function App(): ReactElement {
         <Datadog>
           <FullStory orgId="150TVM">
             <GoogleAnalytics trackingId="UA-5966978-4">
-              <QueryClientProvider client={QUERY_CLIENT}>
-                <I18nProvider>
+              <I18nProvider>
+                <QueryClientProvider>
                   <Sentry>
                     <Theme>
                       <Routes />
                     </Theme>
                   </Sentry>
-                </I18nProvider>
-              </QueryClientProvider>
+                </QueryClientProvider>
+              </I18nProvider>
             </GoogleAnalytics>
           </FullStory>
         </Datadog>

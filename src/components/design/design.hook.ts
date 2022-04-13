@@ -22,7 +22,7 @@ interface Props<P> {
 
 interface State<P> {
   readonly Component: LazyExoticComponent<(props: P) => ReactElement>;
-  readonly fallback: ReactChild | ReactFragment | ReactPortal | null;
+  readonly fallback: ReactChild | ReactFragment | ReactPortal | boolean | null;
   readonly showFallback: boolean;
 }
 
