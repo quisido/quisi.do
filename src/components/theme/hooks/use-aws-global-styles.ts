@@ -1,20 +1,17 @@
 import { useLayoutEffect } from 'react';
-import getAwsuiGlobalStyleElement from '../utils/get-awsui-global-style-element';
-import mapElementToParentNode from '../utils/map-element-to-parent-node';
-
-const globalStyleElement: Element | ProcessingInstruction =
-  getAwsuiGlobalStyleElement();
-
-const globalStyleParent: ParentNode =
-  mapElementToParentNode(globalStyleElement);
-
-globalStyleParent.removeChild(globalStyleElement);
+import { useCaptureException } from 'sentry-react';
+import AWSUI_GLOBAL_STYLES from '../constants/awsui-global-styles';
 
 export default function useAwsThemeGlobalStyles(): void {
+  const captureException = useCaptureException();
+
   useLayoutEffect((): VoidFunction => {
-    globalStyleParent.appendChild(globalStyleElement);
+    AWSUI_GLOBAL_STYLES.addEventListener('error', captureException);
+    AWSUI_GLOBAL_STYLES.mount();
+
     return (): void => {
-      globalStyleParent.removeChild(globalStyleElement);
+      AWSUI_GLOBAL_STYLES.unmount();
+      AWSUI_GLOBAL_STYLES.removeEventListener('error', captureException);
     };
-  }, []);
+  }, [captureException]);
 }
