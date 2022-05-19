@@ -1,4 +1,4 @@
-import useParamsMemo from 'use-params-memo';
+import { useMemo } from 'react';
 import useLanguage from '../../hooks/use-language';
 import mapLanguageToLocale from '../../utils/map-language-to-locale';
 
@@ -10,6 +10,8 @@ export default function useNumberFormat(): State {
   const [language] = useLanguage();
 
   return {
-    locale: useParamsMemo(mapLanguageToLocale, [language]),
+    locale: useMemo(() => {
+      return mapLanguageToLocale(language);
+    }, [language]),
   };
 }

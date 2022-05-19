@@ -1,6 +1,5 @@
 import type { Attributes, ChangeEvent, ComponentType, MouseEvent } from 'react';
 import { useCallback, useMemo } from 'react';
-import useParamsMemo from 'use-params-memo';
 import type Column from '../../types/table-column';
 import type RowsPerPageOption from '../../types/table-rows-per-page-option';
 import useRowProps from './hooks/use-mui-row-props';
@@ -95,9 +94,8 @@ export default function useMuiTable<Item>({
       items: rows,
     }),
 
-    rowsPerPageOptions: useParamsMemo(
-      mapRowsPerPageOptionsToMuiRowsPerPageOptions,
-      [rowsPerPageOptions],
-    ),
+    rowsPerPageOptions: useMemo((): MuiRowsPerPageOption[] => {
+      return mapRowsPerPageOptionsToMuiRowsPerPageOptions(rowsPerPageOptions);
+    }, [rowsPerPageOptions]),
   };
 }

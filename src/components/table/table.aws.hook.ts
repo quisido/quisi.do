@@ -8,13 +8,13 @@ import { useTranslate } from 'lazy-i18n';
 import type { ComponentType, MutableRefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
-import useParamsMemo from 'use-params-memo';
 import type ReadonlyTableSortingEvent from '../../types/readonly-table-sorting-event';
 import type TableColumn from '../../types/table-column';
 import type TableRowsPerPageOption from '../../types/table-rows-per-page-option';
 import filterByDefined from '../../utils/filter-by-defined';
 import filterByUndefined from '../../utils/filter-by-undefined';
 import useCountText from './hooks/use-aws-count-text';
+import type AwsuiPaginationChangeHandler from './types/awsui-pagination-change-handler';
 import mapColumnToVisibleContentOption from './utils/map-column-to-visible-content-option';
 import mapColumnsToDefinitions from './utils/map-columns-to-definitions';
 import mapNumberDispatchToPaginationChangeHandler from './utils/map-number-dispatch-to-pagination-change-handler';
@@ -106,7 +106,9 @@ export default function useAwsTableHook<Item>({
   const [wrapLines, setWrapLines] = useState(false);
 
   const columnDefinitions: readonly TableProps.ColumnDefinition<Item>[] =
-    useParamsMemo(mapColumnsToDefinitions, [columns]);
+    useMemo((): readonly TableProps.ColumnDefinition<Item>[] => {
+      return mapColumnsToDefinitions(columns);
+    }, [columns]);
 
   const visibleContent: readonly string[] = useMemo((): readonly string[] => {
     const mapColumnIndexToContent = (columnIndex: number): string => {
@@ -196,8 +198,9 @@ export default function useAwsTableHook<Item>({
       ],
     ),
 
-    handlePaginationChange: useParamsMemo(
-      mapNumberDispatchToPaginationChangeHandler,
+    handlePaginationChange: useMemo(
+      (): AwsuiPaginationChangeHandler =>
+        mapNumberDispatchToPaginationChangeHandler(onPageChange),
       [onPageChange],
     ),
 

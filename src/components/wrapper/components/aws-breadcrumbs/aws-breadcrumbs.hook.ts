@@ -1,8 +1,8 @@
 import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
+import { useMemo } from 'react';
 import { useBreadcrumbGroup } from 'use-awsui-router';
-import useParamsMemo from 'use-params-memo';
 import type Breadcrumb from '../../../../types/breadcrumb';
 import mapBreadcrumbsToAwsBreadcrumbGroupItems from '../../utils/map-breadcrumbs-to-aws-breadcrumb-group-items';
 
@@ -33,8 +33,8 @@ export default function useAwsWrapperBreadcrumbs(
     ariaLabel: translate('Breadcrumbs'),
     handleFollow,
 
-    items: useParamsMemo(mapBreadcrumbsToAwsBreadcrumbGroupItems, [
-      breadcrumbs,
-    ]),
+    items: useMemo((): readonly BreadcrumbGroupProps.Item[] => {
+      return mapBreadcrumbsToAwsBreadcrumbGroupItems(breadcrumbs);
+    }, [breadcrumbs]),
   };
 }

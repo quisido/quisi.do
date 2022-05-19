@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import useParamsMemo from 'use-params-memo';
+import { useMemo } from 'react';
 import mapIconToStyle from '../../utils/map-icon-to-style';
 
 interface Props {
@@ -12,6 +12,8 @@ interface State {
 
 export default function useProjectListItem({ icon }: Props): State {
   return {
-    style: useParamsMemo(mapIconToStyle, [icon]),
+    style: useMemo((): CSSProperties => {
+      return mapIconToStyle(icon);
+    }, [icon]),
   };
 }
