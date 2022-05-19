@@ -1,3 +1,4 @@
+import BionicReading from '../../../components/bionic-reading';
 import ben from '../images/benjamin-tsai.png';
 import carson from '../images/carson-stack.jpg';
 import ellis from '../images/ellis-gregory.jpg';
@@ -9,8 +10,6 @@ import mihir from '../images/mihir-patel.jpg';
 import mustafa from '../images/mustafa-torun.jpg';
 import qian from '../images/qian-zhang.png';
 import rongdi from '../images/rongdi-lin.jpg';
-import sriram from '../images/sriram-rudraraju.jpg';
-import walter from '../images/walter-sorto.jpg';
 import xinhe from '../images/xinhe-gao.png';
 import type Quote from '../types/quote';
 
@@ -26,33 +25,39 @@ const QUOTES: readonly Quote[] = [
     quote: (
       <>
         <p>
-          Charles has always been a great mentor for me. He knows a lot about
-          good coding practices and industrial development. Most importantly,
-          Charles is willing to share his advices and provide explanations
-          accurately and thoroughly. Once I met a problem and wondered if there
-          is a pre-existing design pattern that can solve it, so I asked for his
-          advice. He immediately gave back a sound, comprehensive, and clever
-          way to solve it, which really helped me. He also provided an example
-          where the solution is already being used in our code so that I could
-          better understand how it works and solves the problem under the given
-          scenario.
+          <BionicReading>
+            Charles has always been a great mentor for me. He knows a lot about
+            good coding practices and industrial development. Most importantly,
+            Charles is willing to share his advices and provide explanations
+            accurately and thoroughly. Once I met a problem and wondered if
+            there is a pre-existing design pattern that can solve it, so I asked
+            for his advice. He immediately gave back a sound, comprehensive, and
+            clever way to solve it, which really helped me. He also provided an
+            example where the solution is already being used in our code so that
+            I could better understand how it works and solves the problem under
+            the given scenario.
+          </BionicReading>
         </p>
         <p>
-          Charles is knowledgeable about the systems and tools our team is
-          using. Almost every time, if I’m not sure about a tool we are using or
-          how to resolve an issue in our system, I can reach out to him and get
-          some direction. Even without context about a specific issue, he
-          explains possible solutions to help me understand the subject matter
-          better.
+          <BionicReading>
+            Charles is knowledgeable about the systems and tools our team is
+            using. Almost every time, if I’m not sure about a tool we are using
+            or how to resolve an issue in our system, I can reach out to him and
+            get some direction. Even without context about a specific issue, he
+            explains possible solutions to help me understand the subject matter
+            better.
+          </BionicReading>
         </p>
         <p>
-          Charles is able to demonstrate mentorship through shared packages he
-          created and documentations he has written. He created several utility
-          packages that our team and other teams can use and also wrote good
-          documentation, allowing me to know what I need without repeated and
-          unnecessary communication. These packages and documentations are good
-          examples to me for how one can show ownership and improve the
-          development environment.
+          <BionicReading>
+            Charles is able to demonstrate mentorship through shared packages he
+            created and documentations he has written. He created several
+            utility packages that our team and other teams can use and also
+            wrote good documentation, allowing me to know what I need without
+            repeated and unnecessary communication. These packages and
+            documentations are good examples to me for how one can show
+            ownership and improve the development environment.
+          </BionicReading>
         </p>
       </>
     ),
@@ -66,30 +71,32 @@ const QUOTES: readonly Quote[] = [
     title: 'Front End Engineer',
     quote: (
       <p>
-        Since joining the frontend team this year, I have benefited greatly from
-        Charles’s mentorship. His ability to develop the engineers around him
-        stems from his eagerness to help others and his technical acumen.
-        Charles has a clear penchant for teaching: he is the first to offer
-        assistance to a teammate who asks for help during standup, and he
-        patiently spends time explaining concepts to others. He does not view a
-        request for help as a burden or distraction, but rather becomes
-        personally invested in the problems of others. In doing so, he is quick
-        to explain not only a solution, but also makes it a point to teach why
-        the solution works. Because of this, Charles is typically the first
-        person I turn to for advice when stuck, knowing that he will turn my
-        roadblock into a learning experience. Also, whenever I ask him for help,
-        he always follows up afterwards to see whether his suggested solution
-        worked as intended. While his attitude and approach to helping others
-        are invaluable, his knowledge is what truly equips him to do so
-        effectively. He is clearly a subject matter expert when it comes to
-        front end technologies, allowing him to elucidate complex concepts,
-        reliably respond to operational questions, and evaluate design
-        tradeoffs. While discussing a recent design decision, he was able to
-        confirm that my proposed idea would solve the problem at hand, but he
-        had the foresight to point out that it would lead to complications in
-        testing my feature down the road. He takes seriously his role in
-        coaching others, and I can personally say that I have grown as an
-        engineer as a result.
+        <BionicReading>
+          Since joining the frontend team this year, I have benefited greatly
+          from Charles’s mentorship. His ability to develop the engineers around
+          him stems from his eagerness to help others and his technical acumen.
+          Charles has a clear penchant for teaching: he is the first to offer
+          assistance to a teammate who asks for help during standup, and he
+          patiently spends time explaining concepts to others. He does not view
+          a request for help as a burden or distraction, but rather becomes
+          personally invested in the problems of others. In doing so, he is
+          quick to explain not only a solution, but also makes it a point to
+          teach why the solution works. Because of this, Charles is typically
+          the first person I turn to for advice when stuck, knowing that he will
+          turn my roadblock into a learning experience. Also, whenever I ask him
+          for help, he always follows up afterwards to see whether his suggested
+          solution worked as intended. While his attitude and approach to
+          helping others are invaluable, his knowledge is what truly equips him
+          to do so effectively. He is clearly a subject matter expert when it
+          comes to front end technologies, allowing him to elucidate complex
+          concepts, reliably respond to operational questions, and evaluate
+          design tradeoffs. While discussing a recent design decision, he was
+          able to confirm that my proposed idea would solve the problem at hand,
+          but he had the foresight to point out that it would lead to
+          complications in testing my feature down the road. He takes seriously
+          his role in coaching others, and I can personally say that I have
+          grown as an engineer as a result.
+        </BionicReading>
       </p>
     ),
   },
@@ -102,19 +109,21 @@ const QUOTES: readonly Quote[] = [
     title: 'Front End Engineer',
     quote: (
       <p>
-        I am a front end engineer with no prior front end engineering
-        experience. I have little experience in writing large-scale applications
-        in JavaScript and no experience with React. Charles has been extremely
-        helpful in my learning experience in front-end technology. On my first
-        one-on-one with him, he assured me that I should not hesitate to ask for
-        help and would be happy to mentor me. When I’m stuck on an issue
-        regarding React or JavaScript, I can always rely on Charles to provide
-        on guidance. In addition to providing a potential solution, Charles
-        always takes extra time to explain, in detail, relevant React and
-        JavaScript concepts to provide me with more context and equip me with
-        tools to tackle issues on my own in the future. Charles also provides
-        detailed comments on code reviews, including best coding practices and
-        example code.
+        <BionicReading>
+          I am a front end engineer with no prior front end engineering
+          experience. I have little experience in writing large-scale
+          applications in JavaScript and no experience with React. Charles has
+          been extremely helpful in my learning experience in front-end
+          technology. On my first one-on-one with him, he assured me that I
+          should not hesitate to ask for help and would be happy to mentor me.
+          When I’m stuck on an issue regarding React or JavaScript, I can always
+          rely on Charles to provide on guidance. In addition to providing a
+          potential solution, Charles always takes extra time to explain, in
+          detail, relevant React and JavaScript concepts to provide me with more
+          context and equip me with tools to tackle issues on my own in the
+          future. Charles also provides detailed comments on code reviews,
+          including best coding practices and example code.
+        </BionicReading>
       </p>
     ),
   },
@@ -126,15 +135,17 @@ const QUOTES: readonly Quote[] = [
     title: 'Engineering Leader',
     quote: (
       <p>
-        Charles is exceptional at UI development and leading teams as a senior
-        technical leader. During our collaboration, Charles helped us expand our
-        service portfolio to add multiple new AWS services (Lambda and Container
-        Insights). During these projects, Charles did an exceptional job leading
-        his team and building a product that is well-received by our customers.
-        I’ve really appreciated Charles’ technical leadership for our teams and
-        have learned a lot from him. I would highly recommend Charles for senior
-        technical leader roles. Given a chance, I would love to collaborate with
-        him again.
+        <BionicReading>
+          Charles is exceptional at UI development and leading teams as a senior
+          technical leader. During our collaboration, Charles helped us expand
+          our service portfolio to add multiple new AWS services (Lambda and
+          Container Insights). During these projects, Charles did an exceptional
+          job leading his team and building a product that is well-received by
+          our customers. I’ve really appreciated Charles’ technical leadership
+          for our teams and have learned a lot from him. I would highly
+          recommend Charles for senior technical leader roles. Given a chance, I
+          would love to collaborate with him again.
+        </BionicReading>
       </p>
     ),
   },
@@ -147,14 +158,16 @@ const QUOTES: readonly Quote[] = [
     title: 'Principal Software Engineer',
     quote: (
       <p>
-        I have observed Charles’s strengths over the years. I think Charles
-        exhibits a very strong Customer Obsession. When we launched the new
-        console for CloudWatch Logs, he stayed on top of the Reddit thread,
-        answering customer questions, and bringing their feedback to the team.
-        He proposed a program in CloudWatch Logs to form some sort of an on-call
-        to respond customers on social media. I was very impressed with Charles’
-        output of Container Insights console dashboards. It is evident that
-        Charles is technically strong in his domain.
+        <BionicReading>
+          I have observed Charles’s strengths over the years. I think Charles
+          exhibits a very strong Customer Obsession. When we launched the new
+          console for CloudWatch Logs, he stayed on top of the Reddit thread,
+          answering customer questions, and bringing their feedback to the team.
+          He proposed a program in CloudWatch Logs to form some sort of an
+          on-call to respond customers on social media. I was very impressed
+          with Charles’ output of Container Insights console dashboards. It is
+          evident that Charles is technically strong in his domain.
+        </BionicReading>
       </p>
     ),
   },
@@ -168,14 +181,18 @@ const QUOTES: readonly Quote[] = [
     quote: (
       <>
         <p>
-          Charles is always happy to provide insights regarding my UX design. He
-          is able to give input from an engineering perspective, like which
-          steps need further clarification, where the edge cases may occur, and
-          when to communicate errors to customers, etc.
+          <BionicReading>
+            Charles is always happy to provide insights regarding my UX design.
+            He is able to give input from an engineering perspective, like which
+            steps need further clarification, where the edge cases may occur,
+            and when to communicate errors to customers, etc.
+          </BionicReading>
         </p>
         <p>
-          His input helps to complete UX workflows and minimize potential
-          confusion that may happen for customers.
+          <BionicReading>
+            His input helps to complete UX workflows and minimize potential
+            confusion that may happen for customers.
+          </BionicReading>
         </p>
       </>
     ),
@@ -189,15 +206,17 @@ const QUOTES: readonly Quote[] = [
     title: 'Front end engineer',
     quote: (
       <p>
-        Charles is an expert in front end areas and a reliable tech lead in the
-        team. He always makes a solid design to build a high-performance web
-        application. Meanwhile, he always shares his perspicacious insights when
-        making the trade-off between business goal and engineering excellence,
-        so as to help the team make the right decision. Also, he always provides
-        the useful guidance with detailed explanation. Definitely a great guy to
-        work with. Last but not the least, he is always passionate about the
-        tech in the community. He shows his curiosity and impacts everyone
-        around him.
+        <BionicReading>
+          Charles is an expert in front end areas and a reliable tech lead in
+          the team. He always makes a solid design to build a high-performance
+          web application. Meanwhile, he always shares his perspicacious
+          insights when making the trade-off between business goal and
+          engineering excellence, so as to help the team make the right
+          decision. Also, he always provides the useful guidance with detailed
+          explanation. Definitely a great guy to work with. Last but not the
+          least, he is always passionate about the tech in the community. He
+          shows his curiosity and impacts everyone around him.
+        </BionicReading>
       </p>
     ),
   },
@@ -210,22 +229,24 @@ const QUOTES: readonly Quote[] = [
     title: 'Front End Engineer',
     quote: (
       <p>
-        I really appreciate the comments Charles leaves on my pull requests.
-        They help me align my code with the rest of the projects. I consider
-        Charles to be a good mentor. He is willing to share skills, knowledge,
-        and expertise. If I ever have any technical questions I want to ask,
-        he’s always happy to answer in details without feeling bothered. You can
-        not only get help from him through direct message; whenever someone
-        posts a question or asks for help in the team’s Slack channel, he’s
-        always the first one to offer guidance or a solution if he knows the
-        root cause. Besides this, he always gives valuable feedback in my code
-        reviews. Instead of only pointing out the issue of my design, he always
-        comes up with an alternative implementation with a code example and
-        detailed justification to support it, which I think is really helpful to
-        me. The majority of time, I was convinced without the need for back and
-        forth comments. Sometimes I was inspired with a better idea based on
-        that feedback. Overall, I’m glad I can have Charles in the team to offer
-        mentoring.
+        <BionicReading>
+          I really appreciate the comments Charles leaves on my pull requests.
+          They help me align my code with the rest of the projects. I consider
+          Charles to be a good mentor. He is willing to share skills, knowledge,
+          and expertise. If I ever have any technical questions I want to ask,
+          he’s always happy to answer in details without feeling bothered. You
+          can not only get help from him through direct message; whenever
+          someone posts a question or asks for help in the team’s Slack channel,
+          he’s always the first one to offer guidance or a solution if he knows
+          the root cause. Besides this, he always gives valuable feedback in my
+          code reviews. Instead of only pointing out the issue of my design, he
+          always comes up with an alternative implementation with a code example
+          and detailed justification to support it, which I think is really
+          helpful to me. The majority of time, I was convinced without the need
+          for back and forth comments. Sometimes I was inspired with a better
+          idea based on that feedback. Overall, I’m glad I can have Charles in
+          the team to offer mentoring.
+        </BionicReading>
       </p>
     ),
   },
@@ -241,21 +262,25 @@ const QUOTES: readonly Quote[] = [
     quote: (
       <>
         <p>
-          Charles has been extremely effective in collaboration and
-          brainstorming design solutions and then translating them into fully
-          developed products. His full-stack knowledge and expertise help guide
-          my design decisions as they relate not only to the functional aspects
-          of the product, but with the user experience as well. As a Designer, I
-          would highly recommend working with Charles. He has proven time and
-          again that he is reliable, adaptive and intuitive while offering
-          constructive feedback and the necessary positive friction that results
-          in the creation of a high quality product.
+          <BionicReading>
+            Charles has been extremely effective in collaboration and
+            brainstorming design solutions and then translating them into fully
+            developed products. His full-stack knowledge and expertise help
+            guide my design decisions as they relate not only to the functional
+            aspects of the product, but with the user experience as well. As a
+            Designer, I would highly recommend working with Charles. He has
+            proven time and again that he is reliable, adaptive and intuitive
+            while offering constructive feedback and the necessary positive
+            friction that results in the creation of a high quality product.
+          </BionicReading>
         </p>
         <p>
-          Charles is passionate about his work and never fails to meet whatever
-          challenge comes his way. His leadership and “Nothing is impossible”
-          mentality towards development is infectious and inspires myself and
-          the others within the team to do their best.
+          <BionicReading>
+            Charles is passionate about his work and never fails to meet
+            whatever challenge comes his way. His leadership and “Nothing is
+            impossible” mentality towards development is infectious and inspires
+            myself and the others within the team to do their best.
+          </BionicReading>
         </p>
       </>
     ),
@@ -270,17 +295,23 @@ const QUOTES: readonly Quote[] = [
     quote: (
       <>
         <p>
-          I was very privileged to be Charles’ manager for a brief period of
-          time. During that time, Charles demonstrated that he is an extremely
-          gifted JavaScript developer; but beyond that, he demonstrated that he
-          is a principled, driven individual. Charles cared deeply about
-          JavaScript and React and was a great part of our local community, as
-          well as the JavaScript community at large. He was always a good mentor
-          to others and a good teammate. The thing that impressed me most about
-          Charles is that he always sought feedback and he always wanted to get
-          better, both as a person and a developer.
+          <BionicReading>
+            I was very privileged to be Charles’ manager for a brief period of
+            time. During that time, Charles demonstrated that he is an extremely
+            gifted JavaScript developer; but beyond that, he demonstrated that
+            he is a principled, driven individual. Charles cared deeply about
+            JavaScript and React and was a great part of our local community, as
+            well as the JavaScript community at large. He was always a good
+            mentor to others and a good teammate. The thing that impressed me
+            most about Charles is that he always sought feedback and he always
+            wanted to get better, both as a person and a developer.
+          </BionicReading>
         </p>
-        <p>I would happily work with Charles again!</p>
+        <p>
+          <BionicReading>
+            I would happily work with Charles again!
+          </BionicReading>
+        </p>
       </>
     ),
   },
@@ -294,21 +325,27 @@ const QUOTES: readonly Quote[] = [
     quote: (
       <>
         <p>
-          In short: Charles is an efficient, knowledgeable and trustworthy
-          individual.
+          <BionicReading>
+            In short: Charles is an efficient, knowledgeable and trustworthy
+            individual.
+          </BionicReading>
         </p>
         <p>
-          To elaborate: I’ve had the pleasure of employing Charles’s services
-          many times over the past 15 years on projects requiring skills ranging
-          from Frontend and Backend Development to SEO and Technical Writing. He
-          always meets deadlines. His experience makes it so he can not only
-          perform but also advise on any task put before him and can lead a team
-          as exceptionally as he can be part of one. Charles receives my highest
-          recommendation and any company would be lucky to have him.
+          <BionicReading>
+            To elaborate: I’ve had the pleasure of employing Charles’s services
+            many times over the past 15 years on projects requiring skills
+            ranging from Frontend and Backend Development to SEO and Technical
+            Writing. He always meets deadlines. His experience makes it so he
+            can not only perform but also advise on any task put before him and
+            can lead a team as exceptionally as he can be part of one. Charles
+            receives my highest recommendation and any company would be lucky to
+            have him.
+          </BionicReading>
         </p>
       </>
     ),
   },
+  /*
   {
     age: 25,
     author: 'Walter Sorto',
@@ -337,6 +374,7 @@ const QUOTES: readonly Quote[] = [
       </p>
     ),
   },
+  */
 
   // University of Arkansas
   {
@@ -348,17 +386,20 @@ const QUOTES: readonly Quote[] = [
     title: 'Director of Employer Relations',
     quote: (
       <p>
-        When Charles started working for the Career Development Center, I knew
-        quickly that we had gotten very lucky in hiring him. Charles has a lot
-        of experience working in web development; for us, this translated to him
-        not only working through assignments quickly, but also letting us know
-        areas we could improve our website. I was his direct supervisor, but I
-        had no background in web development at that point. Charles did an
-        incredible job of explaining technical issues and opportunities with me
-        so that we could decide the best course of action for moving forward.
-        His desire to improve the website and his ability to communicate complex
-        technical issues to non-technical people really impressed me. I would
-        recommend Charles to any employer - he is a real asset!
+        <BionicReading>
+          When Charles started working for the Career Development Center, I knew
+          quickly that we had gotten very lucky in hiring him. Charles has a lot
+          of experience working in web development; for us, this translated to
+          him not only working through assignments quickly, but also letting us
+          know areas we could improve our website. I was his direct supervisor,
+          but I had no background in web development at that point. Charles did
+          an incredible job of explaining technical issues and opportunities
+          with me so that we could decide the best course of action for moving
+          forward. His desire to improve the website and his ability to
+          communicate complex technical issues to non-technical people really
+          impressed me. I would recommend Charles to any employer - he is a real
+          asset!
+        </BionicReading>
       </p>
     ),
   },

@@ -1,5 +1,5 @@
 import type { FlashbarProps } from '@awsui/components-react/flashbar';
-import useParamsMemo from 'use-params-memo';
+import { useMemo } from 'react';
 import type Notification from '../../../../types/notification';
 import mapNotificationsToFlashbarPropsMessageDefinitions from '../../utils/map-notifications-to-flashbar-props-message-definitions';
 
@@ -7,8 +7,8 @@ const DEFAULT_NOTIFICATIONS: readonly Notification[] = Object.freeze([]);
 
 export default function useAwsWrapperNotifications(
   notifications: readonly Notification[] = DEFAULT_NOTIFICATIONS,
-): FlashbarProps.MessageDefinition[] {
-  return useParamsMemo(mapNotificationsToFlashbarPropsMessageDefinitions, [
-    notifications,
-  ]);
+): readonly FlashbarProps.MessageDefinition[] {
+  return useMemo((): readonly FlashbarProps.MessageDefinition[] => {
+    return mapNotificationsToFlashbarPropsMessageDefinitions(notifications);
+  }, [notifications]);
 }

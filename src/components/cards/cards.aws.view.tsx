@@ -4,6 +4,12 @@ import type { ReactElement } from 'react';
 import useAwsCards from './cards.aws.hook';
 import type Props from './types/props';
 
+const CARDS_LAYOUT: CardsProps.CardsLayout = {
+  cards: 3,
+};
+
+const CARDS_PER_ROW: CardsProps.CardsLayout[] = [CARDS_LAYOUT];
+
 export default function AwsCards<Item>({
   CardContent,
   CardFooter,
@@ -31,6 +37,7 @@ export default function AwsCards<Item>({
   return (
     <Cards
       cardDefinition={cardDefinition}
+      cardsPerRow={CARDS_PER_ROW}
       header={header}
       items={items}
       {...optionalCardsProps}
