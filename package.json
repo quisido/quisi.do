@@ -27,8 +27,8 @@
     "depcruise:err-html": "depcruise --include-only \"^src\" --output-to depcruise.html --output-type err-html src",
     "eslint": "eslint '**/*'",
     "eslint:fix": "eslint '**/*' --fix",
-    "jest": "jest",
-    "jest:watch": "jest --coverage=false --watch",
+    "jest": "jest --runInBand",
+    "jest:watch": "jest --coverage=false --runInBand --watch",
     "start": "react-scripts start"
   },
   "devDependencies": {
@@ -81,7 +81,6 @@
     "babel-plugin-istanbul": "^6.1.1",
     "chai": "^4.3.6",
     "cypress": "^9.6.1",
-    "dd-trace": "^2.7.1",
     "dependency-cruiser": "^11.7.1",
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
