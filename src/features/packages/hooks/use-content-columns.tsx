@@ -3,61 +3,40 @@ import { useTranslate } from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { useMemo } from 'react';
 import type TableColumn from '../../../types/table-column';
-import DirectDownloads from '../components/direct-downloads-cell';
 import PackageName from '../components/name-cell';
-import TotalDownloads from '../components/total-downloads-cell';
+import PACKAGE_NAME_COLUMN from '../constants/package-name-column';
 import type Item from '../types/packages-item';
+import mapHeaderToDirectDownloadsColumn from '../utils/map-header-to-direct-downloads-column';
+import mapHeaderToTotalDownloadsColumn from '../utils/map-header-to-total-downloads-column';
 
 export default function usePackagesContentColumns(
   filter: string,
 ): readonly TableColumn<Item>[] {
   const translate: TranslateFunction = useTranslate();
 
+  const directDownloadsHeader: string = translate('Direct downloads') ?? '...';
+  const packageNameHeader: string = translate('Package name') ?? '...';
+  const totalDownloadsHeader: string = translate('Total downloads') ?? '...';
+
   return useMemo(
     (): readonly TableColumn<Item>[] => [
       {
-        header: translate('Package name') ?? '...',
-        minWidth: 240,
-        width: 320,
-        CellContent({
-          packageName,
-          repositoryName,
-        }: Readonly<Item>): ReactElement {
+        ...PACKAGE_NAME_COLUMN,
+        header: packageNameHeader,
+        CellContent({ href, packageName }: Readonly<Item>): ReactElement {
           return (
             <PackageName
               filter={filter}
+              href={href}
               packageName={packageName}
-              repositoryName={repositoryName}
             />
           );
         },
-        sort(a: Item, b: Item): number {
-          return a.packageName.localeCompare(b.packageName);
-        },
       },
 
-      {
-        CellContent: TotalDownloads,
-        header: translate('Total downloads') ?? '...',
-        maxWidth: 240,
-        minWidth: 180,
-        width: 240,
-        sort(a: Item, b: Item): number {
-          return a.totalDownloads - b.totalDownloads;
-        },
-      },
-
-      {
-        CellContent: DirectDownloads,
-        header: translate('Direct downloads') ?? '...',
-        maxWidth: 240,
-        minWidth: 180,
-        width: 240,
-        sort(a: Item, b: Item): number {
-          return a.directDownloads - b.directDownloads;
-        },
-      },
+      mapHeaderToTotalDownloadsColumn(totalDownloadsHeader),
+      mapHeaderToDirectDownloadsColumn(directDownloadsHeader),
     ],
-    [filter, translate],
+    [directDownloadsHeader, filter, packageNameHeader, totalDownloadsHeader],
   );
 }

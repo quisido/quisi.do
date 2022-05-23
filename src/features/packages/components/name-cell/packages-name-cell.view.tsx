@@ -4,19 +4,18 @@ import Link from '../../../../components/link';
 import type Item from '../../types/packages-item';
 import usePackagesNameCell from './packages-name-cell.hook';
 
-interface Props extends Pick<Item, 'packageName' | 'repositoryName'> {
+interface Props extends Pick<Item, 'href' | 'packageName'> {
   readonly filter: string;
 }
 
 export default function PackagesNameCell({
   filter,
+  href,
   packageName,
-  repositoryName,
 }: Props): ReactElement {
-  const { href, index } = usePackagesNameCell({
+  const { index } = usePackagesNameCell({
     filter,
     packageName,
-    repositoryName,
   });
 
   return (

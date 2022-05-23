@@ -15,6 +15,78 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
       'Generates a glossary application using only JSON definition files.',
     ],
     [
+      '@monorepo-template/coverage',
+      'The coverage script will generate a combined coverage report for both the Cypress and Jest test results for a given package.',
+    ],
+    [
+      '@monorepo-template/cypress-coverage-config-override',
+      'This Webpack configuration override for `react-app-rewired` enables coverage reports for Cypress tests.',
+    ],
+    [
+      '@monorepo-template/eslint-config-react-fixable',
+      'This ESLint configuration for React prrojects only enforces rules that can be automatically fixed by a linter.',
+    ],
+    [
+      '@monorepo-template/eslint-config-react-module',
+      'This ESLint configuration for React modules strictly enforces all rules.',
+    ],
+    [
+      '@monorepo-template/eslint-config-react-strict',
+      'This ESLint configuration for React projects strictly enforces all rules.',
+    ],
+    [
+      '@monorepo-template/eslint-config-react-typescript',
+      'This ESLint configuration for TypeScript React projects strictly enforces all rules.',
+    ],
+    [
+      '@monorepo-template/eslint-config-typescript',
+      'This ESLint configuration disables rules that are impossible to enforce in TypeScript projects.',
+    ],
+    [
+      '@monorepo-template/eslint-config-typescript-fixable',
+      'This ESLint configuration for TypeScript projects only enforces rules that can be automatically fixed by a linter.',
+    ],
+    [
+      '@monorepo-template/eslint-config-typescript-strict',
+      'This ESLint configuration for TypeScript projects strictly enforces all rules.',
+    ],
+    [
+      '@monorepo-template/jest-application-preset',
+      'This Jest preset offers all-in-one support for best application practices.',
+    ],
+    [
+      '@monorepo-template/jest-module-preset',
+      'This Jest preset offers all-in-one support for best module practices.',
+    ],
+    [
+      '@monorepo-template/jest-preset',
+      'This Jest preset offers all-in-one support for best monorepo practices.',
+    ],
+    [
+      '@monorepo-template/jest-transformer',
+      'This Jest transformer supports TypeScript React projects.',
+    ],
+    [
+      '@monorepo-template/merge-coverage',
+      'Merging coverage reports will generate a combined report for any number of provided test results.',
+    ],
+    [
+      '@monorepo-template/react-module-tsconfig',
+      'This TypeScript configuration provides best practices and configurations for React modules.',
+    ],
+    [
+      '@monorepo-template/rollup-config',
+      'This Rollup configuration provides best build practices for distributable modules.',
+    ],
+    [
+      '@monorepo-template/test',
+      'The monorepo test enforces best practices for monorepos as a command line script for integration pipelines.',
+    ],
+    [
+      '@monorepo-template/tsconfig',
+      'This TypeScript configuration package provides best practices and configurations for monorepos.',
+    ],
+    [
       'absolute-timestamp',
       'The absolute timestamp component provides human-readable time formatting to Unix timestamps.',
     ],
