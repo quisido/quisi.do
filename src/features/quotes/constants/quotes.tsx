@@ -1,4 +1,5 @@
 import BionicReading from '../../../components/bionic-reading';
+import avery from '../images/avery-brown.jpg';
 import ben from '../images/benjamin-tsai.png';
 import carson from '../images/carson-stack.jpg';
 import ellis from '../images/ellis-gregory.jpg';
@@ -14,6 +15,29 @@ import xinhe from '../images/xinhe-gao.png';
 import type Quote from '../types/quote';
 
 const QUOTES: readonly Quote[] = [
+  // Coalition, Inc.
+  {
+    age: 21,
+    author: 'Avery Brown',
+    company: 'Coalition, Inc.',
+    gender: 'female',
+    image: avery,
+    title: 'Front End Engineer',
+    quote: (
+      <p>
+        <BionicReading>
+          I appreciate Charles’s willingness to help others and provide insights
+          regarding different issues throughout the workplace! His comments have
+          been so helpful when it comes to gaining context regarding a situation
+          or aspect of the company which is just awesome. It means a lot that
+          even when your time is very much limited, he does his best to make
+          himself available however he can to help others. I’m very happy to
+          have a team member such as him.
+        </BionicReading>
+      </p>
+    ),
+  },
+
   // AWS
   {
     age: 25,
