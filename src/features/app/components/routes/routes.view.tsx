@@ -1,3 +1,4 @@
+import { withSentryReactRouterV6Routing } from '@sentry/react';
 import type { ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from '../../../../features/home';
@@ -25,9 +26,11 @@ const ElectronTransitions = mapHrefToRedirectComponent(
   'https://charlesstover.github.io/electron-transition-calculator/',
 );
 
+const SentryRoutes = withSentryReactRouterV6Routing(Routes);
+
 export default function AppRoutes(): ReactElement {
   return (
-    <Routes>
+    <SentryRoutes>
       <Route element={<Home />} index />
 
       {/* Applications */}
@@ -50,6 +53,6 @@ export default function AppRoutes(): ReactElement {
 
       {/* 404 */}
       <Route element={<HomeRedirect />} path="*" />
-    </Routes>
+    </SentryRoutes>
   );
 }
