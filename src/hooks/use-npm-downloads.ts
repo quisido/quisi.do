@@ -1,5 +1,5 @@
-import type { QueryObserverResult } from 'react-query';
-import { useQuery } from 'react-query';
+import type { QueryObserverResult } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 interface State {
   readonly data?: Record<string, number[]> | undefined;
@@ -12,7 +12,7 @@ interface State {
 
 export default function useNpmDownloads(): State {
   const { data, error, isLoading, refetch } = useQuery(
-    'npm',
+    ['npm'],
     async (): Promise<Record<string, number[]>> => {
       const response: Response = await fetch(
         process.env.REACT_APP_NPM_DOWNLOADS ??

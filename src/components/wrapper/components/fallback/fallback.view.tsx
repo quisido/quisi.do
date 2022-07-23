@@ -4,7 +4,7 @@ import LoadingIcon from '../../../../components/loading-icon';
 
 export default function Fallback({
   children,
-}: Readonly<PropsWithChildren<unknown>>): ReactElement {
+}: Readonly<PropsWithChildren>): ReactElement {
   return (
     <Div textAlign="center">
       <LoadingIcon />

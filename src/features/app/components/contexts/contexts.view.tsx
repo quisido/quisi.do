@@ -6,7 +6,7 @@ import useAppContexts from './contexts.hook';
 
 export default function AppContexts({
   children,
-}: Readonly<PropsWithChildren<unknown>>): ReactElement {
+}: Readonly<PropsWithChildren>): ReactElement {
   const { designSystem, isDarkModeEnabled, language } = useAppContexts();
 
   return (

@@ -7,7 +7,7 @@ const className: string = validateString(styles.root);
 
 export default function PackageDescriptionParagraph({
   children,
-}: Readonly<PropsWithChildren<unknown>>): ReactElement {
+}: Readonly<PropsWithChildren>): ReactElement {
   return (
     <Span className={className} color="secondary-body" element="p" size="small">
       {children}

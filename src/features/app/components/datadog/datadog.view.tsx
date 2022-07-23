@@ -4,7 +4,7 @@ import GITHUB_SHA from '../../../../constants/github-sha';
 
 export default function AppDatadog({
   children,
-}: Readonly<PropsWithChildren<unknown>>): ReactElement {
+}: Readonly<PropsWithChildren>): ReactElement {
   return (
     <DataDog
       applicationId="e29eb164-e193-4380-b512-ebd70bbfaeb6"

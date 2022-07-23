@@ -1,6 +1,6 @@
 {
   "extends": "@monorepo-template/react-application-tsconfig/eslint",
-  "include": ["**/*", "**/*.json", ".eslintrc.json", "cypress.config.ts"],
+  "include": ["**/*", "**/*.json", ".eslintrc.cjs", "cypress.config.ts"],
 
   "compilerOptions": {
     "types": ["react/next", "react-dom/next"]

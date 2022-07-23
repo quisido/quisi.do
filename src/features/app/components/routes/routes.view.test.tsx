@@ -15,9 +15,7 @@ Object.defineProperty(global.window, 'location', {
 describe('App', (): void => {
   it('should reroute "Become the junior developer that companies want to hire" to Medium', (): void => {
     render(<Routes />, {
-      wrapper({
-        children,
-      }: Readonly<PropsWithChildren<unknown>>): ReactElement {
+      wrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
         return (
           <MemoryRouter
             initialEntries={[
