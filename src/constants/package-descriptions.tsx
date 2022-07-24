@@ -23,32 +23,8 @@ const PACKAGE_DESCRIPTIONS: Map<string, ReactNode> = new Map<string, ReactNode>(
       'This Webpack configuration override for `react-app-rewired` enables coverage reports for Cypress tests.',
     ],
     [
-      '@monorepo-template/eslint-config-react-fixable',
-      'This ESLint configuration for React prrojects only enforces rules that can be automatically fixed by a linter.',
-    ],
-    [
-      '@monorepo-template/eslint-config-react-module',
-      'This ESLint configuration for React modules strictly enforces all rules.',
-    ],
-    [
-      '@monorepo-template/eslint-config-react-strict',
-      'This ESLint configuration for React projects strictly enforces all rules.',
-    ],
-    [
-      '@monorepo-template/eslint-config-react-typescript',
-      'This ESLint configuration for TypeScript React projects strictly enforces all rules.',
-    ],
-    [
-      '@monorepo-template/eslint-config-typescript',
-      'This ESLint configuration disables rules that are impossible to enforce in TypeScript projects.',
-    ],
-    [
-      '@monorepo-template/eslint-config-typescript-fixable',
-      'This ESLint configuration for TypeScript projects only enforces rules that can be automatically fixed by a linter.',
-    ],
-    [
-      '@monorepo-template/eslint-config-typescript-strict',
-      'This ESLint configuration for TypeScript projects strictly enforces all rules.',
+      '@monorepo-template/eslint-config',
+      'This collection of ESLint configurations enforces best practices for several popular use cases.',
     ],
     [
       '@monorepo-template/jest-application-preset',

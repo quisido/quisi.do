@@ -1,3 +1,18 @@
 {
-  "extends": "../tsconfig.cypress.json"
+  "extends": "@monorepo-template/react-application-tsconfig/cypress",
+
+  "compilerOptions": {
+    "baseUrl": "http://localhost:3000/"
+  },
+
+  "exclude": [
+    "build",
+    "coverage",
+    "cypress/coverage",
+    "cypress/screenshots",
+    "cypress/videos",
+    "jest/cache",
+    "jest/coverage",
+    "node_modules"
+  ]
 }
