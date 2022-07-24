@@ -102,7 +102,7 @@ const MUI_DARK_THEME_OPTIONS: ThemeOptions = {
           color: grey[400],
         },
         head: {
-          color: blue,
+          // color: blue,
         },
         root: {
           borderColor: BLUE_DARK_700,

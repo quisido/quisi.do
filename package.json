@@ -19,17 +19,17 @@
     "access": "restricted"
   },
   "scripts": {
-    "build": "react-scripts build",
+    "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "coverage": "monorepo-template-coverage",
     "cypress:run": "cypress run",
-    "cypress:start": "react-app-rewired start",
+    "cypress:start": "DISABLE_ESLINT_PLUGIN=true react-app-rewired start",
     "depcruise:dot": "depcruise --include-only \"^src\" --output-to depcruise.dot --output-type dot src",
     "depcruise:err-html": "depcruise --include-only \"^src\" --output-to depcruise.html --output-type err-html src",
     "eslint": "eslint '**/*'",
     "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest --runInBand",
     "jest:watch": "jest --coverage=false --runInBand --watch",
-    "start": "react-scripts start"
+    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start"
   },
   "devDependencies": {
     "@awsui/components-react": "^3.0.545",

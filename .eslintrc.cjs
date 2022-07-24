@@ -24,7 +24,6 @@ module.exports = {
     '@monorepo-template/eslint-config/react-fixable',
     '@monorepo-template/eslint-config/react-strict',
     '@monorepo-template/eslint-config/react-typescript',
-    '@monorepo-template/eslint-config/react-typescript/react-scripts-4',
     'prettier',
   ],
 
