@@ -17658,11 +17658,11 @@ __metadata:
   linkType: hard
 
 "use-force-update@npm:^1.0.7":
-  version: 1.0.8
-  resolution: "use-force-update@npm:1.0.8"
+  version: 1.0.10
+  resolution: "use-force-update@npm:1.0.10"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: b05b9b7c57ce2be51b5ec4545c973eb37d4b36989070a7224019822805416ab7fcc7165cdd3e44a5c8743d91c365d88eff8c526bef1770ffcc469fc747d87276
+  checksum: 5c9bb39117be213a20666b3bd57a38862aa6210963373f4242fcb65d425efc116f5950f5cdb88ac6822ed4efc44ea90cb7c39bf8b9977bd5ba771a2bd65be721
   languageName: node
   linkType: hard
 
