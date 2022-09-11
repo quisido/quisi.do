@@ -2,6 +2,7 @@
   "name": "charlesstover.com",
   "version": "1.0.0",
   "author": "Charles Stover <charlesstover.com@charlesstover.com>",
+  "config-overrides-path": "./config-overrides.cjs",
   "description": "the professional portfolio of Charles Stover",
   "homepage": ".",
   "packageManager": "yarn@3.2.2",
