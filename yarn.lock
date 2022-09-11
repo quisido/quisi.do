@@ -3963,28 +3963,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/coverage@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@monorepo-template/coverage@npm:1.1.2"
+"@monorepo-template/coverage@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@monorepo-template/coverage@npm:1.2.0"
   dependencies:
-    "@monorepo-template/merge-coverage": ^1.1.0
+    "@monorepo-template/merge-coverage": ^1.2.0
     make-dir: ^3.1.0
-    p-map: ^5.4.0
+    p-map: ^5.5.0
   peerDependencies:
     istanbul-lib-coverage: ^3.0.0
     nyc: ^15.0.0
   bin:
-    monorepo-template-coverage: ./bin/coverage.mjs
-  checksum: d2e1e8bf7be4e681a85fb6ae6df7e6a76aa670bc117db8050fa24ba23889566fe4abb27bb6400a59f739638ac38ef4f76392995a7902298c11f25b8da6e3c35d
+    monorepo-template-coverage: ./dist/bin/index.js
+  checksum: a18a635e21b716bedbbf80114caa3cc7e3fcf602284c48e9423178d721f6a5ff3b5f7173c6815f9211b3aa8192c6ec0987eb2e317146f0b3dd1f56855299d12c
   languageName: node
   linkType: hard
 
-"@monorepo-template/cypress-coverage-config-override@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "@monorepo-template/cypress-coverage-config-override@npm:1.2.0"
+"@monorepo-template/cypress-coverage-config-override@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@monorepo-template/cypress-coverage-config-override@npm:1.2.1"
   peerDependencies:
     babel-plugin-istanbul: ^6.0.0
-  checksum: c202f11621627c41cdd2267dbd93e06d8b54cc66ba941aeb3f721bb6c1053c88a3cb87d53fefb4c007983bbc022e5c2ef11b5f7501f5fe7172f3464a3a100abe
+    webpack: ^5.0.0
+  checksum: 996749a97717937b5612370af34925bf45b49bcbf0700570af7bbfa177c5a3e9a22ec32ae0a0f0d5239fcb7c43269dcc25798e21cf90b9c0b3cafc2a69b8ea54
   languageName: node
   linkType: hard
 
@@ -4083,17 +4084,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/merge-coverage@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@monorepo-template/merge-coverage@npm:1.1.0"
+"@monorepo-template/merge-coverage@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@monorepo-template/merge-coverage@npm:1.2.0"
+  dependencies:
+    make-dir: ^3.1.0
+    p-map: ^5.5.0
   peerDependencies:
     istanbul-lib-coverage: ^3.0.0
-    make-dir: ^3.0.0
     nyc: ^15.0.0
-    p-map: ^5.0.0
   bin:
-    merge-coverage: ./bin/merge-coverage.mjs
-  checksum: c0a6024a62d5c933cdbafaa7c5b34c6144dd7134761e45305bd34f7e79cd85af6e40e857665dd6731ff1bcefbb50cd0af52726c7d26fb1f4880408e18887fd5f
+    monorepo-template-merge-coverage: ./dist/bin/index.js
+  checksum: 6fdfeb796de3208a8f6abd1671d65685fd5bddfdb38605bd93af2ddac678f9173d8b5a0a7a10262f5b868ddc480885e07890085e26535cd1ea75f3ba6e7ae6e5
   languageName: node
   linkType: hard
 
@@ -4117,11 +4119,11 @@ __metadata:
   linkType: hard
 
 "@monorepo-template/tsconfig@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "@monorepo-template/tsconfig@npm:1.0.1"
+  version: 1.1.1
+  resolution: "@monorepo-template/tsconfig@npm:1.1.1"
   peerDependencies:
     "@types/node": "*"
-  checksum: ed090a95de35c950e6a4fc1ab13b8aebc2cde1f21fe3f1fa7564c161c5fbdc35cf6bb80387d45a67cfd33abc7d184f639f5236303bef947ee8a8ea63b7fdca5c
+  checksum: f432ce2e06ae156a614939af922db7dfc0c4defdd588086386a8153970bf3c5afd1bf35c4ceea5afe6478902fb16567f084cd50bd8843a2779e9767e27e5d87d
   languageName: node
   linkType: hard
 
@@ -7290,8 +7292,8 @@ __metadata:
     "@emotion/react": ^11.10.0
     "@emotion/styled": ^11.10.0
     "@fullstory/browser": ^1.6.1
-    "@monorepo-template/coverage": ^1.1.2
-    "@monorepo-template/cypress-coverage-config-override": ^1.2.0
+    "@monorepo-template/coverage": ^1.2.0
+    "@monorepo-template/cypress-coverage-config-override": ^1.2.1
     "@monorepo-template/cypress-coverage-plugin": ^1.0.4
     "@monorepo-template/eslint-config": ^1.0.2
     "@monorepo-template/jest-application-preset": ^1.1.0
@@ -14165,15 +14167,6 @@ __metadata:
   dependencies:
     aggregate-error: ^3.0.0
   checksum: cb0ab21ec0f32ddffd31dfc250e3afa61e103ef43d957cc45497afe37513634589316de4eb88abdfd969fe6410c22c0b93ab24328833b8eb1ccc087fc0442a1c
-  languageName: node
-  linkType: hard
-
-"p-map@npm:^5.4.0":
-  version: 5.4.0
-  resolution: "p-map@npm:5.4.0"
-  dependencies:
-    aggregate-error: ^4.0.0
-  checksum: dbd6582860be6543dd7f0da5d0e2be2237d7172f3b431001c03c30b0384d6df6d03a06b90b53836ba4861abadb08da2b9ffb47f1707c68c3e2332b65ace8835c
   languageName: node
   linkType: hard
 
