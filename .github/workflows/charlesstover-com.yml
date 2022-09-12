@@ -140,7 +140,7 @@ jobs:
           browser: ${{ matrix.browser }}
           ci-build-id: ${{ github.run_id }}-${{ github.run_attempt }}
           command-prefix: yarn dlx
-          config-file: cypress.config.mjs
+          config-file: cypress.config.cjs
           group: ${{ matrix.os }}-${{ matrix.browser }}
           parallel: true
           record: true
@@ -176,50 +176,50 @@ jobs:
           - browser: edge
             os: ubuntu
 
-  # coverage:
-  #   if: ${{ always() }}
-  #   needs: [cypress, jest]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #     - name: Setup Node
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         cache: yarn
-  #         check-latest: true
-  #         node-version: 'lts/*'
-  #     - name: Install dependencies
-  #       run: yarn install --immutable
-  #     - name: Download Cypress coverage
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: cypress--coverage
-  #         path: cypress/coverage
-  #     - name: Download Jest coverage
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: jest--coverage
-  #         path: jest/coverage
-  #     - name: Report coverage
-  #       run: yarn coverage
-  #       env:
-  #         BRANCHES_COVERAGE_THRESHOLD: 1
-  #         FUNCTIONS_COVERAGE_THRESHOLD: 1
-  #         LINES_COVERAGE_THRESHOLD: 1
-  #         STATEMENTS_COVERAGE_THRESHOLD: 1
-  #     - name: Upload coverage
-  #       if: ${{ always() }}
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: coverage
-  #         path: |
-  #           .nyc_output
-  #           coverage
+  coverage:
+    if: ${{ always() }}
+    needs: [cypress, jest]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Download Cypress coverage
+        uses: actions/download-artifact@v2
+        with:
+          name: cypress--coverage
+          path: cypress/coverage
+      - name: Download Jest coverage
+        uses: actions/download-artifact@v2
+        with:
+          name: jest--coverage
+          path: jest/coverage
+      - name: Report coverage
+        run: yarn coverage
+        env:
+          BRANCHES_COVERAGE_THRESHOLD: 1
+          FUNCTIONS_COVERAGE_THRESHOLD: 1
+          LINES_COVERAGE_THRESHOLD: 1
+          STATEMENTS_COVERAGE_THRESHOLD: 1
+      - name: Upload coverage
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: |
+            .nyc_output
+            coverage
 
   github-pages:
     if: ${{ github.event_name == 'push' }}
-    needs: [build, cypress, eslint, jest]
+    needs: [build, coverage, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -239,7 +239,7 @@ jobs:
 
   sentry-release:
     if: ${{ github.event_name == 'push' }}
-    needs: [build, cypress, eslint, jest]
+    needs: [build, coverage, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

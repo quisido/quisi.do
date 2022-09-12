@@ -2,7 +2,7 @@ import FullStory from 'fullstory-react';
 import type { ReactElement } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Theme from '../../components/theme';
-import GoogleAnalytics from '../../modules/react-google-analytics';
+// import GoogleAnalytics from '../../modules/react-google-analytics';
 import Contexts from './components/contexts';
 import Datadog from './components/datadog';
 import I18nProvider from './components/i18n-provider';
@@ -23,17 +23,17 @@ export default function App(): ReactElement {
       <Contexts>
         <Datadog>
           <FullStory orgId="150TVM">
-            <GoogleAnalytics trackingId="UA-5966978-4">
-              <I18nProvider>
-                <QueryClientProvider>
-                  <Sentry>
-                    <Theme>
-                      <Routes />
-                    </Theme>
-                  </Sentry>
-                </QueryClientProvider>
-              </I18nProvider>
-            </GoogleAnalytics>
+            {/* <GoogleAnalytics trackingId="UA-5966978-4"> */}
+            <I18nProvider>
+              <QueryClientProvider>
+                <Sentry>
+                  <Theme>
+                    <Routes />
+                  </Theme>
+                </Sentry>
+              </QueryClientProvider>
+            </I18nProvider>
+            {/* </GoogleAnalytics> */}
           </FullStory>
         </Datadog>
       </Contexts>
