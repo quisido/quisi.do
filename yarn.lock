@@ -4000,11 +4000,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/coverage@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "@monorepo-template/coverage@npm:1.2.0"
+"@monorepo-template/coverage@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@monorepo-template/coverage@npm:1.2.1"
   dependencies:
-    "@monorepo-template/merge-coverage": ^1.2.0
+    "@monorepo-template/merge-coverage": ^1.2.1
     make-dir: ^3.1.0
     p-map: ^5.5.0
   peerDependencies:
@@ -4012,7 +4012,7 @@ __metadata:
     nyc: ^15.0.0
   bin:
     monorepo-template-coverage: ./dist/bin/index.js
-  checksum: a18a635e21b716bedbbf80114caa3cc7e3fcf602284c48e9423178d721f6a5ff3b5f7173c6815f9211b3aa8192c6ec0987eb2e317146f0b3dd1f56855299d12c
+  checksum: b6f5a9bd3ef3c489d094ac2bfef0155f9f0e983c0064a9f666e19e86011c0d69a78e007d15bbb86b6a91315bdfc63dd72c63db83341f8ddb30beb9f65b11d461
   languageName: node
   linkType: hard
 
@@ -4026,9 +4026,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/cypress-coverage-plugin@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "@monorepo-template/cypress-coverage-plugin@npm:1.0.4"
+"@monorepo-template/cypress-coverage-plugin@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@monorepo-template/cypress-coverage-plugin@npm:1.0.5"
   dependencies:
     "@monorepo-template/cypress-nyc-config": ^1.0.0
   peerDependencies:
@@ -4038,7 +4038,7 @@ __metadata:
     babel-loader: ^8.0.2
     cypress: ^9.0.0 || ^10.0.0
     webpack: ^4 || ^5
-  checksum: 5db63d7c9189f0688047c7611b5e5e546666150b9f8739d5091cd760f5be62ce3846f850b812480527b34d3b9d36500977e1e69618573590e03ba6b055db421d
+  checksum: afa8e84725499c592c629cdd88d806acf97ecc029495e2be0b4accad6e85c56e35b0170018eafd718ff19866d7ce41b4fa91f8447d39ad65f1a237b210780da0
   languageName: node
   linkType: hard
 
@@ -4121,9 +4121,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/merge-coverage@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "@monorepo-template/merge-coverage@npm:1.2.0"
+"@monorepo-template/merge-coverage@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@monorepo-template/merge-coverage@npm:1.2.1"
   dependencies:
     make-dir: ^3.1.0
     p-map: ^5.5.0
@@ -4132,7 +4132,7 @@ __metadata:
     nyc: ^15.0.0
   bin:
     monorepo-template-merge-coverage: ./dist/bin/index.js
-  checksum: 6fdfeb796de3208a8f6abd1671d65685fd5bddfdb38605bd93af2ddac678f9173d8b5a0a7a10262f5b868ddc480885e07890085e26535cd1ea75f3ba6e7ae6e5
+  checksum: 55955525f84e46075b9e02bfbf606f7c433da9369fbe218b980a428f28d986c4b366967b5a677160735f707163b6d00e2972ea9545743053b36b41d39583c914
   languageName: node
   linkType: hard
 
@@ -7365,9 +7365,9 @@ __metadata:
     "@emotion/react": ^11.10.0
     "@emotion/styled": ^11.10.0
     "@fullstory/browser": ^1.6.1
-    "@monorepo-template/coverage": ^1.2.0
+    "@monorepo-template/coverage": ^1.2.1
     "@monorepo-template/cypress-coverage-config-override": ^1.2.3
-    "@monorepo-template/cypress-coverage-plugin": ^1.0.4
+    "@monorepo-template/cypress-coverage-plugin": ^1.0.5
     "@monorepo-template/eslint-config": ^1.0.2
     "@monorepo-template/jest-application-preset": ^1.1.0
     "@monorepo-template/nyc-config": ^1.0.2
