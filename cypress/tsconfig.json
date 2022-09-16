@@ -1,8 +1,10 @@
 {
-  "extends": "@monorepo-template/react-application-tsconfig/cypress",
+  "extends": "@monorepo-template/tsconfig/react-application/cypress.json",
 
   "compilerOptions": {
-    "baseUrl": "http://localhost:3000/"
+    "baseUrl": "http://localhost:3000/",
+    "inlineSourceMap": false,
+    "sourceMap": true
   },
 
   "exclude": [

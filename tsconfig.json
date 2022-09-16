@@ -1,24 +1,19 @@
 {
-  "extends": "@monorepo-template/react-application-tsconfig",
-  "include": ["src"],
-
-  "compilerOptions": {
-    "types": ["react/next", "react-dom/next"]
-  },
-
+  "extends": "@monorepo-template/tsconfig/react-application.json",
+  "include": ["src/"],
   "exclude": [
     ".git/",
     ".idea/",
+    ".nyc_output/",
     ".yarn/cache/",
     ".yarn/sdks/",
     ".yarn/unplugged/",
     "build/",
     "coverage/",
-    "cypress/coverage/",
-    "cypress/screenshots/",
-    "cypress/videos/",
+    "cypress/",
     "jest/",
     "node_modules/",
-    "src/**/*.e2e.ts"
+    "src/**/*.e2e.ts",
+    "src/test/cypress/"
   ]
 }

@@ -1,22 +1,17 @@
 {
-  "extends": "@monorepo-template/react-application-tsconfig/eslint",
+  "extends": "@monorepo-template/tsconfig/react-application/eslint.json",
   "include": ["**/*", "**/*.json", ".eslintrc.cjs"],
-
-  "compilerOptions": {
-    "types": ["react/next", "react-dom/next"]
-  },
-
   "exclude": [
     ".git/",
     ".idea/",
+    ".nyc_output/",
     ".yarn/",
     "build/",
     "coverage/",
-    "cypress/coverage/",
-    "cypress/screenshots/",
-    "cypress/videos/",
-    "jest/cache/",
-    "jest/coverage/",
-    "node_modules/"
+    "cypress/",
+    "jest/",
+    "node_modules/",
+    "src/**/*.e2e.ts",
+    "src/test/cypress/"
   ]
 }

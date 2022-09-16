@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import ignoreResizeObserverUndeliveredNotificationsError from '../../test/utils/ignore-resize-observer-undelivered-notifications-error';
+import ignoreResizeObserverUndeliveredNotificationsError from '../../test/cypress/utils/ignore-resize-observer-undelivered-notifications-error';
 
 describe('Quotes', (): void => {
   it('should display critical elements', (): void => {
