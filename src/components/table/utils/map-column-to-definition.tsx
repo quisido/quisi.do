@@ -3,7 +3,9 @@ import type { ReactElement } from 'react';
 import type TableColumn from '../../../types/table-column';
 import mapIndexToColumnDefinitionId from '../utils/map-index-to-column-definition-id';
 
-export default function mapColumnToDefinition<Item>(
+export default function mapColumnToDefinition<
+  Item extends Record<string, unknown>,
+>(
   { CellContent, header, maxWidth, minWidth, width }: TableColumn<Item>,
   index: number,
 ): TableProps.ColumnDefinition<Item> {

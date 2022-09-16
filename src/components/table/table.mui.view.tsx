@@ -29,7 +29,7 @@ onFilterChange,
 onVisibleColumnsChange,
 visibleColumnIndices,
 */
-export default function MuiTable<Item>({
+export default function MuiTable<Item extends Record<string, unknown>>({
   Description,
   columns,
   loading,

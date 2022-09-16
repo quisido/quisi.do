@@ -41,7 +41,7 @@ const BASE = 10;
 const FIRST_PAGE = 1;
 const MUI_PAGE_OFFSET = 1;
 
-export default function useMuiTable<Item>({
+export default function useMuiTable<Item extends Record<string, unknown>>({
   Description,
   columns,
   onPageChange,

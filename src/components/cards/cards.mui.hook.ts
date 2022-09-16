@@ -2,7 +2,7 @@ import type { Attributes, ComponentType } from 'react';
 import { useMemo } from 'react';
 import type CardProps from './types/mui-card-props';
 
-interface Props<Item> {
+interface Props<Item extends Record<string, unknown>> {
   readonly CardContent: ComponentType<Item>;
   readonly CardFooter: ComponentType<Item> | undefined;
   readonly CardHeader: ComponentType<Item> | undefined;
@@ -10,11 +10,11 @@ interface Props<Item> {
   readonly items: readonly Item[];
 }
 
-interface State<Item> {
+interface State<Item extends Record<string, unknown>> {
   readonly cardProps: readonly (CardProps<Item> & Required<Attributes>)[];
 }
 
-export default function useMuiCards<Item>({
+export default function useMuiCards<Item extends Record<string, unknown>>({
   CardContent,
   CardFooter,
   CardHeader,

@@ -7,19 +7,16 @@ import type Props from './types/props';
 const AwsTable = lazy(async () => import('./table.aws.view'));
 const MuiTable = lazy(async () => import('./table.mui.view'));
 
-export default function Table<Item>(
+export default function Table<Item extends Record<string, unknown>>(
   props: Readonly<Props<Item>>,
 ): ReactElement {
   return (
-    <Design<Readonly<Props<unknown>>>
-      // Type 'Readonly<Props<Item>>' is not assignable to type
-      //   'Readonly<Props<unknown>>'.
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    <Design
       components={{
         [DesignSystem.Aws]: AwsTable,
         [DesignSystem.Material]: MuiTable,
       }}
-      props={props as Readonly<Props<unknown>>}
+      props={props as Readonly<Props<Record<string, unknown>>>}
     />
   );
 }

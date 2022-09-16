@@ -10,7 +10,7 @@ const CARDS_LAYOUT: CardsProps.CardsLayout = {
 
 const CARDS_PER_ROW: CardsProps.CardsLayout[] = [CARDS_LAYOUT];
 
-export default function AwsCards<Item>({
+export default function AwsCards<Item extends Record<string, unknown>>({
   CardContent,
   CardFooter,
   CardHeader,
