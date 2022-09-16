@@ -1,0 +1,100 @@
+{
+  "editor.tabSize": 2,
+  "eslint.nodePath": ".yarn/sdks",
+  "eslint.runtime": "node",
+  "files.eol": "\n",
+  "prettier.configPath": ".prettierrc.json",
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "editor.rulers": [
+    80
+  ],
+  "files.exclude": {
+    "**/.yarn/": true,
+    "**/node_modules/": true,
+    "**/.pnp.*": true,
+    ".git/": true,
+    ".idea/": true,
+    "packages/*/.next/": true,
+    "packages/*/.nyc_output/": true,
+    "packages/*/build/": true,
+    "packages/*/coverage/": true,
+    "packages/*/cypress/coverage/": true,
+    "packages/*/cypress/downloads/": true,
+    "packages/*/cypress/screenshots/": true,
+    "packages/*/cypress/videos/": true,
+    "packages/*/dist/": true,
+    "packages/*/jest/": true,
+    "packages/*/lighthouse.report.html": true,
+    ".attach_pid*": true,
+    "yarn.lock": true
+  },
+  "files.watcherExclude": {
+    "**/.yarn/cache/**": true,
+    "**/.yarn/sdks/**": true,
+    "**/.yarn/unplugged/**": true,
+    "**/.yarn/build-state.yml": true,
+    "**/.yarn/install-state.gz": true,
+    "**/node_modules/**": true,
+    "**/.pnp.*": true,
+    ".git/objects/**": true,
+    ".git/subtree-cache/**": true,
+    ".idea/**": true,
+    "packages/*/.next/**": true,
+    "packages/*/.nyc_output/**": true,
+    "packages/*/build/**": true,
+    "packages/*/coverage/**": true,
+    "packages/*/cypress/coverage/**": true,
+    "packages/*/cypress/downloads/**": true,
+    "packages/*/dist/**": true,
+    "packages/*/jest/**": true,
+    "packages/*/lighthouse.report.html": true,
+    ".attach_pid*": true,
+    "yarn.lock": true
+  },
+  "search.exclude": {
+    "**/.yarn/": true,
+    "**/node_modules/": true,
+    "**/.pnp.*": true,
+    ".git/": true,
+    ".idea/": true,
+    "packages/*/.next/": true,
+    "packages/*/.nyc_output/": true,
+    "packages/*/build/": true,
+    "packages/*/coverage/": true,
+    "packages/*/cypress/coverage/": true,
+    "packages/*/cypress/screenshots/": true,
+    "packages/*/cypress/videos/": true,
+    "packages/*/dist/": true,
+    "packages/*/jest/": true,
+    "packages/*/lighthouse.report.html": true,
+    ".attach_pid*": true,
+    "yarn.lock": true,
+    "**/.yarn": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

@@ -1,0 +1,26 @@
+compatibility_date = "2023-02-06"
+main = "src/index.ts"
+name = "cloudflare-analytics"
+tsconfig = "./tsconfig.json"
+workers_dev = true
+
+analytics_engine_datasets = [
+  { binding = "ERRORS" },
+  { binding = "FETCH" },
+  { binding = "SCHEDULED" }
+]
+
+r2_buckets = [
+  { binding = "RESULTS", bucket_name = "results", preview_bucket_name = "results-preview" }
+]
+
+routes = [
+  { custom_domain = true, pattern = "analytics.cloudflare.cscdn.net" }
+]
+
+# Workers that use cron triggers do not currently support smart placement.
+# [placement]
+# mode = "smart"
+
+[triggers]
+crons = ["0 0 * * *"]

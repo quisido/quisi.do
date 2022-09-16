@@ -1,17 +1,5 @@
 {
-  "extends": "@monorepo-template/tsconfig/react-application/eslint.json",
-  "include": ["**/*", "**/*.json", ".eslintrc.cjs"],
-  "exclude": [
-    ".git/",
-    ".idea/",
-    ".nyc_output/",
-    ".yarn/",
-    "build/",
-    "coverage/",
-    "cypress/",
-    "jest/",
-    "node_modules/",
-    "src/**/*.e2e.ts",
-    "src/test/cypress/"
-  ]
+  "exclude": ["sarif/"],
+  "extends": "./tsconfig.json",
+  "include": ["**/*", "**/.*", "**/*.json"]
 }

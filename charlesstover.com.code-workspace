@@ -1,0 +1,97 @@
+{
+  "folders": [
+    {
+      "name": "/",
+      "path": "."
+    },
+
+    {
+      "name": "CharlesStover.com (next)",
+      "path": "packages/next"
+    },
+
+    {
+      "name": "CharlesStover.com (react-scripts)",
+      "path": "packages/react-scripts"
+    },
+
+    {
+      "name": "Amazon CloudWatch RUM React client",
+      "path": "packages/aws-rum-react"
+    },
+
+    {
+      "name": "Cloudflare Analytics worker",
+      "path": "packages/cloudflare-analytics-worker"
+    },
+
+    {
+      "name": "React Datadog",
+      "path": "packages/react-datadog"
+    },
+
+    {
+      "name": "map unknown to string",
+      "path": "packages/unknown2string"
+    },
+
+    {
+      "name": "useOffline",
+      "path": "packages/use-offline"
+    }
+  ],
+
+  "settings": {
+    "eslint.nodePath": "../../.yarn/sdks",
+    "prettier.configPath": "../../.prettierrc.json",
+    "prettier.prettierPath": "../../.yarn/sdks/prettier/index.js",
+    "typescript.tsdk": ".yarn/sdks/typescript/lib",
+
+    "files.exclude": {
+      "**/.yarn/": true,
+      "**/node_modules/": true,
+      "**/.pnp.*": true,
+      ".git/": true,
+      ".idea/": true,
+      ".next/": true,
+      ".nyc_output/": true,
+      "build/": true,
+      "coverage/": true,
+      "cypress/coverage/": true,
+      "cypress/downloads/": true,
+      "cypress/screenshots/": true,
+      "cypress/videos/": true,
+      "dist/": true,
+      "jest/": true,
+      "packages/*/*": true,
+      "sarif/": true,
+      ".attach_pid*": true,
+      "lighthouse.report.*": true,
+      "yarn.lock": true
+    },
+
+    "files.watcherExclude": {
+      "**/.yarn/cache/**": true,
+      "**/.yarn/sdks/**": true,
+      "**/.yarn/unplugged/**": true,
+      "**/.yarn/build-state.yml": true,
+      "**/.yarn/install-state.gz": true,
+      "**/node_modules/**": true,
+      "**/.pnp.*": true,
+      ".git/objects/**": true,
+      ".git/subtree-cache/**": true,
+      ".idea/**": true,
+      ".next/**": true,
+      ".nyc_output/**": true,
+      "build/**": true,
+      "coverage/**": true,
+      "cypress/coverage/**": true,
+      "cypress/downloads/**": true,
+      "dist/**": true,
+      "jest/**": true,
+      "lighthouse.report.html": true,
+      ".attach_pid*": true,
+      "yarn.lock": true
+    }
+  }
+}

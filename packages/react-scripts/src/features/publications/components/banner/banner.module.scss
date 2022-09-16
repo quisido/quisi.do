@@ -1,0 +1,99 @@
+@mixin chip($x, $y) {
+  $border-color: #404040;
+  background-color: rgba(64 64 64 / 90%) !important;
+  border-bottom-color: $border-color !important;
+  border-left-color: $border-color !important;
+  border-top-color: $border-color !important;
+  border-style: solid !important;
+  border-width: 0 !important;
+  box-shadow: 0.125em 0.125em 0.25em 0.25em #000000;
+  line-height: 1em;
+  position: absolute;
+
+  @if $x == 'left' {
+    border-right-color: $border-color !important;
+    border-right-width: 1px !important;
+    left: 0;
+    padding-right: 1em !important;
+  }
+
+  @if $x == 'right' {
+    border-left-color: $border-color !important;
+    border-left-width: 1px !important;
+    padding-left: 1em !important;
+    right: 0;
+  }
+
+  @if $y == 'bottom' {
+    border-top-color: $border-color !important;
+    border-top-width: 1px !important;
+    bottom: 0;
+  }
+
+  @if $y == 'top' {
+    border-bottom-color: $border-color !important;
+    border-bottom-width: 1px !important;
+    top: 0;
+  }
+}
+
+.bannerHeight {
+  align-items: center;
+  display: flex;
+  min-height: 220px;
+}
+
+.bannerWidth {
+  line-height: 0;
+  margin: 0 auto;
+  opacity: 0.8;
+  overflow: hidden;
+  position: relative;
+  width: fit-content;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.columnLayout > div {
+  justify-content: space-around;
+}
+
+.dateTime {
+  @include chip(left, bottom);
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+}
+
+.link {
+  display: inline-block !important;
+  line-height: 0 !important;
+
+  // AWS UI's external icon
+  > span {
+    display: none !important;
+  }
+}
+
+.reactions {
+  @include chip(right, top);
+  border-bottom-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.readingTime {
+  @include chip(right, bottom);
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.views {
+  @include chip(left, top);
+  border-bottom-left-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}

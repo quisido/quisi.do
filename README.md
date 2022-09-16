@@ -1,9 +1,20 @@
 # [CharlesStover.com](https://charlesstover.com/)
 
-[![GitHub Action](https://github.com/CharlesStover/charlesstover.com/actions/workflows/charlesstover-com.yml/badge.svg)](https://github.com/CharlesStover/charlesstover.com/actions/workflows/charlesstover-com.yml)
-[![Cypress](https://img.shields.io/endpoint?label=Cypress&style=flat&url=https://dashboard.cypress.io/badge/simple/fahz48/main)](https://dashboard.cypress.io/projects/fahz48/runs)
+The `CharlesStover.com` repository contains the professional portfolio of
+[Charles Stover](https://charlesstover.com/) and all the distributable packages
+used to build it.
 
-the professional portfolio of Charles Stover
+This repository serves as a monorepo with each package living in the `packages`
+directory. The fully integrated application lives in the `packages/next` and the
+`packages/react-scripts` directory.
+
+## Visual Studio Code
+
+This repository intends to support Visual Studio Code as its primary development
+environment. Its configurations in the
+[`.vscode` directory](https://github.com/CharlesStover/charlesstover.com/tree/main/.vscode)
+are committed, and an official Code Workspace for the repository can be found in
+[`charlesstover.com.code-workspace`](https://github.com/CharlesStover/charlesstover.com/blob/main/charlesstover.com.code-workspace).
 
 ## Contributing
 
@@ -11,22 +22,5 @@ To install this repository to begin local development, use the following
 commands in order:
 
 - `yarn set version latest` to keep Yarn up-to-date.
-- `yarn up "*" "@*/*" && yarn up -R caniuse-lite`
-  to install and upgrade dependencies.
-- `yarn sdks vscode` to integrate with Visual Studio Code.
-
-To run the website locally, use `yarn start`.
-
-### Commands
-
-- `yarn build` to build the production application.
-- `yarn cypress` to run end-to-end tests.
-- `yarn jest` to run unit tests.
-- `yarn jest-watch` to run unit tests in watch mode.
-- `yarn start` to start the development application.
-
-### Debugging
-
-#### `Node Sass does not yet support your current environment: OS X 64-bit with Unsupported runtime (93)`
-
-Downgrade from Node 16 to Node 15.
+- `yarn install` to synchronize Yarn's version with its dependencies.
+- `yarn run up` to upgrade dependencies.

@@ -1,0 +1,15 @@
+/**/.DS_Store
+/jest/
+/node_modules/
+/src/
+/*.iml
+/.eslintignore
+/.eslintrc.cjs
+/.gitignore
+/.npmignore
+/.tsbuildinfo
+/jest.config.js
+/rollup.config.js
+/tsconfig.eslint.json
+/tsconfig.json
+/tsconfig.rollup.json
