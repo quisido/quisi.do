@@ -1,5 +1,6 @@
 import type {
   Attributes,
+  ComponentType,
   LazyExoticComponent,
   PropsWithRef,
   ReactElement,
@@ -9,18 +10,15 @@ import { Suspense } from 'react';
 import type DesignSystem from '../../constants/design-system';
 import useDesign from './design.hook';
 
-interface Props<P> {
-  readonly props: PropsWithRef<P> & Readonly<Attributes>;
-  readonly fallback?: ReactNode | undefined;
+interface Props<P extends Record<string, unknown>> {
   readonly components: Readonly<
-    Record<
-      DesignSystem,
-      LazyExoticComponent<(props: Readonly<P>) => ReactElement>
-    >
+    Record<DesignSystem, LazyExoticComponent<ComponentType<P>>>
   >;
+  readonly fallback?: ReactNode | undefined;
+  readonly props: P;
 }
 
-export default function Design<P>({
+export default function Design<P extends Record<string, unknown>>({
   components,
   fallback: fallbackProp,
   props,
@@ -36,7 +34,7 @@ export default function Design<P>({
 
   return (
     <Suspense fallback={showFallback && (fallbackProp ?? fallbackState)}>
-      <Component {...props} />
+      <Component {...(props as Attributes & PropsWithRef<P>)} />
     </Suspense>
   );
 }

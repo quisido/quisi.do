@@ -1,11 +1,8 @@
 import type {
-  Attributes,
+  ComponentType,
   LazyExoticComponent,
-  PropsWithRef,
-  ReactChild,
   ReactElement,
   ReactFragment,
-  ReactPortal,
 } from 'react';
 import { useEffect, useState } from 'react';
 import type DesignSystem from '../../constants/design-system';
@@ -13,22 +10,28 @@ import useDesignSystem from '../../hooks/use-design-system';
 import filterByDefined from '../../utils/filter-by-defined';
 import filterByPropsWithChildren from './utils/filter-by-props-with-children';
 
-interface Props<P> {
-  readonly props: PropsWithRef<P> & Readonly<Attributes>;
+interface Props<P extends Record<string, unknown>> {
   readonly components: Readonly<
-    Record<DesignSystem, LazyExoticComponent<(props: P) => ReactElement>>
+    Record<DesignSystem, LazyExoticComponent<ComponentType<P>>>
   >;
+  readonly props: P;
 }
 
-interface State<P> {
-  readonly Component: LazyExoticComponent<(props: P) => ReactElement>;
-  readonly fallback: ReactChild | ReactFragment | ReactPortal | boolean | null;
+interface State<P extends Record<string, unknown>> {
+  readonly Component: LazyExoticComponent<ComponentType<P>>;
+  readonly fallback:
+    | ReactElement
+    | ReactFragment
+    | boolean
+    | number
+    | string
+    | null;
   readonly showFallback: boolean;
 }
 
 const SHOW_FALLBACK_DELAY = 333;
 
-export default function useDesign<P>({
+export default function useDesign<P extends Record<string, unknown>>({
   components,
   props,
 }: Readonly<Props<P>>): State<P> {

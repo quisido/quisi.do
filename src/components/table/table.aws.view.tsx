@@ -10,7 +10,7 @@ import filterByDefined from '../../utils/filter-by-defined';
 import useAwsTable from './table.aws.hook';
 import type Props from './types/props';
 
-export default function AwsTable<Item>({
+export default function AwsTable<Item extends Record<string, unknown>>({
   Description,
   columns,
   filter,

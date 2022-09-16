@@ -5,7 +5,7 @@ import filterByUndefined from '../../../utils/filter-by-undefined';
 import type CellProps from '../types/mui-cell-props';
 import type RowProps from '../types/mui-row-props';
 
-interface Props<Item> {
+interface Props<Item extends Record<string, unknown>> {
   readonly Description?: ComponentType<Item> | undefined;
   readonly columns: readonly Column<Item>[];
   readonly items: readonly Item[];
@@ -13,7 +13,9 @@ interface Props<Item> {
 
 const FIRST_INDEX = 0;
 
-export default function useMuiTableRowProps<Item>({
+export default function useMuiTableRowProps<
+  Item extends Record<string, unknown>,
+>({
   Description,
   columns,
   items,

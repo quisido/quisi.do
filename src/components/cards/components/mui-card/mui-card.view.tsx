@@ -10,7 +10,7 @@ import styles from './mui-card.module.scss';
 
 const rootClassName: string = validateString(styles.root);
 
-export default function MuiCard<Item>({
+export default function MuiCard<Item extends Record<string, unknown>>({
   Content,
   Footer,
   Header,

@@ -14,7 +14,7 @@ interface State<Item> {
   readonly cardDefinition: CardsProps.CardDefinition<Item>;
 }
 
-export default function useAwsCards<Item>({
+export default function useAwsCards<Item extends Record<string, unknown>>({
   CardContent,
   CardFooter,
   CardHeader,

@@ -82,7 +82,7 @@ interface State<Item> {
 
 const FIRST_PAGE = 1;
 
-export default function useAwsTableHook<Item>({
+export default function useAwsTableHook<Item extends Record<string, unknown>>({
   Description,
   columns,
   onFilterChange,

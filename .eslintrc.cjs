@@ -63,7 +63,7 @@ module.exports = {
 
   parserOptions: {
     extraFileExtensions: ['.json'],
-    project: './tsconfig.eslint.json',
+    project: ['./tsconfig.eslint.json', './cypress/tsconfig.eslint.json'],
     tsconfigRootDir: __dirname,
     useJSXTextNode: true,
     warnOnUnsupportedTypeScriptVersion: false,

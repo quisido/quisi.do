@@ -1,6 +1,0 @@
-{
-  "extends": "@monorepo-template/react-application-tsconfig/development",
-  "compilerOptions": {
-    "types": ["react/next", "react-dom/next"]
-  }
-}

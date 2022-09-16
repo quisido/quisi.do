@@ -1,4 +1,4 @@
-export default interface PackagesItem {
+export default interface PackagesItem extends Record<string, unknown> {
   readonly directDownloads: number;
   readonly downloads: readonly number[];
   readonly href: string;

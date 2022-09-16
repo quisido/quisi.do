@@ -15,7 +15,9 @@ This function generates a renderer function that can be passed to the `content`
   resolving the above two issues.
 */
 
-export default function mapComponentToRenderer<Props>(
+export default function mapComponentToRenderer<
+  Props extends Record<string, unknown>,
+>(
   Component: ComponentType<Props> | undefined,
 ): FunctionComponent<Props> | undefined {
   if (filterByUndefined(Component)) {
