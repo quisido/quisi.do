@@ -21,8 +21,10 @@ To run the website locally, use `yarn start`.
 
 - `yarn build` to build the production application.
 - `yarn cypress` to run end-to-end tests.
+- `yarn eslint` to run lint tests.
+- `yarn eslint:fix` to automatically fix lint errors.
 - `yarn jest` to run unit tests.
-- `yarn jest-watch` to run unit tests in watch mode.
+- `yarn jest:watch` to run unit tests in watch mode.
 - `yarn start` to start the development application.
 
 ### Debugging
