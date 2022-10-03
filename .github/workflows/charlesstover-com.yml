@@ -31,7 +31,7 @@ jobs:
 
   build:
     name: Build
-    needs: example-react-module
+    needs: install-yarn
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -58,7 +58,7 @@ jobs:
           path: packages/charlesstover.com/build/
 
   cypress:
-    needs: install-cypress
+    needs: [install-cypress, install-yarn]
     runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout
