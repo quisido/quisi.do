@@ -1,4 +1,3 @@
-import expect from 'expect';
 import mapGitHubShaToVersion from './map-github-sha-to-version';
 
 describe('mapGitHubShaToVersion', (): void => {

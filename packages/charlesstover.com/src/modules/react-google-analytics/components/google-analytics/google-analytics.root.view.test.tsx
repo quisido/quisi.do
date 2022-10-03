@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react';
-import expect from 'expect';
 import GOOGLE_ANALYTICS_WINDOW from '../../constants/google-analytics-window';
 import GoogleAnalytics from './google-analytics.root.view';
 

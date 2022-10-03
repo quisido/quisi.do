@@ -1,4 +1,3 @@
-import expect from 'expect';
 import GOOGLE_ANALYTICS_WINDOW from '../constants/google-analytics-window';
 import gtag from './gtag';
 

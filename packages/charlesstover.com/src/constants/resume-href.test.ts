@@ -1,4 +1,3 @@
-import expect from 'expect';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import RESUME_HREF from './resume-href';

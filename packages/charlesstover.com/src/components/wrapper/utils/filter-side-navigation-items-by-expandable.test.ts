@@ -1,5 +1,4 @@
 import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
-import expect from 'expect';
 import filterSideNavigationItemsByExpandable from './filter-side-navigation-items-by-expandable';
 
 const TEST_DIVIDER: SideNavigationProps.Divider = {

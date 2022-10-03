@@ -1,4 +1,3 @@
-import expect from 'expect';
 import MISSING_HEAD_ERROR from '../constants/missing-head-element';
 import getHead from './get-head';
 

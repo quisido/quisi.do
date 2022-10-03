@@ -9,3 +9,5 @@ describe('Home', (): void => {
     cy.contains('h2', 'Projects');
   });
 });
+
+export default null;

@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react';
-import expect from 'expect';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import Routes from './routes.view';

@@ -7,6 +7,8 @@
     "cypress/",
     "jest/",
     "node_modules/",
-    "src/**/*.e2e.ts"
+    "src/**/*.e2e.ts",
+    "src/test/cypress/",
+    "cypress.config.cjs"
   ]
 }

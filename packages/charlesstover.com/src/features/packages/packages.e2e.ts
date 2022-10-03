@@ -8,3 +8,5 @@ describe('Packages', (): void => {
     cy.contains('h2', 'Packages');
   });
 });
+
+export default null;

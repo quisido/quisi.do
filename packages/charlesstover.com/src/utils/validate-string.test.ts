@@ -1,4 +1,3 @@
-import expect from 'expect';
 import validateString from './validate-string';
 
 describe('validateString', (): void => {

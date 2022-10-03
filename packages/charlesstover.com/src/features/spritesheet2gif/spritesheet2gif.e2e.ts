@@ -8,3 +8,5 @@ describe('Sprite sheet 2 GIF', (): void => {
     cy.contains('h2', 'Animate a sprite sheet');
   });
 });
+
+export default null;

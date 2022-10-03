@@ -1,5 +1,4 @@
 import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
-import expect from 'expect';
 import filterSideNavigationItemsByHasItems from './filter-side-navigation-items-by-has-items';
 
 const TEST_DIVIDER: SideNavigationProps.Divider = {
