@@ -1,19 +1,5 @@
 {
-  "extends": "@monorepo-template/tsconfig/react-application.json",
-  "include": ["src/"],
-  "exclude": [
-    ".git/",
-    ".idea/",
-    ".nyc_output/",
-    ".yarn/cache/",
-    ".yarn/sdks/",
-    ".yarn/unplugged/",
-    "build/",
-    "coverage/",
-    "cypress/",
-    "jest/",
-    "node_modules/",
-    "src/**/*.e2e.ts",
-    "src/test/cypress/"
-  ]
+  "extends": "@monorepo-template/tsconfig",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["/**/.git/", "/**/.idea/", "/**/.yarn/", "/**/node_modules/"]
 }

@@ -1,6 +1,6 @@
 module.exports = {
   fixturesFolder: false,
-  projectId: 'fahz48',
+  projectId: '4akrvv',
   redirectionLimit: 2,
   e2e: {
     baseUrl: 'http://localhost:3000/',

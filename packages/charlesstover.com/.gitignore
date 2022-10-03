@@ -1,0 +1,9 @@
+/.nyc_output/
+/.yarn/cache/webpack-dev-server/server.pem
+/build/
+/coverage/
+/cypress/coverage/
+/cypress/screenshots/
+/cypress/videos/
+/jest/
+/node_modules/

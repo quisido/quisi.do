@@ -80,5 +80,6 @@
 *.zip             binary
 .pnp.cjs          text -diff
 .pnp.js           text -diff
+.pnp.loader.mjs   text -diff
 package-lock.json text -diff
 pnpm-lock.yaml    text eol=lf -diff
