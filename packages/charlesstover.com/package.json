@@ -27,7 +27,9 @@
     "eslint": "eslint '**/*'",
     "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest --runInBand",
-    "jest:watch": "jest --coverage=false --runInBand --watch",
+    "jest:watch": "jest --runInBand --watch",
+    "prepack": "yarn build",
+    "prepublish": "yarn eslint && yarn jest",
     "serve": "serve --single build",
     "start": "DISABLE_ESLINT_PLUGIN=true react-app-rewired start"
   },
