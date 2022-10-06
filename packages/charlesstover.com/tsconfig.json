@@ -1,0 +1,19 @@
+{
+  "extends": "@monorepo-template/tsconfig/react-application.json",
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+
+  "compilerOptions": {
+    "types": ["jest", "node"]
+  },
+
+  "exclude": [
+    "build/",
+    "coverage/",
+    "cypress/",
+    "jest/",
+    "node_modules/",
+    "src/**/*.e2e.ts",
+    "src/test/cypress/",
+    "cypress.config.cjs"
+  ]
+}
