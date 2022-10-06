@@ -1,5 +1,6 @@
 module.exports = {
   extends: ['@monorepo-template/eslint-config/react-module'],
+  plugins: ['import'],
 
   parserOptions: {
     project: ['./tsconfig.eslint.json', './tsconfig.eslint.cypress.json'],
@@ -7,6 +8,8 @@ module.exports = {
   },
 
   rules: {
+    '@typescript-eslint/prefer-readonly-parameter-types': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'import/no-restricted-paths': [
       'error',
       {

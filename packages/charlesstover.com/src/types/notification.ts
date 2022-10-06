@@ -2,13 +2,13 @@ import type { ComponentType, ReactNode } from 'react';
 
 interface BaseNotification {
   readonly message: ReactNode;
-  readonly onDismiss?: (() => void) | undefined;
+  readonly onDismiss?: VoidFunction | undefined;
   readonly type: 'error';
 }
 
 interface ActionNotification {
   readonly CallToAction: ComponentType<unknown>;
-  readonly onAction: () => void;
+  readonly onAction: VoidFunction;
 }
 
 interface NoActionNotification {

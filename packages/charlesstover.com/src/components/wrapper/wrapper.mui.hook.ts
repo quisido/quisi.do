@@ -4,8 +4,8 @@ import MUI_NAVIGATION_WIDTH from './constants/mui-navigation-width';
 import useMuiMobile from './hooks/use-mui-mobile';
 
 interface State {
-  readonly handleNavigationClose: () => void;
-  readonly handleNavigationOpen: () => void;
+  readonly handleNavigationClose: VoidFunction;
+  readonly handleNavigationOpen: VoidFunction;
   readonly isNavigationOpen: boolean | undefined;
   readonly mainStyle: CSSProperties | undefined;
 }

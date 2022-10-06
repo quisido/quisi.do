@@ -1,5 +1,5 @@
 export default interface MuiNavigationProps {
-  readonly onClose: () => void;
-  readonly onOpen: () => void;
+  readonly onClose: VoidFunction;
+  readonly onOpen: VoidFunction;
   readonly open: boolean | undefined;
 }

@@ -23,8 +23,8 @@ interface ApiGifResponse {
 
 interface Props {
   readonly onError: (error: Readonly<Error>) => void;
-  readonly onErrorDismiss: () => void;
-  readonly onHelpDismiss: () => void;
+  readonly onErrorDismiss: VoidFunction;
+  readonly onHelpDismiss: VoidFunction;
   readonly onHelpRequest: (Help: ComponentType<unknown>) => void;
 }
 
@@ -36,11 +36,11 @@ interface State {
   readonly dimensionLabel: string;
   readonly directionOptions: SelectProps.Options;
   readonly duration: string;
-  readonly handleConvertClick: () => void;
-  readonly handleDimensionInfoFollow: () => void;
-  readonly handleDirectionInfoFollow: () => void;
-  readonly handleHeaderInfoFollow: () => void;
-  readonly handleMatteInfoFollow: () => void;
+  readonly handleConvertClick: VoidFunction;
+  readonly handleDimensionInfoFollow: VoidFunction;
+  readonly handleDirectionInfoFollow: VoidFunction;
+  readonly handleHeaderInfoFollow: VoidFunction;
+  readonly handleMatteInfoFollow: VoidFunction;
   readonly isConvertButtonLoading: boolean;
   readonly isDimensionInfo: boolean;
   readonly isDirectionInfo: boolean;

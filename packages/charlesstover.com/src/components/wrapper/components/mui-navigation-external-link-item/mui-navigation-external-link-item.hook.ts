@@ -8,7 +8,7 @@ interface Props {
 }
 
 interface State {
-  readonly handleClick: () => void;
+  readonly handleClick: VoidFunction;
   readonly sx: SxProps<Theme>;
 }
 

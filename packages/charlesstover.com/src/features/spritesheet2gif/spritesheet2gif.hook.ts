@@ -12,8 +12,8 @@ interface State {
   readonly Help: ComponentType<unknown>;
   readonly breadcrumbs: readonly Breadcrumb[];
   readonly handleError: (error: Readonly<Error>) => void;
-  readonly handleErrorDismiss: () => void;
-  readonly handleHelpDismiss: () => void;
+  readonly handleErrorDismiss: VoidFunction;
+  readonly handleHelpDismiss: VoidFunction;
   readonly handleHelpRequest: (Help: ComponentType<unknown>) => void;
   readonly helpOpen: boolean;
   readonly notifications: readonly Notification[];

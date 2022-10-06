@@ -10,7 +10,7 @@ interface Props {
 interface State {
   readonly dense: boolean;
   readonly expanded: boolean;
-  readonly handleClick: () => void;
+  readonly handleClick: VoidFunction;
   readonly sx: SxProps<Theme>;
 }
 

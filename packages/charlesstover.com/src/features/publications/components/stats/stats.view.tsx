@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Span from '../../../../components/span';
