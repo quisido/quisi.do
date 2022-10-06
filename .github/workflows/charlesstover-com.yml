@@ -13,9 +13,12 @@ jobs:
           runTests: false
     strategy:
       matrix:
-        os: [ubuntu, windows]
+        # Windows is disabled until `cypress-io/github-action` supports it.
+        # https://github.com/cypress-io/github-action/pull/470
+        os: [ubuntu] # windows
 
   install-yarn:
+    name: Install Node dependencies
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -115,7 +118,7 @@ jobs:
         # Windows is disabled until `cypress-io/github-action` supports it.
         # https://github.com/cypress-io/github-action/pull/470
         os: [ubuntu] # , windows
-        browser: [chrome, edge, firefox]
+        browser: [chrome, edge] # firefox
         container: [1, 2, 3]
         exclude:
           - browser: edge
