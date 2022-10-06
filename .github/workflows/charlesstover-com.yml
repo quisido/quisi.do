@@ -223,7 +223,7 @@ jobs:
   github-pages:
     name: GitHub Pages
     if: ${{ github.event_name == 'push' }}
-    needs: [build, coverage, cypress, eslint, jest]
+    needs: [build, cypress, eslint, jest] # coverage
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -243,7 +243,7 @@ jobs:
 
   sentry-release:
     if: ${{ github.event_name == 'push' }}
-    needs: [build, coverage, cypress, eslint, jest]
+    needs: [build, cypress, eslint, jest] # coverage
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
