@@ -9,6 +9,9 @@ module.exports = {
 
   rules: {
     '@typescript-eslint/prefer-readonly-parameter-types': 'off',
+    'react/forbid-component-props': 'off',
+    'react/jsx-child-element-spacing': 'off',
+    'react/jsx-max-depth': 'off',
     'react/jsx-props-no-spreading': 'off',
     'import/no-restricted-paths': [
       'error',

@@ -63,23 +63,6 @@ export default class StyleSheetElementManager {
     }
   }
 
-  private emit<T extends keyof EventListeners>(
-    type: T,
-    ...args: Parameters<SetValue<EventListeners[T]>>
-  ): void {
-    if (this._eventListeners[type].size === EMPTY) {
-      this._eventQueue[type].push(args);
-      return;
-    }
-
-    for (const handleEvent of this._eventListeners[type]) {
-      // Fix: A spread argument must either have a tuple type or be passed to a
-      //   rest parameter. ts(2556)
-      // eslint-disable-next-line prefer-spread
-      handleEvent.apply(null, args);
-    }
-  }
-
   public mount(): void {
     if (typeof this._parentNode === 'undefined') {
       this.emit('error', MISSING_MANAGED_STYLE_SHEET_PARENT_NODE_ERROR);
@@ -113,5 +96,22 @@ export default class StyleSheetElementManager {
     }
 
     this._parentNode.removeChild(this._element);
+  }
+
+  private emit<T extends keyof EventListeners>(
+    type: T,
+    ...args: Parameters<SetValue<EventListeners[T]>>
+  ): void {
+    if (this._eventListeners[type].size === EMPTY) {
+      this._eventQueue[type].push(args);
+      return;
+    }
+
+    for (const handleEvent of this._eventListeners[type]) {
+      // Fix: A spread argument must either have a tuple type or be passed to a
+      //   rest parameter. ts(2556)
+      // eslint-disable-next-line prefer-spread
+      handleEvent.apply(null, args);
+    }
   }
 }
