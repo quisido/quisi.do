@@ -27,6 +27,13 @@ const reactionsClassName: string = validateString(styles.reactions);
 const readingTimeClassName: string = validateString(styles.readingTime);
 const viewsClassName: string = validateString(styles.views);
 
+const prefix = (n: number): string => {
+  if (n < 10) {
+    return `0${n}`;
+  }
+  return n.toString();
+};
+
 export default function PublicationBanner({
   dateTime,
   image,
@@ -37,6 +44,8 @@ export default function PublicationBanner({
   views,
 }: Readonly<Props>): ReactElement {
   const date: Date = new Date(dateTime);
+  const monthStr: string = prefix(date.getMonth() + MONTH_OFFSET);
+  const dayStr: string = prefix(date.getDate());
   return (
     <div className={bannerHeightClassName}>
       <div className={bannerWidthClassName}>
@@ -53,8 +62,7 @@ export default function PublicationBanner({
           className={dateTimeClassName}
           title={<I18n>Publication date</I18n>}
         >
-          📅 {date.getFullYear()}-{date.getMonth() + MONTH_OFFSET}-
-          {date.getDate()}
+          📅 {date.getFullYear()}-{monthStr}-{dayStr}
         </Chip>
         {typeof readingTime === 'number' && (
           <Chip
