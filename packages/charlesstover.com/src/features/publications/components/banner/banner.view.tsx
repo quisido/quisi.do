@@ -20,6 +20,7 @@ interface Props {
 
 const bannerHeightClassName: string = validateString(styles.bannerHeight);
 const bannerWidthClassName: string = validateString(styles.bannerWidth);
+const BASE = 10;
 const dateTimeClassName: string = validateString(styles.dateTime);
 const linkClassName: string = validateString(styles.link);
 const MONTH_OFFSET = 1;
@@ -28,7 +29,7 @@ const readingTimeClassName: string = validateString(styles.readingTime);
 const viewsClassName: string = validateString(styles.views);
 
 const prefix = (n: number): string => {
-  if (n < 10) {
+  if (n < BASE) {
     return `0${n}`;
   }
   return n.toString();
