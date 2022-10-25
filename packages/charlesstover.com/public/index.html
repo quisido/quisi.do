@@ -4,11 +4,17 @@
     <title>Charles Stover</title>
     <link rel="icon" type="image/x-icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="preconnect" href="https://cloudflareinsights.com" />
+    <link rel="preconnect" href="https://edge.fullstory.com" />
+    <link rel="preconnect" href="https://rs.fullstory.com" />
+    <link rel="preconnect" href="https://o592283.ingest.sentry.io" />
     <link
-      rel="stylesheet"
+      rel="preload"
+      as="style"
       media="all"
       type="text/css"
       href="https://fonts.googleapis.com/css?display=swap&family=Roboto:300,400,500,700"
+      onload="this.onload = null; this.setAttribute('rel', 'stylesheet');"
     />
     <meta charset="utf-8" />
     <meta name="color-scheme" content="dark" />
