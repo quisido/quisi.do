@@ -1,9 +1,9 @@
 name: CharlesStover.com
 
 jobs:
-  install:
-    name: Install dependencies
-    runs-on: ${{ matrix.os }}-latest
+  install-yarn:
+    name: Install Node dependencies
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -15,22 +15,10 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable
-      - name: Enable Plug-n-Play `cypress`
-        run: yarn cypress:pnp
-        working-directory: packages/charlesstover.com
-      - name: Install Cypress
-        uses: cypress-io/github-action@v4
-        with:
-          install: false
-          runTests: false
-          working-directory: packages/charlesstover.com
-    strategy:
-      matrix:
-        os: [ubuntu, windows]
 
   build:
     name: Build
-    needs: install
+    needs: install-yarn
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -57,7 +45,7 @@ jobs:
           path: packages/charlesstover.com/build/
 
   cypress:
-    needs: install
+    needs: install-yarn
     runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout
@@ -70,9 +58,6 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable
-      - name: Enable Plug-n-Play `cypress`
-        run: yarn cypress:pnp
-        working-directory: packages/charlesstover.com
       - name: End-to-end test
         uses: cypress-io/github-action@v4
         env:
@@ -84,20 +69,19 @@ jobs:
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
         with:
           browser: ${{ matrix.browser }}
-          ci-build-id: ${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          ci-build-id: ${{ github.run_id }}-${{ github.run_attempt }}
           command-prefix: yarn dlx
           config-file: cypress.config.cjs
-          group: ${{ matrix.browser }}
-          install: false
+          group: ${{ matrix.os }}-${{ matrix.browser }}
           parallel: true
+          project: packages/charlesstover.com
           record: true
-          start: yarn run cypress:start
+          start: yarn packages/charlesstover.com run cypress:start
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000/'
-          wait-on-timeout: 120
-          working-directory: packages/charlesstover.com
+          wait-on-timeout: 300
       - name: Upload coverage
-        if: matrix.os == 'ubuntu'
+        if: ${{ always() }}
         uses: actions/upload-artifact@v3
         with:
           name: charlesstover-com--cypress--coverage
@@ -119,17 +103,14 @@ jobs:
       matrix:
         os: [ubuntu, windows]
         browser: [chrome, edge] # firefox
-        # Cypress only supports 1 container for Edge.
-        # With multiple containers, Cypress will use the wrong browser version.
-        # https://github.com/cypress-io/github-action/issues/121
-        container: [1]
+        container: [1, 2]
         exclude:
           - browser: edge
             os: ubuntu
 
   eslint:
     name: ESLint
-    needs: install
+    needs: install-yarn
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -147,7 +128,7 @@ jobs:
 
   jest:
     name: Jest
-    needs: install
+    needs: install-yarn
     runs-on: ubuntu-latest
     services:
       datadog-agent:
@@ -235,7 +216,7 @@ jobs:
           name: charlesstover-com--build
           path: packages/charlesstover.com/build/
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@4.4.1
         with:
           branch: gh-pages
           clean: true
@@ -243,7 +224,6 @@ jobs:
           single-commit: true
 
   sentry-release:
-    name: Sentry release
     if: ${{ github.event_name == 'push' }}
     needs: [build, coverage, cypress, eslint, jest]
     runs-on: ubuntu-latest
@@ -268,7 +248,6 @@ jobs:
           version: ${{ github.sha }}
 
   cloudflare-purge:
-    name: Cloudflare purge
     if: ${{ github.event_name == 'push' }}
     needs: github-pages
     runs-on: ubuntu-latest
