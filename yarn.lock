@@ -4265,23 +4265,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/cypress-coverage-plugin@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "@monorepo-template/cypress-coverage-plugin@npm:1.0.5"
-  dependencies:
-    "@monorepo-template/cypress-nyc-config": ^1.0.0
-  peerDependencies:
-    "@babel/core": ^7.0.1
-    "@babel/preset-env": ^7.0.0
-    "@cypress/code-coverage": ^3.0.0
-    babel-loader: ^8.0.2
-    cypress: ^9.0.0 || ^10.0.0
-    webpack: ^4 || ^5
-  checksum: afa8e84725499c592c629cdd88d806acf97ecc029495e2be0b4accad6e85c56e35b0170018eafd718ff19866d7ce41b4fa91f8447d39ad65f1a237b210780da0
-  languageName: node
-  linkType: hard
-
-"@monorepo-template/cypress-nyc-config@npm:^1.0.0":
+"@monorepo-template/cypress-nyc-config@npm:^1.0.3":
   version: 1.0.3
   resolution: "@monorepo-template/cypress-nyc-config@npm:1.0.3"
   checksum: eae7db881a500108ecce93bad6e237f769ed4a030b9265d6b036da8c00b86f013bdf4b5ec2ea392f1c361a2e7ae6504e894e8e683df374752e1f9f8bb7f9ebc0
@@ -7796,7 +7780,7 @@ __metadata:
     "@fullstory/browser": ^1.6.2
     "@monorepo-template/coverage": ^1.2.1
     "@monorepo-template/cypress-coverage-config-override": ^1.2.4
-    "@monorepo-template/cypress-coverage-plugin": ^1.0.5
+    "@monorepo-template/cypress-nyc-config": ^1.0.3
     "@monorepo-template/eslint-config": ^1.0.3
     "@monorepo-template/jest-application-preset": ^1.1.2
     "@monorepo-template/tsconfig": ^1.1.2

@@ -8,6 +8,9 @@ module.exports = {
   },
 
   rules: {
+    '@typescript-eslint/consistent-type-imports': 'off',
+    '@typescript-eslint/naming-convention': 'off',
+    '@typescript-eslint/no-type-alias': 'off',
     '@typescript-eslint/prefer-readonly-parameter-types': 'off',
     'react/forbid-component-props': 'off',
     'react/jsx-child-element-spacing': 'off',

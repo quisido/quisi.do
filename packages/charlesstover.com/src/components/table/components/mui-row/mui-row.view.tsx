@@ -22,14 +22,12 @@ const describedClassNames: readonly string[] = [
 const describedClassName: string = describedClassNames.join(' ');
 
 const DescribedStyledRow = styled(TableRow)(({ theme }) => ({
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   '&:nth-of-type(4n), &:nth-of-type(4n - 1)': {
     backgroundColor: theme.palette.action.hover,
   },
 }));
 
 const StyledRow = styled(TableRow)(({ theme }) => ({
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },

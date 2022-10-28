@@ -1,7 +1,6 @@
-const {
-  default: cypressConfigOverride,
-} = require('@monorepo-template/cypress-coverage-config-override');
 const { join } = require('path');
+const cypressConfigOverride =
+  require('@monorepo-template/cypress-coverage-config-override').default;
 
 const DEVELOPMENT_TSCONFIG_PATH = join(__dirname, 'tsconfig.development.json');
 const PRODUCTION_TSCONFIG_PATH = join(__dirname, 'tsconfig.production.json');

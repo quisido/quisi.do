@@ -1,4 +1,7 @@
-module.exports = {
+const { defineConfig } = require('cypress');
+
+module.exports = defineConfig({
+  defaultCommandTimeout: 10000,
   fixturesFolder: false,
   projectId: 'fahz48',
   redirectionLimit: 2,
@@ -13,4 +16,4 @@ module.exports = {
   env: {
     codeCoverageTasksRegistered: true,
   },
-};
+});

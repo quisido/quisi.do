@@ -10,7 +10,6 @@ import {
 } from 'react-router-dom';
 
 // The following types are incorrectly defined and required by `@sentry/react`.
-// eslint-disable-next-line @typescript-eslint/no-type-alias
 type Params<Key extends string = string> = {
   readonly [key in Key]: string | undefined;
 };

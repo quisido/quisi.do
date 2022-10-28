@@ -16,9 +16,7 @@ interface NoActionNotification {
   readonly onAction?: undefined;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-type-alias
-type Notification =
-  // eslint-disable-next-line @typescript-eslint/no-type-alias
-  BaseNotification & (ActionNotification | NoActionNotification);
+type Notification = BaseNotification &
+  (ActionNotification | NoActionNotification);
 
 export default Notification;

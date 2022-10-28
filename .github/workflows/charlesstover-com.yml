@@ -13,9 +13,7 @@ jobs:
           runTests: false
     strategy:
       matrix:
-        # Windows is disabled until `cypress-io/github-action` supports it.
-        # https://github.com/cypress-io/github-action/pull/470
-        os: [ubuntu] # windows
+        os: [ubuntu, windows]
 
   install-yarn:
     name: Install Node dependencies
@@ -93,13 +91,13 @@ jobs:
           start: yarn packages/charlesstover.com run cypress:start
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000/'
-          wait-on-timeout: 120
+          wait-on-timeout: 180
       - name: Upload coverage
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
           name: charlesstover-com--cypress--coverage
-          path: packages/charlesstover.com/cypress/coverage/
+          path: packages/charlesstover.com/coverage/
       - name: Upload screenshots
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
@@ -115,9 +113,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Windows is disabled until `cypress-io/github-action` supports it.
-        # https://github.com/cypress-io/github-action/pull/470
-        os: [ubuntu] # , windows
+        os: [ubuntu, windows]
         browser: [chrome, edge] # firefox
         container: [1, 2, 3]
         exclude:
@@ -179,8 +175,6 @@ jobs:
 
   coverage:
     name: Coverage
-    # Disabled until Cypress 10 supports coverage reporting.
-    if: ${{ !always() }}
     needs: [cypress, jest]
     runs-on: ubuntu-latest
     steps:
@@ -223,7 +217,7 @@ jobs:
   github-pages:
     name: GitHub Pages
     if: ${{ github.event_name == 'push' }}
-    needs: [build, cypress, eslint, jest] # coverage
+    needs: [build, coverage, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -243,7 +237,7 @@ jobs:
 
   sentry-release:
     if: ${{ github.event_name == 'push' }}
-    needs: [build, cypress, eslint, jest] # coverage
+    needs: [build, coverage, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

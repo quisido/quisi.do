@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-type-alias */
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { TableProps } from '@awsui/components-react/table';
 
