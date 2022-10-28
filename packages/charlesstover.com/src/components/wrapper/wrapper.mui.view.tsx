@@ -36,7 +36,7 @@ export default function MuiWrapper({
       <Notifications>{notifications}</Notifications>
       <main className={mainClassName} style={mainStyle}>
         <Breadcrumbs>{breadcrumbs}</Breadcrumbs>
-        <Suspense fallback={<Fallback>{fallback}</Fallback>}>
+        <Suspense fallback={<Fallback fallback={fallback} />}>
           {children}
         </Suspense>
         <Footer />

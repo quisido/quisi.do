@@ -1,14 +1,15 @@
-import type { PropsWithChildren, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import Div from '../../../../components/div';
 import LoadingIcon from '../../../../components/loading-icon';
+import Props from '../../types/props';
 
 export default function Fallback({
-  children,
-}: Readonly<PropsWithChildren>): ReactElement {
+  fallback,
+}: Pick<Props, 'fallback'>): ReactElement {
   return (
     <Div textAlign="center">
       <LoadingIcon />
-      {children}
+      {fallback}
     </Div>
   );
 }
