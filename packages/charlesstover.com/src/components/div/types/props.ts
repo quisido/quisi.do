@@ -58,9 +58,7 @@ interface MarginYProps {
   readonly marginY?: undefined;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-type-alias
 type Props = BaseProps &
-  // eslint-disable-next-line @typescript-eslint/no-type-alias
   (MarginProp | ((MarginXProp | MarginXProps) & (MarginYProp | MarginYProps)));
 
 export default Props;

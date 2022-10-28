@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 export default interface DevArticle {
   readonly canonical_url: string;
   readonly collection_id: null;

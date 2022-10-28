@@ -7,7 +7,6 @@ export default {
   },
 
   transform: {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     '@awsui-.+\\.[cm]?js$': 'babel-jest',
   },
 };
