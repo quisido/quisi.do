@@ -1,7 +1,7 @@
 const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
-  defaultCommandTimeout: 10000,
+  defaultCommandTimeout: 30000,
   fixturesFolder: false,
   projectId: 'fahz48',
   redirectionLimit: 2,
