@@ -101,7 +101,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: charlesstover-com--cypress--coverage
-          path: packages/charlesstover.com/cypress/coverage/
+          path: packages/charlesstover.com/coverage/
       - name: Upload screenshots
         if: ${{ always() }}
         uses: actions/upload-artifact@v3
