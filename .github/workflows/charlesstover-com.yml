@@ -89,15 +89,12 @@ jobs:
           config-file: cypress.config.cjs
           group: ${{ matrix.os }}-${{ matrix.browser }}
           install: false
-          # If using multiple containers, set this to true.
-          parallel: false
+          parallel: true
           record: true
           start: yarn run cypress:start
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000/'
-          # When running n parallel, set this to ~120.
-          # When the OS is Windows, set this to ~300.
-          # wait-on-timeout: 120
+          wait-on-timeout: 300
           working-directory: packages/charlesstover.com
       - name: Upload coverage
         if: ${{ always() }}
