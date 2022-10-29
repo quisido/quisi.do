@@ -15,13 +15,19 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable
+      - name: Enable Plug-n-Play `cypress`
+        working-directory: packages/charlesstover.com
+        run: |
+          mkdir ./node_modules;
+          mkdir ./node_modules/cypress;
+          echo "{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", \"peerDependencies\": { \"cypress\": \"*\" } }" > ./node_modules/cypress/package.json;
+          echo "require('../../../../.pnp.cjs').setup(); module.exports = require('cypress');" > ./node_modules/cypress/index.cjs;
       - name: Install Cypress
         uses: cypress-io/github-action@v4
         env:
           DEBUG: '@cypress/github-action'
         with:
-          install-command: >
-            node -e "const { mkdirSync, writeFileSync } = require('fs'); mkdirSync('./node_modules/cypress', { recursive: true }); writeFileSync('./node_modules/cypress/package.json', '{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", \"peerDependencies\": { "cypress": \"*\" } }'); writeFileSync('./node_modules/cypress/index.cjs', 'require(\"../../../../.pnp.cjs\").setup(); module.exports = require(\"cypress\");');";
+          install: false
           runTests: false
           working-directory: packages/charlesstover.com
     strategy:
@@ -70,6 +76,13 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable
+      - name: Enable Plug-n-Play `cypress`
+        working-directory: packages/charlesstover.com
+        run: |
+          mkdir ./node_modules;
+          mkdir ./node_modules/cypress;
+          echo "{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", \"peerDependencies\": { \"cypress\": \"*\" } }" > ./node_modules/cypress/package.json;
+          echo "require('../../../../.pnp.cjs').setup(); module.exports = require('cypress');" > ./node_modules/cypress/index.cjs;
       - name: End-to-end test
         uses: cypress-io/github-action@v4
         env:
@@ -86,8 +99,7 @@ jobs:
           command-prefix: yarn dlx
           config-file: cypress.config.cjs
           group: ${{ matrix.os }}-${{ matrix.browser }}
-          install-command: >
-            node -e "const { mkdirSync, writeFileSync } = require('fs'); mkdirSync('./node_modules/cypress', { recursive: true }); writeFileSync('./node_modules/cypress/package.json', '{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", \"peerDependencies\": { "cypress": \"*\" } }'); writeFileSync('./node_modules/cypress/index.cjs', 'require(\"../../../../.pnp.cjs\").setup(); module.exports = require(\"cypress\");');";
+          install: false
           parallel: true
           record: true
           start: yarn run cypress:start
