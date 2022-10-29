@@ -7,12 +7,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
       - name: Mock `cypress` Node module resolution
         run: |
-          mkdir ./node_modules;
-          mkdir ./node_modules/cypress;
-          echo "{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", "peerDependencies": { "cypress": "*" } }" > ./node_modules/cypress/package.json;
-          echo "require('../../../../.pnp.cjs').setup(); module.exports = require('cypress');" > ./node_modules/cypress/index.cjs;
+          node -e "const { mkdirSync, writeFileSync } = 'fs'; mkdirSync('./node_modules/cypress', { recursive: true }); writeFileSync('./node_modules/cypress/package.json', '{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", "peerDependencies": { "cypress": "*" } }');
+          ; writeFileSync('./node_modules/cypress/index.cjs', 'require(\"../../../../.pnp.cjs\").setup(); module.exports = require(\"cypress\");');";
           cat ./mode_modules/cypress/package.json;
           cat ./mode_modules/cypress/index.cjs;
       - name: Install Cypress
@@ -85,10 +89,8 @@ jobs:
         run: yarn install --immutable
       - name: Mock `cypress` Node module resolution
         run: >
-          mkdir ./node_modules;
-          mkdir ./node_modules/cypress;
-          echo "{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", "peerDependencies": { "cypress": "*" } }" >> ./node_modules/cypress/package.json;
-          echo "require('../../../../.pnp.cjs').setup(); module.exports = require('cypress');" >> ./node_modules/cypress/index.cjs;
+          node -e "const { mkdirSync, writeFileSync } = 'fs'; mkdirSync('./node_modules/cypress', { recursive: true }); writeFileSync('./node_modules/cypress/package.json', '{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", "peerDependencies": { "cypress": "*" } }');
+          ; writeFileSync('./node_modules/cypress/index.cjs', 'require(\"../../../../.pnp.cjs\").setup(); module.exports = require(\"cypress\");');";
       - name: End-to-end test
         uses: cypress-io/github-action@v4
         env:
