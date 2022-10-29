@@ -100,7 +100,7 @@ jobs:
           wait-on: 'http://localhost:3000/'
           # When running n parallel, set this to ~120.
           # When the OS is Windows, set this to ~300.
-          wait-on-timeout: 0
+          # wait-on-timeout: 120
           working-directory: packages/charlesstover.com
       - name: Upload coverage
         if: ${{ always() }}
