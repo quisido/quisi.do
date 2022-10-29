@@ -9,6 +9,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Cypress
         uses: cypress-io/github-action@v4
+        env:
+          DEBUG: '@cypress/github-action'
         with:
           runTests: false
     strategy:
