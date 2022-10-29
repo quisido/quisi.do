@@ -15,7 +15,7 @@ jobs:
           node-version: 'lts/*'
       - name: Mock `cypress` Node module resolution
         run: |
-          node -e "const { mkdirSync, writeFileSync } = 'fs'; mkdirSync('./node_modules/cypress', { recursive: true }); writeFileSync('./node_modules/cypress/package.json', '{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", "peerDependencies": { "cypress": "*" } }');
+          node -e "const { mkdirSync, writeFileSync } = require('fs'); mkdirSync('./node_modules/cypress', { recursive: true }); writeFileSync('./node_modules/cypress/package.json', '{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", "peerDependencies": { "cypress": "*" } }');
           ; writeFileSync('./node_modules/cypress/index.cjs', 'require(\"../../../../.pnp.cjs\").setup(); module.exports = require(\"cypress\");');";
           cat ./mode_modules/cypress/package.json;
           cat ./mode_modules/cypress/index.cjs;
@@ -89,7 +89,7 @@ jobs:
         run: yarn install --immutable
       - name: Mock `cypress` Node module resolution
         run: >
-          node -e "const { mkdirSync, writeFileSync } = 'fs'; mkdirSync('./node_modules/cypress', { recursive: true }); writeFileSync('./node_modules/cypress/package.json', '{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", "peerDependencies": { "cypress": "*" } }');
+          node -e "const { mkdirSync, writeFileSync } = require('fs'); mkdirSync('./node_modules/cypress', { recursive: true }); writeFileSync('./node_modules/cypress/package.json', '{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", "peerDependencies": { "cypress": "*" } }');
           ; writeFileSync('./node_modules/cypress/index.cjs', 'require(\"../../../../.pnp.cjs\").setup(); module.exports = require(\"cypress\");');";
       - name: End-to-end test
         uses: cypress-io/github-action@v4
