@@ -9,7 +9,7 @@ module.exports = defineConfig({
     baseUrl: 'http://localhost:3000/',
     specPattern: 'src/**/*.e2e.ts',
     setupNodeEvents(on, config) {
-      require('@cypress/code-coverage/task')(on, config);
+      require('@monorepo-template/cypress-coverage-plugin')(on, config);
       return config;
     },
   },

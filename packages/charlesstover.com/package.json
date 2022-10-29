@@ -54,6 +54,7 @@
     "@fullstory/browser": "^1.6.2",
     "@monorepo-template/coverage": "^1.2.1",
     "@monorepo-template/cypress-coverage-config-override": "^1.2.4",
+    "@monorepo-template/cypress-coverage-plugin": "^1.0.6",
     "@monorepo-template/cypress-nyc-config": "^1.0.3",
     "@monorepo-template/eslint-config": "^1.0.3",
     "@monorepo-template/jest-application-preset": "^1.1.2",
