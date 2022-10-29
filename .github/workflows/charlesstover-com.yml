@@ -8,11 +8,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Mock `cypress` Node module resolution
-        run: >
+        run: |
           mkdir ./node_modules;
           mkdir ./node_modules/cypress;
-          echo "{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", "peerDependencies": { "cypress": "*" } }" >> ./node_modules/cypress/package.json;
-          echo "require('../../../../.pnp.cjs').setup(); module.exports = require('cypress');" >> ./node_modules/cypress/index.cjs;
+          echo "{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", "peerDependencies": { "cypress": "*" } }" > ./node_modules/cypress/package.json;
+          echo "require('../../../../.pnp.cjs').setup(); module.exports = require('cypress');" > ./node_modules/cypress/index.cjs;
           cat ./mode_modules/cypress/package.json;
           cat ./mode_modules/cypress/index.cjs;
       - name: Install Cypress
