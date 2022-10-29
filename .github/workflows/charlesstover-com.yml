@@ -92,12 +92,15 @@ jobs:
           config-file: cypress.config.cjs
           group: ${{ matrix.os }}-${{ matrix.browser }}
           install: false
-          parallel: true
+          # If using multiple containers, set this to true.
+          parallel: false
           record: true
           start: yarn run cypress:start
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000/'
-          wait-on-timeout: 300
+          # When running n parallel, set this to ~120.
+          # When the OS is Windows, set this to ~300.
+          wait-on-timeout: 0
           working-directory: packages/charlesstover.com
       - name: Upload coverage
         if: ${{ always() }}
@@ -122,7 +125,10 @@ jobs:
       matrix:
         os: [ubuntu, windows]
         browser: [chrome, edge] # firefox
-        container: [1, 2]
+        # Cypress only supports 1 container for Edge.
+        # With multiple containers, Cypress will use the wrong browser version.
+        # https://github.com/cypress-io/github-action/issues/121
+        container: [1]
         exclude:
           - browser: edge
             os: ubuntu
