@@ -16,12 +16,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Enable Plug-n-Play `cypress`
+        run: yarn cypress:pnp
         working-directory: packages/charlesstover.com
-        run: |
-          mkdir ./node_modules;
-          mkdir ./node_modules/cypress;
-          echo "{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", \"peerDependencies\": { \"cypress\": \"*\" } }" > ./node_modules/cypress/package.json;
-          echo "require('../../../../.pnp.cjs').setup(); module.exports = require('cypress');" > ./node_modules/cypress/index.cjs;
       - name: Install Cypress
         uses: cypress-io/github-action@v4
         env:
@@ -77,12 +73,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Enable Plug-n-Play `cypress`
+        run: yarn cypress:pnp
         working-directory: packages/charlesstover.com
-        run: |
-          mkdir ./node_modules;
-          mkdir ./node_modules/cypress;
-          echo "{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", \"peerDependencies\": { \"cypress\": \"*\" } }" > ./node_modules/cypress/package.json;
-          echo "require('../../../../.pnp.cjs').setup(); module.exports = require('cypress');" > ./node_modules/cypress/index.cjs;
       - name: End-to-end test
         uses: cypress-io/github-action@v4
         env:
