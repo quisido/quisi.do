@@ -14,6 +14,7 @@ jobs:
           check-latest: true
           node-version: 'lts/*'
       - name: Mock `cypress` Node module resolution
+        working-directory: packages/charlesstover.com
         run: |
           node -e "const { mkdirSync, writeFileSync } = require('fs'); mkdirSync('./node_modules/cypress', { recursive: true }); writeFileSync('./node_modules/cypress/package.json', '{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", \"peerDependencies\": { "cypress": \"*\" } }'); writeFileSync('./node_modules/cypress/index.cjs', 'require(\"../../../../.pnp.cjs\").setup(); module.exports = require(\"cypress\");');";
           cat ./node_modules/cypress/package.json;
@@ -87,6 +88,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Mock `cypress` Node module resolution
+        working-directory: packages/charlesstover.com
         run: |
           node -e "const { mkdirSync, writeFileSync } = require('fs'); mkdirSync('./node_modules/cypress', { recursive: true }); writeFileSync('./node_modules/cypress/package.json', '{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", \"peerDependencies\": { "cypress": \"*\" } }'); writeFileSync('./node_modules/cypress/index.cjs', 'require(\"../../../../.pnp.cjs\").setup(); module.exports = require(\"cypress\");');";
       - name: End-to-end test
