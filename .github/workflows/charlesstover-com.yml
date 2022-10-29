@@ -11,14 +11,15 @@ jobs:
         run: >
           mkdir ./node_modules;
           mkdir ./node_modules/cypress;
-          echo '{ "name": "cypress", "version":"0.0.1", "main": "./index.cjs", "type": "commonjs" }' >> ./node_modules/cypress/package.json;
-          echo "require('../../.pnp.cjs').setup(); module.exports = require('cypress');" >> ./node_modules/cypress/index.cjs;
+          echo "{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", "peerDependencies": { "cypress": "*" } }" >> ./node_modules/cypress/package.json;
+          echo "require('../../../../.pnp.cjs').setup(); module.exports = require('cypress');" >> ./node_modules/cypress/index.cjs;
       - name: Install Cypress
         uses: cypress-io/github-action@v4
         env:
           DEBUG: '@cypress/github-action'
         with:
           runTests: false
+          working-directory: packages/charlesstover.com
     strategy:
       matrix:
         os: [ubuntu, windows]
@@ -80,6 +81,12 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable
+      - name: Mock `cypress` Node module resolution
+        run: >
+          mkdir ./node_modules;
+          mkdir ./node_modules/cypress;
+          echo "{ \"name\": \"cypress\", \"version\": \"0.0.1\", \"main\": \"./index.cjs\", \"type\": \"commonjs\", "peerDependencies": { "cypress": "*" } }" >> ./node_modules/cypress/package.json;
+          echo "require('../../../../.pnp.cjs').setup(); module.exports = require('cypress');" >> ./node_modules/cypress/index.cjs;
       - name: End-to-end test
         uses: cypress-io/github-action@v4
         env:
@@ -98,12 +105,12 @@ jobs:
           group: ${{ matrix.os }}-${{ matrix.browser }}
           install: false
           parallel: true
-          project: packages/charlesstover.com
           record: true
-          start: yarn packages/charlesstover.com run cypress:start
+          start: yarn run cypress:start
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000/'
           wait-on-timeout: 300
+          working-directory: packages/charlesstover.com
       - name: Upload coverage
         if: ${{ always() }}
         uses: actions/upload-artifact@v3
