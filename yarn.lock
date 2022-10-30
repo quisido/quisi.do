@@ -2893,8 +2893,8 @@ __metadata:
   linkType: hard
 
 "@monorepo-template/merge-coverage@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@monorepo-template/merge-coverage@npm:1.2.1"
+  version: 1.2.2
+  resolution: "@monorepo-template/merge-coverage@npm:1.2.2"
   dependencies:
     make-dir: ^3.1.0
     p-map: ^5.5.0
@@ -2903,7 +2903,7 @@ __metadata:
     nyc: ^15.0.0
   bin:
     monorepo-template-merge-coverage: ./dist/bin/index.js
-  checksum: 55955525f84e46075b9e02bfbf606f7c433da9369fbe218b980a428f28d986c4b366967b5a677160735f707163b6d00e2972ea9545743053b36b41d39583c914
+  checksum: 7a5c58318c1e7ae316779391c2bf14d03e16ed555ac34c53d5d3ec544f0ee481c09e62d516537326f2a4a5a3107fa0da23ed52d6b51fe2dcec60e9fb71833291
   languageName: node
   linkType: hard
 
