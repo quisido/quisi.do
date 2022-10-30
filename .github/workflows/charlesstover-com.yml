@@ -1,25 +1,9 @@
 name: CharlesStover.com
 
 jobs:
-  install-cypress:
-    name: Install Cypress
+  install:
+    name: Install dependencies
     runs-on: ${{ matrix.os }}-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Install Cypress
-        uses: cypress-io/github-action@v2
-        with:
-          runTests: false
-    strategy:
-      matrix:
-        # Windows is disabled until `cypress-io/github-action` supports it.
-        # https://github.com/cypress-io/github-action/pull/470
-        os: [ubuntu] # windows
-
-  install-yarn:
-    name: Install Node dependencies
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -31,10 +15,22 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable
+      - name: Enable Plug-n-Play `cypress`
+        run: yarn cypress:pnp
+        working-directory: packages/charlesstover.com
+      - name: Install Cypress
+        uses: cypress-io/github-action@v4
+        with:
+          install: false
+          runTests: false
+          working-directory: packages/charlesstover.com
+    strategy:
+      matrix:
+        os: [ubuntu, windows]
 
   build:
     name: Build
-    needs: install-yarn
+    needs: install
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -55,13 +51,13 @@ jobs:
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
       - name: Upload build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: charlesstover-com--build
           path: packages/charlesstover.com/build/
 
   cypress:
-    needs: [install-cypress, install-yarn]
+    needs: install
     runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout
@@ -72,8 +68,13 @@ jobs:
           cache: yarn
           check-latest: true
           node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Enable Plug-n-Play `cypress`
+        run: yarn cypress:pnp
+        working-directory: packages/charlesstover.com
       - name: End-to-end test
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         env:
           CHOKIDAR_USEPOLLING: true
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
@@ -87,46 +88,48 @@ jobs:
           command-prefix: yarn dlx
           config-file: cypress.config.cjs
           group: ${{ matrix.os }}-${{ matrix.browser }}
+          install: false
           parallel: true
-          project: packages/charlesstover.com
           record: true
-          start: yarn packages/charlesstover.com run cypress:start
+          start: yarn run cypress:start
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000/'
-          wait-on-timeout: 120
+          wait-on-timeout: 300
+          working-directory: packages/charlesstover.com
       - name: Upload coverage
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v2
+        if: matrix.os == 'ubuntu'
+        uses: actions/upload-artifact@v3
         with:
           name: charlesstover-com--cypress--coverage
           path: packages/charlesstover.com/cypress/coverage/
       - name: Upload screenshots
         if: ${{ always() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: charlesstover-com--cypress--screenshots
           path: packages/charlesstover.com/cypress/screenshots/
       - name: Upload videos
         if: ${{ always() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: charlesstover-com--cypress--videos
           path: packages/charlesstover.com/cypress/videos/
     strategy:
       fail-fast: false
       matrix:
-        # Windows is disabled until `cypress-io/github-action` supports it.
-        # https://github.com/cypress-io/github-action/pull/470
-        os: [ubuntu] # , windows
+        os: [ubuntu, windows]
         browser: [chrome, edge] # firefox
-        container: [1, 2, 3]
+        # Cypress only supports 1 container for Edge.
+        # With multiple containers, Cypress will use the wrong browser version.
+        # https://github.com/cypress-io/github-action/issues/121
+        container: [1]
         exclude:
           - browser: edge
             os: ubuntu
 
   eslint:
     name: ESLint
-    needs: install-yarn
+    needs: install
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -144,7 +147,7 @@ jobs:
 
   jest:
     name: Jest
-    needs: install-yarn
+    needs: install
     runs-on: ubuntu-latest
     services:
       datadog-agent:
@@ -159,7 +162,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           cache: yarn
           check-latest: true
@@ -172,32 +175,30 @@ jobs:
           DD_ENV: ci
       - name: Upload coverage
         if: ${{ always() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: charlesstover-com--jest--coverage
           path: packages/charlesstover.com/jest/coverage/
 
   coverage:
     name: Coverage
-    # Disabled until Cypress 10 supports coverage reporting.
-    if: ${{ !always() }}
     needs: [cypress, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Download Cypress coverage
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: charlesstover-com--cypress--coverage
           path: packages/charlesstover.com/cypress/coverage/
       - name: Download Jest coverage
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: charlesstover-com--jest--coverage
           path: packages/charlesstover.com/jest/coverage/
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           cache: yarn
           check-latest: true
@@ -213,7 +214,7 @@ jobs:
           STATEMENTS_COVERAGE_THRESHOLD: 1
       - name: Upload coverage
         if: ${{ always() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: charlesstover-com--coverage
           path: |
@@ -223,18 +224,18 @@ jobs:
   github-pages:
     name: GitHub Pages
     if: ${{ github.event_name == 'push' }}
-    needs: [build, cypress, eslint, jest] # coverage
+    needs: [build, coverage, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Download build
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: charlesstover-com--build
           path: packages/charlesstover.com/build/
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.5
+        uses: JamesIves/github-pages-deploy-action@4.4.1
         with:
           branch: gh-pages
           clean: true
@@ -243,13 +244,13 @@ jobs:
 
   sentry-release:
     if: ${{ github.event_name == 'push' }}
-    needs: [build, cypress, eslint, jest] # coverage
+    needs: [build, coverage, cypress, eslint, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Download build
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: charlesstover-com--build
           path: packages/charlesstover.com/build/

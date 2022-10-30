@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
 import { lazy } from 'react';
-import { Link as ReactRouterLink } from 'react-router-dom';
 import Design from '../../components/design';
 import DesignSystem from '../../constants/design-system';
+import Fallback from './components/fallback';
 import type Props from './types/props';
 
 const AwsLink = lazy(async () => import('./link.aws.view'));
@@ -16,15 +16,11 @@ export default function Link({
 }: Readonly<Props>): ReactElement {
   return (
     <Design
+      Fallback={Fallback}
       components={{
         [DesignSystem.Aws]: AwsLink,
         [DesignSystem.Material]: MuiLink,
       }}
-      fallback={
-        <ReactRouterLink className={className} title={title} to={href}>
-          {children}
-        </ReactRouterLink>
-      }
       props={{ children, className, href, title }}
     />
   );

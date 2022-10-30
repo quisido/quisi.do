@@ -19,7 +19,6 @@ Step 3: <Wrapper><Children /></Wrapper>
 
 export default function Wrapper({
   breadcrumbs: breadcrumbsProp,
-  fallback,
   ...props
 }: Readonly<
   Omit<Props, 'breadcrumbs'> & Partial<Pick<Props, 'breadcrumbs'>>
@@ -30,14 +29,13 @@ export default function Wrapper({
 
   return (
     <Design
+      Fallback={Fallback}
       components={{
         [DesignSystem.Aws]: AwsWrapper,
         [DesignSystem.Material]: MuiWrapper,
       }}
-      fallback={<Fallback>{fallback}</Fallback>}
       props={{
         breadcrumbs: breadcrumbsState,
-        fallback,
         ...props,
       }}
     />

@@ -23,12 +23,10 @@ const StyledCell = styled(Cell)(({ theme }) => ({
     backgroundColor: mapPaletteToBackgroundColor(theme.palette),
     color: theme.palette.common.white,
 
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     '& .Mui-active, & .Mui-active svg': {
       color: theme.palette.common.white,
     },
 
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     '& .MuiTableSortLabel-root:hover, & .MuiTableSortLabel-root:hover svg': {
       color: theme.palette.common.white,
     },

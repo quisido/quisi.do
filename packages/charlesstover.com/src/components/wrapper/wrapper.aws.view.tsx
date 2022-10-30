@@ -66,7 +66,7 @@ export default function AwsWrapper({
         {...optionalProps}
         content={
           <>
-            <Suspense fallback={<Fallback>{fallback}</Fallback>}>
+            <Suspense fallback={<Fallback fallback={fallback} />}>
               {children}
             </Suspense>
             <Footer />

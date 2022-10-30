@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention, @typescript-eslint/no-magic-numbers */
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { blue, grey } from '@mui/material/colors';
 import type { ThemeOptions } from '@mui/material/styles';
 
