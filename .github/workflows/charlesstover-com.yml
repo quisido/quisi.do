@@ -97,7 +97,7 @@ jobs:
           wait-on-timeout: 300
           working-directory: packages/charlesstover.com
       - name: Upload coverage
-        if: ${{ always() }}
+        if: matrix.os == 'ubuntu'
         uses: actions/upload-artifact@v3
         with:
           name: charlesstover-com--cypress--coverage
