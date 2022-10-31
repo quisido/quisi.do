@@ -243,6 +243,7 @@ jobs:
           single-commit: true
 
   sentry-release:
+    name: Sentry release
     if: ${{ github.event_name == 'push' }}
     needs: [build, coverage, cypress, eslint, jest]
     runs-on: ubuntu-latest
@@ -267,6 +268,7 @@ jobs:
           version: ${{ github.sha }}
 
   cloudflare-purge:
+    name: Cloudflare purge
     if: ${{ github.event_name == 'push' }}
     needs: github-pages
     runs-on: ubuntu-latest
