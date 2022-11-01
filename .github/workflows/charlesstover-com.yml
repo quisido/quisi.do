@@ -84,17 +84,17 @@ jobs:
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
         with:
           browser: ${{ matrix.browser }}
-          ci-build-id: ${{ github.run_id }}-${{ github.run_attempt }}
+          ci-build-id: ${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
           command-prefix: yarn dlx
           config-file: cypress.config.cjs
-          group: ${{ matrix.os }}-${{ matrix.browser }}
+          group: ${{ matrix.browser }}
           install: false
           parallel: true
           record: true
           start: yarn run cypress:start
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000/'
-          wait-on-timeout: 300
+          wait-on-timeout: 120
           working-directory: packages/charlesstover.com
       - name: Upload coverage
         if: matrix.os == 'ubuntu'
