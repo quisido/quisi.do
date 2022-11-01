@@ -1,5 +1,6 @@
 enum DesignSystem {
   Aws = 'awsui',
+  Cloudscape = 'cloudscape',
   Material = 'mui',
 }
 

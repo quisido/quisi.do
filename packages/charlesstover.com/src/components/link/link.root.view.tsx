@@ -6,6 +6,7 @@ import Fallback from './components/fallback';
 import type Props from './types/props';
 
 const AwsLink = lazy(async () => import('./link.aws.view'));
+const CloudscapeLink = lazy(async () => import('./link.cloudscape.view'));
 const MuiLink = lazy(async () => import('./link.mui.view'));
 
 export default function Link({
@@ -19,6 +20,7 @@ export default function Link({
       Fallback={Fallback}
       components={{
         [DesignSystem.Aws]: AwsLink,
+        [DesignSystem.Cloudscape]: CloudscapeLink,
         [DesignSystem.Material]: MuiLink,
       }}
       props={{ children, className, href, title }}

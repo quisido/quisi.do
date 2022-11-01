@@ -8,16 +8,16 @@ import { useTranslate } from 'lazy-i18n';
 import type { ComponentType, MutableRefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
-import type ReadonlyTableSortingEvent from '../../types/readonly-table-sorting-event';
+import type ReadonlyAwsTableSortingEvent from '../../types/readonly-aws-table-sorting-event';
 import type TableColumn from '../../types/table-column';
 import type TableRowsPerPageOption from '../../types/table-rows-per-page-option';
 import filterByDefined from '../../utils/filter-by-defined';
 import filterByUndefined from '../../utils/filter-by-undefined';
-import useCountText from './hooks/use-aws-count-text';
+import useAwsCountText from './hooks/use-aws-count-text';
 import type AwsuiPaginationChangeHandler from './types/awsui-pagination-change-handler';
-import mapColumnToVisibleContentOption from './utils/map-column-to-visible-content-option';
-import mapColumnsToDefinitions from './utils/map-columns-to-definitions';
-import mapNumberDispatchToPaginationChangeHandler from './utils/map-number-dispatch-to-pagination-change-handler';
+import mapColumnToAwsVisibleContentOption from './utils/map-column-to-aws-visible-content-option';
+import mapColumnsToAwsDefinitions from './utils/map-columns-to-aws-definitions';
+import mapNumberDispatchToAwsPaginationChangeHandler from './utils/map-number-dispatch-to-aws-pagination-change-handler';
 import mapRowsPerPageOptionToPageSizeOption from './utils/map-rows-per-page-option-to-page-size-option';
 import mapSortingColumnToIndex from './utils/map-sorting-column-to-index';
 
@@ -71,7 +71,7 @@ interface State<Item> {
     >,
   ) => void;
   readonly handleSortingChange: (
-    event: ReadonlyTableSortingEvent<Item>,
+    event: ReadonlyAwsTableSortingEvent<Item>,
   ) => void;
   readonly handleTextFilterChange: (
     event: Readonly<
@@ -107,7 +107,7 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
 
   const columnDefinitions: readonly TableProps.ColumnDefinition<Item>[] =
     useMemo((): readonly TableProps.ColumnDefinition<Item>[] => {
-      return mapColumnsToDefinitions(columns);
+      return mapColumnsToAwsDefinitions(columns);
     }, [columns]);
 
   const visibleContent: readonly string[] = useMemo((): readonly string[] => {
@@ -143,7 +143,7 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
     collectionPreferencesTitle: translate('Preferences') ?? '...',
     columnDefinitions,
     confirmLabel: translate('Confirm') ?? '...',
-    countText: useCountText(rowsCount),
+    countText: useAwsCountText(rowsCount),
     filteringAriaLabel: translate('Filter packages'), // TODO
     pagesCount: Math.ceil(rowsCount / rowsPerPage),
     ref,
@@ -200,12 +200,12 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
 
     handlePaginationChange: useMemo(
       (): AwsuiPaginationChangeHandler =>
-        mapNumberDispatchToPaginationChangeHandler(onPageChange),
+        mapNumberDispatchToAwsPaginationChangeHandler(onPageChange),
       [onPageChange],
     ),
 
     handleSortingChange: useCallback(
-      (e: ReadonlyTableSortingEvent<Item>): void => {
+      (e: ReadonlyAwsTableSortingEvent<Item>): void => {
         const columnIndex: number = mapSortingColumnToIndex(
           e.detail.sortingColumn,
         );
@@ -259,7 +259,7 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
         options: [
           {
             label: translate('Properties') ?? '...',
-            options: columns.map(mapColumnToVisibleContentOption),
+            options: columns.map(mapColumnToAwsVisibleContentOption),
           },
         ],
       }),

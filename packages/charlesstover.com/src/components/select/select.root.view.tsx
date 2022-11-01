@@ -5,6 +5,7 @@ import DesignSystem from '../../constants/design-system';
 import type Props from './types/props';
 
 const AwsSelect = lazy(async () => import('./select.aws.view'));
+const CloudscapeSelect = lazy(async () => import('./select.cloudscape.view'));
 const MuiSelect = lazy(async () => import('./select.mui.view'));
 
 export default function Select(props: Readonly<Props>): ReactElement {
@@ -12,6 +13,7 @@ export default function Select(props: Readonly<Props>): ReactElement {
     <Design
       components={{
         [DesignSystem.Aws]: AwsSelect,
+        [DesignSystem.Cloudscape]: CloudscapeSelect,
         [DesignSystem.Material]: MuiSelect,
       }}
       props={props}
