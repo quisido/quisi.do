@@ -7,6 +7,10 @@ const DESIGN_SYSTEM_OPTIONS: readonly SelectOption[] = [
     value: DesignSystem.Aws,
   },
   {
+    label: 'Cloudscape',
+    value: DesignSystem.Cloudscape,
+  },
+  {
     label: 'Material',
     value: DesignSystem.Material,
   },

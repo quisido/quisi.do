@@ -6,6 +6,7 @@ import Fallback from './components/fallback';
 import type Props from './types/props';
 
 const AwsHeader = lazy(async () => import('./header.aws.view'));
+const CloudscapeHeader = lazy(async () => import('./header.cloudscape.view'));
 const MuiHeader = lazy(async () => import('./header.mui.view'));
 
 export default function Header(props: Readonly<Props>): ReactElement {
@@ -14,6 +15,7 @@ export default function Header(props: Readonly<Props>): ReactElement {
       Fallback={Fallback}
       components={{
         [DesignSystem.Aws]: AwsHeader,
+        [DesignSystem.Cloudscape]: CloudscapeHeader,
         [DesignSystem.Material]: MuiHeader,
       }}
       props={props}

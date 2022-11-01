@@ -5,6 +5,7 @@ import DesignSystem from '../../constants/design-system';
 import type Props from './types/props';
 
 const AwsChip = lazy(async () => import('./chip.aws.view'));
+const CloudscapeChip = lazy(async () => import('./chip.cloudscape.view'));
 const MuiChip = lazy(async () => import('./chip.mui.view'));
 
 export default function Chip(props: Readonly<Props>): ReactElement {
@@ -12,6 +13,7 @@ export default function Chip(props: Readonly<Props>): ReactElement {
     <Design
       components={{
         [DesignSystem.Aws]: AwsChip,
+        [DesignSystem.Cloudscape]: CloudscapeChip,
         [DesignSystem.Material]: MuiChip,
       }}
       props={props}

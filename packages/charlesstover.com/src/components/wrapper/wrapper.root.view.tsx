@@ -7,6 +7,7 @@ import type Props from './types/props';
 import useWrapper from './wrapper.root.hook';
 
 const AwsWrapper = lazy(async () => import('./wrapper.aws.view'));
+const CloudscapeWrapper = lazy(async () => import('./wrapper.cloudscape.view'));
 const MuiWrapper = lazy(async () => import('./wrapper.mui.view'));
 
 /*
@@ -32,6 +33,7 @@ export default function Wrapper({
       Fallback={Fallback}
       components={{
         [DesignSystem.Aws]: AwsWrapper,
+        [DesignSystem.Cloudscape]: CloudscapeWrapper,
         [DesignSystem.Material]: MuiWrapper,
       }}
       props={{

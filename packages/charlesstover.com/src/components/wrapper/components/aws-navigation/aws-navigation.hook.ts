@@ -4,8 +4,8 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo } from 'react';
 import { useSideNavigation } from 'use-awsui-router';
-import filterSideNavigationItemsByExpandable from '../../utils/filter-side-navigation-items-by-expandable';
-import filterSideNavigationItemsByHasItems from '../../utils/filter-side-navigation-items-by-has-items';
+import filterAwsSideNavigationItemsByExpandable from '../../utils/filter-aws-side-navigation-items-by-expandable';
+import filterAwsSideNavigationItemsByHasItems from '../../utils/filter-aws-side-navigation-items-by-has-items';
 import mapTranslationFunctionToAwsSideNavigationItems from '../../utils/map-translation-function-to-aws-side-navigation-items';
 
 interface State {
@@ -44,7 +44,7 @@ const mapIndexPrefixToItemToExpandedMapper = (
     const newItem: SideNavigationProps.Item = { ...item };
 
     // If this item is expandable, check for an expanded state.
-    if (filterSideNavigationItemsByExpandable(newItem)) {
+    if (filterAwsSideNavigationItemsByExpandable(newItem)) {
       const newDefaultExpanded: boolean | undefined = EXPANDED.get(id);
       if (typeof newDefaultExpanded === 'boolean') {
         newItem.defaultExpanded = newDefaultExpanded;
@@ -52,7 +52,7 @@ const mapIndexPrefixToItemToExpandedMapper = (
     }
 
     // If this item has children, check them for expanded state.
-    if (filterSideNavigationItemsByHasItems(newItem)) {
+    if (filterAwsSideNavigationItemsByHasItems(newItem)) {
       const mapSubItemToExpanded = mapIndexPrefixToItemToExpandedMapper(id);
       const newSubItems: SideNavigationProps.Item[] =
         newItem.items.map(mapSubItemToExpanded);

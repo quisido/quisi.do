@@ -1,0 +1,15 @@
+.labelDirectionRow {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+
+  > div {
+    &:last-child {
+      flex-grow: 1;
+    }
+
+    > label {
+      padding-right: 0.5em;
+    }
+  }
+}
