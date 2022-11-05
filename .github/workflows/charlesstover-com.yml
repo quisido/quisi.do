@@ -57,6 +57,7 @@ jobs:
           path: packages/charlesstover.com/build/
 
   cypress:
+    name: Cypress
     needs: install
     runs-on: ${{ matrix.os }}-latest
     steps:
@@ -79,7 +80,7 @@ jobs:
           CHOKIDAR_USEPOLLING: true
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }}-${{ matrix.container }}
+          NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }} # -${{ matrix.container }}
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
         with:
@@ -122,7 +123,7 @@ jobs:
         # Cypress only supports 1 container for Edge.
         # With multiple containers, Cypress will use the wrong browser version.
         # https://github.com/cypress-io/github-action/issues/121
-        container: [1]
+        # container: [1, 2, 3]
         exclude:
           - browser: edge
             os: ubuntu
@@ -228,6 +229,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Download build
+        uses: actions/download-artifact@v3
+        with:
+          name: charlesstover-com--build
+          path: packages/charlesstover.com/build/
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
