@@ -84,20 +84,20 @@ jobs:
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
         with:
           browser: ${{ matrix.browser }}
-          ci-build-id: ${{ github.run_id }}-${{ github.run_attempt }}
+          ci-build-id: ${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
           command-prefix: yarn dlx
           config-file: cypress.config.cjs
-          group: ${{ matrix.os }}-${{ matrix.browser }}
+          group: ${{ matrix.browser }}
           install: false
           parallel: true
           record: true
           start: yarn run cypress:start
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000/'
-          wait-on-timeout: 300
+          wait-on-timeout: 120
           working-directory: packages/charlesstover.com
       - name: Upload coverage
-        if: ${{ always() }}
+        if: matrix.os == 'ubuntu'
         uses: actions/upload-artifact@v3
         with:
           name: charlesstover-com--cypress--coverage
@@ -259,7 +259,7 @@ jobs:
           name: charlesstover-com--build
           path: packages/charlesstover.com/build/
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.4.1
+        uses: JamesIves/github-pages-deploy-action@4
         with:
           branch: gh-pages
           clean: true
@@ -267,6 +267,7 @@ jobs:
           single-commit: true
 
   sentry-release:
+    name: Sentry release
     if: ${{ github.event_name == 'push' }}
     needs: [build, coverage, cypress, eslint, jest]
     runs-on: ubuntu-latest
@@ -291,6 +292,7 @@ jobs:
           version: ${{ github.sha }}
 
   cloudflare-purge:
+    name: Cloudflare purge
     if: ${{ github.event_name == 'push' }}
     needs: github-pages
     runs-on: ubuntu-latest
