@@ -243,7 +243,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Audit
-        run: yarn packages/charlesstover.com run lighthouse:run
+        run: yarn run lighthouse
+        working-directory: packages/charlesstover.com
       - name: Upload report
         if: ${{ always() }}
         uses: actions/upload-artifact@v3
