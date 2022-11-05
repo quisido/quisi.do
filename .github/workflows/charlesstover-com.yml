@@ -259,7 +259,7 @@ jobs:
           name: charlesstover-com--build
           path: packages/charlesstover.com/build/
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           clean: true
