@@ -30,7 +30,8 @@
     "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest --runInBand",
     "jest:watch": "jest --runInBand --watch",
-    "lighthouse": "lighthouse http://localhost:3000/ --output=html --output-path=./lighthouse.report.html --preset=experimental",
+    "lighthouse:report": "lighthouse http://localhost:3000/ --output=html --output-path=./lighthouse.report.html --preset=experimental",
+    "lighthouse:run": "concurrently --hide server --kill-others --kill-others-on-fail --names server,lighthouse --success command-lighthouse \"yarn run serve\" \"wait-on http://localhost:3000 && yarn run lighthouse:report\"",
     "prepack": "yarn build",
     "prepublish": "yarn eslint && yarn jest",
     "serve": "serve --single build",
@@ -80,6 +81,7 @@
     "babel-jest": "^29.2.2",
     "babel-loader": "^8.2.5",
     "babel-plugin-istanbul": "^6.1.1",
+    "concurrently": "^7.5.0",
     "cypress": "^10.10.0",
     "dependency-cruiser": "^11.17.0",
     "eslint": "^8.26.0",
@@ -116,6 +118,7 @@
     "use-awsui-router": "^2.0.1",
     "use-awsui-table-item-description": "^2.0.2",
     "use-mui": "^1.0.6",
+    "wait-on": "^6.0.1",
     "webpack": "^5.74.0"
   }
 }

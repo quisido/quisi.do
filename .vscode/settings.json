@@ -1,7 +1,5 @@
 {
-  "editor.rulers": [
-    80
-  ],
+  "editor.rulers": [80],
   "editor.tabSize": 2,
   "eslint.nodePath": ".yarn/sdks",
   "eslint.packageManager": "yarn",
@@ -25,6 +23,7 @@
     "packages/*/cypress/videos/": true,
     "packages/*/dist/": true,
     "packages/*/jest/": true,
+    "packages/*/lighthouse.report.html": true,
     ".attach_pid*": true,
     "yarn.lock": true
   },
@@ -47,6 +46,7 @@
     "packages/*/cypress/coverage/": true,
     "packages/*/dist/": true,
     "packages/*/jest/": true,
+    "packages/*/lighthouse.report.html": true,
     ".attach_pid*": true,
     "yarn.lock": true
   },
@@ -65,6 +65,7 @@
     "packages/*/cypress/videos/": true,
     "packages/*/dist/": true,
     "packages/*/jest/": true,
+    "packages/*/lighthouse.report.html": true,
     ".attach_pid*": true,
     "yarn.lock": true,
     "**/.yarn": true
