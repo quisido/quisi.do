@@ -2,36 +2,26 @@
 
 import select from '../../test/cypress/utils/select';
 
-const mapDesignSystemNameToTestSuite = (
-  name: string,
-): ((suite: VoidFunction) => void) => {
-  return function test(suite: VoidFunction): void {
-    describe(`${name} design system`, (): void => {
-      beforeEach((): void => {
-        cy.get('*[role="button"]').contains('Settings').click();
-        select('Design system', name, {
-          parentSelector: 'nav ul > li',
-        });
-      });
-
-      suite();
+const setDesignSystem = (name: string): void => {
+  beforeEach((): void => {
+    cy.get('*[role="button"]').contains('Settings').click();
+    select('Design system', name, {
+      parentSelector: 'nav ul > li',
     });
-  };
+  });
 };
 
-const DESIGN_SYSTEMS: readonly ((suite: VoidFunction) => void)[] = [
-  mapDesignSystemNameToTestSuite('AWS'),
-  mapDesignSystemNameToTestSuite('Cloudscape'),
-  mapDesignSystemNameToTestSuite('Material'),
-];
+const DESIGN_SYSTEMS: string[] = ['AWS', 'Cloudscape', 'Material'];
 
 describe('Packages', (): void => {
   beforeEach((): void => {
     cy.visit('/packages');
   });
 
-  for (const test of DESIGN_SYSTEMS) {
-    test((): void => {
+  for (const designSystem of DESIGN_SYSTEMS) {
+    describe(designSystem, (): void => {
+      setDesignSystem(designSystem);
+
       it('should display critical elements', (): void => {
         cy.contains('nav', 'Packages');
         cy.contains('h2', 'Packages');

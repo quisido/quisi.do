@@ -8,7 +8,7 @@ export default function select(
   label: string,
   value: string,
   { parentSelector }: Options,
-): Cypress.Chainable<JQuery<HTMLElement>> {
+): Cypress.Chainable<JQuery> {
   const getSelector = (): string => {
     if (typeof parentSelector === 'undefined') {
       return 'label';
@@ -20,7 +20,7 @@ export default function select(
     .get(getSelector())
     .contains(label)
     .invoke('attr', 'for')
-    .then((id: string | undefined): Cypress.Chainable<JQuery<HTMLElement>> => {
+    .then((id: string | undefined): Cypress.Chainable<JQuery> => {
       if (typeof id === 'undefined') {
         throw new Error(`Expected label "${label}" to have \`for\` attribute.`);
       }
