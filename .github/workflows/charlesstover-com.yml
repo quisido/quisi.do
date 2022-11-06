@@ -254,8 +254,8 @@ jobs:
 
   github-pages:
     name: GitHub Pages
-    if: ${{ github.event_name == 'push' }}
-    needs: [build, coverage, cypress, eslint, jest]
+    if: github.event_name == 'push'
+    needs: [build, coverage, eslint, lighthouse]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -275,8 +275,8 @@ jobs:
 
   sentry-release:
     name: Sentry release
-    if: ${{ github.event_name == 'push' }}
-    needs: [build, coverage, cypress, eslint, jest]
+    if: github.event_name == 'push'
+    needs: [build, coverage, eslint, lighthouse]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -300,7 +300,7 @@ jobs:
 
   cloudflare-purge:
     name: Cloudflare purge
-    if: ${{ github.event_name == 'push' }}
+    if: github.event_name == 'push'
     needs: github-pages
     runs-on: ubuntu-latest
     steps:
