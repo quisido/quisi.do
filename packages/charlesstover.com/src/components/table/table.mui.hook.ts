@@ -1,5 +1,8 @@
+import { IconButtonProps } from '@mui/material/IconButton';
+import { TranslateFunction, useTranslate } from 'lazy-i18n';
 import type { Attributes, ChangeEvent, ComponentType, MouseEvent } from 'react';
 import { useCallback, useMemo } from 'react';
+import useWrapperVariant from '../../hooks/use-wrapper-variant';
 import type Column from '../../types/table-column';
 import type RowsPerPageOption from '../../types/table-rows-per-page-option';
 import useRowProps from './hooks/use-mui-row-props';
@@ -23,10 +26,7 @@ interface Props<Item> {
 }
 
 interface State {
-  readonly headCellProps: (HeadCellProps & Required<Attributes>)[];
-  readonly page: number;
-  readonly rowProps: readonly (Required<Attributes> & RowProps)[];
-  readonly rowsPerPageOptions: MuiRowsPerPageOption[];
+  readonly backIconButtonProps: Partial<IconButtonProps>;
   readonly handlePageChange: (
     event: MouseEvent<HTMLButtonElement> | null,
     page: number,
@@ -34,6 +34,12 @@ interface State {
   readonly handleRowsPerPageChange: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
+  readonly headCellProps: (HeadCellProps & Required<Attributes>)[];
+  readonly nextIconButtonProps: Partial<IconButtonProps>;
+  readonly page: number;
+  readonly rowProps: readonly (Required<Attributes> & RowProps)[];
+  readonly rowsPerPageOptions: MuiRowsPerPageOption[];
+  readonly showToolbar: boolean;
 }
 
 const ARRAY_INDEX_OFFSET = 1;
@@ -53,8 +59,19 @@ export default function useMuiTable<Item extends Record<string, unknown>>({
   sortAscending,
   sortColumnIndex,
 }: Props<Item>): State {
+  // Contexts
+  const translate: TranslateFunction = useTranslate();
+  const wrapperVariant: 'table' | 'wizard' | undefined = useWrapperVariant();
+
   return {
     page: page - ARRAY_INDEX_OFFSET,
+
+    backIconButtonProps: useMemo(
+      (): Partial<IconButtonProps> => ({
+        'aria-label': translate('Go to previous page'),
+      }),
+      [translate],
+    ),
 
     handlePageChange: useCallback(
       (_event: MouseEvent<HTMLButtonElement> | null, newPage: number) => {
@@ -88,6 +105,13 @@ export default function useMuiTable<Item extends Record<string, unknown>>({
       return columns.map(mapColumnToHeadCellProps);
     }, [columns, onSort, sortAscending, sortColumnIndex]),
 
+    nextIconButtonProps: useMemo(
+      (): Partial<IconButtonProps> => ({
+        'aria-label': translate('Go to next page'),
+      }),
+      [translate],
+    ),
+
     rowProps: useRowProps({
       Description,
       columns,
@@ -97,5 +121,7 @@ export default function useMuiTable<Item extends Record<string, unknown>>({
     rowsPerPageOptions: useMemo((): MuiRowsPerPageOption[] => {
       return mapRowsPerPageOptionsToMuiRowsPerPageOptions(rowsPerPageOptions);
     }, [rowsPerPageOptions]),
+
+    showToolbar: wrapperVariant !== 'table',
   };
 }

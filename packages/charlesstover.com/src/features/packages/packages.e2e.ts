@@ -33,7 +33,7 @@ describe('Packages', (): void => {
           .first()
           .invoke('text');
 
-        cy.get('button[aria-label="Go to next page"]').click();
+        cy.get('button[aria-label="Go to next page"]').scrollIntoView().click();
 
         const PAGE_2_PACKAGE_1 = cy
           .get('main table > tbody > tr > td a')
