@@ -1,17 +1,28 @@
 /// <reference types="cypress" />
 
-import select from '../../test/cypress/utils/select';
-
-const setDesignSystem = (name: string): void => {
-  beforeEach((): void => {
-    cy.get('*[role="button"]').contains('Settings').click();
-    select('Design system', name, {
-      parentSelector: 'nav ul > li',
-    });
-  });
-};
+import setDesignSystem from '../../test/cypress/utils/set-design-system';
 
 const DESIGN_SYSTEMS: string[] = ['AWS', 'Cloudscape', 'Material'];
+
+const shouldDisplayCriticalElements = (): void => {
+  cy.contains('nav', 'Packages');
+  cy.contains('h2', 'Packages');
+};
+
+const shouldPaginate = (): void => {
+  cy.get('main table > tbody > tr > td a')
+    .first()
+    .invoke('text')
+    .then((page1package1: string): void => {
+      cy.get('button[aria-label="Go to next page"]').scrollIntoView().click();
+      cy.get('main table > tbody > tr > td a')
+        .first()
+        .invoke('text')
+        .then((page2package1: string): void => {
+          expect(page1package1).not.to.eq(page2package1);
+        });
+    });
+};
 
 describe('Packages', (): void => {
   beforeEach((): void => {
@@ -21,27 +32,8 @@ describe('Packages', (): void => {
   for (const designSystem of DESIGN_SYSTEMS) {
     describe(designSystem, (): void => {
       setDesignSystem(designSystem);
-
-      it('should display critical elements', (): void => {
-        cy.contains('nav', 'Packages');
-        cy.contains('h2', 'Packages');
-      });
-
-      it('should paginate', (): void => {
-        const PAGE_1_PACKAGE_1 = cy
-          .get('main table > tbody > tr > td a')
-          .first()
-          .invoke('text');
-
-        cy.get('button[aria-label="Go to next page"]').scrollIntoView().click();
-
-        const PAGE_2_PACKAGE_1 = cy
-          .get('main table > tbody > tr > td a')
-          .first()
-          .invoke('text');
-
-        expect(PAGE_1_PACKAGE_1).not.to.eq(PAGE_2_PACKAGE_1);
-      });
+      it('should display critical elements', shouldDisplayCriticalElements);
+      it('should paginate', shouldPaginate);
     });
   }
 });
