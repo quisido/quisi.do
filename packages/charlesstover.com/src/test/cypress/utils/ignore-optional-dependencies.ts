@@ -4,7 +4,7 @@ import filterLogConfigByFetch from './filter-log-config-by-fetch';
 import filterLogConfigByXhr from './filter-log-config-by-xhr';
 
 interface CypressLog {
-  log(options: Partial<Cypress.LogConfig>): Cypress.Log | undefined;
+  log: (options: Partial<Cypress.LogConfig>) => Cypress.Log | undefined;
 }
 
 declare const Cypress: CyEventEmitter & Cypress.Cypress & CypressLog;
@@ -12,6 +12,7 @@ declare const Cypress: CyEventEmitter & Cypress.Cypress & CypressLog;
 const cypressLog = Cypress.log;
 
 export default function ignoreOptionalDependencies(): void {
+  function log(options: Partial<Cypress.LogConfig>): Cypress.Log;
   function log(options: Partial<Cypress.LogConfig>): Cypress.Log | undefined {
     // Fetch logs
     if (filterLogConfigByFetch(options)) {
@@ -39,5 +40,5 @@ export default function ignoreOptionalDependencies(): void {
     return cypressLog(options);
   }
 
-  Cypress.log = log as Cypress.Cypress['log'];
+  Cypress.log = log;
 }
