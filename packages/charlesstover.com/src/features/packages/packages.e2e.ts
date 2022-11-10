@@ -2,6 +2,8 @@
 
 import setDesignSystem from '../../test/cypress/utils/set-design-system';
 
+const FIRST_PACKAGE_SELECTOR =
+  'main table > tbody > tr:first-child > td:first-child a';
 const DESIGN_SYSTEMS: string[] = ['AWS', 'Cloudscape', 'Material'];
 
 const shouldDisplayCriticalElements = (): void => {
@@ -10,17 +12,14 @@ const shouldDisplayCriticalElements = (): void => {
 };
 
 const shouldPaginate = (): void => {
-  cy.get('main table > tbody > tr > td a')
-    .first()
+  cy.get(FIRST_PACKAGE_SELECTOR)
     .invoke('text')
-    .then((page1package1: string): void => {
-      cy.get('button[aria-label="Go to next page"]').scrollIntoView().click();
-      cy.get('main table > tbody > tr > td a')
-        .first()
-        .invoke('text')
-        .then((page2package1: string): void => {
-          expect(page1package1).not.to.eq(page2package1);
-        });
+    .then((page1package1name: string): void => {
+      cy.get('button[aria-label="Go to next page"]')
+        .last()
+        .scrollIntoView()
+        .click();
+      cy.get(FIRST_PACKAGE_SELECTOR).should('not.contain', page1package1name);
     });
 };
 
