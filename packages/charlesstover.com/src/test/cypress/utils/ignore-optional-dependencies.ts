@@ -7,12 +7,11 @@ interface CypressLog {
   log(options: Partial<Cypress.LogConfig>): Cypress.Log | undefined;
 }
 
-declare const Cypress: Cypress.Cypress & CyEventEmitter & CypressLog;
+declare const Cypress: CyEventEmitter & Cypress.Cypress & CypressLog;
 
 const cypressLog = Cypress.log;
 
 export default function ignoreOptionalDependencies(): void {
-  function log(options: Partial<Cypress.LogConfig>): Cypress.Log;
   function log(options: Partial<Cypress.LogConfig>): Cypress.Log | undefined {
     // Fetch logs
     if (filterLogConfigByFetch(options)) {
@@ -40,5 +39,5 @@ export default function ignoreOptionalDependencies(): void {
     return cypressLog(options);
   }
 
-  Cypress.log = log;
+  Cypress.log = log as Cypress.Cypress['log'];
 }
