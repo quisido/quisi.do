@@ -22,11 +22,11 @@
   "scripts": {
     "build": "DISABLE_ESLINT_PLUGIN=true react-app-rewired build",
     "coverage": "monorepo-template-coverage",
-    "cypress": "concurrently --hide server --kill-others --kill-others-on-fail --names server,cypress \"yarn run cypress:start\" \"yarn run cypress:open\"",
+    "cypress": "concurrently --hide server --kill-others --kill-others-on-fail --names server,cypress \"yarn run cypress:start\" \"wait-on http://localhost:3000/ && yarn run cypress:open\"",
     "cypress:open": "cypress open",
     "cypress:pnp": "node ./scripts/cypress-pnp.cjs",
     "cypress:run": "cypress run",
-    "cypress:start": "DISABLE_ESLINT_PLUGIN=true react-app-rewired start",
+    "cypress:start": "BROWSER=none DISABLE_ESLINT_PLUGIN=true react-app-rewired start",
     "eslint": "eslint '**/*'",
     "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest --runInBand",

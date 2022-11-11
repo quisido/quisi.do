@@ -3,8 +3,8 @@
 import mapParentSelectorToLabelSelector from './map-parent-selector-to-label-selector';
 
 interface Options {
-  readonly onChange: VoidFunction;
-  readonly onIgnore: VoidFunction;
+  readonly onChange?: VoidFunction | undefined;
+  readonly onIgnore?: VoidFunction | undefined;
   readonly parentSelector?: string | undefined;
 }
 

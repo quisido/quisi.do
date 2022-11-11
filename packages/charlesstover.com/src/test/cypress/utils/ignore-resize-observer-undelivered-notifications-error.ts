@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 import filterErrorByResizeObserverUndeliveredNotifications from '../../utils/filter-error-by-resize-observer-undelivered-notifications';
 import inverse from '../../utils/inverse';
 

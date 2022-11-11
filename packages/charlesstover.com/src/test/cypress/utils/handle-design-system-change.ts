@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 export default function handleDesignSystemChange(): void {
   // Wait for the old design system to unmount.
   cy.get('body').should(($body: JQuery<HTMLBodyElement>): void => {
