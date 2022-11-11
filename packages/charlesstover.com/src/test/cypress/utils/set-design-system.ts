@@ -6,6 +6,7 @@ export default function setDesignSystem(name: string): void {
     select('Design system', name, {
       parentSelector: 'nav ul > li',
     });
+    cy.get('body').should('not.contain.text', 'CharlesStover.com');
     cy.get('body').contains('CharlesStover.com');
   });
 }
