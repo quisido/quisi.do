@@ -12,11 +12,13 @@ export default function setDesignSystem(designSystem: string): void {
     });
 
     // Wait for the previous design system to unmount.
-    cy.get('body')
-      .invoke('text')
-      .should('not.contain.text', 'CharlesStover.com');
+    cy.get('body').should(($body: JQuery<HTMLBodyElement>): void => {
+      expect($body.text()).not.to.contain('CharlesStover.com');
+    });
 
     // Wait for the new design system to mount.
-    cy.get('body').invoke('text').should('contain.text', 'CharlesStover.com');
+    cy.get('body').should(($body: JQuery<HTMLBodyElement>): void => {
+      expect($body.text()).to.contain('CharlesStover.com');
+    });
   });
 }
