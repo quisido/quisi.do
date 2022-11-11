@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import mapParentSelectorToLabelSelector from './map-parent-selector-to-label-selector';
+
 interface Options {
   readonly parentSelector?: string | undefined;
 }
@@ -8,23 +10,31 @@ export default function select(
   label: string,
   value: string,
   { parentSelector }: Options,
-): Cypress.Chainable<JQuery> {
-  const getSelector = (): string => {
-    if (typeof parentSelector === 'undefined') {
-      return 'label';
+): void {
+  const selectFormElement = (formElementId: string | undefined): void => {
+    if (typeof formElementId === 'undefined') {
+      throw new Error(`Expected label "${label}" to have \`for\` attribute.`);
     }
-    return `${parentSelector} label`;
+
+    const formElementSelector = `#${formElementId}`;
+
+    const selectValue = (selectedValue: string): void => {
+      if (selectedValue === value) {
+        return;
+      }
+
+      const valueSelector = `ul[aria-labelledby="${formElementId}"] > li`;
+      cy.get(formElementSelector).click();
+      cy.get(valueSelector).contains(value).click();
+    };
+
+    cy.get(formElementSelector).invoke('text').then(selectValue);
   };
 
-  return cy
-    .get(getSelector())
+  const labelSelector: string =
+    mapParentSelectorToLabelSelector(parentSelector);
+  cy.get(labelSelector)
     .contains(label)
     .invoke('attr', 'for')
-    .then((id: string | undefined): Cypress.Chainable<JQuery> => {
-      if (typeof id === 'undefined') {
-        throw new Error(`Expected label "${label}" to have \`for\` attribute.`);
-      }
-      cy.get(`#${id}`).click();
-      return cy.get(`ul[aria-labelledby="${id}"] > li`).contains(value).click();
-    });
+    .then(selectFormElement);
 }
