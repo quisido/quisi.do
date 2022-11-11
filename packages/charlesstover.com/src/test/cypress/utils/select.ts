@@ -3,13 +3,15 @@
 import mapParentSelectorToLabelSelector from './map-parent-selector-to-label-selector';
 
 interface Options {
+  readonly onChange: VoidFunction;
+  readonly onIgnore: VoidFunction;
   readonly parentSelector?: string | undefined;
 }
 
 export default function select(
   label: string,
   value: string,
-  { parentSelector }: Options,
+  { onChange, onIgnore, parentSelector }: Options,
 ): void {
   const selectFormElement = (formElementId: string | undefined): void => {
     if (typeof formElementId === 'undefined') {
@@ -20,12 +22,18 @@ export default function select(
 
     const selectValue = (selectedValue: string): void => {
       if (selectedValue === value) {
+        if (typeof onIgnore === 'function') {
+          onIgnore();
+        }
         return;
       }
 
       const valueSelector = `ul[aria-labelledby="${formElementId}"] > li`;
       cy.get(formElementSelector).click();
       cy.get(valueSelector).contains(value).click();
+      if (typeof onChange === 'function') {
+        onChange();
+      }
     };
 
     cy.get(formElementSelector).invoke('text').then(selectValue);
