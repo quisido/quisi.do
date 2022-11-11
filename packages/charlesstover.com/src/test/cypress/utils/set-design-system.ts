@@ -1,12 +1,20 @@
 import select from './select';
 
-export default function setDesignSystem(name: string): void {
+const EXPANDO_SELECTOR = '*[role="button"]';
+const NAVIGATION_ITEM_SELECTOR = 'nav ul > li';
+
+export default function setDesignSystem(designSystem: string): void {
   beforeEach((): void => {
-    cy.get('*[role="button"]').contains('Settings').click();
-    select('Design system', name, {
-      parentSelector: 'nav ul > li',
+    cy.get(EXPANDO_SELECTOR).contains('Settings').click();
+
+    select('Design system', designSystem, {
+      parentSelector: NAVIGATION_ITEM_SELECTOR,
     });
+
+    // Wait for the previous design system to unmount.
     cy.get('body').should('not.contain.text', 'CharlesStover.com');
-    cy.get('body').contains('CharlesStover.com');
+
+    // Wait for the new design system to mount.
+    cy.get('body').should('contain.text', 'CharlesStover.com');
   });
 }
