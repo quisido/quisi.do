@@ -12,9 +12,11 @@ export default function setDesignSystem(designSystem: string): void {
     });
 
     // Wait for the previous design system to unmount.
-    cy.get('body').should('not.contain.text', 'CharlesStover.com');
+    cy.get('body')
+      .invoke('text')
+      .should('not.contain.text', 'CharlesStover.com');
 
     // Wait for the new design system to mount.
-    cy.get('body').should('contain.text', 'CharlesStover.com');
+    cy.get('body').invoke('text').should('contain.text', 'CharlesStover.com');
   });
 }
