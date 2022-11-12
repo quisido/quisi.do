@@ -1,4 +1,4 @@
-// import handleDesignSystemChange from './handle-design-system-change';
+import handleDesignSystemChange from './handle-design-system-change';
 import select from './select';
 
 const EXPANDO_SELECTOR = '*[role="button"]';
@@ -9,7 +9,7 @@ export default function setDesignSystem(designSystem: string): void {
     cy.get(EXPANDO_SELECTOR).contains('Settings').click();
 
     select('Design system', designSystem, {
-      // onChange: handleDesignSystemChange,
+      onChange: handleDesignSystemChange,
       onIgnore(): void {
         cy.log(`${designSystem} design system appears to be cached.`);
       },
