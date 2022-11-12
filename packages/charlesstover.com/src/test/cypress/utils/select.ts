@@ -28,7 +28,7 @@ export default function select(
         return;
       }
 
-      const valueSelector = `ul[aria-labelledby="${formElementId}"] > li`;
+      const valueSelector = `ul[aria-labelledby$="${formElementId}"] > li`;
       cy.get(formElementSelector).click();
       cy.get(valueSelector).contains(value).click();
       if (typeof onChange === 'function') {
