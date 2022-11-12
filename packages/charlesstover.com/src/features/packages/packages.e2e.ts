@@ -16,7 +16,9 @@ const shouldPaginate = (): void => {
   cy.get(FIRST_PACKAGE_SELECTOR)
     .invoke('text')
     .then((page1package1name: string): void => {
-      cy.get(NEXT_PAGE_SELECTOR).click({ scrollBehavior: 'center' });
+      cy.get(NEXT_PAGE_SELECTOR)
+        .last({ log: false })
+        .click({ scrollBehavior: 'center' });
       cy.get(FIRST_PACKAGE_SELECTOR).should('not.contain', page1package1name);
     });
 };
