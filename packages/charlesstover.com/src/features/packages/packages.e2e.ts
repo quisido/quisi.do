@@ -14,16 +14,10 @@ const shouldDisplayCriticalElements = (): void => {
 
 const shouldPaginate = (): void => {
   cy.get(FIRST_PACKAGE_SELECTOR)
-    .last()
     .invoke('text')
-    .then((page1package1name: string): string => {
-      cy.get(NEXT_PAGE_SELECTOR).last().scrollIntoView().click();
-      return page1package1name;
-    })
     .then((page1package1name: string): void => {
-      cy.get(FIRST_PACKAGE_SELECTOR)
-        .last()
-        .should('not.contain', page1package1name);
+      cy.get(NEXT_PAGE_SELECTOR).click({ scrollBehavior: 'center' });
+      cy.get(FIRST_PACKAGE_SELECTOR).should('not.contain', page1package1name);
     });
 };
 
