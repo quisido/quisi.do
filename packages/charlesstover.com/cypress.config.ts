@@ -1,6 +1,6 @@
-const { defineConfig } = require('cypress');
+import { defineConfig } from 'cypress';
 
-module.exports = defineConfig({
+export default defineConfig({
   defaultCommandTimeout: 30000,
   fixturesFolder: false,
   projectId: 'fahz48',
