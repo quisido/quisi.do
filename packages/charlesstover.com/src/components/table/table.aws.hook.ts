@@ -50,6 +50,7 @@ interface State<Item> {
   readonly filteringAriaLabel: string | undefined;
   readonly pagesCount: number;
   readonly pageSizePreference: CollectionPreferencesProps.PageSizePreference;
+  readonly paginationAriaLabels: PaginationProps.Labels;
   readonly preferences: CollectionPreferencesProps.Preferences;
   readonly ref: MutableRefObject<HTMLDivElement | null>;
   readonly sortingColumn: TableProps.SortingColumn<Item> | undefined;
@@ -233,6 +234,23 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
       }),
       [rowsPerPageOptions, translate],
     ),
+
+    paginationAriaLabels: useMemo((): PaginationProps.Labels => {
+      const labels: PaginationProps.Labels = {};
+      const nextPageLabel: string | undefined = translate('Go to next page');
+      if (typeof nextPageLabel === 'string') {
+        labels.nextPageLabel = nextPageLabel;
+      }
+
+      const previousPageLabel: string | undefined = translate(
+        'Go to previous page',
+      );
+      if (typeof previousPageLabel === 'string') {
+        labels.previousPageLabel = previousPageLabel;
+      }
+
+      return labels;
+    }, [translate]),
 
     preferences: useMemo(
       (): CollectionPreferencesProps.Preferences<void> => ({

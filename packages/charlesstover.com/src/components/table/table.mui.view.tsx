@@ -8,6 +8,8 @@ import Footer from '@mui/material/TableFooter';
 import Head from '@mui/material/TableHead';
 import Pagination from '@mui/material/TablePagination';
 import MuiRow from '@mui/material/TableRow';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import Div from '../../components/div';
 import Span from '../../components/span';
@@ -32,6 +34,7 @@ visibleColumnIndices,
 export default function MuiTable<Item extends Record<string, unknown>>({
   Description,
   columns,
+  header,
   loading,
   onPageChange,
   onRowsPerPageChange,
@@ -45,12 +48,15 @@ export default function MuiTable<Item extends Record<string, unknown>>({
   sortColumnIndex,
 }: Readonly<Props<Item>>): ReactElement {
   const {
+    backIconButtonProps,
     handlePageChange,
     handleRowsPerPageChange,
     headCellProps,
+    nextIconButtonProps,
     page: pageState,
     rowsPerPageOptions: rowsPerPageOptionsState,
     rowProps,
+    showToolbar,
   } = useMuiTable({
     Description,
     columns,
@@ -66,24 +72,15 @@ export default function MuiTable<Item extends Record<string, unknown>>({
 
   return (
     <>
-      {/*
-      Technical debt: We only want to display the `Toolbar` when `Wrapper`'s
-        `contentType` prop is set to `"table"`. We currently have no way of
-        knowing the value of `Wrapper`'s `contentType` prop, but all tables are
-        presently mounted in the `contenType="table"` variant, so we can just
-        remove all instances of the `Toolbar`. This won't scale, but it works
-        for the current features of the application.
-
-      import Toolbar from '@mui/material/Toolbar';
-      import Typography from '@mui/material/Typography';
-      <Toolbar variant="dense">
-        <Div display="flex" flexDirection="column" textAlign="left">
-          <Typography component="div" variant="h6">
-            {header}
-          </Typography>
-        </Div>
-      </Toolbar>
-      */}
+      {showToolbar && (
+        <Toolbar variant="dense">
+          <Div display="flex" flexDirection="column" textAlign="left">
+            <Typography component="div" variant="h6">
+              {header}
+            </Typography>
+          </Div>
+        </Toolbar>
+      )}
       <Container component={Paper}>
         <Table size="small" stickyHeader>
           <Head>
@@ -125,8 +122,10 @@ export default function MuiTable<Item extends Record<string, unknown>>({
       </Container>
       {typeof loading !== 'string' && (
         <Pagination
+          backIconButtonProps={backIconButtonProps}
           component="div"
           count={rowsCount}
+          nextIconButtonProps={nextIconButtonProps}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleRowsPerPageChange}
           page={pageState}

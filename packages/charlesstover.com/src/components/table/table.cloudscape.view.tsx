@@ -45,6 +45,7 @@ export default function CloudscapeTable<Item extends Record<string, unknown>>({
     handleTextFilterChange,
     pageSizePreference,
     pagesCount,
+    paginationAriaLabels,
     preferences,
     ref,
     sortingColumn,
@@ -129,6 +130,7 @@ export default function CloudscapeTable<Item extends Record<string, unknown>>({
         }
         pagination={
           <Pagination
+            ariaLabels={paginationAriaLabels}
             currentPageIndex={page}
             onChange={handlePaginationChange}
             pagesCount={pagesCount}
