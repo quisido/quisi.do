@@ -6,6 +6,6 @@
     "cypress/**/*.json",
     "src/**/*.e2e.ts",
     "src/test/cypress/",
-    "cypress.config.ts"
+    "cypress.config.cjs"
   ]
 }
