@@ -7,6 +7,7 @@ const NAVIGATION_ITEM_SELECTOR = 'nav ul > li';
 export default function setDesignSystem(designSystem: string): void {
   beforeEach((): void => {
     cy.get(EXPANDO_SELECTOR).contains('Settings').click();
+    cy.screenshot();
 
     select('Design system', designSystem, {
       // onChange: handleDesignSystemChange,
@@ -15,5 +16,6 @@ export default function setDesignSystem(designSystem: string): void {
       },
       parentSelector: NAVIGATION_ITEM_SELECTOR,
     });
+    cy.screenshot();
   });
 }

@@ -3,7 +3,7 @@
 import setDesignSystem from '../../test/cypress/utils/set-design-system';
 
 const DESIGN_SYSTEMS: string[] = ['AWS', 'Cloudscape', 'Material'];
-const NEXT_PAGE_SELECTOR = 'button[aria-label="Go to next page"]';
+const NEXT_PAGE_SELECTOR = 'main button[aria-label="Go to next page"]';
 const FIRST_PACKAGE_SELECTOR =
   'main table > tbody > tr:first-child > td:first-child a';
 
@@ -16,9 +16,9 @@ const shouldPaginate = (): void => {
   cy.get(FIRST_PACKAGE_SELECTOR)
     .invoke('text')
     .then((page1package1name: string): void => {
-      cy.get(NEXT_PAGE_SELECTOR)
-        .last({ log: false })
-        .click({ scrollBehavior: 'center' });
+      cy.get(NEXT_PAGE_SELECTOR).click({ scrollBehavior: 'center' });
+      cy.screenshot();
+
       cy.get(FIRST_PACKAGE_SELECTOR).should('not.contain', page1package1name);
     });
 };
@@ -26,6 +26,7 @@ const shouldPaginate = (): void => {
 describe('Packages', (): void => {
   beforeEach((): void => {
     cy.visit('/packages');
+    cy.screenshot();
   });
 
   for (const designSystem of DESIGN_SYSTEMS) {
