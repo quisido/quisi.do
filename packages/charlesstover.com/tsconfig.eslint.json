@@ -9,6 +9,6 @@
     "node_modules/",
     "src/**/*.e2e.ts",
     "src/test/cypress/",
-    "cypress.config.cjs"
+    "cypress.config.ts"
   ]
 }

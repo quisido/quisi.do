@@ -87,7 +87,7 @@ jobs:
           browser: ${{ matrix.browser }}
           ci-build-id: ${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
           command-prefix: yarn dlx
-          config-file: cypress.config.cjs
+          config-file: cypress.config.ts
           group: ${{ matrix.browser }}
           install: false
           parallel: true
