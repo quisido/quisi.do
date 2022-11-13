@@ -1,10 +1,20 @@
 const { defineConfig } = require('cypress');
 
+const getScreenshotsFolder = () => {
+  const subfolder = process.env.CYPRESS_SCREENSHOTS_SUBFOLDER;
+  if (typeof subfolder === 'undefined') {
+    return 'cypress/screenshots';
+  }
+  return `cypress/screenshots/${subfolder}`;
+};
+
 module.exports = defineConfig({
   defaultCommandTimeout: 30000,
   fixturesFolder: false,
   projectId: 'fahz48',
   redirectionLimit: 2,
+  retries: process.env.CYPRESS_RETRIES ?? 0,
+  screenshotsFolder: getScreenshotsFolder(),
   e2e: {
     baseUrl: 'http://localhost:3000/',
     specPattern: 'src/**/*.e2e.ts',
