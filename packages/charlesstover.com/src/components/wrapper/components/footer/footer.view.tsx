@@ -3,18 +3,14 @@ import Div from '../../../../components/div';
 import Span from '../../../../components/span';
 import validateString from '../../../../utils/validate-string';
 import Link from '../../components/footer-link';
-import filterByCoverageWindow from '../../utils/filter-by-coverage-window';
+import useFooter from './footer.hook';
 import styles from './footer.module.scss';
 
 const rootClassName: string = validateString(styles.root);
 const NONE = 0;
 
 export default function Footer(): ReactElement {
-  const features: string[] = [];
-
-  if (filterByCoverageWindow(window)) {
-    features.push('coverage enabled');
-  }
+  const { features } = useFooter();
 
   return (
     <Div className={rootClassName} marginTop="large">
