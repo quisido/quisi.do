@@ -32,7 +32,6 @@ export default function ignoreOptionalDependencies(): void {
       if (OPTIONAL_DEPENDENCY_LOCATIONS.some(filterByUrl)) {
         return;
       }
-      console.log(options, consoleProps);
       return cypressLog(options);
     }
 
