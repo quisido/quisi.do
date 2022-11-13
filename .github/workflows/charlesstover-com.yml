@@ -79,7 +79,6 @@ jobs:
         env:
           CHOKIDAR_USEPOLLING: true
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          CYPRESS_RETRIES: ${{ github.event_name == 'push' && 2 || 0 }}
           CYPRESS_SCREENSHOTS_SUBFOLDER: ${{ matrix.os }}-${{ matrix.browser }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }} # -${{ matrix.container }}
