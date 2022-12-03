@@ -4,7 +4,7 @@
   "author": "Charles Stover <charlesstover.com@charlesstover.com>",
   "description": "the professional portfolio of Charles Stover",
   "homepage": "https://charlesstocer.com/",
-  "packageManager": "yarn@3.2.4",
+  "packageManager": "yarn@3.3.0",
   "private": true,
   "repository": "github:CharlesStover/charlesstover.com",
   "type": "module",
@@ -36,16 +36,16 @@
     "@monorepo-template/eslint-config": "^1.0.3",
     "@monorepo-template/test": "^2.2.0",
     "@monorepo-template/tsconfig": "^1.1.2",
-    "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "^5.42.1",
-    "@typescript-eslint/parser": "^5.42.1",
-    "@yarnpkg/sdks": "^3.0.0-rc.28",
+    "@types/node": "^18.11.10",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "@yarnpkg/sdks": "^3.0.0-rc.32",
     "browserslist": "^4.21.4",
-    "eslint": "^8.27.0",
+    "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.10",
-    "prettier": "^2.7.1",
-    "typescript": "^4.8.4"
+    "eslint-plugin-react": "^7.31.11",
+    "prettier": "^2.8.0",
+    "typescript": "^4.9.3"
   }
 }
