@@ -1598,9 +1598,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@charlesstover/charlesstover.com@workspace:."
   dependencies:
-    "@monorepo-template/eslint-config": ^1.0.3
+    "@monorepo-template/eslint-config": ^1.0.4
     "@monorepo-template/test": ^2.2.0
     "@monorepo-template/tsconfig": ^1.1.2
+    "@monorepo-template/up": ^1.0.1
     "@types/node": ^18.11.10
     "@typescript-eslint/eslint-plugin": ^5.45.0
     "@typescript-eslint/parser": ^5.45.0
@@ -2819,14 +2820,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/eslint-config@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "@monorepo-template/eslint-config@npm:1.0.3"
+"@monorepo-template/eslint-config@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@monorepo-template/eslint-config@npm:1.0.4"
   dependencies:
-    "@typescript-eslint/eslint-plugin": ^5.38.0
-    "@typescript-eslint/parser": ^5.38.0
+    "@typescript-eslint/eslint-plugin": ^5.45.0
+    "@typescript-eslint/parser": ^5.45.0
     eslint-plugin-jsx-a11y: ^6.6.1
-    eslint-plugin-react: ^7.31.8
+    eslint-plugin-react: ^7.31.11
     eslint-plugin-react-hooks: ^4.6.0
   peerDependencies:
     eslint: ^8.0.0
@@ -2841,7 +2842,7 @@ __metadata:
       optional: true
     eslint-plugin-react-hooks:
       optional: true
-  checksum: 23f887cc71c756a16da6bb626a1c6efeb78c36967ef0e2b7ecc4c42875c525d9fb0ba971b1d3e18b896caf4352a8ce4f3308d93a0da6f5c93103584596b113cb
+  checksum: 4726af33e8d959e724c68be48ca45bc90196ff9ca13a861dc923dd1ae445b536c55bee0daa0752c8ba54e0f4961910134bc0209348e1918f107b8220331cb9f3
   languageName: node
   linkType: hard
 
@@ -2938,6 +2939,17 @@ __metadata:
   peerDependencies:
     "@types/node": "*"
   checksum: ecaeef6cd20152eb87e88d47ccd0fbfca4e5e3745e03765746d3bc99cffe807736f0cab4c530e0b100ece7fb7b211798b06f3f13c9611bba7aff0c02ec79ac40
+  languageName: node
+  linkType: hard
+
+"@monorepo-template/up@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@monorepo-template/up@npm:1.0.1"
+  dependencies:
+    yarn-up-skip-workspace: ^1.0.1
+  bin:
+    monorepo-template-up: ./dist/esm/bin/up.js
+  checksum: 9edc1fda5e96c6bbe66843f71448a5e0f96f4189b32669adffefbda541f7ab31d20e48f101aa4319604ae4d823a84672d18aff3dfcd27d94502eb56016bc2a81
   languageName: node
   linkType: hard
 
@@ -4284,7 +4296,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.38.0, @typescript-eslint/eslint-plugin@npm:^5.45.0, @typescript-eslint/eslint-plugin@npm:^5.5.0":
+"@typescript-eslint/eslint-plugin@npm:^5.45.0, @typescript-eslint/eslint-plugin@npm:^5.5.0":
   version: 5.45.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.45.0"
   dependencies:
@@ -4318,7 +4330,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.38.0, @typescript-eslint/parser@npm:^5.45.0, @typescript-eslint/parser@npm:^5.5.0":
+"@typescript-eslint/parser@npm:^5.45.0, @typescript-eslint/parser@npm:^5.5.0":
   version: 5.45.0
   resolution: "@typescript-eslint/parser@npm:5.45.0"
   dependencies:
@@ -6069,7 +6081,7 @@ __metadata:
     "@monorepo-template/cypress-coverage-config-override": ^1.2.4
     "@monorepo-template/cypress-coverage-plugin": ^1.0.6
     "@monorepo-template/cypress-nyc-config": ^1.0.4
-    "@monorepo-template/eslint-config": ^1.0.3
+    "@monorepo-template/eslint-config": ^1.0.4
     "@monorepo-template/jest-application-preset": ^1.1.2
     "@monorepo-template/tsconfig": ^1.1.2
     "@mui/icons-material": ^5.10.16
@@ -8181,7 +8193,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.27.1, eslint-plugin-react@npm:^7.31.11, eslint-plugin-react@npm:^7.31.8":
+"eslint-plugin-react@npm:^7.27.1, eslint-plugin-react@npm:^7.31.11":
   version: 7.31.11
   resolution: "eslint-plugin-react@npm:7.31.11"
   dependencies:
@@ -18055,6 +18067,15 @@ __metadata:
     y18n: "npm:^5.0.5"
     yargs-parser: "npm:^21.1.1"
   checksum: 47da1b0d854fa16d45a3ded57b716b013b2179022352a5f7467409da5a04a1eef5b3b3d97a2dfc13e8bbe5f2ffc0afe3bc6a4a72f8254e60f5a4bd7947138643
+  languageName: node
+  linkType: hard
+
+"yarn-up-skip-workspace@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "yarn-up-skip-workspace@npm:1.0.1"
+  bin:
+    yarn-up-skip-workspace: ./dist/esm/bin/yarn-up-skip-workspace.js
+  checksum: 3343c0b8c9a8b8e0e97318888f8f28d6399034af9473fe18c4070fa18129b0f08509a7e0f7bab38db4622bc5cbacf88251d95ecb62ff6cd06fdfa2b0837cb46b
   languageName: node
   linkType: hard
 

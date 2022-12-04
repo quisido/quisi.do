@@ -27,15 +27,16 @@
     "prepack": "yarn workspaces foreach --parallel --topological-dev run prepack",
     "prepublish": "yarn eslint && yarn test && yarn workspaces foreach --no-private --parallel --topological-dev run prepublish",
     "test": "monorepo-template-test",
-    "up": "yarn set version latest && yarn install && yarn sdks vscode && yarn up \"*\" \"@*/*\" && yarn up -R \"*\" \"@*/*\""
+    "up": "monorepo-template-up"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
-    "@monorepo-template/eslint-config": "^1.0.3",
+    "@monorepo-template/eslint-config": "^1.0.4",
     "@monorepo-template/test": "^2.2.0",
     "@monorepo-template/tsconfig": "^1.1.2",
+    "@monorepo-template/up": "^1.0.1",
     "@types/node": "^18.11.10",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
