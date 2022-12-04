@@ -1,3 +1,8 @@
+/**/*.gz
 /**/.pnp.*
+/.git/
 /.vscode/settings.json
+/.yarn/
 /.yarnrc.yml
+/LICENSE
+/yarn.lock
