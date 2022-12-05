@@ -1,6 +1,10 @@
 import '@cypress/code-coverage/support';
-import ignoreOptionalDependencies from '../../src/test/cypress/utils/ignore-optional-dependencies';
+import ignoreDependencyLogs from '@monorepo-template/ignore-cypress-dependency-logs';
+import IGNORED_DEPENDENCY_LOCATIONS from './constants/ignored-dependency-locations';
 import ignoreResizeObserverUndeliveredNotificationsError from '../../src/test/cypress/utils/ignore-resize-observer-undelivered-notifications-error';
 
-beforeEach(ignoreOptionalDependencies);
 beforeEach(ignoreResizeObserverUndeliveredNotificationsError);
+
+beforeEach((): void => {
+  ignoreDependencyLogs(IGNORED_DEPENDENCY_LOCATIONS);
+});
