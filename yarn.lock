@@ -2846,6 +2846,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@monorepo-template/ignore-cypress-dependency-logs@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@monorepo-template/ignore-cypress-dependency-logs@npm:1.0.0"
+  checksum: 8c1c0c60c14177bba742b6cf9efef877c0e9cef1a03853c465c6ede701143156caec891de3d5411dd358e19ed1648103a00491fb2f15270caa25638e610d084a
+  languageName: node
+  linkType: hard
+
 "@monorepo-template/jest-application-preset@npm:^1.1.2":
   version: 1.1.2
   resolution: "@monorepo-template/jest-application-preset@npm:1.1.2"
@@ -6082,6 +6089,7 @@ __metadata:
     "@monorepo-template/cypress-coverage-plugin": ^1.0.6
     "@monorepo-template/cypress-nyc-config": ^1.0.4
     "@monorepo-template/eslint-config": ^1.0.4
+    "@monorepo-template/ignore-cypress-dependency-logs": ^1.0.0
     "@monorepo-template/jest-application-preset": ^1.1.2
     "@monorepo-template/tsconfig": ^1.1.2
     "@mui/icons-material": ^5.10.16
