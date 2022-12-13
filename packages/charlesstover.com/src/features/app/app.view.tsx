@@ -3,6 +3,7 @@ import type { ReactElement } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Theme from '../../components/theme';
 // import GoogleAnalytics from '../../modules/react-google-analytics';
+import CloudWatchRUM from './components/cloudwatch-rum';
 import Contexts from './components/contexts';
 import Datadog from './components/datadog';
 import I18nProvider from './components/i18n-provider';
@@ -21,21 +22,23 @@ export default function App(): ReactElement {
   return (
     <BrowserRouter>
       <Contexts>
-        <Datadog>
-          <FullStory orgId="150TVM">
-            {/* <GoogleAnalytics trackingId="UA-5966978-4"> */}
-            <I18nProvider>
-              <QueryClientProvider>
-                <Sentry>
-                  <Theme>
-                    <Routes />
-                  </Theme>
-                </Sentry>
-              </QueryClientProvider>
-            </I18nProvider>
-            {/* </GoogleAnalytics> */}
-          </FullStory>
-        </Datadog>
+        <CloudWatchRUM>
+          <Datadog>
+            <FullStory orgId="150TVM">
+              {/* <GoogleAnalytics trackingId="UA-5966978-4"> */}
+              <I18nProvider>
+                <QueryClientProvider>
+                  <Sentry>
+                    <Theme>
+                      <Routes />
+                    </Theme>
+                  </Sentry>
+                </QueryClientProvider>
+              </I18nProvider>
+              {/* </GoogleAnalytics> */}
+            </FullStory>
+          </Datadog>
+        </CloudWatchRUM>
       </Contexts>
     </BrowserRouter>
   );
