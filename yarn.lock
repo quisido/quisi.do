@@ -91,7 +91,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/querystring-builder@npm:3.226.0":
+"@aws-sdk/querystring-builder@npm:3.226.0, @aws-sdk/querystring-builder@npm:^3.0.0":
   version: 3.226.0
   resolution: "@aws-sdk/querystring-builder@npm:3.226.0"
   dependencies:
