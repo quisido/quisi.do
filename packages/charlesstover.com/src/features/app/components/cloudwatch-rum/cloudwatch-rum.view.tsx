@@ -1,6 +1,6 @@
 import { Telemetry } from 'aws-rum-web';
 import type { ReactElement, ReactNode } from 'react';
-import CloudWatchRUM from '../../../../modules/aws-rum-react';
+import { AwsRumProvider } from '../../../../modules/aws-rum-react';
 
 interface Props {
   readonly children: ReactNode;
@@ -8,9 +8,9 @@ interface Props {
 
 const TELEMETRIES: Telemetry[] = ['errors', 'http', 'performance'];
 
-export default function MyCloudWatchRUM({ children }: Props): ReactElement {
+export default function CloudWatchRUM({ children }: Props): ReactElement {
   return (
-    <CloudWatchRUM
+    <AwsRumProvider
       allowCookies
       enableXRay
       endpoint="https://dataplane.rum.us-east-1.amazonaws.com"
@@ -23,6 +23,6 @@ export default function MyCloudWatchRUM({ children }: Props): ReactElement {
       version="1.0.0"
     >
       {children}
-    </CloudWatchRUM>
+    </AwsRumProvider>
   );
 }
