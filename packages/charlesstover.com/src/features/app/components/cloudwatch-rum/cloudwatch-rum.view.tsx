@@ -25,7 +25,6 @@ export default function CloudWatchRUM({ children }: Props): ReactElement {
       telemetries={TELEMETRIES}
       version="1.0.0"
     >
-      <ReactRouterRecordPageView />
       {children}
     </AwsRumProvider>
   );
