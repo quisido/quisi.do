@@ -1,6 +1,6 @@
 import { AwsRum } from 'aws-rum-web';
-import type { ErrorInfo, ReactElement, ReactNode } from 'react';
-import { Component } from 'react';
+import type { ReactElement, ReactNode } from 'react';
+import { PureComponent } from 'react';
 import { withAwsRum } from '../../../../modules/aws-rum-react';
 
 interface Props {
@@ -12,11 +12,7 @@ interface State {
   readonly error: Error | null;
 }
 
-class ErrorBoundary extends Component<Props, State> {
-  static getDerivedStateFromError(error: Error) {
-    return { error };
-  }
-
+class ErrorBoundary extends PureComponent<Props, State> {
   public constructor(props: Props) {
     super(props);
     this.state = {
@@ -24,15 +20,25 @@ class ErrorBoundary extends Component<Props, State> {
     };
   }
 
-  public componentDidCatch(error: Error, _errorInfo: ErrorInfo): void {
-    this.props.awsRum.recordError(error);
+  public static getDerivedStateFromError(error: Error): State {
+    return {
+      error,
+    };
+  }
+
+  public componentDidCatch(error: Error): void {
+    const { awsRum } = this.props;
+    awsRum.recordError(error);
   }
 
   public render(): ReactElement {
-    if (this.state.error !== null) {
-      return <>{this.state.error.message}</>;
+    const { error } = this.state;
+    if (error !== null) {
+      return <>{error.message}</>;
     }
-    return <>{this.props.children}</>;
+
+    const { children } = this.props;
+    return <>{children}</>;
   }
 }
 

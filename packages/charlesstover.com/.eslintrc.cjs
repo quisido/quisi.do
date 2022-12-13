@@ -16,6 +16,7 @@ module.exports = {
     'react/jsx-child-element-spacing': 'off',
     'react/jsx-max-depth': 'off',
     'react/jsx-props-no-spreading': 'off',
+
     'import/no-restricted-paths': [
       'error',
       {
@@ -44,6 +45,19 @@ module.exports = {
               'You may not import from MUI directly. Import from @mui/material/ComponentName instead.',
             target: '**/*',
           },
+        ],
+      },
+    ],
+
+    'react/sort-comp': [
+      'error',
+      {
+        order: [
+          'constructor',
+          'static-methods',
+          'lifecycle',
+          'everything-else',
+          'render',
         ],
       },
     ],
