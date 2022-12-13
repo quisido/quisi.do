@@ -1,9 +1,6 @@
 import { Telemetry } from 'aws-rum-web';
 import type { ReactElement, ReactNode } from 'react';
-import {
-  AwsRumProvider,
-  ReactRouterRecordPageView,
-} from '../../../../modules/aws-rum-react';
+import { AwsRumProvider } from '../../../../modules/aws-rum-react';
 
 interface Props {
   readonly children: ReactNode;
