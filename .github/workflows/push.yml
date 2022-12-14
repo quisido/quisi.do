@@ -1,0 +1,188 @@
+name: Push
+
+jobs:
+  install:
+    name: Install dependencies
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Enable Plug-n-Play `cypress`
+        run: yarn cypress:pnp
+        working-directory: packages/charlesstover.com
+      - name: Install Cypress
+        uses: cypress-io/github-action@v4
+        with:
+          install: false
+          runTests: false
+          working-directory: packages/charlesstover.com
+    strategy:
+      matrix:
+        os: [ubuntu, windows]
+
+  prepack:
+    name: Prepack
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Prepack
+        run: yarn run prepack
+      - name: Upload builds
+        uses: actions/upload-artifact@v3
+        with:
+          name: prepack
+          path: |
+            packages/*/build
+            packages/*/dist
+
+  github-packages:
+    name: GitHub Packages
+    needs: prepack
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download builds
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@${{ github.repository_owner }}'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Publish
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          yarn config set npmAuthToken $NPM_AUTH_TOKEN;
+          yarn config set \
+            npmScopes.${{ github.repository_owner }}.npmPublishRegistry \
+            'https://npm.pkg.github.com';
+          yarn workspaces foreach --no-private --parallel --topological-dev \
+            npm publish --tolerate-republish;
+
+  github-pages:
+    name: GitHub Pages
+    needs: prepack
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Download builds
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          clean: true
+          folder: packages/charlesstover.com/build/
+          single-commit: true
+
+  npm:
+    name: Publish to NPM
+    needs: prepack
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download builds
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Publish
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: >
+          yarn config set npmAuthToken $NPM_AUTH_TOKEN;
+          yarn workspaces foreach --no-private --parallel --topological-dev \
+            npm publish --tolerate-republish;
+
+  sentry-release:
+    name: Sentry release
+    needs: prepack
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Download builds
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Sentry release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_LOG_LEVEL: info
+          SENTRY_ORG: charles-stover
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        with:
+          environment: production
+          sourcemaps: packages/charlesstover.com/build/
+          version: ${{ github.sha }}
+
+  cloudflare-purge:
+    name: Cloudflare purge
+    needs: github-pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Purge Cloudflare files
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        run: >
+          curl \
+            --data '{
+              "files": [
+                "https://charlesstover.com",
+                "https://charlesstover.com/index.html"
+              ]
+            }' \
+            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            --header "Content-Type:application/json" \
+            --request POST \
+            "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache"
+
+on:
+  push:
+    branches: [main]

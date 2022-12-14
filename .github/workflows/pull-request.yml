@@ -1,0 +1,176 @@
+name: Pull request
+
+jobs:
+  install:
+    name: Install dependencies
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Enable Plug-n-Play `cypress`
+        run: yarn cypress:pnp
+        working-directory: packages/charlesstover.com
+      - name: Install Cypress
+        uses: cypress-io/github-action@v4
+        with:
+          install: false
+          runTests: false
+          working-directory: packages/charlesstover.com
+    strategy:
+      matrix:
+        os: [ubuntu, windows]
+
+  cypress:
+    name: Cypress
+    needs: install
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Enable Plug-n-Play `cypress`
+        run: yarn cypress:pnp
+        working-directory: packages/charlesstover.com
+      - name: End-to-end test
+        uses: cypress-io/github-action@v4
+        env:
+          CHOKIDAR_USEPOLLING: true
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_SCREENSHOTS_SUBFOLDER: ${{ matrix.os }}-${{ matrix.browser }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }} # -${{ matrix.container }}
+          REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
+          REACT_APP_GITHUB_SHA: ${{ github.sha }}
+        with:
+          browser: ${{ matrix.browser }}
+          ci-build-id: ${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          command-prefix: yarn dlx
+          config-file: cypress.config.cjs
+          group: ${{ matrix.browser }}
+          install: false
+          parallel: true
+          record: true
+          start: yarn run cypress:start
+          tag: ${{ github.event_name }}
+          wait-on: 'http://localhost:3000/'
+          wait-on-timeout: 120
+          working-directory: packages/charlesstover.com
+      - name: Upload coverage
+        if: matrix.os == 'ubuntu'
+        uses: actions/upload-artifact@v3
+        with:
+          name: charlesstover-com--cypress--coverage
+          path: packages/charlesstover.com/cypress/coverage/
+      - name: Upload screenshots
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: charlesstover-com--cypress--screenshots
+          path: packages/charlesstover.com/cypress/screenshots/
+      - name: Upload videos
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: charlesstover-com--cypress--videos
+          path: packages/charlesstover.com/cypress/videos/
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu, windows]
+        browser: [chrome, edge] # firefox
+        # Cypress only supports 1 container for Edge.
+        # With multiple containers, Cypress will use the wrong browser version.
+        # https://github.com/cypress-io/github-action/issues/121
+        # container: [1, 2, 3]
+        exclude:
+          - browser: edge
+            os: ubuntu
+
+  prepack:
+    name: Prepack
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Prepack
+        run: yarn run prepack
+        env:
+          # Ignore warnings from `mini-css-extract-plugin`.
+          CI: false
+          REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
+          REACT_APP_GITHUB_SHA: ${{ github.sha }}
+      - name: Upload builds
+        uses: actions/upload-artifact@v2
+        with:
+          name: prepack
+          path: |
+            packages/*/build
+            packages/*/dist
+
+  prepublish:
+    name: Prepublish
+    needs: [cypress, prepack]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download builds
+        uses: actions/download-artifact@v2
+        with:
+          name: prepack
+          path: packages/
+      - name: Download Cypress coverage reports
+        uses: actions/download-artifact@v2
+        with:
+          name: charlesstover-com--cypress--coverage
+          path: packages/charlesstover.com/cypress/coverage/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Prepublish
+        run: yarn run prepublish
+      - name: Upload test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: prepublish
+          path: |
+            packages/*/.nyc_output
+            packages/*/coverage
+            packages/*/cypress/coverage
+            packages/*/cypress/screenshots
+            packages/*/cypress/videos
+            packages/*/jest
+            packages/*/lighthouse.report.html
+
+on:
+  pull_request:
+    branches: [main]
