@@ -24,6 +24,15 @@ jobs:
           install: false
           runTests: false
           working-directory: packages/charlesstover.com
+      - name: Build `aws-rum-react`
+        if: matrix.os == 'ubuntu'
+        run: yarn packages/aws-rum-react run prepack
+      - name: Upload `aws-rum-react`
+        if: matrix.os == 'ubuntu'
+        uses: actions/upload-artifact@v3
+        with:
+          name: aws-rum-react--dist
+          path: packages/aws-rum-react/dist
     strategy:
       matrix:
         os: [ubuntu, windows]
@@ -35,6 +44,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Download `aws-rum-react`
+        uses: actions/download-artifact@v3
+        with:
+          name: aws-rum-react--dist
+          path: packages/aws-rum-react/dist
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -63,6 +77,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Download `aws-rum-react`
+        uses: actions/download-artifact@v3
+        with:
+          name: aws-rum-react--dist
+          path: packages/aws-rum-react/dist
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -136,6 +155,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Download `aws-rum-react`
+        uses: actions/download-artifact@v3
+        with:
+          name: aws-rum-react--dist
+          path: packages/aws-rum-react/dist
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -163,6 +187,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Download `aws-rum-react`
+        uses: actions/download-artifact@v3
+        with:
+          name: aws-rum-react--dist
+          path: packages/aws-rum-react/dist
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -230,6 +259,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Download `aws-rum-react`
+        uses: actions/download-artifact@v3
+        with:
+          name: aws-rum-react--dist
+          path: packages/aws-rum-react/dist
       - name: Download build
         uses: actions/download-artifact@v3
         with:
@@ -324,5 +358,13 @@ jobs:
 
 on:
   pull_request:
+    paths:
+      - '.github/workflows/charlesstover-com.yml'
+      - 'packages/aws-rum-react/**/*'
+      - 'packages/charlesstover.com/**/*'
   push:
     branches: [main]
+    paths:
+      - '.github/workflows/charlesstover-com.yml'
+      - 'packages/aws-rum-react/**/*'
+      - 'packages/charlesstover.com/**/*'

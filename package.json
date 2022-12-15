@@ -21,11 +21,10 @@
   },
   "scripts": {
     "browserslist:update-db": "browserslist --update-db",
-    "build": "yarn prepack",
     "eslint": "eslint '**/*'",
     "eslint:fix": "eslint '**/*' --fix",
     "prepack": "yarn workspaces foreach --parallel --topological-dev run prepack",
-    "prepublish": "yarn eslint && yarn test && yarn workspaces foreach --no-private --parallel --topological-dev run prepublish",
+    "prepublish": "eslint '**/*' && monorepo-template-test && yarn workspaces foreach --no-private --parallel --topological-dev run prepublish",
     "test": "monorepo-template-test",
     "up": "monorepo-template-up"
   },
@@ -37,7 +36,7 @@
     "@monorepo-template/test": "^2.2.0",
     "@monorepo-template/tsconfig": "^1.1.2",
     "@monorepo-template/up": "^1.0.1",
-    "@types/node": "^18.11.14",
+    "@types/node": "^18.11.15",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
     "@yarnpkg/sdks": "^3.0.0-rc.33",
