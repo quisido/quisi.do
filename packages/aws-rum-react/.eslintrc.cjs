@@ -8,7 +8,7 @@ module.exports = {
 
   overrides: [
     {
-      files: ['src/test/constants/module-name-mapper.ts'],
+      files: ['src/test/constants/module-name-mapper.js'],
       rules: {
         '@typescript-eslint/naming-convention': 'off',
       },
