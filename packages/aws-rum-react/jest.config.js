@@ -1,4 +1,4 @@
-import MODULE_NAME_MAPPER from './src/test/constants/module-name-mapper';
+import MODULE_NAME_MAPPER from './src/test/constants/module-name-mapper.js';
 
 export default {
   moduleNameMapper: MODULE_NAME_MAPPER,

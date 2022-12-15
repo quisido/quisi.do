@@ -1,4 +1,4 @@
-const MODULE_NAME_MAPPER: Record<string, string> = {
+const MODULE_NAME_MAPPER = {
   '^uuid$': 'uuid',
 };
 
