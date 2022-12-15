@@ -18,7 +18,7 @@ describe('withAwsRum', (): void => {
     const { getByText } = render(<TestHoc />, {
       wrapper({ children }: PropsWithChildren): ReactElement {
         return (
-          <AwsRumProvider id="test-id" region="us-east-1" version="1.0.0">
+          <AwsRumProvider id="test-id" region="us-east-1" version="0.0.0">
             {children}
           </AwsRumProvider>
         );

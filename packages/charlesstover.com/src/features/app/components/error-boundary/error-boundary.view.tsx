@@ -1,11 +1,10 @@
-import type { AwsRum } from 'aws-rum-web';
-import { withAwsRum } from 'aws-rum-react';
+import { withRecordError } from 'aws-rum-react';
 import type { ReactElement, ReactNode } from 'react';
 import { PureComponent } from 'react';
 
 interface Props {
-  readonly awsRum: AwsRum;
   readonly children: ReactNode;
+  readonly recordError: (error: unknown) => void;
 }
 
 interface State {
@@ -27,8 +26,8 @@ class ErrorBoundary extends PureComponent<Props, State> {
   }
 
   public componentDidCatch(error: Error): void {
-    const { awsRum } = this.props;
-    awsRum.recordError(error);
+    const { recordError } = this.props;
+    recordError(error);
   }
 
   public render(): ReactElement {
@@ -42,4 +41,4 @@ class ErrorBoundary extends PureComponent<Props, State> {
   }
 }
 
-export default withAwsRum(ErrorBoundary);
+export default withRecordError(ErrorBoundary);
