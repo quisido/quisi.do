@@ -10,6 +10,8 @@
       "@charlesstover/radix",
       "@charlesstover/rainbow-text",
       "@charlesstover/spritesheet2gif",
+      "@monorepo-template/example-react-module",
+      "@monorepo-template/module",
       "@monorepo-template/nyc-config",
       "async-action",
       "configure-webpack",
@@ -36,19 +38,27 @@
       "@monorepo-template/eslint-config-typescript-fixable",
       "@monorepo-template/eslint-config-typescript-strict"
     ],
-    ["@monorepo-template/jest-application-preset"],
-    ["@monorepo-template/jest-module-preset"],
-    ["@monorepo-template/jest-preset"],
+    ["@monorepo-template/ignore-cypress-dependency-logs"],
+    [
+      "@monorepo-template/jest-preset",
+      "@monorepo-template/jest-application-preset",
+      "@monorepo-template/jest-module-preset"
+    ],
     ["@monorepo-template/jest-transformer"],
     ["@monorepo-template/merge-coverage"],
-    ["@monorepo-template/react-application-tsconfig"],
-    ["@monorepo-template/react-module-tsconfig"],
     ["@monorepo-template/rollup-config"],
     ["@monorepo-template/test"],
-    ["@monorepo-template/tsconfig"],
+    ["@monorepo-template/tree-logger"],
+    [
+      "@monorepo-template/tsconfig",
+      "@monorepo-template/react-application-tsconfig",
+      "@monorepo-template/react-module-tsconfig"
+    ],
+    ["@monorepo-template/up"],
     ["@monorepo-template/webpack-configure-next-babel"],
     ["@monorepo-template/webpack-configure-next-yarn-berry"],
     ["absolute-timestamp"],
+    ["aws-rum-react"],
     ["awsui-dark-mode"],
     ["awsui-theme"],
     ["deep-proxy-polyfill"],
@@ -94,6 +104,7 @@
     ["use-shift-key"],
     ["use-update-effect"],
     ["use-update-layout-effect"],
-    ["with-router"]
+    ["with-router"],
+    ["yarn-up-skip-workspace"]
   ]
 }

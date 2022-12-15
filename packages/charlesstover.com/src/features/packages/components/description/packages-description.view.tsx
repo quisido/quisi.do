@@ -4,24 +4,20 @@ import filterByUndefined from '../../../../utils/filter-by-undefined';
 import Paragraph from '../../components/description-paragraph';
 import type Item from '../../types/packages-item';
 
-const mapParagraphToElement = (
-  paragraph: ReactNode,
+const mapNodeToParagraph = (
+  children: ReactNode,
   index: number,
-): ReactElement => <Paragraph key={index}>{paragraph}</Paragraph>;
+): ReactElement => <Paragraph key={index}>{children}</Paragraph>;
 
 export default function PackageDescription({
   packageName,
 }: Item): ReactElement | null {
-  const description: ReactNode | undefined =
-    PACKAGE_DESCRIPTIONS.get(packageName);
+  const description: string | undefined = PACKAGE_DESCRIPTIONS.get(packageName);
 
   if (filterByUndefined(description)) {
     return null;
   }
 
-  if (!Array.isArray(description)) {
-    return <Paragraph>{description}</Paragraph>;
-  }
-
-  return <>{description.map(mapParagraphToElement)}</>;
+  const descriptions: readonly string[] = description.split('\n');
+  return <>{descriptions.map(mapNodeToParagraph)}</>;
 }
