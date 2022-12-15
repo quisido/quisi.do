@@ -1,5 +1,8 @@
 # Amazon CloudWatch RUM React client
+
 [![GitHub Action](https://github.com/CharlesStover/charlesstover.com/actions/workflows/aws-rum-react.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/charlesstover.com/actions/workflows/aws-rum-react.yml)
+[![version](https://img.shields.io/npm/v/aws-rum-react.svg)](https://www.npmjs.com/package/aws-rum-react)
+[![downloads](https://img.shields.io/npm/dt/aws-rum-react.svg)](https://www.npmjs.com/package/aws-rum-react)
 
 This is the CloudWatch RUM React client source code repository. It hosts a React
 library which performs real user monitoring (RUM) telemetry on web applications.
@@ -58,11 +61,11 @@ Modify the `AwsRumProvider` component props to match your AppMonitor. See
 
 ### Props
 
-| Prop name | Type   | Description |
-| --------- | ------ | ----------- |
-| `id`      | string | a globally unique identifier for the CloudWatch RUM AppMonitor which monitors your application |
-| `region`  | string | the AWS region of the AppMonitor |
-| `version` | string | the application's semantic version |
+| Prop name | Type   | Description                             |
+| --------- | ------ | --------------------------------------- |
+| `id`      | string | a globally unique ID for the AppMonitor |
+| `region`  | string | the AWS region of the AppMonitor        |
+| `version` | string | the application's semantic version      |
 
 You may pass any application-specific React client configuration as additional
 props which are all optional. While these fields are optional, depending on your
@@ -75,26 +78,51 @@ To get started, we recommend the props in the above sample. The `guestRoleArn`
 and `identityPoolId` shown are dummy values. Modify these to match the resources
 created when setting up the AppMonitor:
 
-For a complete list of configuration options, see [Application-specific Configurations](https://github.com/aws-observability/aws-rum-web/blob/main/docs/configuration.md).
+For a complete list of configuration options, see
+[Application-specific Configurations](https://github.com/aws-observability/aws-rum-web/blob/main/docs/configuration.md).
 
-## Additional Documentation:
+## Higher order components
+
+You may use the `withAwsRum` HOC and `withRecordError` HOC to access the AWS RUM
+instance and the `recordError` utility function respectively.
+
+This is particularly useful for mounting your Error Boundaries.
+
+```typescript
+import { withRecordError } from 'aws-rum-react';
+import { PureComponent } from 'react';
+
+interface Props {
+  readonly recordError: (error: unknown) => void;
+}
+
+class ErrorBoundary extends PureComponent<Props> {
+  public componentDidCatch(err: Error): void {
+    this.props.recordError(err);
+  }
+}
+
+export default withRecordError(ErrorBoundary);
+```
+
+## Additional documentation
 
 - [Configuring the client](https://github.com/aws-observability/aws-rum-web/blob/main/docs/configuration.md)
 - [Troubleshooting](https://github.com/aws-observability/aws-rum-web/blob/HEAD/docs/cdn_troubleshooting.md)
 
-## Getting Help
+## Getting help
 
 Use the following community resources for getting help with the SDK. We use the
 GitHub issues for tracking bugs and feature requests.
 
-* View the [CloudWatch RUM documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM.html).
-* Ask a question in the [Amazon CloudWatch forum](https://forums.aws.amazon.com/forum.jspa?forumID=138).
-* Open a support ticket with [AWS Support](https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html).
-* If you think you may have found a bug:
+- View the [CloudWatch RUM documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM.html).
+- Ask a question in the [Amazon CloudWatch forum](https://forums.aws.amazon.com/forum.jspa?forumID=138).
+- Open a support ticket with [AWS Support](https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html).
+- If you think you may have found a bug:
   - open an issue with [`aws-rum-react`](https://github.com/CharlesStover/charlesstover.com/aws-rum-react/issues/new), or
   - open an issue with [`aws-rum-web`](https://github.com/aws-observability/aws-rum-web/issues/new).
 
-## Opening Issues
+## Opening issues
 
 If you encounter a bug with the CloudWatch RUM web client, we want to hear about
 it. Before opening a new issue,

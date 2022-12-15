@@ -12,6 +12,7 @@
     "jest/",
     "node_modules/",
     "src/**/*.test.ts",
+    "src/**/*.test.tsx",
     "src/test/"
   ]
 }
