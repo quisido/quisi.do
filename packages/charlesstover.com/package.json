@@ -33,8 +33,8 @@
     "jest:watch": "jest --runInBand --watch",
     "lighthouse": "concurrently --hide server --kill-others --kill-others-on-fail --names server,lighthouse --success command-lighthouse \"yarn run serve\" \"yarn run lighthouse:report\"",
     "lighthouse:report": "wait-on http://localhost:3000/ && lighthouse http://localhost:3000/ --chrome-flags=\"--headless\" --output=html --output-path=./lighthouse.report.html --preset=experimental",
-    "prepack": "yarn build",
-    "prepublish": "yarn eslint && yarn jest",
+    "prepack": "yarn run build",
+    "prepublish": "yarn run cypress && yarn run jest && yarn run coverage && yarn run eslint && yarn run lighthouse",
     "serve": "serve --single build",
     "start": "DISABLE_ESLINT_PLUGIN=true react-app-rewired start"
   },
@@ -82,6 +82,7 @@
     "@types/react-dom": "^18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
+    "aws-rum-react": "workspace:^",
     "aws-rum-web": "^1.12.0",
     "babel-jest": "^29.3.1",
     "babel-loader": "^9.1.0",

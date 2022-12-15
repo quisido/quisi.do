@@ -1,5 +1,5 @@
-import { AwsRum } from 'aws-rum-web';
-import { ComponentType, ReactElement } from 'react';
+import type { AwsRum } from 'aws-rum-web';
+import type { ComponentType, ReactElement } from 'react';
 import useAwsRum from '../hooks/use-aws-rum';
 
 interface HocProps {

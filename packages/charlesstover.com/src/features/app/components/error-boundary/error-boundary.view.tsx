@@ -1,7 +1,7 @@
-import { AwsRum } from 'aws-rum-web';
+import type { AwsRum } from 'aws-rum-web';
+import { withAwsRum } from 'aws-rum-react';
 import type { ReactElement, ReactNode } from 'react';
 import { PureComponent } from 'react';
-import { withAwsRum } from '../../../../modules/aws-rum-react';
 
 interface Props {
   readonly awsRum: AwsRum;
