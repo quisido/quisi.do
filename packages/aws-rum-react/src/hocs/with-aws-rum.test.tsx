@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { AwsRum } from 'aws-rum-web';
-import { PropsWithChildren, ReactElement } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
 import { AwsRumProvider, withAwsRum } from '..';
 
 interface TestProps {

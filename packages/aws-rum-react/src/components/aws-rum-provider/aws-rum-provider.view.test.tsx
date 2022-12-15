@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { AwsRum } from 'aws-rum-web';
-import { PropsWithChildren, ReactElement } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
 import { AwsRumProvider, useAwsRum } from '../..';
 
 describe('aws-rum-react', (): void => {
