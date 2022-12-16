@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import mapUnknownToString from './map-unknown-to-string';
 
 describe('mapUnknownToString', (): void => {

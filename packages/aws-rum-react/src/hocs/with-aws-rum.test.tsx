@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import { render } from '@testing-library/react';
 import { AwsRum } from 'aws-rum-web';
 import type { PropsWithChildren, ReactElement } from 'react';

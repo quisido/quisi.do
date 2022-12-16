@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import renderHookError from './render-hook-error';
 
 function useTestHook(): null {

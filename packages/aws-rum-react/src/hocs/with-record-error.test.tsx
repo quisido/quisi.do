@@ -1,8 +1,9 @@
-import { AwsRum } from 'aws-rum-web';
+/// <reference types="jest" />
 import { render } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { useEffect } from 'react';
-import { AwsRumProvider, withRecordError } from '..';
+import { withRecordError } from '..';
+import { TestAwsRumProvider } from '../jest';
 
 interface TestProps {
   readonly recordError: (error: unknown) => void;
@@ -10,9 +11,6 @@ interface TestProps {
 
 const ONCE = 1;
 const TEST_RECORD_ERROR = jest.fn<unknown, [unknown]>();
-
-const AWS_RUM_PROTOTYPE_RECORD_ERROR: (error: unknown) => void =
-  AwsRum.prototype.recordError.bind(AwsRum.prototype);
 
 function TestComponent({ recordError }: TestProps): null {
   useEffect((): void => {
@@ -25,21 +23,13 @@ function TestComponent({ recordError }: TestProps): null {
 const TestHoc = withRecordError(TestComponent);
 
 describe('withRecordError', (): void => {
-  beforeEach((): void => {
-    AwsRum.prototype.recordError = TEST_RECORD_ERROR;
-  });
-
-  afterEach((): void => {
-    AwsRum.prototype.recordError = AWS_RUM_PROTOTYPE_RECORD_ERROR;
-  });
-
   it('should provide a `recordError` prop', (): void => {
     render(<TestHoc />, {
       wrapper({ children }: PropsWithChildren): ReactElement {
         return (
-          <AwsRumProvider id="test-id" region="us-east-1" version="0.0.0">
+          <TestAwsRumProvider recordError={TEST_RECORD_ERROR}>
             {children}
-          </AwsRumProvider>
+          </TestAwsRumProvider>
         );
       },
     });

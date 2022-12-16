@@ -44,12 +44,12 @@ export default function AwsRumProvider({
   version,
   ...config
 }: Props): ReactElement {
-  const awsRum: AwsRum = useMemo(
+  const client: AwsRum = useMemo(
     (): AwsRum => new AwsRum(id, version, region, config),
     [config, id, region, version],
   );
 
   return (
-    <AwsRumContext.Provider value={awsRum}>{children}</AwsRumContext.Provider>
+    <AwsRumContext.Provider value={client}>{children}</AwsRumContext.Provider>
   );
 }

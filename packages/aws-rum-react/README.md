@@ -16,13 +16,13 @@ created nor vended by Amazon or Amazon CloudWatch.
 ## Install
 
 The CloudWatch RUM React client can be built into the application's JavaScript
-bundle using the provided CommonJS or ES modules. The recommended method to
-consume and manage the React client dependency is to use the React client's NPM
-package.
+bundle using the provided CommonJS or ECMAScript modules. The recommended method
+to consume and manage the React client dependency is to use the React client's
+Node module.
 
 ```sh
 npm install --save aws-rum-react aws-rum-web
-// or
+# or
 yarn add aws-rum-react aws-rum-web
 ```
 
@@ -105,6 +105,54 @@ class ErrorBoundary extends PureComponent<Props> {
 export default withRecordError(ErrorBoundary);
 ```
 
+### Unit tests
+
+When writing unit tests, a real client cannot be instantiated. You may use the
+utility provider as demonstrated below.
+
+```tsx
+// MyComponent.ts
+import { useRecordError } from 'aws-rum-react';
+import { useEffect } from 'react';
+
+function MyComponent(): null {
+  const recordError = useRecordError();
+
+  useEffect((): void => {
+    recordError('Hello world!');
+  }, [recordError]);
+
+  return null;
+}
+```
+
+```tsx
+// MyComponent.test.ts
+import { render } from '@testing-library/react';
+import { TestAwsRumProvider } from 'aws-rum-react/jest';
+import type { PropsWithChildren, ReactElement } from 'react';
+import MyComponent from './MyComponent';
+
+describe('MyComponent', (): void => {
+  it('should record an error', (): void => {
+    const TEST_RECORD_ERROR = jest.fn();
+
+    render(<MyComponent />, {
+      wrapper({ children }: PropsWithChildren): ReactElement {
+        return (
+          <TestAwsRumProvider recordError={TEST_RECORD_ERROR}>
+            {children}
+          </TestAwsRumProvider>
+        );
+      },
+    });
+
+    expect(TEST_RECORD_ERROR).toHaveBeenCalledTimes(1);
+    expect(TEST_RECORD_ERROR).toHaveBeenLastCalledWith('Hello world!');
+  });
+});
+```
+
 ## Additional documentation
 
 - [Configuring the client](https://github.com/aws-observability/aws-rum-web/blob/main/docs/configuration.md)
@@ -121,20 +169,6 @@ GitHub issues for tracking bugs and feature requests.
 - If you think you may have found a bug:
   - open an issue with [`aws-rum-react`](https://github.com/CharlesStover/charlesstover.com/aws-rum-react/issues/new), or
   - open an issue with [`aws-rum-web`](https://github.com/aws-observability/aws-rum-web/issues/new).
-
-## Opening issues
-
-If you encounter a bug with the CloudWatch RUM web client, we want to hear about
-it. Before opening a new issue,
-[search the existing issues](https://github.com/aws-observability/aws-rum-web/issues?q=is%3Aissue)
-to see if others are also experiencing the issue. Include the version of the
-CloudWatch RUM web client, Node runtime, and other dependencies if applicable.
-In addition, include the repro case when appropriate.
-
-The GitHub issues are intended for bug reports and feature requests. For help
-and questions about using the CloudWatch RUM web client, use the resources
-listed in the [Getting Help](#getting-help) section. Keeping the list of open
-issues lean helps us respond in a timely manner.
 
 ## Contributing
 

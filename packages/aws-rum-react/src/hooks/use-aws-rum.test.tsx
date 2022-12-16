@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import renderHookError from '../test/utils/render-hook-error';
 import { useAwsRum } from '..';
 
