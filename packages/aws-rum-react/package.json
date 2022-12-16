@@ -1,6 +1,6 @@
 {
   "name": "aws-rum-react",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Charles Stover <aws-rum-react@charlesstover.com>",
   "description": "Amazon CloudWatch RUM React client",
   "homepage": "https://github.com/CharlesStover/charlesstover.com/tree/main/packages/aws-rum-react#readme",
@@ -23,6 +23,12 @@
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.cjs",
       "default": "./dist/esm/index.js"
+    },
+    "./jest": {
+      "types": "./dist/types/jest.d.ts",
+      "import": "./dist/esm/jest.js",
+      "require": "./dist/cjs/jest.cjs",
+      "default": "./dist/esm/jest.js"
     }
   },
   "funding": {
