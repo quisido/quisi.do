@@ -81,6 +81,101 @@ created when setting up the AppMonitor:
 For a complete list of configuration options, see
 [Application-specific Configurations](https://github.com/aws-observability/aws-rum-web/blob/main/docs/configuration.md).
 
+## Hooks
+
+You can use hooks to interact with the RUM client directly.
+
+### `useAwsRum`
+
+You may access the Amazon CloudWatch RUM client directly, though it's not
+recommended. This hook is provided to unblock you in edge cases where custom
+functionality is desired.
+
+```javascript
+import { useAwsRum } from 'aws-rum-react';
+
+function MyComponent() {
+  // Access the client directly (not recommended).
+  const client = useAwsRum();
+
+  const handleDisable = useCallback(() => {
+    client.disable();
+  }, [client]);
+
+  const handleEnable = useCallback(() => {
+    client.enable();
+  }, [client]);
+
+  // ...
+}
+```
+
+### `useRecordError`
+
+You may access the `recordError` method via the `useRecordError` hook.
+
+```javascript
+import { useRecordError } from 'aws-rum-react';
+
+function MyComponent() {
+  // Record an error.
+  const recordError = useRecordError();
+
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (error !== null) {
+      recordError(error);
+    }
+  }, [error, recordError]);
+
+  // ...
+}
+```
+
+### `useRecordEvent`
+
+You may access the `recordEvent` method via the `useRecordEvent` hook.
+
+```javascript
+import { useRecordEvent } from 'aws-rum-react';
+
+function MyComponent({ onSubmit }) {
+  // Record an event.
+  const recordEvent = useRecordEvent();
+
+  const [state, setState] = useState({});
+
+  const handleSubmit = useCallback(() => {
+    onSubmit(state);
+    recordEvent('MySubmitEvent', state);
+  }, [recordEvent]);
+
+  // ...
+}
+```
+
+### `useRecordPageView`
+
+You may access the `recordPageView` API via the `useRecordPageView` hook.
+
+```javascript
+import { useRecordPageView } from 'aws-rum-react';
+
+function MyComponent() {
+  // Record a page view.
+  const recordPageView = useRecordPageView();
+
+  const pageAttributes = usePageAttributes();
+
+  useEffect(() => {
+    recordPageView(pageAttributes);
+  }, [pageAttributes, recordPageView]);
+
+  // ...
+}
+```
+
 ## Higher order components
 
 You may use the `withAwsRum` HOC and `withRecordError` HOC to access the AWS RUM

@@ -12,3 +12,5 @@ export { default as withAwsRum } from './hocs/with-aws-rum';
 export { default as withRecordError } from './hocs/with-record-error';
 export { default as useAwsRum } from './hooks/use-aws-rum';
 export { default as useRecordError } from './hooks/use-record-error';
+export { default as useRecordEvent } from './hooks/use-record-event';
+export { default as useRecordPageView } from './hooks/use-record-page-view';

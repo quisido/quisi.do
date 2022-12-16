@@ -2,12 +2,16 @@ import type { AwsRum } from 'aws-rum-web';
 import { useCallback } from 'react';
 import useAwsRum from './use-aws-rum';
 
-export default function useRecordError(): (error: unknown) => void {
+export default function useRecordError(): (
+  ...params: Parameters<AwsRum['recordError']>
+) => ReturnType<AwsRum['recordError']> {
   const client: AwsRum = useAwsRum();
 
   return useCallback(
-    (error: unknown): void => {
-      client.recordError(error);
+    (
+      ...params: Parameters<AwsRum['recordError']>
+    ): ReturnType<AwsRum['recordError']> => {
+      client.recordError(...params);
     },
     [client],
   );

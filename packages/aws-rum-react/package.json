@@ -1,6 +1,6 @@
 {
   "name": "aws-rum-react",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Charles Stover <aws-rum-react@charlesstover.com>",
   "description": "Amazon CloudWatch RUM React client",
   "homepage": "https://github.com/CharlesStover/charlesstover.com/tree/main/packages/aws-rum-react#readme",
