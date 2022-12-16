@@ -80,10 +80,39 @@ jobs:
           name: aws-rum-react--dist
           path: packages/aws-rum-react/dist
 
+  npm:
+    name: Publish to NPM
+    if: github.event_name == 'push'
+    needs: [eslint, jest, prepack]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download builds
+        uses: actions/download-artifact@v3
+        with:
+          name: aws-rum-react--dist
+          path: packages/aws-rum-react/dist
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Publish
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: >
+          yarn config set npmAuthToken $NPM_AUTH_TOKEN;
+          yarn workspaces foreach --no-private --parallel --topological-dev \
+            npm publish --tolerate-republish;
+
   github-packages:
     name: GitHub Packages
     if: github.event_name == 'push'
-    needs: [eslint, jest, prepack]
+    needs: npm
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -114,35 +143,6 @@ jobs:
           yarn config set \
             npmScopes.${{ github.repository_owner }}.npmPublishRegistry \
             'https://npm.pkg.github.com';
-          yarn workspaces foreach --no-private --parallel --topological-dev \
-            npm publish --tolerate-republish;
-
-  npm:
-    name: Publish to NPM
-    if: github.event_name == 'push'
-    needs: [eslint, jest, prepack]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Download builds
-        uses: actions/download-artifact@v3
-        with:
-          name: aws-rum-react--dist
-          path: packages/aws-rum-react/dist
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Publish
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        run: >
-          yarn config set npmAuthToken $NPM_AUTH_TOKEN;
           yarn workspaces foreach --no-private --parallel --topological-dev \
             npm publish --tolerate-republish;
 
