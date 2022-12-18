@@ -23,7 +23,6 @@ const listClassName: string = validateString(styles.list);
 const mapProjectToListItem = mapComponentToPropMapper(ProjectListItem);
 const paragraphClassName: string = validateString(styles.p);
 const projectListClassName: string = validateString(styles.projectList);
-
 const ENTERPRISE_YOE: number = CURRENT_YEAR - ENTERPRISE_START_YEAR;
 const FRONT_END_YOE: number = CURRENT_YEAR - FRONT_END_START_YEAR;
 const FULL_STACK_YOE: number = CURRENT_YEAR - FULL_STACK_START_YEAR;

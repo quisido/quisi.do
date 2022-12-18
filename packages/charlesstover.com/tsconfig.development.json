@@ -7,6 +7,8 @@
     "coverage/",
     "cypress/",
     "jest/",
-    "src/**/*.e2e.ts"
+    "src/**/*.e2e.ts",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx"
   ]
 }

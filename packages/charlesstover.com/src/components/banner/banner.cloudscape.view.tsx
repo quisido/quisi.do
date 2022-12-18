@@ -4,6 +4,10 @@ import type { ReactElement } from 'react';
 import filterByDefined from '../../utils/filter-by-defined';
 import useCloudscapeBanner from './banner.cloudscape.hook';
 import type Props from './types/props';
+import styles from './banner.cloudscape.module.scss';
+import validateString from '../../utils/validate-string';
+
+const rootClassName: string = validateString(styles.root);
 
 export default function CloudscapeBanner({
   children,
@@ -30,8 +34,10 @@ export default function CloudscapeBanner({
   }
 
   return (
-    <Alert type="info" visible {...optionalAlertProps}>
-      {children}
-    </Alert>
+    <div className={rootClassName}>
+      <Alert type="info" {...optionalAlertProps}>
+        {children}
+      </Alert>
+    </div>
   );
 }

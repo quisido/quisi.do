@@ -2,13 +2,8 @@ import type { CardsProps } from '@awsui/components-react/cards';
 import Cards from '@awsui/components-react/cards';
 import type { ReactElement } from 'react';
 import useAwsCards from './cards.aws.hook';
+import CARDS_PER_ROW from './constants/aws-cards-per-row';
 import type Props from './types/props';
-
-const CARDS_LAYOUT: CardsProps.CardsLayout = {
-  cards: 3,
-};
-
-const CARDS_PER_ROW: CardsProps.CardsLayout[] = [CARDS_LAYOUT];
 
 export default function AwsCards<Item extends Record<string, unknown>>({
   CardContent,

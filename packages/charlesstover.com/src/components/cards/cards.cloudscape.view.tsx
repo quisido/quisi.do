@@ -2,13 +2,8 @@ import type { CardsProps } from '@cloudscape-design/components/cards';
 import Cards from '@cloudscape-design/components/cards';
 import type { ReactElement } from 'react';
 import useCloudscapeCards from './cards.cloudscape.hook';
+import CARDS_PER_ROW from './constants/cloudscape-cards-per-row';
 import type Props from './types/props';
-
-const CARDS_LAYOUT: CardsProps.CardsLayout = {
-  cards: 3,
-};
-
-const CARDS_PER_ROW: CardsProps.CardsLayout[] = [CARDS_LAYOUT];
 
 export default function CloudscapeCards<Item extends Record<string, unknown>>({
   CardContent,

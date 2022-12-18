@@ -9,6 +9,10 @@ import type { ReactElement } from 'react';
 import filterByDefined from '../../utils/filter-by-defined';
 import useCloudscapeTable from './table.cloudscape.hook';
 import type Props from './types/props';
+import styles from './table.cloudscape.module.scss';
+import validateString from '../../utils/validate-string';
+
+const rootClassName: string = validateString(styles.root);
 
 export default function CloudscapeTable<Item extends Record<string, unknown>>({
   Description,
@@ -109,7 +113,7 @@ export default function CloudscapeTable<Item extends Record<string, unknown>>({
   //   abstraction.
   // Consider using a `Map` or `WeakMap` to associate the row with a unique ID.
   return (
-    <div ref={ref}>
+    <div className={rootClassName} ref={ref}>
       <Table<Item>
         columnDefinitions={columnDefinitions}
         header={<Header>{header}</Header>}
