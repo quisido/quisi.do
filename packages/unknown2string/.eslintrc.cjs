@@ -1,13 +1,31 @@
 module.exports = {
-  root: false,
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint', 'prettier'],
+  root: true,
+
+  env: {
+    jest: true,
+    node: true,
+  },
 
   extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:prettier/recommended',
     '@monorepo-template/eslint-config/typescript',
     '@monorepo-template/eslint-config/typescript-fixable',
     '@monorepo-template/eslint-config/typescript-strict',
+    'prettier',
   ],
 
   overrides: [
+    {
+      files: ['.eslintrc.cjs'],
+      extends: '@monorepo-template/eslint-config/typescript/eslint',
+    },
+
     {
       files: ['*.cjs', '*.js', '*.jsx'],
       extends: '@monorepo-template/eslint-config/typescript/cjs',
@@ -19,11 +37,6 @@ module.exports = {
         '@monorepo-template/eslint-config/typescript/js',
         '@monorepo-template/eslint-config/typescript-fixable/js',
       ],
-    },
-
-    {
-      files: ['*.eslintrc.cjs'],
-      extends: '@monorepo-template/eslint-config/typescript/eslint',
     },
 
     {
@@ -41,6 +54,11 @@ module.exports = {
   ],
 
   parserOptions: {
+    extraFileExtensions: ['.json'],
+    project: ['./tsconfig.eslint.json'],
     tsconfigRootDir: __dirname,
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true,
+    },
   },
 };
