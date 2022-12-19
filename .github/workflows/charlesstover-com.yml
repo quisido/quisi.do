@@ -13,7 +13,7 @@ jobs:
           cache: yarn
           check-latest: true
           node-version: 'lts/*'
-      - name: Install dependencies
+      - name: Install Yarn dependencies
         run: yarn install --immutable
       - name: Enable Plug-n-Play `cypress`
         run: yarn cypress:pnp
@@ -24,15 +24,17 @@ jobs:
           install: false
           runTests: false
           working-directory: packages/charlesstover.com
-      - name: Build `aws-rum-react`
+      - name: Build workspace dependencies
         if: matrix.os == 'ubuntu'
-        run: yarn packages/aws-rum-react run prepack
-      - name: Upload `aws-rum-react`
+        run: |
+          yarn workspaces foreach --no-private --parallel --topological-dev \
+            run prepack;
+      - name: Upload workspace dependencies
         if: matrix.os == 'ubuntu'
         uses: actions/upload-artifact@v3
         with:
-          name: aws-rum-react--dist
-          path: packages/aws-rum-react/dist
+          name: packages--__--dist
+          path: packages/*/dist
     strategy:
       matrix:
         os: [ubuntu, windows]
@@ -44,11 +46,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Download `aws-rum-react`
+      - name: Download workspace dependencies
         uses: actions/download-artifact@v3
         with:
-          name: aws-rum-react--dist
-          path: packages/aws-rum-react/dist
+          name: packages--__--dist
+          path: packages
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -77,11 +79,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Download `aws-rum-react`
+      - name: Download workspace dependencies
         uses: actions/download-artifact@v3
         with:
-          name: aws-rum-react--dist
-          path: packages/aws-rum-react/dist
+          name: packages--__--dist
+          path: packages
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -155,11 +157,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Download `aws-rum-react`
+      - name: Download workspace dependencies
         uses: actions/download-artifact@v3
         with:
-          name: aws-rum-react--dist
-          path: packages/aws-rum-react/dist
+          name: packages--__--dist
+          path: packages
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -187,11 +189,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Download `aws-rum-react`
+      - name: Download workspace dependencies
         uses: actions/download-artifact@v3
         with:
-          name: aws-rum-react--dist
-          path: packages/aws-rum-react/dist
+          name: packages--__--dist
+          path: packages
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -259,11 +261,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Download `aws-rum-react`
+      - name: Download workspace dependencies
         uses: actions/download-artifact@v3
         with:
-          name: aws-rum-react--dist
-          path: packages/aws-rum-react/dist
+          name: packages--__--dist
+          path: packages
       - name: Download build
         uses: actions/download-artifact@v3
         with:
@@ -362,9 +364,11 @@ on:
       - '.github/workflows/charlesstover-com.yml'
       - 'packages/aws-rum-react/**/*'
       - 'packages/charlesstover.com/**/*'
+      - 'packages/unknown2string/**/*'
   push:
     branches: [main]
     paths:
       - '.github/workflows/charlesstover-com.yml'
       - 'packages/aws-rum-react/**/*'
       - 'packages/charlesstover.com/**/*'
+      - 'packages/unknown2string/**/*'

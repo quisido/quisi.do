@@ -13,7 +13,7 @@ export default function PackagesNameCell({
   href,
   packageName,
 }: Props): ReactElement {
-  const { index } = usePackagesNameCell({
+  const { children, index } = usePackagesNameCell({
     filter,
     packageName,
   });
@@ -21,7 +21,7 @@ export default function PackagesNameCell({
   return (
     <Link href={href}>
       <EmphasizeSubstring index={index} length={filter.length}>
-        {packageName}
+        {children}
       </EmphasizeSubstring>
     </Link>
   );

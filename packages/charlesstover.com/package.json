@@ -121,6 +121,7 @@
     "ts-jest": "^29.0.3",
     "tslib": "^2.4.1",
     "typescript": "4.9.3",
+    "unknown2string": "workspace:^",
     "use-awsui": "^1.0.8",
     "use-awsui-router": "^2.0.1",
     "use-awsui-table-item-description": "^2.0.2",
