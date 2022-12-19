@@ -3,6 +3,11 @@ module.exports = {
   plugins: ['@typescript-eslint', 'prettier'],
   root: true,
 
+  env: {
+    jest: true,
+    node: true,
+  },
+
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -49,8 +54,11 @@ module.exports = {
   ],
 
   parserOptions: {
-    // extraFileExtensions: ['.code-workspace'],
+    extraFileExtensions: ['.json'],
     project: ['./tsconfig.eslint.json'],
     tsconfigRootDir: __dirname,
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true,
+    },
   },
 };

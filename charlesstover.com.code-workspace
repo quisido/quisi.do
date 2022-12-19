@@ -11,6 +11,10 @@
     {
       "name": "CharlesStover.com",
       "path": "packages/charlesstover.com"
+    },
+    {
+      "name": "mapUnknownToString",
+      "path": "packages/unknown2string"
     }
   ],
   "settings": {
@@ -34,7 +38,7 @@
       "cypress/videos/": true,
       "dist/": true,
       "jest/": true,
-      "packages/": true,
+      "packages/*": true,
       ".attach_pid*": true,
       "lighthouse.report.html": true,
       "yarn.lock": true

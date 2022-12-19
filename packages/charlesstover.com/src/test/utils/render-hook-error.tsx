@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import type { ReactElement } from 'react';
-import mapUnknownToString from '../../utils/map-unknown-to-string';
+import mapUnknownToString from 'unknown2string';
 
 const TEST_ID = 'render-hook-error';
 

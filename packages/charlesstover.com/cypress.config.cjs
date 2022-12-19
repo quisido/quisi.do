@@ -13,11 +13,8 @@ module.exports = defineConfig({
   fixturesFolder: false,
   projectId: 'fahz48',
   redirectionLimit: 2,
-  retries: {
-    openMode: 0,
-    runMode: 2,
-  },
   screenshotsFolder: getScreenshotsFolder(),
+
   e2e: {
     baseUrl: 'http://localhost:3000/',
     specPattern: 'src/**/*.e2e.ts',
@@ -26,7 +23,13 @@ module.exports = defineConfig({
       return config;
     },
   },
+
   env: {
     codeCoverageTasksRegistered: true,
+  },
+
+  retries: {
+    openMode: 0,
+    runMode: 2,
   },
 });
