@@ -1,10 +1,9 @@
-import { renderHook } from '@testing-library/react';
+import renderHookError from '../test/utils/render-hook-error';
 import useDesignSystem from './use-design-system';
 
 describe('useDesignSystem', (): void => {
   it('should throw an error if the context is not provided', (): void => {
-    expect((): void => {
-      renderHook(useDesignSystem);
-    }).toThrowError('Expected the design system context to be mounted.');
+    const message: string = renderHookError(useDesignSystem);
+    expect(message).toBe('Expected the design system context to be provided.');
   });
 });

@@ -3,7 +3,7 @@
   "include": ["src/**/*.ts", "src/**/*.tsx"],
 
   "compilerOptions": {
-    "types": ["jest", "node"]
+    "types": ["node"]
   },
 
   "exclude": [

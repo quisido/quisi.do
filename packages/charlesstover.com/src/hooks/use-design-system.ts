@@ -4,7 +4,7 @@ import type DesignSystem from '../constants/design-system';
 import DesignSystemContext from '../contexts/design-system';
 
 const MISSING_DESIGN_SYSTEM_CONTEXT_ERROR: Error = new Error(
-  'Expected the design system context to be mounted.',
+  'Expected the design system context to be provided.',
 );
 
 export default function useDesignSystem(): [

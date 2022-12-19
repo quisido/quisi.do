@@ -4,7 +4,7 @@ import type Language from '../constants/language';
 import LanguageContext from '../contexts/language';
 
 const MISSING_LANGUAGE_CONTEXT_ERROR: Error = new Error(
-  'Expected the language context to be mounted.',
+  'Expected the language context to be provided.',
 );
 
 export default function useLanguage(): [

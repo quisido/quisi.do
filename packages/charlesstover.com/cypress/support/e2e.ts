@@ -1,6 +1,6 @@
 import '@cypress/code-coverage/support';
 import ignoreDependencyLogs from '@monorepo-template/ignore-cypress-dependency-logs';
-import ignoreResizeObserverUndeliveredNotificationsError from '../../src/test/cypress/utils/ignore-resize-observer-undelivered-notifications-error';
+import ignoreResizeObserverUndeliveredNotificationsError from './utils/ignore-resize-observer-undelivered-notifications-error';
 
 beforeEach(ignoreResizeObserverUndeliveredNotificationsError);
 

@@ -1,4 +1,5 @@
-// import handleDesignSystemChange from './handle-design-system-change';
+/// <reference types="cypress" />
+
 import select from './select';
 
 const EXPANDO_SELECTOR = '*[role="button"]';
@@ -10,7 +11,6 @@ export default function setDesignSystem(designSystem: string): void {
     cy.screenshot();
 
     select('Design system', designSystem, {
-      // onChange: handleDesignSystemChange,
       onIgnore(): void {
         cy.log(`${designSystem} design system appears to be cached.`);
       },
