@@ -49,11 +49,8 @@ module.exports = {
   ],
 
   parserOptions: {
-    extraFileExtensions: ['.json'],
+    // extraFileExtensions: ['.code-workspace'],
     project: ['./tsconfig.eslint.json'],
     tsconfigRootDir: __dirname,
-    ecmaFeatures: {
-      experimentalObjectRestSpread: true,
-    },
   },
 };

@@ -9,12 +9,13 @@ interface State {
 }
 
 const NOT_FOUND = -1;
+const SCOPE_DELIMITER_LENGTH = 2;
 const SCOPES: readonly string[] = ['monorepo-template'];
 
 const mapPackageNameToScopeLength = (name: string): number => {
   for (const scope of SCOPES) {
     if (name.startsWith(`@${scope}/`)) {
-      return scope.length + 2;
+      return scope.length + SCOPE_DELIMITER_LENGTH;
     }
   }
   return NOT_FOUND;

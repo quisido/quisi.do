@@ -173,8 +173,10 @@ on:
     paths:
       - '.github/workflows/aws-rum-react.yml'
       - 'packages/aws-rum-react/**/*'
+      - 'packages/unknown2string/**/*'
   push:
     branches: [main]
     paths:
       - '.github/workflows/aws-rum-react.yml'
       - 'packages/aws-rum-react/**/*'
+      - 'packages/unknown2string/**/*'
