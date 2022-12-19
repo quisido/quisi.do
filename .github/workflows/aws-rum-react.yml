@@ -15,6 +15,13 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable
+      - name: Build workspace dependencies
+        run: yarn packages/unknown2string run prepack
+      - name: Upload workspace dependencies
+        uses: actions/upload-artifact@v3
+        with:
+          name: unknown2string--dist
+          path: packages/unknown2string/dist
 
   eslint:
     name: ESLint
@@ -23,6 +30,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Download workspace dependencies
+        uses: actions/download-artifact@v3
+        with:
+          name: unknown2string--dist
+          path: packages/unknown2string/dist
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -41,6 +53,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Download workspace dependencies
+        uses: actions/download-artifact@v3
+        with:
+          name: unknown2string--dist
+          path: packages/unknown2string/dist
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -64,6 +81,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Download workspace dependencies
+        uses: actions/download-artifact@v3
+        with:
+          name: unknown2string--dist
+          path: packages/unknown2string/dist
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
