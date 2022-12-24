@@ -38,7 +38,7 @@
       "cypress/videos/": true,
       "dist/": true,
       "jest/": true,
-      "packages/*": true,
+      "packages/*/*": true,
       ".attach_pid*": true,
       "lighthouse.report.html": true,
       "yarn.lock": true

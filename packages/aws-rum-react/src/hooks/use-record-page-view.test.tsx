@@ -8,7 +8,7 @@ const ONCE = 1;
 const TEST_RECORD_PAGE_VIEW = jest.fn<unknown, [string]>();
 
 describe('useRecordError', (): void => {
-  it('should call recordError', async (): Promise<void> => {
+  it('should call recordError', (): void => {
     const { result } = renderHook(useRecordPageView, {
       wrapper({ children }: PropsWithChildren): ReactElement {
         return (
@@ -19,7 +19,7 @@ describe('useRecordError', (): void => {
       },
     });
 
-    await act((): void => {
+    act((): void => {
       result.current('test page');
     });
 

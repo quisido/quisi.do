@@ -8,7 +8,7 @@ const ONCE = 1;
 const TEST_RECORD_ERROR = jest.fn<unknown, [unknown]>();
 
 describe('useRecordError', (): void => {
-  it('should call recordError', async (): Promise<void> => {
+  it('should call recordError', (): void => {
     const { result } = renderHook(useRecordError, {
       wrapper({ children }: PropsWithChildren): ReactElement {
         return (
@@ -19,7 +19,7 @@ describe('useRecordError', (): void => {
       },
     });
 
-    await act((): void => {
+    act((): void => {
       result.current('test error message');
     });
 

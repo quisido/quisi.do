@@ -8,7 +8,7 @@ const ONCE = 1;
 const TEST_RECORD_EVENT = jest.fn<unknown, [string, object]>();
 
 describe('useRecordEvent', (): void => {
-  it('should call recordEvent', async (): Promise<void> => {
+  it('should call recordEvent', (): void => {
     const { result } = renderHook(useRecordEvent, {
       wrapper({ children }: PropsWithChildren): ReactElement {
         return (
@@ -19,7 +19,7 @@ describe('useRecordEvent', (): void => {
       },
     });
 
-    await act((): void => {
+    act((): void => {
       result.current('test event', { test: 'event' });
     });
 
