@@ -287,7 +287,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: charlesstover-com--lighthouse-report
-          path: packages/charlesstover.com/lighthouse.report.html
+          path: |
+            packages/charlesstover.com/lighthouse.report.html
+            packages/charlesstover.com/lighthouse.report.json
 
   github-pages:
     name: GitHub Pages

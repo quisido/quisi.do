@@ -40,7 +40,7 @@
       "jest/": true,
       "packages/*/*": true,
       ".attach_pid*": true,
-      "lighthouse.report.html": true,
+      "lighthouse.report.*": true,
       "yarn.lock": true
     }
   }
