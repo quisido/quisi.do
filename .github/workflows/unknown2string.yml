@@ -74,7 +74,7 @@ jobs:
         run: yarn install --immutable
       - name: Prepack
         run: yarn packages/unknown2string run prepack
-      - name: Upload builds
+      - name: Upload build
         uses: actions/upload-artifact@v3
         with:
           name: unknown2string--dist
@@ -88,7 +88,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Download builds
+      - name: Download build
         uses: actions/download-artifact@v3
         with:
           name: unknown2string--dist
@@ -120,7 +120,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Download builds
+      - name: Download build
         uses: actions/download-artifact@v3
         with:
           name: unknown2string--dist

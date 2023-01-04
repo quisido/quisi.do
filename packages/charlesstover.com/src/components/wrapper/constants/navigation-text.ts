@@ -2,6 +2,7 @@ enum NavigationText {
   AceAlters = 'acealters',
   Applications = 'applications',
   ConnectWithMe = 'connect-with-me',
+  Dashboard = 'dashboard',
   Dota2Huds = 'dota2huds',
   GitHub = 'github',
   Home = 'home',
