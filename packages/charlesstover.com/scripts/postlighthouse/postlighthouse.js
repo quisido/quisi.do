@@ -5,6 +5,7 @@ import mapResultToDashboard from './utils/map-result-to-dashboard.js';
 const CWD = process.cwd();
 const DASHBOARD_PATH = `${CWD}/public/dashboard.json`;
 const EMPTY = 0;
+const PERFECT = 1;
 const REPORT_PATH = `${CWD}/lighthouse.report.json`;
 
 const IGNORED_AUDITS = new Set([
@@ -26,7 +27,11 @@ const { audits } = result;
 
 const failures = [];
 for (const { id, score, scoreDisplayMode, ...audit } of Object.values(audits)) {
-  if (scoreDisplayMode === 'binary' && score !== 1 && !IGNORED_AUDITS.has(id)) {
+  if (
+    scoreDisplayMode === 'binary' &&
+    score !== PERFECT &&
+    !IGNORED_AUDITS.has(id)
+  ) {
     failures.push(
       mapAuditToString({
         ...audit,
