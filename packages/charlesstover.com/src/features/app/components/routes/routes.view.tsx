@@ -1,6 +1,7 @@
 import { withSentryReactRouterV6Routing } from '@sentry/react';
 import type { ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import Dashboard from '../../../../features/dashboard';
 import Home from '../../../../features/home';
 import Packages from '../../../../features/packages';
 import Publications from '../../../../features/publications';
@@ -37,6 +38,7 @@ export default function AppRoutes(): ReactElement {
       <Route element={<SpriteSheet2Gif />} path="spritesheet2gif" />
 
       {/* Portfolio */}
+      <Route element={<Dashboard />} path="dashboard" />
       <Route element={<Packages />} path="packages" />
       <Route element={<Publications />} path="publications" />
       <Route element={<Quotes />} path="quotes" />

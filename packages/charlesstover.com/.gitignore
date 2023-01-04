@@ -7,4 +7,5 @@
 /cypress/videos/
 /jest/
 /node_modules/
+/public/dashboard.json
 /lighthouse.report.*

@@ -14,6 +14,8 @@ export default function mapTranslateFunctionToNavigationTextTranslator(
         return translate('Applications');
       case NavigationText.ConnectWithMe:
         return translate('Connect with me');
+      case NavigationText.Dashboard:
+        return translate('Dashboard');
       case NavigationText.Dota2Huds:
         return 'Dota 2 HUDs';
       case NavigationText.GitHub:

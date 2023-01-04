@@ -10,7 +10,6 @@
 /.tsbuildinfo
 /jest.config.js
 /rollup.config.js
-/tsconfig.development.json
 /tsconfig.eslint.json
 /tsconfig.json
 /tsconfig.rollup.json

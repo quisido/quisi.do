@@ -16,6 +16,8 @@ export default function WrapperNavigationText({
       return <I18n>Applications</I18n>;
     case NavigationText.ConnectWithMe:
       return <I18n>Connect with me</I18n>;
+    case NavigationText.Dashboard:
+      return <I18n>Dashboard</I18n>;
     case NavigationText.Dota2Huds:
       return <>Dota 2 HUDs</>;
     case NavigationText.GitHub:
