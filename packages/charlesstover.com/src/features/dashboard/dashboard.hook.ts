@@ -3,6 +3,7 @@ import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import useAsyncState from '../../modules/use-async-state';
 import type Breadcrumb from '../../types/breadcrumb';
+import type NonSumMetricStats from '../../types/non-sum-metric-stats';
 import type Notification from '../../types/notification';
 import type RumMetrics from '../../types/rum-metrics';
 
@@ -13,16 +14,23 @@ interface Props {
 interface State {
   readonly apdexError: string | null;
   readonly breadcrumbs: readonly Breadcrumb[];
-  readonly cumulativeLayoutShift: Record<string, number>;
-  readonly firstInputDelay: Record<string, number>;
+  readonly cumulativeLayoutShift: NonSumMetricStats;
+  readonly firstInputDelay: NonSumMetricStats;
   readonly frustrated: Record<string, number>;
   readonly isApdexInitiated: boolean;
   readonly isApdexLoading: boolean;
-  readonly largestContentfulPaint: Record<string, number>;
+  readonly largestContentfulPaint: NonSumMetricStats;
   readonly notifications: readonly Notification[];
   readonly satisfied: Record<string, number>;
   readonly tolerated: Record<string, number>;
 }
+
+const EMPTY: Record<string, never> = Object.freeze({});
+
+const EMPTY_NON_SUM_METRIC_STATS: NonSumMetricStats = Object.freeze({
+  p95: EMPTY,
+  tm95: EMPTY,
+});
 
 export default function useDashboard({
   onRumMetricsRequest,
@@ -53,32 +61,32 @@ export default function useDashboard({
       [translate],
     ),
 
-    cumulativeLayoutShift: useMemo((): Record<string, number> => {
+    cumulativeLayoutShift: useMemo((): NonSumMetricStats => {
       if (rumMetrics === null) {
-        return {};
+        return EMPTY_NON_SUM_METRIC_STATS;
       }
-      return rumMetrics.WebVitalsCumulativeLayoutShift.average;
+      return rumMetrics.WebVitalsCumulativeLayoutShift;
     }, [rumMetrics]),
 
-    firstInputDelay: useMemo((): Record<string, number> => {
+    firstInputDelay: useMemo((): NonSumMetricStats => {
       if (rumMetrics === null) {
-        return {};
+        return EMPTY_NON_SUM_METRIC_STATS;
       }
-      return rumMetrics.WebVitalsFirstInputDelay.average;
+      return rumMetrics.WebVitalsFirstInputDelay;
     }, [rumMetrics]),
 
     frustrated: useMemo((): Record<string, number> => {
       if (rumMetrics === null) {
         return {};
       }
-      return rumMetrics.NavigationFrustratedTransaction.average;
+      return rumMetrics.NavigationFrustratedTransaction.Sum;
     }, [rumMetrics]),
 
-    largestContentfulPaint: useMemo((): Record<string, number> => {
+    largestContentfulPaint: useMemo((): NonSumMetricStats => {
       if (rumMetrics === null) {
-        return {};
+        return EMPTY_NON_SUM_METRIC_STATS;
       }
-      return rumMetrics.WebVitalsLargestContentfulPaint.average;
+      return rumMetrics.WebVitalsLargestContentfulPaint;
     }, [rumMetrics]),
 
     notifications: useMemo((): readonly Notification[] => {
@@ -96,14 +104,14 @@ export default function useDashboard({
       if (rumMetrics === null) {
         return {};
       }
-      return rumMetrics.NavigationSatisfiedTransaction.average;
+      return rumMetrics.NavigationSatisfiedTransaction.Sum;
     }, [rumMetrics]),
 
     tolerated: useMemo((): Record<string, number> => {
       if (rumMetrics === null) {
         return {};
       }
-      return rumMetrics.NavigationToleratedTransaction.average;
+      return rumMetrics.NavigationToleratedTransaction.Sum;
     }, [rumMetrics]),
   };
 }

@@ -3,16 +3,17 @@ import type { ReactElement } from 'react';
 import Container from '../../../../components/container';
 import Div from '../../../../components/div';
 import Link from '../../../../components/link';
+import type NonSumMetricStats from '../../../../types/non-sum-metric-stats';
 import Apdex from '../apdex';
 
 export interface Props {
   readonly apdexError: string | null;
-  readonly cumulativeLayoutShift: Record<string, number>;
-  readonly firstInputDelay: Record<string, number>;
+  readonly cumulativeLayoutShift: NonSumMetricStats;
+  readonly firstInputDelay: NonSumMetricStats;
   readonly frustrated: Record<string, number>;
   readonly isApdexInitiated: boolean;
   readonly isApdexLoading: boolean;
-  readonly largestContentfulPaint: Record<string, number>;
+  readonly largestContentfulPaint: NonSumMetricStats;
   readonly satisfied: Record<string, number>;
   readonly tolerated: Record<string, number>;
 }

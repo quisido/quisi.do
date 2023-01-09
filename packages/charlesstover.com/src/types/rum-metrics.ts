@@ -1,6 +1,16 @@
-import type MetricStats from './metric-stats';
-import type RumMetricKey from './rum-metric-key';
+import type NonSumMetricStats from './non-sum-metric-stats';
+import type SumMetricStats from './sum-metric-stats';
 
-type RumMetrics = Record<RumMetricKey, MetricStats>;
+interface RumMetrics {
+  readonly JsErrorCount: SumMetricStats;
+  readonly NavigationFrustratedTransaction: SumMetricStats;
+  readonly NavigationSatisfiedTransaction: SumMetricStats;
+  readonly NavigationToleratedTransaction: SumMetricStats;
+  readonly PerformanceNavigationDuration: NonSumMetricStats;
+  readonly SessionCount: SumMetricStats;
+  readonly WebVitalsCumulativeLayoutShift: NonSumMetricStats;
+  readonly WebVitalsFirstInputDelay: NonSumMetricStats;
+  readonly WebVitalsLargestContentfulPaint: NonSumMetricStats;
+}
 
 export default RumMetrics;

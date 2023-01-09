@@ -17,3 +17,48 @@ ROOT.render(
     <App onRumMetricsRequest={rumMetrics.handleRequest} />
   </StrictMode>,
 );
+
+/*
+fetch('https://api.cloudflare.com/client/v4/graphql', {
+  body: JSON.stringify({
+    query: `{
+  viewer {
+    zones(filter: { zoneTag: $zoneTag }) {
+      firewallEventsAdaptive(
+        limit: 10
+        orderBy: [datetime_DESC]
+      ) {
+        action
+        clientAsn
+        clientCountryName
+        clientIP
+        clientRequestPath
+        clientRequestQuery
+        datetime
+        source
+        userAgent
+      }
+    }
+  }
+}`,
+    variables: {
+      zoneTag: 'f6bf27c1cb4d60471e5684a9e4bed29f',
+      // filter: {
+      //   datetime_geq: new Date(
+      //     Date.now() - 1000 * 60 * 60 * 24 * 30,
+      //   ).toISOString(),
+      //   datetime_leq: new Date().toISOString(),
+      // },
+    },
+  }),
+  headers: {
+    Authorization: `Bearer ${CLOUDFLARE_GRAPHQL_ANALYTICS_TOKEN}`,
+    'Content-Type': 'application/json',
+    'X-Auth-Email': 'cloudflare@charlesstover.com',
+  },
+  method: 'POST',
+  mode: 'no-cors',
+})
+  .then(console.log)
+  .catch(console.error);
+*/
