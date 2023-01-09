@@ -16,5 +16,6 @@
 /cypress/screenshots/
 /cypress/videos/
 /jest/
+/lighthouse.report.*
 /node_modules/
 /public/CNAME

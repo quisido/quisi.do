@@ -13,7 +13,7 @@ Object.defineProperty(global.window, 'location', {
 
 describe('App', (): void => {
   it('should reroute "Become the junior developer that companies want to hire" to Medium', (): void => {
-    render(<Routes />, {
+    render(<Routes onRumMetricsRequest={jest.fn()} />, {
       wrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
         return (
           <MemoryRouter

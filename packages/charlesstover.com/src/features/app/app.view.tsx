@@ -2,6 +2,7 @@ import FullStory from 'fullstory-react';
 import type { ReactElement } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Theme from '../../components/theme';
+import RumMetrics from '../../types/rum-metrics';
 // import GoogleAnalytics from '../../modules/react-google-analytics';
 import CloudWatchRUM from './components/cloudwatch-rum';
 import Contexts from './components/contexts';
@@ -19,7 +20,13 @@ The App root component mounts context providers for the whole application.
   replaced with Node-friendly alternatives.
 */
 
-export default function App(): ReactElement {
+interface Props {
+  readonly onRumMetricsRequest: () => Promise<RumMetrics>;
+}
+
+export default function App({
+  onRumMetricsRequest,
+}: Readonly<Props>): ReactElement {
   return (
     <CloudWatchRUM>
       <ErrorBoundary>
@@ -32,7 +39,7 @@ export default function App(): ReactElement {
                   <QueryClientProvider>
                     <Sentry>
                       <Theme>
-                        <Routes />
+                        <Routes onRumMetricsRequest={onRumMetricsRequest} />
                       </Theme>
                     </Sentry>
                   </QueryClientProvider>

@@ -1,11 +1,10 @@
 import Container from '@cloudscape-design/components/container';
-import type { HeaderProps } from '@cloudscape-design/components/header';
 import Header from '@cloudscape-design/components/header';
 import type { ReactElement } from 'react';
-import filterByDefined from '../../utils/filter-by-defined';
 import type Props from './types/props';
 import styles from './container.cloudscape.module.scss';
 import validateString from '../../utils/validate-string';
+import Div from '../div';
 
 const rootClassName: string = validateString(styles.root);
 
@@ -15,25 +14,21 @@ export default function CloudscapeContainer({
   footer,
   header,
   headerClassName,
+  marginTop,
 }: Readonly<Props>): ReactElement {
-  const optionalHeaderProps: HeaderProps = {};
-  if (filterByDefined(headerClassName)) {
-    optionalHeaderProps.className = headerClassName;
-  }
-
   return (
-    <div className={rootClassName}>
+    <Div className={rootClassName} marginTop={marginTop}>
       <Container
         footer={footer}
         header={
-          <Header actions={actions} {...optionalHeaderProps}>
-            {header}
-          </Header>
+          <Div className={headerClassName}>
+            <Header actions={actions}>{header}</Header>
+          </Div>
         }
         variant="stacked"
       >
         {children}
       </Container>
-    </div>
+    </Div>
   );
 }

@@ -7,8 +7,13 @@ import Packages from '../../../../features/packages';
 import Publications from '../../../../features/publications';
 import Quotes from '../../../../features/quotes';
 import SpriteSheet2Gif from '../../../../features/spritesheet2gif';
+import RumMetrics from '../../../../types/rum-metrics';
 import mapHrefToRedirectComponent from '../../utils/map-href-to-redirect-component';
 import mapPathToRedirectComponent from '../../utils/map-path-to-redirect-component';
+
+interface Props {
+  readonly onRumMetricsRequest: () => Promise<RumMetrics>;
+}
 
 const BtjdtcwthPath = 'become-the-junior-developer-that-companies-want-to-hire';
 const HomeRedirect = mapPathToRedirectComponent('/');
@@ -29,7 +34,9 @@ const ElectronTransitions = mapHrefToRedirectComponent(
 
 const SentryRoutes = withSentryReactRouterV6Routing(Routes);
 
-export default function AppRoutes(): ReactElement {
+export default function AppRoutes({
+  onRumMetricsRequest,
+}: Readonly<Props>): ReactElement {
   return (
     <SentryRoutes>
       <Route element={<Home />} index />
@@ -38,7 +45,10 @@ export default function AppRoutes(): ReactElement {
       <Route element={<SpriteSheet2Gif />} path="spritesheet2gif" />
 
       {/* Portfolio */}
-      <Route element={<Dashboard />} path="dashboard" />
+      <Route
+        element={<Dashboard onRumMetricsRequest={onRumMetricsRequest} />}
+        path="dashboard"
+      />
       <Route element={<Packages />} path="packages" />
       <Route element={<Publications />} path="publications" />
       <Route element={<Quotes />} path="quotes" />

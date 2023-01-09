@@ -6,4 +6,5 @@ export default interface Props {
   readonly footer?: ReactNode | undefined;
   readonly header: ReactNode;
   readonly headerClassName?: string | undefined;
+  readonly marginTop?: 'large' | 'medium' | 'small' | undefined;
 }

@@ -2,22 +2,56 @@ import I18n from 'lazy-i18n';
 import type { ComponentType, ReactElement } from 'react';
 import { lazy } from 'react';
 import Wrapper from '../../components/wrapper';
+import type RumMetrics from '../../types/rum-metrics';
+import type { Props as ContentProps } from './components/content';
 import useDashboard from './dashboard.hook';
 
-const Content: ComponentType<unknown> = lazy(
-  async () => import('./components/content'),
+interface Props {
+  readonly onRumMetricsRequest: () => Promise<RumMetrics>;
+}
+
+const Content: ComponentType<ContentProps> = lazy(
+  async (): Promise<Record<'default', ComponentType<ContentProps>>> =>
+    import('./components/content'),
 );
 
-export default function Dashboard(): ReactElement {
-  const { breadcrumbs } = useDashboard();
+export default function Dashboard({
+  onRumMetricsRequest,
+}: Readonly<Props>): ReactElement {
+  const {
+    apdexError,
+    breadcrumbs,
+    cumulativeLayoutShift,
+    firstInputDelay,
+    frustrated,
+    isApdexInitiated,
+    isApdexLoading,
+    largestContentfulPaint,
+    notifications,
+    satisfied,
+    tolerated,
+  } = useDashboard({
+    onRumMetricsRequest,
+  });
 
   return (
     <Wrapper
       breadcrumbs={breadcrumbs}
       fallback={<I18n>Loading dashboard</I18n>}
+      notifications={notifications}
       toolsHide
     >
-      <Content />
+      <Content
+        apdexError={apdexError}
+        cumulativeLayoutShift={cumulativeLayoutShift}
+        firstInputDelay={firstInputDelay}
+        frustrated={frustrated}
+        isApdexInitiated={isApdexInitiated}
+        isApdexLoading={isApdexLoading}
+        largestContentfulPaint={largestContentfulPaint}
+        satisfied={satisfied}
+        tolerated={tolerated}
+      />
     </Wrapper>
   );
 }

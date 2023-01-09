@@ -1,8 +1,7 @@
 import Container from '@awsui/components-react/container';
-import type { HeaderProps } from '@awsui/components-react/header';
 import Header from '@awsui/components-react/header';
 import type { ReactElement } from 'react';
-import filterByDefined from '../../utils/filter-by-defined';
+import Div from '../div';
 import type Props from './types/props';
 
 export default function AwsContainer({
@@ -11,22 +10,20 @@ export default function AwsContainer({
   footer,
   header,
   headerClassName,
+  marginTop,
 }: Readonly<Props>): ReactElement {
-  const optionalHeaderProps: HeaderProps = {};
-  if (filterByDefined(headerClassName)) {
-    optionalHeaderProps.className = headerClassName;
-  }
-
   return (
-    <Container
-      footer={footer}
-      header={
-        <Header actions={actions} {...optionalHeaderProps}>
-          {header}
-        </Header>
-      }
-    >
-      {children}
-    </Container>
+    <Div marginTop={marginTop}>
+      <Container
+        footer={footer}
+        header={
+          <Div className={headerClassName}>
+            <Header actions={actions}>{header}</Header>
+          </Div>
+        }
+      >
+        {children}
+      </Container>
+    </Div>
   );
 }
