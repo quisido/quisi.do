@@ -10,6 +10,7 @@ interface Props {
   readonly className: string | undefined;
   readonly display: 'block' | 'flex' | undefined;
   readonly element: 'h2' | 'p' | undefined;
+  readonly flexWrap: 'nowrap' | 'wrap' | undefined;
   readonly margin: 'large' | 'medium' | 'small' | undefined;
   readonly marginBottom: 'large' | 'medium' | 'small' | undefined;
   readonly marginLeft: 'large' | 'medium' | 'small' | undefined;
@@ -32,9 +33,8 @@ interface State {
   readonly variant: 'h2' | 'p' | undefined;
 }
 
-const EMPTY = 0;
-
 const displayFlexClassName: string = validateString(styles.displayFlex);
+const EMPTY = 0;
 const flexDirectionColumnClassName: string = validateString(
   styles.flexDirectionColumn,
 );
@@ -47,12 +47,15 @@ const flexDirectionRowClassName: string = validateString(
 const flexDirectionRowReverseClassName: string = validateString(
   styles.flexDirectionRowReverse,
 );
+const flexWrapNowrapClassName: string = validateString(styles.flexWrapNowrap);
+const flexWrapWrapClassName: string = validateString(styles.flexWrapWrap);
 
 export default function useAwsDiv({
   className,
   display,
   element,
   flexDirection,
+  flexWrap,
   margin,
   marginBottom,
   marginLeft,
@@ -101,12 +104,23 @@ export default function useAwsDiv({
           break;
       }
 
+      switch (flexWrap) {
+        case 'nowrap':
+          classNames.push(flexWrapNowrapClassName);
+          break;
+        case 'wrap':
+          classNames.push(flexWrapWrapClassName);
+          break;
+        case undefined:
+          break;
+      }
+
       if (classNames.length === EMPTY) {
         return;
       }
 
       return classNames.join(' ');
-    }, [className, display, flexDirection]),
+    }, [className, display, flexDirection, flexWrap]),
 
     display: useMemo((): BoxProps.Display | undefined => {
       switch (display) {

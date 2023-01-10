@@ -3,6 +3,7 @@ import type { ReactElement } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Theme from '../../components/theme';
 import RumMetrics from '../../types/rum-metrics';
+import CloudflareInsights from './components/cloudflare-insights/cloudflare-insights.view';
 // import GoogleAnalytics from '../../modules/react-google-analytics';
 import CloudWatchRUM from './components/cloudwatch-rum';
 import Contexts from './components/contexts';
@@ -30,6 +31,7 @@ export default function App({
   return (
     <CloudWatchRUM>
       <ErrorBoundary>
+        <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
         <BrowserRouter>
           <Contexts>
             <Datadog>

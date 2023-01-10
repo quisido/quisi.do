@@ -11,6 +11,7 @@ export default function AwsDiv({
   display: displayProp,
   element,
   flexDirection,
+  flexWrap,
   float,
   margin: marginProp,
   marginBottom,
@@ -31,6 +32,7 @@ export default function AwsDiv({
     display: displayProp,
     element,
     flexDirection,
+    flexWrap,
     margin: marginProp,
     marginBottom,
     marginLeft,
@@ -41,9 +43,6 @@ export default function AwsDiv({
   });
 
   const optionalProps: BoxProps = {};
-  if (filterByDefined(classNameState)) {
-    optionalProps.className = classNameState;
-  }
   if (filterByDefined(displayState)) {
     optionalProps.display = displayState;
   }
@@ -60,5 +59,13 @@ export default function AwsDiv({
     optionalProps.variant = variant;
   }
 
-  return <Box {...optionalProps}>{children}</Box>;
+  if (!filterByDefined(classNameState)) {
+    return <Box {...optionalProps}>{children}</Box>;
+  }
+
+  return (
+    <Box {...optionalProps}>
+      <div className={classNameState}>{children}</div>
+    </Box>
+  );
 }

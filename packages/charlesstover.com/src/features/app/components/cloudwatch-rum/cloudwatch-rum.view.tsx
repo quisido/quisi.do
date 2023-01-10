@@ -12,6 +12,7 @@ export default function CloudWatchRUM({ children }: Props): ReactElement {
   return (
     <AwsRumProvider
       allowCookies
+      enableRumClient={window.location.hostname !== 'localhost'}
       enableXRay
       endpoint="https://dataplane.rum.us-east-1.amazonaws.com"
       guestRoleArn="arn:aws:iam::094281974650:role/RUM-Monitor-us-east-1-094281974650-2971760190761-Unauth"

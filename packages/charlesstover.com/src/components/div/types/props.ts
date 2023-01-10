@@ -18,6 +18,7 @@ interface BaseProps {
     | 'row-reverse'
     | 'row'
     | undefined;
+  readonly flexWrap?: 'nowrap' | 'wrap' | undefined;
 }
 
 interface MarginProp {

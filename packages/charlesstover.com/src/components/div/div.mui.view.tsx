@@ -11,6 +11,7 @@ export default function MuiDiv({
   display,
   element,
   flexDirection,
+  flexWrap,
   float,
   margin,
   marginBottom,
@@ -41,6 +42,9 @@ export default function MuiDiv({
   }
   if (filterByDefined(flexDirection)) {
     optionalProps.flexDirection = flexDirection;
+  }
+  if (filterByDefined(flexWrap)) {
+    optionalProps.flexWrap = flexWrap;
   }
   if (filterByDefined(element)) {
     optionalProps.component = element;

@@ -6,6 +6,7 @@ import type Breadcrumb from '../../types/breadcrumb';
 import type NonSumMetricStats from '../../types/non-sum-metric-stats';
 import type Notification from '../../types/notification';
 import type RumMetrics from '../../types/rum-metrics';
+import mapSecondsTimeSeriesToMilliseconds from './utils/map-seconds-time-series-to-milliseconds';
 
 interface Props {
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
@@ -77,9 +78,11 @@ export default function useDashboard({
 
     frustrated: useMemo((): Record<string, number> => {
       if (rumMetrics === null) {
-        return {};
+        return EMPTY;
       }
-      return rumMetrics.NavigationFrustratedTransaction.Sum;
+      return mapSecondsTimeSeriesToMilliseconds(
+        rumMetrics.NavigationFrustratedTransaction.Sum,
+      );
     }, [rumMetrics]),
 
     largestContentfulPaint: useMemo((): NonSumMetricStats => {
@@ -102,16 +105,20 @@ export default function useDashboard({
 
     satisfied: useMemo((): Record<string, number> => {
       if (rumMetrics === null) {
-        return {};
+        return EMPTY;
       }
-      return rumMetrics.NavigationSatisfiedTransaction.Sum;
+      return mapSecondsTimeSeriesToMilliseconds(
+        rumMetrics.NavigationSatisfiedTransaction.Sum,
+      );
     }, [rumMetrics]),
 
     tolerated: useMemo((): Record<string, number> => {
       if (rumMetrics === null) {
-        return {};
+        return EMPTY;
       }
-      return rumMetrics.NavigationToleratedTransaction.Sum;
+      return mapSecondsTimeSeriesToMilliseconds(
+        rumMetrics.NavigationToleratedTransaction.Sum,
+      );
     }, [rumMetrics]),
   };
 }
