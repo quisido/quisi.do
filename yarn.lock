@@ -1736,7 +1736,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@charlesstover/charlesstover.com@workspace:."
   dependencies:
-    "@monorepo-template/eslint-config": ^1.0.4
+    "@monorepo-template/eslint-config": ^1.0.5
     "@monorepo-template/test": ^2.2.0
     "@monorepo-template/tsconfig": ^1.1.2
     "@monorepo-template/up": ^1.0.1
@@ -2919,58 +2919,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/coverage@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@monorepo-template/coverage@npm:1.2.1"
+"@monorepo-template/coverage@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "@monorepo-template/coverage@npm:1.2.2"
   dependencies:
-    "@monorepo-template/merge-coverage": ^1.2.1
+    "@monorepo-template/merge-coverage": ^1.2.4
     make-dir: ^3.1.0
     p-map: ^5.5.0
   peerDependencies:
-    istanbul-lib-coverage: ^3.0.0
-    nyc: ^15.0.0
+    istanbul-lib-coverage: ">=3.0.0"
+    nyc: ">=15.0.0"
   bin:
     monorepo-template-coverage: ./dist/bin/index.js
-  checksum: b6f5a9bd3ef3c489d094ac2bfef0155f9f0e983c0064a9f666e19e86011c0d69a78e007d15bbb86b6a91315bdfc63dd72c63db83341f8ddb30beb9f65b11d461
+  checksum: c84cb9013a8dcafa5c252304a897cac62195175c03697397f9bd7f8870970e2b32773abc1fcf8a0ec3ce1856bb0792defd640567e5f99d97ea28dfe72ad9a048
   languageName: node
   linkType: hard
 
-"@monorepo-template/cypress-coverage-config-override@npm:^1.2.4":
-  version: 1.2.4
-  resolution: "@monorepo-template/cypress-coverage-config-override@npm:1.2.4"
+"@monorepo-template/cypress-coverage-config-override@npm:^1.2.5":
+  version: 1.2.5
+  resolution: "@monorepo-template/cypress-coverage-config-override@npm:1.2.5"
   peerDependencies:
-    babel-plugin-istanbul: ^6.0.0
-    webpack: ^5.0.0
-  checksum: 3c9fec2477d97da9fcb208dfe3003d126c2415fb8f80875e4236e22d1e55cbddada7fa851fb232ec7eeced1368e66451d3acdee22f594dbb64252ab572d94462
+    babel-plugin-istanbul: ">=6.0.0"
+    webpack: ">=5.0.0"
+  checksum: 22ea1eccf5154f0f48fd4de609bfa19e7384a7a6baf4665d3605d6582394389f9963dc26aec0a0756854c73c75bf72bf5cac82f2dd08e4cda239d8c78aeb9b56
   languageName: node
   linkType: hard
 
-"@monorepo-template/cypress-coverage-plugin@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "@monorepo-template/cypress-coverage-plugin@npm:1.0.6"
+"@monorepo-template/cypress-coverage-plugin@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "@monorepo-template/cypress-coverage-plugin@npm:1.0.7"
   dependencies:
-    "@monorepo-template/cypress-nyc-config": ^1.0.3
+    "@monorepo-template/cypress-nyc-config": ^1.0.4
   peerDependencies:
-    "@babel/core": ^7.0.1
-    "@babel/preset-env": ^7.0.0
-    "@cypress/code-coverage": ^3.0.0
-    babel-loader: ^8.0.2
-    cypress: ^9.0.0 || ^10.0.0
-    webpack: ^4 || ^5
-  checksum: f0126d079727d741555544c801ae95f161d822c7fa9dae34f3a28bda42cc5f696e4f6ea2ac41ce1d86cd1f78de83a5a83e9dfb914b04b4719fc01d8e4ad20002
+    "@babel/core": ">=7.0.0"
+    "@babel/preset-env": ">=7.0.0"
+    "@cypress/code-coverage": ">=3.0.0"
+    babel-loader: ">=8.0.0"
+    cypress: ">=9.0.0"
+    webpack: ">=4"
+  checksum: 40b69f927865a89a2f2d1b9f9d6c4e81c7ff4e6fe798d6afabca7dc21ef6a992f428f82f623c8b5da6e706178d2844dad85b2a82c06b53dff3e77180e8133520
   languageName: node
   linkType: hard
 
-"@monorepo-template/cypress-nyc-config@npm:^1.0.3, @monorepo-template/cypress-nyc-config@npm:^1.0.4":
+"@monorepo-template/cypress-nyc-config@npm:^1.0.4":
   version: 1.0.4
   resolution: "@monorepo-template/cypress-nyc-config@npm:1.0.4"
   checksum: 0ec060a61e2e3f902f62f4d397b04366f2454c764282abbfc343c6755d948fb19c466a60ba8a8eaea04068824ab2a221808b3b54cab2236a3e4fe9698cd93b5e
   languageName: node
   linkType: hard
 
-"@monorepo-template/eslint-config@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "@monorepo-template/eslint-config@npm:1.0.4"
+"@monorepo-template/eslint-config@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@monorepo-template/eslint-config@npm:1.0.5"
   dependencies:
     "@typescript-eslint/eslint-plugin": ^5.45.0
     "@typescript-eslint/parser": ^5.45.0
@@ -2978,7 +2978,7 @@ __metadata:
     eslint-plugin-react: ^7.31.11
     eslint-plugin-react-hooks: ^4.6.0
   peerDependencies:
-    eslint: ^8.0.0
+    eslint: ">=8.0.0"
   dependenciesMeta:
     "@typescript-eslint/eslint-plugin":
       optional: true
@@ -2990,7 +2990,7 @@ __metadata:
       optional: true
     eslint-plugin-react-hooks:
       optional: true
-  checksum: 4726af33e8d959e724c68be48ca45bc90196ff9ca13a861dc923dd1ae445b536c55bee0daa0752c8ba54e0f4961910134bc0209348e1918f107b8220331cb9f3
+  checksum: 8223fadfae13a3b8a1fc1ed5359d99f7dbbba4478fc373f629fd23acf7649798e3756c6322c5a248dae61b33e86c65eddbded46735f73871e62eff7718257aea
   languageName: node
   linkType: hard
 
@@ -3001,91 +3001,91 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/jest-application-preset@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@monorepo-template/jest-application-preset@npm:1.1.2"
+"@monorepo-template/jest-application-preset@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "@monorepo-template/jest-application-preset@npm:1.1.3"
   dependencies:
-    "@monorepo-template/jest-preset": ^1.1.4
+    "@monorepo-template/jest-preset": ^1.1.11
   peerDependencies:
-    "@babel/core": ^7.0.0
-    "@babel/preset-env": ^7.0.0
-    "@babel/preset-react": ^7.0.0
-    "@babel/preset-typescript": ^7.0.0
+    "@babel/core": ">=7.0.0"
+    "@babel/preset-env": ">=7.0.0"
+    "@babel/preset-react": ">=7.0.0"
+    "@babel/preset-typescript": ">=7.0.0"
     "@types/jest": ">=28.0.0"
     babel-jest: ">=28.0.0"
-    identity-obj-proxy: ^3.0.0
-    jest-environment-jsdom: ^28.0.0
-  checksum: 94a7a1ce04e60bbd0dec967c011126e77f33ed175d9060525fdee43aa47b8d9ca035f3df81894967481e7465df23dd93d0a65b3494eb9604123ac31f412ddd4c
+    identity-obj-proxy: ">=3.0.0"
+    jest-environment-jsdom: ">=28.0.0"
+  checksum: 0935e4cab47bc0310bdd10952700dae4510009cb7ee8583f8e30b066c36855c6260dbed1b8363cbb4c26d95483fd3124659ab1ffd7e8bb633b05a3cfc829f208
   languageName: node
   linkType: hard
 
-"@monorepo-template/jest-module-preset@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@monorepo-template/jest-module-preset@npm:1.1.2"
+"@monorepo-template/jest-module-preset@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "@monorepo-template/jest-module-preset@npm:1.1.3"
   dependencies:
-    "@monorepo-template/jest-preset": ^1.1.4
+    "@monorepo-template/jest-preset": ^1.1.11
   peerDependencies:
-    "@babel/core": ^7.0.0
-    "@babel/preset-env": ^7.0.0
-    "@babel/preset-react": ^7.0.0
-    "@babel/preset-typescript": ^7.0.0
+    "@babel/core": ">=7.0.0"
+    "@babel/preset-env": ">=7.0.0"
+    "@babel/preset-react": ">=7.0.0"
+    "@babel/preset-typescript": ">=7.0.0"
     "@types/jest": ">=28.0.0"
     babel-jest: ">=28.0.0"
-    identity-obj-proxy: ^3.0.0
-  checksum: 5d2befa4d97ba7ef303d4d7754b987ab481010603917dd654ac31197901e01e7f1b49a38aad1e4c0930a8464160d031feaebdd2a6a6787e7d9401dcd9fb2729a
+    identity-obj-proxy: ">=3.0.0"
+  checksum: 7415e377e51cbac06ab5d075b6399e14ddf0469dd964fafa3461f30cb913579dafed4b84d0f8e4b0a3f5afdc74319caaa2198d34803df8683f291e2bc1127ce8
   languageName: node
   linkType: hard
 
-"@monorepo-template/jest-preset@npm:^1.1.4":
-  version: 1.1.9
-  resolution: "@monorepo-template/jest-preset@npm:1.1.9"
+"@monorepo-template/jest-preset@npm:^1.1.11":
+  version: 1.1.11
+  resolution: "@monorepo-template/jest-preset@npm:1.1.11"
   dependencies:
-    "@monorepo-template/jest-transformer": "npm:^1.0.1"
+    "@monorepo-template/jest-transformer": ^1.0.2
   peerDependencies:
-    "@babel/core": ^7.0.0
-    "@babel/preset-env": ^7.0.0
-    "@babel/preset-react": ^7.0.0
-    "@babel/preset-typescript": ^7.0.0
+    "@babel/core": ">=7.0.0"
+    "@babel/preset-env": ">=7.0.0"
+    "@babel/preset-react": ">=7.0.0"
+    "@babel/preset-typescript": ">=7.0.0"
     "@types/jest": ">=28.0.0"
     babel-jest: ">=28.0.0"
-    identity-obj-proxy: ^3.0.0
-  checksum: b4ea7dc3b362ae574b87ec9713e8bdcc5b9d62167068b5bac6ef62701637c52e3cea46e35434e912ee3ee723c10b66133765bdc1a3fb1e6a9aa1abdb911711bf
+    identity-obj-proxy: ">=3.0.0"
+  checksum: 786b375a053e2a5a61a12c5f6e61175d950535b8c5ff2ed7e0603db7033dc158ce14424a5722553d1b2c8269bdce5399b1b9ff03b2e496b94c3864cc78998450
   languageName: node
   linkType: hard
 
-"@monorepo-template/jest-transformer@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@monorepo-template/jest-transformer@npm:1.0.1"
+"@monorepo-template/jest-transformer@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@monorepo-template/jest-transformer@npm:1.0.2"
   dependencies:
-    "@types/babel__core": "npm:^7.1.19"
+    "@types/babel__core": ^7.1.20
   peerDependencies:
-    "@babel/core": ^7.0.0
-    "@babel/preset-env": ^7.0.0
-    "@babel/preset-react": ^7.0.0
-    "@babel/preset-typescript": ^7.0.0
+    "@babel/core": ">=7.0.0"
+    "@babel/preset-env": ">=7.0.0"
+    "@babel/preset-react": ">=7.0.0"
+    "@babel/preset-typescript": ">=7.0.0"
     babel-jest: ">=28.0.0"
-  checksum: 91606bbe6af6c840c53ce63d8416e57429d2af4b5998def5bc797653faaf7ec091bd56b34d20a1047ae03a66539767c739afd8cf4c46ff694f6bc26c5a0f5c22
+  checksum: cae2f092ae634d17dc85b66077ba1c9ede65b975567579359e3406f64b2edf67f791f2cb995204d8b19bf3a24e90f6763f89b3e7e459a8b3a3f9e154569424c0
   languageName: node
   linkType: hard
 
-"@monorepo-template/merge-coverage@npm:^1.2.1":
-  version: 1.2.3
-  resolution: "@monorepo-template/merge-coverage@npm:1.2.3"
+"@monorepo-template/merge-coverage@npm:^1.2.4":
+  version: 1.2.4
+  resolution: "@monorepo-template/merge-coverage@npm:1.2.4"
   dependencies:
-    make-dir: "npm:^3.1.0"
-    p-map: "npm:^5.5.0"
+    make-dir: ^3.1.0
+    p-map: ^5.5.0
   peerDependencies:
-    istanbul-lib-coverage: ^3.0.0
-    nyc: ^15.0.0
+    istanbul-lib-coverage: ">=3.0.0"
+    nyc: ">=15.0.0"
   bin:
     monorepo-template-merge-coverage: ./dist/bin/index.js
-  checksum: 286f742ee0ec01ad69c176fd0dad1209652940044092f4b1c9751ec3297f760c6231a005e127328c11099919f4fa0d51000499c4c0edc87c4b6878d0ac6a4d10
+  checksum: 8e7d8c48a1384748ac10e1104763be7cd6aecc3175a587c54cd9221c3535fdc43f1acaef46acfcc4d83771c4d616656f760ae8442e0246f72dc42617fc9f9fd6
   languageName: node
   linkType: hard
 
-"@monorepo-template/rollup-config@npm:^2.4.1":
-  version: 2.4.1
-  resolution: "@monorepo-template/rollup-config@npm:2.4.1"
+"@monorepo-template/rollup-config@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@monorepo-template/rollup-config@npm:3.0.0"
   peerDependencies:
     "@rollup/plugin-commonjs": ">=22.0.0"
     "@rollup/plugin-json": ">=4.0.0"
@@ -3093,8 +3093,8 @@ __metadata:
     rollup: ">=2.0.0"
     rollup-plugin-insert: ">=1.0.0"
     rollup-plugin-typescript2: ">=0.31.0"
-    typescript: ^4.0.0
-  checksum: 4980e382628a6d019adcc201f29eb61c4ac6d94bf1235d25907236147c42ebba294d2906a0e809baba89a975ccf6165638a9a196e698827548f2a4ea5a2e98c9
+    typescript: ">=4.0.0"
+  checksum: 5281bc89d59df816a234eeacad94efc820f7f3d3d33681f6de9e44e012d8473b62f2dda9b7fde35b8dcd116a50d72897ecafde69099f45e4cc20bd832b847920
   languageName: node
   linkType: hard
 
@@ -4271,7 +4271,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/babel__core@npm:^7.0.0, @types/babel__core@npm:^7.1.14, @types/babel__core@npm:^7.1.19":
+"@types/babel__core@npm:^7.0.0, @types/babel__core@npm:^7.1.14, @types/babel__core@npm:^7.1.20":
   version: 7.1.20
   resolution: "@types/babel__core@npm:7.1.20"
   dependencies:
@@ -5862,9 +5862,9 @@ __metadata:
     "@babel/preset-env": ^7.20.2
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.18.6
-    "@monorepo-template/eslint-config": ^1.0.4
-    "@monorepo-template/jest-module-preset": ^1.1.2
-    "@monorepo-template/rollup-config": ^2.4.1
+    "@monorepo-template/eslint-config": ^1.0.5
+    "@monorepo-template/jest-module-preset": ^1.1.3
+    "@monorepo-template/rollup-config": ^3.0.0
     "@monorepo-template/tsconfig": ^1.1.2
     "@rollup/plugin-commonjs": ^24.0.0
     "@rollup/plugin-json": ^6.0.0
@@ -5893,7 +5893,7 @@ __metadata:
     unknown2string: "workspace:^"
     whatwg-fetch: ^3.6.2
   peerDependencies:
-    aws-rum-web: ^1.0.0
+    aws-rum-web: ">=1.0.0"
     react: ">=17.0.0"
   languageName: unknown
   linkType: soft
@@ -6692,13 +6692,13 @@ __metadata:
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
     "@fullstory/browser": ^1.6.2
-    "@monorepo-template/coverage": ^1.2.1
-    "@monorepo-template/cypress-coverage-config-override": ^1.2.4
-    "@monorepo-template/cypress-coverage-plugin": ^1.0.6
+    "@monorepo-template/coverage": ^1.2.2
+    "@monorepo-template/cypress-coverage-config-override": ^1.2.5
+    "@monorepo-template/cypress-coverage-plugin": ^1.0.7
     "@monorepo-template/cypress-nyc-config": ^1.0.4
-    "@monorepo-template/eslint-config": ^1.0.4
+    "@monorepo-template/eslint-config": ^1.0.5
     "@monorepo-template/ignore-cypress-dependency-logs": ^1.0.0
-    "@monorepo-template/jest-application-preset": ^1.1.2
+    "@monorepo-template/jest-application-preset": ^1.1.3
     "@monorepo-template/tsconfig": ^1.1.2
     "@mui/icons-material": ^5.11.0
     "@mui/material": ^5.11.1
@@ -6775,6 +6775,7 @@ __metadata:
     use-mui: ^1.0.6
     wait-on: ^7.0.1
     webpack: ^5.75.0
+    zone.js: ^0.12.0
   languageName: unknown
   linkType: soft
 
@@ -17891,9 +17892,9 @@ __metadata:
     "@babel/preset-env": ^7.20.2
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.18.6
-    "@monorepo-template/eslint-config": ^1.0.4
-    "@monorepo-template/jest-module-preset": ^1.1.2
-    "@monorepo-template/rollup-config": ^2.4.1
+    "@monorepo-template/eslint-config": ^1.0.5
+    "@monorepo-template/jest-module-preset": ^1.1.3
+    "@monorepo-template/rollup-config": ^3.0.0
     "@monorepo-template/tsconfig": ^1.1.2
     "@rollup/plugin-commonjs": ^24.0.0
     "@rollup/plugin-json": ^6.0.0
@@ -19115,5 +19116,14 @@ __metadata:
   dependencies:
     tslib: ^2.3.0
   checksum: ad4a2f4aafce10f5bc3f60213384bb6ee4727de09d87fb77cb8089eecdb44dd5838fd9fa43ac4c351afec142b0e5477a22093928260a486804f70b8cace6c7d3
+  languageName: node
+  linkType: hard
+
+"zone.js@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "zone.js@npm:0.12.0"
+  dependencies:
+    tslib: ^2.3.0
+  checksum: 8efd980442dd11a79837e94de17baef45b27acb82061ac9e204b02b4290379a861c03cc332c5220a94e38f1402e89b306cb6a9e91de77dc7407e88f893abcd25
   languageName: node
   linkType: hard

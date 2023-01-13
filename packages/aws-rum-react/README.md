@@ -224,7 +224,7 @@ function MyComponent(): null {
 ```tsx
 // MyComponent.test.ts
 import { render } from '@testing-library/react';
-import { TestAwsRumProvider } from 'aws-rum-react/jest';
+import { MockAwsRumProvider } from 'aws-rum-react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import MyComponent from './MyComponent';
 
@@ -235,9 +235,9 @@ describe('MyComponent', (): void => {
     render(<MyComponent />, {
       wrapper({ children }: PropsWithChildren): ReactElement {
         return (
-          <TestAwsRumProvider recordError={TEST_RECORD_ERROR}>
+          <MockAwsRumProvider recordError={TEST_RECORD_ERROR}>
             {children}
-          </TestAwsRumProvider>
+          </MockAwsRumProvider>
         );
       },
     });
