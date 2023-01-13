@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import ROOT from './constants/root';
 import App from './features/app';
 import RumMetrics from './utils/rum-metrics';
+import './constants/open-telemetry-provider';
 
 // const CLOUDFLARE_GRAPHQL_ANALYTICS_TOKEN =
 //   't1MqGb9MXf5Tt8kdT5_WimPe3pE8HY31cWkSbMCx';
