@@ -33,7 +33,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@monorepo-template/eslint-config": "^1.0.4",
+    "@monorepo-template/eslint-config": "^1.0.5",
     "@monorepo-template/test": "^2.2.0",
     "@monorepo-template/tsconfig": "^1.1.2",
     "@monorepo-template/up": "^1.0.1",

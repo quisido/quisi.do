@@ -1,8 +1,7 @@
 /// <reference types="jest" />
 import { act, renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
-import { useRecordEvent } from '..';
-import { TestAwsRumProvider } from '../jest';
+import { MockAwsRumProvider, useRecordEvent } from '..';
 
 const ONCE = 1;
 const TEST_RECORD_EVENT = jest.fn<unknown, [string, object]>();
@@ -12,9 +11,9 @@ describe('useRecordEvent', (): void => {
     const { result } = renderHook(useRecordEvent, {
       wrapper({ children }: PropsWithChildren): ReactElement {
         return (
-          <TestAwsRumProvider recordEvent={TEST_RECORD_EVENT}>
+          <MockAwsRumProvider recordEvent={TEST_RECORD_EVENT}>
             {children}
-          </TestAwsRumProvider>
+          </MockAwsRumProvider>
         );
       },
     });

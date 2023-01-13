@@ -2,8 +2,7 @@
 import { render } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { useEffect } from 'react';
-import { withRecordError } from '..';
-import { TestAwsRumProvider } from '../jest';
+import { MockAwsRumProvider, withRecordError } from '..';
 
 interface TestProps {
   readonly recordError: (error: unknown) => void;
@@ -27,9 +26,9 @@ describe('withRecordError', (): void => {
     render(<TestHoc />, {
       wrapper({ children }: PropsWithChildren): ReactElement {
         return (
-          <TestAwsRumProvider recordError={TEST_RECORD_ERROR}>
+          <MockAwsRumProvider recordError={TEST_RECORD_ERROR}>
             {children}
-          </TestAwsRumProvider>
+          </MockAwsRumProvider>
         );
       },
     });
