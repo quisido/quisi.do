@@ -1,9 +1,25 @@
+const {
+  default: cypressConfigOverride,
+} = require('@monorepo-template/cypress-coverage-config-override');
+const compose = require('compose-function');
 const { join } = require('path');
-const cypressConfigOverride =
-  require('@monorepo-template/cypress-coverage-config-override').default;
 
 const DEVELOPMENT_TSCONFIG_PATH = join(__dirname, 'tsconfig.development.json');
 const PRODUCTION_TSCONFIG_PATH = join(__dirname, 'tsconfig.production.json');
+
+const filterWarningBySourceMapLoader = warning =>
+  typeof warning.details === 'string' &&
+  warning.details.includes('Error: Failed to parse source map from ') &&
+  warning.details.includes('Error: ENOENT: no such file or directory, open ') &&
+  warning.details.includes('source-map-loader');
+
+const ignoreSourceMapLoaderWarnings = config => ({
+  ...config,
+  ignoreWarnings: [
+    ...(config.ignoreWarnings ?? []),
+    filterWarningBySourceMapLoader,
+  ],
+});
 
 module.exports = {
   paths: (paths, env) => {
@@ -21,8 +37,12 @@ module.exports = {
 
   webpack: (config, env) => {
     if (env !== 'development') {
-      return config;
+      return compose(ignoreSourceMapLoaderWarnings)(config);
     }
-    return cypressConfigOverride(config);
+
+    return compose(
+      cypressConfigOverride,
+      ignoreSourceMapLoaderWarnings,
+    )(config);
   },
 };
