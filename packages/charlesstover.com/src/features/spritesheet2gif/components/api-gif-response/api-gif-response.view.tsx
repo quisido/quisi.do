@@ -18,7 +18,7 @@ export default function Spritesheet2GifApiGifResponse({
   height,
   image,
   width,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   // Contexts
   const translate: TranslateFunction = useTranslate();
 

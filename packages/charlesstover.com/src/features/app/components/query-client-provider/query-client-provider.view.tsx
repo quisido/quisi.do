@@ -6,7 +6,9 @@ interface Props {
   readonly children: ReactNode;
 }
 
-export default function QueryClientProvider({ children }: Props): ReactElement {
+export default function QueryClientProvider({
+  children,
+}: Readonly<Props>): ReactElement {
   return (
     <ReactQueryClientProvider client={QUERY_CLIENT}>
       {children}

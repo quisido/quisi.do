@@ -10,7 +10,14 @@ interface Props {
   readonly className: string | undefined;
   readonly display: 'block' | 'flex' | undefined;
   readonly element: 'h2' | 'p' | undefined;
+  readonly flexDirection:
+    | 'column-reverse'
+    | 'column'
+    | 'row-reverse'
+    | 'row'
+    | undefined;
   readonly flexWrap: 'nowrap' | 'wrap' | undefined;
+  readonly justifyContent: 'space-around' | 'space-between' | undefined;
   readonly margin: 'large' | 'medium' | 'small' | undefined;
   readonly marginBottom: 'large' | 'medium' | 'small' | undefined;
   readonly marginLeft: 'large' | 'medium' | 'small' | undefined;
@@ -18,12 +25,6 @@ interface Props {
   readonly marginTop: 'large' | 'medium' | 'small' | undefined;
   readonly marginX: 'large' | 'medium' | 'small' | undefined;
   readonly marginY: 'large' | 'medium' | 'small' | undefined;
-  readonly flexDirection:
-    | 'column-reverse'
-    | 'column'
-    | 'row-reverse'
-    | 'row'
-    | undefined;
 }
 
 interface State {
@@ -35,20 +36,32 @@ interface State {
 
 const displayFlexClassName: string = validateString(styles.displayFlex);
 const EMPTY = 0;
+const flexWrapNowrapClassName: string = validateString(styles.flexWrapNowrap);
+const flexWrapWrapClassName: string = validateString(styles.flexWrapWrap);
+
 const flexDirectionColumnClassName: string = validateString(
   styles.flexDirectionColumn,
 );
+
 const flexDirectionColumnReverseClassName: string = validateString(
   styles.flexDirectionColumnReverse,
 );
+
 const flexDirectionRowClassName: string = validateString(
   styles.flexDirectionRow,
 );
+
 const flexDirectionRowReverseClassName: string = validateString(
   styles.flexDirectionRowReverse,
 );
-const flexWrapNowrapClassName: string = validateString(styles.flexWrapNowrap);
-const flexWrapWrapClassName: string = validateString(styles.flexWrapWrap);
+
+const justifyContentSpaceAroundClassName: string = validateString(
+  styles.justifyContentSpaceAround,
+);
+
+const justifyContentSpaceBetweenClassName: string = validateString(
+  styles.justifyContentSpaceBetween,
+);
 
 export default function useAwsDiv({
   className,
@@ -56,6 +69,7 @@ export default function useAwsDiv({
   element,
   flexDirection,
   flexWrap,
+  justifyContent,
   margin,
   marginBottom,
   marginLeft,
@@ -115,12 +129,23 @@ export default function useAwsDiv({
           break;
       }
 
+      switch (justifyContent) {
+        case 'space-around':
+          classNames.push(justifyContentSpaceAroundClassName);
+          break;
+        case 'space-between':
+          classNames.push(justifyContentSpaceBetweenClassName);
+          break;
+        case undefined:
+          break;
+      }
+
       if (classNames.length === EMPTY) {
         return;
       }
 
       return classNames.join(' ');
-    }, [className, display, flexDirection, flexWrap]),
+    }, [className, display, flexDirection, flexWrap, justifyContent]),
 
     display: useMemo((): BoxProps.Display | undefined => {
       switch (display) {

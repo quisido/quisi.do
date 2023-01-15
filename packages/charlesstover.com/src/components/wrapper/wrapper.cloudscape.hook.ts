@@ -37,7 +37,7 @@ interface State {
 export default function useCloudscapeWrapper({
   controlledToolsOpen,
   onToolsChange,
-}: Props): State {
+}: Readonly<Props>): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
 

@@ -6,7 +6,9 @@ interface Props {
   readonly children: number;
 }
 
-export default function CustomNumberFormat({ children }: Props): ReactElement {
+export default function CustomNumberFormat({
+  children,
+}: Readonly<Props>): ReactElement {
   const { locale } = useNumberFormat();
 
   return <NumberFormat locale={locale}>{children}</NumberFormat>;

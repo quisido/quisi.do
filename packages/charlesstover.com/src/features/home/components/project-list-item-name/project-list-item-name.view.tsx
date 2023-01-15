@@ -9,7 +9,7 @@ interface Props {
 export default function HomeProjectListItemName({
   children,
   url,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   if (typeof url !== 'string') {
     return <>{children}</>;
   }

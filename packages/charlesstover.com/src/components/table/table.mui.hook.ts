@@ -58,7 +58,7 @@ export default function useMuiTable<Item extends Record<string, unknown>>({
   rowsPerPageOptions,
   sortAscending,
   sortColumnIndex,
-}: Props<Item>): State {
+}: Readonly<Props<Item>>): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
   const wrapperVariant: 'table' | 'wizard' | undefined = useWrapperVariant();

@@ -15,12 +15,10 @@ const NAVIGATION_ITEMS: readonly (
     path: '/',
     text: NavigationText.Home,
   },
-  /*
   {
     path: '/dashboard',
     text: NavigationText.Dashboard,
   },
-  */
   {
     defaultExpanded: true,
     text: NavigationText.Applications,

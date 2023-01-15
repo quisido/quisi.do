@@ -43,7 +43,7 @@ export default function AwsRumProvider({
   region,
   version,
   ...config
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   const client: AwsRum = useMemo(
     (): AwsRum => new AwsRum(id, version, region, config),
     [config, id, region, version],

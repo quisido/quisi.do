@@ -98,7 +98,7 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
   sortAscending,
   sortColumnIndex,
   visibleColumnIndices,
-}: Props<Item>): State<Item> {
+}: Readonly<Props<Item>>): State<Item> {
   // Contexts
   const translate: TranslateFunction = useTranslate();
 

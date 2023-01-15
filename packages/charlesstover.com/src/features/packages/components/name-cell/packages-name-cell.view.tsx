@@ -12,7 +12,7 @@ export default function PackagesNameCell({
   filter,
   href,
   packageName,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   const { children, index } = usePackagesNameCell({
     filter,
     packageName,

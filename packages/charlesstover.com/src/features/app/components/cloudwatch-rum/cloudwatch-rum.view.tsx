@@ -8,7 +8,9 @@ interface Props {
 
 const TELEMETRIES: Telemetry[] = ['errors', 'http', 'performance'];
 
-export default function CloudWatchRUM({ children }: Props): ReactElement {
+export default function CloudWatchRUM({
+  children,
+}: Readonly<Props>): ReactElement {
   return (
     <AwsRumProvider
       allowCookies

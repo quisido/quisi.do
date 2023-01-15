@@ -20,6 +20,7 @@ export default function AwsDiv({
   marginTop,
   marginX,
   marginY,
+  justifyContent,
   textAlign,
 }: Readonly<Props>): ReactElement {
   const {
@@ -33,6 +34,7 @@ export default function AwsDiv({
     element,
     flexDirection,
     flexWrap,
+    justifyContent,
     margin: marginProp,
     marginBottom,
     marginLeft,

@@ -17,7 +17,7 @@ export default function MuiTableEmptyRows({
   page,
   rowsCount,
   rowsPerPage,
-}: Props): ReactElement | null {
+}: Readonly<Props>): ReactElement | null {
   const pages: number = Math.ceil(rowsCount / rowsPerPage);
   if (page < pages) {
     return null;

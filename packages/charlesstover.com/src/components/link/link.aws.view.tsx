@@ -11,7 +11,7 @@ export default function AwsLink({
   href,
   title,
 }: Readonly<Props>): ReactElement {
-  const { external, ref, rel, target } = useAwsLink({ href, title });
+  const { external, ref, rel, target } = useAwsLink({ children, href, title });
 
   const optionalProps: Pick<LinkProps, 'className' | 'rel'> = {};
   if (filterByDefined(className)) {

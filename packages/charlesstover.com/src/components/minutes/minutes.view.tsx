@@ -7,7 +7,7 @@ interface Props {
 
 const SINGLE = 1;
 
-export default function Minutes({ children }: Props): ReactElement {
+export default function Minutes({ children }: Readonly<Props>): ReactElement {
   switch (children) {
     case SINGLE:
       return <I18n>1 minute</I18n>;

@@ -22,6 +22,7 @@ export default function Dashboard({
     apdexError,
     breadcrumbs,
     cumulativeLayoutShift,
+    errorCount,
     firstInputDelay,
     frustrated,
     isApdexInitiated,
@@ -29,6 +30,7 @@ export default function Dashboard({
     largestContentfulPaint,
     notifications,
     satisfied,
+    sessionCount,
     tolerated,
   } = useDashboard({
     onRumMetricsRequest,
@@ -44,12 +46,14 @@ export default function Dashboard({
       <Content
         apdexError={apdexError}
         cumulativeLayoutShift={cumulativeLayoutShift}
+        errorCount={errorCount}
         firstInputDelay={firstInputDelay}
         frustrated={frustrated}
         isApdexInitiated={isApdexInitiated}
         isApdexLoading={isApdexLoading}
         largestContentfulPaint={largestContentfulPaint}
         satisfied={satisfied}
+        sessionCount={sessionCount}
         tolerated={tolerated}
       />
     </Wrapper>

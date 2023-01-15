@@ -7,7 +7,7 @@ export default function FallbackLink({
   className,
   href,
   title,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   return (
     <ReactRouterLink className={className} title={title} to={href}>
       {children}

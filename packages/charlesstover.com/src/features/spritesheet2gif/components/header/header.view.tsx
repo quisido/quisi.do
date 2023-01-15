@@ -7,7 +7,7 @@ interface Props {
 
 export default function SpriteSheet2GifHeader({
   onInfoFollow,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   return (
     <>
       Animate a sprite sheet{' '}

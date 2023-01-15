@@ -12,7 +12,7 @@ const EMPTY = 0;
 
 export default function AwsWrapperNotifications({
   children,
-}: Props): ReactElement | null {
+}: Readonly<Props>): ReactElement | null {
   const items: readonly FlashbarProps.MessageDefinition[] =
     useAwsNotifications(children);
 
