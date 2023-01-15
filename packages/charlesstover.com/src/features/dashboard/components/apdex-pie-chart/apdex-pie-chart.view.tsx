@@ -19,6 +19,12 @@ const END_ANGLE = START_ANGLE + CIRCLE;
 const HALF_SIZE: number = SIZE * HALF;
 const QUARTER_SIZE: number = SIZE * QUARTER;
 
+enum Fill {
+  Frustrated = '#d6436f',
+  Satisfied = '#43d660',
+  Tolerated = '#d6aa43',
+}
+
 export default function ApdexPieChart({
   frustrated,
   satisfied,
@@ -51,7 +57,7 @@ export default function ApdexPieChart({
             cx: HALF_SIZE,
             cy: HALF_SIZE,
             endAngle: satisfiedEndAngle,
-            fill: 'green',
+            fill: Fill.Satisfied,
             innerRadius: QUARTER_SIZE,
             name: 'Satisfied',
             outerRadius: HALF_SIZE,
@@ -62,7 +68,7 @@ export default function ApdexPieChart({
             cx: HALF_SIZE,
             cy: HALF_SIZE,
             endAngle: toleratedEndAngle,
-            fill: 'yellow',
+            fill: Fill.Tolerated,
             innerRadius: QUARTER_SIZE,
             name: 'Tolerated',
             outerRadius: HALF_SIZE,
@@ -73,7 +79,7 @@ export default function ApdexPieChart({
             cx: HALF_SIZE,
             cy: HALF_SIZE,
             endAngle: END_ANGLE,
-            fill: 'red',
+            fill: Fill.Frustrated,
             innerRadius: QUARTER_SIZE,
             name: 'Frustrated',
             outerRadius: HALF_SIZE,

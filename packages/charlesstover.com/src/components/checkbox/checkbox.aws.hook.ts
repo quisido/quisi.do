@@ -14,7 +14,7 @@ interface State {
   ) => void;
 }
 
-export default function useAwsCheckbox({ onChange }: Props): State {
+export default function useAwsCheckbox({ onChange }: Readonly<Props>): State {
   return {
     handleChange: useCallback(
       (

@@ -100,7 +100,7 @@ export default function useCloudscapeTableHook<
   sortAscending,
   sortColumnIndex,
   visibleColumnIndices,
-}: Props<Item>): State<Item> {
+}: Readonly<Props<Item>>): State<Item> {
   // Contexts
   const translate: TranslateFunction = useTranslate();
 

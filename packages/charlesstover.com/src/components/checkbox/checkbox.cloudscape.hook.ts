@@ -14,7 +14,9 @@ interface State {
   ) => void;
 }
 
-export default function useCloudscapeCheckbox({ onChange }: Props): State {
+export default function useCloudscapeCheckbox({
+  onChange,
+}: Readonly<Props>): State {
   return {
     handleChange: useCallback(
       (

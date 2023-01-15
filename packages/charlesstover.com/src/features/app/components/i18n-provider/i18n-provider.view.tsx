@@ -8,7 +8,9 @@ interface Props {
   readonly children: ReactNode;
 }
 
-export default function AppI18nProvider({ children }: Props): ReactElement {
+export default function AppI18nProvider({
+  children,
+}: Readonly<Props>): ReactElement {
   const { language } = useI18nProvider();
 
   return (

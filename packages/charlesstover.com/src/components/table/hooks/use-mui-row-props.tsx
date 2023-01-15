@@ -20,7 +20,7 @@ export default function useMuiTableRowProps<
   Description,
   columns,
   items,
-}: Props<Item>): readonly (Required<Attributes> & RowProps)[] {
+}: Readonly<Props<Item>>): readonly (Required<Attributes> & RowProps)[] {
   const mapItemToProps = useCallback(
     (item: Item, itemIndex: number): Required<Attributes> & RowProps => {
       const mapColumnToCellProps = (

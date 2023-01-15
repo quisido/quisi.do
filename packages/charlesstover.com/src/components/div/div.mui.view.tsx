@@ -13,6 +13,7 @@ export default function MuiDiv({
   flexDirection,
   flexWrap,
   float,
+  justifyContent,
   margin,
   marginBottom,
   marginLeft,
@@ -37,36 +38,51 @@ export default function MuiDiv({
   if (filterByDefined(className)) {
     optionalProps.className = className;
   }
+
   if (filterByDefined(display)) {
     optionalProps.display = display;
   }
+
   if (filterByDefined(flexDirection)) {
     optionalProps.flexDirection = flexDirection;
   }
+
   if (filterByDefined(flexWrap)) {
     optionalProps.flexWrap = flexWrap;
   }
+
   if (filterByDefined(element)) {
     optionalProps.component = element;
   }
+
   if (filterByDefined(mb)) {
     optionalProps.mb = mb;
   }
+
   if (filterByDefined(ml)) {
     optionalProps.ml = ml;
   }
+
   if (filterByDefined(mr)) {
     optionalProps.mr = mr;
   }
+
   if (filterByDefined(mt)) {
     optionalProps.mt = mt;
   }
+
   if (filterByDefined(style)) {
     optionalProps.style = style;
   }
 
   return (
-    <Box margin={0} padding={0} textAlign={textAlign} {...optionalProps}>
+    <Box
+      justifyContent={justifyContent}
+      margin={0}
+      padding={0}
+      textAlign={textAlign}
+      {...optionalProps}
+    >
       {children}
     </Box>
   );

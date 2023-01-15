@@ -2,8 +2,6 @@ import { ZoneContextManager } from '@opentelemetry/context-zone';
 import { Resource } from '@opentelemetry/resources';
 import {
   BatchSpanProcessor,
-  ConsoleSpanExporter,
-  SimpleSpanProcessor,
   WebTracerProvider,
 } from '@opentelemetry/sdk-trace-web';
 import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
@@ -18,10 +16,6 @@ const OPEN_TELEMETRY_PROVIDER: WebTracerProvider = new WebTracerProvider({
 
 OPEN_TELEMETRY_PROVIDER.addSpanProcessor(
   new BatchSpanProcessor(OPEN_TELEMETRY_EXPORTER),
-);
-
-OPEN_TELEMETRY_PROVIDER.addSpanProcessor(
-  new SimpleSpanProcessor(new ConsoleSpanExporter()),
 );
 
 OPEN_TELEMETRY_PROVIDER.register({

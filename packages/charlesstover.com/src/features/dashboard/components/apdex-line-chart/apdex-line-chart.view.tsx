@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 import validateString from '../../../../utils/validate-string';
-import formatter from '../../utils/formatter';
+import formatApdexScore from '../../utils/format-apdex-score';
 import useApdexLineChart from './apdex-line-chart.hook';
 import styles from './apdex-line-chart.module.scss';
 
@@ -30,7 +30,7 @@ export default function ApdexLineChart({
     <div className={rootClassName} ref={ref}>
       <LineChart data={data} height={240} width={width}>
         <Line dataKey="value" type="natural" />
-        <Tooltip formatter={formatter} labelFormatter={labelFormatter} />
+        <Tooltip formatter={formatApdexScore} labelFormatter={labelFormatter} />
         <XAxis
           angle={-60}
           dataKey="timestamp"

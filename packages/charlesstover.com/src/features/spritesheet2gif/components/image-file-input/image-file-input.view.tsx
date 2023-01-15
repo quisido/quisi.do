@@ -7,7 +7,7 @@ interface Props {
 
 export default function SpriteSheet2GifImageFileInput({
   onChange,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   return (
     <FormField
       description="Only GIF, JPEG, and PNG images are supported."

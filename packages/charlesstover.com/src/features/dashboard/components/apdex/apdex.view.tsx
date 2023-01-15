@@ -6,6 +6,7 @@ import Span from '../../../../components/span';
 import sum from '../../../../utils/sum';
 import PieChart from '../apdex-pie-chart';
 import LineChart from '../apdex-line-chart';
+import Container from '../../../../components/container';
 
 export interface Props {
   readonly error: string | null;
@@ -27,25 +28,38 @@ export default function Apdex({
   loading,
   satisfied,
   tolerated,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   if (!initiated) {
-    return <I18n>Initiating</I18n>;
+    return (
+      <Container
+        header={<I18n>Application Performance Index</I18n>}
+        marginTop="large"
+      >
+        <I18n>Initiating</I18n>
+      </Container>
+    );
   }
 
   if (error !== null) {
     return (
-      <Div>
+      <Container
+        header={<I18n>Application Performance Index</I18n>}
+        marginTop="large"
+      >
         <Span>An error occurred.</Span>
         <Span>{error}</Span>
-      </Div>
+      </Container>
     );
   }
 
   if (loading) {
     return (
-      <>
+      <Container
+        header={<I18n>Application Performance Index</I18n>}
+        marginTop="large"
+      >
         <LoadingIcon /> <I18n>Loading Application Performance Index</I18n>
-      </>
+      </Container>
     );
   }
 
@@ -56,8 +70,14 @@ export default function Apdex({
   const apdexScore: number =
     ((toleratedCount * HALF + satisfiedCount) / total) * PERCENT;
   return (
-    <>
-      <Div>Apdex score: {Math.round(apdexScore)}%</Div>
+    <Container
+      header={
+        <>
+          <I18n>Application Performance Index</I18n> ({Math.round(apdexScore)}%)
+        </>
+      }
+      marginTop="large"
+    >
       <Div display="flex" flexDirection="row" flexWrap="wrap">
         <PieChart
           frustrated={frustratedCount}
@@ -70,6 +90,6 @@ export default function Apdex({
           tolerated={tolerated}
         />
       </Div>
-    </>
+    </Container>
   );
 }

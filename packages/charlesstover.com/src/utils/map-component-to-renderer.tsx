@@ -24,7 +24,7 @@ export default function mapComponentToRenderer<
     return;
   }
 
-  return function render(props: Props): ReactElement {
+  return function render(props: Readonly<Props>): ReactElement {
     return <Component {...props} />;
   };
 }

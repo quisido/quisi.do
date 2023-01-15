@@ -35,7 +35,7 @@ export default function MockAwsRumProvider({
   recordPageView = noop,
   registerDomEvents = noop,
   setAwsCredentials = noop,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   const addPluginRef: MutableRefObject<AwsRum['addPlugin']> = useRef(addPlugin);
   const addSessionAttributesRef: MutableRefObject<
     AwsRum['addSessionAttributes']

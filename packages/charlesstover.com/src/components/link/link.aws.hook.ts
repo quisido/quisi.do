@@ -1,10 +1,16 @@
-import type { HTMLAttributeAnchorTarget, MutableRefObject } from 'react';
+import type {
+  HTMLAttributeAnchorTarget,
+  MutableRefObject,
+  ReactNode,
+} from 'react';
 import { useLayoutEffect, useRef } from 'react';
 import filterHrefByBlank from '../../utils/filter-href-by-blank';
 import filterHrefByExternal from '../../utils/filter-href-by-external';
+import filterNodesByImage from '../../utils/filter-nodes-by-image';
 import mapAwsLinkSpanToAnchorElement from './utils/map-aws-link-span-to-anchor-element';
 
 interface Props {
+  readonly children: ReactNode;
   readonly href: string;
   readonly title: string | undefined;
 }
@@ -16,7 +22,11 @@ interface State {
   readonly target: HTMLAttributeAnchorTarget;
 }
 
-export default function useAwsLink({ href, title }: Readonly<Props>): State {
+export default function useAwsLink({
+  children,
+  href,
+  title,
+}: Readonly<Props>): State {
   const isBlank: boolean = filterHrefByBlank(href);
 
   // States
@@ -36,7 +46,7 @@ export default function useAwsLink({ href, title }: Readonly<Props>): State {
   }, [title]);
 
   return {
-    external: filterHrefByExternal(href),
+    external: filterHrefByExternal(href) && !filterNodesByImage(children),
     ref,
     rel: isBlank ? 'nofollow noopener noreferrer' : undefined,
     target: isBlank ? '_blank' : '_self',

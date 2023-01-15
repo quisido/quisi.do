@@ -10,7 +10,7 @@ interface State {
   readonly style: CSSProperties;
 }
 
-export default function useProjectListItem({ icon }: Props): State {
+export default function useProjectListItem({ icon }: Readonly<Props>): State {
   return {
     style: useMemo((): CSSProperties => {
       return mapIconToStyle(icon);

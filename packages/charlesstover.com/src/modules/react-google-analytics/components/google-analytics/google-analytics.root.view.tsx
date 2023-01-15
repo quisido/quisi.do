@@ -15,7 +15,7 @@ interface Props {
 export default function GoogleAnalytics({
   children,
   trackingId,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   useEffect((): VoidFunction => {
     const script: HTMLScriptElement = mapTrackingIdToScriptElement(trackingId);
     HEAD.appendChild(script);

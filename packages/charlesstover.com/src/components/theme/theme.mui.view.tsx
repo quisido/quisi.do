@@ -8,7 +8,7 @@ interface Props {
   readonly children: ReactNode;
 }
 
-export default function MuiTheme({ children }: Props): ReactElement {
+export default function MuiTheme({ children }: Readonly<Props>): ReactElement {
   const theme: Theme = useMuiTheme();
 
   return (

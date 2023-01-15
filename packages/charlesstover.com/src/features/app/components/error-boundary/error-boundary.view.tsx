@@ -12,7 +12,7 @@ interface State {
 }
 
 class ErrorBoundary extends PureComponent<Props, State> {
-  public constructor(props: Props) {
+  public constructor(props: Readonly<Props>) {
     super(props);
     this.state = {
       error: null,

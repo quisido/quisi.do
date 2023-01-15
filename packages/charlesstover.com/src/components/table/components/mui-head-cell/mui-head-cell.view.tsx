@@ -39,7 +39,7 @@ export default function MuiTableHeadCell({
   ascending,
   header,
   onSort,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   const { direction, handleSortLabelClick, sortDirection } =
     useMuiTableHeadCell({
       active,

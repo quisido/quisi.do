@@ -16,6 +16,7 @@ interface State {
   readonly apdexError: string | null;
   readonly breadcrumbs: readonly Breadcrumb[];
   readonly cumulativeLayoutShift: NonSumMetricStats;
+  readonly errorCount: Record<string, number>;
   readonly firstInputDelay: NonSumMetricStats;
   readonly frustrated: Record<string, number>;
   readonly isApdexInitiated: boolean;
@@ -23,6 +24,7 @@ interface State {
   readonly largestContentfulPaint: NonSumMetricStats;
   readonly notifications: readonly Notification[];
   readonly satisfied: Record<string, number>;
+  readonly sessionCount: Record<string, number>;
   readonly tolerated: Record<string, number>;
 }
 
@@ -32,6 +34,10 @@ const EMPTY_NON_SUM_METRIC_STATS: NonSumMetricStats = Object.freeze({
   p95: EMPTY,
   tm95: EMPTY,
 });
+
+/*
+Additionally, we have access to `PerformanceNavigationDuration`.
+*/
 
 export default function useDashboard({
   onRumMetricsRequest,
@@ -67,6 +73,13 @@ export default function useDashboard({
         return EMPTY_NON_SUM_METRIC_STATS;
       }
       return rumMetrics.WebVitalsCumulativeLayoutShift;
+    }, [rumMetrics]),
+
+    errorCount: useMemo((): Record<string, number> => {
+      if (rumMetrics === null) {
+        return EMPTY;
+      }
+      return mapSecondsTimeSeriesToMilliseconds(rumMetrics.JsErrorCount.Sum);
     }, [rumMetrics]),
 
     firstInputDelay: useMemo((): NonSumMetricStats => {
@@ -110,6 +123,13 @@ export default function useDashboard({
       return mapSecondsTimeSeriesToMilliseconds(
         rumMetrics.NavigationSatisfiedTransaction.Sum,
       );
+    }, [rumMetrics]),
+
+    sessionCount: useMemo((): Record<string, number> => {
+      if (rumMetrics === null) {
+        return EMPTY;
+      }
+      return mapSecondsTimeSeriesToMilliseconds(rumMetrics.SessionCount.Sum);
     }, [rumMetrics]),
 
     tolerated: useMemo((): Record<string, number> => {

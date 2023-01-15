@@ -15,7 +15,7 @@ const NOT_FOUND = -1;
 export default function usePackagesNameCell({
   filter,
   packageName,
-}: Props): State {
+}: Readonly<Props>): State {
   const scopeLength: number = mapPackageNameToScopeLength(packageName);
 
   const getIndex = (): number => {

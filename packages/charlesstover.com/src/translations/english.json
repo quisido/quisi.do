@@ -1,6 +1,7 @@
 {
   "$count matches": "$count matches",
   "$count packages": "$count packages",
+  "$count sessions/day": "$count sessions/day",
   "$n minutes": "$n minutes",
   "1 match": "1 match",
   "1 minute": "1 minute",
@@ -27,6 +28,8 @@
   "Direct downloads": "Direct downloads",
   "Dismiss": "Dismiss",
   "Enterprise: $n years": "Enterprise: $n years",
+  "Error rate": "Error rate",
+  "Errors": "Errors",
   "external": "external",
   "Feb.": "Feb.",
   "Filter packages": "Filter packages",

@@ -9,7 +9,7 @@ interface Props {
 export default function SpriteSheet2GifFooter({
   loading,
   onSubmit,
-}: Props): ReactElement {
+}: Readonly<Props>): ReactElement {
   return (
     <Button loading={loading} onClick={onSubmit} variant="primary">
       Convert
