@@ -9,8 +9,8 @@ import type TimeSeriesDatum from '../../types/time-series-datum';
 import mapStringToInt from '../../utils/map-string-to-int';
 
 interface Props {
-  readonly errorCount: Record<string, number>;
-  readonly sessionCount: Record<string, number>;
+  readonly errorCount: Record<string, number | undefined>;
+  readonly sessionCount: Record<string, number | undefined>;
 }
 
 interface State {

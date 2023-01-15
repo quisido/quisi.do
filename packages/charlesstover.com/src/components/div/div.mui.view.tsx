@@ -77,8 +77,8 @@ export default function MuiDiv({
 
   return (
     <Box
-      margin={0}
       justifyContent={justifyContent}
+      margin={0}
       padding={0}
       textAlign={textAlign}
       {...optionalProps}

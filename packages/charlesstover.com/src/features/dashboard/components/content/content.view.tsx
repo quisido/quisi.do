@@ -191,7 +191,7 @@ export default function DashboardContent({
             <Gauge
               max={0.1}
               size={240}
-              value={{
+              values={{
                 average: tm95cls,
                 max: p95cls,
               }}
@@ -203,7 +203,7 @@ export default function DashboardContent({
               max={300}
               size={240}
               units="ms"
-              value={{
+              values={{
                 average: tm95fid,
                 max: p95fid,
               }}
@@ -215,7 +215,7 @@ export default function DashboardContent({
               max={4000}
               size={240}
               units="ms"
-              value={{
+              values={{
                 average: tm95lcp,
                 max: p95lcp,
               }}

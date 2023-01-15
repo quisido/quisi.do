@@ -11,7 +11,7 @@ interface Props {
   readonly max: number;
   readonly size: number;
   readonly units?: string | undefined;
-  readonly value: Record<string, number>;
+  readonly values: Record<string, number>;
 }
 
 const CIRCLE = 360;
@@ -24,15 +24,15 @@ export default function Gauge({
   max,
   size,
   units = '',
-  value,
+  values,
 }: Readonly<Props>): ReactElement {
   const data: Datum[] = useMemo((): Datum[] => {
     const reduceEntryToDatum = (
-      data: Datum[],
+      newData: Datum[],
       [label, value]: [string, number],
     ): Datum[] => {
       return [
-        ...data,
+        ...newData,
         {
           name: `${label}: ${value}${units}`,
           value: value,
@@ -40,30 +40,32 @@ export default function Gauge({
       ];
     };
 
-    return Object.entries(value).reduce(reduceEntryToDatum, [
+    return Object.entries(values).reduce(reduceEntryToDatum, [
       {
         name: '',
         value: max,
       },
     ]);
-  }, [max, units, value]);
+  }, [max, units, values]);
 
   const huePerCell: number = useMemo((): number => {
-    const cellCount: number = Object.values(value).length;
+    const cellCount: number = Object.values(values).length;
     return Math.round(CIRCLE / cellCount);
-  }, [value]);
+  }, [values]);
 
   const legendWidth: number = useMemo((): number => {
     const reduceEntryToMaxLength = (
       maxLength: number,
       [label, value]: [string, number],
     ): number => Math.max(maxLength, `${label}: ${value}${units}`.length);
-    const maxLength: number = Object.entries(value).reduce(
+
+    const maxLength: number = Object.entries(values).reduce(
       reduceEntryToMaxLength,
       NONE,
     );
+
     return maxLength * LEGEND_FONT_SIZE;
-  }, [units, value]);
+  }, [units, values]);
 
   return (
     <RadialBarChart
@@ -79,7 +81,7 @@ export default function Gauge({
     >
       <RadialBar dataKey="value">
         <Cell fill="transparent" />
-        {Object.keys(value).map(
+        {Object.keys(values).map(
           (key: string, index: number): ReactElement => (
             <Cell
               fill={`hsl(${HUE + huePerCell * index}, 64%, 55%)`}
