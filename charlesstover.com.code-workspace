@@ -13,6 +13,10 @@
       "path": "packages/charlesstover.com"
     },
     {
+      "name": "React Datadog",
+      "path": "packages/react-datadog"
+    },
+    {
       "name": "map unknown to string",
       "path": "packages/unknown2string"
     }

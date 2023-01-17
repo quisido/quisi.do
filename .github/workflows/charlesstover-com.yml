@@ -366,6 +366,7 @@ on:
       - '.github/workflows/charlesstover-com.yml'
       - 'packages/aws-rum-react/**/*'
       - 'packages/charlesstover.com/**/*'
+      - 'packages/react-datadog/**/*'
       - 'packages/unknown2string/**/*'
   push:
     branches: [main]
@@ -373,4 +374,5 @@ on:
       - '.github/workflows/charlesstover-com.yml'
       - 'packages/aws-rum-react/**/*'
       - 'packages/charlesstover.com/**/*'
+      - 'packages/react-datadog/**/*'
       - 'packages/unknown2string/**/*'
