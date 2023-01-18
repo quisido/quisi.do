@@ -1,0 +1,180 @@
+name: React Datadog
+
+jobs:
+  install:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Build workspace dependencies
+        run: yarn packages/unknown2string run prepack
+      - name: Upload workspace dependencies
+        uses: actions/upload-artifact@v3
+        with:
+          name: unknown2string--dist
+          path: packages/unknown2string/dist
+
+  eslint:
+    name: ESLint
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download workspace dependencies
+        uses: actions/download-artifact@v3
+        with:
+          name: unknown2string--dist
+          path: packages/unknown2string/dist
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Lint
+        run: yarn packages/react-datadog run eslint
+
+  jest:
+    name: Jest
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download workspace dependencies
+        uses: actions/download-artifact@v3
+        with:
+          name: unknown2string--dist
+          path: packages/unknown2string/dist
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Unit test
+        run: yarn packages/react-datadog run jest
+      - name: Upload coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: react-datadog--jest
+          path: packages/react-datadog/jest
+
+  prepack:
+    name: Prepack
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download workspace dependencies
+        uses: actions/download-artifact@v3
+        with:
+          name: unknown2string--dist
+          path: packages/unknown2string/dist
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Prepack
+        run: yarn packages/react-datadog run prepack
+      - name: Upload build
+        uses: actions/upload-artifact@v3
+        with:
+          name: react-datadog--dist
+          path: packages/react-datadog/dist
+
+  npm:
+    name: Publish to NPM
+    if: github.event_name == 'push'
+    needs: [eslint, jest, prepack]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download build
+        uses: actions/download-artifact@v3
+        with:
+          name: react-datadog--dist
+          path: packages/react-datadog/dist
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Publish
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: >
+          yarn config set npmAuthToken $NPM_AUTH_TOKEN;
+          yarn workspaces foreach --no-private --parallel --topological-dev \
+            npm publish --tolerate-republish;
+
+  github-packages:
+    name: GitHub Packages
+    if: github.event_name == 'push'
+    needs: npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download build
+        uses: actions/download-artifact@v3
+        with:
+          name: react-datadog--dist
+          path: packages/react-datadog/dist
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@${{ github.repository_owner }}'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Publish
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          yarn config set npmAuthToken $NPM_AUTH_TOKEN;
+          yarn config set \
+            npmScopes.${{ github.repository_owner }}.npmPublishRegistry \
+            'https://npm.pkg.github.com';
+          yarn workspaces foreach --no-private --parallel --topological-dev \
+            npm publish --tolerate-republish;
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/react-datadog.yml'
+      - 'packages/react-datadog/**/*'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/react-datadog.yml'
+      - 'packages/react-datadog/**/*'
