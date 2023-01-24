@@ -180,3 +180,4 @@ on:
       - '.github/workflows/aws-rum-react.yml'
       - 'packages/aws-rum-react/**/*'
       - 'packages/unknown2string/**/*'
+  workflow_dispatch:
