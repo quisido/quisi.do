@@ -7,11 +7,14 @@ import './constants/open-telemetry-provider';
 // const CLOUDFLARE_GRAPHQL_ANALYTICS_TOKEN =
 //   't1MqGb9MXf5Tt8kdT5_WimPe3pE8HY31cWkSbMCx';
 const RUM_METRICS_ACCESS_KEY = '0123-4567-89ab-cdef';
+const RUM_ERROR: Error = new Error(
+  'Real User Monitoring is currently disabled.',
+);
 
 const rumMetrics: RumMetrics = new RumMetrics({
   accessKey: RUM_METRICS_ACCESS_KEY,
-  fetch(): Promise<Response> {
-    throw new Error('Real User Monitoring is currently disabled.');
+  fetch(): never {
+    throw RUM_ERROR;
   },
 });
 
