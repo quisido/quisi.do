@@ -10,7 +10,7 @@ const RUM_METRICS_ACCESS_KEY = '0123-4567-89ab-cdef';
 
 const rumMetrics: RumMetrics = new RumMetrics({
   accessKey: RUM_METRICS_ACCESS_KEY,
-  async fetch(): Promise<Response> {
+  fetch(): Promise<Response> {
     throw new Error('Real User Monitoring is currently disabled.');
   },
 });
