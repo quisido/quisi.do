@@ -5,7 +5,7 @@ import { useLocation } from 'react-router';
 import DesignSystem from '../../../../constants/design-system';
 import useDesignSystem from '../../../../hooks/use-design-system';
 import filterByDesignSystem from '../../../../utils/filter-by-design-system';
-import filterByUndefined from '../../../../utils/filter-by-undefined';
+import findUndefined from '../../../../utils/find-undefined';
 
 interface State {
   readonly designSystem: DesignSystem;
@@ -29,7 +29,7 @@ export default function useWrapperDesignSystemSelect(): State {
 
     handleChange: useCallback(
       (newDesignSystem: string | undefined): void => {
-        if (filterByUndefined(newDesignSystem)) {
+        if (findUndefined(newDesignSystem)) {
           setDesignSystem(DesignSystem.Aws);
           return;
         }

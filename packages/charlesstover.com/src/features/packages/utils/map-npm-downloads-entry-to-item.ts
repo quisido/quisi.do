@@ -1,5 +1,5 @@
 import PACKAGE_DEPENDENCIES from '../../../constants/package-dependencies';
-import filterByUndefined from '../../../utils/filter-by-undefined';
+import findUndefined from '../../../utils/find-undefined';
 import mapPackageNameToHref from '../../../utils/map-package-name-to-href';
 import reduceArrayToSum from '../../../utils/reduce-array-to-sum';
 import type Item from '../types/packages-item';
@@ -27,7 +27,7 @@ export default function mapNpmDownloadsEntryToPackagesItem(
       ]): boolean => entryPackageName === dependentPackageName;
       const dependentEntry: readonly [string, readonly number[]] | undefined =
         entries.find(findDependentEntry);
-      if (filterByUndefined(dependentEntry)) {
+      if (findUndefined(dependentEntry)) {
         break;
       }
       const [, dependentDownloads] = dependentEntry;

@@ -1,7 +1,7 @@
 import type { CardsProps } from '@cloudscape-design/components/cards';
 import type { ComponentType } from 'react';
 import { useMemo } from 'react';
-import filterByDefined from '../../utils/filter-by-defined';
+import findDefined from '../../utils/find-defined';
 import mapComponentToRenderer from '../../utils/map-component-to-renderer';
 
 interface Props<Item> {
@@ -26,7 +26,7 @@ export default function useCloudscapeCards<
         },
       ];
 
-      if (filterByDefined(CardFooter)) {
+      if (findDefined(CardFooter)) {
         sections.push({
           content: mapComponentToRenderer(CardFooter),
           id: 'footer',

@@ -1,7 +1,7 @@
 import type { BoxProps } from '@awsui/components-react/box';
 import Box from '@awsui/components-react/box';
 import type { ReactElement } from 'react';
-import filterByDefined from '../../utils/filter-by-defined';
+import findDefined from '../../utils/find-defined';
 import useAwsSpan from './span.aws.hook';
 import type Props from './types/props';
 
@@ -23,16 +23,16 @@ export default function AwsSpan({
   });
 
   const optionalProps: BoxProps = {};
-  if (filterByDefined(className)) {
+  if (findDefined(className)) {
     optionalProps.className = className;
   }
-  if (filterByDefined(colorState)) {
+  if (findDefined(colorState)) {
     optionalProps.color = colorState;
   }
-  if (filterByDefined(fontSize)) {
+  if (findDefined(fontSize)) {
     optionalProps.fontSize = fontSize;
   }
-  if (filterByDefined(variant)) {
+  if (findDefined(variant)) {
     optionalProps.variant = variant;
   }
 

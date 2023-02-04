@@ -2,7 +2,7 @@ import type { BreadcrumbGroupProps } from '@cloudscape-design/components/breadcr
 import BreadcrumbGroup from '@cloudscape-design/components/breadcrumb-group';
 import type { ReactElement } from 'react';
 import type Breadcrumb from '../../../../types/breadcrumb';
-import filterByDefined from '../../../../utils/filter-by-defined';
+import findDefined from '../../../../utils/find-defined';
 import useCloudscapeWrapperBreadcrumbs from './cloudscape-breadcrumbs.hook';
 
 interface Props {
@@ -19,7 +19,7 @@ export default function CloudscapeWrapperBreadcrumbs({
   //   properties.
   // https://github.com/aws/awsui-documentation/issues/14
   const optionalProps: Pick<BreadcrumbGroupProps, 'ariaLabel'> = {};
-  if (filterByDefined(ariaLabel)) {
+  if (findDefined(ariaLabel)) {
     optionalProps.ariaLabel = ariaLabel;
   }
 

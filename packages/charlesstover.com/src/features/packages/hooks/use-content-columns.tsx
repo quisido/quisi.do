@@ -12,6 +12,7 @@ import mapHeaderToTotalDownloadsColumn from '../utils/map-header-to-total-downlo
 export default function usePackagesContentColumns(
   filter: string,
 ): readonly TableColumn<Item>[] {
+  // Contexts
   const translate: TranslateFunction = useTranslate();
 
   const directDownloadsHeader: string = translate('Direct downloads') ?? '...';

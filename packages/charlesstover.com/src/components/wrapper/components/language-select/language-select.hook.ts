@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import Language from '../../../../constants/language';
 import useLanguage from '../../../../hooks/use-language';
 import filterByLanguage from '../../../../utils/filter-by-language';
-import filterByUndefined from '../../../../utils/filter-by-undefined';
+import findUndefined from '../../../../utils/find-undefined';
 
 interface State {
   readonly label: string | undefined;
@@ -22,7 +22,7 @@ export default function useWrapperLanguageSelect(): State {
 
     handleChange: useCallback(
       (newLanguage: string | undefined): void => {
-        if (filterByUndefined(newLanguage)) {
+        if (findUndefined(newLanguage)) {
           setLanguage(Language.English);
           return;
         }

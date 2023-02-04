@@ -1,6 +1,6 @@
 import Popover from '@awsui/components-react/popover';
 import type { ReactElement, ReactNode } from 'react';
-import filterByDefined from '../../../../utils/filter-by-defined';
+import findDefined from '../../../../utils/find-defined';
 import validateString from '../../../../utils/validate-string';
 import styles from './aws-popover.module.scss';
 
@@ -15,7 +15,7 @@ export default function AwsChipPopover({
   children,
   title,
 }: Readonly<Props>): ReactElement {
-  if (!filterByDefined(title)) {
+  if (!findDefined(title)) {
     return <>{children}</>;
   }
   return (

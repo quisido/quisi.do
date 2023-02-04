@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import { useMemo } from 'react';
-import filterByUndefined from '../../utils/filter-by-undefined';
+import findUndefined from '../../utils/find-undefined';
 import mapSizeToSystemValue from './utils/map-size-to-system-value';
 
 interface Props {
@@ -39,7 +39,7 @@ export default function useAwsDiv({
     mt: mapSizeToSystemValue(marginTop ?? marginY ?? margin),
 
     style: useMemo((): CSSProperties | undefined => {
-      if (filterByUndefined(float)) {
+      if (findUndefined(float)) {
         return;
       }
 

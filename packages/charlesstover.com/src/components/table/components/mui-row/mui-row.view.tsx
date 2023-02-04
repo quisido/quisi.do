@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import MuiCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import type { ReactElement } from 'react';
-import filterByDefined from '../../../../utils/filter-by-defined';
+import findDefined from '../../../../utils/find-defined';
 import mapComponentToPropMapper from '../../../../utils/map-component-to-prop-mapper';
 import validateString from '../../../../utils/validate-string';
 import Cell from '../../components/mui-cell';
@@ -37,7 +37,7 @@ export default function MuiTableRow({
   Description,
   cellProps,
 }: Readonly<Props>): ReactElement {
-  if (filterByDefined(Description)) {
+  if (findDefined(Description)) {
     return (
       <>
         <DescribedStyledRow className={describedClassName}>

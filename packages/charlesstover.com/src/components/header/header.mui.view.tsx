@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import Div from '../../components/div';
-import filterByDefined from '../../utils/filter-by-defined';
+import findDefined from '../../utils/find-defined';
 import validateString from '../../utils/validate-string';
 import type Props from './types/props';
 import styles from './header.mui.module.scss';
@@ -14,7 +14,7 @@ export default function MuiHeader({
   return (
     <Div display="flex" flexDirection="row">
       <h2 className={headingClassName}>{children}</h2>
-      {filterByDefined(actions) && <div>{actions}</div>}
+      {findDefined(actions) && <div>{actions}</div>}
     </Div>
   );
 }

@@ -4,7 +4,7 @@ import { useCallback, useDeferredValue, useMemo, useState } from 'react';
 import useNpmDownloads from '../../../../hooks/use-npm-downloads';
 import type TableColumn from '../../../../types/table-column';
 import type TableRowsPerPageOption from '../../../../types/table-rows-per-page-option';
-import filterByUndefined from '../../../../utils/filter-by-undefined';
+import findUndefined from '../../../../utils/find-undefined';
 import Paginator from '../../../../utils/paginator';
 import useColumns from '../../hooks/use-content-columns';
 import type Item from '../../types/packages-item';
@@ -78,7 +78,7 @@ export default function usePackagesContent(): State {
   const columns: readonly TableColumn<Item>[] = useColumns(deferredFilter);
 
   const items: readonly Item[] = useMemo((): readonly Item[] => {
-    if (filterByUndefined(data)) {
+    if (findUndefined(data)) {
       return [];
     }
     const entries: [string, number[]][] = Object.entries(data);
@@ -132,7 +132,7 @@ export default function usePackagesContent(): State {
 
       const sortColumn: TableColumn<Item> | undefined =
         columns[deferredSortColumnIndex];
-      if (filterByUndefined(sortColumn)) {
+      if (findUndefined(sortColumn)) {
         throw new Error(`Expected column at index ${deferredSortColumnIndex}.`);
       }
 

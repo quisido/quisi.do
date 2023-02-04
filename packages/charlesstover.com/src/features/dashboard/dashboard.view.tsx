@@ -21,17 +21,25 @@ export default function Dashboard({
   const {
     apdexError,
     breadcrumbs,
-    cumulativeLayoutShift,
-    errorCount,
-    firstInputDelay,
-    frustrated,
+    clsP95,
+    clsTm95,
+    errorCountTimeSeries,
+    errorsError,
+    fidP95,
+    fidTm95,
+    frustratedTimeSeries,
     isApdexInitiated,
     isApdexLoading,
-    largestContentfulPaint,
-    notifications,
-    satisfied,
-    sessionCount,
-    tolerated,
+    isErrorsInitiated,
+    isErrorsLoading,
+    isWebVitalsInitiated,
+    isWebVitalsLoading,
+    lcpP95,
+    lcpTm95,
+    satisfiedTimeSeries,
+    sessionCountTimeSeries,
+    toleratedTimeSeries,
+    webVitalsError,
   } = useDashboard({
     onRumMetricsRequest,
   });
@@ -40,21 +48,29 @@ export default function Dashboard({
     <Wrapper
       breadcrumbs={breadcrumbs}
       fallback={<I18n>Loading dashboard</I18n>}
-      notifications={notifications}
       toolsHide
     >
       <Content
         apdexError={apdexError}
-        cumulativeLayoutShift={cumulativeLayoutShift}
-        errorCount={errorCount}
-        firstInputDelay={firstInputDelay}
-        frustrated={frustrated}
+        clsP95={clsP95}
+        clsTm95={clsTm95}
+        errorCountTimeSeries={errorCountTimeSeries}
+        errorsError={errorsError}
+        fidP95={fidP95}
+        fidTm95={fidTm95}
+        frustratedTimeSeries={frustratedTimeSeries}
         isApdexInitiated={isApdexInitiated}
         isApdexLoading={isApdexLoading}
-        largestContentfulPaint={largestContentfulPaint}
-        satisfied={satisfied}
-        sessionCount={sessionCount}
-        tolerated={tolerated}
+        isErrorsInitiated={isErrorsInitiated}
+        isErrorsLoading={isErrorsLoading}
+        isWebVitalsInitiated={isWebVitalsInitiated}
+        isWebVitalsLoading={isWebVitalsLoading}
+        lcpP95={lcpP95}
+        lcpTm95={lcpTm95}
+        satisfiedTimeSeries={satisfiedTimeSeries}
+        sessionCountTimeSeries={sessionCountTimeSeries}
+        toleratedTimeSeries={toleratedTimeSeries}
+        webVitalsError={webVitalsError}
       />
     </Wrapper>
   );
