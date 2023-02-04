@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import filterByDefined from '../../../../utils/filter-by-defined';
+import findDefined from '../../../../utils/find-defined';
 import validateString from '../../../../utils/validate-string';
 import styles from './banner-image.module.scss';
 
@@ -15,7 +15,7 @@ export default function PublicationsBannerImage({
   src,
   title,
 }: Readonly<Props>): ReactElement {
-  if (!filterByDefined(src)) {
+  if (!findDefined(src)) {
     return <div className={undefinedClassName}>&nbsp;</div>;
   }
 

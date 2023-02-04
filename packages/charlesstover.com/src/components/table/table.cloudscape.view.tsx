@@ -6,7 +6,7 @@ import Table from '@cloudscape-design/components/table';
 import type { TextFilterProps } from '@cloudscape-design/components/text-filter';
 import TextFilter from '@cloudscape-design/components/text-filter';
 import type { ReactElement } from 'react';
-import filterByDefined from '../../utils/filter-by-defined';
+import findDefined from '../../utils/find-defined';
 import useCloudscapeTable from './table.cloudscape.hook';
 import type Props from './types/props';
 import styles from './table.cloudscape.module.scss';
@@ -85,25 +85,25 @@ export default function CloudscapeTable<Item extends Record<string, unknown>>({
     | 'visibleColumns'
     | 'wrapLines'
   > = {};
-  if (filterByDefined(loading)) {
+  if (findDefined(loading)) {
     optionalTableProps.loadingText = loading;
   }
-  if (filterByDefined(sortingColumn)) {
+  if (findDefined(sortingColumn)) {
     optionalTableProps.sortingColumn = sortingColumn;
   }
-  if (filterByDefined(sortingDescending)) {
+  if (findDefined(sortingDescending)) {
     optionalTableProps.sortingDescending = sortingDescending;
   }
-  if (filterByDefined(visibleContent)) {
+  if (findDefined(visibleContent)) {
     optionalTableProps.visibleColumns = visibleContent;
   }
-  if (filterByDefined(wrapLines)) {
+  if (findDefined(wrapLines)) {
     optionalTableProps.wrapLines = wrapLines;
   }
 
   const optionalTextFilterProps: Pick<TextFilterProps, 'filteringAriaLabel'> =
     {};
-  if (filterByDefined(filteringAriaLabel)) {
+  if (findDefined(filteringAriaLabel)) {
     optionalTextFilterProps.filteringAriaLabel = filteringAriaLabel;
   }
 
@@ -118,7 +118,7 @@ export default function CloudscapeTable<Item extends Record<string, unknown>>({
         columnDefinitions={columnDefinitions}
         header={<Header>{header}</Header>}
         items={rows}
-        loading={filterByDefined(loading)}
+        loading={findDefined(loading)}
         onSortingChange={handleSortingChange}
         resizableColumns
         stickyHeader

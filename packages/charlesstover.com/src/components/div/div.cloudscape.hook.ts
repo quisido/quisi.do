@@ -1,7 +1,7 @@
 import type { BoxProps } from '@cloudscape-design/components/box';
 import { useMemo } from 'react';
-import filterByDefined from '../../utils/filter-by-defined';
-import filterByUndefined from '../../utils/filter-by-undefined';
+import findDefined from '../../utils/find-defined';
+import findUndefined from '../../utils/find-undefined';
 import validateString from '../../utils/validate-string';
 import styles from './div.cloudscape.module.scss';
 import mapSizeToCloudscapeSpacingSize from './utils/map-size-to-cloudscape-spacing-size';
@@ -9,7 +9,7 @@ import mapSizeToCloudscapeSpacingSize from './utils/map-size-to-cloudscape-spaci
 interface Props {
   readonly className: string | undefined;
   readonly display: 'block' | 'flex' | undefined;
-  readonly element: 'h2' | 'p' | undefined;
+  readonly element: 'h2' | 'h3' | 'h4' | 'p' | undefined;
   readonly flexWrap: 'nowrap' | 'wrap' | undefined;
   readonly justifyContent: 'space-around' | 'space-between' | undefined;
   readonly margin: 'large' | 'medium' | 'small' | undefined;
@@ -31,7 +31,7 @@ interface State {
   readonly className: string | undefined;
   readonly display: BoxProps.Display | undefined;
   readonly margin: BoxProps.Spacing | undefined;
-  readonly variant: 'h2' | 'p' | undefined;
+  readonly variant: 'h2' | 'h3' | 'h4' | 'p' | undefined;
 }
 
 const displayFlexClassName: string = validateString(styles.displayFlex);
@@ -158,25 +158,25 @@ export default function useCloudscapeDiv({
 
     margin: useMemo((): BoxProps.Spacing | undefined => {
       if (
-        filterByUndefined(marginBottomSize) &&
-        filterByUndefined(marginLeftSize) &&
-        filterByUndefined(marginRightSize) &&
-        filterByUndefined(marginTopSize)
+        findUndefined(marginBottomSize) &&
+        findUndefined(marginLeftSize) &&
+        findUndefined(marginRightSize) &&
+        findUndefined(marginTopSize)
       ) {
         return;
       }
 
       const newMargin: BoxProps.Spacing = {};
-      if (filterByDefined(marginBottomSize)) {
+      if (findDefined(marginBottomSize)) {
         newMargin.bottom = mapSizeToCloudscapeSpacingSize(marginBottomSize);
       }
-      if (filterByDefined(marginLeftSize)) {
+      if (findDefined(marginLeftSize)) {
         newMargin.left = mapSizeToCloudscapeSpacingSize(marginLeftSize);
       }
-      if (filterByDefined(marginRightSize)) {
+      if (findDefined(marginRightSize)) {
         newMargin.right = mapSizeToCloudscapeSpacingSize(marginRightSize);
       }
-      if (filterByDefined(marginTopSize)) {
+      if (findDefined(marginTopSize)) {
         newMargin.top = mapSizeToCloudscapeSpacingSize(marginTopSize);
       }
 

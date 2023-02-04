@@ -4,7 +4,7 @@ import type { SelectProps } from '@awsui/components-react/select';
 import type { ChangeEvent, ComponentType, MutableRefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import type ReadonlySelectChangeEvent from '../../../../types/readonly-select-change-event';
-import filterByUndefined from '../../../../utils/filter-by-undefined';
+import findUndefined from '../../../../utils/find-undefined';
 import AutomaticDimensionInfo from '../../components/automatic-dimension-info';
 import AutomaticDirectionInfo from '../../components/automatic-direction-info';
 import HeaderInfo from '../../components/header-info';
@@ -315,7 +315,7 @@ export default function useSpriteSheet2GifContent({
           return;
         }
         const firstFile: File | undefined = e.target.files[FIRST];
-        if (filterByUndefined(firstFile)) {
+        if (findUndefined(firstFile)) {
           setSpriteSheetImageFile(null);
           return;
         }
@@ -330,7 +330,7 @@ export default function useSpriteSheet2GifContent({
       }: Readonly<SelectProps.Option>): boolean => value === direction;
       const newSelectedDirectionOption: SelectProps.Option | undefined =
         DIRECTION_OPTIONS.find(findSelectedDirectionOption);
-      if (filterByUndefined(newSelectedDirectionOption)) {
+      if (findUndefined(newSelectedDirectionOption)) {
         throw new Error(`Cannot find direction: ${direction}`);
       }
       return newSelectedDirectionOption;
@@ -343,7 +343,7 @@ export default function useSpriteSheet2GifContent({
       }: Readonly<SelectProps.Option>): boolean => value === perFrameStr;
       const newSelectePerFrameOption: SelectProps.Option | undefined =
         PER_FRAME_OPTIONS.find(findSelectedPerFrameOption);
-      if (filterByUndefined(newSelectePerFrameOption)) {
+      if (findUndefined(newSelectePerFrameOption)) {
         throw new Error(`Cannot find per frame value: ${perFrameStr}`);
       }
       return newSelectePerFrameOption;

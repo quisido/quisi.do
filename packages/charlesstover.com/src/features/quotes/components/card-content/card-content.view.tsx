@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import Div from '../../../../components/div';
-import filterByDefined from '../../../../utils/filter-by-defined';
+import findDefined from '../../../../utils/find-defined';
 import validateString from '../../../../utils/validate-string';
 import type Quote from '../../types/quote';
 import styles from './card-content.module.scss';
@@ -17,7 +17,7 @@ export default function CardContent({
 }: Readonly<Quote>): ReactElement {
   return (
     <>
-      {filterByDefined(image) && (
+      {findDefined(image) && (
         <Div float="right" marginLeft="large" marginRight="medium">
           <img
             alt={author}

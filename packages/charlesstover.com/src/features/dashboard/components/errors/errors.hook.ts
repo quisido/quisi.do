@@ -6,15 +6,17 @@ import useElementWidth from '../../../../hooks/use-element-width';
 import sortNumbers from '../../../../utils/sort-numbers';
 import useTimestampFormatter from '../../hooks/use-timestamp-formatter';
 import type TimeSeriesDatum from '../../types/time-series-datum';
+import mapRecordToSum from '../../utils/map-record-to-sum';
 import mapStringToInt from '../../utils/map-string-to-int';
 
 interface Props {
-  readonly errorCount: Record<string, number | undefined>;
-  readonly sessionCount: Record<string, number | undefined>;
+  readonly errorCountTimeSeries: Record<string, number | undefined>;
+  readonly sessionCountTimeSeries: Record<string, number | undefined>;
 }
 
 interface State {
   readonly data: TimeSeriesDatum[];
+  readonly errorCount: number;
   readonly formatter: (rate: string) => [string, string];
   readonly labelFormatter: (timestamp: number) => string;
   readonly ref: MutableRefObject<HTMLDivElement | null>;
@@ -25,9 +27,9 @@ interface State {
 const NONE = 0;
 const PERCENT = 100;
 
-export default function useErrorRate({
-  errorCount,
-  sessionCount,
+export default function useErrors({
+  errorCountTimeSeries,
+  sessionCountTimeSeries,
 }: Readonly<Props>): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
@@ -37,6 +39,7 @@ export default function useErrorRate({
   const mapTimestampToDateTime = useTimestampFormatter();
 
   return {
+    errorCount: mapRecordToSum(errorCountTimeSeries),
     labelFormatter: mapTimestampToDateTime,
     ref,
     tickFormatter: mapTimestampToDateTime,
@@ -44,11 +47,11 @@ export default function useErrorRate({
 
     data: useMemo((): TimeSeriesDatum[] => {
       const mapTimestampToErrorRate = (timestamp: number): number => {
-        const sessions: number = sessionCount[timestamp] ?? NONE;
+        const sessions: number = sessionCountTimeSeries[timestamp] ?? NONE;
         if (sessions === NONE) {
           return NONE;
         }
-        const errors: number = errorCount[timestamp] ?? NONE;
+        const errors: number = errorCountTimeSeries[timestamp] ?? NONE;
         return (errors / sessions) * PERCENT;
       };
 
@@ -63,11 +66,11 @@ export default function useErrorRate({
         },
       ];
 
-      const timestamps: readonly number[] = Object.keys(sessionCount)
+      const timestamps: readonly number[] = Object.keys(sessionCountTimeSeries)
         .map(mapStringToInt)
         .sort(sortNumbers);
       return timestamps.reduce(reduceTimestampsToErrorRates, []);
-    }, [errorCount, sessionCount]),
+    }, [errorCountTimeSeries, sessionCountTimeSeries]),
 
     formatter: useCallback(
       (rate: string): [string, string] => [

@@ -3,7 +3,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import type { ReactElement } from 'react';
 import Div from '../../../../components/div';
 import type BreadcrumbType from '../../../../types/breadcrumb';
-import filterByDefined from '../../../../utils/filter-by-defined';
+import findDefined from '../../../../utils/find-defined';
 import mapComponentToPropMapper from '../../../../utils/map-component-to-prop-mapper';
 import BreadcrumbComponent from '../../components/mui-breadcrumb';
 import useWrapperMuiBreadcrumbs from './mui-breadcrumbs.hook';
@@ -23,7 +23,7 @@ export default function WrapperMuiBreadcrumbs({
 
   // Workaround until MUI supports TypeScript 4.4 exact optional properties.
   const optionalProps: Pick<BreadcrumbsProps, 'expandText'> = {};
-  if (filterByDefined(expandText)) {
+  if (findDefined(expandText)) {
     optionalProps.expandText = expandText;
   }
 

@@ -1,7 +1,7 @@
 import type { BoxProps } from '@cloudscape-design/components/box';
 import Box from '@cloudscape-design/components/box';
 import type { ReactElement } from 'react';
-import filterByDefined from '../../utils/filter-by-defined';
+import findDefined from '../../utils/find-defined';
 import useCloudscapeSpan from './span.cloudscape.hook';
 import type Props from './types/props';
 
@@ -23,16 +23,16 @@ export default function CloudscapeSpan({
   });
 
   const optionalProps: BoxProps = {};
-  if (filterByDefined(className)) {
+  if (findDefined(className)) {
     optionalProps.className = className;
   }
-  if (filterByDefined(colorState)) {
+  if (findDefined(colorState)) {
     optionalProps.color = colorState;
   }
-  if (filterByDefined(fontSize)) {
+  if (findDefined(fontSize)) {
     optionalProps.fontSize = fontSize;
   }
-  if (filterByDefined(variant)) {
+  if (findDefined(variant)) {
     optionalProps.variant = variant;
   }
 

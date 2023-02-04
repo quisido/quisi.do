@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import type DevArticle from '../../../types/dev-article';
 import type MediumArticle from '../../../types/medium-article';
-import filterByDefined from '../../../utils/filter-by-defined';
+import findDefined from '../../../utils/find-defined';
 import type Publication from '../types/publication';
 
 interface Props {
@@ -17,7 +17,7 @@ export default function usePublicationsContentItems({
     const newItems: Publication[] = [];
     let totalReactions = 0;
     let totalViews = 0;
-    if (filterByDefined(mediumData)) {
+    if (findDefined(mediumData)) {
       for (const [
         slug,
         {
@@ -52,7 +52,7 @@ export default function usePublicationsContentItems({
     }
 
     const averageViewsPerReaction = totalViews / totalReactions;
-    if (filterByDefined(devData)) {
+    if (findDefined(devData)) {
       for (const {
         canonical_url: canonicalUrl,
         comments_count: commentsCount,
@@ -69,7 +69,7 @@ export default function usePublicationsContentItems({
           newItems.find(findExistingItem);
         const reactions: number = commentsCount + publicReactionsCount;
         const views: number = Math.round(reactions * averageViewsPerReaction);
-        if (filterByDefined(existingItem)) {
+        if (findDefined(existingItem)) {
           existingItem.reactions += reactions;
           existingItem.views += views;
           continue;

@@ -1,4 +1,4 @@
-import filterByUndefined from '../../../utils/filter-by-undefined';
+import findUndefined from '../../../utils/find-undefined';
 
 const LARGE = 3;
 const MEDIUM = 2;
@@ -7,7 +7,7 @@ const SMALL = 1;
 export default function mapSizeToSystemValue(
   size: 'large' | 'medium' | 'small' | undefined,
 ): number | undefined {
-  if (filterByUndefined(size)) {
+  if (findUndefined(size)) {
     return;
   }
 

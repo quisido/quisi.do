@@ -1,7 +1,7 @@
 import type { BoxProps } from '@awsui/components-react/box';
 import { useMemo } from 'react';
-import filterByDefined from '../../utils/filter-by-defined';
-import filterByUndefined from '../../utils/filter-by-undefined';
+import findDefined from '../../utils/find-defined';
+import findUndefined from '../../utils/find-undefined';
 import validateString from '../../utils/validate-string';
 import styles from './div.aws.module.scss';
 import mapSizeToAwsSpacingSize from './utils/map-size-to-aws-spacing-size';
@@ -9,7 +9,7 @@ import mapSizeToAwsSpacingSize from './utils/map-size-to-aws-spacing-size';
 interface Props {
   readonly className: string | undefined;
   readonly display: 'block' | 'flex' | undefined;
-  readonly element: 'h2' | 'p' | undefined;
+  readonly element: 'h2' | 'h3' | 'h4' | 'p' | undefined;
   readonly flexDirection:
     | 'column-reverse'
     | 'column'
@@ -31,7 +31,7 @@ interface State {
   readonly className: string | undefined;
   readonly display: BoxProps.Display | undefined;
   readonly margin: BoxProps.Spacing | undefined;
-  readonly variant: 'h2' | 'p' | undefined;
+  readonly variant: 'h2' | 'h3' | 'h4' | 'p' | undefined;
 }
 
 const displayFlexClassName: string = validateString(styles.displayFlex);
@@ -158,25 +158,25 @@ export default function useAwsDiv({
 
     margin: useMemo((): BoxProps.Spacing | undefined => {
       if (
-        filterByUndefined(marginBottomSize) &&
-        filterByUndefined(marginLeftSize) &&
-        filterByUndefined(marginRightSize) &&
-        filterByUndefined(marginTopSize)
+        findUndefined(marginBottomSize) &&
+        findUndefined(marginLeftSize) &&
+        findUndefined(marginRightSize) &&
+        findUndefined(marginTopSize)
       ) {
         return;
       }
 
       const newMargin: BoxProps.Spacing = {};
-      if (filterByDefined(marginBottomSize)) {
+      if (findDefined(marginBottomSize)) {
         newMargin.bottom = mapSizeToAwsSpacingSize(marginBottomSize);
       }
-      if (filterByDefined(marginLeftSize)) {
+      if (findDefined(marginLeftSize)) {
         newMargin.left = mapSizeToAwsSpacingSize(marginLeftSize);
       }
-      if (filterByDefined(marginRightSize)) {
+      if (findDefined(marginRightSize)) {
         newMargin.right = mapSizeToAwsSpacingSize(marginRightSize);
       }
-      if (filterByDefined(marginTopSize)) {
+      if (findDefined(marginTopSize)) {
         newMargin.top = mapSizeToAwsSpacingSize(marginTopSize);
       }
 

@@ -9,7 +9,7 @@ interface BaseProps {
   readonly children: ReactNode;
   readonly className?: string | undefined;
   readonly display?: 'block' | 'flex' | undefined;
-  readonly element?: 'h2' | 'p' | undefined;
+  readonly element?: 'h2' | 'h3' | 'h4' | 'p' | undefined;
   readonly flexDirection?:
     | 'column-reverse'
     | 'column'

@@ -2,7 +2,7 @@ import type { FormFieldProps } from '@cloudscape-design/components/form-field';
 import FormField from '@cloudscape-design/components/form-field';
 import Select from '@cloudscape-design/components/select';
 import type { ReactElement } from 'react';
-import filterByDefined from '../../utils/filter-by-defined';
+import findDefined from '../../utils/find-defined';
 import useCloudscapeSelect from './select.cloudscape.hook';
 import type Props from './types/props';
 
@@ -22,7 +22,7 @@ export default function CloudscapeSelect({
   });
 
   const optionalFormFieldProps: FormFieldProps = {};
-  if (filterByDefined(className)) {
+  if (findDefined(className)) {
     optionalFormFieldProps.className = className;
   }
 

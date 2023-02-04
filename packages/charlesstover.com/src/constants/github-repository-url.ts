@@ -1,8 +1,8 @@
 import GITHUB_REPOSITORY from '../constants/github-repository';
-import filterByUndefined from '../utils/filter-by-undefined';
+import findUndefined from '../utils/find-undefined';
 
 const getGithubRepositoryUrl = (): string | undefined => {
-  if (filterByUndefined(GITHUB_REPOSITORY)) {
+  if (findUndefined(GITHUB_REPOSITORY)) {
     return;
   }
 

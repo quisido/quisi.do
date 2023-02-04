@@ -1,7 +1,7 @@
 import type { BadgeProps } from '@cloudscape-design/components/badge';
 import Badge from '@cloudscape-design/components/badge';
 import type { ReactElement } from 'react';
-import filterByDefined from '../../utils/filter-by-defined';
+import findDefined from '../../utils/find-defined';
 import Popover from './components/cloudscape-popover';
 import type Props from './types/props';
 
@@ -11,7 +11,7 @@ export default function CloudscapeChip({
   title,
 }: Readonly<Props>): ReactElement {
   const optionalProps: Pick<BadgeProps, 'className'> = {};
-  if (filterByDefined(className)) {
+  if (findDefined(className)) {
     optionalProps.className = className;
   }
 

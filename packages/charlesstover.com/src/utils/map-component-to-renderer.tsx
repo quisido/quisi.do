@@ -1,5 +1,5 @@
 import type { ComponentType, FunctionComponent, ReactElement } from 'react';
-import filterByUndefined from '../utils/filter-by-undefined';
+import findUndefined from '../utils/find-undefined';
 
 /*
 AWSUI does not mount renderer methods (e.g. CardDefinition's `content` and
@@ -20,7 +20,7 @@ export default function mapComponentToRenderer<
 >(
   Component: ComponentType<Props> | undefined,
 ): FunctionComponent<Props> | undefined {
-  if (filterByUndefined(Component)) {
+  if (findUndefined(Component)) {
     return;
   }
 

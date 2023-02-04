@@ -3,10 +3,7 @@ import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import useAsyncState from '../../modules/use-async-state';
 import type Breadcrumb from '../../types/breadcrumb';
-import type NonSumMetricStats from '../../types/non-sum-metric-stats';
-import type Notification from '../../types/notification';
 import type RumMetrics from '../../types/rum-metrics';
-import mapSecondsTimeSeriesToMilliseconds from './utils/map-seconds-time-series-to-milliseconds';
 
 interface Props {
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
@@ -15,28 +12,93 @@ interface Props {
 interface State {
   readonly apdexError: string | null;
   readonly breadcrumbs: readonly Breadcrumb[];
-  readonly cumulativeLayoutShift: NonSumMetricStats;
-  readonly errorCount: Record<string, number>;
-  readonly firstInputDelay: NonSumMetricStats;
-  readonly frustrated: Record<string, number>;
+  readonly clsP95: number;
+  readonly clsTm95: number;
+  readonly errorCountTimeSeries: Record<string, number>;
+  readonly errorsError: string | null;
+  readonly fidP95: number;
+  readonly fidTm95: number;
+  readonly frustratedTimeSeries: Record<string, number>;
   readonly isApdexInitiated: boolean;
   readonly isApdexLoading: boolean;
-  readonly largestContentfulPaint: NonSumMetricStats;
-  readonly notifications: readonly Notification[];
-  readonly satisfied: Record<string, number>;
-  readonly sessionCount: Record<string, number>;
-  readonly tolerated: Record<string, number>;
+  readonly isErrorsInitiated: boolean;
+  readonly isErrorsLoading: boolean;
+  readonly isWebVitalsInitiated: boolean;
+  readonly isWebVitalsLoading: boolean;
+  readonly lcpP95: number;
+  readonly lcpTm95: number;
+  readonly satisfiedTimeSeries: Record<string, number>;
+  readonly sessionCountTimeSeries: Record<string, number>;
+  readonly toleratedTimeSeries: Record<string, number>;
+  readonly webVitalsError: string | null;
 }
 
 const EMPTY: Record<string, never> = Object.freeze({});
 
-const EMPTY_NON_SUM_METRIC_STATS: NonSumMetricStats = Object.freeze({
-  p95: EMPTY,
-  tm95: EMPTY,
-});
+// Additionally, we have access to `PerformanceNavigationDuration`.
 
 /*
-Additionally, we have access to `PerformanceNavigationDuration`.
+
+Migrate the following properties to Lambda:
+
+---
+
+const BASE = 10;
+const MILLISECONDS_PER_SECOND = 1000;
+
+function reduceSecondsTimeSeriesEntriesToMilliseconds<T>(
+  record: Record<string, T>,
+  [seconds, value]: [string, T],
+): Record<string, T> {
+  return {
+    ...record,
+    [parseInt(seconds, BASE) * MILLISECONDS_PER_SECOND]: value,
+  };
+}
+
+---
+
+Given a time series reported in seconds (e.g. CloudWatch metrics), create a time
+  series reported in milliseconds (i.e. timestamps).
+
+function mapSecondsTimeSeriesToMilliseconds(
+  record: Record<string, number>,
+): Record<string, number> {
+  return Object.entries(record).reduce(
+    reduceSecondsTimeSeriesEntriesToMilliseconds,
+    {},
+  );
+}
+
+---
+
+const CUMULATIVE_LAYOUT_SHIFT_PRECISION = 2;
+const clsPow = Math.pow(BASE, CUMULATIVE_LAYOUT_SHIFT_PRECISION);
+
+{
+  clsP95: Math.round(
+    mapRecordToSum(cumulativeLayoutShift.p95) * clsPow,
+  ) / clsPow,
+  clsTm95: Math.round(
+    mapRecordToSum(cumulativeLayoutShift.tm95) * clsPow,
+  ) / clsPow,
+  errorCount: mapSecondsTimeSeriesToMilliseconds(rumMetrics.JsErrorCount.Sum),
+  fidP95: mapRecordToSum(firstInputDelay.p95),
+  fidTm95: Math.round(mapRecordToSum(firstInputDelay.tm95)),
+  frustrated: mapSecondsTimeSeriesToMilliseconds(
+    rumMetrics.NavigationFrustratedTransaction.Sum,
+  ),
+  lcpP95: Math.round(mapRecordToSum(largestContentfulPaint.p95)),
+  lcpTm95: Math.round(mapRecordToSum(largestContentfulPaint.tm95)),
+  satisfied: mapSecondsTimeSeriesToMilliseconds(
+    rumMetrics.NavigationSatisfiedTransaction.Sum,
+  ),
+  sessionCount: mapSecondsTimeSeriesToMilliseconds(rumMetrics.SessionCount.Sum),
+  tolerated: mapSecondsTimeSeriesToMilliseconds(
+    rumMetrics.NavigationToleratedTransaction.Sum,
+  ),
+}
+
 */
 
 export default function useDashboard({
@@ -47,7 +109,6 @@ export default function useDashboard({
 
   // States
   const {
-    data: rumMetrics,
     error: rumMetricsError,
     initiated: isRumMetricsInitiated,
     loading: isRumMetricsLoading,
@@ -55,8 +116,25 @@ export default function useDashboard({
 
   return {
     apdexError: rumMetricsError,
+    clsP95: 0,
+    clsTm95: 0,
+    errorCountTimeSeries: EMPTY,
+    errorsError: rumMetricsError,
+    fidP95: 0,
+    fidTm95: 0,
+    frustratedTimeSeries: EMPTY,
     isApdexInitiated: isRumMetricsInitiated,
     isApdexLoading: isRumMetricsLoading,
+    isErrorsInitiated: isRumMetricsInitiated,
+    isErrorsLoading: isRumMetricsLoading,
+    isWebVitalsInitiated: isRumMetricsInitiated,
+    isWebVitalsLoading: isRumMetricsLoading,
+    lcpP95: 0,
+    lcpTm95: 0,
+    satisfiedTimeSeries: EMPTY,
+    sessionCountTimeSeries: EMPTY,
+    toleratedTimeSeries: EMPTY,
+    webVitalsError: rumMetricsError,
 
     breadcrumbs: useMemo(
       (): readonly Breadcrumb[] => [
@@ -67,78 +145,5 @@ export default function useDashboard({
       ],
       [translate],
     ),
-
-    cumulativeLayoutShift: useMemo((): NonSumMetricStats => {
-      if (rumMetrics === null) {
-        return EMPTY_NON_SUM_METRIC_STATS;
-      }
-      return rumMetrics.WebVitalsCumulativeLayoutShift;
-    }, [rumMetrics]),
-
-    errorCount: useMemo((): Record<string, number> => {
-      if (rumMetrics === null) {
-        return EMPTY;
-      }
-      return mapSecondsTimeSeriesToMilliseconds(rumMetrics.JsErrorCount.Sum);
-    }, [rumMetrics]),
-
-    firstInputDelay: useMemo((): NonSumMetricStats => {
-      if (rumMetrics === null) {
-        return EMPTY_NON_SUM_METRIC_STATS;
-      }
-      return rumMetrics.WebVitalsFirstInputDelay;
-    }, [rumMetrics]),
-
-    frustrated: useMemo((): Record<string, number> => {
-      if (rumMetrics === null) {
-        return EMPTY;
-      }
-      return mapSecondsTimeSeriesToMilliseconds(
-        rumMetrics.NavigationFrustratedTransaction.Sum,
-      );
-    }, [rumMetrics]),
-
-    largestContentfulPaint: useMemo((): NonSumMetricStats => {
-      if (rumMetrics === null) {
-        return EMPTY_NON_SUM_METRIC_STATS;
-      }
-      return rumMetrics.WebVitalsLargestContentfulPaint;
-    }, [rumMetrics]),
-
-    notifications: useMemo((): readonly Notification[] => {
-      const newNotifications: Notification[] = [];
-      if (rumMetricsError !== null) {
-        newNotifications.push({
-          message: rumMetricsError,
-          type: 'error',
-        });
-      }
-      return newNotifications;
-    }, [rumMetricsError]),
-
-    satisfied: useMemo((): Record<string, number> => {
-      if (rumMetrics === null) {
-        return EMPTY;
-      }
-      return mapSecondsTimeSeriesToMilliseconds(
-        rumMetrics.NavigationSatisfiedTransaction.Sum,
-      );
-    }, [rumMetrics]),
-
-    sessionCount: useMemo((): Record<string, number> => {
-      if (rumMetrics === null) {
-        return EMPTY;
-      }
-      return mapSecondsTimeSeriesToMilliseconds(rumMetrics.SessionCount.Sum);
-    }, [rumMetrics]),
-
-    tolerated: useMemo((): Record<string, number> => {
-      if (rumMetrics === null) {
-        return EMPTY;
-      }
-      return mapSecondsTimeSeriesToMilliseconds(
-        rumMetrics.NavigationToleratedTransaction.Sum,
-      );
-    }, [rumMetrics]),
   };
 }
