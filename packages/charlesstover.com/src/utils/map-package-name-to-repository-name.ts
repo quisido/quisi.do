@@ -8,6 +8,8 @@ export default function mapPackageNameToRepositoryName(
       return 'hsl2rgb-js';
     case 'pluralsight-score':
       return 'react-pluralsight-score';
+    case 'react-router-v6-instrumentation':
+      return 'react-router-v6-sentry-browser-tracing-integration';
     default:
       return packageName;
   }
