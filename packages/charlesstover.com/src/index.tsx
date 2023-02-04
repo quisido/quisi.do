@@ -13,7 +13,7 @@ const RUM_ERROR: Error = new Error(
 
 const rumMetrics: RumMetrics = new RumMetrics({
   accessKey: RUM_METRICS_ACCESS_KEY,
-  fetch(): Promise<Response> {
+  async fetch(): Promise<Response> {
     return Promise.reject(RUM_ERROR);
   },
 });
