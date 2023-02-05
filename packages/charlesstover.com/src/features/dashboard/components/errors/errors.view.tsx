@@ -2,7 +2,6 @@ import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 import Container from '../../../../components/container';
-import Div from '../../../../components/div';
 import LoadingIcon from '../../../../components/loading-icon';
 import Span from '../../../../components/span';
 import useErrors from './errors.hook';
@@ -46,9 +45,6 @@ export default function Errors({
   if (error !== null) {
     return (
       <Container header={<I18n>Errors</I18n>} marginTop="large">
-        <Div element="h4">
-          <I18n>An error occurred.</I18n>
-        </Div>
         <Span element="p">{error}</Span>
       </Container>
     );

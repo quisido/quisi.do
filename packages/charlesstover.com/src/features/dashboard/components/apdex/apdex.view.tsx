@@ -43,9 +43,6 @@ export default function Apdex({
         header={<I18n>Application Performance Index</I18n>}
         marginTop="large"
       >
-        <Div element="h4">
-          <I18n>An error occurred.</I18n>
-        </Div>
         <Span element="p">{error}</Span>
       </Container>
     );

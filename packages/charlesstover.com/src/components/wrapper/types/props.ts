@@ -1,9 +1,10 @@
-// TODO: Technical debt. Abstract `Tools` and `onToolsChange`.
 import type { AppLayoutProps } from '@awsui/components-react/app-layout';
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { ComponentType, ReactNode } from 'react';
 import type Breadcrumb from '../../../types/breadcrumb';
 import type Notification from '../../../types/notification';
+
+// TODO: Technical debt. Abstract `Tools` and `onToolsChange`.
 
 export default interface Props {
   readonly Tools?: ComponentType<unknown> | undefined;

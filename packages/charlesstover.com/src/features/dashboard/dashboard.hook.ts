@@ -2,27 +2,31 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import useAsyncState from '../../modules/use-async-state';
-import type Breadcrumb from '../../types/breadcrumb';
 import type RumMetrics from '../../types/rum-metrics';
+import mapRecordToSum from './utils/map-record-to-sum';
 
 interface Props {
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
+  readonly onUptimeRequest: () => Promise<unknown>;
 }
 
 interface State {
   readonly apdexError: string | null;
-  readonly breadcrumbs: readonly Breadcrumb[];
   readonly clsP95: number;
   readonly clsTm95: number;
+  readonly dailySessionCount: number;
   readonly errorCountTimeSeries: Record<string, number>;
   readonly errorsError: string | null;
   readonly fidP95: number;
   readonly fidTm95: number;
   readonly frustratedTimeSeries: Record<string, number>;
+  readonly githubWorkflowStatusAlt: string | undefined;
   readonly isApdexInitiated: boolean;
   readonly isApdexLoading: boolean;
   readonly isErrorsInitiated: boolean;
   readonly isErrorsLoading: boolean;
+  readonly isUptimeInitiated: boolean;
+  readonly isUptimeLoading: boolean;
   readonly isWebVitalsInitiated: boolean;
   readonly isWebVitalsLoading: boolean;
   readonly lcpP95: number;
@@ -30,9 +34,12 @@ interface State {
   readonly satisfiedTimeSeries: Record<string, number>;
   readonly sessionCountTimeSeries: Record<string, number>;
   readonly toleratedTimeSeries: Record<string, number>;
+  readonly uptime: unknown;
+  readonly uptimeError: string | null;
   readonly webVitalsError: string | null;
 }
 
+const DAYS_PER_WEEK = 7;
 const EMPTY: Record<string, never> = Object.freeze({});
 
 // Additionally, we have access to `PerformanceNavigationDuration`.
@@ -103,6 +110,7 @@ const clsPow = Math.pow(BASE, CUMULATIVE_LAYOUT_SHIFT_PRECISION);
 
 export default function useDashboard({
   onRumMetricsRequest,
+  onUptimeRequest,
 }: Readonly<Props>): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
@@ -114,6 +122,15 @@ export default function useDashboard({
     loading: isRumMetricsLoading,
   } = useAsyncState(onRumMetricsRequest);
 
+  const {
+    data: uptime,
+    error: uptimeError,
+    initiated: isUptimeInitiated,
+    loading: isUptimeLoading,
+  } = useAsyncState(onUptimeRequest);
+
+  const sessionCountTimeSeries: Record<string, number> = EMPTY;
+
   return {
     apdexError: rumMetricsError,
     clsP95: 0,
@@ -123,27 +140,28 @@ export default function useDashboard({
     fidP95: 0,
     fidTm95: 0,
     frustratedTimeSeries: EMPTY,
+    githubWorkflowStatusAlt: translate('GitHub workflow status'),
     isApdexInitiated: isRumMetricsInitiated,
     isApdexLoading: isRumMetricsLoading,
     isErrorsInitiated: isRumMetricsInitiated,
     isErrorsLoading: isRumMetricsLoading,
+    isUptimeInitiated,
+    isUptimeLoading,
     isWebVitalsInitiated: isRumMetricsInitiated,
     isWebVitalsLoading: isRumMetricsLoading,
     lcpP95: 0,
     lcpTm95: 0,
     satisfiedTimeSeries: EMPTY,
-    sessionCountTimeSeries: EMPTY,
+    sessionCountTimeSeries,
     toleratedTimeSeries: EMPTY,
+    uptime,
+    uptimeError,
     webVitalsError: rumMetricsError,
 
-    breadcrumbs: useMemo(
-      (): readonly Breadcrumb[] => [
-        {
-          children: translate('Dashboard') ?? '...',
-          path: '/dashboard',
-        },
-      ],
-      [translate],
+    dailySessionCount: useMemo(
+      (): number =>
+        Math.ceil(mapRecordToSum(sessionCountTimeSeries) / DAYS_PER_WEEK),
+      [sessionCountTimeSeries],
     ),
   };
 }

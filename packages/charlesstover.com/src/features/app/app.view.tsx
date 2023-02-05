@@ -23,10 +23,12 @@ The App root component mounts context providers for the whole application.
 
 interface Props {
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
+  readonly onUptimeRequest: () => Promise<unknown>;
 }
 
 export default function App({
   onRumMetricsRequest,
+  onUptimeRequest,
 }: Readonly<Props>): ReactElement {
   return (
     <CloudWatchRUM>
@@ -41,7 +43,10 @@ export default function App({
                   <QueryClientProvider>
                     <Sentry>
                       <Theme>
-                        <Routes onRumMetricsRequest={onRumMetricsRequest} />
+                        <Routes
+                          onRumMetricsRequest={onRumMetricsRequest}
+                          onUptimeRequest={onUptimeRequest}
+                        />
                       </Theme>
                     </Sentry>
                   </QueryClientProvider>

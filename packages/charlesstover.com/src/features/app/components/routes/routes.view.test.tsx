@@ -13,19 +13,22 @@ Object.defineProperty(global.window, 'location', {
 
 describe('App', (): void => {
   it('should reroute "Become the junior developer that companies want to hire" to Medium', (): void => {
-    render(<Routes onRumMetricsRequest={jest.fn()} />, {
-      wrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
-        return (
-          <MemoryRouter
-            initialEntries={[
-              '/become-the-junior-developer-that-companies-want-to-hire/',
-            ]}
-          >
-            {children}
-          </MemoryRouter>
-        );
+    render(
+      <Routes onRumMetricsRequest={jest.fn()} onUptimeRequest={jest.fn()} />,
+      {
+        wrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
+          return (
+            <MemoryRouter
+              initialEntries={[
+                '/become-the-junior-developer-that-companies-want-to-hire/',
+              ]}
+            >
+              {children}
+            </MemoryRouter>
+          );
+        },
       },
-    });
+    );
 
     expect(global.window.location.href).toBe(
       'https://charles-stover.medium.com/become-the-junior-developer-that-companies-want-to-hire-c539f4c236d8',
