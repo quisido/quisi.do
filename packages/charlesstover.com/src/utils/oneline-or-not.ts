@@ -6,7 +6,9 @@ interface Options {
 
 export default class OnlineOrNot {
   private readonly _fetch: Window['fetch'];
+
   private readonly _headers: Headers;
+
   private readonly _id: string;
 
   public constructor({ fetch, id, token }: Readonly<Options>) {
@@ -19,10 +21,6 @@ export default class OnlineOrNot {
     });
   }
 
-  public check = async (): Promise<Response> => {
-    return await this._fetch(this.url, this.requestInit);
-  };
-
   private get requestInit(): RequestInit {
     return {
       headers: this._headers,
@@ -33,4 +31,8 @@ export default class OnlineOrNot {
   private get url(): string {
     return `https://api.onlineornot.com/v1/checks/${this._id}`;
   }
+
+  public handleUptimeRequest = async (): Promise<Response> => {
+    return this._fetch(this.url, this.requestInit);
+  };
 }

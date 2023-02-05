@@ -27,7 +27,7 @@ ROOT.render(
   <StrictMode>
     <App
       onRumMetricsRequest={rumMetrics.handleRequest}
-      onUptimeRequest={onlineOrNot.check}
+      onUptimeRequest={onlineOrNot.handleUptimeRequest}
     />
   </StrictMode>,
 );
