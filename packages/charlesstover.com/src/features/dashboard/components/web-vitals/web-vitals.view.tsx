@@ -49,9 +49,6 @@ export default function WebVitals({
   if (error !== null) {
     return (
       <Container header={<I18n>Web Vitals</I18n>} marginTop="large">
-        <Div element="h4">
-          <I18n>An error occurred.</I18n>
-        </Div>
         <Span element="p">{error}</Span>
       </Container>
     );

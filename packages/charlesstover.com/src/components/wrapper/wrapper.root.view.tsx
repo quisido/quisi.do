@@ -4,8 +4,11 @@ import Design from '../../components/design';
 import DesignSystem from '../../constants/design-system';
 import WrapperVariantContext from '../../contexts/wrapper-variant';
 import Fallback from './components/fallback';
-import type Props from './types/props';
+import type InnerProps from './types/props';
 import useWrapper from './wrapper.root.hook';
+
+export type Props = Omit<InnerProps, 'breadcrumbs'> &
+  Partial<Pick<InnerProps, 'breadcrumbs'>>;
 
 const AwsWrapper = lazy(async () => import('./wrapper.aws.view'));
 const CloudscapeWrapper = lazy(async () => import('./wrapper.cloudscape.view'));
@@ -23,9 +26,7 @@ export default function Wrapper({
   breadcrumbs: breadcrumbsProp,
   contentType,
   ...props
-}: Readonly<
-  Omit<Props, 'breadcrumbs'> & Partial<Pick<Props, 'breadcrumbs'>>
->): ReactElement {
+}: Readonly<Props>): ReactElement {
   const { breadcrumbs: breadcrumbsState } = useWrapper({
     breadcrumbs: breadcrumbsProp,
   });

@@ -3,13 +3,18 @@ import ROOT from './constants/root';
 import App from './features/app';
 import RumMetrics from './utils/rum-metrics';
 import './constants/open-telemetry-provider';
+import OnlineOrNot from './utils/oneline-or-not';
 
-// const CLOUDFLARE_GRAPHQL_ANALYTICS_TOKEN =
-//   't1MqGb9MXf5Tt8kdT5_WimPe3pE8HY31cWkSbMCx';
 const RUM_METRICS_ACCESS_KEY = '0123-4567-89ab-cdef';
 const RUM_ERROR: Error = new Error(
   'Real User Monitoring is currently disabled.',
 );
+
+const onlineOrNot: OnlineOrNot = new OnlineOrNot({
+  fetch: window.fetch.bind(window),
+  id: '9NK7GzKy',
+  token: 'O-Y6-0zuUBd1NzpNrQlNl8phdpX26jye__vIZife',
+});
 
 const rumMetrics: RumMetrics = new RumMetrics({
   accessKey: RUM_METRICS_ACCESS_KEY,
@@ -20,11 +25,17 @@ const rumMetrics: RumMetrics = new RumMetrics({
 
 ROOT.render(
   <StrictMode>
-    <App onRumMetricsRequest={rumMetrics.handleRequest} />
+    <App
+      onRumMetricsRequest={rumMetrics.handleRequest}
+      onUptimeRequest={onlineOrNot.handleUptimeRequest}
+    />
   </StrictMode>,
 );
 
 /*
+const CLOUDFLARE_GRAPHQL_ANALYTICS_TOKEN =
+  't1MqGb9MXf5Tt8kdT5_WimPe3pE8HY31cWkSbMCx';
+
 fetch('https://api.cloudflare.com/client/v4/graphql', {
   body: JSON.stringify({
     query: `{
@@ -63,7 +74,6 @@ fetch('https://api.cloudflare.com/client/v4/graphql', {
     'X-Auth-Email': 'cloudflare@charlesstover.com',
   },
   method: 'POST',
-  mode: 'no-cors',
 })
   .then(console.log)
   .catch(console.error);

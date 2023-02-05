@@ -13,6 +13,7 @@ import mapPathToRedirectComponent from '../../utils/map-path-to-redirect-compone
 
 interface Props {
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
+  readonly onUptimeRequest: () => Promise<unknown>;
 }
 
 const BtjdtcwthPath = 'become-the-junior-developer-that-companies-want-to-hire';
@@ -36,6 +37,7 @@ const SentryRoutes = withSentryReactRouterV6Routing(Routes);
 
 export default function AppRoutes({
   onRumMetricsRequest,
+  onUptimeRequest,
 }: Readonly<Props>): ReactElement {
   return (
     <SentryRoutes>
@@ -46,7 +48,12 @@ export default function AppRoutes({
 
       {/* Portfolio */}
       <Route
-        element={<Dashboard onRumMetricsRequest={onRumMetricsRequest} />}
+        element={
+          <Dashboard
+            onRumMetricsRequest={onRumMetricsRequest}
+            onUptimeRequest={onUptimeRequest}
+          />
+        }
         path="dashboard"
       />
       <Route element={<Packages />} path="packages" />
