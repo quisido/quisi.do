@@ -19,6 +19,10 @@
     {
       "name": "map unknown to string",
       "path": "packages/unknown2string"
+    },
+    {
+      "name": "useOffline",
+      "path": "packages/use-offline"
     }
   ],
   "settings": {

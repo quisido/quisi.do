@@ -7,13 +7,14 @@ import Packages from '../../../../features/packages';
 import Publications from '../../../../features/publications';
 import Quotes from '../../../../features/quotes';
 import SpriteSheet2Gif from '../../../../features/spritesheet2gif';
-import RumMetrics from '../../../../types/rum-metrics';
+import type RumMetrics from '../../../../types/rum-metrics';
+import type UptimeChecks from '../../../../types/uptime-checks';
 import mapHrefToRedirectComponent from '../../utils/map-href-to-redirect-component';
 import mapPathToRedirectComponent from '../../utils/map-path-to-redirect-component';
 
 interface Props {
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
-  readonly onUptimeRequest: () => Promise<unknown>;
+  readonly onUptimeChecksRequest: () => Promise<UptimeChecks>;
 }
 
 const BtjdtcwthPath = 'become-the-junior-developer-that-companies-want-to-hire';
@@ -37,7 +38,7 @@ const SentryRoutes = withSentryReactRouterV6Routing(Routes);
 
 export default function AppRoutes({
   onRumMetricsRequest,
-  onUptimeRequest,
+  onUptimeChecksRequest,
 }: Readonly<Props>): ReactElement {
   return (
     <SentryRoutes>
@@ -51,7 +52,7 @@ export default function AppRoutes({
         element={
           <Dashboard
             onRumMetricsRequest={onRumMetricsRequest}
-            onUptimeRequest={onUptimeRequest}
+            onUptimeChecksRequest={onUptimeChecksRequest}
           />
         }
         path="dashboard"

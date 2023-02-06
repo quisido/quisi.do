@@ -368,6 +368,7 @@ on:
       - 'packages/charlesstover.com/**/*'
       - 'packages/react-datadog/**/*'
       - 'packages/unknown2string/**/*'
+      - 'packages/use-offline/**/*'
   push:
     branches: [main]
     paths:
@@ -376,3 +377,4 @@ on:
       - 'packages/charlesstover.com/**/*'
       - 'packages/react-datadog/**/*'
       - 'packages/unknown2string/**/*'
+      - 'packages/use-offline/**/*'

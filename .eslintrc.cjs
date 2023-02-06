@@ -49,7 +49,6 @@ module.exports = {
   ],
 
   parserOptions: {
-    // extraFileExtensions: ['.code-workspace'],
     project: ['./tsconfig.eslint.json'],
     tsconfigRootDir: __dirname,
   },

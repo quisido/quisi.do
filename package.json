@@ -4,7 +4,7 @@
   "author": "Charles Stover <charlesstover.com@charlesstover.com>",
   "description": "the professional portfolio of Charles Stover",
   "homepage": "https://charlesstocer.com/",
-  "packageManager": "yarn@3.3.1",
+  "packageManager": "yarn@3.4.1",
   "private": true,
   "repository": "github:CharlesStover/charlesstover.com",
   "type": "module",
@@ -24,29 +24,29 @@
     "eslint": "eslint '**/*'",
     "eslint:fix": "eslint '**/*' --fix",
     "prepack": "yarn workspaces foreach --parallel --topological-dev run prepack",
-    "prepublish": "eslint '**/*' && monorepo-template-test && yarn workspaces foreach --no-private --parallel --topological-dev run prepublish",
+    "prepublish": "yarn run eslint && yarn run test && yarn workspaces foreach --interlaced --parallel --topological-dev --verbose run prepublish",
     "start": "yarn packages/charlesstover.com run start",
     "test": "monorepo-template-test",
-    "up": "monorepo-template-up"
+    "up": "yarn up \"@*/*\" \"!(aws-rum-react|react-datadog|unknown2string|use-offline)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
-    "@monorepo-template/eslint-config": "^1.0.5",
+    "@monorepo-template/eslint-config": "^1.0.7",
     "@monorepo-template/test": "^2.2.0",
     "@monorepo-template/tsconfig": "^1.1.2",
     "@monorepo-template/up": "^1.0.1",
-    "@types/node": "^18.11.18",
-    "@typescript-eslint/eslint-plugin": "^5.48.2",
-    "@typescript-eslint/parser": "^5.48.2",
-    "@yarnpkg/sdks": "^3.0.0-rc.35",
-    "browserslist": "^4.21.4",
-    "eslint": "^8.32.0",
+    "@types/node": "^18.11.19",
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "@typescript-eslint/parser": "^5.50.0",
+    "@yarnpkg/sdks": "^3.0.0-rc.38",
+    "browserslist": "^4.21.5",
+    "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.32.1",
+    "eslint-plugin-react": "^7.32.2",
     "prettier": "^2.8.3",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   }
 }

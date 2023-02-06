@@ -2,6 +2,8 @@
 
 import setDesignSystem from '../../test/cypress/utils/set-design-system';
 
+declare const it: Mocha.TestFunction;
+
 const DESIGN_SYSTEMS: string[] = ['AWS', 'Cloudscape', 'Material'];
 const NEXT_PAGE_SELECTOR = 'main button[aria-label="Go to next page"]';
 const FIRST_PACKAGE_SELECTOR =

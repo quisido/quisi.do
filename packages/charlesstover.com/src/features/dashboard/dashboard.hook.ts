@@ -3,11 +3,12 @@ import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import useAsyncState from '../../modules/use-async-state';
 import type RumMetrics from '../../types/rum-metrics';
+import UptimeChecks from '../../types/uptime-checks';
 import mapRecordToSum from './utils/map-record-to-sum';
 
 interface Props {
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
-  readonly onUptimeRequest: () => Promise<unknown>;
+  readonly onUptimeChecksRequest: () => Promise<UptimeChecks>;
 }
 
 interface State {
@@ -25,22 +26,28 @@ interface State {
   readonly isApdexLoading: boolean;
   readonly isErrorsInitiated: boolean;
   readonly isErrorsLoading: boolean;
-  readonly isUptimeInitiated: boolean;
-  readonly isUptimeLoading: boolean;
+  readonly isUptimeChecksInitiated: boolean;
+  readonly isUptimeChecksLoading: boolean;
   readonly isWebVitalsInitiated: boolean;
   readonly isWebVitalsLoading: boolean;
+  readonly lastUptimeCheckStatus: boolean;
+  readonly lastUptimeCheckTimestamp: number;
   readonly lcpP95: number;
   readonly lcpTm95: number;
   readonly satisfiedTimeSeries: Record<string, number>;
   readonly sessionCountTimeSeries: Record<string, number>;
   readonly toleratedTimeSeries: Record<string, number>;
-  readonly uptime: unknown;
-  readonly uptimeError: string | null;
+  readonly uptimeChecks: UptimeChecks | null;
+  readonly uptimeChecksError: string | null;
+  readonly uptimeErrors: readonly unknown[];
+  readonly uptimeMessages: readonly unknown[];
   readonly webVitalsError: string | null;
 }
 
 const DAYS_PER_WEEK = 7;
 const EMPTY: Record<string, never> = Object.freeze({});
+const NONE: readonly never[] = Object.freeze([]);
+const NOT_FOUND = -1;
 
 // Additionally, we have access to `PerformanceNavigationDuration`.
 
@@ -110,7 +117,7 @@ const clsPow = Math.pow(BASE, CUMULATIVE_LAYOUT_SHIFT_PRECISION);
 
 export default function useDashboard({
   onRumMetricsRequest,
-  onUptimeRequest,
+  onUptimeChecksRequest,
 }: Readonly<Props>): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
@@ -123,11 +130,11 @@ export default function useDashboard({
   } = useAsyncState(onRumMetricsRequest);
 
   const {
-    data: uptime,
-    error: uptimeError,
-    initiated: isUptimeInitiated,
-    loading: isUptimeLoading,
-  } = useAsyncState(onUptimeRequest);
+    data: uptimeChecks,
+    error: uptimeChecksError,
+    initiated: isUptimeChecksInitiated,
+    loading: isUptimeChecksLoading,
+  } = useAsyncState(onUptimeChecksRequest);
 
   const sessionCountTimeSeries: Record<string, number> = EMPTY;
 
@@ -145,8 +152,8 @@ export default function useDashboard({
     isApdexLoading: isRumMetricsLoading,
     isErrorsInitiated: isRumMetricsInitiated,
     isErrorsLoading: isRumMetricsLoading,
-    isUptimeInitiated,
-    isUptimeLoading,
+    isUptimeChecksInitiated,
+    isUptimeChecksLoading,
     isWebVitalsInitiated: isRumMetricsInitiated,
     isWebVitalsLoading: isRumMetricsLoading,
     lcpP95: 0,
@@ -154,8 +161,10 @@ export default function useDashboard({
     satisfiedTimeSeries: EMPTY,
     sessionCountTimeSeries,
     toleratedTimeSeries: EMPTY,
-    uptime,
-    uptimeError,
+    uptimeChecks,
+    uptimeChecksError,
+    uptimeErrors: uptimeChecks ? uptimeChecks.errors : NONE,
+    uptimeMessages: uptimeChecks ? uptimeChecks.messages : NONE,
     webVitalsError: rumMetricsError,
 
     dailySessionCount: useMemo(
@@ -163,5 +172,13 @@ export default function useDashboard({
         Math.ceil(mapRecordToSum(sessionCountTimeSeries) / DAYS_PER_WEEK),
       [sessionCountTimeSeries],
     ),
+
+    lastUptimeCheckStatus: uptimeChecks
+      ? uptimeChecks.status === 'ONLINE'
+      : true,
+
+    lastUptimeCheckTimestamp: uptimeChecks
+      ? uptimeChecks.lastChecked
+      : NOT_FOUND,
   };
 }
