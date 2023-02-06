@@ -2,7 +2,8 @@ import FullStory from 'fullstory-react';
 import type { ReactElement } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Theme from '../../components/theme';
-import RumMetrics from '../../types/rum-metrics';
+import type RumMetrics from '../../types/rum-metrics';
+import type UptimeChecks from '../../types/uptime-checks';
 import CloudflareInsights from './components/cloudflare-insights/cloudflare-insights.view';
 // import GoogleAnalytics from '../../modules/react-google-analytics';
 import CloudWatchRUM from './components/cloudwatch-rum';
@@ -23,12 +24,12 @@ The App root component mounts context providers for the whole application.
 
 interface Props {
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
-  readonly onUptimeRequest: () => Promise<unknown>;
+  readonly onUptimeChecksRequest: () => Promise<UptimeChecks>;
 }
 
 export default function App({
   onRumMetricsRequest,
-  onUptimeRequest,
+  onUptimeChecksRequest,
 }: Readonly<Props>): ReactElement {
   return (
     <CloudWatchRUM>
@@ -45,7 +46,7 @@ export default function App({
                       <Theme>
                         <Routes
                           onRumMetricsRequest={onRumMetricsRequest}
-                          onUptimeRequest={onUptimeRequest}
+                          onUptimeChecksRequest={onUptimeChecksRequest}
                         />
                       </Theme>
                     </Sentry>

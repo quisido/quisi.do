@@ -1,0 +1,4 @@
+/**/*.md
+/dist/
+/jest/
+/node_modules/

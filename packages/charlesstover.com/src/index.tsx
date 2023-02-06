@@ -3,18 +3,12 @@ import ROOT from './constants/root';
 import App from './features/app';
 import RumMetrics from './utils/rum-metrics';
 import './constants/open-telemetry-provider';
-import OnlineOrNot from './utils/oneline-or-not';
+import handleUptimeChecksRequest from './utils/handle-uptime-checks-request';
 
 const RUM_METRICS_ACCESS_KEY = '0123-4567-89ab-cdef';
 const RUM_ERROR: Error = new Error(
   'Real User Monitoring is currently disabled.',
 );
-
-const onlineOrNot: OnlineOrNot = new OnlineOrNot({
-  fetch: window.fetch.bind(window),
-  id: '9NK7GzKy',
-  token: 'O-Y6-0zuUBd1NzpNrQlNl8phdpX26jye__vIZife',
-});
 
 const rumMetrics: RumMetrics = new RumMetrics({
   accessKey: RUM_METRICS_ACCESS_KEY,
@@ -27,7 +21,7 @@ ROOT.render(
   <StrictMode>
     <App
       onRumMetricsRequest={rumMetrics.handleRequest}
-      onUptimeRequest={onlineOrNot.handleUptimeRequest}
+      onUptimeChecksRequest={handleUptimeChecksRequest}
     />
   </StrictMode>,
 );

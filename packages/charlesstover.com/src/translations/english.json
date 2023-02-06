@@ -66,7 +66,7 @@
   "Notifications": "Notifications",
   "Nov.": "Nov.",
   "Oct.": "Oct.",
-  "Online": "Online",
+  "Currently online: $status": "Currently online: $status",
   "Only publications with more than $count views are shown.": "Only publications with more than $count views are shown.",
   "Package name": "Package name",
   "Packages": "Packages",

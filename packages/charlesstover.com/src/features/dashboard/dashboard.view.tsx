@@ -4,16 +4,17 @@ import Container from '../../components/container';
 import Div from '../../components/div';
 import Link from '../../components/link';
 import RumMetrics from '../../types/rum-metrics';
+import UptimeChecksType from '../../types/uptime-checks';
 import Apdex from './components/apdex';
 import DailySessions from './components/daily-sessions';
 import Errors from './components/errors';
-import Uptime from './components/uptime';
+import UptimeChecksComponent from './components/uptime-checks';
 import WebVitals from './components/web-vitals';
 import useDashboard from './dashboard.hook';
 
 export interface Props {
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
-  readonly onUptimeRequest: () => Promise<unknown>;
+  readonly onUptimeChecksRequest: () => Promise<UptimeChecksType>;
 }
 
 const NONE = 0;
@@ -26,7 +27,7 @@ const GITHUB_WORKFLOW_STATUS_HREF =
 
 export default function Dashboard({
   onRumMetricsRequest,
-  onUptimeRequest,
+  onUptimeChecksRequest,
 }: Readonly<Props>): ReactElement {
   const {
     apdexError,
@@ -43,21 +44,24 @@ export default function Dashboard({
     isApdexLoading,
     isErrorsInitiated,
     isErrorsLoading,
-    isUptimeInitiated,
-    isUptimeLoading,
+    isUptimeChecksInitiated,
+    isUptimeChecksLoading,
     isWebVitalsInitiated,
     isWebVitalsLoading,
+    lastUptimeCheckStatus,
+    lastUptimeCheckTimestamp,
     lcpP95,
     lcpTm95,
     satisfiedTimeSeries,
     sessionCountTimeSeries,
     toleratedTimeSeries,
-    uptime,
-    uptimeError,
+    uptimeChecksError,
+    uptimeErrors,
+    uptimeMessages,
     webVitalsError,
   } = useDashboard({
     onRumMetricsRequest,
-    onUptimeRequest,
+    onUptimeChecksRequest,
   });
 
   return (
@@ -86,13 +90,15 @@ export default function Dashboard({
           )}
         </Div>
       </Container>
-      <Uptime
-        error={uptimeError}
-        initiated={isUptimeInitiated}
-        loading={isUptimeLoading}
-      >
-        {uptime}
-      </Uptime>
+      <UptimeChecksComponent
+        error={uptimeChecksError}
+        initiated={isUptimeChecksInitiated}
+        lastCheckedStatus={lastUptimeCheckStatus}
+        lastCheckedTimestamp={lastUptimeCheckTimestamp}
+        loading={isUptimeChecksLoading}
+        uptimeErrors={uptimeErrors}
+        uptimeMessages={uptimeMessages}
+      />
       <Errors
         error={errorsError}
         errorCountTimeSeries={errorCountTimeSeries}
