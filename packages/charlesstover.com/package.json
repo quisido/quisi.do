@@ -37,7 +37,7 @@
     "prepack": "yarn run build",
     "prepublish": "yarn run eslint && yarn run jest && yarn run lighthouse && yarn run cypress && yarn run coverage",
     "serve": "serve --single build",
-    "start": "DISABLE_ESLINT_PLUGIN=true react-app-rewired start"
+    "start": "DISABLE_ESLINT_PLUGIN=true REACT_APP_CLOUDFLARE_ANALYTICS_API=http://localhost:8787 react-app-rewired start"
   },
   "devDependencies": {
     "@awsui/components-react": "^3.0.734",

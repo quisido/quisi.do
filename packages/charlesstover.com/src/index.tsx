@@ -3,6 +3,7 @@ import ROOT from './constants/root';
 import App from './features/app';
 import RumMetrics from './utils/rum-metrics';
 import './constants/open-telemetry-provider';
+import handleCloudflareAnalyticsRequest from './utils/handle-cloudflare-analytics-request';
 import handleUptimeChecksRequest from './utils/handle-uptime-checks-request';
 
 const RUM_METRICS_ACCESS_KEY = '0123-4567-89ab-cdef';
@@ -20,55 +21,9 @@ const rumMetrics: RumMetrics = new RumMetrics({
 ROOT.render(
   <StrictMode>
     <App
+      onCloudflareAnalyticsRequest={handleCloudflareAnalyticsRequest}
       onRumMetricsRequest={rumMetrics.handleRequest}
       onUptimeChecksRequest={handleUptimeChecksRequest}
     />
   </StrictMode>,
 );
-
-/*
-const CLOUDFLARE_GRAPHQL_ANALYTICS_TOKEN =
-  't1MqGb9MXf5Tt8kdT5_WimPe3pE8HY31cWkSbMCx';
-
-fetch('https://api.cloudflare.com/client/v4/graphql', {
-  body: JSON.stringify({
-    query: `{
-  viewer {
-    zones(filter: { zoneTag: $zoneTag }) {
-      firewallEventsAdaptive(
-        limit: 10
-        orderBy: [datetime_DESC]
-      ) {
-        action
-        clientAsn
-        clientCountryName
-        clientIP
-        clientRequestPath
-        clientRequestQuery
-        datetime
-        source
-        userAgent
-      }
-    }
-  }
-}`,
-    variables: {
-      zoneTag: 'f6bf27c1cb4d60471e5684a9e4bed29f',
-      // filter: {
-      //   datetime_geq: new Date(
-      //     Date.now() - 1000 * 60 * 60 * 24 * 30,
-      //   ).toISOString(),
-      //   datetime_leq: new Date().toISOString(),
-      // },
-    },
-  }),
-  headers: {
-    Authorization: `Bearer ${CLOUDFLARE_GRAPHQL_ANALYTICS_TOKEN}`,
-    'Content-Type': 'application/json',
-    'X-Auth-Email': 'cloudflare@charlesstover.com',
-  },
-  method: 'POST',
-})
-  .then(console.log)
-  .catch(console.error);
-*/

@@ -8,11 +8,13 @@ import Publications from '../../../../features/publications';
 import Quotes from '../../../../features/quotes';
 import SpriteSheet2Gif from '../../../../features/spritesheet2gif';
 import type RumMetrics from '../../../../types/rum-metrics';
+import type CloudflareAnalytics from '../../../../types/types';
 import type UptimeChecks from '../../../../types/uptime-checks';
 import mapHrefToRedirectComponent from '../../utils/map-href-to-redirect-component';
 import mapPathToRedirectComponent from '../../utils/map-path-to-redirect-component';
 
 interface Props {
+  readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
   readonly onUptimeChecksRequest: () => Promise<UptimeChecks>;
 }
@@ -37,6 +39,7 @@ const ElectronTransitions = mapHrefToRedirectComponent(
 const SentryRoutes = withSentryReactRouterV6Routing(Routes);
 
 export default function AppRoutes({
+  onCloudflareAnalyticsRequest,
   onRumMetricsRequest,
   onUptimeChecksRequest,
 }: Readonly<Props>): ReactElement {
@@ -51,6 +54,7 @@ export default function AppRoutes({
       <Route
         element={
           <Dashboard
+            onCloudflareAnalyticsRequest={onCloudflareAnalyticsRequest}
             onRumMetricsRequest={onRumMetricsRequest}
             onUptimeChecksRequest={onUptimeChecksRequest}
           />
