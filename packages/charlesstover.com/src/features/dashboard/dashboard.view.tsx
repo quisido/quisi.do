@@ -3,8 +3,10 @@ import type { ReactElement } from 'react';
 import Container from '../../components/container';
 import Div from '../../components/div';
 import Link from '../../components/link';
-import RumMetrics from '../../types/rum-metrics';
-import UptimeChecksType from '../../types/uptime-checks';
+import LoadingIcon from '../../components/loading-icon/loading-icon.root.view';
+import type RumMetrics from '../../types/rum-metrics';
+import type CloudflareAnalytics from '../../types/types';
+import type UptimeChecksType from '../../types/uptime-checks';
 import Apdex from './components/apdex';
 import DailySessions from './components/daily-sessions';
 import Errors from './components/errors';
@@ -13,6 +15,7 @@ import WebVitals from './components/web-vitals';
 import useDashboard from './dashboard.hook';
 
 export interface Props {
+  readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
   readonly onUptimeChecksRequest: () => Promise<UptimeChecksType>;
 }
@@ -26,11 +29,14 @@ const GITHUB_WORKFLOW_STATUS_HREF =
   'https://github.com/CharlesStover/charlesstover.com/actions/workflows/charlesstover-com.yml';
 
 export default function Dashboard({
+  onCloudflareAnalyticsRequest,
   onRumMetricsRequest,
   onUptimeChecksRequest,
 }: Readonly<Props>): ReactElement {
   const {
     apdexError,
+    cloudflareAnalytics,
+    cloudflareAnalyticsError,
     clsP95,
     clsTm95,
     dailySessionCount,
@@ -42,6 +48,8 @@ export default function Dashboard({
     githubWorkflowStatusAlt,
     isApdexInitiated,
     isApdexLoading,
+    isCloudflareAnalyticsInitiated,
+    isCloudflareAnalyticsLoading,
     isErrorsInitiated,
     isErrorsLoading,
     isUptimeChecksInitiated,
@@ -60,6 +68,7 @@ export default function Dashboard({
     uptimeMessages,
     webVitalsError,
   } = useDashboard({
+    onCloudflareAnalyticsRequest,
     onRumMetricsRequest,
     onUptimeChecksRequest,
   });
@@ -125,6 +134,17 @@ export default function Dashboard({
         lcpTm95={lcpTm95}
         loading={isWebVitalsLoading}
       />
+      <Container header="Coming soon..." marginTop="large">
+        {!isCloudflareAnalyticsInitiated ? (
+          <I18n>Initiating</I18n>
+        ) : isCloudflareAnalyticsLoading ? (
+          <LoadingIcon />
+        ) : cloudflareAnalyticsError !== null ? (
+          <>{cloudflareAnalyticsError}</>
+        ) : (
+          JSON.stringify(cloudflareAnalytics)
+        )}
+      </Container>
     </>
   );
 }

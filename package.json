@@ -25,7 +25,7 @@
     "eslint:fix": "eslint '**/*' --fix",
     "prepack": "yarn workspaces foreach --parallel --topological-dev run prepack",
     "prepublish": "yarn run eslint && yarn run test && yarn workspaces foreach --interlaced --parallel --topological-dev --verbose run prepublish",
-    "start": "yarn packages/charlesstover.com run start",
+    "start": "concurrently --kill-others --kill-others-on-fail --names charlesstover.com,cloudflare-analytics \"yarn packages/charlesstover.com run start\" \"yarn packages/cloudflare-analytics-worker run start\"",
     "test": "monorepo-template-test",
     "up": "yarn up \"@*/*\" \"!(aws-rum-react|react-datadog|unknown2string|use-offline)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
   },
@@ -42,6 +42,7 @@
     "@typescript-eslint/parser": "^5.50.0",
     "@yarnpkg/sdks": "^3.0.0-rc.38",
     "browserslist": "^4.21.5",
+    "concurrently": "^7.6.0",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",

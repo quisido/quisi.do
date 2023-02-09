@@ -3,10 +3,12 @@ import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import useAsyncState from '../../modules/use-async-state';
 import type RumMetrics from '../../types/rum-metrics';
-import UptimeChecks from '../../types/uptime-checks';
+import type CloudflareAnalytics from '../../types/types';
+import type UptimeChecks from '../../types/uptime-checks';
 import mapRecordToSum from './utils/map-record-to-sum';
 
 interface Props {
+  readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
   readonly onUptimeChecksRequest: () => Promise<UptimeChecks>;
 }
@@ -15,6 +17,8 @@ interface State {
   readonly apdexError: string | null;
   readonly clsP95: number;
   readonly clsTm95: number;
+  readonly cloudflareAnalytics: CloudflareAnalytics | null;
+  readonly cloudflareAnalyticsError: string | null;
   readonly dailySessionCount: number;
   readonly errorCountTimeSeries: Record<string, number>;
   readonly errorsError: string | null;
@@ -24,6 +28,8 @@ interface State {
   readonly githubWorkflowStatusAlt: string | undefined;
   readonly isApdexInitiated: boolean;
   readonly isApdexLoading: boolean;
+  readonly isCloudflareAnalyticsInitiated: boolean;
+  readonly isCloudflareAnalyticsLoading: boolean;
   readonly isErrorsInitiated: boolean;
   readonly isErrorsLoading: boolean;
   readonly isUptimeChecksInitiated: boolean;
@@ -116,6 +122,7 @@ const clsPow = Math.pow(BASE, CUMULATIVE_LAYOUT_SHIFT_PRECISION);
 */
 
 export default function useDashboard({
+  onCloudflareAnalyticsRequest,
   onRumMetricsRequest,
   onUptimeChecksRequest,
 }: Readonly<Props>): State {
@@ -123,6 +130,13 @@ export default function useDashboard({
   const translate: TranslateFunction = useTranslate();
 
   // States
+  const {
+    data: cloudflareAnalytics,
+    error: cloudflareAnalyticsError,
+    initiated: isCloudflareAnalyticsInitiated,
+    loading: isCloudflareAnalyticsLoading,
+  } = useAsyncState(onCloudflareAnalyticsRequest);
+
   const {
     error: rumMetricsError,
     initiated: isRumMetricsInitiated,
@@ -140,6 +154,8 @@ export default function useDashboard({
 
   return {
     apdexError: rumMetricsError,
+    cloudflareAnalytics,
+    cloudflareAnalyticsError,
     clsP95: 0,
     clsTm95: 0,
     errorCountTimeSeries: EMPTY,
@@ -150,6 +166,8 @@ export default function useDashboard({
     githubWorkflowStatusAlt: translate('GitHub workflow status'),
     isApdexInitiated: isRumMetricsInitiated,
     isApdexLoading: isRumMetricsLoading,
+    isCloudflareAnalyticsInitiated,
+    isCloudflareAnalyticsLoading,
     isErrorsInitiated: isRumMetricsInitiated,
     isErrorsLoading: isRumMetricsLoading,
     isUptimeChecksInitiated,

@@ -1,0 +1,105 @@
+export default interface CloudflareAnalytics {
+  readonly budget: number;
+  readonly datasets: CloudflareAnalyticsDatasets;
+}
+
+interface CloudflareAnalyticsDatasets {
+  readonly rumPageloadEventsAdaptiveGroups: Record<
+    'count' | 'sampleInterval.avg' | 'visits.sum',
+    number
+  >;
+  readonly rumPerformanceEventsAdaptiveGroups: Record<
+    | 'connectionTime.avg'
+    | 'connectionTimeP50'
+    | 'connectionTimeP75'
+    | 'connectionTimeP90'
+    | 'connectionTimeP99'
+    | 'count'
+    | 'dnsTime.avg'
+    | 'dnsTimeP50'
+    | 'dnsTimeP75'
+    | 'dnsTimeP90'
+    | 'dnsTimeP99'
+    | 'firstContentfulPaint.avg'
+    | 'firstContentfulPaintP50'
+    | 'firstContentfulPaintP75'
+    | 'firstContentfulPaintP90'
+    | 'firstContentfulPaintP99'
+    | 'firstPaint.avg'
+    | 'firstPaintP50'
+    | 'firstPaintP75'
+    | 'firstPaintP90'
+    | 'firstPaintP99'
+    | 'loadEventTime.avg'
+    | 'loadEventTimeP50'
+    | 'loadEventTimeP75'
+    | 'loadEventTimeP90'
+    | 'loadEventTimeP99'
+    | 'pageLoadTime.avg'
+    | 'pageLoadTimeP50'
+    | 'pageLoadTimeP75'
+    | 'pageLoadTimeP90'
+    | 'pageLoadTimeP99'
+    | 'pageRenderTime.avg'
+    | 'pageRenderTimeP50'
+    | 'pageRenderTimeP75'
+    | 'pageRenderTimeP90'
+    | 'pageRenderTimeP99'
+    | 'requestTime.avg'
+    | 'requestTimeP50'
+    | 'requestTimeP75'
+    | 'requestTimeP90'
+    | 'requestTimeP99'
+    | 'responseTime.avg'
+    | 'responseTimeP50'
+    | 'responseTimeP75'
+    | 'responseTimeP90'
+    | 'responseTimeP99'
+    | 'sampleInterval.avg'
+    | 'visits.sum',
+    number
+  >;
+  readonly workersAnalyticsEngineAdaptiveGroups: Record<'count', number>;
+  readonly workersInvocationsAdaptive: Record<
+    | 'cpuTime.max'
+    | 'cpuTime.min'
+    | 'cpuTimeP25'
+    | 'cpuTimeP50'
+    | 'cpuTimeP75'
+    | 'cpuTimeP90'
+    | 'cpuTimeP99'
+    | 'cpuTimeP999'
+    | 'duration.max'
+    | 'duration.min'
+    | 'duration.sum'
+    | 'durationP25'
+    | 'durationP50'
+    | 'durationP75'
+    | 'durationP90'
+    | 'durationP99'
+    | 'durationP999'
+    | 'errors.sum'
+    | 'requests.sum'
+    | 'responseBodySize.max'
+    | 'responseBodySize.min'
+    | 'responseBodySize.sum'
+    | 'responseBodySizeP25'
+    | 'responseBodySizeP50'
+    | 'responseBodySizeP75'
+    | 'responseBodySizeP90'
+    | 'responseBodySizeP99'
+    | 'responseBodySizeP999'
+    | 'sampleInterval.avg'
+    | 'subrequests.sum'
+    | 'wallTime.max'
+    | 'wallTime.min'
+    | 'wallTime.sum'
+    | 'wallTimeP25'
+    | 'wallTimeP50'
+    | 'wallTimeP75'
+    | 'wallTimeP90'
+    | 'wallTimeP99'
+    | 'wallTimeP999',
+    number
+  >;
+}

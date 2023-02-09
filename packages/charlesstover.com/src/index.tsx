@@ -4,6 +4,8 @@ import App from './features/app';
 import RumMetrics from './utils/rum-metrics';
 import './constants/open-telemetry-provider';
 import handleUptimeChecksRequest from './utils/handle-uptime-checks-request';
+import CLOUDFLARE_ANALYTICS_API_URL from './constants/cloudflare-analytics-api-url';
+import CloudflareAnalytics from './types/types';
 
 const RUM_METRICS_ACCESS_KEY = '0123-4567-89ab-cdef';
 const RUM_ERROR: Error = new Error(
@@ -17,58 +19,18 @@ const rumMetrics: RumMetrics = new RumMetrics({
   },
 });
 
+const handleCloudflareAnalyticsRequest =
+  async (): Promise<CloudflareAnalytics> => {
+    const response: Response = await fetch(CLOUDFLARE_ANALYTICS_API_URL);
+    return await response.json();
+  };
+
 ROOT.render(
   <StrictMode>
     <App
+      onCloudflareAnalyticsRequest={handleCloudflareAnalyticsRequest}
       onRumMetricsRequest={rumMetrics.handleRequest}
       onUptimeChecksRequest={handleUptimeChecksRequest}
     />
   </StrictMode>,
 );
-
-/*
-const CLOUDFLARE_GRAPHQL_ANALYTICS_TOKEN =
-  't1MqGb9MXf5Tt8kdT5_WimPe3pE8HY31cWkSbMCx';
-
-fetch('https://api.cloudflare.com/client/v4/graphql', {
-  body: JSON.stringify({
-    query: `{
-  viewer {
-    zones(filter: { zoneTag: $zoneTag }) {
-      firewallEventsAdaptive(
-        limit: 10
-        orderBy: [datetime_DESC]
-      ) {
-        action
-        clientAsn
-        clientCountryName
-        clientIP
-        clientRequestPath
-        clientRequestQuery
-        datetime
-        source
-        userAgent
-      }
-    }
-  }
-}`,
-    variables: {
-      zoneTag: 'f6bf27c1cb4d60471e5684a9e4bed29f',
-      // filter: {
-      //   datetime_geq: new Date(
-      //     Date.now() - 1000 * 60 * 60 * 24 * 30,
-      //   ).toISOString(),
-      //   datetime_leq: new Date().toISOString(),
-      // },
-    },
-  }),
-  headers: {
-    Authorization: `Bearer ${CLOUDFLARE_GRAPHQL_ANALYTICS_TOKEN}`,
-    'Content-Type': 'application/json',
-    'X-Auth-Email': 'cloudflare@charlesstover.com',
-  },
-  method: 'POST',
-})
-  .then(console.log)
-  .catch(console.error);
-*/

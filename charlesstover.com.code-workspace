@@ -13,6 +13,10 @@
       "path": "packages/charlesstover.com"
     },
     {
+      "name": "Cloudflare Analytics worker",
+      "path": "packages/cloudflare-analytics-worker"
+    },
+    {
       "name": "React Datadog",
       "path": "packages/react-datadog"
     },

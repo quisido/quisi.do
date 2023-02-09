@@ -2,10 +2,11 @@ import FullStory from 'fullstory-react';
 import type { ReactElement } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Theme from '../../components/theme';
-import type RumMetrics from '../../types/rum-metrics';
-import type UptimeChecks from '../../types/uptime-checks';
-import CloudflareInsights from './components/cloudflare-insights/cloudflare-insights.view';
 // import GoogleAnalytics from '../../modules/react-google-analytics';
+import type RumMetrics from '../../types/rum-metrics';
+import type CloudflareAnalytics from '../../types/types';
+import type UptimeChecks from '../../types/uptime-checks';
+import CloudflareInsights from './components/cloudflare-insights';
 import CloudWatchRUM from './components/cloudwatch-rum';
 import Contexts from './components/contexts';
 import Datadog from './components/datadog';
@@ -23,11 +24,13 @@ The App root component mounts context providers for the whole application.
 */
 
 interface Props {
+  readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
   readonly onUptimeChecksRequest: () => Promise<UptimeChecks>;
 }
 
 export default function App({
+  onCloudflareAnalyticsRequest,
   onRumMetricsRequest,
   onUptimeChecksRequest,
 }: Readonly<Props>): ReactElement {
@@ -45,6 +48,9 @@ export default function App({
                     <Sentry>
                       <Theme>
                         <Routes
+                          onCloudflareAnalyticsRequest={
+                            onCloudflareAnalyticsRequest
+                          }
                           onRumMetricsRequest={onRumMetricsRequest}
                           onUptimeChecksRequest={onUptimeChecksRequest}
                         />

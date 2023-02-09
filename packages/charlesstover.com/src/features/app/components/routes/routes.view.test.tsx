@@ -15,6 +15,7 @@ describe('App', (): void => {
   it('should reroute "Become the junior developer that companies want to hire" to Medium', (): void => {
     render(
       <Routes
+        onCloudflareAnalyticsRequest={jest.fn()}
         onRumMetricsRequest={jest.fn()}
         onUptimeChecksRequest={jest.fn()}
       />,
