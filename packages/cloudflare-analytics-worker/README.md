@@ -23,6 +23,6 @@ the account tag, and the zone tag.
 
 ```sh
 echo "API token:" && wrangler secret put API_TOKEN;
-echo \"Account tag:\" && wrangler secret put ACCOUNT_TAG;
-echo \"Zone tag:\" && wrangler secret put ZONE_TAG;
+echo "Account tag:" && wrangler secret put ACCOUNT_TAG;
+echo "Zone tag:" && wrangler secret put ZONE_TAG;
 ```
