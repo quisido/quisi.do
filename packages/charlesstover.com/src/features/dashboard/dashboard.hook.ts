@@ -51,8 +51,9 @@ interface State {
 }
 
 const DAYS_PER_WEEK = 7;
-const EMPTY: Record<string, never> = Object.freeze({});
-const NONE: readonly never[] = Object.freeze([]);
+const EMPTY_ARRAY: readonly never[] = Object.freeze([]);
+const EMPTY_RECORD: Record<string, never> = Object.freeze({});
+const NONE = 0;
 const NOT_FOUND = -1;
 
 // Additionally, we have access to `PerformanceNavigationDuration`.
@@ -150,21 +151,20 @@ export default function useDashboard({
     loading: isUptimeChecksLoading,
   } = useAsyncState(onUptimeChecksRequest);
 
-  const sessionCountTimeSeries: Record<string, number> = EMPTY;
-
+  const sessionCountTimeSeries: Record<string, number> = EMPTY_RECORD;
   return {
     apdexError: rumMetricsError,
     cloudflareAnalyticsBudget: cloudflareAnalytics
       ? cloudflareAnalytics.budget
-      : 0,
+      : NONE,
     cloudflareAnalyticsError,
     clsP95: 0,
     clsTm95: 0,
-    errorCountTimeSeries: EMPTY,
+    errorCountTimeSeries: EMPTY_RECORD,
     errorsError: rumMetricsError,
     fidP95: 0,
     fidTm95: 0,
-    frustratedTimeSeries: EMPTY,
+    frustratedTimeSeries: EMPTY_RECORD,
     githubWorkflowStatusAlt: translate('GitHub workflow status'),
     isApdexInitiated: isRumMetricsInitiated,
     isApdexLoading: isRumMetricsLoading,
@@ -178,13 +178,13 @@ export default function useDashboard({
     isWebVitalsLoading: isRumMetricsLoading,
     lcpP95: 0,
     lcpTm95: 0,
-    satisfiedTimeSeries: EMPTY,
+    satisfiedTimeSeries: EMPTY_RECORD,
     sessionCountTimeSeries,
-    toleratedTimeSeries: EMPTY,
+    toleratedTimeSeries: EMPTY_RECORD,
     uptimeChecks,
     uptimeChecksError,
-    uptimeErrors: uptimeChecks ? uptimeChecks.errors : NONE,
-    uptimeMessages: uptimeChecks ? uptimeChecks.messages : NONE,
+    uptimeErrors: uptimeChecks ? uptimeChecks.errors : EMPTY_ARRAY,
+    uptimeMessages: uptimeChecks ? uptimeChecks.messages : EMPTY_ARRAY,
     webVitalsError: rumMetricsError,
 
     dailySessionCount: useMemo(
