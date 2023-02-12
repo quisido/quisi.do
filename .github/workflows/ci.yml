@@ -78,12 +78,17 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable
+      - name: Enable Plug-n-Play
+        run: yarn cypress:pnp
+        working-directory: packages/charlesstover.com
       - name: Install Cypress
         uses: cypress-io/github-action@v4
         with:
+          command-prefix: yarn dlx
+          config-file: cypress.config.cjs
           install: true
           runTests: false
-          working-directory: packages/charlesstover.com
+          working-directory: packages/charlesstover.com/
     strategy:
       fail-fast: true
       matrix:
