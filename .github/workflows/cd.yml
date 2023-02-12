@@ -1,7 +1,7 @@
 name: Continuous deployment
 
 jobs:
-  # Stage 1: analyze, install
+  # Stage 1: analyze, install-yarn
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
@@ -36,8 +36,8 @@ jobs:
       matrix:
         language: ['javascript']
 
-  install:
-    name: Install
+  install-yarn:
+    name: Install (Yarn)
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -62,10 +62,39 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-  # Stage 2: prepack, prepublish-only
+  # Stage 2: install-cypress, prepack, prepublish-only
+  install-cypress:
+    name: Install (Cypress)
+    needs: install-yarn
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Enable Plug-n-Play
+        run: yarn cypress:pnp
+        working-directory: packages/charlesstover.com
+      - name: Install Cypress
+        uses: cypress-io/github-action@v4
+        with:
+          install: true
+          runTests: false
+          working-directory: packages/charlesstover.com
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu, windows]
+
   prepack:
     name: Prepack
-    needs: install
+    needs: install-yarn
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -105,7 +134,7 @@ jobs:
 
   prepublish-only:
     name: Prepublish only
-    needs: prepack
+    needs: install-yarn
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -135,7 +164,7 @@ jobs:
   # Stage 3: cypress, lighthouse, npm, prepublish
   cypress:
     name: Cypress
-    needs: prepack
+    needs: [install-cypress, prepack]
     runs-on: ${{ matrix.os }}-latest
     ## Container operations are only supported on Linux runners.
     # env:
@@ -168,12 +197,6 @@ jobs:
       - name: Enable Plug-n-Play
         run: yarn cypress:pnp
         working-directory: packages/charlesstover.com
-      - name: Install Cypress
-        uses: cypress-io/github-action@v4
-        with:
-          install: false
-          runTests: false
-          working-directory: packages/charlesstover.com
       - name: End-to-end test
         uses: cypress-io/github-action@v4
         env:
@@ -374,7 +397,7 @@ jobs:
       - name: Download prepublish artifacts
         uses: actions/download-artifact@v3
         with:
-          name: prepbulish
+          name: prepublish
           path: packages/
       - name: Setup Node
         uses: actions/setup-node@v3
