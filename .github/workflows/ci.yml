@@ -57,6 +57,7 @@ jobs:
       - name: Prepack
         run: yarn run prepack
         env:
+          CI: false
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
       - name: Upload artifacts
