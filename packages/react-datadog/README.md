@@ -1,7 +1,8 @@
 # React Datadog
 
+[![CI](https://github.com/CharlesStover/charlesstover.com/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/charlesstover.com/actions/workflows/ci.yml)
+[![CD](https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml)
 [![version](https://img.shields.io/npm/v/react-datadog.svg)](https://www.npmjs.com/package/react-datadog)
-[![minzipped size](https://img.shields.io/bundlephobia/minzip/react-datadog.svg)](https://www.npmjs.com/package/react-datadog)
 [![downloads](https://img.shields.io/npm/dt/react-datadog.svg)](https://www.npmjs.com/package/react-datadog)
 
 `react-datadog` is a collection of React utility components and hooks for

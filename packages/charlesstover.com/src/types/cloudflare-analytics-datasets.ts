@@ -1,9 +1,4 @@
-export default interface CloudflareAnalytics {
-  readonly budget: number;
-  readonly datasets: CloudflareAnalyticsDatasets;
-}
-
-interface CloudflareAnalyticsDatasets {
+export default interface CloudflareAnalyticsDatasets {
   readonly rumPageloadEventsAdaptiveGroups: Record<
     'count' | 'sampleInterval.avg' | 'visits.sum',
     number

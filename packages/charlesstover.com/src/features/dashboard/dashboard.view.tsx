@@ -3,11 +3,11 @@ import type { ReactElement } from 'react';
 import Container from '../../components/container';
 import Div from '../../components/div';
 import Link from '../../components/link';
-import LoadingIcon from '../../components/loading-icon/loading-icon.root.view';
+import type CloudflareAnalyticsType from '../../types/cloudflare-analytics';
 import type RumMetrics from '../../types/rum-metrics';
-import type CloudflareAnalytics from '../../types/types';
 import type UptimeChecksType from '../../types/uptime-checks';
 import Apdex from './components/apdex';
+import CloudflareAnalyticsComponent from './components/cloudflare-analytics';
 import DailySessions from './components/daily-sessions';
 import Errors from './components/errors';
 import UptimeChecksComponent from './components/uptime-checks';
@@ -15,7 +15,7 @@ import WebVitals from './components/web-vitals';
 import useDashboard from './dashboard.hook';
 
 export interface Props {
-  readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
+  readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalyticsType>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
   readonly onUptimeChecksRequest: () => Promise<UptimeChecksType>;
 }
@@ -35,7 +35,7 @@ export default function Dashboard({
 }: Readonly<Props>): ReactElement {
   const {
     apdexError,
-    cloudflareAnalytics,
+    cloudflareAnalyticsBudget,
     cloudflareAnalyticsError,
     clsP95,
     clsTm95,
@@ -108,13 +108,6 @@ export default function Dashboard({
         uptimeErrors={uptimeErrors}
         uptimeMessages={uptimeMessages}
       />
-      <Errors
-        error={errorsError}
-        errorCountTimeSeries={errorCountTimeSeries}
-        initiated={isErrorsInitiated}
-        loading={isErrorsLoading}
-        sessionCountTimeSeries={sessionCountTimeSeries}
-      />
       <Apdex
         error={apdexError}
         frustratedTimeSeries={frustratedTimeSeries}
@@ -122,6 +115,19 @@ export default function Dashboard({
         loading={isApdexLoading}
         satisfiedTimeSeries={satisfiedTimeSeries}
         toleratedTimeSeries={toleratedTimeSeries}
+      />
+      <CloudflareAnalyticsComponent
+        budget={cloudflareAnalyticsBudget}
+        error={cloudflareAnalyticsError}
+        initiated={isCloudflareAnalyticsInitiated}
+        loading={isCloudflareAnalyticsLoading}
+      />
+      <Errors
+        error={errorsError}
+        errorCountTimeSeries={errorCountTimeSeries}
+        initiated={isErrorsInitiated}
+        loading={isErrorsLoading}
+        sessionCountTimeSeries={sessionCountTimeSeries}
       />
       <WebVitals
         clsP95={clsP95}
@@ -134,17 +140,6 @@ export default function Dashboard({
         lcpTm95={lcpTm95}
         loading={isWebVitalsLoading}
       />
-      <Container header="Coming soon..." marginTop="large">
-        {!isCloudflareAnalyticsInitiated ? (
-          <I18n>Initiating</I18n>
-        ) : isCloudflareAnalyticsLoading ? (
-          <LoadingIcon />
-        ) : cloudflareAnalyticsError !== null ? (
-          <>{cloudflareAnalyticsError}</>
-        ) : (
-          JSON.stringify(cloudflareAnalytics)
-        )}
-      </Container>
     </>
   );
 }

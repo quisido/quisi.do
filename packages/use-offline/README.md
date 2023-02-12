@@ -1,6 +1,7 @@
 # `useOffline`
 
-[![GitHub Action](https://github.com/CharlesStover/charlesstover.com/actions/workflows/use-offline.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/charlesstover.com/actions/workflows/use-offline.yml)
+[![CI](https://github.com/CharlesStover/charlesstover.com/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/charlesstover.com/actions/workflows/ci.yml)
+[![CD](https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml)
 [![version](https://img.shields.io/npm/v/use-offline.svg)](https://www.npmjs.com/package/use-offline)
 [![downloads](https://img.shields.io/npm/dt/use-offline.svg)](https://www.npmjs.com/package/use-offline)
 

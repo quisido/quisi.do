@@ -2,8 +2,8 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import useAsyncState from '../../modules/use-async-state';
+import type CloudflareAnalytics from '../../types/cloudflare-analytics';
 import type RumMetrics from '../../types/rum-metrics';
-import type CloudflareAnalytics from '../../types/types';
 import type UptimeChecks from '../../types/uptime-checks';
 import mapRecordToSum from './utils/map-record-to-sum';
 
@@ -17,7 +17,7 @@ interface State {
   readonly apdexError: string | null;
   readonly clsP95: number;
   readonly clsTm95: number;
-  readonly cloudflareAnalytics: CloudflareAnalytics | null;
+  readonly cloudflareAnalyticsBudget: number;
   readonly cloudflareAnalyticsError: string | null;
   readonly dailySessionCount: number;
   readonly errorCountTimeSeries: Record<string, number>;
@@ -154,7 +154,9 @@ export default function useDashboard({
 
   return {
     apdexError: rumMetricsError,
-    cloudflareAnalytics,
+    cloudflareAnalyticsBudget: cloudflareAnalytics
+      ? cloudflareAnalytics.budget
+      : 0,
     cloudflareAnalyticsError,
     clsP95: 0,
     clsTm95: 0,

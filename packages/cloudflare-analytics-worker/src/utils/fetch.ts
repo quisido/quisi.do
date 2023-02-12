@@ -122,7 +122,14 @@ export default async function fetch(
       headers.set('Access-Control-Allow-Origin', origin);
     }
 
-    const body: R2ObjectBody | null = await RESULTS.get('cf.json');
+    const getResults = async (): Promise<R2ObjectBody | null> => {
+      if (typeof RESULTS === 'undefined') {
+        return null;
+      }
+      return RESULTS.get('cf.json');
+    };
+
+    const body: R2ObjectBody | null = await getResults();
     if (body === null) {
       writeDataPoint({
         message: '/cf.json',
@@ -151,8 +158,9 @@ export default async function fetch(
 
     return new Response(bodyInit, responseInit);
   } catch (err: unknown) {
-    const message: string = mapUnknownToString(err);
+    console.error(err);
 
+    const message: string = mapUnknownToString(err);
     const bodyInit: string = JSON.stringify({
       message,
     });
@@ -178,10 +186,12 @@ export default async function fetch(
     );
 
     const duration: number = start.getTime() - Date.now();
-    ERRORS.writeDataPoint({
-      blobs: [message],
-      doubles: [duration],
-    });
+    if (typeof ERRORS !== 'undefined') {
+      ERRORS.writeDataPoint({
+        blobs: [message],
+        doubles: [duration],
+      });
+    }
 
     return new Response(bodyInit, responseInit);
   }

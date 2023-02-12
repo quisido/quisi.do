@@ -1766,6 +1766,7 @@ __metadata:
     concurrently: ^7.6.0
     jest: ^29.4.1
     typescript: ^4.9.5
+    wait-on: ^7.0.1
     wrangler: 2.9.0
   languageName: unknown
   linkType: soft
