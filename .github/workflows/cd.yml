@@ -1,7 +1,7 @@
 name: Continuous deployment
 
 jobs:
-  # Stage 1: analyze, install-yarn
+  # Stage 1: analyze, install
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
@@ -36,8 +36,8 @@ jobs:
       matrix:
         language: ['javascript']
 
-  install-yarn:
-    name: Install (Yarn)
+  install:
+    name: Install
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -62,41 +62,10 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-  # Stage 2: install-cypress, prepack, prepublish-only
-  install-cypress:
-    name: Install (Cypress)
-    needs: install-yarn
-    runs-on: ${{ matrix.os }}-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Enable Plug-n-Play
-        run: yarn cypress:pnp
-        working-directory: packages/charlesstover.com
-      - name: Install Cypress
-        uses: cypress-io/github-action@v4
-        with:
-          command-prefix: yarn dlx
-          config-file: cypress.config.cjs
-          install: true
-          runTests: false
-          working-directory: packages/charlesstover.com/
-    strategy:
-      fail-fast: true
-      matrix:
-        os: [ubuntu, windows]
-
+  # Stage 2: prepack, prepublish-only
   prepack:
     name: Prepack
-    needs: install-yarn
+    needs: install
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -136,7 +105,7 @@ jobs:
 
   prepublish-only:
     name: Prepublish only
-    needs: install-yarn
+    needs: install
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -166,7 +135,7 @@ jobs:
   # Stage 3: cypress, lighthouse, npm, prepublish
   cypress:
     name: Cypress
-    needs: [install-cypress, prepack]
+    needs: prepack
     runs-on: ${{ matrix.os }}-latest
     ## Container operations are only supported on Linux runners.
     # env:
@@ -215,7 +184,7 @@ jobs:
           command-prefix: yarn dlx
           config-file: cypress.config.cjs
           group: ${{ matrix.browser }}
-          install: false
+          install: true
           parallel: true
           record: true
           start: yarn run cypress:start
