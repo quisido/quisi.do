@@ -38,7 +38,7 @@
     "jest": "jest --runInBand",
     "jest:watch": "jest --runInBand --watch",
     "prepack": "yarn run rollup",
-    "prepublish": "yarn run eslint && yarn run jest",
+    "prepublish": "concurrently --kill-others-on-fail --names eslint,jest \"yarn run eslint\" \"yarn run jest\"",
     "rollup": "rollup --config",
     "rollup:watch": "rollup --config --watch"
   },
@@ -59,6 +59,7 @@
     "@types/node": "^18.11.19",
     "@types/react": "^18.0.27",
     "babel-jest": "^29.4.1",
+    "concurrently": "^7.6.0",
     "eslint": "^8.33.0",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",

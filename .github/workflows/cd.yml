@@ -1,13 +1,25 @@
 name: Continuous deployment
 
 jobs:
+  # Stage 1: analyze, install
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
     permissions:
       actions: read
       contents: read
       security-events: write
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -27,6 +39,17 @@ jobs:
   install:
     name: Install
     runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -36,13 +59,25 @@ jobs:
           cache: yarn
           check-latest: true
           node-version: 'lts/*'
-      - name: Install Yarn dependencies
+      - name: Install dependencies
         run: yarn install --immutable
 
+  # Stage 2: prepack, prepublish-only
   prepack:
     name: Prepack
     needs: install
     runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -55,7 +90,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Prepack
-        run: yarn prepack
+        run: yarn run prepack
         env:
           CI: false
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
@@ -68,9 +103,12 @@ jobs:
             packages/*/build/
             packages/*/dist/
 
-  charlesstover-com:
-    name: Prepublish CharlesStover.com
+  prepublish-only:
+    name: Prepublish only
     needs: prepack
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
     services:
       datadog-agent:
         image: datadog/agent:latest
@@ -80,7 +118,37 @@ jobs:
           DD_INSIDE_CI: true
         ports:
           - 8126:8126
-    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Prepublish only
+        run: yarn run prepublishOnly
+
+  # Stage 3: cypress, lighthouse, npm, prepublish
+  cypress:
+    name: Cypress
+    needs: prepack
+    runs-on: ${{ matrix.os }}-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
@@ -96,7 +164,7 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable
-      - name: Enable Plug-n-Play `cypress`
+      - name: Enable Plug-n-Play
         run: yarn cypress:pnp
         working-directory: packages/charlesstover.com
       - name: Install Cypress
@@ -105,41 +173,110 @@ jobs:
           install: false
           runTests: false
           working-directory: packages/charlesstover.com
-      - name: Prepublish
-        run: yarn run prepublish
-        working-directory: packages/charlesstover.com
+      - name: End-to-end test
+        uses: cypress-io/github-action@v4
         env:
-          BRANCHES_COVERAGE_THRESHOLD: 1
           CHOKIDAR_USEPOLLING: true
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           CYPRESS_SCREENSHOTS_SUBFOLDER: ${{ matrix.os }}-${{ matrix.browser }}
-          DD_ENV: ci
-          FUNCTIONS_COVERAGE_THRESHOLD: 1
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          LINES_COVERAGE_THRESHOLD: 1
           NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }} # -${{ matrix.container }}
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
-          STATEMENTS_COVERAGE_THRESHOLD: 1
+        with:
+          browser: ${{ matrix.browser }}
+          ci-build-id: ${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          command-prefix: yarn dlx
+          config-file: cypress.config.cjs
+          group: ${{ matrix.browser }}
+          install: false
+          parallel: true
+          record: true
+          start: yarn run cypress:start
+          tag: ${{ github.event_name }}
+          wait-on: 'http://localhost:3000/'
+          wait-on-timeout: 120
+          working-directory: packages/charlesstover.com/
       - name: Upload artifacts
         if: ${{ always() }}
         uses: actions/upload-artifact@v3
         with:
-          name: charlesstover-com
+          name: cypress
           path: |
-            packages/*/.nyc_output/
-            packages/*/coverage/
             packages/*/cypress/coverage/
             packages/*/cypress/screenshots/
             packages/*/cypress/videos/
-            packages/*/jest/coverage/
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu, windows]
+        browser: [chrome, edge] # firefox
+        # Cypress only supports 1 container for Edge.
+        # With multiple containers, Cypress will use the wrong browser version.
+        # https://github.com/cypress-io/github-action/issues/121
+        # container: [1, 2, 3]
+        exclude:
+          - browser: edge
+            os: ubuntu
+
+  lighthouse:
+    name: Lighthouse
+    needs: prepack
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Audit
+        run: yarn run lighthouse
+        working-directory: packages/charlesstover.com
+      - name: Upload report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: lighthouse
+          path: |
             packages/*/lighthouse.report.html
             packages/*/lighthouse.report.json
 
   npm:
     name: NPM
-    needs: prepack
+    needs: [prepack, prepublish-only]
     runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -165,24 +302,121 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: publish
+          name: npm
+          path: packages/*/jest/
+
+  prepublish:
+    name: Prepublish
+    needs: prepack
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Prepublish
+        run: yarn packages/charlesstover.com run prepublish
+        env:
+          DD_ENV: ci
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: prepublish
+          path: packages/*/jest/
+
+  # Stage 4: coverage, github-packages
+  coverage:
+    name: Coverage
+    needs: [cypress, prepublish]
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download Cypress artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: cypress
+          path: packages/
+      - name: Download prepublish artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: prepbulish
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Report coverage
+        run: yarn packages/charlesstover.com run coverage
+        env:
+          BRANCHES_COVERAGE_THRESHOLD: 1
+          FUNCTIONS_COVERAGE_THRESHOLD: 1
+          LINES_COVERAGE_THRESHOLD: 1
+          STATEMENTS_COVERAGE_THRESHOLD: 1
+      - name: Upload coverage
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
           path: |
             packages/*/.nyc_output/
             packages/*/coverage/
-            packages/*/cypress/coverage/
-            packages/*/cypress/screenshots/
-            packages/*/cypress/videos/
-            packages/*/jest/
-            packages/*/lighthouse.report.html
-            packages/*/lighthouse.report.json
 
   github-packages:
     name: GitHub Packages
     needs: npm
     runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
     permissions:
       contents: read
       packages: write
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -211,12 +445,24 @@ jobs:
             'https://npm.pkg.github.com';
           yarn run publish;
 
+  # Stage 5: github-pages, sentry-release
   github-pages:
     name: GitHub Pages
-    needs: charlesstover-com
+    needs: [coverage, lighthouse]
     runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
         uses: actions/download-artifact@v3
@@ -233,10 +479,21 @@ jobs:
 
   sentry-release:
     name: Sentry release
-    needs: charlesstover-com
+    needs: [coverage, lighthouse]
     runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
         uses: actions/download-artifact@v3
@@ -255,10 +512,22 @@ jobs:
           sourcemaps: build
           version: ${{ github.sha }}
 
+  # Stage 6: cloudflare-purge
   cloudflare-purge:
     name: Cloudflare purge
     needs: github-pages
     runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
       - name: Purge Cloudflare files
         env:

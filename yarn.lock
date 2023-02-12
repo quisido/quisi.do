@@ -6154,6 +6154,7 @@ __metadata:
     "@types/react": ^18.0.27
     aws-rum-web: ^1.12.0
     babel-jest: ^29.4.1
+    concurrently: ^7.6.0
     eslint: ^8.33.0
     eslint-plugin-jsx-a11y: ^6.7.1
     eslint-plugin-react: ^7.32.2
@@ -16102,6 +16103,7 @@ __metadata:
     "@types/node": ^18.11.19
     "@types/react": ^18.0.27
     babel-jest: ^29.4.1
+    concurrently: ^7.6.0
     eslint: ^8.33.0
     eslint-plugin-jsx-a11y: ^6.7.1
     eslint-plugin-react: ^7.32.2
@@ -18741,6 +18743,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.50.0
     "@typescript-eslint/parser": ^5.50.0
     babel-jest: ^29.4.1
+    concurrently: ^7.6.0
     eslint: ^8.33.0
     eslint-config-prettier: ^8.6.0
     eslint-plugin-import: ^2.27.5
@@ -18915,6 +18918,7 @@ __metadata:
     "@types/node": ^18.11.19
     "@types/react": ^18.0.27
     babel-jest: ^29.4.1
+    concurrently: ^7.6.0
     eslint: ^8.33.0
     eslint-plugin-jsx-a11y: ^6.7.1
     eslint-plugin-react: ^7.32.2

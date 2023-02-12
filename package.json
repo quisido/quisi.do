@@ -24,8 +24,9 @@
     "eslint": "eslint '**/*'",
     "eslint:fix": "eslint '**/*' --fix",
     "prepack": "yarn workspaces foreach --parallel --topological-dev run prepack",
-    "prepublish": "yarn run eslint && yarn run test && yarn workspaces foreach --interlaced --parallel --topological-dev --verbose run prepublish",
-    "publish": "yarn run eslint && yarn run test && yarn workspaces foreach --no-private --parallel --topological-dev --verbose npm publish --tolerate-republish",
+    "prepublish": "concurrently --kill-others-on-fail --names eslint,prepublish,test \"yarn run eslint\" \"yarn workspaces foreach --interlaced --parallel --topological-dev --verbose run prepublish\" \"yarn run test\"",
+    "prepublishOnly": "concurrently --kill-others-on-fail --names eslint,test \"yarn run eslint\" \"yarn run test\"",
+    "publish": "yarn workspaces foreach --no-private --parallel --topological-dev --verbose npm publish --tolerate-republish",
     "start": "concurrently --kill-others --kill-others-on-fail --names charlesstover.com,cloudflare-analytics \"yarn packages/charlesstover.com run start\" \"yarn packages/cloudflare-analytics-worker run start\"",
     "test": "monorepo-template-test",
     "up": "yarn up \"@*/*\" \"!(aws-rum-react|react-datadog|unknown2string|use-offline)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
