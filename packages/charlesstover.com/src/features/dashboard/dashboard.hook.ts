@@ -15,6 +15,8 @@ interface Props {
 
 interface State {
   readonly apdexError: string | null;
+  readonly cdStatusAlt: string | undefined;
+  readonly ciStatusAlt: string | undefined;
   readonly clsP95: number;
   readonly clsTm95: number;
   readonly cloudflareAnalyticsBudget: number;
@@ -25,7 +27,6 @@ interface State {
   readonly fidP95: number;
   readonly fidTm95: number;
   readonly frustratedTimeSeries: Record<string, number>;
-  readonly githubWorkflowStatusAlt: string | undefined;
   readonly isApdexInitiated: boolean;
   readonly isApdexLoading: boolean;
   readonly isCloudflareAnalyticsInitiated: boolean;
@@ -154,6 +155,8 @@ export default function useDashboard({
   const sessionCountTimeSeries: Record<string, number> = EMPTY_RECORD;
   return {
     apdexError: rumMetricsError,
+    cdStatusAlt: translate('Continuous deployment status'),
+    ciStatusAlt: translate('Continuous integration status'),
     cloudflareAnalyticsBudget: cloudflareAnalytics
       ? cloudflareAnalytics.budget
       : NONE,
@@ -165,7 +168,6 @@ export default function useDashboard({
     fidP95: 0,
     fidTm95: 0,
     frustratedTimeSeries: EMPTY_RECORD,
-    githubWorkflowStatusAlt: translate('GitHub workflow status'),
     isApdexInitiated: isRumMetricsInitiated,
     isApdexLoading: isRumMetricsLoading,
     isCloudflareAnalyticsInitiated,

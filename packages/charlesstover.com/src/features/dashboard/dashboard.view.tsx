@@ -22,12 +22,6 @@ export interface Props {
 
 const NONE = 0;
 
-const GITHUB_WORKFLOW_STATUS_BADGE_SRC =
-  'https://github.com/CharlesStover/charlesstover.com/actions/workflows/charlesstover-com.yml/badge.svg';
-
-const GITHUB_WORKFLOW_STATUS_HREF =
-  'https://github.com/CharlesStover/charlesstover.com/actions/workflows/charlesstover-com.yml';
-
 export default function Dashboard({
   onCloudflareAnalyticsRequest,
   onRumMetricsRequest,
@@ -35,6 +29,8 @@ export default function Dashboard({
 }: Readonly<Props>): ReactElement {
   const {
     apdexError,
+    cdStatusAlt,
+    ciStatusAlt,
     cloudflareAnalyticsBudget,
     cloudflareAnalyticsError,
     clsP95,
@@ -45,7 +41,6 @@ export default function Dashboard({
     fidP95,
     fidTm95,
     frustratedTimeSeries,
-    githubWorkflowStatusAlt,
     isApdexInitiated,
     isApdexLoading,
     isCloudflareAnalyticsInitiated,
@@ -84,11 +79,20 @@ export default function Dashboard({
       <Container header={<I18n>Status</I18n>} marginTop="large">
         <Div display="flex" flexDirection="row" justifyContent="space-around">
           <Div>
-            <Link href={GITHUB_WORKFLOW_STATUS_HREF}>
+            <Link href="https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml">
               <img
-                alt={githubWorkflowStatusAlt}
+                alt={cdStatusAlt}
                 height={20}
-                src={GITHUB_WORKFLOW_STATUS_BADGE_SRC}
+                src="https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml/badge.svg"
+              />
+            </Link>
+          </Div>
+          <Div>
+            <Link href="https://github.com/CharlesStover/charlesstover.com/actions/workflows/ci.yml">
+              <img
+                alt={ciStatusAlt}
+                height={20}
+                src="https://github.com/CharlesStover/charlesstover.com/actions/workflows/ci.yml/badge.svg"
               />
             </Link>
           </Div>
