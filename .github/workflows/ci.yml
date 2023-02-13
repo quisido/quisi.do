@@ -189,7 +189,7 @@ jobs:
           wait-on-timeout: 120
           working-directory: packages/charlesstover.com/
       - name: Upload artifacts
-        if: ${{ always() }}
+        if: matrix.os == 'ubuntu'
         uses: actions/upload-artifact@v3
         with:
           name: cypress
@@ -245,7 +245,7 @@ jobs:
         run: yarn run lighthouse
         working-directory: packages/charlesstover.com
       - name: Upload report
-        if: ${{ always() }}
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: lighthouse
@@ -339,7 +339,7 @@ jobs:
           LINES_COVERAGE_THRESHOLD: 1
           STATEMENTS_COVERAGE_THRESHOLD: 1
       - name: Upload coverage
-        if: ${{ always() }}
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: coverage
