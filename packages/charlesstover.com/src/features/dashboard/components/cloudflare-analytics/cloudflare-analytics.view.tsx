@@ -95,7 +95,7 @@ export default function CloudflareAnalytics({
       <table cellPadding={4}>
         <thead>
           <tr>
-            <td></td>
+            <td />
             <th>Average</th>
             <th>P50</th>
             <th>P75</th>
@@ -280,7 +280,7 @@ export default function CloudflareAnalytics({
       <table cellPadding={4}>
         <thead>
           <tr>
-            <td></td>
+            <td />
             <th>Minimum</th>
             <th>P25</th>
             <th>P50</th>
@@ -303,7 +303,7 @@ export default function CloudflareAnalytics({
             <td>{datasets.workersInvocationsAdaptive.cpuTimeP99}</td>
             <td>{datasets.workersInvocationsAdaptive.cpuTimeP999}</td>
             <td>{datasets.workersInvocationsAdaptive['cpuTime.max']}</td>
-            <td></td>
+            <td />
           </tr>
           <tr>
             <th>Duration</th>
