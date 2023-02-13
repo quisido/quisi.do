@@ -184,7 +184,7 @@ jobs:
           command-prefix: yarn dlx
           config-file: cypress.config.cjs
           group: ${{ matrix.browser }}
-          install: true
+          install: false
           parallel: true
           record: true
           start: yarn run cypress:start

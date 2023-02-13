@@ -182,7 +182,7 @@ jobs:
           browser: ${{ matrix.browser }}
           command-prefix: yarn dlx
           config-file: cypress.config.cjs
-          install: true
+          install: false
           record: false
           start: yarn run cypress:start
           wait-on: 'http://localhost:3000/'
