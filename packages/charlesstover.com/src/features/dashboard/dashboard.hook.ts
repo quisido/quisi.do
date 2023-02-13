@@ -3,6 +3,7 @@ import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import useAsyncState from '../../modules/use-async-state';
 import type CloudflareAnalytics from '../../types/cloudflare-analytics';
+import type CloudflareAnalyticsDatasets from '../../types/cloudflare-analytics-datasets';
 import type RumMetrics from '../../types/rum-metrics';
 import type UptimeChecks from '../../types/uptime-checks';
 import mapRecordToSum from './utils/map-record-to-sum';
@@ -17,6 +18,7 @@ interface State {
   readonly apdexError: string | null;
   readonly cdStatusAlt: string | undefined;
   readonly ciStatusAlt: string | undefined;
+  readonly cloudflareAnalytics: CloudflareAnalyticsDatasets | null;
   readonly clsP95: number;
   readonly clsTm95: number;
   readonly cloudflareAnalyticsBudget: number;
@@ -157,6 +159,9 @@ export default function useDashboard({
     apdexError: rumMetricsError,
     cdStatusAlt: translate('Continuous deployment status'),
     ciStatusAlt: translate('Continuous integration status'),
+    cloudflareAnalytics: cloudflareAnalytics
+      ? cloudflareAnalytics.datasets
+      : null,
     cloudflareAnalyticsBudget: cloudflareAnalytics
       ? cloudflareAnalytics.budget
       : NONE,

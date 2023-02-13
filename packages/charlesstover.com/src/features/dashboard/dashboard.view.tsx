@@ -31,6 +31,7 @@ export default function Dashboard({
     apdexError,
     cdStatusAlt,
     ciStatusAlt,
+    cloudflareAnalytics,
     cloudflareAnalyticsBudget,
     cloudflareAnalyticsError,
     clsP95,
@@ -122,6 +123,7 @@ export default function Dashboard({
       />
       <CloudflareAnalyticsComponent
         budget={cloudflareAnalyticsBudget}
+        datasets={cloudflareAnalytics}
         error={cloudflareAnalyticsError}
         initiated={isCloudflareAnalyticsInitiated}
         loading={isCloudflareAnalyticsLoading}
