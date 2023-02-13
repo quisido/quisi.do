@@ -1,4 +1,4 @@
-import type CloudflareAnalytics from '../types/types';
+import type CloudflareAnalytics from '../types/cloudflare-analytics';
 import findCloudflareAnalytics from './find-cloudflare-analytics';
 
 export default function validateCloudflareAnalytics(

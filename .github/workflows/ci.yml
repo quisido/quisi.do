@@ -1,0 +1,351 @@
+name: Continuous integration
+
+jobs:
+  # Stage 1: analyze, install
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: ${{ matrix.language }}
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v1
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['javascript']
+
+  install:
+    name: Install
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+
+  # Stage 2: prepack, prepublish-only
+  prepack:
+    name: Prepack
+    needs: install
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Prepack
+        run: yarn run prepack
+        env:
+          CI: false
+          REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
+          REACT_APP_GITHUB_SHA: ${{ github.sha }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: prepack
+          path: |
+            packages/*/build/
+            packages/*/dist/
+
+  prepublish-only:
+    name: Prepublish only
+    needs: install
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Prepublish only
+        run: yarn run prepublishOnly
+
+  # Stage 3: cypress, lighthouse, prepublish
+  cypress:
+    name: Cypress
+    needs: prepack
+    runs-on: ${{ matrix.os }}-latest
+    ## Container operations are only supported on Linux runners.
+    # env:
+    #   DD_ENV: ci
+    # services:
+    #   datadog-agent:
+    #     image: datadog/agent:latest
+    #     env:
+    #       DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+    #       DD_HOSTNAME: none
+    #       DD_INSIDE_CI: true
+    #     ports:
+    #       - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Enable Plug-n-Play
+        run: yarn cypress:pnp
+        working-directory: packages/charlesstover.com
+      - name: End-to-end test
+        uses: cypress-io/github-action@v4
+        env:
+          CHOKIDAR_USEPOLLING: true
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_SCREENSHOTS_SUBFOLDER: ${{ matrix.os }}-${{ matrix.browser }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }} # -${{ matrix.container }}
+          REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
+          REACT_APP_GITHUB_SHA: ${{ github.sha }}
+        with:
+          browser: ${{ matrix.browser }}
+          command-prefix: yarn dlx
+          config-file: cypress.config.cjs
+          install: false
+          record: false
+          start: yarn run cypress:start
+          wait-on: 'http://localhost:3000/'
+          wait-on-timeout: 120
+          working-directory: packages/charlesstover.com/
+      - name: Upload artifacts
+        if: matrix.os == 'ubuntu'
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress
+          path: |
+            packages/*/cypress/coverage/
+            packages/*/cypress/screenshots/
+            packages/*/cypress/videos/
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu, windows]
+        browser: [chrome, edge] # firefox
+        # Cypress only supports 1 container for Edge.
+        # With multiple containers, Cypress will use the wrong browser version.
+        # https://github.com/cypress-io/github-action/issues/121
+        # container: [1, 2, 3]
+        exclude:
+          - browser: edge
+            os: ubuntu
+
+  lighthouse:
+    name: Lighthouse
+    needs: prepack
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Audit
+        run: yarn run lighthouse
+        working-directory: packages/charlesstover.com
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: lighthouse
+          path: |
+            packages/*/lighthouse.report.html
+            packages/*/lighthouse.report.json
+
+  prepublish:
+    name: Prepublish
+    needs: prepack
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Prepublish
+        run: yarn packages/charlesstover.com run prepublish
+        env:
+          DD_ENV: ci
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: prepublish
+          path: packages/*/jest/
+
+  # Stage 4: coverage
+  coverage:
+    name: Coverage
+    needs: [cypress, prepublish]
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download Cypress artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: cypress
+          path: packages/
+      - name: Download prepublish artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: prepublish
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Report coverage
+        run: yarn packages/charlesstover.com run coverage
+        env:
+          BRANCHES_COVERAGE_THRESHOLD: 1
+          FUNCTIONS_COVERAGE_THRESHOLD: 1
+          LINES_COVERAGE_THRESHOLD: 1
+          STATEMENTS_COVERAGE_THRESHOLD: 1
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: |
+            packages/*/.nyc_output/
+            packages/*/coverage/
+
+on:
+  pull_request:

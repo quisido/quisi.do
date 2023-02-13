@@ -52,19 +52,25 @@ export default async function scheduled(
     const costs: readonly number[] = results.map(mapResultToCost);
 
     const cost: number = costs.reduce(sum, NONE);
-    cxt.waitUntil(RESULTS.put('cf.json', JSON.stringify(body)));
+    if (typeof RESULTS !== 'undefined') {
+      cxt.waitUntil(RESULTS.put('cf.json', JSON.stringify(body)));
+    }
 
-    const duration: number = start.getTime() - Date.now();
-    SCHEDULED.writeDataPoint({
-      doubles: [duration, body.budget, cost],
-    });
+    if (typeof SCHEDULED !== 'undefined') {
+      const duration: number = start.getTime() - Date.now();
+      SCHEDULED.writeDataPoint({
+        doubles: [duration, body.budget, cost],
+      });
+    }
   } catch (err: unknown) {
     const message: string = mapUnknownToString(err);
 
-    const duration: number = start.getTime() - Date.now();
-    ERRORS.writeDataPoint({
-      blobs: [message],
-      doubles: [duration],
-    });
+    if (typeof ERRORS !== 'undefined') {
+      const duration: number = start.getTime() - Date.now();
+      ERRORS.writeDataPoint({
+        blobs: [message],
+        doubles: [duration],
+      });
+    }
   }
 }
