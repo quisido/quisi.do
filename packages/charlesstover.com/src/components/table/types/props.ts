@@ -8,7 +8,7 @@ export default interface Props<Item> {
   readonly filter: string;
   readonly filterPlaceholder?: string | undefined;
   readonly header?: ReactElement;
-  readonly loading: string | undefined;
+  readonly loading?: string | undefined;
   readonly onFilterChange: (filter: string) => void;
   readonly onPageChange: (page: number) => void;
   readonly onRowsPerPageChange: (rowsPerPage: number) => void;

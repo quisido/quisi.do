@@ -3,6 +3,7 @@ import type { ReactElement } from 'react';
 import Container from '../../../../components/container';
 import Div from '../../../../components/div';
 import LoadingIcon from '../../../../components/loading-icon';
+import RelativeTimestamp from '../../../../components/relative-timestamp';
 import OnlineStatus from '../online-status';
 
 interface Props {
@@ -72,7 +73,10 @@ export default function UptimeChecks({
       <Div>
         <OnlineStatus>{lastCheckedStatus}</OnlineStatus>
       </Div>
-      <Div>Last checked: {new Date(lastCheckedTimestamp).toLocaleString()}</Div>
+      <Div>
+        Last checked:{' '}
+        <RelativeTimestamp>{lastCheckedTimestamp}</RelativeTimestamp>
+      </Div>
       {uptimeErrors.length > NONE && (
         <Div>Uptime errors: {JSON.stringify(uptimeErrors)}</Div>
       )}

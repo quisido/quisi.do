@@ -7071,6 +7071,7 @@ __metadata:
     react-router-dom: ^6.8.0
     react-scripts: ^5.0.1
     recharts: ^2.3.2
+    relative-timestamp: ^1.0.0
     sass: ^1.58.0
     sentry-react: ^1.1.3
     serve: ^14.2.0
@@ -16637,6 +16638,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"relative-timestamp@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "relative-timestamp@npm:1.0.0"
+  dependencies:
+    use-force-update: ^1.0.7
+  peerDependencies:
+    react: ^17.0.0
+    react-dom: ^17.0.0
+  checksum: aab2b6b61e141c3239bf653bb8532e6a66f77de8a639067227ad038d5a668f584c68a23c079d0a854e73d2b56193338debce68d967785486cb072f447113aa1c
+  languageName: node
+  linkType: hard
+
 "release-zalgo@npm:^1.0.0":
   version: 1.0.0
   resolution: "release-zalgo@npm:1.0.0"
@@ -18884,6 +18897,15 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 7913df383a5a6fcb399212eedefaac2e0c6f843555202d4e3010bac3848afe38ecaa3d0d6500ad1d936fbeffd637e6c517e68edb024af5e6beca7f27f3ce7b21
+  languageName: node
+  linkType: hard
+
+"use-force-update@npm:^1.0.7":
+  version: 1.0.11
+  resolution: "use-force-update@npm:1.0.11"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: fb9512b6caf4f77f864d9e3bb17a6e0c79e020803108a745d0822933ef52e575e29a9e018879a5f7142a6ad4fd642f5c1620a42e46cefd55805522cd5ff3893a
   languageName: node
   linkType: hard
 

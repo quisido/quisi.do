@@ -8,7 +8,7 @@ const AwsTable = lazy(async () => import('./table.aws.view'));
 const CloudscapeTable = lazy(async () => import('./table.cloudscape.view'));
 const MuiTable = lazy(async () => import('./table.mui.view'));
 
-export default function Table<Item extends Record<string, unknown>>(
+export default function Table<Item extends object>(
   props: Readonly<Props<Item>>,
 ): ReactElement {
   return (

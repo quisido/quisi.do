@@ -1,10 +1,14 @@
-import I18n from 'lazy-i18n';
+import type { TranslateFunction } from 'lazy-i18n';
+import I18n, { useTranslate } from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Container from '../../../../components/container';
 import Div from '../../../../components/div';
 import LoadingIcon from '../../../../components/loading-icon';
 import Span from '../../../../components/span';
+import Table from '../../../../components/table';
 import type CloudflareAnalyticsDatasets from '../../../../types/cloudflare-analytics-datasets';
+import CLOUDFLARE_ANALYTICS_COLUMNS from '../../constants/cloudflare-analytics-columns';
+import type CloudflareAnalytic from '../../types/cloudflare-analytic';
 import mapBudgetToPercentage from './utils/map-budget-to-percentage';
 
 interface Props {
@@ -24,6 +28,7 @@ export default function CloudflareAnalytics({
   initiated,
   loading,
 }: Readonly<Props>): ReactElement {
+  const translate: TranslateFunction = useTranslate();
   if (!initiated) {
     return (
       <Container header={<I18n>Errors</I18n>} marginTop="large">
@@ -49,306 +54,196 @@ export default function CloudflareAnalytics({
     );
   }
 
+  const {
+    rumPageloadEventsAdaptiveGroups,
+    rumPerformanceEventsAdaptiveGroups,
+    workersAnalyticsEngineAdaptiveGroups,
+    workersInvocationsAdaptive,
+  } = datasets;
   return (
-    <Container header="Cloudflare analytics" marginTop="large">
-      <Div element="p">Remaining budget: {mapBudgetToPercentage(budget)}%</Div>
-      <Div>
-        RUM pageload events - sum of visits:{' '}
-        {datasets.rumPageloadEventsAdaptiveGroups['visits.sum']}
-      </Div>
-      <Div>
-        RUM performance events - count:{' '}
-        {datasets.rumPerformanceEventsAdaptiveGroups.count}
-      </Div>
-      <Div>
-        RUM performance events - average sample interval:{' '}
-        {datasets.rumPerformanceEventsAdaptiveGroups['sampleInterval.avg']}
-      </Div>
-      <Div>
-        RUM performance events - sum of visits:{' '}
-        {datasets.rumPerformanceEventsAdaptiveGroups['visits.sum']}
-      </Div>
-      <Div>
-        Workers analytics engine - count:{' '}
-        {datasets.workersAnalyticsEngineAdaptiveGroups.count}
-      </Div>
-      <Div>
-        Workers invocations - sum of errors:{' '}
-        {datasets.workersInvocationsAdaptive['errors.sum']} (
-        {(datasets.workersInvocationsAdaptive['errors.sum'] /
-          datasets.workersInvocationsAdaptive['requests.sum']) *
-          PERCENT}
-        %)
-      </Div>
-      <Div>
-        Workers invocations - sum of requests:{' '}
-        {datasets.workersInvocationsAdaptive['requests.sum']}
-      </Div>
-      <Div>
-        Workers invocations - average sample interval:{' '}
-        {datasets.workersInvocationsAdaptive['sampleInterval.avg']}
-      </Div>
-      <Div>
-        Workers invocations - sum of subrequests:{' '}
-        {datasets.workersInvocationsAdaptive['subrequests.sum']}
-      </Div>
-      <table cellPadding={4}>
-        <thead>
-          <tr>
-            <td />
-            <th>Average</th>
-            <th>P50</th>
-            <th>P75</th>
-            <th>P90</th>
-            <th>P99</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Connection time</th>
-            <td>
-              {
-                datasets.rumPerformanceEventsAdaptiveGroups[
-                  'connectionTime.avg'
-                ]
-              }
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.connectionTimeP50}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.connectionTimeP75}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.connectionTimeP90}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.connectionTimeP99}
-            </td>
-          </tr>
-          <tr>
-            <th>DNS time</th>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups['dnsTime.avg']}
-            </td>
-            <td>{datasets.rumPerformanceEventsAdaptiveGroups.dnsTimeP50}</td>
-            <td>{datasets.rumPerformanceEventsAdaptiveGroups.dnsTimeP75}</td>
-            <td>{datasets.rumPerformanceEventsAdaptiveGroups.dnsTimeP90}</td>
-            <td>{datasets.rumPerformanceEventsAdaptiveGroups.dnsTimeP99}</td>
-          </tr>
-          <tr>
-            <th>First contentful paint</th>
-            <td>
-              {
-                datasets.rumPerformanceEventsAdaptiveGroups[
-                  'firstContentfulPaint.avg'
-                ]
-              }
-            </td>
-            <td>
-              {
-                datasets.rumPerformanceEventsAdaptiveGroups
-                  .firstContentfulPaintP50
-              }
-            </td>
-            <td>
-              {
-                datasets.rumPerformanceEventsAdaptiveGroups
-                  .firstContentfulPaintP75
-              }
-            </td>
-            <td>
-              {
-                datasets.rumPerformanceEventsAdaptiveGroups
-                  .firstContentfulPaintP90
-              }
-            </td>
-            <td>
-              {
-                datasets.rumPerformanceEventsAdaptiveGroups
-                  .firstContentfulPaintP99
-              }
-            </td>
-          </tr>
-          <tr>
-            <th>First paint</th>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups['firstPaint.avg']}
-            </td>
-            <td>{datasets.rumPerformanceEventsAdaptiveGroups.firstPaintP50}</td>
-            <td>{datasets.rumPerformanceEventsAdaptiveGroups.firstPaintP75}</td>
-            <td>{datasets.rumPerformanceEventsAdaptiveGroups.firstPaintP90}</td>
-            <td>{datasets.rumPerformanceEventsAdaptiveGroups.firstPaintP99}</td>
-          </tr>
-          <tr>
-            <th>Load event time</th>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups['loadEventTime.avg']}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.loadEventTimeP50}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.loadEventTimeP75}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.loadEventTimeP90}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.loadEventTimeP99}
-            </td>
-          </tr>
-          <tr>
-            <th>Page load time</th>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups['pageLoadTime.avg']}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.pageLoadTimeP50}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.pageLoadTimeP75}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.pageLoadTimeP90}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.pageLoadTimeP99}
-            </td>
-          </tr>
-          <tr>
-            <th>Page render time</th>
-            <td>
-              {
-                datasets.rumPerformanceEventsAdaptiveGroups[
-                  'pageRenderTime.avg'
-                ]
-              }
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.pageRenderTimeP50}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.pageRenderTimeP75}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.pageRenderTimeP90}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.pageRenderTimeP99}
-            </td>
-          </tr>
-          <tr>
-            <th>Request time</th>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups['requestTime.avg']}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.requestTimeP50}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.requestTimeP75}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.requestTimeP90}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.requestTimeP99}
-            </td>
-          </tr>
-          <tr>
-            <th>Response time</th>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups['responseTime.avg']}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.responseTimeP50}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.responseTimeP75}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.responseTimeP90}
-            </td>
-            <td>
-              {datasets.rumPerformanceEventsAdaptiveGroups.responseTimeP99}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <>
+      <Container header="Cloudflare analytics" marginTop="large">
+        <Div element="p">
+          Remaining budget: {mapBudgetToPercentage(budget)}%
+        </Div>
+        <Div>
+          RUM pageload events - sum of visits:{' '}
+          {rumPageloadEventsAdaptiveGroups['visits.sum']}
+        </Div>
+        <Div>
+          RUM performance events - count:{' '}
+          {rumPerformanceEventsAdaptiveGroups.count}
+        </Div>
+        <Div>
+          RUM performance events - average sample interval:{' '}
+          {rumPerformanceEventsAdaptiveGroups['sampleInterval.avg']}
+        </Div>
+        <Div>
+          RUM performance events - sum of visits:{' '}
+          {rumPerformanceEventsAdaptiveGroups['visits.sum']}
+        </Div>
+        <Div>
+          Workers analytics engine - count:{' '}
+          {workersAnalyticsEngineAdaptiveGroups.count}
+        </Div>
+        <Div>
+          Workers invocations - sum of errors:{' '}
+          {workersInvocationsAdaptive['errors.sum']} (
+          {(workersInvocationsAdaptive['errors.sum'] /
+            workersInvocationsAdaptive['requests.sum']) *
+            PERCENT}
+          %)
+        </Div>
+        <Div>
+          Workers invocations - sum of requests:{' '}
+          {workersInvocationsAdaptive['requests.sum']}
+        </Div>
+        <Div>
+          Workers invocations - average sample interval:{' '}
+          {workersInvocationsAdaptive['sampleInterval.avg']}
+        </Div>
+        <Div>
+          Workers invocations - sum of subrequests:{' '}
+          {workersInvocationsAdaptive['subrequests.sum']}
+        </Div>
+      </Container>
 
-      <table cellPadding={4}>
-        <thead>
-          <tr>
-            <td />
-            <th>Minimum</th>
-            <th>P25</th>
-            <th>P50</th>
-            <th>P75</th>
-            <th>P90</th>
-            <th>P99</th>
-            <th>P99.9</th>
-            <th>Maximum</th>
-            <th>Sum</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>CPU time</th>
-            <td>{datasets.workersInvocationsAdaptive['cpuTime.min']}</td>
-            <td>{datasets.workersInvocationsAdaptive.cpuTimeP25}</td>
-            <td>{datasets.workersInvocationsAdaptive.cpuTimeP50}</td>
-            <td>{datasets.workersInvocationsAdaptive.cpuTimeP75}</td>
-            <td>{datasets.workersInvocationsAdaptive.cpuTimeP90}</td>
-            <td>{datasets.workersInvocationsAdaptive.cpuTimeP99}</td>
-            <td>{datasets.workersInvocationsAdaptive.cpuTimeP999}</td>
-            <td>{datasets.workersInvocationsAdaptive['cpuTime.max']}</td>
-            <td />
-          </tr>
-          <tr>
-            <th>Duration</th>
-            <td>{datasets.workersInvocationsAdaptive['duration.min']}</td>
-            <td>{datasets.workersInvocationsAdaptive.durationP25}</td>
-            <td>{datasets.workersInvocationsAdaptive.durationP50}</td>
-            <td>{datasets.workersInvocationsAdaptive.durationP75}</td>
-            <td>{datasets.workersInvocationsAdaptive.durationP90}</td>
-            <td>{datasets.workersInvocationsAdaptive.durationP99}</td>
-            <td>{datasets.workersInvocationsAdaptive.durationP999}</td>
-            <td>{datasets.workersInvocationsAdaptive['duration.max']}</td>
-            <td>{datasets.workersInvocationsAdaptive['duration.sum']}</td>
-          </tr>
-          <tr>
-            <th>Response body size</th>
-            <td>
-              {datasets.workersInvocationsAdaptive['responseBodySize.min']}
-            </td>
-            <td>{datasets.workersInvocationsAdaptive.responseBodySizeP25}</td>
-            <td>{datasets.workersInvocationsAdaptive.responseBodySizeP50}</td>
-            <td>{datasets.workersInvocationsAdaptive.responseBodySizeP75}</td>
-            <td>{datasets.workersInvocationsAdaptive.responseBodySizeP90}</td>
-            <td>{datasets.workersInvocationsAdaptive.responseBodySizeP99}</td>
-            <td>{datasets.workersInvocationsAdaptive.responseBodySizeP999}</td>
-            <td>
-              {datasets.workersInvocationsAdaptive['responseBodySize.max']}
-            </td>
-            <td>
-              {datasets.workersInvocationsAdaptive['responseBodySize.sum']}
-            </td>
-          </tr>
-          <tr>
-            <th>Wall time</th>
-            <td>{datasets.workersInvocationsAdaptive['wallTime.min']}</td>
-            <td>{datasets.workersInvocationsAdaptive.wallTimeP25}</td>
-            <td>{datasets.workersInvocationsAdaptive.wallTimeP50}</td>
-            <td>{datasets.workersInvocationsAdaptive.wallTimeP75}</td>
-            <td>{datasets.workersInvocationsAdaptive.wallTimeP90}</td>
-            <td>{datasets.workersInvocationsAdaptive.wallTimeP99}</td>
-            <td>{datasets.workersInvocationsAdaptive.wallTimeP999}</td>
-            <td>{datasets.workersInvocationsAdaptive['wallTime.max']}</td>
-            <td>{datasets.workersInvocationsAdaptive['wallTime.sum']}</td>
-          </tr>
-        </tbody>
-      </table>
-    </Container>
+      <Table<CloudflareAnalytic>
+        columns={CLOUDFLARE_ANALYTICS_COLUMNS}
+        filter=""
+        onFilterChange={(): void => {}}
+        onPageChange={(): void => {}}
+        onRowsPerPageChange={(): void => {}}
+        onSort={(): void => {}}
+        onVisibleColumnsChange={(): void => {}}
+        page={1}
+        rows={[
+          {
+            avg: rumPerformanceEventsAdaptiveGroups['connectionTime.avg'],
+            name: translate('Connection time') || '...',
+            p50: rumPerformanceEventsAdaptiveGroups.connectionTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.connectionTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.connectionTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.connectionTimeP99,
+          },
+          {
+            max: workersInvocationsAdaptive['cpuTime.max'],
+            min: workersInvocationsAdaptive['cpuTime.min'],
+            name: translate('CPU time') || '...',
+            p25: workersInvocationsAdaptive.cpuTimeP25,
+            p50: workersInvocationsAdaptive.cpuTimeP50,
+            p75: workersInvocationsAdaptive.cpuTimeP75,
+            p90: workersInvocationsAdaptive.cpuTimeP90,
+            p99: workersInvocationsAdaptive.cpuTimeP99,
+            p999: workersInvocationsAdaptive.cpuTimeP999,
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups['dnsTime.avg'],
+            name: translate('DNS time') || '...',
+            p50: rumPerformanceEventsAdaptiveGroups.dnsTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.dnsTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.dnsTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.dnsTimeP99,
+          },
+          {
+            max: workersInvocationsAdaptive['duration.max'],
+            min: workersInvocationsAdaptive['duration.min'],
+            name: translate('Duration') || '...',
+            p25: workersInvocationsAdaptive.durationP25,
+            p50: workersInvocationsAdaptive.durationP50,
+            p75: workersInvocationsAdaptive.durationP75,
+            p90: workersInvocationsAdaptive.durationP90,
+            p99: workersInvocationsAdaptive.durationP99,
+            p999: workersInvocationsAdaptive.durationP999,
+            sum: workersInvocationsAdaptive['duration.sum'],
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups['firstContentfulPaint.avg'],
+            name: translate('First contentful paint') || '...',
+            p50: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP50,
+            p75: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP75,
+            p90: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP90,
+            p99: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP99,
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups['firstPaint.avg'],
+            name: translate('First paint') || '...',
+            p50: rumPerformanceEventsAdaptiveGroups.firstPaintP50,
+            p75: rumPerformanceEventsAdaptiveGroups.firstPaintP75,
+            p90: rumPerformanceEventsAdaptiveGroups.firstPaintP90,
+            p99: rumPerformanceEventsAdaptiveGroups.firstPaintP99,
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups['loadEventTime.avg'],
+            name: translate('Load event time') || '...',
+            p50: rumPerformanceEventsAdaptiveGroups.loadEventTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.loadEventTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.loadEventTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.loadEventTimeP99,
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups['pageLoadTime.avg'],
+            name: translate('Page load time') || '...',
+            p50: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP99,
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups['pageRenderTime.avg'],
+            name: translate('Page render time') || '...',
+            p50: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP99,
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups['requestTime.avg'],
+            name: translate('Request time') || '...',
+            p50: rumPerformanceEventsAdaptiveGroups.requestTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.requestTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.requestTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.requestTimeP99,
+          },
+          {
+            max: workersInvocationsAdaptive['responseBodySize.max'],
+            min: workersInvocationsAdaptive['responseBodySize.min'],
+            name: translate('Response body size') || '...',
+            p25: workersInvocationsAdaptive.responseBodySizeP25,
+            p50: workersInvocationsAdaptive.responseBodySizeP50,
+            p75: workersInvocationsAdaptive.responseBodySizeP75,
+            p90: workersInvocationsAdaptive.responseBodySizeP90,
+            p99: workersInvocationsAdaptive.responseBodySizeP99,
+            p999: workersInvocationsAdaptive.responseBodySizeP999,
+            sum: workersInvocationsAdaptive['responseBodySize.sum'],
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups['responseTime.avg'],
+            name: translate('Response time') || '...',
+            p50: rumPerformanceEventsAdaptiveGroups.responseTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.responseTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.responseTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.responseTimeP99,
+          },
+          {
+            max: workersInvocationsAdaptive['wallTime.max'],
+            min: workersInvocationsAdaptive['wallTime.min'],
+            name: translate('Wall time') || '...',
+            p25: workersInvocationsAdaptive.wallTimeP25,
+            p50: workersInvocationsAdaptive.wallTimeP50,
+            p75: workersInvocationsAdaptive.wallTimeP75,
+            p90: workersInvocationsAdaptive.wallTimeP90,
+            p99: workersInvocationsAdaptive.wallTimeP99,
+            p999: workersInvocationsAdaptive.wallTimeP999,
+            sum: workersInvocationsAdaptive['wallTime.sum'],
+          },
+        ]}
+        rowsCount={1}
+        rowsPerPage={1}
+        rowsPerPageOptions={[]}
+        sortAscending
+        visibleColumnIndices={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+      />
+    </>
   );
 }

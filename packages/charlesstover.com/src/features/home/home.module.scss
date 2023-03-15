@@ -38,9 +38,11 @@
 
 .projectList {
   $margin-left: 2.5em;
+  align-items: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   list-style-position: outside;
   margin-left: -$margin-left;
 
