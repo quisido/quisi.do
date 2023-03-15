@@ -145,7 +145,7 @@
     "use-mui": "^1.0.6",
     "use-offline": "workspace:^",
     "wait-on": "^7.0.1",
-    "webpack": "^5.75.0",
+    "webpack": "^5.76.0",
     "zone.js": "^0.12.0"
   }
 }
