@@ -23,23 +23,28 @@ const ignoreSourceMapLoaderWarnings = config => ({
 
 module.exports = {
   paths: (paths, env) => {
-    if (env === 'development') {
+    // Production
+    if (env !== 'development') {
       return {
         ...paths,
-        appTsConfig: DEVELOPMENT_TSCONFIG_PATH,
+        appTsConfig: PRODUCTION_TSCONFIG_PATH,
       };
     }
+
+    // Development
     return {
       ...paths,
-      appTsConfig: PRODUCTION_TSCONFIG_PATH,
+      appTsConfig: DEVELOPMENT_TSCONFIG_PATH,
     };
   },
 
   webpack: (config, env) => {
+    // Production
     if (env !== 'development') {
       return compose(ignoreSourceMapLoaderWarnings)(config);
     }
 
+    // Development
     return compose(
       cypressConfigOverride,
       ignoreSourceMapLoaderWarnings,
