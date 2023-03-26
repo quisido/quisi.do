@@ -1,5 +1,6 @@
 import type { CollectionPreferencesProps } from '@cloudscape-design/components/collection-preferences';
 import type { NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
+import { NonCancelableEventHandler } from '@cloudscape-design/components/internal/events';
 import type { PaginationProps } from '@cloudscape-design/components/pagination';
 import type { TableProps } from '@cloudscape-design/components/table';
 import type { TextFilterProps } from '@cloudscape-design/components/text-filter';
@@ -24,20 +25,22 @@ import mapSortingColumnToIndex from './utils/map-sorting-column-to-index';
 interface Props<Item> {
   readonly Description?: ComponentType<Item> | undefined;
   readonly columns: readonly TableColumn<Item>[];
-  readonly onFilterChange: (filter: string) => void;
-  readonly onPageChange: (page: number) => void;
-  readonly onRowsPerPageChange: (rowsPerPage: number) => void;
+  readonly filter?: string | undefined;
+  readonly onFilterChange?: ((filter: string) => void) | undefined;
+  readonly onPageChange?: ((page: number) => void) | undefined;
+  readonly onRowsPerPageChange?: ((rowsPerPage: number) => void) | undefined;
   readonly onSort: (columnIndex: number, ascending: boolean) => void;
+  readonly page?: number | undefined;
   readonly rows: readonly Item[];
   readonly rowsCount: number;
   readonly rowsPerPage: number;
-  readonly rowsPerPageOptions: readonly TableRowsPerPageOption[];
+  readonly rowsPerPageOptions?: readonly TableRowsPerPageOption[] | undefined;
   readonly sortAscending: boolean;
   readonly sortColumnIndex?: number | undefined;
-  readonly visibleColumnIndices: readonly number[];
-  readonly onVisibleColumnsChange: (
-    visibleColumnIndices: readonly number[],
-  ) => void;
+  readonly visibleColumnIndices?: readonly number[] | undefined;
+  readonly onVisibleColumnsChange?:
+    | ((visibleColumnIndices: readonly number[]) => void)
+    | undefined;
 }
 
 interface State<Item> {
@@ -47,40 +50,39 @@ interface State<Item> {
   readonly columnDefinitions: readonly TableProps.ColumnDefinition<Item>[];
   readonly confirmLabel: string;
   readonly countText: string;
+  readonly currentPageIndex: number;
   readonly filteringAriaLabel: string | undefined;
+  readonly filteringText: string;
   readonly pagesCount: number;
-  readonly pageSizePreference: CollectionPreferencesProps.PageSizePreference;
   readonly paginationAriaLabels: PaginationProps.Labels;
   readonly preferences: CollectionPreferencesProps.Preferences;
   readonly ref: MutableRefObject<HTMLDivElement | null>;
   readonly sortingColumn: TableProps.SortingColumn<Item> | undefined;
   readonly sortingDescending: boolean | undefined;
   readonly visibleContent: readonly string[] | undefined;
-  readonly visibleContentPreference: CollectionPreferencesProps.VisibleContentPreference;
   readonly wrapLines: boolean | undefined;
   readonly wrapLinesPreference: CollectionPreferencesProps.WrapLinesPreference;
-  readonly handleCollectionPreferencesConfirm: (
-    event: Readonly<
-      NonCancelableCustomEvent<
-        Readonly<CollectionPreferencesProps.Preferences<void>>
-      >
-    >,
-  ) => void;
-  readonly handlePaginationChange: (
-    event: Readonly<
-      NonCancelableCustomEvent<Readonly<PaginationProps.ChangeDetail>>
-    >,
-  ) => void;
+  readonly handleCollectionPreferencesConfirm: NonCancelableEventHandler<
+    CollectionPreferencesProps.Preferences<void>
+  >;
+  readonly handlePaginationChange:
+    | NonCancelableEventHandler<PaginationProps.ChangeDetail>
+    | undefined;
   readonly handleSortingChange: (
     event: ReadonlyCloudscapeTableSortingEvent<Item>,
   ) => void;
-  readonly handleTextFilterChange: (
-    event: Readonly<
-      NonCancelableCustomEvent<Readonly<TextFilterProps.ChangeDetail>>
-    >,
-  ) => void;
+  readonly handleTextFilterChange:
+    | NonCancelableEventHandler<TextFilterProps.ChangeDetail>
+    | undefined;
+  readonly pageSizePreference:
+    | CollectionPreferencesProps.PageSizePreference
+    | undefined;
+  readonly visibleContentPreference:
+    | CollectionPreferencesProps.VisibleContentPreference
+    | undefined;
 }
 
+const DEFAULT_ROWS_PER_PAGE_OPTIONS: readonly never[] = [];
 const FIRST_PAGE = 1;
 
 export default function useCloudscapeTableHook<
@@ -88,15 +90,17 @@ export default function useCloudscapeTableHook<
 >({
   Description,
   columns,
+  filter,
   onFilterChange,
   onPageChange,
   onRowsPerPageChange,
   onSort,
   onVisibleColumnsChange,
+  page = FIRST_PAGE,
   rows,
   rowsCount,
   rowsPerPage,
-  rowsPerPageOptions,
+  rowsPerPageOptions = DEFAULT_ROWS_PER_PAGE_OPTIONS,
   sortAscending,
   sortColumnIndex,
   visibleColumnIndices,
@@ -113,21 +117,30 @@ export default function useCloudscapeTableHook<
       return mapColumnsToCloudscapeDefinitions(columns);
     }, [columns]);
 
-  const visibleContent: readonly string[] = useMemo((): readonly string[] => {
+  const visibleContent: readonly string[] | undefined = useMemo(():
+    | readonly string[]
+    | undefined => {
+    if (typeof visibleColumnIndices === 'undefined') {
+      return;
+    }
+
     const mapColumnIndexToContent = (columnIndex: number): string => {
       const columnDefinition: TableProps.ColumnDefinition<Item> | undefined =
         columnDefinitions[columnIndex];
       if (findUndefined(columnDefinition)) {
         throw new Error(`Expected column definition #${columnIndex} to exist.`);
       }
+
       const content: string | undefined = columnDefinition.id;
       if (findUndefined(content)) {
         throw new Error(
           `Expected column definition #${columnIndex} to have an ID.`,
         );
       }
+
       return content;
     };
+
     return visibleColumnIndices.map(mapColumnIndexToContent);
   }, [columnDefinitions, visibleColumnIndices]);
 
@@ -135,7 +148,7 @@ export default function useCloudscapeTableHook<
   const DescriptionPortal: ComponentType<Record<string, never>> =
     useAwsuiTableItemDescription({
       Component: Description,
-      colSpan: visibleColumnIndices.length,
+      colSpan: visibleColumnIndices?.length ?? columnDefinitions.length,
       items: rows,
       ref,
     });
@@ -147,7 +160,9 @@ export default function useCloudscapeTableHook<
     columnDefinitions,
     confirmLabel: translate('Confirm') ?? '...',
     countText: useCloudscapeCountText(rowsCount),
+    currentPageIndex: page,
     filteringAriaLabel: translate('Filter packages'), // TODO
+    filteringText: filter ?? '',
     pagesCount: Math.ceil(rowsCount / rowsPerPage),
     ref,
     sortingDescending: !sortAscending,
@@ -163,8 +178,8 @@ export default function useCloudscapeTableHook<
         >,
       ): void => {
         if (findDefined(e.detail.pageSize)) {
-          onPageChange(FIRST_PAGE);
-          onRowsPerPageChange(e.detail.pageSize);
+          onPageChange?.(FIRST_PAGE);
+          onRowsPerPageChange?.(e.detail.pageSize);
         }
 
         if (findDefined(e.detail.visibleContent)) {
@@ -186,7 +201,7 @@ export default function useCloudscapeTableHook<
           const newVisibleColumns: readonly number[] = mapContentToColumns(
             e.detail.visibleContent,
           );
-          onVisibleColumnsChange(newVisibleColumns);
+          onVisibleColumnsChange?.(newVisibleColumns);
         }
 
         if (findDefined(e.detail.wrapLines)) {
@@ -201,11 +216,14 @@ export default function useCloudscapeTableHook<
       ],
     ),
 
-    handlePaginationChange: useMemo(
-      (): CloudscapePaginationChangeHandler =>
-        mapNumberDispatchToCloudscapePaginationChangeHandler(onPageChange),
-      [onPageChange],
-    ),
+    handlePaginationChange: useMemo(():
+      | CloudscapePaginationChangeHandler
+      | undefined => {
+      if (typeof onPageChange === 'undefined') {
+        return;
+      }
+      return mapNumberDispatchToCloudscapePaginationChangeHandler(onPageChange);
+    }, [onPageChange]),
 
     handleSortingChange: useCallback(
       (e: ReadonlyCloudscapeTableSortingEvent<Item>): void => {
@@ -217,25 +235,35 @@ export default function useCloudscapeTableHook<
       [onSort],
     ),
 
-    handleTextFilterChange: useCallback(
-      (
+    handleTextFilterChange: useMemo(():
+      | NonCancelableEventHandler<TextFilterProps.ChangeDetail>
+      | undefined => {
+      if (typeof onFilterChange === 'undefined') {
+        return;
+      }
+
+      return (
         e: Readonly<
           NonCancelableCustomEvent<Readonly<TextFilterProps.ChangeDetail>>
         >,
       ): void => {
         onFilterChange(e.detail.filteringText);
-        onPageChange(FIRST_PAGE);
-      },
-      [onFilterChange, onPageChange],
-    ),
+        onPageChange?.(FIRST_PAGE);
+      };
+    }, [onFilterChange, onPageChange]),
 
-    pageSizePreference: useMemo(
-      (): CollectionPreferencesProps.PageSizePreference => ({
+    pageSizePreference: useMemo(():
+      | CollectionPreferencesProps.PageSizePreference
+      | undefined => {
+      if (typeof onRowsPerPageChange === 'undefined') {
+        return;
+      }
+
+      return {
         options: rowsPerPageOptions.map(mapRowsPerPageOptionToPageSizeOption),
         title: translate('Select page size.') ?? '...',
-      }),
-      [rowsPerPageOptions, translate],
-    ),
+      };
+    }, [onRowsPerPageChange, rowsPerPageOptions, translate]),
 
     paginationAriaLabels: useMemo((): PaginationProps.Labels => {
       const labels: PaginationProps.Labels = {};
@@ -254,14 +282,20 @@ export default function useCloudscapeTableHook<
       return labels;
     }, [translate]),
 
-    preferences: useMemo(
-      (): CollectionPreferencesProps.Preferences<void> => ({
+    preferences: useMemo((): CollectionPreferencesProps.Preferences<void> => {
+      if (typeof visibleContent === 'undefined') {
+        return {
+          pageSize: rowsPerPage,
+          wrapLines,
+        };
+      }
+
+      return {
         pageSize: rowsPerPage,
         visibleContent,
         wrapLines,
-      }),
-      [rowsPerPage, visibleContent, wrapLines],
-    ),
+      };
+    }, [rowsPerPage, visibleContent, wrapLines]),
 
     sortingColumn: useMemo((): TableProps.SortingColumn<Item> | undefined => {
       if (findUndefined(sortColumnIndex)) {
@@ -273,8 +307,14 @@ export default function useCloudscapeTableHook<
       };
     }, [sortColumnIndex]),
 
-    visibleContentPreference: useMemo(
-      (): CollectionPreferencesProps.VisibleContentPreference => ({
+    visibleContentPreference: useMemo(():
+      | CollectionPreferencesProps.VisibleContentPreference
+      | undefined => {
+      if (typeof onVisibleColumnsChange === 'undefined') {
+        return;
+      }
+
+      return {
         title: translate('Select visible columns.') ?? '...',
         options: [
           {
@@ -282,9 +322,8 @@ export default function useCloudscapeTableHook<
             options: columns.map(mapColumnToCloudscapeVisibleContentOption),
           },
         ],
-      }),
-      [columns, translate],
-    ),
+      };
+    }, [columns, onVisibleColumnsChange, translate]),
 
     wrapLinesPreference: useMemo(
       (): CollectionPreferencesProps.WrapLinesPreference => ({

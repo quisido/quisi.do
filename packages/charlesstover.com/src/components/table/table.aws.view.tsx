@@ -1,4 +1,6 @@
-import CollectionPreferences from '@awsui/components-react/collection-preferences';
+import CollectionPreferences, {
+  CollectionPreferencesProps,
+} from '@awsui/components-react/collection-preferences';
 import Header from '@awsui/components-react/header';
 import Pagination from '@awsui/components-react/pagination';
 import type { TableProps } from '@awsui/components-react/table';
@@ -38,7 +40,9 @@ export default function AwsTable<Item extends Record<string, unknown>>({
     columnDefinitions,
     confirmLabel,
     countText,
+    currentPageIndex,
     filteringAriaLabel,
+    filteringText,
     handleCollectionPreferencesConfirm,
     handlePaginationChange,
     handleSortingChange,
@@ -57,11 +61,13 @@ export default function AwsTable<Item extends Record<string, unknown>>({
   } = useAwsTable({
     Description,
     columns,
+    filter,
     onFilterChange,
     onPageChange,
     onRowsPerPageChange,
     onSort,
     onVisibleColumnsChange,
+    page,
     rows,
     rowsCount,
     rowsPerPage,
@@ -73,7 +79,19 @@ export default function AwsTable<Item extends Record<string, unknown>>({
 
   // Workaround until AWS UI supports TypeScript 4.4 exact optional properties.
   // https://github.com/aws/awsui-documentation/issues/14
-  const optionalTableProps: Pick<
+  const collectionPreferenceProps: Pick<
+    CollectionPreferencesProps,
+    'pageSizePreference' | 'visibleContentPreference'
+  > = {};
+  if (typeof pageSizePreference !== 'undefined') {
+    collectionPreferenceProps.pageSizePreference = pageSizePreference;
+  }
+  if (typeof visibleContentPreference !== 'undefined') {
+    collectionPreferenceProps.visibleContentPreference =
+      visibleContentPreference;
+  }
+
+  const tableProps: Pick<
     TableProps<Item>,
     | 'loadingText'
     | 'sortingColumn'
@@ -82,25 +100,24 @@ export default function AwsTable<Item extends Record<string, unknown>>({
     | 'wrapLines'
   > = {};
   if (findDefined(loading)) {
-    optionalTableProps.loadingText = loading;
+    tableProps.loadingText = loading;
   }
   if (findDefined(sortingColumn)) {
-    optionalTableProps.sortingColumn = sortingColumn;
+    tableProps.sortingColumn = sortingColumn;
   }
   if (findDefined(sortingDescending)) {
-    optionalTableProps.sortingDescending = sortingDescending;
+    tableProps.sortingDescending = sortingDescending;
   }
   if (findDefined(visibleContent)) {
-    optionalTableProps.visibleColumns = visibleContent;
+    tableProps.visibleColumns = visibleContent;
   }
   if (findDefined(wrapLines)) {
-    optionalTableProps.wrapLines = wrapLines;
+    tableProps.wrapLines = wrapLines;
   }
 
-  const optionalTextFilterProps: Pick<TextFilterProps, 'filteringAriaLabel'> =
-    {};
+  const textFilterProps: Pick<TextFilterProps, 'filteringAriaLabel'> = {};
   if (findDefined(filteringAriaLabel)) {
-    optionalTextFilterProps.filteringAriaLabel = filteringAriaLabel;
+    textFilterProps.filteringAriaLabel = filteringAriaLabel;
   }
 
   // Technical debt: We need a `trackBy` prop to uniquely identify the row, but
@@ -117,34 +134,37 @@ export default function AwsTable<Item extends Record<string, unknown>>({
         onSortingChange={handleSortingChange}
         resizableColumns
         stickyHeader
-        {...optionalTableProps}
+        {...tableProps}
         filter={
-          <TextFilter
-            countText={countText}
-            filteringPlaceholder={filterPlaceholder ?? '...'}
-            filteringText={filter}
-            onChange={handleTextFilterChange}
-            {...optionalTextFilterProps}
-          />
+          typeof handleTextFilterChange !== 'undefined' && (
+            <TextFilter
+              countText={countText}
+              filteringPlaceholder={filterPlaceholder ?? '...'}
+              filteringText={filteringText}
+              onChange={handleTextFilterChange}
+              {...textFilterProps}
+            />
+          )
         }
         pagination={
-          <Pagination
-            ariaLabels={paginationAriaLabels}
-            currentPageIndex={page}
-            onChange={handlePaginationChange}
-            pagesCount={pagesCount}
-          />
+          typeof handlePaginationChange !== 'undefined' && (
+            <Pagination
+              ariaLabels={paginationAriaLabels}
+              currentPageIndex={currentPageIndex}
+              onChange={handlePaginationChange}
+              pagesCount={pagesCount}
+            />
+          )
         }
         preferences={
           <CollectionPreferences
             cancelLabel={cancelLabel}
             confirmLabel={confirmLabel}
             onConfirm={handleCollectionPreferencesConfirm}
-            pageSizePreference={pageSizePreference}
             preferences={preferences}
             title={collectionPreferencesTitle}
-            visibleContentPreference={visibleContentPreference}
             wrapLinesPreference={wrapLinesPreference}
+            {...collectionPreferenceProps}
           />
         }
       />

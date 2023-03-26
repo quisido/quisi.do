@@ -11,6 +11,7 @@ import useCloudscapeTable from './table.cloudscape.hook';
 import type Props from './types/props';
 import styles from './table.cloudscape.module.scss';
 import validateString from '../../utils/validate-string';
+import { CollectionPreferencesProps } from '@awsui/components-react';
 
 const rootClassName: string = validateString(styles.root);
 
@@ -42,7 +43,9 @@ export default function CloudscapeTable<Item extends Record<string, unknown>>({
     columnDefinitions,
     confirmLabel,
     countText,
+    currentPageIndex,
     filteringAriaLabel,
+    filteringText,
     handleCollectionPreferencesConfirm,
     handlePaginationChange,
     handleSortingChange,
@@ -61,11 +64,13 @@ export default function CloudscapeTable<Item extends Record<string, unknown>>({
   } = useCloudscapeTable({
     Description,
     columns,
+    filter,
     onFilterChange,
     onPageChange,
     onRowsPerPageChange,
     onSort,
     onVisibleColumnsChange,
+    page,
     rows,
     rowsCount,
     rowsPerPage,
@@ -77,7 +82,19 @@ export default function CloudscapeTable<Item extends Record<string, unknown>>({
 
   // Workaround until Cloudscape supports TypeScript 4.4 exact optional properties.
   // https://github.com/aws/awsui-documentation/issues/14
-  const optionalTableProps: Pick<
+  const collectionPreferencesProps: Pick<
+    CollectionPreferencesProps,
+    'pageSizePreference' | 'visibleContentPreference'
+  > = {};
+  if (typeof pageSizePreference !== 'undefined') {
+    collectionPreferencesProps.pageSizePreference = pageSizePreference;
+  }
+  if (typeof visibleContentPreference !== 'undefined') {
+    collectionPreferencesProps.visibleContentPreference =
+      visibleContentPreference;
+  }
+
+  const tableProps: Pick<
     TableProps<Item>,
     | 'loadingText'
     | 'sortingColumn'
@@ -86,25 +103,24 @@ export default function CloudscapeTable<Item extends Record<string, unknown>>({
     | 'wrapLines'
   > = {};
   if (findDefined(loading)) {
-    optionalTableProps.loadingText = loading;
+    tableProps.loadingText = loading;
   }
   if (findDefined(sortingColumn)) {
-    optionalTableProps.sortingColumn = sortingColumn;
+    tableProps.sortingColumn = sortingColumn;
   }
   if (findDefined(sortingDescending)) {
-    optionalTableProps.sortingDescending = sortingDescending;
+    tableProps.sortingDescending = sortingDescending;
   }
   if (findDefined(visibleContent)) {
-    optionalTableProps.visibleColumns = visibleContent;
+    tableProps.visibleColumns = visibleContent;
   }
   if (findDefined(wrapLines)) {
-    optionalTableProps.wrapLines = wrapLines;
+    tableProps.wrapLines = wrapLines;
   }
 
-  const optionalTextFilterProps: Pick<TextFilterProps, 'filteringAriaLabel'> =
-    {};
+  const textFilterProps: Pick<TextFilterProps, 'filteringAriaLabel'> = {};
   if (findDefined(filteringAriaLabel)) {
-    optionalTextFilterProps.filteringAriaLabel = filteringAriaLabel;
+    textFilterProps.filteringAriaLabel = filteringAriaLabel;
   }
 
   // Technical debt: We need a `trackBy` prop to uniquely identify the row, but
@@ -122,34 +138,37 @@ export default function CloudscapeTable<Item extends Record<string, unknown>>({
         onSortingChange={handleSortingChange}
         resizableColumns
         stickyHeader
-        {...optionalTableProps}
+        {...tableProps}
         filter={
-          <TextFilter
-            countText={countText}
-            filteringPlaceholder={filterPlaceholder ?? '...'}
-            filteringText={filter}
-            onChange={handleTextFilterChange}
-            {...optionalTextFilterProps}
-          />
+          typeof handleTextFilterChange !== 'undefined' && (
+            <TextFilter
+              countText={countText}
+              filteringPlaceholder={filterPlaceholder ?? '...'}
+              filteringText={filteringText}
+              onChange={handleTextFilterChange}
+              {...textFilterProps}
+            />
+          )
         }
         pagination={
-          <Pagination
-            ariaLabels={paginationAriaLabels}
-            currentPageIndex={page}
-            onChange={handlePaginationChange}
-            pagesCount={pagesCount}
-          />
+          typeof handlePaginationChange !== 'undefined' && (
+            <Pagination
+              ariaLabels={paginationAriaLabels}
+              currentPageIndex={currentPageIndex}
+              onChange={handlePaginationChange}
+              pagesCount={pagesCount}
+            />
+          )
         }
         preferences={
           <CollectionPreferences
             cancelLabel={cancelLabel}
             confirmLabel={confirmLabel}
             onConfirm={handleCollectionPreferencesConfirm}
-            pageSizePreference={pageSizePreference}
             preferences={preferences}
             title={collectionPreferencesTitle}
-            visibleContentPreference={visibleContentPreference}
             wrapLinesPreference={wrapLinesPreference}
+            {...collectionPreferencesProps}
           />
         }
       />
