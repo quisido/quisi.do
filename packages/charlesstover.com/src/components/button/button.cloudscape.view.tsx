@@ -1,7 +1,7 @@
 import type { ButtonProps } from '@cloudscape-design/components/button';
 import Button from '@cloudscape-design/components/button';
 import type { ReactElement } from 'react';
-import findDefined from '../../utils/find-defined';
+import isDefined from '../../utils/is-defined';
 import useCloudscapeButton from './button.cloudscape.hook';
 import type Props from './types/props';
 
@@ -18,16 +18,16 @@ export default function CloudscapeButton({
     ButtonProps,
     'href' | 'iconAlt' | 'iconName' | 'target'
   > = {};
-  if (findDefined(href)) {
+  if (isDefined(href)) {
     optionalProps.href = href;
   }
-  if (findDefined(iconAlt)) {
+  if (isDefined(iconAlt)) {
     optionalProps.iconAlt = iconAlt;
   }
-  if (findDefined(iconName)) {
+  if (isDefined(iconName)) {
     optionalProps.iconName = iconName;
   }
-  if (findDefined(target)) {
+  if (isDefined(target)) {
     optionalProps.target = target;
   }
 

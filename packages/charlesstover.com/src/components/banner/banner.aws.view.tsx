@@ -1,7 +1,7 @@
 import type { AlertProps } from '@awsui/components-react/alert';
 import Alert from '@awsui/components-react/alert';
 import type { ReactElement } from 'react';
-import findDefined from '../../utils/find-defined';
+import isDefined from '../../utils/is-defined';
 import useAwsBanner from './banner.aws.hook';
 import type Props from './types/props';
 
@@ -18,7 +18,7 @@ export default function AwsBanner({
     'dismissAriaLabel' | 'dismissible' | 'onDismiss'
   > = {};
 
-  if (findDefined(dismissAriaLabel)) {
+  if (isDefined(dismissAriaLabel)) {
     optionalAlertProps.dismissAriaLabel = dismissAriaLabel;
   }
 

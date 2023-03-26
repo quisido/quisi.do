@@ -1,7 +1,7 @@
 import type { BoxProps } from '@awsui/components-react/box';
 import Box from '@awsui/components-react/box';
 import type { ReactElement } from 'react';
-import findDefined from '../../utils/find-defined';
+import isDefined from '../../utils/is-defined';
 import useAwsDiv from './div.aws.hook';
 import type Props from './types/props';
 
@@ -45,23 +45,23 @@ export default function AwsDiv({
   });
 
   const optionalProps: BoxProps = {};
-  if (findDefined(displayState)) {
+  if (isDefined(displayState)) {
     optionalProps.display = displayState;
   }
-  if (findDefined(float)) {
+  if (isDefined(float)) {
     optionalProps.float = float;
   }
-  if (findDefined(marginState)) {
+  if (isDefined(marginState)) {
     optionalProps.margin = marginState;
   }
-  if (findDefined(textAlign)) {
+  if (isDefined(textAlign)) {
     optionalProps.textAlign = textAlign;
   }
-  if (findDefined(variant)) {
+  if (isDefined(variant)) {
     optionalProps.variant = variant;
   }
 
-  if (!findDefined(classNameState)) {
+  if (!isDefined(classNameState)) {
     return <Box {...optionalProps}>{children}</Box>;
   }
 

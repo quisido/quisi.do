@@ -2,7 +2,7 @@ import type { datadogRum } from '@datadog/browser-rum';
 import { useEffect } from 'react';
 import useDatadogRum from '../../../hooks/use-datadog-rum';
 import type User from '../../../types/user';
-import findUndefined from '../utils/find-undefined';
+import isUndefined from '../utils/is-undefined';
 import parseStringifiedObject from '../utils/parse-stringified-object';
 
 const DEFAULT_USER: User = {};
@@ -30,7 +30,7 @@ export default function useUser(user: Readonly<User> | undefined): void {
       name,
     };
 
-    if (Object.values(newUser).every(findUndefined)) {
+    if (Object.values(newUser).every(isUndefined)) {
       return;
     }
 

@@ -1,6 +1,6 @@
 import type { SideNavigationProps } from '@cloudscape-design/components/side-navigation';
 import type { TranslateFunction } from 'lazy-i18n';
-import findUndefined from '../../../utils/find-undefined';
+import isUndefined from '../../../utils/is-undefined';
 import mapComponentToElement from '../../../utils/map-component-to-element';
 import NAVIGATION_ITEMS from '../constants/navigation-items';
 import type NavigationText from '../constants/navigation-text';
@@ -43,7 +43,7 @@ export default function mapTranslationFunctionToCloudscapeSideNavigationItems(
     if (filterByNavigationComponent(item)) {
       // Static navigation component
       const { Component, defaultExpanded, text } = item;
-      if (findUndefined(defaultExpanded)) {
+      if (isUndefined(defaultExpanded)) {
         return {
           href: '#',
           info: mapComponentToElement(Component),

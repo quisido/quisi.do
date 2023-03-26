@@ -1,4 +1,4 @@
-import findUndefined from '../../../utils/find-undefined';
+import isUndefined from '../../../utils/is-undefined';
 import type Publication from '../types/publication';
 
 const NEXT = 1;
@@ -9,13 +9,13 @@ export default function sortPublicationItemsByReadingTime(
   { readingTime: a }: Readonly<Publication>,
   { readingTime: b }: Readonly<Publication>,
 ): number {
-  if (findUndefined(a)) {
-    if (findUndefined(b)) {
+  if (isUndefined(a)) {
+    if (isUndefined(b)) {
       return SAME;
     }
     return NEXT;
   }
-  if (findUndefined(b)) {
+  if (isUndefined(b)) {
     return PREVIOUS;
   }
   if (a < b) {

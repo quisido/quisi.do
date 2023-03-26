@@ -1,4 +1,4 @@
-name: Continuous deployment
+name: CI/CD
 
 jobs:
   # Stage 1: analyze, install

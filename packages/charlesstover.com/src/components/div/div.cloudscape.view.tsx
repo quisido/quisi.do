@@ -1,7 +1,7 @@
 import type { BoxProps } from '@cloudscape-design/components/box';
 import Box from '@cloudscape-design/components/box';
 import type { ReactElement } from 'react';
-import findDefined from '../../utils/find-defined';
+import isDefined from '../../utils/is-defined';
 import useCloudscapeDiv from './div.cloudscape.hook';
 import type Props from './types/props';
 
@@ -45,22 +45,22 @@ export default function CloudscapeDiv({
   });
 
   const optionalProps: BoxProps = {};
-  if (findDefined(classNameState)) {
+  if (isDefined(classNameState)) {
     optionalProps.className = classNameState;
   }
-  if (findDefined(displayState)) {
+  if (isDefined(displayState)) {
     optionalProps.display = displayState;
   }
-  if (findDefined(float)) {
+  if (isDefined(float)) {
     optionalProps.float = float;
   }
-  if (findDefined(marginState)) {
+  if (isDefined(marginState)) {
     optionalProps.margin = marginState;
   }
-  if (findDefined(textAlign)) {
+  if (isDefined(textAlign)) {
     optionalProps.textAlign = textAlign;
   }
-  if (findDefined(variant)) {
+  if (isDefined(variant)) {
     optionalProps.variant = variant;
   }
 

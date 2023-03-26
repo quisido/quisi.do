@@ -1,7 +1,7 @@
 import type { BoxProps } from '@awsui/components-react/box';
 import { useMemo } from 'react';
-import findDefined from '../../utils/find-defined';
-import findUndefined from '../../utils/find-undefined';
+import isDefined from '../../utils/is-defined';
+import isUndefined from '../../utils/is-undefined';
 import validateString from '../../utils/validate-string';
 import styles from './div.aws.module.scss';
 import mapSizeToAwsSpacingSize from './utils/map-size-to-aws-spacing-size';
@@ -158,25 +158,25 @@ export default function useAwsDiv({
 
     margin: useMemo((): BoxProps.Spacing | undefined => {
       if (
-        findUndefined(marginBottomSize) &&
-        findUndefined(marginLeftSize) &&
-        findUndefined(marginRightSize) &&
-        findUndefined(marginTopSize)
+        isUndefined(marginBottomSize) &&
+        isUndefined(marginLeftSize) &&
+        isUndefined(marginRightSize) &&
+        isUndefined(marginTopSize)
       ) {
         return;
       }
 
       const newMargin: BoxProps.Spacing = {};
-      if (findDefined(marginBottomSize)) {
+      if (isDefined(marginBottomSize)) {
         newMargin.bottom = mapSizeToAwsSpacingSize(marginBottomSize);
       }
-      if (findDefined(marginLeftSize)) {
+      if (isDefined(marginLeftSize)) {
         newMargin.left = mapSizeToAwsSpacingSize(marginLeftSize);
       }
-      if (findDefined(marginRightSize)) {
+      if (isDefined(marginRightSize)) {
         newMargin.right = mapSizeToAwsSpacingSize(marginRightSize);
       }
-      if (findDefined(marginTopSize)) {
+      if (isDefined(marginTopSize)) {
         newMargin.top = mapSizeToAwsSpacingSize(marginTopSize);
       }
 

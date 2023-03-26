@@ -3,7 +3,7 @@ import CardActions from '@mui/material/CardActions';
 import MuiContent from '@mui/material/CardContent';
 import MuiHeader from '@mui/material/CardHeader';
 import type { ReactElement } from 'react';
-import findDefined from '../../../../utils/find-defined';
+import isDefined from '../../../../utils/is-defined';
 import validateString from '../../../../utils/validate-string';
 import type Props from '../../types/mui-card-props';
 import styles from './mui-card.module.scss';
@@ -18,11 +18,11 @@ export default function MuiCard<Item extends Record<string, unknown>>({
 }: Readonly<Props<Item>>): ReactElement {
   return (
     <Card className={rootClassName}>
-      {findDefined(Header) && <MuiHeader title={<Header {...item} />} />}
+      {isDefined(Header) && <MuiHeader title={<Header {...item} />} />}
       <MuiContent>
         <Content {...item} />
       </MuiContent>
-      {findDefined(Footer) && (
+      {isDefined(Footer) && (
         <CardActions>
           <Footer {...item} />
         </CardActions>

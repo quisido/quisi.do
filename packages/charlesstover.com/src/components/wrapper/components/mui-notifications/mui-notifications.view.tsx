@@ -5,7 +5,7 @@ import type { SnackbarOrigin } from '@mui/material/Snackbar';
 import Snackbar from '@mui/material/Snackbar';
 import type { ReactElement } from 'react';
 import type Notification from '../../../../types/notification';
-import findUndefined from '../../../../utils/find-undefined';
+import isUndefined from '../../../../utils/is-undefined';
 
 interface Props {
   readonly children: readonly Notification[] | undefined;
@@ -43,7 +43,7 @@ const mapChildToSnackbar = (
 export default function MuiWrapperNotifications({
   children,
 }: Readonly<Props>): ReactElement | null {
-  if (findUndefined(children)) {
+  if (isUndefined(children)) {
     return null;
   }
 

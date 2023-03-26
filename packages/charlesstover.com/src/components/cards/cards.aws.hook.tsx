@@ -1,7 +1,7 @@
 import type { CardsProps } from '@awsui/components-react/cards';
 import type { ComponentType } from 'react';
 import { useMemo } from 'react';
-import findDefined from '../../utils/find-defined';
+import isDefined from '../../utils/is-defined';
 import mapComponentToRenderer from '../../utils/map-component-to-renderer';
 
 interface Props<Item> {
@@ -28,7 +28,7 @@ export default function useAwsCards<Item extends Record<string, unknown>>({
         },
       ];
 
-      if (findDefined(CardFooter)) {
+      if (isDefined(CardFooter)) {
         sections.push({
           content: mapComponentToRenderer(CardFooter),
           id: 'footer',

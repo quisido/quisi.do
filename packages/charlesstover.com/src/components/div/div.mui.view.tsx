@@ -1,7 +1,7 @@
 import type { BoxProps } from '@mui/material/Box';
 import Box from '@mui/material/Box';
 import type { ReactElement } from 'react';
-import findDefined from '../../utils/find-defined';
+import isDefined from '../../utils/is-defined';
 import useMuiDiv from './div.mui.hook';
 import type Props from './types/props';
 
@@ -35,43 +35,43 @@ export default function MuiDiv({
   });
 
   const optionalProps: BoxProps = {};
-  if (findDefined(className)) {
+  if (isDefined(className)) {
     optionalProps.className = className;
   }
 
-  if (findDefined(display)) {
+  if (isDefined(display)) {
     optionalProps.display = display;
   }
 
-  if (findDefined(flexDirection)) {
+  if (isDefined(flexDirection)) {
     optionalProps.flexDirection = flexDirection;
   }
 
-  if (findDefined(flexWrap)) {
+  if (isDefined(flexWrap)) {
     optionalProps.flexWrap = flexWrap;
   }
 
-  if (findDefined(element)) {
+  if (isDefined(element)) {
     optionalProps.component = element;
   }
 
-  if (findDefined(mb)) {
+  if (isDefined(mb)) {
     optionalProps.mb = mb;
   }
 
-  if (findDefined(ml)) {
+  if (isDefined(ml)) {
     optionalProps.ml = ml;
   }
 
-  if (findDefined(mr)) {
+  if (isDefined(mr)) {
     optionalProps.mr = mr;
   }
 
-  if (findDefined(mt)) {
+  if (isDefined(mt)) {
     optionalProps.mt = mt;
   }
 
-  if (findDefined(style)) {
+  if (isDefined(style)) {
     optionalProps.style = style;
   }
 

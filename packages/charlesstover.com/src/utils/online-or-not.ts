@@ -1,4 +1,4 @@
-import findRecord from './find-record';
+import isRecord from './is-record';
 
 export interface Options {
   readonly fetch: Window['fetch'];
@@ -23,10 +23,10 @@ export interface UptimeChecksResult {
 
 function findUptimeChecks(value: unknown): value is UptimeChecks {
   return (
-    findRecord(value) &&
+    isRecord(value) &&
     Array.isArray(value.errors) &&
     Array.isArray(value.messages) &&
-    findRecord(value.result) &&
+    isRecord(value.result) &&
     typeof value.result.id === 'string' &&
     typeof value.result.lastQueued === 'string' &&
     typeof value.result.name === 'string' &&

@@ -1,9 +1,9 @@
 import type DatasetValues from '../types/dataset-values';
-import findDatasetValue from './find-dataset-value';
-import findObject from './find-object';
+import isDatasetValue from './is-dataset-value';
+import isObject from './is-object';
 
-export default function findDatasetValues(
+export default function isDatasetValues(
   value: unknown,
 ): value is DatasetValues {
-  return findObject(value) && Object.values(value).every(findDatasetValue);
+  return isObject(value) && Object.values(value).every(isDatasetValue);
 }

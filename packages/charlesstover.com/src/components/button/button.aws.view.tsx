@@ -1,7 +1,7 @@
 import type { ButtonProps } from '@awsui/components-react/button';
 import Button from '@awsui/components-react/button';
 import type { ReactElement } from 'react';
-import findDefined from '../../utils/find-defined';
+import isDefined from '../../utils/is-defined';
 import useAwsButton from './button.aws.hook';
 import type Props from './types/props';
 
@@ -19,19 +19,19 @@ export default function AwsButton({
     'href' | 'iconAlt' | 'iconName' | 'target'
   > = {};
 
-  if (findDefined(href)) {
+  if (isDefined(href)) {
     optionalProps.href = href;
   }
 
-  if (findDefined(iconAlt)) {
+  if (isDefined(iconAlt)) {
     optionalProps.iconAlt = iconAlt;
   }
 
-  if (findDefined(iconName)) {
+  if (isDefined(iconName)) {
     optionalProps.iconName = iconName;
   }
 
-  if (findDefined(target)) {
+  if (isDefined(target)) {
     optionalProps.target = target;
   }
 

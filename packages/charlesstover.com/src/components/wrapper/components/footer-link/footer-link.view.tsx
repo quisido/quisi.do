@@ -4,13 +4,13 @@ import Link from '../../../../components/link';
 import GITHUB_COMMIT_URL from '../../../../constants/github-commit-url';
 import GITHUB_REPOSITORY_URL from '../../../../constants/github-repository-url';
 import VERSION from '../../../../constants/version';
-import findUndefined from '../../../../utils/find-undefined';
+import isUndefined from '../../../../utils/is-undefined';
 
 const VERSION_HREF: string | undefined =
   GITHUB_COMMIT_URL ?? GITHUB_REPOSITORY_URL;
 
 export default function FooterLink(): ReactElement {
-  if (findUndefined(VERSION_HREF)) {
+  if (isUndefined(VERSION_HREF)) {
     return <I18n version={VERSION}>version: $version</I18n>;
   }
 
