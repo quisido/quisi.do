@@ -5,23 +5,23 @@ import type RowsPerPageOption from '../../../types/table-rows-per-page-option';
 export default interface Props<Item> {
   readonly Description?: ComponentType<Item> | undefined;
   readonly columns: readonly Column<Item>[];
-  readonly filter: string;
+  readonly filter?: string;
   readonly filterPlaceholder?: string | undefined;
   readonly header?: ReactElement;
   readonly loading?: string | undefined;
-  readonly onFilterChange: (filter: string) => void;
-  readonly onPageChange: (page: number) => void;
-  readonly onRowsPerPageChange: (rowsPerPage: number) => void;
+  readonly onFilterChange?: ((filter: string) => void) | undefined;
+  readonly onPageChange?: ((page: number) => void) | undefined;
+  readonly onRowsPerPageChange?: ((rowsPerPage: number) => void) | undefined;
   readonly onSort: (columnIndex: number, ascending: boolean) => void;
-  readonly page: number;
+  readonly page?: number | undefined;
   readonly rows: readonly Item[];
   readonly rowsCount: number;
   readonly rowsPerPage: number;
-  readonly rowsPerPageOptions: readonly RowsPerPageOption[];
+  readonly rowsPerPageOptions?: readonly RowsPerPageOption[] | undefined;
   readonly sortAscending: boolean;
   readonly sortColumnIndex?: number | undefined;
-  readonly visibleColumnIndices: readonly number[];
-  readonly onVisibleColumnsChange: (
-    visibleColumnIndices: readonly number[],
-  ) => void;
+  readonly visibleColumnIndices?: readonly number[] | undefined;
+  readonly onVisibleColumnsChange?:
+    | ((visibleColumnIndices: readonly number[]) => void)
+    | undefined;
 }

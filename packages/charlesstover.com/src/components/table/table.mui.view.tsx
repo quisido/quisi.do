@@ -6,6 +6,7 @@ import Body from '@mui/material/TableBody';
 import Container from '@mui/material/TableContainer';
 import Footer from '@mui/material/TableFooter';
 import Head from '@mui/material/TableHead';
+import type { TablePaginationProps } from '@mui/material/TablePagination';
 import Pagination from '@mui/material/TablePagination';
 import MuiRow from '@mui/material/TableRow';
 import Toolbar from '@mui/material/Toolbar';
@@ -20,6 +21,7 @@ import Row from './components/mui-row';
 import useMuiTable from './table.mui.hook';
 import type Props from './types/props';
 
+const FIRST_PAGE = 1;
 const mapHeadCellPropsToComponent = mapComponentToPropMapper(HeadCell);
 const mapRowPropsToComponent = mapComponentToPropMapper(Row);
 
@@ -39,7 +41,7 @@ export default function MuiTable<Item extends Record<string, unknown>>({
   onPageChange,
   onRowsPerPageChange,
   onSort,
-  page: pageProp,
+  page: pageProp = FIRST_PAGE,
   rows,
   rowsCount,
   rowsPerPage,
@@ -69,6 +71,17 @@ export default function MuiTable<Item extends Record<string, unknown>>({
     sortAscending,
     sortColumnIndex,
   });
+
+  const paginationProps: Pick<
+    TablePaginationProps,
+    'onRowsPerPageChange' | 'rowsPerPageOptions'
+  > = {};
+  if (typeof handleRowsPerPageChange !== 'undefined') {
+    paginationProps.onRowsPerPageChange = handleRowsPerPageChange;
+  }
+  if (typeof rowsPerPageOptionsState !== 'undefined') {
+    paginationProps.rowsPerPageOptions = rowsPerPageOptionsState;
+  }
 
   return (
     <>
@@ -120,19 +133,19 @@ export default function MuiTable<Item extends Record<string, unknown>>({
           )}
         </Table>
       </Container>
-      {typeof loading !== 'string' && (
-        <Pagination
-          backIconButtonProps={backIconButtonProps}
-          component="div"
-          count={rowsCount}
-          nextIconButtonProps={nextIconButtonProps}
-          onPageChange={handlePageChange}
-          onRowsPerPageChange={handleRowsPerPageChange}
-          page={pageState}
-          rowsPerPage={rowsPerPage}
-          rowsPerPageOptions={rowsPerPageOptionsState}
-        />
-      )}
+      {typeof loading !== 'string' &&
+        typeof handlePageChange !== 'undefined' && (
+          <Pagination
+            backIconButtonProps={backIconButtonProps}
+            component="div"
+            count={rowsCount}
+            nextIconButtonProps={nextIconButtonProps}
+            onPageChange={handlePageChange}
+            page={pageState}
+            rowsPerPage={rowsPerPage}
+            {...paginationProps}
+          />
+        )}
     </>
   );
 }
