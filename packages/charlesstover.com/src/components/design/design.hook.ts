@@ -7,7 +7,7 @@ import type {
 import { useEffect, useState } from 'react';
 import type DesignSystem from '../../constants/design-system';
 import useDesignSystem from '../../hooks/use-design-system';
-import findDefined from '../../utils/find-defined';
+import isDefined from '../../utils/is-defined';
 import filterByPropsWithChildren from './utils/filter-by-props-with-children';
 
 interface Props<P extends Record<string, unknown>> {
@@ -56,7 +56,7 @@ export default function useDesign<P extends Record<string, unknown>>({
     showFallback,
 
     fallback:
-      filterByPropsWithChildren(props) && findDefined(props.children)
+      filterByPropsWithChildren(props) && isDefined(props.children)
         ? props.children
         : null,
   };

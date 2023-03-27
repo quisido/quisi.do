@@ -1,6 +1,6 @@
 import type CloudflareAnalytics from '../types/cloudflare-analytics';
 import type CloudflareAnalyticsDatasets from '../types/cloudflare-analytics-datasets';
-import findRecord from './find-record';
+import isRecord from './is-record';
 
 const hasNumericKeys = <K extends string>(
   record: Record<string, unknown>,
@@ -122,12 +122,12 @@ const WORKERS_INVOCATION_KEYS: Set<
 export default function findCloudflareAnalytics(
   value: unknown,
 ): value is CloudflareAnalytics {
-  if (!findRecord(value)) {
+  if (!isRecord(value)) {
     return false;
   }
 
   const { budget, datasets } = value;
-  if (typeof budget !== 'number' || !findRecord(datasets)) {
+  if (typeof budget !== 'number' || !isRecord(datasets)) {
     return false;
   }
 
@@ -138,10 +138,10 @@ export default function findCloudflareAnalytics(
     workersInvocationsAdaptive,
   } = datasets;
   return (
-    findRecord(rumPageloadEventsAdaptiveGroups) &&
-    findRecord(rumPerformanceEventsAdaptiveGroups) &&
-    findRecord(workersAnalyticsEngineAdaptiveGroups) &&
-    findRecord(workersInvocationsAdaptive) &&
+    isRecord(rumPageloadEventsAdaptiveGroups) &&
+    isRecord(rumPerformanceEventsAdaptiveGroups) &&
+    isRecord(workersAnalyticsEngineAdaptiveGroups) &&
+    isRecord(workersInvocationsAdaptive) &&
     hasNumericKeys(rumPageloadEventsAdaptiveGroups, RUM_PAGELOAD_KEYS) &&
     hasNumericKeys(rumPerformanceEventsAdaptiveGroups, RUM_PERFORMANCE_KEYS) &&
     hasNumericKeys(

@@ -2,7 +2,7 @@ import type { AppLayoutProps } from '@cloudscape-design/components/app-layout';
 import AppLayout from '@cloudscape-design/components/app-layout';
 import type { ReactElement } from 'react';
 import { Suspense } from 'react';
-import findDefined from '../../utils/find-defined';
+import isDefined from '../../utils/is-defined';
 import validateString from '../../utils/validate-string';
 import Breadcrumbs from './components/cloudscape-breadcrumbs';
 import Navigation from './components/cloudscape-navigation';
@@ -45,16 +45,16 @@ export default function CloudscapeWrapper({
     AppLayoutProps,
     'contentType' | 'navigationOpen' | 'toolsHide' | 'toolsOpen'
   > = {};
-  if (findDefined(contentType)) {
+  if (isDefined(contentType)) {
     optionalProps.contentType = contentType;
   }
-  if (findDefined(navigationOpen)) {
+  if (isDefined(navigationOpen)) {
     optionalProps.navigationOpen = navigationOpen;
   }
-  if (findDefined(toolsHide)) {
+  if (isDefined(toolsHide)) {
     optionalProps.toolsHide = toolsHide;
   }
-  if (findDefined(toolsOpen)) {
+  if (isDefined(toolsOpen)) {
     optionalProps.toolsOpen = toolsOpen;
   }
 

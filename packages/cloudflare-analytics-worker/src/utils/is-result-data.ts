@@ -1,10 +1,10 @@
 import type ResultData from '../types/result-data';
-import findObject from './find-object';
-import findViewer from './find-viewer';
+import isObject from './is-object';
+import findViewer from './is-viewer';
 
-export default function findResultData(value: unknown): value is ResultData {
+export default function isResultData(value: unknown): value is ResultData {
   return (
-    findObject(value) &&
+    isObject(value) &&
     'cost' in value &&
     typeof value.cost === 'number' &&
     'viewer' in value &&

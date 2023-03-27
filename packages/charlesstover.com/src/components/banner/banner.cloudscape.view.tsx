@@ -1,7 +1,7 @@
 import type { AlertProps } from '@cloudscape-design/components/alert';
 import Alert from '@cloudscape-design/components/alert';
 import type { ReactElement } from 'react';
-import findDefined from '../../utils/find-defined';
+import isDefined from '../../utils/is-defined';
 import validateString from '../../utils/validate-string';
 import useCloudscapeBanner from './banner.cloudscape.hook';
 import type Props from './types/props';
@@ -22,7 +22,7 @@ export default function CloudscapeBanner({
     'dismissAriaLabel' | 'dismissible' | 'onDismiss'
   > = {};
 
-  if (findDefined(dismissAriaLabel)) {
+  if (isDefined(dismissAriaLabel)) {
     optionalAlertProps.dismissAriaLabel = dismissAriaLabel;
   }
 

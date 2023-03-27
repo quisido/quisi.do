@@ -1,7 +1,7 @@
 import type { BoxProps } from '@mui/material/Box';
 import Box from '@mui/material/Box';
 import type { ReactElement } from 'react';
-import findDefined from '../../utils/find-defined';
+import isDefined from '../../utils/is-defined';
 import useMuiSpan from './span.mui.hook';
 import type Props from './types/props';
 
@@ -18,16 +18,16 @@ export default function MuiSpan({
   });
 
   const optionalProps: BoxProps = {};
-  if (findDefined(className)) {
+  if (isDefined(className)) {
     optionalProps.className = className;
   }
-  if (findDefined(colorState)) {
+  if (isDefined(colorState)) {
     optionalProps.color = colorState;
   }
-  if (findDefined(element)) {
+  if (isDefined(element)) {
     optionalProps.component = element;
   }
-  if (findDefined(fontSize)) {
+  if (isDefined(fontSize)) {
     optionalProps.fontSize = fontSize;
   }
 

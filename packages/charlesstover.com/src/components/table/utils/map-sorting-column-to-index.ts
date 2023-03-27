@@ -1,10 +1,10 @@
 import type { TableProps } from '@awsui/components-react/table';
-import findUndefined from '../../../utils/find-undefined';
+import isUndefined from '../../../utils/is-undefined';
 
 export default function mapSortingColumnToIndex<Item>({
   sortingField,
 }: Readonly<TableProps.SortingColumn<Item>>): number {
-  if (findUndefined(sortingField)) {
+  if (isUndefined(sortingField)) {
     throw new Error('Expected column to have a sorting field.');
   }
 

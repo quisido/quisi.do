@@ -1,7 +1,7 @@
 import type { ChipProps } from '@mui/material/Chip';
 import Chip from '@mui/material/Chip';
 import type { ReactElement } from 'react';
-import findDefined from '../../utils/find-defined';
+import isDefined from '../../utils/is-defined';
 import type Props from './types/props';
 
 export default function MuiChip({
@@ -9,7 +9,7 @@ export default function MuiChip({
   className,
 }: Readonly<Props>): ReactElement {
   const optionalProps: Pick<ChipProps, 'className'> = {};
-  if (findDefined(className)) {
+  if (isDefined(className)) {
     optionalProps.className = className;
   }
 

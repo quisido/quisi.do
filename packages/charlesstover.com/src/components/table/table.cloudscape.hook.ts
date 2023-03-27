@@ -12,8 +12,8 @@ import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
 import type ReadonlyCloudscapeTableSortingEvent from '../../types/readonly-cloudscape-table-sorting-event';
 import type TableColumn from '../../types/table-column';
 import type TableRowsPerPageOption from '../../types/table-rows-per-page-option';
-import findDefined from '../../utils/find-defined';
-import findUndefined from '../../utils/find-undefined';
+import isDefined from '../../utils/is-defined';
+import isUndefined from '../../utils/is-undefined';
 import useCloudscapeCountText from './hooks/use-cloudscape-count-text';
 import type CloudscapePaginationChangeHandler from './types/cloudscape-pagination-change-handler';
 import mapColumnToCloudscapeVisibleContentOption from './utils/map-column-to-cloudscape-visible-content-option';
@@ -127,12 +127,12 @@ export default function useCloudscapeTableHook<
     const mapColumnIndexToContent = (columnIndex: number): string => {
       const columnDefinition: TableProps.ColumnDefinition<Item> | undefined =
         columnDefinitions[columnIndex];
-      if (findUndefined(columnDefinition)) {
+      if (isUndefined(columnDefinition)) {
         throw new Error(`Expected column definition #${columnIndex} to exist.`);
       }
 
       const content: string | undefined = columnDefinition.id;
-      if (findUndefined(content)) {
+      if (isUndefined(content)) {
         throw new Error(
           `Expected column definition #${columnIndex} to have an ID.`,
         );
@@ -177,12 +177,12 @@ export default function useCloudscapeTableHook<
           >
         >,
       ): void => {
-        if (findDefined(e.detail.pageSize)) {
+        if (isDefined(e.detail.pageSize)) {
           onPageChange?.(FIRST_PAGE);
           onRowsPerPageChange?.(e.detail.pageSize);
         }
 
-        if (findDefined(e.detail.visibleContent)) {
+        if (isDefined(e.detail.visibleContent)) {
           const mapContentItemToColumn = (item: string): number => {
             const findColumnDefinition = ({
               id,
@@ -204,7 +204,7 @@ export default function useCloudscapeTableHook<
           onVisibleColumnsChange?.(newVisibleColumns);
         }
 
-        if (findDefined(e.detail.wrapLines)) {
+        if (isDefined(e.detail.wrapLines)) {
           setWrapLines(e.detail.wrapLines);
         }
       },
@@ -298,7 +298,7 @@ export default function useCloudscapeTableHook<
     }, [rowsPerPage, visibleContent, wrapLines]),
 
     sortingColumn: useMemo((): TableProps.SortingColumn<Item> | undefined => {
-      if (findUndefined(sortColumnIndex)) {
+      if (isUndefined(sortColumnIndex)) {
         return;
       }
 

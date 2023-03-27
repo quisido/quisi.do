@@ -1,7 +1,7 @@
 import type { ReactElement, ReactNode } from 'react';
 import { useEffect } from 'react';
-import findDefined from '../../../../utils/find-defined';
-import findUndefined from '../../../../utils/find-undefined';
+import isDefined from '../../../../utils/is-defined';
+import isUndefined from '../../../../utils/is-undefined';
 import GOOGLE_ANALYTICS_WINDOW from '../../constants/google-analytics-window';
 import HEAD from '../../constants/head';
 import gtag from '../../utils/gtag';
@@ -25,7 +25,7 @@ export default function GoogleAnalytics({
   }, [trackingId]);
 
   useEffect((): VoidFunction | undefined => {
-    if (findDefined(GOOGLE_ANALYTICS_WINDOW.dataLayer)) {
+    if (isDefined(GOOGLE_ANALYTICS_WINDOW.dataLayer)) {
       return;
     }
 
@@ -36,7 +36,7 @@ export default function GoogleAnalytics({
   }, []);
 
   useEffect((): VoidFunction | undefined => {
-    if (findDefined(GOOGLE_ANALYTICS_WINDOW.gtag)) {
+    if (isDefined(GOOGLE_ANALYTICS_WINDOW.gtag)) {
       return;
     }
 
@@ -47,7 +47,7 @@ export default function GoogleAnalytics({
   }, []);
 
   useEffect((): void => {
-    if (findUndefined(GOOGLE_ANALYTICS_WINDOW.gtag)) {
+    if (isUndefined(GOOGLE_ANALYTICS_WINDOW.gtag)) {
       return;
     }
 
@@ -55,7 +55,7 @@ export default function GoogleAnalytics({
   }, []);
 
   useEffect((): void => {
-    if (findUndefined(GOOGLE_ANALYTICS_WINDOW.gtag)) {
+    if (isUndefined(GOOGLE_ANALYTICS_WINDOW.gtag)) {
       return;
     }
 

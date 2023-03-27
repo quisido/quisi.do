@@ -1,4 +1,4 @@
-import findUndefined from '../../../utils/find-undefined';
+import isUndefined from '../../../utils/is-undefined';
 
 const LARGE = 3;
 const MEDIUM = 2;
@@ -7,7 +7,7 @@ const SMALL = 1;
 export default function mapSizeToSystemValue(
   size: 'large' | 'medium' | 'small' | undefined,
 ): number | undefined {
-  if (findUndefined(size)) {
+  if (isUndefined(size)) {
     return;
   }
 

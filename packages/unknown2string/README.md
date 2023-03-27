@@ -1,7 +1,6 @@
 # `mapUnknownToString`
 
-[![CI](https://github.com/CharlesStover/charlesstover.com/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/charlesstover.com/actions/workflows/ci.yml)
-[![CD](https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml)
+[![CI/CD](https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml)
 [![version](https://img.shields.io/npm/v/unknown2string.svg)](https://www.npmjs.com/package/unknown2string)
 [![downloads](https://img.shields.io/npm/dt/unknown2string.svg)](https://www.npmjs.com/package/unknown2string)
 

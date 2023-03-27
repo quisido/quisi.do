@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import Div from '../../../../components/div';
 import Span from '../../../../components/span';
-import findDefined from '../../../../utils/find-defined';
+import isDefined from '../../../../utils/is-defined';
 import type Quote from '../../types/quote';
 
 export default function CardHeader({
@@ -12,12 +12,12 @@ export default function CardHeader({
   return (
     <Div display="flex" flexDirection="column" textAlign="center">
       <Span size="medium">{author}</Span>
-      {findDefined(title) && (
+      {isDefined(title) && (
         <Span color="label" size="small">
           {title}
         </Span>
       )}
-      {findDefined(company) && (
+      {isDefined(company) && (
         <Span color="label" size="small">
           {company}
         </Span>

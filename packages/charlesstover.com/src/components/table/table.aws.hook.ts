@@ -12,8 +12,8 @@ import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
 import type ReadonlyAwsTableSortingEvent from '../../types/readonly-aws-table-sorting-event';
 import type TableColumn from '../../types/table-column';
 import type TableRowsPerPageOption from '../../types/table-rows-per-page-option';
-import findDefined from '../../utils/find-defined';
-import findUndefined from '../../utils/find-undefined';
+import isDefined from '../../utils/is-defined';
+import isUndefined from '../../utils/is-undefined';
 import useAwsCountText from './hooks/use-aws-count-text';
 import type AwsuiPaginationChangeHandler from './types/awsui-pagination-change-handler';
 import mapColumnToAwsVisibleContentOption from './utils/map-column-to-aws-visible-content-option';
@@ -126,12 +126,12 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
       const columnDefinition: TableProps.ColumnDefinition<Item> | undefined =
         columnDefinitions[columnIndex];
 
-      if (findUndefined(columnDefinition)) {
+      if (isUndefined(columnDefinition)) {
         throw new Error(`Expected column definition #${columnIndex} to exist.`);
       }
 
       const content: string | undefined = columnDefinition.id;
-      if (findUndefined(content)) {
+      if (isUndefined(content)) {
         throw new Error(
           `Expected column definition #${columnIndex} to have an ID.`,
         );
@@ -176,12 +176,12 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
           >
         >,
       ): void => {
-        if (findDefined(e.detail.pageSize)) {
+        if (isDefined(e.detail.pageSize)) {
           onPageChange?.(FIRST_PAGE);
           onRowsPerPageChange?.(e.detail.pageSize);
         }
 
-        if (findDefined(e.detail.visibleContent)) {
+        if (isDefined(e.detail.visibleContent)) {
           const mapContentItemToColumn = (item: string): number => {
             const findColumnDefinition = ({
               id,
@@ -203,7 +203,7 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
           onVisibleColumnsChange?.(newVisibleColumns);
         }
 
-        if (findDefined(e.detail.wrapLines)) {
+        if (isDefined(e.detail.wrapLines)) {
           setWrapLines(e.detail.wrapLines);
         }
       },
@@ -297,7 +297,7 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
     }, [rowsPerPage, visibleContent, wrapLines]),
 
     sortingColumn: useMemo((): TableProps.SortingColumn<Item> | undefined => {
-      if (findUndefined(sortColumnIndex)) {
+      if (isUndefined(sortColumnIndex)) {
         return;
       }
 

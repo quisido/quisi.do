@@ -13,7 +13,6 @@
     "esModuleInterop": false,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "importsNotUsedAsValues": "error",
     "incremental": false,
     "inlineSourceMap": false,
     "isolatedModules": true,
@@ -50,6 +49,7 @@
     "suppressImplicitAnyIndexErrors": false,
     "target": "ESNext",
     "types": ["@cloudflare/workers-types"],
-    "useUnknownInCatchVariables": true
+    "useUnknownInCatchVariables": true,
+    "verbatimModuleSyntax": true
   }
 }
