@@ -20,11 +20,11 @@
   padding-top: 0.5em;
 
   &.error {
-    background-color: hsla(0, 64%, 55%, 0.15);
+    background-color: hsla(0, 64%, 55%, 15%);
   }
 
   &.info {
-    background-color: hsla(192, 64%, 55%, 0.15);
+    background-color: hsla(192, 64%, 55%, 15%);
 
     .icon {
       background-color: hsl(192, 64%, 55%);

@@ -59,6 +59,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: devskim-results.sarif
+          wait-for-processing: true
 
   install:
     name: Install
