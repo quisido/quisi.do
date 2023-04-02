@@ -154,6 +154,8 @@ export default function useDashboard({
   } = useAsyncState(onUptimeChecksRequest);
 
   const sessionCountTimeSeries: Record<string, number> = EMPTY_RECORD;
+  const uptimeChecksErrors: readonly unknown[] =
+    uptimeChecks?.errors ?? EMPTY_ARRAY;
   return {
     apdexError: rumMetricsError,
     cloudflareAnalyticsError,
@@ -213,20 +215,14 @@ export default function useDashboard({
       const newUptimeErrors: unknown[] = [];
 
       if (uptimeChecksError !== null) {
-        if (uptimeChecksError === 'Failed to fetch') {
-          newUptimeErrors.push('Uptime incidents are currently private.');
-        } else {
-          newUptimeErrors.push(uptimeChecksError);
-        }
+        newUptimeErrors.push(uptimeChecksError);
       }
 
-      if (uptimeChecks !== null) {
-        for (const err of uptimeChecks.errors) {
-          newUptimeErrors.push(err);
-        }
+      for (const err of uptimeChecksErrors) {
+        newUptimeErrors.push(err);
       }
 
       return newUptimeErrors;
-    }, [uptimeChecks?.errors, uptimeChecksError]),
+    }, [uptimeChecksError, uptimeChecksErrors]),
   };
 }
