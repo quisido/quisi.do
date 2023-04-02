@@ -258,12 +258,18 @@ describe('MyComponent', (): void => {
 Use the following community resources for getting help with the SDK. We use the
 GitHub issues for tracking bugs and feature requests.
 
-- View the [CloudWatch RUM documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM.html).
-- Ask a question in the [Amazon CloudWatch forum](https://forums.aws.amazon.com/forum.jspa?forumID=138).
-- Open a support ticket with [AWS Support](https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html).
+- View the
+  [CloudWatch RUM documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM.html).
+- Ask a question in the
+  [Amazon CloudWatch forum](https://forums.aws.amazon.com/forum.jspa?forumID=138).
+- Open a support ticket with
+  [AWS Support](https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html).
 - If you think you may have found a bug:
-  - open an issue with [`aws-rum-react`](https://github.com/CharlesStover/charlesstover.com/aws-rum-react/issues/new), or
-  - open an issue with [`aws-rum-web`](https://github.com/aws-observability/aws-rum-web/issues/new).
+  - open an issue with
+    [`aws-rum-react`](https://github.com/CharlesStover/charlesstover.com/aws-rum-react/issues/new),
+    or
+  - open an issue with
+    [`aws-rum-web`](https://github.com/aws-observability/aws-rum-web/issues/new).
 
 ## Contributing
 

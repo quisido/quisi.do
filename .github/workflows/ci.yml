@@ -59,6 +59,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: devskim-results.sarif
+          wait-for-processing: true
 
   install:
     name: Install
@@ -333,7 +334,7 @@ jobs:
       - name: Analyze
         uses: codacy/codacy-analysis-cli-action@master
         with:
-          project-token: t4z8yLd74djYsamV4VsO
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           format: sarif
           gh-code-scanning-compat: true
           max-allowed-issues: 2147483647

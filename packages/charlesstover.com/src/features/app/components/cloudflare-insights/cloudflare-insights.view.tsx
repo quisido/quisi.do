@@ -16,14 +16,14 @@ export default function CloudflareInsights({ token }: Readonly<Props>): null {
       token,
     });
 
-    const script: HTMLScriptElement = document.createElement('script');
+    const script: HTMLScriptElement = window.document.createElement('script');
     script.setAttribute('data-cf-beacon', data);
     script.setAttribute('defer', 'true');
     script.setAttribute('src', SOURCE);
 
-    document.body.appendChild(script);
+    window.document.body.appendChild(script);
     return (): void => {
-      document.body.removeChild(script);
+      window.document.body.removeChild(script);
     };
   }, [token]);
 

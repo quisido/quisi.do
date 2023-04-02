@@ -10,7 +10,7 @@
 It'll take a `boolean`, a `number`, `null`, `undefined`, an `Array`, an `Error`,
 an `object`, even another `string`!
 
-## Examples:
+## Examples
 
 ```js
 const unknowns = [
