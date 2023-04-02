@@ -34,7 +34,7 @@ const MUI_DARK_THEME_OPTIONS: ThemeOptions = {
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+          backgroundColor: 'rgba(255 255 255 / 5%)',
         },
       },
     },

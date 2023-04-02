@@ -1,6 +1,6 @@
 @mixin chip($x, $y) {
   $border-color: #404040;
-  background-color: rgba(64, 64, 64, 0.85) !important;
+  background-color: rgba(64 64 64 / 85%) !important;
   border-bottom-color: $border-color !important;
   border-left-color: $border-color !important;
   border-top-color: $border-color !important;

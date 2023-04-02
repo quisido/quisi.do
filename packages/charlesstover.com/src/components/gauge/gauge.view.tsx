@@ -84,7 +84,7 @@ export default function Gauge({
         {Object.keys(values).map(
           (key: string, index: number): ReactElement => (
             <Cell
-              fill={`hsl(${HUE + huePerCell * index}, 64%, 55%)`}
+              fill={`hsl(${HUE + huePerCell * index}deg 64% 55%)`}
               key={key}
             />
           ),

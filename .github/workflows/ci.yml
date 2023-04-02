@@ -334,7 +334,7 @@ jobs:
       - name: Analyze
         uses: codacy/codacy-analysis-cli-action@master
         with:
-          project-token: t4z8yLd74djYsamV4VsO
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           format: sarif
           gh-code-scanning-compat: true
           max-allowed-issues: 2147483647
