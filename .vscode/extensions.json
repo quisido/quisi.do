@@ -1,7 +1,11 @@
 {
   "recommendations": [
     "arcanis.vscode-zipfs",
+    "bungcip.better-toml",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "mariusschulz.yarn-lock-syntax",
+    "redhat.vscode-yaml",
+    "tomoki1207.pdf"
   ]
 }

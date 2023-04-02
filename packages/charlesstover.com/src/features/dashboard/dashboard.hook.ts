@@ -16,8 +16,7 @@ interface Props {
 
 interface State {
   readonly apdexError: string | null;
-  readonly cdStatusAlt: string | undefined;
-  readonly ciStatusAlt: string | undefined;
+  readonly ciCdStatusAlt: string;
   readonly cloudflareAnalytics: CloudflareAnalyticsDatasets | null;
   readonly clsP95: number;
   readonly clsTm95: number;
@@ -35,6 +34,7 @@ interface State {
   readonly isCloudflareAnalyticsLoading: boolean;
   readonly isErrorsInitiated: boolean;
   readonly isErrorsLoading: boolean;
+  readonly isUptimeChecksError: boolean;
   readonly isUptimeChecksInitiated: boolean;
   readonly isUptimeChecksLoading: boolean;
   readonly isWebVitalsInitiated: boolean;
@@ -47,7 +47,6 @@ interface State {
   readonly sessionCountTimeSeries: Record<string, number>;
   readonly toleratedTimeSeries: Record<string, number>;
   readonly uptimeChecks: UptimeChecks | null;
-  readonly uptimeChecksError: string | null;
   readonly uptimeErrors: readonly unknown[];
   readonly uptimeMessages: readonly unknown[];
   readonly webVitalsError: string | null;
@@ -157,14 +156,6 @@ export default function useDashboard({
   const sessionCountTimeSeries: Record<string, number> = EMPTY_RECORD;
   return {
     apdexError: rumMetricsError,
-    cdStatusAlt: translate('Continuous deployment status'),
-    ciStatusAlt: translate('Continuous integration status'),
-    cloudflareAnalytics: cloudflareAnalytics
-      ? cloudflareAnalytics.datasets
-      : null,
-    cloudflareAnalyticsBudget: cloudflareAnalytics
-      ? cloudflareAnalytics.budget
-      : NONE,
     cloudflareAnalyticsError,
     clsP95: 0,
     clsTm95: 0,
@@ -179,6 +170,7 @@ export default function useDashboard({
     isCloudflareAnalyticsLoading,
     isErrorsInitiated: isRumMetricsInitiated,
     isErrorsLoading: isRumMetricsLoading,
+    isUptimeChecksError: uptimeChecksError !== null,
     isUptimeChecksInitiated,
     isUptimeChecksLoading,
     isWebVitalsInitiated: isRumMetricsInitiated,
@@ -189,10 +181,19 @@ export default function useDashboard({
     sessionCountTimeSeries,
     toleratedTimeSeries: EMPTY_RECORD,
     uptimeChecks,
-    uptimeChecksError,
-    uptimeErrors: uptimeChecks ? uptimeChecks.errors : EMPTY_ARRAY,
     uptimeMessages: uptimeChecks ? uptimeChecks.messages : EMPTY_ARRAY,
     webVitalsError: rumMetricsError,
+
+    ciCdStatusAlt:
+      translate('Continuous integration/deployment status') ?? 'CI/CD',
+
+    cloudflareAnalytics: cloudflareAnalytics
+      ? cloudflareAnalytics.datasets
+      : null,
+
+    cloudflareAnalyticsBudget: cloudflareAnalytics
+      ? cloudflareAnalytics.budget
+      : NONE,
 
     dailySessionCount: useMemo(
       (): number =>
@@ -207,5 +208,25 @@ export default function useDashboard({
     lastUptimeCheckTimestamp: uptimeChecks
       ? uptimeChecks.lastChecked
       : NOT_FOUND,
+
+    uptimeErrors: useMemo((): readonly unknown[] => {
+      const newUptimeErrors: unknown[] = [];
+
+      if (uptimeChecksError !== null) {
+        if (uptimeChecksError === 'Failed to fetch') {
+          newUptimeErrors.push('Uptime incidents are currently private.');
+        } else {
+          newUptimeErrors.push(uptimeChecksError);
+        }
+      }
+
+      if (uptimeChecks !== null) {
+        for (const err of uptimeChecks.errors) {
+          newUptimeErrors.push(err);
+        }
+      }
+
+      return newUptimeErrors;
+    }, [uptimeChecks?.errors, uptimeChecksError]),
   };
 }

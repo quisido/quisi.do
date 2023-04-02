@@ -23,7 +23,7 @@ interface Props {
 }
 
 const COLUMNS_LENGTH = 9;
-const DEFAULT_SORT_COLUMN_INDEX = 1;
+const DEFAULT_SORT_COLUMN_INDEX = 0;
 const PERCENT = 100;
 const VISIBLE_COLUMN_INDICES: readonly number[] =
   createIndexArray(COLUMNS_LENGTH);
@@ -39,7 +39,7 @@ export default function CloudflareAnalytics({
   const translate: TranslateFunction = useTranslate();
 
   // States
-  const [sortAscending, setSortAscending] = useState(false);
+  const [sortAscending, setSortAscending] = useState(true);
   const [sortColumnIndex, setSortColumnIndex] = useState(
     DEFAULT_SORT_COLUMN_INDEX,
   );
