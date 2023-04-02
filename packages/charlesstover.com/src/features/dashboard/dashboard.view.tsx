@@ -1,4 +1,3 @@
-import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Container from '../../components/container';
 import Div from '../../components/div';
@@ -8,9 +7,8 @@ import type RumMetrics from '../../types/rum-metrics';
 import type UptimeChecksType from '../../types/uptime-checks';
 import Apdex from './components/apdex';
 import CloudflareAnalyticsComponent from './components/cloudflare-analytics';
-import DailySessions from './components/daily-sessions';
 import Errors from './components/errors';
-import UptimeChecksComponent from './components/uptime-checks';
+import Status from './components/status';
 import WebVitals from './components/web-vitals';
 import useDashboard from './dashboard.hook';
 
@@ -20,8 +18,6 @@ export interface Props {
   readonly onUptimeChecksRequest: () => Promise<UptimeChecksType>;
 }
 
-const NONE = 0;
-
 export default function Dashboard({
   onCloudflareAnalyticsRequest,
   onRumMetricsRequest,
@@ -29,8 +25,7 @@ export default function Dashboard({
 }: Readonly<Props>): ReactElement {
   const {
     apdexError,
-    cdStatusAlt,
-    ciStatusAlt,
+    ciCdStatusAlt,
     cloudflareAnalytics,
     cloudflareAnalyticsBudget,
     cloudflareAnalyticsError,
@@ -48,6 +43,7 @@ export default function Dashboard({
     isCloudflareAnalyticsLoading,
     isErrorsInitiated,
     isErrorsLoading,
+    isUptimeChecksError,
     isUptimeChecksInitiated,
     isUptimeChecksLoading,
     isWebVitalsInitiated,
@@ -59,7 +55,6 @@ export default function Dashboard({
     satisfiedTimeSeries,
     sessionCountTimeSeries,
     toleratedTimeSeries,
-    uptimeChecksError,
     uptimeErrors,
     uptimeMessages,
     webVitalsError,
@@ -77,39 +72,14 @@ export default function Dashboard({
           <Link href="/">CharlesStover.com</Link>.
         </Div>
       </Container>
-      <Container header={<I18n>Status</I18n>} marginTop="large">
-        <Div display="flex" flexDirection="row" justifyContent="space-around">
-          <Div>
-            <Link href="https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml">
-              <img
-                alt={cdStatusAlt}
-                height={20}
-                src="https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml/badge.svg"
-              />
-            </Link>
-          </Div>
-          <Div>
-            <Link href="https://github.com/CharlesStover/charlesstover.com/actions/workflows/ci.yml">
-              <img
-                alt={ciStatusAlt}
-                height={20}
-                src="https://github.com/CharlesStover/charlesstover.com/actions/workflows/ci.yml/badge.svg"
-              />
-            </Link>
-          </Div>
-          {dailySessionCount > NONE && (
-            <Div>
-              <DailySessions>{dailySessionCount}</DailySessions>
-            </Div>
-          )}
-        </Div>
-      </Container>
-      <UptimeChecksComponent
-        error={uptimeChecksError}
-        initiated={isUptimeChecksInitiated}
-        lastCheckedStatus={lastUptimeCheckStatus}
-        lastCheckedTimestamp={lastUptimeCheckTimestamp}
-        loading={isUptimeChecksLoading}
+      <Status
+        ciCdStatusAlt={ciCdStatusAlt}
+        dailySessionCount={dailySessionCount}
+        lastUptimeCheckStatus={lastUptimeCheckStatus}
+        lastUptimeCheckTimestamp={lastUptimeCheckTimestamp}
+        uptimeChecksError={isUptimeChecksError}
+        uptimeChecksInitiated={isUptimeChecksInitiated}
+        uptimeChecksLoading={isUptimeChecksLoading}
         uptimeErrors={uptimeErrors}
         uptimeMessages={uptimeMessages}
       />
