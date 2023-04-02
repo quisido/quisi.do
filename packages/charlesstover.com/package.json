@@ -83,6 +83,7 @@
     "@opentelemetry/sdk-trace-web": "^1.10.1",
     "@opentelemetry/semantic-conventions": "^1.10.1",
     "@sentry/browser": "^7.45.0",
+    "@sentry/core": "^7.46.0",
     "@sentry/fullstory": "^2.0.0",
     "@sentry/react": "^7.45.0",
     "@sentry/tracing": "^7.45.0",
