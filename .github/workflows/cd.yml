@@ -506,6 +506,35 @@ jobs:
             --header "Content-Type:application/json" \
             --request POST \
             "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache"
+
+  # Stage 7: neuralegion
+  neuralegion:
+    name: NeuraLegion
+    needs: cloudflare-purge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Scan
+        id: scan
+        uses: NeuraLegion/run-scan@release
+        with:
+          api_token: ${{ secrets.NEURALEGION_TOKEN }}
+          name: GitHub SHA - ${{ github.sha }}
+          crawler_urls: |
+            ["https://charlesstover.com/"]
+          discovery_types: |
+            ["crawler"]
+      - name: Wait for breakpoint
+        uses: NeuraLegion/wait-for@release
+        with:
+          api_token: ${{ secrets.NEURALEGION_TOKEN }}
+          code_scanning_alerts: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          scan: ${{ steps.scan.outputs.id }}
+          timeout: 600
+          wait_for: any
+
 on:
   push:
     branches: [main]
