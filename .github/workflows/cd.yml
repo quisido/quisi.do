@@ -517,7 +517,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Scan
         continue-on-error: true
-        id: scan
+        # id: scan
         uses: NeuraLegion/run-scan@release
         with:
           api_token: ${{ secrets.NEURALEGION_TOKEN }}
@@ -526,16 +526,16 @@ jobs:
             ["https://charlesstover.com/"]
           discovery_types: |
             ["crawler"]
-      - name: Wait for breakpoint
-        uses: NeuraLegion/wait-for@release
-        with:
-          api_token: ${{ secrets.NEURALEGION_TOKEN }}
-          code_scanning_alerts: true
-          continue-on-error: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          scan: ${{ steps.scan.outputs.id }}
-          timeout: 600
-          wait_for: any
+      # - name: Wait for breakpoint
+      #   continue-on-error: true
+      #   uses: NeuraLegion/wait-for@release
+      #   with:
+      #     api_token: ${{ secrets.NEURALEGION_TOKEN }}
+      #     code_scanning_alerts: true
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     scan: ${{ steps.scan.outputs.id }}
+      #     timeout: 600
+      #     wait_for: any
 
 on:
   push:
