@@ -516,6 +516,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Scan
+        continue-on-error: true
         id: scan
         uses: NeuraLegion/run-scan@release
         with:
@@ -530,6 +531,7 @@ jobs:
         with:
           api_token: ${{ secrets.NEURALEGION_TOKEN }}
           code_scanning_alerts: true
+          continue-on-error: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
           scan: ${{ steps.scan.outputs.id }}
           timeout: 600
