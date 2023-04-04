@@ -1,4 +1,4 @@
-import { ComponentType, PropsWithChildren, ReactElement } from 'react';
+import type { ComponentType, PropsWithChildren, ReactElement } from 'react';
 
 const FIRST = 0;
 const SINGLE = 1;

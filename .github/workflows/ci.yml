@@ -128,35 +128,6 @@ jobs:
             packages/*/build/
             packages/*/dist/
 
-  prepublish-only:
-    name: Prepublish only
-    needs: install
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Prepublish only
-        run: yarn run prepublishOnly
-
   # Stage 3: cypress, lighthouse, prepublish
   cypress:
     name: Cypress
@@ -310,7 +281,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Prepublish
-        run: yarn packages/charlesstover.com run prepublish
+        run: yarn run prepublish
         env:
           DD_ENV: ci
       - name: Upload SARIF

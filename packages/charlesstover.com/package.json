@@ -28,7 +28,7 @@
     "cypress:run": "wait-on http://localhost:3000/ && cypress run --browser chrome:canary",
     "cypress:start": "BROWSER=none DISABLE_ESLINT_PLUGIN=true react-app-rewired start",
     "e2e": "concurrently --kill-others-on-fail --names cypress,lighthouse \"yarn run cypress\" \"yarn run lighthouse\" && yarn run coverage",
-    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/charlesstover-com.sarif",
+    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/charlesstover-com.sarif || eslint '**/*'",
     "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest --runInBand",
     "jest:watch": "jest --runInBand --watch",
