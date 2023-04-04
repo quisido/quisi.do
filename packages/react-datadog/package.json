@@ -1,6 +1,6 @@
 {
   "name": "react-datadog",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "author": "Charles Stover <react-datadog@charlesstover.com>",
   "description": "React wrapper for instantiating Datadog",
   "homepage": "https://github.com/CharlesStover/charlesstover.com/tree/main/packages/react-datadog#readme",

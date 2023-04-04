@@ -10,15 +10,18 @@ import useColumns from '../../hooks/use-content-columns';
 import type Item from '../../types/packages-item';
 import filterDefaultPackage from '../../utils/filter-default-package';
 import mapNpmDownloadsEntryToItem from '../../utils/map-npm-downloads-entry-to-item';
+import filterPackagesByMinimumDownloads from '../../utils/filter-packages-by-minimum-downloads';
 
 interface State {
   readonly columns: readonly TableColumn<Item>[];
   readonly filter: string;
   readonly filterPlaceholder: string | undefined;
+  readonly handleBannerDismiss: VoidFunction;
   readonly handleFilterChange: (filter: string) => void;
   readonly handlePageChange: (page: number) => void;
   readonly handleRowsPerPageChange: (rowsPerPage: number) => void;
   readonly handleSort: (columnIndex: number, ascending: boolean) => void;
+  readonly isBannerVisible: boolean;
   readonly loading: string | undefined;
   readonly page: number;
   readonly rows: readonly Item[];
@@ -59,6 +62,7 @@ export default function usePackagesContent(): State {
 
   // States
   const [filter, setFilter] = useState('');
+  const [isBannerVisible, setIsBannerVisible] = useState(true);
   const [page, setPage] = useState(DEFAULT_PAGE);
   const [rowsPerPage, setRowsPerPage] = useState(DEFAULT_ROWS_PER_PAGE);
   const [sortAscending, setSortAscending] = useState(false);
@@ -82,7 +86,10 @@ export default function usePackagesContent(): State {
       return [];
     }
     const entries: [string, number[]][] = Object.entries(data);
-    return entries.map(mapNpmDownloadsEntryToItem).filter(filterDefaultPackage);
+    return entries
+      .map(mapNpmDownloadsEntryToItem)
+      .filter(filterDefaultPackage)
+      .filter(filterPackagesByMinimumDownloads);
   }, [data]);
 
   const filteredItems: readonly Item[] = useMemo((): readonly Item[] => {
@@ -108,12 +115,17 @@ export default function usePackagesContent(): State {
     handlePageChange: setPage,
     handleRowsPerPageChange: setRowsPerPage,
     handleVisibleColumnsChange: setVisibleColumnIndices,
+    isBannerVisible,
     page,
     rowsCount: filteredItems.length,
     rowsPerPage,
     sortAscending,
     sortColumnIndex,
     visibleColumnIndices,
+
+    handleBannerDismiss: useCallback((): void => {
+      setIsBannerVisible(false);
+    }, []),
 
     handleSort: useCallback((columnIndex: number, ascending: boolean): void => {
       setSortAscending(ascending);

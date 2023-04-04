@@ -12,12 +12,24 @@ const PACKAGE_DESCRIPTIONS: Map<string, string> = new Map([
     'Generates a glossary application using only JSON definition files.',
   ],
   [
+    '@monorepo-template/compose-next-webpack',
+    'This compose function allows you to compose multiple Webpack configuration functions for better readability and maintainability of your Next configuration file.',
+  ],
+  [
     '@monorepo-template/coverage',
     'The coverage script will generate a combined coverage report for both the Cypress and Jest test results for a given package.',
   ],
   [
     '@monorepo-template/cypress-coverage-config-override',
     'This Webpack configuration override for `react-app-rewired` enables coverage reports for Cypress tests.',
+  ],
+  [
+    '@monorepo-template/cypress-coverage-plugin',
+    "This Cypress coverage plugin is a monkey-patch of Cypress's official code coverage plugin, adding pre-configuration of NYC and support for nyc.config.cjs.",
+  ],
+  [
+    '@monorepo-template/cypress-nyc-config',
+    'This NYC configuration offers out-of-the-box Cypress support.',
   ],
   [
     '@monorepo-template/eslint-config',
@@ -44,12 +56,24 @@ const PACKAGE_DESCRIPTIONS: Map<string, string> = new Map([
     'The monorepo test enforces best practices for monorepos as a command line script for integration pipelines.',
   ],
   [
+    '@monorepo-template/tree-logger',
+    'The tree logger is a console interface for logging styled, hierarchical data.',
+  ],
+  [
     '@monorepo-template/tsconfig',
     'This TypeScript configuration package provides best practices and configurations for monorepos.',
   ],
   [
     '@monorepo-template/up',
     "This utility command line tool upgrades all of your project's dependencies in one fell swoop.",
+  ],
+  [
+    '@monorepo-template/webpack-configure-next-babel',
+    'This Webpack configuration offers support for custom Babel configurations in NextJS applications.',
+  ],
+  [
+    '@monorepo-template/webpack-configure-next-yarn-berry',
+    'This Webpack configuration adds support for Yarn modern (v2+) to NextJS applications.',
   ],
   [
     'absolute-timestamp',
@@ -144,10 +168,6 @@ const PACKAGE_DESCRIPTIONS: Map<string, string> = new Map([
   [
     'reactn',
     'ReactN is an extension of React with a built-in global state management API.',
-  ],
-  [
-    'reactn-devtools',
-    'The ReactN DevTools display an application’s ReactN global state in the Redux DevTools browser extension.',
   ],
   [
     'relative-timestamp',

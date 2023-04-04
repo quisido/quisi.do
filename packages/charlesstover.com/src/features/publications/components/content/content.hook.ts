@@ -57,7 +57,7 @@ export default function usePublicationsContents(): State {
 
     handleBannerDismiss: useCallback((): void => {
       setIsBannerVisible(false);
-    }, [setIsBannerVisible]),
+    }, []),
 
     handleSortChange: useCallback((newSort: string | undefined): void => {
       if (isUndefined(newSort)) {

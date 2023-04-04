@@ -1,8 +1,9 @@
 import type { RumInitConfiguration, datadogRum } from '@datadog/browser-rum';
-import { useEffect } from 'react';
+import { MutableRefObject, useEffect, useRef } from 'react';
 import DEFAULT_REPLAY_SAMPLE_RATE from '../../constants/default-replay-sample-rate';
 import DEFAULT_SAMPLE_RATE from '../../constants/default-sample-rate';
 import useDatadogRum from '../../hooks/use-datadog-rum';
+import useShallowMemo from '../../hooks/use-shallow-memo';
 import type User from '../../types/user';
 import useUser from './hooks/use-user';
 
@@ -25,28 +26,34 @@ export default function useDatadog({
   // Contexts
   const rum: typeof datadogRum = useDatadogRum();
 
+  // States
+  const lastInitConfiguration: MutableRefObject<RumInitConfiguration | null> =
+    useRef(null);
+  const rumInitConfigurationMemo: RumInitConfiguration = useShallowMemo({
+    replaySampleRate,
+    sampleRate,
+    site,
+    trackInteractions,
+    ...rumInitConfiguration,
+  });
+
   // Effects
   useEffect((): void => {
     if (!enabled) {
       return;
     }
 
-    rum.init({
-      replaySampleRate,
-      sampleRate,
-      site,
-      trackInteractions,
-      ...rumInitConfiguration,
-    });
-  }, [
-    enabled,
-    replaySampleRate,
-    rum,
-    rumInitConfiguration,
-    sampleRate,
-    site,
-    trackInteractions,
-  ]);
+    // In strict mode, React will execute this effect hook twice, which emits a
+    //   console error: "DD_RUM is already initialized."
+    // If the initialization configuration has not changed, do not initialize
+    //   again.
+    if (lastInitConfiguration.current === rumInitConfigurationMemo) {
+      return;
+    }
+
+    lastInitConfiguration.current = rumInitConfigurationMemo;
+    rum.init(rumInitConfigurationMemo);
+  }, [enabled, rum, rumInitConfigurationMemo]);
 
   useEffect((): VoidFunction | undefined => {
     if (!enabled || !sessionReplayRecording) {
