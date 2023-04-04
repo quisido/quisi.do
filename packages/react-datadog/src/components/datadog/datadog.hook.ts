@@ -1,5 +1,6 @@
 import type { RumInitConfiguration, datadogRum } from '@datadog/browser-rum';
-import { MutableRefObject, useEffect, useRef } from 'react';
+import type { MutableRefObject } from 'react';
+import { useEffect, useRef } from 'react';
 import DEFAULT_REPLAY_SAMPLE_RATE from '../../constants/default-replay-sample-rate';
 import DEFAULT_SAMPLE_RATE from '../../constants/default-sample-rate';
 import useDatadogRum from '../../hooks/use-datadog-rum';

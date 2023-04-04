@@ -21,7 +21,7 @@
   },
   "scripts": {
     "browserslist:update-db": "browserslist --update-db",
-    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ./sarif/index.sarif",
+    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ./sarif/index.sarif || eslint '**/*'",
     "eslint:fix": "eslint '**/*' --fix",
     "prepack": "yarn workspaces foreach --parallel --topological-dev run prepack",
     "prepublish": "concurrently --kill-others-on-fail --names eslint,prepublish,test \"yarn run eslint\" \"yarn workspaces foreach --interlaced --parallel --topological-dev --verbose run prepublish\" \"yarn run test\"",

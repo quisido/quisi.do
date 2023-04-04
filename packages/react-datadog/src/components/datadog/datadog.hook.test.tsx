@@ -15,6 +15,7 @@ const TEST_REMOVE_USER = jest.fn();
 const TEST_SET_USER = jest.fn();
 const TEST_START_SESSION_REPLAY_RECORDING = jest.fn();
 const TEST_STOP_SESSION_REPLAY_RECORDING = jest.fn();
+const TWICE = 2;
 
 const TEST_RUM: typeof datadogRum = {
   init: TEST_INIT,
@@ -108,7 +109,7 @@ describe('useDatadog', (): void => {
       version: 'test-version-2',
     });
 
-    expect(TEST_INIT).toHaveBeenCalledTimes(2);
+    expect(TEST_INIT).toHaveBeenCalledTimes(TWICE);
   });
 
   it('should start session replay recording on mount', (): void => {
