@@ -1,9 +1,11 @@
 import type { datadogRum } from '@datadog/browser-rum';
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
+import { StrictMode } from 'react';
 import DEFAULT_REPLAY_SAMPLE_RATE from '../../constants/default-replay-sample-rate';
 import DEFAULT_SAMPLE_RATE from '../../constants/default-sample-rate';
 import DatadogRumContext from '../../contexts/datadog-rum';
+import composeComponents from '../../test/utils/compose-components';
 import type User from '../../types/user';
 import useDatadog from './datadog.hook';
 
@@ -28,7 +30,9 @@ const TEST_USER: User = {
   name: 'test-name',
 };
 
-function Wrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
+function TestRumProvider({
+  children,
+}: Readonly<PropsWithChildren>): ReactElement {
   return (
     <DatadogRumContext.Provider value={TEST_RUM}>
       {children}
@@ -37,13 +41,13 @@ function Wrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
 }
 
 describe('useDatadog', (): void => {
-  it('should call init', (): void => {
+  it('should call `init`', (): void => {
     renderHook(useDatadog, {
       initialProps: {
         applicationId: 'test-application-id',
         clientToken: 'test-client-token',
       },
-      wrapper: Wrapper,
+      wrapper: composeComponents(StrictMode, TestRumProvider),
     });
 
     expect(TEST_INIT).toHaveBeenCalledTimes(ONCE);
@@ -75,16 +79,36 @@ describe('useDatadog', (): void => {
     });
   });
 
-  it('should not call init if `enabled` is false', (): void => {
+  it('should not call `init` if `enabled` is false', (): void => {
     renderHook(useDatadog, {
       initialProps: {
         applicationId: 'test-application-id',
         clientToken: 'test-client-token',
         enabled: false,
       },
-      wrapper: Wrapper,
+      wrapper: composeComponents(StrictMode, TestRumProvider),
     });
+
     expect(TEST_INIT).not.toHaveBeenCalled();
+  });
+
+  it('should call `init` if the configuration has changed', (): void => {
+    const { rerender } = renderHook(useDatadog, {
+      initialProps: {
+        applicationId: 'test-application-id',
+        clientToken: 'test-client-token',
+        version: 'test-version-1',
+      },
+      wrapper: composeComponents(StrictMode, TestRumProvider),
+    });
+
+    rerender({
+      applicationId: 'test-application-id',
+      clientToken: 'test-client-token',
+      version: 'test-version-2',
+    });
+
+    expect(TEST_INIT).toHaveBeenCalledTimes(2);
   });
 
   it('should start session replay recording on mount', (): void => {
@@ -93,7 +117,7 @@ describe('useDatadog', (): void => {
         applicationId: 'test-application-id',
         clientToken: 'test-client-token',
       },
-      wrapper: Wrapper,
+      wrapper: TestRumProvider,
     });
 
     expect(TEST_START_SESSION_REPLAY_RECORDING).toHaveBeenCalledTimes(ONCE);
@@ -107,7 +131,7 @@ describe('useDatadog', (): void => {
         clientToken: 'test-client-token',
         enabled: false,
       },
-      wrapper: Wrapper,
+      wrapper: TestRumProvider,
     });
 
     expect(TEST_START_SESSION_REPLAY_RECORDING).not.toHaveBeenCalled();
@@ -120,7 +144,7 @@ describe('useDatadog', (): void => {
         clientToken: 'test-client-token',
         sessionReplayRecording: false,
       },
-      wrapper: Wrapper,
+      wrapper: composeComponents(StrictMode, TestRumProvider),
     });
 
     expect(TEST_START_SESSION_REPLAY_RECORDING).not.toHaveBeenCalled();
@@ -132,7 +156,7 @@ describe('useDatadog', (): void => {
         applicationId: 'test-application-id',
         clientToken: 'test-client-token',
       },
-      wrapper: Wrapper,
+      wrapper: TestRumProvider,
     });
 
     unmount();
@@ -147,7 +171,7 @@ describe('useDatadog', (): void => {
         applicationId: 'test-application-id',
         clientToken: 'test-client-token',
       },
-      wrapper: Wrapper,
+      wrapper: composeComponents(StrictMode, TestRumProvider),
     });
 
     expect(TEST_SET_USER).not.toHaveBeenCalled();
@@ -160,7 +184,7 @@ describe('useDatadog', (): void => {
         clientToken: 'test-client-token',
         user: TEST_USER,
       },
-      wrapper: Wrapper,
+      wrapper: TestRumProvider,
     });
 
     expect(TEST_SET_USER).toHaveBeenCalledTimes(ONCE);
@@ -174,7 +198,7 @@ describe('useDatadog', (): void => {
         clientToken: 'test-client-token',
         user: TEST_USER,
       },
-      wrapper: Wrapper,
+      wrapper: TestRumProvider,
     });
 
     unmount();
