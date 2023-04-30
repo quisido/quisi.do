@@ -1,0 +1,39 @@
+diff --git a/collection-preferences/content-display/styles.scoped.css b/collection-preferences/content-display/styles.scoped.css
+index 0e17720115f57ee6fb4b6000a5d8bcba654239b3..68db76bcbf9b43c9d2644f44b5a668ed94632e8e 100644
+--- a/collection-preferences/content-display/styles.scoped.css	
++++ b/collection-preferences/content-display/styles.scoped.css	
+@@ -205,7 +205,7 @@ .awsui_sortable-item-content_1f3h0_beb9k_203:not(#\9) {
+   display: flex;
+   flex-wrap: nowrap;
+   justify-content: space-between;
+-  align-items: start;
++  align-items: flex-start;
+   padding-top: var(--space-xs-rsr2qu, 8px);
+   padding-bottom: var(--space-xs-rsr2qu, 8px);
+   padding-right: 0;
+diff --git a/collection-preferences/styles.scoped.css b/collection-preferences/styles.scoped.css
+index 681dffba21cefed825db1cb06977c64ef96963d6..ac257ae061b0aca79fba89dee6d7bfc3cb5dacec 100644
+--- a/collection-preferences/styles.scoped.css	
++++ b/collection-preferences/styles.scoped.css	
+@@ -429,7 +429,7 @@ .awsui_sortable-item-content_tc96w_e00a9_427:not(#\9) {
+   display: flex;
+   flex-wrap: nowrap;
+   justify-content: space-between;
+-  align-items: start;
++  align-items: flex-start;
+   padding-top: var(--space-xs-rsr2qu, 8px);
+   padding-bottom: var(--space-xs-rsr2qu, 8px);
+   padding-right: 0;
+diff --git a/wizard/styles.scoped.css b/wizard/styles.scoped.css
+index 2f98b558150f70755428d93972f24316c24b3650..c324db89c10bba467b6cebcc247c40b7c929f27e 100644
+--- a/wizard/styles.scoped.css	
++++ b/wizard/styles.scoped.css	
+@@ -215,7 +215,7 @@ .awsui_navigation_1xupv_1df87_123.awsui_refresh_1xupv_1df87_107 > ul > li > .aws
+   grid-row: 1;
+ }
+ .awsui_navigation_1xupv_1df87_123.awsui_refresh_1xupv_1df87_107 > ul > li > a:not(#\9) {
+-  align-items: start;
++  align-items: flex-start;
+   column-gap: var(--space-s-hv8c1d, 12px);
+   cursor: pointer;
+   display: grid;
