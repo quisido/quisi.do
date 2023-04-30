@@ -4,6 +4,7 @@
     "bungcip.better-toml",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
+    "github.vscode-github-actions",
     "mariusschulz.yarn-lock-syntax",
     "redhat.vscode-yaml",
     "tomoki1207.pdf"

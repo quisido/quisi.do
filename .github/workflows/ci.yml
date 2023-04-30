@@ -5,21 +5,10 @@ jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
     permissions:
       actions: read
       contents: read
       security-events: write
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -64,17 +53,6 @@ jobs:
   install:
     name: Install
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -92,17 +70,6 @@ jobs:
     name: Prepack
     needs: install
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -133,18 +100,6 @@ jobs:
     name: Cypress
     needs: prepack
     runs-on: ${{ matrix.os }}-latest
-    ## Container operations are only supported on Linux runners.
-    # env:
-    #   DD_ENV: ci
-    # services:
-    #   datadog-agent:
-    #     image: datadog/agent:latest
-    #     env:
-    #       DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-    #       DD_HOSTNAME: none
-    #       DD_INSIDE_CI: true
-    #     ports:
-    #       - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -210,17 +165,6 @@ jobs:
     name: Lighthouse
     needs: prepack
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -253,17 +197,6 @@ jobs:
     name: Prepublish
     needs: prepack
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -282,8 +215,6 @@ jobs:
         run: yarn install --immutable
       - name: Prepublish
         run: yarn run prepublish
-        env:
-          DD_ENV: ci
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v2
         with:
@@ -321,17 +252,6 @@ jobs:
     name: Coverage
     needs: [cypress, prepublish]
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

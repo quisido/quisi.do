@@ -15,13 +15,11 @@ export default function useAppContexts(): State {
   const { pathname } = useLocation();
 
   // States
-  const [designSystem, setDesignSystem] = useState<DesignSystem>(
-    DesignSystem.Aws,
-  );
+  const [designSystem, setDesignSystem] = useState(DesignSystem.Aws);
 
-  const isSpriteSheet2GifRoute = pathname === '/spritesheet2gif';
+  const isSpriteSheet2GifRoute: boolean = pathname === '/spritesheet2gif';
   return {
-    isDarkModeEnabled: useState<boolean>(true),
+    isDarkModeEnabled: useState(true),
     language: useState<Language>(Language.English),
 
     designSystem: useMemo((): [
@@ -32,6 +30,7 @@ export default function useAppContexts(): State {
       if (isSpriteSheet2GifRoute) {
         return [DesignSystem.Aws, setDesignSystem];
       }
+
       return [designSystem, setDesignSystem];
     }, [designSystem, isSpriteSheet2GifRoute]),
   };

@@ -299,8 +299,6 @@ jobs:
         run: yarn install --immutable
       - name: Prepublish
         run: yarn packages/charlesstover.com run prepublish
-        env:
-          DD_ENV: ci
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -512,6 +510,17 @@ jobs:
     name: NeuraLegion
     needs: cloudflare-purge
     runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
