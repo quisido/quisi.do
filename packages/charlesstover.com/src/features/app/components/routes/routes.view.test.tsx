@@ -3,7 +3,6 @@ import type { PropsWithChildren, ReactElement } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import Routes from './routes.view';
 
-global.window = { ...global.window };
 Object.defineProperty(global.window, 'location', {
   writable: true,
   value: {

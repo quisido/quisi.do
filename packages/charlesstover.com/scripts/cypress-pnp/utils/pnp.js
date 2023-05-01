@@ -5,7 +5,6 @@ import mapPackageNameToContents from './map-package-name-to-contents.js';
 import mapPackageNameToJson from './map-package-name-to-json.js';
 
 const CWD = process.cwd();
-const EMPTY = Object.freeze(Object.create(null));
 const MKDIR_OPTIONS = {
   recursive: true,
 };

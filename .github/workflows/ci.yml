@@ -1,7 +1,7 @@
 name: Continuous integration
 
 jobs:
-  # Stage 1: analyze, dependency-review, devskim, install
+  # Stage 1: analyze, codacy, dependency-review, devskim, install
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
@@ -18,6 +18,28 @@ jobs:
           languages: javascript
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
+
+  codacy:
+    name: Codacy
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Analyze
+        uses: codacy/codacy-analysis-cli-action@master
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          format: sarif
+          gh-code-scanning-compat: true
+          max-allowed-issues: 2147483647
+          output: codacy.sarif
+          verbose: true
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@main
+        with:
+          sarif_file: codacy.sarif
+          wait-for-processing: true
 
   dependency-review:
     name: Dependency review
@@ -226,28 +248,7 @@ jobs:
           name: prepublish
           path: packages/*/jest/
 
-  # Stage 4: codacy, coverage
-  codacy:
-    name: Codacy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Analyze
-        uses: codacy/codacy-analysis-cli-action@master
-        with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          format: sarif
-          gh-code-scanning-compat: true
-          max-allowed-issues: 2147483647
-          output: codacy.sarif
-          verbose: true
-      - name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@main
-        with:
-          sarif_file: codacy.sarif
-          wait-for-processing: true
-
+  # Stage 4: coverage
   coverage:
     name: Coverage
     needs: [cypress, prepublish]
