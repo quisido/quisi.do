@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-
 import mapParentSelectorToLabelSelector from './map-parent-selector-to-label-selector';
 
 interface Options {
@@ -18,7 +17,7 @@ export default function select(
       throw new Error(`Expected label "${label}" to have \`for\` attribute.`);
     }
 
-    const formElementSelector = `#${formElementId}`;
+    const formElementSelector = `#${formElementId.replace(/:/g, '\\:')}`;
 
     const selectValue = (selectedValue: string): void => {
       if (selectedValue === value) {

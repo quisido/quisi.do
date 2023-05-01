@@ -1,1 +1,1 @@
-export default 'https://localhost/image.jpg';
+export default 'https://localhost:3000/favicon.ico';

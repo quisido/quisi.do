@@ -1,10 +1,7 @@
 /// <reference types="cypress" />
+import describeDesignSystems from '../../test/cypress/utils/describe-design-systems';
+import describeFeature from '../../test/cypress/utils/describe-feature';
 
-import setDesignSystem from '../../test/cypress/utils/set-design-system';
-
-declare const it: Mocha.TestFunction;
-
-const DESIGN_SYSTEMS: string[] = ['AWS', 'Cloudscape', 'Material'];
 const NEXT_PAGE_SELECTOR = 'main button[aria-label="Go to next page"]';
 const FIRST_PACKAGE_SELECTOR =
   'main table > tbody > tr:first-child > td:first-child a';
@@ -25,17 +22,9 @@ const shouldPaginate = (): void => {
     });
 };
 
-describe('Packages', (): void => {
-  beforeEach((): void => {
-    cy.visit('/packages');
-    cy.screenshot();
+describeFeature('Packages', '/packages', (): void => {
+  describeDesignSystems((): void => {
+    it('should display critical elements', shouldDisplayCriticalElements);
+    it('should paginate', shouldPaginate);
   });
-
-  for (const designSystem of DESIGN_SYSTEMS) {
-    describe(designSystem, (): void => {
-      setDesignSystem(designSystem);
-      it('should display critical elements', shouldDisplayCriticalElements);
-      it('should paginate', shouldPaginate);
-    });
-  }
 });

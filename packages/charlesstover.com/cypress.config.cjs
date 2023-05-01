@@ -11,10 +11,10 @@ const getScreenshotsFolder = () => {
 module.exports = defineConfig({
   defaultCommandTimeout: 30000,
   experimentalInteractiveRunEvents: true,
-  experimentalMemoryManagement: true,
-  experimentalModifyObstructiveThirdPartyCode: true,
-  experimentalSourceRewriting: true,
-  experimentalWebKitSupport: true,
+  // experimentalMemoryManagement: true,
+  // experimentalModifyObstructiveThirdPartyCode: true,
+  // experimentalSourceRewriting: true,
+  // experimentalWebKitSupport: true,
   fixturesFolder: false,
   projectId: 'fahz48',
   redirectionLimit: 2,
@@ -22,9 +22,9 @@ module.exports = defineConfig({
 
   e2e: {
     baseUrl: 'http://localhost:3000/',
-    experimentalOriginDependencies: true,
+    // experimentalOriginDependencies: true,
     experimentalRunAllSpecs: true,
-    experimentalStudio: true,
+    // experimentalStudio: true,
     specPattern: 'src/**/*.e2e.ts',
     setupNodeEvents(on, config) {
       require('@monorepo-template/cypress-coverage-plugin')(on, config);
