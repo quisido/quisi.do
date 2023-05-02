@@ -1,7 +1,24 @@
 name: CI/CD
 
 jobs:
-  # Stage 1: install
+  # Stage 1: analyze, install
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+
   install:
     name: Install
     runs-on: ubuntu-latest
