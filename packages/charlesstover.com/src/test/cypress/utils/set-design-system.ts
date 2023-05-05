@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-
 import select from './select';
 
 const EXPANDO_SELECTOR = '*[role="button"]';
@@ -10,12 +9,15 @@ export default function setDesignSystem(designSystem: string): void {
     cy.get(EXPANDO_SELECTOR).contains('Settings').click();
     cy.screenshot();
 
+    const handleIgnore = (): void => {
+      cy.log(`${designSystem} design system appears to be cached.`);
+    };
+
     select('Design system', designSystem, {
-      onIgnore(): void {
-        cy.log(`${designSystem} design system appears to be cached.`);
-      },
+      onIgnore: handleIgnore,
       parentSelector: NAVIGATION_ITEM_SELECTOR,
     });
+
     cy.screenshot();
   });
 }

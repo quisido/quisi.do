@@ -1,8 +1,13 @@
 /// <reference types="cypress" />
+import describeDesignSystems from '../../test/cypress/utils/describe-design-systems';
+import describeFeature from '../../test/cypress/utils/describe-feature';
 
-describe('Quotes', (): void => {
-  it('should display critical elements', (): void => {
-    cy.visit('/quotes');
-    cy.contains('nav', 'Quotes');
+const shouldDisplayCriticalElements = (): void => {
+  cy.contains('nav', 'Quotes');
+};
+
+describeFeature('Quotes', '/quotes', (): void => {
+  describeDesignSystems((): void => {
+    it('should display critical elements', shouldDisplayCriticalElements);
   });
 });
