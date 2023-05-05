@@ -17,7 +17,13 @@ export default function MuiContainer({
   return (
     <Div marginTop={marginTop}>
       <Card>
-        <CardHeader action={actions} title={header} />
+        <CardHeader
+          action={actions}
+          title={header}
+          titleTypographyProps={{
+            component: 'h2',
+          }}
+        />
         {isDefined(children) && <CardContent>{children}</CardContent>}
         {isDefined(footer) && <CardActions>{footer}</CardActions>}
       </Card>
