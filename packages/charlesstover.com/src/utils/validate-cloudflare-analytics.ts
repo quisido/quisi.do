@@ -1,10 +1,10 @@
 import type CloudflareAnalytics from '../types/cloudflare-analytics';
-import findCloudflareAnalytics from './find-cloudflare-analytics';
+import isCloudflareAnalytics from './is-cloudflare-analytics';
 
 export default function validateCloudflareAnalytics(
   value: unknown,
 ): CloudflareAnalytics {
-  if (!findCloudflareAnalytics(value)) {
+  if (!isCloudflareAnalytics(value)) {
     throw new Error(
       `Expected Cloudflare analytics, but received ${typeof value} ${JSON.stringify(
         value,

@@ -1,3 +1,4 @@
+import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Div from '../../../../components/div';
 import Span from '../../../../components/span';
@@ -14,7 +15,9 @@ export default function Footer(): ReactElement {
 
   return (
     <Div className={rootClassName} marginTop="large">
-      <Span color="label">&copy; Charles Stover</Span>
+      <Span color="label">
+        <I18n>Made with 💔 by Charles Stover</I18n>
+      </Span>
       {features.length > NONE && (
         <Span color="label" size="small">
           {features.join(', ')}

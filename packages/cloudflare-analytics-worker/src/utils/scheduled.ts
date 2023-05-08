@@ -29,7 +29,6 @@ export default async function scheduled(
   }
 
   const start: Date = new Date(scheduledTime);
-
   try {
     const engine: QueryEngine = new QueryEngine(
       API_TOKEN,
@@ -65,12 +64,14 @@ export default async function scheduled(
   } catch (err: unknown) {
     const message: string = mapUnknownToString(err);
 
-    if (typeof ERRORS !== 'undefined') {
-      const duration: number = start.getTime() - Date.now();
-      ERRORS.writeDataPoint({
-        blobs: [message],
-        doubles: [duration],
-      });
+    if (typeof ERRORS === 'undefined') {
+      return;
     }
+
+    const duration: number = start.getTime() - Date.now();
+    ERRORS.writeDataPoint({
+      blobs: [message],
+      doubles: [duration],
+    });
   }
 }

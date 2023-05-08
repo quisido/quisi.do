@@ -2,19 +2,18 @@ import validateString from './validate-string';
 
 describe('validateString', (): void => {
   it('should throw an error for non-strings', (): void => {
-    const TEST_NUMBER = 1;
-
     expect((): void => {
       validateString(true);
-    }).toThrowError('Expected value to be a string, but received boolean.');
+    }).toThrowError('Expected a string, but received boolean true');
 
     expect((): void => {
+      const TEST_NUMBER = 1;
       validateString(TEST_NUMBER);
-    }).toThrowError('Expected value to be a string, but received number.');
+    }).toThrowError('Expected a string, but received number 1');
 
     expect((): void => {
       validateString(null);
-    }).toThrowError('Expected value to be a string, but received object.');
+    }).toThrowError('Expected a string, but received object null');
   });
 
   it('should return the string', (): void => {

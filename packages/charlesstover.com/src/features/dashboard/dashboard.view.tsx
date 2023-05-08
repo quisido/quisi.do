@@ -4,6 +4,7 @@ import Div from '../../components/div';
 import Link from '../../components/link';
 import type CloudflareAnalyticsType from '../../types/cloudflare-analytics';
 import type RumMetrics from '../../types/rum-metrics';
+import type SentryProjectEvent from '../../types/sentry-project-event';
 import type UptimeChecksType from '../../types/uptime-checks';
 import Apdex from './components/apdex';
 import CloudflareAnalyticsComponent from './components/cloudflare-analytics';
@@ -16,11 +17,15 @@ export interface Props {
   readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalyticsType>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
   readonly onUptimeChecksRequest: () => Promise<UptimeChecksType>;
+  readonly onSentryProjectEventsRequest: () => Promise<
+    readonly SentryProjectEvent[]
+  >;
 }
 
 export default function Dashboard({
   onCloudflareAnalyticsRequest,
   onRumMetricsRequest,
+  onSentryProjectEventsRequest,
   onUptimeChecksRequest,
 }: Readonly<Props>): ReactElement {
   const {
@@ -61,6 +66,7 @@ export default function Dashboard({
   } = useDashboard({
     onCloudflareAnalyticsRequest,
     onRumMetricsRequest,
+    onSentryProjectEventsRequest,
     onUptimeChecksRequest,
   });
 

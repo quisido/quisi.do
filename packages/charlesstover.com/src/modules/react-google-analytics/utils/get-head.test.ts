@@ -1,4 +1,3 @@
-import MISSING_HEAD_ERROR from '../constants/missing-head-element';
 import getHead from './get-head';
 
 const FIRST = 0;
@@ -34,7 +33,7 @@ describe('getHead', (): void => {
     beforeEach(removeHead);
 
     it('should throw an error', (): void => {
-      expect(getHead).toThrowError(MISSING_HEAD_ERROR);
+      expect(getHead).toThrowError('Expected to find a head element.');
     });
   });
 });

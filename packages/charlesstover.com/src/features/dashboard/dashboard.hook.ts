@@ -5,13 +5,18 @@ import useAsyncState from '../../modules/use-async-state';
 import type CloudflareAnalytics from '../../types/cloudflare-analytics';
 import type CloudflareAnalyticsDatasets from '../../types/cloudflare-analytics-datasets';
 import type RumMetrics from '../../types/rum-metrics';
+import type SentryProjectEvent from '../../types/sentry-project-event';
 import type UptimeChecks from '../../types/uptime-checks';
 import mapRecordToSum from './utils/map-record-to-sum';
+import EMPTY_ARRAY from '../../constants/empty-array';
 
 interface Props {
   readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
   readonly onUptimeChecksRequest: () => Promise<UptimeChecks>;
+  readonly onSentryProjectEventsRequest: () => Promise<
+    readonly SentryProjectEvent[]
+  >;
 }
 
 interface State {
@@ -53,7 +58,6 @@ interface State {
 }
 
 const DAYS_PER_WEEK = 7;
-const EMPTY_ARRAY: readonly never[] = Object.freeze([]);
 const EMPTY_RECORD: Record<string, never> = Object.freeze({});
 const NONE = 0;
 const NOT_FOUND = -1;
@@ -127,6 +131,7 @@ const clsPow = Math.pow(BASE, CUMULATIVE_LAYOUT_SHIFT_PRECISION);
 export default function useDashboard({
   onCloudflareAnalyticsRequest,
   onRumMetricsRequest,
+  // onSentryProjectEventsRequest,
   onUptimeChecksRequest,
 }: Readonly<Props>): State {
   // Contexts
@@ -145,6 +150,22 @@ export default function useDashboard({
     initiated: isRumMetricsInitiated,
     loading: isRumMetricsLoading,
   } = useAsyncState(onRumMetricsRequest);
+
+  /*
+  const {
+    data: sentryProjectEvents,
+    error: sentryProjectEventsError,
+    initiated: isSentryProjectEventsInitiated,
+    loading: isSentryProjectEventsLoading,
+  } = useAsyncState(onSentryProjectEventsRequest);
+
+  console.log(
+    sentryProjectEvents,
+    sentryProjectEventsError,
+    isSentryProjectEventsInitiated,
+    isSentryProjectEventsLoading,
+  );
+  */
 
   const {
     data: uptimeChecks,

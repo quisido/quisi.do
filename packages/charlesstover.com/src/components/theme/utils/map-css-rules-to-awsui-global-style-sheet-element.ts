@@ -1,5 +1,3 @@
-import MISSING_AWSUI_GLOBAL_CSS_RULES_PARENT_STYLESHEET_ERROR from '../constants/missing-awsui-global-css-rules-parent-stylesheet-error';
-import MISSING_AWSUI_GLOBAL_STYLESHEET_OWNER_NODE_ERROR from '../constants/missing-awsui-global-stylesheet-owner-node-error';
 import filterCssRuleByAwsuiCssFontFaceRule from '../utils/filter-css-rule-by-awsui-css-font-face-rule';
 
 export default function mapCssRulesToAwsuiGlobalStyleSheetElement(
@@ -12,12 +10,16 @@ export default function mapCssRulesToAwsuiGlobalStyleSheetElement(
 
     const sheet: CSSStyleSheet | null = rule.parentStyleSheet;
     if (sheet === null) {
-      throw MISSING_AWSUI_GLOBAL_CSS_RULES_PARENT_STYLESHEET_ERROR;
+      throw new Error(
+        'Expected the AWS UI global CSS rules to have a parent stylesheet.',
+      );
     }
 
     const node: Element | ProcessingInstruction | null = sheet.ownerNode;
     if (node === null) {
-      throw MISSING_AWSUI_GLOBAL_STYLESHEET_OWNER_NODE_ERROR;
+      throw new Error(
+        'Expected the AWS UI global style sheet to have an owner node.',
+      );
     }
     return node;
   }

@@ -8,9 +8,10 @@ export default function useMediumStats(): UseQueryResult<
   return useQuery(
     ['medium'],
     async (): Promise<Record<string, MediumArticle>> => {
-      const response: Response = await fetch(
+      const response: Response = await window.fetch(
         'https://medium.cscdn.net/charles-stover.json',
       );
+
       return response.json();
     },
   );

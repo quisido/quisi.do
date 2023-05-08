@@ -119,7 +119,7 @@ const WORKERS_INVOCATION_KEYS: Set<
   'wallTimeP999',
 ]);
 
-export default function findCloudflareAnalytics(
+export default function isCloudflareAnalytics(
   value: unknown,
 ): value is CloudflareAnalytics {
   if (!isRecord(value)) {
