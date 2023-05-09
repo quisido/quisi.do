@@ -1,6 +1,4 @@
 import type SetValue from '../../../types/set-value';
-import MISSING_MANAGED_STYLE_SHEET_ERROR from '../constants/missing-managed-style-sheet-error';
-import MISSING_MANAGED_STYLE_SHEET_PARENT_NODE_ERROR from '../constants/missing-managed-style-sheet-parent-node-error';
 import mapElementToParentNode from '../utils/map-element-to-parent-node';
 
 interface EventListeners {
@@ -41,6 +39,22 @@ export default class StyleSheetElementManager {
     }
   }
 
+  public get element(): Element | ProcessingInstruction {
+    if (typeof this._element === 'undefined') {
+      throw new Error('Could not find the style sheet to manage.');
+    }
+
+    return this._element;
+  }
+
+  public get parentNode(): ParentNode {
+    if (typeof this._parentNode === 'undefined') {
+      throw new Error('Expected managed style sheet to have a parent node.');
+    }
+
+    return this._parentNode;
+  }
+
   public addEventListener<T extends keyof EventListeners>(
     type: T,
     listener: SetValue<EventListeners[T]>,
@@ -64,17 +78,11 @@ export default class StyleSheetElementManager {
   }
 
   public mount(): void {
-    if (typeof this._parentNode === 'undefined') {
-      this.emit('error', MISSING_MANAGED_STYLE_SHEET_PARENT_NODE_ERROR);
-      return;
+    try {
+      this.parentNode.appendChild(this.element);
+    } catch (err: unknown) {
+      this.emit('error', err);
     }
-
-    if (typeof this._element === 'undefined') {
-      this.emit('error', MISSING_MANAGED_STYLE_SHEET_ERROR);
-      return;
-    }
-
-    this._parentNode.appendChild(this._element);
   }
 
   public removeEventListener<T extends keyof EventListeners>(
@@ -85,17 +93,11 @@ export default class StyleSheetElementManager {
   }
 
   public unmount(): void {
-    if (typeof this._parentNode === 'undefined') {
-      this.emit('error', MISSING_MANAGED_STYLE_SHEET_PARENT_NODE_ERROR);
-      return;
+    try {
+      this.parentNode.removeChild(this.element);
+    } catch (err: unknown) {
+      this.emit('error', err);
     }
-
-    if (typeof this._element === 'undefined') {
-      this.emit('error', MISSING_MANAGED_STYLE_SHEET_ERROR);
-      return;
-    }
-
-    this._parentNode.removeChild(this._element);
   }
 
   private emit<T extends keyof EventListeners>(

@@ -2,10 +2,6 @@ import type { Dispatch, SetStateAction } from 'react';
 import { useContext } from 'react';
 import DarkModeContext from '../contexts/dark-mode';
 
-const MISSING_DARK_MODE_CONTEXT_ERROR: Error = new Error(
-  'Expected the dark mode context to be provided.',
-);
-
 export default function useDarkMode(): [
   boolean,
   Dispatch<SetStateAction<boolean>>,
@@ -14,7 +10,7 @@ export default function useDarkMode(): [
     useContext(DarkModeContext);
 
   if (darkMode === null) {
-    throw MISSING_DARK_MODE_CONTEXT_ERROR;
+    throw new Error('Expected the dark mode context to be provided.');
   }
 
   return darkMode;

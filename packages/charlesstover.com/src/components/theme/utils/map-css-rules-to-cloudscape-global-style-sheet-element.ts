@@ -1,5 +1,3 @@
-import MISSING_CLOUDSCAPE_GLOBAL_CSS_RULES_PARENT_STYLESHEET_ERROR from '../constants/missing-cloudscape-global-css-rules-parent-stylesheet-error';
-import MISSING_CLOUDSCAPE_GLOBAL_STYLESHEET_OWNER_NODE_ERROR from '../constants/missing-cloudscape-global-stylesheet-owner-node-error';
 import filterCssRuleByCloudscapeCssFontFaceRule from '../utils/filter-css-rule-by-cloudscape-css-font-face-rule';
 
 export default function mapCssRulesToCloudscapeGlobalStyleSheetElement(
@@ -12,13 +10,18 @@ export default function mapCssRulesToCloudscapeGlobalStyleSheetElement(
 
     const sheet: CSSStyleSheet | null = rule.parentStyleSheet;
     if (sheet === null) {
-      throw MISSING_CLOUDSCAPE_GLOBAL_CSS_RULES_PARENT_STYLESHEET_ERROR;
+      throw new Error(
+        'Expected the Cloudscape global CSS rules to have a parent stylesheet.',
+      );
     }
 
     const node: Element | ProcessingInstruction | null = sheet.ownerNode;
     if (node === null) {
-      throw MISSING_CLOUDSCAPE_GLOBAL_STYLESHEET_OWNER_NODE_ERROR;
+      throw new Error(
+        'Expected the Cloudscape global style sheet to have an owner node.',
+      );
     }
+
     return node;
   }
 

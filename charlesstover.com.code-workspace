@@ -51,6 +51,7 @@
       "dist/": true,
       "jest/": true,
       "packages/*/*": true,
+      "sarif/": true,
       ".attach_pid*": true,
       "lighthouse.report.*": true,
       "yarn.lock": true

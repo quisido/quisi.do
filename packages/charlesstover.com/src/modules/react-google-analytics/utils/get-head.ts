@@ -1,5 +1,3 @@
-import MISSING_HEAD_ERROR from '../constants/missing-head-element';
-
 const FIRST = 0;
 
 export default function getHead(): HTMLHeadElement {
@@ -8,7 +6,7 @@ export default function getHead(): HTMLHeadElement {
     .item(FIRST);
 
   if (head === null) {
-    throw MISSING_HEAD_ERROR;
+    throw new Error('Expected to find a head element.');
   }
 
   return head;

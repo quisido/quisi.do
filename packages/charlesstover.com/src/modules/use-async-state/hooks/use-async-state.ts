@@ -26,10 +26,14 @@ export default function useAsyncState<T>(
   const asyncEffectRef: MutableRefObject<Promise<unknown> | undefined> =
     useRef();
   const getRef: MutableRefObject<() => Promise<T>> = useRef(get);
+  const handleErrorRef: MutableRefObject<
+    ((error: string) => void) | undefined
+  > = useRef(onError);
   const [asyncState, setAsyncState] =
     useState<AsyncState<T>>(DEFAULT_ASYNC_STATE);
 
   getRef.current = get;
+  handleErrorRef.current = onError;
   useEffect((): void => {
     const getState = async (): Promise<void> => {
       setAsyncState({
@@ -67,14 +71,14 @@ export default function useAsyncState<T>(
           loading: false,
         });
 
-        if (typeof onError === 'function') {
-          onError(errorStr);
+        if (typeof handleErrorRef.current === 'function') {
+          handleErrorRef.current(errorStr);
         }
       }
     };
 
     asyncEffectRef.current = getState();
-  }, [get, onError]);
+  }, [get]);
 
   return {
     ...asyncState,

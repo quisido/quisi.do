@@ -4,9 +4,10 @@ import type DevArticle from '../types/dev-article';
 
 export default function useDevStats(): UseQueryResult<DevArticle[]> {
   return useQuery(['dev'], async (): Promise<DevArticle[]> => {
-    const response: Response = await fetch(
+    const response: Response = await window.fetch(
       'https://dev.to/api/articles?username=charlesstover',
     );
+
     return response.json();
   });
 }

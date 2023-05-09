@@ -1,4 +1,3 @@
-import MISSING_CLOUDSCAPE_GLOBAL_STYLE_SHEET_ERROR from '../constants/missing-cloudscape-global-style-sheet-error';
 import mapCssRulesToCloudscapeGlobalStyleSheetElement from '../utils/map-css-rules-to-cloudscape-global-style-sheet-element';
 import mapCssStyleSheetToCssRules from '../utils/map-css-style-sheet-to-css-rules';
 
@@ -14,5 +13,5 @@ export default function mapCssStyleSheetsToCloudscapeGlobalStyleSheetElement(
     }
   }
 
-  throw MISSING_CLOUDSCAPE_GLOBAL_STYLE_SHEET_ERROR;
+  throw new Error('Expected the Cloudscape global style sheet to exist.');
 }
