@@ -6,11 +6,12 @@ import type CloudflareAnalyticsType from '../../types/cloudflare-analytics';
 import type RumMetrics from '../../types/rum-metrics';
 import type SentryProjectEvent from '../../types/sentry-project-event';
 import type UptimeChecksType from '../../types/uptime-checks';
-import Apdex from './components/apdex';
+// import Apdex from './components/apdex';
 import CloudflareAnalyticsComponent from './components/cloudflare-analytics';
-import Errors from './components/errors';
+// import Errors from './components/errors';
+// import Events from './components/events';
 import Status from './components/status';
-import WebVitals from './components/web-vitals';
+// import WebVitals from './components/web-vitals';
 import useDashboard from './dashboard.hook';
 
 export interface Props {
@@ -29,40 +30,44 @@ export default function Dashboard({
   onUptimeChecksRequest,
 }: Readonly<Props>): ReactElement {
   const {
-    apdexError,
+    // apdexError,
     ciCdStatusAlt,
     cloudflareAnalytics,
     cloudflareAnalyticsBudget,
     cloudflareAnalyticsError,
-    clsP95,
-    clsTm95,
+    // clsP95,
+    // clsTm95,
     dailySessionCount,
-    errorCountTimeSeries,
-    errorsError,
-    fidP95,
-    fidTm95,
-    frustratedTimeSeries,
-    isApdexInitiated,
-    isApdexLoading,
+    // errorCountTimeSeries,
+    // errorsError,
+    // events,
+    // eventsError,
+    // fidP95,
+    // fidTm95,
+    // frustratedTimeSeries,
+    // isApdexInitiated,
+    // isApdexLoading,
     isCloudflareAnalyticsInitiated,
     isCloudflareAnalyticsLoading,
-    isErrorsInitiated,
-    isErrorsLoading,
+    // isErrorsInitiated,
+    // isErrorsLoading,
+    // isEventsInitiated,
+    // isEventsLoading,
     isUptimeChecksError,
     isUptimeChecksInitiated,
     isUptimeChecksLoading,
-    isWebVitalsInitiated,
-    isWebVitalsLoading,
+    // isWebVitalsInitiated,
+    // isWebVitalsLoading,
     lastUptimeCheckStatus,
     lastUptimeCheckTimestamp,
-    lcpP95,
-    lcpTm95,
-    satisfiedTimeSeries,
-    sessionCountTimeSeries,
-    toleratedTimeSeries,
+    // lcpP95,
+    // lcpTm95,
+    // satisfiedTimeSeries,
+    // sessionCountTimeSeries,
+    // toleratedTimeSeries,
     uptimeErrors,
     uptimeMessages,
-    webVitalsError,
+    // webVitalsError,
   } = useDashboard({
     onCloudflareAnalyticsRequest,
     onRumMetricsRequest,
@@ -89,6 +94,7 @@ export default function Dashboard({
         uptimeErrors={uptimeErrors}
         uptimeMessages={uptimeMessages}
       />
+      {/*
       <Apdex
         error={apdexError}
         frustratedTimeSeries={frustratedTimeSeries}
@@ -97,6 +103,7 @@ export default function Dashboard({
         satisfiedTimeSeries={satisfiedTimeSeries}
         toleratedTimeSeries={toleratedTimeSeries}
       />
+      */}
       <CloudflareAnalyticsComponent
         budget={cloudflareAnalyticsBudget}
         datasets={cloudflareAnalytics}
@@ -104,6 +111,7 @@ export default function Dashboard({
         initiated={isCloudflareAnalyticsInitiated}
         loading={isCloudflareAnalyticsLoading}
       />
+      {/*
       <Errors
         error={errorsError}
         errorCountTimeSeries={errorCountTimeSeries}
@@ -111,6 +119,16 @@ export default function Dashboard({
         loading={isErrorsLoading}
         sessionCountTimeSeries={sessionCountTimeSeries}
       />
+      */}
+      {/*
+      <Events
+        error={eventsError}
+        events={events}
+        initiated={isEventsInitiated}
+        loading={isEventsLoading}
+      />
+      */}
+      {/*
       <WebVitals
         clsP95={clsP95}
         clsTm95={clsTm95}
@@ -122,6 +140,7 @@ export default function Dashboard({
         lcpTm95={lcpTm95}
         loading={isWebVitalsLoading}
       />
+      */}
     </>
   );
 }

@@ -48,7 +48,11 @@ interface State<Item> {
   readonly cancelLabel: string;
   readonly collectionPreferencesTitle: string;
   readonly columnDefinitions: readonly TableProps.ColumnDefinition<Item>[];
+  readonly columnDisplay: readonly TableProps.ColumnDisplayProperties[];
   readonly confirmLabel: string;
+  readonly contentDensity: 'comfortable' | 'compact';
+  readonly contentDensityPreference: CollectionPreferencesProps.ContentDensityPreference;
+  readonly contentDisplayPreference: CollectionPreferencesProps.ContentDisplayPreference;
   readonly countText: string;
   readonly currentPageIndex: number;
   readonly filteringAriaLabel: string | undefined;
@@ -59,7 +63,9 @@ interface State<Item> {
   readonly ref: MutableRefObject<HTMLDivElement | null>;
   readonly sortingColumn: TableProps.SortingColumn<Item> | undefined;
   readonly sortingDescending: boolean | undefined;
-  readonly visibleContent: readonly string[] | undefined;
+  readonly stripedRows: boolean;
+  readonly stripedRowsPreference: CollectionPreferencesProps.StripedRowsPreference;
+  readonly visibleColumns: readonly string[] | undefined;
   readonly wrapLines: boolean | undefined;
   readonly wrapLinesPreference: CollectionPreferencesProps.WrapLinesPreference;
   readonly handleCollectionPreferencesConfirm: NonCancelableEventHandler<
@@ -108,14 +114,23 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
 
   // States
   const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
+  const [stripedRows, setStripedRows] = useState(true);
   const [wrapLines, setWrapLines] = useState(false);
+
+  const [columnDisplay] = useState<
+    readonly TableProps.ColumnDisplayProperties[]
+  >([]);
+
+  const [contentDensity, setContentDensity] = useState<
+    'comfortable' | 'compact'
+  >('comfortable');
 
   const columnDefinitions: readonly TableProps.ColumnDefinition<Item>[] =
     useMemo((): readonly TableProps.ColumnDefinition<Item>[] => {
       return mapColumnsToAwsDefinitions(columns);
     }, [columns]);
 
-  const visibleContent: readonly string[] | undefined = useMemo(():
+  const visibleColumns: readonly string[] | undefined = useMemo(():
     | readonly string[]
     | undefined => {
     if (typeof visibleColumnIndices === 'undefined') {
@@ -157,7 +172,9 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
     cancelLabel: translate('Cancel') ?? '...',
     collectionPreferencesTitle: translate('Preferences') ?? '...',
     columnDefinitions,
+    columnDisplay,
     confirmLabel: translate('Confirm') ?? '...',
+    contentDensity,
     countText: useAwsCountText(rowsCount),
     currentPageIndex: page,
     filteringAriaLabel: translate('Filter packages'), // TODO
@@ -165,8 +182,43 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
     pagesCount: Math.ceil(rowsCount / rowsPerPage),
     ref,
     sortingDescending: !sortAscending,
-    visibleContent,
+    stripedRows,
+    visibleColumns,
     wrapLines,
+
+    contentDensityPreference: useMemo(
+      (): CollectionPreferencesProps.ContentDensityPreference => ({
+        description: '',
+        label: 'Contenty density',
+      }),
+      [],
+    ),
+
+    contentDisplayPreference: useMemo(
+      (): CollectionPreferencesProps.ContentDisplayPreference => ({
+        description: '',
+        title: 'Content display',
+        options: [
+          {
+            id: 'packageName',
+            label: 'Package name',
+            alwaysVisible: true,
+          },
+          {
+            id: 'totalDownloads',
+            label: 'Total downloads',
+            alwaysVisible: false,
+          },
+        ],
+        // liveAnnouncementDndStarted?: (position: number, total: number) => string;
+        // liveAnnouncementDndItemReordered?: (initialPosition: number, currentPosition: number, total: number) => string;
+        // liveAnnouncementDndItemCommitted?: (initialPosition: number, finalPosition: number, total: number) => string;
+        // liveAnnouncementDndDiscarded?: string;
+        // dragHandleAriaLabel?: string;
+        // dragHandleAriaDescription?: string;
+      }),
+      [],
+    ),
 
     handleCollectionPreferencesConfirm: useCallback(
       (
@@ -176,9 +228,17 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
           >
         >,
       ): void => {
+        if (isDefined(e.detail.contentDensity)) {
+          setContentDensity(e.detail.contentDensity);
+        }
+
         if (isDefined(e.detail.pageSize)) {
           onPageChange?.(FIRST_PAGE);
           onRowsPerPageChange?.(e.detail.pageSize);
+        }
+
+        if (isDefined(e.detail.stripedRows)) {
+          setStripedRows(e.detail.stripedRows);
         }
 
         if (isDefined(e.detail.visibleContent)) {
@@ -282,19 +342,21 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
     }, [translate]),
 
     preferences: useMemo((): CollectionPreferencesProps.Preferences<void> => {
-      if (typeof visibleContent === 'undefined') {
+      if (typeof visibleColumns === 'undefined') {
         return {
           pageSize: rowsPerPage,
+          stripedRows,
           wrapLines,
         };
       }
 
       return {
         pageSize: rowsPerPage,
-        visibleContent,
+        stripedRows,
+        visibleContent: visibleColumns,
         wrapLines,
       };
-    }, [rowsPerPage, visibleContent, wrapLines]),
+    }, [rowsPerPage, stripedRows, visibleColumns, wrapLines]),
 
     sortingColumn: useMemo((): TableProps.SortingColumn<Item> | undefined => {
       if (isUndefined(sortColumnIndex)) {
@@ -305,6 +367,16 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
         sortingField: sortColumnIndex.toString(),
       };
     }, [sortColumnIndex]),
+
+    // TODO: Determine the description and label used by the AWS console.
+    // TODO: Copy this state to the Cloudscape hook.
+    stripedRowsPreference: useMemo(
+      (): CollectionPreferencesProps.StripedRowsPreference => ({
+        description: 'alternating background colors',
+        label: 'Striped rows',
+      }),
+      [],
+    ),
 
     visibleContentPreference: useMemo(():
       | CollectionPreferencesProps.VisibleContentPreference

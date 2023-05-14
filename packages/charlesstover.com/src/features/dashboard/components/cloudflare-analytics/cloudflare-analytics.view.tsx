@@ -56,15 +56,16 @@ export default function CloudflareAnalytics({
 
   if (!initiated) {
     return (
-      <Container header={<I18n>Errors</I18n>} marginTop="large">
+      <Container header={<I18n>Cloudflare analytics</I18n>} marginTop="large">
         <I18n>Initiating</I18n>
       </Container>
     );
   }
 
+  // Turn this into an `onError` event to display a banner.
   if (error !== null) {
     return (
-      <Container header={<I18n>Errors</I18n>} marginTop="large">
+      <Container header={<I18n>Cloudflare analytics</I18n>} marginTop="large">
         <Span element="p">{error}</Span>
       </Container>
     );
@@ -73,7 +74,7 @@ export default function CloudflareAnalytics({
   // Technical debt: `datasets` should never be null since it's a state machine.
   if (loading || datasets === null) {
     return (
-      <Container header={<I18n>Errors</I18n>} marginTop="large">
+      <Container header={<I18n>Cloudflare analytics</I18n>} marginTop="large">
         <LoadingIcon /> <I18n>Loading Cloudflare analytics</I18n>
       </Container>
     );
@@ -220,7 +221,7 @@ export default function CloudflareAnalytics({
 
   return (
     <>
-      <Container header="Cloudflare analytics" marginTop="large">
+      <Container header={<I18n>Cloudflare analytics</I18n>} marginTop="large">
         <Div element="p">
           Remaining budget: {mapBudgetToPercentage(budget)}%
         </Div>

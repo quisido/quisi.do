@@ -30,6 +30,8 @@ interface State {
   readonly dailySessionCount: number;
   readonly errorCountTimeSeries: Record<string, number>;
   readonly errorsError: string | null;
+  readonly events: readonly string[];
+  readonly eventsError: string | null;
   readonly fidP95: number;
   readonly fidTm95: number;
   readonly frustratedTimeSeries: Record<string, number>;
@@ -39,6 +41,8 @@ interface State {
   readonly isCloudflareAnalyticsLoading: boolean;
   readonly isErrorsInitiated: boolean;
   readonly isErrorsLoading: boolean;
+  readonly isEventsInitiated: boolean;
+  readonly isEventsLoading: boolean;
   readonly isUptimeChecksError: boolean;
   readonly isUptimeChecksInitiated: boolean;
   readonly isUptimeChecksLoading: boolean;
@@ -158,13 +162,6 @@ export default function useDashboard({
     initiated: isSentryProjectEventsInitiated,
     loading: isSentryProjectEventsLoading,
   } = useAsyncState(onSentryProjectEventsRequest);
-
-  console.log(
-    sentryProjectEvents,
-    sentryProjectEventsError,
-    isSentryProjectEventsInitiated,
-    isSentryProjectEventsLoading,
-  );
   */
 
   const {
@@ -184,6 +181,8 @@ export default function useDashboard({
     clsTm95: 0,
     errorCountTimeSeries: EMPTY_RECORD,
     errorsError: rumMetricsError,
+    events: EMPTY_ARRAY,
+    eventsError: null, // sentryProjectEventsError,
     fidP95: 0,
     fidTm95: 0,
     frustratedTimeSeries: EMPTY_RECORD,
@@ -193,6 +192,8 @@ export default function useDashboard({
     isCloudflareAnalyticsLoading,
     isErrorsInitiated: isRumMetricsInitiated,
     isErrorsLoading: isRumMetricsLoading,
+    isEventsInitiated: false, // isSentryProjectEventsInitiated,
+    isEventsLoading: false, // isSentryProjectEventsLoading,
     isUptimeChecksError: uptimeChecksError !== null,
     isUptimeChecksInitiated,
     isUptimeChecksLoading,
@@ -223,6 +224,19 @@ export default function useDashboard({
         Math.ceil(mapRecordToSum(sessionCountTimeSeries) / DAYS_PER_WEEK),
       [sessionCountTimeSeries],
     ),
+
+    /*
+    events: useMemo((): readonly string[] => {
+      if (sentryProjectEvents === null) {
+        return [];
+      }
+
+      const mapSentryProjectEventToString = (e: SentryProjectEvent): string =>
+        e.title;
+
+      return sentryProjectEvents.map(mapSentryProjectEventToString);
+    }, [sentryProjectEvents]),
+    */
 
     lastUptimeCheckStatus: uptimeChecks
       ? uptimeChecks.status === 'ONLINE'

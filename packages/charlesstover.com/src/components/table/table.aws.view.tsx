@@ -38,7 +38,11 @@ export default function AwsTable<Item extends Record<string, unknown>>({
     cancelLabel,
     collectionPreferencesTitle,
     columnDefinitions,
+    // columnDisplay,
+    contentDensity,
+    // contentDisplayPreference,
     confirmLabel,
+    // contentDensityPreference,
     countText,
     currentPageIndex,
     filteringAriaLabel,
@@ -54,7 +58,9 @@ export default function AwsTable<Item extends Record<string, unknown>>({
     ref,
     sortingColumn,
     sortingDescending,
-    visibleContent,
+    stripedRows,
+    stripedRowsPreference,
+    visibleColumns,
     visibleContentPreference,
     wrapLines,
     wrapLinesPreference,
@@ -108,8 +114,8 @@ export default function AwsTable<Item extends Record<string, unknown>>({
   if (isDefined(sortingDescending)) {
     tableProps.sortingDescending = sortingDescending;
   }
-  if (isDefined(visibleContent)) {
-    tableProps.visibleColumns = visibleContent;
+  if (isDefined(visibleColumns)) {
+    tableProps.visibleColumns = visibleColumns;
   }
   if (isDefined(wrapLines)) {
     tableProps.wrapLines = wrapLines;
@@ -128,12 +134,15 @@ export default function AwsTable<Item extends Record<string, unknown>>({
     <div ref={ref}>
       <Table<Item>
         columnDefinitions={columnDefinitions}
+        // columnDisplay={columnDisplay}
+        contentDensity={contentDensity}
         header={<Header>{header}</Header>}
         items={rows}
         loading={isDefined(loading)}
         onSortingChange={handleSortingChange}
         resizableColumns
         stickyHeader
+        stripedRows={stripedRows}
         {...tableProps}
         filter={
           typeof handleTextFilterChange !== 'undefined' && (
@@ -159,9 +168,12 @@ export default function AwsTable<Item extends Record<string, unknown>>({
         preferences={
           <CollectionPreferences
             cancelLabel={cancelLabel}
+            // contentDisplayPreference={contentDisplayPreference}
             confirmLabel={confirmLabel}
+            // contentDensityPreference={contentDensityPreference}
             onConfirm={handleCollectionPreferencesConfirm}
             preferences={preferences}
+            stripedRowsPreference={stripedRowsPreference}
             title={collectionPreferencesTitle}
             wrapLinesPreference={wrapLinesPreference}
             {...collectionPreferenceProps}
