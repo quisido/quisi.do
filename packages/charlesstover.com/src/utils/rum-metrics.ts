@@ -3,17 +3,18 @@ import type RumMetricsError from '../types/rum-metrics-error';
 
 interface Options {
   readonly accessKey: string;
-  readonly fetch: Window['fetch'];
+  readonly fetch: (input: string, init: RequestInit) => Promise<Response>;
 }
 
 // TODO: Replace this with `zod`.
-const filterByRumMetricsResponse = (
+const isRumMetricsResponse = (
   value: unknown,
 ): value is RumMetricsError | RumMetricsType => value !== null;
+
 const validateRumMetricsResponse = (
   value: unknown,
 ): RumMetricsError | RumMetricsType => {
-  if (!filterByRumMetricsResponse(value)) {
+  if (!isRumMetricsResponse(value)) {
     throw new Error('Expected rum metrics.');
   }
   return value;

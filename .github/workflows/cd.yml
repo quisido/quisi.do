@@ -283,6 +283,45 @@ jobs:
           name: npm
           path: packages/*/jest/
 
+  opensource-registry:
+    name: OpenSource registry
+    needs: [prepack, prepublish-only]
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+          registry-url: 'https://npm-publish.opensourceregistry.com'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Publish
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.OPENSOURCE_REGISTRY_NPM_TOKEN }}
+        run: >
+          yarn config set npmAuthToken $NPM_AUTH_TOKEN;
+          yarn run publish;
+
   prepublish:
     name: Prepublish
     needs: prepack
