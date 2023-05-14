@@ -9,11 +9,13 @@ import { useTranslate } from 'lazy-i18n';
 import type { ComponentType, MutableRefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
+import type ReadonlyColllectionPreferencesEvent from '../../types/readonly-aws-collection-preferences-event copy';
 import type ReadonlyAwsTableSortingEvent from '../../types/readonly-aws-table-sorting-event';
 import type TableColumn from '../../types/table-column';
 import type TableRowsPerPageOption from '../../types/table-rows-per-page-option';
 import isDefined from '../../utils/is-defined';
 import isUndefined from '../../utils/is-undefined';
+import useAriaLabels from './hooks/use-cloudscape-aria-labels';
 import useAwsCountText from './hooks/use-aws-count-text';
 import type AwsuiPaginationChangeHandler from './types/awsui-pagination-change-handler';
 import mapColumnToAwsVisibleContentOption from './utils/map-column-to-aws-visible-content-option';
@@ -45,6 +47,7 @@ interface Props<Item> {
 
 interface State<Item> {
   readonly DescriptionPortal: ComponentType<Record<string, never>>;
+  readonly ariaLabels: TableProps.AriaLabels<Item>;
   readonly cancelLabel: string;
   readonly collectionPreferencesTitle: string;
   readonly columnDefinitions: readonly TableProps.ColumnDefinition<Item>[];
@@ -169,6 +172,7 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
 
   return {
     DescriptionPortal,
+    ariaLabels: useAriaLabels(),
     cancelLabel: translate('Cancel') ?? '...',
     collectionPreferencesTitle: translate('Preferences') ?? '...',
     columnDefinitions,
@@ -188,16 +192,23 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
 
     contentDensityPreference: useMemo(
       (): CollectionPreferencesProps.ContentDensityPreference => ({
-        description: '',
-        label: 'Contenty density',
+        label: translate('Compact mode') ?? '...',
+        description:
+          translate(
+            'Select to display content in denser, more compact mode.',
+          ) ?? '...',
       }),
-      [],
+      [translate],
     ),
 
+    /*
+    // TODO: Map these from columns.
+    // TODO: Copy this logic to `./table.cloudscape.hook.ts`.
     contentDisplayPreference: useMemo(
       (): CollectionPreferencesProps.ContentDisplayPreference => ({
-        description: '',
-        title: 'Content display',
+        title: translate('Column preferences') ?? '...',
+        description:
+          translate("Customize the columns' visibility and order.") ?? '...',
         options: [
           {
             id: 'packageName',
@@ -217,17 +228,16 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
         // dragHandleAriaLabel?: string;
         // dragHandleAriaDescription?: string;
       }),
-      [],
+      [translate],
     ),
+    */
+    contentDisplayPreference: {
+      options: [],
+      title: '',
+    },
 
     handleCollectionPreferencesConfirm: useCallback(
-      (
-        e: Readonly<
-          NonCancelableCustomEvent<
-            Readonly<CollectionPreferencesProps.Preferences<void>>
-          >
-        >,
-      ): void => {
+      (e: ReadonlyColllectionPreferencesEvent<void>): void => {
         if (isDefined(e.detail.contentDensity)) {
           setContentDensity(e.detail.contentDensity);
         }
@@ -324,22 +334,14 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
       };
     }, [onRowsPerPageChange, rowsPerPageOptions, translate]),
 
-    paginationAriaLabels: useMemo((): PaginationProps.Labels => {
-      const labels: PaginationProps.Labels = {};
-      const nextPageLabel: string | undefined = translate('Go to next page');
-      if (typeof nextPageLabel === 'string') {
-        labels.nextPageLabel = nextPageLabel;
-      }
-
-      const previousPageLabel: string | undefined = translate(
-        'Go to previous page',
-      );
-      if (typeof previousPageLabel === 'string') {
-        labels.previousPageLabel = previousPageLabel;
-      }
-
-      return labels;
-    }, [translate]),
+    paginationAriaLabels: useMemo(
+      (): PaginationProps.Labels => ({
+        nextPageLabel: translate('Go to next page.') ?? 'Go to next page.',
+        previousPageLabel:
+          translate('Go to previous page.') ?? 'Go to previous page.',
+      }),
+      [translate],
+    ),
 
     preferences: useMemo((): CollectionPreferencesProps.Preferences<void> => {
       if (typeof visibleColumns === 'undefined') {
@@ -368,14 +370,13 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
       };
     }, [sortColumnIndex]),
 
-    // TODO: Determine the description and label used by the AWS console.
-    // TODO: Copy this state to the Cloudscape hook.
     stripedRowsPreference: useMemo(
       (): CollectionPreferencesProps.StripedRowsPreference => ({
-        description: 'alternating background colors',
-        label: 'Striped rows',
+        label: translate('Striped rows') ?? '...',
+        description:
+          translate('Select to add alternating shaded rows.') ?? '...',
       }),
-      [],
+      [translate],
     ),
 
     visibleContentPreference: useMemo(():
@@ -400,7 +401,7 @@ export default function useAwsTableHook<Item extends Record<string, unknown>>({
       (): CollectionPreferencesProps.WrapLinesPreference => ({
         label: translate('Wrap lines') ?? '...',
         description:
-          translate('Select to wrap lines and see all text.') ?? '...',
+          translate('Select to see all the text and wrap the lines.') ?? '...',
       }),
       [translate],
     ),

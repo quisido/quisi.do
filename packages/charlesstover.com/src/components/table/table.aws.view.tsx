@@ -35,14 +35,15 @@ export default function AwsTable<Item extends Record<string, unknown>>({
 }: Readonly<Props<Item>>): ReactElement {
   const {
     DescriptionPortal,
+    ariaLabels,
     cancelLabel,
     collectionPreferencesTitle,
     columnDefinitions,
     // columnDisplay,
     contentDensity,
-    // contentDisplayPreference,
     confirmLabel,
-    // contentDensityPreference,
+    contentDensityPreference,
+    // contentDisplayPreference,
     countText,
     currentPageIndex,
     filteringAriaLabel,
@@ -133,6 +134,7 @@ export default function AwsTable<Item extends Record<string, unknown>>({
   return (
     <div ref={ref}>
       <Table<Item>
+        ariaLabels={ariaLabels}
         columnDefinitions={columnDefinitions}
         // columnDisplay={columnDisplay}
         contentDensity={contentDensity}
@@ -170,7 +172,7 @@ export default function AwsTable<Item extends Record<string, unknown>>({
             cancelLabel={cancelLabel}
             // contentDisplayPreference={contentDisplayPreference}
             confirmLabel={confirmLabel}
-            // contentDensityPreference={contentDensityPreference}
+            contentDensityPreference={contentDensityPreference}
             onConfirm={handleCollectionPreferencesConfirm}
             preferences={preferences}
             stripedRowsPreference={stripedRowsPreference}

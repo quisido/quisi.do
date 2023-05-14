@@ -8,17 +8,18 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import type { ComponentType, MutableRefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
-import type ReadonlyCloudscapeTableSortingEvent from '../../types/readonly-cloudscape-table-sorting-event';
+import useTableItemDescription from 'use-awsui-table-item-description';
+import type ReadonlyCollectionPreferencesEvent from '../../types/readonly-cloudscape-collection-preferences-event';
+import type ReadonlyTableSortingEvent from '../../types/readonly-cloudscape-table-sorting-event';
 import type TableColumn from '../../types/table-column';
 import type TableRowsPerPageOption from '../../types/table-rows-per-page-option';
 import isDefined from '../../utils/is-defined';
 import isUndefined from '../../utils/is-undefined';
-import useCloudscapeCountText from './hooks/use-cloudscape-count-text';
-import type CloudscapePaginationChangeHandler from './types/cloudscape-pagination-change-handler';
-import mapColumnToCloudscapeVisibleContentOption from './utils/map-column-to-cloudscape-visible-content-option';
-import mapColumnsToCloudscapeDefinitions from './utils/map-columns-to-cloudscape-definitions';
-import mapNumberDispatchToCloudscapePaginationChangeHandler from './utils/map-number-dispatch-to-cloudscape-pagination-change-handler';
+import useColumnDefinitions from './hooks/use-cloudscape-column-definitions';
+import useCountText from './hooks/use-cloudscape-count-text';
+import type PaginationChangeHandler from './types/cloudscape-pagination-change-handler';
+import mapColumnToVisibleContentOption from './utils/map-column-to-cloudscape-visible-content-option';
+import mapNumberDispatchToPaginationChangeHandler from './utils/map-number-dispatch-to-cloudscape-pagination-change-handler';
 import mapRowsPerPageOptionToPageSizeOption from './utils/map-rows-per-page-option-to-page-size-option';
 import mapSortingColumnToIndex from './utils/map-sorting-column-to-index';
 
@@ -59,6 +60,7 @@ interface State<Item> {
   readonly ref: MutableRefObject<HTMLDivElement | null>;
   readonly sortingColumn: TableProps.SortingColumn<Item> | undefined;
   readonly sortingDescending: boolean | undefined;
+  readonly stripedRowsPreference: CollectionPreferencesProps.StripedRowsPreference;
   readonly visibleContent: readonly string[] | undefined;
   readonly wrapLines: boolean | undefined;
   readonly wrapLinesPreference: CollectionPreferencesProps.WrapLinesPreference;
@@ -69,7 +71,7 @@ interface State<Item> {
     | NonCancelableEventHandler<PaginationProps.ChangeDetail>
     | undefined;
   readonly handleSortingChange: (
-    event: ReadonlyCloudscapeTableSortingEvent<Item>,
+    event: ReadonlyTableSortingEvent<Item>,
   ) => void;
   readonly handleTextFilterChange:
     | NonCancelableEventHandler<TextFilterProps.ChangeDetail>
@@ -113,9 +115,7 @@ export default function useCloudscapeTableHook<
   const [wrapLines, setWrapLines] = useState(false);
 
   const columnDefinitions: readonly TableProps.ColumnDefinition<Item>[] =
-    useMemo((): readonly TableProps.ColumnDefinition<Item>[] => {
-      return mapColumnsToCloudscapeDefinitions(columns);
-    }, [columns]);
+    useColumnDefinitions(columns);
 
   const visibleContent: readonly string[] | undefined = useMemo(():
     | readonly string[]
@@ -146,7 +146,7 @@ export default function useCloudscapeTableHook<
 
   // Effects
   const DescriptionPortal: ComponentType<Record<string, never>> =
-    useAwsuiTableItemDescription({
+    useTableItemDescription({
       Component: Description,
       colSpan: visibleColumnIndices?.length ?? columnDefinitions.length,
       items: rows,
@@ -159,7 +159,7 @@ export default function useCloudscapeTableHook<
     collectionPreferencesTitle: translate('Preferences') ?? '...',
     columnDefinitions,
     confirmLabel: translate('Confirm') ?? '...',
-    countText: useCloudscapeCountText(rowsCount),
+    countText: useCountText(rowsCount),
     currentPageIndex: page,
     filteringAriaLabel: translate('Filter packages'), // TODO
     filteringText: filter ?? '',
@@ -170,13 +170,7 @@ export default function useCloudscapeTableHook<
     wrapLines,
 
     handleCollectionPreferencesConfirm: useCallback(
-      (
-        e: Readonly<
-          NonCancelableCustomEvent<
-            Readonly<CollectionPreferencesProps.Preferences<void>>
-          >
-        >,
-      ): void => {
+      (e: ReadonlyCollectionPreferencesEvent<void>): void => {
         if (isDefined(e.detail.pageSize)) {
           onPageChange?.(FIRST_PAGE);
           onRowsPerPageChange?.(e.detail.pageSize);
@@ -216,17 +210,15 @@ export default function useCloudscapeTableHook<
       ],
     ),
 
-    handlePaginationChange: useMemo(():
-      | CloudscapePaginationChangeHandler
-      | undefined => {
+    handlePaginationChange: useMemo((): PaginationChangeHandler | undefined => {
       if (typeof onPageChange === 'undefined') {
         return;
       }
-      return mapNumberDispatchToCloudscapePaginationChangeHandler(onPageChange);
+      return mapNumberDispatchToPaginationChangeHandler(onPageChange);
     }, [onPageChange]),
 
     handleSortingChange: useCallback(
-      (e: ReadonlyCloudscapeTableSortingEvent<Item>): void => {
+      (e: ReadonlyTableSortingEvent<Item>): void => {
         const columnIndex: number = mapSortingColumnToIndex(
           e.detail.sortingColumn,
         );
@@ -265,22 +257,14 @@ export default function useCloudscapeTableHook<
       };
     }, [onRowsPerPageChange, rowsPerPageOptions, translate]),
 
-    paginationAriaLabels: useMemo((): PaginationProps.Labels => {
-      const labels: PaginationProps.Labels = {};
-      const nextPageLabel: string | undefined = translate('Go to next page');
-      if (typeof nextPageLabel === 'string') {
-        labels.nextPageLabel = nextPageLabel;
-      }
-
-      const previousPageLabel: string | undefined = translate(
-        'Go to previous page',
-      );
-      if (typeof previousPageLabel === 'string') {
-        labels.previousPageLabel = previousPageLabel;
-      }
-
-      return labels;
-    }, [translate]),
+    paginationAriaLabels: useMemo(
+      (): PaginationProps.Labels => ({
+        nextPageLabel: translate('Go to next page.') ?? 'Go to next page.',
+        previousPageLabel:
+          translate('Go to previous page.') ?? 'Go to previous page.',
+      }),
+      [translate],
+    ),
 
     preferences: useMemo((): CollectionPreferencesProps.Preferences<void> => {
       if (typeof visibleContent === 'undefined') {
@@ -307,6 +291,15 @@ export default function useCloudscapeTableHook<
       };
     }, [sortColumnIndex]),
 
+    stripedRowsPreference: useMemo(
+      (): CollectionPreferencesProps.StripedRowsPreference => ({
+        label: translate('Striped rows') ?? '...',
+        description:
+          translate('Select to add alternating shaded rows.') ?? '...',
+      }),
+      [translate],
+    ),
+
     visibleContentPreference: useMemo(():
       | CollectionPreferencesProps.VisibleContentPreference
       | undefined => {
@@ -319,7 +312,7 @@ export default function useCloudscapeTableHook<
         options: [
           {
             label: translate('Properties') ?? '...',
-            options: columns.map(mapColumnToCloudscapeVisibleContentOption),
+            options: columns.map(mapColumnToVisibleContentOption),
           },
         ],
       };
@@ -329,7 +322,7 @@ export default function useCloudscapeTableHook<
       (): CollectionPreferencesProps.WrapLinesPreference => ({
         label: translate('Wrap lines') ?? '...',
         description:
-          translate('Select to wrap lines and see all text.') ?? '...',
+          translate('Select to see all the text and wrap the lines.') ?? '...',
       }),
       [translate],
     ),

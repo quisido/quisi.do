@@ -29,18 +29,18 @@ export default function Events({
     );
   }
 
-  if (error !== null) {
-    return (
-      <Container header={<I18n>Events</I18n>} marginTop="large">
-        <Span element="p">{error}</Span>
-      </Container>
-    );
-  }
-
   if (loading) {
     return (
       <Container header={<I18n>Events</I18n>} marginTop="large">
         <LoadingIcon /> <I18n>Loading events</I18n>
+      </Container>
+    );
+  }
+
+  if (error !== null) {
+    return (
+      <Container header={<I18n>Events</I18n>} marginTop="large">
+        <Span element="p">{error}</Span>
       </Container>
     );
   }

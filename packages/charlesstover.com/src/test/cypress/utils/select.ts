@@ -27,10 +27,15 @@ export default function select(
         return;
       }
 
-      cy.get(formElementSelector).click();
+      cy.get(formElementSelector).click({
+        scrollBehavior: 'center',
+      });
 
       const valueSelector = `ul[aria-labelledby$="${formElementId}"] > li`;
-      cy.get(valueSelector).contains(value).click();
+      cy.get(valueSelector).contains(value).click({
+        scrollBehavior: 'center',
+      });
+
       if (typeof onChange === 'function') {
         onChange();
       }
