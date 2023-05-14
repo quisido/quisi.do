@@ -67,7 +67,7 @@ export default function useMuiTable<Item extends Record<string, unknown>>({
 
     backIconButtonProps: useMemo(
       (): Partial<IconButtonProps> => ({
-        'aria-label': translate('Go to previous page'),
+        'aria-label': translate('Go to previous page.'),
       }),
       [translate],
     ),
@@ -119,7 +119,7 @@ export default function useMuiTable<Item extends Record<string, unknown>>({
 
     nextIconButtonProps: useMemo(
       (): Partial<IconButtonProps> => ({
-        'aria-label': translate('Go to next page'),
+        'aria-label': translate('Go to next page.'),
       }),
       [translate],
     ),

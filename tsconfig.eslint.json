@@ -1,4 +1,5 @@
 {
+  "exclude": ["sarif/"],
   "extends": "./tsconfig.json",
   "include": ["**/*", "**/.*", "**/*.json"]
 }
