@@ -4,12 +4,13 @@ import Div from '../../components/div';
 import Link from '../../components/link';
 import type CloudflareAnalyticsType from '../../types/cloudflare-analytics';
 import type RumMetrics from '../../types/rum-metrics';
-import type SentryProjectEvent from '../../types/sentry-project-event';
+import type SentryProjectIssue from '../../types/sentry-project-issue';
 import type UptimeChecksType from '../../types/uptime-checks';
 // import Apdex from './components/apdex';
 import CloudflareAnalyticsComponent from './components/cloudflare-analytics';
 // import Errors from './components/errors';
 // import Events from './components/events';
+import SentryProjectIssues from './components/sentry-project-issues';
 import Status from './components/status';
 // import WebVitals from './components/web-vitals';
 import useDashboard from './dashboard.hook';
@@ -18,15 +19,15 @@ export interface Props {
   readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalyticsType>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
   readonly onUptimeChecksRequest: () => Promise<UptimeChecksType>;
-  readonly onSentryProjectEventsRequest: () => Promise<
-    readonly SentryProjectEvent[]
+  readonly onSentryProjectIssuesRequest: () => Promise<
+    readonly SentryProjectIssue[]
   >;
 }
 
 export default function Dashboard({
   onCloudflareAnalyticsRequest,
   onRumMetricsRequest,
-  onSentryProjectEventsRequest,
+  onSentryProjectIssuesRequest,
   onUptimeChecksRequest,
 }: Readonly<Props>): ReactElement {
   const {
@@ -53,6 +54,8 @@ export default function Dashboard({
     // isErrorsLoading,
     // isEventsInitiated,
     // isEventsLoading,
+    isSentryProjectIssuesInitiated,
+    isSentryProjectIssuesLoading,
     isUptimeChecksError,
     isUptimeChecksInitiated,
     isUptimeChecksLoading,
@@ -63,6 +66,8 @@ export default function Dashboard({
     // lcpP95,
     // lcpTm95,
     // satisfiedTimeSeries,
+    sentryProjectIssues,
+    sentryProjectIssuesError,
     // sessionCountTimeSeries,
     // toleratedTimeSeries,
     uptimeErrors,
@@ -71,7 +76,7 @@ export default function Dashboard({
   } = useDashboard({
     onCloudflareAnalyticsRequest,
     onRumMetricsRequest,
-    onSentryProjectEventsRequest,
+    onSentryProjectIssuesRequest,
     onUptimeChecksRequest,
   });
 
@@ -128,6 +133,12 @@ export default function Dashboard({
         loading={isEventsLoading}
       />
       */}
+      <SentryProjectIssues
+        error={sentryProjectIssuesError}
+        initiated={isSentryProjectIssuesInitiated}
+        issues={sentryProjectIssues}
+        loading={isSentryProjectIssuesLoading}
+      />
       {/*
       <WebVitals
         clsP95={clsP95}

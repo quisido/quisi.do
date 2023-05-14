@@ -6,8 +6,9 @@ const NAVIGATION_ITEM_SELECTOR = 'nav ul > li';
 
 export default function setDesignSystem(designSystem: string): void {
   beforeEach((): void => {
-    cy.get(EXPANDO_SELECTOR).contains('Settings').click();
-    cy.screenshot();
+    cy.get(EXPANDO_SELECTOR).contains('Settings').click({
+      scrollBehavior: 'center',
+    });
 
     const handleIgnore = (): void => {
       cy.log(`${designSystem} design system appears to be cached.`);
@@ -17,7 +18,5 @@ export default function setDesignSystem(designSystem: string): void {
       onIgnore: handleIgnore,
       parentSelector: NAVIGATION_ITEM_SELECTOR,
     });
-
-    cy.screenshot();
   });
 }
