@@ -9,7 +9,7 @@ import { Suspense } from 'react';
 import type DesignSystem from '../../constants/design-system';
 import useDesign from './design.hook';
 
-interface Props<P extends Record<string, unknown>> {
+interface Props<P extends object> {
   readonly components: Readonly<
     Record<DesignSystem, LazyExoticComponent<ComponentType<P>>>
   >;
@@ -17,7 +17,7 @@ interface Props<P extends Record<string, unknown>> {
   readonly props: P;
 }
 
-export default function Design<P extends Record<string, unknown>>({
+export default function Design<P extends object>({
   components,
   Fallback,
   props,

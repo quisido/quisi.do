@@ -1,5 +1,4 @@
 import type { ComponentType, FunctionComponent, ReactElement } from 'react';
-import isUndefined from '../utils/is-undefined';
 
 /*
 AWSUI does not mount renderer methods (e.g. CardDefinition's `content` and
@@ -15,12 +14,10 @@ This function generates a renderer function that can be passed to the `content`
   resolving the above two issues.
 */
 
-export default function mapComponentToRenderer<
-  Props extends Record<string, unknown>,
->(
+export default function mapComponentToRenderer<Props extends object>(
   Component: ComponentType<Props> | undefined,
 ): FunctionComponent<Props> | undefined {
-  if (isUndefined(Component)) {
+  if (typeof Component === 'undefined') {
     return;
   }
 

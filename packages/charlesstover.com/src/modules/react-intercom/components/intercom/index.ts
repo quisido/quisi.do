@@ -1,1 +1,1 @@
-export { default } from './intercom.root.view';
+export { default } from './intercom.view';

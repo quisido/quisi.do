@@ -1,6 +1,5 @@
 import type { ReactElement } from 'react';
 import Div from '../../../../components/div';
-import isDefined from '../../../../utils/is-defined';
 import validateString from '../../../../utils/validate-string';
 import type Quote from '../../types/quote';
 import styles from './card-content.module.scss';
@@ -17,7 +16,7 @@ export default function CardContent({
 }: Readonly<Quote>): ReactElement {
   return (
     <>
-      {isDefined(image) && (
+      {typeof image !== 'undefined' && (
         <Div float="right" marginLeft="large" marginRight="medium">
           <img
             alt={author}

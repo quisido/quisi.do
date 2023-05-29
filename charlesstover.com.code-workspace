@@ -27,6 +27,10 @@
     {
       "name": "useOffline",
       "path": "packages/use-offline"
+    },
+    {
+      "name": "[github/codeql source archive]",
+      "uri": "codeql-zip-archive://1-152/d:\\Users\\charl\\AppData\\Roaming\\Code - Insiders\\User\\workspaceStorage\\7a5bb44505353f50c02eb24a4fbddb28\\GitHub.vscode-codeql\\javascript\\codeql_db\\src.zip"
     }
   ],
   "settings": {

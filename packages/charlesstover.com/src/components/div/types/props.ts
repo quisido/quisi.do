@@ -18,6 +18,7 @@ interface BaseProps {
     | undefined;
   readonly flexWrap?: 'nowrap' | 'wrap' | undefined;
   readonly float?: 'left' | 'right' | undefined;
+  readonly gap?: 'large' | 'medium' | 'small' | undefined;
   readonly justifyContent?: 'space-around' | 'space-between' | undefined;
   readonly textAlign?: 'center' | 'left' | 'right' | undefined;
 }

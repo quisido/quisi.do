@@ -1,2 +1,2 @@
-export { default } from './wrapper.root.view';
-export type { Props } from './wrapper.root.view';
+export type { Props } from './wrapper.view';
+export { default } from './wrapper.view';

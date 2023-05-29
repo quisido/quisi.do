@@ -1,1 +1,2 @@
-export { default } from './link.root.view';
+export { default } from './link.view';
+export type { default as Props } from './types/props';

@@ -1,7 +1,7 @@
 enum DesignSystem {
-  Aws = 'awsui',
-  Cloudscape = 'cloudscape',
-  Material = 'mui',
+  Awsui = 'awsui',
+  CloudscapeDesign = 'cloudscape-design',
+  Mui = 'mui',
 }
 
 export default DesignSystem;

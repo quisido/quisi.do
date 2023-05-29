@@ -1,1 +1,2 @@
-export { default } from './span.root.view';
+export type { Props } from './span.view';
+export { default } from './span.view';
