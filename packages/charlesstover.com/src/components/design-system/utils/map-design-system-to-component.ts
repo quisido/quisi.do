@@ -15,10 +15,10 @@ type DesignSystemComponent<
   Row extends object,
 > = ComponentType<DesignSystemProps<Card, Row>>;
 
-const Awsui = lazy(() => import('../../../design-systems/awsui'));
-const Mui = lazy(() => import('../../../design-systems/mui'));
+const Awsui = lazy(async () => import('../../../design-systems/awsui'));
+const Mui = lazy(async () => import('../../../design-systems/mui'));
 const CloudscapeDesign = lazy(
-  () => import('../../../design-systems/cloudscape-design'),
+  async () => import('../../../design-systems/cloudscape-design'),
 );
 
 export default function mapDesignSystemToComponent<

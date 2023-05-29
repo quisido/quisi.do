@@ -38,7 +38,7 @@ export default function useDesignSystem<
       }
 
       if (typeof Fallback === 'function') {
-        // @ts-ignore TypeScript incorrectly decouples `Fallback` and `props`.
+        // @ts-expect-error TypeScript incorrectly decouples `Fallback` and `props`.
         return <Fallback {...props} />;
       }
 
@@ -47,6 +47,6 @@ export default function useDesignSystem<
       }
 
       return props.children;
-    }, [props]),
+    }, [Fallback, props, showFallback]),
   };
 }

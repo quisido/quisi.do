@@ -16,39 +16,40 @@ import Table from './components/table';
 import Theme from './components/theme';
 import Wrapper from './components/wrapper';
 
-export default function Awsui<Card extends object, Row extends object>(
-  props: Readonly<DesignSystemProps<Card, Row>>,
-): ReactElement {
-  switch (props.type) {
+export default function Awsui<Card extends object, Row extends object>({
+  props,
+  type,
+}: Readonly<DesignSystemProps<Card, Row>>): ReactElement {
+  switch (type) {
     case 'banner':
-      return <Banner {...props.props} />;
+      return <Banner {...props} />;
     case 'button':
-      return <Button {...props.props} />;
+      return <Button {...props} />;
     case 'cards':
-      return <Cards {...props.props} />;
+      return <Cards {...props} />;
     case 'checkbox':
-      return <Checkbox {...props.props} />;
+      return <Checkbox {...props} />;
     case 'chip':
-      return <Chip {...props.props} />;
+      return <Chip {...props} />;
     case 'container':
-      return <Container {...props.props} />;
+      return <Container {...props} />;
     case 'div':
-      return <Div {...props.props} />;
+      return <Div {...props} />;
     case 'header':
-      return <Header {...props.props} />;
+      return <Header {...props} />;
     case 'link':
-      return <Link {...props.props} />;
+      return <Link {...props} />;
     case 'loading-icon':
-      return <LoadingIcon {...props.props} />;
+      return <LoadingIcon {...props} />;
     case 'select':
-      return <Select {...props.props} />;
+      return <Select {...props} />;
     case 'span':
-      return <Span {...props.props} />;
+      return <Span {...props} />;
     case 'table':
-      return <Table {...props.props} />;
+      return <Table {...props} />;
     case 'theme':
-      return <Theme {...props.props} />;
+      return <Theme {...props} />;
     case 'wrapper':
-      return <Wrapper {...props.props} />;
+      return <Wrapper {...props} />;
   }
 }
