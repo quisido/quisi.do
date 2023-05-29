@@ -15,7 +15,7 @@ export default function useAppContexts(): State {
   const { pathname } = useLocation();
 
   // States
-  const [designSystem, setDesignSystem] = useState(DesignSystem.Aws);
+  const [designSystem, setDesignSystem] = useState(DesignSystem.Awsui);
 
   const isSpriteSheet2GifRoute: boolean = pathname === '/spritesheet2gif';
   return {
@@ -28,7 +28,7 @@ export default function useAppContexts(): State {
     ] => {
       // Technical debt: The "Spritesheet 2 GIF" route only supports AWS UI.
       if (isSpriteSheet2GifRoute) {
-        return [DesignSystem.Aws, setDesignSystem];
+        return [DesignSystem.Awsui, setDesignSystem];
       }
 
       return [designSystem, setDesignSystem];

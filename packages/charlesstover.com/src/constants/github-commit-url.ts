@@ -1,9 +1,11 @@
 import GITHUB_REPOSITORY_URL from '../constants/github-repository-url';
 import GITHUB_SHA from '../constants/github-sha';
-import isUndefined from '../utils/is-undefined';
 
 const getGithubCommitUrl = (): string | undefined => {
-  if (isUndefined(GITHUB_REPOSITORY_URL) || isUndefined(GITHUB_SHA)) {
+  if (
+    typeof GITHUB_REPOSITORY_URL === 'undefined' ||
+    typeof GITHUB_SHA === 'undefined'
+  ) {
     return;
   }
 

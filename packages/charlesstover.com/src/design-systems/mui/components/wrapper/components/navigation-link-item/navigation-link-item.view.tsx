@@ -1,0 +1,29 @@
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import type { ReactElement } from 'react';
+import Text from '../../../../../../components/navigation-text';
+import type NavigationText from '../../../../../../constants/navigation-text';
+import useNavigationLinkItem from './navigation-link-item.hook';
+
+interface Props {
+  readonly depth: number;
+  readonly path: string;
+  readonly text: NavigationText;
+}
+
+export default function MuiWrapperNavigationLinkItem({
+  depth,
+  path,
+  text,
+}: Readonly<Props>): ReactElement {
+  const { handleClick, selected, sx } = useNavigationLinkItem({
+    depth,
+    path,
+  });
+
+  return (
+    <ListItemButton dense onClick={handleClick} selected={selected}>
+      <ListItemText primary={<Text>{text}</Text>} sx={sx} />
+    </ListItemButton>
+  );
+}

@@ -1,6 +1,6 @@
 // Reactions and views are mutable when Dev.to and Medium article statistics are
 //   merged.
-export default interface Publication extends Record<string, unknown> {
+export default interface Publication {
   readonly dateTime: number;
   readonly image?: string | undefined;
   reactions: number;

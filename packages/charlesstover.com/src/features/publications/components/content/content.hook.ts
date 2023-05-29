@@ -3,7 +3,6 @@ import { useTranslate } from 'lazy-i18n';
 import { useCallback, useDeferredValue, useMemo, useState } from 'react';
 import useDevStats from '../../../../hooks/use-dev-stats';
 import useMediumStats from '../../../../hooks/use-medium-stats';
-import isUndefined from '../../../../utils/is-undefined';
 import Sort from '../../constants/publications-sort';
 import useItems from '../../hooks/use-content-items';
 import type Publication from '../../types/publication';
@@ -60,7 +59,7 @@ export default function usePublicationsContents(): State {
     }, []),
 
     handleSortChange: useCallback((newSort: string | undefined): void => {
-      if (isUndefined(newSort)) {
+      if (typeof newSort === 'undefined') {
         setSort(DEFAULT_SORT);
         return;
       }

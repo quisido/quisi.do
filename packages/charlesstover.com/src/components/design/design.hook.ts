@@ -7,17 +7,16 @@ import type {
 import { useEffect, useState } from 'react';
 import type DesignSystem from '../../constants/design-system';
 import useDesignSystem from '../../hooks/use-design-system';
-import isDefined from '../../utils/is-defined';
 import filterByPropsWithChildren from './utils/filter-by-props-with-children';
 
-interface Props<P extends Record<string, unknown>> {
+interface Props<P extends object> {
   readonly components: Readonly<
     Record<DesignSystem, LazyExoticComponent<ComponentType<P>>>
   >;
   readonly props: P;
 }
 
-interface State<P extends Record<string, unknown>> {
+interface State<P extends object> {
   readonly Component: LazyExoticComponent<ComponentType<P>>;
   readonly fallback:
     | ReactElement
@@ -31,7 +30,7 @@ interface State<P extends Record<string, unknown>> {
 
 const SHOW_FALLBACK_DELAY = 333;
 
-export default function useDesign<P extends Record<string, unknown>>({
+export default function useDesign<P extends object>({
   components,
   props,
 }: Readonly<Props<P>>): State<P> {
@@ -56,7 +55,7 @@ export default function useDesign<P extends Record<string, unknown>>({
     showFallback,
 
     fallback:
-      filterByPropsWithChildren(props) && isDefined(props.children)
+      filterByPropsWithChildren(props) && typeof props.children !== 'undefined'
         ? props.children
         : null,
   };
