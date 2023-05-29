@@ -1,5 +1,4 @@
 import type { ReactElement } from 'react';
-import isDefined from '../../../../utils/is-defined';
 import validateString from '../../../../utils/validate-string';
 import styles from './banner-image.module.scss';
 
@@ -15,7 +14,7 @@ export default function PublicationsBannerImage({
   src,
   title,
 }: Readonly<Props>): ReactElement {
-  if (!isDefined(src)) {
+  if (typeof src === 'undefined') {
     return <div className={undefinedClassName}>&nbsp;</div>;
   }
 

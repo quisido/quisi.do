@@ -1,4 +1,3 @@
-import isUndefined from '../../../utils/is-undefined';
 import type Publication from '../types/publication';
 
 const NEXT = 1;
@@ -9,13 +8,13 @@ export default function sortPublicationItemsByReadingTime(
   { readingTime: a }: Readonly<Publication>,
   { readingTime: b }: Readonly<Publication>,
 ): number {
-  if (isUndefined(a)) {
-    if (isUndefined(b)) {
+  if (typeof a === 'undefined') {
+    if (typeof b === 'undefined') {
       return SAME;
     }
     return NEXT;
   }
-  if (isUndefined(b)) {
+  if (typeof b === 'undefined') {
     return PREVIOUS;
   }
   if (a < b) {

@@ -1,1 +1,2 @@
-export { default } from './header.root.view';
+export { default } from './header.view';
+export type { default as Props } from './types/props';

@@ -3,8 +3,7 @@ import type { NonCancelableCustomEvent } from '@awsui/components-react/interface
 import type { SelectProps } from '@awsui/components-react/select';
 import type { ChangeEvent, ComponentType, MutableRefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import type ReadonlySelectChangeEvent from '../../../../types/readonly-select-change-event';
-import isUndefined from '../../../../utils/is-undefined';
+import type SelectChangeEvent from '../../../../types/readonly-awsui-select-change-event';
 import AutomaticDimensionInfo from '../../components/automatic-dimension-info';
 import AutomaticDirectionInfo from '../../components/automatic-direction-info';
 import HeaderInfo from '../../components/header-info';
@@ -53,7 +52,7 @@ interface State {
       NonCancelableCustomEvent<Readonly<InputProps.ChangeDetail>>
     >,
   ) => void;
-  readonly handleDirectionChange: (event: ReadonlySelectChangeEvent) => void;
+  readonly handleDirectionChange: (event: SelectChangeEvent) => void;
   readonly handleDurationChange: (
     event: Readonly<
       NonCancelableCustomEvent<Readonly<InputProps.ChangeDetail>>
@@ -64,7 +63,7 @@ interface State {
       NonCancelableCustomEvent<Readonly<InputProps.ChangeDetail>>
     >,
   ) => void;
-  readonly handlePerFrameChange: (event: ReadonlySelectChangeEvent) => void;
+  readonly handlePerFrameChange: (event: SelectChangeEvent) => void;
   readonly handleSpriteSheetImageFileChange: (
     event: ChangeEvent<HTMLInputElement>,
   ) => void;
@@ -245,7 +244,7 @@ export default function useSpriteSheet2GifContent({
     }, [direction, onHelpRequest]),
 
     handleDirectionChange: useCallback(
-      (e: ReadonlySelectChangeEvent): void => {
+      (e: SelectChangeEvent): void => {
         // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         const newDirection: Direction = e.detail.selectedOption
           .value as Direction;
@@ -304,7 +303,7 @@ export default function useSpriteSheet2GifContent({
       onHelpRequest(MatteInfo);
     }, [onHelpRequest]),
 
-    handlePerFrameChange: useCallback((e: ReadonlySelectChangeEvent): void => {
+    handlePerFrameChange: useCallback((e: SelectChangeEvent): void => {
       setPerFrame(e.detail.selectedOption.value === 'true');
     }, []),
 
@@ -315,7 +314,7 @@ export default function useSpriteSheet2GifContent({
           return;
         }
         const firstFile: File | undefined = e.target.files[FIRST];
-        if (isUndefined(firstFile)) {
+        if (typeof firstFile === 'undefined') {
           setSpriteSheetImageFile(null);
           return;
         }
@@ -330,7 +329,7 @@ export default function useSpriteSheet2GifContent({
       }: Readonly<SelectProps.Option>): boolean => value === direction;
       const newSelectedDirectionOption: SelectProps.Option | undefined =
         DIRECTION_OPTIONS.find(findSelectedDirectionOption);
-      if (isUndefined(newSelectedDirectionOption)) {
+      if (typeof newSelectedDirectionOption === 'undefined') {
         throw new Error(`Cannot find direction: ${direction}`);
       }
       return newSelectedDirectionOption;
@@ -343,7 +342,7 @@ export default function useSpriteSheet2GifContent({
       }: Readonly<SelectProps.Option>): boolean => value === perFrameStr;
       const newSelectePerFrameOption: SelectProps.Option | undefined =
         PER_FRAME_OPTIONS.find(findSelectedPerFrameOption);
-      if (isUndefined(newSelectePerFrameOption)) {
+      if (typeof newSelectePerFrameOption === 'undefined') {
         throw new Error(`Cannot find per frame value: ${perFrameStr}`);
       }
       return newSelectePerFrameOption;

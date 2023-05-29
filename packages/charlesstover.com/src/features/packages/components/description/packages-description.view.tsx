@@ -1,6 +1,5 @@
 import type { ReactElement, ReactNode } from 'react';
 import PACKAGE_DESCRIPTIONS from '../../../../constants/package-descriptions';
-import isUndefined from '../../../../utils/is-undefined';
 import Paragraph from '../../components/description-paragraph';
 import type Item from '../../types/packages-item';
 
@@ -14,7 +13,7 @@ export default function PackageDescription({
 }: Item): ReactElement | null {
   const description: string | undefined = PACKAGE_DESCRIPTIONS.get(packageName);
 
-  if (isUndefined(description)) {
+  if (typeof description === 'undefined') {
     return null;
   }
 
