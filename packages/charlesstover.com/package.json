@@ -34,11 +34,11 @@
     "jest": "jest --runInBand",
     "jest:watch": "jest --runInBand --watch",
     "lighthouse": "concurrently --hide server --kill-others --kill-others-on-fail --names server,lighthouse --success command-lighthouse \"yarn run serve\" \"yarn run lighthouse:report\"",
-    "lighthouse:report": "wait-on http://localhost:3000/ && lighthouse http://localhost:3000/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental",
+    "lighthouse:report": "wait-on http://localhost:3000/index.html && lighthouse http://localhost:3000/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental",
     "postlighthouse": "yarn node ./scripts/postlighthouse/index.js",
     "prepack": "yarn run build",
     "prepublish": "concurrently --kill-others-on-fail --names eslint,jest \"yarn run eslint\" \"yarn run jest\"",
-    "serve": "serve --single build",
+    "serve": "serve --config ../serve.json --cors --debug --single build",
     "start": "DISABLE_ESLINT_PLUGIN=true REACT_APP_CLOUDFLARE_ANALYTICS_API=http://localhost:8787 react-app-rewired start"
   },
   "devDependencies": {
