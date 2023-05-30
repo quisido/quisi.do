@@ -1,6 +1,6 @@
 import type { ComponentType, ReactNode } from 'react';
 import { useEffect, useMemo, useState } from 'react';
-import DesignSystemProps from '../../types/design-system-props';
+import type DesignSystemProps from '../../types/design-system-props';
 import useDesignSystemComponent from './hooks/use-design-system-component';
 import type Props from './types/props';
 import isPropsWithChildren from './utils/is-props-with-children';

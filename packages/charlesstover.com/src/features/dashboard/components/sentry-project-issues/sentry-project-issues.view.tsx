@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import SentryProjectIssue from '../../../../types/sentry-project-issue';
+import type SentryProjectIssue from '../../../../types/sentry-project-issue';
 import Container from '../../../../components/container';
 import I18n from 'lazy-i18n';
 import LoadingIcon from '../../../../components/loading-icon';

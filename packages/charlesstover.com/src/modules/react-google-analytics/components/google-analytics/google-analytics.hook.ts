@@ -3,8 +3,8 @@ import useDataLayer from '../../hooks/use-data-layer';
 import useGTag from '../../hooks/use-gtag';
 import useScript from '../../hooks/use-script';
 import useUserData from '../../hooks/use-user-data';
-import GoogleAnalyticsUserData from '../../types/google-analytics-user-data';
-import UserData from '../../types/user-data';
+import type GoogleAnalyticsUserData from '../../types/google-analytics-user-data';
+import type UserData from '../../types/user-data';
 import gtag from '../../utils/gtag';
 
 interface Props {

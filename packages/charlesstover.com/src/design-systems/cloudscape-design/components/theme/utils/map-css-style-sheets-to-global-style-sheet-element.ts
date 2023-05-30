@@ -13,5 +13,7 @@ export default function mapCssStyleSheetsToCloudscapeGlobalStyleSheetElement(
     }
   }
 
-  throw new Error('Expected the Cloudscape global style sheet to exist.');
+  throw new Error(
+    'Expected the Cloudscape Design global style sheet to exist.',
+  );
 }

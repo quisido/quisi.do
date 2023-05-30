@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import { Suspense } from 'react';
 import useDesignSystem from './design-system.hook';
-import Props from './types/props';
+import type Props from './types/props';
 
 export default function DesignSystem<Card extends object, Row extends object>(
   props: Readonly<Props<Card, Row>>,

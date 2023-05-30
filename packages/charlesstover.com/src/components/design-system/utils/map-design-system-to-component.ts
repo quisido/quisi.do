@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
 import { lazy } from 'react';
 import DesignSystem from '../../../constants/design-system';
-import DesignSystemProps from '../../../types/design-system-props';
+import type DesignSystemProps from '../../../types/design-system-props';
 
 /*
 We must use `as` when mapping the design system to its component, because its

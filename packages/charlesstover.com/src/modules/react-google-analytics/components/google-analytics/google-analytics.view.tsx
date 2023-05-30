@@ -1,5 +1,5 @@
 import type { ReactElement, ReactNode } from 'react';
-import UserData from '../../types/user-data';
+import type UserData from '../../types/user-data';
 import useGoogleAnalytics from './google-analytics.hook';
 
 interface Props {
