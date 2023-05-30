@@ -2,7 +2,7 @@ import FullStory from 'fullstory-react';
 import type { ReactElement } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Theme from '../../components/theme';
-// import GoogleAnalytics from '../../modules/react-google-analytics';
+import GoogleAnalytics from '../../modules/react-google-analytics';
 import type CloudflareAnalytics from '../../types/cloudflare-analytics';
 import type RumMetrics from '../../types/rum-metrics';
 import type SentryProjectIssue from '../../types/sentry-project-issue';
@@ -47,26 +47,26 @@ export default function App({
           <Contexts>
             <Datadog>
               <FullStory orgId="150TVM">
-                {/* <GoogleAnalytics trackingId="UA-5966978-4"> */}
-                <I18nProvider>
-                  <QueryClientProvider>
-                    <Sentry>
-                      <Theme>
-                        <Routes
-                          onCloudflareAnalyticsRequest={
-                            onCloudflareAnalyticsRequest
-                          }
-                          onRumMetricsRequest={onRumMetricsRequest}
-                          onSentryProjectIssuesRequest={
-                            onSentryProjectIssuesRequest
-                          }
-                          onUptimeChecksRequest={onUptimeChecksRequest}
-                        />
-                      </Theme>
-                    </Sentry>
-                  </QueryClientProvider>
-                </I18nProvider>
-                {/* </GoogleAnalytics> */}
+                <GoogleAnalytics trackingId="G-0LC1N0MEV7">
+                  <I18nProvider>
+                    <QueryClientProvider>
+                      <Sentry>
+                        <Theme>
+                          <Routes
+                            onCloudflareAnalyticsRequest={
+                              onCloudflareAnalyticsRequest
+                            }
+                            onRumMetricsRequest={onRumMetricsRequest}
+                            onSentryProjectIssuesRequest={
+                              onSentryProjectIssuesRequest
+                            }
+                            onUptimeChecksRequest={onUptimeChecksRequest}
+                          />
+                        </Theme>
+                      </Sentry>
+                    </QueryClientProvider>
+                  </I18nProvider>
+                </GoogleAnalytics>
               </FullStory>
             </Datadog>
           </Contexts>
