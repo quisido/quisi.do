@@ -8,7 +8,7 @@ import LoadingIcon from '../../../../components/loading-icon';
 import Span from '../../../../components/span';
 import Table from '../../../../components/table';
 import type CloudflareAnalyticsDatasets from '../../../../types/cloudflare-analytics-datasets';
-import TableColumn from '../../../../types/table-column';
+import type TableColumn from '../../../../types/table-column';
 import createIndexArray from '../../../../utils/create-index-array';
 import CLOUDFLARE_ANALYTICS_COLUMNS from '../../constants/cloudflare-analytics-columns';
 import type CloudflareAnalytic from '../../types/cloudflare-analytic';
@@ -90,35 +90,38 @@ export default function CloudflareAnalytics({
   const rows: CloudflareAnalytic[] = [
     {
       avg: rumPerformanceEventsAdaptiveGroups['connectionTime.avg'],
-      name: translate('Connection time') ?? '...',
+      name: translate('User connection time') ?? '...',
       p50: rumPerformanceEventsAdaptiveGroups.connectionTimeP50,
       p75: rumPerformanceEventsAdaptiveGroups.connectionTimeP75,
       p90: rumPerformanceEventsAdaptiveGroups.connectionTimeP90,
       p99: rumPerformanceEventsAdaptiveGroups.connectionTimeP99,
+      unit: 'milliseconds',
     },
     {
       max: workersInvocationsAdaptive['cpuTime.max'],
       min: workersInvocationsAdaptive['cpuTime.min'],
-      name: translate('CPU time') ?? '...',
+      name: translate('Cloudflare Workers CPU time') ?? '...',
       p25: workersInvocationsAdaptive.cpuTimeP25,
       p50: workersInvocationsAdaptive.cpuTimeP50,
       p75: workersInvocationsAdaptive.cpuTimeP75,
       p90: workersInvocationsAdaptive.cpuTimeP90,
       p99: workersInvocationsAdaptive.cpuTimeP99,
       p999: workersInvocationsAdaptive.cpuTimeP999,
+      unit: 'microseconds',
     },
     {
       avg: rumPerformanceEventsAdaptiveGroups['dnsTime.avg'],
-      name: translate('DNS time') ?? '...',
+      name: translate('User DNS time') ?? '...',
       p50: rumPerformanceEventsAdaptiveGroups.dnsTimeP50,
       p75: rumPerformanceEventsAdaptiveGroups.dnsTimeP75,
       p90: rumPerformanceEventsAdaptiveGroups.dnsTimeP90,
       p99: rumPerformanceEventsAdaptiveGroups.dnsTimeP99,
+      unit: 'microseconds',
     },
     {
       max: workersInvocationsAdaptive['duration.max'],
       min: workersInvocationsAdaptive['duration.min'],
-      name: translate('Duration') ?? '...',
+      name: translate('Cloudflare Workers duration') ?? '...',
       p25: workersInvocationsAdaptive.durationP25,
       p50: workersInvocationsAdaptive.durationP50,
       p75: workersInvocationsAdaptive.durationP75,
@@ -126,6 +129,7 @@ export default function CloudflareAnalytics({
       p99: workersInvocationsAdaptive.durationP99,
       p999: workersInvocationsAdaptive.durationP999,
       sum: workersInvocationsAdaptive['duration.sum'],
+      unit: 'seconds',
     },
     {
       avg: rumPerformanceEventsAdaptiveGroups['firstContentfulPaint.avg'],
@@ -134,6 +138,7 @@ export default function CloudflareAnalytics({
       p75: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP75,
       p90: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP90,
       p99: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP99,
+      unit: 'microseconds',
     },
     {
       avg: rumPerformanceEventsAdaptiveGroups['firstPaint.avg'],
@@ -142,6 +147,7 @@ export default function CloudflareAnalytics({
       p75: rumPerformanceEventsAdaptiveGroups.firstPaintP75,
       p90: rumPerformanceEventsAdaptiveGroups.firstPaintP90,
       p99: rumPerformanceEventsAdaptiveGroups.firstPaintP99,
+      unit: 'microseconds',
     },
     {
       avg: rumPerformanceEventsAdaptiveGroups['loadEventTime.avg'],
@@ -150,6 +156,7 @@ export default function CloudflareAnalytics({
       p75: rumPerformanceEventsAdaptiveGroups.loadEventTimeP75,
       p90: rumPerformanceEventsAdaptiveGroups.loadEventTimeP90,
       p99: rumPerformanceEventsAdaptiveGroups.loadEventTimeP99,
+      unit: 'milliseconds',
     },
     {
       avg: rumPerformanceEventsAdaptiveGroups['pageLoadTime.avg'],
@@ -158,6 +165,7 @@ export default function CloudflareAnalytics({
       p75: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP75,
       p90: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP90,
       p99: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP99,
+      unit: 'microseconds',
     },
     {
       avg: rumPerformanceEventsAdaptiveGroups['pageRenderTime.avg'],
@@ -166,6 +174,7 @@ export default function CloudflareAnalytics({
       p75: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP75,
       p90: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP90,
       p99: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP99,
+      unit: 'microseconds',
     },
     {
       avg: rumPerformanceEventsAdaptiveGroups['requestTime.avg'],
@@ -174,11 +183,12 @@ export default function CloudflareAnalytics({
       p75: rumPerformanceEventsAdaptiveGroups.requestTimeP75,
       p90: rumPerformanceEventsAdaptiveGroups.requestTimeP90,
       p99: rumPerformanceEventsAdaptiveGroups.requestTimeP99,
+      unit: 'microseconds',
     },
     {
       max: workersInvocationsAdaptive['responseBodySize.max'],
       min: workersInvocationsAdaptive['responseBodySize.min'],
-      name: translate('Response body size') ?? '...',
+      name: translate('Cloudflare Workers response body size') ?? '...',
       p25: workersInvocationsAdaptive.responseBodySizeP25,
       p50: workersInvocationsAdaptive.responseBodySizeP50,
       p75: workersInvocationsAdaptive.responseBodySizeP75,
@@ -186,6 +196,7 @@ export default function CloudflareAnalytics({
       p99: workersInvocationsAdaptive.responseBodySizeP99,
       p999: workersInvocationsAdaptive.responseBodySizeP999,
       sum: workersInvocationsAdaptive['responseBodySize.sum'],
+      unit: 'bytes',
     },
     {
       avg: rumPerformanceEventsAdaptiveGroups['responseTime.avg'],
@@ -194,11 +205,12 @@ export default function CloudflareAnalytics({
       p75: rumPerformanceEventsAdaptiveGroups.responseTimeP75,
       p90: rumPerformanceEventsAdaptiveGroups.responseTimeP90,
       p99: rumPerformanceEventsAdaptiveGroups.responseTimeP99,
+      unit: 'milliseconds',
     },
     {
       max: workersInvocationsAdaptive['wallTime.max'],
       min: workersInvocationsAdaptive['wallTime.min'],
-      name: translate('Wall time') ?? '...',
+      name: translate('Cloudflare Workers wall time') ?? '...',
       p25: workersInvocationsAdaptive.wallTimeP25,
       p50: workersInvocationsAdaptive.wallTimeP50,
       p75: workersInvocationsAdaptive.wallTimeP75,
@@ -206,6 +218,7 @@ export default function CloudflareAnalytics({
       p99: workersInvocationsAdaptive.wallTimeP99,
       p999: workersInvocationsAdaptive.wallTimeP999,
       sum: workersInvocationsAdaptive['wallTime.sum'],
+      unit: 'microseconds',
     },
   ];
 

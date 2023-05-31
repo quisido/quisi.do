@@ -10,4 +10,10 @@ export default interface CloudflareAnalytic {
   readonly p99: number;
   readonly p999?: number | undefined;
   readonly sum?: number | undefined;
+  readonly unit?:
+    | 'bytes'
+    | 'microseconds'
+    | 'milliseconds'
+    | 'seconds'
+    | undefined;
 }

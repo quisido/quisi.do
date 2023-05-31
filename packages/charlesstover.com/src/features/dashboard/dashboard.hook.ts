@@ -1,14 +1,15 @@
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
+import EMPTY_ARRAY from '../../constants/empty-array';
 import useAsyncState from '../../modules/use-async-state';
 import type CloudflareAnalytics from '../../types/cloudflare-analytics';
 import type CloudflareAnalyticsDatasets from '../../types/cloudflare-analytics-datasets';
 import type RumMetrics from '../../types/rum-metrics';
 import type SentryProjectIssue from '../../types/sentry-project-issue';
 import type UptimeChecks from '../../types/uptime-checks';
+import filterSentryProjectNonIssues from './utils/filter-sentry-project-non-issues';
 import mapRecordToSum from './utils/map-record-to-sum';
-import EMPTY_ARRAY from '../../constants/empty-array';
 
 interface Props {
   readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
@@ -208,7 +209,6 @@ export default function useDashboard({
     lcpP95: 0,
     lcpTm95: 0,
     satisfiedTimeSeries: EMPTY_RECORD,
-    sentryProjectIssues: sentryProjectIssues ?? EMPTY_ARRAY,
     sentryProjectIssuesError,
     sessionCountTimeSeries,
     toleratedTimeSeries: EMPTY_RECORD,
@@ -253,6 +253,14 @@ export default function useDashboard({
     lastUptimeCheckTimestamp: uptimeChecks
       ? uptimeChecks.lastChecked
       : NOT_FOUND,
+
+    sentryProjectIssues: useMemo((): readonly SentryProjectIssue[] => {
+      if (sentryProjectIssues === null) {
+        return EMPTY_ARRAY;
+      }
+
+      return sentryProjectIssues.filter(filterSentryProjectNonIssues);
+    }, [sentryProjectIssues]),
 
     uptimeErrors: useMemo((): readonly unknown[] => {
       const newUptimeErrors: unknown[] = [];

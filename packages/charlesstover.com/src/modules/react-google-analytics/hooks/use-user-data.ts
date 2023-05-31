@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import EMPTY_OBJECT from '../constants/empty-object';
 import type GoogleAnalyticsUserData from '../types/google-analytics-user-data';
-import GoogleAnalyticsUserDataAddress from '../types/google-analytics-user-data-address';
+import type GoogleAnalyticsUserDataAddress from '../types/google-analytics-user-data-address';
 import type UserData from '../types/user-data';
 import isUndefined from '../utils/is-undefined';
 

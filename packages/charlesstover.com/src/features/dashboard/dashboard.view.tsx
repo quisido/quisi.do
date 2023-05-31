@@ -7,7 +7,7 @@ import type RumMetrics from '../../types/rum-metrics';
 import type SentryProjectIssue from '../../types/sentry-project-issue';
 import type UptimeChecksType from '../../types/uptime-checks';
 // import Apdex from './components/apdex';
-import CloudflareAnalyticsComponent from './components/cloudflare-analytics';
+import CloudflareAnalytics from './components/cloudflare-analytics';
 // import Errors from './components/errors';
 // import Events from './components/events';
 import SentryProjectIssues from './components/sentry-project-issues';
@@ -109,7 +109,7 @@ export default function Dashboard({
         toleratedTimeSeries={toleratedTimeSeries}
       />
       */}
-      <CloudflareAnalyticsComponent
+      <CloudflareAnalytics
         budget={cloudflareAnalyticsBudget}
         datasets={cloudflareAnalytics}
         error={cloudflareAnalyticsError}

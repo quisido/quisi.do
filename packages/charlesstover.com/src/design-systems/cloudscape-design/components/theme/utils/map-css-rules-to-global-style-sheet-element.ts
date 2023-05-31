@@ -11,14 +11,14 @@ export default function mapCssRulesToCloudscapeGlobalStyleSheetElement(
     const sheet: CSSStyleSheet | null = rule.parentStyleSheet;
     if (sheet === null) {
       throw new Error(
-        'Expected the Cloudscape global CSS rules to have a parent stylesheet.',
+        'Expected the Cloudscape Design global CSS rules to have a parent stylesheet.',
       );
     }
 
     const node: Element | ProcessingInstruction | null = sheet.ownerNode;
     if (node === null) {
       throw new Error(
-        'Expected the Cloudscape global style sheet to have an owner node.',
+        'Expected the Cloudscape Design global style sheet to have an owner node.',
       );
     }
 
