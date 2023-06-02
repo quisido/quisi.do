@@ -25,6 +25,7 @@ const sentryProjectIssues: SentryProjectIssues = new SentryProjectIssues({
 ROOT.render(
   <StrictMode>
     <App
+      cloudWatchRumEnabled={window.location.hostname !== 'localhost'}
       onCloudflareAnalyticsRequest={handleCloudflareAnalyticsRequest}
       onRumMetricsRequest={rumMetrics.handleRequest}
       onSentryProjectIssuesRequest={sentryProjectIssues.handleRequest}

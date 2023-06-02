@@ -25,6 +25,7 @@ The App root component mounts context providers for the whole application.
 */
 
 interface Props {
+  readonly cloudWatchRumEnabled: boolean;
   readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
   readonly onUptimeChecksRequest: () => Promise<UptimeChecks>;
@@ -34,13 +35,14 @@ interface Props {
 }
 
 export default function App({
+  cloudWatchRumEnabled,
   onCloudflareAnalyticsRequest,
   onRumMetricsRequest,
   onSentryProjectIssuesRequest,
   onUptimeChecksRequest,
 }: Readonly<Props>): ReactElement {
   return (
-    <CloudWatchRUM>
+    <CloudWatchRUM enabled={cloudWatchRumEnabled}>
       <ErrorBoundary>
         <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
         <BrowserRouter>
