@@ -48,7 +48,7 @@
     "strictPropertyInitialization": true,
     "suppressImplicitAnyIndexErrors": false,
     "target": "ESNext",
-    "types": ["@cloudflare/workers-types"],
+    "types": [],
     "useUnknownInCatchVariables": true,
     "verbatimModuleSyntax": true
   }

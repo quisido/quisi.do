@@ -64,4 +64,4 @@ interface MarginYProps {
 type Props = BaseProps &
   (MarginProp | ((MarginXProp | MarginXProps) & (MarginYProp | MarginYProps)));
 
-export default Props;
+export type { Props as default };

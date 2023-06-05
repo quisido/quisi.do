@@ -9,4 +9,4 @@ type ReadonlyCloudscapeDesignSelectChangeEvent = Readonly<
   >
 >;
 
-export default ReadonlyCloudscapeDesignSelectChangeEvent;
+export type { ReadonlyCloudscapeDesignSelectChangeEvent as default };

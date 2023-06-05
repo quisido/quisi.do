@@ -22,6 +22,8 @@
   "scripts": {
     "browserslist:update-db": "browserslist --update-db",
     "build": "yarn packages/charlesstover.com run build",
+    "cloudflare-analytics": "yarn packages/cloudflare-analytics-worker run dev",
+    "cloudflare-analytics:init": "yarn packages/cloudflare-analytics-worker run init",
     "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ./sarif/index.sarif || eslint '**/*'",
     "eslint:fix": "eslint '**/*' --fix",
     "lighthouse": "yarn packages/charlesstover.com run lighthouse",
@@ -30,7 +32,7 @@
     "prepublishOnly": "concurrently --kill-others-on-fail --names eslint,test \"yarn run eslint\" \"yarn run test\"",
     "publish": "yarn workspaces foreach --no-private --parallel --topological-dev --verbose npm publish --tolerate-republish",
     "serve": "yarn packages/charlesstover.com run serve",
-    "start": "concurrently --kill-others --kill-others-on-fail --names charlesstover.com,cloudflare-analytics,react-datadog \"yarn packages/charlesstover.com run start\" \"yarn packages/cloudflare-analytics-worker run start\" \"yarn packages/react-datadog run rollup:watch\"",
+    "start": "concurrently --kill-others --kill-others-on-fail --names aws-rum-react,charlesstover.com,cloudflare-analytics,react-datadog \"yarn packages/aws-rum-react run rollup:watch\" \"yarn packages/charlesstover.com run start\" \"yarn packages/cloudflare-analytics-worker run dev\" \"yarn packages/react-datadog run rollup:watch\"",
     "test": "monorepo-template-test",
     "up": "yarn up \"@*/*\" \"!(aws-rum-react|react-datadog|unknown2string|use-offline)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
   },

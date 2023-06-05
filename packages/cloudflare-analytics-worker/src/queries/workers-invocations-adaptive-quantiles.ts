@@ -1,50 +1,55 @@
-export default `
-{
-  cost
-  viewer {
-    accounts(
-      filter: {
-        accountTag: $accountTag
-      }
-    ) {
-      workersInvocationsAdaptive(
+import GraphQLObjectQuery from '../utils/graphql-object-query';
+
+export default new GraphQLObjectQuery({
+  cost: null,
+
+  viewer: {
+    budget: null,
+
+    accounts: {
+      __params: {
         filter: {
-          datetime_gt: $datetime_gt
-        }
-        limit: 1
-        orderBy: [
-          avg_sampleInterval_ASC
-        ]
-      ) {
-        quantiles {
-          cpuTimeP25
-          cpuTimeP50
-          cpuTimeP75
-          cpuTimeP90
-          cpuTimeP99
-          cpuTimeP999
-          durationP25
-          durationP50
-          durationP75
-          durationP90
-          durationP99
-          durationP999
-          responseBodySizeP25
-          responseBodySizeP50
-          responseBodySizeP75
-          responseBodySizeP90
-          responseBodySizeP99
-          responseBodySizeP999
-          wallTimeP25
-          wallTimeP50
-          wallTimeP75
-          wallTimeP90
-          wallTimeP99
-          wallTimeP999
-        }
-      }
-    }
-    budget
-  }
-}
-`;
+          accountTag: '$accountTag',
+        },
+      },
+
+      workersInvocationsAdaptive: {
+        __params: {
+          limit: 1,
+          orderBy: ['avg_sampleInterval_ASC'],
+
+          filter: {
+            datetime_gt: '$datetime_gt',
+          },
+        },
+
+        quantiles: {
+          cpuTimeP25: null,
+          cpuTimeP50: null,
+          cpuTimeP75: null,
+          cpuTimeP90: null,
+          cpuTimeP99: null,
+          cpuTimeP999: null,
+          durationP25: null,
+          durationP50: null,
+          durationP75: null,
+          durationP90: null,
+          durationP99: null,
+          durationP999: null,
+          responseBodySizeP25: null,
+          responseBodySizeP50: null,
+          responseBodySizeP75: null,
+          responseBodySizeP90: null,
+          responseBodySizeP99: null,
+          responseBodySizeP999: null,
+          wallTimeP25: null,
+          wallTimeP50: null,
+          wallTimeP75: null,
+          wallTimeP90: null,
+          wallTimeP99: null,
+          wallTimeP999: null,
+        },
+      },
+    },
+  },
+}).toString();

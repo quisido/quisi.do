@@ -13,4 +13,4 @@ interface RumMetrics {
   readonly WebVitalsLargestContentfulPaint: NonSumMetricStats;
 }
 
-export default RumMetrics;
+export type { RumMetrics as default };

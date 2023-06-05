@@ -1,5 +1,5 @@
-import fetch from './utils/fetch';
-import scheduled from './utils/scheduled';
+import fetch from './features/fetch';
+import scheduled from './features/scheduled';
 
 export default {
   fetch,

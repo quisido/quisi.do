@@ -10,13 +10,16 @@ analytics_engine_datasets = [
   { binding = "SCHEDULED" }
 ]
 
-routes = [
-  { custom_domain = true, pattern = "cf-analytics.cscdn.net" }
-]
-
 r2_buckets = [
   { binding = "RESULTS", bucket_name = "results", preview_bucket_name = "results-preview" }
 ]
+
+routes = [
+  { custom_domain = true, pattern = "analytics.cloudflare.cscdn.net" }
+]
+
+[placement]
+mode = "smart"
 
 [triggers]
 crons = ["0 0 * * *"]

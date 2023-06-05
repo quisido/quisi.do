@@ -39,7 +39,7 @@
     "prepack": "yarn run build",
     "prepublish": "concurrently --kill-others-on-fail --names eslint,jest \"yarn run eslint\" \"yarn run jest\"",
     "serve": "serve --config ../serve.json --cors --debug --single build",
-    "start": "DISABLE_ESLINT_PLUGIN=true REACT_APP_CLOUDFLARE_ANALYTICS_API=http://localhost:8787 react-app-rewired start"
+    "start": "DISABLE_ESLINT_PLUGIN=true REACT_APP_CLOUDFLARE_ANALYTICS_ORIGIN=http://localhost:8787 react-app-rewired start"
   },
   "devDependencies": {
     "@awsui/components-react": "^3.0.841",

@@ -1,4 +1,4 @@
 // A postal code should be 5 digits.
 type PostalCode = `${number}`;
 
-export default PostalCode;
+export type { PostalCode as default };

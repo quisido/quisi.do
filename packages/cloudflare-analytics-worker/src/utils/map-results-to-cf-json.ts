@@ -1,47 +1,72 @@
 import type CfJson from '../types/cf-json';
-import type Datasets from '../types/datasets';
+import type DatasetDimensionValue from '../types/dataset-dimension-value';
+import type DatasetValues from '../types/dataset-values';
 import type Result from '../types/result';
+import mapRecordToEntries from './map-record-to-entries';
 import mapResultToBudget from './map-result-to-budget';
 
-const FIRST = 0;
+type DatasetRecord = Record<string, Datum | undefined>;
+type Datum =
+  | readonly DatasetDimensionValue[]
+  | Record<string, number | undefined>
+  | number;
+
+const EMPTY_ARRAY: readonly never[] = Object.freeze([]);
+const TYPES = ['accounts' as const, 'zones' as const];
+
+const isArray = (value: unknown): value is readonly unknown[] =>
+  Array.isArray(value);
 
 export default function mapResultsToCfJson(results: readonly Result[]): CfJson {
-  const body: Record<string, Record<string, number>> = {};
+  const datasets: Record<string, DatasetRecord | undefined> = {};
 
-  const appendData = (
-    datasetName: string,
-    valueName: string,
-    value: number,
-  ): void => {
-    const dataset: Record<string, number> | undefined = body[datasetName];
-    if (typeof dataset === 'undefined') {
-      body[datasetName] = {
-        [valueName]: value,
-      };
-      return;
+  const mapDatasetNameToRecord = (name: string): DatasetRecord => {
+    const record: DatasetRecord | undefined = datasets[name];
+    if (typeof record !== 'undefined') {
+      return record;
     }
 
-    body[datasetName] = {
-      ...dataset,
-      [valueName]: value,
-    };
+    const newRecord: DatasetRecord = {};
+    datasets[name] = newRecord;
+    return newRecord;
   };
 
   for (const result of results) {
-    const datasets: Datasets = result.data.viewer.accounts[FIRST];
-    for (const [name, [values]] of Object.entries(datasets)) {
-      for (const [valueName, value] of Object.entries(values)) {
-        if (typeof value === 'number') {
-          appendData(name, valueName, value);
-        } else {
-          for (const [nestedValueName, nestedValue] of Object.entries(value)) {
-            if (valueName === 'quantiles') {
-              appendData(name, nestedValueName, nestedValue);
-            } else {
-              appendData(name, `${nestedValueName}.${valueName}`, nestedValue);
-            }
+    for (const type of TYPES) {
+      const [record] = result.data.viewer[type] ?? EMPTY_ARRAY;
+      if (typeof record === 'undefined') {
+        continue;
+      }
+
+      for (const [datasetName, [values]] of Object.entries(record)) {
+        const recursiveParse = (
+          value: readonly DatasetDimensionValue[] | DatasetValues | number,
+          keys: readonly string[] = EMPTY_ARRAY,
+        ): void => {
+          if (typeof value === 'number' || isArray(value)) {
+            const key: string = keys.join('_');
+            const datasetRecord: DatasetRecord =
+              mapDatasetNameToRecord(datasetName);
+
+            datasets[datasetName] = {
+              ...datasetRecord,
+              [key]: value,
+            };
+            return;
           }
-        }
+
+          for (const [nestedName, nestedValue] of mapRecordToEntries(value)) {
+            // Drop the `quantiles` key.
+            if (nestedName === 'quantiles') {
+              recursiveParse(nestedValue, keys);
+              continue;
+            }
+
+            recursiveParse(nestedValue, [nestedName, ...keys]);
+          }
+        };
+
+        recursiveParse(values, []);
       }
     }
   }
@@ -49,6 +74,6 @@ export default function mapResultsToCfJson(results: readonly Result[]): CfJson {
   const budgets: readonly number[] = results.map(mapResultToBudget);
   return {
     budget: Math.min(...budgets),
-    datasets: body,
+    datasets,
   };
 }

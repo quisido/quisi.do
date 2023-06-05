@@ -1,25 +1,31 @@
-export default `
-{
-  cost
-  viewer {
-    accounts(
-      filter: {
-        accountTag: $accountTag
-      }
-    ) {
-      workersAnalyticsEngineAdaptiveGroups(
+import GraphQLObjectQuery from '../utils/graphql-object-query';
+
+export default new GraphQLObjectQuery({
+  cost: null,
+
+  viewer: {
+    budget: null,
+
+    accounts: {
+      __params: {
         filter: {
-          datetime_gt: $datetime_gt
-        }
-        limit: 1
-        orderBy: [
-          count_ASC
-        ]
-      ) {
-        count
-      }
-    }
-    budget
-  }
-}
-`;
+          accountTag: '$accountTag',
+        },
+      },
+
+      workersAnalyticsEngineAdaptiveGroups: {
+        __params: {
+          limit: 1,
+
+          filter: {
+            datetime_gt: '$datetime_gt',
+          },
+
+          orderBy: ['count_ASC'],
+        },
+
+        count: null,
+      },
+    },
+  },
+}).toString();

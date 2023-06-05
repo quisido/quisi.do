@@ -26,4 +26,4 @@ type SingleLetter =
   | 'Y'
   | 'Z';
 
-export default SingleLetter;
+export type { SingleLetter as default };

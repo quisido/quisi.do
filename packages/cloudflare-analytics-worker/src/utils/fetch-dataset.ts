@@ -1,7 +1,4 @@
-interface DataPoint {
-  readonly message: string;
-  readonly statusCode: number;
-}
+import type DataPoint from '../types/data-point';
 
 export default class FetchDataset {
   private readonly _dataset: AnalyticsEngineDataset | undefined;

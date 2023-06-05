@@ -10,4 +10,4 @@ type DesignSystemProps<
   };
 }[keyof DesignSystemPropsRecord<Card, Row>];
 
-export default DesignSystemProps;
+export type { DesignSystemProps as default };

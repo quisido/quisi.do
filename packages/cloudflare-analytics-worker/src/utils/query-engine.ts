@@ -21,9 +21,9 @@ export default class QueryEngine {
 
   public readonly fetch = (query: string): Promise<Response> => {
     return fetch('https://api.cloudflare.com/client/v4/graphql', {
+      body: this.mapQueryToBody(query),
       headers: this._headers,
       method: 'POST',
-      body: this.mapQueryToBody(query),
     });
   };
 

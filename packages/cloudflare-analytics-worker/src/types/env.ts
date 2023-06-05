@@ -1,3 +1,5 @@
+/// <reference types="@cloudflare/workers-types" />
+
 export default interface Env {
   readonly ACCOUNT_TAG: unknown;
   readonly API_TOKEN: unknown;

@@ -1,3 +1,5 @@
-type DatasetValue = Record<string, number> | number;
+import type DatasetDimensionValue from './dataset-dimension-value';
 
-export default DatasetValue;
+type DatasetValue = readonly DatasetDimensionValue[] | number;
+
+export type { DatasetValue as default };
