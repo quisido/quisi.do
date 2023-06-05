@@ -5,4 +5,4 @@ type ReadonlyAwsuiColllectionPreferencesEvent<T> = Readonly<
   NonCancelableCustomEvent<Readonly<CollectionPreferencesProps.Preferences<T>>>
 >;
 
-export default ReadonlyAwsuiColllectionPreferencesEvent;
+export type { ReadonlyAwsuiColllectionPreferencesEvent as default };

@@ -2,12 +2,12 @@ import QUERIES from '../queries';
 import type CfJson from '../types/cf-json';
 import type Env from '../types/env';
 import type Result from '../types/result';
-import mapResultToCost from './map-result-to-cost';
-import mapResultsToCfJson from './map-results-to-cf-json';
-import mapUnknownToString from './map-unknown-to-string';
-import QueryEngine from './query-engine';
-import sum from './sum';
-import validateResult from './validate-result';
+import mapResultToCost from '../utils/map-result-to-cost';
+import mapResultsToCfJson from '../utils/map-results-to-cf-json';
+import mapUnknownToString from '../utils/map-unknown-to-string';
+import QueryEngine from '../utils/query-engine';
+import sum from '../utils/sum';
+import validateResult from '../utils/validate-result';
 
 const NONE = 0;
 
@@ -62,13 +62,14 @@ export default async function scheduled(
       });
     }
   } catch (err: unknown) {
-    const message: string = mapUnknownToString(err);
+    console.error(err);
 
     if (typeof ERRORS === 'undefined') {
       return;
     }
 
     const duration: number = start.getTime() - Date.now();
+    const message: string = mapUnknownToString(err);
     ERRORS.writeDataPoint({
       blobs: [message],
       doubles: [duration],

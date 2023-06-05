@@ -11,4 +11,4 @@ type ReadonlyCloudscapeTableSortingEvent<T> = Readonly<
   >
 >;
 
-export default ReadonlyCloudscapeTableSortingEvent;
+export type { ReadonlyCloudscapeTableSortingEvent as default };

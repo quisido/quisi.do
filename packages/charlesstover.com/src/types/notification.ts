@@ -19,4 +19,4 @@ interface NoActionNotification {
 type Notification = BaseNotification &
   (ActionNotification | NoActionNotification);
 
-export default Notification;
+export type { Notification as default };

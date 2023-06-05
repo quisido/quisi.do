@@ -1,5 +1,7 @@
 import type DatasetValue from './dataset-value';
 
-type DatasetValues = Record<string, DatasetValue>;
+interface DatasetValues {
+  [key: string]: DatasetValues | DatasetValue;
+}
 
-export default DatasetValues;
+export type { DatasetValues as default };

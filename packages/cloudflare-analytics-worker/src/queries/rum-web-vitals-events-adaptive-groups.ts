@@ -1,117 +1,126 @@
-export default `
-{
-  cost
-  viewer {
-    accounts(
-      filter: {
-        accountTag: $accountTag
-      }
-    ) {
-      rumWebVitalsEventsAdaptiveGroups(
+import GraphQLObjectQuery from '../utils/graphql-object-query';
+
+export default new GraphQLObjectQuery({
+  cost: null,
+
+  viewer: {
+    budget: null,
+
+    accounts: {
+      __params: {
         filter: {
-          datetime_gt: $datetime_gt
-        }
-        limit: 1
-        orderBy: [
-          avg_cumulativeLayoutShift_ASC
-        ]
-      ) {
-        avg {
-          cumulativeLayoutShift
-          firstContentfulPaint
-          firstInputDelay
-          interactionToNextPaint
-          largestContentfulPaint
-          sampleInterval
-          timeToFirstByte
-        }
-        count
-        dimensions {
-          countryName
-          cumulativeLayoutShiftElement
-          cumulativeLayoutShiftPath
-          customTagInternalSxg
-          date
-          datetimeFifteenMinutes
-          datetimeFiveMinutes
-          datetimeHalfOfHour
-          datetimeHour
-          datetimeMinute
-          deviceType
-          firstInputDelayElement
-          firstInputDelayName
-          firstInputDelayPath
-          largestContentfulPaintElement
-          largestContentfulPaintObjectHost
-          largestContentfulPaintObjectPath
-          largestContentfulPaintObjectScheme
-          largestContentfulPaintPath
-          refererHost
-          refererPath
-          refererScheme
-          requestHost
-          requestPath
-          requestScheme
-          siteTag
-          userAgentBrowser
-          userAgentOS
-        }
-        quantiles {
-          cumulativeLayoutShiftP50
-          cumulativeLayoutShiftP75
-          cumulativeLayoutShiftP90
-          cumulativeLayoutShiftP99
-          firstContentfulPaintP50
-          firstContentfulPaintP75
-          firstContentfulPaintP90
-          firstContentfulPaintP99
-          firstInputDelayP50
-          firstInputDelayP75
-          firstInputDelayP90
-          firstInputDelayP99
-          interactionToNextPaintP50
-          interactionToNextPaintP75
-          interactionToNextPaintP90
-          interactionToNextPaintP99
-          largestContentfulPaintP50
-          largestContentfulPaintP75
-          largestContentfulPaintP90
-          largestContentfulPaintP99
-          timeToFirstByteP50
-          timeToFirstByteP75
-          timeToFirstByteP90
-          timeToFirstByteP99
-        }
-        sum {
-          clsGood
-          clsNeedsImprovement
-          clsPoor
-          clsTotal
-          fcpGood
-          fcpNeedsImprovement
-          fcpPoor
-          fcpTotal
-          fidGood
-          fidNeedsImprovement
-          fidPoor
-          fidTotal
-          inpGood
-          inpNeedsImprovement
-          inpPoor
-          inpTotal
-          lcpGood
-          lcpNeedsImprovement
-          lcpPoor
-          lcpTotal
-          ttfbGood
-          ttfbNeedsImprovement
-          ttfbPoor
-          ttfbTotal
-          visits
-        }
-      }
-    }
-    budget
-  }
-}
-`;
+          accountTag: '$accountTag',
+        },
+      },
+
+      rumWebVitalsEventsAdaptiveGroups: {
+        count: null,
+
+        __params: {
+          limit: 1,
+          orderBy: ['avg_cumulativeLayoutShift_ASC'],
+
+          filter: {
+            datetime_gt: '$datetime_gt',
+          },
+        },
+
+        avg: {
+          cumulativeLayoutShift: null,
+          firstContentfulPaint: null,
+          firstInputDelay: null,
+          interactionToNextPaint: null,
+          largestContentfulPaint: null,
+          sampleInterval: null,
+          timeToFirstByte: null,
+        },
+
+        dimensions: {
+          countryName: null,
+          cumulativeLayoutShiftElement: null,
+          cumulativeLayoutShiftPath: null,
+          customTagInternalSxg: null,
+          date: null,
+          datetimeFifteenMinutes: null,
+          datetimeFiveMinutes: null,
+          datetimeHalfOfHour: null,
+          datetimeHour: null,
+          datetimeMinute: null,
+          deviceType: null,
+          firstInputDelayElement: null,
+          firstInputDelayName: null,
+          firstInputDelayPath: null,
+          largestContentfulPaintElement: null,
+          largestContentfulPaintObjectHost: null,
+          largestContentfulPaintObjectPath: null,
+          largestContentfulPaintObjectScheme: null,
+          largestContentfulPaintPath: null,
+          refererHost: null,
+          refererPath: null,
+          refererScheme: null,
+          requestHost: null,
+          requestPath: null,
+          requestScheme: null,
+          siteTag: null,
+          userAgentBrowser: null,
+          userAgentOS: null,
+        },
+
+        quantiles: {
+          cumulativeLayoutShiftP50: null,
+          cumulativeLayoutShiftP75: null,
+          cumulativeLayoutShiftP90: null,
+          cumulativeLayoutShiftP99: null,
+          firstContentfulPaintP50: null,
+          firstContentfulPaintP75: null,
+          firstContentfulPaintP90: null,
+          firstContentfulPaintP99: null,
+          firstInputDelayP50: null,
+          firstInputDelayP75: null,
+          firstInputDelayP90: null,
+          firstInputDelayP99: null,
+          interactionToNextPaintP50: null,
+          interactionToNextPaintP75: null,
+          interactionToNextPaintP90: null,
+          interactionToNextPaintP99: null,
+          largestContentfulPaintP50: null,
+          largestContentfulPaintP75: null,
+          largestContentfulPaintP90: null,
+          largestContentfulPaintP99: null,
+          timeToFirstByteP50: null,
+          timeToFirstByteP75: null,
+          timeToFirstByteP90: null,
+          timeToFirstByteP99: null,
+        },
+
+        sum: {
+          clsGood: null,
+          clsNeedsImprovement: null,
+          clsPoor: null,
+          clsTotal: null,
+          fcpGood: null,
+          fcpNeedsImprovement: null,
+          fcpPoor: null,
+          fcpTotal: null,
+          fidGood: null,
+          fidNeedsImprovement: null,
+          fidPoor: null,
+          fidTotal: null,
+          inpGood: null,
+          inpNeedsImprovement: null,
+          inpPoor: null,
+          inpTotal: null,
+          lcpGood: null,
+          lcpNeedsImprovement: null,
+          lcpPoor: null,
+          lcpTotal: null,
+          ttfbGood: null,
+          ttfbNeedsImprovement: null,
+          ttfbPoor: null,
+          ttfbTotal: null,
+          visits: null,
+        },
+      },
+    },
+  },
+}).toString();

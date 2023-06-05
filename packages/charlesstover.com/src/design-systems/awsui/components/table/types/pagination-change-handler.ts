@@ -7,4 +7,4 @@ type AwsuiPaginationChangeHandler = (
   >,
 ) => void;
 
-export default AwsuiPaginationChangeHandler;
+export type { AwsuiPaginationChangeHandler as default };

@@ -7,4 +7,4 @@ type CloudscapePaginationChangeHandler = (
   >,
 ) => void;
 
-export default CloudscapePaginationChangeHandler;
+export type { CloudscapePaginationChangeHandler as default };

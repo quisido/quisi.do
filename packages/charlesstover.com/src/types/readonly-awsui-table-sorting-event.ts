@@ -11,4 +11,4 @@ type ReadonlyAwsuiTableSortingEvent<T> = Readonly<
   >
 >;
 
-export default ReadonlyAwsuiTableSortingEvent;
+export type { ReadonlyAwsuiTableSortingEvent as default };

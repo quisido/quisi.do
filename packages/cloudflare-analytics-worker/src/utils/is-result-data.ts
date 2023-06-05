@@ -1,6 +1,6 @@
 import type ResultData from '../types/result-data';
 import isObject from './is-object';
-import findViewer from './is-viewer';
+import isViewer from './is-viewer';
 
 export default function isResultData(value: unknown): value is ResultData {
   return (
@@ -8,6 +8,6 @@ export default function isResultData(value: unknown): value is ResultData {
     'cost' in value &&
     typeof value.cost === 'number' &&
     'viewer' in value &&
-    findViewer(value.viewer)
+    isViewer(value.viewer)
   );
 }

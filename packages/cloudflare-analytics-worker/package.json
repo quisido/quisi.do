@@ -3,20 +3,24 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "deploy": "wrangler deploy src/index.ts --name cloudflare-analytics",
-    "dev": "wrangler dev",
-    "dev:local": "wrangler dev --local",
+    "deploy": "wrangler publish src/index.ts --name cloudflare-analytics",
+    "dev": "wrangler dev --test-scheduled",
+    "dry-run": "wrangler publish src/index.ts --dry-run --name cloudflare-analytics --outdir dist",
+    "init": "echo \"API token:\" && wrangler secret put API_TOKEN && echo \"Account tag:\" && wrangler secret put ACCOUNT_TAG && echo \"Zone tag:\" && wrangler secret put ZONE_TAG",
+    "jest": "jest",
+    "jest:watch": "jest --watch",
     "prepack": "exit 0",
-    "prepublish": "wrangler deploy --dry-run --outdir dist",
-    "start": "yarn run dev",
-    "tail": "wrangler tail --format pretty --ip self cloudflare-analytics"
+    "prepublish": "jest && yarn run dry-run",
+    "tail": "wrangler tail --format pretty --ip self cloudflare-analytics",
+    "ts-jest:config:init": "ts-jest config:init"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20230518.0",
     "@types/jest": "^29.5.1",
     "@types/node": "^20.2.5",
     "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
     "typescript": "^5.0.4",
-    "wrangler": "^3.0.1"
+    "wrangler": "^2.20.0"
   }
 }

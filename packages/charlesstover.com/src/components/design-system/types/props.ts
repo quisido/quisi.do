@@ -20,4 +20,4 @@ type Props<Card extends object, Row extends object> = {
   >]: DesignSystemComponentProps<Card, Row, Type>;
 }[keyof DesignSystemPropsRecord<Card, Row>];
 
-export default Props;
+export type { Props as default };

@@ -9,4 +9,4 @@ type ReadonlyAwsuiSelectChangeEvent = Readonly<
   >
 >;
 
-export default ReadonlyAwsuiSelectChangeEvent;
+export type { ReadonlyAwsuiSelectChangeEvent as default };

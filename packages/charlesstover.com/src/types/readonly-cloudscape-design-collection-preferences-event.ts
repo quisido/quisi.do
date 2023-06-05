@@ -5,4 +5,4 @@ type ReadonlyCloudscapeDesignCollectionPreferencesEvent<T> = Readonly<
   NonCancelableCustomEvent<Readonly<CollectionPreferencesProps.Preferences<T>>>
 >;
 
-export default ReadonlyCloudscapeDesignCollectionPreferencesEvent;
+export type { ReadonlyCloudscapeDesignCollectionPreferencesEvent as default };

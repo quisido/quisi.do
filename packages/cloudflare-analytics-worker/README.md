@@ -30,9 +30,7 @@ The worker requires 3 secrets: the API token for the GraphQL Analytics engine,
 the account tag, and the zone tag.
 
 ```sh
-echo "API token:" && wrangler secret put API_TOKEN;
-echo "Account tag:" && wrangler secret put ACCOUNT_TAG;
-echo "Zone tag:" && wrangler secret put ZONE_TAG;
+yarn run init
 ```
 
 To provide these secrets to your local development instance, create a

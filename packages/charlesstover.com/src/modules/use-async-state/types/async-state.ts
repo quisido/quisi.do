@@ -4,7 +4,7 @@ type AsyncState<T> =
   | SuccessAsyncState<T>
   | UninitiatedAsyncState;
 
-export default AsyncState;
+export type { AsyncState as default };
 
 interface ErrorAsyncState {
   readonly data: null;
