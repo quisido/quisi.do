@@ -20,42 +20,36 @@ const NAVIGATION_ITEMS: readonly (
     text: NavigationText.Dashboard,
   },
   {
-    defaultExpanded: true,
+    defaultExpanded: false,
     text: NavigationText.Applications,
     children: [
       {
-        path: '/spritesheet2gif',
-        text: NavigationText.Spritesheet2Gif,
+        text: NavigationText.AceAlters,
+        url: 'https://acealters.com/',
       },
       {
-        defaultExpanded: false,
-        text: NavigationText.MoreApplications,
-        children: [
-          {
-            text: NavigationText.AceAlters,
-            url: 'https://acealters.com/',
-          },
-          {
-            text: NavigationText.Tetris3DS,
-            url: 'https://charlesstover.github.io/3ds-tetris/',
-          },
-          {
-            text: NavigationText.Dota2Huds,
-            url: 'https://charlesstover.github.io/dota2huds/',
-          },
-          {
-            text: NavigationText.MTGPlanechase,
-            url: 'https://mtgenius.github.io/planechase/',
-          },
-          {
-            text: NavigationText.Quisido,
-            url: 'https://quisido.com/',
-          },
-          {
-            text: NavigationText.RPGOverworldEngine,
-            url: 'https://charlesstover.github.io/rpg-overworld-engine/',
-          },
-        ],
+        text: NavigationText.Tetris3DS,
+        url: 'https://charlesstover.github.io/3ds-tetris/',
+      },
+      {
+        text: NavigationText.Dota2Huds,
+        url: 'https://charlesstover.github.io/dota2huds/',
+      },
+      {
+        text: NavigationText.MTGPlanechase,
+        url: 'https://mtgenius.github.io/planechase/',
+      },
+      {
+        text: NavigationText.Quisido,
+        url: 'https://quisido.com/',
+      },
+      {
+        text: NavigationText.RPGOverworldEngine,
+        url: 'https://charlesstover.github.io/rpg-overworld-engine/',
+      },
+      {
+        text: NavigationText.SpriteSheet2Gif,
+        path: '/spritesheet2gif',
       },
     ],
   },

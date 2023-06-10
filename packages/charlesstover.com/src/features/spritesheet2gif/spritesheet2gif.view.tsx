@@ -1,44 +1,36 @@
-import I18n from 'lazy-i18n';
-import type { ComponentType, ReactElement } from 'react';
-import { lazy } from 'react';
-import Wrapper from '../../components/wrapper';
-import useSpriteSheet2Gif from './spritesheet2gif.hook';
-import type ContentProps from './types/content-props';
+import type { ReactElement } from 'react';
+import Container from '../../components/container';
+import Div from '../../components/div';
+import Header from '../../components/header';
+import Link from '../../components/link';
+import validateString from '../../utils/validate-string';
+import styles from './spritesheet2gif.module.scss';
 
-const Content: ComponentType<ContentProps> = lazy(
-  async () => import('./components/content'),
-);
+const rootClassName: string = validateString(styles.root);
 
 export default function SpriteSheet2Gif(): ReactElement {
-  const {
-    Help,
-    breadcrumbs,
-    handleError,
-    handleErrorDismiss,
-    handleHelpDismiss,
-    handleHelpRequest,
-    notifications,
-    handleHelpChange,
-    helpOpen,
-  } = useSpriteSheet2Gif();
-
   return (
-    <Wrapper
-      Tools={Help}
-      breadcrumbs={breadcrumbs}
-      contentType="wizard"
-      fallback={<I18n>Loading spritesheet to GIF converter</I18n>}
-      notifications={notifications}
-      onToolsChange={handleHelpChange}
-      toolsHide={false}
-      toolsOpen={helpOpen}
+    <Container
+      className={rootClassName}
+      header={<Header>Animate a sprite sheet</Header>}
     >
-      <Content
-        onError={handleError}
-        onErrorDismiss={handleErrorDismiss}
-        onHelpDismiss={handleHelpDismiss}
-        onHelpRequest={handleHelpRequest}
-      />
-    </Wrapper>
+      <Div element="p">
+        The sprite sheet to GIF converter was a long-running tool for converting
+        sprite sheets to animated GIFs. Launched in 2015, it serviced thousands
+        of customers and held a top rank on Google. In June 2023, the service
+        was terminated.
+      </Div>
+      <Div element="p">
+        If you want to replicate the sprite sheet to GIF converter, you can find{' '}
+        <Link href="https://github.com/CharlesStover/spritesheet2gif-api/">
+          the original source code on GitHub
+        </Link>{' '}
+        and{' '}
+        <Link href="https://hub.docker.com/r/charlesstover/spritesheet2gif-api">
+          the Docker image on DockerHub
+        </Link>
+        .
+      </Div>
+    </Container>
   );
 }
