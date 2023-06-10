@@ -3,10 +3,12 @@ import Header from '@awsui/components-react/header';
 import type { ReactElement } from 'react';
 import type { Props } from '../../../../components/container';
 import Div from '../div';
+import Contents from './components/contents';
 
 export default function AwsuiContainer({
   actions,
   children,
+  className,
   footer,
   header,
   headerClassName,
@@ -21,8 +23,9 @@ export default function AwsuiContainer({
             <Header actions={actions}>{header}</Header>
           </Div>
         }
+        variant="stacked"
       >
-        {children}
+        <Contents className={className}>{children}</Contents>
       </Container>
     </Div>
   );

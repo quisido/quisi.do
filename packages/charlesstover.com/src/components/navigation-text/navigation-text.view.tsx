@@ -46,8 +46,8 @@ export default function WrapperNavigationText({
       return <I18n>RPG overworld engine</I18n>;
     case NavigationText.Settings:
       return <I18n>Settings</I18n>;
-    case NavigationText.Spritesheet2Gif:
-      return <I18n>Sprite sheet to GIF</I18n>;
+    case NavigationText.SpriteSheet2Gif:
+      return <>Sprite sheet to GIF</>;
     case NavigationText.Tetris3DS:
       return <>3DS Tetris</>;
     case NavigationText.Twitter:

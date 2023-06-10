@@ -1,0 +1,7 @@
+.root p {
+  text-indent: 1em;
+
+  + p {
+    margin-top: 0.5em !important;
+  }
+}

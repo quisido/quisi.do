@@ -4,13 +4,15 @@ import type { ReactElement } from 'react';
 import type { Props } from '../../../../components/container';
 import validateString from '../../../../utils/validate-string';
 import Div from '../div';
+import Contents from './components/contents';
 import styles from './container.module.scss';
 
 const rootClassName: string = validateString(styles.root);
 
-export default function CloudscapeContainer({
+export default function CloudscapeDesignContainer({
   actions,
   children,
+  className,
   footer,
   header,
   headerClassName,
@@ -27,7 +29,7 @@ export default function CloudscapeContainer({
         }
         variant="stacked"
       >
-        {children}
+        <Contents className={className}>{children}</Contents>
       </Container>
     </Div>
   );
