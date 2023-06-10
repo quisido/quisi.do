@@ -18,8 +18,9 @@ routes = [
   { custom_domain = true, pattern = "analytics.cloudflare.cscdn.net" }
 ]
 
-[placement]
-mode = "smart"
+# Workers that use cron triggers do not currently support smart placement.
+# [placement]
+# mode = "smart"
 
 [triggers]
 crons = ["0 0 * * *"]

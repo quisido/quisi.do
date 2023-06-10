@@ -5,7 +5,7 @@ import Container from '../../../../components/container';
 import Div from '../../../../components/div';
 import Table from '../../../../components/table';
 import withAsync from '../../../../hocs/with-async';
-import type CloudflareAnalyticsDatasets from '../../../../types/cloudflare-analytics-datasets';
+import type Datasets from '../../../../types/cloudflare-analytics-datasets';
 import createIndexArray from '../../../../utils/create-index-array';
 import ANALYTICS_COLUMNS from './constants/analytics-columns';
 import type CloudflareAnalytic from '../../types/cloudflare-analytic';
@@ -18,7 +18,7 @@ import useTableSort from '../../../../hooks/use-table-sort';
 
 interface Props {
   readonly budget: number;
-  readonly datasets: CloudflareAnalyticsDatasets;
+  readonly datasets: Datasets;
 }
 
 const COLUMNS_LENGTH: number = ANALYTICS_COLUMNS.length;
