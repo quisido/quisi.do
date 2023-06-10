@@ -16,7 +16,7 @@ describe('App', (): void => {
       <Routes
         onCloudflareAnalyticsRequest={jest.fn()}
         onRumMetricsRequest={jest.fn()}
-        onSentryProjectIssuesRequest={jest.fn()}
+        onSentryIssuesRequest={jest.fn()}
         onUptimeChecksRequest={jest.fn()}
       />,
       {

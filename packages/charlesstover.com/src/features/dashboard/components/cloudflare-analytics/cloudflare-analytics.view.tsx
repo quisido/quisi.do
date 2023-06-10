@@ -1,85 +1,35 @@
 import type { TranslateFunction } from 'lazy-i18n';
 import I18n, { useTranslate } from 'lazy-i18n';
 import type { ReactElement } from 'react';
-import { useCallback, useDeferredValue, useState } from 'react';
 import Container from '../../../../components/container';
 import Div from '../../../../components/div';
-import LoadingIcon from '../../../../components/loading-icon';
-import Span from '../../../../components/span';
 import Table from '../../../../components/table';
+import withAsync from '../../../../hocs/with-async';
 import type CloudflareAnalyticsDatasets from '../../../../types/cloudflare-analytics-datasets';
-import type TableColumn from '../../../../types/table-column';
 import createIndexArray from '../../../../utils/create-index-array';
-import CLOUDFLARE_ANALYTICS_COLUMNS from '../../constants/cloudflare-analytics-columns';
+import ANALYTICS_COLUMNS from './constants/analytics-columns';
 import type CloudflareAnalytic from '../../types/cloudflare-analytic';
+import ErrorView from './components/error';
+import Loading from './components/loading';
+import Uninitiated from './components/uninitiated';
+import WorkersInvocations from './components/workers-invocations';
 import mapBudgetToPercentage from './utils/map-budget-to-percentage';
+import useTableSort from '../../../../hooks/use-table-sort';
 
 interface Props {
   readonly budget: number;
-  readonly datasets: CloudflareAnalyticsDatasets | null;
-  readonly error: string | null;
-  readonly initiated: boolean;
-  readonly loading: boolean;
+  readonly datasets: CloudflareAnalyticsDatasets;
 }
 
-const COLUMNS_LENGTH = 9;
-const DEFAULT_SORT_COLUMN_INDEX = 0;
+const COLUMNS_LENGTH: number = ANALYTICS_COLUMNS.length;
 const PERCENT = 100;
 const VISIBLE_COLUMN_INDICES: readonly number[] =
   createIndexArray(COLUMNS_LENGTH);
 
-export default function CloudflareAnalytics({
+function CloudflareAnalytics({
   budget,
   datasets,
-  error,
-  initiated,
-  loading,
 }: Readonly<Props>): ReactElement {
-  // Contexts
-  const translate: TranslateFunction = useTranslate();
-
-  // States
-  const [sortAscending, setSortAscending] = useState(true);
-  const [sortColumnIndex, setSortColumnIndex] = useState(
-    DEFAULT_SORT_COLUMN_INDEX,
-  );
-  const deferredSortAscending: boolean = useDeferredValue(sortAscending);
-  const deferredSortColumnIndex: number = useDeferredValue(sortColumnIndex);
-
-  const handleSort = useCallback(
-    (columnIndex: number, ascending: boolean): void => {
-      setSortAscending(ascending);
-      setSortColumnIndex(columnIndex);
-    },
-    [],
-  );
-
-  if (!initiated) {
-    return (
-      <Container header={<I18n>Cloudflare analytics</I18n>} marginTop="large">
-        <I18n>Initiating</I18n>
-      </Container>
-    );
-  }
-
-  // Turn this into an `onError` event to display a banner.
-  if (error !== null) {
-    return (
-      <Container header={<I18n>Cloudflare analytics</I18n>} marginTop="large">
-        <Span element="p">{error}</Span>
-      </Container>
-    );
-  }
-
-  // Technical debt: `datasets` should never be null since it's a state machine.
-  if (loading || datasets === null) {
-    return (
-      <Container header={<I18n>Cloudflare analytics</I18n>} marginTop="large">
-        <LoadingIcon /> <I18n>Loading Cloudflare analytics</I18n>
-      </Container>
-    );
-  }
-
   const {
     rumPageloadEventsAdaptiveGroups,
     rumPerformanceEventsAdaptiveGroups,
@@ -87,150 +37,18 @@ export default function CloudflareAnalytics({
     workersInvocationsAdaptive,
   } = datasets;
 
-  const rows: CloudflareAnalytic[] = [
-    {
-      avg: rumPerformanceEventsAdaptiveGroups.connectionTime_avg,
-      name: translate('User connection time') ?? '...',
-      p50: rumPerformanceEventsAdaptiveGroups.connectionTimeP50,
-      p75: rumPerformanceEventsAdaptiveGroups.connectionTimeP75,
-      p90: rumPerformanceEventsAdaptiveGroups.connectionTimeP90,
-      p99: rumPerformanceEventsAdaptiveGroups.connectionTimeP99,
-      unit: 'milliseconds',
-    },
-    {
-      max: workersInvocationsAdaptive.cpuTime_max,
-      min: workersInvocationsAdaptive.cpuTime_min,
-      name: translate('Cloudflare Workers CPU time') ?? '...',
-      p25: workersInvocationsAdaptive.cpuTimeP25,
-      p50: workersInvocationsAdaptive.cpuTimeP50,
-      p75: workersInvocationsAdaptive.cpuTimeP75,
-      p90: workersInvocationsAdaptive.cpuTimeP90,
-      p99: workersInvocationsAdaptive.cpuTimeP99,
-      p999: workersInvocationsAdaptive.cpuTimeP999,
-      unit: 'microseconds',
-    },
-    {
-      avg: rumPerformanceEventsAdaptiveGroups.dnsTime_avg,
-      name: translate('User DNS time') ?? '...',
-      p50: rumPerformanceEventsAdaptiveGroups.dnsTimeP50,
-      p75: rumPerformanceEventsAdaptiveGroups.dnsTimeP75,
-      p90: rumPerformanceEventsAdaptiveGroups.dnsTimeP90,
-      p99: rumPerformanceEventsAdaptiveGroups.dnsTimeP99,
-      unit: 'microseconds',
-    },
-    {
-      max: workersInvocationsAdaptive.duration_max,
-      min: workersInvocationsAdaptive.duration_min,
-      name: translate('Cloudflare Workers duration') ?? '...',
-      p25: workersInvocationsAdaptive.durationP25,
-      p50: workersInvocationsAdaptive.durationP50,
-      p75: workersInvocationsAdaptive.durationP75,
-      p90: workersInvocationsAdaptive.durationP90,
-      p99: workersInvocationsAdaptive.durationP99,
-      p999: workersInvocationsAdaptive.durationP999,
-      sum: workersInvocationsAdaptive.duration_sum,
-      unit: 'seconds',
-    },
-    {
-      avg: rumPerformanceEventsAdaptiveGroups.firstContentfulPaint_avg,
-      name: translate('First contentful paint') ?? '...',
-      p50: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP50,
-      p75: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP75,
-      p90: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP90,
-      p99: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP99,
-      unit: 'microseconds',
-    },
-    {
-      avg: rumPerformanceEventsAdaptiveGroups.firstPaint_avg,
-      name: translate('First paint') ?? '...',
-      p50: rumPerformanceEventsAdaptiveGroups.firstPaintP50,
-      p75: rumPerformanceEventsAdaptiveGroups.firstPaintP75,
-      p90: rumPerformanceEventsAdaptiveGroups.firstPaintP90,
-      p99: rumPerformanceEventsAdaptiveGroups.firstPaintP99,
-      unit: 'microseconds',
-    },
-    {
-      avg: rumPerformanceEventsAdaptiveGroups.loadEventTime_avg,
-      name: translate('Load event time') ?? '...',
-      p50: rumPerformanceEventsAdaptiveGroups.loadEventTimeP50,
-      p75: rumPerformanceEventsAdaptiveGroups.loadEventTimeP75,
-      p90: rumPerformanceEventsAdaptiveGroups.loadEventTimeP90,
-      p99: rumPerformanceEventsAdaptiveGroups.loadEventTimeP99,
-      unit: 'milliseconds',
-    },
-    {
-      avg: rumPerformanceEventsAdaptiveGroups.pageLoadTime_avg,
-      name: translate('Page load time') ?? '...',
-      p50: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP50,
-      p75: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP75,
-      p90: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP90,
-      p99: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP99,
-      unit: 'microseconds',
-    },
-    {
-      avg: rumPerformanceEventsAdaptiveGroups.pageRenderTime_avg,
-      name: translate('Page render time') ?? '...',
-      p50: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP50,
-      p75: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP75,
-      p90: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP90,
-      p99: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP99,
-      unit: 'microseconds',
-    },
-    {
-      avg: rumPerformanceEventsAdaptiveGroups.requestTime_avg,
-      name: translate('Request time') ?? '...',
-      p50: rumPerformanceEventsAdaptiveGroups.requestTimeP50,
-      p75: rumPerformanceEventsAdaptiveGroups.requestTimeP75,
-      p90: rumPerformanceEventsAdaptiveGroups.requestTimeP90,
-      p99: rumPerformanceEventsAdaptiveGroups.requestTimeP99,
-      unit: 'microseconds',
-    },
-    {
-      max: workersInvocationsAdaptive.responseBodySize_max,
-      min: workersInvocationsAdaptive.responseBodySize_min,
-      name: translate('Cloudflare Workers response body size') ?? '...',
-      p25: workersInvocationsAdaptive.responseBodySizeP25,
-      p50: workersInvocationsAdaptive.responseBodySizeP50,
-      p75: workersInvocationsAdaptive.responseBodySizeP75,
-      p90: workersInvocationsAdaptive.responseBodySizeP90,
-      p99: workersInvocationsAdaptive.responseBodySizeP99,
-      p999: workersInvocationsAdaptive.responseBodySizeP999,
-      sum: workersInvocationsAdaptive.responseBodySize_sum,
-      unit: 'bytes',
-    },
-    {
-      avg: rumPerformanceEventsAdaptiveGroups.responseTime_avg,
-      name: translate('Response time') ?? '...',
-      p50: rumPerformanceEventsAdaptiveGroups.responseTimeP50,
-      p75: rumPerformanceEventsAdaptiveGroups.responseTimeP75,
-      p90: rumPerformanceEventsAdaptiveGroups.responseTimeP90,
-      p99: rumPerformanceEventsAdaptiveGroups.responseTimeP99,
-      unit: 'milliseconds',
-    },
-    {
-      max: workersInvocationsAdaptive.wallTime_max,
-      min: workersInvocationsAdaptive.wallTime_min,
-      name: translate('Cloudflare Workers wall time') ?? '...',
-      p25: workersInvocationsAdaptive.wallTimeP25,
-      p50: workersInvocationsAdaptive.wallTimeP50,
-      p75: workersInvocationsAdaptive.wallTimeP75,
-      p90: workersInvocationsAdaptive.wallTimeP90,
-      p99: workersInvocationsAdaptive.wallTimeP99,
-      p999: workersInvocationsAdaptive.wallTimeP999,
-      sum: workersInvocationsAdaptive.wallTime_sum,
-      unit: 'microseconds',
-    },
-  ];
+  // States
+  const translate: TranslateFunction = useTranslate();
+  const { ascending, columnIndex, handleSort } = useTableSort();
+  // const sortColumn: TableColumn<CloudflareAnalytic> | undefined =
+  //   CLOUDFLARE_ANALYTICS_COLUMNS[columnIndex];
+  // if (typeof sortColumn !== 'undefined') {
+  //   rows.sort(sortColumn.sort);
 
-  const sortColumn: TableColumn<CloudflareAnalytic> | undefined =
-    CLOUDFLARE_ANALYTICS_COLUMNS[deferredSortColumnIndex];
-  if (typeof sortColumn !== 'undefined') {
-    rows.sort(sortColumn.sort);
-
-    if (!deferredSortAscending) {
-      rows.reverse();
-    }
-  }
+  //   if (!deferredSortAscending) {
+  //     rows.reverse();
+  //   }
+  // }
 
   return (
     <>
@@ -279,17 +97,102 @@ export default function CloudflareAnalytics({
           {workersInvocationsAdaptive.subrequests_sum}
         </Div>
       </Container>
-
       <Table<CloudflareAnalytic>
-        columns={CLOUDFLARE_ANALYTICS_COLUMNS}
+        columns={ANALYTICS_COLUMNS}
+        header={<I18n>Cloudflare Web Analytics</I18n>}
         onSort={handleSort}
-        rows={rows}
+        rows={[
+          {
+            avg: rumPerformanceEventsAdaptiveGroups.connectionTime_avg,
+            name: translate('User connection time') ?? '...',
+            p50: rumPerformanceEventsAdaptiveGroups.connectionTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.connectionTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.connectionTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.connectionTimeP99,
+            unit: 'milliseconds',
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups.dnsTime_avg,
+            name: translate('User DNS time') ?? '...',
+            p50: rumPerformanceEventsAdaptiveGroups.dnsTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.dnsTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.dnsTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.dnsTimeP99,
+            unit: 'microseconds',
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups.firstContentfulPaint_avg,
+            name: translate('First contentful paint') ?? '...',
+            p50: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP50,
+            p75: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP75,
+            p90: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP90,
+            p99: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP99,
+            unit: 'microseconds',
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups.firstPaint_avg,
+            name: translate('First paint') ?? '...',
+            p50: rumPerformanceEventsAdaptiveGroups.firstPaintP50,
+            p75: rumPerformanceEventsAdaptiveGroups.firstPaintP75,
+            p90: rumPerformanceEventsAdaptiveGroups.firstPaintP90,
+            p99: rumPerformanceEventsAdaptiveGroups.firstPaintP99,
+            unit: 'microseconds',
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups.loadEventTime_avg,
+            name: translate('Load event time') ?? '...',
+            p50: rumPerformanceEventsAdaptiveGroups.loadEventTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.loadEventTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.loadEventTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.loadEventTimeP99,
+            unit: 'milliseconds',
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups.pageLoadTime_avg,
+            name: translate('Page load time') ?? '...',
+            p50: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP99,
+            unit: 'microseconds',
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups.pageRenderTime_avg,
+            name: translate('Page render time') ?? '...',
+            p50: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP99,
+            unit: 'microseconds',
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups.requestTime_avg,
+            name: translate('Request time') ?? '...',
+            p50: rumPerformanceEventsAdaptiveGroups.requestTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.requestTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.requestTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.requestTimeP99,
+            unit: 'microseconds',
+          },
+          {
+            avg: rumPerformanceEventsAdaptiveGroups.responseTime_avg,
+            name: translate('Response time') ?? '...',
+            p50: rumPerformanceEventsAdaptiveGroups.responseTimeP50,
+            p75: rumPerformanceEventsAdaptiveGroups.responseTimeP75,
+            p90: rumPerformanceEventsAdaptiveGroups.responseTimeP90,
+            p99: rumPerformanceEventsAdaptiveGroups.responseTimeP99,
+            unit: 'milliseconds',
+          },
+        ]}
         rowsCount={1}
         rowsPerPage={1}
-        sortAscending={sortAscending}
-        sortColumnIndex={sortColumnIndex}
+        sortAscending={ascending}
+        sortColumnIndex={columnIndex}
         visibleColumnIndices={VISIBLE_COLUMN_INDICES}
       />
+      <WorkersInvocations>{workersInvocationsAdaptive}</WorkersInvocations>
     </>
   );
 }
+
+export default withAsync(Uninitiated, Loading, ErrorView, CloudflareAnalytics);

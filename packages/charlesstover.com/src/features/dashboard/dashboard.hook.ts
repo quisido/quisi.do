@@ -6,68 +6,38 @@ import useAsyncState from '../../modules/use-async-state';
 import type CloudflareAnalytics from '../../types/cloudflare-analytics';
 import type CloudflareAnalyticsDatasets from '../../types/cloudflare-analytics-datasets';
 import type RumMetrics from '../../types/rum-metrics';
-import type SentryProjectIssue from '../../types/sentry-project-issue';
+import type SentryIssue from '../../types/sentry-issue';
 import type UptimeChecks from '../../types/uptime-checks';
 import filterSentryProjectNonIssues from './utils/filter-sentry-project-non-issues';
-import mapRecordToSum from './utils/map-record-to-sum';
 
 interface Props {
   readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
+  readonly onSentryIssuesRequest: () => Promise<readonly SentryIssue[]>;
   readonly onUptimeChecksRequest: () => Promise<UptimeChecks>;
-  readonly onSentryProjectIssuesRequest: () => Promise<
-    readonly SentryProjectIssue[]
-  >;
 }
 
 interface State {
-  readonly apdexError: string | null;
   readonly ciCdStatusAlt: string;
-  readonly cloudflareAnalytics: CloudflareAnalyticsDatasets | null;
-  readonly clsP95: number;
-  readonly clsTm95: number;
+  readonly cloudflareAnalytics: CloudflareAnalyticsDatasets | undefined;
   readonly cloudflareAnalyticsBudget: number;
-  readonly cloudflareAnalyticsError: string | null;
-  readonly dailySessionCount: number;
-  readonly errorCountTimeSeries: Record<string, number>;
-  readonly errorsError: string | null;
-  readonly events: readonly string[];
-  readonly eventsError: string | null;
-  readonly fidP95: number;
-  readonly fidTm95: number;
-  readonly frustratedTimeSeries: Record<string, number>;
-  readonly isApdexInitiated: boolean;
-  readonly isApdexLoading: boolean;
+  readonly cloudflareAnalyticsError: string | undefined;
   readonly isCloudflareAnalyticsInitiated: boolean;
   readonly isCloudflareAnalyticsLoading: boolean;
-  readonly isErrorsInitiated: boolean;
-  readonly isErrorsLoading: boolean;
-  readonly isEventsInitiated: boolean;
-  readonly isEventsLoading: boolean;
-  readonly isSentryProjectIssuesInitiated: boolean;
-  readonly isSentryProjectIssuesLoading: boolean;
+  readonly isSentryIssuesInitiated: boolean;
+  readonly isSentryIssuesLoading: boolean;
   readonly isUptimeChecksError: boolean;
   readonly isUptimeChecksInitiated: boolean;
   readonly isUptimeChecksLoading: boolean;
-  readonly isWebVitalsInitiated: boolean;
-  readonly isWebVitalsLoading: boolean;
   readonly lastUptimeCheckStatus: boolean;
   readonly lastUptimeCheckTimestamp: number;
-  readonly lcpP95: number;
-  readonly lcpTm95: number;
-  readonly satisfiedTimeSeries: Record<string, number>;
-  readonly sentryProjectIssues: readonly SentryProjectIssue[];
-  readonly sentryProjectIssuesError: string | null;
-  readonly sessionCountTimeSeries: Record<string, number>;
-  readonly toleratedTimeSeries: Record<string, number>;
-  readonly uptimeChecks: UptimeChecks | null;
+  readonly sentryIssues: readonly SentryIssue[];
+  readonly sentryIssuesError: string | undefined;
+  readonly uptimeChecks: UptimeChecks | undefined;
   readonly uptimeErrors: readonly unknown[];
   readonly uptimeMessages: readonly unknown[];
-  readonly webVitalsError: string | null;
 }
 
-const DAYS_PER_WEEK = 7;
-const EMPTY_RECORD: Record<string, never> = Object.freeze({});
 const NONE = 0;
 const NOT_FOUND = -1;
 
@@ -139,8 +109,7 @@ const clsPow = Math.pow(BASE, CUMULATIVE_LAYOUT_SHIFT_PRECISION);
 
 export default function useDashboard({
   onCloudflareAnalyticsRequest,
-  // onRumMetricsRequest,
-  onSentryProjectIssuesRequest,
+  onSentryIssuesRequest,
   onUptimeChecksRequest,
 }: Readonly<Props>): State {
   // Contexts
@@ -154,20 +123,12 @@ export default function useDashboard({
     loading: isCloudflareAnalyticsLoading,
   } = useAsyncState(onCloudflareAnalyticsRequest);
 
-  /*
   const {
-    error: rumMetricsError,
-    initiated: isRumMetricsInitiated,
-    loading: isRumMetricsLoading,
-  } = useAsyncState(onRumMetricsRequest);
-  */
-
-  const {
-    data: sentryProjectIssues,
-    error: sentryProjectIssuesError,
-    initiated: isSentryProjectIssuesInitiated,
-    loading: isSentryProjectIssuesLoading,
-  } = useAsyncState(onSentryProjectIssuesRequest);
+    data: sentryIssues,
+    error: sentryIssuesError,
+    initiated: isSentryIssuesInitiated,
+    loading: isSentryIssuesLoading,
+  } = useAsyncState(onSentryIssuesRequest);
 
   const {
     data: uptimeChecks,
@@ -176,62 +137,28 @@ export default function useDashboard({
     loading: isUptimeChecksLoading,
   } = useAsyncState(onUptimeChecksRequest);
 
-  const sessionCountTimeSeries: Record<string, number> = EMPTY_RECORD;
   const uptimeChecksErrors: readonly unknown[] =
     uptimeChecks?.errors ?? EMPTY_ARRAY;
   return {
-    apdexError: null, // rumMetricsError,
+    cloudflareAnalytics: cloudflareAnalytics?.datasets,
     cloudflareAnalyticsError,
-    clsP95: 0,
-    clsTm95: 0,
-    errorCountTimeSeries: EMPTY_RECORD,
-    errorsError: null, // rumMetricsError,
-    events: EMPTY_ARRAY,
-    eventsError: null, // sentryProjectEventsError,
-    fidP95: 0,
-    fidTm95: 0,
-    frustratedTimeSeries: EMPTY_RECORD,
-    isApdexInitiated: false, // isRumMetricsInitiated,
-    isApdexLoading: false, // isRumMetricsLoading,
     isCloudflareAnalyticsInitiated,
     isCloudflareAnalyticsLoading,
-    isErrorsInitiated: false, // isRumMetricsInitiated,
-    isErrorsLoading: false, // isRumMetricsLoading,
-    isEventsInitiated: false, // isSentryProjectEventsInitiated,
-    isEventsLoading: false, // isSentryProjectEventsLoading,
-    isSentryProjectIssuesInitiated,
-    isSentryProjectIssuesLoading,
-    isUptimeChecksError: uptimeChecksError !== null,
+    isSentryIssuesInitiated,
+    isSentryIssuesLoading,
+    isUptimeChecksError: typeof uptimeChecksError !== 'undefined',
     isUptimeChecksInitiated,
     isUptimeChecksLoading,
-    isWebVitalsInitiated: false, // isRumMetricsInitiated,
-    isWebVitalsLoading: false, // isRumMetricsLoading,
-    lcpP95: 0,
-    lcpTm95: 0,
-    satisfiedTimeSeries: EMPTY_RECORD,
-    sentryProjectIssuesError,
-    sessionCountTimeSeries,
-    toleratedTimeSeries: EMPTY_RECORD,
+    sentryIssuesError,
     uptimeChecks,
     uptimeMessages: uptimeChecks ? uptimeChecks.messages : EMPTY_ARRAY,
-    webVitalsError: null, // rumMetricsError,
 
     ciCdStatusAlt:
       translate('Continuous integration/deployment status') ?? 'CI/CD',
 
-    cloudflareAnalytics: cloudflareAnalytics
-      ? cloudflareAnalytics.datasets
-      : null,
-
     cloudflareAnalyticsBudget: cloudflareAnalytics
       ? cloudflareAnalytics.budget
       : NONE,
-
-    dailySessionCount: useMemo(
-      (): number =>
-        Math.ceil(mapRecordToSum(sessionCountTimeSeries) / DAYS_PER_WEEK),
-      [sessionCountTimeSeries],
-    ),
 
     /*
     events: useMemo((): readonly string[] => {
@@ -254,18 +181,18 @@ export default function useDashboard({
       ? uptimeChecks.lastChecked
       : NOT_FOUND,
 
-    sentryProjectIssues: useMemo((): readonly SentryProjectIssue[] => {
-      if (sentryProjectIssues === null) {
+    sentryIssues: useMemo((): readonly SentryIssue[] => {
+      if (typeof sentryIssues === 'undefined') {
         return EMPTY_ARRAY;
       }
 
-      return sentryProjectIssues.filter(filterSentryProjectNonIssues);
-    }, [sentryProjectIssues]),
+      return sentryIssues.filter(filterSentryProjectNonIssues);
+    }, [sentryIssues]),
 
     uptimeErrors: useMemo((): readonly unknown[] => {
       const newUptimeErrors: unknown[] = [];
 
-      if (uptimeChecksError !== null) {
+      if (typeof uptimeChecksError !== 'undefined') {
         newUptimeErrors.push(uptimeChecksError);
       }
 

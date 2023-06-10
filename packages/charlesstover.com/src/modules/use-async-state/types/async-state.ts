@@ -7,29 +7,29 @@ type AsyncState<T> =
 export type { AsyncState as default };
 
 interface ErrorAsyncState {
-  readonly data: null;
+  readonly data: undefined;
   readonly error: string;
   readonly initiated: true;
   readonly loading: false;
 }
 
 interface LoadingAsyncState<T> {
-  readonly data: T | null;
-  readonly error: string | null;
+  readonly data: T | undefined;
+  readonly error: string | undefined;
   readonly initiated: true;
   readonly loading: true;
 }
 
 interface SuccessAsyncState<T> {
   readonly data: T;
-  readonly error: null;
+  readonly error: undefined;
   readonly initiated: true;
   readonly loading: false;
 }
 
 interface UninitiatedAsyncState {
-  readonly data: null;
-  readonly error: null;
+  readonly data: undefined;
+  readonly error: undefined;
   readonly initiated: false;
   readonly loading: false;
 }

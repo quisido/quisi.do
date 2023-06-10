@@ -5,7 +5,7 @@ import Theme from '../../components/theme';
 import GoogleAnalytics from '../../modules/react-google-analytics';
 import type CloudflareAnalytics from '../../types/cloudflare-analytics';
 import type RumMetrics from '../../types/rum-metrics';
-import type SentryProjectIssue from '../../types/sentry-project-issue';
+import type SentryIssue from '../../types/sentry-issue';
 import type UptimeChecks from '../../types/uptime-checks';
 import CloudflareInsights from './components/cloudflare-insights';
 import CloudWatchRUM from './components/cloudwatch-rum';
@@ -28,17 +28,15 @@ interface Props {
   readonly cloudWatchRumEnabled: boolean;
   readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
+  readonly onSentryIssuesRequest: () => Promise<readonly SentryIssue[]>;
   readonly onUptimeChecksRequest: () => Promise<UptimeChecks>;
-  readonly onSentryProjectIssuesRequest: () => Promise<
-    readonly SentryProjectIssue[]
-  >;
 }
 
 export default function App({
   cloudWatchRumEnabled,
   onCloudflareAnalyticsRequest,
   onRumMetricsRequest,
-  onSentryProjectIssuesRequest,
+  onSentryIssuesRequest,
   onUptimeChecksRequest,
 }: Readonly<Props>): ReactElement {
   return (
@@ -59,9 +57,7 @@ export default function App({
                               onCloudflareAnalyticsRequest
                             }
                             onRumMetricsRequest={onRumMetricsRequest}
-                            onSentryProjectIssuesRequest={
-                              onSentryProjectIssuesRequest
-                            }
+                            onSentryIssuesRequest={onSentryIssuesRequest}
                             onUptimeChecksRequest={onUptimeChecksRequest}
                           />
                         </Theme>

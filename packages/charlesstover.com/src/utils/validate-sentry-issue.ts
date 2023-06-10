@@ -1,5 +1,5 @@
 import EMPTY_ARRAY from '../constants/empty-array';
-import type SentryProjectIssue from '../types/sentry-project-issue';
+import type SentryIssue from '../types/sentry-issue';
 import assert from './assert';
 import isArray from './is-array';
 import isNumber from './is-number';
@@ -7,7 +7,7 @@ import validateArray from './validate-array';
 import validateBoolean from './validate-boolean';
 import validateNumber from './validate-number';
 import validateObject from './validate-object';
-import validateMetadata from './validate-sentry-project-issue-metadata';
+import validateMetadata from './validate-sentry-issue-metadata';
 import validateString from './validate-string';
 import validateTuple from './validate-tuple';
 
@@ -40,10 +40,10 @@ const validateStats = (
   );
 };
 
-export default function validateSentryProjectIssue(
+export default function validateSentryIssue(
   value: unknown,
   context: readonly string[] = EMPTY_ARRAY,
-): SentryProjectIssue {
+): SentryIssue {
   return validateObject(
     value,
     {

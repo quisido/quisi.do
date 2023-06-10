@@ -8,7 +8,7 @@ const SOURCE = 'https://static.cloudflareinsights.com/beacon.min.js';
 
 export default function CloudflareInsights({ token }: Readonly<Props>): null {
   useEffect((): VoidFunction | undefined => {
-    if (window.location.hostname === 'localhost') {
+    if (process.env.NODE_ENV !== 'production') {
       return;
     }
 

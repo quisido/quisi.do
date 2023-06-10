@@ -5,14 +5,12 @@ import Container from '../../../../components/container';
 import Div from '../../../../components/div';
 import Link from '../../../../components/link';
 import validateString from '../../../../utils/validate-string';
-import DailySessions from '../daily-sessions';
 import OnlineStatus from '../online-status';
 import LastChecked from '../last-checked';
 import styles from './status.module.scss';
 
 interface Props {
   readonly ciCdStatusAlt: string;
-  readonly dailySessionCount: number;
   readonly lastUptimeCheckStatus: boolean;
   readonly lastUptimeCheckTimestamp: number;
   readonly uptimeChecksError: boolean;
@@ -58,7 +56,6 @@ const mapMessageToElement = (message: unknown): ReactElement => {
 
 export default function Status({
   ciCdStatusAlt,
-  dailySessionCount,
   lastUptimeCheckStatus,
   lastUptimeCheckTimestamp,
   uptimeChecksError,
@@ -87,7 +84,6 @@ export default function Status({
         >
           {lastUptimeCheckTimestamp}
         </LastChecked>
-        <DailySessions>{dailySessionCount}</DailySessions>
       </Div>
       {uptimeErrors.length > NONE && (
         <Div className={messagesClassName}>

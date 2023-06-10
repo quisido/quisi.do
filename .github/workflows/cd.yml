@@ -69,6 +69,7 @@ jobs:
             packages/*/build/
             packages/*/dist/
 
+  # Run tests against the root directory.
   prepublish-only:
     name: Prepublish only
     needs: install
@@ -98,7 +99,8 @@ jobs:
       - name: Prepublish only
         run: yarn run prepublishOnly
 
-  # Stage 3: cypress, lighthouse, npm, opensource-registry, prepublish
+  # Stage 3: cypress, lighthouse, npm, opensource-registry,
+  #          prepublish-applications
   cypress:
     name: Cypress
     needs: prepack
@@ -305,8 +307,10 @@ jobs:
           yarn config set npmAuthToken $NPM_AUTH_TOKEN;
           yarn run publish;
 
-  prepublish:
-    name: Prepublish
+  # Run the prepublish test on applications, because prepublish won't be
+  #   triggered for applications by the publish step.
+  prepublish-applications:
+    name: Prepublish applications
     needs: prepack
     runs-on: ubuntu-latest
     env:
@@ -347,7 +351,7 @@ jobs:
   # Stage 4: coverage, github-packages
   coverage:
     name: Coverage
-    needs: [cypress, prepublish]
+    needs: [cypress, prepublish-applications]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci

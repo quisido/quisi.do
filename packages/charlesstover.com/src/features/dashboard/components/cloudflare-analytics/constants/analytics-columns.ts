@@ -1,8 +1,8 @@
-import type TableColumn from '../../../types/table-column';
-import mapKeyToNumberSort from '../../../utils/map-key-to-number-sort';
-import mapKeyToStringSort from '../../../utils/map-key-to-string-sort';
-import type CloudflareAnalytic from '../types/cloudflare-analytic';
-import mapKeyToColumnCell from '../utils/map-cloudflare-analytic-key-to-column-cell';
+import type TableColumn from '../../../../../types/table-column';
+import mapKeyToNumberSort from '../../../../../utils/map-key-to-number-sort';
+import mapKeyToStringSort from '../../../../../utils/map-key-to-string-sort';
+import type CloudflareAnalytic from '../../../types/cloudflare-analytic';
+import mapKeyToColumnCell from '../utils/map-key-to-column-cell';
 
 export default [
   {
