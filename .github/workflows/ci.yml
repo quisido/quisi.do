@@ -68,7 +68,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-  # Stage 2: prepack, prepublish-only
+  # Stage 2: prepack
   prepack:
     name: Prepack
     needs: install
@@ -217,6 +217,8 @@ jobs:
         run: yarn install --immutable
       - name: Prepublish
         run: yarn run prepublish
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_KEY }}
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v2
         with:

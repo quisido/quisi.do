@@ -5,15 +5,15 @@ import type AsyncState from '../types/async-state';
 
 interface State<T> {
   readonly asyncEffectRef: MutableRefObject<Promise<unknown> | undefined>;
-  readonly data: T | null;
-  readonly error: string | null;
+  readonly data: T | undefined;
+  readonly error: string | undefined;
   readonly initiated: boolean;
   readonly loading: boolean;
 }
 
 const DEFAULT_ASYNC_STATE = {
-  data: null,
-  error: null,
+  data: undefined,
+  error: undefined,
   initiated: false,
   loading: false,
 } satisfies AsyncState<unknown>;
@@ -37,11 +37,12 @@ export default function useAsyncState<T>(
   useEffect((): void => {
     const getState = async (): Promise<void> => {
       setAsyncState({
-        data: null,
-        error: null,
+        data: undefined,
+        error: undefined,
         initiated: true,
         loading: true,
       });
+
       try {
         const data: T = await get();
 
@@ -52,7 +53,7 @@ export default function useAsyncState<T>(
 
         setAsyncState({
           data,
-          error: null,
+          error: undefined,
           initiated: true,
           loading: false,
         });
@@ -63,9 +64,8 @@ export default function useAsyncState<T>(
         }
 
         const errorStr: string = mapUnknownToString(err);
-
         setAsyncState({
-          data: null,
+          data: undefined,
           error: errorStr,
           initiated: true,
           loading: false,

@@ -1,3 +1,5 @@
+import type WorkersInvocations from './cloudflare-workers-invocations';
+
 type WithKey<K extends number | string, T> = HasKey<K> & T;
 
 type Dimension<K extends number | string, V extends string> = WithKey<
@@ -27,6 +29,7 @@ interface HttpRequests1hGroups {
 
 export default interface CloudflareAnalyticsDatasets {
   readonly workersAnalyticsEngineAdaptiveGroups: Record<'count', number>;
+  readonly workersInvocationsAdaptive: WorkersInvocations;
 
   readonly httpRequests1hGroups: HttpRequests1hGroups;
 
@@ -84,49 +87,6 @@ export default interface CloudflareAnalyticsDatasets {
     | 'responseTimeP99'
     | 'sampleInterval_avg'
     | 'visits_sum',
-    number
-  >;
-
-  readonly workersInvocationsAdaptive: Record<
-    | 'cpuTime_max'
-    | 'cpuTime_min'
-    | 'cpuTimeP25'
-    | 'cpuTimeP50'
-    | 'cpuTimeP75'
-    | 'cpuTimeP90'
-    | 'cpuTimeP99'
-    | 'cpuTimeP999'
-    | 'duration_max'
-    | 'duration_min'
-    | 'duration_sum'
-    | 'durationP25'
-    | 'durationP50'
-    | 'durationP75'
-    | 'durationP90'
-    | 'durationP99'
-    | 'durationP999'
-    | 'errors_sum'
-    | 'requests_sum'
-    | 'responseBodySize_max'
-    | 'responseBodySize_min'
-    | 'responseBodySize_sum'
-    | 'responseBodySizeP25'
-    | 'responseBodySizeP50'
-    | 'responseBodySizeP75'
-    | 'responseBodySizeP90'
-    | 'responseBodySizeP99'
-    | 'responseBodySizeP999'
-    | 'sampleInterval_avg'
-    | 'subrequests_sum'
-    | 'wallTime_max'
-    | 'wallTime_min'
-    | 'wallTime_sum'
-    | 'wallTimeP25'
-    | 'wallTimeP50'
-    | 'wallTimeP75'
-    | 'wallTimeP90'
-    | 'wallTimeP99'
-    | 'wallTimeP999',
     number
   >;
 }

@@ -15,7 +15,7 @@ const rumMetrics: RumMetrics = new RumMetrics({
   },
 });
 
-const sentryProjectIssues: SentryProjectIssues = new SentryProjectIssues({
+const sentryIssues: SentryProjectIssues = new SentryProjectIssues({
   authToken: '192f445838294027957a4a7d64d5d023a46ce6bfdee3453c820c289e4dcc1f53',
   fetch,
   organizationSlug: 'charles-stover',
@@ -28,7 +28,7 @@ ROOT.render(
       cloudWatchRumEnabled={window.location.hostname !== 'localhost'}
       onCloudflareAnalyticsRequest={handleCloudflareAnalyticsRequest}
       onRumMetricsRequest={rumMetrics.handleRequest}
-      onSentryProjectIssuesRequest={sentryProjectIssues.handleRequest}
+      onSentryIssuesRequest={sentryIssues.handleRequest}
       onUptimeChecksRequest={handleUptimeChecksRequest}
     />
   </StrictMode>,

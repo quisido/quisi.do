@@ -1,4 +1,4 @@
-import type SentryProjectIssue from '../../../types/sentry-project-issue';
+import type SentryIssue from '../../../types/sentry-issue';
 
 // TODO: Turn these into individual metrics.
 const LOADING_CSS_CHUNK_FAILED = /^Error: Loading CSS chunk \d+ failed.$/;
@@ -14,7 +14,7 @@ const TITLES: Set<string> = new Set([
 
 export default function filterSentryProjectNonIssues({
   title,
-}: Readonly<SentryProjectIssue>): boolean {
+}: Readonly<SentryIssue>): boolean {
   return (
     !title.startsWith('ChunkLoadError: ') &&
     !LOADING_CSS_CHUNK_FAILED.test(title) &&

@@ -9,7 +9,7 @@ import Quotes from '../../../../features/quotes';
 import SpriteSheet2Gif from '../../../../features/spritesheet2gif';
 import type CloudflareAnalytics from '../../../../types/cloudflare-analytics';
 import type RumMetrics from '../../../../types/rum-metrics';
-import type SentryProjectIssue from '../../../../types/sentry-project-issue';
+import type SentryIssue from '../../../../types/sentry-issue';
 import type UptimeChecks from '../../../../types/uptime-checks';
 import mapHrefToRedirectComponent from '../../utils/map-href-to-redirect-component';
 import mapPathToRedirectComponent from '../../utils/map-path-to-redirect-component';
@@ -17,10 +17,8 @@ import mapPathToRedirectComponent from '../../utils/map-path-to-redirect-compone
 interface Props {
   readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
+  readonly onSentryIssuesRequest: () => Promise<readonly SentryIssue[]>;
   readonly onUptimeChecksRequest: () => Promise<UptimeChecks>;
-  readonly onSentryProjectIssuesRequest: () => Promise<
-    readonly SentryProjectIssue[]
-  >;
 }
 
 const BtjdtcwthPath = 'become-the-junior-developer-that-companies-want-to-hire';
@@ -45,7 +43,7 @@ const SentryRoutes = withSentryReactRouterV6Routing(Routes);
 export default function AppRoutes({
   onCloudflareAnalyticsRequest,
   onRumMetricsRequest,
-  onSentryProjectIssuesRequest,
+  onSentryIssuesRequest,
   onUptimeChecksRequest,
 }: Readonly<Props>): ReactElement {
   return (
@@ -61,7 +59,7 @@ export default function AppRoutes({
           <Dashboard
             onCloudflareAnalyticsRequest={onCloudflareAnalyticsRequest}
             onRumMetricsRequest={onRumMetricsRequest}
-            onSentryProjectIssuesRequest={onSentryProjectIssuesRequest}
+            onSentryIssuesRequest={onSentryIssuesRequest}
             onUptimeChecksRequest={onUptimeChecksRequest}
           />
         }

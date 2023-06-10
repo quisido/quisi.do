@@ -17,7 +17,7 @@ export interface Project {
 }
 */
 
-export default interface SentryProjectIssue {
+export default interface SentryIssue {
   // readonly annotations: [];
   // readonly assignedTo: null;
   readonly count: string;

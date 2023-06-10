@@ -1,6 +1,6 @@
-import type SentryProjectIssue from '../types/sentry-project-issue';
+import type SentryIssue from '../types/sentry-issue';
 import isSentryError from './is-sentry-error';
-import validateSentryProjectIssues from './validate-sentry-project-issues';
+import validateSentryIssues from './validate-sentry-issues';
 
 interface Options {
   readonly authToken: string;
@@ -54,9 +54,7 @@ export default class SentryProjectEvents {
     return `https://sentry.io/api/0/projects/${this._organizationSlug}/${this._projectSlug}/issues/`;
   }
 
-  public readonly handleRequest = async (): Promise<
-    readonly SentryProjectIssue[]
-  > => {
+  public readonly handleRequest = async (): Promise<readonly SentryIssue[]> => {
     const response: Response = await this._fetch(this.url, this.requestInit);
 
     const json: unknown = await response.json();
@@ -64,6 +62,6 @@ export default class SentryProjectEvents {
       throw new Error(json.detail);
     }
 
-    return validateSentryProjectIssues(json);
+    return validateSentryIssues(json);
   };
 }

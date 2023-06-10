@@ -1,11 +1,11 @@
 import EMPTY_ARRAY from '../constants/empty-array';
-import type SentryProjectIssue from '../types/sentry-project-issue';
+import type SentryIssue from '../types/sentry-issue';
 import validateArray from './validate-array';
-import validateIssue from './validate-sentry-project-issue';
+import validateIssue from './validate-sentry-issue';
 
-export default function validateSentryProjectIssues(
+export default function validateSentryIssues(
   value: unknown,
   context: readonly string[] = EMPTY_ARRAY,
-): readonly SentryProjectIssue[] {
+): readonly SentryIssue[] {
   return validateArray(value, validateIssue, context);
 }

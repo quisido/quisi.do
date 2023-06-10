@@ -3,16 +3,15 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "deploy": "wrangler publish src/index.ts --name cloudflare-analytics",
+    "deploy": "wrangler publish src/index.ts --name cloudflare-analytics --outdir dist",
+    "deploy:dry-run": "wrangler publish src/index.ts --dry-run --name cloudflare-analytics --outdir dist",
     "dev": "wrangler dev --test-scheduled",
-    "dry-run": "wrangler publish src/index.ts --dry-run --name cloudflare-analytics --outdir dist",
     "init": "echo \"API token:\" && wrangler secret put API_TOKEN && echo \"Account tag:\" && wrangler secret put ACCOUNT_TAG && echo \"Zone tag:\" && wrangler secret put ZONE_TAG",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "prepack": "exit 0",
-    "prepublish": "jest && yarn run dry-run",
-    "tail": "wrangler tail --format pretty --ip self cloudflare-analytics",
-    "ts-jest:config:init": "ts-jest config:init"
+    "prepublish": "jest && yarn run deploy:dry-run",
+    "tail": "wrangler tail --format pretty --ip self cloudflare-analytics"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20230518.0",
