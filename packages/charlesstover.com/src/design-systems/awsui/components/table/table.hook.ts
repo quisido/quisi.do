@@ -14,7 +14,6 @@ import type ReadonlyTableSortingEvent from '../../../../types/readonly-awsui-tab
 import type TableColumn from '../../../../types/table-column';
 import type TableRowsPerPageOption from '../../../../types/table-rows-per-page-option';
 import useAriaLabels from './hooks/use-aria-labels';
-import useCountText from './hooks/use-count-text';
 import type AwsuiPaginationChangeHandler from './types/pagination-change-handler';
 import mapColumnToVisibleContentOption from './utils/map-column-to-visible-content-option';
 import mapColumnsToDefinitions from './utils/map-columns-to-definitions';
@@ -25,7 +24,6 @@ import mapSortingColumnToIndex from './utils/map-sorting-column-to-index';
 interface Props<Item> {
   readonly Description?: ComponentType<Item> | undefined;
   readonly columns: readonly TableColumn<Item>[];
-  readonly filter?: string | undefined;
   readonly onFilterChange?: ((filter: string) => void) | undefined;
   readonly onPageChange?: ((page: number) => void) | undefined;
   readonly onRowsPerPageChange?: ((rowsPerPage: number) => void) | undefined;
@@ -54,10 +52,7 @@ interface State<Item> {
   readonly contentDensity: 'comfortable' | 'compact';
   readonly contentDensityPreference: CollectionPreferencesProps.ContentDensityPreference;
   readonly contentDisplayPreference: CollectionPreferencesProps.ContentDisplayPreference;
-  readonly countText: string;
   readonly currentPageIndex: number;
-  readonly filteringAriaLabel: string | undefined;
-  readonly filteringText: string;
   readonly pagesCount: number;
   readonly paginationAriaLabels: PaginationProps.Labels;
   readonly preferences: CollectionPreferencesProps.Preferences;
@@ -72,15 +67,15 @@ interface State<Item> {
   readonly handleCollectionPreferencesConfirm: NonCancelableEventHandler<
     CollectionPreferencesProps.Preferences<void>
   >;
+  readonly handleFilterChange:
+    | NonCancelableEventHandler<TextFilterProps.ChangeDetail>
+    | undefined;
   readonly handlePaginationChange:
     | NonCancelableEventHandler<PaginationProps.ChangeDetail>
     | undefined;
   readonly handleSortingChange: (
     event: ReadonlyTableSortingEvent<Item>,
   ) => void;
-  readonly handleTextFilterChange:
-    | NonCancelableEventHandler<TextFilterProps.ChangeDetail>
-    | undefined;
   readonly pageSizePreference:
     | CollectionPreferencesProps.PageSizePreference
     | undefined;
@@ -95,7 +90,6 @@ const FIRST_PAGE = 1;
 export default function useAwsuiTable<Item extends object>({
   Description,
   columns,
-  filter,
   onFilterChange,
   onPageChange,
   onRowsPerPageChange,
@@ -179,10 +173,7 @@ export default function useAwsuiTable<Item extends object>({
     columnDisplay,
     confirmLabel: translate('Confirm') ?? '...',
     contentDensity,
-    countText: useCountText(rowsCount),
     currentPageIndex: page,
-    filteringAriaLabel: translate('Filter packages'), // TODO
-    filteringText: filter ?? '',
     pagesCount: Math.ceil(rowsCount / rowsPerPage),
     ref,
     sortingDescending: !sortAscending,
@@ -304,7 +295,7 @@ export default function useAwsuiTable<Item extends object>({
       [onSort],
     ),
 
-    handleTextFilterChange: useMemo(():
+    handleFilterChange: useMemo(():
       | NonCancelableEventHandler<TextFilterProps.ChangeDetail>
       | undefined => {
       if (typeof onFilterChange === 'undefined') {

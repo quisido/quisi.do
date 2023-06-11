@@ -1,46 +1,48 @@
-export default `
-{
-  cost
-  viewer {
-    accounts(
-      filter: {
-        accountTag: $accountTag
-      }
-    ) {
-      rumPerformanceEventsAdaptiveGroups(
+import GraphQLObjectQuery from '../utils/graphql-object-query';
+
+export default new GraphQLObjectQuery({
+  cost: true,
+  viewer: {
+    budget: true,
+    accounts: {
+      __params: {
         filter: {
-          datetime_gt: $datetime_gt
-        }
-        limit: 1
-        orderBy: [
-          avg_connectionTime_ASC
-        ]
-      ) {
-        quantiles {
-          loadEventTimeP50
-          loadEventTimeP75
-          loadEventTimeP90
-          loadEventTimeP99
-          pageLoadTimeP50
-          pageLoadTimeP75
-          pageLoadTimeP90
-          pageLoadTimeP99
-          pageRenderTimeP50
-          pageRenderTimeP75
-          pageRenderTimeP90
-          pageRenderTimeP99
-          requestTimeP50
-          requestTimeP75
-          requestTimeP90
-          requestTimeP99
-          responseTimeP50
-          responseTimeP75
-          responseTimeP90
-          responseTimeP99
-        }
-      }
-    }
-    budget
-  }
-}
-`;
+          accountTag: '$accountTag',
+        },
+      },
+
+      rumPerformanceEventsAdaptiveGroups: {
+        __params: {
+          limit: 1,
+          // orderBy: ['avg_connectionTime_ASC'],
+          filter: {
+            datetime_gt: '$datetime_gt',
+          },
+        },
+
+        quantiles: {
+          loadEventTimeP50: true,
+          loadEventTimeP75: true,
+          loadEventTimeP90: true,
+          loadEventTimeP99: true,
+          pageLoadTimeP50: true,
+          pageLoadTimeP75: true,
+          pageLoadTimeP90: true,
+          pageLoadTimeP99: true,
+          pageRenderTimeP50: true,
+          pageRenderTimeP75: true,
+          pageRenderTimeP90: true,
+          pageRenderTimeP99: true,
+          requestTimeP50: true,
+          requestTimeP75: true,
+          requestTimeP90: true,
+          requestTimeP99: true,
+          responseTimeP50: true,
+          responseTimeP75: true,
+          responseTimeP90: true,
+          responseTimeP99: true,
+        },
+      },
+    },
+  },
+}).toString();

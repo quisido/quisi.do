@@ -15,10 +15,20 @@ export default class GraphQLObjectQuery {
   }
 
   private mapEntryToLines = ([key, value]: Entry): readonly string[] => {
+    // true
+    if (value === true) {
+      return [key];
+    }
+
+    // false
+    if (value === false) {
+      return [];
+    }
+
     if (typeof value === 'object') {
       // null
       if (value === null) {
-        return [key];
+        return [];
       }
 
       // function

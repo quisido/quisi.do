@@ -1,11 +1,9 @@
 import GraphQLObjectQuery from '../utils/graphql-object-query';
 
 export default new GraphQLObjectQuery({
-  cost: null,
-
+  cost: true,
   viewer: {
-    budget: null,
-
+    budget: true,
     accounts: {
       __params: {
         filter: {
@@ -16,38 +14,37 @@ export default new GraphQLObjectQuery({
       workersInvocationsAdaptive: {
         __params: {
           limit: 1,
-          orderBy: ['avg_sampleInterval_ASC'],
-
+          // orderBy: ['avg_sampleInterval_ASC'],
           filter: {
             datetime_gt: '$datetime_gt',
           },
         },
 
         quantiles: {
-          cpuTimeP25: null,
-          cpuTimeP50: null,
-          cpuTimeP75: null,
-          cpuTimeP90: null,
-          cpuTimeP99: null,
-          cpuTimeP999: null,
-          durationP25: null,
-          durationP50: null,
-          durationP75: null,
-          durationP90: null,
-          durationP99: null,
-          durationP999: null,
-          responseBodySizeP25: null,
-          responseBodySizeP50: null,
-          responseBodySizeP75: null,
-          responseBodySizeP90: null,
-          responseBodySizeP99: null,
-          responseBodySizeP999: null,
-          wallTimeP25: null,
-          wallTimeP50: null,
-          wallTimeP75: null,
-          wallTimeP90: null,
-          wallTimeP99: null,
-          wallTimeP999: null,
+          cpuTimeP25: true,
+          cpuTimeP50: true,
+          cpuTimeP75: true,
+          cpuTimeP90: true,
+          cpuTimeP99: true,
+          cpuTimeP999: true,
+          durationP25: true,
+          durationP50: true,
+          durationP75: true,
+          durationP90: true,
+          durationP99: true,
+          durationP999: true,
+          responseBodySizeP25: true,
+          responseBodySizeP50: true,
+          responseBodySizeP75: true,
+          responseBodySizeP90: true,
+          responseBodySizeP99: true,
+          responseBodySizeP999: true,
+          wallTimeP25: true,
+          wallTimeP50: true,
+          wallTimeP75: true,
+          wallTimeP90: true,
+          wallTimeP99: true,
+          wallTimeP999: true,
         },
       },
     },

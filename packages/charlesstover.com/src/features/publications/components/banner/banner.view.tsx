@@ -3,7 +3,7 @@ import NumberFormat from 'number-format-react';
 import type { ReactElement } from 'react';
 import Chip from '../../../../components/chip';
 import Link from '../../../../components/link';
-import Minutes from '../../../../components/minutes';
+import Quantity from '../../../../components/quantity';
 import validateString from '../../../../utils/validate-string';
 import BannerImage from '../../components/banner-image';
 import styles from './banner.module.scss';
@@ -70,7 +70,7 @@ export default function PublicationBanner({
             className={readingTimeClassName}
             title={<I18n>Reading time</I18n>}
           >
-            <Minutes>{readingTime}</Minutes> ⏳
+            <Quantity unit="minutes">{readingTime}</Quantity> ⏳
           </Chip>
         )}
       </div>

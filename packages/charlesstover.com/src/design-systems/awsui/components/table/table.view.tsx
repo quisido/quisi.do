@@ -1,14 +1,12 @@
-import CollectionPreferences, {
-  CollectionPreferencesProps,
-} from '@awsui/components-react/collection-preferences';
+import type { CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
+import CollectionPreferences from '@awsui/components-react/collection-preferences';
 import Header from '@awsui/components-react/header';
 import Pagination from '@awsui/components-react/pagination';
 import type { TableProps } from '@awsui/components-react/table';
 import Table from '@awsui/components-react/table';
-import type { TextFilterProps } from '@awsui/components-react/text-filter';
-import TextFilter from '@awsui/components-react/text-filter';
 import type { ReactElement } from 'react';
 import type { Props } from '../../../../components/table';
+import Filter from './components/filter';
 import useTable from './table.hook';
 
 export default function AwsuiTable<Item extends object>({
@@ -44,14 +42,11 @@ export default function AwsuiTable<Item extends object>({
     confirmLabel,
     contentDensityPreference,
     // contentDisplayPreference,
-    countText,
     currentPageIndex,
-    filteringAriaLabel,
-    filteringText,
     handleCollectionPreferencesConfirm,
+    handleFilterChange,
     handlePaginationChange,
     handleSortingChange,
-    handleTextFilterChange,
     pageSizePreference,
     pagesCount,
     paginationAriaLabels,
@@ -68,7 +63,6 @@ export default function AwsuiTable<Item extends object>({
   } = useTable({
     Description,
     columns,
-    filter,
     onFilterChange,
     onPageChange,
     onRowsPerPageChange,
@@ -122,11 +116,6 @@ export default function AwsuiTable<Item extends object>({
     tableProps.wrapLines = wrapLines;
   }
 
-  const textFilterProps: Pick<TextFilterProps, 'filteringAriaLabel'> = {};
-  if (typeof filteringAriaLabel !== 'undefined') {
-    textFilterProps.filteringAriaLabel = filteringAriaLabel;
-  }
-
   // Technical debt: We need a `trackBy` prop to uniquely identify the row, but
   //   AWSUI's reliance on this prop is a poor practice unique to AWSUI, and not
   //   something we want to make a part of the `Table` abstraction.
@@ -147,15 +136,13 @@ export default function AwsuiTable<Item extends object>({
         stripedRows={stripedRows}
         {...tableProps}
         filter={
-          typeof handleTextFilterChange !== 'undefined' && (
-            <TextFilter
-              countText={countText}
-              filteringPlaceholder={filterPlaceholder ?? '...'}
-              filteringText={filteringText}
-              onChange={handleTextFilterChange}
-              {...textFilterProps}
-            />
-          )
+          <Filter
+            onChange={handleFilterChange}
+            placeholder={filterPlaceholder}
+            rowsCount={rowsCount}
+          >
+            {filter}
+          </Filter>
         }
         pagination={
           typeof handlePaginationChange !== 'undefined' && (

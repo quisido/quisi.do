@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
 import { ReactElement } from 'react';
-import round from '../../utils/round';
+import round from '../../../../utils/round';
 import Milliseconds from '../milliseconds';
 
 interface Props {
@@ -8,23 +8,24 @@ interface Props {
   readonly decimals?: number | undefined;
 }
 
-const MICROSECONDS_PER_MILLISECOND = 1000;
+const MILLISECONDS_PER_SECOND = 1000;
+const SINGLE = 1;
 
-export default function Microseconds({
+export default function Seconds({
   children,
   decimals,
 }: Readonly<Props>): ReactElement {
-  if (children >= MICROSECONDS_PER_MILLISECOND) {
+  if (children < SINGLE) {
     return (
       <Milliseconds decimals={decimals}>
-        {children / MICROSECONDS_PER_MILLISECOND}
+        {children * MILLISECONDS_PER_SECOND}
       </Milliseconds>
     );
   }
 
   if (typeof decimals === 'undefined') {
-    return <I18n microseconds={children}>$microseconds μs</I18n>;
+    return <I18n seconds={children}>$seconds s</I18n>;
   }
 
-  return <I18n microseconds={round(children, decimals)}>$microseconds μs</I18n>;
+  return <I18n seconds={round(children, decimals)}>$seconds s</I18n>;
 }
