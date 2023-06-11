@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
-import { ReactElement } from 'react';
-import round from '../../utils/round';
+import type { ReactElement } from 'react';
+import round from '../../../../utils/round';
 import Microseconds from '../microseconds';
 import Seconds from '../seconds';
 

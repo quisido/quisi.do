@@ -1,35 +1,29 @@
-import type { TranslateFunction } from 'lazy-i18n';
-import I18n, { useTranslate } from 'lazy-i18n';
+import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Container from '../../../../components/container';
 import Div from '../../../../components/div';
-import Table from '../../../../components/table';
+import Quantity from '../../../../components/quantity';
 import withAsync from '../../../../hocs/with-async';
 import type Datasets from '../../../../types/cloudflare-analytics-datasets';
-import createIndexArray from '../../../../utils/create-index-array';
-import ANALYTICS_COLUMNS from './constants/analytics-columns';
-import type CloudflareAnalytic from '../../types/cloudflare-analytic';
 import ErrorView from './components/error';
 import Loading from './components/loading';
 import Uninitiated from './components/uninitiated';
+import WebAnalytics from './components/web-analytics/web-analytics.view';
 import WorkersInvocations from './components/workers-invocations';
 import mapBudgetToPercentage from './utils/map-budget-to-percentage';
-import useTableSort from '../../../../hooks/use-table-sort';
+import SampleInterval from './components/sample-interval/sample-interval.view';
 
 interface Props {
   readonly budget: number;
   readonly datasets: Datasets;
 }
 
-const COLUMNS_LENGTH: number = ANALYTICS_COLUMNS.length;
-const VISIBLE_COLUMN_INDICES: readonly number[] =
-  createIndexArray(COLUMNS_LENGTH);
-
 function CloudflareAnalytics({
   budget,
   datasets,
 }: Readonly<Props>): ReactElement {
   const {
+    httpRequests1hGroups,
     rumPageloadEventsAdaptiveGroups,
     rumPerformanceEventsAdaptiveGroups,
     workersAnalyticsEngineAdaptiveGroups,
@@ -37,8 +31,6 @@ function CloudflareAnalytics({
   } = datasets;
 
   // States
-  const translate: TranslateFunction = useTranslate();
-  const { ascending, columnIndex, handleSort } = useTableSort();
   // const sortColumn: TableColumn<CloudflareAnalytic> | undefined =
   //   CLOUDFLARE_ANALYTICS_COLUMNS[columnIndex];
   // if (typeof sortColumn !== 'undefined') {
@@ -53,122 +45,45 @@ function CloudflareAnalytics({
     <>
       <Container header={<I18n>Cloudflare analytics</I18n>} marginTop="large">
         <Div element="p">
-          Remaining budget: {mapBudgetToPercentage(budget)}%
+          <strong>Remaining budget:</strong> {mapBudgetToPercentage(budget)}%
         </Div>
-        <Div>
-          RUM pageload events - sum of visits:{' '}
-          {rumPageloadEventsAdaptiveGroups.visits_sum}
+
+        <Div element="p">
+          <strong>HTTP requests:</strong>{' '}
+          <Quantity decimals={2} unit="bytes">
+            {httpRequests1hGroups.bytes_sum}
+          </Quantity>{' '}
+          bytes,{' '}
+          <Quantity decimals={2} unit="bytes">
+            {httpRequests1hGroups.cachedBytes_sum}
+          </Quantity>{' '}
+          cached bytes, {httpRequests1hGroups.cachedRequests_sum} cached
+          requests,{' '}
+          <Quantity decimals={2} unit="bytes">
+            {httpRequests1hGroups.encryptedBytes_sum}
+          </Quantity>{' '}
+          encrypted bytes, {httpRequests1hGroups.encryptedRequests_sum}{' '}
+          encrypted requests, {httpRequests1hGroups.pageViews_sum} page views,{' '}
+          {httpRequests1hGroups.requests_sum} requests,{' '}
+          {httpRequests1hGroups.threats_sum} threats,{' '}
+          {httpRequests1hGroups.uniques_uniq} unique visitors
         </Div>
-        <Div>
-          RUM performance events - count:{' '}
-          {rumPerformanceEventsAdaptiveGroups.count}
+
+        <Div element="p">
+          <strong>RUM pageload events:</strong>{' '}
+          {rumPageloadEventsAdaptiveGroups.count} events,{' '}
+          <SampleInterval>
+            {rumPageloadEventsAdaptiveGroups.sampleInterval_avg}
+          </SampleInterval>
+          , {rumPageloadEventsAdaptiveGroups.visits_sum} visits
         </Div>
-        <Div>
-          RUM performance events - average sample interval:{' '}
-          {rumPerformanceEventsAdaptiveGroups.sampleInterval_avg}
-        </Div>
-        <Div>
-          RUM performance events - sum of visits:{' '}
-          {rumPerformanceEventsAdaptiveGroups.visits_sum}
-        </Div>
-        <Div>
-          Workers analytics engine - count:{' '}
+
+        <Div element="p">
+          <strong>Workers analytics engine:</strong>{' '}
           {workersAnalyticsEngineAdaptiveGroups.count}
         </Div>
       </Container>
-      <Table<CloudflareAnalytic>
-        columns={ANALYTICS_COLUMNS}
-        header={<I18n>Cloudflare Web Analytics</I18n>}
-        onSort={handleSort}
-        rows={[
-          {
-            avg: rumPerformanceEventsAdaptiveGroups.connectionTime_avg,
-            name: translate('User connection time') ?? '...',
-            p50: rumPerformanceEventsAdaptiveGroups.connectionTimeP50,
-            p75: rumPerformanceEventsAdaptiveGroups.connectionTimeP75,
-            p90: rumPerformanceEventsAdaptiveGroups.connectionTimeP90,
-            p99: rumPerformanceEventsAdaptiveGroups.connectionTimeP99,
-            unit: 'milliseconds',
-          },
-          {
-            avg: rumPerformanceEventsAdaptiveGroups.dnsTime_avg,
-            name: translate('User DNS time') ?? '...',
-            p50: rumPerformanceEventsAdaptiveGroups.dnsTimeP50,
-            p75: rumPerformanceEventsAdaptiveGroups.dnsTimeP75,
-            p90: rumPerformanceEventsAdaptiveGroups.dnsTimeP90,
-            p99: rumPerformanceEventsAdaptiveGroups.dnsTimeP99,
-            unit: 'microseconds',
-          },
-          {
-            avg: rumPerformanceEventsAdaptiveGroups.firstContentfulPaint_avg,
-            name: translate('First contentful paint') ?? '...',
-            p50: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP50,
-            p75: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP75,
-            p90: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP90,
-            p99: rumPerformanceEventsAdaptiveGroups.firstContentfulPaintP99,
-            unit: 'microseconds',
-          },
-          {
-            avg: rumPerformanceEventsAdaptiveGroups.firstPaint_avg,
-            name: translate('First paint') ?? '...',
-            p50: rumPerformanceEventsAdaptiveGroups.firstPaintP50,
-            p75: rumPerformanceEventsAdaptiveGroups.firstPaintP75,
-            p90: rumPerformanceEventsAdaptiveGroups.firstPaintP90,
-            p99: rumPerformanceEventsAdaptiveGroups.firstPaintP99,
-            unit: 'microseconds',
-          },
-          {
-            avg: rumPerformanceEventsAdaptiveGroups.loadEventTime_avg,
-            name: translate('Load event time') ?? '...',
-            p50: rumPerformanceEventsAdaptiveGroups.loadEventTimeP50,
-            p75: rumPerformanceEventsAdaptiveGroups.loadEventTimeP75,
-            p90: rumPerformanceEventsAdaptiveGroups.loadEventTimeP90,
-            p99: rumPerformanceEventsAdaptiveGroups.loadEventTimeP99,
-            unit: 'milliseconds',
-          },
-          {
-            avg: rumPerformanceEventsAdaptiveGroups.pageLoadTime_avg,
-            name: translate('Page load time') ?? '...',
-            p50: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP50,
-            p75: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP75,
-            p90: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP90,
-            p99: rumPerformanceEventsAdaptiveGroups.pageLoadTimeP99,
-            unit: 'microseconds',
-          },
-          {
-            avg: rumPerformanceEventsAdaptiveGroups.pageRenderTime_avg,
-            name: translate('Page render time') ?? '...',
-            p50: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP50,
-            p75: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP75,
-            p90: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP90,
-            p99: rumPerformanceEventsAdaptiveGroups.pageRenderTimeP99,
-            unit: 'microseconds',
-          },
-          {
-            avg: rumPerformanceEventsAdaptiveGroups.requestTime_avg,
-            name: translate('Request time') ?? '...',
-            p50: rumPerformanceEventsAdaptiveGroups.requestTimeP50,
-            p75: rumPerformanceEventsAdaptiveGroups.requestTimeP75,
-            p90: rumPerformanceEventsAdaptiveGroups.requestTimeP90,
-            p99: rumPerformanceEventsAdaptiveGroups.requestTimeP99,
-            unit: 'microseconds',
-          },
-          {
-            avg: rumPerformanceEventsAdaptiveGroups.responseTime_avg,
-            name: translate('Response time') ?? '...',
-            p50: rumPerformanceEventsAdaptiveGroups.responseTimeP50,
-            p75: rumPerformanceEventsAdaptiveGroups.responseTimeP75,
-            p90: rumPerformanceEventsAdaptiveGroups.responseTimeP90,
-            p99: rumPerformanceEventsAdaptiveGroups.responseTimeP99,
-            unit: 'milliseconds',
-          },
-        ]}
-        rowsCount={1}
-        rowsPerPage={1}
-        sortAscending={ascending}
-        sortColumnIndex={columnIndex}
-        visibleColumnIndices={VISIBLE_COLUMN_INDICES}
-      />
+      <WebAnalytics>{rumPerformanceEventsAdaptiveGroups}</WebAnalytics>
       <WorkersInvocations>{workersInvocationsAdaptive}</WorkersInvocations>
     </>
   );

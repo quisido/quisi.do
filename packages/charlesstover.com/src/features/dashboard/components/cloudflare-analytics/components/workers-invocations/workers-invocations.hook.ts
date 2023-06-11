@@ -1,10 +1,11 @@
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
-import type Invocations from '../../../../../../types/cloudflare-workers-invocations';
-import type Analytic from '../../../../types/cloudflare-analytic';
 import { useMemo } from 'react';
 import useTableSort from '../../../../../../hooks/use-table-sort';
+import type Invocations from '../../../../../../types/cloudflare-workers-invocations';
 import round from '../../../../../../utils/round';
+import type Analytic from '../../types/workers-invocations-analytic';
+import mapSampleIntervalToRate from '../../map-sample-interval-to-rate';
 
 interface State {
   readonly handleSort: (columnIndex: number, ascending: boolean) => void;
@@ -16,7 +17,6 @@ interface State {
 
 const DECIMALS = 2;
 const PERCENT = 100;
-const SAMPLE_SIZE = 1;
 
 export default function useWorkersInvocations({
   cpuTime_max,
@@ -59,13 +59,10 @@ export default function useWorkersInvocations({
   wallTimeP99,
   wallTimeP999,
 }: Readonly<Invocations>): State {
+  const sampleRate: number = mapSampleIntervalToRate(sampleInterval_avg);
+
   const errorRate: number = round(
     (errors_sum / requests_sum) * PERCENT,
-    DECIMALS,
-  );
-
-  const sampleRate: number = round(
-    (SAMPLE_SIZE / sampleInterval_avg) * PERCENT,
     DECIMALS,
   );
 

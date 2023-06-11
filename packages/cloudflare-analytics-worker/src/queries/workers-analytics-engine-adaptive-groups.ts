@@ -1,11 +1,9 @@
 import GraphQLObjectQuery from '../utils/graphql-object-query';
 
 export default new GraphQLObjectQuery({
-  cost: null,
-
+  cost: true,
   viewer: {
-    budget: null,
-
+    budget: true,
     accounts: {
       __params: {
         filter: {
@@ -14,17 +12,14 @@ export default new GraphQLObjectQuery({
       },
 
       workersAnalyticsEngineAdaptiveGroups: {
+        count: true,
         __params: {
           limit: 1,
-
+          // orderBy: ['count_ASC'],
           filter: {
             datetime_gt: '$datetime_gt',
           },
-
-          orderBy: ['count_ASC'],
         },
-
-        count: null,
       },
     },
   },

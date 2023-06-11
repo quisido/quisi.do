@@ -1,10 +1,10 @@
 import GraphQLObjectQuery from '../utils/graphql-object-query';
 
 export default new GraphQLObjectQuery({
-  cost: null,
+  cost: true,
 
   viewer: {
-    budget: null,
+    budget: true,
 
     accounts: {
       __params: {
@@ -16,37 +16,37 @@ export default new GraphQLObjectQuery({
       workersInvocationsAdaptive: {
         __params: {
           limit: 1,
+          // orderBy: ['avg_sampleInterval_ASC'],
           filter: {
             datetime_gt: '$datetime_gt',
           },
-          orderBy: ['avg_sampleInterval_ASC'],
         },
 
         avg: {
-          sampleInterval: null,
+          sampleInterval: true,
         },
 
         max: {
-          cpuTime: null,
-          duration: null,
-          responseBodySize: null,
-          wallTime: null,
+          cpuTime: true,
+          duration: true,
+          responseBodySize: true,
+          wallTime: true,
         },
 
         min: {
-          cpuTime: null,
-          duration: null,
-          responseBodySize: null,
-          wallTime: null,
+          cpuTime: true,
+          duration: true,
+          responseBodySize: true,
+          wallTime: true,
         },
 
         sum: {
-          duration: null,
-          errors: null,
-          requests: null,
-          responseBodySize: null,
-          subrequests: null,
-          wallTime: null,
+          duration: true,
+          errors: true,
+          requests: true,
+          responseBodySize: true,
+          subrequests: true,
+          wallTime: true,
         },
       },
     },

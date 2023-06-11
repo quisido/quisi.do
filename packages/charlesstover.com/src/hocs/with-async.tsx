@@ -1,4 +1,5 @@
-import { ComponentType, ReactElement } from 'react';
+import type { ComponentType, ReactElement } from 'react';
+import type Optional from '../types/optional';
 
 interface AsyncProps {
   readonly error?: string | undefined;
@@ -9,10 +10,6 @@ interface AsyncProps {
 interface ErrorProps {
   readonly children: string;
 }
-
-type Optional<T> = {
-  [K in keyof T]?: T[K] | undefined;
-};
 
 export default function withAsync<T extends object>(
   UninitiatedComponent: ComponentType,

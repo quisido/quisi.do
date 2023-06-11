@@ -1,7 +1,7 @@
 import type TableColumn from '../../../../../types/table-column';
 import mapKeyToNumberSort from '../../../../../utils/map-key-to-number-sort';
 import mapKeyToStringSort from '../../../../../utils/map-key-to-string-sort';
-import type CloudflareAnalytic from '../../../types/cloudflare-analytic';
+import type Analytic from '../types/web-analytic';
 import mapKeyToColumnCell from '../utils/map-key-to-column-cell';
 
 export default [
@@ -11,14 +11,9 @@ export default [
     sort: mapKeyToStringSort('name'),
   },
   {
-    CellContent: mapKeyToColumnCell('min'),
-    header: 'Minimum',
-    sort: mapKeyToNumberSort('min'),
-  },
-  {
-    CellContent: mapKeyToColumnCell('p25'),
-    header: 'P25',
-    sort: mapKeyToNumberSort('p25'),
+    CellContent: mapKeyToColumnCell('avg'),
+    header: 'Average',
+    sort: mapKeyToNumberSort('avg'),
   },
   {
     CellContent: mapKeyToColumnCell('p50'),
@@ -40,19 +35,4 @@ export default [
     header: 'P99',
     sort: mapKeyToNumberSort('p99'),
   },
-  {
-    CellContent: mapKeyToColumnCell('p999'),
-    header: 'P99.9',
-    sort: mapKeyToNumberSort('p999'),
-  },
-  {
-    CellContent: mapKeyToColumnCell('max'),
-    header: 'Maximum',
-    sort: mapKeyToNumberSort('max'),
-  },
-  {
-    CellContent: mapKeyToColumnCell('sum'),
-    header: 'Sum',
-    sort: mapKeyToNumberSort('sum'),
-  },
-] satisfies readonly TableColumn<CloudflareAnalytic>[];
+] satisfies readonly TableColumn<Analytic>[];

@@ -1,11 +1,9 @@
 import GraphQLObjectQuery from '../utils/graphql-object-query';
 
 export default new GraphQLObjectQuery({
-  cost: null,
-
+  cost: true,
   viewer: {
-    budget: null,
-
+    budget: true,
     zones: {
       __params: {
         filter: {
@@ -29,62 +27,62 @@ export default new GraphQLObjectQuery({
         */
 
         sum: {
-          bytes: null,
-          cachedBytes: null,
-          cachedRequests: null,
-          encryptedBytes: null,
-          encryptedRequests: null,
-          pageViews: null,
-          requests: null,
-          threats: null,
+          bytes: true,
+          cachedBytes: true,
+          cachedRequests: true,
+          encryptedBytes: true,
+          encryptedRequests: true,
+          pageViews: true,
+          requests: true,
+          threats: true,
 
           /*
           browserMap: {
             key: 'uaBrowserFamily',
-            pageViews: null,
+            pageViews: true,
           },
           */
 
           clientSSLMap: {
             key: 'clientSSLProtocol',
-            requests: null,
+            requests: true,
           },
 
           /*
           contentTypeMap: {
-            bytes: null,
+            bytes: true,
             key: 'edgeResponseContentTypeName',
-            requests: null,
+            requests: true,
           },
           */
 
           countryMap: {
-            bytes: null,
+            bytes: true,
             key: 'clientCountryName',
-            requests: null,
-            threats: null,
+            requests: true,
+            threats: true,
           },
 
           /*
           ipClassMap: {
             key: 'ipType',
-            requests: null,
+            requests: true,
           },
           */
 
           responseStatusMap: {
             key: 'edgeResponseStatus',
-            requests: null,
+            requests: true,
           },
 
           threatPathingMap: {
             key: 'threatPathingName',
-            requests: null,
+            requests: true,
           },
         },
 
         uniq: {
-          uniques: null,
+          uniques: true,
         },
       },
     },

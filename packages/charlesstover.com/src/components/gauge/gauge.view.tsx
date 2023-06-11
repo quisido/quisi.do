@@ -67,6 +67,7 @@ export default function Gauge({
     return maxLength * LEGEND_FONT_SIZE;
   }, [units, values]);
 
+  const width: number = size + legendWidth;
   return (
     <RadialBarChart
       cx={size * HALF + legendWidth}
@@ -77,7 +78,7 @@ export default function Gauge({
       innerRadius={0}
       outerRadius={size * HALF}
       startAngle={180}
-      width={size + legendWidth}
+      width={width}
     >
       <RadialBar dataKey="value">
         <Cell fill="transparent" />

@@ -6,7 +6,7 @@ import DesignSystem from '../design-system';
 export interface Props<Item extends object> {
   readonly Description?: ComponentType<Item> | undefined;
   readonly columns: readonly Column<Item>[];
-  readonly filter?: string;
+  readonly filter?: string | undefined;
   readonly filterPlaceholder?: string | undefined;
   readonly header?: ReactNode | undefined;
   readonly loading?: string | undefined;
