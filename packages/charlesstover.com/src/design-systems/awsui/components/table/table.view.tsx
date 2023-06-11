@@ -30,6 +30,7 @@ export default function AwsuiTable<Item extends object>({
   rowsPerPageOptions,
   sortAscending,
   sortColumnIndex,
+  subheader,
   visibleColumnIndices,
 }: Readonly<Props<Item>>): ReactElement {
   const {
@@ -137,7 +138,7 @@ export default function AwsuiTable<Item extends object>({
         columnDefinitions={columnDefinitions}
         // columnDisplay={columnDisplay}
         contentDensity={contentDensity}
-        header={<Header>{header}</Header>}
+        header={<Header description={subheader}>{header}</Header>}
         items={rows}
         loading={typeof loading !== 'undefined'}
         onSortingChange={handleSortingChange}

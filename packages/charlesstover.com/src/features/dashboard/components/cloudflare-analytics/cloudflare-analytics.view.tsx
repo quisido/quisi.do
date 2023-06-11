@@ -22,7 +22,6 @@ interface Props {
 }
 
 const COLUMNS_LENGTH: number = ANALYTICS_COLUMNS.length;
-const PERCENT = 100;
 const VISIBLE_COLUMN_INDICES: readonly number[] =
   createIndexArray(COLUMNS_LENGTH);
 
@@ -75,26 +74,6 @@ function CloudflareAnalytics({
         <Div>
           Workers analytics engine - count:{' '}
           {workersAnalyticsEngineAdaptiveGroups.count}
-        </Div>
-        <Div>
-          Workers invocations - sum of errors:{' '}
-          {workersInvocationsAdaptive.errors_sum} (
-          {(workersInvocationsAdaptive.errors_sum /
-            workersInvocationsAdaptive.requests_sum) *
-            PERCENT}
-          %)
-        </Div>
-        <Div>
-          Workers invocations - sum of requests:{' '}
-          {workersInvocationsAdaptive.requests_sum}
-        </Div>
-        <Div>
-          Workers invocations - average sample interval:{' '}
-          {workersInvocationsAdaptive.sampleInterval_avg}
-        </Div>
-        <Div>
-          Workers invocations - sum of subrequests:{' '}
-          {workersInvocationsAdaptive.subrequests_sum}
         </Div>
       </Container>
       <Table<CloudflareAnalytic>

@@ -19,6 +19,7 @@ import Span from '../span';
 import EmptyRows from './components/empty-rows';
 import HeadCell from './components/head-cell';
 import Row from './components/row';
+import Subheader from './components/subheader';
 import useTable from './table.hook';
 
 const FIRST_PAGE = 1;
@@ -48,6 +49,7 @@ export default function MuiTable<Item extends object>({
   rowsPerPageOptions: rowsPerPageOptionsProp,
   sortAscending,
   sortColumnIndex,
+  subheader,
 }: Readonly<Props<Item>>): ReactElement {
   const {
     backIconButtonProps,
@@ -87,10 +89,17 @@ export default function MuiTable<Item extends object>({
     <>
       {showToolbar && (
         <Toolbar variant="dense">
-          <Div display="flex" flexDirection="column" textAlign="left">
+          <Div
+            display="flex"
+            flexDirection="column"
+            marginBottom="small"
+            marginTop="medium"
+            textAlign="left"
+          >
             <Typography component="div" variant="h6">
               {header}
             </Typography>
+            <Subheader>{subheader}</Subheader>
           </Div>
         </Toolbar>
       )}
