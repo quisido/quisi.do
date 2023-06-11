@@ -1,9 +1,7 @@
 import type { FunctionComponent, ReactElement } from 'react';
-import Bytes from '../../../../../components/bytes';
-import Microseconds from '../../../../../components/microseconds';
-import Milliseconds from '../../../../../components/milliseconds';
-import Seconds from '../../../../../components/seconds';
+import Div from '../../../../../components/div';
 import type Analytic from '../../../types/cloudflare-analytic';
+import Quantity from '../components/quantity/quantity.view';
 
 const NONE = 0;
 
@@ -22,17 +20,10 @@ export default function mapCloudflareAnalyticKeyToColumnCell(
       return null;
     }
 
-    switch (unit) {
-      case 'bytes':
-        return <Bytes decimals={2}>{value}</Bytes>;
-      case 'microseconds':
-        return <Microseconds decimals={2}>{value}</Microseconds>;
-      case 'milliseconds':
-        return <Milliseconds decimals={2}>{value}</Milliseconds>;
-      case 'seconds':
-        return <Seconds decimals={2}>{value}</Seconds>;
-      default:
-        return <>{value}</>;
-    }
+    return (
+      <Div display="flex" flexDirection="row">
+        <Quantity unit={unit}>{value}</Quantity>
+      </Div>
+    );
   };
 }

@@ -8,7 +8,7 @@ export interface Props<Item extends object> {
   readonly columns: readonly Column<Item>[];
   readonly filter?: string;
   readonly filterPlaceholder?: string | undefined;
-  readonly header?: ReactNode;
+  readonly header?: ReactNode | undefined;
   readonly loading?: string | undefined;
   readonly onFilterChange?: ((filter: string) => void) | undefined;
   readonly onPageChange?: ((page: number) => void) | undefined;
@@ -21,6 +21,7 @@ export interface Props<Item extends object> {
   readonly rowsPerPageOptions?: readonly RowsPerPageOption[] | undefined;
   readonly sortAscending: boolean;
   readonly sortColumnIndex?: number | undefined;
+  readonly subheader?: ReactNode | undefined;
   readonly visibleColumnIndices?: readonly number[] | undefined;
   readonly onVisibleColumnsChange?:
     | ((visibleColumnIndices: readonly number[]) => void)

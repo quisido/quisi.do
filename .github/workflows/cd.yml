@@ -28,7 +28,36 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-  # Stage 2: prepack, prepublish-only
+  # Stage 2: eslint, prepack, test
+  eslint:
+    name: ESLint
+    needs: install
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Lint
+        run: yarn run eslint
+
   prepack:
     name: Prepack
     needs: install
@@ -69,9 +98,8 @@ jobs:
             packages/*/build/
             packages/*/dist/
 
-  # Run tests against the root directory.
-  prepublish-only:
-    name: Prepublish only
+  test:
+    name: Test
     needs: install
     runs-on: ubuntu-latest
     env:
@@ -96,8 +124,8 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable
-      - name: Prepublish only
-        run: yarn run prepublishOnly
+      - name: Lint
+        run: yarn run test
 
   # Stage 3: cypress, lighthouse, npm, opensource-registry,
   #          prepublish-applications
@@ -227,7 +255,7 @@ jobs:
 
   npm:
     name: NPM
-    needs: [prepack, prepublish-only]
+    needs: [eslint, prepack, test]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -270,7 +298,7 @@ jobs:
 
   opensource-registry:
     name: OpenSource registry
-    needs: [prepack, prepublish-only]
+    needs: [eslint, prepack, test]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci

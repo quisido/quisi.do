@@ -29,7 +29,6 @@
     "lighthouse": "yarn packages/charlesstover.com run lighthouse",
     "prepack": "yarn workspaces foreach --parallel --topological-dev run prepack",
     "prepublish": "concurrently --kill-others-on-fail --names eslint,prepublish,test \"yarn run eslint\" \"yarn workspaces foreach --interlaced --parallel --topological-dev --verbose run prepublish\" \"yarn run test\"",
-    "prepublishOnly": "concurrently --kill-others-on-fail --names eslint,test \"yarn run eslint\" \"yarn run test\"",
     "publish": "yarn workspaces foreach --no-private --parallel --topological-dev --verbose npm publish --tolerate-republish",
     "serve": "yarn packages/charlesstover.com run serve",
     "start": "concurrently --kill-others --kill-others-on-fail --names aws-rum-react,charlesstover.com,cloudflare-analytics,react-datadog \"yarn packages/aws-rum-react run rollup:watch\" \"yarn packages/charlesstover.com run start\" \"yarn packages/cloudflare-analytics-worker run dev\" \"yarn packages/react-datadog run rollup:watch\"",

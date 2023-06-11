@@ -4,13 +4,19 @@ import type Invocations from '../../../../../../types/cloudflare-workers-invocat
 import type Analytic from '../../../../types/cloudflare-analytic';
 import { useMemo } from 'react';
 import useTableSort from '../../../../../../hooks/use-table-sort';
+import round from '../../../../../../utils/round';
 
 interface State {
   readonly handleSort: (columnIndex: number, ascending: boolean) => void;
   readonly rows: readonly Analytic[];
   readonly sortAscending: boolean;
   readonly sortColumnIndex: number;
+  readonly subheader: string;
 }
+
+const DECIMALS = 2;
+const PERCENT = 100;
+const SAMPLE_SIZE = 1;
 
 export default function useWorkersInvocations({
   cpuTime_max,
@@ -30,7 +36,8 @@ export default function useWorkersInvocations({
   durationP90,
   durationP99,
   durationP999,
-  // requests_sum,
+  errors_sum,
+  requests_sum,
   responseBodySize_max,
   responseBodySize_min,
   responseBodySize_sum,
@@ -40,6 +47,8 @@ export default function useWorkersInvocations({
   responseBodySizeP90,
   responseBodySizeP99,
   responseBodySizeP999,
+  sampleInterval_avg,
+  subrequests_sum,
   wallTime_max,
   wallTime_min,
   wallTime_sum,
@@ -49,7 +58,17 @@ export default function useWorkersInvocations({
   wallTimeP90,
   wallTimeP99,
   wallTimeP999,
-}: Invocations): State {
+}: Readonly<Invocations>): State {
+  const errorRate: number = round(
+    (errors_sum / requests_sum) * PERCENT,
+    DECIMALS,
+  );
+
+  const sampleRate: number = round(
+    (SAMPLE_SIZE / sampleInterval_avg) * PERCENT,
+    DECIMALS,
+  );
+
   // Contexts
   const translate: TranslateFunction = useTranslate();
 
@@ -64,6 +83,13 @@ export default function useWorkersInvocations({
     handleSort,
     sortAscending,
     sortColumnIndex,
+    subheader: [
+      `${errorRate}% error rate`,
+      `${errors_sum} errors`,
+      `${requests_sum} requests`,
+      `${sampleRate}% sample rate`,
+      `${subrequests_sum} subrequests`,
+    ].join(' • '),
 
     rows: useMemo(
       (): readonly Analytic[] => [

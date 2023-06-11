@@ -33,6 +33,7 @@ export default function CloudscapeTable<Item extends object>({
   rowsPerPageOptions,
   sortAscending,
   sortColumnIndex,
+  subheader,
   visibleColumnIndices,
 }: Readonly<Props<Item>>): ReactElement {
   const {
@@ -136,7 +137,7 @@ export default function CloudscapeTable<Item extends object>({
     <div className={rootClassName} ref={ref}>
       <Table<Item>
         columnDefinitions={columnDefinitions}
-        header={<Header>{header}</Header>}
+        header={<Header description={subheader}>{header}</Header>}
         items={rows}
         loading={typeof loading !== 'undefined'}
         onSortingChange={handleSortingChange}
