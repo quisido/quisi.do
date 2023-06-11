@@ -1,1 +1,1 @@
-export { default } from './spritesheet2gif.view';
+export { default } from './spritesheet2gif.hoc';

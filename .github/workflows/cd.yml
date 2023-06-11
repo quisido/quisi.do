@@ -345,7 +345,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: prepublish
+          name: prepublish-applications
           path: packages/*/jest/
 
   # Stage 4: coverage, github-packages
@@ -375,7 +375,7 @@ jobs:
       - name: Download prepublish artifacts
         uses: actions/download-artifact@v3
         with:
-          name: prepublish
+          name: prepublish-applications
           path: packages/
       - name: Setup Node
         uses: actions/setup-node@v3

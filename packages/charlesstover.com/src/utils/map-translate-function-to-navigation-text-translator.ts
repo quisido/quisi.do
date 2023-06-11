@@ -44,8 +44,8 @@ export default function mapTranslateFunctionToNavigationTextTranslator(
         return translate('RPG overworld engine');
       case NavigationText.Settings:
         return translate('Settings');
-      case NavigationText.Spritesheet2Gif:
-        return translate('Sprite sheet to GIF');
+      case NavigationText.SpriteSheet2Gif:
+        return 'Sprite sheet to GIF';
       case NavigationText.Tetris3DS:
         return '3DS Tetris';
       case NavigationText.Twitter:

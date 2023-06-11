@@ -17,7 +17,7 @@ enum NavigationText {
   Quotes = 'quotes',
   RPGOverworldEngine = 'rpg-overworld-engine',
   Settings = 'settings',
-  Spritesheet2Gif = 'spritesheet2gif',
+  SpriteSheet2Gif = 'spritesheet2gif',
   Tetris3DS = '3ds-tetris',
   Twitter = 'twitter',
 }
