@@ -22,11 +22,19 @@ export default function SpriteSheet2Gif(): ReactElement {
       </Div>
       <Div element="p">
         If you want to replicate the sprite sheet to GIF converter, you can find{' '}
-        <Link href="https://github.com/CharlesStover/spritesheet2gif-api/">
+        <Link
+          category="features/spritesheet2gif"
+          href="https://github.com/CharlesStover/spritesheet2gif-api/"
+          title="CharlesStover/spritesheet2gif-api: a back end API for converting sprite sheets to GIFs"
+        >
           the original source code on GitHub
         </Link>{' '}
         and{' '}
-        <Link href="https://hub.docker.com/r/charlesstover/spritesheet2gif-api">
+        <Link
+          category="features/spritesheet2gif"
+          href="https://hub.docker.com/r/charlesstover/spritesheet2gif-api"
+          title="charlesstover/spritesheet2gif-api - Docker Image | DockerHub"
+        >
           the Docker image on DockerHub
         </Link>
         .

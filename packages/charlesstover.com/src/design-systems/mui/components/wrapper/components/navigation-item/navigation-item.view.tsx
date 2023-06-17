@@ -55,6 +55,7 @@ export default function WrapperMuiNavigationItem({
     );
   }
 
+  // External link
   if (filterNavigationByExternalLink(item)) {
     const { text, url } = item;
     return <ExternalLinkItem depth={depth} text={text} url={url} />;

@@ -26,6 +26,7 @@ The App root component mounts context providers for the whole application.
 
 interface Props {
   readonly cloudWatchRumEnabled: boolean;
+  readonly hostname: string;
   readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
   readonly onSentryIssuesRequest: () => Promise<readonly SentryIssue[]>;
@@ -34,6 +35,7 @@ interface Props {
 
 export default function App({
   cloudWatchRumEnabled,
+  hostname,
   onCloudflareAnalyticsRequest,
   onRumMetricsRequest,
   onSentryIssuesRequest,
@@ -44,7 +46,7 @@ export default function App({
       <ErrorBoundary>
         <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
         <BrowserRouter>
-          <Contexts>
+          <Contexts hostname={hostname}>
             <Datadog>
               <FullStory orgId="150TVM">
                 <GoogleAnalytics trackingId="G-0LC1N0MEV7">

@@ -12,7 +12,12 @@ export default function PublicationsCardHeader({
   url,
 }: Readonly<Publication>): ReactElement {
   return (
-    <Link className={rootClassName} href={url} title={title}>
+    <Link
+      category="features/publications/card-header"
+      className={rootClassName}
+      href={url}
+      title={title}
+    >
       <Span color="inherit" size="medium-heading">
         {title}
       </Span>

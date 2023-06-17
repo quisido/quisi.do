@@ -5,12 +5,14 @@ import type { Props } from '../../../../components/link';
 import useLink from './link.hook';
 
 export default function AwsuiLink({
+  category,
   children,
   className,
   href,
   title,
 }: Readonly<Props>): ReactElement {
-  const { external, ref, rel, target } = useLink({
+  const { external, handleFollow, ref, rel, target } = useLink({
+    category,
     children,
     href,
     title,
@@ -27,7 +29,13 @@ export default function AwsuiLink({
 
   return (
     <span ref={ref}>
-      <Link {...optionalProps} external={external} href={href} target={target}>
+      <Link
+        {...optionalProps}
+        external={external}
+        href={href}
+        onFollow={handleFollow}
+        target={target}
+      >
         {children}
       </Link>
     </span>

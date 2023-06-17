@@ -50,7 +50,12 @@ export default function PublicationBanner({
   return (
     <div className={bannerHeightClassName}>
       <div className={bannerWidthClassName}>
-        <Link className={linkClassName} href={url}>
+        <Link
+          category="features/publications/banner"
+          className={linkClassName}
+          href={url}
+          title={title}
+        >
           <BannerImage src={image} title={title} />
         </Link>
         <Chip className={viewsClassName} title={<I18n>Views</I18n>}>

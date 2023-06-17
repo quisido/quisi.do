@@ -4,13 +4,19 @@ import type { ReactElement } from 'react';
 import type { Props } from '../../../../components/link';
 import useLink from './link.hook';
 
-export default function CloudscapeLink({
+export default function CloudscapeDesignLink({
+  category,
   children,
   className,
   href,
   title,
 }: Readonly<Props>): ReactElement {
-  const { external, ref, rel, target } = useLink({ href, title });
+  const { external, handleFollow, ref, rel, target } = useLink({
+    category,
+    children,
+    href,
+    title,
+  });
 
   const optionalProps: Pick<LinkProps, 'className' | 'rel'> = {};
   if (typeof className !== 'undefined') {
@@ -22,7 +28,13 @@ export default function CloudscapeLink({
 
   return (
     <span ref={ref}>
-      <Link {...optionalProps} external={external} href={href} target={target}>
+      <Link
+        {...optionalProps}
+        external={external}
+        href={href}
+        onFollow={handleFollow}
+        target={target}
+      >
         {children}
       </Link>
     </span>

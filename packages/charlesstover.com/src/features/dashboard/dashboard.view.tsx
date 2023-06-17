@@ -54,7 +54,14 @@ export default function Dashboard({
       <Container header="CharlesStover.com">
         <Div element="p">
           This dashboard showcases operational and performance metrics for{' '}
-          <Link href="/">CharlesStover.com</Link>.
+          <Link
+            category="features/dashboard"
+            href="/"
+            title="CharlesStover.com"
+          >
+            CharlesStover.com
+          </Link>
+          .
         </Div>
       </Container>
       <Status

@@ -19,6 +19,7 @@ export default function MuiWrapperNavigationLinkItem({
   const { handleClick, selected, sx } = useNavigationLinkItem({
     depth,
     path,
+    text,
   });
 
   return (
