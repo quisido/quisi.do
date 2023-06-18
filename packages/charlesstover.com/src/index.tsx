@@ -26,6 +26,7 @@ ROOT.render(
   <StrictMode>
     <App
       cloudWatchRumEnabled={window.location.hostname !== 'localhost'}
+      hostname={window.location.hostname}
       onCloudflareAnalyticsRequest={handleCloudflareAnalyticsRequest}
       onRumMetricsRequest={rumMetrics.handleRequest}
       onSentryIssuesRequest={sentryIssues.handleRequest}

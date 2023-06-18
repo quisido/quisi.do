@@ -14,5 +14,13 @@ export default function HomeProjectListItemName({
     return <>{children}</>;
   }
 
-  return <Link href={url}>{children}</Link>;
+  return (
+    <Link
+      category="features/home/project-list-item-name"
+      href={url}
+      title={children}
+    >
+      {children}
+    </Link>
+  );
 }

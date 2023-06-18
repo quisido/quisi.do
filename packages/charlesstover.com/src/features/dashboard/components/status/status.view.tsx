@@ -68,7 +68,11 @@ export default function Status({
     <Container header={<I18n>Status</I18n>} marginTop="large">
       <Div display="flex" flexDirection="row" justifyContent="space-around">
         <Div>
-          <Link href="https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml">
+          <Link
+            category="features/dashboard/status"
+            href="https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml"
+            title="Continuous deployment workflow"
+          >
             <img
               alt={ciCdStatusAlt}
               height={20}

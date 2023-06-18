@@ -3,13 +3,15 @@ import type {
   MutableRefObject,
   ReactNode,
 } from 'react';
-import { useLayoutEffect, useRef } from 'react';
+import { useCallback, useLayoutEffect, useRef } from 'react';
+import useEvent from '../../../../hooks/use-event';
 import filterHrefByBlank from '../../../../utils/filter-href-by-blank';
 import filterHrefByExternal from '../../../../utils/filter-href-by-external';
 import filterNodesByImage from '../../../../utils/filter-nodes-by-image';
 import mapLinkSpanToAnchorElement from './utils/map-link-span-to-anchor-element';
 
 interface Props {
+  readonly category: string;
   readonly children: ReactNode;
   readonly href: string;
   readonly title: string | undefined;
@@ -17,17 +19,23 @@ interface Props {
 
 interface State {
   readonly external: boolean;
+  readonly handleFollow: VoidFunction;
   readonly ref: MutableRefObject<HTMLSpanElement | null>;
   readonly rel: string | undefined;
   readonly target: HTMLAttributeAnchorTarget;
 }
 
 export default function useAwsuiLink({
+  category,
   children,
   href,
   title,
 }: Readonly<Props>): State {
   const isBlank: boolean = filterHrefByBlank(href);
+  const target: HTMLAttributeAnchorTarget = isBlank ? '_blank' : '_self';
+
+  // Contexts
+  const emit = useEvent();
 
   // States
   const ref: MutableRefObject<HTMLSpanElement | null> = useRef(null);
@@ -50,6 +58,15 @@ export default function useAwsuiLink({
     external: filterHrefByExternal(href) && !filterNodesByImage(children),
     ref,
     rel: isBlank ? 'nofollow noopener noreferrer' : undefined,
-    target: isBlank ? '_blank' : '_self',
+    target,
+
+    handleFollow: useCallback((): void => {
+      emit('click', {
+        category,
+        label: title,
+        target,
+        url: href,
+      });
+    }, [category, emit, href, target, title]),
   };
 }
