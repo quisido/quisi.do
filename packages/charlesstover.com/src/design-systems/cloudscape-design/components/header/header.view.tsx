@@ -2,7 +2,7 @@ import Header from '@cloudscape-design/components/header';
 import type { ReactElement } from 'react';
 import type { Props } from '../../../../components/header';
 
-export default function CloudscapeHeader({
+export default function CloudscapeDesignHeader({
   actions,
   children,
 }: Readonly<Props>): ReactElement {

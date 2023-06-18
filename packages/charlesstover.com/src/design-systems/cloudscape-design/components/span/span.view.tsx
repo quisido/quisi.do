@@ -4,7 +4,7 @@ import type { ReactElement } from 'react';
 import type { Props } from '../../../../components/span';
 import useSpan from './span.hook';
 
-export default function CloudscapeSpan({
+export default function CloudscapeDesignSpan({
   children,
   className,
   color: colorProp,

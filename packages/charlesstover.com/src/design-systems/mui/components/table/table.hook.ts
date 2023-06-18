@@ -1,5 +1,6 @@
-import { IconButtonProps } from '@mui/material/IconButton';
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
+import type { IconButtonProps } from '@mui/material/IconButton';
+import type { TranslateFunction } from 'lazy-i18n';
+import { useTranslate } from 'lazy-i18n';
 import type { Attributes, ChangeEvent, ComponentType, MouseEvent } from 'react';
 import { useMemo } from 'react';
 import useWrapperVariant from '../../../../hooks/use-wrapper-variant';

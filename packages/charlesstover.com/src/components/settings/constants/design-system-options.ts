@@ -1,7 +1,7 @@
 import DesignSystem from '../../../constants/design-system';
 import type SelectOption from '../../../types/select-option';
 
-const DESIGN_SYSTEM_OPTIONS: readonly SelectOption[] = [
+export default [
   {
     label: 'AWS UI',
     value: DesignSystem.Awsui,
@@ -11,9 +11,7 @@ const DESIGN_SYSTEM_OPTIONS: readonly SelectOption[] = [
     value: DesignSystem.CloudscapeDesign,
   },
   {
-    label: 'Material UI',
+    label: 'MUI',
     value: DesignSystem.Mui,
   },
-];
-
-export default DESIGN_SYSTEM_OPTIONS;
+] satisfies readonly SelectOption[];

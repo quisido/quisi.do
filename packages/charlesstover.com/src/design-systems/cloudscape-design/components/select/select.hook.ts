@@ -24,7 +24,7 @@ const labelDirectionRowClassName: string = validateString(
   styles.labelDirectionRow,
 );
 
-export default function useCloudscapeSelect({
+export default function useCloudscapeDesignSelect({
   labelDirection,
   onChange,
   options,

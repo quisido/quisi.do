@@ -4,7 +4,7 @@ import type { ReactElement } from 'react';
 import type { Props } from '../../../../components/div';
 import useDiv from './div.hook';
 
-export default function CloudscapeDiv({
+export default function CloudscapeDesignDiv({
   children,
   className: classNameProp,
   display: displayProp,

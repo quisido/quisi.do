@@ -5,7 +5,9 @@ import { useMemo } from 'react';
 const NONE = 0;
 const SINGLE = 1;
 
-export default function useCloudscapeTableCountText(count: number): string {
+export default function useCloudscapeDesignTableCountText(
+  count: number,
+): string {
   const translate: TranslateFunction = useTranslate();
 
   return useMemo((): string => {

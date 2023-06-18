@@ -25,7 +25,7 @@ interface State {
   readonly target: HTMLAttributeAnchorTarget;
 }
 
-export default function useCloudscapeLink({
+export default function useCloudscapeDesignLink({
   category,
   children,
   href,

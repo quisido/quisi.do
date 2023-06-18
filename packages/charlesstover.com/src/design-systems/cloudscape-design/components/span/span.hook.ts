@@ -20,7 +20,7 @@ interface State {
   readonly variant: 'h2' | 'p' | undefined;
 }
 
-export default function useCloudscapeSpan({
+export default function useCloudscapeDesignSpan({
   color,
   element,
   size,

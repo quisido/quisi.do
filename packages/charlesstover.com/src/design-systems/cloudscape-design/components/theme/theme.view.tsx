@@ -1,7 +1,7 @@
 import type { PropsWithChildren, ReactElement } from 'react';
 import useTheme from './theme.hook';
 
-export default function CloudscapeTheme({
+export default function CloudscapeDesignTheme({
   children,
 }: Readonly<PropsWithChildren>): ReactElement {
   useTheme();

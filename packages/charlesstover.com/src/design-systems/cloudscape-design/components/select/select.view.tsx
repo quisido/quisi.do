@@ -5,7 +5,7 @@ import type { ReactElement } from 'react';
 import type { Props } from '../../../../components/select';
 import useSelect from './select.hook';
 
-export default function CloudscapeSelect({
+export default function CloudscapeDesignSelect({
   disabled = false,
   label,
   labelDirection,

@@ -1,4 +1,4 @@
-import {
+import type {
   BrowserContext,
   Contexts,
   default as SentryProjectEvent,

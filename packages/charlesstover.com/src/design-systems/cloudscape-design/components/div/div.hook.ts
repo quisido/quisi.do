@@ -65,7 +65,7 @@ const justifyContentSpaceBetweenClassName: string = validateString(
   styles.justifyContentSpaceBetween,
 );
 
-export default function useCloudscapeDiv({
+export default function useCloudscapeDesignDiv({
   className,
   display,
   element,

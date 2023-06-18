@@ -1,5 +1,5 @@
 import EMPTY_ARRAY from '../constants/empty-array';
-import { default as SentryProjectEvent } from '../types/sentry-project-event';
+import type { default as SentryProjectEvent } from '../types/sentry-project-event';
 import validateArray from './validate-array';
 import validateEvent from './validate-sentry-project-event';
 

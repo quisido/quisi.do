@@ -1,6 +1,6 @@
 import type { CollectionPreferencesProps } from '@cloudscape-design/components/collection-preferences';
 import type { NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
-import { NonCancelableEventHandler } from '@cloudscape-design/components/internal/events';
+import type { NonCancelableEventHandler } from '@cloudscape-design/components/internal/events';
 import type { PaginationProps } from '@cloudscape-design/components/pagination';
 import type { TableProps } from '@cloudscape-design/components/table';
 import type { TextFilterProps } from '@cloudscape-design/components/text-filter';

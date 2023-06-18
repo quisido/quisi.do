@@ -1,4 +1,5 @@
-import I18n, { TranslateFunction, useTranslate } from 'lazy-i18n';
+import type { TranslateFunction } from 'lazy-i18n';
+import I18n, { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import type { Props as WrapperProps } from '../../../components/wrapper';
 import type Breadcrumb from '../../../types/breadcrumb';

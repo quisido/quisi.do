@@ -4,7 +4,7 @@ import type { ReactElement } from 'react';
 import type { Props } from '../../../../components/chip';
 import Popover from './components/popover';
 
-export default function CloudscapeChip({
+export default function CloudscapeDesignChip({
   children,
   className,
   title,

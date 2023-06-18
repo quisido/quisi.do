@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react';
 import { useCaptureException } from 'sentry-react';
 import GLOBAL_STYLES from '../constants/global-styles';
 
-export default function useCloudscapeThemeGlobalStyles(): void {
+export default function useCloudscapeDesignThemeGlobalStyles(): void {
   // Contexts
   const captureException = useCaptureException();
 

@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 
 const SINGLE = 1;
 
-export default function useCloudscapeAriaLabels<
+export default function useCloudscapeDesignTableAriaLabels<
   Item,
 >(): TableProps.AriaLabels<Item> {
   // Contexts

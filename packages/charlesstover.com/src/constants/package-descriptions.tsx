@@ -142,7 +142,7 @@ const PACKAGE_DESCRIPTIONS: Map<string, string> = new Map([
   ],
   [
     'react-mui-tooltip',
-    'Create React tooltips similar to those used by Material-UI.',
+    'Create React tooltips similar to those used by the MUI design system.',
   ],
   [
     'react-multi-context',

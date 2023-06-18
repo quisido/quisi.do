@@ -14,7 +14,7 @@ import styles from './table.module.scss';
 
 const rootClassName: string = validateString(styles.root);
 
-export default function CloudscapeTable<Item extends object>({
+export default function CloudscapeDesignTable<Item extends object>({
   Description,
   columns,
   filter,
