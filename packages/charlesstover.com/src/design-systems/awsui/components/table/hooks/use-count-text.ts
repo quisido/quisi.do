@@ -15,6 +15,10 @@ export default function useAwsuiTableCountText(count: number): string {
     if (count === SINGLE) {
       return translate('1 match') ?? '...';
     }
-    return translate('$count matches', { count }) ?? '...';
+    return (
+      translate('$n matches', {
+        n: count,
+      }) ?? '...'
+    );
   }, [count, translate]);
 }

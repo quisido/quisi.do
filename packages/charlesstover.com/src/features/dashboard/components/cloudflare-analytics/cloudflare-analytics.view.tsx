@@ -48,34 +48,59 @@ function CloudflareAnalytics({
           <strong>Remaining budget:</strong> {mapBudgetToPercentage(budget)}%
         </Div>
 
-        <Div element="p">
-          <strong>HTTP requests:</strong>{' '}
-          <Quantity decimals={2} unit="bytes">
-            {httpRequests1hGroups.bytes_sum}
-          </Quantity>{' '}
-          bytes,{' '}
-          <Quantity decimals={2} unit="bytes">
-            {httpRequests1hGroups.cachedBytes_sum}
-          </Quantity>{' '}
-          cached bytes, {httpRequests1hGroups.cachedRequests_sum} cached
-          requests,{' '}
-          <Quantity decimals={2} unit="bytes">
-            {httpRequests1hGroups.encryptedBytes_sum}
-          </Quantity>{' '}
-          encrypted bytes, {httpRequests1hGroups.encryptedRequests_sum}{' '}
-          encrypted requests, {httpRequests1hGroups.pageViews_sum} page views,{' '}
-          {httpRequests1hGroups.requests_sum} requests,{' '}
-          {httpRequests1hGroups.threats_sum} threats,{' '}
-          {httpRequests1hGroups.uniques_uniq} unique visitors
+        <Div>
+          <strong>HTTP requests:</strong>
+          <ul>
+            <li>
+              <Quantity decimals={2} unit="bytes">
+                {httpRequests1hGroups.bytes_sum}
+              </Quantity>
+            </li>
+            <li>
+              <Quantity decimals={2} unit="bytes">
+                {httpRequests1hGroups.cachedBytes_sum}
+              </Quantity>{' '}
+              cached
+            </li>
+            <li>
+              {httpRequests1hGroups.cachedRequests_sum.toLocaleString()}{' '}
+              requests cached
+            </li>
+            <li>
+              <Quantity decimals={2} unit="bytes">
+                {httpRequests1hGroups.encryptedBytes_sum}
+              </Quantity>{' '}
+              encrypted
+            </li>
+            <li>
+              {httpRequests1hGroups.encryptedRequests_sum.toLocaleString()}{' '}
+              requests encrypted
+            </li>
+            <li>
+              {httpRequests1hGroups.pageViews_sum.toLocaleString()} page views
+            </li>
+            <li>
+              {httpRequests1hGroups.requests_sum.toLocaleString()} requests
+            </li>
+            <li>{httpRequests1hGroups.threats_sum.toLocaleString()} threats</li>
+            <li>
+              {httpRequests1hGroups.uniques_uniq.toLocaleString()} unique
+              visitors
+            </li>
+          </ul>
         </Div>
 
-        <Div element="p">
-          <strong>RUM pageload events:</strong>{' '}
-          {rumPageloadEventsAdaptiveGroups.count} events,{' '}
-          <SampleInterval>
-            {rumPageloadEventsAdaptiveGroups.sampleInterval_avg}
-          </SampleInterval>
-          , {rumPageloadEventsAdaptiveGroups.visits_sum} visits
+        <Div>
+          <strong>RUM pageload events:</strong>
+          <ul>
+            <li>{rumPageloadEventsAdaptiveGroups.count} events</li>
+            <li>
+              <SampleInterval>
+                {rumPageloadEventsAdaptiveGroups.sampleInterval_avg}
+              </SampleInterval>
+            </li>
+            <li>{rumPageloadEventsAdaptiveGroups.visits_sum} visits</li>
+          </ul>
         </Div>
 
         <Div element="p">

@@ -1,6 +1,6 @@
 {
-  "$count matches": "$count ka pares",
-  "$count packages": "$count ka putos",
+  "$n matches": "$n ka pares",
+  "$n packages": "$n ka putos",
   "$n minutes": "$n mga minuto",
   "1 match": "1 ka pares",
   "1 minute": "1 minuto",

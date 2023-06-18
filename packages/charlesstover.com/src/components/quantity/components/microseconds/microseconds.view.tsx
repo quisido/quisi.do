@@ -23,8 +23,14 @@ export default function Microseconds({
   }
 
   if (typeof decimals === 'undefined') {
-    return <I18n microseconds={children}>$microseconds μs</I18n>;
+    return (
+      <I18n microseconds={children.toLocaleString()}>$microseconds μs</I18n>
+    );
   }
 
-  return <I18n microseconds={round(children, decimals)}>$microseconds μs</I18n>;
+  return (
+    <I18n microseconds={round(children, decimals).toLocaleString()}>
+      $microseconds μs
+    </I18n>
+  );
 }

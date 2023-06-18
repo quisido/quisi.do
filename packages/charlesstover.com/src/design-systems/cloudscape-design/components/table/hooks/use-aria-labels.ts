@@ -22,8 +22,8 @@ export default function useCloudscapeDesignTableAriaLabels<
         }
 
         return (
-          translate('$count items selected', {
-            count,
+          translate('$n items selected', {
+            n: count,
           }) ?? `${count} items selected`
         );
       },

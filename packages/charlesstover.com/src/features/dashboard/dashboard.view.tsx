@@ -25,7 +25,6 @@ export default function Dashboard({
   onUptimeChecksRequest,
 }: Readonly<Props>): ReactElement {
   const {
-    ciCdStatusAlt,
     cloudflareAnalytics,
     cloudflareAnalyticsBudget,
     cloudflareAnalyticsError,
@@ -65,7 +64,6 @@ export default function Dashboard({
         </Div>
       </Container>
       <Status
-        ciCdStatusAlt={ciCdStatusAlt}
         lastUptimeCheckStatus={lastUptimeCheckStatus}
         lastUptimeCheckTimestamp={lastUptimeCheckTimestamp}
         uptimeChecksError={isUptimeChecksError}

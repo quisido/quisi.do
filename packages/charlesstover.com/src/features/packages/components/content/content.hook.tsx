@@ -165,7 +165,9 @@ export default function usePackagesContent(): State {
       const mapNumberToPageSizeOption = (
         value: number,
       ): TableRowsPerPageOption => ({
-        label: translate('$count packages', { count: value }),
+        label: translate('$n packages', {
+          n: value,
+        }),
         value,
       });
 

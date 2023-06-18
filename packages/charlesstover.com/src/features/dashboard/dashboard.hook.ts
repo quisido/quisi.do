@@ -1,5 +1,3 @@
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import EMPTY_ARRAY from '../../constants/empty-array';
 import useAsyncState from '../../modules/use-async-state';
@@ -18,7 +16,6 @@ interface Props {
 }
 
 interface State {
-  readonly ciCdStatusAlt: string;
   readonly cloudflareAnalytics: CloudflareAnalyticsDatasets | undefined;
   readonly cloudflareAnalyticsBudget: number;
   readonly cloudflareAnalyticsError: string | undefined;
@@ -112,9 +109,6 @@ export default function useDashboard({
   onSentryIssuesRequest,
   onUptimeChecksRequest,
 }: Readonly<Props>): State {
-  // Contexts
-  const translate: TranslateFunction = useTranslate();
-
   // States
   const {
     data: cloudflareAnalytics,
@@ -152,9 +146,6 @@ export default function useDashboard({
     sentryIssuesError,
     uptimeChecks,
     uptimeMessages: uptimeChecks ? uptimeChecks.messages : EMPTY_ARRAY,
-
-    ciCdStatusAlt:
-      translate('Continuous integration/deployment status') ?? 'CI/CD',
 
     cloudflareAnalyticsBudget: cloudflareAnalytics
       ? cloudflareAnalytics.budget

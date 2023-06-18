@@ -12,6 +12,6 @@ export default function Minutes({ children }: Readonly<Props>): ReactElement {
     case SINGLE:
       return <I18n>1 minute</I18n>;
     default:
-      return <I18n n={children}>$n minutes</I18n>;
+      return <I18n n={children.toLocaleString()}>$n minutes</I18n>;
   }
 }

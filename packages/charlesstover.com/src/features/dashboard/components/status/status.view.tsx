@@ -5,12 +5,13 @@ import Container from '../../../../components/container';
 import Div from '../../../../components/div';
 import Link from '../../../../components/link';
 import validateString from '../../../../utils/validate-string';
-import OnlineStatus from '../online-status';
 import LastChecked from '../last-checked';
+import MessageInABottle from '../message-in-a-bottle';
+import OnlineStatus from '../online-status';
+import useStatus from './status.hook';
 import styles from './status.module.scss';
 
 interface Props {
-  readonly ciCdStatusAlt: string;
   readonly lastUptimeCheckStatus: boolean;
   readonly lastUptimeCheckTimestamp: number;
   readonly uptimeChecksError: boolean;
@@ -54,8 +55,7 @@ const mapMessageToElement = (message: unknown): ReactElement => {
   );
 };
 
-export default function Status({
-  ciCdStatusAlt,
+export default function DashboardStatus({
   lastUptimeCheckStatus,
   lastUptimeCheckTimestamp,
   uptimeChecksError,
@@ -64,8 +64,18 @@ export default function Status({
   uptimeErrors,
   uptimeMessages,
 }: Readonly<Props>): ReactElement {
+  const { ciCdAlt } = useStatus();
+
   return (
-    <Container header={<I18n>Status</I18n>} marginTop="large">
+    <Container
+      header={
+        <>
+          <I18n>Status</I18n>
+          <MessageInABottle />
+        </>
+      }
+      marginTop="large"
+    >
       <Div display="flex" flexDirection="row" justifyContent="space-around">
         <Div>
           <Link
@@ -74,7 +84,7 @@ export default function Status({
             title="Continuous deployment workflow"
           >
             <img
-              alt={ciCdStatusAlt}
+              alt={ciCdAlt}
               height={20}
               src="https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml/badge.svg"
             />

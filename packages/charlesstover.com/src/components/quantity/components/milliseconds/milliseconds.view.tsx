@@ -34,8 +34,14 @@ export default function Milliseconds({
   }
 
   if (typeof decimals === 'undefined') {
-    return <I18n milliseconds={children}>$milliseconds ms</I18n>;
+    return (
+      <I18n milliseconds={children.toLocaleString()}>$milliseconds ms</I18n>
+    );
   }
 
-  return <I18n milliseconds={round(children, decimals)}>$milliseconds ms</I18n>;
+  return (
+    <I18n milliseconds={round(children, decimals).toLocaleString()}>
+      $milliseconds ms
+    </I18n>
+  );
 }

@@ -1,28 +1,30 @@
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import round from '../../../../utils/round';
-import Kilobytes from '../kilobytes';
+import Kibibytes from '../kibibytes';
 
 interface Props {
   readonly children: number;
   readonly decimals?: number | undefined;
 }
 
-const BYTES_PER_KILOBYTE = 1024;
+const BYTES_PER_KIBIBYTE = 1024;
 
 export default function Bytes({
   children,
   decimals,
 }: Readonly<Props>): ReactElement {
-  if (children > BYTES_PER_KILOBYTE) {
+  if (children > BYTES_PER_KIBIBYTE) {
     return (
-      <Kilobytes decimals={decimals}>{children / BYTES_PER_KILOBYTE}</Kilobytes>
+      <Kibibytes decimals={decimals}>{children / BYTES_PER_KIBIBYTE}</Kibibytes>
     );
   }
 
   if (typeof decimals === 'undefined') {
-    return <I18n bytes={children}>$bytes bytes</I18n>;
+    return <I18n bytes={children.toLocaleString()}>$bytes bytes</I18n>;
   }
 
-  return <I18n bytes={round(children, decimals)}>$bytes bytes</I18n>;
+  return (
+    <I18n bytes={round(children, decimals).toLocaleString()}>$bytes bytes</I18n>
+  );
 }

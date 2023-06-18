@@ -1,6 +1,6 @@
 {
-  "$count matches": "المطابقات $count",
-  "$count packages": "الباقات $count",
+  "$n matches": "المطابقات $n",
+  "$n packages": "الباقات $n",
   "$n minutes": "دقائق $n",
   "1 match": " تطابق ١",
   "1 minute": "دقيقه ١",

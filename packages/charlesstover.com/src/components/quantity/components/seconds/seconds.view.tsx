@@ -24,8 +24,10 @@ export default function Seconds({
   }
 
   if (typeof decimals === 'undefined') {
-    return <I18n seconds={children}>$seconds s</I18n>;
+    return <I18n seconds={children.toLocaleString()}>$seconds s</I18n>;
   }
 
-  return <I18n seconds={round(children, decimals)}>$seconds s</I18n>;
+  return (
+    <I18n seconds={round(children, decimals).toLocaleString()}>$seconds s</I18n>
+  );
 }

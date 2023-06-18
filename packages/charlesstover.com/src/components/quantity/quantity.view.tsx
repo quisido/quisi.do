@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import Bytes from './components/bytes';
-import Kilobytes from './components/kilobytes';
+import Kibibytes from './components/kibibytes';
 import Microseconds from './components/microseconds';
 import Milliseconds from './components/milliseconds';
 import Minutes from './components/minutes';
@@ -27,7 +27,7 @@ export default function Quantity({
     case 'bytes':
       return <Bytes decimals={decimals}>{children}</Bytes>;
     case 'kilobytes':
-      return <Kilobytes decimals={decimals}>{children}</Kilobytes>;
+      return <Kibibytes decimals={decimals}>{children}</Kibibytes>;
     case 'microseconds':
       return <Microseconds decimals={decimals}>{children}</Microseconds>;
     case 'milliseconds':
