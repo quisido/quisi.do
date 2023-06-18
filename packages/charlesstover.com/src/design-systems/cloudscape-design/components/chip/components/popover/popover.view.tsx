@@ -10,13 +10,14 @@ interface Props {
 
 const rootClassName: string = validateString(styles.root);
 
-export default function CloudscapeChipPopover({
+export default function CloudscapeDesignChipPopover({
   children,
   title,
 }: Readonly<Props>): ReactElement {
   if (typeof title === 'undefined') {
     return <>{children}</>;
   }
+
   return (
     <Popover className={rootClassName} content={<>{title}</>} size="small">
       {children}

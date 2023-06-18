@@ -3,7 +3,7 @@ import { useLayoutEffect } from 'react';
 import useDarkMode from '../../../../hooks/use-dark-mode';
 import useGlobalStyles from './hooks/use-global-styles';
 
-export default function useCloudscapeTheme(): void {
+export default function useCloudscapeDesignTheme(): void {
   const [isDarkModeEnabled] = useDarkMode();
 
   useGlobalStyles();

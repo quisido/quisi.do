@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import type { Props as BannerProps } from '../components/banner';
 import type { Props as ButtonProps } from '../components/button';
 import type { Props as CardsProps } from '../components/cards';

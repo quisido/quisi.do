@@ -1,4 +1,4 @@
-import { Event as SentryEvent } from '@sentry/types';
+import type { Event as SentryEvent } from '@sentry/types';
 import { useRecordEvent } from 'aws-rum-react';
 import { useCallback } from 'react';
 import { useCaptureEvent } from 'sentry-react';

@@ -5,7 +5,11 @@ import RESUME_HREF from '../../../../constants/resume-href';
 
 export default function ViewResumeButton(): ReactElement {
   return (
-    <Button href={RESUME_HREF} variant="primary">
+    <Button
+      category="features/home/view-resume-button"
+      href={RESUME_HREF}
+      variant="primary"
+    >
       <I18n>View résumé</I18n>
     </Button>
   );

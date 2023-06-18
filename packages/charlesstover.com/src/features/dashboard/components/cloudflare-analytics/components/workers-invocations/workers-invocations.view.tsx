@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import Table from '../../../../../../components/table';
 import type WorkersInvocations from '../../../../../../types/cloudflare-workers-invocations';
 import createIndexArray from '../../../../../../utils/create-index-array';

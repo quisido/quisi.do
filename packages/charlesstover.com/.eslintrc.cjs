@@ -69,7 +69,6 @@ module.exports = {
   ],
 
   rules: {
-    '@typescript-eslint/consistent-type-imports': 'off',
     '@typescript-eslint/naming-convention': 'off',
     '@typescript-eslint/no-type-alias': 'off',
     '@typescript-eslint/prefer-readonly-parameter-types': 'off',
@@ -83,28 +82,40 @@ module.exports = {
       {
         zones: [
           {
-            from: './.yarn/**/node_modules/@awsui/components-react/**/*',
+            from: '**/node_modules/@awsui/components-react/**/*',
+            target: './src/features/',
             message:
-              'Features may not import from AWSUI directly. Import from src/components instead.',
-            target: './src/features/!(spritesheet2gif)/**/*',
+              'Features may not import from AWS UI directly. Import from src/components instead.',
           },
           {
-            from: './.yarn/**/node_modules/@mui/material/**/*',
+            from: '**/node_modules/@cloudscape-design/components/**/*',
+            target: './src/features/!(spritesheet2gif)/**/*',
+            message:
+              'Features may not import from Cloudscape Design directly. Import from src/components instead.',
+          },
+          {
+            from: '**/node_modules/@mui/material/**/*',
+            target: './src/features/',
             message:
               'Features may not import from MUI directly. Import from src/components instead.',
-            target: './src/features/!(spritesheet2gif)/**/*',
           },
           {
-            from: './.yarn/**/node_modules/@awsui/components-react/index.js',
-            message:
-              'You may not import from AWSUI directly. Import from @awsui/components-react/component-name instead.',
+            from: '**/node_modules/@awsui/components-react/index.js',
             target: '**/*',
+            message:
+              'You may not import from AWS UI directly. Import from @awsui/components-react/component-name instead.',
           },
           {
-            from: './.yarn/**/node_modules/@mui/material/index.js',
+            from: '**/node_modules/@mui/material/index.js',
+            target: '**/*',
             message:
               'You may not import from MUI directly. Import from @mui/material/ComponentName instead.',
+          },
+          {
+            from: '**/node_modules/@cloudscape-design/components/index.js',
             target: '**/*',
+            message:
+              'You may not import from Cloudscape Design directly. Import from @awsui/components-react/component-name instead.',
           },
         ],
       },

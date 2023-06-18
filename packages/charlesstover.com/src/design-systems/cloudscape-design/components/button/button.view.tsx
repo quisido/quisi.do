@@ -5,11 +5,18 @@ import type { Props } from '../../../../components/button';
 import useButton from './button.hook';
 
 export default function CloudscapeDesignButton({
+  category,
   children,
   href,
+  onClick,
   variant,
 }: Readonly<Props>): ReactElement {
-  const { iconAlt, iconName, target } = useButton({ href });
+  const { handleClick, iconAlt, iconName, target } = useButton({
+    category,
+    children,
+    href,
+    onClick,
+  });
 
   // Workaround until Cloudscape supports TypeScript 4.4 exact optional properties.
   // https://github.com/aws/awsui-documentation/issues/14
@@ -26,12 +33,15 @@ export default function CloudscapeDesignButton({
   if (typeof iconName !== 'undefined') {
     optionalProps.iconName = iconName;
   }
-  if (typeof target !== 'undefined') {
-    optionalProps.target = target;
-  }
 
   return (
-    <Button iconAlign="right" variant={variant} {...optionalProps}>
+    <Button
+      iconAlign="right"
+      onClick={handleClick}
+      target={target}
+      variant={variant}
+      {...optionalProps}
+    >
       {children}
     </Button>
   );

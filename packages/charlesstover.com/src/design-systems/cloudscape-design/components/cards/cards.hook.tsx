@@ -13,7 +13,7 @@ interface State<Item> {
   readonly cardDefinition: CardsProps.CardDefinition<Item>;
 }
 
-export default function useCloudscapeCards<Item extends object>({
+export default function useCloudscapeDesignCards<Item extends object>({
   CardContent,
   CardFooter,
   CardHeader,
