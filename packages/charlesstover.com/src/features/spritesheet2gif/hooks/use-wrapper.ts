@@ -11,6 +11,5 @@ const BREADCRUMBS: readonly Breadcrumb[] = [
 export default function useSpritesheet2GifWrapperProps(): Partial<WrapperProps> {
   return {
     breadcrumbs: BREADCRUMBS,
-    contentType: 'wizard',
   };
 }
