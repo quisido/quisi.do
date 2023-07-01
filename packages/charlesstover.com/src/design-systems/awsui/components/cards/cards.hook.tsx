@@ -20,13 +20,15 @@ export default function useAwsuiCards<Item extends object>({
 }: Readonly<Props<Item>>): State<Item> {
   return {
     cardDefinition: useMemo((): CardsProps.CardDefinition<Item> => {
-      const sections: CardsProps.SectionDefinition<Item>[] = [
-        {
-          content: mapComponentToRenderer(CardContent),
-          id: 'content',
-        },
-      ];
+      const contentSection: CardsProps.SectionDefinition<Item> = {
+        id: 'content',
+      };
 
+      if (typeof CardContent !== 'undefined') {
+        contentSection.content = mapComponentToRenderer(CardContent);
+      }
+
+      const sections: CardsProps.SectionDefinition<Item>[] = [contentSection];
       if (typeof CardFooter !== 'undefined') {
         sections.push({
           content: mapComponentToRenderer(CardFooter),
@@ -34,10 +36,15 @@ export default function useAwsuiCards<Item extends object>({
         });
       }
 
-      return {
-        header: mapComponentToRenderer(CardHeader),
+      const cardDefinition: CardsProps.CardDefinition<Item> = {
         sections,
       };
+
+      if (typeof CardHeader !== 'undefined') {
+        cardDefinition.header = mapComponentToRenderer(CardHeader);
+      }
+
+      return cardDefinition;
     }, [CardContent, CardFooter, CardHeader]),
   };
 }

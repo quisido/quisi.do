@@ -15,12 +15,8 @@ This function generates a renderer function that can be passed to the `content`
 */
 
 export default function mapComponentToRenderer<Props extends object>(
-  Component: ComponentType<Props> | undefined,
-): FunctionComponent<Props> | undefined {
-  if (typeof Component === 'undefined') {
-    return;
-  }
-
+  Component: ComponentType<Props>,
+): FunctionComponent<Props> {
   return function render(props: Readonly<Props>): ReactElement {
     return <Component {...props} />;
   };
