@@ -6,7 +6,8 @@ import type CloudflareAnalyticsDatasets from '../../types/cloudflare-analytics-d
 import type RumMetrics from '../../types/rum-metrics';
 import type SentryIssue from '../../types/sentry-issue';
 import type UptimeChecks from '../../types/uptime-checks';
-import filterSentryProjectNonIssues from './utils/filter-sentry-project-non-issues';
+import filterSentryNonIssues from './utils/filter-sentry-non-issues';
+import mapSentryIssueToSimple from './utils/map-sentry-issue-to-simple';
 
 interface Props {
   readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
@@ -177,7 +178,9 @@ export default function useDashboard({
         return EMPTY_ARRAY;
       }
 
-      return sentryIssues.filter(filterSentryProjectNonIssues);
+      return sentryIssues
+        .filter(filterSentryNonIssues)
+        .map(mapSentryIssueToSimple);
     }, [sentryIssues]),
 
     uptimeErrors: useMemo((): readonly unknown[] => {

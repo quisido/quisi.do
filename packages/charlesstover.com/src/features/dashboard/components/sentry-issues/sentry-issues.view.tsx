@@ -14,9 +14,9 @@ interface Props {
   readonly loading: boolean;
 }
 
-const mapIssueToListItem = (issue: Readonly<Issue>): ReactElement => {
-  return <li key={issue.id}>{issue.title}</li>;
-};
+const mapIssueToListItem = (issue: Readonly<Issue>): ReactElement => (
+  <li key={issue.id}>{issue.title}</li>
+);
 
 function SentryIssues({ issues }: Readonly<Props>): ReactElement {
   return (

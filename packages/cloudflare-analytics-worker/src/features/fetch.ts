@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /// <reference types="@cloudflare/workers-types" />
 import ALLOWED_METHODS from '../constants/allowed-methods';
 import FAVICON_ICO from '../constants/favicon-ico';
@@ -15,9 +16,11 @@ import mapOriginToErrorResponseInit from '../utils/map-origin-to-error-response-
 import mapUnknownToString from '../utils/map-unknown-to-string';
 
 export default async function fetch(
-  request: Request,
+  // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
+  request: Readonly<Request>,
+  // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
   { ERRORS, FETCH, RESULTS }: Readonly<Env>,
-  cxt: ExecutionContext,
+  cxt: Readonly<ExecutionContext>,
 ): Promise<Response> {
   const start: Date = new Date();
   const origin: string | null = request.headers.get('Origin');

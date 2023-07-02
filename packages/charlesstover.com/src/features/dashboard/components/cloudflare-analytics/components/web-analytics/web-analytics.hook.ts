@@ -64,7 +64,19 @@ export default function useCloudflareWebAnalytics({
   sampleInterval_avg,
   visits_sum,
 }: Readonly<RumPerformanceEvents>): State {
-  const sampleRate: number = mapSampleIntervalToRate(sampleInterval_avg);
+  const subheaders: string[] = [];
+  if (typeof count === 'number') {
+    subheaders.push(`${count} events`);
+  }
+
+  if (typeof sampleInterval_avg === 'number') {
+    const sampleRate: number = mapSampleIntervalToRate(sampleInterval_avg);
+    subheaders.push(`${sampleRate}% sample rate`);
+  }
+
+  if (typeof visits_sum === 'number') {
+    subheaders.push(`${visits_sum} visits`);
+  }
 
   // Contexts
   const translate: TranslateFunction = useTranslate();
@@ -80,16 +92,13 @@ export default function useCloudflareWebAnalytics({
     handleSort,
     sortAscending,
     sortColumnIndex,
-    subheader: [
-      `${count} events`,
-      `${sampleRate}% sample rate`,
-      `${visits_sum} visits`,
-    ].join(' • '),
+    subheader: subheaders.join(' • '),
 
     rows: useMemo(
       (): readonly Analytic[] => [
         {
           avg: firstContentfulPaint_avg,
+          goal: 'low',
           name: translate('First contentful paint') ?? '...',
           p50: firstContentfulPaintP50,
           p75: firstContentfulPaintP75,
@@ -99,6 +108,7 @@ export default function useCloudflareWebAnalytics({
         },
         {
           avg: firstPaint_avg,
+          goal: 'low',
           name: translate('First paint') ?? '...',
           p50: firstPaintP50,
           p75: firstPaintP75,
@@ -108,6 +118,7 @@ export default function useCloudflareWebAnalytics({
         },
         {
           avg: loadEventTime_avg,
+          goal: 'low',
           name: translate('Load event time') ?? '...',
           p50: loadEventTimeP50,
           p75: loadEventTimeP75,
@@ -117,6 +128,7 @@ export default function useCloudflareWebAnalytics({
         },
         {
           avg: pageLoadTime_avg,
+          goal: 'low',
           name: translate('Page load time') ?? '...',
           p50: pageLoadTimeP50,
           p75: pageLoadTimeP75,
@@ -126,6 +138,7 @@ export default function useCloudflareWebAnalytics({
         },
         {
           avg: pageRenderTime_avg,
+          goal: 'low',
           name: translate('Page render time') ?? '...',
           p50: pageRenderTimeP50,
           p75: pageRenderTimeP75,
@@ -135,6 +148,7 @@ export default function useCloudflareWebAnalytics({
         },
         {
           avg: requestTime_avg,
+          goal: 'low',
           name: translate('Request time') ?? '...',
           p50: requestTimeP50,
           p75: requestTimeP75,
@@ -144,6 +158,7 @@ export default function useCloudflareWebAnalytics({
         },
         {
           avg: responseTime_avg,
+          goal: 'low',
           name: translate('Response time') ?? '...',
           p50: responseTimeP50,
           p75: responseTimeP75,
@@ -153,6 +168,7 @@ export default function useCloudflareWebAnalytics({
         },
         {
           avg: connectionTime_avg,
+          goal: 'low',
           name: translate('User connection time') ?? '...',
           p50: connectionTimeP50,
           p75: connectionTimeP75,
@@ -162,6 +178,7 @@ export default function useCloudflareWebAnalytics({
         },
         {
           avg: dnsTime_avg,
+          goal: 'low',
           name: translate('User DNS time') ?? '...',
           p50: dnsTimeP50,
           p75: dnsTimeP75,

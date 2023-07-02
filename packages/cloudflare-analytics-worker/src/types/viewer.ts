@@ -1,7 +1,7 @@
 import type Datasets from './datasets';
 
 export default interface Viewer {
-  readonly accounts?: [Datasets] | undefined;
+  readonly accounts?: readonly [Datasets] | undefined;
   readonly budget: number;
-  readonly zones?: [Datasets] | undefined;
+  readonly zones?: readonly [Datasets] | undefined;
 }

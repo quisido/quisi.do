@@ -47,7 +47,7 @@ type CloudflareRumPerformanceEvents = Record<
   | 'responseTimeP99'
   | 'sampleInterval_avg'
   | 'visits_sum',
-  number
+  number | undefined
 >;
 
 export default CloudflareRumPerformanceEvents;

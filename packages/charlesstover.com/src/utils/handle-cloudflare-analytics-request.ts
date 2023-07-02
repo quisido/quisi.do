@@ -5,5 +5,6 @@ import validateCloudflareAnalytics from './validate-cloudflare-analytics';
 export default async function handleCloudflareAnalyticsRequest(): Promise<CloudflareAnalytics> {
   const response: Response = await window.fetch(CLOUDFLARE_ANALYTICS_URL);
   const json: unknown = await response.json();
+  // {"message":"internal error"}.
   return validateCloudflareAnalytics(json);
 }
