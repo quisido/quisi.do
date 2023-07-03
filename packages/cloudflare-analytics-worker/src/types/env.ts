@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /// <reference types="@cloudflare/workers-types" />
 
 export default interface Env {

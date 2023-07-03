@@ -1,4 +1,5 @@
 export default interface CloudflareWorkersInvocationsAnalytic {
+  readonly goal?: 'high' | 'low' | undefined;
   readonly max: number;
   readonly min?: number | undefined;
   readonly name: string;

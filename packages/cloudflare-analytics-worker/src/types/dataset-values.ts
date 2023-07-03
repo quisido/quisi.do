@@ -1,7 +1,7 @@
 import type DatasetValue from './dataset-value';
 
 interface DatasetValues {
-  [key: string]: DatasetValues | DatasetValue;
+  readonly [key: string]: DatasetValue | DatasetValues;
 }
 
 export type { DatasetValues as default };

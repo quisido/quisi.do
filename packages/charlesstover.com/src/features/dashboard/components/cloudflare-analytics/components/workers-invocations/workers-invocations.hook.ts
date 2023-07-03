@@ -91,6 +91,7 @@ export default function useWorkersInvocations({
     rows: useMemo(
       (): readonly Analytic[] => [
         {
+          goal: 'low',
           max: cpuTime_max,
           min: cpuTime_min,
           name: translate('CPU time') ?? '...',
@@ -103,6 +104,7 @@ export default function useWorkersInvocations({
           unit: 'microseconds',
         },
         {
+          goal: 'low',
           max: duration_max,
           min: duration_min,
           name: translate('Duration') ?? '...',
@@ -129,6 +131,7 @@ export default function useWorkersInvocations({
           unit: 'bytes',
         },
         {
+          goal: 'low',
           max: wallTime_max,
           min: wallTime_min,
           name: translate('Wall time') ?? '...',

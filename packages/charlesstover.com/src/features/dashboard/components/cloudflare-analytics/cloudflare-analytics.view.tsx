@@ -2,21 +2,43 @@ import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Container from '../../../../components/container';
 import Div from '../../../../components/div';
+import Gauge from '../../../../components/gauge';
 import Quantity from '../../../../components/quantity';
 import withAsync from '../../../../hocs/with-async';
 import type Datasets from '../../../../types/cloudflare-analytics-datasets';
 import ErrorView from './components/error';
 import Loading from './components/loading';
+import SampleInterval from './components/sample-interval';
 import Uninitiated from './components/uninitiated';
-import WebAnalytics from './components/web-analytics/web-analytics.view';
+import WebAnalytics from './components/web-analytics';
 import WorkersInvocations from './components/workers-invocations';
 import mapBudgetToPercentage from './utils/map-budget-to-percentage';
-import SampleInterval from './components/sample-interval/sample-interval.view';
 
 interface Props {
   readonly budget: number;
   readonly datasets: Datasets;
 }
+
+interface ClientSslMapSum {
+  readonly key: string;
+  readonly requests: number;
+}
+
+const SIZE_PER_VALUE = 50;
+const ZERO = 0;
+
+const reduceClientSslMapSumToMax = (
+  max: number,
+  { requests }: ClientSslMapSum,
+): number => Math.max(max, requests);
+
+const reduceClientSslMapSumToRecord = (
+  record: Record<string, number>,
+  { key, requests }: ClientSslMapSum,
+): Record<string, number> => ({
+  ...record,
+  [key]: requests,
+});
 
 function CloudflareAnalytics({
   budget,
@@ -47,6 +69,18 @@ function CloudflareAnalytics({
         <Div element="p">
           <strong>Remaining budget:</strong> {mapBudgetToPercentage(budget)}%
         </Div>
+
+        <Gauge
+          max={httpRequests1hGroups.clientSSLMap_sum.reduce(
+            reduceClientSslMapSumToMax,
+            ZERO,
+          )}
+          size={httpRequests1hGroups.clientSSLMap_sum.length * SIZE_PER_VALUE}
+          values={httpRequests1hGroups.clientSSLMap_sum.reduce(
+            reduceClientSslMapSumToRecord,
+            {},
+          )}
+        />
 
         <Div>
           <strong>HTTP requests:</strong>

@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-type-alias */
+
 type DatasetDimensionValue<
   K extends number | string = number | string,
   V extends string = string,
-> = WithKey<K, Record<V, number>>;
+> = WithKey<K, Readonly<Record<V, number>>>;
+
 type WithKey<K extends number | string, T> = HasKey<K> & T;
 
 interface HasKey<K extends number | string> {

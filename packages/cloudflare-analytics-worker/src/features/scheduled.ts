@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import QUERIES from '../queries';
 import type CfJson from '../types/cf-json';
 import type Env from '../types/env';
@@ -13,8 +14,16 @@ const NONE = 0;
 
 export default async function scheduled(
   { scheduledTime }: Pick<ScheduledEvent, 'scheduledTime'>,
-  { ACCOUNT_TAG, API_TOKEN, ERRORS, RESULTS, SCHEDULED, ZONE_TAG }: Env,
-  cxt: ExecutionContext,
+  // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
+  {
+    ACCOUNT_TAG,
+    API_TOKEN,
+    ERRORS,
+    RESULTS,
+    SCHEDULED,
+    ZONE_TAG,
+  }: Readonly<Env>,
+  cxt: Readonly<ExecutionContext>,
 ): Promise<void> {
   if (typeof ACCOUNT_TAG !== 'string') {
     throw new Error('Missing `ACCOUNT_TAG` variable.');

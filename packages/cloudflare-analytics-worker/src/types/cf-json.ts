@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-type-alias */
 import type DatasetDimensionValue from './dataset-dimension-value';
 
 type Value =
-  | readonly DatasetDimensionValue[]
   | Record<string, number | undefined>
   | number
+  | readonly DatasetDimensionValue[]
   | undefined;
 
 export default interface CfJson {

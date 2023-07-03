@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-type-alias */
 import type CfJson from '../types/cf-json';
 import type DatasetDimensionValue from '../types/dataset-dimension-value';
 import type DatasetValues from '../types/dataset-values';
@@ -6,10 +7,11 @@ import mapRecordToEntries from './map-record-to-entries';
 import mapResultToBudget from './map-result-to-budget';
 
 type DatasetRecord = Record<string, Datum | undefined>;
+
 type Datum =
-  | readonly DatasetDimensionValue[]
   | Record<string, number | undefined>
-  | number;
+  | number
+  | readonly DatasetDimensionValue[];
 
 const EMPTY_ARRAY: readonly never[] = Object.freeze([]);
 const TYPES = ['accounts' as const, 'zones' as const];
@@ -40,7 +42,7 @@ export default function mapResultsToCfJson(results: readonly Result[]): CfJson {
 
       for (const [datasetName, [values]] of Object.entries(record)) {
         const recursiveParse = (
-          value: readonly DatasetDimensionValue[] | DatasetValues | number,
+          value: DatasetValues | number | readonly DatasetDimensionValue[],
           keys: readonly string[] = EMPTY_ARRAY,
         ): void => {
           if (typeof value === 'number' || isArray(value)) {
