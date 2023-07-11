@@ -21,10 +21,10 @@ export default function Bytes({
   }
 
   if (typeof decimals === 'undefined') {
-    return <I18n bytes={children.toLocaleString()}>$bytes bytes</I18n>;
+    return <I18n bytes={children.toLocaleString()}>$n bytes</I18n>;
   }
 
   return (
-    <I18n bytes={round(children, decimals).toLocaleString()}>$bytes bytes</I18n>
+    <I18n bytes={round(children, decimals).toLocaleString()}>$n bytes</I18n>
   );
 }
