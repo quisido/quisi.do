@@ -239,6 +239,10 @@ const PACKAGE_DESCRIPTIONS: Map<string, string> = new Map([
     'with-router',
     'This higher-order component re-renders your components when the route changes.',
   ],
+  [
+    'yarn-up-skip-workspace',
+    'This command line tool upgrades all non-workspace dependencies in a Yarn monorepo.',
+  ],
 ]);
 
 export default PACKAGE_DESCRIPTIONS;

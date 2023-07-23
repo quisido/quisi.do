@@ -2,7 +2,6 @@ import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Container from '../../components/container';
 import Div from '../../components/div';
-import Wrapper from '../../components/wrapper';
 import PROJECTS from '../../constants/projects';
 import mapComponentToPropMapper from '../../utils/map-component-to-prop-mapper';
 import validateString from '../../utils/validate-string';
@@ -31,7 +30,7 @@ export default function Home(): ReactElement {
   const { avatarAlt } = useHome();
 
   return (
-    <Wrapper toolsHide>
+    <>
       <Container actions={<ViewResumeButton />} header={<I18n>About me</I18n>}>
         <Div className={contentClassName} display="flex" flexDirection="row">
           <Div className={avatarClassName} marginRight="large">
@@ -72,6 +71,6 @@ export default function Home(): ReactElement {
           </ul>
         </Container>
       </Div>
-    </Wrapper>
+    </>
   );
 }

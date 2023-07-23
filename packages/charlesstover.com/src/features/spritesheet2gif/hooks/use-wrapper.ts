@@ -8,7 +8,10 @@ const BREADCRUMBS: readonly Breadcrumb[] = [
   },
 ];
 
-export default function useSpritesheet2GifWrapperProps(): Partial<WrapperProps> {
+export default function useSpritesheet2GifWrapperProps(): Omit<
+  WrapperProps,
+  'children'
+> {
   return {
     breadcrumbs: BREADCRUMBS,
   };
