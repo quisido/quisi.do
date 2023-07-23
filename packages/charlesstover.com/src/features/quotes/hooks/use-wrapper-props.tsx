@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import type { Props as WrapperProps } from '../../../components/wrapper';
 import type Breadcrumb from '../../../types/breadcrumb';
 
-export default function useDashboardWrapperProps(): Omit<
+export default function useQuotesWrapperProps(): Omit<
   WrapperProps,
   'children'
 > {
@@ -13,14 +13,14 @@ export default function useDashboardWrapperProps(): Omit<
 
   // States
   return {
-    fallback: <I18n>Loading dashboard</I18n>,
+    fallback: <I18n>Loading quotes</I18n>,
     toolsHide: true,
 
     breadcrumbs: useMemo(
       (): readonly Breadcrumb[] => [
         {
-          children: translate('Dashboard') ?? '...',
-          path: '/dashboard',
+          children: translate('Quotes') ?? '...',
+          path: '/quotes',
         },
       ],
       [translate],

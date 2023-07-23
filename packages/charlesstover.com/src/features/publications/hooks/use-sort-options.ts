@@ -10,6 +10,18 @@ export default function usePublicationsSortOptions(): readonly SelectOption[] {
   return useMemo(
     (): readonly SelectOption[] => [
       {
+        label: translate('Daily reactions') ?? '...',
+        value: Sort.ReactionsPerDay,
+      },
+      {
+        label: translate('Daily views') ?? '...',
+        value: Sort.ViewsPerDay,
+      },
+      {
+        label: translate('Engagement rate') ?? '...',
+        value: Sort.ReactionsPerView,
+      },
+      {
         label: translate('Publication date') ?? '...',
         value: Sort.PublicationDate,
       },
@@ -18,24 +30,12 @@ export default function usePublicationsSortOptions(): readonly SelectOption[] {
         value: Sort.Reactions,
       },
       {
-        label: translate('Reactions per day') ?? '...',
-        value: Sort.ReactionsPerDay,
-      },
-      {
-        label: translate('Reactions per view') ?? '...',
-        value: Sort.ReactionsPerView,
-      },
-      {
         label: translate('Reading time') ?? '...',
         value: Sort.ReadingTime,
       },
       {
         label: translate('Views') ?? '...',
         value: Sort.Views,
-      },
-      {
-        label: translate('Views per day') ?? '...',
-        value: Sort.ViewsPerDay,
       },
     ],
     [translate],

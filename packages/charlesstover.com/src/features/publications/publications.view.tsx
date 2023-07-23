@@ -1,23 +1,56 @@
 import I18n from 'lazy-i18n';
-import type { ComponentType, ReactElement } from 'react';
-import { lazy } from 'react';
-import Wrapper from '../../components/wrapper';
+import type { ReactElement } from 'react';
+import Banner from '../../components/banner';
+import Cards from '../../components/cards';
+import Div from '../..//components/div';
+import NumberFormat from '../../components/number-format';
+import CardContent from './components/card-content';
+import CardHeader from './components/card-header';
+import Header from './components/header';
+import MINIMUM_VIEWS from './constants/minimum-publications-views';
 import usePublications from './publications.hook';
 
-const Content: ComponentType<unknown> = lazy(
-  async () => import('./components/content'),
-);
-
 export default function Publications(): ReactElement {
-  const { breadcrumbs } = usePublications();
+  const {
+    handleMediumApiBannerDismiss,
+    handleMinimumViewsBannerDismiss,
+    handleSortChange,
+    isMediumApiBannerVisible,
+    isMinimumViewsBannerVisible,
+    items,
+    loading,
+    sort,
+  } = usePublications();
 
   return (
-    <Wrapper
-      breadcrumbs={breadcrumbs}
-      fallback={<I18n>Loading publications</I18n>}
-      toolsHide
-    >
-      <Content />
-    </Wrapper>
+    <>
+      {isMediumApiBannerVisible && (
+        <Div marginBottom="medium">
+          <Banner onDismiss={handleMediumApiBannerDismiss}>
+            <I18n>
+              Due to a dependency API change, publication statistics are locked
+              to July 2023.
+            </I18n>
+          </Banner>
+        </Div>
+      )}
+      {isMinimumViewsBannerVisible && (
+        <Div marginBottom="medium">
+          <Banner onDismiss={handleMinimumViewsBannerDismiss}>
+            <I18n count={<NumberFormat>{MINIMUM_VIEWS}</NumberFormat>}>
+              Only publications with more than $count views are shown.
+            </I18n>
+          </Banner>
+        </Div>
+      )}
+      <Cards
+        CardContent={CardContent}
+        CardHeader={CardHeader}
+        cardKey="url"
+        header={<Header onSortChange={handleSortChange} sort={sort} />}
+        items={items}
+        loading={loading}
+      />
+    </>
   );
 }

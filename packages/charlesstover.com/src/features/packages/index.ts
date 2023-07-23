@@ -1,1 +1,1 @@
-export { default } from './packages.view';
+export { default } from './packages.hoc';
