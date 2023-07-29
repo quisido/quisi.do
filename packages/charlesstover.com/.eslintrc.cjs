@@ -70,8 +70,11 @@ module.exports = {
 
   rules: {
     '@typescript-eslint/naming-convention': 'off',
+    '@typescript-eslint/no-duplicate-imports': 'off', // deprecated
+    '@typescript-eslint/no-parameter-properties': 'off', // deprecated
     '@typescript-eslint/no-type-alias': 'off',
     '@typescript-eslint/prefer-readonly-parameter-types': 'off',
+    '@typescript-eslint/sort-type-union-intersection-members': 'off', // deprecated
     'react/forbid-component-props': 'off',
     'react/jsx-child-element-spacing': 'off',
     'react/jsx-max-depth': 'off',

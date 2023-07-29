@@ -14,14 +14,16 @@ export default function composeComponents(
   }
 
   const [Parent, Child, ...remainingComponents] = components;
-  return composeComponents(function ComposedComponent({
-    children,
-  }: Readonly<PropsWithChildren>): ReactElement {
-    return (
-      <Parent>
-        <Child>{children}</Child>
-      </Parent>
-    );
-  },
-  ...remainingComponents);
+  return composeComponents(
+    function ComposedComponent({
+      children,
+    }: Readonly<PropsWithChildren>): ReactElement {
+      return (
+        <Parent>
+          <Child>{children}</Child>
+        </Parent>
+      );
+    },
+    ...remainingComponents,
+  );
 }
