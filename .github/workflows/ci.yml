@@ -121,7 +121,7 @@ jobs:
         run: yarn install --immutable
       - name: Enable Plug-n-Play
         run: yarn cypress:pnp
-        working-directory: packages/charlesstover.com
+        working-directory: packages/react-scripts
       - name: End-to-end test
         uses: cypress-io/github-action@v4
         env:
@@ -140,7 +140,7 @@ jobs:
           start: yarn run cypress:start
           wait-on: 'http://localhost:3000/'
           wait-on-timeout: 120
-          working-directory: packages/charlesstover.com/
+          working-directory: packages/react-scripts/
       - name: Upload artifacts
         if: matrix.os == 'ubuntu'
         uses: actions/upload-artifact@v3
@@ -185,7 +185,7 @@ jobs:
         run: yarn install --immutable
       - name: Audit
         run: yarn run lighthouse
-        working-directory: packages/charlesstover.com
+        working-directory: packages/react-scripts
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v3
@@ -257,7 +257,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Report coverage
-        run: yarn packages/charlesstover.com run coverage
+        run: yarn packages/react-scripts run coverage
         env:
           BRANCHES_COVERAGE_THRESHOLD: 1
           FUNCTIONS_COVERAGE_THRESHOLD: 1

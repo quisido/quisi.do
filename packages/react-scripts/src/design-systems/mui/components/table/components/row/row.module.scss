@@ -1,0 +1,18 @@
+.root {
+  &:last-child td,
+  &:last-child th {
+    border-width: 0;
+  }
+}
+
+.described {
+  & > td,
+  & > th {
+    border-bottom: unset;
+    padding-bottom: 0;
+  }
+}
+
+.descriptionCell {
+  padding-top: 0;
+}

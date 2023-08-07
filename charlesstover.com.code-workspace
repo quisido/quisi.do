@@ -6,13 +6,18 @@
     },
 
     {
-      "name": "Amazon CloudWatch RUM React client",
-      "path": "packages/aws-rum-react"
+      "name": "CharlesStover.com (next)",
+      "path": "packages/next"
     },
 
     {
-      "name": "CharlesStover.com",
-      "path": "packages/charlesstover.com"
+      "name": "CharlesStover.com (react-scripts)",
+      "path": "packages/react-scripts"
+    },
+
+    {
+      "name": "Amazon CloudWatch RUM React client",
+      "path": "packages/aws-rum-react"
     },
 
     {
