@@ -1,0 +1,11 @@
+@use '@cloudscape-design/design-tokens/index' as awsui;
+
+.content {
+  /*
+  See also:
+  - src/components/banner/banner.cloudscape.module.scss
+  - src/components/container/container.cloudscape.module.scss
+  - src/components/table/table.cloudscape.module.scss
+  */
+  margin-top: awsui.$space-static-xxl;
+}

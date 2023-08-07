@@ -5,8 +5,8 @@ The `CharlesStover.com` repository contains the professional portfolio of
 used to build it.
 
 This repository serves as a monorepo with each package living in the `packages`
-directory. The fully integrated application lives in the
-`packages/charlesstover.com` directory.
+directory. The fully integrated application lives in the `packages/next` and the
+`packages/react-scripts` directory.
 
 ## Visual Studio Code
 
