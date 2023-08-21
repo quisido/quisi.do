@@ -1,8 +1,6 @@
 import type { RumInitConfiguration, datadogRum } from '@datadog/browser-rum';
 import type { MutableRefObject } from 'react';
 import { useEffect, useRef } from 'react';
-import DEFAULT_REPLAY_SAMPLE_RATE from '../../constants/default-replay-sample-rate';
-import DEFAULT_SAMPLE_RATE from '../../constants/default-sample-rate';
 import useDatadogRum from '../../hooks/use-datadog-rum';
 import useShallowMemo from '../../hooks/use-shallow-memo';
 import type User from '../../types/user';
@@ -16,11 +14,8 @@ interface Props extends RumInitConfiguration {
 
 export default function useDatadog({
   enabled = true,
-  replaySampleRate = DEFAULT_REPLAY_SAMPLE_RATE,
-  sampleRate = DEFAULT_SAMPLE_RATE,
   sessionReplayRecording = true,
   site = 'datadoghq.com',
-  trackInteractions = true,
   user,
   ...rumInitConfiguration
 }: Readonly<Props>): void {
@@ -31,10 +26,7 @@ export default function useDatadog({
   const lastInitConfiguration: MutableRefObject<RumInitConfiguration | null> =
     useRef(null);
   const rumInitConfigurationMemo: RumInitConfiguration = useShallowMemo({
-    replaySampleRate,
-    sampleRate,
     site,
-    trackInteractions,
     ...rumInitConfiguration,
   });
 
@@ -44,10 +36,12 @@ export default function useDatadog({
       return;
     }
 
-    // In strict mode, React will execute this effect hook twice, which emits a
-    //   console error: "DD_RUM is already initialized."
-    // If the initialization configuration has not changed, do not initialize
-    //   again.
+    /**
+     * In strict mode, React will execute this effect hook twice, which emits a
+     *   console error: "DD_RUM is already initialized."
+     * If the initialization configuration has not changed, do not initialize
+     *   again.
+     */
     if (lastInitConfiguration.current === rumInitConfigurationMemo) {
       return;
     }

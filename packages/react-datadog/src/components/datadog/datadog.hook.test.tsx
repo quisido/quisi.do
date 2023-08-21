@@ -2,8 +2,6 @@ import type { datadogRum } from '@datadog/browser-rum';
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { StrictMode } from 'react';
-import DEFAULT_REPLAY_SAMPLE_RATE from '../../constants/default-replay-sample-rate';
-import DEFAULT_SAMPLE_RATE from '../../constants/default-sample-rate';
 import DatadogRumContext from '../../contexts/datadog-rum';
 import composeComponents from '../../test/utils/compose-components';
 import type User from '../../types/user';
@@ -53,30 +51,10 @@ describe('useDatadog', (): void => {
 
     expect(TEST_INIT).toHaveBeenCalledTimes(ONCE);
     expect(TEST_INIT).toHaveBeenLastCalledWith({
-      actionNameAttribute: undefined,
-      allowedTracingOrigins: undefined,
       applicationId: 'test-application-id',
-      beforeSend: undefined,
       clientToken: 'test-client-token',
-      defaultPrivacyLevel: undefined,
-      enableExperimentalFeatures: undefined,
-      env: undefined,
-      intakeApiVersion: undefined,
-      internalMonitoringApiKey: undefined,
-      proxyUrl: undefined,
-      replaySampleRate: DEFAULT_REPLAY_SAMPLE_RATE,
-      replica: undefined,
-      silentMultipleInit: undefined,
-      sampleRate: DEFAULT_SAMPLE_RATE,
-      service: undefined,
       site: 'datadoghq.com',
       trackInteractions: true,
-      trackSessionAcrossSubdomains: undefined,
-      trackViewsManually: undefined,
-      useAlternateIntakeDomains: undefined,
-      useCrossSiteSessionCookie: undefined,
-      useSecureSessionCookie: undefined,
-      version: undefined,
     });
   });
 
