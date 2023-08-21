@@ -1,10 +1,11 @@
 {
   "folders": [
     {
-      "name": "/",
+      "name": "$root",
       "path": "."
     },
 
+    // Applications
     {
       "name": "CharlesStover.com (next)",
       "path": "packages/next"
@@ -16,29 +17,36 @@
     },
 
     {
-      "name": "Amazon CloudWatch RUM React client",
-      "path": "packages/aws-rum-react"
-    },
-
-    {
       "name": "Cloudflare Analytics worker",
       "path": "packages/cloudflare-analytics-worker"
     },
 
+    // Integrations
     {
-      "name": "React Datadog",
+      "name": "Amazon CloudWatch RUM",
+      "path": "packages/aws-rum-react"
+    },
+
+    {
+      "name": "Datadog",
       "path": "packages/react-datadog"
     },
 
     {
-      "name": "map unknown to string",
-      "path": "packages/unknown2string"
+      "name": "FullStory",
+      "path": "packages/fullstory-react"
+    },
+
+    // Components
+    {
+      "name": "Hook: useOffline",
+      "path": "packages/use-offline"
     },
 
     {
-      "name": "useOffline",
-      "path": "packages/use-offline"
-    }
+      "name": "Util: mapUnknownToString",
+      "path": "packages/unknown2string"
+    },
   ],
 
   "settings": {

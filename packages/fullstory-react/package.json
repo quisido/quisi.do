@@ -1,0 +1,76 @@
+{
+  "name": "fullstory-react",
+  "version": "2.0.0",
+  "author": "Charles Stover <fullstory-react@charlesstover.com>",
+  "description": "FullStory integration with React",
+  "homepage": "https://github.com/CharlesStover/charlesstover.com/tree/main/packages/fullstory-react#readme",
+  "license": "MIT",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.js",
+  "type": "module",
+  "types": "./types/index.d.ts",
+  "bugs": {
+    "email": "fullstory-react@charlesstover.com",
+    "url": "https://github.com/CharlesStover/fullstory-react/issues"
+  },
+  "directories": {
+    "lib": "src"
+  },
+  "files": [
+    "dist",
+    "types"
+  ],
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/CharlesStover"
+  },
+  "publishConfig": {
+    "access": "public",
+    "main": "./dist/cjs/index.cjs",
+    "module": "./dist/esm/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CharlesStover/fullstory-react.git"
+  },
+  "scripts": {
+    "eslint": "eslint src",
+    "jest": "jest",
+    "jest-watch": "jest --coverage=false --watch",
+    "rollup": "rollup --config",
+    "rollup-watch": "rollup --config --watch"
+  },
+  "devDependencies": {
+    "@fullstory/browser": "^1.4.9",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/react-hooks": "^7.0.2",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.7",
+    "@types/react": "^17.0.35",
+    "@types/react-dom": "^17.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "@yarnpkg/sdks": "^2.5.1-rc.2",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "jest": "^27.3.1",
+    "prettier": "^2.4.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-test-renderer": "^17.0.2",
+    "rollup": "^2.60.0",
+    "rollup-plugin-typescript2": "^0.31.0",
+    "ts-jest": "^27.0.7",
+    "tslib": "^2.3.1",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "@fullstory/browser": ">=1.0.0",
+    "react": ">=17.0.0"
+  }
+}
