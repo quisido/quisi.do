@@ -3,7 +3,7 @@ import type { SideNavigationProps } from '@awsui/components-react/side-navigatio
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo } from 'react';
-import { useSideNavigation } from 'use-awsui-router';
+// import { useSideNavigation } from '../../../../../../../../use-next-awsui';
 import filterSideNavigationItemsByExpandable from '../../utils/filter-side-navigation-items-by-expandable';
 import filterSideNavigationItemsByHasItems from '../../utils/filter-side-navigation-items-by-has-items';
 import mapTranslationFunctionToSideNavigationItems from '../../utils/map-translation-function-to-side-navigation-items';
@@ -69,7 +69,7 @@ export default function useAwsuiWrapperNavigation(): State {
   const translate: TranslateFunction = useTranslate();
 
   // States
-  const { activeHref, handleFollow } = useSideNavigation();
+  // const { activeHref, handleFollow } = useSideNavigation();
 
   const items: SideNavigationProps.Item[] =
     useMemo((): SideNavigationProps.Item[] => {
@@ -79,8 +79,8 @@ export default function useAwsuiWrapperNavigation(): State {
     }, [translate]);
 
   return {
-    activeHref,
-    handleFollow,
+    activeHref: '',
+    handleFollow(): void {},
     items,
 
     handleChange: useCallback(

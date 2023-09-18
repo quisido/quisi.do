@@ -1,6 +1,6 @@
 import type { AppLayoutProps } from '@awsui/components-react/app-layout';
 import AppLayout from '@awsui/components-react/app-layout';
-import type { ReactElement } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
 import { Suspense } from 'react';
 import type { Props } from '../../../../components/wrapper';
 import ContentFallback from '../../../../components/wrapper-content-fallback';
@@ -11,16 +11,13 @@ import Notifications from './components/notifications';
 import useWrapper from './wrapper.hook';
 
 export default function AwsuiWrapper({
-  Tools,
+  Info,
   breadcrumbs,
   children,
   contentType,
   fallback,
   notifications,
-  onToolsChange,
-  toolsHide,
-  toolsOpen: controlledToolsOpen,
-}: Readonly<Props>): ReactElement {
+}: Readonly<PropsWithChildren<Props>>): ReactElement {
   const {
     ariaLabels,
     handleNavigationChange,
@@ -28,10 +25,7 @@ export default function AwsuiWrapper({
     navigationOpen,
     ref,
     toolsOpen,
-  } = useWrapper({
-    controlledToolsOpen,
-    onToolsChange,
-  });
+  } = useWrapper();
 
   // Workaround until AWS UI supports TypeScript 4.4 exact optional properties.
   // https://github.com/aws/awsui-documentation/issues/14
@@ -45,12 +39,6 @@ export default function AwsuiWrapper({
   if (typeof navigationOpen !== 'undefined') {
     optionalProps.navigationOpen = navigationOpen;
   }
-  if (typeof toolsHide !== 'undefined') {
-    optionalProps.toolsHide = toolsHide;
-  }
-  if (typeof toolsOpen !== 'undefined') {
-    optionalProps.toolsOpen = toolsOpen;
-  }
 
   return (
     <div ref={ref}>
@@ -60,7 +48,9 @@ export default function AwsuiWrapper({
         notifications={<Notifications>{notifications}</Notifications>}
         onNavigationChange={handleNavigationChange}
         onToolsChange={handleToolsChange}
-        tools={Tools && <Tools />}
+        tools={typeof Info !== 'undefined' && <Info />}
+        toolsHide={typeof Info === 'undefined'}
+        toolsOpen={toolsOpen}
         {...optionalProps}
         breadcrumbs={
           typeof breadcrumbs !== 'undefined' && (

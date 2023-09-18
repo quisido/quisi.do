@@ -1,4 +1,5 @@
 import I18n from 'lazy-i18n';
+import Image from 'next/image';
 import type { ReactElement } from 'react';
 import Container from '../../components/container';
 import Div from '../../components/div';
@@ -34,7 +35,7 @@ export default function Home(): ReactElement {
       <Container actions={<ViewResumeButton />} header={<I18n>About me</I18n>}>
         <Div className={contentClassName} display="flex" flexDirection="row">
           <Div className={avatarClassName} marginRight="large">
-            <img alt={avatarAlt} height={100} src={avatar} width={100} />
+            <Image alt={avatarAlt} height={100} src={avatar} width={100} />
           </Div>
           <Div
             className={paragraphClassName}

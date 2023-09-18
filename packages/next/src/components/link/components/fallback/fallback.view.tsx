@@ -1,5 +1,7 @@
+'use client';
+
+import NextLink from 'next/link';
 import type { ReactElement } from 'react';
-import { Link as ReactRouterLink } from 'react-router-dom';
 import type Props from '../../types/props';
 
 export default function FallbackLink({
@@ -9,8 +11,8 @@ export default function FallbackLink({
   title,
 }: Readonly<Props>): ReactElement {
   return (
-    <ReactRouterLink className={className} title={title} to={href}>
+    <NextLink className={className} href={href} title={title}>
       {children}
-    </ReactRouterLink>
+    </NextLink>
   );
 }

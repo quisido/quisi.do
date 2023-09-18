@@ -1,3 +1,5 @@
+'use client';
+
 import type { ReactElement } from 'react';
 import { Suspense } from 'react';
 import useDesignSystem from './design-system.hook';

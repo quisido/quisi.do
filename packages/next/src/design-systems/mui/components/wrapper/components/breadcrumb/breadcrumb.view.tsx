@@ -1,7 +1,7 @@
 import MuiLink from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import NextLink from 'next/link';
 import type { ReactElement } from 'react';
-import { Link as ReactRouterLink } from 'react-router-dom';
 import type Props from '../../types/breadcrumb-props';
 import useWrapperBreadcrumb from './breadcrumb.hook';
 
@@ -21,12 +21,7 @@ export default function MuiWrapperBreadcrumb({
   }
 
   return (
-    <MuiLink
-      color="inherit"
-      component={ReactRouterLink}
-      to={path}
-      underline="hover"
-    >
+    <MuiLink color="inherit" component={NextLink} href={path} underline="hover">
       {children}
     </MuiLink>
   );

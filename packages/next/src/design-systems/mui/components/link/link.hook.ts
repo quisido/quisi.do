@@ -1,7 +1,7 @@
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
+import { useRouter } from 'next/navigation';
 import type { HTMLAttributeAnchorTarget, MouseEvent } from 'react';
-import { useCallback } from 'react';
-import type { NavigateFunction } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import useEffectEvent from '../../../../hooks/use-effect-event';
 import useEvent from '../../../../hooks/use-event/use-event';
 import filterHrefByBlank from '../../../../utils/filter-href-by-blank';
 
@@ -27,13 +27,13 @@ export default function useMuiLink({
 
   // Contexts
   const emit = useEvent();
-  const navigate: NavigateFunction = useNavigate();
+  const router: AppRouterInstance = useRouter();
 
   // States
   return {
     rel: isBlank ? 'nofollow noopener noreferrer' : undefined,
 
-    handleClick: useCallback(
+    handleClick: useEffectEvent(
       (e: Readonly<MouseEvent<Readonly<HTMLAnchorElement>>>): void => {
         e.preventDefault();
         const target: HTMLAttributeAnchorTarget = isBlank ? '_blank' : '_self';
@@ -49,9 +49,8 @@ export default function useMuiLink({
           return;
         }
 
-        navigate(href);
+        router.push(href);
       },
-      [category, emit, href, isBlank, navigate, title],
     ),
   };
 }

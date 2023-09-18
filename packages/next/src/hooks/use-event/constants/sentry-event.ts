@@ -4,8 +4,8 @@ import sentryReactPackage1 from '@sentry/react/package.json';
 import sentryTracingPackage from '@sentry/tracing/package.json';
 import type { Event } from '@sentry/types';
 import sentryTypesPackage from '@sentry/types/package.json';
-import reactPackage from 'react/package.json';
 import reactDomPackage from 'react-dom/package.json';
+import reactPackage from 'react/package.json';
 import sentryReactPackage2 from 'sentry-react/package.json';
 import VERSION from '../../../constants/version';
 
@@ -18,15 +18,15 @@ export default {
   level: 'log',
   logger: 'useEvent',
   platform: 'javascript',
-  release: `charlesstover.com@${VERSION}`,
+  release: `quisi.do@${VERSION}`,
   start_timestamp: START_TIMESTAMP,
   type: 'transaction',
 
   contexts: {
     app: {
       app_build: VERSION,
-      app_identifier: 'charlesstover.com',
-      app_name: 'CharlesStover.com',
+      app_identifier: 'quisi.do',
+      app_name: 'Quisi.do',
       app_start_time: APP_START_TIME,
       app_version: VERSION,
       build_type: process.env.NODE_ENV,

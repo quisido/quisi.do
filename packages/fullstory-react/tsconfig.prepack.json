@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+
+  "compilerOptions": {
+    "declarationMap": true,
+    "jsx": "react-jsx",
+    "noEmit": false,
+    "outDir": "dist",
+    "rootDir": "src",
+    "skipLibCheck": false,
+    "sourceMap": true
+  }
+}

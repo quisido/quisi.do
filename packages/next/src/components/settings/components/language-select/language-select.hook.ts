@@ -1,38 +1,35 @@
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
-import { useCallback } from 'react';
-import Language from '../../../../constants/language';
-import useLanguage from '../../../../hooks/use-language';
-import filterByLanguage from '../../../../utils/filter-by-language';
+import Locale from '../../../../constants/locale';
+import { useLocale } from '../../../../contexts/locale';
+import useEffectEvent from '../../../../hooks/use-effect-event';
+import isLocale from '../../../../utils/is-locale';
 
 interface State {
   readonly label: string | undefined;
-  readonly language: Language;
+  readonly locale: Locale;
   readonly handleChange: (newLanguage: string | undefined) => void;
 }
 
 export default function useSettingsLanguageSelect(): State {
-  const [language, setLanguage] = useLanguage();
+  const [locale, setLocale] = useLocale();
   const translate: TranslateFunction = useTranslate();
 
   return {
     label: translate('Language'),
-    language,
+    locale,
 
-    handleChange: useCallback(
-      (newLanguage: string | undefined): void => {
-        if (typeof newLanguage === 'undefined') {
-          setLanguage(Language.English);
-          return;
-        }
+    handleChange: useEffectEvent((newLocale: string | undefined): void => {
+      if (typeof newLocale === 'undefined') {
+        setLocale(Locale.English);
+        return;
+      }
 
-        if (!filterByLanguage(newLanguage)) {
-          throw new Error(`Expected a language, but received: ${newLanguage}`);
-        }
+      if (!isLocale(newLocale)) {
+        throw new Error(`Expected a locale, but received: ${newLocale}`);
+      }
 
-        setLanguage(newLanguage);
-      },
-      [setLanguage],
-    ),
+      setLocale(newLocale);
+    }),
   };
 }

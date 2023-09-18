@@ -34,14 +34,13 @@ interface State {
   ) => void;
 }
 
-export default function useCloudscapeDesignWrapper({
-  controlledToolsOpen,
-  onToolsChange,
-}: Readonly<Props>): State {
+export default function useCloudscapeDesignWrapper(): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
 
   // States
+  const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
+
   const {
     handleNavigationChange,
     handleToolsChange,
@@ -50,8 +49,6 @@ export default function useCloudscapeDesignWrapper({
   } = useAppLayout({
     defaultToolsOpen: false,
   });
-
-  const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
   // Effects
   useLayoutEffect((): void => {
@@ -63,7 +60,9 @@ export default function useCloudscapeDesignWrapper({
 
   return {
     handleNavigationChange,
+    handleToolsChange,
     navigationOpen,
+    toolsOpen,
     ref,
 
     ariaLabels: useMemo((): AppLayoutProps.Labels => {
@@ -109,13 +108,5 @@ export default function useCloudscapeDesignWrapper({
 
       return newAriaLabels;
     }, [translate]),
-
-    handleToolsChange:
-      typeof onToolsChange === 'function' ? onToolsChange : handleToolsChange,
-
-    toolsOpen:
-      typeof controlledToolsOpen === 'boolean'
-        ? controlledToolsOpen
-        : toolsOpen,
   };
 }

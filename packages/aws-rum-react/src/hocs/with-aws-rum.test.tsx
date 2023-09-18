@@ -2,7 +2,7 @@
 import { render } from '@testing-library/react';
 import { AwsRum } from 'aws-rum-web';
 import type { PropsWithChildren, ReactElement } from 'react';
-import { AwsRumProvider, withAwsRum } from '..';
+import { AwsRumProvider, withAwsRum } from '../index.js';
 
 interface TestProps {
   readonly awsRum: AwsRum;

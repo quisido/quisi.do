@@ -2,7 +2,7 @@ import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-gr
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
-import { useBreadcrumbGroup } from 'use-awsui-router';
+import { useBreadcrumbGroup } from '../../../../../../../../use-next-awsui';
 import type Breadcrumb from '../../../../../../types/breadcrumb';
 import mapBreadcrumbsToBreadcrumbGroupItems from '../../utils/map-breadcrumbs-to-breadcrumb-group-items';
 

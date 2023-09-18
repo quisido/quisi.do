@@ -1,8 +1,8 @@
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
+import Div from '../..//components/div';
 import Banner from '../../components/banner';
 import Cards from '../../components/cards';
-import Div from '../..//components/div';
 import NumberFormat from '../../components/number-format';
 import CardContent from './components/card-content';
 import CardHeader from './components/card-header';

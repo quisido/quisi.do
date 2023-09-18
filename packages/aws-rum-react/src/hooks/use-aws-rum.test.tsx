@@ -1,6 +1,6 @@
 /// <reference types="jest" />
-import renderHookError from '../test/utils/render-hook-error';
-import { useAwsRum } from '..';
+import { useAwsRum } from '../index.js';
+import renderHookError from '../test/utils/render-hook-error.js';
 
 describe('useAwsRum', (): void => {
   it('should throw an error when the AwsRum context is not provided', (): void => {

@@ -1,6 +1,13 @@
 {
-  "exclude": [".next"],
-  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts"],
+  "exclude": [
+    ".next"
+  ],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "next-env.d.ts"
+  ],
   "compilerOptions": {
     "allowJs": false,
     "downlevelIteration": true,
@@ -9,11 +16,19 @@
     "incremental": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "noEmit": true,
     "resolveJsonModule": true,
+    "rootDirs": [
+      "../use-next-awsui/src",
+      "src"
+    ],
     "skipLibCheck": false,
     "strict": true,
     "target": "es5",

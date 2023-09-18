@@ -6,17 +6,6 @@ import type { MutableRefObject } from 'react';
 import { useLayoutEffect, useMemo, useRef } from 'react';
 import { useAppLayout } from 'use-awsui';
 
-interface Props {
-  readonly controlledToolsOpen: boolean | undefined;
-  readonly onToolsChange:
-    | ((
-        event: Readonly<
-          NonCancelableCustomEvent<Readonly<AppLayoutProps.ChangeDetail>>
-        >,
-      ) => void)
-    | undefined;
-}
-
 interface State {
   readonly ariaLabels: AppLayoutProps.Labels;
   readonly navigationOpen: boolean | undefined;
@@ -34,14 +23,13 @@ interface State {
   ) => void;
 }
 
-export default function useAwsuiWrapper({
-  controlledToolsOpen,
-  onToolsChange,
-}: Readonly<Props>): State {
+export default function useAwsuiWrapper(): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
 
   // States
+  const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
+
   const {
     handleNavigationChange,
     handleToolsChange,
@@ -50,8 +38,6 @@ export default function useAwsuiWrapper({
   } = useAppLayout({
     defaultToolsOpen: false,
   });
-
-  const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
   // Effects
   useLayoutEffect((): void => {
@@ -63,13 +49,12 @@ export default function useAwsuiWrapper({
 
   return {
     handleNavigationChange,
+    handleToolsChange,
+    toolsOpen,
     navigationOpen,
     ref,
 
     ariaLabels: useMemo((): AppLayoutProps.Labels => {
-      // Workaround until AWS UI supports TypeScript 4.4 exact optional
-      //   properties.
-      // https://github.com/aws/awsui-documentation/issues/14
       const newAriaLabels: AppLayoutProps.Labels = {};
       const navigation: string | undefined = translate('Navigation');
       if (typeof navigation === 'string') {
@@ -109,13 +94,5 @@ export default function useAwsuiWrapper({
 
       return newAriaLabels;
     }, [translate]),
-
-    handleToolsChange:
-      typeof onToolsChange === 'function' ? onToolsChange : handleToolsChange,
-
-    toolsOpen:
-      typeof controlledToolsOpen === 'boolean'
-        ? controlledToolsOpen
-        : toolsOpen,
   };
 }

@@ -1,17 +1,14 @@
-import { useMemo } from 'react';
-import useLanguage from '../../hooks/use-language';
-import mapLanguageToLocale from '../../utils/map-language-to-locale';
+import Locale from '../../constants/locale';
+import { useLocale } from '../../contexts/locale';
 
 interface State {
-  readonly locale: string;
+  readonly locale: Locale;
 }
 
 export default function useNumberFormat(): State {
-  const [language] = useLanguage();
+  const [locale] = useLocale();
 
   return {
-    locale: useMemo(() => {
-      return mapLanguageToLocale(language);
-    }, [language]),
+    locale,
   };
 }

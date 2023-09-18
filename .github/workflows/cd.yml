@@ -598,8 +598,8 @@ jobs:
           curl \
             --data '{
               "files": [
-                "https://charlesstover.com",
-                "https://charlesstover.com/index.html"
+                "https://quisi.do",
+                "https://quisi.do/index.html"
               ]
             }' \
             --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
@@ -634,7 +634,7 @@ jobs:
           api_token: ${{ secrets.NEURALEGION_TOKEN }}
           name: GitHub SHA - ${{ github.sha }}
           crawler_urls: |
-            ["https://charlesstover.com/"]
+            ["https://quisi.do/"]
           discovery_types: |
             ["crawler"]
       # - name: Wait for breakpoint

@@ -1,8 +1,8 @@
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
+import { useRouter } from 'next/navigation';
 import type { MouseEvent, ReactNode } from 'react';
-import { useCallback } from 'react';
 import innerText from 'react-innertext';
-import type { NavigateFunction } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import useEffectEvent from '../../../../hooks/use-effect-event';
 import useEvent from '../../../../hooks/use-event/use-event';
 import filterHrefByBlank from '../../../../utils/filter-href-by-blank';
 
@@ -32,13 +32,13 @@ export default function useMuiButton({
 
   // Contexts
   const emit = useEvent();
-  const navigate: NavigateFunction = useNavigate();
+  const router: AppRouterInstance = useRouter();
 
   // States
   return {
     variant: 'contained',
 
-    handleClick: useCallback(
+    handleClick: useEffectEvent(
       (e: Readonly<MouseEvent<HTMLButtonElement>>): void => {
         e.preventDefault();
 
@@ -67,7 +67,7 @@ export default function useMuiButton({
           return;
         }
 
-        navigate(href);
+        router.push(href);
         emit('click', {
           category,
           label,
@@ -75,7 +75,6 @@ export default function useMuiButton({
           url: href,
         });
       },
-      [category, emit, href, isBlank, label, navigate, onClick],
     ),
   };
 }

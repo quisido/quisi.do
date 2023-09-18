@@ -65,6 +65,7 @@ export default function useMuiTable<Item extends object>({
 
   return {
     page: page - ARRAY_INDEX_OFFSET,
+    showToolbar: wrapperVariant !== 'table',
 
     backIconButtonProps: useMemo(
       (): Partial<IconButtonProps> => ({
@@ -138,7 +139,5 @@ export default function useMuiTable<Item extends object>({
 
       return mapRowsPerPageOptionsToMuiRowsPerPageOptions(rowsPerPageOptions);
     }, [rowsPerPageOptions]),
-
-    showToolbar: wrapperVariant !== 'table',
   };
 }

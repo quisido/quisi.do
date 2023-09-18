@@ -1,23 +1,50 @@
 import type { ReactElement } from 'react';
-import REPORT_URI_KEYS from '../../constants/report-uri-keys';
 
-const REPORT_URI = 'https://cscdn.report-uri.com/r/d/csp/enforce';
+/**
+ * Technical debt: NextJS will encode HTML entities in `meta` tags' `content`
+ *   property, making the JSON invalid. A solution must be found before the
+ *   Report URI headers can be added.
+ */
+
+interface ReportToEndpoint {
+  readonly url: string;
+}
+
+interface NetworkErrorLogging {
+  readonly include_subdomains: boolean;
+  readonly max_age: number;
+  readonly report_to: string;
+}
+
+interface ReportToContent {
+  readonly endpoints: readonly ReportToEndpoint[];
+  readonly group: string;
+  readonly include_subdomains: boolean;
+  readonly max_age: number;
+}
+
+const NEL_CONTENT: string = JSON.stringify({
+  include_subdomains: true,
+  max_age: 31536000,
+  report_to: 'default',
+} satisfies NetworkErrorLogging);
+
+const REPORT_TO_CONTENT: string = JSON.stringify({
+  group: 'default',
+  include_subdomains: true,
+  max_age: 31536000,
+  endpoints: [
+    {
+      url: 'https://cscdn.report-uri.com/a/d/g',
+    },
+  ],
+} satisfies ReportToContent);
 
 export default function ReportUri(): ReactElement {
   return (
     <>
-      <script id="csp-report-uri" type="text/json">
-        {JSON.stringify({
-          keys: REPORT_URI_KEYS,
-          reportUri: REPORT_URI,
-        })}
-      </script>
-      <script
-        async
-        crossOrigin="anonymous"
-        integrity="sha256-/u7ebXQXcESMpl6YCvyBEqs83Wt+JpsaMvO8sXFbIH0="
-        src="https://cdn.report-uri.com/libs/report-uri-js/1.0.0/report-uri-js.min.js"
-      />
+      <meta httpEquiv="Report-To" content={REPORT_TO_CONTENT} />
+      <meta httpEquiv="NEL" content={NEL_CONTENT} />
     </>
   );
 }

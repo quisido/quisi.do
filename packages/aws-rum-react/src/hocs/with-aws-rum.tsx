@@ -1,6 +1,6 @@
 import type { AwsRum } from 'aws-rum-web';
 import type { ComponentType, ReactElement } from 'react';
-import useAwsRum from '../hooks/use-aws-rum';
+import useAwsRum from '../hooks/use-aws-rum.js';
 
 interface HocProps {
   readonly awsRum: AwsRum;

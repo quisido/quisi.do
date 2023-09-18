@@ -14,12 +14,12 @@
     "tail": "wrangler tail --format pretty --ip self cloudflare-analytics"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20230807.0",
-    "@types/jest": "^29.5.3",
-    "@types/node": "^20.4.9",
-    "jest": "^29.6.2",
+    "@cloudflare/workers-types": "^4.20230821.0",
+    "@types/jest": "^29.5.4",
+    "@types/node": "^20.5.8",
+    "jest": "^29.6.4",
     "ts-jest": "^29.1.1",
     "typescript": "^5.2.2",
-    "wrangler": "^3.5.0"
+    "wrangler": "^3.6.0"
   }
 }

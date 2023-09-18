@@ -8,7 +8,7 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import type { ComponentType, MutableRefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import useTableItemDescription from 'use-awsui-table-item-description';
+import * as useTableItemDescription from 'use-awsui-table-item-description';
 import type CollectionPreferencesEvent from '../../../../types/readonly-cloudscape-design-collection-preferences-event';
 import type TableSortingEvent from '../../../../types/readonly-cloudscape-design-table-sorting-event';
 import type TableColumn from '../../../../types/table-column';

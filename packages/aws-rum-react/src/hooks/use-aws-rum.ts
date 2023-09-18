@@ -1,6 +1,6 @@
 import type { AwsRum } from 'aws-rum-web';
 import { useContext } from 'react';
-import AwsRumContext from '../contexts/aws-rum';
+import AwsRumContext from '../contexts/aws-rum.js';
 
 export default function useAwsRum(): AwsRum {
   const client: AwsRum | null = useContext(AwsRumContext);

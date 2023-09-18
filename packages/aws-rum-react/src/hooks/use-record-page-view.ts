@@ -1,6 +1,6 @@
 import type { AwsRum } from 'aws-rum-web';
 import { useCallback } from 'react';
-import useAwsRum from './use-aws-rum';
+import useAwsRum from './use-aws-rum.js';
 
 export default function useRecordPageView(): (
   ...params: Parameters<AwsRum['recordPageView']>
