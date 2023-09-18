@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow:
 
-Sitemap: https://charlesstover.com/sitemap.xml
+Sitemap: https://quisi.do/sitemap.xml

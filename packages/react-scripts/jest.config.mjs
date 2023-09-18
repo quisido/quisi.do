@@ -10,7 +10,7 @@ export default {
 
   testEnvironmentOptions: {
     ...PRESET.testEnvironmentOptions,
-    url: 'https://charlesstover.com/',
+    url: 'https://quisi.do/',
   },
 
   transform: {

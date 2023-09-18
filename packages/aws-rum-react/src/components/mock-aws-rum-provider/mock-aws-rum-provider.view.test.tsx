@@ -2,7 +2,7 @@
 import { render, renderHook } from '@testing-library/react';
 import { AwsRum } from 'aws-rum-web';
 import type { PropsWithChildren, ReactElement } from 'react';
-import { MockAwsRumProvider, useAwsRum } from '../..';
+import { MockAwsRumProvider, useAwsRum } from '../../index.js';
 
 describe('MockAwsRumProvider', (): void => {
   it('should not require props', (): void => {

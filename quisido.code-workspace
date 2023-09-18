@@ -1,0 +1,157 @@
+{
+  "folders": [
+    {
+      "name": "$root",
+      "path": "."
+    },
+
+    // Applications
+    {
+      "name": "Quisi.do (next)",
+      "path": "packages/next"
+    },
+
+    {
+      "name": "Quisi.do (react-scripts)",
+      "path": "packages/react-scripts"
+    },
+
+    {
+      "name": "Cloudflare Analytics worker",
+      "path": "packages/cloudflare-analytics-worker"
+    },
+
+    // Integrations
+    {
+      "name": "Amazon CloudWatch RUM",
+      "path": "packages/aws-rum-react"
+    },
+
+    {
+      "name": "Datadog",
+      "path": "packages/react-datadog"
+    },
+
+    {
+      "name": "FullStory",
+      "path": "packages/fullstory-react"
+    },
+
+    {
+      "name": "Lazy Internationalization",
+      "path": "packages/lazy-i18n"
+    },
+
+    {
+      "name": "Rollup configuration",
+      "path": "packages/rollup-config"
+    },
+
+    {
+      "name": "Sentry",
+      "path": "packages/sentry-react"
+    },
+
+    // Components
+    {
+      "name": "mapUnknownToString",
+      "path": "packages/unknown2string"
+    },
+
+    {
+      "name": "useNextAwsui",
+      "path": "packages/use-next-awsui"
+    },
+
+    {
+      "name": "useOffline",
+      "path": "packages/use-offline"
+    }
+  ],
+
+  "settings": {
+    "editor.rulers": [80],
+    "editor.tabSize": 2,
+    "eslint.nodePath": "../../.yarn/sdks",
+    "eslint.runtime": "node",
+    "files.eol": "\n",
+    "prettier.configPath": "../../.prettierrc.json",
+    "prettier.prettierPath": "../../.yarn/sdks/prettier/index.js",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "typescript.tsdk": ".yarn/sdks/typescript/lib",
+
+    "files.exclude": {
+      "**/.git/": true,
+      "**/.idea/": true,
+      "**/.next/": true,
+      "**/.nyc_output/": true,
+      "**/.yarn/": true,
+      "**/build/": true,
+      "**/coverage/": true,
+      "**/cypress/coverage/": true,
+      "**/cypress/downloads/": true,
+      "**/cypress/screenshots/": true,
+      "**/cypress/videos/": true,
+      "**/dist/": true,
+      "**/jest/": true,
+      "**/node_modules/": true,
+      "**/sarif/": true,
+      "**/.attach_pid*": true,
+      "**/.pnp.*": true,
+      "**/*.tsbuildinfo": true,
+      "**/lighthouse.report.*": true,
+      "**/yarn.lock": true,
+      "packages/*/*": true
+    },
+
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/.idea/**": true,
+      "**/.next/**": true,
+      "**/.nyc_output/**": true,
+      "**/.yarn/cache/**": true,
+      "**/.yarn/sdks/**": true,
+      "**/.yarn/unplugged/**": true,
+      "**/.yarn/build-state.yml": true,
+      "**/.yarn/install-state.gz": true,
+      "**/build/**": true,
+      "**/coverage/**": true,
+      "**/cypress/coverage/**": true,
+      "**/cypress/downloads/**": true,
+      "**/cypress/screenshots/": true,
+      "**/cypress/videos/": true,
+      "**/dist/**": true,
+      "**/jest/**": true,
+      "**/node_modules/**": true,
+      "**/.attach_pid*": true,
+      "**/.pnp.*": true,
+      "**/*.tsbuildinfo": true,
+      "**/lighthouse.report.*": true,
+      "**/yarn.lock": true
+    },
+
+    "search.exclude": {
+      "**/.git/": true,
+      "**/.idea/": true,
+      "**/.next/": true,
+      "**/.nyc_output/": true,
+      "**/.yarn/": true,
+      "**/build/": true,
+      "**/coverage/": true,
+      "**/cypress/coverage/": true,
+      "**/cypress/downloads/": true,
+      "**/cypress/screenshots/": true,
+      "**/cypress/videos/": true,
+      "**/dist/": true,
+      "**/jest/": true,
+      "**/node_modules/": true,
+      "**/sarif/": true,
+      "**/.attach_pid*": true,
+      "**/.pnp.*": true,
+      "**/*.tsbuildinfo": true,
+      "**/lighthouse.report.*": true,
+      "**/yarn.lock": true
+    }
+  }
+}

@@ -1,32 +1,55 @@
-import type { QueryObserverResult } from '@tanstack/react-query';
-import { useQuery } from '@tanstack/react-query';
+import { MutableRefObject, useRef } from 'react';
+import mapUnknownToString from 'unknown2string';
+import RetryAction from '../components/retry-action';
+import { useNotify } from '../contexts/notify';
+import type { AsyncState } from '../modules/use-async-state';
+import useAsyncState from '../modules/use-async-state';
 
-interface State {
-  readonly data?: Record<string, number[]> | undefined;
-  readonly error: unknown;
-  readonly isLoading: boolean;
-  readonly refetch: () => Promise<
-    QueryObserverResult<Record<string, number[]>>
-  >;
+/**
+ * Technical debt: This is currently called twice, when it should only be called
+ *   once. `packages.hook` needs it to render the packages to the /packages/
+ *   page, but the packages page's `use-wrapper-props` hook also calls this in
+ *   order to display errors as a banner notification.
+ * This is an unnecessary network request. 😢
+ */
+
+interface BaseState {
+  readonly asyncErrorActionRef: MutableRefObject<unknown>;
 }
 
-export default function useNpmDownloads(): State {
-  const { data, error, isLoading, refetch } = useQuery(
-    ['npm'],
-    async (): Promise<Record<string, number[]>> => {
-      const response: Response = await window.fetch(
-        process.env.REACT_APP_NPM_DOWNLOADS ??
-          'https://npm.cscdn.net/charlesstover.json',
-      );
+type State = AsyncState<Readonly<Record<string, readonly number[]>>> &
+  BaseState;
 
-      return response.json();
-    },
+const getNpmDownloads = async (): Promise<
+  Readonly<Record<string, readonly number[]>>
+> => {
+  const response: Response = await window.fetch(
+    process.env.REACT_APP_NPM_DOWNLOADS ??
+      'https://npm.cscdn.net/charlesstover.json',
   );
 
+  return response.json();
+};
+export default function useNpmDownloads(): State {
+  // Contexts
+  const notify = useNotify();
+
+  // States
+  const asyncErrorActionRef: MutableRefObject<unknown> = useRef();
+
+  const asyncState = useAsyncState(getNpmDownloads, (err: string): void => {
+    notify({
+      CallToAction: RetryAction,
+      message: mapUnknownToString(err),
+      type: 'error',
+      onAction: (): void => {
+        asyncErrorActionRef.current = asyncState.retry();
+      },
+    });
+  });
+
   return {
-    data,
-    error,
-    isLoading,
-    refetch,
+    ...asyncState,
+    asyncErrorActionRef,
   };
 }

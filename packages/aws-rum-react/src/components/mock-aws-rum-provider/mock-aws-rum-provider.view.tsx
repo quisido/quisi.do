@@ -1,9 +1,9 @@
 import { AwsRum } from 'aws-rum-web';
 import type { MutableRefObject, ReactElement, ReactNode } from 'react';
 import { useMemo, useRef } from 'react';
-import AwsRumContext from '../../contexts/aws-rum';
-import mapRefToFunction from '../../utils/map-ref-to-function';
-import noop from '../../utils/noop';
+import AwsRumContext from '../../contexts/aws-rum.js';
+import mapRefToFunction from '../../utils/map-ref-to-function.js';
+import noop from '../../utils/noop.js';
 
 interface Props {
   readonly addPlugin?: AwsRum['addPlugin'] | undefined;

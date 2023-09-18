@@ -1,16 +1,16 @@
 {
-  "name": "@charlesstover/charlesstover.com",
+  "name": "@quisi/do",
   "version": "1.0.0",
-  "author": "Charles Stover <charlesstover.com@charlesstover.com>",
-  "description": "the professional portfolio of Charles Stover",
-  "homepage": "https://charlesstocer.com/",
-  "packageManager": "yarn@3.6.2",
+  "author": "Chaz Quisido <chaz@quisi.do>",
+  "description": "the professional portfolio of Chaz Quisido",
+  "homepage": "https://quisi.do/",
+  "packageManager": "yarn@3.6.3",
   "private": true,
-  "repository": "github:CharlesStover/charlesstover.com",
+  "repository": "github:CharlesStover/quisi.do",
   "type": "module",
   "bugs": {
-    "email": "charlesstover.com@charlesstover.com",
-    "url": "https://github.com/CharlesStover/charlesstover.com/issues"
+    "email": "chaz@quisi.do",
+    "url": "https://github.com/CharlesStover/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
@@ -34,7 +34,7 @@
     "serve": "yarn packages/react-scripts run serve",
     "start": "concurrently --kill-others --kill-others-on-fail --names aws-rum-react,cloudflare-analytics,react-datadog,react-scripts \"yarn packages/aws-rum-react run rollup:watch\" \"yarn packages/cloudflare-analytics-worker run dev\" \"yarn packages/react-datadog run rollup:watch\" \"yarn packages/react-scripts run start\"",
     "test": "monorepo-template-test",
-    "up": "yarn up \"@*/*\" \"!(aws-rum-react|react-datadog|unknown2string|use-offline)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
+    "up": "yarn up \"@*/*\" \"!(aws-rum-react|csbuild|fullstory-react|react-datadog|unknown2string|use-offline)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
   },
   "workspaces": [
     "packages/*"
@@ -45,17 +45,20 @@
     "@monorepo-template/test": "^2.2.0",
     "@monorepo-template/tsconfig": "^1.1.2",
     "@monorepo-template/up": "^1.0.1",
-    "@types/node": "^20.4.9",
-    "@typescript-eslint/eslint-plugin": "^6.3.0",
-    "@typescript-eslint/parser": "^6.3.0",
-    "@yarnpkg/sdks": "^3.0.0-rc.48",
+    "@types/node": "^20.5.8",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "@yarnpkg/sdks": "^3.0.0-rc.50",
     "browserslist": "^4.21.10",
-    "concurrently": "^8.2.0",
-    "eslint": "^8.47.0",
+    "concurrently": "^8.2.1",
+    "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-react": "^7.33.1",
-    "prettier": "^3.0.2",
+    "eslint-plugin-react": "^7.33.2",
+    "prettier": "^3.0.3",
     "typescript": "^5.2.2"
+  },
+  "resolutions": {
+    "aws-rum-web@^1.14.0": "patch:aws-rum-web@npm%3A1.14.0#./.yarn/patches/aws-rum-web-npm-1.14.0-653ad283fd.patch"
   }
 }

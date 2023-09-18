@@ -50,15 +50,15 @@ export default function Dashboard({
 
   return (
     <>
-      <Container header="CharlesStover.com">
+      <Container header="Quisi.do">
         <Div element="p">
           This dashboard showcases operational and performance metrics for{' '}
           <Link
             category="features/dashboard"
             href="/"
-            title="CharlesStover.com"
+            title="Quisi.do"
           >
-            CharlesStover.com
+            Quisi.do
           </Link>
           .
         </Div>

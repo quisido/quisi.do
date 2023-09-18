@@ -1,5 +1,5 @@
-import type { ReactElement } from 'react';
 import NumberFormat from 'number-format-react';
+import type { ReactElement } from 'react';
 import useNumberFormat from './number-format.hook';
 
 interface Props {

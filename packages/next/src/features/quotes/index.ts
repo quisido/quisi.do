@@ -1,1 +1,1 @@
-export { default } from './quotes.hoc';
+export { default } from './quotes.view';

@@ -1,6 +1,6 @@
 import type { AppLayoutProps } from '@cloudscape-design/components/app-layout';
 import AppLayout from '@cloudscape-design/components/app-layout';
-import type { ReactElement } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
 import { Suspense } from 'react';
 import type { Props } from '../../../../components/wrapper';
 import ContentFallback from '../../../../components/wrapper-content-fallback';
@@ -15,16 +15,13 @@ import styles from './wrapper.module.scss';
 const contentClassName: string = validateString(styles.content);
 
 export default function CloudscapeDesignWrapper({
-  Tools,
+  Info,
   breadcrumbs,
   children,
   contentType,
   fallback,
   notifications,
-  onToolsChange,
-  toolsHide,
-  toolsOpen: controlledToolsOpen,
-}: Readonly<Props>): ReactElement {
+}: Readonly<PropsWithChildren<Props>>): ReactElement {
   const {
     ariaLabels,
     handleNavigationChange,
@@ -32,10 +29,7 @@ export default function CloudscapeDesignWrapper({
     navigationOpen,
     ref,
     toolsOpen,
-  } = useWrapper({
-    controlledToolsOpen,
-    onToolsChange,
-  });
+  } = useWrapper();
 
   // Workaround until Cloudscape supports TypeScript 4.4 exact optional
   //   properties.

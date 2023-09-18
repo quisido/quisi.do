@@ -8,13 +8,13 @@ interface Alternates {
 
 export default function mapPathToAlternates(path: string): Alternates {
   return {
-    canonical: `https://charlesstover.com${path}`,
+    canonical: `https://quisi.do${path}`,
     languages: {
-      'ar-EG': `https://charlesstover.com/ar-EG${path}`,
-      'en-US': `https://charlesstover.com${path}`,
-      'es-ES': `https://charlesstover.com/es-ES${path}`,
-      'fil-PH': `https://charlesstover.com/fil-PH${path}`,
-      'x-default': `https://charlesstover.com${path}`,
+      'ar-EG': `https://quisi.do/ar-EG${path}`,
+      'en-US': `https://quisi.do${path}`,
+      'es-ES': `https://quisi.do/es-ES${path}`,
+      'fil-PH': `https://quisi.do/fil-PH${path}`,
+      'x-default': `https://quisi.do${path}`,
     },
   };
 }

@@ -1,0 +1,13 @@
+{
+  "exclude": ["/.yarn/", "/dist/", "/jest/", "/node_modules/", "/types/"],
+  "extends": "./tsconfig.json",
+  "include": [
+    "**/*.cjs",
+    "**/*.d.ts",
+    "**/*.js",
+    "**/*.json",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.yml"
+  ]
+}

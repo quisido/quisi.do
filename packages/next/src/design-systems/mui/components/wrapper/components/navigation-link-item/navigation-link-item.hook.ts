@@ -1,11 +1,12 @@
 import type { Theme } from '@mui/material/styles';
 import type { SxProps } from '@mui/system';
-import { useCallback, useMemo } from 'react';
-import type { NavigateFunction } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import usePathname from '../../../../../../hooks/use-pathname';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
+import { useRouter } from 'next/navigation';
+import { useMemo } from 'react';
+import useEffectEvent from '../../../../../../hooks/use-effect-event';
 import useEvent from '../../../../../../hooks/use-event/use-event';
 import useHostname from '../../../../../../hooks/use-hostname';
+import usePathname from '../../../../../../hooks/use-pathname';
 
 interface Props {
   readonly depth: number;
@@ -29,14 +30,14 @@ export default function useMuiWrapperNavigationLinkItem({
   // Contexts
   const emit = useEvent();
   const hostname: string = useHostname();
-  const navigate: NavigateFunction = useNavigate();
   const locationPath: string = usePathname();
+  const router: AppRouterInstance = useRouter();
 
   return {
     selected: path === locationPath,
 
-    handleClick: useCallback((): void => {
-      navigate(path);
+    handleClick: useEffectEvent((): void => {
+      router.push(path);
 
       emit('click', {
         category: 'navigation',
@@ -44,7 +45,7 @@ export default function useMuiWrapperNavigationLinkItem({
         title: text,
         url: `${hostname}${path}`,
       });
-    }, [emit, hostname, navigate, path, text]),
+    }),
 
     sx: useMemo(
       (): SxProps<Theme> => ({

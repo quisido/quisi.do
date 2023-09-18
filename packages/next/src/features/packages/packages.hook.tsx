@@ -1,3 +1,5 @@
+'use client';
+
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useCallback, useDeferredValue, useMemo, useState } from 'react';
@@ -8,8 +10,8 @@ import Paginator from '../../utils/paginator';
 import useColumns from './hooks/use-content-columns';
 import type Item from './types/packages-item';
 import filterDefaultPackage from './utils/filter-default-package';
-import mapNpmDownloadsEntryToItem from './utils/map-npm-downloads-entry-to-item';
 import filterPackagesByMinimumDownloads from './utils/filter-packages-by-minimum-downloads';
+import mapNpmDownloadsEntryToItem from './utils/map-npm-downloads-entry-to-item';
 
 interface State {
   readonly columns: readonly TableColumn<Item>[];
@@ -56,7 +58,7 @@ const PAGE_SIZES: number[] = [
 
 export default function usePackagesContent(): State {
   // Contexts
-  const { data, isLoading } = useNpmDownloads();
+  const { data, loading: isLoading } = useNpmDownloads();
   const translate: TranslateFunction = useTranslate();
 
   // States
@@ -84,7 +86,7 @@ export default function usePackagesContent(): State {
     if (typeof data === 'undefined') {
       return [];
     }
-    const entries: [string, number[]][] = Object.entries(data);
+    const entries: [string, readonly number[]][] = Object.entries(data);
     return entries
       .map(mapNpmDownloadsEntryToItem)
       .filter(filterDefaultPackage)

@@ -32,7 +32,7 @@ export default function AwsuiTable<Item extends object>({
   visibleColumnIndices,
 }: Readonly<Props<Item>>): ReactElement {
   const {
-    DescriptionPortal,
+    // DescriptionPortal,
     ariaLabels,
     cancelLabel,
     collectionPreferencesTitle,
@@ -169,7 +169,7 @@ export default function AwsuiTable<Item extends object>({
           />
         }
       />
-      <DescriptionPortal />
+      {/* <DescriptionPortal /> */}
     </div>
   );
 }

@@ -1,7 +1,8 @@
+/// <reference types="jest" />
 import { renderHook } from '@testing-library/react-hooks';
 import { PropsWithChildren, ReactElement } from 'react';
 import FullStoryAPIProvider from '../test/components/fullstory-api-provider';
-import useFullStory from './use-fullstory';
+import useFullStory from './use-fullstory.js';
 
 const ONCE = 1;
 const TEST_ANONYMIZE = jest.fn();

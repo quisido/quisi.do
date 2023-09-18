@@ -4,8 +4,8 @@ import type MediumArticle from '../../../types/medium-article';
 import type Publication from '../types/publication';
 
 interface Props {
-  readonly devData: DevArticle[] | undefined;
-  readonly mediumData: Record<string, MediumArticle> | undefined;
+  readonly devData: readonly DevArticle[] | undefined;
+  readonly mediumData: Readonly<Record<string, MediumArticle>> | undefined;
 }
 
 export default function usePublicationsContentItems({

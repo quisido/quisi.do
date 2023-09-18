@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import mapPathToAlternates from '../utils/map-path-to-alternates';
-import AUTHOR_CHARLES_STOVER from './author-charles-stover';
+import AUTHOR_CHAZ_QUISIDO from './author-chaz-quisido';
 import FORMAT_DETECTION from './format-detection';
 import KEYWORDS from './keywords';
 // import ROBOTS_INFO from './robots-info';
@@ -13,52 +13,52 @@ import VIEWPORT from './viewport';
  */
 export default {
   alternates: mapPathToAlternates('/'),
-  applicationName: 'Charles Stover',
-  authors: [AUTHOR_CHARLES_STOVER],
+  applicationName: 'Quisi.do',
+  authors: [AUTHOR_CHAZ_QUISIDO],
   colorScheme: 'dark light',
-  creator: 'Charles Stover',
-  description: 'portfolio for Charles Stover',
+  creator: 'Chaz Quisido',
+  description: 'portfolio for Chaz Quisido',
   formatDetection: FORMAT_DETECTION,
   generator: null,
   keywords: [...KEYWORDS],
   manifest: '/manifest.json',
-  metadataBase: new URL('/', 'https://charlesstover.com'),
-  publisher: 'Charles Stover',
+  metadataBase: new URL('/', 'https://quisi.do'),
+  publisher: 'Chaz Quisido',
   referrer: 'no-referrer-when-downgrade',
   // robots: ROBOTS_INFO,
   themeColor: [...THEME_COLOR_DESCRIPTORS],
-  title: 'Charles Stover',
+  title: 'Chaz Quisido',
   viewport: VIEWPORT,
 
   appLinks: {
     web: {
-      url: 'https://charlesstover.com/',
+      url: 'https://quisi.do/',
     },
   },
 
   openGraph: {
     // audio: OGAudio | Array<OGAudio>
     // countryName: string
-    description: 'portfolio of Charles Stover',
+    description: 'portfolio of Chaz Quisido',
     // determiner: 'a' | 'an' | 'the' | 'auto' | ''
-    emails: ['open-graph@charlesstover.com'],
-    firstName: 'Charles',
+    emails: ['open-graph@quisi.do'],
+    firstName: 'Chaz',
     gender: 'male',
     // images: OGImage | Array<OGImage>
-    lastName: 'Stover',
+    lastName: 'Quisido',
     locale: 'en-US',
-    siteName: 'CharlesStover.com',
-    title: 'Charles Stover',
+    siteName: 'Quisi.do',
+    title: 'Chaz Quisido',
     type: 'profile',
-    url: 'https://charlesstover.com/',
+    url: 'https://quisi.do/',
     // videos: OGVideo | Array<OGVideo>
   },
 
   twitter: {
     creatorId: 'CharlesStover',
-    description: 'portfolio of Charles Stover',
+    description: 'portfolio of Chaz Quisido',
     // images: TwitterImage | Array<TwitterImage>;
     siteId: 'CharlesStover',
-    title: 'Charles Stover', // <-- title of content, not site
+    title: 'Chaz Quisido', // <-- title of the page, not the website
   },
 } satisfies Metadata;

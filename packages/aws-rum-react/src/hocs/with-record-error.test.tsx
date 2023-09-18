@@ -2,7 +2,7 @@
 import { render } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { useEffect } from 'react';
-import { MockAwsRumProvider, withRecordError } from '..';
+import { MockAwsRumProvider, withRecordError } from '../index.js';
 
 interface TestProps {
   readonly recordError: (error: unknown) => void;

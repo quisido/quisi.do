@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import noop from './noop';
+import noop from './noop.js';
 
 describe('noop', (): void => {
   it('should do nothing', (): void => {

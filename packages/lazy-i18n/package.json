@@ -1,0 +1,60 @@
+{
+  "name": "lazy-i18n",
+  "version": "3.0.0",
+  "author": "Quisido <lazy-i18n@quisi.do>",
+  "description": "Lazy loads translations for React apps",
+  "homepage": "https://www.npmjs.com/package/lazy-i18n",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "repository": "github:CharlesStover/lazy-i18n",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "bugs": {
+    "email": "lazy-i18n@charlesstover.com",
+    "url": "https://github.com/CharlesStover/lazy-i18n/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/CharlesStover"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "eslint": "eslint",
+    "jest": "jest",
+    "prepack": "yarn run rollup",
+    "prepublish": "yarn run eslint && yarn run jest",
+    "rollup": "rollup --config"
+  },
+  "devDependencies": {
+    "@quisido/rollup-config": "workspace:^",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/react-hooks": "^5.0.3",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.31",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "@types/testing-library__react-hooks": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-test-renderer": "^17.0.1",
+    "rollup": "^2.40.0",
+    "ts-jest": "^26.5.2",
+    "tslib": "^2.1.0",
+    "typescript": "^4.2.2"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  }
+}

@@ -4,6 +4,8 @@ import { NextResponse } from 'next/server';
 import isLocalePath from './utils/is-locale-path';
 
 const RESERVED_FILES: ReadonlySet<string> = new Set([
+  // '/',
+  // '/_error',
   '/apple-icon.png',
   '/favicon.ico',
   '/hhRmW9PFLyiXjXY8JBcs1U.nex',
@@ -30,7 +32,6 @@ export const middleware: NextMiddleware = ({
 
   // Redirect away from English locales in URLs.
   if (nextUrlPathname.startsWith('/en-US/')) {
-    console.log('Rewriting without en-US:', nextUrlPathname);
     const newUrl: URL = new URL(
       nextUrlPathname.substring('/en-US'.length),
       requestUrl,
@@ -40,7 +41,6 @@ export const middleware: NextMiddleware = ({
 
   // Rewrite missing locales to English.
   if (!isLocalePath(nextUrlPathname)) {
-    console.log('Rewriting to en-US:', nextUrlPathname);
     const newPathname = `/en-US${nextUrlPathname}`;
     const newUrl: URL = new URL(newPathname, requestUrl);
     return NextResponse.rewrite(newUrl);

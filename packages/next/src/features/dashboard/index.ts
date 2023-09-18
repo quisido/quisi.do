@@ -1,1 +1,1 @@
-export { default } from './dashboard.hoc';
+export { default } from './dashboard.view';

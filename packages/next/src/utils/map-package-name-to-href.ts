@@ -2,6 +2,7 @@ import mapPackageNameToRepositoryName from '../utils/map-package-name-to-reposit
 
 const MONOREPO_DEPENDENCIES = new Set([
   'aws-rum-react',
+  'fullstory-react',
   'react-datadog',
   'unknown2string',
   'use-offline',
@@ -17,7 +18,7 @@ export default function mapPackageNameToRepositoryHref(
   }
 
   if (MONOREPO_DEPENDENCIES.has(packageName)) {
-    return `https://github.com/CharlesStover/charlesstover.com/tree/main/packages/${packageName}#readme`;
+    return `https://github.com/CharlesStover/quisi.do/tree/main/packages/${packageName}#readme`;
   }
 
   return `https://github.com/CharlesStover/${mapPackageNameToRepositoryName(

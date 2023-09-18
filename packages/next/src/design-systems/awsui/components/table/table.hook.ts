@@ -8,7 +8,7 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import type { ComponentType, MutableRefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
+// import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
 import type ReadonlyCollectionPreferencesEvent from '../../../../types/readonly-awsui-collection-preferences-event';
 import type ReadonlyTableSortingEvent from '../../../../types/readonly-awsui-table-sorting-event';
 import type TableColumn from '../../../../types/table-column';
@@ -42,7 +42,7 @@ interface Props<Item> {
 }
 
 interface State<Item> {
-  readonly DescriptionPortal: ComponentType<Record<string, never>>;
+  // readonly DescriptionPortal: ComponentType<Record<string, never>>;
   readonly ariaLabels: TableProps.AriaLabels<Item>;
   readonly cancelLabel: string;
   readonly collectionPreferencesTitle: string;
@@ -156,6 +156,7 @@ export default function useAwsuiTable<Item extends object>({
   }, [columnDefinitions, visibleColumnIndices]);
 
   // Effects
+  /*
   const DescriptionPortal: ComponentType<Record<string, never>> =
     useAwsuiTableItemDescription({
       Component: Description,
@@ -163,9 +164,10 @@ export default function useAwsuiTable<Item extends object>({
       items: rows,
       ref,
     });
+  */
 
   return {
-    DescriptionPortal,
+    // DescriptionPortal,
     ariaLabels: useAriaLabels(),
     cancelLabel: translate('Cancel') ?? '...',
     collectionPreferencesTitle: translate('Preferences') ?? '...',

@@ -3,7 +3,7 @@ import describeDesignSystems from '../../test/cypress/utils/describe-design-syst
 import describeFeature from '../../test/cypress/utils/describe-feature';
 
 const shouldDisplayCriticalElements = (): void => {
-  cy.contains('nav', 'CharlesStover.com');
+  cy.contains('nav', 'Quisi.do');
   cy.contains('h2', 'About me');
   cy.contains('h2', 'Projects');
 };
