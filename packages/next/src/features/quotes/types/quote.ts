@@ -1,3 +1,4 @@
+import type { StaticImageData } from 'next/image.js';
 import type { ReactNode } from 'react';
 
 export default interface Quote {
@@ -5,7 +6,7 @@ export default interface Quote {
   readonly author: string;
   readonly company?: string | undefined;
   readonly gender?: 'female' | 'male' | 'neutral' | undefined;
-  readonly image?: string | undefined;
+  readonly image?: StaticImageData | undefined;
   readonly quote: ReactNode;
   readonly title?: string | undefined;
 }

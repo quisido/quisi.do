@@ -9,7 +9,7 @@ export default function useWrapperFooter(): State {
     features: useMemo((): readonly string[] => {
       const newFeatures: string[] = [];
 
-      if ('__coverage__' in window) {
+      if (typeof window === 'object' && '__coverage__' in window) {
         newFeatures.push('coverage enabled');
       }
 

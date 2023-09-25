@@ -1,3 +1,5 @@
+'use client';
+
 import type { PropsWithChildren, ReactElement } from 'react';
 import DesignSystem from '../design-system';
 import Fallback from '../wrapper-content-fallback';
@@ -23,7 +25,6 @@ export default function Wrapper({
   });
 
   return (
-    // <WrapperVariantContext.Provider value={contentType}>
     <DesignSystem
       Fallback={Fallback}
       props={{
@@ -32,6 +33,5 @@ export default function Wrapper({
       }}
       type="wrapper"
     />
-    // </WrapperVariantContext.Provider>
   );
 }

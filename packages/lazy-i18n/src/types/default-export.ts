@@ -1,4 +1,3 @@
-type DefaultExport<T> = {
+export type DefaultExport<T> = {
   default: T;
 };
-export default DefaultExport;

@@ -1,15 +1,18 @@
+'use client';
+
 import { useEffect } from 'react';
-import GOOGLE_ANALYTICS_WINDOW from '../constants/google-analytics-window';
+import GoogleAnalyticsWindow from '../types/google-analytics-window';
 
 export default function useDataLayer(): void {
   useEffect((): VoidFunction | undefined => {
-    if (typeof GOOGLE_ANALYTICS_WINDOW.dataLayer !== 'undefined') {
+    const googleAnalyticsWindow: GoogleAnalyticsWindow = window;
+    if (typeof googleAnalyticsWindow.dataLayer !== 'undefined') {
       return;
     }
 
-    GOOGLE_ANALYTICS_WINDOW.dataLayer = [];
+    googleAnalyticsWindow.dataLayer = [];
     return (): void => {
-      delete GOOGLE_ANALYTICS_WINDOW.dataLayer;
+      delete googleAnalyticsWindow.dataLayer;
     };
   }, []);
 }

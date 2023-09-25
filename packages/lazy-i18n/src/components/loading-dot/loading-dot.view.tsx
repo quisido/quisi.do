@@ -1,4 +1,4 @@
-import { CSSProperties, ReactElement } from 'react';
+import type { CSSProperties, ReactElement } from 'react';
 import styles from './loading-dot.module.scss';
 
 interface Props {
@@ -19,7 +19,7 @@ const STYLES: [CSSProperties, CSSProperties, CSSProperties] = [
 
 export default function I18nLoadingDot({ index }: Props): ReactElement {
   return (
-    <span className={styles.root} style={STYLES[index]}>
+    <span className={styles['root']} style={STYLES[index]}>
       .
     </span>
   );

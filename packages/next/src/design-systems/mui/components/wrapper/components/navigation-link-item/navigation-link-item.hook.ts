@@ -1,8 +1,9 @@
+'use client';
+
 import type { Theme } from '@mui/material/styles';
 import type { SxProps } from '@mui/system';
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
-import { useRouter } from 'next/navigation';
-import { useMemo } from 'react';
+import { useRouter } from 'next/navigation.js';
+import { useEffect, useMemo } from 'react';
 import useEffectEvent from '../../../../../../hooks/use-effect-event';
 import useEvent from '../../../../../../hooks/use-event/use-event';
 import useHostname from '../../../../../../hooks/use-hostname';
@@ -31,7 +32,11 @@ export default function useMuiWrapperNavigationLinkItem({
   const emit = useEvent();
   const hostname: string = useHostname();
   const locationPath: string = usePathname();
-  const router: AppRouterInstance = useRouter();
+  const router = useRouter();
+
+  useEffect((): void => {
+    router.prefetch(path);
+  }, [path, router]);
 
   return {
     selected: path === locationPath,

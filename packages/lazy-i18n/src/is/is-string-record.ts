@@ -1,5 +1,5 @@
-import isRecord from '../is/is-record';
-import isStringTuple from '../is/is-string-tuple';
+import isRecord from '../is/is-record.js';
+import isStringTuple from '../is/is-string-tuple.js';
 
 export default function isStringRecord(
   value: unknown,

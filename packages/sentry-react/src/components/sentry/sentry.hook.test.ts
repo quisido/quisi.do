@@ -5,7 +5,7 @@ jest.mock('@sentry/react', () => ({
   setUser: TEST_SET_USER,
 }));
 
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import type { User } from '@sentry/types';
 import DEFAULT_USER from '../../constants/default-user';
 import useSentry from './sentry.hook';

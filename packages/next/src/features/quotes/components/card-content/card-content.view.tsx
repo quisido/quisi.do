@@ -1,3 +1,4 @@
+import Image from 'next/image.js';
 import type { ReactElement } from 'react';
 import Div from '../../../../components/div';
 import validateString from '../../../../utils/validate-string';
@@ -18,7 +19,7 @@ export default function CardContent({
     <>
       {typeof image !== 'undefined' && (
         <Div float="right" marginLeft="large" marginRight="medium">
-          <img
+          <Image
             alt={author}
             className={imageClassName}
             height={IMAGE_SIZE}

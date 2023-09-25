@@ -1,6 +1,8 @@
 {
-  "extends": "@monorepo-template/tsconfig/react-application/development.json",
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
   "exclude": [
     "src/**/*.e2e.ts",
     "src/**/*.test.ts",

@@ -4,11 +4,14 @@ import type {
   ReactNode,
 } from 'react';
 import { useCallback, useLayoutEffect, useRef } from 'react';
+import { useLink as useNextAwsuiLink } from 'use-next-awsui';
 import filterHrefByBlank from '../../../../utils/filter-href-by-blank';
 import filterHrefByExternal from '../../../../utils/filter-href-by-external';
 import mapLinkSpanToAnchorElement from './utils/map-link-span-to-anchor-element';
 import useEvent from '../../../../hooks/use-event/use-event';
 import filterNodesByImage from '../../../../utils/filter-nodes-by-image';
+import { NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
+import { LinkProps } from '@cloudscape-design/components/link';
 
 interface Props {
   readonly category: string;
@@ -19,7 +22,7 @@ interface Props {
 
 interface State {
   readonly external: boolean;
-  readonly handleFollow: VoidFunction;
+  readonly handleFollow: (event: CustomEvent<LinkProps.FollowDetail>) => void;
   readonly ref: MutableRefObject<HTMLSpanElement | null>;
   readonly rel: string | undefined;
   readonly target: HTMLAttributeAnchorTarget;
@@ -54,19 +57,24 @@ export default function useCloudscapeDesignLink({
     };
   }, [title]);
 
+  const { handleFollow } = useNextAwsuiLink(href);
   return {
     external: filterHrefByExternal(href) && !filterNodesByImage(children),
     ref,
     rel: isBlank ? 'nofollow noopener noreferrer' : undefined,
     target,
 
-    handleFollow: useCallback((): void => {
-      emit('click', {
-        category,
-        label: title,
-        target,
-        url: href,
-      });
-    }, [category, emit, href, target, title]),
+    handleFollow: useCallback(
+      (e: CustomEvent<LinkProps.FollowDetail>): void => {
+        emit('click', {
+          category,
+          label: title,
+          target,
+          url: href,
+        });
+        handleFollow(e);
+      },
+      [category, emit, handleFollow, href, target, title],
+    ),
   };
 }

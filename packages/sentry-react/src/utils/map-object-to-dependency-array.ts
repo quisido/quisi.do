@@ -1,4 +1,4 @@
-import sortRecordKeys from '../utils/sort-record-keys';
+import sortRecordKeys from '../utils/sort-record-keys.js';
 
 export default function mapObjectToDependencyArray<T extends object>(
   obj: T,

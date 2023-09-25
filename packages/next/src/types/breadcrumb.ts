@@ -1,4 +1,4 @@
 export default interface Breadcrumb {
-  children: string;
-  path: string;
+  readonly children: string;
+  readonly path: string;
 }

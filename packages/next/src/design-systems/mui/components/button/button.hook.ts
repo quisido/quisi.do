@@ -1,6 +1,7 @@
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
-import { useRouter } from 'next/navigation';
-import type { MouseEvent, ReactNode } from 'react';
+'use client';
+
+import { useRouter } from 'next/navigation.js';
+import { useEffect, type MouseEvent, type ReactNode } from 'react';
 import innerText from 'react-innertext';
 import useEffectEvent from '../../../../hooks/use-effect-event';
 import useEvent from '../../../../hooks/use-event/use-event';
@@ -32,7 +33,15 @@ export default function useMuiButton({
 
   // Contexts
   const emit = useEvent();
-  const router: AppRouterInstance = useRouter();
+  const router = useRouter();
+
+  useEffect((): void => {
+    if (isBlank || typeof href === 'undefined') {
+      return;
+    }
+
+    router.prefetch(href);
+  }, [href, isBlank, router]);
 
   // States
   return {

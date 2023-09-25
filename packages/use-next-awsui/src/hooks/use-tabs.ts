@@ -2,8 +2,7 @@
 
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { TabsProps } from '@awsui/components-react/tabs';
-import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime.js';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation.js';
 import type { MutableRefObject } from 'react';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import RunnableTabFinder from '../utils/runnable-tab-finder.js';
@@ -34,7 +33,7 @@ export default function useReactRouterTabs(
   // Contexts
   const hash: string = useHash();
   const pathname: string = usePathname();
-  const router: AppRouterInstance = useRouter();
+  const router = useRouter();
   const search: string = useSearch();
 
   // States

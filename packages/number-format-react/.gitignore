@@ -1,0 +1,9 @@
+/.git
+/.vscode
+/build
+/coverage
+/dist
+/jest
+/node_modules
+/.env
+/yarn-error.log

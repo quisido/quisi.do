@@ -1,3 +1,5 @@
+/// <reference types="jest" />
+
 export default async function expectToEventuallyThrow(
   f: () => Promise<void>,
   err: unknown,

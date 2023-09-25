@@ -4,9 +4,9 @@ import type { BrowserOptions, ReportDialogOptions } from '@sentry/react';
 import { ErrorBoundary } from '@sentry/react';
 import type { Scope, User } from '@sentry/types';
 import type { ReactElement, ReactNode } from 'react';
-import DefaultErrorBoundaryFallback from '../../components/default-error-boundary-fallback';
-import type FallbackRenderParams from '../../types/fallback-render-params';
-import useSentry from './sentry.hook';
+import DefaultErrorBoundaryFallback from '../../components/default-error-boundary-fallback/index.js';
+import type FallbackRenderParams from '../../types/fallback-render-params.js';
+import useSentry from './sentry.hook.js';
 
 interface Props extends Readonly<BrowserOptions> {
   readonly children: ReactNode;
@@ -71,6 +71,7 @@ export default function Sentry({
   });
 
   return (
+    // @ts-expect-error https://github.com/getsentry/sentry-javascript/pull/9098
     <ErrorBoundary
       beforeCapture={beforeErrorBoundaryCapture}
       dialogOptions={errorBoundaryDialogOptions}

@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import { PropsWithChildren, ReactElement } from 'react';
 import TranslateFunctionContext from '../contexts/translate-function';
 import { useTranslate } from '../index';

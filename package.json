@@ -1,15 +1,15 @@
 {
   "name": "@quisi/do",
   "version": "1.0.0",
-  "author": "Chaz Quisido <chaz@quisi.do>",
-  "description": "the professional portfolio of Chaz Quisido",
+  "author": "Quisido <contact@quisi.do>",
+  "description": "Quisido",
   "homepage": "https://quisi.do/",
   "packageManager": "yarn@3.6.3",
   "private": true,
   "repository": "github:CharlesStover/quisi.do",
   "type": "module",
   "bugs": {
-    "email": "chaz@quisi.do",
+    "email": "bugs@quisi.do",
     "url": "https://github.com/CharlesStover/quisi.do/issues"
   },
   "funding": {
@@ -33,7 +33,7 @@
     "publish": "yarn workspaces foreach --no-private --parallel --topological-dev --verbose npm publish --tolerate-republish",
     "serve": "yarn packages/react-scripts run serve",
     "test": "monorepo-template-test",
-    "up": "yarn up \"@*/*\" \"!(aws-rum-react|fullstory-react|lazy-i18n|react-datadog|rollup-config|sentry-react|unknown2string|use-next-awsui|use-offline)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
+    "up": "yarn up \"@*/*\" \"!(aws-rum-react|fullstory-react|lazy-i18n|number-format-react|react-datadog|sentry-react|unknown2string|use-awsui-table-item-description|use-next-awsui|use-offline)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
   },
   "workspaces": [
     "packages/*"
@@ -42,7 +42,6 @@
     "@microsoft/eslint-formatter-sarif": "^3.0.0",
     "@monorepo-template/eslint-config": "^1.0.7",
     "@monorepo-template/test": "^2.2.0",
-    "@monorepo-template/tsconfig": "^1.1.2",
     "@monorepo-template/up": "^1.0.1",
     "@types/node": "^20.6.5",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
@@ -58,7 +57,6 @@
     "typescript": "^5.2.2"
   },
   "resolutions": {
-    "aws-rum-web@^1.14.0": "patch:aws-rum-web@npm%3A1.14.0#./.yarn/patches/aws-rum-web-npm-1.14.0-653ad283fd.patch",
-    "@sentry/react@^7.70.0": "patch:@sentry/react@npm%3A7.70.0#./.yarn/patches/@sentry-react-npm-7.70.0-497abb71d0.patch"
+    "aws-rum-web@^1.14.0": "patch:aws-rum-web@npm%3A1.14.0#./.yarn/patches/aws-rum-web-npm-1.14.0-653ad283fd.patch"
   }
 }

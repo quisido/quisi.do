@@ -41,7 +41,6 @@ export default {
     },
 
     device: {
-      name: window.navigator.userAgent,
       // arch?: string;
       // battery_level?: number;
       // battery_status?: string;
@@ -61,6 +60,7 @@ export default {
       // memory_size?: number;
       // model?: string;
       // model_id?: string;
+      // name: window.navigator.userAgent, // window isn't defined until runtime
       // online?: boolean;
       // orientation?: 'portrait' | 'landscape';
       // processor_count?: number;

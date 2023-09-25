@@ -21,16 +21,14 @@
     "access": "public"
   },
   "scripts": {
-    "eslint": "eslint",
+    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/unknown2string.sarif || eslint '**/*'",
     "jest": "jest",
     "prepack": "yarn run tsc",
     "prepublish": "concurrently --kill-others-on-fail --names eslint,jest \"yarn run eslint\" \"yarn run jest\"",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile"
   },
   "devDependencies": {
-    "@quisido/rollup-config": "workspace:^",
     "@testing-library/react": "^14.0.0",
-    "@testing-library/react-hooks": "^8.0.1",
     "@types/jest": "^29.5.5",
     "@types/node": "^20.6.5",
     "@types/react": "^18.2.22",
@@ -48,7 +46,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",
-    "rollup": "^3.29.3",
     "ts-jest": "^29.1.1",
     "tslib": "^2.6.2",
     "typescript": "^5.2.2"

@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react';
 import { lazy } from 'react';
+import Awsui from '../../../design-systems/awsui';
 import DesignSystem from '../../../constants/design-system';
 import type DesignSystemProps from '../../../types/design-system-props';
 
@@ -15,7 +16,7 @@ type DesignSystemComponent<
   Row extends object,
 > = ComponentType<DesignSystemProps<Card, Row>>;
 
-const Awsui = lazy(async () => import('../../../design-systems/awsui'));
+// const Awsui = lazy(async () => import('../../../design-systems/awsui'));
 const Mui = lazy(async () => import('../../../design-systems/mui'));
 const CloudscapeDesign = lazy(
   async () => import('../../../design-systems/cloudscape-design'),

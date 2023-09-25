@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo } from 'react';
 import type Breadcrumb from '../../types/breadcrumb';
 import ROOT_BREADCRUMBS from './constants/root-breadcrumbs';

@@ -1,5 +1,5 @@
-import isRecord from '../is/is-record';
-import DefaultExport from '../types/default-export';
+import isRecord from '../is/is-record.js';
+import type { DefaultExport } from '../types/default-export.js';
 
 export default function isDefaultExport(
   value: unknown,

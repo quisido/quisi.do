@@ -22,7 +22,7 @@
   },
   "scripts": {
     "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/use-offline.sarif || eslint '**/*'",
-    "jest": "jest --runInBand",
+    "jest": "jest",
     "prepack": "yarn run tsc",
     "prepublish": "concurrently --kill-others-on-fail --names eslint,jest \"yarn run eslint\" \"yarn run jest\"",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile"
@@ -31,8 +31,6 @@
     "@microsoft/eslint-formatter-sarif": "^3.0.0",
     "@monorepo-template/eslint-config": "^1.0.7",
     "@monorepo-template/jest-module-preset": "^1.1.3",
-    "@monorepo-template/tsconfig": "^1.1.2",
-    "@quisido/rollup-config": "workspace:^",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.5",
     "@types/node": "^20.6.5",
@@ -47,7 +45,6 @@
     "jest-environment-jsdom": "^29.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rollup": "^3.29.3",
     "tslib": "^2.6.2",
     "typescript": "^5.2.2"
   },

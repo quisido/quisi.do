@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { ReactElement } from 'react';
-import inner from '../test-utils/inner';
-import replaceVariables from './replace-variables';
+import inner from '../test-utils/inner.js';
+import replaceVariables from './replace-variables.js';
 
 describe('replaceVariables', (): void => {
   it('should return strings with no variables', (): void => {

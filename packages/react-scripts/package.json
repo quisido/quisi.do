@@ -16,7 +16,6 @@
     "@monorepo-template/cypress-nyc-config": "^1.0.4",
     "@monorepo-template/eslint-config": "^1.0.7",
     "@monorepo-template/jest-application-preset": "^1.1.3",
-    "@monorepo-template/tsconfig": "^1.1.2",
     "babel-jest": "^29.7.0",
     "babel-loader": "^9.1.3",
     "compose-function": "^3.0.3",

@@ -1,6 +1,5 @@
 import type { CollectionPreferencesProps } from '@cloudscape-design/components/collection-preferences';
 import type { NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
-import type { NonCancelableEventHandler } from '@cloudscape-design/components/internal/events';
 import type { PaginationProps } from '@cloudscape-design/components/pagination';
 import type { TableProps } from '@cloudscape-design/components/table';
 import type { TextFilterProps } from '@cloudscape-design/components/text-filter';
@@ -8,7 +7,7 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import type { ComponentType, MutableRefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import * as useTableItemDescription from 'use-awsui-table-item-description';
+import useItemDescription from 'use-awsui-table-item-description';
 import type CollectionPreferencesEvent from '../../../../types/readonly-cloudscape-design-collection-preferences-event';
 import type TableSortingEvent from '../../../../types/readonly-cloudscape-design-table-sorting-event';
 import type TableColumn from '../../../../types/table-column';
@@ -52,6 +51,7 @@ interface State<Item> {
   readonly currentPageIndex: number;
   readonly filteringAriaLabel: string | undefined;
   readonly filteringText: string;
+  readonly handleSortingChange: (event: TableSortingEvent<Item>) => void;
   readonly pagesCount: number;
   readonly paginationAriaLabels: PaginationProps.Labels;
   readonly preferences: CollectionPreferencesProps.Preferences;
@@ -62,15 +62,16 @@ interface State<Item> {
   readonly visibleContent: readonly string[] | undefined;
   readonly wrapLines: boolean | undefined;
   readonly wrapLinesPreference: CollectionPreferencesProps.WrapLinesPreference;
-  readonly handleCollectionPreferencesConfirm: NonCancelableEventHandler<
-    CollectionPreferencesProps.Preferences<void>
-  >;
+  readonly handleCollectionPreferencesConfirm: (
+    event: NonCancelableCustomEvent<
+      CollectionPreferencesProps.Preferences<void>
+    >,
+  ) => void;
   readonly handlePaginationChange:
-    | NonCancelableEventHandler<PaginationProps.ChangeDetail>
+    | ((event: NonCancelableCustomEvent<PaginationProps.ChangeDetail>) => void)
     | undefined;
-  readonly handleSortingChange: (event: TableSortingEvent<Item>) => void;
   readonly handleTextFilterChange:
-    | NonCancelableEventHandler<TextFilterProps.ChangeDetail>
+    | ((event: NonCancelableCustomEvent<TextFilterProps.ChangeDetail>) => void)
     | undefined;
   readonly pageSizePreference:
     | CollectionPreferencesProps.PageSizePreference
@@ -140,7 +141,7 @@ export default function useCloudscapeDesignTable<Item extends object>({
 
   // Effects
   const DescriptionPortal: ComponentType<Record<string, never>> =
-    useTableItemDescription({
+    useItemDescription({
       Component: Description,
       colSpan: visibleColumnIndices?.length ?? columnDefinitions.length,
       items: rows,
@@ -222,7 +223,9 @@ export default function useCloudscapeDesignTable<Item extends object>({
     ),
 
     handleTextFilterChange: useMemo(():
-      | NonCancelableEventHandler<TextFilterProps.ChangeDetail>
+      | ((
+          event: NonCancelableCustomEvent<TextFilterProps.ChangeDetail>,
+        ) => void)
       | undefined => {
       if (typeof onFilterChange === 'undefined') {
         return;

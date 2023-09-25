@@ -1,7 +1,7 @@
 'use client';
 
 import I18n, { useTranslate, type TranslateFunction } from 'lazy-i18n';
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { useSelectedLayoutSegment } from 'next/navigation.js';
 import { PropsWithChildren, ReactElement, useMemo, useState } from 'react';
 import Wrapper from '../../components/wrapper';
 import EMPTY_ARRAY from '../../constants/empty-array';
@@ -56,6 +56,13 @@ export default function AppWrapper({
                 path: '/quotes',
               },
             ];
+          case 'spritesheet2gif':
+            return [
+              {
+                children: 'Sprite sheet to GIF',
+                path: '/spritesheet2gif',
+              },
+            ];
           default:
             throw new Error(`Unknown breadcrumbs segment: ${segment}`);
         }
@@ -72,6 +79,8 @@ export default function AppWrapper({
             return <I18n>Loading publications</I18n>;
           case 'quotes':
             return <I18n>Loading quotes</I18n>;
+          case 'spritesheet2gif':
+            return <>...</>;
           default:
             throw new Error(`Unknown fallback segment: ${segment}`);
         }

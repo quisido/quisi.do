@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react';
-import type { ReactNodeTranslationValue } from '../types/react-node-translation-value.js';
-import type { StringTranslationValue } from '../types/string-translation-value.js';
+import type { ReactNodeTranslationValue } from './react-node-translation-value.js';
+import type { StringTranslationValue } from './string-translation-value.js';
 
 type ReactNodeVars = Record<string, ReactNodeTranslationValue>;
 type StringVars = Record<string, StringTranslationValue>;
 
-export interface TranslateFunction {
+export default interface TranslateFunction {
   // translate('Hello, world!')
   (str: string): string | undefined;
 

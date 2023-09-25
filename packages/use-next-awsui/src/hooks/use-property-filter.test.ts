@@ -1,5 +1,5 @@
 import type { PropertyFilterProps } from '@awsui/components-react/property-filter';
-import { act } from '@testing-library/react-hooks';
+import { act } from '@testing-library/react';
 import { usePropertyFilter } from '..';
 import renderHook from '../test-utils/render-hook';
 

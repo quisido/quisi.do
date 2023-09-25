@@ -1,9 +1,10 @@
-import { ComponentType, ReactElement, ReactNode, useContext } from 'react';
-import loadingComponentContext from '../../contexts/loading-component';
-import useTranslate from '../../hooks/use-translate';
-import ReactNodeTranslationValue from '../../types/react-node-translation-value';
-import TranslateFunction from '../../types/translate-function';
-import mapChildrenToTranslationKey from './utils/map-children-to-translation-key';
+import type { ComponentType, ReactElement, ReactNode } from 'react';
+import { useContext } from 'react';
+import loadingComponentContext from '../../contexts/loading-component.js';
+import useTranslate from '../../hooks/use-translate.js';
+import type { ReactNodeTranslationValue } from '../../types/react-node-translation-value.js';
+import type TranslateFunction from '../../types/translate-function.js';
+import mapChildrenToTranslationKey from './utils/map-children-to-translation-key.js';
 
 interface Props extends Record<string, ReactNodeTranslationValue> {
   children: number | string | (number | string)[];

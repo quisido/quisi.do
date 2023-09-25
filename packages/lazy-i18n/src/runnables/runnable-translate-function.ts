@@ -1,26 +1,27 @@
-import { ReactNode } from 'react';
-import ReactNodeTranslationValue from '../types/react-node-translation-value';
-import StringTranslationValue from '../types/string-translation-value';
-import TranslateFunction from '../types/translate-function';
-import EventEmitter from '../utils/event-emitter';
-import replaceVariables from '../utils/replace-variables';
+import type { ReactNode } from 'react';
+import type { ReactNodeTranslationValue } from '../types/react-node-translation-value.js';
+import type { StringTranslationValue } from '../types/string-translation-value.js';
+import type TranslateFunction from '../types/translate-function.js';
+import EventEmitter from '../utils/event-emitter.js';
+import replaceVariables from '../utils/replace-variables.js';
 
 type ReactNodeVars = Record<string, ReactNodeTranslationValue>;
 type Event = 'loadFallbackTranslations' | 'loadTranslations' | 'notFound';
 type StringVars = Record<string, StringTranslationValue>;
 
 interface Options {
-  fallbackTranslations?: Record<string, string>;
-  translations?: Record<string, string>;
+  readonly fallbackTranslations?: Record<string, string> | undefined;
+  readonly translations?: Record<string, string> | undefined;
 }
 
 interface Run {
-  run: TranslateFunction;
+  readonly run: TranslateFunction;
 }
 
 export default class RunnableTranslateFunction
   extends EventEmitter<Event, [string]>
-  implements Run {
+  implements Run
+{
   private _fallbackTranslations: Record<string, string> | undefined;
   private _translations: Record<string, string> | undefined;
 
@@ -45,8 +46,9 @@ export default class RunnableTranslateFunction
     }
 
     // Use target translation.
-    if (typeof this._translations[str] !== 'undefined') {
-      return replaceVariables(this._translations[str], vars);
+    const translationsStr: string | undefined = this._translations[str];
+    if (typeof translationsStr !== 'undefined') {
+      return replaceVariables(translationsStr, vars);
     }
 
     // Load fallback locale.
@@ -56,8 +58,10 @@ export default class RunnableTranslateFunction
     }
 
     // Use fallback translation.
-    if (typeof this._fallbackTranslations[str] !== 'undefined') {
-      return replaceVariables(this._fallbackTranslations[str], vars);
+    const fallbackTranslationsStr: string | undefined =
+      this._fallbackTranslations[str];
+    if (typeof fallbackTranslationsStr !== 'undefined') {
+      return replaceVariables(fallbackTranslationsStr, vars);
     }
 
     this.emit('notFound', str);

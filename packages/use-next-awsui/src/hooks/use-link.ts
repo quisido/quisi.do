@@ -1,9 +1,13 @@
 'use client';
 
 import type { LinkProps } from '@awsui/components-react/link';
-import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime.js';
 import { useRouter } from 'next/navigation.js';
+import { useEffect } from 'react';
 import useEffectEvent from './use-effect-event.js';
+
+interface Props {
+  readonly href?: string | undefined;
+}
 
 export interface State {
   readonly handleFollow: (
@@ -11,9 +15,19 @@ export interface State {
   ) => void;
 }
 
-export default function useLink(): State {
+const DEFAULT_PROPS: Props = {};
+
+export default function useLink({ href }: Props = DEFAULT_PROPS): State {
   // Contexts
-  const router: AppRouterInstance = useRouter();
+  const router = useRouter();
+
+  useEffect((): void => {
+    if (typeof href === 'undefined') {
+      return;
+    }
+
+    router.prefetch(href);
+  }, [href, router]);
 
   return {
     handleFollow: useEffectEvent(

@@ -2,9 +2,10 @@ import type { BreadcrumbGroupProps } from '@cloudscape-design/components/breadcr
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
-import { useBreadcrumbGroup } from '../../../../../../../../use-next-awsui';
+import { useBreadcrumbGroup } from 'use-next-awsui';
 import type Breadcrumb from '../../../../../../types/breadcrumb';
 import mapBreadcrumbsToBreadcrumbGroupItems from '../../utils/map-breadcrumbs-to-breadcrumb-group-items';
+import mapBreadcrumbToPath from '../../../../../../utils/map-breadcrumb-to-path';
 
 interface State {
   readonly ariaLabel: string | undefined;
@@ -27,7 +28,12 @@ export default function useCloudscapeDesignWrapperBreadcrumbs(
   const translate: TranslateFunction = useTranslate();
 
   // States
-  const { handleFollow } = useBreadcrumbGroup();
+  const paths: ReadonlySet<string> = useMemo(
+    (): ReadonlySet<string> => new Set(breadcrumbs.map(mapBreadcrumbToPath)),
+    [breadcrumbs],
+  );
+
+  const { handleFollow } = useBreadcrumbGroup(paths);
 
   return {
     ariaLabel: translate('Breadcrumbs'),
