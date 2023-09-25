@@ -1,7 +1,7 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import expectToEventuallyThrow from '../../../test-utils/expect-to-eventually-throw';
-import DefaultExport from '../../../types/default-export';
-import Translations from '../../../types/translations';
+import type { DefaultExport } from '../../../types/default-export';
+import type { Translations } from '../../../types/translations';
 import useLoadTranslations, { Props, State } from './use-load-translations';
 
 type Locale = 'es_ES';

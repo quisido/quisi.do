@@ -1,13 +1,16 @@
+'use client';
+
 import { useEffect } from 'react';
-import HEAD from '../constants/head';
+import getHead from '../utils/get-head';
 import mapTrackingIdToScriptElement from '../utils/map-tracking-id-to-script-element';
 
 export default function useScript(trackingId: string): void {
   useEffect((): VoidFunction => {
+    const head: HTMLHeadElement = getHead();
     const script: HTMLScriptElement = mapTrackingIdToScriptElement(trackingId);
-    HEAD.appendChild(script);
+    head.appendChild(script);
     return (): void => {
-      HEAD.removeChild(script);
+      head.removeChild(script);
     };
   }, [trackingId]);
 }

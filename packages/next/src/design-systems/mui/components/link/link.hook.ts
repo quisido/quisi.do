@@ -1,6 +1,11 @@
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
-import { useRouter } from 'next/navigation';
-import type { HTMLAttributeAnchorTarget, MouseEvent } from 'react';
+'use client';
+
+import { useRouter } from 'next/navigation.js';
+import {
+  useEffect,
+  type HTMLAttributeAnchorTarget,
+  type MouseEvent,
+} from 'react';
 import useEffectEvent from '../../../../hooks/use-effect-event';
 import useEvent from '../../../../hooks/use-event/use-event';
 import filterHrefByBlank from '../../../../utils/filter-href-by-blank';
@@ -27,7 +32,15 @@ export default function useMuiLink({
 
   // Contexts
   const emit = useEvent();
-  const router: AppRouterInstance = useRouter();
+  const router = useRouter();
+
+  useEffect((): void => {
+    if (isBlank) {
+      return;
+    }
+
+    router.prefetch(href);
+  }, [href, isBlank, router]);
 
   // States
   return {

@@ -43,11 +43,6 @@
     },
 
     {
-      "name": "Rollup configuration",
-      "path": "packages/rollup-config"
-    },
-
-    {
       "name": "Sentry",
       "path": "packages/sentry-react"
     },
@@ -56,6 +51,16 @@
     {
       "name": "mapUnknownToString",
       "path": "packages/unknown2string"
+    },
+
+    {
+      "name": "NumberFormat",
+      "path": "packages/number-format-react"
+    },
+
+    {
+      "name": "useAwsuiTableItemDescription",
+      "path": "packages/use-awsui-table-item-description"
     },
 
     {

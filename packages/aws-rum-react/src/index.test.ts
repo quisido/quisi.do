@@ -145,7 +145,7 @@ function describePackageJson({
 
       it('should have prepack scripts', (): void => {
         assert('prepack' in scripts);
-        expect(scripts.prepack).toBe('yarn run rollup');
+        expect(scripts.prepack).toBe('yarn run tsc');
       });
 
       it('should have prepublish scripts', (): void => {
@@ -190,7 +190,7 @@ function describePackageJson({
 }
 
 describePackageJson({
-  author: 'Chaz Quisido',
+  author: 'Quisido',
   domain: 'quisi.do',
   fundingUrl: 'https://github.com/sponsors/CharlesStover',
   packageJson: readFileSync('../../package.json').toString(),

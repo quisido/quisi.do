@@ -140,8 +140,7 @@ To contribute to this repository, start by running the following commands.
 
 To test your changes for validity, use the following scripts:
 
-- To build your changes, run `yarn rollup`.
-- To build your changes in watch mode, run `yarn rollup-watch`.
+- To build your changes, run `yarn tsc`.
 - To lint your changes, run `yarn eslint`.
 - To unit test your changes, run `yarn jest`.
 - To unit test your changes in watch mode, run `yarn jest-watch`.

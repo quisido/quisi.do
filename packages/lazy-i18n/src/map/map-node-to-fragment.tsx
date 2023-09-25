@@ -1,4 +1,5 @@
-import { Fragment, ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
+import { Fragment } from 'react';
 
 export default function mapNodeToFragment(
   node: ReactNode,

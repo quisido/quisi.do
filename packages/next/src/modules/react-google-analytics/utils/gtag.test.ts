@@ -1,14 +1,16 @@
-import GOOGLE_ANALYTICS_WINDOW from '../constants/google-analytics-window';
+/// <reference types="jest" />
+import GoogleAnalyticsWindow from '../types/google-analytics-window';
 import gtag from './gtag';
 
+const googleAnalyticsWindow: GoogleAnalyticsWindow = window;
 const ONE = 1;
 
 const addDataLayer = (): void => {
-  GOOGLE_ANALYTICS_WINDOW.dataLayer = [];
+  googleAnalyticsWindow.dataLayer = [];
 };
 
 const removeDataLayer = (): void => {
-  delete GOOGLE_ANALYTICS_WINDOW.dataLayer;
+  delete googleAnalyticsWindow.dataLayer;
 };
 
 describe('gtag', (): void => {
@@ -18,8 +20,8 @@ describe('gtag', (): void => {
 
     it('should append to `dataLayer`', (): void => {
       gtag('a', true);
-      expect(GOOGLE_ANALYTICS_WINDOW.dataLayer).toBeInstanceOf(Array);
-      expect(GOOGLE_ANALYTICS_WINDOW.dataLayer).toHaveLength(ONE);
+      expect(googleAnalyticsWindow.dataLayer).toBeInstanceOf(Array);
+      expect(googleAnalyticsWindow.dataLayer).toHaveLength(ONE);
     });
   });
 
@@ -28,8 +30,8 @@ describe('gtag', (): void => {
 
     it('should create `dataLayer`', (): void => {
       gtag('a', true);
-      expect(GOOGLE_ANALYTICS_WINDOW.dataLayer).toBeInstanceOf(Array);
-      expect(GOOGLE_ANALYTICS_WINDOW.dataLayer).toHaveLength(ONE);
+      expect(googleAnalyticsWindow.dataLayer).toBeInstanceOf(Array);
+      expect(googleAnalyticsWindow.dataLayer).toHaveLength(ONE);
     });
   });
 });

@@ -1,8 +1,9 @@
-import { MutableRefObject, useCallback, useRef } from 'react';
-import isDefaultStringRecordExport from '../../../is/is-default-string-record-export';
-import isStringRecord from '../../../is/is-string-record';
-import DefaultExport from '../../../types/default-export';
-import Translations from '../../../types/translations';
+import type { MutableRefObject } from 'react';
+import { useCallback, useRef } from 'react';
+import isDefaultStringRecordExport from '../../../is/is-default-string-record-export.js';
+import isStringRecord from '../../../is/is-string-record.js';
+import type { DefaultExport } from '../../../types/default-export.js';
+import type { Translations } from '../../../types/translations.js';
 
 type EagerTranslations =
   | DefaultExport<Record<string, string>>
@@ -14,12 +15,12 @@ export type State<T> = (locale: T) => Promise<void> | undefined;
 
 export interface Props<T> {
   onLoad(locale: keyof T, translations: Record<string, string>): void;
-  onLoadError?(locale: keyof T, err: unknown): void;
+  onLoadError: ((locale: keyof T, err: unknown) => void) | undefined;
   translationsRecord: T;
 }
 
 export default function useLoadTranslations<
-  T extends Record<string, Translations | undefined>
+  T extends Record<string, Translations | undefined>,
 >({ onLoad, onLoadError, translationsRecord }: Props<T>): State<keyof T> {
   const isFetchedRef: MutableRefObject<Record<keyof T, boolean>> = useRef(
     Object.create(null),
@@ -35,7 +36,7 @@ export default function useLoadTranslations<
 
       const translations: Translations | undefined = translationsRecord[locale];
       if (typeof translations === 'undefined') {
-        throw new Error(`Locale not found: ${locale}`);
+        throw new Error(`Locale not found: ${String(locale)}`);
       }
       if (isStringRecord(translations)) {
         onLoad(locale, translations);
@@ -46,9 +47,8 @@ export default function useLoadTranslations<
         return;
       }
 
-      const importedRecord:
-        | EagerTranslations
-        | LazyTranslations = translations();
+      const importedRecord: EagerTranslations | LazyTranslations =
+        translations();
       if (isStringRecord(importedRecord)) {
         onLoad(locale, importedRecord);
         return;

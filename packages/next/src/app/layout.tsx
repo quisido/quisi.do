@@ -1,14 +1,14 @@
 import type { ComponentType, PropsWithChildren, ReactElement } from 'react';
 import { Fragment, StrictMode } from 'react';
 import Contexts from '../app-components/contexts';
-// import GoogleAnalytics from '../app-components/google-analytics';
+import GoogleAnalytics from '../app-components/google-analytics';
 import Sentry from '../app-components/sentry';
 import CloudflareInsights from '../components/cloudflare-insights';
 import CloudWatchRUM from '../components/cloudwatch-rum';
 import Datadog from '../components/datadog';
-// import FullStory from '../components/fullstory';
+import FullStory from '../components/fullstory';
 import Preconnect from '../components/preconnect';
-// import ReportUri from '../components/report-uri';
+import ReportUri from '../components/report-uri';
 import Theme from '../components/theme';
 import PRECONNECT_HREFS from '../constants/preconnect-hrefs';
 import withWrappers from '../hocs/with-wrappers';
@@ -22,24 +22,24 @@ export { default as metadata } from '../constants/root-metadata';
 const BodyChildren: ComponentType<PropsWithChildren> = withWrappers(
   CloudWatchRUM,
   Contexts,
-  Datadog,
-  // Sentry,
-  // Theme,
+  Sentry,
+  Theme,
 )(Fragment);
 
 function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
   return (
     <html lang="en">
       <head>
-        {/* <ReportUri /> */}
+        <ReportUri />
         <Preconnect hrefs={PRECONNECT_HREFS} />
-        <meta charSet="utf-8" />
         <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
+        <meta charSet="utf-8" />
       </head>
-      <body>
+      <body className="awsui-dark-mode">
         <BodyChildren>
-          {/* <FullStory /> */}
-          {/* <GoogleAnalytics /> */}
+          <Datadog />
+          <FullStory />
+          <GoogleAnalytics />
           {children}
         </BodyChildren>
       </body>

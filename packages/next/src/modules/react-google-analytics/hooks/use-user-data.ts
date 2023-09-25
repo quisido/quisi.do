@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo } from 'react';
 import EMPTY_OBJECT from '../constants/empty-object';
 import type GoogleAnalyticsUserData from '../types/google-analytics-user-data';

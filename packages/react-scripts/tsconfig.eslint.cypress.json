@@ -1,6 +1,9 @@
 {
-  "extends": "@monorepo-template/tsconfig/react-application/eslint/cypress.json",
-  "exclude": ["cypress/coverage/", "cypress/screenshots/", "cypress/videos/"],
+  "exclude": [
+    "cypress/coverage/",
+    "cypress/screenshots/",
+    "cypress/videos/"
+  ],
   "include": [
     "cypress/",
     "cypress/**/*.json",

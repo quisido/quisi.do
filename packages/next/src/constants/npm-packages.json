@@ -56,7 +56,7 @@
     ["@monorepo-template/up"],
     ["@monorepo-template/webpack-configure-next-babel"],
     ["@monorepo-template/webpack-configure-next-yarn-berry"],
-    ["@quisido/rollup-config", "@monorepo-template/rollup-config"],
+    ["@monorepo-template/rollup-config"],
     ["absolute-timestamp"],
     ["aws-rum-react"],
     ["awsui-dark-mode"],

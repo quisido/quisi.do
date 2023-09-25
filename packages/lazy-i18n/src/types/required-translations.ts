@@ -1,6 +1,5 @@
-import DefaultExport from '../types/default-export';
+import type { DefaultExport } from './default-export.js';
 
-type RequiredTranslations = () =>
+export type RequiredTranslations = () =>
   | DefaultExport<Record<string, string>>
   | Record<string, string>;
-export default RequiredTranslations;

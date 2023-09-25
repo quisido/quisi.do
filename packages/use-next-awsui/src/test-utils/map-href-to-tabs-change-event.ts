@@ -1,9 +1,10 @@
-import type { NonCancelableCustomEvent } from '@awsui/components-react/internal/events';
+import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { TabsProps } from '@awsui/components-react/tabs';
 
 export default function mapHrefToTabsChangeEvent(
-  href?: string,
+  href?: string | undefined,
 ): NonCancelableCustomEvent<TabsProps.ChangeDetail> {
+  // @ts-expect-error `activeTabHref` has invalid `exactOptionalPropertyTypes`.
   return new CustomEvent('', {
     detail: {
       activeTabHref: href,

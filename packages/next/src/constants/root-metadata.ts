@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import mapPathToAlternates from '../utils/map-path-to-alternates';
-import AUTHOR_CHAZ_QUISIDO from './author-chaz-quisido';
+import AUTHOR_QUISIDO from './author-quisido';
 import FORMAT_DETECTION from './format-detection';
 import KEYWORDS from './keywords';
 // import ROBOTS_INFO from './robots-info';
@@ -14,20 +14,20 @@ import VIEWPORT from './viewport';
 export default {
   alternates: mapPathToAlternates('/'),
   applicationName: 'Quisi.do',
-  authors: [AUTHOR_CHAZ_QUISIDO],
+  authors: [AUTHOR_QUISIDO],
   colorScheme: 'dark light',
-  creator: 'Chaz Quisido',
-  description: 'portfolio for Chaz Quisido',
+  creator: 'Quisido',
+  description: 'portfolio for Quisido',
   formatDetection: FORMAT_DETECTION,
   generator: null,
   keywords: [...KEYWORDS],
   manifest: '/manifest.json',
   metadataBase: new URL('/', 'https://quisi.do'),
-  publisher: 'Chaz Quisido',
+  publisher: 'Quisido',
   referrer: 'no-referrer-when-downgrade',
   // robots: ROBOTS_INFO,
   themeColor: [...THEME_COLOR_DESCRIPTORS],
-  title: 'Chaz Quisido',
+  title: 'Quisido',
   viewport: VIEWPORT,
 
   appLinks: {
@@ -39,7 +39,7 @@ export default {
   openGraph: {
     // audio: OGAudio | Array<OGAudio>
     // countryName: string
-    description: 'portfolio of Chaz Quisido',
+    description: 'portfolio of Quisido',
     // determiner: 'a' | 'an' | 'the' | 'auto' | ''
     emails: ['open-graph@quisi.do'],
     firstName: 'Chaz',
@@ -48,7 +48,7 @@ export default {
     lastName: 'Quisido',
     locale: 'en-US',
     siteName: 'Quisi.do',
-    title: 'Chaz Quisido',
+    title: 'Quisido',
     type: 'profile',
     url: 'https://quisi.do/',
     // videos: OGVideo | Array<OGVideo>
@@ -56,9 +56,9 @@ export default {
 
   twitter: {
     creatorId: 'CharlesStover',
-    description: 'portfolio of Chaz Quisido',
+    description: 'portfolio of Quisido',
     // images: TwitterImage | Array<TwitterImage>;
     siteId: 'CharlesStover',
-    title: 'Chaz Quisido', // <-- title of the page, not the website
+    title: 'Quisido', // <-- title of the page, not the website
   },
 } satisfies Metadata;

@@ -1,5 +1,6 @@
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-import { usePathname, useRouter } from 'next/navigation';
+'use client';
+
+import { usePathname, useRouter } from 'next/navigation.js';
 import { useMemo } from 'react';
 import { default as Locale, validateLocale } from '../../constants/locale';
 import useEffectEvent from '../../hooks/use-effect-event';
@@ -21,7 +22,7 @@ export default function useLocaleLayout({ params }: Props): State {
   const locale: Locale = mapParamsToLocale(params);
 
   // Contexts
-  const router: AppRouterInstance = useRouter();
+  const router = useRouter();
   const pathname: string = usePathname();
 
   // Callacks

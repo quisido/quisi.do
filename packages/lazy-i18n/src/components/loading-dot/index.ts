@@ -1,1 +1,1 @@
-export { default } from './loading-dot.view';
+export { default } from './loading-dot.view.js';

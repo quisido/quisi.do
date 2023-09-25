@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 import type GoogleAnalyticsUserData from '../types/google-analytics-user-data';
 import type UserData from '../types/user-data';

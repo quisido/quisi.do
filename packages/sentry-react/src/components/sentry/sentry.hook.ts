@@ -4,8 +4,8 @@ import type { BrowserOptions } from '@sentry/react';
 import { init, setUser } from '@sentry/react';
 import type { User } from '@sentry/types';
 import { useEffect } from 'react';
-import DEFAULT_USER from '../../constants/default-user';
-import mapObjectToDependencyArray from '../../utils/map-object-to-dependency-array';
+import DEFAULT_USER from '../../constants/default-user.js';
+import mapObjectToDependencyArray from '../../utils/map-object-to-dependency-array.js';
 
 interface Props extends Readonly<BrowserOptions> {
   readonly user?: User | undefined;

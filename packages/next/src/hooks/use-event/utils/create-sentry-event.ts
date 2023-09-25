@@ -27,5 +27,12 @@ export default function createSentryEvent({
     server_name: hostname,
     timestamp: now,
     transaction: pathname,
+    contexts: {
+      ...SENTRY_EVENT.contexts,
+      device: {
+        ...SENTRY_EVENT.contexts.device,
+        name: window.navigator.userAgent,
+      },
+    },
   };
 }

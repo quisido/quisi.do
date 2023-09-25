@@ -1,7 +1,7 @@
 const FIRST = 0;
 
 export default function getHead(): HTMLHeadElement {
-  const head: HTMLHeadElement | null = document
+  const head: HTMLHeadElement | null = window.document
     .getElementsByTagName('head')
     .item(FIRST);
 

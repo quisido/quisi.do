@@ -1,8 +1,8 @@
 # [Quisi.do](https://quisi.do/)
 
 The `Quisi.do` repository contains the professional portfolio of
-[Chaz Quisido](https://quisi.do/) and all the distributable packages used to
-build it.
+[Quisido](https://quisi.do/) and all the distributable packages used to build
+it.
 
 This repository serves as a monorepo with each package living in the `packages`
 directory. The fully integrated application lives in the `packages/next`

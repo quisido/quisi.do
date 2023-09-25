@@ -20,10 +20,8 @@
     "access": "public"
   },
   "scripts": {
-    "eslint": "eslint",
-    "eslint:fix": "eslint --fix",
+    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/unknown2string.sarif || eslint '**/*'",
     "jest": "jest",
-    "jest:watch": "jest --watch",
     "prepack": "yarn run tsc",
     "prepublish": "concurrently --kill-others-on-fail --names eslint,jest \"yarn run eslint\" \"yarn run jest\"",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile"
@@ -33,7 +31,6 @@
     "url": "https://github.com/CharlesStover/quisi.do.git"
   },
   "devDependencies": {
-    "@quisido/rollup-config": "workspace:^",
     "@sentry/react": "^7.70.0",
     "@sentry/types": "^7.70.0",
     "@testing-library/react": "^14.0.0",
@@ -53,7 +50,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",
-    "rollup": "^3.29.3",
     "ts-jest": "^29.1.1",
     "tslib": "^2.6.2",
     "typescript": "^5.2.2"

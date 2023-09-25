@@ -1,5 +1,6 @@
-import { RenderResult, act, renderHook } from '@testing-library/react-hooks';
-import useProvider, { State } from './provider.hook';
+import type { RenderResult } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react';
+import useProvider, { type State } from './provider.hook.js';
 
 const EN_US: 'en_US' = 'en_US';
 const ES_ES: 'es_ES' = 'es_ES';
@@ -7,21 +8,17 @@ const ES_ES: 'es_ES' = 'es_ES';
 const asyncLoadFallbackTranslationsEffect = async (
   result: RenderResult<State>,
 ): Promise<void> => {
-  await act(
-    async (): Promise<void> => {
-      await result.current.asyncLoadFallbackTranslationsEffect.current;
-    },
-  );
+  await act(async (): Promise<void> => {
+    await result.current.asyncLoadFallbackTranslationsEffect.current;
+  });
 };
 
 const asyncLoadTranslationsEffect = async (
   result: RenderResult<State>,
 ): Promise<void> => {
-  await act(
-    async (): Promise<void> => {
-      await result.current.asyncLoadTranslationsEffect.current;
-    },
-  );
+  await act(async (): Promise<void> => {
+    await result.current.asyncLoadTranslationsEffect.current;
+  });
 };
 
 describe('useProvider', (): void => {

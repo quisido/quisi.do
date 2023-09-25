@@ -2,13 +2,8 @@
 
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { PropertyFilterProps } from '@awsui/components-react/property-filter';
-import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime.js';
-import {
-  ReadonlyURLSearchParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation';
+import type { ReadonlyURLSearchParams } from 'next/navigation.js';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation.js';
 import type { SetStateAction } from 'react';
 import { useMemo, useState } from 'react';
 import mapSearchValueToTokenOperator from '../utils/map-search-value-to-token-operator.js';
@@ -49,7 +44,7 @@ export default function usePropertyFilter({
 }: Props = DEFAULT_PROPS): State {
   // Contexts
   const pathname: string = usePathname();
-  const router: AppRouterInstance = useRouter();
+  const router = useRouter();
   const urlSearchParams: ReadonlyURLSearchParams = useSearchParams();
 
   const tokenPropertyKeys: readonly string[] =

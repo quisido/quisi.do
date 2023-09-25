@@ -1,16 +1,11 @@
-import {
-  MutableRefObject,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import mapTranslationsRecordToLoadedTranslationsRecord from '../../map/map-translations-record-to-loaded-translations-record';
-import RunnableTranslateFunction from '../../runnables/runnable-translate-function';
-import TranslateFunction from '../../types/translate-function';
-import Translations from '../../types/translations';
-import handleNotFound from '../../utils/handle-not-found';
-import useLoadTranslations from './hooks/use-load-translations';
+import type { MutableRefObject } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import mapTranslationsRecordToLoadedTranslationsRecord from '../../map/map-translations-record-to-loaded-translations-record.js';
+import RunnableTranslateFunction from '../../runnables/runnable-translate-function.js';
+import type TranslateFunction from '../../types/translate-function.js';
+import type { Translations } from '../../types/translations.js';
+import handleNotFound from '../../utils/handle-not-found.js';
+import useLoadTranslations from './hooks/use-load-translations.js';
 
 type LoadedTranslationsRecord<K extends number | string | symbol> = Record<
   K,
@@ -18,10 +13,10 @@ type LoadedTranslationsRecord<K extends number | string | symbol> = Record<
 >;
 
 interface Props<T extends Record<string, Translations | undefined>> {
-  fallbackLocale?: keyof T;
-  locale: keyof T;
-  onLoadError?(locale: keyof T, err: unknown): void;
-  translationsRecord: T;
+  readonly fallbackLocale?: keyof T | undefined;
+  readonly locale: keyof T;
+  readonly onLoadError?: ((locale: keyof T, err: unknown) => void) | undefined;
+  readonly translationsRecord: T;
 }
 
 export interface State {
@@ -33,7 +28,7 @@ export interface State {
 }
 
 export default function useProvider<
-  T extends Record<string, Translations | undefined>
+  T extends Record<string, Translations | undefined>,
 >({
   fallbackLocale,
   locale,
@@ -41,7 +36,7 @@ export default function useProvider<
   translationsRecord,
 }: Props<T>): State {
   if (typeof translationsRecord[locale] === 'undefined') {
-    throw new Error(`Translations do not exist for locale: ${locale}`);
+    throw new Error(`Translations do not exist for locale: ${String(locale)}`);
   }
 
   if (
@@ -89,9 +84,8 @@ export default function useProvider<
       if (typeof fallbackLocale === 'undefined') {
         throw new Error(`Translation not found: ${str}`);
       }
-      asyncLoadFallbackTranslationsEffect.current = loadTranslations(
-        fallbackLocale,
-      );
+      asyncLoadFallbackTranslationsEffect.current =
+        loadTranslations(fallbackLocale);
     },
     [fallbackLocale, loadTranslations],
   );
@@ -109,12 +103,11 @@ export default function useProvider<
     asyncLoadTranslationsEffect,
 
     translate: useMemo((): TranslateFunction => {
-      const newTranslate: RunnableTranslateFunction = new RunnableTranslateFunction(
-        {
+      const newTranslate: RunnableTranslateFunction =
+        new RunnableTranslateFunction({
           fallbackTranslations: loadedFallbackTranslations,
           translations: loadedTranslations,
-        },
-      );
+        });
       newTranslate.on(
         'loadFallbackTranslations',
         handleLoadFallbackTranslations,

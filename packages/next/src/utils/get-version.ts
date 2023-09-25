@@ -17,9 +17,5 @@ export default function getVersion(): string {
   }
 
   // If we're in development mode, then we call it the alpha build.
-  if (NODE_ENV === 'development') {
-    return 'alpha';
-  }
-
-  return 'beta';
+  return 'alpha';
 }

@@ -1,1 +1,1 @@
-export { default } from './i18n.view';
+export { default } from './i18n.view.js';

@@ -1,5 +1,5 @@
 import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
-import { act } from '@testing-library/react-hooks';
+import { act } from '@testing-library/react';
 import type { SideNavigationState } from '..';
 import { useSideNavigation } from '..';
 import renderHook from '../test-utils/render-hook';

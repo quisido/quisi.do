@@ -3,19 +3,22 @@ import type { SideNavigationProps } from '@awsui/components-react/side-navigatio
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo } from 'react';
-// import { useSideNavigation } from '../../../../../../../../use-next-awsui';
+import { useSideNavigation } from 'use-next-awsui';
 import filterSideNavigationItemsByExpandable from '../../utils/filter-side-navigation-items-by-expandable';
 import filterSideNavigationItemsByHasItems from '../../utils/filter-side-navigation-items-by-has-items';
 import mapTranslationFunctionToSideNavigationItems from '../../utils/map-translation-function-to-side-navigation-items';
+import mapItemsToHrefs from '../../utils/map-items-to-hrefs';
 
 interface State {
   readonly activeHref: string;
   readonly items: readonly SideNavigationProps.Item[];
+
   readonly handleChange: (
     event: Readonly<
       NonCancelableCustomEvent<Readonly<SideNavigationProps.ChangeDetail>>
     >,
   ) => void;
+
   readonly handleFollow: (
     event: Readonly<CustomEvent<Readonly<SideNavigationProps.FollowDetail>>>,
   ) => void;
@@ -69,8 +72,6 @@ export default function useAwsuiWrapperNavigation(): State {
   const translate: TranslateFunction = useTranslate();
 
   // States
-  // const { activeHref, handleFollow } = useSideNavigation();
-
   const items: SideNavigationProps.Item[] =
     useMemo((): SideNavigationProps.Item[] => {
       const sideNavigationItems: readonly SideNavigationProps.Item[] =
@@ -78,9 +79,18 @@ export default function useAwsuiWrapperNavigation(): State {
       return sideNavigationItems.map(mapItemToExpanded);
     }, [translate]);
 
+  const hrefs: ReadonlySet<string> = useMemo(
+    (): ReadonlySet<string> => mapItemsToHrefs(items),
+    [items],
+  );
+
+  const { activeHref, handleFollow } = useSideNavigation({
+    hrefs,
+  });
+
   return {
-    activeHref: '',
-    handleFollow(): void {},
+    activeHref,
+    handleFollow,
     items,
 
     handleChange: useCallback(

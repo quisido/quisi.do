@@ -52,7 +52,7 @@
     "inlineSources": true,
     "isolatedModules": true,
     "keyofStringsOnly": false,
-    "lib": ["DOM", "ESNext"],
+    "lib": ["ESNext"],
     "listEmittedFiles": false,
     "listFiles": false,
     "maxNodeModuleJsDepth": 0,

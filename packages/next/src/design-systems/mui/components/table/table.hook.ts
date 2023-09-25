@@ -3,7 +3,6 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import type { Attributes, ChangeEvent, ComponentType, MouseEvent } from 'react';
 import { useMemo } from 'react';
-import useWrapperVariant from '../../../../hooks/use-wrapper-variant';
 import type Column from '../../../../types/table-column';
 import type RowsPerPageOption from '../../../../types/table-rows-per-page-option';
 import useRowProps from './hooks/use-row-props';
@@ -61,11 +60,12 @@ export default function useMuiTable<Item extends object>({
 }: Readonly<Props<Item>>): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
-  const wrapperVariant: 'table' | 'wizard' | undefined = useWrapperVariant();
 
   return {
     page: page - ARRAY_INDEX_OFFSET,
-    showToolbar: wrapperVariant !== 'table',
+
+    // This should only be true if the page more than a table.
+    showToolbar: true,
 
     backIconButtonProps: useMemo(
       (): Partial<IconButtonProps> => ({

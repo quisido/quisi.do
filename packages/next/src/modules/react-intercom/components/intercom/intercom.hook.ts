@@ -1,9 +1,9 @@
 import { useEffect, useMemo } from 'react';
-import HEAD from '../../constants/head';
 import INTERCOM_WINDOW from '../../constants/intercom-window';
 import type IntercomFunction from '../../types/intercom-function';
 import createIntercomFunction from '../../utils/create-intercom';
 import mapAppIdToScriptElement from '../../utils/map-app-id-to-script-element';
+import getHead from '../../utils/get-head';
 
 export default function useIntercom(appId: string): IntercomFunction {
   const intercom: IntercomFunction = useMemo(createIntercomFunction, []);
@@ -19,10 +19,11 @@ export default function useIntercom(appId: string): IntercomFunction {
   }, [intercom]);
 
   useEffect((): VoidFunction => {
+    const head: HTMLHeadElement = getHead();
     const script: HTMLScriptElement = mapAppIdToScriptElement(appId);
-    HEAD.appendChild(script);
+    head.appendChild(script);
     return (): void => {
-      HEAD.removeChild(script);
+      head.removeChild(script);
     };
   }, [appId]);
 

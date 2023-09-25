@@ -1,3 +1,5 @@
+'use client';
+
 import type { AppLayoutProps } from '@awsui/components-react/app-layout';
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { TranslateFunction } from 'lazy-i18n';

@@ -1,17 +1,18 @@
-import { ComponentType, ReactElement, ReactNode, memo } from 'react';
-import Loading from '../../components/loading';
-import LoadingComponentContext from '../../contexts/loading-component';
-import TranslateFunctionContext from '../../contexts/translate-function';
-import Translations from '../../types/translations';
-import useProvider from './provider.hook';
+import type { ComponentType, ReactElement, ReactNode } from 'react';
+import { memo } from 'react';
+import Loading from '../../components/loading/index.js';
+import LoadingComponentContext from '../../contexts/loading-component.js';
+import TranslateFunctionContext from '../../contexts/translate-function.js';
+import type { Translations } from '../../types/translations.js';
+import useProvider from './provider.hook.js';
 
 interface Props<T extends Record<string, Translations | undefined>> {
-  LoadingComponent?: ComponentType<unknown>;
-  children?: ReactNode;
-  onLoadError?(locale: keyof T, err: unknown): void;
-  fallbackLocale?: keyof T;
-  locale: keyof T;
-  translations: T;
+  readonly LoadingComponent?: ComponentType<unknown>;
+  readonly children?: ReactNode;
+  readonly onLoadError?: ((locale: keyof T, err: unknown) => void) | undefined;
+  readonly fallbackLocale?: keyof T | undefined;
+  readonly locale: keyof T;
+  readonly translations: T;
 }
 
 function I18nProvider<T extends Record<string, Translations | undefined>>({

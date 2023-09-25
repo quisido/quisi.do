@@ -48,6 +48,10 @@ const PACKAGE_DESCRIPTIONS: Map<string, string> = new Map([
     'Merging coverage reports will generate a combined report for any number of provided test results.',
   ],
   [
+    '@monorepo-template/rollup-config',
+    'This Rollup configuration provides best build practices for distributable modules.',
+  ],
+  [
     '@monorepo-template/test',
     'The monorepo test enforces best practices for monorepos as a command line script for integration pipelines.',
   ],
@@ -70,10 +74,6 @@ const PACKAGE_DESCRIPTIONS: Map<string, string> = new Map([
   [
     '@monorepo-template/webpack-configure-next-yarn-berry',
     'This Webpack configuration adds support for Yarn modern (v2+) to NextJS applications.',
-  ],
-  [
-    '@quisido/rollup-config',
-    'This Rollup configuration provides best build practices for distributable modules.',
   ],
   [
     'absolute-timestamp',

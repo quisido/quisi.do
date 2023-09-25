@@ -1,6 +1,5 @@
 import type { CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
-import type { NonCancelableEventHandler } from '@awsui/components-react/internal/events';
 import type { PaginationProps } from '@awsui/components-react/pagination';
 import type { TableProps } from '@awsui/components-react/table';
 import type { TextFilterProps } from '@awsui/components-react/text-filter';
@@ -8,7 +7,7 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import type { ComponentType, MutableRefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
-// import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
+import useItemDescription from 'use-awsui-table-item-description';
 import type ReadonlyCollectionPreferencesEvent from '../../../../types/readonly-awsui-collection-preferences-event';
 import type ReadonlyTableSortingEvent from '../../../../types/readonly-awsui-table-sorting-event';
 import type TableColumn from '../../../../types/table-column';
@@ -42,7 +41,7 @@ interface Props<Item> {
 }
 
 interface State<Item> {
-  // readonly DescriptionPortal: ComponentType<Record<string, never>>;
+  readonly DescriptionPortal: ComponentType<Record<string, never>>;
   readonly ariaLabels: TableProps.AriaLabels<Item>;
   readonly cancelLabel: string;
   readonly collectionPreferencesTitle: string;
@@ -64,14 +63,16 @@ interface State<Item> {
   readonly visibleColumns: readonly string[] | undefined;
   readonly wrapLines: boolean | undefined;
   readonly wrapLinesPreference: CollectionPreferencesProps.WrapLinesPreference;
-  readonly handleCollectionPreferencesConfirm: NonCancelableEventHandler<
-    CollectionPreferencesProps.Preferences<void>
-  >;
+  readonly handleCollectionPreferencesConfirm: (
+    event: NonCancelableCustomEvent<
+      CollectionPreferencesProps.Preferences<void>
+    >,
+  ) => void;
   readonly handleFilterChange:
-    | NonCancelableEventHandler<TextFilterProps.ChangeDetail>
+    | ((event: NonCancelableCustomEvent<TextFilterProps.ChangeDetail>) => void)
     | undefined;
   readonly handlePaginationChange:
-    | NonCancelableEventHandler<PaginationProps.ChangeDetail>
+    | ((event: NonCancelableCustomEvent<PaginationProps.ChangeDetail>) => void)
     | undefined;
   readonly handleSortingChange: (
     event: ReadonlyTableSortingEvent<Item>,
@@ -156,18 +157,16 @@ export default function useAwsuiTable<Item extends object>({
   }, [columnDefinitions, visibleColumnIndices]);
 
   // Effects
-  /*
   const DescriptionPortal: ComponentType<Record<string, never>> =
-    useAwsuiTableItemDescription({
+    useItemDescription({
       Component: Description,
       colSpan: visibleColumnIndices?.length ?? columnDefinitions.length,
       items: rows,
       ref,
     });
-  */
 
   return {
-    // DescriptionPortal,
+    DescriptionPortal,
     ariaLabels: useAriaLabels(),
     cancelLabel: translate('Cancel') ?? '...',
     collectionPreferencesTitle: translate('Preferences') ?? '...',
@@ -298,7 +297,9 @@ export default function useAwsuiTable<Item extends object>({
     ),
 
     handleFilterChange: useMemo(():
-      | NonCancelableEventHandler<TextFilterProps.ChangeDetail>
+      | ((
+          event: NonCancelableCustomEvent<TextFilterProps.ChangeDetail>,
+        ) => void)
       | undefined => {
       if (typeof onFilterChange === 'undefined') {
         return;

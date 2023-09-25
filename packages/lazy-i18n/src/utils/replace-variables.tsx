@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import isPrimitive from '../is/is-primitive.js';
 import mapNodeToFragment from '../map/map-node-to-fragment.js';
-import type ReactNodeTranslationValue from '../types/react-node-translation-value.js';
+import type { ReactNodeTranslationValue } from '../types/react-node-translation-value.js';
 import type { StringTranslationValue } from '../types/string-translation-value.js';
 
 export default function replaceVariables(
