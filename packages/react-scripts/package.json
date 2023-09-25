@@ -4,10 +4,10 @@
   "config-overrides-path": "./config-overrides.cjs",
   "homepage": ".",
   "devDependencies": {
-    "@babel/core": "^7.22.11",
+    "@babel/core": "^7.22.20",
     "@babel/plugin-syntax-flow": "^7.22.5",
-    "@babel/plugin-transform-react-jsx": "^7.22.5",
-    "@babel/preset-react": "^7.22.5",
+    "@babel/plugin-transform-react-jsx": "^7.22.15",
+    "@babel/preset-react": "^7.22.15",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@monorepo-template/coverage": "^1.2.3",
@@ -17,20 +17,20 @@
     "@monorepo-template/eslint-config": "^1.0.7",
     "@monorepo-template/jest-application-preset": "^1.1.3",
     "@monorepo-template/tsconfig": "^1.1.2",
-    "babel-jest": "^29.6.4",
+    "babel-jest": "^29.7.0",
     "babel-loader": "^9.1.3",
     "compose-function": "^3.0.3",
     "console-table-printer": "^2.11.2",
-    "dependency-cruiser": "^13.1.5",
+    "dependency-cruiser": "^14.0.0",
     "identity-obj-proxy": "^3.0.0",
     "react-app-polyfill": "^3.0.0",
     "react-app-rewired": "^2.2.1",
     "react-refresh": "^0.14.0",
     "react-scripts": "^5.0.1",
     "recharts": "^2.8.0",
-    "sass": "^1.66.1",
+    "sass": "^1.68.0",
     "use-awsui-router": "^2.0.1",
     "webpack": "^5.88.2",
-    "zone.js": "^0.13.1"
+    "zone.js": "^0.14.0"
   }
 }

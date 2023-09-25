@@ -14,7 +14,13 @@ export default function Contexts({
   return (
     <DarkModeContext.Provider value={isDarkModeEnabled}>
       <DesignSystemContext.Provider value={designSystem}>
-        <Hostname.Provider value={window.location.hostname}>
+        <Hostname.Provider
+          value={
+            typeof window === 'undefined'
+              ? 'localhost'
+              : window.location.hostname
+          }
+        >
           {children}
         </Hostname.Provider>
       </DesignSystemContext.Provider>

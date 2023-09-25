@@ -1,12 +1,14 @@
+'use client';
+
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { TabsProps } from '@awsui/components-react/tabs';
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
+import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime.js';
 import { usePathname, useRouter } from 'next/navigation';
 import type { MutableRefObject } from 'react';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import RunnableTabFinder from '../utils/runnable-tab-finder';
-import useHash from './use-hash';
-import useSearch from './use-search';
+import RunnableTabFinder from '../utils/runnable-tab-finder.js';
+import useHash from './use-hash.js';
+import useSearch from './use-search.js';
 
 export interface Props {
   readonly defaultActiveTabId?: string | undefined;

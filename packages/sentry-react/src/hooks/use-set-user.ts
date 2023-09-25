@@ -1,6 +1,5 @@
 import { setUser } from '@sentry/react';
-import type { User } from '@sentry/types';
 
-export default function useSetUser(): (user: User | null) => void {
+export default function useSetUser(): typeof setUser {
   return setUser;
 }

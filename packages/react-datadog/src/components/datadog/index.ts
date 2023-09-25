@@ -1,1 +1,1 @@
-export { default } from './datadog.view';
+export { default } from './datadog.view.js';

@@ -1,8 +1,9 @@
+/// <reference types="jest" />
 import { act } from '@testing-library/react';
 import type { BreadcrumbGroupState } from '..';
 import { useBreadcrumbGroup } from '..';
-import mapHrefToBreadcrumbGroupClickEvent from '../test-utils/map-href-to-breadcrumb-group-click-event';
-import renderHook from '../test-utils/render-hook';
+import mapHrefToBreadcrumbGroupClickEvent from '../test-utils/map-href-to-breadcrumb-group-click-event.js';
+import renderHook from '../test-utils/render-hook.js';
 
 const TEST_HREF = '/test/pathname?test=search#test:hash';
 

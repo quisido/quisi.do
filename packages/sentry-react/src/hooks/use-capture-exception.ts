@@ -1,9 +1,5 @@
 import { captureException } from '@sentry/react';
-import type { CaptureContext } from '@sentry/types';
 
-export default function useCaptureException(): (
-  exception: unknown,
-  captureContext?: CaptureContext | undefined,
-) => string {
+export default function useCaptureException(): typeof captureException {
   return captureException;
 }

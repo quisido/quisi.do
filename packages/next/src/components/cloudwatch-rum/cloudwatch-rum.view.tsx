@@ -1,7 +1,7 @@
 'use client';
 
 import type { Telemetry } from 'aws-rum-react';
-import { AwsRumProvider } from 'aws-rum-react';
+import { AwsRumProvider, MockAwsRumProvider } from 'aws-rum-react';
 import type { ReactElement, ReactNode } from 'react';
 import VERSION from '../../constants/version';
 
@@ -14,6 +14,10 @@ const TELEMETRIES: Telemetry[] = ['errors', 'http', 'performance'];
 export default function CloudWatchRum({
   children,
 }: Readonly<Props>): ReactElement {
+  if (typeof window === 'undefined') {
+    return <MockAwsRumProvider>{children}</MockAwsRumProvider>;
+  }
+
   return (
     <AwsRumProvider
       allowCookies

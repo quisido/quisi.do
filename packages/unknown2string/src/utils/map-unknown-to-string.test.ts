@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import mapUnknownToString from '..';
+import mapUnknownToString from '../index.js';
 
 describe('mapUnknownToString', (): void => {
   it('should support primitives', (): void => {

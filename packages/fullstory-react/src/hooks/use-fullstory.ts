@@ -1,3 +1,5 @@
+'use client';
+
 import type { SnippetOptions } from '@fullstory/browser';
 import { useEffect } from 'react';
 import type IdentifyProps from '../types/identify-props.js';

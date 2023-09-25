@@ -1,3 +1,5 @@
+'use client';
+
 import type { BrowserOptions, ReportDialogOptions } from '@sentry/react';
 import { ErrorBoundary } from '@sentry/react';
 import type { Scope, User } from '@sentry/types';
@@ -13,8 +15,10 @@ interface Props extends Readonly<BrowserOptions> {
   readonly showErrorBoundaryDialog?: boolean | undefined;
   readonly user?: User | undefined;
 
-  // `ErrorBoundaryFallback` is a React `FunctionComponent` without the `null`
-  //    return type.
+  /**
+   * `ErrorBoundaryFallback` is a React `FunctionComponent` without the `null`
+   *   return type.
+   */
   readonly ErrorBoundaryFallback?:
     | ((props: FallbackRenderParams) => ReactElement)
     | undefined;

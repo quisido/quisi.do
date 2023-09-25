@@ -1,1 +1,1 @@
-export { default } from './hooks/use-offline';
+export { default } from './hooks/use-offline.js';

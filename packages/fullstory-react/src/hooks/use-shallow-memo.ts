@@ -1,3 +1,5 @@
+'use client';
+
 import type { MutableRefObject } from 'react';
 import { useRef } from 'react';
 import mapObjectToEntries from '../utils/map-object-to-entries.js';

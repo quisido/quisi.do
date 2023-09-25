@@ -23,8 +23,8 @@ const BodyChildren: ComponentType<PropsWithChildren> = withWrappers(
   CloudWatchRUM,
   Contexts,
   Datadog,
-  Sentry,
-  Theme,
+  // Sentry,
+  // Theme,
 )(Fragment);
 
 function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {

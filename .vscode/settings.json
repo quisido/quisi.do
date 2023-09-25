@@ -28,6 +28,7 @@
     "**/sarif/": true,
     "**/.attach_pid*": true,
     "**/.pnp.*": true,
+    "**/*.cpuprofile": true,
     "**/*.tsbuildinfo": true,
     "**/lighthouse.report.*": true,
     "**/yarn.lock": true
@@ -54,6 +55,7 @@
     "**/node_modules/**": true,
     "**/.attach_pid*": true,
     "**/.pnp.*": true,
+    "**/*.cpuprofile": true,
     "**/*.tsbuildinfo": true,
     "**/lighthouse.report.*": true,
     "**/yarn.lock": true
@@ -76,9 +78,11 @@
     "**/sarif/": true,
     "**/.attach_pid*": true,
     "**/.pnp.*": true,
+    "**/*.cpuprofile": true,
     "**/*.tsbuildinfo": true,
     "**/lighthouse.report.*": true,
-    "**/yarn.lock": true
+    "**/yarn.lock": true,
+    "**/.yarn": true
   },
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

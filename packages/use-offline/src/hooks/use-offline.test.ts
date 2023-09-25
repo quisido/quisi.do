@@ -1,6 +1,6 @@
 /// <reference types="jest" />
 import { act, renderHook } from '@testing-library/react';
-import useOffline from '..';
+import useOffline from '../index.js';
 
 describe('useOffline', (): void => {
   it('should default to false', (): void => {

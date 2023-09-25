@@ -1,5 +1,5 @@
-import { anonymize, identify, init, shutdown } from "@fullstory/browser";
-import FullStoryAPI from "../types/fullstory-api.js";
+import { anonymize, identify, init, shutdown } from '@fullstory/browser';
+import type FullStoryAPI from '../types/fullstory-api.js';
 
 export default {
   anonymize,

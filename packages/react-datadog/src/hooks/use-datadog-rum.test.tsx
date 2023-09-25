@@ -1,8 +1,9 @@
+/// <reference types="jest" />
 import { datadogRum } from '@datadog/browser-rum';
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
-import { useDatadogRum } from '..';
-import DatadogRumContext from '../contexts/datadog-rum';
+import { useDatadogRum } from '../index.js';
+import DatadogRumContext from '../contexts/datadog-rum.js';
 
 describe('useDatadogRum', (): void => {
   it('should return a provided RUM client', (): void => {

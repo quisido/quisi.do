@@ -145,7 +145,7 @@ function describePackageJson({
 
       it('should have prepack scripts', (): void => {
         assert('prepack' in scripts);
-        expect(scripts.prepack).toBe('yarn run tsc:prepack');
+        expect(scripts.prepack).toBe('yarn run rollup');
       });
 
       it('should have prepublish scripts', (): void => {
@@ -155,12 +155,14 @@ function describePackageJson({
         );
       });
 
+      /*
       it('should have TypeScript compiler scripts', (): void => {
         assert('tsc:prepack' in scripts);
         expect(scripts['tsc:prepack']).toBe(
           'tsc --project tsconfig.prepack.json',
         );
       });
+      */
     });
 
     describe('devDependencies', (): void => {
@@ -171,10 +173,10 @@ function describePackageJson({
 
       it('should have the expected developer dependencies', (): void => {
         assert('@arethetypeswrong/cli' in devDependencies);
-        assert("@microsoft/eslint-formatter-sarif" in devDependencies);
-        assert("@types/node" in devDependencies);
-        assert("concurrently" in devDependencies);
-        assert("eslint" in devDependencies);
+        assert('@microsoft/eslint-formatter-sarif' in devDependencies);
+        assert('@types/node' in devDependencies);
+        assert('concurrently' in devDependencies);
+        assert('eslint' in devDependencies);
         // assert("eslint-plugin-jsx-a11y" in devDependencies);
         // assert("eslint-plugin-react" in devDependencies);
         // assert("eslint-plugin-react-hooks" in devDependencies);

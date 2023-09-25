@@ -1,9 +1,18 @@
 {
   "extends": "../../tsconfig.package.json",
-  "include": ["package.json", "src/**/*.ts", "src/**/*.tsx"],
-
   "compilerOptions": {
-    "jsx": "react-jsxdev",
-    "lib": ["DOM", "ESNext"]
-  }
+    "declarationDir": "dist",
+    "jsx": "react-jsx",
+    "outDir": "dist",
+    "rootDir": "src",
+    "sourceRoot": "src"
+  },
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/test/"
+  ],
+  "include": [
+    "src"
+  ]
 }

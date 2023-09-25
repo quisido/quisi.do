@@ -1,3 +1,5 @@
+'use client';
+
 import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
 import { NextRouter, useRouter } from 'next/router';
 import useEffectEvent from './use-effect-event.js';

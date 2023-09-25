@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import type { PropertyFilterProps } from '@awsui/components-react/property-filter';
 import COMPARISON_OPERATORS from './comparison-operators.js';
 

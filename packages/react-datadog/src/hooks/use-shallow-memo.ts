@@ -1,6 +1,8 @@
+'use client';
+
 import type { MutableRefObject } from 'react';
 import { useRef } from 'react';
-import mapObjectToEntries from '../utils/map-object-to-entries';
+import mapObjectToEntries from '../utils/map-object-to-entries.js';
 
 export default function useShallowMemo<T extends Record<string, unknown>>(
   obj: T,
