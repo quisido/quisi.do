@@ -1,9 +1,9 @@
-import { ComponentType, ReactNode } from 'react';
+import type { ComponentType, ReactNode } from 'react';
 
 type NumberFunction = () => number;
 type StringFunction = () => string;
 
-type ReactNodeTranslationValue =
+export type ReactNodeTranslationValue =
   | ComponentType<unknown>
   | NumberFunction
   | ReactNode
@@ -11,5 +11,3 @@ type ReactNodeTranslationValue =
   | number
   | string
   | undefined;
-
-export default ReactNodeTranslationValue;

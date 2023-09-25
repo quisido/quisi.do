@@ -1,8 +1,8 @@
-import { ReactNode } from 'react';
-import isPrimitive from '../is/is-primitive';
-import mapNodeToFragment from '../map/map-node-to-fragment';
-import ReactNodeTranslationValue from '../types/react-node-translation-value';
-import StringTranslationValue from '../types/string-translation-value';
+import type { ReactNode } from 'react';
+import isPrimitive from '../is/is-primitive.js';
+import mapNodeToFragment from '../map/map-node-to-fragment.js';
+import type ReactNodeTranslationValue from '../types/react-node-translation-value.js';
+import type { StringTranslationValue } from '../types/string-translation-value.js';
 
 export default function replaceVariables(
   translation: string,
@@ -30,7 +30,7 @@ export default function replaceVariables(
       const newItems: ReactNode[] = item.split(`$${variable}`);
       if (newItems.length > 1) {
         for (let j = 0; j < newItems.length - 1; j += 2) {
-          newItems.splice(j + 1, 0, value);
+          newItems.splice(j + 1, 0, value as ReactNode);
         }
         newTranslation.splice(i, 1, ...newItems);
         i += newItems.length - 1;

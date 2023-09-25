@@ -1,57 +1,18 @@
 {
+  "extends": "../../tsconfig.package.json",
   "compilerOptions": {
-    "allowJs": false,
-    "allowSyntheticDefaultImports": true,
-    "allowUmdGlobalAccess": false,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "alwaysStrict": true,
-    "checkJs": false,
-    "declaration": true,
     "declarationDir": "dist",
-    "declarationMap": true,
-    "downlevelIteration": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "incremental": false,
-    "inlineSourceMap": false,
-    "isolatedModules": false,
     "jsx": "react-jsx",
-    "lib": [
-      "DOM",
-      "ESNext"
-    ],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "removeComments": true,
-    "resolveJsonModule": true,
+    "outDir": "dist",
     "rootDir": "src",
-    "skipLibCheck": false,
-    "sourceMap": true,
-    "strict": true,
-    "strictBindCallApply": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "suppressImplicitAnyIndexErrors": false,
-    "target": "ESNext"
+    "sourceRoot": "src"
   },
   "exclude": [
-    "/dist/",
-    "/jest/",
-    "/node_modules/",
-    "**/test-utils/*.ts",
-    "**/test-utils/*.tsx",
-    "**/*.test.ts",
-    "**/*.test.tsx"
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/test/"
   ],
   "include": [
-    "src/**/*"
+    "src"
   ]
 }

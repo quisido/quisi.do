@@ -2,7 +2,7 @@
 
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { PropertyFilterProps } from '@awsui/components-react/property-filter';
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.js';
+import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime.js';
 import {
   ReadonlyURLSearchParams,
   usePathname,
@@ -11,8 +11,8 @@ import {
 } from 'next/navigation';
 import type { SetStateAction } from 'react';
 import { useMemo, useState } from 'react';
-import mapSearchValueToTokenOperator from '../utils/map-search-value-to-token-operator';
-import mapSearchValueToTokenValue from '../utils/map-search-value-to-token-value';
+import mapSearchValueToTokenOperator from '../utils/map-search-value-to-token-operator.js';
+import mapSearchValueToTokenValue from '../utils/map-search-value-to-token-value.js';
 import mapUrlSearchParamsToKeys from '../utils/map-url-search-params-to-keys.js';
 import useEffectEvent from './use-effect-event.js';
 

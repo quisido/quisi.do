@@ -1,8 +1,8 @@
 'use client';
 
 import type { RumInitConfiguration } from '@datadog/browser-rum';
-import type User from '../../types/user';
-import useDatadog from './datadog.hook';
+import type User from '../../types/user.js';
+import useDatadog from './datadog.hook.js';
 
 interface Props extends RumInitConfiguration {
   readonly enabled?: boolean | undefined;

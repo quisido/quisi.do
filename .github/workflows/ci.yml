@@ -1,6 +1,22 @@
 name: Continuous integration
 
 jobs:
+  # Test a bun build.
+  bun:
+    name: bun
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Install bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install dependencies
+        run: bun install
+      - name: Prepack
+        run: bun run prepack
+      - name: Prepublish
+        run: bun run prepublish
+
   # Stage 1: codacy, dependency-review, devskim, install
   codacy:
     name: Codacy

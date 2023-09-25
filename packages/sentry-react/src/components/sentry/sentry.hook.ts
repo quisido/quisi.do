@@ -1,3 +1,5 @@
+'use client';
+
 import type { BrowserOptions } from '@sentry/react';
 import { init, setUser } from '@sentry/react';
 import type { User } from '@sentry/types';

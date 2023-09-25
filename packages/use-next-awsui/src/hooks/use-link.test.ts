@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import type { LinkProps } from '@awsui/components-react/link';
 import { act } from '@testing-library/react';
 import type { LinkState } from '..';

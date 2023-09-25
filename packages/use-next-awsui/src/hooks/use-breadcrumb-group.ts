@@ -1,9 +1,9 @@
 'use client';
 
 import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
-import { useRouter } from 'next/navigation';
-import useEffectEvent from './use-effect-event';
+import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime.js';
+import { useRouter } from 'next/navigation.js';
+import useEffectEvent from './use-effect-event.js';
 
 export interface State<
   Item extends BreadcrumbGroupProps.Item = BreadcrumbGroupProps.Item,

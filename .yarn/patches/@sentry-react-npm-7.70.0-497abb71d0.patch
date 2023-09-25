@@ -1,0 +1,21 @@
+diff --git a/package.json b/package.json
+index 160f2f457b3ee42f76adde28c273b50bb921a5a9..feb41a255c29d0fcb1a7a9bc18698f9a0b6f44b6 100644
+--- a/package.json	
++++ b/package.json	
+@@ -1,4 +1,16 @@
+ {
++  "type": "module",
++  "exports": {
++    ".": {
++      "types": "./types/index.d.ts",
++      "import": "./esm/index.js",
++      "require": "./cjs/index.js",
++      "default": "./esm/index.js"
++    },
++    "./package.json": {
++      "default": "./package.json"
++    }
++  },
+   "name": "@sentry/react",
+   "version": "7.70.0",
+   "description": "Official Sentry SDK for React.js",

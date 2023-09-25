@@ -2,10 +2,10 @@ import type { datadogRum } from '@datadog/browser-rum';
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { StrictMode } from 'react';
-import DatadogRumContext from '../../contexts/datadog-rum';
-import composeComponents from '../../test/utils/compose-components';
-import type User from '../../types/user';
-import useDatadog from './datadog.hook';
+import { DatadogRumContext } from '../../index.js';
+import composeComponents from '../../test/utils/compose-components.js';
+import type User from '../../types/user.js';
+import useDatadog from './datadog.hook.js';
 
 const ONCE = 1;
 const TEST_INIT = jest.fn();
