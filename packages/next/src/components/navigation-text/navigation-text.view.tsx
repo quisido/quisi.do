@@ -14,6 +14,8 @@ export default function WrapperNavigationText({
       return <>AceAlters.com</>;
     case NavigationText.Applications:
       return <I18n>Applications</I18n>;
+    case NavigationText.Bluesky:
+      return <>Bluesky</>;
     case NavigationText.ConnectWithMe:
       return <I18n>Connect with me</I18n>;
     case NavigationText.Dashboard:
@@ -50,6 +52,8 @@ export default function WrapperNavigationText({
       return <>Sprite sheet to GIF</>;
     case NavigationText.Tetris3DS:
       return <>3DS Tetris</>;
+    case NavigationText.Threads:
+      return <>Threads</>;
     case NavigationText.Twitter:
       return <>Twitter</>;
   }

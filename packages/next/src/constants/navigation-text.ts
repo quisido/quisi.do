@@ -2,6 +2,7 @@ enum NavigationText {
   AceAlters = 'acealters',
   Applications = 'applications',
   ConnectWithMe = 'connect-with-me',
+  Bluesky = 'bluesky',
   Dashboard = 'dashboard',
   Dota2Huds = 'dota2huds',
   GitHub = 'github',
@@ -19,6 +20,7 @@ enum NavigationText {
   Settings = 'settings',
   SpriteSheet2Gif = 'spritesheet2gif',
   Tetris3DS = '3ds-tetris',
+  Threads = 'threads',
   Twitter = 'twitter',
 }
 

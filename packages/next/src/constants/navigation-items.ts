@@ -16,7 +16,7 @@ const NAVIGATION_ITEMS: readonly (
     text: NavigationText.Home,
   },
   {
-    path: '/dashboard',
+    path: '/dashboard/',
     text: NavigationText.Dashboard,
   },
   {
@@ -49,7 +49,7 @@ const NAVIGATION_ITEMS: readonly (
       },
       {
         text: NavigationText.SpriteSheet2Gif,
-        path: '/spritesheet2gif',
+        path: '/spritesheet2gif/',
       },
     ],
   },
@@ -58,15 +58,15 @@ const NAVIGATION_ITEMS: readonly (
     text: NavigationText.Portfolio,
     children: [
       {
-        path: '/packages',
+        path: '/packages/',
         text: NavigationText.Packages,
       },
       {
-        path: '/publications',
+        path: '/publications/',
         text: NavigationText.Publications,
       },
       {
-        path: '/quotes',
+        path: '/quotes/',
         text: NavigationText.Quotes,
       },
     ],
@@ -76,7 +76,11 @@ const NAVIGATION_ITEMS: readonly (
     text: NavigationText.ConnectWithMe,
     children: [
       {
-        url: 'https://github.com/CharlesStover',
+        url: 'https://bsky.app/profile/stover.bsky.social',
+        text: NavigationText.Bluesky,
+      },
+      {
+        url: 'https://github.com/CharlesStover/',
         text: NavigationText.GitHub,
       },
       {
@@ -102,9 +106,15 @@ const NAVIGATION_ITEMS: readonly (
       },
       */
       {
+        url: 'https://threads.net/@charlesstover21',
+        text: NavigationText.Threads,
+      },
+      /*
+      {
         url: 'https://twitter.com/CharlesStover',
         text: NavigationText.Twitter,
       },
+      */
     ],
   },
   {

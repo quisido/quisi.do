@@ -12,6 +12,8 @@ export default function mapTranslateFunctionToNavigationTextTranslator(
         return 'AceAlters.com';
       case NavigationText.Applications:
         return translate('Applications');
+      case NavigationText.Bluesky:
+        return 'Bluesky';
       case NavigationText.ConnectWithMe:
         return translate('Connect with me');
       case NavigationText.Dashboard:
@@ -48,6 +50,8 @@ export default function mapTranslateFunctionToNavigationTextTranslator(
         return 'Sprite sheet to GIF';
       case NavigationText.Tetris3DS:
         return '3DS Tetris';
+      case NavigationText.Threads:
+        return 'Threads';
       case NavigationText.Twitter:
         return 'Twitter';
     }

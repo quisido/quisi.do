@@ -44,12 +44,6 @@ export default function CloudscapeDesignWrapper({
   if (typeof navigationOpen !== 'undefined') {
     optionalProps.navigationOpen = navigationOpen;
   }
-  if (typeof toolsHide !== 'undefined') {
-    optionalProps.toolsHide = toolsHide;
-  }
-  if (typeof toolsOpen !== 'undefined') {
-    optionalProps.toolsOpen = toolsOpen;
-  }
 
   return (
     <div ref={ref}>
@@ -59,7 +53,9 @@ export default function CloudscapeDesignWrapper({
         notifications={<Notifications>{notifications}</Notifications>}
         onNavigationChange={handleNavigationChange}
         onToolsChange={handleToolsChange}
-        tools={Tools && <Tools />}
+        tools={typeof Info !== 'undefined' && <Info />}
+        toolsHide={typeof Info === 'undefined'}
+        toolsOpen={toolsOpen}
         {...optionalProps}
         breadcrumbs={
           typeof breadcrumbs !== 'undefined' && (
