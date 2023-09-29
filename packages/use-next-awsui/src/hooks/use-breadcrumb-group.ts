@@ -2,8 +2,8 @@
 
 import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
 import { useRouter } from 'next/navigation.js';
-import useEffectEvent from './use-effect-event.js';
 import { useEffect } from 'react';
+import useEffectEvent from './use-effect-event.js';
 
 export interface State<
   Item extends BreadcrumbGroupProps.Item = BreadcrumbGroupProps.Item,

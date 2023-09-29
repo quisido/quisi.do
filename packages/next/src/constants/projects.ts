@@ -2,9 +2,15 @@ import type Project from '../types/project';
 
 const PROJECTS: Project[] = [
   {
-    icon: '👷‍♂️',
-    name: 'Amazon Jobs',
-    url: 'https://amazon.jobs/',
+    icon: '✍',
+    name: 'Amazon Jobs CMS',
+    url: 'https://amazon.jobs/content/',
+  },
+
+  {
+    icon: '🔍',
+    name: 'Amazon Jobs search',
+    url: 'https://amazon.jobs/search/',
   },
 
   {
@@ -37,9 +43,8 @@ const PROJECTS: Project[] = [
     url: 'https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Lambda-Insights-view-metrics.html',
   },
 
-  /*
   {
-    icon: '⚛',
+    icon: '🌌',
     name: 'ReactN',
     url: 'https://www.npmjs.com/package/reactn',
   },
@@ -47,8 +52,8 @@ const PROJECTS: Project[] = [
   {
     icon: '🦹‍♂️',
     name: 'Walmart Asset Protection Hub',
+    url: 'https://old.reddit.com/r/walmart/comments/16v2ahr/what_is_aphub/',
   },
-  */
 ];
 
 export default PROJECTS;
