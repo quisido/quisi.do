@@ -1968,6 +1968,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@charlesstover/cloudflare-analytics-worker@workspace:packages/cloudflare-analytics-worker"
   dependencies:
+    "@arethetypeswrong/cli": ^0.10.2
     "@cloudflare/workers-types": ^4.20230914.0
     "@types/jest": ^29.5.5
     "@types/node": ^20.6.5
@@ -4376,6 +4377,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@quisi/do@workspace:."
   dependencies:
+    "@arethetypeswrong/cli": ^0.10.2
     "@microsoft/eslint-formatter-sarif": ^3.0.0
     "@monorepo-template/eslint-config": ^1.0.7
     "@monorepo-template/test": ^2.2.0
@@ -4399,6 +4401,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@quisido/next@workspace:packages/next"
   dependencies:
+    "@arethetypeswrong/cli": ^0.10.2
     "@aws-sdk/types": ^3.418.0
     "@awsui/components-react": ^3.0.940
     "@awsui/design-tokens": ^3.0.58
@@ -7739,6 +7742,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "charlesstover.com@workspace:packages/react-scripts"
   dependencies:
+    "@arethetypeswrong/cli": ^0.10.2
     "@babel/core": ^7.22.20
     "@babel/plugin-syntax-flow": ^7.22.5
     "@babel/plugin-transform-react-jsx": ^7.22.15
@@ -14319,6 +14323,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "lazy-i18n@workspace:packages/lazy-i18n"
   dependencies:
+    "@arethetypeswrong/cli": ^0.10.2
     "@testing-library/react": ^14.0.0
     "@types/jest": ^29.5.5
     "@types/node": ^20.6.5
@@ -15487,6 +15492,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "number-format-react@workspace:packages/number-format-react"
   dependencies:
+    "@arethetypeswrong/cli": ^0.10.2
     "@microsoft/eslint-formatter-sarif": ^3.0.0
     "@monorepo-template/eslint-config": ^1.0.7
     "@monorepo-template/jest-module-preset": ^1.1.3
@@ -17429,6 +17435,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-datadog@workspace:packages/react-datadog"
   dependencies:
+    "@arethetypeswrong/cli": ^0.10.2
     "@babel/core": ^7.22.20
     "@babel/preset-env": ^7.22.20
     "@babel/preset-react": ^7.22.15
@@ -18594,6 +18601,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "sentry-react@workspace:packages/sentry-react"
   dependencies:
+    "@arethetypeswrong/cli": ^0.10.2
     "@sentry/react": ^7.70.0
     "@sentry/types": ^7.70.0
     "@testing-library/react": ^14.0.0
@@ -20319,6 +20327,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "unknown2string@workspace:packages/unknown2string"
   dependencies:
+    "@arethetypeswrong/cli": ^0.10.2
     "@babel/core": ^7.22.20
     "@babel/preset-env": ^7.22.20
     "@babel/preset-react": ^7.22.15
@@ -20429,6 +20438,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "use-awsui-table-item-description@workspace:packages/use-awsui-table-item-description"
   dependencies:
+    "@arethetypeswrong/cli": ^0.10.2
     "@awsui/components-react": ^3.0.940
     "@babel/core": ^7.22.20
     "@babel/preset-env": ^7.22.20
@@ -20500,6 +20510,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "use-next-awsui@workspace:packages/use-next-awsui"
   dependencies:
+    "@arethetypeswrong/cli": ^0.10.2
     "@awsui/components-react": ^3.0.940
     "@babel/core": ^7.22.20
     "@babel/preset-env": ^7.22.20
@@ -20541,6 +20552,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "use-offline@workspace:packages/use-offline"
   dependencies:
+    "@arethetypeswrong/cli": ^0.10.2
     "@microsoft/eslint-formatter-sarif": ^3.0.0
     "@monorepo-template/eslint-config": ^1.0.7
     "@monorepo-template/jest-module-preset": ^1.1.3

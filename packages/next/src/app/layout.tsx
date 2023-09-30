@@ -12,6 +12,7 @@ import ReportUri from '../components/report-uri';
 import Theme from '../components/theme';
 import PRECONNECT_HREFS from '../constants/preconnect-hrefs';
 import withWrappers from '../hocs/with-wrappers';
+import Turnstile from '../app-components/turnstile';
 
 export { default as metadata } from '../constants/root-metadata';
 
@@ -24,6 +25,7 @@ const BodyChildren: ComponentType<PropsWithChildren> = withWrappers(
   Contexts,
   Sentry,
   Theme,
+  Turnstile,
 )(Fragment);
 
 function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {

@@ -1,6 +1,6 @@
 import type Project from '../types/project';
 
-const PROJECTS: Project[] = [
+export default [
   {
     icon: '✍',
     name: 'Amazon Jobs CMS',
@@ -52,8 +52,6 @@ const PROJECTS: Project[] = [
   {
     icon: '🦹‍♂️',
     name: 'Walmart Asset Protection Hub',
-    url: 'https://old.reddit.com/r/walmart/comments/16v2ahr/what_is_aphub/',
+    url: 'https://old.reddit.com/r/walmart/comments/16v2ahr/what_is_aphub/k2onhyq/',
   },
-];
-
-export default PROJECTS;
+] satisfies readonly Project[];

@@ -18,6 +18,7 @@
     "access": "restricted"
   },
   "scripts": {
+    "attw": "attw",
     "build": "next build",
     "cdk:synth": "cdk synth",
     "coverage": "monorepo-template-coverage",
@@ -27,9 +28,7 @@
     "cypress:run": "wait-on http://localhost:3000/ && cypress run --browser chrome:canary",
     "dev": "next dev",
     "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/quisido-next.sarif",
-    "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest",
-    "jest:watch": "jest --watch",
     "lighthouse": "concurrently --hide server --kill-others --kill-others-on-fail --names server,lighthouse --success command-lighthouse \"next build && next start\" \"yarn run lighthouse:report\"",
     "lighthouse:report": "wait-on http://localhost:3000/index.html && lighthouse http://localhost:3000/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental",
     "lint": "next lint",
@@ -39,6 +38,7 @@
     "start": "REACT_APP_CLOUDFLARE_ANALYTICS_ORIGIN=http://localhost:8787 next start"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.10.2",
     "@aws-sdk/types": "^3.418.0",
     "@awsui/components-react": "^3.0.940",
     "@awsui/design-tokens": "^3.0.58",

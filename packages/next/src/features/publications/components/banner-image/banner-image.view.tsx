@@ -1,10 +1,11 @@
+import Image from 'next/image.js';
 import type { ReactElement } from 'react';
 import validateString from '../../../../utils/validate-string';
 import styles from './banner-image.module.scss';
 
 interface Props {
   readonly src?: string | undefined;
-  readonly title?: string | undefined;
+  readonly title: string;
 }
 
 const imageClassName: string = validateString(styles.image);
@@ -18,5 +19,5 @@ export default function PublicationsBannerImage({
     return <div className={undefinedClassName}>&nbsp;</div>;
   }
 
-  return <img alt={title} className={imageClassName} src={src} width={320} />;
+  return <Image alt={title} className={imageClassName} src={src} width={320} />;
 }

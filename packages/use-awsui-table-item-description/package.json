@@ -21,13 +21,15 @@
     "access": "public"
   },
   "scripts": {
+    "attw": "attw",
     "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/unknown2string.sarif || eslint '**/*'",
     "jest": "jest",
     "prepack": "yarn run tsc",
-    "prepublish": "concurrently --kill-others-on-fail --names eslint,jest \"yarn run eslint\" \"yarn run jest\"",
+    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,jest \"yarn run attw\" \"yarn run eslint\" \"yarn run jest\"",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.10.2",
     "@awsui/components-react": "^3.0.940",
     "@babel/core": "^7.22.20",
     "@babel/preset-env": "^7.22.20",

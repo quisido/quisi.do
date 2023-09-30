@@ -2,7 +2,12 @@
 
 import I18n, { useTranslate, type TranslateFunction } from 'lazy-i18n';
 import { useSelectedLayoutSegment } from 'next/navigation.js';
-import { PropsWithChildren, ReactElement, useMemo, useState } from 'react';
+import {
+  type PropsWithChildren,
+  type ReactElement,
+  useMemo,
+  useState,
+} from 'react';
 import Wrapper from '../../components/wrapper';
 import EMPTY_ARRAY from '../../constants/empty-array';
 import { NotifyProvider } from '../../contexts/notify';
@@ -66,7 +71,7 @@ export default function AppWrapper({
           default:
             throw new Error(`Unknown breadcrumbs segment: ${segment}`);
         }
-      }, [translate])}
+      }, [segment, translate])}
       fallback={useMemo((): ReactElement | undefined => {
         switch (segment) {
           case null:

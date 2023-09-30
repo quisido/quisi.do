@@ -26,9 +26,7 @@
   "scripts": {
     "attw": "attw",
     "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/aws-rum-react.sarif || eslint '**/*'",
-    "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest",
-    "jest:watch": "jest --watch",
     "prepack": "yarn run tsc",
     "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,jest \"yarn run attw\" \"yarn run eslint\" \"yarn run jest\"",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile"

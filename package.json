@@ -20,6 +20,7 @@
     "access": "restricted"
   },
   "scripts": {
+    "attw": "attw",
     "browserslist:update-db": "browserslist --update-db",
     "build": "yarn packages/react-scripts run build",
     "cloudflare-analytics": "yarn packages/cloudflare-analytics-worker run dev",
@@ -39,6 +40,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.10.2",
     "@microsoft/eslint-formatter-sarif": "^3.0.0",
     "@monorepo-template/eslint-config": "^1.0.7",
     "@monorepo-template/test": "^2.2.0",
@@ -55,8 +57,5 @@
     "eslint-plugin-react": "^7.33.2",
     "prettier": "^3.0.3",
     "typescript": "^5.2.2"
-  },
-  "resolutions": {
-    "aws-rum-web@^1.14.0": "patch:aws-rum-web@npm%3A1.14.0#./.yarn/patches/aws-rum-web-npm-1.14.0-653ad283fd.patch"
   }
 }

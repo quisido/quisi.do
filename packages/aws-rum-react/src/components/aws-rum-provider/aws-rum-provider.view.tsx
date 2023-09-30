@@ -1,3 +1,5 @@
+'use client';
+
 import type { AwsRumConfig } from 'aws-rum-web';
 import { AwsRum } from 'aws-rum-web';
 import type { ReactElement, ReactNode } from 'react';
