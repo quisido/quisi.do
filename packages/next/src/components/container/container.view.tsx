@@ -9,6 +9,7 @@ export interface Props {
   readonly header: ReactNode;
   readonly headerClassName?: string | undefined;
   readonly marginTop?: 'large' | 'medium' | 'small' | undefined;
+  readonly subheader?: ReactNode | undefined;
 }
 
 export default function Container(props: Readonly<Props>): ReactElement {

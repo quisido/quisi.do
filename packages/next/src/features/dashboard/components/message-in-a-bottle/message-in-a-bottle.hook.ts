@@ -2,8 +2,7 @@ import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 
 interface State {
-  readonly alt: string;
-  readonly title: string;
+  readonly label: string;
 }
 
 export default function useDashboardMessageInABottle(): State {
@@ -11,7 +10,6 @@ export default function useDashboardMessageInABottle(): State {
   const translate: TranslateFunction = useTranslate();
 
   return {
-    alt: translate('message in a bottle') ?? '...',
-    title: translate('message in a bottle') ?? '...',
+    label: translate('message in a bottle') ?? '...',
   };
 }

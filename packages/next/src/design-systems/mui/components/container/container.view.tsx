@@ -13,7 +13,9 @@ export default function MuiContainer({
   className,
   footer,
   header,
+  headerClassName,
   marginTop,
+  subheader,
 }: Readonly<Props>): ReactElement {
   const cardContentProps: CardContentProps = {};
   if (typeof className !== 'undefined') {
@@ -25,6 +27,8 @@ export default function MuiContainer({
       <Card>
         <CardHeader
           action={actions}
+          className={headerClassName}
+          subheader={subheader}
           title={header}
           titleTypographyProps={{
             component: 'h2',

@@ -9,6 +9,7 @@ export default function MuiLink({
   children,
   className,
   href,
+  label,
   title,
 }: Readonly<Props>): ReactElement {
   const { handleClick, rel } = useLink({
@@ -24,6 +25,7 @@ export default function MuiLink({
 
   return (
     <Link
+      aria-label={label}
       color="inherit"
       href={href}
       onClick={handleClick}

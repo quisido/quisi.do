@@ -17,6 +17,7 @@ export default function CloudscapeDesignContainer({
   header,
   headerClassName,
   marginTop,
+  subheader,
 }: Readonly<Props>): ReactElement {
   return (
     <Div className={rootClassName} marginTop={marginTop}>
@@ -25,6 +26,7 @@ export default function CloudscapeDesignContainer({
         header={
           <Div className={headerClassName}>
             <Header actions={actions}>{header}</Header>
+            {subheader}
           </Div>
         }
         variant="stacked"

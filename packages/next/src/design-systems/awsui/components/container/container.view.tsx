@@ -13,6 +13,7 @@ export default function AwsuiContainer({
   header,
   headerClassName,
   marginTop,
+  subheader,
 }: Readonly<Props>): ReactElement {
   return (
     <Div marginTop={marginTop}>
@@ -21,6 +22,7 @@ export default function AwsuiContainer({
         header={
           <Div className={headerClassName}>
             <Header actions={actions}>{header}</Header>
+            {subheader}
           </Div>
         }
         variant="stacked"
