@@ -1,3 +1,5 @@
+'use client';
+
 import type { SxProps } from '@mui/system';
 import type { Theme } from '@mui/material/styles';
 import { useCallback, useMemo, useState } from 'react';

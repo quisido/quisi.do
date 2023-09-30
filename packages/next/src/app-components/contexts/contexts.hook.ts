@@ -1,3 +1,5 @@
+'use client';
+
 import type { Dispatch, SetStateAction } from 'react';
 import { useMemo, useState } from 'react';
 import DesignSystem from '../../constants/design-system';

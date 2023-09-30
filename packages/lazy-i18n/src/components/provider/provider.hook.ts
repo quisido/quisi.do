@@ -1,3 +1,5 @@
+'use client';
+
 import type { MutableRefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import mapTranslationsRecordToLoadedTranslationsRecord from '../../map/map-translations-record-to-loaded-translations-record.js';

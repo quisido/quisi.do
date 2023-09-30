@@ -1,3 +1,5 @@
+'use client';
+
 import type { AwsRum } from 'aws-rum-web';
 import type { Context } from 'react';
 import { createContext } from 'react';

@@ -1,3 +1,5 @@
+'use client';
+
 import I18n from 'lazy-i18n';
 import Image from 'next/image';
 import type { ReactElement } from 'react';
