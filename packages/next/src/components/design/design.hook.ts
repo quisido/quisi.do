@@ -1,8 +1,11 @@
+'use client';
+
 import type {
   ComponentType,
   LazyExoticComponent,
+  PromiseLikeOfReactNode,
   ReactElement,
-  ReactFragment,
+  ReactNode,
 } from 'react';
 import { useEffect, useState } from 'react';
 import type DesignSystem from '../../constants/design-system';
@@ -20,7 +23,8 @@ interface State<P extends object> {
   readonly Component: LazyExoticComponent<ComponentType<P>>;
   readonly fallback:
     | ReactElement
-    | ReactFragment
+    | Iterable<ReactNode>
+    | PromiseLikeOfReactNode
     | boolean
     | number
     | string

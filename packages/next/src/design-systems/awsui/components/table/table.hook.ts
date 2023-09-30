@@ -1,3 +1,5 @@
+'use client';
+
 import type { CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { PaginationProps } from '@awsui/components-react/pagination';

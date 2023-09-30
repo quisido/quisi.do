@@ -1,3 +1,5 @@
+'use client';
+
 import type { Context } from 'react';
 import { createContext } from 'react';
 import type TranslateFunctionType from '../types/translate-function.js';

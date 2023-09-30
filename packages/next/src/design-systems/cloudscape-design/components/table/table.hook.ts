@@ -1,3 +1,5 @@
+'use client';
+
 import type { CollectionPreferencesProps } from '@cloudscape-design/components/collection-preferences';
 import type { NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
 import type { PaginationProps } from '@cloudscape-design/components/pagination';

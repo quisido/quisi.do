@@ -1,3 +1,5 @@
+'use client';
+
 import type { CSSProperties } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 import NAVIGATION_WIDTH from './constants/navigation-width';
