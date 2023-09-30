@@ -9,8 +9,9 @@ export default function AwsuiLink({
   children,
   className,
   href,
+  label,
   title,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { external, handleFollow, ref, rel, target } = useLink({
     category,
     children,
@@ -28,9 +29,15 @@ export default function AwsuiLink({
   }
 
   return (
+    /**
+     * AWSUI's `<Link>` does not support `title`. We can remove this `ref` with
+     *   this pull request:
+     * https://github.com/cloudscape-design/components/pull/1600
+     */
     <span ref={ref}>
       <Link
         {...optionalProps}
+        ariaLabel={label}
         external={external}
         href={href}
         onFollow={handleFollow}

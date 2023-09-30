@@ -35,7 +35,7 @@
     "postlighthouse": "yarn node ./scripts/postlighthouse/index.js",
     "prepack": "yarn run build",
     "prepublish": "exit 0",
-    "start": "REACT_APP_CLOUDFLARE_ANALYTICS_ORIGIN=http://localhost:8787 next start"
+    "start": "REACT_APP_CLOUDFLARE_ANALYTICS_ORIGIN=http://localhost:8787 next start -p 80"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.10.2",

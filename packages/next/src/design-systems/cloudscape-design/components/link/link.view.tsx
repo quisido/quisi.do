@@ -9,6 +9,7 @@ export default function CloudscapeDesignLink({
   children,
   className,
   href,
+  label,
   title,
 }: Readonly<Props>): ReactElement {
   const { external, handleFollow, ref, rel, target } = useLink({
@@ -27,9 +28,15 @@ export default function CloudscapeDesignLink({
   }
 
   return (
+    /**
+     * Cloudscape Design's `<Link>` does not support `title`. We can remove this
+     *   `ref` with this pull request:
+     * https://github.com/cloudscape-design/components/pull/1600
+     */
     <span ref={ref}>
       <Link
         {...optionalProps}
+        ariaLabel={label}
         external={external}
         href={href}
         onFollow={handleFollow}

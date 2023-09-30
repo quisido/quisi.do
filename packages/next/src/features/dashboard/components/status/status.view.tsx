@@ -22,11 +22,13 @@ interface Props {
 }
 
 const errorClassName: string = validateString(styles.error);
+const headerClassName: string = validateString(styles.header);
 const iconClassName: string = validateString(styles.icon);
 const infoClassName: string = validateString(styles.info);
 const messageClassName = validateString(styles.message);
 const messagesClassName = validateString(styles.messages);
 const NONE = 0;
+const subheaderClassName: string = validateString(styles.subheader);
 
 const mapErrorToElement = (err: unknown): ReactElement => {
   const errStr: string = mapUnknownToString(err);
@@ -68,13 +70,14 @@ export default function DashboardStatus({
 
   return (
     <Container
-      header={
-        <>
-          <I18n>Status</I18n>
-          <MessageInABottle />
-        </>
-      }
+      header={<I18n>Status</I18n>}
+      headerClassName={headerClassName}
       marginTop="large"
+      subheader={
+        <div className={subheaderClassName}>
+          <MessageInABottle />
+        </div>
+      }
     >
       <Div display="flex" flexDirection="row" justifyContent="space-around">
         <Div>
