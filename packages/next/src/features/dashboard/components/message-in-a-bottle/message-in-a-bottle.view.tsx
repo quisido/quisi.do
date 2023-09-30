@@ -1,7 +1,9 @@
+import Image from 'next/image.js';
 import type { ReactElement } from 'react';
 import Link from '../../../../components/link';
 import validateString from '../../../../utils/validate-string';
-import src from '../../images/message-in-a-bottle.png';
+import newHorizons from '../../../../images/new-horizons.jpg';
+import messageInABottle from '../../images/message-in-a-bottle.png';
 import useMessageInABottle from './message-in-a-bottle.hook';
 import styles from './message-in-a-bottle.module.scss';
 
@@ -19,14 +21,14 @@ export default function MessageInABottle(): ReactElement {
   return (
     <Link
       category="easter-egg/message-in-a-bottle"
-      href="/images/new-horizons.jpg"
+      href={newHorizons.src}
       title=""
     >
-      <img
+      <Image
         alt={alt}
         className={imageClassName}
         height={HEIGHT}
-        src={src}
+        src={messageInABottle}
         width={WIDTH}
       />
     </Link>

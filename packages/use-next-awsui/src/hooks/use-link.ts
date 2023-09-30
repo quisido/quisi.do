@@ -34,7 +34,8 @@ export default function useLink({ href }: Props = DEFAULT_PROPS): State {
       (e: Readonly<CustomEvent<Readonly<LinkProps.FollowDetail>>>): void => {
         if (
           e.detail.external === true ||
-          typeof e.detail.href === 'undefined'
+          typeof e.detail.href === 'undefined' ||
+          e.detail.target === '_blank'
         ) {
           return;
         }

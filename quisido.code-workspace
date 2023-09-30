@@ -23,53 +23,52 @@
 
     // Integrations
     {
-      "name": "Amazon CloudWatch RUM",
+      "name": "aws-rum-react",
       "path": "packages/aws-rum-react"
     },
 
     {
-      "name": "Datadog",
-      "path": "packages/react-datadog"
-    },
-
-    {
-      "name": "FullStory",
+      "name": "fullstory-react",
       "path": "packages/fullstory-react"
     },
 
     {
-      "name": "Lazy Internationalization",
+      "name": "lazy-i18n",
       "path": "packages/lazy-i18n"
     },
 
     {
-      "name": "Sentry",
-      "path": "packages/sentry-react"
-    },
-
-    // Components
-    {
-      "name": "mapUnknownToString",
-      "path": "packages/unknown2string"
-    },
-
-    {
-      "name": "NumberFormat",
+      "name": "number-format-react",
       "path": "packages/number-format-react"
     },
 
     {
-      "name": "useAwsuiTableItemDescription",
+      "name": "react-datadog",
+      "path": "packages/react-datadog"
+    },
+
+    {
+      "name": "sentry-react",
+      "path": "packages/sentry-react"
+    },
+
+    {
+      "name": "unknown2string",
+      "path": "packages/unknown2string"
+    },
+
+    {
+      "name": "use-awsui-table-item-description",
       "path": "packages/use-awsui-table-item-description"
     },
 
     {
-      "name": "useNextAwsui",
+      "name": "use-next-awsui",
       "path": "packages/use-next-awsui"
     },
 
     {
-      "name": "useOffline",
+      "name": "use-offline",
       "path": "packages/use-offline"
     }
   ],

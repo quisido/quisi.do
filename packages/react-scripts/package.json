@@ -4,6 +4,7 @@
   "config-overrides-path": "./config-overrides.cjs",
   "homepage": ".",
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.10.2",
     "@babel/core": "^7.22.20",
     "@babel/plugin-syntax-flow": "^7.22.5",
     "@babel/plugin-transform-react-jsx": "^7.22.15",

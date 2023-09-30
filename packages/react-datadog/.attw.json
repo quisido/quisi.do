@@ -1,0 +1,5 @@
+{
+  "format": "table-flipped",
+  "ignoreRules": ["cjs-resolves-to-esm"],
+  "pack": "."
+}

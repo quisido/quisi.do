@@ -1,4 +1,6 @@
 const PRECONNECT_HREFS: readonly string[] = [
+  // Cloudflare
+  'https://challenges.cloudflare.com',
 
   // Cloudflare Insights
   'https://cloudflareinsights.com',

@@ -41,6 +41,9 @@ export default function useAwsuiLink({
 
   // States
   const ref: MutableRefObject<HTMLSpanElement | null> = useRef(null);
+  const { handleFollow } = useNextAwsuiLink({
+    href,
+  });
 
   // Effects
   useLayoutEffect((): VoidFunction | undefined => {
@@ -56,7 +59,6 @@ export default function useAwsuiLink({
     };
   }, [title]);
 
-  const { handleFollow } = useNextAwsuiLink(href);
   return {
     external: filterHrefByExternal(href) && !filterNodesByImage(children),
     ref,
