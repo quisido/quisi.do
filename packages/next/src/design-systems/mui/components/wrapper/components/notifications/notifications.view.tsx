@@ -16,7 +16,14 @@ const ANCHOR_ORIGIN: SnackbarOrigin = {
 };
 
 const mapChildToSnackbar = (
-  { CallToAction, message, onAction, onDismiss, type }: Readonly<Notification>,
+  {
+    CallToAction,
+    Header,
+    message,
+    onAction,
+    onDismiss,
+    type,
+  }: Readonly<Notification>,
   index: number,
 ): ReactElement => {
   const alertProps: AlertProps = {};
@@ -39,6 +46,7 @@ const mapChildToSnackbar = (
   return (
     <Snackbar anchorOrigin={ANCHOR_ORIGIN} key={index} open>
       <Alert {...alertProps} severity={type} sx={{ width: '100%' }}>
+        {typeof Header !== 'undefined' && <Header />}
         {message}
       </Alert>
     </Snackbar>

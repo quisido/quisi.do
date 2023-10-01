@@ -2,7 +2,9 @@ import type { ComponentType, PropsWithChildren, ReactElement } from 'react';
 import { Fragment, StrictMode } from 'react';
 import Contexts from '../app-components/contexts';
 import GoogleAnalytics from '../app-components/google-analytics';
+import NotificationsProvider from '../app-components/notifications-provider';
 import Sentry from '../app-components/sentry';
+import Turnstile from '../app-components/turnstile';
 import CloudflareInsights from '../components/cloudflare-insights';
 import CloudWatchRUM from '../components/cloudwatch-rum';
 import Datadog from '../components/datadog';
@@ -12,7 +14,6 @@ import ReportUri from '../components/report-uri';
 import Theme from '../components/theme';
 import PRECONNECT_HREFS from '../constants/preconnect-hrefs';
 import withWrappers from '../hocs/with-wrappers';
-import Turnstile from '../app-components/turnstile';
 
 export { default as metadata } from '../constants/root-metadata';
 
@@ -21,6 +22,7 @@ export { default as metadata } from '../constants/root-metadata';
  *   inadvertently render HTML elements around `<body>`.
  */
 const BodyChildren: ComponentType<PropsWithChildren> = withWrappers(
+  NotificationsProvider,
   CloudWatchRUM,
   Contexts,
   Sentry,

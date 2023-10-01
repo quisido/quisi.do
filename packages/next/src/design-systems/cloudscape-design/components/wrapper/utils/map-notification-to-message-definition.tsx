@@ -1,17 +1,9 @@
 import type { FlashbarProps } from '@cloudscape-design/components/flashbar';
-import type { ReactNode } from 'react';
-import ErrorNotificationHeader from '../../../../../components/error-notification-header';
 import type Notification from '../../../../../types/notification';
-
-const mapTypeToHeader = (type: 'error'): ReactNode => {
-  switch (type) {
-    case 'error':
-      return <ErrorNotificationHeader />;
-  }
-};
 
 export default function mapNotificationToCloudscapeFlashbarPropsMessageDefinition({
   CallToAction,
+  Header,
   message,
   onAction,
   onDismiss,
@@ -19,7 +11,7 @@ export default function mapNotificationToCloudscapeFlashbarPropsMessageDefinitio
 }: Readonly<Notification>): FlashbarProps.MessageDefinition {
   const messageDefinition: FlashbarProps.MessageDefinition = {
     content: message,
-    header: mapTypeToHeader(type),
+    header: typeof Header !== 'undefined' ? <Header /> : undefined,
     type,
   };
 
