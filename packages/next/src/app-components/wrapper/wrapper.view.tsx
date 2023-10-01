@@ -2,29 +2,18 @@
 
 import I18n, { useTranslate, type TranslateFunction } from 'lazy-i18n';
 import { useSelectedLayoutSegment } from 'next/navigation.js';
-import {
-  type PropsWithChildren,
-  type ReactElement,
-  useMemo,
-  useState,
-} from 'react';
+import { type PropsWithChildren, type ReactElement, useMemo } from 'react';
 import Wrapper from '../../components/wrapper';
-import EMPTY_ARRAY from '../../constants/empty-array';
-import { NotifyProvider } from '../../contexts/notify';
-import useEffectEvent from '../../hooks/use-effect-event';
 import Breadcrumb from '../../types/breadcrumb';
-import Notification from '../../types/notification';
+import { useNotifications } from '../../contexts/notifications';
 
 export default function AppWrapper({
   children,
 }: Readonly<PropsWithChildren>): ReactElement {
   // Contexts
+  const [notifications] = useNotifications();
   const segment: string | null = useSelectedLayoutSegment();
   const translate: TranslateFunction = useTranslate();
-
-  // States
-  const [notifications, setNotifications] =
-    useState<readonly Notification[]>(EMPTY_ARRAY);
 
   return (
     <Wrapper
@@ -91,17 +80,7 @@ export default function AppWrapper({
         }
       }, [segment])}
     >
-      <NotifyProvider
-        value={useEffectEvent((notification: Notification): void => {
-          setNotifications(
-            (
-              oldNotifications: readonly Notification[],
-            ): readonly Notification[] => [...oldNotifications, notification],
-          );
-        })}
-      >
-        {children}
-      </NotifyProvider>
+      {children}
     </Wrapper>
   );
 }

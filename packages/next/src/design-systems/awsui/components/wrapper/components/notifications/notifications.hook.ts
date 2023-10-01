@@ -7,7 +7,9 @@ import mapNotificationsToMessageDefinitions from '../../utils/map-notifications-
 export default function useAwsuiWrapperNotifications(
   notifications: readonly Notification[] = EMPTY_ARRAY,
 ): readonly FlashbarProps.MessageDefinition[] {
-  return useMemo((): readonly FlashbarProps.MessageDefinition[] => {
-    return mapNotificationsToMessageDefinitions(notifications);
-  }, [notifications]);
+  return useMemo(
+    (): readonly FlashbarProps.MessageDefinition[] =>
+      mapNotificationsToMessageDefinitions(notifications),
+    [notifications],
+  );
 }

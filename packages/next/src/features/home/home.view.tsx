@@ -34,7 +34,7 @@ export default function Home(): ReactElement {
 
   return (
     <>
-      <Container actions={<ViewResumeButton />} header={<I18n>About me</I18n>}>
+      <Container actions={<ViewResumeButton />} header={<I18n>About</I18n>}>
         <Div className={contentClassName} display="flex" flexDirection="row">
           <Div className={avatarClassName} marginRight="large">
             <Image alt={avatarAlt} height={100} src={avatar} width={100} />
@@ -45,12 +45,9 @@ export default function Home(): ReactElement {
             flexDirection="column"
           >
             <Div element="p" marginBottom="medium">
-              My name is <strong>Charles Stover</strong>. I am a{' '}
-              <strong>staff-level front end engineer</strong> with an expertise
-              in <strong>JavaScript and React</strong>. My focus is on long-term
-              product visions, impact across teams, operational health,
-              application monitoring, and <abbr title="user interface">UI</abbr>
-              /<abbr title="user experience">UX</abbr>.
+              <strong>Quisido</strong> is a front end engineer driving a{' '}
+              <abbr title="software as a service">SaaS</abbr> charity
+              initiative.
             </Div>
             <ul className={listClassName}>
               <li>

@@ -1,7 +1,7 @@
 import { MutableRefObject, useRef } from 'react';
 import mapUnknownToString from 'unknown2string';
 import RetryAction from '../components/retry-action';
-import { useNotify } from '../contexts/notify';
+import useNotify from '../hooks/use-notify';
 import type { AsyncState } from '../modules/use-async-state';
 import useAsyncState from '../modules/use-async-state';
 
