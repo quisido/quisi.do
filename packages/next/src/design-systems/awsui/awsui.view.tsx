@@ -8,6 +8,7 @@ import Chip from './components/chip';
 import Container from './components/container';
 import Div from './components/div';
 import Header from './components/header';
+import Input from './components/input';
 import Link from './components/link';
 import LoadingIcon from './components/loading-icon';
 import Select from './components/select';
@@ -37,6 +38,8 @@ export default function Awsui<Card extends object, Row extends object>({
       return <Div {...props} />;
     case 'header':
       return <Header {...props} />;
+    case 'input':
+      return <Input {...props} />;
     case 'link':
       return <Link {...props} />;
     case 'loading-icon':

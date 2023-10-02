@@ -41,7 +41,7 @@ export default function AppTurnstile({
             notify({
               type: 'warning',
               Header(): ReactElement {
-                return <>Are you still 🧑?</>;
+                return <>🐱‍👤 Are you still human?</>;
               },
               message:
                 'You probably left this tab open while doing something else.',
@@ -51,7 +51,7 @@ export default function AppTurnstile({
             notify({
               type: 'error',
               Header(): ReactElement {
-                return <>You may be 🤖.</>;
+                return <>🤖 You may be a robot.</>;
               },
               message: (
                 <>
@@ -68,7 +68,7 @@ export default function AppTurnstile({
           message: 'Your Turnstile session has expired.',
           type: 'warning',
           Header(): ReactElement {
-            return <>Are you still 🧑?</>;
+            return <>🐱‍👤 Are you still human?</>;
           },
         });
       }}
@@ -77,7 +77,7 @@ export default function AppTurnstile({
           message: 'Turnstile has validated your session.',
           type: 'info',
           Header(): ReactElement {
-            return <>You are 🧑!</>;
+            return <>🧑 You are human!</>;
           },
         });
       }}

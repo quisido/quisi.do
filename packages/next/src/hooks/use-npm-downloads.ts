@@ -1,4 +1,4 @@
-import { MutableRefObject, useRef } from 'react';
+import { MutableRefObject, useEffect, useRef } from 'react';
 import mapUnknownToString from 'unknown2string';
 import RetryAction from '../components/retry-action';
 import useNotify from '../hooks/use-notify';
@@ -14,7 +14,7 @@ import useAsyncState from '../modules/use-async-state';
  */
 
 interface BaseState {
-  readonly asyncErrorActionRef: MutableRefObject<unknown>;
+  readonly asyncRetryRef: MutableRefObject<Promise<unknown> | undefined>;
 }
 
 type State = AsyncState<Readonly<Record<string, readonly number[]>>> &
@@ -35,21 +35,29 @@ export default function useNpmDownloads(): State {
   const notify = useNotify();
 
   // States
-  const asyncErrorActionRef: MutableRefObject<unknown> = useRef();
+  const { request, retry, ...asyncState } =
+    useAsyncState<Readonly<Record<string, readonly number[]>>>();
 
-  const asyncState = useAsyncState(getNpmDownloads, (err: string): void => {
-    notify({
-      CallToAction: RetryAction,
-      message: mapUnknownToString(err),
-      type: 'error',
-      onAction: (): void => {
-        asyncErrorActionRef.current = asyncState.retry();
-      },
+  const asyncRetryRef: MutableRefObject<Promise<unknown> | undefined> =
+    useRef();
+
+  useEffect((): void => {
+    request(getNpmDownloads).catch((err: string): void => {
+      notify({
+        CallToAction: RetryAction,
+        message: mapUnknownToString(err),
+        type: 'error',
+        onAction: (): void => {
+          asyncRetryRef.current = retry();
+        },
+      });
     });
-  });
+  }, [request, retry]);
 
   return {
     ...asyncState,
-    asyncErrorActionRef,
+    asyncRetryRef,
+    request,
+    retry,
   };
 }

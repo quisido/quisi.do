@@ -1,6 +1,7 @@
 enum NavigationText {
   AceAlters = 'acealters',
   Applications = 'applications',
+  CloudflareWorkersAI = 'cloudflare-workers-ai',
   ConnectWithMe = 'connect-with-me',
   Bluesky = 'bluesky',
   Dashboard = 'dashboard',
@@ -9,7 +10,6 @@ enum NavigationText {
   Home = 'home',
   LinkedIn = 'linkedin',
   Medium = 'medium',
-  MoreApplications = 'more-applications',
   MTGPlanechase = 'mtg-planechase',
   Packages = 'packages',
   Portfolio = 'portfolio',

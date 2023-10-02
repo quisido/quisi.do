@@ -2,6 +2,7 @@ import type { ComponentType, PropsWithChildren, ReactElement } from 'react';
 import { Fragment, StrictMode } from 'react';
 import Contexts from '../app-components/contexts';
 import GoogleAnalytics from '../app-components/google-analytics';
+import Mixpanel from '../app-components/mixpanel';
 import NotificationsProvider from '../app-components/notifications-provider';
 import Sentry from '../app-components/sentry';
 import Turnstile from '../app-components/turnstile';
@@ -38,14 +39,28 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
         <Preconnect hrefs={PRECONNECT_HREFS} />
         <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
         <meta charSet="utf-8" />
+        <script
+          referrerPolicy="origin"
+          src="https://quisi.do/cdn-cgi/zaraz/i.js"
+          type="text/javascript"
+        />
       </head>
       <body className="awsui-dark-mode">
         <BodyChildren>
           <Datadog />
           <FullStory />
           <GoogleAnalytics />
+          <Mixpanel />
           {children}
         </BodyChildren>
+        {/*
+        <script
+          defer
+          id="hs-script-loader"
+          src="https://js-na1.hs-scripts.com/39916358.js"
+          type="text/javascript"
+        />
+        */}
       </body>
     </html>
   );

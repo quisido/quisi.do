@@ -16,6 +16,8 @@ export default function WrapperNavigationText({
       return <I18n>Applications</I18n>;
     case NavigationText.Bluesky:
       return <>Bluesky</>;
+    case NavigationText.CloudflareWorkersAI:
+      return <>Cloudflare Workers AI</>;
     case NavigationText.ConnectWithMe:
       return <I18n>Connect with me</I18n>;
     case NavigationText.Dashboard:
@@ -32,8 +34,6 @@ export default function WrapperNavigationText({
       return <>MTG Planechase</>;
     case NavigationText.Medium:
       return <>Medium</>;
-    case NavigationText.MoreApplications:
-      return <I18n>More applications</I18n>;
     case NavigationText.Packages:
       return <I18n>Packages</I18n>;
     case NavigationText.Portfolio:
