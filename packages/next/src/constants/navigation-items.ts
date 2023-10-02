@@ -24,12 +24,16 @@ const NAVIGATION_ITEMS: readonly (
     text: NavigationText.Applications,
     children: [
       {
+        text: NavigationText.Tetris3DS,
+        url: 'https://charlesstover.github.io/3ds-tetris/',
+      },
+      {
         text: NavigationText.AceAlters,
         url: 'https://acealters.com/',
       },
       {
-        text: NavigationText.Tetris3DS,
-        url: 'https://charlesstover.github.io/3ds-tetris/',
+        text: NavigationText.CloudflareWorkersAI,
+        url: '/cloudflare-workers-ai/',
       },
       {
         text: NavigationText.Dota2Huds,

@@ -2,7 +2,7 @@
 
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import useAsyncState from '../../modules/use-async-state';
 import DevArticle from '../../types/dev-article';
 import MediumArticle from '../../types/medium-article';
@@ -46,11 +46,19 @@ export default function usePublicationsContents(): State {
   const translate: TranslateFunction = useTranslate();
 
   // States
-  const { data: devData, loading: isDevLoading } = useAsyncState(getDevData);
   const [sort, setSort] = useState<Sort>(DEFAULT_SORT);
 
-  const { data: mediumData, loading: isMediumLoading } =
-    useAsyncState(getMediumData);
+  const {
+    data: devData,
+    loading: isDevLoading,
+    request: requestDev,
+  } = useAsyncState<readonly DevArticle[]>();
+
+  const {
+    data: mediumData,
+    loading: isMediumLoading,
+    request: requestMedium,
+  } = useAsyncState<Record<string, MediumArticle>>();
 
   const [isMediumApiBannerVisible, setIsMediumApiBannerVisible] =
     useState(true);
@@ -62,6 +70,15 @@ export default function usePublicationsContents(): State {
     devData,
     mediumData,
   });
+
+  // Effects
+  useEffect((): void => {
+    requestDev(getDevData);
+  }, [getDevData, requestDev]);
+
+  useEffect((): void => {
+    requestMedium(getMediumData);
+  }, [getMediumData, requestMedium]);
 
   return {
     isMediumApiBannerVisible,

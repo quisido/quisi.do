@@ -7,6 +7,7 @@ import type { Props as ChipProps } from '../components/chip';
 import type { Props as ContainerProps } from '../components/container';
 import type { Props as DivProps } from '../components/div';
 import type { Props as HeaderProps } from '../components/header';
+import type { Props as InputProps } from '../components/input';
 import type { Props as LinkProps } from '../components/link';
 import type { Props as SelectProps } from '../components/select';
 import type { Props as SpanProps } from '../components/span';
@@ -25,6 +26,7 @@ export default interface DesignSystemPropsRecord<
   readonly container: ContainerProps;
   readonly div: DivProps;
   readonly header: HeaderProps;
+  readonly input: InputProps;
   readonly link: LinkProps;
   readonly 'loading-icon': Record<string, never>;
   readonly select: SelectProps;

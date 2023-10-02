@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import EMPTY_ARRAY from '../../constants/empty-array';
 import useAsyncState from '../../modules/use-async-state';
 import type CloudflareAnalytics from '../../types/cloudflare-analytics';
@@ -116,21 +116,37 @@ export default function useDashboard({
     error: cloudflareAnalyticsError,
     initiated: isCloudflareAnalyticsInitiated,
     loading: isCloudflareAnalyticsLoading,
-  } = useAsyncState(onCloudflareAnalyticsRequest);
+    request: requestCloudflareAnalytics,
+  } = useAsyncState<CloudflareAnalytics>();
 
   const {
     data: sentryIssues,
     error: sentryIssuesError,
     initiated: isSentryIssuesInitiated,
     loading: isSentryIssuesLoading,
-  } = useAsyncState(onSentryIssuesRequest);
+    request: requestSentryIssues,
+  } = useAsyncState<readonly SentryIssue[]>();
 
   const {
     data: uptimeChecks,
     error: uptimeChecksError,
     initiated: isUptimeChecksInitiated,
     loading: isUptimeChecksLoading,
-  } = useAsyncState(onUptimeChecksRequest);
+    request: requestUptimeChecks,
+  } = useAsyncState<UptimeChecks>();
+
+  // Effects
+  useEffect((): void => {
+    requestCloudflareAnalytics(onCloudflareAnalyticsRequest);
+  }, [onCloudflareAnalyticsRequest, requestCloudflareAnalytics]);
+
+  useEffect((): void => {
+    requestSentryIssues(onSentryIssuesRequest);
+  }, [onSentryIssuesRequest, requestSentryIssues]);
+
+  useEffect((): void => {
+    requestUptimeChecks(onUptimeChecksRequest);
+  }, [onUptimeChecksRequest, requestUptimeChecks]);
 
   const uptimeChecksErrors: readonly unknown[] =
     uptimeChecks?.errors ?? EMPTY_ARRAY;

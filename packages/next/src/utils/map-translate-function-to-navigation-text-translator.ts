@@ -14,6 +14,8 @@ export default function mapTranslateFunctionToNavigationTextTranslator(
         return translate('Applications');
       case NavigationText.Bluesky:
         return 'Bluesky';
+      case NavigationText.CloudflareWorkersAI:
+        return 'Cloudflare Workers AI';
       case NavigationText.ConnectWithMe:
         return translate('Connect with me');
       case NavigationText.Dashboard:
@@ -30,8 +32,6 @@ export default function mapTranslateFunctionToNavigationTextTranslator(
         return 'MTG Planechase';
       case NavigationText.Medium:
         return 'Medium';
-      case NavigationText.MoreApplications:
-        return translate('More applications');
       case NavigationText.Packages:
         return translate('Packages');
       case NavigationText.Portfolio:

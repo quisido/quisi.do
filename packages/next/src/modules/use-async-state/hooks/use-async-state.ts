@@ -9,6 +9,7 @@ export type State<T> = AsyncState<T> & BaseState<T>;
 
 interface BaseState<T> {
   readonly asyncEffectRef: MutableRefObject<Promise<unknown> | undefined>;
+  readonly request: (get: () => Promise<T>) => Promise<void>;
   readonly retry: () => Promise<void>;
 }
 
@@ -19,25 +20,20 @@ const DEFAULT_ASYNC_STATE = {
   loading: false,
 } satisfies AsyncState<unknown>;
 
-export default function useAsyncState<T>(
-  get: () => Promise<T>,
-  onError?: ((error: string) => void) | undefined,
-): State<T> {
+export default function useAsyncState<T = unknown>(): State<T> {
   // States
-  const getRef: MutableRefObject<() => Promise<T>> = useRef(get);
+  const lastGetRef: MutableRefObject<(() => Promise<T>) | undefined> = useRef();
 
   const asyncEffectRef: MutableRefObject<Promise<unknown> | undefined> =
     useRef();
-
-  const handleErrorRef: MutableRefObject<
-    ((error: string) => void) | undefined
-  > = useRef(onError);
 
   const [asyncState, setAsyncState] =
     useState<AsyncState<T>>(DEFAULT_ASYNC_STATE);
 
   // Callbacks
-  const getState = useCallback(async (): Promise<void> => {
+  const getState = useCallback(async (get: () => Promise<T>): Promise<void> => {
+    lastGetRef.current = get;
+
     setAsyncState({
       data: undefined,
       error: undefined,
@@ -49,7 +45,7 @@ export default function useAsyncState<T>(
       const data: T = await get();
 
       // If this data does not belong to this getter, bail.
-      if (get !== getRef.current) {
+      if (get !== lastGetRef.current) {
         return;
       }
 
@@ -61,7 +57,7 @@ export default function useAsyncState<T>(
       });
     } catch (err: unknown) {
       // If this error does not belong to this getter, bail.
-      if (get !== getRef.current) {
+      if (get !== lastGetRef.current) {
         return;
       }
 
@@ -72,22 +68,27 @@ export default function useAsyncState<T>(
         initiated: true,
         loading: false,
       });
-
-      if (typeof handleErrorRef.current === 'function') {
-        handleErrorRef.current(errorStr);
-      }
     }
-  }, [get]);
-
-  getRef.current = get;
-  handleErrorRef.current = onError;
-  useEffect((): void => {
-    asyncEffectRef.current = getState();
-  }, [get]);
+  }, []);
 
   return {
     ...asyncState,
     asyncEffectRef,
-    retry: getState,
+
+    retry: useCallback(async (): Promise<void> => {
+      if (typeof lastGetRef.current === 'undefined') {
+        return;
+      }
+
+      const promise: Promise<unknown> = getState(lastGetRef.current);
+      asyncEffectRef.current = promise;
+      await promise;
+    }, [getState]),
+
+    request: useCallback(async (get: () => Promise<T>): Promise<void> => {
+      const promise: Promise<unknown> = getState(get);
+      asyncEffectRef.current = promise;
+      await promise;
+    }, []),
   };
 }
