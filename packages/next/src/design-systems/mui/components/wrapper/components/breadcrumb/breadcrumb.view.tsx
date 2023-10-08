@@ -9,7 +9,7 @@ export default function MuiWrapperBreadcrumb({
   children,
   current,
   path,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { currentProps } = useWrapperBreadcrumb();
 
   if (current) {

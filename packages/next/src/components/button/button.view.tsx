@@ -17,6 +17,6 @@ export interface Props {
   readonly variant: 'primary';
 }
 
-export default function Button(props: Readonly<Props>): ReactElement {
+export default function Button(props: Props): ReactElement {
   return <DesignSystem props={props} type="button" />;
 }

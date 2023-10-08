@@ -15,6 +15,6 @@ export interface Props {
     | undefined;
 }
 
-export default function Span(props: Readonly<Props>): ReactElement {
+export default function Span(props: Props): ReactElement {
   return <DesignSystem props={props} type="span" />;
 }

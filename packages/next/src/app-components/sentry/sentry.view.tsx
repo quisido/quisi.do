@@ -9,7 +9,7 @@ interface Props {
   readonly children: ReactNode;
 }
 
-export default function Sentry({ children }: Readonly<Props>): ReactElement {
+export default function Sentry({ children }: Props): ReactElement {
   return (
     <SentryReact
       dsn="https://a36b53fdd093405eb597a945f49a70f2@o592283.ingest.sentry.io/5740642"

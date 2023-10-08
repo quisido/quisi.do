@@ -6,9 +6,7 @@ interface Props {
   readonly children: boolean;
 }
 
-export default function OnlineStatus({
-  children,
-}: Readonly<Props>): ReactElement {
+export default function OnlineStatus({ children }: Props): ReactElement {
   const status: string = useOnlineStatus(children);
 
   return <I18n status={status}>Currently online: $status</I18n>;

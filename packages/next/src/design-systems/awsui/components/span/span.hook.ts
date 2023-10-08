@@ -20,11 +20,7 @@ interface State {
   readonly variant: 'h2' | 'p' | undefined;
 }
 
-export default function useAwsuiSpan({
-  color,
-  element,
-  size,
-}: Readonly<Props>): State {
+export default function useAwsuiSpan({ color, element, size }: Props): State {
   return {
     color: color && mapColorToAwsuiColor(color),
     fontSize: size && mapSizeToFontSize(size),

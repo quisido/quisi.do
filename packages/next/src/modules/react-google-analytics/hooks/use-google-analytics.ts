@@ -17,7 +17,7 @@ interface Props {
 export default function useGoogleAnalytics({
   trackingId,
   userData,
-}: Readonly<Props>): void {
+}: Props): void {
   // States
   const googleAnalyticsUserData: GoogleAnalyticsUserData | undefined =
     useUserData(userData);

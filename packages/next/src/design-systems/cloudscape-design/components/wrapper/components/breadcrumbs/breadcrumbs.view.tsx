@@ -10,7 +10,7 @@ interface Props {
 
 export default function CloudscapeDesignWrapperBreadcrumbs({
   children,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { ariaLabel, handleFollow, items } = useBreadcrumbs(children);
 
   // Workaround until Cloudscape supports TypeScript 4.4 exact optional

@@ -7,6 +7,6 @@ interface Props {
 
 export default function DefaultErrorBoundaryFallback({
   error,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   return <>{error.message}</>;
 }

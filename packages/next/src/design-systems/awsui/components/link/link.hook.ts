@@ -6,11 +6,11 @@ import type {
 import { useCallback, useLayoutEffect, useRef } from 'react';
 import { useLink as useNextAwsuiLink } from 'use-next-awsui';
 import useEvent from '../../../../hooks/use-event';
-import filterHrefByBlank from '../../../../utils/filter-href-by-blank';
-import filterHrefByExternal from '../../../../utils/filter-href-by-external';
+import isHrefBlank from '../../../../utils/is-href-blank';
 import filterNodesByImage from '../../../../utils/filter-nodes-by-image';
 import mapLinkSpanToAnchorElement from './utils/map-link-span-to-anchor-element';
 import { LinkProps } from '@awsui/components-react/link';
+import isHrefExternal from '../../../../utils/is-href-external';
 
 interface Props {
   readonly category: string;
@@ -32,8 +32,8 @@ export default function useAwsuiLink({
   children,
   href,
   title,
-}: Readonly<Props>): State {
-  const isBlank: boolean = filterHrefByBlank(href);
+}: Props): State {
+  const isBlank: boolean = isHrefBlank(href);
   const target: HTMLAttributeAnchorTarget = isBlank ? '_blank' : '_self';
 
   // Contexts
@@ -60,7 +60,7 @@ export default function useAwsuiLink({
   }, [title]);
 
   return {
-    external: filterHrefByExternal(href) && !filterNodesByImage(children),
+    external: isHrefExternal(href) && !filterNodesByImage(children),
     ref,
     rel: isBlank ? 'nofollow noopener noreferrer' : undefined,
     target,

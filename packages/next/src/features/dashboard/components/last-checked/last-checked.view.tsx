@@ -16,7 +16,7 @@ export default function LastChecked({
   error,
   initiated,
   loading,
-}: Readonly<Props>): ReactElement | null {
+}: Props): ReactElement | null {
   if (error) {
     return null;
   }

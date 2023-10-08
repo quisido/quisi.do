@@ -7,6 +7,6 @@ export interface Props {
   readonly onChange: (checked: boolean) => void;
 }
 
-export default function Checkbox(props: Readonly<Props>): ReactElement {
+export default function Checkbox(props: Props): ReactElement {
   return <DesignSystem props={props} type="checkbox" />;
 }

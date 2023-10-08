@@ -29,7 +29,7 @@ export default function ApdexPieChart({
   frustrated,
   satisfied,
   tolerated,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const total: number = frustrated + satisfied + tolerated;
   // const frustratedPercent: number = frustrated / total;
   const satisfiedPercent: number = satisfied / total;

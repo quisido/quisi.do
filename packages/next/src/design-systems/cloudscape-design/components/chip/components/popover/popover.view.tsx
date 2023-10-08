@@ -13,7 +13,7 @@ const rootClassName: string = validateString(styles.root);
 export default function CloudscapeDesignChipPopover({
   children,
   title,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   if (typeof title === 'undefined') {
     return <>{children}</>;
   }

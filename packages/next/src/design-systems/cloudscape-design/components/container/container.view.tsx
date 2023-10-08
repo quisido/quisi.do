@@ -18,7 +18,7 @@ export default function CloudscapeDesignContainer({
   headerClassName,
   marginTop,
   subheader,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   return (
     <Div className={rootClassName} marginTop={marginTop}>
       <Container

@@ -12,7 +12,7 @@ export default function MuiWrapperNavigation({
   onClose,
   onOpen,
   open,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { Drawer, ariaLabel } = useMuiNavigation();
 
   return (

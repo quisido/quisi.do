@@ -14,7 +14,7 @@ const undefinedClassName: string = validateString(styles.undefined);
 export default function PublicationsBannerImage({
   src,
   title,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   if (typeof src === 'undefined') {
     return <div className={undefinedClassName}>&nbsp;</div>;
   }

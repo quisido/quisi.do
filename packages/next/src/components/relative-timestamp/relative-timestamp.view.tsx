@@ -8,9 +8,7 @@ interface Props {
 
 const SINGLE = 1;
 
-export default function RelativeTimestamp({
-  children,
-}: Readonly<Props>): ReactElement {
+export default function RelativeTimestamp({ children }: Props): ReactElement {
   return (
     <RelativeTimestampModule value={children}>
       {(

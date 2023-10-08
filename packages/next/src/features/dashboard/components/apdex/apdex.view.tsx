@@ -25,7 +25,7 @@ export default function Apdex({
   loading,
   satisfiedTimeSeries,
   toleratedTimeSeries,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   if (!initiated) {
     return (
       <Container

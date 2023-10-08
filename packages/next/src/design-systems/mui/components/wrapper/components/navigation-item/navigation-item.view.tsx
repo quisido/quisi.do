@@ -22,7 +22,7 @@ const DEPTH_OFFSET = 1;
 export default function WrapperMuiNavigationItem({
   children: item,
   depth = DEFAULT_DEPTH,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   // Navigation category
   if (filterNavigationByCategory(item)) {
     const { children, defaultExpanded, text } = item;

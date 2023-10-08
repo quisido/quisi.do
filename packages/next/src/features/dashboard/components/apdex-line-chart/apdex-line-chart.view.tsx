@@ -17,7 +17,7 @@ export default function ApdexLineChart({
   frustrated,
   satisfied,
   tolerated,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { data, labelFormatter, ref, tickFormatter, width } = useApdexLineChart(
     {
       frustrated,

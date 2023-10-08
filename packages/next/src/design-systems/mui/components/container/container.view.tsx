@@ -16,7 +16,7 @@ export default function MuiContainer({
   headerClassName,
   marginTop,
   subheader,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const cardContentProps: CardContentProps = {};
   if (typeof className !== 'undefined') {
     cardContentProps.className = className;

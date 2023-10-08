@@ -22,7 +22,7 @@ export default function CloudscapeDesignDiv({
   marginX,
   marginY,
   textAlign,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const {
     className: classNameState,
     display: displayState,

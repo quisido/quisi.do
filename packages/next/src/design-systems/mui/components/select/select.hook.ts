@@ -24,10 +24,7 @@ const mapOptionToProps = ({
   value,
 });
 
-export default function useMuiSelect({
-  onChange,
-  options,
-}: Readonly<Props>): State {
+export default function useMuiSelect({ onChange, options }: Props): State {
   return {
     id: useId(),
 

@@ -11,7 +11,7 @@ interface State {
   ) => void;
 }
 
-export default function useMuiCheckbox({ onChange }: Readonly<Props>): State {
+export default function useMuiCheckbox({ onChange }: Props): State {
   return {
     handleChange: useCallback(
       (e: Readonly<ChangeEvent<Readonly<HTMLInputElement>>>): void => {

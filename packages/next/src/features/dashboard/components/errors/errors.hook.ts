@@ -30,7 +30,7 @@ const PERCENT = 100;
 export default function useErrors({
   errorCountTimeSeries,
   sessionCountTimeSeries,
-}: Readonly<Props>): State {
+}: Props): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
 

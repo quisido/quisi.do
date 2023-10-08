@@ -7,9 +7,7 @@ interface Props {
   readonly children: string;
 }
 
-export default function SentryIssuesError({
-  children,
-}: Readonly<Props>): ReactElement {
+export default function SentryIssuesError({ children }: Props): ReactElement {
   return (
     <Container header={<I18n>Sentry issues</I18n>} marginTop="large">
       <Span element="p">{children}</Span>

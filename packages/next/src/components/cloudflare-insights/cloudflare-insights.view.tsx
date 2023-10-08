@@ -6,7 +6,7 @@ interface Props {
 
 export default function CloudflareInsights({
   token,
-}: Readonly<Props>): ReactElement | null {
+}: Props): ReactElement | null {
   if (process.env.NODE_ENV !== 'production') {
     return null;
   }

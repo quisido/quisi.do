@@ -10,7 +10,7 @@ export default function MuiButton({
   href,
   onClick,
   variant: variantProp,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { handleClick, variant: variantState } = useButton({
     category,
     children,

@@ -20,7 +20,7 @@ export default function Errors({
   initiated,
   loading,
   sessionCountTimeSeries,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const {
     data,
     errorCount,

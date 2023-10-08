@@ -9,7 +9,7 @@ interface Props {
 
 export default function CloudflareAnalyticsError({
   children,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   return (
     <Container header={<I18n>Cloudflare analytics</I18n>} marginTop="large">
       <Span element="p">{children}</Span>

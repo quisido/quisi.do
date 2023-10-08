@@ -35,7 +35,7 @@ const StyledRow = styled(TableRow)(({ theme }) => ({
 export default function MuiTableRow({
   Description,
   cellProps,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   if (typeof Description !== 'undefined') {
     return (
       <>

@@ -20,7 +20,7 @@ interface WrapperProps {
 }
 
 export default function renderHook<Props, State>(
-  useHook: (props: Readonly<Props>) => State,
+  useHook: (props: Props) => State,
   { initialHref = '', ...options }: Readonly<Options<Props>> = {},
 ): Result<Props, State> {
   const href: MutableRefObject<string> = {

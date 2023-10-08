@@ -5,9 +5,7 @@ interface Props {
   readonly children: number;
 }
 
-export default function SampleInterval({
-  children,
-}: Readonly<Props>): ReactElement {
+export default function SampleInterval({ children }: Props): ReactElement {
   const rate: number = mapSampleIntervalToRate(children);
 
   return <>{rate}% sample rate</>;

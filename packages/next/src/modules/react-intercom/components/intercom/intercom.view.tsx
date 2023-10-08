@@ -8,10 +8,7 @@ interface Props {
   readonly children: ReactNode;
 }
 
-export default function Intercom({
-  appId,
-  children,
-}: Readonly<Props>): ReactElement {
+export default function Intercom({ appId, children }: Props): ReactElement {
   const intercom: IntercomFunction = useIntercom(appId);
 
   return (

@@ -33,7 +33,7 @@ export default function useMuiDiv({
   marginTop,
   marginX,
   marginY,
-}: Readonly<Props>): State {
+}: Props): State {
   return {
     gap: mapSizeToSystemValue(gap),
     mb: mapSizeToSystemValue(marginBottom ?? marginY ?? margin),

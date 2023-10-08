@@ -10,10 +10,7 @@ interface Props {
 
 const BYTES_PER_KIBIBYTE = 1024;
 
-export default function Bytes({
-  children,
-  decimals,
-}: Readonly<Props>): ReactElement {
+export default function Bytes({ children, decimals }: Props): ReactElement {
   if (children > BYTES_PER_KIBIBYTE) {
     return (
       <Kibibytes decimals={decimals}>{children / BYTES_PER_KIBIBYTE}</Kibibytes>

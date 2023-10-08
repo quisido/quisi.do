@@ -11,9 +11,7 @@ interface Props {
 
 const TELEMETRIES: Telemetry[] = ['errors', 'http', 'performance'];
 
-export default function CloudWatchRum({
-  children,
-}: Readonly<Props>): ReactElement {
+export default function CloudWatchRum({ children }: Props): ReactElement {
   if (typeof window === 'undefined') {
     return <MockAwsRumProvider>{children}</MockAwsRumProvider>;
   }

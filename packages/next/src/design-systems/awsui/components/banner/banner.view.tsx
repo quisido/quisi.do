@@ -7,7 +7,7 @@ import useBanner from './banner.hook';
 export default function AwsuiBanner({
   children,
   onDismiss,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { dismissAriaLabel } = useBanner();
 
   // Workaround until AWS UI supports TypeScript 4.4 exact optional properties.

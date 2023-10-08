@@ -11,7 +11,7 @@ export default function CloudscapeDesignLink({
   href,
   label,
   title,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { external, handleFollow, ref, rel, target } = useLink({
     category,
     children,

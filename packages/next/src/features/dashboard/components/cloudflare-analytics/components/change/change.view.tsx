@@ -17,7 +17,7 @@ export default function CloudflareAnalyticChange({
   goal,
   p50,
   value,
-}: Readonly<Props>): ReactElement | null {
+}: Props): ReactElement | null {
   if (typeof p50 === 'undefined' || p50 === ZERO) {
     return null;
   }

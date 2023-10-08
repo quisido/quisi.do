@@ -5,6 +5,6 @@ interface Props {
   readonly hrefs: readonly string[];
 }
 
-export default function Preconnect({ hrefs }: Readonly<Props>): ReactElement {
+export default function Preconnect({ hrefs }: Props): ReactElement {
   return <>{hrefs.map(mapHrefToElement)}</>;
 }

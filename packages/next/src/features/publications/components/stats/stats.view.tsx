@@ -26,7 +26,7 @@ export default function PublicationStats({
   dateTime,
   reactions,
   views,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const days: number = mapTimeToDaysAgo(dateTime) - LOCKED_DAYS_AGO;
   return (
     <div className={rootClassName}>

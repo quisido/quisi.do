@@ -11,10 +11,7 @@ interface Props {
 const KIBIBYTE_PER_MEBIBYTE = 1024;
 const SINGLE = 1;
 
-export default function Mebibytes({
-  children,
-  decimals,
-}: Readonly<Props>): ReactElement {
+export default function Mebibytes({ children, decimals }: Props): ReactElement {
   if (children < SINGLE) {
     return (
       <Kibibytes decimals={decimals}>

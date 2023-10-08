@@ -11,6 +11,6 @@ export interface Props {
   readonly value: string | undefined;
 }
 
-export default function Select(props: Readonly<Props>): ReactElement {
+export default function Select(props: Props): ReactElement {
   return <DesignSystem props={props} type="select" />;
 }

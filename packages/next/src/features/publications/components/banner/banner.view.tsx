@@ -35,7 +35,7 @@ export default function PublicationBanner({
   title,
   url,
   views,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   /*
   const date: Date = new Date(dateTime);
   const monthStr: string = prefix(date.getMonth() + MONTH_OFFSET);

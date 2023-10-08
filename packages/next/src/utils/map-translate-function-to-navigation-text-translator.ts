@@ -1,6 +1,12 @@
 import type { TranslateFunction } from 'lazy-i18n';
 import NavigationText from '../constants/navigation-text';
 
+/**
+ * Since AWSUI and Cloudscape render navigation text as strings, we map
+ *   `NavigationText` to translated text with this utility function.
+ * For MUI, see `navigation-text.view.tsx`.
+ */
+
 export default function mapTranslateFunctionToNavigationTextTranslator(
   translate: TranslateFunction,
 ): (text: NavigationText) => string | undefined {

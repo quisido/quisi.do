@@ -13,7 +13,7 @@ interface State {
 export default function useAwsuiTableFilter({
   placeholder,
   rowsCount,
-}: Readonly<Props>): State {
+}: Props): State {
   return {
     countText: useCountText(rowsCount),
     filteringPlaceholder: placeholder ?? '...',

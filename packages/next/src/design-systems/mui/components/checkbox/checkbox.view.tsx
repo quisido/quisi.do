@@ -8,7 +8,7 @@ export default function MuiCheckbox({
   checked,
   children,
   onChange,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { handleChange } = useCheckbox({ onChange });
 
   return (

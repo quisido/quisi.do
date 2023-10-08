@@ -6,10 +6,7 @@ import styles from './header.module.scss';
 
 const headingClassName: string = validateString(styles.heading);
 
-export default function MuiHeader({
-  actions,
-  children,
-}: Readonly<Props>): ReactElement {
+export default function MuiHeader({ actions, children }: Props): ReactElement {
   return (
     <Div display="flex" flexDirection="row">
       <h2 className={headingClassName}>{children}</h2>

@@ -16,7 +16,7 @@ interface State {
 
 export default function useCloudscapeDesignCheckbox({
   onChange,
-}: Readonly<Props>): State {
+}: Props): State {
   return {
     handleChange: useCallback(
       (

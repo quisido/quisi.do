@@ -109,7 +109,7 @@ export default function useDashboard({
   onCloudflareAnalyticsRequest,
   onSentryIssuesRequest,
   onUptimeChecksRequest,
-}: Readonly<Props>): State {
+}: Props): State {
   // States
   const {
     data: cloudflareAnalytics,

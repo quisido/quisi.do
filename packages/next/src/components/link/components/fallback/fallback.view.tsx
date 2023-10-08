@@ -9,7 +9,7 @@ export default function FallbackLink({
   className,
   href,
   title,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   return (
     <NextLink className={className} href={href} title={title}>
       {children}

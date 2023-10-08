@@ -28,7 +28,7 @@ export default function useApdexLineChart({
   frustrated,
   satisfied,
   tolerated,
-}: Readonly<Props>): State {
+}: Props): State {
   // States
   const { ref, width } = useElementWidth<HTMLDivElement>();
   const mapTimestampToDateTime = useTimestampFormatter();

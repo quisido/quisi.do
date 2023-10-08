@@ -2,13 +2,20 @@ import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import NavigationText from '../../constants/navigation-text';
 
+/**
+ * Since MUI renders navigation text with React nodes, we map `NavigationText`
+ *   to translated text with this component.
+ * For AWSUI and Cloudscape, see
+ *   `mapTranslateFunctionToNavigationTextTranslator`.
+ */
+
 interface Props {
   readonly children: NavigationText;
 }
 
 export default function WrapperNavigationText({
   children,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   switch (children) {
     case NavigationText.AceAlters:
       return <>AceAlters.com</>;

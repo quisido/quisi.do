@@ -15,7 +15,7 @@ interface State {
 
 export default function useWrapper({
   breadcrumbs = EMPTY_ARRAY,
-}: Readonly<Props>): State {
+}: Props): State {
   return {
     breadcrumbs: useMemo(
       (): readonly Readonly<Breadcrumb>[] => [

@@ -22,7 +22,7 @@ export default function AwsuiDiv({
   marginY,
   justifyContent,
   textAlign,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const {
     className: classNameState,
     display: displayState,

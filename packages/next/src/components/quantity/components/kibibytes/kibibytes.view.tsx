@@ -13,10 +13,7 @@ const BYTES_PER_KIBIBYTE = 1024;
 const KIBIBYTES_PER_MEBIBYTE = 1024;
 const SINGLE = 1;
 
-export default function Kibibytes({
-  children,
-  decimals,
-}: Readonly<Props>): ReactElement {
+export default function Kibibytes({ children, decimals }: Props): ReactElement {
   if (children < SINGLE) {
     return <Bytes decimals={decimals}>{children * BYTES_PER_KIBIBYTE}</Bytes>;
   }

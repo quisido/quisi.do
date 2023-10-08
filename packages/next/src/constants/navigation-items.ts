@@ -12,16 +12,16 @@ const NAVIGATION_ITEMS: readonly (
   | NavigationLink
 )[] = [
   {
-    path: '/',
     text: NavigationText.Home,
+    path: '/',
   },
   {
-    path: '/dashboard/',
     text: NavigationText.Dashboard,
+    path: '/dashboard/',
   },
   {
-    defaultExpanded: false,
     text: NavigationText.Applications,
+    defaultExpanded: false,
     children: [
       {
         text: NavigationText.Tetris3DS,
@@ -33,7 +33,7 @@ const NAVIGATION_ITEMS: readonly (
       },
       {
         text: NavigationText.CloudflareWorkersAI,
-        url: '/cloudflare-workers-ai/',
+        path: '/cloudflare-workers-ai/',
       },
       {
         text: NavigationText.Dota2Huds,
@@ -58,73 +58,73 @@ const NAVIGATION_ITEMS: readonly (
     ],
   },
   {
-    defaultExpanded: true,
     text: NavigationText.Portfolio,
-    children: [
-      {
-        path: '/packages/',
-        text: NavigationText.Packages,
-      },
-      {
-        path: '/publications/',
-        text: NavigationText.Publications,
-      },
-      {
-        path: '/quotes/',
-        text: NavigationText.Quotes,
-      },
-    ],
-  },
-  {
     defaultExpanded: true,
-    text: NavigationText.ConnectWithMe,
     children: [
       {
-        url: 'https://bsky.app/profile/stover.bsky.social',
+        text: NavigationText.Packages,
+        path: '/packages/',
+      },
+      {
+        text: NavigationText.Publications,
+        path: '/publications/',
+      },
+      {
+        text: NavigationText.Quotes,
+        path: '/quotes/',
+      },
+    ],
+  },
+  {
+    text: NavigationText.ConnectWithMe,
+    defaultExpanded: true,
+    children: [
+      {
         text: NavigationText.Bluesky,
+        url: 'https://bsky.app/profile/stover.bsky.social',
       },
       {
-        url: 'https://github.com/CharlesStover/',
         text: NavigationText.GitHub,
+        url: 'https://github.com/CharlesStover/',
       },
       {
-        url: 'https://www.linkedin.com/in/charles-stover/',
         text: NavigationText.LinkedIn,
+        url: 'https://www.linkedin.com/in/charles-stover/',
       },
       {
-        url: 'https://charles-stover.medium.com/',
         text: NavigationText.Medium,
+        url: 'https://charles-stover.medium.com/',
       },
       /*
       {
-        url: 'https://www.npmjs.com/~charlesstover',
         text: NavigationText.NPM,
+        url: 'https://www.npmjs.com/~charlesstover',
       },
       {
-        url: 'https://www.reddit.com/user/Charles_Stover',
         text: NavigationText.Reddit,
+        url: 'https://www.reddit.com/user/Charles_Stover',
       },
       {
-        url: 'https://stackoverflow.com/users/4856301/charles-stover',
         text: NavigationText.StackOverflow,
+        url: 'https://stackoverflow.com/users/4856301/charles-stover',
       },
       */
       {
-        url: 'https://threads.net/@charlesstover21',
         text: NavigationText.Threads,
+        url: 'https://threads.net/@charlesstover21',
       },
       /*
       {
-        url: 'https://twitter.com/CharlesStover',
         text: NavigationText.Twitter,
+        url: 'https://twitter.com/CharlesStover',
       },
       */
     ],
   },
   {
+    text: NavigationText.Settings,
     Component: Settings,
     defaultExpanded: false,
-    text: NavigationText.Settings,
   },
 ];
 

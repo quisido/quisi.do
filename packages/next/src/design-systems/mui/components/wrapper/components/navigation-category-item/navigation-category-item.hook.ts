@@ -23,7 +23,7 @@ const toggle = (old: boolean): boolean => !old;
 export default function useWrapperMuiNavigationCategoryItem({
   defaultExpanded,
   depth,
-}: Readonly<Props>): State {
+}: Props): State {
   const [expanded, setExpanded] = useState(defaultExpanded);
 
   return {

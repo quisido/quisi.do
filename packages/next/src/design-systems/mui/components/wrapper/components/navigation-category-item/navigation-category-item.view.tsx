@@ -21,7 +21,7 @@ export default function WrapperMuiNavigationCategoryItem({
   defaultExpanded,
   depth,
   text,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { dense, expanded, handleClick, sx } = useNavigationCategoryItem({
     defaultExpanded,
     depth,
