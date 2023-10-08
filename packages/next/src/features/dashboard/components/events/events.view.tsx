@@ -20,7 +20,7 @@ export default function Events({
   events,
   initiated,
   loading,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   if (!initiated) {
     return (
       <Container header={<I18n>Events</I18n>} marginTop="large">

@@ -13,7 +13,7 @@ const MICROSECONDS_PER_MILLISECOND = 1000;
 export default function Microseconds({
   children,
   decimals,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   if (children >= MICROSECONDS_PER_MILLISECOND) {
     return (
       <Milliseconds decimals={decimals}>

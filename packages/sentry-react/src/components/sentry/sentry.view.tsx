@@ -64,7 +64,7 @@ export default function Sentry({
   showErrorBoundaryDialog,
   user,
   ...browserOptions
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   useSentry({
     user,
     ...browserOptions,

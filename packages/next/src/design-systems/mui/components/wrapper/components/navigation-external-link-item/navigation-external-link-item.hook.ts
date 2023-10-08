@@ -20,7 +20,7 @@ export default function useWrapperMuiNavigationExternalLinkItem({
   depth,
   text,
   url,
-}: Readonly<Props>): State {
+}: Props): State {
   // Contexts
   const emit = useEvent();
 

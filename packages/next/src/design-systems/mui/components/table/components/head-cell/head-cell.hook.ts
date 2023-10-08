@@ -16,7 +16,7 @@ export default function useMuiTableHeadCell({
   active,
   ascending,
   onSort,
-}: Readonly<Props>): State {
+}: Props): State {
   return {
     direction: useMemo((): 'asc' | 'desc' => {
       if (!active) {

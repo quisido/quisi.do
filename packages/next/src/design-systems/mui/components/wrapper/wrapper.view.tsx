@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
 import { Suspense } from 'react';
 import type { Props } from '../../../../components/wrapper';
 import ContentFallback from '../../../../components/wrapper-content-fallback';
@@ -18,7 +18,7 @@ export default function MuiWrapper({
   children,
   fallback,
   notifications,
-}: Readonly<Props>): ReactElement {
+}: PropsWithChildren<Props>): ReactElement {
   const {
     handleNavigationClose,
     handleNavigationOpen,

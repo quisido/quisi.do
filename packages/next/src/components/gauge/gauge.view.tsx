@@ -25,7 +25,7 @@ export default function Gauge({
   size,
   units = '',
   values,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const data: Datum[] = useMemo((): Datum[] => {
     const reduceEntryToDatum = (
       newData: Datum[],

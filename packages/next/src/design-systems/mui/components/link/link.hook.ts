@@ -8,7 +8,7 @@ import {
 } from 'react';
 import useEffectEvent from '../../../../hooks/use-effect-event';
 import useEvent from '../../../../hooks/use-event/use-event';
-import filterHrefByBlank from '../../../../utils/filter-href-by-blank';
+import isHrefBlank from '../../../../utils/is-href-blank';
 
 interface Props {
   readonly category: string;
@@ -23,12 +23,8 @@ interface State {
   ) => void;
 }
 
-export default function useMuiLink({
-  category,
-  href,
-  title,
-}: Readonly<Props>): State {
-  const isBlank: boolean = filterHrefByBlank(href);
+export default function useMuiLink({ category, href, title }: Props): State {
+  const isBlank: boolean = isHrefBlank(href);
 
   // Contexts
   const emit = useEvent();

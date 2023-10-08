@@ -5,6 +5,6 @@ import type { Props } from '../../../../components/header';
 export default function AwsuiHeader({
   actions,
   children,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   return <Header actions={actions}>{children}</Header>;
 }

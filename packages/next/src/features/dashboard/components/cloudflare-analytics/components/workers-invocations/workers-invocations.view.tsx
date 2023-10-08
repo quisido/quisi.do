@@ -17,7 +17,7 @@ const VISIBLE_COLUMN_INDICES: readonly number[] =
 
 export default function CloudflareWorkersInvocations({
   children,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { handleSort, rows, sortAscending, sortColumnIndex, subheader } =
     useWorkersInvocations(children);
 

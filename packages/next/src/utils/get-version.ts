@@ -2,7 +2,7 @@ import mapGitHubShaToVersion from '../utils/map-github-sha-to-version';
 
 export default function getVersion(): string {
   // If this build relates to a specific GitHub SHA, then the SHA should be used
-  //   to calculate the version.
+  //   to generate the version ID.
   const githubSha: string | undefined = process.env.REACT_APP_GITHUB_SHA;
   if (typeof githubSha === 'string') {
     return mapGitHubShaToVersion(githubSha);
@@ -17,5 +17,9 @@ export default function getVersion(): string {
   }
 
   // If we're in development mode, then we call it the alpha build.
-  return 'alpha';
+  if (NODE_ENV === 'development') {
+    return 'alpha';
+  }
+
+  return 'beta';
 }

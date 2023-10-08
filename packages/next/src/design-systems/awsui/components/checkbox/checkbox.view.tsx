@@ -7,7 +7,7 @@ export default function AwsuiCheckbox({
   checked,
   children,
   onChange,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { handleChange } = useCheckbox({ onChange });
 
   return (

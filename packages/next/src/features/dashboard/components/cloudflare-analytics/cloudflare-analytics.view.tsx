@@ -40,10 +40,7 @@ const reduceClientSslMapSumToRecord = (
   [key]: requests,
 });
 
-function CloudflareAnalytics({
-  budget,
-  datasets,
-}: Readonly<Props>): ReactElement {
+function CloudflareAnalytics({ budget, datasets }: Props): ReactElement {
   const {
     httpRequests1hGroups,
     rumPageloadEventsAdaptiveGroups,

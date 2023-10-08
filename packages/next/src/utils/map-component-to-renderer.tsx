@@ -17,7 +17,7 @@ This function generates a renderer function that can be passed to the `content`
 export default function mapComponentToRenderer<Props extends object>(
   Component: ComponentType<Props>,
 ): FunctionComponent<Props> {
-  return function render(props: Readonly<Props>): ReactElement {
+  return function render(props: Props): ReactElement {
     return <Component {...props} />;
   };
 }

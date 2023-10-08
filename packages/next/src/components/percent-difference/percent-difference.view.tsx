@@ -16,7 +16,7 @@ export default function PercentDifference({
   decimals = NONE,
   from,
   to,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   if (from === ZERO) {
     throw new Error('Cannot calculate a percentage change from zero.');
   }

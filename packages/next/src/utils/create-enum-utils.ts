@@ -7,7 +7,8 @@ export default function createEnumUtils<V extends number | string>(
   t: Record<string, V>,
 ): EnumUtils<V> {
   const values: Set<V> = new Set(Object.values(t));
-  const isType = (value: unknown): value is V => values.has(value as V);
+  const isType = (value: unknown): value is V =>
+    Set.prototype.has.call(values, value);
 
   return {
     isType,

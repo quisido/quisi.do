@@ -8,7 +8,7 @@ export default function CloudscapeDesignChip({
   children,
   className,
   title,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const optionalProps: Pick<BadgeProps, 'className'> = {};
   if (typeof className !== 'undefined') {
     optionalProps.className = className;

@@ -15,7 +15,7 @@ export default function Datadog({
   sessionReplayRecording,
   user,
   ...rumInitConfiguration
-}: Readonly<Props>): null {
+}: Props): null {
   useDatadog({
     enabled,
     sessionReplayRecording,

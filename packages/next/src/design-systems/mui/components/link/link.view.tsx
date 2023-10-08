@@ -11,7 +11,7 @@ export default function MuiLink({
   href,
   label,
   title,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { handleClick, rel } = useLink({
     category,
     href,

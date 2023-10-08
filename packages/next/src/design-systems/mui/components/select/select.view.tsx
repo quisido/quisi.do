@@ -20,7 +20,7 @@ export default function MuiSelect({
   onChange,
   options,
   value,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { handleChange, id, menuItemProps } = useSelect({
     onChange,
     options,

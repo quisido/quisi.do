@@ -18,7 +18,7 @@ const mapIssueToListItem = (issue: Readonly<Issue>): ReactElement => (
   <li key={issue.id}>{issue.title}</li>
 );
 
-function SentryIssues({ issues }: Readonly<Props>): ReactElement {
+function SentryIssues({ issues }: Props): ReactElement {
   return (
     <Container header={<I18n>Sentry issues</I18n>} marginTop="large">
       <ul>{issues.map(mapIssueToListItem)}</ul>

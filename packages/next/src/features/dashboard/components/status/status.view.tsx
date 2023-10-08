@@ -65,7 +65,7 @@ export default function DashboardStatus({
   uptimeChecksLoading,
   uptimeErrors,
   uptimeMessages,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { ciCdAlt } = useStatus();
 
   return (

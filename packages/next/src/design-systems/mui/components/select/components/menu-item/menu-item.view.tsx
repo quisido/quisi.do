@@ -10,6 +10,6 @@ import type Props from '../../types/menu-item-props';
 export default function MuiSelectMenuItem({
   children,
   value,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   return <option value={value}>{children}</option>;
 }

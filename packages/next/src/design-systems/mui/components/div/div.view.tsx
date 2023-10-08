@@ -22,7 +22,7 @@ export default function MuiDiv({
   marginX,
   marginY,
   textAlign,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const {
     gap: gapState,
     mb,

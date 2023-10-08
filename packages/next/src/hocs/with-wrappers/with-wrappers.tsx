@@ -13,7 +13,7 @@ export default function withWrappers(
   return function wrapComponent<Props>(
     Component: ComponentType<Props>,
   ): ComponentType<Props> {
-    return function WrappedComponent(props: Readonly<Props>): ReactElement {
+    return function WrappedComponent(props: Props): ReactElement {
       return (
         <Wrapper>
           <Component {...props} />

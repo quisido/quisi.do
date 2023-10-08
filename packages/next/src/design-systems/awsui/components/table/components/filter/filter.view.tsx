@@ -17,7 +17,7 @@ function AwsuiTableFilter({
   placeholder,
   onChange,
   rowsCount,
-}: Readonly<Props>): ReactElement | null {
+}: Props): ReactElement | null {
   const { countText, filteringPlaceholder } = useAwsuiTableFilter({
     placeholder,
     rowsCount,

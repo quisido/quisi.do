@@ -46,6 +46,7 @@ export default function useSideNavigation({
         if (e.detail.external === true) {
           return;
         }
+
         e.preventDefault();
         router.push(e.detail.href);
       },

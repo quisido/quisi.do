@@ -14,7 +14,7 @@ export default function AwsuiContainer({
   headerClassName,
   marginTop,
   subheader,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   return (
     <Div marginTop={marginTop}>
       <Container

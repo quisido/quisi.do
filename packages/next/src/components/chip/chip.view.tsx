@@ -7,6 +7,6 @@ export interface Props {
   readonly title?: ReactNode | undefined;
 }
 
-export default function Chip(props: Readonly<Props>): ReactElement {
+export default function Chip(props: Props): ReactElement {
   return <DesignSystem props={props} type="chip" />;
 }

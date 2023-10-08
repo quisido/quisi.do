@@ -24,7 +24,7 @@ export default function useCloudscapeDesignSpan({
   color,
   element,
   size,
-}: Readonly<Props>): State {
+}: Props): State {
   return {
     color: color && mapColorToCloudscapeColor(color),
     fontSize: size && mapSizeToFontSize(size),

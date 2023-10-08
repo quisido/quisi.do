@@ -11,10 +11,7 @@ interface Props {
 const MILLISECONDS_PER_SECOND = 1000;
 const SINGLE = 1;
 
-export default function Seconds({
-  children,
-  decimals,
-}: Readonly<Props>): ReactElement {
+export default function Seconds({ children, decimals }: Props): ReactElement {
   if (children < SINGLE) {
     return (
       <Milliseconds decimals={decimals}>

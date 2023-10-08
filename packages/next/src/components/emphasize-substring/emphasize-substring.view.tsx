@@ -13,7 +13,7 @@ export default function EmphasizeSubstring({
   children,
   index,
   length,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   if (index === NOT_FOUND) {
     return <>{children}</>;
   }

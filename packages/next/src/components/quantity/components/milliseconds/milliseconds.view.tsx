@@ -16,7 +16,7 @@ const SINGLE = 1;
 export default function Milliseconds({
   children,
   decimals,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   if (children < SINGLE) {
     return (
       <Microseconds decimals={decimals}>

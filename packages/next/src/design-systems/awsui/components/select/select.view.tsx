@@ -12,7 +12,7 @@ export default function AwsuiSelect({
   onChange,
   options,
   value,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { className, handleChange, selectedOption } = useSelect({
     labelDirection,
     onChange,

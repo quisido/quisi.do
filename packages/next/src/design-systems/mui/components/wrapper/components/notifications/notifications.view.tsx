@@ -55,7 +55,7 @@ const mapChildToSnackbar = (
 
 export default function MuiWrapperNotifications({
   children,
-}: Readonly<Props>): ReactElement | null {
+}: Props): ReactElement | null {
   if (typeof children === 'undefined') {
     return null;
   }

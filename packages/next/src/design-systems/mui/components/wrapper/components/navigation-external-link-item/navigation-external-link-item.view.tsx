@@ -15,7 +15,7 @@ export default function WrapperMuiNavigationExternalLinkItem({
   depth,
   text,
   url,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { handleClick, sx } = useNavigationExternalLinkItem({
     depth,
     text,

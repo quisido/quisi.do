@@ -22,7 +22,7 @@ export default function Quantity({
   children,
   decimals,
   unit,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   switch (unit) {
     case 'bytes':
       return <Bytes decimals={decimals}>{children}</Bytes>;

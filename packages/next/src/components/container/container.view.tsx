@@ -12,6 +12,6 @@ export interface Props {
   readonly subheader?: ReactNode | undefined;
 }
 
-export default function Container(props: Readonly<Props>): ReactElement {
+export default function Container(props: Props): ReactElement {
   return <DesignSystem props={props} type="container" />;
 }

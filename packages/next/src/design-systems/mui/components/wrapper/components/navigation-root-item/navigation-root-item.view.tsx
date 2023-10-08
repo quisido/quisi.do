@@ -6,7 +6,7 @@ import type Props from '../../types/navigation-root-item-props';
 export default function WrapperMuiNavigationRootItem({
   divider,
   item,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   return (
     <>
       <Item>{item}</Item>

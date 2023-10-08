@@ -27,7 +27,7 @@ export default function useMuiWrapperNavigationLinkItem({
   depth,
   path,
   text,
-}: Readonly<Props>): State {
+}: Props): State {
   // Contexts
   const emit = useEvent();
   const hostname: string = useHostname();

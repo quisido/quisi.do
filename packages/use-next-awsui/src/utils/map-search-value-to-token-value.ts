@@ -6,5 +6,6 @@ export default function mapSearchValueToTokenValue(value: string): string {
       return value.substring(operator.length);
     }
   }
+
   return value;
 }

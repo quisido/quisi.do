@@ -15,7 +15,7 @@ export default function MuiWrapperNavigationLinkItem({
   depth,
   path,
   text,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { handleClick, selected, sx } = useNavigationLinkItem({
     depth,
     path,

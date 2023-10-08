@@ -9,5 +9,6 @@ export default function mapSearchValueToTokenOperator(
       return operator;
     }
   }
+
   return '=';
 }

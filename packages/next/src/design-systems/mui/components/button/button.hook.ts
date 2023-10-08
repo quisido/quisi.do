@@ -5,7 +5,7 @@ import { useEffect, type MouseEvent, type ReactNode } from 'react';
 import innerText from 'react-innertext';
 import useEffectEvent from '../../../../hooks/use-effect-event';
 import useEvent from '../../../../hooks/use-event/use-event';
-import filterHrefByBlank from '../../../../utils/filter-href-by-blank';
+import isHrefBlank from '../../../../utils/is-href-blank';
 
 interface Props {
   readonly category: string;
@@ -27,8 +27,8 @@ export default function useMuiButton({
   children,
   href,
   onClick,
-}: Readonly<Props>): State {
-  const isBlank: boolean = filterHrefByBlank(href);
+}: Props): State {
+  const isBlank: boolean = isHrefBlank(href);
   const label: string = innerText(children);
 
   // Contexts

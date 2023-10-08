@@ -29,7 +29,7 @@ export default function useCloudscapeDesignSelect({
   onChange,
   options,
   value,
-}: Readonly<Props>): State {
+}: Props): State {
   return {
     className: useMemo((): string | undefined => {
       const classNames: string[] = [];

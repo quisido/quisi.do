@@ -11,10 +11,7 @@ interface Props extends Readonly<BrowserOptions> {
   readonly user?: User | undefined;
 }
 
-export default function useSentry({
-  user,
-  ...browserOptions
-}: Readonly<Props>): void {
+export default function useSentry({ user, ...browserOptions }: Props): void {
   const initDependencies: unknown[] =
     mapObjectToDependencyArray(browserOptions);
 

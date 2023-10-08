@@ -23,7 +23,7 @@ export default function Dashboard({
   onRumMetricsRequest,
   onSentryIssuesRequest,
   onUptimeChecksRequest,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const {
     cloudflareAnalytics,
     cloudflareAnalyticsBudget,
@@ -53,11 +53,7 @@ export default function Dashboard({
       <Container header="Quisi.do">
         <Div element="p">
           This dashboard showcases operational and performance metrics for{' '}
-          <Link
-            category="features/dashboard"
-            href="/"
-            title="Quisi.do"
-          >
+          <Link category="features/dashboard" href="/" title="Quisi.do">
             Quisi.do
           </Link>
           .

@@ -15,7 +15,7 @@ const mapBreadcrumbPropsToElement = mapComponentToPropMapper(Breadcrumb);
 
 export default function WrapperMuiBreadcrumbs({
   children: breadcrumbs,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { ariaLabel, breadcrumbProps, expandText } =
     useWrapperBreadcrumbs(breadcrumbs);
 

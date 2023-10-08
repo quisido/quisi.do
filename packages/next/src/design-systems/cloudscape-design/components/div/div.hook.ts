@@ -80,7 +80,7 @@ export default function useCloudscapeDesignDiv({
   marginTop,
   marginX,
   marginY,
-}: Readonly<Props>): State {
+}: Props): State {
   const marginBottomSize: 'large' | 'medium' | 'small' | undefined =
     marginBottom ?? marginY ?? margin;
   const marginLeftSize: 'large' | 'medium' | 'small' | undefined =

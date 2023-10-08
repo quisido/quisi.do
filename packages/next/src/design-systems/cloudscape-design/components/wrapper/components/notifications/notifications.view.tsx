@@ -12,7 +12,7 @@ const EMPTY = 0;
 
 export default function CloudscapeDesignWrapperNotifications({
   children,
-}: Readonly<Props>): ReactElement | null {
+}: Props): ReactElement | null {
   const items: readonly FlashbarProps.MessageDefinition[] =
     useNotifications(children);
 

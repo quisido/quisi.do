@@ -37,7 +37,7 @@ export default function WebVitals({
   lcpP95,
   lcpTm95,
   loading,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   if (!initiated) {
     return (
       <Container header={<I18n>Web Vitals</I18n>} marginTop="large">

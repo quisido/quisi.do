@@ -13,7 +13,7 @@ interface Props {
 export default function PublicationsHeader({
   onSortChange,
   sort,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { sortOptions } = usePublicationsHeader();
 
   return (

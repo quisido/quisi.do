@@ -1,3 +1,5 @@
+import createEnumUtils from '../utils/create-enum-utils';
+
 enum DesignSystem {
   Awsui = 'awsui',
   CloudscapeDesign = 'cloudscape-design',
@@ -5,3 +7,6 @@ enum DesignSystem {
 }
 
 export default DesignSystem;
+
+const { isType } = createEnumUtils(DesignSystem);
+export const isDesignSystem = isType;

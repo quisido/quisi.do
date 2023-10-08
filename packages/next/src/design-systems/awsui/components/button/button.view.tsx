@@ -10,7 +10,7 @@ export default function AwsuiButton({
   href,
   onClick,
   variant,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { handleClick, iconAlt, iconName, target } = useButton({
     category,
     children,

@@ -11,7 +11,7 @@ const rootClassName: string = validateString(styles.root);
 export default function CloudscapeDesignBanner({
   children,
   onDismiss,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { dismissAriaLabel } = useBanner();
 
   // Workaround until Cloudscape supports TypeScript 4.4 exact optional properties.

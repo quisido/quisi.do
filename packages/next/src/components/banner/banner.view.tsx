@@ -6,6 +6,6 @@ export interface Props {
   readonly onDismiss?: VoidFunction | undefined;
 }
 
-export default function Banner(props: Readonly<Props>): ReactElement {
+export default function Banner(props: Props): ReactElement {
   return <DesignSystem props={props} type="banner" />;
 }

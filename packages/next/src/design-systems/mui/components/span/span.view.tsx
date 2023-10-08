@@ -10,7 +10,7 @@ export default function MuiSpan({
   color: colorProps,
   element,
   size,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { color: colorState, fontSize } = useSpan({
     color: colorProps,
     size,

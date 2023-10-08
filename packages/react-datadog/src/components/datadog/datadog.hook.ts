@@ -20,7 +20,7 @@ export default function useDatadog({
   site = 'datadoghq.com',
   user,
   ...rumInitConfiguration
-}: Readonly<Props>): void {
+}: Props): void {
   // Contexts
   const rum: typeof datadogRum = useDatadogRum();
 

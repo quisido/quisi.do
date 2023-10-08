@@ -10,7 +10,7 @@ export default function CloudscapeDesignSpan({
   color: colorProp,
   element,
   size,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const {
     color: colorState,
     fontSize,

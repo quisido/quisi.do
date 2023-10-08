@@ -17,7 +17,7 @@ interface State {
   readonly fontSize: number | undefined;
 }
 
-export default function useMuiSpan({ color, size }: Readonly<Props>): State {
+export default function useMuiSpan({ color, size }: Props): State {
   return {
     color: color && mapColorToMuiColor(color),
     fontSize: size && mapSizeToFontSize(size),

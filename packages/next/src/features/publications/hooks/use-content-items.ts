@@ -11,7 +11,7 @@ interface Props {
 export default function usePublicationsContentItems({
   devData,
   mediumData,
-}: Readonly<Props>): readonly Publication[] {
+}: Props): readonly Publication[] {
   return useMemo((): readonly Publication[] => {
     const newItems: Publication[] = [];
     let totalReactions = 0;

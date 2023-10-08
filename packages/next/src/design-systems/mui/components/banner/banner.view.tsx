@@ -7,7 +7,7 @@ import useBanner from './banner.hook';
 export default function MuiBanner({
   children,
   onDismiss,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const { closeText } = useBanner();
 
   const optionalProps: Pick<AlertProps, 'closeText' | 'onClose'> = {};
