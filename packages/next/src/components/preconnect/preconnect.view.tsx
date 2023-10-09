@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import mapHrefToElement from './utils/map-href-to-element';
 
 interface Props {

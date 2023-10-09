@@ -23,6 +23,7 @@
   "scripts": {
     "attw": "attw",
     "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/aws-rum-react.sarif || eslint '**/*'",
+    "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest",
     "prepack": "yarn run tsc",
     "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,jest \"yarn run attw\" \"yarn run eslint\" \"yarn run jest\"",
@@ -38,7 +39,7 @@
     "@types/react": "^18.2.22",
     "aws-rum-web": "^1.14.1",
     "concurrently": "^8.2.1",
-    "eslint": "^8.50.0",
+    "eslint": "^8.51.0",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",

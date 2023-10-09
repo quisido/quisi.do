@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import DesignSystem from '../design-system';
 import type Props from './types/props';
 

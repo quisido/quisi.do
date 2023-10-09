@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 import type { ReactNode } from 'react';
 import isPrimitive from '../is/is-primitive.js';
 import mapNodeToFragment from '../map/map-node-to-fragment.js';
@@ -6,7 +7,7 @@ import type { StringTranslationValue } from '../types/string-translation-value.j
 
 export default function replaceVariables(
   translation: string,
-  vars?: Record<string, StringTranslationValue>,
+  vars?: Readonly<Record<string, StringTranslationValue>>,
 ): string;
 export default function replaceVariables(
   translation: string,

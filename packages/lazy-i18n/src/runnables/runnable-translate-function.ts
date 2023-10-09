@@ -22,8 +22,9 @@ export default class RunnableTranslateFunction
   extends EventEmitter<Event, [string]>
   implements Run
 {
-  private _fallbackTranslations: Record<string, string> | undefined;
-  private _translations: Record<string, string> | undefined;
+  private readonly _fallbackTranslations: Record<string, string> | undefined;
+
+  private readonly _translations: Record<string, string> | undefined;
 
   public constructor({ fallbackTranslations, translations }: Options) {
     super();

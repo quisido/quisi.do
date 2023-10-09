@@ -1,4 +1,4 @@
-import type { TableProps } from '@cloudscape-design/components/table';
+import { type TableProps } from '@cloudscape-design/components/table';
 import type TableColumn from '../../../../../types/table-column';
 import mapColumnsToDefinitions from '../utils/map-columns-to-definitions';
 

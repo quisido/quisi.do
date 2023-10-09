@@ -1,5 +1,4 @@
-import type { Theme } from '@mui/material/styles';
-import { createTheme } from '@mui/material/styles';
+import { type Theme, createTheme } from '@mui/material/styles';
 import { deepmerge } from '@mui/utils';
 import BASE_THEME_OPTIONS from './base-theme-options';
 import LIGHT_THEME_OPTIONS from './light-theme-options';

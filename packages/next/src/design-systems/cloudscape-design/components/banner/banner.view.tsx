@@ -1,7 +1,6 @@
-import type { AlertProps } from '@cloudscape-design/components/alert';
-import Alert from '@cloudscape-design/components/alert';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/banner';
+import Alert, type { AlertProps } from '@cloudscape-design/components/alert';
+import  { type ReactElement } from 'react';
+import  { type Props } from '../../../../components/banner';
 import validateString from '../../../../utils/validate-string';
 import useBanner from './banner.hook';
 import styles from './banner.module.scss';

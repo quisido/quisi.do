@@ -1,7 +1,6 @@
-import type { AlertProps } from '@awsui/components-react/alert';
-import Alert from '@awsui/components-react/alert';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/banner';
+import Alert, type { AlertProps } from '@awsui/components-react/alert';
+import  { type ReactElement } from 'react';
+import  { type Props } from '../../../../components/banner';
 import useBanner from './banner.hook';
 
 export default function AwsuiBanner({

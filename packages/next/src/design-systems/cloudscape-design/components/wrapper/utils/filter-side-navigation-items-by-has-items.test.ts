@@ -1,4 +1,4 @@
-import type { SideNavigationProps } from '@cloudscape-design/components/side-navigation';
+import { type SideNavigationProps } from '@cloudscape-design/components/side-navigation';
 import filterCloudscapeSideNavigationItemsByHasItems from './filter-side-navigation-items-by-has-items';
 
 const TEST_DIVIDER: SideNavigationProps.Divider = {

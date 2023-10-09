@@ -1,6 +1,6 @@
 'use client';
 
-import type { Provider } from 'react';
+import { type Provider } from 'react';
 import type Locale from '../constants/locale';
 import createContextUtils from '../utils/create-context-utils';
 

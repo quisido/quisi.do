@@ -1,6 +1,9 @@
-import type { NextMiddlewareResult } from 'next/dist/server/web/types';
-import type { NextMiddleware, NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import { type NextMiddlewareResult } from 'next/dist/server/web/types';
+import {
+  type NextMiddleware,
+  type NextRequest,
+  NextResponse,
+} from 'next/server';
 import isLocalePath from './utils/is-locale-path';
 
 const RESERVED_FILES: ReadonlySet<string> = new Set([

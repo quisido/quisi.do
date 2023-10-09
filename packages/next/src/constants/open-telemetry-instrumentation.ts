@@ -1,4 +1,4 @@
-import type { InstrumentationBase } from '@opentelemetry/instrumentation';
+import { type InstrumentationBase } from '@opentelemetry/instrumentation';
 import { DocumentLoadInstrumentation } from '@opentelemetry/instrumentation-document-load';
 import { FetchInstrumentation } from '@opentelemetry/instrumentation-fetch';
 import { UserInteractionInstrumentation } from '@opentelemetry/instrumentation-user-interaction';

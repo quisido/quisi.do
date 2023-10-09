@@ -1,11 +1,10 @@
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/cards';
+import  { type ReactElement } from 'react';
+import  { type Props } from '../../../../components/cards';
 import mapComponentToPropMapper from '../../../../utils/map-component-to-prop-mapper';
 import validateString from '../../../../utils/validate-string';
 import useMuiCards from './cards.hook';
 import styles from './cards.module.scss';
-import type { Props as CardProps } from './components/card';
-import Card from './components/card';
+import Card, type { Props as CardProps } from './components/card';
 
 const rootClassName: string = validateString(styles.root);
 

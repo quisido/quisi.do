@@ -1,7 +1,12 @@
 'use client';
 
-import type { ComponentType, ReactNode } from 'react';
-import { useEffect, useMemo, useState } from 'react';
+import {
+  type ComponentType,
+  type ReactNode,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import type DesignSystemProps from '../../types/design-system-props';
 import useDesignSystemComponent from './hooks/use-design-system-component';
 import type Props from './types/props';

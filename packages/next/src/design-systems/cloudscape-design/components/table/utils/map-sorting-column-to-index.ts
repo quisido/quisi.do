@@ -1,4 +1,4 @@
-import type { TableProps } from '@cloudscape-design/components/table';
+import { type TableProps } from '@cloudscape-design/components/table';
 
 export default function mapSortingColumnToIndex<Item>({
   sortingField,

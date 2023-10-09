@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import I18n from 'lazy-i18n';
 import Div from '../../../../components/div';
 import LoadingIcon from '../../../../components/loading-icon';

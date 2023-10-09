@@ -1,5 +1,5 @@
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import type { PropsWithChildren, ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import DISABLE_BACKDROP_TRANSITION from '../../constants/disable-mobile-navigation-backdrop-transition';
 import MODAL_PROPS from '../../constants/navigation-modal-props';
 import PAPER_PROPS from '../../constants/navigation-paper-props';

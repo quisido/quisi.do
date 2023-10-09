@@ -1,6 +1,11 @@
 'use client';
 
-import type { Context, Provider, ProviderProps, ReactElement } from 'react';
+import {
+  type Context,
+  type Provider,
+  type ProviderProps,
+  type ReactElement,
+} from 'react';
 
 export default function mapContextToProvider<T>(
   Context: Context<T | null>,

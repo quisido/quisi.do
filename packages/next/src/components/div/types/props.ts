@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 /*
 Consider `BaseProps extends SpanProps` from `src/components/span` and nesting a
@@ -6,6 +6,7 @@ Consider `BaseProps extends SpanProps` from `src/components/span` and nesting a
 */
 
 interface BaseProps {
+  readonly alignItems?: 'center' | undefined;
   readonly children: ReactNode;
   readonly className?: string | undefined;
   readonly display?: 'block' | 'flex' | undefined;

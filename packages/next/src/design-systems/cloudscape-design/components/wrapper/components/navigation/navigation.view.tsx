@@ -1,7 +1,6 @@
 import SideNavigation from '@cloudscape-design/components/side-navigation';
 import I18n from 'lazy-i18n';
-import type { ReactElement } from 'react';
-import { memo } from 'react';
+import { type ReactElement, memo } from 'react';
 import Div from '../../../../components/div';
 import validateString from '../../../../../../utils/validate-string';
 import useNavigation from './navigation.hook';

@@ -1,5 +1,5 @@
-import type { SideNavigationProps } from '@cloudscape-design/components/side-navigation';
-import type { TranslateFunction } from 'lazy-i18n';
+import { type SideNavigationProps } from '@cloudscape-design/components/side-navigation';
+import { type TranslateFunction } from 'lazy-i18n';
 import NAVIGATION_ITEMS from '../../../../../constants/navigation-items';
 import type NavigationText from '../../../../../constants/navigation-text';
 import type NavigationCategory from '../../../../../types/navigation-category';

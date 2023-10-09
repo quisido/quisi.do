@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import SelectOption from '../../../types/select-option';
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
+import type SelectOption from '../../../types/select-option';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import Model from '../constants/model';
 
 export default function useModelOptions(): readonly SelectOption[] {

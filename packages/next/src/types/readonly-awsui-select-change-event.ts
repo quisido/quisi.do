@@ -1,5 +1,5 @@
-import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
-import type { SelectProps } from '@awsui/components-react/select';
+import { type NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
+import { type SelectProps } from '@awsui/components-react/select';
 
 type ReadonlyAwsuiSelectChangeEvent = Readonly<
   NonCancelableCustomEvent<

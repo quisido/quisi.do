@@ -4,7 +4,7 @@ import I18n, { useTranslate, type TranslateFunction } from 'lazy-i18n';
 import { useSelectedLayoutSegment } from 'next/navigation.js';
 import { type PropsWithChildren, type ReactElement, useMemo } from 'react';
 import Wrapper from '../../components/wrapper';
-import Breadcrumb from '../../types/breadcrumb';
+import type Breadcrumb from '../../types/breadcrumb';
 import { useNotifications } from '../../contexts/notifications';
 
 export default function AppWrapper({

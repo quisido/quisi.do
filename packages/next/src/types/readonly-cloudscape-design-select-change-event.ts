@@ -1,5 +1,5 @@
-import type { NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
-import type { SelectProps } from '@cloudscape-design/components/select';
+import { type NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
+import { type SelectProps } from '@cloudscape-design/components/select';
 
 type ReadonlyCloudscapeDesignSelectChangeEvent = Readonly<
   NonCancelableCustomEvent<

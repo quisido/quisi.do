@@ -1,14 +1,19 @@
 'use client';
 
-import type { CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
-import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
-import type { PaginationProps } from '@awsui/components-react/pagination';
-import type { TableProps } from '@awsui/components-react/table';
-import type { TextFilterProps } from '@awsui/components-react/text-filter';
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
-import type { ComponentType, MutableRefObject } from 'react';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { type CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
+import { type NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
+import { type PaginationProps } from '@awsui/components-react/pagination';
+import { type TableProps } from '@awsui/components-react/table';
+import { type TextFilterProps } from '@awsui/components-react/text-filter';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
+import {
+  type ComponentType,
+  type MutableRefObject,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import useItemDescription from 'use-awsui-table-item-description';
 import type ReadonlyCollectionPreferencesEvent from '../../../../types/readonly-awsui-collection-preferences-event';
 import type ReadonlyTableSortingEvent from '../../../../types/readonly-awsui-table-sorting-event';

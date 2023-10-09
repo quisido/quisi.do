@@ -1,8 +1,12 @@
-import type { IconButtonProps } from '@mui/material/IconButton';
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
-import type { Attributes, ChangeEvent, ComponentType, MouseEvent } from 'react';
-import { useMemo } from 'react';
+import { type IconButtonProps } from '@mui/material/IconButton';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
+import {
+  type Attributes,
+  type ChangeEvent,
+  type ComponentType,
+  type MouseEvent,
+  useMemo,
+} from 'react';
 import type Column from '../../../../types/table-column';
 import type RowsPerPageOption from '../../../../types/table-rows-per-page-option';
 import useRowProps from './hooks/use-row-props';

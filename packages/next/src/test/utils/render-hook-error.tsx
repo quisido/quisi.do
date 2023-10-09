@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import mapUnknownToString from 'unknown2string';
 
 const TEST_ID = 'render-hook-error';

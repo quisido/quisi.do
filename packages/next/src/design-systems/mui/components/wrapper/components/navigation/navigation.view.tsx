@@ -1,5 +1,5 @@
 import List from '@mui/material/List';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import mapComponentToPropMapper from '../../../../../../utils/map-component-to-prop-mapper';
 import ROOT_ITEM_PROPS from '../../constants/navigation-root-item-props';
 import type Props from '../../types/navigation-props';

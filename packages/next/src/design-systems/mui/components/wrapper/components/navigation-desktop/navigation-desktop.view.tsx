@@ -1,5 +1,5 @@
 import Drawer from '@mui/material/Drawer';
-import type { PropsWithChildren, ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import PAPER_PROPS from '../../constants/navigation-paper-props';
 import type Props from '../../types/navigation-props';
 

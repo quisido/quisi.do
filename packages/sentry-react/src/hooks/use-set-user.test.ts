@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import { setUser } from '@sentry/react';
 import { useSetUser } from '..';
 

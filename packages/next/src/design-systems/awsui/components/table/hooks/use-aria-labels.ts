@@ -1,6 +1,5 @@
-import type { TableProps } from '@awsui/components-react/table';
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
+import { type TableProps } from '@awsui/components-react/table';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 
 const SINGLE = 1;

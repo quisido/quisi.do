@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Div from '../../../../components/div';
 import Span from '../../../../components/span';
 import type Project from '../../../../types/project';

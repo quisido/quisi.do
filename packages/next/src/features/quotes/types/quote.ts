@@ -1,5 +1,5 @@
-import type { StaticImageData } from 'next/image.js';
-import type { ReactNode } from 'react';
+import { type StaticImageData } from 'next/image.js';
+import { type ReactNode } from 'react';
 
 export default interface Quote {
   readonly age?: number | undefined;

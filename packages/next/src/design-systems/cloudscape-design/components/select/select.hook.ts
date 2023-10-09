@@ -1,4 +1,4 @@
-import type { SelectProps } from '@cloudscape-design/components/select';
+import { type SelectProps } from '@cloudscape-design/components/select';
 import { useCallback, useMemo } from 'react';
 import type SelectChangeEvent from '../../../../types/readonly-cloudscape-design-select-change-event';
 import type SelectOption from '../../../../types/select-option';

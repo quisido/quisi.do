@@ -1,7 +1,6 @@
-import type { BoxProps } from '@cloudscape-design/components/box';
-import Box from '@cloudscape-design/components/box';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/div';
+import Box, type { BoxProps } from '@cloudscape-design/components/box';
+import  { type ReactElement } from 'react';
+import  { type Props } from '../../../../components/div';
 import useDiv from './div.hook';
 
 export default function CloudscapeDesignDiv({

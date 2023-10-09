@@ -1,6 +1,6 @@
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
 interface Props {
   readonly colSpan: number;

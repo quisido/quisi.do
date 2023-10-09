@@ -1,13 +1,14 @@
 'use client';
 
-import type {
-  ComponentType,
-  LazyExoticComponent,
-  PromiseLikeOfReactNode,
-  ReactElement,
-  ReactNode,
+import {
+  type ComponentType,
+  type LazyExoticComponent,
+  type PromiseLikeOfReactNode,
+  type ReactElement,
+  type ReactNode,
+  useEffect,
+  useState,
 } from 'react';
-import { useEffect, useState } from 'react';
 import type DesignSystem from '../../constants/design-system';
 import useDesignSystem from '../../hooks/use-design-system';
 import filterByPropsWithChildren from './utils/filter-by-props-with-children';

@@ -1,7 +1,6 @@
-import type { NonCancelableEventHandler } from '@awsui/components-react/internal/events';
-import type { TextFilterProps } from '@awsui/components-react/text-filter';
-import TextFilter from '@awsui/components-react/text-filter';
-import type { ReactElement } from 'react';
+import  { type NonCancelableEventHandler } from '@awsui/components-react/internal/events';
+import TextFilter, type { TextFilterProps } from '@awsui/components-react/text-filter';
+import  { type ReactElement } from 'react';
 import withRequiredProps from '../../../../../../hocs/with-required-props';
 import useAwsuiTableFilter from './filter.hook';
 

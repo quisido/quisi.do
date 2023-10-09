@@ -1,4 +1,4 @@
-import type { ComponentType, ReactElement, ReactNode } from 'react';
+import { type ComponentType, type ReactElement, type ReactNode } from 'react';
 import type Column from '../../types/table-column';
 import type RowsPerPageOption from '../../types/table-rows-per-page-option';
 import DesignSystem from '../design-system';

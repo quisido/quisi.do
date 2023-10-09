@@ -1,5 +1,4 @@
-import type { ReactElement } from 'react';
-import { useMemo } from 'react';
+import { type ReactElement, useMemo } from 'react';
 import { Cell, Legend, RadialBar, RadialBarChart } from 'recharts';
 
 interface Datum {

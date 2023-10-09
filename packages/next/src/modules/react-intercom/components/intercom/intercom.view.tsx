@@ -1,4 +1,4 @@
-import type { ReactElement, ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import IntercomContext from '../../contexts/intercom';
 import type IntercomFunction from '../../types/intercom-function';
 import useIntercom from './intercom.hook';

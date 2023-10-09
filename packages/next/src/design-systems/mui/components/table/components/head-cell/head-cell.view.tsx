@@ -1,10 +1,9 @@
-import type { Palette } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
+import { type Palette, styled } from '@mui/material/styles';
 import Cell from '@mui/material/TableCell';
 import SortLabel from '@mui/material/TableSortLabel';
 import visuallyHidden from '@mui/utils/visuallyHidden';
 import I18n from 'lazy-i18n';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import type Props from '../../types/head-cell-props';
 import useMuiTableHeadCell from './head-cell.hook';
 

@@ -1,7 +1,6 @@
 import SideNavigation from '@awsui/components-react/side-navigation';
 import I18n from 'lazy-i18n';
-import type { ReactElement } from 'react';
-import { memo } from 'react';
+import { type ReactElement, memo } from 'react';
 import validateString from '../../../../../../utils/validate-string';
 import Div from '../../../div';
 import useNavigation from './navigation.hook';

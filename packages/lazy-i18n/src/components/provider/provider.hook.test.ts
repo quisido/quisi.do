@@ -87,7 +87,7 @@ describe('useProvider', (): void => {
       initialProps: {
         locale: ES_ES,
         translationsRecord: {
-          [ES_ES]: (): Promise<Record<string, string>> =>
+          [ES_ES]: async (): Promise<Record<string, string>> =>
             Promise.resolve({
               Spanish: 'Espanol',
             }),
@@ -105,7 +105,7 @@ describe('useProvider', (): void => {
         fallbackLocale: EN_US,
         locale: ES_ES,
         translationsRecord: {
-          [EN_US]: (): Promise<Record<string, string>> =>
+          [EN_US]: async (): Promise<Record<string, string>> =>
             Promise.resolve({
               English: 'English',
             }),

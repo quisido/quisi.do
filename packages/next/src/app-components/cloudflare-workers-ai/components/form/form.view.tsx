@@ -1,8 +1,8 @@
-import { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Model from '../../constants/model';
-import ModelState from '../../types/model-state';
+import type ModelState from '../../types/model-state';
 import TranslationForm from '../translation-form';
-import { MetaM2m10012b } from '../../types/inputs';
+import { type MetaM2m10012b } from '../../types/inputs';
 
 /**
  * Technical debt:

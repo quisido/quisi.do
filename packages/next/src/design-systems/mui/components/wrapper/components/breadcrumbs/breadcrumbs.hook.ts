@@ -1,7 +1,5 @@
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
-import type { Attributes } from 'react';
-import { useMemo } from 'react';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
+import { type Attributes, useMemo } from 'react';
 import type Breadcrumb from '../../../../../../types/breadcrumb';
 import type BreadcrumbProps from '../../types/breadcrumb-props';
 

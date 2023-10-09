@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Bytes from './components/bytes';
 import Kibibytes from './components/kibibytes';
 import Microseconds from './components/microseconds';

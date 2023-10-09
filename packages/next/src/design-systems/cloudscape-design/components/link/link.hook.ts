@@ -1,16 +1,18 @@
-import type {
-  HTMLAttributeAnchorTarget,
-  MutableRefObject,
-  ReactNode,
+import {
+  type HTMLAttributeAnchorTarget,
+  type MutableRefObject,
+  type ReactNode,
+  useCallback,
+  useLayoutEffect,
+  useRef,
 } from 'react';
-import { useCallback, useLayoutEffect, useRef } from 'react';
 import { useLink as useNextAwsuiLink } from 'use-next-awsui';
 import isHrefBlank from '../../../../utils/is-href-blank';
 import mapLinkSpanToAnchorElement from './utils/map-link-span-to-anchor-element';
 import useEvent from '../../../../hooks/use-event/use-event';
 import filterNodesByImage from '../../../../utils/filter-nodes-by-image';
 import { NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
-import { LinkProps } from '@cloudscape-design/components/link';
+import { type LinkProps } from '@cloudscape-design/components/link';
 import isHrefExternal from '../../../../utils/is-href-external';
 
 interface Props {

@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation.js';
 import { useMemo } from 'react';
 import { default as Locale, validateLocale } from '../../constants/locale';
 import useEffectEvent from '../../hooks/use-effect-event';
-import Params from './types/params';
+import type Params from './types/params';
 
 interface Props {
   readonly params: Params;

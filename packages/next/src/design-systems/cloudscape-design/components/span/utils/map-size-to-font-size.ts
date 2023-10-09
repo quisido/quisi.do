@@ -1,4 +1,4 @@
-import type { BoxProps } from '@cloudscape-design/components/box';
+import { type BoxProps } from '@cloudscape-design/components/box';
 
 export default function mapSizeToCloudscapeFontSize(
   size: 'large' | 'medium-heading' | 'medium' | 'small-heading' | 'small',

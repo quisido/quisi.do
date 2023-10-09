@@ -1,7 +1,6 @@
 'use client';
 
-import type { Context, Provider } from 'react';
-import { createContext } from 'react';
+import { type Context, type Provider, createContext } from 'react';
 import mapContextToProvider from './utils/map-context-to-provider';
 import mapContextToHook from './utils/map-context-to-hook';
 

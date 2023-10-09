@@ -1,4 +1,4 @@
-import type { FlashbarProps } from '@cloudscape-design/components/flashbar';
+import { type FlashbarProps } from '@cloudscape-design/components/flashbar';
 import { useMemo } from 'react';
 import EMPTY_ARRAY from '../../../../../../constants/empty-array';
 import type Notification from '../../../../../../types/notification';

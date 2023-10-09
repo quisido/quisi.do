@@ -1,4 +1,4 @@
-import type { TableProps } from '@awsui/components-react/table';
+import { type TableProps } from '@awsui/components-react/table';
 import type TableColumn from '../../../../../types/table-column';
 import mapColumnToDefinition from './map-column-to-definition';
 

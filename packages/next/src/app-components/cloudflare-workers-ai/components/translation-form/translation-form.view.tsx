@@ -1,5 +1,5 @@
-import { ReactElement } from 'react';
-import { MetaM2m10012b } from '../../types/inputs';
+import { type ReactElement } from 'react';
+import { type MetaM2m10012b } from '../../types/inputs';
 import useTranslationForm from './translation-form.hook';
 import Select from '../../../../components/select';
 import Div from '../../../../components/div';

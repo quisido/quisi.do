@@ -1,4 +1,4 @@
-import type { BoxProps } from '@cloudscape-design/components/box';
+import { type BoxProps } from '@cloudscape-design/components/box';
 
 export default function mapColorToCloudscapeColor(
   color: 'inherit' | 'label' | 'secondary-body',

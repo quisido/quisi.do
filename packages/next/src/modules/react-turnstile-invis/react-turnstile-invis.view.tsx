@@ -7,7 +7,7 @@ import {
   useState,
   useEffect,
   useId,
-  MutableRefObject,
+  type MutableRefObject,
   useRef,
 } from 'react';
 

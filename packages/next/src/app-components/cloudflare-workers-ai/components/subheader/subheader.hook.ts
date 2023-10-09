@@ -1,6 +1,6 @@
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import useModelOptions from '../../hooks/use-model-options';
-import SelectOption from '../../../../types/select-option';
+import type SelectOption from '../../../../types/select-option';
 import useEffectEvent from '../../../../hooks/use-effect-event';
 import Model, { isModel } from '../../constants/model';
 

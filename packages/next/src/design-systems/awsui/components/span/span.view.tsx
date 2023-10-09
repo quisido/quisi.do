@@ -1,7 +1,6 @@
-import type { BoxProps } from '@awsui/components-react/box';
-import Box from '@awsui/components-react/box';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/span';
+import Box, type { BoxProps } from '@awsui/components-react/box';
+import  { type ReactElement } from 'react';
+import  { type Props } from '../../../../components/span';
 import useSpan from './span.hook';
 
 export default function AwsuiSpan({

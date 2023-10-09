@@ -1,8 +1,8 @@
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/select';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/select';
 import mapComponentToPropMapper from '../../../../utils/map-component-to-prop-mapper';
 import MenuItem from './components/menu-item';
 import useSelect from './select.hook';

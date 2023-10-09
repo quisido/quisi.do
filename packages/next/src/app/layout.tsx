@@ -1,5 +1,10 @@
-import type { ComponentType, PropsWithChildren, ReactElement } from 'react';
-import { Fragment, StrictMode } from 'react';
+import {
+  type ComponentType,
+  type PropsWithChildren,
+  type ReactElement,
+  Fragment,
+  StrictMode,
+} from 'react';
 import Contexts from '../app-components/contexts';
 import GoogleAnalytics from '../app-components/google-analytics';
 import Mixpanel from '../app-components/mixpanel';
@@ -50,7 +55,7 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
           <Datadog />
           <FullStory />
           <GoogleAnalytics />
-          <Mixpanel />
+          {/* <Mixpanel /> */}
           {children}
         </BodyChildren>
         {/*

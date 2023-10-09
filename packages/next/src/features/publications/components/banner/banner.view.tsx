@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
 import NumberFormat from 'number-format-react';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Chip from '../../../../components/chip';
 import Link from '../../../../components/link';
 // import Quantity from '../../../../components/quantity';

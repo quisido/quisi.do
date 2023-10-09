@@ -1,4 +1,4 @@
-import type { NextConfig } from 'next';
+import { type NextConfig } from 'next';
 import getVersion from './src/utils/get-version';
 
 export default {

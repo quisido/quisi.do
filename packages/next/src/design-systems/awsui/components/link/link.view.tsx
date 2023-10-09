@@ -1,7 +1,6 @@
-import type { LinkProps } from '@awsui/components-react/link';
-import Link from '@awsui/components-react/link';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/link';
+import Link, type { LinkProps } from '@awsui/components-react/link';
+import  { type ReactElement } from 'react';
+import  { type Props } from '../../../../components/link';
 import useLink from './link.hook';
 
 export default function AwsuiLink({

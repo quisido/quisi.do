@@ -1,6 +1,6 @@
 /// <reference types="jest" />
 import { renderHook } from '@testing-library/react';
-import { PropsWithChildren, ReactElement } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
 import FullStoryAPIProvider from '../test/components/fullstory-api-provider';
 import useFullStory from './use-fullstory.js';
 
@@ -10,9 +10,7 @@ const TEST_IDENTIFY = jest.fn();
 const TEST_INIT = jest.fn();
 const TEST_SHUTDOWN = jest.fn();
 
-function TestWrapper({
-  children,
-}: Readonly<PropsWithChildren<unknown>>): ReactElement {
+function TestWrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
   return (
     <FullStoryAPIProvider
       anonymize={TEST_ANONYMIZE}

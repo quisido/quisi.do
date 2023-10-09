@@ -1,7 +1,6 @@
-import type { BoxProps } from '@mui/material/Box';
-import Box from '@mui/material/Box';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/div';
+import Box, type { BoxProps } from '@mui/material/Box';
+import  { type ReactElement } from 'react';
+import  { type Props } from '../../../../components/div';
 import useDiv from './div.hook';
 
 export default function MuiDiv({

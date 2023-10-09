@@ -1,4 +1,4 @@
-import { FormEvent, ReactElement } from 'react';
+import { type FormEvent, type ReactElement } from 'react';
 import DesignSystem from '../design-system';
 import mapAutoCompleteToString from '../../utils/map-autocomplete-to-string';
 

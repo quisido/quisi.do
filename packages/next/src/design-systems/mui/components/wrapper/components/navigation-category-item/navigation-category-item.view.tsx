@@ -4,7 +4,7 @@ import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import type { ReactElement, ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import Text from '../../../../../../components/navigation-text';
 import type NavigationText from '../../../../../../constants/navigation-text';
 import useNavigationCategoryItem from './navigation-category-item.hook';

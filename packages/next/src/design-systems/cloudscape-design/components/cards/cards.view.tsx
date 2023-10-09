@@ -1,7 +1,6 @@
-import type { CardsProps } from '@cloudscape-design/components/cards';
-import Cards from '@cloudscape-design/components/cards';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/cards';
+import Cards, type { CardsProps } from '@cloudscape-design/components/cards';
+import  { type ReactElement } from 'react';
+import  { type Props } from '../../../../components/cards';
 import useCloudscapeCards from './cards.hook';
 import CARDS_PER_ROW from './constants/cards-per-row';
 

@@ -1,4 +1,4 @@
-import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
+import { type SideNavigationProps } from '@awsui/components-react/side-navigation';
 
 export default function filterAwsuiSideNavigationItemsByHasItems(
   item: SideNavigationProps.Item,

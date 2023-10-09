@@ -1,4 +1,4 @@
-import type { Attributes } from 'react';
+import { type Attributes } from 'react';
 import ITEMS from '../../../../../constants/navigation-items';
 import type Props from '../types/navigation-root-item-props';
 import mapItemToRootItemProps from '../utils/map-navigation-item-to-navigation-root-item-props';

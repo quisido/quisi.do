@@ -1,4 +1,4 @@
-import { SideNavigationProps } from '@cloudscape-design/components';
+import { type SideNavigationProps } from '@cloudscape-design/components';
 
 export default function mapItemsToHrefs(
   items: readonly SideNavigationProps.Item[],

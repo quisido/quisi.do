@@ -1,12 +1,12 @@
-import type { BoxProps } from '@awsui/components-react/box';
-import type { CSSProperties } from 'react';
-import { useMemo } from 'react';
+import { type BoxProps } from '@awsui/components-react/box';
+import { type CSSProperties, useMemo } from 'react';
 import validateString from '../../../../utils/validate-string';
 import styles from './div.module.scss';
 import mapSizeToSpacingSize from './utils/map-size-to-spacing-size';
 import mapSizeToPixels from './utils/map-size-to-pixels';
 
 interface Props {
+  readonly alignItems?: 'center' | undefined;
   readonly className?: string | undefined;
   readonly display?: 'block' | 'flex' | undefined;
   readonly element?: 'h2' | 'h3' | 'h4' | 'p' | undefined;
@@ -41,6 +41,10 @@ const EMPTY = 0;
 const flexWrapNowrapClassName: string = validateString(styles.flexWrapNowrap);
 const flexWrapWrapClassName: string = validateString(styles.flexWrapWrap);
 
+const alignItemsCenterClassName: string = validateString(
+  styles.alignItemsCenter,
+);
+
 const flexDirectionColumnClassName: string = validateString(
   styles.flexDirectionColumn,
 );
@@ -66,6 +70,7 @@ const justifyContentSpaceBetweenClassName: string = validateString(
 );
 
 export default function useAwsuiDiv({
+  alignItems,
   className,
   display,
   element,
@@ -95,6 +100,14 @@ export default function useAwsuiDiv({
 
     className: useMemo((): string | undefined => {
       const classNames: string[] = [];
+
+      switch (alignItems) {
+        case 'center':
+          classNames.push(alignItemsCenterClassName);
+          break;
+        case undefined:
+          break;
+      }
 
       if (typeof className === 'string') {
         classNames.push(className);
@@ -148,7 +161,14 @@ export default function useAwsuiDiv({
       }
 
       return classNames.join(' ');
-    }, [className, display, flexDirection, flexWrap, justifyContent]),
+    }, [
+      alignItems,
+      className,
+      display,
+      flexDirection,
+      flexWrap,
+      justifyContent,
+    ]),
 
     display: useMemo((): BoxProps.Display | undefined => {
       switch (display) {

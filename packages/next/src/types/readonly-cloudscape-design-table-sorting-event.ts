@@ -1,5 +1,5 @@
-import type { NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
-import type { TableProps } from '@cloudscape-design/components/table';
+import { type NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
+import { type TableProps } from '@cloudscape-design/components/table';
 
 type ReadonlyCloudscapeTableSortingEvent<T> = Readonly<
   NonCancelableCustomEvent<

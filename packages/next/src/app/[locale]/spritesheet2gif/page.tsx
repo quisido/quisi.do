@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Container from '../../../components/container';
 import Div from '../../../components/div';
 import Header from '../../../components/header';

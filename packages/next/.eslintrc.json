@@ -1,7 +1,46 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:jsx-a11y/strict",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended",
+    "next/core-web-vitals"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "root": true,
+  "parserOptions": {
+    "project": [
+      "./tsconfig.eslint.json"
+    ]
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "jsx-a11y",
+    "prettier",
+    "react"
+  ],
   "rules": {
     "@typescript-eslint/naming-convention": "off",
-    "@typescript-eslint/prefer-readonly-parameter-types": "off"
+    "@typescript-eslint/prefer-readonly-parameter-types": "off",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        "fixStyle": "inline-type-imports"
+      }
+    ],
+    "import/consistent-type-specifier-style": [
+      "error",
+      "prefer-inline"
+    ],
+    "import/no-duplicates": [
+      "error",
+      {
+        "prefer-inline": true
+      }
+    ]
   }
 }

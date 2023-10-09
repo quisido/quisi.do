@@ -1,7 +1,6 @@
-import type { ButtonProps } from '@awsui/components-react/button';
-import Button from '@awsui/components-react/button';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/button';
+import Button, type { ButtonProps } from '@awsui/components-react/button';
+import  { type ReactElement } from 'react';
+import  { type Props } from '../../../../components/button';
 import useButton from './button.hook';
 
 export default function AwsuiButton({

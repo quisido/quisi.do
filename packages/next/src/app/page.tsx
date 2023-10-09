@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Layout from './[locale]/layout';
 import Page from './[locale]/page';
 

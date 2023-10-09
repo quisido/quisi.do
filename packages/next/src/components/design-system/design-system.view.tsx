@@ -1,7 +1,6 @@
 'use client';
 
-import type { ReactElement } from 'react';
-import { Suspense } from 'react';
+import { type ReactElement, Suspense } from 'react';
 import useDesignSystem from './design-system.hook';
 import type Props from './types/props';
 

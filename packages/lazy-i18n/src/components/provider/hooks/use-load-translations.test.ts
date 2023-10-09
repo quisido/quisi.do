@@ -2,7 +2,8 @@ import { renderHook } from '@testing-library/react';
 import expectToEventuallyThrow from '../../../test-utils/expect-to-eventually-throw';
 import type { DefaultExport } from '../../../types/default-export';
 import type { Translations } from '../../../types/translations';
-import useLoadTranslations, { Props, State } from './use-load-translations';
+import type { Props, State } from './use-load-translations';
+import useLoadTranslations from './use-load-translations';
 
 type Locale = 'es_ES';
 type P = Props<T>;
@@ -132,7 +133,7 @@ describe('useLoadTranslations', (): void => {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
         translationsRecord: {
-          [ES_ES]: (): Promise<Record<string, string>> =>
+          [ES_ES]: async (): Promise<Record<string, string>> =>
             Promise.resolve({
               Spanish: 'Espanol',
             }),
@@ -152,7 +153,7 @@ describe('useLoadTranslations', (): void => {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
         translationsRecord: {
-          [ES_ES]: (): Promise<DefaultExport<Record<string, string>>> =>
+          [ES_ES]: async (): Promise<DefaultExport<Record<string, string>>> =>
             Promise.resolve({
               default: {
                 Spanish: 'Espanol',
@@ -173,7 +174,7 @@ describe('useLoadTranslations', (): void => {
       initialProps: {
         onLoad(): void {},
         translationsRecord: {
-          [ES_ES]: (): Promise<Record<string, string>> =>
+          [ES_ES]: async (): Promise<Record<string, string>> =>
             Promise.reject(TEST_ERROR),
         },
       },
@@ -190,7 +191,7 @@ describe('useLoadTranslations', (): void => {
         onLoad(): void {},
         onLoadError: MOCK_LOAD_ERROR_HANDLER,
         translationsRecord: {
-          [ES_ES]: (): Promise<Record<string, string>> =>
+          [ES_ES]: async (): Promise<Record<string, string>> =>
             Promise.reject(TEST_ERROR),
         },
       },

@@ -1,8 +1,7 @@
-import type { FormFieldProps } from '@cloudscape-design/components/form-field';
-import FormField from '@cloudscape-design/components/form-field';
+import FormField, type { FormFieldProps } from '@cloudscape-design/components/form-field';
 import Select from '@cloudscape-design/components/select';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/select';
+import  { type ReactElement } from 'react';
+import  { type Props } from '../../../../components/select';
 import useSelect from './select.hook';
 
 export default function CloudscapeDesignSelect({
