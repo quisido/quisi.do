@@ -1,6 +1,5 @@
-import type { BoxProps } from '@cloudscape-design/components/box';
-import type { CSSProperties } from 'react';
-import { useMemo } from 'react';
+import { type BoxProps } from '@cloudscape-design/components/box';
+import { type CSSProperties, useMemo } from 'react';
 import validateString from '../../../../utils/validate-string';
 import styles from './div.module.scss';
 import mapSizeToSpacingSize from './utils/map-size-to-spacing-size';

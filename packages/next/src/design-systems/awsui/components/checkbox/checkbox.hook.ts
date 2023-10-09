@@ -1,5 +1,5 @@
-import type { CheckboxProps } from '@awsui/components-react/checkbox';
-import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
+import { type CheckboxProps } from '@awsui/components-react/checkbox';
+import { type NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import { useCallback } from 'react';
 
 interface Props {

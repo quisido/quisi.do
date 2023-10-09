@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import ArrowDropDownRounded from '@mui/icons-material/ArrowDropDownRounded';
-import type { ThemeOptions } from '@mui/material/styles';
+import { type ThemeOptions } from '@mui/material/styles';
 import SYSTEM_FONTS from './system-fonts';
 
 const DEFAULT_MUI_THEME_OPTIONS: ThemeOptions = {

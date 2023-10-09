@@ -1,7 +1,6 @@
-import type { AlertProps } from '@mui/material/Alert';
-import Alert from '@mui/material/Alert';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/banner';
+import Alert, { type AlertProps } from '@mui/material/Alert';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/banner';
 import useBanner from './banner.hook';
 
 export default function MuiBanner({

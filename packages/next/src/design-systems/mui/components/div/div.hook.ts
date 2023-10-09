@@ -1,5 +1,4 @@
-import type { CSSProperties } from 'react';
-import { useMemo } from 'react';
+import { type CSSProperties, useMemo } from 'react';
 import mapSizeToSystemValue from './utils/map-size-to-system-value';
 
 interface Props {

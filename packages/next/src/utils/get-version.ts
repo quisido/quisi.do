@@ -17,7 +17,8 @@ export default function getVersion(): string {
   }
 
   // If we're in development mode, then we call it the alpha build.
-  if (NODE_ENV === 'development') {
+  // `NODE_ENV` is `undefined` in the client instance of a NextJS application.
+  if (NODE_ENV === 'development' || typeof NODE_ENV === 'undefined') {
     return 'alpha';
   }
 

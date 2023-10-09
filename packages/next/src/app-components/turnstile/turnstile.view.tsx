@@ -1,7 +1,7 @@
 'use client';
 
 import {
-  MutableRefObject,
+  type MutableRefObject,
   useRef,
   type PropsWithChildren,
   type ReactElement,

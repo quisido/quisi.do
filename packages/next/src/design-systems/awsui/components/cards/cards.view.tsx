@@ -1,7 +1,6 @@
-import type { CardsProps } from '@awsui/components-react/cards';
-import Cards from '@awsui/components-react/cards';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/cards';
+import Cards, { type CardsProps } from '@awsui/components-react/cards';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/cards';
 import useCards from './cards.hook';
 import CARDS_PER_ROW from './constants/cards-per-row';
 

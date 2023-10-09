@@ -1,4 +1,4 @@
-import type { FunctionComponent, ReactElement } from 'react';
+import { type FunctionComponent, type ReactElement } from 'react';
 
 export default function mapKeyToColumnCell<T>(
   key: keyof T,

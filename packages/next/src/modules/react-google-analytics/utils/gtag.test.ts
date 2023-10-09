@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import GoogleAnalyticsWindow from '../types/google-analytics-window';
+import type GoogleAnalyticsWindow from '../types/google-analytics-window';
 import gtag from './gtag';
 
 const googleAnalyticsWindow: GoogleAnalyticsWindow = window;

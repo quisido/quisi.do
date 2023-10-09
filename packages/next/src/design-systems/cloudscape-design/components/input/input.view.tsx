@@ -2,8 +2,8 @@ import CloudscapeInput, {
   type InputProps,
 } from '@cloudscape-design/components/input';
 import { type NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
-import { ReactElement } from 'react';
-import type { Props } from '../../../../components/input';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/input';
 import useEffectEvent from '../../../../hooks/use-effect-event';
 import mapAutoCompleteToString from '../../../../utils/map-autocomplete-to-string';
 

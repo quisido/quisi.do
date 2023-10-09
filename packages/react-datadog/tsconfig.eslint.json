@@ -1,14 +1,4 @@
 {
-  "exclude": [
-    "dist/",
-    "jest/",
-    "node_modules/"
-  ],
   "extends": "../../tsconfig.package.json",
-  "include": [
-    "**/*",
-    "**/*.json",
-    "**/.*",
-    "**/.*.json"
-  ]
+  "include": ["**/*", "**/*.json", "**/.*", "**/.*.json"]
 }

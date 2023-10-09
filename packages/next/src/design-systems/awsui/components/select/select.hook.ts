@@ -1,4 +1,4 @@
-import type { SelectProps } from '@awsui/components-react/select';
+import { type SelectProps } from '@awsui/components-react/select';
 import { useCallback, useMemo } from 'react';
 import type ReadonlySelectChangeEvent from '../../../../types/readonly-awsui-select-change-event';
 import type SelectOption from '../../../../types/select-option';

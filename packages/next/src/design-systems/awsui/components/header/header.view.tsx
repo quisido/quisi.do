@@ -1,6 +1,6 @@
 import Header from '@awsui/components-react/header';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/header';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/header';
 
 export default function AwsuiHeader({
   actions,

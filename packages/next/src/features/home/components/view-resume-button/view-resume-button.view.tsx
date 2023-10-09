@@ -1,5 +1,5 @@
 import I18n from 'lazy-i18n';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Button from '../../../../components/button';
 import RESUME_HREF from '../../../../constants/resume-href';
 

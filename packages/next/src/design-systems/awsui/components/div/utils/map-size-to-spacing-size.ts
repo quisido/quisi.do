@@ -1,4 +1,4 @@
-import type { BoxProps } from '@awsui/components-react/box';
+import { type BoxProps } from '@awsui/components-react/box';
 
 export default function mapSizeToAwsuiSpacingSize(
   size: 'large' | 'medium' | 'small',

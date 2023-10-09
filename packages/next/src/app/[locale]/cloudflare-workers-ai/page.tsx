@@ -1,15 +1,13 @@
 'use client';
 
-import { ReactElement, useEffect } from 'react';
-import {
-  type Model,
+import { type ReactElement } from 'react';
+import CloudflareWorkersAi, {
   type ModelState,
 } from '../../../app-components/cloudflare-workers-ai';
-import CloudflareWorkersAi from '../../../app-components/cloudflare-workers-ai';
 
 const ACCOUNT_IDENTIFIER = 'da0f1e5d73beae3d7bbc796d448766ab';
 
-const handleFetch = async <M extends Model>(
+const handleFetch = async (
   apiToken: string,
   { inputs, model }: ModelState,
 ): Promise<unknown> => {
@@ -18,7 +16,7 @@ const handleFetch = async <M extends Model>(
     {
       body: JSON.stringify(inputs),
       method: 'POST',
-      mode: 'no-cors',
+      // mode: 'no-cors',
       headers: {
         Authorization: `Bearer ${apiToken}`,
         'Content-Type': 'application/json',

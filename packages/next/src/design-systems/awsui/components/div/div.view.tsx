@@ -1,10 +1,10 @@
-import type { BoxProps } from '@awsui/components-react/box';
-import Box from '@awsui/components-react/box';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/div';
+import Box, { type BoxProps } from '@awsui/components-react/box';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/div';
 import useDiv from './div.hook';
 
 export default function AwsuiDiv({
+  alignItems,
   children,
   className: classNameProp,
   display: displayProp,
@@ -30,6 +30,7 @@ export default function AwsuiDiv({
     style,
     variant,
   } = useDiv({
+    alignItems,
     className: classNameProp,
     display: displayProp,
     element,

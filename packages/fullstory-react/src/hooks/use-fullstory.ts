@@ -1,7 +1,7 @@
 'use client';
 
 import type { SnippetOptions } from '@fullstory/browser';
-import { useEffect, type MutableRefObject, useRef } from 'react';
+import { type MutableRefObject, useEffect, useRef } from 'react';
 import type IdentifyProps from '../types/identify-props.js';
 import useFullStoryAPI from './use-fullstory-api.js';
 import useShallowMemo from './use-shallow-memo.js';

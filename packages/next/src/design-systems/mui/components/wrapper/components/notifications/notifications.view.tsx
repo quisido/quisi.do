@@ -1,8 +1,6 @@
-import type { AlertProps } from '@mui/material/Alert';
-import Alert from '@mui/material/Alert';
-import type { SnackbarOrigin } from '@mui/material/Snackbar';
-import Snackbar from '@mui/material/Snackbar';
-import type { ReactElement } from 'react';
+import Alert, { type AlertProps } from '@mui/material/Alert';
+import Snackbar, { type SnackbarOrigin } from '@mui/material/Snackbar';
+import { type ReactElement } from 'react';
 import type Notification from '../../../../../../types/notification';
 import Button from '../../../button';
 

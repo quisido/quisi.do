@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.package.json",
+  "compilerOptions": {
+    "types": [
+      "jest"
+    ]
+  },
+  "include": [
+    "**/*",
+    "**/*.json",
+    "**/.*",
+    "**/.*.json"
+  ]
+}

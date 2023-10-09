@@ -1,6 +1,7 @@
-import type { BreadcrumbGroupProps } from '@cloudscape-design/components/breadcrumb-group';
-import BreadcrumbGroup from '@cloudscape-design/components/breadcrumb-group';
-import type { ReactElement } from 'react';
+import BreadcrumbGroup, {
+  type BreadcrumbGroupProps,
+} from '@cloudscape-design/components/breadcrumb-group';
+import { type ReactElement } from 'react';
 import type Breadcrumb from '../../../../../../types/breadcrumb';
 import useBreadcrumbs from './breadcrumbs.hook';
 

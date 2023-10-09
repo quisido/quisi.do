@@ -1,4 +1,4 @@
-import Locale from '../../constants/locale';
+import type Locale from '../../constants/locale';
 import { useLocale } from '../../contexts/locale';
 
 interface State {

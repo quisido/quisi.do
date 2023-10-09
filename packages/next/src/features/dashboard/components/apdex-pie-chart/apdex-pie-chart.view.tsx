@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { Pie, Surface } from 'recharts';
 import validateString from '../../../../utils/validate-string';
 import styles from './apdex-pie-chart.module.scss';

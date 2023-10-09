@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Link from '../../../../components/link';
 import validateString from '../../../../utils/validate-string';
 import newHorizons from '../../../../images/new-horizons.jpg';

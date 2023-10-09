@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { PropsWithChildren, ReactElement } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
 import { act } from 'react-dom/test-utils';
 import I18n, { I18nProvider } from '../../index';
 
@@ -14,7 +14,7 @@ describe('I18n', (): void => {
     });
     const MOCK_ES_ES = jest.fn().mockReturnValue(ES_ES_PROMISE);
     const { getByText } = render(<I18n>Spanish</I18n>, {
-      wrapper({ children }: PropsWithChildren<unknown>): ReactElement {
+      wrapper({ children }: PropsWithChildren): ReactElement {
         return (
           <I18nProvider
             LoadingComponent={TestLoadingComponent}
@@ -30,11 +30,9 @@ describe('I18n', (): void => {
     });
     getByText('test loading component');
 
-    await act(
-      async (): Promise<void> => {
-        await ES_ES_PROMISE;
-      },
-    );
+    await act(async (): Promise<void> => {
+      await ES_ES_PROMISE;
+    });
 
     getByText('Espanol');
   });

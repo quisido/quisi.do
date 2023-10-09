@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import type { Attributes, ComponentType, ReactElement } from 'react';
+import { type Attributes, type ComponentType, type ReactElement } from 'react';
 import { useCallback, useMemo } from 'react';
 import type Column from '../../../../../types/table-column';
 import type CellProps from '../types/cell-props';

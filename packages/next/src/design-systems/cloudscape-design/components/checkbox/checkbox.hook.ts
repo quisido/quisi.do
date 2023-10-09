@@ -1,5 +1,5 @@
-import type { CheckboxProps } from '@cloudscape-design/components/checkbox';
-import type { NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
+import { type CheckboxProps } from '@cloudscape-design/components/checkbox';
+import { type NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
 import { useCallback } from 'react';
 
 interface Props {

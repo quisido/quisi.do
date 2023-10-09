@@ -1,5 +1,5 @@
 import Image from 'next/image.js';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Div from '../../../../components/div';
 import validateString from '../../../../utils/validate-string';
 import type Quote from '../../types/quote';

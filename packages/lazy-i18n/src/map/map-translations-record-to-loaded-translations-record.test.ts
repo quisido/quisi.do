@@ -17,7 +17,7 @@ describe('mapTranslationsRecordToLoadedTranslationsRecord', (): void => {
             five: 'six',
           };
         },
-        d(): Promise<Record<string, string>> {
+        async d(): Promise<Record<string, string>> {
           return Promise.resolve({
             seven: 'eight',
           });

@@ -1,11 +1,10 @@
 'use client';
 
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import useAsyncState from '../../modules/use-async-state';
-import DevArticle from '../../types/dev-article';
-import MediumArticle from '../../types/medium-article';
+import type DevArticle from '../../types/dev-article';
+import type MediumArticle from '../../types/medium-article';
 import Sort from './constants/publications-sort';
 import useItems from './hooks/use-content-items';
 import type Publication from './types/publication';

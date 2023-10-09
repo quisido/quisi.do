@@ -1,5 +1,5 @@
 import type Inputs from './inputs';
-import WithModel from './with-model';
+import type WithModel from './with-model';
 
 type ModelState = ModelStates[keyof Inputs];
 

@@ -1,4 +1,4 @@
-import type { BoxProps } from '@awsui/components-react/box';
+import { type BoxProps } from '@awsui/components-react/box';
 
 export default function mapSizeToFontSize(
   size: 'large' | 'medium-heading' | 'medium' | 'small-heading' | 'small',

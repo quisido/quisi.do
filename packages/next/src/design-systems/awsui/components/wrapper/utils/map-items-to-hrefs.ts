@@ -1,4 +1,4 @@
-import { SideNavigationProps } from '@awsui/components-react';
+import { type SideNavigationProps } from '@awsui/components-react';
 
 export default function mapItemsToHrefs(
   items: readonly SideNavigationProps.Item[],

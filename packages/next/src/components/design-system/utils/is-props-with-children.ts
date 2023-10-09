@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import isRecord from '../../../utils/is-record';
 
 export default function isPropsWithChildren(

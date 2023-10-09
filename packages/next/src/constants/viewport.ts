@@ -1,4 +1,4 @@
-import { Viewport } from "next/dist/lib/metadata/types/extra-types";
+import { type Viewport } from 'next/dist/lib/metadata/types/extra-types';
 
 const VIEWPORT: Viewport = {
   // height?: string | number,

@@ -1,8 +1,11 @@
-import type { IconProps } from '@awsui/components-react/icon';
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
-import type { HTMLAttributeAnchorTarget, ReactNode } from 'react';
-import { useCallback, useMemo } from 'react';
+import { type IconProps } from '@awsui/components-react/icon';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
+import {
+  type HTMLAttributeAnchorTarget,
+  type ReactNode,
+  useCallback,
+  useMemo,
+} from 'react';
 import innerText from 'react-innertext';
 import useEvent from '../../../../hooks/use-event/use-event';
 import isHrefBlank from '../../../../utils/is-href-blank';

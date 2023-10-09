@@ -1,5 +1,5 @@
 import Popover from '@awsui/components-react/popover';
-import type { ReactElement, ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import validateString from '../../../../../../utils/validate-string';
 import styles from './popover.module.scss';
 

@@ -1,5 +1,4 @@
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
 import useTableSort from '../../../../../../hooks/use-table-sort';
 import type RumPerformanceEvents from '../../../../../../types/cloudflare-rum-performance-events';

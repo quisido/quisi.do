@@ -2,7 +2,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import MuiContent from '@mui/material/CardContent';
 import MuiHeader from '@mui/material/CardHeader';
-import type { ComponentType, ReactElement } from 'react';
+import { type ComponentType, type ReactElement } from 'react';
 import validateString from '../../../../../../utils/validate-string';
 import styles from './card.module.scss';
 

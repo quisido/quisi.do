@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import MuiCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import mapComponentToPropMapper from '../../../../../../utils/map-component-to-prop-mapper';
 import validateString from '../../../../../../utils/validate-string';
 import type Props from '../../types/row-props';

@@ -1,5 +1,4 @@
-import type { MutableRefObject } from 'react';
-import { useMemo } from 'react';
+import { type MutableRefObject, useMemo } from 'react';
 import useElementWidth from '../../../../hooks/use-element-width';
 import sortNumbers from '../../../../utils/sort-numbers';
 import useTimestampFormatter from '../../hooks/use-timestamp-formatter';

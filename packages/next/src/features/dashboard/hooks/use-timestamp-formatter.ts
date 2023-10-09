@@ -1,5 +1,4 @@
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo } from 'react';
 import leftPad from '../../../utils/left-pad';
 

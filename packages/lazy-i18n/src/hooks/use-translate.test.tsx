@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react';
-import { PropsWithChildren, ReactElement } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
 import TranslateFunctionContext from '../contexts/translate-function';
 import { useTranslate } from '../index';
-import TranslateFunctionType from '../types/translate-function';
+import type TranslateFunctionType from '../types/translate-function';
 
 const TEST_TRANSLATE_FUNCTION: TranslateFunctionType = (): string =>
   'test translation';
@@ -10,7 +10,7 @@ const TEST_TRANSLATE_FUNCTION: TranslateFunctionType = (): string =>
 describe('useTranslate', (): void => {
   it('should return the translate function from context', (): void => {
     const { result } = renderHook(useTranslate, {
-      wrapper({ children }: PropsWithChildren<unknown>): ReactElement {
+      wrapper({ children }: PropsWithChildren): ReactElement {
         return (
           <TranslateFunctionContext.Provider value={TEST_TRANSLATE_FUNCTION}>
             {children}

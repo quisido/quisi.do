@@ -1,4 +1,4 @@
-import type { ComponentType, ReactNode } from 'react';
+import { type ComponentType, type ReactNode } from 'react';
 import type Breadcrumb from '../../../types/breadcrumb';
 import type Notification from '../../../types/notification';
 

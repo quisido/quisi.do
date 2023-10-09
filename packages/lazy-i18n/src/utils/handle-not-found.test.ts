@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import handleNotFound from './handle-not-found';
 
 describe('handleNotFound', (): void => {

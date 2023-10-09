@@ -1,8 +1,8 @@
-import { App, Stack } from 'aws-cdk-lib';
+import { type App, Stack } from 'aws-cdk-lib';
 import { LambdaIntegration, RestApi } from 'aws-cdk-lib/aws-apigateway';
 import { Role as IamRole, ManagedPolicy } from 'aws-cdk-lib/aws-iam';
 import {
-  Function as LambdaFunction,
+  type Function as LambdaFunction,
   Runtime as LambdaRuntime,
 } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction as LambdaNodeFunction } from 'aws-cdk-lib/aws-lambda-nodejs';

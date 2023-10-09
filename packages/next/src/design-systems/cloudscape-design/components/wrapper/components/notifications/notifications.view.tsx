@@ -1,6 +1,5 @@
-import type { FlashbarProps } from '@awsui/components-react/flashbar';
-import Flashbar from '@awsui/components-react/flashbar';
-import type { ReactElement } from 'react';
+import Flashbar, { type FlashbarProps } from '@awsui/components-react/flashbar';
+import { type ReactElement } from 'react';
 import type Notification from '../../../../../../types/notification';
 import useNotifications from './notifications.hook';
 

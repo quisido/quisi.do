@@ -1,7 +1,6 @@
 import CssBaseline from '@mui/material/CssBaseline';
-import type { Theme } from '@mui/material/styles';
-import { ThemeProvider } from '@mui/material/styles';
-import type { PropsWithChildren, ReactElement } from 'react';
+import { type Theme, ThemeProvider } from '@mui/material/styles';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import useTheme from './theme.hook';
 
 export default function MuiTheme({

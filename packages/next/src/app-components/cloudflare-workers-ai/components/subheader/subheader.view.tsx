@@ -1,11 +1,11 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Select from '../../../../components/select';
 import Input from '../../../../components/input';
 import ApiTokenStatus from '../api-token-status';
 import Div from '../../../../components/div';
-import IApiTokenStatus from '../../types/api-token-status';
+import type IApiTokenStatus from '../../types/api-token-status';
 import useSubheader from './subheader.hook';
-import Model from '../../constants/model';
+import type Model from '../../constants/model';
 
 interface Props {
   readonly apiToken: string;
@@ -30,7 +30,7 @@ export default function Subheader({
 
   return (
     <Div display="flex" flexDirection="row" justifyContent="space-around">
-      <Div>
+      <Div alignItems="center" display="flex" flexDirection="row">
         <Input
           autoComplete={API_TOKEN_AUTO_COMPLETE}
           onChange={onApiTokenChange}

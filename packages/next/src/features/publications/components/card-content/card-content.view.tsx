@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Banner from '../../components/banner';
 import Stats from '../../components/stats';
 import type Publication from '../../types/publication';

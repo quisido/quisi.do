@@ -1,7 +1,6 @@
-import type { BoxProps } from '@cloudscape-design/components/box';
-import Box from '@cloudscape-design/components/box';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/span';
+import Box, { type BoxProps } from '@cloudscape-design/components/box';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/span';
 import useSpan from './span.hook';
 
 export default function CloudscapeDesignSpan({

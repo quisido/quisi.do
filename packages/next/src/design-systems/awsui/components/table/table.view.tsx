@@ -1,11 +1,11 @@
-import type { CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
-import CollectionPreferences from '@awsui/components-react/collection-preferences';
+import CollectionPreferences, {
+  type CollectionPreferencesProps,
+} from '@awsui/components-react/collection-preferences';
 import Header from '@awsui/components-react/header';
 import Pagination from '@awsui/components-react/pagination';
-import type { TableProps } from '@awsui/components-react/table';
-import Table from '@awsui/components-react/table';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/table';
+import Table, { type TableProps } from '@awsui/components-react/table';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/table';
 import Filter from './components/filter';
 import useTable from './table.hook';
 

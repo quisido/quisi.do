@@ -1,11 +1,9 @@
 'use client';
 
-import type { AppLayoutProps } from '@awsui/components-react/app-layout';
-import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
-import type { MutableRefObject } from 'react';
-import { useLayoutEffect, useMemo, useRef } from 'react';
+import { type AppLayoutProps } from '@awsui/components-react/app-layout';
+import { type NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
+import { type MutableRefObject, useLayoutEffect, useMemo, useRef } from 'react';
 import { useAppLayout } from 'use-awsui';
 
 interface State {

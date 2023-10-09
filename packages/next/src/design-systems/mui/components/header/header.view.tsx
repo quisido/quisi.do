@@ -1,5 +1,5 @@
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/header';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/header';
 import validateString from '../../../../utils/validate-string';
 import Div from '../div';
 import styles from './header.module.scss';

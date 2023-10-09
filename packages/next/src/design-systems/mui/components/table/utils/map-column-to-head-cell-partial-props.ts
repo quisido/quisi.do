@@ -1,4 +1,4 @@
-import type { Attributes } from 'react';
+import { type Attributes } from 'react';
 import type Column from '../../../../../types/table-column';
 import type HeadCellProps from '../types/head-cell-props';
 

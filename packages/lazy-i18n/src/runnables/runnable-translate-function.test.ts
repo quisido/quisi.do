@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import RunnableTranslateFunction from './runnable-translate-function';
 
 describe('RunnableTranslateFunction', (): void => {

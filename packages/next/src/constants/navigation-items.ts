@@ -31,10 +31,12 @@ const NAVIGATION_ITEMS: readonly (
         text: NavigationText.AceAlters,
         url: 'https://acealters.com/',
       },
+      /*
       {
         text: NavigationText.CloudflareWorkersAI,
         path: '/cloudflare-workers-ai/',
       },
+      */
       {
         text: NavigationText.Dota2Huds,
         url: 'https://charlesstover.github.io/dota2huds/',

@@ -6,14 +6,14 @@ import {
   useMemo,
 } from 'react';
 import useAsyncState from '../../modules/use-async-state';
-import Fetch from './types/fetch';
-import ApiTokenStatus from './types/api-token-status';
+import type Fetch from './types/fetch';
+import type ApiTokenStatus from './types/api-token-status';
 import useEffectEvent from '../../hooks/use-effect-event';
 import isRunnable from './utils/is-runnable';
 import DEFAULT_STATE from './constants/default-state';
-import Model from './constants/model';
+import type Model from './constants/model';
 import type ModelState from './types/model-state';
-import { TranslateFunction, useTranslate } from 'lazy-i18n';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import mapModelToInitialInputs from './utils/map-model-to-initial-inputs';
 
 interface State<S extends ModelState> {
@@ -65,15 +65,41 @@ export default function useCloudflareWorkersAi<S extends ModelState>(
       const response: Response = await window.fetch(
         'https://api.cloudflare.com/client/v4/user/tokens/verify',
         {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
+          method: 'GET',
+          mode: 'cors',
+          headers: new Headers({
             Authorization: `Bearer ${apiToken}`,
             'Content-Type': 'application/json',
-          },
+          }),
         },
       );
-      return await response.json();
+
+      /**
+       * {
+          "errors": [],
+          "messages": [],
+          "result": {
+            "expires_on": "2020-01-01T00:00:00Z",
+            "id": "ed17574386854bf78a67040be0a770b0",
+            "not_before": "2018-07-01T05:20:00Z",
+            "status": "active"
+          },
+          "success": true
+        }
+       * {
+       *   "success":false,
+       *   "messages": [],
+       *   "result": null,
+       *   "errors": [
+       *     {
+       *       "code": 1001,
+       *       "message": "Missing \"Authorization\" header",
+       *     }
+       *   ],
+       * }
+       */
+      const json: unknown = await response.json();
+      return json;
     });
   }, [apiToken]);
 

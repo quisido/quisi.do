@@ -1,7 +1,5 @@
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
-import type { MutableRefObject } from 'react';
-import { useCallback, useMemo } from 'react';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
+import { type MutableRefObject, useCallback, useMemo } from 'react';
 import useElementWidth from '../../../../hooks/use-element-width';
 import sortNumbers from '../../../../utils/sort-numbers';
 import useTimestampFormatter from '../../hooks/use-timestamp-formatter';

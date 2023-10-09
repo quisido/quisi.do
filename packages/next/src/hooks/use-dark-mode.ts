@@ -1,5 +1,4 @@
-import type { Dispatch, SetStateAction } from 'react';
-import { useContext } from 'react';
+import { type Dispatch, type SetStateAction, useContext } from 'react';
 import DarkModeContext from '../contexts/dark-mode';
 
 export default function useDarkMode(): [

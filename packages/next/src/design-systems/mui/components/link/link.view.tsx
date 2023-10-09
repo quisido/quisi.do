@@ -1,7 +1,6 @@
-import type { LinkProps } from '@mui/material/Link';
-import Link from '@mui/material/Link';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/link';
+import Link, { type LinkProps } from '@mui/material/Link';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/link';
 import useLink from './link.hook';
 
 export default function MuiLink({

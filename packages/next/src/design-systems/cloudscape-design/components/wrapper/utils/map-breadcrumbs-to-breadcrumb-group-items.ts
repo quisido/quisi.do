@@ -1,4 +1,4 @@
-import type { BreadcrumbGroupProps } from '@cloudscape-design/components/breadcrumb-group';
+import { type BreadcrumbGroupProps } from '@cloudscape-design/components/breadcrumb-group';
 import type Breadcrumb from '../../../../../types/breadcrumb';
 import mapBreadcrumbToBreadcrumbGroupItem from './map-breadcrumb-to-breadcrumb-group-item';
 

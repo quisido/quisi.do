@@ -1,5 +1,5 @@
 import I18n from 'lazy-i18n';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import round from '../../../../utils/round';
 import Kibibytes from '../kibibytes';
 
@@ -18,10 +18,8 @@ export default function Bytes({ children, decimals }: Props): ReactElement {
   }
 
   if (typeof decimals === 'undefined') {
-    return <I18n bytes={children.toLocaleString()}>$n bytes</I18n>;
+    return <I18n n={children.toLocaleString()}>$n bytes</I18n>;
   }
 
-  return (
-    <I18n bytes={round(children, decimals).toLocaleString()}>$n bytes</I18n>
-  );
+  return <I18n n={round(children, decimals).toLocaleString()}>$n bytes</I18n>;
 }

@@ -1,8 +1,9 @@
-import type { FormFieldProps } from '@awsui/components-react/form-field';
-import FormField from '@awsui/components-react/form-field';
+import FormField, {
+  type FormFieldProps,
+} from '@awsui/components-react/form-field';
 import Select from '@awsui/components-react/select';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/select';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/select';
 import useSelect from './select.hook';
 
 export default function AwsuiSelect({

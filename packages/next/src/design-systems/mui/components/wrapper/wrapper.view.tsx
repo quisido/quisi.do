@@ -1,6 +1,5 @@
-import type { PropsWithChildren, ReactElement } from 'react';
-import { Suspense } from 'react';
-import type { Props } from '../../../../components/wrapper';
+import { type PropsWithChildren, type ReactElement, Suspense } from 'react';
+import { type Props } from '../../../../components/wrapper';
 import ContentFallback from '../../../../components/wrapper-content-fallback';
 import Footer from '../../../../components/wrapper-footer';
 import validateString from '../../../../utils/validate-string';

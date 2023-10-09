@@ -1,4 +1,4 @@
-import type { Event } from '@sentry/types';
+import { type Event } from '@sentry/types';
 import SENTRY_EVENT from '../constants/sentry-event';
 import mapDimensionsToFingerprints from './map-dimensions-to-fingerprints';
 import mapNumberToSentryEventId from './map-number-to-sentry-event-id';

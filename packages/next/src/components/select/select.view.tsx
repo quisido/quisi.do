@@ -1,4 +1,4 @@
-import type { ReactElement, ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import type SelectOption from '../../types/select-option';
 import DesignSystem from '../design-system';
 

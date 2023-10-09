@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Dashboard from '../../../features/dashboard';
 import handleCloudflareAnalyticsRequest from '../../../utils/handle-cloudflare-analytics-request';
 import handleUptimeChecksRequest from '../../../utils/handle-uptime-checks-request';

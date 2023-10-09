@@ -1,15 +1,17 @@
-import type {
-  HTMLAttributeAnchorTarget,
-  MutableRefObject,
-  ReactNode,
+import {
+  type HTMLAttributeAnchorTarget,
+  type MutableRefObject,
+  type ReactNode,
+  useCallback,
+  useLayoutEffect,
+  useRef,
 } from 'react';
-import { useCallback, useLayoutEffect, useRef } from 'react';
 import { useLink as useNextAwsuiLink } from 'use-next-awsui';
 import useEvent from '../../../../hooks/use-event';
 import isHrefBlank from '../../../../utils/is-href-blank';
 import filterNodesByImage from '../../../../utils/filter-nodes-by-image';
 import mapLinkSpanToAnchorElement from './utils/map-link-span-to-anchor-element';
-import { LinkProps } from '@awsui/components-react/link';
+import { type LinkProps } from '@awsui/components-react/link';
 import isHrefExternal from '../../../../utils/is-href-external';
 
 interface Props {

@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import { type ComponentType } from 'react';
 import useDesignSystem from '../../../hooks/use-design-system';
 import type DesignSystemProps from '../../../types/design-system-props';
 import mapDesignSystemToComponent from '../utils/map-design-system-to-component';

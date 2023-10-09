@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 export default interface Props {
   readonly category: string; // used for tracking events

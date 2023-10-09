@@ -1,4 +1,4 @@
-import type { PaperProps } from '@mui/material/Paper';
+import { type PaperProps } from '@mui/material/Paper';
 import WIDTH from './navigation-width';
 
 const MUI_NAVIGATION_PAPER_PROPS: Partial<PaperProps> = {

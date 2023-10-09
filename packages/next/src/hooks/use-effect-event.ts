@@ -1,4 +1,4 @@
-import { MutableRefObject, useCallback, useRef } from 'react';
+import { type MutableRefObject, useCallback, useRef } from 'react';
 
 export default function useEffectEvent<A extends readonly unknown[], R>(
   f: (...args: A) => R,

@@ -1,16 +1,12 @@
 import { render } from '@testing-library/react';
-import {
-  ComponentType,
-  PropsWithChildren,
-  ReactElement,
-  useContext,
-} from 'react';
+import type { ComponentType, PropsWithChildren, ReactElement } from 'react';
+import { useContext } from 'react';
 import Loading from '../../components/loading';
 import LoadingComponentContext from '../../contexts/loading-component';
 import TranslateFunctionContext from '../../contexts/translate-function';
 import { I18nProvider } from '../../index';
-import TranslateFunctionType from '../../types/translate-function';
-import Translations from '../../types/translations';
+import type TranslateFunctionType from '../../types/translate-function';
+import type Translations from '../../types/translations';
 
 const TEST_TRANSLATIONS: Record<string, Translations> = {
   es_ES: {
@@ -29,7 +25,7 @@ describe('Provider', (): void => {
     }
 
     render(<TestComponent />, {
-      wrapper({ children }: PropsWithChildren<unknown>): ReactElement {
+      wrapper({ children }: PropsWithChildren): ReactElement {
         return (
           <I18nProvider locale="es_ES" translations={TEST_TRANSLATIONS}>
             {children}
@@ -57,7 +53,7 @@ describe('Provider', (): void => {
     }
 
     render(<TestComponent />, {
-      wrapper({ children }: PropsWithChildren<unknown>): ReactElement {
+      wrapper({ children }: PropsWithChildren): ReactElement {
         return (
           <I18nProvider
             LoadingComponent={TestLoadingComponent}

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { blue, grey } from '@mui/material/colors';
-import type { ThemeOptions } from '@mui/material/styles';
+import { type ThemeOptions } from '@mui/material/styles';
 
 // MUI docs dark theme
 // https://github.com/mui-org/material-ui-docs/blob/e4c83e43be627ff31cdf0159645f4b63ec1e6097/docs/src/modules/brandingTheme.ts#L108
