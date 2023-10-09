@@ -1,7 +1,7 @@
-import type {
-  BrowserContext,
-  Contexts,
-  default as SentryProjectEvent,
+import {
+  type BrowserContext,
+  type Contexts,
+  type default as SentryProjectEvent,
 } from '../types/sentry-project-event';
 import assert from './assert';
 import validateNumber from './validate-number';

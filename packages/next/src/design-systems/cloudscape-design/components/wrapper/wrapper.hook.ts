@@ -1,9 +1,7 @@
-import type { AppLayoutProps } from '@cloudscape-design/components/app-layout';
-import type { NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
-import type { MutableRefObject } from 'react';
-import { useLayoutEffect, useMemo, useRef } from 'react';
+import { type AppLayoutProps } from '@cloudscape-design/components/app-layout';
+import { type NonCancelableCustomEvent } from '@cloudscape-design/components/interfaces';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
+import { type MutableRefObject, useLayoutEffect, useMemo, useRef } from 'react';
 import { useAppLayout } from 'use-awsui';
 
 interface Props {

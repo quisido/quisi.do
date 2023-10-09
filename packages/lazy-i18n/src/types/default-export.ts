@@ -1,3 +1,3 @@
-export type DefaultExport<T> = {
+export interface DefaultExport<T> {
   default: T;
-};
+}

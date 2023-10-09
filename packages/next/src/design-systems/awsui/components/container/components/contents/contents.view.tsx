@@ -1,4 +1,4 @@
-import type { PropsWithChildren, ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement } from 'react';
 
 interface Props {
   readonly className?: string | undefined;

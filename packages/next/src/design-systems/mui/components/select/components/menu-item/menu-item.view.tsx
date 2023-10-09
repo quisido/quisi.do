@@ -1,5 +1,5 @@
 // import MenuItem from '@mui/material/MenuItem';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import type Props from '../../types/menu-item-props';
 
 /**

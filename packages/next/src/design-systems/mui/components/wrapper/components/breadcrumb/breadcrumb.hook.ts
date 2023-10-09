@@ -1,6 +1,5 @@
-import type { TypographyProps } from '@mui/material/Typography';
-import type { ElementType } from 'react';
-import { useMemo } from 'react';
+import { type TypographyProps } from '@mui/material/Typography';
+import { type ElementType, useMemo } from 'react';
 
 interface CurrentProps extends Partial<TypographyProps> {
   readonly component?: ElementType;

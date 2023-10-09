@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import mapSampleIntervalToRate from '../../map-sample-interval-to-rate';
 
 interface Props {

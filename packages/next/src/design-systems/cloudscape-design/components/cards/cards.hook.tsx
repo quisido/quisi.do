@@ -1,6 +1,5 @@
-import type { CardsProps } from '@cloudscape-design/components/cards';
-import type { ComponentType } from 'react';
-import { useMemo } from 'react';
+import { type CardsProps } from '@cloudscape-design/components/cards';
+import { type ComponentType, useMemo } from 'react';
 import mapComponentToRenderer from '../../../../utils/map-component-to-renderer';
 
 interface Props<Item> {

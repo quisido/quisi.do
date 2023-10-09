@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import type DesignSystemProps from '../../types/design-system-props';
 import Banner from './components/banner';
 import Button from './components/button';

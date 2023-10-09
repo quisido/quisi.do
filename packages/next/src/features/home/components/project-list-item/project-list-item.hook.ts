@@ -1,5 +1,4 @@
-import type { CSSProperties } from 'react';
-import { useMemo } from 'react';
+import { type CSSProperties, useMemo } from 'react';
 import mapIconToStyle from '../../utils/map-icon-to-style';
 
 interface Props {

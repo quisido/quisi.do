@@ -1,4 +1,4 @@
-import type { PropsWithChildren, ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import Span from '../../../../components/span';
 import validateString from '../../../../utils/validate-string';
 import styles from './packages-description-paragraph.module.scss';

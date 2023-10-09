@@ -1,6 +1,7 @@
-import type { BreadcrumbGroupProps } from '@awsui/components-react/breadcrumb-group';
-import BreadcrumbGroup from '@awsui/components-react/breadcrumb-group';
-import type { ReactElement } from 'react';
+import BreadcrumbGroup, {
+  type BreadcrumbGroupProps,
+} from '@awsui/components-react/breadcrumb-group';
+import { type ReactElement } from 'react';
 import type Breadcrumb from '../../../../../../types/breadcrumb';
 import useBreadcrumbs from './breadcrumbs.hook';
 

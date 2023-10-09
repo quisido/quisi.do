@@ -1,4 +1,4 @@
-import type { SideNavigationProps } from '@cloudscape-design/components/side-navigation';
+import { type SideNavigationProps } from '@cloudscape-design/components/side-navigation';
 
 export default function filterCloudscapeSideNavigationItemsByHasItems(
   item: SideNavigationProps.Item,

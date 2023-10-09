@@ -1,7 +1,7 @@
 'use client'; // lazy-i18n
 
 import I18n from 'lazy-i18n';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Banner from '../../components/banner';
 import Div from '../../components/div';
 import NumberFormat from '../../components/number-format';

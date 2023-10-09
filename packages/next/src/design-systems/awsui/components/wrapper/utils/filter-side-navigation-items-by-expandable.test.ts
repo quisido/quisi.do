@@ -1,4 +1,4 @@
-import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
+import { type SideNavigationProps } from '@awsui/components-react/side-navigation';
 import filterAwsuiSideNavigationItemsByExpandable from './filter-side-navigation-items-by-expandable';
 
 const TEST_DIVIDER: SideNavigationProps.Divider = {

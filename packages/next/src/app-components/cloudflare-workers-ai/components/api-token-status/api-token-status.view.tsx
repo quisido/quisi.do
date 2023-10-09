@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import LoadingIcon from '../../../../components/loading-icon';
 import type Status from '../../types/api-token-status';
 

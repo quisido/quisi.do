@@ -1,11 +1,11 @@
-import type {
-  Attributes,
-  ComponentType,
-  LazyExoticComponent,
-  PropsWithRef,
-  ReactElement,
+import {
+  type Attributes,
+  type ComponentType,
+  type LazyExoticComponent,
+  type PropsWithRef,
+  type ReactElement,
+  Suspense,
 } from 'react';
-import { Suspense } from 'react';
 import type DesignSystem from '../../constants/design-system';
 import useDesign from './design.hook';
 

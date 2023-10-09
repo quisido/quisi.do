@@ -1,4 +1,4 @@
-import type { CardsProps } from '@awsui/components-react/cards';
+import { type CardsProps } from '@awsui/components-react/cards';
 
 // See also:
 //   src/components/cloudscape-design-system/cards/constants/cards-per-row.ts

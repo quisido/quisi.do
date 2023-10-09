@@ -1,10 +1,10 @@
-import type {
-  Context,
-  Exception as SentryException,
+import {
+  type Context,
+  type Exception as SentryException,
   // SdkInfo,
-  Contexts as SentryContexts,
-  StackFrame as SentryStackFrame,
-  Stacktrace as SentryStacktrace,
+  type Contexts as SentryContexts,
+  type StackFrame as SentryStackFrame,
+  type Stacktrace as SentryStacktrace,
   // User,
 } from '@sentry/types';
 

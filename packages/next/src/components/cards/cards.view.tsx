@@ -1,4 +1,4 @@
-import type { ComponentType, ReactElement, ReactNode } from 'react';
+import { type ComponentType, type ReactElement, type ReactNode } from 'react';
 import DesignSystem from '../../components/design-system';
 
 export interface Props<Item extends object> {

@@ -1,4 +1,4 @@
-import type { FunctionComponent, ReactElement } from 'react';
+import { type FunctionComponent, type ReactElement } from 'react';
 import Div from '../../../../../components/div';
 import Quantity from '../../../../../components/quantity';
 import Change from '../components/change';

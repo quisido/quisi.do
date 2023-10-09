@@ -1,5 +1,4 @@
-import type { Dispatch, SetStateAction } from 'react';
-import { useContext } from 'react';
+import { type Dispatch, type SetStateAction, useContext } from 'react';
 import type DesignSystem from '../constants/design-system';
 import DesignSystemContext from '../contexts/design-system';
 

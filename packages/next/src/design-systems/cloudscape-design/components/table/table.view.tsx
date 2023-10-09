@@ -1,13 +1,14 @@
-import type { CollectionPreferencesProps } from '@cloudscape-design/components/collection-preferences';
-import CollectionPreferences from '@cloudscape-design/components/collection-preferences';
+import CollectionPreferences, {
+  type CollectionPreferencesProps,
+} from '@cloudscape-design/components/collection-preferences';
 import Header from '@cloudscape-design/components/header';
 import Pagination from '@cloudscape-design/components/pagination';
-import type { TableProps } from '@cloudscape-design/components/table';
-import Table from '@cloudscape-design/components/table';
-import type { TextFilterProps } from '@cloudscape-design/components/text-filter';
-import TextFilter from '@cloudscape-design/components/text-filter';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/table';
+import Table, { type TableProps } from '@cloudscape-design/components/table';
+import TextFilter, {
+  type TextFilterProps,
+} from '@cloudscape-design/components/text-filter';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/table';
 import validateString from '../../../../utils/validate-string';
 import useTable from './table.hook';
 import styles from './table.module.scss';

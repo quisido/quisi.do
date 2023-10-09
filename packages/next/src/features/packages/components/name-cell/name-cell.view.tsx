@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import EmphasizeSubstring from '../../../../components/emphasize-substring';
 import Link from '../../../../components/link';
 import type Item from '../../types/packages-item';

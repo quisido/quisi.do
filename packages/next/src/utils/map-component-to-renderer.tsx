@@ -1,4 +1,8 @@
-import type { ComponentType, FunctionComponent, ReactElement } from 'react';
+import {
+  type ComponentType,
+  type FunctionComponent,
+  type ReactElement,
+} from 'react';
 
 /*
 AWSUI does not mount renderer methods (e.g. CardDefinition's `content` and

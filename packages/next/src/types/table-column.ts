@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import { type ComponentType } from 'react';
 
 export default interface TableColumn<Item> {
   readonly CellContent: ComponentType<Item>;

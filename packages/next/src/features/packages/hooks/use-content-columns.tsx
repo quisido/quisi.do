@@ -1,7 +1,5 @@
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
-import type { ReactElement } from 'react';
-import { useMemo } from 'react';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
+import { type ReactElement, useMemo } from 'react';
 import type TableColumn from '../../../types/table-column';
 import PackageName from '../components/name-cell';
 import PACKAGE_NAME_COLUMN from '../constants/package-name-column';

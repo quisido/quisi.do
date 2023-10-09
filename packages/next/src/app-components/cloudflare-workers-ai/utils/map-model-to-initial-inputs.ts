@@ -1,12 +1,12 @@
 import Language from '../constants/language';
 import Model from '../constants/model';
-import Inputs, {
-  BaaiBgeEnV15,
-  HuggingfaceDistilbertSst2Int8,
-  MetaLlama27bChatInt8,
-  MetaM2m10012b,
-  MicrosoftResnet50,
-  OpenaiWhisper,
+import  type Inputs, {
+  type type BaaiBgeEnV15,
+  type type HuggingfaceDistilbertSst2Int8,
+  type type MetaLlama27bChatInt8,
+  type type MetaM2m10012b,
+  type type MicrosoftResnet50,
+  type type OpenaiWhisper,
 } from '../types/inputs';
 
 export default function mapModelToInitialInputs(

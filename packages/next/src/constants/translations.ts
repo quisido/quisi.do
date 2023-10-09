@@ -1,4 +1,4 @@
-import type { Translations } from 'lazy-i18n';
+import { type Translations } from 'lazy-i18n';
 import Locale from '../constants/locale';
 import english from '../translations/english.json';
 

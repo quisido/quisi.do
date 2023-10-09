@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Container from '../../components/container';
 import Div from '../../components/div';
 import Link from '../../components/link';
@@ -50,7 +50,7 @@ export default function Dashboard({
 
   return (
     <>
-      <Container header="Quisi.do">
+      <Container header="Quisi.do operational health dashboard">
         <Div element="p">
           This dashboard showcases operational and performance metrics for{' '}
           <Link category="features/dashboard" href="/" title="Quisi.do">

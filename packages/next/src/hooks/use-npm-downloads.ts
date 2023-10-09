@@ -1,9 +1,8 @@
-import { MutableRefObject, useEffect, useRef } from 'react';
+import { type MutableRefObject, useEffect, useRef } from 'react';
 import mapUnknownToString from 'unknown2string';
 import RetryAction from '../components/retry-action';
 import useNotify from '../hooks/use-notify';
-import type { AsyncState } from '../modules/use-async-state';
-import useAsyncState from '../modules/use-async-state';
+import useAsyncState, { type AsyncState } from '../modules/use-async-state';
 
 /**
  * Technical debt: This is currently called twice, when it should only be called

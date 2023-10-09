@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 import validateString from '../../../../utils/validate-string';
 import formatApdexScore from '../../utils/format-apdex-score';

@@ -1,4 +1,8 @@
-import type { ComponentType, PropsWithChildren, ReactElement } from 'react';
+import {
+  type ComponentType,
+  type PropsWithChildren,
+  type ReactElement,
+} from 'react';
 
 export default function reduceWrappersToWrapper(
   Previous: ComponentType<Required<PropsWithChildren>>,

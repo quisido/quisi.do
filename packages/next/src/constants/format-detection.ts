@@ -1,4 +1,4 @@
-import type { FormatDetection } from "next/dist/lib/metadata/types/extra-types";
+import { type FormatDetection } from 'next/dist/lib/metadata/types/extra-types';
 
 const FORMAT_DETECTION: FormatDetection = {
   address: false,

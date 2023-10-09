@@ -1,6 +1,6 @@
 import MuiInput from '@mui/material/Input';
-import { FormEvent, ReactElement } from 'react';
-import type { Props } from '../../../../components/input';
+import { type FormEvent, type ReactElement } from 'react';
+import { type Props } from '../../../../components/input';
 import useEffectEvent from '../../../../hooks/use-effect-event';
 import mapAutocompleteToString from '../../../../utils/map-autocomplete-to-string';
 

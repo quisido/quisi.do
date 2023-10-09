@@ -1,7 +1,6 @@
-import type { ButtonProps } from '@cloudscape-design/components/button';
-import Button from '@cloudscape-design/components/button';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/button';
+import Button, { type ButtonProps } from '@cloudscape-design/components/button';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/button';
 import useButton from './button.hook';
 
 export default function CloudscapeDesignButton({

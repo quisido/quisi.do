@@ -1,5 +1,4 @@
-import type { ComponentType } from 'react';
-import { lazy } from 'react';
+import { type ComponentType, lazy } from 'react';
 import Awsui from '../../../design-systems/awsui';
 import DesignSystem from '../../../constants/design-system';
 import type DesignSystemProps from '../../../types/design-system-props';

@@ -1,5 +1,5 @@
-import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
-import type { TableProps } from '@awsui/components-react/table';
+import { type NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
+import { type TableProps } from '@awsui/components-react/table';
 
 type ReadonlyAwsuiTableSortingEvent<T> = Readonly<
   NonCancelableCustomEvent<

@@ -1,6 +1,6 @@
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Text from '../../../../../../components/navigation-text';
 import type NavigationText from '../../../../../../constants/navigation-text';
 import useNavigationExternalLinkItem from './navigation-external-link-item.hook';

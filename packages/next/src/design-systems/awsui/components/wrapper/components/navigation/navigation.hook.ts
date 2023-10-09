@@ -1,7 +1,6 @@
-import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
-import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
+import { type NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
+import { type SideNavigationProps } from '@awsui/components-react/side-navigation';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo } from 'react';
 import { useSideNavigation } from 'use-next-awsui';
 import filterSideNavigationItemsByExpandable from '../../utils/filter-side-navigation-items-by-expandable';

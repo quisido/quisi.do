@@ -1,6 +1,6 @@
 'use client';
 
-import type { PropsWithChildren, ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import DataDog from 'react-datadog';
 import GITHUB_SHA from '../../constants/github-sha';
 

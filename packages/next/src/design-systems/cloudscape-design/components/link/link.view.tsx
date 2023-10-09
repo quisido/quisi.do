@@ -1,7 +1,6 @@
-import type { LinkProps } from '@cloudscape-design/components/link';
-import Link from '@cloudscape-design/components/link';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/link';
+import Link, { type LinkProps } from '@cloudscape-design/components/link';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/link';
 import useLink from './link.hook';
 
 export default function CloudscapeDesignLink({

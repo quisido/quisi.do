@@ -6,11 +6,6 @@
     "rootDir": "src",
     "sourceRoot": "src"
   },
-  "exclude": [
-    "src/**/*.test.ts",
-    "src/test/"
-  ],
-  "include": [
-    "src"
-  ]
+  "exclude": ["src/**/*.test.ts", "src/test/"],
+  "include": ["src"]
 }

@@ -1,4 +1,4 @@
-import ModelState from '../types/model-state';
+import type ModelState from '../types/model-state';
 import Language from './language';
 import Model from './model';
 

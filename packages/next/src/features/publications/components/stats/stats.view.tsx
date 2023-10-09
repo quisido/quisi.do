@@ -1,5 +1,5 @@
 import I18n from 'lazy-i18n';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Span from '../../../../components/span';
 import mapTimeToDaysAgo from '../../../../utils/map-time-to-days-ago';
 import round from '../../../../utils/round';

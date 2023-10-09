@@ -1,5 +1,5 @@
 import I18n from 'lazy-i18n';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Div from '../../../../components/div';
 import Container from '../../../../components/container';
 import LoadingIcon from '../../../../components/loading-icon';

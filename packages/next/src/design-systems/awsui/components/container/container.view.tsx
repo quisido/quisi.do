@@ -1,7 +1,7 @@
 import Container from '@awsui/components-react/container';
 import Header from '@awsui/components-react/header';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/container';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/container';
 import Div from '../div';
 import Contents from './components/contents';
 

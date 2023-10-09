@@ -1,6 +1,6 @@
 'use client';
 
-import type { PropsWithChildren, ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import DesignSystem from '../design-system';
 import Fallback from '../wrapper-content-fallback';
 import type Props from './types/props';

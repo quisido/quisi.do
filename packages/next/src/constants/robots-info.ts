@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import { type Metadata } from 'next';
 
 // eslint-disable-next-line @typescript-eslint/no-type-alias
 type RobotsInfo = Metadata['robots'] extends infer T | string | null | undefined

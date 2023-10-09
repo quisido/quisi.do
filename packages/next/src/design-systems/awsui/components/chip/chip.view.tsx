@@ -1,7 +1,6 @@
-import type { BadgeProps } from '@awsui/components-react/badge';
-import Badge from '@awsui/components-react/badge';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/chip';
+import Badge, { type BadgeProps } from '@awsui/components-react/badge';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/chip';
 import Popover from './components/popover';
 
 export default function AwsuiChip({

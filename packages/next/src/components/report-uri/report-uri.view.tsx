@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
 /**
  * Technical debt: NextJS will encode HTML entities in `meta` tags' `content`

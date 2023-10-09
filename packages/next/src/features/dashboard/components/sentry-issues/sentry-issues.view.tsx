@@ -1,5 +1,5 @@
 import I18n from 'lazy-i18n';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import type Issue from '../../../../types/sentry-issue';
 import Container from '../../../../components/container';
 import withAsync from '../../../../hocs/with-async';

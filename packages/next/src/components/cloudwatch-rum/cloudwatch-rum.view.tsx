@@ -1,8 +1,11 @@
 'use client';
 
-import type { Telemetry } from 'aws-rum-react';
-import { AwsRumProvider, MockAwsRumProvider } from 'aws-rum-react';
-import type { ReactElement, ReactNode } from 'react';
+import {
+  type Telemetry,
+  AwsRumProvider,
+  MockAwsRumProvider,
+} from 'aws-rum-react';
+import { type ReactElement, type ReactNode } from 'react';
 import VERSION from '../../constants/version';
 
 interface Props {

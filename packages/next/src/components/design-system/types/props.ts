@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import { type ComponentType } from 'react';
 import type DesignSystemPropsRecord from '../../../types/design-system-props-record';
 
 interface DesignSystemComponentProps<

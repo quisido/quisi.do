@@ -1,7 +1,7 @@
 'use client';
 
-import type { Theme } from '@mui/material/styles';
-import type { SxProps } from '@mui/system';
+import { type Theme } from '@mui/material/styles';
+import { type SxProps } from '@mui/system';
 import { useRouter } from 'next/navigation.js';
 import { useEffect, useMemo } from 'react';
 import useEffectEvent from '../../../../../../hooks/use-effect-event';

@@ -1,5 +1,5 @@
 import ListItem from '@mui/material/ListItem';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import type Category from '../../../../../../types/navigation-category';
 import type Component from '../../../../../../types/navigation-component';
 import type ExternalLink from '../../../../../../types/navigation-external-link';

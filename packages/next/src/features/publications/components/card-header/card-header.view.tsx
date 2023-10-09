@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Link from '../../../../components/link';
 import Span from '../../../../components/span';
 import validateString from '../../../../utils/validate-string';

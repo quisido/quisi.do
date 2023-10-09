@@ -1,9 +1,9 @@
 'use client';
 
-import type { PropsWithChildren, ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import Div from '../../components/div';
 import LoadingIcon from '../../components/loading-icon';
-import type { Props } from '../wrapper';
+import { type Props } from '../wrapper';
 
 export default function WrapperContentFallback({
   children,

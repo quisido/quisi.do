@@ -1,4 +1,4 @@
-import type { CollectionPreferencesProps } from '@cloudscape-design/components/collection-preferences';
+import { type CollectionPreferencesProps } from '@cloudscape-design/components/collection-preferences';
 import type TableRowsPerPageOption from '../../../../../types/table-rows-per-page-option';
 
 export default function mapRowsPerPageOptionToPageSizeOption({

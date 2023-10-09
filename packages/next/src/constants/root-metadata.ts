@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import { type Metadata } from 'next';
 import mapPathToAlternates from '../utils/map-path-to-alternates';
 import AUTHOR_QUISIDO from './author-quisido';
 import FORMAT_DETECTION from './format-detection';

@@ -1,5 +1,5 @@
 import Image from 'next/image.js';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import validateString from '../../../../utils/validate-string';
 import styles from './banner-image.module.scss';
 

@@ -1,18 +1,18 @@
-import type { PropsWithChildren } from 'react';
-import type { Props as BannerProps } from '../components/banner';
-import type { Props as ButtonProps } from '../components/button';
-import type { Props as CardsProps } from '../components/cards';
-import type { Props as CheckboxProps } from '../components/checkbox';
-import type { Props as ChipProps } from '../components/chip';
-import type { Props as ContainerProps } from '../components/container';
-import type { Props as DivProps } from '../components/div';
-import type { Props as HeaderProps } from '../components/header';
-import type { Props as InputProps } from '../components/input';
-import type { Props as LinkProps } from '../components/link';
-import type { Props as SelectProps } from '../components/select';
-import type { Props as SpanProps } from '../components/span';
-import type { Props as TableProps } from '../components/table';
-import type { Props as WrapperProps } from '../components/wrapper';
+import { type PropsWithChildren } from 'react';
+import { type Props as BannerProps } from '../components/banner';
+import { type Props as ButtonProps } from '../components/button';
+import { type Props as CardsProps } from '../components/cards';
+import { type Props as CheckboxProps } from '../components/checkbox';
+import { type Props as ChipProps } from '../components/chip';
+import { type Props as ContainerProps } from '../components/container';
+import { type Props as DivProps } from '../components/div';
+import { type Props as HeaderProps } from '../components/header';
+import { type Props as InputProps } from '../components/input';
+import { type Props as LinkProps } from '../components/link';
+import { type Props as SelectProps } from '../components/select';
+import { type Props as SpanProps } from '../components/span';
+import { type Props as TableProps } from '../components/table';
+import { type Props as WrapperProps } from '../components/wrapper';
 
 export default interface DesignSystemPropsRecord<
   Card extends object,

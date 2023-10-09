@@ -1,4 +1,4 @@
-import type { TableProps } from '@awsui/components-react/table';
+import { type TableProps } from '@awsui/components-react/table';
 
 export default function mapSortingColumnToIndex<Item>({
   sortingField,

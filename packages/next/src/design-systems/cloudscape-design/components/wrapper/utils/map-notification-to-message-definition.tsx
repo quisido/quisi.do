@@ -1,4 +1,4 @@
-import type { FlashbarProps } from '@cloudscape-design/components/flashbar';
+import { type FlashbarProps } from '@cloudscape-design/components/flashbar';
 import type Notification from '../../../../../types/notification';
 
 export default function mapNotificationToCloudscapeFlashbarPropsMessageDefinition({

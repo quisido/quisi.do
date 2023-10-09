@@ -1,6 +1,5 @@
-import type { TranslateFunction } from 'lazy-i18n';
-import { useTranslate } from 'lazy-i18n';
-import type { ComponentType, PropsWithChildren } from 'react';
+import { type TranslateFunction, useTranslate } from 'lazy-i18n';
+import { type ComponentType, type PropsWithChildren } from 'react';
 import useMuiMobile from '../../hooks/use-mobile';
 import type Props from '../../types/navigation-props';
 import Desktop from '../navigation-desktop';

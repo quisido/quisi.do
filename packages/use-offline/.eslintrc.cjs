@@ -16,8 +16,6 @@ module.exports = {
   },
 
   rules: {
-    '@typescript-eslint/no-duplicate-imports': 'off', // deprecated
     '@typescript-eslint/no-parameter-properties': 'off', // deprecated
-    '@typescript-eslint/sort-type-union-intersection-members': 'off', // deprecated
   },
 };

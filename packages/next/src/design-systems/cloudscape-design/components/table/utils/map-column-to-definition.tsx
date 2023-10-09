@@ -1,5 +1,5 @@
-import type { TableProps } from '@cloudscape-design/components/table';
-import type { ReactElement } from 'react';
+import { type TableProps } from '@cloudscape-design/components/table';
+import { type ReactElement } from 'react';
 import type TableColumn from '../../../../../types/table-column';
 import mapIndexToColumnDefinitionId from './map-index-to-column-definition-id';
 

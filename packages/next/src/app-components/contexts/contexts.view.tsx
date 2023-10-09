@@ -1,6 +1,6 @@
 'use client';
 
-import type { PropsWithChildren, ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import DarkModeContext from '../../contexts/dark-mode';
 import DesignSystemContext from '../../contexts/design-system';
 import Hostname from '../../contexts/hostname';

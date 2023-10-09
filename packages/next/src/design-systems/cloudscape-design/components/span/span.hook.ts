@@ -1,4 +1,4 @@
-import type { BoxProps } from '@cloudscape-design/components/box';
+import { type BoxProps } from '@cloudscape-design/components/box';
 import mapColorToCloudscapeColor from './utils/map-color-to-cloudscape-color';
 import mapSizeToFontSize from './utils/map-size-to-font-size';
 

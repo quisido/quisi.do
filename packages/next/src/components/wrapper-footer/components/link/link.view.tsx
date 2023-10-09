@@ -1,5 +1,5 @@
 import I18n from 'lazy-i18n';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Link from '../../../../components/link';
 import GITHUB_COMMIT_URL from '../../../../constants/github-commit-url';
 import GITHUB_REPOSITORY_URL from '../../../../constants/github-repository-url';

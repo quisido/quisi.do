@@ -1,4 +1,4 @@
-import type { CardsProps } from '@cloudscape-design/components/cards';
+import { type CardsProps } from '@cloudscape-design/components/cards';
 
 // See also: arc/aws-design-system/components/cards/constants/cards-per-row.ts
 const CARDS_PER_ROW: CardsProps.CardsLayout[] = [

@@ -1,4 +1,4 @@
-import type { CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
+import { type CollectionPreferencesProps } from '@awsui/components-react/collection-preferences';
 import type TableColumn from '../../../../../types/table-column';
 import mapIndexToColumnDefinitionId from './map-index-to-column-definition-id';
 

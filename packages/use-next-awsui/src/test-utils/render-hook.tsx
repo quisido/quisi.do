@@ -4,7 +4,7 @@ import type {
 } from '@testing-library/react';
 import { renderHook as testingLibraryRenderHook } from '@testing-library/react';
 import type { MutableRefObject, PropsWithChildren, ReactElement } from 'react';
-import { withRouter, type NextRouter } from 'next/router.js';
+import { type NextRouter, withRouter } from 'next/router.js';
 
 interface Options<Props> extends RenderHookOptions<Props> {
   readonly initialHref?: string | undefined;

@@ -1,5 +1,5 @@
-import type { Theme } from '@mui/material/styles';
-import type { SxProps } from '@mui/system';
+import { type Theme } from '@mui/material/styles';
+import { type SxProps } from '@mui/system';
 import { useCallback, useMemo } from 'react';
 import useEvent from '../../../../../../hooks/use-event/use-event';
 

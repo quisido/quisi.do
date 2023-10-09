@@ -8,7 +8,7 @@ import { LocaleProvider } from '../../contexts/locale';
 import type NextLayoutProps from '../../types/next-layout-props';
 import Wrapper from '../wrapper';
 import useLocaleLayout from './locale-layout.hook';
-import Params from './types/params';
+import type Params from './types/params';
 
 /**
  * The `[locale]` layout wraps all content in <body>.

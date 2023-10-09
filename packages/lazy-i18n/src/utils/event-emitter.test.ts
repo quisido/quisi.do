@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import EventEmitter from './event-emitter';
 
 describe('EventEmitter', (): void => {

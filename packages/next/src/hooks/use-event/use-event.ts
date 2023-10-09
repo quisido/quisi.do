@@ -1,4 +1,4 @@
-import type { Event as SentryEvent } from '@sentry/types';
+import { type Event as SentryEvent } from '@sentry/types';
 import { useRecordEvent } from 'aws-rum-react';
 import { track } from 'mixpanel-browser';
 import { useCallback } from 'react';

@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Div from '../div';
 import DarkModeToggle from './components/dark-mode-toggle';
 import DesignSystemSelect from './components/design-system-select';

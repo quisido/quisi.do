@@ -1,5 +1,5 @@
 import NumberFormat from 'number-format-react';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import validateString from '../../../../utils/validate-string';
 import type Item from '../../types/packages-item';
 import styles from './total-downloads-cell.module.scss';

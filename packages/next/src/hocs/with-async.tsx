@@ -1,4 +1,4 @@
-import type { ComponentType, ReactElement } from 'react';
+import { type ComponentType, type ReactElement } from 'react';
 import type Optional from '../types/optional';
 
 interface AsyncProps {

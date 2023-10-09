@@ -1,6 +1,5 @@
-import type { BreadcrumbsProps } from '@mui/material/Breadcrumbs';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import type { ReactElement } from 'react';
+import Breadcrumbs, { type BreadcrumbsProps } from '@mui/material/Breadcrumbs';
+import { type ReactElement } from 'react';
 import type BreadcrumbType from '../../../../../../types/breadcrumb';
 import mapComponentToPropMapper from '../../../../../../utils/map-component-to-prop-mapper';
 import Div from '../../../div';

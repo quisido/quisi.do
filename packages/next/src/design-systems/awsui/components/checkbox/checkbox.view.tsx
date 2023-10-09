@@ -1,6 +1,6 @@
 import Checkbox from '@awsui/components-react/checkbox';
-import type { ReactElement } from 'react';
-import type { Props } from '../../../../components/checkbox';
+import { type ReactElement } from 'react';
+import { type Props } from '../../../../components/checkbox';
 import useCheckbox from './checkbox.hook';
 
 export default function AwsuiCheckbox({
