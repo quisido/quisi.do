@@ -8,6 +8,10 @@ import styles from './styles.module.scss';
 
 const rootClassName: string = validateString(styles.root);
 
+export function generateStaticParams(): Record<never, never> {
+  return [];
+}
+
 export default function SpriteSheet2GIFPage(): ReactElement {
   return (
     <Container

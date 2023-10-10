@@ -1,3 +1,5 @@
+'use client'; // lazy-i18n
+
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import Div from '../..//components/div';

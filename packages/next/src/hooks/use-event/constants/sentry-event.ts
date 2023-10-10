@@ -26,7 +26,7 @@ export default {
     app: {
       app_build: VERSION,
       app_identifier: 'quisi.do',
-      app_name: 'Quisi.do',
+      app_name: 'quisi.do',
       app_start_time: APP_START_TIME,
       app_version: VERSION,
       build_type: process.env.NODE_ENV,

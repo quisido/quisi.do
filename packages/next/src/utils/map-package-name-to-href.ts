@@ -3,8 +3,13 @@ import mapPackageNameToRepositoryName from '../utils/map-package-name-to-reposit
 const MONOREPO_DEPENDENCIES = new Set([
   'aws-rum-react',
   'fullstory-react',
+  'lazy-i18n',
+  'number-format-react',
   'react-datadog',
+  'sentry-react',
   'unknown2string',
+  'use-awsui-table-item-description',
+  'use-next-awsui',
   'use-offline',
 ]);
 

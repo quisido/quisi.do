@@ -1,9 +1,11 @@
-'use client';
-
 import { type ReactElement } from 'react';
 import CloudflareWorkersAi, {
   type ModelState,
 } from '../../../app-components/cloudflare-workers-ai';
+
+export function generateStaticParams(): Record<never, never> {
+  return [];
+}
 
 const ACCOUNT_IDENTIFIER = 'da0f1e5d73beae3d7bbc796d448766ab';
 

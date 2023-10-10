@@ -15,6 +15,7 @@ import styles from './home.module.scss';
 import avatar from './images/charles-stover.jpg';
 import mapProjectToAttributes from './utils/map-project-to-attributes';
 
+const aboutClassName: string = validateString(styles.about);
 const avatarClassName: string = validateString(styles.avatar);
 const contentClassName: string = validateString(styles.content);
 const CURRENT_YEAR: number = new Date().getFullYear();
@@ -23,7 +24,6 @@ const FRONT_END_START_YEAR = 2001;
 const FULL_STACK_START_YEAR = 2005;
 const listClassName: string = validateString(styles.list);
 const mapProjectToListItem = mapComponentToPropMapper(ProjectListItem);
-const paragraphClassName: string = validateString(styles.p);
 const projectListClassName: string = validateString(styles.projectList);
 const ENTERPRISE_YOE: number = CURRENT_YEAR - ENTERPRISE_START_YEAR;
 const FRONT_END_YOE: number = CURRENT_YEAR - FRONT_END_START_YEAR;
@@ -39,27 +39,27 @@ export default function Home(): ReactElement {
           <Div className={avatarClassName} marginRight="large">
             <Image alt={avatarAlt} height={100} src={avatar} width={100} />
           </Div>
-          <Div
-            className={paragraphClassName}
-            display="flex"
-            flexDirection="column"
-          >
+          <Div className={aboutClassName} display="flex" flexDirection="column">
             <Div element="p" marginBottom="medium">
-              <strong>Quisido</strong> is a front end engineer driving a{' '}
+              <strong>Charles Quisido</strong> is a front end engineer leading a{' '}
               <abbr title="software as a service">SaaS</abbr> charity
-              initiative.
+              initiative. The <strong>quisi.do</strong> website contains a
+              collection of open-source software, all profits of which go toward{' '}
+              <strong>501(c)(3) charities</strong>.
             </Div>
-            <ul className={listClassName}>
-              <li>
-                <I18n n={ENTERPRISE_YOE}>Enterprise: $n years</I18n>
-              </li>
-              <li>
-                <I18n n={FRONT_END_YOE}>Front end: $n years</I18n>
-              </li>
-              <li>
-                <I18n n={FULL_STACK_YOE}>Full stack: $n years</I18n>
-              </li>
-            </ul>
+            <section>
+              <ul className={listClassName}>
+                <li>
+                  <I18n n={ENTERPRISE_YOE}>Enterprise: $n years</I18n>
+                </li>
+                <li>
+                  <I18n n={FRONT_END_YOE}>Front end: $n years</I18n>
+                </li>
+                <li>
+                  <I18n n={FULL_STACK_YOE}>Full stack: $n years</I18n>
+                </li>
+              </ul>
+            </section>
           </Div>
         </Div>
       </Container>

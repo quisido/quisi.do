@@ -1,8 +1,8 @@
 {
   "background_color": "#202020",
   "display": "standalone",
-  "name": "Quisi.do",
-  "short_name": "Quisi.do",
+  "name": "quisi.do",
+  "short_name": "quisi.do",
   "start_url": "/",
   "theme_color": "#161616",
   "icons": [

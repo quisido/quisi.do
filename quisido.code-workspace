@@ -7,12 +7,12 @@
 
     // Applications
     {
-      "name": "Quisi.do (next)",
+      "name": "quisi.do (next)",
       "path": "packages/next"
     },
 
     {
-      "name": "Quisi.do (react-scripts)",
+      "name": "quisi.do (react-scripts)",
       "path": "packages/react-scripts"
     },
 

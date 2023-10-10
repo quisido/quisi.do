@@ -13,21 +13,21 @@ import VIEWPORT from './viewport';
  */
 export default {
   alternates: mapPathToAlternates('/'),
-  applicationName: 'Quisi.do',
+  applicationName: 'quisi.do',
   authors: [AUTHOR_QUISIDO],
   colorScheme: 'dark light',
-  creator: 'Quisido',
-  description: 'portfolio for Quisido',
+  creator: 'Charles Quisido',
+  description: 'portfolio for Charles Quisido',
   formatDetection: FORMAT_DETECTION,
   generator: null,
   keywords: [...KEYWORDS],
   manifest: '/manifest.json',
   metadataBase: new URL('/', 'https://quisi.do'),
-  publisher: 'Quisido',
+  // publisher: 'Quisido',
   referrer: 'no-referrer-when-downgrade',
   // robots: ROBOTS_INFO,
   themeColor: [...THEME_COLOR_DESCRIPTORS],
-  title: 'Quisido',
+  title: 'quisi.do',
   viewport: VIEWPORT,
 
   appLinks: {
@@ -39,16 +39,16 @@ export default {
   openGraph: {
     // audio: OGAudio | Array<OGAudio>
     // countryName: string
-    description: 'portfolio of Quisido',
+    description: 'portfolio of Charles Quisido',
     // determiner: 'a' | 'an' | 'the' | 'auto' | ''
     emails: ['open-graph@quisi.do'],
-    firstName: 'Chaz',
+    firstName: 'Charles',
     gender: 'male',
     // images: OGImage | Array<OGImage>
     lastName: 'Quisido',
     locale: 'en-US',
-    siteName: 'Quisi.do',
-    title: 'Quisido',
+    siteName: 'quisi.do',
+    title: 'quisi.do',
     type: 'profile',
     url: 'https://quisi.do/',
     // videos: OGVideo | Array<OGVideo>
@@ -56,9 +56,9 @@ export default {
 
   twitter: {
     creatorId: 'CharlesStover',
-    description: 'portfolio of Quisido',
+    description: 'portfolio of Charles Quisido',
     // images: TwitterImage | Array<TwitterImage>;
     siteId: 'CharlesStover',
-    title: 'Quisido', // <-- title of the page, not the website
+    title: 'quisi.do', // <-- title of the page, not the website
   },
 } satisfies Metadata;
