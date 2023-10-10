@@ -1,3 +1,5 @@
+'use client';
+
 import { type ReactElement } from 'react';
 import Container from '../../components/container';
 import Div from '../../components/div';
@@ -50,11 +52,11 @@ export default function Dashboard({
 
   return (
     <>
-      <Container header="Quisi.do operational health dashboard">
+      <Container header="quisi.do operational health dashboard">
         <Div element="p">
           This dashboard showcases operational and performance metrics for{' '}
-          <Link category="features/dashboard" href="/" title="Quisi.do">
-            Quisi.do
+          <Link category="features/dashboard" href="/" title="quisi.do">
+            quisi.do
           </Link>
           .
         </Div>

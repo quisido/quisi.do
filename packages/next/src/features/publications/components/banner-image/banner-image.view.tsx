@@ -1,4 +1,3 @@
-import Image from 'next/image.js';
 import { type ReactElement } from 'react';
 import validateString from '../../../../utils/validate-string';
 import styles from './banner-image.module.scss';
@@ -19,5 +18,5 @@ export default function PublicationsBannerImage({
     return <div className={undefinedClassName}>&nbsp;</div>;
   }
 
-  return <Image alt={title} className={imageClassName} src={src} width={320} />;
+  return <img alt={title} className={imageClassName} src={src} width={320} />;
 }

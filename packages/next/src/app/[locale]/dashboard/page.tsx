@@ -1,5 +1,3 @@
-'use client';
-
 import { type ReactElement } from 'react';
 import Dashboard from '../../../features/dashboard';
 import handleCloudflareAnalyticsRequest from '../../../utils/handle-cloudflare-analytics-request';
@@ -20,6 +18,10 @@ const sentryIssues: SentryProjectIssues = new SentryProjectIssues({
   organizationSlug: 'charles-stover',
   projectSlug: 'charlesstover-com',
 });
+
+export function generateStaticParams(): Record<never, never> {
+  return [];
+}
 
 export default function DashboardPage(): ReactElement {
   return (

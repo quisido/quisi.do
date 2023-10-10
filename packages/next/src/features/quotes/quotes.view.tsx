@@ -1,3 +1,5 @@
+'use client'; // lazy-i18n
+
 import { type ReactElement } from 'react';
 import Cards from '../../components/cards';
 import CardContent from './components/card-content';

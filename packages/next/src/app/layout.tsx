@@ -7,10 +7,10 @@ import {
 } from 'react';
 import Contexts from '../app-components/contexts';
 import GoogleAnalytics from '../app-components/google-analytics';
-import Mixpanel from '../app-components/mixpanel';
+// import Mixpanel from '../app-components/mixpanel';
 import NotificationsProvider from '../app-components/notifications-provider';
 import Sentry from '../app-components/sentry';
-import Turnstile from '../app-components/turnstile';
+// import Turnstile from '../app-components/turnstile';
 import CloudflareInsights from '../components/cloudflare-insights';
 import CloudWatchRUM from '../components/cloudwatch-rum';
 import Datadog from '../components/datadog';
@@ -33,7 +33,7 @@ const BodyChildren: ComponentType<PropsWithChildren> = withWrappers(
   Contexts,
   Sentry,
   Theme,
-  Turnstile,
+  // Turnstile,
 )(Fragment);
 
 function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
