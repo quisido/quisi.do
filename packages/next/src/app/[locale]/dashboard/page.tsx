@@ -19,9 +19,7 @@ const sentryIssues: SentryProjectIssues = new SentryProjectIssues({
   projectSlug: 'charlesstover-com',
 });
 
-export function generateStaticParams(): Record<never, never> {
-  return [];
-}
+export { default as generateStaticParams } from '../../../features/generate-locale-static-params';
 
 export default function DashboardPage(): ReactElement {
   return (
