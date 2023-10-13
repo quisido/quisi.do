@@ -3,10 +3,6 @@ import CloudflareWorkersAi, {
   type ModelState,
 } from '../../../app-components/cloudflare-workers-ai';
 
-export function generateStaticParams(): Record<never, never> {
-  return [];
-}
-
 const ACCOUNT_IDENTIFIER = 'da0f1e5d73beae3d7bbc796d448766ab';
 
 const handleFetch = async (
@@ -28,6 +24,8 @@ const handleFetch = async (
 
   return await response.json();
 };
+
+export { default as generateStaticParams } from '../../../features/generate-locale-static-params';
 
 export default function CloudflareWorkersAiPage(): ReactElement {
   return <CloudflareWorkersAi onFetch={handleFetch} />;

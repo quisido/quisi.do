@@ -8,9 +8,7 @@ import styles from './styles.module.scss';
 
 const rootClassName: string = validateString(styles.root);
 
-export function generateStaticParams(): Record<never, never> {
-  return [];
-}
+export { default as generateStaticParams } from '../../../features/generate-locale-static-params';
 
 export default function SpriteSheet2GIFPage(): ReactElement {
   return (
