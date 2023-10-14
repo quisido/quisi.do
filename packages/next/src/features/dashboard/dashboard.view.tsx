@@ -4,28 +4,39 @@ import { type ReactElement } from 'react';
 import Container from '../../components/container';
 import Div from '../../components/div';
 import Link from '../../components/link';
-import type CloudflareAnalyticsType from '../../types/cloudflare-analytics';
-import type RumMetrics from '../../types/rum-metrics';
-import type SentryIssue from '../../types/sentry-issue';
-import type UptimeChecksType from '../../types/uptime-checks';
+import handleCloudflareAnalyticsRequest from '../../utils/handle-cloudflare-analytics-request';
+import handleUptimeChecksRequest from '../../utils/handle-uptime-checks-request';
+import RumMetrics from '../../utils/rum-metrics';
+import SentryProjectIssues from '../../utils/sentry-project-issues';
 import CloudflareAnalytics from './components/cloudflare-analytics';
 import SentryIssues from './components/sentry-issues';
 import Status from './components/status';
 import useDashboard from './dashboard.hook';
 
+/*
 export interface Props {
   readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalyticsType>;
   readonly onRumMetricsRequest: () => Promise<RumMetrics>;
   readonly onSentryIssuesRequest: () => Promise<readonly SentryIssue[]>;
   readonly onUptimeChecksRequest: () => Promise<UptimeChecksType>;
 }
+*/
 
-export default function Dashboard({
-  onCloudflareAnalyticsRequest,
-  onRumMetricsRequest,
-  onSentryIssuesRequest,
-  onUptimeChecksRequest,
-}: Props): ReactElement {
+const rumMetrics: RumMetrics = new RumMetrics({
+  accessKey: '0123-4567-89ab-cdef',
+  fetch(): never {
+    throw new Error('Real User Monitoring is currently disabled.');
+  },
+});
+
+const sentryProjectIssues: SentryProjectIssues = new SentryProjectIssues({
+  authToken: '192f445838294027957a4a7d64d5d023a46ce6bfdee3453c820c289e4dcc1f53',
+  fetch,
+  organizationSlug: 'charles-stover',
+  projectSlug: 'charlesstover-com',
+});
+
+export default function Dashboard(): ReactElement {
   const {
     cloudflareAnalytics,
     cloudflareAnalyticsBudget,
@@ -44,10 +55,10 @@ export default function Dashboard({
     uptimeErrors,
     uptimeMessages,
   } = useDashboard({
-    onCloudflareAnalyticsRequest,
-    onRumMetricsRequest,
-    onSentryIssuesRequest,
-    onUptimeChecksRequest,
+    onCloudflareAnalyticsRequest: handleCloudflareAnalyticsRequest,
+    onRumMetricsRequest: rumMetrics.handleRequest,
+    onSentryIssuesRequest: sentryProjectIssues.handleRequest,
+    onUptimeChecksRequest: handleUptimeChecksRequest,
   });
 
   return (
