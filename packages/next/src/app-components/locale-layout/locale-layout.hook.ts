@@ -15,8 +15,17 @@ interface State {
   readonly localeContextValue: readonly [Locale, (locale: Locale) => void];
 }
 
-const mapParamsToLocale = ({ locale }: Readonly<Params>): Locale =>
-  validateLocale(locale);
+const mapParamsToLocale = ({
+  locale: localeParam,
+}: Readonly<Params>): Locale => {
+  const locale: Locale = validateLocale(localeParam);
+
+  if (locale === Locale.English) {
+    throw new Error('Did not expect the locale parameter to be English.');
+  }
+
+  return locale;
+};
 
 export default function useLocaleLayout({ params }: Props): State {
   const locale: Locale = mapParamsToLocale(params);
