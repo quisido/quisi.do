@@ -1,1 +1,1 @@
-export * from '../[locale]/quotes/page';
+export { default, generateStaticParams } from '../[locale]/quotes/page';
