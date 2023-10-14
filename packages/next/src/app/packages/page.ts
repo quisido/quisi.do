@@ -1,1 +1,1 @@
-export * from '../[locale]/packages/page';
+export { default, generateStaticParams } from '../[locale]/packages/page';
