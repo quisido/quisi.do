@@ -4,7 +4,7 @@ export default [
   {
     icon: '✍',
     name: 'Amazon Jobs CMS',
-    url: 'https://amazon.jobs/content/',
+    url: 'https://amazon.jobs/content/en/our-workplace/diversity-and-inclusion',
   },
 
   {
