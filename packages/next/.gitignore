@@ -1,5 +1,8 @@
 /.next/
 /build/
 /coverage/
+/cypress/downloads/
+/cypress/screenshots/
+/cypress/videos/
 /node_modules/
 /out/
