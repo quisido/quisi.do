@@ -1,20 +1,28 @@
 {
-  "exclude": [".next"],
-  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts"],
+  "extends": "../../tsconfig.package.json",
   "compilerOptions": {
     "allowJs": false,
     "downlevelIteration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
+    "inlineSourceMap": true,
+    "sourceMap": false,
     "isolatedModules": true,
     "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "noEmit": true,
     "resolveJsonModule": true,
-    "rootDirs": ["../use-next-awsui/src", "src"],
+    "rootDirs": [
+      "../use-next-awsui/src",
+      "src"
+    ],
     "skipLibCheck": false,
     "strict": true,
     "target": "es5",
@@ -23,5 +31,15 @@
         "name": "next"
       }
     ]
-  }
+  },
+  "exclude": [
+    ".next",
+    "out"
+  ],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "next-env.d.ts"
+  ]
 }

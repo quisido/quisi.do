@@ -3102,6 +3102,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@monorepo-template/cypress-coverage-plugin@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "@monorepo-template/cypress-coverage-plugin@npm:1.0.7"
+  dependencies:
+    "@monorepo-template/cypress-nyc-config": ^1.0.4
+  peerDependencies:
+    "@babel/core": ">=7.0.0"
+    "@babel/preset-env": ">=7.0.0"
+    "@cypress/code-coverage": ">=3.0.0"
+    babel-loader: ">=8.0.0"
+    cypress: ">=9.0.0"
+    webpack: ">=4"
+  checksum: 40b69f927865a89a2f2d1b9f9d6c4e81c7ff4e6fe798d6afabca7dc21ef6a992f428f82f623c8b5da6e706178d2844dad85b2a82c06b53dff3e77180e8133520
+  languageName: node
+  linkType: hard
+
 "@monorepo-template/cypress-nyc-config@npm:^1.0.4":
   version: 1.0.4
   resolution: "@monorepo-template/cypress-nyc-config@npm:1.0.4"
@@ -3852,6 +3868,7 @@ __metadata:
     "@emotion/styled": ^11.11.0
     "@fullstory/browser": ^1.7.1
     "@microsoft/eslint-formatter-sarif": ^3.0.0
+    "@monorepo-template/cypress-coverage-plugin": ^1.0.7
     "@monorepo-template/ignore-cypress-dependency-logs": ^1.0.0
     "@mui/icons-material": ^5.14.9
     "@mui/material": ^5.14.10
@@ -3886,6 +3903,7 @@ __metadata:
     aws-cdk: ^2.97.0
     aws-rum-react: "workspace:^"
     aws-rum-web: ^1.14.1
+    babel-loader: ^9.1.3
     babel-plugin-istanbul: ^6.1.1
     concurrently: ^8.2.1
     cypress: ^13.2.0
@@ -3909,6 +3927,7 @@ __metadata:
     nyc: ^15.1.0
     postcss: ^8.4.30
     prettier: ^3.0.3
+    process: ^0.11.10
     react: ^18.2.0
     react-datadog: "workspace:^"
     react-dom: ^18.2.0
@@ -3919,6 +3938,7 @@ __metadata:
     sentry-react: "workspace:^"
     serve: ^14.2.1
     sharp: ^0.32.6
+    tslib: ^2.6.2
     typescript: ^5.2.2
     unknown2string: "workspace:^"
     use-awsui: ^1.0.8
@@ -3927,6 +3947,7 @@ __metadata:
     use-next-awsui: "workspace:^"
     use-offline: "workspace:^"
     wait-on: ^7.0.1
+    webpack: ^5.89.0
     zone.js: ^0.14.0
   languageName: unknown
   linkType: soft
@@ -15804,6 +15825,43 @@ __metadata:
   bin:
     webpack: bin/webpack.js
   checksum: 79476a782da31a21f6dd38fbbd06b68da93baf6a62f0d08ca99222367f3b8668f5a1f2086b7bb78e23172e31fa6df6fa7ab09b25e827866c4fc4dc2b30443ce2
+  languageName: node
+  linkType: hard
+
+"webpack@npm:^5.89.0":
+  version: 5.89.0
+  resolution: "webpack@npm:5.89.0"
+  dependencies:
+    "@types/eslint-scope": ^3.7.3
+    "@types/estree": ^1.0.0
+    "@webassemblyjs/ast": ^1.11.5
+    "@webassemblyjs/wasm-edit": ^1.11.5
+    "@webassemblyjs/wasm-parser": ^1.11.5
+    acorn: ^8.7.1
+    acorn-import-assertions: ^1.9.0
+    browserslist: ^4.14.5
+    chrome-trace-event: ^1.0.2
+    enhanced-resolve: ^5.15.0
+    es-module-lexer: ^1.2.1
+    eslint-scope: 5.1.1
+    events: ^3.2.0
+    glob-to-regexp: ^0.4.1
+    graceful-fs: ^4.2.9
+    json-parse-even-better-errors: ^2.3.1
+    loader-runner: ^4.2.0
+    mime-types: ^2.1.27
+    neo-async: ^2.6.2
+    schema-utils: ^3.2.0
+    tapable: ^2.1.1
+    terser-webpack-plugin: ^5.3.7
+    watchpack: ^2.4.0
+    webpack-sources: ^3.2.3
+  peerDependenciesMeta:
+    webpack-cli:
+      optional: true
+  bin:
+    webpack: bin/webpack.js
+  checksum: 43fe0dbc30e168a685ef5a86759d5016a705f6563b39a240aa00826a80637d4a3deeb8062e709d6a4b05c63e796278244c84b04174704dc4a37bedb0f565c5ed
   languageName: node
   linkType: hard
 
