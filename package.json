@@ -32,6 +32,7 @@
     "prepack": "yarn workspaces foreach --parallel --topological-dev run prepack",
     "prepublish": "concurrently --kill-others-on-fail --names eslint,prepublish,test \"yarn run eslint\" \"yarn workspaces foreach --interlaced --parallel --topological-dev --verbose run prepublish\" \"yarn run test\"",
     "publish": "yarn workspaces foreach --no-private --parallel --topological-dev --verbose npm publish --tolerate-republish",
+    "serve": "yarn packages/next run serve",
     "test": "monorepo-template-test",
     "up": "yarn up \"@*/*\" \"!(aws-rum-react|fullstory-react|lazy-i18n|number-format-react|react-datadog|sentry-react|unknown2string|use-awsui-table-item-description|use-next-awsui|use-offline)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
   },

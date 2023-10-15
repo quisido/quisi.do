@@ -1,7 +1,7 @@
 'use client';
 
 import I18n from 'lazy-i18n';
-import Image from 'next/image';
+import Image from 'next/image.js';
 import { type ReactElement } from 'react';
 import Container from '../../components/container';
 import Div from '../../components/div';
@@ -37,7 +37,14 @@ export default function Home(): ReactElement {
       <Container actions={<ViewResumeButton />} header={<I18n>About</I18n>}>
         <Div className={contentClassName} display="flex" flexDirection="row">
           <Div className={avatarClassName} marginRight="large">
-            <Image alt={avatarAlt} height={100} src={avatar} width={100} />
+            <Image
+              {...avatar}
+              alt={avatarAlt}
+              height={100}
+              priority
+              sizes="100px"
+              width={100}
+            />
           </Div>
           <Div className={aboutClassName} display="flex" flexDirection="column">
             <Div element="p" marginBottom="medium">

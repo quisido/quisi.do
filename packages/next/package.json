@@ -36,6 +36,7 @@
     "postlighthouse": "yarn node ./scripts/postlighthouse/index.js",
     "prepack": "yarn run build",
     "prepublish": "exit 0",
+    "serve": "serve out",
     "start": "REACT_APP_CLOUDFLARE_ANALYTICS_ORIGIN=http://localhost:8787 next start -p 80"
   },
   "devDependencies": {
@@ -123,6 +124,7 @@
     "relative-timestamp": "^1.0.0",
     "sass": "^1.69.1",
     "sentry-react": "workspace:^",
+    "serve": "^14.2.1",
     "sharp": "^0.32.6",
     "typescript": "^5.2.2",
     "unknown2string": "workspace:^",

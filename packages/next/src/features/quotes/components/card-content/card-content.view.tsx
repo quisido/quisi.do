@@ -20,10 +20,11 @@ export default function CardContent({
       {typeof image !== 'undefined' && (
         <Div float="right" marginLeft="large" marginRight="medium">
           <Image
+            {...image}
             alt={author}
             className={imageClassName}
             height={IMAGE_SIZE}
-            src={image}
+            sizes={`${IMAGE_SIZE}px`}
             width={IMAGE_SIZE}
           />
         </Div>

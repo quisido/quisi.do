@@ -9,20 +9,12 @@ import useContexts from './contexts.hook';
 export default function Contexts({
   children,
 }: Readonly<PropsWithChildren>): ReactElement {
-  const { designSystem, isDarkModeEnabled } = useContexts();
+  const { designSystem, hostname, isDarkModeEnabled } = useContexts();
 
   return (
     <DarkModeContext.Provider value={isDarkModeEnabled}>
       <DesignSystemContext.Provider value={designSystem}>
-        <Hostname.Provider
-          value={
-            typeof window === 'undefined'
-              ? 'localhost'
-              : window.location.hostname
-          }
-        >
-          {children}
-        </Hostname.Provider>
+        <Hostname.Provider value={hostname}>{children}</Hostname.Provider>
       </DesignSystemContext.Provider>
     </DarkModeContext.Provider>
   );
