@@ -4,6 +4,7 @@ interface EnumUtils<V extends number | string> {
 }
 
 export default function createEnumUtils<V extends number | string>(
+  name: string,
   t: Record<string, V>,
 ): EnumUtils<V> {
   const values: Set<V> = new Set(Object.values(t));
@@ -19,7 +20,7 @@ export default function createEnumUtils<V extends number | string>(
       }
 
       throw new Error(
-        `Expected an enumerated value, but received ${typeof value} ${JSON.stringify(
+        `Expected an enumerated \`${name}\` value, but received ${typeof value} ${JSON.stringify(
           value,
         )}`,
       );

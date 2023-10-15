@@ -10,6 +10,6 @@ enum Locale {
 
 export default Locale;
 
-const { isType, validateType } = createEnumUtils(Locale);
+const { isType, validateType } = createEnumUtils('Locale', Locale);
 export const isLocale = isType;
 export const validateLocale = validateType;

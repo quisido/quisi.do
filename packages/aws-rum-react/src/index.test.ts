@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import assert from 'node:assert';
 import { readFileSync } from 'node:fs';
 
@@ -151,7 +152,7 @@ function describePackageJson({
       it('should have prepublish scripts', (): void => {
         assert('prepublish' in scripts);
         expect(scripts.prepublish).toBe(
-          'concurrently --kill-others-on-fail --names attw,eslint,jest "yarn run attw" "yarn run eslint" "yarn run jest"',
+          'concurrently --kill-others-on-fail --names attw,eslint,jest --prefix-colors auto "yarn run attw" "yarn run eslint" "yarn run jest"',
         );
       });
 

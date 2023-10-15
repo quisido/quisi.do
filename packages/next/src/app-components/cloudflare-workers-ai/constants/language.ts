@@ -7,5 +7,5 @@ enum Language {
 }
 export default Language;
 
-const { isType } = createEnumUtils(Language);
+const { isType } = createEnumUtils('Language', Language);
 export const isLanguage = isType;

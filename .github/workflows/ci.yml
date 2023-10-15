@@ -144,6 +144,7 @@ jobs:
           CHOKIDAR_USEPOLLING: true
           CYPRESS_SCREENSHOTS_SUBFOLDER: ${{ matrix.os }}-${{ matrix.browser }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_ENV: test
           NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }} # -${{ matrix.container }}
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
           REACT_APP_GITHUB_SHA: ${{ github.sha }}
@@ -156,7 +157,7 @@ jobs:
           start: yarn run start
           wait-on: 'http://localhost:3000/'
           wait-on-timeout: 120
-          working-directory: packages/next/
+          working-directory: packages/next
       - name: Upload artifacts
         if: matrix.os == 'ubuntu'
         uses: actions/upload-artifact@v3

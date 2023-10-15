@@ -1,6 +1,7 @@
 import { type NextConfig } from 'next';
 import { type ImageConfig } from 'next/dist/shared/lib/image-config';
 import getVersion from './src/utils/get-version';
+import mapRowsPerPageOptionsToMuiRowsPerPageOptions from './src/design-systems/mui/components/table/utils/map-rows-per-page-options-to-mui-rows-per-page-options';
 
 const getImageConfig = (): ImageConfig => {
   /*
@@ -17,10 +18,18 @@ const getImageConfig = (): ImageConfig => {
   };
 };
 
+const getOutput = (): 'export' | 'standalone' => {
+  if (process.env.NODE_ENV === 'test') {
+    return 'standalone';
+  }
+
+  return 'export';
+};
+
 export default {
   generateBuildId: getVersion,
   images: getImageConfig(),
-  output: 'export', // static site generation
+  output: getOutput(),
   skipTrailingSlashRedirect: false,
   trailingSlash: true,
   eslint: {

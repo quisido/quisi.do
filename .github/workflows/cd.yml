@@ -187,7 +187,7 @@ jobs:
           tag: ${{ github.event_name }}
           wait-on: 'http://localhost:3000/'
           wait-on-timeout: 120
-          working-directory: packages/next/
+          working-directory: packages/next
       - name: Upload artifacts
         if: matrix.os == 'ubuntu'
         uses: actions/upload-artifact@v3

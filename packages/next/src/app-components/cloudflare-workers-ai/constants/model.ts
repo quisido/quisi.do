@@ -13,5 +13,5 @@ enum Model {
 
 export default Model;
 
-const { isType } = createEnumUtils(Model);
+const { isType } = createEnumUtils('Model', Model);
 export const isModel = isType;

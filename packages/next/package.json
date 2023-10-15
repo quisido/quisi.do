@@ -22,7 +22,7 @@
     "build": "next build",
     "cdk:synth": "cdk synth",
     "coverage": "monorepo-template-coverage",
-    "cypress": "concurrently --hide server --kill-others --kill-others-on-fail --names server,cypress --success command-cypress \"next build && next start\" \"yarn run cypress:run\"",
+    "cypress": "concurrently --hide server --kill-others --kill-others-on-fail --names server,cypress --prefix-colors auto --success command-cypress \"next build && next start\" \"yarn run cypress:run\"",
     "cypress:open": "wait-on http://localhost:3000/ && cypress open",
     "cypress:pnp": "node ./scripts/cypress-pnp/index.js",
     "cypress:run": "wait-on http://localhost:3000/ && cypress run --browser chrome:canary",
@@ -30,14 +30,14 @@
     "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/next.sarif || eslint '**/*'",
     "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest",
-    "lighthouse": "concurrently --hide server --kill-others --kill-others-on-fail --names server,lighthouse --success command-lighthouse \"next build && next start\" \"yarn run lighthouse:report\"",
-    "lighthouse:report": "wait-on http://localhost:3000/index.html && lighthouse http://localhost:3000/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental",
+    "lighthouse": "NODE_ENV=test concurrently --kill-others --kill-others-on-fail --names next,lighthouse --prefix-colors auto --success command-lighthouse \"yarn run build && yarn run start\" \"yarn run lighthouse:report\"",
+    "lighthouse:report": "wait-on http://localhost:3000/ && lighthouse http://localhost:3000/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental",
     "lint": "next lint",
     "postlighthouse": "yarn node ./scripts/postlighthouse/index.js",
     "prepack": "yarn run build",
     "prepublish": "exit 0",
     "serve": "serve out",
-    "start": "REACT_APP_CLOUDFLARE_ANALYTICS_ORIGIN=http://localhost:8787 next start -p 80"
+    "start": "REACT_APP_CLOUDFLARE_ANALYTICS_ORIGIN=http://localhost:8787 next start -p 3000"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.10.2",

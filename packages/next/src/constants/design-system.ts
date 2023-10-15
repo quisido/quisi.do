@@ -8,5 +8,5 @@ enum DesignSystem {
 
 export default DesignSystem;
 
-const { isType } = createEnumUtils(DesignSystem);
+const { isType } = createEnumUtils('DesignSystem', DesignSystem);
 export const isDesignSystem = isType;

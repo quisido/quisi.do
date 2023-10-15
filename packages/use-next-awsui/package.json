@@ -26,7 +26,7 @@
     "eslint:fix": "eslint \"**/*\" --fix",
     "jest": "jest",
     "prepack": "yarn run tsc",
-    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,jest \"yarn run attw\" \"yarn run eslint\" \"yarn run jest\"",
+    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,jest --prefix-colors auto \"yarn run attw\" \"yarn run eslint\" \"yarn run jest\"",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile"
   },
   "devDependencies": {
