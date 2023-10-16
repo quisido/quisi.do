@@ -1,12 +1,12 @@
 import { render } from '@testing-library/react';
 import type { ComponentType, PropsWithChildren, ReactElement } from 'react';
 import { useContext } from 'react';
-import Loading from '../../components/loading';
-import LoadingComponentContext from '../../contexts/loading-component';
-import TranslateFunctionContext from '../../contexts/translate-function';
-import { I18nProvider } from '../../index';
-import type TranslateFunctionType from '../../types/translate-function';
-import type Translations from '../../types/translations';
+import Loading from '../../components/loading/index.js';
+import LoadingComponentContext from '../../contexts/loading-component.js';
+import TranslateFunctionContext from '../../contexts/translate-function.js';
+import { I18nProvider } from '../../index.js';
+import type TranslateFunctionType from '../../types/translate-function.js';
+import type { Translations } from '../../types/translations.js';
 
 const TEST_TRANSLATIONS: Record<string, Translations> = {
   es_ES: {

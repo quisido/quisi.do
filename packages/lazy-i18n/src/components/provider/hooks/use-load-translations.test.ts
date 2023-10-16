@@ -1,9 +1,9 @@
 import { renderHook } from '@testing-library/react';
-import expectToEventuallyThrow from '../../../test-utils/expect-to-eventually-throw';
-import type { DefaultExport } from '../../../types/default-export';
-import type { Translations } from '../../../types/translations';
-import type { Props, State } from './use-load-translations';
-import useLoadTranslations from './use-load-translations';
+import expectToEventuallyThrow from '../../../test-utils/expect-to-eventually-throw.js';
+import type { DefaultExport } from '../../../types/default-export.js';
+import type { Translations } from '../../../types/translations.js';
+import type { Props, State } from './use-load-translations.js';
+import useLoadTranslations from './use-load-translations.js';
 
 type Locale = 'es_ES';
 type P = Props<T>;

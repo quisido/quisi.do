@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import LoadingDot from '.';
+import LoadingDot from './index.js';
 
 describe('LoadingDot', (): void => {
   it('should render a .', (): void => {

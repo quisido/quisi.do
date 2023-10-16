@@ -1,4 +1,4 @@
-import isDefaultExport from './is-default-export';
+import isDefaultExport from './is-default-export.js';
 
 describe('isDefaultExport', (): void => {
   it('should return false for non-objects', (): void => {

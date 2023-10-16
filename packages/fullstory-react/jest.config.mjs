@@ -23,9 +23,12 @@ export default {
     },
   },
 
-  globals: {
-    'ts-jest': {
-      tsconfig: './tsconfig.jest.json',
-    },
+  transform: {
+    ['/\\.tsx?$']: [
+      'ts-jest',
+      {
+        tsconfig: './tsconfig.jest.json',
+      },
+    ],
   },
 };

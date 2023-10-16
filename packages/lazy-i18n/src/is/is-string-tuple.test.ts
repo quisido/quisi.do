@@ -1,4 +1,4 @@
-import isStringTuple from './is-string-tuple';
+import isStringTuple from './is-string-tuple.js';
 
 describe('isStringTuple', (): void => {
   it('should return false for non-string tuples', (): void => {

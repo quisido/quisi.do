@@ -1,4 +1,4 @@
-import isRecord from './is-record';
+import isRecord from './is-record.js';
 
 describe('isRecord', (): void => {
   it('should return false for non-objects', (): void => {

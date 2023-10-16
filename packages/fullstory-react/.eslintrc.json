@@ -8,7 +8,7 @@
   ],
   "env": {
     "jest": true,
-    "node": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended",

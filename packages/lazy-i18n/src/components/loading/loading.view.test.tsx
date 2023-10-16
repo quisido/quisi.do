@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import inner from '../../test-utils/inner';
-import Loading from '.';
+import inner from '../../test-utils/inner.js';
+import Loading from './index.js';
 
 describe('Loading', (): void => {
   it('should render ...', (): void => {
