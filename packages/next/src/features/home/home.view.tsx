@@ -14,6 +14,7 @@ import useHome from './home.hook';
 import styles from './home.module.scss';
 import avatar from './images/charles-stover.jpg';
 import mapProjectToAttributes from './utils/map-project-to-attributes';
+import Link from '../../components/link';
 
 const aboutClassName: string = validateString(styles.about);
 const avatarClassName: string = validateString(styles.avatar);
@@ -44,8 +45,24 @@ export default function Home(): ReactElement {
               <strong>Charles Quisido</strong> is a front end engineer leading a{' '}
               <abbr title="software as a service">SaaS</abbr> charity
               initiative. The <strong>quisi.do</strong> website contains a
-              collection of open-source software, all profits of which go toward{' '}
-              <strong>501(c)(3) charities</strong>.
+              collection of open-source software, the profits of which are
+              forwarded to{' '}
+              <Link
+                category="features/home"
+                href="/charities"
+                title="quisi.do's supported charities"
+              >
+                501(c)(3) charities
+              </Link>{' '}
+              with completely{' '}
+              <Link
+                category="features/home"
+                href="/dashboard"
+                title="quisi.do operational dashboard"
+              >
+                transparent operations
+              </Link>
+              .
             </Div>
             <section>
               <ul className={listClassName}>

@@ -5,7 +5,6 @@ import FORMAT_DETECTION from './format-detection';
 import KEYWORDS from './keywords';
 // import ROBOTS_INFO from './robots-info';
 import THEME_COLOR_DESCRIPTORS from './theme-color-descriptors';
-import VIEWPORT from './viewport';
 
 /**
  * TODO: Validate these against the standard documented on MDN:
@@ -15,7 +14,6 @@ export default {
   alternates: mapPathToAlternates('/'),
   applicationName: 'quisi.do',
   authors: [AUTHOR_QUISIDO],
-  colorScheme: 'dark light',
   creator: 'Charles Quisido',
   description: 'portfolio for Charles Quisido',
   formatDetection: FORMAT_DETECTION,
@@ -26,9 +24,7 @@ export default {
   // publisher: 'Quisido',
   referrer: 'no-referrer-when-downgrade',
   // robots: ROBOTS_INFO,
-  themeColor: [...THEME_COLOR_DESCRIPTORS],
   title: 'quisi.do',
-  viewport: VIEWPORT,
 
   appLinks: {
     web: {

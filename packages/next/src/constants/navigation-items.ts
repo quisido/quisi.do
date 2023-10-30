@@ -81,10 +81,12 @@ const NAVIGATION_ITEMS: readonly (
     text: NavigationText.ConnectWithMe,
     defaultExpanded: true,
     children: [
+      /*
       {
         text: NavigationText.Bluesky,
         url: 'https://bsky.app/profile/stover.bsky.social',
       },
+      */
       {
         text: NavigationText.GitHub,
         url: 'https://github.com/CharlesStover/',
@@ -110,15 +112,9 @@ const NAVIGATION_ITEMS: readonly (
         text: NavigationText.StackOverflow,
         url: 'https://stackoverflow.com/users/4856301/charles-stover',
       },
-      */
       {
         text: NavigationText.Threads,
         url: 'https://threads.net/@charlesstover21',
-      },
-      /*
-      {
-        text: NavigationText.Twitter,
-        url: 'https://twitter.com/CharlesStover',
       },
       */
     ],

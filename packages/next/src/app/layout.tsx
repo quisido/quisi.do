@@ -22,6 +22,7 @@ import PRECONNECT_HREFS from '../constants/preconnect-hrefs';
 import withWrappers from '../hocs/with-wrappers';
 
 export { default as metadata } from '../constants/root-metadata';
+export { default as viewport } from '../constants/root-viewport';
 
 /**
  * We do not put wrappers around `<body>` itself, because we do not want to

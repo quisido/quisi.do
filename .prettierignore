@@ -1,9 +1,11 @@
 /**/.next/
+/**/.yarn/
+/**/jest/
+/**/node_modules/
 /**/*.gz
 /**/.pnp.*
 /.git/
 /.vscode/settings.json
-/.yarn/
 /.yarnrc.yml
 /LICENSE
 /yarn.lock

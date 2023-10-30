@@ -4,7 +4,7 @@
   "eslint.runtime": "node",
   "files.eol": "\n",
   "prettier.configPath": ".prettierrc.json",
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "editor.rulers": [
