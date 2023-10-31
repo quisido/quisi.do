@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import EventEmitter from './event-emitter';
+import EventEmitter from './event-emitter.js';
 
 describe('EventEmitter', (): void => {
   it('should not crash if no event handler exists', (): void => {

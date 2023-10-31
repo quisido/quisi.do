@@ -1,8 +1,8 @@
 import type { SideNavigationProps } from '@awsui/components-react/side-navigation';
 import { act } from '@testing-library/react';
-import type { SideNavigationState } from '..';
-import { useSideNavigation } from '..';
-import renderHook from '../test-utils/render-hook';
+import type { SideNavigationState } from '../index.js';
+import { useSideNavigation } from '../index.js';
+import renderHook from '../test-utils/render-hook.js';
 
 const TEST_HREF = '/test/pathname?test=search#test:hash';
 const TEST_TEXT = 'test text';

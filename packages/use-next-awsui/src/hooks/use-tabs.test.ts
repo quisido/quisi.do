@@ -2,9 +2,9 @@
 import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { TabsProps } from '@awsui/components-react/tabs';
 import { act } from '@testing-library/react';
-import { useTabs } from '..';
-import mapHrefToTabsChangeEvent from '../test-utils/map-href-to-tabs-change-event';
-import renderHook from '../test-utils/render-hook';
+import { useTabs } from '../index.js';
+import mapHrefToTabsChangeEvent from '../test-utils/map-href-to-tabs-change-event.js';
+import renderHook from '../test-utils/render-hook.js';
 
 const ONCE = 1;
 const TEST_HREF = '/test/pathname?test=search#test:hash';

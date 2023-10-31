@@ -1,4 +1,4 @@
-import mapChildrenToTranslationKey from './map-children-to-translation-key';
+import mapChildrenToTranslationKey from './map-children-to-translation-key.js';
 
 describe('mapChildrenToTranslationKey', (): void => {
   it('should join arrays', (): void => {

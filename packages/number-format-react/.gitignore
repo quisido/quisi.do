@@ -1,9 +1,7 @@
-/.git
-/.vscode
-/build
-/coverage
-/dist
-/jest
+/dist/
+/jest/
 /node_modules
-/.env
-/yarn-error.log
+/*.cpuprofile
+/*.iml
+/*.tsbuildinfo
+/*-*.*.*.tgz

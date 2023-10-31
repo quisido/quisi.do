@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import RunnableTranslateFunction from './runnable-translate-function';
+import RunnableTranslateFunction from './runnable-translate-function.js';
 
 describe('RunnableTranslateFunction', (): void => {
   it('should emit loadTranslations when they have not loaded', (): void => {

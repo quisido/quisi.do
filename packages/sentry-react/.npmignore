@@ -5,6 +5,7 @@
 /*.cpuprofile
 /*.iml
 /*.tsbuildinfo
+/*-*.*.*.tgz
 /.eslintignore
 /.eslintrc.*
 /.gitignore

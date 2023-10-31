@@ -1,4 +1,5 @@
-import mapObjectToDependencyArray from './map-object-to-dependency-array';
+/// <reference types="jest" />
+import mapObjectToDependencyArray from './map-object-to-dependency-array.js';
 
 const TEST_NUMBER = 789;
 const TEST_NUMBER_PROPERTY_KEY = 123;

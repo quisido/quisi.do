@@ -3,4 +3,6 @@
 /jest/
 /node_modules/
 /*.cpuprofile
+/*.iml
 /*.tsbuildinfo
+/*-*.*.*.tgz

@@ -1,14 +1,7 @@
 {
   "extends": "../../tsconfig.package.json",
-  "include": [
-    "**/*",
-    "**/*.json",
-    "**/.*",
-    "**/.*.json"
-  ],
+  "include": ["**/*", "**/*.json", "**/.*", "**/.*.json"],
   "compilerOptions": {
-    "types": [
-      "jest"
-    ]
+    "jsx": "react-jsxdev"
   }
 }

@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import DefaultErrorBoundaryFallback from '.';
+import DefaultErrorBoundaryFallback from './index.js';
 
 describe('DefaultErrorBoundaryFallback', (): void => {
   it('should render the error message', (): void => {

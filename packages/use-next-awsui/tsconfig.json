@@ -3,10 +3,7 @@
   "compilerOptions": {
     "declarationDir": "dist",
     "jsx": "react-jsx",
-    "lib": [
-      "DOM",
-      "ESNext"
-    ],
+    "lib": ["DOM", "ESNext"],
     "outDir": "dist",
     "rootDir": "src",
     "sourceRoot": "src",
@@ -17,12 +14,6 @@
      */
     "skipLibCheck": true,
   },
-  "exclude": [
-    "src/**/*.test.ts",
-    "src/**/*.test.tsx",
-    "src/test/"
-  ],
-  "include": [
-    "src"
-  ]
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/"],
+  "include": ["src"]
 }

@@ -2,12 +2,13 @@
 /jest/
 /node_modules/
 /src/
-/*.cpuprofile
-/*.iml
-/*.tsbuildinfo
 /.eslintignore
 /.eslintrc.*
 /.gitignore
 /.npmignore
+/*.cpuprofile
+/*.iml
+/*.tsbuildinfo
+/*-*.*.*.tgz
 /jest.config.*
 /tsconfig.*

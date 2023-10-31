@@ -16,7 +16,9 @@ export default {
       statements: 100,
     },
   },
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
     '\\.module.scss$': '<rootDir>/src/test-utils/module-scss.ts',
   },
   resetMocks: true,
@@ -24,6 +26,14 @@ export default {
   restoreMocks: true,
   roots: ['<rootDir>/src'],
   transform: {
-    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        isolatedModules: true,
+        tsconfig: './tsconfig.jest.json',
+        useESM: true,
+        verbatimModuleSyntax: true,
+      },
+    ],
   },
 };

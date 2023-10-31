@@ -1,5 +1,5 @@
 import { captureEvent } from '@sentry/react';
-import { useCaptureEvent } from '..';
+import { useCaptureEvent } from '../index.js';
 
 describe('useCaptureEvent', (): void => {
   it('should return the Sentry `captureEvent` method', (): void => {

@@ -1,3 +1,5 @@
+/// <reference types="jest" />
+
 const TEST_INIT = jest.fn();
 const TEST_SET_USER = jest.fn();
 jest.mock('@sentry/react', () => ({
@@ -7,8 +9,8 @@ jest.mock('@sentry/react', () => ({
 
 import { renderHook } from '@testing-library/react';
 import type { User } from '@sentry/types';
-import DEFAULT_USER from '../../constants/default-user';
-import useSentry from './sentry.hook';
+import DEFAULT_USER from '../../constants/default-user.js';
+import useSentry from './sentry.hook.js';
 
 const ONCE = 1;
 const TEST_BEFORE_BREADCRUMB = jest.fn();

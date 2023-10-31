@@ -1,4 +1,4 @@
-import isDefaultStringRecordExport from './is-default-string-record-export';
+import isDefaultStringRecordExport from './is-default-string-record-export.js';
 
 describe('isDefaultStringRecordExport', (): void => {
   it('should return false for non-default exports', (): void => {

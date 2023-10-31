@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import type { RenderResult } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react';
 import useProvider, { type State } from './provider.hook.js';

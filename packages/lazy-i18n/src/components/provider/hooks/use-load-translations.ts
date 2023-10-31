@@ -14,9 +14,9 @@ type LazyTranslations = Promise<EagerTranslations>;
 export type State<T> = (locale: T) => Promise<void> | undefined;
 
 export interface Props<T> {
-  onLoad: (locale: keyof T, translations: Record<string, string>) => void;
-  onLoadError: ((locale: keyof T, err: unknown) => void) | undefined;
-  translationsRecord: T;
+  readonly onLoad: (locale: keyof T, translations: Record<string, string>) => void;
+  readonly onLoadError?: ((locale: keyof T, err: unknown) => void) | undefined;
+  readonly translationsRecord: T;
 }
 
 export default function useLoadTranslations<

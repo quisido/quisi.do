@@ -114,6 +114,7 @@
       "**/.pnp.*": true,
       "**/*.cpuprofile": true,
       "**/*.tsbuildinfo": true,
+      "**/*-*.*.*.tgz": true,
       "**/lighthouse.report.*": true,
       "**/yarn.lock": true,
       "packages/*/*": true
@@ -143,6 +144,7 @@
       "**/.pnp.*": true,
       "**/*.cpuprofile": true,
       "**/*.tsbuildinfo": true,
+      "**/*-*.*.*.tgz": true,
       "**/lighthouse.report.*": true,
       "**/yarn.lock": true
     },
@@ -167,6 +169,7 @@
       "**/.pnp.*": true,
       "**/*.cpuprofile": true,
       "**/*.tsbuildinfo": true,
+      "**/*-*.*.*.tgz": true,
       "**/lighthouse.report.*": true,
       "**/yarn.lock": true
     }

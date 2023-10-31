@@ -1,4 +1,5 @@
-import isPrimitive from './is-primitive';
+/// <reference types="jest" />
+import isPrimitive from './is-primitive.js';
 
 describe('isPrimitive', (): void => {
   it('should return true for primitives values', (): void => {

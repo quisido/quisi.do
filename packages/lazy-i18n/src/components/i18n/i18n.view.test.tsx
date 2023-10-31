@@ -1,7 +1,8 @@
+/// <reference types="jest" />
 import { render } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { act } from 'react-dom/test-utils';
-import I18n, { I18nProvider } from '../../index';
+import I18n, { I18nProvider } from '../../index.js';
 
 function TestLoadingComponent(): ReactElement {
   return <>test loading component</>;

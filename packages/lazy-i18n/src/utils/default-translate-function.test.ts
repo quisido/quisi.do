@@ -1,4 +1,4 @@
-import defaultTranslateFunction from './default-translate-function';
+import defaultTranslateFunction from './default-translate-function.js';
 
 const TEST_STRING = 'test string';
 

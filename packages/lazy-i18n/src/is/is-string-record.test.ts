@@ -1,4 +1,4 @@
-import isStringRecord from './is-string-record';
+import isStringRecord from './is-string-record.js';
 
 describe('isStringRecord', (): void => {
   it('should return false for non-records', (): void => {

@@ -1,9 +1,10 @@
+/// <reference types="jest" />
 import { renderHook } from '@testing-library/react';
-import expectToEventuallyThrow from '../../../test-utils/expect-to-eventually-throw';
-import type { DefaultExport } from '../../../types/default-export';
-import type { Translations } from '../../../types/translations';
-import type { Props, State } from './use-load-translations';
-import useLoadTranslations from './use-load-translations';
+import expectToEventuallyThrow from '../../../test-utils/expect-to-eventually-throw.js';
+import type { DefaultExport } from '../../../types/default-export.js';
+import type { Translations } from '../../../types/translations.js';
+import type { Props, State } from './use-load-translations.js';
+import useLoadTranslations from './use-load-translations.js';
 
 type Locale = 'es_ES';
 type P = Props<T>;
@@ -19,7 +20,7 @@ describe('useLoadTranslations', (): void => {
     const MOCK_ES_ES = jest.fn().mockReturnValue({
       Spanish: 'Espanol',
     });
-    const { result } = renderHook<P, S>(useLoadTranslations, {
+    const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad(): void {},
         translationsRecord: {
@@ -34,7 +35,7 @@ describe('useLoadTranslations', (): void => {
   });
 
   it('should throw an error if the translations do not exist', (): void => {
-    const { result } = renderHook<P, S>(useLoadTranslations, {
+    const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad(): void {},
         translationsRecord: {
@@ -49,7 +50,7 @@ describe('useLoadTranslations', (): void => {
 
   it('should load string record translations', (): void => {
     const MOCK_LOAD_HANDLER = jest.fn();
-    const { result } = renderHook<P, S>(useLoadTranslations, {
+    const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
         translationsRecord: {
@@ -68,7 +69,7 @@ describe('useLoadTranslations', (): void => {
 
   it('should load default export string record translations', (): void => {
     const MOCK_LOAD_HANDLER = jest.fn();
-    const { result } = renderHook<P, S>(useLoadTranslations, {
+    const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
         translationsRecord: {
@@ -89,7 +90,7 @@ describe('useLoadTranslations', (): void => {
 
   it('should load imported string record translations', (): void => {
     const MOCK_LOAD_HANDLER = jest.fn();
-    const { result } = renderHook<P, S>(useLoadTranslations, {
+    const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
         translationsRecord: {
@@ -108,7 +109,7 @@ describe('useLoadTranslations', (): void => {
 
   it('should load default imported string record translations', (): void => {
     const MOCK_LOAD_HANDLER = jest.fn();
-    const { result } = renderHook<P, S>(useLoadTranslations, {
+    const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
         translationsRecord: {
@@ -129,7 +130,7 @@ describe('useLoadTranslations', (): void => {
 
   it('should load dynamically imported string record translations', async (): Promise<void> => {
     const MOCK_LOAD_HANDLER = jest.fn();
-    const { result } = renderHook<P, S>(useLoadTranslations, {
+    const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
         translationsRecord: {
@@ -149,7 +150,7 @@ describe('useLoadTranslations', (): void => {
 
   it('should load dynamically default imported string record translations', async (): Promise<void> => {
     const MOCK_LOAD_HANDLER = jest.fn();
-    const { result } = renderHook<P, S>(useLoadTranslations, {
+    const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
         translationsRecord: {
@@ -170,7 +171,7 @@ describe('useLoadTranslations', (): void => {
   });
 
   it('should throw load errors', async (): Promise<void> => {
-    const { result } = renderHook<P, S>(useLoadTranslations, {
+    const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad(): void {},
         translationsRecord: {
@@ -186,7 +187,7 @@ describe('useLoadTranslations', (): void => {
 
   it('should emit load errors', async (): Promise<void> => {
     const MOCK_LOAD_ERROR_HANDLER = jest.fn();
-    const { result } = renderHook<P, S>(useLoadTranslations, {
+    const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad(): void {},
         onLoadError: MOCK_LOAD_ERROR_HANDLER,

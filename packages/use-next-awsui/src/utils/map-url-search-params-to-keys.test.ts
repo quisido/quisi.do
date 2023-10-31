@@ -1,4 +1,5 @@
-import mapUrlSearchParamsToKeys from './map-url-search-params-to-keys';
+/// <reference types="jest" />
+import mapUrlSearchParamsToKeys from './map-url-search-params-to-keys.js';
 
 describe('mapUrlSearchParamsToKeys', (): void => {
   it('should return an empty array when there are no search params', (): void => {

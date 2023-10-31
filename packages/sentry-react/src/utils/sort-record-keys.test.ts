@@ -1,4 +1,5 @@
-import sortRecordKeys from './sort-record-keys';
+/// <reference types="jest" />
+import sortRecordKeys from './sort-record-keys.js';
 
 const AFTER = 1;
 const BEFORE = -1;

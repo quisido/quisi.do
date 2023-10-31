@@ -1,5 +1,5 @@
 import type { TabsProps } from '@awsui/components-react/tabs';
-import RunnableTabFinder from './runnable-tab-finder';
+import RunnableTabFinder from './runnable-tab-finder.js';
 
 const TEST_HASH = '#test:hash';
 const TEST_PATHNAME = '/test/pathname';

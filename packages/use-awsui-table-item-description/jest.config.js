@@ -2,7 +2,7 @@ export default {
   cacheDirectory: './jest/cache',
   collectCoverage: true,
   coverageDirectory: './jest/coverage',
-  preset: 'ts-jest',
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   resetMocks: true,
   resetModules: true,
   restoreMocks: true,
@@ -12,6 +12,9 @@ export default {
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
     '!<rootDir>/src/**/*.d.ts',
+    '!<rootDir>/src/**/*.stories.{ts,tsx}',
+    '!<rootDir>/src/**/*.test.{ts,tsx}',
+    '!<rootDir>/src/**/test-utils/*.{ts,tsx}',
   ],
 
   coverageThreshold: {
@@ -23,9 +26,19 @@ export default {
     },
   },
 
-  globals: {
-    'ts-jest': {
-      tsconfig: './tsconfig.jest.json',
-    },
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
+
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        isolatedModules: true,
+        tsconfig: './tsconfig.jest.json',
+        useESM: true,
+        verbatimModuleSyntax: true,
+      },
+    ],
   },
 };

@@ -1,7 +1,8 @@
+/// <reference types="jest" />
 import { render } from '@testing-library/react';
-import Sentry from '../..';
-import CustomErrorBoundaryFallback from '../../test/components/custom-error-boundary-fallback';
-import ThrowError from '../../test/components/throw-error';
+import Sentry from '../../index.js';
+import CustomErrorBoundaryFallback from '../../test/components/custom-error-boundary-fallback/index.js';
+import ThrowError from '../../test/components/throw-error/index.js';
 
 describe('Sentry', (): void => {
   it('should render children', (): void => {

@@ -1,6 +1,6 @@
 /// <reference types="jest" />
 import { setUser } from '@sentry/react';
-import { useSetUser } from '..';
+import { useSetUser } from '../index.js';
 
 describe('useSetUser', (): void => {
   it('should return the Sentry `setUser` method', (): void => {

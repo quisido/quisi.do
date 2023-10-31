@@ -4,6 +4,7 @@ export default {
   cacheDirectory: './jest/cache',
   collectCoverage: true,
   coverageDirectory: './jest/coverage',
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   moduleNameMapper: MODULE_NAME_MAPPER,
   resetMocks: true,
   resetModules: true,
@@ -11,6 +12,7 @@ export default {
   roots: ['<rootDir>/src'],
   setupFiles: ['<rootDir>/src/test/setup.ts'],
   testEnvironment: 'jsdom',
+
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
     '!<rootDir>/src/**/*.d.ts',
@@ -18,6 +20,7 @@ export default {
     '!<rootDir>/src/**/*.test.{ts,tsx}',
     '!<rootDir>/src/**/test-utils/*.{ts,tsx}',
   ],
+
   coverageThreshold: {
     global: {
       branches: 100,
@@ -26,8 +29,17 @@ export default {
       statements: 100,
     },
   },
+
   transform: {
-    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        isolatedModules: true,
+        tsconfig: './tsconfig.jest.json',
+        useESM: true,
+        verbatimModuleSyntax: true,
+      },
+    ],
   },
 };
 
