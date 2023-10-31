@@ -1,16 +1,33 @@
 /// <reference types="jest" />
+import assert from 'node:assert';
 import { readFileSync, readdirSync } from 'node:fs';
 import { scripts } from './package.json';
 
-const isPublic = (workspace: string): boolean => {
-  const packageJsonPath = `./packages/${workspace}/package.json`;
-  const packageJson: string = readFileSync(packageJsonPath).toString();
-  const { private: isPrivate } = JSON.parse(packageJson);
-  return isPrivate !== true;
+const isPublic = (value: object): boolean => {
+  if (!('private' in value)) {
+    return true;
+  }
+  return value.private !== true;
 };
 
-const workspaces: readonly string[] = readdirSync('packages').sort();
-const publicWorkspaces: readonly string[] = workspaces.filter(isPublic);
+const mapToName = (value: object): string => {
+  assert('name' in value);
+  const { name } = value;
+  assert(typeof name === 'string');
+  return name;
+};
+
+const mapWorkspaceToPackage = (workspace: string): object => {
+  const path = `./packages/${workspace}/package.json`;
+  const contents: string = readFileSync(path).toString();
+  return JSON.parse(contents);
+};
+
+const publicPackageNames: readonly string[] = readdirSync('packages')
+  .map(mapWorkspaceToPackage)
+  .filter(isPublic)
+  .map(mapToName)
+  .sort();
 
 describe('package.json', (): void => {
   describe('scripts', (): void => {
@@ -23,7 +40,7 @@ describe('package.json', (): void => {
        *   copy as the source of truth.
        */
       it('should not upgrade workspaces', (): void => {
-        expect(up).toMatch(`"!(${publicWorkspaces.join('|')})"`);
+        expect(up).toMatch(`"!(${publicPackageNames.join('|')})"`);
       });
     });
   });

@@ -1,0 +1,6 @@
+/**/*.md
+/dist/
+/jest/
+/node_modules/
+/*.cpuprofile
+/*.tsbuildinfo

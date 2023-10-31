@@ -56,6 +56,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@arethetypeswrong/cli@npm:^0.13.0":
+  version: 0.13.0
+  resolution: "@arethetypeswrong/cli@npm:0.13.0"
+  dependencies:
+    "@arethetypeswrong/core": "npm:0.13.0"
+    chalk: "npm:^4.1.2"
+    cli-table3: "npm:^0.6.3"
+    commander: "npm:^10.0.1"
+    marked: "npm:^9.1.2"
+    marked-terminal: "npm:^6.0.0"
+    semver: "npm:^7.5.4"
+  bin:
+    attw: dist/index.js
+  checksum: d5b01f105285dce61080cc98b090cbee7c07afe4c5b0e5844c58cf7552ef46225dd05b06ac1d9104c5354b987f29ba4105da6d58c5c60ed824e4a71cf9f4e23d
+  languageName: node
+  linkType: hard
+
 "@arethetypeswrong/core@npm:0.12.2":
   version: 0.12.2
   resolution: "@arethetypeswrong/core@npm:0.12.2"
@@ -67,6 +84,19 @@ __metadata:
     typescript: "npm:^5.2.2"
     validate-npm-package-name: "npm:^5.0.0"
   checksum: 32c20cc9eda855114afa0ded66f9747cb4937d6d3fb8060219b72584ce19ea4e670124de3a614ffdf9f51981188eb06b9dbf9ba7eaeed584973f3c969da76601
+  languageName: node
+  linkType: hard
+
+"@arethetypeswrong/core@npm:0.13.0":
+  version: 0.13.0
+  resolution: "@arethetypeswrong/core@npm:0.13.0"
+  dependencies:
+    "@andrewbranch/untar.js": "npm:^1.0.3"
+    fflate: "npm:^0.7.4"
+    semver: "npm:^7.5.4"
+    typescript: "npm:^5.2.2"
+    validate-npm-package-name: "npm:^5.0.0"
+  checksum: aac3e65cd082aacbb0eeb617473170ae4080718ea5852bf587c06b1e0807744c142ec0d89f9ffba004229a5daaa51162db5d4585dd2b5beb2e95727ec4b4ae5a
   languageName: node
   linkType: hard
 
@@ -3055,38 +3085,47 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/test@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@monorepo-template/test@npm:2.2.0"
+"@monorepo-template/test@workspace:^, @monorepo-template/test@workspace:packages/test":
+  version: 0.0.0-use.local
+  resolution: "@monorepo-template/test@workspace:packages/test"
   dependencies:
-    "@monorepo-template/tree-logger": "npm:^1.0.0"
+    "@arethetypeswrong/cli": "npm:^0.13.0"
+    "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
+    "@monorepo-template/eslint-config": "npm:^1.0.7"
+    "@monorepo-template/tree-logger": "workspace:^"
     "@types/js-yaml": "npm:^4.0.5"
+    "@types/node": "npm:^18.11.10"
+    concurrently: "npm:^8.2.2"
+    eslint: "npm:^8.29.0"
+    eslint-plugin-jsx-a11y: "npm:^6.7.1"
+    eslint-plugin-react: "npm:^7.33.2"
+    eslint-plugin-react-hooks: "npm:^4.6.0"
     js-yaml: "npm:^4.1.0"
+    tslib: "npm:^2.6.2"
+    typescript: "npm:^5.2.2"
   bin:
-    monorepo-template-test: ./dist/esm/bin/test.js
-  checksum: 879f62e305ea7a95e3e36faae1b14ebd4ee4ffd550d3b6076c358def88bc0712a65c6dc2471423965f738fe95ef89029f14162646aae25a65ee8afcbf386f976
-  languageName: node
-  linkType: hard
+    monorepo-template-test: ./dist/bin/test.js
+  languageName: unknown
+  linkType: soft
 
-"@monorepo-template/tree-logger@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@monorepo-template/tree-logger@npm:1.0.0"
+"@monorepo-template/tree-logger@workspace:^, @monorepo-template/tree-logger@workspace:packages/tree-logger":
+  version: 0.0.0-use.local
+  resolution: "@monorepo-template/tree-logger@workspace:packages/tree-logger"
   dependencies:
-    ansi-styles: "npm:^6.1.0"
-  checksum: 87f474e8bb02acbebc61899e8e0e664dce515e395a57334bbfa8b088d26217965f6a45e0bf5702565d0d36e734a54433d651d86d8605a35d185e2823086de9b6
-  languageName: node
-  linkType: hard
-
-"@monorepo-template/up@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@monorepo-template/up@npm:1.0.1"
-  dependencies:
-    yarn-up-skip-workspace: "npm:^1.0.1"
-  bin:
-    monorepo-template-up: ./dist/esm/bin/up.js
-  checksum: f4c2ded3b5b7783a1ce9413235903ae2454f9c39a8e70c5eb191f4a0275498e71c19918e42672a430ed2d984d5c2b1bf361f78ad98b3dfea1491854eab09d1e0
-  languageName: node
-  linkType: hard
+    "@arethetypeswrong/cli": "npm:^0.13.0"
+    "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
+    "@monorepo-template/eslint-config": "npm:^1.0.7"
+    "@types/node": "npm:^18.11.10"
+    ansi-styles: "npm:^6.2.1"
+    concurrently: "npm:^8.2.2"
+    eslint: "npm:^8.29.0"
+    eslint-plugin-jsx-a11y: "npm:^6.7.1"
+    eslint-plugin-react: "npm:^7.33.2"
+    eslint-plugin-react-hooks: "npm:^4.6.0"
+    tslib: "npm:^2.6.2"
+    typescript: "npm:^5.2.2"
+  languageName: unknown
+  linkType: soft
 
 "@mui/base@npm:5.0.0-beta.21":
   version: 5.0.0-beta.21
@@ -3671,14 +3710,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@quisi/do@workspace:."
   dependencies:
-    "@arethetypeswrong/cli": "npm:^0.12.2"
     "@babel/core": "npm:^7.23.2"
     "@babel/preset-env": "npm:^7.23.2"
     "@babel/preset-typescript": "npm:^7.23.2"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
-    "@monorepo-template/test": "npm:^2.2.0"
-    "@monorepo-template/up": "npm:^1.0.1"
+    "@monorepo-template/test": "workspace:^"
     "@types/babel__core": "npm:^7.20.3"
     "@types/babel__preset-env": "npm:^7.9.4"
     "@types/jest": "npm:^29.5.6"
@@ -4006,6 +4043,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sindresorhus/is@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "@sindresorhus/is@npm:3.1.2"
+  checksum: 33780588daef4a66fd11388cb98a9bd3368029d297df16937daa5cd126bfd11d1c08c9da7592f7993bc3241da2c741582d1e15740eb8b9edf60f9be3d2993d72
+  languageName: node
+  linkType: hard
+
 "@sindresorhus/is@npm:^4.0.0":
   version: 4.6.0
   resolution: "@sindresorhus/is@npm:4.6.0"
@@ -4297,6 +4341,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/identity-obj-proxy@npm:^3":
+  version: 3.0.1
+  resolution: "@types/identity-obj-proxy@npm:3.0.1"
+  checksum: 662b8d72a36ba45ff4427ee724b70841593206528428fe5b2b5c75d991f330b53a8131666b1d5a12f3a1c43023cc1284360eaca8a97ef45132a23826ce9f083d
+  languageName: node
+  linkType: hard
+
 "@types/istanbul-lib-coverage@npm:*, @types/istanbul-lib-coverage@npm:^2.0.0, @types/istanbul-lib-coverage@npm:^2.0.1":
   version: 2.0.5
   resolution: "@types/istanbul-lib-coverage@npm:2.0.5"
@@ -4398,7 +4449,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.17.5":
+"@types/node@npm:^18.11.10, @types/node@npm:^18.17.5":
   version: 18.18.7
   resolution: "@types/node@npm:18.18.7"
   dependencies:
@@ -5602,7 +5653,9 @@ __metadata:
     "@arethetypeswrong/cli": "npm:^0.12.2"
     "@aws-sdk/types": "npm:^3.433.0"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
+    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@testing-library/react": "npm:^14.0.0"
+    "@types/identity-obj-proxy": "npm:^3"
     "@types/jest": "npm:^29.5.6"
     "@types/node": "npm:^20.8.9"
     "@types/react": "npm:^18.2.33"
@@ -5612,6 +5665,7 @@ __metadata:
     eslint-plugin-jsx-a11y: "npm:^6.7.1"
     eslint-plugin-react: "npm:^7.33.2"
     eslint-plugin-react-hooks: "npm:^4.6.0"
+    identity-obj-proxy: "npm:^3.0.0"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
     react: "npm:^18.2.0"
@@ -6171,7 +6225,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:5.3.0, chalk@npm:^5.2.0":
+"chalk@npm:5.3.0, chalk@npm:^5.2.0, chalk@npm:^5.3.0":
   version: 5.3.0
   resolution: "chalk@npm:5.3.0"
   checksum: 6373caaab21bd64c405bfc4bd9672b145647fc9482657b5ea1d549b3b2765054e9d3d928870cdf764fb4aad67555f5061538ff247b8310f110c5c888d92397ea
@@ -7467,6 +7521,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"emojilib@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "emojilib@npm:2.4.0"
+  checksum: bef767eca49acaa881388d91bee6936ea57ae367d603d5227ff0a9da3e2d1e774a61c447e5f2f4901797d023c4b5239bc208285b6172a880d3655024a0f44980
+  languageName: node
+  linkType: hard
+
 "encoding@npm:^0.1.13":
   version: 0.1.13
   resolution: "encoding@npm:0.1.13"
@@ -8014,7 +8075,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.52.0, eslint@npm:^8.9.0":
+"eslint@npm:^8.29.0, eslint@npm:^8.52.0, eslint@npm:^8.9.0":
   version: 8.52.0
   resolution: "eslint@npm:8.52.0"
   dependencies:
@@ -8723,6 +8784,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.33.2"
     eslint-plugin-react-hooks: "npm:^4.6.0"
     jest: "npm:^29.7.0"
+    jest-environment-jsdom: "npm:^29.7.0"
     prettier: "npm:^3.0.3"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -11184,12 +11246,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"marked-terminal@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "marked-terminal@npm:6.0.0"
+  dependencies:
+    ansi-escapes: "npm:^6.2.0"
+    cardinal: "npm:^2.1.1"
+    chalk: "npm:^5.3.0"
+    cli-table3: "npm:^0.6.3"
+    node-emoji: "npm:^2.1.0"
+    supports-hyperlinks: "npm:^3.0.0"
+  peerDependencies:
+    marked: ">=1 <10"
+  checksum: 9737a55c93876f8b8f85f28b07f1b944a3217c68fd1a6c35a24365f70913df9d1c45fa46495a718aa4c31b7df84e599fb79551d4c1d0ee04e2fb548b9f92f491
+  languageName: node
+  linkType: hard
+
 "marked@npm:^5.1.0":
   version: 5.1.2
   resolution: "marked@npm:5.1.2"
   bin:
     marked: bin/marked.js
   checksum: e51d15f79c9b2a93e8bd801cfc0f1924027f0bf9ae12c237300d34363edf9dacdfa27de0659074ade78f2ba747cdb1c8246aef144f9ccf91600ee71c87e4d169
+  languageName: node
+  linkType: hard
+
+"marked@npm:^9.1.2":
+  version: 9.1.4
+  resolution: "marked@npm:9.1.4"
+  bin:
+    marked: bin/marked.js
+  checksum: 365d60f32818a01a7d7ff3baf3a860c28d65738e1dd3bb7645a339f6fda399cbfe13f06f0d156559f12b928998296a1b634834b729284d19b435bf0f2b26666b
   languageName: node
   linkType: hard
 
@@ -11619,6 +11706,18 @@ __metadata:
   dependencies:
     lodash: "npm:^4.17.21"
   checksum: 1d7ae9bcb0f23d7cdfcac5c3a90a6fd6ec584e6f7c70ff073f6122bfbed6c06284da7334092500d24e14162f5c4016e5dcd3355753cbd5b7e60de560a973248d
+  languageName: node
+  linkType: hard
+
+"node-emoji@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "node-emoji@npm:2.1.0"
+  dependencies:
+    "@sindresorhus/is": "npm:^3.1.2"
+    char-regex: "npm:^1.0.2"
+    emojilib: "npm:^2.4.0"
+    skin-tone: "npm:^2.0.0"
+  checksum: 255630d2e948df91b27d82deec0f4a64f215d97d4f43d2c252804dee1b8b1bf6b4638a51745e03b68251a460c9cf43edaa6d758df83a1902113d224ee4a513e8
   languageName: node
   linkType: hard
 
@@ -12696,8 +12795,8 @@ __metadata:
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.2.2"
   peerDependencies:
-    "@datadog/browser-rum": ^4.0.0
-    react: ^17.0.0 || ^18.0.0
+    "@datadog/browser-rum": ^5.0.0
+    react: ">=17.0.0"
   languageName: unknown
   linkType: soft
 
@@ -13490,6 +13589,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.33.2"
     eslint-plugin-react-hooks: "npm:^4.6.0"
     jest: "npm:^29.7.0"
+    jest-environment-jsdom: "npm:^29.7.0"
     prettier: "npm:^3.0.3"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -13663,6 +13763,15 @@ __metadata:
   version: 1.0.5
   resolution: "sisteransi@npm:1.0.5"
   checksum: aba6438f46d2bfcef94cf112c835ab395172c75f67453fe05c340c770d3c402363018ae1ab4172a1026a90c47eaccf3af7b6ff6fa749a680c2929bd7fa2b37a4
+  languageName: node
+  linkType: hard
+
+"skin-tone@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "skin-tone@npm:2.0.0"
+  dependencies:
+    unicode-emoji-modifier-base: "npm:^1.0.0"
+  checksum: 19de157586b8019cacc55eb25d9d640f00fc02415761f3e41a4527142970fd4e7f6af0333bc90e879858766c20a976107bb386ffd4c812289c01d51f2c8d182c
   languageName: node
   linkType: hard
 
@@ -14111,6 +14220,16 @@ __metadata:
     has-flag: "npm:^4.0.0"
     supports-color: "npm:^7.0.0"
   checksum: 3e7df6e9eaa177d7bfbbe065c91325e9b482f48de0f7c9133603e3ffa8af31cbceac104a0941cd0266a57f8e691de6eb58b79fec237852dc84ed7ad152b116b0
+  languageName: node
+  linkType: hard
+
+"supports-hyperlinks@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "supports-hyperlinks@npm:3.0.0"
+  dependencies:
+    has-flag: "npm:^4.0.0"
+    supports-color: "npm:^7.0.0"
+  checksum: 911075a412d8bcfbbca413e8963d56ed0975e35ff98d599ef85301aed4221428653145263828b6c58cb4cb6ff24596be83ead3cca221a88a70428af93d5e2a73
   languageName: node
   linkType: hard
 
@@ -14685,6 +14804,13 @@ __metadata:
   version: 2.0.0
   resolution: "unicode-canonical-property-names-ecmascript@npm:2.0.0"
   checksum: 39be078afd014c14dcd957a7a46a60061bc37c4508ba146517f85f60361acf4c7539552645ece25de840e17e293baa5556268d091ca6762747fdd0c705001a45
+  languageName: node
+  linkType: hard
+
+"unicode-emoji-modifier-base@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "unicode-emoji-modifier-base@npm:1.0.0"
+  checksum: 6e1521d35fa69493207eb8b41f8edb95985d8b3faf07c01d820a1830b5e8403e20002563e2f84683e8e962a49beccae789f0879356bf92a4ec7a4dd8e2d16fdb
   languageName: node
   linkType: hard
 
@@ -15600,15 +15726,6 @@ __metadata:
     y18n: "npm:^4.0.0"
     yargs-parser: "npm:^18.1.2"
   checksum: bbcc82222996c0982905b668644ca363eebe6ffd6a572fbb52f0c0e8146661d8ce5af2a7df546968779bb03d1e4186f3ad3d55dfaadd1c4f0d5187c0e3a5ba16
-  languageName: node
-  linkType: hard
-
-"yarn-up-skip-workspace@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "yarn-up-skip-workspace@npm:1.0.1"
-  bin:
-    yarn-up-skip-workspace: ./dist/esm/bin/yarn-up-skip-workspace.js
-  checksum: 0b6e7895a82f9ad6b1da0c02950c50dd0b051266ee6c456527a32b6cc70698d2b2315bb5540f2e17c3dde4527471345553ef4563600d99e0bf21113e3464ea36
   languageName: node
   linkType: hard
 

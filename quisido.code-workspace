@@ -23,6 +23,16 @@
 
     // Integrations
     {
+      "name": "@monorepo-template/test",
+      "path": "packages/test"
+    },
+
+    {
+      "name": "@monorepo-template/tree-logger",
+      "path": "packages/tree-logger"
+    },
+
+    {
       "name": "aws-rum-react",
       "path": "packages/aws-rum-react"
     },

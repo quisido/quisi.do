@@ -1,8 +1,35 @@
 import MODULE_NAME_MAPPER from './src/test/constants/module-name-mapper.js';
 
 export default {
+  cacheDirectory: './jest/cache',
+  collectCoverage: true,
+  coverageDirectory: './jest/coverage',
   moduleNameMapper: MODULE_NAME_MAPPER,
-  preset: '@monorepo-template/jest-module-preset',
+  resetMocks: true,
+  resetModules: true,
+  restoreMocks: true,
+  roots: ['<rootDir>/src'],
   setupFiles: ['<rootDir>/src/test/setup.ts'],
   testEnvironment: 'jsdom',
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.{ts,tsx}',
+    '!<rootDir>/src/**/*.d.ts',
+    '!<rootDir>/src/**/*.stories.{ts,tsx}',
+    '!<rootDir>/src/**/*.test.{ts,tsx}',
+    '!<rootDir>/src/**/test-utils/*.{ts,tsx}',
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100,
+    },
+  },
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest',
+  },
 };
+
+
+

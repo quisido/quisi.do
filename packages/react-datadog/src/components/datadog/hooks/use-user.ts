@@ -24,7 +24,7 @@ export default function useUser(user: Readonly<User> = DEFAULT_USER): void {
 
     rum.setUser(userMemo);
     return (): void => {
-      rum.removeUser();
+      rum.clearUser();
     };
   }, [rum, userMemo]);
 }
