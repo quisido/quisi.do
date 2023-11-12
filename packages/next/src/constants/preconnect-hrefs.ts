@@ -27,6 +27,21 @@ const PRECONNECT_HREFS: readonly string[] = [
   // Honeycomb
   'https://api.honeycomb.io',
 
+  // Microsoft Clarity
+  'https://clarity.ms',
+
+  // Mixpanel
+  // 'https://mixpanel.com',
+
+  // New Relic
+  // 'https://rpm.newrelic.com',
+
+  // OpenCensus
+  // 'https://stats.opencensus.io',
+
+  // Plausible
+  // 'https://plausible.io',
+
   // Report URI
   'https://cscdn.report-uri.com',
 

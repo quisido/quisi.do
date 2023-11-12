@@ -20,6 +20,7 @@ import ReportUri from '../components/report-uri';
 import Theme from '../components/theme';
 import PRECONNECT_HREFS from '../constants/preconnect-hrefs';
 import withWrappers from '../hocs/with-wrappers';
+import Clarity from '../modules/react-clarity';
 
 export { default as metadata } from '../constants/root-metadata';
 export { default as viewport } from '../constants/root-viewport';
@@ -43,6 +44,7 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
       <head>
         <ReportUri />
         <Preconnect hrefs={PRECONNECT_HREFS} />
+        <Clarity tag="jn26o3oqm1" />
         <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
         <meta charSet="utf-8" />
         <script
