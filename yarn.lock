@@ -1896,46 +1896,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@charlesstover/cloudflare-analytics-worker@workspace:packages/cloudflare-analytics-worker":
-  version: 0.0.0-use.local
-  resolution: "@charlesstover/cloudflare-analytics-worker@workspace:packages/cloudflare-analytics-worker"
-  dependencies:
-    "@arethetypeswrong/cli": "npm:^0.12.2"
-    "@cloudflare/workers-types": "npm:^4.20231025.0"
-    "@types/jest": "npm:^29.5.6"
-    "@types/node": "npm:^20.8.9"
-    jest: "npm:^29.7.0"
-    ts-jest: "npm:^29.1.1"
-    typescript: "npm:^5.2.2"
-    wrangler: "npm:^3.15.0"
-  languageName: unknown
-  linkType: soft
-
-"@cloudflare-apps/create-cloudflare-app@workspace:packages/create-cloudflare-app-master":
-  version: 0.0.0-use.local
-  resolution: "@cloudflare-apps/create-cloudflare-app@workspace:packages/create-cloudflare-app-master"
-  dependencies:
-    babel-core: "npm:^6.26.3"
-    babel-eslint: "npm:^10.0.1"
-    babel-loader: "npm:^7.0.0"
-    babel-preset-env: "npm:^1.7.0"
-    css-loader: "npm:^1.0.1"
-    eslint: "npm:^5.3.0"
-    eslint-config-airbnb-base: "npm:13.1.0"
-    eslint-config-prettier: "npm:2.9.0"
-    eslint-plugin-import: "npm:^2.14.0"
-    eslint-plugin-prettier: "npm:2.6.1"
-    eslint-watch: "npm:^4.0.2"
-    extract-loader: "npm:^3.0.0"
-    file-loader: "npm:^2.0.0"
-    prettier: "npm:^1.14.3"
-    style-loader: "npm:^0.23.1"
-    webpack: "npm:^4.24.0"
-    webpack-cli: "npm:^3.1.2"
-    yarn-run-all: "npm:^3.1.1"
-  languageName: unknown
-  linkType: soft
-
 "@cloudflare/kv-asset-handler@npm:^0.2.0":
   version: 0.2.0
   resolution: "@cloudflare/kv-asset-handler@npm:0.2.0"
@@ -3818,6 +3778,46 @@ __metadata:
     jest: "npm:^29.7.0"
     prettier: "npm:^3.0.3"
     typescript: "npm:^5.2.2"
+  languageName: unknown
+  linkType: soft
+
+"@quisido/cloudflare-analytics-worker@workspace:packages/cloudflare-analytics-worker":
+  version: 0.0.0-use.local
+  resolution: "@quisido/cloudflare-analytics-worker@workspace:packages/cloudflare-analytics-worker"
+  dependencies:
+    "@arethetypeswrong/cli": "npm:^0.12.2"
+    "@cloudflare/workers-types": "npm:^4.20231025.0"
+    "@types/jest": "npm:^29.5.6"
+    "@types/node": "npm:^20.8.9"
+    jest: "npm:^29.7.0"
+    ts-jest: "npm:^29.1.1"
+    typescript: "npm:^5.2.2"
+    wrangler: "npm:^3.15.0"
+  languageName: unknown
+  linkType: soft
+
+"@quisido/create-cloudflare-app@workspace:packages/create-cloudflare-app":
+  version: 0.0.0-use.local
+  resolution: "@quisido/create-cloudflare-app@workspace:packages/create-cloudflare-app"
+  dependencies:
+    babel-core: "npm:^6.26.3"
+    babel-eslint: "npm:^10.0.1"
+    babel-loader: "npm:^7.0.0"
+    babel-preset-env: "npm:^1.7.0"
+    css-loader: "npm:^1.0.1"
+    eslint: "npm:^5.3.0"
+    eslint-config-airbnb-base: "npm:13.1.0"
+    eslint-config-prettier: "npm:2.9.0"
+    eslint-plugin-import: "npm:^2.14.0"
+    eslint-plugin-prettier: "npm:2.6.1"
+    eslint-watch: "npm:^4.0.2"
+    extract-loader: "npm:^3.0.0"
+    file-loader: "npm:^2.0.0"
+    prettier: "npm:^1.14.3"
+    style-loader: "npm:^0.23.1"
+    webpack: "npm:^4.24.0"
+    webpack-cli: "npm:^3.1.2"
+    yarn-run-all: "npm:^3.1.1"
   languageName: unknown
   linkType: soft
 

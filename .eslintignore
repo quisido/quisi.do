@@ -15,6 +15,7 @@
 /.attach_pid*
 /.eslintcache
 /.pnp.*
+/assets/
 /LICENSE
 /yarn.lock
 /yarn-error.log

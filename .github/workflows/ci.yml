@@ -136,7 +136,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Enable Plug-n-Play
-        run: yarn cypress:pnp
+        run: yarn run cypress:pnp
         working-directory: packages/react-scripts
       - name: End-to-end test
         uses: cypress-io/github-action@v4
@@ -153,7 +153,7 @@ jobs:
           config-file: cypress.config.cjs
           install: false
           record: false
-          start: yarn run cypress:start
+          start: yarn run start
           wait-on: 'http://localhost:3000/'
           wait-on-timeout: 120
           working-directory: packages/react-scripts/

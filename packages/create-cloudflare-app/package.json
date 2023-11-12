@@ -1,7 +1,8 @@
 {
-  "name": "@cloudflare-apps/create-cloudflare-app",
+  "name": "@quisido/create-cloudflare-app",
   "version": "1.0.0",
   "description": "Cloudflare Apps boilerplate featuring DNS powered by Webpack and Babel",
+  "private": true,
   "scripts": {
     "start": "npm-run-all dev:setup dev:webpack",
     "dev:webpack": "webpack --watch --colors",
