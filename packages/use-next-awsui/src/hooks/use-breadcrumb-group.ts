@@ -23,6 +23,7 @@ export default function useBreadcrumbGroup<
   // Contexts
   const router = useRouter();
 
+  // Effects
   useEffect((): void => {
     for (const path of paths) {
       router.prefetch(path);

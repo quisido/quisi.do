@@ -13,15 +13,17 @@ const TEST_LABEL = 'Test label';
 
 describe('useTabs', (): void => {
   it('should scroll into view', (): void => {
+    const TABS: readonly TabsProps.Tab[] = [
+      {
+        href: TEST_HREF,
+        id: TEST_ID,
+        label: TEST_LABEL,
+      },
+    ];
+
     const { navigate, rerender, result } = renderHook(useTabs, {
       initialProps: {
-        tabs: [
-          {
-            href: TEST_HREF,
-            id: TEST_ID,
-            label: TEST_LABEL,
-          },
-        ],
+        tabs: TABS,
       },
     });
 

@@ -8,18 +8,31 @@ import renderHook from '../test/utils/render-hook.js';
 const TEST_HREF = '/test/pathname?test=search#test:hash';
 
 describe('useBreadcrumbs', (): void => {
+  it('should prefetch paths', (): void => {
+    const { expectToHavePrefetched } = renderHook(useBreadcrumbGroup, {
+      initialProps: ['/one', '/two'],
+    });
+
+    expectToHavePrefetched('/one');
+    expectToHavePrefetched('/two');
+  });
+
   describe('handleFollow', (): void => {
     it('should prevent default behavior', (): void => {
+      const preventDefault = jest.fn();
       const testFollowEvent = mapHrefToBreadcrumbGroupClickEvent(TEST_HREF);
+
       const { result } = renderHook<never, BreadcrumbGroupState>(
         useBreadcrumbGroup,
       );
 
+      testFollowEvent.preventDefault = preventDefault;
       act((): void => {
         result.current.handleFollow(testFollowEvent);
       });
 
-      // expect(testFollowEvent.defaultPrevented).toBe(true);
+      expect(preventDefault).toHaveBeenCalledTimes(1);
+      expect(preventDefault).toHaveBeenLastCalledWith();
     });
 
     it('should push to history', (): void => {

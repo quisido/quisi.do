@@ -1,0 +1,27 @@
+diff --git a/index.js b/index.js
+index da7bc12136cbbe0c4b1794a31ab315b903a80a4d..f2dc8991c89fea00128aea438a2293b810fa30b9 100644
+--- a/index.js
++++ b/index.js
+@@ -2,7 +2,7 @@
+ 'use strict';
+ 
+ 
+-var Punycode = require('punycode');
++var Punycode = require('punycode/');
+ 
+ 
+ var internals = {};
+diff --git a/package.json b/package.json
+index baddd50bfb55a9968ecf31c281d449c91c448baf..cbb6159f40dc5f30ae7505ff1a6ca210aa13e1fe 100644
+--- a/package.json
++++ b/package.json
+@@ -24,6 +24,9 @@
+   ],
+   "author": "Lupo Montero <lupomontero@gmail.com> (https://lupomontero.com/)",
+   "license": "MIT",
++  "dependencies": {
++    "punycode": "^2.3.1"
++  },
+   "devDependencies": {
+     "browserify": "^17.0.0",
+     "browserslist-browserstack": "^3.1.1",

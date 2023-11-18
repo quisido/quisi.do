@@ -25,11 +25,9 @@ export interface State {
 const DEFAULT_PROPS: Props = Object.freeze({});
 const DEFAULT_TABS: TabsProps['tabs'] = Object.freeze([]);
 
-export default function useReactRouterTabs(
-  props: Props = DEFAULT_PROPS,
+export default function useNextTabs(
+  { defaultActiveTabId, tabs = DEFAULT_TABS }: Props = DEFAULT_PROPS,
 ): State {
-  const { defaultActiveTabId, tabs = DEFAULT_TABS } = props;
-
   // Contexts
   const hash: string = useHash();
   const pathname: string = usePathname();
@@ -54,6 +52,7 @@ export default function useReactRouterTabs(
     if (typeof currentTab === 'undefined' || ref.current === null) {
       return;
     }
+
     ref.current.scrollIntoView();
   }, [currentTab]);
 
@@ -70,6 +69,7 @@ export default function useReactRouterTabs(
         if (typeof e.detail.activeTabHref === 'undefined') {
           return;
         }
+
         router.push(e.detail.activeTabHref);
       },
       [router],

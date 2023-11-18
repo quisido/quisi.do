@@ -1,41 +1,19 @@
-import { AppRouterContext, type AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime.js";
-import { type PropsWithChildren } from "react";
+import type { MemoryHistory } from "history";
+import { AppRouterContext, type AppRouterInstance, type PrefetchOptions } from "next/dist/shared/lib/app-router-context.shared-runtime.js";
+import { useMemo, type PropsWithChildren } from "react";
+import noop from "../utils/noop.js";
 
-Object.defineProperty(window, 'location', {
-  configurable: true,
-  enumerable: true,
-  writable: true,
-  value: {
-    ...window.location,
-  },
-});
+interface Props {
+  readonly history: MemoryHistory;
+  readonly prefetch?: ((href: string, options?: PrefetchOptions | undefined) => void) | undefined;
+}
 
-export const BACK = jest.fn(window.history.back);
-export const FORWARD = jest.fn(window.history.forward);
-export const PREFETCH = jest.fn();
+export default function MockAppRouter({ children, history, prefetch = noop }: PropsWithChildren<Props>) {
+  const value: AppRouterInstance = useMemo((): AppRouterInstance => ({
+    ...history,
+    prefetch,
+    refresh: noop,
+  }), [history, prefetch]);
 
-export const PUSH = jest.fn((href: string): void => {
-  window.history.pushState(null, '', href);
-  window.location.href = href;
-});
-
-export const REFRESH = jest.fn((): void => {
-  window.history.go(0);
-});
-
-export const REPLACE = jest.fn((href: string): void => {
-  window.history.replaceState(null, '', href);
-});
-
-const TEST_APP_ROUTER_INSTANCE: AppRouterInstance = {
-  back: BACK,
-  forward: FORWARD,
-  prefetch: PREFETCH,
-  push: PUSH,
-  refresh: REFRESH,
-  replace: REPLACE,
-};
-
-export default function MockAppRouter({ children }: PropsWithChildren) {
-  return <AppRouterContext.Provider value={TEST_APP_ROUTER_INSTANCE}>{children}</AppRouterContext.Provider>;
+  return <AppRouterContext.Provider value={value}>{children}</AppRouterContext.Provider>;
 }

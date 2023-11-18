@@ -107,6 +107,7 @@ describe('useSideNavigation', (): void => {
 
       it('should set activeHref', (): void => {
         const { rerender, result } = renderHook(useSideNavigation);
+
         expect(result.current.activeHref).toBe('/');
 
         act((): void => {
@@ -120,8 +121,10 @@ describe('useSideNavigation', (): void => {
           result.current.handleFollow(testFollowEvent);
         });
 
-        // This re-render should be automatic at runtime, but must be manually
-        //   called within Jest.
+        /**
+         *   This re-render should be automatic at runtime, but must be manually
+         * called within Jest.
+         */
         rerender();
 
         expect(result.current.activeHref).toBe(TEST_HREF);
