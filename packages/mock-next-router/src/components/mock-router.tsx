@@ -2,7 +2,12 @@ import type { MemoryHistory } from 'history';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime.js';
 import { Router } from 'next/router.js';
 import type { ParsedUrlQuery } from 'querystring';
-import { Fragment, type PropsWithChildren, type ReactElement, useMemo } from 'react';
+import {
+  Fragment,
+  type PropsWithChildren,
+  type ReactElement,
+  useMemo,
+} from 'react';
 import createPromise from '../utils/create-promise.js';
 import mapIterableToRecord from '../utils/map-iterable-to-record.js';
 import Null from './null.js';

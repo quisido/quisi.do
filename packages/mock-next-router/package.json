@@ -22,12 +22,12 @@
   },
   "scripts": {
     "attw": "attw",
-    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/mock-next-router.sarif || eslint '**/*'",
-    "eslint:fix": "eslint '**/*' --fix",
+    "eslint": "eslint \"**/*\" --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/mock-next-router.sarif || eslint \"**/*\"",
+    "eslint:fix": "eslint \"**/*\" --fix",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "prepack": "yarn run tsc",
-    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,jest 'yarn run attw' 'yarn run eslint' 'yarn run jest'",
+    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,jest \"yarn run attw\" \"yarn run eslint\" \"yarn run jest\"",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json"
   },
   "dependencies": {

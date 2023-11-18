@@ -12,7 +12,7 @@
      *   Property "sendRenderResult" in type "NextNodeServer" is not assignable to
      *   the same property in base type "Server<Options>".
      */
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
   "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/"],
   "include": ["src"]
