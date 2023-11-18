@@ -12,5 +12,9 @@ export default function mapIterableToRecord<
   K extends number | string | symbol,
   V,
 >(iterable: Iterable<[K, V]>): Record<K, V> {
-  return Array.from(iterable).reduce<Record<K, V>>(reduceIterableToRecord, {});
+  const initialValue: Record<number | string | symbol, never> = {};
+  return Array.from(iterable).reduce<Record<K, V>>(
+    reduceIterableToRecord,
+    initialValue,
+  );
 }
