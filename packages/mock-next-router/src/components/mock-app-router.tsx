@@ -4,7 +4,7 @@ import {
   type AppRouterInstance,
   type PrefetchOptions,
 } from 'next/dist/shared/lib/app-router-context.shared-runtime.js';
-import { type PropsWithChildren, useMemo } from 'react';
+import { type PropsWithChildren, type ReactElement, useMemo } from 'react';
 import noop from '../utils/noop.js';
 
 interface Props {
@@ -18,7 +18,7 @@ export default function MockAppRouter({
   children,
   history,
   prefetch = noop,
-}: PropsWithChildren<Props>) {
+}: PropsWithChildren<Props>): ReactElement {
   const value: AppRouterInstance = useMemo(
     (): AppRouterInstance => ({
       ...history,
