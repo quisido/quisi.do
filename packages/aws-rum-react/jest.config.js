@@ -1,5 +1,6 @@
 import MODULE_NAME_MAPPER from './src/test/constants/module-name-mapper.js';
 
+/** @type {import('jest').Config} */
 export default {
   cacheDirectory: './jest/cache',
   collectCoverage: true,
@@ -31,15 +32,7 @@ export default {
   },
 
   transform: {
-    '^.+\\.tsx?$': [
-      'ts-jest',
-      {
-        isolatedModules: true,
-        tsconfig: './tsconfig.jest.json',
-        useESM: true,
-        verbatimModuleSyntax: true,
-      },
-    ],
+    '^.+\\.tsx?$': '@monorepo-template/jest-transformer',
   },
 };
 

@@ -2,8 +2,8 @@
 import { act } from '@testing-library/react';
 import type { BreadcrumbGroupState } from '../index.js';
 import { useBreadcrumbGroup } from '../index.js';
-import mapHrefToBreadcrumbGroupClickEvent from '../test-utils/map-href-to-breadcrumb-group-click-event.js';
-import renderHook from '../test-utils/render-hook.js';
+import mapHrefToBreadcrumbGroupClickEvent from '../test/utils/map-href-to-breadcrumb-group-click-event.js';
+import renderHook from '../test/utils/render-hook.js';
 
 const TEST_HREF = '/test/pathname?test=search#test:hash';
 

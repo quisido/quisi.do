@@ -3,7 +3,7 @@ import type { LinkProps } from '@awsui/components-react/link';
 import { act } from '@testing-library/react';
 import type { LinkState } from '../index.js';
 import { useLink } from '../index.js';
-import renderHook from '../test-utils/render-hook.js';
+import renderHook from '../test/utils/render-hook.js';
 
 const TEST_HREF = '/test/pathname?test=search#test:hash';
 

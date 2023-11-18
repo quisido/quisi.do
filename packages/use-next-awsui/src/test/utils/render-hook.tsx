@@ -3,8 +3,9 @@ import type {
   RenderHookResult,
 } from '@testing-library/react';
 import { renderHook as testingLibraryRenderHook } from '@testing-library/react';
-import type { MutableRefObject, PropsWithChildren, ReactElement } from 'react';
+import type { ComponentType, MutableRefObject, PropsWithChildren, ReactElement, ReactNode } from 'react';
 import { type NextRouter, withRouter } from 'next/router.js';
+import RouterProvider from '../components/router-provider.js';
 
 interface Options<Props> extends RenderHookOptions<Props> {
   readonly initialHref?: string | undefined;
@@ -28,18 +29,21 @@ export default function renderHook<Props, State>(
   };
 
   let router: NextRouter | undefined;
+  const RouterListener: ComponentType<PropsWithChildren> = withRouter(
+    ({
+      children,
+      router: routerProp,
+    }: Readonly<PropsWithChildren<WrapperProps>>): ReactElement => {
+      router = routerProp;
+      return <>{children}</>;
+    });
+
   const renderHookResult: RenderHookResult<State, Props> =
     testingLibraryRenderHook(useHook, {
       ...options,
-      wrapper: withRouter(
-        ({
-          children,
-          router: routerProp,
-        }: Readonly<PropsWithChildren<WrapperProps>>): ReactElement => {
-          router = routerProp;
-          return <>{children}</>;
-        },
-      ),
+      wrapper({ children }: PropsWithChildren): ReactNode {
+        return <RouterProvider><RouterListener>{children}</RouterListener></RouterProvider>;
+      },
     });
 
   return {

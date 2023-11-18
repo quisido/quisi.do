@@ -4,7 +4,7 @@
   "author": "Quisido <contact@quisi.do>",
   "description": "Quisido",
   "homepage": "https://quisi.do/",
-  "packageManager": "yarn@4.0.1",
+  "packageManager": "yarn@4.0.2",
   "private": true,
   "repository": "github:CharlesStover/quisi.do",
   "type": "module",
@@ -31,11 +31,11 @@
     "jest": "jest",
     "lighthouse": "yarn packages/next run lighthouse",
     "prepack": "yarn workspaces foreach --all --interlaced --parallel --topological-dev --verbose run prepack",
-    "prepublish": "concurrently --kill-others --kill-others-on-fail --names eslint,prepublish,test \"yarn run eslint\" \"yarn workspaces foreach --all --parallel --verbose run prepublish\" \"yarn run test\"",
+    "prepublish": "concurrently --kill-others-on-fail --names eslint,jest,prepublish,test \"yarn run eslint\" \"yarn run jest\" \"yarn workspaces foreach --all --parallel --verbose run prepublish\" \"yarn run test\"",
     "publish": "yarn workspaces foreach --interlaced --no-private --parallel --topological-dev --verbose npm publish --tolerate-republish",
     "serve": "yarn packages/next run serve",
     "start": "yarn packages/next run start",
-    "test": "jest && monorepo-template-test",
+    "test": "monorepo-template-test",
     "up": "yarn up \"@*/*\" \"!(@monorepo-template/test|@monorepo-template/tree-logger|aws-rum-react|fullstory-react|lazy-i18n|number-format-react|react-datadog|sentry-react|unknown2string|use-awsui-table-item-description|use-next-awsui|use-offline)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
   },
   "workspaces": [

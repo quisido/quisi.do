@@ -2,7 +2,7 @@
 import type { PropertyFilterProps } from '@awsui/components-react/property-filter';
 import { act } from '@testing-library/react';
 import { usePropertyFilter } from '../index.js';
-import renderHook from '../test-utils/render-hook.js';
+import renderHook from '../test/utils/render-hook.js';
 
 describe('usePropertyFilter', (): void => {
   describe('handleChange', (): void => {

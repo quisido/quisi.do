@@ -1,3 +1,4 @@
+/** @type {import('jest').Config} */
 export default {
   cacheDirectory: './jest/cache',
   collectCoverage: true,
@@ -28,14 +29,6 @@ export default {
   },
 
   transform: {
-    '^.+\\.tsx?$': [
-      'ts-jest',
-      {
-        isolatedModules: true,
-        tsconfig: './tsconfig.jest.json',
-        useESM: true,
-        verbatimModuleSyntax: true,
-      },
-    ],
+    '^.+\\.tsx?$': '@monorepo-template/jest-transformer',
   },
 };

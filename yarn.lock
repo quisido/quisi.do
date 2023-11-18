@@ -424,6 +424,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/core@npm:^7.23.3":
+  version: 7.23.3
+  resolution: "@babel/core@npm:7.23.3"
+  dependencies:
+    "@ampproject/remapping": "npm:^2.2.0"
+    "@babel/code-frame": "npm:^7.22.13"
+    "@babel/generator": "npm:^7.23.3"
+    "@babel/helper-compilation-targets": "npm:^7.22.15"
+    "@babel/helper-module-transforms": "npm:^7.23.3"
+    "@babel/helpers": "npm:^7.23.2"
+    "@babel/parser": "npm:^7.23.3"
+    "@babel/template": "npm:^7.22.15"
+    "@babel/traverse": "npm:^7.23.3"
+    "@babel/types": "npm:^7.23.3"
+    convert-source-map: "npm:^2.0.0"
+    debug: "npm:^4.1.0"
+    gensync: "npm:^1.0.0-beta.2"
+    json5: "npm:^2.2.3"
+    semver: "npm:^6.3.1"
+  checksum: f9e7016b62842d23f78c98dc31daa3bd9161c5770c1e9df0557f78186ed75fd2cfc8e7161975fe8c6ad147665b1881790139da91de34ec03cf8b9f6a256d86eb
+  languageName: node
+  linkType: hard
+
 "@babel/generator@npm:^7.23.0, @babel/generator@npm:^7.7.2":
   version: 7.23.0
   resolution: "@babel/generator@npm:7.23.0"
@@ -582,6 +605,21 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0
   checksum: d72fe444f7b6c5aadaac8f393298d603eedd48e5dead67273a48e5c83a677cbccbd8a12a06c5bf5d97924666083279158a4bd0e799d28b86cbbfacba9e41f598
+  languageName: node
+  linkType: hard
+
+"@babel/helper-module-transforms@npm:^7.23.3":
+  version: 7.23.3
+  resolution: "@babel/helper-module-transforms@npm:7.23.3"
+  dependencies:
+    "@babel/helper-environment-visitor": "npm:^7.22.20"
+    "@babel/helper-module-imports": "npm:^7.22.15"
+    "@babel/helper-simple-access": "npm:^7.22.5"
+    "@babel/helper-split-export-declaration": "npm:^7.22.6"
+    "@babel/helper-validator-identifier": "npm:^7.22.20"
+  peerDependencies:
+    "@babel/core": ^7.0.0
+  checksum: 583fa580f8e50e6f45c4f46aa76a8e49c2528deb84e25f634d66461b9a0e2420e13979b0a607b67aef67eaf8db8668eb9edc038b4514b16e3879fe09e8fd294b
   languageName: node
   linkType: hard
 
@@ -1467,6 +1505,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-transform-react-display-name@npm:^7.23.3":
+  version: 7.23.3
+  resolution: "@babel/plugin-transform-react-display-name@npm:7.23.3"
+  dependencies:
+    "@babel/helper-plugin-utils": "npm:^7.22.5"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 7f86964e8434d3ddbd3c81d2690c9b66dbf1cd8bd9512e2e24500e9fa8cf378bc52c0853270b3b82143aba5965aec04721df7abdb768f952b44f5c6e0b198779
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-transform-react-jsx-development@npm:^7.22.5":
   version: 7.22.5
   resolution: "@babel/plugin-transform-react-jsx-development@npm:7.22.5"
@@ -1502,6 +1551,18 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 092021c4f404e267002099ec20b3f12dd730cb90b0d83c5feed3dc00dbe43b9c42c795a18e7c6c7d7bddea20c7dd56221b146aec81b37f2e7eb5137331c61120
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-react-pure-annotations@npm:^7.23.3":
+  version: 7.23.3
+  resolution: "@babel/plugin-transform-react-pure-annotations@npm:7.23.3"
+  dependencies:
+    "@babel/helper-annotate-as-pure": "npm:^7.22.5"
+    "@babel/helper-plugin-utils": "npm:^7.22.5"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 9ea3698b1d422561d93c0187ac1ed8f2367e4250b10e259785ead5aa643c265830fd0f4cf5087a5bedbc4007444c06da2f2006686613220acf0949895f453666
   languageName: node
   linkType: hard
 
@@ -1774,6 +1835,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/preset-react@npm:^7.23.3":
+  version: 7.23.3
+  resolution: "@babel/preset-react@npm:7.23.3"
+  dependencies:
+    "@babel/helper-plugin-utils": "npm:^7.22.5"
+    "@babel/helper-validator-option": "npm:^7.22.15"
+    "@babel/plugin-transform-react-display-name": "npm:^7.23.3"
+    "@babel/plugin-transform-react-jsx": "npm:^7.22.15"
+    "@babel/plugin-transform-react-jsx-development": "npm:^7.22.5"
+    "@babel/plugin-transform-react-pure-annotations": "npm:^7.23.3"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: ef6aef131b2f36e2883e9da0d832903643cb3c9ad4f32e04fb3eecae59e4221d583139e8d8f973e25c28d15aafa6b3e60fe9f25c5fd09abd3e2df03b8637bdd2
+  languageName: node
+  linkType: hard
+
 "@babel/preset-typescript@npm:^7.23.2":
   version: 7.23.2
   resolution: "@babel/preset-typescript@npm:7.23.2"
@@ -1849,7 +1926,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.7.0":
+"@babel/traverse@npm:^7.23.3, @babel/traverse@npm:^7.7.0":
   version: 7.23.3
   resolution: "@babel/traverse@npm:7.23.3"
   dependencies:
@@ -4248,6 +4325,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/babel__core@npm:^7":
+  version: 7.20.4
+  resolution: "@types/babel__core@npm:7.20.4"
+  dependencies:
+    "@babel/parser": "npm:^7.20.7"
+    "@babel/types": "npm:^7.20.7"
+    "@types/babel__generator": "npm:*"
+    "@types/babel__template": "npm:*"
+    "@types/babel__traverse": "npm:*"
+  checksum: 01e1b5f0a2109bde99093c2148a6ca73890dd8d4050734288cd46c9d170ab072a082a99486960051d3d76630673f117d574ebe6b880b5359114c70ae1dfb75b1
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.1.14, @types/babel__core@npm:^7.1.20, @types/babel__core@npm:^7.20.3":
   version: 7.20.3
   resolution: "@types/babel__core@npm:7.20.3"
@@ -6114,9 +6204,13 @@ __metadata:
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.12.2"
     "@aws-sdk/types": "npm:^3.433.0"
+    "@babel/core": "npm:^7.23.3"
+    "@babel/preset-react": "npm:^7.23.3"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
+    "@types/babel__core": "npm:^7"
     "@types/identity-obj-proxy": "npm:^3"
     "@types/jest": "npm:^29.5.6"
     "@types/node": "npm:^20.8.9"
@@ -11127,9 +11221,13 @@ __metadata:
   resolution: "fullstory-react@workspace:packages/fullstory-react"
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.12.2"
+    "@babel/core": "npm:^7.23.3"
+    "@babel/preset-react": "npm:^7.23.3"
     "@fullstory/browser": "npm:^1.7.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
+    "@types/babel__core": "npm:^7"
     "@types/jest": "npm:^29.5.6"
     "@types/node": "npm:^20.8.9"
     "@types/react": "npm:^18.2.33"
@@ -13709,7 +13807,11 @@ __metadata:
   resolution: "lazy-i18n@workspace:packages/lazy-i18n"
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.12.2"
+    "@babel/core": "npm:^7.23.3"
+    "@babel/preset-react": "npm:^7.23.3"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
+    "@types/babel__core": "npm:^7"
     "@types/jest": "npm:^29.5.6"
     "@types/node": "npm:^20.8.9"
     "@types/react": "npm:^18.2.33"
@@ -15055,13 +15157,14 @@ __metadata:
   resolution: "number-format-react@workspace:packages/number-format-react"
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.12.2"
-    "@babel/core": "npm:^7.23.2"
+    "@babel/core": "npm:^7.23.3"
     "@babel/preset-env": "npm:^7.23.2"
-    "@babel/preset-react": "npm:^7.22.15"
+    "@babel/preset-react": "npm:^7.23.3"
     "@babel/preset-typescript": "npm:^7.23.2"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/jest-module-preset": "npm:^1.1.3"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
     "@types/jest": "npm:^29.5.6"
     "@types/node": "npm:^20.8.9"
@@ -16440,14 +16543,15 @@ __metadata:
   resolution: "react-datadog@workspace:packages/react-datadog"
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.12.2"
-    "@babel/core": "npm:^7.23.2"
+    "@babel/core": "npm:^7.23.3"
     "@babel/preset-env": "npm:^7.23.2"
-    "@babel/preset-react": "npm:^7.22.15"
+    "@babel/preset-react": "npm:^7.23.3"
     "@babel/preset-typescript": "npm:^7.23.2"
     "@datadog/browser-rum": "npm:^5.1.0"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/jest-module-preset": "npm:^1.1.3"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
     "@types/jest": "npm:^29.5.6"
     "@types/node": "npm:^20.8.9"
@@ -17533,9 +17637,13 @@ __metadata:
   resolution: "sentry-react@workspace:packages/sentry-react"
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.12.2"
+    "@babel/core": "npm:^7.23.3"
+    "@babel/preset-react": "npm:^7.23.3"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@sentry/react": "npm:^7.76.0"
     "@sentry/types": "npm:^7.76.0"
     "@testing-library/react": "npm:^14.0.0"
+    "@types/babel__core": "npm:^7"
     "@types/jest": "npm:^29.5.6"
     "@types/node": "npm:^20.8.9"
     "@types/react": "npm:^18.2.33"
@@ -19455,13 +19563,14 @@ __metadata:
   resolution: "unknown2string@workspace:packages/unknown2string"
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.12.2"
-    "@babel/core": "npm:^7.23.2"
+    "@babel/core": "npm:^7.23.3"
     "@babel/preset-env": "npm:^7.23.2"
     "@babel/preset-react": "npm:^7.22.15"
     "@babel/preset-typescript": "npm:^7.23.2"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/jest-module-preset": "npm:^1.1.3"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@types/jest": "npm:^29.5.6"
     "@types/node": "npm:^20.8.9"
     "@typescript-eslint/eslint-plugin": "npm:^6.9.0"
@@ -19579,13 +19688,14 @@ __metadata:
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.12.2"
     "@awsui/components-react": "npm:^3.0.967"
-    "@babel/core": "npm:^7.23.2"
+    "@babel/core": "npm:^7.23.3"
     "@babel/preset-env": "npm:^7.23.2"
     "@babel/preset-react": "npm:^7.22.15"
     "@babel/preset-typescript": "npm:^7.23.2"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/jest-module-preset": "npm:^1.1.3"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
     "@types/jest": "npm:^29.5.6"
     "@types/node": "npm:^20.8.9"
@@ -19654,13 +19764,14 @@ __metadata:
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.12.2"
     "@awsui/components-react": "npm:^3.0.967"
-    "@babel/core": "npm:^7.23.2"
+    "@babel/core": "npm:^7.23.3"
     "@babel/preset-env": "npm:^7.23.2"
     "@babel/preset-react": "npm:^7.22.15"
     "@babel/preset-typescript": "npm:^7.23.2"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/jest-module-preset": "npm:^1.1.3"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
     "@types/jest": "npm:^29.5.6"
     "@types/node": "npm:^20.8.9"
@@ -19698,13 +19809,14 @@ __metadata:
   resolution: "use-offline@workspace:packages/use-offline"
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.12.2"
-    "@babel/core": "npm:^7.23.2"
+    "@babel/core": "npm:^7.23.3"
     "@babel/preset-env": "npm:^7.23.2"
     "@babel/preset-react": "npm:^7.22.15"
     "@babel/preset-typescript": "npm:^7.23.2"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/jest-module-preset": "npm:^1.1.3"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
     "@types/jest": "npm:^29.5.6"
     "@types/node": "npm:^20.8.9"
