@@ -4,8 +4,8 @@ import type {
 } from '@testing-library/react';
 import { renderHook as testingLibraryRenderHook } from '@testing-library/react';
 import { createMemoryHistory, type MemoryHistory } from 'history';
+import MockNextRouter from 'mock-next-router';
 import { type PropsWithChildren, type ReactNode } from 'react';
-import MockNextRouter from '../components/mock-next-router.js';
 
 interface Options<Props> extends RenderHookOptions<Props> {
   readonly initialHref?: string | undefined;
@@ -29,9 +29,9 @@ export default function renderHook<Props, State>(
   });
 
   // Set the initial hash.
-  const { hash } = new URL(`https://localhost${initialHref}`);
-  if (hash !== '') {
-    window.location.href = hash;
+  const { hash: initialHash } = new URL(`https://localhost${initialHref}`);
+  if (initialHash !== '') {
+    window.location.href = initialHash;
   }
 
   const prefetch = jest.fn();
@@ -47,8 +47,8 @@ export default function renderHook<Props, State>(
     ...renderHookResult,
 
     expectHrefToBe(href: string): void {
-      const { hash, pathname, search } = memoryHistory.location;
-      expect(href).toBe(`${pathname}${search}${hash}`);
+      const { hash: currentHash, pathname, search } = memoryHistory.location;
+      expect(href).toBe(`${pathname}${search}${currentHash}`);
     },
 
     expectToHavePrefetched(href: string): void {

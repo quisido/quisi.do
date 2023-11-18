@@ -1,4 +1,6 @@
+/**/*.md
 /dist/
 /jest/
 /*.tsbuildinfo
 /*-*.*.*.tgz
+/tsc-output.cpuprofile

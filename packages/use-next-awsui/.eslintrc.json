@@ -11,11 +11,44 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:prettier/recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "@monorepo-template/eslint-config/react-fixable",
+    "@monorepo-template/eslint-config/react-strict",
+    "@monorepo-template/eslint-config/react-typescript",
+    "@monorepo-template/eslint-config/typescript",
+    "@monorepo-template/eslint-config/typescript-fixable",
+    "@monorepo-template/eslint-config/typescript-strict"
   ],
   "overrides": [
     {
+      "files": [".eslintrc.json"],
+      "extends": "@monorepo-template/eslint-config/typescript/eslint"
+    },
+
+    {
+      "files": ["*.cjs"],
+      "extends": "@monorepo-template/eslint-config/typescript/cjs"
+    },
+
+    {
+      "files": ["*.cjs", "*.js", "*.jsx", "*.mjs"],
+      "extends": [
+        "@monorepo-template/eslint-config/typescript/js",
+        "@monorepo-template/eslint-config/typescript-fixable/js"
+      ]
+    },
+
+    {
+      "files": ["*.json"],
+      "extends": [
+        "@monorepo-template/eslint-config/react-typescript/json",
+        "@monorepo-template/eslint-config/typescript/json",
+        "@monorepo-template/eslint-config/typescript-fixable/json"
+      ]
+    },
+    {
       "files": ["*.ts", "*.tsx"],
+      "extends": ["@monorepo-template/eslint-config/typescript/ts"],
       "rules": {
         "@typescript-eslint/explicit-function-return-type": "error",
         "@typescript-eslint/explicit-member-accessibility": "error",
@@ -27,6 +60,15 @@
     "project": ["./tsconfig.eslint.json"]
   },
   "rules": {
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
+    "react/jsx-max-depth": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/no-duplicate-imports": "off",
+    "@typescript-eslint/no-parameter-properties": "off",
+    "@typescript-eslint/sort-type-union-intersection-members": "off",
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/array-type": "error",
     "@typescript-eslint/ban-ts-comment": "error",
@@ -175,33 +217,6 @@
       {
         "disallowTypeAnnotations": true,
         "prefer": "type-imports"
-      }
-    ],
-    "@typescript-eslint/naming-convention": [
-      "error",
-      {
-        "format": ["camelCase", "PascalCase"],
-        "leadingUnderscore": "allow",
-        "selector": "default",
-        "trailingUnderscore": "allow"
-      },
-      {
-        "format": ["camelCase", "PascalCase"],
-        "leadingUnderscore": "forbid",
-        "selector": "function",
-        "trailingUnderscore": "forbid"
-      },
-      {
-        "format": ["camelCase", "UPPER_CASE"],
-        "leadingUnderscore": "allow",
-        "selector": "variable",
-        "trailingUnderscore": "allow"
-      },
-      {
-        "format": ["camelCase", "PascalCase"],
-        "leadingUnderscore": "forbid",
-        "selector": ["enumMember", "typeLike"],
-        "trailingUnderscore": "forbid"
       }
     ],
     "@typescript-eslint/no-invalid-void-type": [
