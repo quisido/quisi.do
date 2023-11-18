@@ -3,7 +3,7 @@ import type {
   RenderHookResult,
 } from '@testing-library/react';
 import { renderHook as testingLibraryRenderHook } from '@testing-library/react';
-import { createMemoryHistory, type MemoryHistory } from 'history';
+import { type MemoryHistory, createMemoryHistory } from 'history';
 import MockNextRouter from 'mock-next-router';
 import { type PropsWithChildren, type ReactNode } from 'react';
 
@@ -19,10 +19,7 @@ interface Result<Props, State> extends RenderHookResult<State, Props> {
 
 export default function renderHook<Props, State>(
   useHook: (props: Props) => State,
-  {
-    initialHref = '/',
-    ...options
-  }: Readonly<Options<Props>> = {},
+  { initialHref = '/', ...options }: Readonly<Options<Props>> = {},
 ): Result<Props, State> {
   const memoryHistory: MemoryHistory = createMemoryHistory({
     initialEntries: [initialHref],
@@ -39,7 +36,11 @@ export default function renderHook<Props, State>(
     testingLibraryRenderHook(useHook, {
       ...options,
       wrapper({ children }: PropsWithChildren): ReactNode {
-        return <MockNextRouter history={memoryHistory} prefetch={prefetch}>{children}</MockNextRouter>;
+        return (
+          <MockNextRouter history={memoryHistory} prefetch={prefetch}>
+            {children}
+          </MockNextRouter>
+        );
       },
     });
 

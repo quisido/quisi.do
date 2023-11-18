@@ -25,9 +25,10 @@ export interface State {
 const DEFAULT_PROPS: Props = Object.freeze({});
 const DEFAULT_TABS: TabsProps['tabs'] = Object.freeze([]);
 
-export default function useNextTabs(
-  { defaultActiveTabId, tabs = DEFAULT_TABS }: Props = DEFAULT_PROPS,
-): State {
+export default function useNextTabs({
+  defaultActiveTabId,
+  tabs = DEFAULT_TABS,
+}: Props = DEFAULT_PROPS): State {
   // Contexts
   const hash: string = useHash();
   const pathname: string = usePathname();

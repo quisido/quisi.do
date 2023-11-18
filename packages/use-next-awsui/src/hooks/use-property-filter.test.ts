@@ -96,9 +96,7 @@ describe('usePropertyFilter', (): void => {
         );
       });
 
-      expectHrefToBe(
-        '/?baz=test2&foo=bar&bar=%21%3Dbaz%7C%21%3Dquaz',
-      );
+      expectHrefToBe('/?baz=test2&foo=bar&bar=%21%3Dbaz%7C%21%3Dquaz');
     });
   });
 

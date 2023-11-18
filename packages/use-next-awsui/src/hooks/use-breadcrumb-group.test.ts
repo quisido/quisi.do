@@ -36,9 +36,10 @@ describe('useBreadcrumbs', (): void => {
     });
 
     it('should push to history', (): void => {
-      const { expectHrefToBe, result } = renderHook<never, BreadcrumbGroupState>(
-        useBreadcrumbGroup,
-      );
+      const { expectHrefToBe, result } = renderHook<
+        never,
+        BreadcrumbGroupState
+      >(useBreadcrumbGroup);
 
       act((): void => {
         const testFollowEvent = mapHrefToBreadcrumbGroupClickEvent(TEST_HREF);

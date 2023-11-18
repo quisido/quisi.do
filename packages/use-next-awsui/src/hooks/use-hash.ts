@@ -3,8 +3,7 @@
 import { useEffect, useState } from 'react';
 import mapWindowToHash from '../utils/map-window-to-hash.js';
 
-const getInitialHash = (): string =>
-  mapWindowToHash(window);
+const getInitialHash = (): string => mapWindowToHash(window);
 
 export default function useHash(): string {
   // States

@@ -9,14 +9,11 @@ const TEST_TEXT = 'test text';
 
 describe('useSideNavigation', (): void => {
   it('should prefetch', (): void => {
-    const { expectToHavePrefetched } = renderHook(
-      useSideNavigation,
-      {
-        initialProps: {
-          hrefs: ['/one', '/two'],
-        },
+    const { expectToHavePrefetched } = renderHook(useSideNavigation, {
+      initialProps: {
+        hrefs: ['/one', '/two'],
       },
-    );
+    });
 
     expectToHavePrefetched('/one');
     expectToHavePrefetched('/two');

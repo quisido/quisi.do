@@ -13,8 +13,9 @@ describe('Comparison operators', (): void => {
         COMPARISON_OPERATORS[i];
       assert(typeof operator !== 'undefined');
 
-      const previousOperator: PropertyFilterProps.ComparisonOperator | undefined =
-        COMPARISON_OPERATORS[i + PREVIOUS];
+      const previousOperator:
+        | PropertyFilterProps.ComparisonOperator
+        | undefined = COMPARISON_OPERATORS[i + PREVIOUS];
       assert(typeof previousOperator !== 'undefined');
 
       if (operator.length > previousOperator.length) {

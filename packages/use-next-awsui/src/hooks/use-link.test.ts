@@ -21,7 +21,9 @@ describe('useLink', (): void => {
   describe('handleFollow', (): void => {
     describe('external', (): void => {
       it('should not push to history', (): void => {
-        const { expectHrefToBe, result } = renderHook<never, LinkState>(useLink);
+        const { expectHrefToBe, result } = renderHook<never, LinkState>(
+          useLink,
+        );
 
         act((): void => {
           result.current.handleFollow(
@@ -58,7 +60,9 @@ describe('useLink', (): void => {
 
     describe('undefined href', (): void => {
       it('should not push to history', (): void => {
-        const { expectHrefToBe, result } = renderHook<never, LinkState>(useLink);
+        const { expectHrefToBe, result } = renderHook<never, LinkState>(
+          useLink,
+        );
 
         act((): void => {
           result.current.handleFollow(
@@ -95,17 +99,16 @@ describe('useLink', (): void => {
         const { result } = renderHook<never, LinkState>(useLink);
 
         const preventDefault = jest.fn();
-        const testFollowEvent: CustomEvent<LinkProps.FollowDetail> = new CustomEvent<LinkProps.FollowDetail>('', {
-          detail: {
-            href: TEST_HREF,
-          },
-        });
+        const testFollowEvent: CustomEvent<LinkProps.FollowDetail> =
+          new CustomEvent<LinkProps.FollowDetail>('', {
+            detail: {
+              href: TEST_HREF,
+            },
+          });
         testFollowEvent.preventDefault = preventDefault;
 
         act((): void => {
-          result.current.handleFollow(
-            testFollowEvent,
-          );
+          result.current.handleFollow(testFollowEvent);
         });
 
         expect(preventDefault).toHaveBeenCalledTimes(1);
@@ -113,7 +116,9 @@ describe('useLink', (): void => {
       });
 
       it('should push to history', (): void => {
-        const { expectHrefToBe, result } = renderHook<never, LinkState>(useLink);
+        const { expectHrefToBe, result } = renderHook<never, LinkState>(
+          useLink,
+        );
 
         act((): void => {
           result.current.handleFollow(
