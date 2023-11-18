@@ -1,0 +1,14 @@
+/**/.DS_Store
+/jest/
+/node_modules/
+/src/
+/*.cpuprofile
+/*.iml
+/*.tsbuildinfo
+/*-*.*.*.tgz
+/.eslintignore
+/.eslintrc.*
+/.gitignore
+/.npmignore
+/jest.config.*
+/tsconfig.*

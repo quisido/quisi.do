@@ -8,6 +8,16 @@ import renderHook from '../test/utils/render-hook.js';
 const TEST_HREF = '/test/pathname?test=search#test:hash';
 
 describe('useLink', (): void => {
+  it('should prefetch', (): void => {
+    const { expectToHavePrefetched } = renderHook(useLink, {
+      initialProps: {
+        href: '/test-href',
+      },
+    });
+
+    expectToHavePrefetched('/test-href');
+  });
+
   describe('handleFollow', (): void => {
     describe('external', (): void => {
       it('should not push to history', (): void => {
@@ -84,17 +94,22 @@ describe('useLink', (): void => {
       it('should prevent default behavior', (): void => {
         const { result } = renderHook<never, LinkState>(useLink);
 
+        const preventDefault = jest.fn();
+        const testFollowEvent: CustomEvent<LinkProps.FollowDetail> = new CustomEvent<LinkProps.FollowDetail>('', {
+          detail: {
+            href: TEST_HREF,
+          },
+        });
+        testFollowEvent.preventDefault = preventDefault;
+
         act((): void => {
           result.current.handleFollow(
-            new CustomEvent<LinkProps.FollowDetail>('', {
-              detail: {
-                href: TEST_HREF,
-              },
-            }),
+            testFollowEvent,
           );
         });
 
-        // expect(testFollowEvent.defaultPrevented).toBe(true);
+        expect(preventDefault).toHaveBeenCalledTimes(1);
+        expect(preventDefault).toHaveBeenLastCalledWith();
       });
 
       it('should push to history', (): void => {

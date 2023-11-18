@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import { render } from '@testing-library/react';
 import Null from './null.js';
 

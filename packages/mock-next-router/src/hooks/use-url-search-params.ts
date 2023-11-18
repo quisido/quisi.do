@@ -1,11 +1,15 @@
-import type { MemoryHistory, Update } from "history";
-import { useEffect, useMemo, type MutableRefObject, useRef } from "react";
-import useForceUpdate from "use-force-update";
+import type { MemoryHistory, Update } from 'history';
+import { type MutableRefObject, useEffect, useMemo, useRef } from 'react';
+import useForceUpdate from 'use-force-update';
 
-export default function useUrlSearchParams(memoryHistory: MemoryHistory): URLSearchParams {
+export default function useUrlSearchParams(
+  memoryHistory: MemoryHistory,
+): URLSearchParams {
   // States
   const forceUpdate: VoidFunction = useForceUpdate();
-  const searchRef: MutableRefObject<string> = useRef(memoryHistory.location.search);
+  const searchRef: MutableRefObject<string> = useRef(
+    memoryHistory.location.search,
+  );
 
   // Effects
   useEffect((): VoidFunction => {
@@ -26,8 +30,5 @@ export default function useUrlSearchParams(memoryHistory: MemoryHistory): URLSea
   }, [forceUpdate, memoryHistory]);
 
   const { search } = memoryHistory.location;
-  return useMemo((): URLSearchParams =>
-    new URLSearchParams(search),
-    [search],
-  );
+  return useMemo((): URLSearchParams => new URLSearchParams(search), [search]);
 }

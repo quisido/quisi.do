@@ -1,0 +1,7 @@
+/dist/
+/jest/
+/*.cpuprofile
+/*.iml
+/*.tsbuildinfo
+/*-*.*.*.tgz
+/README.md

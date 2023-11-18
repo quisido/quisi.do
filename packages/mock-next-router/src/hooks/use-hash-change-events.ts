@@ -1,10 +1,14 @@
-import type { Location, MemoryHistory, Update } from "history";
-import { useEffect, type MutableRefObject, useRef } from "react";
+import type { Location, MemoryHistory, Update } from 'history';
+import { type MutableRefObject, useEffect, useRef } from 'react';
 
 const ORIGIN = 'https://localhost';
 
-export default function useHashChangeEvents(memoryHistory: MemoryHistory): void {
-  const locationRef: MutableRefObject<Location> = useRef(memoryHistory.location);
+export default function useHashChangeEvents(
+  memoryHistory: MemoryHistory,
+): void {
+  const locationRef: MutableRefObject<Location> = useRef(
+    memoryHistory.location,
+  );
 
   // Effects
   useEffect((): VoidFunction => {
@@ -26,10 +30,13 @@ export default function useHashChangeEvents(memoryHistory: MemoryHistory): void 
         return;
       }
 
-      const hashChangeEvent: HashChangeEvent = new HashChangeEvent('hashchange', {
-        newURL: `${ORIGIN}${newPathname}${newSearch}${newHash}`,
-        oldURL: `${ORIGIN}${oldPathname}${oldSearch}${oldHash}`,
-      });
+      const hashChangeEvent: HashChangeEvent = new HashChangeEvent(
+        'hashchange',
+        {
+          newURL: `${ORIGIN}${newPathname}${newSearch}${newHash}`,
+          oldURL: `${ORIGIN}${oldPathname}${oldSearch}${oldHash}`,
+        },
+      );
 
       window.dispatchEvent(hashChangeEvent);
     };

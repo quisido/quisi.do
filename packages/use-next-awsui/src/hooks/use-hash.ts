@@ -1,13 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import mapWindowToHash from '../utils/map-window-to-hash.js';
 
-const getInitialHash = (): string => {
-  if (typeof window === 'undefined') {
-    return '';
-  }
-  return window.location.hash;
-};
+const getInitialHash = (): string =>
+  mapWindowToHash(window);
 
 export default function useHash(): string {
   // States

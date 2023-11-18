@@ -8,6 +8,20 @@ const TEST_HREF = '/test/pathname?test=search#test:hash';
 const TEST_TEXT = 'test text';
 
 describe('useSideNavigation', (): void => {
+  it('should prefetch', (): void => {
+    const { expectToHavePrefetched } = renderHook(
+      useSideNavigation,
+      {
+        initialProps: {
+          hrefs: ['/one', '/two'],
+        },
+      },
+    );
+
+    expectToHavePrefetched('/one');
+    expectToHavePrefetched('/two');
+  });
+
   describe('handleFollow', (): void => {
     describe('external', (): void => {
       it('should not prevent default behavior for external navigation', (): void => {
@@ -74,6 +88,7 @@ describe('useSideNavigation', (): void => {
           useSideNavigation,
         );
 
+        const preventDefault = jest.fn();
         const testFollowEvent: CustomEvent<SideNavigationProps.FollowDetail> =
           new CustomEvent<SideNavigationProps.FollowDetail>('', {
             detail: {
@@ -81,11 +96,13 @@ describe('useSideNavigation', (): void => {
               text: TEST_TEXT,
             },
           });
+        testFollowEvent.preventDefault = preventDefault;
         act((): void => {
           result.current.handleFollow(testFollowEvent);
         });
 
-        // expect(testFollowEvent.defaultPrevented).toBe(true);
+        expect(preventDefault).toHaveBeenCalledTimes(1);
+        expect(preventDefault).toHaveBeenLastCalledWith();
       });
 
       it('should push to history', (): void => {

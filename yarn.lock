@@ -14743,6 +14743,54 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mock-next-router@workspace:^, mock-next-router@workspace:packages/mock-next-router":
+  version: 0.0.0-use.local
+  resolution: "mock-next-router@workspace:packages/mock-next-router"
+  dependencies:
+    "@arethetypeswrong/cli": "npm:^0.12.2"
+    "@babel/core": "npm:^7.23.3"
+    "@babel/preset-env": "npm:^7.23.2"
+    "@babel/preset-react": "npm:^7.22.15"
+    "@babel/preset-typescript": "npm:^7.23.2"
+    "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
+    "@monorepo-template/eslint-config": "npm:^1.0.7"
+    "@monorepo-template/jest-module-preset": "npm:^1.1.3"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
+    "@testing-library/react": "npm:^14.0.0"
+    "@types/jest": "npm:^29.5.6"
+    "@types/node": "npm:^20.8.9"
+    "@types/react": "npm:^18.2.33"
+    "@types/react-dom": "npm:^18.2.14"
+    "@typescript-eslint/eslint-plugin": "npm:^6.9.0"
+    "@typescript-eslint/parser": "npm:^6.9.0"
+    babel-jest: "npm:^29.7.0"
+    concurrently: "npm:^8.2.2"
+    eslint: "npm:^8.52.0"
+    eslint-config-prettier: "npm:^9.0.0"
+    eslint-plugin-jsx-a11y: "npm:^6.7.1"
+    eslint-plugin-prettier: "npm:^5.0.1"
+    eslint-plugin-react: "npm:^7.33.2"
+    eslint-plugin-react-hooks: "npm:^4.6.0"
+    history: "npm:^5.3.0"
+    identity-obj-proxy: "npm:^3.0.0"
+    jest: "npm:^29.7.0"
+    jest-environment-jsdom: "npm:^29.7.0"
+    next: "npm:^14.0.0"
+    prettier: "npm:^3.0.3"
+    querystring: "npm:^0.2.1"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    tslib: "npm:^2.6.2"
+    typescript: "npm:^5.2.2"
+    use-force-update: "npm:^1.0.11"
+  peerDependencies:
+    "@awsui/components-react": ">=3.0.0"
+    history: ">=5.0.0"
+    next: ">=13.0.0"
+    react: ">=18.0.0"
+  languageName: unknown
+  linkType: soft
+
 "module-details-from-path@npm:^1.0.3":
   version: 1.0.3
   resolution: "module-details-from-path@npm:1.0.3"
@@ -16453,6 +16501,13 @@ __metadata:
   version: 0.2.1
   resolution: "querystring-es3@npm:0.2.1"
   checksum: c99fccfe1a9c4c25ea6194fa7a559fdb83d2628f118f898af6f0ac02c4ffcd7e0576997bb80e7dfa892d193988b60e23d4968122426351819f87051862af991c
+  languageName: node
+  linkType: hard
+
+"querystring@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "querystring@npm:0.2.1"
+  checksum: 5ae2eeb8c6d70263a3d13ffaf234ce9593ae0e95ad8ea04aa540e14ff66679347420817aeb4fe6fdfa2aaa7fac86e311b6f1d3da2187f433082ad9125c808c14
   languageName: node
   linkType: hard
 
@@ -19800,6 +19855,7 @@ __metadata:
     identity-obj-proxy: "npm:^3.0.0"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
+    mock-next-router: "workspace:^"
     next: "npm:^14.0.0"
     prettier: "npm:^3.0.3"
     react: "npm:^18.2.0"
@@ -19807,7 +19863,6 @@ __metadata:
     ts-jest: "npm:^29.1.1"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.2.2"
-    use-force-update: "npm:^1.0.11"
   peerDependencies:
     "@awsui/components-react": ">=3.0.0"
     next: ">=13.0.0"
