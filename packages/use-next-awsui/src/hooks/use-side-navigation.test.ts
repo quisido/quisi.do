@@ -31,7 +31,7 @@ describe('useSideNavigation', (): void => {
       });
 
       it('should not push to history', (): void => {
-        const { href, result } = renderHook(useSideNavigation);
+        const { expectHrefToBe, result } = renderHook(useSideNavigation);
 
         act((): void => {
           const testFollowEvent: CustomEvent<SideNavigationProps.FollowDetail> =
@@ -45,7 +45,7 @@ describe('useSideNavigation', (): void => {
           result.current.handleFollow(testFollowEvent);
         });
 
-        expect(href.current).toBe('/');
+        expectHrefToBe('/');
       });
 
       it('should not set activeHref', (): void => {
@@ -89,7 +89,7 @@ describe('useSideNavigation', (): void => {
       });
 
       it('should push to history', (): void => {
-        const { href, result } = renderHook(useSideNavigation);
+        const { expectHrefToBe, result } = renderHook(useSideNavigation);
 
         act((): void => {
           const testFollowEvent: CustomEvent<SideNavigationProps.FollowDetail> =
@@ -102,7 +102,7 @@ describe('useSideNavigation', (): void => {
           result.current.handleFollow(testFollowEvent);
         });
 
-        expect(href.current).toBe(TEST_HREF);
+        expectHrefToBe(TEST_HREF);
       });
 
       it('should set activeHref', (): void => {

@@ -73,7 +73,7 @@ describe('useTabs', (): void => {
 
   describe('handleChange', (): void => {
     it('should push to history if href is present', (): void => {
-      const { href, result } = renderHook(useTabs);
+      const { expectHrefToBe, result } = renderHook(useTabs);
 
       act((): void => {
         const testChangeEvent: NonCancelableCustomEvent<TabsProps.ChangeDetail> =
@@ -81,11 +81,11 @@ describe('useTabs', (): void => {
         result.current.handleChange(testChangeEvent);
       });
 
-      expect(href.current).toBe(TEST_HREF);
+      expectHrefToBe(TEST_HREF);
     });
 
     it('should not push to history if href is not present', (): void => {
-      const { href, result } = renderHook(useTabs);
+      const { expectHrefToBe, result } = renderHook(useTabs);
 
       act((): void => {
         const testChangeEvent: NonCancelableCustomEvent<TabsProps.ChangeDetail> =
@@ -93,7 +93,7 @@ describe('useTabs', (): void => {
         result.current.handleChange(testChangeEvent);
       });
 
-      expect(href.current).toBe('/');
+      expectHrefToBe('/');
     });
   });
 });

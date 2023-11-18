@@ -25,7 +25,7 @@ describe('usePropertyFilter', (): void => {
     });
 
     it('should set tokens', (): void => {
-      const { href, result } = renderHook(usePropertyFilter);
+      const { expectHrefToBe, result } = renderHook(usePropertyFilter);
 
       act((): void => {
         result.current.handleChange(
@@ -53,11 +53,11 @@ describe('usePropertyFilter', (): void => {
         );
       });
 
-      expect(href.current).toBe('/?foo=bar&bar=%21%3Dbaz');
+      expectHrefToBe('/?foo=bar&bar=%21%3Dbaz');
     });
 
     it('should set only property keys in search', (): void => {
-      const { href, result } = renderHook(usePropertyFilter, {
+      const { expectHrefToBe, result } = renderHook(usePropertyFilter, {
         initialHref: '/?foo=test1&baz=test2',
         initialProps: {
           delimiter: '|',
@@ -96,7 +96,7 @@ describe('usePropertyFilter', (): void => {
         );
       });
 
-      expect(href.current).toBe(
+      expectHrefToBe(
         '/?baz=test2&foo=bar&bar=%21%3Dbaz%7C%21%3Dquaz',
       );
     });

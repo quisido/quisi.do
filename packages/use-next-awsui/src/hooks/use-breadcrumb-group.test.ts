@@ -23,7 +23,7 @@ describe('useBreadcrumbs', (): void => {
     });
 
     it('should push to history', (): void => {
-      const { href, result } = renderHook<never, BreadcrumbGroupState>(
+      const { expectHrefToBe, result } = renderHook<never, BreadcrumbGroupState>(
         useBreadcrumbGroup,
       );
 
@@ -32,7 +32,7 @@ describe('useBreadcrumbs', (): void => {
         result.current.handleFollow(testFollowEvent);
       });
 
-      expect(href.current).toBe(TEST_HREF);
+      expectHrefToBe(TEST_HREF);
     });
   });
 });

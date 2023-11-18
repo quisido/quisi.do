@@ -11,7 +11,7 @@ describe('useLink', (): void => {
   describe('handleFollow', (): void => {
     describe('external', (): void => {
       it('should not push to history', (): void => {
-        const { href, result } = renderHook<never, LinkState>(useLink);
+        const { expectHrefToBe, result } = renderHook<never, LinkState>(useLink);
 
         act((): void => {
           result.current.handleFollow(
@@ -24,7 +24,7 @@ describe('useLink', (): void => {
           );
         });
 
-        expect(href.current).toBe('/');
+        expectHrefToBe('/');
       });
 
       it('should not prevent default behavior', (): void => {
@@ -48,7 +48,7 @@ describe('useLink', (): void => {
 
     describe('undefined href', (): void => {
       it('should not push to history', (): void => {
-        const { href, result } = renderHook<never, LinkState>(useLink);
+        const { expectHrefToBe, result } = renderHook<never, LinkState>(useLink);
 
         act((): void => {
           result.current.handleFollow(
@@ -60,7 +60,7 @@ describe('useLink', (): void => {
           );
         });
 
-        expect(href.current).toBe('/');
+        expectHrefToBe('/');
       });
 
       it('should not prevent default behavior', (): void => {
@@ -98,7 +98,7 @@ describe('useLink', (): void => {
       });
 
       it('should push to history', (): void => {
-        const { href, result } = renderHook<never, LinkState>(useLink);
+        const { expectHrefToBe, result } = renderHook<never, LinkState>(useLink);
 
         act((): void => {
           result.current.handleFollow(
@@ -110,7 +110,7 @@ describe('useLink', (): void => {
           );
         });
 
-        expect(href.current).toBe(TEST_HREF);
+        expectHrefToBe(TEST_HREF);
       });
     });
   });
