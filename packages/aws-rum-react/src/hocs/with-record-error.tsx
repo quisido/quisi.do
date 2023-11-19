@@ -22,6 +22,7 @@ export default function withRecordError<Props extends HocProps>(
       [awsRum],
     );
 
+    // eslint-disable-next-line  @typescript-eslint/consistent-type-assertions
     return <Component {...(props as Props)} recordError={recordError} />;
   };
 }

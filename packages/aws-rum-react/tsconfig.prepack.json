@@ -1,11 +1,10 @@
 {
-  "extends": "../../tsconfig.package.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "jsx": "react-jsxdev",
-    "lib": ["DOM", "ESNext"],
-    "noEmit": true,
-    "rootDir": "src",
-    "sourceRoot": "src",
+    "declarationDir": "dist",
+    "jsx": "react-jsx",
+    "noEmit": false,
+    "outDir": "dist",
     /**
      * `aws-rum-web` uses a CommonJS build with `web-vital`'s CommonJS as a
      *   dependency. However, `web-vital` only vends ESM types, so TypeScript
@@ -14,6 +13,6 @@
      */
     "skipLibCheck": true
   },
-  "exclude": [],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
 }

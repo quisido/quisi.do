@@ -5,6 +5,7 @@ import { useBreadcrumbGroup } from '../index.js';
 import mapHrefToBreadcrumbGroupClickEvent from '../test/utils/map-href-to-breadcrumb-group-click-event.js';
 import renderHook from '../test/utils/render-hook.js';
 
+const ONCE = 1;
 const TEST_HREF = '/test/pathname?test=search#test:hash';
 
 describe('useBreadcrumbs', (): void => {
@@ -31,7 +32,7 @@ describe('useBreadcrumbs', (): void => {
         result.current.handleFollow(testFollowEvent);
       });
 
-      expect(preventDefault).toHaveBeenCalledTimes(1);
+      expect(preventDefault).toHaveBeenCalledTimes(ONCE);
       expect(preventDefault).toHaveBeenLastCalledWith();
     });
 

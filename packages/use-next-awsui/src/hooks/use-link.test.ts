@@ -5,6 +5,7 @@ import type { LinkState } from '../index.js';
 import { useLink } from '../index.js';
 import renderHook from '../test/utils/render-hook.js';
 
+const ONCE = 1;
 const TEST_HREF = '/test/pathname?test=search#test:hash';
 
 describe('useLink', (): void => {
@@ -111,7 +112,7 @@ describe('useLink', (): void => {
           result.current.handleFollow(testFollowEvent);
         });
 
-        expect(preventDefault).toHaveBeenCalledTimes(1);
+        expect(preventDefault).toHaveBeenCalledTimes(ONCE);
         expect(preventDefault).toHaveBeenLastCalledWith();
       });
 

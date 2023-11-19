@@ -11,7 +11,7 @@ export default function useHash(): string {
 
   // Effects
   useEffect((): VoidFunction => {
-    const handleHashChange = (e: HashChangeEvent) => {
+    const handleHashChange = (e: HashChangeEvent): void => {
       const { hash: newHash } = new URL(e.newURL);
       setHash(newHash);
     };

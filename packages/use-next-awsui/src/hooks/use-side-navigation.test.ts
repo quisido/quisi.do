@@ -4,6 +4,7 @@ import type { SideNavigationState } from '../index.js';
 import { useSideNavigation } from '../index.js';
 import renderHook from '../test/utils/render-hook.js';
 
+const ONCE = 1;
 const TEST_HREF = '/test/pathname?test=search#test:hash';
 const TEST_TEXT = 'test text';
 
@@ -98,7 +99,7 @@ describe('useSideNavigation', (): void => {
           result.current.handleFollow(testFollowEvent);
         });
 
-        expect(preventDefault).toHaveBeenCalledTimes(1);
+        expect(preventDefault).toHaveBeenCalledTimes(ONCE);
         expect(preventDefault).toHaveBeenLastCalledWith();
       });
 

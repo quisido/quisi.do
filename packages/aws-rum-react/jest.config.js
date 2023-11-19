@@ -17,9 +17,6 @@ export default {
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
     '!<rootDir>/src/**/*.d.ts',
-    '!<rootDir>/src/**/*.stories.{ts,tsx}',
-    '!<rootDir>/src/**/*.test.{ts,tsx}',
-    '!<rootDir>/src/**/test-utils/*.{ts,tsx}',
   ],
 
   coverageThreshold: {
@@ -32,9 +29,7 @@ export default {
   },
 
   transform: {
+    unknown2string: '@monorepo-template/jest-transformer',
     '^.+\\.tsx?$': '@monorepo-template/jest-transformer',
   },
 };
-
-
-

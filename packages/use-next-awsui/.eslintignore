@@ -3,4 +3,5 @@
 /jest/
 /*.tsbuildinfo
 /*-*.*.*.tgz
+/LICENSE
 /tsc-output.cpuprofile

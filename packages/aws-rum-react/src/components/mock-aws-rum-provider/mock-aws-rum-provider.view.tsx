@@ -99,6 +99,8 @@ export default function MockAwsRumProvider({
 
     // `newClient instanceof AwsRum`
     Object.setPrototypeOf(newClient, AwsRum.prototype);
+
+    // eslint-disable-next-line  @typescript-eslint/consistent-type-assertions
     return newClient as AwsRum;
   }, []);
 

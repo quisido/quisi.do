@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 interface Options {
   readonly author: string;
@@ -24,7 +25,9 @@ function describePackageJson({
   assert(typeof packageJson === 'object');
   assert(packageJson !== null);
   assert('name' in packageJson);
-  const expectedEmail = `${packageJson.name}@${domain}`;
+  const { name: packageJsonName } = packageJson;
+  assert(typeof packageJsonName === 'string');
+  const expectedEmail = `${packageJsonName}@${domain}`;
 
   describe('package.json', (): void => {
     it('should have the expected author', (): void => {
@@ -39,7 +42,7 @@ function describePackageJson({
     it('should have the expected homepage', (): void => {
       assert('homepage' in packageJson);
       expect(packageJson.homepage).toBe(
-        `https://github.com/${repo}/tree/main/packages/${packageJson.name}#readme`,
+        `https://github.com/${repo}/tree/main/packages/${packageJsonName}#readme`,
       );
     });
 
@@ -189,10 +192,12 @@ function describePackageJson({
   });
 }
 
+const packageJsonPath: string = join(__dirname, '..', 'package.json');
+
 describePackageJson({
   author: 'Quisido',
   domain: 'quisi.do',
   fundingUrl: 'https://github.com/sponsors/CharlesStover',
-  packageJson: readFileSync('../../package.json').toString(),
+  packageJson: readFileSync(packageJsonPath).toString(),
   repo: 'CharlesStover/quisi.do',
 });
