@@ -1,7 +1,7 @@
 /// <reference types="jest" />
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
-import FullStoryAPIProvider from '../test/components/fullstory-api-provider';
+import FullStoryAPIProvider from '../test/components/fullstory-api-provider/index.js';
 import useFullStory from './use-fullstory.js';
 
 const ONCE = 1;
@@ -112,6 +112,7 @@ describe('useFullStory', (): void => {
       initialProps: {
         devMode: false,
         orgId: 'test-org-id',
+        userUid: 'test-user-id',
       },
     });
 

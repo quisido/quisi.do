@@ -1,7 +1,7 @@
 import type { PropsWithChildren, ReactElement } from 'react';
-import FullstoryAPIContext from '../../../contexts/fullstory-api';
-import useShallowMemo from '../../../hooks/use-shallow-memo';
-import type FullStoryAPIType from '../../../types/fullstory-api';
+import FullstoryAPIContext from '../../../contexts/fullstory-api.js';
+import useShallowMemo from '../../../hooks/use-shallow-memo.js';
+import type FullStoryAPIType from '../../../types/fullstory-api.js';
 
 export default function FullStoryAPIProvider({
   children,
