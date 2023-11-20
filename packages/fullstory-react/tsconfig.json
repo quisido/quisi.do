@@ -1,11 +1,12 @@
 {
+  "exclude": ["dist/", "jest/"],
   "extends": "../../tsconfig.package.json",
+  "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
     "rootDir": "src",
     "sourceRoot": "src"
-  },
-  "include": ["**/*.ts", "**/*.tsx"]
+  }
 }

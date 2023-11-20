@@ -1,29 +1,38 @@
 /// <reference types="jest" />
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
-import FullStoryAPIProvider from '../test/components/fullstory-api-provider/index.js';
+import MockFullStory from '../components/mock-fullstory.js';
 import useFullStory from './use-fullstory.js';
 
 const ONCE = 1;
 const TEST_ANONYMIZE = jest.fn();
 const TEST_IDENTIFY = jest.fn();
 const TEST_INIT = jest.fn();
+const TEST_IS_INITIALIZED = jest.fn();
 const TEST_SHUTDOWN = jest.fn();
 
 function TestWrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
   return (
-    <FullStoryAPIProvider
+    <MockFullStory
       anonymize={TEST_ANONYMIZE}
       identify={TEST_IDENTIFY}
       init={TEST_INIT}
+      isInitialized={TEST_IS_INITIALIZED}
       shutdown={TEST_SHUTDOWN}
     >
       {children}
-    </FullStoryAPIProvider>
+    </MockFullStory>
   );
 }
 
 describe('useFullStory', (): void => {
+  beforeEach((): void => {
+    TEST_IS_INITIALIZED.mockReturnValue(false);
+    TEST_INIT.mockImplementation((): void => {
+      TEST_IS_INITIALIZED.mockReturnValue(true);
+    });
+  });
+
   it('should init', (): void => {
     renderHook(useFullStory, {
       wrapper: TestWrapper,
@@ -53,6 +62,57 @@ describe('useFullStory', (): void => {
 
     expect(TEST_SHUTDOWN).toHaveBeenCalledTimes(ONCE);
     expect(TEST_SHUTDOWN).toHaveBeenLastCalledWith();
+  });
+
+  it('should not init on re-render', (): void => {
+    const { rerender } = renderHook(useFullStory, {
+      wrapper: TestWrapper,
+      initialProps: {
+        orgId: 'test-org-id-1',
+      },
+    });
+
+    // Re-render
+    rerender({
+      orgId: 'test-org-id-2',
+    });
+
+    expect(TEST_INIT).toHaveBeenCalledTimes(ONCE);
+  });
+
+  // If two components try to mount simultaneously, only respect the first one.
+  it('should not init a second time', (): void => {
+    renderHook(useFullStory, {
+      wrapper: TestWrapper,
+      initialProps: {
+        orgId: 'test-org-id-1',
+      },
+    });
+
+    renderHook(useFullStory, {
+      wrapper: TestWrapper,
+      initialProps: {
+        orgId: 'test-org-id-2',
+      },
+    });
+
+    expect(TEST_INIT).toHaveBeenCalledTimes(ONCE);
+  });
+
+  // Shutdowns require `restart` to be called 30 minutes after shutting down.
+  it('should not shutdown on re-render', (): void => {
+    const { rerender } = renderHook(useFullStory, {
+      wrapper: TestWrapper,
+      initialProps: {
+        orgId: 'test-org-id-1',
+      },
+    });
+
+    rerender({
+      orgId: 'test-org-id-2',
+    });
+
+    expect(TEST_SHUTDOWN).not.toHaveBeenCalled();
   });
 
   it('should anonymize if no user UID exists', (): void => {

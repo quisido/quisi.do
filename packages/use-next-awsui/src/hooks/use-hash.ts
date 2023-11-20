@@ -1,13 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import mapWindowToHash from '../utils/map-window-to-hash.js';
-
-const getInitialHash = (): string => mapWindowToHash(window);
+import getHash from '../utils/get-hash.js';
 
 export default function useHash(): string {
   // States
-  const [hash, setHash] = useState(getInitialHash);
+  const [hash, setHash] = useState(getHash);
 
   // Effects
   useEffect((): VoidFunction => {

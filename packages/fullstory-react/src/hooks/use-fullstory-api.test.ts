@@ -1,17 +1,11 @@
 /// <reference types="jest" />
-import { anonymize, identify, init, shutdown } from '@fullstory/browser';
+import * as fullStoryBrowser from '@fullstory/browser';
 import { renderHook } from '@testing-library/react';
-import useFullStoryAPI from './use-fullstory-api.js';
+import useFullStorySdk from './use-fullstory-sdk.js';
 
-describe('useFullStoryAPI', (): void => {
+describe('useFullStorySdk', (): void => {
   it('should return the FullStory browser API by default', (): void => {
-    const { result } = renderHook(useFullStoryAPI);
-
-    expect(result.current).toStrictEqual({
-      anonymize,
-      identify,
-      init,
-      shutdown,
-    });
+    const { result } = renderHook(useFullStorySdk);
+    expect(result.current).toStrictEqual(fullStoryBrowser);
   });
 });

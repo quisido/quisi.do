@@ -1,5 +1,7 @@
 {
+  "exclude": ["dist/", "jest/"],
   "extends": "./tsconfig.json",
+  "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
     "module": "ESNext",
     "moduleResolution": "Bundler"

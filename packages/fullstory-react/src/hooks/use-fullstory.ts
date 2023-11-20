@@ -1,9 +1,9 @@
 'use client';
 
 import type { SnippetOptions } from '@fullstory/browser';
-import { type MutableRefObject, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import type IdentifyProps from '../types/identify-props.js';
-import useFullStoryAPI from './use-fullstory-api.js';
+import useFullStorySdk from './use-fullstory-sdk.js';
 import useShallowMemo from './use-shallow-memo.js';
 
 export default function useFullStory({
@@ -14,28 +14,26 @@ export default function useFullStory({
   const { devMode } = snippetOptions;
 
   // Contexts
-  const { anonymize, identify, init, shutdown } = useFullStoryAPI();
+  const { anonymize, identify, init, isInitialized, shutdown } =
+    useFullStorySdk();
 
   // States
   const memoizedSnippetOptions: SnippetOptions = useShallowMemo(snippetOptions);
-  const snippetOptionsRef: MutableRefObject<SnippetOptions | null> =
-    useRef(null);
 
   // Effects
-  useEffect((): (() => void) | undefined => {
-    // React fires effect hooks twice in development mode.
-    // If we've already initiated, don't do it a second time.
-    if (snippetOptionsRef.current === memoizedSnippetOptions) {
+  useEffect((): void => {
+    if (isInitialized()) {
       return;
     }
-
-    snippetOptionsRef.current = memoizedSnippetOptions;
     init(memoizedSnippetOptions);
+  }, [init, isInitialized, memoizedSnippetOptions]);
 
-    return (): void => {
+  useEffect(
+    (): VoidFunction => (): void => {
       shutdown();
-    };
-  }, [memoizedSnippetOptions]);
+    },
+    [shutdown],
+  );
 
   useEffect((): (() => void) | undefined => {
     if (typeof userUid === 'undefined' || devMode === true) {
@@ -47,5 +45,5 @@ export default function useFullStory({
     return (): void => {
       anonymize();
     };
-  }, [devMode, userUid, userVars]);
+  }, [anonymize, devMode, identify, userUid, userVars]);
 }

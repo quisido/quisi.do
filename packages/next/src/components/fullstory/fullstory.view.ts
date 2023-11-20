@@ -1,6 +1,6 @@
 'use client';
 
-import useFullStory from 'fullstory-react';
+import { useFullStory } from 'fullstory-react';
 
 export default function FullStory(): null {
   useFullStory({
