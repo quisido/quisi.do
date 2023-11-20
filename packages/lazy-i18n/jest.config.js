@@ -26,6 +26,7 @@ export default {
   resetModules: true,
   restoreMocks: true,
   roots: ['<rootDir>/src'],
+  testEnvironment: 'jsdom',
   transform: {
     '^.+\\.tsx?$': '@monorepo-template/jest-transformer',
   },
