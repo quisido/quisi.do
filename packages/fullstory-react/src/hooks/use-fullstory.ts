@@ -2,9 +2,9 @@
 
 import type { SnippetOptions } from '@fullstory/browser';
 import { useEffect } from 'react';
+import useShallowMemo from 'use-shallow-memo';
 import type IdentifyProps from '../types/identify-props.js';
 import useFullStorySdk from './use-fullstory-sdk.js';
-import useShallowMemo from './use-shallow-memo.js';
 
 export default function useFullStory({
   userUid,

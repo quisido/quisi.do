@@ -83,13 +83,13 @@ export default function DashboardStatus({
         <Div>
           <Link
             category="features/dashboard/status"
-            href="https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml"
+            href="https://github.com/CharlesStover/quisi.do/actions/workflows/cd.yml"
             title="Continuous deployment workflow"
           >
             <img
               alt={ciCdAlt}
               height={20}
-              src="https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml/badge.svg"
+              src="https://github.com/CharlesStover/quisi.do/actions/workflows/cd.yml/badge.svg"
             />
           </Link>
         </Div>

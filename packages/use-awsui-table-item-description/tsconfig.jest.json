@@ -1,9 +1,8 @@
 {
-  "extends": "../../tsconfig.package.json",
+  "extends": "./tsconfig.json",
   "include": ["src/"],
   "compilerOptions": {
-    "jsx": "react-jsxdev",
-    "module": "ES6",
+    "module": "ESNext",
     "moduleResolution": "Bundler"
   }
 }

@@ -1,12 +1,4 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["**/*", "**/*.json", "**/.*", "**/.*.json"],
-  "compilerOptions": {
-    "jsx": "react-jsxdev",
-    "lib": ["DOM", "ESNext"],
-    "module": "ES6",
-    "moduleResolution": "Bundler",
-    "noEmit": true,
-    "skipLibCheck": true
-  }
+  "include": ["**/*", "**/*.json", "**/.*", "**/.*.json"]
 }

@@ -1,6 +1,6 @@
 # React Datadog
 
-[![CI/CD](https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml)
+[![CI/CD](https://github.com/CharlesStover/quisi.do/actions/workflows/cd.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/quisi.do/actions/workflows/cd.yml)
 [![version](https://img.shields.io/npm/v/react-datadog.svg)](https://www.npmjs.com/package/react-datadog)
 [![downloads](https://img.shields.io/npm/dt/react-datadog.svg)](https://www.npmjs.com/package/react-datadog)
 

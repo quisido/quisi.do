@@ -1,12 +1,11 @@
 {
-  "extends": "../../tsconfig.package.json",
+  "exclude": ["dist/", "jest/"],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*.ts"],
   "compilerOptions": {
-    "declarationDir": "dist",
     "lib": ["DOM", "ESNext"],
-    "outDir": "dist",
+    "noEmit": true,
     "rootDir": "src",
     "sourceRoot": "src"
-  },
-  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/"],
-  "include": ["src"]
+  }
 }

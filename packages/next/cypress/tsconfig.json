@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tsconfig.package.json",
+  "extends": "../tsconfig.json",
   "exclude": ["coverage/", "screenshots/", "videos/"],
   "include": ["**/*.ts"],
   "compilerOptions": {

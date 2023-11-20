@@ -3,8 +3,8 @@
 import type { RumInitConfiguration, datadogRum } from '@datadog/browser-rum';
 import type { MutableRefObject } from 'react';
 import { useEffect, useRef } from 'react';
+import useShallowMemo from 'use-shallow-memo';
 import useDatadogRum from '../../hooks/use-datadog-rum.js';
-import useShallowMemo from '../../hooks/use-shallow-memo.js';
 import type User from '../../types/user.js';
 import useUser from './hooks/use-user.js';
 

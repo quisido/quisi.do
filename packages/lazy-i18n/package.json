@@ -6,12 +6,12 @@
   "homepage": "https://www.npmjs.com/package/lazy-i18n",
   "license": "MIT",
   "main": "./dist/index.js",
-  "repository": "github:CharlesStover/lazy-i18n",
+  "repository": "github:CharlesStover/quisi.do",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
-    "email": "lazy-i18n@charlesstover.com",
-    "url": "https://github.com/CharlesStover/lazy-i18n/issues"
+    "email": "lazy-i18n@quisi.do",
+    "url": "https://github.com/CharlesStover/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
@@ -27,7 +27,7 @@
     "jest": "jest",
     "prepack": "yarn run tsc",
     "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,jest \"yarn run attw\" \"yarn run eslint\" \"yarn run jest\"",
-    "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile"
+    "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.12.2",

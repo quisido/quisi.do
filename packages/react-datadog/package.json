@@ -27,7 +27,7 @@
     "jest": "jest",
     "prepack": "yarn run tsc",
     "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,jest \"yarn run attw\" \"yarn run eslint\" \"yarn run jest\"",
-    "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile"
+    "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.12.2",
@@ -62,5 +62,8 @@
   "peerDependencies": {
     "@datadog/browser-rum": "^5.0.0",
     "react": ">=17.0.0"
+  },
+  "dependencies": {
+    "use-shallow-memo": "workspace:^"
   }
 }

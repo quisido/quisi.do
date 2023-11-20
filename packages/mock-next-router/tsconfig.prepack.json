@@ -1,12 +1,9 @@
 {
-  "extends": "../../tsconfig.package.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "declarationDir": "dist",
     "jsx": "react-jsx",
-    "lib": ["DOM", "ESNext"],
     "outDir": "dist",
-    "rootDir": "src",
-    "sourceRoot": "src",
     /**
      * next/dist/server/next-server.d.ts
      *   Property "sendRenderResult" in type "NextNodeServer" is not assignable to
@@ -15,5 +12,5 @@
     "skipLibCheck": true
   },
   "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/"],
-  "include": ["src"]
+  "include": ["src/"]
 }

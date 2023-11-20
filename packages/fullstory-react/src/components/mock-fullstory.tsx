@@ -2,8 +2,8 @@
 
 import * as fullStoryBrowser from '@fullstory/browser';
 import { useMemo, type PropsWithChildren, type ReactElement } from 'react';
+import useShallowMemo from 'use-shallow-memo';
 import FullStorySdk from '../contexts/fullstory-sdk.js';
-import useShallowMemo from '../hooks/use-shallow-memo.js';
 import type { FullStorySdk as FullStorySdkType } from '../types/fullstory-sdk.js';
 
 export default function MockFullStory({

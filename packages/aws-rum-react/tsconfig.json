@@ -1,5 +1,7 @@
 {
-  "extends": "../../tsconfig.package.json",
+  "exclude": ["dist/", "jest/"],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],
@@ -13,7 +15,5 @@
      *   ECMAScript module.
      */
     "skipLibCheck": true
-  },
-  "exclude": [],
-  "include": ["**/*.ts", "**/*.tsx"]
+  }
 }

@@ -85,6 +85,11 @@
     {
       "name": "use-offline",
       "path": "packages/use-offline"
+    },
+
+    {
+      "name": "use-shallow-memo",
+      "path": "packages/use-shallow-memo"
     }
   ],
 

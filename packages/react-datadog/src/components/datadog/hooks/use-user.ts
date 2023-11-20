@@ -2,8 +2,8 @@
 
 import type { datadogRum } from '@datadog/browser-rum';
 import { useEffect } from 'react';
+import useShallowMemo from 'use-shallow-memo';
 import useDatadogRum from '../../../hooks/use-datadog-rum.js';
-import useShallowMemo from '../../../hooks/use-shallow-memo.js';
 import type User from '../../../types/user.js';
 import isUndefined from '../utils/is-undefined.js';
 

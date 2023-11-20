@@ -1,7 +1,7 @@
 # Cloudflare analytics worker
 
 The Cloudflare analytics worker is a Cloudflare worker for vending Cloudflare
-GraphQL analytics for the `charlesstover.com` zone.
+GraphQL analytics for the `quisi.do` zone.
 
 ## Prerequisites
 

@@ -33,7 +33,8 @@
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json"
   },
   "dependencies": {
-    "@fullstory/browser": "^1.7.1"
+    "@fullstory/browser": "^1.7.1",
+    "use-shallow-memo": "workspace:^"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.12.2",

@@ -29,7 +29,7 @@
     "eslint:fix": "eslint '**/*' --fix",
     "prepack": "yarn run tsc",
     "prepublish": "concurrently --kill-others-on-fail --names attw,eslint \"yarn run attw\" \"yarn run eslint\"",
-    "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile"
+    "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json"
   },
   "dependencies": {
     "@monorepo-template/tree-logger": "workspace:^",
