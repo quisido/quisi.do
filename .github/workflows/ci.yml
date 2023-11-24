@@ -112,7 +112,7 @@ jobs:
       # available on the public registry. To work around this, we build the
       # public packages first, then the private packages afterward.
       - name: Prepack (public)
-        run: yarn prepack -- --exclude "@quisido/next"
+        run: yarn prepack
       - name: Prepack (private)
         run: yarn packages/next run prepack
         env:
