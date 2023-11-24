@@ -1,13 +1,13 @@
 /// <reference types="jest" />
-import type { RenderResult } from '@testing-library/react';
+import type { RenderHookResult } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react';
-import useProvider, { type State } from './provider.hook.js';
+import useProvider, { type Props, type State } from './provider.hook.js';
 
 const EN_US: 'en_US' = 'en_US';
 const ES_ES: 'es_ES' = 'es_ES';
 
 const asyncLoadFallbackTranslationsEffect = async (
-  result: RenderResult<State>,
+  result: RenderHookResult<State, Props<Record<string, undefined>>>['result'],
 ): Promise<void> => {
   await act(async (): Promise<void> => {
     await result.current.asyncLoadFallbackTranslationsEffect.current;
@@ -15,7 +15,7 @@ const asyncLoadFallbackTranslationsEffect = async (
 };
 
 const asyncLoadTranslationsEffect = async (
-  result: RenderResult<State>,
+  result: RenderHookResult<State, Props<Record<string, undefined>>>['result'],
 ): Promise<void> => {
   await act(async (): Promise<void> => {
     await result.current.asyncLoadTranslationsEffect.current;
@@ -24,31 +24,33 @@ const asyncLoadTranslationsEffect = async (
 
 describe('useProvider', (): void => {
   it('should throw an error when the locale does not exist', (): void => {
-    const { result } = renderHook(useProvider, {
-      initialProps: {
-        locale: EN_US,
-        translationsRecord: {
-          [EN_US]: undefined,
+    expect((): void => {
+      renderHook(useProvider, {
+        initialProps: {
+          locale: EN_US,
+          translationsRecord: {
+            [EN_US]: undefined,
+          },
         },
-      },
-    });
-    expect(result.error).toBeInstanceOf(Error);
+      });
+    }).toThrowError();
   });
 
   it('should throw an error when the fallback locale does not exist', (): void => {
-    const { result } = renderHook(useProvider, {
-      initialProps: {
-        fallbackLocale: ES_ES,
-        locale: EN_US,
-        translationsRecord: {
-          [EN_US]: {
-            English: 'English',
+    expect((): void => {
+      renderHook(useProvider, {
+        initialProps: {
+          fallbackLocale: ES_ES,
+          locale: EN_US,
+          translationsRecord: {
+            [EN_US]: {
+              English: 'English',
+            },
+            [ES_ES]: undefined,
           },
-          [ES_ES]: undefined,
         },
-      },
-    });
-    expect(result.error).toBeInstanceOf(Error);
+      });
+    }).toThrowError();
   });
 
   it('should handle eager-loaded translations', (): void => {

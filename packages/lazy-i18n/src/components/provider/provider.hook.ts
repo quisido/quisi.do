@@ -14,7 +14,7 @@ type LoadedTranslationsRecord<K extends number | string | symbol> = Record<
   Record<string, string> | undefined
 >;
 
-interface Props<T extends Record<string, Translations | undefined>> {
+export interface Props<T extends Record<string, Translations | undefined>> {
   readonly fallbackLocale?: keyof T | undefined;
   readonly locale: keyof T;
   readonly onLoadError?: ((locale: keyof T, err: unknown) => void) | undefined;
