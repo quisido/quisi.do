@@ -30,7 +30,7 @@
     "export": "yarn packages/next run export",
     "jest": "jest",
     "lighthouse": "yarn packages/next run lighthouse",
-    "prepack": "yarn workspaces foreach --all --exclude \"@quisido/next\" --interlaced --jobs unlimited --parallel --topological-dev --verbose run prepack",
+    "prepack": "yarn workspaces foreach --all --interlaced --jobs unlimited --parallel --topological-dev --verbose run prepack",
     "prepublish": "concurrently --kill-others-on-fail --names eslint,jest,prepublish,test \"yarn run eslint\" \"yarn run jest\" \"yarn workspaces foreach --all --jobs unlimited --parallel --verbose run prepublish\" \"yarn run test\"",
     "publish": "yarn workspaces foreach --interlaced --jobs unlimited --no-private --parallel --topological-dev --verbose npm publish --tolerate-republish",
     "serve": "yarn packages/next run serve",

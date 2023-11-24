@@ -3,6 +3,7 @@
   "compilerOptions": {
     "declarationDir": "dist",
     "jsx": "react-jsx",
+    "noEmit": false,
     "outDir": "dist",
     "rootDir": "src",
     "sourceRoot": "src",
@@ -14,5 +15,5 @@
     "skipLibCheck": true
   },
   "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/"],
-  "include": ["src"]
+  "include": ["src/"]
 }
