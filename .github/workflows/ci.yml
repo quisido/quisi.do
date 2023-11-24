@@ -113,7 +113,7 @@ jobs:
       # public packages first, then the private packages afterward.
       - name: Prepack (public)
         run: yarn prepack -- --exclude "@quisido/next"
-      -- name: Prepack (private)
+      - name: Prepack (private)
         run: yarn packages/next run prepack
         env:
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
