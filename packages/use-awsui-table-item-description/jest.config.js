@@ -9,13 +9,11 @@ export default {
   restoreMocks: true,
   roots: ['<rootDir>/src'],
   testEnvironment: 'jsdom',
+  transformIgnorePatterns: ['node_modules/(?!@awsui/components-react)/'],
 
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
     '!<rootDir>/src/**/*.d.ts',
-    '!<rootDir>/src/**/*.stories.{ts,tsx}',
-    '!<rootDir>/src/**/*.test.{ts,tsx}',
-    '!<rootDir>/src/**/test-utils/*.{ts,tsx}',
   ],
 
   coverageThreshold: {
@@ -28,10 +26,12 @@ export default {
   },
 
   moduleNameMapper: {
+    '.+\.css$': '<rootDir>/src/test/constants/css.ts',
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
 
   transform: {
+    '@awsui-.+\\.[cm]?js$': '@monorepo-template/jest-transformer',
     '^.+\\.tsx?$': '@monorepo-template/jest-transformer',
   },
 };

@@ -54,12 +54,13 @@
     "@cloudscape-design/components": "^3.0.418",
     "@cloudscape-design/design-tokens": "^3.0.28",
     "@cloudscape-design/global-styles": "^1.0.15",
-    "@cypress/code-coverage": "^3.12.6",
+    "@cypress/code-coverage": "^3.12.11",
     "@datadog/browser-rum": "^5.1.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fullstory/browser": "^1.7.1",
     "@microsoft/eslint-formatter-sarif": "^3.0.0",
+    "@monorepo-template/cypress-coverage-plugin": "^1.0.7",
     "@monorepo-template/ignore-cypress-dependency-logs": "^1.0.0",
     "@mui/icons-material": "^5.14.15",
     "@mui/material": "^5.14.15",
@@ -94,6 +95,7 @@
     "aws-cdk": "^2.103.1",
     "aws-rum-react": "workspace:^",
     "aws-rum-web": "^1.15.0",
+    "babel-loader": "^9.1.3",
     "babel-plugin-istanbul": "^6.1.1",
     "concurrently": "^8.2.2",
     "cypress": "^13.3.3",
@@ -135,6 +137,7 @@
     "use-next-awsui": "workspace:^",
     "use-offline": "workspace:^",
     "wait-on": "^7.0.1",
+    "webpack": "^5.89.0",
     "zone.js": "^0.14.1"
   }
 }

@@ -5,8 +5,6 @@ export default {
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
     '!<rootDir>/src/**/*.d.ts',
-    '!<rootDir>/src/**/*.test.{ts,tsx}',
-    '!<rootDir>/src/**/test-utils/*.{ts,tsx}',
   ],
   coverageDirectory: './jest/coverage',
   coverageThreshold: {

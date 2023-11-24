@@ -139,7 +139,7 @@ jobs:
         run: yarn run cypress:pnp
         working-directory: packages/next/
       - name: End-to-end test
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v6
         env:
           CHOKIDAR_USEPOLLING: true
           CYPRESS_SCREENSHOTS_SUBFOLDER: ${{ matrix.os }}-${{ matrix.browser }}
@@ -153,6 +153,7 @@ jobs:
           command-prefix: yarn dlx
           config-file: cypress.config.cjs
           install: false
+          parallel: true
           record: false
           start: yarn run start
           wait-on: 'http://localhost:3000/'

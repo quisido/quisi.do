@@ -36,7 +36,7 @@
     "serve": "yarn packages/next run serve",
     "start": "yarn packages/next run start",
     "test": "monorepo-template-test",
-    "up": "yarn up \"@*/*\" \"!(@monorepo-template/test|@monorepo-template/tree-logger|aws-rum-react|fullstory-react|lazy-i18n|number-format-react|react-datadog|sentry-react|unknown2string|use-awsui-table-item-description|use-next-awsui|use-offline)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
+    "up": "yarn up \"@*/*\" \"!(@monorepo-template/test|@monorepo-template/tree-logger|aws-rum-react|fullstory-react|lazy-i18n|mock-next-router|number-format-react|react-datadog|sentry-react|unknown2string|use-awsui-table-item-description|use-next-awsui|use-offline|use-shallow-memo)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
   },
   "workspaces": [
     "packages/*"

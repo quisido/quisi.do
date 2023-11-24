@@ -23,6 +23,14 @@ export default function AppWrapper({
           case null:
             return [];
 
+          case 'charities':
+            return [
+              {
+                children: 'Charities',
+                path: '/charities',
+              },
+            ];
+
           case 'cloudflare-workers-ai':
             return [
               {
@@ -79,6 +87,8 @@ export default function AppWrapper({
         switch (segment) {
           case null:
             return;
+          case 'charities':
+            return <>Loading charities</>;
           case 'cloudflare-workers-ai':
             return <>Loading Cloudflare Workers AI</>;
           case 'dashboard':

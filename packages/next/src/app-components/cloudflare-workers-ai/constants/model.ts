@@ -13,5 +13,5 @@ enum Model {
 
 export default Model;
 
-const { isType } = createEnumUtils(Model);
+const { isType } = createEnumUtils(Model, 'a Cloudflare Workers AI model');
 export const isModel = isType;
