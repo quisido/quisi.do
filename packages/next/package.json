@@ -32,13 +32,13 @@
     "export": "next export",
     "jest": "jest",
     "lighthouse": "concurrently --hide server --kill-others --kill-others-on-fail --names server,lighthouse --success command-lighthouse \"yarn run build && yarn run serve\" \"yarn run lighthouse:report\"",
-    "lighthouse:report": "wait-on http://localhost:80/index.html && lighthouse http://localhost:80/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental",
+    "lighthouse:report": "wait-on http://localhost:3000/index.html && lighthouse http://localhost:3000/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental",
     "lint": "next lint",
     "postlighthouse": "yarn node ./scripts/postlighthouse/index.js",
     "prepack": "yarn run build",
     "prepublish": "exit 0",
     "serve": "serve out",
-    "start": "REACT_APP_CLOUDFLARE_ANALYTICS_ORIGIN=http://localhost:8787 next start -p 80"
+    "start": "REACT_APP_CLOUDFLARE_ANALYTICS_ORIGIN=http://localhost:8787 next start -p 3000"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.12.2",

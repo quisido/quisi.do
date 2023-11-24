@@ -13,14 +13,9 @@ jobs:
       - name: Install dependencies
         run: bun install
       - name: Prepack
-        if: always()
         run: bun run prepack
       - name: Prepublish
-        if: always()
         run: bun run prepublish
-      - name: Succeed
-        if: always()
-        run: exit 0
 
   # Stage 1: codacy, dependency-review, devskim, install
   codacy:
@@ -55,9 +50,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Review dependencies
         uses: actions/dependency-review-action@v2
-      - name: Succeed
-        if: always()
-        run: exit 0
 
   devskim:
     name: DevSkim
