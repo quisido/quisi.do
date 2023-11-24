@@ -1,3 +1,4 @@
+import { type LinkProps } from '@awsui/components-react/link';
 import {
   type HTMLAttributeAnchorTarget,
   type MutableRefObject,
@@ -8,11 +9,10 @@ import {
 } from 'react';
 import { useLink as useNextAwsuiLink } from 'use-next-awsui';
 import useEvent from '../../../../hooks/use-event';
-import isHrefBlank from '../../../../utils/is-href-blank';
 import filterNodesByImage from '../../../../utils/filter-nodes-by-image';
-import mapLinkSpanToAnchorElement from './utils/map-link-span-to-anchor-element';
-import { type LinkProps } from '@awsui/components-react/link';
+import isHrefBlank from '../../../../utils/is-href-blank';
 import isHrefExternal from '../../../../utils/is-href-external';
+import mapLinkSpanToAnchorElement from './utils/map-link-span-to-anchor-element';
 
 interface Props {
   readonly category: string;
