@@ -44,7 +44,13 @@ describe('package.json', (): void => {
        *   copy as the source of truth.
        */
       it('should not upgrade workspaces', (): void => {
-        expect(up).toMatch(`"!(${publicPackageNames.join('|')})"`);
+        expect(up).toMatch(
+          [
+            `yarn up \"@*/*\" "!(${publicPackageNames.join('|')})"`,
+            'yarn up --recursive "@*/*" "*"',
+            'yarn sdks vscode',
+          ].join(' && '),
+        );
       });
     });
   });
