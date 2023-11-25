@@ -1,1 +1,1 @@
-export { default } from './number-format-react.js';
+export { default } from './components/number-format/index.js';

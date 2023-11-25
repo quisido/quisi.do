@@ -16,6 +16,7 @@
     "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/number-format-react.sarif",
     "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest",
+    "jest:watch": "jest --watch",
     "prepack": "yarn run tsc",
     "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,jest \"yarn run attw\" \"yarn run eslint\" \"yarn run jest\"",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json"
@@ -28,7 +29,6 @@
     "@babel/preset-typescript": "^7.23.2",
     "@microsoft/eslint-formatter-sarif": "^3.0.0",
     "@monorepo-template/eslint-config": "^1.0.7",
-    "@monorepo-template/jest-module-preset": "^1.1.3",
     "@monorepo-template/jest-transformer": "^1.0.2",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.6",

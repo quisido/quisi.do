@@ -3948,40 +3948,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/jest-module-preset@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "@monorepo-template/jest-module-preset@npm:1.1.3"
-  dependencies:
-    "@monorepo-template/jest-preset": "npm:^1.1.11"
-  peerDependencies:
-    "@babel/core": ">=7.0.0"
-    "@babel/preset-env": ">=7.0.0"
-    "@babel/preset-react": ">=7.0.0"
-    "@babel/preset-typescript": ">=7.0.0"
-    "@types/jest": ">=28.0.0"
-    babel-jest: ">=28.0.0"
-    identity-obj-proxy: ">=3.0.0"
-  checksum: 7415e377e51cbac06ab5d075b6399e14ddf0469dd964fafa3461f30cb913579dafed4b84d0f8e4b0a3f5afdc74319caaa2198d34803df8683f291e2bc1127ce8
-  languageName: node
-  linkType: hard
-
-"@monorepo-template/jest-preset@npm:^1.1.11":
-  version: 1.1.11
-  resolution: "@monorepo-template/jest-preset@npm:1.1.11"
-  dependencies:
-    "@monorepo-template/jest-transformer": "npm:^1.0.2"
-  peerDependencies:
-    "@babel/core": ">=7.0.0"
-    "@babel/preset-env": ">=7.0.0"
-    "@babel/preset-react": ">=7.0.0"
-    "@babel/preset-typescript": ">=7.0.0"
-    "@types/jest": ">=28.0.0"
-    babel-jest: ">=28.0.0"
-    identity-obj-proxy: ">=3.0.0"
-  checksum: c47585c12ecdee05e42601c44a8a2a2c98aa532780481254daf0543c6698fb2d17575e340e73e2f16f7e4bbdaf629a7f2c4c81ebe0d1f76999cd8a80155817b4
-  languageName: node
-  linkType: hard
-
 "@monorepo-template/jest-transformer@npm:^1.0.2":
   version: 1.0.2
   resolution: "@monorepo-template/jest-transformer@npm:1.0.2"
@@ -15701,7 +15667,6 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.2"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
-    "@monorepo-template/jest-module-preset": "npm:^1.1.3"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
     "@types/jest": "npm:^29.5.6"
@@ -16166,7 +16131,6 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.2"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
-    "@monorepo-template/jest-module-preset": "npm:^1.1.3"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
     "@types/jest": "npm:^29.5.6"
@@ -17568,7 +17532,6 @@ __metadata:
     "@datadog/browser-rum": "npm:^5.1.0"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
-    "@monorepo-template/jest-module-preset": "npm:^1.1.3"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
     "@types/jest": "npm:^29.5.6"
@@ -20591,7 +20554,6 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.2"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
-    "@monorepo-template/jest-module-preset": "npm:^1.1.3"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@types/jest": "npm:^29.5.6"
     "@types/node": "npm:^20.8.9"
@@ -20715,7 +20677,6 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.2"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
-    "@monorepo-template/jest-module-preset": "npm:^1.1.3"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
     "@types/identity-obj-proxy": "npm:^3"
@@ -20792,7 +20753,6 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.2"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
-    "@monorepo-template/jest-module-preset": "npm:^1.1.3"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
     "@types/jest": "npm:^29.5.6"
@@ -20838,7 +20798,6 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.2"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
-    "@monorepo-template/jest-module-preset": "npm:^1.1.3"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
     "@types/jest": "npm:^29.5.6"
@@ -20873,7 +20832,6 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.2"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
-    "@monorepo-template/jest-module-preset": "npm:^1.1.3"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.1.2"
     "@types/jest": "npm:^29.5.6"

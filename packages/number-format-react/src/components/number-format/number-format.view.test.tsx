@@ -1,6 +1,6 @@
 /// <reference types="jest" />
 import { render } from '@testing-library/react';
-import NumberFormat from './number-format-react.js';
+import NumberFormat from '../../index.js';
 
 describe('NumberFormat', (): void => {
   it('should render numeric strings', (): void => {
