@@ -18622,6 +18622,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.23.3"
     "@babel/preset-react": "npm:^7.23.3"
     "@babel/preset-typescript": "npm:^7.23.3"
+    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@sentry/react": "npm:^7.76.0"
     "@sentry/types": "npm:^7.76.0"

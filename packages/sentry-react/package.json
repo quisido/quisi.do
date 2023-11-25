@@ -38,6 +38,7 @@
     "@babel/preset-env": "^7.23.3",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
+    "@monorepo-template/eslint-config": "^1.0.7",
     "@monorepo-template/jest-transformer": "^1.0.2",
     "@sentry/react": "^7.76.0",
     "@sentry/types": "^7.76.0",

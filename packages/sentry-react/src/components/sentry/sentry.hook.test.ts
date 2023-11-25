@@ -1,10 +1,15 @@
 /// <reference types="jest" />
 
-const TEST_INIT = jest.fn();
-const TEST_SET_USER = jest.fn();
+/**
+ *   Technical debt: Replace `jest.mock` with a context provider for mocked
+ * implementations. We use `var` here because `jest.mock` is hoisted, so too
+ * must be the variables used inside the mock implementation.
+ */
+const mockInit = jest.fn();
+const mockSetUser = jest.fn();
 jest.mock('@sentry/react', () => ({
-  init: TEST_INIT,
-  setUser: TEST_SET_USER,
+  init: mockInit,
+  setUser: mockSetUser,
 }));
 
 import { renderHook } from '@testing-library/react';
@@ -50,8 +55,8 @@ describe('useSentry', (): void => {
       },
     });
 
-    expect(TEST_INIT).toHaveBeenCalledTimes(ONCE);
-    expect(TEST_INIT).toHaveBeenLastCalledWith({
+    expect(mockInit).toHaveBeenCalledTimes(ONCE);
+    expect(mockInit).toHaveBeenLastCalledWith({
       allowUrls: [],
       attachStacktrace: true,
       autoSessionTracking: true,
@@ -87,8 +92,8 @@ describe('useSentry', (): void => {
       },
     });
 
-    expect(TEST_SET_USER).toHaveBeenCalledTimes(ONCE);
-    expect(TEST_SET_USER).toHaveBeenLastCalledWith(DEFAULT_USER);
+    expect(mockSetUser).toHaveBeenCalledTimes(ONCE);
+    expect(mockSetUser).toHaveBeenLastCalledWith(DEFAULT_USER);
   });
 
   it('should support an explicit user', (): void => {
@@ -104,7 +109,7 @@ describe('useSentry', (): void => {
       },
     });
 
-    expect(TEST_SET_USER).toHaveBeenCalledTimes(ONCE);
-    expect(TEST_SET_USER).toHaveBeenLastCalledWith(TEST_USER);
+    expect(mockSetUser).toHaveBeenCalledTimes(ONCE);
+    expect(mockSetUser).toHaveBeenLastCalledWith(TEST_USER);
   });
 });

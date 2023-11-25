@@ -11,7 +11,7 @@ import useSentry from './sentry.hook.js';
 interface Props extends Readonly<BrowserOptions> {
   readonly children: ReactNode;
   readonly errorBoundaryDialogOptions?: ReportDialogOptions | undefined;
-  readonly onErrorBoundaryMount?: VoidFunction | undefined;
+  readonly onErrorBoundaryMount?: (() => void) | undefined;
   readonly showErrorBoundaryDialog?: boolean | undefined;
   readonly user?: User | undefined;
 
