@@ -10,8 +10,9 @@
     "dev": "wrangler dev --test-scheduled",
     "init": "echo \"API token:\" && wrangler secret put API_TOKEN && echo \"Account tag:\" && wrangler secret put ACCOUNT_TAG && echo \"Zone tag:\" && wrangler secret put ZONE_TAG",
     "jest": "jest",
+    "jest:watch": "jest --watch",
     "prepack": "exit 0",
-    "prepublish": "jest && yarn run deploy:dry-run",
+    "prepublish": "yarn run jest",
     "tail": "wrangler tail --format pretty --ip self cloudflare-analytics"
   },
   "devDependencies": {
