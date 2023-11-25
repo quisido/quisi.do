@@ -1,5 +1,5 @@
 {
-  "exclude": [".next"],
+  "exclude": [".next/", "out/"],
   "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts"],
   "compilerOptions": {
     "allowJs": false,
