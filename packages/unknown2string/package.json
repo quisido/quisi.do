@@ -22,7 +22,7 @@
   },
   "scripts": {
     "attw": "attw",
-    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/unknown2string.sarif || eslint '**/*'",
+    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/unknown2string.sarif",
     "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest",
     "prepack": "yarn run tsc",

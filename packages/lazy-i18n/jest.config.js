@@ -18,7 +18,7 @@ export default {
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
-    '\\.module.scss$': '<rootDir>/src/test-utils/module-scss.ts',
+    '\\.module.scss$': '<rootDir>/src/test/constants/module-scss.ts',
   },
   resetMocks: true,
   resetModules: true,

@@ -25,7 +25,7 @@
     "cloudflare-analytics": "yarn packages/cloudflare-analytics-worker run dev",
     "cloudflare-analytics:init": "yarn packages/cloudflare-analytics-worker run init",
     "dev": "yarn packages/next run dev",
-    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ./sarif/index.sarif || eslint '**/*'",
+    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ./sarif/index.sarif",
     "eslint:fix": "eslint '**/*' --fix && yarn workspaces foreach --interlaced --parallel --topological-dev --verbose run eslint:fix",
     "export": "yarn packages/next run export",
     "jest": "jest",

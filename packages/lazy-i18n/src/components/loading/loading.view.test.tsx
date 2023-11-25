@@ -1,6 +1,6 @@
 /// <reference types="jest" />
 import { render } from '@testing-library/react';
-import inner from '../../test-utils/inner.js';
+import inner from '../../test/utils/inner.js';
 import Loading from './index.js';
 
 describe('Loading', (): void => {

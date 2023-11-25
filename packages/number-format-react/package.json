@@ -13,7 +13,7 @@
     "url": "https://github.com/CharlesStover/quisi.do/issues"
   },
   "scripts": {
-    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/number-format-react.sarif || eslint '**/*'",
+    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/number-format-react.sarif",
     "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest",
     "prepack": "yarn run tsc",

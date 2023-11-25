@@ -3,8 +3,8 @@ import type { RenderHookResult } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react';
 import useProvider, { type Props, type State } from './provider.hook.js';
 
-const EN_US: 'en_US' = 'en_US';
-const ES_ES: 'es_ES' = 'es_ES';
+const EN_US = 'en_US' as const;
+const ES_ES = 'es_ES' as const;
 
 const asyncLoadFallbackTranslationsEffect = async (
   result: RenderHookResult<State, Props<Record<string, undefined>>>['result'],

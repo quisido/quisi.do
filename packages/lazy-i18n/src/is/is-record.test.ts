@@ -1,10 +1,12 @@
 import isRecord from './is-record.js';
 
+const TEST_NUMBER = 1234;
+
 describe('isRecord', (): void => {
   it('should return false for non-objects', (): void => {
     expect(isRecord(null)).toBe(false);
     expect(isRecord(true)).toBe(false);
-    expect(isRecord(1234)).toBe(false);
+    expect(isRecord(TEST_NUMBER)).toBe(false);
     expect(isRecord('str')).toBe(false);
   });
 

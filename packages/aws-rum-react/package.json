@@ -22,7 +22,7 @@
   },
   "scripts": {
     "attw": "attw",
-    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/aws-rum-react.sarif || eslint '**/*'",
+    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/aws-rum-react.sarif",
     "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest",
     "jest:watch": "jest --watch",

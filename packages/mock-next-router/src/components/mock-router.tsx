@@ -9,20 +9,17 @@ import {
   useMemo,
 } from 'react';
 import createPromise from '../utils/create-promise.js';
+import initNextData from '../utils/init-next-data.js';
 import mapIterableToRecord from '../utils/map-iterable-to-record.js';
-import Null from './null.js';
 import noop from '../utils/noop.js';
+import Null from './null.js';
 
 interface Props {
   readonly history: MemoryHistory;
 }
 
-window.__NEXT_DATA__ = {
-  buildId: 'jest',
-  page: '/',
-  props: {},
-  query: {},
-};
+// The `Router` constructor requires `window.__NEXT_DATA__`.
+initNextData();
 
 export default function MockRouter({
   children,

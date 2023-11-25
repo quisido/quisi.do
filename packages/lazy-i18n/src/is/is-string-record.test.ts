@@ -1,10 +1,12 @@
 import isStringRecord from './is-string-record.js';
 
+const TEST_NUMBER = 1234;
+
 describe('isStringRecord', (): void => {
   it('should return false for non-records', (): void => {
     expect(isStringRecord(null)).toBe(false);
     expect(isStringRecord(true)).toBe(false);
-    expect(isStringRecord(1234)).toBe(false);
+    expect(isStringRecord(TEST_NUMBER)).toBe(false);
     expect(isStringRecord('str')).toBe(false);
     expect(isStringRecord([])).toBe(false);
   });

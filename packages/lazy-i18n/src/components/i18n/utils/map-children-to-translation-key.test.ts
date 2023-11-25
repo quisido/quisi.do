@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 import mapChildrenToTranslationKey from './map-children-to-translation-key.js';
 
 describe('mapChildrenToTranslationKey', (): void => {

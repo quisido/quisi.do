@@ -27,7 +27,7 @@
     "cypress:pnp": "node ./scripts/cypress-pnp/index.js",
     "cypress:run": "wait-on http://localhost:3000/ && cypress run --browser chrome:canary",
     "dev": "next dev",
-    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/next.sarif || eslint '**/*'",
+    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/next.sarif",
     "eslint:fix": "eslint '**/*' --fix",
     "export": "next export",
     "jest": "jest",

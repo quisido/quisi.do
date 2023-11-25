@@ -31,7 +31,7 @@ function I18nProvider<T extends Record<string, Translations | undefined>>({
   });
 
   return (
-    <LoadingComponentContext.Provider value={LoadingComponent || Loading}>
+    <LoadingComponentContext.Provider value={LoadingComponent ?? Loading}>
       <TranslateFunctionContext.Provider value={translate}>
         {children}
       </TranslateFunctionContext.Provider>

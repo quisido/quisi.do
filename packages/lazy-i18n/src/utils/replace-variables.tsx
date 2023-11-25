@@ -24,9 +24,11 @@ export default function replaceVariables(
   const newTranslation: ReactNode[] = [translation];
   for (const [variable, value] of Object.entries(vars)) {
     for (let i = 0; i < newTranslation.length; i += 2) {
-      // Every even index is a string.
-      // Every odd index may be number, string, or ReactNode.
-      // 'Hello $world!' --> ['Hello ', <World />, '!']
+      /**
+       * Every even index is a string.
+       * Every odd index may be number, string, or ReactNode.
+       * 'Hello $world!' --> ['Hello ', <World />, '!']
+       */
       const item: string = newTranslation[i] as string;
       const newItems: ReactNode[] = item.split(`$${variable}`);
       if (newItems.length > 1) {

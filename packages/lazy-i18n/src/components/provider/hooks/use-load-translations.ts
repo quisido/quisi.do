@@ -14,25 +14,36 @@ type LazyTranslations = Promise<EagerTranslations>;
 export type State<T> = (locale: T) => Promise<void> | undefined;
 
 export interface Props<T> {
-  readonly onLoad: (locale: keyof T, translations: Record<string, string>) => void;
   readonly onLoadError?: ((locale: keyof T, err: unknown) => void) | undefined;
   readonly translationsRecord: T;
+  readonly onLoad: (
+    locale: keyof T,
+    translations: Record<string, string>,
+  ) => void;
 }
+
+const DEFAULT_IS_FETCHED: Readonly<
+  Record<number | string | symbol, undefined>
+> = Object.freeze({});
 
 export default function useLoadTranslations<
   T extends Record<string, Translations | undefined>,
 >({ onLoad, onLoadError, translationsRecord }: Props<T>): State<keyof T> {
-  const isFetchedRef: MutableRefObject<Record<keyof T, boolean>> = useRef(
-    Object.create(null),
-  );
+  const isFetchedRef: MutableRefObject<
+    Readonly<Record<keyof T, boolean | undefined>>
+  > = useRef(DEFAULT_IS_FETCHED);
 
   return useCallback(
     (locale: keyof T): Promise<void> | undefined => {
       // If we've already fetched these locations, don't fetch them again.
-      if (isFetchedRef.current[locale]) {
+      if (isFetchedRef.current[locale] === true) {
         return;
       }
-      isFetchedRef.current[locale] = true;
+
+      isFetchedRef.current = {
+        ...isFetchedRef.current,
+        [locale]: true,
+      };
 
       const translations: Translations | undefined = translationsRecord[locale];
       if (typeof translations === 'undefined') {

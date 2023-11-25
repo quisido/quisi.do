@@ -1,6 +1,11 @@
 /// <reference types="jest" />
 import { render } from '@testing-library/react';
-import type { ComponentType, PropsWithChildren, ReactElement } from 'react';
+import type {
+  ComponentType,
+  MutableRefObject,
+  PropsWithChildren,
+  ReactElement,
+} from 'react';
 import { useContext } from 'react';
 import Loading from '../../components/loading/index.js';
 import LoadingComponentContext from '../../contexts/loading-component.js';
@@ -17,11 +22,19 @@ const TEST_TRANSLATIONS: Record<string, Translations> = {
 
 describe('Provider', (): void => {
   it('should set the contexts to their default values', (): void => {
-    let LoadingComponent: ComponentType<unknown> | undefined;
-    let translate: TranslateFunctionType | undefined;
+    const LoadingComponent: MutableRefObject<
+      ComponentType<unknown> | undefined
+    > = {
+      current: undefined,
+    };
+
+    const translate: MutableRefObject<TranslateFunctionType | undefined> = {
+      current: undefined,
+    };
+
     function TestComponent(): null {
-      LoadingComponent = useContext(LoadingComponentContext);
-      translate = useContext(TranslateFunctionContext);
+      LoadingComponent.current = useContext(LoadingComponentContext);
+      translate.current = useContext(TranslateFunctionContext);
       return null;
     }
 
@@ -35,20 +48,22 @@ describe('Provider', (): void => {
       },
     });
 
-    if (typeof translate === 'undefined') {
+    if (typeof translate.current === 'undefined') {
       throw new Error('Could not find translate function context.');
     }
 
-    expect(LoadingComponent).toBe(Loading);
-    expect(translate('cat')).toBe('gato');
+    expect(LoadingComponent.current).toBe(Loading);
+    expect(translate.current('cat')).toBe('gato');
   });
 
   it('should set the contexts to the user-specified props', (): void => {
-    let LoadingComponent: ComponentType<unknown> | undefined;
+    let LoadingComponent: ComponentType<unknown> | undefined = undefined;
+
     function TestComponent(): null {
       LoadingComponent = useContext(LoadingComponentContext);
       return null;
     }
+
     function TestLoadingComponent(): null {
       return null;
     }

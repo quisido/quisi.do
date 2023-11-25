@@ -12,17 +12,11 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": [
-      "./tsconfig.eslint.json"
-    ]
+    "project": ["./tsconfig.eslint.json"]
   },
-  "plugins": [
-    "@typescript-eslint",
-    "prettier",
-    "react",
-    "react-hooks"
-  ],
+  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
   "rules": {
+    "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-type-alias": "off",
     "@typescript-eslint/prefer-readonly-parameter-types": "off",
     "prettier/prettier": "error",

@@ -33,8 +33,7 @@ export default class RunnableTranslateFunction
     this.run = this.run.bind(this);
   }
 
-  public run(str: string): string | undefined;
-  public run(str: string, vars: StringVars): string | undefined;
+  public run(str: string, vars?: StringVars): string | undefined;
   public run(str: string, vars: ReactNodeVars): ReactNode | undefined;
   public run(
     str: string,

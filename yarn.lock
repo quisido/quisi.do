@@ -14761,6 +14761,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.23.3"
     "@babel/preset-react": "npm:^7.23.3"
     "@babel/preset-typescript": "npm:^7.23.3"
+    "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.0.0"
     "@types/babel__core": "npm:^7"

@@ -97,7 +97,9 @@ export default function useProvider<
   }, [loadTranslations, locale]);
 
   const loadedFallbackTranslations: Record<string, string> | undefined =
-    fallbackLocale && loadedTranslationsRecord[fallbackLocale];
+    typeof fallbackLocale === 'undefined'
+      ? undefined
+      : loadedTranslationsRecord[fallbackLocale];
   const loadedTranslations: Record<string, string> | undefined =
     loadedTranslationsRecord[locale];
   return {
@@ -116,7 +118,7 @@ export default function useProvider<
       );
       newTranslate.on('loadTranslations', handleLoadTranslations);
       newTranslate.on('notFound', handleNotFound);
-      return newTranslate.run;
+      return newTranslate.run.bind(newTranslate);
     }, [
       handleLoadFallbackTranslations,
       handleLoadTranslations,

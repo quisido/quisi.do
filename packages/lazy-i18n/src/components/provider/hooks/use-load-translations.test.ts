@@ -1,6 +1,6 @@
 /// <reference types="jest" />
 import { renderHook } from '@testing-library/react';
-import expectToEventuallyThrow from '../../../test-utils/expect-to-eventually-throw.js';
+import expectToEventuallyThrow from '../../../test/utils/expect-to-eventually-throw.js';
 import type { DefaultExport } from '../../../types/default-export.js';
 import type { Translations } from '../../../types/translations.js';
 import type { Props, State } from './use-load-translations.js';
@@ -11,7 +11,8 @@ type P = Props<T>;
 type S = State<keyof T>;
 type T = Record<Locale, Translations | undefined>;
 
-const ES_ES: 'es_ES' = 'es_ES';
+const ES_ES = 'es_ES' as const;
+const ONCE = 1;
 const TEST_ERROR_MESSAGE = 'test error message';
 const TEST_ERROR: Error = new Error(TEST_ERROR_MESSAGE);
 
@@ -20,6 +21,7 @@ describe('useLoadTranslations', (): void => {
     const MOCK_ES_ES = jest.fn().mockReturnValue({
       Spanish: 'Espanol',
     });
+
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad(): void {},
@@ -28,13 +30,14 @@ describe('useLoadTranslations', (): void => {
         },
       },
     });
-    result.current('es_ES');
-    expect(MOCK_ES_ES).toHaveBeenCalledTimes(1);
-    result.current('es_ES');
-    expect(MOCK_ES_ES).toHaveBeenCalledTimes(1);
+
+    await result.current('es_ES');
+    expect(MOCK_ES_ES).toHaveBeenCalledTimes(ONCE);
+    await result.current('es_ES');
+    expect(MOCK_ES_ES).toHaveBeenCalledTimes(ONCE);
   });
 
-  it('should throw an error if the translations do not exist', (): void => {
+  it('should throw an error if the translations do not exist', async (): Promise<void> => {
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad(): void {},
@@ -43,12 +46,13 @@ describe('useLoadTranslations', (): void => {
         },
       },
     });
-    expect((): void => {
-      result.current('es_ES');
-    }).toThrowError();
+
+    await expect(async (): Promise<void> => {
+      await result.current('es_ES');
+    }).rejects.toThrowError();
   });
 
-  it('should load string record translations', (): void => {
+  it('should load string record translations', async (): Promise<void> => {
     const MOCK_LOAD_HANDLER = jest.fn();
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
@@ -60,14 +64,15 @@ describe('useLoadTranslations', (): void => {
         },
       },
     });
-    result.current('es_ES');
-    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(1);
+
+    await result.current('es_ES');
+    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(ONCE);
     expect(MOCK_LOAD_HANDLER).toHaveBeenLastCalledWith('es_ES', {
       Spanish: 'Espanol',
     });
   });
 
-  it('should load default export string record translations', (): void => {
+  it('should load default export string record translations', async (): Promise<void> => {
     const MOCK_LOAD_HANDLER = jest.fn();
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
@@ -81,14 +86,15 @@ describe('useLoadTranslations', (): void => {
         },
       },
     });
-    result.current('es_ES');
-    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(1);
+
+    await result.current('es_ES');
+    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(ONCE);
     expect(MOCK_LOAD_HANDLER).toHaveBeenLastCalledWith('es_ES', {
       Spanish: 'Espanol',
     });
   });
 
-  it('should load imported string record translations', (): void => {
+  it('should load imported string record translations', async (): Promise<void> => {
     const MOCK_LOAD_HANDLER = jest.fn();
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
@@ -100,14 +106,15 @@ describe('useLoadTranslations', (): void => {
         },
       },
     });
-    result.current('es_ES');
-    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(1);
+
+    await result.current('es_ES');
+    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(ONCE);
     expect(MOCK_LOAD_HANDLER).toHaveBeenLastCalledWith('es_ES', {
       Spanish: 'Espanol',
     });
   });
 
-  it('should load default imported string record translations', (): void => {
+  it('should load default imported string record translations', async (): Promise<void> => {
     const MOCK_LOAD_HANDLER = jest.fn();
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
@@ -121,8 +128,9 @@ describe('useLoadTranslations', (): void => {
         },
       },
     });
-    result.current('es_ES');
-    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(1);
+
+    await result.current('es_ES');
+    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(ONCE);
     expect(MOCK_LOAD_HANDLER).toHaveBeenLastCalledWith('es_ES', {
       Spanish: 'Espanol',
     });
@@ -141,8 +149,9 @@ describe('useLoadTranslations', (): void => {
         },
       },
     });
+
     await result.current('es_ES');
-    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(1);
+    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(ONCE);
     expect(MOCK_LOAD_HANDLER).toHaveBeenLastCalledWith('es_ES', {
       Spanish: 'Espanol',
     });
@@ -164,7 +173,7 @@ describe('useLoadTranslations', (): void => {
       },
     });
     await result.current('es_ES');
-    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(1);
+    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(ONCE);
     expect(MOCK_LOAD_HANDLER).toHaveBeenLastCalledWith('es_ES', {
       Spanish: 'Espanol',
     });
@@ -198,7 +207,7 @@ describe('useLoadTranslations', (): void => {
       },
     });
     await result.current('es_ES');
-    expect(MOCK_LOAD_ERROR_HANDLER).toHaveBeenCalledTimes(1);
+    expect(MOCK_LOAD_ERROR_HANDLER).toHaveBeenCalledTimes(ONCE);
     expect(MOCK_LOAD_ERROR_HANDLER).toHaveBeenLastCalledWith(ES_ES, TEST_ERROR);
   });
 });

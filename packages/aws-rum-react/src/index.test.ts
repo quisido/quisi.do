@@ -131,7 +131,7 @@ function describePackageJson({
       it('should have ESLint scripts', (): void => {
         assert('eslint' in scripts);
         expect(scripts.eslint).toBe(
-          "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/aws-rum-react.sarif || eslint '**/*'",
+          "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/aws-rum-react.sarif",
         );
 
         assert('eslint:fix' in scripts);

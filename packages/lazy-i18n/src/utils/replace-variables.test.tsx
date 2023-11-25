@@ -1,7 +1,15 @@
 import { render } from '@testing-library/react';
 import type { ReactElement } from 'react';
-import inner from '../test-utils/inner.js';
+import inner from '../test/utils/inner.js';
 import replaceVariables from './replace-variables.js';
+
+function TestHello(): ReactElement {
+  return <strong>olleh</strong>;
+}
+
+function TestWorld(): ReactElement {
+  return <em>dlrow</em>;
+}
 
 describe('replaceVariables', (): void => {
   it('should return strings with no variables', (): void => {
@@ -19,12 +27,6 @@ describe('replaceVariables', (): void => {
   });
 
   it('should replace React node variables', (): void => {
-    function TestHello(): ReactElement {
-      return <strong>olleh</strong>;
-    }
-    function TestWorld(): ReactElement {
-      return <em>dlrow</em>;
-    }
     const { getByText } = render(
       <>
         {replaceVariables('$hello, $world? $n! $world $hello.', {
