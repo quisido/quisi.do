@@ -2,6 +2,8 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
   "env": {
+    "browser": true,
+    "es6": true,
     "jest": true,
     "node": true
   },
@@ -61,6 +63,14 @@
     "project": ["./tsconfig.eslint.json"]
   },
   "rules": {
+    "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-redundant-type-constituents": "off",
+    "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-duplicate-imports": "off",
     "@typescript-eslint/no-parameter-properties": "off",
     "@typescript-eslint/sort-type-union-intersection-members": "off",
@@ -120,7 +130,6 @@
     "@typescript-eslint/no-unnecessary-qualifier": "error",
     "@typescript-eslint/no-unnecessary-type-arguments": "error",
     "@typescript-eslint/no-unnecessary-type-constraint": "error",
-    "@typescript-eslint/no-unsafe-argument": "error",
     "@typescript-eslint/no-unused-expressions": "error",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-use-before-define": "error",
@@ -212,33 +221,6 @@
       {
         "disallowTypeAnnotations": true,
         "prefer": "type-imports"
-      }
-    ],
-    "@typescript-eslint/naming-convention": [
-      "error",
-      {
-        "format": ["camelCase", "PascalCase"],
-        "leadingUnderscore": "allow",
-        "selector": "default",
-        "trailingUnderscore": "allow"
-      },
-      {
-        "format": ["camelCase", "PascalCase"],
-        "leadingUnderscore": "forbid",
-        "selector": "function",
-        "trailingUnderscore": "forbid"
-      },
-      {
-        "format": ["camelCase", "UPPER_CASE"],
-        "leadingUnderscore": "allow",
-        "selector": "variable",
-        "trailingUnderscore": "allow"
-      },
-      {
-        "format": ["camelCase", "PascalCase"],
-        "leadingUnderscore": "forbid",
-        "selector": ["enumMember", "typeLike"],
-        "trailingUnderscore": "forbid"
       }
     ],
     "@typescript-eslint/no-invalid-void-type": [

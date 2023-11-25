@@ -11,14 +11,7 @@ export default function inner(text: string): MatcherFunction {
       return false;
     }
 
-    /**
-     *   eslint can't correctly determine that `HTMLCollection` is
-     * `ArrayLike<Element>`.
-     */
-    const elements: readonly Element[] = Array.from(
-      element.children as ArrayLike<Element>,
-    );
-
+    const elements: readonly Element[] = Array.from(element.children);
     return elements.filter(isElement).every(hasNoTextContent);
   };
 }
