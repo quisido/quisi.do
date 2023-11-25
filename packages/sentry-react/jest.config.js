@@ -29,6 +29,7 @@ export default {
   },
 
   transform: {
+    'use-shallow-memo': '@monorepo-template/jest-transformer',
     '^.+\\.tsx?$': '@monorepo-template/jest-transformer',
   },
 };

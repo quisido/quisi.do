@@ -1,6 +1,6 @@
 /// <reference types="jest" />
 import { renderHook } from '@testing-library/react';
-import useShallowMemo from "../index.js";
+import useShallowMemo from '../index.js';
 
 const INITIAL_OBJECT = {
   boolean: true,
@@ -16,7 +16,7 @@ describe('useShallowMemo', (): void => {
 
     expect(result.current).toBe(INITIAL_OBJECT);
 
-    rerender({...INITIAL_OBJECT});
+    rerender({ ...INITIAL_OBJECT });
 
     expect(result.current).toBe(INITIAL_OBJECT);
 

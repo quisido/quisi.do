@@ -1,6 +1,7 @@
 {
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
+  "root": true,
   "env": {
     "jest": true,
     "node": true
@@ -61,6 +62,7 @@
     "project": ["./tsconfig.eslint.json"]
   },
   "rules": {
+    "@typescript-eslint/no-type-alias": "off",
     "@typescript-eslint/no-duplicate-imports": "off",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-parameter-properties": "off",
@@ -115,7 +117,6 @@
     "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-this-alias": "error",
     "@typescript-eslint/no-throw-literal": "error",
-    "@typescript-eslint/no-type-alias": "error",
     "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
     "@typescript-eslint/no-unnecessary-condition": "error",
     "@typescript-eslint/no-unnecessary-qualifier": "error",

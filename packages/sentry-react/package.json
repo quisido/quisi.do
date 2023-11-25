@@ -32,16 +32,23 @@
     "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,jest \"yarn run attw\" \"yarn run eslint\" \"yarn run jest\"",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json"
   },
+  "dependencies": {
+    "@sentry/browser": "^7.81.1",
+    "@sentry/react": "^7.81.1",
+    "@sentry/types": "^7.81.1",
+    "use-shallow-memo": "workspace:^"
+  },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.12.2",
     "@babel/core": "^7.23.3",
     "@babel/preset-env": "^7.23.3",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
+    "@microsoft/eslint-formatter-sarif": "^3.0.0",
     "@monorepo-template/eslint-config": "^1.0.7",
     "@monorepo-template/jest-transformer": "^1.0.2",
-    "@sentry/react": "^7.76.0",
-    "@sentry/types": "^7.76.0",
+    "@sentry/react": "^7.81.1",
+    "@sentry/types": "^7.81.1",
     "@testing-library/react": "^14.0.0",
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
@@ -69,8 +76,6 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "@sentry/react": ">=6.0.0",
-    "@sentry/types": ">=6.0.0",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   }

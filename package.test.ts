@@ -46,7 +46,7 @@ describe('package.json', (): void => {
       it('should not upgrade workspaces', (): void => {
         expect(up).toMatch(
           [
-            `yarn up \"@*/*\" "!(${publicPackageNames.join('|')})"`,
+            `yarn up "@*/*" "!(${publicPackageNames.join('|')})"`,
             'yarn up --recursive "@*/*" "*"',
             'yarn sdks vscode',
           ].join(' && '),

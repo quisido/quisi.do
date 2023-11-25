@@ -1,10 +1,10 @@
 import { useLayoutEffect } from 'react';
-import { useCaptureException } from 'sentry-react';
+import { useSentrySdk } from 'sentry-react';
 import GLOBAL_STYLES from '../constants/global-styles';
 
 export default function useCloudscapeDesignThemeGlobalStyles(): void {
   // Contexts
-  const captureException = useCaptureException();
+  const { captureException } = useSentrySdk();
 
   // Effects
   useLayoutEffect((): VoidFunction => {

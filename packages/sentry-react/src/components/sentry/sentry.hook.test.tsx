@@ -1,31 +1,31 @@
 /// <reference types="jest" />
 
-/**
- *   Technical debt: Replace `jest.mock` with a context provider for mocked
- * implementations. We use `var` here because `jest.mock` is hoisted, so too
- * must be the variables used inside the mock implementation.
- */
-const mockInit = jest.fn();
-const mockSetUser = jest.fn();
-jest.mock('@sentry/react', () => ({
-  init: mockInit,
-  setUser: mockSetUser,
-}));
-
+import type { User } from '@sentry/react';
 import { renderHook } from '@testing-library/react';
-import type { User } from '@sentry/types';
-import DEFAULT_USER from '../../constants/default-user.js';
+import type { PropsWithChildren, ReactElement } from 'react';
+import { MockSentrySdk } from '../../index.js';
 import useSentry from './sentry.hook.js';
 
 const ONCE = 1;
 const TEST_BEFORE_BREADCRUMB = jest.fn();
 const TEST_BEFORE_SEND = jest.fn();
+const TEST_INIT = jest.fn();
+const TEST_SET_USER = jest.fn();
 const TEST_TRACES_SAMPLER = jest.fn();
 const TEST_TRANSPORT = jest.fn();
+
+function Wrapper({ children }: PropsWithChildren): ReactElement {
+  return (
+    <MockSentrySdk init={TEST_INIT} setUser={TEST_SET_USER}>
+      {children}
+    </MockSentrySdk>
+  );
+}
 
 describe('useSentry', (): void => {
   it('should call init', (): void => {
     renderHook(useSentry, {
+      wrapper: Wrapper,
       initialProps: {
         allowUrls: [],
         attachStacktrace: true,
@@ -55,8 +55,8 @@ describe('useSentry', (): void => {
       },
     });
 
-    expect(mockInit).toHaveBeenCalledTimes(ONCE);
-    expect(mockInit).toHaveBeenLastCalledWith({
+    expect(TEST_INIT).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_INIT).toHaveBeenLastCalledWith({
       allowUrls: [],
       attachStacktrace: true,
       autoSessionTracking: true,
@@ -87,29 +87,33 @@ describe('useSentry', (): void => {
 
   it('should support a default user', (): void => {
     renderHook(useSentry, {
+      wrapper: Wrapper,
       initialProps: {
         dsn: 'test-dsn',
       },
     });
 
-    expect(mockSetUser).toHaveBeenCalledTimes(ONCE);
-    expect(mockSetUser).toHaveBeenLastCalledWith(DEFAULT_USER);
+    expect(TEST_SET_USER).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_SET_USER).toHaveBeenLastCalledWith({
+      ip_address: '{{auto}}',
+    });
   });
 
   it('should support an explicit user', (): void => {
     const TEST_USER: User = {
-      ...DEFAULT_USER,
       id: 'test-id',
+      ip_address: '{{auto}}',
     };
 
     renderHook(useSentry, {
+      wrapper: Wrapper,
       initialProps: {
         dsn: 'test-dsn',
         user: TEST_USER,
       },
     });
 
-    expect(mockSetUser).toHaveBeenCalledTimes(ONCE);
-    expect(mockSetUser).toHaveBeenLastCalledWith(TEST_USER);
+    expect(TEST_SET_USER).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_SET_USER).toHaveBeenLastCalledWith(TEST_USER);
   });
 });

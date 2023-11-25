@@ -1,4 +1,4 @@
-# <Sentry />
+# `<Sentry />`
 
 [![version](https://img.shields.io/npm/v/sentry-react.svg)](https://www.npmjs.com/package/sentry-react)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/sentry-react.svg)](https://www.npmjs.com/package/sentry-react)
@@ -34,16 +34,9 @@ render(
 
 In addition to the default `<Sentry />` component export, you can also import:
 
-- The `Profiler` component to leverage Sentry's tracing integration and generate
-  spans based on component lifecycles.
-- The `useAddBreadcrumb` hook to add breadcrumbs to Sentry traces.
-- The `useCaptureEvent` hook to manually capture an event.
-- The `useCaptureException` hook to manually capture an exception.
-- The `useCaptureMessage` hook to manually log a message.
-- The `useProfiler` hook to profile a React component.
-- The `useSetUser` hook to manually authenticate a user.
-- The `withProfiler` higher-order component will wrap your component in the
-  aforementioned `Profiler` component.
+- `<MockSentrySdk />` to mock the Sentry SDK during unit tests.
+- `useSentrySdk()` to get the Sentry SDK.
+  - e.g. `const { captureError } = useSentrySdk();`
 
 ## Props
 
@@ -128,19 +121,3 @@ recommends `id`, `email`, `ip_address`, and `username`.
 To integrate Sentry with FullStory, go to the Sentry website, under organization
 settings, Security & Privacy, Data Scrubbing, and add `fullStoryUrl` to "Global
 Safe Fields."
-
-## Contributing
-
-To contribute to this repository, start by running the following commands.
-
-- To keep Yarn up to date, run `yarn set version latest`.
-- To keep dependencies up to date, run `yarn up "*" "@*/*"`.
-- If you use VIM, run `yarn sdks vim`.
-- If you use Visual Studio Code, run `yarn sdks vscode`.
-
-To test your changes for validity, use the following scripts:
-
-- To build your changes, run `yarn tsc`.
-- To lint your changes, run `yarn eslint`.
-- To unit test your changes, run `yarn jest`.
-- To unit test your changes in watch mode, run `yarn jest-watch`.

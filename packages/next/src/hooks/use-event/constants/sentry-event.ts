@@ -96,7 +96,7 @@ export default {
     '@sentry/types': sentryTypesPackage.version,
     react: reactPackage.version,
     'react-dom': reactDomPackage.version,
-    'sentry-react-': sentryReactPackage2.version,
+    'sentry-react': sentryReactPackage2.version,
   },
 
   transaction_info: {

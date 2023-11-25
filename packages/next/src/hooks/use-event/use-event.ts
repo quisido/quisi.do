@@ -2,7 +2,7 @@ import { type Event as SentryEvent } from '@sentry/types';
 import { useRecordEvent } from 'aws-rum-react';
 import { track } from 'mixpanel-browser';
 import { useCallback } from 'react';
-import { useCaptureEvent } from 'sentry-react';
+import { useSentrySdk } from 'sentry-react';
 import EMPTY_OBJECT from '../../modules/react-google-analytics/constants/empty-object';
 import usePathname from '../use-pathname';
 import useHostname from '../use-hostname';
@@ -59,7 +59,7 @@ const hasZaraz = (w: Window): w is ZarazWindow => 'zaraz' in w;
  */
 export default function useEvent(): EventEmitter {
   // Context
-  const captureEvent = useCaptureEvent();
+  const { captureEvent } = useSentrySdk();
   const hostname: string = useHostname();
   const pathname: string = usePathname();
   const recordEvent = useRecordEvent();

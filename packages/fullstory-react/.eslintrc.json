@@ -1,6 +1,7 @@
 {
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
+  "root": true,
   "env": {
     "jest": true,
     "node": true
