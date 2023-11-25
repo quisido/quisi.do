@@ -3,7 +3,7 @@
 /dist/
 /jest/
 /node_modules/
-/*.cpuprofile
 /*.tsbuildinfo
 /*-*.*.*.tgz
 /LICENSE
+/tsc-output.cpuprofile

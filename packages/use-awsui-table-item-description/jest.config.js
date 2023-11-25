@@ -26,7 +26,7 @@ export default {
   },
 
   moduleNameMapper: {
-    '.+\.css$': '<rootDir>/src/test/constants/css.ts',
+    '.+\\.css$': '<rootDir>/src/test/constants/css.ts',
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
 

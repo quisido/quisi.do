@@ -1,4 +1,4 @@
-import { type Attributes } from "react";
+import { type Attributes } from 'react';
 
 export default interface TestItem extends Attributes {
   readonly description?: string | undefined;

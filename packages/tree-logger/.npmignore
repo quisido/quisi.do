@@ -2,7 +2,6 @@
 /jest/
 /node_modules/
 /src/
-/*.cpuprofile
 /*.iml
 /*.tsbuildinfo
 /.eslintignore
@@ -10,4 +9,5 @@
 /.gitignore
 /.npmignore
 /jest.config.*
+/tsc-output.cpuprofile
 /tsconfig.*

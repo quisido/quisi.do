@@ -6,9 +6,9 @@
 /.eslintrc.*
 /.gitignore
 /.npmignore
-/*.cpuprofile
 /*.iml
 /*.tsbuildinfo
 /*-*.*.*.tgz
 /jest.config.*
+/tsc-output.cpuprofile
 /tsconfig.*
