@@ -3,9 +3,9 @@
 import type { datadogRum } from '@datadog/browser-rum';
 import { useEffect } from 'react';
 import useShallowMemo from 'use-shallow-memo';
-import useDatadogRum from '../../../hooks/use-datadog-rum.js';
-import type User from '../../../types/user.js';
+import type User from '../types/user.js';
 import isUndefined from '../utils/is-undefined.js';
+import useDatadogRum from './use-datadog-rum.js';
 
 const DEFAULT_USER: Readonly<User> = Object.freeze({});
 

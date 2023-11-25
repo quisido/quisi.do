@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+
 /** @type {import('jest').Config} */
 export default {
   cacheDirectory: './jest/cache',
@@ -29,6 +31,7 @@ export default {
   },
 
   transform: {
+    'use-shallow-memo': '@monorepo-template/jest-transformer',
     '^.+\\.tsx?$': '@monorepo-template/jest-transformer',
   },
 };

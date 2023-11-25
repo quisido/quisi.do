@@ -2,10 +2,11 @@ import type { datadogRum } from '@datadog/browser-rum';
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { StrictMode } from 'react';
-import { DatadogRumContext } from '../../index.js';
-import composeComponents from '../../test/utils/compose-components.js';
-import type User from '../../types/user.js';
-import useDatadog from './datadog.hook.js';
+import useDatadog, {
+  UNSAFE_DatadogRumContext as DatadogRumContext,
+} from '../index.js';
+import composeComponents from '../test/utils/compose-components.js';
+import type User from '../types/user.js';
 
 const ONCE = 1;
 const TEST_INIT = jest.fn();
@@ -16,12 +17,31 @@ const TEST_STOP_SESSION_REPLAY_RECORDING = jest.fn();
 const TWICE = 2;
 
 const TEST_RUM: typeof datadogRum = {
+  addAction: jest.fn(),
+  addError: jest.fn(),
+  addFeatureFlagEvaluation: jest.fn(),
+  addTiming: jest.fn(),
+  clearGlobalContext: jest.fn(),
+  clearUser: TEST_REMOVE_USER,
+  getGlobalContext: jest.fn(),
+  getInitConfiguration: jest.fn(),
+  getInternalContext: jest.fn(),
+  getSessionReplayLink: jest.fn(),
+  getUser: jest.fn(),
   init: TEST_INIT,
-  removeUser: TEST_REMOVE_USER,
+  onReady: jest.fn(),
+  removeGlobalContextProperty: jest.fn(),
+  removeUserProperty: jest.fn(),
+  setGlobalContext: jest.fn(),
+  setGlobalContextProperty: jest.fn(),
   setUser: TEST_SET_USER,
+  setUserProperty: jest.fn(),
   startSessionReplayRecording: TEST_START_SESSION_REPLAY_RECORDING,
+  startView: jest.fn(),
+  stopSession: jest.fn(),
   stopSessionReplayRecording: TEST_STOP_SESSION_REPLAY_RECORDING,
-} as unknown as typeof datadogRum;
+  version: '0.0.0',
+};
 
 const TEST_USER: User = {
   id: 'test-id',
@@ -54,7 +74,6 @@ describe('useDatadog', (): void => {
       applicationId: 'test-application-id',
       clientToken: 'test-client-token',
       site: 'datadoghq.com',
-      trackInteractions: true,
     });
   });
 
