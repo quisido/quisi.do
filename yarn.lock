@@ -4759,6 +4759,30 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@quisido/react-scripts@workspace:packages/react-scripts":
+  version: 0.0.0-use.local
+  resolution: "@quisido/react-scripts@workspace:packages/react-scripts"
+  dependencies:
+    "@arethetypeswrong/cli": "npm:^0.12.2"
+    "@babel/core": "npm:^7.23.2"
+    "@babel/plugin-syntax-flow": "npm:^7.22.5"
+    "@babel/plugin-transform-react-jsx": "npm:^7.22.15"
+    "@babel/preset-react": "npm:^7.22.15"
+    "@monorepo-template/cypress-nyc-config": "npm:^1.0.4"
+    babel-jest: "npm:^29.7.0"
+    babel-loader: "npm:^9.1.3"
+    compose-function: "npm:^3.0.3"
+    console-table-printer: "npm:^2.11.2"
+    dependency-cruiser: "npm:^15.1.1"
+    identity-obj-proxy: "npm:^3.0.0"
+    react-app-polyfill: "npm:^3.0.0"
+    react-refresh: "npm:^0.14.0"
+    sass: "npm:^1.69.5"
+    webpack: "npm:^5.89.0"
+    zone.js: "npm:^0.14.1"
+  languageName: unknown
+  linkType: soft
+
 "@reach/observe-rect@npm:^1.1.0":
   version: 1.2.0
   resolution: "@reach/observe-rect@npm:1.2.0"
@@ -8784,30 +8808,6 @@ __metadata:
   checksum: b0ec668fba5eeec575ed2559a0917ba41a6481f49063c8445400e476754e0957ee09e44dc032310f526182b8f1bf25e9d4ed371f74050af7be1383e06bc44952
   languageName: node
   linkType: hard
-
-"charlesstover.com@workspace:packages/react-scripts":
-  version: 0.0.0-use.local
-  resolution: "charlesstover.com@workspace:packages/react-scripts"
-  dependencies:
-    "@arethetypeswrong/cli": "npm:^0.12.2"
-    "@babel/core": "npm:^7.23.2"
-    "@babel/plugin-syntax-flow": "npm:^7.22.5"
-    "@babel/plugin-transform-react-jsx": "npm:^7.22.15"
-    "@babel/preset-react": "npm:^7.22.15"
-    "@monorepo-template/cypress-nyc-config": "npm:^1.0.4"
-    babel-jest: "npm:^29.7.0"
-    babel-loader: "npm:^9.1.3"
-    compose-function: "npm:^3.0.3"
-    console-table-printer: "npm:^2.11.2"
-    dependency-cruiser: "npm:^15.1.1"
-    identity-obj-proxy: "npm:^3.0.0"
-    react-app-polyfill: "npm:^3.0.0"
-    react-refresh: "npm:^0.14.0"
-    sass: "npm:^1.69.5"
-    webpack: "npm:^5.89.0"
-    zone.js: "npm:^0.14.1"
-  languageName: unknown
-  linkType: soft
 
 "check-more-types@npm:^2.24.0":
   version: 2.24.0
