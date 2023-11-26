@@ -15,9 +15,6 @@ export default function WrapperFooter(): ReactElement {
 
   return (
     <Div className={rootClassName} marginTop="large">
-      <Span color="label">
-        <I18n>Made with 💔 by Charles Stover</I18n>
-      </Span>
       {features.length > NONE && (
         <Span color="label" size="small">
           {features.join(', ')}

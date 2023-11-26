@@ -1,5 +1,5 @@
 {
-  "name": "charlesstover.com",
+  "name": "@quisido/react-scripts",
   "version": "1.0.0",
   "config-overrides-path": "./config-overrides.cjs",
   "homepage": ".",

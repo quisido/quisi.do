@@ -12,7 +12,6 @@ import ProjectListItem from './components/project-list-item';
 import ViewResumeButton from './components/view-resume-button';
 import useHome from './home.hook';
 import styles from './home.module.scss';
-import avatar from './images/charles-stover.jpg';
 import mapProjectToAttributes from './utils/map-project-to-attributes';
 import Link from '../../components/link';
 
@@ -37,23 +36,23 @@ export default function Home(): ReactElement {
     <>
       <Container actions={<ViewResumeButton />} header={<I18n>About</I18n>}>
         <Div className={contentClassName} display="flex" flexDirection="row">
-          <Div className={avatarClassName} marginRight="large">
+          {/* <Div className={avatarClassName} marginRight="large">
             <Image alt={avatarAlt} height={100} src={avatar} width={100} />
-          </Div>
+          </Div> */}
           <Div className={aboutClassName} display="flex" flexDirection="column">
             <Div element="p" marginBottom="medium">
-              <strong>Charles Quisido</strong> is a front end engineer leading a{' '}
+              <strong>Quisido</strong> is a front end engineer leading a{' '}
               <abbr title="software as a service">SaaS</abbr> charity
               initiative. The <strong>quisi.do</strong> website contains a
               collection of open-source software, the profits of which are
               forwarded to{' '}
-              <Link
+              {/* <Link
                 category="features/home"
-                href="/charities"
+                href="/charities/"
                 title="quisi.do's supported charities"
-              >
-                501(c)(3) charities
-              </Link>{' '}
+              > */}
+                501(c)(3) charities{' '}
+              {/* </Link>{' '} */}
               with completely{' '}
               <Link
                 category="features/home"
@@ -81,13 +80,13 @@ export default function Home(): ReactElement {
         </Div>
       </Container>
 
-      <Div marginTop="large">
+      {/* <Div marginTop="large">
         <Container header={<I18n>Projects</I18n>}>
           <ul className={projectListClassName}>
             {PROJECTS.map(mapProjectToAttributes).map(mapProjectToListItem)}
           </ul>
         </Container>
-      </Div>
+      </Div> */}
     </>
   );
 }
