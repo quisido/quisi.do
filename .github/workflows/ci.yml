@@ -234,7 +234,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Prepublish
-        run: yarn run prepublish
+        run: yarn run eslint && yarn run jest && yarn workspaces foreach --all --jobs unlimited --parallel --verbose run prepublish && yarn run test
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_KEY }}
       - name: Upload SARIF
