@@ -3,6 +3,7 @@
   "compilerOptions": {
     "declarationDir": "dist",
     "jsx": "react-jsx",
+    "noEmit": false,
     "outDir": "dist",
     /**
      * next/dist/server/next-server.d.ts
