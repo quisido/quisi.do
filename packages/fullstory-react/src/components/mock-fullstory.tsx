@@ -2,14 +2,22 @@
 
 import * as fullStoryBrowser from '@fullstory/browser';
 import type { ApiV1, ApiV2, FSApi } from '@fullstory/snippet';
-import { useMemo, type PropsWithChildren, type ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement, useMemo } from 'react';
 import useShallowMemo from 'use-shallow-memo';
 import FullStoryBrowser from '../contexts/fullstory-browser.js';
 import merge from '../utils/merge.js';
-import mapV2OperationHandlersToApi, { type V2AsyncOperationHandlers, type V2OperationHandlers } from '../utils/map-v2-operation-handlers-to-api.js';
+import mapV2OperationHandlersToApi, {
+  type V2AsyncOperationHandlers,
+  type V2OperationHandlers,
+} from '../utils/map-v2-operation-handlers-to-api.js';
 import noop from '../utils/noop.js';
 
-type Props = Partial<FSApi & typeof fullStoryBrowser & V2AsyncOperationHandlers & V2OperationHandlers>;
+type Props = Partial<
+  FSApi &
+    typeof fullStoryBrowser &
+    V2AsyncOperationHandlers &
+    V2OperationHandlers
+>;
 
 export default function MockFullStory({
   children,
@@ -17,13 +25,14 @@ export default function MockFullStory({
 }: PropsWithChildren<Props>): ReactElement {
   const memoizedProps: Props = useShallowMemo(props);
 
-  const value: typeof fullStoryBrowser = useMemo(
-    (): typeof fullStoryBrowser  => {
+  const value: typeof fullStoryBrowser =
+    useMemo((): typeof fullStoryBrowser => {
       /**
        * `ApiV2` has a default interface:
        *   <Op>(operation: Op, options: Options[Op]) => ReturnType[Op]
        */
-      const apiV2Default: Omit<ApiV2, keyof ApiV2> = mapV2OperationHandlersToApi(memoizedProps);
+      const apiV2Default: Omit<ApiV2, keyof ApiV2> =
+        mapV2OperationHandlersToApi(memoizedProps);
 
       const apiV1: ApiV1 = {
         ...fullStoryBrowser.FullStory,
@@ -36,11 +45,11 @@ export default function MockFullStory({
         ...memoizedProps,
         FullStory: merge(apiV2Default, apiV1),
       };
-    },
-    [memoizedProps],
-  );
+    }, [memoizedProps]);
 
   return (
-    <FullStoryBrowser.Provider value={value}>{children}</FullStoryBrowser.Provider>
+    <FullStoryBrowser.Provider value={value}>
+      {children}
+    </FullStoryBrowser.Provider>
   );
 }

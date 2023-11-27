@@ -57,6 +57,7 @@ module.exports = {
     extraFileExtensions: ['.json'],
     project: ['./tsconfig.eslint.json'],
     tsconfigRootDir: __dirname,
+    warnOnUnsupportedTypeScriptVersion: false,
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
     },

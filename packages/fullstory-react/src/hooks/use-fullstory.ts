@@ -6,7 +6,9 @@ import useShallowMemo from 'use-shallow-memo';
 import useFullStoryBrowser from './use-fullstory-browser.js';
 import type { FSApi } from '@fullstory/snippet';
 
-export default function useFullStory(snippetOptions: Readonly<SnippetOptions>): FSApi {
+export default function useFullStory(
+  snippetOptions: Readonly<SnippetOptions>,
+): FSApi {
   // Contexts
   const { FullStory, init, isInitialized } = useFullStoryBrowser();
 

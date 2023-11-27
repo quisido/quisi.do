@@ -14,7 +14,9 @@ describe('mapV2OperationHandlersToApi', (): void => {
         orgId: 'my-org-id',
       },
       wrapper({ children }: PropsWithChildren): ReactElement {
-        return <MockFullStory FullStory={TEST_FULLSTORY}>{children}</MockFullStory>;
+        return (
+          <MockFullStory FullStory={TEST_FULLSTORY}>{children}</MockFullStory>
+        );
       },
     });
 
@@ -23,7 +25,11 @@ describe('mapV2OperationHandlersToApi', (): void => {
     });
 
     expect(TEST_FULLSTORY).toHaveBeenCalledTimes(ONCE);
-    expect(TEST_FULLSTORY).toHaveBeenLastCalledWith('shutdown', undefined, undefined);
+    expect(TEST_FULLSTORY).toHaveBeenLastCalledWith(
+      'shutdown',
+      undefined,
+      undefined,
+    );
   });
 
   it('should return a mocked FullStory API', (): void => {
@@ -32,7 +38,9 @@ describe('mapV2OperationHandlersToApi', (): void => {
         orgId: 'my-org-id',
       },
       wrapper({ children }: PropsWithChildren): ReactElement {
-        return <MockFullStory onShutdown={TEST_SHUTDOWN}>{children}</MockFullStory>;
+        return (
+          <MockFullStory onShutdown={TEST_SHUTDOWN}>{children}</MockFullStory>
+        );
       },
     });
 
