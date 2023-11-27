@@ -242,7 +242,7 @@ jobs:
       - name: Test
         run: yarn run test
       - name: Prepublish
-        run: yarn workspaces foreach --all --exclude "@quisi/do" --exclude "@quisido/cloudflare-analytics-worker" --interlaced --jobs unlimited --parallel --verbose run prepublish
+        run: yarn workspaces foreach --all --exclude "@quisi/do" --verbose run prepublish
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_KEY }}
       - name: Upload SARIF
