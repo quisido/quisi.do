@@ -60,6 +60,7 @@
     "@emotion/styled": "^11.11.0",
     "@fullstory/browser": "^2.0.0",
     "@microsoft/eslint-formatter-sarif": "^3.0.0",
+    "@monorepo-template/coverage": "^1.2.3",
     "@monorepo-template/cypress-coverage-plugin": "^1.0.7",
     "@monorepo-template/ignore-cypress-dependency-logs": "^1.0.0",
     "@mui/icons-material": "^5.14.18",

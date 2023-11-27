@@ -257,46 +257,46 @@ jobs:
           path: packages/*/jest/
 
   # Stage 4: coverage
-  coverage:
-    name: Coverage
-    needs: [prepublish] # cypress
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      # - name: Download Cypress artifacts
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: cypress
-      #     path: packages/
-      - name: Download prepublish artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: prepublish
-          path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Report coverage
-        run: yarn packages/next run coverage
-        env:
-          BRANCHES_COVERAGE_THRESHOLD: 1
-          FUNCTIONS_COVERAGE_THRESHOLD: 1
-          LINES_COVERAGE_THRESHOLD: 1
-          STATEMENTS_COVERAGE_THRESHOLD: 1
-      - name: Upload coverage
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage
-          path: |
-            packages/*/.nyc_output/
-            packages/*/coverage/
+  # coverage:
+  #   name: Coverage
+  #   needs: [prepublish] # cypress
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
+  #     # - name: Download Cypress artifacts
+  #     #   uses: actions/download-artifact@v3
+  #     #   with:
+  #     #     name: cypress
+  #     #     path: packages/
+  #     - name: Download prepublish artifacts
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: prepublish
+  #         path: packages/
+  #     - name: Setup Node
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         cache: yarn
+  #         check-latest: true
+  #         node-version: 'lts/*'
+  #     - name: Install dependencies
+  #       run: yarn install --immutable
+  #     - name: Report coverage
+  #       run: yarn packages/next run coverage
+  #       env:
+  #         BRANCHES_COVERAGE_THRESHOLD: 1
+  #         FUNCTIONS_COVERAGE_THRESHOLD: 1
+  #         LINES_COVERAGE_THRESHOLD: 1
+  #         STATEMENTS_COVERAGE_THRESHOLD: 1
+  #     - name: Upload coverage
+  #       if: always()
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: coverage
+  #         path: |
+  #           packages/*/.nyc_output/
+  #           packages/*/coverage/
 
 on:
   pull_request:

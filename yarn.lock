@@ -2968,6 +2968,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@monorepo-template/coverage@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "@monorepo-template/coverage@npm:1.2.3"
+  dependencies:
+    "@monorepo-template/merge-coverage": "npm:^1.2.4"
+    make-dir: "npm:^3.1.0"
+    p-map: "npm:^5.5.0"
+  peerDependencies:
+    istanbul-lib-coverage: ">=3.0.0"
+    nyc: ">=15.0.0"
+  bin:
+    monorepo-template-coverage: ./dist/bin/index.js
+  checksum: 539d5468da67177460640b9b8af3cabc31f491368177ee1bbad8d10671db7ce3279e74b300aef77bf405303e0bb0e75ded0649077fd19de3c3cccb03017ce97a
+  languageName: node
+  linkType: hard
+
 "@monorepo-template/cypress-coverage-plugin@npm:^1.0.7":
   version: 1.0.7
   resolution: "@monorepo-template/cypress-coverage-plugin@npm:1.0.7"
@@ -3036,6 +3052,21 @@ __metadata:
     "@babel/preset-typescript": ">=7.0.0"
     babel-jest: ">=28.0.0"
   checksum: e41e8c6d2d093cf6d431fa702e1820c98ffb8929db07f7cf6a1314ae0cd324597cb3ddbc4f5c734f75048b1ecdc506810a066078f0c48b7cbd6688d6ca797f86
+  languageName: node
+  linkType: hard
+
+"@monorepo-template/merge-coverage@npm:^1.2.4":
+  version: 1.2.4
+  resolution: "@monorepo-template/merge-coverage@npm:1.2.4"
+  dependencies:
+    make-dir: "npm:^3.1.0"
+    p-map: "npm:^5.5.0"
+  peerDependencies:
+    istanbul-lib-coverage: ">=3.0.0"
+    nyc: ">=15.0.0"
+  bin:
+    monorepo-template-merge-coverage: ./dist/bin/index.js
+  checksum: 8fa41bc628aabbc6f32149c3c9f49e71082bb7a5bad70d499cc5e36040ca9e547c37528327786b9a9518c71471d37a719418bb750e0873a0b8e5a8aee77ce304
   languageName: node
   linkType: hard
 
@@ -3763,6 +3794,7 @@ __metadata:
     "@emotion/styled": "npm:^11.11.0"
     "@fullstory/browser": "npm:^2.0.0"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
+    "@monorepo-template/coverage": "npm:^1.2.3"
     "@monorepo-template/cypress-coverage-plugin": "npm:^1.0.7"
     "@monorepo-template/ignore-cypress-dependency-logs": "npm:^1.0.0"
     "@mui/icons-material": "npm:^5.14.18"
@@ -5305,6 +5337,16 @@ __metadata:
     clean-stack: "npm:^2.0.0"
     indent-string: "npm:^4.0.0"
   checksum: 1101a33f21baa27a2fa8e04b698271e64616b886795fd43c31068c07533c7b3facfcaf4e9e0cab3624bd88f729a592f1c901a1a229c9e490eafce411a8644b79
+  languageName: node
+  linkType: hard
+
+"aggregate-error@npm:^4.0.0":
+  version: 4.0.1
+  resolution: "aggregate-error@npm:4.0.1"
+  dependencies:
+    clean-stack: "npm:^4.0.0"
+    indent-string: "npm:^5.0.0"
+  checksum: bb3ffdfd13447800fff237c2cba752c59868ee669104bb995dfbbe0b8320e967d679e683dabb640feb32e4882d60258165cde0baafc4cd467cc7d275a13ad6b5
   languageName: node
   linkType: hard
 
@@ -7237,6 +7279,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clean-stack@npm:^4.0.0":
+  version: 4.2.0
+  resolution: "clean-stack@npm:4.2.0"
+  dependencies:
+    escape-string-regexp: "npm:5.0.0"
+  checksum: 373f656a31face5c615c0839213b9b542a0a48057abfb1df66900eab4dc2a5c6097628e4a0b5aa559cdfc4e66f8a14ea47be9681773165a44470ef5fb8ccc172
+  languageName: node
+  linkType: hard
+
 "cli-boxes@npm:^3.0.0":
   version: 3.0.0
   resolution: "cli-boxes@npm:3.0.0"
@@ -8783,6 +8834,13 @@ __metadata:
   version: 3.1.1
   resolution: "escalade@npm:3.1.1"
   checksum: afa618e73362576b63f6ca83c975456621095a1ed42ff068174e3f5cea48afc422814dda548c96e6ebb5333e7265140c7292abcc81bbd6ccb1757d50d3a4e182
+  languageName: node
+  linkType: hard
+
+"escape-string-regexp@npm:5.0.0":
+  version: 5.0.0
+  resolution: "escape-string-regexp@npm:5.0.0"
+  checksum: 20daabe197f3cb198ec28546deebcf24b3dbb1a5a269184381b3116d12f0532e06007f4bc8da25669d6a7f8efb68db0758df4cd981f57bc5b57f521a3e12c59e
   languageName: node
   linkType: hard
 
@@ -10562,7 +10620,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"indent-string@npm:5.0.0":
+"indent-string@npm:5.0.0, indent-string@npm:^5.0.0":
   version: 5.0.0
   resolution: "indent-string@npm:5.0.0"
   checksum: e466c27b6373440e6d84fbc19e750219ce25865cb82d578e41a6053d727e5520dc5725217d6eb1cc76005a1bb1696a0f106d84ce7ebda3033b963a38583fb3b3
@@ -12483,7 +12541,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"make-dir@npm:^3.0.0, make-dir@npm:^3.0.2":
+"make-dir@npm:^3.0.0, make-dir@npm:^3.0.2, make-dir@npm:^3.1.0":
   version: 3.1.0
   resolution: "make-dir@npm:3.1.0"
   dependencies:
@@ -13559,6 +13617,15 @@ __metadata:
   dependencies:
     aggregate-error: "npm:^3.0.0"
   checksum: 7ba4a2b1e24c05e1fc14bbaea0fc6d85cf005ae7e9c9425d4575550f37e2e584b1af97bcde78eacd7559208f20995988d52881334db16cf77bc1bcf68e48ed7c
+  languageName: node
+  linkType: hard
+
+"p-map@npm:^5.5.0":
+  version: 5.5.0
+  resolution: "p-map@npm:5.5.0"
+  dependencies:
+    aggregate-error: "npm:^4.0.0"
+  checksum: 089a709d2525208a965b7907cc8e58af950542629b538198fc142c40e7f36b3b492dd6a46a1279515ccab58bb6f047e04593c0ab5ef4539d312adf7f761edf55
   languageName: node
   linkType: hard
 
