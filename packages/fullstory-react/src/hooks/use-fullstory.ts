@@ -3,19 +3,12 @@
 import type { SnippetOptions } from '@fullstory/browser';
 import { useEffect } from 'react';
 import useShallowMemo from 'use-shallow-memo';
-import type IdentifyProps from '../types/identify-props.js';
-import useFullStorySdk from './use-fullstory-sdk.js';
+import useFullStoryBrowser from './use-fullstory-browser.js';
+import type { FSApi } from '@fullstory/snippet';
 
-export default function useFullStory({
-  userUid,
-  userVars,
-  ...snippetOptions
-}: Readonly<IdentifyProps & SnippetOptions>): void {
-  const { devMode } = snippetOptions;
-
+export default function useFullStory(snippetOptions: Readonly<SnippetOptions>): FSApi {
   // Contexts
-  const { anonymize, identify, init, isInitialized, shutdown } =
-    useFullStorySdk();
+  const { FullStory, init, isInitialized } = useFullStoryBrowser();
 
   // States
   const memoizedSnippetOptions: SnippetOptions = useShallowMemo(snippetOptions);
@@ -28,22 +21,5 @@ export default function useFullStory({
     init(memoizedSnippetOptions);
   }, [init, isInitialized, memoizedSnippetOptions]);
 
-  useEffect(
-    (): VoidFunction => (): void => {
-      shutdown();
-    },
-    [shutdown],
-  );
-
-  useEffect((): (() => void) | undefined => {
-    if (typeof userUid === 'undefined' || devMode === true) {
-      anonymize();
-      return;
-    }
-
-    identify(userUid.toString(), userVars);
-    return (): void => {
-      anonymize();
-    };
-  }, [anonymize, devMode, identify, userUid, userVars]);
+  return FullStory;
 }

@@ -13,6 +13,7 @@
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:prettier/recommended",
     "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
     "@monorepo-template/eslint-config/react-fixable",
     "@monorepo-template/eslint-config/react-strict",
     "@monorepo-template/eslint-config/react-typescript",

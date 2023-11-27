@@ -14,22 +14,80 @@ FullStory integration with React
 ## Use
 
 ```jsx
-import useFullStory from 'fullstory-react';
+import { useFullStory } from 'fullstory-react';
 
 export default function App() {
-  useFullStory({
+  const { shutdown } = useFullStory({
     orgId: 'my-org-id',
   });
+
+  // On unmount, shutdown FullStory.
+  useEffect(() => shutdown);
 
   return <>Hello world!</>;
 }
 ```
 
-The `useFullStory` hooks accepts all the same properties that would be passed to
-the FullStory `init` method.
+The `useFullStory` hook accepts all the same properties that would be passed to
+the FullStory `init` method. The hook returns the `FS` object (type `FSApi`).
 
-To identify your user, you may optionally provide `userUid` and `userVars`, the
-parameters you would pass to the FullStory `identify` method.
+## Testing
+
+To mock the FullStory API in unit tests, wrap your component or hook with the
+`MockFullStory` component.
+
+```jsx
+import { render } from '@testing-library/react';
+import { MockFullStory } from 'fullstory-react';
+import MyComponent from './my-component.js';
+
+const ONCE = 1;
+
+describe('MyComponent', () => {
+  it('should initialize FullStory', () => {
+    const mockInit = jest.fn();
+
+    render(<MyComponent />, {
+      wrapper({ children }) {
+        return <MockFullStory init={mockInit}>{children}</MockFullStory>;
+      },
+    });
+
+    expect(mockInit).toHaveBeenCalledTimes(ONCE);
+    expect(mockInit).toHaveBeenLastCalledWith({
+      orgId: 'my-org-id',
+    });
+  });
+
+  it('should shutdown FullStory on unmount', () => {
+    const mockShutdown = jest.fn();
+
+    const { unmount } = render(<MyComponent />, {
+      wrapper({ children }) {
+        return (
+          <MockFullStory
+            init={jest.fn()}
+            onShutdown={mockShutdown}
+          >
+            {children}
+          </MockFullStory>
+        );
+      },
+    });
+
+    expect(mockShutdown).not.toHaveBeenCalled();
+
+    unmount();
+
+    expect(mockShutdown).toHaveBeenCalledTimes(ONCE);
+  });
+});
+```
+
+The prop names for the `init` and `isInitiated` methods are named `init` and
+`isInitiated` respectively. The prop names for all other operations are
+camel-case: `on{Operation}`. The TypeScript definition for `MockFullStory` will
+help you with auto-completion.
 
 ## Integrations
 

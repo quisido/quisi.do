@@ -3,6 +3,7 @@
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
+    "exactOptionalPropertyTypes": false, // import('@fullstory/snippet').ApiV2
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],
     "noEmit": true,

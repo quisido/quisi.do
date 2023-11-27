@@ -13,11 +13,44 @@
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:prettier/recommended",
     "plugin:react/recommended",
-    "plugin:react/jsx-runtime"
+    "plugin:react/jsx-runtime",
+    "@monorepo-template/eslint-config/react-fixable",
+    "@monorepo-template/eslint-config/react-strict",
+    "@monorepo-template/eslint-config/react-typescript",
+    "@monorepo-template/eslint-config/typescript",
+    "@monorepo-template/eslint-config/typescript-fixable",
+    "@monorepo-template/eslint-config/typescript-strict"
   ],
   "overrides": [
     {
+      "files": [".eslintrc.json"],
+      "extends": "@monorepo-template/eslint-config/typescript/eslint"
+    },
+
+    {
+      "files": ["*.cjs"],
+      "extends": "@monorepo-template/eslint-config/typescript/cjs"
+    },
+
+    {
+      "files": ["*.cjs", "*.js", "*.jsx", "*.mjs"],
+      "extends": [
+        "@monorepo-template/eslint-config/typescript/js",
+        "@monorepo-template/eslint-config/typescript-fixable/js"
+      ]
+    },
+
+    {
+      "files": ["*.json"],
+      "extends": [
+        "@monorepo-template/eslint-config/react-typescript/json",
+        "@monorepo-template/eslint-config/typescript/json",
+        "@monorepo-template/eslint-config/typescript-fixable/json"
+      ]
+    },
+    {
       "files": ["*.ts", "*.tsx"],
+      "extends": ["@monorepo-template/eslint-config/typescript/ts"],
       "rules": {
         "@typescript-eslint/explicit-function-return-type": "error",
         "@typescript-eslint/explicit-member-accessibility": "error",
@@ -29,6 +62,10 @@
     "project": "./tsconfig.eslint.json"
   },
   "rules": {
+    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/no-duplicate-imports": "off",
+    "@typescript-eslint/no-parameter-properties": "off",
+    "@typescript-eslint/sort-type-union-intersection-members": "off",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/prefer-readonly-parameter-types": "off"
   },

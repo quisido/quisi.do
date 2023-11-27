@@ -5,22 +5,22 @@
   "homepage": ".",
   "private": true,
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.12.2",
-    "@babel/core": "^7.23.2",
-    "@babel/plugin-syntax-flow": "^7.22.5",
-    "@babel/plugin-transform-react-jsx": "^7.22.15",
-    "@babel/preset-react": "^7.22.15",
+    "@arethetypeswrong/cli": "^0.13.2",
+    "@babel/core": "^7.23.3",
+    "@babel/plugin-syntax-flow": "^7.23.3",
+    "@babel/plugin-transform-react-jsx": "^7.23.4",
+    "@babel/preset-react": "^7.23.3",
     "@monorepo-template/cypress-nyc-config": "^1.0.4",
     "babel-jest": "^29.7.0",
     "babel-loader": "^9.1.3",
     "compose-function": "^3.0.3",
     "console-table-printer": "^2.11.2",
-    "dependency-cruiser": "^15.1.1",
+    "dependency-cruiser": "^15.4.0",
     "identity-obj-proxy": "^3.0.0",
     "react-app-polyfill": "^3.0.0",
     "react-refresh": "^0.14.0",
     "sass": "^1.69.5",
     "webpack": "^5.89.0",
-    "zone.js": "^0.14.1"
+    "zone.js": "^0.14.2"
   }
 }
