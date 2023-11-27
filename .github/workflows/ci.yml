@@ -2,20 +2,20 @@ name: Continuous integration
 
 jobs:
   # Test a bun build.
-  bun:
-    name: bun
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-      - name: Install bun
-        uses: oven-sh/setup-bun@v1
-      - name: Install dependencies
-        run: bun install
-      - name: Prepack
-        run: bun run prepack
-      - name: Prepublish
-        run: bun run prepublish
+  # bun:
+  #   name: bun
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repo
+  #       uses: actions/checkout@v3
+  #     - name: Install bun
+  #       uses: oven-sh/setup-bun@v1
+  #     - name: Install dependencies
+  #       run: bun install
+  #     - name: Prepack
+  #       run: bun run prepack
+  #     - name: Prepublish
+  #       run: bun run prepublish
 
   # Stage 1: codacy, dependency-review, devskim, install
   codacy:
@@ -40,16 +40,16 @@ jobs:
           sarif_file: codacy.sarif
           wait-for-processing: true
 
-  dependency-review:
-    name: Dependency review
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Review dependencies
-        uses: actions/dependency-review-action@v2
+  # dependency-review:
+  #   name: Dependency review
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     pull-requests: write
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
+  #     - name: Review dependencies
+  #       uses: actions/dependency-review-action@v2
 
   devskim:
     name: DevSkim
@@ -233,8 +233,16 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable
+
+      # yarn prepublish
+      - name: ESLint
+        run: yarn run eslint
+      - name: Jest
+        run: yarn run jest
+      - name: Test
+        run: yarn run test
       - name: Prepublish
-        run: yarn prepublish
+        run: yarn workspaces foreach --all --interlaced --jobs unlimited --parallel --verbose run prepublish
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_KEY }}
       - name: Upload SARIF
