@@ -3,6 +3,12 @@ import assert from 'node:assert';
 import { readFileSync, readdirSync } from 'node:fs';
 import { scripts } from './package.json';
 
+const SECOND = 1;
+const isScoped = (name: string): boolean => name.startsWith('@');
+const isUnscoped = (name: string): boolean => !name.startsWith('@');
+const mapToScope = (name: string): string =>
+  name.substring(SECOND, name.indexOf('/'));
+
 const isPublic = (value: unknown): boolean => {
   assert(typeof value === 'object');
   assert(value !== null);
@@ -44,9 +50,15 @@ describe('package.json', (): void => {
        *   copy as the source of truth.
        */
       it('should not upgrade workspaces', (): void => {
+        const scopes = Array.from(
+          new Set(publicPackageNames.filter(isScoped).map(mapToScope)),
+        );
+        const unscopedPackageNames = publicPackageNames.filter(isUnscoped);
         expect(up).toMatch(
           [
-            `yarn up "@*/*" "!(${publicPackageNames.join('|')})"`,
+            `yarn up "@!(${scopes.join('|')})/*" "!(${unscopedPackageNames.join(
+              '|',
+            )})"`,
             'yarn up --recursive "@*/*" "*"',
             'yarn sdks vscode',
           ].join(' && '),
