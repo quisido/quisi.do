@@ -281,7 +281,7 @@ jobs:
         with:
           branch: gh-pages
           clean: true
-          folder: packages/next/build/
+          folder: packages/next/out/
           single-commit: true
 
   npm:
