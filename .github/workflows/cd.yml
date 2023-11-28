@@ -320,7 +320,13 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: >
           yarn config set npmAuthToken $NPM_AUTH_TOKEN;
-          yarn run publish;
+          yarn workspaces foreach \
+            --jobs unlimited \
+            --no-private \
+            --parallel \
+            --topological-dev \
+            --verbose \
+            npm publish --tolerate-republish;
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
