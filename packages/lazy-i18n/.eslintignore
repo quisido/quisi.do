@@ -1,0 +1,9 @@
+/**/*.md
+/**/*.scss
+/dist/
+/jest/
+/node_modules/
+/*.cpuprofile
+/*.tsbuildinfo
+/*-*.*.*.tgz
+/LICENSE

@@ -3,7 +3,11 @@
     "path": "/*",
 
     "options": {
-      "firstPartyHostnames": ["*.charlesstover.com", "*.cscdn.net"]
+      "firstPartyHostnames": [
+        "*.cscdn.net",
+        "*.quisi.do",
+        "*.quisido.com"
+      ]
     },
 
     "timings": [

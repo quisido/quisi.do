@@ -1,9 +1,11 @@
+'use client';
+
 import { AwsRum } from 'aws-rum-web';
 import type { MutableRefObject, ReactElement, ReactNode } from 'react';
 import { useMemo, useRef } from 'react';
-import AwsRumContext from '../../contexts/aws-rum';
-import mapRefToFunction from '../../utils/map-ref-to-function';
-import noop from '../../utils/noop';
+import AwsRumContext from '../../contexts/aws-rum.js';
+import mapRefToFunction from '../../utils/map-ref-to-function.js';
+import noop from '../../utils/noop.js';
 
 interface Props {
   readonly addPlugin?: AwsRum['addPlugin'] | undefined;
@@ -35,26 +37,34 @@ export default function MockAwsRumProvider({
   recordPageView = noop,
   registerDomEvents = noop,
   setAwsCredentials = noop,
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const addPluginRef: MutableRefObject<AwsRum['addPlugin']> = useRef(addPlugin);
+  const disableRef: MutableRefObject<AwsRum['disable']> = useRef(disable);
+  const dispatchRef: MutableRefObject<AwsRum['dispatch']> = useRef(dispatch);
+  const enableRef: MutableRefObject<AwsRum['enable']> = useRef(enable);
+
   const addSessionAttributesRef: MutableRefObject<
     AwsRum['addSessionAttributes']
   > = useRef(addSessionAttributes);
+
   const allowCookiesRef: MutableRefObject<AwsRum['allowCookies']> =
     useRef(allowCookies);
-  const disableRef: MutableRefObject<AwsRum['disable']> = useRef(disable);
+
   const dispatchBeaconRef: MutableRefObject<AwsRum['dispatchBeacon']> =
     useRef(dispatchBeacon);
-  const dispatchRef: MutableRefObject<AwsRum['dispatch']> = useRef(dispatch);
-  const enableRef: MutableRefObject<AwsRum['enable']> = useRef(enable);
+
   const registerDomEventsRef: MutableRefObject<AwsRum['registerDomEvents']> =
     useRef(registerDomEvents);
+
   const recordErrorRef: MutableRefObject<AwsRum['recordError']> =
     useRef(recordError);
+
   const recordEventRef: MutableRefObject<AwsRum['recordEvent']> =
     useRef(recordEvent);
+
   const recordPageViewRef: MutableRefObject<AwsRum['recordPageView']> =
     useRef(recordPageView);
+
   const setAwsCredentialsRef: MutableRefObject<AwsRum['setAwsCredentials']> =
     useRef(setAwsCredentials);
 
@@ -89,6 +99,8 @@ export default function MockAwsRumProvider({
 
     // `newClient instanceof AwsRum`
     Object.setPrototypeOf(newClient, AwsRum.prototype);
+
+    // eslint-disable-next-line  @typescript-eslint/consistent-type-assertions
     return newClient as AwsRum;
   }, []);
 

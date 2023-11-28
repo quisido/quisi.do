@@ -1,5 +1,20 @@
 {
-  "exclude": ["dist/", "jest/", "node_modules/"],
-  "extends": "@monorepo-template/tsconfig/react-module.json",
-  "include": ["src/**/*.ts", "src/**/*.tsx"]
+  "exclude": ["dist/", "jest/"],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "compilerOptions": {
+    "jsx": "react-jsxdev",
+    "lib": ["DOM", "ESNext"],
+    "noEmit": true,
+    "rootDir": ".",
+    "sourceRoot": ".",
+
+    /**
+     *   `aws-rum-web` uses a CommonJS build with `web-vital`'s CommonJS as a
+     * dependency. However, `web-vital` only vends ESM types, so TypeScript
+     * incorrectly believes `aws-rum-web`'s CommonJS module to be importing a
+     * ECMAScript module.
+     */
+    "skipLibCheck": true
+  }
 }

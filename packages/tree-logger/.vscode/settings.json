@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "dist/": true,
+    "*.cpuprofile": true,
+    "*.tsbuildinfo": true
+  }
+}

@@ -1,10 +1,24 @@
 name: Continuous integration
 
 jobs:
-  # Stage 1: codacy, dependency-review, devskim, install
+  # Stage 1: bun, codacy, dependency-review, devskim, install
+  # bun:
+  #   name: bun
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repo
+  #       uses: actions/checkout@v3
+  #     - name: Install bun
+  #       uses: oven-sh/setup-bun@v1
+  #     - name: Install dependencies
+  #       run: bun install
+  #     - name: Prepack
+  #       run: bun run prepack
+  #     - name: Prepublish
+  #       run: bun run prepublish
+
   codacy:
     name: Codacy
-    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -18,22 +32,23 @@ jobs:
           max-allowed-issues: 2147483647
           output: codacy.sarif
           verbose: true
-      - name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@main
-        with:
-          sarif_file: codacy.sarif
-          wait-for-processing: true
+      # - name: Upload SARIF
+      #   if: always()
+      #   uses: github/codeql-action/upload-sarif@main
+      #   with:
+      #     sarif_file: codacy.sarif
+      #     wait-for-processing: true
 
-  dependency-review:
-    name: Dependency review
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Review dependencies
-        uses: actions/dependency-review-action@v2
+  # dependency-review:
+  #   name: Dependency review
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     pull-requests: write
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
+  #     - name: Review dependencies
+  #       uses: actions/dependency-review-action@v2
 
   devskim:
     name: DevSkim
@@ -85,83 +100,105 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Prepack
-        run: yarn run prepack
+        run: yarn run --require dd-trace/init prepack
         env:
-          CI: false
-          REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
-          REACT_APP_GITHUB_SHA: ${{ github.sha }}
+          CLARITY_TAG: ln18ya61ca
+          CLOUD_PLATFORM: GitHub
+          CLOUD_PROVIDER: GitHub Actions
+          CLOUDWATCH_RUM_APPLICATION_ID: 9be6a855-9bac-4f07-bae8-6ad0d7a00b00
+          CLOUDWATCH_RUM_GUEST_ROLE_ARN: arn:aws:iam::787801101157:role/RUM-Monitor-us-west-2-787801101157-5868679251171-Unauth
+          CLOUDWATCH_RUM_IDENTITY_POOL_ID: us-west-2:9d109fe9-23c3-4e33-a478-143f93445968
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_APPLICATION_ID: 3e55f7ef-a00a-41ab-9857-baf7ad00daa1
+          DD_CLIENT_TOKEN: pubee0abcc4e08cef309eda284ba1d44e32
+          DD_ENV: staging
+          DD_PROFILING_ENABLED: true
+          DD_SERVICE: quisi.do-(staging)
+          DD_VERSION: ${{ github.sha }}
+          DEPLOYMENT_ENVIRONMENT: integration
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GOOGLE_ANALYTICS_TRACKING_ID: G-GMKFW5ZZ9G
+          IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
+          PATREON_OAUTH_CLIENT_ID: 4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG
+          PATREON_OAUTH_REDIRECT_URI: https://localhost:5882/patreon/
+          SENTRY_ENVIRONMENT: staging
+          WHOAMI: https://localhost:1098/whoami
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: prepack
           path: |
-            packages/*/build/
+            packages/*/.next/
             packages/*/dist/
+            packages/*/out/
 
   # Stage 3: cypress, lighthouse, prepublish
-  cypress:
-    name: Cypress
-    needs: prepack
-    runs-on: ${{ matrix.os }}-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: prepack
-          path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Enable Plug-n-Play
-        run: yarn cypress:pnp
-        working-directory: packages/react-scripts
-      - name: End-to-end test
-        uses: cypress-io/github-action@v4
-        env:
-          CHOKIDAR_USEPOLLING: true
-          CYPRESS_SCREENSHOTS_SUBFOLDER: ${{ matrix.os }}-${{ matrix.browser }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }} # -${{ matrix.container }}
-          REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
-          REACT_APP_GITHUB_SHA: ${{ github.sha }}
-        with:
-          browser: ${{ matrix.browser }}
-          command-prefix: yarn dlx
-          config-file: cypress.config.cjs
-          install: false
-          record: false
-          start: yarn run cypress:start
-          wait-on: 'http://localhost:3000/'
-          wait-on-timeout: 120
-          working-directory: packages/react-scripts/
-      - name: Upload artifacts
-        if: matrix.os == 'ubuntu'
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress
-          path: |
-            packages/*/cypress/coverage/
-            packages/*/cypress/screenshots/
-            packages/*/cypress/videos/
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu, windows]
-        browser: [chrome, edge] # firefox
-        # Cypress only supports 1 container for Edge.
-        # With multiple containers, Cypress will use the wrong browser version.
-        # https://github.com/cypress-io/github-action/issues/121
-        # container: [1, 2, 3]
-        exclude:
-          - browser: edge
-            os: ubuntu
+  # cypress:
+  #   name: Cypress
+  #   needs: prepack
+  #   runs-on: ${{ matrix.os }}-latest
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
+  #     - name: Download artifacts
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: prepack
+  #         path: packages/
+  #     - name: Setup Node
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         cache: yarn
+  #         check-latest: true
+  #         node-version: 'lts/*'
+  #     - name: Install dependencies
+  #       run: yarn install --immutable
+  #     - name: Enable Plug-n-Play
+  #       run: yarn packages/next run cypress:pnp
+  #     - name: End-to-end test
+  #       uses: cypress-io/github-action@v6
+  #       env:
+  #         CHOKIDAR_USEPOLLING: true
+  #         CYPRESS_SCREENSHOTS_SUBFOLDER: ${{ matrix.os }}-${{ matrix.browser }}
+  #         GITHUB_REPOSITORY: ${{ github.repository }}
+  #         GITHUB_SHA: ${{ github.sha }}
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
+  #         NODE_ENV: test
+  #         NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }} # -${{ matrix.container }}
+  #       with:
+  #         browser: ${{ matrix.browser }}
+  #         command-prefix: yarn dlx
+  #         config-file: cypress.config.cjs
+  #         install: false
+  #         parallel: true
+  #         record: false
+  #         start: yarn run start
+  #         wait-on: 'https://localhost:3000/'
+  #         wait-on-timeout: 120
+  #         working-directory: packages/next/
+  #     - name: Upload artifacts
+  #       if: matrix.os == 'ubuntu'
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: cypress
+  #         path: |
+  #           packages/*/cypress/coverage/
+  #           packages/*/cypress/screenshots/
+  #           packages/*/cypress/videos/
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       os: [ubuntu, windows]
+  #       browser: [chrome, edge] # firefox
+  #       # Cypress only supports 1 container for Edge.
+  #       # With multiple containers, Cypress will use the wrong browser version.
+  #       # https://github.com/cypress-io/github-action/issues/121
+  #       # container: [1, 2, 3]
+  #       exclude:
+  #         - browser: edge
+  #           os: ubuntu
 
   lighthouse:
     name: Lighthouse
@@ -184,16 +221,18 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Audit
-        run: yarn run lighthouse
-        working-directory: packages/react-scripts
+        run: yarn packages/next run lighthouse:dev
+      - name: Validate
+        run: yarn packages/next run postlighthouse
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: lighthouse
           path: |
-            packages/*/lighthouse.report.html
-            packages/*/lighthouse.report.json
+            packages/*/lighthouse.report.*
+            packages/*/lighthouse-*.devtoolslog.json
+            packages/*/lighthouse-*.trace.json
 
   prepublish:
     name: Prepublish
@@ -216,9 +255,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Prepublish
-        run: yarn run prepublish
+        run: yarn prepublish
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v2
         with:
@@ -231,46 +270,46 @@ jobs:
           path: packages/*/jest/
 
   # Stage 4: coverage
-  coverage:
-    name: Coverage
-    needs: [cypress, prepublish]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Download Cypress artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: cypress
-          path: packages/
-      - name: Download prepublish artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: prepublish
-          path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Report coverage
-        run: yarn packages/react-scripts run coverage
-        env:
-          BRANCHES_COVERAGE_THRESHOLD: 1
-          FUNCTIONS_COVERAGE_THRESHOLD: 1
-          LINES_COVERAGE_THRESHOLD: 1
-          STATEMENTS_COVERAGE_THRESHOLD: 1
-      - name: Upload coverage
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage
-          path: |
-            packages/*/.nyc_output/
-            packages/*/coverage/
+  # coverage:
+  #   name: Coverage
+  #   needs: [prepublish] # cypress
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
+  #     # - name: Download Cypress artifacts
+  #     #   uses: actions/download-artifact@v3
+  #     #   with:
+  #     #     name: cypress
+  #     #     path: packages/
+  #     - name: Download prepublish artifacts
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: prepublish
+  #         path: packages/
+  #     - name: Setup Node
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         cache: yarn
+  #         check-latest: true
+  #         node-version: 'lts/*'
+  #     - name: Install dependencies
+  #       run: yarn install --immutable
+  #     - name: Report coverage
+  #       run: yarn packages/next run coverage
+  #       env:
+  #         BRANCHES_COVERAGE_THRESHOLD: 1
+  #         FUNCTIONS_COVERAGE_THRESHOLD: 1
+  #         LINES_COVERAGE_THRESHOLD: 1
+  #         STATEMENTS_COVERAGE_THRESHOLD: 1
+  #     - name: Upload coverage
+  #       if: always()
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: coverage
+  #         path: |
+  #           packages/*/.nyc_output/
+  #           packages/*/coverage/
 
 on:
   pull_request:

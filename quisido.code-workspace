@@ -1,0 +1,142 @@
+{
+  "folders": [
+    {
+      "name": "$root",
+      "path": ".",
+    },
+    {
+      "name": "quisi.do",
+      "path": "packages/next",
+    },
+    {
+      "name": "Authentication",
+      "path": "packages/authn",
+    },
+    {
+      "name": "Cloudflare Analytics",
+      "path": "packages/cloudflare-analytics",
+    },
+    {
+      "name": "Dashboard",
+      "path": "packages/dashboard",
+    },
+    {
+      "name": "Who am I?",
+      "path": "packages/whoami",
+    },
+    {
+      "name": "authn-shared",
+      "path": "packages/authn-shared",
+    },
+    {
+      "name": "aws-rum-react",
+      "path": "packages/aws-rum-react",
+    },
+    {
+      "name": "cjs-ts",
+      "path": "packages/cjs-ts",
+    },
+    {
+      "name": "fmrs",
+      "path": "packages/fmrs",
+    },
+    {
+      "name": "fullstory-react",
+      "path": "packages/fullstory-react",
+    },
+    {
+      "name": "lazy-i18n",
+      "path": "packages/lazy-i18n",
+    },
+    {
+      "name": "mock-next-router",
+      "path": "packages/mock-next-router",
+    },
+    {
+      "name": "number-format-react",
+      "path": "packages/number-format-react",
+    },
+    {
+      "name": "react-datadog",
+      "path": "packages/react-datadog",
+    },
+    {
+      "name": "sentry-react",
+      "path": "packages/sentry-react",
+    },
+    {
+      "name": "test",
+      "path": "packages/test",
+    },
+    {
+      "name": "tree-logger",
+      "path": "packages/tree-logger",
+    },
+    {
+      "name": "unknown2string",
+      "path": "packages/unknown2string",
+    },
+    {
+      "name": "use-shallow-memo",
+      "path": "packages/use-shallow-memo",
+    },
+  ],
+
+  "settings": {
+    "eslint.experimental.useFlatConfig": false,
+    "eslint.nodePath": "../../.yarn/sdks",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "typescript.tsdk": ".yarn/sdks/typescript/lib",
+
+    "files.watcherExclude": {
+      "**/.idea/": true,
+      "**/.next/": true,
+      "**/.nyc_output/": true,
+      "**/.wrangler/": true,
+      "**/build/**": true,
+      "**/coverage/**": true,
+      "**/cypress/coverage/**": true,
+      "**/cypress/downloads/**": true,
+      "**/cypress/screenshots/": true,
+      "**/cypress/videos/": true,
+      "**/dist/**": true,
+      "**/jest/**": true,
+      "**/node_modules/**": true,
+      "**/*.cpuprofile": true,
+      "**/*.tsbuildinfo": true,
+      "**/*-*.*.*.tgz": true,
+      "**/lighthouse.report.*": true,
+      ".git/objects/": true,
+      ".git/subtree-cache/": true,
+      ".yarn/": true,
+      ".attach_pid*": true,
+      ".pnp.*": true,
+      "yarn.lock": true,
+    },
+
+    "search.exclude": {
+      "**/.idea/": true,
+      "**/.next/": true,
+      "**/.nyc_output/": true,
+      "**/build/": true,
+      "**/coverage/": true,
+      "**/cypress/coverage/": true,
+      "**/cypress/downloads/": true,
+      "**/cypress/screenshots/": true,
+      "**/cypress/videos/": true,
+      "**/dist/": true,
+      "**/jest/": true,
+      "**/node_modules/": true,
+      "**/*.cpuprofile": true,
+      "**/*.tsbuildinfo": true,
+      "**/*-*.*.*.tgz": true,
+      "**/lighthouse.report.*": true,
+      ".git/": true,
+      ".yarn/": true,
+      "sarif/": true,
+      ".attach_pid*": true,
+      ".pnp.*": true,
+      "yarn.lock": true,
+    },
+  },
+}

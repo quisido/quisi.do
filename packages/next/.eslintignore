@@ -1,0 +1,13 @@
+/**/*.ico
+/**/*.jpg
+/**/*.md
+/**/*.pdf
+/**/*.png
+/**/*.scss
+/**/*.txt
+/.next/
+/.wrangler/
+/analyze/
+/jest/
+/out/
+/public/CNAME

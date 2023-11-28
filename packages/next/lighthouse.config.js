@@ -1,6 +1,1 @@
-export default {
-  extends: 'lighthouse:default',
-  settings: {
-    blockedUrlPatterns: ['https://cloudflareinsights.com/cdn-cgi/rum'],
-  },
-};
+export { default } from './lighthouse.config.cjs';

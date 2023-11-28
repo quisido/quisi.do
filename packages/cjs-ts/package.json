@@ -1,0 +1,55 @@
+{
+  "name": "cjs-ts",
+  "version": "1.0.1",
+  "author": "quisi.do <cjs-ts@quisi.do>",
+  "description": "a Babel preconfiguration to bridge CommonJS and TypeScript files",
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/cjs-ts#readme",
+  "license": "MIT",
+  "main": "./index.cjs",
+  "repository": "github:quisido/quisi.do",
+  "type": "commonjs",
+  "types": "./index.d.ts",
+  "bugs": {
+    "email": "cjs-ts@quisi.do",
+    "url": "https://github.com/quisido/quisi.do/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quisido"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "attw": "attw",
+    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/cjs-ts.sarif",
+    "eslint:fix": "eslint '**/*' --fix",
+    "prepack": "exit 0",
+    "prepublish": "concurrently --kill-others-on-fail --names attw \"yarn run attw\""
+  },
+  "dependencies": {
+    "@babel/register": "^7.23.7"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.1",
+    "@microsoft/eslint-formatter-sarif": "^3.0.0",
+    "@types/babel__core": "^7.20.5",
+    "@types/babel__preset-env": "^7.9.6",
+    "@types/babel__register": "^7",
+    "@types/node": "^20.11.28",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.2"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.24.3",
+    "@babel/preset-env": "^7.24.3",
+    "@babel/preset-typescript": "^7.24.1",
+    "babel-plugin-replace-import-extension": "^1.1.4"
+  }
+}

@@ -1,6 +1,6 @@
 # Amazon CloudWatch RUM React client
 
-[![CI/CD](https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/charlesstover.com/actions/workflows/cd.yml)
+[![CI/CD](https://github.com/quisido/quisi.do/actions/workflows/cd.yml/badge.svg?branch=main&event=push)](https://github.com/quisido/quisi.do/actions/workflows/cd.yml)
 [![version](https://img.shields.io/npm/v/aws-rum-react.svg)](https://www.npmjs.com/package/aws-rum-react)
 [![downloads](https://img.shields.io/npm/dt/aws-rum-react.svg)](https://www.npmjs.com/package/aws-rum-react)
 
@@ -266,7 +266,7 @@ GitHub issues for tracking bugs and feature requests.
   [AWS Support](https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html).
 - If you think you may have found a bug:
   - open an issue with
-    [`aws-rum-react`](https://github.com/CharlesStover/charlesstover.com/aws-rum-react/issues/new),
+    [`aws-rum-react`](https://github.com/quisido/quisi.do/issues/new),
     or
   - open an issue with
     [`aws-rum-web`](https://github.com/aws-observability/aws-rum-web/issues/new).

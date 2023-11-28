@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "./.next/",
+    "./cypress/",
+    "./src/**/*.e2e.ts",
+    "./src/test/cypress/",
+    "./out/",
+    "./cypress.config.*"
+  ],
+  "include": [".next/types/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "next-env.d.ts"],
+  "compilerOptions": {
+    "jsx": "preserve",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "rootDir": "src",
+    "skipLibCheck": false,
+    "sourceMap": true,
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/next/src/",
+    "target": "ES5"
+  }
+}

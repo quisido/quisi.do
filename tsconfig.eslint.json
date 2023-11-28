@@ -1,5 +1,5 @@
 {
-  "exclude": ["sarif/"],
+  "exclude": [".git/", ".yarn/", "jest/", "node_modules/", "sarif/"],
   "extends": "./tsconfig.json",
-  "include": ["**/*", "**/.*", "**/*.json"]
+  "include": ["**/*", "**/*.json", "**/.*", "**/.*.json"]
 }

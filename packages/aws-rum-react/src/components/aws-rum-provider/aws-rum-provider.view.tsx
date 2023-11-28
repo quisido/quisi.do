@@ -1,8 +1,10 @@
+'use client';
+
 import type { AwsRumConfig } from 'aws-rum-web';
 import { AwsRum } from 'aws-rum-web';
 import type { ReactElement, ReactNode } from 'react';
 import { useMemo } from 'react';
-import AwsRumContext from '../../contexts/aws-rum';
+import AwsRumContext from '../../contexts/aws-rum.js';
 
 interface Props extends AwsRumConfig {
   readonly children: ReactNode;
@@ -43,7 +45,7 @@ export default function AwsRumProvider({
   region,
   version,
   ...config
-}: Readonly<Props>): ReactElement {
+}: Props): ReactElement {
   const client: AwsRum = useMemo(
     (): AwsRum => new AwsRum(id, version, region, config),
     [config, id, region, version],

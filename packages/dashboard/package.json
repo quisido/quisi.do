@@ -1,0 +1,29 @@
+{
+  "name": "@quisido/dashboard",
+  "type": "module",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "attw": "attw",
+    "dev": "wrangler dev --persist-to ../../.wrangler/state",
+    "jest": "jest",
+    "jest:watch": "jest --watch",
+    "login": "wrangler login",
+    "prepack": "exit 0",
+    "prepublish": "exit 0",
+    "production:deploy": "wrangler deploy src/index.ts --env production --outdir dist",
+    "production:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env production --outdir dist",
+    "staging:deploy": "wrangler deploy src/index.ts --env staging --outdir dist",
+    "staging:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env staging --outdir dist",
+    "whoami": "wrangler whoami"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.1",
+    "@cloudflare/workers-types": "^4.20240314.0",
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.2",
+    "wrangler": "^3.34.2"
+  }
+}

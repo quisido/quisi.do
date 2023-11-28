@@ -1,0 +1,22 @@
+.list {
+  display: flex;
+  justify-content: center;
+  list-style-position: inside;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    margin: 0;
+    padding-left: 1em;
+    padding-right: 1em;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
