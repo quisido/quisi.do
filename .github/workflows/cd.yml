@@ -320,13 +320,7 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: >
           yarn config set npmAuthToken $NPM_AUTH_TOKEN;
-          yarn workspaces foreach \
-            --jobs unlimited \
-            --no-private \
-            --parallel \
-            --topological-dev \
-            --verbose \
-            npm publish --tolerate-republish;
+          yarn run publish;
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -370,13 +364,7 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.OPENSOURCE_REGISTRY_NPM_TOKEN }}
         run: >
           yarn config set npmAuthToken $NPM_AUTH_TOKEN;
-          yarn workspaces foreach \
-            --jobs unlimited \
-            --no-private \
-            --parallel \
-            --topological-dev \
-            --verbose \
-            npm publish --tolerate-republish;
+          yarn run publish;
 
   sentry-release:
     name: Sentry release

@@ -232,16 +232,8 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable
-
-      # yarn prepublish
-      - name: ESLint
-        run: yarn run eslint
-      - name: Jest
-        run: yarn run jest
-      - name: Test
-        run: yarn run test
       - name: Prepublish
-        run: yarn workspaces foreach --all --exclude "@quisi/do" --verbose run prepublish
+        run: yarn prepublish
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_KEY }}
       - name: Upload SARIF
