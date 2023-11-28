@@ -340,7 +340,7 @@ jobs:
 
   sentry-release:
     name: Sentry release
-    needs: [coverage, lighthouse]
+    needs: [lighthouse, prepublish-applications]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -375,7 +375,7 @@ jobs:
 
   wrangler-deploy:
     name: Wrangler deploy
-    needs: [coverage, lighthouse]
+    needs: [lighthouse, prepublish-applications]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
