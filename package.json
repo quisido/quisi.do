@@ -32,6 +32,7 @@
     "lighthouse": "yarn packages/next run lighthouse",
     "prepack": "yarn workspaces foreach --all --exclude \"@quisi/do\" --interlaced --jobs unlimited --parallel --topological-dev --verbose run prepack",
     "prepublish": "concurrently --kill-others-on-fail --names eslint,jest,prepublish,test \"yarn run eslint\" \"yarn run jest\" \"yarn workspaces foreach --all --exclude \\\"@quisi/do\\\" --verbose run prepublish\" \"yarn run test\"",
+    "publish": "yarn workspaces foreach --all --jobs unlimited --no-private --parallel --topological-dev --verbose npm publish --tolerate-republish",
     "serve": "yarn packages/next run serve",
     "start": "yarn packages/next run start",
     "test": "monorepo-template-test",
