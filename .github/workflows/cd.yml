@@ -53,6 +53,7 @@ jobs:
           DD_HOSTNAME: none
           DD_INSIDE_CI: true
         ports:
+          - 8126:8126
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
