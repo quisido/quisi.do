@@ -51,8 +51,7 @@ export default function Home(): ReactElement {
                 href="/charities/"
                 title="quisi.do's supported charities"
               > */}
-                501(c)(3) charities{' '}
-              {/* </Link>{' '} */}
+              501(c)(3) charities {/* </Link>{' '} */}
               with completely{' '}
               <Link
                 category="features/home"

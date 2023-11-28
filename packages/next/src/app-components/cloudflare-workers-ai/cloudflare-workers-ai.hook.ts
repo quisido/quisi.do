@@ -1,9 +1,9 @@
 import {
   type MutableRefObject,
   useEffect,
+  useMemo,
   useRef,
   useState,
-  useMemo,
 } from 'react';
 import useAsyncState from '../../modules/use-async-state';
 import type Fetch from './types/fetch';
@@ -162,8 +162,7 @@ export default function useCloudflareWorkersAi<S extends ModelState>(
         return;
       }
 
-      const run = async (): Promise<unknown> =>
-        await onFetch(apiToken, modelState);
+      const run = async (): Promise<unknown> => onFetch(apiToken, modelState);
 
       asyncRunEffect.current = request(run);
     }),

@@ -235,7 +235,7 @@ jobs:
       - name: Prepublish
         run: yarn prepublish
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v2
         with:

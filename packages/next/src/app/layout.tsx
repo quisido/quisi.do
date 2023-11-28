@@ -1,8 +1,8 @@
 import {
   type ComponentType,
+  Fragment,
   type PropsWithChildren,
   type ReactElement,
-  Fragment,
   StrictMode,
 } from 'react';
 import Contexts from '../app-components/contexts';

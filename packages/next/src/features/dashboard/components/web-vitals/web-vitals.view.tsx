@@ -67,24 +67,24 @@ export default function WebVitals({
     clsP95 <= CUMULATIVE_LAYOUT_POOR_THRESHOLD
       ? Status.Good
       : clsTm95 <= CUMULATIVE_LAYOUT_POOR_THRESHOLD
-      ? Status.NeedsImprovement
-      : Status.Poor;
+        ? Status.NeedsImprovement
+        : Status.Poor;
 
   const fidStatus: Status =
     fidTm95 <= FIRST_INPUT_DELAY_GOOD_THRESHOLD &&
     fidP95 <= FIRST_INPUT_DELAY_POOR_THRESHOLD
       ? Status.Good
       : fidTm95 <= FIRST_INPUT_DELAY_POOR_THRESHOLD
-      ? Status.NeedsImprovement
-      : Status.Poor;
+        ? Status.NeedsImprovement
+        : Status.Poor;
 
   const lcpStatus: Status =
     lcpTm95 <= LARGEST_CONTENTFUL_PAINT_GOOD_THRESHOLD &&
     lcpP95 <= LARGEST_CONTENTFUL_PAINT_POOR_THRESHOLD
       ? Status.Good
       : lcpTm95 <= LARGEST_CONTENTFUL_PAINT_POOR_THRESHOLD
-      ? Status.NeedsImprovement
-      : Status.Poor;
+        ? Status.NeedsImprovement
+        : Status.Poor;
 
   return (
     <Container
@@ -96,10 +96,10 @@ export default function WebVitals({
           lcpStatus === Status.Poor
             ? mapStatusToEmoji(Status.Poor)
             : clsStatus === Status.NeedsImprovement ||
-              fidStatus === Status.NeedsImprovement ||
-              lcpStatus === Status.NeedsImprovement
-            ? mapStatusToEmoji(Status.NeedsImprovement)
-            : mapStatusToEmoji(Status.Good)}
+                fidStatus === Status.NeedsImprovement ||
+                lcpStatus === Status.NeedsImprovement
+              ? mapStatusToEmoji(Status.NeedsImprovement)
+              : mapStatusToEmoji(Status.Good)}
         </>
       }
       marginTop="large"

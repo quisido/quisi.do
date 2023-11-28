@@ -1,6 +1,6 @@
 'use client';
 
-import I18n, { useTranslate, type TranslateFunction } from 'lazy-i18n';
+import I18n, { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useSelectedLayoutSegment } from 'next/navigation.js';
 import { type PropsWithChildren, type ReactElement, useMemo } from 'react';
 import Wrapper from '../../components/wrapper';

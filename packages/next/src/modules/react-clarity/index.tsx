@@ -1,22 +1,19 @@
 'use client';
 
-import { type ReactElement, useEffect } from "react";
+import { type ReactElement, useEffect } from 'react';
 
 interface Clarity {
   (): void;
   q: IArguments[];
 }
 
-interface Props{
+interface Props {
   readonly tag: string;
 }
 
-export default function Clarity({tag}: Props): ReactElement {
+export default function Clarity({ tag }: Props): ReactElement {
   useEffect((): void => {
-    if (
-      typeof window === 'undefined' ||
-      'clarity' in window
-    ) {
+    if (typeof window === 'undefined' || 'clarity' in window) {
       return;
     }
 
@@ -25,12 +22,9 @@ export default function Clarity({tag}: Props): ReactElement {
     };
     clarity.q = [];
 
-    Object.defineProperty(
-      window,
-      'clarity', {
-        value: clarity,
-      },
-    );
+    Object.defineProperty(window, 'clarity', {
+      value: clarity,
+    });
   }, []);
 
   return <script async src={`https://www.clarity.ms/tag/${tag}`} />;

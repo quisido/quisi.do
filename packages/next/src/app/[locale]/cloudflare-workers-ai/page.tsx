@@ -22,7 +22,7 @@ const handleFetch = async (
     },
   );
 
-  return await response.json();
+  return response.json();
 };
 
 export { default as generateStaticParams } from '../../../features/generate-locale-static-params';

@@ -2,9 +2,9 @@
 
 import {
   type MutableRefObject,
-  useRef,
   type PropsWithChildren,
   type ReactElement,
+  useRef,
 } from 'react';
 import useNotify from '../../hooks/use-notify';
 import useEffectEvent from '../../hooks/use-effect-event';

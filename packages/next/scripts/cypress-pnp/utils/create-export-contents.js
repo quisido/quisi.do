@@ -1,4 +1,4 @@
-const mapPackageNameToDirectory = (packageName) => {
+const mapPackageNameToDirectory = packageName => {
   if (packageName.indexOf('/') !== -1) {
     return '../../../../../';
   }
@@ -10,7 +10,9 @@ export default function createExportContents(packageName, _export = '') {
 
   return [
     `require('${directory}.pnp.cjs').setup();`,
-    `module.exports = require('${packageName}${_export === '' ? '' : `/${_export}`}');`,
+    `module.exports = require('${packageName}${
+      _export === '' ? '' : `/${_export}`
+    }');`,
     '',
   ].join('\n');
 }
