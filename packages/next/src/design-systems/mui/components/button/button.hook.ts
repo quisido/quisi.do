@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation.js';
-import { useEffect, type MouseEvent, type ReactNode } from 'react';
+import { type MouseEvent, type ReactNode, useEffect } from 'react';
 import innerText from 'react-innertext';
 import useEffectEvent from '../../../../hooks/use-effect-event';
 import useEvent from '../../../../hooks/use-event/use-event';

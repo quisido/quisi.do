@@ -7,11 +7,11 @@ export { default as generateStaticParams } from '../../../features/generate-loca
 
 export default function CharitiesPage(): ReactElement {
   return (
-    <Container
-      header={<Header>Charities</Header>}
-    >
+    <Container header={<Header>Charities</Header>}>
       <Div element="p">
-        quisi.do is in the process of defining charities. As this matter has legal, financial, and moral implications, the decisions won't be made lightly and will be posted after they are ready.
+        quisi.do is in the process of defining charities. As this matter has
+        legal, financial, and moral implications, the decisions won't be made
+        lightly and will be posted after they are ready.
       </Div>
     </Container>
   );

@@ -32,8 +32,8 @@ const rumMetrics: RumMetrics = new RumMetrics({
 const sentryProjectIssues: SentryProjectIssues = new SentryProjectIssues({
   authToken: '192f445838294027957a4a7d64d5d023a46ce6bfdee3453c820c289e4dcc1f53',
   fetch,
-  organizationSlug: 'charles-stover',
-  projectSlug: 'charlesstover-com',
+  organizationSlug: 'quisido',
+  projectSlug: 'quisi-do',
 });
 
 export default function Dashboard(): ReactElement {

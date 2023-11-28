@@ -1,14 +1,14 @@
 'use client';
 
 import {
+  type MutableRefObject,
   type PropsWithChildren,
   type ReactElement,
   createContext,
-  useState,
   useEffect,
   useId,
-  type MutableRefObject,
   useRef,
+  useState,
 } from 'react';
 
 // https://developers.cloudflare.com/turnstile/reference/supported-languages/
@@ -156,7 +156,7 @@ export default function Turnstile({
     const scripts: HTMLCollectionOf<HTMLScriptElement> =
       window.document.getElementsByTagName('script');
 
-    const readyRender = (attempt: number = 0): void => {
+    const readyRender = (attempt = 0): void => {
       if (!hasTurnstile(window)) {
         // ~30 seconds
         if (attempt < 150) {

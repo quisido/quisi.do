@@ -1,7 +1,7 @@
 'use client'; // Error components must be Client Components
 
 import { withRecordError } from 'aws-rum-react';
-import { useEffect, type ReactElement } from 'react';
+import { type ReactElement, useEffect } from 'react';
 
 interface Props {
   readonly error: Error;

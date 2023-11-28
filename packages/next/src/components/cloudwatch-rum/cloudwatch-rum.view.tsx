@@ -1,9 +1,9 @@
 'use client';
 
 import {
-  type Telemetry,
   AwsRumProvider,
   MockAwsRumProvider,
+  type Telemetry,
 } from 'aws-rum-react';
 import { type ReactElement, type ReactNode } from 'react';
 import VERSION from '../../constants/version';

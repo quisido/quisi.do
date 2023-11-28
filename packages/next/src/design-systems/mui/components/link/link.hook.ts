@@ -2,9 +2,9 @@
 
 import { useRouter } from 'next/navigation.js';
 import {
-  useEffect,
   type HTMLAttributeAnchorTarget,
   type MouseEvent,
+  useEffect,
 } from 'react';
 import useEffectEvent from '../../../../hooks/use-effect-event';
 import useEvent from '../../../../hooks/use-event/use-event';

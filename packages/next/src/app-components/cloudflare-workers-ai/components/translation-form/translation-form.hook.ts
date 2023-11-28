@@ -1,7 +1,8 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import useEffectEvent from '../../../../hooks/use-effect-event';
 import type SelectOption from '../../../../types/select-option';
-import type Language, { isLanguage } from '../../constants/language';
+import { isLanguage } from '../../constants/language';
+import type Language from '../../constants/language';
 import useLanguages from '../../hooks/use-languages';
 import { type MetaM2m10012b } from '../../types/inputs';
 

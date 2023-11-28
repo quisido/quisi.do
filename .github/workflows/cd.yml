@@ -394,7 +394,7 @@ jobs:
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_LOG_LEVEL: info
-          SENTRY_ORG: charles-stover
+          SENTRY_ORG: quisido
           SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         with:
           environment: production
@@ -430,7 +430,7 @@ jobs:
       - name: Deploy
         run: yarn packages/cloudflare-analytics-worker run deploy
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
   # Stage 5: cloudflare-purge, github-packages
   cloudflare-purge:
@@ -451,7 +451,7 @@ jobs:
     steps:
       - name: Purge Cloudflare files
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_PURGE_API_TOKEN }}
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
         run: >
           curl \

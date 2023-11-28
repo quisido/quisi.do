@@ -1,4 +1,4 @@
-import { useContext, type Context } from 'react';
+import { type Context, useContext } from 'react';
 
 export default function mapContextToHook<T>(
   Context: Context<T | null>,

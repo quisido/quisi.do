@@ -12,9 +12,7 @@ interface State {
   readonly ariaLabel: string | undefined;
   readonly items: readonly BreadcrumbGroupProps.Item[];
   readonly handleFollow: (
-    event: CustomEvent<
-      BreadcrumbGroupProps.ClickDetail<BreadcrumbGroupProps.Item>
-    >,
+    event: CustomEvent<BreadcrumbGroupProps.ClickDetail>,
   ) => void;
 }
 

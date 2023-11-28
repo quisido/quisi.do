@@ -1,8 +1,8 @@
 import {
   type ComponentType,
+  Fragment,
   type PropsWithChildren,
   type ReactElement,
-  Fragment,
 } from 'react';
 import reduceWrappersToWrapper from './utils/reduce-wrappers-to-wrapper';
 
