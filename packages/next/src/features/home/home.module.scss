@@ -1,0 +1,52 @@
+.about {
+  max-width: 640px;
+}
+
+.avatar {
+  text-align: center;
+
+  > img {
+    border-radius: 50%;
+  }
+}
+
+.content {
+  justify-content: center;
+}
+
+.list {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    padding: 0 1em;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+.projectList {
+  $margin-left: 2.5em;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  list-style-position: outside;
+  margin-left: -$margin-left;
+
+  > li {
+    margin-left: $margin-left;
+  }
+}

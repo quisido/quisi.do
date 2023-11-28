@@ -1,7 +1,7 @@
 import type { AwsRum } from 'aws-rum-web';
 import type { ComponentType, ReactElement } from 'react';
 import { useCallback } from 'react';
-import useAwsRum from '../hooks/use-aws-rum';
+import useAwsRum from '../hooks/use-aws-rum.js';
 
 interface HocProps {
   readonly recordError: (error: unknown) => void;
@@ -22,6 +22,7 @@ export default function withRecordError<Props extends HocProps>(
       [awsRum],
     );
 
+    // eslint-disable-next-line  @typescript-eslint/consistent-type-assertions
     return <Component {...(props as Props)} recordError={recordError} />;
   };
 }

@@ -1,3 +1,6 @@
 /dist/
 /jest/
-/node_modules/
+/*.iml
+/*.tsbuildinfo
+/*-*.*.*.tgz
+/tsc-output.cpuprofile

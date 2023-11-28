@@ -1,3 +1,0 @@
-const DEFAULT_SAMPLE_RATE = 100;
-
-export default DEFAULT_SAMPLE_RATE;

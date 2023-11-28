@@ -1,0 +1,188 @@
+{
+  "folders": [
+    {
+      "name": "$root",
+      "path": "."
+    },
+
+    // Applications
+    {
+      "name": "quisi.do (next)",
+      "path": "packages/next"
+    },
+
+    {
+      "name": "quisi.do (react-scripts)",
+      "path": "packages/react-scripts"
+    },
+
+    {
+      "name": "Cloudflare Analytics worker",
+      "path": "packages/cloudflare-analytics-worker"
+    },
+
+    // Integrations
+    {
+      "name": "@monorepo-template/test",
+      "path": "packages/test"
+    },
+
+    {
+      "name": "@monorepo-template/tree-logger",
+      "path": "packages/tree-logger"
+    },
+
+    {
+      "name": "aws-rum-react",
+      "path": "packages/aws-rum-react"
+    },
+
+    {
+      "name": "fullstory-react",
+      "path": "packages/fullstory-react"
+    },
+
+    {
+      "name": "lazy-i18n",
+      "path": "packages/lazy-i18n"
+    },
+
+    {
+      "name": "mock-next-router",
+      "path": "packages/mock-next-router"
+    },
+
+    {
+      "name": "number-format-react",
+      "path": "packages/number-format-react"
+    },
+
+    {
+      "name": "react-datadog",
+      "path": "packages/react-datadog"
+    },
+
+    {
+      "name": "sentry-react",
+      "path": "packages/sentry-react"
+    },
+
+    {
+      "name": "unknown2string",
+      "path": "packages/unknown2string"
+    },
+
+    {
+      "name": "use-awsui-table-item-description",
+      "path": "packages/use-awsui-table-item-description"
+    },
+
+    {
+      "name": "use-next-awsui",
+      "path": "packages/use-next-awsui"
+    },
+
+    {
+      "name": "use-offline",
+      "path": "packages/use-offline"
+    },
+
+    {
+      "name": "use-shallow-memo",
+      "path": "packages/use-shallow-memo"
+    }
+  ],
+
+  "settings": {
+    "editor.rulers": [80],
+    "editor.tabSize": 2,
+    "eslint.nodePath": "../../.yarn/sdks",
+    "eslint.runtime": "node",
+    "files.eol": "\n",
+    "prettier.configPath": "../../.prettierrc.json",
+    "prettier.prettierPath": "../../.yarn/sdks/prettier/index.js",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "typescript.tsdk": ".yarn/sdks/typescript/lib",
+
+    "files.exclude": {
+      "**/.git/": true,
+      "**/.idea/": true,
+      "**/.next/": true,
+      "**/.nyc_output/": true,
+      "**/.yarn/": true,
+      "**/build/": true,
+      "**/coverage/": true,
+      "**/cypress/coverage/": true,
+      "**/cypress/downloads/": true,
+      "**/cypress/screenshots/": true,
+      "**/cypress/videos/": true,
+      "**/dist/": true,
+      "**/jest/": true,
+      "**/node_modules/": true,
+      "**/out/": true,
+      "**/sarif/": true,
+      "**/.attach_pid*": true,
+      "**/.pnp.*": true,
+      "**/*.cpuprofile": true,
+      "**/*.tsbuildinfo": true,
+      "**/*-*.*.*.tgz": true,
+      "**/lighthouse.report.*": true,
+      "**/yarn.lock": true,
+      "packages/*/*": true
+    },
+
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/.idea/**": true,
+      "**/.next/**": true,
+      "**/.nyc_output/**": true,
+      "**/.yarn/cache/**": true,
+      "**/.yarn/sdks/**": true,
+      "**/.yarn/unplugged/**": true,
+      "**/.yarn/build-state.yml": true,
+      "**/.yarn/install-state.gz": true,
+      "**/build/**": true,
+      "**/coverage/**": true,
+      "**/cypress/coverage/**": true,
+      "**/cypress/downloads/**": true,
+      "**/cypress/screenshots/": true,
+      "**/cypress/videos/": true,
+      "**/dist/**": true,
+      "**/jest/**": true,
+      "**/node_modules/**": true,
+      "**/.attach_pid*": true,
+      "**/.pnp.*": true,
+      "**/*.cpuprofile": true,
+      "**/*.tsbuildinfo": true,
+      "**/*-*.*.*.tgz": true,
+      "**/lighthouse.report.*": true,
+      "**/yarn.lock": true
+    },
+
+    "search.exclude": {
+      "**/.git/": true,
+      "**/.idea/": true,
+      "**/.next/": true,
+      "**/.nyc_output/": true,
+      "**/.yarn/": true,
+      "**/build/": true,
+      "**/coverage/": true,
+      "**/cypress/coverage/": true,
+      "**/cypress/downloads/": true,
+      "**/cypress/screenshots/": true,
+      "**/cypress/videos/": true,
+      "**/dist/": true,
+      "**/jest/": true,
+      "**/node_modules/": true,
+      "**/sarif/": true,
+      "**/.attach_pid*": true,
+      "**/.pnp.*": true,
+      "**/*.cpuprofile": true,
+      "**/*.tsbuildinfo": true,
+      "**/*-*.*.*.tgz": true,
+      "**/lighthouse.report.*": true,
+      "**/yarn.lock": true
+    }
+  }
+}

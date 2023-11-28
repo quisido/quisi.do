@@ -1,0 +1,15 @@
+/dist/
+/jest/
+/node_modules/
+/src/
+/.attw.json
+/.eslintignore
+/.eslintrc.*
+/.gitignore
+/.npmignore
+/*.iml
+/*.tsbuildinfo
+/*-*.*.*.tgz
+/jest.config.*
+/tsc-output.cpuprofile
+/tsconfig.*

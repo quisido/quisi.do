@@ -2,12 +2,13 @@
 /jest/
 /node_modules/
 /src/
-/*.iml
 /.eslintignore
 /.eslintrc.*
 /.gitignore
 /.npmignore
-/.tsbuildinfo
+/*.iml
+/*.tsbuildinfo
+/*-*.*.*.tgz
 /jest.config.*
-/rollup.config.*
+/tsc-output.cpuprofile
 /tsconfig.*

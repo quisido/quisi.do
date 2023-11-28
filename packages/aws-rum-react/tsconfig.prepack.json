@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declarationDir": "dist",
+    "jsx": "react-jsx",
+    "noEmit": false,
+    "outDir": "dist",
+    /**
+     * `aws-rum-web` uses a CommonJS build with `web-vital`'s CommonJS as a
+     *   dependency. However, `web-vital` only vends ESM types, so TypeScript
+     *   incorrectly believes `aws-rum-web`'s CommonJS module to be importing a
+     *   ECMAScript module.
+     */
+    "skipLibCheck": true
+  },
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/"],
+  "include": ["src/"]
+}

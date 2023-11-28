@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declarationDir": "dist",
+    "jsx": "react-jsx",
+    "noEmit": false,
+    "outDir": "dist",
+    /**
+     * next/dist/server/next-server.d.ts
+     *   Property "sendRenderResult" in type "NextNodeServer" is not assignable to
+     *   the same property in base type "Server<Options>".
+     */
+    "skipLibCheck": true
+  },
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/"],
+  "include": ["src/"]
+}

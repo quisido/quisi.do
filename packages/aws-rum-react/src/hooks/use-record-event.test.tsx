@@ -1,7 +1,7 @@
 /// <reference types="jest" />
 import { act, renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
-import { MockAwsRumProvider, useRecordEvent } from '..';
+import { MockAwsRumProvider, useRecordEvent } from '../index.js';
 
 const ONCE = 1;
 const TEST_RECORD_EVENT = jest.fn<unknown, [string, object]>();

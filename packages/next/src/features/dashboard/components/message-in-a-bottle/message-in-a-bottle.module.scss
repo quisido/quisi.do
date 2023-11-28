@@ -1,0 +1,66 @@
+@use 'sass:math';
+
+$height: 22px; // AWS UI header line height
+$original-height: 104px;
+$original-width: 68px;
+$aspect-ratio: $original-height / $original-width;
+$width: $height / $aspect-ratio;
+
+@keyframes shake {
+  0% {
+    transform: rotate(22.5deg);
+  }
+
+  13% {
+    transform: rotate(45deg);
+  }
+
+  38% {
+    transform: rotate(0);
+  }
+
+  63% {
+    transform: rotate(45deg);
+  }
+
+  88% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(22.5deg);
+  }
+}
+
+.root {
+  background-image: url('../../images/message-in-a-bottle.png');
+  background-size: contain;
+  height: math.round($height);
+  opacity: 0.1;
+  position: absolute;
+  margin-left: 0 - math.floor($width / 2) !important; // override MUI
+  margin-right: 0 - math.ceil($width / 2) !important; // override MUI
+  margin-top: 0 - math.round($height / 2) !important; // override MUI
+  transform: rotate(22.5deg);
+  transition-delay: 0s !important; // override AWSUI
+  transition-duration: 500ms !important; // override AWSUI
+  transition-property: height, margin-left, margin-right, margin-top, opacity, transform, width !important; // override AWSUI
+  transition-timing-function: ease-in-out !important; // override AWSUI
+  width: math.round($width);
+  z-index: 1; // greater than <Container>'s border
+
+  &:hover {
+    animation-delay: 0s !important; // override AWSUI
+    animation-duration: 500ms !important; // override AWSUI
+    animation-iteration-count: 1 !important; // override AWSUI
+    animation-name: shake !important; // override AWSUI
+    animation-timing-function: ease-in-out !important; // override AWSUI
+    height: math.round(2 * $height);
+    margin-left: 0 - math.floor($width) !important; // override MUI
+    margin-right: 0 - math.ceil($width) !important; // override MUI
+    margin-top: 0 - math.round($height) !important; // override MUI
+    opacity: 0.75;
+    transform: rotate(22.5deg);
+    width: math.round(2 * $width);
+  }
+}

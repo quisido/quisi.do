@@ -1,7 +1,7 @@
 # Security policy
 
 To report a vulnerability,
-[submit an issue](https://github.com/CharlesStover/charlesstover.com/issues/new/choose)
+[submit an issue](https://github.com/CharlesStover/quisi.do/issues/new/choose)
 on GitHub.
 
 Updates are prioritized by their perceived risk; therefore, they are not

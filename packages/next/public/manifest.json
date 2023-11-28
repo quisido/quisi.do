@@ -1,8 +1,8 @@
 {
   "background_color": "#202020",
   "display": "standalone",
-  "name": "CharlesStover.com",
-  "short_name": "CharlesStover.com",
+  "name": "quisi.do",
+  "short_name": "quisi.do",
   "start_url": "/",
   "theme_color": "#161616",
   "icons": [
@@ -14,7 +14,7 @@
     {
       "purpose": "any maskable monochrome",
       "sizes": "512x512",
-      "src": "/apple-touch-icon.png",
+      "src": "/apple-icon.png",
       "type": "image/png"
     }
   ]
