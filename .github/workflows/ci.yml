@@ -1,7 +1,7 @@
 name: Continuous integration
 
 jobs:
-  # Test a bun build.
+  # Stage 1: bun, codacy, dependency-review, devskim, install
   # bun:
   #   name: bun
   #   runs-on: ubuntu-latest
@@ -17,7 +17,6 @@ jobs:
   #     - name: Prepublish
   #       run: bun run prepublish
 
-  # Stage 1: codacy, dependency-review, devskim, install
   codacy:
     name: Codacy
     runs-on: ubuntu-latest

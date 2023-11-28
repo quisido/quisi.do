@@ -1,7 +1,47 @@
 name: CI/CD
 
 jobs:
-  # Stage 1: install
+  # Stage 1: codacy, devskim, install
+  codacy:
+    name: Codacy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Analyze
+        uses: codacy/codacy-analysis-cli-action@master
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          format: sarif
+          gh-code-scanning-compat: true
+          max-allowed-issues: 2147483647
+          output: codacy.sarif
+          verbose: true
+      - name: Upload SARIF
+        if: always()
+        uses: github/codeql-action/upload-sarif@main
+        with:
+          sarif_file: codacy.sarif
+          wait-for-processing: true
+
+  devskim:
+    name: DevSkim
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Scan
+        uses: microsoft/DevSkim-Action@v1
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: devskim-results.sarif
+          wait-for-processing: true
+
   install:
     name: Install
     runs-on: ubuntu-latest
@@ -28,36 +68,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-  # Stage 2: eslint, prepack, test
-  eslint:
-    name: ESLint
-    needs: install
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Lint
-        run: yarn run eslint
-
+  # Stage 2: prepack
   prepack:
     name: Prepack
     needs: install
@@ -85,7 +96,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Prepack
-        run: yarn run prepack
+        run: yarn prepack
         env:
           CI: false
           REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
@@ -95,121 +106,11 @@ jobs:
         with:
           name: prepack
           path: |
-            packages/*/build/
+            packages/*/.next/
             packages/*/dist/
+            packages/*/out/
 
-  test:
-    name: Test
-    needs: install
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Lint
-        run: yarn run test
-
-  # Stage 3: cypress, lighthouse, npm, opensource-registry,
-  #          prepublish-applications
-  cypress:
-    name: Cypress
-    needs: prepack
-    runs-on: ${{ matrix.os }}-latest
-    ## Container operations are only supported on Linux runners.
-    # env:
-    #   DD_ENV: ci
-    # services:
-    #   datadog-agent:
-    #     image: datadog/agent:latest
-    #     env:
-    #       DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-    #       DD_HOSTNAME: none
-    #       DD_INSIDE_CI: true
-    #     ports:
-    #       - 8126:8126
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: prepack
-          path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Enable Plug-n-Play
-        run: yarn cypress:pnp
-        working-directory: packages/next/
-      - name: End-to-end test
-        uses: cypress-io/github-action@v4
-        env:
-          CHOKIDAR_USEPOLLING: true
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          CYPRESS_SCREENSHOTS_SUBFOLDER: ${{ matrix.os }}-${{ matrix.browser }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }} # -${{ matrix.container }}
-          REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
-          REACT_APP_GITHUB_SHA: ${{ github.sha }}
-        with:
-          browser: ${{ matrix.browser }}
-          ci-build-id: ${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
-          command-prefix: yarn dlx
-          config-file: cypress.config.cjs
-          group: ${{ matrix.browser }}
-          install: false
-          parallel: true
-          record: true
-          start: yarn run cypress:start
-          tag: ${{ github.event_name }}
-          wait-on: 'http://localhost:3000/'
-          wait-on-timeout: 120
-          working-directory: packages/next/
-      - name: Upload artifacts
-        if: matrix.os == 'ubuntu'
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress
-          path: |
-            packages/*/cypress/coverage/
-            packages/*/cypress/screenshots/
-            packages/*/cypress/videos/
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu, windows]
-        browser: [chrome, edge] # firefox
-        # Cypress only supports 1 container for Edge.
-        # With multiple containers, Cypress will use the wrong browser version.
-        # https://github.com/cypress-io/github-action/issues/121
-        # container: [1, 2, 3]
-        exclude:
-          - browser: edge
-            os: ubuntu
-
+  # Stage 3: lighthouse, prepublish, prepublish-applications
   lighthouse:
     name: Lighthouse
     needs: prepack
@@ -253,9 +154,111 @@ jobs:
             packages/*/lighthouse.report.html
             packages/*/lighthouse.report.json
 
+  prepublish:
+    name: Prepublish
+    needs: prepack
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Prepublish
+        run: yarn prepublish
+
+  #   Run prepublish on applications, because prepublish won't be triggered for
+  # applications by the publish step.
+  prepublish-applications:
+    name: Prepublish applications
+    needs: prepack
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Prepublish quisi.do
+        run: yarn packages/next run prepublish
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: prepublish-applications
+          path: packages/*/jest/
+
+  # Stage 4: github-pages, npm, opensource-registry, sentry-release, wrangler-deploy
+  github-pages:
+    name: GitHub Pages
+    needs: [lighthouse, prepublish-applications]
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          clean: true
+          folder: packages/next/build/
+          single-commit: true
+
   npm:
     name: NPM
-    needs: [eslint, prepack, test]
+    needs: [prepack, prepublish]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -298,7 +301,7 @@ jobs:
 
   opensource-registry:
     name: OpenSource registry
-    needs: [eslint, prepack, test]
+    needs: [prepack, prepublish]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -334,178 +337,6 @@ jobs:
         run: >
           yarn config set npmAuthToken $NPM_AUTH_TOKEN;
           yarn run publish;
-
-  # Run the prepublish test on applications, because prepublish won't be
-  #   triggered for applications by the publish step.
-  prepublish-applications:
-    name: Prepublish applications
-    needs: prepack
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: prepack
-          path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Prepublish
-        run: yarn packages/next run prepublish
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: prepublish-applications
-          path: packages/*/jest/
-
-  # Stage 4: coverage, github-packages
-  coverage:
-    name: Coverage
-    needs: [cypress, prepublish-applications]
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Download Cypress artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: cypress
-          path: packages/
-      - name: Download prepublish artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: prepublish-applications
-          path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Report coverage
-        run: yarn packages/next run coverage
-        env:
-          BRANCHES_COVERAGE_THRESHOLD: 1
-          FUNCTIONS_COVERAGE_THRESHOLD: 1
-          LINES_COVERAGE_THRESHOLD: 1
-          STATEMENTS_COVERAGE_THRESHOLD: 1
-      - name: Upload coverage
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage
-          path: |
-            packages/*/.nyc_output/
-            packages/*/coverage/
-
-  github-packages:
-    name: GitHub Packages
-    needs: npm
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    permissions:
-      contents: read
-      packages: write
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: prepack
-          path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@${{ github.repository_owner }}'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Publish
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: >
-          yarn config set npmAuthToken $NPM_AUTH_TOKEN;
-          yarn config set \
-            npmScopes.${{ github.repository_owner }}.npmPublishRegistry \
-            'https://npm.pkg.github.com';
-          yarn run publish;
-
-  # Stage 5: github-pages, sentry-release, wrangler-deploy
-  github-pages:
-    name: GitHub Pages
-    needs: [coverage, lighthouse]
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: prepack
-          path: packages/
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          clean: true
-          folder: packages/next/build/
-          single-commit: true
 
   sentry-release:
     name: Sentry release
@@ -573,7 +404,7 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_KEY }}
 
-  # Stage 6: cloudflare-purge
+  # Stage 5: cloudflare-purge, github-packages
   cloudflare-purge:
     name: Cloudflare purge
     needs: github-pages
@@ -607,7 +438,53 @@ jobs:
             --request POST \
             "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache"
 
-  # Stage 7: neuralegion
+  github-packages:
+    name: GitHub Packages
+    needs: npm
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    permissions:
+      contents: read
+      packages: write
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@${{ github.repository_owner }}'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Publish
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          yarn config set npmAuthToken $NPM_AUTH_TOKEN;
+          yarn config set \
+            npmScopes.${{ github.repository_owner }}.npmPublishRegistry \
+            'https://npm.pkg.github.com';
+          yarn run publish;
+
+  # Stage 6: neuralegion
   neuralegion:
     name: NeuraLegion
     needs: cloudflare-purge
