@@ -5,12 +5,6 @@ import {
   type ReactElement,
   StrictMode,
 } from 'react';
-import Contexts from '../app-components/contexts';
-import GoogleAnalytics from '../app-components/google-analytics';
-// import Mixpanel from '../app-components/mixpanel';
-import NotificationsProvider from '../app-components/notifications-provider';
-import Sentry from '../app-components/sentry';
-// import Turnstile from '../app-components/turnstile';
 import CloudflareInsights from '../components/cloudflare-insights';
 import CloudWatchRUM from '../components/cloudwatch-rum';
 import Datadog from '../components/datadog';
@@ -19,6 +13,12 @@ import Preconnect from '../components/preconnect';
 import ReportUri from '../components/report-uri';
 import Theme from '../components/theme';
 import PRECONNECT_HREFS from '../constants/preconnect-hrefs';
+import Contexts from '../features/contexts';
+import GoogleAnalytics from '../features/google-analytics';
+// import Mixpanel from '../features/mixpanel';
+import NotificationsProvider from '../features/notifications-provider';
+import Sentry from '../features/sentry';
+// import Turnstile from '../features/turnstile';
 import withWrappers from '../hocs/with-wrappers';
 import Clarity from '../modules/react-clarity';
 

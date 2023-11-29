@@ -1,1 +1,1 @@
-export { default } from '../../app-components/locale-layout';
+export { default } from '../../features/locale-layout';

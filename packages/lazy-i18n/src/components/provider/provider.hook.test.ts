@@ -33,7 +33,7 @@ describe('useProvider', (): void => {
           },
         },
       });
-    }).toThrowError();
+    }).toThrow();
   });
 
   it('should throw an error when the fallback locale does not exist', (): void => {
@@ -50,7 +50,7 @@ describe('useProvider', (): void => {
           },
         },
       });
-    }).toThrowError();
+    }).toThrow();
   });
 
   it('should handle eager-loaded translations', (): void => {
@@ -64,6 +64,7 @@ describe('useProvider', (): void => {
         },
       },
     });
+
     expect(result.current.translate('Spanish')).toBe('Espanol');
   });
 
@@ -82,6 +83,7 @@ describe('useProvider', (): void => {
         },
       },
     });
+
     expect(result.current.translate('English')).toBe('English');
   });
 
@@ -97,6 +99,7 @@ describe('useProvider', (): void => {
         },
       },
     });
+
     expect(result.current.translate('Spanish')).toBeUndefined();
     await asyncLoadTranslationsEffect(result);
     expect(result.current.translate('Spanish')).toBe('Espanol');
@@ -118,6 +121,7 @@ describe('useProvider', (): void => {
         },
       },
     });
+
     expect(result.current.translate('English')).toBeUndefined();
     await asyncLoadFallbackTranslationsEffect(result);
     expect(result.current.translate('English')).toBe('English');
@@ -134,9 +138,10 @@ describe('useProvider', (): void => {
         },
       },
     });
+
     expect((): void => {
       result.current.translate('Spanish');
-    }).toThrowError();
+    }).toThrow();
   });
 
   it('should throw an error if no translation exists', (): void => {
@@ -154,8 +159,9 @@ describe('useProvider', (): void => {
         },
       },
     });
+
     expect((): void => {
       result.current.translate('German');
-    }).toThrowError();
+    }).toThrow();
   });
 });

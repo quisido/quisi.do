@@ -8,6 +8,6 @@ describe('expectToEventuallyThrow', (): void => {
         async (): Promise<void> => Promise.resolve(),
         new Error(),
       );
-    }).rejects.toThrowError('Expected function to throw.');
+    }).rejects.toThrow('Expected function to throw.');
   });
 });

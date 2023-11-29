@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  type MutableRefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { type MutableRefObject, useCallback, useRef, useState } from 'react';
 import mapUnknownToString from 'unknown2string';
 import type AsyncState from '../types/async-state';
 
@@ -90,10 +84,13 @@ export default function useAsyncState<T = unknown>(): State<T> {
       await promise;
     }, [getState]),
 
-    request: useCallback(async (get: () => Promise<T>): Promise<void> => {
-      const promise: Promise<unknown> = getState(get);
-      asyncEffectRef.current = promise;
-      await promise;
-    }, []),
+    request: useCallback(
+      async (get: () => Promise<T>): Promise<void> => {
+        const promise: Promise<unknown> = getState(get);
+        asyncEffectRef.current = promise;
+        await promise;
+      },
+      [getState],
+    ),
   };
 }

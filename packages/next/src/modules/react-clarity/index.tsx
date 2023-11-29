@@ -2,7 +2,7 @@
 
 import { type ReactElement, useEffect } from 'react';
 
-interface Clarity {
+interface ClarityApi {
   (): void;
   q: IArguments[];
 }
@@ -17,7 +17,7 @@ export default function Clarity({ tag }: Props): ReactElement {
       return;
     }
 
-    const clarity: Clarity = function(): void {
+    const clarity: ClarityApi = function(): void {
       clarity.q.push(arguments);
     };
     clarity.q = [];
@@ -27,5 +27,11 @@ export default function Clarity({ tag }: Props): ReactElement {
     });
   }, []);
 
-  return <script async src={`https://www.clarity.ms/tag/${tag}`} />;
+  return (
+    <script
+      async
+      src={`https://www.clarity.ms/tag/${tag}`}
+      type="text/javascript"
+    />
+  );
 }

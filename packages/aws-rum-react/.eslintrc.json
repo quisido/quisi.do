@@ -47,6 +47,7 @@
         "@monorepo-template/eslint-config/typescript-fixable/json"
       ]
     },
+
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["@monorepo-template/eslint-config/typescript/ts"],

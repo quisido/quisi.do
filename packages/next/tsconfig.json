@@ -1,5 +1,12 @@
 {
-  "exclude": [".next/", "out/"],
+  "exclude": [
+    "./.next/",
+    "./cypress/",
+    "./src/**/*.e2e.ts",
+    "./src/test/cypress/",
+    "./out/",
+    "./cypress.config.*"
+  ],
   "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts"],
   "compilerOptions": {
     "allowJs": false,
@@ -14,7 +21,6 @@
     "moduleResolution": "Bundler",
     "noEmit": true,
     "resolveJsonModule": true,
-    "rootDirs": ["../use-next-awsui/src", "."],
     "skipLibCheck": false,
     "strict": true,
     "target": "es5",

@@ -29,6 +29,7 @@ const getNpmDownloads = async (): Promise<
 
   return response.json();
 };
+
 export default function useNpmDownloads(): State {
   // Contexts
   const notify = useNotify();

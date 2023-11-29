@@ -1,8 +1,0 @@
-{
-  "extends": "../tsconfig.json",
-  "exclude": ["coverage/", "screenshots/", "videos/"],
-  "include": ["**/*.ts"],
-  "compilerOptions": {
-    "baseUrl": "http://localhost:3000/"
-  }
-}

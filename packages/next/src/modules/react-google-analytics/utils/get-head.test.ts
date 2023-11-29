@@ -33,7 +33,7 @@ describe('getHead', (): void => {
     beforeEach(removeHead);
 
     it('should throw an error', (): void => {
-      expect(getHead).toThrowError('Expected to find a head element.');
+      expect(getHead).toThrow('Expected to find a head element.');
     });
   });
 });

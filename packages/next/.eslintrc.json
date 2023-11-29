@@ -1,4 +1,9 @@
 {
+  "env": {
+    "browser": true,
+    "jest": true,
+    "node": true
+  },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -7,22 +12,63 @@
     "plugin:jsx-a11y/strict",
     "plugin:prettier/recommended",
     "plugin:react/recommended",
+    "plugin:react/recommended",
+    "@monorepo-template/eslint-config/typescript",
+    "@monorepo-template/eslint-config/typescript-fixable",
+    "@monorepo-template/eslint-config/typescript-strict",
     "next/core-web-vitals"
+  ],
+  "overrides": [
+    {
+      "files": [".eslintrc.json"],
+      "extends": "@monorepo-template/eslint-config/typescript/eslint"
+    },
+
+    {
+      "files": ["*.cjs"],
+      "extends": "@monorepo-template/eslint-config/typescript/cjs"
+    },
+
+    {
+      "files": ["*.cjs", "*.js", "*.jsx", "*.mjs"],
+      "extends": [
+        "@monorepo-template/eslint-config/typescript/js",
+        "@monorepo-template/eslint-config/typescript-fixable/js"
+      ]
+    },
+
+    {
+      "files": ["*.json"],
+      "extends": [
+        "@monorepo-template/eslint-config/react-typescript/json",
+        "@monorepo-template/eslint-config/typescript/json",
+        "@monorepo-template/eslint-config/typescript-fixable/json"
+      ]
+    },
+
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["@monorepo-template/eslint-config/typescript/ts"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": "error",
+        "@typescript-eslint/explicit-member-accessibility": "error",
+        "@typescript-eslint/explicit-module-boundary-types": "error"
+      }
+    }
   ],
   "parser": "@typescript-eslint/parser",
   "root": true,
   "parserOptions": {
-    "project": ["./tsconfig.eslint.json"],
+    "project": ["./tsconfig.cypress.json", "./tsconfig.eslint.json"],
     "warnOnUnsupportedTypeScriptVersion": false
   },
-  "plugins": [
-    "@typescript-eslint",
-    "import",
-    "jsx-a11y",
-    "prettier",
-    "react"
-  ],
+  "plugins": ["@typescript-eslint", "import", "jsx-a11y", "prettier", "react"],
   "rules": {
+    "@typescript-eslint/sort-type-union-intersection-members": "off",
+    "@typescript-eslint/no-duplicate-imports": "off",
+    "@typescript-eslint/no-type-alias": "off",
+    "@typescript-eslint/consistent-type-assertions": "off",
+    "@typescript-eslint/no-parameter-properties": "off",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/prefer-readonly-parameter-types": "off",
     "@typescript-eslint/adjacent-overload-signatures": "error",
@@ -75,7 +121,6 @@
     "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-this-alias": "error",
     "@typescript-eslint/no-throw-literal": "error",
-    "@typescript-eslint/no-type-alias": "error",
     "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
     "@typescript-eslint/no-unnecessary-condition": "error",
     "@typescript-eslint/no-unnecessary-qualifier": "error",
@@ -158,12 +203,6 @@
         "imports": "always-multiline",
         "objects": "always-multiline",
         "tuples": "never"
-      }
-    ],
-    "@typescript-eslint/consistent-type-assertions": [
-      "error",
-      {
-        "assertionStyle": "never"
       }
     ],
     "@typescript-eslint/consistent-type-imports": [
