@@ -18,6 +18,8 @@ import noop from '../../utils/noop';
  *   context.
  */
 
+const CHALLENGE_TIMEOUT = 110600;
+
 export default function AppTurnstile({
   children,
 }: PropsWithChildren): ReactElement {
@@ -36,8 +38,7 @@ export default function AppTurnstile({
       onError={(code: number): void => {
         // https://developers.cloudflare.com/turnstile/reference/client-side-errors/
         switch (code) {
-          case 110600:
-            // return 'You took too long to solve the challenge.';
+          case CHALLENGE_TIMEOUT:
             notify({
               type: 'warning',
               Header(): ReactElement {

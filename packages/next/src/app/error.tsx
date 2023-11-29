@@ -12,7 +12,7 @@ interface Props {
 function ErrorBoundary({ error, recordError, reset }: Props): ReactElement {
   useEffect((): void => {
     recordError(error);
-  }, [recordError]);
+  }, [error, recordError]);
 
   return (
     <div>

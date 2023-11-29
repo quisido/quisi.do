@@ -1,7 +1,11 @@
+/**/*.ico
 /**/*.jpg
+/**/*.md
+/**/*.pdf
 /**/*.png
 /**/*.scss
+/**/*.txt
 /.next/
 /jest/
 /out/
-/*.md
+/public/CNAME

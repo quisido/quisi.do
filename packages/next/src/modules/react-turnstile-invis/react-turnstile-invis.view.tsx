@@ -88,10 +88,15 @@ export interface State {
   readonly token: string | null;
 }
 
+const ATTEMPT_DELAY = 200;
 const Context = createContext<State | null>(null);
+const INCREMENT = 1;
+const MAX_ATTEMPTS = 150; // ~30 seconds
+const NONE = 0;
 const SRC =
   'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
 
+const hasTurnstile = (w: Window): w is TurnstileWindow => 'turnstile' in w;
 const hasScript = (scripts: HTMLCollectionOf<HTMLScriptElement>): boolean => {
   for (const script of scripts) {
     if (script.getAttribute('src') !== SRC) {
@@ -102,7 +107,6 @@ const hasScript = (scripts: HTMLCollectionOf<HTMLScriptElement>): boolean => {
   return false;
 };
 
-const hasTurnstile = (w: Window): w is TurnstileWindow => 'turnstile' in w;
 const DEFAULT_STATE: State = {
   error: null,
   expired: true,
@@ -156,13 +160,12 @@ export default function Turnstile({
     const scripts: HTMLCollectionOf<HTMLScriptElement> =
       window.document.getElementsByTagName('script');
 
-    const readyRender = (attempt = 0): void => {
+    const readyRender = (attempt = NONE): void => {
       if (!hasTurnstile(window)) {
-        // ~30 seconds
-        if (attempt < 150) {
+        if (attempt < MAX_ATTEMPTS) {
           setTimeout((): void => {
-            readyRender(attempt + 1);
-          }, 200);
+            readyRender(attempt + INCREMENT);
+          }, ATTEMPT_DELAY);
         }
         return;
       }

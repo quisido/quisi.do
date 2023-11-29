@@ -4,7 +4,7 @@ import AUTHOR_QUISIDO from './author-quisido';
 import FORMAT_DETECTION from './format-detection';
 import KEYWORDS from './keywords';
 // import ROBOTS_INFO from './robots-info';
-import THEME_COLOR_DESCRIPTORS from './theme-color-descriptors';
+// import THEME_COLOR_DESCRIPTORS from './theme-color-descriptors';
 
 /**
  * TODO: Validate these against the standard documented on MDN:

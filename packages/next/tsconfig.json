@@ -1,12 +1,11 @@
 {
   "exclude": [
-    "**/cypress/",
-    "**/test/cypress/",
-    "**/*.e2e.ts",
-    "**/cypress.config.*",
-    ".next/",
-    "out/",
-    "cypress"
+    "./.next/",
+    "./cypress/",
+    "./src/**/*.e2e.ts",
+    "./src/test/cypress/",
+    "./out/",
+    "./cypress.config.*"
   ],
   "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts"],
   "compilerOptions": {

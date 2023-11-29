@@ -59,7 +59,7 @@
   "parser": "@typescript-eslint/parser",
   "root": true,
   "parserOptions": {
-    "project": ["./tsconfig.eslint.json"],
+    "project": ["./tsconfig.cypress.json", "./tsconfig.eslint.json"],
     "warnOnUnsupportedTypeScriptVersion": false
   },
   "plugins": ["@typescript-eslint", "import", "jsx-a11y", "prettier", "react"],

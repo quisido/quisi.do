@@ -14,7 +14,7 @@ const { ContextProvider, useContextValue } =
           | ((
               oldNotifications: readonly Notification[],
             ) => readonly Notification[]),
-      ) => void,
+      ) => void
     ]
   >();
 
@@ -27,7 +27,7 @@ export const NotificationsProvider: Provider<
         | ((
             oldNotifications: readonly Notification[],
           ) => readonly Notification[]),
-    ) => void,
+    ) => void
   ]
 > = ContextProvider;
 
@@ -39,5 +39,5 @@ export const useNotifications: () => readonly [
       | ((
           oldNotifications: readonly Notification[],
         ) => readonly Notification[]),
-  ) => void,
+  ) => void
 ] = useContextValue;
