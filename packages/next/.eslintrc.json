@@ -7,7 +7,49 @@
     "plugin:jsx-a11y/strict",
     "plugin:prettier/recommended",
     "plugin:react/recommended",
+    "plugin:react/recommended",
+    "@monorepo-template/eslint-config/typescript",
+    "@monorepo-template/eslint-config/typescript-fixable",
+    "@monorepo-template/eslint-config/typescript-strict",
     "next/core-web-vitals"
+  ],
+  "overrides": [
+    {
+      "files": [".eslintrc.json"],
+      "extends": "@monorepo-template/eslint-config/typescript/eslint"
+    },
+
+    {
+      "files": ["*.cjs"],
+      "extends": "@monorepo-template/eslint-config/typescript/cjs"
+    },
+
+    {
+      "files": ["*.cjs", "*.js", "*.jsx", "*.mjs"],
+      "extends": [
+        "@monorepo-template/eslint-config/typescript/js",
+        "@monorepo-template/eslint-config/typescript-fixable/js"
+      ]
+    },
+
+    {
+      "files": ["*.json"],
+      "extends": [
+        "@monorepo-template/eslint-config/react-typescript/json",
+        "@monorepo-template/eslint-config/typescript/json",
+        "@monorepo-template/eslint-config/typescript-fixable/json"
+      ]
+    },
+
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["@monorepo-template/eslint-config/typescript/ts"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": "error",
+        "@typescript-eslint/explicit-member-accessibility": "error",
+        "@typescript-eslint/explicit-module-boundary-types": "error"
+      }
+    }
   ],
   "parser": "@typescript-eslint/parser",
   "root": true,

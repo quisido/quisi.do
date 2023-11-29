@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 import CloudflareWorkersAi, {
   type ModelState,
-} from '../../../app-components/cloudflare-workers-ai';
+} from '../../../features/cloudflare-workers-ai';
 
 const ACCOUNT_IDENTIFIER = 'da0f1e5d73beae3d7bbc796d448766ab';
 
