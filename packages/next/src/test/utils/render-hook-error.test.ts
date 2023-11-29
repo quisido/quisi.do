@@ -9,6 +9,6 @@ describe('renderHookError', (): void => {
   it('should throw an error when the hook does not throw an error', (): void => {
     expect((): void => {
       renderHookError(useTestHook);
-    }).toThrowError();
+    }).toThrow();
   });
 });

@@ -3,7 +3,6 @@
 import {
   type MutableRefObject,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -94,6 +93,6 @@ export default function useAsyncState<T = unknown>(): State<T> {
       const promise: Promise<unknown> = getState(get);
       asyncEffectRef.current = promise;
       await promise;
-    }, []),
+    }, [getState]),
   };
 }

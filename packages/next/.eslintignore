@@ -1,3 +1,7 @@
+/**/*.jpg
+/**/*.png
+/**/*.scss
 /.next/
 /jest/
 /out/
+/*.md

@@ -1,8 +1,8 @@
 import {
   type Context,
+  type Contexts as SentryContexts,
   type Exception as SentryException,
   // SdkInfo,
-  type Contexts as SentryContexts,
   type StackFrame as SentryStackFrame,
   type Stacktrace as SentryStacktrace,
   // User,

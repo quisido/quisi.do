@@ -49,7 +49,7 @@ describe('useLoadTranslations', (): void => {
 
     await expect(async (): Promise<void> => {
       await result.current('es_ES');
-    }).rejects.toThrowError();
+    }).rejects.toThrow();
   });
 
   it('should load string record translations', async (): Promise<void> => {

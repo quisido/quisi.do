@@ -1,4 +1,9 @@
 {
+  "env": {
+    "browser": true,
+    "jest": true,
+    "node": true
+  },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -57,14 +62,13 @@
     "project": ["./tsconfig.eslint.json"],
     "warnOnUnsupportedTypeScriptVersion": false
   },
-  "plugins": [
-    "@typescript-eslint",
-    "import",
-    "jsx-a11y",
-    "prettier",
-    "react"
-  ],
+  "plugins": ["@typescript-eslint", "import", "jsx-a11y", "prettier", "react"],
   "rules": {
+    "@typescript-eslint/sort-type-union-intersection-members": "off",
+    "@typescript-eslint/no-duplicate-imports": "off",
+    "@typescript-eslint/no-type-alias": "off",
+    "@typescript-eslint/consistent-type-assertions": "off",
+    "@typescript-eslint/no-parameter-properties": "off",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/prefer-readonly-parameter-types": "off",
     "@typescript-eslint/adjacent-overload-signatures": "error",
@@ -117,7 +121,6 @@
     "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-this-alias": "error",
     "@typescript-eslint/no-throw-literal": "error",
-    "@typescript-eslint/no-type-alias": "error",
     "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
     "@typescript-eslint/no-unnecessary-condition": "error",
     "@typescript-eslint/no-unnecessary-qualifier": "error",
@@ -200,12 +203,6 @@
         "imports": "always-multiline",
         "objects": "always-multiline",
         "tuples": "never"
-      }
-    ],
-    "@typescript-eslint/consistent-type-assertions": [
-      "error",
-      {
-        "assertionStyle": "never"
       }
     ],
     "@typescript-eslint/consistent-type-imports": [
