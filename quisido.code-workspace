@@ -5,31 +5,14 @@
       "path": "."
     },
 
-    // Applications
     {
-      "name": "quisi.do (next)",
+      "name": "quisi.do",
       "path": "packages/next"
-    },
-
-    {
-      "name": "quisi.do (react-scripts)",
-      "path": "packages/react-scripts"
     },
 
     {
       "name": "Cloudflare Analytics worker",
       "path": "packages/cloudflare-analytics-worker"
-    },
-
-    // Integrations
-    {
-      "name": "@monorepo-template/test",
-      "path": "packages/test"
-    },
-
-    {
-      "name": "@monorepo-template/tree-logger",
-      "path": "packages/tree-logger"
     },
 
     {
@@ -65,6 +48,16 @@
     {
       "name": "sentry-react",
       "path": "packages/sentry-react"
+    },
+
+    {
+      "name": "test",
+      "path": "packages/test"
+    },
+
+    {
+      "name": "tree-logger",
+      "path": "packages/tree-logger"
     },
 
     {
