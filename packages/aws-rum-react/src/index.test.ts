@@ -195,9 +195,9 @@ function describePackageJson({
 const packageJsonPath: string = join(__dirname, '..', 'package.json');
 
 describePackageJson({
-  author: 'Quisido',
+  author: 'quisi.do',
   domain: 'quisi.do',
-  fundingUrl: 'https://github.com/sponsors/CharlesStover',
+  fundingUrl: 'https://github.com/sponsors/quisido',
   packageJson: readFileSync(packageJsonPath).toString(),
-  repo: 'CharlesStover/quisi.do',
+  repo: 'quisido/quisi.do',
 });

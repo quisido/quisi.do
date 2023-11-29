@@ -1,27 +1,27 @@
 {
   "name": "fullstory-react",
   "version": "2.0.0",
-  "author": "Quisido <fullstory-react@quisi.do>",
+  "author": "quisi.do <fullstory-react@quisi.do>",
   "description": "FullStory integration with React",
-  "homepage": "https://github.com/CharlesStover/quisi.do/tree/main/packages/fullstory-react#readme",
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/fullstory-react#readme",
   "license": "MIT",
   "main": "./dist/index.js",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
     "email": "fullstory-react@quisi.do",
-    "url": "https://github.com/CharlesStover/quisi.do/issues"
+    "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://github.com/sponsors/CharlesStover"
+    "url": "https://github.com/sponsors/quisido"
   },
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/CharlesStover/quisi.do.git"
+    "url": "https://github.com/quisido/quisi.do.git"
   },
   "scripts": {
     "attw": "attw",

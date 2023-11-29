@@ -1,12 +1,12 @@
 {
   "name": "@monorepo-template/test",
   "version": "3.0.0",
-  "author": "Quisido <monorepo-template-test@quisi.do>",
+  "author": "quisi.do <monorepo-template-test@quisi.do>",
   "description": "tests monorepos for best practices",
-  "homepage": "https://github.com/CharlesStover/quisi.do/tree/main/packages/test#readme",
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/test#readme",
   "license": "MIT",
   "main": "./dist/index.js",
-  "repository": "github:CharlesStover/quisi.do",
+  "repository": "github:quisido/quisi.do",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bin": {
@@ -14,11 +14,11 @@
   },
   "bugs": {
     "email": "monorepo-template-test@quisi.do",
-    "url": "https://github.com/CharlesStover/quisi.do/issues"
+    "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://github.com/sponsors/CharlesStover"
+    "url": "https://github.com/sponsors/quisido"
   },
   "publishConfig": {
     "access": "public"

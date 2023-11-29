@@ -1,20 +1,20 @@
 {
   "name": "@quisi/do",
   "version": "1.0.0",
-  "author": "Quisido <contact@quisi.do>",
-  "description": "Quisido",
+  "author": "quisi.do <contact@quisi.do>",
+  "description": "quisi.do",
   "homepage": "https://quisi.do/",
   "packageManager": "yarn@4.0.2",
   "private": true,
-  "repository": "github:CharlesStover/quisi.do",
+  "repository": "github:quisido/quisi.do",
   "type": "module",
   "bugs": {
     "email": "bugs@quisi.do",
-    "url": "https://github.com/CharlesStover/quisi.do/issues"
+    "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://github.com/sponsors/CharlesStover"
+    "url": "https://github.com/sponsors/quisido"
   },
   "publishConfig": {
     "access": "restricted"

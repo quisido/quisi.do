@@ -1,21 +1,21 @@
 {
   "name": "mock-next-router",
   "version": "1.0.0",
-  "author": "Quisido <mock-next-router@quisi.do>",
+  "author": "quisi.do <mock-next-router@quisi.do>",
   "description": "a Next Router for unit tests",
-  "homepage": "https://github.com/CharlesStover/quisi.do/tree/main/packages/mock-next-router#readme",
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/mock-next-router#readme",
   "license": "MIT",
   "main": "./dist/index.js",
-  "repository": "github:CharlesStover/quisi.do",
+  "repository": "github:quisido/quisi.do",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
     "email": "mock-next-router@quisi.do",
-    "url": "https://github.com/CharlesStover/quisi.do/issues"
+    "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://github.com/sponsors/CharlesStover"
+    "url": "https://github.com/sponsors/quisido"
   },
   "publishConfig": {
     "access": "public"

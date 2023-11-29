@@ -30,7 +30,7 @@ export default function Home(): ReactElement {
         <Div className={contentClassName} display="flex" flexDirection="row">
           <Div className={aboutClassName} display="flex" flexDirection="column">
             <Div element="p" marginBottom="medium">
-              <strong>Quisido</strong> is a front end engineer leading a{' '}
+              <strong>quisi.do</strong> is a front end engineer leading a{' '}
               <abbr title="software as a service">SaaS</abbr> charity
               initiative. The <strong>quisi.do</strong> website contains a
               collection of open-source software, the profits of which are

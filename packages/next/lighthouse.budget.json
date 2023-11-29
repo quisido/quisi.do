@@ -4,7 +4,6 @@
 
     "options": {
       "firstPartyHostnames": [
-        "*.charlesstover.com",
         "*.cscdn.net",
         "*.quisi.do",
         "*.quisido.com"

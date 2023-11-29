@@ -1,21 +1,21 @@
 {
   "name": "use-offline",
   "version": "2.0.0",
-  "author": "Quisido <use-offline@quisi.do>",
+  "author": "quisi.do <use-offline@quisi.do>",
   "description": "a React hook for listening to network connectivity events",
-  "homepage": "https://github.com/CharlesStover/quisi.do/tree/main/packages/use-offline#readme",
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/use-offline#readme",
   "license": "MIT",
   "main": "./dist/index.js",
-  "repository": "github:CharlesStover/quisi.do",
+  "repository": "github:quisido/quisi.do",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
     "email": "use-offline@quisi.do",
-    "url": "https://github.com/CharlesStover/quisi.do/issues"
+    "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://github.com/sponsors/CharlesStover"
+    "url": "https://github.com/sponsors/quisido"
   },
   "publishConfig": {
     "access": "public"

@@ -1,18 +1,18 @@
 {
   "name": "@quisido/next",
   "version": "1.0.0",
-  "author": "Quisido <next@quisi.do>",
-  "description": "Quisido",
+  "author": "quisi.do <next@quisi.do>",
+  "description": "quisi.do",
   "private": true,
-  "repository": "github:CharlesStover/quisi.do",
+  "repository": "github:quisido/quisi.do",
   "type": "module",
   "bugs": {
     "email": "next@quisi.do",
-    "url": "https://github.com/CharlesStover/quisi.do/issues"
+    "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://github.com/sponsors/CharlesStover"
+    "url": "https://github.com/sponsors/quisido"
   },
   "publishConfig": {
     "access": "restricted"
