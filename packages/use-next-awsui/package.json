@@ -1,6 +1,6 @@
 {
   "name": "use-next-awsui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Quisido <use-next-awsui@quisi.do>",
   "description": "a collection of React hooks to integrate Next with AWSUI",
   "homepage": "https://github.com/CharlesStover/quisi.do/tree/main/packages/use-next-awsui#readme",
