@@ -1,24 +1,35 @@
 # `useShallowMemo`
 
 [![CI/CD](https://github.com/CharlesStover/quisi.do/actions/workflows/cd.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/quisi.do/actions/workflows/cd.yml)
-[![version](https://img.shields.io/npm/v/use-offline.svg)](https://www.npmjs.com/package/use-offline)
-[![downloads](https://img.shields.io/npm/dt/use-offline.svg)](https://www.npmjs.com/package/use-offline)
+[![version](https://img.shields.io/npm/v/use-shallow-memo.svg)](https://www.npmjs.com/package/use-shallow-memo)
+[![downloads](https://img.shields.io/npm/dt/use-shallow-memo.svg)](https://www.npmjs.com/package/use-shallow-memo)
 
-Listen to network connectivity events with a React hook.
+a React hook for memoizing objects
 
 ## Install
 
-- `npm install use-offline` or
-- `yarn add use-offline`
+- `npm install use-shallow-memo` or
+- `yarn add use-shallow-memo`
 
 ## Use
 
 ```jsx
-import useOffline from 'use-offline';
+import useShallowMemo from 'use-shallow-memo';
 
-export default function App() {
-  const isOffline = useOffline();
+export default function MyComponent({ data }) {
+  const memoizedData = useShallowMemo(data);
 
-  return <p>You are {isOffline ? 'offline' : 'online'}.</p>;
+  // Even though `data` changes every render, `memoizedData` does not.
+  useEffect(() => {
+    alert(data.message); // Hello world!
+  }, [memoizedData]);
+  
+  // ...
 }
+
+<MyComponent
+  data={{
+    message: 'Hello world!',
+  }}
+/>
 ```
