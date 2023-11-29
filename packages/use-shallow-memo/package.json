@@ -1,21 +1,21 @@
 {
   "name": "use-shallow-memo",
   "version": "1.0.1",
-  "author": "Quisido <use-shallow-memo@quisi.do>",
+  "author": "quisi.do <use-shallow-memo@quisi.do>",
   "description": "a simple useMemo for objects",
-  "homepage": "https://github.com/CharlesStover/quisi.do/tree/main/packages/use-shallow-memo#readme",
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/use-shallow-memo#readme",
   "license": "MIT",
   "main": "./dist/index.js",
-  "repository": "github:CharlesStover/quisi.do",
+  "repository": "github:quisido/quisi.do",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
     "email": "use-shallow-memo@quisi.do",
-    "url": "https://github.com/CharlesStover/quisi.do/issues"
+    "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://github.com/sponsors/CharlesStover"
+    "url": "https://github.com/sponsors/quisido"
   },
   "publishConfig": {
     "access": "public"

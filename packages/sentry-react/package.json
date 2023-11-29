@@ -1,7 +1,7 @@
 {
   "name": "sentry-react",
   "version": "2.0.0",
-  "author": "Quisido <sentry-react@quisi.do>",
+  "author": "quisi.do <sentry-react@quisi.do>",
   "description": "A React component for instantiating Sentry",
   "homepage": "https://www.npmjs.com/package/sentry-react",
   "license": "MIT",
@@ -10,18 +10,18 @@
   "types": "./dist/index.d.ts",
   "bugs": {
     "email": "sentry-react@quisi.do",
-    "url": "https://github.com/CharlesStover/quisi.do/issues"
+    "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://github.com/sponsors/CharlesStover"
+    "url": "https://github.com/sponsors/quisido"
   },
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/CharlesStover/quisi.do.git"
+    "url": "https://github.com/quisido/quisi.do.git"
   },
   "scripts": {
     "attw": "attw",

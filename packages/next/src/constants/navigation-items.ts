@@ -25,7 +25,7 @@ const NAVIGATION_ITEMS: readonly (
     children: [
       {
         text: NavigationText.Tetris3DS,
-        url: 'https://charlesstover.github.io/3ds-tetris/',
+        url: 'https://quisido.github.io/3ds-tetris/',
       },
       {
         text: NavigationText.AceAlters,
@@ -39,7 +39,7 @@ const NAVIGATION_ITEMS: readonly (
       */
       {
         text: NavigationText.Dota2Huds,
-        url: 'https://charlesstover.github.io/dota2huds/',
+        url: 'https://quisido.github.io/dota2huds/',
       },
       {
         text: NavigationText.MTGPlanechase,
@@ -51,7 +51,7 @@ const NAVIGATION_ITEMS: readonly (
       },
       {
         text: NavigationText.RPGOverworldEngine,
-        url: 'https://charlesstover.github.io/rpg-overworld-engine/',
+        url: 'https://quisido.github.io/rpg-overworld-engine/',
       },
       {
         text: NavigationText.SpriteSheet2Gif,
@@ -89,7 +89,7 @@ const NAVIGATION_ITEMS: readonly (
       */
       {
         text: NavigationText.GitHub,
-        url: 'https://github.com/CharlesStover/',
+        url: 'https://github.com/quisido/',
       },
       {
         text: NavigationText.LinkedIn,

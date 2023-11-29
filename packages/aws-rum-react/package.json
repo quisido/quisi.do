@@ -1,21 +1,21 @@
 {
   "name": "aws-rum-react",
   "version": "2.0.0",
-  "author": "Quisido <aws-rum-react@quisi.do>",
+  "author": "quisi.do <aws-rum-react@quisi.do>",
   "description": "Amazon CloudWatch RUM React client",
-  "homepage": "https://github.com/CharlesStover/quisi.do/tree/main/packages/aws-rum-react#readme",
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/aws-rum-react#readme",
   "license": "MIT",
   "main": "./dist/index.js",
-  "repository": "github:CharlesStover/quisi.do",
+  "repository": "github:quisido/quisi.do",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
     "email": "aws-rum-react@quisi.do",
-    "url": "https://github.com/CharlesStover/quisi.do/issues"
+    "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://github.com/sponsors/CharlesStover"
+    "url": "https://github.com/sponsors/quisido"
   },
   "publishConfig": {
     "access": "public"

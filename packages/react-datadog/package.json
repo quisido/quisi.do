@@ -1,21 +1,21 @@
 {
   "name": "react-datadog",
   "version": "2.0.0",
-  "author": "Quisido <react-datadog@quisi.do>",
+  "author": "quisi.do <react-datadog@quisi.do>",
   "description": "React wrapper for instantiating Datadog",
-  "homepage": "https://github.com/CharlesStover/quisi.do/tree/main/packages/react-datadog#readme",
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/react-datadog#readme",
   "license": "MIT",
   "main": "./dist/index.js",
-  "repository": "github:CharlesStover/quisi.do",
+  "repository": "github:quisido/quisi.do",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
     "email": "react-datadog@quisi.do",
-    "url": "https://github.com/CharlesStover/quisi.do/issues"
+    "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://github.com/sponsors/CharlesStover"
+    "url": "https://github.com/sponsors/quisido"
   },
   "publishConfig": {
     "access": "public"

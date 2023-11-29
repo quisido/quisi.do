@@ -1,6 +1,6 @@
 # `useShallowMemo`
 
-[![CI/CD](https://github.com/CharlesStover/quisi.do/actions/workflows/cd.yml/badge.svg?branch=main&event=push)](https://github.com/CharlesStover/quisi.do/actions/workflows/cd.yml)
+[![CI/CD](https://github.com/quisido/quisi.do/actions/workflows/cd.yml/badge.svg?branch=main&event=push)](https://github.com/quisido/quisi.do/actions/workflows/cd.yml)
 [![version](https://img.shields.io/npm/v/use-shallow-memo.svg)](https://www.npmjs.com/package/use-shallow-memo)
 [![downloads](https://img.shields.io/npm/dt/use-shallow-memo.svg)](https://www.npmjs.com/package/use-shallow-memo)
 
@@ -23,7 +23,7 @@ export default function MyComponent({ data }) {
   useEffect(() => {
     alert(data.message); // Hello world!
   }, [memoizedData]);
-  
+
   // ...
 }
 

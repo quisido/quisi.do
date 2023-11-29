@@ -1,21 +1,21 @@
 {
   "name": "unknown2string",
   "version": "1.0.0",
-  "author": "Quisido <unknown2string@quisi.do>",
+  "author": "quisi.do <unknown2string@quisi.do>",
   "description": "maps any value to a string",
-  "homepage": "https://github.com/CharlesStover/quisi.do/tree/main/packages/unknown2string#readme",
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/unknown2string#readme",
   "license": "MIT",
   "main": "./dist/index.js",
-  "repository": "github:CharlesStover/quisi.do",
+  "repository": "github:quisido/quisi.do",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
     "email": "unknown2string@quisi.do",
-    "url": "https://github.com/CharlesStover/quisi.do/issues"
+    "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://github.com/sponsors/CharlesStover"
+    "url": "https://github.com/sponsors/quisido"
   },
   "publishConfig": {
     "access": "public"

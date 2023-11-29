@@ -58,7 +58,7 @@ Example customer behavior:
   tab.
 - Customer selects the route corresponding to your second tab, `/tab2`, from
   your
-  [`SideNavigation` component](https://github.com/CharlesStover/use-awsui-router/blob/master/docs/use-side-navigation.md)
+  [`SideNavigation` component](https://github.com/quisido/use-awsui-router/blob/master/docs/use-side-navigation.md)
   without first scrolling back to the top of the page.
 - Since the navigation matches a new tab, your `activeTabId` of your `Tabs`
   component updates.

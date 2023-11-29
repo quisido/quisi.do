@@ -1,7 +1,7 @@
 import { type Author } from 'next/dist/lib/metadata/types/metadata-types';
 
 const AUTHOR_QUISIDO: Author = {
-  name: 'Quisido',
+  name: 'quisi.do',
   url: 'https://quisi.do/',
 };
 

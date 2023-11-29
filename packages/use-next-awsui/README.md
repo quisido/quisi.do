@@ -27,8 +27,8 @@ components. These hooks return several of the components' value props and event
 handlers in order to both instantiate and manage the components' local,
 controlled state, including integration with NextJS.
 
-- [BreadcrumbGroup](https://github.com/CharlesStover/quisi.do/blob/main/packages/use-next-awsui/docs/use-breadcrumb-group.md)
-- [Link](https://github.com/CharlesStover/quisi.do/blob/main/packages/use-next-awsui/docs/use-link.md)
-- [PropertyFilter](https://github.com/CharlesStover/quisi.do/blob/main/packages/use-next-awsui/docs/use-property-filter.md)
-- [SideNavigation](https://github.com/CharlesStover/quisi.do/blob/main/packages/use-next-awsui/docs/use-side-navigation.md)
-- [Tabs](https://github.com/CharlesStover/quisi.do/blob/main/packages/use-next-awsui/docs/use-tabs.md)
+- [BreadcrumbGroup](https://github.com/quisido/quisi.do/blob/main/packages/use-next-awsui/docs/use-breadcrumb-group.md)
+- [Link](https://github.com/quisido/quisi.do/blob/main/packages/use-next-awsui/docs/use-link.md)
+- [PropertyFilter](https://github.com/quisido/quisi.do/blob/main/packages/use-next-awsui/docs/use-property-filter.md)
+- [SideNavigation](https://github.com/quisido/quisi.do/blob/main/packages/use-next-awsui/docs/use-side-navigation.md)
+- [Tabs](https://github.com/quisido/quisi.do/blob/main/packages/use-next-awsui/docs/use-tabs.md)

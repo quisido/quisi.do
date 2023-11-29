@@ -23,10 +23,10 @@ export default function mapPackageNameToRepositoryHref(
   }
 
   if (MONOREPO_DEPENDENCIES.has(packageName)) {
-    return `https://github.com/CharlesStover/quisi.do/tree/main/packages/${packageName}#readme`;
+    return `https://github.com/quisido/quisi.do/tree/main/packages/${packageName}#readme`;
   }
 
-  return `https://github.com/CharlesStover/${mapPackageNameToRepositoryName(
+  return `https://github.com/quisido/${mapPackageNameToRepositoryName(
     packageName,
   )}#readme`;
 }

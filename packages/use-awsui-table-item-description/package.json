@@ -1,21 +1,21 @@
 {
   "name": "use-awsui-table-item-description",
   "version": "3.0.0",
-  "author": "Charles Stover <use-awsui-table-item-description@quisi.do>",
+  "author": "quisi.do <use-awsui-table-item-description@quisi.do>",
   "description": "adds a description row to each AWS UI table item",
   "homepage": "https://www.npmjs.com/package/use-awsui-table-item-description",
   "license": "MIT",
   "main": "./dist/index.js",
-  "repository": "github:CharlesStover/quisi.do",
+  "repository": "github:quisido/quisi.do",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
     "email": "use-awsui-table-item-description@quisi.do",
-    "url": "https://github.com/CharlesStover/quisi.do/issues"
+    "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://github.com/sponsors/CharlesStover"
+    "url": "https://github.com/sponsors/quisido"
   },
   "publishConfig": {
     "access": "public"

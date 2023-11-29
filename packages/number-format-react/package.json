@@ -1,16 +1,16 @@
 {
   "name": "number-format-react",
   "version": "2.0.0",
-  "author": "Quisido <number-format-react@quisi.do>",
+  "author": "quisi.do <number-format-react@quisi.do>",
   "description": "the Intl.NumberFormat class as a React component",
   "homepage": "https://www.npmjs.com/package/number-format-react",
   "main": "./dist/index.js",
-  "repository": "https://github.com/CharlesStover/quisi.do",
+  "repository": "https://github.com/quisido/quisi.do",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
     "email": "number-format-react@quisi.do",
-    "url": "https://github.com/CharlesStover/quisi.do/issues"
+    "url": "https://github.com/quisido/quisi.do/issues"
   },
   "scripts": {
     "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/number-format-react.sarif",

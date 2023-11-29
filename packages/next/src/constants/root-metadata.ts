@@ -14,14 +14,14 @@ export default {
   alternates: mapPathToAlternates('/'),
   applicationName: 'quisi.do',
   authors: [AUTHOR_QUISIDO],
-  creator: 'Charles Quisido',
-  description: 'portfolio for Charles Quisido',
+  creator: 'quisi.do',
+  description: 'quisi.do',
   formatDetection: FORMAT_DETECTION,
   generator: null,
   keywords: [...KEYWORDS],
   manifest: '/manifest.json',
   metadataBase: new URL('/', 'https://quisi.do'),
-  // publisher: 'Quisido',
+  // publisher: 'quisi.do',
   referrer: 'no-referrer-when-downgrade',
   // robots: ROBOTS_INFO,
   title: 'quisi.do',
@@ -35,13 +35,13 @@ export default {
   openGraph: {
     // audio: OGAudio | Array<OGAudio>
     // countryName: string
-    description: 'portfolio of Charles Quisido',
+    description: 'quisi.do',
     // determiner: 'a' | 'an' | 'the' | 'auto' | ''
     emails: ['open-graph@quisi.do'],
-    firstName: 'Charles',
+    firstName: 'quisi',
     gender: 'male',
     // images: OGImage | Array<OGImage>
-    lastName: 'Quisido',
+    lastName: '.do',
     locale: 'en-US',
     siteName: 'quisi.do',
     title: 'quisi.do',
@@ -51,10 +51,10 @@ export default {
   },
 
   twitter: {
-    creatorId: 'CharlesStover',
-    description: 'portfolio of Charles Quisido',
+    creatorId: 'elonmusk',
+    description: 'quisi.do',
     // images: TwitterImage | Array<TwitterImage>;
-    siteId: 'CharlesStover',
+    siteId: 'quisi.do',
     title: 'quisi.do', // <-- title of the page, not the website
   },
 } satisfies Metadata;
