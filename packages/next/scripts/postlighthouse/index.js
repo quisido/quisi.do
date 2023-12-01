@@ -1,1 +1,1 @@
-import './post-lighthouse.js';
+import './postlighthouse.js';

@@ -6,8 +6,8 @@ export default class AuditDetailsTableHeadingsToRowReducer {
     this._item = item;
   }
 
-  _mapHeadingToValue = ({ itemType, key }) => {
-    switch (itemType) {
+  _mapHeadingToValue = ({ valueType, key, ...heading }) => {
+    switch (valueType) {
       case 'code':
       case 'text':
       case 'url':
@@ -17,8 +17,10 @@ export default class AuditDetailsTableHeadingsToRowReducer {
       case 'source-location':
         return mapSourceLocationToString(this._item[key]);
       default:
-        throw new Error(`Unexpected heading item type: ${itemType}
-${JSON.stringify(this._item)}`);
+        throw new Error(`Unexpected heading value type: ${valueType}
+With heading key: ${key}
+With heading: ${JSON.stringify(heading)}
+With item: ${JSON.stringify(this._item)}`);
     }
   };
 

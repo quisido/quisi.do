@@ -3,3 +3,4 @@
 /node_modules/
 /out/
 /lighthouse.report.*
+/localhost_*-*-*_*-*-*.report.html
