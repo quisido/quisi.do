@@ -21,7 +21,10 @@
     "moduleResolution": "Bundler",
     "noEmit": true,
     "resolveJsonModule": true,
+    "rootDir": "src",
     "skipLibCheck": false,
+    "sourceMap": true,
+    "sourceRoot": "src",
     "strict": true,
     "target": "es5",
     "plugins": [
