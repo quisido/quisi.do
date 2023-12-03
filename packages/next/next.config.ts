@@ -1,6 +1,7 @@
 import NextBundleAnalyzer from '@next/bundle-analyzer';
 import { type NextConfig } from 'next';
 import { cpus } from 'node:os';
+import { join } from 'node:path';
 import getVersion from './src/utils/get-version';
 
 const CPUS_COUNT: number = cpus().length;
@@ -40,7 +41,7 @@ const mapNodeEnvToOutput = (
   switch (env) {
     case 'development':
     case 'test':
-      return;
+      return 'standalone';
     case 'production':
       return 'export';
   }
@@ -102,6 +103,7 @@ export default withBundleAnalyzer({
     optimisticClientCache: true,
     optimizeCss: true,
     optimizeServerReact: true,
+    outputFileTracingRoot: join(__dirname, '..', '..'),
     ppr: process.env.NODE_ENV !== 'production',
     serverMinification: true,
     serverSourceMaps: true,
