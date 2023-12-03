@@ -1,65 +1,22 @@
-import NextBundleAnalyzer from '@next/bundle-analyzer';
 import { type NextConfig } from 'next';
 import { cpus } from 'node:os';
 import { join } from 'node:path';
 import getVersion from './src/utils/get-version';
+import mapNodeEnvToOnDemandEntries from './src/utils/map-node-env-to-on-demand-entries';
+import mapNodeEnvToOutput from './src/utils/map-node-env-to-output';
+import mapProcessEnvToNextJsEnv from './src/utils/map-process-env-to-nextjs-env';
+import withNextJsBundleAnalyzer from './src/utils/with-nextjs-bundle-analyzer';
 
 const CPUS_COUNT: number = cpus().length;
 
-const getOnDemandEntries = (): NextConfig['onDemandEntries'] => {
-  if (process.env.NODE_ENV !== 'development') {
-    return;
-  }
-
-  return {
-    maxInactiveAge: 60 * 60 * 1000,
-    pagesBufferLength: 1024,
-  };
-};
-
-const reduceDictEntriesToRecord = <T>(
-  record: Record<string, T>,
-  [key, value]: [string, T | undefined],
-): Record<string, T> => {
-  if (typeof value === 'undefined') {
-    return record;
-  }
-
-  return {
-    ...record,
-    [key]: value,
-  };
-};
-
-const mapDictToRecord = <T>(dict: NodeJS.Dict<T>): Record<string, T> => {
-  return Object.entries(dict).reduce(reduceDictEntriesToRecord, {});
-};
-
-const mapNodeEnvToOutput = (
-  env: NodeJS.ProcessEnv['NODE_ENV'],
-): NextConfig['output'] => {
-  switch (env) {
-    case 'development':
-    case 'test':
-      return 'standalone';
-    case 'production':
-      return 'export';
-  }
-};
-
-const withBundleAnalyzer = NextBundleAnalyzer({
-  analyzerMode: 'static', // Use 'json' for a JSON file.
-  enabled: true,
-  openAnalyzer: false,
-});
-
-export default withBundleAnalyzer({
+export default withNextJsBundleAnalyzer({
   assetPrefix: '', // same domain
   basePath: '', // deployed application pathname
   compress: true,
   distDir: '.next',
+  env: mapProcessEnvToNextJsEnv(process.env),
   generateBuildId: getVersion,
-  onDemandEntries: getOnDemandEntries(),
+  onDemandEntries: mapNodeEnvToOnDemandEntries(process.env.NODE_ENV),
   output: mapNodeEnvToOutput(process.env.NODE_ENV),
   poweredByHeader: false,
   productionBrowserSourceMaps: true,
@@ -71,15 +28,6 @@ export default withBundleAnalyzer({
     buildActivity: true,
     buildActivityPosition: 'bottom-right',
   },
-
-  env: mapDictToRecord({
-    ...process.env,
-    __COMPAT_LAYER: undefined,
-    __NEXT_PROCESSED_ENV: undefined,
-    NEXT_RUNTIME: undefined,
-    NODE_ENV: undefined,
-    NODE_OPTIONS: undefined,
-  }),
 
   eslint: {
     ignoreDuringBuilds: true,
