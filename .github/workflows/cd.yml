@@ -122,8 +122,8 @@ jobs:
         run: yarn prepack
         env:
           CI: false
-          REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
-          REACT_APP_GITHUB_SHA: ${{ github.sha }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:

@@ -102,8 +102,8 @@ jobs:
       - name: Prepack
         run: yarn prepack
         env:
-          REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
-          REACT_APP_GITHUB_SHA: ${{ github.sha }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -142,11 +142,11 @@ jobs:
   #       env:
   #         CHOKIDAR_USEPOLLING: true
   #         CYPRESS_SCREENSHOTS_SUBFOLDER: ${{ matrix.os }}-${{ matrix.browser }}
+  #         GITHUB_REPOSITORY: ${{ github.repository }}
+  #         GITHUB_SHA: ${{ github.sha }}
   #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   #         NODE_ENV: test
   #         NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }} # -${{ matrix.container }}
-  #         REACT_APP_GITHUB_REPOSITORY: ${{ github.repository }}
-  #         REACT_APP_GITHUB_SHA: ${{ github.sha }}
   #       with:
   #         browser: ${{ matrix.browser }}
   #         command-prefix: yarn dlx

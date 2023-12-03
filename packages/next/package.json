@@ -33,13 +33,16 @@
     "jest": "jest",
     "lighthouse": "yarn run build && yarn run lighthouse:serve",
     "lighthouse:serve": "concurrently --hide serve --kill-others --kill-others-on-fail --names serve,lighthouse --success command-lighthouse \"yarn run serve\" \"yarn run lighthouse:report\"",
-    "lighthouse:report": "wait-on http://localhost:3000/index.html && lighthouse http://localhost:3000/ --config-path=lighthouse.config.js",
+    "lighthouse:report": "wait-on http://localhost:3000/index.html && lighthouse http://localhost:3000/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental --save-assets",
     "lint": "next lint",
     "postlighthouse": "yarn node ./scripts/postlighthouse/index.js",
     "prepack": "yarn run build",
     "prepublish": "exit 0",
     "serve": "serve out",
-    "start": "REACT_APP_CLOUDFLARE_ANALYTICS_ORIGIN=http://localhost:8787 next start -p 3000"
+    "start": "CLOUDFLARE_ANALYTICS_ORIGIN=http://localhost:8787 next start -p 3000"
+  },
+  "dependencies": {
+    "sharp": "^0.32.6"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.13.2",
@@ -69,6 +72,7 @@
     "@mui/material": "^5.14.18",
     "@mui/system": "^5.14.18",
     "@mui/utils": "^5.14.18",
+    "@next/bundle-analyzer": "^14.0.3",
     "@opentelemetry/api": "^1.7.0",
     "@opentelemetry/context-zone": "^1.18.1",
     "@opentelemetry/exporter-trace-otlp-http": "^0.45.1",
@@ -132,7 +136,6 @@
     "sass": "^1.69.5",
     "sentry-react": "workspace:^",
     "serve": "^14.2.1",
-    "sharp": "^0.32.6",
     "typescript": "^5.3.2",
     "unknown2string": "workspace:^",
     "use-awsui": "^1.0.8",
