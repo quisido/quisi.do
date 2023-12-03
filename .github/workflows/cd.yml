@@ -396,7 +396,7 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_LOG_LEVEL: info
           SENTRY_ORG: quisido
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+          SENTRY_PROJECT: quisi-do
         with:
           environment: production
           sourcemaps: build

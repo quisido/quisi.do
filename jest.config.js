@@ -8,6 +8,7 @@ export default {
     '!<rootDir>/packages/**',
   ],
   coverageDirectory: './jest/coverage',
+  coverageReporters: ['clover', 'json', 'lcov', ['text', { skipFull: true }]],
   coverageThreshold: {
     global: {
       branches: 100,

@@ -18,6 +18,7 @@ export default withNextJsBundleAnalyzer({
   generateBuildId: getVersion,
   onDemandEntries: mapNodeEnvToOnDemandEntries(process.env.NODE_ENV),
   output: mapNodeEnvToOutput(process.env.NODE_ENV),
+  outputFileTracing: false, // Yarn PNP is not yet supported.
   poweredByHeader: false,
   productionBrowserSourceMaps: true,
   reactStrictMode: true,
