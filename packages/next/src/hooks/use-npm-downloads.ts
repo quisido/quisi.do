@@ -23,8 +23,7 @@ const getNpmDownloads = async (): Promise<
   Readonly<Record<string, readonly number[]>>
 > => {
   const response: Response = await window.fetch(
-    process.env.REACT_APP_NPM_DOWNLOADS ??
-      'https://npm.cscdn.net/charlesstover.json',
+    process.env.NPM_DOWNLOADS ?? 'https://npm.cscdn.net/charlesstover.json',
   );
 
   return response.json();

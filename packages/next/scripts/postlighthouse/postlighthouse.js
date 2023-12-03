@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import mapAuditToString from './utils/map-audit-to-string.js';
 import mapResultToDashboard from './utils/map-result-to-dashboard.js';
 
@@ -27,11 +27,11 @@ const { audits } = result;
 
 const failures = [];
 for (const { id, score, scoreDisplayMode, ...audit } of Object.values(audits)) {
-  if (
-    scoreDisplayMode === 'binary' &&
-    score !== PERFECT &&
-    !IGNORED_AUDITS.has(id)
-  ) {
+  if (IGNORED_AUDITS.has(id)) {
+    continue;
+  }
+
+  if (scoreDisplayMode === 'binary' && score !== PERFECT) {
     failures.push(
       mapAuditToString({
         ...audit,

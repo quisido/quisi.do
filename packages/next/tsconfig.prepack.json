@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "./.next/",
+    "./cypress/",
+    "./src/**/*.e2e.ts",
+    "./src/test/cypress/",
+    "./out/",
+    "./cypress.config.*"
+  ],
+  "include": [".next/types/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "next-env.d.ts"],
+  "compilerOptions": {
+    "jsx": "preserve",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "rootDir": "src",
+    "skipLibCheck": false,
+    "sourceMap": true,
+    "target": "ES5"
+  }
+}

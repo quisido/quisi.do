@@ -1,0 +1,46 @@
+{
+  "name": "@quisido/cdk",
+  "version": "0.0.1",
+  "author": "quisi.do <cdk@quisi.do>",
+  "description": "quisi.do",
+  "private": true,
+  "repository": "github:quisido/quisi.do",
+  "type": "module",
+  "bugs": {
+    "email": "cdk@quisi.do",
+    "url": "https://github.com/quisido/quisi.do/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quisido"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "attw": "attw",
+    "synth": "cdk synth",
+    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/cdk.sarif",
+    "eslint:fix": "eslint '**/*' --fix",
+    "jest": "jest",
+    "prepack": "exit 0",
+    "prepublish": "exit 0"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.13.2",
+    "@microsoft/eslint-formatter-sarif": "^3.0.0",
+    "@monorepo-template/eslint-config": "^1.0.7",
+    "@types/jest": "^29.5.10",
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "aws-cdk": "^2.110.1",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "jest": "^29.7.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.2"
+  }
+}

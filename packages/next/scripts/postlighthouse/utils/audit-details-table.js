@@ -1,6 +1,6 @@
 import { Table } from 'console-table-printer';
 import HeadingsToRowReducer from './audit-details-table-headings-to-row-reducer.js';
-import mapAuditDetailsTableHeadingToColumn from './map-audit-details-table-heading-to-column.js';
+import mapHeadingToColumn from './map-audit-details-table-heading-to-column.js';
 
 export default class AuditDetailsTable {
   constructor({ headings, items }) {
@@ -15,7 +15,7 @@ export default class AuditDetailsTable {
 
   toString() {
     const table = new Table({
-      columns: this._headings.map(mapAuditDetailsTableHeadingToColumn),
+      columns: this._headings.map(mapHeadingToColumn),
       rows: this._items.map(this._mapItemToRow),
     });
     return table.render();
