@@ -124,6 +124,7 @@ jobs:
           CI: false
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
+          IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:

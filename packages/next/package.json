@@ -19,14 +19,14 @@
   },
   "scripts": {
     "attw": "attw",
-    "build": "next build --turbo",
+    "build": "next build",
     "cdk:synth": "cdk synth",
     "coverage": "monorepo-template-coverage",
     "cypress": "concurrently --hide server --kill-others --kill-others-on-fail --names server,cypress --success command-cypress \"next build && next start\" \"yarn run cypress:run\"",
     "cypress:open": "wait-on http://localhost:3000/ && cypress open",
     "cypress:pnp": "node ./scripts/cypress-pnp/index.js",
     "cypress:run": "wait-on http://localhost:3000/ && cypress run --browser chrome:canary",
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/next.sarif",
     "eslint:fix": "eslint '**/*' --fix",
     "export": "next export --turbo",
@@ -37,8 +37,7 @@
     "postlighthouse": "yarn node ./scripts/postlighthouse/index.js",
     "prepack": "yarn run build",
     "prepublish": "exit 0",
-    "serve": "serve out",
-    "start": "CLOUDFLARE_ANALYTICS_ORIGIN=http://localhost:8787 next start -p 3000 --turbo"
+    "serve": "serve out"
   },
   "dependencies": {
     "sharp": "^0.32.6"
@@ -54,6 +53,7 @@
     "@babel/preset-env": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
     "@babel/register": "^7.22.15",
+    "@builder.io/partytown": "^0.8.1",
     "@cloudscape-design/components": "^3.0.443",
     "@cloudscape-design/design-tokens": "^3.0.28",
     "@cloudscape-design/global-styles": "^1.0.15",

@@ -73,6 +73,7 @@ export default withBundleAnalyzer({
 
   env: mapDictToRecord({
     ...process.env,
+    __NEXT_PROCESSED_ENV: undefined,
     NEXT_RUNTIME: undefined,
     NODE_ENV: undefined,
     NODE_OPTIONS: undefined,
@@ -83,16 +84,16 @@ export default withBundleAnalyzer({
   },
 
   experimental: {
-    adjustFontFallbacks: true,
-    adjustFontFallbacksWithSizeAdjust: true,
-    bundlePagesExternals: true,
+    // adjustFontFallbacks: true,
+    // adjustFontFallbacksWithSizeAdjust: true,
+    // bundlePagesExternals: true,
     deploymentId: getVersion(),
-    disablePostcssPresetEnv: true,
+    // disablePostcssPresetEnv: true,
     cpus: CPUS_COUNT,
     craCompat: false,
-    fallbackNodePolyfills: false,
+    // fallbackNodePolyfills: false,
     forceSwcTransforms: true,
-    fullySpecified: true,
+    // fullySpecified: true,
     gzipSize: true,
     isrMemoryCacheSize: Number.POSITIVE_INFINITY,
     // largePageDataBytes: 1024,
@@ -100,32 +101,33 @@ export default withBundleAnalyzer({
     optimisticClientCache: true,
     optimizeCss: true,
     optimizeServerReact: true,
-    ppr: true,
+    ppr: process.env.NODE_ENV !== 'production',
     serverMinification: true,
     serverSourceMaps: true,
-    staticWorkerRequestDeduping: true,
+    // staticWorkerRequestDeduping: true,
     strictNextHead: true,
-    swcMinify: true,
-    swcTraceProfiling: true,
+    // swcMinify: true,
+    // swcTraceProfiling: true,
     taint: true,
-    typedRoutes: true,
+    // typedRoutes: true,
     useDeploymentId: true,
     webpackBuildWorker: true,
     webVitalsAttribution: ["CLS", "FCP", "FID", "INP", "LCP", "TTFB"],
     workerThreads: true,
 
-    sri: {
-      algorithm: 'sha512',
-    },
+    // sri: {
+    //   algorithm: 'sha512',
+    // },
 
     turbotrace: {
       memoryLimit: 64 * 1024,
     },
   },
 
-  // images: {
-  //   loader: 'cloudinary',
-  // },
+  images: {
+    loader: 'custom',
+    loaderFile: './scripts/imagekit-loader/index.js',
+  },
 
   typescript: {
     ignoreBuildErrors: true,
