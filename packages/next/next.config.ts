@@ -1,6 +1,9 @@
 import NextBundleAnalyzer from '@next/bundle-analyzer';
 import { type NextConfig } from 'next';
+import { cpus } from 'node:os';
 import getVersion from './src/utils/get-version';
+
+const CPUS_COUNT: number = cpus().length;
 
 const getOnDemandEntries = (): NextConfig['onDemandEntries'] => {
   if (process.env.NODE_ENV !== 'development') {
@@ -8,9 +11,27 @@ const getOnDemandEntries = (): NextConfig['onDemandEntries'] => {
   }
 
   return {
-    maxInactiveAge: Number.POSITIVE_INFINITY,
-    pagesBufferLength: Number.POSITIVE_INFINITY,
+    maxInactiveAge: 60 * 60 * 1000,
+    pagesBufferLength: 1024,
   };
+};
+
+const reduceDictEntriesToRecord = <T>(
+  record: Record<string, T>,
+  [key, value]: [string, T | undefined],
+): Record<string, T> => {
+  if (typeof value === 'undefined') {
+    return record;
+  }
+
+  return {
+    ...record,
+    [key]: value,
+  };
+};
+
+const mapDictToRecord = <T>(dict: NodeJS.Dict<T>): Record<string, T> => {
+  return Object.entries(dict).reduce(reduceDictEntriesToRecord, {});
 };
 
 const mapNodeEnvToOutput = (
@@ -33,12 +54,13 @@ const withBundleAnalyzer = NextBundleAnalyzer({
 
 export default withBundleAnalyzer({
   assetPrefix: '', // same domain
-  basePath: '/', // deployed application pathname
+  basePath: '', // deployed application pathname
   compress: true,
   distDir: '.next',
   generateBuildId: getVersion,
   onDemandEntries: getOnDemandEntries(),
   output: mapNodeEnvToOutput(process.env.NODE_ENV),
+  poweredByHeader: false,
   productionBrowserSourceMaps: true,
   reactStrictMode: true,
   skipTrailingSlashRedirect: false,
@@ -49,31 +71,61 @@ export default withBundleAnalyzer({
     buildActivityPosition: 'bottom-right',
   },
 
-  env: {
-    /**
-     *   Next incorrectly types `env` as `Record<string, string>` when it should
-     * be `Record<string, string | undefined>`.
-     * https://github.com/vercel/next.js/pull/59200
-     */
-    CLOUDFLARE_ANALYTICS_ORIGIN: process.env.CLOUDFLARE_ANALYTICS_ORIGIN as string,
-    GITHUB_REPOSITORY: process.env.GITHUB_REPOSITORY as string,
-    GITHUB_SHA: process.env.GITHUB_SHA as string,
-    NODE_ENV: process.env.NODE_ENV,
-    NPM_DOWNLOADS: process.env.NPM_DOWNLOADS as string,
-  },
+  env: mapDictToRecord({
+    ...process.env,
+    NEXT_RUNTIME: undefined,
+    NODE_ENV: undefined,
+    NODE_OPTIONS: undefined,
+  }),
 
   eslint: {
     ignoreDuringBuilds: true,
   },
 
   experimental: {
+    adjustFontFallbacks: true,
+    adjustFontFallbacksWithSizeAdjust: true,
+    bundlePagesExternals: true,
     deploymentId: getVersion(),
+    disablePostcssPresetEnv: true,
+    cpus: CPUS_COUNT,
+    craCompat: false,
+    fallbackNodePolyfills: false,
+    forceSwcTransforms: true,
+    fullySpecified: true,
+    gzipSize: true,
+    isrMemoryCacheSize: Number.POSITIVE_INFINITY,
+    // largePageDataBytes: 1024,
+    nextScriptWorkers: true,
+    optimisticClientCache: true,
+    optimizeCss: true,
+    optimizeServerReact: true,
+    ppr: true,
+    serverMinification: true,
+    serverSourceMaps: true,
+    staticWorkerRequestDeduping: true,
+    strictNextHead: true,
+    swcMinify: true,
+    swcTraceProfiling: true,
+    taint: true,
+    typedRoutes: true,
     useDeploymentId: true,
+    webpackBuildWorker: true,
+    webVitalsAttribution: ["CLS", "FCP", "FID", "INP", "LCP", "TTFB"],
+    workerThreads: true,
+
+    sri: {
+      algorithm: 'sha512',
+    },
+
+    turbotrace: {
+      memoryLimit: 64 * 1024,
+    },
   },
 
-  images: {
-    loader: 'cloudinary',
-  },
+  // images: {
+  //   loader: 'cloudinary',
+  // },
 
   typescript: {
     ignoreBuildErrors: true,
