@@ -11,6 +11,11 @@
     },
 
     {
+      "name": "quisi.do CDK",
+      "path": "packages/cdk"
+    },
+
+    {
       "name": "Cloudflare Analytics worker",
       "path": "packages/cloudflare-analytics-worker"
     },
