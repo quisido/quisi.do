@@ -28,6 +28,7 @@
     "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ./sarif/index.sarif",
     "eslint:fix": "eslint '**/*' --fix",
     "export": "yarn packages/next run export",
+    "info": "yarn packages/next run info",
     "jest": "jest",
     "lighthouse": "yarn packages/next run lighthouse",
     "postlighthouse": "yarn packages/next run postlighthouse",

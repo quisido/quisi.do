@@ -29,6 +29,7 @@
     "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/next.sarif",
     "eslint:fix": "eslint '**/*' --fix",
     "export": "next export --turbo",
+    "info": "next info",
     "jest": "jest",
     "lighthouse": "yarn run build && yarn run lighthouse:serve",
     "lighthouse:serve": "concurrently --hide serve --kill-others --kill-others-on-fail --names serve,lighthouse --success command-lighthouse \"yarn run serve\" \"yarn run lighthouse:report\"",

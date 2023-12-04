@@ -18,7 +18,6 @@ export default withNextJsBundleAnalyzer({
   generateBuildId: getVersion,
   onDemandEntries: mapNodeEnvToOnDemandEntries(process.env.NODE_ENV),
   output: mapNodeEnvToOutput(process.env.NODE_ENV),
-  outputFileTracing: false, // Yarn PNP is not yet supported.
   poweredByHeader: false,
   productionBrowserSourceMaps: true,
   reactStrictMode: true,
@@ -67,13 +66,19 @@ export default withNextJsBundleAnalyzer({
     webVitalsAttribution: ["CLS", "FCP", "FID", "INP", "LCP", "TTFB"],
     workerThreads: true,
 
-    // sri: {
-    //   algorithm: 'sha512',
-    // },
-
-    turbotrace: {
-      memoryLimit: 64 * 1024,
+    /*
+    sri: {
+      algorithm: 'sha512',
     },
+    */
+
+    /**
+     * Yarn PNP is not supported yet.
+     * https://github.com/vercel/next.js/issues/59225
+     * turbotrace: {
+     *   memoryLimit: 64 * 1024,
+     * },
+     */
   },
 
   images: {
