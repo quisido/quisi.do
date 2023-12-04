@@ -1,9 +1,7 @@
 import createEnumUtils from '../utils/create-enum-utils';
 
 enum DesignSystem {
-  Awsui = 'awsui',
-  CloudscapeDesign = 'cloudscape-design',
-  Mui = 'mui',
+  Quisi = 'quisi',
 }
 
 export default DesignSystem;

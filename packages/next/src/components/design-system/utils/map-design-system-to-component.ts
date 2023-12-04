@@ -1,5 +1,4 @@
 import { type ComponentType, lazy } from 'react';
-import Awsui from '../../../design-systems/awsui';
 import DesignSystem from '../../../constants/design-system';
 import type DesignSystemProps from '../../../types/design-system-props';
 
@@ -15,22 +14,14 @@ type DesignSystemComponent<
   Row extends object,
 > = ComponentType<DesignSystemProps<Card, Row>>;
 
-// const Awsui = lazy(async () => import('../../../design-systems/awsui'));
-const Mui = lazy(async () => import('../../../design-systems/mui'));
-const CloudscapeDesign = lazy(
-  async () => import('../../../design-systems/cloudscape-design'),
-);
+const Quisi = lazy(async () => import('../../../design-systems/quisi'));
 
 export default function mapDesignSystemToComponent<
   Card extends object,
   Row extends object,
 >(designSystem: DesignSystem): DesignSystemComponent<Card, Row> {
   switch (designSystem) {
-    case DesignSystem.Awsui:
-      return Awsui as DesignSystemComponent<Card, Row>;
-    case DesignSystem.CloudscapeDesign:
-      return CloudscapeDesign as DesignSystemComponent<Card, Row>;
-    case DesignSystem.Mui:
-      return Mui as DesignSystemComponent<Card, Row>;
+    case DesignSystem.Quisi:
+      return Quisi as DesignSystemComponent<Card, Row>;
   }
 }

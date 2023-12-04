@@ -42,19 +42,19 @@ $width: $height / $aspect-ratio;
   margin-right: 0 - math.ceil($width / 2) !important; // override MUI
   margin-top: 0 - math.round($height / 2) !important; // override MUI
   transform: rotate(22.5deg);
-  transition-delay: 0s !important; // override AWSUI
-  transition-duration: 500ms !important; // override AWSUI
-  transition-property: height, margin-left, margin-right, margin-top, opacity, transform, width !important; // override AWSUI
-  transition-timing-function: ease-in-out !important; // override AWSUI
+  transition-delay: 0s;
+  transition-duration: 500ms;
+  transition-property: height, margin-left, margin-right, margin-top, opacity, transform, width;
+  transition-timing-function: ease-in-out;
   width: math.round($width);
   z-index: 1; // greater than <Container>'s border
 
   &:hover {
-    animation-delay: 0s !important; // override AWSUI
-    animation-duration: 500ms !important; // override AWSUI
-    animation-iteration-count: 1 !important; // override AWSUI
-    animation-name: shake !important; // override AWSUI
-    animation-timing-function: ease-in-out !important; // override AWSUI
+    animation-delay: 0s;
+    animation-duration: 500ms;
+    animation-iteration-count: 1;
+    animation-name: shake;
+    animation-timing-function: ease-in-out;
     height: math.round(2 * $height);
     margin-left: 0 - math.floor($width) !important; // override MUI
     margin-right: 0 - math.ceil($width) !important; // override MUI

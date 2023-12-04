@@ -5,8 +5,6 @@ import NavigationText from '../../constants/navigation-text';
 /**
  * Since MUI renders navigation text with React nodes, we map `NavigationText`
  *   to translated text with this component.
- * For AWSUI and Cloudscape, see
- *   `mapTranslateFunctionToNavigationTextTranslator`.
  */
 
 interface Props {

@@ -10,7 +10,7 @@ interface State {
 
 export default function useContexts(): State {
   // States
-  const [designSystem, setDesignSystem] = useState(DesignSystem.Awsui);
+  const [designSystem, setDesignSystem] = useState(DesignSystem.Quisi);
 
   return {
     isDarkModeEnabled: useState(true),

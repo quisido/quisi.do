@@ -53,7 +53,7 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
           type="text/javascript"
         />
       </head>
-      <body className="awsui-dark-mode">
+      <body>
         <BodyChildren>
           <Datadog />
           <FullStory />
