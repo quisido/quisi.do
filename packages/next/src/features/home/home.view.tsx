@@ -42,13 +42,15 @@ export default function Home(): ReactElement {
               > */}
               501(c)(3) charities {/* </Link>{' '} */}
               with completely{' '}
-              <Link
-                category="features/home"
-                href="/dashboard"
-                title="quisi.do operational dashboard"
-              >
-                transparent operations
-              </Link>
+              <strong>
+                <Link
+                  category="features/home"
+                  href="/dashboard"
+                  title="quisi.do operational dashboard"
+                >
+                  transparent operations
+                </Link>
+              </strong>
               .
             </Div>
             <section>

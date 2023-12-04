@@ -169,6 +169,9 @@ jobs:
       - name: Audit
         run: yarn run lighthouse
         working-directory: packages/next/
+      - name: Validate
+        run: yarn run postlighthouse
+        working-directory: packages/next/
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v3
