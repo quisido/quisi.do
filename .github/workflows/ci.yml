@@ -102,6 +102,7 @@ jobs:
       - name: Prepack
         run: yarn run --require dd-trace/init prepack
         env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           DD_ENV: ci
           DD_PROFILING_ENABLED: true
           DD_SERVICE: quisi.do
