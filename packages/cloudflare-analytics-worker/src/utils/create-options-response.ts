@@ -7,6 +7,8 @@ interface Options {
   readonly origin: string | null;
 }
 
+const WILDCARD_ORIGINS = /^https:\/\/[\d\w]+\.quisido\.pages\.dev$/;
+
 export default function createOptionsResponse({
   onDataPoint,
   origin,
@@ -25,7 +27,7 @@ export default function createOptionsResponse({
   }
 
   // HTTP 403 Forbidden
-  if (!ALLOWED_ORIGINS.has(origin)) {
+  if (!ALLOWED_ORIGINS.has(origin) && !WILDCARD_ORIGINS.test(origin)) {
     onDataPoint({
       message: origin,
       statusCode: 403,
