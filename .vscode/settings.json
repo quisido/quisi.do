@@ -1,5 +1,6 @@
 {
   "editor.tabSize": 2,
+  "eslint.experimental.useFlatConfig": false,
   "eslint.nodePath": ".yarn/sdks",
   "eslint.runtime": "node",
   "files.eol": "\n",
@@ -10,30 +11,6 @@
   "editor.rulers": [
     80
   ],
-  "files.exclude": {
-    "**/.git/": true,
-    "**/.idea/": true,
-    "**/.next/": true,
-    "**/.nyc_output/": true,
-    "**/.yarn/": true,
-    "**/build/": true,
-    "**/coverage/": true,
-    "**/cypress/coverage/": true,
-    "**/cypress/downloads/": true,
-    "**/cypress/screenshots/": true,
-    "**/cypress/videos/": true,
-    "**/dist/": true,
-    "**/jest/": true,
-    "**/node_modules/": true,
-    "**/sarif/": true,
-    "**/.attach_pid*": true,
-    "**/.pnp.*": true,
-    "**/*.cpuprofile": true,
-    "**/*.tsbuildinfo": true,
-    "**/*-*.*.*.tgz": true,
-    "**/lighthouse.report.*": true,
-    "**/yarn.lock": true
-  },
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,

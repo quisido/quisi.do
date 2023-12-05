@@ -7,8 +7,9 @@ export default function AppDatadog(): null {
   useDatadog({
     applicationId: 'e29eb164-e193-4380-b512-ebd70bbfaeb6',
     clientToken: 'pubf0c07bd5003d0c4a65a9f129d9e83a3d',
+    enableExperimentalFeatures: ['feature_flags'],
     env: process.env.NODE_ENV,
-    service: 'charlesstover.com',
+    service: 'quisi.do',
     sessionReplayRecording: true,
     version: GITHUB_SHA ?? 'unknown',
   });
