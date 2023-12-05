@@ -100,8 +100,12 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Prepack
-        run: yarn prepack
+        run: yarn run --require dd-trace/init prepack
         env:
+          DD_ENV: ci
+          DD_PROFILING_ENABLED: true
+          DD_SERVICE: quisi.do
+          DD_VERSION: ${{ github.sha }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
           IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
