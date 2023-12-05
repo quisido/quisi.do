@@ -1,0 +1,36 @@
+diff --git a/index.d.ts b/index.d.ts
+index d76b617c1f4fe4e375102245c0141987167ba20d..e6d4967fbb932b2966f5b74a2456439a19cbdb76 100644
+--- a/index.d.ts
++++ b/index.d.ts
+@@ -4,6 +4,12 @@ declare function NextBundleAnalyzer(options?: {
+   enabled?: boolean
+   openAnalyzer?: boolean
+   analyzerMode?: 'json' | 'static'
++
++  /**
++   * Log level. Can be "info", "warn", "error" or "silent".
++   * @default 'info'
++   */
++  logLevel?: "info" | "warn" | "error" | "silent" | undefined
+ }): (config?: NextConfig) => NextConfig
+ 
+ export = NextBundleAnalyzer
+diff --git a/index.js b/index.js
+index e44e2ccf5c82a2ad2597a4c5149bf30b33a692fa..855843aec69ac7d616e28920215530c4e5f11485 100644
+--- a/index.js
++++ b/index.js
+@@ -1,5 +1,5 @@
+ module.exports =
+-  ({ enabled = true, openAnalyzer, analyzerMode } = {}) =>
++  ({ enabled = true, logLevel, openAnalyzer, analyzerMode } = {}) =>
+   (nextConfig = {}) => {
+     return Object.assign({}, nextConfig, {
+       webpack(config, options) {
+@@ -8,6 +8,7 @@ module.exports =
+           config.plugins.push(
+             new BundleAnalyzerPlugin({
+               analyzerMode: analyzerMode || 'static',
++              logLevel,
+               openAnalyzer,
+               reportFilename: !options.nextRuntime
+                 ? `./analyze/client.html`
