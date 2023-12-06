@@ -82,7 +82,7 @@ export default function DashboardStatus({
       <Div display="flex" flexDirection="row" justifyContent="space-around">
         <Div>
           <Link
-            category="features/dashboard/status"
+            feature="dashboard/status"
             href="https://github.com/quisido/quisi.do/actions/workflows/cd.yml"
             title="Continuous deployment workflow"
           >

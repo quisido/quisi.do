@@ -8,9 +8,12 @@ interface State {
   readonly isDarkModeEnabled: [boolean, Dispatch<SetStateAction<boolean>>];
 }
 
+const INITIAL_DESIGN_SYSTEM: DesignSystem =
+  process.env.NODE_ENV === 'production' ? DesignSystem.Mui : DesignSystem.Quisi;
+
 export default function useContexts(): State {
   // States
-  const [designSystem, setDesignSystem] = useState(DesignSystem.Quisi);
+  const [designSystem, setDesignSystem] = useState(INITIAL_DESIGN_SYSTEM);
 
   return {
     isDarkModeEnabled: useState(false),

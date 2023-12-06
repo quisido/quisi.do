@@ -11,7 +11,7 @@ import useEvent from '../../../../hooks/use-event/use-event';
 import isHrefBlank from '../../../../utils/is-href-blank';
 
 interface Props {
-  readonly category: string;
+  readonly feature: string;
   readonly href: string;
   readonly title: string;
 }
@@ -23,7 +23,7 @@ interface State {
   ) => void;
 }
 
-export default function useMuiLink({ category, href, title }: Props): State {
+export default function useMuiLink({ feature, href, title }: Props): State {
   const isBlank: boolean = isHrefBlank(href);
 
   // Contexts
@@ -47,7 +47,7 @@ export default function useMuiLink({ category, href, title }: Props): State {
         e.preventDefault();
         const target: HTMLAttributeAnchorTarget = isBlank ? '_blank' : '_self';
         emit('click', {
-          category,
+          feature,
           label: title,
           target,
           url: href,

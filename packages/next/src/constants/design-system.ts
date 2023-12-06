@@ -1,6 +1,7 @@
 import createEnumUtils from '../utils/create-enum-utils';
 
 enum DesignSystem {
+  Mui = 'mui',
   Quisi = 'quisi',
 }
 

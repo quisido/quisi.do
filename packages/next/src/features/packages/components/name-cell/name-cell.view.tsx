@@ -19,7 +19,7 @@ export default function PackagesNameCell({
   });
 
   return (
-    <Link category="packages/name-cell" href={href} title={children}>
+    <Link feature="packages/name-cell" href={href} title={children}>
       <EmphasizeSubstring index={index} length={filter.length}>
         {children}
       </EmphasizeSubstring>

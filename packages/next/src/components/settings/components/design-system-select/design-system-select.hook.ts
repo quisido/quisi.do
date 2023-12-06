@@ -1,8 +1,7 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useCallback } from 'react';
-import DesignSystem, {
-  isDesignSystem,
-} from '../../../../constants/design-system';
+import type DesignSystem from '../../../../constants/design-system';
+import { isDesignSystem } from '../../../../constants/design-system';
 import useDesignSystem from '../../../../hooks/use-design-system';
 
 interface State {
@@ -23,7 +22,6 @@ export default function useSettingsDesignSystemSelect(): State {
     handleChange: useCallback(
       (newDesignSystem: string | undefined): void => {
         if (typeof newDesignSystem === 'undefined') {
-          setDesignSystem(DesignSystem.Quisi);
           return;
         }
 

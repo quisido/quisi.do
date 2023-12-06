@@ -8,8 +8,8 @@ import useEvent from '../../../../hooks/use-event/use-event';
 import isHrefBlank from '../../../../utils/is-href-blank';
 
 interface Props {
-  readonly category: string;
   readonly children: ReactNode;
+  readonly feature: string;
   readonly href: string | undefined;
   readonly onClick?: VoidFunction | undefined;
   readonly variant: 'primary';
@@ -23,8 +23,8 @@ interface State {
 }
 
 export default function useMuiButton({
-  category,
   children,
+  feature,
   href,
   onClick,
 }: Props): State {
@@ -57,7 +57,7 @@ export default function useMuiButton({
 
         if (typeof href !== 'string') {
           emit('click', {
-            category,
+            feature,
             label,
             target: '_self',
             url: null,
@@ -68,7 +68,7 @@ export default function useMuiButton({
         if (isBlank) {
           window.open(href, '_blank');
           emit('click', {
-            category,
+            feature,
             label,
             target: '_blank',
             url: href,
@@ -78,7 +78,7 @@ export default function useMuiButton({
 
         router.push(href);
         emit('click', {
-          category,
+          feature,
           label,
           target: '_self',
           url: href,

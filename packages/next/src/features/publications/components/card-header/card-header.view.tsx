@@ -13,8 +13,8 @@ export default function PublicationsCardHeader({
 }: Readonly<Publication>): ReactElement {
   return (
     <Link
-      category="features/publications/card-header"
       className={rootClassName}
+      feature="publications/card-header"
       href={url}
       title={title}
     >

@@ -4,15 +4,15 @@ import { type Props } from '../../../../components/link';
 import useLink from './link.hook';
 
 export default function MuiLink({
-  category,
   children,
   className,
+  feature,
   href,
   label,
   title,
 }: Props): ReactElement {
   const { handleClick, rel } = useLink({
-    category,
+    feature,
     href,
     title,
   });

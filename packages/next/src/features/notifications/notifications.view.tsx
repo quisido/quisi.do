@@ -28,11 +28,7 @@ const mapChildToSnackbar = (
 
   if (typeof CallToAction === 'function' && typeof onAction === 'function') {
     alertProps.action = (
-      <Button
-        category="components/wrapper/notifications"
-        onClick={onAction}
-        variant="primary"
-      >
+      <Button feature="notifications" onClick={onAction} variant="primary">
         <CallToAction />
       </Button>
     );

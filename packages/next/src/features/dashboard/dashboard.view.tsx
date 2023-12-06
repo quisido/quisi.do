@@ -66,7 +66,7 @@ export default function Dashboard(): ReactElement {
       <Container header="quisi.do operational health dashboard">
         <Div element="p">
           This dashboard showcases operational and performance metrics for{' '}
-          <Link category="features/dashboard" href="/" title="quisi.do">
+          <Link feature="dashboard" href="/" title="quisi.do">
             quisi.do
           </Link>
           .

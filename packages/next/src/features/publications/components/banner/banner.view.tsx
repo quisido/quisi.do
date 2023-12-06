@@ -45,8 +45,8 @@ export default function PublicationBanner({
     <div className={bannerHeightClassName}>
       <div className={bannerWidthClassName}>
         <Link
-          category="features/publications/banner"
           className={linkClassName}
+          feature="publications/banner"
           href={url}
           title={title}
         >

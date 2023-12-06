@@ -12,8 +12,8 @@ export default function MessageInABottle(): ReactElement {
 
   return (
     <Link
-      category="easter-egg/message-in-a-bottle"
       className={rootClassName}
+      feature="easter-egg/message-in-a-bottle"
       href={newHorizons.src}
       label={label}
       title=""

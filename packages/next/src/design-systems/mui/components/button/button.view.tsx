@@ -4,15 +4,15 @@ import { type Props } from '../../../../components/button';
 import useButton from './button.hook';
 
 export default function MuiButton({
-  category,
   children,
+  feature,
   href,
   onClick,
   variant: variantProp,
 }: Props): ReactElement {
   const { handleClick, variant: variantState } = useButton({
-    category,
     children,
+    feature,
     href,
     onClick,
     variant: variantProp,

@@ -25,7 +25,7 @@ export default function SpriteSheet2GIFPage(): ReactElement {
       <Div element="p">
         If you want to replicate the sprite sheet to GIF converter, you can find{' '}
         <Link
-          category="features/spritesheet2gif"
+          feature="spritesheet2gif"
           href="https://github.com/quisido/spritesheet2gif-api/"
           title="quisido/spritesheet2gif-api: a back end API for converting sprite sheets to GIFs"
         >
@@ -33,7 +33,7 @@ export default function SpriteSheet2GIFPage(): ReactElement {
         </Link>{' '}
         and{' '}
         <Link
-          category="features/spritesheet2gif"
+          feature="spritesheet2gif"
           href="https://hub.docker.com/r/quisido/spritesheet2gif-api"
           title="quisido/spritesheet2gif-api - Docker Image | DockerHub"
         >

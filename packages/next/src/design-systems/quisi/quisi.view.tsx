@@ -1,55 +1,174 @@
-import { type ReactElement } from 'react';
+import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
 import type DesignSystemProps from '../../types/design-system-props';
-import Banner from './components/banner';
-import Button from './components/button';
-import Cards from './components/cards';
-import Checkbox from './components/checkbox';
-import Chip from './components/chip';
-import Container from './components/container';
-import Div from './components/div';
-import Header from './components/header';
-import Input from './components/input';
-import Link from './components/link';
-import LoadingIcon from './components/loading-icon';
-import Select from './components/select';
-import Span from './components/span';
-import Table from './components/table';
-import Theme from './components/theme';
 
-export default function Quisi<Card extends object, Row extends object>({
+function Demo({
+  children,
+  type,
+}: PropsWithChildren<{ type: string }>): ReactElement {
+  return (
+    <div
+      style={{
+        borderLeft: '6px solid #404040',
+        marginLeft: 12,
+        marginTop: 24,
+        paddingLeft: 12,
+        paddingTop: 24,
+      }}
+    >
+      <strong>{type}</strong>
+      <br />
+      {children}
+    </div>
+  );
+}
+
+export default function Quisido<Card extends object, Row extends object>({
   props,
   type,
-}: Readonly<DesignSystemProps<Card, Row>>): ReactElement {
+}: Readonly<DesignSystemProps<Card, Row>>): ReactNode {
   switch (type) {
     case 'banner':
-      return <Banner {...props} />;
+      return (
+        <Demo type="Banner">
+          {JSON.stringify({ ...props, children: undefined })}
+          <br />
+          Children: {props.children}
+        </Demo>
+      );
     case 'button':
-      return <Button {...props} />;
+      return (
+        <Demo type="Button">
+          {JSON.stringify({ ...props, children: undefined })}
+          <br />
+          Children: {props.children}
+        </Demo>
+      );
     case 'cards':
-      return <Cards {...props} />;
+      return (
+        <Demo type="Cards">
+          {JSON.stringify({ ...props, header: undefined })}
+          <br />
+          Header: {props.header}
+        </Demo>
+      );
     case 'checkbox':
-      return <Checkbox {...props} />;
+      return (
+        <Demo type="Checkbox">
+          {JSON.stringify({ ...props, children: undefined })}
+          <br />
+          Children: {props.children}
+        </Demo>
+      );
     case 'chip':
-      return <Chip {...props} />;
+      return (
+        <Demo type="Chip">
+          {JSON.stringify({ ...props, children: undefined, title: undefined })}
+          <br />
+          Title: {props.title}
+          <br />
+          Children: {props.children}
+        </Demo>
+      );
     case 'container':
-      return <Container {...props} />;
+      return (
+        <Demo type="Container">
+          {JSON.stringify({
+            ...props,
+            actions: undefined,
+            children: undefined,
+            footer: undefined,
+            header: undefined,
+            subheader: undefined,
+          })}
+          <br />
+          Header: {props.header}
+          <br />
+          Actions: {props.actions}
+          <br />
+          Subheader: {props.subheader}
+          <br />
+          Children: {props.children}
+          <br />
+          Footer: {props.footer}
+        </Demo>
+      );
     case 'div':
-      return <Div {...props} />;
+      return (
+        <Demo type="Div">
+          {JSON.stringify({ ...props, children: undefined })}
+          <br />
+          Children: {props.children}
+        </Demo>
+      );
     case 'header':
-      return <Header {...props} />;
+      return (
+        <Demo type="Header">
+          {JSON.stringify({
+            ...props,
+            children: undefined,
+            actions: undefined,
+          })}
+          <br />
+          Actions: {props.actions}
+          <br />
+          Children: {props.children}
+        </Demo>
+      );
     case 'input':
-      return <Input {...props} />;
+      return <Demo type="Input">{JSON.stringify({ ...props })}</Demo>;
     case 'link':
-      return <Link {...props} />;
+      return (
+        <a
+          aria-label={props.label}
+          className={props.className}
+          href={props.href}
+          title={props.title}
+          onClick={() => {
+            console.log(`track: ${props.feature}`);
+          }}
+        >
+          {props.children}
+        </a>
+      );
     case 'loading-icon':
-      return <LoadingIcon {...props} />;
+      return (
+        <Demo type="LoadingIcon">
+          {JSON.stringify({ ...props, children: undefined })}
+          <br />
+          Children: {props.children}
+        </Demo>
+      );
     case 'select':
-      return <Select {...props} />;
+      return (
+        <Demo type="Select">
+          {JSON.stringify({ ...props, label: undefined })}
+          <br />
+          Label: {props.label}
+        </Demo>
+      );
     case 'span':
-      return <Span {...props} />;
+      return (
+        <Demo type="Span">
+          {JSON.stringify({ ...props, children: undefined })}
+          <br />
+          Children: {props.children}
+        </Demo>
+      );
     case 'table':
-      return <Table {...props} />;
+      return (
+        <Demo type="Table">
+          {JSON.stringify({
+            ...props,
+            header: undefined,
+            subheader: undefined,
+          })}
+          <br />
+          Header: {props.header}
+          <br />
+          Subheader: {props.subheader}
+        </Demo>
+      );
     case 'theme':
-      return <Theme {...props} />;
+      return <>{props.children}</>;
   }
 }

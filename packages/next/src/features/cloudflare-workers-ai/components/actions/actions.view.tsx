@@ -9,7 +9,7 @@ interface Props {
 export default function Actions({ onRunClick }: Props): ReactElement {
   return (
     <Button
-      category="features/cloudflare-workers-ai/actions"
+      feature="cloudflare-workers-ai/actions"
       onClick={onRunClick}
       variant="primary"
     >

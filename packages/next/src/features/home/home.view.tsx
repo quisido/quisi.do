@@ -32,7 +32,7 @@ export default function Home(): ReactElement {
               collection of open-source software, the profits of which are
               forwarded to{' '}
               {/* <Link
-                category="features/home"
+                feature="home"
                 href="/charities/"
                 title="quisi.do's supported charities"
               > */}
@@ -40,7 +40,7 @@ export default function Home(): ReactElement {
               with completely{' '}
               <strong>
                 <Link
-                  category="features/home"
+                  feature="home"
                   href="/dashboard"
                   title="quisi.do operational dashboard"
                 >
