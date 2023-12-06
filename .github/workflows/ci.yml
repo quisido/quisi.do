@@ -141,8 +141,7 @@ jobs:
   #     - name: Install dependencies
   #       run: yarn install --immutable
   #     - name: Enable Plug-n-Play
-  #       run: yarn run cypress:pnp
-  #       working-directory: packages/next/
+  #       run: yarn packages/next run cypress:pnp
   #     - name: End-to-end test
   #       uses: cypress-io/github-action@v6
   #       env:
@@ -208,19 +207,18 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Audit
-        run: yarn run lighthouse
-        working-directory: packages/next/
+        run: yarn packages/next run lighthouse:serve
       - name: Validate
-        run: yarn run postlighthouse
-        working-directory: packages/next/
+        run: yarn packages/next run postlighthouse
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: lighthouse
           path: |
-            packages/*/lighthouse.report.html
-            packages/*/lighthouse.report.json
+            packages/*/lighthouse.report.*
+            packages/*/lighthouse-*.devtoolslog.json
+            packages/*/lighthouse-*.trace.json
 
   prepublish:
     name: Prepublish

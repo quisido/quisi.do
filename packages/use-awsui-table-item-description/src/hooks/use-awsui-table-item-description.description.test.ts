@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 /// <reference types="jest" />
+import assert from 'node:assert';
 import { act } from 'react-dom/test-utils';
 import type TestItem from '../test/types/test-item.js';
 import TestAwsuiTableItemDescription from '../test/components/test-awsui-table-item-description.js';
@@ -92,10 +93,12 @@ describe('useAwsuiTableItemDescription', (): void => {
       const expectCellNodeValue = (
         rowIndex: number,
       ): jest.JestMatchers<string> => {
-        const tr: HTMLTableRowElement = trs[rowIndex];
+        const tr: HTMLTableRowElement | undefined = trs[rowIndex];
+        assert(typeof tr !== 'undefined');
         const cells: HTMLCollectionOf<HTMLTableCellElement> =
           tr.getElementsByTagName('td');
-        const cell: HTMLTableCellElement = Array.from(cells)[0];
+        const cell: HTMLTableCellElement | undefined = Array.from(cells)[0];
+        assert(typeof cell !== 'undefined');
         return expect(cell.firstChild?.nodeValue);
       };
 
@@ -130,10 +133,12 @@ describe('useAwsuiTableItemDescription', (): void => {
       const expectCellNodeValue = (
         rowIndex: number,
       ): jest.JestMatchers<string> => {
-        const tr: HTMLTableRowElement = trs[rowIndex];
+        const tr: HTMLTableRowElement | undefined = trs[rowIndex];
+        assert(typeof tr !== 'undefined');
         const cells: HTMLCollectionOf<HTMLTableCellElement> =
           tr.getElementsByTagName('td');
-        const cell: HTMLTableCellElement = Array.from(cells)[0];
+        const cell: HTMLTableCellElement | undefined = Array.from(cells)[0];
+        assert(typeof cell !== 'undefined');
         return expect(cell.firstChild?.nodeValue);
       };
 
