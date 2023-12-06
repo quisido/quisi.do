@@ -13,7 +13,7 @@ export default function useContexts(): State {
   const [designSystem, setDesignSystem] = useState(DesignSystem.Quisi);
 
   return {
-    isDarkModeEnabled: useState(true),
+    isDarkModeEnabled: useState(false),
 
     designSystem: useMemo((): [
       DesignSystem,

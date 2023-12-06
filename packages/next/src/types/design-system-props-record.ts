@@ -12,7 +12,6 @@ import { type Props as LinkProps } from '../components/link';
 import { type Props as SelectProps } from '../components/select';
 import { type Props as SpanProps } from '../components/span';
 import { type Props as TableProps } from '../components/table';
-import { type Props as WrapperProps } from '../components/wrapper';
 
 export default interface DesignSystemPropsRecord<
   Card extends object,
@@ -33,5 +32,4 @@ export default interface DesignSystemPropsRecord<
   readonly span: SpanProps;
   readonly table: TableProps<Row>;
   readonly theme: Readonly<PropsWithChildren>;
-  readonly wrapper: WrapperProps;
 }

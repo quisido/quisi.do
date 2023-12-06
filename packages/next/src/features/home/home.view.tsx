@@ -5,8 +5,6 @@ import { type ReactElement } from 'react';
 import Container from '../../components/container';
 import Div from '../../components/div';
 import validateString from '../../utils/validate-string';
-import ViewResumeButton from './components/view-resume-button';
-import useHome from './home.hook';
 import styles from './home.module.scss';
 import Link from '../../components/link';
 
@@ -22,11 +20,9 @@ const FRONT_END_YOE: number = CURRENT_YEAR - FRONT_END_START_YEAR;
 const FULL_STACK_YOE: number = CURRENT_YEAR - FULL_STACK_START_YEAR;
 
 export default function Home(): ReactElement {
-  const { avatarAlt } = useHome();
-
   return (
     <>
-      <Container actions={<ViewResumeButton />} header={<I18n>About</I18n>}>
+      <Container header={<I18n>About</I18n>}>
         <Div className={contentClassName} display="flex" flexDirection="row">
           <Div className={aboutClassName} display="flex" flexDirection="column">
             <Div element="p" marginBottom="medium">

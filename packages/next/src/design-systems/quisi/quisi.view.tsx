@@ -15,9 +15,8 @@ import Select from './components/select';
 import Span from './components/span';
 import Table from './components/table';
 import Theme from './components/theme';
-import Wrapper from './components/wrapper';
 
-export default function Mui<Card extends object, Row extends object>({
+export default function Quisi<Card extends object, Row extends object>({
   props,
   type,
 }: Readonly<DesignSystemProps<Card, Row>>): ReactElement {
@@ -52,7 +51,5 @@ export default function Mui<Card extends object, Row extends object>({
       return <Table {...props} />;
     case 'theme':
       return <Theme {...props} />;
-    case 'wrapper':
-      return <Wrapper {...props} />;
   }
 }

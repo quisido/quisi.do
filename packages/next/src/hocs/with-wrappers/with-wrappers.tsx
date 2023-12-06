@@ -20,7 +20,7 @@ export default function withWrappers(
     return function WrappedComponent(props: Props): ReactElement {
       return (
         <Wrapper>
-          <Component {...props} />
+          <Component key={null} {...props} />
         </Wrapper>
       );
     };

@@ -202,7 +202,7 @@
         "generics": "always-multiline",
         "imports": "always-multiline",
         "objects": "always-multiline",
-        "tuples": "never"
+        "tuples": "always-multiline"
       }
     ],
     "@typescript-eslint/consistent-type-imports": [
