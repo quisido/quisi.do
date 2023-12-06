@@ -5,8 +5,8 @@ import { type ReactElement } from 'react';
 import { default as Locale } from '../../constants/locale';
 import TRANSLATIONS from '../../constants/translations';
 import { LocaleProvider } from '../../contexts/locale';
+// import Notifications from '../../features/notifications';
 import type NextLayoutProps from '../../types/next-layout-props';
-import Wrapper from '../wrapper';
 import useLocaleLayout from './locale-layout.hook';
 import type Params from './types/params';
 
@@ -29,7 +29,10 @@ export default function LocaleLayout({
         locale={locale}
         translations={TRANSLATIONS}
       >
-        <Wrapper>{children}</Wrapper>
+        <div style={{ display: 'flex' }}>
+          {/* <Notifications>{notifications}</Notifications> */}
+          <main style={{ flexGrow: 1 }}>{children}</main>
+        </div>
       </I18nProvider>
     </LocaleProvider>
   );

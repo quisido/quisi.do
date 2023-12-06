@@ -1,8 +1,8 @@
 import Alert, { type AlertProps } from '@mui/material/Alert';
 import Snackbar, { type SnackbarOrigin } from '@mui/material/Snackbar';
 import { type ReactElement } from 'react';
-import type Notification from '../../../../../../types/notification';
-import Button from '../../../button';
+import Button from '../../components/button';
+import type Notification from '../../types/notification';
 
 interface Props {
   readonly children: readonly Notification[] | undefined;
