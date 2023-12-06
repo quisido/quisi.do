@@ -10,7 +10,7 @@ import OPEN_TELEMETRY_INSTRUMENTATION from './open-telemetry-instrumentation';
 
 const OPEN_TELEMETRY_PROVIDER: WebTracerProvider = new WebTracerProvider({
   resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: 'charlesstover.com',
+    [SemanticResourceAttributes.SERVICE_NAME]: 'quisi.do',
   }),
 });
 

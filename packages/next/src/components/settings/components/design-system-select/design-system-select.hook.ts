@@ -23,7 +23,7 @@ export default function useSettingsDesignSystemSelect(): State {
     handleChange: useCallback(
       (newDesignSystem: string | undefined): void => {
         if (typeof newDesignSystem === 'undefined') {
-          setDesignSystem(DesignSystem.Awsui);
+          setDesignSystem(DesignSystem.Quisi);
           return;
         }
 

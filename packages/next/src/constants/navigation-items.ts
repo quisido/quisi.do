@@ -93,13 +93,13 @@ const NAVIGATION_ITEMS: readonly (
       },
       {
         text: NavigationText.LinkedIn,
-        url: 'https://www.linkedin.com/in/charles-stover/',
+        url: 'https://www.linkedin.com/in/quisido/',
       },
+      /*
       {
         text: NavigationText.Medium,
         url: 'https://charles-stover.medium.com/',
       },
-      /*
       {
         text: NavigationText.NPM,
         url: 'https://www.npmjs.com/~charlesstover',

@@ -119,9 +119,12 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Prepack
-        run: yarn prepack
+        run: yarn run --require dd-trace/init prepack
         env:
-          CI: false
+          DD_ENV: ci
+          DD_PROFILING_ENABLED: true
+          DD_SERVICE: quisi.do
+          DD_VERSION: ${{ github.sha }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
           IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
@@ -167,19 +170,18 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Audit
-        run: yarn run lighthouse
-        working-directory: packages/next/
+        run: yarn packages/next run lighthouse:serve
       - name: Validate
-        run: yarn run postlighthouse
-        working-directory: packages/next/
+        run: yarn packages/next run postlighthouse
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: lighthouse
           path: |
-            packages/*/lighthouse.report.html
-            packages/*/lighthouse.report.json
+            packages/*/lighthouse.report.*
+            packages/*/lighthouse-*.devtoolslog.json
+            packages/*/lighthouse-*.trace.json
 
   prepublish:
     name: Prepublish
@@ -213,7 +215,12 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Prepublish
-        run: yarn prepublish
+        run: yarn run --require dd-trace/ci/init prepublish
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+          DD_ENV: ci
+          DD_SERVICE: quisi.do
 
   #   Run prepublish on applications, because prepublish won't be triggered for
   # applications by the publish step.
@@ -257,6 +264,35 @@ jobs:
           path: packages/*/jest/
 
   # Stage 4: github-pages, npm, opensource-registry, sentry-release, wrangler-deploy
+  datadog-sourcemaps:
+    name: Datadog sourcemaps
+    needs: [lighthouse, prepublish-applications]
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: prepack
+          path: packages/
+      - name: Upload Datadog sourcemaps
+        run: yarn packages/next run datadog:sourcemaps
+        env:
+          DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          RELEASE_VERSION: ${{ github.sha }}
+
   github-pages:
     name: GitHub Pages
     needs: [lighthouse, prepublish-applications]

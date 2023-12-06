@@ -28,6 +28,7 @@ module.exports = defineConfig({
     specPattern: 'src/**/*.e2e.ts',
     setupNodeEvents(on, config) {
       require('@monorepo-template/cypress-coverage-plugin')(on, config);
+      require('dd-trace/ci/cypress/plugin')(on, config);
       return config;
     },
   },
