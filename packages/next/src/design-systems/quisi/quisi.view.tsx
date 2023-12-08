@@ -1,3 +1,4 @@
+import Card from '@salesforce/design-system-react/components/card';
 import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
 import type DesignSystemProps from '../../types/design-system-props';
 
@@ -71,7 +72,12 @@ export default function Quisido<Card extends object, Row extends object>({
       );
     case 'container':
       return (
-        <Demo type="Container">
+        <Card
+          empty={false}
+          footer={props.footer}
+          headerActions={props.actions}
+          heading={props.header}
+        >
           {JSON.stringify({
             ...props,
             actions: undefined,
@@ -81,16 +87,10 @@ export default function Quisido<Card extends object, Row extends object>({
             subheader: undefined,
           })}
           <br />
-          Header: {props.header}
-          <br />
-          Actions: {props.actions}
-          <br />
           Subheader: {props.subheader}
           <br />
-          Children: {props.children}
-          <br />
-          Footer: {props.footer}
-        </Demo>
+          {props.children}
+        </Card>
       );
     case 'div':
       return (

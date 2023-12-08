@@ -1,11 +1,16 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { type NextConfig } from 'next';
+import type { WebpackConfigContext } from 'next/dist/server/config-shared';
 import { cpus } from 'node:os';
 import { join } from 'node:path';
+import type { Configuration, ModuleOptions, RuleSetRule } from 'webpack';
 import getVersion from './src/utils/get-version';
 import mapNodeEnvToOnDemandEntries from './src/utils/map-node-env-to-on-demand-entries';
 import mapNodeEnvToOutput from './src/utils/map-node-env-to-output';
 import mapProcessEnvToNextJsEnv from './src/utils/map-process-env-to-nextjs-env';
 import withNextJsBundleAnalyzer from './src/utils/with-nextjs-bundle-analyzer';
+
+type Rule = undefined | null | false | '' | 0 | RuleSetRule | '...';
 
 const CPUS_COUNT: number = cpus().length;
 
@@ -63,7 +68,7 @@ export default withNextJsBundleAnalyzer({
     // typedRoutes: true,
     useDeploymentId: true,
     webpackBuildWorker: true,
-    webVitalsAttribution: ["CLS", "FCP", "FID", "INP", "LCP", "TTFB"],
+    webVitalsAttribution: ['CLS', 'FCP', 'FID', 'INP', 'LCP', 'TTFB'],
     workerThreads: true,
 
     /*
@@ -89,5 +94,29 @@ export default withNextJsBundleAnalyzer({
   typescript: {
     ignoreBuildErrors: true,
     tsconfigPath: './tsconfig.prepack.json',
+  },
+
+  webpack(
+    config: Configuration,
+    { defaultLoaders }: WebpackConfigContext,
+  ): Configuration {
+    const moduleOptions: ModuleOptions = config.module ?? {};
+    const rules: readonly Rule[] = moduleOptions.rules ?? [];
+    return {
+      ...config,
+      module: {
+        ...moduleOptions,
+        rules: [
+          {
+            test: [
+              /@salesforce\/design-system-react/,
+              /@salesforce-design-system-react-virtual-/,
+            ],
+            use: defaultLoaders.babel as string,
+          },
+          ...rules,
+        ],
+      },
+    };
   },
 } satisfies NextConfig) satisfies NextConfig;
