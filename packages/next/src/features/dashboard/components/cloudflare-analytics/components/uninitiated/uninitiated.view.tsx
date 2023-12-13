@@ -1,11 +1,11 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Container from '../../../../../../components/container';
+import Section from '../../../../../../components/section';
 
 export default function CloudflareAnalyticsUninitiated(): ReactElement {
   return (
-    <Container header={<I18n>Cloudflare analytics</I18n>} marginTop="large">
+    <Section header={<I18n>Cloudflare analytics</I18n>}>
       <I18n>Initiating</I18n>
-    </Container>
+    </Section>
   );
 }

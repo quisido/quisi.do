@@ -9,15 +9,17 @@ import CloudflareInsights from '../components/cloudflare-insights';
 import CloudWatchRUM from '../components/cloudwatch-rum';
 import Datadog from '../components/datadog';
 import FullStory from '../components/fullstory';
-import Preconnect from '../components/preconnect';
 import ReportUri from '../components/report-uri';
-import Theme from '../components/theme';
-import PRECONNECT_HREFS from '../constants/preconnect-hrefs';
+import DesignSystemTheme from '../components/theme';
 import Contexts from '../features/contexts';
+import GoogleFonts from '../features/google-fonts';
+import Header from '../features/header';
 import GoogleAnalytics from '../features/google-analytics';
 // import Mixpanel from '../features/mixpanel';
 import NotificationsProvider from '../features/notifications-provider';
+import Preconnect from '../features/preconnect';
 import Sentry from '../features/sentry';
+import ThemeFeature from '../features/theme';
 // import Turnstile from '../features/turnstile';
 import withWrappers from '../hocs/with-wrappers';
 import Clarity from '../modules/react-clarity';
@@ -25,16 +27,83 @@ import Clarity from '../modules/react-clarity';
 export { default as metadata } from '../constants/root-metadata';
 export { default as viewport } from '../constants/root-viewport';
 
+const BODY_FONT_FAMILIES: readonly string[] = [
+  '-apple-system',
+  'BlinkMacSystemFont',
+  '"Segoe UI"',
+  'Roboto',
+  'Oxygen',
+  'Ubuntu',
+  'Cantarell',
+  '"Open Sans"',
+  '"Helvetica Neue"',
+  'Helvetica',
+  'Arial',
+  'sans-serif',
+  '"Apple Color Emoji"',
+  '"Segoe UI Emoji"',
+  '"Segoe UI Symbol"',
+];
+
+const LAYOUT_CSS = `
+body {
+  box-sizing: border-box;
+  color: #000000;
+  font-family: ${BODY_FONT_FAMILIES.join(', ')};
+  font-feature-settings: "pnum";
+  -webkit-font-feature-settings: "pnum";
+  font-size: 16px;
+  font-smooth: always;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: proportional-nums;
+  letter-spacing: 0;
+  line-height: 1.5;
+  margin-bottom: 0.5in;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0.5in;
+  min-height: 100%;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-y: scroll;
+  padding-bottom: 0;
+  padding-top: 0;
+  text-rendering: optimizeLegibility;
+  text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+
+  @media (max-width: 6in) {
+    padding-left: 0.5in;
+    padding-right: 0.5in;
+  }
+
+  @media (min-width: 6in) {
+    padding-left: 1in;
+    padding-right: 1in;
+  }
+
+  /*
+  @media (prefers-color-scheme: dark) {
+    background-color: #202020;
+    color: #ffffff;
+  }
+  */
+}
+`;
+
 /**
  * We do not put wrappers around `<body>` itself, because we do not want to
  *   inadvertently render HTML elements around `<body>`.
  */
 const BodyChildren: ComponentType<PropsWithChildren> = withWrappers(
+  ThemeFeature,
   NotificationsProvider,
   CloudWatchRUM,
   Contexts,
   Sentry,
-  Theme,
+  DesignSystemTheme,
   // Turnstile,
 )(Fragment);
 
@@ -43,15 +112,24 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
     <html lang="en">
       <head>
         <ReportUri />
-        <Preconnect hrefs={PRECONNECT_HREFS} />
+        <Preconnect />
         <Clarity tag="jn26o3oqm1" />
         <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
         <meta charSet="utf-8" />
+        <style
+          type="text/css"
+          dangerouslySetInnerHTML={{
+            __html: LAYOUT_CSS,
+          }}
+        />
+        {/*
         <script
           referrerPolicy="origin"
           src="https://quisi.do/cdn-cgi/zaraz/i.js"
           type="text/javascript"
         />
+        */}
+        <GoogleFonts />
       </head>
       <body>
         <BodyChildren>
@@ -59,7 +137,16 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
           <FullStory />
           <GoogleAnalytics />
           {/* <Mixpanel /> */}
-          {children}
+          <Header />
+          <main
+            style={{
+              margin: '0 auto',
+              maxWidth: '60em',
+              minWidth: 320,
+            }}
+          >
+            {children}
+          </main>
         </BodyChildren>
         {/*
         <script

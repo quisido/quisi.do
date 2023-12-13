@@ -7,7 +7,7 @@ import {
   useEffect,
 } from 'react';
 import useEffectEvent from '../../../../hooks/use-effect-event';
-import useEvent from '../../../../hooks/use-event/use-event';
+import useEmit from '../../../../hooks/use-emit';
 import isHrefBlank from '../../../../utils/is-href-blank';
 
 interface Props {
@@ -27,7 +27,7 @@ export default function useMuiLink({ feature, href, title }: Props): State {
   const isBlank: boolean = isHrefBlank(href);
 
   // Contexts
-  const emit = useEvent();
+  const emit = useEmit();
   const router = useRouter();
 
   useEffect((): void => {

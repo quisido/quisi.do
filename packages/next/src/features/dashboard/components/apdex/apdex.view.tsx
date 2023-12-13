@@ -1,8 +1,8 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import Div from '../../../../components/div';
-import Container from '../../../../components/container';
 import LoadingIcon from '../../../../components/loading-icon';
+import Section from '../../../../components/section';
 import Span from '../../../../components/span';
 import PieChart from '../apdex-pie-chart';
 import LineChart from '../apdex-line-chart';
@@ -28,34 +28,25 @@ export default function Apdex({
 }: Props): ReactElement {
   if (!initiated) {
     return (
-      <Container
-        header={<I18n>Application Performance Index</I18n>}
-        marginTop="large"
-      >
+      <Section header={<I18n>Application Performance Index</I18n>}>
         <I18n>Initiating</I18n>
-      </Container>
+      </Section>
     );
   }
 
   if (error !== null) {
     return (
-      <Container
-        header={<I18n>Application Performance Index</I18n>}
-        marginTop="large"
-      >
+      <Section header={<I18n>Application Performance Index</I18n>}>
         <Span element="p">{error}</Span>
-      </Container>
+      </Section>
     );
   }
 
   if (loading) {
     return (
-      <Container
-        header={<I18n>Application Performance Index</I18n>}
-        marginTop="large"
-      >
+      <Section header={<I18n>Application Performance Index</I18n>}>
         <LoadingIcon /> <I18n>Loading Application Performance Index</I18n>
-      </Container>
+      </Section>
     );
   }
 
@@ -69,13 +60,12 @@ export default function Apdex({
   });
 
   return (
-    <Container
+    <Section
       header={
         <>
           <I18n>Application Performance Index</I18n> ({Math.round(apdexScore)}%)
         </>
       }
-      marginTop="large"
     >
       <Div display="flex" flexDirection="row" flexWrap="wrap">
         <PieChart
@@ -89,6 +79,6 @@ export default function Apdex({
           tolerated={toleratedTimeSeries}
         />
       </Div>
-    </Container>
+    </Section>
   );
 }

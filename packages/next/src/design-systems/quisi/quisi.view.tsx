@@ -1,6 +1,9 @@
-import Card from '@salesforce/design-system-react/components/card';
 import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
 import type DesignSystemProps from '../../types/design-system-props';
+import Button from './components/button';
+import Link from './components/link';
+import Section from './components/section';
+import Theme from './components/theme';
 
 function Demo({
   children,
@@ -36,14 +39,10 @@ export default function Quisido<Card extends object, Row extends object>({
           Children: {props.children}
         </Demo>
       );
+
     case 'button':
-      return (
-        <Demo type="Button">
-          {JSON.stringify({ ...props, children: undefined })}
-          <br />
-          Children: {props.children}
-        </Demo>
-      );
+      return <Button {...props} />;
+
     case 'cards':
       return (
         <Demo type="Cards">
@@ -52,6 +51,7 @@ export default function Quisido<Card extends object, Row extends object>({
           Header: {props.header}
         </Demo>
       );
+
     case 'checkbox':
       return (
         <Demo type="Checkbox">
@@ -60,6 +60,7 @@ export default function Quisido<Card extends object, Row extends object>({
           Children: {props.children}
         </Demo>
       );
+
     case 'chip':
       return (
         <Demo type="Chip">
@@ -70,28 +71,7 @@ export default function Quisido<Card extends object, Row extends object>({
           Children: {props.children}
         </Demo>
       );
-    case 'container':
-      return (
-        <Card
-          empty={false}
-          footer={props.footer}
-          headerActions={props.actions}
-          heading={props.header}
-        >
-          {JSON.stringify({
-            ...props,
-            actions: undefined,
-            children: undefined,
-            footer: undefined,
-            header: undefined,
-            subheader: undefined,
-          })}
-          <br />
-          Subheader: {props.subheader}
-          <br />
-          {props.children}
-        </Card>
-      );
+
     case 'div':
       return (
         <Demo type="Div">
@@ -100,6 +80,7 @@ export default function Quisido<Card extends object, Row extends object>({
           Children: {props.children}
         </Demo>
       );
+
     case 'header':
       return (
         <Demo type="Header">
@@ -114,22 +95,13 @@ export default function Quisido<Card extends object, Row extends object>({
           Children: {props.children}
         </Demo>
       );
+
     case 'input':
       return <Demo type="Input">{JSON.stringify({ ...props })}</Demo>;
+
     case 'link':
-      return (
-        <a
-          aria-label={props.label}
-          className={props.className}
-          href={props.href}
-          title={props.title}
-          onClick={() => {
-            console.log(`track: ${props.feature}`);
-          }}
-        >
-          {props.children}
-        </a>
-      );
+      return <Link {...props} />;
+
     case 'loading-icon':
       return (
         <Demo type="LoadingIcon">
@@ -138,6 +110,10 @@ export default function Quisido<Card extends object, Row extends object>({
           Children: {props.children}
         </Demo>
       );
+
+    case 'section':
+      return <Section {...props} />;
+
     case 'select':
       return (
         <Demo type="Select">
@@ -146,6 +122,7 @@ export default function Quisido<Card extends object, Row extends object>({
           Label: {props.label}
         </Demo>
       );
+
     case 'span':
       return (
         <Demo type="Span">
@@ -154,6 +131,7 @@ export default function Quisido<Card extends object, Row extends object>({
           Children: {props.children}
         </Demo>
       );
+
     case 'table':
       return (
         <Demo type="Table">
@@ -168,7 +146,8 @@ export default function Quisido<Card extends object, Row extends object>({
           Subheader: {props.subheader}
         </Demo>
       );
+
     case 'theme':
-      return <>{props.children}</>;
+      return <Theme>{props.children}</Theme>;
   }
 }

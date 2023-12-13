@@ -1,9 +1,9 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import mapUnknownToString from 'unknown2string';
-import Container from '../../../../components/container';
 import Div from '../../../../components/div';
 import Link from '../../../../components/link';
+import Section from '../../../../components/section';
 import validateString from '../../../../utils/validate-string';
 import LastChecked from '../last-checked';
 import MessageInABottle from '../message-in-a-bottle';
@@ -22,7 +22,6 @@ interface Props {
 }
 
 const errorClassName: string = validateString(styles.error);
-const headerClassName: string = validateString(styles.header);
 const iconClassName: string = validateString(styles.icon);
 const infoClassName: string = validateString(styles.info);
 const messageClassName = validateString(styles.message);
@@ -69,16 +68,10 @@ export default function DashboardStatus({
   const { ciCdAlt } = useStatus();
 
   return (
-    <Container
-      header={<I18n>Status</I18n>}
-      headerClassName={headerClassName}
-      marginTop="large"
-      subheader={
-        <div className={subheaderClassName}>
-          <MessageInABottle />
-        </div>
-      }
-    >
+    <Section header={<I18n>Status</I18n>}>
+      <div className={subheaderClassName}>
+        <MessageInABottle />
+      </div>
       <Div display="flex" flexDirection="row" justifyContent="space-around">
         <Div>
           <Link
@@ -86,6 +79,7 @@ export default function DashboardStatus({
             href="https://github.com/quisido/quisi.do/actions/workflows/cd.yml"
             title="Continuous deployment workflow"
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt={ciCdAlt}
               height={20}
@@ -112,6 +106,6 @@ export default function DashboardStatus({
           {uptimeMessages.map(mapMessageToElement)}
         </Div>
       )}
-    </Container>
+    </Section>
   );
 }

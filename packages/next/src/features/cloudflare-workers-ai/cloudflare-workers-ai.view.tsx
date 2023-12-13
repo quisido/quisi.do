@@ -1,20 +1,20 @@
 import { type ReactElement } from 'react';
-import Container from '../../components/container';
+import Section from '../../components/section';
 // import Div from '../../components/div';
 // import useCloudflareWorkersAi from './cloudflare-workers-ai.hook';
 // import Actions from './components/actions';
 // import Form from './components/form';
 // import Subheader from './components/subheader';
-import type Fetch from './types/fetch';
+// import type Fetch from './types/fetch';
 // import handleSubmit from './utils/handle-submit';
 
+/*
 interface Props {
   readonly onFetch: Fetch;
 }
+*/
 
-export default function CloudflareWorkersAiFeature(
-  _props: Props,
-): ReactElement {
+export default function CloudflareWorkersAiFeature(): ReactElement {
   /*
   const {
     apiToken,
@@ -30,10 +30,10 @@ export default function CloudflareWorkersAiFeature(
 
   return (
     <form action="#" method="POST" onSubmit={handleSubmit}>
-      <Container
+      <Section
         actions={<Actions onRunClick={handleRunClick} />}
         header="Cloudflare Workers AI"
-        subheader={
+      >
           <Subheader
             apiToken={apiToken}
             apiTokenStatus={apiTokenStatus}
@@ -41,8 +41,6 @@ export default function CloudflareWorkersAiFeature(
             onModelChange={handleModelChange}
             model={model}
           />
-        }
-      >
         {initiated && <>Initiated</>}
         {loading && <LoadingIcon />}
         {error && <>{JSON.stringify(error)}</>}
@@ -56,8 +54,8 @@ export default function CloudflareWorkersAiFeature(
   );
   */
   return (
-    <Container header="Cloudflare Workers AI">
+    <Section header="Cloudflare Workers AI">
       This page may or may not exist. 🤔
-    </Container>
+    </Section>
   );
 }

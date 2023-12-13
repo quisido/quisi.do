@@ -1,9 +1,9 @@
 'use client';
 
 import { type ReactElement } from 'react';
-import Container from '../../components/container';
 import Div from '../../components/div';
 import Link from '../../components/link';
+import Section from '../../components/section';
 import handleCloudflareAnalyticsRequest from '../../utils/handle-cloudflare-analytics-request';
 import handleUptimeChecksRequest from '../../utils/handle-uptime-checks-request';
 import RumMetrics from '../../utils/rum-metrics';
@@ -63,7 +63,7 @@ export default function Dashboard(): ReactElement {
 
   return (
     <>
-      <Container header="quisi.do operational health dashboard">
+      <Section header="quisi.do operational health dashboard">
         <Div element="p">
           This dashboard showcases operational and performance metrics for{' '}
           <Link feature="dashboard" href="/" title="quisi.do">
@@ -71,7 +71,7 @@ export default function Dashboard(): ReactElement {
           </Link>
           .
         </Div>
-      </Container>
+      </Section>
       <Status
         lastUptimeCheckStatus={lastUptimeCheckStatus}
         lastUptimeCheckTimestamp={lastUptimeCheckTimestamp}

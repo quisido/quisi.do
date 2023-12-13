@@ -5,12 +5,12 @@ import Button from './components/button';
 import Cards from './components/cards';
 import Checkbox from './components/checkbox';
 import Chip from './components/chip';
-import Container from './components/container';
 import Div from './components/div';
 import Header from './components/header';
 import Input from './components/input';
 import Link from './components/link';
 import LoadingIcon from './components/loading-icon';
+import Section from './components/section';
 import Select from './components/select';
 import Span from './components/span';
 import Table from './components/table';
@@ -31,8 +31,6 @@ export default function Mui<Card extends object, Row extends object>({
       return <Checkbox {...props} />;
     case 'chip':
       return <Chip {...props} />;
-    case 'container':
-      return <Container {...props} />;
     case 'div':
       return <Div {...props} />;
     case 'header':
@@ -43,6 +41,8 @@ export default function Mui<Card extends object, Row extends object>({
       return <Link {...props} />;
     case 'loading-icon':
       return <LoadingIcon {...props} />;
+    case 'section':
+      return <Section {...props} />;
     case 'select':
       return <Select {...props} />;
     case 'span':

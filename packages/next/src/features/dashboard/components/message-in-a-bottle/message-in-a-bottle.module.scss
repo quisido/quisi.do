@@ -47,7 +47,7 @@ $width: $height / $aspect-ratio;
   transition-property: height, margin-left, margin-right, margin-top, opacity, transform, width;
   transition-timing-function: ease-in-out;
   width: math.round($width);
-  z-index: 1; // greater than <Container>'s border
+  z-index: 1; // greater than <Section>'s border
 
   &:hover {
     animation-delay: 0s;

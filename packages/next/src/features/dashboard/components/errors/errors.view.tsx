@@ -1,8 +1,8 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
-import Container from '../../../../components/container';
 import LoadingIcon from '../../../../components/loading-icon';
+import Section from '../../../../components/section';
 import Span from '../../../../components/span';
 import useErrors from './errors.hook';
 
@@ -36,33 +36,30 @@ export default function Errors({
 
   if (!initiated) {
     return (
-      <Container header={<I18n>Errors</I18n>} marginTop="large">
+      <Section header={<I18n>Errors</I18n>}>
         <I18n>Initiating</I18n>
-      </Container>
+      </Section>
     );
   }
 
   if (error !== null) {
     return (
-      <Container header={<I18n>Errors</I18n>} marginTop="large">
+      <Section header={<I18n>Errors</I18n>}>
         <Span element="p">{error}</Span>
-      </Container>
+      </Section>
     );
   }
 
   if (loading) {
     return (
-      <Container header={<I18n>Errors</I18n>} marginTop="large">
+      <Section header={<I18n>Errors</I18n>}>
         <LoadingIcon /> <I18n>Loading errors</I18n>
-      </Container>
+      </Section>
     );
   }
 
   return (
-    <Container
-      header={<I18n count={errorCount}>Errors ($count)</I18n>}
-      marginTop="large"
-    >
+    <Section header={<I18n count={errorCount}>Errors ($count)</I18n>}>
       <div ref={ref}>
         <LineChart data={data} height={240} width={width}>
           <Line dataKey="value" type="natural" />
@@ -82,6 +79,6 @@ export default function Errors({
           />
         </LineChart>
       </div>
-    </Container>
+    </Section>
   );
 }

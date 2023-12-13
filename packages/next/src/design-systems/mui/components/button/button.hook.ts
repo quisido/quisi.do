@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation.js';
 import { type MouseEvent, type ReactNode, useEffect } from 'react';
 import innerText from 'react-innertext';
 import useEffectEvent from '../../../../hooks/use-effect-event';
-import useEvent from '../../../../hooks/use-event/use-event';
+import useEmit from '../../../../hooks/use-emit';
 import isHrefBlank from '../../../../utils/is-href-blank';
 
 interface Props {
@@ -32,7 +32,7 @@ export default function useMuiButton({
   const label: string = innerText(children);
 
   // Contexts
-  const emit = useEvent();
+  const emit = useEmit();
   const router = useRouter();
 
   useEffect((): void => {

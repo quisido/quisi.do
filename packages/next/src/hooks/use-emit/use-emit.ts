@@ -57,12 +57,12 @@ const hasZaraz = (w: Window): w is ZarazWindow => 'zaraz' in w;
  *   Viewed Promotion
  *   Shipping Info Entered
  */
-export default function useEvent(): EventEmitter {
+export default function useEmit(): EventEmitter {
   // Context
-  const { captureEvent } = useSentrySdk();
   const hostname: string = useHostname();
   const pathname: string = usePathname();
   const recordEvent = useRecordEvent();
+  const { captureEvent } = useSentrySdk();
 
   // States
   return useCallback(

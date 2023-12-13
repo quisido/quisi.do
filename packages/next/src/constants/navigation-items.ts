@@ -53,10 +53,6 @@ const NAVIGATION_ITEMS: readonly (
         text: NavigationText.RPGOverworldEngine,
         url: 'https://quisido.github.io/rpg-overworld-engine/',
       },
-      {
-        text: NavigationText.SpriteSheet2Gif,
-        path: '/spritesheet2gif/',
-      },
     ],
   },
   {

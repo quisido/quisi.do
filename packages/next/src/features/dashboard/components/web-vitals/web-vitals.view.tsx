@@ -1,9 +1,9 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Container from '../../../../components/container';
 import Div from '../../../../components/div';
 import Gauge from '../../../../components/gauge';
 import LoadingIcon from '../../../../components/loading-icon';
+import Section from '../../../../components/section';
 import Span from '../../../../components/span';
 import Status from '../../constants/status';
 import mapStatusToEmoji from '../../utils/map-status-to-emoji';
@@ -40,25 +40,25 @@ export default function WebVitals({
 }: Props): ReactElement {
   if (!initiated) {
     return (
-      <Container header={<I18n>Web Vitals</I18n>} marginTop="large">
+      <Section header={<I18n>Web Vitals</I18n>}>
         <I18n>Initiating</I18n>
-      </Container>
+      </Section>
     );
   }
 
   if (error !== null) {
     return (
-      <Container header={<I18n>Web Vitals</I18n>} marginTop="large">
+      <Section header={<I18n>Web Vitals</I18n>}>
         <Span element="p">{error}</Span>
-      </Container>
+      </Section>
     );
   }
 
   if (loading) {
     return (
-      <Container header={<I18n>Web Vitals</I18n>} marginTop="large">
+      <Section header={<I18n>Web Vitals</I18n>}>
         <LoadingIcon /> <I18n>Loading Web Vitals</I18n>
-      </Container>
+      </Section>
     );
   }
 
@@ -87,7 +87,7 @@ export default function WebVitals({
         : Status.Poor;
 
   return (
-    <Container
+    <Section
       header={
         <>
           <I18n>Web Vitals</I18n>{' '}
@@ -102,7 +102,6 @@ export default function WebVitals({
               : mapStatusToEmoji(Status.Good)}
         </>
       }
-      marginTop="large"
     >
       <Div display="flex" justifyContent="space-around">
         <Div display="flex" flexDirection="column">
@@ -143,6 +142,6 @@ export default function WebVitals({
           />
         </Div>
       </Div>
-    </Container>
+    </Section>
   );
 }
