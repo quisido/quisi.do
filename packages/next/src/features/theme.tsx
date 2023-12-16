@@ -24,7 +24,7 @@ export default function Theme({ children }: PropsWithChildren): ReactElement {
         backgroundColor: '#ffffff',
         displayFontWeight: 700,
         foregroundColor: '#000000',
-        primary: [240, 160, 200],
+        primary: [240, 160, 200], // #f0a0c8
         primaryDark: '#604050',
         primaryFontWeight: 700,
         // secondary: [34, 174, 221],

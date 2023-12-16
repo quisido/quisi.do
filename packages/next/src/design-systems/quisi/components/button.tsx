@@ -14,6 +14,7 @@ const RAISED_OFFSET = -3;
 export default function Button({
   children,
   feature,
+  href,
   onClick,
 }: Props): ReactElement {
   // Contexts
@@ -26,6 +27,7 @@ export default function Button({
   const ref: RefObject<HTMLButtonElement> = useRef(null);
   const { buttonProps } = useButton(
     {
+      href,
       onPress: () => {
         if (typeof onClick === 'function') {
           onClick();

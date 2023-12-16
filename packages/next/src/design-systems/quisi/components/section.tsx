@@ -15,14 +15,7 @@ export default function QuisiSection({
   return (
     <section
       style={{
-        // border: '1px solid #ccc',
         backgroundColor,
-        borderRadius: '0.25em',
-        borderColor: 'rgba(0, 0, 0, 0.01)',
-        borderStyle: 'solid',
-        borderWidth: 1,
-        boxShadow: '1px 1px 2px rgba(0, 0, 0, 0.1)',
-        boxSizing: 'border-box',
         color: foregroundColor,
         overflow: 'hidden',
         marginBottom: '1em',

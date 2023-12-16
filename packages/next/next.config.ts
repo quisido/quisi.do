@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import getVersion from './src/utils/get-version';
 import mapNodeEnvToOnDemandEntries from './src/utils/map-node-env-to-on-demand-entries';
 import mapNodeEnvToOutput from './src/utils/map-node-env-to-output';
-import mapProcessEnvToNextJsEnv from './src/utils/map-process-env-to-nextjs-env';
+// import mapProcessEnvToNextJsEnv from './src/utils/map-process-env-to-nextjs-env';
 import withNextJsBundleAnalyzer from './src/utils/with-nextjs-bundle-analyzer';
 
 const CPUS_COUNT: number = cpus().length;
@@ -15,7 +15,7 @@ export default withNextJsBundleAnalyzer({
   basePath: '', // deployed application pathname
   compress: true,
   distDir: '.next',
-  env: mapProcessEnvToNextJsEnv(process.env),
+  // env: mapProcessEnvToNextJsEnv(process.env),
   generateBuildId: getVersion,
   onDemandEntries: mapNodeEnvToOnDemandEntries(process.env.NODE_ENV),
   output: mapNodeEnvToOutput(process.env.NODE_ENV),
