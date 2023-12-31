@@ -12,6 +12,7 @@ import FullStory from '../components/fullstory';
 import ReportUri from '../components/report-uri';
 import DesignSystemTheme from '../components/theme';
 import Contexts from '../features/contexts';
+import Footer from '../features/footer';
 import GoogleFonts from '../features/google-fonts';
 import Header from '../features/header';
 import GoogleAnalytics from '../features/google-analytics';
@@ -138,7 +139,7 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
           <GoogleAnalytics />
           {/* <Mixpanel /> */}
           <Header />
-          <main
+          <div
             style={{
               margin: '0 auto',
               maxWidth: '60em',
@@ -146,7 +147,8 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
             }}
           >
             {children}
-          </main>
+          </div>
+          <Footer />
         </BodyChildren>
         {/*
         <script

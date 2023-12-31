@@ -7,7 +7,14 @@ export default function Header(): ReactElement {
   const { displayFontFamily, displayFontWeight } = useTheme();
 
   return (
-    <header>
+    <header
+      style={{
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        maxWidth: '60em',
+        minWidth: 320,
+      }}
+    >
       <h1
         style={{
           fontFamily: displayFontFamily,

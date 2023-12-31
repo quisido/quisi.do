@@ -11,6 +11,12 @@ enum Weight {
 }
 
 const GOOGLE_FONTS: Record<string, GoogleFont> = {
+  Caveat: {
+    weights: [Weight.Normal],
+  },
+  'Noto Color Emoji': {
+    weights: [Weight.Normal],
+  },
   'Noto Sans': {
     weights: [Weight.Normal, Weight.Bold],
   },
@@ -29,7 +35,7 @@ export default function GoogleFonts(): ReactElement {
   params.set('display', 'swap');
   for (const entry of Object.entries(GOOGLE_FONTS)) {
     const family: string = mapGoogleFontEntryToFamily(entry);
-    params.set('family', family);
+    params.append('family', family);
   }
 
   return (

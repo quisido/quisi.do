@@ -27,7 +27,7 @@ export default function Home(): ReactElement {
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'stretch',
-          justifyContent: 'stretch',
+          justifyContent: 'flex-start',
         }}
       >
         <ul style={{ flexGrow: 1 }}>
