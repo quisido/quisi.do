@@ -1,6 +1,6 @@
-import type DatasetValues from '../types/dataset-values';
-import isDatasetValue from './is-dataset-value';
-import isObject from './is-object';
+import type DatasetValues from '../types/dataset-values.js';
+import isDatasetValue from './is-dataset-value.js';
+import isObject from './is-object.js';
 
 export default function isDatasetValues(
   value: unknown,

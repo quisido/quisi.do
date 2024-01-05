@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-type-alias */
-import type DatasetDimensionValue from './dataset-dimension-value';
+import type DatasetDimensionValue from './dataset-dimension-value.js';
 
 type Value =
   | Record<string, number | undefined>

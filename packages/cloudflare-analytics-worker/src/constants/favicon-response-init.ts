@@ -1,4 +1,4 @@
-import HEADERS_INIT from './headers-init';
+import HEADERS_INIT from './headers-init.js';
 
 const FAVICON_RESPONSE_INIT: ResponseInit = {
   status: 200,

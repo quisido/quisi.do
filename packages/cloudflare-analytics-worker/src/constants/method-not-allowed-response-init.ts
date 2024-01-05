@@ -1,4 +1,4 @@
-import HEADERS_INIT from './headers-init';
+import HEADERS_INIT from './headers-init.js';
 
 const METHOD_NOT_ALLOWED_RESPONSE_INI: ResponseInit = {
   status: 405,

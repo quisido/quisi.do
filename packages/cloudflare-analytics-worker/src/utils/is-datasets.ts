@@ -1,7 +1,7 @@
-import type DatasetValues from '../types/dataset-values';
-import type Datasets from '../types/datasets';
-import isDatasetValues from './is-dataset-values';
-import isObject from './is-object';
+import type DatasetValues from '../types/dataset-values.js';
+import type Datasets from '../types/datasets.js';
+import isDatasetValues from './is-dataset-values.js';
+import isObject from './is-object.js';
 
 const SINGLE = 1;
 

@@ -1,4 +1,4 @@
-import GraphQLObjectQuery from '../utils/graphql-object-query';
+import GraphQLObjectQuery from '../utils/graphql-object-query.js';
 
 export default new GraphQLObjectQuery({
   cost: true,

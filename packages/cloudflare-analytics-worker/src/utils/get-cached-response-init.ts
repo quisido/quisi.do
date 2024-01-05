@@ -1,4 +1,4 @@
-import mapResponseToResponseInit from './map-response-to-response-init';
+import mapResponseToResponseInit from './map-response-to-response-init.js';
 
 interface Options {
   readonly origin: string | null;

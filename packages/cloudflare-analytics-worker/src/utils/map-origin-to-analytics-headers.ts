@@ -1,4 +1,4 @@
-import mapOriginToAnalyticsHeadersInit from './map-origin-to-analytics-headers-init';
+import mapOriginToAnalyticsHeadersInit from './map-origin-to-analytics-headers-init.js';
 
 export default function mapOriginToAnalyticsHeaders(
   origin: string | null,

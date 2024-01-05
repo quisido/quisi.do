@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import QUERIES from '../queries';
-import type CfJson from '../types/cf-json';
-import type Env from '../types/env';
-import type Result from '../types/result';
-import mapResultToCost from '../utils/map-result-to-cost';
-import mapResultsToCfJson from '../utils/map-results-to-cf-json';
-import mapUnknownToString from '../utils/map-unknown-to-string';
-import QueryEngine from '../utils/query-engine';
-import sum from '../utils/sum';
-import validateResult from '../utils/validate-result';
+import QUERIES from '../queries/index.js';
+import type CfJson from '../types/cf-json.js';
+import type Env from '../types/env.js';
+import type Result from '../types/result.js';
+import mapResultToCost from '../utils/map-result-to-cost.js';
+import mapResultsToCfJson from '../utils/map-results-to-cf-json.js';
+import mapUnknownToString from '../utils/map-unknown-to-string.js';
+import QueryEngine from '../utils/query-engine.js';
+import sum from '../utils/sum.js';
+import validateResult from '../utils/validate-result.js';
 
 const NONE = 0;
 

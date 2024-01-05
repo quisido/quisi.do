@@ -1,10 +1,13 @@
-import mapApiTokenToHeaders from './map-api-token-to-headers';
-import mapDateToDatetimeGT from './map-date-to-datetime-gt';
+import mapApiTokenToHeaders from './map-api-token-to-headers.js';
+import mapDateToDatetimeGT from './map-date-to-datetime-gt.js';
 
 export default class QueryEngine {
   private readonly _accountTag: string;
+
   private readonly _datetimeGT: string;
+
   private readonly _headers: Headers;
+
   private readonly _zoneTag: string;
 
   public constructor(
@@ -19,7 +22,15 @@ export default class QueryEngine {
     this._zoneTag = zoneTag;
   }
 
-  public readonly fetch = (query: string): Promise<Response> => {
+  private get variables(): Record<string, string> {
+    return {
+      accountTag: this._accountTag,
+      datetime_gt: this._datetimeGT,
+      zoneTag: this._zoneTag,
+    };
+  }
+
+  public readonly fetch = async (query: string): Promise<Response> => {
     return fetch('https://api.cloudflare.com/client/v4/graphql', {
       body: this.mapQueryToBody(query),
       headers: this._headers,
@@ -32,12 +43,4 @@ export default class QueryEngine {
       query,
       variables: this.variables,
     });
-
-  private get variables(): Record<string, string> {
-    return {
-      accountTag: this._accountTag,
-      datetime_gt: this._datetimeGT,
-      zoneTag: this._zoneTag,
-    };
-  }
 }

@@ -1,4 +1,4 @@
-import HEADERS_INIT from './headers-init';
+import HEADERS_INIT from './headers-init.js';
 
 const OPTIONS_HEADERS_INIT: HeadersInit = {
   ...HEADERS_INIT,

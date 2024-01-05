@@ -1,42 +1,37 @@
-import type DatasetValue from '../types/dataset-value';
-import type DatasetValues from '../types/dataset-values';
-import isObject from './is-object';
+import type DatasetValue from '../types/dataset-value.js';
+import type DatasetValues from '../types/dataset-values.js';
+import isObject from './is-object.js';
 
-class Validator {
-  public static is = (
-    value: unknown,
-  ): value is DatasetValue | DatasetValues => {
-    if (typeof value === 'number') {
-      return true;
-    }
-    if (Array.isArray(value)) {
-      return value.every(Validator.isRecord);
-    }
+const isEntry = (
+  entry: readonly [string, unknown],
+): entry is [string, DatasetValue | DatasetValues] => {
+  const [key, value] = entry;
+  switch (key) {
+    case 'key':
+      return typeof value === 'number' || typeof value === 'string';
+    default:
+      // We need to hoist here so that all 3 functions can reference each other.
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      return isDatasetValue(value);
+  }
+};
 
-    return Validator.isRecord(value);
-  };
-
-  public static isEntry = (
-    entry: readonly [string, unknown],
-  ): entry is [string, DatasetValue | DatasetValues] => {
-    const [key, value] = entry;
-    switch (key) {
-      case 'key':
-        return typeof value === 'number' || typeof value === 'string';
-      default:
-        return Validator.is(value);
-    }
-  };
-
-  public static isRecord = (
-    value: unknown,
-  ): value is Record<string, DatasetValues | DatasetValue> => {
-    return isObject(value) && Object.entries(value).every(Validator.isEntry);
-  };
-}
+const isRecord = (
+  value: unknown,
+): value is Record<string, DatasetValues | DatasetValue> => {
+  return isObject(value) && Object.entries(value).every(isEntry);
+};
 
 export default function isDatasetValue(
   value: unknown,
 ): value is DatasetValue | DatasetValues {
-  return Validator.is(value);
+  if (typeof value === 'number') {
+    return true;
+  }
+
+  if (Array.isArray(value)) {
+    return value.every(isRecord);
+  }
+
+  return isRecord(value);
 }

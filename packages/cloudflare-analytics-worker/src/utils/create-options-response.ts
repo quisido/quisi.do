@@ -1,6 +1,6 @@
-import ALLOWED_ORIGINS from '../constants/allowed-origins';
-import OPTIONS_HEADERS_INIT from '../constants/options-headers-init';
-import type DataPoint from '../types/data-point';
+import ALLOWED_ORIGINS from '../constants/allowed-origins.js';
+import OPTIONS_HEADERS_INIT from '../constants/options-headers-init.js';
+import type DataPoint from '../types/data-point.js';
 
 interface Options {
   readonly onDataPoint: (point: Readonly<DataPoint>) => void;

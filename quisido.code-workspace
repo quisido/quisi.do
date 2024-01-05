@@ -21,6 +21,11 @@
     },
 
     {
+      "name": "Cloudflare Authentication worker",
+      "path": "packages/cloudflare-authn-worker"
+    },
+
+    {
       "name": "aws-rum-react",
       "path": "packages/aws-rum-react"
     },

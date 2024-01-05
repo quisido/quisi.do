@@ -1,4 +1,4 @@
-import type DataPoint from '../types/data-point';
+import type DataPoint from '../types/data-point.js';
 
 export default class FetchDataset {
   private readonly _dataset: AnalyticsEngineDataset | undefined;
@@ -7,7 +7,7 @@ export default class FetchDataset {
 
   public constructor(
     dataset: Readonly<AnalyticsEngineDataset> | undefined,
-    start: Date,
+    start: Readonly<Date>,
   ) {
     this._dataset = dataset;
     this._start = start;

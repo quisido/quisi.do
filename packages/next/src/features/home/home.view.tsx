@@ -1,23 +1,17 @@
 'use client';
 
 import { type ReactElement } from 'react';
-import Button from '../../components/button';
-import Section from '../../components/section';
-
-const PATREON_OAUTH_CLIENT_ID =
-  'J_6jrNJZNibHylSF83UVl9I4OHZYf67RAsU0s7_LnH1N5BKF-vgOyweF3KQLOKm1';
+import Button from '../../components/button.js';
+import Section from '../../components/section.js';
+import useHome from './home.hook.js';
 
 export default function Home(): ReactElement {
+  const { authenticateHref } = useHome();
+
   return (
     <Section
       actions={
-        <Button
-          feature="home"
-          href={`https://www.patreon.com/oauth2/authorize?client_id=${PATREON_OAUTH_CLIENT_ID}&redirect_uri=${encodeURIComponent(
-            'https://quisi.do/auth/',
-          )}&response_type=code`}
-          variant="primary"
-        >
+        <Button feature="home" href={authenticateHref} variant="primary">
           Authenticate
         </Button>
       }

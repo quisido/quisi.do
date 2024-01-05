@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { useButton } from '@react-aria/button';
-import type { RefObject } from 'react';
 import { type ReactElement, useRef } from 'react';
 import { type Props } from '../../../components/button';
 import useElementId from '../../../hooks/use-element-id';
@@ -24,11 +23,10 @@ export default function Button({
 
   // States
   const id: string = useElementId();
-  const ref: RefObject<HTMLButtonElement> = useRef(null);
   const { buttonProps } = useButton(
     {
       href,
-      onPress: () => {
+      onPress: (): void => {
         if (typeof onClick === 'function') {
           onClick();
         }
@@ -39,7 +37,7 @@ export default function Button({
         });
       },
     },
-    ref,
+    useRef(null),
   );
 
   return (
@@ -63,11 +61,16 @@ export default function Button({
   margin-right: ${OUTLINE_WIDTH - HOVER_OFFSET}px !important;
   margin-top: ${OUTLINE_WIDTH + HOVER_OFFSET}px !important;
 }
+
+#${id}:not(:focus-visible) {
+  outline-color: ${primaryHex};
+  outline-style: solid;
+  outline-width: ${OUTLINE_WIDTH}px;
+}
 `}</style>
       <button
         {...buttonProps}
         id={id}
-        ref={ref}
         style={{
           backgroundColor: primaryHex,
           borderColor: backgroundColor,
@@ -83,9 +86,6 @@ export default function Button({
           fontFamily: '"Noto Sans", sans-serif',
           fontSize: 16,
           fontWeight: primaryFontWeight,
-          outlineColor: primaryHex,
-          outlineStyle: 'solid',
-          outlineWidth: OUTLINE_WIDTH,
           marginBottom: OUTLINE_WIDTH - RAISED_OFFSET,
           marginLeft: OUTLINE_WIDTH + RAISED_OFFSET,
           marginRight: OUTLINE_WIDTH - RAISED_OFFSET,

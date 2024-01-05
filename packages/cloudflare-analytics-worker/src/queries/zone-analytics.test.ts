@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import ZONE_ANALYTICS_QUERY from './zone-analytics';
+import ZONE_ANALYTICS_QUERY from './zone-analytics.js';
 
 describe('Zone analytics', (): void => {
   it('should resolve to a valid GraphQL query', (): void => {

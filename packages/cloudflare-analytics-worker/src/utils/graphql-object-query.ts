@@ -1,6 +1,6 @@
-import flatten from './flatten';
-import indent from './indent';
-import isString from './is-string';
+import flatten from './flatten.js';
+import indent from './indent.js';
+import isString from './is-string.js';
 
 type Entry<T = unknown> = readonly [string, T];
 
@@ -14,7 +14,13 @@ export default class GraphQLObjectQuery {
     this._obj = obj;
   }
 
-  private mapEntryToLines = ([key, value]: Entry): readonly string[] => {
+  public toString = (): string =>
+    ['{', ...this.mapObjectToLines(this._obj), '}'].join('\n');
+
+  private readonly mapEntryToLines = ([
+    key,
+    value,
+  ]: Entry): readonly string[] => {
     // true
     if (value === true) {
       return [key];
@@ -62,7 +68,7 @@ export default class GraphQLObjectQuery {
     throw new Error(`Unexpected value type: ${typeof value}`);
   };
 
-  private mapParameterEntryToLines = (
+  private readonly mapParameterEntryToLines = (
     [key, value]: Entry,
     index: number,
     entries: readonly Entry[],
@@ -102,7 +108,7 @@ export default class GraphQLObjectQuery {
     throw new Error(`Unexpected parameter type: ${typeof value}`);
   };
 
-  private mapParametersToLines = (obj: object): readonly string[] => {
+  private readonly mapParametersToLines = (obj: object): readonly string[] => {
     const entries: readonly [string, unknown][] = Object.entries(obj);
     return entries
       .map(this.mapParameterEntryToLines)
@@ -110,14 +116,11 @@ export default class GraphQLObjectQuery {
       .map(indent);
   };
 
-  private mapObjectToLines = (obj: object): readonly string[] => {
+  private readonly mapObjectToLines = (obj: object): readonly string[] => {
     const entries: readonly [string, unknown][] = Object.entries(obj);
     return entries
       .map(this.mapEntryToLines)
       .reduce(flatten, EMPTY_ARRAY)
       .map(indent);
   };
-
-  public toString = (): string =>
-    ['{', ...this.mapObjectToLines(this._obj), '}'].join('\n');
 }

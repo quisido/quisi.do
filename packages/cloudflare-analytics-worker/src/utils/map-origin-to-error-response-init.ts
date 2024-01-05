@@ -1,4 +1,4 @@
-import mapOriginToErrorHeaders from './map-origin-to-error-headers';
+import mapOriginToErrorHeaders from './map-origin-to-error-headers.js';
 
 export default function mapOriginToErrorResponseInit(
   origin: string | null,

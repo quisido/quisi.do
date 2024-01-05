@@ -1,5 +1,5 @@
-import type Result from '../types/result';
-import isResult from './is-result';
+import type Result from '../types/result.js';
+import isResult from './is-result.js';
 
 export default function validateResult(value: unknown): Result {
   if (!isResult(value)) {

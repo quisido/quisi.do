@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-type-alias */
-import type CfJson from '../types/cf-json';
-import type DatasetDimensionValue from '../types/dataset-dimension-value';
-import type DatasetValues from '../types/dataset-values';
-import type Result from '../types/result';
-import mapRecordToEntries from './map-record-to-entries';
-import mapResultToBudget from './map-result-to-budget';
+import type CfJson from '../types/cf-json.js';
+import type DatasetDimensionValue from '../types/dataset-dimension-value.js';
+import type DatasetValues from '../types/dataset-values.js';
+import type Result from '../types/result.js';
+import mapRecordToEntries from './map-record-to-entries.js';
+import mapResultToBudget from './map-result-to-budget.js';
 
 type DatasetRecord = Record<string, Datum | undefined>;
 

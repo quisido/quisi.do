@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /// <reference types="@cloudflare/workers-types" />
-import ALLOWED_METHODS from '../constants/allowed-methods';
-import FAVICON_ICO from '../constants/favicon-ico';
-import FAVICON_RESPONSE_INIT from '../constants/favicon-response-init';
-import METHOD_NOT_ALLOWED_RESPONSE_INI from '../constants/method-not-allowed-response-init';
-import NOT_FOUND_RESPONSE_INIT from '../constants/not-found-response-init';
-import ROOT_RESPONSE_INIT from '../constants/root-response-init';
-import type Env from '../types/env';
-import createOptionsResponse from '../utils/create-options-response';
-import FetchDataset from '../utils/fetch-dataset';
-import getCachedResponseInit from '../utils/get-cached-response-init';
-import mapDateToCacheKey from '../utils/map-date-to-cache-key';
-import mapOriginToAnalyticsHeaders from '../utils/map-origin-to-analytics-headers';
-import mapOriginToErrorResponseInit from '../utils/map-origin-to-error-response-init';
-import mapUnknownToString from '../utils/map-unknown-to-string';
+import ALLOWED_METHODS from '../constants/allowed-methods.js';
+import FAVICON_ICO from '../constants/favicon-ico.js';
+import FAVICON_RESPONSE_INIT from '../constants/favicon-response-init.js';
+import METHOD_NOT_ALLOWED_RESPONSE_INI from '../constants/method-not-allowed-response-init.js';
+import NOT_FOUND_RESPONSE_INIT from '../constants/not-found-response-init.js';
+import ROOT_RESPONSE_INIT from '../constants/root-response-init.js';
+import type Env from '../types/env.js';
+import createOptionsResponse from '../utils/create-options-response.js';
+import FetchDataset from '../utils/fetch-dataset.js';
+import getCachedResponseInit from '../utils/get-cached-response-init.js';
+import mapDateToCacheKey from '../utils/map-date-to-cache-key.js';
+import mapOriginToAnalyticsHeaders from '../utils/map-origin-to-analytics-headers.js';
+import mapOriginToErrorResponseInit from '../utils/map-origin-to-error-response-init.js';
+import mapUnknownToString from '../utils/map-unknown-to-string.js';
 
 export default async function fetch(
   // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
@@ -74,9 +74,8 @@ export default async function fetch(
       return new Response(null, NOT_FOUND_RESPONSE_INIT);
     }
 
-    const cachedResponse: Response | undefined = await caches.default.match(
-      cacheKey,
-    );
+    const cachedResponse: Response | undefined =
+      await caches.default.match(cacheKey);
 
     if (typeof cachedResponse !== 'undefined') {
       const responseInit: ResponseInit = getCachedResponseInit({

@@ -21,7 +21,7 @@ export default function Header(): ReactElement {
           fontSize: '1.5em',
           fontWeight: displayFontWeight,
           lineHeight: '1.5em',
-          marginBottom: '1em',
+          marginBottom: 0,
           marginLeft: 0,
           marginRight: 0,
           marginTop: '0.67em',
@@ -31,6 +31,16 @@ export default function Header(): ReactElement {
       >
         quisi.do
       </h1>
+      <span
+        style={{
+          display: 'block',
+          fontSize: '0.75em',
+          marginBottom: '1em',
+          paddingLeft: '1.5em',
+        }}
+      >
+        charitable <abbr title="Software as a service">SaaS</abbr>
+      </span>
     </header>
   );
 }

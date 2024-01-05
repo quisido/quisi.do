@@ -1,7 +1,7 @@
-import type Datasets from '../types/datasets';
-import type Viewer from '../types/viewer';
-import isDatasets from './is-datasets';
-import isObject from './is-object';
+import type Datasets from '../types/datasets.js';
+import type Viewer from '../types/viewer.js';
+import isDatasets from './is-datasets.js';
+import isObject from './is-object.js';
 
 const SINGLE = 1;
 

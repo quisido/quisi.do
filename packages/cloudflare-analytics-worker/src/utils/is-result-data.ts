@@ -1,6 +1,6 @@
-import type ResultData from '../types/result-data';
-import isObject from './is-object';
-import isViewer from './is-viewer';
+import type ResultData from '../types/result-data.js';
+import isObject from './is-object.js';
+import isViewer from './is-viewer.js';
 
 export default function isResultData(value: unknown): value is ResultData {
   return (

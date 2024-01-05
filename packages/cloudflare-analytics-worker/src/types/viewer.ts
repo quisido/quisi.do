@@ -1,4 +1,4 @@
-import type Datasets from './datasets';
+import type Datasets from './datasets.js';
 
 export default interface Viewer {
   readonly accounts?: readonly [Datasets] | undefined;

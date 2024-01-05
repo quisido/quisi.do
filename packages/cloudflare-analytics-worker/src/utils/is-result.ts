@@ -1,6 +1,6 @@
-import type Result from '../types/result';
-import isObject from './is-object';
-import isResultData from './is-result-data';
+import type Result from '../types/result.js';
+import isObject from './is-object.js';
+import isResultData from './is-result-data.js';
 
 export default function isResult(value: unknown): value is Result {
   return (
