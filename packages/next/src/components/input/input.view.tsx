@@ -1,6 +1,6 @@
 import { type FormEvent, type ReactElement } from 'react';
-import DesignSystem from '../design-system';
-import mapAutoCompleteToString from '../../utils/map-autocomplete-to-string';
+import DesignSystem from '../design-system/index.js';
+import mapAutoCompleteToString from '../../utils/map-autocomplete-to-string.js';
 
 export interface Props {
   readonly autoComplete: Set<AutoFill> | false;

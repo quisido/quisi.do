@@ -1,1 +1,1 @@
-export { default } from './retry-action.view';
+export { default } from './retry-action.view.js';

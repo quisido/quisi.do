@@ -1,4 +1,4 @@
-import createEnumUtils from '../../../utils/create-enum-utils';
+import createEnumUtils from '../../../utils/create-enum-utils.js';
 
 enum Language {
   English = 'en',

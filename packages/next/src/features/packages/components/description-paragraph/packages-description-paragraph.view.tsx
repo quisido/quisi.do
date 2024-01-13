@@ -1,9 +1,9 @@
 import { type PropsWithChildren, type ReactElement } from 'react';
-import Span from '../../../../components/span';
-import validateString from '../../../../utils/validate-string';
+import Span from '../../../../components/span/index.js';
+import validateString from '../../../../utils/validate-string.js';
 import styles from './packages-description-paragraph.module.scss';
 
-const className: string = validateString(styles.root);
+const className: string = validateString(styles['root']);
 
 export default function PackageDescriptionParagraph({
   children,

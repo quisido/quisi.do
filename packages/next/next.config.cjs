@@ -5,7 +5,23 @@ require('@babel/register')({
   comments: false,
   extensions: ['.ts'],
   ignore: [],
-  include: ['**/*.ts'],
+  include: ['**/*.js', '**/*.ts'],
+
+  plugins: [
+    /**
+     *   `@babel/preset-typescript` does not yet support fully-qualified
+     * imports.
+     */
+    [
+      'replace-import-extension',
+      {
+        extMapping: {
+          '.js': '.ts',
+        },
+      },
+    ],
+  ],
+
   presets: [
     [
       '@babel/preset-env',
@@ -15,6 +31,7 @@ require('@babel/register')({
         },
       },
     ],
+
     '@babel/preset-typescript',
   ],
 });

@@ -1,5 +1,5 @@
 import { type PropsWithChildren } from 'react';
-import isRecord from '../../../utils/is-record';
+import isRecord from '../../../utils/is-record.js';
 
 export default function isPropsWithChildren(
   value: unknown,

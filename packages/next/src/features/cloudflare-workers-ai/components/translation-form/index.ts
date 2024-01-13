@@ -1,1 +1,1 @@
-export { default } from './translation-form.view';
+export { default } from './translation-form.view.js';

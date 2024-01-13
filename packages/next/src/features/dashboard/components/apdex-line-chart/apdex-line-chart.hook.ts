@@ -1,9 +1,9 @@
 import { type MutableRefObject, useMemo } from 'react';
-import useElementWidth from '../../../../hooks/use-element-width';
-import sortNumbers from '../../../../utils/sort-numbers';
-import useTimestampFormatter from '../../hooks/use-timestamp-formatter';
-import type TimeSeriesDatum from '../../types/time-series-datum';
-import mapStringToInt from '../../utils/map-string-to-int';
+import useElementWidth from '../../../../hooks/use-element-width.js';
+import sortNumbers from '../../../../utils/sort-numbers.js';
+import useTimestampFormatter from '../../hooks/use-timestamp-formatter.js';
+import type TimeSeriesDatum from '../../types/time-series-datum.js';
+import mapStringToInt from '../../utils/map-string-to-int.js';
 
 interface Props {
   readonly frustrated: Record<string, number | undefined>;

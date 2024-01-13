@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import NavigationText from '../../constants/navigation-text';
+import NavigationText from '../../constants/navigation-text.js';
 
 /**
  * Since MUI renders navigation text with React nodes, we map `NavigationText`

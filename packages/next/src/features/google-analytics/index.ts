@@ -1,1 +1,1 @@
-export { default } from './google-analytics.view';
+export { default } from './google-analytics.view.js';

@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
-import LoadingIcon from '../../../../components/loading-icon';
-import type Status from '../../types/api-token-status';
+import LoadingIcon from '../../../../components/loading-icon/index.js';
+import type Status from '../../types/api-token-status.js';
 
 interface Props {
   readonly children: Status;

@@ -1,10 +1,10 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
-import useEffectEvent from '../../../../hooks/use-effect-event';
-import type SelectOption from '../../../../types/select-option';
-import { isLanguage } from '../../constants/language';
-import type Language from '../../constants/language';
-import useLanguages from '../../hooks/use-languages';
-import { type MetaM2m10012b } from '../../types/inputs';
+import useEffectEvent from '../../../../hooks/use-effect-event.js';
+import type SelectOption from '../../../../types/select-option.js';
+import { isLanguage } from '../../constants/language.js';
+import type Language from '../../constants/language.js';
+import useLanguages from '../../hooks/use-languages.js';
+import { type MetaM2m10012b } from '../../types/inputs.js';
 
 interface Props {
   readonly inputs: MetaM2m10012b;

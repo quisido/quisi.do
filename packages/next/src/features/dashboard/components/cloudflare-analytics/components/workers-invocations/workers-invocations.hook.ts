@@ -1,10 +1,10 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
-import useTableSort from '../../../../../../hooks/use-table-sort';
-import type Invocations from '../../../../../../types/cloudflare-workers-invocations';
-import round from '../../../../../../utils/round';
-import type Analytic from '../../types/workers-invocations-analytic';
-import mapSampleIntervalToRate from '../../map-sample-interval-to-rate';
+import useTableSort from '../../../../../../hooks/use-table-sort.js';
+import type Invocations from '../../../../../../types/cloudflare-workers-invocations.js';
+import round from '../../../../../../utils/round.js';
+import type Analytic from '../../types/workers-invocations-analytic.js';
+import mapSampleIntervalToRate from '../../map-sample-interval-to-rate.js';
 
 interface State {
   readonly handleSort: (columnIndex: number, ascending: boolean) => void;

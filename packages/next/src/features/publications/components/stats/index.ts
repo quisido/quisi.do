@@ -1,1 +1,1 @@
-export { default } from './stats.view';
+export { default } from './stats.view.js';

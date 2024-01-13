@@ -1,5 +1,5 @@
-import mapDecimalToHexadecimal from './map-decimal-to-hexadecimal';
-import mapRgbToHex from './map-rgb-to-hex';
+import mapDecimalToHexadecimal from './map-decimal-to-hexadecimal.js';
+import mapRgbToHex from './map-rgb-to-hex.js';
 
 type RGBA = readonly [number, number, number, number];
 type Row = readonly RGBA[];

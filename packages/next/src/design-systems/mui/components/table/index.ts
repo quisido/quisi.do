@@ -1,1 +1,1 @@
-export { default } from './table.view';
+export { default } from './table.view.js';

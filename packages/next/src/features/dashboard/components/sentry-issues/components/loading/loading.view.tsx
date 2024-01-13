@@ -1,7 +1,7 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import LoadingIcon from '../../../../../../components/loading-icon';
-import Section from '../../../../../../components/section';
+import LoadingIcon from '../../../../../../components/loading-icon/index.js';
+import Section from '../../../../../../components/section.js';
 
 export default function SentryIssuesLoading(): ReactElement {
   return (

@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import Button from './button';
+import Button from './button.js';
 
 describe('Button', (): void => {
   it('should have a matching background and outline color', (): void => {

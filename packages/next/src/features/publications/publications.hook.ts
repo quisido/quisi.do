@@ -2,15 +2,15 @@
 
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import useAsyncState from '../../modules/use-async-state';
-import type DevArticle from '../../types/dev-article';
-import type MediumArticle from '../../types/medium-article';
-import Sort from './constants/publications-sort';
-import useItems from './hooks/use-content-items';
-import type Publication from './types/publication';
-import filterByPublicationsSort from './utils/filter-by-publications-sort';
-import filterItemsByMinimumViews from './utils/filter-publications-items-by-minimum-views';
-import mapSortToFunction from './utils/map-publications-sort-to-function';
+import useAsyncState from '../../modules/use-async-state.js';
+import type DevArticle from '../../types/dev-article.js';
+import type MediumArticle from '../../types/medium-article.js';
+import Sort from './constants/publications-sort.js';
+import useItems from './hooks/use-content-items.js';
+import type Publication from './types/publication.js';
+import filterByPublicationsSort from './utils/filter-by-publications-sort.js';
+import filterItemsByMinimumViews from './utils/filter-publications-items-by-minimum-views.js';
+import mapSortToFunction from './utils/map-publications-sort-to-function.js';
 
 interface State {
   readonly handleMediumApiBannerDismiss: VoidFunction;

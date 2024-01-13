@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import type GoogleAnalyticsWindow from '../types/google-analytics-window';
-import gtag from '../utils/gtag';
+import type GoogleAnalyticsWindow from '../types/google-analytics-window.js';
+import gtag from '../utils/gtag.js';
 
 export default function useGTag(): void {
   useEffect((): VoidFunction | undefined => {

@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
-import Div from '../../../../components/div';
-import Span from '../../../../components/span';
-import type Quote from '../../types/quote';
+import Div from '../../../../components/div/index.js';
+import Span from '../../../../components/span/index.js';
+import type Quote from '../../types/quote.js';
 
 export default function CardHeader({
   author,

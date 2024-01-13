@@ -1,4 +1,4 @@
-import mapPackageNameToScopeLength from '../../utils/map-package-name-to-scope-length';
+import mapPackageNameToScopeLength from '../../utils/map-package-name-to-scope-length.js';
 
 interface Props {
   readonly filter: string;

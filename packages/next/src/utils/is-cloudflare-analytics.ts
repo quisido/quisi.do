@@ -1,6 +1,6 @@
-import type CloudflareAnalytics from '../types/cloudflare-analytics';
-import type CloudflareAnalyticsDatasets from '../types/cloudflare-analytics-datasets';
-import isRecord from './is-record';
+import type CloudflareAnalytics from '../types/cloudflare-analytics.js';
+import type CloudflareAnalyticsDatasets from '../types/cloudflare-analytics-datasets.js';
+import isRecord from './is-record.js';
 
 const hasNumericKeys = <K extends string>(
   record: Record<string, unknown>,

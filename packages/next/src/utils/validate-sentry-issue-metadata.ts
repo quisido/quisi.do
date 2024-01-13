@@ -1,7 +1,7 @@
-import { type Metadata } from '../types/sentry-issue';
-import validateObject from './validate-object';
-import validateOptional from './validate-optional';
-import validateString from './validate-string';
+import { type Metadata } from '../types/sentry-issue.js';
+import validateObject from './validate-object.js';
+import validateOptional from './validate-optional.js';
+import validateString from './validate-string.js';
 
 export default function validateSentryIssueMetadata(
   metadata: unknown,

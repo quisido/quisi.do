@@ -2,10 +2,10 @@
 'use client';
 
 import type { PropsWithChildren, ReactElement } from 'react';
-import ThemeContext from '../contexts/theme';
+import ThemeContext from '../contexts/theme.js';
 
 // import darkVisualStudio from '../themes/dark-visual-studio.json';
-// import flattenVSCodeColorTheme from '../utils/flatten-vscode-color-theme';
+// import flattenVSCodeColorTheme from '../utils/flatten-vscode-color-theme.js';
 // const flatDarkVisualStudio = flattenVSCodeColorTheme(darkVisualStudio);
 // const mapVSCodeColorThemeToTheme = theme => ({
 //   backgroundColor: flatDarkVisualStudio['editor.background'],

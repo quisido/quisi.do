@@ -1,5 +1,5 @@
 import { type PropsWithChildren, type ReactElement } from 'react';
-import Span from '../../../span';
+import Span from '../../../span/index.js';
 
 export default function MuiTableSubheader({
   children,

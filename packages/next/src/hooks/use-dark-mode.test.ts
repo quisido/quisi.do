@@ -1,5 +1,5 @@
-import renderHookError from '../test/utils/render-hook-error';
-import useDarkMode from './use-dark-mode';
+import renderHookError from '../test/utils/render-hook-error.js';
+import useDarkMode from './use-dark-mode.js';
 
 describe('useDarkMode', (): void => {
   it('should throw an error if the context is not provided', (): void => {

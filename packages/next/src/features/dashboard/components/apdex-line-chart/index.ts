@@ -1,1 +1,1 @@
-export { default } from './apdex-line-chart.view';
+export { default } from './apdex-line-chart.view.js';

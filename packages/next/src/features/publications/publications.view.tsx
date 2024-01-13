@@ -2,15 +2,15 @@
 
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Div from '../..//components/div';
-import Banner from '../../components/banner';
-import Cards from '../../components/cards';
-import NumberFormat from '../../components/number-format';
-import CardContent from './components/card-content';
-import CardHeader from './components/card-header';
-import Header from './components/header';
-import MINIMUM_VIEWS from './constants/minimum-publications-views';
-import usePublications from './publications.hook';
+import Div from '../..//components/div/index.js';
+import Banner from '../../components/banner.js';
+import Cards from '../../components/cards.js';
+import NumberFormat from '../../components/number-format/index.js';
+import CardContent from './components/card-content/index.js';
+import CardHeader from './components/card-header/index.js';
+import Header from './components/header/index.js';
+import MINIMUM_VIEWS from './constants/minimum-publications-views.js';
+import usePublications from './publications.hook.js';
 
 export default function Publications(): ReactElement {
   const {

@@ -1,11 +1,11 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { type ReactElement, useMemo } from 'react';
-import type TableColumn from '../../../types/table-column';
-import PackageName from '../components/name-cell';
-import PACKAGE_NAME_COLUMN from '../constants/package-name-column';
-import type Item from '../types/packages-item';
-import mapHeaderToDirectDownloadsColumn from '../utils/map-header-to-direct-downloads-column';
-import mapHeaderToTotalDownloadsColumn from '../utils/map-header-to-total-downloads-column';
+import type TableColumn from '../../../types/table-column.js';
+import PackageName from '../components/name-cell.js';
+import PACKAGE_NAME_COLUMN from '../constants/package-name-column.js';
+import type Item from '../types/packages-item.js';
+import mapHeaderToDirectDownloadsColumn from '../utils/map-header-to-direct-downloads-column.js';
+import mapHeaderToTotalDownloadsColumn from '../utils/map-header-to-total-downloads-column.js';
 
 export default function usePackagesContentColumns(
   filter: string,

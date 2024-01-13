@@ -2,10 +2,10 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/select';
-import mapComponentToPropMapper from '../../../../utils/map-component-to-prop-mapper';
-import MenuItem from './components/menu-item';
-import useSelect from './select.hook';
+import { type Props } from '../../../../components/select/index.js';
+import mapComponentToPropMapper from '../../../../utils/map-component-to-prop-mapper.js';
+import MenuItem from './components/menu-item/index.js';
+import useSelect from './select.hook.js';
 
 /**
  * The `Select` component should not have to have a `native` prop, but the

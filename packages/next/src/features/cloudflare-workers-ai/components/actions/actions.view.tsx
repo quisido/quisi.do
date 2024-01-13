@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Button from '../../../../components/button';
+import Button from '../../../../components/button.js';
 
 interface Props {
   readonly onRunClick: VoidFunction;

@@ -1,5 +1,5 @@
 import { type Attributes, type ComponentType, useMemo } from 'react';
-import { type Props as CardProps } from './components/card';
+import { type Props as CardProps } from './components/card.js';
 
 interface Props<Item extends object> {
   readonly CardContent: ComponentType<Item>;

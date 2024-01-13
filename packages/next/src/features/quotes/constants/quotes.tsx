@@ -1,17 +1,17 @@
-import avery from '../images/avery-brown.jpg';
-import ben from '../images/benjamin-tsai.png';
-import carson from '../images/carson-stack.jpg';
-import ellis from '../images/ellis-gregory.jpg';
-import juneHo from '../images/june-ho-park.png';
-import kelsey from '../images/kelsey-lavigne.jpg';
-import logan from '../images/logan-mclain.jpg';
-import malakai from '../images/malakai-whitston.jpg';
-import mihir from '../images/mihir-patel.jpg';
-import mustafa from '../images/mustafa-torun.jpg';
-import qian from '../images/qian-zhang.png';
-import rongdi from '../images/rongdi-lin.jpg';
-import xinhe from '../images/xinhe-gao.png';
-import type Quote from '../types/quote';
+import avery from '../images/avery-brown.jpg.js';
+import ben from '../images/benjamin-tsai.png.js';
+import carson from '../images/carson-stack.jpg.js';
+import ellis from '../images/ellis-gregory.jpg.js';
+import juneHo from '../images/june-ho-park.png.js';
+import kelsey from '../images/kelsey-lavigne.jpg.js';
+import logan from '../images/logan-mclain.jpg.js';
+import malakai from '../images/malakai-whitston.jpg.js';
+import mihir from '../images/mihir-patel.jpg.js';
+import mustafa from '../images/mustafa-torun.jpg.js';
+import qian from '../images/qian-zhang.png.js';
+import rongdi from '../images/rongdi-lin.jpg.js';
+import xinhe from '../images/xinhe-gao.png.js';
+import type Quote from '../types/quote.js';
 
 const QUOTES: readonly Quote[] = [
   // Coalition, Inc.

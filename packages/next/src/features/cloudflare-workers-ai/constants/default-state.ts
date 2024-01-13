@@ -1,6 +1,6 @@
-import type ModelState from '../types/model-state';
-import Language from './language';
-import Model from './model';
+import type ModelState from '../types/model-state.js';
+import Language from './language.js';
+import Model from './model.js';
 
 export default {
   model: Model.Translation,

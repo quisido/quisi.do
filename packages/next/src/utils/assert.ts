@@ -1,4 +1,4 @@
-import EMPTY_ARRAY from '../constants/empty-array';
+import EMPTY_ARRAY from '../constants/empty-array.js';
 
 const NONE = 0;
 

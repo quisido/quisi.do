@@ -1,8 +1,7 @@
 import { type ReactElement } from 'react';
-import CloudflareWorkersAi, {
-  type ModelState,
-} from '../../../features/cloudflare-workers-ai';
+import CloudflareWorkersAi from '../../../features/cloudflare-workers-ai';
 
+/*
 const ACCOUNT_IDENTIFIER = 'da0f1e5d73beae3d7bbc796d448766ab';
 
 const handleFetch = async (
@@ -24,9 +23,10 @@ const handleFetch = async (
 
   return response.json();
 };
+*/
 
-export { default as generateStaticParams } from '../../../features/generate-locale-static-params';
+export { default as generateStaticParams } from '../../../features/generate-locale-static-params.js';
 
 export default function CloudflareWorkersAiPage(): ReactElement {
-  return <CloudflareWorkersAi onFetch={handleFetch} />;
+  return <CloudflareWorkersAi /*onFetch={handleFetch}*/ />;
 }

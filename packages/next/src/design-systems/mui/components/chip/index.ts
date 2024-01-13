@@ -1,1 +1,1 @@
-export { default } from './chip.view';
+export { default } from './chip.view.js';

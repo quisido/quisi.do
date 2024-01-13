@@ -1,5 +1,5 @@
 import { type ComponentType, type ReactElement } from 'react';
-import type Optional from '../types/optional';
+import type Optional from '../types/optional.js';
 
 export default function withRequiredProps<
   Props extends object,

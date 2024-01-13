@@ -1,11 +1,11 @@
 import I18n from 'lazy-i18n';
 import NumberFormat from 'number-format-react';
 import { type ReactElement } from 'react';
-import Chip from '../../../../components/chip';
-import Link from '../../../../components/link';
-// import Quantity from '../../../../components/quantity';
-import validateString from '../../../../utils/validate-string';
-import BannerImage from '../../components/banner-image';
+import Chip from '../../../../components/chip/index.js';
+import Link from '../../../../components/link/index.js';
+// import Quantity from '../../../../components/quantity.js';
+import validateString from '../../../../utils/validate-string.js';
+import BannerImage from '../../components/banner-image/index.js';
 import styles from './banner.module.scss';
 
 interface Props {
@@ -18,14 +18,14 @@ interface Props {
   readonly views: number;
 }
 
-const bannerHeightClassName: string = validateString(styles.bannerHeight);
-const bannerWidthClassName: string = validateString(styles.bannerWidth);
+const bannerHeightClassName: string = validateString(styles['bannerHeight']);
+const bannerWidthClassName: string = validateString(styles['bannerWidth']);
 // const dateTimeClassName: string = validateString(styles.dateTime);
-const linkClassName: string = validateString(styles.link);
+const linkClassName: string = validateString(styles['link']);
 // const MONTH_OFFSET = 1;
-const reactionsClassName: string = validateString(styles.reactions);
+const reactionsClassName: string = validateString(styles['reactions']);
 // const readingTimeClassName: string = validateString(styles.readingTime);
-const viewsClassName: string = validateString(styles.views);
+const viewsClassName: string = validateString(styles['views']);
 
 export default function PublicationBanner({
   // dateTime,

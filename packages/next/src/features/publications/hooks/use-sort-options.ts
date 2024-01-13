@@ -1,7 +1,7 @@
-import type SelectOption from '../../../types/select-option';
+import type SelectOption from '../../../types/select-option.js';
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
-import Sort from '../constants/publications-sort';
+import Sort from '../constants/publications-sort.js';
 
 export default function usePublicationsSortOptions(): readonly SelectOption[] {
   const translate: TranslateFunction = useTranslate();

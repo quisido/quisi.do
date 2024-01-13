@@ -1,9 +1,0 @@
-analytics_engine_datasets = [{ binding = "ERRORS" }, { binding = "FETCH" }]
-compatibility_date = "2023-02-06"
-main = "src/index.ts"
-name = "authentication"
-tsconfig = "./tsconfig.json"
-workers_dev = true
-
-[placement]
-mode = "smart"

@@ -1,1 +1,1 @@
-export { default } from './milliseconds.view';
+export { default } from './milliseconds.view.js';

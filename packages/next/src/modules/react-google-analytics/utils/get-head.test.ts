@@ -1,4 +1,4 @@
-import getHead from './get-head';
+import getHead from './get-head.js';
 
 const FIRST = 0;
 const TEST_HEAD: HTMLHeadElement = document.createElement('head');

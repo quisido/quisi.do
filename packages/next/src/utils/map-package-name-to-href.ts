@@ -1,4 +1,4 @@
-import mapPackageNameToRepositoryName from '../utils/map-package-name-to-repository-name';
+import mapPackageNameToRepositoryName from '../utils/map-package-name-to-repository-name.js';
 
 const MONOREPO_DEPENDENCIES = new Set([
   'aws-rum-react',

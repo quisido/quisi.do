@@ -1,4 +1,4 @@
-import getVersion from '../utils/get-version';
+import getVersion from '../utils/get-version.js';
 
 const VERSION: string = getVersion();
 

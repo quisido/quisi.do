@@ -1,1 +1,1 @@
-export { default } from './notifications-provider.view';
+export { default } from './notifications-provider.view.js';

@@ -1,8 +1,8 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
-import Locale from '../../../../constants/locale';
-import { useLocale } from '../../../../contexts/locale';
-import useEffectEvent from '../../../../hooks/use-effect-event';
-import isLocale from '../../../../utils/is-locale';
+import Locale from '../../../../constants/locale.js';
+import { useLocale } from '../../../../contexts/locale.js';
+import useEffectEvent from '../../../../hooks/use-effect-event.js';
+import isLocale from '../../../../utils/is-locale.js';
 
 interface State {
   readonly label: string | undefined;

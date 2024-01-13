@@ -1,6 +1,6 @@
 import { type ReactElement, type ReactNode } from 'react';
-import type SelectOption from '../../types/select-option';
-import DesignSystem from '../design-system';
+import type SelectOption from '../../types/select-option.js';
+import DesignSystem from '../design-system/index.js';
 
 export interface Props {
   readonly disabled?: boolean | undefined;

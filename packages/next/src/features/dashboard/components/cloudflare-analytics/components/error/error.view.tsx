@@ -1,7 +1,7 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Section from '../../../../../../components/section';
-import Span from '../../../../../../components/span';
+import Section from '../../../../../../components/section.js';
+import Span from '../../../../../../components/span/index.js';
 
 interface Props {
   readonly children: string;

@@ -1,7 +1,8 @@
-import Alert, { type AlertProps } from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/banner';
-import useBanner from './banner.hook';
+import { type Props } from '../../../../components/banner.js';
+import useBanner from './banner.hook.js';
+import optional from '../../../../utils/optional.js';
 
 export default function MuiBanner({
   children,
@@ -9,16 +10,13 @@ export default function MuiBanner({
 }: Props): ReactElement {
   const { closeText } = useBanner();
 
-  const optionalProps: Pick<AlertProps, 'closeText' | 'onClose'> = {};
-  if (typeof closeText === 'string') {
-    optionalProps.closeText = closeText;
-  }
-  if (typeof onDismiss === 'function') {
-    optionalProps.onClose = onDismiss;
-  }
-
   return (
-    <Alert color="info" severity="info" {...optionalProps}>
+    <Alert
+      {...optional('closeText', closeText)}
+      color="info"
+      {...optional('onClose', onDismiss)}
+      severity="info"
+    >
       {children}
     </Alert>
   );

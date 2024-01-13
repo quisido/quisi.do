@@ -1,8 +1,8 @@
 'use client';
 
 import { type ReactElement, Suspense } from 'react';
-import useDesignSystem from './design-system.hook';
-import type Props from './types/props';
+import useDesignSystem from './design-system.hook.js';
+import type Props from './types/props.js';
 
 export default function DesignSystem<Card extends object, Row extends object>(
   props: Readonly<Props<Card, Row>>,

@@ -1,1 +1,1 @@
-export { default } from './banner.view';
+export { default } from './banner.view.js';

@@ -1,5 +1,5 @@
-import type RumPerformanceEvents from './cloudflare-rum-performance-events';
-import type WorkersInvocations from './cloudflare-workers-invocations';
+import type RumPerformanceEvents from './cloudflare-rum-performance-events.js';
+import type WorkersInvocations from './cloudflare-workers-invocations.js';
 
 type WithKey<K extends number | string, T> = HasKey<K> & T;
 

@@ -1,1 +1,1 @@
-export { default } from './apdex-pie-chart.view';
+export { default } from './apdex-pie-chart.view.js';

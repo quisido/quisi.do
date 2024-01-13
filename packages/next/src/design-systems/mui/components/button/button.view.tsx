@@ -1,7 +1,8 @@
-import Button, { type ButtonProps } from '@mui/material/Button';
+import Button from '@mui/material/Button';
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/button';
-import useButton from './button.hook';
+import { type Props } from '../../../../components/button.js';
+import useButton from './button.hook.js';
+import optional from '../../../../utils/optional.js';
 
 export default function MuiButton({
   children,
@@ -18,13 +19,12 @@ export default function MuiButton({
     variant: variantProp,
   });
 
-  const optionalProps: Pick<ButtonProps, 'href'> = {};
-  if (typeof href === 'string') {
-    optionalProps.href = href;
-  }
-
   return (
-    <Button onClick={handleClick} variant={variantState} {...optionalProps}>
+    <Button
+      {...optional('href', href)}
+      onClick={handleClick}
+      variant={variantState}
+    >
       {children}
     </Button>
   );

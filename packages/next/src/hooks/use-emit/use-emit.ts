@@ -3,10 +3,10 @@ import { useRecordEvent } from 'aws-rum-react';
 import { track } from 'mixpanel-browser';
 import { useCallback } from 'react';
 import { useSentrySdk } from 'sentry-react';
-import EMPTY_OBJECT from '../../modules/react-google-analytics/constants/empty-object';
-import usePathname from '../use-pathname';
-import useHostname from '../use-hostname';
-import createSentryEvent from './utils/create-sentry-event';
+import EMPTY_OBJECT from '../../modules/react-google-analytics/constants/empty-object.js';
+import usePathname from '../use-pathname.js';
+import useHostname from '../use-hostname.js';
+import createSentryEvent from './utils/create-sentry-event.js';
 
 type Dimensions = Record<
   number | string,

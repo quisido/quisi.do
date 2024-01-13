@@ -1,7 +1,7 @@
 import { type Event } from '@sentry/types';
-import SENTRY_EVENT from '../constants/sentry-event';
-import mapDimensionsToFingerprints from './map-dimensions-to-fingerprints';
-import mapNumberToSentryEventId from './map-number-to-sentry-event-id';
+import SENTRY_EVENT from '../constants/sentry-event.js';
+import mapDimensionsToFingerprints from './map-dimensions-to-fingerprints.js';
+import mapNumberToSentryEventId from './map-number-to-sentry-event-id.js';
 
 interface Options {
   readonly dimensions: Record<string, unknown>;

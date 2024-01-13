@@ -1,6 +1,6 @@
 import { type Attributes } from 'react';
-import type Column from '../../../../../types/table-column';
-import type HeadCellProps from '../types/head-cell-props';
+import type Column from '../../../../../types/table-column.js';
+import type HeadCellProps from '../types/head-cell-props.js';
 
 const FIRST_INDEX = 0;
 

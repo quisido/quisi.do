@@ -1,5 +1,5 @@
-import Model from '../constants/model';
-import type State from '../types/state';
+import Model from '../constants/model.js';
+import type State from '../types/state.js';
 
 export default function isRunnable(state: State): boolean {
   switch (state.model) {

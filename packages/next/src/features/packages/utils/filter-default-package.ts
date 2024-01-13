@@ -1,4 +1,4 @@
-import type Item from '../types/packages-item';
+import type Item from '../types/packages-item.js';
 
 export default function filterDefaultPackage({
   packageName,

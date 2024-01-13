@@ -1,9 +1,9 @@
 import { type MouseEvent, type ReactElement, useEffect } from 'react';
-import { type Props } from '../../../components/link';
-import useEmit from '../../../hooks/use-emit';
-import useTheme from '../../../hooks/use-theme';
+import { type Props } from '../../../components/link/index.js';
+import useEmit from '../../../hooks/use-emit/index.js';
+import useTheme from '../../../hooks/use-theme.js';
 import { useRouter } from 'next/navigation';
-import isHrefBlank from '../../../utils/is-href-blank';
+import isHrefBlank from '../../../utils/is-href-blank.js';
 import innerText from 'react-innertext';
 
 export default function Link({

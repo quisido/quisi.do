@@ -1,7 +1,7 @@
-import EMPTY_ARRAY from '../constants/empty-array';
-import { type default as SentryProjectEvent } from '../types/sentry-project-event';
-import validateArray from './validate-array';
-import validateEvent from './validate-sentry-project-event';
+import EMPTY_ARRAY from '../constants/empty-array.js';
+import { type default as SentryProjectEvent } from '../types/sentry-project-event.js';
+import validateArray from './validate-array.js';
+import validateEvent from './validate-sentry-project-event.js';
 
 export default function validateSentryProjectEvents(
   value: unknown,

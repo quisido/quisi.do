@@ -1,11 +1,11 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Table from '../../../../../../components/table';
-import type RumPerformanceEvents from '../../../../../../types/cloudflare-rum-performance-events';
-import createIndexArray from '../../../../../../utils/create-index-array';
-import type Analytic from '../../types/web-analytic';
-import COLUMNS from '../../constants/web-analytics-columns';
-import useWebAnalytics from './web-analytics.hook';
+import Table from '../../../../../../components/table.js';
+import type RumPerformanceEvents from '../../../../../../types/cloudflare-rum-performance-events.js';
+import createIndexArray from '../../../../../../utils/create-index-array.js';
+import type Analytic from '../../types/web-analytic.js';
+import COLUMNS from '../../constants/web-analytics-columns.js';
+import useWebAnalytics from './web-analytics.hook.js';
 
 interface Props {
   readonly children: RumPerformanceEvents;

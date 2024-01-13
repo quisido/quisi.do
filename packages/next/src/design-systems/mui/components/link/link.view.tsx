@@ -1,7 +1,8 @@
 import Link, { type LinkProps } from '@mui/material/Link';
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/link';
-import useLink from './link.hook';
+import { type Props } from '../../../../components/link/index.js';
+import useLink from './link.hook.js';
+import optional from '../../../../utils/optional.js';
 
 export default function MuiLink({
   children,
@@ -17,20 +18,15 @@ export default function MuiLink({
     title,
   });
 
-  const optionalProps: Pick<LinkProps, 'className'> = {};
-  if (typeof className === 'string') {
-    optionalProps.className = className;
-  }
-
   return (
     <Link
       aria-label={label}
+      {...optional<LinkProps>('className', className)}
       color="inherit"
       href={href}
       onClick={handleClick}
       rel={rel}
       title={title}
-      {...optionalProps}
     >
       {children}
     </Link>

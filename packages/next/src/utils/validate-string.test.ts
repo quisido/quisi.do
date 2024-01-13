@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import validateString from './validate-string';
+import validateString from './validate-string.js';
 
 describe('validateString', (): void => {
   it('should throw an error for non-strings', (): void => {

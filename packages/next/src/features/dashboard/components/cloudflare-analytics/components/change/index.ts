@@ -1,1 +1,1 @@
-export { default } from './change.view';
+export { default } from './change.view.js';

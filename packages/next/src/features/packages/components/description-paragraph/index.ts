@@ -1,1 +1,1 @@
-export { default } from './packages-description-paragraph.view';
+export { default } from './packages-description-paragraph.view.js';

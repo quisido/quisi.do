@@ -1,8 +1,8 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
-import useModelOptions from '../../hooks/use-model-options';
-import type SelectOption from '../../../../types/select-option';
-import useEffectEvent from '../../../../hooks/use-effect-event';
-import Model, { isModel } from '../../constants/model';
+import useModelOptions from '../../hooks/use-model-options.js';
+import type SelectOption from '../../../../types/select-option.js';
+import useEffectEvent from '../../../../hooks/use-effect-event.js';
+import Model, { isModel } from '../../constants/model.js';
 
 interface Props {
   readonly onModelChange: (model: Model) => void;

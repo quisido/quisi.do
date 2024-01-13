@@ -1,7 +1,7 @@
-import EMPTY_ARRAY from '../constants/empty-array';
-import assert from './assert';
-import isRecord from './is-record';
-import mapObjectToKeys from './map-object-to-keys';
+import EMPTY_ARRAY from '../constants/empty-array.js';
+import assert from './assert.js';
+import isRecord from './is-record.js';
+import mapObjectToKeys from './map-object-to-keys.js';
 
 type Validator<T> = {
   [K in keyof T]: (value: unknown, context: readonly string[]) => T[K];

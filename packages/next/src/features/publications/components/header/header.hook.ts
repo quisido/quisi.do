@@ -1,5 +1,5 @@
-import type SelectOption from '../../../../types/select-option';
-import useSortOptions from '../../hooks/use-sort-options';
+import type SelectOption from '../../../../types/select-option.js';
+import useSortOptions from '../../hooks/use-sort-options.js';
 
 interface State {
   readonly sortOptions: readonly SelectOption[];

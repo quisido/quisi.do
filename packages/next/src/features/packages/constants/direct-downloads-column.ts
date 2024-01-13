@@ -1,7 +1,7 @@
-import type TableColumn from '../../../types/table-column';
-import DirectDownloads from '../components/direct-downloads-cell';
-import type Item from '../types/packages-item';
-import sortByDirectDownloads from '../utils/sort-by-direct-downloads';
+import type TableColumn from '../../../types/table-column.js';
+import DirectDownloads from '../components/direct-downloads-cell.js';
+import type Item from '../types/packages-item.js';
+import sortByDirectDownloads from '../utils/sort-by-direct-downloads.js';
 
 const DIRECT_DOWNLOADS_COLUMN: Omit<TableColumn<Item>, 'header'> = {
   CellContent: DirectDownloads,

@@ -1,10 +1,10 @@
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/header';
-import validateString from '../../../../utils/validate-string';
-import Div from '../div';
+import { type Props } from '../../../../components/header/index.js';
+import validateString from '../../../../utils/validate-string.js';
+import Div from '../div/index.js';
 import styles from './header.module.scss';
 
-const headingClassName: string = validateString(styles.heading);
+const headingClassName: string = validateString(styles['heading']);
 
 export default function MuiHeader({ actions, children }: Props): ReactElement {
   return (

@@ -2,15 +2,15 @@
 
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useCallback, useDeferredValue, useMemo, useState } from 'react';
-import useNpmDownloads from '../../hooks/use-npm-downloads';
-import type TableColumn from '../../types/table-column';
-import type TableRowsPerPageOption from '../../types/table-rows-per-page-option';
-import Paginator from '../../utils/paginator';
-import useColumns from './hooks/use-content-columns';
-import type Item from './types/packages-item';
-import filterDefaultPackage from './utils/filter-default-package';
-import filterPackagesByMinimumDownloads from './utils/filter-packages-by-minimum-downloads';
-import mapNpmDownloadsEntryToItem from './utils/map-npm-downloads-entry-to-item';
+import useNpmDownloads from '../../hooks/use-npm-downloads.js';
+import type TableColumn from '../../types/table-column.js';
+import type TableRowsPerPageOption from '../../types/table-rows-per-page-option.js';
+import Paginator from '../../utils/paginator.js';
+import useColumns from './hooks/use-content-columns.js';
+import type Item from './types/packages-item.js';
+import filterDefaultPackage from './utils/filter-default-package.js';
+import filterPackagesByMinimumDownloads from './utils/filter-packages-by-minimum-downloads.js';
+import mapNpmDownloadsEntryToItem from './utils/map-npm-downloads-entry-to-item.js';
 
 interface State {
   readonly columns: readonly TableColumn<Item>[];

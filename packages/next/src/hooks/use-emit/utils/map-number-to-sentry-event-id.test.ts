@@ -1,4 +1,4 @@
-import mapNumberToSentryEventId from './map-number-to-sentry-event-id';
+import mapNumberToSentryEventId from './map-number-to-sentry-event-id.js';
 
 const EXPECTED_LENGTH = 32;
 const HEXADECIMAL = /^[0-9a-f]+$/;

@@ -1,1 +1,1 @@
-export { default } from './card-header.view';
+export { default } from './card-header.view.js';

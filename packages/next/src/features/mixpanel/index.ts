@@ -1,1 +1,1 @@
-export { default } from './mixpanel.view';
+export { default } from './mixpanel.view.js';

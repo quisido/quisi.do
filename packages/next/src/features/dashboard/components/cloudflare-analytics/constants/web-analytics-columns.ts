@@ -1,8 +1,8 @@
-import type TableColumn from '../../../../../types/table-column';
-import mapKeyToNumberSort from '../../../../../utils/map-key-to-number-sort';
-import mapKeyToStringSort from '../../../../../utils/map-key-to-string-sort';
-import type Analytic from '../types/web-analytic';
-import mapKeyToColumnCell from '../utils/map-key-to-column-cell';
+import type TableColumn from '../../../../../types/table-column.js';
+import mapKeyToNumberSort from '../../../../../utils/map-key-to-number-sort.js';
+import mapKeyToStringSort from '../../../../../utils/map-key-to-string-sort.js';
+import type Analytic from '../types/web-analytic.js';
+import mapKeyToColumnCell from '../utils/map-key-to-column-cell.js';
 
 export default [
   {

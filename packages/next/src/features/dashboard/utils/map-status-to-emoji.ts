@@ -1,4 +1,4 @@
-import Status from '../constants/status';
+import Status from '../constants/status.js';
 
 export default function mapStatusToIcon(status: Status): string {
   switch (status) {

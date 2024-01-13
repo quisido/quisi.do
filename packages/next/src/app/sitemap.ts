@@ -1,5 +1,5 @@
 import { type MetadataRoute } from 'next';
-import Locale from '../constants/locale';
+import Locale from '../constants/locale.js';
 
 const NOW: Date = new Date();
 

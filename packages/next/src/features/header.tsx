@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactElement } from 'react';
-import useTheme from '../hooks/use-theme';
+import useTheme from '../hooks/use-theme.js';
 
 export default function Header(): ReactElement {
   const { displayFontFamily, displayFontWeight } = useTheme();

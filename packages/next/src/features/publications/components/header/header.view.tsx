@@ -1,9 +1,9 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Header from '../../../../components/header';
-import Select from '../../../../components/select';
-import type Sort from '../../constants/publications-sort';
-import usePublicationsHeader from './header.hook';
+import Header from '../../../../components/header.js';
+import Select from '../../../../components/select.js';
+import type Sort from '../../constants/publications-sort.js';
+import usePublicationsHeader from './header.hook.js';
 
 interface Props {
   readonly onSortChange: (value: string | undefined) => void;

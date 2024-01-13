@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
-import Home from '../../features/home';
+import Home from '../../features/home/index.js';
 
-export { default as generateStaticParams } from '../../features/generate-locale-static-params';
+export { default as generateStaticParams } from '../../features/generate-locale-static-params.js';
 
 export default function Page(): ReactElement {
   return <Home />;

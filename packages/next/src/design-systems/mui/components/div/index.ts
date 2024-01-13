@@ -1,1 +1,1 @@
-export { default } from './div.view';
+export { default } from './div.view.js';

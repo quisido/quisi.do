@@ -1,14 +1,104 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { useButton } from '@react-aria/button';
-import { type ReactElement, useRef } from 'react';
-import { type Props } from '../../../components/button';
-import useElementId from '../../../hooks/use-element-id';
-import useTheme from '../../../hooks/use-theme';
-import useEmit from '../../../hooks/use-emit';
+import { useLink } from '@react-aria/link';
+import {
+  type CSSProperties,
+  type PropsWithChildren,
+  type ReactElement,
+  useRef,
+} from 'react';
+import { type Props } from '../../../components/button.js';
+import useElementId from '../../../hooks/use-element-id.js';
+import useEmit from '../../../hooks/use-emit/index.js';
+import useTheme from '../../../hooks/use-theme.js';
+import optional from '../../../utils/optional.js';
+
+interface ButtonElementProps {
+  readonly id: string;
+  readonly onPress: VoidFunction;
+  readonly style: CSSProperties;
+}
+
+interface ElementProps {
+  readonly href?: string | undefined;
+  readonly id: string;
+  readonly onPress: VoidFunction;
+  readonly style: CSSProperties;
+}
+
+interface LinkElementProps {
+  readonly href: string;
+  readonly id: string;
+  readonly onPress: VoidFunction;
+  readonly style: CSSProperties;
+}
 
 const OUTLINE_WIDTH = 4;
 const HOVER_OFFSET = -2;
 const RAISED_OFFSET = -3;
+
+function ButtonElement({
+  children,
+  id,
+  onPress,
+  style,
+}: PropsWithChildren<ButtonElementProps>): ReactElement {
+  const { buttonProps } = useButton(
+    {
+      onPress,
+    },
+    useRef(null),
+  );
+
+  return (
+    <button {...buttonProps} id={id} style={style}>
+      {children}
+    </button>
+  );
+}
+
+function LinkElement({
+  children,
+  href,
+  id,
+  onPress,
+  style,
+}: PropsWithChildren<LinkElementProps>): ReactElement {
+  const { linkProps } = useLink(
+    {
+      ...optional('href', href),
+      onPress,
+    },
+    useRef(null),
+  );
+
+  return (
+    <a {...linkProps} id={id} style={style}>
+      {children}
+    </a>
+  );
+}
+
+function Element({
+  children,
+  href,
+  id,
+  onPress,
+  style,
+}: PropsWithChildren<ElementProps>): ReactElement {
+  if (typeof href === 'undefined') {
+    return (
+      <ButtonElement id={id} onPress={onPress} style={style}>
+        {children}
+      </ButtonElement>
+    );
+  }
+  return (
+    <LinkElement href={href} id={id} onPress={onPress} style={style}>
+      {children}
+    </LinkElement>
+  );
+}
 
 export default function Button({
   children,
@@ -23,22 +113,6 @@ export default function Button({
 
   // States
   const id: string = useElementId();
-  const { buttonProps } = useButton(
-    {
-      href,
-      onPress: (): void => {
-        if (typeof onClick === 'function') {
-          onClick();
-        }
-
-        emit('button.click', {
-          designSystem: 'quisi',
-          feature,
-        });
-      },
-    },
-    useRef(null),
-  );
 
   return (
     <>
@@ -68,9 +142,19 @@ export default function Button({
   outline-width: ${OUTLINE_WIDTH}px;
 }
 `}</style>
-      <button
-        {...buttonProps}
+      <Element
+        href={href}
         id={id}
+        onPress={(): void => {
+          if (typeof onClick === 'function') {
+            onClick();
+          }
+
+          emit('button.click', {
+            designSystem: 'quisi',
+            feature,
+          });
+        }}
         style={{
           backgroundColor: primaryHex,
           borderColor: backgroundColor,
@@ -94,7 +178,7 @@ export default function Button({
           paddingLeft: 20,
           paddingRight: 20,
           paddingTop: 12,
-          transform: 'rotate(-1deg)',
+          transform: 'rotate(-10deg)',
           transitionDelay: '0s',
           transitionDuration: '150ms',
           transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -112,7 +196,7 @@ export default function Button({
         }}
       >
         {children}
-      </button>
+      </Element>
     </>
   );
 }

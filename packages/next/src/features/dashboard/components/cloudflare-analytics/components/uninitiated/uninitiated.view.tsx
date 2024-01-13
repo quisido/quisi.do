@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Section from '../../../../../../components/section';
+import Section from '../../../../../../components/section.js';
 
 export default function CloudflareAnalyticsUninitiated(): ReactElement {
   return (

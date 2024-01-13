@@ -1,7 +1,7 @@
-import PACKAGE_DEPENDENCIES from '../../../constants/package-dependencies';
-import mapPackageNameToHref from '../../../utils/map-package-name-to-href';
-import reduceArrayToSum from '../../../utils/reduce-array-to-sum';
-import type Item from '../types/packages-item';
+import PACKAGE_DEPENDENCIES from '../../../constants/package-dependencies.js';
+import mapPackageNameToHref from '../../../utils/map-package-name-to-href.js';
+import reduceArrayToSum from '../../../utils/reduce-array-to-sum.js';
+import type Item from '../types/packages-item.js';
 
 const NONE = 0;
 

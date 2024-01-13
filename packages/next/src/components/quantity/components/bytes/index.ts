@@ -1,1 +1,1 @@
-export { default } from './bytes.view';
+export { default } from './bytes.view.js';

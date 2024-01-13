@@ -1,5 +1,5 @@
-import Locale from '../../../constants/locale';
-import type SelectOption from '../../../types/select-option';
+import Locale from '../../../constants/locale.js';
+import type SelectOption from '../../../types/select-option.js';
 
 export default [
   {

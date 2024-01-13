@@ -1,1 +1,1 @@
-export { default } from './cloudwatch-rum.view';
+export { default } from './cloudwatch-rum.view.js';

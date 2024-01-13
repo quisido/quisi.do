@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
-import describeDesignSystems from '../../test/cypress/utils/describe-design-systems';
-import describeFeature from '../../test/cypress/utils/describe-feature';
+import describeDesignSystems from '../../test/cypress/utils/describe-design-systems.js';
+import describeFeature from '../../test/cypress/utils/describe-feature.js';
 
 const NEXT_PAGE_SELECTOR = 'main button[aria-label="Go to next page."]';
 const FIRST_PACKAGE_SELECTOR =

@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import Preconnect from '../components/preconnect';
+import Preconnect from '../components/preconnect.js';
 
 /**
  * Additional works that have yet to be integrated:

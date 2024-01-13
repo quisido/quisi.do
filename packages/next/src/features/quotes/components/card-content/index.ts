@@ -1,1 +1,1 @@
-export { default } from './card-content.view';
+export { default } from './card-content.view.js';

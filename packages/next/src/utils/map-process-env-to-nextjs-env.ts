@@ -1,4 +1,4 @@
-import mapDictToRecord from './map-dict-to-record';
+import mapDictToRecord from './map-dict-to-record.js';
 
 export default function mapProcessEnvToNextJsEnv(
   env: NodeJS.ProcessEnv,

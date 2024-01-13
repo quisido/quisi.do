@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
-import Select from '../../../../components/select';
-import OPTIONS from '../../constants/locale-options';
-import useLanguageSelect from './language-select.hook';
+import Select from '../../../../components/select.js';
+import OPTIONS from '../../constants/locale-options.js';
+import useLanguageSelect from './language-select.hook.js';
 
 export default function SettingsLanguageSelect(): ReactElement {
   const { handleChange, label, locale } = useLanguageSelect();

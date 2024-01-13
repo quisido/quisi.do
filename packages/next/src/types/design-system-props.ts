@@ -1,4 +1,4 @@
-import type DesignSystemPropsRecord from './design-system-props-record';
+import type DesignSystemPropsRecord from './design-system-props-record.js';
 
 type DesignSystemProps<
   Card extends object = object,

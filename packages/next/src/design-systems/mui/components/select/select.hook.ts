@@ -1,7 +1,7 @@
 import { type SelectChangeEvent } from '@mui/material/Select';
 import { type Attributes, useCallback, useId, useMemo } from 'react';
-import type SelectOption from '../../../../types/select-option';
-import type MenuItemProps from './types/menu-item-props';
+import type SelectOption from '../../../../types/select-option.js';
+import type MenuItemProps from './types/menu-item-props.js';
 
 interface Props {
   readonly onChange: (value: string | undefined) => void;

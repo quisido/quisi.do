@@ -5,25 +5,25 @@ import {
   type ReactElement,
   StrictMode,
 } from 'react';
-import CloudflareInsights from '../components/cloudflare-insights';
-import CloudWatchRUM from '../components/cloudwatch-rum';
-import Datadog from '../components/datadog';
-import FullStory from '../components/fullstory';
-import ReportUri from '../components/report-uri';
-import DesignSystemTheme from '../components/theme';
-import Contexts from '../features/contexts';
-import Footer from '../features/footer';
-import GoogleFonts from '../features/google-fonts';
-import Header from '../features/header';
-import GoogleAnalytics from '../features/google-analytics';
-// import Mixpanel from '../features/mixpanel';
-import NotificationsProvider from '../features/notifications-provider';
-import Preconnect from '../features/preconnect';
-import Sentry from '../features/sentry';
-import ThemeFeature from '../features/theme';
-// import Turnstile from '../features/turnstile';
-import withWrappers from '../hocs/with-wrappers';
-import Clarity from '../modules/react-clarity';
+import CloudflareInsights from '../components/cloudflare-insights/index.js';
+import CloudWatchRUM from '../components/cloudwatch-rum/index.js';
+import Datadog from '../components/datadog/index.js';
+import FullStory from '../components/fullstory/index.js';
+import ReportUri from '../components/report-uri/index.js';
+import DesignSystemTheme from '../components/theme/index.js';
+import Contexts from '../features/contexts/index.js';
+import Footer from '../features/footer.js';
+import GoogleFonts from '../features/google-fonts.js';
+import Header from '../features/header.js';
+import GoogleAnalytics from '../features/google-analytics/index.js';
+// import Mixpanel from '../features/mixpanel.js';
+import NotificationsProvider from '../features/notifications-provider/index.js';
+import Preconnect from '../features/preconnect.js';
+import Sentry from '../features/sentry/index.js';
+import ThemeFeature from '../features/theme.js';
+// import Turnstile from '../features/turnstile.js';
+import withWrappers from '../hocs/with-wrappers/index.js';
+import Clarity from '../modules/react-clarity/index.js';
 
 export { default as metadata } from '../constants/root-metadata';
 export { default as viewport } from '../constants/root-viewport';

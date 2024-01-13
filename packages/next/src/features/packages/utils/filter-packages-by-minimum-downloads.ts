@@ -1,5 +1,5 @@
-import MINIMUM_DOWNLOADS from '../constants/minimum-package-downloads';
-import type Item from '../types/packages-item';
+import MINIMUM_DOWNLOADS from '../constants/minimum-package-downloads.js';
+import type Item from '../types/packages-item.js';
 
 export default function filterPackagesByMinimumDownloads({
   totalDownloads,

@@ -6,11 +6,11 @@ import {
   type ReactElement,
   useRef,
 } from 'react';
-import useNotify from '../../hooks/use-notify';
-import useEffectEvent from '../../hooks/use-effect-event';
-import Turnstile from '../../modules/react-turnstile-invis';
-import type Notification from '../../types/notification';
-import noop from '../../utils/noop';
+import useNotify from '../../hooks/use-notify.js';
+import useEffectEvent from '../../hooks/use-effect-event.js';
+import Turnstile from '../../modules/react-turnstile-invis.js';
+import type Notification from '../../types/notification.js';
+import noop from '../../utils/noop.js';
 
 /**
  * Technical debt: If this banner is always present, we could generate it with

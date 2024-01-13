@@ -1,7 +1,7 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import round from '../../../../utils/round';
-import Milliseconds from '../milliseconds';
+import round from '../../../../utils/round.js';
+import Milliseconds from '../milliseconds.js';
 
 interface Props {
   readonly children: number;

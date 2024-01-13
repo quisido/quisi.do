@@ -1,1 +1,1 @@
-export { default } from './report-uri.view';
+export { default } from './report-uri.view.js';

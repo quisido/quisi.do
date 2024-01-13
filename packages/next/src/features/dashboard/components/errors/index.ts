@@ -1,1 +1,1 @@
-export { default } from './errors.view';
+export { default } from './errors.view.js';

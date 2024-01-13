@@ -2,16 +2,18 @@ import { styled } from '@mui/material/styles';
 import MuiCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { type ReactElement } from 'react';
-import mapComponentToPropMapper from '../../../../../../utils/map-component-to-prop-mapper';
-import validateString from '../../../../../../utils/validate-string';
-import type Props from '../../types/row-props';
-import Cell from '../cell';
+import mapComponentToPropMapper from '../../../../../../utils/map-component-to-prop-mapper.js';
+import validateString from '../../../../../../utils/validate-string.js';
+import type Props from '../../types/row-props.js';
+import Cell from '../cell/index.js';
 import styles from './row.module.scss';
 
-const rootDescribedClassName: string = validateString(styles.described);
-const descriptionCellClassName: string = validateString(styles.descriptionCell);
+const rootDescribedClassName: string = validateString(styles['described']);
 const mapCellPropsToComponent = mapComponentToPropMapper(Cell);
-const rootClassName: string = validateString(styles.root);
+const rootClassName: string = validateString(styles['root']);
+const descriptionCellClassName: string = validateString(
+  styles['descriptionCell'],
+);
 
 const describedClassNames: readonly string[] = [
   rootClassName,

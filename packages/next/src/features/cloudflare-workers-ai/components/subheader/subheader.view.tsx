@@ -1,11 +1,11 @@
 import { type ReactElement } from 'react';
-import Select from '../../../../components/select';
-import Input from '../../../../components/input';
-import ApiTokenStatus from '../api-token-status';
-import Div from '../../../../components/div';
-import type IApiTokenStatus from '../../types/api-token-status';
-import useSubheader from './subheader.hook';
-import type Model from '../../constants/model';
+import Select from '../../../../components/select/index.js';
+import Input from '../../../../components/input/index.js';
+import ApiTokenStatus from '../api-token-status.js';
+import Div from '../../../../components/div/index.js';
+import type IApiTokenStatus from '../../types/api-token-status.js';
+import useSubheader from './subheader.hook.js';
+import type Model from '../../constants/model.js';
 
 interface Props {
   readonly apiToken: string;

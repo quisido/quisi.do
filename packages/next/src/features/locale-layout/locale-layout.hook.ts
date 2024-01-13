@@ -2,9 +2,9 @@
 
 import { usePathname, useRouter } from 'next/navigation.js';
 import { useMemo } from 'react';
-import { default as Locale, validateLocale } from '../../constants/locale';
-import useEffectEvent from '../../hooks/use-effect-event';
-import type Params from './types/params';
+import { default as Locale, validateLocale } from '../../constants/locale.js';
+import useEffectEvent from '../../hooks/use-effect-event.js';
+import type Params from './types/params.js';
 
 interface Props {
   readonly params: Params;

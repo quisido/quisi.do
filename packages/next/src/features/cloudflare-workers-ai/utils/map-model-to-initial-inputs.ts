@@ -1,5 +1,5 @@
-import Language from '../constants/language';
-import Model from '../constants/model';
+import Language from '../constants/language.js';
+import Model from '../constants/model.js';
 import  type Inputs, {
   type type BaaiBgeEnV15,
   type type HuggingfaceDistilbertSst2Int8,

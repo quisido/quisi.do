@@ -1,6 +1,6 @@
 import { type PropsWithChildren, type ReactElement } from 'react';
-import Locale from '../../constants/locale';
-import Layout from '../[locale]/layout';
+import Locale from '../../constants/locale.js';
+import Layout from '../[locale]/layout.js';
 
 export default function PackagesLayout({
   children,

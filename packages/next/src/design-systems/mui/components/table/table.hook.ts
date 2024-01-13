@@ -7,14 +7,14 @@ import {
   type MouseEvent,
   useMemo,
 } from 'react';
-import type Column from '../../../../types/table-column';
-import type RowsPerPageOption from '../../../../types/table-rows-per-page-option';
-import useRowProps from './hooks/use-row-props';
-import type HeadCellProps from './types/head-cell-props';
-import type RowProps from './types/row-props';
-import type MuiRowsPerPageOption from './types/rows-per-page-option';
-import mapColumnToHeadCellPartialProps from './utils/map-column-to-head-cell-partial-props';
-import mapRowsPerPageOptionsToMuiRowsPerPageOptions from './utils/map-rows-per-page-options-to-mui-rows-per-page-options';
+import type Column from '../../../../types/table-column.js';
+import type RowsPerPageOption from '../../../../types/table-rows-per-page-option.js';
+import useRowProps from './hooks/use-row-props.js';
+import type HeadCellProps from './types/head-cell-props.js';
+import type RowProps from './types/row-props.js';
+import type MuiRowsPerPageOption from './types/rows-per-page-option.js';
+import mapColumnToHeadCellPartialProps from './utils/map-column-to-head-cell-partial-props.js';
+import mapRowsPerPageOptionsToMuiRowsPerPageOptions from './utils/map-rows-per-page-options-to-mui-rows-per-page-options.js';
 
 interface Props<Item> {
   readonly Description?: ComponentType<Item> | undefined;

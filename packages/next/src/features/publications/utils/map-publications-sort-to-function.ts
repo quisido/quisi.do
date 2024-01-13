@@ -1,12 +1,12 @@
-import Sort from '../constants/publications-sort';
-import type Publication from '../types/publication';
-import sortItemsByPublicationDate from '../utils/sort-publications-items-by-publication-date';
-import sortItemsByReactions from '../utils/sort-publications-items-by-reactions';
-import sortItemsByReactionsPerDay from '../utils/sort-publications-items-by-reactions-per-day';
-import sortItemsByReactionsPerView from '../utils/sort-publications-items-by-reactions-per-view';
-import sortItemsByReadingTime from '../utils/sort-publications-items-by-reading-time';
-import sortItemsByViews from '../utils/sort-publications-items-by-views';
-import sortItemsByViewsPerDay from '../utils/sort-publications-items-by-views-per-day';
+import Sort from '../constants/publications-sort.js';
+import type Publication from '../types/publication.js';
+import sortItemsByPublicationDate from '../utils/sort-publications-items-by-publication-date.js';
+import sortItemsByReactions from '../utils/sort-publications-items-by-reactions.js';
+import sortItemsByReactionsPerDay from '../utils/sort-publications-items-by-reactions-per-day.js';
+import sortItemsByReactionsPerView from '../utils/sort-publications-items-by-reactions-per-view.js';
+import sortItemsByReadingTime from '../utils/sort-publications-items-by-reading-time.js';
+import sortItemsByViews from '../utils/sort-publications-items-by-views.js';
+import sortItemsByViewsPerDay from '../utils/sort-publications-items-by-views-per-day.js';
 
 export default function mapPublicationsSortToFunction(
   sort: Sort,

@@ -1,8 +1,8 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useCallback } from 'react';
-import type DesignSystem from '../../../../constants/design-system';
-import { isDesignSystem } from '../../../../constants/design-system';
-import useDesignSystem from '../../../../hooks/use-design-system';
+import type DesignSystem from '../../../../constants/design-system.js';
+import { isDesignSystem } from '../../../../constants/design-system.js';
+import useDesignSystem from '../../../../hooks/use-design-system.js';
 
 interface State {
   readonly designSystem: DesignSystem;

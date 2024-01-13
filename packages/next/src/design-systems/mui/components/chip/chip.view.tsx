@@ -1,19 +1,15 @@
 import Chip, { type ChipProps } from '@mui/material/Chip';
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/chip';
+import { type Props } from '../../../../components/chip/index.js';
+import optional from '../../../../utils/optional.js';
 
 export default function MuiChip({ children, className }: Props): ReactElement {
-  const optionalProps: Pick<ChipProps, 'className'> = {};
-  if (typeof className !== 'undefined') {
-    optionalProps.className = className;
-  }
-
   return (
     <Chip
+      {...optional<ChipProps>('className', className)}
       color="default"
       label={<>{children}</>}
       size="small"
-      {...optionalProps}
     />
   );
 }

@@ -1,4 +1,4 @@
-import isRecord from './is-record';
+import isRecord from './is-record.js';
 
 export interface Options {
   readonly fetch: Window['fetch'];

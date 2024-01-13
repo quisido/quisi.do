@@ -1,4 +1,4 @@
-import mapTrackingIdToScriptSrc from './map-tracking-id-to-script-src';
+import mapTrackingIdToScriptSrc from './map-tracking-id-to-script-src.js';
 
 const TEST_TRACKING_ID = 'UA-123456789-1';
 

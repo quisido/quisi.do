@@ -1,2 +1,2 @@
-export type { Props } from './cards.view';
-export { default } from './cards.view';
+export type { Props } from './cards.view.js';
+export { default } from './cards.view.js';

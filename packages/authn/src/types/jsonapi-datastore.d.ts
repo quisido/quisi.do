@@ -7,9 +7,9 @@ declare module 'jsonapi-datastore' {
     public readonly serialize: (() => string) &
       ((options: SerializeOptions) => string);
 
-    public readonly sync: (data: string) => void;
+    public readonly sync: (data: object) => object;
 
-    public readonly syncWithMeta: (data: string) => void;
+    public readonly syncWithMeta: (data: object) => object;
   }
 
   interface SerializeOptions {

@@ -1,12 +1,12 @@
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/cards';
-import mapComponentToPropMapper from '../../../../utils/map-component-to-prop-mapper';
-import validateString from '../../../../utils/validate-string';
-import useMuiCards from './cards.hook';
+import { type Props } from '../../../../components/cards.js';
+import mapComponentToPropMapper from '../../../../utils/map-component-to-prop-mapper.js';
+import validateString from '../../../../utils/validate-string.js';
+import useMuiCards from './cards.hook.js';
 import styles from './cards.module.scss';
-import Card, { type Props as CardProps } from './components/card';
+import Card, { type Props as CardProps } from './components/card/index.js';
 
-const rootClassName: string = validateString(styles.root);
+const rootClassName: string = validateString(styles['root']);
 
 export default function MuiCards<Item extends object>({
   CardContent,

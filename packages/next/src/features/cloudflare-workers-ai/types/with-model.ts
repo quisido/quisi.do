@@ -1,4 +1,4 @@
-import type Model from '../constants/model';
+import type Model from '../constants/model.js';
 
 export default interface WithModel<M extends Model, Inputs> {
   readonly model: M;

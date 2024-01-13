@@ -1,5 +1,5 @@
 import { type Viewport } from 'next';
-import THEME_COLOR_DESCRIPTORS from './theme-color-descriptors';
+import THEME_COLOR_DESCRIPTORS from './theme-color-descriptors.js';
 
 /**
  * TODO: Validate these against the standard documented on MDN:

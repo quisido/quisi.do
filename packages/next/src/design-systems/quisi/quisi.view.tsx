@@ -1,9 +1,9 @@
 import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
-import type DesignSystemProps from '../../types/design-system-props';
-import Button from './components/button';
-import Link from './components/link';
-import Section from './components/section';
-import Theme from './components/theme';
+import type DesignSystemProps from '../../types/design-system-props.js';
+import Button from './components/button.js';
+import Link from './components/link.js';
+import Section from './components/section.js';
+import Theme from './components/theme.js';
 
 function Demo({
   children,
@@ -107,7 +107,7 @@ export default function Quisido<Card extends object, Row extends object>({
         <Demo type="LoadingIcon">
           {JSON.stringify({ ...props, children: undefined })}
           <br />
-          Children: {props.children}
+          Children: {props['children']}
         </Demo>
       );
 

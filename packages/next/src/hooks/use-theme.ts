@@ -1,9 +1,9 @@
 'use client';
 
 import { useContext } from 'react';
-import Theme from '../contexts/theme';
-import type ThemeType from '../types/theme';
-import mapRgbToHex from '../utils/map-rgb-to-hex';
+import Theme from '../contexts/theme.js';
+import type ThemeType from '../types/theme.js';
+import mapRgbToHex from '../utils/map-rgb-to-hex.js';
 
 interface State extends ThemeType {
   readonly primaryHex: string;

@@ -1,11 +1,11 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Section from '../../../../components/section';
-import withAsync from '../../../../hocs/with-async';
-import type Issue from '../../../../types/sentry-issue';
-import ErrorView from './components/error';
-import Loading from './components/loading';
-import Uninitiated from './components/uninitiated';
+import Section from '../../../../components/section.js';
+import withAsync from '../../../../hocs/with-async.js';
+import type Issue from '../../../../types/sentry-issue.js';
+import ErrorView from './components/error.js';
+import Loading from './components/loading.js';
+import Uninitiated from './components/uninitiated.js';
 
 interface Props {
   readonly error: string | null;

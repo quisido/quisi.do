@@ -1,7 +1,8 @@
 import Box, { type BoxProps } from '@mui/material/Box';
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/div';
-import useDiv from './div.hook';
+import { type Props } from '../../../../components/div/index.js';
+import useDiv from './div.hook.js';
+import optional from '../../../../utils/optional.js';
 
 export default function MuiDiv({
   children,
@@ -41,55 +42,23 @@ export default function MuiDiv({
     marginY,
   });
 
-  const optionalProps: BoxProps = {};
-  if (typeof className !== 'undefined') {
-    optionalProps.className = className;
-  }
-
-  if (typeof display !== 'undefined') {
-    optionalProps.display = display;
-  }
-
-  if (typeof flexDirection !== 'undefined') {
-    optionalProps.flexDirection = flexDirection;
-  }
-
-  if (typeof flexWrap !== 'undefined') {
-    optionalProps.flexWrap = flexWrap;
-  }
-
-  if (typeof element !== 'undefined') {
-    optionalProps.component = element;
-  }
-
-  if (typeof mb !== 'undefined') {
-    optionalProps.mb = mb;
-  }
-
-  if (typeof ml !== 'undefined') {
-    optionalProps.ml = ml;
-  }
-
-  if (typeof mr !== 'undefined') {
-    optionalProps.mr = mr;
-  }
-
-  if (typeof mt !== 'undefined') {
-    optionalProps.mt = mt;
-  }
-
-  if (typeof style !== 'undefined') {
-    optionalProps.style = style;
-  }
-
   return (
     <Box
+      {...optional<BoxProps>('className', className)}
+      {...optional<BoxProps>('component', element)}
+      {...optional<BoxProps>('display', display)}
+      {...optional<BoxProps>('flexDirection', flexDirection)}
+      {...optional<BoxProps>('flexWrap', flexWrap)}
       gap={gapState}
       justifyContent={justifyContent}
       margin={0}
+      {...optional<BoxProps>('mb', mb)}
+      {...optional<BoxProps>('ml', ml)}
+      {...optional<BoxProps>('mr', mr)}
+      {...optional<BoxProps>('mt', mt)}
       padding={0}
+      {...optional<BoxProps>('style', style)}
       textAlign={textAlign}
-      {...optionalProps}
     >
       {children}
     </Box>

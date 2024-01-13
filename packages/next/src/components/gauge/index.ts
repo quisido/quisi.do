@@ -1,1 +1,1 @@
-export { default } from './gauge.view';
+export { default } from './gauge.view.js';

@@ -20,10 +20,11 @@
     "access": "restricted"
   },
   "scripts": {
+    "authn": "yarn packages/authn run dev",
     "browserslist:update-db": "browserslist --update-db",
     "build": "yarn packages/next run build",
-    "cloudflare-analytics": "yarn packages/cloudflare-analytics-worker run dev",
-    "cloudflare-analytics:init": "yarn packages/cloudflare-analytics-worker run init",
+    "cloudflare-analytics": "yarn packages/cloudflare-analytics run dev",
+    "cloudflare-analytics:init": "yarn packages/cloudflare-analytics run init",
     "dev": "yarn packages/next run dev",
     "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ./sarif/index.sarif",
     "eslint:fix": "eslint '**/*' --fix",

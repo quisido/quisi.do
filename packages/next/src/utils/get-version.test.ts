@@ -1,8 +1,8 @@
 /// <reference types="jest" />
-import getVersion from './get-version';
+import getVersion from './get-version.js';
 
 const setGitHubSha = (value: string): void => {
-  process.env.GITHUB_SHA = value;
+  process.env['GITHUB_SHA'] = value;
 };
 
 const setNodeEnv = (value: string): void => {
@@ -14,7 +14,7 @@ const setNodeEnv = (value: string): void => {
 describe('getVersion', (): void => {
   afterEach((): void => {
     setNodeEnv('test');
-    delete process.env.GITHUB_SHA;
+    delete process.env['GITHUB_SHA'];
   });
 
   it('should be the GitHub SHA', (): void => {

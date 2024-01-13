@@ -1,9 +1,9 @@
 import { type ReactElement } from 'react';
-import { type MetaM2m10012b } from '../../types/inputs';
-import useTranslationForm from './translation-form.hook';
-import Select from '../../../../components/select';
-import Div from '../../../../components/div';
-import Input from '../../../../components/input';
+import { type MetaM2m10012b } from '../../types/inputs.js';
+import useTranslationForm from './translation-form.hook.js';
+import Select from '../../../../components/select/index.js';
+import Div from '../../../../components/div/index.js';
+import Input from '../../../../components/input/index.js';
 
 interface Props {
   readonly inputs: MetaM2m10012b;

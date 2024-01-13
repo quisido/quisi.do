@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import Intercom from '../contexts/intercom';
-import type IntercomFunction from '../types/intercom-function';
+import Intercom from '../contexts/intercom.js';
+import type IntercomFunction from '../types/intercom-function.js';
 
 export default function useIntercom(): IntercomFunction {
   const intercom: IntercomFunction | null = useContext(Intercom);

@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
-import Locale from '../constants/locale';
-import Layout from './[locale]/layout';
-import Page from './[locale]/page';
+import Locale from '../constants/locale.js';
+import Layout from './[locale]/layout.js';
+import Page from './[locale]/page.js';
 
 export default function RootPage(): ReactElement {
   return (

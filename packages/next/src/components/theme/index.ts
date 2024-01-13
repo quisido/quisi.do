@@ -1,1 +1,1 @@
-export { default } from './theme.view';
+export { default } from './theme.view.js';

@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
-import Dashboard from '../../../features/dashboard';
+import Dashboard from '../../../features/dashboard/index.js';
 
-export { default as generateStaticParams } from '../../../features/generate-locale-static-params';
+export { default as generateStaticParams } from '../../../features/generate-locale-static-params.js';
 
 export default function DashboardPage(): ReactElement {
   /*

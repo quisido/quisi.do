@@ -1,7 +1,7 @@
 import { type ReactElement, type ReactNode } from 'react';
-import PACKAGE_DESCRIPTIONS from '../../../../constants/package-descriptions';
-import Paragraph from '../../components/description-paragraph';
-import type Item from '../../types/packages-item';
+import PACKAGE_DESCRIPTIONS from '../../../../constants/package-descriptions.js';
+import Paragraph from '../../components/description-paragraph.js';
+import type Item from '../../types/packages-item.js';
 
 const mapNodeToParagraph = (
   children: ReactNode,

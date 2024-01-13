@@ -1,1 +1,1 @@
-export { default } from './last-checked.view';
+export { default } from './last-checked.view.js';

@@ -1,12 +1,12 @@
 import { type ReactElement } from 'react';
-import Section from '../../components/section';
-// import Div from '../../components/div';
-// import useCloudflareWorkersAi from './cloudflare-workers-ai.hook';
-// import Actions from './components/actions';
-// import Form from './components/form';
-// import Subheader from './components/subheader';
-// import type Fetch from './types/fetch';
-// import handleSubmit from './utils/handle-submit';
+import Section from '../../components/section.js';
+// import Div from '../../components/div/index.js';
+// import useCloudflareWorkersAi from './cloudflare-workers-ai.hook.js';
+// import Actions from './components/actions.js';
+// import Form from './components/form.js';
+// import Subheader from './components/subheader.js';
+// import type Fetch from './types/fetch.js';
+// import handleSubmit from './utils/handle-submit.js';
 
 /*
 interface Props {

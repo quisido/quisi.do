@@ -2,13 +2,16 @@
 import { type NextConfig } from 'next';
 import { cpus } from 'node:os';
 import { join } from 'node:path';
-import getVersion from './src/utils/get-version';
-import mapNodeEnvToOnDemandEntries from './src/utils/map-node-env-to-on-demand-entries';
-import mapNodeEnvToOutput from './src/utils/map-node-env-to-output';
-// import mapProcessEnvToNextJsEnv from './src/utils/map-process-env-to-nextjs-env';
-import withNextJsBundleAnalyzer from './src/utils/with-nextjs-bundle-analyzer';
+import getVersion from './src/utils/get-version.js';
+import mapNodeEnvToOutput from './src/utils/map-node-env-to-output.js';
+// import mapProcessEnvToNextJsEnv from './src/utils/map-process-env-to-nextjs-env.js';
+import withNextJsBundleAnalyzer from './src/utils/with-nextjs-bundle-analyzer.js';
+import type { Configuration as WebpackConfiguration } from 'webpack';
+import optional from './src/utils/optional.js';
+import mapNodeEnvToOnDemandEntries from './src/utils/map-node-env-to-on-demand-entries.js';
 
 const CPUS_COUNT: number = cpus().length;
+const handleDemandEntries = mapNodeEnvToOnDemandEntries(process.env.NODE_ENV);
 
 export default withNextJsBundleAnalyzer({
   assetPrefix: '', // same domain
@@ -17,7 +20,7 @@ export default withNextJsBundleAnalyzer({
   distDir: '.next',
   // env: mapProcessEnvToNextJsEnv(process.env),
   generateBuildId: getVersion,
-  onDemandEntries: mapNodeEnvToOnDemandEntries(process.env.NODE_ENV),
+  ...optional('onDemandEntries', handleDemandEntries),
   output: mapNodeEnvToOutput(process.env.NODE_ENV),
   poweredByHeader: false,
   productionBrowserSourceMaps: true,
@@ -63,8 +66,8 @@ export default withNextJsBundleAnalyzer({
     taint: true,
     // typedRoutes: true,
     useDeploymentId: true,
-    webpackBuildWorker: true,
     webVitalsAttribution: ['CLS', 'FCP', 'FID', 'INP', 'LCP', 'TTFB'],
+    webpackBuildWorker: true,
     workerThreads: true,
 
     /*
@@ -88,7 +91,21 @@ export default withNextJsBundleAnalyzer({
   },
 
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
     tsconfigPath: './tsconfig.prepack.json',
+  },
+
+  // Add support for fully-qualified ESM imports.
+  // https://github.com/vercel/next.js/issues/41961
+  webpack(config: WebpackConfiguration): WebpackConfiguration {
+    return {
+      ...config,
+      resolve: {
+        ...config.resolve,
+        extensionAlias: {
+          '.js': ['.ts', '.tsx', '.js', '.jsx'],
+        },
+      },
+    };
   },
 } satisfies NextConfig) satisfies NextConfig;

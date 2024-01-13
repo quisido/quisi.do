@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import type SelectOption from '../../../types/select-option';
+import type SelectOption from '../../../types/select-option.js';
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
-import Language from '../constants/language';
+import Language from '../constants/language.js';
 
 export default function useLanguages(): readonly SelectOption[] {
   const translate: TranslateFunction = useTranslate();

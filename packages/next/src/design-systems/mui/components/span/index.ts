@@ -1,1 +1,1 @@
-export { default } from './span.view';
+export { default } from './span.view.js';

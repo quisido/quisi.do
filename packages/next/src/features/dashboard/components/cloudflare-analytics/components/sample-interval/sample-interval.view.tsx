@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import mapSampleIntervalToRate from '../../map-sample-interval-to-rate';
+import mapSampleIntervalToRate from '../../map-sample-interval-to-rate.js';
 
 interface Props {
   readonly children: number;

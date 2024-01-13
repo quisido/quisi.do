@@ -1,10 +1,10 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
-import LoadingIcon from '../../../../components/loading-icon';
-import Section from '../../../../components/section';
-import Span from '../../../../components/span';
-import useErrors from './errors.hook';
+import LoadingIcon from '../../../../components/loading-icon/index.js';
+import Section from '../../../../components/section.js';
+import Span from '../../../../components/span/index.js';
+import useErrors from './errors.hook.js';
 
 interface Props {
   readonly error: string | null;

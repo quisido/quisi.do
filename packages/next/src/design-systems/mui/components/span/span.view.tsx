@@ -1,7 +1,8 @@
 import Box, { type BoxProps } from '@mui/material/Box';
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/span';
-import useSpan from './span.hook';
+import { type Props } from '../../../../components/span/index.js';
+import optional from '../../../../utils/optional.js';
+import useSpan from './span.hook.js';
 
 export default function MuiSpan({
   children,
@@ -15,22 +16,14 @@ export default function MuiSpan({
     size,
   });
 
-  const optionalProps: BoxProps = {};
-  if (typeof className !== 'undefined') {
-    optionalProps.className = className;
-  }
-  if (typeof colorState !== 'undefined') {
-    optionalProps.color = colorState;
-  }
-  if (typeof element !== 'undefined') {
-    optionalProps.component = element;
-  }
-  if (typeof fontSize !== 'undefined') {
-    optionalProps.fontSize = fontSize;
-  }
-
   return (
-    <Box display="inline" {...optionalProps}>
+    <Box
+      {...optional<BoxProps>('className', className)}
+      {...optional<BoxProps>('color', colorState)}
+      {...optional<BoxProps>('component', element)}
+      display="inline"
+      {...optional<BoxProps>('fontSize', fontSize)}
+    >
       {children}
     </Box>
   );

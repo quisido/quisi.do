@@ -1,8 +1,8 @@
 'use client';
 
 import { type Context, type Provider, createContext } from 'react';
-import mapContextToProvider from './utils/map-context-to-provider';
-import mapContextToHook from './utils/map-context-to-hook';
+import mapContextToProvider from './utils/map-context-to-provider.js';
+import mapContextToHook from './utils/map-context-to-hook.js';
 
 interface ContextUtils<T> {
   readonly ContextProvider: Provider<T>;

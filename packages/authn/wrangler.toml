@@ -1,0 +1,12 @@
+compatibility_date = "2023-10-30"
+main = "src/index.ts"
+name = "authn"
+tsconfig = "./tsconfig.json"
+workers_dev = true
+
+[dev]
+ip = "127.0.0.1"
+port = 5882      # parseInt('authn', 36) % 9999
+
+[placement]
+mode = "smart"

@@ -1,14 +1,14 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import mapUnknownToString from 'unknown2string';
-import Div from '../../../../components/div';
-import Link from '../../../../components/link';
-import Section from '../../../../components/section';
-import validateString from '../../../../utils/validate-string';
-import LastChecked from '../last-checked';
-import MessageInABottle from '../message-in-a-bottle';
-import OnlineStatus from '../online-status';
-import useStatus from './status.hook';
+import Div from '../../../../components/div/index.js';
+import Link from '../../../../components/link/index.js';
+import Section from '../../../../components/section.js';
+import validateString from '../../../../utils/validate-string.js';
+import LastChecked from '../last-checked/index.js';
+import MessageInABottle from '../message-in-a-bottle/index.js';
+import OnlineStatus from '../online-status.js';
+import useStatus from './status.hook.js';
 import styles from './status.module.scss';
 
 interface Props {
@@ -21,13 +21,13 @@ interface Props {
   readonly uptimeMessages: readonly unknown[];
 }
 
-const errorClassName: string = validateString(styles.error);
-const iconClassName: string = validateString(styles.icon);
-const infoClassName: string = validateString(styles.info);
-const messageClassName = validateString(styles.message);
-const messagesClassName = validateString(styles.messages);
+const errorClassName: string = validateString(styles['error']);
+const iconClassName: string = validateString(styles['icon']);
+const infoClassName: string = validateString(styles['info']);
+const messageClassName = validateString(styles['message']);
+const messagesClassName = validateString(styles['messages']);
 const NONE = 0;
-const subheaderClassName: string = validateString(styles.subheader);
+const subheaderClassName: string = validateString(styles['subheader']);
 
 const mapErrorToElement = (err: unknown): ReactElement => {
   const errStr: string = mapUnknownToString(err);

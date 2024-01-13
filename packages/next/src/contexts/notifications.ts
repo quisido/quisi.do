@@ -1,8 +1,8 @@
 'use client';
 
 import { type Provider } from 'react';
-import type Notification from '../types/notification';
-import createContextUtils from '../utils/create-context-utils';
+import type Notification from '../types/notification.js';
+import createContextUtils from '../utils/create-context-utils/index.js';
 
 const { ContextProvider, useContextValue } =
   createContextUtils<
@@ -14,7 +14,7 @@ const { ContextProvider, useContextValue } =
           | ((
               oldNotifications: readonly Notification[],
             ) => readonly Notification[]),
-      ) => void
+      ) => void,
     ]
   >();
 
@@ -27,7 +27,7 @@ export const NotificationsProvider: Provider<
         | ((
             oldNotifications: readonly Notification[],
           ) => readonly Notification[]),
-    ) => void
+    ) => void,
   ]
 > = ContextProvider;
 
@@ -39,5 +39,5 @@ export const useNotifications: () => readonly [
       | ((
           oldNotifications: readonly Notification[],
         ) => readonly Notification[]),
-  ) => void
+  ) => void,
 ] = useContextValue;

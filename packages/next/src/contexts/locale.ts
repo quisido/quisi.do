@@ -1,8 +1,8 @@
 'use client';
 
 import { type Provider } from 'react';
-import type Locale from '../constants/locale';
-import createContextUtils from '../utils/create-context-utils';
+import type Locale from '../constants/locale.js';
+import createContextUtils from '../utils/create-context-utils/index.js';
 
 const { ContextProvider, useContextValue } =
   createContextUtils<readonly [Locale, (locale: Locale) => void]>();

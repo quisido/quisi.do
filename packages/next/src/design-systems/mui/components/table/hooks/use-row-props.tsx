@@ -1,9 +1,9 @@
 /* eslint-disable react/no-multi-comp */
 import { type Attributes, type ComponentType, type ReactElement } from 'react';
 import { useCallback, useMemo } from 'react';
-import type Column from '../../../../../types/table-column';
-import type CellProps from '../types/cell-props';
-import type RowProps from '../types/row-props';
+import type Column from '../../../../../types/table-column.js';
+import type CellProps from '../types/cell-props.js';
+import type RowProps from '../types/row-props.js';
 
 interface Props<Item extends object> {
   readonly Description?: ComponentType<Item> | undefined;

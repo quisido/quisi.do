@@ -4907,6 +4907,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@quisido/authn@workspace:packages/authn":
+  version: 0.0.0-use.local
+  resolution: "@quisido/authn@workspace:packages/authn"
+  dependencies:
+    "@arethetypeswrong/cli": "npm:^0.13.2"
+    "@cloudflare/workers-types": "npm:^4.20231121.0"
+    "@types/jest": "npm:^29.5.10"
+    form-urlencoded: "npm:^2.0.4"
+    jest: "npm:^29.7.0"
+    jsonapi-datastore: "npm:^0.4.0-beta"
+    patreon: "npm:^0.4.1"
+    ts-jest: "npm:^29.1.1"
+    typescript: "npm:^5.3.2"
+    wrangler: "npm:^3.17.1"
+  languageName: unknown
+  linkType: soft
+
 "@quisido/cdk@workspace:packages/cdk":
   version: 0.0.0-use.local
   resolution: "@quisido/cdk@workspace:packages/cdk"
@@ -4929,31 +4946,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@quisido/cloudflare-analytics-worker@workspace:packages/cloudflare-analytics-worker":
+"@quisido/cloudflare-analytics@workspace:packages/cloudflare-analytics":
   version: 0.0.0-use.local
-  resolution: "@quisido/cloudflare-analytics-worker@workspace:packages/cloudflare-analytics-worker"
+  resolution: "@quisido/cloudflare-analytics@workspace:packages/cloudflare-analytics"
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.13.2"
     "@cloudflare/workers-types": "npm:^4.20231121.0"
     "@types/jest": "npm:^29.5.10"
     "@types/node": "npm:^20.10.0"
     jest: "npm:^29.7.0"
-    ts-jest: "npm:^29.1.1"
-    typescript: "npm:^5.3.2"
-    wrangler: "npm:^3.17.1"
-  languageName: unknown
-  linkType: soft
-
-"@quisido/cloudflare-authn-worker@workspace:packages/cloudflare-authn-worker":
-  version: 0.0.0-use.local
-  resolution: "@quisido/cloudflare-authn-worker@workspace:packages/cloudflare-authn-worker"
-  dependencies:
-    "@arethetypeswrong/cli": "npm:^0.13.2"
-    "@cloudflare/workers-types": "npm:^4.20231121.0"
-    "@types/jest": "npm:^29.5.10"
-    "@types/node": "npm:^20.10.0"
-    jest: "npm:^29.7.0"
-    patreon: "npm:^0.4.1"
     ts-jest: "npm:^29.1.1"
     typescript: "npm:^5.3.2"
     wrangler: "npm:^3.17.1"
@@ -5026,6 +5027,7 @@ __metadata:
     "@opentelemetry/sdk-trace-web": "npm:^1.18.1"
     "@opentelemetry/semantic-conventions": "npm:^1.18.1"
     "@react-aria/button": "npm:^3.9.0"
+    "@react-aria/link": "npm:^3.6.3"
     "@react-aria/overlays": "npm:^3.20.0"
     "@sentry/browser": "npm:^7.81.1"
     "@sentry/core": "npm:^7.81.1"
@@ -5046,6 +5048,7 @@ __metadata:
     aws-rum-web: "npm:^1.16.0"
     babel-loader: "npm:^9.1.3"
     babel-plugin-istanbul: "npm:^6.1.1"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
     concurrently: "npm:^8.2.2"
     console-table-printer: "npm:^2.11.2"
     cypress: "npm:^13.6.0"
@@ -5187,6 +5190,22 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: f61f8657d29944adb91a081e316315dd18e07fc794fc8e114a7513a8eb0a806133505ec945ae5db29435dc6adb89021cc65601919544a8f42c47f5a3a58e5ca3
+  languageName: node
+  linkType: hard
+
+"@react-aria/link@npm:^3.6.3":
+  version: 3.6.3
+  resolution: "@react-aria/link@npm:3.6.3"
+  dependencies:
+    "@react-aria/focus": "npm:^3.16.0"
+    "@react-aria/interactions": "npm:^3.20.1"
+    "@react-aria/utils": "npm:^3.23.0"
+    "@react-types/link": "npm:^3.5.2"
+    "@react-types/shared": "npm:^3.22.0"
+    "@swc/helpers": "npm:^0.5.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: 016200f1a6fd443b338720b58df5d2b28aee2853f4ed1135963984d55ee54d3843f2ea09310b12f8de614ed955fd1fa06201f17796675ab1a8900efb1d166360
   languageName: node
   linkType: hard
 
@@ -5334,6 +5353,17 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: 48fd23f68dbcf62f8dc58e125d0cc87e38bb8c9a12c0c92508409fb327dfe54bc638cd7aac06016aaebdab4ab3414378b723bca1f7717b70635d0a755cabc814
+  languageName: node
+  linkType: hard
+
+"@react-types/link@npm:^3.5.2":
+  version: 3.5.2
+  resolution: "@react-types/link@npm:3.5.2"
+  dependencies:
+    "@react-types/shared": "npm:^3.22.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: a1e7e9c64074b2d8bbfa90f7f0719f9fddad44bd4dd263f9985cffd9fa8a293a4524cef55c834228946706e5f5582e6c22b250e9054ec536fb48627d6861c21f
   languageName: node
   linkType: hard
 
@@ -8321,6 +8351,13 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.4.0 || ^8.0.0-0 <8.0.0
   checksum: cc32313b9ebbf1d7bedc33524a861136b9e5d3b6e9be317ac360a1c2a59ae5ed1b465a6c68b2715cdefb089780ddfb0c11f4a148e49827a947beee76e43da598
+  languageName: node
+  linkType: hard
+
+"babel-plugin-replace-import-extension@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "babel-plugin-replace-import-extension@npm:1.1.4"
+  checksum: e6132c8f35530a2fbae9fc8d93e6277e4bbace0dc739bca4097dfc8f2357f83d539b7083c8508ed406889c075dfb4a7376ea1d9fc554da6daa269f45e5235193
   languageName: node
   linkType: hard
 
@@ -14770,7 +14807,7 @@ __metadata:
 "jsonapi-datastore@npm:^0.4.0-beta":
   version: 0.4.0-beta
   resolution: "jsonapi-datastore@npm:0.4.0-beta"
-  checksum: 341922e7878a61e5d6f72ccf85e99a23f01c5f42ad78bd15fe05e8c6c1e126749e2b99beb4f70535ad1bcc381d52f34b4195611f3455e96712fd5cd7a805edbe
+  checksum: a23a8d7262e300afbc1280062e24e2d213c8a0f535db015e4d51b46637692638770e0ab93b3e7f58daf0bc8899dce9a1ca3df74e2e561ddb4870acd4dfcb6d52
   languageName: node
   linkType: hard
 
@@ -20058,7 +20095,7 @@ __metadata:
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 73c8bad74e732d93211c9d77f28b03307e2f5fc6a0afc73f4b783261ab567686a16d6ae958bdaef383a00be1b0b8c8b6741dd6ca3d13af4963fa7e47456d49c7
+  checksum: 484c47b7381e0d26d4ad4594a83e0f11cbbda5f5abdd3fdaf2086a42de7b1099efe8d915615644102c6360def8268e966e42344c0f05d03ae1fd5cb8e30ea21b
   languageName: node
   linkType: hard
 

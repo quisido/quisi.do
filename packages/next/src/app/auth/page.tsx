@@ -3,10 +3,10 @@
 import { useRouter } from 'next/router.js';
 import type { ParsedUrlQuery } from 'querystring';
 import { type ReactElement, useEffect, useState } from 'react';
-import Section from '../../components/section';
-import Div from '../../components/div';
-import Header from '../../components/header';
 import mapUnknownToString from 'unknown2string';
+import Div from '../../components/div/index.js';
+import Header from '../../components/header/index.js';
+import Section from '../../components/section.js';
 
 const FIRST = 0;
 const { PATREON_OAUTH_CLIENT_SECRET } = process.env;

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import type GoogleAnalyticsWindow from '../types/google-analytics-window';
+import type GoogleAnalyticsWindow from '../types/google-analytics-window.js';
 
 export default function useDataLayer(): void {
   useEffect((): VoidFunction | undefined => {

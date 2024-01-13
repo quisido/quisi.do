@@ -1,6 +1,6 @@
-import type TableColumn from '../../../types/table-column';
-import DIRECT_DOWNLOADS_COLUMN from '../constants/direct-downloads-column';
-import type Item from '../types/packages-item';
+import type TableColumn from '../../../types/table-column.js';
+import DIRECT_DOWNLOADS_COLUMN from '../constants/direct-downloads-column.js';
+import type Item from '../types/packages-item.js';
 
 export default function mapHeaderToDirectDownloadsColumn(
   header: string,

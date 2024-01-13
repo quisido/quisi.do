@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import mapGitHubShaToVersion from './map-github-sha-to-version';
+import mapGitHubShaToVersion from './map-github-sha-to-version.js';
 
 describe('mapGitHubShaToVersion', (): void => {
   it('should convert to base 36 and strip trailing zeros', (): void => {

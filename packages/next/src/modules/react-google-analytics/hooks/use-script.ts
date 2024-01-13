@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import getHead from '../utils/get-head';
-import mapTrackingIdToScriptElement from '../utils/map-tracking-id-to-script-element';
+import getHead from '../utils/get-head.js';
+import mapTrackingIdToScriptElement from '../utils/map-tracking-id-to-script-element.js';
 
 export default function useScript(trackingId: string): void {
   useEffect((): VoidFunction => {

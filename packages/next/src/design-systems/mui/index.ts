@@ -1,1 +1,1 @@
-export { default } from './mui.view';
+export { default } from './mui.view.js';

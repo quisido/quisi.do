@@ -1,1 +1,1 @@
-export { default } from './events.view';
+export { default } from './events.view.js';

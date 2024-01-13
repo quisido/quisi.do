@@ -1,6 +1,4 @@
-const createSessionId = (): string => {
-  return '1234567890';
-};
+import createSessionId from './create-session-id.js';
 
 export default function getSessionId(): string {
   const id: null | string = window.sessionStorage.getItem('id');

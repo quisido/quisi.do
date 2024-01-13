@@ -2,14 +2,14 @@
 
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Banner from '../../components/banner';
-import Div from '../../components/div';
-import NumberFormat from '../../components/number-format';
-import Table from '../../components/table';
-import Description from './components/description';
-import MINIMUM_DOWNLOADS from './constants/minimum-package-downloads';
-import usePackages from './packages.hook';
-import type Item from './types/packages-item';
+import Banner from '../../components/banner.js';
+import Div from '../../components/div/index.js';
+import NumberFormat from '../../components/number-format/index.js';
+import Table from '../../components/table/index.js';
+import Description from './components/description/index.js';
+import MINIMUM_DOWNLOADS from './constants/minimum-package-downloads.js';
+import usePackages from './packages.hook.js';
+import type Item from './types/packages-item.js';
 
 export default function Packages(): ReactElement {
   const {

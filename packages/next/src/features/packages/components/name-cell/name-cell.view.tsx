@@ -1,8 +1,8 @@
 import { type ReactElement } from 'react';
-import EmphasizeSubstring from '../../../../components/emphasize-substring';
-import Link from '../../../../components/link';
-import type Item from '../../types/packages-item';
-import useNameCell from './name-cell.hook';
+import EmphasizeSubstring from '../../../../components/emphasize-substring/index.js';
+import Link from '../../../../components/link/index.js';
+import type Item from '../../types/packages-item.js';
+import useNameCell from './name-cell.hook.js';
 
 interface Props extends Pick<Item, 'href' | 'packageName'> {
   readonly filter: string;

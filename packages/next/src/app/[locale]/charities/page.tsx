@@ -1,9 +1,9 @@
 import { type ReactElement } from 'react';
-import Section from '../../../components/section';
-import Div from '../../../components/div';
-import Header from '../../../components/header';
+import Section from '../../../components/section.js';
+import Div from '../../../components/div/index.js';
+import Header from '../../../components/header/index.js';
 
-export { default as generateStaticParams } from '../../../features/generate-locale-static-params';
+export { default as generateStaticParams } from '../../../features/generate-locale-static-params.js';
 
 export default function CharitiesPage(): ReactElement {
   return (

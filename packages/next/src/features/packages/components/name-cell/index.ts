@@ -1,1 +1,1 @@
-export { default } from './name-cell.view';
+export { default } from './name-cell.view.js';

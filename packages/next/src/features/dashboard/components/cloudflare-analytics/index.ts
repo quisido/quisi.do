@@ -1,1 +1,1 @@
-export { default } from './cloudflare-analytics.view';
+export { default } from './cloudflare-analytics.view.js';

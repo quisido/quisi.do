@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import useOnlineStatus from './online-status.hook';
+import useOnlineStatus from './online-status.hook.js';
 
 interface Props {
   readonly children: boolean;

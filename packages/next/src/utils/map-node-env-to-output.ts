@@ -1,8 +1,8 @@
-import { type NextConfig } from "next";
+import { type NextConfig } from 'next';
 
 export default function mapNodeEnvToOutput(
   env: NodeJS.ProcessEnv['NODE_ENV'],
-): NextConfig['output'] {
+): Required<NextConfig>['output'] {
   switch (env) {
     case 'development':
     case 'test':

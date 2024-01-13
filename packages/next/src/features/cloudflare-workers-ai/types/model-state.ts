@@ -1,5 +1,5 @@
-import type Inputs from './inputs';
-import type WithModel from './with-model';
+import type Inputs from './inputs.js';
+import type WithModel from './with-model.js';
 
 type ModelState = ModelStates[keyof Inputs];
 

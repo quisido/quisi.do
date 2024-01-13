@@ -3,7 +3,7 @@ import CardActions from '@mui/material/CardActions';
 import MuiContent from '@mui/material/CardContent';
 import MuiHeader from '@mui/material/CardHeader';
 import { type ComponentType, type ReactElement } from 'react';
-import validateString from '../../../../../../utils/validate-string';
+import validateString from '../../../../../../utils/validate-string.js';
 import styles from './card.module.scss';
 
 export interface Props<Item extends object> {
@@ -13,7 +13,7 @@ export interface Props<Item extends object> {
   readonly item: Item;
 }
 
-const rootClassName: string = validateString(styles.root);
+const rootClassName: string = validateString(styles['root']);
 
 export default function MuiCard<Item extends object>({
   Content,

@@ -1,13 +1,13 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Div from '../../../../components/div';
-import LoadingIcon from '../../../../components/loading-icon';
-import Section from '../../../../components/section';
-import Span from '../../../../components/span';
-import PieChart from '../apdex-pie-chart';
-import LineChart from '../apdex-line-chart';
-import mapRecordToSum from '../../utils/map-record-to-sum';
-import createApdexScore from '../../utils/create-apdex-score';
+import Div from '../../../../components/div/index.js';
+import LoadingIcon from '../../../../components/loading-icon/index.js';
+import Section from '../../../../components/section.js';
+import Span from '../../../../components/span/index.js';
+import PieChart from '../apdex-pie-chart/index.js';
+import LineChart from '../apdex-line-chart/index.js';
+import mapRecordToSum from '../../utils/map-record-to-sum.js';
+import createApdexScore from '../../utils/create-apdex-score.js';
 
 export interface Props {
   readonly error: string | null;

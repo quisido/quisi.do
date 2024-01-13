@@ -1,5 +1,5 @@
 import type { PropsWithChildren, ReactElement } from 'react';
-import useTheme from '../../../hooks/use-theme';
+import useTheme from '../../../hooks/use-theme.js';
 
 export default function Theme({ children }: PropsWithChildren): ReactElement {
   const { backgroundColor, foregroundColor } = useTheme();

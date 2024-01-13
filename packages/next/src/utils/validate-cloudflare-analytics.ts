@@ -1,5 +1,5 @@
-import type CloudflareAnalytics from '../types/cloudflare-analytics';
-import isCloudflareAnalytics from './is-cloudflare-analytics';
+import type CloudflareAnalytics from '../types/cloudflare-analytics.js';
+import isCloudflareAnalytics from './is-cloudflare-analytics.js';
 
 export default function validateCloudflareAnalytics(
   value: unknown,

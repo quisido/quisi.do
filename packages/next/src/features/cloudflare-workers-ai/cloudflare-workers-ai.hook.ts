@@ -5,16 +5,16 @@ import {
   useRef,
   useState,
 } from 'react';
-import useAsyncState from '../../modules/use-async-state';
-import type Fetch from './types/fetch';
-import type ApiTokenStatus from './types/api-token-status';
-import useEffectEvent from '../../hooks/use-effect-event';
-import isRunnable from './utils/is-runnable';
-import DEFAULT_STATE from './constants/default-state';
-import type Model from './constants/model';
-import type ModelState from './types/model-state';
+import useAsyncState from '../../modules/use-async-state.js';
+import type Fetch from './types/fetch.js';
+import type ApiTokenStatus from './types/api-token-status.js';
+import useEffectEvent from '../../hooks/use-effect-event.js';
+import isRunnable from './utils/is-runnable.js';
+import DEFAULT_STATE from './constants/default-state.js';
+import type Model from './constants/model.js';
+import type ModelState from './types/model-state.js';
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
-import mapModelToInitialInputs from './utils/map-model-to-initial-inputs';
+import mapModelToInitialInputs from './utils/map-model-to-initial-inputs.js';
 
 interface State<S extends ModelState> {
   readonly apiToken: string;

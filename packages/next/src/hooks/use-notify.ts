@@ -1,6 +1,6 @@
-import { useNotifications } from '../contexts/notifications';
-import type Notification from '../types/notification';
-import useEffectEvent from './use-effect-event';
+import { useNotifications } from '../contexts/notifications.js';
+import type Notification from '../types/notification.js';
+import useEffectEvent from './use-effect-event.js';
 
 export default function useNotify(): (
   notification: Notification,

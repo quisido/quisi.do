@@ -6,8 +6,8 @@ import {
   type ReactElement,
   Suspense,
 } from 'react';
-import type DesignSystem from '../../constants/design-system';
-import useDesign from './design.hook';
+import type DesignSystem from '../../constants/design-system.js';
+import useDesign from './design.hook.js';
 
 interface Props<P extends object> {
   readonly components: Readonly<

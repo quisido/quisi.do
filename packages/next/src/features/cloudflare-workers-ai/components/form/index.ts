@@ -1,1 +1,1 @@
-export { default } from './form.view';
+export { default } from './form.view.js';

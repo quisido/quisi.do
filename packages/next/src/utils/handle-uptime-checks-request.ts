@@ -1,4 +1,4 @@
-import type UptimeChecks from '../types/uptime-checks';
+import type UptimeChecks from '../types/uptime-checks.js';
 import OnlineOrNot, {
   type UptimeChecks as OnlineOrNotUptimeChecks,
 } from './online-or-not';

@@ -1,4 +1,4 @@
-import type IntercomWindow from '../types/intercom-window';
+import type IntercomWindow from '../types/intercom-window.js';
 
 // Intercom requires its presence on the `window` object.
 const INTERCOM_WINDOW: IntercomWindow = window;

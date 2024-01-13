@@ -1,2 +1,2 @@
-export type { Props } from './checkbox.view';
-export { default } from './checkbox.view';
+export type { Props } from './checkbox.view.js';
+export { default } from './checkbox.view.js';

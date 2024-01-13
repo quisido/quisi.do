@@ -4,8 +4,8 @@ import SortLabel from '@mui/material/TableSortLabel';
 import visuallyHidden from '@mui/utils/visuallyHidden';
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import type Props from '../../types/head-cell-props';
-import useMuiTableHeadCell from './head-cell.hook';
+import type Props from '../../types/head-cell-props.js';
+import useMuiTableHeadCell from './head-cell.hook.js';
 
 const mapPaletteToBackgroundColor = ({
   mode,

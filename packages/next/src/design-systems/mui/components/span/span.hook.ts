@@ -1,5 +1,5 @@
-import mapColorToMuiColor from './utils/map-color-to-mui-color';
-import mapSizeToFontSize from './utils/map-size-to-font-size';
+import mapColorToMuiColor from './utils/map-color-to-mui-color.js';
+import mapSizeToFontSize from './utils/map-size-to-font-size.js';
 
 interface Props {
   readonly color: 'inherit' | 'label' | 'secondary-body' | undefined;

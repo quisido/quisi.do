@@ -1,2 +1,2 @@
-export type { Props } from './table.view';
-export { default } from './table.view';
+export type { Props } from './table.view.js';
+export { default } from './table.view.js';

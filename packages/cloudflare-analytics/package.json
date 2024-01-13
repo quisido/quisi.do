@@ -1,5 +1,5 @@
 {
-  "name": "@quisido/cloudflare-analytics-worker",
+  "name": "@quisido/cloudflare-analytics",
   "type": "module",
   "private": true,
   "version": "1.0.0",

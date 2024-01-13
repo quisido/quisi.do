@@ -3,7 +3,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import { type ReactElement } from 'react';
-import { type Props } from '../../../components/section';
+import { type Props } from '../../../components/section.js';
 
 export default function MuiSection({
   actions,

@@ -1,10 +1,10 @@
 'use client';
 
-import { type ReactElement, useRef } from 'react';
-import Emoji from '../components/emoji';
-import useLocalStorage from '../hooks/use-local-storage';
-import LocalStorageItem from '../constants/local-storage-item';
 import { useButton } from '@react-aria/button';
+import { type ReactElement, useRef } from 'react';
+import Emoji from '../components/emoji.js';
+import useLocalStorage from '../hooks/use-local-storage.js';
+import LocalStorageItem from '../constants/local-storage-item.js';
 
 export default function Footer(): ReactElement | null {
   const [show, setShow] = useLocalStorage(LocalStorageItem.QuisidoDotCom);

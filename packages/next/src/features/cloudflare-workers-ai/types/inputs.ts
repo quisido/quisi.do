@@ -1,5 +1,5 @@
-import type Language from '../constants/language';
-import type Model from '../constants/model';
+import type Language from '../constants/language.js';
+import type Model from '../constants/model.js';
 
 export interface BaaiBgeEnV15 {
   readonly text: string | readonly string[];

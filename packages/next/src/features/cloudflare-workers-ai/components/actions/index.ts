@@ -1,1 +1,1 @@
-export { default } from './actions.view';
+export { default } from './actions.view.js';

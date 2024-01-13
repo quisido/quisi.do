@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import select from './select';
+import select from './select.js';
 
 const EXPANDO_SELECTOR = '*[role="button"]';
 const NAVIGATION_ITEM_SELECTOR = 'nav ul > li';

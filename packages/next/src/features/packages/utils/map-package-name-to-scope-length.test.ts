@@ -1,4 +1,4 @@
-import mapPackageNameToScopeLength from './map-package-name-to-scope-length';
+import mapPackageNameToScopeLength from './map-package-name-to-scope-length.js';
 
 const NOT_FOUND = -1;
 

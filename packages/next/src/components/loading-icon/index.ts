@@ -1,1 +1,1 @@
-export { default } from './loading-icon.view';
+export { default } from './loading-icon.view.js';

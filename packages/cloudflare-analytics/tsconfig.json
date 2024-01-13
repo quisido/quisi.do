@@ -48,7 +48,7 @@
     "strictPropertyInitialization": true,
     "suppressImplicitAnyIndexErrors": false,
     "target": "ESNext",
-    "types": ["node"],
+    "types": [],
     "useUnknownInCatchVariables": true,
     "verbatimModuleSyntax": true
   }

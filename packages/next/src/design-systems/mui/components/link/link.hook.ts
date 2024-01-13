@@ -6,9 +6,9 @@ import {
   type MouseEvent,
   useEffect,
 } from 'react';
-import useEffectEvent from '../../../../hooks/use-effect-event';
-import useEmit from '../../../../hooks/use-emit';
-import isHrefBlank from '../../../../utils/is-href-blank';
+import useEffectEvent from '../../../../hooks/use-effect-event.js';
+import useEmit from '../../../../hooks/use-emit/index.js';
+import isHrefBlank from '../../../../utils/is-href-blank.js';
 
 interface Props {
   readonly feature: string;

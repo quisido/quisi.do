@@ -1,5 +1,5 @@
 import { type CSSProperties, useMemo } from 'react';
-import mapSizeToSystemValue from './utils/map-size-to-system-value';
+import mapSizeToSystemValue from './utils/map-size-to-system-value.js';
 
 interface Props {
   readonly float?: 'left' | 'right' | undefined;

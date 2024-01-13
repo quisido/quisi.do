@@ -1,2 +1,2 @@
-export type { Props } from './apdex.view';
-export { default } from './apdex.view';
+export type { Props } from './apdex.view.js';
+export { default } from './apdex.view.js';

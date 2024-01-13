@@ -1,4 +1,4 @@
-import Locale from '../constants/locale';
+import Locale from '../constants/locale.js';
 
 interface Params {
   readonly locale: Locale;
