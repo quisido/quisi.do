@@ -1,4 +1,4 @@
-import JsonApiDataStore from 'jsonapi-datastore';
+import { JsonApiDataStore } from 'jsonapi-datastore';
 import { type ClientPathname } from 'patreon';
 import USER_AGENT from '../constants/user-agent.js';
 import createApiAccessToken from './create-api-access-token.js';

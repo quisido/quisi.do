@@ -79,7 +79,9 @@ export default async function createApiAccessToken(
           return json.error_description;
         }
         default:
-          return 'Unknown Patreon OAuth token error';
+          return `Unknown Patreon OAuth token error: ${JSON.stringify(
+            json.error,
+          )}`;
       }
     };
 

@@ -37,7 +37,7 @@
     "prepublish": "concurrently --kill-others-on-fail --names eslint,jest,prepublish,test \"yarn run eslint\" \"yarn run jest\" \"yarn workspaces foreach --all --exclude \\\"@quisi/do\\\" --verbose run prepublish\" \"yarn run test\"",
     "publish": "yarn workspaces foreach --all --jobs unlimited --no-private --parallel --topological-dev --verbose npm publish --tolerate-republish",
     "serve": "yarn packages/next run serve",
-    "start": "echo \"Please use either `yarn dev` or `yarn serve` instead.\" && exit 1",
+    "start": "echo \"Please use either `yarn run dev` or `yarn run serve` instead.\" && exit 1",
     "test": "monorepo-template-test",
     "up": "yarn up \"@!(monorepo-template)/*\" \"!(aws-rum-react|fullstory-react|lazy-i18n|mock-next-router|number-format-react|react-datadog|sentry-react|unknown2string|use-awsui-table-item-description|use-next-awsui|use-offline|use-shallow-memo)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
   },
