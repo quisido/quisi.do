@@ -1,124 +1,77 @@
 /// <reference types="@cloudflare/workers-types" />
-import type { JsonApiDataStore } from 'jsonapi-datastore';
+import Environment from '../constants/environment.js';
+import {
+  FAVICON_RESPONSE_BODY,
+  FAVICON_RESPONSE_INIT,
+} from '../constants/favicon-response.js';
+import StatusCode from '../constants/status-code.js';
+import type State from '../types/state.js';
 import assert from '../utils/assert.js';
-import createApiClient from '../utils/create-api-client.js';
-import isCause from '../utils/is-cause.js';
-import mapRequestUrlToCode from '../utils/map-request-url-to-code.js';
-
-interface Serializable<T> {
-  readonly serialize: () => T;
-}
-
-const FIRST = 0;
-const HTTP_INTERNAL_SERVER_ERROR = 500;
-const HEADERS: Headers = new Headers({
-  'Content-Type': 'application/json; charset=utf-8',
-});
-
-const serialize = <T>(serializable: Serializable<T>): T =>
-  serializable.serialize();
+import createError from '../utils/create-error.js';
+import createPatreonResponse from '../utils/create-patreon-response.js';
+import isEnvironment from '../utils/is-environment.js';
+import mapErrorToResponse from '../utils/map-error-to-response.js';
+import mapRequestToState from '../utils/map-request-to-state.js';
+import mapRequestSearchParamsToCode from '../utils/map-request-search-params-to-code.js';
+import throttle from './throttle.js';
 
 export default async function fetch(
   request: Readonly<Request>,
   {
-    PATREON_CLIENT_ID,
-    PATREON_CLIENT_SECRET,
+    ENV,
+    PATREON_OAUTH_CLIENT_ID,
+    PATREON_OAUTH_CLIENT_SECRET,
     PATREON_OAUTH_HOST,
-    PATREON_REDIRECT_URI,
+    PATREON_OAUTH_REDIRECT_URI,
   }: Readonly<Record<string, unknown>>,
 ): Promise<Response> {
-  const {
-    pathname: requestPathname,
-    search: requestSearch,
-    hash: requestHash,
-  }: URL = new URL(request.url);
-  if (requestPathname === '/favicon.ico') {
-    return new Response(null);
-  }
-
-  console.log(`${requestPathname}${requestSearch}${requestHash}`);
-
   try {
+    // Method
     assert(
-      typeof PATREON_CLIENT_ID === 'string',
-      'Expected a Patreon client ID.',
-    );
-    assert(
-      typeof PATREON_CLIENT_SECRET === 'string',
-      'Expected a Patreon client secret.',
-    );
-    assert(
-      typeof PATREON_OAUTH_HOST === 'string',
-      'Expected a Patreon OAuth host.',
-    );
-    assert(
-      typeof PATREON_REDIRECT_URI === 'string',
-      'Expected a Patreon redirect URI.',
+      request.method === 'GET' || request.method === 'POST',
+      'Method not allowed.',
+      StatusCode.MethodNotAllowed,
+      request.method,
     );
 
-    const code: string = mapRequestUrlToCode(request.url);
-    const makeRequest = await createApiClient(
-      PATREON_OAUTH_HOST,
-      PATREON_CLIENT_ID,
-      PATREON_CLIENT_SECRET,
-      PATREON_REDIRECT_URI,
-      code,
-    );
+    // Pathname
+    const {
+      pathname: requestPathname,
+      searchParams: requestSearchParams,
+    }: URL = new URL(request.url);
+    if (requestPathname === '/favicon.ico') {
+      return new Response(FAVICON_RESPONSE_BODY, FAVICON_RESPONSE_INIT);
+    }
 
-    const store: JsonApiDataStore = await makeRequest('/current_user');
-    const model: object | undefined = store.findAll('user').map(serialize)[
-      FIRST
-    ];
-
+    // Throttle (deployed environments)
     assert(
-      typeof model !== 'undefined',
-      'Expected to find a Patreon current user.',
+      isEnvironment(ENV),
+      'Expected an environment to be provided.',
+      StatusCode.InternalServerError,
+      ENV,
     );
 
-    assert('data' in model, 'Expected Patreon current user to contain data.');
+    if (ENV !== Environment.Development) {
+      throttle(request);
+    }
 
-    const { data } = model;
-    return new Response(JSON.stringify(data));
+    // Patreon
+    const state: State = mapRequestToState(request);
+    if (requestPathname === '/patreon/') {
+      const code: string = mapRequestSearchParamsToCode(requestSearchParams);
+      return await createPatreonResponse(
+        PATREON_OAUTH_HOST,
+        PATREON_OAUTH_CLIENT_ID,
+        PATREON_OAUTH_CLIENT_SECRET,
+        PATREON_OAUTH_REDIRECT_URI,
+        code,
+      );
+    }
+
+    throw createError('Not found.', StatusCode.NotFound, requestPathname);
   } catch (err: unknown) {
-    // Unknown error
-    if (!(err instanceof Error)) {
-      console.error(err);
-      return new Response(
-        JSON.stringify({
-          message: JSON.stringify(err),
-        }),
-        {
-          headers: HEADERS,
-          status: HTTP_INTERNAL_SERVER_ERROR,
-        },
-      );
-    }
-
-    // Unknown cause
-    const { cause } = err;
-    if (!isCause(cause)) {
-      console.error(err, cause);
-      return new Response(
-        JSON.stringify({
-          message: err.message,
-        }),
-        {
-          headers: HEADERS,
-          status: HTTP_INTERNAL_SERVER_ERROR,
-        },
-      );
-    }
-
-    // Known cause
-    console.error(err, cause.data);
-    return new Response(
-      JSON.stringify({
-        message: err.message,
-      }),
-      {
-        headers: HEADERS,
-        status: cause.status,
-      },
-    );
+    // Error `data` gets logged here.
+    console.error(err);
+    return mapErrorToResponse(err);
   }
 }

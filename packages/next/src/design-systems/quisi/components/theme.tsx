@@ -3,6 +3,7 @@ import useTheme from '../../../hooks/use-theme.js';
 
 export default function Theme({ children }: PropsWithChildren): ReactElement {
   const { backgroundColor, foregroundColor } = useTheme();
+
   return (
     <>
       <style

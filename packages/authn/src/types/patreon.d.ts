@@ -1,5 +1,5 @@
 declare module 'patreon' {
-  import type { default as JsonApiDataStore } from 'jsonapi-datastore';
+  import type { JsonApiDataStore } from 'jsonapi-datastore';
 
   interface ApiResult {
     readonly rawJson: JsonApiDocument;

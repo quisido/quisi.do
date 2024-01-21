@@ -4,6 +4,7 @@ import USER_AGENT from '../constants/user-agent.js';
 import createApiAccessToken from './create-api-access-token.js';
 import assert from './assert.js';
 import isObject from './is-object.js';
+import StatusCode from '../constants/status-code.js';
 
 const BASE_PATH = '/api/oauth2/api';
 const HTTP_REDIRECTION = 300;
@@ -52,6 +53,8 @@ export default async function createApiClient(
     assert(
       isObject(json),
       `Expected \`${host}${requestSpec}\` to be an object, but received ${typeof json}.`,
+      StatusCode.BadGateway,
+      json,
     );
 
     const store: JsonApiDataStore = new JsonApiDataStore();

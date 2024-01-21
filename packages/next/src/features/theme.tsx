@@ -21,7 +21,7 @@ export default function Theme({ children }: PropsWithChildren): ReactElement {
   return (
     <ThemeContext.Provider
       value={{
-        backgroundColor: '#ffffff',
+        backgroundColor: '#fff8e0',
         displayFontWeight: 700,
         foregroundColor: '#000000',
         primary: [240, 160, 200], // #f0a0c8

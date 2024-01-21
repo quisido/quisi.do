@@ -4,11 +4,11 @@ import { cpus } from 'node:os';
 import { join } from 'node:path';
 import getVersion from './src/utils/get-version.js';
 import mapNodeEnvToOutput from './src/utils/map-node-env-to-output.js';
-// import mapProcessEnvToNextJsEnv from './src/utils/map-process-env-to-nextjs-env.js';
 import withNextJsBundleAnalyzer from './src/utils/with-nextjs-bundle-analyzer.js';
 import type { Configuration as WebpackConfiguration } from 'webpack';
 import optional from './src/utils/optional.js';
 import mapNodeEnvToOnDemandEntries from './src/utils/map-node-env-to-on-demand-entries.js';
+import validateString from './src/utils/validate-string.js';
 
 const CPUS_COUNT: number = cpus().length;
 const handleDemandEntries = mapNodeEnvToOnDemandEntries(process.env.NODE_ENV);
@@ -18,7 +18,6 @@ export default withNextJsBundleAnalyzer({
   basePath: '', // deployed application pathname
   compress: true,
   distDir: '.next',
-  // env: mapProcessEnvToNextJsEnv(process.env),
   generateBuildId: getVersion,
   ...optional('onDemandEntries', handleDemandEntries),
   output: mapNodeEnvToOutput(process.env.NODE_ENV),
@@ -31,6 +30,15 @@ export default withNextJsBundleAnalyzer({
   devIndicators: {
     buildActivity: true,
     buildActivityPosition: 'bottom-right',
+  },
+
+  env: {
+    PATREON_OAUTH_CLIENT_ID: validateString(
+      process.env['PATREON_OAUTH_CLIENT_ID'],
+    ),
+    PATREON_OAUTH_REDIRECT_URI: validateString(
+      process.env['PATREON_OAUTH_REDIRECT_URI'],
+    ),
   },
 
   eslint: {

@@ -1,9 +1,10 @@
+import type StatusCode from '../constants/status-code.js';
 import type Cause from '../types/cause.js';
 
 export default function createError(
   message: string,
-  data: unknown,
-  status: number,
+  status: StatusCode,
+  data?: unknown,
 ): Error {
   return new Error(message, {
     cause: {
