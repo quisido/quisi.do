@@ -1,15 +1,13 @@
 'use client';
 
-import { type PropsWithChildren, type ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement, memo } from 'react';
 import DarkMode from '../../contexts/dark-mode.js';
 import DesignSystemContext from '../../contexts/design-system.js';
 import Hostname from '../../contexts/hostname.js';
 import SessionId from '../../contexts/session-id.js';
 import useContexts from './contexts.hook.js';
 
-export default function Contexts({
-  children,
-}: Readonly<PropsWithChildren>): ReactElement {
+function Contexts({ children }: Readonly<PropsWithChildren>): ReactElement {
   const { designSystem, hostname, isDarkModeEnabled, sessionId } =
     useContexts();
 
@@ -23,3 +21,5 @@ export default function Contexts({
     </DarkMode.Provider>
   );
 }
+
+export default memo(Contexts);

@@ -24,10 +24,10 @@ export default function Theme({ children }: PropsWithChildren): ReactElement {
         backgroundColor: '#fff8e0',
         displayFontWeight: 700,
         foregroundColor: '#000000',
-        primary: [240, 160, 200], // #f0a0c8
+        primary: [0xf0, 0xa0, 0xc8], // [240, 160, 200]
         primaryDark: '#604050',
         primaryFontWeight: 700,
-        // secondary: [34, 174, 221],
+        secondary: [0x86, 0xae, 0x52],
         // secondaryDark: '#0a3442',
         displayFontFamily:
           '"Noto Sans Display", "Noto Sans", Helvetica, sans-serif',

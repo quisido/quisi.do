@@ -4,6 +4,11 @@ name = "authn"
 tsconfig = "./tsconfig.json"
 workers_dev = true
 
+[[d1_databases]]
+binding = "USERS"
+database_name = "users"
+database_id = "d0e825fc-b58d-49b3-a86c-a9d967278d80"
+
 [dev]
 ip = "127.0.0.1"
 port = 5882      # parseInt('authn', 36) % 9999

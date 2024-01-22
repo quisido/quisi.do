@@ -17,7 +17,7 @@ import GoogleFonts from '../features/google-fonts.js';
 import Header from '../features/header.js';
 import GoogleAnalytics from '../features/google-analytics/index.js';
 // import Mixpanel from '../features/mixpanel.js';
-import NotificationsProvider from '../features/notifications-provider/index.js';
+import NotificationsProvider from '../features/notifications-provider.js';
 import Preconnect from '../features/preconnect.js';
 import Sentry from '../features/sentry/index.js';
 import ThemeFeature from '../features/theme.js';

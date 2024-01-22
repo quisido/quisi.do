@@ -1,3 +1,8 @@
+import {
+  MILLISECONDS_PER_SECOND,
+  MILLISECONDS_PER_YEAR,
+} from '../constants/time.js';
+
 interface Options {
   readonly expiresMs?: number | undefined;
   readonly partitioned?: boolean | undefined;
@@ -6,8 +11,15 @@ interface Options {
 }
 
 const DEFAULT_OPTIONS: Options = {};
-const MILLISECONDS_PER_SECOND = 1000;
 const SESSION = 0;
+
+const mapExpiresMsToMaxAge = (expiresMs: number): number => {
+  if (expiresMs === SESSION) {
+    return MILLISECONDS_PER_YEAR;
+  }
+
+  return Math.floor(expiresMs / MILLISECONDS_PER_SECOND);
+};
 
 export default function setCookie(
   key: string,
@@ -30,7 +42,7 @@ export default function setCookie(
     attributes.push(`expires=${expiry.toUTCString()}`);
   }
 
-  const maxAge: number = Math.floor(expiresMs / MILLISECONDS_PER_SECOND);
+  const maxAge: number = mapExpiresMsToMaxAge(expiresMs);
   attributes.push(`max-age=${maxAge}`);
 
   if (partitioned) {

@@ -1,11 +1,11 @@
 'use client';
 
 import { type PropsWithChildren, type ReactElement, useState } from 'react';
-import EMPTY_ARRAY from '../../constants/empty-array.js';
-import { NotificationsProvider } from '../../contexts/notifications.js';
-import type Notification from '../../types/notification.js';
+import EMPTY_ARRAY from '../constants/empty-array.js';
+import { NotificationsProvider } from '../contexts/notifications.js';
+import type Notification from '../types/notification.js';
 
-export default function AppNotificationsProvider({
+export default function NotificationsProviderFeature({
   children,
 }: PropsWithChildren): ReactElement {
   return (

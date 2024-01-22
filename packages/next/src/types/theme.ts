@@ -6,6 +6,9 @@ export default interface Theme {
   readonly displayFontWeight: 400 | 700;
   readonly foregroundColor: string;
   readonly primary: readonly [number, number, number];
-  readonly primaryDark: string;
   readonly primaryFontWeight: 400 | 700;
+  readonly secondary: readonly [number, number, number];
+
+  // TODO: Replace with `hsl` and darken.
+  readonly primaryDark: string;
 }

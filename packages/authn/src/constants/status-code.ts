@@ -3,6 +3,7 @@
 enum StatusCode {
   BadGateway = 502,
   BadRequest = 400,
+  Created = 201,
   InternalServerError = 500,
   MethodNotAllowed = 405,
   NotFound = 404,

@@ -7,6 +7,7 @@ import mapRgbToHex from '../utils/map-rgb-to-hex.js';
 
 interface State extends ThemeType {
   readonly primaryHex: string;
+  readonly secondaryHex: string;
 }
 
 export default function useTheme(): State {
@@ -19,5 +20,6 @@ export default function useTheme(): State {
   return {
     ...theme,
     primaryHex: mapRgbToHex(theme.primary),
+    secondaryHex: mapRgbToHex(theme.secondary),
   };
 }

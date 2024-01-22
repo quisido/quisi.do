@@ -16,6 +16,11 @@ export default function QuisiSection({
     <section
       style={{
         backgroundColor,
+        backgroundImage: `linear-gradient(${[
+          'rgba(255, 255, 255, 0.33)',
+          'rgba(255, 255, 255, 0.33)',
+        ].join(', ')})`,
+        borderRadius: '1em',
         color: foregroundColor,
         overflow: 'hidden',
         marginBottom: '1em',

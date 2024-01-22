@@ -103,7 +103,7 @@ export default async function fetch(
 
     /**
      * To create a missing analytics cache, visit
-     *   http://localhost:8787/__scheduled?cron=*+*+*+*+*
+     *   https://localhost:8787/__scheduled?cron=*+*+*+*+*
      **/
     if (body === null) {
       writeDataPoint({

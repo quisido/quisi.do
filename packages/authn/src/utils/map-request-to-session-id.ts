@@ -13,7 +13,7 @@ export default function mapRequestToSessionId(request: Request): string {
   );
 
   const cookiesRecord: Record<string, string> = parse(cookies);
-  const sessionId: string | undefined = cookiesRecord['__Secure-Session-ID'];
+  const sessionId: string | undefined = cookiesRecord['Session-ID'];
 
   assert(
     typeof sessionId === 'string',

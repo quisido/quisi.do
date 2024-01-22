@@ -56,7 +56,7 @@ export default async function fetch(
     }
 
     // Patreon
-    const state: State = mapRequestToState(request);
+    const { returnHref }: State = mapRequestToState(request);
     if (requestPathname === '/patreon/') {
       const code: string = mapRequestSearchParamsToCode(requestSearchParams);
       return await createPatreonResponse(
@@ -65,6 +65,7 @@ export default async function fetch(
         PATREON_OAUTH_CLIENT_SECRET,
         PATREON_OAUTH_REDIRECT_URI,
         code,
+        returnHref,
       );
     }
 

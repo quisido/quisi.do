@@ -1,3 +1,4 @@
+import assert from './assert.js';
 import mapDecimalToHexadecimal from './map-decimal-to-hexadecimal.js';
 import mapRgbToHex from './map-rgb-to-hex.js';
 
@@ -5,7 +6,6 @@ type RGBA = readonly [number, number, number, number];
 type Row = readonly RGBA[];
 
 const DIGITS = 2;
-const FIRST = 0;
 const HEX = 16;
 const OPAGUE = 1;
 
@@ -50,10 +50,12 @@ const mapRowToElements = (row: readonly RGBA[], rowIndex: number): string => {
 };
 
 export default function createDataUrl(...rows: readonly Row[]): string {
-  const height: number = rows.length;
-  const width: number = rows[FIRST].length;
+  const [firstRow] = rows;
+  assert(typeof firstRow !== 'undefined', firstRow, 'an array');
 
-  const svg = `<svg height="${height}" viewBox="0 0 ${width} ${height}" width="${width}" xmlns="http://www.w3.org/2000/svg">${rows
+  const height: number = rows.length;
+  const width: number = firstRow.length;
+  const svg = `<svg height="${height}" viewBox="0 0 ${width} ${height}" width="${width}" xmlns="https://www.w3.org/2000/svg">${rows
     .map(mapRowToElements)
     .join('')}</svg>`;
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;

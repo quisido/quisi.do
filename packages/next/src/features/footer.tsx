@@ -5,8 +5,10 @@ import { type ReactElement, useRef } from 'react';
 import Emoji from '../components/emoji.js';
 import useLocalStorage from '../hooks/use-local-storage.js';
 import LocalStorageItem from '../constants/local-storage-item.js';
+import useTheme from '../hooks/use-theme.js';
 
 export default function Footer(): ReactElement | null {
+  const { secondaryHex } = useTheme();
   const [show, setShow] = useLocalStorage(LocalStorageItem.QuisidoDotCom);
 
   const { buttonProps } = useButton(
@@ -25,8 +27,8 @@ export default function Footer(): ReactElement | null {
   return (
     <aside
       style={{
-        backgroundColor: '#40f0c0',
-        borderColor: '#40f0c0',
+        backgroundColor: secondaryHex,
+        borderColor: secondaryHex,
         borderStyle: 'outset',
         borderWidth: '0 0 1px 0',
         boxSizing: 'border-box',

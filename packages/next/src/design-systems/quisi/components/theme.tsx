@@ -12,7 +12,6 @@ export default function Theme({ children }: PropsWithChildren): ReactElement {
           __html: `
 body {
   background-color: ${backgroundColor};
-  background-image: linear-gradient(rgba(0, 0, 0, 0.005), rgba(0, 0, 0, 0.005));
   color: ${foregroundColor};
 }
 `,
