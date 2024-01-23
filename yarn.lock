@@ -4922,6 +4922,7 @@ __metadata:
     patreon: "npm:^0.4.1"
     ts-jest: "npm:^29.1.1"
     typescript: "npm:^5.3.2"
+    unknown2string: "workspace:^"
     wrangler: "npm:^3.17.1"
   languageName: unknown
   linkType: soft

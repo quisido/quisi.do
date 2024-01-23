@@ -21,3 +21,16 @@ export const FAVICON_RESPONSE_INIT: ResponseInit = {
     'Content-Type': 'image/x-icon; charset=utf-8',
   }),
 };
+
+export const ROBOTS_RESPONSE_BODY: BodyInit = 'Disallow: *';
+export const ROBOTS_RESPONSE_INIT: ResponseInit = {
+  status: 200,
+  headers: new Headers({
+    'Access-Control-Allow-Headers': 'Authorization',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Max-Age': '31536000',
+    Allow: 'GET, OPTIONS',
+    'Cache-Control': 'immutable, max-age=31536000, public',
+    'Content-Type': 'text/plain; charset=utf-8',
+  }),
+};

@@ -4,10 +4,13 @@ name = "authn"
 tsconfig = "./tsconfig.json"
 workers_dev = true
 
-[[d1_databases]]
-binding = "USERS"
-database_name = "users"
-database_id = "d0e825fc-b58d-49b3-a86c-a9d967278d80"
+d1_databases = [
+  { binding = "AUTHN", database_id = "d0e825fc-b58d-49b3-a86c-a9d967278d80", database_name = "authn" },
+]
+
+kv_namespaces = [
+  { binding = "AUTHN_USER_IDS", id = "4dca15c74cdb4fba9680ee52d46c1534" },
+]
 
 [dev]
 ip = "127.0.0.1"

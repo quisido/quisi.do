@@ -5,42 +5,21 @@ import createApiClient from '../utils/create-api-client.js';
 import serialize from '../utils/serialize.js';
 import isObject from './is-object.js';
 import PatreonGender from '../constants/patreon-gender.js';
+import type OAuthUser from '../types/oauth-user.js';
+import mapPatreonGenderToGender from './map-patreon-gender-to-gender.js';
 
-const GENDERS: Set<unknown> = new Set(Object.values(PatreonGender));
-const isGender = (value: unknown): value is PatreonGender => GENDERS.has(value);
+const PATREON_GENDERS: Set<unknown> = new Set(Object.values(PatreonGender));
 
-export default async function createPatreonResponse(
-  oAuthHost: unknown,
-  clientId: unknown,
-  clientSecret: unknown,
-  redirectUri: unknown,
+const isPatreonGender = (value: unknown): value is PatreonGender =>
+  PATREON_GENDERS.has(value);
+
+export default async function getPatreonUser(
+  oAuthHost: string,
+  clientId: string,
+  clientSecret: string,
+  redirectUri: string,
   code: string,
-  returnHref: string,
-): Promise<Response> {
-  assert(
-    typeof oAuthHost === 'string',
-    'Expected a Patreon OAuth host.',
-    StatusCode.InternalServerError,
-  );
-
-  assert(
-    typeof clientId === 'string',
-    'Expected a Patreon client ID.',
-    StatusCode.InternalServerError,
-  );
-
-  assert(
-    typeof clientSecret === 'string',
-    'Expected a Patreon client secret.',
-    StatusCode.InternalServerError,
-  );
-
-  assert(
-    typeof redirectUri === 'string',
-    'Expected a Patreon redirect URI.',
-    StatusCode.InternalServerError,
-  );
-
+): Promise<OAuthUser> {
   const makeRequest = await createApiClient(
     oAuthHost,
     clientId,
@@ -186,33 +165,14 @@ export default async function createPatreonResponse(
   const gender: unknown =
     'gender' in attributes ? attributes.gender : PatreonGender.Neutral;
   assert(
-    isGender(gender),
+    isPatreonGender(gender),
     'Expected Patreon to provide a gender.',
     StatusCode.BadGateway,
     gender,
   );
 
-  /**
-   * SELECT `userId` FROM `oauth`
-   * WHERE `provider` = OAuthProvider.Patreon AND `oauthId` = ${id}
-   */
-  /**
-   *   a. If it does not exist, create it.
-   *      users: firstName, fullName, registrationTimestamp (Date.now() - new Date('2024-01-01 00:00:00 UTC').getTime()), gender
-   *        GET USER ID
-   *      emails: userId, address: email
-   *      oauth: Patreon, oauthId: id, userId
-   * 2. Generate a __Secure-Authentication-ID value.
-   *   a. Set it as a cookie.
-   *   b. Write AUTHN -> USER_ID to KV.
-   * 3. Publish
-   * 4. ENABLE WAF
-   */
-  return new Response(null, {
-    status: StatusCode.Created,
-    headers: new Headers({
-      Location: returnHref,
-      'Set-Cookie': '__Secure-Authentication-ID=',
-    }),
-  });
+  return {
+    gender: mapPatreonGenderToGender(gender),
+    id,
+  };
 }

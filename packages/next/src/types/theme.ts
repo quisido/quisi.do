@@ -4,7 +4,7 @@ export default interface Theme {
   readonly backgroundColor: string;
   readonly displayFontFamily: string;
   readonly displayFontWeight: 400 | 700;
-  readonly foregroundColor: string;
+  readonly foreground: readonly [number, number, number];
   readonly primary: readonly [number, number, number];
   readonly primaryFontWeight: 400 | 700;
   readonly secondary: readonly [number, number, number];

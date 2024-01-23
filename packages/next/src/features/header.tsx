@@ -9,6 +9,7 @@ export default function Header(): ReactElement {
   return (
     <header
       style={{
+        marginBottom: '1em',
         marginLeft: 'auto',
         marginRight: 'auto',
         maxWidth: '60em',
@@ -35,7 +36,7 @@ export default function Header(): ReactElement {
         style={{
           display: 'block',
           fontSize: '0.75em',
-          marginBottom: '1em',
+          marginTop: '-0.5em',
           paddingLeft: '1.5em',
         }}
       >
