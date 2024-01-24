@@ -7,7 +7,7 @@ import Section from '../../../../components/section.js';
 import validateString from '../../../../utils/validate-string.js';
 import LastChecked from '../last-checked/index.js';
 import MessageInABottle from '../message-in-a-bottle/index.js';
-import OnlineStatus from '../online-status.js';
+import OnlineStatus from '../online-status/index.js';
 import useStatus from './status.hook.js';
 import styles from './status.module.scss';
 

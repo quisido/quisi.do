@@ -1,7 +1,7 @@
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/checkbox.js';
+import { type Props } from '../../../../components/checkbox/index.js';
 import useCheckbox from './checkbox.hook.js';
 
 export default function MuiCheckbox({

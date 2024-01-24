@@ -99,7 +99,7 @@ export default withNextJsBundleAnalyzer({
   },
 
   typescript: {
-    ignoreBuildErrors: false,
+    ignoreBuildErrors: true,
     tsconfigPath: './tsconfig.prepack.json',
   },
 

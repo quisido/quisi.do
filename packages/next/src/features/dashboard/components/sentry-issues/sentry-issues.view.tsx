@@ -3,9 +3,9 @@ import { type ReactElement } from 'react';
 import Section from '../../../../components/section.js';
 import withAsync from '../../../../hocs/with-async.js';
 import type Issue from '../../../../types/sentry-issue.js';
-import ErrorView from './components/error.js';
-import Loading from './components/loading.js';
-import Uninitiated from './components/uninitiated.js';
+import ErrorView from './components/error/index.js';
+import Loading from './components/loading/index.js';
+import Uninitiated from './components/uninitiated/index.js';
 
 interface Props {
   readonly error: string | null;

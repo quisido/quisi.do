@@ -8,7 +8,7 @@ import {
 } from 'react';
 import useNotify from '../../hooks/use-notify.js';
 import useEffectEvent from '../../hooks/use-effect-event.js';
-import Turnstile from '../../modules/react-turnstile-invis.js';
+import Turnstile from '../../modules/react-turnstile-invis/index.js';
 import type Notification from '../../types/notification.js';
 import noop from '../../utils/noop.js';
 

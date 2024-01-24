@@ -8,9 +8,9 @@ import handleCloudflareAnalyticsRequest from '../../utils/handle-cloudflare-anal
 import handleUptimeChecksRequest from '../../utils/handle-uptime-checks-request.js';
 import RumMetrics from '../../utils/rum-metrics.js';
 import SentryProjectIssues from '../../utils/sentry-project-issues.js';
-import CloudflareAnalytics from './components/cloudflare-analytics.js';
-import SentryIssues from './components/sentry-issues.js';
-import Status from './components/status.js';
+import CloudflareAnalytics from './components/cloudflare-analytics/index.js';
+import SentryIssues from './components/sentry-issues/index.js';
+import Status from './components/status/index.js';
 import useDashboard from './dashboard.hook.js';
 
 /*

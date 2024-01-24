@@ -10,8 +10,8 @@ import ErrorView from './components/error/index.js';
 import Loading from './components/loading/index.js';
 import SampleInterval from './components/sample-interval/index.js';
 import Uninitiated from './components/uninitiated/index.js';
-import WebAnalytics from './components/web-analytics.js';
-import WorkersInvocations from './components/workers-invocations.js';
+import WebAnalytics from './components/web-analytics/index.js';
+import WorkersInvocations from './components/workers-invocations/index.js';
 import mapBudgetToPercentage from './utils/map-budget-to-percentage.js';
 
 interface Props {

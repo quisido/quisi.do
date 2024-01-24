@@ -18,12 +18,9 @@ interface State {
   readonly sessionId: string | undefined;
 }
 
-const INITIAL_DESIGN_SYSTEM: DesignSystem =
-  process.env.NODE_ENV === 'production' ? DesignSystem.Mui : DesignSystem.Quisi;
-
 export default function useContexts(): State {
   // States
-  const [designSystem, setDesignSystem] = useState(INITIAL_DESIGN_SYSTEM);
+  const [designSystem, setDesignSystem] = useState(DesignSystem.Quisi);
   const [sessionId, setSessionId] = useState<string>();
 
   // Effects

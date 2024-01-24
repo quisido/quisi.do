@@ -1,10 +1,10 @@
 import { type ReactElement } from 'react';
-import Table from '../../../../../../components/table.js';
+import Table from '../../../../../../components/table/index.js';
 import type WorkersInvocations from '../../../../../../types/cloudflare-workers-invocations.js';
 import createIndexArray from '../../../../../../utils/create-index-array.js';
 import COLUMNS from '../../constants/workers-invocations-columns.js';
 import type Analytic from '../../types/workers-invocations-analytic.js';
-import Header from '../workers-invocations-header.js';
+import Header from '../workers-invocations-header/index.js';
 import useWorkersInvocations from './workers-invocations.hook.js';
 
 interface Props {

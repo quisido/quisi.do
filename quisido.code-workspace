@@ -106,6 +106,7 @@
       "**/.idea/": true,
       "**/.next/": true,
       "**/.nyc_output/": true,
+      "**/.wrangler/": true,
       "**/build/**": true,
       "**/coverage/**": true,
       "**/cypress/coverage/**": true,

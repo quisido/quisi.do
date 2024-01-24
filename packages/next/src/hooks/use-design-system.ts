@@ -4,7 +4,7 @@ import DesignSystemContext from '../contexts/design-system.js';
 
 export default function useDesignSystem(): [
   DesignSystem,
-  Dispatch<SetStateAction<DesignSystem>>
+  Dispatch<SetStateAction<DesignSystem>>,
 ] {
   const designSystem:
     | [DesignSystem, Dispatch<SetStateAction<DesignSystem>>]

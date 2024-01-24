@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Table from '../../../../../../components/table.js';
+import Table from '../../../../../../components/table/index.js';
 import type RumPerformanceEvents from '../../../../../../types/cloudflare-rum-performance-events.js';
 import createIndexArray from '../../../../../../utils/create-index-array.js';
 import type Analytic from '../../types/web-analytic.js';

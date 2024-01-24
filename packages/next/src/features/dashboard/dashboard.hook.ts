@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import EMPTY_ARRAY from '../../constants/empty-array.js';
-import useAsyncState from '../../modules/use-async-state.js';
+import useAsyncState from '../../modules/use-async-state/index.js';
 import type CloudflareAnalytics from '../../types/cloudflare-analytics.js';
 import type CloudflareAnalyticsDatasets from '../../types/cloudflare-analytics-datasets.js';
 import type RumMetrics from '../../types/rum-metrics.js';
@@ -137,15 +137,15 @@ export default function useDashboard({
 
   // Effects
   useEffect((): void => {
-    requestCloudflareAnalytics(onCloudflareAnalyticsRequest);
+    void requestCloudflareAnalytics(onCloudflareAnalyticsRequest);
   }, [onCloudflareAnalyticsRequest, requestCloudflareAnalytics]);
 
   useEffect((): void => {
-    requestSentryIssues(onSentryIssuesRequest);
+    void requestSentryIssues(onSentryIssuesRequest);
   }, [onSentryIssuesRequest, requestSentryIssues]);
 
   useEffect((): void => {
-    requestUptimeChecks(onUptimeChecksRequest);
+    void requestUptimeChecks(onUptimeChecksRequest);
   }, [onUptimeChecksRequest, requestUptimeChecks]);
 
   const uptimeChecksErrors: readonly unknown[] =

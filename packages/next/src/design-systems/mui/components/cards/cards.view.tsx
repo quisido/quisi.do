@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/cards.js';
+import { type Props } from '../../../../components/cards/index.js';
 import mapComponentToPropMapper from '../../../../utils/map-component-to-prop-mapper.js';
 import validateString from '../../../../utils/validate-string.js';
 import useMuiCards from './cards.hook.js';

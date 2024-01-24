@@ -1,4 +1,4 @@
-import Settings from '../components/settings.js';
+import Settings from '../components/settings/index.js';
 import NavigationText from '../constants/navigation-text.js';
 import type NavigationCategory from '../types/navigation-category.js';
 import type NavigationComponent from '../types/navigation-component.js';

@@ -1,11 +1,7 @@
 {
   "files.exclude": {
-    ".wrangler/": true
-  },
-  "files.watcherExclude": {
-    ".wrangler/": true
-  },
-  "search.exclude": {
-    ".wrangler/": true
+    ".wrangler/": true,
+    "dist/": true,
+    "node_modules/": true
   }
 }
