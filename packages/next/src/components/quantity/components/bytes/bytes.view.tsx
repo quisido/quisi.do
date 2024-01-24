@@ -1,7 +1,7 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import round from '../../../../utils/round';
-import Kibibytes from '../kibibytes';
+import round from '../../../../utils/round.js';
+import Kibibytes from '../kibibytes/index.js';
 
 interface Props {
   readonly children: number;

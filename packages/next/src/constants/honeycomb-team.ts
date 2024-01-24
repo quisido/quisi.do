@@ -1,4 +1,4 @@
-import getHoneycombTeam from '../utils/get-honeycomb-team';
+import getHoneycombTeam from '../utils/get-honeycomb-team.js';
 
 const HONEYCOMB_TEAM: string = getHoneycombTeam();
 

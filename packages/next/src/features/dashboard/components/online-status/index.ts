@@ -1,1 +1,1 @@
-export { default } from './online-status.view';
+export { default } from './online-status.view.js';

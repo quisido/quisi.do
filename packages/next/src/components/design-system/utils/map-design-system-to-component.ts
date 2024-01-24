@@ -1,6 +1,6 @@
 import { type ComponentType, lazy } from 'react';
-import DesignSystem from '../../../constants/design-system';
-import type DesignSystemProps from '../../../types/design-system-props';
+import DesignSystem from '../../../constants/design-system.js';
+import type DesignSystemProps from '../../../types/design-system-props.js';
 
 /*
 We must use `as` when mapping the design system to its component, because its
@@ -14,6 +14,7 @@ type DesignSystemComponent<
   Row extends object,
 > = ComponentType<DesignSystemProps<Card, Row>>;
 
+const Mui = lazy(async () => import('../../../design-systems/mui'));
 const Quisi = lazy(async () => import('../../../design-systems/quisi'));
 
 export default function mapDesignSystemToComponent<
@@ -21,6 +22,8 @@ export default function mapDesignSystemToComponent<
   Row extends object,
 >(designSystem: DesignSystem): DesignSystemComponent<Card, Row> {
   switch (designSystem) {
+    case DesignSystem.Mui:
+      return Mui as DesignSystemComponent<Card, Row>;
     case DesignSystem.Quisi:
       return Quisi as DesignSystemComponent<Card, Row>;
   }

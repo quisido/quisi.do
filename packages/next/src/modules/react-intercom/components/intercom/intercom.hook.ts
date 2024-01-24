@@ -1,9 +1,9 @@
 import { useEffect, useMemo } from 'react';
-import INTERCOM_WINDOW from '../../constants/intercom-window';
-import type IntercomFunction from '../../types/intercom-function';
-import createIntercomFunction from '../../utils/create-intercom';
-import mapAppIdToScriptElement from '../../utils/map-app-id-to-script-element';
-import getHead from '../../utils/get-head';
+import INTERCOM_WINDOW from '../../constants/intercom-window.js';
+import type IntercomFunction from '../../types/intercom-function.js';
+import createIntercomFunction from '../../utils/create-intercom.js';
+import mapAppIdToScriptElement from '../../utils/map-app-id-to-script-element.js';
+import getHead from '../../utils/get-head.js';
 
 export default function useIntercom(appId: string): IntercomFunction {
   const intercom: IntercomFunction = useMemo(createIntercomFunction, []);

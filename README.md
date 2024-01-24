@@ -1,6 +1,6 @@
 # [quisi.do](https://quisi.do/)
 
-This repository serves as a monorepo with each package living in the `packages`
+This repository serves as a monorepo with each package living in the `packages/`
 directory. The fully integrated application lives in the `packages/next`
 directory.
 
@@ -14,7 +14,7 @@ are committed, and an official Code Workspace for the repository can be found in
 
 ## Contributing
 
-To install this repository to begin local development, use the following
+To install this repository and begin local development, use the following
 commands in order:
 
 - `yarn set version latest` to keep Yarn up-to-date.

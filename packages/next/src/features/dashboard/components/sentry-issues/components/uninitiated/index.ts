@@ -1,1 +1,1 @@
-export { default } from './uninitiated.view';
+export { default } from './uninitiated.view.js';

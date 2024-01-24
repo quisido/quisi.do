@@ -1,7 +1,7 @@
 import { type ComponentType, type ReactElement, type ReactNode } from 'react';
-import type Column from '../../types/table-column';
-import type RowsPerPageOption from '../../types/table-rows-per-page-option';
-import DesignSystem from '../design-system';
+import type Column from '../../types/table-column.js';
+import type RowsPerPageOption from '../../types/table-rows-per-page-option.js';
+import DesignSystem from '../design-system/index.js';
 
 export interface Props<Item extends object> {
   readonly Description?: ComponentType<Item> | undefined;

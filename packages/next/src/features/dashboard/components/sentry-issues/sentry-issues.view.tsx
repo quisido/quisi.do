@@ -1,11 +1,11 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import type Issue from '../../../../types/sentry-issue';
-import Container from '../../../../components/container';
-import withAsync from '../../../../hocs/with-async';
-import ErrorView from './components/error';
-import Loading from './components/loading';
-import Uninitiated from './components/uninitiated';
+import Section from '../../../../components/section.js';
+import withAsync from '../../../../hocs/with-async.js';
+import type Issue from '../../../../types/sentry-issue.js';
+import ErrorView from './components/error/index.js';
+import Loading from './components/loading/index.js';
+import Uninitiated from './components/uninitiated/index.js';
 
 interface Props {
   readonly error: string | null;
@@ -20,9 +20,9 @@ const mapIssueToListItem = (issue: Readonly<Issue>): ReactElement => (
 
 function SentryIssues({ issues }: Props): ReactElement {
   return (
-    <Container header={<I18n>Sentry issues</I18n>} marginTop="large">
+    <Section header={<I18n>Sentry issues</I18n>}>
       <ul>{issues.map(mapIssueToListItem)}</ul>
-    </Container>
+    </Section>
   );
 }
 

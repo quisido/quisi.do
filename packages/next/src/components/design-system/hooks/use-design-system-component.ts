@@ -1,7 +1,7 @@
 import { type ComponentType } from 'react';
-import useDesignSystem from '../../../hooks/use-design-system';
-import type DesignSystemProps from '../../../types/design-system-props';
-import mapDesignSystemToComponent from '../utils/map-design-system-to-component';
+import useDesignSystem from '../../../hooks/use-design-system.js';
+import type DesignSystemProps from '../../../types/design-system-props.js';
+import mapDesignSystemToComponent from '../utils/map-design-system-to-component.js';
 
 export default function useDesignSystemComponent<
   Card extends object,

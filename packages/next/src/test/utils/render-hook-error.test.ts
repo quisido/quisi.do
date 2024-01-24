@@ -1,5 +1,5 @@
 /// <reference types="jest" />
-import renderHookError from './render-hook-error';
+import renderHookError from './render-hook-error.js';
 
 function useTestHook(): null {
   return null;

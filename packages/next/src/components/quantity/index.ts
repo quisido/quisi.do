@@ -1,1 +1,1 @@
-export { default } from './quantity.view';
+export { default } from './quantity.view.js';

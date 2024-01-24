@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import setDesignSystem from './set-design-system';
+import setDesignSystem from './set-design-system.js';
 
 export default function describeDesignSystem(
   designSystem: string,

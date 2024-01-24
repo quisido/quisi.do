@@ -1,6 +1,6 @@
-import type SentryProjectEvent from '../types/sentry-project-event';
-import isSentryError from './is-sentry-error';
-import validateSentryProjectEvents from './validate-sentry-project-events';
+import type SentryProjectEvent from '../types/sentry-project-event.js';
+import isSentryError from './is-sentry-error.js';
+import validateSentryProjectEvents from './validate-sentry-project-events.js';
 
 interface Options {
   readonly authToken: string;

@@ -1,1 +1,1 @@
-export { default } from './locale-layout.view';
+export { default } from './locale-layout.view.js';

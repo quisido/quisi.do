@@ -1,4 +1,4 @@
-import mapTrackingIdToScriptSrc from '../utils/map-tracking-id-to-script-src';
+import mapTrackingIdToScriptSrc from '../utils/map-tracking-id-to-script-src.js';
 
 export default function mapTrackingIdToScriptElement(
   trackingId: string,

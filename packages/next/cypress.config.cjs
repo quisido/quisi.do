@@ -21,7 +21,7 @@ module.exports = defineConfig({
   screenshotsFolder: getScreenshotsFolder(),
 
   e2e: {
-    baseUrl: 'http://localhost:3000/',
+    baseUrl: 'https://localhost:3000/',
     // experimentalOriginDependencies: true,
     experimentalRunAllSpecs: true,
     // experimentalStudio: true,

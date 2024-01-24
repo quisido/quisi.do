@@ -1,1 +1,1 @@
-export { default } from './quisi.view';
+export { default } from './quisi.view.js';

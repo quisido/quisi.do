@@ -1,18 +1,18 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Container from '../../../../components/container';
-import Div from '../../../../components/div';
-import Gauge from '../../../../components/gauge';
-import Quantity from '../../../../components/quantity';
-import withAsync from '../../../../hocs/with-async';
-import type Datasets from '../../../../types/cloudflare-analytics-datasets';
-import ErrorView from './components/error';
-import Loading from './components/loading';
-import SampleInterval from './components/sample-interval';
-import Uninitiated from './components/uninitiated';
-import WebAnalytics from './components/web-analytics';
-import WorkersInvocations from './components/workers-invocations';
-import mapBudgetToPercentage from './utils/map-budget-to-percentage';
+import Div from '../../../../components/div/index.js';
+import Gauge from '../../../../components/gauge/index.js';
+import Quantity from '../../../../components/quantity/index.js';
+import Section from '../../../../components/section.js';
+import withAsync from '../../../../hocs/with-async.js';
+import type Datasets from '../../../../types/cloudflare-analytics-datasets.js';
+import ErrorView from './components/error/index.js';
+import Loading from './components/loading/index.js';
+import SampleInterval from './components/sample-interval/index.js';
+import Uninitiated from './components/uninitiated/index.js';
+import WebAnalytics from './components/web-analytics/index.js';
+import WorkersInvocations from './components/workers-invocations/index.js';
+import mapBudgetToPercentage from './utils/map-budget-to-percentage.js';
 
 interface Props {
   readonly budget: number;
@@ -62,7 +62,7 @@ function CloudflareAnalytics({ budget, datasets }: Props): ReactElement {
 
   return (
     <>
-      <Container header={<I18n>Cloudflare analytics</I18n>} marginTop="large">
+      <Section header={<I18n>Cloudflare analytics</I18n>}>
         <Div element="p">
           <strong>Remaining budget:</strong> {mapBudgetToPercentage(budget)}%
         </Div>
@@ -138,7 +138,7 @@ function CloudflareAnalytics({ budget, datasets }: Props): ReactElement {
           <strong>Workers analytics engine:</strong>{' '}
           {workersAnalyticsEngineAdaptiveGroups.count}
         </Div>
-      </Container>
+      </Section>
       <WebAnalytics>{rumPerformanceEventsAdaptiveGroups}</WebAnalytics>
       <WorkersInvocations>{workersInvocationsAdaptive}</WorkersInvocations>
     </>

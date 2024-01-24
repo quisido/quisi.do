@@ -1,17 +1,17 @@
 'use client';
 
 import { type ReactElement } from 'react';
-import Container from '../../components/container';
-import Div from '../../components/div';
-import Link from '../../components/link';
-import handleCloudflareAnalyticsRequest from '../../utils/handle-cloudflare-analytics-request';
-import handleUptimeChecksRequest from '../../utils/handle-uptime-checks-request';
-import RumMetrics from '../../utils/rum-metrics';
-import SentryProjectIssues from '../../utils/sentry-project-issues';
-import CloudflareAnalytics from './components/cloudflare-analytics';
-import SentryIssues from './components/sentry-issues';
-import Status from './components/status';
-import useDashboard from './dashboard.hook';
+import Div from '../../components/div/index.js';
+import Link from '../../components/link/index.js';
+import Section from '../../components/section.js';
+import handleCloudflareAnalyticsRequest from '../../utils/handle-cloudflare-analytics-request.js';
+import handleUptimeChecksRequest from '../../utils/handle-uptime-checks-request.js';
+import RumMetrics from '../../utils/rum-metrics.js';
+import SentryProjectIssues from '../../utils/sentry-project-issues.js';
+import CloudflareAnalytics from './components/cloudflare-analytics/index.js';
+import SentryIssues from './components/sentry-issues/index.js';
+import Status from './components/status/index.js';
+import useDashboard from './dashboard.hook.js';
 
 /*
 export interface Props {
@@ -63,15 +63,15 @@ export default function Dashboard(): ReactElement {
 
   return (
     <>
-      <Container header="quisi.do operational health dashboard">
+      <Section header="quisi.do operational health dashboard">
         <Div element="p">
           This dashboard showcases operational and performance metrics for{' '}
-          <Link category="features/dashboard" href="/" title="quisi.do">
+          <Link feature="dashboard" href="/" title="quisi.do">
             quisi.do
           </Link>
           .
         </Div>
-      </Container>
+      </Section>
       <Status
         lastUptimeCheckStatus={lastUptimeCheckStatus}
         lastUptimeCheckTimestamp={lastUptimeCheckTimestamp}

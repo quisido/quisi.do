@@ -1,4 +1,4 @@
-import round from '../../../../utils/round';
+import round from '../../../../utils/round.js';
 
 const DECIMALS = 2;
 const PERCENT = 100;

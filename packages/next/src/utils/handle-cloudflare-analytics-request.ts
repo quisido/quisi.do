@@ -1,6 +1,6 @@
-import CLOUDFLARE_ANALYTICS_URL from '../constants/cloudflare-analytics-url';
-import type CloudflareAnalytics from '../types/cloudflare-analytics';
-import validateCloudflareAnalytics from './validate-cloudflare-analytics';
+import CLOUDFLARE_ANALYTICS_URL from '../constants/cloudflare-analytics-url.js';
+import type CloudflareAnalytics from '../types/cloudflare-analytics.js';
+import validateCloudflareAnalytics from './validate-cloudflare-analytics.js';
 
 export default async function handleCloudflareAnalyticsRequest(): Promise<CloudflareAnalytics> {
   const response: Response = await window.fetch(CLOUDFLARE_ANALYTICS_URL);

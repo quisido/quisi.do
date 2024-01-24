@@ -1,10 +1,10 @@
 'use client';
 
-import useGoogleAnalytics from '../../modules/react-google-analytics';
+import useGoogleAnalytics from '../../modules/react-google-analytics/index.js';
 
 export default function GoogleAnalytics(): null {
   useGoogleAnalytics({
-    trackingId: 'G-0LC1N0MEV7',
+    trackingId: 'G-ZTQ6K5CVQS',
   });
 
   return null;

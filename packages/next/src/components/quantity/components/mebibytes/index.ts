@@ -1,1 +1,1 @@
-export { default } from './mebibytes.view';
+export { default } from './mebibytes.view.js';

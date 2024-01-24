@@ -1,1 +1,1 @@
-export { default } from './fallback.view';
+export { default } from './fallback.view.js';

@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
-import PercentDifference from '../../../../../../components/percent-difference';
-import validateString from '../../../../../../utils/validate-string';
+import PercentDifference from '../../../../../../components/percent-difference/index.js';
+import validateString from '../../../../../../utils/validate-string.js';
 import styles from './change.module.scss';
 
 interface Props {
@@ -9,8 +9,8 @@ interface Props {
   readonly value: number;
 }
 
-const badClassName: string = validateString(styles.bad);
-const goodClassName: string = validateString(styles.good);
+const badClassName: string = validateString(styles['bad']);
+const goodClassName: string = validateString(styles['good']);
 const ZERO = 0;
 
 export default function CloudflareAnalyticChange({

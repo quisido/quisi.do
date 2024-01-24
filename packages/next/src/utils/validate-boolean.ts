@@ -1,5 +1,5 @@
-import EMPTY_ARRAY from '../constants/empty-array';
-import assert from './assert';
+import EMPTY_ARRAY from '../constants/empty-array.js';
+import assert from './assert.js';
 
 export default function validateBoolean(
   value: unknown,

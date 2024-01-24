@@ -1,5 +1,5 @@
-import GITHUB_REPOSITORY_URL from '../constants/github-repository-url';
-import GITHUB_SHA from '../constants/github-sha';
+import GITHUB_REPOSITORY_URL from '../constants/github-repository-url.js';
+import GITHUB_SHA from '../constants/github-sha.js';
 
 const getGithubCommitUrl = (): string | undefined => {
   if (

@@ -1,4 +1,4 @@
-import Locale from '../constants/locale';
+import Locale from '../constants/locale.js';
 
 const LOCALES: Set<unknown> = new Set(Object.values(Locale));
 

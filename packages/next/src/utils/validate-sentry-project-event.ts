@@ -2,11 +2,11 @@ import {
   type BrowserContext,
   type Contexts,
   type default as SentryProjectEvent,
-} from '../types/sentry-project-event';
-import assert from './assert';
-import validateNumber from './validate-number';
-import validateObject from './validate-object';
-import validateString from './validate-string';
+} from '../types/sentry-project-event.js';
+import assert from './assert.js';
+import validateNumber from './validate-number.js';
+import validateObject from './validate-object.js';
+import validateString from './validate-string.js';
 
 export default function validateSentryProjectEvent(
   value: unknown,

@@ -1,14 +1,14 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import mapUnknownToString from 'unknown2string';
-import Container from '../../../../components/container';
-import Div from '../../../../components/div';
-import Link from '../../../../components/link';
-import validateString from '../../../../utils/validate-string';
-import LastChecked from '../last-checked';
-import MessageInABottle from '../message-in-a-bottle';
-import OnlineStatus from '../online-status';
-import useStatus from './status.hook';
+import Div from '../../../../components/div/index.js';
+import Link from '../../../../components/link/index.js';
+import Section from '../../../../components/section.js';
+import validateString from '../../../../utils/validate-string.js';
+import LastChecked from '../last-checked/index.js';
+import MessageInABottle from '../message-in-a-bottle/index.js';
+import OnlineStatus from '../online-status/index.js';
+import useStatus from './status.hook.js';
 import styles from './status.module.scss';
 
 interface Props {
@@ -21,14 +21,13 @@ interface Props {
   readonly uptimeMessages: readonly unknown[];
 }
 
-const errorClassName: string = validateString(styles.error);
-const headerClassName: string = validateString(styles.header);
-const iconClassName: string = validateString(styles.icon);
-const infoClassName: string = validateString(styles.info);
-const messageClassName = validateString(styles.message);
-const messagesClassName = validateString(styles.messages);
+const errorClassName: string = validateString(styles['error']);
+const iconClassName: string = validateString(styles['icon']);
+const infoClassName: string = validateString(styles['info']);
+const messageClassName = validateString(styles['message']);
+const messagesClassName = validateString(styles['messages']);
 const NONE = 0;
-const subheaderClassName: string = validateString(styles.subheader);
+const subheaderClassName: string = validateString(styles['subheader']);
 
 const mapErrorToElement = (err: unknown): ReactElement => {
   const errStr: string = mapUnknownToString(err);
@@ -69,23 +68,18 @@ export default function DashboardStatus({
   const { ciCdAlt } = useStatus();
 
   return (
-    <Container
-      header={<I18n>Status</I18n>}
-      headerClassName={headerClassName}
-      marginTop="large"
-      subheader={
-        <div className={subheaderClassName}>
-          <MessageInABottle />
-        </div>
-      }
-    >
+    <Section header={<I18n>Status</I18n>}>
+      <div className={subheaderClassName}>
+        <MessageInABottle />
+      </div>
       <Div display="flex" flexDirection="row" justifyContent="space-around">
         <Div>
           <Link
-            category="features/dashboard/status"
+            feature="dashboard/status"
             href="https://github.com/quisido/quisi.do/actions/workflows/cd.yml"
             title="Continuous deployment workflow"
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt={ciCdAlt}
               height={20}
@@ -112,6 +106,6 @@ export default function DashboardStatus({
           {uptimeMessages.map(mapMessageToElement)}
         </Div>
       )}
-    </Container>
+    </Section>
   );
 }

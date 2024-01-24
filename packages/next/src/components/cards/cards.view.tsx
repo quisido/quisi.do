@@ -1,5 +1,5 @@
 import { type ComponentType, type ReactElement, type ReactNode } from 'react';
-import DesignSystem from '../../components/design-system';
+import DesignSystem from '../../components/design-system/index.js';
 
 export interface Props<Item extends object> {
   readonly CardContent: ComponentType<Item>;

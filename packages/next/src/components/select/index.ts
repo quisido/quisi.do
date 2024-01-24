@@ -1,2 +1,2 @@
-export type { Props } from './select.view';
-export { default } from './select.view';
+export type { Props } from './select.view.js';
+export { default } from './select.view.js';

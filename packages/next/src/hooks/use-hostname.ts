@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import Hostname from '../contexts/hostname';
+import Hostname from '../contexts/hostname.js';
 
 export default function useHostname(): string {
   const hostname: string | null = useContext(Hostname);

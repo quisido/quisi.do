@@ -1,1 +1,1 @@
-export { default } from './kibibytes.view';
+export { default } from './kibibytes.view.js';

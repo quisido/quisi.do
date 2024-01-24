@@ -128,6 +128,8 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
           IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
+          PATREON_OAUTH_CLIENT_ID: J_6jrNJZNibHylSF83UVl9I4OHZYf67RAsU0s7_LnH1N5BKF-vgOyweF3KQLOKm1
+          PATREON_OAUTH_REDIRECT_URI: https://a.quisi.do/patreon/
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -287,6 +289,8 @@ jobs:
         with:
           name: prepack
           path: packages/
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: Upload Datadog sourcemaps
         run: yarn packages/next run datadog:sourcemaps
         env:
@@ -441,8 +445,8 @@ jobs:
           sourcemaps: build
           version: ${{ github.sha }}
 
-  wrangler-deploy:
-    name: Wrangler deploy
+  wrangler-deploy-authn:
+    name: Wrangler deploy Authentication
     needs: [lighthouse, prepublish-applications]
     runs-on: ubuntu-latest
     env:
@@ -468,7 +472,38 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Deploy
-        run: yarn packages/cloudflare-analytics-worker run deploy
+        run: yarn packages/authn run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
+
+  wrangler-deploy-cloudflare-analytics:
+    name: Wrangler deploy Cloudflare Analytics
+    needs: [lighthouse, prepublish-applications]
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Deploy
+        run: yarn packages/cloudflare-analytics run deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 

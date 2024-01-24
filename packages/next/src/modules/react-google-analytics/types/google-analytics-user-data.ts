@@ -1,5 +1,5 @@
-import type GoogleAnalyticsUserDataAddress from './google-analytics-user-data-address';
-import type PhoneNumber from './phone-number';
+import type GoogleAnalyticsUserDataAddress from './google-analytics-user-data-address.js';
+import type PhoneNumber from './phone-number.js';
 
 export default interface GoogleAnalyticsUserData {
   readonly address?: GoogleAnalyticsUserDataAddress | undefined;

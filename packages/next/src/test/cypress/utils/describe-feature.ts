@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import describeViewports from './describe-viewports';
+import describeViewports from './describe-viewports.js';
 
 export default function describeFeature(
   title: string,

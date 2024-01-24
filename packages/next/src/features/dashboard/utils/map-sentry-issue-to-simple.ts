@@ -1,4 +1,4 @@
-import type SentryIssue from '../../../types/sentry-issue';
+import type SentryIssue from '../../../types/sentry-issue.js';
 
 const ADBLOCK: Set<string> = new Set([
   'Error: CWR: Failed to retrieve Cognito identity: TypeError: Failed to fetch',

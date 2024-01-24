@@ -1,5 +1,5 @@
-import type PhoneNumber from './phone-number';
-import type UserDataAddress from './user-data-address';
+import type PhoneNumber from './phone-number.js';
+import type UserDataAddress from './user-data-address.js';
 
 export default interface UserData {
   readonly address?: UserDataAddress | undefined;

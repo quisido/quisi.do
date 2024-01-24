@@ -1,7 +1,7 @@
 import { type ComponentType, type ReactElement } from 'react';
-import type Optional from '../types/optional';
+import type Optional from '../types/optional.js';
 
-interface AsyncProps {
+export interface AsyncProps {
   readonly error?: string | undefined;
   readonly initiated: boolean;
   readonly loading: boolean;

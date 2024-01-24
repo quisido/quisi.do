@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import round from '../../utils/round';
+import round from '../../utils/round.js';
 
 interface Props {
   readonly decimals?: number | undefined;

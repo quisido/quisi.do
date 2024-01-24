@@ -1,1 +1,1 @@
-export { default } from './contexts.view';
+export { default } from './contexts.view.js';

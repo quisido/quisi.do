@@ -1,4 +1,4 @@
-import isRecord from './is-record';
+import isRecord from './is-record.js';
 
 interface SentryError {
   readonly detail: string;

@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
 import { Pie, Surface } from 'recharts';
-import validateString from '../../../../utils/validate-string';
+import validateString from '../../../../utils/validate-string.js';
 import styles from './apdex-pie-chart.module.scss';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 const CIRCLE = 360;
 const HALF = 0.5;
 const QUARTER = 0.25;
-const rootClassName: string = validateString(styles.root);
+const rootClassName: string = validateString(styles['root']);
 const SIZE = 240;
 const START_ANGLE = 90;
 const END_ANGLE = START_ANGLE + CIRCLE;

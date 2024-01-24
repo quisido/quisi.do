@@ -1,0 +1,14 @@
+{
+  "files.exclude": {
+    ".next/": true,
+    "certificates/": true,
+    "out/": true,
+    "lighthouse-0.devtoolslog.json": true,
+    "lighthouse-0.trace.json": true,
+    "lighthouse.report.html": true,
+    "lighthouse.report.json": true,
+    "next-env.d.ts": true,
+    "next.config.cjs": true,
+    "next.config.js": true
+  }
+}

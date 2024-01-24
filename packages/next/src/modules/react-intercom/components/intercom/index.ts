@@ -1,1 +1,1 @@
-export { default } from './intercom.view';
+export { default } from './intercom.view.js';

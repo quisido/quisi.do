@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import mapParentSelectorToLabelSelector from './map-parent-selector-to-label-selector';
+import mapParentSelectorToLabelSelector from './map-parent-selector-to-label-selector.js';
 
 interface Options {
   readonly onChange?: VoidFunction | undefined;

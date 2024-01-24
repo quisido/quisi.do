@@ -1,70 +1,40 @@
 'use client';
 
-import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Container from '../../components/container';
-import Div from '../../components/div';
-import validateString from '../../utils/validate-string';
-import styles from './home.module.scss';
-import Link from '../../components/link';
-
-const aboutClassName: string = validateString(styles.about);
-const contentClassName: string = validateString(styles.content);
-const CURRENT_YEAR: number = new Date().getFullYear();
-const ENTERPRISE_START_YEAR = 2016;
-const FRONT_END_START_YEAR = 2001;
-const FULL_STACK_START_YEAR = 2005;
-const listClassName: string = validateString(styles.list);
-const ENTERPRISE_YOE: number = CURRENT_YEAR - ENTERPRISE_START_YEAR;
-const FRONT_END_YOE: number = CURRENT_YEAR - FRONT_END_START_YEAR;
-const FULL_STACK_YOE: number = CURRENT_YEAR - FULL_STACK_START_YEAR;
+import Button from '../../components/button.js';
+import Section from '../../components/section.js';
+import useHome from './home.hook.js';
 
 export default function Home(): ReactElement {
+  const { authenticateHref } = useHome();
+
   return (
-    <>
-      <Container header={<I18n>About</I18n>}>
-        <Div className={contentClassName} display="flex" flexDirection="row">
-          <Div className={aboutClassName} display="flex" flexDirection="column">
-            <Div element="p" marginBottom="medium">
-              <strong>quisi.do</strong> is a front end engineer leading a{' '}
-              <abbr title="software as a service">SaaS</abbr> charity
-              initiative. The <strong>quisi.do</strong> website contains a
-              collection of open-source software, the profits of which are
-              forwarded to{' '}
-              {/* <Link
-                category="features/home"
-                href="/charities/"
-                title="quisi.do's supported charities"
-              > */}
-              501(c)(3) charities {/* </Link>{' '} */}
-              with completely{' '}
-              <strong>
-                <Link
-                  category="features/home"
-                  href="/dashboard"
-                  title="quisi.do operational dashboard"
-                >
-                  transparent operations
-                </Link>
-              </strong>
-              .
-            </Div>
-            <section>
-              <ul className={listClassName}>
-                <li>
-                  <I18n n={ENTERPRISE_YOE}>Enterprise: $n years</I18n>
-                </li>
-                <li>
-                  <I18n n={FRONT_END_YOE}>Front end: $n years</I18n>
-                </li>
-                <li>
-                  <I18n n={FULL_STACK_YOE}>Full stack: $n years</I18n>
-                </li>
-              </ul>
-            </section>
-          </Div>
-        </Div>
-      </Container>
-    </>
+    <Section
+      actions={
+        <Button feature="home" href={authenticateHref} variant="primary">
+          Authenticate
+        </Button>
+      }
+    >
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'stretch',
+          justifyContent: 'flex-start',
+        }}
+      >
+        <ul style={{ flexGrow: 1 }}>
+          <li>Open source</li>
+          <li>Transparent</li>
+          <li>Not for profit</li>
+        </ul>
+        <ul style={{ flexGrow: 1 }}>
+          <li>Educate</li>
+          <li>Empower</li>
+          <li>Heal</li>
+        </ul>
+      </div>
+    </Section>
   );
 }

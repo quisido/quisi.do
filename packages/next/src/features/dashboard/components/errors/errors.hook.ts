@@ -1,11 +1,11 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { type MutableRefObject, useCallback, useMemo } from 'react';
-import useElementWidth from '../../../../hooks/use-element-width';
-import sortNumbers from '../../../../utils/sort-numbers';
-import useTimestampFormatter from '../../hooks/use-timestamp-formatter';
-import type TimeSeriesDatum from '../../types/time-series-datum';
-import mapRecordToSum from '../../utils/map-record-to-sum';
-import mapStringToInt from '../../utils/map-string-to-int';
+import useElementWidth from '../../../../hooks/use-element-width.js';
+import sortNumbers from '../../../../utils/sort-numbers.js';
+import useTimestampFormatter from '../../hooks/use-timestamp-formatter.js';
+import type TimeSeriesDatum from '../../types/time-series-datum.js';
+import mapRecordToSum from '../../utils/map-record-to-sum.js';
+import mapStringToInt from '../../utils/map-string-to-int.js';
 
 interface Props {
   readonly errorCountTimeSeries: Record<string, number | undefined>;

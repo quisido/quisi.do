@@ -1,7 +1,7 @@
-import EMPTY_ARRAY from '../constants/empty-array';
-import type SentryIssue from '../types/sentry-issue';
-import validateArray from './validate-array';
-import validateIssue from './validate-sentry-issue';
+import EMPTY_ARRAY from '../constants/empty-array.js';
+import type SentryIssue from '../types/sentry-issue.js';
+import validateArray from './validate-array.js';
+import validateIssue from './validate-sentry-issue.js';
 
 export default function validateSentryIssues(
   value: unknown,

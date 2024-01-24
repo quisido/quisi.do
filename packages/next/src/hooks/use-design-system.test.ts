@@ -1,5 +1,5 @@
-import renderHookError from '../test/utils/render-hook-error';
-import useDesignSystem from './use-design-system';
+import renderHookError from '../test/utils/render-hook-error.js';
+import useDesignSystem from './use-design-system.js';
 
 describe('useDesignSystem', (): void => {
   it('should throw an error if the context is not provided', (): void => {

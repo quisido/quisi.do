@@ -1,13 +1,13 @@
 import { useEffect, useMemo } from 'react';
-import EMPTY_ARRAY from '../../constants/empty-array';
-import useAsyncState from '../../modules/use-async-state';
-import type CloudflareAnalytics from '../../types/cloudflare-analytics';
-import type CloudflareAnalyticsDatasets from '../../types/cloudflare-analytics-datasets';
-import type RumMetrics from '../../types/rum-metrics';
-import type SentryIssue from '../../types/sentry-issue';
-import type UptimeChecks from '../../types/uptime-checks';
-import filterSentryNonIssues from './utils/filter-sentry-non-issues';
-import mapSentryIssueToSimple from './utils/map-sentry-issue-to-simple';
+import EMPTY_ARRAY from '../../constants/empty-array.js';
+import useAsyncState from '../../modules/use-async-state/index.js';
+import type CloudflareAnalytics from '../../types/cloudflare-analytics.js';
+import type CloudflareAnalyticsDatasets from '../../types/cloudflare-analytics-datasets.js';
+import type RumMetrics from '../../types/rum-metrics.js';
+import type SentryIssue from '../../types/sentry-issue.js';
+import type UptimeChecks from '../../types/uptime-checks.js';
+import filterSentryNonIssues from './utils/filter-sentry-non-issues.js';
+import mapSentryIssueToSimple from './utils/map-sentry-issue-to-simple.js';
 
 interface Props {
   readonly onCloudflareAnalyticsRequest: () => Promise<CloudflareAnalytics>;
@@ -137,15 +137,15 @@ export default function useDashboard({
 
   // Effects
   useEffect((): void => {
-    requestCloudflareAnalytics(onCloudflareAnalyticsRequest);
+    void requestCloudflareAnalytics(onCloudflareAnalyticsRequest);
   }, [onCloudflareAnalyticsRequest, requestCloudflareAnalytics]);
 
   useEffect((): void => {
-    requestSentryIssues(onSentryIssuesRequest);
+    void requestSentryIssues(onSentryIssuesRequest);
   }, [onSentryIssuesRequest, requestSentryIssues]);
 
   useEffect((): void => {
-    requestUptimeChecks(onUptimeChecksRequest);
+    void requestUptimeChecks(onUptimeChecksRequest);
   }, [onUptimeChecksRequest, requestUptimeChecks]);
 
   const uptimeChecksErrors: readonly unknown[] =

@@ -5,8 +5,8 @@ import {
   WebTracerProvider,
 } from '@opentelemetry/sdk-trace-web';
 import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
-import OPEN_TELEMETRY_EXPORTER from './open-telemetry-exporter';
-import OPEN_TELEMETRY_INSTRUMENTATION from './open-telemetry-instrumentation';
+import OPEN_TELEMETRY_EXPORTER from './open-telemetry-exporter.js';
+import OPEN_TELEMETRY_INSTRUMENTATION from './open-telemetry-instrumentation.js';
 
 const OPEN_TELEMETRY_PROVIDER: WebTracerProvider = new WebTracerProvider({
   resource: new Resource({

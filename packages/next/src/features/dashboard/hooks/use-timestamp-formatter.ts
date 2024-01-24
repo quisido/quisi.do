@@ -1,6 +1,6 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo } from 'react';
-import leftPad from '../../../utils/left-pad';
+import leftPad from '../../../utils/left-pad.js';
 
 export default function useTimestampFormatter(): (timestamp: number) => string {
   // Contexts

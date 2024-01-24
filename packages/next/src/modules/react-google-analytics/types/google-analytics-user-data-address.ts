@@ -1,5 +1,5 @@
-import type PostalCode from './postal-code';
-import type SingleLetter from './single-letter';
+import type PostalCode from './postal-code.js';
+import type SingleLetter from './single-letter.js';
 
 export default interface GoogleAnalyticsUserDataAddress {
   readonly city?: string | undefined;

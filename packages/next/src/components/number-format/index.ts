@@ -1,1 +1,1 @@
-export { default } from './number-format.view';
+export { default } from './number-format.view.js';

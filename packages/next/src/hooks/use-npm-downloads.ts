@@ -1,8 +1,10 @@
 import { type MutableRefObject, useEffect, useRef } from 'react';
 import mapUnknownToString from 'unknown2string';
-import RetryAction from '../components/retry-action';
-import useNotify from '../hooks/use-notify';
-import useAsyncState, { type AsyncState } from '../modules/use-async-state';
+import RetryAction from '../components/retry-action/index.js';
+import useNotify from '../hooks/use-notify.js';
+import useAsyncState, {
+  type AsyncState,
+} from '../modules/use-async-state/index.js';
 
 /**
  * Technical debt: This is currently called twice, when it should only be called
@@ -23,7 +25,7 @@ const getNpmDownloads = async (): Promise<
   Readonly<Record<string, readonly number[]>>
 > => {
   const response: Response = await window.fetch(
-    process.env.NPM_DOWNLOADS ?? 'https://npm.cscdn.net/charlesstover.json',
+    process.env['NPM_DOWNLOADS'] ?? 'https://npm.cscdn.net/charlesstover.json',
   );
 
   return response.json();
@@ -51,7 +53,7 @@ export default function useNpmDownloads(): State {
         },
       });
     });
-  }, [request, retry]);
+  }, [notify, request, retry]);
 
   return {
     ...asyncState,

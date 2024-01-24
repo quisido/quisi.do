@@ -1,8 +1,8 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Container from '../../../../components/container';
-import LoadingIcon from '../../../../components/loading-icon';
-import Span from '../../../../components/span';
+import LoadingIcon from '../../../../components/loading-icon/index.js';
+import Section from '../../../../components/section.js';
+import Span from '../../../../components/span/index.js';
 
 interface Props {
   readonly error: string | null;
@@ -23,34 +23,31 @@ export default function Events({
 }: Props): ReactElement {
   if (!initiated) {
     return (
-      <Container header={<I18n>Events</I18n>} marginTop="large">
+      <Section header={<I18n>Events</I18n>}>
         <I18n>Initiating</I18n>
-      </Container>
+      </Section>
     );
   }
 
   if (loading) {
     return (
-      <Container header={<I18n>Events</I18n>} marginTop="large">
+      <Section header={<I18n>Events</I18n>}>
         <LoadingIcon /> <I18n>Loading events</I18n>
-      </Container>
+      </Section>
     );
   }
 
   if (error !== null) {
     return (
-      <Container header={<I18n>Events</I18n>} marginTop="large">
+      <Section header={<I18n>Events</I18n>}>
         <Span element="p">{error}</Span>
-      </Container>
+      </Section>
     );
   }
 
   return (
-    <Container
-      header={<I18n count={events.length}>Events ($count)</I18n>}
-      marginTop="large"
-    >
+    <Section header={<I18n count={events.length}>Events ($count)</I18n>}>
       <ol>{events.map(mapStringToListItem)}</ol>
-    </Container>
+    </Section>
   );
 }

@@ -2,7 +2,7 @@
 
 import { type ReactElement, type ReactNode } from 'react';
 import SentryReact from 'sentry-react';
-import useSentry from './sentry.hook';
+import useSentry from './sentry.hook.js';
 
 interface Props {
   readonly children: ReactNode;

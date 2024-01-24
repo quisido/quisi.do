@@ -1,10 +1,10 @@
 import { type Metadata } from 'next';
-import mapPathToAlternates from '../utils/map-path-to-alternates';
-import AUTHOR_QUISIDO from './author-quisido';
-import FORMAT_DETECTION from './format-detection';
-import KEYWORDS from './keywords';
-// import ROBOTS_INFO from './robots-info';
-// import THEME_COLOR_DESCRIPTORS from './theme-color-descriptors';
+import mapPathToAlternates from '../utils/map-path-to-alternates.js';
+import AUTHOR_QUISIDO from './author-quisido.js';
+import FORMAT_DETECTION from './format-detection.js';
+import KEYWORDS from './keywords.js';
+// import ROBOTS_INFO from './robots-info.js';
+// import THEME_COLOR_DESCRIPTORS from './theme-color-descriptors.js';
 
 /**
  * TODO: Validate these against the standard documented on MDN:

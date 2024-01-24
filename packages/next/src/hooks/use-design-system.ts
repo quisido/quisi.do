@@ -1,10 +1,10 @@
 import { type Dispatch, type SetStateAction, useContext } from 'react';
-import type DesignSystem from '../constants/design-system';
-import DesignSystemContext from '../contexts/design-system';
+import type DesignSystem from '../constants/design-system.js';
+import DesignSystemContext from '../contexts/design-system.js';
 
 export default function useDesignSystem(): [
   DesignSystem,
-  Dispatch<SetStateAction<DesignSystem>>
+  Dispatch<SetStateAction<DesignSystem>>,
 ] {
   const designSystem:
     | [DesignSystem, Dispatch<SetStateAction<DesignSystem>>]

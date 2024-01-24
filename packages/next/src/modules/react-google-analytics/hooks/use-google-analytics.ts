@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect } from 'react';
-import type GoogleAnalyticsUserData from '../types/google-analytics-user-data';
-import type UserData from '../types/user-data';
-import gtag from '../utils/gtag';
-import useDataLayer from './use-data-layer';
-import useGTag from './use-gtag';
-import useScript from './use-script';
-import useUserData from './use-user-data';
+import type GoogleAnalyticsUserData from '../types/google-analytics-user-data.js';
+import type UserData from '../types/user-data.js';
+import gtag from '../utils/gtag.js';
+import useDataLayer from './use-data-layer.js';
+import useGTag from './use-gtag.js';
+import useScript from './use-script.js';
+import useUserData from './use-user-data.js';
 
 interface Props {
   readonly trackingId: string;

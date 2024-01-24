@@ -7,10 +7,10 @@ import {
   useMemo,
   useState,
 } from 'react';
-import type DesignSystemProps from '../../types/design-system-props';
-import useDesignSystemComponent from './hooks/use-design-system-component';
-import type Props from './types/props';
-import isPropsWithChildren from './utils/is-props-with-children';
+import type DesignSystemProps from '../../types/design-system-props.js';
+import useDesignSystemComponent from './hooks/use-design-system-component.js';
+import type Props from './types/props.js';
+import isPropsWithChildren from './utils/is-props-with-children.js';
 
 interface State<Card extends object, Row extends object> {
   readonly Component: ComponentType<DesignSystemProps<Card, Row>>;

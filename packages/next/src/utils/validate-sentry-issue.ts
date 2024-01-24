@@ -1,15 +1,15 @@
-import EMPTY_ARRAY from '../constants/empty-array';
-import type SentryIssue from '../types/sentry-issue';
-import assert from './assert';
-import isArray from './is-array';
-import isNumber from './is-number';
-import validateArray from './validate-array';
-import validateBoolean from './validate-boolean';
-import validateNumber from './validate-number';
-import validateObject from './validate-object';
-import validateMetadata from './validate-sentry-issue-metadata';
-import validateString from './validate-string';
-import validateTuple from './validate-tuple';
+import EMPTY_ARRAY from '../constants/empty-array.js';
+import type SentryIssue from '../types/sentry-issue.js';
+import assert from './assert.js';
+import isArray from './is-array.js';
+import isNumber from './is-number.js';
+import validateArray from './validate-array.js';
+import validateBoolean from './validate-boolean.js';
+import validateNumber from './validate-number.js';
+import validateObject from './validate-object.js';
+import validateMetadata from './validate-sentry-issue-metadata.js';
+import validateString from './validate-string.js';
+import validateTuple from './validate-tuple.js';
 
 const validateStat = (
   value: unknown,

@@ -2,7 +2,7 @@
 
 import { type MutableRefObject, useCallback, useRef, useState } from 'react';
 import mapUnknownToString from 'unknown2string';
-import type AsyncState from '../types/async-state';
+import type AsyncState from '../types/async-state.js';
 
 export type State<T> = AsyncState<T> & BaseState<T>;
 

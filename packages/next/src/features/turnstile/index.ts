@@ -1,1 +1,1 @@
-export { default } from './turnstile.view';
+export { default } from './turnstile.view.js';

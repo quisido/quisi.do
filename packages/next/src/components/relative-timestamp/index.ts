@@ -1,1 +1,1 @@
-export { default } from './relative-timestamp.view';
+export { default } from './relative-timestamp.view.js';

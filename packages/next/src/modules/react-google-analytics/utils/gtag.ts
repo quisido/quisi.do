@@ -1,6 +1,6 @@
 /* eslint-disable prefer-rest-params */
 
-import type GoogleAnalyticsWindow from '../types/google-analytics-window';
+import type GoogleAnalyticsWindow from '../types/google-analytics-window.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function gtag(..._args: readonly unknown[]): void {

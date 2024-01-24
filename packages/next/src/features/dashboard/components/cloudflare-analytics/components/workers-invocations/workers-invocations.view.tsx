@@ -1,11 +1,11 @@
 import { type ReactElement } from 'react';
-import Table from '../../../../../../components/table';
-import type WorkersInvocations from '../../../../../../types/cloudflare-workers-invocations';
-import createIndexArray from '../../../../../../utils/create-index-array';
-import COLUMNS from '../../constants/workers-invocations-columns';
-import type Analytic from '../../types/workers-invocations-analytic';
-import Header from '../workers-invocations-header';
-import useWorkersInvocations from './workers-invocations.hook';
+import Table from '../../../../../../components/table/index.js';
+import type WorkersInvocations from '../../../../../../types/cloudflare-workers-invocations.js';
+import createIndexArray from '../../../../../../utils/create-index-array.js';
+import COLUMNS from '../../constants/workers-invocations-columns.js';
+import type Analytic from '../../types/workers-invocations-analytic.js';
+import Header from '../workers-invocations-header/index.js';
+import useWorkersInvocations from './workers-invocations.hook.js';
 
 interface Props {
   readonly children: WorkersInvocations;

@@ -1,5 +1,5 @@
-import isDefined from '../../../utils/is-defined';
-import sum from '../../../utils/sum';
+import isDefined from '../../../utils/is-defined.js';
+import sum from '../../../utils/sum.js';
 
 const NONE = 0;
 

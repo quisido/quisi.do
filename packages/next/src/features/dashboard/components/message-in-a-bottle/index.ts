@@ -1,1 +1,1 @@
-export { default } from './message-in-a-bottle.view';
+export { default } from './message-in-a-bottle.view.js';

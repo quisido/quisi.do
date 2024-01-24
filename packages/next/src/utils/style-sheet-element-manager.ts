@@ -1,5 +1,5 @@
-import type SetValue from '../types/set-value';
-import mapElementToParentNode from './map-element-to-parent-node';
+import type SetValue from '../types/set-value.js';
+import mapElementToParentNode from './map-element-to-parent-node.js';
 
 interface EventListeners {
   readonly error: Set<(error: unknown) => void>;

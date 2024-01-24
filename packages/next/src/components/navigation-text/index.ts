@@ -1,1 +1,1 @@
-export { default } from './navigation-text.view';
+export { default } from './navigation-text.view.js';

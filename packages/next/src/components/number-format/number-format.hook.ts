@@ -1,5 +1,5 @@
-import type Locale from '../../constants/locale';
-import { useLocale } from '../../contexts/locale';
+import type Locale from '../../constants/locale.js';
+import { useLocale } from '../../contexts/locale.js';
 
 interface State {
   readonly locale: Locale;

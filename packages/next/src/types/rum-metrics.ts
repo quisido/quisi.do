@@ -1,5 +1,5 @@
-import type NonSumMetricStats from './non-sum-metric-stats';
-import type SumMetricStats from './sum-metric-stats';
+import type NonSumMetricStats from './non-sum-metric-stats.js';
+import type SumMetricStats from './sum-metric-stats.js';
 
 interface RumMetrics {
   readonly JsErrorCount: SumMetricStats;

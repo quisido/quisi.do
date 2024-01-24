@@ -1,1 +1,1 @@
-export { default } from './percent-difference.view';
+export { default } from './percent-difference.view.js';

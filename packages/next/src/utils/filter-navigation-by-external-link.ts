@@ -1,8 +1,8 @@
-import type NavigationCategory from '../types/navigation-category';
-import type NavigationComponent from '../types/navigation-component';
-import type NavigationExternalLink from '../types/navigation-external-link';
-import type NavigationLink from '../types/navigation-link';
-import isHrefExternal from './is-href-external';
+import type NavigationCategory from '../types/navigation-category.js';
+import type NavigationComponent from '../types/navigation-component.js';
+import type NavigationExternalLink from '../types/navigation-external-link.js';
+import type NavigationLink from '../types/navigation-link.js';
+import isHrefExternal from './is-href-external.js';
 
 export default function filterNavigationByExternalLink(
   item:

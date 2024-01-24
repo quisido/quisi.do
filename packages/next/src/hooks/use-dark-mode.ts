@@ -1,5 +1,5 @@
 import { type Dispatch, type SetStateAction, useContext } from 'react';
-import DarkMode from '../contexts/dark-mode';
+import DarkMode from '../contexts/dark-mode.js';
 
 export default function useDarkMode(): [
   boolean,

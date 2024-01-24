@@ -1,6 +1,6 @@
 import { existsSync } from 'fs';
 import { join } from 'path';
-import RESUME_HREF from './resume-href';
+import RESUME_HREF from './resume-href.js';
 
 const RESUME_PATH = join('public', RESUME_HREF);
 

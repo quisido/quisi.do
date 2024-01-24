@@ -1,7 +1,5 @@
 'use client';
 
-import { type Context, createContext } from 'react';
+import { createContext } from 'react';
 
-const Hostname: Context<string | null> = createContext<string | null>(null);
-
-export default Hostname;
+export default createContext<string | null>(null);

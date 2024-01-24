@@ -1,6 +1,6 @@
-import type SentryIssue from '../types/sentry-issue';
-import isSentryError from './is-sentry-error';
-import validateSentryIssues from './validate-sentry-issues';
+import type SentryIssue from '../types/sentry-issue.js';
+import isSentryError from './is-sentry-error.js';
+import validateSentryIssues from './validate-sentry-issues.js';
 
 interface Options {
   readonly authToken: string;

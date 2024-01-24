@@ -1,1 +1,1 @@
-export { default, type Props } from './input.view';
+export { default, type Props } from './input.view.js';

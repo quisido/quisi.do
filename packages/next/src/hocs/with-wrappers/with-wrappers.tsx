@@ -4,7 +4,7 @@ import {
   type PropsWithChildren,
   type ReactElement,
 } from 'react';
-import reduceWrappersToWrapper from './utils/reduce-wrappers-to-wrapper';
+import reduceWrappersToWrapper from './utils/reduce-wrappers-to-wrapper.js';
 
 export default function withWrappers(
   ...Wrappers: readonly ComponentType<Required<PropsWithChildren>>[]

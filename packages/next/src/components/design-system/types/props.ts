@@ -1,5 +1,5 @@
 import { type ComponentType } from 'react';
-import type DesignSystemPropsRecord from '../../../types/design-system-props-record';
+import type DesignSystemPropsRecord from '../../../types/design-system-props-record.js';
 
 interface DesignSystemComponentProps<
   Card extends object,

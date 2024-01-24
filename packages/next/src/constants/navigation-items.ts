@@ -1,9 +1,9 @@
-import Settings from '../components/settings';
-import NavigationText from '../constants/navigation-text';
-import type NavigationCategory from '../types/navigation-category';
-import type NavigationComponent from '../types/navigation-component';
-import type NavigationExternalLink from '../types/navigation-external-link';
-import type NavigationLink from '../types/navigation-link';
+import Settings from '../components/settings/index.js';
+import NavigationText from '../constants/navigation-text.js';
+import type NavigationCategory from '../types/navigation-category.js';
+import type NavigationComponent from '../types/navigation-component.js';
+import type NavigationExternalLink from '../types/navigation-external-link.js';
+import type NavigationLink from '../types/navigation-link.js';
 
 const NAVIGATION_ITEMS: readonly (
   | NavigationCategory
@@ -52,10 +52,6 @@ const NAVIGATION_ITEMS: readonly (
       {
         text: NavigationText.RPGOverworldEngine,
         url: 'https://quisido.github.io/rpg-overworld-engine/',
-      },
-      {
-        text: NavigationText.SpriteSheet2Gif,
-        path: '/spritesheet2gif/',
       },
     ],
   },

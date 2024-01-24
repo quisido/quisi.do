@@ -1,6 +1,6 @@
-import EMPTY_ARRAY from '../constants/empty-array';
-import assert from './assert';
-import isArray from './is-array';
+import EMPTY_ARRAY from '../constants/empty-array.js';
+import assert from './assert.js';
+import isArray from './is-array.js';
 
 export default function validateArray<T>(
   arr: unknown,

@@ -1,5 +1,5 @@
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
-import HONEYCOMB_TEAM from './honeycomb-team';
+import HONEYCOMB_TEAM from './honeycomb-team.js';
 
 const OPEN_TELEMETRY_EXPORTER: OTLPTraceExporter = new OTLPTraceExporter({
   headers: {

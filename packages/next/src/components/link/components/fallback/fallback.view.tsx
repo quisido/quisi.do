@@ -2,7 +2,7 @@
 
 import NextLink from 'next/link';
 import { type ReactElement } from 'react';
-import type Props from '../../types/props';
+import type Props from '../../types/props.js';
 
 export default function FallbackLink({
   children,

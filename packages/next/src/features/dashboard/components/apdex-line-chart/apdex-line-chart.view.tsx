@@ -1,8 +1,8 @@
 import { type ReactElement } from 'react';
 import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
-import validateString from '../../../../utils/validate-string';
-import formatApdexScore from '../../utils/format-apdex-score';
-import useApdexLineChart from './apdex-line-chart.hook';
+import validateString from '../../../../utils/validate-string.js';
+import formatApdexScore from '../../utils/format-apdex-score.js';
+import useApdexLineChart from './apdex-line-chart.hook.js';
 import styles from './apdex-line-chart.module.scss';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
   readonly tolerated: Record<string, number>;
 }
 
-const rootClassName: string = validateString(styles.root);
+const rootClassName: string = validateString(styles['root']);
 
 export default function ApdexLineChart({
   frustrated,

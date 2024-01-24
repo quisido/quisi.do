@@ -1,9 +1,9 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { useMemo } from 'react';
-import useTableSort from '../../../../../../hooks/use-table-sort';
-import type RumPerformanceEvents from '../../../../../../types/cloudflare-rum-performance-events';
-import type Analytic from '../../types/web-analytic';
-import mapSampleIntervalToRate from '../../map-sample-interval-to-rate';
+import useTableSort from '../../../../../../hooks/use-table-sort.js';
+import type RumPerformanceEvents from '../../../../../../types/cloudflare-rum-performance-events.js';
+import type Analytic from '../../types/web-analytic.js';
+import mapSampleIntervalToRate from '../../map-sample-interval-to-rate.js';
 
 interface State {
   readonly handleSort: (columnIndex: number, ascending: boolean) => void;

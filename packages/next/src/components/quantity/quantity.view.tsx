@@ -1,10 +1,10 @@
 import { type ReactElement } from 'react';
-import Bytes from './components/bytes';
-import Kibibytes from './components/kibibytes';
-import Microseconds from './components/microseconds';
-import Milliseconds from './components/milliseconds';
-import Minutes from './components/minutes';
-import Seconds from './components/seconds';
+import Bytes from './components/bytes/index.js';
+import Kibibytes from './components/kibibytes/index.js';
+import Microseconds from './components/microseconds/index.js';
+import Milliseconds from './components/milliseconds/index.js';
+import Minutes from './components/minutes/index.js';
+import Seconds from './components/seconds/index.js';
 
 interface Props {
   readonly children: number;

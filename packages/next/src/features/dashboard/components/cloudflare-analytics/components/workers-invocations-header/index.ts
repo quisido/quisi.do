@@ -1,1 +1,1 @@
-export { default } from './workers-invocations-header.view';
+export { default } from './workers-invocations-header.view.js';

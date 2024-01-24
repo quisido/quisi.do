@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import NavigationText from '../../constants/navigation-text';
+import NavigationText from '../../constants/navigation-text.js';
 
 /**
  * Since MUI renders navigation text with React nodes, we map `NavigationText`
@@ -53,8 +53,6 @@ export default function WrapperNavigationText({
       return <I18n>RPG overworld engine</I18n>;
     case NavigationText.Settings:
       return <I18n>Settings</I18n>;
-    case NavigationText.SpriteSheet2Gif:
-      return <>Sprite sheet to GIF</>;
     case NavigationText.Tetris3DS:
       return <>3DS Tetris</>;
     case NavigationText.Threads:
