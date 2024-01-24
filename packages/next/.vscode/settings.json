@@ -9,6 +9,6 @@
     "lighthouse.report.json": true,
     "next-env.d.ts": true,
     "next.config.cjs": true,
-    "next.config.js": true,
+    "next.config.js": true
   }
 }
