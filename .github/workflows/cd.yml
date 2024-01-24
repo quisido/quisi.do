@@ -289,6 +289,8 @@ jobs:
         with:
           name: prepack
           path: packages/
+      - name: Install dependencies
+        run: yarn install --immutable
       - name: Upload Datadog sourcemaps
         run: yarn packages/next run datadog:sourcemaps
         env:
