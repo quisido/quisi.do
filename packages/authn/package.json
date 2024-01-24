@@ -5,15 +5,21 @@
   "version": "1.0.0",
   "scripts": {
     "attw": "attw",
-    "deploy": "wrangler deploy src/index.ts --name authentication --outdir dist",
-    "deploy:dry-run": "wrangler deploy src/index.ts --dry-run --name authentication --outdir dist",
+    "delete": "wrangler d1 execute authn --file=./sql/delete.sql --local",
+    "deploy": "wrangler deploy src/index.ts --name quisido-authn --outdir dist",
+    "deploy:dry-run": "wrangler deploy src/index.ts --dry-run --name quisido-authn --outdir dist",
     "dev": "wrangler dev --local-protocol https",
-    "init": "echo \"API token:\" && wrangler secret put API_TOKEN && echo \"Account tag:\" && wrangler secret put ACCOUNT_TAG && echo \"Zone tag:\" && wrangler secret put ZONE_TAG",
+    "init": "yarn run init:emails && yarn run init:oauth && yarn run init:users",
+    "init:emails": "wrangler d1 execute authn --file=./sql/emails.sql --local",
+    "init:oauth": "wrangler d1 execute authn --file=./sql/oauth.sql --local",
+    "init:users": "wrangler d1 execute authn --file=./sql/users.sql --local",
     "jest": "jest",
     "jest:watch": "jest --watch",
+    "login": "wrangler login",
     "prepack": "exit 0",
     "prepublish": "yarn run jest",
-    "tail": "wrangler tail --format pretty --ip self authentication"
+    "tail": "wrangler tail --format pretty --ip self authentication",
+    "whoami": "wrangler whoami"
   },
   "dependencies": {
     "cookie": "^0.6.0",

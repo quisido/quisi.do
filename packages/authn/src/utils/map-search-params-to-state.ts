@@ -1,8 +1,9 @@
 import StatusCode from '../constants/status-code.js';
 import assert from './assert.js';
 
-export default function mapRequestToStateSearchParam(request: Request): string {
-  const { searchParams }: URL = new URL(request.url);
+export default function mapSearchParamsToState(
+  searchParams: URLSearchParams,
+): string {
   const state: string | null = searchParams.get('state');
 
   assert(

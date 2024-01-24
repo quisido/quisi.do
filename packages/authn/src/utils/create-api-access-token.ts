@@ -3,8 +3,8 @@ import USER_AGENT from '../constants/user-agent.js';
 import assert from './assert.js';
 import isObject from './is-object.js';
 import mapReadableStreamToString from './map-readable-stream-to-string.js';
-import createError from './create-error.js';
 import StatusCode from '../constants/status-code.js';
+import createPatreonError from './create-patreon-error.js';
 import parseJson from './parse-json.js';
 
 const HTTP_REDIRECTION = 300;
@@ -13,29 +13,6 @@ const HEADERS: Headers = new Headers({
   'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
   'User-Agent': USER_AGENT,
 });
-
-const mapErrorJsonToMessage = (json: Record<'error', unknown>): string => {
-  switch (json.error) {
-    case 'invalid_request': {
-      assert(
-        'error_description' in json,
-        'Expected Patreon OAuth invalid token request to have a description.',
-        StatusCode.BadGateway,
-        json,
-      );
-      assert(
-        typeof json.error_description === 'string',
-        'Expected Patreon OAuth invalid token request description to be a string.',
-        StatusCode.BadGateway,
-        json,
-      );
-      return json.error_description;
-    }
-
-    default:
-      return `Unknown Patreon OAuth token error: ${JSON.stringify(json.error)}`;
-  }
-};
 
 export default async function createApiAccessToken(
   host: string,
@@ -85,8 +62,12 @@ export default async function createApiAccessToken(
       json,
     );
 
-    const message: string = mapErrorJsonToMessage(json);
-    throw createError(message, response.status, json);
+    throw createPatreonError({
+      clientId,
+      code,
+      json,
+      status: response.status,
+    });
   }
 
   const json: unknown = await response.json();
@@ -96,25 +77,6 @@ export default async function createApiAccessToken(
     StatusCode.BadGateway,
     json,
   );
-
-  // Why isn't this non-2xx? 🤔
-  if ('error' in json) {
-    const getMessage = (): string => {
-      switch (json.error) {
-        case 'invalid_grant':
-          return `${host} cannot grant authorization codes.`;
-        case 'invalid_client':
-          return `Invalid client ID: ${clientId}`;
-        default:
-          return `Unknown error: ${JSON.stringify(json.error)}`;
-      }
-    };
-
-    const message: string = getMessage();
-
-    // Technical debt: Should we change this status code?
-    throw createError(message, response.status, json);
-  }
 
   assert(
     'access_token' in json,

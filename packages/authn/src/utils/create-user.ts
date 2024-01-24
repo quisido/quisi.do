@@ -2,22 +2,20 @@
 import mapUnknownToString from 'unknown2string';
 import EPOCH_SECONDS_OFFSET from '../constants/epoch-seconds-offset.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
-import StatusCode from '../constants/status-code.js';
 import { MILLISECONDS_PER_SECOND } from '../constants/time';
 import type OAuthUser from '../types/oauth-user.js';
-import assert from './assert.js';
 
-const EMAILS_QUERY = `
+const INSERT_INTO_EMAILS_QUERY = `
 INSERT INTO \`emails\` (\`address\`, \`userId\`)
 VALUES (?, ?);
 `;
 
-const OAUTH_QUERY = `
+const INSERT_INTO_OAUTH_QUERY = `
 INSERT INTO \`oauth\` (\`oauthId\`, \`oauthProvider\`, \`userId\`)
 VALUES (?, ?, ?);
 `;
 
-const USERS_QUERY = `
+const INSERT_INTO_USERS_QUERY = `
 INSERT INTO \`users\` (
   \`firstName\`,
   \`fullName\`,
@@ -35,58 +33,51 @@ export default async function createUser(
 ): Promise<number> {
   const nowSeconds: number = Date.now() / MILLISECONDS_PER_SECOND;
   const usersStatement = usersDb
-    .prepare(USERS_QUERY)
+    .prepare(INSERT_INTO_USERS_QUERY)
     .bind(firstName, fullName, gender, nowSeconds - EPOCH_SECONDS_OFFSET);
 
   const {
-    meta: { duration: usersDuration },
+    meta: {
+      changes: usersChanges,
+      duration: usersDuration,
+      last_row_id: usersLastRowId,
+      size_after: usersSizeAfter,
+    },
     success: usersSuccess,
   } = await usersStatement.run();
 
   // TODO: This needs to be emit and put on /dashboard!
   console.log({
+    changes: usersChanges,
     duration: usersDuration,
+    lastRowId: usersLastRowId,
     query: 'utils/create-user#users',
+    sizeAfter: usersSizeAfter,
     success: usersSuccess,
   });
 
-  const result: Record<string, unknown> | null = await usersDb
-    .prepare('SELECT last_insert_rowid();')
-    .first();
-
-  assert(
-    result !== null,
-    'Expected a row to have been inserted.',
-    StatusCode.BadGateway,
-  );
-
-  assert(
-    'last_insert_rowid()' in result,
-    'Expected a last insert row ID.',
-    StatusCode.BadGateway,
-  );
-
-  const { 'last_insert_rowid()': userId } = result;
-  assert(
-    typeof userId === 'number',
-    'Expected last insert row ID to be numeric.',
-    StatusCode.BadGateway,
-  );
-
   ctx.waitUntil(
     usersDb
-      .prepare(OAUTH_QUERY)
-      .bind(oAuthId, oAuthProvider, userId)
+      .prepare(INSERT_INTO_OAUTH_QUERY)
+      .bind(oAuthId, oAuthProvider, usersLastRowId)
       .run()
       // TODO: This needs to be emit and put on /dashboard!
       .then(
         ({
-          meta: { duration: oAuthDuration },
+          meta: {
+            changes: oAuthChanges,
+            duration: oAuthDuration,
+            last_row_id: oAuthLastRowId,
+            size_after: oAuthSizeAfter,
+          },
           success: oAuthSuccess,
         }: D1Result): void => {
           console.log({
+            changes: oAuthChanges,
             duration: oAuthDuration,
+            lastRowId: oAuthLastRowId,
             query: 'utils/create-user#oauth',
+            sizeAfter: oAuthSizeAfter,
             success: oAuthSuccess,
           });
         },
@@ -103,18 +94,26 @@ export default async function createUser(
 
   ctx.waitUntil(
     usersDb
-      .prepare(EMAILS_QUERY)
-      .bind(email, userId)
+      .prepare(INSERT_INTO_EMAILS_QUERY)
+      .bind(email, usersLastRowId)
       .run()
       // TODO: This needs to be emit and put on /dashboard!
       .then(
         ({
-          meta: { duration: oAuthDuration },
+          meta: {
+            changes: emailsChanges,
+            duration: emailsDuration,
+            last_row_id: emailsLastRowId,
+            size_after: emailsSizeAfter,
+          },
           success: oAuthSuccess,
         }: D1Result): void => {
           console.log({
-            duration: oAuthDuration,
+            changes: emailsChanges,
+            duration: emailsDuration,
+            lastRowId: emailsLastRowId,
             query: 'utils/create-user#emails',
+            sizeAfter: emailsSizeAfter,
             success: oAuthSuccess,
           });
         },
@@ -129,5 +128,5 @@ export default async function createUser(
       }),
   );
 
-  return userId;
+  return usersLastRowId;
 }

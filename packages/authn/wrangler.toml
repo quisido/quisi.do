@@ -5,7 +5,7 @@ tsconfig = "./tsconfig.json"
 workers_dev = true
 
 d1_databases = [
-  { binding = "AUTHN", database_id = "d0e825fc-b58d-49b3-a86c-a9d967278d80", database_name = "authn" },
+  { binding = "AUTHN", database_id = "d0e825fc-b58d-49b3-a86c-a9d967278d80", database_name = "authn", database_preview_id = "768ff4ca-4c33-4c2c-bd62-24afe6e2bb13" },
 ]
 
 kv_namespaces = [

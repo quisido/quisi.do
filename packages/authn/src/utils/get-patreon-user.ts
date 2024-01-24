@@ -172,6 +172,9 @@ export default async function getPatreonUser(
   );
 
   return {
+    email,
+    firstName,
+    fullName,
     gender: mapPatreonGenderToGender(gender),
     id,
   };

@@ -7,7 +7,7 @@ const QUERY = `
 SELECT \`userId\`
 FROM \`oauth\`
 WHERE \`oauthProvider\` = ?
-  AND \`oauthId\` = ?;
+  AND \`oauthId\` = ?
 LIMIT 1;
 `;
 
@@ -18,11 +18,10 @@ export default async function getUserId(
 ): Promise<number | null> {
   const statement: D1PreparedStatement = db
     .prepare(QUERY)
-    .bind(oauthProvider)
-    .bind(oauthId);
+    .bind(oauthProvider, oauthId);
 
   const {
-    meta: { duration, rows_read: rowsRead },
+    meta: { duration, size_after: sizeAfter },
     results,
     success,
   } = await statement.run();
@@ -31,7 +30,7 @@ export default async function getUserId(
   console.log({
     duration,
     query: 'utils/get-user-id',
-    rowsRead,
+    sizeAfter,
     success,
   });
 

@@ -7,6 +7,7 @@ enum StatusCode {
   InternalServerError = 500,
   MethodNotAllowed = 405,
   NotFound = 404,
+  SeeOther = 303,
   TooManyRequests = 429,
   Unauthorized = 401,
 }

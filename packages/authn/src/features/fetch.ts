@@ -17,13 +17,17 @@ import getUserId from '../utils/get-user-id.js';
 import getPatreonUser from '../utils/get-patreon-user.js';
 import isEnvironment from '../utils/is-environment.js';
 import mapErrorToResponse from '../utils/map-error-to-response.js';
-import mapRequestToState from '../utils/map-request-to-state.js';
 import mapRequestSearchParamsToCode from '../utils/map-request-search-params-to-code.js';
 import throttle from './throttle.js';
 import isObject from '../utils/is-object.js';
 import createAuthenticationId from '../utils/create-authentication-id.js';
 import isKVNamespace from '../utils/is-kv-namespace.js';
 import createUser from '../utils/create-user.js';
+import isD1Database from '../utils/is-d1-database.js';
+import mapSearchParamsToState from '../utils/map-search-params-to-state.js';
+import createRequestState from '../utils/create-request-state.js';
+import mapHeadersToCookies from '../utils/map-headers-to-cookies.js';
+import mapCookiesToSessionId from '../utils/map-cookies-to-session-id.js';
 
 export default (async function fetch(
   request: Readonly<Request>,
@@ -59,8 +63,8 @@ export default (async function fetch(
     );
 
     const {
+      AUTHN,
       AUTHN_USER_IDS,
-      AUTHN_USERS,
       ENV,
       PATREON_OAUTH_CLIENT_ID,
       PATREON_OAUTH_CLIENT_SECRET,
@@ -84,12 +88,14 @@ export default (async function fetch(
       isKVNamespace(AUTHN_USER_IDS),
       'Expected an authentication database.',
       StatusCode.InternalServerError,
+      AUTHN_USER_IDS,
     );
 
     assert(
-      AUTHN_USERS instanceof D1Database,
+      isD1Database(AUTHN),
       'Expected an authentication database.',
       StatusCode.InternalServerError,
+      AUTHN,
     );
 
     assert(
@@ -116,8 +122,18 @@ export default (async function fetch(
       StatusCode.InternalServerError,
     );
 
+    const { hostname, searchParams } = new URL(request.url);
+    const cookies: Partial<Record<string, string>> = mapHeadersToCookies(
+      request.headers,
+    );
+
     // Patreon
-    const { returnHref }: State = mapRequestToState(request);
+    const { returnHref }: State = createRequestState({
+      hostname,
+      sessionId: mapCookiesToSessionId(cookies),
+      stateSearchParam: mapSearchParamsToState(searchParams),
+    });
+
     const getOAuthUser = async (): Promise<
       OAuthUser & Record<'provider', OAuthProvider>
     > => {
@@ -148,15 +164,25 @@ export default (async function fetch(
     // Create an authentication ID.
     const authnId: string = createAuthenticationId();
     const optionalPromise: Promise<void> = getUserId(
-      AUTHN_USERS,
+      AUTHN,
       oAuthProvider,
       oAuthUser.id,
     )
       .then(async (userId: number | null): Promise<number> => {
         if (userId !== null) {
+          console.log(`User #${userId} authenticated.`);
           return userId;
         }
-        return createUser(AUTHN_USERS, oAuthProvider, oAuthUser, ctx);
+
+        console.log('Creating user...');
+        const newUserId: number = await createUser(
+          AUTHN,
+          oAuthProvider,
+          oAuthUser,
+          ctx,
+        );
+        console.log(`User #${userId} created.`);
+        return newUserId;
       })
       .then(async (userId: number): Promise<void> => {
         const nowSeconds: number = Math.floor(
@@ -180,10 +206,11 @@ export default (async function fetch(
     }
 
     return new Response(null, {
-      status: StatusCode.Created,
+      status: StatusCode.SeeOther,
       headers: new Headers({
+        'Content-Location': returnHref,
         Location: returnHref,
-        'Set-Cookie': `__Secure-Authentication-ID="${authnId}"; domain=localhost; max-age=${SECONDS_PER_DAY}; partitioned; path=/; samesite=lax; secure`,
+        'Set-Cookie': `__Secure-Authentication-ID=${authnId}; domain=${hostname}; max-age=${SECONDS_PER_DAY}; partitioned; path=/; samesite=lax; secure`,
       }),
     });
   } catch (err: unknown) {
