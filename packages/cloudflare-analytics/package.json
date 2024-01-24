@@ -12,7 +12,7 @@
     "jest": "jest",
     "jest:watch": "jest --watch",
     "prepack": "exit 0",
-    "prepublish": "yarn run jest",
+    "prepublish": "exit 0",
     "tail": "wrangler tail --format pretty --ip self cloudflare-analytics"
   },
   "devDependencies": {

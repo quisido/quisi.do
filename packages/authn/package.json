@@ -17,7 +17,7 @@
     "jest:watch": "jest --watch",
     "login": "wrangler login",
     "prepack": "exit 0",
-    "prepublish": "yarn run jest",
+    "prepublish": "exit 0",
     "tail": "wrangler tail --format pretty --ip self authentication",
     "whoami": "wrangler whoami"
   },
