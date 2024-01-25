@@ -16,13 +16,18 @@
     },
 
     {
-      "name": "Cloudflare Analytics worker",
+      "name": "Authentication",
+      "path": "packages/authn"
+    },
+
+    {
+      "name": "Cloudflare Analytics",
       "path": "packages/cloudflare-analytics"
     },
 
     {
-      "name": "Cloudflare Authentication worker",
-      "path": "packages/authn"
+      "name": "Who am I?",
+      "path": "packages/whoami"
     },
 
     {

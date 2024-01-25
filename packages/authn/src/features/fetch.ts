@@ -28,6 +28,7 @@ import mapSearchParamsToState from '../utils/map-search-params-to-state.js';
 import createRequestState from '../utils/create-request-state.js';
 import mapHeadersToCookies from '../utils/map-headers-to-cookies.js';
 import mapCookiesToSessionId from '../utils/map-cookies-to-session-id.js';
+import logError from '../utils/log-error.js';
 
 export default (async function fetch(
   request: Readonly<Request>,
@@ -65,7 +66,9 @@ export default (async function fetch(
     const {
       AUTHN,
       AUTHN_USER_IDS,
-      ENV,
+      COOKIE_DOMAIN,
+      ENVIRONMENT,
+      HOST,
       PATREON_OAUTH_CLIENT_ID,
       PATREON_OAUTH_CLIENT_SECRET,
       PATREON_OAUTH_HOST,
@@ -73,14 +76,14 @@ export default (async function fetch(
     } = env as Readonly<Record<string, unknown>>;
 
     assert(
-      isEnvironment(ENV),
+      isEnvironment(ENVIRONMENT),
       'Expected an environment to be provided.',
       StatusCode.InternalServerError,
-      ENV,
+      ENVIRONMENT,
     );
 
     // Throttle (deployed environments)
-    if (ENV !== Environment.Development) {
+    if (ENVIRONMENT !== Environment.Development) {
       throttle(request);
     }
 
@@ -96,6 +99,18 @@ export default (async function fetch(
       'Expected an authentication database.',
       StatusCode.InternalServerError,
       AUTHN,
+    );
+
+    assert(
+      typeof COOKIE_DOMAIN === 'string',
+      'Expected a cookie domain.',
+      StatusCode.InternalServerError,
+    );
+
+    assert(
+      typeof HOST === 'string',
+      'Expected a host.',
+      StatusCode.InternalServerError,
     );
 
     assert(
@@ -122,14 +137,14 @@ export default (async function fetch(
       StatusCode.InternalServerError,
     );
 
-    const { hostname, searchParams } = new URL(request.url);
+    const { searchParams } = new URL(request.url);
     const cookies: Partial<Record<string, string>> = mapHeadersToCookies(
       request.headers,
     );
 
     // Patreon
     const { returnHref }: State = createRequestState({
-      hostname,
+      host: HOST,
       sessionId: mapCookiesToSessionId(cookies),
       stateSearchParam: mapSearchParamsToState(searchParams),
     });
@@ -199,7 +214,7 @@ export default (async function fetch(
      *   TODO: Emit an A/B test duration metric for `await` and `waitUntil` in
      * production.
      */
-    if (ENV === Environment.Development) {
+    if (ENVIRONMENT === Environment.Development) {
       await optionalPromise;
     } else {
       ctx.waitUntil(optionalPromise.catch(console.error));
@@ -210,12 +225,11 @@ export default (async function fetch(
       headers: new Headers({
         'Content-Location': returnHref,
         Location: returnHref,
-        'Set-Cookie': `__Secure-Authentication-ID=${authnId}; domain=${hostname}; max-age=${SECONDS_PER_DAY}; partitioned; path=/; samesite=lax; secure`,
+        'Set-Cookie': `__Secure-Authentication-ID=${authnId}; domain=${COOKIE_DOMAIN}; max-age=${SECONDS_PER_DAY}; partitioned; path=/; samesite=lax; secure`,
       }),
     });
   } catch (err: unknown) {
-    // Error `data` gets logged here.
-    console.error(err);
+    logError(err);
     return mapErrorToResponse(err);
   }
 } satisfies ExportedHandlerFetchHandler);

@@ -32,9 +32,12 @@ export default async function createUser(
   ctx: ExecutionContext,
 ): Promise<number> {
   const nowSeconds: number = Date.now() / MILLISECONDS_PER_SECOND;
-  const usersStatement = usersDb
-    .prepare(INSERT_INTO_USERS_QUERY)
-    .bind(firstName, fullName, gender, nowSeconds - EPOCH_SECONDS_OFFSET);
+  const usersStatement = usersDb.prepare(INSERT_INTO_USERS_QUERY).bind(
+    firstName,
+    fullName,
+    gender,
+    Math.floor(nowSeconds - EPOCH_SECONDS_OFFSET), // `registrationTimestamp`
+  );
 
   const {
     meta: {

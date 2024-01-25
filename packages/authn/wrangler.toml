@@ -1,20 +1,55 @@
 compatibility_date = "2023-10-30"
+kv_namespaces = [{ binding = "AUTHN_USER_IDS", id = "AUTHN_USER_IDS" }]
 main = "src/index.ts"
-name = "authn"
+name = "quisido-authn"
 tsconfig = "./tsconfig.json"
-workers_dev = true
 
 d1_databases = [
-  { binding = "AUTHN", database_id = "d0e825fc-b58d-49b3-a86c-a9d967278d80", database_name = "authn", database_preview_id = "768ff4ca-4c33-4c2c-bd62-24afe6e2bb13" },
-]
-
-kv_namespaces = [
-  { binding = "AUTHN_USER_IDS", id = "4dca15c74cdb4fba9680ee52d46c1534" },
+  { binding = "AUTHN", database_id = "AUTHN", database_name = "authn" },
 ]
 
 [dev]
 ip = "127.0.0.1"
 port = 5882      # parseInt('authn', 36) % 9999
+
+[env.production]
+name = "quisido-authn"
+
+d1_databases = [
+  { binding = "AUTHN", database_id = "d0e825fc-b58d-49b3-a86c-a9d967278d80", database_name = "authn", database_preview_id = "d546119e-036c-4c3d-a684-953418657a8d" },
+]
+
+kv_namespaces = [
+  { binding = "AUTHN_USER_IDS", id = "4dca15c74cdb4fba9680ee52d46c1534", preview_id = "235afbbf5e6a4a6bbadf56ea33d07b3e" },
+]
+
+[env.production.vars]
+COOKIE_DOMAIN = "quisi.do"
+ENVIRONMENT = "production"
+HOST = "quisi.do"
+PATREON_OAUTH_CLIENT_ID = "J_6jrNJZNibHylSF83UVl9I4OHZYf67RAsU0s7_LnH1N5BKF-vgOyweF3KQLOKm1"
+PATREON_OAUTH_HOST = "https://www.patreon.com"
+PATREON_OAUTH_REDIRECT_URI = "https://a.quisi.do/patreon/"
+
+[env.staging]
+name = "quisido-authn-staging"
+workers_dev = true
+
+d1_databases = [
+  { binding = "AUTHN", database_id = "d546119e-036c-4c3d-a684-953418657a8d", database_name = "authn-staging" },
+]
+
+kv_namespaces = [
+  { binding = "AUTHN_USER_IDS", id = "235afbbf5e6a4a6bbadf56ea33d07b3e" },
+]
+
+[env.staging.vars]
+COOKIE_DOMAIN = "localhost"
+ENVIRONMENT = "staging"
+HOST = "localhost:3000"
+PATREON_OAUTH_CLIENT_ID = "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG"
+PATREON_OAUTH_HOST = "https://www.patreon.com"
+PATREON_OAUTH_REDIRECT_URI = "https://localhost:5882/patreon/"
 
 [placement]
 mode = "smart"

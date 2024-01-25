@@ -5,20 +5,13 @@ import isObject from './is-object.js';
 import parseJson from './parse-json.js';
 
 interface Options {
-  readonly hostname: string;
+  readonly host: string;
   readonly sessionId: string;
   readonly stateSearchParam: string;
 }
 
-const mapHostnameToHost = (hostname: string): string => {
-  if (hostname === 'localhost') {
-    return 'localhost:3000';
-  }
-  return hostname;
-};
-
 export default function createRequestState({
-  hostname,
+  host,
   sessionId,
   stateSearchParam,
 }: Options): State {
@@ -66,7 +59,6 @@ export default function createRequestState({
     },
   );
 
-  const host: string = mapHostnameToHost(hostname);
   return {
     returnHref: `https://${host}${returnPath}`,
     sessionId: stateSessionId,
