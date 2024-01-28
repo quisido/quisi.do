@@ -1,3 +1,5 @@
 {
-  "recommendations": []
+  "recommendations": [
+    "alexcvzz.vscode-sqlite"
+  ]
 }

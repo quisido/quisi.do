@@ -2,6 +2,7 @@ import { type ComponentType, type ReactNode } from 'react';
 
 interface BaseNotification {
   readonly Header?: ComponentType | undefined;
+  readonly icon?: string | undefined;
   readonly message: ReactNode;
   readonly onDismiss?: VoidFunction | undefined;
   readonly type: 'error' | 'info' | 'success' | 'warning';

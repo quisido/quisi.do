@@ -5,15 +5,16 @@
   "version": "1.0.0",
   "scripts": {
     "attw": "attw",
-    "deploy": "wrangler deploy src/index.ts --env production --outdir dist",
-    "deploy:dry-run": "wrangler deploy src/index.ts --dry-run --outdir dist",
-    "deploy:staging": "wrangler deploy src/index.ts --env staging --outdir dist",
-    "dev": "wrangler dev --local-protocol https",
+    "dev": "wrangler dev --persist-to ../next/.wrangler/state",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "login": "wrangler login",
     "prepack": "exit 0",
     "prepublish": "exit 0",
+    "production:deploy": "wrangler deploy src/index.ts --env production --outdir dist",
+    "production:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env production --outdir dist",
+    "staging:deploy": "wrangler deploy src/index.ts --env staging --outdir dist",
+    "staging:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env staging --outdir dist",
     "whoami": "wrangler whoami"
   },
   "dependencies": {

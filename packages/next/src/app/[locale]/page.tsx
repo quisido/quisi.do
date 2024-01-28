@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import Home from '../../features/home/index.js';
+import Home from '../../features/home.js';
 
 export { default as generateStaticParams } from '../../features/generate-locale-static-params.js';
 

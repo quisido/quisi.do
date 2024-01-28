@@ -27,7 +27,7 @@ export default function Theme({ children }: PropsWithChildren): ReactElement {
         primary: [0xf0, 0xa0, 0xc8], // [240, 160, 200]
         primaryDark: '#604050',
         primaryFontWeight: 700,
-        secondary: [0x86, 0xae, 0x52],
+        secondary: [0xc0, 0xe0, 0xa0],
         // secondaryDark: '#0a3442',
         displayFontFamily:
           '"Noto Sans Display", "Noto Sans", Helvetica, sans-serif',

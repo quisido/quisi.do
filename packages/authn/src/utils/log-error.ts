@@ -10,11 +10,11 @@ export default function logError(err: unknown): void {
   // Unknown cause
   const { cause, message } = err;
   if (!isCause(cause)) {
-    console.error('Unknown cause:', message, cause);
+    console.error('Unknown cause:', message, JSON.stringify(cause));
     return;
   }
 
   // Known cause
   const { data, status } = cause;
-  console.error(message, data, status);
+  console.error(message, JSON.stringify(data), status);
 }

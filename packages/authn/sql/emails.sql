@@ -1,6 +1,6 @@
-CREATE TABLE [emails] (
+CREATE TABLE IF NOT EXISTS [emails] (
   "address" VARCHAR(255) NOT NULL PRIMARY KEY,
   "userId" UNSIGNED INTEGER NOT NULL
 );
 
-CREATE INDEX idx_emails_userId ON emails(userId);
+CREATE INDEX IF NOT EXISTS idx_emails_userId ON emails(userId);

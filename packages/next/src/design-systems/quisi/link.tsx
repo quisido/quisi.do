@@ -1,10 +1,10 @@
+import { useRouter } from 'next/navigation.js';
 import { type MouseEvent, type ReactElement, useEffect } from 'react';
-import { type Props } from '../../../components/link/index.js';
-import useEmit from '../../../hooks/use-emit/index.js';
-import useTheme from '../../../hooks/use-theme.js';
-import { useRouter } from 'next/navigation';
-import isHrefBlank from '../../../utils/is-href-blank.js';
 import innerText from 'react-innertext';
+import { type Props } from '../../components/link/index.js';
+import useEmit from '../../hooks/use-emit/index.js';
+import useTheme from '../../hooks/use-theme.js';
+import isHrefBlank from '../../utils/is-href-blank.js';
 
 export default function Link({
   children,
@@ -59,7 +59,6 @@ export default function Link({
       }}
       style={{
         color: primaryHex,
-        fontWeight: primaryFontWeight,
       }}
     >
       {children}

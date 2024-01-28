@@ -24,7 +24,6 @@ import createAuthenticationId from '../utils/create-authentication-id.js';
 import isKVNamespace from '../utils/is-kv-namespace.js';
 import createUser from '../utils/create-user.js';
 import isD1Database from '../utils/is-d1-database.js';
-import mapSearchParamsToState from '../utils/map-search-params-to-state.js';
 import createRequestState from '../utils/create-request-state.js';
 import mapHeadersToCookies from '../utils/map-headers-to-cookies.js';
 import mapCookiesToSessionId from '../utils/map-cookies-to-session-id.js';
@@ -142,11 +141,24 @@ export default (async function fetch(
       request.headers,
     );
 
+    const stateSearchParam: string | null = searchParams.get('state');
+
+    // "Deny"
+    if (stateSearchParam === null) {
+      return new Response(null, {
+        status: StatusCode.Found,
+        headers: new Headers({
+          'Content-Location': `https://${HOST}/`,
+          Location: `https://${HOST}/`,
+        }),
+      });
+    }
+
     // Patreon
     const { returnHref }: State = createRequestState({
       host: HOST,
       sessionId: mapCookiesToSessionId(cookies),
-      stateSearchParam: mapSearchParamsToState(searchParams),
+      stateSearchParam,
     });
 
     const getOAuthUser = async (): Promise<
@@ -204,10 +216,12 @@ export default (async function fetch(
           Date.now() / MILLISECONDS_PER_SECOND,
         );
 
-        return AUTHN_USER_IDS.put(authnId, userId.toString(), {
+        console.log('Recording authentication ID...');
+        await AUTHN_USER_IDS.put(authnId, userId.toString(), {
           expiration: nowSeconds + SECONDS_PER_DAY,
           expirationTtl: SECONDS_PER_DAY,
         });
+        console.log('Authentication ID recorded.');
       });
 
     /**

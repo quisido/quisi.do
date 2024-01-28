@@ -14,8 +14,8 @@ type DesignSystemComponent<
   Row extends object,
 > = ComponentType<DesignSystemProps<Card, Row>>;
 
-const Mui = lazy(async () => import('../../../design-systems/mui'));
-const Quisi = lazy(async () => import('../../../design-systems/quisi'));
+const Mui = lazy(async () => import('../../../design-systems/mui/index.js'));
+const Quisi = lazy(async () => import('../../../design-systems/quisi.js'));
 
 export default function mapDesignSystemToComponent<
   Card extends object,

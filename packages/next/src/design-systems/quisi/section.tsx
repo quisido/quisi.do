@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
-import { type Props } from '../../../components/section.js';
-import useTheme from '../../../hooks/use-theme.js';
+import { type Props } from '../../components/section.js';
+import useTheme from '../../hooks/use-theme.js';
 
 const BORDER_OPACITY = 0.05;
 const ROTATION = '0.5deg';

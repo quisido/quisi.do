@@ -1,12 +1,13 @@
-import { type Attributes, type ComponentType, type ReactElement } from 'react';
+import { type ComponentType, type ReactElement } from 'react';
+import type { WithKey } from '../types/with-key.js';
 
 export default function mapComponentToPropMapper<P>(
   Component: ComponentType<P>,
-): (props: P & Readonly<Required<Attributes>>) => ReactElement {
+): (props: WithKey<P>) => ReactElement {
   return function MappedPropsComponent({
     key,
     ...props
-  }: P & Readonly<Required<Attributes>>): ReactElement {
+  }: WithKey<P>): ReactElement {
     return <Component {...(props as P)} key={key} />;
   };
 }

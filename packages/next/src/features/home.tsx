@@ -1,9 +1,9 @@
 'use client';
 
 import { type ReactElement } from 'react';
-import Button from '../../components/button.js';
-import Section from '../../components/section.js';
-import useHome from './home.hook.js';
+import Button from '../components/button.js';
+import Section from '../components/section.js';
+import useHome from './home/use-home.js';
 
 export default function Home(): ReactElement {
   const { authenticateHref } = useHome();

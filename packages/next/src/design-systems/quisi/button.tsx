@@ -7,11 +7,11 @@ import {
   type ReactElement,
   useRef,
 } from 'react';
-import { type Props } from '../../../components/button.js';
-import useElementId from '../../../hooks/use-element-id.js';
-import useEmit from '../../../hooks/use-emit/index.js';
-import useTheme from '../../../hooks/use-theme.js';
-import optional from '../../../utils/optional.js';
+import { type Props } from '../../components/button.js';
+import useElementId from '../../hooks/use-element-id.js';
+import useEmit from '../../hooks/use-emit/index.js';
+import useTheme from '../../hooks/use-theme.js';
+import optional from '../../utils/optional.js';
 
 interface ButtonElementProps {
   readonly id: string;

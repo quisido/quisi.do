@@ -1,9 +1,10 @@
 import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
-import type DesignSystemProps from '../../types/design-system-props.js';
-import Button from './components/button.js';
-import Link from './components/link.js';
-import Section from './components/section.js';
-import Theme from './components/theme.js';
+import type DesignSystemProps from '../types/design-system-props.js';
+import Banner from './quisi/banner.js';
+import Button from './quisi/button.js';
+import Link from './quisi/link.js';
+import Section from './quisi/section.js';
+import Theme from './quisi/theme.js';
 
 function Demo({
   children,
@@ -32,13 +33,7 @@ export default function Quisido<Card extends object, Row extends object>({
 }: Readonly<DesignSystemProps<Card, Row>>): ReactNode {
   switch (type) {
     case 'banner':
-      return (
-        <Demo type="Banner">
-          {JSON.stringify({ ...props, children: undefined })}
-          <br />
-          Children: {props.children}
-        </Demo>
-      );
+      return <Banner {...props} />;
 
     case 'button':
       return <Button {...props} />;

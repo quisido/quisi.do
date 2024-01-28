@@ -1,8 +1,8 @@
 import type { PropsWithChildren, ReactElement } from 'react';
-import useTheme from '../../../hooks/use-theme.js';
+import useTheme from '../../hooks/use-theme.js';
 
 export default function Theme({ children }: PropsWithChildren): ReactElement {
-  const { backgroundColor, foregroundColor } = useTheme();
+  const { backgroundColor, foregroundHex } = useTheme();
 
   return (
     <>
@@ -12,7 +12,7 @@ export default function Theme({ children }: PropsWithChildren): ReactElement {
           __html: `
 body {
   background-color: ${backgroundColor};
-  color: ${foregroundColor};
+  color: ${foregroundHex};
 }
 `,
         }}

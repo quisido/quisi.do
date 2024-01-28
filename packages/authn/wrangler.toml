@@ -1,16 +1,16 @@
 compatibility_date = "2023-10-30"
 kv_namespaces = [{ binding = "AUTHN_USER_IDS", id = "AUTHN_USER_IDS" }]
 main = "src/index.ts"
-name = "quisido-authn"
+name = "quisido-authn-dev"
 tsconfig = "./tsconfig.json"
 
 d1_databases = [
-  { binding = "AUTHN", database_id = "AUTHN", database_name = "authn" },
+  { binding = "AUTHN", database_id = "AUTHN", database_name = "authn-dev" },
 ]
 
 [dev]
-ip = "127.0.0.1"
-port = 5882      # parseInt('authn', 36) % 9999
+local_protocol = "https"
+port = 5882              # parseInt('authn', 36) % 9999
 
 [env.production]
 name = "quisido-authn"

@@ -1,4 +1,5 @@
 /.next/
+/.wrangler/
 /analyze/
 /coverage/
 /node_modules/

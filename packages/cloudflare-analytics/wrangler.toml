@@ -16,6 +16,9 @@ r2_buckets = [
 
 routes = [{ custom_domain = true, pattern = "analytics.cloudflare.cscdn.net" }]
 
+[dev]
+local_protocol = "https"
+
 # Workers that use cron triggers do not currently support smart placement.
 # [placement]
 # mode = "smart"

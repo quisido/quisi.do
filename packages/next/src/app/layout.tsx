@@ -11,12 +11,14 @@ import Datadog from '../components/datadog/index.js';
 import FullStory from '../components/fullstory/index.js';
 import ReportUri from '../components/report-uri/index.js';
 import DesignSystemTheme from '../components/theme/index.js';
+import Authentication from '../features/authentication.js';
 import Contexts from '../features/contexts/index.js';
 import Footer from '../features/footer.js';
 import GoogleFonts from '../features/google-fonts.js';
 import Header from '../features/header.js';
 import GoogleAnalytics from '../features/google-analytics/index.js';
 // import Mixpanel from '../features/mixpanel.js';
+import Notifications from '../features/notifications.js';
 import NotificationsProvider from '../features/notifications-provider.js';
 import Preconnect from '../features/preconnect.js';
 import Sentry from '../features/sentry/index.js';
@@ -100,6 +102,7 @@ body {
  */
 const BodyChildren: ComponentType<PropsWithChildren> = withWrappers(
   ThemeFeature,
+  Authentication,
   NotificationsProvider,
   CloudWatchRUM,
   Contexts,
@@ -138,6 +141,7 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
           <FullStory />
           <GoogleAnalytics />
           {/* <Mixpanel /> */}
+          <Notifications />
           <Header />
           <div
             style={{
