@@ -1,6 +1,6 @@
 /.next/
-/.wrangler/
 /analyze/
+/certificates/
 /coverage/
 /node_modules/
 /out/
@@ -9,5 +9,3 @@
 /lighthouse-0.devtoolslog.json
 /lighthouse-0.trace.json
 /localhost_*-*-*_*-*-*.report.*
-
-certificates

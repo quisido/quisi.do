@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "scripts": {
     "attw": "attw",
-    "dev": "wrangler dev --persist-to ../next/.wrangler/state",
+    "dev": "wrangler dev --persist-to ../../.wrangler/state",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "login": "wrangler login",

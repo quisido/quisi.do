@@ -1,2 +1,4 @@
 /dist/
 /jest/
+/*.cpuprofile
+/*.tsbuildinfo

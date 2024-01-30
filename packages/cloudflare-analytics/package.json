@@ -7,7 +7,7 @@
     "attw": "attw",
     "deploy": "wrangler deploy src/index.ts --name cloudflare-analytics --outdir dist",
     "deploy:dry-run": "wrangler deploy src/index.ts --dry-run --name cloudflare-analytics --outdir dist",
-    "dev": "wrangler dev --persist-to ../next/.wrangler/state --test-scheduled",
+    "dev": "wrangler dev --persist-to ../../.wrangler/state --test-scheduled",
     "init": "echo \"API token:\" && wrangler secret put API_TOKEN && echo \"Account tag:\" && wrangler secret put ACCOUNT_TAG && echo \"Zone tag:\" && wrangler secret put ZONE_TAG",
     "jest": "jest",
     "jest:watch": "jest --watch",
