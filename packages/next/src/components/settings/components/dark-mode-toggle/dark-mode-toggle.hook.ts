@@ -1,4 +1,4 @@
-import useDarkMode from '../../../../hooks/use-dark-mode.js';
+import { useDarkMode } from '../../../../contexts/dark-mode.js';
 
 interface State {
   readonly checked: boolean;

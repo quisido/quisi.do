@@ -1,7 +1,9 @@
 'use client';
 
-import { type Dispatch, type SetStateAction, createContext } from 'react';
+import { type Dispatch, type SetStateAction } from 'react';
+import createContextUtils from '../utils/create-context-utils';
 
-export default createContext<
-  [boolean, Dispatch<SetStateAction<boolean>>] | null
->(null);
+export const {
+  ContextProvider: DarkModeProvider,
+  useContextValue: useDarkMode,
+} = createContextUtils<[boolean, Dispatch<SetStateAction<boolean>>]>();

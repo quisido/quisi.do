@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
 interface GoogleFont {
   readonly weights: readonly number[];
@@ -11,8 +11,8 @@ enum Weight {
 }
 
 const GOOGLE_FONTS: Record<string, GoogleFont> = {
-  Caveat: {
-    weights: [Weight.Normal],
+  Merienda: {
+    weights: [Weight.Normal, Weight.Bold],
   },
   'Noto Color Emoji': {
     weights: [Weight.Normal],

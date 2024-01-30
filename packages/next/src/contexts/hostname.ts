@@ -1,5 +1,8 @@
 'use client';
 
-import { createContext } from 'react';
+import createContextUtils from '../utils/create-context-utils';
 
-export default createContext<string | null>(null);
+export const {
+  ContextProvider: HostnameProvider,
+  useContextValue: useHostname,
+} = createContextUtils<string>();

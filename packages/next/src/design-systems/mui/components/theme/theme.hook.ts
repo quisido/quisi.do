@@ -1,5 +1,5 @@
 import { type Theme } from '@mui/material/styles';
-import useDarkMode from '../../../../hooks/use-dark-mode.js';
+import { useDarkMode } from '../../../../contexts/dark-mode.js';
 import MUI_DARK_THEME from './constants/dark-theme.js';
 import MUI_LIGHT_THEME from './constants/light-theme.js';
 

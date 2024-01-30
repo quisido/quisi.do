@@ -1,3 +1,8 @@
-import { createContext } from 'react';
+'use client';
 
-export default createContext<null | string | undefined>(null);
+import createContextUtils from '../utils/create-context-utils';
+
+export const {
+  ContextProvider: SessionIdProvider,
+  useContextValue: useSessionId,
+} = createContextUtils<string | undefined>();

@@ -1,9 +1,9 @@
 'use client';
 
 import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
+import { AuthenticationProvider } from '../contexts/authentication.js';
 import useAsyncState from '../modules/use-async-state/index.js';
 import type AuthenticationType from '../types/authentication.js';
-import { AuthenticationProvider } from '../contexts/authentication.js';
 import isObject from '../utils/is-object.js';
 
 const whoAmiI = async (): Promise<AuthenticationType> => {
@@ -29,6 +29,7 @@ const whoAmiI = async (): Promise<AuthenticationType> => {
 export default function AuthenticationFeature({
   children,
 }: PropsWithChildren): ReactElement {
+  // States
   const state = useAsyncState<AuthenticationType>();
 
   const { request } = state;

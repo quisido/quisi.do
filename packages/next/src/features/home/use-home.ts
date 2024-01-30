@@ -4,14 +4,15 @@ import {
   PATREON_OAUTH_CLIENT_ID,
   PATREON_OAUTH_REDIRECT_URI,
 } from '../../constants/patreon-oauth.js';
+import { useSessionId } from '../../contexts/session-id.js';
 import useSearch from '../../hooks/use-search.js';
-import useSessionId from '../../hooks/use-session-id.js';
 
 interface State {
   readonly authenticateHref: string;
 }
 
 export default function useHome(): State {
+  // Contexts
   const pathname: string = usePathname();
   const search: string = useSearch();
   const sessionId: string | undefined = useSessionId();

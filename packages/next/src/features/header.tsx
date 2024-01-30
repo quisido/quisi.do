@@ -1,9 +1,9 @@
 'use client';
 
-import type { ReactElement } from 'react';
+import { type ReactElement, memo } from 'react';
 import useTheme from '../hooks/use-theme.js';
 
-export default function Header(): ReactElement {
+function Header(): ReactElement {
   const { displayFontFamily, displayFontWeight } = useTheme();
 
   return (
@@ -12,6 +12,7 @@ export default function Header(): ReactElement {
         marginBottom: '1em',
         marginLeft: 'auto',
         marginRight: 'auto',
+        marginTop: 0,
         maxWidth: '60em',
         minWidth: 320,
       }}
@@ -40,8 +41,10 @@ export default function Header(): ReactElement {
           paddingLeft: '1.5em',
         }}
       >
-        charitable <abbr title="Software as a service">SaaS</abbr>
+        software as a service
       </span>
     </header>
   );
 }
+
+export default memo(Header);

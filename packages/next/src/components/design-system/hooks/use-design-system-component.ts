@@ -1,5 +1,5 @@
 import { type ComponentType } from 'react';
-import useDesignSystem from '../../../hooks/use-design-system.js';
+import { useDesignSystem } from '../../../contexts/design-system.js';
 import type DesignSystemProps from '../../../types/design-system-props.js';
 import mapDesignSystemToComponent from '../utils/map-design-system-to-component.js';
 

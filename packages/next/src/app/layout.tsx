@@ -12,23 +12,23 @@ import FullStory from '../components/fullstory/index.js';
 import ReportUri from '../components/report-uri/index.js';
 import DesignSystemTheme from '../components/theme/index.js';
 import Authentication from '../features/authentication.js';
-import Contexts from '../features/contexts/index.js';
+import DarkModeProvider from '../features/dark-mode-provider.js';
+import DesignSystemProvider from '../features/design-system-provider.js';
 import Footer from '../features/footer.js';
+import GoogleAnalytics from '../features/google-analytics/index.js';
 import GoogleFonts from '../features/google-fonts.js';
 import Header from '../features/header.js';
-import GoogleAnalytics from '../features/google-analytics/index.js';
-// import Mixpanel from '../features/mixpanel.js';
-import Notifications from '../features/notifications.js';
+import HostnameProvider from '../features/hostname-provider.js';
 import NotificationsProvider from '../features/notifications-provider.js';
+import Notifications from '../features/notifications.js';
 import Preconnect from '../features/preconnect.js';
 import Sentry from '../features/sentry/index.js';
+import SessionIdProvider from '../features/session-id-provider.js';
 import ThemeFeature from '../features/theme.js';
-// import Turnstile from '../features/turnstile.js';
 import withWrappers from '../hocs/with-wrappers/index.js';
 import Clarity from '../modules/react-clarity/index.js';
-
-export { default as metadata } from '../constants/root-metadata';
-export { default as viewport } from '../constants/root-viewport';
+export { default as metadata } from '../constants/root-metadata.js';
+export { default as viewport } from '../constants/root-viewport.js';
 
 const BODY_FONT_FAMILIES: readonly string[] = [
   '-apple-system',
@@ -50,32 +50,32 @@ const BODY_FONT_FAMILIES: readonly string[] = [
 
 const LAYOUT_CSS = `
 body {
+  -moz-osx-font-smoothing: grayscale;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -ms-text-size-adjust: none;
+  -webkit-font-feature-settings: "pnum";
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  -webkit-text-size-adjust: none;
   box-sizing: border-box;
   color: #000000;
   font-family: ${BODY_FONT_FAMILIES.join(', ')};
   font-feature-settings: "pnum";
-  -webkit-font-feature-settings: "pnum";
   font-size: 16px;
   font-smooth: always;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
   font-variant-numeric: proportional-nums;
   letter-spacing: 0;
   line-height: 1.5;
-  margin-bottom: 0.5in;
+  margin-bottom: 0;
   margin-left: 0;
   margin-right: 0;
-  margin-top: 0.5in;
+  margin-top: 0;
   min-height: 100%;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
   overflow-y: scroll;
   padding-bottom: 0;
   padding-top: 0;
   text-rendering: optimizeLegibility;
   text-size-adjust: none;
-  -ms-text-size-adjust: none;
-  -webkit-text-size-adjust: none;
 
   @media (max-width: 6in) {
     padding-left: 0.5in;
@@ -100,13 +100,16 @@ body {
  * We do not put wrappers around `<body>` itself, because we do not want to
  *   inadvertently render HTML elements around `<body>`.
  */
-const BodyChildren: ComponentType<PropsWithChildren> = withWrappers(
-  ThemeFeature,
+const Contexts: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,
-  NotificationsProvider,
   CloudWatchRUM,
-  Contexts,
+  DarkModeProvider,
+  DesignSystemProvider,
+  HostnameProvider,
+  NotificationsProvider,
   Sentry,
+  SessionIdProvider,
+  ThemeFeature,
   DesignSystemTheme,
   // Turnstile,
 )(Fragment);
@@ -136,24 +139,15 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
         <GoogleFonts />
       </head>
       <body>
-        <BodyChildren>
-          <Datadog />
-          <FullStory />
-          <GoogleAnalytics />
-          {/* <Mixpanel /> */}
+        <Contexts>
           <Notifications />
           <Header />
-          <div
-            style={{
-              margin: '0 auto',
-              maxWidth: '60em',
-              minWidth: 320,
-            }}
-          >
-            {children}
-          </div>
+          <main>{children}</main>
           <Footer />
-        </BodyChildren>
+        </Contexts>
+        <Datadog />
+        <FullStory />
+        <GoogleAnalytics />
         {/*
         <script
           defer

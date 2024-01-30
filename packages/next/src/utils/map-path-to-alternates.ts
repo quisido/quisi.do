@@ -1,4 +1,4 @@
-interface Alternates {
+export interface Alternates {
   readonly canonical: string;
   readonly languages: Record<
     'ar-EG' | 'en-US' | 'es-ES' | 'fil-PH' | 'x-default',

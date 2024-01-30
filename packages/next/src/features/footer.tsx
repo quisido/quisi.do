@@ -1,7 +1,7 @@
-import { type ReactElement } from 'react';
+import { type ReactElement, memo } from 'react';
 import Link from '../components/link/index.js';
 
-export default function Footer(): ReactElement | null {
+function Footer(): ReactElement | null {
   return (
     <footer style={{ textAlign: 'center' }}>
       <Link
@@ -14,3 +14,5 @@ export default function Footer(): ReactElement | null {
     </footer>
   );
 }
+
+export default memo(Footer);

@@ -1,6 +1,6 @@
 import { type Integration } from '@sentry/types';
 import GITHUB_SHA from '../../constants/github-sha.js';
-import useIntegrations from './hooks/use-integrations.js';
+import useIntegrations from './use-integrations.js';
 
 interface State {
   readonly environment: string;

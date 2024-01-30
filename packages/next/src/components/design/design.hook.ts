@@ -10,7 +10,7 @@ import {
   useState,
 } from 'react';
 import type DesignSystem from '../../constants/design-system.js';
-import useDesignSystem from '../../hooks/use-design-system.js';
+import { useDesignSystem } from '../../contexts/design-system.js';
 import filterByPropsWithChildren from './utils/filter-by-props-with-children.js';
 
 interface Props<P extends object> {

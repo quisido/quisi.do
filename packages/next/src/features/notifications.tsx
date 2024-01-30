@@ -1,13 +1,13 @@
 'use client';
 
-import type { ReactElement } from 'react';
+import { type ReactElement, memo } from 'react';
 import { useNotifications } from '../contexts/notifications.js';
 import mapComponentToPropMapper from '../utils/map-component-to-prop-mapper.js';
 import Notification from './notifications/notification.js';
 
 const mapNotificationToElement = mapComponentToPropMapper(Notification);
 
-export default function Notifications(): ReactElement {
+function Notifications(): ReactElement {
   // Context
   const [notifications] = useNotifications();
 
@@ -24,3 +24,5 @@ export default function Notifications(): ReactElement {
     </div>
   );
 }
+
+export default memo(Notifications);

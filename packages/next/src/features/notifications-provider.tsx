@@ -4,19 +4,20 @@ import {
   type MutableRefObject,
   type PropsWithChildren,
   type ReactElement,
+  memo,
   useMemo,
   useRef,
   useState,
 } from 'react';
 import LocalStorageItem from '../constants/local-storage-item.js';
 import { NotificationsProvider } from '../contexts/notifications.js';
+import useEffectEvent from '../hooks/use-effect-event.js';
 import useLocalStorage from '../hooks/use-local-storage.js';
 import type Notification from '../types/notification.js';
 import type { WithKey } from '../types/with-key.js';
-import useEffectEvent from '../hooks/use-effect-event.js';
 import append from '../utils/append.js';
-import isNot from '../utils/is-not.js';
 import filter from '../utils/filter.js';
+import isNot from '../utils/is-not.js';
 
 type NotificationState = WithKey<Notification> &
   RequiredDefined<Pick<Notification, 'onDismiss'>>;
@@ -32,8 +33,9 @@ function QuisidoDotComNotification(): ReactElement {
     <span
       style={{
         display: 'inline-block',
-        fontFamily: 'Caveat, serif',
-        transform: 'scale(1.25, 1)',
+        fontFamily: 'Merienda, serif',
+        // letterSpacing: -1,
+        // transform: 'scale(1.25, 1)',
         transformOrigin: '0 50%',
       }}
     >
@@ -56,7 +58,7 @@ function QuisidoDotComNotification(): ReactElement {
   );
 }
 
-export default function NotificationsProviderFeature({
+function NotificationsProviderFeature({
   children,
 }: PropsWithChildren): ReactElement {
   // Contexts
@@ -128,3 +130,5 @@ export default function NotificationsProviderFeature({
     </NotificationsProvider>
   );
 }
+
+export default memo(NotificationsProviderFeature);

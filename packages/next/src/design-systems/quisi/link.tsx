@@ -18,7 +18,7 @@ export default function Link({
   // Contexts
   const emit = useEmit();
   const router = useRouter();
-  const { primaryFontWeight, primaryHex } = useTheme();
+  const { primaryHex } = useTheme();
 
   // Effects
   useEffect((): void => {

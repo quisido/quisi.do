@@ -29,10 +29,7 @@ export default function LocaleLayout({
         locale={locale}
         translations={TRANSLATIONS}
       >
-        <div style={{ display: 'flex' }}>
-          {/* <Notifications>{notifications}</Notifications> */}
-          <main style={{ flexGrow: 1 }}>{children}</main>
-        </div>
+        {children}
       </I18nProvider>
     </LocaleProvider>
   );

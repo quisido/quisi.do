@@ -25,6 +25,7 @@ export default function QuisiSection({
         borderStyle: 'double',
         borderWidth: 4,
         borderRadius: '1em',
+        boxSizing: 'border-box',
         color: foregroundHex,
         overflow: 'hidden',
         marginBottom: '1em',
