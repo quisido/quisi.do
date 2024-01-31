@@ -6,9 +6,16 @@ import useAsyncState from '../modules/use-async-state/index.js';
 import type AuthenticationType from '../types/authentication.js';
 import isObject from '../utils/is-object.js';
 
+const getWhoAmIUrl = (): string => {
+  if (process.env.NODE_ENV === 'development') {
+    return 'https://localhost:1098/whoami';
+  }
+  return 'https://api.quisi.do/whoami';
+};
+
 const whoAmiI = async (): Promise<AuthenticationType> => {
-  // fetch('https://localhost:1098/whoami')
-  const response: Response = await fetch('https://api.quisi.do/whoami');
+  const url: string = getWhoAmIUrl();
+  const response: Response = await fetch(url);
   const json: unknown = await response.json();
   if (!isObject(json)) {
     throw new Error('You do not have data.');

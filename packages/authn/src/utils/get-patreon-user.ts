@@ -1,11 +1,11 @@
 import type { JsonApiDataStore } from 'jsonapi-datastore';
+import PatreonGender from '../constants/patreon-gender.js';
 import StatusCode from '../constants/status-code.js';
+import type OAuthUser from '../types/oauth-user.js';
 import assert from '../utils/assert.js';
 import createApiClient from '../utils/create-api-client.js';
 import serialize from '../utils/serialize.js';
 import isObject from './is-object.js';
-import PatreonGender from '../constants/patreon-gender.js';
-import type OAuthUser from '../types/oauth-user.js';
 import mapPatreonGenderToGender from './map-patreon-gender-to-gender.js';
 
 const PATREON_GENDERS: Set<unknown> = new Set(Object.values(PatreonGender));
@@ -28,7 +28,7 @@ export default async function getPatreonUser(
     code,
   );
 
-  const store: JsonApiDataStore = await makeRequest('/current_user');
+  const store: JsonApiDataStore = await makeRequest('/identity');
   const [firstUser] = store.findAll('user').map(serialize);
 
   assert(

@@ -2,7 +2,7 @@
 import type Theme from '../types/theme.js';
 
 export default {
-  backgroundColor: '#fff8e0',
+  backgroundColor: '#fffcf0',
   displayFontWeight: 700,
   foreground: [0x00, 0x00, 0x00],
   primary: [0xf0, 0xa0, 0xc8],

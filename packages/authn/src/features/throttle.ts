@@ -1,6 +1,7 @@
 import createThrottler from '../utils/create-throttler.js';
 import mapRequestToIp from '../utils/map-request-to-ip.js';
 
+// TODO: Make this increase with each call.
 const IP_THROTTLE_LIMIT = 10000; // once per 10s
 const throttleIp = createThrottler();
 

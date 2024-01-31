@@ -1,12 +1,13 @@
 import { JsonApiDataStore } from 'jsonapi-datastore';
 import { type ClientPathname } from 'patreon';
-import USER_AGENT from '../constants/user-agent.js';
-import createApiAccessToken from './create-api-access-token.js';
-import assert from './assert.js';
-import isObject from './is-object.js';
 import StatusCode from '../constants/status-code.js';
+import USER_AGENT from '../constants/user-agent.js';
+import assert from './assert.js';
+import createApiAccessToken from './create-api-access-token.js';
+import isObject from './is-object.js';
 
-const BASE_PATH = '/api/oauth2/api';
+const BASE_PATH = '/api/oauth2/v2';
+const FORBIDDEN = 403;
 const HTTP_REDIRECTION = 300;
 const HTTP_SUCCESSFUL = 200;
 
@@ -42,14 +43,22 @@ export default async function createApiClient(
       requestInit,
     );
 
-    if (
-      response.status < HTTP_SUCCESSFUL ||
-      response.status >= HTTP_REDIRECTION
-    ) {
-      throw response;
-    }
-
     const json: unknown = await response.json();
+
+    assert(
+      response.status !== FORBIDDEN,
+      'Forbidden by Patreon',
+      StatusCode.Forbidden,
+      json,
+    );
+
+    assert(
+      response.status >= HTTP_SUCCESSFUL && response.status < HTTP_REDIRECTION,
+      `Patreon status ${response.status}`,
+      StatusCode.Unauthorized,
+      json,
+    );
+
     assert(
       isObject(json),
       `Expected \`${host}${requestSpec}\` to be an object, but received ${typeof json}.`,

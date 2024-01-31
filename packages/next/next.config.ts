@@ -2,13 +2,13 @@
 import { type NextConfig } from 'next';
 import { cpus } from 'node:os';
 import { join } from 'node:path';
-import getVersion from './src/utils/get-version.js';
-import mapNodeEnvToOutput from './src/utils/map-node-env-to-output.js';
-import withNextJsBundleAnalyzer from './src/utils/with-nextjs-bundle-analyzer.js';
 import type { Configuration as WebpackConfiguration } from 'webpack';
-import optional from './src/utils/optional.js';
+import getVersion from './src/utils/get-version.js';
 import mapNodeEnvToOnDemandEntries from './src/utils/map-node-env-to-on-demand-entries.js';
+import mapNodeEnvToOutput from './src/utils/map-node-env-to-output.js';
+import optional from './src/utils/optional.js';
 import validateString from './src/utils/validate-string.js';
+import withNextJsBundleAnalyzer from './src/utils/with-nextjs-bundle-analyzer.js';
 
 const CPUS_COUNT: number = cpus().length;
 const handleDemandEntries = mapNodeEnvToOnDemandEntries(process.env.NODE_ENV);

@@ -7,10 +7,7 @@ declare module 'patreon' {
     readonly store: JsonApiDataStore;
   }
 
-  type ClientPathname =
-    | `/campaigns/${string}/pledges`
-    | '/current_user'
-    | '/current_user/campaigns';
+  type ClientPathname = '/identity';
 
   interface JsonApi {
     readonly ext?: readonly string[];

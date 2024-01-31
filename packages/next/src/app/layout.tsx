@@ -139,6 +139,7 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
         <GoogleFonts />
       </head>
       <body>
+        <noscript>JavaScript is required.</noscript>
         <Contexts>
           <Notifications />
           <Header />
