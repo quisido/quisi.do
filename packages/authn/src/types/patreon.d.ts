@@ -7,8 +7,6 @@ declare module 'patreon' {
     readonly store: JsonApiDataStore;
   }
 
-  type ClientPathname = '/identity';
-
   interface JsonApi {
     readonly ext?: readonly string[];
     readonly meta?: Record<number | string | symbol, unknown>;
@@ -91,12 +89,12 @@ declare module 'patreon' {
   export const oauth: (clientId: string, clientSecret: string) => OAuthClient;
 
   export const jsonApiURL: (
-    pathname: ClientPathname,
+    pathname: string,
     options: JsonApiUrlOptions,
   ) => void;
 
   export const patreon: (
     accessToken: string,
-  ) => ((pathname: ClientPathname) => Promise<ApiResult>) &
-    ((pathname: ClientPathname, callback: (result: ApiResult) => void) => void);
+  ) => ((pathname: string) => Promise<ApiResult>) &
+    ((pathname: string, callback: (result: ApiResult) => void) => void);
 }

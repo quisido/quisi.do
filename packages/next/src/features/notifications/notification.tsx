@@ -11,7 +11,7 @@ export default function Notification({
   return (
     <Banner onDismiss={onDismiss} type={type}>
       {Header && <Header />}
-      {message}
+      <span style={{ fontSize: '0.8em' }}>{message}</span>
     </Banner>
   );
 }

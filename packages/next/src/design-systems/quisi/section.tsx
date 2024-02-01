@@ -3,7 +3,6 @@ import { type Props } from '../../components/section.js';
 import useTheme from '../../hooks/use-theme.js';
 import createRandomNumberGenerator from '../../utils/create-random-number-generator.js';
 
-const BORDER_OPACITY = 0.05;
 const INITIAL_ROTATION = 0;
 const MAXIMUM_ROTATION = -2;
 const MINIMUM_ROTATION = -2;
@@ -20,7 +19,7 @@ export default function QuisiSection({
   header,
 }: Props): ReactElement {
   // Contexts
-  const { backgroundColor, foregroundAlpha, foregroundHex } = useTheme();
+  const { backgroundColor, foregroundHex } = useTheme();
 
   // States
   const [rotation, setRotation] = useState(INITIAL_ROTATION);
@@ -34,14 +33,10 @@ export default function QuisiSection({
     <section
       style={{
         backgroundColor,
-        backgroundImage: `linear-gradient(${[
-          'rgba(255, 255, 255, 0.75)',
-          'rgba(255, 255, 255, 0.75)',
-        ].join(', ')})`,
-        borderColor: foregroundAlpha(BORDER_OPACITY),
-        borderStyle: 'double',
-        borderWidth: 4,
-        borderRadius: '1em',
+        // backgroundImage: `linear-gradient(${[
+        //   'rgba(255, 255, 255, 0.5)',
+        //   'rgba(255, 255, 255, 0.5)',
+        // ].join(', ')})`,
         boxSizing: 'border-box',
         color: foregroundHex,
         overflow: 'hidden',
@@ -61,7 +56,14 @@ export default function QuisiSection({
         }}
       >
         {typeof header !== 'undefined' && <header>{header}</header>}
-        {children}
+        <div
+          style={{
+            paddingBottom: '1em',
+            paddingTop: '1em',
+          }}
+        >
+          {children}
+        </div>
         {typeof actions !== 'undefined' && (
           <footer
             style={{

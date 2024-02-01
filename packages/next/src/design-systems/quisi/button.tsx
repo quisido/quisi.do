@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { useButton } from '@react-aria/button';
 import { useLink } from '@react-aria/link';
 import {

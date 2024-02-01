@@ -16,25 +16,23 @@ export default function Home(): ReactElement {
         </Button>
       }
     >
-      <div
+      <ul
         style={{
+          alignItems: 'stretch',
           display: 'flex',
           flexDirection: 'row',
-          alignItems: 'stretch',
-          justifyContent: 'flex-start',
+          justifyContent: 'space-around',
+          listStylePosition: 'inside',
+          listStyleType: 'none',
+          margin: 0,
+          padding: 0,
+          width: '100%',
         }}
       >
-        <ul style={{ flexGrow: 1 }}>
-          <li>Open source</li>
-          <li>Transparent</li>
-          <li>Not for profit</li>
-        </ul>
-        <ul style={{ flexGrow: 1 }}>
-          <li>Educate</li>
-          <li>Empower</li>
-          <li>Heal</li>
-        </ul>
-      </div>
+        <li>Open source</li>
+        <li>Transparent</li>
+        <li>Not for profit</li>
+      </ul>
     </Section>
   );
 }

@@ -18,6 +18,7 @@ import type { WithKey } from '../types/with-key.js';
 import append from '../utils/append.js';
 import filter from '../utils/filter.js';
 import isNot from '../utils/is-not.js';
+import QuisidoDotComNotification from './quisido-dot-com-notification.js';
 
 type NotificationState = WithKey<Notification> &
   RequiredDefined<Pick<Notification, 'onDismiss'>>;
@@ -27,36 +28,6 @@ type RequiredDefined<T> = {
 };
 
 const INITIAL_ID = 0;
-
-function QuisidoDotComNotification(): ReactElement {
-  return (
-    <span
-      style={{
-        display: 'inline-block',
-        fontFamily: 'Merienda, serif',
-        // letterSpacing: -1,
-        // transform: 'scale(1.25, 1)',
-        transformOrigin: '0 50%',
-      }}
-    >
-      Looking for the artist <strong>Jaq Quisido</strong>? Visit{' '}
-      <a
-        href="https://quisido.com/"
-        rel="noopener"
-        target="_blank"
-        style={{
-          color: '#e03060',
-          fontWeight: 'bold',
-          textDecoration: 'none',
-        }}
-        title="Jaq Quisido's portfolio"
-      >
-        quisido.com
-      </a>
-      .
-    </span>
-  );
-}
 
 function NotificationsProviderFeature({
   children,
@@ -106,15 +77,13 @@ function NotificationsProviderFeature({
     return newNotification;
   };
 
-  const pushNotification = useEffectEvent(
-    (notification: Notification): VoidFunction => {
-      const newNotification: NotificationState = withRequired(notification);
-      setNotifications(append<WithKey<Notification>>(newNotification));
+  const notify = useEffectEvent((notification: Notification): VoidFunction => {
+    const newNotification: NotificationState = withRequired(notification);
+    setNotifications(append<WithKey<Notification>>(newNotification));
 
-      // Expose the dismiss handler so that it can be bound to other actions.
-      return newNotification.onDismiss;
-    },
-  );
+    // Expose the dismiss handler so that it can be bound to other actions.
+    return newNotification.onDismiss;
+  });
 
   return (
     <NotificationsProvider
@@ -122,8 +91,8 @@ function NotificationsProviderFeature({
         (): readonly [
           readonly WithKey<Notification>[],
           (notification: Notification) => VoidFunction,
-        ] => [notifications, pushNotification],
-        [notifications, pushNotification],
+        ] => [notifications, notify],
+        [notifications, notify],
       )}
     >
       {children}

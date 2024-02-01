@@ -27,9 +27,9 @@ export default function useTheme(): State {
     ...theme,
     foregroundAlpha: useThemeAlpha(...foreground),
     foregroundHex: mapRgbToHex(foreground),
-    primaryAlpha: useThemeAlpha(...foreground),
+    primaryAlpha: useThemeAlpha(...primary),
     primaryHex: mapRgbToHex(primary),
-    secondaryAlpha: useThemeAlpha(...foreground),
+    secondaryAlpha: useThemeAlpha(...secondary),
     secondaryHex: mapRgbToHex(secondary),
   };
 }

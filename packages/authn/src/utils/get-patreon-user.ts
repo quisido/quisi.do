@@ -13,6 +13,17 @@ const PATREON_GENDERS: Set<unknown> = new Set(Object.values(PatreonGender));
 const isPatreonGender = (value: unknown): value is PatreonGender =>
   PATREON_GENDERS.has(value);
 
+const FIELDS: URLSearchParams = new URLSearchParams({
+  'fields[user]': [
+    'email',
+    'first_name',
+    'full_name',
+    'is_email_verified',
+  ].join(','),
+});
+
+const SEARCH: string = FIELDS.toString();
+
 export default async function getPatreonUser(
   oAuthHost: string,
   clientId: string,
@@ -28,7 +39,7 @@ export default async function getPatreonUser(
     code,
   );
 
-  const store: JsonApiDataStore = await makeRequest('/identity');
+  const store: JsonApiDataStore = await makeRequest(`/identity?${SEARCH}`);
   const [firstUser] = store.findAll('user').map(serialize);
 
   assert(
@@ -97,31 +108,17 @@ export default async function getPatreonUser(
   );
 
   assert(
-    'email' in attributes,
-    'Expected the Patreon user to have an email.',
-    StatusCode.BadGateway,
-    attributes,
-  );
-
-  assert(
     'first_name' in attributes,
     'Expected the Patreon user to have a first name.',
     StatusCode.BadGateway,
-    attributes,
+    data,
   );
 
   assert(
     'full_name' in attributes,
     'Expected the Patreon user to have a full name.',
     StatusCode.BadGateway,
-    attributes,
-  );
-
-  assert(
-    'is_email_verified' in attributes,
-    'Expected email verification.',
-    StatusCode.BadGateway,
-    attributes,
+    data,
   );
 
   /**
@@ -129,17 +126,11 @@ export default async function getPatreonUser(
    * to merge with this one.
    */
   const {
-    email,
     first_name: firstName,
     full_name: fullName,
-    is_email_verified: isEmailVerified,
+    // email,
+    // is_email_verified: isEmailVerified,
   } = attributes;
-  assert(
-    typeof email === 'string',
-    "Expected the Patreon user's email address to be a string.",
-    StatusCode.BadGateway,
-    attributes,
-  );
 
   assert(
     typeof firstName === 'string',
@@ -155,13 +146,6 @@ export default async function getPatreonUser(
     attributes,
   );
 
-  assert(
-    isEmailVerified === true,
-    'Expected the Patreon user to have a verified email address.',
-    StatusCode.BadGateway,
-    attributes,
-  );
-
   const gender: unknown =
     'gender' in attributes ? attributes.gender : PatreonGender.Neutral;
   assert(
@@ -171,8 +155,33 @@ export default async function getPatreonUser(
     gender,
   );
 
+  const getEmail = (): string | null => {
+    if (!('email' in attributes)) {
+      // emit();
+      return null;
+    }
+
+    if (!('is_email_verified' in attributes)) {
+      // emit();
+      return null;
+    }
+
+    const { email, is_email_verified: isEmailVerified } = attributes;
+    if (typeof email !== 'string') {
+      // emit();
+      return null;
+    }
+
+    if (isEmailVerified !== true) {
+      // emit();
+      return null;
+    }
+
+    return email;
+  };
+
   return {
-    email,
+    email: getEmail(),
     firstName,
     fullName,
     gender: mapPatreonGenderToGender(gender),

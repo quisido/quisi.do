@@ -1,7 +1,7 @@
 import type { PropsWithChildren, ReactElement } from 'react';
 import useTheme from '../../hooks/use-theme.js';
 
-const BORDER_COLOR_OPACITY = 0.05;
+const BORDER_COLOR_OPACITY = 0.15;
 
 export default function Theme({ children }: PropsWithChildren): ReactElement {
   const { backgroundColor, foregroundHex, secondaryAlpha } = useTheme();

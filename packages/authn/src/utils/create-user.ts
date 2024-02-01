@@ -95,41 +95,43 @@ export default async function createUser(
       }),
   );
 
-  ctx.waitUntil(
-    usersDb
-      .prepare(INSERT_INTO_EMAILS_QUERY)
-      .bind(email, usersLastRowId)
-      .run()
-      // TODO: This needs to be emit and put on /dashboard!
-      .then(
-        ({
-          meta: {
-            changes: emailsChanges,
-            duration: emailsDuration,
-            last_row_id: emailsLastRowId,
-            size_after: emailsSizeAfter,
-          },
-          success: oAuthSuccess,
-        }: D1Result): void => {
-          console.log({
-            changes: emailsChanges,
-            duration: emailsDuration,
-            lastRowId: emailsLastRowId,
-            query: 'utils/create-user#emails',
-            sizeAfter: emailsSizeAfter,
+  if (email !== null) {
+    ctx.waitUntil(
+      usersDb
+        .prepare(INSERT_INTO_EMAILS_QUERY)
+        .bind(email, usersLastRowId)
+        .run()
+        // TODO: This needs to be emit and put on /dashboard!
+        .then(
+          ({
+            meta: {
+              changes: emailsChanges,
+              duration: emailsDuration,
+              last_row_id: emailsLastRowId,
+              size_after: emailsSizeAfter,
+            },
             success: oAuthSuccess,
+          }: D1Result): void => {
+            console.log({
+              changes: emailsChanges,
+              duration: emailsDuration,
+              lastRowId: emailsLastRowId,
+              query: 'utils/create-user#emails',
+              sizeAfter: emailsSizeAfter,
+              success: oAuthSuccess,
+            });
+          },
+        )
+        // TODO: This needs to be emit and put on /dashboard!
+        .catch((err: unknown): void => {
+          console.error({
+            message: mapUnknownToString(err),
+            query: 'utils/create-user#emails',
+            success: false,
           });
-        },
-      )
-      // TODO: This needs to be emit and put on /dashboard!
-      .catch((err: unknown): void => {
-        console.error({
-          message: mapUnknownToString(err),
-          query: 'utils/create-user#emails',
-          success: false,
-        });
-      }),
-  );
+        }),
+    );
+  }
 
   return usersLastRowId;
 }

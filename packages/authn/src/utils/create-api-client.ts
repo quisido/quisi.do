@@ -1,5 +1,4 @@
 import { JsonApiDataStore } from 'jsonapi-datastore';
-import { type ClientPathname } from 'patreon';
 import StatusCode from '../constants/status-code.js';
 import USER_AGENT from '../constants/user-agent.js';
 import assert from './assert.js';
@@ -17,7 +16,7 @@ export default async function createApiClient(
   secret: string,
   redirectUrl: string,
   code: string,
-): Promise<(pathname: ClientPathname) => Promise<JsonApiDataStore>> {
+): Promise<(pathname: string) => Promise<JsonApiDataStore>> {
   const accessToken: string = await createApiAccessToken(
     host,
     id,
