@@ -2,7 +2,6 @@ import type { JsonApiDataStore } from 'jsonapi-datastore';
 import PatreonGender from '../constants/patreon-gender.js';
 import StatusCode from '../constants/status-code.js';
 import type OAuthUser from '../types/oauth-user.js';
-import assert from '../utils/assert.js';
 import createApiClient from '../utils/create-api-client.js';
 import serialize from '../utils/serialize.js';
 import isObject from './is-object.js';
@@ -30,6 +29,12 @@ export default async function getPatreonUser(
   clientSecret: string,
   redirectUri: string,
   code: string,
+  assert: (
+    assertion: boolean,
+    message: string,
+    status: StatusCode,
+    data?: unknown,
+  ) => asserts assertion,
 ): Promise<OAuthUser> {
   const makeRequest = await createApiClient(
     oAuthHost,
@@ -37,6 +42,7 @@ export default async function getPatreonUser(
     clientSecret,
     redirectUri,
     code,
+    assert,
   );
 
   const store: JsonApiDataStore = await makeRequest(`/identity?${SEARCH}`);

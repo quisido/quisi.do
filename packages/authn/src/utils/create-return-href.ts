@@ -1,10 +1,14 @@
 import StatusCode from '../constants/status-code.js';
-import type State from '../types/state.js';
-import assert from './assert.js';
 import isObject from './is-object.js';
 import parseJson from './parse-json.js';
 
 interface Options {
+  readonly assert: (
+    assertion: boolean,
+    message: string,
+    status: StatusCode,
+    data?: unknown,
+  ) => asserts assertion;
   readonly host: string;
   readonly sessionId: string;
   readonly stateSearchParam: string;
@@ -14,8 +18,21 @@ export default function createRequestState({
   host,
   sessionId,
   stateSearchParam,
-}: Options): State {
+  ...options
+}: Options): string {
   const state: unknown = parseJson(stateSearchParam);
+
+  /**
+   *   Assertions require every name in the call target to be declared with an
+   * explicit type annotation. ts(2775)
+   * 'assert' needs an explicit type annotation.
+   */
+  const assert: (
+    assertion: boolean,
+    message: string,
+    status: StatusCode,
+    data?: unknown,
+  ) => asserts assertion = options.assert;
 
   assert(
     isObject(state),
@@ -59,8 +76,5 @@ export default function createRequestState({
     },
   );
 
-  return {
-    returnHref: `https://${host}${returnPath}`,
-    sessionId: stateSessionId,
-  };
+  return `https://${host}${returnPath}`;
 }

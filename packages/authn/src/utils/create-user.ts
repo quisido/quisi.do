@@ -1,6 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 import mapUnknownToString from 'unknown2string';
 import EPOCH_SECONDS_OFFSET from '../constants/epoch-seconds-offset.js';
+import MetricName from '../constants/metric-name.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
 import { MILLISECONDS_PER_SECOND } from '../constants/time';
 import type OAuthUser from '../types/oauth-user.js';
@@ -30,6 +31,11 @@ export default async function createUser(
   oAuthProvider: OAuthProvider,
   { email, firstName, fullName, gender, id: oAuthId }: OAuthUser,
   ctx: ExecutionContext,
+  emit: (
+    name: MetricName,
+    value?: null | number,
+    dimensions?: Readonly<Record<string, number | string>>,
+  ) => void,
 ): Promise<number> {
   const nowSeconds: number = Date.now() / MILLISECONDS_PER_SECOND;
   const usersStatement = usersDb.prepare(INSERT_INTO_USERS_QUERY).bind(
@@ -46,17 +52,11 @@ export default async function createUser(
       last_row_id: usersLastRowId,
       size_after: usersSizeAfter,
     },
-    success: usersSuccess,
   } = await usersStatement.run();
-
-  // TODO: This needs to be emit and put on /dashboard!
-  console.log({
+  emit(MetricName.UserInserted, usersLastRowId, {
     changes: usersChanges,
     duration: usersDuration,
-    lastRowId: usersLastRowId,
-    query: 'utils/create-user#users',
     sizeAfter: usersSizeAfter,
-    success: usersSuccess,
   });
 
   ctx.waitUntil(
@@ -64,7 +64,6 @@ export default async function createUser(
       .prepare(INSERT_INTO_OAUTH_QUERY)
       .bind(oAuthId, oAuthProvider, usersLastRowId)
       .run()
-      // TODO: This needs to be emit and put on /dashboard!
       .then(
         ({
           meta: {
@@ -73,24 +72,17 @@ export default async function createUser(
             last_row_id: oAuthLastRowId,
             size_after: oAuthSizeAfter,
           },
-          success: oAuthSuccess,
         }: D1Result): void => {
-          console.log({
+          emit(MetricName.OAuthInserted, oAuthLastRowId, {
             changes: oAuthChanges,
             duration: oAuthDuration,
-            lastRowId: oAuthLastRowId,
-            query: 'utils/create-user#oauth',
             sizeAfter: oAuthSizeAfter,
-            success: oAuthSuccess,
           });
         },
       )
-      // TODO: This needs to be emit and put on /dashboard!
       .catch((err: unknown): void => {
-        console.error({
+        emit(MetricName.FailedOAuthInsert, null, {
           message: mapUnknownToString(err),
-          query: 'utils/create-user#oauth',
-          success: false,
         });
       }),
   );
@@ -110,24 +102,19 @@ export default async function createUser(
               last_row_id: emailsLastRowId,
               size_after: emailsSizeAfter,
             },
-            success: oAuthSuccess,
           }: D1Result): void => {
-            console.log({
+            emit(MetricName.EmailInserted, emailsLastRowId, {
               changes: emailsChanges,
               duration: emailsDuration,
               lastRowId: emailsLastRowId,
-              query: 'utils/create-user#emails',
               sizeAfter: emailsSizeAfter,
-              success: oAuthSuccess,
             });
           },
         )
         // TODO: This needs to be emit and put on /dashboard!
         .catch((err: unknown): void => {
-          console.error({
+          emit(MetricName.FailedEmailInsert, null, {
             message: mapUnknownToString(err),
-            query: 'utils/create-user#emails',
-            success: false,
           });
         }),
     );

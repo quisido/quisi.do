@@ -1,10 +1,9 @@
 import formUrlEncoded from 'form-urlencoded';
+import StatusCode from '../constants/status-code.js';
 import USER_AGENT from '../constants/user-agent.js';
-import assert from './assert.js';
+import createPatreonError from './create-patreon-error.js';
 import isObject from './is-object.js';
 import mapReadableStreamToString from './map-readable-stream-to-string.js';
-import StatusCode from '../constants/status-code.js';
-import createPatreonError from './create-patreon-error.js';
 import parseJson from './parse-json.js';
 
 const HTTP_REDIRECTION = 300;
@@ -20,6 +19,12 @@ export default async function createApiAccessToken(
   clientSecret: string,
   redirectUri: string,
   code: string,
+  assert: (
+    assertion: boolean,
+    message: string,
+    status: StatusCode,
+    data?: unknown,
+  ) => asserts assertion,
 ): Promise<string> {
   const response: Response = await fetch(`${host}/api/oauth2/token`, {
     // compress: false,
@@ -63,6 +68,7 @@ export default async function createApiAccessToken(
     );
 
     throw createPatreonError({
+      assert,
       clientId,
       code,
       json,

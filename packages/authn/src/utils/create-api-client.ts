@@ -1,7 +1,6 @@
 import { JsonApiDataStore } from 'jsonapi-datastore';
 import StatusCode from '../constants/status-code.js';
 import USER_AGENT from '../constants/user-agent.js';
-import assert from './assert.js';
 import createApiAccessToken from './create-api-access-token.js';
 import isObject from './is-object.js';
 
@@ -16,6 +15,12 @@ export default async function createApiClient(
   secret: string,
   redirectUrl: string,
   code: string,
+  assert: (
+    assertion: boolean,
+    message: string,
+    status: StatusCode,
+    data?: unknown,
+  ) => asserts assertion,
 ): Promise<(pathname: string) => Promise<JsonApiDataStore>> {
   const accessToken: string = await createApiAccessToken(
     host,
@@ -23,6 +28,7 @@ export default async function createApiClient(
     secret,
     redirectUrl,
     code,
+    assert,
   );
 
   const requestInit: RequestInit = {

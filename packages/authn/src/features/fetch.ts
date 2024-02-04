@@ -1,4 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
+import { parse } from 'cookie';
 import Environment from '../constants/environment.js';
 import MetricName from '../constants/metric-name.js';
 import OAuthProvider from '../constants/oauth-provider.js';
@@ -11,12 +12,11 @@ import {
 import StatusCode from '../constants/status-code.js';
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_DAY } from '../constants/time.js';
 import type OAuthUser from '../types/oauth-user.js';
-import type State from '../types/state.js';
-import assert from '../utils/assert.js';
+import createAssert from '../utils/create-assert.js';
 import createAuthenticationId from '../utils/create-authentication-id.js';
 import createEmitter from '../utils/create-emitter.js';
 import createError from '../utils/create-error.js';
-import createRequestState from '../utils/create-request-state.js';
+import createReturnHref from '../utils/create-return-href.js';
 import createUser from '../utils/create-user.js';
 import getPatreonUser from '../utils/get-patreon-user.js';
 import getUserId from '../utils/get-user-id.js';
@@ -26,11 +26,14 @@ import isEnvironment from '../utils/is-environment.js';
 import isKVNamespace from '../utils/is-kv-namespace.js';
 import isObject from '../utils/is-object.js';
 import logError from '../utils/log-error.js';
-import mapCookiesToSessionId from '../utils/map-cookies-to-session-id.js';
 import mapErrorToResponse from '../utils/map-error-to-response.js';
-import mapHeadersToCookies from '../utils/map-headers-to-cookies.js';
-import mapRequestSearchParamsToCode from '../utils/map-request-search-params-to-code.js';
+import roll from '../utils/roll.js';
 import throttle from './throttle.js';
+
+const AWAIT_EXPERIMENT_ODDS = 0.5;
+const FAILURE = 2;
+const startTime: number = Date.now();
+const SUCCESS = 1;
 
 export default (async function fetch(
   request: Readonly<Request>,
@@ -38,14 +41,15 @@ export default (async function fetch(
   ctx: ExecutionContext,
 ): Promise<Response> {
   try {
-    const startTime: number = Date.now();
+    const fetchTime: number = Date.now();
 
-    assert(
-      isObject(env),
-      'Expected an environment.',
-      StatusCode.InternalServerError,
-      env,
-    );
+    if (!isObject(env)) {
+      throw createError(
+        'Expected an environment.',
+        StatusCode.InternalServerError,
+        env,
+      );
+    }
 
     const {
       ANALYTICS,
@@ -60,26 +64,50 @@ export default (async function fetch(
       PATREON_OAUTH_REDIRECT_URI,
     } = env as Readonly<Record<string, unknown>>;
 
-    assert(
-      isAnalyticsEngineDataset(ANALYTICS),
-      'Expected an analytics engine dataset.',
-      StatusCode.InternalServerError,
-    );
+    if (!isEnvironment(ENVIRONMENT)) {
+      throw createError(
+        'Expected an environment to be provided.',
+        StatusCode.InternalServerError,
+        ENVIRONMENT,
+      );
+    }
 
-    assert(
-      isEnvironment(ENVIRONMENT),
-      'Expected an environment to be provided.',
-      StatusCode.InternalServerError,
-      ENVIRONMENT,
-    );
+    const getAnalyticsEngineDataset = ():
+      | AnalyticsEngineDataset
+      | undefined => {
+      if (isAnalyticsEngineDataset(ANALYTICS)) {
+        return ANALYTICS;
+      }
+
+      if (
+        ENVIRONMENT === Environment.Development &&
+        typeof ANALYTICS === 'undefined'
+      ) {
+        return;
+      }
+
+      throw createError(
+        'Expected an analytics engine dataset.',
+        StatusCode.InternalServerError,
+        env,
+      );
+    };
 
     const emit = createEmitter({
-      analyticsEngineDataset: ANALYTICS,
+      analyticsEngineDataset: getAnalyticsEngineDataset(),
       environment: ENVIRONMENT,
+      fetchTime,
       startTime,
     });
 
     try {
+      const assert: (
+        assertion: boolean,
+        message: string,
+        status: StatusCode,
+        data?: unknown,
+      ) => asserts assertion = createAssert(emit);
+
       // Method
       assert(
         request.method === 'GET' || request.method === 'POST',
@@ -105,8 +133,52 @@ export default (async function fetch(
 
       // Throttle (deployed environments)
       if (ENVIRONMENT !== Environment.Development) {
-        throttle(request);
+        throttle(request, assert);
       }
+
+      assert(
+        typeof HOST === 'string',
+        'Expected a host.',
+        StatusCode.InternalServerError,
+      );
+
+      const { searchParams } = new URL(request.url);
+      const stateSearchParam: string | null = searchParams.get('state');
+
+      // "Deny"
+      if (stateSearchParam === null) {
+        emit(MetricName.Deny);
+        return new Response(null, {
+          status: StatusCode.Found,
+          headers: new Headers({
+            'Content-Location': `https://${HOST}/`,
+            Location: `https://${HOST}/`,
+          }),
+        });
+      }
+
+      const cookieHeader: string | null = request.headers.get('Cookie');
+      assert(
+        cookieHeader !== null,
+        'Expected cookies.',
+        StatusCode.BadRequest,
+        request.headers.entries(),
+      );
+
+      const cookies: Partial<Record<string, string>> = parse(cookieHeader);
+      const sessionId: string | undefined = cookies['__Secure-Session-ID'];
+      assert(
+        typeof sessionId === 'string',
+        'Expected a session ID.',
+        StatusCode.BadRequest,
+      );
+
+      const returnHref: string = createReturnHref({
+        assert, // <-- Code smell 🦨
+        host: HOST,
+        sessionId,
+        stateSearchParam,
+      });
 
       assert(
         isKVNamespace(AUTHN_USER_IDS),
@@ -125,12 +197,6 @@ export default (async function fetch(
       assert(
         typeof COOKIE_DOMAIN === 'string',
         'Expected a cookie domain.',
-        StatusCode.InternalServerError,
-      );
-
-      assert(
-        typeof HOST === 'string',
-        'Expected a host.',
         StatusCode.InternalServerError,
       );
 
@@ -158,38 +224,21 @@ export default (async function fetch(
         StatusCode.InternalServerError,
       );
 
-      const { searchParams } = new URL(request.url);
-      const cookies: Partial<Record<string, string>> = mapHeadersToCookies(
-        request.headers,
-      );
-
-      const stateSearchParam: string | null = searchParams.get('state');
-
-      // "Deny"
-      if (stateSearchParam === null) {
-        return new Response(null, {
-          status: StatusCode.Found,
-          headers: new Headers({
-            'Content-Location': `https://${HOST}/`,
-            Location: `https://${HOST}/`,
-          }),
-        });
-      }
-
-      // Patreon
-      const { returnHref }: State = createRequestState({
-        host: HOST,
-        sessionId: mapCookiesToSessionId(cookies),
-        stateSearchParam,
-      });
-
       const getOAuthUser = async (): Promise<
         OAuthUser & Record<'provider', OAuthProvider>
       > => {
         switch (requestPathname) {
+          // Patreon
           case '/patreon/': {
-            const code: string =
-              mapRequestSearchParamsToCode(requestSearchParams);
+            emit(MetricName.PatreonRequest);
+            const code: string | null = requestSearchParams.get('code');
+            assert(
+              code !== null,
+              'Expected a code.',
+              StatusCode.Unauthorized,
+              searchParams.toString(),
+            );
+
             return {
               provider: OAuthProvider.Patreon,
               ...(await getPatreonUser(
@@ -198,11 +247,13 @@ export default (async function fetch(
                 PATREON_OAUTH_CLIENT_SECRET,
                 PATREON_OAUTH_REDIRECT_URI,
                 code,
+                assert, // <-- Code smell 🦨
               )),
             };
           }
 
           default:
+            emit(MetricName.NotFoundRequest);
             throw createError(
               'Not found.',
               StatusCode.NotFound,
@@ -220,21 +271,27 @@ export default (async function fetch(
         AUTHN,
         oAuthProvider,
         oAuthUser.id,
+        emit,
+        assert,
       )
         .then(async (userId: number | null): Promise<number> => {
           if (userId !== null) {
+            emit(MetricName.Login);
             console.log(`User #${userId} authenticated.`);
             return userId;
           }
 
-          console.log('Creating user...');
+          emit(MetricName.StartRegistration);
           const newUserId: number = await createUser(
             AUTHN,
             oAuthProvider,
             oAuthUser,
             ctx,
+            emit,
           );
-          console.log(`User #${userId} created.`);
+
+          emit(MetricName.EndRegistration);
+          console.log(`User #${newUserId} created.`);
           return newUserId;
         })
         .then(async (userId: number): Promise<void> => {
@@ -247,25 +304,35 @@ export default (async function fetch(
             expiration: nowSeconds + SECONDS_PER_DAY,
             expirationTtl: SECONDS_PER_DAY,
           });
+
+          emit(MetricName.SetAuthenticationIdUser);
           console.log('Authentication ID recorded.');
         });
 
-      /**
-       *   TODO: Emit an A/B test duration metric for `await` and `waitUntil` in
-       * production.
-       */
-      if (ENVIRONMENT === Environment.Development) {
+      const isAwaitExperiment = roll(AWAIT_EXPERIMENT_ODDS);
+      if (ENVIRONMENT === Environment.Development || isAwaitExperiment) {
         await optionalPromise;
+        emit(MetricName.AwaitExperiment);
       } else {
-        ctx.waitUntil(optionalPromise.catch(console.error));
+        ctx.waitUntil(
+          optionalPromise
+            .then((): void => {
+              emit(MetricName.AwaitExperiment, SUCCESS);
+            })
+            .catch((err: unknown): void => {
+              emit(MetricName.AwaitExperiment, FAILURE);
+              logError(err);
+            }),
+        );
       }
 
+      emit(MetricName.Success);
       return new Response(null, {
         status: StatusCode.SeeOther,
         headers: new Headers({
           'Content-Location': returnHref,
           Location: returnHref,
-          'Set-Cookie': `__Secure-Authentication-ID=${authnId}; domain=${COOKIE_DOMAIN}; max-age=${SECONDS_PER_DAY}; partitioned; path=/; samesite=lax; secure`,
+          'Set-Cookie': `__Secure-Authentication-ID=${authnId}; domain=${COOKIE_DOMAIN}; max-age=${SECONDS_PER_DAY}; partitioned; path=/; secure`,
         }),
       });
     } catch (err: unknown) {
@@ -275,6 +342,7 @@ export default (async function fetch(
     }
   } catch (err: unknown) {
     logError(err);
+    // Include `returnHref` in this response.
     return mapErrorToResponse(err);
   }
 } satisfies ExportedHandlerFetchHandler);

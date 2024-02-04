@@ -1,12 +1,26 @@
 import StatusCode from '../constants/status-code.js';
-import assert from './assert.js';
 
 export default function createThrottler(): (
   key: number | string | symbol,
   ms: number,
+  assert: (
+    assertion: boolean,
+    message: string,
+    status: StatusCode,
+    data?: unknown,
+  ) => asserts assertion,
 ) => void {
   const map: Map<number | string | symbol, number> = new Map();
-  return function throttle(key: number | string | symbol, ms: number): void {
+  return function throttle(
+    key: number | string | symbol,
+    ms: number,
+    assert: (
+      assertion: boolean,
+      message: string,
+      status: StatusCode,
+      data?: unknown,
+    ) => asserts assertion,
+  ): void {
     const lastCallTime: number | undefined = map.get(key);
     const now: number = Date.now();
 

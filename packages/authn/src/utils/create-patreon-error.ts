@@ -1,8 +1,13 @@
 import StatusCode from '../constants/status-code.js';
-import assert from './assert.js';
 import createError from './create-error.js';
 
 interface Options {
+  readonly assert: (
+    assertion: boolean,
+    message: string,
+    status: StatusCode,
+    data?: unknown,
+  ) => asserts assertion;
   readonly clientId: string;
   readonly code: string;
   readonly json: Record<'error', unknown>;
@@ -14,7 +19,15 @@ export default function createPatreonError({
   code,
   json,
   status,
+  ...options
 }: Options): Error {
+  const assert: (
+    assertion: boolean,
+    message: string,
+    status: StatusCode,
+    data?: unknown,
+  ) => asserts assertion = options.assert;
+
   switch (json.error) {
     case 'invalid_client':
       return createError('Invalid Patreon client ID.', status, clientId);

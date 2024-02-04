@@ -1,6 +1,6 @@
+import MetricName from '../constants/metric-name.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
 import StatusCode from '../constants/status-code.js';
-import assert from './assert.js';
 import isObject from './is-object.js';
 
 const QUERY = `
@@ -15,6 +15,17 @@ export default async function getUserId(
   db: D1Database,
   oauthProvider: OAuthProvider,
   oauthId: string,
+  emit: (
+    name: MetricName,
+    value?: null | number,
+    dimensions?: Readonly<Record<string, number | string>>,
+  ) => void,
+  assert: (
+    assertion: boolean,
+    message: string,
+    status: StatusCode,
+    data?: unknown,
+  ) => asserts assertion,
 ): Promise<number | null> {
   const statement: D1PreparedStatement = db
     .prepare(QUERY)
@@ -23,20 +34,13 @@ export default async function getUserId(
   const {
     meta: { duration, size_after: sizeAfter },
     results,
-    success,
   } = await statement.run();
 
   // TODO: This needs to be emit and put on /dashboard!
-  console.log({
+  emit(MetricName.OAuthUserIdSelected, null, {
     duration,
-    query: 'utils/get-user-id',
     sizeAfter,
-    success,
   });
-
-  // if (!success) {
-  //   return null;
-  // }
 
   const [firstResult] = results;
   if (!isObject(firstResult)) {
