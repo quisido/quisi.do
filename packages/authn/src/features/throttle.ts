@@ -1,3 +1,4 @@
+import ErrorCode from '../constants/error-code.js';
 import StatusCode from '../constants/status-code.js';
 import createThrottler from '../utils/create-throttler.js';
 
@@ -10,6 +11,7 @@ export default function throttle(
   assert: (
     assertion: boolean,
     message: string,
+    code: ErrorCode,
     status: StatusCode,
     data?: unknown,
   ) => asserts assertion,
@@ -19,6 +21,7 @@ export default function throttle(
   assert(
     ip !== null,
     'Expected a Cloudflare connecting IP.',
+    ErrorCode.MissingIP,
     StatusCode.BadRequest,
   );
 

@@ -1,4 +1,5 @@
 import mapUnknownToString from 'unknown2string/dist/utils/map-unknown-to-string.js';
+import type ErrorCode from '../constants/error-code.js';
 import MetricName from '../constants/metric-name.js';
 import type StatusCode from '../constants/status-code.js';
 import createError from './create-error.js';
@@ -17,12 +18,14 @@ export default function createAssert(
 ): (
   assertion: boolean,
   message: string,
+  code: ErrorCode,
   status: StatusCode,
   data?: unknown,
 ) => asserts assertion {
   return function assert(
     assertion: boolean,
     message: string,
+    code: ErrorCode,
     status: StatusCode,
     data?: unknown,
   ): asserts assertion {
@@ -35,6 +38,6 @@ export default function createAssert(
       status,
     });
 
-    throw createError(message, status, data);
+    throw createError(message, code, status, data);
   };
 }

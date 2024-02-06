@@ -1,4 +1,5 @@
 import formUrlEncoded from 'form-urlencoded';
+import ErrorCode from '../constants/error-code.js';
 import StatusCode from '../constants/status-code.js';
 import USER_AGENT from '../constants/user-agent.js';
 import createPatreonError from './create-patreon-error.js';
@@ -22,6 +23,7 @@ export default async function createApiAccessToken(
   assert: (
     assertion: boolean,
     message: string,
+    code: ErrorCode,
     status: StatusCode,
     data?: unknown,
   ) => asserts assertion,
@@ -47,15 +49,20 @@ export default async function createApiAccessToken(
     assert(
       response.body !== null,
       'Expected Patreon OAuth token error to have a body.',
+      ErrorCode.MissingPatreonOAuthTokenErrorBody,
       StatusCode.BadGateway,
     );
 
     const body: string = await mapReadableStreamToString(response.body);
-    const json: unknown = parseJson(body);
+    const json: unknown = parseJson(
+      body,
+      ErrorCode.NonJsonPatreonOAuthTokenErrorBody,
+    );
 
     assert(
       isObject(json),
       'Expected Patreon OAuth token error to be an object.',
+      ErrorCode.NonObjectPatreonOAuthTokenError,
       StatusCode.BadGateway,
       json,
     );
@@ -63,6 +70,7 @@ export default async function createApiAccessToken(
     assert(
       'error' in json,
       'Expected Patreon OAuth token error to have a code.',
+      ErrorCode.MissingPatreonOAuthTokenErrorCode,
       StatusCode.BadGateway,
       json,
     );
@@ -80,6 +88,7 @@ export default async function createApiAccessToken(
   assert(
     isObject(json),
     `Expected \`${host}/api/oauth2/token\` to be an object, but received ${typeof json}.`,
+    ErrorCode.NonObjectPatreonOAuthTokenResponse,
     StatusCode.BadGateway,
     json,
   );
@@ -87,6 +96,7 @@ export default async function createApiAccessToken(
   assert(
     'access_token' in json,
     "Expected Patreon's OAuth response to have an access token.",
+    ErrorCode.MissingPatreonOAuthAccessToken,
     response.status,
     json,
   );
@@ -94,6 +104,7 @@ export default async function createApiAccessToken(
   assert(
     typeof json.access_token === 'string',
     "Expected Patreon's OAuth access token to be a string.",
+    ErrorCode.NonStringPatreonOAuthAccessToken,
     response.status,
     json,
   );

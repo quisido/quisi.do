@@ -1,3 +1,4 @@
+import ErrorCode from '../constants/error-code.js';
 import StatusCode from '../constants/status-code.js';
 import createError from './create-error.js';
 
@@ -5,6 +6,7 @@ interface Options {
   readonly assert: (
     assertion: boolean,
     message: string,
+    code: ErrorCode,
     status: StatusCode,
     data?: unknown,
   ) => asserts assertion;
@@ -24,34 +26,59 @@ export default function createPatreonError({
   const assert: (
     assertion: boolean,
     message: string,
+    code: ErrorCode,
     status: StatusCode,
     data?: unknown,
   ) => asserts assertion = options.assert;
 
   switch (json.error) {
     case 'invalid_client':
-      return createError('Invalid Patreon client ID.', status, clientId);
+      return createError(
+        'Invalid Patreon client ID.',
+        ErrorCode.InvalidPatreonClientId,
+        status,
+        clientId,
+      );
 
     case 'invalid_grant':
-      return createError('Invalid Patreon grant code.', status, code);
+      return createError(
+        'Invalid Patreon grant code.',
+        ErrorCode.InvalidPatreonGrantCode,
+        status,
+        code,
+      );
 
     case 'invalid_request': {
       assert(
         'error_description' in json,
         'Expected Patreon OAuth invalid token request to have a description.',
+        ErrorCode.MissingPatreonOAuthInvalidTokenRequestDescription,
         StatusCode.BadGateway,
         json,
       );
+
       assert(
         typeof json.error_description === 'string',
         'Expected Patreon OAuth invalid token request description to be a string.',
+        ErrorCode.NonStringPatreonOAuthInvalidTokenRequestDescription,
         StatusCode.BadGateway,
         json,
       );
-      return createError(json.error_description, status, json);
+
+      return createError(
+        json.error_description,
+        ErrorCode.InvalidPatreonOAuthTokenRequest,
+        status,
+        json,
+      );
     }
 
     default:
-      return createError('Unknown Patreon OAuth token error.', status, json);
+      return createError(
+        'Unknown Patreon OAuth token error.',
+        ErrorCode.UnknownPatreonOAuthTokenError,
+        status,
+        json,
+      );
   }
 }

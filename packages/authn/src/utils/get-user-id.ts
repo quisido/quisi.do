@@ -1,3 +1,4 @@
+import ErrorCode from '../constants/error-code.js';
 import MetricName from '../constants/metric-name.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
 import StatusCode from '../constants/status-code.js';
@@ -23,6 +24,7 @@ export default async function getUserId(
   assert: (
     assertion: boolean,
     message: string,
+    code: ErrorCode,
     status: StatusCode,
     data?: unknown,
   ) => asserts assertion,
@@ -36,7 +38,6 @@ export default async function getUserId(
     results,
   } = await statement.run();
 
-  // TODO: This needs to be emit and put on /dashboard!
   emit(MetricName.OAuthUserIdSelected, null, {
     duration,
     sizeAfter,
@@ -50,6 +51,7 @@ export default async function getUserId(
   assert(
     'userId' in firstResult,
     'Expected OAuth result to have a user ID.',
+    ErrorCode.MissingOAuthUserId,
     StatusCode.InternalServerError,
   );
 
@@ -57,6 +59,7 @@ export default async function getUserId(
   assert(
     typeof userId === 'number',
     'Expected OAuth user ID to be numeric.',
+    ErrorCode.NonNumberOAuthUserId,
     StatusCode.InternalServerError,
   );
 

@@ -1,6 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 import { parse } from 'cookie';
 import Environment from '../constants/environment.js';
+import ErrorCode from '../constants/error-code.js';
 import MetricName from '../constants/metric-name.js';
 import OAuthProvider from '../constants/oauth-provider.js';
 import {
@@ -18,6 +19,7 @@ import createEmitter from '../utils/create-emitter.js';
 import createError from '../utils/create-error.js';
 import createReturnHref from '../utils/create-return-href.js';
 import createUser from '../utils/create-user.js';
+import emitError from '../utils/emit-error.js';
 import getPatreonUser from '../utils/get-patreon-user.js';
 import getUserId from '../utils/get-user-id.js';
 import isAnalyticsEngineDataset from '../utils/is-analytics-engine-dataset.js';
@@ -28,6 +30,7 @@ import isObject from '../utils/is-object.js';
 import logError from '../utils/log-error.js';
 import mapErrorToResponse from '../utils/map-error-to-response.js';
 import roll from '../utils/roll.js';
+import withReturnHref from '../utils/with-return-href.js';
 import throttle from './throttle.js';
 
 const AWAIT_EXPERIMENT_ODDS = 0.5;
@@ -46,6 +49,7 @@ export default (async function fetch(
     if (!isObject(env)) {
       throw createError(
         'Expected an environment.',
+        ErrorCode.MissingEnvironment,
         StatusCode.InternalServerError,
         env,
       );
@@ -67,6 +71,7 @@ export default (async function fetch(
     if (!isEnvironment(ENVIRONMENT)) {
       throw createError(
         'Expected an environment to be provided.',
+        ErrorCode.MissingEnvironmentEnvironment,
         StatusCode.InternalServerError,
         ENVIRONMENT,
       );
@@ -88,6 +93,7 @@ export default (async function fetch(
 
       throw createError(
         'Expected an analytics engine dataset.',
+        ErrorCode.MissingAnalyticsEngineDataset,
         StatusCode.InternalServerError,
         env,
       );
@@ -104,6 +110,7 @@ export default (async function fetch(
       const assert: (
         assertion: boolean,
         message: string,
+        code: ErrorCode,
         status: StatusCode,
         data?: unknown,
       ) => asserts assertion = createAssert(emit);
@@ -112,6 +119,7 @@ export default (async function fetch(
       assert(
         request.method === 'GET' || request.method === 'POST',
         'Method not allowed.',
+        ErrorCode.MethodNotAllowed,
         StatusCode.MethodNotAllowed,
         request.method,
       );
@@ -139,6 +147,7 @@ export default (async function fetch(
       assert(
         typeof HOST === 'string',
         'Expected a host.',
+        ErrorCode.MissingHost,
         StatusCode.InternalServerError,
       );
 
@@ -161,6 +170,7 @@ export default (async function fetch(
       assert(
         cookieHeader !== null,
         'Expected cookies.',
+        ErrorCode.MissingCookies,
         StatusCode.BadRequest,
         request.headers.entries(),
       );
@@ -170,6 +180,7 @@ export default (async function fetch(
       assert(
         typeof sessionId === 'string',
         'Expected a session ID.',
+        ErrorCode.MissingSessionIDCookie,
         StatusCode.BadRequest,
       );
 
@@ -180,169 +191,187 @@ export default (async function fetch(
         stateSearchParam,
       });
 
-      assert(
-        isKVNamespace(AUTHN_USER_IDS),
-        'Expected an authentication database.',
-        StatusCode.InternalServerError,
-        AUTHN_USER_IDS,
-      );
+      try {
+        assert(
+          isKVNamespace(AUTHN_USER_IDS),
+          'Expected an authentication namespace.',
+          ErrorCode.MissingAuthenticationNamespace,
+          StatusCode.InternalServerError,
+          AUTHN_USER_IDS,
+        );
 
-      assert(
-        isD1Database(AUTHN),
-        'Expected an authentication database.',
-        StatusCode.InternalServerError,
-        AUTHN,
-      );
+        assert(
+          isD1Database(AUTHN),
+          'Expected an authentication database.',
+          ErrorCode.MissingAuthenticationDatabase,
+          StatusCode.InternalServerError,
+          AUTHN,
+        );
 
-      assert(
-        typeof COOKIE_DOMAIN === 'string',
-        'Expected a cookie domain.',
-        StatusCode.InternalServerError,
-      );
+        assert(
+          typeof COOKIE_DOMAIN === 'string',
+          'Expected a cookie domain.',
+          ErrorCode.MissingCookieDomain,
+          StatusCode.InternalServerError,
+        );
 
-      assert(
-        typeof PATREON_OAUTH_CLIENT_ID === 'string',
-        'Expected a Patreon client ID.',
-        StatusCode.InternalServerError,
-      );
+        assert(
+          typeof PATREON_OAUTH_CLIENT_ID === 'string',
+          'Expected a Patreon client ID.',
+          ErrorCode.MissingPatreonClientID,
+          StatusCode.InternalServerError,
+        );
 
-      assert(
-        typeof PATREON_OAUTH_CLIENT_SECRET === 'string',
-        'Expected a Patreon client secret.',
-        StatusCode.InternalServerError,
-      );
+        assert(
+          typeof PATREON_OAUTH_CLIENT_SECRET === 'string',
+          'Expected a Patreon client secret.',
+          ErrorCode.MissingPatreonClientSecret,
+          StatusCode.InternalServerError,
+        );
 
-      assert(
-        typeof PATREON_OAUTH_HOST === 'string',
-        'Expected a Patreon OAuth host.',
-        StatusCode.InternalServerError,
-      );
+        assert(
+          typeof PATREON_OAUTH_HOST === 'string',
+          'Expected a Patreon OAuth host.',
+          ErrorCode.MissingPatreonOAuthHost,
+          StatusCode.InternalServerError,
+        );
 
-      assert(
-        typeof PATREON_OAUTH_REDIRECT_URI === 'string',
-        'Expected a Patreon redirect URI.',
-        StatusCode.InternalServerError,
-      );
+        assert(
+          typeof PATREON_OAUTH_REDIRECT_URI === 'string',
+          'Expected a Patreon redirect URI.',
+          ErrorCode.MissingPatreonRedirectURI,
+          StatusCode.InternalServerError,
+        );
 
-      const getOAuthUser = async (): Promise<
-        OAuthUser & Record<'provider', OAuthProvider>
-      > => {
-        switch (requestPathname) {
-          // Patreon
-          case '/patreon/': {
-            emit(MetricName.PatreonRequest);
-            const code: string | null = requestSearchParams.get('code');
-            assert(
-              code !== null,
-              'Expected a code.',
-              StatusCode.Unauthorized,
-              searchParams.toString(),
+        const getOAuthUser = async (): Promise<
+          OAuthUser & Record<'provider', OAuthProvider>
+        > => {
+          switch (requestPathname) {
+            // Patreon
+            case '/patreon/': {
+              emit(MetricName.PatreonRequest);
+              const code: string | null = requestSearchParams.get('code');
+              assert(
+                code !== null,
+                'Expected a code.',
+                ErrorCode.MissingCode,
+                StatusCode.Unauthorized,
+                searchParams.toString(),
+              );
+
+              return {
+                provider: OAuthProvider.Patreon,
+                ...(await getPatreonUser(
+                  PATREON_OAUTH_HOST,
+                  PATREON_OAUTH_CLIENT_ID,
+                  PATREON_OAUTH_CLIENT_SECRET,
+                  PATREON_OAUTH_REDIRECT_URI,
+                  code,
+                  emit, // <-- Code smell 🦨
+                  assert, // <-- Code smell 🦨
+                )),
+              };
+            }
+
+            default:
+              emit(MetricName.NotFoundRequest);
+              throw createError(
+                'Not found.',
+                ErrorCode.NotFound,
+                StatusCode.NotFound,
+                requestPathname,
+              );
+          }
+        };
+
+        // Validate the authentication.
+        const { provider: oAuthProvider, ...oAuthUser } = await getOAuthUser();
+
+        // Create an authentication ID.
+        const authnId: string = createAuthenticationId();
+        const optionalPromise: Promise<void> = getUserId(
+          AUTHN,
+          oAuthProvider,
+          oAuthUser.id,
+          emit,
+          assert,
+        )
+          .then(async (userId: number | null): Promise<number> => {
+            if (userId !== null) {
+              emit(MetricName.Login);
+              console.log(`User #${userId} authenticated.`);
+              return userId;
+            }
+
+            emit(MetricName.StartRegistration);
+            const newUserId: number = await createUser(
+              AUTHN,
+              oAuthProvider,
+              oAuthUser,
+              ctx,
+              emit,
             );
 
-            return {
-              provider: OAuthProvider.Patreon,
-              ...(await getPatreonUser(
-                PATREON_OAUTH_HOST,
-                PATREON_OAUTH_CLIENT_ID,
-                PATREON_OAUTH_CLIENT_SECRET,
-                PATREON_OAUTH_REDIRECT_URI,
-                code,
-                assert, // <-- Code smell 🦨
-              )),
-            };
-          }
-
-          default:
-            emit(MetricName.NotFoundRequest);
-            throw createError(
-              'Not found.',
-              StatusCode.NotFound,
-              requestPathname,
+            emit(MetricName.EndRegistration);
+            console.log(`User #${newUserId} created.`);
+            return newUserId;
+          })
+          .then(async (userId: number): Promise<void> => {
+            const nowSeconds: number = Math.floor(
+              Date.now() / MILLISECONDS_PER_SECOND,
             );
-        }
-      };
 
-      // Validate the authentication.
-      const { provider: oAuthProvider, ...oAuthUser } = await getOAuthUser();
+            console.log('Recording authentication ID...');
+            await AUTHN_USER_IDS.put(authnId, userId.toString(), {
+              expiration: nowSeconds + SECONDS_PER_DAY,
+              expirationTtl: SECONDS_PER_DAY,
+            });
 
-      // Create an authentication ID.
-      const authnId: string = createAuthenticationId();
-      const optionalPromise: Promise<void> = getUserId(
-        AUTHN,
-        oAuthProvider,
-        oAuthUser.id,
-        emit,
-        assert,
-      )
-        .then(async (userId: number | null): Promise<number> => {
-          if (userId !== null) {
-            emit(MetricName.Login);
-            console.log(`User #${userId} authenticated.`);
-            return userId;
-          }
-
-          emit(MetricName.StartRegistration);
-          const newUserId: number = await createUser(
-            AUTHN,
-            oAuthProvider,
-            oAuthUser,
-            ctx,
-            emit,
-          );
-
-          emit(MetricName.EndRegistration);
-          console.log(`User #${newUserId} created.`);
-          return newUserId;
-        })
-        .then(async (userId: number): Promise<void> => {
-          const nowSeconds: number = Math.floor(
-            Date.now() / MILLISECONDS_PER_SECOND,
-          );
-
-          console.log('Recording authentication ID...');
-          await AUTHN_USER_IDS.put(authnId, userId.toString(), {
-            expiration: nowSeconds + SECONDS_PER_DAY,
-            expirationTtl: SECONDS_PER_DAY,
+            emit(MetricName.SetAuthenticationIdUser);
+            console.log('Authentication ID recorded.');
           });
 
-          emit(MetricName.SetAuthenticationIdUser);
-          console.log('Authentication ID recorded.');
+        const isAwaitExperiment = roll(AWAIT_EXPERIMENT_ODDS);
+        if (ENVIRONMENT === Environment.Development || isAwaitExperiment) {
+          await optionalPromise;
+          emit(MetricName.AwaitExperiment);
+        } else {
+          ctx.waitUntil(
+            optionalPromise
+              .then((): void => {
+                emit(MetricName.AwaitExperiment, SUCCESS);
+              })
+              .catch((err: unknown): void => {
+                emit(MetricName.AwaitExperiment, FAILURE);
+                logError(err);
+              }),
+          );
+        }
+
+        emit(MetricName.Success);
+        return new Response(null, {
+          status: StatusCode.SeeOther,
+          headers: new Headers({
+            'Content-Location': returnHref,
+            Location: returnHref,
+            'Set-Cookie': `__Secure-Authentication-ID=${authnId}; domain=${COOKIE_DOMAIN}; max-age=${SECONDS_PER_DAY}; partitioned; path=/; secure`,
+          }),
         });
-
-      const isAwaitExperiment = roll(AWAIT_EXPERIMENT_ODDS);
-      if (ENVIRONMENT === Environment.Development || isAwaitExperiment) {
-        await optionalPromise;
-        emit(MetricName.AwaitExperiment);
-      } else {
-        ctx.waitUntil(
-          optionalPromise
-            .then((): void => {
-              emit(MetricName.AwaitExperiment, SUCCESS);
-            })
-            .catch((err: unknown): void => {
-              emit(MetricName.AwaitExperiment, FAILURE);
-              logError(err);
-            }),
-        );
+      } catch (err: unknown) {
+        // Scope: `returnHref`
+        // TODO: `return handleError(err, emit, returnHref);`
+        throw withReturnHref(err, returnHref, emit);
       }
-
-      emit(MetricName.Success);
-      return new Response(null, {
-        status: StatusCode.SeeOther,
-        headers: new Headers({
-          'Content-Location': returnHref,
-          Location: returnHref,
-          'Set-Cookie': `__Secure-Authentication-ID=${authnId}; domain=${COOKIE_DOMAIN}; max-age=${SECONDS_PER_DAY}; partitioned; path=/; secure`,
-        }),
-      });
     } catch (err: unknown) {
-      // TODO: Break this into `instanceof Error`, `isCause`, and non-Error.
-      emit(MetricName.ErrorResponse);
+      // Scope: `emit`
+      // TODO: `return handleError(err, emit);`
+      emitError(emit, err);
       throw err;
     }
   } catch (err: unknown) {
+    // Scope: `logError`
+    // TODO: `return handleError(err);`
     logError(err);
-    // Include `returnHref` in this response.
     return mapErrorToResponse(err);
   }
 } satisfies ExportedHandlerFetchHandler);

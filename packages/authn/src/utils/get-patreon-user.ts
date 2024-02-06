@@ -1,4 +1,6 @@
 import type { JsonApiDataStore } from 'jsonapi-datastore';
+import ErrorCode from '../constants/error-code.js';
+import MetricName from '../constants/metric-name.js';
 import PatreonGender from '../constants/patreon-gender.js';
 import StatusCode from '../constants/status-code.js';
 import type OAuthUser from '../types/oauth-user.js';
@@ -29,9 +31,15 @@ export default async function getPatreonUser(
   clientSecret: string,
   redirectUri: string,
   code: string,
+  emit: (
+    name: MetricName,
+    value?: null | number,
+    dimensions?: Readonly<Record<string, number | string>>,
+  ) => void,
   assert: (
     assertion: boolean,
     message: string,
+    code: ErrorCode,
     status: StatusCode,
     data?: unknown,
   ) => asserts assertion,
@@ -51,6 +59,7 @@ export default async function getPatreonUser(
   assert(
     typeof firstUser !== 'undefined',
     'Expected to find a Patreon user.',
+    ErrorCode.MissingPatreonUser,
     StatusCode.BadGateway,
     store,
   );
@@ -58,6 +67,7 @@ export default async function getPatreonUser(
   assert(
     'data' in firstUser,
     'Expected the Patreon user to contain data.',
+    ErrorCode.MissingPatreonUserData,
     StatusCode.BadGateway,
     firstUser,
   );
@@ -66,6 +76,7 @@ export default async function getPatreonUser(
   assert(
     isObject(data),
     'Expected the Patreon user data to be an object.',
+    ErrorCode.NonObjectPatreonUserData,
     StatusCode.BadGateway,
     data,
   );
@@ -73,6 +84,7 @@ export default async function getPatreonUser(
   assert(
     'attributes' in data,
     'Expected the Patreon user to have attributes.',
+    ErrorCode.MissingPatreonUserAttributes,
     StatusCode.BadGateway,
     data,
   );
@@ -80,6 +92,7 @@ export default async function getPatreonUser(
   assert(
     'id' in data,
     'Expected the Patreon user to have an ID.',
+    ErrorCode.MissingPatreonUserId,
     StatusCode.BadGateway,
     data,
   );
@@ -87,6 +100,7 @@ export default async function getPatreonUser(
   assert(
     'type' in data,
     'Expected the Patreon user to have a type.',
+    ErrorCode.MissingPatreonUserType,
     StatusCode.BadGateway,
     data,
   );
@@ -95,6 +109,7 @@ export default async function getPatreonUser(
   assert(
     isObject(attributes),
     'Expected the Patreon user attributes to be an object.',
+    ErrorCode.NonObjectPatreonUserAttributes,
     StatusCode.BadGateway,
     data,
   );
@@ -102,13 +117,15 @@ export default async function getPatreonUser(
   assert(
     typeof id === 'string',
     'Expected the Patreon user ID to be a string.',
+    ErrorCode.NonStringPatreonUserId,
     StatusCode.BadGateway,
     data,
   );
 
   assert(
     type === 'user',
-    'Expected the Patreon user to be a user.', // 🤔
+    'Expected a Patreon user type.', // 🤔
+    ErrorCode.NonPatreonUserType,
     StatusCode.BadGateway,
     data,
   );
@@ -116,6 +133,7 @@ export default async function getPatreonUser(
   assert(
     'first_name' in attributes,
     'Expected the Patreon user to have a first name.',
+    ErrorCode.MissingPatreonUserFirstName,
     StatusCode.BadGateway,
     data,
   );
@@ -123,6 +141,7 @@ export default async function getPatreonUser(
   assert(
     'full_name' in attributes,
     'Expected the Patreon user to have a full name.',
+    ErrorCode.MissingPatreonUserFullName,
     StatusCode.BadGateway,
     data,
   );
@@ -141,6 +160,7 @@ export default async function getPatreonUser(
   assert(
     typeof firstName === 'string',
     "Expected the Patreon user's first name to be a string.",
+    ErrorCode.NonStringPatreonUserFirstName,
     StatusCode.BadGateway,
     attributes,
   );
@@ -148,38 +168,35 @@ export default async function getPatreonUser(
   assert(
     typeof fullName === 'string',
     "Expected the Patreon user's full name to be a string.",
+    ErrorCode.NonStringPatreonUserFullName,
     StatusCode.BadGateway,
     attributes,
   );
 
-  const gender: unknown =
-    'gender' in attributes ? attributes.gender : PatreonGender.Neutral;
-  assert(
-    isPatreonGender(gender),
-    'Expected Patreon to provide a gender.',
-    StatusCode.BadGateway,
-    gender,
-  );
+  const gender: PatreonGender =
+    'gender' in attributes && isPatreonGender(attributes.gender)
+      ? attributes.gender
+      : PatreonGender.Neutral;
 
   const getEmail = (): string | null => {
     if (!('email' in attributes)) {
-      // emit();
+      emit(MetricName.MissingPatreonEmail);
       return null;
     }
 
     if (!('is_email_verified' in attributes)) {
-      // emit();
+      emit(MetricName.MissingPatreonEmailVerification);
       return null;
     }
 
     const { email, is_email_verified: isEmailVerified } = attributes;
     if (typeof email !== 'string') {
-      // emit();
+      emit(MetricName.NonStringPatreonEmail);
       return null;
     }
 
     if (isEmailVerified !== true) {
-      // emit();
+      emit(MetricName.UnverifiedPatreonEmail);
       return null;
     }
 

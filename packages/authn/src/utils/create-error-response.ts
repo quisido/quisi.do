@@ -1,18 +1,18 @@
-import type StatusCode from '../constants/status-code.js';
+import type ErrorCode from '../constants/error-code.js';
+import StatusCode from '../constants/status-code.js';
 
 export default function createErrorResponse(
-  message: string,
-  status: StatusCode,
+  errorCode: ErrorCode,
+
+  // We should always know the `returnHref`, but we fallback just in case.
+  returnHref = 'https://quisi.do/',
 ): Response {
-  return new Response(
-    JSON.stringify({
-      message,
+  const location = `${returnHref}#error:${errorCode}`;
+  return new Response(null, {
+    status: StatusCode.SeeOther,
+    headers: new Headers({
+      'Content-Location': location,
+      Location: location,
     }),
-    {
-      status,
-      headers: new Headers({
-        'Content-Type': 'application/json; charset=utf-8',
-      }),
-    },
-  );
+  });
 }

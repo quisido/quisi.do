@@ -1,3 +1,4 @@
+import ErrorCode from '../constants/error-code.js';
 import StatusCode from '../constants/status-code.js';
 
 export default function createThrottler(): (
@@ -6,6 +7,7 @@ export default function createThrottler(): (
   assert: (
     assertion: boolean,
     message: string,
+    code: ErrorCode,
     status: StatusCode,
     data?: unknown,
   ) => asserts assertion,
@@ -17,6 +19,7 @@ export default function createThrottler(): (
     assert: (
       assertion: boolean,
       message: string,
+      code: ErrorCode,
       status: StatusCode,
       data?: unknown,
     ) => asserts assertion,
@@ -28,6 +31,7 @@ export default function createThrottler(): (
     assert(
       typeof lastCallTime === 'undefined' || lastCallTime < now - ms,
       'Too many requests.',
+      ErrorCode.TooManyRequests,
       StatusCode.TooManyRequests,
       {
         key,

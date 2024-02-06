@@ -1,4 +1,5 @@
 import { JsonApiDataStore } from 'jsonapi-datastore';
+import ErrorCode from '../constants/error-code.js';
 import StatusCode from '../constants/status-code.js';
 import USER_AGENT from '../constants/user-agent.js';
 import createApiAccessToken from './create-api-access-token.js';
@@ -18,6 +19,7 @@ export default async function createApiClient(
   assert: (
     assertion: boolean,
     message: string,
+    code: ErrorCode,
     status: StatusCode,
     data?: unknown,
   ) => asserts assertion,
@@ -53,6 +55,7 @@ export default async function createApiClient(
     assert(
       response.status !== FORBIDDEN,
       'Forbidden by Patreon',
+      ErrorCode.PatreonForbidden,
       StatusCode.Forbidden,
       json,
     );
@@ -60,6 +63,7 @@ export default async function createApiClient(
     assert(
       response.status >= HTTP_SUCCESSFUL && response.status < HTTP_REDIRECTION,
       `Patreon status ${response.status}`,
+      ErrorCode.NonOkResponseStatus,
       StatusCode.Unauthorized,
       json,
     );
@@ -67,6 +71,7 @@ export default async function createApiClient(
     assert(
       isObject(json),
       `Expected \`${host}${requestSpec}\` to be an object, but received ${typeof json}.`,
+      ErrorCode.NonObjectPatreonRequestSpec,
       StatusCode.BadGateway,
       json,
     );
