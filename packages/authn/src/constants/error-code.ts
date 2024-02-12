@@ -10,10 +10,10 @@ enum ErrorCode {
   MissingCode = 21,
   MissingCookieDomain = 16,
   MissingCookies = 7,
-  MissingEnvironment = 2,
-  MissingEnvironmentEnvironment = 3,
+  MissingEnvironmentName = 3,
   MissingHost = 5,
   MissingIP = 6,
+  MissingIsolateEnvironment = 2,
   MissingOAuthUserId = 50,
   MissingPatreonClientID = 17,
   MissingPatreonClientSecret = 18,
@@ -54,8 +54,6 @@ enum ErrorCode {
   PatreonForbidden = 34,
   TooManyRequests = 429,
   Unknown = 1,
-  UnknownCauseWithReturnHref = 55,
-  UnknownErrorWithReturnHref = 54,
   UnknownPatreonOAuthTokenError = 30,
 }
 

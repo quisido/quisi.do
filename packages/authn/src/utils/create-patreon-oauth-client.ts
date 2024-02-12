@@ -19,7 +19,7 @@ let cache: Cache | EmptyCache = {
   secret: null,
 };
 
-export default function createOAuthClient(
+export default function createPatreonOAuthClient(
   id: string,
   secret: string,
 ): OAuthClient {

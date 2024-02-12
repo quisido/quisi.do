@@ -9,12 +9,14 @@ const isErrorCode = (value: unknown): value is ErrorCode =>
 export default function isCause(value: unknown): value is Cause {
   return (
     isObject(value) &&
+    // code
     'code' in value &&
     isErrorCode(value.code) &&
-    'data' in value &&
+    // returnHref
     (!('returnHref' in value) ||
       typeof value.returnHref === 'string' ||
       typeof value.returnHref === 'undefined') &&
+    // status
     'status' in value &&
     typeof value.status === 'number'
   );
