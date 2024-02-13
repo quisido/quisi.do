@@ -264,7 +264,6 @@ export default class FetchOperation extends CloudflareWorkerOperation<
           .prepare(INSERT_INTO_EMAILS_QUERY)
           .bind(email, usersLastRowId)
           .run()
-          // TODO: This needs to be emit and put on /dashboard!
           .then(
             ({
               meta: {

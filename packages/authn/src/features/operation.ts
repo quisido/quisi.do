@@ -2,8 +2,6 @@ import mapMapToRecord from '../modules/map-reduce/map-map-to-record.js';
 import createTraceId from '../utils/create-trace-id.js';
 import since from '../utils/since.js';
 
-// TODO: Add tracing.
-
 export type Emit<
   M extends string = string,
   V extends number = number,
