@@ -28,9 +28,6 @@ enum MetricName {
   NonStringPatreonEmail = 'patreon.email.non-string',
   PatreonRequest = 'request.patreon',
   UnverifiedPatreonEmail = 'patreon.email.unverified',
-
-  // Undefined behavior
-  ExistingReturnHref = 'behavior.undefined.existing-return-href',
 }
 
 export default MetricName;
