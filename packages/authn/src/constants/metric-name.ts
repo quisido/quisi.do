@@ -10,16 +10,27 @@ enum MetricName {
   Login = 'login',
   NotFoundRequest = 'request.404',
   OAuthInserted = 'db.oauth.insert.success',
-  PatreonRequest = 'request.patreon',
   OAuthUserIdSelected = 'db.oauth.user-id.success',
   SetAuthenticationIdUser = 'kv.authn-id_user.set',
   StartRegistration = 'registration.start',
   Success = 'success',
   RobotsTxt = 'robots.txt',
+  UnknownErrorCauseResponse = 'response.error.cause.unknown',
+  UnknownErrorResponse = 'response.error.unknown',
   UserInserted = 'db.users.insert',
 
   // Experiments
   AwaitExperiment = 'experiment.await',
+
+  // Patreon
+  MissingPatreonEmail = 'patreon.email.missing',
+  MissingPatreonEmailVerification = 'patreon.email-verification.missing',
+  NonStringPatreonEmail = 'patreon.email.non-string',
+  PatreonRequest = 'request.patreon',
+  UnverifiedPatreonEmail = 'patreon.email.unverified',
+
+  // Undefined behavior
+  ExistingReturnHref = 'behavior.undefined.existing-return-href',
 }
 
 export default MetricName;
