@@ -1,11 +1,11 @@
 'use client';
 
-import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import { AuthenticationProvider } from '../contexts/authentication.js';
 import useAsyncState from '../modules/use-async-state/index.js';
 import type AuthenticationType from '../types/authentication.js';
-import isObject from '../utils/is-object.js';
 
+/*
 const getWhoAmIUrl = (): string => {
   if (process.env.NODE_ENV === 'development') {
     return 'https://localhost:1098/whoami';
@@ -32,6 +32,7 @@ const whoAmiI = async (): Promise<AuthenticationType> => {
     id,
   };
 };
+*/
 
 export default function AuthenticationFeature({
   children,
@@ -39,10 +40,12 @@ export default function AuthenticationFeature({
   // States
   const state = useAsyncState<AuthenticationType>();
 
+  /*
   const { request } = state;
   useEffect((): void => {
     void request(whoAmiI);
   }, [request]);
+  */
 
   return (
     <AuthenticationProvider value={state}>{children}</AuthenticationProvider>
