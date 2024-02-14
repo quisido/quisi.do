@@ -1,8 +1,6 @@
-/**/.DS_Store
-/.vscode/
-/docs/
-/jest/
-/node_modules/
+/cypress/
+/public/
+/scripts/
 /src/
 /.attw.json
 /.*ignore
@@ -11,5 +9,6 @@
 /*.cpuprofile
 /*.iml
 /*.tsbuildinfo
-/*-*.*.*.tgz
+/lighthouse.*
+/next-env.d.ts
 /tsconfig.*

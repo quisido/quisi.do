@@ -3,12 +3,11 @@
 /jest/
 /node_modules/
 /src/
+/.attw.json
+/.*ignore
+/.*rc.*
+/*.config.*
+/*.cpuprofile
 /*.iml
 /*.tsbuildinfo
-/.eslintignore
-/.eslintrc.*
-/.gitignore
-/.npmignore
-/jest.config.*
-/tsc-output.cpuprofile
 /tsconfig.*

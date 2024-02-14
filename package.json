@@ -34,6 +34,7 @@
     "jest": "jest",
     "lighthouse": "yarn packages/next run lighthouse",
     "next": "yarn packages/next run dev",
+    "pack:dry-run": "yarn workspaces foreach --all --exclude \"@quisi/do\" --interlaced --jobs unlimited --parallel --topological-dev --verbose pack --dry-run",
     "postlighthouse": "yarn packages/next run postlighthouse",
     "prepack": "yarn workspaces foreach --all --exclude \"@quisi/do\" --interlaced --jobs unlimited --parallel --topological-dev --verbose run prepack",
     "prepublish": "concurrently --kill-others-on-fail --names eslint,jest,prepublish,test \"yarn run eslint\" \"yarn run jest\" \"yarn workspaces foreach --all --exclude \\\"@quisi/do\\\" --verbose run prepublish\" \"yarn run test\"",
