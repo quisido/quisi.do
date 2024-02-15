@@ -472,7 +472,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Deploy
-        run: yarn packages/authn run deploy
+        run: yarn packages/authn run production:deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
