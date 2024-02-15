@@ -1,1 +1,1 @@
-export { default } from '../../features/locale-layout';
+export { default } from '../../features/locale-layout/index.js';

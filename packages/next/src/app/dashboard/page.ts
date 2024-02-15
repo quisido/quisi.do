@@ -1,1 +1,1 @@
-export { default, generateStaticParams } from '../[locale]/dashboard/page';
+export { default, generateStaticParams } from '../[locale]/dashboard/page.js';
