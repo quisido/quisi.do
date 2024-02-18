@@ -52,7 +52,7 @@ function Header(): ReactElement {
         </span>
       </div>
       <div>
-        <Link feature="header" href={authenticateHref} title="">
+        <Link feature="header" href={authenticateHref} title="Authenticate">
           Authenticate
         </Link>
       </div>

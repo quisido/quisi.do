@@ -1,8 +1,8 @@
 import { type ReactElement } from 'react';
-import PrivacyPolicy from '../../../features/privacy-policy.js';
+import CookiePolicy from '../../../features/cookie-policy.js';
 
 export { default as generateStaticParams } from '../../../features/generate-locale-static-params.js';
 
-export default function PrivacyPage(): ReactElement {
-  return <PrivacyPolicy />;
+export default function CookiesPage(): ReactElement {
+  return <CookiePolicy />;
 }

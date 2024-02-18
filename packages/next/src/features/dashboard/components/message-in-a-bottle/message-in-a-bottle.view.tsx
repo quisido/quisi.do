@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 import Link from '../../../../components/link/index.js';
-import validateString from '../../../../utils/validate-string.js';
 import newHorizons from '../../../../images/new-horizons.jpg';
+import validateString from '../../../../utils/validate-string.js';
 import useMessageInABottle from './message-in-a-bottle.hook.js';
 import styles from './message-in-a-bottle.module.scss';
 
@@ -13,7 +13,7 @@ export default function MessageInABottle(): ReactElement {
   return (
     <Link
       className={rootClassName}
-      feature="easter-egg/message-in-a-bottle"
+      feature="dashboard/message-in-a-bottle"
       href={newHorizons.src}
       label={label}
       title=""
