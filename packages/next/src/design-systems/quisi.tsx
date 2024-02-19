@@ -2,6 +2,8 @@ import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
 import type DesignSystemProps from '../types/design-system-props.js';
 import Banner from './quisi/banner.js';
 import Button from './quisi/button.js';
+import Div from './quisi/div.js';
+import Header from './quisi/header.js';
 import Link from './quisi/link.js';
 import Section from './quisi/section.js';
 import Theme from './quisi/theme.js';
@@ -68,28 +70,10 @@ export default function Quisido<Card extends object, Row extends object>({
       );
 
     case 'div':
-      return (
-        <Demo type="Div">
-          {JSON.stringify({ ...props, children: undefined })}
-          <br />
-          Children: {props.children}
-        </Demo>
-      );
+      return <Div {...props} />;
 
     case 'header':
-      return (
-        <Demo type="Header">
-          {JSON.stringify({
-            ...props,
-            children: undefined,
-            actions: undefined,
-          })}
-          <br />
-          Actions: {props.actions}
-          <br />
-          Children: {props.children}
-        </Demo>
-      );
+      return <Header {...props} />;
 
     case 'input':
       return <Demo type="Input">{JSON.stringify({ ...props })}</Demo>;
