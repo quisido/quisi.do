@@ -27,7 +27,7 @@ interface Metadata {
   readonly traceId: string;
 }
 
-let MODULE_TIMESTAMP: number = Date.now();
+const MODULE_TIMESTAMP: number = Date.now();
 
 export default class Operation<
   Cause = unknown,
@@ -39,18 +39,14 @@ export default class Operation<
 > {
   protected readonly _parentTraceId: string;
 
-  protected readonly _publicMetadata: Map<string, string | number> = new Map();
+  protected readonly _publicMetadataetadata: Map<string, string | number> =
+    new Map();
 
   protected readonly _startTimestamp: number;
 
   protected readonly _traceId: string = createTraceId();
 
   public constructor(parentTraceId: string) {
-    // As of 2024-02-25, Cloudflare mocks `Date` as `0` until its first run.
-    if (MODULE_TIMESTAMP === 0) {
-      MODULE_TIMESTAMP = Date.now();
-    }
-
     this._parentTraceId = parentTraceId;
     this._startTimestamp = Date.now();
   }
@@ -62,7 +58,7 @@ export default class Operation<
       parentTraceId: this.parentTraceId,
       timestamp: Date.now(),
       traceId: this.traceId,
-      ...mapMapToRecord(this._publicMetadata),
+      ...mapMapToRecord(this._publicMetadataetadata),
     };
   }
 
@@ -75,7 +71,7 @@ export default class Operation<
   }
 
   public addMetadata(key: string, value: string | number): this {
-    this._publicMetadata.set(key, value);
+    this._publicMetadataetadata.set(key, value);
     return this;
   }
 

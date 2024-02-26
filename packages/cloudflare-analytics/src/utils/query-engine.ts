@@ -30,6 +30,8 @@ export default class QueryEngine {
     };
   }
 
+  // TODO: Replace this with the new API:
+  // curl -X POST "https://api.cloudflare.com/client/v4/accounts/<ACCOUNT_ID>/analytics_engine/sql" -H "Authorization: Bearer <TOKEN>" -d "SHOW TABLES"
   public readonly fetch = async (query: string): Promise<Response> => {
     return fetch('https://api.cloudflare.com/client/v4/graphql', {
       body: this.mapQueryToBody(query),

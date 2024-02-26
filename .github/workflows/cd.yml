@@ -26,14 +26,15 @@ jobs:
           format: sarif
           gh-code-scanning-compat: true
           max-allowed-issues: 2147483647
-          output: codacy.sarif
+          output: sarif/codacy.sarif
           verbose: true
-      - name: Upload SARIF
-        if: always()
-        uses: github/codeql-action/upload-sarif@main
-        with:
-          sarif_file: codacy.sarif
-          wait-for-processing: true
+      ## rejecting SARIF, as there are more runs than allowed (22 > 20)
+      # - name: Upload SARIF
+      #   if: always()
+      #   uses: github/codeql-action/upload-sarif@main
+      #   with:
+      #     sarif_file: sarif/codacy.sarif
+      #     wait-for-processing: true
 
   devskim:
     name: DevSkim

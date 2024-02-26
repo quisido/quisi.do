@@ -4,7 +4,7 @@
   "author": "quisi.do <contact@quisi.do>",
   "description": "quisi.do",
   "homepage": "https://quisi.do/",
-  "packageManager": "yarn@4.0.2",
+  "packageManager": "yarn@4.1.0",
   "private": true,
   "repository": "github:quisido/quisi.do",
   "type": "module",
