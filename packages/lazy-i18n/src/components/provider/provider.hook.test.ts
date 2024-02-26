@@ -25,12 +25,10 @@ const asyncLoadTranslationsEffect = async (
 describe('useProvider', (): void => {
   it('should throw an error when the locale does not exist', (): void => {
     expect((): void => {
-      renderHook(useProvider, {
-        initialProps: {
-          locale: EN_US,
-          translationsRecord: {
-            [EN_US]: undefined,
-          },
+      useProvider({
+        locale: EN_US,
+        translationsRecord: {
+          [EN_US]: undefined,
         },
       });
     }).toThrow();
@@ -38,16 +36,14 @@ describe('useProvider', (): void => {
 
   it('should throw an error when the fallback locale does not exist', (): void => {
     expect((): void => {
-      renderHook(useProvider, {
-        initialProps: {
-          fallbackLocale: ES_ES,
-          locale: EN_US,
-          translationsRecord: {
-            [EN_US]: {
-              English: 'English',
-            },
-            [ES_ES]: undefined,
+      useProvider({
+        fallbackLocale: ES_ES,
+        locale: EN_US,
+        translationsRecord: {
+          [EN_US]: {
+            English: 'English',
           },
+          [ES_ES]: undefined,
         },
       });
     }).toThrow();

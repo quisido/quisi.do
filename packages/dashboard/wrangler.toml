@@ -1,0 +1,30 @@
+analytics_engine_datasets = [{ binding = "AUTHN", dataset = "AUTHN_DEV" }]
+compatibility_date = "2023-10-30"
+main = "src/index.ts"
+name = "quisido-dashboard-dev"
+r2_buckets = [{ binding = 'DASHBOARD', bucket_name = 'quisido-dashboard' }]
+tsconfig = "./tsconfig.json"
+
+[dev]
+local_protocol = "https"
+port = 9778              # parseInt('dashboard', 36) % 9999
+
+[env.production]
+analytics_engine_datasets = [{ binding = "AUTHN", dataset = "AUTHN" }]
+name = "quisido-dashboard"
+r2_buckets = [{ binding = 'DASHBOARD', bucket_name = 'quisido-dashboard' }]
+
+[env.production.vars]
+ENVIRONMENT = "production"
+
+[env.staging]
+analytics_engine_datasets = [{ binding = "AUTHN", dataset = "AUTHN_STAGING" }]
+name = "quisido-dashboard-staging"
+r2_buckets = [{ binding = 'DASHBOARD', bucket_name = 'quisido-dashboard' }]
+workers_dev = true
+
+[env.staging.vars]
+ENVIRONMENT = "staging"
+
+[placement]
+mode = "smart"

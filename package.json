@@ -4,7 +4,7 @@
   "author": "quisi.do <contact@quisi.do>",
   "description": "quisi.do",
   "homepage": "https://quisi.do/",
-  "packageManager": "yarn@4.0.2",
+  "packageManager": "yarn@4.1.0",
   "private": true,
   "repository": "github:quisido/quisi.do",
   "type": "module",
@@ -44,7 +44,7 @@
     "serve": "yarn packages/next run serve",
     "start": "echo \"Please use either `yarn run dev` or `yarn run serve` instead.\" && exit 1",
     "test": "monorepo-template-test",
-    "up": "yarn up \"@!(monorepo-template)/*\" \"!(aws-rum-react|fullstory-react|lazy-i18n|mock-next-router|number-format-react|react-datadog|sentry-react|unknown2string|use-awsui-table-item-description|use-next-awsui|use-offline|use-shallow-memo)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode",
+    "up": "yarn up \"@!(monorepo-template)/*\" \"!(aws-rum-react|fullstory-react|lazy-i18n|m7e|mock-next-router|number-format-react|react-datadog|sentry-react|unknown2string|use-offline|use-shallow-memo)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode",
     "whoami": "yarn packages/whoami run dev"
   },
   "workspaces": [

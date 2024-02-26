@@ -1,0 +1,8 @@
+/**/*.md
+/dist/
+/jest/
+/node_modules/
+/*.tsbuildinfo
+/*-*.*.*.tgz
+/LICENSE
+/tsc-output.cpuprofile

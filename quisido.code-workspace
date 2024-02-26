@@ -4,97 +4,82 @@
       "name": "$root",
       "path": "."
     },
-
     {
       "name": "quisi.do",
       "path": "packages/next"
     },
-
     {
       "name": "quisi.do CDK",
       "path": "packages/cdk"
     },
-
     {
       "name": "Authentication",
       "path": "packages/authn"
     },
-
     {
       "name": "Cloudflare Analytics",
       "path": "packages/cloudflare-analytics"
     },
-
+    {
+      "name": "Create Cloudflare app",
+      "path": "packages/create-cloudflare-app"
+    },
+    {
+      "name": "Dashboard",
+      "path": "packages/dashboard"
+    },
     {
       "name": "Who am I?",
       "path": "packages/whoami"
     },
-
     {
       "name": "aws-rum-react",
       "path": "packages/aws-rum-react"
     },
-
     {
       "name": "fullstory-react",
       "path": "packages/fullstory-react"
     },
-
     {
       "name": "lazy-i18n",
       "path": "packages/lazy-i18n"
     },
-
+    {
+      "name": "m7e",
+      "path": "packages/m7e"
+    },
     {
       "name": "mock-next-router",
       "path": "packages/mock-next-router"
     },
-
     {
       "name": "number-format-react",
       "path": "packages/number-format-react"
     },
-
     {
       "name": "react-datadog",
       "path": "packages/react-datadog"
     },
-
     {
       "name": "sentry-react",
       "path": "packages/sentry-react"
     },
-
     {
       "name": "test",
       "path": "packages/test"
     },
-
     {
       "name": "tree-logger",
       "path": "packages/tree-logger"
     },
-
     {
       "name": "unknown2string",
       "path": "packages/unknown2string"
     },
-
-    {
-      "name": "use-awsui-table-item-description",
-      "path": "packages/use-awsui-table-item-description"
-    },
-
-    {
-      "name": "use-next-awsui",
-      "path": "packages/use-next-awsui"
-    },
-
     {
       "name": "use-offline",
       "path": "packages/use-offline"
     },
-
     {
       "name": "use-shallow-memo",
       "path": "packages/use-shallow-memo"
