@@ -2,7 +2,7 @@
 import type Theme from '../types/theme.js';
 
 export default {
-  backgroundColor: '#fffcf8',
+  background: [0xff, 0xfc, 0xf8],
   displayFontFamily: '"Noto Sans Display", "Noto Sans", Helvetica, sans-serif',
   displayFontWeight: 700,
   foreground: [0x00, 0x00, 0x00],

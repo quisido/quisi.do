@@ -107,7 +107,7 @@ export default function Button({
 }: Props): ReactElement {
   // Contexts
   const emit = useEmit();
-  const { backgroundColor, primaryDark, primaryFontWeight, primaryHex } =
+  const { backgroundHex, primaryDark, primaryFontWeight, primaryHex } =
     useTheme();
 
   // States
@@ -156,10 +156,10 @@ export default function Button({
         }}
         style={{
           backgroundColor: primaryHex,
-          borderColor: backgroundColor,
+          borderColor: backgroundHex,
           borderRadius: 1,
           borderImageSlice: '16',
-          borderImageSource: `repeating-linear-gradient(45deg, ${backgroundColor}, ${backgroundColor} 2px, ${primaryHex} 1px, ${primaryHex} 16px)`,
+          borderImageSource: `repeating-linear-gradient(45deg, ${backgroundHex}, ${backgroundHex} 2px, ${primaryHex} 1px, ${primaryHex} 16px)`,
           borderImageRepeat: 'round',
           borderImageWidth: 2,
           borderStyle: 'dashed',

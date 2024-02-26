@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
 export default interface Theme {
-  readonly backgroundColor: string;
+  readonly background: readonly [number, number, number];
   readonly displayFontFamily: string;
   readonly displayFontWeight: 400 | 700;
   readonly foreground: readonly [number, number, number];

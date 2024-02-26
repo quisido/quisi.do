@@ -7,6 +7,7 @@ import mapRgbToHex from '../utils/map-rgb-to-hex.js';
 import useThemeAlpha from './use-theme-alpha.js';
 
 interface State extends ThemeType {
+  readonly backgroundHex: string;
   readonly foregroundAlpha: (opacity: number) => string;
   readonly foregroundHex: string;
   readonly primaryAlpha: (opacity: number) => string;
@@ -25,6 +26,7 @@ export default function useTheme(): State {
   const { foreground, primary, secondary } = theme;
   return {
     ...theme,
+    backgroundHex: mapRgbToHex(theme.background),
     foregroundAlpha: useThemeAlpha(...foreground),
     foregroundHex: mapRgbToHex(foreground),
     primaryAlpha: useThemeAlpha(...primary),
