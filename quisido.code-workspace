@@ -21,10 +21,6 @@
       "path": "packages/cloudflare-analytics"
     },
     {
-      "name": "Create Cloudflare app",
-      "path": "packages/create-cloudflare-app"
-    },
-    {
       "name": "Dashboard",
       "path": "packages/dashboard"
     },
