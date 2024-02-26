@@ -18,11 +18,7 @@
     "whoami": "wrangler whoami"
   },
   "dependencies": {
-    "cookie": "^0.6.0",
-    "form-urlencoded": "^2.0.4",
-    "jsonapi-datastore": "^0.4.0-beta",
-    "patreon": "^0.4.1",
-    "unknown2string": "workspace:^"
+    "cookie": "^0.6.0"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.13.2",

@@ -4706,7 +4706,6 @@ __metadata:
     patreon: "npm:^0.4.1"
     ts-jest: "npm:^29.1.1"
     typescript: "npm:^5.3.2"
-    unknown2string: "workspace:^"
     wrangler: "npm:^3.17.1"
   languageName: unknown
   linkType: soft
@@ -4876,13 +4875,9 @@ __metadata:
     "@types/cookie": "npm:^0"
     "@types/jest": "npm:^29.5.10"
     cookie: "npm:^0.6.0"
-    form-urlencoded: "npm:^2.0.4"
     jest: "npm:^29.7.0"
-    jsonapi-datastore: "npm:^0.4.0-beta"
-    patreon: "npm:^0.4.1"
     ts-jest: "npm:^29.1.1"
     typescript: "npm:^5.3.2"
-    unknown2string: "workspace:^"
     wrangler: "npm:^3.17.1"
   languageName: unknown
   linkType: soft

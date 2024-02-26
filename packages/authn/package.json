@@ -37,8 +37,7 @@
     "form-urlencoded": "^2.0.4",
     "jsonapi-datastore": "^0.4.0-beta",
     "m7e": "workspace:^",
-    "patreon": "^0.4.1",
-    "unknown2string": "workspace:^"
+    "patreon": "^0.4.1"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.13.2",
