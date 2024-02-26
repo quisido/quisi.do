@@ -21,6 +21,10 @@
       "path": "packages/cloudflare-analytics"
     },
     {
+      "name": "Create Cloudflare app",
+      "path": "packages/create-cloudflare-app"
+    },
+    {
       "name": "Dashboard",
       "path": "packages/dashboard"
     },
@@ -39,6 +43,10 @@
     {
       "name": "lazy-i18n",
       "path": "packages/lazy-i18n"
+    },
+    {
+      "name": "m7e",
+      "path": "packages/m7e"
     },
     {
       "name": "mock-next-router",
@@ -67,14 +75,6 @@
     {
       "name": "unknown2string",
       "path": "packages/unknown2string"
-    },
-    {
-      "name": "use-awsui-table-item-description",
-      "path": "packages/use-awsui-table-item-description"
-    },
-    {
-      "name": "use-next-awsui",
-      "path": "packages/use-next-awsui"
     },
     {
       "name": "use-offline",

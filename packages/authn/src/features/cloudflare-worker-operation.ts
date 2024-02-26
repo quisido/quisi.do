@@ -13,30 +13,6 @@ export default class CloudflareWorkerOperation<
 
   public constructor(parentTraceId: string) {
     super(parentTraceId);
-    this.setEmitter(
-      (
-        name: MetricName,
-        value: MetricValue | null,
-        dimensions: MetricDimensions,
-      ): void => {
-        if (typeof this._analyticsEngineDataset === 'undefined') {
-          super._emit(name, value, dimensions);
-          return;
-        }
-
-        const valueDoubles: readonly number[] = value === null ? [] : [value];
-        const { blobs, doubles } = mapDimensionsToDataPoint({
-          ...this.publicMetadata,
-          ...dimensions,
-        });
-
-        this._analyticsEngineDataset.writeDataPoint({
-          blobs,
-          indexes: [name],
-          doubles: [...valueDoubles, ...doubles],
-        });
-      },
-    );
   }
 
   public setAnalyticsEngineDataset(
@@ -44,5 +20,28 @@ export default class CloudflareWorkerOperation<
   ): this {
     this._analyticsEngineDataset = analyticsEngineDataset;
     return this;
+  }
+
+  protected override _emit(
+    name: MetricName,
+    value: MetricValue | null,
+    dimensions: MetricDimensions,
+  ): void {
+    if (typeof this._analyticsEngineDataset === 'undefined') {
+      super._emit(name, value, dimensions);
+      return;
+    }
+
+    const valueDoubles: readonly number[] = value === null ? [] : [value];
+    const { blobs, doubles } = mapDimensionsToDataPoint({
+      ...this.publicMetadata,
+      ...dimensions,
+    });
+
+    this._analyticsEngineDataset.writeDataPoint({
+      blobs,
+      indexes: [name],
+      doubles: [...valueDoubles, ...doubles],
+    });
   }
 }

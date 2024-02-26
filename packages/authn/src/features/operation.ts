@@ -1,4 +1,4 @@
-import mapMapToRecord from '../modules/map-reduce/map-map-to-record.js';
+import { mapMapToRecord } from 'm7e';
 import createTraceId from '../utils/create-trace-id.js';
 
 export type Emit<
@@ -99,6 +99,12 @@ export default class Operation<
 
   public emit(
     name: MetricName,
+    value?: MetricValue,
+    dimensions?: MetricDimensions,
+  ): void;
+  public emit(name: MetricName, dimensions?: MetricDimensions): void;
+  public emit(
+    name: MetricName,
     valueParam?: MetricValue | MetricDimensions,
     dimensionsParam?: MetricDimensions,
   ): void {
@@ -123,13 +129,6 @@ export default class Operation<
       ...this.publicMetadata,
       error: err,
     });
-  }
-
-  public setEmitter(
-    emit: Emit<MetricName, MetricValue, MetricDimensions>,
-  ): this {
-    this._emit = emit;
-    return this;
   }
 
   protected _emit(

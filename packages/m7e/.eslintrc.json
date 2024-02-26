@@ -1,0 +1,15 @@
+{
+  "parserOptions": {
+    "extraFileExtensions": [".json"],
+    "project": ["./tsconfig.eslint.json"],
+    "warnOnUnsupportedTypeScriptVersion": false,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+
+  "rules": {
+    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/prefer-readonly-parameter-types": "off"
+  }
+}

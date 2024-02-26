@@ -1,6 +1,7 @@
 import { parse } from 'cookie';
 import formUrlEncoded from 'form-urlencoded';
 import { JsonApiDataStore } from 'jsonapi-datastore';
+import { mapEntriesToRecord } from 'm7e';
 import EPOCH_SECONDS_OFFSET from '../constants/epoch-seconds-offset.js';
 import ErrorCode from '../constants/error-code.js';
 import MetricName from '../constants/metric-name.js';
@@ -9,7 +10,6 @@ import PatreonGender from '../constants/patreon-gender.js';
 import StatusCode from '../constants/status-code.js';
 import { MILLISECONDS_PER_SECOND } from '../constants/time.js';
 import USER_AGENT from '../constants/user-agent.js';
-import mapEntriesToRecord from '../modules/map-reduce/map-entries-to-record.js';
 import type Cause from '../types/cause.js';
 import type OAuthUser from '../types/oauth-user.js';
 import createThrottler from '../utils/create-throttler.js';

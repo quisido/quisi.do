@@ -1,6 +1,0 @@
-/dist/
-/jest/
-/*.iml
-/*.tsbuildinfo
-/*-*.*.*.tgz
-/tsc-output.cpuprofile
