@@ -266,7 +266,7 @@ jobs:
           name: prepublish-applications
           path: packages/*/jest/
 
-  # Stage 4: github-pages, npm, opensource-registry, sentry-release, wrangler-deploy
+  # Stage 4: github-pages, npm, opensource-registry, sentry-release
   datadog-sourcemaps:
     name: Datadog sourcemaps
     needs: [lighthouse, prepublish-applications]
@@ -446,69 +446,7 @@ jobs:
           sourcemaps: build
           version: ${{ github.sha }}
 
-  wrangler-deploy-authn:
-    name: Wrangler deploy Authentication
-    needs: [lighthouse, prepublish-applications]
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Deploy
-        run: yarn packages/authn run production:deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
-
-  wrangler-deploy-cloudflare-analytics:
-    name: Wrangler deploy Cloudflare Analytics
-    needs: [lighthouse, prepublish-applications]
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Deploy
-        run: yarn packages/cloudflare-analytics run deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
-
-  # Stage 5: cloudflare-purge, github-packages
+  # Stage 5: cloudflare-purge, github-packages, wrangler-deploy-*
   cloudflare-purge:
     name: Cloudflare purge
     needs: github-pages
@@ -587,6 +525,68 @@ jobs:
             npmScopes.${{ github.repository_owner }}.npmPublishRegistry \
             'https://npm.pkg.github.com';
           yarn run publish;
+
+  wrangler-deploy-authn:
+    name: Wrangler deploy Authentication
+    needs: [lighthouse, npm, prepublish-applications]
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Deploy
+        run: yarn packages/authn run production:deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
+
+  wrangler-deploy-cloudflare-analytics:
+    name: Wrangler deploy Cloudflare Analytics
+    needs: [lighthouse, npm, prepublish-applications]
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Deploy
+        run: yarn packages/cloudflare-analytics run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
   # Stage 6: neuralegion
   neuralegion:
