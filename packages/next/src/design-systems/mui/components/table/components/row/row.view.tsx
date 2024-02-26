@@ -1,6 +1,6 @@
-import { styled } from '@mui/material/styles';
 import MuiCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import { styled } from '@mui/material/styles';
 import { type ReactElement } from 'react';
 import mapComponentToPropMapper from '../../../../../../utils/map-component-to-prop-mapper.js';
 import validateString from '../../../../../../utils/validate-string.js';
@@ -11,9 +11,7 @@ import styles from './row.module.scss';
 const rootDescribedClassName: string = validateString(styles['described']);
 const mapCellPropsToComponent = mapComponentToPropMapper(Cell);
 const rootClassName: string = validateString(styles['root']);
-const descriptionCellClassName: string = validateString(
-  styles['descriptionCell'],
-);
+const descriptionClassName: string = validateString(styles['description']);
 
 const describedClassNames: readonly string[] = [
   rootClassName,
@@ -45,10 +43,7 @@ export default function MuiTableRow({
           {cellProps.map(mapCellPropsToComponent)}
         </DescribedStyledRow>
         <DescribedStyledRow className={rootClassName}>
-          <MuiCell
-            className={descriptionCellClassName}
-            colSpan={cellProps.length}
-          >
+          <MuiCell className={descriptionClassName} colSpan={cellProps.length}>
             <Description />
           </MuiCell>
         </DescribedStyledRow>

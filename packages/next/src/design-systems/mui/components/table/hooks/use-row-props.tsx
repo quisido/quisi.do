@@ -1,7 +1,12 @@
 /* eslint-disable react/no-multi-comp */
-import { type Attributes, type ComponentType, type ReactElement } from 'react';
-import { useCallback, useMemo } from 'react';
+import {
+  type ComponentType,
+  type ReactElement,
+  useCallback,
+  useMemo,
+} from 'react';
 import type Column from '../../../../../types/table-column.js';
+import type { WithKey } from '../../../../../types/with-key.js';
 import type CellProps from '../types/cell-props.js';
 import type RowProps from '../types/row-props.js';
 
@@ -17,13 +22,13 @@ export default function useMuiTableRowProps<Item extends object>({
   Description,
   columns,
   items,
-}: Readonly<Props<Item>>): readonly (Required<Attributes> & RowProps)[] {
+}: Readonly<Props<Item>>): readonly WithKey<RowProps>[] {
   const mapItemToProps = useCallback(
-    (item: Item, itemIndex: number): Required<Attributes> & RowProps => {
+    (item: Item, itemIndex: number): WithKey<RowProps> => {
       const mapColumnToCellProps = (
         { CellContent }: Column<Item>,
         columnIndex: number,
-      ): CellProps & Required<Attributes> => {
+      ): WithKey<CellProps> => {
         return {
           align: columnIndex === FIRST_INDEX ? 'left' : 'right',
           key: columnIndex,
@@ -33,7 +38,7 @@ export default function useMuiTableRowProps<Item extends object>({
         };
       };
 
-      const props: Required<Attributes> & RowProps = {
+      const props: WithKey<RowProps> = {
         cellProps: columns.map(mapColumnToCellProps),
         key: itemIndex,
       };
@@ -52,7 +57,7 @@ export default function useMuiTableRowProps<Item extends object>({
     [Description, columns],
   );
 
-  return useMemo((): readonly (Required<Attributes> & RowProps)[] => {
+  return useMemo((): readonly WithKey<RowProps>[] => {
     return items.map(mapItemToProps);
   }, [items, mapItemToProps]);
 }

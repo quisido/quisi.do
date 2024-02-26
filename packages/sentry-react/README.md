@@ -109,7 +109,6 @@ Type _(optional)_:
 ) => void`
 ```
 
-
 This callback fires when the error boundary unmounts.
 
 ### `showErrorBoundaryDialog`

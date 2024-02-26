@@ -1,4 +1,5 @@
-import { type Attributes, type ComponentType, useMemo } from 'react';
+import { type ComponentType, useMemo } from 'react';
+import type { WithKey } from '../../../../types/with-key.js';
 import { type Props as CardProps } from './components/card/index.js';
 
 interface Props<Item extends object> {
@@ -10,7 +11,7 @@ interface Props<Item extends object> {
 }
 
 interface State<Item extends object> {
-  readonly cardProps: readonly (CardProps<Item> & Required<Attributes>)[];
+  readonly cardProps: readonly WithKey<CardProps<Item>>[];
 }
 
 export default function useMuiCards<Item extends object>({
@@ -21,11 +22,10 @@ export default function useMuiCards<Item extends object>({
   items,
 }: Readonly<Props<Item>>): State<Item> {
   return {
-    cardProps: useMemo((): readonly (CardProps<Item> &
-      Required<Attributes>)[] => {
+    cardProps: useMemo((): readonly WithKey<CardProps<Item>>[] => {
       const mapItemToCardProps = (
         item: Readonly<Item>,
-      ): CardProps<Item> & Required<Attributes> => ({
+      ): WithKey<CardProps<Item>> => ({
         Content: CardContent,
         Footer: CardFooter,
         Header: CardHeader,

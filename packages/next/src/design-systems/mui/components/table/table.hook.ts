@@ -1,7 +1,6 @@
 import { type IconButtonProps } from '@mui/material/IconButton';
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import {
-  type Attributes,
   type ChangeEvent,
   type ComponentType,
   type MouseEvent,
@@ -9,6 +8,7 @@ import {
 } from 'react';
 import type Column from '../../../../types/table-column.js';
 import type RowsPerPageOption from '../../../../types/table-rows-per-page-option.js';
+import type { WithKey } from '../../../../types/with-key.js';
 import useRowProps from './hooks/use-row-props.js';
 import type HeadCellProps from './types/head-cell-props.js';
 import type RowProps from './types/row-props.js';
@@ -31,10 +31,10 @@ interface Props<Item> {
 
 interface State {
   readonly backIconButtonProps: Partial<IconButtonProps>;
-  readonly headCellProps: (HeadCellProps & Required<Attributes>)[];
+  readonly headCellProps: WithKey<HeadCellProps>[];
   readonly nextIconButtonProps: Partial<IconButtonProps>;
   readonly page: number;
-  readonly rowProps: readonly (Required<Attributes> & RowProps)[];
+  readonly rowProps: readonly WithKey<RowProps>[];
   readonly rowsPerPageOptions?: MuiRowsPerPageOption[] | undefined;
   readonly showToolbar: boolean;
   readonly handlePageChange:
@@ -107,11 +107,11 @@ export default function useMuiTable<Item extends object>({
       };
     }, [onPageChange, onRowsPerPageChange]),
 
-    headCellProps: useMemo((): (HeadCellProps & Required<Attributes>)[] => {
+    headCellProps: useMemo((): WithKey<HeadCellProps>[] => {
       const mapColumnToHeadCellProps = (
         column: Column<Item>,
         columnIndex: number,
-      ): HeadCellProps & Required<Attributes> => ({
+      ): WithKey<HeadCellProps> => ({
         ...mapColumnToHeadCellPartialProps(column, columnIndex),
         active: columnIndex === sortColumnIndex,
         ascending: sortAscending,
