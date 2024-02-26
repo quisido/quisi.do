@@ -552,8 +552,6 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: yarn install --immutable
-      - name: Install latest workspace dependencies
-        run: yarn packages/authn add m7e@latest
       - name: Deploy
         run: yarn packages/authn run production:deploy
         env:
