@@ -84,18 +84,31 @@ This callback fires when the error boundary mounts.
 
 ### `onErrorBoundaryReset`
 
-Type:
-`(error: Error | null, componentStack: string | null, eventId: string | null) => void`
-_optional_
+Type _(optional)_:
+
+```ts
+(
+  error: Error | null,
+  componentStack: string | null,
+  eventId: string | null
+) => void
+```
 
 This callback fires if and when the `resetError` prop is called from the
 [`ErrorBoundaryFallback` component](#errorboundaryfallback).
 
 ### `onErrorBoundaryUnmount`
 
-Type:
-`(error: Error | null, componentStack: string | null, eventId: string | null) => void`
-_optional_
+Type _(optional)_:
+
+```ts
+(
+  error: Error | null,
+  componentStack: string | null,
+  eventId: string | null
+) => void`
+```
+
 
 This callback fires when the error boundary unmounts.
 
