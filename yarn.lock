@@ -4702,7 +4702,7 @@ __metadata:
     form-urlencoded: "npm:^2.0.4"
     jest: "npm:^29.7.0"
     jsonapi-datastore: "npm:^0.4.0-beta"
-    m7e: "workspace:^"
+    m7e: "npm:^1.0.0"
     patreon: "npm:^0.4.1"
     ts-jest: "npm:^29.1.1"
     typescript: "npm:^5.3.2"
@@ -14060,7 +14060,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"m7e@workspace:^, m7e@workspace:packages/m7e":
+"m7e@npm:^1.0.0, m7e@workspace:packages/m7e":
   version: 0.0.0-use.local
   resolution: "m7e@workspace:packages/m7e"
   dependencies:
