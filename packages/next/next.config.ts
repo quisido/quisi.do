@@ -33,6 +33,11 @@ export default withNextJsBundleAnalyzer({
   },
 
   env: {
+    CLOUD_PLATFORM: validateString(process.env['CLOUD_PLATFORM']),
+    CLOUD_PROVIDER: validateString(process.env['CLOUD_PROVIDER']),
+    DEPLOYMENT_ENVIRONMENT: validateString(
+      process.env['DEPLOYMENT_ENVIRONMENT'],
+    ),
     PATREON_OAUTH_CLIENT_ID: validateString(
       process.env['PATREON_OAUTH_CLIENT_ID'],
     ),

@@ -136,7 +136,7 @@ export default function Button({
 }
 
 #${id}:not(:focus-visible) {
-  outline-color: ${primaryHex};
+  outline-color: ${backgroundHex};
   outline-style: solid;
   outline-width: ${OUTLINE_WIDTH}px;
 }
@@ -155,15 +155,18 @@ export default function Button({
           });
         }}
         style={{
-          backgroundColor: primaryHex,
-          borderColor: backgroundHex,
+          backgroundColor: backgroundHex,
+          borderColor: primaryHex,
           borderRadius: 1,
-          borderImageSlice: '16',
-          borderImageSource: `repeating-linear-gradient(45deg, ${backgroundHex}, ${backgroundHex} 2px, ${primaryHex} 1px, ${primaryHex} 16px)`,
+          borderImageSlice: '4',
+          borderImageSource: `repeating-linear-gradient(45deg, ${primaryHex}, ${primaryHex} 1px, ${backgroundHex} 1px, ${backgroundHex} 4px)`,
           borderImageRepeat: 'round',
           borderImageWidth: 2,
           borderStyle: 'dashed',
           borderWidth: 2,
+          boxShadow: `${primaryDark}80 ${OUTLINE_WIDTH - RAISED_OFFSET}px ${
+            OUTLINE_WIDTH - RAISED_OFFSET
+          }px 4px`,
           color: primaryDark,
           cursor: 'pointer',
           display: 'inline-block',
@@ -181,11 +184,6 @@ export default function Button({
           transform: 'rotate(-1deg)',
           transitionDelay: '0s',
           transitionDuration: '150ms',
-          transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-          userSelect: 'none',
-          boxShadow: `${primaryDark}80 ${OUTLINE_WIDTH - RAISED_OFFSET}px ${
-            OUTLINE_WIDTH - RAISED_OFFSET
-          }px 4px`,
           transitionProperty: [
             'box-shadow',
             'margin-bottom',
@@ -193,6 +191,8 @@ export default function Button({
             'margin-right',
             'margin-top',
           ].join(', '),
+          transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+          userSelect: 'none',
         }}
       >
         {children}
