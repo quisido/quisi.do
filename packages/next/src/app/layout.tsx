@@ -25,10 +25,15 @@ import Preconnect from '../features/preconnect.js';
 import Sentry from '../features/sentry/index.js';
 import SessionIdProvider from '../features/session-id-provider.js';
 import ThemeFeature from '../features/theme.js';
+import TracerProviderProvider from '../features/tracer-provider-provider.js';
 import withWrappers from '../hocs/with-wrappers/index.js';
 import Clarity from '../modules/react-clarity/index.js';
 export { default as metadata } from '../constants/root-metadata.js';
 export { default as viewport } from '../constants/root-viewport.js';
+
+const HEX = '0123456789abcdef';
+const SPAN_ID_LENGTH = 16;
+const TRACE_ID_LENGTH = 32;
 
 const BODY_FONT_FAMILIES: readonly string[] = [
   '-apple-system',
@@ -96,9 +101,24 @@ body {
 }
 `;
 
+const getRandomHex = (): string =>
+  HEX.charAt(Math.floor(Math.random() * HEX.length));
+
+const SPAN_ID: string = new Array(SPAN_ID_LENGTH)
+  .fill(null)
+  .map(getRandomHex)
+  .join('');
+
+const TRACE_ID: string = new Array(TRACE_ID_LENGTH)
+  .fill(null)
+  .map(getRandomHex)
+  .join('');
+
+const TRACEPARENT = `00-${TRACE_ID}-${SPAN_ID}-00`;
+
 /**
- * We do not put wrappers around `<body>` itself, because we do not want to
- *   inadvertently render HTML elements around `<body>`.
+ *   We do not put wrappers around `<body>` itself, because we do not want to
+ * inadvertently render HTML elements around `<body>`.
  */
 const Contexts: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,
@@ -111,6 +131,7 @@ const Contexts: ComponentType<PropsWithChildren> = withWrappers(
   SessionIdProvider,
   ThemeFeature,
   DesignSystemTheme,
+  TracerProviderProvider,
   // Turnstile,
 )(Fragment);
 
@@ -123,6 +144,7 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
         <Clarity tag="jn26o3oqm1" />
         <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
         <meta charSet="utf-8" />
+        <meta name="traceparent" content={TRACEPARENT} />
         <style
           type="text/css"
           dangerouslySetInnerHTML={{
