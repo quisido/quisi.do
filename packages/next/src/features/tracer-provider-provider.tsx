@@ -1,9 +1,5 @@
 'use client';
 
-import type { TracerProvider } from '@opentelemetry/api';
-import { getWebAutoInstrumentations } from '@opentelemetry/auto-instrumentations-web';
-import { registerInstrumentations } from '@opentelemetry/instrumentation';
-import type { EventName } from '@opentelemetry/instrumentation-user-interaction';
 import {
   type PropsWithChildren,
   type ReactElement,
@@ -14,6 +10,7 @@ import { useHostname } from '../contexts/hostname.js';
 import TracerProviderProvider from '../modules/react-tracer/index.js';
 import WebTracerProvider from './web-tracer-provider.js';
 
+/*
 const EVENT_NAMES: readonly EventName[] = [
   'auxclick',
   'click',
@@ -37,18 +34,23 @@ const EVENT_NAMES: readonly EventName[] = [
   'submit',
   'toggle',
 ];
+*/
 
 export default function TracerProviderProviderImpl({
   children,
 }: PropsWithChildren): ReactElement {
+  // Contexts
   const hostname: string = useHostname();
 
-  const value: TracerProvider = useMemo(
-    (): TracerProvider => new WebTracerProvider(hostname),
+  // States
+  const value: WebTracerProvider = useMemo(
+    (): WebTracerProvider => new WebTracerProvider(hostname),
     [hostname],
   );
 
-  useEffect((): void => {
+  // Effects
+  useEffect((): VoidFunction => {
+    /*
     registerInstrumentations({
       // meterProvider?: MeterProvider;
       // loggerProvider?: LoggerProvider;
@@ -64,6 +66,11 @@ export default function TracerProviderProviderImpl({
         }),
       ],
     });
+    */
+
+    return (): void => {
+      void value.shutdown();
+    };
   }, [value]);
 
   return (

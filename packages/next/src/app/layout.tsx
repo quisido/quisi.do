@@ -12,13 +12,13 @@ import FullStory from '../components/fullstory/index.js';
 import ReportUri from '../components/report-uri/index.js';
 import DesignSystemTheme from '../components/theme/index.js';
 import Authentication from '../features/authentication.js';
-import DarkModeProvider from '../features/dark-mode-provider.js';
 import DesignSystemProvider from '../features/design-system-provider.js';
 import Footer from '../features/footer.js';
 import GoogleAnalytics from '../features/google-analytics/index.js';
 import GoogleFonts from '../features/google-fonts.js';
 import Header from '../features/header.js';
 import HostnameProvider from '../features/hostname-provider.js';
+import LayoutStyle from '../features/layout-style.js';
 import NotificationsProvider from '../features/notifications-provider.js';
 import Notifications from '../features/notifications.js';
 import Preconnect from '../features/preconnect.js';
@@ -31,91 +31,6 @@ import Clarity from '../modules/react-clarity/index.js';
 export { default as metadata } from '../constants/root-metadata.js';
 export { default as viewport } from '../constants/root-viewport.js';
 
-const HEX = '0123456789abcdef';
-const SPAN_ID_LENGTH = 16;
-const TRACE_ID_LENGTH = 32;
-
-const BODY_FONT_FAMILIES: readonly string[] = [
-  '-apple-system',
-  'BlinkMacSystemFont',
-  '"Segoe UI"',
-  'Roboto',
-  'Oxygen',
-  'Ubuntu',
-  'Cantarell',
-  '"Open Sans"',
-  '"Helvetica Neue"',
-  'Helvetica',
-  'Arial',
-  'sans-serif',
-  '"Apple Color Emoji"',
-  '"Segoe UI Emoji"',
-  '"Segoe UI Symbol"',
-];
-
-const LAYOUT_CSS = `
-body {
-  -moz-osx-font-smoothing: grayscale;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  -ms-text-size-adjust: none;
-  -webkit-font-feature-settings: "pnum";
-  -webkit-font-smoothing: antialiased;
-  -webkit-overflow-scrolling: touch;
-  -webkit-text-size-adjust: none;
-  box-sizing: border-box;
-  color: #000000;
-  font-family: ${BODY_FONT_FAMILIES.join(', ')};
-  font-feature-settings: "pnum";
-  font-size: 16px;
-  font-smooth: always;
-  font-variant-numeric: proportional-nums;
-  letter-spacing: 0;
-  line-height: 1.5;
-  margin-bottom: 0;
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  min-height: 100%;
-  overflow-y: scroll;
-  padding-bottom: 0;
-  padding-top: 0;
-  text-rendering: optimizeLegibility;
-  text-size-adjust: none;
-
-  @media (max-width: 6in) {
-    padding-left: 0.5in;
-    padding-right: 0.5in;
-  }
-
-  @media (min-width: 6in) {
-    padding-left: 1in;
-    padding-right: 1in;
-  }
-
-  /*
-  @media (prefers-color-scheme: dark) {
-    background-color: #202020;
-    color: #ffffff;
-  }
-  */
-}
-`;
-
-const getRandomHex = (): string =>
-  HEX.charAt(Math.floor(Math.random() * HEX.length));
-
-const SPAN_ID: string = new Array(SPAN_ID_LENGTH)
-  .fill(null)
-  .map(getRandomHex)
-  .join('');
-
-const TRACE_ID: string = new Array(TRACE_ID_LENGTH)
-  .fill(null)
-  .map(getRandomHex)
-  .join('');
-
-const TRACEPARENT = `00-${TRACE_ID}-${SPAN_ID}-00`;
-
 /**
  *   We do not put wrappers around `<body>` itself, because we do not want to
  * inadvertently render HTML elements around `<body>`.
@@ -123,7 +38,7 @@ const TRACEPARENT = `00-${TRACE_ID}-${SPAN_ID}-00`;
 const Contexts: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,
   CloudWatchRUM,
-  DarkModeProvider,
+  // DarkModeProvider,
   DesignSystemProvider,
   HostnameProvider,
   NotificationsProvider,
@@ -139,18 +54,14 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
   return (
     <html lang="en">
       <head>
-        <ReportUri />
-        <Preconnect />
+        <LayoutStyle />
         <Clarity tag="jn26o3oqm1" />
         <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
+        <GoogleFonts />
         <meta charSet="utf-8" />
-        <meta name="traceparent" content={TRACEPARENT} />
-        <style
-          type="text/css"
-          dangerouslySetInnerHTML={{
-            __html: LAYOUT_CSS,
-          }}
-        />
+        <Preconnect />
+        <ReportUri />
+        {/* <Traceparent /> */}
         {/*
         <script
           referrerPolicy="origin"
@@ -158,7 +69,6 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
           type="text/javascript"
         />
         */}
-        <GoogleFonts />
       </head>
       <body>
         <noscript>JavaScript is required.</noscript>

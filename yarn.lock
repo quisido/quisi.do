@@ -4383,7 +4383,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/core@npm:1.22.0":
+"@opentelemetry/core@npm:1.22.0, @opentelemetry/core@npm:^1.22.0":
   version: 1.22.0
   resolution: "@opentelemetry/core@npm:1.22.0"
   dependencies:
@@ -4601,7 +4601,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/sdk-metrics@npm:1.22.0":
+"@opentelemetry/sdk-metrics@npm:1.22.0, @opentelemetry/sdk-metrics@npm:^1.22.0":
   version: 1.22.0
   resolution: "@opentelemetry/sdk-metrics@npm:1.22.0"
   dependencies:
@@ -4970,6 +4970,7 @@ __metadata:
     "@opentelemetry/api": "npm:^1.8.0"
     "@opentelemetry/auto-instrumentations-web": "npm:^0.36.0"
     "@opentelemetry/context-zone": "npm:^1.22.0"
+    "@opentelemetry/core": "npm:^1.22.0"
     "@opentelemetry/exporter-trace-otlp-http": "npm:^0.49.1"
     "@opentelemetry/instrumentation": "npm:^0.49.1"
     "@opentelemetry/instrumentation-document-load": "npm:^0.35.0"
@@ -4977,6 +4978,7 @@ __metadata:
     "@opentelemetry/instrumentation-user-interaction": "npm:^0.35.0"
     "@opentelemetry/instrumentation-xml-http-request": "npm:^0.49.1"
     "@opentelemetry/resources": "npm:^1.22.0"
+    "@opentelemetry/sdk-metrics": "npm:^1.22.0"
     "@opentelemetry/sdk-trace-web": "npm:^1.22.0"
     "@opentelemetry/semantic-conventions": "npm:^1.22.0"
     "@react-aria/button": "npm:^3.9.0"

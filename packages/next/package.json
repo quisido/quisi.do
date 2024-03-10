@@ -105,6 +105,8 @@
     "@monorepo-template/ignore-cypress-dependency-logs": "^1.0.0",
     "@next/bundle-analyzer": "patch:@next/bundle-analyzer@npm%3A14.0.3#~/.yarn/patches/@next-bundle-analyzer-npm-14.0.3-27eabe728b.patch",
     "@opentelemetry/auto-instrumentations-web": "^0.36.0",
+    "@opentelemetry/core": "^1.22.0",
+    "@opentelemetry/sdk-metrics": "^1.22.0",
     "@react-aria/link": "^3.6.3",
     "@sentry/types": "^7.81.1",
     "@testing-library/react": "^14.1.2",

@@ -1,5 +1,4 @@
 import { mapMapToRecord } from 'm7e';
-import createTraceId from '../utils/create-trace-id.js';
 
 export type Emit<
   M extends string = string,
@@ -22,12 +21,11 @@ interface Metadata {
   readonly [key: string]: string | number;
   readonly moduleTimestamp: number;
   readonly operationTimestamp: number;
-  readonly parentTraceId: string;
   readonly timestamp: number;
   readonly traceId: string;
 }
 
-let MODULE_TIMESTAMP: number = Date.now();
+const UNINITIALIZED = 0;
 
 export default class Operation<
   Cause = unknown,
@@ -37,37 +35,32 @@ export default class Operation<
     Record<string, number | string>
   >,
 > {
-  protected readonly _parentTraceId: string;
+  private static INITIALIZATION_TIMESTAMP = Date.now();
 
   protected readonly _publicMetadata: Map<string, string | number> = new Map();
 
   protected readonly _startTimestamp: number;
 
-  protected readonly _traceId: string = createTraceId();
+  protected readonly _traceId: string;
 
-  public constructor(parentTraceId: string) {
+  public constructor(traceId: string) {
     // As of 2024-02-25, Cloudflare mocks `Date` as `0` until its first run.
-    if (MODULE_TIMESTAMP === 0) {
-      MODULE_TIMESTAMP = Date.now();
+    if (Operation.INITIALIZATION_TIMESTAMP === UNINITIALIZED) {
+      Operation.INITIALIZATION_TIMESTAMP = Date.now();
     }
 
-    this._parentTraceId = parentTraceId;
     this._startTimestamp = Date.now();
+    this._traceId = traceId;
   }
 
   public get publicMetadata(): Metadata {
     return {
-      moduleTimestamp: MODULE_TIMESTAMP,
+      moduleTimestamp: Operation.INITIALIZATION_TIMESTAMP,
       operationTimestamp: this._startTimestamp,
-      parentTraceId: this.parentTraceId,
       timestamp: Date.now(),
       traceId: this.traceId,
       ...mapMapToRecord(this._publicMetadata),
     };
-  }
-
-  public get parentTraceId(): string {
-    return this._parentTraceId;
   }
 
   public get traceId(): string {

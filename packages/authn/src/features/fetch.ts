@@ -23,7 +23,6 @@ import FetchOperation from './fetch-operation.js';
 
 const AWAIT_EXPERIMENT_ODDS = 0.5;
 const FAILURE = 2;
-const isolateTraceId: string = createTraceId();
 const OFF = 0;
 const SUCCESS = 1;
 
@@ -32,11 +31,8 @@ export default (async function fetch(
   env: unknown,
   ctx: ExecutionContext,
 ): Promise<Response> {
-  const operation: FetchOperation = new FetchOperation(
-    isolateTraceId,
-    request,
-    ctx,
-  );
+  const traceId: string = createTraceId();
+  const operation: FetchOperation = new FetchOperation(traceId, request, ctx);
 
   try {
     operation.assert(isObject(env), 'The isolate environment is missing.', {

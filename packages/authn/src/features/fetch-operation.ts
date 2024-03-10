@@ -99,12 +99,8 @@ export default class FetchOperation extends CloudflareWorkerOperation<
 
   private _returnHref: string | undefined;
 
-  public constructor(
-    isolateTraceId: string,
-    request: Request,
-    ctx: ExecutionContext,
-  ) {
-    super(isolateTraceId);
+  public constructor(traceId: string, request: Request, ctx: ExecutionContext) {
+    super(traceId);
     this._ctx = ctx;
     this._request = request;
   }

@@ -11,8 +11,8 @@ export default class CloudflareWorkerOperation<
 > extends Operation<Cause, MetricName, MetricValue, MetricDimensions> {
   private _analyticsEngineDataset: AnalyticsEngineDataset | undefined;
 
-  public constructor(parentTraceId: string) {
-    super(parentTraceId);
+  public constructor(traceId: string) {
+    super(traceId);
   }
 
   public setAnalyticsEngineDataset(
