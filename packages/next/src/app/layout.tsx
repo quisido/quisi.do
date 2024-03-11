@@ -12,6 +12,7 @@ import FullStory from '../components/fullstory/index.js';
 import ReportUri from '../components/report-uri/index.js';
 import DesignSystemTheme from '../components/theme/index.js';
 import Authentication from '../features/authentication.js';
+import DarkModeProvider from '../features/dark-mode-provider.js';
 import DesignSystemProvider from '../features/design-system-provider.js';
 import Footer from '../features/footer.js';
 import GoogleAnalytics from '../features/google-analytics/index.js';
@@ -38,7 +39,7 @@ export { default as viewport } from '../constants/root-viewport.js';
 const Contexts: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,
   CloudWatchRUM,
-  // DarkModeProvider,
+  DarkModeProvider,
   DesignSystemProvider,
   HostnameProvider,
   NotificationsProvider,

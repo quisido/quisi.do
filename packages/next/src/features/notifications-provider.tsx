@@ -41,7 +41,12 @@ function NotificationsProviderFeature({
   const initialNotifications: readonly WithKey<Notification>[] =
     useMemo((): readonly WithKey<Notification>[] => {
       const newInitialNotifications: WithKey<Notification>[] = [];
-      if (showQuisidoDotCom !== 'false') {
+
+      /**
+       *   TODO: When ready to display the notification, set this to
+       * `!== 'false'`.
+       */
+      if (showQuisidoDotCom === 'true') {
         newInitialNotifications.push({
           icon: '🧑‍🎨',
           key: 'quisido.com',
@@ -52,6 +57,7 @@ function NotificationsProviderFeature({
           },
         });
       }
+
       return newInitialNotifications;
     }, [setShowQuisidoDotCom, showQuisidoDotCom]);
 

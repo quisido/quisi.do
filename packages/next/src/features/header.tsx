@@ -18,7 +18,7 @@ function Header(): ReactElement {
         marginBottom: '1em',
         marginLeft: 'auto',
         marginRight: 'auto',
-        marginTop: '1em',
+        marginTop: '1rem',
         maxWidth: '60em',
         minWidth: 320,
       }}
@@ -29,7 +29,7 @@ function Header(): ReactElement {
             fontFamily: displayFontFamily,
             fontSize: '1.5em',
             fontWeight: displayFontWeight,
-            lineHeight: '1.5em',
+            lineHeight: '2rem',
             marginBottom: 0,
             marginLeft: 0,
             marginRight: 0,
@@ -44,7 +44,8 @@ function Header(): ReactElement {
           style={{
             display: 'block',
             fontSize: '0.75em',
-            marginTop: '-0.5em',
+            marginBottom: '0.5rem',
+            marginTop: '-0.5rem',
             paddingLeft: '1.5em',
           }}
         >

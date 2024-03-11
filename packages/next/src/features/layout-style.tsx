@@ -27,15 +27,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
   -webkit-text-size-adjust: none;
+  background-color: #f0f0f0;
   box-sizing: border-box;
   color: #000000;
   font-family: ${BODY_FONT_FAMILIES.join(', ')};
   font-feature-settings: "pnum";
-  font-size: 16px;
+  font-size: 14px;
   font-smooth: always;
   font-variant-numeric: proportional-nums;
   letter-spacing: 0;
-  line-height: 1.5;
+  line-height: 1rem;
   margin-bottom: 0;
   margin-left: 0;
   margin-right: 0;
@@ -57,12 +58,17 @@ body {
     padding-right: 1in;
   }
 
-  /*
   @media (prefers-color-scheme: dark) {
     background-color: #202020;
     color: #ffffff;
   }
-  */
+}
+
+html {
+  font-size: 16px;
+  height: 100%;
+  max-height: 100%;
+  min-height: 100%;
 }
 `;
 
