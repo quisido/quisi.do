@@ -1,0 +1,13 @@
+diff --git a/types-ts3.8/transaction.d.ts b/types-ts3.8/transaction.d.ts
+index af8fc6dd85e05cfa13072ca4df4a81857de3743a..aa0babea4a495f582b6aba2376d5e0dd1acbbbee 100644
+--- a/types-ts3.8/transaction.d.ts
++++ b/types-ts3.8/transaction.d.ts
+@@ -57,7 +57,7 @@ export interface Transaction extends TransactionContext, Pick<Span, Exclude<keyo
+      * Was this transaction chosen to be sent as part of the sample?
+      * @deprecated Use `spanIsSampled(transaction)` instead.
+      */
+-    sampled?: boolean;
++    sampled?: boolean | undefined;
+     /**
+      * @inheritDoc
+      */

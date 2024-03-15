@@ -21,6 +21,30 @@
     "packages/": true,
     "yarn.lock": true
   },
+  "search.exclude": {
+    "**/.git/": true,
+    "**/.idea/": true,
+    "**/.next/": true,
+    "**/.nyc_output/": true,
+    "**/.yarn/": true,
+    "**/build/": true,
+    "**/coverage/": true,
+    "**/cypress/coverage/": true,
+    "**/cypress/downloads/": true,
+    "**/cypress/screenshots/": true,
+    "**/cypress/videos/": true,
+    "**/dist/": true,
+    "**/jest/": true,
+    "**/node_modules/": true,
+    "**/sarif/": true,
+    "**/.attach_pid*": true,
+    "**/.yarn": true,
+    "**/.pnp.*": true,
+    "**/*.cpuprofile": true,
+    "**/*.tsbuildinfo": true,
+    "**/lighthouse.report.*": true,
+    "**/yarn.lock": true
+  },
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
