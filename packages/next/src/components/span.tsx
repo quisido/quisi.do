@@ -1,5 +1,5 @@
 import { type ReactElement, type ReactNode } from 'react';
-import DesignSystem from '../design-system/index.js';
+import DesignSystem from './design-system/index.js';
 
 export interface Props {
   readonly children: ReactNode;

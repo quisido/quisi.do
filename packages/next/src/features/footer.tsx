@@ -4,7 +4,12 @@ import styles from './footer.module.scss';
 
 function Footer(): ReactElement | null {
   return (
-    <footer style={{ paddingTop: '1em', textAlign: 'center' }}>
+    <footer
+      style={{
+        paddingTop: '1rem',
+        textAlign: 'center',
+      }}
+    >
       <ul className={styles['list']}>
         <li>
           <Link

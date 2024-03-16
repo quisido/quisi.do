@@ -12,7 +12,11 @@
     80
   ],
   "files.exclude": {
-    ".yarn/": true,
+    ".yarn/__virtual__/": true,
+    ".yarn/cache/": true,
+    ".yarn/sdks/": true,
+    ".yarn/unplugged/": true,
+    ".yarn/install-state.gz": true,
     "jest/": true,
     "node_modules/": true,
     "sarif/": true,

@@ -32,7 +32,7 @@ body {
   color: #000000;
   font-family: ${BODY_FONT_FAMILIES.join(', ')};
   font-feature-settings: "pnum";
-  font-size: 14px;
+  font-size: 12px;
   font-smooth: always;
   font-variant-numeric: proportional-nums;
   letter-spacing: 0;
@@ -65,7 +65,7 @@ body {
 }
 
 html {
-  font-size: 16px;
+  font-size: 20px;
   height: 100%;
   max-height: 100%;
   min-height: 100%;

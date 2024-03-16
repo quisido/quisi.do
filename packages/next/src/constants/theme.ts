@@ -6,8 +6,7 @@ export default {
   displayFontFamily: '"Noto Sans Display", "Noto Sans", Helvetica, sans-serif',
   displayFontWeight: 700,
   foreground: [0x00, 0x00, 0x00],
-  primary: [0xf0, 0xa0, 0xc8],
-  primaryDark: '#604050',
+  primary: [0xd0, 0x80, 0xa8],
   primaryFontWeight: 700,
   secondary: [0xf0, 0xc8, 0xa0],
 } satisfies Theme;

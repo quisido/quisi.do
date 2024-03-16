@@ -59,6 +59,7 @@ export default function Link({
       }}
       style={{
         color: primaryHex,
+        textDecoration: 'none',
       }}
     >
       {children}

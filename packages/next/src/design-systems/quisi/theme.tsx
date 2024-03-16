@@ -42,33 +42,31 @@ export default function Theme({ children }: PropsWithChildren): ReactElement {
     const previousColor: string | null = style.getPropertyValue('color');
     const previousBackgroundColor: string | null =
       style.getPropertyValue('background-color');
-    const previousBackgroundImage: string | null =
-      style.getPropertyValue('background-image');
 
     style.setProperty('background-color', backgroundHex);
-    style.setProperty('background-image', backgroundImage);
     style.setProperty('color', foregroundHex);
     return (): void => {
       style.setProperty('background-color', previousBackgroundColor);
-      style.setProperty('background-image', previousBackgroundImage);
       style.setProperty('color', previousColor);
     };
-  }, [backgroundHex, backgroundImage, foregroundHex]);
+  }, [backgroundHex, foregroundHex]);
 
   return (
     <div
       style={{
-        borderColor: secondaryAlpha(BORDER_COLOR_OPACITY),
-        borderStyle: 'double',
+        backgroundImage,
+        borderColor: backgroundHex,
+        borderStyle: 'solid',
         borderWidth: '0 6px',
         boxSizing: 'border-box',
         margin: '0 auto',
         maxWidth: '60em',
         minWidth: 320,
-        paddingBottom: 0,
-        paddingLeft: '1em',
-        paddingRight: '1em',
-        paddingTop: '3rem', // 0.5in
+        outlineColor: secondaryAlpha(BORDER_COLOR_OPACITY),
+        outlineOffset: -6,
+        outlineStyle: 'double',
+        outlineWidth: '0 6px',
+        paddingBottom: '1rem',
       }}
     >
       {children}

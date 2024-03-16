@@ -13,7 +13,6 @@ import ThemeContext from '../contexts/theme.js';
 //   displayFontWeight: 700,
 //   foregroundColor: flatDarkVisualStudio['editor.foreground'],
 //   primary: [200, 240, 160],
-//   primaryDark: flatDarkVisualStudio['comment.foreground'],
 //   primaryFontWeight: 700,
 //   displayFontFamily: '"Noto Sans Display", "Noto Sans", Helvetica, sans-serif',
 // });

@@ -107,8 +107,7 @@ export default function Button({
 }: Props): ReactElement {
   // Contexts
   const emit = useEmit();
-  const { backgroundHex, primaryDark, primaryFontWeight, primaryHex } =
-    useTheme();
+  const { backgroundHex, primaryFontWeight, primaryHex } = useTheme();
 
   // States
   const id: string = useElementId();
@@ -118,7 +117,6 @@ export default function Button({
       <style type="text/css">{`
 #${id}:active,
 #${id}:active:hover {
-  box-shadow: ${primaryDark}C0 ${OUTLINE_WIDTH}px ${OUTLINE_WIDTH}px 4px !important;
   margin-bottom: ${OUTLINE_WIDTH}px !important;
   margin-left: ${OUTLINE_WIDTH}px !important;
   margin-right: ${OUTLINE_WIDTH}px !important;
@@ -126,9 +124,6 @@ export default function Button({
 }
 
 #${id}:hover {
-  box-shadow: ${primaryDark}A0 ${OUTLINE_WIDTH - HOVER_OFFSET}px ${
-    OUTLINE_WIDTH - HOVER_OFFSET
-  }px 4px !important;
   margin-bottom: ${OUTLINE_WIDTH - HOVER_OFFSET}px !important;
   margin-left: ${OUTLINE_WIDTH + HOVER_OFFSET}px !important;
   margin-right: ${OUTLINE_WIDTH - HOVER_OFFSET}px !important;
@@ -164,10 +159,6 @@ export default function Button({
           borderImageWidth: 2,
           borderStyle: 'dashed',
           borderWidth: 2,
-          boxShadow: `${primaryDark}80 ${OUTLINE_WIDTH - RAISED_OFFSET}px ${
-            OUTLINE_WIDTH - RAISED_OFFSET
-          }px 4px`,
-          color: primaryDark,
           cursor: 'pointer',
           display: 'inline-block',
           fontFamily: '"Noto Sans", sans-serif',
