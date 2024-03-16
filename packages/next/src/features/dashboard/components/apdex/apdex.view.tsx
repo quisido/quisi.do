@@ -3,11 +3,11 @@ import { type ReactElement } from 'react';
 import Div from '../../../../components/div/index.js';
 import LoadingIcon from '../../../../components/loading-icon/index.js';
 import Section from '../../../../components/section.js';
-import Span from '../../../../components/span/index.js';
-import PieChart from '../apdex-pie-chart/index.js';
-import LineChart from '../apdex-line-chart/index.js';
-import mapRecordToSum from '../../utils/map-record-to-sum.js';
+import Span from '../../../../components/span.js';
 import createApdexScore from '../../utils/create-apdex-score.js';
+import mapRecordToSum from '../../utils/map-record-to-sum.js';
+import LineChart from '../apdex-line-chart/index.js';
+import PieChart from '../apdex-pie-chart/index.js';
 
 export interface Props {
   readonly error: string | null;

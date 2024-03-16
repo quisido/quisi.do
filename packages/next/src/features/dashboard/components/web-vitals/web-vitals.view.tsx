@@ -4,7 +4,7 @@ import Div from '../../../../components/div/index.js';
 import Gauge from '../../../../components/gauge/index.js';
 import LoadingIcon from '../../../../components/loading-icon/index.js';
 import Section from '../../../../components/section.js';
-import Span from '../../../../components/span/index.js';
+import Span from '../../../../components/span.js';
 import Status from '../../constants/status.js';
 import mapStatusToEmoji from '../../utils/map-status-to-emoji.js';
 

@@ -10,7 +10,7 @@ import { type Props as InputProps } from '../components/input/index.js';
 import { type Props as LinkProps } from '../components/link/index.js';
 import { type Props as SectionProps } from '../components/section.js';
 import { type Props as SelectProps } from '../components/select/index.js';
-import { type Props as SpanProps } from '../components/span/index.js';
+import { type Props as SpanProps } from '../components/span.js';
 import { type Props as TableProps } from '../components/table/index.js';
 
 export default interface DesignSystemPropsRecord<
