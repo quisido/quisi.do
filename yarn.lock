@@ -5023,7 +5023,7 @@ __metadata:
     "@sentry/fullstory": "npm:^2.1.0"
     "@sentry/react": "npm:^7.107.0"
     "@sentry/tracing": "npm:^7.107.0"
-    "@sentry/types": "npm:^7.107.0"
+    "@sentry/types": "patch:@sentry/types@npm%3A7.107.0#~/.yarn/patches/@sentry-types-npm-7.107.0-a994f84978.patch"
     "@testing-library/react": "npm:^14.2.1"
     "@types/jest": "npm:^29.5.12"
     "@types/mixpanel-browser": "npm:^2.49.0"
@@ -5493,17 +5493,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/types@npm:6.19.7":
-  version: 6.19.7
-  resolution: "@sentry/types@npm:6.19.7"
-  checksum: 10c0/b428ee58ca5f1587a5bdcf5ae19de0116f5c73eba056872b3a54ff2221d0f5166f3ef28867a8563f00d3da08e55ed3e24baad207b4d1d918596867f99c0ec705
-  languageName: node
-  linkType: hard
-
-"@sentry/types@npm:7.107.0, @sentry/types@npm:^7.107.0":
+"@sentry/types@npm:7.107.0":
   version: 7.107.0
   resolution: "@sentry/types@npm:7.107.0"
   checksum: 10c0/08a2b95a27106a974a42a1e2462c979b8d61d9ae63cef0d7bd36eb37603009e1e8e9bb181586d1a449b7fe52a4b696b01a4228ac13083a7c4088774f16c89421
+  languageName: node
+  linkType: hard
+
+"@sentry/types@patch:@sentry/types@npm%3A7.107.0#~/.yarn/patches/@sentry-types-npm-7.107.0-a994f84978.patch":
+  version: 7.107.0
+  resolution: "@sentry/types@patch:@sentry/types@npm%3A7.107.0#~/.yarn/patches/@sentry-types-npm-7.107.0-a994f84978.patch::version=7.107.0&hash=38375f"
+  checksum: 10c0/65424bbc751808e71b3c0efd2c885eaa34280de6becbc6c0df923ee75696426377c2d64b3f0d9dac045972d3d4ee70102c0b032d09ec611abb38221e69785cc3
   languageName: node
   linkType: hard
 
@@ -13620,7 +13620,7 @@ __metadata:
 "jsonapi-datastore@npm:^0.4.0-beta":
   version: 0.4.0-beta
   resolution: "jsonapi-datastore@npm:0.4.0-beta"
-  checksum: 10c0/a23a8d7262e300afbc1280062e24e2d213c8a0f535db015e4d51b46637692638770e0ab93b3e7f58daf0bc8899dce9a1ca3df74e2e561ddb4870acd4dfcb6d52
+  checksum: 10c0/341922e7878a61e5d6f72ccf85e99a23f01c5f42ad78bd15fe05e8c6c1e126749e2b99beb4f70535ad1bcc381d52f34b4195611f3455e96712fd5cd7a805edbe
   languageName: node
   linkType: hard
 
@@ -16772,7 +16772,7 @@ __metadata:
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@sentry/browser": "npm:^7.107.0"
     "@sentry/react": "npm:^7.107.0"
-    "@sentry/types": "npm:^7.107.0"
+    "@sentry/types": "patch:@sentry/types@npm%3A7.107.0#~/.yarn/patches/@sentry-types-npm-7.107.0-a994f84978.patch"
     "@testing-library/react": "npm:^14.2.1"
     "@types/babel__core": "npm:^7.20.5"
     "@types/babel__preset-env": "npm:^7.9.6"

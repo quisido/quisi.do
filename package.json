@@ -77,6 +77,8 @@
     "typescript": "^5.4.2"
   },
   "resolutions": {
-    "buildcheck@npm:~0.0.6": "patch:buildcheck@npm%3A0.0.6#~/.yarn/patches/buildcheck-npm-0.0.6-46e0f23ecf.patch"
+    "buildcheck@npm:~0.0.6": "patch:buildcheck@npm%3A0.0.6#~/.yarn/patches/buildcheck-npm-0.0.6-46e0f23ecf.patch",
+    "@sentry/types@npm:7.107.0": "patch:@sentry/types@npm%3A7.107.0#~/.yarn/patches/@sentry-types-npm-7.107.0-a994f84978.patch",
+    "@sentry/types@npm:6.19.7": "patch:@sentry/types@npm%3A7.107.0#~/.yarn/patches/@sentry-types-npm-7.107.0-a994f84978.patch"
   }
 }
