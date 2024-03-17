@@ -4742,7 +4742,7 @@ __metadata:
 "@opentelemetry/semantic-conventions@npm:1.22.0, @opentelemetry/semantic-conventions@npm:^1.0.0, @opentelemetry/semantic-conventions@npm:^1.22.0":
   version: 1.22.0
   resolution: "@opentelemetry/semantic-conventions@npm:1.22.0"
-  checksum: 10c0/da0b227c0aefec31d81496a184bfbc4651e9a610e1357bd93d83136b72924f8f234e9e1ea2d0115f5831f28d1329e6a06d0c9d11476a056a0c224af64d726c2d
+  checksum: 10c0/35d4aae14111fd65becf667fb935aef673f820dba0e160cdf02dfee19b8eb169a8ba3f7db4db8a40d82a15989f465faf085b4ba41895ba2c89f8e631f5e53f08
   languageName: node
   linkType: hard
 
@@ -5023,7 +5023,7 @@ __metadata:
     "@sentry/fullstory": "npm:^2.1.0"
     "@sentry/react": "npm:^7.107.0"
     "@sentry/tracing": "npm:^7.107.0"
-    "@sentry/types": "patch:@sentry/types@npm%3A7.107.0#~/.yarn/patches/@sentry-types-npm-7.107.0-a994f84978.patch"
+    "@sentry/types": "npm:^7.107.0"
     "@testing-library/react": "npm:^14.2.1"
     "@types/jest": "npm:^29.5.12"
     "@types/mixpanel-browser": "npm:^2.49.0"
@@ -5493,17 +5493,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/types@npm:7.107.0":
-  version: 7.107.0
-  resolution: "@sentry/types@npm:7.107.0"
-  checksum: 10c0/7e823aa4e3c7fe4bc4cefe9097075e88a6615b2b54d08311a3f3b3a994eb153a1ddcf0072bcfd32b71eecde36160e5b6c7738119af08ac8002e30d41a0e332bf
+"@sentry/types@npm:6.19.7":
+  version: 6.19.7
+  resolution: "@sentry/types@npm:6.19.7"
+  checksum: 10c0/b428ee58ca5f1587a5bdcf5ae19de0116f5c73eba056872b3a54ff2221d0f5166f3ef28867a8563f00d3da08e55ed3e24baad207b4d1d918596867f99c0ec705
   languageName: node
   linkType: hard
 
-"@sentry/types@patch:@sentry/types@npm%3A7.107.0#~/.yarn/patches/@sentry-types-npm-7.107.0-a994f84978.patch":
+"@sentry/types@npm:7.107.0, @sentry/types@npm:^7.107.0":
   version: 7.107.0
-  resolution: "@sentry/types@patch:@sentry/types@npm%3A7.107.0#~/.yarn/patches/@sentry-types-npm-7.107.0-a994f84978.patch::version=7.107.0&hash=840205"
-  checksum: 10c0/1f162f02385cfb5c7bc795ee4314fa400560a8cf272e02b4de8044bbdcfc5cae1ece571d9f73a73cf7f2d0959d9ff0264d056a2c78d68002e5e77e5423d70716
+  resolution: "@sentry/types@npm:7.107.0"
+  checksum: 10c0/08a2b95a27106a974a42a1e2462c979b8d61d9ae63cef0d7bd36eb37603009e1e8e9bb181586d1a449b7fe52a4b696b01a4228ac13083a7c4088774f16c89421
   languageName: node
   linkType: hard
 
@@ -8381,10 +8381,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buildcheck@npm:~0.0.6":
+"buildcheck@npm:0.0.6":
   version: 0.0.6
   resolution: "buildcheck@npm:0.0.6"
   checksum: 10c0/8cbdb89f41bc484b8325f4828db4135b206a0dffb641eb6cdb2b7022483c45dd0e5aac6d820c9a67bdd2caab3a02c76d7ceec7bd9ec494b5a2270d2806b01a76
+  languageName: node
+  linkType: hard
+
+"buildcheck@patch:buildcheck@npm%3A0.0.6#~/.yarn/patches/buildcheck-npm-0.0.6-46e0f23ecf.patch":
+  version: 0.0.6
+  resolution: "buildcheck@patch:buildcheck@npm%3A0.0.6#~/.yarn/patches/buildcheck-npm-0.0.6-46e0f23ecf.patch::version=0.0.6&hash=f18ac0"
+  checksum: 10c0/2fff57e139f3a795dd10cf084f64da3bfa71a1ea7243894ae8fc6ecb8791496118df032359a49d06b081066186aae22312e2273dbfb9d86dd0e1f80236e4346b
   languageName: node
   linkType: hard
 
@@ -16765,7 +16772,7 @@ __metadata:
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@sentry/browser": "npm:^7.107.0"
     "@sentry/react": "npm:^7.107.0"
-    "@sentry/types": "patch:@sentry/types@npm%3A7.107.0#~/.yarn/patches/@sentry-types-npm-7.107.0-a994f84978.patch"
+    "@sentry/types": "npm:^7.107.0"
     "@testing-library/react": "npm:^14.2.1"
     "@types/babel__core": "npm:^7.20.5"
     "@types/babel__preset-env": "npm:^7.9.6"

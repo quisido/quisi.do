@@ -35,7 +35,7 @@
   "dependencies": {
     "@sentry/browser": "^7.107.0",
     "@sentry/react": "^7.107.0",
-    "@sentry/types": "patch:@sentry/types@npm%3A7.107.0#~/.yarn/patches/@sentry-types-npm-7.107.0-a994f84978.patch",
+    "@sentry/types": "^7.107.0",
     "use-shallow-memo": "workspace:^"
   },
   "devDependencies": {
@@ -48,7 +48,6 @@
     "@monorepo-template/eslint-config": "^1.0.7",
     "@monorepo-template/jest-transformer": "^1.0.2",
     "@sentry/react": "^7.107.0",
-    "@sentry/types": "patch:@sentry/types@npm%3A7.107.0#~/.yarn/patches/@sentry-types-npm-7.107.0-a994f84978.patch",
     "@testing-library/react": "^14.2.1",
     "@types/babel__core": "^7.20.5",
     "@types/babel__preset-env": "^7.9.6",
