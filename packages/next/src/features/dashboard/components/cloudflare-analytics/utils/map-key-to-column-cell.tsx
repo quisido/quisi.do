@@ -1,5 +1,5 @@
 import { type FunctionComponent, type ReactElement } from 'react';
-import Div from '../../../../../components/div/index.js';
+import Div from '../../../../../components/div.js';
 import Quantity from '../../../../../components/quantity/index.js';
 import Change from '../components/change/index.js';
 

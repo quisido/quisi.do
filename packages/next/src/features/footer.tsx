@@ -29,6 +29,11 @@ function Footer(): ReactElement | null {
             privacy policy
           </Link>
         </li>
+        <li>
+          <Link feature="footer" href="/tos/" title="quisi.do terms of service">
+            terms of service
+          </Link>
+        </li>
       </ul>
     </footer>
   );

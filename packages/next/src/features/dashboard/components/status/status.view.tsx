@@ -1,7 +1,7 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import mapUnknownToString from 'unknown2string';
-import Div from '../../../../components/div/index.js';
+import Div from '../../../../components/div.js';
 import Link from '../../../../components/link/index.js';
 import Section from '../../../../components/section.js';
 import validateString from '../../../../utils/validate-string.js';

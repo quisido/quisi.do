@@ -4,7 +4,7 @@ import { type Props as ButtonProps } from '../components/button.js';
 import { type Props as CardsProps } from '../components/cards/index.js';
 import { type Props as CheckboxProps } from '../components/checkbox/index.js';
 import { type Props as ChipProps } from '../components/chip/index.js';
-import { type Props as DivProps } from '../components/div/index.js';
+import { type Props as DivProps } from '../components/div.js';
 import { type Props as HeaderProps } from '../components/header/index.js';
 import { type Props as InputProps } from '../components/input/index.js';
 import { type Props as LinkProps } from '../components/link/index.js';

@@ -7,8 +7,14 @@ import {
 import useTheme from '../../hooks/use-theme.js';
 import map from '../../utils/map.js';
 
+const BORDER_BOX_MIN_WIDTH = 320;
 const BORDER_COLOR_OPACITY = 0.15;
+const BORDER_X_COUNT = 2;
+const BORDER_WIDTH = 6;
 const MAX_COLOR = 255;
+
+const CONTENT_BOX_MIN_WIDTH =
+  BORDER_BOX_MIN_WIDTH - BORDER_WIDTH * BORDER_X_COUNT;
 
 const invert = (color: number): number => MAX_COLOR - color;
 
@@ -55,17 +61,20 @@ export default function Theme({ children }: PropsWithChildren): ReactElement {
     <div
       style={{
         backgroundImage,
+        borderBottomWidth: 0,
         borderColor: backgroundHex,
+        borderLeftWidth: BORDER_WIDTH,
+        borderRightWidth: BORDER_WIDTH,
         borderStyle: 'solid',
-        borderWidth: '0 6px',
-        boxSizing: 'border-box',
+        borderTopWidth: 0,
+        boxSizing: 'content-box',
         margin: '0 auto',
         maxWidth: '60em',
-        minWidth: 320,
+        minWidth: CONTENT_BOX_MIN_WIDTH,
         outlineColor: secondaryAlpha(BORDER_COLOR_OPACITY),
-        outlineOffset: -6,
+        outlineOffset: -BORDER_WIDTH,
         outlineStyle: 'double',
-        outlineWidth: '0 6px',
+        outlineWidth: `0 ${BORDER_WIDTH}px`,
         paddingBottom: '1rem',
       }}
     >

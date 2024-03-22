@@ -14,14 +14,15 @@ function Header(): ReactElement {
       style={{
         alignItems: 'center',
         backgroundColor: backgroundHex,
+        boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'row',
         marginLeft: 'auto',
         marginRight: 'auto',
         maxWidth: '60em',
-        minWidth: 320,
         paddingLeft: '1rem',
         paddingRight: '1rem',
+        width: '100%',
       }}
     >
       <div style={{ flexGrow: 1 }}>

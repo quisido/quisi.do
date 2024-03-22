@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import Div from '../../../components/div/index.js';
+import Div from '../../../components/div.js';
 import Header from '../../../components/header/index.js';
 import Section from '../../../components/section.js';
 

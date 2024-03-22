@@ -2,6 +2,7 @@ import { type ReactElement, useLayoutEffect, useState } from 'react';
 import { type Props } from '../../components/section.js';
 import useTheme from '../../hooks/use-theme.js';
 import createRandomNumberGenerator from '../../utils/create-random-number-generator.js';
+import Header from './header.js';
 
 const INITIAL_ROTATION = 0;
 const MAXIMUM_ROTATION = -2;
@@ -34,12 +35,12 @@ export default function QuisiSection({
       style={{
         boxSizing: 'border-box',
         color: foregroundHex,
-        overflow: 'hidden',
         marginBottom: '1rem',
+        marginTop: '1rem',
         maxHeight: '100%',
-        minHeight: '5rem',
         maxWidth: '100%',
-        padding: '1rem 2em',
+        paddingLeft: '2em',
+        paddingRight: '2em',
         position: 'relative',
         transform: `rotate(${rotation}deg)`,
         width: '100%',
@@ -50,15 +51,7 @@ export default function QuisiSection({
           transform: `rotate(${NEGATIVE * rotation}deg)`,
         }}
       >
-        {typeof header !== 'undefined' && (
-          <header
-            style={{
-              paddingBottom: '1rem',
-            }}
-          >
-            {header}
-          </header>
-        )}
+        {typeof header !== 'undefined' && <Header>{header}</Header>}
         <div>{children}</div>
         {typeof actions !== 'undefined' && (
           <footer
