@@ -5,6 +5,8 @@
     "out/": true,
     "lighthouse-0.devtoolslog.json": true,
     "lighthouse-0.trace.json": true,
+    "lighthouse.config.cjs": true,
+    "lighthouse.config.js": true,
     "lighthouse.report.html": true,
     "lighthouse.report.json": true,
     "next-env.d.ts": true,
