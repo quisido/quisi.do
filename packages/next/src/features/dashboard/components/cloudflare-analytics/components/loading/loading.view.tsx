@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import LoadingIcon from '../../../../../../components/loading-icon/index.js';
+import LoadingIcon from '../../../../../../components/loading-icon.js';
 import Section from '../../../../../../components/section.js';
 
 export default function CloudflareAnalyticsLoading(): ReactElement {

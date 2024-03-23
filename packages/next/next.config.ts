@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { type NextConfig } from 'next';
+import type { ExperimentalConfig } from 'next/dist/server/config-shared.js';
 import { cpus } from 'node:os';
 import { join } from 'node:path';
 import type { Configuration as WebpackConfiguration } from 'webpack';
@@ -35,6 +36,7 @@ export default withNextJsBundleAnalyzer({
   env: {
     CLOUD_PLATFORM: validateString(process.env['CLOUD_PLATFORM']),
     CLOUD_PROVIDER: validateString(process.env['CLOUD_PROVIDER']),
+    WHOAMI: validateString(process.env['WHOAMI']),
     DEPLOYMENT_ENVIRONMENT: validateString(
       process.env['DEPLOYMENT_ENVIRONMENT'],
     ),
@@ -94,7 +96,7 @@ export default withNextJsBundleAnalyzer({
      *   memoryLimit: 64 * 1024,
      * },
      */
-  },
+  } satisfies ExperimentalConfig,
 
   images: {
     loader: 'custom',

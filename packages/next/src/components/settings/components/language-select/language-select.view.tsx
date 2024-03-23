@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import Select from '../../../../components/select/index.js';
+import Select from '../../../../components/select.js';
 import OPTIONS from '../../constants/locale-options.js';
 import useLanguageSelect from './language-select.hook.js';
 

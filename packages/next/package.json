@@ -83,6 +83,7 @@
     "sentry-react": "workspace:^",
     "sharp": "^0.33.2",
     "unknown2string": "workspace:^",
+    "use-force-update": "^1.0.11",
     "use-mui": "^1.0.6",
     "use-offline": "workspace:^",
     "use-shallow-memo": "workspace:^",

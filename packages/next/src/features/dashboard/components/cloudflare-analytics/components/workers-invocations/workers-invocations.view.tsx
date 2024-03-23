@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import Table from '../../../../../../components/table/index.js';
+import Table from '../../../../../../components/table.js';
 import type WorkersInvocations from '../../../../../../types/cloudflare-workers-invocations.js';
 import createIndexArray from '../../../../../../utils/create-index-array.js';
 import COLUMNS from '../../constants/workers-invocations-columns.js';

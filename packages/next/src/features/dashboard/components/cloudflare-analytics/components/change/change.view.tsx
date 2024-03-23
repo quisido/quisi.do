@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import PercentDifference from '../../../../../../components/percent-difference/index.js';
+import PercentDifference from '../../../../../../components/percent-difference.js';
 import validateString from '../../../../../../utils/validate-string.js';
 import styles from './change.module.scss';
 

@@ -1,8 +1,8 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import Div from '../../../../components/div.js';
-import LoadingIcon from '../../../../components/loading-icon/index.js';
-import RelativeTimestamp from '../../../../components/relative-timestamp/index.js';
+import LoadingIcon from '../../../../components/loading-icon.js';
+import RelativeTimestamp from '../../../../components/relative-timestamp.js';
 
 interface Props {
   readonly children: number;

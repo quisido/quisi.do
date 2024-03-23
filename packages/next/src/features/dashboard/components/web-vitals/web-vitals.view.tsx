@@ -1,8 +1,8 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import Div from '../../../../components/div.js';
-import Gauge from '../../../../components/gauge/index.js';
-import LoadingIcon from '../../../../components/loading-icon/index.js';
+import Gauge from '../../../../components/gauge.js';
+import LoadingIcon from '../../../../components/loading-icon.js';
 import Section from '../../../../components/section.js';
 import Span from '../../../../components/span.js';
 import Status from '../../constants/status.js';

@@ -1,7 +1,7 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import Div from '../../../../components/div.js';
-import Gauge from '../../../../components/gauge/index.js';
+import Gauge from '../../../../components/gauge.js';
 import Quantity from '../../../../components/quantity/index.js';
 import Section from '../../../../components/section.js';
 import withAsync from '../../../../hocs/with-async.js';

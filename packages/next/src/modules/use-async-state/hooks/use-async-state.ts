@@ -1,13 +1,13 @@
 'use client';
 
-import { type MutableRefObject, useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState, type MutableRefObject } from 'react';
 import mapUnknownToString from 'unknown2string';
 import type AsyncState from '../types/async-state.js';
 
 export type State<T> = AsyncState<T> & BaseState<T>;
 
 interface BaseState<T> {
-  readonly asyncEffectRef: MutableRefObject<Promise<unknown> | undefined>;
+  readonly asyncEffectRef: MutableRefObject<Promise<void> | undefined>;
   readonly request: (get: () => Promise<T>) => Promise<void>;
   readonly retry: () => Promise<void>;
 }
@@ -21,11 +21,8 @@ const DEFAULT_ASYNC_STATE = {
 
 export default function useAsyncState<T = unknown>(): State<T> {
   // States
+  const asyncEffectRef: MutableRefObject<Promise<void> | undefined> = useRef();
   const lastGetRef: MutableRefObject<(() => Promise<T>) | undefined> = useRef();
-
-  const asyncEffectRef: MutableRefObject<Promise<unknown> | undefined> =
-    useRef();
-
   const [asyncState, setAsyncState] =
     useState<AsyncState<T>>(DEFAULT_ASYNC_STATE);
 
@@ -79,14 +76,14 @@ export default function useAsyncState<T = unknown>(): State<T> {
         return;
       }
 
-      const promise: Promise<unknown> = getState(lastGetRef.current);
+      const promise: Promise<void> = getState(lastGetRef.current);
       asyncEffectRef.current = promise;
       await promise;
     }, [getState]),
 
     request: useCallback(
       async (get: () => Promise<T>): Promise<void> => {
-        const promise: Promise<unknown> = getState(get);
+        const promise: Promise<void> = getState(get);
         asyncEffectRef.current = promise;
         await promise;
       },

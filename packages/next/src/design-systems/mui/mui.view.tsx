@@ -7,7 +7,7 @@ import Checkbox from './components/checkbox/index.js';
 import Chip from './components/chip/index.js';
 import Div from './components/div/index.js';
 import Header from './components/header/index.js';
-import Input from './components/input/index.js';
+import Input from './components/input.js';
 import Link from './components/link/index.js';
 import LoadingIcon from './components/loading-icon/index.js';
 import Section from './components/section.js';

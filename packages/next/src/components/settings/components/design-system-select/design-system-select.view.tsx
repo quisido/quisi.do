@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import Select from '../../../../components/select/index.js';
+import Select from '../../../../components/select.js';
 import OPTIONS from '../../constants/design-system-options.js';
 import useDesignSystemSelect from './design-system-select.hook.js';
 
