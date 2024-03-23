@@ -1,4 +1,5 @@
-import { type ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
+import DesignSystem from './design-system/index.js';
 
 /*
 Consider `BaseProps extends SpanProps` from `src/components/span` and nesting a
@@ -62,7 +63,9 @@ interface MarginYProps {
   readonly marginY?: undefined;
 }
 
-type Props = BaseProps &
+export type Props = BaseProps &
   (MarginProp | ((MarginXProp | MarginXProps) & (MarginYProp | MarginYProps)));
 
-export type { Props as default };
+export default function Div(props: Props): ReactElement {
+  return <DesignSystem props={props} type="div" />;
+}

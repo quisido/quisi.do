@@ -6,6 +6,7 @@ import Div from './quisi/div.js';
 import Header from './quisi/header.js';
 import Link from './quisi/link.js';
 import Section from './quisi/section.js';
+import Span from './quisi/span.js';
 import Theme from './quisi/theme.js';
 
 function Demo({
@@ -103,13 +104,7 @@ export default function Quisido<Card extends object, Row extends object>({
       );
 
     case 'span':
-      return (
-        <Demo type="Span">
-          {JSON.stringify({ ...props, children: undefined })}
-          <br />
-          Children: {props.children}
-        </Demo>
-      );
+      return <Span {...props} />;
 
     case 'table':
       return (

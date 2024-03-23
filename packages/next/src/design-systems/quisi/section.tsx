@@ -2,6 +2,7 @@ import { type ReactElement, useLayoutEffect, useState } from 'react';
 import { type Props } from '../../components/section.js';
 import useTheme from '../../hooks/use-theme.js';
 import createRandomNumberGenerator from '../../utils/create-random-number-generator.js';
+import Header from './header.js';
 
 const INITIAL_ROTATION = 0;
 const MAXIMUM_ROTATION = -2;
@@ -19,7 +20,7 @@ export default function QuisiSection({
   header,
 }: Props): ReactElement {
   // Contexts
-  const { backgroundColor, foregroundHex } = useTheme();
+  const { foregroundHex } = useTheme();
 
   // States
   const [rotation, setRotation] = useState(INITIAL_ROTATION);
@@ -32,19 +33,14 @@ export default function QuisiSection({
   return (
     <section
       style={{
-        backgroundColor,
-        // backgroundImage: `linear-gradient(${[
-        //   'rgba(255, 255, 255, 0.5)',
-        //   'rgba(255, 255, 255, 0.5)',
-        // ].join(', ')})`,
         boxSizing: 'border-box',
         color: foregroundHex,
-        overflow: 'hidden',
-        marginBottom: '1em',
+        marginBottom: '1rem',
+        marginTop: '1rem',
         maxHeight: '100%',
-        minHeight: '5em',
         maxWidth: '100%',
-        padding: '1em',
+        paddingLeft: '2em',
+        paddingRight: '2em',
         position: 'relative',
         transform: `rotate(${rotation}deg)`,
         width: '100%',
@@ -55,19 +51,12 @@ export default function QuisiSection({
           transform: `rotate(${NEGATIVE * rotation}deg)`,
         }}
       >
-        {typeof header !== 'undefined' && <header>{header}</header>}
-        <div
-          style={{
-            paddingBottom: '1em',
-            paddingTop: '1em',
-          }}
-        >
-          {children}
-        </div>
+        {typeof header !== 'undefined' && <Header>{header}</Header>}
+        <div>{children}</div>
         {typeof actions !== 'undefined' && (
           <footer
             style={{
-              paddingTop: '1em',
+              paddingTop: '1rem',
               textAlign: 'right',
             }}
           >

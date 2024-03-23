@@ -1,8 +1,8 @@
 import Box, { type BoxProps } from '@mui/material/Box';
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/div/index.js';
-import useDiv from './div.hook.js';
+import { type Props } from '../../../../components/div.js';
 import optional from '../../../../utils/optional.js';
+import useDiv from './div.hook.js';
 
 export default function MuiDiv({
   children,

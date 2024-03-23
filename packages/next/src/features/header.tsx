@@ -7,29 +7,31 @@ import useHeader from './header/use-header.js';
 
 function Header(): ReactElement {
   const { authenticateHref } = useHeader();
-  const { displayFontFamily, displayFontWeight } = useTheme();
+  const { backgroundHex, displayFontFamily, displayFontWeight } = useTheme();
 
   return (
     <header
       style={{
         alignItems: 'center',
+        backgroundColor: backgroundHex,
+        boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'row',
-        marginBottom: '1em',
         marginLeft: 'auto',
         marginRight: 'auto',
-        marginTop: '1rem',
         maxWidth: '60em',
-        minWidth: 320,
+        paddingLeft: '1rem',
+        paddingRight: '1rem',
+        width: '100%',
       }}
     >
       <div style={{ flexGrow: 1 }}>
         <h1
           style={{
-            fontFamily: displayFontFamily,
-            fontSize: '1.5em',
+            fontFamily: `"Cairo Play", ${displayFontFamily}`,
+            fontSize: '3em',
             fontWeight: displayFontWeight,
-            lineHeight: '2rem',
+            lineHeight: '4rem',
             marginBottom: 0,
             marginLeft: 0,
             marginRight: 0,
@@ -43,10 +45,11 @@ function Header(): ReactElement {
         <span
           style={{
             display: 'block',
-            fontSize: '0.75em',
-            marginBottom: '0.5rem',
-            marginTop: '-0.5rem',
-            paddingLeft: '1.5em',
+            fontFamily: `"Cairo Play", ${displayFontFamily}`,
+            fontSize: '1em',
+            marginBottom: '2em',
+            marginTop: '-2em',
+            paddingLeft: '1.85em',
           }}
         >
           software as a service

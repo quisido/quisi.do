@@ -71,7 +71,6 @@ export default function Sentry({
   });
 
   return (
-    // @ts-expect-error https://github.com/getsentry/sentry-javascript/pull/9098
     <ErrorBoundary
       beforeCapture={beforeErrorBoundaryCapture}
       dialogOptions={errorBoundaryDialogOptions}

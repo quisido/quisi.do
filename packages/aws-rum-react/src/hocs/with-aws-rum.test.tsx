@@ -19,7 +19,14 @@ describe('withAwsRum', (): void => {
     const { getByText } = render(<TestHoc />, {
       wrapper({ children }: PropsWithChildren): ReactElement {
         return (
-          <AwsRumProvider id="test-id" region="us-east-1" version="0.0.0">
+          <AwsRumProvider
+            eventPluginsToLoad={[]}
+            fetchFunction={jest.fn()}
+            id="test-id"
+            region="us-east-1"
+            telemetries={[]}
+            version="0.0.0"
+          >
             {children}
           </AwsRumProvider>
         );

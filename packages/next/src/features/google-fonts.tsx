@@ -11,6 +11,9 @@ enum Weight {
 }
 
 const GOOGLE_FONTS: Record<string, GoogleFont> = {
+  'Cairo Play': {
+    weights: [Weight.Normal, Weight.Bold],
+  },
   Merienda: {
     weights: [Weight.Normal, Weight.Bold],
   },

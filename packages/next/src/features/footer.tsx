@@ -4,7 +4,12 @@ import styles from './footer.module.scss';
 
 function Footer(): ReactElement | null {
   return (
-    <footer style={{ paddingTop: '1em', textAlign: 'center' }}>
+    <footer
+      style={{
+        paddingTop: '1rem',
+        textAlign: 'center',
+      }}
+    >
       <ul className={styles['list']}>
         <li>
           <Link
@@ -22,6 +27,11 @@ function Footer(): ReactElement | null {
             title="quisi.do privacy policy"
           >
             privacy policy
+          </Link>
+        </li>
+        <li>
+          <Link feature="footer" href="/tos/" title="quisi.do terms of service">
+            terms of service
           </Link>
         </li>
       </ul>

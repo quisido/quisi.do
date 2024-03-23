@@ -1,6 +1,6 @@
 import Box, { type BoxProps } from '@mui/material/Box';
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/span/index.js';
+import { type Props } from '../../../../components/span.js';
 import optional from '../../../../utils/optional.js';
 import useSpan from './span.hook.js';
 

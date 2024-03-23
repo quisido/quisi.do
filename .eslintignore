@@ -1,6 +1,7 @@
 /**/.idea/
 /**/.yarn/
 /**/node_modules/
+/**/*.cs
 /**/*.gz
 /**/*.md
 /**/.DS_Store

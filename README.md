@@ -18,5 +18,7 @@ To install this repository and begin local development, use the following
 commands in order:
 
 - `yarn set version latest` to keep Yarn up-to-date.
-- `yarn install` to synchronize Yarn's version with its dependencies.
+- On Windows,
+  `set FIND_VISUALSTUDIO_PATH=%CD%\scripts\find-visualstudio.cs&&yarn install`
+  to synchronize Yarn's version with its dependencies.
 - `yarn run up` to upgrade dependencies.
