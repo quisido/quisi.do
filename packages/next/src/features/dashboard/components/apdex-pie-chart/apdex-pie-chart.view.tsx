@@ -1,3 +1,4 @@
+import { useTranslate, type TranslateFunction } from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import { Pie, Surface } from 'recharts';
 import validateString from '../../../../utils/validate-string.js';
@@ -30,6 +31,8 @@ export default function ApdexPieChart({
   satisfied,
   tolerated,
 }: Props): ReactElement {
+  const translate: TranslateFunction = useTranslate();
+
   const total: number = frustrated + satisfied + tolerated;
   // const frustratedPercent: number = frustrated / total;
   const satisfiedPercent: number = satisfied / total;
@@ -45,9 +48,9 @@ export default function ApdexPieChart({
         cx={HALF_SIZE}
         cy={HALF_SIZE}
         data={[
-          { name: 'Satisfied', value: satisfied },
-          { name: 'Tolerated', value: tolerated },
-          { name: 'Frustrated', value: frustrated },
+          { name: translate('Satisfied') ?? 'Satisfied', value: satisfied },
+          { name: translate('Tolerated') ?? 'Tolerated', value: tolerated },
+          { name: translate('Frustrated') ?? 'Frustrated', value: frustrated },
         ]}
         dataKey="value"
         innerRadius={QUARTER_SIZE}
@@ -59,7 +62,7 @@ export default function ApdexPieChart({
             endAngle: satisfiedEndAngle,
             fill: Fill.Satisfied,
             innerRadius: QUARTER_SIZE,
-            name: 'Satisfied',
+            name: translate('Satisfied') ?? 'Satisfied',
             outerRadius: HALF_SIZE,
             startAngle: START_ANGLE,
             value: satisfied,
@@ -70,7 +73,7 @@ export default function ApdexPieChart({
             endAngle: toleratedEndAngle,
             fill: Fill.Tolerated,
             innerRadius: QUARTER_SIZE,
-            name: 'Tolerated',
+            name: translate('Tolerated') ?? 'Tolerated',
             outerRadius: HALF_SIZE,
             startAngle: satisfiedEndAngle,
             value: tolerated,
@@ -81,7 +84,7 @@ export default function ApdexPieChart({
             endAngle: END_ANGLE,
             fill: Fill.Frustrated,
             innerRadius: QUARTER_SIZE,
-            name: 'Frustrated',
+            name: translate('Frustrated') ?? 'Frustrated',
             outerRadius: HALF_SIZE,
             startAngle: toleratedEndAngle,
             value: frustrated,

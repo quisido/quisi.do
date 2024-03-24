@@ -45,7 +45,8 @@ export default function Apdex({
   if (loading) {
     return (
       <Section header={<I18n>Application Performance Index</I18n>}>
-        <LoadingIcon /> <I18n>Loading Application Performance Index</I18n>
+        <LoadingIcon />{' '}
+        {/*<I18n>Loading Application Performance Index</I18n> */}
       </Section>
     );
   }

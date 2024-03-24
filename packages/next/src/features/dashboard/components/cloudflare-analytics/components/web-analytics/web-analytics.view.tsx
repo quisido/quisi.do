@@ -1,4 +1,3 @@
-import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import Table from '../../../../../../components/table.js';
 import type RumPerformanceEvents from '../../../../../../types/cloudflare-rum-performance-events.js';
@@ -24,7 +23,7 @@ export default function CloudflareWebAnalytics({
   return (
     <Table<Analytic>
       columns={COLUMNS}
-      header={<I18n>Cloudflare Web Analytics</I18n>}
+      header="Cloudflare Web Analytics"
       onSort={handleSort}
       rows={rows}
       rowsCount={1}
