@@ -6,6 +6,7 @@ const lightghouseConfig: Config = {
     // budgetPath: 'lighthouse.budget.json',
     // chromeFlags: "--headless",
     // enableErrorReporting: true,
+    locale: 'en-US',
     // output: ['html', 'json'],
     // outputPath: "lighthouse",
     // preset: "experimental",
@@ -15,6 +16,7 @@ const lightghouseConfig: Config = {
       'https://browser-intake-datadoghq.com/*',
       'https://cloudflareinsights.com/*',
       'https://edge.fullstory.com/*',
+      'https://localhost:1098/whoami', // invalid certificate
       'https://o592283.ingest.sentry.io/*',
       'https://rs.fullstory.com/*',
       'https://stats.g.doubleclick.net/*',
