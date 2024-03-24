@@ -115,6 +115,7 @@ jobs:
           IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
           PATREON_OAUTH_CLIENT_ID: 4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG
           PATREON_OAUTH_REDIRECT_URI: https://localhost:5882/patreon/
+          WHOAMI: https://localhost:1098/whoami
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
