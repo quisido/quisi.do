@@ -1,20 +1,19 @@
 import {
-  type ComponentType,
   Fragment,
+  StrictMode,
+  type ComponentType,
   type PropsWithChildren,
   type ReactElement,
-  StrictMode,
 } from 'react';
-import CloudflareInsights from '../components/cloudflare-insights/index.js';
-import CloudWatchRUM from '../components/cloudwatch-rum/index.js';
-import Datadog from '../components/datadog/index.js';
-import FullStory from '../components/fullstory/index.js';
-import ReportUri from '../components/report-uri/index.js';
-import DesignSystemTheme from '../components/theme/index.js';
+import CloudflareInsights from '../components/cloudflare-insights.js';
+import DesignSystemTheme from '../components/theme.js';
 import Authentication from '../features/authentication.js';
+import CloudWatchRUM from '../features/cloudwatch-rum.js';
 import DarkModeProvider from '../features/dark-mode-provider.js';
+import Datadog from '../features/datadog.js';
 import DesignSystemProvider from '../features/design-system-provider.js';
 import Footer from '../features/footer.js';
+import FullStory from '../features/fullstory.js';
 import GoogleAnalytics from '../features/google-analytics/index.js';
 import GoogleFonts from '../features/google-fonts.js';
 import Header from '../features/header.js';
@@ -23,6 +22,7 @@ import LayoutStyle from '../features/layout-style.js';
 import NotificationsProvider from '../features/notifications-provider.js';
 import Notifications from '../features/notifications.js';
 import Preconnect from '../features/preconnect.js';
+import ReportUri from '../features/report-uri.js';
 import Sentry from '../features/sentry/index.js';
 import SessionIdProvider from '../features/session-id-provider.js';
 import ThemeFeature from '../features/theme.js';

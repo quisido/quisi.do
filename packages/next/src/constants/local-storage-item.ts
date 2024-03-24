@@ -1,5 +1,3 @@
-enum LocalStorageItem {
-  QuisidoDotCom = 'quisido.com',
-}
+enum LocalStorageItem {}
 
 export default LocalStorageItem;

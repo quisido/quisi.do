@@ -1,3 +1,3 @@
 export default interface Authentication {
-  readonly id: number;
+  readonly id: null | number;
 }

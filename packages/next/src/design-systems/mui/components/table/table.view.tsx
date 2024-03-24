@@ -1,8 +1,8 @@
-import Cell from '@mui/material/TableCell';
 import LinearProgress from '@mui/material/LinearProgress';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import Body from '@mui/material/TableBody';
+import Cell from '@mui/material/TableCell';
 import Container from '@mui/material/TableContainer';
 import Footer from '@mui/material/TableFooter';
 import Head from '@mui/material/TableHead';
@@ -13,7 +13,7 @@ import MuiRow from '@mui/material/TableRow';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { type ReactElement } from 'react';
-import { type Props } from '../../../../components/table/index.js';
+import { type Props } from '../../../../components/table.js';
 import mapComponentToPropMapper from '../../../../utils/map-component-to-prop-mapper.js';
 import Div from '../div/index.js';
 import Span from '../span/index.js';

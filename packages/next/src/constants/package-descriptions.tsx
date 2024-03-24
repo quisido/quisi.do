@@ -65,7 +65,7 @@ const PACKAGE_DESCRIPTIONS: Map<string, string> = new Map([
   ],
   [
     '@monorepo-template/up',
-    "This utility command line tool upgrades all of your project's dependencies in one fell swoop.",
+    'This utility command line tool upgrades all of your project dependencies in one fell swoop.',
   ],
   [
     '@monorepo-template/webpack-configure-next-babel',

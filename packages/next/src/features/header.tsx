@@ -1,19 +1,32 @@
 'use client';
 
-import { type ReactElement, memo } from 'react';
-import Link from '../components/link/index.js';
+import { memo, type ReactElement } from 'react';
 import useTheme from '../hooks/use-theme.js';
-import useHeader from './header/use-header.js';
+import Authentication from './header-authentication.js';
+import Heading from './header-heading.js';
+
+interface State {
+  readonly backgroundColor: string;
+}
+
+function useHeader(): State {
+  // Contexts
+  const { backgroundHex } = useTheme();
+
+  return {
+    backgroundColor: backgroundHex,
+  };
+}
 
 function Header(): ReactElement {
-  const { authenticateHref } = useHeader();
-  const { backgroundHex, displayFontFamily, displayFontWeight } = useTheme();
+  const { backgroundColor } = useHeader();
+  const { displayFontFamily } = useTheme();
 
   return (
     <header
       style={{
         alignItems: 'center',
-        backgroundColor: backgroundHex,
+        backgroundColor,
         boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'row',
@@ -26,22 +39,7 @@ function Header(): ReactElement {
       }}
     >
       <div style={{ flexGrow: 1 }}>
-        <h1
-          style={{
-            fontFamily: `"Cairo Play", ${displayFontFamily}`,
-            fontSize: '3em',
-            fontWeight: displayFontWeight,
-            lineHeight: '4rem',
-            marginBottom: 0,
-            marginLeft: 0,
-            marginRight: 0,
-            marginTop: 0,
-            padding: 0,
-            textAlign: 'left',
-          }}
-        >
-          quisi.do
-        </h1>
+        <Heading />
         <span
           style={{
             display: 'block',
@@ -56,9 +54,7 @@ function Header(): ReactElement {
         </span>
       </div>
       <div>
-        <Link feature="header" href={authenticateHref} title="Authenticate">
-          Authenticate
-        </Link>
+        <Authentication />
       </div>
     </header>
   );

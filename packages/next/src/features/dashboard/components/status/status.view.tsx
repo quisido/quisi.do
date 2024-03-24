@@ -6,7 +6,6 @@ import Link from '../../../../components/link/index.js';
 import Section from '../../../../components/section.js';
 import validateString from '../../../../utils/validate-string.js';
 import LastChecked from '../last-checked/index.js';
-import MessageInABottle from '../message-in-a-bottle/index.js';
 import OnlineStatus from '../online-status/index.js';
 import useStatus from './status.hook.js';
 import styles from './status.module.scss';
@@ -27,7 +26,6 @@ const infoClassName: string = validateString(styles['info']);
 const messageClassName = validateString(styles['message']);
 const messagesClassName = validateString(styles['messages']);
 const NONE = 0;
-const subheaderClassName: string = validateString(styles['subheader']);
 
 const mapErrorToElement = (err: unknown): ReactElement => {
   const errStr: string = mapUnknownToString(err);
@@ -69,9 +67,6 @@ export default function DashboardStatus({
 
   return (
     <Section header={<I18n>Status</I18n>}>
-      <div className={subheaderClassName}>
-        <MessageInABottle />
-      </div>
       <Div display="flex" flexDirection="row" justifyContent="space-around">
         <Div>
           <Link

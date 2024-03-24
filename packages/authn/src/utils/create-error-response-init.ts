@@ -7,7 +7,7 @@ export default function createErrorResponseInit(
   // We should always know the `returnHref`, but we fallback just in case.
   returnHref = 'https://quisi.do/',
 ): ResponseInit {
-  const location = `${returnHref}#error:${errorCode}`;
+  const location = `${returnHref}#authn:error=${errorCode}`;
   return {
     status: StatusCode.SeeOther,
     headers: new Headers({

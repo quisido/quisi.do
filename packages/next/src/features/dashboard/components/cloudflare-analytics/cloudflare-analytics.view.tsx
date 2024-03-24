@@ -1,7 +1,6 @@
-import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import Div from '../../../../components/div.js';
-import Gauge from '../../../../components/gauge/index.js';
+// import Gauge from '../../../../components/gauge.js';
 import Quantity from '../../../../components/quantity/index.js';
 import Section from '../../../../components/section.js';
 import withAsync from '../../../../hocs/with-async.js';
@@ -19,6 +18,7 @@ interface Props {
   readonly datasets: Datasets;
 }
 
+/*
 interface ClientSslMapSum {
   readonly key: string;
   readonly requests: number;
@@ -39,6 +39,7 @@ const reduceClientSslMapSumToRecord = (
   ...record,
   [key]: requests,
 });
+*/
 
 function CloudflareAnalytics({ budget, datasets }: Props): ReactElement {
   const {
@@ -62,12 +63,12 @@ function CloudflareAnalytics({ budget, datasets }: Props): ReactElement {
 
   return (
     <>
-      <Section header={<I18n>Cloudflare analytics</I18n>}>
+      <Section header="Cloudflare Analytics">
         <Div element="p">
           <strong>Remaining budget:</strong> {mapBudgetToPercentage(budget)}%
         </Div>
 
-        <Gauge
+        {/* <Gauge
           max={httpRequests1hGroups.clientSSLMap_sum.reduce(
             reduceClientSslMapSumToMax,
             ZERO,
@@ -77,7 +78,7 @@ function CloudflareAnalytics({ budget, datasets }: Props): ReactElement {
             reduceClientSslMapSumToRecord,
             {},
           )}
-        />
+        /> */}
 
         <Div>
           <strong>HTTP requests:</strong>

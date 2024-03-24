@@ -1,4 +1,3 @@
-import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import Section from '../../../../../../components/section.js';
 import Span from '../../../../../../components/span.js';
@@ -11,7 +10,7 @@ export default function CloudflareAnalyticsError({
   children,
 }: Props): ReactElement {
   return (
-    <Section header={<I18n>Cloudflare analytics</I18n>}>
+    <Section header="Cloudflare Analytics">
       <Span element="p">{children}</Span>
     </Section>
   );

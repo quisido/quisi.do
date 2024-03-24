@@ -1,7 +1,7 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import Div from '../../../../components/div.js';
-import LoadingIcon from '../../../../components/loading-icon/index.js';
+import LoadingIcon from '../../../../components/loading-icon.js';
 import Section from '../../../../components/section.js';
 import Span from '../../../../components/span.js';
 import createApdexScore from '../../utils/create-apdex-score.js';
@@ -45,7 +45,8 @@ export default function Apdex({
   if (loading) {
     return (
       <Section header={<I18n>Application Performance Index</I18n>}>
-        <LoadingIcon /> <I18n>Loading Application Performance Index</I18n>
+        <LoadingIcon />{' '}
+        {/*<I18n>Loading Application Performance Index</I18n> */}
       </Section>
     );
   }

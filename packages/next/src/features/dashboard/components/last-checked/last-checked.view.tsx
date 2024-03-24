@@ -1,8 +1,7 @@
-import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import Div from '../../../../components/div.js';
-import LoadingIcon from '../../../../components/loading-icon/index.js';
-import RelativeTimestamp from '../../../../components/relative-timestamp/index.js';
+import LoadingIcon from '../../../../components/loading-icon.js';
+import RelativeTimestamp from '../../../../components/relative-timestamp.js';
 
 interface Props {
   readonly children: number;
@@ -22,13 +21,14 @@ export default function LastChecked({
   }
 
   if (!initiated) {
-    return <I18n>Initiating</I18n>;
+    /* <I18n>Initiating</I18n>; */
+    return <>Initiating</>;
   }
 
   if (loading) {
     return (
       <Div>
-        <LoadingIcon /> <I18n>Loading uptime incidents</I18n>
+        <LoadingIcon /> {/* <I18n>Loading uptime incidents</I18n> */}
       </Div>
     );
   }

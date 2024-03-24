@@ -74,7 +74,7 @@ const isPatreonGender = (value: unknown): value is PatreonGender =>
   PATREON_GENDERS.has(value);
 
 const PATREON_FIELDS: URLSearchParams = new URLSearchParams({
-  'fields[user]': [
+  'fields%5Buser%5D': [
     'email',
     'first_name',
     'full_name',
@@ -240,7 +240,7 @@ export default class FetchOperation extends CloudflareWorkerOperation<
               last_row_id: oAuthLastRowId,
               size_after: oAuthSizeAfter,
             },
-          }: D1Result): void => {
+          }: D1Response): void => {
             this.emit(MetricName.OAuthInserted, oAuthLastRowId, {
               changes: oAuthChanges,
               duration: oAuthDuration,
@@ -268,7 +268,7 @@ export default class FetchOperation extends CloudflareWorkerOperation<
                 last_row_id: emailsLastRowId,
                 size_after: emailsSizeAfter,
               },
-            }: D1Result): void => {
+            }: D1Response): void => {
               this.emit(MetricName.EmailInserted, emailsLastRowId, {
                 changes: emailsChanges,
                 duration: emailsDuration,
@@ -534,7 +534,7 @@ export default class FetchOperation extends CloudflareWorkerOperation<
     const {
       meta: { duration, size_after: sizeAfter },
       results,
-    } = await statement.run();
+    } = await statement.all();
 
     this.emit(MetricName.OAuthUserIdSelected, {
       duration,
@@ -724,7 +724,7 @@ export default class FetchOperation extends CloudflareWorkerOperation<
         `Patreon status ${response.status}`,
         {
           code: ErrorCode.NonOkResponseStatus,
-          privateData: json,
+          privateData: JSON.stringify(json),
           status: response.status,
         },
       );
