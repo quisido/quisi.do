@@ -56,7 +56,7 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
     <html lang="en">
       <head>
         <LayoutStyle />
-        <Clarity tag="jn26o3oqm1" />
+        <Clarity tag="lm4m88gmix" />
         <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
         <GoogleFonts />
         <meta charSet="utf-8" />
