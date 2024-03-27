@@ -221,7 +221,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Audit
-        run: yarn packages/next run lighthouse:serve
+        run: yarn packages/next run lighthouse:dev
       - name: Validate
         run: yarn packages/next run postlighthouse
       - name: Upload report
