@@ -14,7 +14,7 @@ import Datadog from '../features/datadog.js';
 import DesignSystemProvider from '../features/design-system-provider.js';
 import Footer from '../features/footer.js';
 import FullStory from '../features/fullstory.js';
-import GoogleAnalytics from '../features/google-analytics/index.js';
+import GoogleAnalytics from '../features/google-analytics.js';
 import GoogleFonts from '../features/google-fonts.js';
 import Header from '../features/header.js';
 import HostnameProvider from '../features/hostname-provider.js';
@@ -29,8 +29,11 @@ import ThemeFeature from '../features/theme.js';
 import TracerProviderProvider from '../features/tracer-provider-provider.js';
 import withWrappers from '../hocs/with-wrappers/index.js';
 import Clarity from '../modules/react-clarity/index.js';
+import validateString from '../utils/validate-string.js';
 export { default as metadata } from '../constants/root-metadata.js';
 export { default as viewport } from '../constants/root-viewport.js';
+
+const CLARITY_TAG: string = validateString(process.env['CLARITY_TAG']);
 
 /**
  *   We do not put wrappers around `<body>` itself, because we do not want to
@@ -56,20 +59,15 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
     <html lang="en">
       <head>
         <LayoutStyle />
-        <Clarity tag="lm4m88gmix" />
-        <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
+        <Clarity tag={CLARITY_TAG} />
+        {process.env.NODE_ENV === 'production' && (
+          <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
+        )}
         <GoogleFonts />
         <meta charSet="utf-8" />
         <Preconnect />
         <ReportUri />
         {/* <Traceparent /> */}
-        {/*
-        <script
-          referrerPolicy="origin"
-          src="https://quisi.do/cdn-cgi/zaraz/i.js"
-          type="text/javascript"
-        />
-        */}
       </head>
       <body>
         <noscript>JavaScript is required.</noscript>

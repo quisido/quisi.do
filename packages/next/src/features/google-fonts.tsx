@@ -1,50 +1,17 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { type ReactElement } from 'react';
+import GoogleFonts from '../components/google-fonts.js';
+import FontWeight from '../constants/font-weight.js';
 
-interface GoogleFont {
-  readonly weights: readonly number[];
-}
+const NORMAL_BOLD: readonly FontWeight[] = [FontWeight.Normal, FontWeight.Bold];
 
-enum Weight {
-  Bold = 700,
-  Normal = 400,
-}
-
-const GOOGLE_FONTS: Record<string, GoogleFont> = {
-  'Cairo Play': {
-    weights: [Weight.Normal, Weight.Bold],
-  },
-  Merienda: {
-    weights: [Weight.Normal, Weight.Bold],
-  },
-  'Noto Color Emoji': {
-    weights: [Weight.Normal],
-  },
-  'Noto Sans': {
-    weights: [Weight.Normal, Weight.Bold],
-  },
-  'Noto Sans Display': {
-    weights: [Weight.Bold],
-  },
-};
-
-const mapGoogleFontEntryToFamily = ([family, { weights }]: [
-  string,
-  GoogleFont,
-]): string => `${family}:wght@${weights.join(';')}`;
-
-export default function GoogleFonts(): ReactElement {
-  const params: URLSearchParams = new URLSearchParams();
-  params.set('display', 'swap');
-  for (const entry of Object.entries(GOOGLE_FONTS)) {
-    const family: string = mapGoogleFontEntryToFamily(entry);
-    params.append('family', family);
-  }
-
+export default function GoogleFontsFeature(): ReactElement {
   return (
-    <link
-      href={`https://fonts.googleapis.com/css2?${params.toString()}`}
-      rel="stylesheet"
+    <GoogleFonts
+      Cairo_Play={NORMAL_BOLD}
+      Merienda={NORMAL_BOLD}
+      Noto_Color_Emoji={FontWeight.Normal}
+      Noto_Sans={NORMAL_BOLD}
+      Noto_Sans_Display={FontWeight.Bold}
     />
   );
 }

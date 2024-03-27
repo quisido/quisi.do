@@ -122,19 +122,27 @@ jobs:
       - name: Prepack
         run: yarn run --require dd-trace/init prepack
         env:
+          CLARITY_TAG: lm4m88gmix
           CLOUD_PLATFORM: GitHub
           CLOUD_PROVIDER: GitHub Pages
+          CLOUDWATCH_RUM_APPLICATION_ID: 8495b9c9-f57e-4395-9ca6-6c01862c107b
+          CLOUDWATCH_RUM_GUEST_ROLE_ARN: arn:aws:iam::787801101157:role/RUM-Monitor-us-west-2-787801101157-0860829251171-Unauth
+          CLOUDWATCH_RUM_IDENTITY_POOL_ID: us-west-2:f6379e5a-a304-4608-bf6d-b66f00a5d3fb
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_ENV: ci
+          DD_APPLICATION_ID: e29eb164-e193-4380-b512-ebd70bbfaeb6
+          DD_CLIENT_TOKEN: pubf0c07bd5003d0c4a65a9f129d9e83a3d
+          DD_ENV: prod
           DD_PROFILING_ENABLED: true
           DD_SERVICE: quisi.do
           DD_VERSION: ${{ github.sha }}
           DEPLOYMENT_ENVIRONMENT: live
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
+          GOOGLE_ANALYTICS_TRACKING_ID: G-ZTQ6K5CVQS
           IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
           PATREON_OAUTH_CLIENT_ID: J_6jrNJZNibHylSF83UVl9I4OHZYf67RAsU0s7_LnH1N5BKF-vgOyweF3KQLOKm1
           PATREON_OAUTH_REDIRECT_URI: https://a.quisi.do/patreon/
+          SENTRY_ENVIRONMENT: production
           WHOAMI: https://api.quisi.do/whoami
       - name: Upload artifacts
         uses: actions/upload-artifact@v3

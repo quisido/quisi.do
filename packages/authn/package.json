@@ -36,7 +36,7 @@
     "cookie": "^0.6.0",
     "form-urlencoded": "^6.1.4",
     "jsonapi-datastore": "^0.4.0-beta",
-    "m7e": "workspace:^",
+    "map-reduce-sort": "workspace:^",
     "patreon": "^0.4.1"
   },
   "devDependencies": {

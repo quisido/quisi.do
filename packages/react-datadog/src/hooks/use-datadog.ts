@@ -8,7 +8,7 @@ import type User from '../types/user.js';
 import useDatadogRum from './use-datadog-rum.js';
 import useUser from './use-user.js';
 
-interface Props extends RumInitConfiguration {
+export interface Props extends RumInitConfiguration {
   readonly enabled?: boolean | undefined;
   readonly sessionReplayRecording?: boolean | undefined;
   readonly user?: User | undefined;

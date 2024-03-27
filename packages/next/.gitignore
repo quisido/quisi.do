@@ -1,10 +1,10 @@
 /.next/
+/.wrangler/
 /analyze/
 /certificates/
 /coverage/
 /node_modules/
 /out/
-/.env
 /lighthouse.report.*
 /lighthouse-0.devtoolslog.json
 /lighthouse-0.trace.json

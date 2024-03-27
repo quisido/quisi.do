@@ -1,4 +1,4 @@
-import mapUnknownToString from 'unknown2string';
+import { mapUnknownToString } from 'map-reduce-sort';
 import mapObjectToEntries from '../../../utils/map-object-to-entries.js';
 import sortEntriesByKey from '../../../utils/sort-entries-by-key.js';
 

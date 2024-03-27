@@ -15,8 +15,9 @@ export default function PreconnectFeature(): ReactElement {
       <Preconnect>https://api.honeycomb.io</Preconnect>
       <Preconnect>https://challenges.cloudflare.com</Preconnect>
       <Preconnect>https://clarity.ms</Preconnect>
-      <Preconnect>https://cloudflareinsights.com</Preconnect>
-      <Preconnect>https://cscdn.report-uri.com</Preconnect>
+      {process.env.NODE_ENV === 'production' && (
+        <Preconnect>https://cloudflareinsights.com</Preconnect>
+      )}
       <Preconnect>https://dataplane.rum.us-west-2.amazonaws.com</Preconnect>
       <Preconnect>https://edge.fullstory.com</Preconnect>
       <Preconnect>https://fonts.googleapis.com</Preconnect>

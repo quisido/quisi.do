@@ -1,0 +1,11 @@
+{
+  "exclude": [],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*", "**/*.json", "**/.*", "**/.*.json"],
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "noEmit": true,
+    "rootDir": ".",
+    "sourceRoot": "."
+  }
+}

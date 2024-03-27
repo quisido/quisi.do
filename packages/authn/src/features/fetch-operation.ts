@@ -1,7 +1,7 @@
 import { parse } from 'cookie';
 import formUrlEncoded from 'form-urlencoded';
 import { JsonApiDataStore } from 'jsonapi-datastore';
-import { mapEntriesToRecord } from 'm7e';
+import { mapEntriesToRecord } from 'map-reduce-sort';
 import EPOCH_SECONDS_OFFSET from '../constants/epoch-seconds-offset.js';
 import ErrorCode from '../constants/error-code.js';
 import MetricName from '../constants/metric-name.js';

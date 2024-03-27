@@ -1,11 +1,2 @@
-const getReportDir = () => {
-  const nycReportDir = process.env.NYC_REPORT_DIR;
-  if (nycReportDir) {
-    return nycReportDir;
-  }
-  return 'coverage';
-};
-
-module.exports = {
-  'report-dir': getReportDir(),
-};
+require('cjs-ts');
+module.exports = require('./nyc.config.ts').default;

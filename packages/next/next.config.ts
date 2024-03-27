@@ -34,11 +34,27 @@ export default withNextJsBundleAnalyzer({
   },
 
   env: {
+    CLARITY_TAG: validateString(process.env['CLARITY_TAG']),
     CLOUD_PLATFORM: validateString(process.env['CLOUD_PLATFORM']),
     CLOUD_PROVIDER: validateString(process.env['CLOUD_PROVIDER']),
+    DD_APPLICATION_ID: validateString(process.env['DD_APPLICATION_ID']),
+    DD_CLIENT_TOKEN: validateString(process.env['DD_CLIENT_TOKEN']),
+    SENTRY_ENVIRONMENT: validateString(process.env['SENTRY_ENVIRONMENT']),
     WHOAMI: validateString(process.env['WHOAMI']),
+    CLOUDWATCH_RUM_APPLICATION_ID: validateString(
+      process.env['CLOUDWATCH_RUM_APPLICATION_ID'],
+    ),
+    CLOUDWATCH_RUM_GUEST_ROLE_ARN: validateString(
+      process.env['CLOUDWATCH_RUM_GUEST_ROLE_ARN'],
+    ),
+    CLOUDWATCH_RUM_IDENTITY_POOL_ID: validateString(
+      process.env['CLOUDWATCH_RUM_IDENTITY_POOL_ID'],
+    ),
     DEPLOYMENT_ENVIRONMENT: validateString(
       process.env['DEPLOYMENT_ENVIRONMENT'],
+    ),
+    GOOGLE_ANALYTICS_TRACKING_ID: validateString(
+      process.env['GOOGLE_ANALYTICS_TRACKING_ID'],
     ),
     PATREON_OAUTH_CLIENT_ID: validateString(
       process.env['PATREON_OAUTH_CLIENT_ID'],

@@ -1,5 +1,12 @@
 import type { ReactElement } from 'react';
 
+/*
+@media (prefers-color-scheme: dark) {
+  background-color: #202020;
+  color: #ffffff;
+}
+*/
+
 const BODY_FONT_FAMILIES: readonly string[] = [
   '-apple-system',
   'BlinkMacSystemFont',
@@ -56,11 +63,6 @@ body {
   @media (min-width: 6in) {
     padding-left: 1in;
     padding-right: 1in;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    background-color: #202020;
-    color: #ffffff;
   }
 }
 
