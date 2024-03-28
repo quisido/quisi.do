@@ -1,19 +1,19 @@
 import { type Translations } from 'lazy-i18n';
 import Locale from '../constants/locale.js';
-import english from '../translations/english.json';
+import english from '../translations/en-US.json';
 
 export default {
   [Locale.English]: english,
 
   [Locale.Arabic]: async (): Promise<{ default: Record<string, string> }> =>
-    import('../translations/arabic.json'),
+    import('../translations/ar-EG.json'),
 
   [Locale.Filipino]: async (): Promise<{ default: Record<string, string> }> =>
-    import('../translations/cebuano.json'),
+    import('../translations/fil-PH.json'),
 
   [Locale.Japanese]: async (): Promise<{ default: Record<string, string> }> =>
-    import('../translations/japanese.json'),
+    import('../translations/ja-JP.json'),
 
   [Locale.Spanish]: async (): Promise<{ default: Record<string, string> }> =>
-    import('../translations/spanish.json'),
+    import('../translations/es-ES.json'),
 } satisfies Record<Locale, Translations>;

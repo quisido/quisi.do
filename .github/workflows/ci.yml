@@ -102,19 +102,27 @@ jobs:
       - name: Prepack
         run: yarn run --require dd-trace/init prepack
         env:
+          CLARITY_TAG: ln18ya61ca
           CLOUD_PLATFORM: GitHub
           CLOUD_PROVIDER: GitHub Actions
+          CLOUDWATCH_RUM_APPLICATION_ID: 9be6a855-9bac-4f07-bae8-6ad0d7a00b00
+          CLOUDWATCH_RUM_GUEST_ROLE_ARN: arn:aws:iam::787801101157:role/RUM-Monitor-us-west-2-787801101157-5868679251171-Unauth
+          CLOUDWATCH_RUM_IDENTITY_POOL_ID: us-west-2:9d109fe9-23c3-4e33-a478-143f93445968
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_ENV: ci
+          DD_APPLICATION_ID: 3e55f7ef-a00a-41ab-9857-baf7ad00daa1
+          DD_CLIENT_TOKEN: pubee0abcc4e08cef309eda284ba1d44e32
+          DD_ENV: staging
           DD_PROFILING_ENABLED: true
-          DD_SERVICE: quisi.do
+          DD_SERVICE: quisi.do-(staging)
           DD_VERSION: ${{ github.sha }}
           DEPLOYMENT_ENVIRONMENT: integration
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
+          GOOGLE_ANALYTICS_TRACKING_ID: G-GMKFW5ZZ9G
           IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
           PATREON_OAUTH_CLIENT_ID: 4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG
           PATREON_OAUTH_REDIRECT_URI: https://localhost:5882/patreon/
+          SENTRY_ENVIRONMENT: staging
           WHOAMI: https://localhost:1098/whoami
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
@@ -213,7 +221,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Audit
-        run: yarn packages/next run lighthouse:serve
+        run: yarn packages/next run lighthouse:dev
       - name: Validate
         run: yarn packages/next run postlighthouse
       - name: Upload report

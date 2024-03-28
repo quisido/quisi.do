@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
+import { mapUnknownToString } from 'map-reduce-sort';
 import { type ReactElement } from 'react';
-import mapUnknownToString from 'unknown2string';
 import Div from '../../../../components/div.js';
 import Link from '../../../../components/link/index.js';
 import Section from '../../../../components/section.js';

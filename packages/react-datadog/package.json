@@ -1,6 +1,6 @@
 {
   "name": "react-datadog",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "quisi.do <react-datadog@quisi.do>",
   "description": "React wrapper for instantiating Datadog",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/react-datadog#readme",

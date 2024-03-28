@@ -1,4 +1,4 @@
-import { mapMapToRecord } from 'm7e';
+import { mapMapToRecord } from 'map-reduce-sort';
 
 export type Emit<
   M extends string = string,

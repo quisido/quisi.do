@@ -7,17 +7,13 @@ interface Props {
 export default function CloudflareInsights({
   token,
 }: Props): ReactElement | null {
-  if (process.env.NODE_ENV !== 'production') {
-    return null;
-  }
-
-  const data: string = JSON.stringify({
+  const beacon: string = JSON.stringify({
     token,
   });
 
   return (
     <script
-      data-cf-beacon={data}
+      data-cf-beacon={beacon}
       defer
       src="https://static.cloudflareinsights.com/beacon.min.js"
       type="text/javascript"

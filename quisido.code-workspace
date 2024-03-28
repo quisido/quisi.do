@@ -2,84 +2,88 @@
   "folders": [
     {
       "name": "$root",
-      "path": "."
+      "path": ".",
     },
     {
       "name": "quisi.do",
-      "path": "packages/next"
+      "path": "packages/next",
     },
     {
       "name": "quisi.do CDK",
-      "path": "packages/cdk"
+      "path": "packages/cdk",
     },
     {
       "name": "Authentication",
-      "path": "packages/authn"
+      "path": "packages/authn",
     },
     {
       "name": "Cloudflare Analytics",
-      "path": "packages/cloudflare-analytics"
+      "path": "packages/cloudflare-analytics",
     },
     {
       "name": "Dashboard",
-      "path": "packages/dashboard"
+      "path": "packages/dashboard",
     },
     {
       "name": "Who am I?",
-      "path": "packages/whoami"
+      "path": "packages/whoami",
     },
     {
       "name": "aws-rum-react",
-      "path": "packages/aws-rum-react"
+      "path": "packages/aws-rum-react",
+    },
+    {
+      "name": "cjs-ts",
+      "path": "packages/cjs-ts",
     },
     {
       "name": "fullstory-react",
-      "path": "packages/fullstory-react"
+      "path": "packages/fullstory-react",
     },
     {
       "name": "lazy-i18n",
-      "path": "packages/lazy-i18n"
+      "path": "packages/lazy-i18n",
     },
     {
-      "name": "m7e",
-      "path": "packages/m7e"
+      "name": "map-reduce-sort",
+      "path": "packages/map-reduce-sort",
     },
     {
       "name": "mock-next-router",
-      "path": "packages/mock-next-router"
+      "path": "packages/mock-next-router",
     },
     {
       "name": "number-format-react",
-      "path": "packages/number-format-react"
+      "path": "packages/number-format-react",
     },
     {
       "name": "react-datadog",
-      "path": "packages/react-datadog"
+      "path": "packages/react-datadog",
     },
     {
       "name": "sentry-react",
-      "path": "packages/sentry-react"
+      "path": "packages/sentry-react",
     },
     {
       "name": "test",
-      "path": "packages/test"
+      "path": "packages/test",
     },
     {
       "name": "tree-logger",
-      "path": "packages/tree-logger"
+      "path": "packages/tree-logger",
     },
     {
       "name": "unknown2string",
-      "path": "packages/unknown2string"
+      "path": "packages/unknown2string",
     },
     {
       "name": "use-offline",
-      "path": "packages/use-offline"
+      "path": "packages/use-offline",
     },
     {
       "name": "use-shallow-memo",
-      "path": "packages/use-shallow-memo"
-    }
+      "path": "packages/use-shallow-memo",
+    },
   ],
 
   "settings": {
@@ -111,7 +115,7 @@
       ".yarn/": true,
       ".attach_pid*": true,
       ".pnp.*": true,
-      "yarn.lock": true
+      "yarn.lock": true,
     },
 
     "search.exclude": {
@@ -136,7 +140,7 @@
       "sarif/": true,
       ".attach_pid*": true,
       ".pnp.*": true,
-      "yarn.lock": true
-    }
-  }
+      "yarn.lock": true,
+    },
+  },
 }
