@@ -1,13 +1,15 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import mapChildrenToTranslationKey from './map-children-to-translation-key.js';
 
 describe('mapChildrenToTranslationKey', (): void => {
   it('should join arrays', (): void => {
-    expect(mapChildrenToTranslationKey([1, 'test', 2])).toBe('1test2');
+    const FIRST = 1;
+    const LAST = 2;
+    expect(mapChildrenToTranslationKey([FIRST, 'test', LAST])).toBe('1test2');
   });
 
   it('should convert numbers to strings', (): void => {
-    expect(mapChildrenToTranslationKey(1)).toBe('1');
+    const NUMBER = 1;
+    expect(mapChildrenToTranslationKey(NUMBER)).toBe('1');
   });
 
   it('should return strings', (): void => {

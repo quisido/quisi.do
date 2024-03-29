@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 'use client';
 
-import { type PropsWithChildren, type ReactElement, memo } from 'react';
+import { memo, type PropsWithChildren, type ReactElement } from 'react';
 import THEME from '../constants/theme.js';
 import ThemeContext from '../contexts/theme.js';
 

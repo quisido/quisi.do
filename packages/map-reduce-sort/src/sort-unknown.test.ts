@@ -1,23 +1,25 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import sortUnknown from './sort-unknown.js';
 
 describe('sortUnknown', (): void => {
   it('should sort numbers', (): void => {
-    expect([2, 4, 5, 3, 1].sort(sortUnknown)).toEqual([1, 2, 3, 4, 5]);
+    const FIFTH = 5;
+    const FIRST = 1;
+    const FOURTH = 4;
+    const SECOND = 2;
+    const THIRD = 3;
+    const UNSORTED: readonly number[] = [FIFTH, FIRST, FOURTH, SECOND, THIRD];
+    const SORTED: readonly number[] = [FIRST, SECOND, THIRD, FOURTH, FIFTH];
+    expect([...UNSORTED].sort(sortUnknown)).toEqual(SORTED);
   });
 
   it('should sort strings', (): void => {
-    expect(['b', 'd', 'e', 'c', 'a'].sort(sortUnknown)).toEqual([
-      'a',
-      'b',
-      'c',
-      'd',
-      'e',
-    ]);
+    const UNSORTED: readonly string[] = ['b', 'd', 'e', 'c', 'a'];
+    const SORTED: readonly string[] = ['a', 'b', 'c', 'd', 'e'];
+    expect([...UNSORTED].sort(sortUnknown)).toEqual(SORTED);
   });
 
   it('should sort mixed values', (): void => {
-    expect([1, 'a'].sort(sortUnknown)).toEqual([1, 'a']);
-    expect(['a', 1].sort(sortUnknown)).toEqual([1, 'a']);
+    expect(['a', false, true].sort(sortUnknown)).toEqual(['a', false, true]);
+    expect([true, 'a', false].sort(sortUnknown)).toEqual(['a', false, true]);
   });
 });

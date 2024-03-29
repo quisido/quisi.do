@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import ArrowDropDownRounded from '@mui/icons-material/ArrowDropDownRounded';
 import { type ThemeOptions } from '@mui/material/styles';
 import SYSTEM_FONTS from './system-fonts.js';
@@ -16,7 +15,7 @@ const DEFAULT_MUI_THEME_OPTIONS: ThemeOptions = {
         sizeLarge: {
           fontWeight: 700,
           letterSpacing: 0,
-          lineHeight: 21 / 16,
+          lineHeight: 1.3125,
           padding: '1rem 1.25rem',
         },
       },
@@ -244,12 +243,12 @@ const DEFAULT_MUI_THEME_OPTIONS: ThemeOptions = {
 
     body1: {
       letterSpacing: 0,
-      lineHeight: 24 / 16,
+      lineHeight: 1.5,
     },
 
     body2: {
       letterSpacing: 0,
-      lineHeight: 21 / 14,
+      lineHeight: 1.5,
     },
 
     button: {
@@ -262,33 +261,33 @@ const DEFAULT_MUI_THEME_OPTIONS: ThemeOptions = {
       display: 'inline-block',
       fontWeight: 700,
       letterSpacing: 0,
-      lineHeight: 18 / 12,
+      lineHeight: 1.5,
     },
 
     h1: {
       fontFamily: ['"PlusJakartaSans-ExtraBold"', ...SYSTEM_FONTS].join(','),
       fontSize: 'clamp(2.625rem, 1.2857rem + 3.5714vw, 4rem)',
       fontWeight: 800,
-      lineHeight: 78 / 70,
+      lineHeight: 1.114285714285714,
     },
 
     h2: {
       fontFamily: ['"PlusJakartaSans-ExtraBold"', ...SYSTEM_FONTS].join(','),
       fontSize: 'clamp(1.5rem, 0.9643rem + 1.4286vw, 2.25rem)',
       fontWeight: 800,
-      lineHeight: 44 / 36,
+      lineHeight: 1.222222222222222,
     },
 
     h3: {
       fontFamily: ['"PlusJakartaSans-Bold"', ...SYSTEM_FONTS].join(','),
       letterSpacing: 0.2,
-      lineHeight: 44 / 36,
+      lineHeight: 1.222222222222222,
     },
 
     h4: {
       fontFamily: ['"PlusJakartaSans-Bold"', ...SYSTEM_FONTS].join(','),
       letterSpacing: 0.2,
-      lineHeight: 42 / 28,
+      lineHeight: 1.5,
     },
 
     h5: {
@@ -298,13 +297,13 @@ const DEFAULT_MUI_THEME_OPTIONS: ThemeOptions = {
     },
 
     h6: {
-      lineHeight: 30 / 20,
+      lineHeight: 1.5,
     },
 
     subtitle1: {
       fontWeight: 500,
       letterSpacing: 0,
-      lineHeight: 24 / 18,
+      lineHeight: 1.333333333333333,
     },
   },
 };

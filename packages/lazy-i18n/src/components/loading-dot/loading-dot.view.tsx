@@ -1,9 +1,12 @@
 import type { CSSProperties, ReactElement } from 'react';
 import styles from './loading-dot.module.scss';
 
+type First = 0;
+type Second = 1;
+type Third = 2;
+
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-  readonly index: 0 | 1 | 2;
+  readonly index: First | Second | Third;
 }
 
 const STYLES: [CSSProperties, CSSProperties, CSSProperties] = [

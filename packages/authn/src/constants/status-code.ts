@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-
 enum StatusCode {
   BadGateway = 502,
   BadRequest = 400,
