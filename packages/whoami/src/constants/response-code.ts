@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-
 enum ResponseCode {
   Cached = 1,
   InvalidAuthenticationId = 6,

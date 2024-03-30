@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 enum PatreonGender {
   Female = 2,
   Male = 1,

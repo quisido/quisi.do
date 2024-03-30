@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { type NextConfig } from 'next';
 import type { ExperimentalConfig } from 'next/dist/server/config-shared.js';
 import { cpus } from 'node:os';
@@ -13,6 +12,19 @@ import withNextJsBundleAnalyzer from './src/utils/with-nextjs-bundle-analyzer.js
 
 const CPUS_COUNT: number = cpus().length;
 const handleDemandEntries = mapNodeEnvToOnDemandEntries(process.env.NODE_ENV);
+
+const reduceEnvironmentVariableNamesToRecord = (
+  record: Record<string, string | undefined>,
+  name: string,
+): Record<string, string | undefined> => ({
+  ...record,
+  [name]: validateString(process.env[name]),
+});
+
+const mapEnvironmentVariableNamesToRecord = (
+  names: readonly string[],
+): Record<string, string | undefined> =>
+  names.reduce(reduceEnvironmentVariableNamesToRecord, {});
 
 export default withNextJsBundleAnalyzer({
   assetPrefix: '', // same domain
@@ -33,36 +45,22 @@ export default withNextJsBundleAnalyzer({
     buildActivityPosition: 'bottom-right',
   },
 
-  env: {
-    CLARITY_TAG: validateString(process.env['CLARITY_TAG']),
-    CLOUD_PLATFORM: validateString(process.env['CLOUD_PLATFORM']),
-    CLOUD_PROVIDER: validateString(process.env['CLOUD_PROVIDER']),
-    DD_APPLICATION_ID: validateString(process.env['DD_APPLICATION_ID']),
-    DD_CLIENT_TOKEN: validateString(process.env['DD_CLIENT_TOKEN']),
-    SENTRY_ENVIRONMENT: validateString(process.env['SENTRY_ENVIRONMENT']),
-    WHOAMI: validateString(process.env['WHOAMI']),
-    CLOUDWATCH_RUM_APPLICATION_ID: validateString(
-      process.env['CLOUDWATCH_RUM_APPLICATION_ID'],
-    ),
-    CLOUDWATCH_RUM_GUEST_ROLE_ARN: validateString(
-      process.env['CLOUDWATCH_RUM_GUEST_ROLE_ARN'],
-    ),
-    CLOUDWATCH_RUM_IDENTITY_POOL_ID: validateString(
-      process.env['CLOUDWATCH_RUM_IDENTITY_POOL_ID'],
-    ),
-    DEPLOYMENT_ENVIRONMENT: validateString(
-      process.env['DEPLOYMENT_ENVIRONMENT'],
-    ),
-    GOOGLE_ANALYTICS_TRACKING_ID: validateString(
-      process.env['GOOGLE_ANALYTICS_TRACKING_ID'],
-    ),
-    PATREON_OAUTH_CLIENT_ID: validateString(
-      process.env['PATREON_OAUTH_CLIENT_ID'],
-    ),
-    PATREON_OAUTH_REDIRECT_URI: validateString(
-      process.env['PATREON_OAUTH_REDIRECT_URI'],
-    ),
-  },
+  env: mapEnvironmentVariableNamesToRecord([
+    'CLARITY_TAG',
+    'CLOUD_PLATFORM',
+    'CLOUD_PROVIDER',
+    'CLOUDWATCH_RUM_APPLICATION_ID',
+    'CLOUDWATCH_RUM_GUEST_ROLE_ARN',
+    'CLOUDWATCH_RUM_IDENTITY_POOL_ID',
+    'DD_APPLICATION_ID',
+    'DD_CLIENT_TOKEN',
+    'DEPLOYMENT_ENVIRONMENT',
+    'GOOGLE_ANALYTICS_TRACKING_ID',
+    'PATREON_OAUTH_CLIENT_ID',
+    'PATREON_OAUTH_REDIRECT_URI',
+    'SENTRY_ENVIRONMENT',
+    'WHOAMI',
+  ]),
 
   eslint: {
     ignoreDuringBuilds: true,

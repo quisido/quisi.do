@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-
 export default interface Theme {
   readonly background: readonly [number, number, number];
   readonly displayFontFamily: string;

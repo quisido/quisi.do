@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 import type Theme from '../types/theme.js';
 
 export default {
