@@ -2,10 +2,12 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
   "root": true,
+
   "env": {
     "jest": true,
     "node": true
   },
+
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -21,6 +23,7 @@
     "@monorepo-template/eslint-config/typescript-fixable",
     "@monorepo-template/eslint-config/typescript-strict"
   ],
+
   "overrides": [
     {
       "files": [".eslintrc.json"],
@@ -58,10 +61,12 @@
       }
     }
   ],
+
   "parserOptions": {
     "project": ["./tsconfig.eslint.json"],
     "warnOnUnsupportedTypeScriptVersion": false
   },
+
   "rules": {
     "@typescript-eslint/no-type-alias": "off",
     "@typescript-eslint/no-duplicate-imports": "off",
@@ -74,10 +79,10 @@
     "@typescript-eslint/ban-tslint-comment": "error",
     "@typescript-eslint/ban-types": "error",
     "@typescript-eslint/brace-style": "off",
-    "@typescript-eslint/class-literal-property-style": ["error", "getters"],
+    "@typescript-eslint/class-literal-property-style": "error",
     "@typescript-eslint/comma-spacing": "error",
     "@typescript-eslint/consistent-indexed-object-style": "error",
-    "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+    "@typescript-eslint/consistent-type-definitions": "error",
     "@typescript-eslint/default-param-last": "error",
     "@typescript-eslint/dot-notation": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -190,6 +195,7 @@
     "semi": "off",
     "space-before-function-paren": "off",
     "space-infix-ops": "off",
+
     "@typescript-eslint/comma-dangle": [
       "error",
       {
@@ -203,12 +209,14 @@
         "tuples": "never"
       }
     ],
+
     "@typescript-eslint/consistent-type-assertions": [
       "error",
       {
         "assertionStyle": "never"
       }
     ],
+
     "@typescript-eslint/consistent-type-imports": [
       "error",
       {
@@ -216,12 +224,14 @@
         "prefer": "type-imports"
       }
     ],
+
     "@typescript-eslint/no-invalid-void-type": [
       "error",
       {
         "allowAsThisParameter": true
       }
     ],
+
     "@typescript-eslint/space-before-function-paren": [
       "error",
       {
@@ -230,12 +240,14 @@
         "named": "never"
       }
     ],
+
     "react/prop-types": [
       "error",
       {
         "skipUndeclared": true
       }
     ],
+
     "sort-imports": [
       "error",
       {
@@ -243,6 +255,7 @@
       }
     ]
   },
+
   "settings": {
     "react": {
       "version": "detect"
