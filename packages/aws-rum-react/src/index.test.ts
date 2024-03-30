@@ -140,10 +140,12 @@ function describePackageJson({
 
       it('should have Jest scripts', (): void => {
         assert('jest' in scripts);
-        expect(scripts.jest).toBe('jest');
+        expect(scripts.jest).toBe('jest --config jest.config.cjs');
 
         assert('jest:watch' in scripts);
-        expect(scripts['jest:watch']).toBe('jest --watch');
+        expect(scripts['jest:watch']).toBe(
+          'jest --config jest.config.cjs --watch',
+        );
       });
 
       it('should have prepack scripts', (): void => {

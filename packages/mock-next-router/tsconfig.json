@@ -6,7 +6,7 @@
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
-    "rootDir": "src",
-    "sourceRoot": "src"
+    "rootDir": ".",
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/mock-next-router/"
   }
 }

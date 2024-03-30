@@ -6,6 +6,6 @@
     "lib": ["ESNext"],
     "noEmit": true,
     "rootDir": ".",
-    "sourceRoot": "."
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/cjs-ts/",
   }
 }

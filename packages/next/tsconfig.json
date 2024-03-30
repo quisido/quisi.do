@@ -23,6 +23,7 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "rootDir": ".",
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/next/",
     "skipLibCheck": false,
     "strict": true,
     "plugins": [

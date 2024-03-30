@@ -6,13 +6,14 @@
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
-    "rootDir": "src",
-    "sourceRoot": "src",
+    "rootDir": ".",
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/aws-rum-react/",
+
     /**
-     * `aws-rum-web` uses a CommonJS build with `web-vital`'s CommonJS as a
-     *   dependency. However, `web-vital` only vends ESM types, so TypeScript
-     *   incorrectly believes `aws-rum-web`'s CommonJS module to be importing a
-     *   ECMAScript module.
+     *   `aws-rum-web` uses a CommonJS build with `web-vital`'s CommonJS as a
+     * dependency. However, `web-vital` only vends ESM types, so TypeScript
+     * incorrectly believes `aws-rum-web`'s CommonJS module to be importing a
+     * ECMAScript module.
      */
     "skipLibCheck": true
   }

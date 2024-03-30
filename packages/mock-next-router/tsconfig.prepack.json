@@ -1,17 +1,20 @@
 {
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/"],
   "extends": "./tsconfig.json",
+  "include": ["src/"],
   "compilerOptions": {
     "declarationDir": "dist",
     "jsx": "react-jsx",
     "noEmit": false,
     "outDir": "dist",
+    "rootDir": "src",
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/mock-next-router/src/",
+
     /**
      * next/dist/server/next-server.d.ts
      *   Property "sendRenderResult" in type "NextNodeServer" is not assignable to
      *   the same property in base type "Server<Options>".
      */
     "skipLibCheck": true
-  },
-  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/"],
-  "include": ["src/"]
+  }
 }
