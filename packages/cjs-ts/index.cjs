@@ -1,5 +1,5 @@
-const PLUGINS = require('./src/plugins.js');
-const PRESETS = require('./src/presets.js');
+const PLUGINS = require('./src/plugins.cjs');
+const PRESETS = require('./src/presets.cjs');
 
 require('@babel/register')({
   babelrc: false,

@@ -44,7 +44,7 @@
     "serve": "yarn packages/next run serve",
     "start": "echo \"Please use either `yarn run dev` or `yarn run serve` instead.\" && exit 1",
     "test": "monorepo-template-test",
-    "up": "yarn up \"@!(monorepo-template)/*\" \"!(aws-rum-react|cjs-ts|fullstory-react|lazy-i18n|map-reduce-sort|mock-next-router|number-format-react|react-datadog|sentry-react|unknown2string|use-offline|use-shallow-memo)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode",
+    "up": "yarn up \"@!(monorepo-template)/*\" \"!(aws-rum-react|cjs-ts|fullstory-react|lazy-i18n|map-reduce-sort|mock-next-router|number-format-react|react-datadog|sentry-react|unknown2string|use-shallow-memo)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode",
     "whoami": "yarn packages/whoami run dev"
   },
   "workspaces": [

@@ -16,6 +16,15 @@
     "prettier"
   ],
 
+  "overrides": [
+    {
+      "files": ["*.cjs"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ],
+
   "parserOptions": {
     "ecmaVersion": "latest",
     "project": ["./tsconfig.eslint.json"]

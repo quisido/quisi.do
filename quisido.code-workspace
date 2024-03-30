@@ -9,10 +9,6 @@
       "path": "packages/next",
     },
     {
-      "name": "quisi.do CDK",
-      "path": "packages/cdk",
-    },
-    {
       "name": "Authentication",
       "path": "packages/authn",
     },
@@ -75,10 +71,6 @@
     {
       "name": "unknown2string",
       "path": "packages/unknown2string",
-    },
-    {
-      "name": "use-offline",
-      "path": "packages/use-offline",
     },
     {
       "name": "use-shallow-memo",

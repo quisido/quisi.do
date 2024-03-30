@@ -6,7 +6,6 @@ import Link from '../../../../components/link/index.js';
 import Section from '../../../../components/section.js';
 import validateString from '../../../../utils/validate-string.js';
 import LastChecked from '../last-checked/index.js';
-import OnlineStatus from '../online-status/index.js';
 import useStatus from './status.hook.js';
 import styles from './status.module.scss';
 
@@ -82,7 +81,7 @@ export default function DashboardStatus({
             />
           </Link>
         </Div>
-        <OnlineStatus>{lastUptimeCheckStatus}</OnlineStatus>
+        {lastUptimeCheckStatus ? 'Online' : 'Offline'}
         <LastChecked
           error={uptimeChecksError}
           initiated={uptimeChecksInitiated}

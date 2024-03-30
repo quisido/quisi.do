@@ -5817,11 +5817,16 @@ __metadata:
   resolution: "@quisido/authn@workspace:packages/authn"
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.1"
+    "@babel/core": "npm:^7.24.3"
+    "@babel/preset-env": "npm:^7.24.3"
+    "@babel/preset-typescript": "npm:^7.24.1"
     "@cloudflare/workers-types": "npm:^4.20240314.0"
     "@types/cookie": "npm:^0.6.0"
     "@types/jest": "npm:^29.5.12"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
     cookie: "npm:^0.6.0"
-    form-urlencoded: "npm:^6.1.4"
+    form-urlencoded: "npm:^2.0.4"
     jest: "npm:^29.7.0"
     jsonapi-datastore: "npm:^0.4.0-beta"
     map-reduce-sort: "workspace:^"
@@ -5965,7 +5970,6 @@ __metadata:
     typescript: "npm:^5.4.2"
     use-force-update: "npm:^1.0.11"
     use-mui: "npm:^1.0.6"
-    use-offline: "workspace:^"
     use-shallow-memo: "workspace:^"
     wait-on: "npm:^7.2.0"
     webpack: "npm:^5.90.3"
@@ -5980,10 +5984,7 @@ __metadata:
     "@arethetypeswrong/cli": "npm:^0.15.1"
     "@cloudflare/workers-types": "npm:^4.20240314.0"
     "@types/cookie": "npm:^0.6.0"
-    "@types/jest": "npm:^29.5.12"
     cookie: "npm:^0.6.0"
-    jest: "npm:^29.7.0"
-    ts-jest: "npm:^29.1.2"
     typescript: "npm:^5.4.2"
     wrangler: "npm:^3.34.2"
   languageName: unknown
@@ -8841,6 +8842,8 @@ __metadata:
     "@typescript-eslint/parser": "npm:^7.2.0"
     aws-rum-web: "npm:^1.17.1"
     babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
@@ -9674,9 +9677,6 @@ __metadata:
   resolution: "cjs-ts@workspace:packages/cjs-ts"
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.1"
-    "@babel/core": "npm:^7.24.3"
-    "@babel/preset-env": "npm:^7.24.3"
-    "@babel/preset-typescript": "npm:^7.24.1"
     "@babel/register": "npm:^7.23.7"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@types/babel__core": "npm:^7.20.5"
@@ -9685,13 +9685,17 @@ __metadata:
     "@types/node": "npm:^20.11.28"
     "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
     "@typescript-eslint/parser": "npm:^7.2.0"
-    babel-plugin-replace-import-extension: "npm:^1.1.4"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-prettier: "npm:^5.1.3"
     prettier: "npm:^3.2.5"
     typescript: "npm:^5.4.2"
+  peerDependencies:
+    "@babel/core": ^7.24.3
+    "@babel/preset-env": ^7.24.3
+    "@babel/preset-typescript": ^7.24.1
+    babel-plugin-replace-import-extension: ^1.1.4
   languageName: unknown
   linkType: soft
 
@@ -12286,13 +12290,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-urlencoded@npm:^6.1.4":
-  version: 6.1.4
-  resolution: "form-urlencoded@npm:6.1.4"
-  checksum: 10c0/2285c56acf3de5126723c4f55bb9e279818b8991ff1123d749c03a1a26b16e945f76c49802478cc33b2a9821553db70b789149e0e9d8b8204d8c2d40472b8c25
-  languageName: node
-  linkType: hard
-
 "fraction.js@npm:^4.3.7":
   version: 4.3.7
   resolution: "fraction.js@npm:4.3.7"
@@ -12398,6 +12395,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
     "@typescript-eslint/parser": "npm:^7.2.0"
     babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
@@ -14732,9 +14731,9 @@ __metadata:
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.1"
     "@babel/core": "npm:^7.24.0"
-    "@babel/preset-env": "npm:^7.24.0"
+    "@babel/preset-env": "npm:^7.24.3"
     "@babel/preset-react": "npm:^7.23.3"
-    "@babel/preset-typescript": "npm:^7.23.3"
+    "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@testing-library/react": "npm:^14.2.1"
@@ -14747,6 +14746,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
     "@typescript-eslint/parser": "npm:^7.2.0"
     babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
@@ -15167,9 +15168,9 @@ __metadata:
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.1"
     "@babel/core": "npm:^7.24.0"
-    "@babel/preset-env": "npm:^7.24.0"
+    "@babel/preset-env": "npm:^7.24.3"
     "@babel/preset-react": "npm:^7.23.3"
-    "@babel/preset-typescript": "npm:^7.23.3"
+    "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
@@ -15178,6 +15179,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
     "@typescript-eslint/parser": "npm:^7.2.0"
     babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
@@ -15485,9 +15488,9 @@ __metadata:
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.1"
     "@babel/core": "npm:^7.24.0"
-    "@babel/preset-env": "npm:^7.24.0"
+    "@babel/preset-env": "npm:^7.24.3"
     "@babel/preset-react": "npm:^7.23.3"
-    "@babel/preset-typescript": "npm:^7.23.3"
+    "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
@@ -15499,6 +15502,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
     "@typescript-eslint/parser": "npm:^7.2.0"
     babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
@@ -15933,9 +15938,9 @@ __metadata:
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.1"
     "@babel/core": "npm:^7.24.0"
-    "@babel/preset-env": "npm:^7.24.0"
+    "@babel/preset-env": "npm:^7.24.3"
     "@babel/preset-react": "npm:^7.23.3"
-    "@babel/preset-typescript": "npm:^7.23.3"
+    "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
@@ -15946,6 +15951,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
     "@typescript-eslint/parser": "npm:^7.2.0"
     babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
@@ -16971,9 +16978,9 @@ __metadata:
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.1"
     "@babel/core": "npm:^7.24.0"
-    "@babel/preset-env": "npm:^7.24.0"
+    "@babel/preset-env": "npm:^7.24.3"
     "@babel/preset-react": "npm:^7.23.3"
-    "@babel/preset-typescript": "npm:^7.23.3"
+    "@babel/preset-typescript": "npm:^7.24.1"
     "@datadog/browser-rum": "npm:^5.11.0"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
@@ -16983,6 +16990,8 @@ __metadata:
     "@types/node": "npm:^20.11.28"
     "@types/react": "npm:^18.2.66"
     babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^8.57.0"
     eslint-plugin-jsx-a11y: "npm:^6.8.0"
@@ -17744,9 +17753,9 @@ __metadata:
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.1"
     "@babel/core": "npm:^7.24.0"
-    "@babel/preset-env": "npm:^7.24.0"
+    "@babel/preset-env": "npm:^7.24.3"
     "@babel/preset-react": "npm:^7.23.3"
-    "@babel/preset-typescript": "npm:^7.23.3"
+    "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
@@ -17763,6 +17772,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
     "@typescript-eslint/parser": "npm:^7.2.0"
     babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
@@ -19315,9 +19326,9 @@ __metadata:
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.1"
     "@babel/core": "npm:^7.24.0"
-    "@babel/preset-env": "npm:^7.24.0"
+    "@babel/preset-env": "npm:^7.24.3"
     "@babel/preset-react": "npm:^7.23.3"
-    "@babel/preset-typescript": "npm:^7.23.3"
+    "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
@@ -19326,6 +19337,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
     "@typescript-eslint/parser": "npm:^7.2.0"
     babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
@@ -19417,54 +19430,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-offline@workspace:^, use-offline@workspace:packages/use-offline":
-  version: 0.0.0-use.local
-  resolution: "use-offline@workspace:packages/use-offline"
-  dependencies:
-    "@arethetypeswrong/cli": "npm:^0.15.1"
-    "@babel/core": "npm:^7.24.0"
-    "@babel/preset-env": "npm:^7.24.0"
-    "@babel/preset-react": "npm:^7.23.3"
-    "@babel/preset-typescript": "npm:^7.23.3"
-    "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
-    "@monorepo-template/jest-transformer": "npm:^1.0.2"
-    "@testing-library/react": "npm:^14.2.1"
-    "@types/jest": "npm:^29.5.12"
-    "@types/node": "npm:^20.11.28"
-    "@types/react": "npm:^18.2.66"
-    "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
-    "@typescript-eslint/parser": "npm:^7.2.0"
-    babel-jest: "npm:^29.7.0"
-    concurrently: "npm:^8.2.2"
-    eslint: "npm:^8.57.0"
-    eslint-config-prettier: "npm:^9.1.0"
-    eslint-plugin-jsx-a11y: "npm:^6.8.0"
-    eslint-plugin-prettier: "npm:^5.1.3"
-    eslint-plugin-react: "npm:^7.34.0"
-    eslint-plugin-react-hooks: "npm:^4.6.0"
-    jest: "npm:^29.7.0"
-    jest-environment-jsdom: "npm:^29.7.0"
-    prettier: "npm:^3.2.5"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
-    ts-jest: "npm:^29.1.2"
-    tslib: "npm:^2.6.2"
-    typescript: "npm:^5.4.2"
-  peerDependencies:
-    react: ">=16.8.0"
-  languageName: unknown
-  linkType: soft
-
 "use-shallow-memo@workspace:^, use-shallow-memo@workspace:packages/use-shallow-memo":
   version: 0.0.0-use.local
   resolution: "use-shallow-memo@workspace:packages/use-shallow-memo"
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.1"
     "@babel/core": "npm:^7.24.0"
-    "@babel/preset-env": "npm:^7.24.0"
+    "@babel/preset-env": "npm:^7.24.3"
     "@babel/preset-react": "npm:^7.23.3"
-    "@babel/preset-typescript": "npm:^7.23.3"
+    "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
     "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
@@ -19475,6 +19449,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
     "@typescript-eslint/parser": "npm:^7.2.0"
     babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"

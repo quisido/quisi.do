@@ -1,4 +1,5 @@
-/** @type {import('jest').Config} */
+import type { Config } from 'jest';
+
 export default {
   cacheDirectory: './jest/cache',
   collectCoverage: true,
@@ -35,7 +36,6 @@ export default {
   },
 
   transform: {
-    'use-shallow-memo': '@monorepo-template/jest-transformer',
     '^.+\\.tsx?$': '@monorepo-template/jest-transformer',
   },
-};
+} satisfies Config;

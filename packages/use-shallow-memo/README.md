@@ -21,7 +21,7 @@ export default function MyComponent({ data }) {
 
   // Even though `data` changes every render, `memoizedData` does not.
   useEffect(() => {
-    alert(data.message); // Hello world!
+    alert(memoizedData.message); // Hello world!
   }, [memoizedData]);
 
   // ...

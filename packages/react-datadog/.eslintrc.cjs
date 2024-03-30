@@ -2,6 +2,15 @@ module.exports = {
   extends: ['@monorepo-template/eslint-config/react-module'],
   root: false,
 
+  overrides: [
+    {
+      files: ['jest.config.ts'],
+      rules: {
+        '@typescript-eslint/naming-convention': 'off',
+      },
+    },
+  ],
+
   parserOptions: {
     tsconfigRootDir: __dirname,
     warnOnUnsupportedTypeScriptVersion: false,

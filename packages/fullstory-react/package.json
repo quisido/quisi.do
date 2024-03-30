@@ -27,7 +27,8 @@
     "attw": "attw",
     "eslint": "eslint \"**/*\" --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/fullstory-react.sarif",
     "eslint:fix": "eslint \"**/*\" --fix",
-    "jest": "jest",
+    "jest": "jest --config jest.config.cjs",
+    "jest:watch": "jest --config jest.config.cjs --watch",
     "prepack": "yarn run tsc",
     "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,jest \"yarn run attw\" \"yarn run eslint\" \"yarn run jest\"",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json"
@@ -56,6 +57,8 @@
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "babel-jest": "^29.7.0",
+    "babel-plugin-replace-import-extension": "^1.1.4",
+    "cjs-ts": "workspace:^",
     "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",

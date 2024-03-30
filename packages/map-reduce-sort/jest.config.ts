@@ -1,6 +1,5 @@
-import MODULE_NAME_MAPPER from './src/test/constants/module-name-mapper.js';
+import type { Config } from 'jest';
 
-/** @type {import('jest').Config} */
 export default {
   cacheDirectory: './jest/cache',
   collectCoverage: true,
@@ -12,12 +11,10 @@ export default {
     ['text', { skipEmpty: true, skipFull: true }],
   ],
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
-  moduleNameMapper: MODULE_NAME_MAPPER,
   resetMocks: true,
   resetModules: true,
   restoreMocks: true,
   roots: ['<rootDir>/src'],
-  setupFiles: ['<rootDir>/src/test/setup.ts'],
   testEnvironment: 'jsdom',
 
   collectCoverageFrom: [
@@ -34,8 +31,12 @@ export default {
     },
   },
 
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
+
   transform: {
     unknown2string: '@monorepo-template/jest-transformer',
     '^.+\\.tsx?$': '@monorepo-template/jest-transformer',
   },
-};
+} satisfies Config;

@@ -1,9 +1,13 @@
 {
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
   "root": true,
+
   "env": {
     "jest": true,
     "node": true
   },
+
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -11,12 +15,21 @@
     "plugin:prettier/recommended",
     "plugin:react/recommended"
   ],
-  "parser": "@typescript-eslint/parser",
+
+  "overrides": [
+    {
+      "files": ["*.cjs"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ],
+
   "parserOptions": {
     "project": ["./tsconfig.eslint.json"],
     "warnOnUnsupportedTypeScriptVersion": false
   },
-  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
+
   "rules": {
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-type-alias": "off",
@@ -39,6 +52,7 @@
       }
     ]
   },
+
   "settings": {
     "react": {
       "version": "detect"

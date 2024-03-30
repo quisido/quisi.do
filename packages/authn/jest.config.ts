@@ -1,7 +1,7 @@
-/** @type {import('ts-jest').JestConfigWithTsJest} */
+import type { JestConfigWithTsJest } from 'ts-jest';
+
 export default {
   testEnvironment: 'node',
-
   transform: {
     '.ts': [
       'ts-jest',
@@ -12,4 +12,4 @@ export default {
       },
     ],
   },
-};
+} satisfies JestConfigWithTsJest;
