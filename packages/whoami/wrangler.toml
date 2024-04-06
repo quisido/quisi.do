@@ -17,7 +17,7 @@ kv_namespaces = [
 
 [env.production.vars]
 COOKIE_DOMAIN = "quisi.do"
-ENVIRONMENT = "production"
+ENVIRONMENT_NAME = "production"
 
 [env.staging]
 name = "quisido-whoami-staging"
@@ -29,7 +29,7 @@ kv_namespaces = [
 
 [env.staging.vars]
 COOKIE_DOMAIN = "localhost"
-ENVIRONMENT = "staging"
+ENVIRONMENT_NAME = "staging"
 
 [placement]
 mode = "smart"

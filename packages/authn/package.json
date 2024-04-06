@@ -33,18 +33,21 @@
     "whoami": "wrangler whoami"
   },
   "dependencies": {
+    "babel-jest": "^29.7.0",
     "cookie": "^0.6.0",
     "form-urlencoded": "^2.0.4",
-    "jsonapi-datastore": "^0.4.0-beta",
     "map-reduce-sort": "workspace:^",
-    "patreon": "^0.4.1"
+    "patreon": "^0.4.1",
+    "proposal-async-context": "https://github.com/tc39/proposal-async-context"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.1",
     "@babel/core": "^7.24.3",
     "@babel/preset-env": "^7.24.3",
+    "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
     "@cloudflare/workers-types": "^4.20240314.0",
+    "@monorepo-template/jest-transformer": "^1.0.2",
     "@types/cookie": "^0.6.0",
     "@types/jest": "^29.5.12",
     "babel-plugin-replace-import-extension": "^1.1.4",

@@ -1,6 +1,6 @@
 /**
  *   You can only construct a `Response` during a request, so we must keep these
- * parameters unconstructed for now.
+ * parameters deconstructed for now.
  *
  * https://dev.to/kleeut/
  *   cloudflare-workers-some-functionality-can-only-
@@ -13,7 +13,6 @@ export const FAVICON_RESPONSE_BODY: BodyInit =
 export const FAVICON_RESPONSE_INIT: ResponseInit = {
   status: 200,
   headers: new Headers({
-    'Access-Control-Allow-Headers': 'Authorization',
     'Access-Control-Allow-Methods': 'GET, OPTIONS',
     'Access-Control-Max-Age': '31536000',
     Allow: 'GET, OPTIONS',
@@ -26,7 +25,6 @@ export const ROBOTS_RESPONSE_BODY: BodyInit = 'Disallow: *';
 export const ROBOTS_RESPONSE_INIT: ResponseInit = {
   status: 200,
   headers: new Headers({
-    'Access-Control-Allow-Headers': 'Authorization',
     'Access-Control-Allow-Methods': 'GET, OPTIONS',
     'Access-Control-Max-Age': '31536000',
     Allow: 'GET, OPTIONS',

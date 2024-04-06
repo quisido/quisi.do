@@ -3,9 +3,9 @@ import sign from './sign.js';
 const NONE = 0;
 
 export default function imageKit({ quality, src, width }) {
-  // if (process.env.NODE_ENV === 'development') {
-  //   return src;
-  // }
+  if (process.env.NODE_ENV === 'development') {
+    return src;
+  }
 
   const tr = [];
 

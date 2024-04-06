@@ -5,6 +5,7 @@ import Button from './quisi/button.js';
 import Div from './quisi/div.js';
 import Header from './quisi/header.js';
 import Link from './quisi/link.js';
+import LoadingIcon from './quisi/loading-icon.js';
 import Section from './quisi/section.js';
 import Span from './quisi/span.js';
 import Theme from './quisi/theme.js';
@@ -83,13 +84,7 @@ export default function Quisido<Card extends object, Row extends object>({
       return <Link {...props} />;
 
     case 'loading-icon':
-      return (
-        <Demo type="LoadingIcon">
-          {JSON.stringify({ ...props, children: undefined })}
-          <br />
-          Children: {props['children']}
-        </Demo>
-      );
+      return <LoadingIcon {...props} />;
 
     case 'section':
       return <Section {...props} />;

@@ -36,7 +36,7 @@ export default (async function fetch(
     return new Response(ROBOTS_RESPONSE_BODY, ROBOTS_RESPONSE_INIT);
   }
 
-  const { AUTHN_USER_IDS, COOKIE_DOMAIN, ENVIRONMENT } = env as Partial<
+  const { AUTHN_USER_IDS, COOKIE_DOMAIN, ENVIRONMENT_NAME } = env as Partial<
     Readonly<Record<string, unknown>>
   >;
 
@@ -76,7 +76,7 @@ export default (async function fetch(
     );
   }
 
-  if (typeof ENVIRONMENT !== 'string') {
+  if (typeof ENVIRONMENT_NAME !== 'string') {
     return new Response(
       JSON.stringify({
         code: ResponseCode.MissingEnvironmentName,
@@ -164,7 +164,7 @@ export default (async function fetch(
   }
 
   const ip: string | null =
-    ENVIRONMENT === 'development'
+    ENVIRONMENT_NAME === 'development'
       ? '127.0.0.1'
       : request.headers.get('CF-Connecting-IP');
   if (ip === null) {
