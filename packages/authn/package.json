@@ -38,7 +38,8 @@
     "form-urlencoded": "^2.0.4",
     "map-reduce-sort": "workspace:^",
     "patreon": "^0.4.1",
-    "proposal-async-context": "https://github.com/tc39/proposal-async-context"
+    "proposal-async-context": "https://github.com/tc39/proposal-async-context",
+    "tslib": "^2.6.2"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.1",

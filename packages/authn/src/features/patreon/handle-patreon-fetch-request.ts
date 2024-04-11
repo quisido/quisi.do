@@ -1,3 +1,4 @@
+import { Snapshot } from 'proposal-async-context/src/index.js';
 import MetricName from '../../constants/metric-name.js';
 import getTelemetry from '../../utils/get-telemetry.js';
 import getPatreonCurrentUser from './get-patreon-current-user.js';
@@ -6,10 +7,12 @@ export default async function handlePatreonFetchRequest(): Promise<Response> {
   const { emitPublicMetric } = getTelemetry();
   emitPublicMetric({ name: MetricName.PatreonRequest });
 
+  const snapshot: Snapshot = new Snapshot();
   const identity: Record<string, unknown> = await getPatreonCurrentUser();
-
-  console.log(identity);
-  return new Response(JSON.stringify(identity));
+  return snapshot.run((): Response => {
+    console.log(identity);
+    return new Response(JSON.stringify(identity));
+  });
   /*
   if (!('data' in identity)) {
     throw mapCauseToError({

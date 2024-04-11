@@ -30,6 +30,7 @@ export default class TelemetryQueue<M extends object> extends Telemetry<M> {
   protected override _emitPrivateMetric(metric: M): void {
     this._queue.push((): void => {
       super._emitPrivateMetric({
+        ...this._publicDimensions,
         ...this._privateDimensions,
         ...metric,
       });

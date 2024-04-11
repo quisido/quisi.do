@@ -5874,6 +5874,7 @@ __metadata:
     patreon: "npm:^0.4.1"
     proposal-async-context: "https://github.com/tc39/proposal-async-context"
     ts-jest: "npm:^29.1.2"
+    tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.2"
     wrangler: "npm:^3.34.2"
   languageName: unknown

@@ -2,6 +2,12 @@ import stateVar from '../constants/state-var.js';
 import State from '../features/state.js';
 import assert from '../utils/assert.js';
 
+/**
+ *   `withTestState` allows you to inject a mocked state variable value. This
+ * should ONLY be used to test code branches that are [theoretically] impossible
+ * to trigger, such as types of errors that cannot be forcefully thrown.
+ */
+
 interface Result<R> {
   readonly expectPrivateError: (err: Error) => void;
   readonly expectPublicDataPoint: (datapoint: AnalyticsEngineDataPoint) => void;
@@ -22,6 +28,7 @@ const SEARCH: string = new URLSearchParams({
 }).toString();
 
 export default function withTestState<R>(f: () => R): Result<R> {
+  // Create a mocked state implementation.
   const state: State = new State(
     jest.fn(),
     new Request(`https://localhost/authn/?${SEARCH}`, {
@@ -33,7 +40,7 @@ export default function withTestState<R>(f: () => R): Result<R> {
       passThroughOnException: jest.fn(),
       waitUntil: jest.fn(),
     },
-    '',
+    '0123456789abcdef0123456789abcdef',
   );
 
   const result: R = stateVar.run(state, (): R => {
