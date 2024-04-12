@@ -26,7 +26,7 @@ export default async function getPatreonAccessToken(): Promise<string> {
         return json;
       } catch (err: unknown) {
         throw mapCauseToError({
-          code: ErrorCode.NonJsonPatreonOAuthTokenResponse,
+          code: ErrorCode.NonJsonPatreonTokenResponse,
         });
       }
     };
@@ -35,7 +35,7 @@ export default async function getPatreonAccessToken(): Promise<string> {
     const json: unknown = await getJson();
     if (!isObject(json)) {
       throw mapCauseToError({
-        code: ErrorCode.NonObjectPatreonOAuthTokenResponse,
+        code: ErrorCode.NonObjectPatreonTokenResponse,
         privateData: json,
         publicData: typeof json,
       });
@@ -45,14 +45,14 @@ export default async function getPatreonAccessToken(): Promise<string> {
     const { access_token: accessToken } = json;
     if (typeof accessToken === 'undefined') {
       throw mapCauseToError({
-        code: ErrorCode.MissingPatreonOAuthAccessToken,
+        code: ErrorCode.MissingPatreonAccessToken,
       });
     }
 
     // Invalid access token
     if (typeof accessToken !== 'string') {
       throw mapCauseToError({
-        code: ErrorCode.NonStringPatreonOAuthAccessToken,
+        code: ErrorCode.NonStringPatreonAccessToken,
         privateData: accessToken,
         publicData: typeof accessToken,
       });

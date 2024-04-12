@@ -13,7 +13,7 @@ export default function getPatreonOAuthClientId(): string {
 
   if (typeof PATREON_OAUTH_CLIENT_ID !== 'string') {
     throw mapCauseToError({
-      code: ErrorCode.InvalidPatreonOAuthClientIDEnvironment,
+      code: ErrorCode.InvalidPatreonOAuthClientID,
       privateData: PATREON_OAUTH_CLIENT_ID,
       publicData: typeof PATREON_OAUTH_CLIENT_ID,
     });

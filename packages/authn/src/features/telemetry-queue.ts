@@ -1,4 +1,4 @@
-import { mapUnknownToError } from 'map-reduce-sort';
+import { mapUnknownToError } from 'fmrs';
 import MetricName from '../constants/metric-name.js';
 import type { TraceParent } from '../modules/trace-parent/index.js';
 import type { Metric } from '../types/metric.js';
@@ -41,15 +41,12 @@ const mapTraceParentToDimensions = ({
 });
 
 export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric> {
-  private readonly _ctx: ExecutionContext;
-
   public constructor(
     env: Record<string, unknown>,
     ctx: ExecutionContext,
     traceId: string,
   ) {
     super();
-    this._ctx = ctx;
 
     this.addPublicDimensions({
       ...DEFAULT_PUBLIC_METRIC_DIMENSIONS,
@@ -61,32 +58,10 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
     this.setPrivateDataset(PRIVATE_DATASET);
     this.setPublicDataset(PUBLIC_DATASET);
     // this.setTraceParent(request);
-  }
 
-  public onSideEffect(metricName: MetricName, promise: Promise<void>): void {
-    const startTime: number = Date.now();
-    this._ctx.waitUntil(
-      promise
-        .then((): void => {
-          this.emitPublicMetric({
-            endTime: Date.now(),
-            name: metricName,
-            startTime,
-            success: 1,
-          });
-        })
-        .catch((err: unknown): void => {
-          this.emitPublicMetric({
-            endTime: Date.now(),
-            name: metricName,
-            startTime,
-            success: 0,
-          });
-          this.logPrivateError(
-            new Error(`Side effect \`${metricName}\` failed.`, { cause: err }),
-          );
-        }),
-    );
+    this.onSideEffect((promise: Promise<unknown>): void => {
+      ctx.waitUntil(promise);
+    });
   }
 
   public setPrivateDataset(dataset: unknown): void {

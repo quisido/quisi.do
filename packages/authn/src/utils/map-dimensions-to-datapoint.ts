@@ -1,4 +1,4 @@
-import { sortArraysByIndex } from 'map-reduce-sort';
+import { sortArraysByIndex } from 'fmrs';
 
 const KEY_INDEX = 0;
 const mapEntryToValue = <T>([, value]: readonly [unknown, T]): T => value;

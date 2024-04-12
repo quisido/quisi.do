@@ -16,6 +16,14 @@ export default class Telemetry<M extends object> {
 
   private readonly _publicLogListeners: ((error: Error) => void)[] = [];
 
+  private readonly _sideEffectListeners: ((
+    promise: Promise<unknown>,
+  ) => void)[] = [];
+
+  protected _affect(promise: Promise<unknown>): void {
+    callCallbacks(this._sideEffectListeners, promise);
+  }
+
   protected _emitPrivateMetric(metric: M): void {
     callCallbacks(this._privateEmitListeners, metric);
   }
@@ -36,7 +44,7 @@ export default class Telemetry<M extends object> {
     this._privateLogListeners.push(callback);
   }
 
-  protected _onPrivateMetric(callback: (Mtric: M) => void): void {
+  protected _onPrivateMetric(callback: (metric: M) => void): void {
     this._privateEmitListeners.push(callback);
   }
 
@@ -44,9 +52,15 @@ export default class Telemetry<M extends object> {
     this._publicLogListeners.push(callback);
   }
 
-  protected _onPublicMetric(callback: (Mtric: M) => void): void {
+  protected _onPublicMetric(callback: (metric: M) => void): void {
     this._publicEmitListeners.push(callback);
   }
+
+  protected _onSideEffect(callback: (promise: Promise<unknown>) => void): void {
+    this._sideEffectListeners.push(callback);
+  }
+
+  public readonly affect = this._affect.bind(this);
 
   public readonly emitPrivateMetric = this._emitPrivateMetric.bind(this);
 
@@ -63,4 +77,6 @@ export default class Telemetry<M extends object> {
   public readonly onPublicError = this._onPublicError.bind(this);
 
   public readonly onPublicMetric = this._onPublicMetric.bind(this);
+
+  public readonly onSideEffect = this._onSideEffect.bind(this);
 }

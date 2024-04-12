@@ -1,16 +1,16 @@
 {
-  "name": "map-reduce-sort",
-  "version": "1.0.0",
-  "author": "quisi.do <map-reduce-sort@quisi.do>",
-  "description": "maps and reduces",
-  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/map-reduce-sort#readme",
+  "name": "fmrs",
+  "version": "1.0.1",
+  "author": "quisi.do <fmrs@quisi.do>",
+  "description": "filters/finds, maps, reduces, and sorts",
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/fmrs#readme",
   "license": "MIT",
   "main": "./dist/index.js",
   "repository": "github:quisido/quisi.do",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
-    "email": "map-reduce-sort@quisi.do",
+    "email": "fmrs@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "attw": "attw",
-    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/map-reduce-sort.sarif",
+    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/fmrs.sarif",
     "eslint:fix": "eslint '**/*' --fix",
     "jest": "jest --config jest.config.cjs",
     "jest:watch": "jest --config jest.config.cjs --watch",

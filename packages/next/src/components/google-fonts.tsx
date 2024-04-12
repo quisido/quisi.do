@@ -1,4 +1,4 @@
-import { sortArraysByIndex } from 'map-reduce-sort';
+import { sortArraysByIndex } from 'fmrs';
 import { type ReactElement } from 'react';
 
 const ENTRY_FAMILY_INDEX = 0;

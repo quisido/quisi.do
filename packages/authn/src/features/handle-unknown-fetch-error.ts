@@ -1,4 +1,4 @@
-import { mapUnknownToError } from 'map-reduce-sort';
+import { mapUnknownToError } from 'fmrs';
 import ErrorCode from '../constants/error-code.js';
 import MetricName from '../constants/metric-name.js';
 import getTelemetry from '../utils/get-telemetry.js';

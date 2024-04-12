@@ -2,6 +2,7 @@ compatibility_date = "2023-10-30"
 kv_namespaces = [{ binding = "AUTHN_USER_IDS", id = "AUTHN_USER_IDS" }]
 main = "src/index.ts"
 name = "quisido-authn-dev"
+r2_buckets = [{ binding = 'AUTHN_DATA', bucket_name = 'authn-dev' }]
 tsconfig = "./tsconfig.json"
 
 analytics_engine_datasets = [
@@ -10,15 +11,20 @@ analytics_engine_datasets = [
 ]
 
 d1_databases = [
-  { binding = "AUTHN", database_id = "AUTHN", database_name = "authn-dev" },
+  { binding = "AUTHN_DB", database_id = "AUTHN", database_name = "authn-dev" },
 ]
 
 [dev]
 local_protocol = "https"
 port = 5882              # parseInt('authn', 36) % 9999
 
+##############
+# Production #
+##############
+
 [env.production]
 name = "quisido-authn"
+r2_buckets = [{ binding = 'AUTHN_DATA', bucket_name = 'authn' }]
 
 analytics_engine_datasets = [
   { binding = "PRIVATE_DATASET", dataset = "AUTHN_PRIVATE" },
@@ -26,7 +32,7 @@ analytics_engine_datasets = [
 ]
 
 d1_databases = [
-  { binding = "AUTHN", database_id = "d0e825fc-b58d-49b3-a86c-a9d967278d80", database_name = "authn", database_preview_id = "d546119e-036c-4c3d-a684-953418657a8d" },
+  { binding = "AUTHN_DB", database_id = "d0e825fc-b58d-49b3-a86c-a9d967278d80", database_name = "authn", database_preview_id = "d546119e-036c-4c3d-a684-953418657a8d" },
 ]
 
 kv_namespaces = [
@@ -41,8 +47,13 @@ PATREON_OAUTH_CLIENT_ID = "J_6jrNJZNibHylSF83UVl9I4OHZYf67RAsU0s7_LnH1N5BKF-vgOy
 PATREON_OAUTH_HOST = "https://www.patreon.com"
 PATREON_OAUTH_REDIRECT_URI = "https://a.quisi.do/patreon/"
 
+###########
+# Staging #
+###########
+
 [env.staging]
 name = "quisido-authn-staging"
+r2_buckets = [{ binding = 'AUTHN_DATA', bucket_name = 'authn-staging' }]
 workers_dev = true
 
 analytics_engine_datasets = [
@@ -51,7 +62,7 @@ analytics_engine_datasets = [
 ]
 
 d1_databases = [
-  { binding = "AUTHN", database_id = "d546119e-036c-4c3d-a684-953418657a8d", database_name = "authn-staging" },
+  { binding = "AUTHN_DB", database_id = "d546119e-036c-4c3d-a684-953418657a8d", database_name = "authn-staging" },
 ]
 
 kv_namespaces = [

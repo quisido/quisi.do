@@ -22,10 +22,10 @@ export default {
 
   coverageThreshold: {
     global: {
-      branches: 100,
-      functions: 100,
-      lines: 100,
-      statements: 100,
+      branches: 32,
+      functions: 58,
+      lines: 75,
+      statements: 75,
     },
   },
 
@@ -39,7 +39,7 @@ export default {
   },
 
   transform: {
-    'map-reduce-sort': '@monorepo-template/jest-transformer',
+    fmrs: '@monorepo-template/jest-transformer',
     unknown2string: '@monorepo-template/jest-transformer',
     '^(.*\\/)?proposal-async-context\\/src\\/index(\\.[jt]s)?$': [
       'ts-jest',

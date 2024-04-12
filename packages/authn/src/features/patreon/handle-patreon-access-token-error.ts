@@ -11,7 +11,7 @@ export default async function handlePatreonAccessTokenError(
 ): Promise<never> {
   if (response.body === null) {
     throw mapCauseToError({
-      code: ErrorCode.MissingPatreonOAuthTokenErrorBody,
+      code: ErrorCode.MissingPatreonTokenErrorBody,
     });
   }
 
@@ -23,7 +23,7 @@ export default async function handlePatreonAccessTokenError(
         return JSON.parse(body);
       } catch (err: unknown) {
         throw mapCauseToError({
-          code: ErrorCode.NonJsonPatreonOAuthTokenErrorBody,
+          code: ErrorCode.NonJsonPatreonTokenErrorBody,
           privateData: body,
         });
       }
@@ -32,7 +32,7 @@ export default async function handlePatreonAccessTokenError(
     const json: unknown = getBodyJson();
     if (!isObject(json)) {
       throw mapCauseToError({
-        code: ErrorCode.NonObjectPatreonOAuthTokenError,
+        code: ErrorCode.NonObjectPatreonTokenError,
         privateData: json,
         publicData: typeof json,
       });
@@ -41,14 +41,14 @@ export default async function handlePatreonAccessTokenError(
     const { error, error_description: errorDescription } = json;
     if (typeof error === 'undefined') {
       throw mapCauseToError({
-        code: ErrorCode.MissingPatreonOAuthTokenErrorCode,
+        code: ErrorCode.MissingPatreonTokenErrorCode,
       });
     }
 
     switch (error) {
       case 'invalid_client':
         throw mapCauseToError({
-          code: ErrorCode.InvalidPatreonOAuthClientIDResponse,
+          code: ErrorCode.InvalidPatreonClientID,
           publicData: getPatreonOAuthClientId(),
         });
 
@@ -61,28 +61,28 @@ export default async function handlePatreonAccessTokenError(
       case 'invalid_request': {
         if (typeof errorDescription === 'undefined') {
           throw mapCauseToError({
-            code: ErrorCode.MissingPatreonInvalidRequestDescription,
+            code: ErrorCode.MissingInvalidPatreonRequestDescription,
             privateData: json,
           });
         }
 
         if (typeof errorDescription !== 'string') {
           throw mapCauseToError({
-            code: ErrorCode.NonStringPatreonInvalidRequestDescription,
+            code: ErrorCode.NonStringInvalidPatreonRequestDescription,
             privateData: errorDescription,
             publicData: typeof errorDescription,
           });
         }
 
         throw mapCauseToError({
-          code: ErrorCode.InvalidPatreonOAuthTokenRequest,
+          code: ErrorCode.InvalidPatreonTokenRequest,
           privateData: json,
         });
       }
 
       default:
         throw mapCauseToError({
-          code: ErrorCode.UnknownPatreonOAuthTokenError,
+          code: ErrorCode.UnknownPatreonTokenError,
           privateData: json,
         });
     }

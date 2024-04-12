@@ -1,6 +1,6 @@
 'use client';
 
-import { mapUnknownToString } from 'map-reduce-sort';
+import { mapUnknownToString } from 'fmrs';
 import { useCallback, useRef, useState, type MutableRefObject } from 'react';
 import type AsyncState from '../types/async-state.js';
 
