@@ -7,7 +7,7 @@ import handleThrottledRequest from './handle-throttled-request.js';
 import handlePatreonFetchRequest from './patreon/handle-patreon-fetch-request.js';
 import shouldThrottle from './should-throttle.js';
 
-export default function handleFetchRequest(): Promise<Response> | Response {
+export default async function handleFetchRequest(): Promise<Response> {
   const pathname: string = getRequestPathname();
 
   // Static responses for reserved pathnames

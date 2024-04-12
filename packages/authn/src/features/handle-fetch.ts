@@ -7,15 +7,15 @@ import handleInvalidIsolateEnvironment from './handle-invalid-isolate-environmen
 import handleMissingIsolateEnvironment from './handle-missing-isolate-environment.js';
 import State from './state.js';
 
-export default function handleFetch(
+export default async function handleFetch(
   fetch: Fetcher['fetch'],
   request: Request,
   env: unknown,
   ctx: ExecutionContext,
-): Promise<Response> | Response {
+): Promise<Response> {
   const traceId: string = createTraceId();
   const state: State = new State(fetch, request, ctx, traceId);
-  return stateVar.run(state, (): Promise<Response> | Response => {
+  return stateVar.run(state, async (): Promise<Response> => {
     if (typeof env === 'undefined') {
       return handleMissingIsolateEnvironment();
     }
@@ -30,9 +30,11 @@ export default function handleFetch(
        * stateful errors when validating it here.
        */
       state.setEnv(env);
-      return handleFetchRequest();
+      return await handleFetchRequest();
     } catch (err: unknown) {
-      return handleFetchError(err);
+      return stateVar.run(state, (): Response => {
+        return handleFetchError(err);
+      });
     } finally {
       state.flushTelemetry();
     }
