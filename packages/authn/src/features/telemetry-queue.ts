@@ -48,6 +48,18 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
   ) {
     super();
 
+    this.onPrivateError((err: Error): void => {
+      console.error(err);
+    });
+
+    this.onPublicError((err: Error): void => {
+      console.error(err);
+    });
+
+    this.onSideEffect((promise: Promise<unknown>): void => {
+      ctx.waitUntil(promise);
+    });
+
     this.addPublicDimensions({
       ...DEFAULT_PUBLIC_METRIC_DIMENSIONS,
       timestamp: Date.now(),
@@ -58,10 +70,6 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
     this.setPrivateDataset(PRIVATE_DATASET);
     this.setPublicDataset(PUBLIC_DATASET);
     // this.setTraceParent(request);
-
-    this.onSideEffect((promise: Promise<unknown>): void => {
-      ctx.waitUntil(promise);
-    });
   }
 
   public setPrivateDataset(dataset: unknown): void {
