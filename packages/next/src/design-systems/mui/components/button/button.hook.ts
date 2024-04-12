@@ -1,11 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation.js';
-import { type MouseEvent, type ReactNode, useEffect } from 'react';
+import { useEffect, type MouseEvent, type ReactNode } from 'react';
 import innerText from 'react-innertext';
 import useEffectEvent from '../../../../hooks/use-effect-event.js';
 import useEmit from '../../../../hooks/use-emit/index.js';
-import isHrefBlank from '../../../../utils/is-href-blank.js';
 
 interface Props {
   readonly children: ReactNode;
@@ -28,7 +27,6 @@ export default function useMuiButton({
   href,
   onClick,
 }: Props): State {
-  const isBlank: boolean = isHrefBlank(href);
   const label: string = innerText(children);
 
   // Contexts
@@ -36,12 +34,12 @@ export default function useMuiButton({
   const router = useRouter();
 
   useEffect((): void => {
-    if (isBlank || typeof href === 'undefined') {
+    if (typeof href === 'undefined') {
       return;
     }
 
     router.prefetch(href);
-  }, [href, isBlank, router]);
+  }, [href, router]);
 
   // States
   return {
@@ -61,17 +59,6 @@ export default function useMuiButton({
             label,
             target: '_self',
             url: null,
-          });
-          return;
-        }
-
-        if (isBlank) {
-          window.open(href, '_blank');
-          emit('click', {
-            feature,
-            label,
-            target: '_blank',
-            url: href,
           });
           return;
         }

@@ -1,10 +1,9 @@
 import { useRouter } from 'next/navigation.js';
-import { type MouseEvent, type ReactElement, useEffect } from 'react';
+import { useEffect, type MouseEvent, type ReactElement } from 'react';
 import innerText from 'react-innertext';
 import { type Props } from '../../components/link/index.js';
 import useEmit from '../../hooks/use-emit/index.js';
 import useTheme from '../../hooks/use-theme.js';
-import isHrefBlank from '../../utils/is-href-blank.js';
 
 export default function Link({
   children,
@@ -13,8 +12,6 @@ export default function Link({
   label: ariaLabel,
   title,
 }: Props): ReactElement {
-  const isBlank: boolean = isHrefBlank(href);
-
   // Contexts
   const emit = useEmit();
   const router = useRouter();
@@ -22,12 +19,12 @@ export default function Link({
 
   // Effects
   useEffect((): void => {
-    if (isBlank || typeof href === 'undefined') {
+    if (typeof href === 'undefined') {
       return;
     }
 
     router.prefetch(href);
-  }, [href, isBlank, router]);
+  }, [href, router]);
 
   return (
     <a
@@ -37,23 +34,10 @@ export default function Link({
       onClick={(e: MouseEvent<HTMLAnchorElement>): void => {
         e.preventDefault();
 
-        const label: string = innerText(children);
-        if (isBlank) {
-          window.open(href, '_blank');
-          emit('click', {
-            feature,
-            label,
-            target: '_blank',
-            url: href,
-          });
-          return;
-        }
-
         router.push(href);
         emit('click', {
           feature,
-          label,
-          target: '_self',
+          label: innerText(children),
           url: href,
         });
       }}

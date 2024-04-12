@@ -49,11 +49,13 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
     super();
 
     this.onPrivateError((err: Error): void => {
-      console.error(err);
+      // When given an `Error`, Cloudflare does not include `cause` or `stack`.
+      console.error(err.message, err.cause, err.stack);
     });
 
     this.onPublicError((err: Error): void => {
-      console.error(err);
+      // When given an `Error`, Cloudflare does not include `cause` or `stack`.
+      console.error(err.message, err.cause, err.stack);
     });
 
     this.onSideEffect((promise: Promise<unknown>): void => {
