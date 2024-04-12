@@ -3,15 +3,10 @@ interface State {
   value: string;
 }
 
-export default async function mapReadableStreamToString(
-  stream: ReadableStream,
-): Promise<string> {
-  /**
-   *   Technical debt: I could not create an `ArrayBuffer` type guard that
-   * includes `Uint8Array`. 🙁
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const reader: ReadableStreamDefaultReader<ArrayBuffer> = stream.getReader();
+export default async function mapReadableStreamToString<
+  T extends ArrayBuffer | ArrayBufferView,
+>(stream: ReadableStream<T>): Promise<string> {
+  const reader: ReadableStreamDefaultReader<T> = stream.getReader();
 
   const state: State = {
     done: false,

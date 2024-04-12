@@ -2,8 +2,8 @@
 /dist/
 /jest/
 /node_modules/
+/*.cpuprofile
 /*.iml
 /*.tsbuildinfo
 /*-*.*.*.tgz
 /LICENSE
-/tsc-output.cpuprofile

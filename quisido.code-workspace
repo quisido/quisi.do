@@ -33,16 +33,16 @@
       "path": "packages/cjs-ts",
     },
     {
+      "name": "fmrs",
+      "path": "packages/fmrs",
+    },
+    {
       "name": "fullstory-react",
       "path": "packages/fullstory-react",
     },
     {
       "name": "lazy-i18n",
       "path": "packages/lazy-i18n",
-    },
-    {
-      "name": "map-reduce-sort",
-      "path": "packages/map-reduce-sort",
     },
     {
       "name": "mock-next-router",

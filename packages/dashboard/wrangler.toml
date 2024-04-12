@@ -15,7 +15,7 @@ name = "quisido-dashboard"
 r2_buckets = [{ binding = 'DASHBOARD', bucket_name = 'quisido-dashboard' }]
 
 [env.production.vars]
-ENVIRONMENT = "production"
+ENVIRONMENT_NAME = "production"
 
 [env.staging]
 analytics_engine_datasets = [{ binding = "AUTHN", dataset = "AUTHN_STAGING" }]
@@ -24,7 +24,7 @@ r2_buckets = [{ binding = 'DASHBOARD', bucket_name = 'quisido-dashboard' }]
 workers_dev = true
 
 [env.staging.vars]
-ENVIRONMENT = "staging"
+ENVIRONMENT_NAME = "staging"
 
 [placement]
 mode = "smart"

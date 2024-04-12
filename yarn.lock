@@ -2720,6 +2720,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-transform-react-display-name@npm:^7.24.1":
+  version: 7.24.1
+  resolution: "@babel/plugin-transform-react-display-name@npm:7.24.1"
+  dependencies:
+    "@babel/helper-plugin-utils": "npm:^7.24.0"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/adf1a3cb0df8134533a558a9072a67e34127fd489dfe431c3348a86dd41f3e74861d5d5134bbb68f61a9cdb3f7e79b2acea1346be94ce4d3328a64e5a9e09be1
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-transform-react-jsx-development@npm:^7.22.5":
   version: 7.22.5
   resolution: "@babel/plugin-transform-react-jsx-development@npm:7.22.5"
@@ -2731,7 +2742,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-react-jsx@npm:^7.22.15, @babel/plugin-transform-react-jsx@npm:^7.22.5":
+"@babel/plugin-transform-react-jsx@npm:^7.22.15, @babel/plugin-transform-react-jsx@npm:^7.22.5, @babel/plugin-transform-react-jsx@npm:^7.23.4":
   version: 7.23.4
   resolution: "@babel/plugin-transform-react-jsx@npm:7.23.4"
   dependencies:
@@ -2755,6 +2766,18 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 10c0/76287adeab656fb7f39243e5ab6a8c60069cf69fffeebd1566457d56cb2f966366a23bd755d3e369f4d0437459e3b76243df370caa7d7d2287a8560b66c53ca2
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-react-pure-annotations@npm:^7.24.1":
+  version: 7.24.1
+  resolution: "@babel/plugin-transform-react-pure-annotations@npm:7.24.1"
+  dependencies:
+    "@babel/helper-annotate-as-pure": "npm:^7.22.5"
+    "@babel/helper-plugin-utils": "npm:^7.24.0"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/9eb3056fcaadd63d404fd5652b2a3f693bc4758ba753fee5b5c580c7a64346eeeb94e5a4f77a99c76f3cf06d1f1ad6c227647cd0b1219efe3d00cafa5a6e7b2a
   languageName: node
   linkType: hard
 
@@ -3244,6 +3267,22 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 10c0/cecb2493e09fd4ffa5effcef1d06e968386b1bfe077a99834f7e8ef249208274fca62fe5a6b3986ef1c1c3900b2eb409adb528ae1b73dba31397b16f9262e83c
+  languageName: node
+  linkType: hard
+
+"@babel/preset-react@npm:^7.24.1":
+  version: 7.24.1
+  resolution: "@babel/preset-react@npm:7.24.1"
+  dependencies:
+    "@babel/helper-plugin-utils": "npm:^7.24.0"
+    "@babel/helper-validator-option": "npm:^7.23.5"
+    "@babel/plugin-transform-react-display-name": "npm:^7.24.1"
+    "@babel/plugin-transform-react-jsx": "npm:^7.23.4"
+    "@babel/plugin-transform-react-jsx-development": "npm:^7.22.5"
+    "@babel/plugin-transform-react-pure-annotations": "npm:^7.24.1"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10c0/a842abc5a024ed68a0ce4c1244607d40165cb6f8cf1817ebda282e470f20302d81c6a61cb41c1a31aa6c4e99ce93df4dd9e998a8ded1417c25d7480f0e14103a
   languageName: node
   linkType: hard
 
@@ -5819,19 +5858,23 @@ __metadata:
     "@arethetypeswrong/cli": "npm:^0.15.1"
     "@babel/core": "npm:^7.24.3"
     "@babel/preset-env": "npm:^7.24.3"
+    "@babel/preset-react": "npm:^7.24.1"
     "@babel/preset-typescript": "npm:^7.24.1"
     "@cloudflare/workers-types": "npm:^4.20240314.0"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@types/cookie": "npm:^0.6.0"
     "@types/jest": "npm:^29.5.12"
+    babel-jest: "npm:^29.7.0"
     babel-plugin-replace-import-extension: "npm:^1.1.4"
     cjs-ts: "workspace:^"
     cookie: "npm:^0.6.0"
+    fmrs: "workspace:^"
     form-urlencoded: "npm:^2.0.4"
     jest: "npm:^29.7.0"
-    jsonapi-datastore: "npm:^0.4.0-beta"
-    map-reduce-sort: "workspace:^"
     patreon: "npm:^0.4.1"
+    proposal-async-context: "https://github.com/tc39/proposal-async-context"
     ts-jest: "npm:^29.1.2"
+    tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.2"
     wrangler: "npm:^3.34.2"
   languageName: unknown
@@ -5944,13 +5987,13 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.1.3"
     eslint-plugin-react: "npm:^7.34.0"
     eslint-plugin-react-hooks: "npm:^4.6.0"
+    fmrs: "workspace:^"
     fullstory-react: "workspace:^"
     istanbul-lib-coverage: "npm:^3.2.2"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
     lazy-i18n: "workspace:^"
     lighthouse: "npm:^11.6.0"
-    map-reduce-sort: "workspace:^"
     mixpanel-browser: "npm:^2.49.0"
     next: "npm:^14.2.0-canary.24"
     number-format-react: "workspace:^"
@@ -12204,6 +12247,40 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fmrs@workspace:^, fmrs@workspace:packages/fmrs":
+  version: 0.0.0-use.local
+  resolution: "fmrs@workspace:packages/fmrs"
+  dependencies:
+    "@arethetypeswrong/cli": "npm:^0.15.1"
+    "@babel/core": "npm:^7.24.0"
+    "@babel/preset-env": "npm:^7.24.3"
+    "@babel/preset-react": "npm:^7.23.3"
+    "@babel/preset-typescript": "npm:^7.24.1"
+    "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
+    "@monorepo-template/eslint-config": "npm:^1.0.7"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
+    "@types/jest": "npm:^29.5.12"
+    "@types/node": "npm:^20.11.28"
+    "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
+    "@typescript-eslint/parser": "npm:^7.2.0"
+    babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
+    concurrently: "npm:^8.2.2"
+    eslint: "npm:^8.57.0"
+    eslint-config-prettier: "npm:^9.1.0"
+    eslint-plugin-import: "npm:^2.29.1"
+    eslint-plugin-prettier: "npm:^5.1.3"
+    jest: "npm:^29.7.0"
+    jest-environment-jsdom: "npm:^29.7.0"
+    prettier: "npm:^3.2.5"
+    ts-jest: "npm:^29.1.2"
+    tslib: "npm:^2.6.2"
+    typescript: "npm:^5.4.2"
+    unknown2string: "workspace:^"
+  languageName: unknown
+  linkType: soft
+
 "follow-redirects@npm:^1.15.4":
   version: 1.15.6
   resolution: "follow-redirects@npm:1.15.6"
@@ -15162,40 +15239,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"map-reduce-sort@workspace:^, map-reduce-sort@workspace:packages/map-reduce-sort":
-  version: 0.0.0-use.local
-  resolution: "map-reduce-sort@workspace:packages/map-reduce-sort"
-  dependencies:
-    "@arethetypeswrong/cli": "npm:^0.15.1"
-    "@babel/core": "npm:^7.24.0"
-    "@babel/preset-env": "npm:^7.24.3"
-    "@babel/preset-react": "npm:^7.23.3"
-    "@babel/preset-typescript": "npm:^7.24.1"
-    "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
-    "@monorepo-template/jest-transformer": "npm:^1.0.2"
-    "@types/jest": "npm:^29.5.12"
-    "@types/node": "npm:^20.11.28"
-    "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
-    "@typescript-eslint/parser": "npm:^7.2.0"
-    babel-jest: "npm:^29.7.0"
-    babel-plugin-replace-import-extension: "npm:^1.1.4"
-    cjs-ts: "workspace:^"
-    concurrently: "npm:^8.2.2"
-    eslint: "npm:^8.57.0"
-    eslint-config-prettier: "npm:^9.1.0"
-    eslint-plugin-import: "npm:^2.29.1"
-    eslint-plugin-prettier: "npm:^5.1.3"
-    jest: "npm:^29.7.0"
-    jest-environment-jsdom: "npm:^29.7.0"
-    prettier: "npm:^3.2.5"
-    ts-jest: "npm:^29.1.2"
-    tslib: "npm:^2.6.2"
-    typescript: "npm:^5.4.2"
-    unknown2string: "workspace:^"
-  languageName: unknown
-  linkType: soft
-
 "marked-terminal@npm:^6.0.0":
   version: 6.2.0
   resolution: "marked-terminal@npm:6.2.0"
@@ -16766,6 +16809,13 @@ __metadata:
     object-assign: "npm:^4.1.1"
     react-is: "npm:^16.13.1"
   checksum: 10c0/59ece7ca2fb9838031d73a48d4becb9a7cc1ed10e610517c7d8f19a1e02fa47f7c27d557d8a5702bec3cfeccddc853579832b43f449e54635803f277b1c78077
+  languageName: node
+  linkType: hard
+
+"proposal-async-context@https://github.com/tc39/proposal-async-context":
+  version: 1.0.0
+  resolution: "proposal-async-context@https://github.com/tc39/proposal-async-context.git#commit=b2434001cc55818530bc7940280f9cb65b6a4f0b"
+  checksum: 10c0/4a66ef5abae69e0ac9d98fc75eddab1eae7860d3f61b44a63de998dd6e886e85ea01010081d9838c00af90ea04420e81b4a9aeb9abf2b51fbbff7b8081197e93
   languageName: node
   linkType: hard
 

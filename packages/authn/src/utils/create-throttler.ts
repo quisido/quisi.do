@@ -3,6 +3,7 @@ export default function createThrottler(): (
   ms: number,
 ) => void {
   const map: Map<number | string | symbol, number> = new Map();
+
   return function throttle(key: number | string | symbol, ms: number): void {
     const lastCallTime: number | undefined = map.get(key);
     const now: number = Date.now();

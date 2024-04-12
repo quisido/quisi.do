@@ -1,5 +1,5 @@
+import { mapUnknownToString } from 'fmrs';
 import I18n from 'lazy-i18n';
-import { mapUnknownToString } from 'map-reduce-sort';
 import { type ReactElement } from 'react';
 import Div from '../../../../components/div.js';
 import Link from '../../../../components/link/index.js';

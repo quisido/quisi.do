@@ -7,6 +7,6 @@
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
     "rootDir": ".",
-    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/react-datadog/"
+    "sourceRoot": "."
   }
 }

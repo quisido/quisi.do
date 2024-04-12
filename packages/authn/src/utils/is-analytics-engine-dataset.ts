@@ -7,6 +7,6 @@ export default function isAnaylticsEngineDataset(
   return (
     isObject(value) &&
     'writeDataPoint' in value &&
-    typeof value.writeDataPoint === 'function'
+    typeof value['writeDataPoint'] === 'function'
   );
 }

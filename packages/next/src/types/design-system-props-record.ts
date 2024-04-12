@@ -1,9 +1,9 @@
 import { type PropsWithChildren } from 'react';
 import { type Props as BannerProps } from '../components/banner.js';
 import { type Props as ButtonProps } from '../components/button.js';
-import { type Props as CardsProps } from '../components/cards/index.js';
+import { type Props as CardsProps } from '../components/cards.js';
 import { type Props as CheckboxProps } from '../components/checkbox.js';
-import { type Props as ChipProps } from '../components/chip/index.js';
+import { type Props as ChipProps } from '../components/chip.js';
 import { type Props as DivProps } from '../components/div.js';
 import { type Props as HeaderProps } from '../components/header/index.js';
 import { type Props as InputProps } from '../components/input.js';

@@ -9,10 +9,10 @@ export default function isKVNamespace(value: unknown): value is KVNamespace {
     'getWithMetadata' in value &&
     'list' in value &&
     'put' in value &&
-    typeof value.delete === 'function' &&
-    typeof value.get === 'function' &&
-    typeof value.getWithMetadata === 'function' &&
-    typeof value.list === 'function' &&
-    typeof value.put === 'function'
+    typeof value['delete'] === 'function' &&
+    typeof value['get'] === 'function' &&
+    typeof value['getWithMetadata'] === 'function' &&
+    typeof value['list'] === 'function' &&
+    typeof value['put'] === 'function'
   );
 }

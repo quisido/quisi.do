@@ -18,7 +18,7 @@ import GoogleAnalytics from '../features/google-analytics.js';
 import GoogleFonts from '../features/google-fonts.js';
 import Header from '../features/header.js';
 import HostnameProvider from '../features/hostname-provider.js';
-import LayoutStyle from '../features/layout-style.js';
+import styles from '../features/layout.module.scss';
 import NotificationsProvider from '../features/notifications-provider.js';
 import Notifications from '../features/notifications.js';
 import Preconnect from '../features/preconnect.js';
@@ -33,7 +33,9 @@ import validateString from '../utils/validate-string.js';
 export { default as metadata } from '../constants/root-metadata.js';
 export { default as viewport } from '../constants/root-viewport.js';
 
+const BODY_CLASS_NAME: string = validateString(styles['body']);
 const CLARITY_TAG: string = validateString(process.env['CLARITY_TAG']);
+const HTML_CLASS_NAME: string = validateString(styles['html']);
 
 /**
  *   We do not put wrappers around `<body>` itself, because we do not want to
@@ -56,9 +58,8 @@ const Contexts: ComponentType<PropsWithChildren> = withWrappers(
 
 function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
   return (
-    <html lang="en">
+    <html className={HTML_CLASS_NAME} lang="en">
       <head>
-        <LayoutStyle />
         <Clarity tag={CLARITY_TAG} />
         {process.env.NODE_ENV === 'production' && (
           <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
@@ -69,7 +70,7 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
         <ReportUri />
         {/* <Traceparent /> */}
       </head>
-      <body>
+      <body className={BODY_CLASS_NAME}>
         <noscript>JavaScript is required.</noscript>
         <Contexts>
           <Notifications />

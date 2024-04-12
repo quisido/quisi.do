@@ -7,7 +7,7 @@
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
     "rootDir": ".",
-    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/aws-rum-react/",
+    "sourceRoot": ".",
 
     /**
      *   `aws-rum-web` uses a CommonJS build with `web-vital`'s CommonJS as a

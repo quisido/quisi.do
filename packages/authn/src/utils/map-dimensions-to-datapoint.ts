@@ -1,28 +1,36 @@
-import sortEntryByKey from './sort-entry-by-key.js';
+import { sortArraysByIndex } from 'fmrs';
 
-const reduceEntriesToDataPoint = (
+const KEY_INDEX = 0;
+const mapEntryToValue = <T>([, value]: readonly [unknown, T]): T => value;
+
+const reduceValuesToDataPoint = (
   datapoint: Required<Omit<AnalyticsEngineDataPoint, 'indexes'>>,
-  [, value]: readonly [string, number | string],
+  value: number | string | undefined,
 ): Required<Omit<AnalyticsEngineDataPoint, 'indexes'>> => {
-  const { blobs = [], doubles = [] } = datapoint;
+  if (typeof value === 'undefined') {
+    return datapoint;
+  }
+
   if (typeof value === 'number') {
     return {
-      blobs,
-      doubles: [...doubles, value],
+      ...datapoint,
+      doubles: [...datapoint.doubles, value],
     };
   }
+
   return {
-    blobs: [...blobs, value],
-    doubles,
+    ...datapoint,
+    blobs: [...datapoint.blobs, value],
   };
 };
 
 export default function mapDimensionsToDataPoint(
-  dimensions: Readonly<Record<string, number | string>>,
+  dimensions: Readonly<Partial<Record<string, number | string>>>,
 ): Required<Omit<AnalyticsEngineDataPoint, 'indexes'>> {
   return Object.entries(dimensions)
-    .sort(sortEntryByKey)
-    .reduce(reduceEntriesToDataPoint, {
+    .sort(sortArraysByIndex(KEY_INDEX))
+    .map(mapEntryToValue)
+    .reduce(reduceValuesToDataPoint, {
       blobs: [],
       doubles: [],
     });
