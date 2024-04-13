@@ -32,8 +32,8 @@ enum MetricName {
   OAuthUserIdSelected = 'query.oauth.select.user-id',
 
   // Patreon
-  InvalidPatreonCurrentUserAttributes = 'patreon.current-user.attributes.invalid',
-  MissingPatreonCurrentUserAttributes = 'patreon.current-user.attributes.missing',
+  InvalidPatreonIdentityAttributes = 'patreon.identity.attributes.invalid',
+  MissingPatreonIdentityAttributes = 'patreon.identity.attributes.missing',
 
   // quisi.do
   AuthnIdCreated = 'authn-id.created',

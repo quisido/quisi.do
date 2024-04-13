@@ -14,6 +14,17 @@ interface State {
   readonly title: string;
 }
 
+const SCOPES: readonly string[] = [
+  // 'campaigns',
+  // 'campaigns.members',
+  // 'campaigns.members[email]',
+  // 'campaigns.members.address',
+  // 'campaigns.posts',
+  'identity',
+  'identity[email]',
+  // 'identity.memberships',
+];
+
 function useAuthenticateLink(): State {
   // Contexts
   const pathname: string = usePathname();
@@ -29,6 +40,7 @@ function useAuthenticateLink(): State {
         client_id: PATREON_OAUTH_CLIENT_ID,
         redirect_uri: PATREON_OAUTH_REDIRECT_URI,
         response_type: 'code',
+        scope: SCOPES.join(' '),
         state: JSON.stringify({
           returnPath: `${pathname}${search}`,
           sessionId,

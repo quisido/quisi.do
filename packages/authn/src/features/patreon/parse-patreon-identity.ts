@@ -1,13 +1,13 @@
-import ErrorCode from '../constants/error-code.js';
-import Gender from '../constants/gender.js';
-import MetricName from '../constants/metric-name.js';
-import OAuthProvider from '../constants/oauth-provider.js';
-import getTelemetry from './get-telemetry.js';
-import isObject from './is-object.js';
-import isPatreonGender from './is-patreon-gender.js';
-import mapCauseToError from './map-cause-to-error.js';
-import mapPatreonGenderToGender from './map-patreon-gender-to-gender.js';
-import writeOAuthResponse from './write-file.js';
+import ErrorCode from '../../constants/error-code.js';
+import Gender from '../../constants/gender.js';
+import MetricName from '../../constants/metric-name.js';
+import OAuthProvider from '../../constants/oauth-provider.js';
+import getTelemetry from '../../utils/get-telemetry.js';
+import isObject from '../../utils/is-object.js';
+import isPatreonGender from '../../utils/is-patreon-gender.js';
+import mapCauseToError from '../../utils/map-cause-to-error.js';
+import mapPatreonGenderToGender from '../../utils/map-patreon-gender-to-gender.js';
+import writeOAuthResponse from '../../utils/write-oauth-response.js';
 
 interface Result {
   readonly email?: string | undefined;
@@ -18,21 +18,21 @@ interface Result {
   readonly isEmailVerified?: boolean | undefined;
 }
 
-export default function parsePatreonCurrentUser(
-  currentUser: Record<string, unknown>,
+export default function parsePatreonIdentity(
+  identity: Record<string, unknown>,
 ): Result {
   const { affect, emitPublicMetric } = getTelemetry();
 
-  const { data } = currentUser;
+  const { data } = identity;
   if (!isObject(data)) {
     if (typeof data === 'undefined') {
       throw mapCauseToError({
-        code: ErrorCode.MissingPatreonCurrentUserData,
+        code: ErrorCode.MissingPatreonIdentityData,
       });
     }
 
     throw mapCauseToError({
-      code: ErrorCode.InvalidPatreonCurrentUserData,
+      code: ErrorCode.InvalidPatreonIdentityData,
       privateData: data,
       publicData: typeof data,
     });
@@ -42,23 +42,23 @@ export default function parsePatreonCurrentUser(
   if (typeof id !== 'string') {
     if (typeof id === 'undefined') {
       throw mapCauseToError({
-        code: ErrorCode.MissingPatreonCurrentUserId,
+        code: ErrorCode.MissingPatreonIdentityId,
       });
     }
 
     throw mapCauseToError({
-      code: ErrorCode.NonStringPatreonCurrentUserId,
+      code: ErrorCode.NonStringPatreonIdentityId,
       privateData: id,
       publicData: typeof id,
     });
   }
 
-  affect(writeOAuthResponse(OAuthProvider.Patreon, id, currentUser));
+  affect(writeOAuthResponse(OAuthProvider.Patreon, id, identity));
 
   if (!isObject(attributes)) {
     if (typeof attributes === 'undefined') {
       emitPublicMetric({
-        name: MetricName.MissingPatreonCurrentUserAttributes,
+        name: MetricName.MissingPatreonIdentityAttributes,
       });
       return {
         id,
@@ -66,7 +66,7 @@ export default function parsePatreonCurrentUser(
     }
 
     emitPublicMetric({
-      name: MetricName.InvalidPatreonCurrentUserAttributes,
+      name: MetricName.InvalidPatreonIdentityAttributes,
     });
     return {
       id,

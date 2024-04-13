@@ -36,15 +36,15 @@ enum ErrorCode {
   NonStringPatreonAccessToken = 37,
   UnknownPatreonTokenError = 33,
 
-  // Patreon current user
-  InvalidPatreonCurrentUserData = 43,
-  MissingPatreonCurrentUserData = 42,
-  MissingPatreonCurrentUserId = 44,
-  NonJsonPatreonCurrentUserResponse = 38,
-  NonObjectPatreonCurrentUserResponse = 41,
-  NonOkPatreonCurrentUserResponseStatus = 40,
-  NonStringPatreonCurrentUserId = 45,
-  PatreonCurrentUserForbidden = 39,
+  // Patreon identity
+  InvalidPatreonIdentityData = 43,
+  MissingPatreonIdentityData = 42,
+  MissingPatreonIdentityId = 44,
+  NonJsonPatreonIdentityResponse = 38,
+  NonObjectPatreonIdentityResponse = 41,
+  NonOkPatreonIdentityResponseStatus = 40,
+  NonStringPatreonIdentityId = 45,
+  PatreonIdentityForbidden = 39,
 
   // quisi.do
   CSRF = 14,

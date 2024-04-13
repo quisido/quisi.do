@@ -1,4 +1,5 @@
 import { mapUnknownToError } from 'fmrs';
+import { Snapshot } from 'proposal-async-context/src/index.js';
 import type Gender from '../constants/gender.js';
 import MetricName from '../constants/metric-name.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
@@ -45,6 +46,7 @@ export default async function putDatabaseUser(
     .prepare(INSERT_INTO_USERS_QUERY)
     .bind(firstName, fullName, gender, registrationTimestamp);
 
+  const snapshot: Snapshot = new Snapshot();
   const {
     meta: {
       changes: usersChanges,
@@ -54,84 +56,43 @@ export default async function putDatabaseUser(
     },
   } = await usersStatement.run();
 
-  const { affect, emitPublicMetric, logPrivateError } = getTelemetry();
-  emitPublicMetric({
-    changes: usersChanges,
-    duration: usersDuration,
-    lastRowId: usersLastRowId,
-    name: MetricName.AuthenticationCreated,
-    sizeAfter: usersSizeAfter,
-  });
-
-  // Associate the user ID with the OAuth ID.
-  const startTime: number = Date.now();
-  const handleOAuthError = (err: unknown): void => {
-    logPrivateError(mapUnknownToError(err));
+  return snapshot.run((): number => {
+    const { affect, emitPublicMetric, logPrivateError } = getTelemetry();
     emitPublicMetric({
-      endTime: Date.now(),
-      name: MetricName.OAuthInsertError,
-      startTime,
-      userId: usersLastRowId,
+      changes: usersChanges,
+      duration: usersDuration,
+      lastRowId: usersLastRowId,
+      name: MetricName.AuthenticationCreated,
+      sizeAfter: usersSizeAfter,
     });
-  };
 
-  const handleOAuthResponse = ({
-    meta: {
-      changes: oAuthChanges,
-      duration: oAuthDuration,
-      last_row_id: oAuthLastRowId,
-      size_after: oAuthSizeAfter,
-    },
-  }: D1Response): void => {
-    emitPublicMetric({
-      changes: oAuthChanges,
-      duration: oAuthDuration,
-      endTime: Date.now(),
-      lastRowId: oAuthLastRowId,
-      name: MetricName.OAuthInserted,
-      sizeAfter: oAuthSizeAfter,
-      startTime,
-      userId: usersLastRowId,
-    });
-  };
-
-  affect(
-    db
-      .prepare(INSERT_INTO_OAUTH_QUERY)
-      .bind(usersLastRowId, oAuthProvider, oAuthId)
-      .run()
-      .then(handleOAuthResponse)
-      .catch(handleOAuthError),
-  );
-
-  // Associate the user ID with their email.
-  if (email !== null) {
-    const handleEmailError = (err: unknown): void => {
+    // Associate the user ID with the OAuth ID.
+    const startTime: number = Date.now();
+    const handleOAuthError = (err: unknown): void => {
       logPrivateError(mapUnknownToError(err));
       emitPublicMetric({
-        duration: Date.now() - startTime,
         endTime: Date.now(),
-        name: MetricName.EmailInsertError,
+        name: MetricName.OAuthInsertError,
         startTime,
         userId: usersLastRowId,
       });
     };
 
-    const handleEmailResponse = ({
+    const handleOAuthResponse = ({
       meta: {
-        changes: emailsChanges,
-        duration: emailsDuration,
-        last_row_id: emailsLastRowId,
-        size_after: emailsSizeAfter,
+        changes: oAuthChanges,
+        duration: oAuthDuration,
+        last_row_id: oAuthLastRowId,
+        size_after: oAuthSizeAfter,
       },
     }: D1Response): void => {
       emitPublicMetric({
-        changes: emailsChanges,
+        changes: oAuthChanges,
+        duration: oAuthDuration,
         endTime: Date.now(),
-        name: MetricName.EmailInserted,
-        duration: emailsDuration,
-        lastRowId: emailsLastRowId,
-        sizeAfter: emailsSizeAfter,
+        lastRowId: oAuthLastRowId,
+        name: MetricName.OAuthInserted,
+        sizeAfter: oAuthSizeAfter,
         startTime,
         userId: usersLastRowId,
       });
@@ -139,13 +100,56 @@ export default async function putDatabaseUser(
 
     affect(
       db
-        .prepare(INSERT_INTO_EMAILS_QUERY)
-        .bind(email, usersLastRowId)
+        .prepare(INSERT_INTO_OAUTH_QUERY)
+        .bind(usersLastRowId, oAuthProvider, oAuthId)
         .run()
-        .then(handleEmailResponse)
-        .catch(handleEmailError),
+        .then(handleOAuthResponse)
+        .catch(handleOAuthError),
     );
-  }
 
-  return usersLastRowId;
+    // Associate the user ID with their email.
+    if (email !== null) {
+      const handleEmailError = (err: unknown): void => {
+        logPrivateError(mapUnknownToError(err));
+        emitPublicMetric({
+          duration: Date.now() - startTime,
+          endTime: Date.now(),
+          name: MetricName.EmailInsertError,
+          startTime,
+          userId: usersLastRowId,
+        });
+      };
+
+      const handleEmailResponse = ({
+        meta: {
+          changes: emailsChanges,
+          duration: emailsDuration,
+          last_row_id: emailsLastRowId,
+          size_after: emailsSizeAfter,
+        },
+      }: D1Response): void => {
+        emitPublicMetric({
+          changes: emailsChanges,
+          endTime: Date.now(),
+          name: MetricName.EmailInserted,
+          duration: emailsDuration,
+          lastRowId: emailsLastRowId,
+          sizeAfter: emailsSizeAfter,
+          startTime,
+          userId: usersLastRowId,
+        });
+      };
+
+      affect(
+        db
+          .prepare(INSERT_INTO_EMAILS_QUERY)
+          .bind(email, usersLastRowId)
+          .run()
+          .then(handleEmailResponse)
+          .catch(handleEmailError),
+      );
+    }
+
+    return usersLastRowId;
+  });
 }
