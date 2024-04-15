@@ -33,11 +33,10 @@
     "whoami": "wrangler whoami"
   },
   "dependencies": {
-    "babel-jest": "^29.7.0",
+    "@quisido/authn-shared": "workspace:^",
     "cookie": "^0.6.0",
     "fmrs": "workspace:^",
     "form-urlencoded": "^2.0.4",
-    "patreon": "^0.4.1",
     "proposal-async-context": "https://github.com/tc39/proposal-async-context",
     "tslib": "^2.6.2"
   },
@@ -51,6 +50,7 @@
     "@monorepo-template/jest-transformer": "^1.0.2",
     "@types/cookie": "^0.6.0",
     "@types/jest": "^29.5.12",
+    "babel-jest": "^29.7.0",
     "babel-plugin-replace-import-extension": "^1.1.4",
     "cjs-ts": "workspace:^",
     "jest": "^29.7.0",

@@ -1,4 +1,4 @@
-import ErrorCode from '../constants/error-code.js';
+import { ErrorCode } from '@quisido/authn-shared';
 import MetricName from '../constants/metric-name.js';
 import expectResponseToRedirectTo from '../test/expect-response-to-redirect-to.js';
 import withTestState from '../test/with-test-state.js';

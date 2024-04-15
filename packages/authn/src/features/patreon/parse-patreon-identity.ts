@@ -1,4 +1,4 @@
-import ErrorCode from '../../constants/error-code.js';
+import { ErrorCode } from '@quisido/authn-shared';
 import Gender from '../../constants/gender.js';
 import MetricName from '../../constants/metric-name.js';
 import OAuthProvider from '../../constants/oauth-provider.js';

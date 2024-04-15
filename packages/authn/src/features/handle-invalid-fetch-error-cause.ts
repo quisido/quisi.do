@@ -1,4 +1,4 @@
-import ErrorCode from '../constants/error-code.js';
+import { ErrorCode } from '@quisido/authn-shared';
 import MetricName from '../constants/metric-name.js';
 import getTelemetry from '../utils/get-telemetry.js';
 import ErrorResponseInit from './error-response-init.js';

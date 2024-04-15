@@ -1,6 +1,7 @@
+/// <reference types="jest" />
 import { isNumber, sortUnknown } from 'fmrs';
-import createAscendingArray from '../test/create-ascending-array.js';
-import ErrorCode from './error-code.js';
+import { ErrorCode } from './index.js';
+import createAscendingArray from './test/create-ascending-array.js';
 
 const ERROR_CODES: readonly number[] =
   Object.values(ErrorCode).filter(isNumber);

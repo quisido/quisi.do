@@ -1,4 +1,5 @@
 {
+  "An unknown error occurred.": "An unknown error occurred.",
   "Application Performance Index": "Application Performance Index",
   "Authenticate": "Authenticate",
   "Continuous integration/deployment status": "Continuous integration/deployment status",
@@ -17,6 +18,7 @@
   "Sentry issues": "Sentry issues",
   "Status": "Status",
   "Tolerated": "Tolerated",
+  "Unknown error": "Unknown error",
   "User connection time": "User connection time",
   "User DNS time": "User DNS time",
   "Wall time": "Wall time"

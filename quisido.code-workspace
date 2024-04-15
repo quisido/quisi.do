@@ -25,6 +25,10 @@
       "path": "packages/whoami",
     },
     {
+      "name": "authn-shared",
+      "path": "packages/authn-shared",
+    },
+    {
       "name": "aws-rum-react",
       "path": "packages/aws-rum-react",
     },
