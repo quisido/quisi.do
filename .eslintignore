@@ -13,6 +13,7 @@
 /sarif/
 /*.code-workspace
 /*.iml
+/*.nex
 /.attach_pid*
 /.eslintcache
 /.pnp.*
