@@ -1,7 +1,6 @@
 'use client';
 
 import {
-  lazy,
   memo,
   useMemo,
   useRef,
@@ -18,6 +17,8 @@ import type { WithKey } from '../types/with-key.js';
 import append from '../utils/append.js';
 import filter from '../utils/filter.js';
 import isNot from '../utils/is-not.js';
+import { mapUnknownToString } from 'fmrs';
+import type AuthnErrorNotification from './authn-error-notification.js';
 
 type NotificationState = WithKey<Notification> &
   RequiredDefined<Pick<Notification, 'onDismiss'>>;
@@ -29,7 +30,20 @@ type RequiredDefined<T> = {
 const INITIAL_ID = 0;
 const INITIAL_NOTIFICATIONS: readonly WithKey<Notification>[] = [];
 
-const HashNotification = lazy(async () => import('./hash-notification.js'));
+const loadAuthnErrorNotification = async (): Promise<{
+  default: typeof AuthnErrorNotification;
+}> => import('./authn-error-notification.js');
+
+const mapErrorToNotification = (err: unknown): WithKey<Notification> => {
+  return {
+    icon: '⚠',
+    key: 'authn:error',
+    type: 'error',
+    Message(): string {
+      return mapUnknownToString(err);
+    },
+  };
+};
 
 function NotificationsProviderFeature({
   children,
@@ -69,38 +83,43 @@ function NotificationsProviderFeature({
   return (
     <NotificationsProvider
       value={useMemo((): readonly [
-        readonly NotificationState[],
+        readonly (Promise<NotificationState> | NotificationState)[],
         (notification: Notification) => VoidFunction,
       ] => {
-        const newNotifications: WithKey<Notification>[] = [...notifications];
+        const newNotifications: (
+          | Promise<WithKey<Notification>>
+          | WithKey<Notification>
+        )[] = [...notifications];
 
         if (/^#authn:error=\d+$/.test(hash)) {
-          newNotifications.push({
-            icon: '⚠️',
-            key: hash,
-            type: 'error',
-            Header: function Header(): ReactElement {
-              return (
-                <HashNotification variant="header">{hash}</HashNotification>
-              );
-            },
-            message: (
-              <HashNotification variant="message">{hash}</HashNotification>
-            ),
-            onDismiss(): void {
-              setHash('replace', '');
-            },
-          });
+          newNotifications.push(
+            loadAuthnErrorNotification()
+              .then(
+                ({ default: AuthnErrorNotification }): WithKey<Notification> =>
+                  AuthnErrorNotification.fromHash(hash, {
+                    onDismiss(): void {
+                      setHash('replace', '');
+                    },
+                  }),
+              )
+              .catch(mapErrorToNotification),
+          );
         }
 
         const mapToDismissable = (
-          notification: WithKey<Notification>,
-        ): NotificationState => ({
-          ...notification,
-          onDismiss(): void {
-            dismiss(notification);
-          },
-        });
+          notification: Promise<WithKey<Notification>> | WithKey<Notification>,
+        ): Promise<NotificationState> | NotificationState => {
+          if (notification instanceof Promise) {
+            return notification.then(mapToDismissable);
+          }
+
+          return {
+            ...notification,
+            onDismiss(): void {
+              dismiss(notification);
+            },
+          };
+        };
 
         return [newNotifications.map(mapToDismissable), notify];
       }, [dismiss, hash, notifications, notify, setHash])}

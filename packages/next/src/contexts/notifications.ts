@@ -5,7 +5,7 @@ import type { WithKey } from '../types/with-key.js';
 import createContextUtils from '../utils/create-context-utils/index.js';
 
 type Notifications = readonly [
-  readonly WithKey<Notification>[],
+  readonly (Promise<WithKey<Notification>> | WithKey<Notification>)[],
   (notification: Notification) => VoidFunction,
 ];
 

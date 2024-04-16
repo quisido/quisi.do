@@ -14936,7 +14936,7 @@ __metadata:
     chrome-debug: core/scripts/manual-chrome-launcher.js
     lighthouse: cli/index.js
     smokehouse: cli/test/smokehouse/frontends/smokehouse-bin.js
-  checksum: 10c0/03157b96033ce4f577ec9645337a074465c20e61f43999bbcc61f760c3ae219d7aee1b0dfb555b6d94f7046959d1c52f0131c7d5dd1df8e91773212d60bd8062
+  checksum: 10c0/fe2e28f75e86e1659c32b3b00cb51314c77549e3f58f16a5461af4d14e14e76c24604f9c20517630c67f74d71b22d3942d2065cda1ac76630d3b3072a9d40df5
   languageName: node
   linkType: hard
 
