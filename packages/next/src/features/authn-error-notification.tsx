@@ -10,6 +10,10 @@ export interface Options {
   readonly onDismiss: VoidFunction;
 }
 
+function AnUnknownErrorOccurred(): ReactElement {
+  return <I18n>An unknown error occurred.</I18n>;
+}
+
 export default class AuthnErrorNotification
   implements WithKey<NoActionNotification>
 {
@@ -17,7 +21,7 @@ export default class AuthnErrorNotification
 
   public readonly key = 'authn:error';
 
-  public readonly Header: () => ReactNode;
+  public readonly Header: (() => ReactNode) | undefined;
 
   public readonly Message: () => ReactNode;
 
@@ -33,17 +37,14 @@ export default class AuthnErrorNotification
      * code into their address bar.
      */
     if (code === null) {
-      this.Header = function Header(): ReactElement {
-        return <I18n>Unknown error</I18n>;
-      };
-      this.Message = function Message(): ReactElement {
-        return <I18n>An unknown error occurred.</I18n>;
-      };
+      this.Message = AnUnknownErrorOccurred;
     } else {
       const [header, message] = mapAuthnErrorCodeToContent(code);
-      this.Header = function Header(): ReactNode {
-        return header;
-      };
+      if (header !== null) {
+        this.Header = function Header(): ReactNode {
+          return header;
+        };
+      }
       this.Message = function Header(): ReactNode {
         return message;
       };

@@ -1,0 +1,22 @@
+{
+  "Cross-site request forgery": "Cross-site request forgery",
+  "cross-site request forgery": "cross-site request forgery",
+  "Ensure cookies are enabled. To prevent $csrf, authentication requires visiting this website first.": "Ensure cookies are enabled. To prevent $csrf, authentication requires visiting this website first.",
+  "Missing access token": "Missing access token",
+  "Missing client ID": "Missing client ID",
+  "Missing client secret": "Missing client secret",
+  "Missing code": "Missing code",
+  "Missing database": "Missing database",
+  "Missing host" :"Missing host",
+  "Missing ID": "Missing ID",
+  "Missing isolate environment": "Missing isolate environment",
+  "Missing namespace": "Missing namespace",
+  "Missing session ID cookie": "Missing session ID cookie",
+  "Missing state": "Missing state",
+  "The authentication attempt could not be trusted and was rejected.": "The authentication attempt could not be trusted and was rejected.",
+  "The authentication attempt was throttled.": "The authentication attempt was throttled.",
+  "To prevent $csrf, authentication must originate from this website.": "To prevent $csrf, authentication must originate from this website.",
+  "Too many requests": "Too many requests",
+  "You must enable cookies to authenticate.": "You must enable cookies to authenticate.",
+  "Your session cannot currently be paired with your account. The developer has been notified. Please try again later.": "Your session cannot currently be paired with your account. The developer has been notified. Please try again later."
+}
