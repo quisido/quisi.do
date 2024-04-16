@@ -17,8 +17,8 @@ import type { WithKey } from '../types/with-key.js';
 import append from '../utils/append.js';
 import filter from '../utils/filter.js';
 import isNot from '../utils/is-not.js';
-import { mapUnknownToString } from 'fmrs';
 import type AuthnErrorNotification from './authn-error-notification.js';
+import mapErrorToNotification from '../utils/map-error-to-notification.js';
 
 type NotificationState = WithKey<Notification> &
   RequiredDefined<Pick<Notification, 'onDismiss'>>;
@@ -30,20 +30,9 @@ type RequiredDefined<T> = {
 const INITIAL_ID = 0;
 const INITIAL_NOTIFICATIONS: readonly WithKey<Notification>[] = [];
 
-const loadAuthnErrorNotification = async (): Promise<{
+const loadAuthnErrorNotificationModule = async (): Promise<{
   default: typeof AuthnErrorNotification;
 }> => import('./authn-error-notification.js');
-
-const mapErrorToNotification = (err: unknown): WithKey<Notification> => {
-  return {
-    icon: '⚠',
-    key: 'authn:error',
-    type: 'error',
-    Message(): string {
-      return mapUnknownToString(err);
-    },
-  };
-};
 
 function NotificationsProviderFeature({
   children,
@@ -93,7 +82,7 @@ function NotificationsProviderFeature({
 
         if (/^#authn:error=\d+$/.test(hash)) {
           newNotifications.push(
-            loadAuthnErrorNotification()
+            loadAuthnErrorNotificationModule()
               .then(
                 ({ default: AuthnErrorNotification }): WithKey<Notification> =>
                   AuthnErrorNotification.fromHash(hash, {
@@ -102,7 +91,12 @@ function NotificationsProviderFeature({
                     },
                   }),
               )
-              .catch(mapErrorToNotification),
+              .catch(
+                (err: unknown): WithKey<Notification> => ({
+                  ...mapErrorToNotification(err),
+                  key: 'authn:error',
+                }),
+              ),
           );
         }
 

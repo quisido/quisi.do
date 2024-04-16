@@ -34,6 +34,7 @@ enum MetricName {
   // Patreon
   InvalidPatreonIdentityAttributes = 'patreon.identity.attributes.invalid',
   MissingPatreonIdentityAttributes = 'patreon.identity.attributes.missing',
+  MissingPatreonOAuthHost = 'oauth.patreon.host.missing',
 
   // quisi.do
   AuthnIdCreated = 'authn-id.created',
