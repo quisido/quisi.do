@@ -16,7 +16,6 @@ enum ErrorCode {
   InvalidPatreonOAuthRedirectUri = 23,
   MissingPatreonOAuthClientID = 16,
   MissingPatreonOAuthClientSecret = 18,
-  MissingPatreonOAuthHost = 20,
   MissingPatreonOAuthRedirectUri = 22,
 
   // Patreon access token
@@ -48,7 +47,7 @@ enum ErrorCode {
 
   // quisi.do
   CSRF = 14,
-  InvalidAuthnUserIdsNamespace = 50,
+  InvalidAuthnUserIdsNamespace = 20,
   InvalidCause = 3,
   InvalidDatabase = 47,
   InvalidIsolateEnvironment = 6,

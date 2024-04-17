@@ -1,5 +1,5 @@
+import { ErrorCode } from '@quisido/authn-shared';
 import EnvironmentName from '../constants/environment-name.js';
-import ErrorCode from '../constants/error-code.js';
 import MetricName from '../constants/metric-name.js';
 import fetch from '../test/fetch.js';
 

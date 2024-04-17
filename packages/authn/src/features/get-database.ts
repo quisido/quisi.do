@@ -1,4 +1,4 @@
-import ErrorCode from '../constants/error-code.js';
+import { ErrorCode } from '@quisido/authn-shared';
 import getEnv from '../utils/get-env.js';
 import isD1Database from '../utils/is-d1-database.js';
 import mapCauseToError from '../utils/map-cause-to-error.js';

@@ -1,4 +1,4 @@
-import ErrorCode from '../constants/error-code.js';
+import { ErrorCode } from '@quisido/authn-shared';
 import getRequestSearchParam from '../utils/get-request-search-param.js';
 import getSessionIdCookie from '../utils/get-session-id-cookie.js';
 import isObject from '../utils/is-object.js';

@@ -1,5 +1,5 @@
+import { isErrorCode } from '@quisido/authn-shared';
 import type Cause from '../types/cause.js';
-import isErrorCode from './is-error-code.js';
 import isObject from './is-object.js';
 
 export default function isCause(value: unknown): value is Cause {

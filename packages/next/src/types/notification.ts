@@ -1,24 +1,23 @@
-import { type ComponentType, type ReactNode } from 'react';
+import { type ComponentType } from 'react';
 
 interface BaseNotification {
-  readonly Header?: ComponentType | undefined;
+  readonly Header?: ComponentType | string | undefined;
   readonly icon?: string | undefined;
-  readonly message: ReactNode;
+  readonly Message: ComponentType | string;
   readonly onDismiss?: VoidFunction | undefined;
   readonly type: 'error' | 'info' | 'success' | 'warning';
 }
 
-interface ActionNotification {
+export interface ActionNotification extends BaseNotification {
   readonly CallToAction: ComponentType;
   readonly onAction: VoidFunction;
 }
 
-interface NoActionNotification {
+export interface NoActionNotification extends BaseNotification {
   readonly CallToAction?: undefined;
   readonly onAction?: undefined;
 }
 
-type Notification = BaseNotification &
-  (ActionNotification | NoActionNotification);
+type Notification = ActionNotification | NoActionNotification;
 
 export type { Notification as default };

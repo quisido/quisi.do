@@ -1,5 +1,5 @@
+import { ErrorCode } from '@quisido/authn-shared';
 import { parse } from 'cookie';
-import ErrorCode from '../constants/error-code.js';
 import getRequestHeaders from './get-request-headers.js';
 import mapCauseToError from './map-cause-to-error.js';
 

@@ -1,5 +1,5 @@
+import { ErrorCode } from '@quisido/authn-shared';
 import { Snapshot } from 'proposal-async-context/src/index.js';
-import ErrorCode from '../../constants/error-code.js';
 import isObject from '../../utils/is-object.js';
 import mapCauseToError from '../../utils/map-cause-to-error.js';
 import mapReadableStreamToString from '../../utils/map-readable-stream-to-string.js';

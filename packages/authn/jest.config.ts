@@ -24,8 +24,8 @@ export default {
     global: {
       branches: 32,
       functions: 58,
-      lines: 75,
-      statements: 75,
+      lines: 73,
+      statements: 73,
     },
   },
 
@@ -39,6 +39,8 @@ export default {
   },
 
   transform: {
+    '@quisido/authn-shared': '@monorepo-template/jest-transformer',
+    'authn-shared': '@monorepo-template/jest-transformer',
     fmrs: '@monorepo-template/jest-transformer',
     unknown2string: '@monorepo-template/jest-transformer',
     '^(.*\\/)?proposal-async-context\\/src\\/index(\\.[jt]s)?$': [

@@ -54,7 +54,20 @@ export default function mapUserIdToResponse(id: number): Response {
     headers: new Headers({
       'Content-Location': returnHref,
       Location: returnHref,
-      'Set-Cookie': `__Secure-Authentication-ID=${authnId}; domain=${cookieDomain}; max-age=${SECONDS_PER_DAY}; partitioned; path=/; secure`,
+      'Set-Cookie': [
+        `__Secure-Authentication-ID=${authnId}`,
+        `Domain=${cookieDomain}`,
+        `Max-Age=${SECONDS_PER_DAY}`,
+        /**
+         *   We really want partitioned cookies, but this is currently
+         * preventing `quisi.do` from sending the cookie to `api.quisi.do`.
+         */
+        // 'Partitioned',
+        'Path=/',
+        // `Lax` is the default behavior.
+        // 'SameSite=Lax',
+        'Secure',
+      ].join('; '),
     }),
   });
 }

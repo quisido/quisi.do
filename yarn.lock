@@ -5851,6 +5851,39 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@quisido/authn-shared@workspace:^, @quisido/authn-shared@workspace:packages/authn-shared":
+  version: 0.0.0-use.local
+  resolution: "@quisido/authn-shared@workspace:packages/authn-shared"
+  dependencies:
+    "@arethetypeswrong/cli": "npm:^0.15.1"
+    "@babel/core": "npm:^7.24.0"
+    "@babel/preset-env": "npm:^7.24.3"
+    "@babel/preset-react": "npm:^7.23.3"
+    "@babel/preset-typescript": "npm:^7.24.1"
+    "@microsoft/eslint-formatter-sarif": "npm:^3.0.0"
+    "@monorepo-template/eslint-config": "npm:^1.0.7"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
+    "@types/jest": "npm:^29.5.12"
+    "@types/node": "npm:^20.11.28"
+    "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
+    "@typescript-eslint/parser": "npm:^7.2.0"
+    babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
+    concurrently: "npm:^8.2.2"
+    eslint: "npm:^8.57.0"
+    eslint-config-prettier: "npm:^9.1.0"
+    eslint-plugin-import: "npm:^2.29.1"
+    eslint-plugin-prettier: "npm:^5.1.3"
+    fmrs: "workspace:^"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.2.5"
+    ts-jest: "npm:^29.1.2"
+    tslib: "npm:^2.6.2"
+    typescript: "npm:^5.4.2"
+  languageName: unknown
+  linkType: soft
+
 "@quisido/authn@workspace:packages/authn":
   version: 0.0.0-use.local
   resolution: "@quisido/authn@workspace:packages/authn"
@@ -5862,6 +5895,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.24.1"
     "@cloudflare/workers-types": "npm:^4.20240314.0"
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
+    "@quisido/authn-shared": "workspace:^"
     "@types/cookie": "npm:^0.6.0"
     "@types/jest": "npm:^29.5.12"
     babel-jest: "npm:^29.7.0"
@@ -5871,7 +5905,6 @@ __metadata:
     fmrs: "workspace:^"
     form-urlencoded: "npm:^2.0.4"
     jest: "npm:^29.7.0"
-    patreon: "npm:^0.4.1"
     proposal-async-context: "https://github.com/tc39/proposal-async-context"
     ts-jest: "npm:^29.1.2"
     tslib: "npm:^2.6.2"
@@ -5950,6 +5983,7 @@ __metadata:
     "@opentelemetry/sdk-metrics": "npm:^1.22.0"
     "@opentelemetry/sdk-trace-web": "npm:^1.22.0"
     "@opentelemetry/semantic-conventions": "npm:^1.22.0"
+    "@quisido/authn-shared": "workspace:^"
     "@react-aria/button": "npm:^3.9.3"
     "@react-aria/link": "npm:^3.6.5"
     "@react-aria/overlays": "npm:^3.21.1"
@@ -11125,7 +11159,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"encoding@npm:^0.1.11, encoding@npm:^0.1.13":
+"encoding@npm:^0.1.13":
   version: 0.1.13
   resolution: "encoding@npm:0.1.13"
   dependencies:
@@ -13694,13 +13728,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-stream@npm:^1.0.1":
-  version: 1.1.0
-  resolution: "is-stream@npm:1.1.0"
-  checksum: 10c0/b8ae7971e78d2e8488d15f804229c6eed7ed36a28f8807a1815938771f4adff0e705218b7dab968270433f67103e4fef98062a0beea55d64835f705ee72c7002
-  languageName: node
-  linkType: hard
-
 "is-stream@npm:^2.0.0":
   version: 2.0.1
   resolution: "is-stream@npm:2.0.1"
@@ -13823,16 +13850,6 @@ __metadata:
   version: 3.0.1
   resolution: "isobject@npm:3.0.1"
   checksum: 10c0/03344f5064a82f099a0cd1a8a407f4c0d20b7b8485e8e816c39f249e9416b06c322e8dec5b842b6bb8a06de0af9cb48e7bc1b5352f0fadc2f0abac033db3d4db
-  languageName: node
-  linkType: hard
-
-"isomorphic-fetch@npm:^2.2.1":
-  version: 2.2.1
-  resolution: "isomorphic-fetch@npm:2.2.1"
-  dependencies:
-    node-fetch: "npm:^1.0.1"
-    whatwg-fetch: "npm:>=0.10.0"
-  checksum: 10c0/ea9fd37d31ec7b35b82180e1946d4a2f512506d0559fa567ec6ee6701ff1c6d924be90e75499c50982274b707e03ecd9eaa21d618872dd0deff530e4c3bdb074
   languageName: node
   linkType: hard
 
@@ -14672,13 +14689,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonapi-datastore@npm:^0.4.0-beta":
-  version: 0.4.0-beta
-  resolution: "jsonapi-datastore@npm:0.4.0-beta"
-  checksum: 10c0/341922e7878a61e5d6f72ccf85e99a23f01c5f42ad78bd15fe05e8c6c1e126749e2b99beb4f70535ad1bcc381d52f34b4195611f3455e96712fd5cd7a805edbe
-  languageName: node
-  linkType: hard
-
 "jsonfile@npm:^6.0.1":
   version: 6.1.0
   resolution: "jsonfile@npm:6.1.0"
@@ -14926,7 +14936,7 @@ __metadata:
     chrome-debug: core/scripts/manual-chrome-launcher.js
     lighthouse: cli/index.js
     smokehouse: cli/test/smokehouse/frontends/smokehouse-bin.js
-  checksum: 10c0/03157b96033ce4f577ec9645337a074465c20e61f43999bbcc61f760c3ae219d7aee1b0dfb555b6d94f7046959d1c52f0131c7d5dd1df8e91773212d60bd8062
+  checksum: 10c0/fe2e28f75e86e1659c32b3b00cb51314c77549e3f58f16a5461af4d14e14e76c24604f9c20517630c67f74d71b22d3942d2065cda1ac76630d3b3072a9d40df5
   languageName: node
   linkType: hard
 
@@ -15829,16 +15839,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^1.0.1":
-  version: 1.7.3
-  resolution: "node-fetch@npm:1.7.3"
-  dependencies:
-    encoding: "npm:^0.1.11"
-    is-stream: "npm:^1.0.1"
-  checksum: 10c0/5a6b56b3edf909ccd20414355867d24f15f1885da3b26be90840241c46e63754ebf4697050f897daab676e3952d969611ffe1d4bc4506cf50f70837e20ad5328
-  languageName: node
-  linkType: hard
-
 "node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.12, node-fetch@npm:^2.6.9":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
@@ -16542,18 +16542,6 @@ __metadata:
   version: 4.0.0
   resolution: "path-type@npm:4.0.0"
   checksum: 10c0/666f6973f332f27581371efaf303fd6c272cc43c2057b37aa99e3643158c7e4b2626549555d88626e99ea9e046f82f32e41bbde5f1508547e9a11b149b52387c
-  languageName: node
-  linkType: hard
-
-"patreon@npm:^0.4.1":
-  version: 0.4.1
-  resolution: "patreon@npm:0.4.1"
-  dependencies:
-    form-urlencoded: "npm:^2.0.4"
-    is-plain-object: "npm:^2.0.4"
-    isomorphic-fetch: "npm:^2.2.1"
-    jsonapi-datastore: "npm:^0.4.0-beta"
-  checksum: 10c0/e4c7cb91eb51d897185088e782194c88eae44a2812b42755e6504bc500c4445408c79f4350da658c747861a289b924e2654590db347e95a856ddc69db53e36c5
   languageName: node
   linkType: hard
 
@@ -19762,7 +19750,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"whatwg-fetch@npm:>=0.10.0, whatwg-fetch@npm:^3.6.20":
+"whatwg-fetch@npm:^3.6.20":
   version: 3.6.20
   resolution: "whatwg-fetch@npm:3.6.20"
   checksum: 10c0/fa972dd14091321d38f36a4d062298df58c2248393ef9e8b154493c347c62e2756e25be29c16277396046d6eaa4b11bd174f34e6403fff6aaca9fb30fa1ff46d

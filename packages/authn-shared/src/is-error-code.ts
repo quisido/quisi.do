@@ -1,4 +1,4 @@
-import ErrorCode from '../constants/error-code.js';
+import ErrorCode from './error-code.js';
 
 const ERROR_CODES: Set<unknown> = new Set(Object.values(ErrorCode));
 

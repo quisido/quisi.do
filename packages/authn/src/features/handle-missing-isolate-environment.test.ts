@@ -1,4 +1,4 @@
-import ErrorCode from '../constants/error-code.js';
+import { ErrorCode } from '@quisido/authn-shared';
 import fetch from '../test/fetch.js';
 
 describe('handleMissingIsolateEnvironment', (): void => {

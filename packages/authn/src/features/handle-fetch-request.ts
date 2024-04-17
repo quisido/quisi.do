@@ -1,4 +1,4 @@
-import ErrorCode from '../constants/error-code.js';
+import { ErrorCode } from '@quisido/authn-shared';
 import getRequestPathname from '../utils/get-request-pathname.js';
 import isReservedPathname from '../utils/is-reserved-pathname.js';
 import mapCauseToError from '../utils/map-cause-to-error.js';
