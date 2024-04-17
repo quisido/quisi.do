@@ -49,6 +49,7 @@ export default (async function fetch(
       {
         status: StatusCode.InternalServerError,
         headers: new Headers({
+          'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Origin': 'quisi.do',
           'Content-Type': 'text/json; charset=utf-8',
         }),
@@ -69,6 +70,7 @@ export default (async function fetch(
       {
         status: StatusCode.InternalServerError,
         headers: new Headers({
+          'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
           'Content-Type': 'text/json; charset=utf-8',
         }),
@@ -85,6 +87,7 @@ export default (async function fetch(
       {
         status: StatusCode.InternalServerError,
         headers: new Headers({
+          'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
           'Content-Type': 'text/json; charset=utf-8',
         }),
@@ -102,6 +105,7 @@ export default (async function fetch(
       {
         status: StatusCode.MethodNotAllowed,
         headers: new Headers({
+          'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
           'Content-Type': 'text/json; charset=utf-8',
         }),
@@ -118,6 +122,7 @@ export default (async function fetch(
       {
         status: StatusCode.InternalServerError,
         headers: new Headers({
+          'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
           'Content-Type': 'text/json; charset=utf-8',
         }),
@@ -139,6 +144,7 @@ export default (async function fetch(
       {
         status: StatusCode.OK,
         headers: new Headers({
+          'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
           'Content-Type': 'text/json; charset=utf-8',
         }),
@@ -156,6 +162,7 @@ export default (async function fetch(
       {
         status: StatusCode.OK,
         headers: new Headers({
+          'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
           'Content-Type': 'text/json; charset=utf-8',
         }),
@@ -176,6 +183,7 @@ export default (async function fetch(
       {
         status: StatusCode.BadRequest,
         headers: new Headers({
+          'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
           'Content-Type': 'text/json; charset=utf-8',
         }),
@@ -192,6 +200,7 @@ export default (async function fetch(
       {
         status: StatusCode.TooManyRequests,
         headers: new Headers({
+          'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
           'Content-Type': 'text/json; charset=utf-8',
         }),
@@ -211,6 +220,7 @@ export default (async function fetch(
       {
         status: StatusCode.OK,
         headers: new Headers({
+          'Access-Control-Allow-Credentials': 'true',
           'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
           'Content-Type': 'text/json; charset=utf-8',
         }),
@@ -226,6 +236,7 @@ export default (async function fetch(
     {
       status: StatusCode.OK,
       headers: new Headers({
+        'Access-Control-Allow-Credentials': 'true',
         'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
         'Content-Type': 'text/json; charset=utf-8',
       }),
