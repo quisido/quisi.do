@@ -19,7 +19,11 @@ export default function AuthenticationFeature({
   const { request } = state;
   useEffect((): void => {
     void request(async (): Promise<AuthenticationType> => {
-      const response: Response = await fetch(WHOAMI);
+      const response: Response = await fetch(WHOAMI, {
+        credentials: 'include',
+        redirect: 'error',
+      });
+
       const json: unknown = await response.json();
       if (!isObject(json)) {
         throw new Error('You do not have data.');
