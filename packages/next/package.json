@@ -20,7 +20,7 @@
   "scripts": {
     "attw": "attw",
     "build": "next build",
-    "clean": "rm -rf .next .wrangler cypress/downloads cypress/screenshots cypress/videos out",
+    "clean": "rm -rf .next .wrangler cypress/coverage cypress/downloads cypress/screenshots cypress/videos out",
     "coverage": "monorepo-template-coverage",
     "cypress": "concurrently --hide server --kill-others --kill-others-on-fail --names server,cypress --success command-cypress \"next build && next start\" \"yarn run cypress:run\"",
     "cypress:open": "wait-on https://localhost:3000/ && cypress open",

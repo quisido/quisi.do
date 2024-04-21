@@ -1,5 +1,8 @@
-import type ErrorCode from '../constants/error-code.js';
+import type { ErrorCode } from '@quisido/authn-shared';
 import handleFetch from '../features/handle-fetch.js';
+import createFetchEnv from './create-fetch-env.js';
+import createFetchExecutionContext from './create-fetch-execution-context.js';
+import createFetchRequest from './create-fetch-request.js';
 import expectResponseToRedirectTo from './expect-response-to-redirect-to.js';
 
 /**
@@ -28,56 +31,38 @@ interface Result {
   ) => void;
 }
 
-const TEST_SESSION_ID = '0123456789abcdef';
 const TEST_WRITE_PRIVATE_DATAPOINT = jest.fn();
 const TEST_WRITE_PUBLIC_DATAPOINT = jest.fn();
-
-const DEFAULT_ENV: Record<string, unknown> = {
-  HOST: 'localhost',
-  PRIVATE_DATASET: {
-    writeDataPoint: TEST_WRITE_PRIVATE_DATAPOINT,
-  } satisfies AnalyticsEngineDataset,
-  PUBLIC_DATASET: {
-    writeDataPoint: TEST_WRITE_PUBLIC_DATAPOINT,
-  } satisfies AnalyticsEngineDataset,
-};
 
 export default async function fetch({
   env,
   fetch: fetchImpl = jest.fn(),
   headers = {},
   pathname = '/authn/',
-  search: searchOption = {},
+  search = {},
   waitUntil = jest.fn(),
 }: Options): Promise<Result> {
-  const search: string = new URLSearchParams({
-    ...searchOption,
-    state: JSON.stringify({
-      returnPath: '/',
-      sessionId: TEST_SESSION_ID,
-    }),
-  }).toString();
-
   const response: Response = await handleFetch(
     fetchImpl,
-    new Request(`https://localhost${pathname}?${search}`, {
-      headers: new Headers({
-        ...headers,
-        Cookie: `__Secure-Session-ID=${TEST_SESSION_ID}`,
-      }),
+    createFetchRequest({
+      headers,
+      pathname,
+      search,
     }),
-    typeof env === 'object' ? { ...DEFAULT_ENV, ...env } : env,
-    {
-      passThroughOnException: jest.fn(),
-      waitUntil,
-    },
+    createFetchEnv({
+      env,
+      writePrivateDataPoint: TEST_WRITE_PRIVATE_DATAPOINT,
+      writePublicDataPoint: TEST_WRITE_PUBLIC_DATAPOINT,
+    }),
+    createFetchExecutionContext(waitUntil),
   );
 
   return {
     expectErrorCodeRedirect(code: ErrorCode): void {
+      const codeStr: string = code.toString();
       expectResponseToRedirectTo(
         response,
-        `https://localhost/#authn:error=${code}`,
+        `https://localhost/#authn:error=${codeStr}`,
       );
     },
 

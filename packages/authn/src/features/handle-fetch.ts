@@ -32,9 +32,7 @@ export default async function handleFetch(
       state.setEnv(env);
       return await handleFetchRequest();
     } catch (err: unknown) {
-      return stateVar.run(state, (): Response => {
-        return handleFetchError(err);
-      });
+      return stateVar.run(state, (): Response => handleFetchError(err));
     } finally {
       state.flushTelemetry();
     }

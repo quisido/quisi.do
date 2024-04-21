@@ -22,6 +22,13 @@ import mapHeadersToCookies from '../utils/map-headers-to-cookies.js';
 const authnIdIdMap: Map<string, string> = new Map();
 const BASE = 10;
 const throttleCacheMiss = createThrottler();
+const HEADERS_INIT: HeadersInit = {
+  'Access-Control-Allow-Credentials': 'true',
+  'Access-Control-Allow-Methods': 'GET, OPTIONS',
+  'Access-Control-Allow-Origin': 'quisi.do',
+  Allow: 'GET, OPTIONS',
+  'Content-Type': 'text/json; charset=utf-8',
+};
 
 export default (async function fetch(
   request: Readonly<Request>,
@@ -47,12 +54,8 @@ export default (async function fetch(
         message: 'A cookie domain was not specified.',
       }),
       {
+        headers: new Headers(HEADERS_INIT),
         status: StatusCode.InternalServerError,
-        headers: new Headers({
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': 'quisi.do',
-          'Content-Type': 'text/json; charset=utf-8',
-        }),
       },
     );
   }
@@ -61,6 +64,11 @@ export default (async function fetch(
     COOKIE_DOMAIN === 'localhost' ? 'localhost:3000' : COOKIE_DOMAIN
   }`;
 
+  const headers: Headers = new Headers({
+    ...HEADERS_INIT,
+    'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
+  });
+
   if (!isKVNamespace(AUTHN_USER_IDS)) {
     return new Response(
       JSON.stringify({
@@ -68,12 +76,8 @@ export default (async function fetch(
         message: 'The authentication database was not provided.',
       }),
       {
+        headers,
         status: StatusCode.InternalServerError,
-        headers: new Headers({
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
-          'Content-Type': 'text/json; charset=utf-8',
-        }),
       },
     );
   }
@@ -85,33 +89,20 @@ export default (async function fetch(
         message: 'The environment could not be identified.',
       }),
       {
+        headers,
         status: StatusCode.InternalServerError,
-        headers: new Headers({
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
-          'Content-Type': 'text/json; charset=utf-8',
-        }),
       },
     );
   }
 
-  // Method
-  if (request.method !== 'GET') {
-    return new Response(
-      JSON.stringify({
-        code: ResponseCode.MethodNotAllowed,
-        message: `The ${request.method} method is not allowed.`,
-      }),
-      {
-        status: StatusCode.MethodNotAllowed,
-        headers: new Headers({
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
-          'Content-Type': 'text/json; charset=utf-8',
-        }),
-      },
-    );
+  // Options
+  if (request.method === 'OPTIONS') {
+    return new Response(null, {
+      headers,
+      status: StatusCode.OK,
+    });
   }
+
 
   if (!isObject(env)) {
     return new Response(
@@ -120,12 +111,8 @@ export default (async function fetch(
         message: 'The environment is missing.',
       }),
       {
+        headers,
         status: StatusCode.InternalServerError,
-        headers: new Headers({
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
-          'Content-Type': 'text/json; charset=utf-8',
-        }),
       },
     );
   }
@@ -142,12 +129,8 @@ export default (async function fetch(
         message: 'You are not authenticated.',
       }),
       {
+        headers,
         status: StatusCode.OK,
-        headers: new Headers({
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
-          'Content-Type': 'text/json; charset=utf-8',
-        }),
       },
     );
   }
@@ -160,12 +143,8 @@ export default (async function fetch(
         id: parseInt(cachedId, BASE),
       }),
       {
+        headers,
         status: StatusCode.OK,
-        headers: new Headers({
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
-          'Content-Type': 'text/json; charset=utf-8',
-        }),
       },
     );
   }
@@ -181,12 +160,8 @@ export default (async function fetch(
         message: 'You could not be identified.',
       }),
       {
+        headers,
         status: StatusCode.BadRequest,
-        headers: new Headers({
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
-          'Content-Type': 'text/json; charset=utf-8',
-        }),
       },
     );
   }
@@ -198,12 +173,8 @@ export default (async function fetch(
         message: 'Too many requests.',
       }),
       {
+        headers,
         status: StatusCode.TooManyRequests,
-        headers: new Headers({
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
-          'Content-Type': 'text/json; charset=utf-8',
-        }),
       },
     );
   }
@@ -218,12 +189,8 @@ export default (async function fetch(
         message: 'The authentication ID is invalid.',
       }),
       {
+        headers,
         status: StatusCode.OK,
-        headers: new Headers({
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
-          'Content-Type': 'text/json; charset=utf-8',
-        }),
       },
     );
   }
@@ -234,12 +201,8 @@ export default (async function fetch(
       id: parseInt(id, BASE),
     }),
     {
+      headers,
       status: StatusCode.OK,
-      headers: new Headers({
-        'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
-        'Content-Type': 'text/json; charset=utf-8',
-      }),
     },
   );
 } satisfies ExportedHandlerFetchHandler);

@@ -1,6 +1,6 @@
 import ReservedPathname from '../constants/reserved-pathname.js';
 
-const RESERVED_PATHNAMES: Set<unknown> = new Set(
+const RESERVED_PATHNAMES: Set<unknown> = new Set<unknown>(
   Object.values(ReservedPathname),
 );
 

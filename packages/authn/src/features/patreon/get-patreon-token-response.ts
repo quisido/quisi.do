@@ -19,6 +19,7 @@ export default async function getPatreonTokenResponse(): Promise<Response> {
   return fetch(`${oAuthHost}/api/oauth2/token`, {
     headers: HEADERS,
     method: 'POST',
+
     body: formUrlEncoded({
       client_id: getPatreonOAuthClientId(),
       client_secret: getPatreonOAuthClientSecret(),

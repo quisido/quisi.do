@@ -3,8 +3,7 @@ import { Snapshot } from 'proposal-async-context/src/index.js';
 import isObject from '../../utils/is-object.js';
 import mapCauseToError from '../../utils/map-cause-to-error.js';
 import mapReadableStreamToString from '../../utils/map-readable-stream-to-string.js';
-import getPatreonOAuthClientId from './get-patreon-oauth-client-id.js';
-import getPatreonRequestCode from './get-patreon-request-code.js';
+import handlePatreonTokenErrorCode from './handle-patreon-token-error-code.js';
 
 export default async function handlePatreonAccessTokenError(
   response: Response,
@@ -45,46 +44,10 @@ export default async function handlePatreonAccessTokenError(
       });
     }
 
-    switch (error) {
-      case 'invalid_client':
-        throw mapCauseToError({
-          code: ErrorCode.InvalidPatreonClientID,
-          publicData: getPatreonOAuthClientId(),
-        });
-
-      case 'invalid_grant':
-        throw mapCauseToError({
-          code: ErrorCode.InvalidPatreonGrantCode,
-          privateData: getPatreonRequestCode(),
-        });
-
-      case 'invalid_request': {
-        if (typeof errorDescription === 'undefined') {
-          throw mapCauseToError({
-            code: ErrorCode.MissingInvalidPatreonRequestDescription,
-            privateData: json,
-          });
-        }
-
-        if (typeof errorDescription !== 'string') {
-          throw mapCauseToError({
-            code: ErrorCode.NonStringInvalidPatreonRequestDescription,
-            privateData: errorDescription,
-            publicData: typeof errorDescription,
-          });
-        }
-
-        throw mapCauseToError({
-          code: ErrorCode.InvalidPatreonTokenRequest,
-          privateData: json,
-        });
-      }
-
-      default:
-        throw mapCauseToError({
-          code: ErrorCode.UnknownPatreonTokenError,
-          privateData: json,
-        });
-    }
+    return handlePatreonTokenErrorCode({
+      code: error,
+      description: errorDescription,
+      json,
+    });
   });
 }

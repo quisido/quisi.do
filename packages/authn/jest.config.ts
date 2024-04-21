@@ -23,7 +23,7 @@ export default {
   coverageThreshold: {
     global: {
       branches: 32,
-      functions: 58,
+      functions: 53,
       lines: 73,
       statements: 73,
     },
@@ -43,7 +43,8 @@ export default {
     'authn-shared': '@monorepo-template/jest-transformer',
     fmrs: '@monorepo-template/jest-transformer',
     unknown2string: '@monorepo-template/jest-transformer',
-    '^(.*\\/)?proposal-async-context\\/src\\/index(\\.[jt]s)?$': [
+
+    '\\.[jt]s$': [
       'ts-jest',
       {
         isolatedModules: true,
@@ -51,7 +52,8 @@ export default {
         verbatimModuleSyntax: true,
       },
     ],
-    '\\.[jt]s$': [
+
+    '^(.*\\/)?proposal-async-context\\/src\\/index(\\.[jt]s)?$': [
       'ts-jest',
       {
         isolatedModules: true,

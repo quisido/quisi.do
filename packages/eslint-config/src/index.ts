@@ -1,14 +1,20 @@
 import type { Linter } from 'eslint';
-import cjs from './cjs.js';
-import dts from './dts.js';
-import js from './js.js';
-import ts from './ts.js';
+import CJS from './cjs.js';
+import D_TS from './d-ts.js';
+import JS from './js.js';
+import TEST_TS from './test-ts.js';
+import TS from './ts.js';
 
 export default [
-  cjs,
-  dts,
-  js,
-  ts,
+  JS,
+
+  // Extends JS.
+  CJS,
+  TS,
+
+  // Extends TS.
+  D_TS,
+  TEST_TS,
 
   {
     ignores: [
@@ -20,6 +26,7 @@ export default [
       'analyze/**',
       'certificates/**',
       'coverage/**',
+      'cypress/coverage/**',
       'cypress/downloads/**',
       'cypress/screenshots/**',
       'cypress/videos/**',

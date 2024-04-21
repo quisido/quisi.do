@@ -1,6 +1,7 @@
 import EnvironmentName from '../constants/environment-name.js';
 
-const ENVIRONMENT_NAMES: Set<unknown> = new Set(Object.values(EnvironmentName));
+const ENVIRONMENT_NAMES: Set<unknown> =
+  new Set<unknown>(Object.values(EnvironmentName));
 
 export default function isEnvironmentName(
   value: unknown,

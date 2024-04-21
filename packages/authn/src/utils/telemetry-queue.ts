@@ -1,84 +1,84 @@
 import Telemetry from './telemetry.js';
 
 export default class TelemetryQueue<M extends object> extends Telemetry<M> {
-  private readonly _privateDimensions: Record<string, number | string> = {};
+  readonly #privateDimensions: Record<string, number | string> = {};
 
-  private readonly _publicDimensions: Record<string, number | string> = {};
+  readonly #publicDimensions: Record<string, number | string> = {};
 
-  private readonly _queue: (() => void)[] = [];
+  readonly #queue: (() => void)[] = [];
 
-  protected _addPrivateDimension(name: string, value: number | string): void {
-    this._privateDimensions[name] = value;
+  protected proAddPrivateDimension(name: string, value: number | string): void {
+    this.#privateDimensions[name] = value;
   }
 
-  protected _addPublicDimension(name: string, value: number | string): void {
-    this._publicDimensions[name] = value;
+  protected proAddPublicDimension(name: string, value: number | string): void {
+    this.#publicDimensions[name] = value;
   }
 
-  protected _addPrivateDimensions(
+  protected proAddPrivateDimensions(
     dimensions: Partial<Record<string, number | string>>,
   ): void {
-    Object.assign(this._privateDimensions, dimensions);
+    Object.assign(this.#privateDimensions, dimensions);
   }
 
-  protected _addPublicDimensions(
+  protected proAddPublicDimensions(
     dimensions: Partial<Record<string, number | string>>,
   ): void {
-    Object.assign(this._publicDimensions, dimensions);
+    Object.assign(this.#publicDimensions, dimensions);
   }
 
-  protected override _emitPrivateMetric(metric: M): void {
-    this._queue.push((): void => {
-      super._emitPrivateMetric({
-        ...this._publicDimensions,
-        ...this._privateDimensions,
+  protected override proEmitPrivateMetric(metric: M): void {
+    this.#queue.push((): void => {
+      super.proEmitPrivateMetric({
+        ...this.#publicDimensions,
+        ...this.#privateDimensions,
         ...metric,
       });
     });
   }
 
-  protected override _emitPublicMetric(metric: M): void {
-    this._queue.push((): void => {
-      super._emitPublicMetric({
-        ...this._publicDimensions,
+  protected override proEmitPublicMetric(metric: M): void {
+    this.#queue.push((): void => {
+      super.proEmitPublicMetric({
+        ...this.#publicDimensions,
         ...metric,
       });
     });
   }
 
-  protected _flush(): void {
-    for (const act of this._queue) {
+  protected proFlush(): void {
+    for (const act of this.#queue) {
       act();
     }
   }
 
-  public override _logPrivateError(err: Error): void {
-    this._queue.push((): void => {
-      super._logPrivateError(err);
+  protected override proLogPrivateError(err: Error): void {
+    this.#queue.push((): void => {
+      super.proLogPrivateError(err);
     });
   }
 
-  public override _logPublicError(err: Error): void {
-    this._queue.push((): void => {
-      super._logPublicError(err);
+  protected override proLogPublicError(err: Error): void {
+    this.#queue.push((): void => {
+      super.proLogPublicError(err);
     });
   }
 
-  public addPrivateDimension = this._addPrivateDimension.bind(this);
+  public addPrivateDimension = this.proAddPrivateDimension.bind(this);
 
-  public addPublicDimension = this._addPublicDimension.bind(this);
+  public addPublicDimension = this.proAddPublicDimension.bind(this);
 
-  public addPrivateDimensions = this._addPrivateDimensions.bind(this);
+  public addPrivateDimensions = this.proAddPrivateDimensions.bind(this);
 
-  public addPublicDimensions = this._addPublicDimensions.bind(this);
+  public addPublicDimensions = this.proAddPublicDimensions.bind(this);
 
-  public override emitPrivateMetric = this._emitPrivateMetric.bind(this);
+  public override emitPrivateMetric = this.proEmitPrivateMetric.bind(this);
 
-  public override emitPublicMetric = this._emitPublicMetric.bind(this);
+  public override emitPublicMetric = this.proEmitPublicMetric.bind(this);
 
-  public flush = this._flush.bind(this);
+  public flush = this.proFlush.bind(this);
 
-  public override logPrivateError = this._logPrivateError.bind(this);
+  public override logPrivateError = this.proLogPrivateError.bind(this);
 
-  public override logPublicError = this._logPublicError.bind(this);
+  public override logPublicError = this.proLogPublicError.bind(this);
 }

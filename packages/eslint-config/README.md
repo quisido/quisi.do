@@ -1,43 +1,43 @@
-# filter/find, map, reduce, sort
+# [quisi.do](https://quisi.do) ESLint configuration
 
 [![CI/CD](https://github.com/quisido/quisi.do/actions/workflows/cd.yml/badge.svg?branch=main&event=push)](https://github.com/quisido/quisi.do/actions/workflows/cd.yml)
-[![version](https://img.shields.io/npm/v/fmrs.svg)](https://www.npmjs.com/package/fmrs)
-[![downloads](https://img.shields.io/npm/dt/fmrs.svg)](https://www.npmjs.com/package/fmrs)
+[![version](https://img.shields.io/npm/v/@quisido/eslint-config.svg)](https://www.npmjs.com/package/@quisido/eslint-config)
+[![downloads](https://img.shields.io/npm/dt/@quisido/eslint-config.svg)](https://www.npmjs.com/package/@quisido/eslint-config)
 
-`fmrs` is a collection of utility functions that _filter/find_, _map_, _reduce_,
-and _sort_ JavaScript primitives and built-ins between each other.
+The `@quisido/eslint-config` provides flat ESLint configurations for `.cjs`,
+`.d.ts`, `.js`, `.test.ts`, and `.ts` files.
 
-For example:
+The simplest implementation is to just export the entire module as your ESLint
+configuration.
 
-- _Mapping_ the boolean `true` to a string would be `'true'`.
-- _Reducing_ the entries `[['key', 'value']]` to a record would be
-  `{ key: 'value' }`.
-- _Sorting_ the values `1` and `2` would be `-1`.
+```js
+// eslint.config.js
+export { default } from '@quisido/eslint-config';
+```
 
-## Filters and finders
+To extend the configuration, you may spread the default export as an array.
 
-- number
-- string
+```js
+// eslint.config.js
+import configs from '@quisido/eslint-config';
 
-## Mappers
+export default [
+  ...configs,
+  {
+    // Add your custom configuration here.
+  },
+];
+```
 
-| from    | to            |
-| ------- | ------------- |
-| entries | Record (`{}`) |
-| `Map`   | entries       |
-| `Map`   | Record (`{}`) |
-| unknown | index         |
-| unknown | string        |
+To cherry-pick or tailor any configurations, you may import them directly.
 
-## Reducers
+```js
+// eslint.config.js
+import CJS from '@quisido/eslint-config/cjs';
+import D_TS from '@quisido/eslint-config/d-ts';
+import JS from '@quisido/eslint-config/js';
+import TEST_TS from '@quisido/eslint-config/test-ts';
+import TS from '@quisido/eslint-config/ts';
 
-| from    | to            |
-| ------- | ------------- |
-| entries | Record (`{}`) |
-
-## Sorters
-
-- arrays (by index)
-- number
-- string
-- unknown
+export default [JS, CJS, TS, D_TS, TEST_TS];
+```

@@ -7,8 +7,8 @@ import { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
 
 export default {
   ...JS,
-  files: ['**/*.mts', '**/*.ts'],
-  ignores: ['**/*.d.ts'],
+  files: ['**/*.ts'],
+  ignores: ['**/*.d.ts', '**/*.test.ts'],
   languageOptions: TYPESCRIPT_LANGUAGE_OPTIONS,
   name: '@quisido/ts',
 
@@ -25,6 +25,9 @@ export default {
     ...ts.configs.recommendedTypeChecked.reduce(reduceFlatConfigsToRules, {}),
     ...ts.configs.strictTypeChecked.reduce(reduceFlatConfigsToRules, {}),
     'no-invalid-this': 'off',
+
+    // Exhaustive `switch`es do not require a default case.
+    'default-case': 'off',
 
     /**
      *   ESLint incorrectly flags shadowing in TypeScript: (1) `enum`s and (2)

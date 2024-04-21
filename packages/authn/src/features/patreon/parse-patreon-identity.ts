@@ -1,13 +1,14 @@
-import { ErrorCode } from '@quisido/authn-shared';
 import Gender from '../../constants/gender.js';
-import MetricName from '../../constants/metric-name.js';
 import OAuthProvider from '../../constants/oauth-provider.js';
 import getTelemetry from '../../utils/get-telemetry.js';
 import isObject from '../../utils/is-object.js';
-import isPatreonGender from '../../utils/is-patreon-gender.js';
-import mapCauseToError from '../../utils/map-cause-to-error.js';
-import mapPatreonGenderToGender from '../../utils/map-patreon-gender-to-gender.js';
+import mapToOptionalBoolean from '../../utils/map-to-optional-boolean.js';
+import mapToOptionalString from '../../utils/map-to-optional-string.js';
 import writeOAuthResponse from '../../utils/write-oauth-response.js';
+import handleInvalidPatreonIdentityAttributes from './handle-invalid-patreon-identity-attributes.js';
+import handleInvalidPatreonIdentityData from './handle-invalid-patreon-identity-data.js';
+import handleInvalidPatreonIdentityId from './handle-invalid-patreon-identity-id.js';
+import mapToGender from './map-to-gender.js';
 
 interface Result {
   readonly email?: string | undefined;
@@ -21,56 +22,22 @@ interface Result {
 export default function parsePatreonIdentity(
   identity: Record<string, unknown>,
 ): Result {
-  const { affect, emitPublicMetric } = getTelemetry();
+  const { affect } = getTelemetry();
 
   const { data } = identity;
   if (!isObject(data)) {
-    if (typeof data === 'undefined') {
-      throw mapCauseToError({
-        code: ErrorCode.MissingPatreonIdentityData,
-      });
-    }
-
-    throw mapCauseToError({
-      code: ErrorCode.InvalidPatreonIdentityData,
-      privateData: data,
-      publicData: typeof data,
-    });
+    return handleInvalidPatreonIdentityData(data);
   }
 
   const { attributes, id } = data;
   if (typeof id !== 'string') {
-    if (typeof id === 'undefined') {
-      throw mapCauseToError({
-        code: ErrorCode.MissingPatreonIdentityId,
-      });
-    }
-
-    throw mapCauseToError({
-      code: ErrorCode.NonStringPatreonIdentityId,
-      privateData: id,
-      publicData: typeof id,
-    });
+    return handleInvalidPatreonIdentityId(id);
   }
 
   affect(writeOAuthResponse(OAuthProvider.Patreon, id, identity));
 
   if (!isObject(attributes)) {
-    if (typeof attributes === 'undefined') {
-      emitPublicMetric({
-        name: MetricName.MissingPatreonIdentityAttributes,
-      });
-      return {
-        id,
-      };
-    }
-
-    emitPublicMetric({
-      name: MetricName.InvalidPatreonIdentityAttributes,
-    });
-    return {
-      id,
-    };
+    return handleInvalidPatreonIdentityAttributes({ attributes, id });
   }
 
   const {
@@ -82,16 +49,11 @@ export default function parsePatreonIdentity(
   } = attributes;
 
   return {
-    email: typeof email === 'string' ? email : undefined,
-    firstName: typeof firstName === 'string' ? firstName : undefined,
-    fullName: typeof fullName === 'string' ? fullName : undefined,
+    email: mapToOptionalString(email),
+    firstName: mapToOptionalString(firstName),
+    fullName: mapToOptionalString(fullName),
+    gender: mapToGender(gender),
     id,
-
-    gender: isPatreonGender(gender)
-      ? mapPatreonGenderToGender(gender)
-      : Gender.Neutral,
-
-    isEmailVerified:
-      typeof isEmailVerified === 'boolean' ? isEmailVerified : false,
+    isEmailVerified: mapToOptionalBoolean(isEmailVerified),
   };
 }

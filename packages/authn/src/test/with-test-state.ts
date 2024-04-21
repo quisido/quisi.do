@@ -27,7 +27,7 @@ const SEARCH: string = new URLSearchParams({
   }),
 }).toString();
 
-export default function withTestState<R>(f: () => R): Result<R> {
+export default function withTestState<R>(fn: () => R): Result<R> {
   // Create a mocked state implementation.
   const state: State = new State(
     jest.fn(),
@@ -56,7 +56,7 @@ export default function withTestState<R>(f: () => R): Result<R> {
 
     assert(state.telemetry !== null);
     state.telemetry.onPrivateError(TEST_LOG_PRIVATE_ERROR);
-    const runResult: R = f();
+    const runResult: R = fn();
     state.flushTelemetry();
     return runResult;
   });

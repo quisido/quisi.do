@@ -7,6 +7,6 @@
     "noEmit": false,
     "outDir": "dist",
     "rootDir": "src",
-    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/map-reduce-sort/src/"
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/eslint-config/src/"
   }
 }

@@ -1,5 +1,9 @@
+/// <reference types="jest" />
 import MetricName from '../constants/metric-name.js';
 import fetch from '../test/fetch.js';
+
+const DEFAULT_TRACE_FLAGS = 0;
+const DEFAULT_TRACE_VERSION = 0;
 
 describe('handleReservedPathname', (): void => {
   it('should handle `/favicon.ico`', async (): Promise<void> => {
@@ -11,8 +15,13 @@ describe('handleReservedPathname', (): void => {
     expectResponseHeaderToBe('Content-Type', 'image/x-icon; charset=utf-8');
     expectPublicDataPoint({
       blobs: [expect.any(String) as string, '0000000000000000'],
-      doubles: [expect.any(Number) as number, 0, 0],
       indexes: [MetricName.FaviconIco],
+
+      doubles: [
+        expect.any(Number) as number,
+        DEFAULT_TRACE_FLAGS,
+        DEFAULT_TRACE_VERSION,
+      ],
     });
   });
 
@@ -25,8 +34,13 @@ describe('handleReservedPathname', (): void => {
     expectResponseHeaderToBe('Content-Type', 'text/plain; charset=utf-8');
     expectPublicDataPoint({
       blobs: [expect.any(String) as string, '0000000000000000'],
-      doubles: [expect.any(Number) as number, 0, 0],
       indexes: [MetricName.RobotsTxt],
+
+      doubles: [
+        expect.any(Number) as number,
+        DEFAULT_TRACE_FLAGS,
+        DEFAULT_TRACE_VERSION,
+      ],
     });
   });
 });

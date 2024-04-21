@@ -1,13 +1,15 @@
+import { TraceFlag } from '../constants/trace-flag.js';
+import type { ParentIdLength } from '../types/parent-id-length.js';
+import type { TraceIdLength } from '../types/trace-id-length.js';
 import type { TraceParentGroups } from '../types/trace-parent-groups.js';
 import type TraceParent from '../types/trace-parent.js';
 import type { Tuple } from '../types/tuple.js';
+import hasTraceFlag from '../utils/has-trace-flag.js';
 import mapHexToNumber from '../utils/map-hex-to-number.js';
 import splitByLength from '../utils/split-by-length.js';
 import tupleMap from '../utils/tuple-map.js';
 
-// https://github.com/w3c/trace-context/blob/main/spec/20-http_request_header_format.md#trace-flags
-const FLAG_SAMPLED = 1; // 00000001
-const FLAG_RANDOM = 2; // 00000010
+const BYTES_PER_HEX = 2;
 
 export default function parseTraceParentGroups({
   parentId,
@@ -25,18 +27,18 @@ export default function parseTraceParentGroups({
 
   const traceFlags: number = mapHexToNumber(traceFlagsStr);
   return {
-    traceFlagRandom: (traceFlags & FLAG_RANDOM) === FLAG_RANDOM,
-    traceFlagSampled: (traceFlags & FLAG_SAMPLED) === FLAG_SAMPLED,
-    traceFlags: traceFlags,
+    traceFlagRandom: hasTraceFlag(traceFlags, TraceFlag.Random),
+    traceFlagSampled: hasTraceFlag(traceFlags, TraceFlag.Sampled),
+    traceFlags,
     version: mapHexToNumber(version),
 
     parentId: tupleMap(
-      splitByLength(parentId, 2) as Tuple<string, 8>,
+      splitByLength(parentId, BYTES_PER_HEX) as Tuple<string, ParentIdLength>,
       mapHexToNumber,
     ),
 
     traceId: tupleMap(
-      splitByLength(traceId, 2) as Tuple<string, 16>,
+      splitByLength(traceId, BYTES_PER_HEX) as Tuple<string, TraceIdLength>,
       mapHexToNumber,
     ),
   };

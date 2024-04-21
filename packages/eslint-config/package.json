@@ -1,6 +1,6 @@
 {
   "name": "@quisido/eslint-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "quisi.do <eslint-config@quisi.do>",
   "description": "ESLint configurations for quisi.do",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/eslint-config#readme",
@@ -25,15 +25,20 @@
       "types": "./dist/cjs.d.ts",
       "default": "./dist/cjs.js"
     },
-    "./dts": {
-      "import": "./dist/dts.js",
-      "types": "./dist/dts.d.ts",
-      "default": "./dist/dts.js"
+    "./d-ts": {
+      "import": "./dist/d-ts.js",
+      "types": "./dist/d-ts.d.ts",
+      "default": "./dist/d-ts.js"
     },
     "./js": {
       "import": "./dist/js.js",
       "types": "./dist/js.d.ts",
       "default": "./dist/js.js"
+    },
+    "./test-ts": {
+      "import": "./dist/test-ts.js",
+      "types": "./dist/test-ts.d.ts",
+      "default": "./dist/test-ts.js"
     },
     "./ts": {
       "import": "./dist/ts.js",

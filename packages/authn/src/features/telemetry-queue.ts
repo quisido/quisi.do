@@ -20,8 +20,8 @@ const DEFAULT_PUBLIC_METRIC_DIMENSIONS: Partial<
   traceVersion: 0,
 };
 
-const mapNumberToHex = (n: number): string => {
-  const str: string = n.toString(HEXADECIMAL);
+const mapNumberToHex = (num: number): string => {
+  const str: string = num.toString(HEXADECIMAL);
   if (str.length === SINGLE) {
     return `0${str}`;
   }
@@ -34,9 +34,9 @@ const mapTraceParentToDimensions = ({
   traceId,
   version,
 }: TraceParent): Partial<Record<string, number | string>> => ({
+  traceFlags,
   traceId: traceId.map(mapNumberToHex).join(''),
   traceParentId: parentId.map(mapNumberToHex).join(''),
-  traceFlags,
   traceVersion: version,
 });
 
@@ -71,7 +71,7 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
     const { PRIVATE_DATASET, PUBLIC_DATASET } = env;
     this.setPrivateDataset(PRIVATE_DATASET);
     this.setPublicDataset(PUBLIC_DATASET);
-    // this.setTraceParent(request);
+    // Eventually: this.setTraceParent(request);
   }
 
   public setPrivateDataset(dataset: unknown): void {
@@ -136,10 +136,10 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
 
       this.addPublicDimensions(mapTraceParentToDimensions(traceParent));
     } catch (err: unknown) {
+      this.logPublicError(mapUnknownToError(err));
       this.emitPublicMetric({
         name: MetricName.InvalidTraceParent,
       });
-      this.logPublicError(mapUnknownToError(err));
     }
   }
 }

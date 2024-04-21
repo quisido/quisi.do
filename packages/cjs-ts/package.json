@@ -26,7 +26,7 @@
     "eslint": "eslint . --cache --color --exit-on-fatal-error --format @microsoft/eslint-formatter-sarif --max-warnings 0 --output-file ../../sarif/cjs-ts.sarif --stats || (echo \"ESLint failed.\" && exit 1)",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "exit 0",
-    "prepublish": "concurrently --kill-others-on-fail --names attw \"yarn run attw\""
+    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint \"yarn run attw\" \"yarn run eslint\""
   },
   "dependencies": {
     "@babel/register": "^7.23.7"

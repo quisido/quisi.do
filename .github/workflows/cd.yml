@@ -277,7 +277,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: prepublish-applications
-          path: packages/*/jest/
+          path: |
+            packages/*/jest/
+            sarif/
 
   # Stage 4: github-pages, npm, sentry-release
   datadog-sourcemaps:
@@ -383,7 +385,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: npm
-          path: packages/*/jest/
+          path: |
+            packages/*/jest/
+            sarif/
 
   sentry-release:
     name: Sentry release

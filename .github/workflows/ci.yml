@@ -267,7 +267,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: prepublish
-          path: packages/*/jest/
+          path: |
+            packages/*/jest/
+            sarif/
 
   # Stage 4: coverage
   # coverage:
@@ -286,7 +288,7 @@ jobs:
   #       uses: actions/download-artifact@v3
   #       with:
   #         name: prepublish
-  #         path: packages/
+  #         path: /
   #     - name: Setup Node
   #       uses: actions/setup-node@v3
   #       with:

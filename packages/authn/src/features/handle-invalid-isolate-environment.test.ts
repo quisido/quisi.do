@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import { ErrorCode } from '@quisido/authn-shared';
 import fetch from '../test/fetch.js';
 
@@ -7,8 +8,7 @@ describe('handleInvalidIsolateEnvironment', (): void => {
       env: true,
     });
 
-    expectResponseToRedirectTo(
-      `https://quisi.do/#authn:error=${ErrorCode.InvalidIsolateEnvironment}`,
-    );
+    const codeStr: string = ErrorCode.InvalidIsolateEnvironment.toString();
+    expectResponseToRedirectTo(`https://quisi.do/#authn:error=${codeStr}`);
   });
 });

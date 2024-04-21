@@ -3,6 +3,9 @@ import EnvironmentName from '../constants/environment-name.js';
 import MetricName from '../constants/metric-name.js';
 import fetch from '../test/fetch.js';
 
+const DEFAULT_TRACE_FLAGS = 0;
+const DEFAULT_TRACE_VERSION = 0;
+
 describe('shouldThrottle', (): void => {
   it('should emit telemetry when IP is missing', async (): Promise<void> => {
     const { expectPublicDataPoint } = await fetch({
@@ -13,18 +16,24 @@ describe('shouldThrottle', (): void => {
 
     expectPublicDataPoint({
       blobs: [expect.any(String) as string, '0000000000000000'],
-      doubles: [expect.any(Number) as number, 0, 0],
       indexes: [MetricName.MissingIP],
+
+      doubles: [
+        expect.any(Number) as number,
+        DEFAULT_TRACE_FLAGS,
+        DEFAULT_TRACE_VERSION,
+      ],
     });
   });
 
-  it('should throttle the same IP twice', async (): Promise<void> => {
+  it('should emit telemetry when throttling', async (): Promise<void> => {
     const TEST_IP = '127.0.0.1';
 
     await fetch({
       env: {
         ENVIRONMENT_NAME: EnvironmentName.Production,
       },
+
       headers: {
         'CF-Connecting-IP': TEST_IP,
       },
@@ -34,6 +43,7 @@ describe('shouldThrottle', (): void => {
       env: {
         ENVIRONMENT_NAME: EnvironmentName.Production,
       },
+
       headers: {
         'CF-Connecting-IP': TEST_IP,
       },
@@ -41,24 +51,26 @@ describe('shouldThrottle', (): void => {
 
     expectPrivateDataPoint({
       blobs: [TEST_IP, expect.any(String) as string, '0000000000000000'],
+      indexes: [MetricName.TooManyRequests],
+
       doubles: [
         expect.any(Number) as number,
         expect.any(Number) as number,
-        0,
-        0,
+        DEFAULT_TRACE_FLAGS,
+        DEFAULT_TRACE_VERSION,
       ],
-      indexes: [MetricName.TooManyRequests],
     });
 
     expectPublicDataPoint({
       blobs: [expect.any(String) as string, '0000000000000000'],
+      indexes: [MetricName.TooManyRequests],
+
       doubles: [
         expect.any(Number) as number,
         expect.any(Number) as number,
-        0,
-        0,
+        DEFAULT_TRACE_FLAGS,
+        DEFAULT_TRACE_VERSION,
       ],
-      indexes: [MetricName.TooManyRequests],
     });
   });
 
@@ -69,6 +81,7 @@ describe('shouldThrottle', (): void => {
       env: {
         ENVIRONMENT_NAME: EnvironmentName.Production,
       },
+
       headers: {
         'CF-Connecting-IP': TEST_IP,
       },
@@ -78,6 +91,7 @@ describe('shouldThrottle', (): void => {
       env: {
         ENVIRONMENT_NAME: EnvironmentName.Production,
       },
+
       headers: {
         'CF-Connecting-IP': TEST_IP,
       },

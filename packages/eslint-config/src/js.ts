@@ -17,6 +17,7 @@ export default {
     ...js.configs.recommended.rules,
     ...prettier.rules,
     'func-name-matching': 'off',
+    'no-bitwise': 'off',
     'no-continue': 'off',
     'one-var': 'off',
     'sort-imports': 'off',

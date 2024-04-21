@@ -13,13 +13,17 @@ export default function handleFetchErrorCause({
 
   if (typeof privateData !== 'undefined') {
     logPrivateError(
-      new Error(`Error code #${code}`, { cause: JSON.stringify(privateData) }),
+      new Error(`Error code #${code.toString()}`, {
+        cause: JSON.stringify(privateData),
+      }),
     );
   }
 
   if (typeof publicData !== 'undefined') {
     logPublicError(
-      new Error(`Error code #${code}`, { cause: JSON.stringify(publicData) }),
+      new Error(`Error code #${code.toString()}`, {
+        cause: JSON.stringify(publicData),
+      }),
     );
   }
 

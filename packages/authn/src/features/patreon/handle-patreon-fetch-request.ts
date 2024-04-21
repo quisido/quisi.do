@@ -37,20 +37,25 @@ export default async function handlePatreonFetchRequest(): Promise<Response> {
       }
 
       const snapshot3: Snapshot = new Snapshot();
+      const getEmail = (): string | null => {
+        if (!isEmailVerified) {
+          return null;
+        }
+        return email;
+      };
+
       const newUserId: number = await putDatabaseUser(
         OAuthProvider.Patreon,
         oAuthId,
         {
-          email: isEmailVerified ? email : null,
+          email: getEmail(),
           firstName,
           fullName,
           gender,
         },
       );
 
-      return snapshot3.run((): Response => {
-        return mapUserIdToResponse(newUserId);
-      });
+      return snapshot3.run((): Response => mapUserIdToResponse(newUserId));
     });
   });
 }

@@ -1,6 +1,7 @@
+import { ErrorCode } from '@quisido/authn-shared';
 import type Cause from '../types/cause.js';
 
-// TODO: Create `mapCodeToMessage` to generate human-readable error messages.
 export default function mapCauseToError(cause: Cause): Error {
-  return new Error(`Code #${cause.code}`, { cause });
+  const { code } = cause;
+  return new Error(`${ErrorCode[code]}#${code.toString()}`, { cause });
 }

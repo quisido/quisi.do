@@ -3,6 +3,7 @@
 /analyze/
 /certificates/
 /coverage/
+/cypress/coverage/
 /cypress/downloads/
 /cypress/screenshots/
 /cypress/videos/

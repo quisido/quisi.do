@@ -12,7 +12,7 @@ export default async function writeOAuthResponse(
   }
 
   await dataBucket.put(
-    `provider-${provider}/${id}.json`,
+    `provider-${provider.toString()}/${id}.json`,
     JSON.stringify(response),
     {
       customMetadata: {

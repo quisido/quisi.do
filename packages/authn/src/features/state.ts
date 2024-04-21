@@ -4,19 +4,19 @@ import createReturnHref from './create-return-href.js';
 import TelemetryQueue from './telemetry-queue.js';
 
 export default class State {
-  private readonly _ctx: ExecutionContext;
+  readonly #ctx: ExecutionContext;
 
-  private _env: Record<string, unknown> | null = null;
+  #env: Record<string, unknown> | null = null;
 
-  private readonly _fetch: Fetcher['fetch'];
+  readonly #fetch: Fetcher['fetch'];
 
-  private readonly _request: Request;
+  readonly #request: Request;
 
-  private _returnHref: string | null = null;
+  #returnHref: string | null = null;
 
-  private _telemetry: TelemetryQueue | null = null;
+  #telemetry: TelemetryQueue | null = null;
 
-  private readonly _traceId: string;
+  readonly #traceId: string;
 
   public constructor(
     fetch: Fetcher['fetch'],
@@ -24,52 +24,52 @@ export default class State {
     ctx: ExecutionContext,
     traceId: string,
   ) {
-    this._ctx = ctx;
-    this._fetch = fetch;
-    this._request = request;
-    this._traceId = traceId;
+    this.#ctx = ctx;
+    this.#fetch = fetch;
+    this.#request = request;
+    this.#traceId = traceId;
   }
 
   public get ctx(): ExecutionContext {
-    return this._ctx;
+    return this.#ctx;
   }
 
   public get env(): Record<string, unknown> | null {
-    return this._env;
+    return this.#env;
   }
 
   public get fetch(): Fetcher['fetch'] {
-    return this._fetch;
+    return this.#fetch;
   }
 
   public get request(): Request {
-    return this._request;
+    return this.#request;
   }
 
   public get returnHref(): string | null {
-    return this._returnHref;
+    return this.#returnHref;
   }
 
   public get telemetry(): Telemetry<Metric> | null {
-    return this._telemetry;
+    return this.#telemetry;
   }
 
   public get traceId(): string {
-    return this._traceId;
+    return this.#traceId;
   }
 
   public flushTelemetry(): void {
-    if (this._telemetry === null) {
+    if (this.#telemetry === null) {
       return;
     }
-    this._telemetry.flush();
+    this.#telemetry.flush();
   }
 
   public setEnv(env: Record<string, unknown>): void {
-    this._env = env;
-    this._telemetry = new TelemetryQueue(env, this._ctx, this._traceId);
+    this.#env = env;
+    this.#telemetry = new TelemetryQueue(env, this.#ctx, this.#traceId);
 
     // Requires `env` and `telemetry`.
-    this._returnHref = createReturnHref();
+    this.#returnHref = createReturnHref();
   }
 }

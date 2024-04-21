@@ -30,12 +30,4 @@ export default [
       'no-useless-return': 'off',
     },
   },
-
-  {
-    files: ['**/*.test.ts'],
-    rules: {
-      'max-lines-per-function': 'off',
-      'no-undefined': 'off',
-    },
-  },
 ];

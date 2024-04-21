@@ -14,6 +14,7 @@ export const FAVICON_RESPONSE_BODY: BodyInit =
 
 export const FAVICON_RESPONSE_INIT: ResponseInit = {
   status: StatusCode.OK,
+
   headers: new Headers({
     'Access-Control-Allow-Methods': 'GET, OPTIONS',
     'Access-Control-Max-Age': '31536000',
@@ -26,6 +27,7 @@ export const FAVICON_RESPONSE_INIT: ResponseInit = {
 export const ROBOTS_RESPONSE_BODY: BodyInit = 'Disallow: *';
 export const ROBOTS_RESPONSE_INIT: ResponseInit = {
   status: StatusCode.OK,
+
   headers: new Headers({
     'Access-Control-Allow-Methods': 'GET, OPTIONS',
     'Access-Control-Max-Age': '31536000',

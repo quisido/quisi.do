@@ -87,8 +87,8 @@
   ],
 
   "settings": {
-    "eslint.experimental.useFlatConfig": false,
     "eslint.nodePath": "../../.yarn/sdks",
+    "eslint.useFlatConfig": true,
     "typescript.enablePromptUseWorkspaceTsdk": true,
     "typescript.tsdk": ".yarn/sdks/typescript/lib",
 

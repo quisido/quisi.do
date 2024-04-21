@@ -1,14 +1,12 @@
 import { mapUnknownToError } from 'fmrs';
-import DEFAULT_RETURN_HREF from '../constants/default-return-href.js';
 import MetricName from '../constants/metric-name.js';
 import StatusCode from '../constants/status-code.js';
 import { SECONDS_PER_DAY } from '../constants/time.js';
 import createAuthenticationId from '../utils/create-authentication-id.js';
 import getNowSeconds from '../utils/get-now-seconds.js';
-import getReturnHref from '../utils/get-return-href.js';
 import getTelemetry from '../utils/get-telemetry.js';
 import getAuthnUserIdsNamespace from './get-authn-user-ids-namespace.js';
-import getCookieDomain from './get-cookie-domain.js';
+import mapAuthnIdToResponseHeaders from './map-authn-id-to-response-headers.js';
 
 export default function mapUserIdToResponse(id: number): Response {
   const authnId: string = createAuthenticationId();
@@ -47,23 +45,9 @@ export default function mapUserIdToResponse(id: number): Response {
       }),
   );
 
-  const cookieDomain: string = getCookieDomain();
-  const returnHref: string = getReturnHref() ?? DEFAULT_RETURN_HREF;
+
   return new Response(null, {
+    headers: mapAuthnIdToResponseHeaders(authnId),
     status: StatusCode.SeeOther,
-    headers: new Headers({
-      'Content-Location': returnHref,
-      Location: returnHref,
-      'Set-Cookie': [
-        `__Secure-Authentication-ID=${authnId}`,
-        `Domain=${cookieDomain}`,
-        `Max-Age=${SECONDS_PER_DAY}`,
-        'Partitioned',
-        'Path=/',
-        // `Lax` is the default behavior.
-        // 'SameSite=Lax',
-        'Secure',
-      ].join('; '),
-    }),
   });
 }

@@ -1,5 +1,9 @@
+/// <reference types="jest" />
 import MetricName from '../constants/metric-name.js';
 import fetch from '../test/fetch.js';
+
+const DEFAULT_TRACE_FLAGS = 0;
+const DEFAULT_TRACE_VERSION = 0;
 
 describe('getEnvironmentName', (): void => {
   it('should emit telemetry for a missing environment name', async (): Promise<void> => {
@@ -9,8 +13,13 @@ describe('getEnvironmentName', (): void => {
 
     expectPublicDataPoint({
       blobs: [expect.any(String) as string, '0000000000000000'],
-      doubles: [expect.any(Number) as number, 0, 0],
       indexes: [MetricName.MissingEnvironmentName],
+
+      doubles: [
+        expect.any(Number) as number,
+        DEFAULT_TRACE_FLAGS,
+        DEFAULT_TRACE_VERSION,
+      ],
     });
   });
 
@@ -23,10 +32,15 @@ describe('getEnvironmentName', (): void => {
 
     expectPublicDataPoint({
       blobs: [expect.any(String) as string, '0000000000000000'],
-      doubles: [expect.any(Number) as number, 0, 0],
       indexes: [MetricName.InvalidEnvironmentName],
+
+      doubles: [
+        expect.any(Number) as number,
+        DEFAULT_TRACE_FLAGS,
+        DEFAULT_TRACE_VERSION,
+      ],
     });
 
-    // expectPrivateLog()
+    // Eventually: expectPrivateLog()
   });
 });
