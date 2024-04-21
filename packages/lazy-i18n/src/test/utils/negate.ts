@@ -1,7 +1,5 @@
 export default function negate<A extends unknown[]>(
-  f: (...args: A) => boolean,
+  fn: (...args: A) => boolean,
 ): (...args: A) => boolean {
-  return (...args: A): boolean => {
-    return !f(...args);
-  };
+  return (...args: A): boolean => !fn(...args);
 }

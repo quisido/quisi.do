@@ -1,12 +1,12 @@
 /// <reference types="jest" />
 
 export default async function expectToEventuallyThrow(
-  f: () => Promise<void>,
+  fn: () => Promise<void>,
   err: unknown,
 ): Promise<void> {
   let didThrow = true;
   try {
-    await f();
+    await fn();
     didThrow = false;
   } catch (actualErr: unknown) {
     expect(actualErr).toBe(err);

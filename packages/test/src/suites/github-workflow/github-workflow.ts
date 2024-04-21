@@ -14,29 +14,31 @@ import EXPECTED_ON_TYPE_ERROR from './constants/expected-on-type-error.js';
 import mapGitHubWorkflowEventNameToPathsTypeFail from './utils/map-github-workflow-event-name-to-paths-type-fail.js';
 import mapGitHubWorkflowPathToRelative from './utils/map-github-workflow-path-to-relative.js';
 
-const GLOB_ENDING = /(?:\/\*\*)?\/\*$/;
+const GLOB_ENDING = /(?:\/\*\*)?\/\*$/u;
 
 export default class GitHubWorkflowTest implements Test {
-  private readonly _absolutePath: string;
+  readonly #absolutePath: string;
 
-  private readonly _relativePath: string;
+  readonly #relativePath: string;
 
-  private _relativeWorkspacePaths: readonly string[] = [];
+  #relativeWorkspacePaths: readonly string[] = [];
 
   public constructor(absolutePath: string) {
-    this._absolutePath = absolutePath;
-    this._relativePath = mapGitHubWorkflowPathToRelative(absolutePath);
+    this.#absolutePath = absolutePath;
+    this.#relativePath = mapGitHubWorkflowPathToRelative(absolutePath);
   }
 
-  // `test` is a getter that returns a function, instead of a method, so that it
-  //   has access to the `GitHubWorkflowsTest` object despite that returned
-  //   function using a `TreeLogger` context.
+  /**
+   *   The `test` getter returns a function, instead of a method, so that it has
+   * access to the `GitHubWorkflowsTest` object despite that returned function
+   * using a `TreeLogger` context.
+   */
   public get test(): (this: Readonly<TreeLogger>) => void {
     const { on }: Record<string, unknown> = mapYamlPathToJson(
-      this._absolutePath,
+      this.#absolutePath,
     );
 
-    // skip; does not target any events
+    // Skip. Does not target any events.
     if (typeof on === 'undefined') {
       return noop;
     }
@@ -63,7 +65,7 @@ export default class GitHubWorkflowTest implements Test {
   }
 
   public setRelativeWorkspacePaths(paths: readonly string[]): this {
-    this._relativeWorkspacePaths = paths;
+    this.#relativeWorkspacePaths = paths;
     return this;
   }
 
@@ -84,7 +86,7 @@ export default class GitHubWorkflowTest implements Test {
       return mapGitHubWorkflowEventNameToPathsTypeFail(event);
     }
 
-    const relativePath: string = this._relativePath;
+    const relativePath: string = this.#relativePath;
     if (!paths.includes(relativePath)) {
       return function failGitHubWorkflowEvent(
         this: Readonly<TreeLogger>,
@@ -99,16 +101,17 @@ export default class GitHubWorkflowTest implements Test {
 
     const mapPathToWorkspace = this.mapPathToWorkspace.bind(this);
     return function testGitHubWorkflowEvent(this: Readonly<TreeLogger>): void {
-      const workspacePackageJsons: Map<string, PackageJson> = new Map();
+      const workspacePackageJsons: Map<string, PackageJson> =
+        new Map<string, PackageJson>();
       for (const path of paths) {
         const workspacePath: string | undefined = mapPathToWorkspace(path);
 
-        // skip; not a workspace
+        // Skip. Not a workspace.
         if (filterByUndefined(workspacePath)) {
           continue;
         }
 
-        // skip; already tested
+        // Skip. Already tested.
         if (workspacePackageJsons.has(workspacePath)) {
           continue;
         }
@@ -174,7 +177,7 @@ export default class GitHubWorkflowTest implements Test {
   }
 
   private mapPathToWorkspace(path: string): string | undefined {
-    for (const relativeWorkspacePath of this._relativeWorkspacePaths) {
+    for (const relativeWorkspacePath of this.#relativeWorkspacePaths) {
       if (
         path === relativeWorkspacePath ||
         path.startsWith(`${relativeWorkspacePath}/`)
@@ -182,6 +185,7 @@ export default class GitHubWorkflowTest implements Test {
         return relativeWorkspacePath;
       }
     }
+
     return;
   }
 }

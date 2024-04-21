@@ -17,7 +17,7 @@ describe('isDefaultStringRecordExport', (): void => {
     expect(
       isDefaultStringRecordExport({
         default: {
-          a: 'b',
+          'test-key': 'test value',
         },
       }),
     ).toBe(true);

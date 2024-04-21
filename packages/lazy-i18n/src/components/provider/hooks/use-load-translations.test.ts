@@ -1,17 +1,17 @@
 /// <reference types="jest" />
 import { renderHook } from '@testing-library/react';
 import expectToEventuallyThrow from '../../../test/utils/expect-to-eventually-throw.js';
+import noop from '../../../test/utils/noop.js';
 import type { DefaultExport } from '../../../types/default-export.js';
 import type { Translations } from '../../../types/translations.js';
-import type { Props, State } from './use-load-translations.js';
-import useLoadTranslations from './use-load-translations.js';
+import { default as useLoadTranslations, type Props, type State } from './use-load-translations.js';
 
 type Locale = 'es_ES';
+type T = Record<Locale, Translations | undefined>;
 type P = Props<T>;
 type S = State<keyof T>;
-type T = Record<Locale, Translations | undefined>;
 
-const ES_ES = 'es_ES' as const;
+const ES_ES = 'es_ES';
 const ONCE = 1;
 const TEST_ERROR_MESSAGE = 'test error message';
 const TEST_ERROR: Error = new Error(TEST_ERROR_MESSAGE);
@@ -24,7 +24,7 @@ describe('useLoadTranslations', (): void => {
 
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
-        onLoad(): void {},
+        onLoad: noop,
         translationsRecord: {
           [ES_ES]: MOCK_ES_ES,
         },
@@ -40,7 +40,7 @@ describe('useLoadTranslations', (): void => {
   it('should throw an error if the translations do not exist', async (): Promise<void> => {
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
-        onLoad(): void {},
+        onLoad: noop,
         translationsRecord: {
           [ES_ES]: undefined,
         },
@@ -182,7 +182,7 @@ describe('useLoadTranslations', (): void => {
   it('should throw load errors', async (): Promise<void> => {
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
-        onLoad(): void {},
+        onLoad: noop,
         translationsRecord: {
           [ES_ES]: async (): Promise<Record<string, string>> =>
             Promise.reject(TEST_ERROR),
@@ -198,7 +198,7 @@ describe('useLoadTranslations', (): void => {
     const MOCK_LOAD_ERROR_HANDLER = jest.fn();
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
-        onLoad(): void {},
+        onLoad: noop,
         onLoadError: MOCK_LOAD_ERROR_HANDLER,
         translationsRecord: {
           [ES_ES]: async (): Promise<Record<string, string>> =>

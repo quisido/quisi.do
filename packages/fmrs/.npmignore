@@ -5,6 +5,7 @@
 /.*.json
 /.*ignore
 /.*rc.*
+/.eslintcache
 /*.config.*
 /*.cpuprofile
 /*.iml

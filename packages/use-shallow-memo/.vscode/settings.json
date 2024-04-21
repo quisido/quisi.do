@@ -2,6 +2,7 @@
   "files.exclude": {
     "dist/": true,
     "jest/": true,
+    ".eslintcache": true,
     "jest.config.cjs": true,
     "*.cpuprofile": true,
     "*.tsbuildinfo": true

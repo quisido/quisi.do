@@ -20,10 +20,13 @@
     "cookie": "^0.6.0"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.15.1",
-    "@cloudflare/workers-types": "^4.20240314.0",
+    "@arethetypeswrong/cli": "^0.15.3",
+    "@cloudflare/workers-types": "^4.20240419.0",
+    "@quisido/eslint-config": "workspace:^",
     "@types/cookie": "^0.6.0",
-    "typescript": "^5.4.2",
-    "wrangler": "^3.34.2"
+    "@types/eslint": "^8.56.10",
+    "eslint": "^9.1.0",
+    "typescript": "^5.4.5",
+    "wrangler": "^3.51.2"
   }
 }

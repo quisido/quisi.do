@@ -31,7 +31,15 @@ interface ZarazWindow extends Window {
   readonly zaraz: Zaraz;
 }
 
+const DEFAULT_METRIC_VALUE = 1;
 const hasZaraz = (w: Window): w is ZarazWindow => 'zaraz' in w;
+
+const mapDimensionsToValue = (dimensions: Dimensions): number => {
+  if ('value' in dimensions && typeof dimensions['value'] === 'number') {
+    return dimensions['value'];
+  }
+  return DEFAULT_METRIC_VALUE;
+}
 
 /**
  * Common e-commerce events:
@@ -62,7 +70,7 @@ export default function useEmit(): EventEmitter {
   const hostname: string = useHostname();
   const pathname: string = usePathname();
   const recordEvent = useRecordEvent();
-  const { captureEvent } = useSentrySdk();
+  const { captureEvent, metrics } = useSentrySdk();
 
   // States
   return useCallback(
@@ -88,7 +96,15 @@ export default function useEmit(): EventEmitter {
       });
 
       captureEvent(sentryEvent);
+      metrics.set(
+        name,
+        mapDimensionsToValue(dimensions),
+        {
+          tags: dimensions,
+          timestamp: Date.now(),
+        },
+      );
     },
-    [captureEvent, hostname, pathname, recordEvent],
+    [captureEvent, hostname, metrics, pathname, recordEvent],
   );
 }

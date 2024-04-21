@@ -2,11 +2,11 @@ import {
   AppRouterContext,
   type AppRouterInstance,
 } from 'next/dist/shared/lib/app-router-context.shared-runtime.js';
-import { type MutableRefObject, useContext } from 'react';
+import { useContext, type MutableRefObject } from 'react';
 
 interface State {
-  readonly appRouter: MutableRefObject<AppRouterInstance | null>;
   readonly Consumer: () => null;
+  readonly appRouter: MutableRefObject<AppRouterInstance | null>;
 }
 
 export default function createAppRouterConsumer(): State {
@@ -16,6 +16,7 @@ export default function createAppRouterConsumer(): State {
 
   return {
     appRouter,
+
     Consumer: function AppRouterConsumer(): null {
       appRouter.current = useContext(AppRouterContext);
       return null;

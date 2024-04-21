@@ -1,6 +1,7 @@
 {
   "files.exclude": {
     "dist/": true,
+    ".eslintcache": true,
     "*.cpuprofile": true,
     "*.tsbuildinfo": true
   }

@@ -10,24 +10,24 @@ import DEFAULT_REQUIRED_SEARCH_EXCLUDE_KEYS from './constants/default-required-s
 import MISSING_SETTINGS_JSON_FILE from './constants/missing-settings-json.js';
 
 export default class VSCodeTest implements Test {
-  private readonly _bannedSearchExcludeKeys: Set<string> = new Set();
+  readonly #bannedSearchExcludeKeys: Set<string> = new Set<string>();
 
-  private readonly _requiredSearchExcludeKeys: Set<string> = new Set(
+  readonly #requiredSearchExcludeKeys: Set<string> = new Set<string>(
     DEFAULT_REQUIRED_SEARCH_EXCLUDE_KEYS,
   );
 
-  private readonly _root: string;
+  readonly #root: string;
 
   public constructor(root: string = process.cwd()) {
-    this._root = root;
+    this.#root = root;
   }
 
   public get bannedSearchExcludeKeys(): Set<string> {
-    return this._bannedSearchExcludeKeys;
+    return this.#bannedSearchExcludeKeys;
   }
 
   public get requiredSearchExcludeKeys(): Set<string> {
-    return this._requiredSearchExcludeKeys;
+    return this.#requiredSearchExcludeKeys;
   }
 
   public get test(): (this: Readonly<TreeLogger>) => void {
@@ -38,7 +38,7 @@ export default class VSCodeTest implements Test {
   }
 
   private get settingsJsonPath(): string {
-    return join(this._root, '.vscode', 'settings.json');
+    return join(this.#root, '.vscode', 'settings.json');
   }
 
   private get testSettingsJson(): (this: Readonly<TreeLogger>) => void {
@@ -54,31 +54,31 @@ export default class VSCodeTest implements Test {
   }
 
   public banSearchExcludeKey(key: string): this {
-    this._bannedSearchExcludeKeys.add(key);
+    this.#bannedSearchExcludeKeys.add(key);
     return this;
   }
 
   public requireSearchExcludeKey(key: string): this {
-    this._requiredSearchExcludeKeys.add(key);
+    this.#requiredSearchExcludeKeys.add(key);
     return this;
   }
 
   public unbanSearchExcludeKey(key: string): this {
-    this._bannedSearchExcludeKeys.delete(key);
+    this.#bannedSearchExcludeKeys.delete(key);
     return this;
   }
 
   public unrequireSearchExcludeKey(key: string): this {
-    this._requiredSearchExcludeKeys.delete(key);
+    this.#requiredSearchExcludeKeys.delete(key);
     return this;
   }
 
   private getBannedSearchExcludeKeys(): Set<string> {
-    return this._bannedSearchExcludeKeys;
+    return this.#bannedSearchExcludeKeys;
   }
 
   private getRequiredSearchExcludeKeys(): Set<string> {
-    return this._requiredSearchExcludeKeys;
+    return this.#requiredSearchExcludeKeys;
   }
 
   private getSettingsJson(): VSCodeSettings {
@@ -109,13 +109,13 @@ export default class VSCodeTest implements Test {
       this: Readonly<TreeLogger>,
     ): void {
       for (const bannedKey of getBannedKeys()) {
-        if (Object.prototype.hasOwnProperty.call(searchExclude, bannedKey)) {
+        if (Object.hasOwn(searchExclude, bannedKey)) {
           this.addError(new Error(`Remove \`${bannedKey}\`.`));
         }
       }
 
       for (const requiredKey of getRequiredKeys()) {
-        if (!Object.prototype.hasOwnProperty.call(searchExclude, requiredKey)) {
+        if (!Object.hasOwn(searchExclude, requiredKey)) {
           this.addError(new Error(`Add \`${requiredKey}\`.`));
           continue;
         }

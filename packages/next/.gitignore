@@ -8,6 +8,7 @@
 /cypress/videos/
 /node_modules/
 /out/
+/.eslintcache
 /lighthouse.report.*
 /lighthouse-0.devtoolslog.json
 /lighthouse-0.trace.json

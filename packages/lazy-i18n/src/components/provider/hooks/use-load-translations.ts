@@ -1,5 +1,4 @@
-import type { MutableRefObject } from 'react';
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, type MutableRefObject } from 'react';
 import isDefaultStringRecordExport from '../../../is/is-default-string-record-export.js';
 import isStringRecord from '../../../is/is-string-record.js';
 import type { DefaultExport } from '../../../types/default-export.js';
@@ -73,9 +72,9 @@ export default function useLoadTranslations<
         .then((record: EagerTranslations): void => {
           if (isDefaultStringRecordExport(record)) {
             onLoad(locale, record.default);
-          } else {
-            onLoad(locale, record);
+            return;
           }
+          onLoad(locale, record);
         })
         .catch((err: unknown): void => {
           if (typeof onLoadError === 'undefined') {

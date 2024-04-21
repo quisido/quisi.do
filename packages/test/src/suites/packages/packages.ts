@@ -7,7 +7,6 @@ import filterByDefined from '../../utils/filter-by-defined.js';
 import filterByRecord from '../../utils/filter-by-record.js';
 import filterByUndefined from '../../utils/filter-by-undefined.js';
 import mapPathToPackageJson from '../../utils/map-path-to-package-json.js';
-import MISSING_PACKAGES_DIRECTORY_ERROR from './constants/missing-packages-directory-error.js';
 import createDependenciesTest from './utils/create-dependencies-test.js';
 import failPackageJsonFiles from './utils/fail-package-json-files.js';
 import mapPackageDirectoryToMissingPackageJsonError from './utils/map-package-directory-to-missing-package-json-error.js';
@@ -16,12 +15,12 @@ import mapPackageJsonExportsToTest from './utils/map-package-json-exports-to-tes
 const DEPENDENCY_KEYS = ['dependencies' as const, 'devDependencies' as const];
 
 export default class PackagesTest implements Test {
-  private _packagesDirectory = 'packages';
+  #packagesDirectory = 'packages';
 
-  private readonly _root: string;
+  readonly #root: string;
 
   public constructor(root: string = process.cwd()) {
-    this._root = root;
+    this.#root = root;
   }
 
   public get test(): (this: Readonly<TreeLogger>) => void {
@@ -31,8 +30,10 @@ export default class PackagesTest implements Test {
 
     return function testPackages(this: Readonly<TreeLogger>): void {
       const packageDirectories: readonly string[] = getPackageDirectories();
-      const packageDirectoryToJsonMap: Map<string, PackageJson> = new Map();
-      const packageNameToJsonMap: Map<string, PackageJson> = new Map();
+      const packageDirectoryToJsonMap: Map<string, PackageJson> =
+        new Map<string, PackageJson>();
+      const packageNameToJsonMap: Map<string, PackageJson> =
+        new Map<string, PackageJson>();
 
       for (const packageDirectory of packageDirectories) {
         const packageJson: PackageJson =
@@ -43,8 +44,8 @@ export default class PackagesTest implements Test {
 
       const mapPackageDirectoryToTest = (
         packageDirectory: string,
-      ): ((this: Readonly<TreeLogger>) => void) => {
-        return function testPackage(this: Readonly<TreeLogger>): void {
+      ): ((this: Readonly<TreeLogger>) => void) =>
+        function testPackage(this: Readonly<TreeLogger>): void {
           const packageJson: PackageJson | undefined =
             packageDirectoryToJsonMap.get(packageDirectory);
 
@@ -68,9 +69,7 @@ export default class PackagesTest implements Test {
 
           // Check for missing peer dependencies.
           for (const dependencyKey of DEPENDENCY_KEYS) {
-            if (
-              !Object.prototype.hasOwnProperty.call(packageJson, dependencyKey)
-            ) {
+            if (!Object.hasOwn(packageJson, dependencyKey)) {
               continue;
             }
 
@@ -84,7 +83,6 @@ export default class PackagesTest implements Test {
             );
           }
         };
-      };
 
       for (const packageDirectory of packageDirectories) {
         this.scope(
@@ -96,16 +94,16 @@ export default class PackagesTest implements Test {
   }
 
   private get packageDirectories(): readonly string[] {
-    if (!readdirSync(this._root).includes(this._packagesDirectory)) {
-      throw MISSING_PACKAGES_DIRECTORY_ERROR;
+    if (!readdirSync(this.#root).includes(this.#packagesDirectory)) {
+      throw new Error('Expected to find a `packages` directory.');
     }
 
-    const packagesPath: string = join(this._root, this._packagesDirectory);
+    const packagesPath: string = join(this.#root, this.#packagesDirectory);
     return readdirSync(packagesPath);
   }
 
   public setPackagesDirectory(dir: string): this {
-    this._packagesDirectory = dir;
+    this.#packagesDirectory = dir;
     return this;
   }
 
@@ -114,7 +112,7 @@ export default class PackagesTest implements Test {
   }
 
   private mapPackageDirectoryToPackageJson(packageDir: string): PackageJson {
-    const path: string = join(this._root, this._packagesDirectory, packageDir);
+    const path: string = join(this.#root, this.#packagesDirectory, packageDir);
     return mapPathToPackageJson(path);
   }
 }

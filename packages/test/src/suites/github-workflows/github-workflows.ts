@@ -13,21 +13,21 @@ import PACKAGE_WORKSPACES_TYPE_ERROR from './constants/package-workspaces-type-e
 import mapRootToGitHubWorkflowPaths from './utils/map-root-to-github-workflow-paths.js';
 import mapWorkspaceGlobToEndsWithError from './utils/map-workspace-glob-to-ends-with-error.js';
 
-const GLOB_ENDING = /\/\*$/;
+const GLOB_ENDING = /\/\*$/u;
 
 export default class GitHubWorkflowsTest implements Test {
-  private readonly _root: string;
+  readonly #root: string;
 
-  private readonly _workflowPaths: readonly string[];
+  readonly #workflowPaths: readonly string[];
 
-  private readonly _workspacePaths: readonly string[];
+  readonly #workspacePaths: readonly string[];
 
   public constructor(root: string = process.cwd()) {
     const packageJson: PackageJson = mapPathToPackageJson(root);
 
-    this._root = root;
-    this._workflowPaths = mapRootToGitHubWorkflowPaths(root);
-    this._workspacePaths =
+    this.#root = root;
+    this.#workflowPaths = mapRootToGitHubWorkflowPaths(root);
+    this.#workspacePaths =
       this.mapPackageJsonToRelativeWorkspacePaths(packageJson);
   }
 
@@ -46,7 +46,7 @@ export default class GitHubWorkflowsTest implements Test {
     (this: Readonly<TreeLogger>) => void,
   ][] {
     const mapPathToTestEntry = this.mapPathToTestEntry.bind(this);
-    return this._workflowPaths.map(mapPathToTestEntry);
+    return this.#workflowPaths.map(mapPathToTestEntry);
   }
 
   private getTestEntries(): readonly [
@@ -76,7 +76,7 @@ export default class GitHubWorkflowsTest implements Test {
     path: string,
   ): [string, (this: Readonly<TreeLogger>) => void] {
     const gitHubWorkflow: GitHubWorkflowTest = new GitHubWorkflowTest(path);
-    gitHubWorkflow.setRelativeWorkspacePaths(this._workspacePaths);
+    gitHubWorkflow.setRelativeWorkspacePaths(this.#workspacePaths);
     return [mapYamlFilePathToName(path), gitHubWorkflow.test];
   }
 
@@ -86,10 +86,12 @@ export default class GitHubWorkflowsTest implements Test {
     }
 
     const relativeRoot: string = glob.replace(GLOB_ENDING, '');
-    const absoluteRoot: string = join(this._root, relativeRoot);
+    const absoluteRoot: string = join(this.#root, relativeRoot);
 
-    // We use `/` instead of `path.join()` because this should pass on developers'
-    //   Windows machines and the path will be `/` during CI.
+    /**
+     *   We use `/` instead of `path.join()` because this should pass on
+     * developers' Windows machines and the path will be `/` during CI.
+     */
     const mapFileNameToRelativePath = (fileName: string): string =>
       `${relativeRoot}/${fileName}`;
 

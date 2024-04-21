@@ -1,3 +1,5 @@
-export default function increment(n: number): number {
-  return ++n;
+const INCREMENT = 1;
+
+export default function increment(num: number): number {
+  return num + INCREMENT;
 }

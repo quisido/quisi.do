@@ -4,11 +4,12 @@ export default class EventEmitter<
   Event = string,
   A extends unknown[] = never[],
 > {
-  private readonly _eventHandlers: Map<Event, EventHandler<A>[]> = new Map();
+  readonly #eventHandlers: Map<Event, EventHandler<A>[]> =
+    new Map<Event, EventHandler<A>[]>();
 
   public emit(event: Event, ...args: A): void {
     const eventHandlers: EventHandler<A>[] | undefined =
-      this._eventHandlers.get(event);
+      this.#eventHandlers.get(event);
     if (typeof eventHandlers === 'undefined') {
       return;
     }
@@ -19,9 +20,9 @@ export default class EventEmitter<
 
   public on(event: Event, handler: EventHandler<A>): void {
     const eventHandlers: EventHandler<A>[] | undefined =
-      this._eventHandlers.get(event);
+      this.#eventHandlers.get(event);
     if (typeof eventHandlers === 'undefined') {
-      this._eventHandlers.set(event, [handler]);
+      this.#eventHandlers.set(event, [handler]);
     } else {
       eventHandlers.push(handler);
     }

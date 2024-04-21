@@ -10,7 +10,7 @@ interface Params {
   readonly packageNameToJsonMap: Readonly<Map<string, PackageJson>>;
 }
 
-const WORKSPACE_VERSION = /^workspace:.*$/;
+const WORKSPACE_VERSION = /^workspace:.*$/u;
 
 export default function createDependenciesTest({
   dependencyKey,
@@ -26,8 +26,10 @@ export default function createDependenciesTest({
 
   return function testDependencies(this: Readonly<TreeLogger>): void {
     for (const [name, version] of Object.entries(record)) {
-      // If this isn't a dependency in the workspace, then there's nothing to
-      //   test.
+      /**
+       *   If this isn't a dependency in the workspace, then there's nothing to
+       * test.
+       */
       if (!WORKSPACE_VERSION.test(version)) {
         continue;
       }

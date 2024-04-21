@@ -4,12 +4,6 @@ export default {
   cacheDirectory: './jest/cache',
   collectCoverage: true,
   coverageDirectory: './jest/coverage',
-  coverageReporters: [
-    'clover',
-    'json',
-    'lcov',
-    ['text', { skipEmpty: true, skipFull: true }],
-  ],
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   resetMocks: true,
   resetModules: true,
@@ -20,6 +14,13 @@ export default {
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
     '!<rootDir>/src/**/*.d.ts',
+  ],
+
+  coverageReporters: [
+    'clover',
+    'json',
+    'lcov',
+    ['text', { skipEmpty: true, skipFull: true }],
   ],
 
   coverageThreshold: {
@@ -36,7 +37,7 @@ export default {
   },
 
   transform: {
-    'use-shallow-memo': '@monorepo-template/jest-transformer',
     '^.+\\.tsx?$': '@monorepo-template/jest-transformer',
+    'use-shallow-memo': '@monorepo-template/jest-transformer',
   },
 } satisfies Config;

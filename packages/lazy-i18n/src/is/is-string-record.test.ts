@@ -14,13 +14,13 @@ describe('isStringRecord', (): void => {
   it('should return false for non-string records', (): void => {
     expect(
       isStringRecord({
-        a: 1,
+        test: 1,
       }),
     ).toBe(false);
     expect(
       isStringRecord({
-        a: 'b',
-        c: 4,
+        'test-number': 4,
+        'test-string': 'b',
       }),
     ).toBe(false);
   });
@@ -28,7 +28,7 @@ describe('isStringRecord', (): void => {
   it('should return true for string records', (): void => {
     expect(
       isStringRecord({
-        a: 'b',
+        test: 'b',
       }),
     ).toBe(true);
   });

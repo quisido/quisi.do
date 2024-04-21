@@ -1,4 +1,4 @@
-enum ErrorCode {
+export enum ErrorCode {
   // OAuth
   MissingCookies = 12,
   MissingSessionIDCookie = 13,
@@ -60,5 +60,3 @@ enum ErrorCode {
   Unknown = 1,
   UnknownCause = 2,
 }
-
-export default ErrorCode;

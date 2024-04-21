@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 export default function reduceEntriesToRecord<
   K extends number | string | symbol,
   V,

@@ -1,6 +1,7 @@
 {
   "files.exclude": {
     ".wrangler/": true,
-    "dist/": true
+    "dist/": true,
+    ".eslintcache": true
   }
 }

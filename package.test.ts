@@ -36,8 +36,7 @@ const mapWorkspaceToPackage = (workspace: string): unknown => {
 const publicPackageNames: readonly string[] = readdirSync('packages')
   .map(mapWorkspaceToPackage)
   .filter(isPublic)
-  .map(mapToName)
-  .sort();
+  .map(mapToName);
 
 describe('package.json', (): void => {
   describe('scripts', (): void => {
@@ -50,10 +49,15 @@ describe('package.json', (): void => {
        *   copy as the source of truth.
        */
       it('should not upgrade workspaces', (): void => {
-        const scopes = Array.from(
+        const scopes: readonly string[] = Array.from(
           new Set(publicPackageNames.filter(isScoped).map(mapToScope)),
-        );
-        const unscopedPackageNames = publicPackageNames.filter(isUnscoped);
+        ).sort();
+
+        const unscopedPackageNames: readonly string[] = [
+          ...publicPackageNames.filter(isUnscoped),
+          'proposal-async-context',
+        ].sort();
+
         expect(up).toMatch(
           [
             `yarn up "@!(${scopes.join('|')})/*" "!(${unscopedPackageNames.join(

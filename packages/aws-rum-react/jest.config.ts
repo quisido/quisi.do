@@ -45,7 +45,7 @@ export default {
   },
 
   transform: {
-    unknown2string: '@monorepo-template/jest-transformer',
     '^.+\\.tsx?$': '@monorepo-template/jest-transformer',
+    unknown2string: '@monorepo-template/jest-transformer',
   },
 } satisfies Config;

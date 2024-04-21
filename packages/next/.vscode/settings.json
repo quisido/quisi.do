@@ -5,6 +5,7 @@
     "analyze/": true,
     "certificates/": true,
     "out/": true,
+    ".eslintcache": true,
     "cypress.config.cjs": true,
     "jest.config.cjs": true,
     "lighthouse-0.devtoolslog.json": true,
