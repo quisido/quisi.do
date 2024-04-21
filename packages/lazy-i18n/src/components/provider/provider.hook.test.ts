@@ -1,6 +1,5 @@
 /// <reference types="jest" />
-import type { RenderHookResult } from '@testing-library/react';
-import { act, renderHook } from '@testing-library/react';
+import { act, renderHook, type RenderHookResult } from '@testing-library/react';
 import useProvider, { type Props, type State } from './provider.hook.js';
 
 const EN_US = 'en_US' as const;

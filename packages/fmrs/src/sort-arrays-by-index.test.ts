@@ -11,15 +11,15 @@ const TWO: readonly [boolean, number, string] = [true, LARGER_NUMBER, 'xyz'];
 
 describe('sortArraysByIndex', (): void => {
   it('should sort by the specified index', (): void => {
-    // boolean
+    // Boolean
     expect([ONE, TWO].sort(sortArraysByIndex(FIRST))).toEqual([ONE, TWO]);
     expect([TWO, ONE].sort(sortArraysByIndex(FIRST))).toEqual([ONE, TWO]);
 
-    // number
+    // Number
     expect([ONE, TWO].sort(sortArraysByIndex(SECOND))).toEqual([ONE, TWO]);
     expect([TWO, ONE].sort(sortArraysByIndex(SECOND))).toEqual([ONE, TWO]);
 
-    // string
+    // String
     expect([ONE, TWO].sort(sortArraysByIndex(THIRD))).toEqual([ONE, TWO]);
     expect([TWO, ONE].sort(sortArraysByIndex(THIRD))).toEqual([ONE, TWO]);
   });

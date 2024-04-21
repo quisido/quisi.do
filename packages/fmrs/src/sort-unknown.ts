@@ -1,12 +1,12 @@
 import mapUnknownToString from 'unknown2string';
 import sortNumbers from './sort-numbers.js';
 
-export default function sortUnknown(a: unknown, b: unknown): number {
-  if (typeof a === 'number' && typeof b === 'number') {
-    return sortNumbers(a, b);
+export default function sortUnknown(first: unknown, second: unknown): number {
+  if (typeof first === 'number' && typeof second === 'number') {
+    return sortNumbers(first, second);
   }
 
-  const aStr: string = mapUnknownToString(a);
-  const bStr: string = mapUnknownToString(b);
-  return aStr.localeCompare(bStr);
+  const firstStr: string = mapUnknownToString(first);
+  const secondStr: string = mapUnknownToString(second);
+  return firstStr.localeCompare(secondStr);
 }

@@ -1,6 +1,6 @@
 {
-  "exclude": [".git/", ".yarn/", "jest/", "node_modules/", "sarif/"],
   "include": ["**/.*.json", "**/*.json", "**/*.ts", "**/*.tsx"],
+
   "compilerOptions": {
     // "charset": "utf8",
     // "fallbackPolling": "dynamicPriorityPolling",
@@ -108,5 +108,16 @@
     "useDefineForClassFields": true,
     "useUnknownInCatchVariables": true,
     "verbatimModuleSyntax": true
-  }
+  },
+
+  "exclude": [
+    ".git/",
+    ".idea/",
+    ".yarn/",
+    "jest/",
+    "node_modules/",
+    "packages/",
+    "sarif/",
+    ".pnp.*"
+  ]
 }

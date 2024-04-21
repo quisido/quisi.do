@@ -1,5 +1,6 @@
 {
   "files.exclude": {
+    ".eslintcache": true,
     "*-*.*.*.tgz": true
   }
 }

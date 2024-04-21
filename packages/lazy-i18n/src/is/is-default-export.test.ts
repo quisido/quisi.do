@@ -18,7 +18,7 @@ describe('isDefaultExport', (): void => {
   it('should return false for non-default exports', (): void => {
     expect(
       isDefaultExport({
-        a: 'b',
+        'test-key': 'test value',
       }),
     ).toBe(false);
   });
@@ -26,8 +26,8 @@ describe('isDefaultExport', (): void => {
   it('should return false for exports containing more than default', (): void => {
     expect(
       isDefaultExport({
-        a: 'b',
         default: 'default',
+        'test-key': 'test value',
       }),
     ).toBe(false);
   });
@@ -36,7 +36,7 @@ describe('isDefaultExport', (): void => {
     expect(
       isDefaultExport({
         default: {
-          a: 'b',
+          'test-key': 'test value',
         },
       }),
     ).toBe(true);

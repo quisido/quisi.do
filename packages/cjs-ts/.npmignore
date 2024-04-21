@@ -1,8 +1,9 @@
 /.vscode/
 /node_modules/
-/.attw.json
+/.*.json
 /.*ignore
 /.*rc.*
+/.eslintcache
 /*.iml
 /*-*.*.*.tgz
 /tsconfig.*

@@ -2,9 +2,9 @@
 import { mapMapToRecord } from './index.js';
 
 const TEST_RECORD: Record<string, unknown> = {
-  a: true,
-  b: 1234,
-  c: 'str',
+  boolean: true,
+  number: 1234,
+  string: 'str',
 };
 
 describe('mapMapToRecord', (): void => {

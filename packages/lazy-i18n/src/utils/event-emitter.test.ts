@@ -12,7 +12,8 @@ describe('EventEmitter', (): void => {
   it('should call various emit handlers', (): void => {
     const ONE = jest.fn();
     const TWO = jest.fn();
-    const emitter: EventEmitter<'test', [string]> = new EventEmitter();
+    const emitter: EventEmitter<'test', [string]> =
+      new EventEmitter<'test', [string]>();
     emitter.on('test', ONE);
     emitter.on('test', TWO);
     emitter.emit('test', 'arg');

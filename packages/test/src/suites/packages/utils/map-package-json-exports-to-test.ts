@@ -1,6 +1,5 @@
 import type TreeLogger from '@monorepo-template/tree-logger';
 import filterByRecord from '../../../utils/filter-by-record.js';
-import DEFAULT_EXPORT_CONDITION_INDEX_ERROR from '../constants/default-export-condition-index-error.js';
 import findDefaultString from './find-default-string.js';
 
 const ARRAY_INDEX_OFFSET = 1;
@@ -25,7 +24,9 @@ export default function mapPackageJsonExportsToTest(
 
         const lastExportIndex: number = keys.length - ARRAY_INDEX_OFFSET;
         if (defaultExportIndex !== lastExportIndex) {
-          this.addError(DEFAULT_EXPORT_CONDITION_INDEX_ERROR);
+          this.addError(new Error(
+            'The default condition must be the last one.',
+          ));
         }
       });
     }

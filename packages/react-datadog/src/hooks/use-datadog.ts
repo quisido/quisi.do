@@ -1,8 +1,7 @@
 'use client';
 
 import type { RumInitConfiguration, datadogRum } from '@datadog/browser-rum';
-import type { MutableRefObject } from 'react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type MutableRefObject } from 'react';
 import useShallowMemo from 'use-shallow-memo';
 import type User from '../types/user.js';
 import useDatadogRum from './use-datadog-rum.js';
@@ -39,10 +38,8 @@ export default function useDatadog({
     }
 
     /**
-     * In strict mode, React will execute this effect hook twice, which emits a
-     *   console error: "DD_RUM is already initialized."
-     * If the initialization configuration has not changed, do not initialize
-     *   again.
+     *   In strict mode, React will execute this effect hook twice, which emits
+     * a console error: "DD_RUM is already initialized." If the initialization configuration has not changed, do not initialize again.
      */
     if (lastInitConfiguration.current === rumInitConfigurationMemo) {
       return;

@@ -23,8 +23,8 @@
   "scripts": {
     "attw": "attw",
     "clean": "rm -rf dist jest && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
-    "eslint": "eslint '**/*' --format @microsoft/eslint-formatter-sarif --output-file ../../sarif/monorepo-template--tree-logger.sarif",
-    "eslint:fix": "eslint '**/*' --fix",
+    "eslint": "eslint . --cache --color --exit-on-fatal-error --format @microsoft/eslint-formatter-sarif --max-warnings 0 --output-file ../../sarif/monorepo-template--tree-logger.sarif --stats || (echo \"ESLint failed.\" && exit 1)",
+    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "yarn run tsc",
     "prepublish": "concurrently --kill-others-on-fail --names attw,eslint \"yarn run attw\" \"yarn run eslint\"",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json"
@@ -33,21 +33,22 @@
     "ansi-styles": "^6.2.1"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.15.1",
-    "@microsoft/eslint-formatter-sarif": "^3.0.0",
+    "@arethetypeswrong/cli": "^0.15.3",
+    "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@monorepo-template/eslint-config": "^1.0.7",
-    "@types/node": "^20.11.28",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
+    "@quisido/eslint-config": "workspace:^",
+    "@types/node": "^20.12.7",
+    "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch",
+    "@typescript-eslint/parser": "^7.7.0",
     "concurrently": "^8.2.2",
-    "eslint": "^8.57.0",
+    "eslint": "^9.1.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-prettier": "^5.1.3",
-    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.2.5",
     "tslib": "^2.6.2",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.5"
   }
 }

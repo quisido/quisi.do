@@ -5,30 +5,30 @@ describe('mapTranslationsRecordToLoadedTranslationsRecord', (): void => {
   it('should keep eagerly loaded translations', (): void => {
     expect(
       mapTranslationsRecordToLoadedTranslationsRecord({
-        a: {
+        testA: {
           one: 'two',
         },
-        b: {
+        testB: {
           default: {
             three: 'four',
           },
         },
-        c(): Record<string, string> {
+        testC(): Record<string, string> {
           return {
             five: 'six',
           };
         },
-        async d(): Promise<Record<string, string>> {
+        async testD(): Promise<Record<string, string>> {
           return Promise.resolve({
             seven: 'eight',
           });
         },
       }),
     ).toEqual({
-      a: {
+      testA: {
         one: 'two',
       },
-      b: {
+      testB: {
         three: 'four',
       },
     });

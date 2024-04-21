@@ -2,9 +2,8 @@ import type { datadogRum } from '@datadog/browser-rum';
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { StrictMode } from 'react';
-import useDatadog, {
-  UNSAFE_DatadogRumContext as DatadogRumContext,
-} from '../index.js';
+import DatadogRumContext from '../contexts/datadog-rum.js';
+import useDatadog from '../index.js';
 import composeComponents from '../test/utils/compose-components.js';
 import type User from '../types/user.js';
 
@@ -34,6 +33,7 @@ const TEST_RUM: typeof datadogRum = {
   removeUserProperty: jest.fn(),
   setGlobalContext: jest.fn(),
   setGlobalContextProperty: jest.fn(),
+  setTrackingConsent: jest.fn(),
   setUser: TEST_SET_USER,
   setUserProperty: jest.fn(),
   startSessionReplayRecording: TEST_START_SESSION_REPLAY_RECORDING,

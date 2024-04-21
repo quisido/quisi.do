@@ -1,8 +1,7 @@
 'use client';
 
 import type { AwsRum } from 'aws-rum-web';
-import type { Context } from 'react';
-import { createContext } from 'react';
+import { createContext, type Context } from 'react';
 
 const AwsRumContext: Context<AwsRum | null> = createContext<AwsRum | null>(
   null,

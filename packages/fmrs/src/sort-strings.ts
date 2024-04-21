@@ -1,3 +1,3 @@
-export default function sortStrings(a: string, b: string): number {
-  return a.localeCompare(b);
+export default function sortStrings(first: string, second: string): number {
+  return first.localeCompare(second);
 }

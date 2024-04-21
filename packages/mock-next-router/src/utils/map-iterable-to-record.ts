@@ -1,12 +1,10 @@
 const reduceIterableToRecord = <K extends number | string | symbol, V>(
   record: Record<K, V>,
   [key, value]: [K, V],
-): Record<K, V> => {
-  return {
-    ...record,
-    [key]: value,
-  };
-};
+): Record<K, V> => ({
+  ...record,
+  [key]: value,
+});
 
 export default function mapIterableToRecord<
   K extends number | string | symbol,

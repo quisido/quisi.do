@@ -37,6 +37,10 @@
       "path": "packages/cjs-ts",
     },
     {
+      "name": "eslint-config",
+      "path": "packages/eslint-config",
+    },
+    {
       "name": "fmrs",
       "path": "packages/fmrs",
     },

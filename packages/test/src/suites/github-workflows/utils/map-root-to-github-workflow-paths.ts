@@ -6,9 +6,8 @@ export default function mapRootToGitHubWorkflowPaths(
 ): readonly string[] {
   const fileNames: readonly string[] = mapRootToGitHubWorkflowFileNames(root);
 
-  const mapFileNameToPath = (fileName: string): string => {
-    return resolve(root, '.github', 'workflows', fileName);
-  };
+  const mapFileNameToPath = (fileName: string): string =>
+    resolve(root, '.github', 'workflows', fileName);
 
   return fileNames.map(mapFileNameToPath);
 }

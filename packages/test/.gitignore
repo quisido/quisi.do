@@ -1,4 +1,5 @@
 /dist/
 /jest/
+/.eslintcache
 /*.cpuprofile
 /*.tsbuildinfo

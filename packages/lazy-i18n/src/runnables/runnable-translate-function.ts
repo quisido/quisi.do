@@ -22,14 +22,14 @@ export default class RunnableTranslateFunction
   extends EventEmitter<Event, [string]>
   implements Run
 {
-  private readonly _fallbackTranslations: Record<string, string> | undefined;
+  readonly #fallbackTranslations: Record<string, string> | undefined;
 
-  private readonly _translations: Record<string, string> | undefined;
+  readonly #translations: Record<string, string> | undefined;
 
   public constructor({ fallbackTranslations, translations }: Options) {
     super();
-    this._fallbackTranslations = fallbackTranslations;
-    this._translations = translations;
+    this.#fallbackTranslations = fallbackTranslations;
+    this.#translations = translations;
     this.run = this.run.bind(this);
   }
 
@@ -40,26 +40,26 @@ export default class RunnableTranslateFunction
     vars?: ReactNodeVars | StringVars,
   ): ReactNode | string | undefined {
     // Load target locale.
-    if (typeof this._translations === 'undefined') {
+    if (typeof this.#translations === 'undefined') {
       this.emit('loadTranslations', str);
       return;
     }
 
     // Use target translation.
-    const translationsStr: string | undefined = this._translations[str];
+    const translationsStr: string | undefined = this.#translations[str];
     if (typeof translationsStr !== 'undefined') {
       return replaceVariables(translationsStr, vars);
     }
 
     // Load fallback locale.
-    if (typeof this._fallbackTranslations === 'undefined') {
+    if (typeof this.#fallbackTranslations === 'undefined') {
       this.emit('loadFallbackTranslations', str);
       return;
     }
 
     // Use fallback translation.
     const fallbackTranslationsStr: string | undefined =
-      this._fallbackTranslations[str];
+      this.#fallbackTranslations[str];
     if (typeof fallbackTranslationsStr !== 'undefined') {
       return replaceVariables(fallbackTranslationsStr, vars);
     }

@@ -1,8 +1,8 @@
 {
   "editor.tabSize": 2,
-  "eslint.experimental.useFlatConfig": false,
   "eslint.nodePath": ".yarn/sdks",
   "eslint.runtime": "node",
+  "eslint.useFlatConfig": true,
   "files.eol": "\n",
   "javascript.preferences.importModuleSpecifierEnding": "js",
   "prettier.configPath": ".prettierrc.json",
@@ -21,10 +21,12 @@
     ".yarn/install-state.gz": true,
     "jest/": true,
     "node_modules/": true,
+    "packages/": true,
     "sarif/": true,
+    ".eslintcache": true,
     ".pnp.cjs": true,
     ".pnp.loader.mjs": true,
-    "packages/": true,
+    "jest.config.cjs": true,
     "yarn.lock": true
   },
   "search.exclude": {
@@ -44,6 +46,7 @@
     "**/node_modules/": true,
     "**/sarif/": true,
     "**/.attach_pid*": true,
+    "**/.eslintcache": true,
     "**/.yarn": true,
     "**/.pnp.*": true,
     "**/*.cpuprofile": true,

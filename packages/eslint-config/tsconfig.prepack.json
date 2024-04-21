@@ -1,0 +1,12 @@
+{
+  "exclude": ["src/**/*.test.ts", "src/test/"],
+  "extends": "./tsconfig.json",
+  "include": ["src/"],
+  "compilerOptions": {
+    "declarationDir": "dist/import",
+    "noEmit": false,
+    "outDir": "dist/import",
+    "rootDir": "src",
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/map-reduce-sort/src/"
+  }
+}

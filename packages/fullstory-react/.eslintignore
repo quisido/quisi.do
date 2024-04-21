@@ -1,9 +1,0 @@
-/dist/
-/jest/
-/node_modules/
-/*.cpuprofile
-/*.iml
-/*.tsbuildinfo
-/*-*.*.*.tgz
-/LICENSE
-*.md
