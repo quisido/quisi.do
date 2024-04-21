@@ -1,3 +1,4 @@
+import { metrics } from '@sentry/browser';
 import type { Integration } from '@sentry/types';
 import { useFullStory, type FSApi } from 'fullstory-react';
 import { useMemo } from 'react';
@@ -17,6 +18,10 @@ export default function useIntegrations(): Integration[] {
 
   return useMemo((): Integration[] => {
     const fullStoryIntegration: Integration = mapFullStoryApiToIntegration(FS);
-    return [BROWSER_TRACING_INTEGRATION, fullStoryIntegration];
+    return [
+      BROWSER_TRACING_INTEGRATION,
+      fullStoryIntegration,
+      metrics.metricsAggregatorIntegration(),
+    ];
   }, [FS]);
 }
