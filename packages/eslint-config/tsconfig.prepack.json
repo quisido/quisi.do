@@ -3,9 +3,9 @@
   "extends": "./tsconfig.json",
   "include": ["src/"],
   "compilerOptions": {
-    "declarationDir": "dist/import",
+    "declarationDir": "dist",
     "noEmit": false,
-    "outDir": "dist/import",
+    "outDir": "dist",
     "rootDir": "src",
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/map-reduce-sort/src/"
   }
