@@ -2,9 +2,9 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Start",
+      "name": "Development server",
       "request": "launch",
-      "runtimeArgs": ["run", "start"],
+      "runtimeArgs": ["run", "quisido"],
       "runtimeExecutable": "yarn",
       "type": "node",
       "skipFiles": [

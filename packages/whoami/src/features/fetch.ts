@@ -1,4 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
+import { HEADERS_INIT } from '../constants/headers-init.js';
 import ResponseCode from '../constants/response-code.js';
 import {
   FAVICON_RESPONSE_BODY,
@@ -22,11 +23,9 @@ import mapHeadersToCookies from '../utils/map-headers-to-cookies.js';
 const authnIdIdMap: Map<string, string> = new Map();
 const BASE = 10;
 const throttleCacheMiss = createThrottler();
-const HEADERS_INIT: HeadersInit = {
-  'Access-Control-Allow-Credentials': 'true',
-  'Access-Control-Allow-Methods': 'GET, OPTIONS',
-  'Access-Control-Allow-Origin': 'quisi.do',
-  Allow: 'GET, OPTIONS',
+
+const JSON_HEADERS_INIT: HeadersInit = {
+  ...HEADERS_INIT,
   'Content-Type': 'text/json; charset=utf-8',
 };
 
@@ -54,7 +53,7 @@ export default (async function fetch(
         message: 'A cookie domain was not specified.',
       }),
       {
-        headers: new Headers(HEADERS_INIT),
+        headers: new Headers(JSON_HEADERS_INIT),
         status: StatusCode.InternalServerError,
       },
     );
@@ -65,7 +64,7 @@ export default (async function fetch(
   }`;
 
   const headers: Headers = new Headers({
-    ...HEADERS_INIT,
+    ...JSON_HEADERS_INIT,
     'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
   });
 

@@ -83,7 +83,7 @@
     "react-datadog": "workspace:^",
     "react-dom": "^18.2.0",
     "react-innertext": "^1.1.5",
-    "recharts": "^2.12.5",
+    "recharts": "^2.12.6",
     "relative-timestamp": "^1.0.0",
     "sentry-react": "workspace:^",
     "sharp": "^0.33.3",
