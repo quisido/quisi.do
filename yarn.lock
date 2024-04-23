@@ -5119,6 +5119,7 @@ __metadata:
     jest-environment-jsdom: "npm:^29.7.0"
     lazy-i18n: "workspace:^"
     lighthouse: "npm:^11.7.1"
+    logrocket: "npm:^8.1.0"
     mixpanel-browser: "npm:^2.49.0"
     next: "npm:^14.2.2"
     number-format-react: "workspace:^"
@@ -14211,6 +14212,13 @@ __metadata:
     slice-ansi: "npm:^4.0.0"
     wrap-ansi: "npm:^6.2.0"
   checksum: 10c0/18b299e230432a156f2535660776406d15ba8bb7817dd3eaadd58004b363756d4ecaabcd658f9949f90b62ea7d3354423be3fdeb7a201ab951ec0e8d6139af86
+  languageName: node
+  linkType: hard
+
+"logrocket@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "logrocket@npm:8.1.0"
+  checksum: 10c0/fef2973d8e304036ebc5e304a93bb157c3b32aac43966e0373e3d6007a6d287db05ea66f15e6691ce390d74298ead101684d5ea7400a1b0f4e5a813db4d947b9
   languageName: node
   linkType: hard
 

@@ -33,6 +33,7 @@ export default function Datadog(): null {
     startSessionReplayRecordingManually: false,
     telemetryConfigurationSampleRate: 100,
     telemetrySampleRate: 100,
+    traceContextInjection: 'all',
     traceSampleRate: 100,
     trackLongTasks: true,
     trackResources: true,

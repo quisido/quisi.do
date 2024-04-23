@@ -19,6 +19,7 @@ import GoogleFonts from '../features/google-fonts.js';
 import Header from '../features/header.js';
 import HostnameProvider from '../features/hostname-provider.js';
 import styles from '../features/layout.module.scss';
+import LogRocket from '../features/log-rocket.js';
 import NotificationsProvider from '../features/notifications-provider.js';
 import Notifications from '../features/notifications.js';
 import Preconnect from '../features/preconnect.js';
@@ -37,6 +38,8 @@ const BODY_CLASS_NAME: string = validateString(styles['body']);
 const CLARITY_TAG: string = validateString(process.env['CLARITY_TAG']);
 const HTML_CLASS_NAME: string = validateString(styles['html']);
 
+
+
 /**
  *   We do not put wrappers around `<body>` itself, because we do not want to
  * inadvertently render HTML elements around `<body>`.
@@ -47,6 +50,7 @@ const Contexts: ComponentType<PropsWithChildren> = withWrappers(
   DarkModeProvider,
   DesignSystemProvider,
   HostnameProvider,
+  LogRocket,
   NotificationsProvider,
   Sentry,
   SessionIdProvider,
