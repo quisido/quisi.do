@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, type ReactElement, type ReactNode } from 'react';
 import GITHUB_SHA from '../constants/github-sha.js';
 import { WHOAMI } from '../constants/whoami.js';
