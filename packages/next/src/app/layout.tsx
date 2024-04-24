@@ -38,8 +38,6 @@ const BODY_CLASS_NAME: string = validateString(styles['body']);
 const CLARITY_TAG: string = validateString(process.env['CLARITY_TAG']);
 const HTML_CLASS_NAME: string = validateString(styles['html']);
 
-
-
 /**
  *   We do not put wrappers around `<body>` itself, because we do not want to
  * inadvertently render HTML elements around `<body>`.

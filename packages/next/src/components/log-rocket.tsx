@@ -31,8 +31,7 @@ const CONSOLE: Required<Required<LogRocketOptions>['console']> = {
   shouldAggregateConsoleErrors: true,
 };
 
-const DOM: Required<Required<LogRocketOptions>['dom']> = {
-  baseHref: window.location.host,
+const DOM: Required<Omit<Required<LogRocketOptions>['dom'], 'baseHref'>> = {
   hiddenAttributes: [],
   inputSanitizer: false,
   isEnabled: true,
@@ -83,7 +82,6 @@ export default function LogRocket({ appId, children }: Props): ReactElement {
       childDomains: [],
       console: CONSOLE,
       disableBusyFramesTracker: false,
-      dom: DOM,
       mergeIframes: true,
       network: NETWORK,
       parentDomain: null,
@@ -94,6 +92,10 @@ export default function LogRocket({ appId, children }: Props): ReactElement {
       shouldDebugLog: false,
       shouldDetectExceptions: true,
       shouldParseXHRBlob: true,
+      dom: {
+        ...DOM,
+        baseHref: `${window.location.origin}/`,
+      },
     } satisfies Required<Omit<LogRocketOptions, 'serverURL' | 'shouldSendData' | 'uploadTimeInterval'>>);
   }, [appId, init]);
 
