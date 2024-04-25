@@ -1,4 +1,5 @@
 /.git/
+/.wrangler/
 /.yarn/cache/
 /.yarn/sdks/
 /.yarn/unplugged/
