@@ -1,4 +1,5 @@
 /.wrangler/
 /dist/
 /jest/
+/.dev.vars
 /.eslintcache
