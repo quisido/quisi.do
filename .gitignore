@@ -6,6 +6,7 @@
 /.yarn/build-state.yml
 /.yarn/install-state.gz
 /jest/
+/packages/*/.dev.vars
 /sarif/
 /.attach_pid*
 /.eslintcache
