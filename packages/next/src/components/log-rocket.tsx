@@ -74,10 +74,10 @@ const NETWORK: Required<Required<LogRocketOptions>['network']> = {
 };
 
 export default function LogRocket({ appId, children }: Props): ReactElement {
-  const { init } = useLogRocket();
+  const LogRocket = useLogRocket();
 
   useEffect((): void => {
-    init(appId, {
+    LogRocket.init(appId, {
       browser: BROWSER,
       childDomains: [],
       console: CONSOLE,
@@ -97,7 +97,7 @@ export default function LogRocket({ appId, children }: Props): ReactElement {
         baseHref: `${window.location.origin}/`,
       },
     } satisfies Required<Omit<LogRocketOptions, 'serverURL' | 'shouldSendData' | 'uploadTimeInterval'>>);
-  }, [appId, init]);
+  }, [appId, LogRocket]);
 
   return <>{children}</>;
 }

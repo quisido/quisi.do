@@ -3,6 +3,10 @@ import useForceUpdate from 'use-force-update';
 import type { LogRocket as ILogRocket } from '../types/log-rocket.js';
 import noop from '../utils/noop.js';
 
+interface DefaultExport<T> {
+  readonly default: T;
+}
+
 /**
  *   When ran server-side, importing `logrocket` results in the error:
  * TypeError: Cannot create property '_interopRequireDefault' on number '0'
@@ -27,15 +31,18 @@ let LogRocket: ILogRocket = {
   warn: noop,
 };
 
+
 export default function useLogRocket(): ILogRocket {
   const forceUpdate: VoidFunction = useForceUpdate();
 
   useEffect((): void => {
     void importLogRocket()
-      .then((logRocket: ILogRocket): void => {
-        LogRocket = logRocket;
-        forceUpdate();
-      })
+      .then(
+        ({ default: defaultLogRocket }: DefaultExport<ILogRocket>): void => {
+          LogRocket = defaultLogRocket;
+          forceUpdate();
+        },
+      )
       .catch(noop);
   }, [forceUpdate]);
 

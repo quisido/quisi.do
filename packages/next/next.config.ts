@@ -84,7 +84,7 @@ export default withNextJsBundleAnalyzer({
     optimizeCss: true,
     optimizeServerReact: true,
     outputFileTracingRoot: join(__dirname, '..', '..'),
-    ppr: process.env.NODE_ENV !== 'production',
+    // ppr: process.env.NODE_ENV !== 'production',
     serverMinification: true,
     serverSourceMaps: true,
     // staticWorkerRequestDeduping: true,
