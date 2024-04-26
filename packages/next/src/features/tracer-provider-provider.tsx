@@ -1,10 +1,10 @@
 'use client';
 
 import {
-  type PropsWithChildren,
-  type ReactElement,
   useEffect,
   useMemo,
+  type PropsWithChildren,
+  type ReactElement,
 } from 'react';
 import { useHostname } from '../contexts/hostname.js';
 import TracerProviderProvider from '../modules/react-tracer/index.js';
@@ -50,24 +50,6 @@ export default function TracerProviderProviderImpl({
 
   // Effects
   useEffect((): VoidFunction => {
-    /*
-    registerInstrumentations({
-      // meterProvider?: MeterProvider;
-      // loggerProvider?: LoggerProvider;
-      tracerProvider: value,
-      instrumentations: [
-        getWebAutoInstrumentations({
-          '@opentelemetry/instrumentation-fetch': {
-            ignoreNetworkEvents: false,
-          },
-          '@opentelemetry/instrumentation-user-interaction': {
-            eventNames: [...EVENT_NAMES],
-          },
-        }),
-      ],
-    });
-    */
-
     return (): void => {
       void value.shutdown();
     };

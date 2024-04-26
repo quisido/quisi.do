@@ -123,6 +123,7 @@ jobs:
         run: yarn run --require dd-trace/init prepack
         env:
           CLARITY_TAG: lm4m88gmix
+          CLOUD_ACCOUNT_ID: quisido
           CLOUD_PLATFORM: GitHub
           CLOUD_PROVIDER: GitHub Pages
           CLOUDWATCH_RUM_APPLICATION_ID: 8495b9c9-f57e-4395-9ca6-6c01862c107b
