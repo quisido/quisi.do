@@ -26,8 +26,8 @@ const mapEnvironmentVariableNamesToRecord = (
   names.reduce(reduceEnvironmentVariableNamesToRecord, {});
 
 export default withNextJsBundleAnalyzer({
-  assetPrefix: '', // same domain
-  basePath: '', // deployed application pathname
+  assetPrefix: '', // Same domain
+  basePath: '', // Deployed application pathname
   compress: true,
   distDir: '.next',
   generateBuildId: getVersion,
@@ -67,34 +67,36 @@ export default withNextJsBundleAnalyzer({
   },
 
   experimental: {
-    // adjustFontFallbacks: true,
-    // adjustFontFallbacksWithSizeAdjust: true,
-    // bundlePagesExternals: true,
-    // cacheMaxMemorySize: Number.POSITIVE_INFINITY,
-    // disablePostcssPresetEnv: true,
+    /*
+     * AdjustFontFallbacks: true,
+     * adjustFontFallbacksWithSizeAdjust: true,
+     * bundlePagesExternals: true,
+     * cacheMaxMemorySize: Number.POSITIVE_INFINITY,
+     * disablePostcssPresetEnv: true,
+     */
     cpus: CPUS_COUNT,
     craCompat: false,
-    // fallbackNodePolyfills: false,
+    // FallbackNodePolyfills: false,
     forceSwcTransforms: true,
-    // fullySpecified: true,
+    // FullySpecified: true,
     gzipSize: true,
-    // largePageDataBytes: 1024,
+    // LargePageDataBytes: 1024,
     nextScriptWorkers: true,
     optimisticClientCache: true,
     optimizeCss: true,
     optimizeServerReact: true,
     outputFileTracingRoot: join(__dirname, '..', '..'),
-    // ppr: process.env.NODE_ENV !== 'production',
+    // Ppr: process.env.NODE_ENV !== 'production',
     serverMinification: true,
     serverSourceMaps: true,
-    // staticWorkerRequestDeduping: true,
+    // StaticWorkerRequestDeduping: true,
     strictNextHead: true,
     swcMinify: true,
     swcTraceProfiling: true,
     taint: true,
-    // typedRoutes: true,
+    // TypedRoutes: true,
     webVitalsAttribution: ['CLS', 'FCP', 'FID', 'INP', 'LCP', 'TTFB'],
-    // webpackBuildWorker: undefined,
+    // WebpackBuildWorker: undefined,
     workerThreads: true,
 
     extensionAlias: {
@@ -103,10 +105,10 @@ export default withNextJsBundleAnalyzer({
     },
 
     /*
-    sri: {
-      algorithm: 'sha512',
-    },
-    */
+     *Sri: {
+     *  algorithm: 'sha512',
+     *},
+     */
 
     /**
      * Yarn PNP is not supported yet.

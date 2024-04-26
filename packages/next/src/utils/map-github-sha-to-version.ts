@@ -2,8 +2,8 @@ const ALPHANUMERIC_LENGTH = 36;
 const BASE = 10;
 const HEXADECIMAL = 16;
 
-const filterNumberByTrailingZeros = (n: number): boolean => {
-  const str: string = n.toString();
+const filterNumberByTrailingZeros = (num: number): boolean => {
+  const str: string = num.toString();
   return str.endsWith('0') || str.includes('+');
 };
 

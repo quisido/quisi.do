@@ -62,13 +62,13 @@ export default function useApdexLineChart({
         return ((satisfiedCount + toleratedCount * HALF) / total) * PERCENT;
       };
 
-      const mapTimestampToDatum = (timestamp: number): TimeSeriesDatum => {
+      const mapTimestampToDatum = (timestamp: number): TimeSeriesDatum => 
         // If an Apdex score exists for this timestamp, return it.
-        return {
+         ({
           timestamp,
           value: mapTimestampToScore(timestamp),
-        };
-      };
+        })
+      ;
 
       return partialXAxis.map(mapTimestampToDatum);
     }, [frustrated, satisfied, tolerated]),

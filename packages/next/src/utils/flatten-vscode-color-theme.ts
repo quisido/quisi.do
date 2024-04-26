@@ -15,15 +15,15 @@ type FlatVSCodeColorTheme<T extends VSCodeColorTheme> = T['colors'] &
   FlatTokenColors<T>;
 
 interface TokenColors {
-  // readonly name?: string;
+  // Readonly name?: string;
   readonly scope: string | readonly string[];
   readonly settings: Partial<Readonly<Record<string, string>>>;
 }
 
 interface VSCodeColorTheme {
-  // readonly $schema: string; // 'vscode://schemas/color-theme'
+  // Readonly $schema: string; // 'vscode://schemas/color-theme'
   readonly colors?: Readonly<Record<string, string>>;
-  // readonly name: string;
+  // Readonly name: string;
   readonly semanticTokenColors?: Readonly<Record<string, string>>;
   readonly tokenColors?: readonly TokenColors[];
 }
@@ -51,7 +51,7 @@ const mapTokenColorsToRecord = <T extends VSCodeColorTheme>(
       EMPTY_OBJECT,
     );
   }
-  // for (const tokenColors){}
+  // For (const tokenColors){}
   return record;
 };
 

@@ -1,13 +1,13 @@
-import { type ComponentType, lazy } from 'react';
+import { lazy, type ComponentType } from 'react';
 import DesignSystem from '../../../constants/design-system.js';
 import type DesignSystemProps from '../../../types/design-system-props.js';
 
 /*
-We must use `as` when mapping the design system to its component, because its
-  lazy definition cannot accept its generic. Instead, the generics for `Card`
-  and `Row` become defined as `object`, when in fact they are still generic. The
-  `as` definition returns them to their original generic form.
-*/
+ *   We must use `as` when mapping the design system to its component, because
+ * its lazy definition cannot accept its generic. Instead, the generics for
+ * `Card` and `Row` become defined as `object`, when in fact they are still
+ * generic. The `as` definition returns them to their original generic form.
+ */
 
 type DesignSystemComponent<
   Card extends object,

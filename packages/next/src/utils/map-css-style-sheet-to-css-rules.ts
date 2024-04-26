@@ -1,6 +1,6 @@
 import mapCssRuleListToCssRules from '../utils/map-css-rule-list-to-css-rules.js';
 
-const EMPTY_CSS_RULES: Set<CSSRule> = new Set();
+const EMPTY_CSS_RULES = new Set<CSSRule>();
 
 export default function mapCssStyleSheetToCssRules(
   sheet: Readonly<CSSStyleSheet>,

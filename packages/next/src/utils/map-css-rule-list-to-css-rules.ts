@@ -1,10 +1,12 @@
+const INCREMENT = 1;
+
 export default function mapCssRuleListToCssRules(
   list: Readonly<CSSRuleList>,
 ): Set<CSSRule> {
-  const rules: Set<CSSRule> = new Set();
+  const rules = new Set<CSSRule>();
 
   const ruleCount: number = list.length;
-  for (let i = 0; i < ruleCount; i++) {
+  for (let i = 0; i < ruleCount; i += INCREMENT) {
     const rule: CSSRule | null = list.item(i);
     if (rule === null) {
       break;

@@ -293,7 +293,7 @@ const DEFAULT_MUI_THEME_OPTIONS: ThemeOptions = {
     h5: {
       fontFamily: ['"PlusJakartaSans-Bold"', ...SYSTEM_FONTS].join(','),
       letterSpacing: 0.1,
-      // lineHeight: 36 / 24,
+      // LineHeight: 36 / 24,
     },
 
     h6: {

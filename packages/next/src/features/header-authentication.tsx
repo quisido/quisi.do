@@ -31,9 +31,25 @@ function useAuthenticationState(): State {
     };
   }, [loading]);
 
+  const getShow = (): boolean => {
+    if (!initiated) {
+      return false;
+    }
+
+    if (loading && !showLoading) {
+      return false;
+    }
+
+    if (typeof error !== 'undefined') {
+      return false;
+    }
+
+    return true;
+  }
+
   return {
     id: typeof data === 'undefined' ? null : data.id,
-    show: initiated && typeof error === 'undefined',
+    show: getShow(),
     showLoading: loading && showLoading,
   };
 }

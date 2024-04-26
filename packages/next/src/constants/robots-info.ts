@@ -1,11 +1,10 @@
 import { type Metadata } from 'next';
 
-// eslint-disable-next-line @typescript-eslint/no-type-alias
 type RobotsInfo = Metadata['robots'] extends infer T | string | null | undefined
   ? T
   : never;
 
-const ROBOTS_INFO: Omit<
+export const ROBOTS_INFO: Omit<
   Required<RobotsInfo>,
   | 'googleBot'
   | 'max-video-preview'
@@ -25,5 +24,3 @@ const ROBOTS_INFO: Omit<
   notranslate: false,
   nositelinkssearchbox: false,
 };
-
-export default ROBOTS_INFO;

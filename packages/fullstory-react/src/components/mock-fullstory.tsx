@@ -2,15 +2,16 @@
 
 import * as fullStoryBrowser from '@fullstory/browser';
 import type { ApiV1, ApiV2, FSApi } from '@fullstory/snippet';
-import { type PropsWithChildren, type ReactElement, useMemo } from 'react';
+import { useMemo, type PropsWithChildren, type ReactElement } from 'react';
 import useShallowMemo from 'use-shallow-memo';
-import FullStoryBrowser from '../contexts/fullstory-browser.js';
-import merge from '../utils/merge.js';
+import FullstoryBrowser from '../contexts/fullstory-browser.js';
 import mapV2OperationHandlersToApi, {
   type V2AsyncOperationHandlers,
   type V2OperationHandlers,
 } from '../utils/map-v2-operation-handlers-to-api.js';
+import merge from '../utils/merge.js';
 import noop from '../utils/noop.js';
+import Fullstory from './fullstory.js';
 
 type Props = Partial<
   FSApi &
@@ -19,10 +20,11 @@ type Props = Partial<
     V2OperationHandlers
 >;
 
-export default function MockFullStory({
+export default function MockFullstory({
   children,
+  orgId,
   ...props
-}: PropsWithChildren<Props>): ReactElement {
+}: PropsWithChildren<Props  & { orgId: string }>): ReactElement {
   const memoizedProps: Props = useShallowMemo(props);
 
   const value: typeof fullStoryBrowser =
@@ -48,8 +50,10 @@ export default function MockFullStory({
     }, [memoizedProps]);
 
   return (
-    <FullStoryBrowser.Provider value={value}>
-      {children}
-    </FullStoryBrowser.Provider>
+    <FullstoryBrowser.Provider value={value}>
+      <Fullstory orgId={orgId}>
+        {children}
+      </Fullstory>
+    </FullstoryBrowser.Provider>
   );
 }

@@ -9,7 +9,7 @@ type Mapped<A extends readonly unknown[], T> = A extends [unknown, ...infer U]
 
 export default function map<T, U, A extends readonly T[]>(
   arr: A,
-  f: (value: T) => U,
+  fn: (value: T) => U,
 ): Mapped<A, U> {
-  return arr.map(f) as Mapped<A, U>;
+  return arr.map(fn) as Mapped<A, U>;
 }

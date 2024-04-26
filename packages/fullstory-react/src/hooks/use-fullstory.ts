@@ -1,27 +1,16 @@
 'use client';
 
-import type { SnippetOptions } from '@fullstory/browser';
-import { useEffect } from 'react';
-import useShallowMemo from 'use-shallow-memo';
-import useFullStoryBrowser from './use-fullstory-browser.js';
 import type { FSApi } from '@fullstory/snippet';
+import { useContext } from 'react';
+import Fullstory from '../contexts/fullstory.js';
 
-export default function useFullStory(
-  snippetOptions: Readonly<SnippetOptions>,
-): FSApi {
+export default function useFullstory(): FSApi {
   // Contexts
-  const { FullStory, init, isInitialized } = useFullStoryBrowser();
+  const fullstory: FSApi | null = useContext(Fullstory);
 
-  // States
-  const memoizedSnippetOptions: SnippetOptions = useShallowMemo(snippetOptions);
+  if (fullstory === null) {
+    throw new Error('Expected the Fullstory context to be provided.');
+  }
 
-  // Effects
-  useEffect((): void => {
-    if (isInitialized()) {
-      return;
-    }
-    init(memoizedSnippetOptions);
-  }, [init, isInitialized, memoizedSnippetOptions]);
-
-  return FullStory;
+  return fullstory;
 }

@@ -14,7 +14,7 @@ const setNodeEnv = (value: string): void => {
 describe('getVersion', (): void => {
   afterEach((): void => {
     setNodeEnv('test');
-    delete process.env['GITHUB_SHA'];
+    delete process.env.GITHUB_SHA;
   });
 
   it('should be the GitHub SHA', (): void => {

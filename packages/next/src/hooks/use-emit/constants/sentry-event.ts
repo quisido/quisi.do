@@ -33,58 +33,64 @@ export default {
     },
 
     culture: {
-      // calendar?: string;
-      // display_name?: string;
-      // is_24_hour_format?: boolean;
-      // locale?: string;
-      // timezone?: string;
+      /*
+       * Calendar?: string;
+       * display_name?: string;
+       * is_24_hour_format?: boolean;
+       * locale?: string;
+       * timezone?: string;
+       */
     },
 
     device: {
-      // arch?: string;
-      // battery_level?: number;
-      // battery_status?: string;
-      // boot_time?: string;
-      // brand?: string;
-      // charging?: boolean;
-      // cpu_description?: string;
-      // device_type?: string;
-      // device_unique_identifier?: string;
-      // external_free_storage?: number;
-      // external_storage_size?: number;
-      // family?: string;
-      // free_memory?: number;
-      // free_storage?: number;
-      // low_memory?: boolean;
-      // manufacturer?: string;
-      // memory_size?: number;
-      // model?: string;
-      // model_id?: string;
-      // name: window.navigator.userAgent, // window isn't defined until runtime
-      // online?: boolean;
-      // orientation?: 'portrait' | 'landscape';
-      // processor_count?: number;
-      // processor_frequency?: number;
-      // screen_density?: number;
-      // screen_dpi?: number;
-      // screen_height_pixels?: number;
-      // screen_resolution?: string;
-      // screen_width_pixels?: number;
-      // simulator?: boolean;
-      // storage_size?: number;
-      // supports_accelerometer?: boolean;
-      // supports_audio?: boolean;
-      // supports_gyroscope?: boolean;
-      // supports_location_service?: boolean;
-      // supports_vibration?: boolean;
-      // usable_memory?: number;
+      /*
+       * Arch?: string;
+       * battery_level?: number;
+       * battery_status?: string;
+       * boot_time?: string;
+       * brand?: string;
+       * charging?: boolean;
+       * cpu_description?: string;
+       * device_type?: string;
+       * device_unique_identifier?: string;
+       * external_free_storage?: number;
+       * external_storage_size?: number;
+       * family?: string;
+       * free_memory?: number;
+       * free_storage?: number;
+       * low_memory?: boolean;
+       * manufacturer?: string;
+       * memory_size?: number;
+       * model?: string;
+       * model_id?: string;
+       * name: window.navigator.userAgent, // window isn't defined until runtime
+       * online?: boolean;
+       * orientation?: 'portrait' | 'landscape';
+       * processor_count?: number;
+       * processor_frequency?: number;
+       * screen_density?: number;
+       * screen_dpi?: number;
+       * screen_height_pixels?: number;
+       * screen_resolution?: string;
+       * screen_width_pixels?: number;
+       * simulator?: boolean;
+       * storage_size?: number;
+       * supports_accelerometer?: boolean;
+       * supports_audio?: boolean;
+       * supports_gyroscope?: boolean;
+       * supports_location_service?: boolean;
+       * supports_vibration?: boolean;
+       * usable_memory?: number;
+       */
     },
 
     os: {
-      // build?: string;
-      // kernel_version?: string;
-      // name?: string;
-      // version?: string;
+      /*
+       * Build?: string;
+       * kernel_version?: string;
+       * name?: string;
+       * version?: string;
+       */
     },
   },
 

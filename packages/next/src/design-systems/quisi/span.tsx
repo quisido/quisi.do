@@ -6,15 +6,7 @@ export default function QuisiSpan({
   className,
 }: SpanProps): ReactElement {
   return (
-    <span
-      className={className}
-      style={{
-        display: 'inline-block',
-        lineHeight: '1em',
-        paddingBottom: '1px',
-        paddingTop: 'calc(1rem - 1em - 1px)',
-      }}
-    >
+    <span className={className}>
       {children}
     </span>
   );

@@ -20,7 +20,7 @@ const SPAN_STYLE: CSSProperties = {
 export default function LoadingIcon(): ReactElement {
   return (
     <span style={SPAN_STYLE}>
-      <Image alt="Loading" src={src} style={IMG_STYLE} />
+      <Image alt="Loading" src={src} style={IMG_STYLE} unoptimized />
     </span>
   );
 }

@@ -3,31 +3,39 @@ import type { Config } from 'lighthouse';
 const lightghouseConfig: Config = {
   extends: 'lighthouse:default',
   settings: {
-    // budgetPath: 'lighthouse.budget.json',
-    // chromeFlags: "--headless",
-    // enableErrorReporting: true,
+    /*
+     * BudgetPath: 'lighthouse.budget.json',
+     * chromeFlags: "--headless",
+     * enableErrorReporting: true,
+     */
     locale: 'en-US',
-    // output: ['html', 'json'],
-    // outputPath: "lighthouse",
-    // preset: "experimental",
-    // saveAssets: true,
-    // verbose: false,
+    /*
+     * Output: ['html', 'json'],
+     * outputPath: "lighthouse",
+     * preset: "experimental",
+     * saveAssets: true,
+     * verbose: false,
+     */
     blockedUrlPatterns: [
+      'https://analytics.google.com/*',
       'https://api.honeycomb.io/*',
-      'https://api.quisi.do/*', // temp block to allow fix to pass CI
+      'https://api.quisi.do/*', // Temp block to allow fix to pass CI
       'https://browser-intake-datadoghq.com/*',
+      'https://cdn.logr-ingest.com/*',
       'https://challenges.cloudflare.com/*',
       'https://clarity.ms/*',
       'https://cloudflareinsights.com/*',
       'https://dataplane.rum.us-west-2.amazonaws.com/*',
       'https://edge.fullstory.com/*',
-      'https://localhost:1098/whoami', // invalid certificate
+      'https://localhost:1098/whoami', // Invalid certificate
       'https://o592283.ingest.sentry.io/*',
+      'https://r.logr-ingest.com/*',
       'https://rs.fullstory.com/*',
       'https://rum.browser-intake-datadoghq.com/*',
       'https://session-replay.browser-intake-datadoghq.com/*',
       'https://static.cloudflareinsights.com/*',
       'https://stats.g.doubleclick.net/*',
+      'https://t.clarity.ms/*',
       'https://www.clarity.ms/*',
       'https://www.google.com/ads/*',
       'https://www.googleadservices.com/*',

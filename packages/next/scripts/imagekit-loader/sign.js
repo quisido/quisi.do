@@ -1,14 +1,10 @@
-import { createHmac } from 'crypto'; // node:crypto
+// NextJS doesn't support the proper `node:crypto` module name.
+import { createHmac } from 'crypto';
 
-/*
-const { IMAGEKIT_KEY } = process.env;
-
-if (typeof IMAGEKIT_KEY === 'undefined') {
-  throw new Error('Expected an environment variable named "IMAGEKIT_KEY".');
-}
-*/
-
-// NextJS image loaders do not support environment variables.
+/**
+ *   This should be private; but NextJS does not support environment variables
+ * for image loaders, and we're not using ImageKit beyond free tier testing.
+ */
 const IMAGEKIT_KEY = 'private_xvrnszuazhYS4Gdmg9nO3nH3rig=';
 
 export default function sign(data) {

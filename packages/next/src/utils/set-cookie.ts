@@ -31,7 +31,14 @@ export default function setCookie(
     subdomains = false,
   }: Options = DEFAULT_OPTIONS,
 ): void {
-  const attributes = [`__Secure-${key}=${value}`];
+  const maxAge: number = mapExpiresMsToMaxAge(expiresMs);
+  const attributes = [
+    `__Secure-${key}=${value}`,
+    `max-age=${maxAge}`,
+    `path=${path}`,
+    'samesite=lax',
+    'secure',
+  ];
 
   if (subdomains) {
     attributes.push(`domain=${window.location.hostname}`);
@@ -42,16 +49,9 @@ export default function setCookie(
     attributes.push(`expires=${expiry.toUTCString()}`);
   }
 
-  const maxAge: number = mapExpiresMsToMaxAge(expiresMs);
-  attributes.push(`max-age=${maxAge}`);
-
   if (partitioned) {
     attributes.push('partitioned');
   }
-
-  attributes.push(`path=${path}`);
-  attributes.push('samesite=lax');
-  attributes.push('secure');
 
   document.cookie = attributes.join('; ');
 }

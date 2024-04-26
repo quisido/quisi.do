@@ -7,6 +7,7 @@ import useTheme from '../../hooks/use-theme.js';
 
 export default function Link({
   children,
+  className,
   feature,
   href,
   label: ariaLabel,
@@ -29,6 +30,7 @@ export default function Link({
   return (
     <a
       aria-label={ariaLabel}
+      className={className}
       href={href}
       title={title}
       onClick={(e: MouseEvent<HTMLAnchorElement>): void => {
