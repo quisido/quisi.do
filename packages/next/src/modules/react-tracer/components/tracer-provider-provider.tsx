@@ -4,7 +4,7 @@ import TracerProvider from '../contexts/tracer-provider.js';
 
 interface Props {
   readonly children: ReactNode;
-  readonly value: ITracerProvider;
+  readonly value: ITracerProvider | null;
 }
 
 export default function TracerProviderProvider({

@@ -2,7 +2,6 @@ import { type NextConfig } from 'next';
 import type { ExperimentalConfig } from 'next/dist/server/config-shared.js';
 import { cpus } from 'node:os';
 import { join } from 'node:path';
-import type { Configuration as WebpackConfiguration } from 'webpack';
 import getVersion from './src/utils/get-version.js';
 import mapNodeEnvToOnDemandEntries from './src/utils/map-node-env-to-on-demand-entries.js';
 import mapNodeEnvToOutput from './src/utils/map-node-env-to-output.js';
@@ -47,6 +46,7 @@ export default withNextJsBundleAnalyzer({
 
   env: mapEnvironmentVariableNamesToRecord([
     'CLARITY_TAG',
+    'CLOUD_ACCOUNT_ID',
     'CLOUD_PLATFORM',
     'CLOUD_PROVIDER',
     'CLOUDWATCH_RUM_APPLICATION_ID',
@@ -84,18 +84,23 @@ export default withNextJsBundleAnalyzer({
     optimizeCss: true,
     optimizeServerReact: true,
     outputFileTracingRoot: join(__dirname, '..', '..'),
-    ppr: process.env.NODE_ENV !== 'production',
+    // ppr: process.env.NODE_ENV !== 'production',
     serverMinification: true,
     serverSourceMaps: true,
     // staticWorkerRequestDeduping: true,
     strictNextHead: true,
-    // swcMinify: true,
-    // swcTraceProfiling: true,
+    swcMinify: true,
+    swcTraceProfiling: true,
     taint: true,
     // typedRoutes: true,
     webVitalsAttribution: ['CLS', 'FCP', 'FID', 'INP', 'LCP', 'TTFB'],
-    webpackBuildWorker: true,
+    // webpackBuildWorker: undefined,
     workerThreads: true,
+
+    extensionAlias: {
+      '.js': ['.ts', '.tsx', '.js', '.jsx'],
+      '.jsx': ['.tsx', '.jsx'],
+    },
 
     /*
     sri: {
@@ -121,19 +126,5 @@ export default withNextJsBundleAnalyzer({
     // TODO: 🔥🔥🔥 CHANGE MY BACK TO `false`! 🔥🔥🔥
     ignoreBuildErrors: true,
     tsconfigPath: './tsconfig.prepack.json',
-  },
-
-  // Add support for fully-qualified ESM imports.
-  // https://github.com/vercel/next.js/issues/41961
-  webpack(config: WebpackConfiguration): WebpackConfiguration {
-    return {
-      ...config,
-      resolve: {
-        ...config.resolve,
-        extensionAlias: {
-          '.js': ['.ts', '.tsx', '.js', '.jsx'],
-        },
-      },
-    };
   },
 } satisfies NextConfig) satisfies NextConfig;

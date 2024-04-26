@@ -13,6 +13,12 @@ const IGNORED_AUDITS = new Set([
   'crawlable-anchors',
   'image-size-responsive',
   'service-worker',
+
+  // `zone.js` uses `UnloadHandler`.
+  'deprecations',
+
+  // `zone.js` uses an unload listener.
+  'no-unload-listeners',
 ]);
 
 if (!existsSync(REPORT_PATH)) {

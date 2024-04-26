@@ -1,14 +1,13 @@
 'use client';
 
 import { useEffect, type PropsWithChildren, type ReactElement } from 'react';
+import { WHOAMI } from '../constants/whoami.js';
 import { AuthenticationProvider } from '../contexts/authentication.js';
 import useAsyncState from '../modules/use-async-state/index.js';
 import type AuthenticationType from '../types/authentication.js';
 import isObject from '../utils/is-object.js';
-import validateString from '../utils/validate-string.js';
 
 const UNAUTHENTICATED_CODE = 5;
-const WHOAMI: string = validateString(process.env['WHOAMI']);
 
 export default function AuthenticationFeature({
   children,

@@ -1,5 +1,6 @@
 import { Resource } from '@opentelemetry/resources';
 import {
+  SEMRESATTRS_CLOUD_ACCOUNT_ID,
   SEMRESATTRS_CLOUD_PLATFORM,
   SEMRESATTRS_CLOUD_PROVIDER,
   SEMRESATTRS_DEPLOYMENT_ENVIRONMENT,
@@ -24,7 +25,6 @@ import mapPackageToSemanticResourceAttributes from '../utils/map-package-to-sema
 import validateString from '../utils/validate-string.js';
 
 const { description: nextDescription, version: nextVersion } = nextPackageJson;
-
 const {
   dependencies: packageDependencies,
   name: packageName,
@@ -35,13 +35,20 @@ const ARGV: string = process.argv.join(' ');
 const CLOUD_PLATFORM: string = validateString(process.env['CLOUD_PLATFORM']);
 const CLOUD_PROVIDER: string = validateString(process.env['CLOUD_PROVIDER']);
 const TELEMETRY_SDK_NAME = '@opentelemetry/sdk-trace-web';
+
+const CLOUD_ACCOUNT_ID: string = validateString(
+  process.env['CLOUD_ACCOUNT_ID'],
+);
+
 const DEPLOYMENT_ENVIRONMENT: string = validateString(
   process.env['DEPLOYMENT_ENVIRONMENT'],
 );
+
 export default class ResourceImpl extends Resource {
   public constructor(hostname: string) {
     super({
       [SEMRESATTRS_DEPLOYMENT_ENVIRONMENT]: DEPLOYMENT_ENVIRONMENT,
+      [SEMRESATTRS_CLOUD_ACCOUNT_ID]: CLOUD_ACCOUNT_ID,
       [SEMRESATTRS_CLOUD_PLATFORM]: CLOUD_PLATFORM,
       [SEMRESATTRS_CLOUD_PROVIDER]: CLOUD_PROVIDER,
       [SEMRESATTRS_HOST_NAME]: hostname,
