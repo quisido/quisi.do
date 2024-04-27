@@ -40,7 +40,7 @@ export default function Datadog(): null {
     trackSessionAcrossSubdomains: true,
     trackUserInteractions: true,
     trackViewsManually: false,
-    trackingConsent: 'not-granted', // or 'granted'
+    trackingConsent: 'not-granted', // Or 'granted'
     usePartitionedCrossSiteSessionCookie: true,
     useSecureSessionCookie: true,
     user: undefined,

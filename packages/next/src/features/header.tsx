@@ -53,9 +53,7 @@ function Header(): ReactElement {
           software as a service
         </span>
       </div>
-      <div>
-        <Authentication />
-      </div>
+      <Authentication />
     </header>
   );
 }

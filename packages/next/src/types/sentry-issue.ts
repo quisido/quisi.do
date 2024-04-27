@@ -2,7 +2,7 @@
 // /api/0/projects/{organization_slug}/{project_slug}/issues/
 
 export interface Metadata {
-  // readonly display_title_with_tree_label: boolean;
+  // Readonly display_title_with_tree_label: boolean;
   readonly filename?: string | undefined;
   readonly function?: string | undefined;
   readonly type?: string | undefined; // 'Error'
@@ -10,16 +10,18 @@ export interface Metadata {
 }
 
 /*
-export interface Project {
-  readonly id: string;
-  readonly name: string;
-  readonly slug: string;
-}
-*/
+ *Export interface Project {
+ *  readonly id: string;
+ *  readonly name: string;
+ *  readonly slug: string;
+ *}
+ */
 
 export default interface SentryIssue {
-  // readonly annotations: [];
-  // readonly assignedTo: null;
+  /*
+   * Readonly annotations: [];
+   * readonly assignedTo: null;
+   */
   readonly count: string;
   readonly culprit: string;
   readonly firstSeen: string;
@@ -30,17 +32,21 @@ export default interface SentryIssue {
   readonly isSubscribed: boolean;
   readonly lastSeen: string;
   readonly level: string; // 'error'
-  // readonly logger: null;
+  // Readonly logger: null;
   readonly metadata: Metadata;
   readonly numComments: number;
   readonly permalink: string;
-  // readonly project: Project;
-  // readonly shareId: null;
+  /*
+   * Readonly project: Project;
+   * readonly shareId: null;
+   */
   readonly shortId: string;
   readonly stats: Record<'24h', readonly (readonly [number, number])[]>;
   readonly status: string; // 'unresolved'
-  // readonly statusDetails: {};
-  // readonly subscriptionDetails: null;
+  /*
+   * Readonly statusDetails: {};
+   * readonly subscriptionDetails: null;
+   */
   readonly title: string;
   readonly type: string; // 'default'
   readonly userCount: number;

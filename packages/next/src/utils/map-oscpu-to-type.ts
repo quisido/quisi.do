@@ -16,8 +16,8 @@ export default function mapOscpuToType(
   }
 
   switch (oscpu) {
-    case 'Mac_PowerPC': // Linux?
-    case 'Macintosh': // Linux?
+    case 'Mac_PowerPC':
+    case 'Macintosh':
     case 'X11':
       return OSTYPEVALUES_LINUX;
 

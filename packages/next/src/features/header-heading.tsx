@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import useTheme from '../hooks/use-theme.js';
+import Text from './header-heading-text.jsx';
 
 interface State {
   readonly fontFamily: string;
@@ -33,7 +34,7 @@ export default function Heading(): ReactElement {
         textAlign: 'left',
       }}
     >
-      quisi.do
+      <Text />
     </h1>
   );
 }

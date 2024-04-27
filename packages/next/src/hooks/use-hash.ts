@@ -55,7 +55,7 @@ export default function useHash(): readonly [
       return;
     }
 
-    let forceUpdateTimeout: number | undefined = undefined;
+    let forceUpdateTimeout: number | undefined;
     const handler = (): void => {
       // Delay update until `window.location.hash` has updated.
       forceUpdateTimeout = window.setTimeout(forceUpdate, HASH_CHANGE_DELAY);

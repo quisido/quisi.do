@@ -3,7 +3,7 @@ import mapPathToAlternates from '../utils/map-path-to-alternates.js';
 import AUTHOR_QUISIDO from './author-quisido.js';
 import FORMAT_DETECTION from './format-detection.js';
 import KEYWORDS from './keywords.js';
-// import ROBOTS_INFO from './robots-info.js';
+import { ROBOTS_INFO } from './robots-info.js';
 // import THEME_COLOR_DESCRIPTORS from './theme-color-descriptors.js';
 
 /**
@@ -21,9 +21,9 @@ export default {
   keywords: [...KEYWORDS],
   manifest: '/manifest.json',
   metadataBase: new URL('/', 'https://quisi.do'),
-  // publisher: 'quisi.do',
+  publisher: 'quisi.do',
   referrer: 'no-referrer-when-downgrade',
-  // robots: ROBOTS_INFO,
+  robots: ROBOTS_INFO,
   title: 'quisi.do',
 
   appLinks: {
@@ -33,27 +33,29 @@ export default {
   },
 
   openGraph: {
-    // audio: OGAudio | Array<OGAudio>
-    // countryName: string
+    /*
+     * Audio: OGAudio | Array<OGAudio>
+     * countryName: string
+     */
     description: 'quisi.do',
     // determiner: 'a' | 'an' | 'the' | 'auto' | ''
     emails: ['open-graph@quisi.do'],
-    firstName: 'quisi',
+    // firstName: 'Mr.',
     gender: 'male',
     // images: OGImage | Array<OGImage>
-    lastName: '.do',
+    // lastName: 'quisi.do',
     locale: 'en-US',
     siteName: 'quisi.do',
     title: 'quisi.do',
     type: 'profile',
     url: 'https://quisi.do/',
-    // videos: OGVideo | Array<OGVideo>
+    // Videos: OGVideo | Array<OGVideo>
   },
 
   twitter: {
     creatorId: 'elonmusk',
     description: 'quisi.do',
-    // images: TwitterImage | Array<TwitterImage>;
+    // Images: TwitterImage | Array<TwitterImage>;
     siteId: 'quisi.do',
     title: 'quisi.do', // <-- title of the page, not the website
   },

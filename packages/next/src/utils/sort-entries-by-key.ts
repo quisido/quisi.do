@@ -1,6 +1,6 @@
 export default function sortEntriesByKey(
-  [a]: [string, unknown],
-  [b]: [string, unknown],
+  [keyA]: [string, unknown],
+  [keyB]: [string, unknown],
 ): number {
-  return a.localeCompare(b);
+  return keyA.localeCompare(keyB);
 }

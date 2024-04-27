@@ -22,12 +22,12 @@ interface BreadcrumbsEntryData {
 
 export interface BrowserContext extends Context {
   readonly name: string;
-  // readonly type: 'browser';
+  // Readonly type: 'browser';
   readonly version: string;
 }
 
 interface ClockDriftData {
-  // readonly name: 'timestamp';
+  // Readonly name: 'timestamp';
   readonly sdk_time: string;
   readonly server_time: string;
 }
@@ -51,12 +51,14 @@ export type Error =
 interface Exception extends Omit<SentryException, 'stacktrace' | 'thread_id'> {
   readonly rawStacktrace: Stacktrace;
   readonly stacktrace: Stacktrace;
-  // readonly threadId: number | null;
+  // Readonly threadId: number | null;
 }
 
 interface ExceptionEntryData {
-  // readonly excOmitted: boolean;
-  // readonly hasSystemFrames: boolean;
+  /*
+   * Readonly excOmitted: boolean;
+   * readonly hasSystemFrames: boolean;
+   */
   readonly values: readonly Exception[];
 }
 
@@ -95,20 +97,22 @@ interface NavigationBreadcrumbData {
 
 interface RequestEntryData {
   readonly cookies: readonly unknown[];
-  // readonly data: null;
-  // readonly env: null;
+  /*
+   * Readonly data: null;
+   * readonly env: null;
+   */
   readonly fragment: string | null;
   readonly headers: readonly [string, string][];
-  // readonly inferredContentType: null;
+  // Readonly inferredContentType: null;
   readonly method: string | null;
-  // readonly query: readonly unknown[];
+  // Readonly query: readonly unknown[];
   readonly url: string;
 }
 
 interface SentryBreadcrumb<T extends string, C extends string, D = null> {
   readonly category: C;
   readonly data: D;
-  // readonly event_id: null;
+  // Readonly event_id: null;
   readonly level: 'info';
   readonly message: string | null;
   readonly timestamp: string;
@@ -130,23 +134,29 @@ export default interface SentryProjectEvent {
   readonly contexts: Contexts;
   readonly dateCreated: string;
   readonly dateReceived: string;
-  // readonly entries: readonly Entry[];
-  // readonly errors: readonly Error[];
+  /*
+   * Readonly entries: readonly Entry[];
+   * readonly errors: readonly Error[];
+   */
   readonly eventID: string;
-  // readonly fingerprints: readonly string[];
+  // Readonly fingerprints: readonly string[];
   readonly groupID: string;
   readonly id: string;
   readonly location: string | null;
   readonly message: string;
-  // readonly metadata: Metadata | MetadataBase;
-  // readonly platform: 'javascript' | 'python';
-  // readonly projectID: string;
-  // readonly sdk: SdkInfo;
+  /*
+   * Readonly metadata: Metadata | MetadataBase;
+   * readonly platform: 'javascript' | 'python';
+   * readonly projectID: string;
+   * readonly sdk: SdkInfo;
+   */
   readonly size: number;
-  // readonly tags: readonly Tag[];
+  // Readonly tags: readonly Tag[];
   readonly title: string;
-  // readonly type: 'error';
-  // readonly user: User;
+  /*
+   * Readonly type: 'error';
+   * readonly user: User;
+   */
 }
 
 interface StackFrame
@@ -163,15 +173,17 @@ interface StackFrame
   readonly absPath: string | null;
   readonly colNo: number | null;
   readonly context: readonly [number, string][];
-  // readonly inApp: boolean | null;
-  // readonly instructionAddr: string | null;
+  /*
+   * Readonly inApp: boolean | null;
+   * readonly instructionAddr: string | null;
+   */
   readonly lineNo: number | null;
 }
 
 interface Stacktrace
   extends Omit<SentryStacktrace, 'frames_omitted' | 'frames'> {
   readonly frames: readonly StackFrame[];
-  // readonly framesOmitted: readonly [number, number] | null;
+  // Readonly framesOmitted: readonly [number, number] | null;
 }
 
 export interface Tag {

@@ -23,22 +23,18 @@ const validateStat = (
 const validateStatsValue = (
   value: unknown,
   context: readonly string[],
-): readonly (readonly [number, number])[] => {
-  return validateArray(value, validateStat, context);
-};
+): readonly (readonly [number, number])[] => validateArray(value, validateStat, context);
 
 const validateStats = (
   value: unknown,
   context: readonly string[],
-): Record<'24h', readonly (readonly [number, number])[]> => {
-  return validateObject(
+): Record<'24h', readonly (readonly [number, number])[]> => validateObject(
     value,
     {
       '24h': validateStatsValue,
     },
     context,
   );
-};
 
 export default function validateSentryIssue(
   value: unknown,
@@ -56,16 +52,22 @@ export default function validateSentryIssue(
       isPublic: validateBoolean,
       isSubscribed: validateBoolean,
       lastSeen: validateString,
-      level: validateString, // 'error'
       metadata: validateMetadata,
       numComments: validateNumber,
       permalink: validateString,
       shortId: validateString,
       stats: validateStats,
-      status: validateString, // 'unresolved'
       title: validateString,
-      type: validateString, // 'default'
       userCount: validateNumber,
+
+      // e.g. 'error'
+      level: validateString,
+
+      // e.g. 'unresolved'
+      status: validateString,
+
+      // e.g. 'default'
+      type: validateString,
     },
     context,
   );

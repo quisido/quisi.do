@@ -33,18 +33,16 @@ const mapRgbaToHex = (
 ): string => {
   const a: number = Math.round(
     aFloat *
-      (Math.pow(HEX, DIGITS) -
+      (HEX**DIGITS -
         THE_NUMBER_OF_NUMBERS_BETWEEN_THE_BEGINNING_OF_THE_SET_OF_WHOLE_NUMBERS_AND_THE_BEGINNING_OF_THE_SET_OF_NATURAL_NUMBERS),
   );
   return `${mapRgbToHex([r10, g10, b10])}${mapDecimalToHexadecimal(a)}`;
 };
 
 const mapRowToElements = (row: readonly RGBA[], rowIndex: number): string => {
-  const mapRgbaToElement = (column: RGBA, columnIndex: number): string => {
-    return `<rect height="1" style="fill: ${mapRgbaToHex(
+  const mapRgbaToElement = (column: RGBA, columnIndex: number): string => `<rect height="1" style="fill: ${mapRgbaToHex(
       ...column,
     )}" width="1" x="${columnIndex}" y="${rowIndex}" />`;
-  };
 
   return row.map(mapRgbaToElement).join('');
 };

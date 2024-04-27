@@ -35,8 +35,6 @@ export default function useMuiSelect({ onChange, options }: Props): State {
       [onChange],
     ),
 
-    menuItemProps: useMemo((): readonly WithKey<MenuItemProps>[] => {
-      return options.map(mapOptionToProps);
-    }, [options]),
+    menuItemProps: useMemo((): readonly WithKey<MenuItemProps>[] => options.map(mapOptionToProps), [options]),
   };
 }

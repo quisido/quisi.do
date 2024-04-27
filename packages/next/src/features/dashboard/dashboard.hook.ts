@@ -42,68 +42,68 @@ const NOT_FOUND = -1;
 // Additionally, we have access to `PerformanceNavigationDuration`.
 
 /*
-
-Migrate the following properties to Lambda:
-
----
-
-const BASE = 10;
-const MILLISECONDS_PER_SECOND = 1000;
-
-function reduceSecondsTimeSeriesEntriesToMilliseconds<T>(
-  record: Record<string, T>,
-  [seconds, value]: [string, T],
-): Record<string, T> {
-  return {
-    ...record,
-    [parseInt(seconds, BASE) * MILLISECONDS_PER_SECOND]: value,
-  };
-}
-
----
-
-Given a time series reported in seconds (e.g. CloudWatch metrics), create a time
-  series reported in milliseconds (i.e. timestamps).
-
-function mapSecondsTimeSeriesToMilliseconds(
-  record: Record<string, number>,
-): Record<string, number> {
-  return Object.entries(record).reduce(
-    reduceSecondsTimeSeriesEntriesToMilliseconds,
-    {},
-  );
-}
-
----
-
-const CUMULATIVE_LAYOUT_SHIFT_PRECISION = 2;
-const clsPow = Math.pow(BASE, CUMULATIVE_LAYOUT_SHIFT_PRECISION);
-
-{
-  clsP95: Math.round(
-    mapRecordToSum(cumulativeLayoutShift.p95) * clsPow,
-  ) / clsPow,
-  clsTm95: Math.round(
-    mapRecordToSum(cumulativeLayoutShift.tm95) * clsPow,
-  ) / clsPow,
-  errorCount: mapSecondsTimeSeriesToMilliseconds(rumMetrics.JsErrorCount.Sum),
-  fidP95: mapRecordToSum(firstInputDelay.p95),
-  fidTm95: Math.round(mapRecordToSum(firstInputDelay.tm95)),
-  frustrated: mapSecondsTimeSeriesToMilliseconds(
-    rumMetrics.NavigationFrustratedTransaction.Sum,
-  ),
-  lcpP95: Math.round(mapRecordToSum(largestContentfulPaint.p95)),
-  lcpTm95: Math.round(mapRecordToSum(largestContentfulPaint.tm95)),
-  satisfied: mapSecondsTimeSeriesToMilliseconds(
-    rumMetrics.NavigationSatisfiedTransaction.Sum,
-  ),
-  sessionCount: mapSecondsTimeSeriesToMilliseconds(rumMetrics.SessionCount.Sum),
-  tolerated: mapSecondsTimeSeriesToMilliseconds(
-    rumMetrics.NavigationToleratedTransaction.Sum,
-  ),
-}
-
-*/
+ *
+ *Migrate the following properties to Lambda:
+ *
+ *---
+ *
+ *const BASE = 10;
+ *const MILLISECONDS_PER_SECOND = 1000;
+ *
+ *function reduceSecondsTimeSeriesEntriesToMilliseconds<T>(
+ *  record: Record<string, T>,
+ *  [seconds, value]: [string, T],
+ *): Record<string, T> {
+ *  return {
+ *    ...record,
+ *    [parseInt(seconds, BASE) * MILLISECONDS_PER_SECOND]: value,
+ *  };
+ *}
+ *
+ *---
+ *
+ *Given a time series reported in seconds (e.g. CloudWatch metrics), create a time
+ *  series reported in milliseconds (i.e. timestamps).
+ *
+ *function mapSecondsTimeSeriesToMilliseconds(
+ *  record: Record<string, number>,
+ *): Record<string, number> {
+ *  return Object.entries(record).reduce(
+ *    reduceSecondsTimeSeriesEntriesToMilliseconds,
+ *    {},
+ *  );
+ *}
+ *
+ *---
+ *
+ *const CUMULATIVE_LAYOUT_SHIFT_PRECISION = 2;
+ *const clsPow = Math.pow(BASE, CUMULATIVE_LAYOUT_SHIFT_PRECISION);
+ *
+ *{
+ *  clsP95: Math.round(
+ *    mapRecordToSum(cumulativeLayoutShift.p95) * clsPow,
+ *  ) / clsPow,
+ *  clsTm95: Math.round(
+ *    mapRecordToSum(cumulativeLayoutShift.tm95) * clsPow,
+ *  ) / clsPow,
+ *  errorCount: mapSecondsTimeSeriesToMilliseconds(rumMetrics.JsErrorCount.Sum),
+ *  fidP95: mapRecordToSum(firstInputDelay.p95),
+ *  fidTm95: Math.round(mapRecordToSum(firstInputDelay.tm95)),
+ *  frustrated: mapSecondsTimeSeriesToMilliseconds(
+ *    rumMetrics.NavigationFrustratedTransaction.Sum,
+ *  ),
+ *  lcpP95: Math.round(mapRecordToSum(largestContentfulPaint.p95)),
+ *  lcpTm95: Math.round(mapRecordToSum(largestContentfulPaint.tm95)),
+ *  satisfied: mapSecondsTimeSeriesToMilliseconds(
+ *    rumMetrics.NavigationSatisfiedTransaction.Sum,
+ *  ),
+ *  sessionCount: mapSecondsTimeSeriesToMilliseconds(rumMetrics.SessionCount.Sum),
+ *  tolerated: mapSecondsTimeSeriesToMilliseconds(
+ *    rumMetrics.NavigationToleratedTransaction.Sum,
+ *  ),
+ *}
+ *
+ */
 
 export default function useDashboard({
   onCloudflareAnalyticsRequest,
@@ -169,17 +169,17 @@ export default function useDashboard({
       : NONE,
 
     /*
-    events: useMemo((): readonly string[] => {
-      if (sentryProjectEvents === null) {
-        return [];
-      }
-
-      const mapSentryProjectEventToString = (e: SentryProjectEvent): string =>
-        e.title;
-
-      return sentryProjectEvents.map(mapSentryProjectEventToString);
-    }, [sentryProjectEvents]),
-    */
+     *Events: useMemo((): readonly string[] => {
+     *  if (sentryProjectEvents === null) {
+     *    return [];
+     *  }
+     *
+     *  const mapSentryProjectEventToString = (e: SentryProjectEvent): string =>
+     *    e.title;
+     *
+     *  return sentryProjectEvents.map(mapSentryProjectEventToString);
+     *}, [sentryProjectEvents]),
+     */
 
     lastUptimeCheckStatus: uptimeChecks
       ? uptimeChecks.status === 'ONLINE'

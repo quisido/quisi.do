@@ -14,13 +14,13 @@ const hasNumericKeys = <K extends string>(
   return true;
 };
 
-const RUM_PAGELOAD_KEYS: Set<
+const RUM_PAGELOAD_KEYS = new Set<
   keyof CloudflareAnalyticsDatasets['rumPageloadEventsAdaptiveGroups']
-> = new Set(['count', 'sampleInterval_avg', 'visits_sum'] as const);
+>(['count', 'sampleInterval_avg', 'visits_sum'] as const);
 
-const RUM_PERFORMANCE_KEYS: Set<
+const RUM_PERFORMANCE_KEYS = new Set<
   keyof CloudflareAnalyticsDatasets['rumPerformanceEventsAdaptiveGroups']
-> = new Set([
+>([
   'connectionTime_avg',
   'connectionTimeP50',
   'connectionTimeP75',
@@ -71,13 +71,13 @@ const RUM_PERFORMANCE_KEYS: Set<
   'visits_sum',
 ] as const);
 
-const WORKERS_ANALYTICS_KEYS: Set<
+const WORKERS_ANALYTICS_KEYS = new Set<
   keyof CloudflareAnalyticsDatasets['workersAnalyticsEngineAdaptiveGroups']
-> = new Set(['count'] as const);
+>(['count'] as const);
 
-const WORKERS_INVOCATION_KEYS: Set<
+const WORKERS_INVOCATION_KEYS = new Set<
   keyof CloudflareAnalyticsDatasets['workersInvocationsAdaptive']
-> = new Set([
+>([
   'cpuTime_max',
   'cpuTime_min',
   'cpuTimeP25',

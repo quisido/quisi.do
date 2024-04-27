@@ -34,6 +34,7 @@ export default function mapNavigatorToSemanticResourceAttributes(
     if (!('oscpu' in navigator)) {
       return;
     }
+
     try {
       return validateString(navigator.oscpu);
     } catch (err: unknown) {

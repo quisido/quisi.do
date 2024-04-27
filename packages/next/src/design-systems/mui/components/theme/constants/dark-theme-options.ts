@@ -2,14 +2,16 @@
 import { blue, grey } from '@mui/material/colors';
 import { type ThemeOptions } from '@mui/material/styles';
 
-// MUI docs dark theme
-// https://github.com/mui-org/material-ui-docs/blob/e4c83e43be627ff31cdf0159645f4b63ec1e6097/docs/src/modules/brandingTheme.ts#L108
+/*
+ * MUI docs dark theme
+ * https://github.com/mui-org/material-ui-docs/blob/e4c83e43be627ff31cdf0159645f4b63ec1e6097/docs/src/modules/brandingTheme.ts#L108
+ */
 
 const BLUE_DARK_400 = '#265d97';
 const BLUE_DARK_500 = '#1e4976';
 const BLUE_DARK_600 = '#173a5e';
 const BLUE_DARK_700 = '#132f4c';
-// const BLUE_DARK_800 = '#004c99';
+// Const BLUE_DARK_800 = '#004c99';
 const BLUE_DARK_900 = '#0a1929';
 
 const MUI_DARK_THEME_OPTIONS: ThemeOptions = {
@@ -102,7 +104,7 @@ const MUI_DARK_THEME_OPTIONS: ThemeOptions = {
           color: grey[400],
         },
         head: {
-          // color: blue,
+          // Color: blue,
         },
         root: {
           borderColor: BLUE_DARK_700,
