@@ -17,6 +17,9 @@ const IGNORED_AUDITS = new Set([
   // `zone.js` uses `UnloadHandler`.
   'deprecations',
 
+  // Mixpanel tracks events with an `img` element that lacks an `alt` attribute.
+  'image-alt',
+
   // `zone.js` uses an unload listener.
   'no-unload-listeners',
 ]);
