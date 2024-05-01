@@ -42,7 +42,6 @@ function useAuthenticationState(): State {
     }
 
     if (typeof error !== 'undefined') {
-      console.error('Authentication error:', error);
       return false;
     }
 
