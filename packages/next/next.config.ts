@@ -9,8 +9,17 @@ import optional from './src/utils/optional.js';
 import validateString from './src/utils/validate-string.js';
 import withNextJsBundleAnalyzer from './src/utils/with-nextjs-bundle-analyzer.js';
 
+const BASE = 10;
 const CPUS_COUNT: number = cpus().length;
 const handleDemandEntries = mapNodeEnvToOnDemandEntries(process.env.NODE_ENV);
+
+const getCpus = (): number => {
+  const cpus: string | undefined = process.env['CPUS'];
+  if (typeof cpus === 'undefined') {
+    return CPUS_COUNT;
+  }
+  return parseInt(cpus, BASE);
+};
 
 const reduceEnvironmentVariableNamesToRecord = (
   record: Record<string, string | undefined>,
@@ -75,7 +84,7 @@ export default withNextJsBundleAnalyzer({
      * cacheMaxMemorySize: Number.POSITIVE_INFINITY,
      * disablePostcssPresetEnv: true,
      */
-    cpus: CPUS_COUNT,
+    cpus: getCpus(),
     craCompat: false,
     // FallbackNodePolyfills: false,
     forceSwcTransforms: true,
