@@ -15,7 +15,7 @@ export default function describePackageJsonScripts(packageJson: object): void {
     it('should have ESLint scripts', (): void => {
       assert('eslint' in scripts);
       expect(scripts.eslint).toBe(
-        "eslint . --cache --color --exit-on-fatal-error --format @microsoft/eslint-formatter-sarif --max-warnings 0 --output-file ../../sarif/aws-rum-react.sarif --stats || (echo \"ESLint failed.\" && exit 1)",
+        'eslint . --cache --color --exit-on-fatal-error --max-warnings 0',
       );
 
       assert('eslint:fix' in scripts);
