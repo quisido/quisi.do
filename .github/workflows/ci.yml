@@ -120,6 +120,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
           GOOGLE_ANALYTICS_TRACKING_ID: G-GMKFW5ZZ9G
+          HONEYCOMB_API_KEY: hcaik_01hwsdk67m93b349m3hp3gtzneg8rr32rn1037h5zpzrnfnyhsb7jdpwqm
           IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
           PATREON_OAUTH_CLIENT_ID: 4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG
           PATREON_OAUTH_REDIRECT_URI: https://localhost:5882/patreon/
@@ -133,73 +134,6 @@ jobs:
             packages/*/.next/
             packages/*/dist/
             packages/*/out/
-
-  # Stage 3: cypress, lighthouse, prepublish
-  # cypress:
-  #   name: Cypress
-  #   needs: prepack
-  #   runs-on: ${{ matrix.os }}-latest
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v3
-  #     - name: Download artifacts
-  #       uses: actions/download-artifact@v3
-  #       with:
-  #         name: prepack
-  #         path: packages/
-  #     - name: Setup Node
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         cache: yarn
-  #         check-latest: true
-  #         node-version: 'lts/*'
-  #     - name: Install dependencies
-  #       run: yarn install --immutable
-  #     - name: Enable Plug-n-Play
-  #       run: yarn packages/next run cypress:pnp
-  #     - name: End-to-end test
-  #       uses: cypress-io/github-action@v6
-  #       env:
-  #         CHOKIDAR_USEPOLLING: true
-  #         CYPRESS_SCREENSHOTS_SUBFOLDER: ${{ matrix.os }}-${{ matrix.browser }}
-  #         GITHUB_REPOSITORY: ${{ github.repository }}
-  #         GITHUB_SHA: ${{ github.sha }}
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #         IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
-  #         NODE_ENV: test
-  #         NYC_REPORT_DIR: cypress/coverage/${{ matrix.os }}-${{ matrix.browser }} # -${{ matrix.container }}
-  #       with:
-  #         browser: ${{ matrix.browser }}
-  #         command-prefix: yarn dlx
-  #         config-file: cypress.config.cjs
-  #         install: false
-  #         parallel: true
-  #         record: false
-  #         start: yarn run start
-  #         wait-on: 'https://localhost:3000/'
-  #         wait-on-timeout: 120
-  #         working-directory: packages/next/
-  #     - name: Upload artifacts
-  #       if: matrix.os == 'ubuntu'
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: cypress
-  #         path: |
-  #           packages/*/cypress/coverage/
-  #           packages/*/cypress/screenshots/
-  #           packages/*/cypress/videos/
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       os: [ubuntu, windows]
-  #       browser: [chrome, edge] # firefox
-  #       # Cypress only supports 1 container for Edge.
-  #       # With multiple containers, Cypress will use the wrong browser version.
-  #       # https://github.com/cypress-io/github-action/issues/121
-  #       # container: [1, 2, 3]
-  #       exclude:
-  #         - browser: edge
-  #           os: ubuntu
 
   lighthouse:
     name: Lighthouse

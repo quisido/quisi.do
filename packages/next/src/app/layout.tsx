@@ -49,6 +49,7 @@ const Contexts: ComponentType<PropsWithChildren> = withWrappers(
   DarkModeProvider,
   DesignSystemProvider,
   Fullstory,
+  // Honeycomb,
   HostnameProvider,
   LogRocket,
   NotificationsProvider,

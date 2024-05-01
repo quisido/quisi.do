@@ -140,6 +140,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
           GOOGLE_ANALYTICS_TRACKING_ID: G-ZTQ6K5CVQS
+          HONEYCOMB_API_KEY: hcaik_01hwsd84kyjjrwjgg4kqbzzvp2p4qrxxq71ejv1c04g0x29v20fnmvw8dg
           IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
           PATREON_OAUTH_CLIENT_ID: J_6jrNJZNibHylSF83UVl9I4OHZYf67RAsU0s7_LnH1N5BKF-vgOyweF3KQLOKm1
           PATREON_OAUTH_REDIRECT_URI: https://a.quisi.do/patreon/

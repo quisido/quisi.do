@@ -26,22 +26,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
       {
         lastModified: NOW,
+        url: mapPathToUrl('/charities/'),
+      },
+
+      {
+        lastModified: NOW,
+        url: mapPathToUrl('/cookies/'),
+      },
+
+      {
+        lastModified: NOW,
         url: mapPathToUrl('/dashboard/'),
       },
 
       {
         lastModified: NOW,
-        url: mapPathToUrl('/packages/'),
+        url: mapPathToUrl('/privacy/'),
       },
 
       {
         lastModified: NOW,
-        url: mapPathToUrl('/publications/'),
-      },
-
-      {
-        lastModified: NOW,
-        url: mapPathToUrl('/quotes/'),
+        url: mapPathToUrl('/tos/'),
       },
     );
   }

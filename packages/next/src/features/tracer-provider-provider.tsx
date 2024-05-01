@@ -36,7 +36,7 @@ const EVENT_NAMES: readonly EventName[] = [
 ];
 */
 
-export default function TracerProviderProviderImpl({
+export default function TracerProviderProviderFeature({
   children,
 }: PropsWithChildren): ReactElement {
   // Contexts

@@ -102,6 +102,7 @@
     "@builder.io/partytown": "^0.10.1",
     "@cypress/code-coverage": "^3.12.35",
     "@datadog/datadog-ci": "^2.33.1",
+    "@honeycombio/opentelemetry-web": "^0.1.1",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@monorepo-template/coverage": "^1.2.3",
     "@monorepo-template/cypress-coverage-plugin": "^1.0.7",

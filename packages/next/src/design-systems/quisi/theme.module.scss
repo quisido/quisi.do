@@ -21,27 +21,9 @@ $min-width: 320px;
 .border-outer {
   border-bottom-width: 0;
   border-top-width: 0;
-
-  @media (max-width: 6in) {
-    border-left-width: 0;
-    border-right-width: 0;
-    border-style: none;
-  }
-
-  @media (min-width: 6in) {
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-style: solid;
-  }
-}
-
-.theme {
-  border-bottom-width: 0;
-  border-top-width: 0;
   box-sizing: border-box;
   margin: 0 auto;
   max-width: 60em;
-  padding-bottom: 1rem;
 
   @media (max-width: 6in) {
     border-left-width: 0;
@@ -55,5 +37,24 @@ $min-width: 320px;
     border-right-width: 1px;
     border-style: solid;
     min-width: $min-width - 2 * $border-width;
+  }
+}
+
+.theme {
+  border-bottom-width: 0;
+  border-top-width: 0;
+  padding-bottom: 1rem;
+  width: 100%;
+
+  @media (max-width: 6in) {
+    border-left-width: 0;
+    border-right-width: 0;
+    border-style: none;
+  }
+
+  @media (min-width: 6in) {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-style: solid;
   }
 }
