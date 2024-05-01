@@ -17,9 +17,8 @@ enum MetricName {
   MissingPrivateDataset = 'dataset.private.missing',
   MissingPublicDataset = 'dataset.public.missing',
   MissingTraceParent = 'trace-parent.missing',
-  PatreonRequest = 'request.patreon',
   RobotsTxt = 'pathname.robots.txt',
-  SetAuthenticationIdUser = 'namespace.authn-user-ids.set',
+  SetAuthnUserId = 'namespace.authn-user-ids.set',
   TooManyRequests = 'throttle.ip',
 
   // OAuth
@@ -35,6 +34,16 @@ enum MetricName {
   InvalidPatreonIdentityAttributes = 'patreon.identity.attributes.invalid',
   MissingPatreonIdentityAttributes = 'patreon.identity.attributes.missing',
   MissingPatreonOAuthHost = 'oauth.patreon.host.missing',
+  PatreonRequest = 'request.patreon',
+
+  // Who am I?
+  CachedAuthnId = 'id.cached',
+  ExpiredAuthnId = 'id.expired',
+  InvalidAuthnId = 'id.invalid',
+  MissingAuthnId = 'id.missing',
+  UncachedAuthnId = 'id.uncached',
+  WhoAmIRequest = 'request.whoami',
+  WhoAmIThrottled = 'whoami.throttled',
 
   // quisi.do
   AuthnIdCreated = 'authn-id.created',

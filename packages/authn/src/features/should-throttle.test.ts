@@ -9,6 +9,8 @@ const DEFAULT_TRACE_VERSION = 0;
 describe('shouldThrottle', (): void => {
   it('should emit telemetry when IP is missing', async (): Promise<void> => {
     const { expectPublicDataPoint } = await fetch({
+      pathname: '/patreon/',
+
       env: {
         ENVIRONMENT_NAME: EnvironmentName.Production,
       },
@@ -30,6 +32,8 @@ describe('shouldThrottle', (): void => {
     const TEST_IP = '127.0.0.1';
 
     await fetch({
+      pathname: '/patreon/',
+
       env: {
         ENVIRONMENT_NAME: EnvironmentName.Production,
       },
@@ -40,6 +44,8 @@ describe('shouldThrottle', (): void => {
     });
 
     const { expectPrivateDataPoint, expectPublicDataPoint } = await fetch({
+      pathname: '/patreon/',
+
       env: {
         ENVIRONMENT_NAME: EnvironmentName.Production,
       },
@@ -78,6 +84,8 @@ describe('shouldThrottle', (): void => {
     const TEST_IP = '192.168.1.1';
 
     await fetch({
+      pathname: '/patreon/',
+
       env: {
         ENVIRONMENT_NAME: EnvironmentName.Production,
       },
@@ -88,6 +96,8 @@ describe('shouldThrottle', (): void => {
     });
 
     const { expectErrorCodeRedirect } = await fetch({
+      pathname: '/patreon/',
+
       env: {
         ENVIRONMENT_NAME: EnvironmentName.Production,
       },

@@ -1,35 +1,42 @@
-import { ErrorCode } from '@quisido/authn-shared';
-import getRequestPathname from '../utils/get-request-pathname.js';
-import isReservedPathname from '../utils/is-reserved-pathname.js';
-import mapCauseToError from '../utils/map-cause-to-error.js';
-import handleReservedPathname from './handle-reserved-pathname.js';
-import handleThrottledRequest from './handle-throttled-request.js';
-import handlePatreonFetchRequest from './patreon/handle-patreon-fetch-request.js';
-import shouldThrottle from './should-throttle.js';
+import { ErrorCode } from "@quisido/authn-shared";
+import isAuthenticationPathname from "../utils/is-authentication-pathname.js";
+import isStaticPathname from "../utils/is-static-pathname.js";
+import mapCauseToError from "../utils/map-cause-to-error.js";
+import getRequestPathname from "./get-request-pathname.js";
+import handleAuthenticationPathname from "./handle-authentication-pathname.js";
+import handleStaticPathname from "./handle-static-pathname.js";
+import handleThrottledRequest from "./handle-throttled-request.js";
+import setReturnHref from "./set-return-href.js";
+import shouldThrottle from "./should-throttle.js";
+import handleWhoAmIFetchRequest from "./whoami/handle-whoami-fetch-request.js";
 
 export default async function handleFetchRequest(): Promise<Response> {
   const pathname: string = getRequestPathname();
 
-  // Static responses for reserved pathnames
-  if (isReservedPathname(pathname)) {
-    return handleReservedPathname(pathname);
+  if (pathname === '/whoami/') {
+    return await handleWhoAmIFetchRequest();
   }
 
-  // Throttling
+  // Static responses
+  if (isStaticPathname(pathname)) {
+    return handleStaticPathname(pathname);
+  }
+
+  // Unknown pathname
+  if (!isAuthenticationPathname(pathname)) {
+    throw mapCauseToError({
+      code: ErrorCode.NotFound,
+      publicData: pathname,
+    });
+  }
+
+  // `returnHref` can only exist for OAuth pathnames.
+  setReturnHref();
+
+  // Throttle
   if (shouldThrottle()) {
     return handleThrottledRequest();
   }
 
-  // Authenticate
-  switch (pathname) {
-    case '/patreon/':
-      return handlePatreonFetchRequest();
-
-    default: {
-      throw mapCauseToError({
-        code: ErrorCode.NotFound,
-        publicData: pathname,
-      });
-    }
-  }
+  return await handleAuthenticationPathname(pathname);
 }

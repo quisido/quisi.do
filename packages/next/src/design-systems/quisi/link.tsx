@@ -11,6 +11,7 @@ export default function Link({
   feature,
   href,
   label: ariaLabel,
+  onClick,
   title,
 }: Props): ReactElement {
   // Contexts
@@ -35,13 +36,22 @@ export default function Link({
       title={title}
       onClick={(e: MouseEvent<HTMLAnchorElement>): void => {
         e.preventDefault();
-
-        router.push(href);
         emit('click', {
           feature,
           label: innerText(children),
           url: href,
         });
+
+        if (typeof onClick === 'function') {
+          const preventDefault: boolean | undefined = onClick();
+          if (preventDefault === true) {
+            return;
+          }
+        }
+
+        if (typeof href === 'string') {
+          router.push(href);
+        }
       }}
       style={{
         color: primaryHex,

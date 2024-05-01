@@ -1,0 +1,5 @@
+img[src^="https://api-js.mixpanel.com/track/"] {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}

@@ -19,7 +19,6 @@ const lightghouseConfig: Config = {
     blockedUrlPatterns: [
       'https://analytics.google.com/*',
       'https://api.honeycomb.io/*',
-      'https://api.quisi.do/*', // Temp block to allow fix to pass CI
       'https://browser-intake-datadoghq.com/*',
       'https://cdn.logr-ingest.com/*',
       'https://challenges.cloudflare.com/*',
@@ -27,7 +26,7 @@ const lightghouseConfig: Config = {
       'https://cloudflareinsights.com/*',
       'https://dataplane.rum.us-west-2.amazonaws.com/*',
       'https://edge.fullstory.com/*',
-      'https://localhost:1098/whoami', // Invalid certificate
+      'https://localhost:5882/*', // Invalid certificate
       'https://o592283.ingest.sentry.io/*',
       'https://r.logr-ingest.com/*',
       'https://rs.fullstory.com/*',

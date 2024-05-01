@@ -5,7 +5,7 @@ import getTelemetry from '../utils/get-telemetry.js';
 
 const DEFAULT_COOKIE_DOMAIN = 'quisi.do';
 
-export default function getEnvironmentName(): string {
+export default function getCookieDomain(): string {
   const { COOKIE_DOMAIN } = getEnv();
   if (typeof COOKIE_DOMAIN === 'string') {
     return COOKIE_DOMAIN;

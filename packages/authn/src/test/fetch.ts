@@ -38,7 +38,7 @@ export default async function fetch({
   env,
   fetch: fetchImpl = jest.fn(),
   headers = {},
-  pathname = '/authn/',
+  pathname = '/',
   search = {},
   waitUntil = jest.fn(),
 }: Options): Promise<Result> {

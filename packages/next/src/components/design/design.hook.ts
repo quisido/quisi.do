@@ -1,13 +1,13 @@
 'use client';
 
 import {
-  type ComponentType,
-  type LazyExoticComponent,
-  type PromiseLikeOfReactNode,
-  type ReactElement,
-  type ReactNode,
   useEffect,
   useState,
+  type AwaitedReactNode,
+  type ComponentType,
+  type LazyExoticComponent,
+  type ReactElement,
+  type ReactNode,
 } from 'react';
 import type DesignSystem from '../../constants/design-system.js';
 import { useDesignSystem } from '../../contexts/design-system.js';
@@ -23,9 +23,10 @@ interface Props<P extends object> {
 interface State<P extends object> {
   readonly Component: LazyExoticComponent<ComponentType<P>>;
   readonly fallback:
+    | Promise<AwaitedReactNode>
     | ReactElement
     | Iterable<ReactNode>
-    | PromiseLikeOfReactNode
+    | bigint
     | boolean
     | number
     | string

@@ -1,10 +1,10 @@
 {
-  "background_color": "#ffffff",
+  "background_color": "#f8f4f0",
   "display": "standalone",
   "name": "quisi.do",
   "short_name": "quisi.do",
   "start_url": "/",
-  "theme_color": "#e31280",
+  "theme_color": "#13171a",
   "icons": [
     {
       "sizes": "16x16",

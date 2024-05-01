@@ -53,6 +53,7 @@ export default function withTestState<R>(fn: () => R): Result<R> {
         writeDataPoint: TEST_WRITE_PUBLIC_DATAPOINT,
       } satisfies AnalyticsEngineDataset,
     });
+    state.setReturnHref();
 
     assert(state.telemetry !== null);
     state.telemetry.onPrivateError(TEST_LOG_PRIVATE_ERROR);

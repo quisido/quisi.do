@@ -1,35 +1,16 @@
 'use client';
 
 import { type ReactElement } from 'react';
+import Link from '../components/link/index.js';
 import Section from '../components/section.js';
-import Span from '../components/span.js';
 
 export default function Home(): ReactElement {
   return (
     <Section>
-      <ul
-        style={{
-          alignItems: 'stretch',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          listStylePosition: 'inside',
-          listStyleType: 'none',
-          margin: 0,
-          padding: 0,
-          width: '100%',
-        }}
-      >
-        <li>
-          <Span>Open source</Span>
-        </li>
-        <li>
-          <Span>Transparent</Span>
-        </li>
-        <li>
-          <Span>Not for profit</Span>
-        </li>
-      </ul>
+      <Link feature="home" href="https://quisi.do/" title="quisi.do">
+        quisi.do
+      </Link>{' '}
+      is a not-for-profit front end software-as-a-service.
     </Section>
   );
 }

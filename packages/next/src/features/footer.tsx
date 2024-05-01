@@ -1,4 +1,4 @@
-import { type ReactElement, memo } from 'react';
+import { memo, type ReactElement } from 'react';
 import Link from '../components/link/index.js';
 import styles from './footer.module.scss';
 
@@ -6,7 +6,7 @@ function Footer(): ReactElement | null {
   return (
     <footer
       style={{
-        paddingTop: '1rem',
+        // paddingTop: '1rem',
         textAlign: 'center',
       }}
     >

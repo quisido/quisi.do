@@ -68,8 +68,9 @@ export default class State {
   public setEnv(env: Record<string, unknown>): void {
     this.#env = env;
     this.#telemetry = new TelemetryQueue(env, this.#ctx, this.#traceId);
+  }
 
-    // Requires `env` and `telemetry`.
+  public setReturnHref(): void {
     this.#returnHref = createReturnHref();
   }
 }

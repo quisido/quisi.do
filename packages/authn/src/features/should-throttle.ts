@@ -16,17 +16,12 @@ export default function shouldThrottle(): boolean {
     return false;
   }
 
-  const ip: string | null = getIp();
-  const { emitPrivateMetric, emitPublicMetric } = getTelemetry();
-  if (ip === null) {
-    emitPublicMetric({ name: MetricName.MissingIP });
-    return false;
-  }
-
+  const ip: string = getIp();
   try {
     throttleIp(ip, IP_THROTTLE_LIMIT);
     return false;
   } catch (err: unknown) {
+    const { emitPrivateMetric, emitPublicMetric } = getTelemetry();
     const lastCallTime: number = mapThrottleErrorToLastCallTime(err);
 
     emitPrivateMetric({
