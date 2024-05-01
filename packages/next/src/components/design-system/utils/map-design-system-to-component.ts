@@ -1,7 +1,7 @@
-import { lazy, type ComponentType } from 'react';
+import { lazy, type ComponentType, type LazyExoticComponent } from 'react';
 import DesignSystem from '../../../constants/design-system.js';
+import Quisi from '../../../design-systems/quisi.js';
 import type DesignSystemProps from '../../../types/design-system-props.js';
-
 /*
  *   We must use `as` when mapping the design system to its component, because
  * its lazy definition cannot accept its generic. Instead, the generics for
@@ -15,16 +15,17 @@ type DesignSystemComponent<
 > = ComponentType<DesignSystemProps<Card, Row>>;
 
 const Mui = lazy(async () => import('../../../design-systems/mui/index.js'));
-const Quisi = lazy(async () => import('../../../design-systems/quisi.js'));
 
 export default function mapDesignSystemToComponent<
   Card extends object,
   Row extends object,
->(designSystem: DesignSystem): DesignSystemComponent<Card, Row> {
+>(designSystem: DesignSystem):
+  | DesignSystemComponent<Card, Row>
+  | LazyExoticComponent<DesignSystemComponent<Card, Row>> {
   switch (designSystem) {
     case DesignSystem.Mui:
-      return Mui as DesignSystemComponent<Card, Row>;
+      return Mui;
     case DesignSystem.Quisi:
-      return Quisi as DesignSystemComponent<Card, Row>;
+      return Quisi;
   }
 }

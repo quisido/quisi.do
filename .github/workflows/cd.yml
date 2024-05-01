@@ -144,7 +144,7 @@ jobs:
           PATREON_OAUTH_CLIENT_ID: J_6jrNJZNibHylSF83UVl9I4OHZYf67RAsU0s7_LnH1N5BKF-vgOyweF3KQLOKm1
           PATREON_OAUTH_REDIRECT_URI: https://a.quisi.do/patreon/
           SENTRY_ENVIRONMENT: production
-          WHOAMI: https://api.quisi.do/whoami
+          WHOAMI: https://a.quisi.do/whoami/
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -569,42 +569,6 @@ jobs:
         run: yarn install --immutable
       - name: Deploy
         run: yarn packages/cloudflare-analytics run deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
-
-  wrangler-deploy-whoami:
-    name: Wrangler deploy Who am I?
-    needs: [lighthouse, npm, prepublish-applications]
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: prepack
-          path: packages/
-      - name: Deploy
-        run: yarn packages/whoami run production:deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 

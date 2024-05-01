@@ -26,8 +26,8 @@
     "clean": "rm -rf .yarn/cache .yarn/sdks .yarn/unplugged jest node_modules sarif && rm -f .yarn/build-state.yml .yarn/install-state.gz && yarn workspaces foreach --all --exclude \"@quisi/do\" --interlaced --jobs unlimited --parallel --verbose run clean",
     "cloudflare-analytics": "yarn packages/cloudflare-analytics run dev",
     "cloudflare-analytics:init": "yarn packages/cloudflare-analytics run init",
-    "dev": "echo \"Please use either `yarn run authn` or `yarn run next` instead.\" && exit 1",
-    "eslint": "eslint . --cache --color --exit-on-fatal-error --format @microsoft/eslint-formatter-sarif --max-warnings 0 --output-file ./sarif/index.sarif --stats || (echo \"ESLint failed.\" && exit 1)",
+    "dev": "concurrently --kill-others-on-fail --names authn,next \"yarn run authn\" \"yarn run next\"",
+    "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "export": "yarn packages/next run export",
     "init": "yarn packages/authn run local:init",
@@ -42,13 +42,11 @@
     "prepublish": "concurrently --kill-others-on-fail --names eslint,jest,prepublish,test \"yarn run eslint\" \"yarn run jest\" \"yarn run prepublish:workspaces\" \"yarn run test\"",
     "prepublish:workspaces": "yarn workspaces foreach --all --exclude \"@quisi/do\" --verbose run prepublish",
     "publish": "yarn workspaces foreach --all --jobs unlimited --no-private --parallel --topological-dev --verbose npm publish --tolerate-republish",
-    "quisido": "concurrently --kill-others-on-fail --names authn,next,whoami \"yarn run authn\" \"yarn run next\" \"yarn run whoami\"",
     "reinit": "yarn packages/authn run local:reinit",
     "serve": "yarn packages/next run serve",
     "start": "echo \"Please use either `yarn run dev` or `yarn run serve` instead.\" && exit 1",
     "test": "monorepo-template-test",
-    "up": "yarn up \"@!(monorepo-template|quisido)/*\" \"!(aws-rum-react|cjs-ts|fmrs|fullstory-react|lazy-i18n|mock-next-router|number-format-react|proposal-async-context|react-datadog|sentry-react|unknown2string|use-shallow-memo)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode",
-    "whoami": "yarn packages/whoami run dev"
+    "up": "yarn up \"@!(monorepo-template|quisido)/*\" \"!(aws-rum-react|cjs-ts|fmrs|fullstory-react|lazy-i18n|mock-next-router|number-format-react|proposal-async-context|react-datadog|sentry-react|unknown2string|use-shallow-memo)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode"
   },
   "workspaces": [
     "packages/*"

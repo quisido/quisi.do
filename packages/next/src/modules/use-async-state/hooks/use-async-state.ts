@@ -9,7 +9,9 @@ export type State<T> = AsyncState<T> & BaseState<T>;
 interface BaseState<T> {
   readonly asyncEffectRef: MutableRefObject<Promise<void> | undefined>;
   readonly request: (get: () => Promise<T>) => Promise<void>;
+  readonly reset: VoidFunction;
   readonly retry: () => Promise<void>;
+  readonly set: (data: T) => void;
 }
 
 const DEFAULT_ASYNC_STATE = {
@@ -71,6 +73,21 @@ export default function useAsyncState<T = unknown>(): State<T> {
     ...asyncState,
     asyncEffectRef,
 
+    request: useCallback(
+      async (get: () => Promise<T>): Promise<void> => {
+        const promise: Promise<void> = getState(get);
+        asyncEffectRef.current = promise;
+        await promise;
+      },
+      [getState],
+    ),
+
+    reset: useCallback((): void => {
+      asyncEffectRef.current = undefined;
+      lastGetRef.current = undefined;
+      setAsyncState(DEFAULT_ASYNC_STATE);
+    }, []),
+
     retry: useCallback(async (): Promise<void> => {
       if (typeof lastGetRef.current === 'undefined') {
         return;
@@ -81,13 +98,15 @@ export default function useAsyncState<T = unknown>(): State<T> {
       await promise;
     }, [getState]),
 
-    request: useCallback(
-      async (get: () => Promise<T>): Promise<void> => {
-        const promise: Promise<void> = getState(get);
-        asyncEffectRef.current = promise;
-        await promise;
-      },
-      [getState],
-    ),
+    set: useCallback((data: T): void => {
+      asyncEffectRef.current = undefined;
+      lastGetRef.current = undefined;
+      setAsyncState({
+        data,
+        error: undefined,
+        initiated: true,
+        loading: false,
+      });
+    }, []),
   };
 }

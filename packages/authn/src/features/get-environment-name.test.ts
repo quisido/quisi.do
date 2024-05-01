@@ -9,6 +9,7 @@ describe('getEnvironmentName', (): void => {
   it('should emit telemetry for a missing environment name', async (): Promise<void> => {
     const { expectPublicDataPoint } = await fetch({
       env: {},
+      pathname: '/patreon/',
     });
 
     expectPublicDataPoint({
@@ -25,6 +26,8 @@ describe('getEnvironmentName', (): void => {
 
   it('should emit telemetry for an invalid environment name', async (): Promise<void> => {
     const { expectPublicDataPoint } = await fetch({
+      pathname: '/patreon/',
+
       env: {
         ENVIRONMENT_NAME: 'test-invalid-environment-name',
       },

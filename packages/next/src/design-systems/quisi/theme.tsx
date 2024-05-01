@@ -1,20 +1,19 @@
 import {
-  type PropsWithChildren,
-  type ReactElement,
   useLayoutEffect,
   useMemo,
+  type PropsWithChildren,
+  type ReactElement,
 } from 'react';
 import useTheme from '../../hooks/use-theme.js';
 import map from '../../utils/map.js';
+import validateString from '../../utils/validate-string.js';
+import styles from './theme.module.scss';
 
-const BORDER_BOX_MIN_WIDTH = 320;
 const BORDER_COLOR_OPACITY = 0.15;
-const BORDER_X_COUNT = 2;
-const BORDER_WIDTH = 6;
+const CLASS_NAME: string = validateString(styles['theme']);
+const INNER_BORDER_COLOR_CLASS_NAME: string = validateString(styles['border-inner']);
 const MAX_COLOR = 255;
-
-const CONTENT_BOX_MIN_WIDTH =
-  BORDER_BOX_MIN_WIDTH - BORDER_WIDTH * BORDER_X_COUNT;
+const OUTER_BORDER_COLOR_CLASS_NAME: string = validateString(styles['border-outer']);
 
 const invert = (color: number): number => MAX_COLOR - color;
 
@@ -29,7 +28,7 @@ function useBackgroundImage(): string {
 
     const gradient: string = [
       'transparent',
-      `rgba(${invertedRgb.join(', ')}, 0.25) 1px`,
+      `rgba(${invertedRgb.join(', ')}, 0.1) 1px`,
       'transparent 1px',
       'transparent 1rem',
     ].join(', ');
@@ -41,6 +40,7 @@ function useBackgroundImage(): string {
 export default function Theme({ children }: PropsWithChildren): ReactElement {
   const { backgroundHex, foregroundHex, secondaryAlpha } = useTheme();
   const backgroundImage: string = useBackgroundImage();
+  const borderColor: string = secondaryAlpha(BORDER_COLOR_OPACITY);
 
   useLayoutEffect((): VoidFunction => {
     const { style } = window.document.body;
@@ -59,26 +59,27 @@ export default function Theme({ children }: PropsWithChildren): ReactElement {
 
   return (
     <div
+      className={OUTER_BORDER_COLOR_CLASS_NAME}
       style={{
-        backgroundImage,
-        borderBottomWidth: 0,
-        borderColor: backgroundHex,
-        borderLeftWidth: BORDER_WIDTH,
-        borderRightWidth: BORDER_WIDTH,
-        borderStyle: 'solid',
-        borderTopWidth: 0,
-        boxSizing: 'content-box',
-        margin: '0 auto',
-        maxWidth: '60em',
-        minWidth: CONTENT_BOX_MIN_WIDTH,
-        outlineColor: secondaryAlpha(BORDER_COLOR_OPACITY),
-        outlineOffset: -BORDER_WIDTH,
-        outlineStyle: 'double',
-        outlineWidth: `0 ${BORDER_WIDTH}px`,
-        paddingBottom: '1rem',
+        borderColor,
       }}
     >
-      {children}
+      <div
+        className={INNER_BORDER_COLOR_CLASS_NAME}
+        style={{
+          borderColor: backgroundHex,
+        }}
+      >
+        <div
+          className={CLASS_NAME}
+          style={{
+            backgroundImage,
+            borderColor,
+          }}
+        >
+          {children}
+        </div>
+      </div>
     </div>
   );
 }

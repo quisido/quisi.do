@@ -1,6 +1,7 @@
 'use client';
 
 import type { ReactElement } from 'react';
+import '../modules/react-mixpanel/img.css';
 import Mixpanel from '../modules/react-mixpanel/index.js';
 
 // https://github.com/mixpanel/mixpanel-js/blob/master/doc/readme.io/javascript-full-api-reference.md#mixpanelset_config

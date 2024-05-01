@@ -15,7 +15,7 @@
   "scripts": {
     "attw": "attw",
     "clean": "rm -rf dist jest && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
-    "eslint": "eslint . --cache --color --exit-on-fatal-error --format @microsoft/eslint-formatter-sarif --max-warnings 0 --output-file ../../sarif/number-format-react.sarif --stats || (echo \"ESLint failed.\" && exit 1)",
+    "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "jest": "jest --config jest.config.cjs",
     "jest:watch": "jest --config jest.config.cjs --watch",

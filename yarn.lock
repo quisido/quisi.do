@@ -5146,22 +5146,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@quisido/whoami@workspace:packages/whoami":
-  version: 0.0.0-use.local
-  resolution: "@quisido/whoami@workspace:packages/whoami"
-  dependencies:
-    "@arethetypeswrong/cli": "npm:^0.15.3"
-    "@cloudflare/workers-types": "npm:^4.20240419.0"
-    "@quisido/eslint-config": "workspace:^"
-    "@types/cookie": "npm:^0.6.0"
-    "@types/eslint": "npm:^8.56.10"
-    cookie: "npm:^0.6.0"
-    eslint: "npm:^9.1.1"
-    typescript: "npm:^5.4.5"
-    wrangler: "npm:^3.51.2"
-  languageName: unknown
-  linkType: soft
-
 "@react-aria/button@npm:^3.9.3":
   version: 3.9.3
   resolution: "@react-aria/button@npm:3.9.3"

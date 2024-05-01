@@ -28,7 +28,7 @@
     "cypress:run": "wait-on https://localhost:3000/ && cypress run --browser chrome:canary",
     "datadog:sourcemaps": "datadog-ci sourcemaps upload out/_next/static --minified-path-prefix=https://quisi.do/_next/static --release-version=$RELEASE_VERSION --service=quisi.do",
     "dev": "next dev --experimental-https",
-    "eslint": "eslint . --cache --color --exit-on-fatal-error --format @microsoft/eslint-formatter-sarif --max-warnings 0 --output-file ../../sarif/next.sarif --stats || (echo \"ESLint failed.\" && exit 1)",
+    "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "export": "next export --turbo",
     "info": "next info",

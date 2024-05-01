@@ -1,7 +1,10 @@
-import { useEffect, useRef, useState, type ReactElement } from 'react';
+'use client';
+
+import { useEffect, useState, type ReactElement } from 'react';
 import LoadingIcon from '../components/loading-icon.js';
 import { useAuthentication } from '../contexts/authentication.js';
 import AuthenticateLink from './header-authenticate-link.js';
+import HeaderAuthenticationUserId from './header-authentication-user-id.js';
 
 interface State {
   readonly id: number | null;
@@ -13,10 +16,8 @@ const SHOW_LOADING_TIMEOUT = 200;
 
 function useAuthenticationState(): State {
   const { initiated, data, error, loading } = useAuthentication();
-  const lastLoading = useRef(loading);
   const [showLoading, setShowLoading] = useState(false);
 
-  lastLoading.current = loading;
   useEffect((): VoidFunction | undefined => {
     if (!loading) {
       return;
@@ -41,6 +42,7 @@ function useAuthenticationState(): State {
     }
 
     if (typeof error !== 'undefined') {
+      console.error('Authentication error:', error);
       return false;
     }
 
@@ -69,5 +71,5 @@ export default function Authentication(): ReactElement | null {
     return <AuthenticateLink />;
   }
 
-  return <>User #{id}</>;
+  return <HeaderAuthenticationUserId>{id}</HeaderAuthenticationUserId>;
 }

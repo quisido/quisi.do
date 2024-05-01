@@ -1,5 +1,6 @@
 'use client';
 
+import { WhoAmIResponseCode } from '@quisido/authn-shared';
 import { useEffect, type PropsWithChildren, type ReactElement } from 'react';
 import { WHOAMI } from '../constants/whoami.js';
 import { AuthenticationProvider } from '../contexts/authentication.js';
@@ -7,7 +8,10 @@ import useAsyncState from '../modules/use-async-state/index.js';
 import type AuthenticationType from '../types/authentication.js';
 import isObject from '../utils/is-object.js';
 
-const UNAUTHENTICATED_CODE = 5;
+const isUnauthenticatedResponseCode = (code: unknown): boolean =>
+  code === WhoAmIResponseCode.InvalidAuthnId ||
+  code === WhoAmIResponseCode.MissingAuthnId ||
+  code === WhoAmIResponseCode.Throttled;
 
 export default function AuthenticationFeature({
   children,
@@ -23,12 +27,16 @@ export default function AuthenticationFeature({
         redirect: 'error',
       });
 
+      /**
+       *   Technical debt: We want to emit the following errors, but our
+       * monitoring services depend on our authentication. 🥲
+       */
       const json: unknown = await response.json();
       if (!isObject(json)) {
         throw new Error('You do not have data.');
       }
 
-      if ('code' in json && json.code === UNAUTHENTICATED_CODE) {
+      if ('code' in json && isUnauthenticatedResponseCode(json.code)) {
         return {
           id: null,
         };

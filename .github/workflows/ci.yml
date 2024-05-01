@@ -124,7 +124,7 @@ jobs:
           PATREON_OAUTH_CLIENT_ID: 4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG
           PATREON_OAUTH_REDIRECT_URI: https://localhost:5882/patreon/
           SENTRY_ENVIRONMENT: staging
-          WHOAMI: https://localhost:1098/whoami
+          WHOAMI: https://localhost:5882/whoami/
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -259,11 +259,6 @@ jobs:
         run: yarn prepublish
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
-      - name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: sarif/
-          wait-for-processing: true
       - name: Upload prepublish artifacts
         uses: actions/upload-artifact@v3
         with:

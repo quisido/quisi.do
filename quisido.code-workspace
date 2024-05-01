@@ -21,10 +21,6 @@
       "path": "packages/dashboard",
     },
     {
-      "name": "Who am I?",
-      "path": "packages/whoami",
-    },
-    {
       "name": "authn-shared",
       "path": "packages/authn-shared",
     },
