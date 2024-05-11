@@ -1,4 +1,3 @@
-import { dirname, join } from 'node:path';
 import type { JestConfigWithTsJest } from 'ts-jest';
 
 export default {
@@ -31,11 +30,6 @@ export default {
 
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
-    'proposal-async-context/src/index.js': join(
-      dirname(require.resolve('proposal-async-context/package.json')),
-      'src',
-      'index.ts',
-    ),
   },
 
   transform: {
@@ -54,19 +48,9 @@ export default {
         verbatimModuleSyntax: true,
       },
     ],
-
-    '^(.*\\/)?proposal-async-context\\/src\\/index(\\.[jt]s)?$': [
-      'ts-jest',
-      {
-        isolatedModules: true,
-        useESM: true,
-        verbatimModuleSyntax: true,
-      },
-    ],
   },
 
   transformIgnorePatterns: [
-    '/node_modules/(?!(proposal-async-context)/)',
     '\\.pnp\\.[^\\/]+$',
   ],
 } satisfies JestConfigWithTsJest;
