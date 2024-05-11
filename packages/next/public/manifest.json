@@ -13,7 +13,7 @@
     },
     {
       "purpose": "any maskable monochrome",
-      "sizes": "512x512",
+      "sizes": "64x64",
       "src": "/apple-icon.png",
       "type": "image/png"
     }

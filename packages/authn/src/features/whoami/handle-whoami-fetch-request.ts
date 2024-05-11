@@ -15,10 +15,6 @@ import mapAuthnIdToResponse from './map-authn-id-to-response.js';
 
 const throttle = createThrottler();
 
-/**
- *   Technical debt: We can replace this with `Promise<Response> | Response` by
- * swapping `await authnUserIds.get(...)` with `mapAuthnIdToResponse`.
- */
 export default async function handleWhoAmIFetchRequest(): Promise<Response> {
   const { headers: requestHeaders, method }: Request = getRequest();
   const { emitPublicMetric } = getTelemetry();

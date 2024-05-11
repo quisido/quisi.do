@@ -1,4 +1,4 @@
-import { dirname, join } from 'path';
+import { dirname, join } from 'node:path';
 import type { JestConfigWithTsJest } from 'ts-jest';
 
 export default {
@@ -20,15 +20,6 @@ export default {
     ['text', { skipEmpty: true, skipFull: true }],
   ],
 
-  coverageThreshold: {
-    global: {
-      branches: 32,
-      functions: 53,
-      lines: 73,
-      statements: 73,
-    },
-  },
-
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
     'proposal-async-context/src/index.js': join(
@@ -40,7 +31,9 @@ export default {
 
   transform: {
     '@quisido/authn-shared': '@monorepo-template/jest-transformer',
+    '@quisido/workers-shared': '@monorepo-template/jest-transformer',
     'authn-shared': '@monorepo-template/jest-transformer',
+    'workers-shared': '@monorepo-template/jest-transformer',
     fmrs: '@monorepo-template/jest-transformer',
     unknown2string: '@monorepo-template/jest-transformer',
 

@@ -6,7 +6,7 @@ export default function getTelemetry(): Telemetry<Metric> {
   const { telemetry } = getState();
 
   if (telemetry === null) {
-    throw new Error('Expected the state to contain a telemetry.');
+    throw new Error('Expected the state to contain telemetry.');
   }
 
   return telemetry;

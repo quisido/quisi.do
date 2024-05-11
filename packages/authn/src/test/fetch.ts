@@ -33,6 +33,7 @@ interface Result {
 
 const TEST_WRITE_PRIVATE_DATAPOINT = jest.fn();
 const TEST_WRITE_PUBLIC_DATAPOINT = jest.fn();
+const TEST_WRITE_USAGE_DATAPOINT = jest.fn();
 
 export default async function fetch({
   env,
@@ -53,6 +54,7 @@ export default async function fetch({
       env,
       writePrivateDataPoint: TEST_WRITE_PRIVATE_DATAPOINT,
       writePublicDataPoint: TEST_WRITE_PUBLIC_DATAPOINT,
+      writeUsageDatapoint: TEST_WRITE_USAGE_DATAPOINT,
     }),
     createFetchExecutionContext(waitUntil),
   );

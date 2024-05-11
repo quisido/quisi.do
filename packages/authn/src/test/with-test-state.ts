@@ -19,6 +19,7 @@ const TEST_SESSION_ID = '0123456789abcdef';
 const TEST_LOG_PRIVATE_ERROR = jest.fn();
 const TEST_WRITE_PRIVATE_DATAPOINT = jest.fn();
 const TEST_WRITE_PUBLIC_DATAPOINT = jest.fn();
+const TEST_WRITE_USAGE_DATAPOINT = jest.fn();
 
 const SEARCH: string = new URLSearchParams({
   state: JSON.stringify({
@@ -51,6 +52,9 @@ export default function withTestState<R>(fn: () => R): Result<R> {
       } satisfies AnalyticsEngineDataset,
       PUBLIC_DATASET: {
         writeDataPoint: TEST_WRITE_PUBLIC_DATAPOINT,
+      } satisfies AnalyticsEngineDataset,
+      USAGE: {
+        writeDataPoint: TEST_WRITE_USAGE_DATAPOINT,
       } satisfies AnalyticsEngineDataset,
     });
     state.setReturnHref();

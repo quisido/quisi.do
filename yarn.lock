@@ -4972,6 +4972,7 @@ __metadata:
     "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@quisido/authn-shared": "workspace:^"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/workers-shared": "workspace:^"
     "@types/cookie": "npm:^0.6.0"
     "@types/eslint": "npm:^8.56.10"
     "@types/jest": "npm:^29.5.12"
@@ -4992,33 +4993,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@quisido/cloudflare-analytics@workspace:packages/cloudflare-analytics":
+"@quisido/csp@workspace:packages/csp":
   version: 0.0.0-use.local
-  resolution: "@quisido/cloudflare-analytics@workspace:packages/cloudflare-analytics"
+  resolution: "@quisido/csp@workspace:packages/csp"
   dependencies:
-    "@arethetypeswrong/cli": "npm:^0.15.3"
+    "@babel/core": "npm:^7.24.4"
+    "@babel/preset-env": "npm:^7.24.4"
+    "@babel/preset-react": "npm:^7.24.1"
+    "@babel/preset-typescript": "npm:^7.24.1"
     "@cloudflare/workers-types": "npm:^4.20240419.0"
+    "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
     "@quisido/eslint-config": "workspace:^"
     "@types/eslint": "npm:^8.56.10"
     "@types/jest": "npm:^29.5.12"
-    "@types/node": "npm:^20.12.7"
-    eslint: "npm:^9.1.1"
-    jest: "npm:^29.7.0"
-    ts-jest: "npm:^29.1.2"
-    typescript: "npm:^5.4.5"
-    wrangler: "npm:^3.51.2"
-  languageName: unknown
-  linkType: soft
-
-"@quisido/dashboard@workspace:packages/dashboard":
-  version: 0.0.0-use.local
-  resolution: "@quisido/dashboard@workspace:packages/dashboard"
-  dependencies:
-    "@arethetypeswrong/cli": "npm:^0.15.3"
-    "@cloudflare/workers-types": "npm:^4.20240419.0"
-    "@quisido/eslint-config": "workspace:^"
-    "@types/eslint": "npm:^8.56.10"
-    "@types/jest": "npm:^29.5.12"
+    babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
+    concurrently: "npm:^8.2.2"
     eslint: "npm:^9.1.1"
     jest: "npm:^29.7.0"
     ts-jest: "npm:^29.1.2"
@@ -5178,6 +5170,39 @@ __metadata:
     wait-on: "npm:^7.2.0"
     webpack: "npm:^5.91.0"
     zone.js: "npm:^0.14.4"
+  languageName: unknown
+  linkType: soft
+
+"@quisido/workers-shared@workspace:^, @quisido/workers-shared@workspace:packages/workers-shared":
+  version: 0.0.0-use.local
+  resolution: "@quisido/workers-shared@workspace:packages/workers-shared"
+  dependencies:
+    "@arethetypeswrong/cli": "npm:^0.15.3"
+    "@babel/core": "npm:^7.24.4"
+    "@babel/preset-env": "npm:^7.24.4"
+    "@babel/preset-react": "npm:^7.24.1"
+    "@babel/preset-typescript": "npm:^7.24.1"
+    "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
+    "@monorepo-template/eslint-config": "npm:^1.0.7"
+    "@monorepo-template/jest-transformer": "npm:^1.0.2"
+    "@quisido/eslint-config": "workspace:^"
+    "@types/jest": "npm:^29.5.12"
+    "@types/node": "npm:^20.12.7"
+    "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
+    "@typescript-eslint/parser": "npm:^7.7.0"
+    babel-jest: "npm:^29.7.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
+    concurrently: "npm:^8.2.2"
+    eslint: "npm:^9.1.1"
+    eslint-config-prettier: "npm:^9.1.0"
+    eslint-plugin-import: "npm:^2.29.1"
+    eslint-plugin-prettier: "npm:^5.1.3"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.2.5"
+    ts-jest: "npm:^29.1.2"
+    tslib: "npm:^2.6.2"
+    typescript: "npm:^5.4.5"
   languageName: unknown
   linkType: soft
 

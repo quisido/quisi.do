@@ -1,9 +1,11 @@
+import { AccountNumber, UsageType } from '@quisido/workers-shared';
 import StatusCode from '../constants/status-code.js';
 import { SECONDS_PER_DAY } from '../constants/time.js';
 import createAuthnId from '../utils/create-authn-id.js';
 import getNowSeconds from '../utils/get-now-seconds.js';
 import getTelemetry from '../utils/get-telemetry.js';
 import getAuthnUserIdsNamespace from './get-authn-user-ids-namespace.js';
+import getUsage from './get-usage.js';
 import handlePutAuthnUserIdError from './handle-put-authn-user-id-error.js';
 import handlePutAuthnUserId from './handle-put-authn-user-id.js';
 import mapAuthnIdToResponseHeaders from './map-authn-id-to-response-headers.js';
@@ -13,6 +15,7 @@ export default function mapUserIdToResponse(id: number): Response {
   const authnUserIds: KVNamespace = getAuthnUserIdsNamespace();
   const nowSeconds: number = getNowSeconds();
   const { affect } = getTelemetry();
+  const use = getUsage();
 
   /**
    *   We set the ID asynchronously because there are good odds that it
@@ -23,6 +26,12 @@ export default function mapUserIdToResponse(id: number): Response {
    */
   const startTime: number = Date.now();
   const expiration: number = nowSeconds + SECONDS_PER_DAY;
+  use(
+    AccountNumber.Quisido,
+    UsageType.KVStore,
+    `${authnId}=${id}`.length,
+    SECONDS_PER_DAY,
+  );
   affect(
     authnUserIds
       .put(authnId, id.toString(), {

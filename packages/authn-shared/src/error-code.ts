@@ -51,6 +51,7 @@ export enum ErrorCode {
   InvalidCause = 3,
   InvalidDatabase = 47,
   InvalidIsolateEnvironment = 6,
+  InvalidUsageDataset = 50,
   InvalidUserId = 48,
   MissingAuthnUserIdsNamespace = 49,
   MissingDatabase = 46,

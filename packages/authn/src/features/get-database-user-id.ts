@@ -1,10 +1,12 @@
 import { ErrorCode } from '@quisido/authn-shared';
+import { AccountNumber, UsageType } from '@quisido/workers-shared';
 import MetricName from '../constants/metric-name.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
 import getTelemetry from '../utils/get-telemetry.js';
 import isObject from '../utils/is-object.js';
 import mapCauseToError from '../utils/map-cause-to-error.js';
 import getDatabase from './get-database.js';
+import getUsage from './get-usage.js';
 
 const SELECT_USERID_FROM_OAUTH_QUERY = `
 SELECT \`userId\`
@@ -20,11 +22,13 @@ export default async function getDatabaseUserId(
 ): Promise<number | null> {
   const db: D1Database = getDatabase();
   const { emitPrivateMetric, emitPublicMetric } = getTelemetry();
+  const use = getUsage();
 
   const statement: D1PreparedStatement = db
     .prepare(SELECT_USERID_FROM_OAUTH_QUERY)
     .bind(oAuthProvider, oAuthId);
 
+  use(AccountNumber.Quisido, UsageType.D1Read);
   const {
     meta: { duration, rows_read: rowsRead, size_after: sizeAfter },
     results,

@@ -9,6 +9,7 @@ import CloudflareInsights from '../components/cloudflare-insights.js';
 import DesignSystemTheme from '../components/theme.js';
 import Authentication from '../features/authentication.js';
 import CloudWatchRUM from '../features/cloudwatch-rum.js';
+// import ContentSecurityPolicy from '../features/content-security-policy.js';
 import DarkModeProvider from '../features/dark-mode-provider.js';
 import Datadog from '../features/datadog.js';
 import DesignSystemProvider from '../features/design-system-provider.js';
@@ -65,6 +66,7 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
   return (
     <html className={HTML_CLASS_NAME} lang="en">
       <head>
+        {/* <ContentSecurityPolicy /> */}
         <Clarity tag={CLARITY_TAG} />
         {process.env.NODE_ENV === 'production' && (
           <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />

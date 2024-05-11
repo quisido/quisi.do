@@ -13,12 +13,8 @@
       "path": "packages/authn",
     },
     {
-      "name": "Cloudflare Analytics",
-      "path": "packages/cloudflare-analytics",
-    },
-    {
-      "name": "Dashboard",
-      "path": "packages/dashboard",
+      "name": "Content Security Policy reporting endpoint",
+      "path": "packages/csp",
     },
     {
       "name": "authn-shared",
@@ -79,6 +75,10 @@
     {
       "name": "use-shallow-memo",
       "path": "packages/use-shallow-memo",
+    },
+    {
+      "name": "workers-shared",
+      "path": "packages/workers-shared",
     },
   ],
 

@@ -1,7 +1,9 @@
+import { AccountNumber, UsageType } from "@quisido/workers-shared";
 import MetricName from "../constants/metric-name.js";
 import type OAuthProvider from "../constants/oauth-provider.js";
 import getTelemetry from "../utils/get-telemetry.js";
 import getDatabase from "./get-database.js";
+import getUsage from "./get-usage.js";
 import handleInsertIntoEmailsError from './handle-insert-into-emails-error.js';
 import handleInsertIntoEmailsResponse from './handle-insert-into-emails-response.js';
 import handleInsertIntoOAuthError from './handle-insert-into-oauth-error.js';
@@ -38,6 +40,7 @@ export default function putDatabaseUserMetadata({
 }: Options): number {
   const db: D1Database = getDatabase();
   const { affect, emitPublicMetric } = getTelemetry();
+  const use = getUsage();
   emitPublicMetric({
     changes,
     duration,
@@ -47,6 +50,7 @@ export default function putDatabaseUserMetadata({
   });
 
   // Associate user ID with OAuth ID.
+  use(AccountNumber.Quisido, UsageType.D1Write);
   const insertIntoOAuth: Promise<D1Response> = db
     .prepare(INSERT_INTO_OAUTH_QUERY)
     .bind(userId, oAuthProvider, oAuthId)
@@ -60,6 +64,7 @@ export default function putDatabaseUserMetadata({
 
   // Associate user ID with email.
   if (email !== null) {
+    use(AccountNumber.Quisido, UsageType.D1Write);
     const insertIntoEmails: Promise<D1Response> = db
       .prepare(INSERT_INTO_EMAILS_QUERY)
       .bind(email, userId)
