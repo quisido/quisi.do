@@ -8,7 +8,7 @@ export default function optional<K extends number | string | symbol, V>(
   obj: object,
   key: K,
   validator: (value: unknown) => value is V,
-): obj is Record<K, V | never> {
+): obj is Record<K, V | undefined> {
   if (!isKeyOf(key, obj)) {
     return true;
   }

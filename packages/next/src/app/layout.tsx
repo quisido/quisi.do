@@ -6,13 +6,11 @@ import {
   type ReactElement,
 } from 'react';
 import CloudflareInsights from '../components/cloudflare-insights.js';
-import DesignSystemTheme from '../components/theme.js';
 import Authentication from '../features/authentication.js';
 import CloudWatchRUM from '../features/cloudwatch-rum.js';
 // import ContentSecurityPolicy from '../features/content-security-policy.js';
 import DarkModeProvider from '../features/dark-mode-provider.js';
 import Datadog from '../features/datadog.js';
-import DesignSystemProvider from '../features/design-system-provider.js';
 import Footer from '../features/footer.js';
 import Fullstory from '../features/fullstory.js';
 import GoogleAnalytics from '../features/google-analytics.js';
@@ -31,6 +29,7 @@ import SessionIdProvider from '../features/session-id-provider.js';
 import ThemeFeature from '../features/theme.js';
 import TracerProviderProvider from '../features/tracer-provider-provider.js';
 import withWrappers from '../hocs/with-wrappers/index.js';
+import Theme from '../modules/quisi/theme.jsx';
 import Clarity from '../modules/react-clarity/index.js';
 import validateString from '../utils/validate-string.js';
 export { default as metadata } from '../constants/root-metadata.js';
@@ -48,7 +47,6 @@ const Contexts: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,
   CloudWatchRUM,
   DarkModeProvider,
-  DesignSystemProvider,
   Fullstory,
   // Honeycomb,
   HostnameProvider,
@@ -57,7 +55,7 @@ const Contexts: ComponentType<PropsWithChildren> = withWrappers(
   Sentry,
   SessionIdProvider,
   ThemeFeature,
-  DesignSystemTheme,
+  Theme,
   TracerProviderProvider,
   // Turnstile,
 )(Fragment);

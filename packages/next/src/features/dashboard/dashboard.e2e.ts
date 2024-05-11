@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-import describeDesignSystems from '../../test/cypress/utils/describe-design-systems.js';
 import describeFeature from '../../test/cypress/utils/describe-feature.js';
 
 const shouldDisplayCriticalElements = (): void => {
@@ -7,7 +6,5 @@ const shouldDisplayCriticalElements = (): void => {
 };
 
 describeFeature('Dashboard', '/dashboard', (): void => {
-  describeDesignSystems((): void => {
-    it('should display critical elements', shouldDisplayCriticalElements);
-  });
+  it('should display critical elements', shouldDisplayCriticalElements);
 });

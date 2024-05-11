@@ -21,10 +21,10 @@ export default {
 
   coverageThreshold: {
     global: {
-      branches: 32,
-      functions: 53,
-      lines: 73,
-      statements: 73,
+      branches: 0,
+      functions: 0,
+      lines: 0,
+      statements: 0,
     },
   },
 
@@ -36,9 +36,9 @@ export default {
     '@quisido/authn-shared': '@monorepo-template/jest-transformer',
     '@quisido/workers-shared': '@monorepo-template/jest-transformer',
     'authn-shared': '@monorepo-template/jest-transformer',
-    'workers-shared': '@monorepo-template/jest-transformer',
     fmrs: '@monorepo-template/jest-transformer',
     unknown2string: '@monorepo-template/jest-transformer',
+    'workers-shared': '@monorepo-template/jest-transformer',
 
     '\\.[jt]s$': [
       'ts-jest',

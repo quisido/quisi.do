@@ -10,7 +10,15 @@ import mapCauseToError from '../utils/map-cause-to-error.js';
 import mapRequestToTraceParent from '../utils/map-request-to-trace-parent.js';
 import TelemetryQueue from '../utils/telemetry-queue.js';
 
+interface Options {
+  readonly console: Console;
+  readonly ctx: ExecutionContext;
+  readonly env: Record<string, unknown>;
+  readonly traceId: string;
+}
+
 const HEXADECIMAL = 16;
+const ONCE = 1;
 const SINGLE = 1;
 
 // Current design does not allow optional dimensions. Set defaults.
@@ -44,11 +52,12 @@ const mapTraceParentToDimensions = ({
 });
 
 export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric> {
-  public constructor(
-    env: Record<string, unknown>,
-    ctx: ExecutionContext,
-    traceId: string,
-  ) {
+  public constructor({
+    console,
+    ctx,
+    env,
+    traceId,
+  }: Options) {
     super();
 
     const { USAGE } = env;
@@ -114,8 +123,8 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
     this.onPrivateMetric(emit);
     this.onPrivateMetric((): void => {
       usage.writeDataPoint({
-        doubles: [UsageType.AnalyticsEngineDatasetWriteDataPoint, 1],
-        indexes: [AccountNumber.Quisido.toString()], // account number
+        doubles: [UsageType.AnalyticsEngineDatasetWriteDataPoint, ONCE],
+        indexes: [AccountNumber.Quisido.toString()],
       });
     });
   }
@@ -148,8 +157,8 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
     this.onPublicMetric(emit);
     this.onPublicMetric((): void => {
       usage.writeDataPoint({
-        doubles: [UsageType.AnalyticsEngineDatasetWriteDataPoint, 1],
-        indexes: [AccountNumber.Quisido.toString()], // account number
+        doubles: [UsageType.AnalyticsEngineDatasetWriteDataPoint, ONCE],
+        indexes: [AccountNumber.Quisido.toString()],
       });
     });
   }

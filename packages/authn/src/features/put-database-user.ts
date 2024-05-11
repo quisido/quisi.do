@@ -39,7 +39,10 @@ export default async function putDatabaseUser(
 
   const snapshot: Snapshot = new Snapshot();
 
-  use(AccountNumber.Quisido, UsageType.D1Write);
+  use({
+    account: AccountNumber.Quisido,
+    type: UsageType.D1Write,
+  });
   const {
     meta: {
       changes,

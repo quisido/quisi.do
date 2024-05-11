@@ -1,3 +1,4 @@
+/// <reference types="@cloudflare/workers-types" />
 import { ALLOWED_METHODS_SET } from "../constants/allowed-methods.js";
 import { StatusCode } from "../constants/status-code.js";
 import InvalidPathnameResponse from "../utils/invalid-pathname-response.js";
@@ -11,6 +12,7 @@ import handleOptions from "./handle-options.js";
 import handlePost from "./handle-post.js";
 
 export default async function handleFetch(
+  console: Console,
   { body, headers, method, url }: Request,
   env: unknown,
   ctx: ExecutionContext
@@ -42,11 +44,12 @@ export default async function handleFetch(
     return new Response(StatusCode.InternalServerError);
   }
 
-  // Options
+  // OPTIONS
   if (method === 'OPTIONS') {
     const origin: string | null = mapHeadersToOrigin(headers);
-    return await handleOptions(CSP_DB, projectId, origin);
+    return await handleOptions({ console, db: CSP_DB, origin, projectId });
   }
 
-  return await handlePost(CSP_DB, projectId, body, ctx);
+  // POST
+  return await handlePost({ body, console, ctx, db: CSP_DB, projectId });
 }

@@ -1,9 +1,9 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Div from '../../../../components/div.js';
-import LoadingIcon from '../../../../components/loading-icon.js';
-import Section from '../../../../components/section.js';
-import Span from '../../../../components/span.js';
+import Div from '../../../../modules/quisi/div.js';
+import LoadingIcon from '../../../../modules/quisi/loading-icon.js';
+import Section from '../../../../modules/quisi/section.js';
+import Span from '../../../../modules/quisi/span.js';
 import createApdexScore from '../../utils/create-apdex-score.js';
 import mapRecordToSum from '../../utils/map-record-to-sum.js';
 import LineChart from '../apdex-line-chart/index.js';

@@ -1,7 +1,7 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Section from '../../../../components/section.js';
 import withAsync from '../../../../hocs/with-async.js';
+import Section from '../../../../modules/quisi/section.js';
 import type Issue from '../../../../types/sentry-issue.js';
 import ErrorView from './components/error/index.js';
 import Loading from './components/loading/index.js';

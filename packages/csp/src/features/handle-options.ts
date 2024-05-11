@@ -5,11 +5,28 @@ import MissingOriginResponse from "../utils/missing-origin-response.js";
 import query from "../utils/query.js";
 import Response from '../utils/response.js';
 
-export default async function handleOptions(
-  db: D1Database,
-  projectId: number,
-  origin: string | null,
-): Promise<Response> {
+interface Options {
+  readonly console: Console;
+  readonly db: D1Database;
+  readonly origin: string | null;
+  readonly projectId: number;
+}
+
+class OkResponse extends Response {
+  public constructor(origin: string) {
+    super(StatusCode.OK, {
+      'Access-Control-Allow-Origin': origin,
+      'Access-Control-Max-Age': '31536000',
+    });
+  }
+}
+
+export default async function handleOptions({
+  console,
+  db,
+  origin,
+  projectId,
+}: Options): Promise<Response> {
   // Origin
   if (origin === null) {
     console.log('Missing origin');
@@ -17,12 +34,19 @@ export default async function handleOptions(
   }
 
   // Query
-  // TODO: Charge `userId` for 1 SELECT query.
   const [result] =
     await query(db, SELECT_ORIGINS_USER_ID_FROM_PROJECTS, projectId);
 
   // Not found
   if (typeof result === 'undefined') {
+    /**
+     * When `USAGE` is ready:
+     * use({
+     *   account: AccountNumber.Quisido,
+     *   type: UsageType.D1Read,
+     * });
+     */
+
     console.log('Missing project');
     return new Response(StatusCode.NotFound);
   }
@@ -30,21 +54,34 @@ export default async function handleOptions(
   // Bad gateway
   const { origins, userId } = result;
   if (typeof origins !== 'string' || typeof userId !== 'number') {
+    /**
+     * When `USAGE` is ready:
+     * use({
+     *   account: AccountNumber.Quisido,
+     *   type: UsageType.D1Read,
+     * });
+     */
+
     console.log('Invalid database table row');
     return new Response(StatusCode.BadGateway);
   }
 
+  /**
+   * When `USAGE` is ready:
+   * use({
+   *   account: userId,
+   *   type: UsageType.D1Read,
+   * });
+   */
+
   // Allow origin
   const originsArr: readonly string[] = origins.split(' ');
-  const originsSet: Set<string> = new Set(originsArr);
+  const originsSet: Set<string> = new Set<string>(originsArr);
   if (!originsSet.has(origin)) {
     console.log('Invalid origin');
     return new InvalidOriginResponse();
   }
 
   console.log('Options', origin);
-  return new Response(StatusCode.OK, {
-    'Access-Control-Allow-Origin': origin,
-    'Access-Control-Max-Age': '31536000',
-  });
+  return new OkResponse(origin);
 }

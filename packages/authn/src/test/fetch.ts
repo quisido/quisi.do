@@ -1,9 +1,11 @@
+/// <reference types="@cloudflare/workers-types" />
 import type { ErrorCode } from '@quisido/authn-shared';
 import handleFetch from '../features/handle-fetch.js';
 import createFetchEnv from './create-fetch-env.js';
 import createFetchExecutionContext from './create-fetch-execution-context.js';
 import createFetchRequest from './create-fetch-request.js';
 import expectResponseToRedirectTo from './expect-response-to-redirect-to.js';
+import { TEST_CONSOLE } from './test-console.js';
 
 /**
  *   This test `fetch` function mimics the behavior of the Clouderflare worker's
@@ -45,6 +47,7 @@ export default async function fetch({
 }: Options): Promise<Result> {
   const response: Response = await handleFetch(
     fetchImpl,
+    TEST_CONSOLE,
     createFetchRequest({
       headers,
       pathname,

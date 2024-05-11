@@ -2,5 +2,5 @@
 import handleFetch from "./features/handle-fetch.js";
 
 export default {
-  fetch: handleFetch,
+  fetch: handleFetch.bind(null, console),
 } satisfies ExportedHandler;

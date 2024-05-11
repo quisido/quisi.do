@@ -9,12 +9,13 @@ import State from './state.js';
 
 export default async function handleFetch(
   fetch: Fetcher['fetch'],
+  console: Console,
   request: Request,
   env: unknown,
   ctx: ExecutionContext,
 ): Promise<Response> {
   const traceId: string = createTraceId();
-  const state: State = new State(fetch, request, ctx, traceId);
+  const state: State = new State(fetch, console, request, ctx, traceId);
   return stateVar.run(state, async (): Promise<Response> => {
     if (typeof env === 'undefined') {
       return handleMissingIsolateEnvironment();

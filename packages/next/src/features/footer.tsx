@@ -1,5 +1,5 @@
 import { memo, type ReactElement } from 'react';
-import Link from '../components/link/index.js';
+import Link from '../modules/quisi/link.jsx';
 import styles from './footer.module.scss';
 
 function Footer(): ReactElement | null {

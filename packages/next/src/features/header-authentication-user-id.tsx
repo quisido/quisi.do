@@ -1,9 +1,9 @@
 'use client';
 
 import type { ReactElement } from "react";
-import Div from "../components/div.jsx";
-import Link from "../components/link/index.js";
 import { useAuthentication } from "../contexts/authentication.js";
+import Div from "../modules/quisi/div.jsx";
+import Link from "../modules/quisi/link.jsx";
 import setCookie from "../utils/set-cookie.js";
 
 interface Props {

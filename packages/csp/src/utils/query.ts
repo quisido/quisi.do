@@ -1,8 +1,8 @@
 export default async function query(
   db: D1Database,
-  q: string,
+  queryStr: string,
   ...values: readonly unknown[]
 ): Promise<Record<string, unknown>[]> {
-  const { results } = await db.prepare(q).bind(...values).all();
+  const { results } = await db.prepare(queryStr).bind(...values).all();
   return results;
 }

@@ -1,4 +1,4 @@
-import type ReportBody from "../types/report.js";
+import type ReportBody from "../types/report-body.js";
 
 export default function mapReportToBody({
   body,

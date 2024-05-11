@@ -1,16 +1,14 @@
 import { type ReactElement } from 'react';
-import Div from '../../../../components/div.js';
+import Div from '../../../../modules/quisi/div.js';
 // import Gauge from '../../../../components/gauge.js';
 import Quantity from '../../../../components/quantity/index.js';
-import Section from '../../../../components/section.js';
 import withAsync from '../../../../hocs/with-async.js';
+import Section from '../../../../modules/quisi/section.js';
 import type Datasets from '../../../../types/cloudflare-analytics-datasets.js';
 import ErrorView from './components/error/index.js';
 import Loading from './components/loading/index.js';
 import SampleInterval from './components/sample-interval/index.js';
 import Uninitiated from './components/uninitiated/index.js';
-import WebAnalytics from './components/web-analytics/index.js';
-import WorkersInvocations from './components/workers-invocations/index.js';
 import mapBudgetToPercentage from './utils/map-budget-to-percentage.js';
 
 interface Props {
@@ -45,9 +43,7 @@ function CloudflareAnalytics({ budget, datasets }: Props): ReactElement {
   const {
     httpRequests1hGroups,
     rumPageloadEventsAdaptiveGroups,
-    rumPerformanceEventsAdaptiveGroups,
     workersAnalyticsEngineAdaptiveGroups,
-    workersInvocationsAdaptive,
   } = datasets;
 
   // States
@@ -140,8 +136,6 @@ function CloudflareAnalytics({ budget, datasets }: Props): ReactElement {
           {workersAnalyticsEngineAdaptiveGroups.count}
         </Div>
       </Section>
-      <WebAnalytics>{rumPerformanceEventsAdaptiveGroups}</WebAnalytics>
-      <WorkersInvocations>{workersInvocationsAdaptive}</WorkersInvocations>
     </>
   );
 }

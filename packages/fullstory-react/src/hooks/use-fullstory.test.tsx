@@ -3,6 +3,7 @@ import { FullStory } from '@fullstory/browser';
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import MockFullstory from '../components/mock-fullstory.js';
+import expectToThrow from '../test/expect-to-throw.js';
 import useFullstory from './use-fullstory.js';
 
 const TEST_FULLSTORY = Object.assign(jest.fn(), FullStory);
@@ -31,9 +32,10 @@ describe('useFullstory', (): void => {
   });
 
   it('should throw when Fullstory is not provided', (): void => {
-    expect((): void => {
-      renderHook(useFullstory);
-    }).toThrow('Expected the Fullstory context to be provided.');
+    expectToThrow(
+      useFullstory,
+      'Expected the Fullstory context to be provided.',
+    );
   });
 
   it('should provide a Fullstory API', (): void => {

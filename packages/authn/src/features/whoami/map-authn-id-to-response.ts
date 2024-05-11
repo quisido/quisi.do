@@ -17,7 +17,10 @@ export default async function mapAuthnIdToResponse(authnId: string): Promise<Res
 
   const snapshot: Snapshot = new Snapshot();
 
-  use(AccountNumber.Quisido, UsageType.KVRead);
+  use({
+    account: AccountNumber.Quisido,
+    type: UsageType.KVRead,
+  });
   const id: string | null = await authnUserIds.get(authnId, 'text');
   return snapshot.run((): Response => {
     const { emitPrivateMetric, emitPublicMetric } = getTelemetry();

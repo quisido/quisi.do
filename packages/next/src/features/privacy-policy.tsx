@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
-import Div from '../components/div.js';
-import Header from '../components/header/index.js';
-import Link from '../components/link/index.js';
-import Section from '../components/section.js';
+import Div from '../modules/quisi/div.js';
+import Header from '../modules/quisi/header.js';
+import Link from '../modules/quisi/link.js';
+import Section from '../modules/quisi/section.js';
 
 export default function PrivacyPolicy(): ReactElement {
   return (

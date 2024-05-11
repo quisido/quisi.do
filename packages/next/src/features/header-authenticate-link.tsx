@@ -1,13 +1,13 @@
 import I18n, { useTranslate, type TranslateFunction } from 'lazy-i18n';
 import { usePathname } from 'next/navigation.js';
 import { useMemo, type ReactElement } from 'react';
-import Link from '../components/link/index.js';
 import {
   PATREON_OAUTH_CLIENT_ID,
   PATREON_OAUTH_REDIRECT_URI,
 } from '../constants/patreon-oauth.js';
 import { useSessionId } from '../contexts/session-id.js';
 import useSearch from '../hooks/use-search.js';
+import Link from '../modules/quisi/link.jsx';
 
 interface State {
   readonly href: string;

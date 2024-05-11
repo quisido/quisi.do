@@ -1,8 +1,8 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import Link from '../components/link/index.js';
 import usePathname from '../hooks/use-pathname.js';
+import Link from '../modules/quisi/link.jsx';
 import validateString from '../utils/validate-string.js';
 import styles from './header-heading-text.module.scss';
 

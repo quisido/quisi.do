@@ -26,12 +26,12 @@ export default function mapUserIdToResponse(id: number): Response {
    */
   const startTime: number = Date.now();
   const expiration: number = nowSeconds + SECONDS_PER_DAY;
-  use(
-    AccountNumber.Quisido,
-    UsageType.KVStore,
-    `${authnId}=${id}`.length,
-    SECONDS_PER_DAY,
-  );
+  use({
+    account: AccountNumber.Quisido,
+    count: `${authnId}=${id.toString()}`.length,
+    per: SECONDS_PER_DAY,
+    type: UsageType.KVStore,
+  });
   affect(
     authnUserIds
       .put(authnId, id.toString(), {

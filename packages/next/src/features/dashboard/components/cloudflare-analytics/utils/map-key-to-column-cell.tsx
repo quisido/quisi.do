@@ -1,6 +1,6 @@
 import { type FunctionComponent, type ReactElement } from 'react';
-import Div from '../../../../../components/div.js';
 import Quantity from '../../../../../components/quantity/index.js';
+import Div from '../../../../../modules/quisi/div.js';
 import Change from '../components/change/index.js';
 
 interface Analytic {

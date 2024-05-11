@@ -4,10 +4,9 @@ import type OAuthProvider from "../constants/oauth-provider.js";
 import getTelemetry from "../utils/get-telemetry.js";
 import getDatabase from "./get-database.js";
 import getUsage from "./get-usage.js";
-import handleInsertIntoEmailsError from './handle-insert-into-emails-error.js';
-import handleInsertIntoEmailsResponse from './handle-insert-into-emails-response.js';
 import handleInsertIntoOAuthError from './handle-insert-into-oauth-error.js';
 import handleInsertIntoOAuthResponse from './handle-insert-into-oauth-response.js';
+import putDatabaseUserEmail from "./put-database-user-email.js";
 
 interface Options {
   readonly changes: number;
@@ -18,11 +17,6 @@ interface Options {
   readonly sizeAfter: number;
   readonly userId: number;
 }
-
-const INSERT_INTO_EMAILS_QUERY = `
-INSERT INTO \`emails\` (\`address\`, \`userId\`)
-VALUES (?, ?);
-`;
 
 const INSERT_INTO_OAUTH_QUERY = `
 INSERT INTO \`oauth\` (\`userId\`, \`oAuthProvider\`, \`oAuthId\`)
@@ -50,7 +44,10 @@ export default function putDatabaseUserMetadata({
   });
 
   // Associate user ID with OAuth ID.
-  use(AccountNumber.Quisido, UsageType.D1Write);
+  use({
+    account: AccountNumber.Quisido,
+    type: UsageType.D1Write,
+  });
   const insertIntoOAuth: Promise<D1Response> = db
     .prepare(INSERT_INTO_OAUTH_QUERY)
     .bind(userId, oAuthProvider, oAuthId)
@@ -64,17 +61,7 @@ export default function putDatabaseUserMetadata({
 
   // Associate user ID with email.
   if (email !== null) {
-    use(AccountNumber.Quisido, UsageType.D1Write);
-    const insertIntoEmails: Promise<D1Response> = db
-      .prepare(INSERT_INTO_EMAILS_QUERY)
-      .bind(email, userId)
-      .run();
-
-    affect(
-      insertIntoEmails
-        .then(handleInsertIntoEmailsResponse(userId))
-        .catch(handleInsertIntoEmailsError(userId)),
-    );
+    putDatabaseUserEmail({ email, userId });
   }
 
   return userId;

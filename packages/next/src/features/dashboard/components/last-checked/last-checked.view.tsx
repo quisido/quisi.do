@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
-import Div from '../../../../components/div.js';
-import LoadingIcon from '../../../../components/loading-icon.js';
 import RelativeTimestamp from '../../../../components/relative-timestamp.js';
+import Div from '../../../../modules/quisi/div.js';
+import LoadingIcon from '../../../../modules/quisi/loading-icon.js';
 
 interface Props {
   readonly children: number;

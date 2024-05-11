@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import Section from '../../../../../../components/section.js';
+import Section from '../../../../../../modules/quisi/section.js';
 
 export default function CloudflareAnalyticsUninitiated(): ReactElement {
   return (

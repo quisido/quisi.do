@@ -6,6 +6,14 @@ import parseReport from "../utils/parse-report.js";
 import query from "../utils/query.js";
 import Response from '../utils/response.js';
 
+interface Options {
+  readonly body: ReadableStream | null;
+  readonly console: Console;
+  readonly ctx: ExecutionContext;
+  readonly db: D1Database;
+  readonly projectId: number;
+}
+
 type ReportBodyArray = [
   string,
   string | null,
@@ -48,24 +56,32 @@ const mapReportBodyToArray = ({
   columnNumber ?? null,
 ];
 
-export default async function handlePost(
-  db: D1Database,
-  projectId: number,
-  body: ReadableStream | null,
-  ctx: ExecutionContext
-): Promise<Response> {
+export default async function handlePost({
+  body,
+  console,
+  ctx,
+  db,
+  projectId,
+}: Options): Promise<Response> {
   if (body === null) {
     console.log('Invalid body');
     return new Response(StatusCode.BadRequest);
   }
 
   // Query
-  // TODO: Charge `userId` for 1 SELECT query.
   const [result] =
     await query(db, SELECT_USER_ID_FROM_PROJECTS, projectId);
 
   // Not found
   if (typeof result === 'undefined') {
+    /**
+     * When `USAGE` is ready:
+     * use({
+     *   account: AccountNumber.Quisido,
+     *   type: UsageType.D1Read,
+     * });
+     */
+
     console.log('Missing project');
     return new Response(StatusCode.NotFound);
   }
@@ -73,9 +89,25 @@ export default async function handlePost(
   // Bad gateway
   const { userId } = result;
   if (typeof userId !== 'number') {
+    /**
+     * When `USAGE` is ready:
+     * use({
+     *   account: AccountNumber.Quisido,
+     *   type: UsageType.D1Read,
+     * });
+     */
+
     console.log('Invalid database table row');
     return new Response(StatusCode.BadGateway);
   }
+
+  /**
+   * When `USAGE` is ready:
+   * use({
+   *   account: userId,
+   *   type: UsageType.D1Read,
+   * });
+   */
 
   const mapReportBodyToInsertValues = (
     body: ReportBody,
@@ -89,14 +121,21 @@ export default async function handlePost(
     const reportStr: string = await mapReadableStreamToString(body);
     const reports: readonly ReportBody[] = parseReport(reportStr);
 
-    // TODO: Charge for 1 INSERT query.
+    /**
+     * When `USAGE` is ready:
+     * use({
+     *   account: userId,
+     *   type: UsageType.D1Write,
+     * });
+     */
+
     ctx.waitUntil(
       query(
         db,
         `
         INSERT INTO \`reports\` (
           \`project\`,
-          \'timestamp\',
+          \`timestamp\`,
           \`documentURL\`,
           \`referrer\`,
           \`blockedURL\`,

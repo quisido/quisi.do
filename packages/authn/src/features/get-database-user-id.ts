@@ -28,7 +28,10 @@ export default async function getDatabaseUserId(
     .prepare(SELECT_USERID_FROM_OAUTH_QUERY)
     .bind(oAuthProvider, oAuthId);
 
-  use(AccountNumber.Quisido, UsageType.D1Read);
+  use({
+    account: AccountNumber.Quisido,
+    type: UsageType.D1Read,
+  });
   const {
     meta: { duration, rows_read: rowsRead, size_after: sizeAfter },
     results,

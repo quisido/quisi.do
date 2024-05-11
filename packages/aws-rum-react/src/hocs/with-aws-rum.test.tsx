@@ -13,8 +13,17 @@ function TestComponent({ awsRum }: TestProps): ReactElement {
 }
 
 const TestHoc = withAwsRum(TestComponent);
+const WINDOW_FETCH = window.fetch;
 
 describe('withAwsRum', (): void => {
+  beforeEach((): void => {
+    window.fetch = jest.fn();
+  });
+
+  afterEach((): void => {
+    window.fetch = WINDOW_FETCH;
+  });
+
   it('should provide an `awsRum` prop', (): void => {
     const { getByText } = render(<TestHoc />, {
       wrapper({ children }: PropsWithChildren): ReactElement {

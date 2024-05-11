@@ -1,9 +1,9 @@
 'use client';
 
 import { type ReactElement } from 'react';
-import Div from '../../components/div.js';
-import Link from '../../components/link/index.js';
-import Section from '../../components/section.js';
+import Div from '../../modules/quisi/div.js';
+import Link from '../../modules/quisi/link.js';
+import Section from '../../modules/quisi/section.js';
 import handleCloudflareAnalyticsRequest from '../../utils/handle-cloudflare-analytics-request.js';
 import handleUptimeChecksRequest from '../../utils/handle-uptime-checks-request.js';
 import RumMetrics from '../../utils/rum-metrics.js';

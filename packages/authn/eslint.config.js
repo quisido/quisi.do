@@ -30,7 +30,7 @@ export default [
   {
     files: ['src/features/handle-fetch.ts', 'src/features/state.ts'],
     rules: {
-      'max-params': ['error', { max: 4 }],
+      'max-params': ['error', { max: 5 }],
     },
   },
 
@@ -45,6 +45,13 @@ export default [
     files: ['src/features/telemetry-queue.ts'],
     rules: {
       'no-console': 'off',
+    },
+  },
+
+  {
+    files: ['src/test/fetch.ts'],
+    rules: {
+      'max-lines-per-function': 'off',
     },
   },
 

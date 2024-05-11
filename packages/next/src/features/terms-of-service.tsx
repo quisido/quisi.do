@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
-import Div from '../components/div.js';
-import Section from '../components/section.js';
+import Div from '../modules/quisi/div.js';
+import Section from '../modules/quisi/section.js';
 
 const LAST_UPDATED: Date = new Date('2024-03-21');
 

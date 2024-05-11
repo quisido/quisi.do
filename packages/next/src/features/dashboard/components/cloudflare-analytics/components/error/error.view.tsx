@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
-import Section from '../../../../../../components/section.js';
-import Span from '../../../../../../components/span.js';
+import Section from '../../../../../../modules/quisi/section.js';
+import Span from '../../../../../../modules/quisi/span.js';
 
 interface Props {
   readonly children: string;

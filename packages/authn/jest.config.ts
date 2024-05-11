@@ -33,9 +33,9 @@ export default {
     '@quisido/authn-shared': '@monorepo-template/jest-transformer',
     '@quisido/workers-shared': '@monorepo-template/jest-transformer',
     'authn-shared': '@monorepo-template/jest-transformer',
-    'workers-shared': '@monorepo-template/jest-transformer',
     fmrs: '@monorepo-template/jest-transformer',
     unknown2string: '@monorepo-template/jest-transformer',
+    'workers-shared': '@monorepo-template/jest-transformer',
 
     '\\.[jt]s$': [
       'ts-jest',
