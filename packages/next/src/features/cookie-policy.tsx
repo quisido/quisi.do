@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
-import Div from '../components/div.js';
-import Header from '../components/header/index.js';
-import Section from '../components/section.js';
+import Div from '../modules/quisi/div.jsx';
+import Header from '../modules/quisi/header.jsx';
+import Section from '../modules/quisi/section.jsx';
 
 export default function CookiePolicy(): ReactElement {
   return (

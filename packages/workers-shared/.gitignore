@@ -1,0 +1,7 @@
+/dist/
+/jest/
+/.eslintcache
+/*.cpuprofile
+/*.iml
+/*.tsbuildinfo
+/*-*.*.*.tgz

@@ -10,9 +10,7 @@ export default function createReturnHref(): string {
 
   const stateSearchParam: string | null = getRequestSearchParam('state');
   if (stateSearchParam === null) {
-    throw mapCauseToError({
-      code: ErrorCode.MissingState,
-    });
+    throw mapCauseToError({ code: ErrorCode.MissingState });
   }
 
   const getStateJson = (): unknown => {

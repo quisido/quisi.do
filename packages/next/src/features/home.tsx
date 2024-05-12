@@ -1,8 +1,8 @@
 'use client';
 
 import { type ReactElement } from 'react';
-import Link from '../components/link/index.js';
-import Section from '../components/section.js';
+import Link from '../modules/quisi/link.js';
+import Section from '../modules/quisi/section.js';
 
 export default function Home(): ReactElement {
   return (

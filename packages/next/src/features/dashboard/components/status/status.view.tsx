@@ -1,9 +1,9 @@
 import { mapUnknownToString } from 'fmrs';
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Div from '../../../../components/div.js';
-import Link from '../../../../components/link/index.js';
-import Section from '../../../../components/section.js';
+import Div from '../../../../modules/quisi/div.js';
+import Link from '../../../../modules/quisi/link.js';
+import Section from '../../../../modules/quisi/section.js';
 import validateString from '../../../../utils/validate-string.js';
 import LastChecked from '../last-checked/index.js';
 import useStatus from './status.hook.js';

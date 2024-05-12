@@ -1,8 +1,8 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import LoadingIcon from '../../../../components/loading-icon.js';
-import Section from '../../../../components/section.js';
-import Span from '../../../../components/span.js';
+import LoadingIcon from '../../../../modules/quisi/loading-icon.js';
+import Section from '../../../../modules/quisi/section.js';
+import Span from '../../../../modules/quisi/span.js';
 
 interface Props {
   readonly error: string | null;

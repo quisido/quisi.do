@@ -2,7 +2,7 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import I18n from 'lazy-i18n';
 import type { ReactElement, ReactNode } from 'react';
-import Link from '../components/link';
+import Link from '../modules/quisi/link.js';
 
 function CsrfLink(): ReactElement {
   return (
@@ -116,6 +116,12 @@ export default function mapAuthnErrorCodeToContent(
       ];
 
     case ErrorCode.InvalidPatreonTokenRequest:
+      return [
+        <I18n>An unknown error occurred.</I18n>,
+        <I18n>An unknown error occurred.</I18n>,
+      ];
+
+    case ErrorCode.InvalidUsageDataset:
       return [
         <I18n>An unknown error occurred.</I18n>,
         <I18n>An unknown error occurred.</I18n>,

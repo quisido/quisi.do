@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Section from '../../../../../../components/section.js';
+import Section from '../../../../../../modules/quisi/section.js';
 
 export default function SentryIssuesUninitiated(): ReactElement {
   return (

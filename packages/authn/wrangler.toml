@@ -6,6 +6,7 @@ r2_buckets = [{ binding = 'AUTHN_DATA', bucket_name = 'authn-dev' }]
 tsconfig = "./tsconfig.json"
 
 analytics_engine_datasets = [
+  { binding = "USAGE", dataset = "USAGE_DEV" },
   { binding = "PRIVATE_DATASET", dataset = "AUTHN_PRIVATE_DEV" },
   { binding = "PUBLIC_DATASET", dataset = "AUTHN_PUBLIC_DEV" },
 ]
@@ -27,6 +28,7 @@ name = "quisido-authn"
 r2_buckets = [{ binding = 'AUTHN_DATA', bucket_name = 'authn' }]
 
 analytics_engine_datasets = [
+  { binding = "USAGE", dataset = "USAGE" },
   { binding = "PRIVATE_DATASET", dataset = "AUTHN_PRIVATE" },
   { binding = "PUBLIC_DATASET", dataset = "AUTHN_PUBLIC" },
 ]
@@ -57,6 +59,7 @@ r2_buckets = [{ binding = 'AUTHN_DATA', bucket_name = 'authn-staging' }]
 workers_dev = true
 
 analytics_engine_datasets = [
+  { binding = "USAGE", dataset = "USAGE_STAGING" },
   { binding = "PRIVATE_DATASET", dataset = "AUTHN_PRIVATE_STAGING" },
   { binding = "PUBLIC_DATASET", dataset = "AUTHN_PUBLIC_STAGING" },
 ]

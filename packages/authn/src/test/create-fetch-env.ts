@@ -8,12 +8,17 @@ interface Options {
   readonly writePublicDataPoint: (
     event?: AnalyticsEngineDataPoint | undefined,
   ) => void;
+
+  readonly writeUsageDatapoint: (
+    event?: AnalyticsEngineDataPoint | undefined,
+  ) => void;
 }
 
 export default function createFetchEnv({
   env,
   writePrivateDataPoint,
   writePublicDataPoint,
+  writeUsageDatapoint,
 }: Options): unknown {
   if (typeof env !== 'object') {
     return env;
@@ -26,6 +31,9 @@ export default function createFetchEnv({
     } satisfies AnalyticsEngineDataset,
     PUBLIC_DATASET: {
       writeDataPoint: writePublicDataPoint,
+    } satisfies AnalyticsEngineDataset,
+    USAGE: {
+      writeDataPoint: writeUsageDatapoint,
     } satisfies AnalyticsEngineDataset,
     ...env,
   };

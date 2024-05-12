@@ -10,7 +10,7 @@ This repository intends to support Visual Studio Code as its primary development
 environment. Its configurations in the
 [`.vscode` directory](https://github.com/quisido/quisi.do/tree/main/.vscode)
 are committed, and an official Code Workspace for the repository can be found in
-[`quisi.do.code-workspace`](https://github.com/quisido/quisi.do/blob/main/quisi.do.code-workspace).
+[`quisido.code-workspace`](https://github.com/quisido/quisi.do/blob/main/quisido.code-workspace).
 
 ## Contributing
 
@@ -22,3 +22,7 @@ commands in order:
   `set FIND_VISUALSTUDIO_PATH=%CD%\scripts\find-visualstudio.cs&&yarn install`
   to synchronize Yarn's version with its dependencies.
 - `yarn run up` to upgrade dependencies.
+
+## Commands
+
+- `yarn run dev` to run the application and its dependencies.

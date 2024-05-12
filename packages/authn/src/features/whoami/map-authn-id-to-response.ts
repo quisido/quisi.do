@@ -1,9 +1,11 @@
 import { WhoAmIResponseCode } from "@quisido/authn-shared";
+import { AccountNumber, UsageType } from "@quisido/workers-shared";
 import { Snapshot } from "proposal-async-context/src/index.js";
 import MetricName from "../../constants/metric-name.js";
 import StatusCode from "../../constants/status-code.js";
 import getTelemetry from "../../utils/get-telemetry.js";
 import getAuthnUserIdsNamespace from "../get-authn-user-ids-namespace.js";
+import getUsage from "../get-usage.js";
 import getResponseHeaders from "./get-response-headers.js";
 import handleInvalidAuthnId from "./handle-invalid-authn-id.js";
 
@@ -11,8 +13,14 @@ const BASE = 10;
 
 export default async function mapAuthnIdToResponse(authnId: string): Promise<Response> {
   const authnUserIds: KVNamespace = getAuthnUserIdsNamespace();
+  const use = getUsage();
 
   const snapshot: Snapshot = new Snapshot();
+
+  use({
+    account: AccountNumber.Quisido,
+    type: UsageType.KVRead,
+  });
   const id: string | null = await authnUserIds.get(authnId, 'text');
   return snapshot.run((): Response => {
     const { emitPrivateMetric, emitPublicMetric } = getTelemetry();

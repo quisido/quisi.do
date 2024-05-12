@@ -6,6 +6,8 @@ import TelemetryQueue from './telemetry-queue.js';
 export default class State {
   readonly #ctx: ExecutionContext;
 
+  #console: Console;
+
   #env: Record<string, unknown> | null = null;
 
   readonly #fetch: Fetcher['fetch'];
@@ -20,10 +22,12 @@ export default class State {
 
   public constructor(
     fetch: Fetcher['fetch'],
+    console: Console,
     request: Request,
     ctx: ExecutionContext,
     traceId: string,
   ) {
+    this.#console = console;
     this.#ctx = ctx;
     this.#fetch = fetch;
     this.#request = request;
@@ -67,7 +71,12 @@ export default class State {
 
   public setEnv(env: Record<string, unknown>): void {
     this.#env = env;
-    this.#telemetry = new TelemetryQueue(env, this.#ctx, this.#traceId);
+    this.#telemetry = new TelemetryQueue({
+      console: this.#console,
+      ctx: this.#ctx,
+      env,
+      traceId: this.#traceId,
+    });
   }
 
   public setReturnHref(): void {

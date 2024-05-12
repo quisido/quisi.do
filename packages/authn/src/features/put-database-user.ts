@@ -1,8 +1,10 @@
+import { AccountNumber, UsageType } from '@quisido/workers-shared';
 import { Snapshot } from 'proposal-async-context/src/index.js';
 import type Gender from '../constants/gender.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
 import getNowSeconds from '../utils/get-now-seconds.js';
 import getDatabase from './get-database.js';
+import getUsage from './get-usage.js';
 import putDatabaseUserMetadata from './put-database-user-metadata.js';
 
 interface Options {
@@ -28,6 +30,7 @@ export default async function putDatabaseUser(
   { email, firstName, fullName, gender }: Options,
 ): Promise<number> {
   const registrationTimestamp: number = getNowSeconds();
+  const use = getUsage();
 
   const db: D1Database = getDatabase();
   const usersStatement = db
@@ -35,6 +38,11 @@ export default async function putDatabaseUser(
     .bind(firstName, fullName, gender, registrationTimestamp);
 
   const snapshot: Snapshot = new Snapshot();
+
+  use({
+    account: AccountNumber.Quisido,
+    type: UsageType.D1Write,
+  });
   const {
     meta: {
       changes,

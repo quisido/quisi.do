@@ -1,13 +1,24 @@
+import { ErrorCode } from '@quisido/authn-shared';
+import { AccountNumber, UsageType } from '@quisido/workers-shared';
 import { mapUnknownToError } from 'fmrs';
 import MetricName from '../constants/metric-name.js';
 import type { TraceParent } from '../modules/trace-parent/index.js';
 import type { Metric } from '../types/metric.js';
 import isAnaylticsEngineDataset from '../utils/is-analytics-engine-dataset.js';
 import mapAnalyticsEngineDatasetToEmitter from '../utils/map-analytics-dataset-engine-to-emitter.js';
+import mapCauseToError from '../utils/map-cause-to-error.js';
 import mapRequestToTraceParent from '../utils/map-request-to-trace-parent.js';
 import TelemetryQueue from '../utils/telemetry-queue.js';
 
+interface Options {
+  readonly console: Console;
+  readonly ctx: ExecutionContext;
+  readonly env: Record<string, unknown>;
+  readonly traceId: string;
+}
+
 const HEXADECIMAL = 16;
+const ONCE = 1;
 const SINGLE = 1;
 
 // Current design does not allow optional dimensions. Set defaults.
@@ -41,12 +52,22 @@ const mapTraceParentToDimensions = ({
 });
 
 export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric> {
-  public constructor(
-    env: Record<string, unknown>,
-    ctx: ExecutionContext,
-    traceId: string,
-  ) {
+  public constructor({
+    console,
+    ctx,
+    env,
+    traceId,
+  }: Options) {
     super();
+
+    const { USAGE } = env;
+    if (!isAnaylticsEngineDataset(USAGE)) {
+      throw mapCauseToError({
+        code: ErrorCode.InvalidUsageDataset,
+        privateData: JSON.stringify(USAGE),
+        publicData: typeof USAGE,
+      });
+    }
 
     this.onPrivateError((err: Error): void => {
       // When given an `Error`, Cloudflare does not include `cause` or `stack`.
@@ -69,12 +90,15 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
     });
 
     const { PRIVATE_DATASET, PUBLIC_DATASET } = env;
-    this.setPrivateDataset(PRIVATE_DATASET);
-    this.setPublicDataset(PUBLIC_DATASET);
+    this.setPrivateDataset(PRIVATE_DATASET, USAGE);
+    this.setPublicDataset(PUBLIC_DATASET, USAGE);
     // Eventually: this.setTraceParent(request);
   }
 
-  public setPrivateDataset(dataset: unknown): void {
+  public setPrivateDataset(
+    dataset: unknown,
+    usage: AnalyticsEngineDataset,
+  ): void {
     if (typeof dataset === 'undefined') {
       this.emitPublicMetric({
         name: MetricName.MissingPrivateDataset,
@@ -97,9 +121,18 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
 
     const emit = mapAnalyticsEngineDatasetToEmitter(dataset);
     this.onPrivateMetric(emit);
+    this.onPrivateMetric((): void => {
+      usage.writeDataPoint({
+        doubles: [UsageType.AnalyticsEngineDatasetWriteDataPoint, ONCE],
+        indexes: [AccountNumber.Quisido.toString()],
+      });
+    });
   }
 
-  public setPublicDataset(dataset: unknown): void {
+  public setPublicDataset(
+    dataset: unknown,
+    usage: AnalyticsEngineDataset,
+  ): void {
     if (typeof dataset === 'undefined') {
       this.emitPublicMetric({
         name: MetricName.MissingPublicDataset,
@@ -122,6 +155,12 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
 
     const emit = mapAnalyticsEngineDatasetToEmitter(dataset);
     this.onPublicMetric(emit);
+    this.onPublicMetric((): void => {
+      usage.writeDataPoint({
+        doubles: [UsageType.AnalyticsEngineDatasetWriteDataPoint, ONCE],
+        indexes: [AccountNumber.Quisido.toString()],
+      });
+    });
   }
 
   public setTraceParent(request: Request): void {
