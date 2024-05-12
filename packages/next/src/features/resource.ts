@@ -18,7 +18,7 @@ import {
 } from '@opentelemetry/semantic-conventions';
 import { default as nextPackageJson } from 'next/package.json';
 import { default as packageJson } from '../../package.json';
-import GITHUB_SHA from '../constants/github-sha.js';
+import { GITHUB_SHA } from '../constants/github-sha.js';
 import getSemanticResourceNavigatorAttributes from '../utils/get-semantic-resource-navigator-attributes';
 import getTelemetrySdkLanguage from '../utils/get-telemetry-sdk-language.js';
 import mapPackageToSemanticResourceAttributes from '../utils/map-package-to-semantic-resource-attributes.js';
@@ -47,10 +47,10 @@ const DEPLOYMENT_ENVIRONMENT: string = validateString(
 export default class ResourceImpl extends Resource {
   public constructor(hostname: string) {
     super({
-      [SEMRESATTRS_DEPLOYMENT_ENVIRONMENT]: DEPLOYMENT_ENVIRONMENT,
       [SEMRESATTRS_CLOUD_ACCOUNT_ID]: CLOUD_ACCOUNT_ID,
       [SEMRESATTRS_CLOUD_PLATFORM]: CLOUD_PLATFORM,
       [SEMRESATTRS_CLOUD_PROVIDER]: CLOUD_PROVIDER,
+      [SEMRESATTRS_DEPLOYMENT_ENVIRONMENT]: DEPLOYMENT_ENVIRONMENT,
       [SEMRESATTRS_HOST_NAME]: hostname,
       [SEMRESATTRS_PROCESS_COMMAND]: process.argv0,
       [SEMRESATTRS_PROCESS_COMMAND_ARGS]: ARGV,

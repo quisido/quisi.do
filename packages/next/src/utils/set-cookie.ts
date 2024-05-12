@@ -34,7 +34,7 @@ export default function setCookie(
   const maxAge: number = mapExpiresMsToMaxAge(expiresMs);
   const attributes = [
     `__Secure-${key}=${value}`,
-    `max-age=${maxAge}`,
+    `max-age=${maxAge.toString()}`,
     `path=${path}`,
     'samesite=lax',
     'secure',

@@ -1,4 +1,4 @@
-type CloudflareRumPerformanceEvents = Record<
+export type CloudflareRumPerformanceEvents = Record<
   | 'connectionTime_avg'
   | 'connectionTimeP50'
   | 'connectionTimeP75'
@@ -49,5 +49,3 @@ type CloudflareRumPerformanceEvents = Record<
   | 'visits_sum',
   number | undefined
 >;
-
-export default CloudflareRumPerformanceEvents;

@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 const isDevelopment = false; // process.env.NODE_ENV === 'development'
 

@@ -1,7 +1,7 @@
 'use client';
 
 import useDatadog, { type Props } from 'react-datadog';
-import GITHUB_SHA from '../constants/github-sha.js';
+import { GITHUB_SHA } from '../constants/github-sha.js';
 import validateString from '../utils/validate-string.js';
 
 const APPLICATION_ID: string = validateString(process.env['DD_APPLICATION_ID']);

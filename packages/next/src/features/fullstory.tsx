@@ -1,7 +1,7 @@
 'use client';
 
 import { Fullstory } from 'fullstory-react';
-import type { PropsWithChildren, ReactNode } from 'react';
+import { type PropsWithChildren, type ReactNode } from 'react';
 
 export default function FullstoryFeature({ children }: PropsWithChildren): ReactNode {
   return (

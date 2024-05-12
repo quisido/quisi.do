@@ -20,7 +20,7 @@ export const ROBOTS_INFO: Omit<
   noarchive: false,
   nocache: false,
   noimageindex: false,
+  nositelinkssearchbox: false,
   nosnippet: false,
   notranslate: false,
-  nositelinkssearchbox: false,
 };

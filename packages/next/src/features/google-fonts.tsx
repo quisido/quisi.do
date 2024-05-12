@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
 import GoogleFonts from '../components/google-fonts.js';
-import FontWeight from '../constants/font-weight.js';
+import { FontWeight } from '../constants/font-weight.js';
 
 const NORMAL_BOLD: readonly FontWeight[] = [FontWeight.Normal, FontWeight.Bold];
 

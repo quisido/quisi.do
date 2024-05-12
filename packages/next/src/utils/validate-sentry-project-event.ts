@@ -11,8 +11,8 @@ import validateString from './validate-string.js';
 const validateContextsBrowser = (
   browser: unknown,
   browserContext: readonly string[],
-): BrowserContext => {
-  return validateObject(
+): BrowserContext =>
+  validateObject(
     browser,
     {
       name: validateString,
@@ -20,7 +20,6 @@ const validateContextsBrowser = (
     },
     browserContext,
   );
-};
 
 const validateLocation = (
   location: unknown,

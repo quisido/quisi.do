@@ -1,9 +1,23 @@
 type RecordKeyOf<T> = T extends Record<infer U, unknown> ? U : never;
 
+interface TokenColors {
+  // Readonly name?: string;
+  readonly scope: string | readonly string[];
+  readonly settings: Partial<Readonly<Record<string, string>>>;
+}
+
 type TokenColorKeys<T extends readonly TokenColors[]> =
   T[number]['scope'] extends string
     ? `${T[number]['scope']}.${RecordKeyOf<T[number]['settings']>}`
     : `${T[number]['scope'][number]}.${RecordKeyOf<T[number]['settings']>}`;
+
+interface VSCodeColorTheme {
+  // Readonly $schema: string; // 'vscode://schemas/color-theme'
+  readonly colors?: Readonly<Record<string, string>>;
+  // Readonly name: string;
+  readonly semanticTokenColors?: Readonly<Record<string, string>>;
+  readonly tokenColors?: readonly TokenColors[];
+}
 
 type FlatTokenColors<T extends VSCodeColorTheme> =
   T['tokenColors'] extends readonly TokenColors[]
@@ -14,20 +28,6 @@ type FlatVSCodeColorTheme<T extends VSCodeColorTheme> = T['colors'] &
   T['semanticTokenColors'] &
   FlatTokenColors<T>;
 
-interface TokenColors {
-  // Readonly name?: string;
-  readonly scope: string | readonly string[];
-  readonly settings: Partial<Readonly<Record<string, string>>>;
-}
-
-interface VSCodeColorTheme {
-  // Readonly $schema: string; // 'vscode://schemas/color-theme'
-  readonly colors?: Readonly<Record<string, string>>;
-  // Readonly name: string;
-  readonly semanticTokenColors?: Readonly<Record<string, string>>;
-  readonly tokenColors?: readonly TokenColors[];
-}
-
 const EMPTY_OBJECT: Readonly<Record<string, never>> = {};
 
 const mapObjectToEntries = <T extends Record<string, unknown>>(
@@ -35,7 +35,8 @@ const mapObjectToEntries = <T extends Record<string, unknown>>(
 ): [keyof T, T[keyof T]][] => Object.entries(obj) as [keyof T, T[keyof T]][];
 
 const mapTokenColorsToRecord = <T extends VSCodeColorTheme>(
-  { scope, settings }: TokenColors, // Required<T>['tokenColors'][number]
+  // // Required<T>['tokenColors'][number]
+  { scope, settings }: TokenColors,
 ): FlatTokenColors<T> => {
   const record: FlatTokenColors<T> = Object.assign(EMPTY_OBJECT, {});
   if (typeof scope === 'string') {

@@ -1,6 +1,6 @@
 {
   "name": "sentry-react",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "quisi.do <sentry-react@quisi.do>",
   "description": "A React component for instantiating Sentry",
   "homepage": "https://www.npmjs.com/package/sentry-react",
@@ -11,6 +11,16 @@
   "bugs": {
     "email": "sentry-react@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": {
+      "default": "./package.json"
+    }
   },
   "funding": {
     "type": "individual",

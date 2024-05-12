@@ -1,5 +1,5 @@
 export default function getCookie(key: string): string | null {
-  const cookies: readonly string[] = window.document.cookie.split(/;\s*/);
+  const cookies: readonly string[] = window.document.cookie.split(/;\s*/u);
 
   const targetCookieName = `__Secure-${key}`;
   for (const cookie of cookies) {

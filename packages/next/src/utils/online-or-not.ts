@@ -6,13 +6,6 @@ export interface Options {
   readonly token: string;
 }
 
-export interface UptimeChecks {
-  readonly errors: unknown[];
-  readonly messages: unknown[];
-  readonly result: UptimeChecksResult;
-  readonly success: boolean;
-}
-
 export interface UptimeChecksResult {
   readonly id: string;
   readonly lastQueued: string;
@@ -21,8 +14,15 @@ export interface UptimeChecksResult {
   readonly url: string;
 }
 
-function findUptimeChecks(value: unknown): value is UptimeChecks {
-  return (
+export interface UptimeChecks {
+  readonly errors: unknown[];
+  readonly messages: unknown[];
+  readonly result: UptimeChecksResult;
+  readonly success: boolean;
+}
+
+const findUptimeChecks = (value: unknown): value is UptimeChecks =>
+  (
     isRecord(value) &&
     Array.isArray(value['errors']) &&
     Array.isArray(value['messages']) &&
@@ -34,9 +34,8 @@ function findUptimeChecks(value: unknown): value is UptimeChecks {
     typeof value['result']['status'] === 'string' &&
     typeof value['result']['url'] === 'string'
   );
-}
 
-function validateUptimeChecks(value: unknown): UptimeChecks {
+const validateUptimeChecks = (value: unknown): UptimeChecks => {
   if (!findUptimeChecks(value)) {
     throw new Error(
       `Expected uptime checks, but received: ${typeof value} ${JSON.stringify(
@@ -46,37 +45,37 @@ function validateUptimeChecks(value: unknown): UptimeChecks {
   }
 
   return value;
-}
+};
 
 export default class OnlineOrNot {
-  private readonly _fetch: Window['fetch'];
+  readonly #fetch: Window['fetch'];
 
-  private readonly _headers: Headers;
+  readonly #headers: Headers;
 
-  private readonly _id: string;
+  readonly #id: string;
 
   public constructor({ fetch, id, token }: Readonly<Options>) {
-    this._fetch = fetch;
-    this._id = id;
+    this.#fetch = fetch;
+    this.#id = id;
 
-    this._headers = new Headers({
+    this.#headers = new Headers({
       Authorization: `Bearer ${token}`,
     });
   }
 
   private get requestInit(): RequestInit {
     return {
-      headers: this._headers,
+      headers: this.#headers,
       method: 'GET',
     };
   }
 
   private get url(): string {
-    return `https://api.onlineornot.com/v1/checks/${this._id}`;
+    return `https://api.onlineornot.com/v1/checks/${this.#id}`;
   }
 
   public check = async (): Promise<UptimeChecks> => {
-    const response: Response = await this._fetch(this.url, this.requestInit);
+    const response: Response = await this.#fetch(this.url, this.requestInit);
     const json: unknown = await response.json();
     return validateUptimeChecks(json);
   };

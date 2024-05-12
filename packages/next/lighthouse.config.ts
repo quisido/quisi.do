@@ -1,4 +1,4 @@
-import type { Config } from 'lighthouse';
+import { type Config } from 'lighthouse';
 
 const lightghouseConfig: Config = {
   extends: 'lighthouse:default',

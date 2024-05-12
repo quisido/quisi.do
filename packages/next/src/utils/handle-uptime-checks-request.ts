@@ -3,18 +3,16 @@ import OnlineOrNot, {
   type UptimeChecks as OnlineOrNotUptimeChecks,
 } from './online-or-not';
 
-function mapOnlineOrNotUptimeChecksToUptimeChecks({
+const mapOnlineOrNotUptimeChecksToUptimeChecks = ({
   errors,
   messages,
   result,
-}: Readonly<OnlineOrNotUptimeChecks>): UptimeChecks {
-  return {
-    errors,
-    messages,
-    lastChecked: new Date(result.lastQueued).getTime(),
-    status: result.status,
-  };
-}
+}: Readonly<OnlineOrNotUptimeChecks>): UptimeChecks => ({
+  errors,
+  lastChecked: new Date(result.lastQueued).getTime(),
+  messages,
+  status: result.status,
+});
 
 export default async function handleUptimeChecksRequest(): Promise<UptimeChecks> {
   const ONLINE_OR_NOT: OnlineOrNot = new OnlineOrNot({

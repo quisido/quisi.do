@@ -3,6 +3,7 @@ import {
   SEMRESATTRS_SERVICE_NAMESPACE,
   SEMRESATTRS_SERVICE_VERSION,
 } from '@opentelemetry/semantic-conventions';
+import split from './split.js';
 
 interface Package {
   readonly name: string;
@@ -11,15 +12,6 @@ interface Package {
 
 const reverse = <T extends readonly unknown[]>(arr: T): T =>
   [...arr].reverse() as unknown as T;
-
-const split = (
-  value: string,
-  delimeter: string,
-): [string, ...(string | undefined)[]] => {
-  const [first, ...rest] = value.split(delimeter);
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return [first!, ...rest];
-};
 
 export default function mapPackageToSemanticResourceAttributes({
   name,

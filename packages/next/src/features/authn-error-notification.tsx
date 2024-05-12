@@ -1,10 +1,10 @@
-import type { ErrorCode } from '@quisido/authn-shared';
+import { type ErrorCode } from '@quisido/authn-shared';
 import I18n from 'lazy-i18n';
-import type { ReactElement, ReactNode } from 'react';
-import mapHashToAuthnErrorCode from '../utils/map-hash-to-authn-error-code';
-import type { WithKey } from '../types/with-key.js';
-import type { NoActionNotification } from '../types/notification.js';
+import { type ReactElement, type ReactNode } from 'react';
+import { type NoActionNotification } from '../types/notification.js';
+import { type WithKey } from '../types/with-key.js';
 import mapAuthnErrorCodeToContent from '../utils/map-authn-error-code-to-content';
+import mapHashToAuthnErrorCode from '../utils/map-hash-to-authn-error-code';
 
 export interface Options {
   readonly onDismiss: VoidFunction;

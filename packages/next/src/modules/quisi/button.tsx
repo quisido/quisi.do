@@ -11,14 +11,18 @@ import useElementId from '../../hooks/use-element-id.js';
 import useEmit from '../../hooks/use-emit/index.js';
 import useTheme from '../../hooks/use-theme.js';
 import optional from '../../utils/optional.js';
+import validateString from '../../utils/validate-string.js';
+import styles from './button.module.scss';
 
 interface ButtonElementProps {
+  readonly className: string;
   readonly id: string;
   readonly onPress: VoidFunction;
   readonly style: CSSProperties;
 }
 
 interface ElementProps {
+  readonly className: string;
   readonly href?: string | undefined;
   readonly id: string;
   readonly onPress: VoidFunction;
@@ -26,6 +30,7 @@ interface ElementProps {
 }
 
 interface LinkElementProps {
+  readonly className: string;
   readonly href: string;
   readonly id: string;
   readonly onPress: VoidFunction;
@@ -39,12 +44,11 @@ export interface Props {
   readonly onClick?: VoidFunction | undefined;
 }
 
-const OUTLINE_WIDTH = 4;
-const HOVER_OFFSET = -2;
-const RAISED_OFFSET = -3;
+const CLASS_NAME: string = validateString(styles['button']);
 
 function ButtonElement({
   children,
+  className,
   id,
   onPress,
   style,
@@ -57,7 +61,7 @@ function ButtonElement({
   );
 
   return (
-    <button {...buttonProps} id={id} style={style}>
+    <button {...buttonProps} className={className} id={id} style={style}>
       {children}
     </button>
   );
@@ -65,6 +69,7 @@ function ButtonElement({
 
 function LinkElement({
   children,
+  className,
   href,
   id,
   onPress,
@@ -79,7 +84,7 @@ function LinkElement({
   );
 
   return (
-    <a {...linkProps} id={id} style={style}>
+    <a {...linkProps} className={className} id={id} style={style}>
       {children}
     </a>
   );
@@ -87,6 +92,7 @@ function LinkElement({
 
 function Element({
   children,
+  className,
   href,
   id,
   onPress,
@@ -94,13 +100,25 @@ function Element({
 }: PropsWithChildren<ElementProps>): ReactElement {
   if (typeof href === 'undefined') {
     return (
-      <ButtonElement id={id} onPress={onPress} style={style}>
+      <ButtonElement
+        className={className}
+        id={id}
+        onPress={onPress}
+        style={style}
+      >
         {children}
       </ButtonElement>
     );
   }
+
   return (
-    <LinkElement href={href} id={id} onPress={onPress} style={style}>
+    <LinkElement
+      className={className}
+      href={href}
+      id={id}
+      onPress={onPress}
+      style={style}
+    >
       {children}
     </LinkElement>
   );
@@ -122,28 +140,12 @@ export default function Button({
   return (
     <>
       <style type="text/css">{`
-#${id}:active,
-#${id}:active:hover {
-  margin-bottom: ${OUTLINE_WIDTH}px !important;
-  margin-left: ${OUTLINE_WIDTH}px !important;
-  margin-right: ${OUTLINE_WIDTH}px !important;
-  margin-top: ${OUTLINE_WIDTH}px !important;
-}
-
-#${id}:hover {
-  margin-bottom: ${OUTLINE_WIDTH - HOVER_OFFSET}px !important;
-  margin-left: ${OUTLINE_WIDTH + HOVER_OFFSET}px !important;
-  margin-right: ${OUTLINE_WIDTH - HOVER_OFFSET}px !important;
-  margin-top: ${OUTLINE_WIDTH + HOVER_OFFSET}px !important;
-}
-
 #${id}:not(:focus-visible) {
   outline-color: ${backgroundHex};
-  outline-style: solid;
-  outline-width: ${OUTLINE_WIDTH}px;
 }
 `}</style>
       <Element
+        className={CLASS_NAME}
         href={href}
         id={id}
         onPress={(): void => {
@@ -158,38 +160,8 @@ export default function Button({
         style={{
           backgroundColor: backgroundHex,
           borderColor: primaryHex,
-          borderRadius: 1,
-          borderImageSlice: '4',
           borderImageSource: `repeating-linear-gradient(45deg, ${primaryHex}, ${primaryHex} 1px, ${backgroundHex} 1px, ${backgroundHex} 4px)`,
-          borderImageRepeat: 'round',
-          borderImageWidth: 2,
-          borderStyle: 'dashed',
-          borderWidth: 2,
-          cursor: 'pointer',
-          display: 'inline-block',
-          fontFamily: '"Noto Sans", sans-serif',
-          fontSize: 16,
           fontWeight: primaryFontWeight,
-          marginBottom: OUTLINE_WIDTH - RAISED_OFFSET,
-          marginLeft: OUTLINE_WIDTH + RAISED_OFFSET,
-          marginRight: OUTLINE_WIDTH - RAISED_OFFSET,
-          marginTop: OUTLINE_WIDTH + RAISED_OFFSET,
-          paddingBottom: 12,
-          paddingLeft: 20,
-          paddingRight: 20,
-          paddingTop: 12,
-          transform: 'rotate(-1deg)',
-          transitionDelay: '0s',
-          transitionDuration: '150ms',
-          transitionProperty: [
-            'box-shadow',
-            'margin-bottom',
-            'margin-left',
-            'margin-right',
-            'margin-top',
-          ].join(', '),
-          transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-          userSelect: 'none',
         }}
       >
         {children}

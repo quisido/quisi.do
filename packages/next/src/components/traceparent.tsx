@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
 const HEX = '0123456789abcdef';
 const SPAN_ID_LENGTH = 16;

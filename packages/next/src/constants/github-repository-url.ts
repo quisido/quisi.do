@@ -1,4 +1,4 @@
-import GITHUB_REPOSITORY from '../constants/github-repository.js';
+import { GITHUB_REPOSITORY } from '../constants/github-repository.js';
 
 const getGithubRepositoryUrl = (): string | undefined => {
   if (typeof GITHUB_REPOSITORY === 'undefined') {

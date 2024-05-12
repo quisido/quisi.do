@@ -1,5 +1,5 @@
 import { type NextConfig } from 'next';
-import type { ExperimentalConfig } from 'next/dist/server/config-shared.js';
+import { type ExperimentalConfig } from 'next/dist/server/config-shared.js';
 import { cpus } from 'node:os';
 import { join } from 'node:path';
 import getVersion from './src/utils/get-version.js';
@@ -135,7 +135,7 @@ export default withNextJsBundleAnalyzer({
   },
 
   typescript: {
-    // TODO: 🔥🔥🔥 CHANGE MY BACK TO `false`! 🔥🔥🔥
+    // TODO: 🔥🔥🔥 CHANGE ME BACK TO `false`! 🔥🔥🔥
     ignoreBuildErrors: true,
     tsconfigPath: './tsconfig.prepack.json',
   },

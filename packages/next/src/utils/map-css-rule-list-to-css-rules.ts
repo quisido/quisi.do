@@ -6,8 +6,8 @@ export default function mapCssRuleListToCssRules(
   const rules = new Set<CSSRule>();
 
   const ruleCount: number = list.length;
-  for (let i = 0; i < ruleCount; i += INCREMENT) {
-    const rule: CSSRule | null = list.item(i);
+  for (let ri = 0; ri < ruleCount; ri += INCREMENT) {
+    const rule: CSSRule | null = list.item(ri);
     if (rule === null) {
       break;
     }

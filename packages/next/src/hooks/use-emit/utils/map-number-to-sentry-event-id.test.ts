@@ -1,7 +1,7 @@
 import mapNumberToSentryEventId from './map-number-to-sentry-event-id.js';
 
 const EXPECTED_LENGTH = 32;
-const HEXADECIMAL = /^[0-9a-f]+$/;
+const HEXADECIMAL = /^[0-9a-f]+$/u;
 const TEST_NUMBER: number = Date.now();
 
 describe('mapNumberToSentryEventId', (): void => {

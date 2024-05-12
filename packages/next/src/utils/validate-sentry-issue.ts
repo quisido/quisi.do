@@ -60,13 +60,13 @@ export default function validateSentryIssue(
       title: validateString,
       userCount: validateNumber,
 
-      // e.g. 'error'
+      // Example: 'error'
       level: validateString,
 
-      // e.g. 'unresolved'
+      // Example: 'unresolved'
       status: validateString,
 
-      // e.g. 'default'
+      // Example: 'default'
       type: validateString,
     },
     context,

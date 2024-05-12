@@ -1,5 +1,14 @@
+import { FullStory } from '@fullstory/browser';
 import { render } from '@testing-library/react';
+import { MockAwsRumProvider } from 'aws-rum-react';
+import { MockFullstory } from 'fullstory-react';
+import { type PropsWithChildren, type ReactElement } from 'react';
+import THEME from '../../constants/theme.js';
+import { HostnameProvider } from '../../contexts/hostname.js';
+import Theme from '../../contexts/theme.js';
 import Button from './button.js';
+
+const MOCK_FULLSTORY = Object.assign(jest.fn(), FullStory);
 
 describe('Button', (): void => {
   it('should have a matching background and outline color', (): void => {
@@ -7,6 +16,21 @@ describe('Button', (): void => {
       <Button feature="test">
         test children
       </Button>,
+      {
+        wrapper({ children }: PropsWithChildren): ReactElement {
+          return (
+            <HostnameProvider value="localhost">
+              <MockAwsRumProvider>
+                <MockFullstory FullStory={MOCK_FULLSTORY} orgId="test-org-id">
+                  <Theme.Provider value={THEME}>
+                    {children}
+                  </Theme.Provider>
+                </MockFullstory>
+              </MockAwsRumProvider>
+            </HostnameProvider>
+          );
+        },
+      },
     );
 
     const backgroundColor: string =

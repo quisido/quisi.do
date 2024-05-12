@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Div from '../modules/quisi/div.jsx';
 import Header from '../modules/quisi/header.jsx';
 import Section from '../modules/quisi/section.jsx';

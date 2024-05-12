@@ -3,7 +3,7 @@
 import { type Integration } from '@sentry/types';
 import { type ReactElement, type ReactNode } from 'react';
 import SentryReact from 'sentry-react';
-import GITHUB_SHA from '../../constants/github-sha.js';
+import { GITHUB_SHA } from '../../constants/github-sha.js';
 import validateString from '../../utils/validate-string.js';
 import useIntegrations from './use-integrations.js';
 

@@ -25,24 +25,23 @@ const THE_NUMBER_OF_NUMBERS_BETWEEN_THE_BEGINNING_OF_THE_SET_OF_WHOLE_NUMBERS_AN
       THE_BEGINNING_OF_THE_SET_OF_WHOLE_NUMBERS,
   );
 
-const mapRgbaToHex = (
-  r10: number,
-  g10: number,
-  b10: number,
-  aFloat: number = OPAGUE,
-): string => {
-  const a: number = Math.round(
+const mapRgbaToHex = ([
+  r10,
+  g10,
+  b10,
+  aFloat = OPAGUE,
+]: readonly [number, number, number, number | undefined]): string => {
+  const alpha: number = Math.round(
     aFloat *
       (HEX**DIGITS -
         THE_NUMBER_OF_NUMBERS_BETWEEN_THE_BEGINNING_OF_THE_SET_OF_WHOLE_NUMBERS_AND_THE_BEGINNING_OF_THE_SET_OF_NATURAL_NUMBERS),
   );
-  return `${mapRgbToHex([r10, g10, b10])}${mapDecimalToHexadecimal(a)}`;
+  return `${mapRgbToHex([r10, g10, b10])}${mapDecimalToHexadecimal(alpha)}`;
 };
 
 const mapRowToElements = (row: readonly RGBA[], rowIndex: number): string => {
-  const mapRgbaToElement = (column: RGBA, columnIndex: number): string => `<rect height="1" style="fill: ${mapRgbaToHex(
-      ...column,
-    )}" width="1" x="${columnIndex}" y="${rowIndex}" />`;
+  const mapRgbaToElement = (column: RGBA, columnIndex: number): string =>
+    `<rect height="1" style="fill: ${mapRgbaToHex(column)}" width="1" x="${columnIndex.toString()}" y="${rowIndex.toString()}" />`;
 
   return row.map(mapRgbaToElement).join('');
 };
@@ -53,7 +52,7 @@ export default function createDataUrl(...rows: readonly Row[]): string {
 
   const height: number = rows.length;
   const width: number = firstRow.length;
-  const svg = `<svg height="${height}" viewBox="0 0 ${width} ${height}" width="${width}" xmlns="https://www.w3.org/2000/svg">${rows
+  const svg = `<svg height="${height.toString()}" viewBox="0 0 ${width.toString()} ${height.toString()}" width="${width.toString()}" xmlns="https://www.w3.org/2000/svg">${rows
     .map(mapRowToElements)
     .join('')}</svg>`;
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;

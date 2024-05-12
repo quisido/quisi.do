@@ -1,0 +1,50 @@
+$hover-offset: -2px;
+$outline-width: 4px;
+$raised-offset: -3px;
+
+.button {
+  border-radius: 1px;
+  border-image-slice: 4;
+  border-image-repeat: round;
+  border-image-width: 2px;
+  border-style: dashed;
+  border-width: 2px;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
+  margin-bottom: $outline-width - $raised-offset;
+  margin-left: $outline-width + $raised-offset;
+  margin-right: $outline-width - $raised-offset;
+  margin-top: $outline-width + $raised-offset;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 12px;
+  transform: rotate(-1deg);
+  transition-delay: 0s;
+  transition-duration: 150ms;
+  transition-property: box-shadow, margin-bottom, margin-left, margin-right, margin-top;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.button:active,
+.button:active:hover {
+  margin-bottom: $outline-width !important;
+  margin-left: $outline-width !important;
+  margin-right: $outline-width !important;
+  margin-top: $outline-width !important;
+}
+
+.button:hover {
+  margin-bottom: ($outline-width - $hover-offset) !important;
+  margin-left: ($outline-width + $hover-offset) !important;
+  margin-right: ($outline-width - $hover-offset) !important;
+  margin-top: ($outline-width + $hover-offset) !important;
+}
+
+.button:not(:focus-visible) {
+  outline-style: solid;
+  outline-width: $outline-width;
+}

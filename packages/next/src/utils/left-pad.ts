@@ -5,11 +5,11 @@ export default function leftPad(
   length: number = DEFAULT_LENGTH,
 ): string {
   if (typeof num === 'number') {
-    return leftPad(n.toString(), length);
+    return leftPad(num.toString(), length);
   }
 
   if (num.length < length) {
-    const zeroes: string = '0'.repeat(length - n.length);
+    const zeroes: string = '0'.repeat(length - num.length);
     return `${zeroes}${num}`;
   }
 

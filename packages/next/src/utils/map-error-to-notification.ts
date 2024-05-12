@@ -5,6 +5,7 @@ export default function mapErrorToNotification(err: unknown): Notification {
   return {
     icon: '⚠',
     type: 'error',
+
     Message(): string {
       return mapUnknownToString(err);
     },

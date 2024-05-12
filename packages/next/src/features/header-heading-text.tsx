@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import usePathname from '../hooks/use-pathname.js';
 import Link from '../modules/quisi/link.jsx';
 import validateString from '../utils/validate-string.js';

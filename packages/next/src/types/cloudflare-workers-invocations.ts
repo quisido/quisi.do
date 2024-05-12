@@ -1,5 +1,3 @@
-type CloudflareWorkersInvocations = OptionalMetrics & RequiredMetrics;
-
 type OptionalMetrics = Record<
   | 'cpuTime_min'
   | 'cpuTimeP25'
@@ -47,4 +45,4 @@ type RequiredMetrics = Record<
   number
 >;
 
-export default CloudflareWorkersInvocations;
+export type CloudflareWorkersInvocations = OptionalMetrics & RequiredMetrics;

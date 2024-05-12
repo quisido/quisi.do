@@ -1,7 +1,7 @@
 import type SentryIssue from '../../../types/sentry-issue.js';
 
 // TODO: Turn these into individual metrics.
-const LOADING_CSS_CHUNK_FAILED = /^Error: Loading CSS chunk \d+ failed.$/;
+const LOADING_CSS_CHUNK_FAILED = /^Error: Loading CSS chunk \d+ failed.$/u;
 
 const TITLES = new Set<string>([
   'Error: ResizeObserver loop completed with undelivered notifications.',

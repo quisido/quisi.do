@@ -1,5 +1,4 @@
-import type { ReadonlyURLSearchParams } from 'next/navigation.js';
-import { useSearchParams } from 'next/navigation.js';
+import { useSearchParams, type ReadonlyURLSearchParams } from 'next/navigation.js';
 
 export default function useSearch(): string {
   const searchParams: ReadonlyURLSearchParams = useSearchParams();

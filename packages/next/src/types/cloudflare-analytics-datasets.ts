@@ -1,5 +1,5 @@
-import type RumPerformanceEvents from './cloudflare-rum-performance-events.js';
-import type WorkersInvocations from './cloudflare-workers-invocations.js';
+import { type CloudflareRumPerformanceEvents } from './cloudflare-rum-performance-events.js';
+import { type CloudflareWorkersInvocations } from './cloudflare-workers-invocations.js';
 
 type WithKey<K extends number | string, T> = HasKey<K> & T;
 
@@ -33,9 +33,9 @@ interface HttpRequests1hGroups {
 
 export default interface CloudflareAnalyticsDatasets {
   readonly httpRequests1hGroups: HttpRequests1hGroups;
-  readonly rumPerformanceEventsAdaptiveGroups: RumPerformanceEvents;
+  readonly rumPerformanceEventsAdaptiveGroups: CloudflareRumPerformanceEvents;
   readonly workersAnalyticsEngineAdaptiveGroups: Record<'count', number>;
-  readonly workersInvocationsAdaptive: WorkersInvocations;
+  readonly workersInvocationsAdaptive: CloudflareWorkersInvocations;
   readonly rumPageloadEventsAdaptiveGroups: Record<
     'count' | 'sampleInterval_avg' | 'visits_sum',
     number

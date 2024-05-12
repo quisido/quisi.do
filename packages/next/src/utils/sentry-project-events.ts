@@ -23,16 +23,16 @@ const mapAuthTokenToRequestInit = (token: string): RequestInit => ({
 });
 
 export default class SentryProjectEvents {
-  private readonly _authToken: string;
+  readonly #authToken: string;
 
-  private readonly _fetch: (
+  readonly #fetch: (
     input: string,
     init: RequestInit,
   ) => Promise<Response>;
 
-  private readonly _organizationSlug: string;
+  readonly #organizationSlug: string;
 
-  private readonly _projectSlug: string;
+  readonly #projectSlug: string;
 
   public constructor({
     authToken,
@@ -40,24 +40,24 @@ export default class SentryProjectEvents {
     organizationSlug,
     projectSlug,
   }: Readonly<Options>) {
-    this._authToken = authToken;
-    this._fetch = fetch;
-    this._organizationSlug = organizationSlug;
-    this._projectSlug = projectSlug;
+    this.#authToken = authToken;
+    this.#fetch = fetch;
+    this.#organizationSlug = organizationSlug;
+    this.#projectSlug = projectSlug;
   }
 
   private get requestInit(): RequestInit {
-    return mapAuthTokenToRequestInit(this._authToken);
+    return mapAuthTokenToRequestInit(this.#authToken);
   }
 
   private get url(): string {
-    return `https://sentry.io/api/0/projects/${this._organizationSlug}/${this._projectSlug}/events/?full=true`;
+    return `https://sentry.io/api/0/projects/${this.#organizationSlug}/${this.#projectSlug}/events/?full=true`;
   }
 
   public readonly handleRequest = async (): Promise<
     readonly SentryProjectEvent[]
   > => {
-    const response: Response = await this._fetch(this.url, this.requestInit);
+    const response: Response = await this.#fetch(this.url, this.requestInit);
 
     const json: unknown = await response.json();
     if (isSentryError(json)) {

@@ -4,10 +4,10 @@ interface EnumUtils<V extends number | string> {
 }
 
 export default function createEnumUtils<V extends number | string>(
-  t: Record<string, V>,
+  enumObj: Record<string, V>,
   name: string,
 ): EnumUtils<V> {
-  const values = new Set<V>(Object.values(t));
+  const values = new Set<V>(Object.values(enumObj));
   const isType = (value: unknown): value is V =>
     Set.prototype.has.call(values, value);
 

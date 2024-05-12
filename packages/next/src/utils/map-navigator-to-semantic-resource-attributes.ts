@@ -38,7 +38,8 @@ export default function mapNavigatorToSemanticResourceAttributes(
     try {
       return validateString(navigator.oscpu);
     } catch (err: unknown) {
-      return;
+      // Fail gracefully.
+      return undefined;
     }
   };
 

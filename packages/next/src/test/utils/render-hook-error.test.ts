@@ -1,9 +1,7 @@
 /// <reference types="jest" />
 import renderHookError from './render-hook-error.js';
 
-function useTestHook(): null {
-  return null;
-}
+const useTestHook = (): null => null;
 
 describe('renderHookError', (): void => {
   it('should throw an error when the hook does not throw an error', (): void => {

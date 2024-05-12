@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import sign from './sign.js';
 
 const NONE = 0;
