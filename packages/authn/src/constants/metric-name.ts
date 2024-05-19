@@ -49,6 +49,7 @@ enum MetricName {
   AuthnIdCreated = 'authn-id.created',
   AuthnIdError = 'authn-id.error',
   InvalidUsageDataset = 'dataset.usage.invalid',
+  MissingUsageDataset = 'dataset.usage.missing',
 }
 
 export default MetricName;

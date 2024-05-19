@@ -1,14 +1,14 @@
-/// <reference types="jest" />
 import { renderHook } from '@testing-library/react';
 import { AwsRum } from 'aws-rum-web';
 import type { PropsWithChildren, ReactElement } from 'react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AwsRumProvider, useAwsRum } from '../../index.js';
 
 const WINDOW_FETCH = window.fetch;
 
 describe('AwsRumProvider', (): void => {
   beforeEach((): void => {
-    window.fetch = jest.fn();
+    window.fetch = vi.fn();
   });
 
   afterEach((): void => {

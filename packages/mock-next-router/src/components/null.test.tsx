@@ -1,5 +1,5 @@
-/// <reference types="jest" />
 import { render } from '@testing-library/react';
+import { describe, it } from 'vitest';
 import Null from './null.js';
 
 describe('Null', (): void => {

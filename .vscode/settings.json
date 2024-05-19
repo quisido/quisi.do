@@ -14,19 +14,20 @@
     80
   ],
   "files.exclude": {
+    ".wrangler/": true,
     ".yarn/__virtual__/": true,
     ".yarn/cache/": true,
     ".yarn/sdks/": true,
     ".yarn/unplugged/": true,
     ".yarn/install-state.gz": true,
-    "jest/": true,
+    "coverage/": true,
     "node_modules/": true,
     "packages/": true,
     "sarif/": true,
     ".eslintcache": true,
     ".pnp.cjs": true,
     ".pnp.loader.mjs": true,
-    "jest.config.cjs": true,
+    "vitest.config.ts.timestamp-*-*.mjs": true,
     "yarn.lock": true
   },
   "search.exclude": {
@@ -34,6 +35,7 @@
     "**/.idea/": true,
     "**/.next/": true,
     "**/.nyc_output/": true,
+    "**/.wrangler/": true,
     "**/.yarn/": true,
     "**/build/": true,
     "**/coverage/": true,

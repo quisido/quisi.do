@@ -1,5 +1,6 @@
+/coverage/
 /dist/
-/jest/
+/node_modules/
 /.eslintcache
 /*.cpuprofile
 /*.iml

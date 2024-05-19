@@ -1,7 +1,7 @@
 {
-  "exclude": ["dist/", "jest/"],
+  "exclude": ["coverage/", "dist/"],
   "extends": "../../tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts"],
   "compilerOptions": {
     "lib": ["ESNext"],
     "noEmit": true,

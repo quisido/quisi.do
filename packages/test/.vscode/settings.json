@@ -1,8 +1,10 @@
 {
   "files.exclude": {
     "dist/": true,
+    ".attw.json": true,
     ".eslintcache": true,
     "*.cpuprofile": true,
-    "*.tsbuildinfo": true
+    "*.tsbuildinfo": true,
+    "vitest.config.ts.timestamp-*-*.mjs": true
   }
 }

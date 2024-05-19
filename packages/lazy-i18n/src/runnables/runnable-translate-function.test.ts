@@ -1,11 +1,11 @@
-/// <reference types="jest" />
+import { describe, expect, it, vi } from 'vitest';
 import RunnableTranslateFunction from './runnable-translate-function.js';
 
 const ONCE = 1;
 
 describe('RunnableTranslateFunction', (): void => {
   it('should emit loadTranslations when they have not loaded', (): void => {
-    const MOCK_LOAD_TRANSLATIONS = jest.fn();
+    const MOCK_LOAD_TRANSLATIONS = vi.fn();
     const runnable: RunnableTranslateFunction = new RunnableTranslateFunction(
       {},
     );
@@ -25,7 +25,7 @@ describe('RunnableTranslateFunction', (): void => {
   });
 
   it('should emit loadFallbackTranslations when they have not loaded', (): void => {
-    const MOCK_LOAD_FALLBACK_TRANSLATIONS = jest.fn();
+    const MOCK_LOAD_FALLBACK_TRANSLATIONS = vi.fn();
     const runnable: RunnableTranslateFunction = new RunnableTranslateFunction({
       translations: {
         one: 'two',
@@ -50,7 +50,7 @@ describe('RunnableTranslateFunction', (): void => {
   });
 
   it('should emit notFound when no translations exist', (): void => {
-    const MOCK_NOT_FOUND = jest.fn();
+    const MOCK_NOT_FOUND = vi.fn();
     const runnable: RunnableTranslateFunction = new RunnableTranslateFunction({
       fallbackTranslations: {
         three: 'four',

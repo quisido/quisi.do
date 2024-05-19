@@ -1,4 +1,4 @@
-import assert from "node:assert";
+import { assert, describe, expect, it } from "vitest";
 
 export default function describePackageJsonScripts(packageJson: object): void {
   describe('scripts', (): void => {
@@ -22,16 +22,6 @@ export default function describePackageJsonScripts(packageJson: object): void {
       expect(scripts['eslint:fix']).toBe("eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0");
     });
 
-    it('should have Jest scripts', (): void => {
-      assert('jest' in scripts);
-      expect(scripts.jest).toBe('jest --config jest.config.cjs');
-
-      assert('jest:watch' in scripts);
-      expect(scripts['jest:watch']).toBe(
-        'jest --config jest.config.cjs --watch',
-      );
-    });
-
     it('should have prepack scripts', (): void => {
       assert('prepack' in scripts);
       expect(scripts.prepack).toBe('yarn run tsc');
@@ -40,7 +30,7 @@ export default function describePackageJsonScripts(packageJson: object): void {
     it('should have prepublish scripts', (): void => {
       assert('prepublish' in scripts);
       expect(scripts.prepublish).toBe(
-        'concurrently --kill-others-on-fail --names attw,eslint,jest "yarn run attw" "yarn run eslint" "yarn run jest"',
+        'concurrently --kill-others-on-fail --names attw,eslint,vitest "yarn run attw" "yarn run eslint" "yarn run vitest:run"',
       );
     });
 
@@ -49,6 +39,17 @@ export default function describePackageJsonScripts(packageJson: object): void {
       expect(scripts.tsc).toBe(
         'tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json',
       );
+    });
+
+    it('should have vitest scripts', (): void => {
+      assert('vitest' in scripts);
+      expect(scripts.vitest).toBe('vitest');
+
+      assert('vitest:run' in scripts);
+      expect(scripts['vitest:run']).toBe('vitest run');
+
+      assert('vitest:watch' in scripts);
+      expect(scripts['vitest:watch']).toBe('vitest watch');
     });
   });
 }

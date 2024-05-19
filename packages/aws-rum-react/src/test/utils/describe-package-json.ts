@@ -1,4 +1,4 @@
-import assert from 'node:assert';
+import { assert, describe } from 'vitest';
 import describePackageJsonBugs from './describe-package-json-bugs.js';
 import describePackageJsonDevDependencies from './describe-package-json-dev-dependencies.js';
 import describePackageJsonFunding from './describe-package-json-funding.js';

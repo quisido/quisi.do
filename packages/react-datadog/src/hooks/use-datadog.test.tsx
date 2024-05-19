@@ -2,43 +2,44 @@ import type { datadogRum } from '@datadog/browser-rum';
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { StrictMode } from 'react';
+import { describe, expect, it, vi } from 'vitest';
 import DatadogRumContext from '../contexts/datadog-rum.js';
 import useDatadog from '../index.js';
 import composeComponents from '../test/utils/compose-components.js';
 import type User from '../types/user.js';
 
 const ONCE = 1;
-const TEST_INIT = jest.fn();
-const TEST_REMOVE_USER = jest.fn();
-const TEST_SET_USER = jest.fn();
-const TEST_START_SESSION_REPLAY_RECORDING = jest.fn();
-const TEST_STOP_SESSION_REPLAY_RECORDING = jest.fn();
+const TEST_INIT = vi.fn();
+const TEST_REMOVE_USER = vi.fn();
+const TEST_SET_USER = vi.fn();
+const TEST_START_SESSION_REPLAY_RECORDING = vi.fn();
+const TEST_STOP_SESSION_REPLAY_RECORDING = vi.fn();
 const TWICE = 2;
 
 const TEST_RUM: typeof datadogRum = {
-  addAction: jest.fn(),
-  addError: jest.fn(),
-  addFeatureFlagEvaluation: jest.fn(),
-  addTiming: jest.fn(),
-  clearGlobalContext: jest.fn(),
+  addAction: vi.fn(),
+  addError: vi.fn(),
+  addFeatureFlagEvaluation: vi.fn(),
+  addTiming: vi.fn(),
+  clearGlobalContext: vi.fn(),
   clearUser: TEST_REMOVE_USER,
-  getGlobalContext: jest.fn(),
-  getInitConfiguration: jest.fn(),
-  getInternalContext: jest.fn(),
-  getSessionReplayLink: jest.fn(),
-  getUser: jest.fn(),
+  getGlobalContext: vi.fn(),
+  getInitConfiguration: vi.fn(),
+  getInternalContext: vi.fn(),
+  getSessionReplayLink: vi.fn(),
+  getUser: vi.fn(),
   init: TEST_INIT,
-  onReady: jest.fn(),
-  removeGlobalContextProperty: jest.fn(),
-  removeUserProperty: jest.fn(),
-  setGlobalContext: jest.fn(),
-  setGlobalContextProperty: jest.fn(),
-  setTrackingConsent: jest.fn(),
+  onReady: vi.fn(),
+  removeGlobalContextProperty: vi.fn(),
+  removeUserProperty: vi.fn(),
+  setGlobalContext: vi.fn(),
+  setGlobalContextProperty: vi.fn(),
+  setTrackingConsent: vi.fn(),
   setUser: TEST_SET_USER,
-  setUserProperty: jest.fn(),
+  setUserProperty: vi.fn(),
   startSessionReplayRecording: TEST_START_SESSION_REPLAY_RECORDING,
-  startView: jest.fn(),
-  stopSession: jest.fn(),
+  startView: vi.fn() as typeof datadogRum['startView'],
+  stopSession: vi.fn(),
   stopSessionReplayRecording: TEST_STOP_SESSION_REPLAY_RECORDING,
   version: '0.0.0',
 };

@@ -1,12 +1,12 @@
-/// <reference types="jest" />
 import { FullStory } from '@fullstory/browser';
 import { render } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { MockFullstory } from '../index.js';
 
 const ONCE = 1;
-const TEST_FULLSTORY = Object.assign(jest.fn(), FullStory);
-const TEST_INIT = jest.fn();
-const TEST_IS_INITIALIZED = jest.fn();
+const TEST_FULLSTORY = Object.assign(vi.fn(), FullStory);
+const TEST_INIT = vi.fn();
+const TEST_IS_INITIALIZED = vi.fn();
 
 describe('Fullstory', (): void => {
   beforeEach((): void => {

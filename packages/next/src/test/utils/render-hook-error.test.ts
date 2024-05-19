@@ -1,4 +1,4 @@
-/// <reference types="jest" />
+import { describe, expect, it } from 'vitest';
 import renderHookError from './render-hook-error.js';
 
 const useTestHook = (): null => null;

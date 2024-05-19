@@ -1,5 +1,5 @@
-/// <reference types="jest" />
 import { OSTYPEVALUES_WINDOWS } from '@opentelemetry/semantic-conventions';
+import { describe, expect, it } from 'vitest';
 import mapOscpuToType from './map-oscpu-to-type.js';
 
 describe('mapOscpuToType', (): void => {

@@ -1,10 +1,10 @@
-/// <reference types="jest" />
 import { act, renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
+import { describe, expect, it, vi } from 'vitest';
 import { MockAwsRumProvider, useRecordPageView } from '../index.js';
 
 const ONCE = 1;
-const TEST_RECORD_PAGE_VIEW = jest.fn<unknown, [string]>();
+const TEST_RECORD_PAGE_VIEW = vi.fn();
 
 describe('useRecordError', (): void => {
   it('should call recordError', (): void => {

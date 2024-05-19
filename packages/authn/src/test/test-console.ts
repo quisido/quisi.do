@@ -1,6 +1,8 @@
-export const TEST_CONSOLE_ERROR = jest.fn();
-export const TEST_CONSOLE_LOG = jest.fn();
-export const TEST_CONSOLE_WARN = jest.fn();
+import { vi } from "vitest";
+
+export const TEST_CONSOLE_ERROR = vi.fn();
+export const TEST_CONSOLE_LOG = vi.fn();
+export const TEST_CONSOLE_WARN = vi.fn();
 
 export const TEST_CONSOLE: Console = {
   ...console,

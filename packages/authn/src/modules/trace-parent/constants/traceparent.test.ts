@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import assert from '../../../utils/assert.js';
 import type { TraceParentGroups } from '../types/trace-parent-groups.js';
 import TRACEPARENT from './traceparent.js';

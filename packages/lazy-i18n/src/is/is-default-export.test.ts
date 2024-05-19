@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import isDefaultExport from './is-default-export.js';
 
 const FALSEY_NUMBER = 0;

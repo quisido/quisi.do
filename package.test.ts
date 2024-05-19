@@ -1,6 +1,5 @@
-/// <reference types="jest" />
-import assert from 'node:assert';
 import { readFileSync, readdirSync } from 'node:fs';
+import { assert, describe, expect, it } from 'vitest';
 import { scripts } from './package.json';
 
 const SECOND = 1;

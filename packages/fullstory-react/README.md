@@ -39,13 +39,14 @@ To mock the FullStory API in unit tests, wrap your component or hook with the
 ```jsx
 import { render } from '@testing-library/react';
 import { MockFullStory } from 'fullstory-react';
+import { vi } from 'vitest';
 import MyComponent from './my-component.js';
 
 const ONCE = 1;
 
 describe('MyComponent', () => {
   it('should initialize FullStory', () => {
-    const mockInit = jest.fn();
+    const mockInit = vi.fn();
 
     render(<MyComponent />, {
       wrapper({ children }) {
@@ -60,13 +61,13 @@ describe('MyComponent', () => {
   });
 
   it('should shutdown FullStory on unmount', () => {
-    const mockShutdown = jest.fn();
+    const mockShutdown = vi.fn();
 
     const { unmount } = render(<MyComponent />, {
       wrapper({ children }) {
         return (
           <MockFullStory
-            init={jest.fn()}
+            init={vi.fn()}
             onShutdown={mockShutdown}
           >
             {children}

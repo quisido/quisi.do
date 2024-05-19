@@ -1,5 +1,5 @@
-/// <reference types="jest" />
 import { render } from '@testing-library/react';
+import { describe, it } from 'vitest';
 import NumberFormat from '../../index.js';
 
 describe('NumberFormat', (): void => {

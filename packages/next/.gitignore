@@ -7,7 +7,6 @@
 /cypress/downloads/
 /cypress/screenshots/
 /cypress/videos/
-/jest/
 /node_modules/
 /out/
 /.eslintcache

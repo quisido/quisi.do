@@ -1,11 +1,12 @@
 import { FullStory } from '@fullstory/browser';
 import { act, renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
+import { describe, expect, it, vi } from 'vitest';
 import { MockFullstory, useFullstory } from '../index.js';
 
 const ONCE = 1;
-const TEST_FULLSTORY = Object.assign(jest.fn(), FullStory);
-const TEST_SHUTDOWN = jest.fn();
+const TEST_FULLSTORY = Object.assign(vi.fn(), FullStory);
+const TEST_SHUTDOWN = vi.fn();
 
 describe('mapV2OperationHandlersToApi', (): void => {
   it('should call a mocked FullStory API', (): void => {

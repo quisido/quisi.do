@@ -1,4 +1,4 @@
-/// <reference types="jest" />
+import { afterEach, describe, expect, it } from 'vitest';
 import getVersion from './get-version.js';
 
 const setGitHubSha = (value: string): void => {

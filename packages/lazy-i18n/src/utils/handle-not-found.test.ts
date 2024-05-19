@@ -1,4 +1,4 @@
-/// <reference types="jest" />
+import { describe, expect, it } from 'vitest';
 import handleNotFound from './handle-not-found.js';
 
 describe('handleNotFound', (): void => {

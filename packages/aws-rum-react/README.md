@@ -226,11 +226,12 @@ function MyComponent(): null {
 import { render } from '@testing-library/react';
 import { MockAwsRumProvider } from 'aws-rum-react';
 import type { PropsWithChildren, ReactElement } from 'react';
+import { vi } from 'vitest';
 import MyComponent from './MyComponent';
 
 describe('MyComponent', (): void => {
   it('should record an error', (): void => {
-    const TEST_RECORD_ERROR = jest.fn();
+    const TEST_RECORD_ERROR = vi.fn();
 
     render(<MyComponent />, {
       wrapper({ children }: PropsWithChildren): ReactElement {

@@ -1,7 +1,8 @@
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import getHead from './get-head.js';
 
 const FIRST = 0;
-const TEST_HEAD: HTMLHeadElement = document.createElement('head');
+const TEST_HEAD: HTMLHeadElement = window.document.createElement('head');
 
 const appendHead = (): void => {
   window.document.body.appendChild(TEST_HEAD);

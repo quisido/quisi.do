@@ -1,3 +1,4 @@
+import { expect, vi } from 'vitest';
 import stateVar from '../constants/state-var.js';
 import State from '../features/state.js';
 import assert from '../utils/assert.js';
@@ -17,15 +18,15 @@ interface Result<R> {
 }
 
 const ONCE = 1;
-const TEST_LOG_PRIVATE_ERROR = jest.fn();
+const TEST_LOG_PRIVATE_ERROR = vi.fn();
 const TEST_SESSION_ID = '0123456789abcdef';
-const TEST_WRITE_PRIVATE_DATAPOINT = jest.fn();
-const TEST_WRITE_PUBLIC_DATAPOINT = jest.fn();
-const TEST_WRITE_USAGE_DATAPOINT = jest.fn();
+const TEST_WRITE_PRIVATE_DATAPOINT = vi.fn();
+const TEST_WRITE_PUBLIC_DATAPOINT = vi.fn();
+const TEST_WRITE_USAGE_DATAPOINT = vi.fn();
 
 const TEST_CTX: ExecutionContext = {
-  passThroughOnException: jest.fn(),
-  waitUntil: jest.fn(),
+  passThroughOnException: vi.fn(),
+  waitUntil: vi.fn(),
 };
 
 const TEST_ENV: Record<string, unknown> = {
@@ -44,7 +45,7 @@ const TEST_ENV: Record<string, unknown> = {
 export default function withTestState<R>(fn: () => R): Result<R> {
   // Create a mocked state implementation.
   const state: State = new State(
-    jest.fn(),
+    vi.fn(),
     TEST_CONSOLE,
     mapSessionIdToRequest(TEST_SESSION_ID),
     TEST_CTX,

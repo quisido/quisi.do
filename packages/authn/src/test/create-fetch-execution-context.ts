@@ -1,8 +1,10 @@
+import { vi } from "vitest";
+
 export default function createFetchExecutionContext(
   waitUntil: (promise: Promise<unknown>) => void,
 ): ExecutionContext {
   return {
-    passThroughOnException: jest.fn(),
+    passThroughOnException: vi.fn(),
     waitUntil,
   };
 }

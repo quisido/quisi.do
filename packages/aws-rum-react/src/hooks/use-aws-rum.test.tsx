@@ -1,4 +1,4 @@
-/// <reference types="jest" />
+import { describe, expect, it } from 'vitest';
 import { useAwsRum } from '../index.js';
 import renderHookError from '../test/utils/render-hook-error.js';
 

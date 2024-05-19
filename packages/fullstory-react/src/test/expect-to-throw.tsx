@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
 import { Component, type PropsWithChildren, type ReactElement, type ReactNode } from "react";
+import { expect, vi } from "vitest";
 
 interface State {
   readonly error?: Error | undefined;
@@ -15,10 +16,10 @@ export default function expectToThrow(
   useHook: VoidFunction,
   message: string,
 ): void {
-  console.error = jest.fn();
+  console.error = vi.fn();
 
   const testGetDerivedStateFromError =
-    jest.fn(testGetDerivedStateFromErrorImpl);
+    vi.fn(testGetDerivedStateFromErrorImpl);
 
   class Boundary extends Component<PropsWithChildren, State> {
     public static getDerivedStateFromError = testGetDerivedStateFromError;

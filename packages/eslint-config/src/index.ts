@@ -35,6 +35,7 @@ export default [
       'node_modules/**',
       'out/**',
       '.pnp.*',
+      'vitest.config.ts.timestamp-*-*.mjs',
     ],
   },
 ] satisfies readonly Linter.FlatConfig[];

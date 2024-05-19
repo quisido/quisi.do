@@ -1,4 +1,4 @@
-/// <reference types="jest" />
+import { describe, expect, it } from 'vitest';
 import { mapUnknownToError } from './index.js';
 
 describe('mapUnknownToError', (): void => {

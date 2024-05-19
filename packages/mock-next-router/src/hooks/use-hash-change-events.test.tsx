@@ -1,11 +1,11 @@
 import { act, render } from '@testing-library/react';
-import { type MemoryHistory, createMemoryHistory } from 'history';
-import assert from 'node:assert';
+import { createMemoryHistory, type MemoryHistory } from 'history';
+import { afterEach, assert, beforeEach, describe, expect, it, vi } from 'vitest';
 import MockNextRouter from '../index.js';
 
 const FIRST = 0;
 const ONCE = 1;
-const TEST_HASH_CHANGE_LISTENER = jest.fn();
+const TEST_HASH_CHANGE_LISTENER = vi.fn();
 
 describe('useHashChangeEvents', (): void => {
   beforeEach((): void => {

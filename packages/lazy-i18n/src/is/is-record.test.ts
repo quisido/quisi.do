@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import isRecord from './is-record.js';
 
 const TEST_NUMBER = 1234;

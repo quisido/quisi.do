@@ -15,14 +15,6 @@
       "type": "chrome",
       "url": "https://localhost:3000",
       "webRoot": "${workspaceFolder}"
-    },
-    {
-      "name": "Test current file",
-      "request": "launch",
-      "runtimeArgs": ["run", "jest", "--", "${relativeFile}"],
-      "runtimeExecutable": "yarn",
-      "skipFiles": ["<node_internals>/**"],
-      "type": "node"
     }
   ]
 }
