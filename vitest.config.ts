@@ -1,9 +1,10 @@
-import { configDefaults, defineConfig } from 'vitest/config';
+import { defaultExclude, defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
     clearMocks: true,
     environment: 'node',
+    exclude: [...defaultExclude, '.yarn/**', 'coverage/**', 'packages/**'],
     mockReset: true,
     restoreMocks: true,
 
@@ -11,8 +12,7 @@ export default defineConfig({
       all: true,
       clean: true,
       enabled: true,
-      ignoreEmptyLines: true,
-      provider: 'v8',
+      provider: 'istanbul',
       skipFull: true,
 
       thresholds: {
@@ -22,12 +22,5 @@ export default defineConfig({
         statements: 100,
       },
     },
-
-    exclude: [
-      ...configDefaults.exclude,
-      '.yarn/**',
-      'coverage/**',
-      'packages/**',
-    ],
   },
 });

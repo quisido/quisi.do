@@ -11,8 +11,7 @@ export default defineConfig({
       all: true,
       clean: true,
       enabled: true,
-      ignoreEmptyLines: true,
-      provider: 'v8',
+      provider: 'istanbul',
       skipFull: true,
 
       thresholds: {

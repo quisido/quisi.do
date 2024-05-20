@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vitest/config';
+import { defaultExclude, defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react()],
@@ -14,8 +14,7 @@ export default defineConfig({
       all: true,
       clean: true,
       enabled: true,
-      ignoreEmptyLines: true,
-      provider: 'v8',
+      provider: 'istanbul',
       skipFull: true,
 
       thresholds: {
@@ -25,5 +24,14 @@ export default defineConfig({
         statements: 100,
       },
     },
+
+    exclude: [
+      ...defaultExclude,
+      '.next/**',
+      '.wrangler/**',
+      'certificates/**',
+      'coverage/**',
+      'cypress/**',
+    ],
   },
 });

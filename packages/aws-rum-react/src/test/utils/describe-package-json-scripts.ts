@@ -9,7 +9,7 @@ export default function describePackageJsonScripts(packageJson: object): void {
 
     it('should have an AreTheTypesWrong script', (): void => {
       assert('attw' in scripts);
-      expect(scripts.attw).toBe('attw');
+      expect(scripts.attw).toBe('attw --quiet');
     });
 
     it('should have ESLint scripts', (): void => {

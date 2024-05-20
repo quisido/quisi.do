@@ -54,7 +54,7 @@
     "access": "public"
   },
   "scripts": {
-    "attw": "attw",
+    "attw": "attw --quiet",
     "clean": "rm -rf coverage dist node_modules && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
@@ -83,7 +83,7 @@
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.12.7",
-    "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/coverage-istanbul": "^1.6.0",
     "babel-plugin-replace-import-extension": "^1.1.4",
     "cjs-ts": "workspace:^",
     "concurrently": "^8.2.2",

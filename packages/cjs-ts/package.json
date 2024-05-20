@@ -21,7 +21,7 @@
     "access": "public"
   },
   "scripts": {
-    "attw": "attw",
+    "attw": "attw --quiet",
     "clean": "exit 0",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",

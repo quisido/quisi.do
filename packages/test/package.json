@@ -24,7 +24,7 @@
     "access": "public"
   },
   "scripts": {
-    "attw": "attw",
+    "attw": "attw --quiet",
     "clean": "rm -rf coverage dist node_modules && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
@@ -48,7 +48,7 @@
     "@quisido/eslint-config": "workspace:^",
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch",
     "@typescript-eslint/parser": "^7.7.0",
-    "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/coverage-istanbul": "^1.6.0",
     "concurrently": "^8.2.2",
     "eslint": "^9.1.1",
     "eslint-config-prettier": "^9.1.0",
