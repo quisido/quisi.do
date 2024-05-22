@@ -1,10 +1,12 @@
 {
   "files.exclude": {
+    "coverage/": true,
     "dist/": true,
-    "jest/": true,
+    "node_modules/": true,
+    ".attw.json": true,
     ".eslintcache": true,
-    "jest.config.cjs": true,
     "*.cpuprofile": true,
-    "*.tsbuildinfo": true
+    "*.tsbuildinfo": true,
+    "vitest.config.ts.timestamp-*-*.mjs": true
   }
 }

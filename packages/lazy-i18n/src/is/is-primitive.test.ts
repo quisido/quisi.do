@@ -1,4 +1,4 @@
-/// <reference types="jest" />
+import { describe, expect, it } from 'vitest';
 import isPrimitive from './is-primitive.js';
 
 const FALSEY_NUMBER = 0;

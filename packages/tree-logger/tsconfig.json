@@ -1,11 +1,12 @@
 {
-  "exclude": ["dist/", "jest/"],
+  "exclude": ["coverage/", "dist/", "node_modules/"],
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts"],
+
   "compilerOptions": {
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
-    "rootDir": "src",
-    "sourceRoot": "src"
+    "rootDir": ".",
+    "sourceRoot": "."
   }
 }

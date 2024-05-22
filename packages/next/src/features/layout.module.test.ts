@@ -1,6 +1,6 @@
-/// <reference types="jest" />
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { describe, expect, it } from 'vitest';
 import THEME from '../constants/theme.js';
 import mapRgbToHex from '../utils/map-rgb-to-hex.js';
 

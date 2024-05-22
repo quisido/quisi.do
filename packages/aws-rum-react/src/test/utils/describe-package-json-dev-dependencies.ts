@@ -1,4 +1,4 @@
-import assert from "node:assert";
+import { assert, describe, it } from "vitest";
 
 export default function describePackageJsonDevDependencies(
   packageJson: object,
@@ -13,12 +13,11 @@ export default function describePackageJsonDevDependencies(
       assert('@arethetypeswrong/cli' in devDependencies);
       assert('@microsoft/eslint-formatter-sarif' in devDependencies);
       assert('@types/node' in devDependencies);
+      assert('@vitest/coverage-istanbul' in devDependencies);
       assert('concurrently' in devDependencies);
       assert('eslint' in devDependencies);
-      assert('jest' in devDependencies);
-      assert('jest-environment-jsdom' in devDependencies);
-      assert('tslib' in devDependencies);
       assert('typescript' in devDependencies);
+      assert('vitest' in devDependencies);
     });
   });
 }

@@ -1,0 +1,24 @@
+.header {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 60em;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+
+  > div:first-child {
+    flex-grow: 1;
+  }
+}
+
+.tag-line {
+  display: block;
+  font-size: 1em;
+  margin-bottom: 2em;
+  margin-top: -2em;
+  padding-left: 1.85em;
+}

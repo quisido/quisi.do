@@ -1,7 +1,7 @@
-/// <reference types="jest" />
 import { render, renderHook } from '@testing-library/react';
 import { AwsRum } from 'aws-rum-web';
 import type { PropsWithChildren, ReactElement } from 'react';
+import { describe, expect, it } from 'vitest';
 import { MockAwsRumProvider, useAwsRum } from '../../index.js';
 
 describe('MockAwsRumProvider', (): void => {

@@ -1,10 +1,10 @@
-/// <reference types="jest" />
 import { act, renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
+import { describe, expect, it, vi } from 'vitest';
 import { MockAwsRumProvider, useRecordEvent } from '../index.js';
 
 const ONCE = 1;
-const TEST_RECORD_EVENT = jest.fn<unknown, [string, object]>();
+const TEST_RECORD_EVENT = vi.fn();
 
 describe('useRecordEvent', (): void => {
   it('should call recordEvent', (): void => {

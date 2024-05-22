@@ -1,16 +1,15 @@
 import { memo, type ReactElement } from 'react';
 import Link from '../modules/quisi/link.jsx';
+import validateString from '../utils/validate-string.js';
 import styles from './footer.module.scss';
+
+const CLASS_NAME: string = validateString(styles['footer']);
+const LIST_CLASS_NAME: string = validateString(styles['list']);
 
 function Footer(): ReactElement | null {
   return (
-    <footer
-      style={{
-        // paddingTop: '1rem',
-        textAlign: 'center',
-      }}
-    >
-      <ul className={styles['list']}>
+    <footer className={CLASS_NAME}>
+      <ul className={LIST_CLASS_NAME}>
         <li>
           <Link
             feature="footer"

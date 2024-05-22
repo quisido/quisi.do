@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { background_color as backgroundColor, icons, name, theme_color as themeColor } from '../public/manifest.json';
 import THEME from './constants/theme.js';
 import findSplashScreenIcon from './test/find-splash-screen-icon.js';

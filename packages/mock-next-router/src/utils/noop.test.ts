@@ -1,3 +1,4 @@
+import { describe, it } from 'vitest';
 import noop from './noop.js';
 
 describe('noop', (): void => {

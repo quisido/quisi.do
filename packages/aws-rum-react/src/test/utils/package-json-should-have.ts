@@ -1,4 +1,4 @@
-import assert from "node:assert";
+import { assert, expect, it } from "vitest";
 
 interface Options {
   readonly author: string;

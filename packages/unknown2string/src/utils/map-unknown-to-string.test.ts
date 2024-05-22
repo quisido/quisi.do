@@ -1,4 +1,4 @@
-/// <reference types="jest" />
+import { describe, expect, it } from 'vitest';
 import mapUnknownToString from '../index.js';
 
 describe('mapUnknownToString', (): void => {

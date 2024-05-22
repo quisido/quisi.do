@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { filterByNumber, findNumber, isNumber } from './index.js';
 
 const TEST_NUMBER = 1234;

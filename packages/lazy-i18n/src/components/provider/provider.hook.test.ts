@@ -1,5 +1,5 @@
-/// <reference types="jest" />
 import { act, renderHook, type RenderHookResult } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 import useProvider, { type Props, type State } from './provider.hook.js';
 
 const EN_US = 'en_US' as const;

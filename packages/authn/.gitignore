@@ -1,5 +1,6 @@
 /.wrangler/
+/coverage/
 /dist/
-/jest/
+/node_modules/
 /.dev.vars
 /.eslintcache

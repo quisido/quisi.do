@@ -1,5 +1,5 @@
-/// <reference types="jest" />
 import { ErrorCode } from '@quisido/authn-shared';
+import { describe, expect, it } from 'vitest';
 import MetricName from '../constants/metric-name.js';
 import expectResponseToRedirectTo from '../test/expect-response-to-redirect-to.js';
 import withTestState from '../test/with-test-state.js';

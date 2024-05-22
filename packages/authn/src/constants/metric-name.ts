@@ -48,7 +48,10 @@ enum MetricName {
   // quisi.do
   AuthnIdCreated = 'authn-id.created',
   AuthnIdError = 'authn-id.error',
+  InvalidConsole = 'console.invalid',
   InvalidUsageDataset = 'dataset.usage.invalid',
+  MissingConsole = 'console.missing',
+  MissingUsageDataset = 'dataset.usage.missing',
 }
 
 export default MetricName;

@@ -1,11 +1,11 @@
 {
   "exclude": [
-    "./.next/",
-    "./cypress/",
-    "./src/**/*.e2e.ts",
-    "./src/test/cypress/",
-    "./out/",
-    "./cypress.config.*"
+    ".next/",
+    "cypress/",
+    "src/**/*.e2e.ts",
+    "src/test/cypress/",
+    "out/",
+    "cypress.config.*"
   ],
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts"],
@@ -26,6 +26,8 @@
     "sourceRoot": ".",
     "skipLibCheck": false,
     "strict": true,
+    "typeRoots": [],
+    "types": [],
     "plugins": [
       {
         "name": "next"

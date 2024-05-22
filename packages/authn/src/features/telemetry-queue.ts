@@ -1,4 +1,3 @@
-import { ErrorCode } from '@quisido/authn-shared';
 import { AccountNumber, UsageType } from '@quisido/workers-shared';
 import { mapUnknownToError } from 'fmrs';
 import MetricName from '../constants/metric-name.js';
@@ -6,7 +5,6 @@ import type { TraceParent } from '../modules/trace-parent/index.js';
 import type { Metric } from '../types/metric.js';
 import isAnaylticsEngineDataset from '../utils/is-analytics-engine-dataset.js';
 import mapAnalyticsEngineDatasetToEmitter from '../utils/map-analytics-dataset-engine-to-emitter.js';
-import mapCauseToError from '../utils/map-cause-to-error.js';
 import mapRequestToTraceParent from '../utils/map-request-to-trace-parent.js';
 import TelemetryQueue from '../utils/telemetry-queue.js';
 
@@ -60,15 +58,6 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
   }: Options) {
     super();
 
-    const { USAGE } = env;
-    if (!isAnaylticsEngineDataset(USAGE)) {
-      throw mapCauseToError({
-        code: ErrorCode.InvalidUsageDataset,
-        privateData: JSON.stringify(USAGE),
-        publicData: typeof USAGE,
-      });
-    }
-
     this.onPrivateError((err: Error): void => {
       // When given an `Error`, Cloudflare does not include `cause` or `stack`.
       console.error(err.message, err.cause, err.stack);
@@ -89,16 +78,15 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
       traceId,
     });
 
-    const { PRIVATE_DATASET, PUBLIC_DATASET } = env;
-    this.setPrivateDataset(PRIVATE_DATASET, USAGE);
-    this.setPublicDataset(PUBLIC_DATASET, USAGE);
+    const { PRIVATE_DATASET, PUBLIC_DATASET, USAGE } = env;
+    this.setPrivateDataset(PRIVATE_DATASET);
+    this.setPublicDataset(PUBLIC_DATASET);
+    this.setUsageDataset(USAGE);
+
     // Eventually: this.setTraceParent(request);
   }
 
-  public setPrivateDataset(
-    dataset: unknown,
-    usage: AnalyticsEngineDataset,
-  ): void {
+  public setPrivateDataset(dataset: unknown): void {
     if (typeof dataset === 'undefined') {
       this.emitPublicMetric({
         name: MetricName.MissingPrivateDataset,
@@ -121,18 +109,9 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
 
     const emit = mapAnalyticsEngineDatasetToEmitter(dataset);
     this.onPrivateMetric(emit);
-    this.onPrivateMetric((): void => {
-      usage.writeDataPoint({
-        doubles: [UsageType.AnalyticsEngineDatasetWriteDataPoint, ONCE],
-        indexes: [AccountNumber.Quisido.toString()],
-      });
-    });
   }
 
-  public setPublicDataset(
-    dataset: unknown,
-    usage: AnalyticsEngineDataset,
-  ): void {
+  public setPublicDataset(dataset: unknown): void {
     if (typeof dataset === 'undefined') {
       this.emitPublicMetric({
         name: MetricName.MissingPublicDataset,
@@ -155,12 +134,6 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
 
     const emit = mapAnalyticsEngineDatasetToEmitter(dataset);
     this.onPublicMetric(emit);
-    this.onPublicMetric((): void => {
-      usage.writeDataPoint({
-        doubles: [UsageType.AnalyticsEngineDatasetWriteDataPoint, ONCE],
-        indexes: [AccountNumber.Quisido.toString()],
-      });
-    });
   }
 
   public setTraceParent(request: Request): void {
@@ -180,5 +153,41 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
         name: MetricName.InvalidTraceParent,
       });
     }
+  }
+
+  public setUsageDataset(dataset: unknown): void {
+    if (typeof dataset === 'undefined') {
+      this.emitPublicMetric({
+        name: MetricName.MissingUsageDataset,
+      });
+      return;
+    }
+
+    if (!isAnaylticsEngineDataset(dataset)) {
+      this.emitPublicMetric({
+        name: MetricName.InvalidUsageDataset,
+        type: typeof dataset,
+      });
+      this.logPrivateError(
+        new Error('Invalid usage dataset', {
+          cause: JSON.stringify(dataset),
+        }),
+      );
+      return;
+    }
+
+    this.onPrivateMetric((): void => {
+      dataset.writeDataPoint({
+        doubles: [UsageType.AnalyticsEngineDatasetWriteDataPoint, ONCE],
+        indexes: [AccountNumber.Quisido.toString()],
+      });
+    });
+
+    this.onPublicMetric((): void => {
+      dataset.writeDataPoint({
+        doubles: [UsageType.AnalyticsEngineDatasetWriteDataPoint, ONCE],
+        indexes: [AccountNumber.Quisido.toString()],
+      });
+    });
   }
 }

@@ -1,14 +1,14 @@
-/// <reference types="jest" />
 import { FullStory } from '@fullstory/browser';
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import MockFullstory from '../components/mock-fullstory.js';
 import expectToThrow from '../test/expect-to-throw.js';
 import useFullstory from './use-fullstory.js';
 
-const TEST_FULLSTORY = Object.assign(jest.fn(), FullStory);
-const TEST_INIT = jest.fn();
-const TEST_IS_INITIALIZED = jest.fn();
+const TEST_FULLSTORY = Object.assign(vi.fn(), FullStory);
+const TEST_INIT = vi.fn();
+const TEST_IS_INITIALIZED = vi.fn();
 
 function TestWrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
   return (

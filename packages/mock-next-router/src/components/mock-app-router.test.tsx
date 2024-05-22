@@ -1,28 +1,31 @@
 import { render } from '@testing-library/react';
+import { assert, describe, expect, it, vi } from 'vitest';
 import MockNextRouter from '../index.js';
-import assert from 'node:assert';
-import createAppRouterConsumer from '../test/utils/create-app-router-consumer.js';
+import createAppRouterConsumer from '../test/create-app-router-consumer.js';
 
 const ONCE = 1;
-const TEST_PREFETCH = jest.fn();
+const TEST_PREFETCH = vi.fn();
 
 describe('MockAppRouter', (): void => {
   it('should provider a mocked app router', (): void => {
     const { appRouter, Consumer } = createAppRouterConsumer();
 
-    render(
+    const { unmount } = render(
       <MockNextRouter>
         <Consumer />
       </MockNextRouter>,
     );
 
     expect(appRouter.current).not.toBeNull();
+
+    // Unlisten to the router.
+    unmount();
   });
 
   it('should provide a mocked prefetch', (): void => {
     const { appRouter, Consumer } = createAppRouterConsumer();
 
-    render(
+    const { unmount } = render(
       <MockNextRouter prefetch={TEST_PREFETCH}>
         <Consumer />
       </MockNextRouter>,
@@ -33,5 +36,8 @@ describe('MockAppRouter', (): void => {
 
     expect(TEST_PREFETCH).toHaveBeenCalledTimes(ONCE);
     expect(TEST_PREFETCH).toHaveBeenLastCalledWith('/test-href');
+
+    // Unlisten to the router.
+    unmount();
   });
 });

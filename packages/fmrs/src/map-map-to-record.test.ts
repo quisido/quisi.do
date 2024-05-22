@@ -1,4 +1,4 @@
-/// <reference types="jest" />
+import { describe, expect, it } from 'vitest';
 import { mapMapToRecord } from './index.js';
 
 const TEST_RECORD: Record<string, unknown> = {

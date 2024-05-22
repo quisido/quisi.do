@@ -1,4 +1,5 @@
 import type { NEXT_DATA } from 'next/dist/shared/lib/utils.js';
+import { describe, expect, it } from 'vitest';
 import getNextData from './get-next-data.js';
 
 describe('getNextData', (): void => {

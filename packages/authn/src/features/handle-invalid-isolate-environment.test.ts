@@ -1,5 +1,5 @@
-/// <reference types="jest" />
 import { ErrorCode } from '@quisido/authn-shared';
+import { describe, it } from 'vitest';
 import fetch from '../test/fetch.js';
 
 describe('handleInvalidIsolateEnvironment', (): void => {

@@ -1,4 +1,4 @@
-/// <reference types="jest" />
+import { describe, expect, it, vi } from 'vitest';
 import EventEmitter from './event-emitter.js';
 
 const ONCE = 1;
@@ -10,8 +10,8 @@ describe('EventEmitter', (): void => {
   });
 
   it('should call various emit handlers', (): void => {
-    const ONE = jest.fn();
-    const TWO = jest.fn();
+    const ONE = vi.fn();
+    const TWO = vi.fn();
     const emitter: EventEmitter<'test', [string]> =
       new EventEmitter<'test', [string]>();
     emitter.on('test', ONE);

@@ -1,5 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 import type { ErrorCode } from '@quisido/authn-shared';
+import { expect, vi } from 'vitest';
 import handleFetch from '../features/handle-fetch.js';
 import createFetchEnv from './create-fetch-env.js';
 import createFetchExecutionContext from './create-fetch-execution-context.js';
@@ -10,7 +11,7 @@ import { TEST_CONSOLE } from './test-console.js';
 /**
  *   This test `fetch` function mimics the behavior of the Clouderflare worker's
  * exported fetch handler, with two important test-specific differences:
- * 1. You supply your own `fetch` implementation (e.g. `jest.fn()`).
+ * 1. You supply your own `fetch` implementation (e.g. `vi.fn()`).
  * 2. It returns an abstracted test API, analogous to a Page Object Model.
  */
 
@@ -33,17 +34,17 @@ interface Result {
   ) => void;
 }
 
-const TEST_WRITE_PRIVATE_DATAPOINT = jest.fn();
-const TEST_WRITE_PUBLIC_DATAPOINT = jest.fn();
-const TEST_WRITE_USAGE_DATAPOINT = jest.fn();
+const TEST_WRITE_PRIVATE_DATAPOINT = vi.fn();
+const TEST_WRITE_PUBLIC_DATAPOINT = vi.fn();
+const TEST_WRITE_USAGE_DATAPOINT = vi.fn();
 
 export default async function fetch({
   env,
-  fetch: fetchImpl = jest.fn(),
+  fetch: fetchImpl = vi.fn(),
   headers = {},
   pathname = '/',
   search = {},
-  waitUntil = jest.fn(),
+  waitUntil = vi.fn(),
 }: Options): Promise<Result> {
   const response: Response = await handleFetch(
     fetchImpl,

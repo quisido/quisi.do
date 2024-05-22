@@ -1,7 +1,7 @@
-/// <reference types="jest" />
 import { render } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { act } from 'react-dom/test-utils';
+import { describe, it, vi } from 'vitest';
 import I18n, { I18nProvider } from '../../index.js';
 
 function TestLoadingComponent(): ReactElement {
@@ -13,7 +13,7 @@ describe('I18n', (): void => {
     const ES_ES_PROMISE = Promise.resolve({
       Spanish: 'Espanol',
     });
-    const MOCK_ES_ES = jest.fn().mockReturnValue(ES_ES_PROMISE);
+    const MOCK_ES_ES = vi.fn().mockReturnValue(ES_ES_PROMISE);
     const { getByText } = render(<I18n>Spanish</I18n>, {
       wrapper({ children }: PropsWithChildren): ReactElement {
         return (

@@ -1,6 +1,6 @@
-/// <reference types="jest" />
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
+import { describe, expect, it } from 'vitest';
 import TranslateFunctionContext from '../contexts/translate-function.js';
 import { useTranslate } from '../index.js';
 import type TranslateFunctionType from '../types/translate-function.js';

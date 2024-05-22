@@ -1,4 +1,4 @@
-/// <reference types="jest" />
+import { describe, expect, it } from 'vitest';
 import mapTranslationsRecordToLoadedTranslationsRecord from './map-translations-record-to-loaded-translations-record.js';
 
 describe('mapTranslationsRecordToLoadedTranslationsRecord', (): void => {

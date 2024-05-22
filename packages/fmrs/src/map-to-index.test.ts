@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { mapToIndex } from './index.js';
 
 const FIRST = 0;

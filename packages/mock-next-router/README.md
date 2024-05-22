@@ -43,11 +43,12 @@ If you want to test prefetching, provide a `prefetch` prop.
 ```tsx
 import { render } from '@testing-library/react';
 import MockNextRouter from 'mock-next-router';
+import { vi } from 'vitest';
 import MyComponent from './my-component.js';
 
 describe('MyComponent', (): void => {
   it('should support prefetching', (): void => {
-    const prefetch = jest.fn();
+    const prefetch = vi.fn();
     const { getByText } = render(<MyComponent />, {
       wrapper({ children }) {
         return <MockNextRouter prefetch={prefetch}>{children}</MockNextRouter>;

@@ -1,7 +1,7 @@
-/// <reference types="jest" />
 import { render } from '@testing-library/react';
 import { AwsRum } from 'aws-rum-web';
 import type { PropsWithChildren, ReactElement } from 'react';
+import { afterEach, beforeEach, describe, it, vi } from 'vitest';
 import { AwsRumProvider, withAwsRum } from '../index.js';
 
 interface TestProps {
@@ -17,7 +17,7 @@ const WINDOW_FETCH = window.fetch;
 
 describe('withAwsRum', (): void => {
   beforeEach((): void => {
-    window.fetch = jest.fn();
+    window.fetch = vi.fn();
   });
 
   afterEach((): void => {
@@ -30,7 +30,7 @@ describe('withAwsRum', (): void => {
         return (
           <AwsRumProvider
             eventPluginsToLoad={[]}
-            fetchFunction={jest.fn()}
+            fetchFunction={vi.fn()}
             id="test-id"
             region="us-east-1"
             telemetries={[]}

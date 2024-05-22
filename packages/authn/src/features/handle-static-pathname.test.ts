@@ -1,4 +1,4 @@
-/// <reference types="jest" />
+import { describe, expect, it } from 'vitest';
 import MetricName from '../constants/metric-name.js';
 import fetch from '../test/fetch.js';
 

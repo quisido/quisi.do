@@ -1,4 +1,4 @@
-/// <reference types="jest" />
+import { describe, expect, it } from 'vitest';
 import expectToEventuallyThrow from './expect-to-eventually-throw.js';
 
 describe('expectToEventuallyThrow', (): void => {

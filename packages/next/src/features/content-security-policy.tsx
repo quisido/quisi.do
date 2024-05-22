@@ -1,6 +1,6 @@
 import { type ReactElement } from "react";
 
-const isDevelopment = false; // process.env.NODE_ENV === 'development'
+const isDevelopment: boolean = process.env.NODE_ENV === 'development'
 
 const CONNECT_SRC: string = [
   "'self'",

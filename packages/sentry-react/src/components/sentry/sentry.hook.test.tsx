@@ -1,18 +1,17 @@
-/// <reference types="jest" />
-
 import type { User } from '@sentry/react';
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
+import { describe, expect, it, vi } from 'vitest';
 import { MockSentrySdk } from '../../index.js';
 import useSentry from './sentry.hook.js';
 
 const ONCE = 1;
-const TEST_BEFORE_BREADCRUMB = jest.fn();
-const TEST_BEFORE_SEND = jest.fn();
-const TEST_INIT = jest.fn();
-const TEST_SET_USER = jest.fn();
-const TEST_TRACES_SAMPLER = jest.fn();
-const TEST_TRANSPORT = jest.fn();
+const TEST_BEFORE_BREADCRUMB = vi.fn();
+const TEST_BEFORE_SEND = vi.fn();
+const TEST_INIT = vi.fn();
+const TEST_SET_USER = vi.fn();
+const TEST_TRACES_SAMPLER = vi.fn();
+const TEST_TRANSPORT = vi.fn();
 
 function Wrapper({ children }: PropsWithChildren): ReactElement {
   return (

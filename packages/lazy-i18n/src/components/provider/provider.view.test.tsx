@@ -1,4 +1,3 @@
-/// <reference types="jest" />
 import { render } from '@testing-library/react';
 import type {
   ComponentType,
@@ -7,6 +6,7 @@ import type {
   ReactElement,
 } from 'react';
 import { useContext } from 'react';
+import { describe, expect, it } from 'vitest';
 import Loading from '../../components/loading/index.js';
 import LoadingComponentContext from '../../contexts/loading-component.js';
 import TranslateFunctionContext from '../../contexts/translate-function.js';

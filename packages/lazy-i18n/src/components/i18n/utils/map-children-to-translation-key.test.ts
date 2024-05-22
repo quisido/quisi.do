@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import mapChildrenToTranslationKey from './map-children-to-translation-key.js';
 
 describe('mapChildrenToTranslationKey', (): void => {

@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import mapNumberToSentryEventId from './map-number-to-sentry-event-id.js';
 
 const EXPECTED_LENGTH = 32;

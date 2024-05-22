@@ -1,3 +1,4 @@
+import { expect } from 'vitest';
 import StatusCode from '../constants/status-code.js';
 
 export default function expectResponseToRedirectTo(

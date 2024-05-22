@@ -1,14 +1,28 @@
 {
   "extends": "./tsconfig.json",
+  "include": [".next/types/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "next-env.d.ts"],
+
   "exclude": [
     "./.next/",
+    "./.vscode/",
+    "./.wrangler/",
+    "./analyze/",
+    "./certificates/",
+    "./coverage/",
     "./cypress/",
-    "./src/**/*.e2e.ts",
-    "./src/test/cypress/",
     "./out/",
-    "./cypress.config.*"
+    "./scripts/",
+    "./src/**/*.e2e.ts",
+    "./src/**/*.test.ts",
+    "./src/**/*.test.tsx",
+    "./src/test/",
+    "./out/",
+    "./.*.json",
+    "./*.config.*",
+    "./lighthouse.*",
+    "./tsconfig.*"
   ],
-  "include": [".next/types/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "next-env.d.ts"],
+
   "compilerOptions": {
     "jsx": "preserve",
     "module": "NodeNext",

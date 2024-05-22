@@ -1,5 +1,5 @@
-/// <reference types="jest" />
 import { render } from '@testing-library/react';
+import { afterEach, beforeEach, describe, it, vi } from 'vitest';
 import Sentry from '../../index.js';
 import CustomErrorBoundaryFallback from '../../test/components/custom-error-boundary-fallback/index.js';
 import ThrowError from '../../test/components/throw-error/index.js';
@@ -18,7 +18,7 @@ describe('Sentry', (): void => {
     // Disable console.error, because the thrown error is expected to be logged.
     const consoleError = console.error;
     beforeEach((): void => {
-      console.error = jest.fn();
+      console.error = vi.fn();
     });
 
     afterEach((): void => {

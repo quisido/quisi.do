@@ -3,12 +3,13 @@ import { render } from '@testing-library/react';
 import { MockAwsRumProvider } from 'aws-rum-react';
 import { MockFullstory } from 'fullstory-react';
 import { type PropsWithChildren, type ReactElement } from 'react';
+import { describe, expect, it, vi } from 'vitest';
 import THEME from '../../constants/theme.js';
 import { HostnameProvider } from '../../contexts/hostname.js';
 import Theme from '../../contexts/theme.js';
 import Button from './button.js';
 
-const MOCK_FULLSTORY = Object.assign(jest.fn(), FullStory);
+const MOCK_FULLSTORY = Object.assign(vi.fn(), FullStory);
 
 describe('Button', (): void => {
   it('should have a matching background and outline color', (): void => {

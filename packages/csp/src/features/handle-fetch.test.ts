@@ -1,9 +1,9 @@
-/// <reference types="jest" />
+import { describe, expect, it, vi } from 'vitest';
 import { StatusCode } from '../constants/status-code.js';
 import handleFetch from './handle-fetch.js';
 
 const ONCE = 1;
-const TEST_CONSOLE_LOG = jest.fn();
+const TEST_CONSOLE_LOG = vi.fn();
 
 const TEST_CONSOLE: Console = {
   ...console,
@@ -11,8 +11,8 @@ const TEST_CONSOLE: Console = {
 };
 
 const TEST_EXECUTION_CONTEXT: ExecutionContext = {
-  passThroughOnException: jest.fn(),
-  waitUntil: jest.fn(),
+  passThroughOnException: vi.fn(),
+  waitUntil: vi.fn(),
 };
 
 describe('handleFetch', (): void => {

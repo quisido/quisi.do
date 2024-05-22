@@ -1,4 +1,4 @@
-import assert from "node:assert";
+import { assert, describe, expect, it } from "vitest";
 
 export default function describePackageJsonBugs(
   packageJson: object,

@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import defaultTranslateFunction from './default-translate-function.js';
 
 const TEST_STRING = 'test string';

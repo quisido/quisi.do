@@ -1,5 +1,5 @@
-/// <reference types="jest" />
 import { isNumber, sortUnknown } from 'fmrs';
+import { describe, expect, it } from 'vitest';
 import { WhoAmIResponseCode } from './index.js';
 import createAscendingArray from './test/create-ascending-array.js';
 

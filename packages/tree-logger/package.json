@@ -21,13 +21,16 @@
     "access": "public"
   },
   "scripts": {
-    "attw": "attw",
-    "clean": "rm -rf dist jest && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
+    "attw": "attw --quiet",
+    "clean": "rm -rf coverage dist node_modules && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "yarn run tsc",
     "prepublish": "concurrently --kill-others-on-fail --names attw,eslint \"yarn run attw\" \"yarn run eslint\"",
-    "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json"
+    "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json",
+    "vitest": "vitest",
+    "vitest:run": "vitest run",
+    "vitest:watch": "vitest watch"
   },
   "dependencies": {
     "ansi-styles": "^6.2.1"
@@ -40,6 +43,7 @@
     "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch",
     "@typescript-eslint/parser": "^7.7.0",
+    "@vitest/coverage-istanbul": "^1.6.0",
     "concurrently": "^8.2.2",
     "eslint": "^9.1.1",
     "eslint-config-prettier": "^9.1.0",
@@ -49,6 +53,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.2.5",
     "tslib": "^2.6.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
   }
 }

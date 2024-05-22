@@ -1,5 +1,5 @@
-/// <reference types="jest" />
 import { renderHook } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 import expectToEventuallyThrow from '../../../test/utils/expect-to-eventually-throw.js';
 import noop from '../../../test/utils/noop.js';
 import type { DefaultExport } from '../../../types/default-export.js';
@@ -18,7 +18,7 @@ const TEST_ERROR: Error = new Error(TEST_ERROR_MESSAGE);
 
 describe('useLoadTranslations', (): void => {
   it('should not load a second time', async (): Promise<void> => {
-    const MOCK_ES_ES = jest.fn().mockReturnValue({
+    const MOCK_ES_ES = vi.fn().mockReturnValue({
       Spanish: 'Espanol',
     });
 
@@ -53,7 +53,7 @@ describe('useLoadTranslations', (): void => {
   });
 
   it('should load string record translations', async (): Promise<void> => {
-    const MOCK_LOAD_HANDLER = jest.fn();
+    const MOCK_LOAD_HANDLER = vi.fn();
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
@@ -73,7 +73,7 @@ describe('useLoadTranslations', (): void => {
   });
 
   it('should load default export string record translations', async (): Promise<void> => {
-    const MOCK_LOAD_HANDLER = jest.fn();
+    const MOCK_LOAD_HANDLER = vi.fn();
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
@@ -95,7 +95,7 @@ describe('useLoadTranslations', (): void => {
   });
 
   it('should load imported string record translations', async (): Promise<void> => {
-    const MOCK_LOAD_HANDLER = jest.fn();
+    const MOCK_LOAD_HANDLER = vi.fn();
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
@@ -115,7 +115,7 @@ describe('useLoadTranslations', (): void => {
   });
 
   it('should load default imported string record translations', async (): Promise<void> => {
-    const MOCK_LOAD_HANDLER = jest.fn();
+    const MOCK_LOAD_HANDLER = vi.fn();
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
@@ -137,7 +137,7 @@ describe('useLoadTranslations', (): void => {
   });
 
   it('should load dynamically imported string record translations', async (): Promise<void> => {
-    const MOCK_LOAD_HANDLER = jest.fn();
+    const MOCK_LOAD_HANDLER = vi.fn();
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
@@ -158,7 +158,7 @@ describe('useLoadTranslations', (): void => {
   });
 
   it('should load dynamically default imported string record translations', async (): Promise<void> => {
-    const MOCK_LOAD_HANDLER = jest.fn();
+    const MOCK_LOAD_HANDLER = vi.fn();
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
@@ -195,7 +195,7 @@ describe('useLoadTranslations', (): void => {
   });
 
   it('should emit load errors', async (): Promise<void> => {
-    const MOCK_LOAD_ERROR_HANDLER = jest.fn();
+    const MOCK_LOAD_ERROR_HANDLER = vi.fn();
     const { result } = renderHook<S, P>(useLoadTranslations, {
       initialProps: {
         onLoad: noop,

@@ -2,12 +2,17 @@
 
 import { memo, type ReactElement } from 'react';
 import useTheme from '../hooks/use-theme.js';
+import validateString from '../utils/validate-string.js';
 import Authentication from './header-authentication.js';
 import Heading from './header-heading.js';
+import styles from './header.module.scss';
 
 interface State {
   readonly backgroundColor: string;
 }
+
+const CLASS_NAME: string = validateString(styles['header']);
+const TAG_LINE_CLASS_NAME: string = validateString(styles['tag-line']);
 
 function useHeader(): State {
   // Contexts
@@ -24,31 +29,14 @@ function Header(): ReactElement {
 
   return (
     <header
-      style={{
-        alignItems: 'center',
-        backgroundColor,
-        boxSizing: 'border-box',
-        display: 'flex',
-        flexDirection: 'row',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        maxWidth: '60em',
-        paddingLeft: '1rem',
-        paddingRight: '1rem',
-        width: '100%',
-      }}
+      className={CLASS_NAME}
+      style={{ backgroundColor }}
     >
-      <div style={{ flexGrow: 1 }}>
+      <div>
         <Heading />
         <span
-          style={{
-            display: 'block',
-            fontFamily: `"Cairo Play", ${displayFontFamily}`,
-            fontSize: '1em',
-            marginBottom: '2em',
-            marginTop: '-2em',
-            paddingLeft: '1.85em',
-          }}
+          className={TAG_LINE_CLASS_NAME}
+          style={{ fontFamily: `"Cairo Play", ${displayFontFamily}` }}
         >
           software as a service
         </span>

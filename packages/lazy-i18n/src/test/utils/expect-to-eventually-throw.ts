@@ -1,4 +1,4 @@
-/// <reference types="jest" />
+import { expect } from 'vitest';
 
 export default async function expectToEventuallyThrow(
   fn: () => Promise<void>,

@@ -1,6 +1,6 @@
 import { type ThemeColorDescriptor } from 'next/dist/lib/metadata/types/metadata-types';
 
-const THEME_COLOR_DESCRIPTORS: readonly ThemeColorDescriptor[] = [
+export const THEME_COLOR_DESCRIPTORS: readonly ThemeColorDescriptor[] = [
   {
     color: '#161616',
     media: '(prefers-color-scheme: dark)',
@@ -10,5 +10,3 @@ const THEME_COLOR_DESCRIPTORS: readonly ThemeColorDescriptor[] = [
     media: '(prefers-color-scheme: light)',
   },
 ];
-
-export default THEME_COLOR_DESCRIPTORS;

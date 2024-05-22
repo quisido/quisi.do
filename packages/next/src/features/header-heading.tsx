@@ -1,11 +1,15 @@
 import type { ReactElement } from 'react';
 import useTheme from '../hooks/use-theme.js';
+import validateString from '../utils/validate-string.js';
 import Text from './header-heading-text.jsx';
+import styles from './header-heading.module.scss';
 
 interface State {
   readonly fontFamily: string;
   readonly fontWeight: number;
 }
+
+const CLASS_NAME: string = validateString(styles['heading']);
 
 function useHeaderHeading(): State {
   const { displayFontFamily, displayFontWeight } = useTheme();
@@ -21,17 +25,10 @@ export default function Heading(): ReactElement {
 
   return (
     <h1
+      className={CLASS_NAME}
       style={{
         fontFamily,
-        fontSize: '3em',
         fontWeight,
-        lineHeight: '4rem',
-        marginBottom: 0,
-        marginLeft: 0,
-        marginRight: 0,
-        marginTop: 0,
-        padding: 0,
-        textAlign: 'left',
       }}
     >
       <Text />
