@@ -5,6 +5,8 @@
     "analyze/": true,
     "certificates/": true,
     "coverage/": true,
+    "cypress/downloads/": true,
+    "node_modules/": true,
     "out/": true,
     ".eslintcache": true,
     "cypress.config.cjs": true,

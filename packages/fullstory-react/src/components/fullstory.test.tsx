@@ -4,7 +4,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { MockFullstory } from '../index.js';
 
 const ONCE = 1;
-const TEST_FULLSTORY = Object.assign(vi.fn(), FullStory);
+const TEST_FULLSTORY_FN = vi.fn();
+const TEST_FULLSTORY = Object.assign(TEST_FULLSTORY_FN, FullStory);
 const TEST_INIT = vi.fn();
 const TEST_IS_INITIALIZED = vi.fn();
 
@@ -75,5 +76,25 @@ describe('Fullstory', (): void => {
     );
 
     expect(TEST_INIT).toHaveBeenCalledTimes(ONCE);
+  });
+
+  it('should shutdown on unmount', (): void => {
+    const { unmount } = render(
+      <MockFullstory
+        FullStory={TEST_FULLSTORY}
+        init={TEST_INIT}
+        isInitialized={TEST_IS_INITIALIZED}
+        orgId="test-org-id"
+      />
+    );
+
+    unmount();
+
+    expect(TEST_FULLSTORY_FN).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_FULLSTORY_FN).toHaveBeenLastCalledWith(
+      'shutdown',
+      undefined,
+      undefined,
+    );
   });
 });

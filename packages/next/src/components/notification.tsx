@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
-import Banner from '../../modules/quisi/banner.js';
-import type NotificationType from '../../types/notification.js';
+import Banner from '../modules/quisi/banner.js';
+import type NotificationType from '../types/notification.js';
 
 export default function Notification({
   Header,

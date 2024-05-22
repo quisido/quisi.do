@@ -11,17 +11,25 @@ export default function getCookieDomain(): string {
     return COOKIE_DOMAIN;
   }
 
-  const { emitPublicMetric, logPrivateError } = getTelemetry();
+  const { emitPublicMetric, logPrivateError, logPublicError } = getTelemetry();
   if (typeof COOKIE_DOMAIN === 'undefined') {
     emitPublicMetric({ name: MetricName.MissingCookieDomain });
     return DEFAULT_COOKIE_DOMAIN;
   }
 
   emitPublicMetric({ name: MetricName.InvalidCookieDomain });
+
   logPrivateError(
     new Error('Invalid cookie domain', {
       cause: mapUnknownToString(COOKIE_DOMAIN),
     }),
   );
+
+  logPublicError(
+    new Error('Invalid cookie domain', {
+      cause: typeof COOKIE_DOMAIN,
+    }),
+  );
+
   return DEFAULT_COOKIE_DOMAIN;
 }

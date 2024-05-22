@@ -34,6 +34,10 @@ export default class State {
     this.#traceId = traceId;
   }
 
+  public get console(): Console {
+    return this.#console;
+  }
+
   public get ctx(): ExecutionContext {
     return this.#ctx;
   }

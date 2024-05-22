@@ -1,9 +1,10 @@
 import { render } from '@testing-library/react';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import Null from './null.js';
 
 describe('Null', (): void => {
   it('should render nothing', (): void => {
-    render(<Null />);
+    const { container } = render(<Null />);
+    expect(container.innerHTML).toBe('');
   });
 });
