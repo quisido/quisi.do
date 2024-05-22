@@ -156,8 +156,8 @@ jobs:
             packages/*/out/
 
   # Stage 3: lighthouse, prepublish, prepublish-applications
-  lighthouse:
-    name: Lighthouse
+  lighthouse-ci:
+    name: Lighthouse (continuous integration)
     needs: prepack
     runs-on: ubuntu-latest
     env:
@@ -188,14 +188,14 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Audit
-        run: yarn packages/next run lighthouse:report:production
+        run: yarn packages/next run lighthouse:report
       - name: Validate
         run: yarn packages/next run postlighthouse
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: lighthouse
+          name: lighthouse-ci
           path: |
             packages/*/lighthouse.report.*
             packages/*/lighthouse-*.devtoolslog.json
@@ -559,10 +559,10 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
-  # Stage 6: neuralegion
-  neuralegion:
-    name: NeuraLegion
-    needs: cloudflare-purge
+  # Stage 6: lighthouse-production
+  lighthouse-production:
+    name: Lighthouse (production)
+    needs: prepack
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -578,27 +578,32 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Scan
-        continue-on-error: true
-        # id: scan
-        uses: NeuraLegion/run-scan@release
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
         with:
-          api_token: ${{ secrets.NEURALEGION_TOKEN }}
-          name: GitHub SHA - ${{ github.sha }}
-          crawler_urls: |
-            ["https://quisi.do/"]
-          discovery_types: |
-            ["crawler"]
-      # - name: Wait for breakpoint
-      #   continue-on-error: true
-      #   uses: NeuraLegion/wait-for@release
-      #   with:
-      #     api_token: ${{ secrets.NEURALEGION_TOKEN }}
-      #     code_scanning_alerts: true
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     scan: ${{ steps.scan.outputs.id }}
-      #     timeout: 600
-      #     wait_for: any
+          name: prepack
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          check-latest: true
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Audit
+        run: yarn packages/next run lighthouse:report:production
+      - name: Validate
+        run: yarn packages/next run postlighthouse
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: lighthouse-production
+          path: |
+            packages/*/lighthouse.report.*
+            packages/*/lighthouse-*.devtoolslog.json
+            packages/*/lighthouse-*.trace.json
 
 on:
   push:
