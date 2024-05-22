@@ -1,6 +1,6 @@
 import { type FormatDetection } from 'next/dist/lib/metadata/types/extra-types';
 
-const FORMAT_DETECTION: FormatDetection = {
+export const FORMAT_DETECTION: FormatDetection = {
   address: false,
   date: true,
   email: false,
@@ -8,4 +8,3 @@ const FORMAT_DETECTION: FormatDetection = {
   url: false,
 };
 
-export default FORMAT_DETECTION;

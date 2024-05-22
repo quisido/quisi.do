@@ -28,8 +28,6 @@ import withWrappers from '../hocs/with-wrappers/index.js';
 import Theme from '../modules/quisi/theme.jsx';
 import validateString from '../utils/validate-string.js';
 import Head from './head.jsx';
-export { default as metadata } from '../constants/root-metadata.js';
-export { default as viewport } from '../constants/root-viewport.js';
 
 const BODY_CLASS_NAME: string = validateString(styles['body']);
 const HTML_CLASS_NAME: string = validateString(styles['html']);
