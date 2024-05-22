@@ -2,7 +2,7 @@ import { WhoAmIResponseCode } from "@quisido/authn-shared";
 import MetricName from "../../constants/metric-name.js";
 import StatusCode from "../../constants/status-code.js";
 import getTelemetry from "../../utils/get-telemetry.js";
-import getResponseHeaders from "./get-response-headers.js";
+import getWhoAmIResponseHeaders from "./get-whoami-response-headers.js";
 
 export default function handleInvalidAuthnId(authnId: string): Response {
   const { emitPrivateMetric, emitPublicMetric } = getTelemetry();
@@ -21,7 +21,7 @@ export default function handleInvalidAuthnId(authnId: string): Response {
       code: WhoAmIResponseCode.InvalidAuthnId,
     }),
     {
-      headers: getResponseHeaders(),
+      headers: getWhoAmIResponseHeaders(),
       status: StatusCode.OK,
     },
   );

@@ -6,7 +6,7 @@ import StatusCode from "../../constants/status-code.js";
 import getTelemetry from "../../utils/get-telemetry.js";
 import getAuthnUserIdsNamespace from "../get-authn-user-ids-namespace.js";
 import getUsage from "../get-usage.js";
-import getResponseHeaders from "./get-response-headers.js";
+import getWhoAmIResponseHeaders from "./get-whoami-response-headers.js";
 import handleInvalidAuthnId from "./handle-invalid-authn-id.js";
 
 const BASE = 10;
@@ -50,7 +50,7 @@ export default async function mapAuthnIdToResponse(authnId: string): Promise<Res
         id: parseInt(id, BASE),
       }),
       {
-        headers: getResponseHeaders(),
+        headers: getWhoAmIResponseHeaders(),
         status: StatusCode.OK,
       },
     );
