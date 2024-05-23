@@ -1,8 +1,8 @@
 /// <reference types="@cloudflare/workers-types" />
+import { isD1Database } from "cloudflare-utils";
 import { ALLOWED_METHODS_SET } from "../constants/allowed-methods.js";
 import { StatusCode } from "../constants/status-code.js";
 import InvalidPathnameResponse from "../utils/invalid-pathname-response.js";
-import isD1Database from "../utils/is-d1-database.js";
 import isObject from "../utils/is-object.js";
 import mapHeadersToOrigin from "../utils/map-headers-to-origin.js";
 import mapPathnameToProjectId from "../utils/map-pathname-to-project-id.js";

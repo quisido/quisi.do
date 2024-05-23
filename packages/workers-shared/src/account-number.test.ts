@@ -1,8 +1,8 @@
 import { isNumber, sortUnknown } from 'fmrs';
 import { describe, expect, it } from 'vitest';
-import { AccountNumber } from '../index.js';
-import createAscendingArray from '../test/create-ascending-array.js';
-import increment from '../test/increment.js';
+import { AccountNumber } from './index.js';
+import createAscendingArray from './test/create-ascending-array.js';
+import increment from './test/increment.js';
 
 const VALUES: readonly number[] = Object.values(AccountNumber).filter(isNumber);
 const ASCENDING_ARRAY: readonly number[] =

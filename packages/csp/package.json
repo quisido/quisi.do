@@ -32,6 +32,10 @@
     "vitest:watch": "vitest watch",
     "whoami": "wrangler whoami"
   },
+  "dependencies": {
+    "@quisido/workers-shared": "workspace:^",
+    "cloudflare-utils": "workspace:^"
+  },
   "devDependencies": {
     "@babel/core": "^7.24.4",
     "@babel/preset-env": "^7.24.4",

@@ -2657,6 +2657,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cloudflare/workers-types@npm:^4.20240512.0":
+  version: 4.20240512.0
+  resolution: "@cloudflare/workers-types@npm:4.20240512.0"
+  checksum: 10c0/2121867705db9b5e8e44e8d7baf6c3982e7ce41e9e01ea2d2502b7f00c73859a17b23cfcc79c88c5a55c725229d36c5cc6a5d3399ffd62f8be72c2f48ab7c128
+  languageName: node
+  linkType: hard
+
 "@colors/colors@npm:1.5.0":
   version: 1.5.0
   resolution: "@colors/colors@npm:1.5.0"
@@ -4147,32 +4154,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo-template/eslint-config@npm:^1.0.7":
-  version: 1.0.7
-  resolution: "@monorepo-template/eslint-config@npm:1.0.7"
-  dependencies:
-    "@typescript-eslint/eslint-plugin": "npm:^5.45.0"
-    "@typescript-eslint/parser": "npm:^5.45.0"
-    eslint-plugin-jsx-a11y: "npm:^6.6.1"
-    eslint-plugin-react: "npm:^7.31.11"
-    eslint-plugin-react-hooks: "npm:^4.6.0"
-  peerDependencies:
-    eslint: ">=8.0.0"
-  dependenciesMeta:
-    "@typescript-eslint/eslint-plugin":
-      optional: true
-    "@typescript-eslint/parser":
-      optional: true
-    eslint-plugin-jsx-a11y:
-      optional: true
-    eslint-plugin-react:
-      optional: true
-    eslint-plugin-react-hooks:
-      optional: true
-  checksum: 10c0/1c61c54ac15ea4ab9cba09710066ff1e0b475a17d17a873010d452790e5cabcba31412af74679957034454a5d9cc530a333c7b409268bdb6d37aca4e1a3bfea1
-  languageName: node
-  linkType: hard
-
 "@monorepo-template/ignore-cypress-dependency-logs@npm:^1.0.0":
   version: 1.0.0
   resolution: "@monorepo-template/ignore-cypress-dependency-logs@npm:1.0.0"
@@ -4201,7 +4182,6 @@ __metadata:
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.3"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/tree-logger": "workspace:^"
     "@quisido/eslint-config": "workspace:^"
     "@types/js-yaml": "npm:^4.0.9"
@@ -4232,7 +4212,6 @@ __metadata:
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.3"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@quisido/eslint-config": "workspace:^"
     "@types/node": "npm:^20.12.7"
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
@@ -4961,7 +4940,6 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.24.1"
     "@eslint/js": "npm:^9.1.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/test": "workspace:^"
     "@quisido/eslint-config": "workspace:^"
     "@types/babel__core": "npm:^7.20.5"
@@ -5037,6 +5015,7 @@ __metadata:
     "@vitest/coverage-istanbul": "npm:^1.6.0"
     babel-plugin-replace-import-extension: "npm:^1.1.4"
     cjs-ts: "workspace:^"
+    cloudflare-utils: "workspace:^"
     concurrently: "npm:^8.2.2"
     cookie: "npm:^0.6.0"
     eslint: "npm:^9.1.1"
@@ -5061,10 +5040,12 @@ __metadata:
     "@cloudflare/workers-types": "npm:^4.20240419.0"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/workers-shared": "workspace:^"
     "@types/eslint": "npm:^8.56.10"
     "@vitest/coverage-istanbul": "npm:^1.6.0"
     babel-plugin-replace-import-extension: "npm:^1.1.4"
     cjs-ts: "workspace:^"
+    cloudflare-utils: "workspace:^"
     concurrently: "npm:^8.2.2"
     eslint: "npm:^9.1.1"
     typescript: "npm:^5.4.5"
@@ -5130,7 +5111,6 @@ __metadata:
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@monorepo-template/coverage": "npm:^1.2.3"
     "@monorepo-template/cypress-coverage-plugin": "npm:^1.0.7"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@monorepo-template/ignore-cypress-dependency-logs": "npm:^1.0.0"
     "@mui/icons-material": "npm:^5.15.15"
     "@mui/material": "npm:^5.15.15"
@@ -5238,8 +5218,8 @@ __metadata:
     "@babel/preset-env": "npm:^7.24.4"
     "@babel/preset-react": "npm:^7.24.1"
     "@babel/preset-typescript": "npm:^7.24.1"
+    "@cloudflare/workers-types": "npm:^4.20240512.0"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@quisido/eslint-config": "workspace:^"
     "@types/node": "npm:^20.12.7"
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
@@ -7014,23 +6994,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.45.0":
-  version: 5.62.0
-  resolution: "@typescript-eslint/parser@npm:5.62.0"
-  dependencies:
-    "@typescript-eslint/scope-manager": "npm:5.62.0"
-    "@typescript-eslint/types": "npm:5.62.0"
-    "@typescript-eslint/typescript-estree": "npm:5.62.0"
-    debug: "npm:^4.3.4"
-  peerDependencies:
-    eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 10c0/315194b3bf39beb9bd16c190956c46beec64b8371e18d6bb72002108b250983eb1e186a01d34b77eb4045f4941acbb243b16155fbb46881105f65e37dc9e24d4
-  languageName: node
-  linkType: hard
-
 "@typescript-eslint/parser@npm:^7.0.2":
   version: 7.8.0
   resolution: "@typescript-eslint/parser@npm:7.8.0"
@@ -7046,16 +7009,6 @@ __metadata:
     typescript:
       optional: true
   checksum: 10c0/0dd994c1b31b810c25e1b755b8d352debb7bf21a31f9a91acaec34acf4e471320bcceaa67cf64c110c0b8f5fac10a037dbabac6ec423e17adf037e59a7bce9c1
-  languageName: node
-  linkType: hard
-
-"@typescript-eslint/scope-manager@npm:5.62.0":
-  version: 5.62.0
-  resolution: "@typescript-eslint/scope-manager@npm:5.62.0"
-  dependencies:
-    "@typescript-eslint/types": "npm:5.62.0"
-    "@typescript-eslint/visitor-keys": "npm:5.62.0"
-  checksum: 10c0/861253235576c1c5c1772d23cdce1418c2da2618a479a7de4f6114a12a7ca853011a1e530525d0931c355a8fd237b9cd828fac560f85f9623e24054fd024726f
   languageName: node
   linkType: hard
 
@@ -7133,13 +7086,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:5.62.0":
-  version: 5.62.0
-  resolution: "@typescript-eslint/types@npm:5.62.0"
-  checksum: 10c0/7febd3a7f0701c0b927e094f02e82d8ee2cada2b186fcb938bc2b94ff6fbad88237afc304cbaf33e82797078bbbb1baf91475f6400912f8b64c89be79bfa4ddf
-  languageName: node
-  linkType: hard
-
 "@typescript-eslint/types@npm:6.21.0":
   version: 6.21.0
   resolution: "@typescript-eslint/types@npm:6.21.0"
@@ -7165,24 +7111,6 @@ __metadata:
   version: 7.8.0
   resolution: "@typescript-eslint/types@npm:7.8.0"
   checksum: 10c0/b2fdbfc21957bfa46f7d8809b607ad8c8b67c51821d899064d09392edc12f28b2318a044f0cd5d523d782e84e8f0558778877944964cf38e139f88790cf9d466
-  languageName: node
-  linkType: hard
-
-"@typescript-eslint/typescript-estree@npm:5.62.0":
-  version: 5.62.0
-  resolution: "@typescript-eslint/typescript-estree@npm:5.62.0"
-  dependencies:
-    "@typescript-eslint/types": "npm:5.62.0"
-    "@typescript-eslint/visitor-keys": "npm:5.62.0"
-    debug: "npm:^4.3.4"
-    globby: "npm:^11.1.0"
-    is-glob: "npm:^4.0.3"
-    semver: "npm:^7.3.7"
-    tsutils: "npm:^3.21.0"
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 10c0/d7984a3e9d56897b2481940ec803cb8e7ead03df8d9cfd9797350be82ff765dfcf3cfec04e7355e1779e948da8f02bc5e11719d07a596eb1cb995c48a95e38cf
   languageName: node
   linkType: hard
 
@@ -7310,16 +7238,6 @@ __metadata:
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0
   checksum: 10c0/ab2df3833b2582d4e5467a484d08942b4f2f7208f8e09d67de510008eb8001a9b7460f2f9ba11c12086fd3cdcac0c626761c7995c2c6b5657d5fa6b82030a32d
-  languageName: node
-  linkType: hard
-
-"@typescript-eslint/visitor-keys@npm:5.62.0":
-  version: 5.62.0
-  resolution: "@typescript-eslint/visitor-keys@npm:5.62.0"
-  dependencies:
-    "@typescript-eslint/types": "npm:5.62.0"
-    eslint-visitor-keys: "npm:^3.3.0"
-  checksum: 10c0/7c3b8e4148e9b94d9b7162a596a1260d7a3efc4e65199693b8025c71c4652b8042501c0bc9f57654c1e2943c26da98c0f77884a746c6ae81389fcb0b513d995d
   languageName: node
   linkType: hard
 
@@ -8304,7 +8222,6 @@ __metadata:
     "@babel/preset-react": "npm:^7.24.1"
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@quisido/eslint-config": "workspace:^"
     "@testing-library/react": "npm:^15.0.7"
     "@types/babel__core": "npm:^7.20.5"
@@ -9248,6 +9165,29 @@ __metadata:
   checksum: 10c0/2176952b3649293473999a95d7bebfc9dc96410f6cbd3d2595cf12fd401f63a4bf41a7adbfd3ab2ff09ed60cb9870c58c6acdd18b87767366fabfc163700f13b
   languageName: node
   linkType: hard
+
+"cloudflare-utils@workspace:^, cloudflare-utils@workspace:packages/cloudflare-utils":
+  version: 0.0.0-use.local
+  resolution: "cloudflare-utils@workspace:packages/cloudflare-utils"
+  dependencies:
+    "@arethetypeswrong/cli": "npm:^0.15.3"
+    "@cloudflare/workers-types": "npm:^4.20240512.0"
+    "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
+    "@quisido/eslint-config": "workspace:^"
+    "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
+    "@typescript-eslint/parser": "npm:^7.7.0"
+    "@vitest/coverage-istanbul": "npm:^1.6.0"
+    concurrently: "npm:^8.2.2"
+    eslint: "npm:^9.1.1"
+    eslint-config-prettier: "npm:^9.1.0"
+    eslint-plugin-import: "npm:^2.29.1"
+    eslint-plugin-prettier: "npm:^5.1.3"
+    prettier: "npm:^3.2.5"
+    tslib: "npm:^2.6.2"
+    typescript: "npm:^5.4.5"
+    vitest: "npm:^1.6.0"
+  languageName: unknown
+  linkType: soft
 
 "clsx@npm:^2.0.0, clsx@npm:^2.1.0":
   version: 2.1.0
@@ -10898,7 +10838,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsx-a11y@npm:^6.6.1, eslint-plugin-jsx-a11y@npm:^6.7.1, eslint-plugin-jsx-a11y@npm:^6.8.0":
+"eslint-plugin-jsx-a11y@npm:^6.7.1, eslint-plugin-jsx-a11y@npm:^6.8.0":
   version: 6.8.0
   resolution: "eslint-plugin-jsx-a11y@npm:6.8.0"
   dependencies:
@@ -10962,7 +10902,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.31.11, eslint-plugin-react@npm:^7.33.2, eslint-plugin-react@npm:^7.34.1":
+"eslint-plugin-react@npm:^7.33.2, eslint-plugin-react@npm:^7.34.1":
   version: 7.34.1
   resolution: "eslint-plugin-react@npm:7.34.1"
   dependencies:
@@ -11650,7 +11590,6 @@ __metadata:
     "@babel/preset-react": "npm:^7.24.1"
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@quisido/eslint-config": "workspace:^"
     "@types/node": "npm:^20.12.7"
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
@@ -11850,7 +11789,6 @@ __metadata:
     "@fullstory/browser": "npm:^2.0.4"
     "@fullstory/snippet": "npm:^2.0.4"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@quisido/eslint-config": "workspace:^"
     "@testing-library/react": "npm:^15.0.7"
     "@types/babel__core": "npm:^7.20.5"
@@ -14568,7 +14506,6 @@ __metadata:
     "@babel/preset-react": "npm:^7.24.1"
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@quisido/eslint-config": "workspace:^"
     "@testing-library/react": "npm:^15.0.7"
     "@types/node": "npm:^20.12.7"
@@ -14950,7 +14887,6 @@ __metadata:
     "@babel/preset-react": "npm:^7.24.1"
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@quisido/eslint-config": "workspace:^"
     "@testing-library/react": "npm:^15.0.7"
     "@types/node": "npm:^20.12.7"
@@ -16006,7 +15942,6 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.24.1"
     "@datadog/browser-rum": "npm:^5.15.0"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@quisido/eslint-config": "workspace:^"
     "@testing-library/react": "npm:^15.0.7"
     "@types/node": "npm:^20.12.7"
@@ -16827,7 +16762,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:7.6.0, semver@npm:^7.0.0, semver@npm:^7.1.2, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.5.2, semver@npm:^7.5.3, semver@npm:^7.5.4, semver@npm:^7.6.0":
+"semver@npm:7.6.0, semver@npm:^7.0.0, semver@npm:^7.1.2, semver@npm:^7.3.5, semver@npm:^7.5.2, semver@npm:^7.5.3, semver@npm:^7.5.4, semver@npm:^7.6.0":
   version: 7.6.0
   resolution: "semver@npm:7.6.0"
   dependencies:
@@ -16866,7 +16801,6 @@ __metadata:
     "@babel/preset-react": "npm:^7.24.1"
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@quisido/eslint-config": "workspace:^"
     "@sentry/browser": "npm:^7.111.0"
     "@sentry/react": "npm:^7.111.0"
@@ -18090,7 +18024,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^1.11.1, tslib@npm:^1.8.1, tslib@npm:^1.9.0, tslib@npm:^1.9.3":
+"tslib@npm:^1.11.1, tslib@npm:^1.9.0, tslib@npm:^1.9.3":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: 10c0/69ae09c49eea644bc5ebe1bca4fa4cc2c82b7b3e02f43b84bd891504edf66dbc6b2ec0eef31a957042de2269139e4acff911e6d186a258fb14069cd7f6febce2
@@ -18101,17 +18035,6 @@ __metadata:
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: 10c0/e03a8a4271152c8b26604ed45535954c0a45296e32445b4b87f8a5abdb2421f40b59b4ca437c4346af0f28179780d604094eb64546bee2019d903d01c6c19bdb
-  languageName: node
-  linkType: hard
-
-"tsutils@npm:^3.21.0":
-  version: 3.21.0
-  resolution: "tsutils@npm:3.21.0"
-  dependencies:
-    tslib: "npm:^1.8.1"
-  peerDependencies:
-    typescript: ">=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta"
-  checksum: 10c0/02f19e458ec78ead8fffbf711f834ad8ecd2cc6ade4ec0320790713dccc0a412b99e7fd907c4cda2a1dc602c75db6f12e0108e87a5afad4b2f9e90a24cabd5a2
   languageName: node
   linkType: hard
 
@@ -18463,7 +18386,6 @@ __metadata:
     "@babel/preset-react": "npm:^7.24.1"
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@quisido/eslint-config": "workspace:^"
     "@types/node": "npm:^20.12.7"
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
@@ -18570,7 +18492,6 @@ __metadata:
     "@babel/preset-react": "npm:^7.24.1"
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
-    "@monorepo-template/eslint-config": "npm:^1.0.7"
     "@quisido/eslint-config": "workspace:^"
     "@testing-library/react": "npm:^15.0.7"
     "@types/node": "npm:^20.12.7"

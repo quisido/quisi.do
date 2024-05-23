@@ -38,6 +38,7 @@
   "dependencies": {
     "@quisido/authn-shared": "workspace:^",
     "@quisido/workers-shared": "workspace:^",
+    "cloudflare-utils": "workspace:^",
     "cookie": "^0.6.0",
     "fmrs": "workspace:^",
     "form-urlencoded": "^6.1.4",

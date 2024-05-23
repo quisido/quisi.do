@@ -1,8 +1,8 @@
+import { isR2Bucket } from 'cloudflare-utils';
 import { mapUnknownToString } from 'fmrs';
 import MetricName from '../constants/metric-name.js';
 import getEnv from '../utils/get-env.js';
 import getTelemetry from '../utils/get-telemetry.js';
-import isR2Bucket from '../utils/is-r2-bucket.js';
 
 export default function getDataBucket(): R2Bucket | null {
   const { AUTHN_DATA } = getEnv();

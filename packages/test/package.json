@@ -44,7 +44,6 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.3",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@monorepo-template/eslint-config": "^1.0.7",
     "@quisido/eslint-config": "workspace:^",
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch",
     "@typescript-eslint/parser": "^7.7.0",

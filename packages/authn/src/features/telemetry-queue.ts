@@ -1,9 +1,9 @@
 import { AccountNumber, UsageType } from '@quisido/workers-shared';
+import { isAnalyticsEngineDataset } from 'cloudflare-utils';
 import { mapUnknownToError } from 'fmrs';
 import MetricName from '../constants/metric-name.js';
 import type { TraceParent } from '../modules/trace-parent/index.js';
 import type { Metric } from '../types/metric.js';
-import isAnaylticsEngineDataset from '../utils/is-analytics-engine-dataset.js';
 import mapAnalyticsEngineDatasetToEmitter from '../utils/map-analytics-dataset-engine-to-emitter.js';
 import mapRequestToTraceParent from '../utils/map-request-to-trace-parent.js';
 import TelemetryQueue from '../utils/telemetry-queue.js';
@@ -94,7 +94,7 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
       return;
     }
 
-    if (!isAnaylticsEngineDataset(dataset)) {
+    if (!isAnalyticsEngineDataset(dataset)) {
       this.emitPublicMetric({
         name: MetricName.InvalidPrivateDataset,
         type: typeof dataset,
@@ -119,7 +119,7 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
       return;
     }
 
-    if (!isAnaylticsEngineDataset(dataset)) {
+    if (!isAnalyticsEngineDataset(dataset)) {
       this.emitPublicMetric({
         name: MetricName.InvalidPublicDataset,
         type: typeof dataset,
@@ -163,7 +163,7 @@ export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric>
       return;
     }
 
-    if (!isAnaylticsEngineDataset(dataset)) {
+    if (!isAnalyticsEngineDataset(dataset)) {
       this.emitPublicMetric({
         name: MetricName.InvalidUsageDataset,
         type: typeof dataset,
