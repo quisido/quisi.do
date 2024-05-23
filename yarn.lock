@@ -5216,6 +5216,7 @@ __metadata:
     sentry-react: "workspace:^"
     serve: "npm:^14.2.1"
     sharp: "npm:^0.33.3"
+    source-map: "npm:^0.7.4"
     typescript: "npm:^5.4.5"
     use-force-update: "npm:^1.0.11"
     use-mui: "npm:^1.0.6"

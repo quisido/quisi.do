@@ -9,9 +9,13 @@ export default function getAccessControlAllowOrigin(): string {
    * The HTTP protocol is for `serve`; the HTTPS protocol is for `dev`.
    */
   const origin: string | null = request.headers.get('Origin');
+  if (origin === null) {
+    return '*';
+  }
+
   if (
     origin === 'http://localhost:3000' ||
-    origin === 'https://localhost:3000/'
+    origin === 'https://localhost:3000'
   ) {
     return origin;
   }

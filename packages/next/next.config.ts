@@ -1,38 +1,17 @@
 import { type NextConfig } from 'next';
 import { type ExperimentalConfig } from 'next/dist/server/config-shared.js';
-import { cpus } from 'node:os';
 import { join } from 'node:path';
+import getCpus from './src/utils/get-cpus.js';
 import getVersion from './src/utils/get-version.js';
+import mapEnvironmentVariableNamesToRecord from './src/utils/map-environment-variable-names-to-record.js';
 import mapNodeEnvToOnDemandEntries from './src/utils/map-node-env-to-on-demand-entries.js';
 import mapNodeEnvToOutput from './src/utils/map-node-env-to-output.js';
+import nextConfigWebpack from './src/utils/next-config-webpack.js';
 import optional from './src/utils/optional.js';
-import validateString from './src/utils/validate-string.js';
 import withNextJsBundleAnalyzer from './src/utils/with-nextjs-bundle-analyzer.js';
 
-const BASE = 10;
-const CPUS_COUNT: number = cpus().length;
+const cpus: number = getCpus();
 const handleDemandEntries = mapNodeEnvToOnDemandEntries(process.env.NODE_ENV);
-
-const getCpus = (): number => {
-  const cpus: string | undefined = process.env['CPUS'];
-  if (typeof cpus === 'undefined') {
-    return CPUS_COUNT;
-  }
-  return parseInt(cpus, BASE);
-};
-
-const reduceEnvironmentVariableNamesToRecord = (
-  record: Record<string, string | undefined>,
-  name: string,
-): Record<string, string | undefined> => ({
-  ...record,
-  [name]: validateString(process.env[name]),
-});
-
-const mapEnvironmentVariableNamesToRecord = (
-  names: readonly string[],
-): Record<string, string | undefined> =>
-  names.reduce(reduceEnvironmentVariableNamesToRecord, {});
 
 export default withNextJsBundleAnalyzer({
   assetPrefix: '', // Same domain
@@ -47,6 +26,7 @@ export default withNextJsBundleAnalyzer({
   reactStrictMode: true,
   skipTrailingSlashRedirect: false,
   trailingSlash: true,
+  webpack: nextConfigWebpack,
 
   devIndicators: {
     buildActivity: true,
@@ -84,7 +64,7 @@ export default withNextJsBundleAnalyzer({
      * cacheMaxMemorySize: Number.POSITIVE_INFINITY,
      * disablePostcssPresetEnv: true,
      */
-    cpus: getCpus(),
+    cpus,
     craCompat: false,
     // FallbackNodePolyfills: false,
     forceSwcTransforms: true,
@@ -129,13 +109,8 @@ export default withNextJsBundleAnalyzer({
      */
   } satisfies ExperimentalConfig,
 
-  images: {
-    loader: 'custom',
-    loaderFile: './scripts/imagekit-loader/index.js',
-  },
-
   typescript: {
-    // TODO: 🔥🔥🔥 CHANGE ME BACK TO `false`! 🔥🔥🔥
+    // NextJS freezes with "Checking validity of types."
     ignoreBuildErrors: true,
     tsconfigPath: './tsconfig.prepack.json',
   },

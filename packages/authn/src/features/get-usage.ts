@@ -48,11 +48,14 @@ export default function getUsage(): (options: Options) => void {
     type,
   }: Options): void {
     USAGE.writeDataPoint({
-      doubles: [type, count, per],
-      indexes: [
-        account.toString(),
-        Product.Authentication.toString(),
-        QUISIDO_AUTHENTICATION_PROJECT.toString(),
+      indexes: [account.toString()],
+
+      doubles: [
+        Product.Authentication,
+        QUISIDO_AUTHENTICATION_PROJECT,
+        type,
+        count,
+        per,
       ],
     });
   }
