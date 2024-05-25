@@ -1,13 +1,12 @@
 {
-  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/"],
+  "exclude": ["src/**/*.test.ts", "src/test/"],
   "extends": "./tsconfig.json",
   "include": ["src/"],
-
   "compilerOptions": {
     "declarationDir": "dist",
     "noEmit": false,
     "outDir": "dist",
     "rootDir": "src",
-    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/test/src/"
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/eslint-config/src/"
   }
 }

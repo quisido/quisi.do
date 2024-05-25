@@ -115,6 +115,7 @@
     "@opentelemetry/core": "^1.23.0",
     "@opentelemetry/sdk-metrics": "^1.23.0",
     "@quisido/eslint-config": "workspace:^",
+    "@quisido/vitest-config": "workspace:^",
     "@react-aria/link": "^3.6.5",
     "@sentry/types": "^7.111.0",
     "@stylistic/eslint-plugin-ts": "^1.7.2",

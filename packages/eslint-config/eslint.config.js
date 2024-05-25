@@ -1,1 +1,1 @@
-export { default } from '@quisido/eslint-config';
+export { default } from './dist/index.js';

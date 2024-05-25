@@ -2650,13 +2650,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudflare/workers-types@npm:^4.20240419.0":
-  version: 4.20240419.0
-  resolution: "@cloudflare/workers-types@npm:4.20240419.0"
-  checksum: 10c0/e84f7bb16fb0d929dd91f9e0917f4c6f628b6b33d6894229fabd24350c28cfab2b632b605d5ac81eb56a9af096d9179488b4522d6ed9cc772c3d71a4e8f33717
-  languageName: node
-  linkType: hard
-
 "@cloudflare/workers-types@npm:^4.20240512.0":
   version: 4.20240512.0
   resolution: "@cloudflare/workers-types@npm:4.20240512.0"
@@ -4184,6 +4177,7 @@ __metadata:
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@monorepo-template/tree-logger": "workspace:^"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@types/js-yaml": "npm:^4.0.9"
     "@types/node": "npm:^20.12.7"
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
@@ -4200,6 +4194,7 @@ __metadata:
     prettier: "npm:^3.2.5"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   bin:
     monorepo-template-test: ./dist/bin/test.js
@@ -4213,6 +4208,7 @@ __metadata:
     "@arethetypeswrong/cli": "npm:^0.15.3"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@types/node": "npm:^20.12.7"
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
     "@typescript-eslint/parser": "npm:^7.7.0"
@@ -4228,6 +4224,7 @@ __metadata:
     prettier: "npm:^3.2.5"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   languageName: unknown
   linkType: soft
@@ -4942,6 +4939,7 @@ __metadata:
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@monorepo-template/test": "workspace:^"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@types/babel__core": "npm:^7.20.5"
     "@types/babel__preset-env": "npm:^7.9.6"
     "@types/eslint": "npm:^8.56.10"
@@ -4978,6 +4976,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@types/node": "npm:^20.12.7"
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
     "@typescript-eslint/parser": "npm:^7.7.0"
@@ -4993,6 +4992,7 @@ __metadata:
     prettier: "npm:^3.2.5"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   languageName: unknown
   linkType: soft
@@ -5005,10 +5005,11 @@ __metadata:
     "@babel/preset-env": "npm:^7.24.4"
     "@babel/preset-react": "npm:^7.24.1"
     "@babel/preset-typescript": "npm:^7.24.1"
-    "@cloudflare/workers-types": "npm:^4.20240419.0"
+    "@cloudflare/workers-types": "npm:^4.20240512.0"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/authn-shared": "workspace:^"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@quisido/workers-shared": "workspace:^"
     "@types/cookie": "npm:^0.6.0"
     "@types/eslint": "npm:^8.56.10"
@@ -5024,6 +5025,7 @@ __metadata:
     proposal-async-context: "https://github.com/tc39/proposal-async-context"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
     wrangler: "npm:^3.51.2"
   languageName: unknown
@@ -5037,9 +5039,10 @@ __metadata:
     "@babel/preset-env": "npm:^7.24.4"
     "@babel/preset-react": "npm:^7.24.1"
     "@babel/preset-typescript": "npm:^7.24.1"
-    "@cloudflare/workers-types": "npm:^4.20240419.0"
+    "@cloudflare/workers-types": "npm:^4.20240512.0"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@quisido/workers-shared": "workspace:^"
     "@types/eslint": "npm:^8.56.10"
     "@vitest/coverage-istanbul": "npm:^1.6.0"
@@ -5049,6 +5052,7 @@ __metadata:
     concurrently: "npm:^8.2.2"
     eslint: "npm:^9.1.1"
     typescript: "npm:^5.4.5"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
     wrangler: "npm:^3.51.2"
   languageName: unknown
@@ -5133,6 +5137,7 @@ __metadata:
     "@opentelemetry/semantic-conventions": "npm:^1.23.0"
     "@quisido/authn-shared": "workspace:^"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@react-aria/button": "npm:^3.9.3"
     "@react-aria/link": "npm:^3.6.5"
     "@react-aria/overlays": "npm:^3.21.1"
@@ -5209,6 +5214,44 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@quisido/vitest-config@workspace:^, @quisido/vitest-config@workspace:packages/vitest-config":
+  version: 0.0.0-use.local
+  resolution: "@quisido/vitest-config@workspace:packages/vitest-config"
+  dependencies:
+    "@arethetypeswrong/cli": "npm:^0.15.3"
+    "@babel/core": "npm:^7.24.4"
+    "@babel/preset-env": "npm:^7.24.4"
+    "@babel/preset-react": "npm:^7.24.1"
+    "@babel/preset-typescript": "npm:^7.24.1"
+    "@eslint/js": "npm:^9.1.1"
+    "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
+    "@types/eslint": "npm:^8.56.10"
+    "@types/eslint-config-prettier": "npm:^6.11.3"
+    "@types/eslint__js": "npm:^8.42.3"
+    "@types/node": "npm:^20.12.7"
+    "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
+    "@typescript-eslint/parser": "npm:^7.7.0"
+    "@vitest/coverage-istanbul": "npm:^1.6.0"
+    babel-plugin-replace-import-extension: "npm:^1.1.4"
+    cjs-ts: "workspace:^"
+    concurrently: "npm:^8.2.2"
+    eslint: "npm:^9.1.1"
+    eslint-config-prettier: "npm:^9.1.0"
+    eslint-plugin-import: "npm:^2.29.1"
+    eslint-plugin-prettier: "npm:^5.1.3"
+    prettier: "npm:^3.2.5"
+    tslib: "npm:^2.6.2"
+    typescript: "npm:^5.4.5"
+    typescript-eslint: "patch:typescript-eslint@npm%3A7.7.0#~/.yarn/patches/typescript-eslint-npm-7.7.0-1c6d9ccc41.patch"
+    vite: "npm:^5.2.11"
+    vitest: "npm:^1.6.0"
+  peerDependencies:
+    eslint: ^9.0.0
+    vite: ^5.0.0
+    vitest: ^1.0.0
+  languageName: unknown
+  linkType: soft
+
 "@quisido/workers-shared@workspace:^, @quisido/workers-shared@workspace:packages/workers-shared":
   version: 0.0.0-use.local
   resolution: "@quisido/workers-shared@workspace:packages/workers-shared"
@@ -5221,6 +5264,7 @@ __metadata:
     "@cloudflare/workers-types": "npm:^4.20240512.0"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@types/node": "npm:^20.12.7"
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
     "@typescript-eslint/parser": "npm:^7.7.0"
@@ -5236,6 +5280,7 @@ __metadata:
     prettier: "npm:^3.2.5"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   languageName: unknown
   linkType: soft
@@ -8223,6 +8268,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@testing-library/react": "npm:^15.0.7"
     "@types/babel__core": "npm:^7.20.5"
     "@types/babel__preset-env": "npm:^7.9.6"
@@ -8248,6 +8294,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     typescript: "npm:^5.4.5"
     unknown2string: "workspace:^"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
     whatwg-fetch: "npm:^3.6.20"
   peerDependencies:
@@ -9174,6 +9221,7 @@ __metadata:
     "@cloudflare/workers-types": "npm:^4.20240512.0"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
     "@typescript-eslint/parser": "npm:^7.7.0"
     "@vitest/coverage-istanbul": "npm:^1.6.0"
@@ -9185,6 +9233,7 @@ __metadata:
     prettier: "npm:^3.2.5"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   languageName: unknown
   linkType: soft
@@ -11591,6 +11640,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@types/node": "npm:^20.12.7"
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
     "@typescript-eslint/parser": "npm:^7.7.0"
@@ -11606,6 +11656,7 @@ __metadata:
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
     unknown2string: "workspace:^"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   languageName: unknown
   linkType: soft
@@ -11790,6 +11841,7 @@ __metadata:
     "@fullstory/snippet": "npm:^2.0.4"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@testing-library/react": "npm:^15.0.7"
     "@types/babel__core": "npm:^7.20.5"
     "@types/babel__preset-env": "npm:^7.9.6"
@@ -11815,6 +11867,7 @@ __metadata:
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
     use-shallow-memo: "workspace:^"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   peerDependencies:
     react: ">=17.0.0"
@@ -13732,6 +13785,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@testing-library/react": "npm:^15.0.7"
     "@types/babel__core": "npm:^7.20.5"
     "@types/babel__preset-env": "npm:^7.9.6"
@@ -13757,6 +13811,7 @@ __metadata:
     sass: "npm:^1.77.2"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   peerDependencies:
     react: ">=17.0.0"
@@ -14507,6 +14562,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@testing-library/react": "npm:^15.0.7"
     "@types/node": "npm:^20.12.7"
     "@types/react": "npm:^18.2.79"
@@ -14533,6 +14589,7 @@ __metadata:
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
     use-force-update: "npm:^1.0.11"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   peerDependencies:
     "@awsui/components-react": ">=3.0.0"
@@ -14888,6 +14945,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@testing-library/react": "npm:^15.0.7"
     "@types/node": "npm:^20.12.7"
     "@types/react": "npm:^18.2.79"
@@ -14909,6 +14967,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   peerDependencies:
     react: ">=16.8.0"
@@ -15943,6 +16002,7 @@ __metadata:
     "@datadog/browser-rum": "npm:^5.15.0"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@testing-library/react": "npm:^15.0.7"
     "@types/node": "npm:^20.12.7"
     "@types/react": "npm:^18.2.79"
@@ -15960,6 +16020,7 @@ __metadata:
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
     use-shallow-memo: "workspace:^"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   peerDependencies:
     "@datadog/browser-rum": ^5.0.0
@@ -16802,6 +16863,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@sentry/browser": "npm:^7.111.0"
     "@sentry/react": "npm:^7.111.0"
     "@sentry/types": "npm:^7.111.0"
@@ -16830,6 +16892,7 @@ __metadata:
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
     use-shallow-memo: "workspace:^"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   peerDependencies:
     react: ">=18.0.0"
@@ -18387,6 +18450,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@types/node": "npm:^20.12.7"
     "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch"
     "@typescript-eslint/parser": "npm:^7.7.0"
@@ -18401,6 +18465,7 @@ __metadata:
     prettier: "npm:^3.2.5"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   languageName: unknown
   linkType: soft
@@ -18493,6 +18558,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.24.1"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/vitest-config": "workspace:^"
     "@testing-library/react": "npm:^15.0.7"
     "@types/node": "npm:^20.12.7"
     "@types/react": "npm:^18.2.79"
@@ -18514,6 +18580,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.4.5"
+    vite: "npm:^5.2.11"
     vitest: "npm:^1.6.0"
   peerDependencies:
     react: ">=16.8.0"

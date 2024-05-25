@@ -1,25 +1,10 @@
+import CONFIG, { INLINE_CONFIG } from '@quisido/vitest-config';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
+  ...CONFIG,
   test: {
-    clearMocks: true,
+    ...INLINE_CONFIG,
     environment: 'jsdom',
-    mockReset: true,
-    restoreMocks: true,
-
-    coverage: {
-      all: true,
-      clean: true,
-      enabled: true,
-      provider: 'istanbul',
-      skipFull: true,
-
-      thresholds: {
-        branches: 100,
-        functions: 100,
-        lines: 100,
-        statements: 100,
-      },
-    },
   },
 });

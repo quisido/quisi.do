@@ -6,9 +6,9 @@ export default [
 
   {
     files: [
-      'src/constants/account-number.ts',
-      'src/constants/product.ts',
-      'src/constants/usage-type.ts',
+      'src/account-number.ts',
+      'src/product.ts',
+      'src/usage-type.ts',
     ],
 
     rules: {

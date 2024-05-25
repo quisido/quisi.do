@@ -81,6 +81,10 @@
       "path": "packages/use-shallow-memo",
     },
     {
+      "name": "vitest-config",
+      "path": "packages/vitest-config",
+    },
+    {
       "name": "workers-shared",
       "path": "packages/workers-shared",
     },

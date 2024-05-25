@@ -1,7 +1,7 @@
 {
   "exclude": ["coverage/", "dist/", "node_modules/"],
   "extends": "../../tsconfig.json",
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
     "lib": ["DOM", "ESNext"],
     "noEmit": true,

@@ -1,27 +1,25 @@
 {
-  "name": "fullstory-react",
-  "version": "2.0.1",
-  "author": "quisi.do <fullstory-react@quisi.do>",
-  "description": "FullStory integration with React",
-  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/fullstory-react#readme",
+  "name": "@quisido/vitest-config",
+  "version": "1.0.0",
+  "author": "quisi.do <vitest-config@quisi.do>",
+  "description": "vitest configurations for quisi.do",
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/vitest-config#readme",
   "license": "MIT",
   "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "repository": "github:quisido/quisi.do",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
-    "email": "fullstory-react@quisi.do",
+    "email": "vitest-config@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
   "funding": {
-    "type": "individual",
+    "type": "",
     "url": "https://github.com/sponsors/quisido"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/quisido/quisi.do.git"
   },
   "scripts": {
     "attw": "attw --quiet",
@@ -29,16 +27,20 @@
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "yarn run tsc",
-    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,vitest \"yarn run attw\" \"yarn run eslint\" \"yarn run vitest:run\"",
+    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint \"yarn run attw\" \"yarn run eslint\"",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json",
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
   },
   "dependencies": {
-    "@fullstory/browser": "^2.0.4",
-    "@fullstory/snippet": "^2.0.4",
-    "use-shallow-memo": "workspace:^"
+    "@eslint/js": "^9.1.1",
+    "@types/eslint": "^8.56.10",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "@types/eslint__js": "^8.42.3",
+    "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch",
+    "@typescript-eslint/parser": "^7.7.0",
+    "typescript-eslint": "patch:typescript-eslint@npm%3A7.7.0#~/.yarn/patches/typescript-eslint-npm-7.7.0-1c6d9ccc41.patch"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.3",
@@ -47,36 +49,25 @@
     "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@quisido/eslint-config": "workspace:^",
-    "@quisido/vitest-config": "workspace:^",
-    "@testing-library/react": "^15.0.7",
-    "@types/babel__core": "^7.20.5",
-    "@types/babel__preset-env": "^7.9.6",
+    "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.12.7",
-    "@types/react": "^18.2.79",
-    "@types/react-dom": "^18.2.25",
-    "@typescript-eslint/eslint-plugin": "patch:@typescript-eslint/eslint-plugin@npm%3A7.7.0#~/.yarn/patches/@typescript-eslint-eslint-plugin-npm-7.7.0-de43f1e757.patch",
-    "@typescript-eslint/parser": "^7.7.0",
     "@vitest/coverage-istanbul": "^1.6.0",
     "babel-plugin-replace-import-extension": "^1.1.4",
     "cjs-ts": "workspace:^",
     "concurrently": "^8.2.2",
     "eslint": "^9.1.1",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.1.3",
-    "eslint-plugin-react": "^7.34.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "jsdom": "^24.0.0",
     "prettier": "^3.2.5",
-    "react": "^18.3.1",
-    "react-dom": "^18.2.0",
-    "react-test-renderer": "^18.2.0",
     "tslib": "^2.6.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.11",
     "vitest": "^1.6.0"
   },
   "peerDependencies": {
-    "react": ">=17.0.0"
+    "eslint": "^9.0.0",
+    "vite": "^5.0.0",
+    "vitest": "^1.0.0"
   }
 }
