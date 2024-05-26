@@ -1,4 +1,4 @@
-export { AccountNumber } from "./constants/account-number.js";
-export { Product } from "./constants/product.js";
-export { UsageType } from "./constants/usage-type.js";
+export { AccountNumber } from "./account-number.js";
+export { Product } from "./product.js";
+export { UsageType } from "./usage-type.js";
 

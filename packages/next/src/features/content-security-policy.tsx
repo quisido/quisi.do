@@ -9,6 +9,7 @@ const CONNECT_SRC: string = [
   // Clarity
   'p.clarity.ms',
   't.clarity.ms',
+  'w.clarity.ms',
 
   // Cloudflare Insights
   'cloudflareinsights.com',

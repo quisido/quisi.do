@@ -1,18 +1,13 @@
+import CONFIG, { COVERAGE_OPTIONS, INLINE_CONFIG } from '@quisido/vitest-config';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
+  ...CONFIG,
   test: {
-    clearMocks: true,
-    environment: 'node',
-    mockReset: true,
-    restoreMocks: true,
+    ...INLINE_CONFIG,
 
     coverage: {
-      all: true,
-      clean: true,
-      enabled: true,
-      provider: 'istanbul',
-      skipFull: true,
+      ...COVERAGE_OPTIONS,
 
       thresholds: {
         branches: 9,

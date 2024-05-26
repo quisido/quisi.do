@@ -58,8 +58,8 @@
     "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@monorepo-template/eslint-config": "^1.0.7",
     "@quisido/eslint-config": "workspace:^",
+    "@quisido/vitest-config": "workspace:^",
     "@sentry/react": "^7.111.0",
     "@testing-library/react": "^15.0.7",
     "@types/babel__core": "^7.20.5",
@@ -85,6 +85,7 @@
     "react-test-renderer": "^18.2.0",
     "tslib": "^2.6.2",
     "typescript": "^5.4.5",
+    "vite": "^5.2.11",
     "vitest": "^1.6.0"
   },
   "peerDependencies": {

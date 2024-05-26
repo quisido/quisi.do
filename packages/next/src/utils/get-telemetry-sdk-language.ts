@@ -7,5 +7,6 @@ export default function getTelemetrySdkLanguage(): string {
   if (typeof window === 'undefined') {
     return TELEMETRYSDKLANGUAGEVALUES_NODEJS;
   }
+
   return TELEMETRYSDKLANGUAGEVALUES_WEBJS;
 }

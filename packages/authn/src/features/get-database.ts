@@ -1,6 +1,6 @@
 import { ErrorCode } from '@quisido/authn-shared';
+import { isD1Database } from 'cloudflare-utils';
 import getEnv from '../utils/get-env.js';
-import isD1Database from '../utils/is-d1-database.js';
 import mapCauseToError from '../utils/map-cause-to-error.js';
 
 export default function getDatabase(): D1Database {

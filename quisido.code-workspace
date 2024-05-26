@@ -25,6 +25,10 @@
       "path": "packages/aws-rum-react",
     },
     {
+      "name": "cloudflare-utils",
+      "path": "packages/cloudflare-utils",
+    },
+    {
       "name": "cjs-ts",
       "path": "packages/cjs-ts",
     },
@@ -75,6 +79,10 @@
     {
       "name": "use-shallow-memo",
       "path": "packages/use-shallow-memo",
+    },
+    {
+      "name": "vitest-config",
+      "path": "packages/vitest-config",
     },
     {
       "name": "workers-shared",

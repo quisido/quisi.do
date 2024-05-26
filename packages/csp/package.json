@@ -32,14 +32,19 @@
     "vitest:watch": "vitest watch",
     "whoami": "wrangler whoami"
   },
+  "dependencies": {
+    "@quisido/workers-shared": "workspace:^",
+    "cloudflare-utils": "workspace:^"
+  },
   "devDependencies": {
     "@babel/core": "^7.24.4",
     "@babel/preset-env": "^7.24.4",
     "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
-    "@cloudflare/workers-types": "^4.20240419.0",
+    "@cloudflare/workers-types": "^4.20240512.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "workspace:^",
+    "@quisido/vitest-config": "workspace:^",
     "@types/eslint": "^8.56.10",
     "@vitest/coverage-istanbul": "^1.6.0",
     "babel-plugin-replace-import-extension": "^1.1.4",
@@ -47,6 +52,7 @@
     "concurrently": "^8.2.2",
     "eslint": "^9.1.1",
     "typescript": "^5.4.5",
+    "vite": "^5.2.11",
     "vitest": "^1.6.0",
     "wrangler": "^3.51.2"
   }
