@@ -1,5 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
-import { isD1Database } from "cloudflare-utils";
+import { isAnalyticsEngineDataset, isD1Database } from "cloudflare-utils";
 import { ALLOWED_METHODS_SET } from "../constants/allowed-methods.js";
 import { StatusCode } from "../constants/status-code.js";
 import InvalidPathnameResponse from "../utils/invalid-pathname-response.js";
@@ -38,18 +38,36 @@ export default async function handleFetch(
   }
 
   // Database
-  const { CSP_DB } = env;
+  const { CSP_DB, USAGE } = env;
   if (!isD1Database(CSP_DB)) {
     console.log('Invalid database');
+    return new Response(StatusCode.InternalServerError);
+  }
+
+  if (!isAnalyticsEngineDataset(USAGE)) {
+    console.log('Invalid usage dataset');
     return new Response(StatusCode.InternalServerError);
   }
 
   // OPTIONS
   if (method === 'OPTIONS') {
     const origin: string | null = mapHeadersToOrigin(headers);
-    return await handleOptions({ console, db: CSP_DB, origin, projectId });
+    return await handleOptions({
+      console,
+      db: CSP_DB,
+      origin,
+      projectId,
+      usage: USAGE,
+    });
   }
 
   // POST
-  return await handlePost({ body, console, ctx, db: CSP_DB, projectId });
+  return await handlePost({
+    body,
+    console,
+    ctx,
+    db: CSP_DB,
+    projectId,
+    usage: USAGE,
+  });
 }

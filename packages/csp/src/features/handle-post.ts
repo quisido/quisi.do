@@ -1,3 +1,4 @@
+import { AccountNumber, Product, UsageType } from "@quisido/workers-shared";
 import { SELECT_USER_ID_FROM_PROJECTS } from "../constants/queries.js";
 import { StatusCode } from "../constants/status-code.js";
 import type ReportBody from "../types/report-body.js";
@@ -12,6 +13,7 @@ interface Options {
   readonly ctx: ExecutionContext;
   readonly db: D1Database;
   readonly projectId: number;
+  readonly usage: AnalyticsEngineDataset;
 }
 
 type ReportBodyArray = [
@@ -28,7 +30,10 @@ type ReportBodyArray = [
   number | null
 ];
 
+const DEFAULT_PROJECT_ID = 0;
+const ONCE = 1;
 const SELECT = 'SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?';
+const SINGLE = 1;
 
 const mapReportBodyToArray = ({
   documentURL,
@@ -62,6 +67,7 @@ export default async function handlePost({
   ctx,
   db,
   projectId,
+  usage,
 }: Options): Promise<Response> {
   if (body === null) {
     console.log('Invalid body');
@@ -74,13 +80,17 @@ export default async function handlePost({
 
   // Not found
   if (typeof result === 'undefined') {
-    /**
-     * When `USAGE` is ready:
-     * use({
-     *   account: AccountNumber.Quisido,
-     *   type: UsageType.D1Read,
-     * });
-     */
+    usage.writeDataPoint({
+      indexes: [AccountNumber.Quisido.toString()],
+
+      doubles: [
+        Product.ContentSecurityPolicy,
+        DEFAULT_PROJECT_ID,
+        UsageType.D1Read,
+        ONCE,
+        SINGLE,
+      ],
+    });
 
     console.log('Missing project');
     return new Response(StatusCode.NotFound);
@@ -89,25 +99,33 @@ export default async function handlePost({
   // Bad gateway
   const { userId } = result;
   if (typeof userId !== 'number') {
-    /**
-     * When `USAGE` is ready:
-     * use({
-     *   account: AccountNumber.Quisido,
-     *   type: UsageType.D1Read,
-     * });
-     */
+    usage.writeDataPoint({
+      indexes: [AccountNumber.Quisido.toString()],
+
+      doubles: [
+        Product.ContentSecurityPolicy,
+        DEFAULT_PROJECT_ID,
+        UsageType.D1Read,
+        ONCE,
+        SINGLE,
+      ],
+    });
 
     console.log('Invalid database table row');
     return new Response(StatusCode.BadGateway);
   }
 
-  /**
-   * When `USAGE` is ready:
-   * use({
-   *   account: userId,
-   *   type: UsageType.D1Read,
-   * });
-   */
+  usage.writeDataPoint({
+    indexes: [userId.toString()],
+
+    doubles: [
+      Product.ContentSecurityPolicy,
+      projectId,
+      UsageType.D1Read,
+      ONCE,
+      SINGLE,
+    ],
+  });
 
   const mapReportBodyToInsertValues = (
     body: ReportBody,
@@ -121,13 +139,17 @@ export default async function handlePost({
     const reportStr: string = await mapReadableStreamToString(body);
     const reports: readonly ReportBody[] = parseReport(reportStr);
 
-    /**
-     * When `USAGE` is ready:
-     * use({
-     *   account: userId,
-     *   type: UsageType.D1Write,
-     * });
-     */
+    usage.writeDataPoint({
+      indexes: [userId.toString()],
+
+      doubles: [
+        Product.ContentSecurityPolicy,
+        projectId,
+        UsageType.D1Write,
+        ONCE,
+        SINGLE,
+      ],
+    });
 
     ctx.waitUntil(
       query(

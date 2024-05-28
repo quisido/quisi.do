@@ -1,3 +1,4 @@
+import { AccountNumber, Product, UsageType } from "@quisido/workers-shared";
 import { SELECT_ORIGINS_USER_ID_FROM_PROJECTS } from "../constants/queries.js";
 import { StatusCode } from "../constants/status-code.js";
 import InvalidOriginResponse from "../utils/invalid-origin-response.js";
@@ -10,7 +11,12 @@ interface Options {
   readonly db: D1Database;
   readonly origin: string | null;
   readonly projectId: number;
+  readonly usage: AnalyticsEngineDataset;
 }
+
+const DEFAULT_PROJECT_ID = 0;
+const ONCE = 1;
+const SINGLE = 1;
 
 class OkResponse extends Response {
   public constructor(origin: string) {
@@ -26,6 +32,7 @@ export default async function handleOptions({
   db,
   origin,
   projectId,
+  usage,
 }: Options): Promise<Response> {
   // Origin
   if (origin === null) {
@@ -39,13 +46,17 @@ export default async function handleOptions({
 
   // Not found
   if (typeof result === 'undefined') {
-    /**
-     * When `USAGE` is ready:
-     * use({
-     *   account: AccountNumber.Quisido,
-     *   type: UsageType.D1Read,
-     * });
-     */
+    usage.writeDataPoint({
+      indexes: [AccountNumber.Quisido.toString()],
+
+      doubles: [
+        Product.ContentSecurityPolicy,
+        DEFAULT_PROJECT_ID,
+        UsageType.D1Read,
+        ONCE,
+        SINGLE,
+      ],
+    });
 
     console.log('Missing project');
     return new Response(StatusCode.NotFound);
@@ -54,25 +65,33 @@ export default async function handleOptions({
   // Bad gateway
   const { origins, userId } = result;
   if (typeof origins !== 'string' || typeof userId !== 'number') {
-    /**
-     * When `USAGE` is ready:
-     * use({
-     *   account: AccountNumber.Quisido,
-     *   type: UsageType.D1Read,
-     * });
-     */
+    usage.writeDataPoint({
+      indexes: [AccountNumber.Quisido.toString()],
+
+      doubles: [
+        Product.ContentSecurityPolicy,
+        DEFAULT_PROJECT_ID,
+        UsageType.D1Read,
+        ONCE,
+        SINGLE,
+      ],
+    });
 
     console.log('Invalid database table row');
     return new Response(StatusCode.BadGateway);
   }
 
-  /**
-   * When `USAGE` is ready:
-   * use({
-   *   account: userId,
-   *   type: UsageType.D1Read,
-   * });
-   */
+  usage.writeDataPoint({
+    indexes: [userId.toString()],
+
+    doubles: [
+      Product.ContentSecurityPolicy,
+      projectId,
+      UsageType.D1Read,
+      ONCE,
+      SINGLE,
+    ],
+  });
 
   // Allow origin
   const originsArr: readonly string[] = origins.split(' ');

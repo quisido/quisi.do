@@ -3,6 +3,8 @@ import type { Configuration } from 'webpack';
 import type { WebpackRule } from '../types/webpack-rule.js';
 import isRuleSetRule from './is-rule-set-rule.js';
 
+const isDev: boolean = process.env.NODE_ENV === 'development';
+
 const mapRule = (rule: WebpackRule): WebpackRule => {
   if (
     !isRuleSetRule(rule) ||
@@ -29,7 +31,7 @@ export default function nextConfigWebpack(
 
   return {
     ...config,
-    devtool: 'source-map',
+    devtool: isDev ? 'eval-source-map' : 'source-map',
     module: {
       ...config.module,
       rules: config.module.rules.map(mapRule),
