@@ -1,5 +1,5 @@
 import tsPlugin from '@typescript-eslint/eslint-plugin';
-import type { Linter } from 'eslint';
+import type { ESLint, Linter } from 'eslint';
 import ts from 'typescript-eslint';
 import JS from './js.js';
 import reduceFlatConfigsToRules from './reduce-flat-configs-to-rules.js';
@@ -14,16 +14,16 @@ export default {
 
   plugins: {
     ...JS.plugins,
-    '@typescript-eslint': tsPlugin,
+    '@typescript-eslint': tsPlugin as unknown as ESLint.Plugin,
   },
 
   rules: {
-    ...JS.rules,
-    ...ts.configs.base.rules,
-    ...ts.configs.eslintRecommended.rules,
-    ...ts.configs.stylisticTypeChecked.reduce(reduceFlatConfigsToRules, {}),
-    ...ts.configs.recommendedTypeChecked.reduce(reduceFlatConfigsToRules, {}),
-    ...ts.configs.strictTypeChecked.reduce(reduceFlatConfigsToRules, {}),
+    ...JS.rules as Linter.RulesRecord,
+    ...ts.configs.base.rules as Linter.RulesRecord,
+    ...ts.configs.eslintRecommended.rules as Linter.RulesRecord,
+    ...(ts.configs.stylisticTypeChecked as Linter.FlatConfig[]).reduce(reduceFlatConfigsToRules, {}),
+    ...(ts.configs.recommendedTypeChecked as Linter.FlatConfig[]).reduce(reduceFlatConfigsToRules, {}),
+    ...(ts.configs.strictTypeChecked as Linter.FlatConfig[]).reduce(reduceFlatConfigsToRules, {}),
     'no-invalid-this': 'off',
 
     // Exhaustive `switch`es do not require a default case.
@@ -34,5 +34,5 @@ export default {
      * functions with `this` inside other functions with `this`.
      */
     'no-shadow': 'off',
-  },
+  } satisfies Linter.RulesRecord,
 } satisfies Required<Omit<Linter.FlatConfig, 'processor'>>;

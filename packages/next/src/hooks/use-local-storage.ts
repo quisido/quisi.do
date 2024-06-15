@@ -1,5 +1,3 @@
-'use client';
-
 import { useLayoutEffect, useState } from 'react';
 import type LocalStorageItem from '../constants/local-storage-item.js';
 import getLocalStorageItem from '../utils/get-local-storage-item.js';

@@ -7,13 +7,14 @@ import Clarity from "../modules/react-clarity/index.jsx";
 import validateString from "../utils/validate-string.js";
 
 const CLARITY_TAG: string = validateString(process.env['CLARITY_TAG']);
+const isProduction: boolean = process.env.NODE_ENV === 'production';
 
 export default function Head(): ReactElement {
   return (
     <head>
       {/* <ContentSecurityPolicy /> */}
       <Clarity tag={CLARITY_TAG} />
-      {process.env.NODE_ENV === 'production' && (
+      {isProduction && (
         <CloudflareInsights token="f9703ac5039848f8abd3ab107a208a83" />
       )}
       <GoogleFonts />

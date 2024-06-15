@@ -25,28 +25,28 @@ interface Props extends Readonly<BrowserOptions> {
   readonly beforeErrorBoundaryCapture?:
     | ((
         scope: Readonly<Scope>,
-        error: Readonly<Error> | null,
-        componentStack: string | null,
+        error: unknown,
+        componentStack: string | undefined,
       ) => void)
     | undefined;
   readonly onErrorBoundaryError?:
     | ((
-        error: Readonly<Error>,
-        componentStack: string,
+        error: unknown,
+        componentStack: string | undefined,
         eventId: string,
       ) => void)
     | undefined;
   readonly onErrorBoundaryReset?:
     | ((
-        error: Error | null,
-        componentStack: string | null,
+        error: unknown,
+        componentStack: string | null | undefined,
         eventId: string | null,
       ) => void)
     | undefined;
   readonly onErrorBoundaryUnmount?:
     | ((
-        error: Error | null,
-        componentStack: string | null,
+        error: unknown,
+        componentStack: string | null | undefined,
         eventId: string | null,
       ) => void)
     | undefined;

@@ -6,4 +6,4 @@ import createContextUtils from '../utils/create-context-utils/index.js';
 export const {
   ContextProvider: HoneycombProvider,
   useContextValue: useHoneycomb,
-} = createContextUtils<HoneycombWebSDK>();
+} = createContextUtils<HoneycombWebSDK | undefined>();

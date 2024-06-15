@@ -7,8 +7,6 @@ import {
 } from 'react';
 import Authentication from '../features/authentication.js';
 import CloudWatchRUM from '../features/cloudwatch-rum.js';
-// import ContentSecurityPolicy from '../features/content-security-policy.js';
-import DarkModeProvider from '../features/dark-mode-provider.js';
 import Datadog from '../features/datadog.js';
 import Footer from '../features/footer.js';
 import Fullstory from '../features/fullstory.js';
@@ -20,7 +18,7 @@ import LogRocket from '../features/log-rocket.js';
 import Mixpanel from '../features/mixpanel.js';
 import NotificationsProvider from '../features/notifications-provider.js';
 import Notifications from '../features/notifications.js';
-import Sentry from '../features/sentry/index.js';
+import Sentry from '../features/sentry.jsx';
 import SessionIdProvider from '../features/session-id-provider.js';
 import ThemeFeature from '../features/theme.js';
 import TracerProviderProvider from '../features/tracer-provider-provider.js';
@@ -39,9 +37,7 @@ const HTML_CLASS_NAME: string = validateString(styles['html']);
 const Contexts: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,
   CloudWatchRUM,
-  DarkModeProvider,
   Fullstory,
-  // Honeycomb,
   HostnameProvider,
   LogRocket,
   NotificationsProvider,
@@ -51,6 +47,9 @@ const Contexts: ComponentType<PropsWithChildren> = withWrappers(
   Theme,
   TracerProviderProvider,
   // Turnstile,
+
+  // Requires `HostnameProvider`.
+  // Honeycomb, // Error: "Critical dependency: the request of a dependency is an expression"
 )(Fragment);
 
 function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {

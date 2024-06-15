@@ -11,5 +11,5 @@ export default {
     ...TS.rules,
     'max-lines-per-function': 'off',
     'no-undefined': 'off',
-  },
+  } satisfies Linter.RulesRecord,
 } satisfies Required<Omit<Linter.FlatConfig, 'processor'>>;

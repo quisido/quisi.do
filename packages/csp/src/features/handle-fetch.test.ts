@@ -33,7 +33,7 @@ describe('handleFetch', (): void => {
     const response: Response = await handleFetch(
       TEST_CONSOLE,
       new Request('https://localhost/', {
-        method: 'GET',
+        method: 'PUT',
       }),
       {},
       TEST_EXECUTION_CONTEXT,

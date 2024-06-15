@@ -409,7 +409,7 @@ jobs:
           SENTRY_PROJECT: quisi-do
         with:
           environment: production
-          sourcemaps: build
+          sourcemaps: out
           version: ${{ github.sha }}
 
   # Stage 5: cloudflare-purge, github-packages, wrangler-deploy-*

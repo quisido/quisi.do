@@ -1,12 +1,13 @@
 import type { ReactElement } from 'react';
+import mapUnknownToString from 'unknown2string';
 
 interface Props {
-  readonly error: Readonly<Error>;
+  readonly error: unknown;
   // readonly resetError: () => void;
 }
 
 export default function DefaultErrorBoundaryFallback({
   error,
 }: Props): ReactElement {
-  return <>{error.message}</>;
+  return <>{mapUnknownToString(error)}</>;
 }

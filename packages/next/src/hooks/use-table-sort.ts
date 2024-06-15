@@ -1,5 +1,3 @@
-'use client';
-
 import { useCallback, useDeferredValue, useState } from 'react';
 
 interface State {
