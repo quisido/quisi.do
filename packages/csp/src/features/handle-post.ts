@@ -36,23 +36,23 @@ const SELECT = 'SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?';
 const SINGLE = 1;
 
 const mapReportBodyToArray = ({
-  documentURL,
-  referrer,
   blockedURL,
-  effectiveDirective,
-  originalPolicy,
-  sourceFile,
-  sample,
-  disposition,
-  statusCode,
-  lineNumber,
   columnNumber,
+  disposition,
+  documentURL,
+  effectiveDirective,
+  lineNumber,
+  referrer,
+  sample,
+  sourceFile,
+  statusCode,
 }: ReportBody): ReportBodyArray => [
   documentURL,
   referrer ?? null,
   blockedURL ?? null,
   effectiveDirective,
-  originalPolicy,
+  // "Original policy" is too large (expensive), so just write an empty string.
+  '',
   sourceFile ?? null,
   sample ?? null,
   disposition,

@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS [projects] (
   "userId" INTEGER NOT NULL
 );
 
-CREATE INDEX IF NOT EXISTS idx_projects_userId ON projects(userId);
+CREATE INDEX IF NOT EXISTS idx_projects_userId ON projects(`userId`);
 
 INSERT INTO `projects` (`name`, `origins`, `userId`)
-VALUES ("quisi.do", "https://localhost:3000 https://quisi.do", 1)
+VALUES ("quisi.do", "http://localhost:3000 https://localhost:3000 https://quisi.do", 1);

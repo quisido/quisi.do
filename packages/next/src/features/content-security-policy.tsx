@@ -4,61 +4,72 @@ const isDevelopment: boolean = process.env.NODE_ENV === 'development'
 
 const CONNECT_SRC: string = [
   "'self'",
-  'a.quisi.do',
+  'https://a.quisi.do',
 
   // Clarity
-  'p.clarity.ms',
-  't.clarity.ms',
-  'w.clarity.ms',
+  'https://a.clarity.ms',
+  'https://p.clarity.ms',
+  'https://q.clarity.ms',
+  'https://s.clarity.ms',
+  'https://t.clarity.ms',
+  'https://u.clarity.ms',
+  'https://v.clarity.ms',
+  'https://w.clarity.ms',
+  'https://x.clarity.ms',
+  'https://y.clarity.ms',
+  'https://z.clarity.ms',
 
   // Cloudflare Insights
-  'cloudflareinsights.com',
-  'static.cloudflareinsights.com',
+  'https://cloudflareinsights.com',
+  'https://static.cloudflareinsights.com',
 
   // CloudWatch RUM
-  'cognito-identity.us-west-2.amazonaws.com',
-  'dataplane.rum.us-west-2.amazonaws.com',
-  'sts.us-west-2.amazonaws.com',
+  'https://cognito-identity.us-west-2.amazonaws.com',
+  'https://dataplane.rum.us-west-2.amazonaws.com',
+  'https://sts.us-west-2.amazonaws.com',
 
   // Fullstory
-  'edge.fullstory.com',
-  'rs.fullstory.com',
+  'https://edge.fullstory.com',
+  'https://rs.fullstory.com',
 
   // Google Analytics
-  'analytics.google.com',
-  'stats.g.doubleclick.net',
+  'https://analytics.google.com',
+  'https://region1.analytics.google.com',
+  'https://stats.g.doubleclick.net',
 
   // LogRocket
-  'r.logr-ingest.com',
+  'https://r.logr-ingest.com',
 
   // Sentry
-  'o592283.ingest.sentry.io',
+  'https://o592283.ingest.sentry.io',
 
   // Who am I?
-  ...(isDevelopment ? ['localhost:5882'] : []),
+  ...(isDevelopment ? ['https://localhost:5882'] : []),
 ].join(' ');
 
 const FRAME_SRC: string = [
   // Google Analytics
-  'td.doubleclick.net',
+  'https://td.doubleclick.net',
 ].join(' ');
 
 const IMG_SRC: string = [
   "'self'",
 
   // Clarity
-  'c.bing.com',
-  'c.clarity.ms',
+  'https://c.bing.com',
+  'https://c.clarity.ms',
+
+  // Google Analytics
+  'https://www.google.co.in',
+  'https://www.google.co.kr',
+  'https://www.google.com.ar',
+  'https://www.google.com.pk',
+  'https://www.google.com.sg',
+  'https://www.google.de',
 
   // Mixpanel
-  'api-js.mixpanel.com',
+  'https://api-js.mixpanel.com',
 ].join(' ');
-
-/**
- *   During development, `eval-source-map` uses `eval` to create source files
- * with source maps for browser devtools.
- */
-const SCRIPT_SRC: string = isDevelopment ? "'unsafe-eval'" : "'none'";
 
 const SCRIPT_SRC_ELEM: string = [
   "'self'",
@@ -70,19 +81,19 @@ const SCRIPT_SRC_ELEM: string = [
   "'unsafe-inline'",
 
   // Clarity
-  'www.clarity.ms',
+  'https://www.clarity.ms',
 
   // Cloudflare Insights
-  'static.cloudflareinsights.com',
+  'https://static.cloudflareinsights.com',
 
   // Fullstory
-  'edge.fullstory.com',
+  'https://edge.fullstory.com',
 
   // Google Analytics
-  'www.googletagmanager.com',
+  'https://www.googletagmanager.com',
 
   // LogRocket
-  'cdn.logr-ingest.com',
+  'https://cdn.logr-ingest.com',
 ].join(' ');
 
 const STYLE_SRC: string = [
@@ -90,7 +101,7 @@ const STYLE_SRC: string = [
   "'unsafe-inline'",
 
   // Google Fonts
-  'fonts.googleapis.com',
+  'https://fonts.googleapis.com',
 ].join(' ');
 
 const CONTENT: string = [
@@ -103,10 +114,8 @@ const CONTENT: string = [
   "manifest-src 'self'",
   "media-src 'self'",
   "object-src 'none'",
-  `script-src ${SCRIPT_SRC}`,
   "script-src-attr 'none'",
   `script-src-elem ${SCRIPT_SRC_ELEM}`,
-  "style-src 'none'",
   "style-src-attr 'unsafe-inline'",
   `style-src-elem ${STYLE_SRC}`,
   `worker-src blob:`,

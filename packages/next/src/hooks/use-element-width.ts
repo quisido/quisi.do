@@ -1,12 +1,10 @@
-'use client';
-
 import {
-  type MutableRefObject,
   useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
   useState,
+  type MutableRefObject,
 } from 'react';
 
 interface State<T extends HTMLElement> {

@@ -1,5 +1,3 @@
-'use client';
-
 import { useContext } from 'react';
 import Theme from '../contexts/theme.js';
 import type ThemeType from '../types/theme.js';

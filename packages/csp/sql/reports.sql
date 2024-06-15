@@ -16,6 +16,6 @@ CREATE TABLE IF NOT EXISTS [reports] (
   "columnNumber" INTEGER DEFAULT NULL
 );
 
-CREATE INDEX IF NOT EXISTS idx_reports_project_blockedURL ON reports(project, blockedURL);
-CREATE INDEX IF NOT EXISTS idx_reports_project_documentURL ON reports(project, documentURL);
-CREATE INDEX IF NOT EXISTS idx_reports_project ON reports(project);
+CREATE INDEX IF NOT EXISTS idx_reports_project_blockedURL ON reports(`project`, `blockedURL`);
+CREATE INDEX IF NOT EXISTS idx_reports_project_documentURL ON reports(`project`, `documentURL`);
+CREATE INDEX IF NOT EXISTS idx_reports_project ON reports(`project`);
