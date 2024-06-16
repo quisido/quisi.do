@@ -1,5 +1,5 @@
-import getRequest from "../utils/get-request.js";
-import getCookieDomain from "./get-cookie-domain.js";
+import getRequest from '../utils/get-request.js';
+import getCookieDomain from './get-cookie-domain.js';
 
 export default function getAccessControlAllowOrigin(): string {
   const request: Request = getRequest();

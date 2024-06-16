@@ -30,6 +30,7 @@
     "dev": "concurrently --kill-others-on-fail --names authn,next \"yarn run authn\" \"yarn run next\"",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
+    "eslint:fix:workspaces": "yarn workspaces foreach --all --exclude \"@quisi/do\" --exclude \"@quisido/next\" --verbose run eslint:fix",
     "export": "yarn packages/next run export",
     "init": "yarn packages/authn run local:init",
     "info": "yarn packages/next run info",

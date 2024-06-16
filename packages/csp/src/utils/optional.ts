@@ -1,8 +1,7 @@
 const isKeyOf = <T extends object>(
   key: number | string | symbol,
   obj: T,
-): key is keyof T =>
-  key in obj;
+): key is keyof T => key in obj;
 
 export default function optional<K extends number | string | symbol, V>(
   obj: object,

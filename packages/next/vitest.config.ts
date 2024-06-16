@@ -1,4 +1,8 @@
-import CONFIG, { COVERAGE_OPTIONS, INLINE_CONFIG, PLUGIN_OPTIONS } from '@quisido/vitest-config';
+import CONFIG, {
+  COVERAGE_OPTIONS,
+  INLINE_CONFIG,
+  PLUGIN_OPTIONS,
+} from '@quisido/vitest-config';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
 

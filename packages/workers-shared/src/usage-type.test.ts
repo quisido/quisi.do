@@ -8,8 +8,6 @@ const ASCENDING_ARRAY: readonly number[] = createAscendingArray(VALUES.length);
 
 describe('UsageType', (): void => {
   it('should contain ascending values', (): void => {
-    expect([...VALUES].sort(sortUnknown)).toEqual([
-      ...ASCENDING_ARRAY,
-    ]);
+    expect([...VALUES].sort(sortUnknown)).toEqual([...ASCENDING_ARRAY]);
   });
 });

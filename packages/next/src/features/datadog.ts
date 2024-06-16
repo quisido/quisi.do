@@ -10,19 +10,15 @@ const EXPERIMENTAL_FEATURES: string[] = ['feature_flags'];
 
 export default function Datadog(): null {
   useDatadog({
-    actionNameAttribute: undefined,
     allowFallbackToLocalStorage: true,
     allowUntrustedEvents: true,
-    allowedTracingUrls: undefined,
     applicationId: APPLICATION_ID,
-    beforeSend: undefined,
     clientToken: CLIENT_TOKEN,
     compressIntakeRequests: true,
     defaultPrivacyLevel: 'mask-user-input',
     enabled: true,
     enableExperimentalFeatures: EXPERIMENTAL_FEATURES,
     env: process.env.NODE_ENV,
-    excludedActivityUrls: undefined,
     service: 'quisi.do',
     sessionReplayRecording: true,
     sessionReplaySampleRate: 100,
@@ -33,6 +29,7 @@ export default function Datadog(): null {
     startSessionReplayRecordingManually: false,
     telemetryConfigurationSampleRate: 100,
     telemetrySampleRate: 100,
+    telemetryUsageSampleRate: 100,
     traceContextInjection: 'all',
     traceSampleRate: 100,
     trackLongTasks: true,
@@ -43,17 +40,21 @@ export default function Datadog(): null {
     trackingConsent: 'not-granted',
     usePartitionedCrossSiteSessionCookie: true,
     useSecureSessionCookie: true,
-    user: undefined,
     version: GITHUB_SHA ?? 'unknown',
   } satisfies Required<
     Omit<
       Props,
+      | 'actionNameAttribute'
+      | 'allowedTracingUrls'
+      | 'beforeSend'
       | 'datacenter'
+      | 'excludedActivityUrls'
       | 'internalAnalyticsSubdomain'
       | 'proxy'
       | 'replica'
       | 'subdomain'
       | 'useCrossSiteSessionCookie'
+      | 'user'
       | 'workerUrl'
     >
   >);

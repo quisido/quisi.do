@@ -1,11 +1,3 @@
-type AsyncState<T> =
-  | ErrorAsyncState
-  | LoadingAsyncState<T>
-  | SuccessAsyncState<T>
-  | UninitiatedAsyncState;
-
-export type { AsyncState as default };
-
 interface ErrorAsyncState {
   readonly data: undefined;
   readonly error: string;
@@ -33,3 +25,11 @@ interface UninitiatedAsyncState {
   readonly initiated: false;
   readonly loading: false;
 }
+
+type AsyncState<T> =
+  | ErrorAsyncState
+  | LoadingAsyncState<T>
+  | SuccessAsyncState<T>
+  | UninitiatedAsyncState;
+
+export type { AsyncState as default };

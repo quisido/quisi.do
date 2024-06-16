@@ -30,10 +30,14 @@ export default class PackagesTest implements Test {
 
     return function testPackages(this: Readonly<TreeLogger>): void {
       const packageDirectories: readonly string[] = getPackageDirectories();
-      const packageDirectoryToJsonMap: Map<string, PackageJson> =
-        new Map<string, PackageJson>();
-      const packageNameToJsonMap: Map<string, PackageJson> =
-        new Map<string, PackageJson>();
+      const packageDirectoryToJsonMap: Map<string, PackageJson> = new Map<
+        string,
+        PackageJson
+      >();
+      const packageNameToJsonMap: Map<string, PackageJson> = new Map<
+        string,
+        PackageJson
+      >();
 
       for (const packageDirectory of packageDirectories) {
         const packageJson: PackageJson =

@@ -25,10 +25,7 @@ const mapAuthTokenToRequestInit = (token: string): RequestInit => ({
 export default class SentryProjectEvents {
   readonly #authToken: string;
 
-  readonly #fetch: (
-    input: string,
-    init: RequestInit,
-  ) => Promise<Response>;
+  readonly #fetch: (input: string, init: RequestInit) => Promise<Response>;
 
   readonly #organizationSlug: string;
 

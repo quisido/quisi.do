@@ -14,8 +14,8 @@ const cpus: number = getCpus();
 const handleDemandEntries = mapNodeEnvToOnDemandEntries(process.env.NODE_ENV);
 
 export default withNextJsBundleAnalyzer({
-  assetPrefix: '', // Same domain
-  basePath: '', // Deployed application pathname
+  assetPrefix: '',
+  basePath: '',
   compress: true,
   distDir: '.next',
   generateBuildId: getVersion,

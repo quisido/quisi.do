@@ -1,4 +1,4 @@
-import { FetchInstrumentation } from "@opentelemetry/instrumentation-fetch";
+import { FetchInstrumentation } from '@opentelemetry/instrumentation-fetch';
 
 export default class FetchInstrumentationImpl extends FetchInstrumentation {
   public constructor() {

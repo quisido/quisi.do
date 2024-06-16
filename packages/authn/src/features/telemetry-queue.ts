@@ -50,12 +50,7 @@ const mapTraceParentToDimensions = ({
 });
 
 export default class AuthenticationTelemetryQueue extends TelemetryQueue<Metric> {
-  public constructor({
-    console,
-    ctx,
-    env,
-    traceId,
-  }: Options) {
+  public constructor({ console, ctx, env, traceId }: Options) {
     super();
 
     this.onPrivateError((err: Error): void => {

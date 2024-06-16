@@ -1,4 +1,4 @@
 declare module '*.json' {
-  const _: Record<string, unknown>;
-  export = _;
+  const json: Record<string, unknown>;
+  export = json;
 }

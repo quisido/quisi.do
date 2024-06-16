@@ -1,7 +1,7 @@
-import type ReportBody from "../types/report-body.js";
-import isNumber from "./is-number.js";
-import isString from "./is-string.js";
-import optional from "./optional.js";
+import type ReportBody from '../types/report-body.js';
+import isNumber from './is-number.js';
+import isString from './is-string.js';
+import optional from './optional.js';
 
 export default function isReportBody(value: unknown): value is ReportBody {
   return (

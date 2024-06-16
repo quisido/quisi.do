@@ -1,4 +1,4 @@
-import { SECONDS_PER_MINUTE } from "../../constants/time.js";
+import { SECONDS_PER_MINUTE } from '../../constants/time.js';
 
 const MAX_AGE_MINUTES = 10;
 

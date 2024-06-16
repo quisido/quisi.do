@@ -1,22 +1,22 @@
 /// <reference types="@cloudflare/workers-types" />
-import { isAnalyticsEngineDataset, isD1Database } from "cloudflare-utils";
-import { StatusCode } from "../constants/status-code.js";
-import InvalidPathnameResponse from "../utils/invalid-pathname-response.js";
-import isAllowedMethod from "../utils/is-allowed-method.js";
-import isObject from "../utils/is-object.js";
-import mapHeadersToOrigin from "../utils/map-headers-to-origin.js";
-import mapPathnameToProjectId from "../utils/map-pathname-to-project-id.js";
-import MethodNotAllowedResponse from "../utils/method-not-allowed-response.js";
+import { isAnalyticsEngineDataset, isD1Database } from 'cloudflare-utils';
+import { StatusCode } from '../constants/status-code.js';
+import InvalidPathnameResponse from '../utils/invalid-pathname-response.js';
+import isAllowedMethod from '../utils/is-allowed-method.js';
+import isObject from '../utils/is-object.js';
+import mapHeadersToOrigin from '../utils/map-headers-to-origin.js';
+import mapPathnameToProjectId from '../utils/map-pathname-to-project-id.js';
+import MethodNotAllowedResponse from '../utils/method-not-allowed-response.js';
 import Response from '../utils/response.js';
-import handleGet from "./handle-get.js";
-import handleOptions from "./handle-options.js";
-import handlePost from "./handle-post.js";
+import handleGet from './handle-get.js';
+import handleOptions from './handle-options.js';
+import handlePost from './handle-post.js';
 
 export default async function handleFetch(
   console: Console,
   { body, headers, method, url }: Request,
   env: unknown,
-  ctx: ExecutionContext
+  ctx: ExecutionContext,
 ): Promise<Response> {
   // Environment
   if (!isObject(env)) {

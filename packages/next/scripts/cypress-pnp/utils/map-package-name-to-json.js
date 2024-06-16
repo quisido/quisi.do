@@ -4,9 +4,11 @@ export default function mapPackageNameToJson(name) {
     name,
     type: 'commonjs',
     version: '0.0.1',
+
     exports: {
       '.': './index.js',
     },
+
     peerDependencies: {
       [name]: '*',
     },

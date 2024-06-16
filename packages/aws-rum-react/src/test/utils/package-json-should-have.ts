@@ -1,4 +1,4 @@
-import { assert, expect, it } from "vitest";
+import { assert, expect, it } from 'vitest';
 
 interface Options {
   readonly author: string;
@@ -10,13 +10,7 @@ interface Options {
 
 export default function packageJsonShouldHave(
   packageJson: object,
-  {
-    author,
-    expectedEmail,
-    license,
-    packageJsonName,
-    repo,
-  }: Options,
+  { author, expectedEmail, license, packageJsonName, repo }: Options,
 ): void {
   it('should have the expected author', (): void => {
     assert('author' in packageJson);

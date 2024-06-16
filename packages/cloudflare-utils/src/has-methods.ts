@@ -1,4 +1,4 @@
-import hasMethod from "./has-method.js";
+import hasMethod from './has-method.js';
 
 export default function hasMethods<K extends string | number | symbol>(
   value: Record<string | number | symbol, unknown>,

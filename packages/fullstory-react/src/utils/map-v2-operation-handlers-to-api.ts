@@ -95,11 +95,10 @@ export default function mapV2OperationHandlersToApi({
     const handler:
       | MapV2OperationToAsyncHandler<Op>
       | MapV2OperationToHandler<Op>
-      | undefined =
-      handlers[handlerName] as
-        | MapV2OperationToAsyncHandler<Op>
-        | MapV2OperationToHandler<Op>
-        | undefined;
+      | undefined = handlers[handlerName] as
+      | MapV2OperationToAsyncHandler<Op>
+      | MapV2OperationToHandler<Op>
+      | undefined;
     if (typeof handler !== 'undefined') {
       return handler(options, source);
     }

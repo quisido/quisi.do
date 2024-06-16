@@ -1,5 +1,5 @@
-import type { Linter } from "eslint";
-import { ECMA_FEATURES } from "./ecma-features.js";
+import type { Linter } from 'eslint';
+import { ECMA_FEATURES } from './ecma-features.js';
 
 export const PARSER_OPTIONS: Required<Linter.ParserOptions> = {
   ecmaFeatures: ECMA_FEATURES,

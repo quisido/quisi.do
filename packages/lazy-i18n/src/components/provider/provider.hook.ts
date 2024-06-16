@@ -1,6 +1,12 @@
 'use client';
 
-import { useCallback, useMemo, useRef, useState, type MutableRefObject } from 'react';
+import {
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+  type MutableRefObject,
+} from 'react';
 import mapTranslationsRecordToLoadedTranslationsRecord from '../../map/map-translations-record-to-loaded-translations-record.js';
 import RunnableTranslateFunction from '../../runnables/runnable-translate-function.js';
 import type TranslateFunction from '../../types/translate-function.js';
@@ -81,7 +87,9 @@ export default function useProvider<
     ),
   });
 
-  const getLoadedFallbackTranslations = (): Record<string, string> | undefined => {
+  const getLoadedFallbackTranslations = ():
+    | Record<string, string>
+    | undefined => {
     if (typeof fallbackLocale === 'undefined') {
       return;
     }
@@ -103,16 +111,13 @@ export default function useProvider<
           translations: loadedTranslations,
         });
 
-      newTranslate.on(
-        'loadFallbackTranslations',
-        (str: string): void => {
-          if (typeof fallbackLocale === 'undefined') {
-            throw new Error(`Translation not found: ${str}`);
-          }
-          asyncLoadFallbackTranslationsEffect.current =
-            loadTranslations(fallbackLocale);
-        },
-      );
+      newTranslate.on('loadFallbackTranslations', (str: string): void => {
+        if (typeof fallbackLocale === 'undefined') {
+          throw new Error(`Translation not found: ${str}`);
+        }
+        asyncLoadFallbackTranslationsEffect.current =
+          loadTranslations(fallbackLocale);
+      });
 
       newTranslate.on('loadTranslations', (): void => {
         asyncLoadTranslationsEffect.current = loadTranslations(locale);

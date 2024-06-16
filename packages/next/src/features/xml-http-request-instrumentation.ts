@@ -1,4 +1,4 @@
-import { XMLHttpRequestInstrumentation } from "@opentelemetry/instrumentation-xml-http-request";
+import { XMLHttpRequestInstrumentation } from '@opentelemetry/instrumentation-xml-http-request';
 
 export default class XMLHttpRequestInstrumentationImpl extends XMLHttpRequestInstrumentation {
   public constructor() {

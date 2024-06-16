@@ -18,12 +18,21 @@ export default {
   },
 
   rules: {
-    ...JS.rules as Linter.RulesRecord,
-    ...ts.configs.base.rules as Linter.RulesRecord,
-    ...ts.configs.eslintRecommended.rules as Linter.RulesRecord,
-    ...(ts.configs.stylisticTypeChecked as Linter.FlatConfig[]).reduce(reduceFlatConfigsToRules, {}),
-    ...(ts.configs.recommendedTypeChecked as Linter.FlatConfig[]).reduce(reduceFlatConfigsToRules, {}),
-    ...(ts.configs.strictTypeChecked as Linter.FlatConfig[]).reduce(reduceFlatConfigsToRules, {}),
+    ...(JS.rules as Linter.RulesRecord),
+    ...(ts.configs.base.rules as Linter.RulesRecord),
+    ...(ts.configs.eslintRecommended.rules as Linter.RulesRecord),
+    ...(ts.configs.stylisticTypeChecked as Linter.FlatConfig[]).reduce(
+      reduceFlatConfigsToRules,
+      {},
+    ),
+    ...(ts.configs.recommendedTypeChecked as Linter.FlatConfig[]).reduce(
+      reduceFlatConfigsToRules,
+      {},
+    ),
+    ...(ts.configs.strictTypeChecked as Linter.FlatConfig[]).reduce(
+      reduceFlatConfigsToRules,
+      {},
+    ),
     'no-invalid-this': 'off',
 
     // Exhaustive `switch`es do not require a default case.

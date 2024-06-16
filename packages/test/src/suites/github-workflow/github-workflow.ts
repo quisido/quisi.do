@@ -101,8 +101,10 @@ export default class GitHubWorkflowTest implements Test {
 
     const mapPathToWorkspace = this.mapPathToWorkspace.bind(this);
     return function testGitHubWorkflowEvent(this: Readonly<TreeLogger>): void {
-      const workspacePackageJsons: Map<string, PackageJson> =
-        new Map<string, PackageJson>();
+      const workspacePackageJsons: Map<string, PackageJson> = new Map<
+        string,
+        PackageJson
+      >();
       for (const path of paths) {
         const workspacePath: string | undefined = mapPathToWorkspace(path);
 

@@ -1,5 +1,5 @@
-import getAccessControlAllowOrigin from "../get-access-control-allow-origin.js";
-import { HEADERS_INIT } from "./headers-init.js";
+import getAccessControlAllowOrigin from '../get-access-control-allow-origin.js';
+import { HEADERS_INIT } from './headers-init.js';
 
 export default function getWhoAmIResponseHeaders(): Headers {
   return new Headers({

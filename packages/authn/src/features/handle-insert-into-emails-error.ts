@@ -1,6 +1,6 @@
-import { mapUnknownToError } from "fmrs";
-import MetricName from "../constants/metric-name.js";
-import getTelemetry from "../utils/get-telemetry.js";
+import { mapUnknownToError } from 'fmrs';
+import MetricName from '../constants/metric-name.js';
+import getTelemetry from '../utils/get-telemetry.js';
 
 export default function handleInsertIntoEmailsError(
   userId: number,
@@ -18,5 +18,5 @@ export default function handleInsertIntoEmailsError(
       startTime,
       userId,
     });
-  }
+  };
 }

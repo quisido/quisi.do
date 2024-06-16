@@ -31,7 +31,7 @@ export default function getUsage(): (options: Options) => void {
         type,
       }: Options): void {
         console.log({ account, count, per, type });
-      };;
+      };
     }
 
     throw mapCauseToError({
@@ -58,5 +58,5 @@ export default function getUsage(): (options: Options) => void {
         per,
       ],
     });
-  }
+  };
 }

@@ -1,4 +1,4 @@
-import { StatusCode } from "../constants/status-code.js";
+import { StatusCode } from '../constants/status-code.js';
 import Response from '../utils/response.js';
 
 interface Options {
@@ -9,10 +9,7 @@ interface Options {
   readonly usage: AnalyticsEngineDataset;
 }
 
-export default function handleGet({
-  console,
-  key,
-}: Options): Response {
+export default function handleGet({ console, key }: Options): Response {
   if (key === null) {
     console.log('Missing key');
     return new Response(StatusCode.BadRequest);

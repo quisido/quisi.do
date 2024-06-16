@@ -6,11 +6,8 @@ interface Icon {
 const BASE = 10;
 const SPLASH_SCREEN_ICON_SIZE = 512;
 
-export default function findSplashScreenIcon({
-  sizes,
-  type,
-}: Icon): boolean {
-  const [, widthStr, heightStr] = sizes.match(/^(\d+)x(\d+)$/)!;
+export default function findSplashScreenIcon({ sizes, type }: Icon): boolean {
+  const [, widthStr, heightStr] = sizes.match(/^(\d+)x(\d+)$/u)!;
   const height: number = parseInt(heightStr!, BASE);
   const width: number = parseInt(widthStr!, BASE);
 

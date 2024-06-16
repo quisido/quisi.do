@@ -1,7 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 
-import hasMethods from "./has-methods.js";
-import isRecord from "./is-record.js";
+import hasMethods from './has-methods.js';
+import isRecord from './is-record.js';
 
 const REQUIRED_METHODS: readonly (keyof D1Database)[] = [
   'batch',
@@ -11,8 +11,5 @@ const REQUIRED_METHODS: readonly (keyof D1Database)[] = [
 ];
 
 export default function isD1Database(value: unknown): value is D1Database {
-  return (
-    isRecord(value) &&
-    hasMethods(value, REQUIRED_METHODS)
-  );
+  return isRecord(value) && hasMethods(value, REQUIRED_METHODS);
 }

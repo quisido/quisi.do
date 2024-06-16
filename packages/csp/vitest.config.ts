@@ -1,4 +1,7 @@
-import CONFIG, { COVERAGE_OPTIONS, INLINE_CONFIG } from '@quisido/vitest-config';
+import CONFIG, {
+  COVERAGE_OPTIONS,
+  INLINE_CONFIG,
+} from '@quisido/vitest-config';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({

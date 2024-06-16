@@ -5,8 +5,10 @@ export interface Metadata {
   // Readonly display_title_with_tree_label: boolean;
   readonly filename?: string | undefined;
   readonly function?: string | undefined;
-  readonly type?: string | undefined; // 'Error'
   readonly value: string;
+
+  // Type can be "Error"
+  readonly type?: string | undefined;
 }
 
 /*
@@ -31,7 +33,6 @@ export default interface SentryIssue {
   readonly isPublic: boolean;
   readonly isSubscribed: boolean;
   readonly lastSeen: string;
-  readonly level: string; // 'error'
   // Readonly logger: null;
   readonly metadata: Metadata;
   readonly numComments: number;
@@ -42,12 +43,20 @@ export default interface SentryIssue {
    */
   readonly shortId: string;
   readonly stats: Record<'24h', readonly (readonly [number, number])[]>;
-  readonly status: string; // 'unresolved'
+
   /*
    * Readonly statusDetails: {};
    * readonly subscriptionDetails: null;
    */
   readonly title: string;
-  readonly type: string; // 'default'
   readonly userCount: number;
+
+  // Level can be 'error'.
+  readonly level: string;
+
+  // Status can be 'unresolved'.
+  readonly status: string;
+
+  // Type can be 'default'.
+  readonly type: string;
 }

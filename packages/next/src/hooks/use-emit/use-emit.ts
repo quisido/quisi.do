@@ -36,14 +36,14 @@ interface ZarazWindow extends Window {
 }
 
 const DEFAULT_METRIC_VALUE = 1;
-const hasZaraz = (w: Window): w is ZarazWindow => 'zaraz' in w;
+const hasZaraz = (wndw: Window): wndw is ZarazWindow => 'zaraz' in wndw;
 
 const mapDimensionsToValue = (dimensions: Dimensions): number => {
   if ('value' in dimensions && typeof dimensions['value'] === 'number') {
     return dimensions['value'];
   }
   return DEFAULT_METRIC_VALUE;
-}
+};
 
 const removeNullValues = <K extends number | string | symbol, V>(
   record: Record<K, V | null | undefined>,
@@ -129,14 +129,10 @@ export default function useEmit(): EventEmitter {
         pathname,
       });
       captureEvent(sentryEvent);
-      metrics.set(
-        name,
-        mapDimensionsToValue(dimensions),
-        {
-          tags: dimensions,
-          timestamp: Date.now(),
-        },
-      );
+      metrics.set(name, mapDimensionsToValue(dimensions), {
+        tags: dimensions,
+        timestamp: Date.now(),
+      });
 
       // Zaraz
       if (hasZaraz(window)) {

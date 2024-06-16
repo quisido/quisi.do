@@ -7,4 +7,3 @@ export const FORMAT_DETECTION: FormatDetection = {
   telephone: false,
   url: false,
 };
-

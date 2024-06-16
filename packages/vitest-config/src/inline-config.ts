@@ -1,6 +1,6 @@
-import type { InlineConfig } from "vitest";
-import { COVERAGE_OPTIONS } from "./coverage-options.js";
-import { EXCLUDE } from "./exclude.js";
+import type { InlineConfig } from 'vitest';
+import { COVERAGE_OPTIONS } from './coverage-options.js';
+import { EXCLUDE } from './exclude.js';
 
 export const INLINE_CONFIG: InlineConfig = {
   clearMocks: true,

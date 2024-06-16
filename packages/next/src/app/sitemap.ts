@@ -36,11 +36,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
       {
         lastModified: NOW,
-        url: mapPathToUrl('/dashboard/'),
-      },
-
-      {
-        lastModified: NOW,
         url: mapPathToUrl('/privacy/'),
       },
 

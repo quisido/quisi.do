@@ -1,5 +1,5 @@
-import type { TraceParent } from "../modules/trace-parent/index.js";
-import mapTraceparentRequestHeaderToTraceParent from "./map-traceparent-request-header-to-trace-parent.js";
+import type { TraceParent } from '../modules/trace-parent/index.js';
+import mapTraceparentRequestHeaderToTraceParent from './map-traceparent-request-header-to-trace-parent.js';
 
 export default function mapRequestHeadersToTraceParent(
   headers: Headers,

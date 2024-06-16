@@ -1,8 +1,8 @@
-import { mapUnknownToError } from "fmrs";
-import { Snapshot } from "proposal-async-context/src/index.js";
-import { AUTHN_USER_ID_MAP } from "../constants/authn-user-id-map.js";
-import MetricName from "../constants/metric-name.js";
-import getTelemetry from "../utils/get-telemetry.js";
+import { mapUnknownToError } from 'fmrs';
+import { Snapshot } from 'proposal-async-context/src/index.js';
+import { AUTHN_USER_ID_MAP } from '../constants/authn-user-id-map.js';
+import MetricName from '../constants/metric-name.js';
+import getTelemetry from '../utils/get-telemetry.js';
 
 interface Options {
   readonly authnId: string;
@@ -26,7 +26,6 @@ export default function handlePutAuthnUserIdError({
       id,
     });
 
-
     snapshot.run((): void => {
       const { emitPublicMetric, logPrivateError } = getTelemetry();
       logPrivateError(mapUnknownToError(err));
@@ -36,5 +35,5 @@ export default function handlePutAuthnUserIdError({
         startTime,
       });
     });
-  }
+  };
 }

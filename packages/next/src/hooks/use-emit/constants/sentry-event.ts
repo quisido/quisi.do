@@ -6,7 +6,7 @@ import { type Event } from '@sentry/types';
 import sentryTypesPackage from '@sentry/types/package.json';
 import reactDomPackage from 'react-dom/package.json';
 import reactPackage from 'react/package.json';
-// import sentryReactPackage2 from 'sentry-react/package.json';
+// Import sentryReactPackage2 from 'sentry-react/package.json';
 import VERSION from '../../../constants/version.js';
 
 const APP_START_TIME: string = new Date().toUTCString();

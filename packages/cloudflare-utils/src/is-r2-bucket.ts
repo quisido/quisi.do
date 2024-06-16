@@ -1,7 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 
-import hasMethods from "./has-methods.js";
-import isRecord from "./is-record.js";
+import hasMethods from './has-methods.js';
+import isRecord from './is-record.js';
 
 const REQUIRED_METHODS: readonly (keyof R2Bucket)[] = [
   'createMultipartUpload',
@@ -14,8 +14,5 @@ const REQUIRED_METHODS: readonly (keyof R2Bucket)[] = [
 ];
 
 export default function isR2Bucket(value: unknown): value is R2Bucket {
-  return (
-    isRecord(value) &&
-    hasMethods(value, REQUIRED_METHODS)
-  );
+  return isRecord(value) && hasMethods(value, REQUIRED_METHODS);
 }

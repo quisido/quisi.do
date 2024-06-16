@@ -4,7 +4,11 @@ import expectToEventuallyThrow from '../../../test/utils/expect-to-eventually-th
 import noop from '../../../test/utils/noop.js';
 import type { DefaultExport } from '../../../types/default-export.js';
 import type { Translations } from '../../../types/translations.js';
-import { default as useLoadTranslations, type Props, type State } from './use-load-translations.js';
+import {
+  default as useLoadTranslations,
+  type Props,
+  type State,
+} from './use-load-translations.js';
 
 type Locale = 'es_ES';
 type T = Record<Locale, Translations | undefined>;

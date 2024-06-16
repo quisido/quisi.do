@@ -1,4 +1,4 @@
-import type { ESLintECMAFeatures } from "./eslint-ecma-features.js";
+import type { ESLintECMAFeatures } from './eslint-ecma-features.js';
 
 export const ECMA_FEATURES: Required<ESLintECMAFeatures> = {
   experimentalObjectRestSpread: true,

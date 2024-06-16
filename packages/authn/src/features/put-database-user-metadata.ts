@@ -1,12 +1,12 @@
-import { AccountNumber, UsageType } from "@quisido/workers-shared";
-import MetricName from "../constants/metric-name.js";
-import type OAuthProvider from "../constants/oauth-provider.js";
-import getTelemetry from "../utils/get-telemetry.js";
-import getDatabase from "./get-database.js";
-import getUsage from "./get-usage.js";
+import { AccountNumber, UsageType } from '@quisido/workers-shared';
+import MetricName from '../constants/metric-name.js';
+import type OAuthProvider from '../constants/oauth-provider.js';
+import getTelemetry from '../utils/get-telemetry.js';
+import getDatabase from './get-database.js';
+import getUsage from './get-usage.js';
 import handleInsertIntoOAuthError from './handle-insert-into-oauth-error.js';
 import handleInsertIntoOAuthResponse from './handle-insert-into-oauth-response.js';
-import putDatabaseUserEmail from "./put-database-user-email.js";
+import putDatabaseUserEmail from './put-database-user-email.js';
 
 interface Options {
   readonly changes: number;

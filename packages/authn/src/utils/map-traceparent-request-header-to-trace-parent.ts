@@ -1,4 +1,7 @@
-import { parseTraceParent, type TraceParent } from "../modules/trace-parent/index.js";
+import {
+  parseTraceParent,
+  type TraceParent,
+} from '../modules/trace-parent/index.js';
 
 export default function mapTraceparentRequestHeaderToTraceParent(
   traceparent: string | null,

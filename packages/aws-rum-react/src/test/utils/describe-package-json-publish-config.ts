@@ -1,4 +1,4 @@
-import { assert, describe, expect, it } from "vitest";
+import { assert, describe, expect, it } from 'vitest';
 
 export default function describePackageJsonPublishConfig(
   packageJson: object,

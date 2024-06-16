@@ -42,7 +42,6 @@ export default function mapUserIdToResponse(id: number): Response {
       .catch(handlePutAuthnUserIdError({ authnId, expiration, id, startTime })),
   );
 
-
   return new Response(null, {
     headers: mapAuthnIdToResponseHeaders(authnId),
     status: StatusCode.SeeOther,

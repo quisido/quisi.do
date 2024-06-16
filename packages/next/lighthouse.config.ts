@@ -16,6 +16,7 @@ const lightghouseConfig: Config = {
      * saveAssets: true,
      * verbose: false,
      */
+
     blockedUrlPatterns: [
       'https://analytics.google.com/*',
       'https://api.honeycomb.io/*',
@@ -26,7 +27,6 @@ const lightghouseConfig: Config = {
       'https://cloudflareinsights.com/*',
       'https://dataplane.rum.us-west-2.amazonaws.com/*',
       'https://edge.fullstory.com/*',
-      'https://localhost:5882/*', // Invalid certificate
       'https://o592283.ingest.sentry.io/*',
       'https://r.logr-ingest.com/*',
       'https://rs.fullstory.com/*',
@@ -40,6 +40,9 @@ const lightghouseConfig: Config = {
       'https://www.googleadservices.com/*',
       'https://www.google-analytics.com/*',
       'https://www.googletagmanager.com/*',
+
+      // Localhosts have invalid certificates.
+      'https://localhost:5882/*',
     ],
   },
 };

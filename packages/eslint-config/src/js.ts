@@ -1,6 +1,8 @@
 import js from '@eslint/js';
-import type { Linter } from "eslint";
-import prettier from 'eslint-config-prettier';
+import type { Linter } from 'eslint';
+import prettierConfig from 'eslint-config-prettier';
+import prettierPlugin from 'eslint-plugin-prettier';
+import prettierPluginRecommended from 'eslint-plugin-prettier/recommended';
 import { LANGUAGE_OPTIONS } from './language-options.js';
 import { LINTER_OPTIONS } from './linter-options.js';
 
@@ -9,13 +11,17 @@ export default {
   languageOptions: LANGUAGE_OPTIONS,
   linterOptions: LINTER_OPTIONS,
   name: '@quisido/js',
-  plugins: {},
   settings: {},
+
+  plugins: {
+    prettier: prettierPlugin,
+  },
 
   rules: {
     ...js.configs.all.rules,
     ...js.configs.recommended.rules,
-    ...prettier.rules,
+    ...prettierConfig.rules,
+    ...prettierPluginRecommended.rules,
     'func-name-matching': 'off',
     'no-bitwise': 'off',
     'no-continue': 'off',
@@ -33,4 +39,4 @@ export default {
       },
     ],
   },
-} satisfies Required<Omit<Linter.FlatConfig, 'ignores' | 'processor'>>
+} satisfies Required<Omit<Linter.FlatConfig, 'ignores' | 'processor'>>;

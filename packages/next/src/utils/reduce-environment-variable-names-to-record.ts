@@ -1,4 +1,4 @@
-import validateString from "./validate-string.js";
+import validateString from './validate-string.js';
 
 export default function reduceEnvironmentVariableNamesToRecord(
   record: Record<string, string | undefined>,

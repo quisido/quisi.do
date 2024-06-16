@@ -24,9 +24,9 @@ export default function mapPackageJsonExportsToTest(
 
         const lastExportIndex: number = keys.length - ARRAY_INDEX_OFFSET;
         if (defaultExportIndex !== lastExportIndex) {
-          this.addError(new Error(
-            'The default condition must be the last one.',
-          ));
+          this.addError(
+            new Error('The default condition must be the last one.'),
+          );
         }
       });
     }

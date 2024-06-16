@@ -1,4 +1,4 @@
-import { ALLOWED_METHODS_SET } from "../constants/allowed-methods.js";
+import { ALLOWED_METHODS_SET } from '../constants/allowed-methods.js';
 
 export default function isAllowedMethod(
   method: string,

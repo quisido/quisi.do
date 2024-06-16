@@ -1,7 +1,7 @@
 import DEFAULT_RETURN_HREF from '../constants/default-return-href.js';
-import { SECONDS_PER_DAY } from "../constants/time.js";
-import getReturnHref from "../utils/get-return-href.js";
-import getCookieDomain from "./get-cookie-domain.js";
+import { SECONDS_PER_DAY } from '../constants/time.js';
+import getReturnHref from '../utils/get-return-href.js';
+import getCookieDomain from './get-cookie-domain.js';
 
 export default function mapAuthnIdToResponseHeaders(authnId: string): Headers {
   const cookieDomain: string = getCookieDomain();

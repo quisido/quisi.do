@@ -3,20 +3,23 @@ import HeadingsToRowReducer from './audit-details-table-headings-to-row-reducer.
 import mapHeadingToColumn from './map-audit-details-table-heading-to-column.js';
 
 export default class AuditDetailsTable {
+  #headings = [];
+  #items = [];
+
   constructor({ headings, items }) {
-    this._headings = headings;
-    this._items = items;
+    this.#headings = headings;
+    this.#items = items;
   }
 
-  _mapItemToRow = item => {
+  #mapItemToRow = item => {
     const reduceHeadingsToRow = new HeadingsToRowReducer(item).run;
-    return this._headings.reduce(reduceHeadingsToRow, {});
+    return this.#headings.reduce(reduceHeadingsToRow, {});
   };
 
   toString() {
     const table = new Table({
-      columns: this._headings.map(mapHeadingToColumn),
-      rows: this._items.map(this._mapItemToRow),
+      columns: this.#headings.map(mapHeadingToColumn),
+      rows: this.#items.map(this.#mapItemToRow),
     });
     return table.render();
   }

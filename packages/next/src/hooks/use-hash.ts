@@ -4,7 +4,9 @@ import useForceUpdate from 'use-force-update';
 import useEffectEvent from './use-effect-event';
 
 const FIRST_CHARACTER = 1;
-const HASH_CHANGE_DELAY = 1; // Hash changes occur after hash change events.
+
+// Hash changes occur after hash change events.
+const HASH_CHANGE_DELAY = 1;
 
 const mapHashToNewURL = (hash: string): string => {
   const { pathname, search } = window.location;

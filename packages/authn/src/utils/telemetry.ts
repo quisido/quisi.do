@@ -1,4 +1,4 @@
-import callCallbacks from "./call-callbacks.js";
+import callCallbacks from './call-callbacks.js';
 
 export default class Telemetry<M extends object> {
   readonly #privateEmitListeners: ((metric: M) => void)[] = [];
@@ -9,9 +9,7 @@ export default class Telemetry<M extends object> {
 
   readonly #publicLogListeners: ((error: Error) => void)[] = [];
 
-  readonly #sideEffectListeners: ((
-    promise: Promise<unknown>,
-  ) => void)[] = [];
+  readonly #sideEffectListeners: ((promise: Promise<unknown>) => void)[] = [];
 
   protected proAffect(promise: Promise<unknown>): void {
     callCallbacks(this.#sideEffectListeners, promise);
@@ -49,7 +47,9 @@ export default class Telemetry<M extends object> {
     this.#publicEmitListeners.push(callback);
   }
 
-  protected proOnSideEffect(callback: (promise: Promise<unknown>) => void): void {
+  protected proOnSideEffect(
+    callback: (promise: Promise<unknown>) => void,
+  ): void {
     this.#sideEffectListeners.push(callback);
   }
 

@@ -5,11 +5,7 @@ export default [
   ...configs,
 
   {
-    files: [
-      'src/account-number.ts',
-      'src/product.ts',
-      'src/usage-type.ts',
-    ],
+    files: ['src/account-number.ts', 'src/product.ts', 'src/usage-type.ts'],
 
     rules: {
       'no-magic-numbers': 'off',

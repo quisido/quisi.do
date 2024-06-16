@@ -1,4 +1,4 @@
-import { type FontWeight } from "../constants/font-weight.js";
+import { type FontWeight } from '../constants/font-weight.js';
 
 export default interface Theme {
   readonly background: readonly [number, number, number];

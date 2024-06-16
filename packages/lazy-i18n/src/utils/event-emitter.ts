@@ -4,8 +4,10 @@ export default class EventEmitter<
   Event = string,
   A extends unknown[] = never[],
 > {
-  readonly #eventHandlers: Map<Event, EventHandler<A>[]> =
-    new Map<Event, EventHandler<A>[]>();
+  readonly #eventHandlers: Map<Event, EventHandler<A>[]> = new Map<
+    Event,
+    EventHandler<A>[]
+  >();
 
   public emit(event: Event, ...args: A): void {
     const eventHandlers: EventHandler<A>[] | undefined =

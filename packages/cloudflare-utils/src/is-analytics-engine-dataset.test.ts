@@ -1,6 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 import { describe, expect, it, vi } from 'vitest';
-import { isAnalyticsEngineDataset } from "./index.js";
+import { isAnalyticsEngineDataset } from './index.js';
 
 describe('isAnalyticsEngineDataset', (): void => {
   it('should identify Analytics Engine dataset interfaces', (): void => {
@@ -8,8 +8,10 @@ describe('isAnalyticsEngineDataset', (): void => {
     expect(isAnalyticsEngineDataset(null)).toBe(false);
     expect(isAnalyticsEngineDataset({})).toBe(false);
 
-    expect(isAnalyticsEngineDataset({
-      writeDataPoint: vi.fn(),
-    })).toBe(true);
+    expect(
+      isAnalyticsEngineDataset({
+        writeDataPoint: vi.fn(),
+      }),
+    ).toBe(true);
   });
 });

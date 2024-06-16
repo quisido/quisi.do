@@ -1,8 +1,8 @@
 /// <reference types="@cloudflare/workers-types" />
-import { AccountNumber, UsageType } from "@quisido/workers-shared";
-import getTelemetry from "../utils/get-telemetry.js";
-import getDatabase from "./get-database.js";
-import getUsage from "./get-usage.js";
+import { AccountNumber, UsageType } from '@quisido/workers-shared';
+import getTelemetry from '../utils/get-telemetry.js';
+import getDatabase from './get-database.js';
+import getUsage from './get-usage.js';
 import handleInsertIntoEmailsError from './handle-insert-into-emails-error.js';
 import handleInsertIntoEmailsResponse from './handle-insert-into-emails-response.js';
 
@@ -16,10 +16,7 @@ INSERT INTO \`emails\` (\`address\`, \`userId\`)
 VALUES (?, ?);
 `;
 
-export default function putDatabaseUserEmail({
-  email,
-  userId,
-}: Options): void {
+export default function putDatabaseUserEmail({ email, userId }: Options): void {
   const db: D1Database = getDatabase();
   const { affect } = getTelemetry();
   const use = getUsage();

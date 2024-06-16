@@ -2,8 +2,10 @@ export default function createThrottler(): (
   key: number | string | symbol,
   ms: number,
 ) => void {
-  const map: Map<number | string | symbol, number> =
-    new Map<number | string | symbol, number>();
+  const map: Map<number | string | symbol, number> = new Map<
+    number | string | symbol,
+    number
+  >();
 
   return function throttle(key: number | string | symbol, ms: number): void {
     const lastCallTime: number | undefined = map.get(key);

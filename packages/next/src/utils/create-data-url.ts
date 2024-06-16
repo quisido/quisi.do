@@ -25,15 +25,15 @@ const THE_NUMBER_OF_NUMBERS_BETWEEN_THE_BEGINNING_OF_THE_SET_OF_WHOLE_NUMBERS_AN
       THE_BEGINNING_OF_THE_SET_OF_WHOLE_NUMBERS,
   );
 
-const mapRgbaToHex = ([
-  r10,
-  g10,
-  b10,
-  aFloat = OPAGUE,
-]: readonly [number, number, number, number | undefined]): string => {
+const mapRgbaToHex = ([r10, g10, b10, aFloat = OPAGUE]: readonly [
+  number,
+  number,
+  number,
+  number | undefined,
+]): string => {
   const alpha: number = Math.round(
     aFloat *
-      (HEX**DIGITS -
+      (HEX ** DIGITS -
         THE_NUMBER_OF_NUMBERS_BETWEEN_THE_BEGINNING_OF_THE_SET_OF_WHOLE_NUMBERS_AND_THE_BEGINNING_OF_THE_SET_OF_NATURAL_NUMBERS),
   );
   return `${mapRgbToHex([r10, g10, b10])}${mapDecimalToHexadecimal(alpha)}`;

@@ -1,6 +1,6 @@
-import { ErrorCode } from "@quisido/authn-shared";
-import getSessionIdCookie from "../utils/get-session-id-cookie.js";
-import mapCauseToError from "../utils/map-cause-to-error.js";
+import { ErrorCode } from '@quisido/authn-shared';
+import getSessionIdCookie from '../utils/get-session-id-cookie.js';
+import mapCauseToError from '../utils/map-cause-to-error.js';
 
 export default function mapStateToReturnPath(
   state: Record<string, unknown>,

@@ -1,6 +1,6 @@
-import { AUTHN_USER_ID_MAP } from "../../constants/authn-user-id-map.js";
-import MetricName from "../../constants/metric-name.js";
-import getTelemetry from "../../utils/get-telemetry.js";
+import { AUTHN_USER_ID_MAP } from '../../constants/authn-user-id-map.js';
+import MetricName from '../../constants/metric-name.js';
+import getTelemetry from '../../utils/get-telemetry.js';
 
 interface Options {
   readonly authnId: string;

@@ -14,8 +14,8 @@ interface DefaultExport<T> {
 const importLogRocket = () => import('logrocket');
 
 let LogRocket: ILogRocket = {
-  captureMessage: noop,
   captureException: noop,
+  captureMessage: noop,
   debug: noop,
   error: noop,
   getSessionURL: noop,
@@ -27,10 +27,9 @@ let LogRocket: ILogRocket = {
   sessionURL: null,
   startNewSession: noop,
   track: noop,
-  version: undefined,
+  version: '0.0.0',
   warn: noop,
 };
-
 
 export default function useLogRocket(): ILogRocket {
   const forceUpdate: VoidFunction = useForceUpdate();

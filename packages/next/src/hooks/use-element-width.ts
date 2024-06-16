@@ -12,12 +12,10 @@ interface State<T extends HTMLElement> {
   readonly width: number | undefined;
 }
 
-const INITIAL_WIDTH = undefined;
-
 export default function useElementWidth<T extends HTMLElement>(): State<T> {
   // States
   const ref: MutableRefObject<T | null> = useRef(null);
-  const [width, setWidth] = useState<number | undefined>(INITIAL_WIDTH);
+  const [width, setWidth] = useState<number | undefined>();
 
   // Callbacks
   const handleResize = useCallback((): void => {

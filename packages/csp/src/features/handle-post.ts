@@ -1,10 +1,10 @@
-import { AccountNumber, Product, UsageType } from "@quisido/workers-shared";
-import { SELECT_USER_ID_FROM_PROJECTS } from "../constants/queries.js";
-import { StatusCode } from "../constants/status-code.js";
-import type ReportBody from "../types/report-body.js";
-import mapReadableStreamToString from "../utils/map-readable-stream-to-string.js";
-import parseReport from "../utils/parse-report.js";
-import query from "../utils/query.js";
+import { AccountNumber, Product, UsageType } from '@quisido/workers-shared';
+import { SELECT_USER_ID_FROM_PROJECTS } from '../constants/queries.js';
+import { StatusCode } from '../constants/status-code.js';
+import type ReportBody from '../types/report-body.js';
+import mapReadableStreamToString from '../utils/map-readable-stream-to-string.js';
+import parseReport from '../utils/parse-report.js';
+import query from '../utils/query.js';
 import Response from '../utils/response.js';
 
 interface Options {
@@ -27,7 +27,7 @@ type ReportBodyArray = [
   string,
   number,
   number | null,
-  number | null
+  number | null,
 ];
 
 const DEFAULT_PROJECT_ID = 0;
@@ -75,8 +75,7 @@ export default async function handlePost({
   }
 
   // Query
-  const [result] =
-    await query(db, SELECT_USER_ID_FROM_PROJECTS, projectId);
+  const [result] = await query(db, SELECT_USER_ID_FROM_PROJECTS, projectId);
 
   // Not found
   if (typeof result === 'undefined') {

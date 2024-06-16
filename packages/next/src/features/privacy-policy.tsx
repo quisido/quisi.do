@@ -19,16 +19,9 @@ export default function PrivacyPolicy(): ReactElement {
       <Div element="p" marginBottom="medium">
         For website traffic, quisi.do uses third-party monitoring services, such
         as Amazon CloudWatch RUM, Cloudflare Insights, Datadog RUM, Fullstory,
-        and Google Analytics. This data is aggregated and{' '}
-        <Link
-          feature="privacy-policy"
-          href="/dashboard/"
-          title="quisi.do dashboard"
-        >
-          dashboarded
-        </Link>{' '}
-        to transparently monitor the website&apos;s performance. These services
-        use cookies, and cookie functionality will be documented in{' '}
+        and Google Analytics. This data is aggregated and dashboarded to
+        transparently monitor the website&apos;s performance. These services use
+        cookies, and cookie functionality will be documented in{' '}
         quisi.do&apos;s{' '}
         <Link
           feature="privacy"

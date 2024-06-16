@@ -1,7 +1,7 @@
-import { ErrorCode } from "@quisido/authn-shared";
-import mapCauseToError from "../../utils/map-cause-to-error.js";
-import getPatreonOAuthClientId from "./get-patreon-oauth-client-id.js";
-import getPatreonRequestCode from "./get-patreon-request-code.js";
+import { ErrorCode } from '@quisido/authn-shared';
+import mapCauseToError from '../../utils/map-cause-to-error.js';
+import getPatreonOAuthClientId from './get-patreon-oauth-client-id.js';
+import getPatreonRequestCode from './get-patreon-request-code.js';
 
 interface Options {
   readonly code: unknown;

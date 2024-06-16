@@ -1,4 +1,4 @@
-import { StatusCode } from "../constants/status-code.js";
+import { StatusCode } from '../constants/status-code.js';
 import Response from './response.js';
 
 export default class MethodNotAllowedResponse extends Response {

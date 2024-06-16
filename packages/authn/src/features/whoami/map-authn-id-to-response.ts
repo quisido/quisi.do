@@ -1,17 +1,19 @@
-import { WhoAmIResponseCode } from "@quisido/authn-shared";
-import { AccountNumber, UsageType } from "@quisido/workers-shared";
-import { Snapshot } from "proposal-async-context/src/index.js";
-import MetricName from "../../constants/metric-name.js";
-import StatusCode from "../../constants/status-code.js";
-import getTelemetry from "../../utils/get-telemetry.js";
-import getAuthnUserIdsNamespace from "../get-authn-user-ids-namespace.js";
-import getUsage from "../get-usage.js";
-import getWhoAmIResponseHeaders from "./get-whoami-response-headers.js";
-import handleInvalidAuthnId from "./handle-invalid-authn-id.js";
+import { WhoAmIResponseCode } from '@quisido/authn-shared';
+import { AccountNumber, UsageType } from '@quisido/workers-shared';
+import { Snapshot } from 'proposal-async-context/src/index.js';
+import MetricName from '../../constants/metric-name.js';
+import StatusCode from '../../constants/status-code.js';
+import getTelemetry from '../../utils/get-telemetry.js';
+import getAuthnUserIdsNamespace from '../get-authn-user-ids-namespace.js';
+import getUsage from '../get-usage.js';
+import getWhoAmIResponseHeaders from './get-whoami-response-headers.js';
+import handleInvalidAuthnId from './handle-invalid-authn-id.js';
 
 const BASE = 10;
 
-export default async function mapAuthnIdToResponse(authnId: string): Promise<Response> {
+export default async function mapAuthnIdToResponse(
+  authnId: string,
+): Promise<Response> {
   const authnUserIds: KVNamespace = getAuthnUserIdsNamespace();
   const use = getUsage();
 

@@ -1,4 +1,4 @@
-import { assert, describe, expect, it } from "vitest";
+import { assert, describe, expect, it } from 'vitest';
 
 export default function describePackageJsonScripts(packageJson: object): void {
   describe('scripts', (): void => {
@@ -19,7 +19,9 @@ export default function describePackageJsonScripts(packageJson: object): void {
       );
 
       assert('eslint:fix' in scripts);
-      expect(scripts['eslint:fix']).toBe("eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0");
+      expect(scripts['eslint:fix']).toBe(
+        'eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0',
+      );
     });
 
     it('should have prepack scripts', (): void => {

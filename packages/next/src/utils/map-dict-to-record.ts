@@ -12,6 +12,8 @@ const reduceDictEntriesToRecord = <T>(
   };
 };
 
-export default function mapDictToRecord<T>(dict: NodeJS.Dict<T>): Record<string, T> {
+export default function mapDictToRecord<T>(
+  dict: NodeJS.Dict<T>,
+): Record<string, T> {
   return Object.entries(dict).reduce(reduceDictEntriesToRecord, {});
 }

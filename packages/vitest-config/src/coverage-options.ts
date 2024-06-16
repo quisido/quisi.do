@@ -1,6 +1,6 @@
-import type { CoverageOptions } from "vitest";
-import { EXCLUDE } from "./exclude.js";
-import { THRESHOLDS } from "./thresholds.js";
+import type { CoverageOptions } from 'vitest';
+import { EXCLUDE } from './exclude.js';
+import { THRESHOLDS } from './thresholds.js';
 
 export const COVERAGE_OPTIONS: CoverageOptions = {
   all: true,

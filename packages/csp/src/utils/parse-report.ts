@@ -1,6 +1,6 @@
-import type ReportBody from "../types/report-body.js";
-import isReport from "./is-report.js";
-import mapReportToBody from "./map-report-to-body.js";
+import type ReportBody from '../types/report-body.js';
+import isReport from './is-report.js';
+import mapReportToBody from './map-report-to-body.js';
 
 export default function parseReport(report: string): readonly ReportBody[] {
   const json: unknown = JSON.parse(report);

@@ -44,12 +44,7 @@ export default async function putDatabaseUser(
     type: UsageType.D1Write,
   });
   const {
-    meta: {
-      changes,
-      duration,
-      last_row_id: userId,
-      size_after: sizeAfter,
-    },
+    meta: { changes, duration, last_row_id: userId, size_after: sizeAfter },
   } = await usersStatement.run();
 
   return snapshot.run((): number =>

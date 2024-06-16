@@ -25,7 +25,9 @@ describe('handleFetch', (): void => {
     );
 
     expect(TEST_CONSOLE_LOG).toHaveBeenCalledTimes(ONCE);
-    expect(TEST_CONSOLE_LOG).toHaveBeenLastCalledWith('Invalid isolate environment');
+    expect(TEST_CONSOLE_LOG).toHaveBeenLastCalledWith(
+      'Invalid isolate environment',
+    );
     expect(response.status).toBe(StatusCode.InternalServerError);
   });
 

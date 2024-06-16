@@ -1,4 +1,4 @@
-import type { Linter } from "eslint";
+import type { Linter } from 'eslint';
 import JS from './js.js';
 
 export default {
@@ -13,4 +13,4 @@ export default {
       require: 'writable',
     },
   },
-} satisfies Required<Omit<Linter.FlatConfig, 'ignores' | 'processor'>>
+} satisfies Required<Omit<Linter.FlatConfig, 'ignores' | 'processor'>>;

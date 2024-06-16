@@ -37,12 +37,12 @@ export default {
      * countryName: string
      */
     description: 'quisi.do',
-    // determiner: 'a' | 'an' | 'the' | 'auto' | ''
+    // Determiner: 'a' | 'an' | 'the' | 'auto' | ''
     emails: ['open-graph@quisi.do'],
-    // firstName: 'Mr.',
+    // FirstName: 'Mr.',
     gender: 'male',
-    // images: OGImage | Array<OGImage>
-    // lastName: 'quisi.do',
+    // Images: OGImage | Array<OGImage>
+    // LastName: 'quisi.do',
     locale: 'en-US',
     siteName: 'quisi.do',
     title: 'quisi.do',
@@ -56,6 +56,8 @@ export default {
     description: 'quisi.do',
     // Images: TwitterImage | Array<TwitterImage>;
     siteId: 'quisi.do',
-    title: 'quisi.do', // <-- title of the page, not the website
+
+    // This refers to the title of the page, not the title of the website.
+    title: 'quisi.do',
   },
 } satisfies Metadata;

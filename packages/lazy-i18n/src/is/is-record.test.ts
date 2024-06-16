@@ -20,8 +20,10 @@ describe('isRecord', (): void => {
   });
 
   it('should return true for records', (): void => {
-    expect(isRecord({
-      'test-key': 'test value',
-    })).toBe(true);
+    expect(
+      isRecord({
+        'test-key': 'test value',
+      }),
+    ).toBe(true);
   });
 });

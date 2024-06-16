@@ -23,12 +23,14 @@ const validateStat = (
 const validateStatsValue = (
   value: unknown,
   context: readonly string[],
-): readonly (readonly [number, number])[] => validateArray(value, validateStat, context);
+): readonly (readonly [number, number])[] =>
+  validateArray(value, validateStat, context);
 
 const validateStats = (
   value: unknown,
   context: readonly string[],
-): Record<'24h', readonly (readonly [number, number])[]> => validateObject(
+): Record<'24h', readonly (readonly [number, number])[]> =>
+  validateObject(
     value,
     {
       '24h': validateStatsValue,

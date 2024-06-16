@@ -1,6 +1,6 @@
-import { ErrorCode } from "@quisido/authn-shared";
-import isObject from "../../utils/is-object.js";
-import mapCauseToError from "../../utils/map-cause-to-error.js";
+import { ErrorCode } from '@quisido/authn-shared';
+import isObject from '../../utils/is-object.js';
+import mapCauseToError from '../../utils/map-cause-to-error.js';
 
 export default function mapTokenResponseJsonToAccessToken(
   json: unknown,

@@ -12,8 +12,10 @@ describe('EventEmitter', (): void => {
   it('should call various emit handlers', (): void => {
     const ONE = vi.fn();
     const TWO = vi.fn();
-    const emitter: EventEmitter<'test', [string]> =
-      new EventEmitter<'test', [string]>();
+    const emitter: EventEmitter<'test', [string]> = new EventEmitter<
+      'test',
+      [string]
+    >();
     emitter.on('test', ONE);
     emitter.on('test', TWO);
     emitter.emit('test', 'arg');

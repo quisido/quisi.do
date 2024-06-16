@@ -5,7 +5,9 @@ import THEME from '../constants/theme.js';
 import mapRgbToHex from '../utils/map-rgb-to-hex.js';
 
 const BACKGROUND_COLOR: string = mapRgbToHex(THEME.background);
-const LAYOUT_SCSS: string = readFileSync(join(__dirname, 'layout.module.scss')).toString();
+const LAYOUT_SCSS: string = readFileSync(
+  join(__dirname, 'layout.module.scss'),
+).toString();
 const FOREGROUND_COLOR: string = mapRgbToHex(THEME.foreground);
 
 describe('layout', (): void => {

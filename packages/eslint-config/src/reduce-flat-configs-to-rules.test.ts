@@ -1,6 +1,6 @@
-import type { Linter } from "eslint";
+import type { Linter } from 'eslint';
 import { describe, expect, it } from 'vitest';
-import reduceFlatConfigsToRules from "./reduce-flat-configs-to-rules.js";
+import reduceFlatConfigsToRules from './reduce-flat-configs-to-rules.js';
 
 const FLAT_CONFIGS: readonly Linter.FlatConfig[] = [
   {},

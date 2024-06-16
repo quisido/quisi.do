@@ -1,5 +1,5 @@
-import { ErrorCode } from "@quisido/authn-shared";
-import mapCauseToError from "../../utils/map-cause-to-error.js";
+import { ErrorCode } from '@quisido/authn-shared';
+import mapCauseToError from '../../utils/map-cause-to-error.js';
 
 export default function handleInvalidPatreonIdentityData(data: unknown): never {
   if (typeof data === 'undefined') {
