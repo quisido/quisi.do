@@ -47,7 +47,7 @@
     "@quisido/vitest-config": "workspace:^",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/react": "^16.0.0",
-    "@types/node": "^20.14.2",
+    "@types/node": "^20.14.4",
     "@types/react": "^18.3.3",
     "@vitest/coverage-istanbul": "^1.6.0",
     "babel-plugin-replace-import-extension": "^1.1.4",

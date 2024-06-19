@@ -1,4 +1,3 @@
-import { AccountNumber, Product, UsageType } from '@quisido/workers-shared';
 import { SELECT_USER_ID_FROM_PROJECTS } from '../constants/queries.js';
 import { StatusCode } from '../constants/status-code.js';
 import type ReportBody from '../types/report-body.js';
@@ -6,6 +5,11 @@ import mapReadableStreamToString from '../utils/map-readable-stream-to-string.js
 import parseReport from '../utils/parse-report.js';
 import query from '../utils/query.js';
 import Response from '../utils/response.js';
+import mapProjectIdToD1ReadDoubles from '../utils/map-project-id-to-d1-read-doubles.js';
+import type { ReportBodyArray } from '../types/report-body-array.js';
+import mapReportBodyToArray from '../utils/map-report-body-to-array.js';
+import mapProjectIdToD1WriteDoubles from '../utils/map-project-id-to-d1-write-doubles.js';
+import { DEFAULT_D1_READ_DATA_POINT } from '../constants/default-d1-read-data-point.js';
 
 interface Options {
   readonly body: ReadableStream | null;
@@ -16,50 +20,7 @@ interface Options {
   readonly usage: AnalyticsEngineDataset;
 }
 
-type ReportBodyArray = [
-  string,
-  string | null,
-  string | null,
-  string,
-  string,
-  string | null,
-  string | null,
-  string,
-  number,
-  number | null,
-  number | null,
-];
-
-const DEFAULT_PROJECT_ID = 0;
-const ONCE = 1;
 const SELECT = 'SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?';
-const SINGLE = 1;
-
-const mapReportBodyToArray = ({
-  blockedURL,
-  columnNumber,
-  disposition,
-  documentURL,
-  effectiveDirective,
-  lineNumber,
-  referrer,
-  sample,
-  sourceFile,
-  statusCode,
-}: ReportBody): ReportBodyArray => [
-  documentURL,
-  referrer ?? null,
-  blockedURL ?? null,
-  effectiveDirective,
-  // "Original policy" is too large (expensive), so just write an empty string.
-  '',
-  sourceFile ?? null,
-  sample ?? null,
-  disposition,
-  statusCode,
-  lineNumber ?? null,
-  columnNumber ?? null,
-];
 
 export default async function handlePost({
   body,
@@ -79,18 +40,7 @@ export default async function handlePost({
 
   // Not found
   if (typeof result === 'undefined') {
-    usage.writeDataPoint({
-      indexes: [AccountNumber.Quisido.toString()],
-
-      doubles: [
-        Product.ContentSecurityPolicy,
-        DEFAULT_PROJECT_ID,
-        UsageType.D1Read,
-        ONCE,
-        SINGLE,
-      ],
-    });
-
+    usage.writeDataPoint(DEFAULT_D1_READ_DATA_POINT);
     console.log('Missing project');
     return new Response(StatusCode.NotFound);
   }
@@ -98,32 +48,14 @@ export default async function handlePost({
   // Bad gateway
   const { userId } = result;
   if (typeof userId !== 'number') {
-    usage.writeDataPoint({
-      indexes: [AccountNumber.Quisido.toString()],
-
-      doubles: [
-        Product.ContentSecurityPolicy,
-        DEFAULT_PROJECT_ID,
-        UsageType.D1Read,
-        ONCE,
-        SINGLE,
-      ],
-    });
-
+    usage.writeDataPoint(DEFAULT_D1_READ_DATA_POINT);
     console.log('Invalid database table row');
     return new Response(StatusCode.BadGateway);
   }
 
   usage.writeDataPoint({
+    doubles: mapProjectIdToD1ReadDoubles(projectId),
     indexes: [userId.toString()],
-
-    doubles: [
-      Product.ContentSecurityPolicy,
-      projectId,
-      UsageType.D1Read,
-      ONCE,
-      SINGLE,
-    ],
   });
 
   const mapReportBodyToInsertValues = (
@@ -139,15 +71,8 @@ export default async function handlePost({
     const reports: readonly ReportBody[] = parseReport(reportStr);
 
     usage.writeDataPoint({
+      doubles: mapProjectIdToD1WriteDoubles(projectId),
       indexes: [userId.toString()],
-
-      doubles: [
-        Product.ContentSecurityPolicy,
-        projectId,
-        UsageType.D1Write,
-        ONCE,
-        SINGLE,
-      ],
     });
 
     ctx.waitUntil(
@@ -155,7 +80,7 @@ export default async function handlePost({
         db,
         `
         INSERT INTO \`reports\` (
-          \`project\`,
+          \`projectId\`,
           \`timestamp\`,
           \`documentURL\`,
           \`referrer\`,

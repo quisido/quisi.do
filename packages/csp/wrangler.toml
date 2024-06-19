@@ -27,7 +27,7 @@ analytics_engine_datasets = [
 ]
 
 d1_databases = [
-  { binding = "CSP_DB", database_id = "2ea99634-ee39-491d-94d9-f8e688d1cb92", database_name = "csp", database_preview_id = "a5299acf-42a8-47bb-95e7-c062bc772b48" },
+  { binding = "CSP_DB", database_id = "2ea99634-ee39-491d-94d9-f8e688d1cb92", database_name = "csp", preview_database_id = "a5299acf-42a8-47bb-95e7-c062bc772b48" },
 ]
 
 [env.production.vars]
