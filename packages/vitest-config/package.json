@@ -38,9 +38,9 @@
     "@types/eslint": "^8.56.10",
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/eslint__js": "^8.42.3",
-    "@typescript-eslint/eslint-plugin": "^7.13.0",
-    "@typescript-eslint/parser": "^7.13.0",
-    "typescript-eslint": "^7.13.0"
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
+    "typescript-eslint": "^7.13.1"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.3",
@@ -50,7 +50,7 @@
     "@babel/preset-typescript": "^7.24.7",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@types/eslint__js": "^8.42.3",
-    "@types/node": "^20.14.2",
+    "@types/node": "^20.14.4",
     "@vitest/coverage-istanbul": "^1.6.0",
     "babel-plugin-replace-import-extension": "^1.1.4",
     "cjs-ts": "workspace:^",

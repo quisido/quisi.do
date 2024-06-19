@@ -13,6 +13,7 @@ export default [
   {
     files: [
       'src/features/handle-fetch.ts',
+      'src/features/handle-get.ts',
       'src/features/handle-options.ts',
       'src/features/handle-post.ts',
     ],

@@ -3,7 +3,9 @@
 import { useLayoutEffect, useState, type ReactElement, type ReactNode } from 'react';
 import useTheme from '../../hooks/use-theme.js';
 import createRandomNumberGenerator from '../../utils/create-random-number-generator.js';
+import validateString from '../../utils/validate-string.js';
 import Header from './header.js';
+import styles from './section.module.scss';
 
 export interface Props {
   readonly actions?: ReactNode | undefined;
@@ -11,10 +13,12 @@ export interface Props {
   readonly header?: ReactNode | undefined;
 }
 
+const FOOTER_CLASS_NAME: string = validateString(styles['footer']);
 const INITIAL_ROTATION = 0;
 const MAXIMUM_ROTATION = -2;
 const MINIMUM_ROTATION = -2;
 const NEGATIVE = -1;
+const SECTION_CLASS_NAME: string = validateString(styles['section']);
 
 const getRotation = createRandomNumberGenerator(
   MINIMUM_ROTATION,
@@ -39,18 +43,10 @@ export default function QuisiSection({
 
   return (
     <section
+      className={SECTION_CLASS_NAME}
       style={{
-        boxSizing: 'border-box',
         color: foregroundHex,
-        marginBottom: '1rem',
-        marginTop: '1rem',
-        maxHeight: '100%',
-        maxWidth: '100%',
-        paddingLeft: '2em',
-        paddingRight: '2em',
-        position: 'relative',
         transform: `rotate(${rotation}deg)`,
-        width: '100%',
       }}
     >
       <div
@@ -61,12 +57,7 @@ export default function QuisiSection({
         {typeof header !== 'undefined' && <Header>{header}</Header>}
         <div>{children}</div>
         {typeof actions !== 'undefined' && (
-          <footer
-            style={{
-              paddingTop: '1rem',
-              textAlign: 'right',
-            }}
-          >
+          <footer className={FOOTER_CLASS_NAME}>
             {actions}
           </footer>
         )}

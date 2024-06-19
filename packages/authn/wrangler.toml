@@ -34,7 +34,7 @@ analytics_engine_datasets = [
 ]
 
 d1_databases = [
-  { binding = "AUTHN_DB", database_id = "d0e825fc-b58d-49b3-a86c-a9d967278d80", database_name = "authn", database_preview_id = "d546119e-036c-4c3d-a684-953418657a8d" },
+  { binding = "AUTHN_DB", database_id = "d0e825fc-b58d-49b3-a86c-a9d967278d80", database_name = "authn", preview_database_id = "d546119e-036c-4c3d-a684-953418657a8d" },
 ]
 
 kv_namespaces = [
