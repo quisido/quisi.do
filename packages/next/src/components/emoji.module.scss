@@ -1,4 +1,9 @@
 .emoji {
   font-family: "Noto Color Emoji";
   vertical-align: bottom;
+
+  // Un-invert.
+  @media (prefers-color-scheme: dark) {
+    filter: invert(95%);
+  }
 }

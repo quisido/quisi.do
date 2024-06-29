@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
 import type {
   ComponentType,
-  MutableRefObject,
   PropsWithChildren,
   ReactElement,
+  RefObject,
 } from 'react';
 import { useContext } from 'react';
 import { describe, expect, it } from 'vitest';
@@ -22,13 +22,13 @@ const TEST_TRANSLATIONS: Record<string, Translations> = {
 
 describe('Provider', (): void => {
   it('should set the contexts to their default values', (): void => {
-    const LoadingComponent: MutableRefObject<
+    const LoadingComponent: RefObject<
       ComponentType<unknown> | undefined
     > = {
       current: undefined,
     };
 
-    const translate: MutableRefObject<TranslateFunctionType | undefined> = {
+    const translate: RefObject<TranslateFunctionType | undefined> = {
       current: undefined,
     };
 

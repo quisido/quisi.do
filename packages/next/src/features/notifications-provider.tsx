@@ -5,9 +5,9 @@ import {
   useMemo,
   useRef,
   useState,
-  type MutableRefObject,
   type PropsWithChildren,
   type ReactElement,
+  type RefObject,
 } from 'react';
 import { NotificationsProvider } from '../contexts/notifications.js';
 import useEffectEvent from '../hooks/use-effect-event.js';
@@ -17,8 +17,8 @@ import type { WithKey } from '../types/with-key.js';
 import append from '../utils/append.js';
 import filter from '../utils/filter.js';
 import isNot from '../utils/is-not.js';
-import type AuthnErrorNotification from './authn-error-notification.js';
 import mapErrorToNotification from '../utils/map-error-to-notification.js';
+import type AuthnErrorNotification from './authn-error-notification.js';
 
 type NotificationState = WithKey<Notification> &
   RequiredDefined<Pick<Notification, 'onDismiss'>>;
@@ -41,7 +41,7 @@ function NotificationsProviderFeature({
   const [hash, setHash] = useHash();
 
   // States
-  const key: MutableRefObject<number> = useRef(INITIAL_ID);
+  const key: RefObject<number> = useRef(INITIAL_ID);
   const [notifications, setNotifications] = useState(INITIAL_NOTIFICATIONS);
 
   // Callbacks

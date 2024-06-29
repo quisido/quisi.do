@@ -23,7 +23,7 @@ export default function PreconnectFeature(): ReactElement {
       <Preconnect>https://dataplane.rum.us-west-2.amazonaws.com</Preconnect>
       <Preconnect>https://edge.fullstory.com</Preconnect>
       <Preconnect>https://fonts.googleapis.com</Preconnect>
-      <Preconnect as="font" cors>https://fonts.gstatic.com</Preconnect>
+      <Preconnect cors>https://fonts.gstatic.com</Preconnect>
       <Preconnect>https://o592283.ingest.sentry.io</Preconnect>
       <Preconnect>https://r.logr-ingest.com</Preconnect>
       <Preconnect>https://rs.fullstory.com</Preconnect>

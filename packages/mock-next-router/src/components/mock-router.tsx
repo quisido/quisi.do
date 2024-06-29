@@ -1,12 +1,11 @@
 import type { MemoryHistory } from 'history';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime.js';
 import { Router } from 'next/router.js';
-import type { ParsedUrlQuery } from 'querystring';
 import {
   Fragment,
+  useMemo,
   type PropsWithChildren,
   type ReactElement,
-  useMemo,
 } from 'react';
 import createPromise from '../utils/create-promise.js';
 import initNextData from '../utils/init-next-data.js';
@@ -28,7 +27,8 @@ export default function MockRouter({
   const value: Router = useMemo((): Router => {
     const { pathname, search } = history.location;
     const urlSearchParams: URLSearchParams = new URLSearchParams(search);
-    const query: ParsedUrlQuery = mapIterableToRecord(urlSearchParams);
+    const query: Record<string, string | string[] | undefined> =
+      mapIterableToRecord(urlSearchParams.entries());
     return new Router(pathname, query, '', {
       App: Null,
       Component: Fragment,

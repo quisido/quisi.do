@@ -4,6 +4,7 @@ import CONFIG, {
   PLUGIN_OPTIONS,
 } from '@quisido/vitest-config';
 import react from '@vitejs/plugin-react';
+import type { CoverageOptions } from 'vitest';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -22,7 +23,7 @@ export default defineConfig({
         lines: 7,
         statements: 7,
       },
-    },
+    } as CoverageOptions,
 
     env: {
       CLARITY_TAG: 'test-clarity-tag',

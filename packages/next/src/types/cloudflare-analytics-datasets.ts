@@ -1,16 +1,16 @@
 import { type CloudflareRumPerformanceEvents } from './cloudflare-rum-performance-events.js';
 import { type CloudflareWorkersInvocations } from './cloudflare-workers-invocations.js';
 
+interface HasKey<K extends number | string> {
+  readonly key: K;
+}
+
 type WithKey<K extends number | string, T> = HasKey<K> & T;
 
 type Dimension<K extends number | string, V extends string> = WithKey<
   K,
   Record<V, number>
 >;
-
-interface HasKey<K extends number | string> {
-  readonly key: K;
-}
 
 interface HttpRequests1hGroups {
   readonly bytes_sum: number;

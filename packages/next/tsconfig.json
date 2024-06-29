@@ -1,14 +1,7 @@
 {
-  "exclude": [
-    ".next/",
-    "cypress/",
-    "src/**/*.e2e.ts",
-    "src/test/cypress/",
-    "out/",
-    "cypress.config.*"
-  ],
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts"],
+
   "compilerOptions": {
     "allowJs": false,
     "downlevelIteration": true,
@@ -26,12 +19,21 @@
     "sourceRoot": ".",
     "skipLibCheck": false,
     "strict": true,
-    "typeRoots": [],
-    "types": [],
+    "types": ["node"],
+
     "plugins": [
       {
         "name": "next"
       }
     ]
-  }
+  },
+
+  "exclude": [
+    ".next/",
+    "cypress/coverage/",
+    "cypress/downloads/",
+    "cypress/screenshots/",
+    "cypress/videos/",
+    "out/",
+  ]
 }

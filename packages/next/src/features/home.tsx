@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 import Link from '../modules/quisi/link.js';
 import Section from '../modules/quisi/section.js';
-import ContentSecurityPolicy from './content-security-policy.jsx';
+import ContentSecurityPolicy from './content-security-policy/index.js';
 
 export default function Home(): ReactElement {
   return (

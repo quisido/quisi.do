@@ -1,6 +1,8 @@
 import { type MetadataRoute } from 'next';
 import Locale from '../constants/locale.js';
 
+export const dynamic = 'force-static';
+
 const NOW: Date = new Date();
 
 const mapLocaleToPath = (locale: Locale): string => {

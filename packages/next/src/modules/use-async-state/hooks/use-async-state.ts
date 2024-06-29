@@ -1,13 +1,13 @@
 'use client';
 
 import { mapUnknownToString } from 'fmrs';
-import { useCallback, useRef, useState, type MutableRefObject } from 'react';
+import { useCallback, useRef, useState, type RefObject } from 'react';
 import type AsyncState from '../types/async-state.js';
 
 export type State<T> = AsyncState<T> & BaseState<T>;
 
 interface BaseState<T> {
-  readonly asyncEffectRef: MutableRefObject<Promise<void> | undefined>;
+  readonly asyncEffectRef: RefObject<Promise<void> | undefined>;
   readonly request: (get: () => Promise<T>) => Promise<void>;
   readonly reset: VoidFunction;
   readonly retry: () => Promise<void>;
@@ -23,8 +23,10 @@ const DEFAULT_ASYNC_STATE = {
 
 export default function useAsyncState<T = unknown>(): State<T> {
   // States
-  const asyncEffectRef: MutableRefObject<Promise<void> | undefined> = useRef();
-  const lastGetRef: MutableRefObject<(() => Promise<T>) | undefined> = useRef();
+  const asyncEffectRef: RefObject<Promise<void> | undefined> =
+    useRef(undefined);
+  const lastGetRef: RefObject<(() => Promise<T>) | undefined> =
+    useRef(undefined);
   const [asyncState, setAsyncState] =
     useState<AsyncState<T>>(DEFAULT_ASYNC_STATE);
 
