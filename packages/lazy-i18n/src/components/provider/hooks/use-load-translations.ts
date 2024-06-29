@@ -1,4 +1,4 @@
-import { useCallback, useRef, type MutableRefObject } from 'react';
+import { useCallback, useRef, type RefObject } from 'react';
 import isDefaultStringRecordExport from '../../../is/is-default-string-record-export.js';
 import isStringRecord from '../../../is/is-string-record.js';
 import type { DefaultExport } from '../../../types/default-export.js';
@@ -10,7 +10,7 @@ type EagerTranslations =
 
 type LazyTranslations = Promise<EagerTranslations>;
 
-export type State<T> = (locale: T) => Promise<void> | undefined;
+export type State<T> = (locale: T) => Promise<void> | null;
 
 export interface Props<T> {
   readonly onLoadError?: ((locale: keyof T, err: unknown) => void) | undefined;
@@ -28,15 +28,15 @@ const DEFAULT_IS_FETCHED: Readonly<
 export default function useLoadTranslations<
   T extends Record<string, Translations | undefined>,
 >({ onLoad, onLoadError, translationsRecord }: Props<T>): State<keyof T> {
-  const isFetchedRef: MutableRefObject<
+  const isFetchedRef: RefObject<
     Readonly<Record<keyof T, boolean | undefined>>
   > = useRef(DEFAULT_IS_FETCHED);
 
   return useCallback(
-    (locale: keyof T): Promise<void> | undefined => {
+    (locale: keyof T): Promise<void> | null => {
       // If we've already fetched these locations, don't fetch them again.
       if (isFetchedRef.current[locale] === true) {
-        return;
+        return null;
       }
 
       isFetchedRef.current = {
@@ -48,24 +48,27 @@ export default function useLoadTranslations<
       if (typeof translations === 'undefined') {
         throw new Error(`Locale not found: ${String(locale)}`);
       }
+
       if (isStringRecord(translations)) {
         onLoad(locale, translations);
-        return;
+        return null;
       }
+
       if (isDefaultStringRecordExport(translations)) {
         onLoad(locale, translations.default);
-        return;
+        return null;
       }
 
       const importedRecord: EagerTranslations | LazyTranslations =
         translations();
       if (isStringRecord(importedRecord)) {
         onLoad(locale, importedRecord);
-        return;
+        return null;
       }
+
       if (isDefaultStringRecordExport(importedRecord)) {
         onLoad(locale, importedRecord.default);
-        return;
+        return null;
       }
 
       return importedRecord

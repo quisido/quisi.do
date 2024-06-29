@@ -1,7 +1,7 @@
 'use client';
 
 import I18n from "lazy-i18n";
-import { useEffect, useState, type MutableRefObject, type ReactElement } from "react";
+import { useEffect, useState, type ReactElement, type RefObject } from "react";
 import useMountedRef from "../hooks/use-mounted-ref.js";
 import type NotificationType from '../types/notification.js';
 import mapErrorToNotification from '../utils/map-error-to-notification.js';
@@ -23,7 +23,7 @@ export default function LazyNotification({
   children,
 }: LazyNotificationProps): ReactElement {
   // States
-  const isMountedRef: MutableRefObject<boolean> = useMountedRef();
+  const isMountedRef: RefObject<boolean> = useMountedRef();
   const [notification, setNotification] =
     useState<NotificationType>(LOADING_NOTIFICATION);
 

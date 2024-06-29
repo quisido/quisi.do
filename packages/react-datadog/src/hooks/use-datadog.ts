@@ -1,7 +1,7 @@
 'use client';
 
 import type { RumInitConfiguration, datadogRum } from '@datadog/browser-rum';
-import { useEffect, useRef, type MutableRefObject } from 'react';
+import { useEffect, useRef, type RefObject } from 'react';
 import useShallowMemo from 'use-shallow-memo';
 import type User from '../types/user.js';
 import useDatadogRum from './use-datadog-rum.js';
@@ -16,6 +16,7 @@ export interface Props extends RumInitConfiguration {
 export default function useDatadog({
   enabled = true,
   sessionReplayRecording = true,
+  silentMultipleInit = true,
   site = 'datadoghq.com',
   user,
   ...rumInitConfiguration
@@ -24,24 +25,18 @@ export default function useDatadog({
   const rum: typeof datadogRum = useDatadogRum();
 
   // States
-  const lastInitConfiguration: MutableRefObject<RumInitConfiguration | null> =
+  const lastInitConfiguration: RefObject<RumInitConfiguration | null> =
     useRef(null);
+
   const rumInitConfigurationMemo: RumInitConfiguration = useShallowMemo({
-    site,
     ...rumInitConfiguration,
+    silentMultipleInit,
+    site,
   });
 
   // Effects
   useEffect((): void => {
     if (!enabled) {
-      return;
-    }
-
-    /**
-     *   In strict mode, React will execute this effect hook twice, which emits
-     * a console error: "DD_RUM is already initialized." If the initialization configuration has not changed, do not initialize again.
-     */
-    if (lastInitConfiguration.current === rumInitConfigurationMemo) {
       return;
     }
 

@@ -10,6 +10,7 @@ interface BaseProps {
   readonly children?: ReactNode;
   readonly className?: string | undefined;
   readonly feature: string; // Used for tracking events
+  readonly follow?: boolean | undefined;
   readonly label?: string | undefined;
   readonly title: string;
 }
@@ -30,6 +31,7 @@ export default function Link({
   children,
   className,
   feature,
+  follow = true,
   href,
   label: ariaLabel,
   onClick,
@@ -49,11 +51,22 @@ export default function Link({
     router.prefetch(href);
   }, [href, router]);
 
+  const getRel = (): string => {
+    const rels: string[] = ['noopener'];
+    if (!follow) {
+      rels.push('nofollow');
+    }
+
+    return rels.join(' ');
+  };
+
+  const rel: string | undefined = getRel();
   return (
     <a
       aria-label={ariaLabel}
       className={className}
       href={href}
+      rel={rel}
       title={title}
       onClick={(e: MouseEvent<HTMLAnchorElement>): void => {
         e.preventDefault();

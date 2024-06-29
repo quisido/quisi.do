@@ -1,14 +1,14 @@
 'use client';
 
 import {
-  type MutableRefObject,
-  type PropsWithChildren,
-  type ReactElement,
   createContext,
   useEffect,
   useId,
   useRef,
   useState,
+  type PropsWithChildren,
+  type ReactElement,
+  type RefObject,
 } from 'react';
 
 // https://developers.cloudflare.com/turnstile/reference/supported-languages/
@@ -134,20 +134,20 @@ export default function Turnstile({
   const containerId: string = useId();
   const [state, setState] = useState<State>(DEFAULT_STATE);
 
-  const onErrorRef: MutableRefObject<((code: number) => void) | undefined> =
+  const onErrorRef: RefObject<((code: number) => void) | undefined> =
     useRef(onError);
 
-  const onExpiredRef: MutableRefObject<((token: string) => void) | undefined> =
+  const onExpiredRef: RefObject<((token: string) => void) | undefined> =
     useRef(onExpired);
 
-  const onSuccessRef: MutableRefObject<((token: string) => void) | undefined> =
+  const onSuccessRef: RefObject<((token: string) => void) | undefined> =
     useRef(onSuccess);
 
-  const onTimeoutRef: MutableRefObject<
+  const onTimeoutRef: RefObject<
     ((...args: readonly unknown[]) => void) | undefined
   > = useRef(onTimeout);
 
-  const onUnsupportedRef: MutableRefObject<
+  const onUnsupportedRef: RefObject<
     ((...args: readonly unknown[]) => void) | undefined
   > = useRef(onUnsupported);
 

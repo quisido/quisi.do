@@ -4,17 +4,17 @@ import {
   useLayoutEffect,
   useRef,
   useState,
-  type MutableRefObject,
+  type RefObject,
 } from 'react';
 
 interface State<T extends HTMLElement> {
-  readonly ref: MutableRefObject<T | null>;
+  readonly ref: RefObject<T | null>;
   readonly width: number | undefined;
 }
 
 export default function useElementWidth<T extends HTMLElement>(): State<T> {
   // States
-  const ref: MutableRefObject<T | null> = useRef(null);
+  const ref: RefObject<T | null> = useRef(null);
   const [width, setWidth] = useState<number | undefined>();
 
   // Callbacks

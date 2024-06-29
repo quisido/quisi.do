@@ -1,16 +1,16 @@
 'use client';
 
 import {
-  type MutableRefObject,
+  useRef,
   type PropsWithChildren,
   type ReactElement,
-  useRef,
+  type RefObject,
 } from 'react';
+import { useNotifications } from '../../contexts/notifications.js';
 import useEffectEvent from '../../hooks/use-effect-event.js';
 import Turnstile from '../../modules/react-turnstile-invis/index.js';
 import type Notification from '../../types/notification.js';
 import noop from '../../utils/noop.js';
-import { useNotifications } from '../../contexts/notifications.js';
 
 /**
  * Technical debt: If this banner is always present, we could generate it with
@@ -27,7 +27,7 @@ export default function AppTurnstile({
   const [, emitNotification] = useNotifications();
 
   // State
-  const removeRef: MutableRefObject<VoidFunction> = useRef(noop);
+  const removeRef: RefObject<VoidFunction> = useRef(noop);
   const notify = useEffectEvent((notification: Notification): void => {
     removeRef.current();
     removeRef.current = emitNotification(notification);
@@ -44,7 +44,7 @@ export default function AppTurnstile({
               Header(): ReactElement {
                 return <>🐱‍👤 Are you still human?</>;
               },
-              message:
+              Message:
                 'You probably left this tab open while doing something else.',
             });
             break;
@@ -54,19 +54,21 @@ export default function AppTurnstile({
               Header(): ReactElement {
                 return <>🤖 You may be a robot.</>;
               },
-              message: (
-                <>
-                  <p>Turnstile failed to verify you.</p>
-                  <p>Code: {code}</p>
-                </>
-              ),
+              Message(): ReactElement {
+                return (
+                  <>
+                    <p>Turnstile failed to verify you.</p>
+                    <p>Code: {code}</p>
+                  </>
+                );
+              },
             });
             break;
         }
       }}
       onExpired={(): void => {
         notify({
-          message: 'Your Turnstile session has expired.',
+          Message: 'Your Turnstile session has expired.',
           type: 'warning',
           Header(): ReactElement {
             return <>🐱‍👤 Are you still human?</>;
@@ -75,7 +77,7 @@ export default function AppTurnstile({
       }}
       onSuccess={(): void => {
         notify({
-          message: 'Turnstile has validated your session.',
+          Message: 'Turnstile has validated your session.',
           type: 'info',
           Header(): ReactElement {
             return <>🧑 You are human!</>;
@@ -88,20 +90,22 @@ export default function AppTurnstile({
           Header(): ReactElement {
             return <>You may be 🤖.</>;
           },
-          message: (
-            <>
-              <p>Turnstile timed out.</p>
-              <ul>
-                {args.map(
-                  (arg: unknown, index: number): ReactElement => (
-                    <li key={index}>
-                      {typeof arg} {JSON.stringify(arg)}
-                    </li>
-                  ),
-                )}
-              </ul>
-            </>
-          ),
+          Message(): ReactElement {
+            return (
+              <>
+                <p>Turnstile timed out.</p>
+                <ul>
+                  {args.map(
+                    (arg: unknown, index: number): ReactElement => (
+                      <li key={index}>
+                        {typeof arg} {JSON.stringify(arg)}
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </>
+            );
+          },
         });
       }}
       onUnsupported={(...args: readonly unknown[]): void => {
@@ -110,20 +114,22 @@ export default function AppTurnstile({
           Header(): ReactElement {
             return <>You may be 🤖.</>;
           },
-          message: (
-            <>
-              <p>Turnstile does not support your device.</p>
-              <ul>
-                {args.map(
-                  (arg: unknown, index: number): ReactElement => (
-                    <li key={index}>
-                      {typeof arg} {JSON.stringify(arg)}
-                    </li>
-                  ),
-                )}
-              </ul>
-            </>
-          ),
+          Message(): ReactElement {
+            return (
+              <>
+                <p>Turnstile does not support your device.</p>
+                <ul>
+                  {args.map(
+                    (arg: unknown, index: number): ReactElement => (
+                      <li key={index}>
+                        {typeof arg} {JSON.stringify(arg)}
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </>
+            );
+          },
         });
       }}
       sitekey="0x4AAAAAAAK2L9AbDrFo9T77"

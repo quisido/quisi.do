@@ -1,7 +1,3 @@
-.expando {
-  cursor: pointer;
-}
-
 .list {
   list-style-type: none;
   margin: 0;
@@ -21,22 +17,6 @@
 
       > li {
         word-break: break-all;
-      }
-    }
-
-    &.collapsed {
-      > ul {
-        display: none;
-      }
-    }
-
-    &.expanded {
-      > span {
-        font-weight: bold;
-      }
-
-      > ul {
-        display: block;
       }
     }
 

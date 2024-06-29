@@ -1,6 +1,6 @@
 import type TreeLogger from '@monorepo-template/tree-logger';
-import { readdirSync } from 'fs';
-import { join } from 'path';
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import GitHubWorkflowTest from '../../suites/github-workflow/index.js';
 import type PackageJson from '../../types/package-json.js';
 import type Test from '../../types/test.js';

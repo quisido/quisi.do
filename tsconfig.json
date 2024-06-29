@@ -104,7 +104,7 @@
     "suppressImplicitAnyIndexErrors": false,
     "target": "ESNext",
     "traceResolution": false,
-    "types": ["node"],
+    "types": [],
     "useDefineForClassFields": true,
     "useUnknownInCatchVariables": true,
     "verbatimModuleSyntax": true

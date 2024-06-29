@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-  type MutableRefObject,
-} from 'react';
+import { useCallback, useMemo, useRef, useState, type RefObject } from 'react';
 import mapTranslationsRecordToLoadedTranslationsRecord from '../../map/map-translations-record-to-loaded-translations-record.js';
 import RunnableTranslateFunction from '../../runnables/runnable-translate-function.js';
 import type TranslateFunction from '../../types/translate-function.js';
@@ -27,11 +21,9 @@ export interface Props<T extends Record<string, Translations | undefined>> {
 }
 
 export interface State {
-  translate: TranslateFunction;
-  asyncLoadTranslationsEffect: MutableRefObject<Promise<unknown> | undefined>;
-  asyncLoadFallbackTranslationsEffect: MutableRefObject<
-    Promise<unknown> | undefined
-  >;
+  readonly asyncLoadFallbackTranslationsEffect: RefObject<Promise<unknown> | null>;
+  readonly asyncLoadTranslationsEffect: RefObject<Promise<unknown> | null>;
+  readonly translate: TranslateFunction;
 }
 
 export default function useProvider<
@@ -55,13 +47,11 @@ export default function useProvider<
     );
   }
 
-  const asyncLoadFallbackTranslationsEffect: MutableRefObject<
-    Promise<unknown> | undefined
-  > = useRef();
+  const asyncLoadFallbackTranslationsEffect: RefObject<Promise<unknown> | null> =
+    useRef(null);
 
-  const asyncLoadTranslationsEffect: MutableRefObject<
-    Promise<unknown> | undefined
-  > = useRef();
+  const asyncLoadTranslationsEffect: RefObject<Promise<unknown> | null> =
+    useRef(null);
 
   const [loadedTranslationsRecord, setLoadedTranslationsRecord] = useState(
     (): LoadedTranslationsRecord<keyof T> =>

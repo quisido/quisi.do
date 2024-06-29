@@ -1,7 +1,7 @@
 'use client';
 
 import { AwsRum } from 'aws-rum-web';
-import type { MutableRefObject, ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode, RefObject } from 'react';
 import { useMemo, useRef } from 'react';
 import AwsRumContext from '../../contexts/aws-rum.js';
 import mapRefToFunction from '../../utils/map-ref-to-function.js';
@@ -38,34 +38,34 @@ export default function MockAwsRumProvider({
   registerDomEvents = noop,
   setAwsCredentials = noop,
 }: Props): ReactElement {
-  const addPluginRef: MutableRefObject<AwsRum['addPlugin']> = useRef(addPlugin);
-  const disableRef: MutableRefObject<AwsRum['disable']> = useRef(disable);
-  const dispatchRef: MutableRefObject<AwsRum['dispatch']> = useRef(dispatch);
-  const enableRef: MutableRefObject<AwsRum['enable']> = useRef(enable);
+  const addPluginRef: RefObject<AwsRum['addPlugin']> = useRef(addPlugin);
+  const disableRef: RefObject<AwsRum['disable']> = useRef(disable);
+  const dispatchRef: RefObject<AwsRum['dispatch']> = useRef(dispatch);
+  const enableRef: RefObject<AwsRum['enable']> = useRef(enable);
 
-  const addSessionAttributesRef: MutableRefObject<
+  const addSessionAttributesRef: RefObject<
     AwsRum['addSessionAttributes']
   > = useRef(addSessionAttributes);
 
-  const allowCookiesRef: MutableRefObject<AwsRum['allowCookies']> =
+  const allowCookiesRef: RefObject<AwsRum['allowCookies']> =
     useRef(allowCookies);
 
-  const dispatchBeaconRef: MutableRefObject<AwsRum['dispatchBeacon']> =
+  const dispatchBeaconRef: RefObject<AwsRum['dispatchBeacon']> =
     useRef(dispatchBeacon);
 
-  const registerDomEventsRef: MutableRefObject<AwsRum['registerDomEvents']> =
+  const registerDomEventsRef: RefObject<AwsRum['registerDomEvents']> =
     useRef(registerDomEvents);
 
-  const recordErrorRef: MutableRefObject<AwsRum['recordError']> =
+  const recordErrorRef: RefObject<AwsRum['recordError']> =
     useRef(recordError);
 
-  const recordEventRef: MutableRefObject<AwsRum['recordEvent']> =
+  const recordEventRef: RefObject<AwsRum['recordEvent']> =
     useRef(recordEvent);
 
-  const recordPageViewRef: MutableRefObject<AwsRum['recordPageView']> =
+  const recordPageViewRef: RefObject<AwsRum['recordPageView']> =
     useRef(recordPageView);
 
-  const setAwsCredentialsRef: MutableRefObject<AwsRum['setAwsCredentials']> =
+  const setAwsCredentialsRef: RefObject<AwsRum['setAwsCredentials']> =
     useRef(setAwsCredentials);
 
   addPluginRef.current = addPlugin;

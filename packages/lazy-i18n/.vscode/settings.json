@@ -7,6 +7,7 @@
     ".eslintcache": true,
     "*.cpuprofile": true,
     "*.tsbuildinfo": true,
+    "*-*.*.*.tgz": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   }
 }
