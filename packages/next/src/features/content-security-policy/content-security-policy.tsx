@@ -1,26 +1,34 @@
 'use client';
 
+import { GetErrorCode } from '@quisido/csp-shared';
 import { useEffect, useState, type ReactElement } from "react";
 import LoadingIcon from "../../modules/quisi/loading-icon.jsx";
 import Section from "../../modules/quisi/section.jsx";
 import useAsyncState from "../../modules/use-async-state/index.js";
 import type ReportBody from '../../types/content-security-policy-report-body.js';
+import mapPropsToElement from "../../utils/map-props-to-element.jsx";
 import validateString from "../../utils/validate-string.js";
 import type ContentSecurityPolicyGroup from './content-security-policy-group.js';
-import ContentSecurityPolicyListItem from "./content-security-policy-list-item.jsx";
+import ContentSecurityPolicyListItem, {
+  type ContentSecurityPolicyListItemProps,
+} from './content-security-policy-list-item.jsx';
 import styles from './content-security-policy.module.scss';
 import mapReportBodiesToContentSecurityPolicyGroups from './map-report-bodies-to-content-security-policy-groups.js';
 
 interface ErrorResponse {
-  readonly code: 1 | 2 | 3;
+  readonly code: number;
 }
 
 type CspResponse = ErrorResponse | readonly ReportBody[];
 
 const LIST_CLASS_NAME: string = validateString(styles['list']);
+const REQUEST_INFO = 'https://csp.quisi.do/1/?key=demo-get';
 
 const isErrorResponse = (value: CspResponse): value is ErrorResponse =>
   !Array.isArray(value);
+
+const mapContentSecurityPolicyListItemPropsToElement =
+  mapPropsToElement(ContentSecurityPolicyListItem);
 
 export default function ContentSecurityPolicy(): ReactElement {
   // States
@@ -36,7 +44,7 @@ export default function ContentSecurityPolicy(): ReactElement {
   // Effects
   useEffect((): void => {
     request(async (): Promise<CspResponse> => {
-      const response = await window.fetch('https://csp.quisi.do/1/?key=demo');
+      const response = await window.fetch(REQUEST_INFO);
       return await response.json();
     });
   }, [request]);
@@ -58,60 +66,84 @@ export default function ContentSecurityPolicy(): ReactElement {
   }
 
   if (isErrorResponse(data)) {
-    return (
-      <Section header="Content Security Policy">
-        Error code #{data.code}
-      </Section>
-    );
+    switch (data.code) {
+      case GetErrorCode.InvalidDatabaseProjectRow:
+        return (
+          <Section header="Content Security Policy">
+            Invalid database project row
+          </Section>
+        );
+
+      case GetErrorCode.InvalidKey:
+        return (
+          <Section header="Content Security Policy">
+            Invalid key
+          </Section>
+        );
+
+      case GetErrorCode.MissingKey:
+        return (
+          <Section header="Content Security Policy">
+            Missing key
+          </Section>
+        );
+
+      default:
+        return (
+          <Section header="Content Security Policy">
+            Unknown error code: {data.code}
+          </Section>
+        );
+    }
   }
 
   const groups: readonly ContentSecurityPolicyGroup[] =
     mapReportBodiesToContentSecurityPolicyGroups(data);
 
-  const mapGroupToElement = (
+  const mapGroupToProps = (
     {
       disposition,
       effectiveDirective,
       originPathname,
-      urls,
+      ...group
     }: ContentSecurityPolicyGroup,
     index: number,
     arr: readonly ContentSecurityPolicyGroup[],
-  ): ReactElement => {
+  ): ContentSecurityPolicyListItemProps => {
     const key = `${disposition} ${effectiveDirective} ${originPathname}`;
+    const previousDisposition: string | undefined =
+      arr[index - 1]?.disposition;
     const previousEffectiveDirective: string | undefined =
       arr[index - 1]?.effectiveDirective;
 
-    const firstOfType: boolean =
-      effectiveDirective !== previousEffectiveDirective;
+    return {
+      ...group,
+      disposition,
+      effectiveDirective,
+      expanded: key === expandedKey,
+      firstDisposition: disposition !== previousDisposition,
+      originPathname,
 
-    const handleToggle = (): void => {
-      setExpandedKey((oldExpandedKey: string | null): string | null => {
-        if (oldExpandedKey === key) {
-          return null;
-        }
-        return key;
-      });
+      firstEffectiveDirective:
+        effectiveDirective !== previousEffectiveDirective,
+
+      onToggle(): void {
+        setExpandedKey((oldExpandedKey: string | null): string | null => {
+          if (oldExpandedKey === key) {
+            return null;
+          }
+          return key;
+        });
+      },
     };
-
-    return (
-      <ContentSecurityPolicyListItem
-        disposition={disposition}
-        effectiveDirective={effectiveDirective}
-        expanded={key === expandedKey}
-        firstOfType={firstOfType}
-        key={key}
-        onToggle={handleToggle}
-        originPathname={originPathname}
-        urls={urls}
-      />
-    );
   };
 
+  const props: readonly ContentSecurityPolicyListItemProps[] =
+    groups.map(mapGroupToProps);
   return (
     <Section header="Content Security Policy">
       <ul className={LIST_CLASS_NAME} data-nosnippet>
-        {groups.map(mapGroupToElement)}
+        {props.map(mapContentSecurityPolicyListItemPropsToElement)}
       </ul>
     </Section>
   );

@@ -4,6 +4,13 @@ export default [
   ...configs,
 
   {
+    rules: {
+      // The `queries` function uses numbers as a generic.
+      'no-magic-numbers': 'off',
+    },
+  },
+
+  {
     files: ['src/constants/*.ts'],
     rules: {
       'no-magic-numbers': 'off',

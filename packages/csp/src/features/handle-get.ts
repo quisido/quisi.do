@@ -1,6 +1,8 @@
-import { AccountNumber, Product, UsageType } from '@quisido/workers-shared';
+import { GetErrorCode } from '@quisido/csp-shared';
+import { AccountNumber, UsageType } from '@quisido/workers-shared';
 import { HEADERS_INIT } from '../constants/headers-init.js';
 import { StatusCode } from '../constants/status-code.js';
+import createAnalyticsEngineDataPoint from '../utils/create-analytics-engine-datapoint.js';
 import query from '../utils/query.js';
 
 interface Options {
@@ -14,8 +16,6 @@ interface Options {
 const DEFAULT_PROJECT_ID = 0;
 const MILLISECONDS_PER_MONTH = 2629746000;
 const ONCE = 1;
-const SINGLE = 1;
-const TWICE = 2;
 
 const SELECT_USER_ID_FROM_KEYS_QUERY = `
 SELECT \`projects\`.\`userId\`
@@ -52,13 +52,18 @@ export default async function handleGet({
   // Key
   if (key === null) {
     console.log('Missing key');
-    return new Response('{"code":1}', {
-      headers: new Headers(HEADERS_INIT),
-      status: StatusCode.BadRequest,
-    });
+    return new Response(
+      JSON.stringify({
+        code: GetErrorCode.MissingKey,
+      }),
+      {
+        headers: new Headers(HEADERS_INIT),
+        status: StatusCode.BadRequest,
+      },
+    );
   }
 
-  const [result] = await query(
+  const [keysRow] = await query(
     db,
     SELECT_USER_ID_FROM_KEYS_QUERY,
     key,
@@ -66,66 +71,67 @@ export default async function handleGet({
   );
 
   // Not found
-  if (typeof result === 'undefined') {
-    usage.writeDataPoint({
-      indexes: [AccountNumber.Quisido.toString()],
+  if (typeof keysRow === 'undefined') {
+    usage.writeDataPoint(
+      createAnalyticsEngineDataPoint({
+        accountNumber: AccountNumber.Quisido,
+        count: ONCE,
+        projectId: DEFAULT_PROJECT_ID,
+        usageType: UsageType.D1Read,
+      }),
+    );
 
-      doubles: [
-        Product.ContentSecurityPolicy,
-        DEFAULT_PROJECT_ID,
-        UsageType.D1Read,
-        ONCE,
-        SINGLE,
-      ],
-    });
-
-    console.log('Missing key');
-    return new Response('{"code":2}', {
-      headers: new Headers(HEADERS_INIT),
-      status: StatusCode.NotFound,
-    });
+    console.log('Invalid key');
+    return new Response(
+      JSON.stringify({
+        code: GetErrorCode.InvalidKey,
+      }),
+      {
+        headers: new Headers(HEADERS_INIT),
+        status: StatusCode.NotFound,
+      },
+    );
   }
 
   // Bad gateway
-  const { userId } = result;
+  const { userId } = keysRow;
   if (typeof userId !== 'number') {
-    usage.writeDataPoint({
-      indexes: [AccountNumber.Quisido.toString()],
-
-      doubles: [
-        Product.ContentSecurityPolicy,
+    usage.writeDataPoint(
+      createAnalyticsEngineDataPoint({
+        accountNumber: AccountNumber.Quisido,
+        count: ONCE,
         projectId,
-        UsageType.D1Read,
-        ONCE,
-        SINGLE,
-      ],
-    });
+        usageType: UsageType.D1Read,
+      }),
+    );
 
-    console.log('Invalid database table row');
-    return new Response('{"code":3}', {
-      headers: new Headers(HEADERS_INIT),
-      status: StatusCode.BadGateway,
-    });
+    console.log('Invalid database project row');
+    return new Response(
+      JSON.stringify({
+        code: GetErrorCode.InvalidDatabaseProjectRow,
+      }),
+      {
+        headers: new Headers(HEADERS_INIT),
+        status: StatusCode.BadGateway,
+      },
+    );
   }
 
-  const reports: Record<string, unknown>[] = await query(
+  const reports: readonly Record<string, unknown>[] = await query(
     db,
     SELECT_REPORTS_QUERY,
     projectId,
     Date.now() - MILLISECONDS_PER_MONTH,
   );
 
-  usage.writeDataPoint({
-    indexes: [userId.toString()],
-
-    doubles: [
-      Product.ContentSecurityPolicy,
+  usage.writeDataPoint(
+    createAnalyticsEngineDataPoint({
+      accountNumber: userId,
+      count: ONCE + reports.length,
       projectId,
-      UsageType.D1Read,
-      TWICE,
-      SINGLE,
-    ],
-  });
+      usageType: UsageType.D1Read,
+    }),
+  );
 
   return new Response(JSON.stringify(reports), {
     headers: new Headers(HEADERS_INIT),

@@ -12,6 +12,13 @@ export enum UsageType {
   D1Read = 1,
 
   /**
+   * $0.75 per GB-month
+   * $0.00000000000000026078701112 per byte per second
+   * https://developers.cloudflare.com/d1/platform/pricing/
+   */
+  D1Store = 6,
+
+  /**
    * $0.000001
    * https://developers.cloudflare.com/d1/platform/pricing/
    */
@@ -25,7 +32,7 @@ export enum UsageType {
 
   /**
    * $0.50 per GB-month
-   * $0.00000000000000190237903913118 per byte per second
+   * $0.00000000000000017385800741 per byte per second
    * https://developers.cloudflare.com/kv/platform/pricing/
    */
   KVStore = 5,

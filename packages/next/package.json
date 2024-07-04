@@ -66,6 +66,7 @@
     "@opentelemetry/sdk-trace-web": "^1.25.1",
     "@opentelemetry/semantic-conventions": "^1.25.1",
     "@quisido/authn-shared": "workspace:^",
+    "@quisido/csp-shared": "workspace:^",
     "@react-aria/button": "^3.9.5",
     "@react-aria/overlays": "^3.22.1",
     "@sentry/browser": "^8.13.0",

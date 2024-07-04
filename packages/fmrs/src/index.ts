@@ -1,5 +1,10 @@
 export { default as mapUnknownToString } from 'unknown2string';
 export {
+  default as filterByDefined,
+  default as findDefined,
+  default as isDefined,
+} from './is-defined.js';
+export {
   default as filterByNumber,
   default as findNumber,
   default as isNumber,

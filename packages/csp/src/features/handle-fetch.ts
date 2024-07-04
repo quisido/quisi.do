@@ -1,9 +1,11 @@
 /// <reference types="@cloudflare/workers-types" />
 import { isAnalyticsEngineDataset, isD1Database } from 'cloudflare-utils';
+import handleStaticPathname from '../constants/handle-static-pathname.js';
 import { StatusCode } from '../constants/status-code.js';
 import InvalidPathnameResponse from '../utils/invalid-pathname-response.js';
 import isAllowedMethod from '../utils/is-allowed-method.js';
 import isObject from '../utils/is-object.js';
+import isStaticPathname from '../utils/is-static-pathname.js';
 import mapHeadersToOrigin from '../utils/map-headers-to-origin.js';
 import mapPathnameToProjectId from '../utils/map-pathname-to-project-id.js';
 import MethodNotAllowedResponse from '../utils/method-not-allowed-response.js';
@@ -30,8 +32,14 @@ export default async function handleFetch(
     return new MethodNotAllowedResponse();
   }
 
-  // Pathname
   const { pathname, searchParams } = new URL(url);
+
+  // Static responses
+  if (isStaticPathname(pathname)) {
+    return handleStaticPathname(pathname);
+  }
+
+  // Project pathnames
   const projectId: number = mapPathnameToProjectId(pathname);
   if (Number.isNaN(projectId)) {
     console.log('Invalid pathname');
@@ -77,6 +85,7 @@ export default async function handleFetch(
         console,
         ctx,
         db: CSP_DB,
+        key: searchParams.get('key'),
         projectId,
         usage: USAGE,
       });

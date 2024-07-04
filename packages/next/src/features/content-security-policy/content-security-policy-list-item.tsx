@@ -7,9 +7,10 @@ import styles from './content-security-policy-list-item.module.scss';
 import type ContentSecurityPolicyReport from "./content-security-policy-report.js";
 import mapContentSecurityPolicyReportToListItemElement from './map-content-security-policy-report-to-list-item-element.jsx';
 
-interface Props extends ContentSecurityPolicyGroup {
+export interface ContentSecurityPolicyListItemProps extends ContentSecurityPolicyGroup {
   readonly expanded: boolean;
-  readonly firstOfType: boolean;
+  readonly firstDisposition: boolean;
+  readonly firstEffectiveDirective: boolean;
   readonly onToggle: VoidFunction;
 }
 
@@ -18,6 +19,7 @@ const EXPANDED_CLASS_NAME: string = validateString(styles['expanded']);
 const EXPANDO_CLASS_NAME: string = validateString(styles['expando']);
 const LIST_ITEM_CLASS_NAME: string = validateString(styles['listItem']);
 const NONE = 0;
+const NOT_FIRST_CLASS_NAME: string = validateString(styles['notFirst']);
 const REPORTS_COUNT_CLASS_NAME: string = validateString(styles['reportsCount']);
 const SINGLE = 1;
 
@@ -25,12 +27,8 @@ const DISPOSITION_ICON_CLASS_NAME: string = validateString(
   styles['dispositionIcon'],
 );
 
-const EFFECTIVE_DIRECTIVE_CLASS_NAME: string = validateString(
-  styles['effectiveDirective'],
-);
-
-const NOT_FIRST_OF_TYPE_CLASS_NAME: string = validateString(
-  styles['notFirstOfType'],
+const FIRST_EFFECTIVE_DIRECTIVE_CLASS_NAME: string = validateString(
+  styles['firstEffectiveDirective'],
 );
 
 const reduceUrlsToCount = (
@@ -47,11 +45,12 @@ export default function ContentSecurityPolicyListItem({
   disposition,
   effectiveDirective,
   expanded,
-  firstOfType,
+  firstDisposition,
+  firstEffectiveDirective,
   onToggle,
   originPathname,
   urls,
-}: Props): ReactElement {
+}: ContentSecurityPolicyListItemProps): ReactElement {
   // Contexts
   const { displayFontFamily } = useTheme();
 
@@ -65,15 +64,37 @@ export default function ContentSecurityPolicyListItem({
       classNames.push(COLLAPSED_CLASS_NAME);
     }
 
-    if (!firstOfType) {
-      classNames.push(NOT_FIRST_OF_TYPE_CLASS_NAME);
+    if (firstEffectiveDirective) {
+      classNames.push(FIRST_EFFECTIVE_DIRECTIVE_CLASS_NAME);
     }
 
     return classNames.join(' ');
-  }
+  };
+
+  const getDispositionIconClassName = (): string => {
+    const classNames: string[] = [DISPOSITION_ICON_CLASS_NAME];
+
+    if (!firstDisposition) {
+      classNames.push(NOT_FIRST_CLASS_NAME);
+    }
+
+    return classNames.join(' ');
+  };
+
+  const getEffectiveDirectiveClassName = (): string => {
+    const classNames: string[] = [];
+
+    if (!firstEffectiveDirective) {
+      classNames.push(NOT_FIRST_CLASS_NAME);
+    }
+
+    return classNames.join(' ');
+  };
 
   const className: string = getClassName();
   const count: number = mapUrlsToCount(urls);
+  const dispositionIconClassName: string = getDispositionIconClassName();
+  const effectiveDirectiveClassName: string = getEffectiveDirectiveClassName();
   return (
     <li className={className}>
       <button
@@ -81,25 +102,27 @@ export default function ContentSecurityPolicyListItem({
         onClick={onToggle}
       >
         <ContentSecurityPolicyDispositionIcon
-          className={DISPOSITION_ICON_CLASS_NAME}
+          className={dispositionIconClassName}
         >
           {disposition}
         </ContentSecurityPolicyDispositionIcon>{' '}
-        <span className={EFFECTIVE_DIRECTIVE_CLASS_NAME}>
+        <span className={effectiveDirectiveClassName}>
           {effectiveDirective}
         </span>{' '}
-        {originPathname}{' '}
-        {
-          count > SINGLE &&
-          <span
-            className={REPORTS_COUNT_CLASS_NAME}
-            style={{
-              fontFamily: `"Cairo Play", ${displayFontFamily}`,
-            }}
-          >
-            &times;{count}
-          </span>
-        }
+        <span>
+          {originPathname}{' '}
+          {
+            count > SINGLE &&
+            <span
+              className={REPORTS_COUNT_CLASS_NAME}
+              style={{
+                fontFamily: `"Cairo Play", ${displayFontFamily}`,
+              }}
+            >
+              &times;{count}
+            </span>
+          }
+        </span>
       </button>
       <ul>
         {urls.map(mapContentSecurityPolicyReportToListItemElement)}
