@@ -1,6 +1,7 @@
-import { AccountNumber, Product, UsageType } from '@quisido/workers-shared';
+import { AccountNumber, UsageType } from '@quisido/workers-shared';
 import { SELECT_ORIGINS_USER_ID_FROM_PROJECTS } from '../constants/queries.js';
 import { StatusCode } from '../constants/status-code.js';
+import createAnalyticsEngineDataPoint from '../utils/create-analytics-engine-datapoint.js';
 import InvalidOriginResponse from '../utils/invalid-origin-response.js';
 import MissingOriginResponse from '../utils/missing-origin-response.js';
 import query from '../utils/query.js';
@@ -14,9 +15,7 @@ interface Options {
   readonly usage: AnalyticsEngineDataset;
 }
 
-const DEFAULT_PROJECT_ID = 0;
 const ONCE = 1;
-const SINGLE = 1;
 
 class OkResponse extends Response {
   public constructor(origin: string) {
@@ -49,17 +48,14 @@ export default async function handleOptions({
 
   // Not found
   if (typeof result === 'undefined') {
-    usage.writeDataPoint({
-      indexes: [AccountNumber.Quisido.toString()],
-
-      doubles: [
-        Product.ContentSecurityPolicy,
-        DEFAULT_PROJECT_ID,
-        UsageType.D1Read,
-        ONCE,
-        SINGLE,
-      ],
-    });
+    usage.writeDataPoint(
+      createAnalyticsEngineDataPoint({
+        accountNumber: AccountNumber.Quisido,
+        count: ONCE,
+        projectId,
+        usageType: UsageType.D1Read,
+      }),
+    );
 
     console.log('Missing project');
     return new Response(StatusCode.NotFound);
@@ -68,33 +64,27 @@ export default async function handleOptions({
   // Bad gateway
   const { origins, userId } = result;
   if (typeof origins !== 'string' || typeof userId !== 'number') {
-    usage.writeDataPoint({
-      indexes: [AccountNumber.Quisido.toString()],
-
-      doubles: [
-        Product.ContentSecurityPolicy,
-        DEFAULT_PROJECT_ID,
-        UsageType.D1Read,
-        ONCE,
-        SINGLE,
-      ],
-    });
+    usage.writeDataPoint(
+      createAnalyticsEngineDataPoint({
+        accountNumber: AccountNumber.Quisido,
+        count: ONCE,
+        projectId,
+        usageType: UsageType.D1Read,
+      }),
+    );
 
     console.log('Invalid database table row');
     return new Response(StatusCode.BadGateway);
   }
 
-  usage.writeDataPoint({
-    indexes: [userId.toString()],
-
-    doubles: [
-      Product.ContentSecurityPolicy,
+  usage.writeDataPoint(
+    createAnalyticsEngineDataPoint({
+      accountNumber: userId,
+      count: ONCE,
       projectId,
-      UsageType.D1Read,
-      ONCE,
-      SINGLE,
-    ],
-  });
+      usageType: UsageType.D1Read,
+    }),
+  );
 
   // Allow origin
   const originsArr: readonly string[] = origins.split(' ');

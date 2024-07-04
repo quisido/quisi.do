@@ -1,0 +1,11 @@
+{
+  "exclude": ["coverage/", "dist/"],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*.ts"],
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "noEmit": true,
+    "rootDir": ".",
+    "sourceRoot": "."
+  }
+}

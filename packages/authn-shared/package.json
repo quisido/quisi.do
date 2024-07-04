@@ -32,9 +32,6 @@
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
   },
-  "dependencies": {
-    "fmrs": "workspace:^"
-  },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.3",
     "@babel/core": "^7.24.7",
@@ -54,6 +51,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.1.3",
+    "fmrs": "workspace:^",
     "prettier": "^3.3.2",
     "tslib": "^2.6.3",
     "typescript": "~5.4.5",

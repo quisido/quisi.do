@@ -33,8 +33,10 @@
     "whoami": "wrangler whoami"
   },
   "dependencies": {
+    "@quisido/csp-shared": "workspace:^",
     "@quisido/workers-shared": "workspace:^",
-    "cloudflare-utils": "workspace:^"
+    "cloudflare-utils": "workspace:^",
+    "fmrs": "workspace:^"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",
