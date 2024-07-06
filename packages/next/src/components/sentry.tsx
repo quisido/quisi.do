@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactElement, type ReactNode } from 'react';
+import { memo, type ReactElement, type ReactNode } from 'react';
 import SentryReact from 'sentry-react';
 import useSentryIntegrations from '../hooks/use-sentry-integrations.js';
 
@@ -13,7 +13,7 @@ interface Props {
   readonly tracePropagationTargets: string[];
 }
 
-export default function Sentry({
+function Sentry({
   children,
   dsn,
   environment,
@@ -33,6 +33,7 @@ export default function Sentry({
       environment={environment}
       integrations={integrations}
       normalizeDepth={Number.POSITIVE_INFINITY}
+      profilesSampleRate={1}
       release={release}
       replaysOnErrorSampleRate={1}
       replaysSessionSampleRate={1}
@@ -46,3 +47,5 @@ export default function Sentry({
     </SentryReact>
   );
 }
+
+export default memo(Sentry);

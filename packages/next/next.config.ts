@@ -25,6 +25,7 @@ export default withNextJsBundleAnalyzer({
   productionBrowserSourceMaps: true,
   reactStrictMode: true,
   skipTrailingSlashRedirect: false,
+  staticPageGenerationTimeout: 300,
   trailingSlash: true,
   webpack: nextConfigWebpack,
 

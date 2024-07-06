@@ -5,6 +5,8 @@ import { useRef, type ReactElement, type ReactNode } from 'react';
 import Emoji from '../../components/emoji.js';
 import useTheme from '../../hooks/use-theme.js';
 import optional from '../../utils/optional.js';
+import validateString from '../../utils/validate-string.js';
+import styles from './banner.module.scss';
 
 export interface Props {
   readonly children: ReactNode;
@@ -12,6 +14,9 @@ export interface Props {
   readonly onDismiss?: VoidFunction | undefined;
   readonly type: 'error' | 'info' | 'success' | 'warning';
 }
+
+const BUTTON_CLASS_NAME: string = validateString(styles['button']);
+const CLASS_NAME: string = validateString(styles['banner']);
 
 export default function Banner({
   children,
@@ -26,24 +31,15 @@ export default function Banner({
     {
       ...optional('onPress', onDismiss),
     },
-    useRef(null),
+    useRef<HTMLButtonElement>(null as unknown as HTMLButtonElement),
   );
 
   return (
     <aside
+      className={CLASS_NAME}
       style={{
         backgroundColor: secondaryHex,
         borderColor: secondaryHex,
-        borderStyle: 'outset',
-        borderWidth: '0 0 1px 0',
-        boxSizing: 'border-box',
-        color: '#002010',
-        display: 'flex',
-        fontSize: '1em',
-        gap: '0.5em',
-        lineHeight: '1em',
-        padding: '0.5em 1em',
-        width: '100%',
       }}
     >
       {typeof icon === 'string' && (
@@ -59,13 +55,8 @@ export default function Banner({
         {children}
       </div>
       <button
+        className={BUTTON_CLASS_NAME}
         {...buttonProps}
-        style={{
-          backgroundColor: 'transparent',
-          borderWidth: 0,
-          cursor: 'pointer',
-          padding: 0,
-        }}
       >
         <Emoji>❌</Emoji>
       </button>

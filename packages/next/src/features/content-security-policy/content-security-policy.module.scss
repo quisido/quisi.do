@@ -1,7 +1,6 @@
 .list {
-  column-gap: 0.5em;
   display: grid;
-  grid-template-columns: min-content min-content max-content;
+  grid-template-columns: min-content min-content minmax(0, 1fr);
   grid-template-rows: auto;
   flex-direction: column;
   list-style-type: none;

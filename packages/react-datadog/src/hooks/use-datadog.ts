@@ -1,10 +1,10 @@
 'use client';
 
-import type { RumInitConfiguration, datadogRum } from '@datadog/browser-rum';
-import { useEffect, useRef, type RefObject } from 'react';
+import type { RumInitConfiguration } from '@datadog/browser-rum';
 import useShallowMemo from 'use-shallow-memo';
 import type User from '../types/user.js';
-import useDatadogRum from './use-datadog-rum.js';
+import useInit from './use-init.js';
+import useSessionReplayRecording from './use-session-replay-recording.js';
 import useUser from './use-user.js';
 
 export interface Props extends RumInitConfiguration {
@@ -21,39 +21,20 @@ export default function useDatadog({
   user,
   ...rumInitConfiguration
 }: Props): void {
-  // Contexts
-  const rum: typeof datadogRum = useDatadogRum();
-
   // States
-  const lastInitConfiguration: RefObject<RumInitConfiguration | null> =
-    useRef(null);
-
-  const rumInitConfigurationMemo: RumInitConfiguration = useShallowMemo({
-    ...rumInitConfiguration,
-    silentMultipleInit,
-    site,
+  useInit({
+    enabled,
+    rumInitConfiguration: useShallowMemo({
+      ...rumInitConfiguration,
+      silentMultipleInit,
+      site,
+    }),
   });
 
-  // Effects
-  useEffect((): void => {
-    if (!enabled) {
-      return;
-    }
-
-    lastInitConfiguration.current = rumInitConfigurationMemo;
-    rum.init(rumInitConfigurationMemo);
-  }, [enabled, rum, rumInitConfigurationMemo]);
-
-  useEffect((): VoidFunction | undefined => {
-    if (!enabled || !sessionReplayRecording) {
-      return;
-    }
-
-    rum.startSessionReplayRecording();
-    return (): void => {
-      rum.stopSessionReplayRecording();
-    };
-  }, [enabled, rum, sessionReplayRecording]);
+  useSessionReplayRecording({
+    enabled,
+    sessionReplayRecording,
+  });
 
   useUser(user);
 }

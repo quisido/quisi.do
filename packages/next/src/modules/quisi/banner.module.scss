@@ -1,0 +1,19 @@
+.banner {
+  border-style: outset;
+  border-width: 0 0 1px 0;
+  box-sizing: border-box;
+  color: #002010;
+  display: flex;
+  font-size: 1em;
+  gap: 0.5em;
+  line-height: 1em;
+  padding: 0.5em 1em;
+  width: 100%;
+}
+
+.button {
+  background-color: transparent;
+  border-width: 0;
+  cursor: pointer;
+  padding: 0;
+}

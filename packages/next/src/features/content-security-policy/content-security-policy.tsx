@@ -1,7 +1,7 @@
 'use client';
 
 import { GetErrorCode } from '@quisido/csp-shared';
-import { useEffect, useState, type ReactElement } from "react";
+import { useEffect, useState, type Attributes, type ReactElement } from 'react';
 import LoadingIcon from "../../modules/quisi/loading-icon.jsx";
 import Section from "../../modules/quisi/section.jsx";
 import useAsyncState from "../../modules/use-async-state/index.js";
@@ -109,7 +109,7 @@ export default function ContentSecurityPolicy(): ReactElement {
     }: ContentSecurityPolicyGroup,
     index: number,
     arr: readonly ContentSecurityPolicyGroup[],
-  ): ContentSecurityPolicyListItemProps => {
+  ): Required<Attributes> & ContentSecurityPolicyListItemProps => {
     const key = `${disposition} ${effectiveDirective} ${originPathname}`;
     const previousDisposition: string | undefined =
       arr[index - 1]?.disposition;
@@ -122,6 +122,7 @@ export default function ContentSecurityPolicy(): ReactElement {
       effectiveDirective,
       expanded: key === expandedKey,
       firstDisposition: disposition !== previousDisposition,
+      key,
       originPathname,
 
       firstEffectiveDirective:
@@ -138,7 +139,7 @@ export default function ContentSecurityPolicy(): ReactElement {
     };
   };
 
-  const props: readonly ContentSecurityPolicyListItemProps[] =
+  const props: readonly (Required<Attributes> & ContentSecurityPolicyListItemProps)[] =
     groups.map(mapGroupToProps);
   return (
     <Section header="Content Security Policy">

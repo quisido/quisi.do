@@ -24,7 +24,9 @@ export const FAVICON_RESPONSE_INIT: ResponseInit = {
   }),
 };
 
-export const ROBOTS_RESPONSE_BODY: BodyInit = 'Disallow: *';
+export const ROBOTS_RESPONSE_BODY: BodyInit = `User-agent: *
+Disallow: *`;
+
 export const ROBOTS_RESPONSE_INIT: ResponseInit = {
   status: StatusCode.OK,
 

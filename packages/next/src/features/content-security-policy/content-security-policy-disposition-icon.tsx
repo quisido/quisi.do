@@ -3,7 +3,6 @@ import Emoji from "../../components/emoji.jsx";
 
 interface Props {
   readonly children: string;
-  readonly className: string;
 }
 
 const mapDispositionToEmoji = (disposition: string): string => {
@@ -19,9 +18,8 @@ const mapDispositionToEmoji = (disposition: string): string => {
 
 export default function ContentSecurityPolicyDispositionIcon({
   children,
-  className,
 }: Props): ReactElement {
   const emoji: string = mapDispositionToEmoji(children);
 
-  return <Emoji className={className}>{emoji}</Emoji>;
+  return <Emoji>{emoji}</Emoji>;
 }

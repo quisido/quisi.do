@@ -1,11 +1,13 @@
 import { type ReactElement } from "react";
 import useTheme from "../../hooks/use-theme.js";
+import mapPropsToElement from "../../utils/map-props-to-element.jsx";
 import validateString from "../../utils/validate-string.js";
 import ContentSecurityPolicyDispositionIcon from "./content-security-policy-disposition-icon.jsx";
 import type ContentSecurityPolicyGroup from './content-security-policy-group.js';
 import styles from './content-security-policy-list-item.module.scss';
+import ContentSecurityPolicyReportListItem from "./content-security-policy-report-list-item.jsx";
 import type ContentSecurityPolicyReport from "./content-security-policy-report.js";
-import mapContentSecurityPolicyReportToListItemElement from './map-content-security-policy-report-to-list-item-element.jsx';
+import mapContentSecurityPolicyReportToListItemProps from "./map-content-security-policy-report-to-list-item-props.js";
 
 export interface ContentSecurityPolicyListItemProps extends ContentSecurityPolicyGroup {
   readonly expanded: boolean;
@@ -16,20 +18,17 @@ export interface ContentSecurityPolicyListItemProps extends ContentSecurityPolic
 
 const COLLAPSED_CLASS_NAME: string = validateString(styles['collapsed']);
 const EXPANDED_CLASS_NAME: string = validateString(styles['expanded']);
-const EXPANDO_CLASS_NAME: string = validateString(styles['expando']);
 const LIST_ITEM_CLASS_NAME: string = validateString(styles['listItem']);
 const NONE = 0;
 const NOT_FIRST_CLASS_NAME: string = validateString(styles['notFirst']);
 const REPORTS_COUNT_CLASS_NAME: string = validateString(styles['reportsCount']);
 const SINGLE = 1;
 
-const DISPOSITION_ICON_CLASS_NAME: string = validateString(
-  styles['dispositionIcon'],
-);
-
 const FIRST_EFFECTIVE_DIRECTIVE_CLASS_NAME: string = validateString(
   styles['firstEffectiveDirective'],
 );
+
+const mapPropsToContentSecurityPolicyReportListItem = mapPropsToElement(ContentSecurityPolicyReportListItem);
 
 const reduceUrlsToCount = (
   sum: number,
@@ -71,14 +70,11 @@ export default function ContentSecurityPolicyListItem({
     return classNames.join(' ');
   };
 
-  const getDispositionIconClassName = (): string => {
-    const classNames: string[] = [DISPOSITION_ICON_CLASS_NAME];
-
-    if (!firstDisposition) {
-      classNames.push(NOT_FIRST_CLASS_NAME);
+  const getDispositionIconClassName = (): string | undefined  => {
+    if (firstDisposition) {
+      return;
     }
-
-    return classNames.join(' ');
+    return NOT_FIRST_CLASS_NAME;
   };
 
   const getEffectiveDirectiveClassName = (): string => {
@@ -93,24 +89,22 @@ export default function ContentSecurityPolicyListItem({
 
   const className: string = getClassName();
   const count: number = mapUrlsToCount(urls);
-  const dispositionIconClassName: string = getDispositionIconClassName();
+  const dispositionIconClassName: string | undefined = getDispositionIconClassName();
   const effectiveDirectiveClassName: string = getEffectiveDirectiveClassName();
+
   return (
     <li className={className}>
-      <button
-        className={EXPANDO_CLASS_NAME}
-        onClick={onToggle}
-      >
-        <ContentSecurityPolicyDispositionIcon
-          className={dispositionIconClassName}
-        >
-          {disposition}
-        </ContentSecurityPolicyDispositionIcon>{' '}
+      <button onClick={onToggle}>
+        <span className={dispositionIconClassName}>
+          <ContentSecurityPolicyDispositionIcon>
+            {disposition}
+          </ContentSecurityPolicyDispositionIcon>
+        </span>
         <span className={effectiveDirectiveClassName}>
           {effectiveDirective}
-        </span>{' '}
+        </span>
         <span>
-          {originPathname}{' '}
+          <span tabIndex={0}>{originPathname}</span>
           {
             count > SINGLE &&
             <span
@@ -125,7 +119,11 @@ export default function ContentSecurityPolicyListItem({
         </span>
       </button>
       <ul>
-        {urls.map(mapContentSecurityPolicyReportToListItemElement)}
+        {
+          urls
+            .map(mapContentSecurityPolicyReportToListItemProps)
+            .map(mapPropsToContentSecurityPolicyReportListItem)
+        }
       </ul>
     </li>
   );

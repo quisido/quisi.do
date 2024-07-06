@@ -73,6 +73,7 @@
     "@sentry/core": "^8.13.0",
     "@sentry/fullstory": "^3.0.0",
     "@sentry/nextjs": "^8.13.0",
+    "@sentry/profiling-node": "^8.14.0",
     "@sentry/react": "patch:@sentry/react@npm%3A8.13.0#~/.yarn/patches/@sentry-react-npm-8.13.0-bd23d3c2da.patch",
     "@sentry/tracing": "7.114.0",
     "aws-rum-react": "workspace:^",

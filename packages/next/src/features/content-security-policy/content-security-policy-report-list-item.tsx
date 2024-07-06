@@ -5,6 +5,7 @@ import styles from './content-security-policy-report-list-item.module.scss';
 import type ContentSecurityPolicyReport from './content-security-policy-report.js';
 import ContentSecurityPolicySourceFile from './content-security-policy-source-file.jsx';
 
+const CLASS_NAME: string = validateString(styles['listItem']);
 const COUNT_CLASS_NAME: string = validateString(styles['count']);
 const SINGLE = 1;
 
@@ -17,11 +18,11 @@ export default function ContentSecurityPolicyReportListItem({
   const { displayFontFamily } = useTheme();
 
   if (sourceFile === null) {
-    return <li>Unknown source</li>;
+    return <li className={CLASS_NAME}>Unknown source</li>;
   }
 
   return (
-    <li>
+    <li className={CLASS_NAME}>
       <ContentSecurityPolicySourceFile
         columnNumber={columnNumber}
         lineNumber={lineNumber}

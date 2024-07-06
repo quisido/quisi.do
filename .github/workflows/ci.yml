@@ -120,7 +120,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
           GOOGLE_ANALYTICS_TRACKING_ID: G-GMKFW5ZZ9G
-          HONEYCOMB_API_KEY: hcaik_01hwsdk67m93b349m3hp3gtzneg8rr32rn1037h5zpzrnfnyhsb7jdpwqm
+          HONEYCOMB_API_KEY: hcaik_01hwsd84kyjjrwjgg4kqbzzvp2
           IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
           PATREON_OAUTH_CLIENT_ID: 4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG
           PATREON_OAUTH_REDIRECT_URI: https://localhost:5882/patreon/

@@ -1,6 +1,6 @@
 import type { datadogRum } from '@datadog/browser-rum';
 import { renderHook } from '@testing-library/react';
-import type { PropsWithChildren, ReactElement } from 'react';
+import { StrictMode, type PropsWithChildren, type ReactElement } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import DatadogRumContext from '../contexts/datadog-rum.js';
 import useDatadog from '../index.js';
@@ -48,20 +48,22 @@ const TEST_USER: User = {
   name: 'test-name',
 };
 
-function TestRumProvider({
+function Wrapper({
   children,
 }: Readonly<PropsWithChildren>): ReactElement {
   return (
-    <DatadogRumContext.Provider value={TEST_RUM}>
-      {children}
-    </DatadogRumContext.Provider>
+    <StrictMode>
+      <DatadogRumContext.Provider value={TEST_RUM}>
+        {children}
+      </DatadogRumContext.Provider>
+    </StrictMode>
   );
 }
 
 describe('useDatadog', (): void => {
   it('should call `init`', (): void => {
     renderHook(useDatadog, {
-      wrapper: TestRumProvider,
+      wrapper: Wrapper,
 
       initialProps: {
         applicationId: 'test-application-id',
@@ -80,7 +82,7 @@ describe('useDatadog', (): void => {
 
   it('should not call `init` if `enabled` is false', (): void => {
     renderHook(useDatadog, {
-      wrapper: TestRumProvider,
+      wrapper: Wrapper,
 
       initialProps: {
         applicationId: 'test-application-id',
@@ -94,7 +96,7 @@ describe('useDatadog', (): void => {
 
   it('should call `init` if the configuration has changed', (): void => {
     const { rerender } = renderHook(useDatadog, {
-      wrapper: TestRumProvider,
+      wrapper: Wrapper,
 
       initialProps: {
         applicationId: 'test-application-id',
@@ -114,7 +116,7 @@ describe('useDatadog', (): void => {
 
   it('should start session replay recording on mount', (): void => {
     renderHook(useDatadog, {
-      wrapper: TestRumProvider,
+      wrapper: Wrapper,
 
       initialProps: {
         applicationId: 'test-application-id',
@@ -128,7 +130,7 @@ describe('useDatadog', (): void => {
 
   it('should not start session replay recording when `enabled` is false', (): void => {
     renderHook(useDatadog, {
-      wrapper: TestRumProvider,
+      wrapper: Wrapper,
 
       initialProps: {
         applicationId: 'test-application-id',
@@ -142,7 +144,7 @@ describe('useDatadog', (): void => {
 
   it('should not start session replay recording when `sessionReplayRecording` is false', (): void => {
     renderHook(useDatadog, {
-      wrapper: TestRumProvider,
+      wrapper: Wrapper,
 
       initialProps: {
         applicationId: 'test-application-id',
@@ -156,7 +158,7 @@ describe('useDatadog', (): void => {
 
   it('should stop session replay recording on unmount', (): void => {
     const { unmount } = renderHook(useDatadog, {
-      wrapper: TestRumProvider,
+      wrapper: Wrapper,
 
       initialProps: {
         applicationId: 'test-application-id',
@@ -172,7 +174,7 @@ describe('useDatadog', (): void => {
 
   it('should not set the user when not provided', (): void => {
     renderHook(useDatadog, {
-      wrapper: TestRumProvider,
+      wrapper: Wrapper,
 
       initialProps: {
         applicationId: 'test-application-id',
@@ -185,7 +187,7 @@ describe('useDatadog', (): void => {
 
   it('should set the user when provided', (): void => {
     renderHook(useDatadog, {
-      wrapper: TestRumProvider,
+      wrapper: Wrapper,
 
       initialProps: {
         applicationId: 'test-application-id',
@@ -200,7 +202,7 @@ describe('useDatadog', (): void => {
 
   it('should remove the user on unmount', (): void => {
     const { unmount } = renderHook(useDatadog, {
-      wrapper: TestRumProvider,
+      wrapper: Wrapper,
 
       initialProps: {
         applicationId: 'test-application-id',

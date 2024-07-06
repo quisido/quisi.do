@@ -1,4 +1,4 @@
-import type { ReactElement, ReactNode } from "react";
+import { memo, type ReactElement, type ReactNode } from "react";
 import Sentry from "../components/sentry.jsx";
 import { GITHUB_SHA } from "../constants/github-sha.js";
 import validateString from "../utils/validate-string.js";
@@ -15,7 +15,7 @@ const TRACE_PROPAGATION_TARGETS: string[] = [
   'quisi.do',
 ];
 
-export default function SentryFeature({ children }: Props): ReactElement {
+function SentryFeature({ children }: Props): ReactElement {
   return (
     <Sentry
       dsn="https://a36b53fdd093405eb597a945f49a70f2@o592283.ingest.sentry.io/5740642"
@@ -28,3 +28,5 @@ export default function SentryFeature({ children }: Props): ReactElement {
     </Sentry>
   );
 }
+
+export default memo(SentryFeature);

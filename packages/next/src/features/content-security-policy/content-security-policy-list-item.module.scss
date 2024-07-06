@@ -1,55 +1,10 @@
-.dispositionIcon {
-  font-size: 0.75em;
-}
-
-.expando {
-  background-color: transparent;
-  border-width: 0;
-  color: inherit;
-  column-gap: 8px;
-  cursor: pointer;
-  display: contents;
-  flex-direction: row;
-  font-size: 1em;
-  line-height: 1rem;
-  overflow: hidden;
-  padding-bottom: 0;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  padding-top: 0;
-  text-align: left;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
-
-  &:hover {
-    background-color: #00000020;
-  }
-
-  > span:last-child {
-    column-gap: 0.333em;
-    display: inline-flex;
-    flex-direction: row;
-  }
-}
-
 .listItem {
-  border-bottom-width: 0;
-  border-color: transparent;
-  border-left-width: 0;
-  border-right-width: 0;
-  border-style: solid;
-  border-top-width: 0;
   display: contents;
-  font-size: 1em;
-  line-height: 1rem;
-  margin-bottom: 0;
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
 
   &.collapsed {
-    &:hover {
+    // Grid row
+    &:hover > button > span,
+    > button:focus-within > span {
       border-bottom-width: 1px;
       border-color: #00000020;
       border-top-width: 1px;
@@ -57,25 +12,25 @@
       margin-top: -1px;
     }
 
+    // URLs
     > ul {
       display: none;
     }
   }
 
   &.expanded {
-    border-bottom-width: 1px;
-    border-color: #00000040;
-    border-top-width: 1px;
-    margin-bottom: -1px;
-    margin-top: -1px;
-
-    > span {
+    // Grid row
+    > button > span {
       font-weight: bold;
+      border-top-width: 1px;
+      margin-top: -1px;
     }
 
+    // URLs
     > ul {
+      border-bottom-width: 1px;
       display: block;
-      margin-top: 1rem;
+      margin-bottom: -1px;
     }
   }
 
@@ -87,29 +42,108 @@
     }
   }
 
+  > button:focus-within,
+  &:has(> button > span:hover) > button {
+    // Grid row
+    > span {
+      background-color: #00000020;
+    }
+  }
+
+  > button {
+    background-color: transparent;
+    border-width: 0;
+    color: inherit;
+    display: contents;
+    font-size: 1em;
+    line-height: 1rem;
+    width: 100%;
+
+    > span {
+      border-bottom-width: 0;
+      border-color: #00000040;
+      border-left-width: 0;
+      border-right-width: 0;
+      border-style: solid;
+      border-top-width: 0;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 1em;
+      line-height: 1rem;
+      margin-bottom: 0;
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: 0;
+      padding-bottom: 0;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      padding-top: 0;
+      text-align: left;
+      white-space: nowrap;
+
+      // Disposition icon's cell
+      &:first-child {
+        font-size: 0.75em;
+        padding-bottom: 0;
+        padding-right: 0;
+        padding-top: 0;
+      }
+
+      // Path's cell
+      &:last-child {
+        display: inline-flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        padding-bottom: 0;
+        padding-top: 0;
+
+        > span:first-child {
+          overflow: hidden;
+          padding-right: 0.5em;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          word-break: break-all;
+        }
+      }
+    }
+  }
+
   + .expanded {
     margin-bottom: 0;
     margin-top: 0;
   }
 
   > ul {
-    grid-column-end: span 2;
-    grid-column-start: 2;
+    border-bottom-width: 0;
+    border-color: #00000040;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-style: solid;
+    border-top-width: 0;
+    grid-column-end: span 3;
+    grid-column-start: 1;
     list-style-type: none;
-    margin: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1rem;
     padding-bottom: 1rem;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
     padding-top: 0;
 
     > li {
+      font-size: 1em;
+      line-height: 1rem;
+      text-align: left;
+      white-space: nowrap;
       word-break: break-all;
     }
   }
 }
 
 .notFirst {
-  visibility: hidden;
+  color: transparent;
 }
 
 .reportsCount {
