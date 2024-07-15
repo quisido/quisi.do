@@ -42,8 +42,6 @@ import { MockFullStory } from 'fullstory-react';
 import { vi } from 'vitest';
 import MyComponent from './my-component.js';
 
-const ONCE = 1;
-
 describe('MyComponent', () => {
   it('should initialize FullStory', () => {
     const mockInit = vi.fn();
@@ -54,7 +52,7 @@ describe('MyComponent', () => {
       },
     });
 
-    expect(mockInit).toHaveBeenCalledTimes(ONCE);
+    expect(mockInit).toHaveBeenCalledOnce();
     expect(mockInit).toHaveBeenLastCalledWith({
       orgId: 'my-org-id',
     });
@@ -80,7 +78,7 @@ describe('MyComponent', () => {
 
     unmount();
 
-    expect(mockShutdown).toHaveBeenCalledTimes(ONCE);
+    expect(mockShutdown).toHaveBeenCalledOnce();
   });
 });
 ```

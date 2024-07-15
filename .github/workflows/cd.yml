@@ -129,6 +129,7 @@ jobs:
           CLOUDWATCH_RUM_APPLICATION_ID: 8495b9c9-f57e-4395-9ca6-6c01862c107b
           CLOUDWATCH_RUM_GUEST_ROLE_ARN: arn:aws:iam::787801101157:role/RUM-Monitor-us-west-2-787801101157-0860829251171-Unauth
           CLOUDWATCH_RUM_IDENTITY_POOL_ID: us-west-2:f6379e5a-a304-4608-bf6d-b66f00a5d3fb
+          CSP_ORIGIN: https://csp.quisi.do
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           DD_APPLICATION_ID: e29eb164-e193-4380-b512-ebd70bbfaeb6
           DD_CLIENT_TOKEN: pubf0c07bd5003d0c4a65a9f129d9e83a3d

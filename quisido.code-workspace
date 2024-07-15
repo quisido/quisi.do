@@ -61,6 +61,10 @@
       "path": "packages/number-format-react",
     },
     {
+      "name": "proposal-async-context",
+      "path": "packages/proposal-async-context",
+    },
+    {
       "name": "react-datadog",
       "path": "packages/react-datadog",
     },

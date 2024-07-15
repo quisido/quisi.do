@@ -14,6 +14,7 @@ connect-src
   https://rs.fullstory.com/rec/page
   https://analytics.google.com/g/collect
   https://localhost:5882/whoami/
+  https://localhost:6586/1/
   https://r.logr-ingest.com/i
   https://o592283.ingest.sentry.io/api/5740642/envelope/
   https://a.quisi.do/whoami/

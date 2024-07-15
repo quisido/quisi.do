@@ -3,7 +3,6 @@ import { assert, describe, expect, it, vi } from 'vitest';
 import MockNextRouter from '../index.js';
 import createAppRouterConsumer from '../test/create-app-router-consumer.js';
 
-const ONCE = 1;
 const TEST_PREFETCH = vi.fn();
 
 describe('MockAppRouter', (): void => {
@@ -34,7 +33,7 @@ describe('MockAppRouter', (): void => {
     assert(appRouter.current !== null);
     appRouter.current.prefetch('/test-href');
 
-    expect(TEST_PREFETCH).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_PREFETCH).toHaveBeenCalledOnce();
     expect(TEST_PREFETCH).toHaveBeenLastCalledWith('/test-href');
 
     // Unlisten to the router.

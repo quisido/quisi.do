@@ -1,6 +1,6 @@
-import { Snapshot } from 'proposal-async-context/src/index.js';
+import { Snapshot } from '@quisido/workers-shared';
 import Gender from '../../constants/gender.js';
-import MetricName from '../../constants/metric-name.js';
+import { MetricName } from '../../constants/metric-name.js';
 import OAuthProvider from '../../constants/oauth-provider.js';
 import getTelemetry from '../../utils/get-telemetry.js';
 import getDatabaseUserId from '../get-database-user-id.js';

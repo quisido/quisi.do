@@ -4,11 +4,13 @@ name = "quisido-csp-dev"
 tsconfig = "./tsconfig.json"
 
 analytics_engine_datasets = [
+  { binding = "PRIVATE_DATASET", dataset = "CSP_PRIVATE_DEV" },
+  { binding = "PUBLIC_DATASET", dataset = "CSP_PUBLIC_DEV" },
   { binding = "USAGE", dataset = "USAGE_DEV" },
 ]
 
 d1_databases = [
-  { binding = "CSP_DB", database_id = "CSP_DB", database_name = "csp-dev" },
+  { binding = "CSP_DB", database_id = "CSP", database_name = "csp-dev" },
 ]
 
 [dev]
@@ -23,6 +25,8 @@ port = 6586              # parseInt('csp', 36) % 9999
 name = "quisido-csp"
 
 analytics_engine_datasets = [
+  { binding = "PRIVATE_DATASET", dataset = "CSP_PRIVATE" },
+  { binding = "PUBLIC_DATASET", dataset = "CSP_PUBLIC" },
   { binding = "USAGE", dataset = "USAGE" },
 ]
 
@@ -42,6 +46,8 @@ name = "quisido-csp-staging"
 workers_dev = true
 
 analytics_engine_datasets = [
+  { binding = "PRIVATE_DATASET", dataset = "CSP_PRIVATE_STAGING" },
+  { binding = "PUBLIC_DATASET", dataset = "CSP_PUBLIC_STAGING" },
   { binding = "USAGE", dataset = "USAGE_STAGING" },
 ]
 

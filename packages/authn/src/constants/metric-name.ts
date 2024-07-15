@@ -1,4 +1,4 @@
-enum MetricName {
+export enum MetricName {
   ErrorCode = 'error.code',
   FaviconIco = 'pathname.favicon.ico',
   InvalidCookieDomain = 'cookie-domain.invalid',
@@ -51,5 +51,3 @@ enum MetricName {
   InvalidUsageDataset = 'dataset.usage.invalid',
   MissingUsageDataset = 'dataset.usage.missing',
 }
-
-export default MetricName;

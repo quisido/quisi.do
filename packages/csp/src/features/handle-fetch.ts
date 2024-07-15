@@ -22,7 +22,7 @@ export default async function handleFetch(
 ): Promise<Response> {
   // Environment
   if (!isObject(env)) {
-    console.log('Invalid isolate environment');
+    console.error(new Error('Invalid isolate environment'));
     return new Response(StatusCode.InternalServerError);
   }
 
@@ -42,20 +42,20 @@ export default async function handleFetch(
   // Project pathnames
   const projectId: number = mapPathnameToProjectId(pathname);
   if (Number.isNaN(projectId)) {
-    console.log('Invalid pathname');
+    console.error(new Error('Invalid pathname'));
     return new InvalidPathnameResponse();
   }
 
   // Database
   const { CSP_DB, USAGE } = env;
   if (!isD1Database(CSP_DB)) {
-    console.log('Invalid database');
+    console.error(new Error('Invalid database'));
     return new Response(StatusCode.InternalServerError);
   }
 
   // Usage
   if (!isAnalyticsEngineDataset(USAGE)) {
-    console.log('Invalid usage dataset');
+    console.error(new Error('Invalid usage dataset'));
     return new Response(StatusCode.InternalServerError);
   }
 

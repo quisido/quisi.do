@@ -1,5 +1,4 @@
-import { AccountNumber, UsageType } from '@quisido/workers-shared';
-import { Snapshot } from 'proposal-async-context/src/index.js';
+import { AccountNumber, Snapshot, UsageType } from '@quisido/workers-shared';
 import type Gender from '../constants/gender.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
 import getNowSeconds from '../utils/get-now-seconds.js';

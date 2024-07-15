@@ -1,8 +1,6 @@
-import type State from '../features/state.js';
-import RequiredVariable from '../utils/required-variable.js';
+import { RequiredVariable } from '@quisido/workers-shared';
+import AuthnState from '../features/authn-state.js';
 
-const stateVar: RequiredVariable<State> = new RequiredVariable<State>({
+export const STATE_VAR = new RequiredVariable<AuthnState>({
   name: 'state',
 });
-
-export default stateVar;

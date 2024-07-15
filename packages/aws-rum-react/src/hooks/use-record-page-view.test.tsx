@@ -3,7 +3,6 @@ import type { PropsWithChildren, ReactElement } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { MockAwsRumProvider, useRecordPageView } from '../index.js';
 
-const ONCE = 1;
 const TEST_RECORD_PAGE_VIEW = vi.fn();
 
 describe('useRecordError', (): void => {
@@ -22,7 +21,7 @@ describe('useRecordError', (): void => {
       result.current('test page');
     });
 
-    expect(TEST_RECORD_PAGE_VIEW).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_RECORD_PAGE_VIEW).toHaveBeenCalledOnce();
     expect(TEST_RECORD_PAGE_VIEW).toHaveBeenLastCalledWith('test page');
   });
 });

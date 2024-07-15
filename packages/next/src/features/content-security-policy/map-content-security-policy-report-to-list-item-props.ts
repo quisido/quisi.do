@@ -1,4 +1,4 @@
-import type { Attributes } from "react";
+import type { Attributes } from 'react';
 import type ContentSecurityPolicyReport from './content-security-policy-report.js';
 
 export default function mapContentSecurityPolicyReportToListItemProps({
@@ -6,7 +6,8 @@ export default function mapContentSecurityPolicyReportToListItemProps({
   count,
   lineNumber,
   sourceFile,
-}: ContentSecurityPolicyReport): Required<Attributes> & ContentSecurityPolicyReport {
+}: ContentSecurityPolicyReport): Required<Attributes> &
+  ContentSecurityPolicyReport {
   const getKey = (): string | null => {
     // Assumption: There will only ever be one item with a null `sourceFile`.
     if (sourceFile === null) {

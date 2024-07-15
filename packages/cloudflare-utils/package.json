@@ -33,7 +33,7 @@
     "vitest:watch": "vitest watch"
   },
   "dependencies": {
-    "@cloudflare/workers-types": "^4.20240620.0"
+    "@cloudflare/workers-types": "^4.20240712.0"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.3",

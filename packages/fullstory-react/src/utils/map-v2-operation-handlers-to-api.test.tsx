@@ -4,7 +4,6 @@ import type { PropsWithChildren, ReactElement } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { MockFullstory, useFullstory } from '../index.js';
 
-const ONCE = 1;
 const TEST_FULLSTORY = Object.assign(vi.fn(), FullStory);
 const TEST_SHUTDOWN = vi.fn();
 
@@ -25,7 +24,7 @@ describe('mapV2OperationHandlersToApi', (): void => {
       result.current('shutdown');
     });
 
-    expect(TEST_FULLSTORY).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_FULLSTORY).toHaveBeenCalledOnce();
     expect(TEST_FULLSTORY).toHaveBeenLastCalledWith(
       'shutdown',
       undefined,
@@ -49,6 +48,6 @@ describe('mapV2OperationHandlersToApi', (): void => {
       result.current('shutdown');
     });
 
-    expect(TEST_SHUTDOWN).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_SHUTDOWN).toHaveBeenCalledOnce();
   });
 });

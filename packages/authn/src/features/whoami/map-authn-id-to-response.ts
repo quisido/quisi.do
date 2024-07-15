@@ -1,7 +1,6 @@
 import { WhoAmIResponseCode } from '@quisido/authn-shared';
-import { AccountNumber, UsageType } from '@quisido/workers-shared';
-import { Snapshot } from 'proposal-async-context/src/index.js';
-import MetricName from '../../constants/metric-name.js';
+import { AccountNumber, Snapshot, UsageType } from '@quisido/workers-shared';
+import { MetricName } from '../../constants/metric-name.js';
 import StatusCode from '../../constants/status-code.js';
 import getTelemetry from '../../utils/get-telemetry.js';
 import getAuthnUserIdsNamespace from '../get-authn-user-ids-namespace.js';

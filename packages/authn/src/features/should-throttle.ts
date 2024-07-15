@@ -1,5 +1,5 @@
 import EnvironmentName from '../constants/environment-name.js';
-import MetricName from '../constants/metric-name.js';
+import { MetricName } from '../constants/metric-name.js';
 import createThrottler from '../utils/create-throttler.js';
 import getIp from '../utils/get-ip.js';
 import getTelemetry from '../utils/get-telemetry.js';

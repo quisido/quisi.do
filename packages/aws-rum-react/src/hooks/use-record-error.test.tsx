@@ -3,7 +3,6 @@ import type { PropsWithChildren, ReactElement } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { MockAwsRumProvider, useRecordError } from '../index.js';
 
-const ONCE = 1;
 const TEST_RECORD_ERROR = vi.fn();
 
 describe('useRecordError', (): void => {
@@ -22,7 +21,7 @@ describe('useRecordError', (): void => {
       result.current('test error message');
     });
 
-    expect(TEST_RECORD_ERROR).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_RECORD_ERROR).toHaveBeenCalledOnce();
     expect(TEST_RECORD_ERROR).toHaveBeenLastCalledWith('test error message');
   });
 });

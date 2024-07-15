@@ -7,10 +7,10 @@ import getScreenshotsFolder from './src/test/utils/get-cypress-screenshots-folde
 export default {
   defaultCommandTimeout: 30000,
   experimentalInteractiveRunEvents: true,
-  // experimentalMemoryManagement: true,
-  // experimentalModifyObstructiveThirdPartyCode: true,
-  // experimentalSourceRewriting: true,
-  // experimentalWebKitSupport: true,
+  // ExperimentalMemoryManagement: true,
+  // ExperimentalModifyObstructiveThirdPartyCode: true,
+  // ExperimentalSourceRewriting: true,
+  // ExperimentalWebKitSupport: true,
   fixturesFolder: false,
   projectId: 'kqcybg',
   redirectionLimit: 2,
@@ -18,9 +18,9 @@ export default {
 
   e2e: {
     baseUrl: 'https://localhost:3000/',
-    // experimentalOriginDependencies: true,
+    // ExperimentalOriginDependencies: true,
     experimentalRunAllSpecs: true,
-    // experimentalStudio: true,
+    // ExperimentalStudio: true,
     specPattern: 'src/**/*.e2e.ts',
     setupNodeEvents(
       on: Cypress.PluginEvents,

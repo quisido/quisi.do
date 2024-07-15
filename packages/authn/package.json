@@ -17,7 +17,7 @@
     "local:reinit": "yarn run local:drop && yarn run local:init",
     "login": "wrangler login",
     "prepack": "exit 0",
-    "prepublish": "concurrently --kill-others-on-fail --names eslint,vitest \"yarn run eslint\" \"yarn run vitest:run\"",
+    "prepublish": "concurrently --kill-others-on-fail --names eslint,tsc,vitest \"yarn run eslint\" \"yarn run tsc\" \"yarn run vitest:run\"",
     "production:deploy": "wrangler deploy src/index.ts --env production --outdir dist",
     "production:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env production --outdir dist",
     "production:init": "yarn run production:init:emails && yarn run production:init:oauth && yarn run production:init:users",
@@ -30,6 +30,7 @@
     "staging:init:emails": "wrangler d1 execute authn-staging --env staging --file=./sql/emails.sql --remote",
     "staging:init:oauth": "wrangler d1 execute authn-staging --env staging --file=./sql/oauth.sql --remote",
     "staging:init:users": "wrangler d1 execute authn-staging --env staging --file=./sql/users.sql --remote",
+    "tsc": "tsc --skipLibCheck",
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch",
@@ -42,7 +43,6 @@
     "cookie": "^0.6.0",
     "fmrs": "workspace:^",
     "form-urlencoded": "^6.1.5",
-    "proposal-async-context": "https://github.com/tc39/proposal-async-context",
     "tslib": "^2.6.3"
   },
   "devDependencies": {
@@ -50,7 +50,7 @@
     "@babel/preset-env": "^7.24.7",
     "@babel/preset-react": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
-    "@cloudflare/workers-types": "^4.20240620.0",
+    "@cloudflare/workers-types": "^4.20240712.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "workspace:^",
     "@quisido/vitest-config": "workspace:^",

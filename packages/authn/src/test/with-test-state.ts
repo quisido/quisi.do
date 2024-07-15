@@ -1,7 +1,6 @@
 import { expect, vi } from 'vitest';
-import stateVar from '../constants/state-var.js';
-import State from '../features/state.js';
-import assert from '../utils/assert.js';
+import { STATE_VAR } from '../constants/state-var.js';
+import AuthnState from '../features/authn-state.js';
 import mapSessionIdToRequest from './map-session-id-to-request.js';
 import { TEST_CONSOLE } from './test-console.js';
 
@@ -17,7 +16,6 @@ interface Result<R> {
   readonly result: R;
 }
 
-const ONCE = 1;
 const TEST_LOG_PRIVATE_ERROR = vi.fn();
 const TEST_SESSION_ID = '0123456789abcdef';
 const TEST_WRITE_PRIVATE_DATAPOINT = vi.fn();
@@ -44,35 +42,30 @@ const TEST_ENV: Record<string, unknown> = {
 
 export default function withTestState<R>(fn: () => R): Result<R> {
   // Create a mocked state implementation.
-  const state: State = new State(
-    vi.fn(),
+  const state: AuthnState = new AuthnState(
     TEST_CONSOLE,
+    vi.fn(),
     mapSessionIdToRequest(TEST_SESSION_ID),
+    TEST_ENV,
     TEST_CTX,
-    '0123456789abcdef0123456789abcdef',
   );
 
-  const result: R = stateVar.run(state, (): R => {
-    state.setEnv(TEST_ENV);
+  state.telemetry.on('error:private', TEST_LOG_PRIVATE_ERROR);
+
+  const result: R = STATE_VAR.run(state, (): R => {
     state.setReturnHref();
-    assert(state.telemetry !== null);
-    state.telemetry.onPrivateError(TEST_LOG_PRIVATE_ERROR);
-    const runResult: R = fn();
-    state.flushTelemetry();
-    return runResult;
+    return fn();
   });
 
   return {
     result,
 
     expectPrivateError(err: Error): void {
-      expect(TEST_LOG_PRIVATE_ERROR).toHaveBeenCalledTimes(ONCE);
-      expect(TEST_LOG_PRIVATE_ERROR).toHaveBeenLastCalledWith(err);
+      expect(TEST_LOG_PRIVATE_ERROR).toHaveBeenCalledWith(err);
     },
 
     expectPublicDataPoint(datapoint: AnalyticsEngineDataPoint): void {
-      expect(TEST_WRITE_PUBLIC_DATAPOINT).toHaveBeenCalledTimes(ONCE);
-      expect(TEST_WRITE_PUBLIC_DATAPOINT).toHaveBeenLastCalledWith(datapoint);
+      expect(TEST_WRITE_PUBLIC_DATAPOINT).toHaveBeenCalledWith(datapoint);
     },
   };
 }

@@ -41,8 +41,11 @@ const lightghouseConfig: Config = {
       'https://www.google-analytics.com/*',
       'https://www.googletagmanager.com/*',
 
-      // Localhosts have invalid certificates.
+      // AuthN has an invalid local certificate.
       'https://localhost:5882/*',
+
+      // CSP has an invalid local certificate.
+      'https://localhost:6586/*',
     ],
   },
 };

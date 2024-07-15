@@ -1,0 +1,44 @@
+{
+  "name": "@quisido/proposal-async-context",
+  "version": "0.0.1",
+  "author": "Chengzhong Wu <legendecas@gmail.com>",
+  "description": "Async Context proposal for JavaScript",
+  "homepage": "https://github.com/tc39/proposal-async-context",
+  "license": "CC0-1.0",
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
+  "repository": "legendecas/proposal-async-context",
+  "type": "module",
+  "types": "./dist/src/index.d.ts",
+  "keywords": [
+    "async",
+    "context",
+    "async-context",
+    "zone",
+    "tc39",
+    "javascript",
+    "ecmascript",
+    "spec"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "attw": "attw --quiet",
+    "fix-esm-import-path": "fix-esm-import-path dist/src/",
+    "prepack": "yarn run webpack && yarn run fix-esm-import-path",
+    "prepublish": "yarn run attw",
+    "webpack": "webpack"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.3",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.14.11",
+    "fix-esm-import-path": "^1.10.0",
+    "proposal-async-context": "git://github.com/tc39/proposal-async-context.git",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.5.3",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

@@ -1,11 +1,11 @@
-import { sortNumbers } from "fmrs";
-import EMPTY_ARRAY from "../../constants/empty-array.js";
+import { sortNumbers } from 'fmrs';
+import EMPTY_ARRAY from '../../constants/empty-array.js';
 import type ReportBody from '../../types/content-security-policy-report-body.js';
 import not from '../../utils/not.js';
 import sortEntriesByKey from '../../utils/sort-entries-by-key.js';
-import type Group from "./content-security-policy-group.js";
+import type Group from './content-security-policy-group.js';
 import type Report from './content-security-policy-report.js';
-import mapBlockedUrlToOriginPathname from "./map-blocked-url-to-origin-pathname.js";
+import mapBlockedUrlToOriginPathname from './map-blocked-url-to-origin-pathname.js';
 
 const sortReportsByCount = (
   { count: count1 }: Report,
@@ -17,7 +17,7 @@ const mapDispositionEntryToGroups = ([
   effectiveDirectiveMap,
 ]: readonly [
   string,
-  ReadonlyMap<string, ReadonlyMap<string, readonly Report[]>>
+  ReadonlyMap<string, ReadonlyMap<string, readonly Report[]>>,
 ]): readonly Group[] => {
   const mapEffectiveDirectiveEntriesToGroups = ([
     effectiveDirective,
@@ -26,10 +26,7 @@ const mapDispositionEntryToGroups = ([
     string,
     ReadonlyMap<string, readonly Report[]>,
   ]): readonly Group[] => {
-    const mapOriginPathnameEntryToGroup = ([
-      originPathname,
-      reports,
-    ]: readonly [
+    const mapOriginPathnameEntryToGroup = ([originPathname, reports]: readonly [
       string,
       readonly Report[],
     ]): Group => ({
@@ -42,7 +39,7 @@ const mapDispositionEntryToGroups = ([
     return [...originPathnameMap.entries()]
       .sort(sortEntriesByKey)
       .map(mapOriginPathnameEntryToGroup);
-  }
+  };
 
   return [...effectiveDirectiveMap.entries()]
     .sort(sortEntriesByKey)
@@ -52,8 +49,10 @@ const mapDispositionEntryToGroups = ([
 export default function mapReportBodiesToContentSecurityPolicyGroups(
   bodies: readonly ReportBody[],
 ): readonly Group[] {
-  const dispositionMap =
-    new Map<string, ReadonlyMap<string, ReadonlyMap<string, readonly Report[]>>>();
+  const dispositionMap = new Map<
+    string,
+    ReadonlyMap<string, ReadonlyMap<string, readonly Report[]>>
+  >();
 
   for (const {
     blockedURL,
@@ -64,10 +63,13 @@ export default function mapReportBodiesToContentSecurityPolicyGroups(
     sourceFile,
   } of bodies) {
     const originPathname: string = mapBlockedUrlToOriginPathname(blockedURL);
-    const effectiveDirectiveMap: Map<string, ReadonlyMap<string, readonly Report[]>> =
-      new Map(dispositionMap.get(disposition));
-    const originPathnameMap: Map<string, readonly Report[]> =
-      new Map(effectiveDirectiveMap.get(effectiveDirective));
+    const effectiveDirectiveMap = new Map<
+      string,
+      ReadonlyMap<string, readonly Report[]>
+    >(dispositionMap.get(disposition));
+    const originPathnameMap = new Map<string, readonly Report[]>(
+      effectiveDirectiveMap.get(effectiveDirective),
+    );
     const reports: readonly Report[] =
       originPathnameMap.get(originPathname) ?? EMPTY_ARRAY;
 

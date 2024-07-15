@@ -1,3 +1,5 @@
+'use client';
+
 import type { ComponentType, ReactElement, ReactNode } from 'react';
 import { memo } from 'react';
 import Loading from '../../components/loading/index.js';

@@ -1,7 +1,7 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { describe, expect, it } from 'vitest';
 import EnvironmentName from '../constants/environment-name.js';
-import MetricName from '../constants/metric-name.js';
+import { MetricName } from '../constants/metric-name.js';
 import fetch from '../test/fetch.js';
 
 const DEFAULT_TRACE_FLAGS = 0;

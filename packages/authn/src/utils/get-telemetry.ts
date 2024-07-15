@@ -1,13 +1,8 @@
-import type { Metric } from '../types/metric.js';
+import { type Telemetry } from '@quisido/workers-shared';
+import { type AuthnMetric } from '../types/authn-metric.js';
 import getState from './get-state.js';
-import type Telemetry from './telemetry.js';
 
-export default function getTelemetry(): Telemetry<Metric> {
+export default function getTelemetry(): Telemetry<AuthnMetric> {
   const { telemetry } = getState();
-
-  if (telemetry === null) {
-    throw new Error('Expected the state to contain telemetry.');
-  }
-
   return telemetry;
 }

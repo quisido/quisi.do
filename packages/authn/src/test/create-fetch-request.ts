@@ -1,3 +1,5 @@
+import { type IncomingRequest } from 'cloudflare-utils';
+
 interface Options {
   readonly headers: Readonly<Record<string, string>>;
   readonly pathname: string;
@@ -10,7 +12,7 @@ export default function createFetchRequest({
   headers,
   pathname,
   search: searchInit,
-}: Options): Request {
+}: Options): IncomingRequest {
   const search: string = new URLSearchParams({
     ...searchInit,
     state: JSON.stringify({

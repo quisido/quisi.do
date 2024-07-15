@@ -3,7 +3,6 @@ import type { PropsWithChildren, ReactElement } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { MockAwsRumProvider, useRecordEvent } from '../index.js';
 
-const ONCE = 1;
 const TEST_RECORD_EVENT = vi.fn();
 
 describe('useRecordEvent', (): void => {
@@ -22,7 +21,7 @@ describe('useRecordEvent', (): void => {
       result.current('test event', { test: 'event' });
     });
 
-    expect(TEST_RECORD_EVENT).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_RECORD_EVENT).toHaveBeenCalledOnce();
     expect(TEST_RECORD_EVENT).toHaveBeenLastCalledWith('test event', {
       test: 'event',
     });

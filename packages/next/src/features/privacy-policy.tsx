@@ -1,12 +1,12 @@
+import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Div from '../modules/quisi/div.js';
-import Header from '../modules/quisi/header.js';
 import Link from '../modules/quisi/link.js';
 import Section from '../modules/quisi/section.js';
 
 export default function PrivacyPolicy(): ReactElement {
   return (
-    <Section header={<Header>Privacy Policy</Header>}>
+    <Section header={<I18n>Privacy policy</I18n>}>
       <Div element="p" marginBottom="medium">
         quisi.do is a completely open source software-as-a-service provider. As
         such, it offers full transparency into its collection and use of your
