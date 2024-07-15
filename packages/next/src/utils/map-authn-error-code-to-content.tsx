@@ -111,26 +111,29 @@ export default function mapAuthnErrorCodeToContent(
 
     case ErrorCode.InvalidPatreonOAuthRedirectUri:
       return [
-        <I18n>An unknown error occurred.</I18n>,
-        <I18n>An unknown error occurred.</I18n>,
+        <I18n>Invalid redirect URI</I18n>,
+        <I18n>The Patreon redirect URI could not be identified.</I18n>,
       ];
 
     case ErrorCode.InvalidPatreonTokenRequest:
       return [
-        <I18n>An unknown error occurred.</I18n>,
-        <I18n>An unknown error occurred.</I18n>,
+        <I18n>Invalid token</I18n>,
+        <I18n>Your Patreon authentication token could not be verified.</I18n>,
       ];
 
     case ErrorCode.InvalidUsageDataset:
       return [
-        <I18n>An unknown error occurred.</I18n>,
-        <I18n>An unknown error occurred.</I18n>,
+        <I18n>Invalid dataset</I18n>,
+        <>
+          <I18n>Application usage cannot currently be tracked.</I18n>
+          <I18n>The developer has been notified. Please try again later.</I18n>
+        </>,
       ];
 
     case ErrorCode.InvalidUserId:
       return [
-        <I18n>An unknown error occurred.</I18n>,
-        <I18n>An unknown error occurred.</I18n>,
+        <I18n>Invalid user ID</I18n>,
+        <I18n>The developer has been notified. Please try again later.</I18n>,
       ];
 
     case ErrorCode.MissingCookies:
@@ -139,18 +142,18 @@ export default function mapAuthnErrorCodeToContent(
     case ErrorCode.MissingInvalidPatreonRequestDescription:
       return [
         <I18n>An unknown error occurred.</I18n>,
-        <I18n>An unknown error occurred.</I18n>,
+        <I18n>Patreon rejected the authentication attempt, but did not disclose why.</I18n>,
       ];
 
     case ErrorCode.MissingPatreonAccessToken:
       return [
         <I18n>Missing access token</I18n>,
-        <I18n>An unknown error occurred.</I18n>,
+        <I18n>Patreon did not provide an access token.</I18n>,
       ];
     case ErrorCode.NonStringPatreonAccessToken:
       return [
-        <I18n>An unknown error occurred.</I18n>,
-        <I18n>An unknown error occurred.</I18n>,
+        <I18n>Invalid access token</I18n>,
+        <I18n>Patreon provided an invalid access token.</I18n>,
       ];
 
     case ErrorCode.MissingPatreonIdentityData:
@@ -207,35 +210,25 @@ export default function mapAuthnErrorCodeToContent(
 
     case ErrorCode.NonJsonPatreonIdentityResponse:
       return [
-        <I18n>An unknown error occurred.</I18n>,
-        <I18n>An unknown error occurred.</I18n>,
+        <I18n>Invalid Patreon identity</I18n>,
+        <I18n>Patreon responded with an invalid identity.</I18n>,
       ];
 
     case ErrorCode.NonJsonPatreonTokenErrorBody:
+    case ErrorCode.NonObjectPatreonTokenError:
       return [
         <I18n>An unknown error occurred.</I18n>,
-        <I18n>An unknown error occurred.</I18n>,
+        <I18n>Patreon rejected the authentication token, but did not disclose why.</I18n>,
       ];
 
     case ErrorCode.NonJsonPatreonTokenResponse:
+    case ErrorCode.NonObjectPatreonTokenResponse:
       return [
         <I18n>An unknown error occurred.</I18n>,
         <I18n>An unknown error occurred.</I18n>,
       ];
 
     case ErrorCode.NonObjectPatreonIdentityResponse:
-      return [
-        <I18n>An unknown error occurred.</I18n>,
-        <I18n>An unknown error occurred.</I18n>,
-      ];
-
-    case ErrorCode.NonObjectPatreonTokenError:
-      return [
-        <I18n>An unknown error occurred.</I18n>,
-        <I18n>An unknown error occurred.</I18n>,
-      ];
-
-    case ErrorCode.NonObjectPatreonTokenResponse:
       return [
         <I18n>An unknown error occurred.</I18n>,
         <I18n>An unknown error occurred.</I18n>,
