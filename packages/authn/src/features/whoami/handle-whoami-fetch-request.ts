@@ -2,7 +2,7 @@ import {
   AUTHN_USER_ID_MAP,
   type State as AuthnUserIdState,
 } from '../../constants/authn-user-id-map.js';
-import MetricName from '../../constants/metric-name.js';
+import { MetricName } from '../../constants/metric-name.js';
 import { MILLISECONDS_PER_SECOND } from '../../constants/time.js';
 import createThrottler from '../../utils/create-throttler.js';
 import getIp from '../../utils/get-ip.js';

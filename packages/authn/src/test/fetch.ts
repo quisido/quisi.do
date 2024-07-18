@@ -47,8 +47,8 @@ export default async function fetch({
   waitUntil = vi.fn(),
 }: Options): Promise<Result> {
   const response: Response = await handleFetch(
-    fetchImpl,
     TEST_CONSOLE,
+    fetchImpl,
     createFetchRequest({
       headers,
       pathname,

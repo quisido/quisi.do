@@ -1,4 +1,4 @@
-import MetricName from '../constants/metric-name.js';
+import { MetricName } from '../constants/metric-name.js';
 import type Cause from '../types/cause.js';
 import createDataError from '../utils/create-data-error.js';
 import getTelemetry from '../utils/get-telemetry.js';

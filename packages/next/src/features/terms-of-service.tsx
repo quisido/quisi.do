@@ -1,3 +1,4 @@
+import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import Div from '../modules/quisi/div.js';
 import Section from '../modules/quisi/section.js';
@@ -6,7 +7,7 @@ const LAST_UPDATED: Date = new Date('2024-03-21');
 
 export default function TermsOfService(): ReactElement {
   return (
-    <Section header="Terms of Service">
+    <Section header={<I18n>Terms of service</I18n>}>
       <Div marginBottom="medium">
         Last updated {LAST_UPDATED.toLocaleDateString()}
       </Div>

@@ -1,9 +1,9 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import { Snapshot } from 'proposal-async-context/src/index.js';
+import { Snapshot } from '@quisido/workers-shared';
 import isObject from '../../utils/is-object.js';
 import mapCauseToError from '../../utils/map-cause-to-error.js';
 import mapReadableStreamToString from '../../utils/map-readable-stream-to-string.js';
-import handlePatreonTokenErrorCode from './handle-patreon-token-error-code.js';
+import handlePatreonAccessTokenErrorCode from './handle-patreon-access-token-error-code.js';
 
 export default async function handlePatreonAccessTokenError(
   response: Response,
@@ -44,7 +44,7 @@ export default async function handlePatreonAccessTokenError(
       });
     }
 
-    return handlePatreonTokenErrorCode({
+    return handlePatreonAccessTokenErrorCode({
       code: error,
       description: errorDescription,
       json,

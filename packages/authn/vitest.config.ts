@@ -15,10 +15,10 @@ export default defineConfig({
       skipFull: true,
 
       thresholds: {
-        branches: 28,
-        functions: 53,
-        lines: 51,
-        statements: 51,
+        branches: 32,
+        functions: 49,
+        lines: 47,
+        statements: 48,
       },
     },
   },

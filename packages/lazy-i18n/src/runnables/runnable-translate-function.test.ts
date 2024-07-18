@@ -1,8 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import RunnableTranslateFunction from './runnable-translate-function.js';
 
-const ONCE = 1;
-
 describe('RunnableTranslateFunction', (): void => {
   it('should emit loadTranslations when they have not loaded', (): void => {
     const MOCK_LOAD_TRANSLATIONS = vi.fn();
@@ -11,7 +9,7 @@ describe('RunnableTranslateFunction', (): void => {
     );
     runnable.on('loadTranslations', MOCK_LOAD_TRANSLATIONS);
     expect(runnable.run('test')).toBeUndefined();
-    expect(MOCK_LOAD_TRANSLATIONS).toHaveBeenCalledTimes(ONCE);
+    expect(MOCK_LOAD_TRANSLATIONS).toHaveBeenCalledOnce();
     expect(MOCK_LOAD_TRANSLATIONS).toHaveBeenLastCalledWith('test');
   });
 
@@ -33,7 +31,7 @@ describe('RunnableTranslateFunction', (): void => {
     });
     runnable.on('loadFallbackTranslations', MOCK_LOAD_FALLBACK_TRANSLATIONS);
     expect(runnable.run('three')).toBeUndefined();
-    expect(MOCK_LOAD_FALLBACK_TRANSLATIONS).toHaveBeenCalledTimes(ONCE);
+    expect(MOCK_LOAD_FALLBACK_TRANSLATIONS).toHaveBeenCalledOnce();
     expect(MOCK_LOAD_FALLBACK_TRANSLATIONS).toHaveBeenLastCalledWith('three');
   });
 
@@ -61,7 +59,7 @@ describe('RunnableTranslateFunction', (): void => {
     });
     runnable.on('notFound', MOCK_NOT_FOUND);
     expect(runnable.run('five')).toBeUndefined();
-    expect(MOCK_NOT_FOUND).toHaveBeenCalledTimes(ONCE);
+    expect(MOCK_NOT_FOUND).toHaveBeenCalledOnce();
     expect(MOCK_NOT_FOUND).toHaveBeenLastCalledWith('five');
   });
 });

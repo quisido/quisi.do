@@ -1,5 +1,5 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import { Snapshot } from 'proposal-async-context/src/index.js';
+import { Snapshot } from '@quisido/workers-shared';
 import mapCauseToError from '../../utils/map-cause-to-error.js';
 import getPatreonTokenResponse from './get-patreon-token-response.js';
 import handlePatreonAccessTokenError from './handle-patreon-access-token-error.js';

@@ -1,6 +1,6 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { AccountNumber, UsageType } from '@quisido/workers-shared';
-import MetricName from '../constants/metric-name.js';
+import { MetricName } from '../constants/metric-name.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
 import getTelemetry from '../utils/get-telemetry.js';
 import isObject from '../utils/is-object.js';

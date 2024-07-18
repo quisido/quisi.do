@@ -1,4 +1,8 @@
-export default function mapSessionIdToRequest(sessionId: string): Request {
+import { type IncomingRequest } from 'cloudflare-utils';
+
+export default function mapSessionIdToRequest(
+  sessionId: string,
+): IncomingRequest {
   const search: string = new URLSearchParams({
     state: JSON.stringify({
       returnPath: '/',

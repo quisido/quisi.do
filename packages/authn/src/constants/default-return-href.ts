@@ -1,1 +1,1 @@
-export default 'https://quisi.do/';
+export const DEFAULT_RETURN_HREF = 'https://quisi.do/';

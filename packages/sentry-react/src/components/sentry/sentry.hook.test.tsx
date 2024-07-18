@@ -5,7 +5,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { MockSentrySdk } from '../../index.js';
 import useSentry from './sentry.hook.js';
 
-const ONCE = 1;
 const TEST_BEFORE_BREADCRUMB = vi.fn();
 const TEST_BEFORE_SEND = vi.fn();
 const TEST_INIT = vi.fn();
@@ -54,7 +53,7 @@ describe('useSentry', (): void => {
       },
     });
 
-    expect(TEST_INIT).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_INIT).toHaveBeenCalledOnce();
     expect(TEST_INIT).toHaveBeenLastCalledWith({
       allowUrls: [],
       attachStacktrace: true,
@@ -92,7 +91,7 @@ describe('useSentry', (): void => {
       },
     });
 
-    expect(TEST_SET_USER).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_SET_USER).toHaveBeenCalledOnce();
     expect(TEST_SET_USER).toHaveBeenLastCalledWith({
       ip_address: '{{auto}}',
     });
@@ -112,7 +111,7 @@ describe('useSentry', (): void => {
       },
     });
 
-    expect(TEST_SET_USER).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_SET_USER).toHaveBeenCalledOnce();
     expect(TEST_SET_USER).toHaveBeenLastCalledWith(TEST_USER);
   });
 });

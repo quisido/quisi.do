@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import MetricName from '../constants/metric-name.js';
+import { MetricName } from '../constants/metric-name.js';
 import fetch from '../test/fetch.js';
 
 const DEFAULT_TRACE_FLAGS = 0;
@@ -34,7 +34,7 @@ describe('getEnvironmentName', (): void => {
     });
 
     expectPublicDataPoint({
-      blobs: [expect.any(String) as string, '0000000000000000'],
+      blobs: [expect.any(String) as string, '0000000000000000', 'string'],
       indexes: [MetricName.InvalidEnvironmentName],
 
       doubles: [

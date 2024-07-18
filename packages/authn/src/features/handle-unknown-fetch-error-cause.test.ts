@@ -1,6 +1,6 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { describe, expect, it } from 'vitest';
-import MetricName from '../constants/metric-name.js';
+import { MetricName } from '../constants/metric-name.js';
 import expectResponseToRedirectTo from '../test/expect-response-to-redirect-to.js';
 import withTestState from '../test/with-test-state.js';
 import handleFetchError from './handle-fetch-error.js';
@@ -17,7 +17,7 @@ describe('handleUnknownFetchErrorCause', (): void => {
 
     expectPrivateError(TEST_ERROR);
     expectPublicDataPoint({
-      blobs: ['0123456789abcdef0123456789abcdef', '0000000000000000'],
+      blobs: [expect.any(String) as string, '0000000000000000'],
       indexes: [MetricName.ErrorCode],
 
       doubles: [

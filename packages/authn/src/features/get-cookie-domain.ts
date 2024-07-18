@@ -1,5 +1,5 @@
 import { mapUnknownToString } from 'fmrs';
-import MetricName from '../constants/metric-name.js';
+import { MetricName } from '../constants/metric-name.js';
 import getEnv from '../utils/get-env.js';
 import getTelemetry from '../utils/get-telemetry.js';
 
@@ -11,23 +11,20 @@ export default function getCookieDomain(): string {
     return COOKIE_DOMAIN;
   }
 
-  const { emitPublicMetric, logPrivateError, logPublicError } = getTelemetry();
+  const { emitPublicMetric, logPrivateError } = getTelemetry();
   if (typeof COOKIE_DOMAIN === 'undefined') {
     emitPublicMetric({ name: MetricName.MissingCookieDomain });
     return DEFAULT_COOKIE_DOMAIN;
   }
 
-  emitPublicMetric({ name: MetricName.InvalidCookieDomain });
+  emitPublicMetric({
+    name: MetricName.InvalidCookieDomain,
+    type: typeof COOKIE_DOMAIN,
+  });
 
   logPrivateError(
     new Error('Invalid cookie domain', {
       cause: mapUnknownToString(COOKIE_DOMAIN),
-    }),
-  );
-
-  logPublicError(
-    new Error('Invalid cookie domain', {
-      cause: typeof COOKIE_DOMAIN,
     }),
   );
 

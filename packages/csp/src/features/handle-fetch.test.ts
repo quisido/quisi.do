@@ -2,11 +2,12 @@ import { describe, expect, it, vi } from 'vitest';
 import { StatusCode } from '../constants/status-code.js';
 import handleFetch from './handle-fetch.js';
 
-const ONCE = 1;
+const TEST_CONSOLE_ERROR = vi.fn();
 const TEST_CONSOLE_LOG = vi.fn();
 
 const TEST_CONSOLE: Console = {
   ...console,
+  error: TEST_CONSOLE_ERROR,
   log: TEST_CONSOLE_LOG,
 };
 
@@ -24,9 +25,9 @@ describe('handleFetch', (): void => {
       TEST_EXECUTION_CONTEXT,
     );
 
-    expect(TEST_CONSOLE_LOG).toHaveBeenCalledTimes(ONCE);
-    expect(TEST_CONSOLE_LOG).toHaveBeenLastCalledWith(
-      'Invalid isolate environment',
+    expect(TEST_CONSOLE_ERROR).toHaveBeenCalledOnce();
+    expect(TEST_CONSOLE_ERROR).toHaveBeenLastCalledWith(
+      new Error('Invalid isolate environment'),
     );
     expect(response.status).toBe(StatusCode.InternalServerError);
   });
@@ -41,7 +42,7 @@ describe('handleFetch', (): void => {
       TEST_EXECUTION_CONTEXT,
     );
 
-    expect(TEST_CONSOLE_LOG).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_CONSOLE_LOG).toHaveBeenCalledOnce();
     expect(TEST_CONSOLE_LOG).toHaveBeenLastCalledWith('Method not allowed');
     expect(response.status).toBe(StatusCode.MethodNotAllowed);
   });

@@ -1,4 +1,4 @@
-import MetricName from '../constants/metric-name.js';
+import { MetricName } from '../constants/metric-name.js';
 import {
   FAVICON_RESPONSE_BODY,
   FAVICON_RESPONSE_INIT,

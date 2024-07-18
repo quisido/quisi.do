@@ -1,41 +1,33 @@
-import stateVar from '../constants/state-var.js';
-import createTraceId from '../utils/create-trace-id.js';
+import { type IncomingRequest } from 'cloudflare-utils';
+import { STATE_VAR } from '../constants/state-var.js';
 import isObject from '../utils/is-object.js';
+import AuthnState from './authn-state.js';
 import handleFetchError from './handle-fetch-error.js';
 import handleFetchRequest from './handle-fetch-request.js';
 import handleInvalidIsolateEnvironment from './handle-invalid-isolate-environment.js';
 import handleMissingIsolateEnvironment from './handle-missing-isolate-environment.js';
-import State from './state.js';
 
 export default async function handleFetch(
-  fetch: Fetcher['fetch'],
   console: Console,
-  request: Request,
+  fetch: Fetcher['fetch'],
+  request: IncomingRequest,
   env: unknown,
   ctx: ExecutionContext,
 ): Promise<Response> {
-  const traceId: string = createTraceId();
-  const state: State = new State(fetch, console, request, ctx, traceId);
-  return stateVar.run(state, async (): Promise<Response> => {
-    if (typeof env === 'undefined') {
-      return handleMissingIsolateEnvironment();
-    }
+  if (typeof env === 'undefined') {
+    return handleMissingIsolateEnvironment();
+  }
 
-    if (!isObject(env)) {
-      return handleInvalidIsolateEnvironment();
-    }
+  if (!isObject(env)) {
+    return handleInvalidIsolateEnvironment();
+  }
 
+  const state = new AuthnState(console, fetch, request, env, ctx);
+  return STATE_VAR.run(state, async (): Promise<Response> => {
     try {
-      /**
-       *   We cannot set `env` when we instantiate state, because we throw
-       * stateful errors when validating it here.
-       */
-      state.setEnv(env);
       return await handleFetchRequest();
     } catch (err: unknown) {
-      return stateVar.run(state, (): Response => handleFetchError(err));
-    } finally {
-      state.flushTelemetry();
+      return STATE_VAR.run(state, (): Response => handleFetchError(err));
     }
   });
 }

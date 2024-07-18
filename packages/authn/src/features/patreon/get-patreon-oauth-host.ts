@@ -1,8 +1,8 @@
 import { ErrorCode } from '@quisido/authn-shared';
+import { MetricName } from '../../constants/metric-name.js';
 import getEnv from '../../utils/get-env.js';
-import mapCauseToError from '../../utils/map-cause-to-error.js';
 import getTelemetry from '../../utils/get-telemetry.js';
-import MetricName from '../../constants/metric-name.js';
+import mapCauseToError from '../../utils/map-cause-to-error.js';
 
 const DEFAULT_PATREON_OAUTH_HOST = 'https://www.patreon.com';
 
@@ -11,9 +11,7 @@ export default function getPatreonOAuthHost(): string {
   const { emitPublicMetric } = getTelemetry();
 
   if (typeof PATREON_OAUTH_HOST === 'undefined') {
-    emitPublicMetric({
-      name: MetricName.MissingPatreonOAuthHost,
-    });
+    emitPublicMetric({ name: MetricName.MissingPatreonOAuthHost });
     return DEFAULT_PATREON_OAUTH_HOST;
   }
 

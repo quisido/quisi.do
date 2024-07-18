@@ -35,7 +35,7 @@ export default [
   },
 
   {
-    files: ['src/features/handle-fetch.ts', 'src/features/state.ts'],
+    files: ['src/features/authn-state.ts', 'src/features/handle-fetch.ts'],
     rules: {
       'max-params': ['error', { max: 5 }],
     },

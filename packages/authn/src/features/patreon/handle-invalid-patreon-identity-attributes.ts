@@ -1,4 +1,4 @@
-import MetricName from '../../constants/metric-name.js';
+import { MetricName } from '../../constants/metric-name.js';
 import getTelemetry from '../../utils/get-telemetry.js';
 
 interface Options {
@@ -17,9 +17,7 @@ export default function handleInvalidPatreonIdentityAttributes({
   const { emitPublicMetric } = getTelemetry();
 
   if (typeof attributes === 'undefined') {
-    emitPublicMetric({
-      name: MetricName.MissingPatreonIdentityAttributes,
-    });
+    emitPublicMetric({ name: MetricName.MissingPatreonIdentityAttributes });
     return {
       id,
     };
@@ -27,7 +25,9 @@ export default function handleInvalidPatreonIdentityAttributes({
 
   emitPublicMetric({
     name: MetricName.InvalidPatreonIdentityAttributes,
+    type: typeof attributes,
   });
+
   return {
     id,
   };

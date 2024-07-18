@@ -1,5 +1,5 @@
 import EnvironmentName from '../constants/environment-name.js';
-import MetricName from '../constants/metric-name.js';
+import { MetricName } from '../constants/metric-name.js';
 import getEnvironmentName from '../features/get-environment-name.js';
 import getRequestHeaders from './get-request-headers.js';
 import getTelemetry from './get-telemetry.js';

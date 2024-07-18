@@ -16,7 +16,6 @@ type P = Props<T>;
 type S = State<keyof T>;
 
 const ES_ES = 'es_ES';
-const ONCE = 1;
 const TEST_ERROR_MESSAGE = 'test error message';
 const TEST_ERROR: Error = new Error(TEST_ERROR_MESSAGE);
 
@@ -36,9 +35,9 @@ describe('useLoadTranslations', (): void => {
     });
 
     await result.current('es_ES');
-    expect(MOCK_ES_ES).toHaveBeenCalledTimes(ONCE);
+    expect(MOCK_ES_ES).toHaveBeenCalledOnce();
     await result.current('es_ES');
-    expect(MOCK_ES_ES).toHaveBeenCalledTimes(ONCE);
+    expect(MOCK_ES_ES).toHaveBeenCalledOnce();
   });
 
   it('should throw an error if the translations do not exist', async (): Promise<void> => {
@@ -70,7 +69,7 @@ describe('useLoadTranslations', (): void => {
     });
 
     await result.current('es_ES');
-    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(ONCE);
+    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledOnce();
     expect(MOCK_LOAD_HANDLER).toHaveBeenLastCalledWith('es_ES', {
       Spanish: 'Espanol',
     });
@@ -92,7 +91,7 @@ describe('useLoadTranslations', (): void => {
     });
 
     await result.current('es_ES');
-    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(ONCE);
+    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledOnce();
     expect(MOCK_LOAD_HANDLER).toHaveBeenLastCalledWith('es_ES', {
       Spanish: 'Espanol',
     });
@@ -112,7 +111,7 @@ describe('useLoadTranslations', (): void => {
     });
 
     await result.current('es_ES');
-    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(ONCE);
+    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledOnce();
     expect(MOCK_LOAD_HANDLER).toHaveBeenLastCalledWith('es_ES', {
       Spanish: 'Espanol',
     });
@@ -134,7 +133,7 @@ describe('useLoadTranslations', (): void => {
     });
 
     await result.current('es_ES');
-    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(ONCE);
+    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledOnce();
     expect(MOCK_LOAD_HANDLER).toHaveBeenLastCalledWith('es_ES', {
       Spanish: 'Espanol',
     });
@@ -155,7 +154,7 @@ describe('useLoadTranslations', (): void => {
     });
 
     await result.current('es_ES');
-    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(ONCE);
+    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledOnce();
     expect(MOCK_LOAD_HANDLER).toHaveBeenLastCalledWith('es_ES', {
       Spanish: 'Espanol',
     });
@@ -177,7 +176,7 @@ describe('useLoadTranslations', (): void => {
       },
     });
     await result.current('es_ES');
-    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledTimes(ONCE);
+    expect(MOCK_LOAD_HANDLER).toHaveBeenCalledOnce();
     expect(MOCK_LOAD_HANDLER).toHaveBeenLastCalledWith('es_ES', {
       Spanish: 'Espanol',
     });
@@ -211,7 +210,7 @@ describe('useLoadTranslations', (): void => {
       },
     });
     await result.current('es_ES');
-    expect(MOCK_LOAD_ERROR_HANDLER).toHaveBeenCalledTimes(ONCE);
+    expect(MOCK_LOAD_ERROR_HANDLER).toHaveBeenCalledOnce();
     expect(MOCK_LOAD_ERROR_HANDLER).toHaveBeenLastCalledWith(ES_ES, TEST_ERROR);
   });
 });

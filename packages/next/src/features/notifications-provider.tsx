@@ -81,22 +81,22 @@ function NotificationsProviderFeature({
         )[] = [...notifications];
 
         if (/^#authn:error=\d+$/.test(hash)) {
+          const handleDismiss = (): void => {
+            setHash('replace', '');
+          };
+
           newNotifications.push(
             loadAuthnErrorNotificationModule()
               .then(
-                ({ default: AuthnErrorNotification }): WithKey<Notification> =>
-                  AuthnErrorNotification.fromHash(hash, {
-                    onDismiss(): void {
-                      setHash('replace', '');
-                    },
-                  }),
+                ({ default: AuthnErrorNotification }): Notification =>
+                  AuthnErrorNotification.fromHash(hash),
               )
-              .catch(
-                (err: unknown): WithKey<Notification> => ({
-                  ...mapErrorToNotification(err),
-                  key: 'authn:error',
-                }),
-              ),
+              .catch(mapErrorToNotification)
+              .then((notification: Notification): WithKey<Notification> => ({
+                ...notification,
+                key: 'authn:error',
+                onDismiss: handleDismiss,
+              })),
           );
         }
 

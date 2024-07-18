@@ -1,61 +1,66 @@
 import { type ErrorCode } from '@quisido/authn-shared';
 import I18n from 'lazy-i18n';
-import { type ReactElement, type ReactNode } from 'react';
+import { type ComponentType, type ReactElement } from 'react';
 import { type NoActionNotification } from '../types/notification.js';
-import { type WithKey } from '../types/with-key.js';
-import mapAuthnErrorCodeToContent from '../utils/map-authn-error-code-to-content';
+import mapAuthnErrorCodeToNotification from '../utils/map-authn-error-code-to-notification.jsx';
 import mapHashToAuthnErrorCode from '../utils/map-hash-to-authn-error-code';
-
-export interface Options {
-  readonly onDismiss: VoidFunction;
-}
+import AuthnErrorsTranslationsProvider from './authn-errors-translations-provider.jsx';
 
 function AnUnknownErrorOccurred(): ReactElement {
   return <I18n>An unknown error occurred.</I18n>;
 }
 
-export default class AuthnErrorNotification
-  implements WithKey<NoActionNotification>
-{
+export default class AuthnErrorNotification implements NoActionNotification {
   public readonly icon = '⚠️';
 
-  public readonly key = 'authn:error';
+  readonly #Header: ComponentType | undefined;
 
-  public readonly Header: (() => ReactNode) | undefined;
-
-  public readonly Message: () => ReactNode;
-
-  public readonly onDismiss: VoidFunction;
+  readonly #Message: ComponentType;
 
   public readonly type = 'error';
 
-  public constructor(code: ErrorCode | null, { onDismiss }: Options) {
-    this.onDismiss = onDismiss;
-
+  public constructor(code: ErrorCode | null) {
     /**
      *   This should only happen if the user manually entered an invalid error
      * code into their address bar.
      */
     if (code === null) {
-      this.Message = AnUnknownErrorOccurred;
+      this.#Message = AnUnknownErrorOccurred;
     } else {
-      const [header, message] = mapAuthnErrorCodeToContent(code);
-      if (header !== null) {
-        this.Header = function Header(): ReactNode {
-          return header;
-        };
+      const { Header, Message } = mapAuthnErrorCodeToNotification(code);
+      this.#Message = Message;
+      if (typeof Header !== 'undefined') {
+        this.#Header = Header;
       }
-      this.Message = function Header(): ReactNode {
-        return message;
-      };
     }
   }
 
-  public static fromHash(
-    hash: string,
-    options: Options,
-  ): AuthnErrorNotification {
+  public get Header(): ComponentType | undefined {
+    const Component: ComponentType | undefined = this.#Header;
+    if (typeof Component === 'undefined') {
+      return;
+    }
+
+    return function HeaderImpl(): ReactElement {
+      return (
+        <AuthnErrorsTranslationsProvider>
+          <Component />
+        </AuthnErrorsTranslationsProvider>
+      );
+    };
+  }
+
+  public Message(): ReactElement {
+    const Component: ComponentType = this.#Message;
+    return (
+      <AuthnErrorsTranslationsProvider>
+        <Component />
+      </AuthnErrorsTranslationsProvider>
+    );
+  }
+
+  public static fromHash(hash: string): AuthnErrorNotification {
     const code: ErrorCode | null = mapHashToAuthnErrorCode(hash);
-    return new AuthnErrorNotification(code, options);
+    return new AuthnErrorNotification(code);
   }
 }

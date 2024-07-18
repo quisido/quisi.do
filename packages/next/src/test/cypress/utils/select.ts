@@ -17,7 +17,7 @@ export default function select(
       throw new Error(`Expected label "${label}" to have \`for\` attribute.`);
     }
 
-    const formElementSelector = `#${formElementId.replace(/([\\:])/g, '\\$1')}`;
+    const formElementSelector = `#${formElementId.replace(/([\\:])/gu, '\\$1')}`;
 
     const selectValue = (selectedValue: string): void => {
       if (selectedValue === value) {

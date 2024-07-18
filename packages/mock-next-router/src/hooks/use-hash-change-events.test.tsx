@@ -4,7 +4,6 @@ import { afterEach, assert, beforeEach, describe, expect, it, vi } from 'vitest'
 import MockNextRouter from '../index.js';
 
 const FIRST = 0;
-const ONCE = 1;
 const TEST_HASH_CHANGE_LISTENER = vi.fn();
 
 describe('useHashChangeEvents', (): void => {
@@ -27,7 +26,7 @@ describe('useHashChangeEvents', (): void => {
       history.push('/new-pathname?search=new#new-hash');
     });
 
-    expect(TEST_HASH_CHANGE_LISTENER).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_HASH_CHANGE_LISTENER).toHaveBeenCalledOnce();
 
     const firstCallArguments: unknown =
       TEST_HASH_CHANGE_LISTENER.mock.calls[FIRST];

@@ -22,7 +22,8 @@ interface ErrorResponse {
 type CspResponse = ErrorResponse | readonly ReportBody[];
 
 const LIST_CLASS_NAME: string = validateString(styles['list']);
-const REQUEST_INFO = 'https://csp.quisi.do/1/?key=demo-get';
+const ORIGIN: string = validateString(process.env['CSP_ORIGIN']);
+const REQUEST_INFO = `${ORIGIN}/1/?key=demo-get`;
 
 const isErrorResponse = (value: CspResponse): value is ErrorResponse =>
   !Array.isArray(value);

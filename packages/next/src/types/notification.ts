@@ -1,9 +1,9 @@
 import { type ComponentType } from 'react';
 
 interface BaseNotification {
-  readonly Header?: ComponentType | string | undefined;
+  readonly Header?: ComponentType | undefined;
   readonly icon?: string | undefined;
-  readonly Message: ComponentType | string;
+  readonly Message: ComponentType;
   readonly onDismiss?: VoidFunction | undefined;
   readonly type: 'error' | 'info' | 'success' | 'warning';
 }

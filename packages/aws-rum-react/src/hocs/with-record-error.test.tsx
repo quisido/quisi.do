@@ -8,7 +8,6 @@ interface TestProps {
   readonly recordError: (error: unknown) => void;
 }
 
-const ONCE = 1;
 const TEST_RECORD_ERROR = vi.fn();
 
 function TestComponent({ recordError }: TestProps): null {
@@ -33,7 +32,7 @@ describe('withRecordError', (): void => {
       },
     });
 
-    expect(TEST_RECORD_ERROR).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_RECORD_ERROR).toHaveBeenCalledOnce();
     expect(TEST_RECORD_ERROR).toHaveBeenLastCalledWith('test error');
   });
 });

@@ -1,4 +1,7 @@
-import { browserProfilingIntegration, replayIntegration } from '@sentry/browser';
+import {
+  browserProfilingIntegration,
+  replayIntegration,
+} from '@sentry/browser';
 import { fullStoryIntegration } from '@sentry/fullstory';
 import type { Integration } from '@sentry/types';
 import { useFullstory, type FSApi } from 'fullstory-react';
