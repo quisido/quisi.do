@@ -1,12 +1,10 @@
-import { AccountNumber, UsageType } from '@quisido/workers-shared';
 import { MetricName } from '../constants/metric-name.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
-import getTelemetry from '../utils/get-telemetry.js';
-import getDatabase from './get-database.js';
-import getUsage from './get-usage.js';
+import { affect, emitPublicMetric } from '../constants/worker.js';
 import handleInsertIntoOAuthError from './handle-insert-into-oauth-error.js';
 import handleInsertIntoOAuthResponse from './handle-insert-into-oauth-response.js';
 import putDatabaseUserEmail from './put-database-user-email.js';
+import getDatabase from './shared/get-database.js';
 
 interface Options {
   readonly changes: number;
@@ -33,8 +31,6 @@ export default function putDatabaseUserMetadata({
   userId,
 }: Options): number {
   const db: D1Database = getDatabase();
-  const { affect, emitPublicMetric } = getTelemetry();
-  const use = getUsage();
   emitPublicMetric({
     changes,
     duration,
@@ -44,10 +40,10 @@ export default function putDatabaseUserMetadata({
   });
 
   // Associate user ID with OAuth ID.
-  use({
-    account: AccountNumber.Quisido,
-    type: UsageType.D1Write,
-  });
+  // Use({
+  //   Account: AccountNumber.Quisido,
+  //   Type: UsageType.D1Write,
+  // });
   const insertIntoOAuth: Promise<D1Response> = db
     .prepare(INSERT_INTO_OAUTH_QUERY)
     .bind(userId, oAuthProvider, oAuthId)

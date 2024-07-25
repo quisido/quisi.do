@@ -1,10 +1,9 @@
 import { MetricName } from '../constants/metric-name.js';
-import getTelemetry from '../utils/get-telemetry.js';
+import { emitPrivateMetric, emitPublicMetric } from '../constants/worker.js';
 
 export default function handleInsertIntoOAuthResponse(
   userId: number,
 ): (response: D1Response) => void {
-  const { emitPrivateMetric, emitPublicMetric } = getTelemetry();
   const startTime: number = Date.now();
 
   return function handleThen({

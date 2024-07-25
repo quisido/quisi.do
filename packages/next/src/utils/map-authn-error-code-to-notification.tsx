@@ -117,7 +117,7 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.InvalidPatreonClientID:
+    case ErrorCode.InvalidPatreonClientId:
       return {
         Header(): ReactElement {
           return <I18n>Invalid client ID</I18n>;
@@ -160,7 +160,7 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.InvalidPatreonOAuthClientID:
+    case ErrorCode.InvalidPatreonOAuthClientId:
       return {
         Message: MisconfiguredPatreonClient,
 
@@ -196,7 +196,7 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.InvalidPatreonTokenRequest:
+    case ErrorCode.InvalidPatreonAccessTokenRequest:
       return {
         Header(): ReactElement {
           return <I18n>Invalid token</I18n>;
@@ -280,7 +280,7 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.MissingInvalidPatreonRequestDescription:
+    case ErrorCode.MissingInvalidPatreonAccessTokenRequestDescription:
       return {
         Header: UnknownError,
 
@@ -398,8 +398,8 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.MissingPatreonTokenErrorBody:
-    case ErrorCode.MissingPatreonTokenErrorCode:
+    case ErrorCode.MissingPatreonAccessTokenErrorBody:
+    case ErrorCode.MissingPatreonAccessTokenErrorCode:
       return {
         Header: UnknownError,
 
@@ -415,7 +415,7 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.MissingSessionIDCookie:
+    case ErrorCode.MissingSessionIdCookie:
       return {
         Header(): ReactElement {
           return <I18n>Missing session ID cookie</I18n>;
@@ -433,7 +433,7 @@ export default function mapAuthnErrorCodeToNotification(
 
     case ErrorCode.MissingState:
     case ErrorCode.MissingStateReturnPath:
-    case ErrorCode.MissingStateSessionID:
+    case ErrorCode.MissingStateSessionId:
       return {
         Header(): ReactElement {
           return <I18n>Missing state</I18n>;
@@ -448,9 +448,9 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
+    case ErrorCode.InvalidStateReturnPath:
     case ErrorCode.NonJsonState:
     case ErrorCode.NonObjectState:
-    case ErrorCode.NonStringStateReturnPath:
       return {
         Header(): ReactElement {
           return <I18n>Invalid state</I18n>;
@@ -483,8 +483,8 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.NonJsonPatreonTokenErrorBody:
-    case ErrorCode.NonObjectPatreonTokenError:
+    case ErrorCode.InvalidPatreonAccessTokenError:
+    case ErrorCode.InvalidPatreonAccessTokenErrorBody:
       return {
         Header(): ReactElement {
           return <I18n>Invalid response</I18n>;
@@ -502,8 +502,8 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.NonJsonPatreonTokenResponse:
-    case ErrorCode.NonObjectPatreonTokenResponse:
+    case ErrorCode.NonJsonPatreonAccessTokenResponse:
+    case ErrorCode.NonObjectPatreonAccessTokenResponse:
       return {
         Header(): ReactElement {
           return <I18n>Invalid response</I18n>;
@@ -551,7 +551,7 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.NonStringInvalidPatreonRequestDescription:
+    case ErrorCode.InvalidInvalidPatreonAccessTokenRequestDescription:
       return {
         Message(): ReactElement {
           return (
@@ -630,7 +630,7 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.UnknownPatreonTokenError:
+    case ErrorCode.UnknownPatreonAccessTokenError:
       return {
         Header: UnknownError,
 

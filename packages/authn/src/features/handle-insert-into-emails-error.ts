@@ -1,12 +1,14 @@
 import { mapUnknownToError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
-import getTelemetry from '../utils/get-telemetry.js';
+import {
+  emitPrivateMetric,
+  emitPublicMetric,
+  logPrivateError,
+} from '../constants/worker.js';
 
 export default function handleInsertIntoEmailsError(
   userId: number,
 ): (err: unknown) => void {
-  const { emitPrivateMetric, emitPublicMetric, logPrivateError } =
-    getTelemetry();
   const startTime: number = Date.now();
 
   return function handleCatch(err: unknown): void {

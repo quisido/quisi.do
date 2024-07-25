@@ -5209,8 +5209,9 @@ __metadata:
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/authn-shared": "workspace:^"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/proposal-async-context": "workspace:^"
     "@quisido/vitest-config": "workspace:^"
-    "@quisido/workers-shared": "workspace:^"
+    "@quisido/worker": "workspace:^"
     "@types/cookie": "npm:^0.6.0"
     "@types/eslint": "npm:^8.56.10"
     "@vitest/coverage-istanbul": "npm:^1.6.0"
@@ -5218,7 +5219,6 @@ __metadata:
     cjs-ts: "workspace:^"
     cloudflare-utils: "workspace:^"
     concurrently: "npm:^8.2.2"
-    cookie: "npm:^0.6.0"
     eslint: "npm:^9.5.0"
     fmrs: "workspace:^"
     form-urlencoded: "npm:^6.1.5"
@@ -5273,8 +5273,9 @@ __metadata:
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@quisido/csp-shared": "workspace:^"
     "@quisido/eslint-config": "workspace:^"
+    "@quisido/proposal-async-context": "workspace:^"
     "@quisido/vitest-config": "workspace:^"
-    "@quisido/workers-shared": "workspace:^"
+    "@quisido/worker": "workspace:^"
     "@types/eslint": "npm:^8.56.10"
     "@vitest/coverage-istanbul": "npm:^1.6.0"
     babel-plugin-replace-import-extension: "npm:^1.1.4"
@@ -5506,9 +5507,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@quisido/workers-shared@workspace:^, @quisido/workers-shared@workspace:packages/workers-shared":
+"@quisido/worker@workspace:^, @quisido/worker@workspace:packages/worker":
   version: 0.0.0-use.local
-  resolution: "@quisido/workers-shared@workspace:packages/workers-shared"
+  resolution: "@quisido/worker@workspace:packages/worker"
   dependencies:
     "@arethetypeswrong/cli": "npm:^0.15.3"
     "@babel/core": "npm:^7.24.7"
@@ -5520,6 +5521,7 @@ __metadata:
     "@quisido/eslint-config": "workspace:^"
     "@quisido/proposal-async-context": "workspace:^"
     "@quisido/vitest-config": "workspace:^"
+    "@types/cookie": "npm:^0.6.0"
     "@typescript-eslint/eslint-plugin": "npm:^7.14.1"
     "@typescript-eslint/parser": "npm:^7.14.1"
     "@vitest/coverage-istanbul": "npm:^1.6.0"
@@ -5527,6 +5529,7 @@ __metadata:
     cjs-ts: "workspace:^"
     cloudflare-utils: "workspace:^"
     concurrently: "npm:^8.2.2"
+    cookie: "npm:^0.6.0"
     eslint: "npm:^9.5.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-import: "npm:^2.29.1"

@@ -1,17 +1,21 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { mapUnknownToError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
-import getTelemetry from '../utils/get-telemetry.js';
+import { emitPublicMetric, logPrivateError } from '../constants/worker.js';
 import ErrorResponseInit from './error-response-init.js';
 
-export default function handleUnknownFetchError(err: unknown): Response {
-  const { emitPublicMetric, logPrivateError } = getTelemetry();
-
+export default function handleUnknownFetchError(
+  err: unknown,
+  returnPath?: string | undefined,
+): Response {
   logPrivateError(mapUnknownToError(err));
   emitPublicMetric({
     code: ErrorCode.Unknown,
     name: MetricName.ErrorCode,
   });
 
-  return new Response(null, new ErrorResponseInit(ErrorCode.Unknown));
+  return new Response(
+    null,
+    new ErrorResponseInit(ErrorCode.Unknown, returnPath),
+  );
 }

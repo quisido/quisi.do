@@ -1,24 +1,18 @@
-import { ErrorCode } from '@quisido/authn-shared';
-import getEnv from '../utils/get-env.js';
+import { getEnv } from '../constants/worker.js';
 import isKVNamespace from '../utils/is-kv-namespace.js';
-import mapCauseToError from '../utils/map-cause-to-error.js';
+import handleInvalidAuthnUserIdsNamespace from './handle-invalid-authn-user-ids-namespace.js';
+import handleMissingAuthnUserIdsNamespace from './handle-missing-authn-user-ids-namespace.js';
 
 export default function getAuthnUserIdsNamespace(): KVNamespace {
-  const { AUTHN_USER_IDS } = getEnv();
+  const authnUserIds: unknown = getEnv('AUTHN_USER_IDS');
 
-  if (isKVNamespace(AUTHN_USER_IDS)) {
-    return AUTHN_USER_IDS;
+  if (isKVNamespace(authnUserIds)) {
+    return authnUserIds;
   }
 
-  if (typeof AUTHN_USER_IDS === 'undefined') {
-    throw mapCauseToError({
-      code: ErrorCode.MissingAuthnUserIdsNamespace,
-    });
+  if (typeof authnUserIds === 'undefined') {
+    return handleMissingAuthnUserIdsNamespace();
   }
 
-  throw mapCauseToError({
-    code: ErrorCode.InvalidAuthnUserIdsNamespace,
-    privateData: AUTHN_USER_IDS,
-    publicData: typeof AUTHN_USER_IDS,
-  });
+  return handleInvalidAuthnUserIdsNamespace(authnUserIds);
 }

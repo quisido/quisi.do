@@ -1,22 +1,21 @@
 import type { ErrorCode } from '@quisido/authn-shared';
-import { DEFAULT_RETURN_HREF } from '../constants/default-return-href.js';
-import StatusCode from '../constants/status-code.js';
-import getReturnHref from '../utils/get-return-href.js';
+import { StatusCode } from 'cloudflare-utils';
 import ResponseInitImpl from '../utils/response-init.js';
+import getHost from './get-host.js';
 
 export default class ErrorResponseInit extends ResponseInitImpl {
-  public constructor(code: ErrorCode) {
-    const returnHref: string = getReturnHref() ?? DEFAULT_RETURN_HREF;
-    const location = `${returnHref}#authn:error=${code.toString()}`;
+  public constructor(code: ErrorCode, returnPath = '/') {
+    const host: string = getHost();
+    const location = `https://${host}${returnPath}#authn:error=${code.toString()}`;
 
     super({
       status: StatusCode.SeeOther,
 
       headers: new Headers({
-        'Access-Control-Allow-Methods': 'GET',
-        Allow: 'GET',
-        'Content-Location': location,
-        Location: location,
+        'access-control-allow-methods': 'GET',
+        allow: 'GET',
+        'content-location': location,
+        location,
       }),
     });
   }

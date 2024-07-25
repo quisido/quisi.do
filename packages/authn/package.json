@@ -38,9 +38,9 @@
   },
   "dependencies": {
     "@quisido/authn-shared": "workspace:^",
-    "@quisido/workers-shared": "workspace:^",
+    "@quisido/proposal-async-context": "workspace:^",
+    "@quisido/worker": "workspace:^",
     "cloudflare-utils": "workspace:^",
-    "cookie": "^0.6.0",
     "fmrs": "workspace:^",
     "form-urlencoded": "^6.1.5",
     "tslib": "^2.6.3"

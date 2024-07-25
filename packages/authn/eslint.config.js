@@ -42,16 +42,13 @@ export default [
   },
 
   {
-    files: ['src/features/patreon/get-patreon-token-response.ts'],
+    files: [
+      'src/routes/patreon/get-patreon-token-response.ts',
+      'src/routes/patreon/handle-invalid-patreon-access-token-request-description.ts',
+    ],
+
     rules: {
       camelcase: 'off',
-    },
-  },
-
-  {
-    files: ['src/features/telemetry-queue.ts'],
-    rules: {
-      'no-console': 'off',
     },
   },
 
@@ -73,6 +70,18 @@ export default [
     files: ['src/utils/map-readable-stream-to-string.ts'],
     rules: {
       'no-await-in-loop': 'off',
+    },
+  },
+
+  {
+    files: [
+      'src/routes/patreon/handle-invalid-invalid-patreon-access-token-request-description.ts',
+      'src/routes/patreon/handle-invalid-patreon-access-token-request-description.ts',
+      'src/routes/patreon/handle-missing-invalid-patreon-access-token-request-description.ts',
+    ],
+
+    rules: {
+      'no-undefined': 'off',
     },
   },
 

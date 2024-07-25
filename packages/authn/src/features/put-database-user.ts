@@ -1,10 +1,9 @@
-import { AccountNumber, Snapshot, UsageType } from '@quisido/workers-shared';
 import type Gender from '../constants/gender.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
+import { snapshot } from '../constants/worker.js';
 import getNowSeconds from '../utils/get-now-seconds.js';
-import getDatabase from './get-database.js';
-import getUsage from './get-usage.js';
 import putDatabaseUserMetadata from './put-database-user-metadata.js';
+import getDatabase from './shared/get-database.js';
 
 interface Options {
   readonly email: string | null;
@@ -28,33 +27,34 @@ export default async function putDatabaseUser(
   oAuthId: string,
   { email, firstName, fullName, gender }: Options,
 ): Promise<number> {
-  const registrationTimestamp: number = getNowSeconds();
-  const use = getUsage();
-
   const db: D1Database = getDatabase();
-  const usersStatement = db
-    .prepare(INSERT_INTO_USERS_QUERY)
-    .bind(firstName, fullName, gender, registrationTimestamp);
+  const registrationTimestamp: number = getNowSeconds();
 
-  const snapshot: Snapshot = new Snapshot();
-
-  use({
-    account: AccountNumber.Quisido,
-    type: UsageType.D1Write,
-  });
-  const {
-    meta: { changes, duration, last_row_id: userId, size_after: sizeAfter },
-  } = await usersStatement.run();
-
-  return snapshot.run((): number =>
-    putDatabaseUserMetadata({
-      changes,
-      duration,
-      email,
-      oAuthId,
-      oAuthProvider,
-      sizeAfter,
-      userId,
-    }),
+  // Use({
+  //   Account: AccountNumber.Quisido,
+  //   Type: UsageType.D1Write,
+  // });
+  return await snapshot(
+    db
+      .prepare(INSERT_INTO_USERS_QUERY)
+      .bind(firstName, fullName, gender, registrationTimestamp)
+      .run(),
+    ({ meta }: D1Response): number => {
+      const {
+        changes,
+        duration,
+        last_row_id: userId,
+        size_after: sizeAfter,
+      } = meta;
+      return putDatabaseUserMetadata({
+        changes,
+        duration,
+        email,
+        oAuthId,
+        oAuthProvider,
+        sizeAfter,
+        userId,
+      });
+    },
   );
 }

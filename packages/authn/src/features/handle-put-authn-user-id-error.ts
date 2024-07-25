@@ -1,19 +1,17 @@
-import { Snapshot } from '@quisido/workers-shared';
+import { Snapshot } from '@quisido/proposal-async-context';
 import { mapUnknownToError } from 'fmrs';
-import { AUTHN_USER_ID_MAP } from '../constants/authn-user-id-map.js';
 import { MetricName } from '../constants/metric-name.js';
-import getTelemetry from '../utils/get-telemetry.js';
+import { emitPublicMetric, logPrivateError } from '../constants/worker.js';
+import { setAuthnUserIdInMemory } from './authn-user-id.js';
 
 interface Options {
   readonly authnId: string;
-  readonly expiration: number;
   readonly id: number;
   readonly startTime: number;
 }
 
 export default function handlePutAuthnUserIdError({
   authnId,
-  expiration,
   id,
   startTime,
 }: Options): (error: unknown) => void {
@@ -21,13 +19,9 @@ export default function handlePutAuthnUserIdError({
 
   return (err: unknown): void => {
     // If the KV namespace failed, fallback to the cache.
-    AUTHN_USER_ID_MAP.set(authnId, {
-      expiration,
-      id,
-    });
+    setAuthnUserIdInMemory(authnId, id);
 
     snapshot.run((): void => {
-      const { emitPublicMetric, logPrivateError } = getTelemetry();
       logPrivateError(mapUnknownToError(err));
       emitPublicMetric({
         endTime: Date.now(),

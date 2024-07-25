@@ -1,31 +1,31 @@
 import { isR2Bucket } from 'cloudflare-utils';
-import { mapUnknownToString } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
-import getEnv from '../utils/get-env.js';
-import getTelemetry from '../utils/get-telemetry.js';
+import {
+  emitPrivateMetric,
+  emitPublicMetric,
+  getEnv,
+} from '../constants/worker.js';
 
 export default function getDataBucket(): R2Bucket | null {
-  const { AUTHN_DATA } = getEnv();
-  if (isR2Bucket(AUTHN_DATA)) {
-    return AUTHN_DATA;
+  const data: unknown = getEnv('AUTHN_DATA');
+  if (isR2Bucket(data)) {
+    return data;
   }
 
-  const { emitPublicMetric, logPrivateError } = getTelemetry();
-  if (typeof AUTHN_DATA === 'undefined') {
+  if (typeof data === 'undefined') {
     emitPublicMetric({ name: MetricName.MissingDataBucket });
     return null;
   }
 
-  emitPublicMetric({
+  emitPrivateMetric({
     name: MetricName.InvalidDataBucket,
-    type: typeof AUTHN_DATA,
+    value: typeof JSON.stringify(data),
   });
 
-  logPrivateError(
-    new Error('Invalid data bucket', {
-      cause: mapUnknownToString(AUTHN_DATA),
-    }),
-  );
+  emitPublicMetric({
+    name: MetricName.InvalidDataBucket,
+    type: typeof data,
+  });
 
   return null;
 }

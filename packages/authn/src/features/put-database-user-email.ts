@@ -1,10 +1,8 @@
 /// <reference types="@cloudflare/workers-types" />
-import { AccountNumber, UsageType } from '@quisido/workers-shared';
-import getTelemetry from '../utils/get-telemetry.js';
-import getDatabase from './get-database.js';
-import getUsage from './get-usage.js';
+import { affect } from '../constants/worker.js';
 import handleInsertIntoEmailsError from './handle-insert-into-emails-error.js';
 import handleInsertIntoEmailsResponse from './handle-insert-into-emails-response.js';
+import getDatabase from './shared/get-database.js';
 
 interface Options {
   readonly email: string;
@@ -18,13 +16,11 @@ VALUES (?, ?);
 
 export default function putDatabaseUserEmail({ email, userId }: Options): void {
   const db: D1Database = getDatabase();
-  const { affect } = getTelemetry();
-  const use = getUsage();
 
-  use({
-    account: AccountNumber.Quisido,
-    type: UsageType.D1Write,
-  });
+  // Use({
+  //   Account: AccountNumber.Quisido,
+  //   Type: UsageType.D1Write,
+  // });
   const insertIntoEmails: Promise<D1Response> = db
     .prepare(INSERT_INTO_EMAILS_QUERY)
     .bind(email, userId)

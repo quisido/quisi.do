@@ -1,6 +1,6 @@
 {
   "name": "@quisido/authn-shared",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "quisi.do <authn-shared@quisi.do>",
   "description": "isomorphic authentication modules",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/authn-shared#readme",

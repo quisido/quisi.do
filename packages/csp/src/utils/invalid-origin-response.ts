@@ -1,10 +1,10 @@
-import { StatusCode } from '../constants/status-code.js';
+import { StatusCode } from 'cloudflare-utils';
 import Response from './response.js';
 
 export default class InvalidOriginResponse extends Response {
   public constructor() {
     super(StatusCode.Forbidden, {
-      'Access-Control-Allow-Origin': 'null',
+      'access-control-allow-origin': 'null',
     });
   }
 }

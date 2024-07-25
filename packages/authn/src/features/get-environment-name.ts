@@ -1,30 +1,32 @@
 import { mapUnknownToString } from 'fmrs';
 import EnvironmentName from '../constants/environment-name.js';
 import { MetricName } from '../constants/metric-name.js';
-import getEnv from '../utils/get-env.js';
-import getTelemetry from '../utils/get-telemetry.js';
+import {
+  emitPublicMetric,
+  getEnv,
+  logPrivateError,
+} from '../constants/worker.js';
 import isEnvironmentName from '../utils/is-environment-name.js';
 
 export default function getEnvironmentName(): EnvironmentName {
-  const { ENVIRONMENT_NAME } = getEnv();
-  if (isEnvironmentName(ENVIRONMENT_NAME)) {
-    return ENVIRONMENT_NAME;
+  const envName: unknown = getEnv('ENVIRONMENT_NAME');
+  if (isEnvironmentName(envName)) {
+    return envName;
   }
 
-  const { emitPublicMetric, logPrivateError } = getTelemetry();
-  if (typeof ENVIRONMENT_NAME === 'undefined') {
+  if (typeof envName === 'undefined') {
     emitPublicMetric({ name: MetricName.MissingEnvironmentName });
     return EnvironmentName.Unknown;
   }
 
   emitPublicMetric({
     name: MetricName.InvalidEnvironmentName,
-    type: typeof ENVIRONMENT_NAME,
+    type: typeof envName,
   });
 
   logPrivateError(
     new Error('Invalid environment name', {
-      cause: mapUnknownToString(ENVIRONMENT_NAME),
+      cause: mapUnknownToString(envName),
     }),
   );
 

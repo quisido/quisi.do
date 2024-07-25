@@ -1,14 +1,14 @@
-import getRequest from '../utils/get-request.js';
+import { getRequestHeaders } from '../constants/worker.js';
 import getCookieDomain from './get-cookie-domain.js';
 
 export default function getAccessControlAllowOrigin(): string {
-  const request: Request = getRequest();
+  const headers: Headers = getRequestHeaders();
 
   /**
    * Allow `localhost` for Lighthouse reports in CI.
    * The HTTP protocol is for `serve`; the HTTPS protocol is for `dev`.
    */
-  const origin: string | null = request.headers.get('Origin');
+  const origin: string | null = headers.get('origin');
   if (origin === null) {
     return '*';
   }

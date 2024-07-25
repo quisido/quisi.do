@@ -1,10 +1,10 @@
-import { StatusCode } from '../constants/status-code.js';
+import { StatusCode } from 'cloudflare-utils';
 import Response from './response.js';
 
 export default class InvalidPathnameResponse extends Response {
   public constructor() {
     super(StatusCode.NotFound, {
-      'Access-Control-Max-Age': '31536000',
+      'access-control-max-age': '31536000',
     });
   }
 }
