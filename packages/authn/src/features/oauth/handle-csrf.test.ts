@@ -1,22 +1,18 @@
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
 import { MetricName } from '../../constants/metric-name.js';
-import Test from '../../test/test.js';
+import AuthnTest from '../../test/authn-test.js';
 
 describe('handleCrossSiteRequestForgery', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } = new Test();
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest();
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetch(
-      'https://localhost/patreon/?state=%7B%22returnPath%22%3A%22/test-return-path/%22%2C%22sessionId%22%3A%22test-session-id-state%22%7D',
-      {
-        headers: new Headers({
-          cookie: '__Secure-Session-ID=test-session-id-cookie',
-        }),
-      },
-    );
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon({
+      sessionIdCookie: 'test-session-id-cookie',
+      sessionIdState: 'test-session-id-state',
+    });
 
     // Assert
     expectResponseStatusToBe(StatusCode.SeeOther);

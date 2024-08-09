@@ -1,11 +1,11 @@
 import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
-import Test from '../test/test.js';
+import AuthnTest from '../test/authn-test.js';
 
 describe('handleInvalidCookieDomain', (): void => {
   it('should emit and default', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } = new Test({
+    const { expectPrivateMetric, expectPublicMetric, fetch } = new AuthnTest({
       env: {
         COOKIE_DOMAIN: true,
       },

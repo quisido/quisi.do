@@ -1,12 +1,12 @@
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
 import { MetricName } from '../../constants/metric-name.js';
-import Test from '../../test/test.js';
+import AuthnTest from '../../test/authn-test.js';
 
 describe('handleInvalidStateSessionId', (): void => {
   it('should emit and respond for missing session IDs', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } = new Test();
+    const { expectPrivateMetric, expectPublicMetric, fetch } = new AuthnTest();
 
     // Act
     const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetch(
@@ -36,7 +36,7 @@ describe('handleInvalidStateSessionId', (): void => {
 
   it('should emit and respond for invalid session IDs', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } = new Test();
+    const { expectPrivateMetric, expectPublicMetric, fetch } = new AuthnTest();
 
     // Act
     const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetch(

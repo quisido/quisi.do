@@ -2,12 +2,12 @@ import { WhoAmIResponseCode } from '@quisido/authn-shared';
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
 import { MetricName } from '../../constants/metric-name.js';
-import Test from '../../test/test.js';
+import AuthnTest from '../../test/authn-test.js';
 
 describe('handleMissingAuthnId', (): void => {
   it('should response with the correct code', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetch } = new Test();
+    const { expectPublicMetric, fetch } = new AuthnTest();
 
     // Act
     const {

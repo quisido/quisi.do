@@ -2,11 +2,14 @@ import { ErrorCode } from '@quisido/authn-shared';
 import { MetricName } from '../../constants/metric-name.js';
 import { emitPrivateMetric, emitPublicMetric } from '../../constants/worker.js';
 import FatalError from '../../utils/fatal-error.js';
+import handleMissingPatreonIdentityId from './handle-missing-patreon-identity-id.js';
 
-export default function handleInvalidPatreonIdentityId(id: unknown): never {
+export default function handleInvalidPatreonIdentityId(
+  data: Record<string, unknown>,
+  id: unknown,
+): never {
   if (typeof id === 'undefined') {
-    emitPublicMetric({ name: MetricName.MissingPatreonIdentityId });
-    throw new FatalError(ErrorCode.MissingPatreonIdentityId);
+    return handleMissingPatreonIdentityId(data);
   }
 
   emitPrivateMetric({

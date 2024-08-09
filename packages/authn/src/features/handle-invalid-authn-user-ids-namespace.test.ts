@@ -1,12 +1,12 @@
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
-import Test from '../test/test.js';
+import AuthnTest from '../test/authn-test.js';
 
 describe('handleInvalidAuthnUserIdsNamespace', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } = new Test({
+    const { expectPrivateMetric, expectPublicMetric, fetch } = new AuthnTest({
       env: {
         AUTHN_USER_IDS: true,
       },

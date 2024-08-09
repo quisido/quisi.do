@@ -2,35 +2,25 @@ import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
 import EnvironmentName from '../../constants/environment-name.js';
 import { MetricName } from '../../constants/metric-name.js';
-import Test from '../../test/test.js';
+import AuthnTest from '../../test/authn-test.js';
 
 describe('handleThrottledOAuthRequest', (): void => {
   it('should emit and response', async (): Promise<void> => {
     // Assemble
-    const testUrl =
-      'https://localhost/patreon/?state=%7B%22returnPath%22%3A%22/test-return-path/%22%2C%22sessionId%22%3A%22test-session-id%22%7D';
-
-    const { expectPrivateMetric, expectPublicMetric, fetch } = new Test({
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
       env: {
         ENVIRONMENT_NAME: EnvironmentName.Production,
       },
     });
 
     // Act
-    await fetch(testUrl, {
-      headers: new Headers({
-        'cf-connecting-ip': '1.2.3.4',
-      }),
+    await fetchPatreon({
+      ip: '1.2.3.4',
     });
 
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetch(
-      testUrl,
-      {
-        headers: new Headers({
-          'cf-connecting-ip': '1.2.3.4',
-        }),
-      },
-    );
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon({
+      ip: '1.2.3.4',
+    });
 
     // Assert
     expectResponseStatusToBe(StatusCode.SeeOther);

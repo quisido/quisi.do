@@ -1,9 +1,9 @@
 import { describe, it } from 'vitest';
-import Test from '../test/test.js';
+import AuthnTest from '../test/authn-test.js';
 
 describe('getAccessControlAllowOrigin', (): void => {
   it('should be * when origin is undefined', async (): Promise<void> => {
-    const { fetch } = new Test();
+    const { fetch } = new AuthnTest();
 
     const { expectResponseHeadersToBe } = await fetch(
       'https://localhost/whoami/',
@@ -24,7 +24,7 @@ describe('getAccessControlAllowOrigin', (): void => {
   });
 
   it('should support http://localhost:3000', async (): Promise<void> => {
-    const { fetch } = new Test();
+    const { fetch } = new AuthnTest();
 
     const { expectResponseHeadersToBe } = await fetch(
       'https://localhost/whoami/',
@@ -49,7 +49,7 @@ describe('getAccessControlAllowOrigin', (): void => {
   });
 
   it('should support https://localhost:3000', async (): Promise<void> => {
-    const { fetch } = new Test();
+    const { fetch } = new AuthnTest();
 
     const { expectResponseHeadersToBe } = await fetch(
       'https://localhost/whoami/',

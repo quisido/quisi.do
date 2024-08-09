@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import Test from '../../test/test.js';
+import AuthnTest from '../../test/authn-test.js';
 
 describe('getPatreonTokenResponse', (): void => {
   it('should POST to Patreon', async (): Promise<void> => {
@@ -7,16 +7,11 @@ describe('getPatreonTokenResponse', (): void => {
     const {
       expectFetchToHaveBeenCalledWith,
       expectFetchToHaveBeenCalledWithHeaders,
-      fetch,
-      onFetch,
-    } = new Test();
-
-    onFetch('https://test.patreon.com/api/oauth2/token', new Response());
+      fetchPatreon,
+    } = new AuthnTest();
 
     // Act
-    await fetch(
-      'https://localhost/patreon/?code=1234&state=%7B%22returnPath%22%3A%22/test-return-path/%22%2C%22sessionId%22%3A%22test-session-id%22%7D',
-    );
+    await fetchPatreon();
 
     // Assert
     expectFetchToHaveBeenCalledWith(

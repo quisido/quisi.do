@@ -1,10 +1,10 @@
 import { describe, it } from 'vitest';
-import Test from '../test/test.js';
+import AuthnTest from '../test/authn-test.js';
 
 describe('getCookieDomain', (): void => {
   it('should return the COOKIE_DOMAIN environment variable', async (): Promise<void> => {
     // Assemble
-    const { fetch } = new Test({
+    const { fetch } = new AuthnTest({
       env: {
         COOKIE_DOMAIN: 'test.quisi.do',
       },
