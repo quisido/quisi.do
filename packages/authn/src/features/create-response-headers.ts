@@ -15,9 +15,9 @@ export default function createResponseHeaders({
   const host: string = getHost();
 
   return new Headers({
-    'Content-Location': `https://${host}${returnPath}`,
-    Location: `https://${host}${returnPath}`,
-    'Set-Cookie': [
+    'content-location': `https://${host}${returnPath}`,
+    location: `https://${host}${returnPath}`,
+    'set-cookie': [
       `__Secure-Authentication-ID=${authnId}`,
       `Domain=${cookieDomain}`,
       `Max-Age=${SECONDS_PER_DAY.toString()}`,

@@ -40,10 +40,6 @@ export default function putDatabaseUserMetadata({
   });
 
   // Associate user ID with OAuth ID.
-  // Use({
-  //   Account: AccountNumber.Quisido,
-  //   Type: UsageType.D1Write,
-  // });
   const insertIntoOAuth: Promise<D1Response> = db
     .prepare(INSERT_INTO_OAUTH_QUERY)
     .bind(userId, oAuthProvider, oAuthId)

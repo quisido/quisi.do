@@ -1,16 +1,21 @@
 {
   "name": "fullstory-react",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "quisi.do <fullstory-react@quisi.do>",
   "description": "FullStory integration with React",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/fullstory-react#readme",
   "license": "MIT",
   "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
     "email": "fullstory-react@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
+  },
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
   },
   "funding": {
     "type": "individual",
@@ -21,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/quisido/quisi.do.git"
+    "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "scripts": {
     "attw": "attw --quiet",
@@ -29,7 +34,8 @@
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "yarn run tsc",
-    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,vitest \"yarn run attw\" \"yarn run eslint\" \"yarn run vitest:run\"",
+    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,publint,vitest \"yarn run attw\" \"yarn run eslint\" \"yarn run publint\" \"yarn run vitest:run\"",
+    "publint": "publint",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json",
     "vitest": "vitest",
     "vitest:run": "vitest run",
@@ -72,6 +78,7 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "jsdom": "^24.1.0",
     "prettier": "^3.3.2",
+    "publint": "^0.2.10",
     "react": "19.0.0-rc-e02baf6c92-20240627",
     "react-dom": "19.0.0-rc-e02baf6c92-20240627",
     "react-test-renderer": "^18.3.1",

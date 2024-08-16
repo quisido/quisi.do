@@ -1,4 +1,7 @@
+import { expect } from 'vitest';
 import EnvironmentName from "../constants/environment-name.js";
+import { SECONDS_PER_DAY } from '../constants/time.js';
+import { EXPECT_ANY_NUMBER } from '../test/expect-any.js';
 import TestAnalyticsEngineDataset from "./analytics-engine-dataset.js";
 import type FetchTest from "./fetch-test.js";
 import TestKVNamespace from "./kv-namespace.js";
@@ -21,13 +24,16 @@ const DEFAULT_FETCH_PATREON_OPTIONS: FetchPatreonOptions = {};
 const DEFAULT_OPTIONS: Options = {};
 
 export default class AuthnTest extends WorkerTest {
+  #authnUserIds: TestKVNamespace;
+
   public constructor({
     authnUserIds = DEFAULT_AUTHN_USER_IDS,
     env = DEFAULT_ENV,
   }: Options = DEFAULT_OPTIONS) {
+    const authnUserIdsKVNamespace = new TestKVNamespace(authnUserIds);
     super({
       env: {
-        AUTHN_USER_IDS: new TestKVNamespace(authnUserIds),
+        AUTHN_USER_IDS: authnUserIdsKVNamespace,
         ENVIRONMENT_NAME: EnvironmentName.Test,
         HOST: 'test.host',
         PATREON_OAUTH_CLIENT_ID: 'test-client-id',
@@ -40,9 +46,17 @@ export default class AuthnTest extends WorkerTest {
       },
     });
 
+    this.#authnUserIds = authnUserIdsKVNamespace;
     this.mockPatreonIdentity();
     this.mockPatreonToken();
   }
+
+  public expectAuthnUserIdsPut = (authnId: string, id: string): void => {
+    expect(this.#authnUserIds.put).toHaveBeenCalledWith(authnId, id, {
+      expiration: EXPECT_ANY_NUMBER,
+      expirationTtl: SECONDS_PER_DAY,
+    });
+  };
 
   public fetchPatreon = async ({
     ip = '127.0.0.1',

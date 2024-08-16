@@ -1,17 +1,21 @@
 {
   "name": "@monorepo-template/tree-logger",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "quisi.do <monorepo-template-tree-logger@quisi.do>",
   "description": "a logger for hierarchical validation",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/tree-logger#readme",
   "license": "MIT",
   "main": "./dist/index.js",
-  "repository": "github:quisido/quisi.do",
+  "module": "./dist/index.js",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
     "email": "monorepo-template-tree-logger@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
+  },
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
   },
   "funding": {
     "type": "individual",
@@ -20,13 +24,18 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git"
+  },
   "scripts": {
     "attw": "attw --quiet",
     "clean": "rm -rf coverage dist node_modules && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "yarn run tsc",
-    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint \"yarn run attw\" \"yarn run eslint\"",
+    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,publint \"yarn run attw\" \"yarn run eslint\" \"yarn run publint\"",
+    "publint": "publint",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json",
     "vitest": "vitest",
     "vitest:run": "vitest run",
@@ -52,6 +61,7 @@
     "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "prettier": "^3.3.2",
+    "publint": "^0.2.10",
     "tslib": "^2.6.3",
     "typescript": "~5.4.5",
     "vite": "^5.3.2",

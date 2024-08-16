@@ -1,4 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
+import { vi, type Mock } from 'vitest';
 import unimplementedMethod from './unimplemented-method.js';
 
 export default class TestKVNamespace<Key extends string = string>
@@ -7,7 +8,6 @@ export default class TestKVNamespace<Key extends string = string>
   public delete = unimplementedMethod;
   public getWithMetadata = unimplementedMethod;
   public list = unimplementedMethod;
-  public put = unimplementedMethod;
   #record: Partial<Record<string, string>>;
 
   public constructor(record: Partial<Record<string, string>>) {
@@ -59,4 +59,10 @@ export default class TestKVNamespace<Key extends string = string>
         throw new Error('Not implemented');
     }
   }
+
+  #put: KVNamespace<Key>['put'] = (): Promise<void> => {
+    return Promise.resolve();
+  };
+
+  public put: Mock<Parameters<KVNamespace<Key>['put']>, ReturnType<KVNamespace<Key>['put']>> = vi.fn(this.#put);
 }
