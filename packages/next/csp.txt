@@ -7,12 +7,14 @@ connect-src
   https://dataplane.rum.us-west-2.amazonaws.com/appmonitors/8495b9c9-f57e-4395-9ca6-6c01862c107b
   https://sts.us-west-2.amazonaws.com/
   https://*.clarity.ms/collect
+  https://www.clarity.ms/report-err/eusb
   https://cloudflareinsights.com/cdn-cgi/rum
   https://stats.g.doubleclick.net/g/collect
   https://edge.fullstory.com/s/settings/o-1X4ZHB-na1/v1/web
   https://rs.fullstory.com/rec/bundle/v2
   https://rs.fullstory.com/rec/page
   https://analytics.google.com/g/collect
+  https://region1.analytics.google.com/g/collect
   https://localhost:5882/whoami/
   https://localhost:6586/1/
   https://r.logr-ingest.com/i
@@ -36,16 +38,20 @@ img-src
   https://www.google.ca/ads/ga-audiences
   https://www.google.co.il/ads/ga-audiences
   https://www.google.co.in/ads/ga-audiences
+  https://www.google.co.jp/ads/ga-audiences
   https://www.google.co.kr/ads/ga-audiences
   https://www.google.co.ma/ads/ga-audiences
   https://www.google.co.uk/ads/ga-audiences
   https://www.google.co.uz/ads/ga-audiences
   https://www.google.com.ar/ads/ga-audiences
+  https://www.google.com.au/ads/ga-audiences
   https://www.google.com.br/ads/ga-audiences
+  https://www.google.com.hk/ads/ga-audiences
   https://www.google.com.kh/ads/ga-audiences
   https://www.google.com.pk/ads/ga-audiences
   https://www.google.com.sg/ads/ga-audiences
   https://www.google.com.tr/ads/ga-audiences
+  https://www.google.com.vn/ads/ga-audiences
   https://www.google.de/ads/ga-audiences
   https://www.google.fr/ads/ga-audiences
   https://www.google.nl/ads/ga-audiences
