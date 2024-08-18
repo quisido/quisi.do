@@ -1,5 +1,6 @@
 import { MetricName } from '../constants/metric-name.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
+import { INSERT_INTO_OAUTH_QUERY } from '../constants/queries.js';
 import { affect, emitPublicMetric } from '../constants/worker.js';
 import handleInsertIntoOAuthError from './handle-insert-into-oauth-error.js';
 import handleInsertIntoOAuthResponse from './handle-insert-into-oauth-response.js';
@@ -15,11 +16,6 @@ interface Options {
   readonly sizeAfter: number;
   readonly userId: number;
 }
-
-const INSERT_INTO_OAUTH_QUERY = `
-INSERT INTO \`oauth\` (\`userId\`, \`oAuthProvider\`, \`oAuthId\`)
-VALUES (?, ?, ?);
-`;
 
 export default function putDatabaseUserMetadata({
   changes,

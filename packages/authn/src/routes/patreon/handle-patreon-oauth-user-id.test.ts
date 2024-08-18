@@ -1,10 +1,11 @@
 import { StatusCode } from "cloudflare-utils";
 import { describe, expect, it } from "vitest";
 import { MetricName } from "../../constants/metric-name.js";
+import OAuthProvider from "../../constants/oauth-provider.js";
+import { INSERT_INTO_OAUTH_QUERY, INSERT_INTO_USERS_QUERY, SELECT_USERID_FROM_OAUTH_QUERY } from "../../constants/queries.js";
 import AuthnTest from "../../test/authn-test.js";
 import TestD1Database from "../../test/d1-database.js";
 import { EXPECT_ANY_NUMBER, EXPECT_ANY_STRING } from '../../test/expect-any.js';
-import unimplementedMethod from "../../test/unimplemented-method.js";
 
 describe('handlePatreonOAuthUserId', (): void => {
   it('should respond for existing users', async (): Promise<void> => {
@@ -12,37 +13,8 @@ describe('handlePatreonOAuthUserId', (): void => {
     const { expectAuthnUserIdsPut, fetchPatreon, mockPatreonIdentity, mockPatreonToken } = new AuthnTest({
       env: {
         AUTHN_DB: new TestD1Database({
-          prepare: (): D1PreparedStatement => {
-            return {
-              all: unimplementedMethod,
-              first: unimplementedMethod,
-              raw: unimplementedMethod,
-              run: unimplementedMethod,
-              bind(): D1PreparedStatement {
-                return {
-                  bind: unimplementedMethod,
-                  first: unimplementedMethod,
-                  raw: unimplementedMethod,
-                  run: unimplementedMethod,
-                  all<T>(): Promise<D1Result<T>> {
-                    return Promise.resolve({
-                      results: [{ userId: 1234 } as T],
-                      success: true,
-
-                      meta: {
-                        changed_db: true,
-                        changes: 1,
-                        duration: 1,
-                        last_row_id: 1,
-                        rows_read: 1,
-                        rows_written: 1,
-                        size_after: 1,
-                      },
-                    });
-                  }
-                };
-              },
-            };
+          [SELECT_USERID_FROM_OAUTH_QUERY]: {
+            results: [{userId: 1234}],
           },
         }),
       },
@@ -67,58 +39,19 @@ describe('handlePatreonOAuthUserId', (): void => {
     });
   });
 
-  it('should respond for new users', async (): Promise<void> => {
+  it('should insert and respond for new users', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetchPatreon, mockPatreonIdentity, mockPatreonToken } = new AuthnTest({
+    const { expectDatabaseToHaveQueried, expectPrivateMetric, expectPublicMetric, fetchPatreon, mockPatreonIdentity, mockPatreonToken } = new AuthnTest({
       env: {
         AUTHN_DB: new TestD1Database({
-          prepare: (): D1PreparedStatement => {
-            return {
-              all: unimplementedMethod,
-              first: unimplementedMethod,
-              raw: unimplementedMethod,
-              run: unimplementedMethod,
-              bind(): D1PreparedStatement {
-                return {
-                  bind: unimplementedMethod,
-                  first: unimplementedMethod,
-                  raw: unimplementedMethod,
-
-                  all<T>(): Promise<D1Result<T>> {
-                    return Promise.resolve({
-                      results: [],
-                      success: true,
-
-                      meta: {
-                        changed_db: true,
-                        changes: 1,
-                        duration: 1,
-                        last_row_id: 1,
-                        rows_read: 1,
-                        rows_written: 1,
-                        size_after: 1,
-                      },
-                    });
-                  },
-
-                  run(): Promise<D1Response> {
-                    return Promise.resolve({
-                      success: true,
-
-                      meta: {
-                        changed_db: true,
-                        changes: 1,
-                        duration: 1,
-                        last_row_id: 1,
-                        rows_read: 1,
-                        rows_written: 1,
-                        size_after: 1,
-                      },
-                    });
-                  },
-                };
-              },
-            };
+          [INSERT_INTO_OAUTH_QUERY]: {
+            lastRowId: 1234,
+          },
+          [INSERT_INTO_USERS_QUERY]: {
+            lastRowId: 5678,
+          },
+          [SELECT_USERID_FROM_OAUTH_QUERY]: {
+            results: [],
           },
         }),
       },
@@ -131,7 +64,38 @@ describe('handlePatreonOAuthUserId', (): void => {
     const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon();
 
     // Assert
+    expectDatabaseToHaveQueried('AUTHN_DB', SELECT_USERID_FROM_OAUTH_QUERY, [OAuthProvider.Patreon, 'test-id']);
+    expectDatabaseToHaveQueried('AUTHN_DB', INSERT_INTO_USERS_QUERY, [null, null, 0, EXPECT_ANY_NUMBER]);
+
     expectResponseStatusToBe(StatusCode.SeeOther);
+
+    expectPublicMetric({
+      changes: 1,
+      duration: EXPECT_ANY_NUMBER,
+      name: MetricName.AuthenticationCreated,
+      sizeAfter: 1,
+      userId: 5678,
+    });
+
+    expectPrivateMetric({
+      changes: 1,
+      duration: 1,
+      endTime: EXPECT_ANY_NUMBER,
+      lastRowId: 1234,
+      name: MetricName.OAuthInserted,
+      sizeAfter: 1,
+      startTime: EXPECT_ANY_NUMBER,
+      userId: 5678,
+    });
+
+    expectPublicMetric({
+      changes: 1,
+      duration: EXPECT_ANY_NUMBER,
+      endTime: EXPECT_ANY_NUMBER,
+      name: MetricName.OAuthInserted,
+      sizeAfter: 1,
+      startTime: EXPECT_ANY_NUMBER,
+    });
 
     expectPublicMetric({
       endTime: EXPECT_ANY_NUMBER,

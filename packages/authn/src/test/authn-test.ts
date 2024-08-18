@@ -1,8 +1,9 @@
-import { expect } from 'vitest';
+import { assert, expect } from 'vitest';
 import EnvironmentName from "../constants/environment-name.js";
 import { SECONDS_PER_DAY } from '../constants/time.js';
 import { EXPECT_ANY_NUMBER } from '../test/expect-any.js';
 import TestAnalyticsEngineDataset from "./analytics-engine-dataset.js";
+import TestD1Database from './d1-database.js';
 import type FetchTest from "./fetch-test.js";
 import TestKVNamespace from "./kv-namespace.js";
 import WorkerTest from "./worker-test.js";
@@ -56,6 +57,17 @@ export default class AuthnTest extends WorkerTest {
       expiration: EXPECT_ANY_NUMBER,
       expirationTtl: SECONDS_PER_DAY,
     });
+  };
+
+  public expectDatabaseToHaveQueried = (
+    name: string,
+    query: string,
+    values: readonly (null | number | string)[],
+  ): void => {
+    const db: unknown = this.env[name];
+    assert(db instanceof TestD1Database);
+    const { expectToHaveQueried } = db;
+    expectToHaveQueried(query, values);
   };
 
   public fetchPatreon = async ({

@@ -1,4 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
+import { INSERT_INTO_EMAILS_QUERY } from '../constants/queries.js';
 import { affect } from '../constants/worker.js';
 import handleInsertIntoEmailsError from './handle-insert-into-emails-error.js';
 import handleInsertIntoEmailsResponse from './handle-insert-into-emails-response.js';
@@ -8,11 +9,6 @@ interface Options {
   readonly email: string;
   readonly userId: number;
 }
-
-const INSERT_INTO_EMAILS_QUERY = `
-INSERT INTO \`emails\` (\`address\`, \`userId\`)
-VALUES (?, ?);
-`;
 
 export default function putDatabaseUserEmail({ email, userId }: Options): void {
   const db: D1Database = getDatabase();

@@ -1,4 +1,5 @@
 import type OAuthProvider from '../../constants/oauth-provider.js';
+import { SELECT_USERID_FROM_OAUTH_QUERY } from '../../constants/queries.js';
 import getDatabase from './get-database.js';
 
 interface Result {
@@ -7,14 +8,6 @@ interface Result {
   readonly rowsRead: number;
   readonly sizeAfter: number;
 }
-
-const SELECT_USERID_FROM_OAUTH_QUERY = `
-SELECT \`userId\`
-FROM \`oauth\`
-WHERE \`oAuthProvider\` = ?
-  AND \`oAuthId\` = ?
-LIMIT 1;
-`;
 
 export default async function getUserIdFromOAuth(
   oAuthProvider: OAuthProvider,
