@@ -61,6 +61,7 @@
     "babel-plugin-replace-import-extension": "^1.1.4",
     "cjs-ts": "workspace:^",
     "concurrently": "^8.2.2",
+    "cookie": "^0.6.0",
     "eslint": "^9.5.0",
     "publint": "^0.2.10",
     "typescript": "~5.4.5",

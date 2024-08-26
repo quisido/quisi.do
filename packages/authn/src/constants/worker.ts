@@ -10,6 +10,7 @@ export const {
   getCookies,
   getEnv,
   getFetch,
+  getNow,
   getRequestHeaders,
   getRequestMethod,
   getRequestPathname,

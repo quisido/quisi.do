@@ -4,6 +4,7 @@ import { MetricName } from '../constants/metric-name.js';
 import {
   emitPrivateMetric,
   emitPublicMetric,
+  getNow,
   logPrivateError,
 } from '../constants/worker.js';
 
@@ -11,11 +12,11 @@ export default function handleInsertIntoOAuthError(
   userId: number,
 ): (err: unknown) => void {
   const snapshot: Snapshot = new Snapshot();
-  const startTime: number = Date.now();
+  const startTime: number = getNow();
 
   return function handleCatch(err: unknown): void {
-    const endTime: number = Date.now();
     return snapshot.run((): void => {
+      const endTime: number = getNow();
       logPrivateError(mapUnknownToError(err));
 
       emitPrivateMetric({

@@ -8,6 +8,7 @@ export interface Options {
   readonly console: Console;
   readonly contextVar: Variable<WorkerFetchContext>;
   readonly fetch: Fetcher['fetch'];
+  readonly getNow?: (() => number) | undefined;
   readonly invalidPrivateDatasetMetricName: string;
   readonly invalidPublicDatasetMetricName: string;
   readonly invalidTraceParentMetricName: string;

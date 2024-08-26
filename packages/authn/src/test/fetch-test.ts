@@ -1,4 +1,5 @@
 import type { StatusCode } from 'cloudflare-utils';
+import { parse } from 'cookie';
 import { reduceEntriesToRecord } from 'fmrs';
 import { expect } from 'vitest';
 
@@ -7,6 +8,26 @@ export default class FetchTest {
 
   public constructor(response: Response) {
     this.#response = response;
+  }
+
+  public get authnIdCookie(): string {
+    const authnId: string | undefined =
+      this.#cookies['__Secure-Authentication-ID'];
+
+    if (typeof authnId === 'undefined') {
+      throw new Error('Expected an authentication ID cookie.');
+    }
+
+    return authnId;
+  }
+
+  get #cookies(): Record<string, string> {
+    const cookies: string | undefined = this.#headersRecord['set-cookie'];
+    if (typeof cookies === 'undefined') {
+      throw new Error('Expected cookies to be set.')
+    }
+
+    return parse(cookies);
   }
 
   public expectResponseStatusToBe = (status: StatusCode): void => {

@@ -4,6 +4,7 @@ import { MetricName } from '../constants/metric-name.js';
 import {
   emitPrivateMetric,
   emitPublicMetric,
+  getNow,
   logPrivateError,
 } from '../constants/worker.js';
 
@@ -11,10 +12,10 @@ export default function handleInsertIntoEmailsError(
   userId: number,
 ): (err: unknown) => void {
   const snapshot: Snapshot = new Snapshot();
-  const startTime: number = Date.now();
+  const startTime: number = getNow();
 
   return function handleCatch(err: unknown): void {
-    const endTime: number = Date.now();
+    const endTime: number = getNow();
     const duration: number = endTime - startTime;
     return snapshot.run((): void => {
       logPrivateError(mapUnknownToError(err));

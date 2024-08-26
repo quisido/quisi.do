@@ -1,4 +1,5 @@
 import type OAuthProvider from '../../constants/oauth-provider.js';
+import { getNow } from '../../constants/worker.js';
 import getDataBucket from '../get-data-bucket.js';
 
 export default async function writeOAuthResponse(
@@ -16,7 +17,7 @@ export default async function writeOAuthResponse(
     JSON.stringify(response),
     {
       customMetadata: {
-        timestamp: Date.now().toString(),
+        timestamp: getNow().toString(),
       },
       httpMetadata: {
         contentType: 'application/json',

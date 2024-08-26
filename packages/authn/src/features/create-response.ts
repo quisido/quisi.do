@@ -1,6 +1,6 @@
 import { StatusCode } from 'cloudflare-utils';
 import { SECONDS_PER_DAY } from '../constants/time.js';
-import { affect } from '../constants/worker.js';
+import { affect, getNow } from '../constants/worker.js';
 import createAuthnId from '../utils/create-authn-id.js';
 import getNowSeconds from '../utils/get-now-seconds.js';
 import createResponseHeaders from './create-response-headers.js';
@@ -25,7 +25,7 @@ export default function createResponse({ id, returnPath }: Options): Response {
    *   If users are getting unauthenticated errors despite having authenticated,
    * then we can `await` this to fix that issue.
    */
-  const startTime: number = Date.now();
+  const startTime: number = getNow();
   const expiration: number = nowSeconds + SECONDS_PER_DAY;
   affect(
     authnUserIds

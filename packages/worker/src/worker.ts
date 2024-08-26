@@ -2,14 +2,18 @@ import { Variable } from '@quisido/proposal-async-context';
 import { type IncomingRequest } from 'cloudflare-utils';
 import { type AllOrNone } from './all-or-none.js';
 import catchSnapshot from './catch-snapshot.js';
-import createWorkerExportedHandler, {
-  type Options as CreateWorkerExportedHandlerOptions,
-} from './create-worker-exported-handler.js';
+import createWorkerExportedHandler from './create-worker-exported-handler.js';
 import mapHeadersToCookies from './map-headers-to-cookies.js';
 import mapRequestToPathname from './map-request-to-pathname.js';
 import { type Metric } from './metric.js';
 import snapshot from './snapshot.js';
 import type WorkerFetchContext from './worker-fetch-context.js';
+
+export interface CreateExportedHandlerOptions {
+  readonly console: Console;
+  readonly fetch: Fetcher['fetch'];
+  readonly getNow?: (() => number) | undefined;
+}
 
 interface FetchOptions {
   readonly invalidPrivateDatasetMetricName: string;
@@ -57,13 +61,15 @@ export default class Worker {
 
   public createExportedHandler = ({
     console,
+    getNow,
     fetch,
-  }: CreateWorkerExportedHandlerOptions): ExportedHandler => {
+  }: CreateExportedHandlerOptions): ExportedHandler => {
     const ExportedHandler = createWorkerExportedHandler({
       ...this.#fetchOptions,
       console,
       fetch,
       fetchContextVar: this.#fetchContextVar,
+      getNow,
     });
 
     return new ExportedHandler();
@@ -108,6 +114,10 @@ export default class Worker {
 
   public getFetch = (): Fetcher['fetch'] => {
     return this.#fetchContext.getFetch();
+  };
+
+  public getNow = (): number => {
+    return this.#fetchContext.getNow();
   };
 
   public getRequest = (): IncomingRequest => {

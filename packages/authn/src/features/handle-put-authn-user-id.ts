@@ -1,6 +1,6 @@
 import { Snapshot } from '@quisido/proposal-async-context';
 import { MetricName } from '../constants/metric-name.js';
-import { emitPublicMetric } from '../constants/worker.js';
+import { emitPublicMetric, getNow } from '../constants/worker.js';
 import { setAuthnUserIdInMemory } from './authn-user-id.js';
 
 interface Options {
@@ -17,11 +17,11 @@ export default function handlePutAuthnUserId({
   const snapshot: Snapshot = new Snapshot();
 
   return (): void => {
-    setAuthnUserIdInMemory(authnId, id);
-
     snapshot.run((): void => {
+      setAuthnUserIdInMemory(authnId, id);
+
       emitPublicMetric({
-        endTime: Date.now(),
+        endTime: getNow(),
         name: MetricName.AuthnIdCreated,
         startTime,
       });

@@ -2,6 +2,7 @@
 import { isD1Database, type IncomingRequest } from 'cloudflare-utils';
 import { EventEmitter } from 'eventemitter3';
 import createTraceId from './create-trace-id.js';
+import defaultGetNow from './default-get-now.js';
 import { DEFAULT_TRACE_PARENT_METRIC_DIMENSIONS } from './default-trace-parent-metric-dimensions.js';
 import mapRequestToTraceParent from './map-request-to-trace-parent.js';
 import mapTraceParentToMetricDimensions from './map-trace-parent-to-metric-dimensions.js';
@@ -25,6 +26,7 @@ export interface Options<
 > {
   readonly ctx: ExecutionContext;
   readonly env: Env;
+  readonly getNow?: (() => number) | undefined;
   readonly invalidTraceParentMetricName: string;
   readonly missingTraceParentMetricName: string;
   readonly request: IncomingRequest<CfHostMetadata>;
@@ -37,6 +39,7 @@ export default class FetchContext<
   readonly #ctx: ExecutionContext;
   readonly #env: Env;
   readonly #eventEmitter: EventEmitter<EventTypes>;
+  readonly #getNow: () => number;
   readonly #queue: (() => void)[] = [];
   readonly #request: IncomingRequest<CfHostMetadata>;
   readonly #traceId: string;
@@ -45,22 +48,23 @@ export default class FetchContext<
   public constructor({
     ctx,
     env,
+    getNow = defaultGetNow,
     invalidTraceParentMetricName,
     missingTraceParentMetricName,
     request,
   }: Options<Env, CfHostMetadata>) {
+    this.#ctx = ctx;
+    this.#env = env;
     this.#eventEmitter = new EventEmitter();
-
+    this.#getNow = getNow;
+    this.#request = request;
     this.#traceId = createTraceId();
+
     this.#traceParent = this.#createTraceParent(
       request,
       missingTraceParentMetricName,
       invalidTraceParentMetricName,
     );
-
-    this.#ctx = ctx;
-    this.#env = env;
-    this.#request = request;
   }
 
   public affect = (promise: Promise<unknown>): void => {
@@ -144,6 +148,10 @@ export default class FetchContext<
     }
 
     return db;
+  }
+
+  public get getNow(): () => number {
+    return this.#getNow;
   }
 
   public logPrivateError = (err: Error): void => {

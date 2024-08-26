@@ -1,6 +1,7 @@
 import { assert, expect } from 'vitest';
 import EnvironmentName from "../constants/environment-name.js";
 import { SECONDS_PER_DAY } from '../constants/time.js';
+import { createExportedHandler } from '../constants/worker.js';
 import { EXPECT_ANY_NUMBER } from '../test/expect-any.js';
 import TestAnalyticsEngineDataset from "./analytics-engine-dataset.js";
 import TestD1Database from './d1-database.js';
@@ -26,6 +27,7 @@ const DEFAULT_OPTIONS: Options = {};
 
 export default class AuthnTest extends WorkerTest {
   #authnUserIds: TestKVNamespace;
+  #now: number | undefined;
 
   public constructor({
     authnUserIds = DEFAULT_AUTHN_USER_IDS,
@@ -33,6 +35,8 @@ export default class AuthnTest extends WorkerTest {
   }: Options = DEFAULT_OPTIONS) {
     const authnUserIdsKVNamespace = new TestKVNamespace(authnUserIds);
     super({
+      createExportedHandler,
+
       env: {
         AUTHN_USER_IDS: authnUserIdsKVNamespace,
         ENVIRONMENT_NAME: EnvironmentName.Test,
@@ -44,6 +48,10 @@ export default class AuthnTest extends WorkerTest {
         PRIVATE_DATASET: new TestAnalyticsEngineDataset(),
         PUBLIC_DATASET: new TestAnalyticsEngineDataset(),
         ...env,
+      },
+
+      getNow: (): number => {
+        return this.#now ?? Date.now();
       },
     });
 
@@ -121,5 +129,9 @@ export default class AuthnTest extends WorkerTest {
       `${PATREON_OAUTH_HOST}/api/oauth2/token`,
       new Response(body, init),
     );
-  }
+  };
+
+  public setNow = (now: number): void => {
+    this.#now = now;
+  };
 }

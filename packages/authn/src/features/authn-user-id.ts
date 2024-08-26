@@ -6,7 +6,7 @@
 
 import { MetricName } from '../constants/metric-name.js';
 import { MILLISECONDS_PER_DAY } from '../constants/time.js';
-import { emitPrivateMetric, emitPublicMetric } from '../constants/worker.js';
+import { emitPrivateMetric, emitPublicMetric, getNow } from '../constants/worker.js';
 
 interface State {
   readonly expiration: number;
@@ -25,7 +25,7 @@ export const getAuthnUserIdFromMemory = (
 
   // Clean up! The cache has expired. 🧼
   const { expiration, userId } = state;
-  if (expiration < Date.now()) {
+  if (expiration < getNow()) {
     AUTHN_USER_ID_MAP.delete(authnId);
 
     emitPublicMetric({
@@ -50,7 +50,7 @@ export const setAuthnUserIdInMemory = (
   userId: number,
 ): void => {
   AUTHN_USER_ID_MAP.set(authnId, {
-    expiration: Date.now() + MILLISECONDS_PER_DAY,
+    expiration: getNow() + MILLISECONDS_PER_DAY,
     userId,
   });
 };

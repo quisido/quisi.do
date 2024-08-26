@@ -1,5 +1,5 @@
+import type { CreateExportedHandlerOptions } from '@quisido/worker';
 import { assert, expect, vi, type Mock } from 'vitest';
-import { createExportedHandler } from '../constants/worker.js';
 import expectPrivateLog from './expect-private-log.js';
 import expectPrivateMetric from './expect-private-metric.js';
 import expectPublicMetric from './expect-public-metric.js';
@@ -10,10 +10,14 @@ import { TEST_CONSOLE } from './test-console.js';
 
 interface Options {
   readonly env?: Partial<Record<string, unknown>>;
+  readonly getNow?: (() => number) | undefined;
+
+  readonly createExportedHandler: (
+    options: CreateExportedHandlerOptions,
+  ) => ExportedHandler;
 }
 
 const DEFAULT_ENV: Partial<Record<string, unknown>> = {};
-const DEFAULT_OPTIONS: Options = {};
 const FIRST = 0;
 
 export default class WorkerTest {
@@ -27,12 +31,15 @@ export default class WorkerTest {
   readonly #passThroughOnException: () => void = vi.fn();
 
   public constructor({
+    createExportedHandler,
     env = DEFAULT_ENV,
-  }: Options = DEFAULT_OPTIONS) {
+    getNow,
+  }: Options) {
     this.#env = env;
     this.#exportedHandler = createExportedHandler({
       console: TEST_CONSOLE,
       fetch: this.#fetch,
+      getNow,
     });
   }
 

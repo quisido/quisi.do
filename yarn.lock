@@ -5223,6 +5223,7 @@ __metadata:
     cjs-ts: "workspace:^"
     cloudflare-utils: "workspace:^"
     concurrently: "npm:^8.2.2"
+    cookie: "npm:^0.6.0"
     eslint: "npm:^9.5.0"
     fmrs: "workspace:^"
     form-urlencoded: "npm:^6.1.5"

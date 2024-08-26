@@ -11,6 +11,7 @@ interface BaseOptions {
 
 interface FetchOptions {
   readonly fetchContextVar: Variable<WorkerFetchContext>;
+  readonly getNow?: (() => number) | undefined;
   readonly invalidPrivateDatasetMetricName: string;
   readonly invalidPublicDatasetMetricName: string;
   readonly invalidTraceParentMetricName: string;
@@ -27,6 +28,7 @@ export default function createWorkerExportedHandler({
   console,
   fetch,
   fetchContextVar,
+  getNow,
   invalidPrivateDatasetMetricName,
   invalidPublicDatasetMetricName,
   invalidTraceParentMetricName,
@@ -45,6 +47,7 @@ export default function createWorkerExportedHandler({
           console,
           contextVar: fetchContextVar,
           fetch,
+          getNow,
           invalidPrivateDatasetMetricName,
           invalidPublicDatasetMetricName,
           invalidTraceParentMetricName,

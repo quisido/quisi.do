@@ -19,7 +19,7 @@ export default function getDataBucket(): R2Bucket | null {
 
   emitPrivateMetric({
     name: MetricName.InvalidDataBucket,
-    value: typeof JSON.stringify(data),
+    value: JSON.stringify(data),
   });
 
   emitPublicMetric({

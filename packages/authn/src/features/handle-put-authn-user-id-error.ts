@@ -1,7 +1,7 @@
 import { Snapshot } from '@quisido/proposal-async-context';
 import { mapUnknownToError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
-import { emitPublicMetric, logPrivateError } from '../constants/worker.js';
+import { emitPublicMetric, getNow, logPrivateError } from '../constants/worker.js';
 import { setAuthnUserIdInMemory } from './authn-user-id.js';
 
 interface Options {
@@ -18,13 +18,14 @@ export default function handlePutAuthnUserIdError({
   const snapshot: Snapshot = new Snapshot();
 
   return (err: unknown): void => {
-    // If the KV namespace failed, fallback to the cache.
-    setAuthnUserIdInMemory(authnId, id);
-
     snapshot.run((): void => {
+      // If the KV namespace failed, fallback to the memory cache.
+      setAuthnUserIdInMemory(authnId, id);
+
+      const endTime: number = getNow();
       logPrivateError(mapUnknownToError(err));
       emitPublicMetric({
-        endTime: Date.now(),
+        endTime,
         name: MetricName.AuthnIdError,
         startTime,
       });
