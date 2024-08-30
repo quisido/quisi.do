@@ -4,19 +4,16 @@ import AuthnTest from '../test/authn-test.js';
 describe('getCookieDomain', (): void => {
   it('should return the COOKIE_DOMAIN environment variable', async (): Promise<void> => {
     // Assemble
-    const { fetch } = new AuthnTest({
+    const { fetchWhoAmI } = new AuthnTest({
       cookieDomain: 'test.quisi.do',
     });
 
     // Act
-    const { expectResponseHeadersToBe } = await fetch(
-      'https://localhost/whoami/',
+    const { expectResponseHeadersToBe } = await fetchWhoAmI(
       {
         method: 'OPTIONS',
 
-        headers: new Headers({
-          Origin: 'https://invalid.quisi.do',
-        }),
+          origin: 'https://invalid.quisi.do',
       },
     );
 

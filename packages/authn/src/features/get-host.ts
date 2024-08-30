@@ -1,9 +1,8 @@
-import { mapUnknownToString } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
 import {
+  emitPrivateMetric,
   emitPublicMetric,
   getEnv,
-  logPrivateError,
 } from '../constants/worker.js';
 
 const DEFAULT_HOST = 'quisi.do';
@@ -19,14 +18,15 @@ export default function getHost(): string {
     return DEFAULT_HOST;
   }
 
+  emitPrivateMetric({
+    name: MetricName.InvalidHost,
+    value: JSON.stringify(host),
+  });
+
   emitPublicMetric({
     name: MetricName.InvalidHost,
     type: typeof host,
   });
-
-  logPrivateError(
-    new Error('Invalid host', { cause: mapUnknownToString(host) }),
-  );
 
   return DEFAULT_HOST;
 }

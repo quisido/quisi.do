@@ -1,10 +1,9 @@
-import { mapUnknownToString } from 'fmrs';
 import EnvironmentName from '../constants/environment-name.js';
 import { MetricName } from '../constants/metric-name.js';
 import {
+  emitPrivateMetric,
   emitPublicMetric,
   getEnv,
-  logPrivateError,
 } from '../constants/worker.js';
 import isEnvironmentName from '../utils/is-environment-name.js';
 
@@ -19,16 +18,15 @@ export default function getEnvironmentName(): EnvironmentName {
     return EnvironmentName.Unknown;
   }
 
+  emitPrivateMetric({
+    name: MetricName.InvalidEnvironmentName,
+    value: JSON.stringify(envName),
+  });
+
   emitPublicMetric({
     name: MetricName.InvalidEnvironmentName,
     type: typeof envName,
   });
-
-  logPrivateError(
-    new Error('Invalid environment name', {
-      cause: mapUnknownToString(envName),
-    }),
-  );
 
   return EnvironmentName.Unknown;
 }

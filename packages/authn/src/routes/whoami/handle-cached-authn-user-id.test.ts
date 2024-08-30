@@ -8,7 +8,7 @@ const TEST_USER_ID = 1234;
 
 describe('handleCachedAuthnUserId', (): void => {
   it('should emit and respond', async (): Promise<void> => {
-    const { expectPrivateMetric, expectPublicMetric, fetch, fetchPatreon } = new AuthnTest({
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon, fetchWhoAmI } = new AuthnTest({
       userIds: [TEST_USER_ID],
     });
 
@@ -16,10 +16,8 @@ describe('handleCachedAuthnUserId', (): void => {
     const { authnIdCookie } = await fetchPatreon();
 
     // Read from cache.
-    const { expectResponseHeadersToBe, expectResponseJsonToBe, expectResponseStatusToBe } = await fetch('https://localhost/whoami/', {
-      headers: new Headers({
-        cookie: `__Secure-Authentication-ID=${authnIdCookie}`,
-      }),
+    const { expectResponseHeadersToBe, expectResponseJsonToBe, expectResponseStatusToBe } = await fetchWhoAmI({
+      cookie: `__Secure-Authentication-ID=${authnIdCookie}`,
     });
 
     expectResponseStatusToBe(StatusCode.OK);

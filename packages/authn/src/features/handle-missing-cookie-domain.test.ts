@@ -5,19 +5,15 @@ import AuthnTest from '../test/authn-test.js';
 describe('handleMissingCookieDomain', (): void => {
   it('should emit and default', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetch } = new AuthnTest({
+    const { expectPublicMetric, fetchWhoAmI } = new AuthnTest({
       cookieDomain: undefined,
     });
 
     // Act
-    const { expectResponseHeadersToBe } = await fetch(
-      'https://localhost/whoami/',
+    const { expectResponseHeadersToBe } = await fetchWhoAmI(
       {
-        method: 'OPTIONS',
 
-        headers: new Headers({
           origin: 'https://test.origin',
-        }),
       },
     );
 

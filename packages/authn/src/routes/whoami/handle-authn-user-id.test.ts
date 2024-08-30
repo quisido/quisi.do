@@ -7,7 +7,7 @@ import AuthnTest from '../../test/authn-test.js';
 describe('handleAuthnUserId', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } = new AuthnTest({
+    const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI } = new AuthnTest({
       authnUserIds: {
         abcdef: '1234',
       },
@@ -18,10 +18,8 @@ describe('handleAuthnUserId', (): void => {
       expectResponseHeadersToBe,
       expectResponseJsonToBe,
       expectResponseStatusToBe,
-    } = await fetch('https://localhost/whoami/', {
-      headers: new Headers({
-        cookie: '__Secure-Authentication-ID=abcdef',
-      }),
+    } = await fetchWhoAmI({
+      cookie: '__Secure-Authentication-ID=abcdef',
     });
 
     // Assert

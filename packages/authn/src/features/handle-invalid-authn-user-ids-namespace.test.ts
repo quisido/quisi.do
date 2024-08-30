@@ -6,14 +6,12 @@ import AuthnTest from '../test/authn-test.js';
 describe('handleInvalidAuthnUserIdsNamespace', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } = new AuthnTest({
+    const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI } = new AuthnTest({
       authnUserIdsNamespace: true,
     });
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetch(
-      'https://localhost/whoami/',
-    );
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchWhoAmI();
 
     // Assert
     expectResponseStatusToBe(StatusCode.SeeOther);

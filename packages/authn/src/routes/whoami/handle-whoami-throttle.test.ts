@@ -8,26 +8,20 @@ import AuthnTest from '../../test/authn-test.js';
 describe('handleWhoAmIThrottle', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } = new AuthnTest({
+    const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI } = new AuthnTest({
       environmentName: EnvironmentName.Production,
     });
 
     // Act
-    await fetch('https://localhost/whoami/', {
-      headers: new Headers({
-        'cf-connecting-ip': '1.2.3.4',
-      }),
-    });
+    await fetchWhoAmI({
+      cookie: `__Secure-Authentication-ID=abcdef`, ip: '1.2.3.4' });
 
     const {
       expectResponseHeadersToBe,
       expectResponseJsonToBe,
       expectResponseStatusToBe,
-    } = await fetch('https://localhost/whoami/', {
-      headers: new Headers({
-        'cf-connecting-ip': '1.2.3.4',
-      }),
-    });
+    } = await fetchWhoAmI({
+      cookie: `__Secure-Authentication-ID=abcdef`, ip: '1.2.3.4' });
 
     // Assert
     expectResponseStatusToBe(StatusCode.TooManyRequests);

@@ -18,12 +18,20 @@ interface FetchPatreonOptions {
   readonly sessionIdState?: string | undefined;
 }
 
+interface FetchWhoAmIOptions {
+  readonly cookie?: string | undefined;
+  readonly ip?: string | undefined;
+  readonly method?: string | undefined;
+  readonly origin?: string | undefined;
+}
+
 interface Options {
   readonly authnUserIds?: Partial<Record<string, string>>;
   readonly authnUserIdsNamespace?: unknown;
   readonly cookieDomain?: unknown;
   readonly dataBucket?: unknown;
   readonly environmentName?: unknown;
+  readonly host?: unknown;
   readonly oAuthRowId?: number;
   readonly patreonIdentity?: string;
   readonly patreonIdentityStatusCode?: StatusCode;
@@ -35,7 +43,6 @@ interface Options {
 }
 
 const DEFAULT_AUTHN_USER_IDS: Partial<Record<string, string>> = {};
-const DEFAULT_FETCH_PATREON_OPTIONS: FetchPatreonOptions = {};
 const DEFAULT_OPTIONS: Options = {};
 const FIRST = 1;
 
@@ -52,7 +59,6 @@ export default class AuthnTest extends WorkerTest {
   public constructor({
     authnUserIds = DEFAULT_AUTHN_USER_IDS,
     dataBucket = new TestR2Bucket(),
-    environmentName = EnvironmentName.Test,
     oAuthRowId = FIRST,
     patreonIdentity = '{"data":{"attributes":{},"id":"test-id"}}',
     patreonIdentityStatusCode = StatusCode.OK,
@@ -74,17 +80,24 @@ export default class AuthnTest extends WorkerTest {
       },
     });
 
-    const authnUserIdsNamespace: unknown = 'authnUserIdsNamespace' in options ?
-      options.authnUserIdsNamespace :
-      new TestKVNamespace(authnUserIds);
+    /**
+     *   For options that can be explicitly set to `undefined`, we must use
+     * `key in options` rather than destructuring.
+     */
+    const getOption = <K extends keyof typeof options>(
+      key: K,
+      defaultValue: Options[K],
+    ): Options[K] => {
+      if (key in options) {
+        return options[key];
+      }
 
-    const cookieDomain: unknown = 'cookieDomain' in options ?
-      options.cookieDomain :
-      'localhost';
+      return defaultValue;
+    };
 
-    const patreonOAuthHost: unknown = 'patreonOAuthHost' in options ?
-      options.patreonOAuthHost :
-      'https://patreon.test.quisi.do';
+    const authnUserIdsNamespace: unknown = getOption('authnUserIdsNamespace', new TestKVNamespace(authnUserIds));
+    const patreonOAuthHost: unknown = getOption('patreonOAuthHost', 'https://patreon.test.quisi.do');
+
     super({
       createExportedHandler,
 
@@ -92,9 +105,9 @@ export default class AuthnTest extends WorkerTest {
         AUTHN_DATA: dataBucket,
         AUTHN_DB: database,
         AUTHN_USER_IDS: authnUserIdsNamespace,
-        COOKIE_DOMAIN: cookieDomain,
-        ENVIRONMENT_NAME: environmentName,
-        HOST: 'test.host',
+        COOKIE_DOMAIN: getOption('cookieDomain', 'localhost'),
+        ENVIRONMENT_NAME: getOption('environmentName', EnvironmentName.Test),
+        HOST: getOption('host', 'test.host'),
         PATREON_OAUTH_CLIENT_ID: 'test-client-id',
         PATREON_OAUTH_CLIENT_SECRET: 'test-client-secret',
         PATREON_OAUTH_HOST: patreonOAuthHost,
@@ -151,7 +164,7 @@ export default class AuthnTest extends WorkerTest {
     ip = '127.0.0.1',
     sessionIdCookie = 'test-session-id',
     sessionIdState = 'test-session-id',
-  }: FetchPatreonOptions = DEFAULT_FETCH_PATREON_OPTIONS): Promise<FetchTest> => {
+  }: FetchPatreonOptions = {}): Promise<FetchTest> => {
     const headers = new Headers({
       'cf-connecting-ip': ip,
     });
@@ -174,6 +187,31 @@ export default class AuthnTest extends WorkerTest {
         headers,
       },
     );
+  };
+
+  public fetchWhoAmI = ({
+    cookie,
+    ip,
+    method = 'GET',
+    origin,
+  }: FetchWhoAmIOptions = {}): Promise<FetchTest> => {
+    const headers = new Headers();
+    if (typeof cookie === 'string') {
+      headers.set('cookie', cookie);
+    }
+
+    if (typeof ip === 'string') {
+      headers.set('cf-connecting-ip', ip);
+    }
+
+    if (typeof origin === 'string') {
+      headers.set('origin', origin);
+    }
+
+    return this.fetch('https://localhost/whoami/', {
+      headers,
+      method,
+    });
   };
 
   #mockPatreonIdentity(host: unknown, body?: BodyInit | null, init?: ResponseInit): void {

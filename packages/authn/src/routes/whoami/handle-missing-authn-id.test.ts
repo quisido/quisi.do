@@ -7,17 +7,15 @@ import AuthnTest from '../../test/authn-test.js';
 describe('handleMissingAuthnId', (): void => {
   it('should response with the correct code', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetch } = new AuthnTest();
+    const { expectPublicMetric, fetchWhoAmI } = new AuthnTest();
 
     // Act
     const {
       expectResponseJsonToBe,
       expectResponseHeadersToBe,
       expectResponseStatusToBe,
-    } = await fetch('https://localhost/whoami/', {
-      headers: new Headers({
-        cookie: '__Secure-Session-ID=abcdef',
-      }),
+    } = await fetchWhoAmI({
+      cookie: '__Secure-Session-ID=abcdef',
     });
 
     // Assert

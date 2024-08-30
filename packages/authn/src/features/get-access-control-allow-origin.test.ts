@@ -3,14 +3,11 @@ import AuthnTest from '../test/authn-test.js';
 
 describe('getAccessControlAllowOrigin', (): void => {
   it('should be * when origin is undefined', async (): Promise<void> => {
-    const { fetch } = new AuthnTest();
+    const { fetchWhoAmI } = new AuthnTest();
 
-    const { expectResponseHeadersToBe } = await fetch(
-      'https://localhost/whoami/',
-      {
-        method: 'OPTIONS',
-      },
-    );
+    const { expectResponseHeadersToBe } = await fetchWhoAmI({
+      method: 'OPTIONS',
+    });
 
     expectResponseHeadersToBe({
       'access-control-allow-credentials': 'true',
@@ -24,18 +21,12 @@ describe('getAccessControlAllowOrigin', (): void => {
   });
 
   it('should support http://localhost:3000', async (): Promise<void> => {
-    const { fetch } = new AuthnTest();
+    const { fetchWhoAmI } = new AuthnTest();
 
-    const { expectResponseHeadersToBe } = await fetch(
-      'https://localhost/whoami/',
-      {
-        method: 'OPTIONS',
-
-        headers: new Headers({
-          origin: 'http://localhost:3000',
-        }),
-      },
-    );
+    const { expectResponseHeadersToBe } = await fetchWhoAmI({
+      method: 'OPTIONS',
+      origin: 'http://localhost:3000',
+    });
 
     expectResponseHeadersToBe({
       'access-control-allow-credentials': 'true',
@@ -49,16 +40,12 @@ describe('getAccessControlAllowOrigin', (): void => {
   });
 
   it('should support https://localhost:3000', async (): Promise<void> => {
-    const { fetch } = new AuthnTest();
+    const { fetchWhoAmI } = new AuthnTest();
 
-    const { expectResponseHeadersToBe } = await fetch(
-      'https://localhost/whoami/',
-      {
+    const { expectResponseHeadersToBe } = await fetchWhoAmI({
         method: 'OPTIONS',
 
-        headers: new Headers({
           origin: 'https://localhost:3000',
-        }),
       },
     );
 

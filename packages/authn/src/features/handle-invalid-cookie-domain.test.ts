@@ -5,19 +5,16 @@ import AuthnTest from '../test/authn-test.js';
 describe('handleInvalidCookieDomain', (): void => {
   it('should emit and default', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } = new AuthnTest({
+    const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI } = new AuthnTest({
       cookieDomain: true,
     });
 
     // Act
-    const { expectResponseHeadersToBe } = await fetch(
-      'https://localhost/whoami/',
+    const { expectResponseHeadersToBe } = await fetchWhoAmI(
       {
         method: 'OPTIONS',
 
-        headers: new Headers({
           origin: 'https://test.origin',
-        }),
       },
     );
 

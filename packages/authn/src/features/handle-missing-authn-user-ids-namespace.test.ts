@@ -6,13 +6,12 @@ import AuthnTest from '../test/authn-test.js';
 describe('handleMissingAuthnUserIdsNamespace', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetch } = new AuthnTest({
+    const { expectPublicMetric, fetchWhoAmI } = new AuthnTest({
       authnUserIdsNamespace: undefined,
     });
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetch(
-      'https://localhost/whoami/',
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchWhoAmI(
     );
 
     // Assert
