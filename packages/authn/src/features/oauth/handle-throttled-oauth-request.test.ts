@@ -8,9 +8,7 @@ describe('handleThrottledOAuthRequest', (): void => {
   it('should emit and response', async (): Promise<void> => {
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
-      env: {
-        ENVIRONMENT_NAME: EnvironmentName.Production,
-      },
+      environmentName: EnvironmentName.Production,
     });
 
     // Act

@@ -6,11 +6,9 @@ import AuthnTest from "../../test/authn-test.js";
 describe('handleForbiddenPatreonIdentityResponse', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon, mockPatreonIdentity, mockPatreonToken } = new AuthnTest();
-
-    mockPatreonToken('{"access_token":"test-access-token"}');
-    mockPatreonIdentity('{}', {
-      status: StatusCode.Forbidden,
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
+      patreonIdentity: '{}',
+      patreonIdentityStatusCode: StatusCode.Forbidden,
     });
 
     // Act

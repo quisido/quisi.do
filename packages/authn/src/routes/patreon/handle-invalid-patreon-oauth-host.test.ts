@@ -7,9 +7,7 @@ describe('handleInvalidPatreonOAuthHost', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
-      env: {
-        PATREON_OAUTH_HOST: true,
-      },
+      patreonOAuthHost: true,
     });
 
     // Act

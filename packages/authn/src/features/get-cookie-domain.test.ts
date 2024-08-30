@@ -5,9 +5,7 @@ describe('getCookieDomain', (): void => {
   it('should return the COOKIE_DOMAIN environment variable', async (): Promise<void> => {
     // Assemble
     const { fetch } = new AuthnTest({
-      env: {
-        COOKIE_DOMAIN: 'test.quisi.do',
-      },
+      cookieDomain: 'test.quisi.do',
     });
 
     // Act

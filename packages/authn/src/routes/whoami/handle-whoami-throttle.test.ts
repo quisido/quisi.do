@@ -9,9 +9,7 @@ describe('handleWhoAmIThrottle', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } = new AuthnTest({
-      env: {
-        ENVIRONMENT_NAME: EnvironmentName.Production,
-      },
+      environmentName: EnvironmentName.Production,
     });
 
     // Act

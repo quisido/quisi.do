@@ -6,9 +6,7 @@ describe('handleInvalidCookieDomain', (): void => {
   it('should emit and default', async (): Promise<void> => {
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } = new AuthnTest({
-      env: {
-        COOKIE_DOMAIN: true,
-      },
+      cookieDomain: true,
     });
 
     // Act

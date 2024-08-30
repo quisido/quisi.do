@@ -5,10 +5,10 @@ import AuthnTest from "../../test/authn-test.js";
 describe('handleInvalidPatreonIdentityAttributes', (): void => {
   it('should emit when attributes are missing', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon, mockPatreonIdentity, mockPatreonToken } = new AuthnTest();
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
+      patreonIdentity: '{"data":{"id":"test-id"}}',
+    });
 
-    mockPatreonToken('{"access_token":"test-access-token"}');
-    mockPatreonIdentity('{"data":{"id":"test-id"}}');
 
     // Act
     await fetchPatreon();
@@ -24,10 +24,9 @@ describe('handleInvalidPatreonIdentityAttributes', (): void => {
 
   it('should emit when attributes are invalid', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon, mockPatreonIdentity, mockPatreonToken } = new AuthnTest();
-
-    mockPatreonToken('{"access_token":"test-access-token"}');
-    mockPatreonIdentity('{"data":{"attributes":"test-attributes","id":"test-id"}}');
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
+      patreonIdentity: '{"data":{"attributes":"test-attributes","id":"test-id"}}',
+    });
 
     // Act
     await fetchPatreon();

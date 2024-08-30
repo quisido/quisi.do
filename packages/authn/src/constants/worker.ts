@@ -11,6 +11,7 @@ export const {
   getEnv,
   getFetch,
   getNow,
+  getR2Bucket,
   getRequestHeaders,
   getRequestMethod,
   getRequestPathname,

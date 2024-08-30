@@ -3,6 +3,7 @@ import TestD1Database from './test/d1-database.js';
 import { EXPECT_ANY_STRING } from './test/expect-any.js';
 import expectToEmitPublicMetric from './test/expect-emit-public-metric.js';
 import expectToLogError from './test/expect-to-log-error.js';
+import TestR2Bucket from './test/r2-bucket.js';
 import { TEST_EXECUTION_CONTEXT } from './test/test-execution-context.js';
 import TestWorker from './test/test-worker.js';
 
@@ -84,17 +85,11 @@ describe('FetchContext', (): void => {
       db = null;
     });
 
-    const handleFetchRequest = (
-      getD1Database: (name: string) => D1Database,
-    ): Response => {
-      db = getD1Database('TEST_DB');
-      return new Response();
-    };
-
     it('should emit when the D1 database is invalid', async (): Promise<void> => {
       const { fetch, getD1Database } = new TestWorker({
         onFetchRequest(): Response {
-          return handleFetchRequest(getD1Database);
+          db = getD1Database('TEST_DB');
+          return new Response();
         },
       });
 
@@ -106,7 +101,7 @@ describe('FetchContext', (): void => {
 
       expectToEmitPublicMetric({
         db: 'TEST_DB',
-        name: '@quisido/d1-database/invalid',
+        name: '@quisido/worker/d1-database/invalid',
       });
     });
 
@@ -114,19 +109,63 @@ describe('FetchContext', (): void => {
       const TEST_DB: D1Database = new TestD1Database();
       const { fetch, getD1Database } = new TestWorker({
         onFetchRequest(): Response {
-          return handleFetchRequest(getD1Database);
+          db = getD1Database('TEST_DB');
+          return new Response();
         },
       });
 
       await fetch(
         new Request('https://localhost/'),
-        {
-          TEST_DB,
-        },
+        { TEST_DB },
         TEST_EXECUTION_CONTEXT,
       );
 
       expect(db).toBe(TEST_DB);
+    });
+  });
+
+  describe('getR2Bucket', (): void => {
+    let bucket: R2Bucket | null = null;
+    beforeEach((): void => {
+      bucket = null;
+    });
+
+    it('should emit when the R2 bucket is invalid', async (): Promise<void> => {
+      const { fetch, getR2Bucket } = new TestWorker({
+        onFetchRequest(): Response {
+          bucket = getR2Bucket('TEST_BUCKET');
+          return new Response();
+        },
+      });
+
+      await fetch(
+        new Request('https://localhost/'),
+        {},
+        TEST_EXECUTION_CONTEXT,
+      );
+
+      expectToEmitPublicMetric({
+        bucket: 'TEST_BUCKET',
+        name: '@quisido/worker/r2-bucket/invalid',
+      });
+    });
+
+    it('should return a D1 database', async (): Promise<void> => {
+      const TEST_BUCKET: R2Bucket = new TestR2Bucket();
+      const { fetch, getR2Bucket } = new TestWorker({
+        onFetchRequest(): Response {
+          bucket = getR2Bucket('TEST_BUCKET');
+          return new Response();
+        },
+      });
+
+      await fetch(
+        new Request('https://localhost/'),
+        { TEST_BUCKET },
+        TEST_EXECUTION_CONTEXT,
+      );
+
+      expect(bucket).toBe(TEST_BUCKET);
     });
   });
 

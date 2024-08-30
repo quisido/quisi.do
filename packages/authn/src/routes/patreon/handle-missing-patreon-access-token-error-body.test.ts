@@ -6,10 +6,9 @@ import AuthnTest from '../../test/authn-test.js';
 describe('handleMissingPatreonAccessTokenErrorBody', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetchPatreon, mockPatreonToken } = new AuthnTest();
-
-    mockPatreonToken(null, {
-      status: StatusCode.BadRequest,
+    const { expectPublicMetric, fetchPatreon } = new AuthnTest({
+      patreonToken: null,
+      patreonTokenStatusCode: StatusCode.BadRequest,
     });
 
     // Act

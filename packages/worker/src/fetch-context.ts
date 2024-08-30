@@ -1,5 +1,9 @@
 /// <reference types="@cloudflare/workers-types" />
-import { isD1Database, type IncomingRequest } from 'cloudflare-utils';
+import {
+  isD1Database,
+  isR2Bucket,
+  type IncomingRequest,
+} from 'cloudflare-utils';
 import { EventEmitter } from 'eventemitter3';
 import createTraceId from './create-trace-id.js';
 import defaultGetNow from './default-get-now.js';
@@ -135,24 +139,39 @@ export default class FetchContext<
     }
   }
 
-  public getD1Database(name: string): D1Database {
+  public getD1Database = (name: string): D1Database => {
     const db: unknown = this.env[name];
 
     if (!isD1Database(db)) {
       this.emitPublicMetric({
         db: name,
-        name: '@quisido/d1-database/invalid',
+        name: '@quisido/worker/d1-database/invalid',
       });
 
       throw new Error('Expected a D1 database.');
     }
 
     return db;
-  }
+  };
 
   public get getNow(): () => number {
     return this.#getNow;
   }
+
+  public getR2Bucket = (name: string): R2Bucket => {
+    const bucket: unknown = this.env[name];
+
+    if (!isR2Bucket(bucket)) {
+      this.emitPublicMetric({
+        bucket: name,
+        name: '@quisido/worker/r2-bucket/invalid',
+      });
+
+      throw new Error('Expected an R2 bucket.');
+    }
+
+    return bucket;
+  };
 
   public logPrivateError = (err: Error): void => {
     this.#emit('error:private', err);

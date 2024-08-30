@@ -120,6 +120,10 @@ export default class Worker {
     return this.#fetchContext.getNow();
   };
 
+  public getR2Bucket = (name: string): R2Bucket => {
+    return this.#fetchContext.getR2Bucket(name);
+  };
+
   public getRequest = (): IncomingRequest => {
     return this.#fetchContext.request;
   };

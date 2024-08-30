@@ -6,10 +6,9 @@ import AuthnTest from "../../test/authn-test.js";
 describe('handleInvalidPatreonIdentityId', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon, mockPatreonIdentity, mockPatreonToken } = new AuthnTest();
-
-    mockPatreonToken('{"access_token":"test-access-token"}');
-    mockPatreonIdentity('{"data":{"id":true}}');
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
+      patreonIdentity: '{"data":{"id":true}}',
+    });
 
     // Act
     const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon();

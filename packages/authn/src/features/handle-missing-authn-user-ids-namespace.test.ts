@@ -7,9 +7,7 @@ describe('handleMissingAuthnUserIdsNamespace', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
     const { expectPublicMetric, fetch } = new AuthnTest({
-      env: {
-        AUTHN_USER_IDS: undefined,
-      },
+      authnUserIdsNamespace: undefined,
     });
 
     // Act

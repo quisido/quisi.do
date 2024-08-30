@@ -8,7 +8,9 @@ describe('getPatreonTokenResponse', (): void => {
       expectFetchToHaveBeenCalledWith,
       expectFetchToHaveBeenCalledWithHeaders,
       fetchPatreon,
-    } = new AuthnTest();
+    } = new AuthnTest({
+      patreonOAuthHost: 'https://test.patreon.com',
+    });
 
     // Act
     await fetchPatreon();

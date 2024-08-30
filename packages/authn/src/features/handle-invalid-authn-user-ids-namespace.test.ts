@@ -7,9 +7,7 @@ describe('handleInvalidAuthnUserIdsNamespace', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } = new AuthnTest({
-      env: {
-        AUTHN_USER_IDS: true,
-      },
+      authnUserIdsNamespace: true,
     });
 
     // Act

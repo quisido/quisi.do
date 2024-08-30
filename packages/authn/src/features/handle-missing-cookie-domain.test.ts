@@ -6,9 +6,7 @@ describe('handleMissingCookieDomain', (): void => {
   it('should emit and default', async (): Promise<void> => {
     // Assemble
     const { expectPublicMetric, fetch } = new AuthnTest({
-      env: {
-        COOKIE_DOMAIN: undefined,
-      },
+      cookieDomain: undefined,
     });
 
     // Act

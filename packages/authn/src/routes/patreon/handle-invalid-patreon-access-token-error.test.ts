@@ -6,12 +6,11 @@ import AuthnTest from '../../test/authn-test.js';
 describe('handleInvalidPatreonAccessTokenError', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon, mockPatreonToken } =
-      new AuthnTest();
-
-    mockPatreonToken('true', {
-      status: StatusCode.BadRequest,
-    });
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+      new AuthnTest({
+        patreonToken: 'true',
+        patreonTokenStatusCode: StatusCode.BadRequest,
+      });
 
     // Act
     const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon();

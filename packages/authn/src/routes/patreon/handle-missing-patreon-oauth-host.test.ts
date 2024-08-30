@@ -7,9 +7,7 @@ describe('handleMissingPatreonOAuthHost', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
     const { expectPublicMetric, fetchPatreon } = new AuthnTest({
-      env: {
-        PATREON_OAUTH_HOST: undefined,
-      },
+      patreonOAuthHost: undefined,
     });
 
     // Act
