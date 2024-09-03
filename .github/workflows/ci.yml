@@ -144,7 +144,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           name: prepack
           path: packages/
@@ -178,7 +178,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           name: prepack
           path: packages/
@@ -204,12 +204,12 @@ jobs:
   #     - name: Checkout repository
   #       uses: actions/checkout@v3
   #     # - name: Download Cypress artifacts
-  #     #   uses: actions/download-artifact@v3
+  #     #   uses: actions/download-artifact@v4.1.7
   #     #   with:
   #     #     name: cypress
   #     #     path: packages/
   #     - name: Download prepublish artifacts
-  #       uses: actions/download-artifact@v3
+  #       uses: actions/download-artifact@v4.1.7
   #       with:
   #         name: prepublish
   #         path: /
