@@ -48,6 +48,7 @@ img-src
   https://www.google.com.br/ads/ga-audiences
   https://www.google.com.hk/ads/ga-audiences
   https://www.google.com.kh/ads/ga-audiences
+  https://www.google.com.my/ads/ga-audiences
   https://www.google.com.pk/ads/ga-audiences
   https://www.google.com.sg/ads/ga-audiences
   https://www.google.com.tr/ads/ga-audiences

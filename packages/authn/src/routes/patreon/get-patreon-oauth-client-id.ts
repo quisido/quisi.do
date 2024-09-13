@@ -10,24 +10,24 @@ import FatalError from '../../utils/fatal-error.js';
 export default function getPatreonOAuthClientId(): string {
   const clientId: unknown = getEnv('PATREON_OAUTH_CLIENT_ID');
 
+  if (typeof clientId === 'string') {
+    return clientId;
+  }
+
   if (typeof clientId === 'undefined') {
     emitPublicMetric({ name: MetricName.MissingPatreonOAuthClientId });
     throw new FatalError(ErrorCode.MissingPatreonOAuthClientId);
   }
 
-  if (typeof clientId !== 'string') {
-    emitPrivateMetric({
-      name: MetricName.InvalidPatreonOAuthClientId,
-      value: JSON.stringify(clientId),
-    });
+  emitPrivateMetric({
+    name: MetricName.InvalidPatreonOAuthClientId,
+    value: JSON.stringify(clientId),
+  });
 
-    emitPublicMetric({
-      name: MetricName.InvalidPatreonOAuthClientId,
-      type: typeof clientId,
-    });
+  emitPublicMetric({
+    name: MetricName.InvalidPatreonOAuthClientId,
+    type: typeof clientId,
+  });
 
-    throw new FatalError(ErrorCode.InvalidPatreonOAuthClientId);
-  }
-
-  return clientId;
+  throw new FatalError(ErrorCode.InvalidPatreonOAuthClientId);
 }

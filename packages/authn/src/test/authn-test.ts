@@ -1,7 +1,7 @@
 import { StatusCode } from 'cloudflare-utils';
 import { expect } from 'vitest';
 import EnvironmentName from "../constants/environment-name.js";
-import { INSERT_INTO_OAUTH_QUERY, INSERT_INTO_USERS_QUERY, SELECT_USERID_FROM_OAUTH_QUERY } from '../constants/queries.js';
+import { INSERT_INTO_EMAILS_QUERY, INSERT_INTO_OAUTH_QUERY, INSERT_INTO_USERS_QUERY, SELECT_USERID_FROM_OAUTH_QUERY } from '../constants/queries.js';
 import { SECONDS_PER_DAY } from '../constants/time.js';
 import { createExportedHandler } from '../constants/worker.js';
 import { EXPECT_ANY_NUMBER } from '../test/expect-any.js';
@@ -13,8 +13,8 @@ import TestR2Bucket from './r2-bucket.js';
 import WorkerTest from "./worker-test.js";
 
 interface FetchPatreonOptions {
+  readonly cookies?: string | undefined;
   readonly ip?: string | undefined;
-  readonly sessionIdCookie?: string | undefined;
   readonly sessionIdState?: string | undefined;
 }
 
@@ -30,25 +30,26 @@ interface Options {
   readonly authnUserIdsNamespace?: unknown;
   readonly cookieDomain?: unknown;
   readonly dataBucket?: unknown;
+  readonly database?: unknown;
   readonly environmentName?: unknown;
   readonly host?: unknown;
+  readonly insertIntoEmailsError?: Error;
+  readonly insertIntoOAuthError?: Error;
   readonly oAuthRowId?: number;
+  readonly oAuthUserIdResults?: readonly unknown[];
   readonly patreonIdentity?: string;
   readonly patreonIdentityStatusCode?: StatusCode;
+  readonly patreonOAuthClientId?: unknown;
+  readonly patreonOAuthClientSecret?: unknown;
   readonly patreonOAuthHost?: unknown;
   readonly patreonToken?: string | null;
   readonly patreonTokenStatusCode?: StatusCode;
-  readonly userIds?: readonly number[];
   readonly usersRowId?: number;
 }
 
 const DEFAULT_AUTHN_USER_IDS: Partial<Record<string, string>> = {};
 const DEFAULT_OPTIONS: Options = {};
 const FIRST = 1;
-
-const mapUserIdToResult = (userId: number): unknown => ({
-  userId,
-});
 
 export default class AuthnTest extends WorkerTest {
   #authnUserIdsNamespace: unknown;
@@ -59,24 +60,30 @@ export default class AuthnTest extends WorkerTest {
   public constructor({
     authnUserIds = DEFAULT_AUTHN_USER_IDS,
     dataBucket = new TestR2Bucket(),
+    insertIntoEmailsError,
+    insertIntoOAuthError,
     oAuthRowId = FIRST,
+    oAuthUserIdResults = [],
     patreonIdentity = '{"data":{"attributes":{},"id":"test-id"}}',
     patreonIdentityStatusCode = StatusCode.OK,
     patreonToken = '{"access_token":"test-access-token"}',
     patreonTokenStatusCode = StatusCode.OK,
-    userIds = [],
     usersRowId = FIRST,
     ...options
   }: Options = DEFAULT_OPTIONS) {
     const database = new TestD1Database({
+      [INSERT_INTO_EMAILS_QUERY]: {
+        error: insertIntoEmailsError,
+      },
       [INSERT_INTO_OAUTH_QUERY]: {
+        error: insertIntoOAuthError,
         lastRowId: oAuthRowId,
       },
       [INSERT_INTO_USERS_QUERY]: {
         lastRowId: usersRowId,
       },
       [SELECT_USERID_FROM_OAUTH_QUERY]: {
-        results: userIds.map(mapUserIdToResult),
+        results: oAuthUserIdResults,
       },
     });
 
@@ -103,13 +110,13 @@ export default class AuthnTest extends WorkerTest {
 
       env: {
         AUTHN_DATA: dataBucket,
-        AUTHN_DB: database,
+        AUTHN_DB: getOption('database', database),
         AUTHN_USER_IDS: authnUserIdsNamespace,
         COOKIE_DOMAIN: getOption('cookieDomain', 'localhost'),
         ENVIRONMENT_NAME: getOption('environmentName', EnvironmentName.Test),
         HOST: getOption('host', 'test.host'),
-        PATREON_OAUTH_CLIENT_ID: 'test-client-id',
-        PATREON_OAUTH_CLIENT_SECRET: 'test-client-secret',
+        PATREON_OAUTH_CLIENT_ID: getOption('patreonOAuthClientId', 'test-client-id'),
+        PATREON_OAUTH_CLIENT_SECRET: getOption('patreonOAuthClientSecret', 'test-client-secret'),
         PATREON_OAUTH_HOST: patreonOAuthHost,
         PATREON_OAUTH_REDIRECT_URI: 'https://localhost/patreon/callback',
         PRIVATE_DATASET: new TestAnalyticsEngineDataset(),
@@ -161,8 +168,8 @@ export default class AuthnTest extends WorkerTest {
   };
 
   public fetchPatreon = async ({
+    cookies = '__Secure-Session-ID=test-session-id',
     ip = '127.0.0.1',
-    sessionIdCookie = 'test-session-id',
     sessionIdState = 'test-session-id',
   }: FetchPatreonOptions = {}): Promise<FetchTest> => {
     const headers = new Headers({
@@ -177,8 +184,8 @@ export default class AuthnTest extends WorkerTest {
       }),
     });
 
-    if (typeof sessionIdCookie === 'string') {
-      headers.set('cookie', `__Secure-Session-ID=${sessionIdCookie}`);
+    if (typeof cookies === 'string') {
+      headers.set('cookie', cookies);
     }
 
     return this.fetch(

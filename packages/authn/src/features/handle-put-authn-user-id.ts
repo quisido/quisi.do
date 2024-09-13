@@ -5,20 +5,20 @@ import { setAuthnUserIdInMemory } from './authn-user-id.js';
 
 interface Options {
   readonly authnId: string;
-  readonly id: number;
   readonly startTime: number;
+  readonly userId: number;
 }
 
 export default function handlePutAuthnUserId({
   authnId,
-  id,
   startTime,
+  userId,
 }: Options): () => void {
   const snapshot: Snapshot = new Snapshot();
 
   return (): void => {
     snapshot.run((): void => {
-      setAuthnUserIdInMemory(authnId, id);
+      setAuthnUserIdInMemory(authnId, userId);
 
       emitPublicMetric({
         endTime: getNow(),

@@ -8,7 +8,7 @@ describe('getDataBucket', (): void => {
   it('should emit when invalid', async (): Promise<void> => {
     const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
       dataBucket: 'test-invalid-authn-data',
-      userIds: [TEST_USER_ID]
+      oAuthUserIdResults: [{ userId: TEST_USER_ID }],
     });
 
     await fetchPatreon();

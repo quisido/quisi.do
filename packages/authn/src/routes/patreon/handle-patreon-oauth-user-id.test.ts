@@ -13,12 +13,12 @@ describe('handlePatreonOAuthUserId', (): void => {
     // Assemble
     const { expectUserIdsToHavePut, fetchPatreon } = new AuthnTest({
       cookieDomain: 'test.quisi.do',
-      userIds: [TEST_USER_ID],
+      oAuthUserIdResults: [{ userId: TEST_USER_ID }],
     });
 
     // Act
     const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon({
-      sessionIdCookie: 'test-session-id',
+      cookies: '__Secure-Session-ID=test-session-id',
       sessionIdState: 'test-session-id',
     });
 

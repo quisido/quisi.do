@@ -10,19 +10,19 @@ import FatalError from '../utils/fatal-error.js';
 export default function getSessionIdCookie(): string {
   const cookies: Partial<Record<string, string>> = getCookies();
   const sessionId: string | undefined = cookies['__Secure-Session-ID'];
-  if (typeof sessionId !== 'string') {
-    emitPrivateMetric({
-      name: MetricName.MissingSessionIdCookie,
-      value: JSON.stringify(cookies),
-    });
-
-    emitPublicMetric({
-      keys: Object.keys(cookies).join(', '),
-      name: MetricName.MissingSessionIdCookie,
-    });
-
-    throw new FatalError(ErrorCode.MissingSessionIdCookie);
+  if (typeof sessionId === 'string') {
+    return sessionId;
   }
 
-  return sessionId;
+  emitPrivateMetric({
+    name: MetricName.MissingSessionIdCookie,
+    value: JSON.stringify(cookies),
+  });
+
+  emitPublicMetric({
+    keys: Object.keys(cookies).join(', '),
+    name: MetricName.MissingSessionIdCookie,
+  });
+
+  throw new FatalError(ErrorCode.MissingSessionIdCookie);
 }

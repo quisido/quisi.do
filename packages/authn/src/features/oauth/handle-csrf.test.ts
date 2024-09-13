@@ -10,7 +10,7 @@ describe('handleCrossSiteRequestForgery', (): void => {
 
     // Act
     const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon({
-      sessionIdCookie: 'test-session-id-cookie',
+      cookies: '__Secure-Session-ID=test-session-id-cookie',
       sessionIdState: 'test-session-id-state',
     });
 

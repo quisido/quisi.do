@@ -9,11 +9,11 @@ import handlePutAuthnUserIdError from './handle-put-authn-user-id-error.js';
 import handlePutAuthnUserId from './handle-put-authn-user-id.js';
 
 interface Options {
-  readonly id: number;
   readonly returnPath: string;
+  readonly userId: number;
 }
 
-export default function createResponse({ id, returnPath }: Options): Response {
+export default function createResponse({ returnPath, userId }: Options): Response {
   const authnId: string = createAuthnId();
   const authnUserIds: KVNamespace = getAuthnUserIdsNamespace();
   const nowSeconds: number = getNowSeconds();
@@ -29,12 +29,12 @@ export default function createResponse({ id, returnPath }: Options): Response {
   const expiration: number = nowSeconds + SECONDS_PER_DAY;
   affect(
     authnUserIds
-      .put(authnId, id.toString(), {
+      .put(authnId, userId.toString(), {
         expiration,
         expirationTtl: SECONDS_PER_DAY,
       })
-      .then(handlePutAuthnUserId({ authnId, id, startTime }))
-      .catch(handlePutAuthnUserIdError({ authnId, id, startTime })),
+      .then(handlePutAuthnUserId({ authnId, startTime, userId }))
+      .catch(handlePutAuthnUserIdError({ authnId, startTime, userId })),
   );
 
   return new Response(null, {

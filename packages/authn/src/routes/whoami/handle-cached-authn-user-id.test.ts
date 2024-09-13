@@ -9,7 +9,7 @@ const TEST_USER_ID = 1234;
 describe('handleCachedAuthnUserId', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     const { expectPrivateMetric, expectPublicMetric, fetchPatreon, fetchWhoAmI } = new AuthnTest({
-      userIds: [TEST_USER_ID],
+      oAuthUserIdResults: [{ userId: TEST_USER_ID }],
     });
 
     // Write to cache.

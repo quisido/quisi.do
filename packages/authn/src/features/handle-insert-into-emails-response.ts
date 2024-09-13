@@ -11,8 +11,9 @@ export default function handleInsertIntoEmailsResponse(
   return function handleThen({
     meta: { changes, duration, last_row_id: lastRowId, size_after: sizeAfter },
   }: D1Response): void {
-    const endTime: number = getNow();
     return snapshot.run((): void => {
+      const endTime: number = getNow();
+
       emitPrivateMetric({
         changes,
         duration,

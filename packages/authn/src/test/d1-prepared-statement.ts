@@ -1,7 +1,8 @@
 import { expect } from "vitest";
 import unimplementedMethod from "./unimplemented-method.js";
 
-interface Result {
+interface Options {
+  readonly error?: Error | undefined;
   readonly lastRowId?: number | undefined;
   readonly results?: readonly unknown[] | undefined;
 }
@@ -11,15 +12,18 @@ const DEFAULT_RESULTS: readonly never[] = [];
 
 export class TestD1PreparedStatement implements D1PreparedStatement {
   readonly #boundValues: (null | number | string)[] = [];
+  readonly #error: Error | undefined;
   public readonly first = unimplementedMethod;
   readonly #lastRowId: number;
   public readonly raw = unimplementedMethod;
   readonly #results: readonly unknown[];
 
   public constructor({
+    error,
     lastRowId = DEFAULT_LAST_ROW_ID,
     results = DEFAULT_RESULTS,
-  }: Result) {
+  }: Options) {
+    this.#error = error;
     this.#lastRowId = lastRowId;
     this.#results = results;
   }
@@ -59,6 +63,10 @@ export class TestD1PreparedStatement implements D1PreparedStatement {
   };
 
   public run = (): Promise<D1Response> => {
+    if (typeof this.#error !== 'undefined') {
+      return Promise.reject(this.#error);
+    }
+
     return Promise.resolve({
       success: true,
 

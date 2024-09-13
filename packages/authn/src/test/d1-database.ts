@@ -2,6 +2,7 @@ import { TestD1PreparedStatement } from "./d1-prepared-statement.js";
 import unimplementedMethod from "./unimplemented-method.js";
 
 interface Result {
+  readonly error?: Error | undefined;
   readonly lastRowId?: number | undefined;
   readonly results?: readonly unknown[] | undefined;
 }

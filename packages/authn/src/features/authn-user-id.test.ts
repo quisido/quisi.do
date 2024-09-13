@@ -12,7 +12,7 @@ const TEST_NOW: number = Date.now();
 describe('getAuthnUserIdFromMemory', (): void => {
   it('should clear and emit for expired values', async (): Promise<void> => {
     const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI, fetchPatreon, setNow } = new AuthnTest({
-      userIds: [TEST_USER_ID],
+      oAuthUserIdResults: [{ userId: TEST_USER_ID }],
     });
 
     // Write to cache.

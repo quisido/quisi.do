@@ -11,7 +11,7 @@ export default async function handlePatreonOAuthUserId(
   returnPath: string,
 ): Promise<Response> {
   if (userId !== null) {
-    return createResponse({ id: userId, returnPath });
+    return createResponse({ returnPath, userId });
   }
 
   const {
@@ -37,6 +37,6 @@ export default async function handlePatreonOAuthUserId(
       gender,
     }),
     (newUserId: number): Response =>
-      createResponse({ id: newUserId, returnPath }),
+      createResponse({ returnPath, userId: newUserId }),
   );
 }
