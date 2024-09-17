@@ -8,26 +8,26 @@ import {
 import FatalError from '../../utils/fatal-error.js';
 
 export default function getPatreonOAuthClientSecret(): string {
-  const clientSecret: unknown = getEnv('PATREON_OAUTH_CLIENT_SECRET');
+  const secret: unknown = getEnv('PATREON_OAUTH_CLIENT_SECRET');
 
-  if (typeof clientSecret !== 'string') {
-    if (typeof clientSecret === 'undefined') {
-      emitPublicMetric({ name: MetricName.MissingPatreonOAuthClientSecret });
-      throw new FatalError(ErrorCode.MissingPatreonOAuthClientSecret);
-    }
-
-    emitPrivateMetric({
-      name: MetricName.InvalidPatreonOAuthClientSecret,
-      value: JSON.stringify(clientSecret),
-    });
-
-    emitPublicMetric({
-      name: MetricName.InvalidPatreonOAuthClientSecret,
-      type: typeof clientSecret,
-    });
-
-    throw new FatalError(ErrorCode.InvalidPatreonOAuthClientSecret);
+  if (typeof secret === 'string') {
+    return secret;
   }
 
-  return clientSecret;
+  if (typeof secret === 'undefined') {
+    emitPublicMetric({ name: MetricName.MissingPatreonOAuthClientSecret });
+    throw new FatalError(ErrorCode.MissingPatreonOAuthClientSecret);
+  }
+
+  emitPrivateMetric({
+    name: MetricName.InvalidPatreonOAuthClientSecret,
+    value: JSON.stringify(secret),
+  });
+
+  emitPublicMetric({
+    name: MetricName.InvalidPatreonOAuthClientSecret,
+    type: typeof secret,
+  });
+
+  throw new FatalError(ErrorCode.InvalidPatreonOAuthClientSecret);
 }

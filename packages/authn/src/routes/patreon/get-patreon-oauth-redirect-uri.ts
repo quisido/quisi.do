@@ -8,25 +8,25 @@ import {
 import FatalError from '../../utils/fatal-error.js';
 
 export default function getPatreonOAuthRedirectUri(): string {
-  const redirectUri: unknown = getEnv('PATREON_OAUTH_REDIRECT_URI');
+  const uri: unknown = getEnv('PATREON_OAUTH_REDIRECT_URI');
 
-  if (typeof redirectUri === 'string') {
-    return redirectUri;
+  if (typeof uri === 'string') {
+    return uri;
   }
 
-  if (typeof redirectUri === 'undefined') {
+  if (typeof uri === 'undefined') {
     emitPublicMetric({ name: MetricName.MissingPatreonOAuthRedirectUri });
     throw new FatalError(ErrorCode.MissingPatreonOAuthRedirectUri);
   }
 
   emitPrivateMetric({
     name: MetricName.InvalidPatreonOAuthRedirectUri,
-    value: JSON.stringify(redirectUri),
+    value: JSON.stringify(uri),
   });
 
   emitPublicMetric({
     name: MetricName.InvalidPatreonOAuthRedirectUri,
-    type: typeof redirectUri,
+    type: typeof uri,
   });
 
   throw new FatalError(ErrorCode.InvalidPatreonOAuthRedirectUri);

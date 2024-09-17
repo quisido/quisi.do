@@ -6,16 +6,16 @@ export default function handleInvalidPatreonAccessTokenRequest(
   json: Record<string, unknown>,
 ): never {
   const { error_description: description } = json;
-  if (typeof description !== 'string') {
-    if (typeof description === 'undefined') {
-      return handleMissingInvalidPatreonAccessTokenRequestDescription(json);
-    }
-
-    return handleInvalidInvalidPatreonAccessTokenRequestDescription(
-      json,
-      description,
-    );
+  if (typeof description === 'string') {
+    return handleInvalidPatreonAccessTokenRequestDescription(json, description);
   }
 
-  return handleInvalidPatreonAccessTokenRequestDescription(json, description);
+  if (typeof description === 'undefined') {
+    return handleMissingInvalidPatreonAccessTokenRequestDescription(json);
+  }
+
+  return handleInvalidInvalidPatreonAccessTokenRequestDescription(
+    json,
+    description,
+  );
 }

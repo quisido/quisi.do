@@ -13,6 +13,7 @@ import TestR2Bucket from './r2-bucket.js';
 import WorkerTest from "./worker-test.js";
 
 interface FetchPatreonOptions {
+  readonly code?: string | undefined;
   readonly cookies?: string | undefined;
   readonly ip?: string | undefined;
   readonly sessionIdState?: string | undefined;
@@ -42,6 +43,7 @@ interface Options {
   readonly patreonOAuthClientId?: unknown;
   readonly patreonOAuthClientSecret?: unknown;
   readonly patreonOAuthHost?: unknown;
+  readonly patreonOAuthRedirectUri?: unknown;
   readonly patreonToken?: string | null;
   readonly patreonTokenStatusCode?: StatusCode;
   readonly usersRowId?: number;
@@ -118,7 +120,7 @@ export default class AuthnTest extends WorkerTest {
         PATREON_OAUTH_CLIENT_ID: getOption('patreonOAuthClientId', 'test-client-id'),
         PATREON_OAUTH_CLIENT_SECRET: getOption('patreonOAuthClientSecret', 'test-client-secret'),
         PATREON_OAUTH_HOST: patreonOAuthHost,
-        PATREON_OAUTH_REDIRECT_URI: 'https://localhost/patreon/callback',
+        PATREON_OAUTH_REDIRECT_URI: getOption('patreonOAuthRedirectUri', 'https://localhost/patreon/callback'),
         PRIVATE_DATASET: new TestAnalyticsEngineDataset(),
         PUBLIC_DATASET: new TestAnalyticsEngineDataset(),
       },
@@ -171,18 +173,38 @@ export default class AuthnTest extends WorkerTest {
     cookies = '__Secure-Session-ID=test-session-id',
     ip = '127.0.0.1',
     sessionIdState = 'test-session-id',
+    ...options
   }: FetchPatreonOptions = {}): Promise<FetchTest> => {
+    /**
+     *   For options that can be explicitly set to `undefined`, we must use
+     * `key in options` rather than destructuring.
+     */
+    const getOption = <K extends keyof typeof options>(
+      key: K,
+      defaultValue: FetchPatreonOptions[K],
+    ): FetchPatreonOptions[K] => {
+      if (key in options) {
+        return options[key];
+      }
+
+      return defaultValue;
+    };
+    
     const headers = new Headers({
       'cf-connecting-ip': ip,
     });
 
     const urlSearchParams: URLSearchParams = new URLSearchParams({
-      code: '1234',
       state: JSON.stringify({
         returnPath: '/test-return-path/',
         sessionId: sessionIdState,
       }),
     });
+
+    const code: string | undefined = getOption('code', '1234');
+    if (typeof code === 'string') {
+      urlSearchParams.set('code', code);
+    }
 
     if (typeof cookies === 'string') {
       headers.set('cookie', cookies);
