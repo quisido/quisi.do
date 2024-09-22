@@ -7,6 +7,10 @@ import handleMissingPatreonAccessToken from './handle-missing-patreon-access-tok
 export default function mapPatreonOAuthTokenToAccessToken(
   token: unknown,
 ): string {
+  /**
+   *   When the response JSON is invalid, token is `undefined` and the response
+   * body is unusable (already read).
+   */
   if (typeof token === 'undefined') {
     return handleInvalidPatreonOAuthTokenResponse();
   }
