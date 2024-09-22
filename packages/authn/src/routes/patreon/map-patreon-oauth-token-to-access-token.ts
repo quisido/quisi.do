@@ -16,13 +16,13 @@ export default function mapPatreonOAuthTokenToAccessToken(
   }
 
   const { access_token: accessToken } = token;
-  if (typeof accessToken !== 'string') {
-    if (typeof accessToken === 'undefined') {
-      return handleMissingPatreonAccessToken(token);
-    }
-
-    return handleInvalidPatreonAccessToken(token);
+  if (typeof accessToken === 'string') {
+    return accessToken;
   }
 
-  return accessToken;
+  if (typeof accessToken === 'undefined') {
+    return handleMissingPatreonAccessToken(token);
+  }
+
+  return handleInvalidPatreonAccessToken(accessToken);
 }
