@@ -12,7 +12,10 @@ export default function handleUnknownPatreonAccessTokenErrorCode(
   emitPrivateMetric({
     code: mapUnknownToString(code),
     name: MetricName.UnknownPatreonAccessTokenErrorCode,
-    value: JSON.stringify(json),
+    value: JSON.stringify({
+      ...json,
+      error: undefined,
+    }),
   });
 
   throw new FatalError(ErrorCode.UnknownPatreonAccessTokenErrorCode);
