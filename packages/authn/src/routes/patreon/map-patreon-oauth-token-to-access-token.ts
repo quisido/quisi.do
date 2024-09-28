@@ -1,3 +1,4 @@
+import type Worker from '@quisido/worker';
 import isObject from '../../utils/is-object.js';
 import handleInvalidPatreonAccessToken from './handle-invalid-patreon-access-token.js';
 import handleInvalidPatreonOAuthTokenResponse from './handle-invalid-patreon-oauth-token-response.js';
@@ -5,6 +6,7 @@ import handleInvalidPatreonOAuthToken from './handle-invalid-patreon-oauth-token
 import handleMissingPatreonAccessToken from './handle-missing-patreon-access-token.js';
 
 export default function mapPatreonOAuthTokenToAccessToken(
+  this: Worker,
   token: unknown,
 ): string {
   /**
@@ -12,11 +14,11 @@ export default function mapPatreonOAuthTokenToAccessToken(
    * body is unusable (already read).
    */
   if (typeof token === 'undefined') {
-    return handleInvalidPatreonOAuthTokenResponse();
+    return handleInvalidPatreonOAuthTokenResponse.call(this);
   }
 
   if (!isObject(token)) {
-    return handleInvalidPatreonOAuthToken(token);
+    return handleInvalidPatreonOAuthToken.call(this, token);
   }
 
   const { access_token: accessToken } = token;
@@ -25,8 +27,8 @@ export default function mapPatreonOAuthTokenToAccessToken(
   }
 
   if (typeof accessToken === 'undefined') {
-    return handleMissingPatreonAccessToken(token);
+    return handleMissingPatreonAccessToken.call(this, token);
   }
 
-  return handleInvalidPatreonAccessToken(accessToken);
+  return handleInvalidPatreonAccessToken.call(this, accessToken);
 }

@@ -1,29 +1,25 @@
+import type Worker from '@quisido/worker';
 import EnvironmentName from '../constants/environment-name.js';
 import { MetricName } from '../constants/metric-name.js';
-import {
-  emitPrivateMetric,
-  emitPublicMetric,
-  getEnv,
-} from '../constants/worker.js';
 import isEnvironmentName from '../utils/is-environment-name.js';
 
-export default function getEnvironmentName(): EnvironmentName {
-  const envName: unknown = getEnv('ENVIRONMENT_NAME');
+export default function getEnvironmentName(this: Worker): EnvironmentName {
+  const envName: unknown = this.getEnv('ENVIRONMENT_NAME');
   if (isEnvironmentName(envName)) {
     return envName;
   }
 
   if (typeof envName === 'undefined') {
-    emitPublicMetric({ name: MetricName.MissingEnvironmentName });
+    this.emitPublicMetric({ name: MetricName.MissingEnvironmentName });
     return EnvironmentName.Unknown;
   }
 
-  emitPrivateMetric({
+  this.emitPrivateMetric({
     name: MetricName.InvalidEnvironmentName,
     value: JSON.stringify(envName),
   });
 
-  emitPublicMetric({
+  this.emitPublicMetric({
     name: MetricName.InvalidEnvironmentName,
     type: typeof envName,
   });

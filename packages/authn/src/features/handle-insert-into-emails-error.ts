@@ -1,26 +1,22 @@
 import { Snapshot } from '@quisido/proposal-async-context';
+import type Worker from '@quisido/worker';
 import { mapUnknownToError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
-import {
-  emitPrivateMetric,
-  emitPublicMetric,
-  getNow,
-  logPrivateError,
-} from '../constants/worker.js';
 
 export default function handleInsertIntoEmailsError(
+  this: Worker,
   userId: number,
 ): (err: unknown) => void {
   const snapshot: Snapshot = new Snapshot();
-  const startTime: number = getNow();
+  const startTime: number = this.getNow();
 
-  return function handleCatch(err: unknown): void {
+  const handleCatch = (err: unknown): void => {
     return snapshot.run((): void => {
-      const endTime: number = getNow();
+      const endTime: number = this.getNow();
       const duration: number = endTime - startTime;
-      logPrivateError(mapUnknownToError(err));
+      this.logPrivateError(mapUnknownToError(err));
 
-      emitPrivateMetric({
+      this.emitPrivateMetric({
         duration,
         endTime,
         name: MetricName.EmailInsertError,
@@ -28,7 +24,7 @@ export default function handleInsertIntoEmailsError(
         userId,
       });
 
-      emitPublicMetric({
+      this.emitPublicMetric({
         duration,
         endTime,
         name: MetricName.EmailInsertError,
@@ -36,4 +32,6 @@ export default function handleInsertIntoEmailsError(
       });
     });
   };
+
+  return handleCatch;
 }

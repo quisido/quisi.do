@@ -1,14 +1,14 @@
 import { ErrorCode } from '@quisido/authn-shared';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric } from '../../constants/worker.js';
 import ErrorResponse from '../error-response.js';
 
-export default function handleNonJsonStateSearchParam(value: string): Response {
-  emitPublicMetric({ name: MetricName.NonJsonStateSearchParam });
-  emitPrivateMetric({
+export default function handleNonJsonStateSearchParam(this: Worker,value: string): Response {
+  this.emitPublicMetric({ name: MetricName.NonJsonStateSearchParam });
+  this.emitPrivateMetric({
     name: MetricName.NonJsonStateSearchParam,
     value,
   });
 
-  return new ErrorResponse(ErrorCode.NonJsonState);
+  return new ErrorResponse(this, ErrorCode.NonJsonState);
 }

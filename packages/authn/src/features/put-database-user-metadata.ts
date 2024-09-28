@@ -1,7 +1,7 @@
+import type Worker from '@quisido/worker';
 import { MetricName } from '../constants/metric-name.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
 import { INSERT_INTO_OAUTH_QUERY } from '../constants/queries.js';
-import { affect, emitPublicMetric } from '../constants/worker.js';
 import handleInsertIntoOAuthError from './handle-insert-into-oauth-error.js';
 import handleInsertIntoOAuthResponse from './handle-insert-into-oauth-response.js';
 import putDatabaseUserEmail from './put-database-user-email.js';
@@ -17,7 +17,7 @@ interface Options {
   readonly userId: number;
 }
 
-export default function putDatabaseUserMetadata({
+export default function putDatabaseUserMetadata(this: Worker, {
   changes,
   duration,
   email,
@@ -26,8 +26,8 @@ export default function putDatabaseUserMetadata({
   sizeAfter,
   userId,
 }: Options): number {
-  const db: D1Database = getDatabase();
-  emitPublicMetric({
+  const db: D1Database = getDatabase.call(this);
+  this.emitPublicMetric({
     changes,
     duration,
     name: MetricName.AuthenticationCreated,
@@ -41,15 +41,15 @@ export default function putDatabaseUserMetadata({
     .bind(userId, oAuthProvider, oAuthId)
     .run();
 
-  affect(
+    this.affect(
     insertIntoOAuth
-      .then(handleInsertIntoOAuthResponse(userId))
-      .catch(handleInsertIntoOAuthError(userId)),
+      .then(handleInsertIntoOAuthResponse.call(this,userId))
+      .catch(handleInsertIntoOAuthError.call(this,userId)),
   );
 
   // Associate user ID with email.
   if (email !== null) {
-    putDatabaseUserEmail({ email, userId });
+    putDatabaseUserEmail.call(this, { email, userId });
   }
 
   return userId;

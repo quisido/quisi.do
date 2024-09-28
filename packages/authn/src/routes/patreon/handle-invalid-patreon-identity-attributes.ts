@@ -1,5 +1,5 @@
+import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric } from '../../constants/worker.js';
 
 interface Options {
   readonly attributes: unknown;
@@ -11,15 +11,15 @@ interface Result {
   readonly id: string;
 }
 
-export default function handleInvalidPatreonIdentityAttributes({
+export default function handleInvalidPatreonIdentityAttributes(this: Worker,{
   attributes,
   data,
   id,
 }: Options): Result {
   if (typeof attributes === 'undefined') {
-    emitPublicMetric({ name: MetricName.MissingPatreonIdentityAttributes });
+    this.emitPublicMetric({ name: MetricName.MissingPatreonIdentityAttributes });
 
-    emitPrivateMetric({
+    this.emitPrivateMetric({
       data: JSON.stringify(data),
       name: MetricName.MissingPatreonIdentityAttributes,
     });
@@ -29,12 +29,12 @@ export default function handleInvalidPatreonIdentityAttributes({
     };
   }
 
-  emitPrivateMetric({
+  this.emitPrivateMetric({
     name: MetricName.InvalidPatreonIdentityAttributes,
     value: JSON.stringify(attributes),
   });
 
-  emitPublicMetric({
+  this.emitPublicMetric({
     name: MetricName.InvalidPatreonIdentityAttributes,
     type: typeof attributes,
   });

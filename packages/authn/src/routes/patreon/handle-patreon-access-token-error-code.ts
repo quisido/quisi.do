@@ -1,3 +1,4 @@
+import type Worker from '@quisido/worker';
 import handleInvalidPatreonAccessTokenRequest from './handle-invalid-patreon-access-token-request.js';
 import handleInvalidPatreonClientId from './handle-invalid-patreon-client-id.js';
 import handleInvalidPatreonGrantCode from './handle-invalid-patreon-grant-code.js';
@@ -8,21 +9,21 @@ interface Options {
   readonly json: Record<string, unknown>;
 }
 
-export default function handlePatreonAccessTokenErrorCode({
+export default function handlePatreonAccessTokenErrorCode(this: Worker, {
   code,
   json,
 }: Options): never {
   switch (code) {
     case 'invalid_client':
-      return handleInvalidPatreonClientId();
+      return handleInvalidPatreonClientId.call(this);
 
     case 'invalid_grant':
-      return handleInvalidPatreonGrantCode();
+      return handleInvalidPatreonGrantCode.call(this);
 
     case 'invalid_request':
-      return handleInvalidPatreonAccessTokenRequest(json);
+      return handleInvalidPatreonAccessTokenRequest.call(this, json);
 
     default:
-      return handleUnknownPatreonAccessTokenErrorCode(code, json);
+      return handleUnknownPatreonAccessTokenErrorCode.call(this, code, json);
   }
 }

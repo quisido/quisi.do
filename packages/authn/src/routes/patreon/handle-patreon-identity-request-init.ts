@@ -1,4 +1,4 @@
-import { getFetch } from "../../constants/worker.js";
+import type Worker from '@quisido/worker';
 import getPatreonOAuthHost from "./get-patreon-oauth-host.js";
 
 const CAMPAIGN_FIELDS: readonly string[] = ['summary', 'is_monthly'];
@@ -34,11 +34,11 @@ const SEARCH: string = [
   `fields%5Buser%5D=${USER_FIELDS.join(',')}`,
 ].join('&');
 
-export default async function handlePatreonIdentityRequestInit(
+export default async function handlePatreonIdentityRequestInit(this: Worker,
   requestInit: RequestInit,
 ): Promise<Response> {
-  const fetch: Fetcher['fetch'] = getFetch();
-  const oAuthHost: string = getPatreonOAuthHost();
+  const fetch: Fetcher['fetch'] = this.getFetch();
+  const oAuthHost: string = getPatreonOAuthHost.call(this);
 
   return await fetch(
     `${oAuthHost}/api/oauth2/v2/identity?${SEARCH}`,

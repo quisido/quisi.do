@@ -1,5 +1,5 @@
+import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import { emitPublicMetric } from '../../constants/worker.js';
 import FaviconResponse from './favicon-response.js';
 import RobotsResponse from './robots-response.js';
 import { StaticPathname } from './static-pathname.js';
@@ -13,17 +13,17 @@ import { StaticPathname } from './static-pathname.js';
  *   be-performed-while-handling-a-request-3bne
  */
 
-export default function handleStaticPathname(
+export default function handleStaticPathname(this: Worker,
   pathname: StaticPathname,
 ): Response {
   switch (pathname) {
     case StaticPathname.Favicon: {
-      emitPublicMetric({ name: MetricName.FaviconIco });
+      this.emitPublicMetric({ name: MetricName.FaviconIco });
       return new FaviconResponse();
     }
 
     case StaticPathname.Robots: {
-      emitPublicMetric({ name: MetricName.RobotsTxt });
+      this.emitPublicMetric({ name: MetricName.RobotsTxt });
       return new RobotsResponse();
     }
   }

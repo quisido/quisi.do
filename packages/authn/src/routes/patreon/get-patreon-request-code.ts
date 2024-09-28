@@ -1,16 +1,13 @@
 import { ErrorCode } from '@quisido/authn-shared';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import {
-  emitPublicMetric,
-  getRequestSearchParam,
-} from '../../constants/worker.js';
 import FatalError from '../../utils/fatal-error.js';
 
-export default function getPatreonRequestCode(): string {
-  const code: string | null = getRequestSearchParam('code');
+export default function getPatreonRequestCode(this: Worker): string {
+  const code: string | null = this.getRequestSearchParam('code');
 
   if (code === null) {
-    emitPublicMetric({ name: MetricName.MissingPatreonRequestCode });
+    this.emitPublicMetric({ name: MetricName.MissingPatreonRequestCode });
     throw new FatalError(ErrorCode.MissingPatreonRequestCode);
   }
 

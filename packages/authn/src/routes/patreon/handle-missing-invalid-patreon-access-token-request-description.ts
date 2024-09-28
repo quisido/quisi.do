@@ -1,12 +1,12 @@
 import { ErrorCode } from '@quisido/authn-shared';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric } from '../../constants/worker.js';
 import FatalError from '../../utils/fatal-error.js';
 
-export default function handleMissingInvalidPatreonAccessTokenRequestDescription(
+export default function handleMissingInvalidPatreonAccessTokenRequestDescription(this: Worker,
   json: Record<string, unknown>,
 ): never {
-  emitPrivateMetric({
+  this.emitPrivateMetric({
     name: MetricName.MissingInvalidPatreonAccessTokenRequestDescription,
     value: JSON.stringify({
       ...json,
@@ -14,7 +14,7 @@ export default function handleMissingInvalidPatreonAccessTokenRequestDescription
     }),
   });
 
-  emitPublicMetric({
+  this.emitPublicMetric({
     name: MetricName.MissingInvalidPatreonAccessTokenRequestDescription,
   });
 

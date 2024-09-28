@@ -1,6 +1,7 @@
-import { getNow } from "../constants/worker.js";
+import type Worker from '@quisido/worker';
 
 export default function createThrottler(): (
+  this: Worker,
   key: number | string | symbol,
   ms: number,
 ) => void {
@@ -9,9 +10,9 @@ export default function createThrottler(): (
     number
   >();
 
-  return function throttle(key: number | string | symbol, ms: number): void {
+  return function throttle(this: Worker, key: number | string | symbol, ms: number): void {
     const lastCallTime: number | undefined = map.get(key);
-    const now: number = getNow();
+    const now: number = this.getNow();
 
     // Throttle if the last call time was less than `ms` ago.
     if (typeof lastCallTime !== 'undefined' && lastCallTime > now - ms) {

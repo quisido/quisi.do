@@ -1,3 +1,4 @@
+import type Worker from '@quisido/worker';
 import type OAuthProvider from '../../constants/oauth-provider.js';
 import { SELECT_USERID_FROM_OAUTH_QUERY } from '../../constants/queries.js';
 import getDatabase from './get-database.js';
@@ -10,10 +11,11 @@ interface Result {
 }
 
 export default async function getUserIdFromOAuth(
+  this: Worker,
   oAuthProvider: OAuthProvider,
   oAuthId: string,
 ): Promise<Result> {
-  const db: D1Database = getDatabase();
+  const db: D1Database = getDatabase.call(this);
 
   const statement: D1PreparedStatement = db
     .prepare(SELECT_USERID_FROM_OAUTH_QUERY)

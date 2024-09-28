@@ -1,14 +1,14 @@
+import type Worker from '@quisido/worker';
 import { DEFAULT_COOKIE_DOMAIN } from '../constants/default-cookie-domain.js';
 import { MetricName } from '../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric } from '../constants/worker.js';
 
-export default function handleInvalidCookieDomain(domain: unknown): string {
-  emitPrivateMetric({
+export default function handleInvalidCookieDomain(this: Worker, domain: unknown): string {
+  this.emitPrivateMetric({
     name: MetricName.InvalidCookieDomain,
     value: JSON.stringify(domain),
   });
 
-  emitPublicMetric({
+  this.emitPublicMetric({
     name: MetricName.InvalidCookieDomain,
     type: typeof domain,
   });

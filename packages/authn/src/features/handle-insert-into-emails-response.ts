@@ -1,20 +1,21 @@
 import { Snapshot } from '@quisido/proposal-async-context';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric, getNow } from '../constants/worker.js';
 
 export default function handleInsertIntoEmailsResponse(
+  this: Worker,
   userId: number,
 ): (response: D1Response) => void {
   const snapshot: Snapshot = new Snapshot();
-  const startTime: number = getNow();
+  const startTime: number = this.getNow();
 
-  return function handleThen({
+  const handleThen = ({
     meta: { changes, duration, last_row_id: lastRowId, size_after: sizeAfter },
-  }: D1Response): void {
+  }: D1Response): void => {
     return snapshot.run((): void => {
-      const endTime: number = getNow();
+      const endTime: number = this.getNow();
 
-      emitPrivateMetric({
+      this.emitPrivateMetric({
         changes,
         duration,
         endTime,
@@ -25,7 +26,7 @@ export default function handleInsertIntoEmailsResponse(
         userId,
       });
 
-      emitPublicMetric({
+      this.emitPublicMetric({
         changes,
         duration,
         endTime,
@@ -35,4 +36,6 @@ export default function handleInsertIntoEmailsResponse(
       });
     });
   };
+
+  return handleThen;
 }

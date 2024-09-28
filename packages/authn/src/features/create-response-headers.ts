@@ -1,3 +1,4 @@
+import type Worker from '@quisido/worker';
 import { SECONDS_PER_DAY } from '../constants/time.js';
 import getCookieDomain from './get-cookie-domain.js';
 import getHost from './get-host.js';
@@ -7,12 +8,12 @@ interface Options {
   readonly returnPath: string;
 }
 
-export default function createResponseHeaders({
+export default function createResponseHeaders(this: Worker,{
   authnId,
   returnPath,
 }: Options): Headers {
-  const cookieDomain: string = getCookieDomain();
-  const host: string = getHost();
+  const cookieDomain: string = getCookieDomain.call(this);
+  const host: string = getHost.call(this);
 
   return new Headers({
     'content-location': `https://${host}${returnPath}`,

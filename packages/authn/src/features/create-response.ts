@@ -1,8 +1,8 @@
+import type Worker from '@quisido/worker';
 import { StatusCode } from 'cloudflare-utils';
 import { SECONDS_PER_DAY } from '../constants/time.js';
-import { affect, getNow } from '../constants/worker.js';
+import getNowSeconds from '../features/get-now-seconds.js';
 import createAuthnId from '../utils/create-authn-id.js';
-import getNowSeconds from '../utils/get-now-seconds.js';
 import createResponseHeaders from './create-response-headers.js';
 import getAuthnUserIdsNamespace from './get-authn-user-ids-namespace.js';
 import handlePutAuthnUserIdError from './handle-put-authn-user-id-error.js';
@@ -13,10 +13,10 @@ interface Options {
   readonly userId: number;
 }
 
-export default function createResponse({ returnPath, userId }: Options): Response {
+export default function createResponse(this: Worker,{ returnPath, userId }: Options): Response {
   const authnId: string = createAuthnId();
-  const authnUserIds: KVNamespace = getAuthnUserIdsNamespace();
-  const nowSeconds: number = getNowSeconds();
+  const authnUserIds: KVNamespace = getAuthnUserIdsNamespace.call(this);
+  const nowSeconds: number = getNowSeconds.call(this);
 
   /**
    *   We set the ID asynchronously because there are good odds that it
@@ -25,20 +25,20 @@ export default function createResponse({ returnPath, userId }: Options): Respons
    *   If users are getting unauthenticated errors despite having authenticated,
    * then we can `await` this to fix that issue.
    */
-  const startTime: number = getNow();
+  const startTime: number = this.getNow();
   const expiration: number = nowSeconds + SECONDS_PER_DAY;
-  affect(
+  this.affect(
     authnUserIds
       .put(authnId, userId.toString(), {
         expiration,
         expirationTtl: SECONDS_PER_DAY,
       })
-      .then(handlePutAuthnUserId({ authnId, startTime, userId }))
-      .catch(handlePutAuthnUserIdError({ authnId, startTime, userId })),
+      .then(handlePutAuthnUserId.call(this,{ authnId, startTime, userId }))
+      .catch(handlePutAuthnUserIdError.call(this,{ authnId, startTime, userId })),
   );
 
   return new Response(null, {
-    headers: createResponseHeaders({ authnId, returnPath }),
+    headers: createResponseHeaders.call(this, { authnId, returnPath }),
     status: StatusCode.SeeOther,
   });
 }

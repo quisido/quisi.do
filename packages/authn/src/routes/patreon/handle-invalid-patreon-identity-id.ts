@@ -1,23 +1,23 @@
 import { ErrorCode } from '@quisido/authn-shared';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric } from '../../constants/worker.js';
 import FatalError from '../../utils/fatal-error.js';
 import handleMissingPatreonIdentityId from './handle-missing-patreon-identity-id.js';
 
-export default function handleInvalidPatreonIdentityId(
+export default function handleInvalidPatreonIdentityId(this: Worker,
   data: Record<string, unknown>,
   id: unknown,
 ): never {
   if (typeof id === 'undefined') {
-    return handleMissingPatreonIdentityId(data);
+    return handleMissingPatreonIdentityId.call(this,data);
   }
 
-  emitPrivateMetric({
+  this.emitPrivateMetric({
     name: MetricName.InvalidPatreonIdentityId,
     value: JSON.stringify(id),
   });
 
-  emitPublicMetric({
+  this.emitPublicMetric({
     name: MetricName.InvalidPatreonIdentityId,
     type: typeof id,
   });

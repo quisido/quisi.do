@@ -1,7 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
-import { createExportedHandler } from './constants/worker.js';
+import { WORKER } from './constants/worker.js';
 
-export default createExportedHandler({
+export default WORKER.createExportedHandler({
   console,
   fetch,
 }) satisfies ExportedHandler;

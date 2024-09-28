@@ -1,3 +1,4 @@
+import type Worker from '@quisido/worker';
 import isObject from '../../utils/is-object.js';
 import getSessionIdCookie from '../get-session-id-cookie.js';
 import { AuthenticationPathname } from './authentication-pathname.js';
@@ -13,14 +14,15 @@ interface Options {
   readonly stateSearchParam: string;
 }
 
-export default async function handleState({
+export default async function handleState(
+  this: Worker, {
   pathname,
   state,
   stateSearchParam,
 }: Options): Promise<Response> {
   // Invalid state
   if (!isObject(state)) {
-    return handleNonObjectStateSearchParam({
+    return handleNonObjectStateSearchParam.call(this, {
       type: typeof state,
       value: stateSearchParam,
     });
@@ -29,7 +31,7 @@ export default async function handleState({
   // Invalid return path state
   const { returnPath, sessionId: stateSessionId } = state;
   if (typeof returnPath !== 'string') {
-    return handleInvalidReturnPath({
+    return handleInvalidReturnPath.call(this, {
       searchParam: stateSearchParam,
       state,
       value: returnPath,
@@ -38,7 +40,7 @@ export default async function handleState({
 
   // Invalid session ID state
   if (typeof stateSessionId !== 'string') {
-    return handleInvalidStateSessionId({
+    return handleInvalidStateSessionId.call(this, {
       searchParam: stateSearchParam,
       state,
       value: stateSessionId,
@@ -46,14 +48,14 @@ export default async function handleState({
   }
 
   // Cross-site request forgery (CSRF)
-  const sessionIdCookie: string = getSessionIdCookie();
+  const sessionIdCookie: string = getSessionIdCookie.call(this, );
   if (sessionIdCookie !== stateSessionId) {
-    return handleCrossSiteRequestForgery({
+    return handleCrossSiteRequestForgery.call(this, {
       cookie: sessionIdCookie,
       state: stateSessionId,
     });
   }
 
   // Valid return path
-  return await handleReturnPath({ pathname, returnPath });
+  return await handleReturnPath.call(this, { pathname, returnPath });
 }

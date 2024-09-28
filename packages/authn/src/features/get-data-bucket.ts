@@ -1,15 +1,12 @@
+import type Worker from '@quisido/worker';
 import { mapUnknownToString } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
-import {
-  emitPrivateMetric,
-  getR2Bucket,
-} from '../constants/worker.js';
 
-export default function getDataBucket(): R2Bucket | null {
+export default function getDataBucket(this: Worker): R2Bucket | null {
   try {
-    return getR2Bucket('AUTHN_DATA');
+    return this.getR2Bucket('AUTHN_DATA');
   } catch (err: unknown) {
-    emitPrivateMetric({
+    this.emitPrivateMetric({
       message: mapUnknownToString(err),
       name: MetricName.InvalidDataBucket,
     });

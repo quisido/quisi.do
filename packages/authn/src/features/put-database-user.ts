@@ -1,6 +1,6 @@
+import type Worker from '@quisido/worker';
 import type Gender from '../constants/gender.js';
 import type OAuthProvider from '../constants/oauth-provider.js';
-import { snapshot } from '../constants/worker.js';
 import insertIntoUsers from './insert-into-users.js';
 import putDatabaseUserMetadata from './put-database-user-metadata.js';
 
@@ -12,12 +12,13 @@ interface Options {
 }
 
 export default async function putDatabaseUser(
+  this: Worker,
   oAuthProvider: OAuthProvider,
   oAuthId: string,
   { email, firstName, fullName, gender }: Options,
 ): Promise<number> {
-  return await snapshot(
-    insertIntoUsers({
+  return await this.snapshot(
+    insertIntoUsers.call(this, {
       firstName,
       fullName,
       gender,
@@ -28,7 +29,7 @@ export default async function putDatabaseUser(
       last_row_id: userId,
       size_after: sizeAfter,
     }: D1Meta): number => {
-      return putDatabaseUserMetadata({
+      return putDatabaseUserMetadata.call(this, {
         changes,
         duration,
         email,

@@ -1,13 +1,13 @@
 import { ErrorCode } from '@quisido/authn-shared';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric } from '../../constants/worker.js';
 import FatalError from '../../utils/fatal-error.js';
 
-export default function handleMissingPatreonAccessToken(
+export default function handleMissingPatreonAccessToken(this: Worker,
   token: Record<string, unknown>,
 ): never {
-  emitPublicMetric({ name: MetricName.MissingPatreonAccessToken });
-  emitPrivateMetric({
+  this.emitPublicMetric({ name: MetricName.MissingPatreonAccessToken });
+  this.emitPrivateMetric({
     name: MetricName.MissingPatreonAccessToken,
     value: JSON.stringify(token),
   });

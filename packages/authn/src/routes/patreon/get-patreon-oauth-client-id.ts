@@ -1,30 +1,26 @@
 import { ErrorCode } from '@quisido/authn-shared';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import {
-  emitPrivateMetric,
-  emitPublicMetric,
-  getEnv,
-} from '../../constants/worker.js';
 import FatalError from '../../utils/fatal-error.js';
 
-export default function getPatreonOAuthClientId(): string {
-  const clientId: unknown = getEnv('PATREON_OAUTH_CLIENT_ID');
+export default function getPatreonOAuthClientId(this: Worker): string {
+  const clientId: unknown = this.getEnv('PATREON_OAUTH_CLIENT_ID');
 
   if (typeof clientId === 'string') {
     return clientId;
   }
 
   if (typeof clientId === 'undefined') {
-    emitPublicMetric({ name: MetricName.MissingPatreonOAuthClientId });
+    this.emitPublicMetric({ name: MetricName.MissingPatreonOAuthClientId });
     throw new FatalError(ErrorCode.MissingPatreonOAuthClientId);
   }
 
-  emitPrivateMetric({
+  this.emitPrivateMetric({
     name: MetricName.InvalidPatreonOAuthClientId,
     value: JSON.stringify(clientId),
   });
 
-  emitPublicMetric({
+  this.emitPublicMetric({
     name: MetricName.InvalidPatreonOAuthClientId,
     type: typeof clientId,
   });

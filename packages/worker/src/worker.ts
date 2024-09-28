@@ -22,8 +22,12 @@ interface FetchOptions {
   readonly missingPrivateDatasetMetricName: string;
   readonly missingPublicDatasetMetricName: string;
   readonly missingTraceParentMetricName: string;
-  readonly onFetchError: (error: unknown) => Promise<Response> | Response;
-  readonly onFetchRequest: () => Promise<Response> | Response;
+  readonly onFetchRequest: (this: Worker) => Promise<Response> | Response;
+
+  readonly onFetchError: (
+    this: Worker,
+    error: unknown,
+  ) => Promise<Response> | Response;
 }
 
 export type Options = AllOrNone<FetchOptions>;
@@ -64,7 +68,7 @@ export default class Worker {
     getNow,
     fetch,
   }: CreateExportedHandlerOptions): ExportedHandler => {
-    const ExportedHandler = createWorkerExportedHandler({
+    const ExportedHandler = createWorkerExportedHandler.call(this, {
       ...this.#fetchOptions,
       console,
       fetch,

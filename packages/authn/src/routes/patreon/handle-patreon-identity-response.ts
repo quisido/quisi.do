@@ -1,4 +1,4 @@
-import { snapshot } from '../../constants/worker.js';
+import type Worker from '@quisido/worker';
 import isObject from '../../utils/is-object.js';
 import handleForbiddenPatreonIdentityResponse from './handle-forbidden-patreon-identity-response.js';
 import handleInvalidPatreonIdentityResponse from './handle-invalid-patreon-identity-response.js';
@@ -10,7 +10,7 @@ import type PatreonIdentity from './patreon-identity.js';
 const FORBIDDEN = 403;
 const HTTP_REDIRECTION = 300;
 
-export default async function handlePatreonIdentityResponse(response: Response): Promise<PatreonIdentity> {
+export default async function handlePatreonIdentityResponse(this: Worker,response: Response): Promise<PatreonIdentity> {
   const getJson = async (): Promise<unknown> => {
     try {
       return await response.json();
@@ -19,26 +19,26 @@ export default async function handlePatreonIdentityResponse(response: Response):
     }
   };
 
-  return await snapshot(
+  return await this.snapshot(
     getJson(),
     (identity: unknown): PatreonIdentity => {
       if (typeof identity === 'undefined') {
-        return handleInvalidPatreonIdentityResponse();
+        return handleInvalidPatreonIdentityResponse.call(this);
       }
 
       if (response.status === FORBIDDEN) {
-        return handleForbiddenPatreonIdentityResponse(identity);
+        return handleForbiddenPatreonIdentityResponse.call(this,identity);
       }
 
       if (response.status >= HTTP_REDIRECTION) {
-        return handleUnknownPatreonIdentityError(response.status, identity);
+        return handleUnknownPatreonIdentityError.call(this,response.status, identity);
       }
 
       if (!isObject(identity)) {
-        return handleInvalidPatreonIdentity(identity);
+        return handleInvalidPatreonIdentity.call(this,identity);
       }
 
-      return parsePatreonIdentity(identity);
+      return parsePatreonIdentity.call(this,identity);
     },
   );
 }

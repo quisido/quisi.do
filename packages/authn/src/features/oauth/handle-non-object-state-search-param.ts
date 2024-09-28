@@ -1,6 +1,6 @@
 import { ErrorCode } from '@quisido/authn-shared';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric } from '../../constants/worker.js';
 import ErrorResponse from '../error-response.js';
 
 interface Options {
@@ -8,19 +8,19 @@ interface Options {
   readonly value: string;
 }
 
-export default function handleNonObjectStateSearchParam({
+export default function handleNonObjectStateSearchParam(this: Worker,{
   type,
   value,
 }: Options): Response {
-  emitPrivateMetric({
+  this.emitPrivateMetric({
     name: MetricName.NonObjectState,
     value,
   });
 
-  emitPublicMetric({
+  this.emitPublicMetric({
     name: MetricName.NonObjectState,
     type,
   });
 
-  return new ErrorResponse(ErrorCode.NonObjectState);
+  return new ErrorResponse(this, ErrorCode.NonObjectState);
 }

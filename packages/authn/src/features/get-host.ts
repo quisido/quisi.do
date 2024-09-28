@@ -1,29 +1,25 @@
+import type Worker from '@quisido/worker';
 import { MetricName } from '../constants/metric-name.js';
-import {
-  emitPrivateMetric,
-  emitPublicMetric,
-  getEnv,
-} from '../constants/worker.js';
 
 const DEFAULT_HOST = 'quisi.do';
 
-export default function getHost(): string {
-  const host: unknown = getEnv('HOST');
+export default function getHost(this: Worker): string {
+  const host: unknown = this.getEnv('HOST');
   if (typeof host === 'string' && host !== '') {
     return host;
   }
 
   if (typeof host === 'undefined' || host === '') {
-    emitPublicMetric({ name: MetricName.MissingHost });
+    this.emitPublicMetric({ name: MetricName.MissingHost });
     return DEFAULT_HOST;
   }
 
-  emitPrivateMetric({
+  this.emitPrivateMetric({
     name: MetricName.InvalidHost,
     value: JSON.stringify(host),
   });
 
-  emitPublicMetric({
+  this.emitPublicMetric({
     name: MetricName.InvalidHost,
     type: typeof host,
   });

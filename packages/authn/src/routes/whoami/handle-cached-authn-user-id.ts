@@ -1,19 +1,19 @@
 import { WhoAmIResponseCode } from '@quisido/authn-shared';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric } from '../../constants/worker.js';
 import WhoAmIResponse from './whoami-response.js';
 
-export default function handleCachedAuthnUserId(userId: number): Response {
-  emitPrivateMetric({
+export default function handleCachedAuthnUserId(this: Worker,userId: number): Response {
+  this.emitPrivateMetric({
     name: MetricName.CachedAuthnId,
     userId,
   });
 
-  emitPublicMetric({
+  this.emitPublicMetric({
     name: MetricName.CachedAuthnId,
   });
 
-  return new WhoAmIResponse({
+  return new WhoAmIResponse(this,{
     code: WhoAmIResponseCode.Cached,
     id: userId,
   });

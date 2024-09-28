@@ -1,4 +1,5 @@
 import type { WhoAmIResponseCode } from '@quisido/authn-shared';
+import Worker from '@quisido/worker';
 import { StatusCode } from 'cloudflare-utils';
 import WhoAmIResponseInit from './whoami-response-init.js';
 
@@ -9,13 +10,13 @@ interface Options {
 }
 
 export default class WhoAmIResponse extends Response {
-  public constructor({ code, id, status = StatusCode.OK }: Options) {
+  public constructor(worker: Worker, { code, id, status = StatusCode.OK }: Options) {
     super(
       JSON.stringify({
         code,
         id,
       }),
-      new WhoAmIResponseInit(status),
+      new WhoAmIResponseInit(worker, status),
     );
   }
 }

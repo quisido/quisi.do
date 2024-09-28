@@ -1,17 +1,18 @@
 import { ErrorCode } from '@quisido/authn-shared';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric } from '../constants/worker.js';
 import FatalError from '../utils/fatal-error.js';
 
 export default function handleInvalidAuthnUserIdsNamespace(
+  this: Worker,
   namespace: unknown,
 ): never {
-  emitPrivateMetric({
+  this.emitPrivateMetric({
     name: MetricName.InvalidAuthnUserIdsNamespace,
     value: JSON.stringify(namespace),
   });
 
-  emitPublicMetric({
+  this.emitPublicMetric({
     name: MetricName.InvalidAuthnUserIdsNamespace,
     type: typeof namespace,
   });

@@ -1,3 +1,4 @@
+import type Worker from '@quisido/worker';
 import { SECONDS_PER_MINUTE } from '../../constants/time.js';
 import getAccessControlAllowOrigin from '../../features/get-access-control-allow-origin.js';
 
@@ -12,9 +13,9 @@ const HEADERS_INIT: HeadersInit = {
   'content-type': 'text/json; charset=utf-8',
 };
 
-export default function getWhoAmIResponseHeadersInit(): HeadersInit {
+export default function getWhoAmIResponseHeadersInit(this: Worker): HeadersInit {
   return {
     ...HEADERS_INIT,
-    'access-control-allow-origin': getAccessControlAllowOrigin(),
+    'access-control-allow-origin': getAccessControlAllowOrigin.call(this),
   };
 }

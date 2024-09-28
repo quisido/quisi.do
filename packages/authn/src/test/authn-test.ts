@@ -3,9 +3,10 @@ import { expect } from 'vitest';
 import EnvironmentName from "../constants/environment-name.js";
 import { INSERT_INTO_EMAILS_QUERY, INSERT_INTO_OAUTH_QUERY, INSERT_INTO_USERS_QUERY, SELECT_USERID_FROM_OAUTH_QUERY } from '../constants/queries.js';
 import { SECONDS_PER_DAY } from '../constants/time.js';
-import { createExportedHandler } from '../constants/worker.js';
+import { WORKER } from '../constants/worker.js';
 import { EXPECT_ANY_NUMBER } from '../test/expect-any.js';
 import TestAnalyticsEngineDataset from "./analytics-engine-dataset.js";
+import createIp from './create-ip.js';
 import TestD1Database from './d1-database.js';
 import type FetchTest from "./fetch-test.js";
 import TestKVNamespace from "./kv-namespace.js";
@@ -108,7 +109,7 @@ export default class AuthnTest extends WorkerTest {
     const patreonOAuthHost: unknown = getOption('patreonOAuthHost', 'https://patreon.test.quisi.do');
 
     super({
-      createExportedHandler,
+      createExportedHandler: WORKER.createExportedHandler,
 
       env: {
         AUTHN_DATA: dataBucket,
@@ -171,7 +172,7 @@ export default class AuthnTest extends WorkerTest {
 
   public fetchPatreon = async ({
     cookies = '__Secure-Session-ID=test-session-id',
-    ip = '127.0.0.1',
+    ip = createIp(),
     sessionIdState = 'test-session-id',
     ...options
   }: FetchPatreonOptions = {}): Promise<FetchTest> => {
@@ -189,7 +190,7 @@ export default class AuthnTest extends WorkerTest {
 
       return defaultValue;
     };
-    
+
     const headers = new Headers({
       'cf-connecting-ip': ip,
     });
@@ -220,17 +221,16 @@ export default class AuthnTest extends WorkerTest {
 
   public fetchWhoAmI = ({
     cookie,
-    ip,
+    ip = createIp(),
     method = 'GET',
     origin,
   }: FetchWhoAmIOptions = {}): Promise<FetchTest> => {
-    const headers = new Headers();
+    const headers = new Headers({
+      'cf-connecting-ip': ip,
+    });
+
     if (typeof cookie === 'string') {
       headers.set('cookie', cookie);
-    }
-
-    if (typeof ip === 'string') {
-      headers.set('cf-connecting-ip', ip);
     }
 
     if (typeof origin === 'string') {

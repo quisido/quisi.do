@@ -1,6 +1,6 @@
 import { ErrorCode } from '@quisido/authn-shared';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric } from '../../constants/worker.js';
 import ErrorResponse from '../error-response.js';
 
 interface Options {
@@ -8,17 +8,17 @@ interface Options {
   readonly state: string;
 }
 
-export default function handleCrossSiteRequestForgery({
+export default function handleCrossSiteRequestForgery(this: Worker, {
   cookie,
   state,
 }: Options): Response {
-  emitPublicMetric({ name: MetricName.CSRF });
+  this.emitPublicMetric({ name: MetricName.CSRF });
 
-  emitPrivateMetric({
+  this.emitPrivateMetric({
     cookie,
     name: MetricName.CSRF,
     state,
   });
 
-  return new ErrorResponse(ErrorCode.CSRF);
+  return new ErrorResponse(this, ErrorCode.CSRF);
 }

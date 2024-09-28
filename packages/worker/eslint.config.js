@@ -1,8 +1,16 @@
 import configs from '@quisido/eslint-config';
 
-/** @type {readonly import('eslint').Linter.FlatConfig[]} */
+/** @type {readonly import('eslint').Linter.Config[]} */
 export default [
   ...configs,
+
+  {
+    files: ['src/create-worker-exported-handler.ts'],
+    rules: {
+      '@typescript-eslint/no-this-alias': 'off',
+      'consistent-this': 'off',
+    },
+  },
 
   {
     files: ['src/features/handle-fetch-request.ts'],
@@ -39,9 +47,17 @@ export default [
   },
 
   {
+    files: ['src/snapshot.ts'],
+    rules: {
+      'max-params': 'off',
+    },
+  },
+
+  {
     files: ['src/worker.ts'],
     rules: {
       'max-params': 'off',
+      'no-use-before-define': 'off',
     },
   },
 ];

@@ -1,6 +1,7 @@
+import type Worker from "@quisido/worker";
 import type Gender from "../constants/gender.js";
 import { INSERT_INTO_USERS_QUERY } from "../constants/queries.js";
-import getNowSeconds from "../utils/get-now-seconds.js";
+import getNowSeconds from "../features/get-now-seconds.js";
 import getDatabase from "./shared/get-database.js";
 
 interface Options {
@@ -9,13 +10,13 @@ interface Options {
   readonly gender: Gender;
 }
 
-export default async function insertIntoUsers({
+export default async function insertIntoUsers(this: Worker, {
   firstName,
   fullName,
   gender,
 }: Options): Promise<D1Meta> {
-  const db: D1Database = getDatabase();
-  const registrationTimestamp: number = getNowSeconds();
+  const db: D1Database = getDatabase.call(this);
+  const registrationTimestamp: number = getNowSeconds.call(this);
 
   const { meta } = await db
     .prepare(INSERT_INTO_USERS_QUERY)

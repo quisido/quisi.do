@@ -142,16 +142,16 @@ export default class FetchContext<
   public getD1Database = (name: string): D1Database => {
     const db: unknown = this.env[name];
 
-    if (!isD1Database(db)) {
-      this.emitPublicMetric({
-        db: name,
-        name: '@quisido/worker/d1-database/invalid',
-      });
-
-      throw new Error('Expected a D1 database.');
+    if (isD1Database(db)) {
+      return db;
     }
 
-    return db;
+    this.emitPublicMetric({
+      db: name,
+      name: '@quisido/worker/d1-database/invalid',
+    });
+
+    throw new Error('Expected a D1 database.');
   };
 
   public get getNow(): () => number {

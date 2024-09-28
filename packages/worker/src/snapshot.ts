@@ -1,11 +1,14 @@
 import { Snapshot } from '@quisido/proposal-async-context';
 
-export default async function snapshot<P, A extends readonly unknown[], R>(
+export default async function snapshot<T, P, A extends readonly unknown[], R>(
+  this: T,
   promise: Promise<P>,
-  handler: (value: P, ...args: A) => R,
+  handler: (this: T, value: P, ...args: A) => R,
   ...args: A
 ): Promise<R> {
   const snapshot: Snapshot = new Snapshot();
   const value: P = await promise;
-  return snapshot.run(handler, value, ...args);
+  return snapshot.run((): R => {
+    return handler.call(this, value, ...args);
+  });
 }

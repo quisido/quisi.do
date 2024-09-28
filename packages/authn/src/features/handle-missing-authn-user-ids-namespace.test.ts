@@ -11,8 +11,7 @@ describe('handleMissingAuthnUserIdsNamespace', (): void => {
     });
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchWhoAmI(
-    );
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchWhoAmI();
 
     // Assert
     expectResponseStatusToBe(StatusCode.SeeOther);

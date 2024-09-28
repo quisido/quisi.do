@@ -32,6 +32,7 @@
     "staging:init:oauth": "wrangler d1 execute authn-staging --env staging --file=./sql/oauth.sql --remote",
     "staging:init:users": "wrangler d1 execute authn-staging --env staging --file=./sql/users.sql --remote",
     "tsc": "tsc --skipLibCheck",
+    "tsc:no-emit": "tsc --noEmit --skipLibCheck",
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch",

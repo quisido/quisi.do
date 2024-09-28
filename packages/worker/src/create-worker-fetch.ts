@@ -3,6 +3,7 @@ import type { Variable } from '@quisido/proposal-async-context';
 import { type IncomingRequest } from 'cloudflare-utils';
 import isRecord from './is-record.js';
 import WorkerFetchContext from './worker-fetch-context.js';
+import type Worker from './worker.js';
 
 export interface Options {
   readonly console: Console;
@@ -15,18 +16,24 @@ export interface Options {
   readonly missingPrivateDatasetMetricName: string;
   readonly missingPublicDatasetMetricName: string;
   readonly missingTraceParentMetricName: string;
-  readonly onError: (error: unknown) => Promise<Response> | Response;
+  readonly onError: (
+    this: Worker,
+    error: unknown,
+  ) => Promise<Response> | Response;
   readonly onInvalidIsolateEnvironment: (env: unknown) => Response;
-  readonly onRequest: () => Promise<Response> | Response;
+  readonly onRequest: (this: Worker) => Promise<Response> | Response;
 }
 
-export default function createWorkerFetch({
-  contextVar,
-  onError,
-  onInvalidIsolateEnvironment,
-  onRequest,
-  ...createContextOptions
-}: Options): ExportedHandlerFetchHandler {
+export default function createWorkerFetch(
+  this: Worker,
+  {
+    contextVar,
+    onError,
+    onInvalidIsolateEnvironment,
+    onRequest,
+    ...createContextOptions
+  }: Options,
+): ExportedHandlerFetchHandler {
   return async (
     request: IncomingRequest,
     env: unknown,
@@ -43,9 +50,9 @@ export default function createWorkerFetch({
       request,
     });
     try {
-      return await contextVar.run(state, onRequest);
+      return await contextVar.run(state, onRequest.bind(this));
     } catch (err: unknown) {
-      return await contextVar.run(state, onError, err);
+      return await contextVar.run(state, onError.bind(this), err);
     } finally {
       state.flush();
     }

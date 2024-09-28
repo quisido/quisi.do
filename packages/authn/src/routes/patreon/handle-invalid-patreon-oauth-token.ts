@@ -1,15 +1,15 @@
 import { ErrorCode } from '@quisido/authn-shared';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric } from '../../constants/worker.js';
 import FatalError from '../../utils/fatal-error.js';
 
-export default function handleInvalidPatreonOAuthToken(token: unknown): never {
-  emitPrivateMetric({
+export default function handleInvalidPatreonOAuthToken(this: Worker,token: unknown): never {
+  this.emitPrivateMetric({
     name: MetricName.InvalidPatreonOAuthToken,
     value: JSON.stringify(token),
   });
 
-  emitPublicMetric({
+  this.emitPublicMetric({
     name: MetricName.InvalidPatreonOAuthToken,
     type: typeof token,
   });

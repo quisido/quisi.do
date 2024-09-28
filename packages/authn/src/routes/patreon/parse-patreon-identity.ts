@@ -1,5 +1,5 @@
+import type Worker from '@quisido/worker';
 import OAuthProvider from '../../constants/oauth-provider.js';
-import { affect } from '../../constants/worker.js';
 import writeOAuthResponse from '../../features/shared/write-oauth-response.js';
 import isObject from '../../utils/is-object.js';
 import mapToOptionalBoolean from '../../utils/map-to-optional-boolean.js';
@@ -10,23 +10,23 @@ import handleInvalidPatreonIdentityId from './handle-invalid-patreon-identity-id
 import mapToGender from './map-to-gender.js';
 import type PatreonIdentity from './patreon-identity.js';
 
-export default function parsePatreonIdentity(
+export default function parsePatreonIdentity(this: Worker,
   identity: Record<string, unknown>,
 ): PatreonIdentity {
   const { data } = identity;
   if (!isObject(data)) {
-    return handleInvalidPatreonIdentityData(data);
+    return handleInvalidPatreonIdentityData.call(this,data);
   }
 
   const { attributes, id } = data;
   if (typeof id !== 'string') {
-    return handleInvalidPatreonIdentityId(data, id);
+    return handleInvalidPatreonIdentityId.call(this,data, id);
   }
 
-  affect(writeOAuthResponse(OAuthProvider.Patreon, id, identity));
+  this.affect(writeOAuthResponse.call(this,OAuthProvider.Patreon, id, identity));
 
   if (!isObject(attributes)) {
-    return handleInvalidPatreonIdentityAttributes({ attributes, data, id });
+    return handleInvalidPatreonIdentityAttributes.call(this,{ attributes, data, id });
   }
 
   const {

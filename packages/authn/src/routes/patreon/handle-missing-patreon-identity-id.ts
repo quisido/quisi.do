@@ -1,12 +1,12 @@
 import { ErrorCode } from "@quisido/authn-shared";
+import type Worker from '@quisido/worker';
 import { MetricName } from "../../constants/metric-name.js";
-import { emitPrivateMetric, emitPublicMetric } from "../../constants/worker.js";
 import FatalError from "../../utils/fatal-error.js";
 
-export default function handleMissingPatreonIdentityId(data: Record<string, unknown>): never {
-  emitPublicMetric({ name: MetricName.MissingPatreonIdentityId });
+export default function handleMissingPatreonIdentityId(this: Worker,data: Record<string, unknown>): never {
+  this.emitPublicMetric({ name: MetricName.MissingPatreonIdentityId });
 
-  emitPrivateMetric({
+  this.emitPrivateMetric({
     data: JSON.stringify(data),
     name: MetricName.MissingPatreonIdentityId,
   });

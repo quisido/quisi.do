@@ -1,5 +1,5 @@
+import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric } from '../../constants/worker.js';
 import isObject from '../../utils/is-object.js';
 import handleInvalidOAuthUserId from './handle-invalid-oauth-user-id.js';
 
@@ -10,13 +10,13 @@ interface Result {
   readonly sizeAfter: number;
 }
 
-export default function handleOAuthUserIdResult({
+export default function handleOAuthUserIdResult(this: Worker,{
   duration,
   results,
   rowsRead,
   sizeAfter,
 }: Result): number | null {
-  emitPublicMetric({
+  this.emitPublicMetric({
     duration,
     name: MetricName.OAuthUserIdSelected,
     rowsRead,
@@ -32,10 +32,10 @@ export default function handleOAuthUserIdResult({
   // Existent user
   const { userId } = firstResult;
   if (typeof userId !== 'number') {
-    return handleInvalidOAuthUserId(firstResult);
+    return handleInvalidOAuthUserId.call(this, firstResult);
   }
 
-  emitPrivateMetric({ name: MetricName.AuthenticationRead, userId });
-  emitPublicMetric({ name: MetricName.AuthenticationRead });
+  this.emitPrivateMetric({ name: MetricName.AuthenticationRead, userId });
+  this.emitPublicMetric({ name: MetricName.AuthenticationRead });
   return userId;
 }

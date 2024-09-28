@@ -1,7 +1,7 @@
 import { Snapshot } from '@quisido/proposal-async-context';
+import type Worker from '@quisido/worker';
 import { mapUnknownToError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
-import { emitPrivateMetric, emitPublicMetric, getNow, logPrivateError } from '../constants/worker.js';
 import { setAuthnUserIdInMemory } from './authn-user-id.js';
 
 interface Options {
@@ -10,7 +10,7 @@ interface Options {
   readonly userId: number;
 }
 
-export default function handlePutAuthnUserIdError({
+export default function handlePutAuthnUserIdError(this: Worker, {
   authnId,
   startTime,
   userId,
@@ -19,15 +19,15 @@ export default function handlePutAuthnUserIdError({
 
   return (err: unknown): void => {
     snapshot.run((): void => {
-      const endTime: number = getNow();
+      const endTime: number = this.getNow();
       const duration: number = endTime - startTime;
 
       // If the KV namespace failed, fallback to the memory cache.
-      setAuthnUserIdInMemory(authnId, userId);
+      setAuthnUserIdInMemory.call(this, authnId, userId);
 
-      logPrivateError(mapUnknownToError(err));
+      this.logPrivateError(mapUnknownToError(err));
 
-      emitPrivateMetric({
+      this.emitPrivateMetric({
         authnId,
         duration,
         endTime,
@@ -36,7 +36,7 @@ export default function handlePutAuthnUserIdError({
         userId,
       });
 
-      emitPublicMetric({
+      this.emitPublicMetric({
         duration,
         endTime,
         name: MetricName.AuthnIdError,
