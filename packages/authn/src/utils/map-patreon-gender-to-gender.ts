@@ -1,5 +1,5 @@
-import Gender from '../constants/gender.js';
-import PatreonGender from '../constants/patreon-gender.js';
+import { Gender } from '../constants/gender.js';
+import { PatreonGender } from '../constants/patreon-gender.js';
 
 export default function mapPatreonGenderToGender(
   gender: PatreonGender,

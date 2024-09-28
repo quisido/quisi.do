@@ -1,5 +1,5 @@
 import type Worker from "@quisido/worker";
-import type Gender from "../constants/gender.js";
+import { type Gender } from "../constants/gender.js";
 import { INSERT_INTO_USERS_QUERY } from "../constants/queries.js";
 import getNowSeconds from "../features/get-now-seconds.js";
 import getDatabase from "./shared/get-database.js";

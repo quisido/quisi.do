@@ -1,5 +1,5 @@
 import type Worker from '@quisido/worker';
-import type OAuthProvider from '../../constants/oauth-provider.js';
+import { type OAuthProvider } from '../../constants/oauth-provider.js';
 import { SELECT_USERID_FROM_OAUTH_QUERY } from '../../constants/queries.js';
 import getDatabase from './get-database.js';
 

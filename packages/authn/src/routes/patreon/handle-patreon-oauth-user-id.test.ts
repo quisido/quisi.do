@@ -1,7 +1,7 @@
 import { StatusCode } from "cloudflare-utils";
 import { describe, expect, it } from "vitest";
 import { MetricName } from "../../constants/metric-name.js";
-import OAuthProvider from "../../constants/oauth-provider.js";
+import { OAuthProvider } from "../../constants/oauth-provider.js";
 import { INSERT_INTO_USERS_QUERY, SELECT_USERID_FROM_OAUTH_QUERY } from "../../constants/queries.js";
 import AuthnTest from "../../test/authn-test.js";
 import { EXPECT_ANY_NUMBER, EXPECT_ANY_STRING } from '../../test/expect-any.js';

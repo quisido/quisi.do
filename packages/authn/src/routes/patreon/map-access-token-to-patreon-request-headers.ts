@@ -1,4 +1,4 @@
-import PATREON_USER_AGENT from '../../constants/patreon-user-agent.js';
+import { PATREON_USER_AGENT } from '../../constants/patreon-user-agent.js';
 
 export default function mapAccessTokenToPatreonRequestHeaders(
   token: string,

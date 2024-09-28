@@ -1,6 +1,6 @@
 import { StatusCode } from 'cloudflare-utils';
 import { expect } from 'vitest';
-import EnvironmentName from "../constants/environment-name.js";
+import { EnvironmentName } from "../constants/environment-name.js";
 import { INSERT_INTO_EMAILS_QUERY, INSERT_INTO_OAUTH_QUERY, INSERT_INTO_USERS_QUERY, SELECT_USERID_FROM_OAUTH_QUERY } from '../constants/queries.js';
 import { SECONDS_PER_DAY } from '../constants/time.js';
 import { WORKER } from '../constants/worker.js';

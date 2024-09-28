@@ -1,5 +1,5 @@
 import type Worker from '@quisido/worker';
-import type OAuthProvider from '../../constants/oauth-provider.js';
+import { type OAuthProvider } from '../../constants/oauth-provider.js';
 import getDataBucket from '../get-data-bucket.js';
 
 export default async function writeOAuthResponse(this: Worker,

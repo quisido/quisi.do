@@ -1,4 +1,4 @@
-import type Gender from '../../constants/gender.js';
+import { type Gender } from '../../constants/gender.js';
 
 export default interface PatreonIdentity {
   readonly email?: string | undefined;

@@ -1,5 +1,5 @@
 import type Worker from '@quisido/worker';
-import EnvironmentName from '../constants/environment-name.js';
+import { EnvironmentName } from '../constants/environment-name.js';
 import { MetricName } from '../constants/metric-name.js';
 import isEnvironmentName from '../utils/is-environment-name.js';
 

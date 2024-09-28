@@ -1,6 +1,6 @@
 import type Worker from '@quisido/worker';
-import Gender from '../../constants/gender.js';
-import OAuthProvider from '../../constants/oauth-provider.js';
+import { Gender } from '../../constants/gender.js';
+import { OAuthProvider } from '../../constants/oauth-provider.js';
 import createResponse from '../../features/create-response.js';
 import putDatabaseUser from '../../features/put-database-user.js';
 import type PatreonIdentity from './patreon-identity.js';
@@ -30,7 +30,7 @@ export default async function handlePatreonOAuthUserId(this: Worker,
   };
 
   return await this.snapshot(
-    putDatabaseUser.call(this,OAuthProvider.Patreon, oAuthId, {
+    putDatabaseUser.call(this, OAuthProvider.Patreon, oAuthId, {
       email: getEmail(),
       firstName,
       fullName,

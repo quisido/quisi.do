@@ -1,5 +1,5 @@
 import type Worker from '@quisido/worker';
-import OAuthProvider from '../../constants/oauth-provider.js';
+import { OAuthProvider } from '../../constants/oauth-provider.js';
 import writeOAuthResponse from '../../features/shared/write-oauth-response.js';
 import isObject from '../../utils/is-object.js';
 import mapToOptionalBoolean from '../../utils/map-to-optional-boolean.js';
@@ -7,7 +7,7 @@ import mapToOptionalString from '../../utils/map-to-optional-string.js';
 import handleInvalidPatreonIdentityAttributes from './handle-invalid-patreon-identity-attributes.js';
 import handleInvalidPatreonIdentityData from './handle-invalid-patreon-identity-data.js';
 import handleInvalidPatreonIdentityId from './handle-invalid-patreon-identity-id.js';
-import mapToGender from './map-to-gender.js';
+import mapPatreonIdentityGenderAttributeToGender from './map-patreon-identity-gender-attribute-to-gender.js';
 import type PatreonIdentity from './patreon-identity.js';
 
 export default function parsePatreonIdentity(this: Worker,
@@ -41,7 +41,7 @@ export default function parsePatreonIdentity(this: Worker,
     email: mapToOptionalString(email),
     firstName: mapToOptionalString(firstName),
     fullName: mapToOptionalString(fullName),
-    gender: mapToGender(gender),
+    gender: mapPatreonIdentityGenderAttributeToGender(gender),
     id,
     isEmailVerified: mapToOptionalBoolean(isEmailVerified),
   };

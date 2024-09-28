@@ -1,4 +1,4 @@
-import PatreonGender from '../constants/patreon-gender.js';
+import { PatreonGender } from '../constants/patreon-gender.js';
 
 const PATREON_GENDERS: Set<unknown> = new Set<unknown>(
   Object.values(PatreonGender),

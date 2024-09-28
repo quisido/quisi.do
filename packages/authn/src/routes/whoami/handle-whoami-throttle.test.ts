@@ -1,7 +1,7 @@
 import { WhoAmIResponseCode } from '@quisido/authn-shared';
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
-import EnvironmentName from '../../constants/environment-name.js';
+import { EnvironmentName } from '../../constants/environment-name.js';
 import { MetricName } from '../../constants/metric-name.js';
 import AuthnTest from '../../test/authn-test.js';
 

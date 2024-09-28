@@ -1,6 +1,6 @@
 import type Worker from '@quisido/worker';
 import formUrlEncoded from 'form-urlencoded';
-import PATREON_USER_AGENT from '../../constants/patreon-user-agent.js';
+import { PATREON_USER_AGENT } from '../../constants/patreon-user-agent.js';
 import getPatreonOAuthClientId from './get-patreon-oauth-client-id.js';
 import getPatreonOAuthClientSecret from './get-patreon-oauth-client-secret.js';
 import getPatreonOAuthHost from './get-patreon-oauth-host.js';

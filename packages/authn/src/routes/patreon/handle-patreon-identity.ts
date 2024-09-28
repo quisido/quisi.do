@@ -1,5 +1,5 @@
 import type Worker from '@quisido/worker';
-import OAuthProvider from '../../constants/oauth-provider.js';
+import { OAuthProvider } from '../../constants/oauth-provider.js';
 import getOAuthUserId from '../../features/shared/get-oauth-user-id.js';
 import handlePatreonOAuthUserId from './handle-patreon-oauth-user-id.js';
 import type PatreonIdentity from './patreon-identity.js';

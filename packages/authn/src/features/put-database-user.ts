@@ -1,6 +1,6 @@
 import type Worker from '@quisido/worker';
-import type Gender from '../constants/gender.js';
-import type OAuthProvider from '../constants/oauth-provider.js';
+import { type Gender } from '../constants/gender.js';
+import { type OAuthProvider } from '../constants/oauth-provider.js';
 import insertIntoUsers from './insert-into-users.js';
 import putDatabaseUserMetadata from './put-database-user-metadata.js';
 
