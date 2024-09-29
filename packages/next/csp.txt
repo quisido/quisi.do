@@ -36,6 +36,8 @@ img-src
   https://c.clarity.ms/c.gif
   https://www.google.bg/ads/ga-audiences
   https://www.google.ca/ads/ga-audiences
+  https://www.google.ch/ads/ga-audiences
+  https://www.google.cl/ads/ga-audiences
   https://www.google.co.il/ads/ga-audiences
   https://www.google.co.in/ads/ga-audiences
   https://www.google.co.jp/ads/ga-audiences
@@ -45,6 +47,7 @@ img-src
   https://www.google.co.uz/ads/ga-audiences
   https://www.google.com.ar/ads/ga-audiences
   https://www.google.com.au/ads/ga-audiences
+  https://www.google.com.bd/ads/ga-audiences
   https://www.google.com.br/ads/ga-audiences
   https://www.google.com.hk/ads/ga-audiences
   https://www.google.com.kh/ads/ga-audiences
@@ -55,6 +58,7 @@ img-src
   https://www.google.com.vn/ads/ga-audiences
   https://www.google.de/ads/ga-audiences
   https://www.google.fr/ads/ga-audiences
+  https://www.google.it/ads/ga-audiences
   https://www.google.nl/ads/ga-audiences
   https://www.google.ru/ads/ga-audiences
   https://www.googletagmanager.com/a
@@ -81,7 +85,8 @@ script-src-elem
   https://static.cloudflareinsights.com/beacon.min.js
   https://edge.fullstory.com/s/fs.js
   https://www.googletagmanager.com/gtag/js
-  https://cdn.logr-ingest.com/logger-1.min.js;
+  https://cdn.logr-ingest.com/logger-1.min.js
+  https://quisi.do/cdn-cgi/speculation;
 
 style-src-attr
   'unsafe-inline';

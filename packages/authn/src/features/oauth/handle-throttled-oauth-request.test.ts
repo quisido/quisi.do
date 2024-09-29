@@ -13,11 +13,11 @@ describe('handleThrottledOAuthRequest', (): void => {
 
     // Act
     await fetchPatreon({
-      ip: '1.2.3.4',
+      ip: '255.254.253.252',
     });
 
     const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon({
-      ip: '1.2.3.4',
+      ip: '255.254.253.252',
     });
 
     // Assert
@@ -25,7 +25,7 @@ describe('handleThrottledOAuthRequest', (): void => {
     expectPublicMetric({ name: MetricName.OAuthThrottled });
 
     expectPrivateMetric({
-      ip: '1.2.3.4',
+      ip: '255.254.253.252',
       name: MetricName.OAuthThrottled,
     });
 

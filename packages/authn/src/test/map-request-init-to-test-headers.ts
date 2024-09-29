@@ -2,9 +2,6 @@ export default function mapRequestInitToTestHeaders(
   init: RequestInit,
 ): Headers {
   const headers = new Headers(init.headers);
-  if (!headers.has('cf-connecting-ip')) {
-    headers.set('cf-connecting-ip', '127.0.0.1');
-  }
 
   if (!headers.has('cookie')) {
     headers.set(

@@ -14,20 +14,22 @@ describe('handleWhoAmIThrottle', (): void => {
 
     // Act
     await fetchWhoAmI({
-      cookie: `__Secure-Authentication-ID=abcdef`, ip: '1.2.3.4' });
+      cookie: `__Secure-Authentication-ID=abcdef`,
+      ip: '254.253.252.251', });
 
     const {
       expectResponseHeadersToBe,
       expectResponseJsonToBe,
       expectResponseStatusToBe,
     } = await fetchWhoAmI({
-      cookie: `__Secure-Authentication-ID=abcdef`, ip: '1.2.3.4' });
+      cookie: `__Secure-Authentication-ID=abcdef`,
+      ip: '254.253.252.251', });
 
     // Assert
     expectResponseStatusToBe(StatusCode.TooManyRequests);
 
     expectPrivateMetric({
-      ip: '1.2.3.4',
+      ip: '254.253.252.251',
       name: MetricName.WhoAmIThrottled,
     });
 

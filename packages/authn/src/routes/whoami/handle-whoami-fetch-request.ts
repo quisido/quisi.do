@@ -36,6 +36,7 @@ export default async function handleWhoAmIFetchRequest(
 
   // Throttle
   const ip: string = getIp.call(this);
+  this.emitPublicMetric({ ip, name: 'TEST' });
   try {
     throttleIp.call(this, ip, WHOAMI_THROTTLE_DURATION);
   } catch (_err: unknown) {

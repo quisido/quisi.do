@@ -221,16 +221,30 @@ export default class AuthnTest extends WorkerTest {
 
   public fetchWhoAmI = ({
     cookie,
-    ip = createIp(),
     method = 'GET',
     origin,
+    ...options
   }: FetchWhoAmIOptions = {}): Promise<FetchTest> => {
-    const headers = new Headers({
-      'cf-connecting-ip': ip,
-    });
+    const getOption = <K extends keyof typeof options>(
+      key: K,
+      defaultValue: FetchWhoAmIOptions[K],
+    ): FetchWhoAmIOptions[K] => {
+      if (key in options) {
+        return options[key];
+      }
+
+      return defaultValue;
+    };
+
+    const ip: string | undefined = getOption('ip', createIp());
+    const headers = new Headers();
 
     if (typeof cookie === 'string') {
       headers.set('cookie', cookie);
+    }
+
+    if (typeof ip === 'string') {
+      headers.set('cf-connecting-ip', ip);
     }
 
     if (typeof origin === 'string') {
