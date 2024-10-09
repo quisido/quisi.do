@@ -19,7 +19,6 @@ export default function handleFetchError(
     return new ErrorResponse(this, err.cause, returnPath);
   }
 
-  console.log(err);
   this.emitPublicMetric({ name: MetricName.UnknownError });
   this.logPrivateError(mapUnknownToError(err));
   return new ErrorResponse(this, ErrorCode.Unknown, returnPath);
