@@ -32,9 +32,10 @@ describe('getHost', (): void => {
   });
 
   it('should emit and default when invalid', async (): Promise<void> => {
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
-      host: true,
-    });
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+      new AuthnTest({
+        host: true,
+      });
 
     await fetchPatreon();
 

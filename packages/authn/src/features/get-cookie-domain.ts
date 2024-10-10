@@ -12,5 +12,5 @@ export default function getCookieDomain(this: Worker): string {
     return handleMissingCookieDomain.call(this);
   }
 
-  return handleInvalidCookieDomain.call(this,cookieDomain);
+  return handleInvalidCookieDomain.call(this, cookieDomain);
 }

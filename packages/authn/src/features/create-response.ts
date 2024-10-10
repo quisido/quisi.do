@@ -13,7 +13,10 @@ interface Options {
   readonly userId: number;
 }
 
-export default function createResponse(this: Worker,{ returnPath, userId }: Options): Response {
+export default function createResponse(
+  this: Worker,
+  { returnPath, userId }: Options,
+): Response {
   const authnId: string = createAuthnId();
   const authnUserIds: KVNamespace = getAuthnUserIdsNamespace.call(this);
   const nowSeconds: number = getNowSeconds.call(this);
@@ -33,8 +36,10 @@ export default function createResponse(this: Worker,{ returnPath, userId }: Opti
         expiration,
         expirationTtl: SECONDS_PER_DAY,
       })
-      .then(handlePutAuthnUserId.call(this,{ authnId, startTime, userId }))
-      .catch(handlePutAuthnUserIdError.call(this,{ authnId, startTime, userId })),
+      .then(handlePutAuthnUserId.call(this, { authnId, startTime, userId }))
+      .catch(
+        handlePutAuthnUserIdError.call(this, { authnId, startTime, userId }),
+      ),
   );
 
   return new Response(null, {

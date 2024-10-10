@@ -17,15 +17,18 @@ interface Options {
   readonly userId: number;
 }
 
-export default function putDatabaseUserMetadata(this: Worker, {
-  changes,
-  duration,
-  email,
-  oAuthId,
-  oAuthProvider,
-  sizeAfter,
-  userId,
-}: Options): number {
+export default function putDatabaseUserMetadata(
+  this: Worker,
+  {
+    changes,
+    duration,
+    email,
+    oAuthId,
+    oAuthProvider,
+    sizeAfter,
+    userId,
+  }: Options,
+): number {
   const db: D1Database = getDatabase.call(this);
   this.emitPublicMetric({
     changes,
@@ -41,10 +44,10 @@ export default function putDatabaseUserMetadata(this: Worker, {
     .bind(userId, oAuthProvider, oAuthId)
     .run();
 
-    this.affect(
+  this.affect(
     insertIntoOAuth
-      .then(handleInsertIntoOAuthResponse.call(this,userId))
-      .catch(handleInsertIntoOAuthError.call(this,userId)),
+      .then(handleInsertIntoOAuthResponse.call(this, userId))
+      .catch(handleInsertIntoOAuthError.call(this, userId)),
   );
 
   // Associate user ID with email.

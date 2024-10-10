@@ -3,7 +3,8 @@ import mapReadableStreamToString from '../../utils/map-readable-stream-to-string
 import handleMissingPatreonAccessTokenErrorBody from './handle-missing-patreon-access-token-error-body.js';
 import handlePatreonAccessTokenErrorBody from './handle-patreon-access-token-error-body.js';
 
-export default async function handlePatreonAccessTokenError(this: Worker,
+export default async function handlePatreonAccessTokenError(
+  this: Worker,
   response: Response,
 ): Promise<never> {
   if (response.body === null) {

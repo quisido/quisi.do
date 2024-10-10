@@ -13,7 +13,8 @@ import { StaticPathname } from './static-pathname.js';
  *   be-performed-while-handling-a-request-3bne
  */
 
-export default function handleStaticPathname(this: Worker,
+export default function handleStaticPathname(
+  this: Worker,
   pathname: StaticPathname,
 ): Response {
   switch (pathname) {

@@ -4,23 +4,21 @@ import mapPatreonOAuthTokenToAccessToken from './map-patreon-oauth-token-to-acce
 
 const HTTP_REDIRECTION = 300;
 
-export default async function handlePatreonOAuthTokenResponse(this: Worker,
+export default async function handlePatreonOAuthTokenResponse(
+  this: Worker,
   response: Response,
 ): Promise<string> {
   if (response.status >= HTTP_REDIRECTION) {
-    return handlePatreonAccessTokenError.call(this,response);
+    return handlePatreonAccessTokenError.call(this, response);
   }
 
   const getJson = async (): Promise<unknown> => {
     try {
       return await response.json();
     } catch (_err: unknown) {
-      return;
+      return undefined;
     }
   };
 
-  return await this.snapshot(
-    getJson(),
-    mapPatreonOAuthTokenToAccessToken
-  );
+  return await this.snapshot(getJson(), mapPatreonOAuthTokenToAccessToken);
 }

@@ -3,7 +3,10 @@ import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
 import WhoAmIResponse from './whoami-response.js';
 
-export default function handleCachedAuthnUserId(this: Worker,userId: number): Response {
+export default function handleCachedAuthnUserId(
+  this: Worker,
+  userId: number,
+): Response {
   this.emitPrivateMetric({
     name: MetricName.CachedAuthnId,
     userId,
@@ -13,7 +16,7 @@ export default function handleCachedAuthnUserId(this: Worker,userId: number): Re
     name: MetricName.CachedAuthnId,
   });
 
-  return new WhoAmIResponse(this,{
+  return new WhoAmIResponse(this, {
     code: WhoAmIResponseCode.Cached,
     id: userId,
   });

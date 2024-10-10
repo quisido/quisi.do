@@ -7,18 +7,20 @@ import AuthnTest from '../../test/authn-test.js';
 describe('handleThrottledOAuthRequest', (): void => {
   it('should emit and response', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
-      environmentName: EnvironmentName.Production,
-    });
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+      new AuthnTest({
+        environmentName: EnvironmentName.Production,
+      });
 
     // Act
     await fetchPatreon({
       ip: '255.254.253.252',
     });
 
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon({
-      ip: '255.254.253.252',
-    });
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
+      await fetchPatreon({
+        ip: '255.254.253.252',
+      });
 
     // Assert
     expectResponseStatusToBe(StatusCode.SeeOther);

@@ -10,23 +10,30 @@ import handleInvalidPatreonIdentityId from './handle-invalid-patreon-identity-id
 import mapPatreonIdentityGenderAttributeToGender from './map-patreon-identity-gender-attribute-to-gender.js';
 import type PatreonIdentity from './patreon-identity.js';
 
-export default function parsePatreonIdentity(this: Worker,
+export default function parsePatreonIdentity(
+  this: Worker,
   identity: Record<string, unknown>,
 ): PatreonIdentity {
   const { data } = identity;
   if (!isObject(data)) {
-    return handleInvalidPatreonIdentityData.call(this,data);
+    return handleInvalidPatreonIdentityData.call(this, data);
   }
 
   const { attributes, id } = data;
   if (typeof id !== 'string') {
-    return handleInvalidPatreonIdentityId.call(this,data, id);
+    return handleInvalidPatreonIdentityId.call(this, data, id);
   }
 
-  this.affect(writeOAuthResponse.call(this,OAuthProvider.Patreon, id, identity));
+  this.affect(
+    writeOAuthResponse.call(this, OAuthProvider.Patreon, id, identity),
+  );
 
   if (!isObject(attributes)) {
-    return handleInvalidPatreonIdentityAttributes.call(this,{ attributes, data, id });
+    return handleInvalidPatreonIdentityAttributes.call(this, {
+      attributes,
+      data,
+      id,
+    });
   }
 
   const {

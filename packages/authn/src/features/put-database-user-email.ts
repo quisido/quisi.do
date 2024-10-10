@@ -10,7 +10,10 @@ interface Options {
   readonly userId: number;
 }
 
-export default function putDatabaseUserEmail(this: Worker, { email, userId }: Options): void {
+export default function putDatabaseUserEmail(
+  this: Worker,
+  { email, userId }: Options,
+): void {
   const db: D1Database = getDatabase.call(this);
 
   const insertIntoEmails: Promise<D1Response> = db
@@ -18,7 +21,7 @@ export default function putDatabaseUserEmail(this: Worker, { email, userId }: Op
     .bind(email, userId)
     .run();
 
-    this.affect(
+  this.affect(
     insertIntoEmails
       .then(handleInsertIntoEmailsResponse.call(this, userId))
       .catch(handleInsertIntoEmailsError.call(this, userId)),

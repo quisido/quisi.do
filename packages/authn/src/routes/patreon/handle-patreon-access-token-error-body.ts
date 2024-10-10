@@ -5,7 +5,10 @@ import handleInvalidPatreonAccessTokenError from './handle-invalid-patreon-acces
 import handleMissingPatreonAccessTokenErrorCode from './handle-missing-patreon-access-token-error-code.js';
 import handlePatreonAccessTokenErrorCode from './handle-patreon-access-token-error-code.js';
 
-export default function handlePatreonAccessTokenErrorBody(this: Worker, body: string): never {
+export default function handlePatreonAccessTokenErrorBody(
+  this: Worker,
+  body: string,
+): never {
   const getBodyJson = (): unknown => {
     try {
       return JSON.parse(body);

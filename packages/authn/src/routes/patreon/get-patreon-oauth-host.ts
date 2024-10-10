@@ -13,5 +13,5 @@ export default function getPatreonOAuthHost(this: Worker): string {
     return handleMissingPatreonOAuthHost.call(this);
   }
 
-  return handleInvalidPatreonOAuthHost.call(this,host);
+  return handleInvalidPatreonOAuthHost.call(this, host);
 }

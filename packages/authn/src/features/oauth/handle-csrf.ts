@@ -8,10 +8,10 @@ interface Options {
   readonly state: string;
 }
 
-export default function handleCrossSiteRequestForgery(this: Worker, {
-  cookie,
-  state,
-}: Options): Response {
+export default function handleCrossSiteRequestForgery(
+  this: Worker,
+  { cookie, state }: Options,
+): Response {
   this.emitPublicMetric({ name: MetricName.CSRF });
 
   this.emitPrivateMetric({

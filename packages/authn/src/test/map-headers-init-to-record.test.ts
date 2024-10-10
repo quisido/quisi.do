@@ -1,22 +1,22 @@
-import { describe, expect, it } from "vitest";
-import mapHeadersInitToRecord from "./map-headers-init-to-record.js";
-import unimplementedMethod from "./unimplemented-method.js";
+import { describe, expect, it } from 'vitest';
+import mapHeadersInitToRecord from './map-headers-init-to-record.js';
+import unimplementedMethod from './unimplemented-method.js';
 
 const TEST_HEADERS = new Headers({
-  a: 'b',
-  c: 'd',
+  num: '1234',
+  str: 'value',
 });
 
 const TEST_RECORD: Record<string, string> = {
-  a: 'b',
-  c: 'd',
+  num: '1234',
+  str: 'value',
 };
 
 describe('mapHeadersInitToRecord', (): void => {
   it('should support Headers', (): void => {
     expect(mapHeadersInitToRecord(TEST_HEADERS)).toEqual({
-      a: 'b',
-      c: 'd',
+      num: '1234',
+      str: 'value',
     });
   });
 

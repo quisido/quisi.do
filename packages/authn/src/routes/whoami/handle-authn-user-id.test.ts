@@ -7,11 +7,12 @@ import AuthnTest from '../../test/authn-test.js';
 describe('handleAuthnUserId', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI } = new AuthnTest({
-      authnUserIds: {
-        abcdef: '1234',
-      },
-    });
+    const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI } =
+      new AuthnTest({
+        authnUserIds: {
+          abcdef: '1234',
+        },
+      });
 
     // Act
     const {
@@ -19,7 +20,7 @@ describe('handleAuthnUserId', (): void => {
       expectResponseJsonToBe,
       expectResponseStatusToBe,
     } = await fetchWhoAmI({
-      cookie: '__Secure-Authentication-ID=abcdef',
+      cookies: '__Secure-Authentication-ID=abcdef',
     });
 
     // Assert

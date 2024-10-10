@@ -43,11 +43,9 @@ describe('getAccessControlAllowOrigin', (): void => {
     const { fetchWhoAmI } = new AuthnTest();
 
     const { expectResponseHeadersToBe } = await fetchWhoAmI({
-        method: 'OPTIONS',
-
-          origin: 'https://localhost:3000',
-      },
-    );
+      method: 'OPTIONS',
+      origin: 'https://localhost:3000',
+    });
 
     expectResponseHeadersToBe({
       'access-control-allow-credentials': 'true',

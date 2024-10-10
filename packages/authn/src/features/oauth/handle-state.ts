@@ -15,11 +15,9 @@ interface Options {
 }
 
 export default async function handleState(
-  this: Worker, {
-  pathname,
-  state,
-  stateSearchParam,
-}: Options): Promise<Response> {
+  this: Worker,
+  { pathname, state, stateSearchParam }: Options,
+): Promise<Response> {
   // Invalid state
   if (!isObject(state)) {
     return handleNonObjectStateSearchParam.call(this, {
@@ -48,7 +46,7 @@ export default async function handleState(
   }
 
   // Cross-site request forgery (CSRF)
-  const sessionIdCookie: string = getSessionIdCookie.call(this, );
+  const sessionIdCookie: string = getSessionIdCookie.call(this);
   if (sessionIdCookie !== stateSessionId) {
     return handleCrossSiteRequestForgery.call(this, {
       cookie: sessionIdCookie,

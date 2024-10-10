@@ -12,7 +12,9 @@ const HEADERS: Headers = new Headers({
   'user-agent': PATREON_USER_AGENT,
 });
 
-export default async function getPatreonTokenResponse(this: Worker): Promise<Response> {
+export default async function getPatreonTokenResponse(
+  this: Worker,
+): Promise<Response> {
   const fetch: Fetcher['fetch'] = this.getFetch();
   const oAuthHost: string = getPatreonOAuthHost.call(this);
 

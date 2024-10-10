@@ -3,7 +3,8 @@ import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
 import FatalError from '../../utils/fatal-error.js';
 
-export default function handleInvalidPatreonAccessTokenRequestDescription(this: Worker,
+export default function handleInvalidPatreonAccessTokenRequestDescription(
+  this: Worker,
   json: Record<string, unknown>,
   description: string,
 ): never {

@@ -5,13 +5,14 @@ import createResponse from '../../features/create-response.js';
 import putDatabaseUser from '../../features/put-database-user.js';
 import type PatreonIdentity from './patreon-identity.js';
 
-export default async function handlePatreonOAuthUserId(this: Worker,
+export default async function handlePatreonOAuthUserId(
+  this: Worker,
   userId: number | null,
   identity: PatreonIdentity,
   returnPath: string,
 ): Promise<Response> {
   if (userId !== null) {
-    return createResponse.call(this,{ returnPath, userId });
+    return createResponse.call(this, { returnPath, userId });
   }
 
   const {
@@ -37,6 +38,6 @@ export default async function handlePatreonOAuthUserId(this: Worker,
       gender,
     }),
     (newUserId: number): Response =>
-      createResponse.call(this,{ returnPath, userId: newUserId }),
+      createResponse.call(this, { returnPath, userId: newUserId }),
   );
 }

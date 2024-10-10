@@ -3,7 +3,7 @@ import { EnvironmentName } from '../constants/environment-name.js';
 import { MetricName } from '../constants/metric-name.js';
 import getEnvironmentName from '../features/get-environment-name.js';
 
-export default function getIp(this: Worker,): string {
+export default function getIp(this: Worker): string {
   const environmentName: EnvironmentName = getEnvironmentName.call(this);
   if (environmentName === EnvironmentName.Development) {
     return '127.0.0.1';

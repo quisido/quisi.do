@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import AuthnTest from "../../test/authn-test.js";
+import { describe, expect, it } from 'vitest';
+import AuthnTest from '../../test/authn-test.js';
 
 describe('parsePatreonIdentity', (): void => {
   it('should write to data bucket', async (): Promise<void> => {
@@ -17,7 +17,7 @@ describe('parsePatreonIdentity', (): void => {
       '{"data":{"id":"test-id"}}',
       {
         customMetadata: {
-          timestamp: expect.stringMatching(/^\d+$/),
+          timestamp: expect.stringMatching(/^\d+$/u) as string,
         },
         httpMetadata: {
           contentType: 'application/json',

@@ -13,7 +13,9 @@ const HEADERS_INIT: HeadersInit = {
   'content-type': 'text/json; charset=utf-8',
 };
 
-export default function getWhoAmIResponseHeadersInit(this: Worker): HeadersInit {
+export default function getWhoAmIResponseHeadersInit(
+  this: Worker,
+): HeadersInit {
   return {
     ...HEADERS_INIT,
     'access-control-allow-origin': getAccessControlAllowOrigin.call(this),

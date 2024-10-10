@@ -11,7 +11,13 @@ const TEST_NOW: number = Date.now();
 
 describe('getAuthnUserIdFromMemory', (): void => {
   it('should clear and emit for expired values', async (): Promise<void> => {
-    const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI, fetchPatreon, setNow } = new AuthnTest({
+    const {
+      expectPrivateMetric,
+      expectPublicMetric,
+      fetchWhoAmI,
+      fetchPatreon,
+      setNow,
+    } = new AuthnTest({
       oAuthUserIdResults: [{ userId: TEST_USER_ID }],
     });
 
@@ -21,8 +27,12 @@ describe('getAuthnUserIdFromMemory', (): void => {
 
     // Read from cache.
     setNow(TEST_NOW + MILLISECONDS_PER_DAY + SINGLE);
-    const { expectResponseHeadersToBe, expectResponseJsonToBe, expectResponseStatusToBe } = await fetchWhoAmI({
-      cookie: `__Secure-Authentication-ID=${authnIdCookie}`,
+    const {
+      expectResponseHeadersToBe,
+      expectResponseJsonToBe,
+      expectResponseStatusToBe,
+    } = await fetchWhoAmI({
+      cookies: `__Secure-Authentication-ID=${authnIdCookie}`,
     });
 
     expectResponseStatusToBe(StatusCode.OK);
@@ -48,7 +58,7 @@ describe('getAuthnUserIdFromMemory', (): void => {
       'content-type': 'text/json; charset=utf-8',
     });
 
-    expectResponseJsonToBe({
+    await expectResponseJsonToBe({
       code: WhoAmIResponseCode.InvalidAuthnId,
     });
   });

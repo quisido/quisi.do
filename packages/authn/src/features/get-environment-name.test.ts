@@ -9,23 +9,30 @@ describe('getEnvironmentName', (): void => {
     });
 
     await fetchWhoAmI({
-      cookie: `__Secure-Authentication-ID=abcdef`,
+      cookies: `__Secure-Authentication-ID=abcdef`,
     });
 
     expectPublicMetric({ name: MetricName.MissingEnvironmentName });
   });
 
   it('should emit and default when invalid', async (): Promise<void> => {
-    const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI } = new AuthnTest({
-      environmentName: true,
-    });
+    const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI } =
+      new AuthnTest({
+        environmentName: true,
+      });
 
     await fetchWhoAmI({
-      cookie: `__Secure-Authentication-ID=abcdef`,
+      cookies: `__Secure-Authentication-ID=abcdef`,
     });
 
-    expectPrivateMetric({ name: MetricName.InvalidEnvironmentName, value: 'true' });
+    expectPrivateMetric({
+      name: MetricName.InvalidEnvironmentName,
+      value: 'true',
+    });
 
-    expectPublicMetric({ name: MetricName.InvalidEnvironmentName, type: 'boolean' });
+    expectPublicMetric({
+      name: MetricName.InvalidEnvironmentName,
+      type: 'boolean',
+    });
   });
 });

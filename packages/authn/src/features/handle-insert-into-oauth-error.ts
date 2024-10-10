@@ -11,7 +11,7 @@ export default function handleInsertIntoOAuthError(
   const startTime: number = this.getNow();
 
   const handleCatch = (err: unknown): void => {
-    return snapshot.run((): void => {
+    snapshot.run((): void => {
       const endTime: number = this.getNow();
       this.logPrivateError(mapUnknownToError(err));
 

@@ -10,12 +10,15 @@ import type PatreonIdentity from './patreon-identity.js';
 const FORBIDDEN = 403;
 const HTTP_REDIRECTION = 300;
 
-export default async function handlePatreonIdentityResponse(this: Worker,response: Response): Promise<PatreonIdentity> {
+export default async function handlePatreonIdentityResponse(
+  this: Worker,
+  response: Response,
+): Promise<PatreonIdentity> {
   const getJson = async (): Promise<unknown> => {
     try {
       return await response.json();
     } catch (_err: unknown) {
-      return;
+      return undefined;
     }
   };
 
@@ -27,18 +30,22 @@ export default async function handlePatreonIdentityResponse(this: Worker,respons
       }
 
       if (response.status === FORBIDDEN) {
-        return handleForbiddenPatreonIdentityResponse.call(this,identity);
+        return handleForbiddenPatreonIdentityResponse.call(this, identity);
       }
 
       if (response.status >= HTTP_REDIRECTION) {
-        return handleUnknownPatreonIdentityError.call(this,response.status, identity);
+        return handleUnknownPatreonIdentityError.call(
+          this,
+          response.status,
+          identity,
+        );
       }
 
       if (!isObject(identity)) {
-        return handleInvalidPatreonIdentity.call(this,identity);
+        return handleInvalidPatreonIdentity.call(this, identity);
       }
 
-      return parsePatreonIdentity.call(this,identity);
+      return parsePatreonIdentity.call(this, identity);
     },
   );
 }

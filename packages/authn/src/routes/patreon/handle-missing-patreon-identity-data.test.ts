@@ -1,7 +1,7 @@
-import { StatusCode } from "cloudflare-utils";
-import { describe, it } from "vitest";
-import { MetricName } from "../../constants/metric-name.js";
-import AuthnTest from "../../test/authn-test.js";
+import { StatusCode } from 'cloudflare-utils';
+import { describe, it } from 'vitest';
+import { MetricName } from '../../constants/metric-name.js';
+import AuthnTest from '../../test/authn-test.js';
 
 describe('handleMissingPatreonIdentityData', (): void => {
   it('should emit and respond', async (): Promise<void> => {
@@ -11,7 +11,8 @@ describe('handleMissingPatreonIdentityData', (): void => {
     });
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon();
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
+      await fetchPatreon();
 
     // Assert
     expectPublicMetric({ name: MetricName.MissingPatreonIdentityData });

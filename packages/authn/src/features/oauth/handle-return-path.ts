@@ -11,10 +11,10 @@ interface Options {
   readonly returnPath: string;
 }
 
-export default async function handleReturnPath(this: Worker,{
-  pathname,
-  returnPath,
-}: Options): Promise<Response> {
+export default async function handleReturnPath(
+  this: Worker,
+  { pathname, returnPath }: Options,
+): Promise<Response> {
   // Throttle
   const ip: string = getIp.call(this);
   if (shouldThrottleOAuth.call(this, ip)) {

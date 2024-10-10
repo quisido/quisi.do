@@ -9,11 +9,10 @@ interface Options {
   readonly value: unknown;
 }
 
-export default function handleInvalidStateSessionId(this: Worker,{
-  searchParam,
-  state,
-  value,
-}: Options): Response {
+export default function handleInvalidStateSessionId(
+  this: Worker,
+  { searchParam, state, value }: Options,
+): Response {
   if (typeof value === 'undefined') {
     this.emitPrivateMetric({
       name: MetricName.MissingStateSessionId,

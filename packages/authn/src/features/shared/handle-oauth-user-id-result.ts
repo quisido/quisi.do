@@ -10,12 +10,10 @@ interface Result {
   readonly sizeAfter: number;
 }
 
-export default function handleOAuthUserIdResult(this: Worker,{
-  duration,
-  results,
-  rowsRead,
-  sizeAfter,
-}: Result): number | null {
+export default function handleOAuthUserIdResult(
+  this: Worker,
+  { duration, results, rowsRead, sizeAfter }: Result,
+): number | null {
   this.emitPublicMetric({
     duration,
     name: MetricName.OAuthUserIdSelected,

@@ -8,7 +8,12 @@ describe('handleInsertIntoOAuthError', (): void => {
     // Assemble
     const TEST_ERROR = new Error('Failed to insert into OAuth.');
     const TEST_USER_ID = 1234;
-    const { expectPrivateLog, expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
+    const {
+      expectPrivateLog,
+      expectPrivateMetric,
+      expectPublicMetric,
+      fetchPatreon,
+    } = new AuthnTest({
       insertIntoOAuthError: TEST_ERROR,
       usersRowId: TEST_USER_ID,
     });

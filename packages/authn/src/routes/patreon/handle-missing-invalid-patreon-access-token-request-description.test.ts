@@ -6,13 +6,15 @@ import AuthnTest from '../../test/authn-test.js';
 describe('handleMissingInvalidPatreonAccessTokenRequestDescription', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
-      patreonToken: '{"error":"invalid_request","key":"value"}',
-      patreonTokenStatusCode: StatusCode.BadRequest,
-    });
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+      new AuthnTest({
+        patreonToken: '{"error":"invalid_request","key":"value"}',
+        patreonTokenStatusCode: StatusCode.BadRequest,
+      });
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon();
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
+      await fetchPatreon();
 
     // Assert
     expectResponseStatusToBe(StatusCode.SeeOther);

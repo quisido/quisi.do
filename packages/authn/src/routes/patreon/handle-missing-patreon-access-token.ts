@@ -3,7 +3,8 @@ import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
 import FatalError from '../../utils/fatal-error.js';
 
-export default function handleMissingPatreonAccessToken(this: Worker,
+export default function handleMissingPatreonAccessToken(
+  this: Worker,
   token: Record<string, unknown>,
 ): never {
   this.emitPublicMetric({ name: MetricName.MissingPatreonAccessToken });

@@ -10,11 +10,9 @@ interface Options {
 }
 
 export default function handlePutAuthnUserId(
-  this: Worker, {
-  authnId,
-  startTime,
-  userId,
-}: Options): () => void {
+  this: Worker,
+  { authnId, startTime, userId }: Options,
+): () => void {
   const snapshot: Snapshot = new Snapshot();
 
   return (): void => {

@@ -4,7 +4,10 @@ import { MetricName } from '../../constants/metric-name.js';
 import FatalError from '../../utils/fatal-error.js';
 import handleMissingPatreonIdentityData from './handle-missing-patreon-identity-data.js';
 
-export default function handleInvalidPatreonIdentityData(this: Worker,data: unknown): never {
+export default function handleInvalidPatreonIdentityData(
+  this: Worker,
+  data: unknown,
+): never {
   if (typeof data === 'undefined') {
     return handleMissingPatreonIdentityData.call(this);
   }

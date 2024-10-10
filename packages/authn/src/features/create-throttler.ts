@@ -10,7 +10,11 @@ export default function createThrottler(): (
     number
   >();
 
-  return function throttle(this: Worker, key: number | string | symbol, ms: number): void {
+  return function throttle(
+    this: Worker,
+    key: number | string | symbol,
+    ms: number,
+  ): void {
     const lastCallTime: number | undefined = map.get(key);
     const now: number = this.getNow();
 

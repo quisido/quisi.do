@@ -19,7 +19,8 @@ import FatalError from '../../utils/fatal-error.js';
  * }
  */
 
-export default function handleForbiddenPatreonIdentityResponse(this: Worker,
+export default function handleForbiddenPatreonIdentityResponse(
+  this: Worker,
   json: unknown,
 ): never {
   this.emitPublicMetric({ name: MetricName.ForbiddenPatreonIdentityResponse });

@@ -3,7 +3,10 @@ import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
 import ErrorResponse from '../error-response.js';
 
-export default function handleNonJsonStateSearchParam(this: Worker,value: string): Response {
+export default function handleNonJsonStateSearchParam(
+  this: Worker,
+  value: string,
+): Response {
   this.emitPublicMetric({ name: MetricName.NonJsonStateSearchParam });
   this.emitPrivateMetric({
     name: MetricName.NonJsonStateSearchParam,

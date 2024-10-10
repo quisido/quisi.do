@@ -15,7 +15,7 @@ describe('handleMissingAuthnId', (): void => {
       expectResponseHeadersToBe,
       expectResponseStatusToBe,
     } = await fetchWhoAmI({
-      cookie: '__Secure-Session-ID=abcdef',
+      cookies: '__Secure-Session-ID=abcdef',
     });
 
     // Assert

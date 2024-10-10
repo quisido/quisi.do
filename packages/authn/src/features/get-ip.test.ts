@@ -12,11 +12,11 @@ describe('handleWhoAmIThrottle', (): void => {
 
     // Act
     await fetchWhoAmI({
-      cookie: `__Secure-Authentication-ID=abcdef`,
+      cookies: `__Secure-Authentication-ID=abcdef`,
     });
 
     await fetchWhoAmI({
-      cookie: `__Secure-Authentication-ID=abcdef`,
+      cookies: `__Secure-Authentication-ID=abcdef`,
     });
 
     // Assert
@@ -34,7 +34,7 @@ describe('handleWhoAmIThrottle', (): void => {
 
     // Act
     await fetchWhoAmI({
-      cookie: `__Secure-Authentication-ID=abcdef`,
+      cookies: `__Secure-Authentication-ID=abcdef`,
       ip: undefined,
     });
 

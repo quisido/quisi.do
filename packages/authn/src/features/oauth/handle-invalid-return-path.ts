@@ -9,11 +9,10 @@ interface Options {
   readonly value: unknown;
 }
 
-export default function handleInvalidReturnPath(this: Worker, {
-  searchParam,
-  state,
-  value,
-}: Options): Response {
+export default function handleInvalidReturnPath(
+  this: Worker,
+  { searchParam, state, value }: Options,
+): Response {
   if (typeof value === 'undefined') {
     this.emitPrivateMetric({
       name: MetricName.MissingReturnPath,

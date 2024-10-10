@@ -9,14 +9,22 @@ export default function handleInvalidPatreonAccessTokenRequest(
 ): never {
   const { error_description: description } = json;
   if (typeof description === 'string') {
-    return handleInvalidPatreonAccessTokenRequestDescription.call(this, json, description);
+    return handleInvalidPatreonAccessTokenRequestDescription.call(
+      this,
+      json,
+      description,
+    );
   }
 
   if (typeof description === 'undefined') {
-    return handleMissingInvalidPatreonAccessTokenRequestDescription.call(this, json);
+    return handleMissingInvalidPatreonAccessTokenRequestDescription.call(
+      this,
+      json,
+    );
   }
 
-  return handleInvalidInvalidPatreonAccessTokenRequestDescription.call(this,
+  return handleInvalidInvalidPatreonAccessTokenRequestDescription.call(
+    this,
     json,
     description,
   );

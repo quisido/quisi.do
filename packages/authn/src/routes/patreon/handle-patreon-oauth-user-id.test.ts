@@ -1,9 +1,13 @@
-import { StatusCode } from "cloudflare-utils";
-import { describe, expect, it } from "vitest";
-import { MetricName } from "../../constants/metric-name.js";
-import { OAuthProvider } from "../../constants/oauth-provider.js";
-import { INSERT_INTO_USERS_QUERY, SELECT_USERID_FROM_OAUTH_QUERY } from "../../constants/queries.js";
-import AuthnTest from "../../test/authn-test.js";
+import { StatusCode } from 'cloudflare-utils';
+import { describe, expect, it } from 'vitest';
+import { Gender } from '../../constants/gender.js';
+import { MetricName } from '../../constants/metric-name.js';
+import { OAuthProvider } from '../../constants/oauth-provider.js';
+import {
+  INSERT_INTO_USERS_QUERY,
+  SELECT_USERID_FROM_OAUTH_QUERY,
+} from '../../constants/queries.js';
+import AuthnTest from '../../test/authn-test.js';
 import { EXPECT_ANY_NUMBER, EXPECT_ANY_STRING } from '../../test/expect-any.js';
 
 const TEST_USER_ID = 1234;
@@ -17,10 +21,11 @@ describe('handlePatreonOAuthUserId', (): void => {
     });
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon({
-      cookies: '__Secure-Session-ID=test-session-id',
-      sessionIdState: 'test-session-id',
-    });
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
+      await fetchPatreon({
+        cookies: '__Secure-Session-ID=test-session-id',
+        sessionIdState: 'test-session-id',
+      });
 
     // Assert
     expectResponseStatusToBe(StatusCode.SeeOther);
@@ -28,24 +33,40 @@ describe('handlePatreonOAuthUserId', (): void => {
     expectResponseHeadersToBe({
       'content-location': 'https://test.host/test-return-path/',
       location: 'https://test.host/test-return-path/',
-      'set-cookie': expect.stringMatching(/^__Secure-Authentication-ID=.{64}; Domain=test\.quisi\.do; Max-Age=86400; Partitioned; Path=\/; SameSite=Lax; Secure$/),
+      'set-cookie': expect.stringMatching(
+        /^__Secure-Authentication-ID=.{64}; Domain=test\.quisi\.do; Max-Age=86400; Partitioned; Path=\/; SameSite=Lax; Secure$/u,
+      ) as string,
     });
   });
 
   it('should insert and respond for new users', async (): Promise<void> => {
     // Assemble
-    const { expectDatabaseToHaveQueried, expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
+    const {
+      expectDatabaseToHaveQueried,
+      expectPrivateMetric,
+      expectPublicMetric,
+      fetchPatreon,
+    } = new AuthnTest({
       cookieDomain: 'test.quisi.do',
       oAuthRowId: 1234,
       usersRowId: 5678,
     });
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon();
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
+      await fetchPatreon();
 
     // Assert
-    expectDatabaseToHaveQueried(SELECT_USERID_FROM_OAUTH_QUERY, [OAuthProvider.Patreon, 'test-id']);
-    expectDatabaseToHaveQueried(INSERT_INTO_USERS_QUERY, [null, null, 0, EXPECT_ANY_NUMBER]);
+    expectDatabaseToHaveQueried(SELECT_USERID_FROM_OAUTH_QUERY, [
+      OAuthProvider.Patreon,
+      'test-id',
+    ]);
+    expectDatabaseToHaveQueried(INSERT_INTO_USERS_QUERY, [
+      null,
+      null,
+      Gender.Neutral,
+      EXPECT_ANY_NUMBER,
+    ]);
 
     expectResponseStatusToBe(StatusCode.SeeOther);
 
@@ -86,7 +107,9 @@ describe('handlePatreonOAuthUserId', (): void => {
     expectResponseHeadersToBe({
       'content-location': 'https://test.host/test-return-path/',
       location: 'https://test.host/test-return-path/',
-      'set-cookie': expect.stringMatching(/^__Secure-Authentication-ID=.{64}; Domain=test\.quisi\.do; Max-Age=86400; Partitioned; Path=\/; SameSite=Lax; Secure$/),
+      'set-cookie': expect.stringMatching(
+        /^__Secure-Authentication-ID=.{64}; Domain=test\.quisi\.do; Max-Age=86400; Partitioned; Path=\/; SameSite=Lax; Secure$/u,
+      ) as string,
     });
   });
 });

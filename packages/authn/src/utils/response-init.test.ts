@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import ResponseInitImpl from "./response-init.js";
+import { describe, expect, it } from 'vitest';
+import ResponseInitImpl from './response-init.js';
 
 const TEST_HEADERS = new Headers();
 const TEST_STATUS = 404;

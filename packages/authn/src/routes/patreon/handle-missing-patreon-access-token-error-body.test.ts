@@ -12,7 +12,8 @@ describe('handleMissingPatreonAccessTokenErrorBody', (): void => {
     });
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon();
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
+      await fetchPatreon();
 
     // Assert
     expectPublicMetric({ name: MetricName.MissingPatreonAccessTokenErrorBody });

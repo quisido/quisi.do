@@ -10,7 +10,10 @@ interface Options {
 }
 
 export default class WhoAmIResponse extends Response {
-  public constructor(worker: Worker, { code, id, status = StatusCode.OK }: Options) {
+  public constructor(
+    worker: Worker,
+    { code, id, status = StatusCode.OK }: Options,
+  ) {
     super(
       JSON.stringify({
         code,

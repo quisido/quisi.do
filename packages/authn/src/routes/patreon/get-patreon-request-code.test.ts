@@ -9,9 +9,10 @@ describe('getPatreonRequestCode', (): void => {
     const { expectPublicMetric, fetchPatreon } = new AuthnTest();
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon({
-      code: undefined,
-    });
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
+      await fetchPatreon({
+        code: undefined,
+      });
 
     // Assert
     expectPublicMetric({ name: MetricName.MissingPatreonRequestCode });

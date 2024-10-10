@@ -44,7 +44,7 @@ export function getAuthnUserIdFromMemory(
   }
 
   return userId;
-};
+}
 
 export function setAuthnUserIdInMemory(
   this: Worker,
@@ -55,4 +55,4 @@ export function setAuthnUserIdInMemory(
     expiration: this.getNow() + MILLISECONDS_PER_DAY,
     userId,
   });
-};
+}

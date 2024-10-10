@@ -12,19 +12,19 @@ export default async function handleFetchRequest(
   // Who am I?
   const pathname: string = this.getRequestPathname();
   if (pathname === '/whoami/') {
-    return await handleWhoAmIFetchRequest.call(this,);
+    return await handleWhoAmIFetchRequest.call(this);
   }
 
   // Static
   if (isStaticPathname(pathname)) {
-    return handleStaticPathname.call(this,pathname);
+    return handleStaticPathname.call(this, pathname);
   }
 
   // OAuth
   if (isAuthenticationPathname(pathname)) {
-    return await handleAuthenticationPathname.call(this,pathname);
+    return await handleAuthenticationPathname.call(this, pathname);
   }
 
   // Unknown
-  return handleInvalidPathname.call(this,pathname);
+  return handleInvalidPathname.call(this, pathname);
 }

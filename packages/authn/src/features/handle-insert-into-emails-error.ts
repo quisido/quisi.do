@@ -11,7 +11,7 @@ export default function handleInsertIntoEmailsError(
   const startTime: number = this.getNow();
 
   const handleCatch = (err: unknown): void => {
-    return snapshot.run((): void => {
+    snapshot.run((): void => {
       const endTime: number = this.getNow();
       const duration: number = endTime - startTime;
       this.logPrivateError(mapUnknownToError(err));

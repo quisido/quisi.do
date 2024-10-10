@@ -6,12 +6,14 @@ import AuthnTest from '../../test/authn-test.js';
 describe('handleInvalidPatreonOAuthHost', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
-      patreonOAuthHost: true,
-    });
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+      new AuthnTest({
+        patreonOAuthHost: true,
+      });
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon();
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
+      await fetchPatreon();
 
     // Assert
     expectResponseStatusToBe(StatusCode.SeeOther);

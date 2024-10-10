@@ -9,10 +9,10 @@ interface Options {
   readonly json: Record<string, unknown>;
 }
 
-export default function handlePatreonAccessTokenErrorCode(this: Worker, {
-  code,
-  json,
-}: Options): never {
+export default function handlePatreonAccessTokenErrorCode(
+  this: Worker,
+  { code, json }: Options,
+): never {
   switch (code) {
     case 'invalid_client':
       return handleInvalidPatreonClientId.call(this);

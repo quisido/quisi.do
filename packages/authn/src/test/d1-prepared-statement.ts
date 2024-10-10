@@ -1,5 +1,5 @@
-import { expect } from "vitest";
-import unimplementedMethod from "./unimplemented-method.js";
+import { expect } from 'vitest';
+import unimplementedMethod from './unimplemented-method.js';
 
 interface Options {
   readonly error?: Error | undefined;
@@ -9,6 +9,7 @@ interface Options {
 
 const DEFAULT_LAST_ROW_ID = 1;
 const DEFAULT_RESULTS: readonly never[] = [];
+const FIRST = 0;
 
 export class TestD1PreparedStatement implements D1PreparedStatement {
   readonly #boundValues: (null | number | string)[] = [];
@@ -52,9 +53,9 @@ export class TestD1PreparedStatement implements D1PreparedStatement {
   public bind = (
     ...values: readonly (null | number | string)[]
   ): D1PreparedStatement => {
-    this.#boundValues.splice(0, this.#boundValues.length, ...values);
+    this.#boundValues.splice(FIRST, this.#boundValues.length, ...values);
     return this;
-  }
+  };
 
   public expectToHaveBound = (
     ...values: readonly (null | number | string)[]

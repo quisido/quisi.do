@@ -8,10 +8,10 @@ interface Options {
   readonly returnPath: string;
 }
 
-export default function handleThrottledOAuthRequest(this: Worker,{
-  ip,
-  returnPath,
-}: Options): Response {
+export default function handleThrottledOAuthRequest(
+  this: Worker,
+  { ip, returnPath }: Options,
+): Response {
   this.emitPublicMetric({ name: MetricName.OAuthThrottled });
   this.emitPrivateMetric({
     ip,

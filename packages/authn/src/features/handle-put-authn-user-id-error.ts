@@ -10,11 +10,10 @@ interface Options {
   readonly userId: number;
 }
 
-export default function handlePutAuthnUserIdError(this: Worker, {
-  authnId,
-  startTime,
-  userId,
-}: Options): (error: unknown) => void {
+export default function handlePutAuthnUserIdError(
+  this: Worker,
+  { authnId, startTime, userId }: Options,
+): (error: unknown) => void {
   const snapshot: Snapshot = new Snapshot();
 
   return (err: unknown): void => {

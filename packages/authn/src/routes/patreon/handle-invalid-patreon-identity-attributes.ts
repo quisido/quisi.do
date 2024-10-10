@@ -11,13 +11,14 @@ interface Result {
   readonly id: string;
 }
 
-export default function handleInvalidPatreonIdentityAttributes(this: Worker,{
-  attributes,
-  data,
-  id,
-}: Options): Result {
+export default function handleInvalidPatreonIdentityAttributes(
+  this: Worker,
+  { attributes, data, id }: Options,
+): Result {
   if (typeof attributes === 'undefined') {
-    this.emitPublicMetric({ name: MetricName.MissingPatreonIdentityAttributes });
+    this.emitPublicMetric({
+      name: MetricName.MissingPatreonIdentityAttributes,
+    });
 
     this.emitPrivateMetric({
       data: JSON.stringify(data),

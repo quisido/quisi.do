@@ -7,20 +7,21 @@ describe('handleInsertIntoEmailsResponse', (): void => {
   it('should emit', async (): Promise<void> => {
     // Assemble
     const TEST_USER_ID = 1234;
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
-      usersRowId: TEST_USER_ID,
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+      new AuthnTest({
+        usersRowId: TEST_USER_ID,
 
-      patreonIdentity: JSON.stringify({
-        data: {
-          id: 'test-id',
+        patreonIdentity: JSON.stringify({
+          data: {
+            id: 'test-id',
 
-          attributes: {
-            email: 'test@localhost',
-            is_email_verified: true
+            attributes: {
+              email: 'test@localhost',
+              is_email_verified: true,
+            },
           },
-        },
-      }),
-    });
+        }),
+      });
 
     // Act
     await fetchPatreon();

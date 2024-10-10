@@ -11,7 +11,8 @@ describe('getPatreonOAuthClientSecret', (): void => {
     });
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon();
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
+      await fetchPatreon();
 
     // Assert
     expectPublicMetric({ name: MetricName.MissingPatreonOAuthClientSecret });
@@ -27,12 +28,14 @@ describe('getPatreonOAuthClientSecret', (): void => {
 
   it('should emit and respond when invalid', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
-      patreonOAuthClientSecret: true,
-    });
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+      new AuthnTest({
+        patreonOAuthClientSecret: true,
+      });
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon();
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
+      await fetchPatreon();
 
     // Assert
     expectResponseStatusToBe(StatusCode.SeeOther);

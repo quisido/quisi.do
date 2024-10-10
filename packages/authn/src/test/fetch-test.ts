@@ -24,7 +24,7 @@ export default class FetchTest {
   get #cookies(): Record<string, string> {
     const cookies: string | undefined = this.#headersRecord['set-cookie'];
     if (typeof cookies === 'undefined') {
-      throw new Error('Expected cookies to be set.')
+      throw new Error('Expected cookies to be set.');
     }
 
     return parse(cookies);

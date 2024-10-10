@@ -6,16 +6,18 @@ import AuthnTest from '../../test/authn-test.js';
 describe('handleInvalidPatreonGrantCode', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
-      patreonOAuthClientId: 'test-client-id',
-      patreonToken: '{"error":"invalid_grant"}',
-      patreonTokenStatusCode: StatusCode.BadRequest,
-    });
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+      new AuthnTest({
+        patreonOAuthClientId: 'test-client-id',
+        patreonToken: '{"error":"invalid_grant"}',
+        patreonTokenStatusCode: StatusCode.BadRequest,
+      });
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon({
-      code: 'abcdef',
-    });
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
+      await fetchPatreon({
+        code: 'abcdef',
+      });
 
     // Assert
     expectPublicMetric({ name: MetricName.InvalidPatreonGrantCode });

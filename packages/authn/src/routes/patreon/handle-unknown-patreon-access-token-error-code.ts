@@ -4,11 +4,14 @@ import { mapUnknownToString } from 'fmrs';
 import { MetricName } from '../../constants/metric-name.js';
 import FatalError from '../../utils/fatal-error.js';
 
-export default function handleUnknownPatreonAccessTokenErrorCode(this: Worker,
+export default function handleUnknownPatreonAccessTokenErrorCode(
+  this: Worker,
   code: unknown,
   json: Record<string, unknown>,
 ): never {
-  this.emitPublicMetric({ name: MetricName.UnknownPatreonAccessTokenErrorCode });
+  this.emitPublicMetric({
+    name: MetricName.UnknownPatreonAccessTokenErrorCode,
+  });
   this.emitPrivateMetric({
     code: mapUnknownToString(code),
     name: MetricName.UnknownPatreonAccessTokenErrorCode,

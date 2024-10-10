@@ -1,17 +1,17 @@
 import { StatusCode } from 'cloudflare-utils';
 import { expect } from 'vitest';
-import { EnvironmentName } from "../constants/environment-name.js";
-import { INSERT_INTO_EMAILS_QUERY, INSERT_INTO_OAUTH_QUERY, INSERT_INTO_USERS_QUERY, SELECT_USERID_FROM_OAUTH_QUERY } from '../constants/queries.js';
 import { SECONDS_PER_DAY } from '../constants/time.js';
 import { WORKER } from '../constants/worker.js';
 import { EXPECT_ANY_NUMBER } from '../test/expect-any.js';
-import TestAnalyticsEngineDataset from "./analytics-engine-dataset.js";
+import AuthnTestD1Database from './authn-test-d1-database.js';
+import createAuthnTestHeaders from './create-authn-test-headers.js';
 import createIp from './create-ip.js';
 import TestD1Database from './d1-database.js';
-import type FetchTest from "./fetch-test.js";
-import TestKVNamespace from "./kv-namespace.js";
+import type FetchTest from './fetch-test.js';
+import getAuthnTestEnv from './get-authn-test-env.js';
+import TestKVNamespace from './kv-namespace.js';
 import TestR2Bucket from './r2-bucket.js';
-import WorkerTest from "./worker-test.js";
+import WorkerTest from './worker-test.js';
 
 interface FetchPatreonOptions {
   readonly code?: string | undefined;
@@ -21,7 +21,7 @@ interface FetchPatreonOptions {
 }
 
 interface FetchWhoAmIOptions {
-  readonly cookie?: string | undefined;
+  readonly cookies?: string | undefined;
   readonly ip?: string | undefined;
   readonly method?: string | undefined;
   readonly origin?: string | undefined;
@@ -74,26 +74,6 @@ export default class AuthnTest extends WorkerTest {
     usersRowId = FIRST,
     ...options
   }: Options = DEFAULT_OPTIONS) {
-    const database = new TestD1Database({
-      [INSERT_INTO_EMAILS_QUERY]: {
-        error: insertIntoEmailsError,
-      },
-      [INSERT_INTO_OAUTH_QUERY]: {
-        error: insertIntoOAuthError,
-        lastRowId: oAuthRowId,
-      },
-      [INSERT_INTO_USERS_QUERY]: {
-        lastRowId: usersRowId,
-      },
-      [SELECT_USERID_FROM_OAUTH_QUERY]: {
-        results: oAuthUserIdResults,
-      },
-    });
-
-    /**
-     *   For options that can be explicitly set to `undefined`, we must use
-     * `key in options` rather than destructuring.
-     */
     const getOption = <K extends keyof typeof options>(
       key: K,
       defaultValue: Options[K],
@@ -105,25 +85,33 @@ export default class AuthnTest extends WorkerTest {
       return defaultValue;
     };
 
-    const authnUserIdsNamespace: unknown = getOption('authnUserIdsNamespace', new TestKVNamespace(authnUserIds));
-    const patreonOAuthHost: unknown = getOption('patreonOAuthHost', 'https://patreon.test.quisi.do');
+    const authnUserIdsNamespace: unknown = getOption(
+      'authnUserIdsNamespace',
+      new TestKVNamespace(authnUserIds),
+    );
+
+    const database = new AuthnTestD1Database({
+      insertIntoEmailsError,
+      insertIntoOAuthError,
+      oAuthRowId,
+      oAuthUserIdResults,
+      usersRowId,
+    });
+
+    const patreonOAuthHost: unknown = getOption(
+      'patreonOAuthHost',
+      'https://patreon.test.quisi.do',
+    );
 
     super({
       createExportedHandler: WORKER.createExportedHandler,
 
       env: {
+        ...getAuthnTestEnv(options),
         AUTHN_DATA: dataBucket,
         AUTHN_DB: getOption('database', database),
         AUTHN_USER_IDS: authnUserIdsNamespace,
-        COOKIE_DOMAIN: getOption('cookieDomain', 'localhost'),
-        ENVIRONMENT_NAME: getOption('environmentName', EnvironmentName.Test),
-        HOST: getOption('host', 'test.host'),
-        PATREON_OAUTH_CLIENT_ID: getOption('patreonOAuthClientId', 'test-client-id'),
-        PATREON_OAUTH_CLIENT_SECRET: getOption('patreonOAuthClientSecret', 'test-client-secret'),
         PATREON_OAUTH_HOST: patreonOAuthHost,
-        PATREON_OAUTH_REDIRECT_URI: getOption('patreonOAuthRedirectUri', 'https://localhost/patreon/callback'),
-        PRIVATE_DATASET: new TestAnalyticsEngineDataset(),
-        PUBLIC_DATASET: new TestAnalyticsEngineDataset(),
       },
 
       getNow: (): number => {
@@ -161,7 +149,9 @@ export default class AuthnTest extends WorkerTest {
 
   public expectUserIdsToHavePut = (authnId: string, id: string): void => {
     if (!(this.#authnUserIdsNamespace instanceof TestKVNamespace)) {
-      throw new Error('Expected authn user IDs namespace to be a Test KV Namespace.');
+      throw new Error(
+        'Expected authn user IDs namespace to be a Test KV Namespace.',
+      );
     }
 
     expect(this.#authnUserIdsNamespace.put).toHaveBeenCalledWith(authnId, id, {
@@ -191,8 +181,9 @@ export default class AuthnTest extends WorkerTest {
       return defaultValue;
     };
 
-    const headers = new Headers({
-      'cf-connecting-ip': ip,
+    const headers: Headers = createAuthnTestHeaders({
+      cookies,
+      ip,
     });
 
     const urlSearchParams: URLSearchParams = new URLSearchParams({
@@ -207,10 +198,6 @@ export default class AuthnTest extends WorkerTest {
       urlSearchParams.set('code', code);
     }
 
-    if (typeof cookies === 'string') {
-      headers.set('cookie', cookies);
-    }
-
     return this.fetch(
       `https://localhost/patreon/?${urlSearchParams.toString()}`,
       {
@@ -220,7 +207,7 @@ export default class AuthnTest extends WorkerTest {
   };
 
   public fetchWhoAmI = ({
-    cookie,
+    cookies,
     method = 'GET',
     origin,
     ...options
@@ -237,19 +224,11 @@ export default class AuthnTest extends WorkerTest {
     };
 
     const ip: string | undefined = getOption('ip', createIp());
-    const headers = new Headers();
-
-    if (typeof cookie === 'string') {
-      headers.set('cookie', cookie);
-    }
-
-    if (typeof ip === 'string') {
-      headers.set('cf-connecting-ip', ip);
-    }
-
-    if (typeof origin === 'string') {
-      headers.set('origin', origin);
-    }
+    const headers: Headers = createAuthnTestHeaders({
+      cookies,
+      ip,
+      origin,
+    });
 
     return this.fetch('https://localhost/whoami/', {
       headers,
@@ -257,27 +236,29 @@ export default class AuthnTest extends WorkerTest {
     });
   };
 
-  #mockPatreonIdentity(host: unknown, body?: BodyInit | null, init?: ResponseInit): void {
+  #mockPatreonIdentity(
+    host: unknown,
+    body?: BodyInit | null,
+    init?: ResponseInit,
+  ): void {
     if (typeof host !== 'string') {
       return;
     }
 
-    this.onFetch(
-      `${host}/api/oauth2/v2/identity`,
-      new Response(body, init),
-    );
-  };
+    this.onFetch(`${host}/api/oauth2/v2/identity`, new Response(body, init));
+  }
 
-  #mockPatreonToken(host: unknown, body?: BodyInit | null, init?: ResponseInit): void {
+  #mockPatreonToken(
+    host: unknown,
+    body?: BodyInit | null,
+    init?: ResponseInit,
+  ): void {
     if (typeof host !== 'string') {
       return;
     }
 
-    this.onFetch(
-      `${host}/api/oauth2/token`,
-      new Response(body, init),
-    );
-  };
+    this.onFetch(`${host}/api/oauth2/token`, new Response(body, init));
+  }
 
   public setNow = (now: number): void => {
     this.#now = now;

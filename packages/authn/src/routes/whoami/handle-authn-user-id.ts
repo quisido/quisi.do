@@ -7,7 +7,8 @@ import WhoAmIResponse from './whoami-response.js';
 
 const BASE = 10;
 
-export default function handleAuthnUserId(this: Worker,
+export default function handleAuthnUserId(
+  this: Worker,
   authnId: string,
   userIdStr: string | null,
 ): Response {
@@ -16,12 +17,12 @@ export default function handleAuthnUserId(this: Worker,
    * invalid authentication cookie in case the ID exists in the future.
    */
   if (userIdStr === null) {
-    return handleInvalidAuthnId.call(this,authnId);
+    return handleInvalidAuthnId.call(this, authnId);
   }
 
   // User found! 🎉
   const userId: number = parseInt(userIdStr, BASE);
-  setAuthnUserIdInMemory.call(this,authnId, userId);
+  setAuthnUserIdInMemory.call(this, authnId, userId);
 
   this.emitPrivateMetric({
     authnId,

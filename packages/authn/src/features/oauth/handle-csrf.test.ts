@@ -6,13 +6,15 @@ import AuthnTest from '../../test/authn-test.js';
 describe('handleCrossSiteRequestForgery', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest();
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+      new AuthnTest();
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetchPatreon({
-      cookies: '__Secure-Session-ID=test-session-id-cookie',
-      sessionIdState: 'test-session-id-state',
-    });
+    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
+      await fetchPatreon({
+        cookies: '__Secure-Session-ID=test-session-id-cookie',
+        sessionIdState: 'test-session-id-state',
+      });
 
     // Assert
     expectResponseStatusToBe(StatusCode.SeeOther);

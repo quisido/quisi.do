@@ -4,8 +4,8 @@ import AuthnTest from '../test/authn-test.js';
 
 describe('getSessionIdCookie', (): void => {
   it('should emit when missing', async (): Promise<void> => {
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
-    });
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+      new AuthnTest({});
 
     await fetchPatreon({
       cookies: 'cookie1=abc; cookie2=def',

@@ -4,12 +4,13 @@ import { MetricName } from '../../constants/metric-name.js';
 import FatalError from '../../utils/fatal-error.js';
 import handleMissingPatreonIdentityId from './handle-missing-patreon-identity-id.js';
 
-export default function handleInvalidPatreonIdentityId(this: Worker,
+export default function handleInvalidPatreonIdentityId(
+  this: Worker,
   data: Record<string, unknown>,
   id: unknown,
 ): never {
   if (typeof id === 'undefined') {
-    return handleMissingPatreonIdentityId.call(this,data);
+    return handleMissingPatreonIdentityId.call(this, data);
   }
 
   this.emitPrivateMetric({

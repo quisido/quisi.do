@@ -7,9 +7,10 @@ interface Options {
   readonly returnPath: string;
 }
 
-export default async function handlePatreonFetchRequest(this: Worker,{
-  returnPath,
-}: Options): Promise<Response> {
+export default async function handlePatreonFetchRequest(
+  this: Worker,
+  { returnPath }: Options,
+): Promise<Response> {
   this.emitPublicMetric({ name: MetricName.PatreonRequest });
 
   return await this.snapshot(

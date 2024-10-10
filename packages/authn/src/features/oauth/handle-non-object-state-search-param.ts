@@ -8,10 +8,10 @@ interface Options {
   readonly value: string;
 }
 
-export default function handleNonObjectStateSearchParam(this: Worker,{
-  type,
-  value,
-}: Options): Response {
+export default function handleNonObjectStateSearchParam(
+  this: Worker,
+  { type, value }: Options,
+): Response {
   this.emitPrivateMetric({
     name: MetricName.NonObjectState,
     value,

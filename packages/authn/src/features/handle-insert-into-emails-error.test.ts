@@ -8,7 +8,12 @@ describe('handleInsertIntoEmailsError', (): void => {
     // Assemble
     const TEST_ERROR = new Error('Failed to insert into emails.');
     const TEST_USER_ID = 1234;
-    const { expectPrivateLog, expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
+    const {
+      expectPrivateLog,
+      expectPrivateMetric,
+      expectPublicMetric,
+      fetchPatreon,
+    } = new AuthnTest({
       insertIntoEmailsError: TEST_ERROR,
       usersRowId: TEST_USER_ID,
 
@@ -18,7 +23,7 @@ describe('handleInsertIntoEmailsError', (): void => {
 
           attributes: {
             email: 'test@localhost',
-            is_email_verified: true
+            is_email_verified: true,
           },
         },
       }),

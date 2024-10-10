@@ -9,13 +9,10 @@ describe('getCookieDomain', (): void => {
     });
 
     // Act
-    const { expectResponseHeadersToBe } = await fetchWhoAmI(
-      {
-        method: 'OPTIONS',
-
-          origin: 'https://invalid.quisi.do',
-      },
-    );
+    const { expectResponseHeadersToBe } = await fetchWhoAmI({
+      method: 'OPTIONS',
+      origin: 'https://invalid.quisi.do',
+    });
 
     // Assert
     expectResponseHeadersToBe({

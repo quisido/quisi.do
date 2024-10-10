@@ -7,7 +7,8 @@ import AuthnTest from '../../test/authn-test.js';
 describe('handleInvalidAuthnId', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI } = new AuthnTest();
+    const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI } =
+      new AuthnTest();
 
     // Act
     const {
@@ -15,7 +16,7 @@ describe('handleInvalidAuthnId', (): void => {
       expectResponseJsonToBe,
       expectResponseStatusToBe,
     } = await fetchWhoAmI({
-      cookie: '__Secure-Authentication-ID=abcdef',
+      cookies: '__Secure-Authentication-ID=abcdef',
     });
 
     // Assert

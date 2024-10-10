@@ -1,14 +1,15 @@
 const CUBED = 3;
+const INCREMENT = 1;
 const MAX = 128;
-let n = 0;
-const QUARTED  = 4;
+const QUARTED = 4;
 const SQUARED = 2;
 
+let num = 0;
 export default function createIp(): string {
-  ++n;
-  const first: number = n % Math.pow(MAX, QUARTED);
-  const second: number = n % Math.pow(MAX, CUBED);
-  const third: number = n % Math.pow(MAX, SQUARED);
-  const fourth: number = n % MAX;
-  return `${first}.${second}.${third}.${fourth}`;
+  num += INCREMENT;
+  const first = num % MAX ** QUARTED;
+  const second: number = num % MAX ** CUBED;
+  const third: number = num % MAX ** SQUARED;
+  const fourth: number = num % MAX;
+  return `${first.toString()}.${second.toString()}.${third.toString()}.${fourth.toString()}`;
 }

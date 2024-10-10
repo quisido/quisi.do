@@ -4,7 +4,7 @@ import { MetricName } from '../../constants/metric-name.js';
 import FatalError from '../../utils/fatal-error.js';
 import getPatreonOAuthClientId from './get-patreon-oauth-client-id.js';
 
-export default function handleInvalidPatreonClientId(this: Worker,): never {
+export default function handleInvalidPatreonClientId(this: Worker): never {
   this.emitPublicMetric({
     clientId: getPatreonOAuthClientId.call(this),
     name: MetricName.InvalidPatreonClientId,

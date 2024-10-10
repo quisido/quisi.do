@@ -10,12 +10,9 @@ describe('handleMissingCookieDomain', (): void => {
     });
 
     // Act
-    const { expectResponseHeadersToBe } = await fetchWhoAmI(
-      {
-
-          origin: 'https://test.origin',
-      },
-    );
+    const { expectResponseHeadersToBe } = await fetchWhoAmI({
+      origin: 'https://test.origin',
+    });
 
     // Assert
     expectPublicMetric({ name: MetricName.MissingCookieDomain });

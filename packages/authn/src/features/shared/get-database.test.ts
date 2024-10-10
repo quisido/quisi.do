@@ -25,9 +25,10 @@ describe('getDatabase', (): void => {
 
   it('should emit and respond when database is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } = new AuthnTest({
-      database: true,
-    });
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+      new AuthnTest({
+        database: true,
+      });
 
     // Act
     const { expectResponseHeadersToBe } = await fetchPatreon();

@@ -14,5 +14,5 @@ export default function getAuthnUserIdsNamespace(this: Worker): KVNamespace {
     return handleMissingAuthnUserIdsNamespace.call(this);
   }
 
-  return handleInvalidAuthnUserIdsNamespace.call(this,authnUserIds);
+  return handleInvalidAuthnUserIdsNamespace.call(this, authnUserIds);
 }

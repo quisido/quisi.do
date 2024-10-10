@@ -8,10 +8,10 @@ interface Options {
   readonly returnPath: string;
 }
 
-export default function createResponseHeaders(this: Worker,{
-  authnId,
-  returnPath,
-}: Options): Headers {
+export default function createResponseHeaders(
+  this: Worker,
+  { authnId, returnPath }: Options,
+): Headers {
   const cookieDomain: string = getCookieDomain.call(this);
   const host: string = getHost.call(this);
 

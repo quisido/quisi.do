@@ -2,9 +2,12 @@
 import { vi, type Mock } from 'vitest';
 import unimplementedMethod from './unimplemented-method.js';
 
+const put = (): Promise<void> => Promise.resolve();
+
 export default class TestKVNamespace<Key extends string = string>
   implements KVNamespace<Key>
 {
+  readonly #put: KVNamespace<Key>['put'] = put;
   public delete = unimplementedMethod;
   public getWithMetadata = unimplementedMethod;
   public list = unimplementedMethod;
@@ -60,9 +63,8 @@ export default class TestKVNamespace<Key extends string = string>
     }
   }
 
-  #put: KVNamespace<Key>['put'] = (): Promise<void> => {
-    return Promise.resolve();
-  };
-
-  public put: Mock<Parameters<KVNamespace<Key>['put']>, ReturnType<KVNamespace<Key>['put']>> = vi.fn(this.#put);
+  public put: Mock<
+    Parameters<KVNamespace<Key>['put']>,
+    ReturnType<KVNamespace<Key>['put']>
+  > = vi.fn(this.#put);
 }

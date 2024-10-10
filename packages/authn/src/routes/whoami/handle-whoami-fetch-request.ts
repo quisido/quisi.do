@@ -29,9 +29,12 @@ export default async function handleWhoAmIFetchRequest(
   }
 
   // If the authentication ID is cached in memory,
-  const userId: number | undefined = getAuthnUserIdFromMemory.call(this,authnId);
+  const userId: number | undefined = getAuthnUserIdFromMemory.call(
+    this,
+    authnId,
+  );
   if (typeof userId !== 'undefined') {
-    return handleCachedAuthnUserId.call(this,userId);
+    return handleCachedAuthnUserId.call(this, userId);
   }
 
   // Throttle
@@ -40,7 +43,7 @@ export default async function handleWhoAmIFetchRequest(
   try {
     throttleIp.call(this, ip, WHOAMI_THROTTLE_DURATION);
   } catch (_err: unknown) {
-    return handleWhoAmIThrottle.call(this,ip);
+    return handleWhoAmIThrottle.call(this, ip);
   }
 
   return await this.snapshot(

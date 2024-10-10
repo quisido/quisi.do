@@ -12,7 +12,7 @@ export default function handleInsertIntoOAuthResponse(
   const handleThen = ({
     meta: { changes, duration, last_row_id: lastRowId, size_after: sizeAfter },
   }: D1Response): void => {
-    return snapshot.run((): void => {
+    snapshot.run((): void => {
       const endTime: number = this.getNow();
 
       this.emitPrivateMetric({
