@@ -1,21 +1,16 @@
 import { GetErrorCode } from '@quisido/csp-shared';
-import { AccountNumber, UsageType } from '@quisido/workers-shared';
+import { StatusCode } from 'cloudflare-utils';
 import { HEADERS_INIT } from '../constants/headers-init.js';
-import { StatusCode } from '../constants/status-code.js';
-import createAnalyticsEngineDataPoint from '../utils/create-analytics-engine-datapoint.js';
+import { MetricName } from '../constants/metric-name.js';
+import {
+  emitPublicMetric,
+  getD1Database,
+  getRequestSearchParam,
+  logPrivateError,
+} from '../constants/worker.js';
 import query from '../utils/query.js';
 
-interface Options {
-  readonly console: Console;
-  readonly db: D1Database;
-  readonly key: string | null;
-  readonly projectId: number;
-  readonly usage: AnalyticsEngineDataset;
-}
-
-const DEFAULT_PROJECT_ID = 0;
 const MILLISECONDS_PER_MONTH = 2629746000;
-const ONCE = 1;
 
 const SELECT_USER_ID_FROM_KEYS_QUERY = `
 SELECT \`projects\`.\`userId\`
@@ -42,16 +37,14 @@ WHERE \`projectId\` = ?
 AND \`timestamp\` > ?;
 `;
 
-export default async function handleGet({
-  console,
-  db,
-  key,
-  projectId,
-  usage,
-}: Options): Promise<Response> {
+export default async function handleGet(projectId: number): Promise<Response> {
   // Key
+  const key: string | null = getRequestSearchParam('key');
   if (key === null) {
-    console.log('Missing key');
+    emitPublicMetric({
+      name: MetricName.MissingGetKey,
+    });
+
     return new Response(
       JSON.stringify({
         code: GetErrorCode.MissingKey,
@@ -63,6 +56,7 @@ export default async function handleGet({
     );
   }
 
+  const db: D1Database = getD1Database('CSP_DB');
   const [keysRow] = await query(
     db,
     SELECT_USER_ID_FROM_KEYS_QUERY,
@@ -72,16 +66,16 @@ export default async function handleGet({
 
   // Not found
   if (typeof keysRow === 'undefined') {
-    usage.writeDataPoint(
-      createAnalyticsEngineDataPoint({
-        accountNumber: AccountNumber.Quisido,
-        count: ONCE,
-        projectId: DEFAULT_PROJECT_ID,
-        usageType: UsageType.D1Read,
-      }),
-    );
+    emitPublicMetric({
+      name: MetricName.InvalidGetKey,
+    });
 
-    console.log('Invalid key');
+    // Use({
+    //   Account: AccountNumber.Quisido,
+    //   Project: DEFAULT_PROJECT_ID,
+    //   Type: UsageType.D1Read,
+    // });
+
     return new Response(
       JSON.stringify({
         code: GetErrorCode.InvalidKey,
@@ -96,16 +90,20 @@ export default async function handleGet({
   // Bad gateway
   const { userId } = keysRow;
   if (typeof userId !== 'number') {
-    usage.writeDataPoint(
-      createAnalyticsEngineDataPoint({
-        accountNumber: AccountNumber.Quisido,
-        count: ONCE,
-        projectId,
-        usageType: UsageType.D1Read,
-      }),
+    emitPublicMetric({
+      name: MetricName.InvalidDatabaseProjectRow,
+    });
+
+    logPrivateError(
+      new Error(`Invalid database project row: ${projectId.toString()}`),
     );
 
-    console.log('Invalid database project row');
+    // Use({
+    //   Account: AccountNumber.Quisido,
+    //   Project: DEFAULT_PROJECT_ID,
+    //   Type: UsageType.D1Read,
+    // });
+
     return new Response(
       JSON.stringify({
         code: GetErrorCode.InvalidDatabaseProjectRow,
@@ -124,14 +122,12 @@ export default async function handleGet({
     Date.now() - MILLISECONDS_PER_MONTH,
   );
 
-  usage.writeDataPoint(
-    createAnalyticsEngineDataPoint({
-      accountNumber: userId,
-      count: ONCE + reports.length,
-      projectId,
-      usageType: UsageType.D1Read,
-    }),
-  );
+  // Use({
+  //   Account: userId,
+  //   Count: ONCE + reports.length,
+  //   Project: projectId,
+  //   Type: UsageType.D1Read,
+  // });
 
   return new Response(JSON.stringify(reports), {
     headers: new Headers(HEADERS_INIT),

@@ -1,42 +1,30 @@
-import { ErrorCode } from '@quisido/authn-shared';
-import isAuthenticationPathname from '../utils/is-authentication-pathname.js';
-import isStaticPathname from '../utils/is-static-pathname.js';
-import mapCauseToError from '../utils/map-cause-to-error.js';
-import getRequestPathname from './get-request-pathname.js';
-import handleAuthenticationPathname from './handle-authentication-pathname.js';
-import handleStaticPathname from './handle-static-pathname.js';
-import handleThrottledRequest from './handle-throttled-request.js';
-import setReturnHref from './set-return-href.js';
-import shouldThrottle from './should-throttle.js';
-import handleWhoAmIFetchRequest from './whoami/handle-whoami-fetch-request.js';
+import type Worker from '@quisido/worker';
+import handleWhoAmIFetchRequest from '../routes/whoami/handle-whoami-fetch-request.js';
+import handleInvalidPathname from './handle-invalid-pathname.js';
+import handleAuthenticationPathname from './oauth/handle-authentication-pathname.js';
+import isAuthenticationPathname from './oauth/is-authentication-pathname.js';
+import handleStaticPathname from './static/handle-static-pathname.js';
+import isStaticPathname from './static/is-static-pathname.js';
 
-export default async function handleFetchRequest(): Promise<Response> {
-  const pathname: string = getRequestPathname();
-
+export default async function handleFetchRequest(
+  this: Worker,
+): Promise<Response> {
+  // Who am I?
+  const pathname: string = this.getRequestPathname();
   if (pathname === '/whoami/') {
-    return await handleWhoAmIFetchRequest();
+    return await handleWhoAmIFetchRequest.call(this);
   }
 
-  // Static responses
+  // Static
   if (isStaticPathname(pathname)) {
-    return handleStaticPathname(pathname);
+    return handleStaticPathname.call(this, pathname);
   }
 
-  // Unknown pathname
-  if (!isAuthenticationPathname(pathname)) {
-    throw mapCauseToError({
-      code: ErrorCode.NotFound,
-      publicData: pathname,
-    });
+  // OAuth
+  if (isAuthenticationPathname(pathname)) {
+    return await handleAuthenticationPathname.call(this, pathname);
   }
 
-  // `returnHref` can only exist for OAuth pathnames.
-  setReturnHref();
-
-  // Throttle
-  if (shouldThrottle()) {
-    return handleThrottledRequest();
-  }
-
-  return await handleAuthenticationPathname(pathname);
+  // Unknown
+  return handleInvalidPathname.call(this, pathname);
 }

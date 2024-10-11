@@ -1,15 +1,18 @@
 {
   "name": "@quisido/proposal-async-context",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Chengzhong Wu <legendecas@gmail.com>",
   "description": "Async Context proposal for JavaScript",
   "homepage": "https://github.com/tc39/proposal-async-context",
   "license": "CC0-1.0",
   "main": "./dist/src/index.js",
   "module": "./dist/src/index.js",
-  "repository": "legendecas/proposal-async-context",
   "type": "module",
   "types": "./dist/src/index.d.ts",
+  "exports": {
+    "types": "./dist/src/index.d.ts",
+    "default": "./dist/src/index.js"
+  },
   "keywords": [
     "async",
     "context",
@@ -23,19 +26,26 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tc39/proposal-async-context.git"
+  },
   "scripts": {
     "attw": "attw --quiet",
     "fix-esm-import-path": "fix-esm-import-path dist/src/",
     "prepack": "yarn run webpack && yarn run fix-esm-import-path",
-    "prepublish": "yarn run attw",
+    "prepublish": "concurrently --kill-others-on-fail --names attw,publint \"yarn run attw\" \"yarn run publint\"",
+    "publint": "publint",
     "webpack": "webpack"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.3",
     "@types/mocha": "^10.0.7",
     "@types/node": "^20.14.11",
+    "concurrently": "^8.2.2",
     "fix-esm-import-path": "^1.10.0",
     "proposal-async-context": "git://github.com/tc39/proposal-async-context.git",
+    "publint": "^0.2.10",
     "ts-loader": "^9.5.1",
     "typescript": "^5.5.3",
     "webpack": "^5.93.0",

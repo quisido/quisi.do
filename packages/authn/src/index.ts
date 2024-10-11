@@ -1,6 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
-import handleFetch from './features/handle-fetch.js';
+import { WORKER } from './constants/worker.js';
 
-export default {
-  fetch: handleFetch.bind(null, console, fetch),
-} satisfies ExportedHandler;
+export default WORKER.createExportedHandler({
+  console,
+  fetch,
+}) satisfies ExportedHandler;

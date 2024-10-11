@@ -1,6 +1,4 @@
 // These values are stored as `TINYINT`.
-enum OAuthProvider {
+export enum OAuthProvider {
   Patreon = 0,
 }
-
-export default OAuthProvider;

@@ -1,5 +1,5 @@
+import { StatusCode } from 'cloudflare-utils';
 import { HEADERS_INIT } from '../constants/headers-init.js';
-import { StatusCode } from '../constants/status-code.js';
 
 export default class ResponseImpl extends Response {
   public constructor(

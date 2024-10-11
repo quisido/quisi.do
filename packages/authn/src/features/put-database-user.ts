@@ -1,9 +1,7 @@
-import { AccountNumber, Snapshot, UsageType } from '@quisido/workers-shared';
-import type Gender from '../constants/gender.js';
-import type OAuthProvider from '../constants/oauth-provider.js';
-import getNowSeconds from '../utils/get-now-seconds.js';
-import getDatabase from './get-database.js';
-import getUsage from './get-usage.js';
+import type Worker from '@quisido/worker';
+import { type Gender } from '../constants/gender.js';
+import { type OAuthProvider } from '../constants/oauth-provider.js';
+import insertIntoUsers from './insert-into-users.js';
 import putDatabaseUserMetadata from './put-database-user-metadata.js';
 
 interface Options {
@@ -13,48 +11,33 @@ interface Options {
   readonly gender: Gender;
 }
 
-const INSERT_INTO_USERS_QUERY = `
-INSERT INTO \`users\` (
-  \`firstName\`,
-  \`fullName\`,
-  \`gender\`,
-  \`registrationTimestamp\`
-)
-VALUES (?, ?, ?, ?);
-`;
-
 export default async function putDatabaseUser(
+  this: Worker,
   oAuthProvider: OAuthProvider,
   oAuthId: string,
   { email, firstName, fullName, gender }: Options,
 ): Promise<number> {
-  const registrationTimestamp: number = getNowSeconds();
-  const use = getUsage();
-
-  const db: D1Database = getDatabase();
-  const usersStatement = db
-    .prepare(INSERT_INTO_USERS_QUERY)
-    .bind(firstName, fullName, gender, registrationTimestamp);
-
-  const snapshot: Snapshot = new Snapshot();
-
-  use({
-    account: AccountNumber.Quisido,
-    type: UsageType.D1Write,
-  });
-  const {
-    meta: { changes, duration, last_row_id: userId, size_after: sizeAfter },
-  } = await usersStatement.run();
-
-  return snapshot.run((): number =>
-    putDatabaseUserMetadata({
+  return await this.snapshot(
+    insertIntoUsers.call(this, {
+      firstName,
+      fullName,
+      gender,
+    }),
+    ({
       changes,
       duration,
-      email,
-      oAuthId,
-      oAuthProvider,
-      sizeAfter,
-      userId,
-    }),
+      last_row_id: userId,
+      size_after: sizeAfter,
+    }: D1Meta): number => {
+      return putDatabaseUserMetadata.call(this, {
+        changes,
+        duration,
+        email,
+        oAuthId,
+        oAuthProvider,
+        sizeAfter,
+        userId,
+      });
+    },
   );
 }

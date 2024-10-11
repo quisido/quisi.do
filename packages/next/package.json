@@ -4,7 +4,6 @@
   "author": "quisi.do <next@quisi.do>",
   "description": "quisi.do",
   "private": true,
-  "repository": "github:quisido/quisi.do",
   "type": "module",
   "bugs": {
     "email": "next@quisi.do",
@@ -16,6 +15,10 @@
   },
   "publishConfig": {
     "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "scripts": {
     "attw": "attw --quiet",
@@ -39,7 +42,8 @@
     "lighthouse:report:production": "lighthouse https://quisi.do/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental --save-assets",
     "postlighthouse": "yarn node ./scripts/postlighthouse/index.js",
     "prepack": "yarn run build",
-    "prepublish": "concurrently --kill-others-on-fail --names vitest \"yarn run vitest:run\"",
+    "prepublish": "concurrently --kill-others-on-fail --names publint,vitest \"yarn run publint\" \"yarn run vitest:run\"",
+    "publint": "publint",
     "serve": "serve out",
     "vitest": "vitest",
     "vitest:run": "vitest run",
@@ -161,6 +165,7 @@
     "nyc": "^17.0.0",
     "postcss": "^8.4.38",
     "prettier": "^3.3.2",
+    "publint": "^0.2.10",
     "sass": "^1.77.6",
     "serve": "^14.2.3",
     "source-map": "^0.7.4",

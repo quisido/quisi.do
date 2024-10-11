@@ -28,6 +28,13 @@ export default [
   },
 
   {
+    files: ['src/features/authn-user-id.ts'],
+    rules: {
+      'func-style': 'off',
+    },
+  },
+
+  {
     files: ['src/features/get-console.ts'],
     rules: {
       'no-console': 'off',
@@ -42,16 +49,32 @@ export default [
   },
 
   {
-    files: ['src/features/patreon/get-patreon-token-response.ts'],
+    files: [
+      'src/routes/patreon/get-patreon-token-response.ts',
+      'src/routes/patreon/handle-invalid-patreon-access-token-request-description.ts',
+    ],
+
     rules: {
       camelcase: 'off',
     },
   },
 
   {
-    files: ['src/features/telemetry-queue.ts'],
+    files: [
+      'src/routes/patreon/handle-invalid-invalid-patreon-access-token-request-description.ts',
+      'src/routes/patreon/handle-invalid-patreon-access-token-request-description.ts',
+      'src/routes/patreon/handle-missing-invalid-patreon-access-token-request-description.ts',
+    ],
+
     rules: {
-      'no-console': 'off',
+      'no-undefined': 'off',
+    },
+  },
+
+  {
+    files: ['src/test/authn-test.ts'],
+    rules: {
+      'max-lines-per-function': 'off',
     },
   },
 
@@ -78,7 +101,12 @@ export default [
 
   {
     rules: {
+      camelcase: 'off',
       'max-statements': 'off',
+      'no-undefined': 'off',
+
+      // Consider passing parameters as a single object instead.
+      'max-params': 'off',
     },
   },
 ];

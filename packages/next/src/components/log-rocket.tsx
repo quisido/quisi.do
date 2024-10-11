@@ -53,6 +53,7 @@ const NETWORK: Required<Required<LogRocketOptions>['network']> = {
       headers: {
         ...request.headers,
         Cookie: undefined,
+        cookie: undefined,
       },
     };
   },

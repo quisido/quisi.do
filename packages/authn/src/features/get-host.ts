@@ -1,30 +1,28 @@
-import { mapUnknownToString } from 'fmrs';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../constants/metric-name.js';
-import getEnv from '../utils/get-env.js';
-import getTelemetry from '../utils/get-telemetry.js';
 
-const DEFAULT_HOST = 'https://quisi.do/';
+const DEFAULT_HOST = 'quisi.do';
 
-export default function getHost(): string {
-  const { HOST } = getEnv();
-  if (typeof HOST === 'string' && HOST !== '') {
-    return HOST;
+export default function getHost(this: Worker): string {
+  const host: unknown = this.getEnv('HOST');
+  if (typeof host === 'string' && host !== '') {
+    return host;
   }
 
-  const { emitPublicMetric, logPrivateError } = getTelemetry();
-  if (typeof HOST === 'undefined' || HOST === '') {
-    emitPublicMetric({ name: MetricName.MissingHost });
+  if (typeof host === 'undefined' || host === '') {
+    this.emitPublicMetric({ name: MetricName.MissingHost });
     return DEFAULT_HOST;
   }
 
-  emitPublicMetric({
+  this.emitPrivateMetric({
     name: MetricName.InvalidHost,
-    type: typeof HOST,
+    value: JSON.stringify(host),
   });
 
-  logPrivateError(
-    new Error('Invalid host', { cause: mapUnknownToString(HOST) }),
-  );
+  this.emitPublicMetric({
+    name: MetricName.InvalidHost,
+    type: typeof host,
+  });
 
   return DEFAULT_HOST;
 }

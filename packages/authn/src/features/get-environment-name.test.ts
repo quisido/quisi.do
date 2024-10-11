@@ -1,49 +1,38 @@
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
-import fetch from '../test/fetch.js';
-
-const DEFAULT_TRACE_FLAGS = 0;
-const DEFAULT_TRACE_VERSION = 0;
+import AuthnTest from '../test/authn-test.js';
 
 describe('getEnvironmentName', (): void => {
-  it('should emit telemetry for a missing environment name', async (): Promise<void> => {
-    const { expectPublicDataPoint } = await fetch({
-      env: {},
-      pathname: '/patreon/',
+  it('should emit and default when missing', async (): Promise<void> => {
+    const { expectPublicMetric, fetchWhoAmI } = new AuthnTest({
+      environmentName: undefined,
     });
 
-    expectPublicDataPoint({
-      blobs: [expect.any(String) as string, '0000000000000000'],
-      indexes: [MetricName.MissingEnvironmentName],
-
-      doubles: [
-        expect.any(Number) as number,
-        DEFAULT_TRACE_FLAGS,
-        DEFAULT_TRACE_VERSION,
-      ],
+    await fetchWhoAmI({
+      cookies: `__Secure-Authentication-ID=abcdef`,
     });
+
+    expectPublicMetric({ name: MetricName.MissingEnvironmentName });
   });
 
-  it('should emit telemetry for an invalid environment name', async (): Promise<void> => {
-    const { expectPublicDataPoint } = await fetch({
-      pathname: '/patreon/',
+  it('should emit and default when invalid', async (): Promise<void> => {
+    const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI } =
+      new AuthnTest({
+        environmentName: true,
+      });
 
-      env: {
-        ENVIRONMENT_NAME: 'test-invalid-environment-name',
-      },
+    await fetchWhoAmI({
+      cookies: `__Secure-Authentication-ID=abcdef`,
     });
 
-    expectPublicDataPoint({
-      blobs: [expect.any(String) as string, '0000000000000000', 'string'],
-      indexes: [MetricName.InvalidEnvironmentName],
-
-      doubles: [
-        expect.any(Number) as number,
-        DEFAULT_TRACE_FLAGS,
-        DEFAULT_TRACE_VERSION,
-      ],
+    expectPrivateMetric({
+      name: MetricName.InvalidEnvironmentName,
+      value: 'true',
     });
 
-    // Eventually: expectPrivateLog()
+    expectPublicMetric({
+      name: MetricName.InvalidEnvironmentName,
+      type: 'boolean',
+    });
   });
 });

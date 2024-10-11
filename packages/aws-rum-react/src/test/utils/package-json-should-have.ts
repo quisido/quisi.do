@@ -40,7 +40,10 @@ export default function packageJsonShouldHave(
 
   it('should have the expected repository', (): void => {
     assert('repository' in packageJson);
-    expect(packageJson.repository).toBe(`github:${repo}`);
+    expect(packageJson.repository).toEqual({
+      type: 'git',
+      url: `git+https://github.com/${repo}.git`,
+    });
   });
 
   it('should be a module', (): void => {

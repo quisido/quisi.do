@@ -93,8 +93,8 @@
       "path": "packages/vitest-config",
     },
     {
-      "name": "workers-shared",
-      "path": "packages/workers-shared",
+      "name": "worker",
+      "path": "packages/worker",
     },
   ],
 

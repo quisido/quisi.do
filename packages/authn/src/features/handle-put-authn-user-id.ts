@@ -1,33 +1,26 @@
-import { Snapshot } from '@quisido/workers-shared';
-import { AUTHN_USER_ID_MAP } from '../constants/authn-user-id-map.js';
+import { Snapshot } from '@quisido/proposal-async-context';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../constants/metric-name.js';
-import getTelemetry from '../utils/get-telemetry.js';
+import { setAuthnUserIdInMemory } from './authn-user-id.js';
 
 interface Options {
   readonly authnId: string;
-  readonly expiration: number;
-  readonly id: number;
   readonly startTime: number;
+  readonly userId: number;
 }
 
-export default function handlePutAuthnUserId({
-  authnId,
-  expiration,
-  id,
-  startTime,
-}: Options): () => void {
+export default function handlePutAuthnUserId(
+  this: Worker,
+  { authnId, startTime, userId }: Options,
+): () => void {
   const snapshot: Snapshot = new Snapshot();
 
   return (): void => {
-    AUTHN_USER_ID_MAP.set(authnId, {
-      expiration,
-      id,
-    });
-
     snapshot.run((): void => {
-      const { emitPublicMetric } = getTelemetry();
-      emitPublicMetric({
-        endTime: Date.now(),
+      setAuthnUserIdInMemory.call(this, authnId, userId);
+
+      this.emitPublicMetric({
+        endTime: this.getNow(),
         name: MetricName.AuthnIdCreated,
         startTime,
       });

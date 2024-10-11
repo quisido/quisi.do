@@ -1,4 +1,4 @@
-import EnvironmentName from '../constants/environment-name.js';
+import { EnvironmentName } from '../constants/environment-name.js';
 
 const ENVIRONMENT_NAMES: Set<unknown> = new Set<unknown>(
   Object.values(EnvironmentName),

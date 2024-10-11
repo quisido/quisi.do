@@ -1,57 +1,36 @@
-import { AccountNumber, UsageType } from '@quisido/workers-shared';
+import { StatusCode } from 'cloudflare-utils';
 import { Permission } from '../constants/permission.js';
 import {
   SELECT_PERMISSION_FROM_KEYS,
   SELECT_USER_ID_FROM_PROJECTS,
 } from '../constants/queries.js';
-import { StatusCode } from '../constants/status-code.js';
+import {
+  affect,
+  getD1Database,
+  getRequestSearchParam,
+  getRequestText,
+} from '../constants/worker.js';
 import type { ReportBodyArray } from '../types/report-body-array.js';
 import type ReportBody from '../types/report-body.js';
-import createAnalyticsEngineDataPoint from '../utils/create-analytics-engine-datapoint.js';
-import mapReadableStreamToString from '../utils/map-readable-stream-to-string.js';
 import mapReportBodyToArray from '../utils/map-report-body-to-array.js';
-import mapReportBodyToValues from '../utils/map-report-body-to-values.js';
 import parseReport from '../utils/parse-report.js';
 import queries from '../utils/queries.js';
 import query from '../utils/query.js';
 import Response from '../utils/response.js';
 
-interface Options {
-  readonly body: ReadableStream | null;
-  readonly console: Console;
-  readonly ctx: ExecutionContext;
-  readonly db: D1Database;
-  readonly key: string | null;
-  readonly projectId: number;
-  readonly usage: AnalyticsEngineDataset;
-}
-
-const SECONDS_PER_MONTH = 2678400;
 const SELECT = 'SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?';
-const TWICE = 2;
 
-export default async function handlePost({
-  body,
-  console,
-  ctx,
-  db,
-  key,
-  projectId,
-  usage,
-}: Options): Promise<Response> {
-  // Body
-  if (body === null) {
-    console.log('Invalid body');
-    return new Response(StatusCode.BadRequest);
-  }
-
+export default async function handlePost(projectId: number): Promise<Response> {
   // Key
+  const key: string | null = getRequestSearchParam('key');
   if (key === null) {
-    console.log('Missing key');
+    // Log with Worker instance:
+    // Console.log('Missing key');
     return new Response(StatusCode.BadRequest);
   }
 
   // Queries
+  const db: D1Database = getD1Database('CSP_DB');
   const [[keyRow], [projectRow]] = await queries<2>(db, [
     [SELECT_PERMISSION_FROM_KEYS, key, projectId],
     [SELECT_USER_ID_FROM_PROJECTS, projectId],
@@ -59,15 +38,14 @@ export default async function handlePost({
 
   // Project not found
   if (typeof projectRow === 'undefined') {
-    console.log('Missing project');
-    usage.writeDataPoint(
-      createAnalyticsEngineDataPoint({
-        accountNumber: AccountNumber.Quisido,
-        count: TWICE,
-        projectId,
-        usageType: UsageType.D1Read,
-      }),
-    );
+    // Log with Worker instance:
+    // Console.log('Missing project');
+    // Use({
+    //   Account: AccountNumber.Quisido,
+    //   Count: TWICE,
+    //   Project: projectId,
+    //   Type: UsageType.D1Read,
+    // });
 
     return new Response(StatusCode.NotFound);
   }
@@ -75,30 +53,28 @@ export default async function handlePost({
   // Bad gateway
   const { userId } = projectRow;
   if (typeof userId !== 'number') {
-    console.log('Invalid database project row');
-    usage.writeDataPoint(
-      createAnalyticsEngineDataPoint({
-        accountNumber: AccountNumber.Quisido,
-        count: TWICE,
-        projectId,
-        usageType: UsageType.D1Read,
-      }),
-    );
+    // Log with Worker instance:
+    // Console.log('Invalid database project row');
+    // Use({
+    //   Account: AccountNumber.Quisido,
+    //   Count: TWICE,
+    //   Project: projectId,
+    //   Type: UsageType.D1Read,
+    // });
 
     return new Response(StatusCode.BadGateway);
   }
 
   // Key not found
   if (typeof keyRow === 'undefined') {
-    console.log('Missing key');
-    usage.writeDataPoint(
-      createAnalyticsEngineDataPoint({
-        accountNumber: userId,
-        count: TWICE,
-        projectId,
-        usageType: UsageType.D1Read,
-      }),
-    );
+    // Log with Worker instance:
+    // Console.log('Missing key');
+    // Use({
+    //   Account: userId,
+    //   Count: TWICE,
+    //   Project: projectId,
+    //   Type: UsageType.D1Read,
+    // });
 
     return new Response(StatusCode.Forbidden);
   }
@@ -106,30 +82,28 @@ export default async function handlePost({
   // Bad permission
   const { permission } = keyRow;
   if (permission !== Permission.Post) {
-    usage.writeDataPoint(
-      createAnalyticsEngineDataPoint({
-        accountNumber: userId,
-        count: TWICE,
-        projectId,
-        usageType: UsageType.D1Read,
-      }),
-    );
+    // Use({
+    //   Account: userId,
+    //   Count: TWICE,
+    //   Project: projectId,
+    //   Type: UsageType.D1Read,
+    // });
     if (typeof permission !== 'number') {
-      console.log('Invalid database key row');
+      // Log with Worker instance:
+      // Console.log('Invalid database key row');
       return new Response(StatusCode.BadGateway);
     }
-    console.log('Wrong permission');
+    // Log with Worker instance:
+    // Console.log('Wrong permission');
     return new Response(StatusCode.Forbidden);
   }
 
-  usage.writeDataPoint(
-    createAnalyticsEngineDataPoint({
-      accountNumber: userId,
-      count: TWICE,
-      projectId,
-      usageType: UsageType.D1Read,
-    }),
-  );
+  // Use({
+  //   Account: userId,
+  //   Count: TWICE,
+  //   Project: projectId,
+  //   Type: UsageType.D1Read,
+  // });
 
   const mapReportBodyToInsertValues = (
     body: ReportBody,
@@ -140,37 +114,32 @@ export default async function handlePost({
   ];
 
   try {
-    const reportStr: string = await mapReadableStreamToString(body);
-    const reports: readonly ReportBody[] = parseReport(reportStr);
+    const reports: readonly ReportBody[] = parseReport(await getRequestText());
 
-    usage.writeDataPoint(
-      createAnalyticsEngineDataPoint({
-        accountNumber: userId,
-        count: reports.length,
-        projectId,
-        usageType: UsageType.D1Write,
-      }),
-    );
+    // Use({
+    //   Account: userId,
+    //   Count: reports.length,
+    //   Project: projectId,
+    //   Type: UsageType.D1Write,
+    // });
 
     // There has to be a more accurate way to predict the row size.
-    const rowSize: number = reports
-      .flatMap(mapReportBodyToValues)
-      .join('').length;
-    usage.writeDataPoint(
-      createAnalyticsEngineDataPoint({
-        accountNumber: userId,
-        count: rowSize,
-        /**
-         *   So as not to double-charge, maybe this should be until end-of-day or
-         * end-of-month and let cron take over from there?
-         */
-        per: SECONDS_PER_MONTH,
-        projectId,
-        usageType: UsageType.D1Store,
-      }),
-    );
+    // Const rowSize: number = reports
+    //   .flatMap(mapReportBodyToValues)
+    //   .join('').length;
+    // Use({
+    //   Account: userId,
+    //   Count: rowSize,
+    //   /**
+    //    *   So as not to double-charge, maybe this should be until end-of-day or
+    //    * End-of-month and let cron take over from there?
+    //    */
+    //   Per: SECONDS_PER_MONTH,
+    //   Project: projectId,
+    //   Type: UsageType.D1Store,
+    // });
 
-    ctx.waitUntil(
+    affect(
       query(
         db,
         `
@@ -197,7 +166,8 @@ export default async function handlePost({
 
     return new Response(StatusCode.OK);
   } catch (err: unknown) {
-    console.error('Invalid report', err);
+    // Log with Worker instance:
+    // Console.error('Invalid report', err);
     return new Response(StatusCode.BadRequest);
   }
 }

@@ -1,12 +1,11 @@
-import { AccountNumber, UsageType } from '@quisido/workers-shared';
+import type Worker from '@quisido/worker';
 import { MetricName } from '../constants/metric-name.js';
-import type OAuthProvider from '../constants/oauth-provider.js';
-import getTelemetry from '../utils/get-telemetry.js';
-import getDatabase from './get-database.js';
-import getUsage from './get-usage.js';
+import { type OAuthProvider } from '../constants/oauth-provider.js';
+import { INSERT_INTO_OAUTH_QUERY } from '../constants/queries.js';
 import handleInsertIntoOAuthError from './handle-insert-into-oauth-error.js';
 import handleInsertIntoOAuthResponse from './handle-insert-into-oauth-response.js';
 import putDatabaseUserEmail from './put-database-user-email.js';
+import getDatabase from './shared/get-database.js';
 
 interface Options {
   readonly changes: number;
@@ -18,24 +17,20 @@ interface Options {
   readonly userId: number;
 }
 
-const INSERT_INTO_OAUTH_QUERY = `
-INSERT INTO \`oauth\` (\`userId\`, \`oAuthProvider\`, \`oAuthId\`)
-VALUES (?, ?, ?);
-`;
-
-export default function putDatabaseUserMetadata({
-  changes,
-  duration,
-  email,
-  oAuthId,
-  oAuthProvider,
-  sizeAfter,
-  userId,
-}: Options): number {
-  const db: D1Database = getDatabase();
-  const { affect, emitPublicMetric } = getTelemetry();
-  const use = getUsage();
-  emitPublicMetric({
+export default function putDatabaseUserMetadata(
+  this: Worker,
+  {
+    changes,
+    duration,
+    email,
+    oAuthId,
+    oAuthProvider,
+    sizeAfter,
+    userId,
+  }: Options,
+): number {
+  const db: D1Database = getDatabase.call(this);
+  this.emitPublicMetric({
     changes,
     duration,
     name: MetricName.AuthenticationCreated,
@@ -44,24 +39,20 @@ export default function putDatabaseUserMetadata({
   });
 
   // Associate user ID with OAuth ID.
-  use({
-    account: AccountNumber.Quisido,
-    type: UsageType.D1Write,
-  });
   const insertIntoOAuth: Promise<D1Response> = db
     .prepare(INSERT_INTO_OAUTH_QUERY)
     .bind(userId, oAuthProvider, oAuthId)
     .run();
 
-  affect(
+  this.affect(
     insertIntoOAuth
-      .then(handleInsertIntoOAuthResponse(userId))
-      .catch(handleInsertIntoOAuthError(userId)),
+      .then(handleInsertIntoOAuthResponse.call(this, userId))
+      .catch(handleInsertIntoOAuthError.call(this, userId)),
   );
 
   // Associate user ID with email.
   if (email !== null) {
-    putDatabaseUserEmail({ email, userId });
+    putDatabaseUserEmail.call(this, { email, userId });
   }
 
   return userId;

@@ -32,7 +32,7 @@ export default function describePackageJsonScripts(packageJson: object): void {
     it('should have prepublish scripts', (): void => {
       assert('prepublish' in scripts);
       expect(scripts.prepublish).toBe(
-        'concurrently --kill-others-on-fail --names attw,eslint,vitest "yarn run attw" "yarn run eslint" "yarn run vitest:run"',
+        'concurrently --kill-others-on-fail --names attw,eslint,publint,vitest "yarn run attw" "yarn run eslint" "yarn run publint" "yarn run vitest:run"',
       );
     });
 

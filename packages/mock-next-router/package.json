@@ -1,17 +1,21 @@
 {
   "name": "mock-next-router",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "quisi.do <mock-next-router@quisi.do>",
   "description": "a Next Router for unit tests",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/mock-next-router#readme",
   "license": "MIT",
   "main": "./dist/index.js",
-  "repository": "github:quisido/quisi.do",
+  "module": "./dist/index.js",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
     "email": "mock-next-router@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
+  },
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
   },
   "funding": {
     "type": "individual",
@@ -20,13 +24,18 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git"
+  },
   "scripts": {
     "attw": "attw --quiet",
     "clean": "rm -rf coverage dist node_modules && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "yarn run tsc",
-    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,vitest \"yarn run attw\" \"yarn run eslint\" \"yarn run vitest:run\"",
+    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,publint,vitest \"yarn run attw\" \"yarn run eslint\" \"yarn run publint\" \"yarn run vitest:run\"",
+    "publint": "publint",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json",
     "vitest": "vitest",
     "vitest:run": "vitest run",
@@ -69,6 +78,7 @@
     "jsdom": "^24.1.0",
     "next": "15.0.0-canary.47",
     "prettier": "^3.3.2",
+    "publint": "^0.2.10",
     "react": "19.0.0-rc-e02baf6c92-20240627",
     "react-dom": "19.0.0-rc-e02baf6c92-20240627",
     "tslib": "^2.6.3",

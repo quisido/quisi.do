@@ -1,13 +1,12 @@
 {
   "name": "@quisido/eslint-config",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "quisi.do <eslint-config@quisi.do>",
   "description": "ESLint configurations for quisi.do",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/eslint-config#readme",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "repository": "github:quisido/quisi.do",
   "type": "module",
   "types": "./dist/index.d.ts",
   "bugs": {
@@ -16,33 +15,33 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/index.js",
       "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
     "./cjs": {
-      "import": "./dist/cjs.js",
       "types": "./dist/cjs.d.ts",
+      "import": "./dist/cjs.js",
       "default": "./dist/cjs.js"
     },
     "./d-ts": {
-      "import": "./dist/d-ts.js",
       "types": "./dist/d-ts.d.ts",
+      "import": "./dist/d-ts.js",
       "default": "./dist/d-ts.js"
     },
     "./js": {
-      "import": "./dist/js.js",
       "types": "./dist/js.d.ts",
+      "import": "./dist/js.js",
       "default": "./dist/js.js"
     },
     "./test-ts": {
-      "import": "./dist/test-ts.js",
       "types": "./dist/test-ts.d.ts",
+      "import": "./dist/test-ts.js",
       "default": "./dist/test-ts.js"
     },
     "./ts": {
-      "import": "./dist/ts.js",
       "types": "./dist/ts.d.ts",
+      "import": "./dist/ts.js",
       "default": "./dist/ts.js"
     }
   },
@@ -53,13 +52,18 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git"
+  },
   "scripts": {
     "attw": "attw --quiet",
     "clean": "rm -rf coverage dist node_modules && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "yarn run tsc",
-    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,vitest \"yarn run attw\" \"yarn run eslint\" \"yarn run vitest:run\"",
+    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,publint,vitest \"yarn run attw\" \"yarn run eslint\" \"yarn run publint\" \"yarn run vitest:run\"",
+    "publint": "publint",
     "tsc": "tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json",
     "vitest": "vitest",
     "vitest:run": "vitest run",
@@ -91,6 +95,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.1.3",
     "prettier": "^3.3.2",
+    "publint": "^0.2.10",
     "tslib": "^2.6.3",
     "typescript": "~5.4.5",
     "vitest": "^1.6.0"

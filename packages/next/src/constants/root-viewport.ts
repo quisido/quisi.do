@@ -1,5 +1,16 @@
 import { type Viewport } from 'next';
-import { THEME_COLOR_DESCRIPTORS } from './theme-color-descriptors.js';
+import { type ThemeColorDescriptor } from 'next/dist/lib/metadata/types/metadata-types';
+
+const THEME_COLOR_DESCRIPTORS: readonly ThemeColorDescriptor[] = [
+  {
+    color: '#161616',
+    media: '(prefers-color-scheme: dark)',
+  },
+  {
+    color: '#f0f0f0',
+    media: '(prefers-color-scheme: light)',
+  },
+];
 
 /**
  * TODO: Validate these against the standard documented on MDN:

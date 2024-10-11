@@ -1,31 +1,37 @@
+import { Snapshot } from '@quisido/proposal-async-context';
+import type Worker from '@quisido/worker';
 import { mapUnknownToError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
-import getTelemetry from '../utils/get-telemetry.js';
 
 export default function handleInsertIntoEmailsError(
+  this: Worker,
   userId: number,
 ): (err: unknown) => void {
-  const { emitPrivateMetric, emitPublicMetric, logPrivateError } =
-    getTelemetry();
-  const startTime: number = Date.now();
+  const snapshot: Snapshot = new Snapshot();
+  const startTime: number = this.getNow();
 
-  return function handleCatch(err: unknown): void {
-    const endTime: number = Date.now();
-    logPrivateError(mapUnknownToError(err));
+  const handleCatch = (err: unknown): void => {
+    snapshot.run((): void => {
+      const endTime: number = this.getNow();
+      const duration: number = endTime - startTime;
+      this.logPrivateError(mapUnknownToError(err));
 
-    emitPrivateMetric({
-      duration: endTime - startTime,
-      endTime,
-      name: MetricName.EmailInsertError,
-      startTime,
-      userId,
-    });
+      this.emitPrivateMetric({
+        duration,
+        endTime,
+        name: MetricName.EmailInsertError,
+        startTime,
+        userId,
+      });
 
-    emitPublicMetric({
-      duration: endTime - startTime,
-      endTime,
-      name: MetricName.EmailInsertError,
-      startTime,
+      this.emitPublicMetric({
+        duration,
+        endTime,
+        name: MetricName.EmailInsertError,
+        startTime,
+      });
     });
   };
+
+  return handleCatch;
 }

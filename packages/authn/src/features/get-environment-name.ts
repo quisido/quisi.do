@@ -1,32 +1,28 @@
-import { mapUnknownToString } from 'fmrs';
-import EnvironmentName from '../constants/environment-name.js';
+import type Worker from '@quisido/worker';
+import { EnvironmentName } from '../constants/environment-name.js';
 import { MetricName } from '../constants/metric-name.js';
-import getEnv from '../utils/get-env.js';
-import getTelemetry from '../utils/get-telemetry.js';
 import isEnvironmentName from '../utils/is-environment-name.js';
 
-export default function getEnvironmentName(): EnvironmentName {
-  const { ENVIRONMENT_NAME } = getEnv();
-  if (isEnvironmentName(ENVIRONMENT_NAME)) {
-    return ENVIRONMENT_NAME;
+export default function getEnvironmentName(this: Worker): EnvironmentName {
+  const envName: unknown = this.getEnv('ENVIRONMENT_NAME');
+  if (isEnvironmentName(envName)) {
+    return envName;
   }
 
-  const { emitPublicMetric, logPrivateError } = getTelemetry();
-  if (typeof ENVIRONMENT_NAME === 'undefined') {
-    emitPublicMetric({ name: MetricName.MissingEnvironmentName });
+  if (typeof envName === 'undefined') {
+    this.emitPublicMetric({ name: MetricName.MissingEnvironmentName });
     return EnvironmentName.Unknown;
   }
 
-  emitPublicMetric({
+  this.emitPrivateMetric({
     name: MetricName.InvalidEnvironmentName,
-    type: typeof ENVIRONMENT_NAME,
+    value: JSON.stringify(envName),
   });
 
-  logPrivateError(
-    new Error('Invalid environment name', {
-      cause: mapUnknownToString(ENVIRONMENT_NAME),
-    }),
-  );
+  this.emitPublicMetric({
+    name: MetricName.InvalidEnvironmentName,
+    type: typeof envName,
+  });
 
   return EnvironmentName.Unknown;
 }
