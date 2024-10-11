@@ -8,7 +8,7 @@ export const {
   affect,
   emitPrivateMetric,
   emitPublicMetric,
-  ExportedHandler,
+  createExportedHandler,
   getD1Database,
   getRequestHeaders,
   getRequestMethod,
@@ -18,8 +18,6 @@ export const {
   logPrivateError,
   logPublicError,
 } = new Worker({
-  console,
-  fetch,
   invalidPrivateDatasetMetricName: MetricName.InvalidPrivateDataset,
   invalidPublicDatasetMetricName: MetricName.InvalidPublicDataset,
   invalidTraceParentMetricName: MetricName.InvalidTraceParent,

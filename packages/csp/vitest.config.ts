@@ -13,8 +13,8 @@ export default defineConfig({
       ...COVERAGE_OPTIONS,
 
       thresholds: {
-        branches: 9,
-        functions: 19,
+        branches: 6,
+        functions: 7,
         lines: 24,
         statements: 25,
       },

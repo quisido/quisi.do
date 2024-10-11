@@ -1,4 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
-import { ExportedHandler as QuisidoExportedHandler } from './constants/worker.js';
+import { createExportedHandler } from './constants/worker.js';
 
-export default new QuisidoExportedHandler() satisfies ExportedHandler;
+export default createExportedHandler({
+  console,
+  fetch,
+}) satisfies ExportedHandler;
