@@ -33,6 +33,7 @@ frame-src
 
 img-src
   'self'
+  https://c.bing.com/c.gif
   https://c.clarity.ms/c.gif
   https://www.google.bg/ads/ga-audiences
   https://www.google.ca/ads/ga-audiences
