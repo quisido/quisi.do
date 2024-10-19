@@ -15,6 +15,7 @@ const TWICE = 2;
 
 const TEST_RUM: typeof datadogRum = {
   addAction: vi.fn(),
+  addDurationVital: vi.fn(),
   addError: vi.fn(),
   addFeatureFlagEvaluation: vi.fn(),
   addTiming: vi.fn(),
@@ -34,8 +35,12 @@ const TEST_RUM: typeof datadogRum = {
   setTrackingConsent: vi.fn(),
   setUser: TEST_SET_USER,
   setUserProperty: vi.fn(),
+  setViewContext: vi.fn(),
+  setViewContextProperty: vi.fn(),
+  startDurationVital: vi.fn(),
   startSessionReplayRecording: TEST_START_SESSION_REPLAY_RECORDING,
   startView: vi.fn() as typeof datadogRum['startView'],
+  stopDurationVital: vi.fn(),
   stopSession: vi.fn(),
   stopSessionReplayRecording: TEST_STOP_SESSION_REPLAY_RECORDING,
   version: '0.0.0',

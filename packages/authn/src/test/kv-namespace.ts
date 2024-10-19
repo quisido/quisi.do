@@ -63,8 +63,5 @@ export default class TestKVNamespace<Key extends string = string>
     }
   }
 
-  public put: Mock<
-    Parameters<KVNamespace<Key>['put']>,
-    ReturnType<KVNamespace<Key>['put']>
-  > = vi.fn(this.#put);
+  public put: Mock<KVNamespace<Key>['put']> = vi.fn(this.#put);
 }

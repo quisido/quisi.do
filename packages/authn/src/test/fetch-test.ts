@@ -21,7 +21,7 @@ export default class FetchTest {
     return authnId;
   }
 
-  get #cookies(): Record<string, string> {
+  get #cookies(): Partial<Record<string, string>> {
     const cookies: string | undefined = this.#headersRecord['set-cookie'];
     if (typeof cookies === 'undefined') {
       throw new Error('Expected cookies to be set.');

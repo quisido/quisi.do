@@ -39,7 +39,7 @@ export default function describePackageJsonScripts(packageJson: object): void {
     it('should have TypeScript compiler script', (): void => {
       assert('tsc' in scripts);
       expect(scripts.tsc).toBe(
-        'tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json',
+        'tsc --project tsconfig.prepack.json',
       );
     });
 

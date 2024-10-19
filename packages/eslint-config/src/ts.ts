@@ -2,7 +2,7 @@ import tsPlugin from '@typescript-eslint/eslint-plugin';
 import type { ESLint, Linter } from 'eslint';
 import ts from 'typescript-eslint';
 import JS from './js.js';
-import reduceFlatConfigsToRules from './reduce-flat-configs-to-rules.js';
+import reduceConfigsToRules from './reduce-configs-to-rules.js';
 import { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
 
 export default {
@@ -21,16 +21,16 @@ export default {
     ...(JS.rules as Linter.RulesRecord),
     ...(ts.configs.base.rules as Linter.RulesRecord),
     ...(ts.configs.eslintRecommended.rules as Linter.RulesRecord),
-    ...(ts.configs.stylisticTypeChecked as Linter.FlatConfig[]).reduce(
-      reduceFlatConfigsToRules,
+    ...(ts.configs.stylisticTypeChecked as Linter.Config[]).reduce(
+      reduceConfigsToRules,
       {},
     ),
-    ...(ts.configs.recommendedTypeChecked as Linter.FlatConfig[]).reduce(
-      reduceFlatConfigsToRules,
+    ...(ts.configs.recommendedTypeChecked as Linter.Config[]).reduce(
+      reduceConfigsToRules,
       {},
     ),
-    ...(ts.configs.strictTypeChecked as Linter.FlatConfig[]).reduce(
-      reduceFlatConfigsToRules,
+    ...(ts.configs.strictTypeChecked as Linter.Config[]).reduce(
+      reduceConfigsToRules,
       {},
     ),
     'no-invalid-this': 'off',
@@ -44,4 +44,4 @@ export default {
      */
     'no-shadow': 'off',
   } satisfies Linter.RulesRecord,
-} satisfies Required<Omit<Linter.FlatConfig, 'processor'>>;
+} satisfies Required<Omit<Linter.Config, 'language' | 'processor'>>;

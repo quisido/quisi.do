@@ -2,7 +2,7 @@ import configs from '@quisido/eslint-config';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
-/** @type {readonly import('eslint').Linter.FlatConfig[]} */
+/** @type {readonly import('eslint').Linter.Config[]} */
 export default [
   ...configs,
 

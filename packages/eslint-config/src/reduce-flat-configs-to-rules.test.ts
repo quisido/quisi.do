@@ -1,8 +1,8 @@
 import type { Linter } from 'eslint';
 import { describe, expect, it } from 'vitest';
-import reduceFlatConfigsToRules from './reduce-flat-configs-to-rules.js';
+import reduceConfigsToRules from './reduce-configs-to-rules.js';
 
-const FLAT_CONFIGS: readonly Linter.FlatConfig[] = [
+const CONFIGS: readonly Linter.Config[] = [
   {},
   {
     rules: {},
@@ -20,9 +20,9 @@ const FLAT_CONFIGS: readonly Linter.FlatConfig[] = [
   },
 ];
 
-describe('reduceFlatConfigsToRules', (): void => {
+describe('reduceConfigsToRules', (): void => {
   it('should reduce flag configurations to their rules', (): void => {
-    expect(FLAT_CONFIGS.reduce(reduceFlatConfigsToRules, {})).toEqual({
+    expect(CONFIGS.reduce(reduceConfigsToRules, {})).toEqual({
       '@quisido/test-error-rule': 'error',
       '@quisido/test-off-rule': 'off',
       '@quisido/test-warn-rule': 'warn',

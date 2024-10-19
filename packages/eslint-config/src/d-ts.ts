@@ -11,4 +11,4 @@ export default {
     ...TS.rules,
     'init-declarations': 'off',
   } satisfies Linter.RulesRecord,
-} satisfies Required<Omit<Linter.FlatConfig, 'processor'>>;
+} satisfies Required<Omit<Linter.Config, 'language' | 'processor'>>;

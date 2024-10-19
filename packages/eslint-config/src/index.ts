@@ -38,4 +38,4 @@ export default [
       'vitest.config.ts.timestamp-*-*.mjs',
     ],
   },
-] satisfies readonly Linter.FlatConfig[];
+] satisfies readonly Linter.Config[];

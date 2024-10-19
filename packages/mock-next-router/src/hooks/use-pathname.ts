@@ -1,11 +1,11 @@
 import type { MemoryHistory, Update } from 'history';
-import { useEffect, useRef, type RefObject } from 'react';
+import { useEffect, useRef, type MutableRefObject } from 'react';
 import useForceUpdate from 'use-force-update';
 
 export default function usePathname(memoryHistory: MemoryHistory): string {
   // States
   const forceUpdate: VoidFunction = useForceUpdate();
-  const pathnameRef: RefObject<string> = useRef(
+  const pathnameRef: MutableRefObject<string> = useRef(
     memoryHistory.location.pathname,
   );
 
