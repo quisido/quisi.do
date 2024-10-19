@@ -9,7 +9,7 @@ import ErrorResponse from './error-response.js';
 export default function handleFetchError(
   this: Worker,
   err: unknown,
-  returnPath?: string | undefined,
+  returnPath?: string,
 ): Response {
   if (err instanceof FatalError) {
     /**

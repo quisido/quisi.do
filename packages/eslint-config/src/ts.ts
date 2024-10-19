@@ -35,6 +35,13 @@ export default {
     ),
     'no-invalid-this': 'off',
 
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        caughtErrorsIgnorePattern: '^_',
+      },
+    ],
+
     // Exhaustive `switch`es do not require a default case.
     'default-case': 'off',
 

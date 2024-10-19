@@ -69,8 +69,8 @@ export class TestD1PreparedStatement implements D1PreparedStatement {
     }
 
     return Promise.resolve({
-      success: true,
       results: [],
+      success: true,
 
       meta: {
         changed_db: true,

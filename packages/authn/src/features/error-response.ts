@@ -3,11 +3,7 @@ import type Worker from '@quisido/worker';
 import ErrorResponseInit from './error-response-init.js';
 
 export default class ErrorResponse extends Response {
-  public constructor(
-    worker: Worker,
-    code: ErrorCode,
-    returnPath?: string | undefined,
-  ) {
+  public constructor(worker: Worker, code: ErrorCode, returnPath?: string) {
     super(null, new ErrorResponseInit(worker, code, returnPath));
   }
 }

@@ -87,9 +87,8 @@ describe('FetchContext', (): void => {
 
     it('should emit when the D1 database is invalid', async (): Promise<void> => {
       const { fetch, getD1Database } = new TestWorker({
-        onFetchRequest(): Response {
-          db = getD1Database('TEST_DB');
-          return new Response();
+        onFetchRequest(): never {
+          throw getD1Database('TEST_DB');
         },
       });
 
@@ -132,9 +131,8 @@ describe('FetchContext', (): void => {
 
     it('should emit when the R2 bucket is invalid', async (): Promise<void> => {
       const { fetch, getR2Bucket } = new TestWorker({
-        onFetchRequest(): Response {
-          bucket = getR2Bucket('TEST_BUCKET');
-          return new Response();
+        onFetchRequest(): never {
+          throw getR2Bucket('TEST_BUCKET');
         },
       });
 
