@@ -38,9 +38,7 @@ export default function describePackageJsonScripts(packageJson: object): void {
 
     it('should have TypeScript compiler script', (): void => {
       assert('tsc' in scripts);
-      expect(scripts.tsc).toBe(
-        'tsc --project tsconfig.prepack.json',
-      );
+      expect(scripts.tsc).toBe('tsc --project tsconfig.prepack.json');
     });
 
     it('should have vitest scripts', (): void => {

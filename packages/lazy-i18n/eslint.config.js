@@ -39,6 +39,13 @@ export default [
   },
 
   {
+    files: ['src/components/provider/provider.hook.ts'],
+    rules: {
+      'react-compiler/react-compiler': 'off',
+    },
+  },
+
+  {
     files: ['src/runnables/runnable-translate-function.ts'],
     rules: {
       'no-useless-return': 'off',

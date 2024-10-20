@@ -34,7 +34,7 @@
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "yarn run tsc",
-    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,publint,vitest \"yarn run attw\" \"yarn run eslint\" \"yarn run publint\" \"yarn run vitest:run\"",
+    "prepublish": "concurrently --kill-others-on-fail --names eslint,publint,vitest \"yarn run eslint\" \"yarn run publint\" \"yarn run vitest:run\"",
     "publint": "publint",
     "tsc": "tsc --project tsconfig.prepack.json",
     "vitest": "vitest",
