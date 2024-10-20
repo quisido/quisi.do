@@ -1,12 +1,13 @@
 import { render } from '@testing-library/react';
+import assert from 'node:assert';
 import type {
   ComponentType,
+  MutableRefObject,
   PropsWithChildren,
-  ReactElement,
-  RefObject,
+  ReactElement
 } from 'react';
 import { useContext } from 'react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import Loading from '../../components/loading/index.js';
 import LoadingComponentContext from '../../contexts/loading-component.js';
 import TranslateFunctionContext from '../../contexts/translate-function.js';
@@ -22,13 +23,13 @@ const TEST_TRANSLATIONS: Record<string, Translations> = {
 
 describe('Provider', (): void => {
   it('should set the contexts to their default values', (): void => {
-    const LoadingComponent: RefObject<
+    const LoadingComponent: MutableRefObject<
       ComponentType<unknown> | undefined
     > = {
       current: undefined,
     };
 
-    const translate: RefObject<TranslateFunctionType | undefined> = {
+    const translate: MutableRefObject<TranslateFunctionType | undefined> = {
       current: undefined,
     };
 
@@ -48,10 +49,7 @@ describe('Provider', (): void => {
       },
     });
 
-    if (typeof translate.current === 'undefined') {
-      throw new Error('Could not find translate function context.');
-    }
-
+    assert(typeof translate.current !== 'undefined');
     expect(LoadingComponent.current).toBe(Loading);
     expect(translate.current('cat')).toBe('gato');
   });
@@ -64,9 +62,7 @@ describe('Provider', (): void => {
       return null;
     }
 
-    function TestLoadingComponent(): null {
-      return null;
-    }
+    const TestLoadingComponent = vi.fn();
 
     render(<TestComponent />, {
       wrapper({ children }: PropsWithChildren): ReactElement {
