@@ -9,7 +9,7 @@ interface TestProps {
 }
 
 function TestComponent({ awsRum }: TestProps): ReactElement {
-  return <>{awsRum instanceof AwsRum ? 'Yes' : 'No'}</>;
+  return <>{(awsRum instanceof AwsRum).toString()}</>;
 }
 
 const TestHoc = withAwsRum(TestComponent);
@@ -42,6 +42,6 @@ describe('withAwsRum', (): void => {
       },
     });
 
-    getByText('Yes');
+    getByText('true');
   });
 });
