@@ -10,6 +10,7 @@ export default function handleInvalidPatreonAccessTokenErrorBody(
   this.emitPublicMetric({
     name: MetricName.InvalidPatreonAccessTokenErrorBody,
   });
+
   this.emitPrivateMetric({
     name: MetricName.InvalidPatreonAccessTokenErrorBody,
     value: body,

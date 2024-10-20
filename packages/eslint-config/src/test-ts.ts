@@ -12,4 +12,4 @@ export default {
     'max-lines-per-function': 'off',
     'no-undefined': 'off',
   } satisfies Linter.RulesRecord,
-} satisfies Required<Omit<Linter.FlatConfig, 'processor'>>;
+} satisfies Required<Omit<Linter.Config, 'language' | 'processor'>>;

@@ -13,7 +13,7 @@ interface Options {
 
 export default async function handleReturnPath(
   this: Worker,
-  { pathname, returnPath }: Options,
+  { returnPath }: Options,
 ): Promise<Response> {
   // Throttle
   const ip: string = getIp.call(this);
@@ -23,10 +23,14 @@ export default async function handleReturnPath(
 
   return await this.catchSnapshot(
     async (): Promise<Response> => {
-      switch (pathname) {
-        case AuthenticationPathname.Patreon:
-          return await handlePatreonFetchRequest.call(this, { returnPath });
-      }
+      /**
+       * Whenever we support more than one authentication pathname:
+       *   switch (pathname) {
+       *     case AuthenticationPathname.Patreon:
+       *       return await handlePatreonFetchRequest.call(this, { returnPath });
+       *   }
+       */
+      return await handlePatreonFetchRequest.call(this, { returnPath });
     },
     (err: unknown) => {
       return handleFetchError.call(this, err, returnPath);

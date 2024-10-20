@@ -1,7 +1,7 @@
 import { type Event as SentryEvent } from '@sentry/types';
 import { useRecordEvent } from 'aws-rum-react';
 import { useFullstory, type FSApi } from 'fullstory-react';
-import { track } from 'mixpanel-browser';
+import mixpanelBrowser from 'mixpanel-browser';
 import { useDatadogRum } from 'react-datadog';
 import { useSentrySdk } from 'sentry-react';
 import { useHostname } from '../../contexts/hostname.js';
@@ -113,7 +113,7 @@ export default function useEmit(): EventEmitter {
 
       // Mixpanel
       try {
-        track(name, dimensions);
+        mixpanelBrowser.track(name, dimensions);
       } catch (_err: unknown) {
         /*
          * Mixpanel has not finished loading yet.

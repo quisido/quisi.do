@@ -1,4 +1,5 @@
 import { StatusCode } from 'cloudflare-utils';
+import { mapUnknownToError } from 'fmrs';
 import { Permission } from '../constants/permission.js';
 import {
   SELECT_PERMISSION_FROM_KEYS,
@@ -9,6 +10,7 @@ import {
   getD1Database,
   getRequestSearchParam,
   getRequestText,
+  logPrivateError,
 } from '../constants/worker.js';
 import type { ReportBodyArray } from '../types/report-body-array.js';
 import type ReportBody from '../types/report-body.js';
@@ -166,8 +168,7 @@ export default async function handlePost(projectId: number): Promise<Response> {
 
     return new Response(StatusCode.OK);
   } catch (err: unknown) {
-    // Log with Worker instance:
-    // Console.error('Invalid report', err);
+    logPrivateError(mapUnknownToError(err));
     return new Response(StatusCode.BadRequest);
   }
 }

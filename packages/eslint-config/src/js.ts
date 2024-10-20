@@ -39,4 +39,4 @@ export default {
       },
     ],
   },
-} satisfies Required<Omit<Linter.FlatConfig, 'ignores' | 'processor'>>;
+} satisfies Required<Omit<Linter.Config, 'ignores' | 'language' | 'processor'>>;

@@ -16,7 +16,7 @@ export default function shouldThrottleOAuth(this: Worker, ip: string): boolean {
   try {
     throttleIp.call(this, ip, IP_THROTTLE_LIMIT);
     return false;
-  } catch (err: unknown) {
+  } catch (_err: unknown) {
     return true;
   }
 }

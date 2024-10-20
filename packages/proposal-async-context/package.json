@@ -39,16 +39,16 @@
     "webpack": "webpack"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.15.3",
-    "@types/mocha": "^10.0.7",
-    "@types/node": "^20.14.11",
-    "concurrently": "^8.2.2",
-    "fix-esm-import-path": "^1.10.0",
+    "@arethetypeswrong/cli": "^0.16.4",
+    "@types/mocha": "^10.0.9",
+    "@types/node": "^22.7.7",
+    "concurrently": "^9.0.1",
+    "fix-esm-import-path": "^1.10.1",
     "proposal-async-context": "git://github.com/tc39/proposal-async-context.git",
-    "publint": "^0.2.10",
+    "publint": "^0.2.11",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.5.3",
-    "webpack": "^5.93.0",
+    "typescript": "^5.6.3",
+    "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4"
   }
 }

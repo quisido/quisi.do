@@ -1,4 +1,4 @@
-import type { CoverageOptions } from 'vitest';
+import type { CoverageOptions } from 'vitest/node';
 import { EXCLUDE } from './exclude.js';
 import { THRESHOLDS } from './thresholds.js';
 

@@ -15,7 +15,7 @@ const SCRIPT = `
 (function(w, c){
   w[c] = function clarity() {
     w[c].q.push(arguments);
-  }
+  };
   w[c].q = new Array();
 })(window, 'clarity');
 `;

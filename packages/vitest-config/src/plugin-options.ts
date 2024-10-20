@@ -1,5 +1,5 @@
-import type { UserConfig } from 'vitest/config';
+import type { ViteUserConfig } from 'vitest/config';
 
-type PluginOptions = Required<UserConfig>['plugins'];
+type PluginOptions = Required<ViteUserConfig>['plugins'];
 
 export const PLUGIN_OPTIONS: PluginOptions = [];

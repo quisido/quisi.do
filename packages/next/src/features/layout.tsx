@@ -57,7 +57,9 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
     <html className={HTML_CLASS_NAME} lang="en">
       <Head />
       <body className={BODY_CLASS_NAME}>
-        <noscript>JavaScript is required.</noscript>
+        <noscript>
+          <p>JavaScript is required. Sorry for the inconvenience.</p>
+        </noscript>
         <Contexts>
           <Notifications />
           <Header />

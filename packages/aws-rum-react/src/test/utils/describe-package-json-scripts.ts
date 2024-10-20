@@ -32,15 +32,13 @@ export default function describePackageJsonScripts(packageJson: object): void {
     it('should have prepublish scripts', (): void => {
       assert('prepublish' in scripts);
       expect(scripts.prepublish).toBe(
-        'concurrently --kill-others-on-fail --names attw,eslint,publint,vitest "yarn run attw" "yarn run eslint" "yarn run publint" "yarn run vitest:run"',
+        'concurrently --kill-others-on-fail --names eslint,publint,vitest "yarn run eslint" "yarn run publint" "yarn run vitest:run"',
       );
     });
 
     it('should have TypeScript compiler script', (): void => {
       assert('tsc' in scripts);
-      expect(scripts.tsc).toBe(
-        'tsc --generateCpuProfile tsc-output.cpuprofile --project tsconfig.prepack.json',
-      );
+      expect(scripts.tsc).toBe('tsc --project tsconfig.prepack.json');
     });
 
     it('should have vitest scripts', (): void => {

@@ -63,12 +63,13 @@ export class TestD1PreparedStatement implements D1PreparedStatement {
     expect(this.#boundValues).toEqual(values);
   };
 
-  public run = (): Promise<D1Response> => {
+  public run = <T = Record<string, unknown>>(): Promise<D1Result<T>> => {
     if (typeof this.#error !== 'undefined') {
       return Promise.reject(this.#error);
     }
 
     return Promise.resolve({
+      results: [],
       success: true,
 
       meta: {

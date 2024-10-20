@@ -122,16 +122,13 @@ export default class WorkerTest {
     return Promise.resolve(response);
   };
 
-  readonly #fetch: Mock<
-    Parameters<Fetcher['fetch']>,
-    ReturnType<Fetcher['fetch']>
-  > = vi.fn(this.#handleFetch);
+  readonly #fetch: Mock<Fetcher['fetch']> = vi.fn(this.#handleFetch);
 
   public onFetch = (url: string, response: Response): void => {
     this.#fetchHandlers.set(url, response);
   };
 
-  get #waitUntil(): Mock<[Promise<unknown>], void> {
+  get #waitUntil(): Mock<(promise: Promise<unknown>) => void> {
     return vi.fn((promise: Promise<unknown>): void => {
       this.#effects.push(promise);
     });

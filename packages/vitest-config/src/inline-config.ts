@@ -1,4 +1,4 @@
-import type { InlineConfig } from 'vitest';
+import type { InlineConfig } from 'vitest/node';
 import { COVERAGE_OPTIONS } from './coverage-options.js';
 import { EXCLUDE } from './exclude.js';
 

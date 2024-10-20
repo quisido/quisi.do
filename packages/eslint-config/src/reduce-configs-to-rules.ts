@@ -1,8 +1,8 @@
 import type { Linter } from 'eslint';
 
-export default function reduceFlatConfigsToRules<T extends Linter.RulesRecord>(
+export default function reduceConfigsToRules<T extends Linter.RulesRecord>(
   previousRules: T,
-  { rules: nextRules }: Linter.FlatConfig,
+  { rules: nextRules }: Linter.Config,
 ): T {
   return {
     ...previousRules,

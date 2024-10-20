@@ -2,7 +2,7 @@ import configs from '@quisido/eslint-config';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
-/** @type {readonly import('eslint').Linter.FlatConfig[]} */
+/** @type {readonly import('eslint').Linter.Config[]} */
 export default [
   ...configs,
 
@@ -35,6 +35,13 @@ export default [
     files: ['src/components/provider/provider.hook.test.ts'],
     rules: {
       '@typescript-eslint/no-unnecessary-type-assertion': 'off',
+    },
+  },
+
+  {
+    files: ['src/components/provider/provider.hook.ts'],
+    rules: {
+      'react-compiler/react-compiler': 'off',
     },
   },
 

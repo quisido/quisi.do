@@ -1,4 +1,4 @@
-import type { BaseCoverageOptions } from 'vitest';
+import type { BaseCoverageOptions } from 'vitest/node';
 
 type Thresholds = Required<BaseCoverageOptions>['thresholds'];
 

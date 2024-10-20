@@ -12,7 +12,7 @@ export default function handlePatreonAccessTokenErrorBody(
   const getBodyJson = (): unknown => {
     try {
       return JSON.parse(body);
-    } catch (err: unknown) {
+    } catch (_err: unknown) {
       return handleInvalidPatreonAccessTokenErrorBody.call(this, body);
     }
   };

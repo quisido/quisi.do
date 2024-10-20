@@ -1,6 +1,7 @@
 import type { ReactElement } from "react";
 import CloudflareInsights from '../components/cloudflare-insights.js';
 import NetworkErrorLogging from "../components/network-error-logging.jsx";
+import RocketLoaderHotfix from "../components/rocket-loader-hotfix.jsx";
 import GoogleFonts from '../features/google-fonts.js';
 import Preconnect from '../features/preconnect.js';
 import Clarity from "../modules/react-clarity/index.jsx";
@@ -12,6 +13,12 @@ const isProduction: boolean = process.env.NODE_ENV === 'production';
 export default function Head(): ReactElement {
   return (
     <head>
+      {/**
+       *   The Rocket Loader hotfix loads synchronously, so it must appear
+       * before the Rocket Loader script. By loading it immediately, it also
+       * appears before any other scripts that may add unload event listeners.
+       */}
+      <RocketLoaderHotfix />
       {/* <ContentSecurityPolicy /> */}
       <Clarity tag={CLARITY_TAG} />
       {isProduction && (
