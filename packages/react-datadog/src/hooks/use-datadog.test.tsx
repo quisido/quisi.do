@@ -6,8 +6,8 @@ import DatadogRumContext from '../contexts/datadog-rum.js';
 import useDatadog from '../index.js';
 import type User from '../types/user.js';
 
+const TEST_CLEAR_USER = vi.fn();
 const TEST_INIT = vi.fn();
-const TEST_REMOVE_USER = vi.fn();
 const TEST_SET_USER = vi.fn();
 const TEST_START_SESSION_REPLAY_RECORDING = vi.fn();
 const TEST_STOP_SESSION_REPLAY_RECORDING = vi.fn();
@@ -20,7 +20,7 @@ const TEST_RUM: typeof datadogRum = {
   addFeatureFlagEvaluation: vi.fn(),
   addTiming: vi.fn(),
   clearGlobalContext: vi.fn(),
-  clearUser: TEST_REMOVE_USER,
+  clearUser: TEST_CLEAR_USER,
   getGlobalContext: vi.fn(),
   getInitConfiguration: vi.fn(),
   getInternalContext: vi.fn(),
@@ -128,7 +128,7 @@ describe('useDatadog', (): void => {
       },
     });
 
-    expect(TEST_START_SESSION_REPLAY_RECORDING).toHaveBeenCalledOnce();
+    expect(TEST_START_SESSION_REPLAY_RECORDING).toHaveBeenCalledTimes(TWICE);
     expect(TEST_START_SESSION_REPLAY_RECORDING).toHaveBeenLastCalledWith();
   });
 
@@ -172,7 +172,7 @@ describe('useDatadog', (): void => {
 
     unmount();
 
-    expect(TEST_STOP_SESSION_REPLAY_RECORDING).toHaveBeenCalledOnce();
+    expect(TEST_STOP_SESSION_REPLAY_RECORDING).toHaveBeenCalledTimes(TWICE);
     expect(TEST_STOP_SESSION_REPLAY_RECORDING).toHaveBeenLastCalledWith();
   });
 
@@ -200,7 +200,7 @@ describe('useDatadog', (): void => {
       },
     });
 
-    expect(TEST_SET_USER).toHaveBeenCalledOnce();
+    expect(TEST_SET_USER).toHaveBeenCalledTimes(TWICE);
     expect(TEST_SET_USER).toHaveBeenLastCalledWith(TEST_USER);
   });
 
@@ -217,6 +217,6 @@ describe('useDatadog', (): void => {
 
     unmount();
 
-    expect(TEST_REMOVE_USER).toHaveBeenCalledOnce();
+    expect(TEST_CLEAR_USER).toHaveBeenCalledTimes(TWICE);
   });
 });
