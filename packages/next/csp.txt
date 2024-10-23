@@ -15,6 +15,7 @@ connect-src
   https://localhost:6586/1/
   https://o592283.ingest.sentry.io/api/5740642/envelope/
   https://r.logr-ingest.com/i
+  https://r.lrkt-in.com/i
   https://region1.analytics.google.com/g/collect
   https://rs.fullstory.com/rec/bundle/v2
   https://rs.fullstory.com/rec/page
@@ -83,6 +84,7 @@ script-src-elem
   'unsafe-inline'
   https://ajax.cloudflare.com/
   https://cdn.logr-ingest.com/logger-1.min.js
+  https://cdn.lrkt-in.com/logger-1.min.js
   https://edge.fullstory.com/s/fs.js
   https://quisi.do/cdn-cgi/speculation
   https://static.cloudflareinsights.com/
@@ -92,7 +94,7 @@ script-src-elem
 
 style-src-attr
   'unsafe-inline';
-S
+
 style-src-elem
   'self'
   'unsafe-inline'

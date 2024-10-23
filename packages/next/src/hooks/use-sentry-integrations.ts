@@ -27,6 +27,6 @@ export default function useSentryIntegrations(
 
       REPLAY_INTEGRATION,
     ],
-    [fullstory],
+    [fullstory, sentryOrg],
   );
 }

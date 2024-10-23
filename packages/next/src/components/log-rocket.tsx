@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, type ReactElement, type ReactNode } from 'react';
+import { useEffect } from 'react';
 import { GITHUB_SHA } from '../constants/github-sha.js';
 import { WHOAMI } from '../constants/whoami.js';
 import useLogRocket from '../hooks/use-log-rocket.js';
@@ -9,7 +9,6 @@ import getHostname from '../utils/get-hostname.js';
 
 interface Props {
   readonly appId: string;
-  readonly children: ReactNode;
 }
 
 const BROWSER: Required<Required<LogRocketOptions>['browser']> = {
@@ -32,6 +31,8 @@ const CONSOLE: Required<Required<LogRocketOptions>['console']> = {
 };
 
 const DOM: Required<Omit<Required<LogRocketOptions>['dom'], 'baseHref'>> = {
+  disablePageTitles: false,
+  disableWebAnimations: false,
   hiddenAttributes: [],
   inputSanitizer: false,
   isEnabled: true,
@@ -74,31 +75,36 @@ const NETWORK: Required<Required<LogRocketOptions>['network']> = {
   },
 };
 
-export default function LogRocket({ appId, children }: Props): ReactElement {
+const OPTIONS: Required<Omit<LogRocketOptions, 'rootHostname' | 'serverURL' | 'shouldSendData' | 'uploadTimeInterval'>> = {
+  browser: BROWSER,
+  childDomains: [],
+  console: CONSOLE,
+  disableBusyFramesTracker: false,
+  dom: DOM,
+  mergeIframes: true,
+  network: NETWORK,
+  parentDomain: null,
+  release: GITHUB_SHA ?? 'dev',
+  shouldAugmentNPS: true,
+  shouldCaptureIP: true,
+  shouldDebugLog: false,
+  shouldDetectExceptions: true,
+  shouldParseXHRBlob: true,
+};
+
+export default function LogRocket({ appId }: Props): null {
   const LogRocket = useLogRocket();
 
   useEffect((): void => {
     LogRocket.init(appId, {
-      browser: BROWSER,
-      childDomains: [],
-      console: CONSOLE,
-      disableBusyFramesTracker: false,
-      mergeIframes: true,
-      network: NETWORK,
-      parentDomain: null,
-      release: GITHUB_SHA ?? 'dev',
+      ...OPTIONS,
       rootHostname: getHostname(),
-      shouldAugmentNPS: true,
-      shouldCaptureIP: true,
-      shouldDebugLog: false,
-      shouldDetectExceptions: true,
-      shouldParseXHRBlob: true,
       dom: {
-        ...DOM,
+        ...OPTIONS.dom,
         baseHref: `${window.location.origin}/`,
       },
-    } satisfies Required<Omit<LogRocketOptions, 'serverURL' | 'shouldSendData' | 'uploadTimeInterval'>>);
+    });
   }, [appId, LogRocket]);
 
-  return <>{children}</>;
+  return null;
 }

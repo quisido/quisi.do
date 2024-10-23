@@ -11,6 +11,10 @@ import withNextJsBundleAnalyzer from './src/utils/with-nextjs-bundle-analyzer.js
 const cpus: number = getCpus();
 const handleDemandEntries = mapNodeEnvToOnDemandEntries(process.env.NODE_ENV);
 
+const OUTPUT: Required<NextConfig>['output'] = mapNodeEnvToOutput(
+  process.env.NODE_ENV,
+);
+
 export default withNextJsBundleAnalyzer({
   assetPrefix: '',
   basePath: '',
@@ -18,7 +22,7 @@ export default withNextJsBundleAnalyzer({
   distDir: '.next',
   generateBuildId: getVersion,
   ...optional('onDemandEntries', handleDemandEntries),
-  output: mapNodeEnvToOutput(process.env.NODE_ENV),
+  output: OUTPUT,
   poweredByHeader: false,
   productionBrowserSourceMaps: true,
   reactStrictMode: true,
@@ -57,13 +61,49 @@ export default withNextJsBundleAnalyzer({
 
   experimental: {
     cpus,
+    fullySpecified: true,
+    memoryBasedWorkersCount: true,
+    nextScriptWorkers: true,
+    optimizeCss: true,
+    optimizeServerReact: true,
+    ppr: OUTPUT !== 'export',
+    serverMinification: true,
+    serverSourceMaps: true,
+    staticGenerationMaxConcurrency: cpus,
+    staticGenerationRetryCount: 3,
+    strictNextHead: true,
+    swcTraceProfiling: true,
+    taint: true,
+    useEarlyImport: true,
+    useWasmBinary: true,
     webVitalsAttribution: ['CLS', 'FCP', 'FID', 'INP', 'LCP', 'TTFB'],
+    webpackMemoryOptimizations: false,
 
     extensionAlias: {
       '.js': ['.ts', '.tsx', '.js', '.jsx'],
       '.jsx': ['.tsx', '.jsx'],
     },
+
+    sri: {
+      algorithm: 'sha512',
+    },
+
+    turbo: {
+      treeShaking: true,
+    },
+
+    // Error: Jest worker encountered 1 child process exceptions, exceeding retry limit
+    parallelServerBuildTraces: false,
+    parallelServerCompiles: false,
+    webpackBuildWorker: false,
+
+    // DOMException [DataCloneError]: ... could not be cloned.
+    workerThreads: false,
   } satisfies ExperimentalConfig,
+
+  sassOptions: {
+    silenceDeprecations: ['legacy-js-api'],
+  },
 
   typescript: {
     ignoreBuildErrors: true,

@@ -26,6 +26,15 @@ export default [
   },
 
   {
+    files: ['src/modules/react-google-analytics/**/*.ts'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
+      camelcase: 'off',
+      'prefer-rest-params': 'off',
+    },
+  },
+
+  {
     files: ['src/utils/assert.ts'],
     rules: {
       'max-params': 'off',

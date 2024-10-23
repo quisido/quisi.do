@@ -6,8 +6,8 @@ import { MILLISECONDS_PER_DAY } from '../constants/time.js';
 import AuthnTest from '../test/authn-test.js';
 
 const SINGLE = 1;
-const TEST_USER_ID = 1234;
 const TEST_NOW: number = Date.now();
+const TEST_USER_ID = 1234;
 
 describe('getAuthnUserIdFromMemory', (): void => {
   it('should clear and emit for expired values', async (): Promise<void> => {
