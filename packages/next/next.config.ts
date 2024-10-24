@@ -67,6 +67,7 @@ export default withNextJsBundleAnalyzer({
     optimizeCss: true,
     optimizeServerReact: true,
     ppr: OUTPUT !== 'export',
+    reactCompiler: true,
     serverMinification: true,
     serverSourceMaps: true,
     staticGenerationMaxConcurrency: cpus,
