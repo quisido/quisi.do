@@ -1,7 +1,6 @@
 import { useRouter } from 'next/navigation.js';
-import { useEffect } from 'react';
+import { useEffect, experimental_useEffectEvent as useEffectEvent } from 'react';
 import useForceUpdate from 'use-force-update';
-import useEffectEvent from './use-effect-event';
 
 const FIRST_CHARACTER = 1;
 
@@ -25,10 +24,14 @@ export default function useHash(): readonly [
   const forceUpdate = useForceUpdate();
 
   // States
-  const hash: string =
-    typeof window === 'undefined'
-      ? ''
-      : window.location.hash.slice(FIRST_CHARACTER);
+  const getHash = (): string => {
+    if (typeof window === 'undefined') {
+      return '';
+    }
+    return window.location.hash.slice(FIRST_CHARACTER);
+  };
+
+  const hash: string = getHash();
 
   // Callbacks
   const setHash = useEffectEvent(
@@ -57,7 +60,7 @@ export default function useHash(): readonly [
       return;
     }
 
-    let forceUpdateTimeout: number | undefined;
+    let forceUpdateTimeout: number | null = null;
     const handler = (): void => {
       // Delay update until `window.location.hash` has updated.
       forceUpdateTimeout = window.setTimeout(forceUpdate, HASH_CHANGE_DELAY);

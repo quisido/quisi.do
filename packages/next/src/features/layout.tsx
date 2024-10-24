@@ -39,7 +39,6 @@ const Contexts: ComponentType<PropsWithChildren> = withWrappers(
   CloudWatchRUM,
   Fullstory,
   HostnameProvider,
-  LogRocket,
   NotificationsProvider,
   Sentry,
   SessionIdProvider,
@@ -68,6 +67,7 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
         </Contexts>
         <Datadog />
         <GoogleAnalytics />
+        <LogRocket />
         <Mixpanel />
       </body>
     </html>

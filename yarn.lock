@@ -2486,7 +2486,7 @@ __metadata:
 "@datadog/browser-core@npm:5.29.0":
   version: 5.29.0
   resolution: "@datadog/browser-core@npm:5.29.0"
-  checksum: 10c0/6fb045ef4d2bccb74f7024b75bf7d4ccdbe991673ca557c1671ccd079bf686b3d833a30193047cea7a033afcffba0329b0beb0aff905a25fc32466ba81def2fd
+  checksum: 10c0/4a6629d53199ccef49151bfbfbf6fc4be7f0222e5ff27daf3d140209209c5975723d1e8a7324ebc59218f5523408ea5ee9ea3b48fc74089098cd2ff179b48d82
   languageName: node
   linkType: hard
 
@@ -5504,7 +5504,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.2.1"
     eslint-plugin-react: "npm:^7.37.1"
     eslint-plugin-react-compiler: "npm:^19.0.0-beta-9ee70a1-20241017"
-    eslint-plugin-react-hooks: "npm:^5.0.0"
+    eslint-plugin-react-hooks: "npm:0.0.0-experimental-1631855f-20241023"
     eslint-plugin-react-refresh: "npm:^0.4.12"
     fmrs: "workspace:^"
     fullstory-react: "workspace:^"
@@ -5521,9 +5521,9 @@ __metadata:
     postcss: "npm:^8.4.47"
     prettier: "npm:^3.3.3"
     publint: "npm:^0.2.11"
-    react: "npm:^18.3.1"
+    react: "npm:0.0.0-experimental-1631855f-20241023"
     react-datadog: "workspace:^"
-    react-dom: "npm:^18.3.1"
+    react-dom: "npm:0.0.0-experimental-1631855f-20241023"
     react-innertext: "npm:^1.1.5"
     recharts: "npm:^2.13.0"
     relative-timestamp: "npm:^1.0.0"
@@ -11684,6 +11684,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-react-hooks@npm:0.0.0-experimental-1631855f-20241023":
+  version: 0.0.0-experimental-1631855f-20241023
+  resolution: "eslint-plugin-react-hooks@npm:0.0.0-experimental-1631855f-20241023"
+  peerDependencies:
+    eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
+  checksum: 10c0/3576f8d666fdf0a04e3bc0cf9a00ba73a9896e402c99cde3af6f7761d907c835157373e317f28c6d9368e8784ffa9138b467ac006ec5e71d3699b66a449188c1
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-react-hooks@npm:^4.5.0 || 5.0.0-canary-7118f5dd7-20230705":
   version: 5.0.0-canary-7118f5dd7-20230705
   resolution: "eslint-plugin-react-hooks@npm:5.0.0-canary-7118f5dd7-20230705"
@@ -17081,6 +17090,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"react-dom@npm:0.0.0-experimental-1631855f-20241023":
+  version: 0.0.0-experimental-1631855f-20241023
+  resolution: "react-dom@npm:0.0.0-experimental-1631855f-20241023"
+  dependencies:
+    scheduler: "npm:0.0.0-experimental-1631855f-20241023"
+  peerDependencies:
+    react: 0.0.0-experimental-1631855f-20241023
+  checksum: 10c0/bc7357fdf5671b5d2810c36478349060f814fd289ef49336f54b40f41f5774b140576a540691db546b6e8c07e51733e3b9511aa5863b7d7fc52b33a9bc65ac36
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:^18.3.1":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
@@ -17182,6 +17202,13 @@ __metadata:
     react: ">=16.6.0"
     react-dom: ">=16.6.0"
   checksum: 10c0/2ba754ba748faefa15f87c96dfa700d5525054a0141de8c75763aae6734af0740e77e11261a1e8f4ffc08fd9ab78510122e05c21c2d79066c38bb6861a886c82
+  languageName: node
+  linkType: hard
+
+"react@npm:0.0.0-experimental-1631855f-20241023":
+  version: 0.0.0-experimental-1631855f-20241023
+  resolution: "react@npm:0.0.0-experimental-1631855f-20241023"
+  checksum: 10c0/30e124156fa1fbf686300569ee317bdec3594fca9776df0fc514948d9354ad4b63f6d33cb9c6e58d0e934918e1c28f4d6dd17c6a2d7d5a4b37dfd725ad5badfd
   languageName: node
   linkType: hard
 
@@ -17892,6 +17919,13 @@ __metadata:
   dependencies:
     xmlchars: "npm:^2.2.0"
   checksum: 10c0/3847b839f060ef3476eb8623d099aa502ad658f5c40fd60c105ebce86d244389b0d76fcae30f4d0c728d7705ceb2f7e9b34bb54717b6a7dbedaf5dad2d9a4b74
+  languageName: node
+  linkType: hard
+
+"scheduler@npm:0.0.0-experimental-1631855f-20241023":
+  version: 0.0.0-experimental-1631855f-20241023
+  resolution: "scheduler@npm:0.0.0-experimental-1631855f-20241023"
+  checksum: 10c0/3a62c87848db5dc784cfa7dc88c666c4e61c5677ae23803091e16d41e2165a24afd3f633b2dee742a64b1b9a9b8d242d974f5de06357332c81a89e86dd10a6d3
   languageName: node
   linkType: hard
 

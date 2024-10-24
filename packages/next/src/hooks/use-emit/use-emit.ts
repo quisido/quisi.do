@@ -2,12 +2,12 @@ import { type Event as SentryEvent } from '@sentry/types';
 import { useRecordEvent } from 'aws-rum-react';
 import { useFullstory, type FSApi } from 'fullstory-react';
 import mixpanelBrowser from 'mixpanel-browser';
+import { experimental_useEffectEvent as useEffectEvent } from 'react';
 import { useDatadogRum } from 'react-datadog';
 import { useSentrySdk } from 'sentry-react';
 import { useHostname } from '../../contexts/hostname.js';
 import EMPTY_OBJECT from '../../modules/react-google-analytics/constants/empty-object.js';
 import mapObjectToEntries from '../../utils/map-object-to-entries.js';
-import useEffectEvent from '../use-effect-event.js';
 import useLogRocket from '../use-log-rocket.js';
 import usePathname from '../use-pathname.js';
 import createSentryEvent from './utils/create-sentry-event.js';
@@ -17,17 +17,15 @@ type Dimensions = Record<
   boolean | number | string | null | undefined
 >;
 
-type EventEmitter = (
-  name: string,
-  dimensions?: Readonly<Dimensions> | undefined,
-) => void;
+type EventEmitter = (name: string, dimensions?: Readonly<Dimensions>) => void;
 
 interface Zaraz {
   readonly track: (
     eventName: string,
-    eventProperties?:
-      | Record<string, boolean | number | string | null | undefined>
-      | undefined,
+    eventProperties?: Record<
+      string,
+      boolean | number | string | null | undefined
+    >,
   ) => void;
 }
 

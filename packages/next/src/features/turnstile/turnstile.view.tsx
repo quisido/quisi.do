@@ -1,13 +1,13 @@
 'use client';
 
 import {
+  experimental_useEffectEvent as useEffectEvent,
   useRef,
+  type MutableRefObject,
   type PropsWithChildren,
   type ReactElement,
-  type RefObject,
 } from 'react';
 import { useNotifications } from '../../contexts/notifications.js';
-import useEffectEvent from '../../hooks/use-effect-event.js';
 import Turnstile from '../../modules/react-turnstile-invis/index.js';
 import type Notification from '../../types/notification.js';
 import noop from '../../utils/noop.js';
@@ -27,7 +27,7 @@ export default function AppTurnstile({
   const [, emitNotification] = useNotifications();
 
   // State
-  const removeRef: RefObject<VoidFunction> = useRef(noop);
+  const removeRef: MutableRefObject<VoidFunction> = useRef(noop);
   const notify = useEffectEvent((notification: Notification): void => {
     removeRef.current();
     removeRef.current = emitNotification(notification);
@@ -44,8 +44,9 @@ export default function AppTurnstile({
               Header(): ReactElement {
                 return <>🐱‍👤 Are you still human?</>;
               },
-              Message:
-                'You probably left this tab open while doing something else.',
+              Message(): string {
+                return 'You probably left this tab open while doing something else.';
+              },
             });
             break;
           default:
@@ -68,19 +69,27 @@ export default function AppTurnstile({
       }}
       onExpired={(): void => {
         notify({
-          Message: 'Your Turnstile session has expired.',
           type: 'warning',
+
           Header(): ReactElement {
             return <>🐱‍👤 Are you still human?</>;
+          },
+
+          Message(): string {
+            return 'Your Turnstile session has expired.';
           },
         });
       }}
       onSuccess={(): void => {
         notify({
-          Message: 'Turnstile has validated your session.',
           type: 'info',
+
           Header(): ReactElement {
             return <>🧑 You are human!</>;
+          },
+
+          Message(): string {
+            return 'Turnstile has validated your session.';
           },
         });
       }}
