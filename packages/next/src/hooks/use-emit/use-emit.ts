@@ -1,46 +1,63 @@
-import { type Event as SentryEvent } from '@sentry/types';
+import {
+  type EventHint,
+  type Metrics,
+  type Event as SentryEvent,
+} from '@sentry/types';
 import { useRecordEvent } from 'aws-rum-react';
 import { useFullstory, type FSApi } from 'fullstory-react';
 import mixpanelBrowser from 'mixpanel-browser';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
 import { useDatadogRum } from 'react-datadog';
 import { useSentrySdk } from 'sentry-react';
 import { useHostname } from '../../contexts/hostname.js';
 import EMPTY_OBJECT from '../../modules/react-google-analytics/constants/empty-object.js';
+import type { Dimensions } from '../../types/dimensions.js';
 import mapObjectToEntries from '../../utils/map-object-to-entries.js';
+import zarazTrack from '../../utils/zaraz-track.js';
+import useEffectEvent from '../use-effect-event.js';
 import useLogRocket from '../use-log-rocket.js';
 import usePathname from '../use-pathname.js';
 import createSentryEvent from './utils/create-sentry-event.js';
 
-type Dimensions = Record<
-  number | string,
-  boolean | number | string | null | undefined
->;
+interface CaptureSentryEventOptions {
+  readonly captureEvent: (event: SentryEvent, hint?: EventHint) => string;
+  readonly hostname: string;
+  readonly metrics: Metrics;
+  readonly pathname: string;
+}
 
 type EventEmitter = (name: string, dimensions?: Readonly<Dimensions>) => void;
 
-interface Zaraz {
-  readonly track: (
-    eventName: string,
-    eventProperties?: Record<
-      string,
-      boolean | number | string | null | undefined
-    >,
-  ) => void;
-}
-
-interface ZarazWindow extends Window {
-  readonly zaraz: Zaraz;
-}
-
 const DEFAULT_METRIC_VALUE = 1;
-const hasZaraz = (wndw: Window): wndw is ZarazWindow => 'zaraz' in wndw;
 
 const mapDimensionsToValue = (dimensions: Dimensions): number => {
   if ('value' in dimensions && typeof dimensions['value'] === 'number') {
     return dimensions['value'];
   }
   return DEFAULT_METRIC_VALUE;
+};
+
+const captureSentryEvent = (
+  name: string,
+  dimensions: Readonly<Dimensions>,
+  { captureEvent, hostname, metrics, pathname }: CaptureSentryEventOptions,
+): void => {
+  const sentryEvent: SentryEvent = createSentryEvent({
+    dimensions,
+    hostname,
+    name,
+    pathname,
+  });
+
+  captureEvent(sentryEvent, {
+    mechanism: {
+      type: 'generic',
+    },
+  });
+
+  metrics.set(name, mapDimensionsToValue(dimensions), {
+    tags: dimensions,
+    timestamp: Date.now(),
+  });
 };
 
 const removeNullValues = <K extends number | string | symbol, V>(
@@ -55,6 +72,20 @@ const removeNullValues = <K extends number | string | symbol, V>(
     newRecord[key] = value;
   }
   return newRecord;
+};
+
+const safeMixpanelBrowserTrack = (
+  name: string,
+  dimensions: Readonly<Dimensions>,
+): void => {
+  try {
+    mixpanelBrowser.track(name, dimensions);
+  } catch (_err: unknown) {
+    /**
+     * Mixpanel has not finished loading yet.
+     * Cannot read properties of undefined (reading '_event_is_disabled')
+     */
+  }
 };
 
 /**
@@ -110,32 +141,18 @@ export default function useEmit(): EventEmitter {
       LogRocket.track(name, removeNullValues(dimensions));
 
       // Mixpanel
-      try {
-        mixpanelBrowser.track(name, dimensions);
-      } catch (_err: unknown) {
-        /*
-         * Mixpanel has not finished loading yet.
-         * Cannot read properties of undefined (reading '_event_is_disabled')
-         */
-      }
+      safeMixpanelBrowserTrack(name, dimensions);
 
       // Sentry
-      const sentryEvent: SentryEvent = createSentryEvent({
-        dimensions,
+      captureSentryEvent(name, dimensions, {
+        captureEvent,
         hostname,
-        name,
+        metrics,
         pathname,
-      });
-      captureEvent(sentryEvent);
-      metrics.set(name, mapDimensionsToValue(dimensions), {
-        tags: dimensions,
-        timestamp: Date.now(),
       });
 
       // Zaraz
-      if (hasZaraz(window)) {
-        window.zaraz.track(name, dimensions);
-      }
+      zarazTrack(name, dimensions);
     },
   );
 }

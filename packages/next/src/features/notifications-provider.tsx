@@ -2,7 +2,6 @@
 
 import {
   memo,
-  experimental_useEffectEvent as useEffectEvent,
   useMemo,
   useRef,
   useState,
@@ -11,6 +10,7 @@ import {
   type ReactElement,
 } from 'react';
 import { NotificationsProvider } from '../contexts/notifications.js';
+import useEffectEvent from '../hooks/use-effect-event.js';
 import useHash from '../hooks/use-hash.js';
 import type Notification from '../types/notification.js';
 import type { WithKey } from '../types/with-key.js';

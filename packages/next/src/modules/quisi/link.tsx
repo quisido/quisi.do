@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation.js';
 import { useEffect, type MouseEvent, type ReactElement, type ReactNode } from 'react';
 import innerText from 'react-innertext';
-import useEmit from '../../hooks/use-emit/index.js';
 import useTheme from '../../hooks/use-theme.js';
 
 interface BaseProps {
@@ -38,7 +37,7 @@ export default function Link({
   title,
 }: Props): ReactElement {
   // Contexts
-  const emit = useEmit();
+  const emit = (..._args: unknown[])=>{};// useEmit();
   const router = useRouter();
   const { primaryHex } = useTheme();
 

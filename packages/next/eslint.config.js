@@ -6,6 +6,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 export default [
   ...configs,
 
+  // Plugin: react-compiler
   {
     plugins: {
       'react-compiler': reactCompiler,
@@ -15,6 +16,22 @@ export default [
     rules: {
       'react-compiler/react-compiler': 'error',
       'react-refresh/only-export-components': 'error',
+    },
+  },
+
+  // Rule: camelcase
+  {
+    files: ['src/hooks/use-effect-event.ts'],
+    rules: {
+      camelcase: 'off',
+    },
+  },
+
+  // Rule: no-undefined
+  {
+    files: ['src/hooks/use-emit/use-emit.ts'],
+    rules: {
+      'no-undefined': 'off',
     },
   },
 

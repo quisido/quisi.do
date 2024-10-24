@@ -25,3 +25,5 @@ ON reports(`projectId`, `documentURL`);
 
 CREATE INDEX IF NOT EXISTS idx_reports_project
 ON reports(`projectId`);
+
+DELETE FROM `reports`;

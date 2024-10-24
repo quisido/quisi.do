@@ -26,6 +26,8 @@ export interface Options extends FetchContextOptions {
   readonly request: IncomingRequest;
 }
 
+const JSON_SPACE = 2;
+
 export default class WorkerFetchContext extends FetchContext {
   readonly #fetch: Fetcher['fetch'];
 
@@ -83,11 +85,11 @@ export default class WorkerFetchContext extends FetchContext {
     });
 
     this.onPrivateMetric((metric: Metric): void => {
-      console.log('Private:', metric);
+      console.log('Private:', JSON.stringify(metric, null, JSON_SPACE));
     });
 
     this.onPublicMetric((metric: Metric): void => {
-      console.log('Public:', metric);
+      console.log('Public:', JSON.stringify(metric, null, JSON_SPACE));
     });
   }
 

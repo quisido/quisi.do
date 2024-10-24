@@ -17,7 +17,7 @@
     "local:reinit": "yarn run local:drop && yarn run local:init",
     "login": "wrangler login",
     "prepack": "exit 0",
-    "prepublish": "concurrently --kill-others-on-fail --names eslint,publint,tsc,vitest \"yarn run eslint\" \"yarn run publint\" \"yarn run tsc\" \"yarn run vitest:run\"",
+    "prepublish": "concurrently --kill-others-on-fail --names eslint,publint,tsc,vitest --prefix-colors auto \"yarn run eslint\" \"yarn run publint\" \"yarn run tsc\" \"yarn run vitest:run\"",
     "production:deploy": "wrangler deploy src/index.ts --env production --outdir dist",
     "production:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env production --outdir dist",
     "production:init": "yarn run production:init:emails && yarn run production:init:oauth && yarn run production:init:users",

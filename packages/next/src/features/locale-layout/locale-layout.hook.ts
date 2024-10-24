@@ -1,8 +1,9 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation.js';
-import { experimental_useEffectEvent as useEffectEvent, useMemo } from 'react';
+import { useMemo } from 'react';
 import { default as Locale, validateLocale } from '../../constants/locale.js';
+import useEffectEvent from '../../hooks/use-effect-event.js';
 import type Params from './types/params.js';
 
 interface Props {

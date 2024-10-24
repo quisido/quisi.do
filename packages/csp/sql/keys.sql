@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS [keys] (
 CREATE INDEX IF NOT EXISTS idx_keys_projectId_key
 ON keys(`projectId`, `key`);
 
+DELETE FROM `keys`;
+
 INSERT INTO `keys` (`projectId`, `key`, `permission`)
 VALUES (1, "demo-post", 1);
 
