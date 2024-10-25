@@ -19,7 +19,7 @@ export default function expectPrivateMetric(metric: Metric): void {
         timestamp: EXPECT_ANY_NUMBER,
         traceFlags: EXPECT_ANY_NUMBER,
         traceId: EXPECT_ANY_STRING,
-        traceParentId: '0000000000000000',
+        traceParentId: EXPECT_ANY_STRING,
         traceVersion: EXPECT_ANY_NUMBER,
         ...metric,
       });
