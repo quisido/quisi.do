@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import TestAnalyticsEngineDataset from './test/analytics-engine-dataset.js';
 import { EXPECT_ANY_NUMBER, EXPECT_ANY_STRING } from './test/expect-any.js';
-import expectToEmitPrivateMetric from './test/expect-emit-private-metric.js';
-import expectToEmitPublicMetric from './test/expect-emit-public-metric.js';
+import expectPrivateMetric from './test/expect-private-metric.js';
+import expectPublicMetric from './test/expect-public-metric.js';
 import expectToLogError from './test/expect-to-log-error.js';
 import {
   TEST_EXECUTION_CONTEXT,
@@ -42,23 +42,18 @@ describe('WorkerFetchContext', (): void => {
         TEST_EXECUTION_CONTEXT,
       );
 
-      expectToEmitPrivateMetric({
-        name: 'private',
-      });
-
-      expectToEmitPublicMetric({
-        name: 'public',
-      });
+      expectPrivateMetric({ name: 'private' });
+      expectPublicMetric({ name: 'public' });
 
       expectToLogError(
-        'Private:',
+        'Private error:',
         'private message',
         'private cause',
         EXPECT_ANY_STRING,
       );
 
       expectToLogError(
-        'Public:',
+        'Public error:',
         'public message',
         'public cause',
         EXPECT_ANY_STRING,
@@ -122,7 +117,7 @@ describe('WorkerFetchContext', (): void => {
         TEST_EXECUTION_CONTEXT,
       );
 
-      expectToEmitPublicMetric({
+      expectPublicMetric({
         name: 'test-missing-private-dataset-metric-name',
       });
     });
@@ -138,13 +133,13 @@ describe('WorkerFetchContext', (): void => {
         TEST_EXECUTION_CONTEXT,
       );
 
-      expectToEmitPublicMetric({
+      expectPublicMetric({
         name: 'test-invalid-private-dataset-metric-name',
         type: 'string',
       });
 
       expectToLogError(
-        'Private:',
+        'Private error:',
         'Invalid private dataset',
         'test invalid private dataset',
         EXPECT_ANY_STRING,
@@ -186,7 +181,7 @@ describe('WorkerFetchContext', (): void => {
         TEST_EXECUTION_CONTEXT,
       );
 
-      expectToEmitPublicMetric({
+      expectPublicMetric({
         name: 'test-missing-public-dataset-metric-name',
       });
     });
@@ -203,13 +198,13 @@ describe('WorkerFetchContext', (): void => {
       );
 
       expectToLogError(
-        'Private:',
+        'Private error:',
         'Invalid public dataset',
         'test invalid public dataset',
         EXPECT_ANY_STRING,
       );
 
-      expectToEmitPublicMetric({
+      expectPublicMetric({
         name: 'test-invalid-public-dataset-metric-name',
         type: 'string',
       });

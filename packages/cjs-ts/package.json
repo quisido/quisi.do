@@ -33,7 +33,7 @@
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "exit 0",
-    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,publint \"yarn run attw\" \"yarn run eslint\" \"yarn run publint\"",
+    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,publint --prefix-colors auto \"yarn run attw\" \"yarn run eslint\" \"yarn run publint\"",
     "publint": "publint"
   },
   "dependencies": {
