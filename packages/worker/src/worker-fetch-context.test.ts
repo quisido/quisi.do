@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import TestAnalyticsEngineDataset from './test/analytics-engine-dataset.js';
 import { EXPECT_ANY_NUMBER, EXPECT_ANY_STRING } from './test/expect-any.js';
-import expectToEmitPrivateMetric from './test/expect-emit-private-metric.js';
-import expectToEmitPublicMetric from './test/expect-emit-public-metric.js';
+import expectToEmitPrivateMetric from './test/expect-to-emit-private-metric.js';
+import expectToEmitPublicMetric from './test/expect-to-emit-public-metric.js';
 import expectToLogError from './test/expect-to-log-error.js';
 import {
   TEST_EXECUTION_CONTEXT,
@@ -51,14 +51,14 @@ describe('WorkerFetchContext', (): void => {
       });
 
       expectToLogError(
-        'Private:',
+        'Private error:',
         'private message',
         'private cause',
         EXPECT_ANY_STRING,
       );
 
       expectToLogError(
-        'Public:',
+        'Public error:',
         'public message',
         'public cause',
         EXPECT_ANY_STRING,
@@ -144,7 +144,7 @@ describe('WorkerFetchContext', (): void => {
       });
 
       expectToLogError(
-        'Private:',
+        'Private error:',
         'Invalid private dataset',
         'test invalid private dataset',
         EXPECT_ANY_STRING,
@@ -203,7 +203,7 @@ describe('WorkerFetchContext', (): void => {
       );
 
       expectToLogError(
-        'Private:',
+        'Private error:',
         'Invalid public dataset',
         'test invalid public dataset',
         EXPECT_ANY_STRING,

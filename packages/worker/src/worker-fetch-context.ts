@@ -77,19 +77,19 @@ export default class WorkerFetchContext extends FetchContext {
 
   #setConsole(console: Console): void {
     this.onPrivateError((err: Error): void => {
-      console.error('Private:', err.message, err.cause, err.stack);
+      console.error('Private error:', err.message, err.cause, err.stack);
     });
 
     this.onPublicError((err: Error): void => {
-      console.error('Public:', err.message, err.cause, err.stack);
+      console.error('Public error:', err.message, err.cause, err.stack);
     });
 
     this.onPrivateMetric((metric: Metric): void => {
-      console.log('Private:', JSON.stringify(metric, null, JSON_SPACE));
+      console.log('Private metric:', JSON.stringify(metric, null, JSON_SPACE));
     });
 
     this.onPublicMetric((metric: Metric): void => {
-      console.log('Public:', JSON.stringify(metric, null, JSON_SPACE));
+      console.log('Public metric:', JSON.stringify(metric, null, JSON_SPACE));
     });
   }
 

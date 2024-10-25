@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import TestD1Database from './test/d1-database.js';
 import { EXPECT_ANY_STRING } from './test/expect-any.js';
-import expectToEmitPublicMetric from './test/expect-emit-public-metric.js';
+import expectToEmitPublicMetric from './test/expect-to-emit-public-metric.js';
 import expectToLogError from './test/expect-to-log-error.js';
 import TestR2Bucket from './test/r2-bucket.js';
 import { TEST_EXECUTION_CONTEXT } from './test/test-execution-context.js';
@@ -27,7 +27,7 @@ describe('FetchContext', (): void => {
       });
 
       expectToLogError(
-        'Public:',
+        'Public error:',
         'Invalid trace parent',
         new Error('Invalid trace parent'),
         EXPECT_ANY_STRING,
@@ -49,7 +49,7 @@ describe('FetchContext', (): void => {
       );
 
       expectToLogError(
-        'Public:',
+        'Public error:',
         'Invalid trace parent',
         new Error('Trace parent trace IDs must be non-zero.'),
         EXPECT_ANY_STRING,
@@ -71,7 +71,7 @@ describe('FetchContext', (): void => {
       );
 
       expectToLogError(
-        'Public:',
+        'Public error:',
         'Invalid trace parent',
         new Error('Trace parent parent IDs must be non-zero.'),
         EXPECT_ANY_STRING,

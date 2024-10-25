@@ -34,7 +34,7 @@
     "attw": "attw --quiet",
     "fix-esm-import-path": "fix-esm-import-path dist/src/",
     "prepack": "yarn run webpack && yarn run fix-esm-import-path",
-    "prepublish": "concurrently --kill-others-on-fail --names attw,publint \"yarn run attw\" \"yarn run publint\"",
+    "prepublish": "concurrently --kill-others-on-fail --names attw,publint --prefix-colors auto \"yarn run attw\" \"yarn run publint\"",
     "publint": "publint",
     "webpack": "webpack"
   },
