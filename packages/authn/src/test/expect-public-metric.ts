@@ -5,7 +5,7 @@ import { TEST_CONSOLE_LOG } from './test-console.js';
 
 const JSON_SPACE = 2;
 
-export default function expectToEmitPublicMetric(metric: Metric): void {
+export default function expectPublicMetric(metric: Metric): void {
   const metrics: string[] = [];
   for (const call of TEST_CONSOLE_LOG.mock.calls) {
     const [prefix, metricStr] = call as readonly unknown[];

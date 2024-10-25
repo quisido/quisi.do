@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import TestAnalyticsEngineDataset from './test/analytics-engine-dataset.js';
 import { EXPECT_ANY_NUMBER, EXPECT_ANY_STRING } from './test/expect-any.js';
-import expectToEmitPrivateMetric from './test/expect-to-emit-private-metric.js';
-import expectToEmitPublicMetric from './test/expect-to-emit-public-metric.js';
+import expectPrivateMetric from './test/expect-private-metric.js';
+import expectPublicMetric from './test/expect-public-metric.js';
 import expectToLogError from './test/expect-to-log-error.js';
 import {
   TEST_EXECUTION_CONTEXT,
@@ -42,13 +42,8 @@ describe('WorkerFetchContext', (): void => {
         TEST_EXECUTION_CONTEXT,
       );
 
-      expectToEmitPrivateMetric({
-        name: 'private',
-      });
-
-      expectToEmitPublicMetric({
-        name: 'public',
-      });
+      expectPrivateMetric({ name: 'private' });
+      expectPublicMetric({ name: 'public' });
 
       expectToLogError(
         'Private error:',
@@ -122,7 +117,7 @@ describe('WorkerFetchContext', (): void => {
         TEST_EXECUTION_CONTEXT,
       );
 
-      expectToEmitPublicMetric({
+      expectPublicMetric({
         name: 'test-missing-private-dataset-metric-name',
       });
     });
@@ -138,7 +133,7 @@ describe('WorkerFetchContext', (): void => {
         TEST_EXECUTION_CONTEXT,
       );
 
-      expectToEmitPublicMetric({
+      expectPublicMetric({
         name: 'test-invalid-private-dataset-metric-name',
         type: 'string',
       });
@@ -186,7 +181,7 @@ describe('WorkerFetchContext', (): void => {
         TEST_EXECUTION_CONTEXT,
       );
 
-      expectToEmitPublicMetric({
+      expectPublicMetric({
         name: 'test-missing-public-dataset-metric-name',
       });
     });
@@ -209,7 +204,7 @@ describe('WorkerFetchContext', (): void => {
         EXPECT_ANY_STRING,
       );
 
-      expectToEmitPublicMetric({
+      expectPublicMetric({
         name: 'test-invalid-public-dataset-metric-name',
         type: 'string',
       });

@@ -7,7 +7,7 @@ const JSON_SPACE = 2;
 const NONE = 0;
 const UNSPECIFIED = 0;
 
-export default function expectToEmitPrivateMetric(metric: Metric): void {
+export default function expectPrivateMetric(metric: Metric): void {
   const metrics: string[] = [];
   for (const call of TEST_CONSOLE_LOG.mock.calls) {
     const [prefix, metricStr] = call as readonly unknown[];

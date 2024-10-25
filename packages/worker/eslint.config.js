@@ -55,6 +55,17 @@ export default [
   },
 
   {
+    files: [
+      'src/test/expect-private-metric.ts',
+      'src/test/expect-public-metric.ts',
+    ],
+
+    rules: {
+      'max-statements': 'off',
+    },
+  },
+
+  {
     files: ['src/worker.ts'],
     rules: {
       'max-params': 'off',
