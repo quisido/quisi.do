@@ -60,3 +60,6 @@ ENVIRONMENT_NAME = "staging"
 
 [placement]
 mode = "smart"
+
+[vars]
+ENVIRONMENT_NAME = "development"
