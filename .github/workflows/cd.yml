@@ -28,13 +28,13 @@ jobs:
           max-allowed-issues: 2147483647
           output: sarif/codacy.sarif
           verbose: true
-      ## rejecting SARIF, as there are more runs than allowed (22 > 20)
-      # - name: Upload SARIF
-      #   if: always()
-      #   uses: github/codeql-action/upload-sarif@main
-      #   with:
-      #     sarif_file: sarif/codacy.sarif
-      #     wait-for-processing: true
+  #     # rejecting SARIF, as there are more runs than allowed (22 > 20)
+  #     - name: Upload SARIF
+  #       if: always()
+  #       uses: github/codeql-action/upload-sarif@main
+  #       with:
+  #         sarif_file: sarif/codacy.sarif
+  #         wait-for-processing: true
 
   devskim:
     name: DevSkim
@@ -84,11 +84,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
 
@@ -112,11 +111,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
       - name: Prepack
@@ -148,7 +146,7 @@ jobs:
           SENTRY_ENVIRONMENT: production
           WHOAMI: https://a.quisi.do/whoami/
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: prepack
           path: |
@@ -176,16 +174,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
       - name: Audit
@@ -194,7 +191,7 @@ jobs:
         run: yarn packages/next run postlighthouse
       - name: Upload report
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lighthouse-ci
           path: |
@@ -221,16 +218,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
       - name: Prepublish
@@ -262,16 +258,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
       - name: Prepublish quisi.do
@@ -297,7 +292,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
@@ -328,7 +323,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
@@ -359,16 +354,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
       - name: Publish
@@ -397,7 +391,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
@@ -469,16 +463,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
+          node-version: latest
           registry-url: 'https://npm.pkg.github.com'
           scope: '@${{ github.repository_owner }}'
       - name: Install dependencies
@@ -512,15 +505,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
@@ -548,15 +540,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
@@ -585,16 +576,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           cache: yarn
-          check-latest: true
-          node-version: 'lts/*'
+          node-version: latest
       - name: Install dependencies
         run: yarn install --immutable
       - name: Audit
@@ -603,7 +593,7 @@ jobs:
         run: yarn packages/next run postlighthouse
       - name: Upload report
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lighthouse-production
           path: |

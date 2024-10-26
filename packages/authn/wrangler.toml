@@ -82,3 +82,11 @@ PATREON_OAUTH_REDIRECT_URI = "https://localhost:5882/patreon/"
 
 [placement]
 mode = "smart"
+
+[vars]
+COOKIE_DOMAIN = "localhost"
+ENVIRONMENT_NAME = "development"
+HOST = "localhost:3000"
+PATREON_OAUTH_CLIENT_ID = "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG"
+PATREON_OAUTH_HOST = "https://www.patreon.com"
+PATREON_OAUTH_REDIRECT_URI = "https://localhost:5882/patreon/"

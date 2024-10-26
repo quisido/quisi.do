@@ -95,6 +95,10 @@ export default class Worker {
     return state;
   }
 
+  public getAnalyticsEngineDataset = (name: string): AnalyticsEngineDataset => {
+    return this.#fetchContext.getAnalyticsEngineDataset(name);
+  };
+
   public getCookie = (name: string): string | undefined => {
     const cookies: Partial<Record<string, string>> = this.getCookies();
     return cookies[name];

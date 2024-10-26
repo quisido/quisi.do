@@ -1,6 +1,5 @@
-import { mapUnknownToString } from 'fmrs';
+import { mapUnknownToString, sortEntriesByKey } from 'fmrs';
 import mapObjectToEntries from '../../../utils/map-object-to-entries.js';
-import sortEntriesByKey from '../../../utils/sort-entries-by-key.js';
 
 export default function mapDimensionsToFingerprints(
   dimensions: Record<string, unknown>,

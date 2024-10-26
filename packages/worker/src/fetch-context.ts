@@ -1,5 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 import {
+  isAnalyticsEngineDataset,
   isD1Database,
   isR2Bucket,
   type IncomingRequest,
@@ -138,6 +139,20 @@ export default class FetchContext<
       fn();
     }
   }
+
+  public getAnalyticsEngineDataset = (name: string): AnalyticsEngineDataset => {
+    const dataset: unknown = this.env[name];
+    if (isAnalyticsEngineDataset(dataset)) {
+      return dataset;
+    }
+
+    this.emitPublicMetric({
+      dataset: name,
+      name: '@quisido/worker/analytics-engine-dataset/invalid',
+    });
+
+    throw new Error('Expected an Analytics Engine dataset.');
+  };
 
   public getD1Database = (name: string): D1Database => {
     const db: unknown = this.env[name];

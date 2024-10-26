@@ -1,8 +1,6 @@
-import { sortArraysByIndex } from 'fmrs';
+import { sortEntriesByKey } from 'fmrs';
 
-const KEY_INDEX = 0;
 const mapEntryToValue = <T>([, value]: readonly [unknown, T]): T => value;
-const sortEntryByKey = sortArraysByIndex(KEY_INDEX);
 
 const reduceValuesToDataPoint = (
   datapoint: Required<Omit<AnalyticsEngineDataPoint, 'indexes'>>,
@@ -29,7 +27,7 @@ export default function mapMetricDimensionsToDataPoint(
   dimensions: Readonly<Partial<Record<string, number | string>>>,
 ): Required<Omit<AnalyticsEngineDataPoint, 'indexes'>> {
   return Object.entries(dimensions)
-    .sort(sortEntryByKey)
+    .sort(sortEntriesByKey)
     .map(mapEntryToValue)
     .reduce(reduceValuesToDataPoint, {
       blobs: [],
