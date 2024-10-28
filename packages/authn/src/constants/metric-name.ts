@@ -1,6 +1,5 @@
 export enum MetricName {
   ErrorCode = 'error.code',
-  FaviconIco = 'pathname.favicon.ico',
   InvalidCookieDomain = 'cookie-domain.invalid',
   InvalidDataBucket = 'bucket.data.invalid',
   InvalidEnvironmentName = 'environment-name.invalid',
@@ -17,7 +16,6 @@ export enum MetricName {
   MissingPrivateDataset = 'dataset.private.missing',
   MissingPublicDataset = 'dataset.public.missing',
   MissingTraceParent = 'trace-parent.missing',
-  RobotsTxt = 'pathname.robots.txt',
   SetAuthnUserId = 'namespace.authn-user-ids.set',
 
   // OAuth
@@ -85,6 +83,10 @@ export enum MetricName {
   // quisi.do
   AuthnIdCreated = 'authn-id.created',
   AuthnIdError = 'authn-id.error',
+  FaviconIco = 'pathname.favicon.ico',
+  InvalidAnalyticsData = 'analytics.data.invalid',
+  InvalidAnalyticsId = 'analytics.id.invalid',
+  InvalidAnalyticsSecret = 'analytics.secret.invalid',
   InvalidAuthnUserIdsNamespace = 'namespace.authn-user-ids.invalid',
   InvalidDatabase = 'database.invalid',
   InvalidOAuthUserId = 'database.oauth.user-id.invalid',
@@ -94,5 +96,7 @@ export enum MetricName {
   MissingSessionIdCookie = 'cookie.session-id.missing',
   MissingUsageDataset = 'dataset.usage.missing',
   NotFound = 'pathname.invalid',
+  RobotsTxt = 'pathname.robots.txt',
+  RootPathname = 'pathname.root',
   UnknownError = 'error.unknown',
 }

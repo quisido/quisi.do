@@ -1,11 +1,9 @@
 import type TreeLogger from '@monorepo-template/tree-logger';
+import { isDefined, isRecord, isUndefined } from 'fmrs';
 import { readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import type PackageJson from '../../types/package-json.js';
 import type Test from '../../types/test.js';
-import filterByDefined from '../../utils/filter-by-defined.js';
-import filterByRecord from '../../utils/filter-by-record.js';
-import filterByUndefined from '../../utils/filter-by-undefined.js';
 import mapPathToPackageJson from '../../utils/map-path-to-package-json.js';
 import createDependenciesTest from './utils/create-dependencies-test.js';
 import failPackageJsonFiles from './utils/fail-package-json-files.js';
@@ -53,7 +51,7 @@ export default class PackagesTest implements Test {
           const packageJson: PackageJson | undefined =
             packageDirectoryToJsonMap.get(packageDirectory);
 
-          if (filterByUndefined(packageJson)) {
+          if (isUndefined(packageJson)) {
             this.addError(
               mapPackageDirectoryToMissingPackageJsonError(packageDirectory),
             );
@@ -62,12 +60,12 @@ export default class PackagesTest implements Test {
 
           // Check for an `exports` property.
           const { exports, files } = packageJson;
-          if (filterByRecord(exports)) {
+          if (isRecord(exports)) {
             this.scope('exports', mapPackageJsonExportsToTest(exports));
           }
 
           // Check for a `files` property.
-          if (filterByDefined(files)) {
+          if (isDefined(files)) {
             this.scope('files', failPackageJsonFiles);
           }
 

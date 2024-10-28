@@ -1,6 +1,6 @@
 {
   "name": "sentry-react",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "author": "quisi.do <sentry-react@quisi.do>",
   "description": "A React component for instantiating Sentry",
   "homepage": "https://www.npmjs.com/package/sentry-react",
@@ -51,7 +51,7 @@
     "@sentry/browser": "^8.34.0",
     "@sentry/react": "^8.34.0",
     "@sentry/types": "^8.34.0",
-    "unknown2string": "workspace:^",
+    "fmrs": "workspace:^",
     "use-shallow-memo": "workspace:^"
   },
   "devDependencies": {

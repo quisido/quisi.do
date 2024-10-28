@@ -1,4 +1,4 @@
-import { isNumber, sortUnknown } from 'fmrs';
+import { isNumber, sort } from 'fmrs';
 import { describe, expect, it } from 'vitest';
 import { GetErrorCode } from './index.js';
 import createAscendingArray from './test/create-ascending-array.js';
@@ -12,6 +12,6 @@ const ASCENDING_ARRAY: readonly number[] = createAscendingArray(
 
 describe('ErrorCode', (): void => {
   it('should contain ascending values', (): void => {
-    expect([...GET_ERROR_CODES].sort(sortUnknown)).toEqual(ASCENDING_ARRAY);
+    expect([...GET_ERROR_CODES].sort(sort)).toEqual(ASCENDING_ARRAY);
   });
 });

@@ -1,7 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 import type { Variable } from '@quisido/proposal-async-context';
 import { type IncomingRequest } from 'cloudflare-utils';
-import isRecord from './is-record.js';
+import { isRecord } from 'fmrs';
 import WorkerFetchContext from './worker-fetch-context.js';
 import type Worker from './worker.js';
 

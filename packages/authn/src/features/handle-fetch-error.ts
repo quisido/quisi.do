@@ -1,7 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 import { ErrorCode } from '@quisido/authn-shared';
 import type Worker from '@quisido/worker';
-import { mapUnknownToError } from 'fmrs';
+import { mapToError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
 import FatalError from '../utils/fatal-error.js';
 import ErrorResponse from './error-response.js';
@@ -20,6 +20,6 @@ export default function handleFetchError(
   }
 
   this.emitPublicMetric({ name: MetricName.UnknownError });
-  this.logPrivateError(mapUnknownToError(err));
+  this.logPrivateError(mapToError(err));
   return new ErrorResponse(this, ErrorCode.Unknown, returnPath);
 }

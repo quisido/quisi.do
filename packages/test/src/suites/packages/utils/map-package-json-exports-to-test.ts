@@ -1,5 +1,5 @@
 import type TreeLogger from '@monorepo-template/tree-logger';
-import filterByRecord from '../../../utils/filter-by-record.js';
+import { isRecord } from 'fmrs';
 import findDefaultString from './find-default-string.js';
 
 const ARRAY_INDEX_OFFSET = 1;
@@ -10,7 +10,7 @@ export default function mapPackageJsonExportsToTest(
 ): (this: Readonly<TreeLogger>) => void {
   return function testPackageJsonExports(this: Readonly<TreeLogger>): void {
     for (const [path, record] of Object.entries(exports)) {
-      if (!filterByRecord(record)) {
+      if (!isRecord(record)) {
         continue;
       }
 

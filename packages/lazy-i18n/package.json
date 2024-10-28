@@ -1,6 +1,6 @@
 {
   "name": "lazy-i18n",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "author": "quisi.do <lazy-i18n@quisi.do>",
   "description": "Lazy loads translations for React apps",
   "homepage": "https://www.npmjs.com/package/lazy-i18n",
@@ -40,6 +40,9 @@
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
+  },
+  "dependencies": {
+    "fmrs": "workspace:^"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",

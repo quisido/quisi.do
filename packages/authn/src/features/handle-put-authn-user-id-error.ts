@@ -1,6 +1,6 @@
 import { Snapshot } from '@quisido/proposal-async-context';
 import type Worker from '@quisido/worker';
-import { mapUnknownToError } from 'fmrs';
+import { mapToError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
 import { setAuthnUserIdInMemory } from './authn-user-id.js';
 
@@ -24,7 +24,7 @@ export default function handlePutAuthnUserIdError(
       // If the KV namespace failed, fallback to the memory cache.
       setAuthnUserIdInMemory.call(this, authnId, userId);
 
-      this.logPrivateError(mapUnknownToError(err));
+      this.logPrivateError(mapToError(err));
 
       this.emitPrivateMetric({
         authnId,

@@ -1,4 +1,4 @@
-export default function mapUnknownToString(value: unknown): string {
+export default function mapToString(value: unknown): string {
   if (typeof value === 'undefined') {
     return 'undefined';
   }

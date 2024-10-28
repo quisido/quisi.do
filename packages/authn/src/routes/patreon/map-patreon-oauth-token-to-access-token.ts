@@ -1,5 +1,5 @@
 import type Worker from '@quisido/worker';
-import isObject from '../../utils/is-object.js';
+import { isRecord } from 'fmrs';
 import handleInvalidPatreonAccessToken from './handle-invalid-patreon-access-token.js';
 import handleInvalidPatreonOAuthTokenResponse from './handle-invalid-patreon-oauth-token-response.js';
 import handleInvalidPatreonOAuthToken from './handle-invalid-patreon-oauth-token.js';
@@ -17,7 +17,7 @@ export default function mapPatreonOAuthTokenToAccessToken(
     return handleInvalidPatreonOAuthTokenResponse.call(this);
   }
 
-  if (!isObject(token)) {
+  if (!isRecord(token)) {
     return handleInvalidPatreonOAuthToken.call(this, token);
   }
 

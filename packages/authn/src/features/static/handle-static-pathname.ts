@@ -1,5 +1,7 @@
 import type Worker from '@quisido/worker';
+import { StatusCode } from 'cloudflare-utils';
 import { MetricName } from '../../constants/metric-name.js';
+import getCookieDomain from '../get-cookie-domain.js';
 import FaviconResponse from './favicon-response.js';
 import RobotsResponse from './robots-response.js';
 import { StaticPathname } from './static-pathname.js';
@@ -26,6 +28,18 @@ export default function handleStaticPathname(
     case StaticPathname.Robots: {
       this.emitPublicMetric({ name: MetricName.RobotsTxt });
       return new RobotsResponse();
+    }
+
+    case StaticPathname.Root: {
+      this.emitPublicMetric({ name: MetricName.RootPathname });
+      const cookieDomain: string = getCookieDomain.call(this);
+      return new Response(null, {
+        status: StatusCode.PermanentRedirect,
+
+        headers: new Headers({
+          Location: `htttps://${cookieDomain}/`,
+        }),
+      });
     }
   }
 }

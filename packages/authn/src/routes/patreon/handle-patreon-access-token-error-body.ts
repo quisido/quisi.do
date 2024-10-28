@@ -1,5 +1,5 @@
 import type Worker from '@quisido/worker';
-import isObject from '../../utils/is-object.js';
+import { isRecord } from 'fmrs';
 import handleInvalidPatreonAccessTokenErrorBody from './handle-invalid-patreon-access-token-error-body.js';
 import handleInvalidPatreonAccessTokenError from './handle-invalid-patreon-access-token-error.js';
 import handleMissingPatreonAccessTokenErrorCode from './handle-missing-patreon-access-token-error-code.js';
@@ -18,7 +18,7 @@ export default function handlePatreonAccessTokenErrorBody(
   };
 
   const json: unknown = getBodyJson();
-  if (!isObject(json)) {
+  if (!isRecord(json)) {
     return handleInvalidPatreonAccessTokenError.call(this, body, json);
   }
 

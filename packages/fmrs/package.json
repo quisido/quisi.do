@@ -1,6 +1,6 @@
 {
   "name": "fmrs",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "author": "quisi.do <fmrs@quisi.do>",
   "description": "filters/finds, maps, reduces, and sorts",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/fmrs#readme",
@@ -40,9 +40,6 @@
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
-  },
-  "dependencies": {
-    "unknown2string": "workspace:^"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",

@@ -81,10 +81,6 @@
       "path": "packages/tree-logger",
     },
     {
-      "name": "unknown2string",
-      "path": "packages/unknown2string",
-    },
-    {
       "name": "use-shallow-memo",
       "path": "packages/use-shallow-memo",
     },

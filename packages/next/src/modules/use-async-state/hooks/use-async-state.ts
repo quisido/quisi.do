@@ -1,6 +1,6 @@
 'use client';
 
-import { mapUnknownToString } from 'fmrs';
+import { mapToString } from 'fmrs';
 import {
   useCallback,
   useRef,
@@ -69,7 +69,7 @@ export default function useAsyncState<T = unknown>(): State<T> {
         return;
       }
 
-      const errorStr: string = mapUnknownToString(err);
+      const errorStr: string = mapToString(err);
       setAsyncState({
         data: undefined,
         error: errorStr,

@@ -1,4 +1,4 @@
-import { isNumber, sortUnknown } from 'fmrs';
+import { isNumber, sort } from 'fmrs';
 import { describe, expect, it } from 'vitest';
 import { WhoAmIResponseCode } from './index.js';
 import createAscendingArray from './test/create-ascending-array.js';
@@ -16,7 +16,7 @@ const ASCENDING_ARRAY: readonly number[] = createAscendingArray(
 
 describe('WhoAmIResponseCode', (): void => {
   it('should contain ascending values', (): void => {
-    expect([...RESPONSE_CODES].sort(sortUnknown)).toEqual([
+    expect([...RESPONSE_CODES].sort(sort)).toEqual([
       ...ASCENDING_ARRAY,
       ...SPECIAL_RESPONSE_CODES,
     ]);

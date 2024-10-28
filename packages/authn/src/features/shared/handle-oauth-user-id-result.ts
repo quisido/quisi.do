@@ -1,6 +1,6 @@
 import type Worker from '@quisido/worker';
+import { isRecord } from 'fmrs';
 import { MetricName } from '../../constants/metric-name.js';
-import isObject from '../../utils/is-object.js';
 import handleInvalidOAuthUserId from './handle-invalid-oauth-user-id.js';
 
 interface Result {
@@ -23,7 +23,7 @@ export default function handleOAuthUserIdResult(
 
   // Non-existent user
   const [firstResult] = results;
-  if (!isObject(firstResult)) {
+  if (!isRecord(firstResult)) {
     return null;
   }
 

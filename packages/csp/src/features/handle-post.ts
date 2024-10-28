@@ -1,5 +1,5 @@
 import { StatusCode } from 'cloudflare-utils';
-import { mapUnknownToError } from 'fmrs';
+import { mapToError } from 'fmrs';
 import { Permission } from '../constants/permission.js';
 import {
   SELECT_PERMISSION_FROM_KEYS,
@@ -168,7 +168,7 @@ export default async function handlePost(projectId: number): Promise<Response> {
 
     return new Response(StatusCode.OK);
   } catch (err: unknown) {
-    logPrivateError(mapUnknownToError(err));
+    logPrivateError(mapToError(err));
     return new Response(StatusCode.BadRequest);
   }
 }

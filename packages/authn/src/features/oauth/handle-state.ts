@@ -1,5 +1,5 @@
 import type Worker from '@quisido/worker';
-import isObject from '../../utils/is-object.js';
+import { isRecord } from 'fmrs';
 import getSessionIdCookie from '../get-session-id-cookie.js';
 import { AuthenticationPathname } from './authentication-pathname.js';
 import handleCrossSiteRequestForgery from './handle-csrf.js';
@@ -19,7 +19,7 @@ export default async function handleState(
   { pathname, state, stateSearchParam }: Options,
 ): Promise<Response> {
   // Invalid state
-  if (!isObject(state)) {
+  if (!isRecord(state)) {
     return handleNonObjectStateSearchParam.call(this, {
       type: typeof state,
       value: stateSearchParam,

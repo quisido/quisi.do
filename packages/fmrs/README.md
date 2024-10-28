@@ -16,28 +16,44 @@ For example:
 
 ## Filters and finders
 
-- number
+- number (`value is number`)
+  - `arr.every(isNumber)`
+  - `arr.filter(filterByNumber)`
+  - `arr.find(findNumber)`
+- object (`value is object`)
+  - `arr.every(isObject)`
+  - `arr.filter(filterByObject)`
+  - `arr.find(findObject)`
+- record (`value is Record<number | string | symbol, unknown>`)
+  - `arr.every(isRecord)`
+  - `arr.filter(filterByRecord)`
+  - `arr.find(findRecord)`
 - string
+  - `arr.every(isString)`
+  - `arr.filter(filterByString)`
+  - `arr.find(findString)`
 
 ## Mappers
 
-| from    | to            |
-| ------- | ------------- |
-| entries | Record (`{}`) |
-| `Map`   | entries       |
-| `Map`   | Record (`{}`) |
-| unknown | index         |
-| unknown | string        |
+| from    | to            | example                                  |
+| ------- | ------------- | ---------------------------------------- |
+| entries | Record (`{}`) | `mapEntriesToRecord([['key', 'value']])` |
+| `Map`   | entries       | `mapMapToEntries(new Map())`             |
+| `Map`   | Record (`{}`) | `mapMapToRecord(new Map())`              |
+| unknown | index         | `arr.map(mapToIndex)`                    |
+| unknown | string        | `arr.map(mapToString)`                   |
 
 ## Reducers
 
-| from    | to            |
-| ------- | ------------- |
-| entries | Record (`{}`) |
+| from    | to            | example                                                    |
+| ------- | ------------- | ---------------------------------------------------------- |
+| entries | Record (`{}`) | `Object.entries(record).reduce(reduceEntriesToRecord, {})` |
 
 ## Sorters
 
-- arrays (by index)
-- number
-- string
-- unknown
+| items           | example                          |
+| --------------- | -------------------------------- |
+| any             | `arr.sort(sort)`                 |
+| arrays by index | `arrOfArrs.sort(sortByIndex(0))` |
+| numbers         | `arr.sort(sortNumbers)`          |
+| numbers         | `arr.sort(sortStrings)`          |

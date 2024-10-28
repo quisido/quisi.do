@@ -47,13 +47,17 @@ export enum ErrorCode {
 
   // quisi.do
   CSRF = 14,
+  InvalidAnalyticsData = 57,
   InvalidAnalyticsId = 53,
+  InvalidAnalyticsSecret = 54,
   InvalidAuthnUserIdsNamespace = 20,
   InvalidCause = 3,
   InvalidDatabase = 47,
   InvalidIsolateEnvironment = 6,
   InvalidOAuthUserId = 48,
   InvalidUsageDataset = 50,
+  MissingAnalyticsId = 55,
+  MissingAnalyticsSecret = 56,
   MissingAuthnUserIdsNamespace = 49,
   MissingDatabase = 46,
   MissingIsolateEnvironment = 7,

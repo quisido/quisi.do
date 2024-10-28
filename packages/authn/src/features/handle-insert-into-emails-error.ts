@@ -1,6 +1,6 @@
 import { Snapshot } from '@quisido/proposal-async-context';
 import type Worker from '@quisido/worker';
-import { mapUnknownToError } from 'fmrs';
+import { mapToError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
 
 export default function handleInsertIntoEmailsError(
@@ -14,7 +14,7 @@ export default function handleInsertIntoEmailsError(
     snapshot.run((): void => {
       const endTime: number = this.getNow();
       const duration: number = endTime - startTime;
-      this.logPrivateError(mapUnknownToError(err));
+      this.logPrivateError(mapToError(err));
 
       this.emitPrivateMetric({
         duration,

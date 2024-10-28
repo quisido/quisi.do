@@ -1,6 +1,6 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import type Worker from '@quisido/worker';
-import { mapUnknownToString } from 'fmrs';
+import { mapToString } from 'fmrs';
 import { MetricName } from '../../constants/metric-name.js';
 import FatalError from '../../utils/fatal-error.js';
 
@@ -13,7 +13,7 @@ export default function handleUnknownPatreonAccessTokenErrorCode(
     name: MetricName.UnknownPatreonAccessTokenErrorCode,
   });
   this.emitPrivateMetric({
-    code: mapUnknownToString(code),
+    code: mapToString(code),
     name: MetricName.UnknownPatreonAccessTokenErrorCode,
     value: JSON.stringify({
       ...json,

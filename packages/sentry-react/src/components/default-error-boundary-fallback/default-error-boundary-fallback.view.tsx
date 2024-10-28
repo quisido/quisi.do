@@ -1,5 +1,5 @@
+import { mapToString } from 'fmrs';
 import type { ReactElement } from 'react';
-import mapUnknownToString from 'unknown2string';
 
 interface Props {
   readonly error: unknown;
@@ -9,5 +9,5 @@ interface Props {
 export default function DefaultErrorBoundaryFallback({
   error,
 }: Props): ReactElement {
-  return <>{mapUnknownToString(error)}</>;
+  return <>{mapToString(error)}</>;
 }

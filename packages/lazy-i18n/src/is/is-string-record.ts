@@ -1,4 +1,4 @@
-import isRecord from '../is/is-record.js';
+import { isRecord } from 'fmrs';
 import isStringTuple from '../is/is-string-tuple.js';
 
 export default function isStringRecord(
@@ -7,6 +7,7 @@ export default function isStringRecord(
   if (!isRecord(value)) {
     return false;
   }
+
   const entries: [number | string, unknown][] = Object.entries(value);
   return entries.every(isStringTuple);
 }

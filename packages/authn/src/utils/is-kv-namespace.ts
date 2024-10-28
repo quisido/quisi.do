@@ -1,9 +1,9 @@
 /// <reference types="@cloudflare/workers-types" />
-import isObject from './is-object.js';
+import { isRecord } from 'fmrs';
 
 export default function isKVNamespace(value: unknown): value is KVNamespace {
   return (
-    isObject(value) &&
+    isRecord(value) &&
     'delete' in value &&
     'get' in value &&
     'getWithMetadata' in value &&

@@ -1,4 +1,4 @@
-import sortUnknown from './sort-unknown.js';
+import sort from './sort.js';
 
 export default function sortArraysByIndex(
   index: number,
@@ -9,6 +9,6 @@ export default function sortArraysByIndex(
   ): number {
     const valueA: unknown = arrA[index];
     const valueB: unknown = arrB[index];
-    return sortUnknown(valueA, valueB);
+    return sort(valueA, valueB);
   };
 }

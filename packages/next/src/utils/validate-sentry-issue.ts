@@ -1,8 +1,8 @@
+import { isNumber } from 'fmrs';
 import EMPTY_ARRAY from '../constants/empty-array.js';
 import type SentryIssue from '../types/sentry-issue.js';
 import assert from './assert.js';
 import isArray from './is-array.js';
-import isNumber from './is-number.js';
 import validateArray from './validate-array.js';
 import validateBoolean from './validate-boolean.js';
 import validateNumber from './validate-number.js';

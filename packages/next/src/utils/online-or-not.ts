@@ -1,4 +1,4 @@
-import isRecord from './is-record.js';
+import { hasKeys, isObject } from 'fmrs';
 
 export interface Options {
   readonly fetch: Window['fetch'];
@@ -22,16 +22,18 @@ export interface UptimeChecks {
 }
 
 const findUptimeChecks = (value: unknown): value is UptimeChecks =>
-  isRecord(value) &&
-  Array.isArray(value['errors']) &&
-  Array.isArray(value['messages']) &&
-  isRecord(value['result']) &&
-  typeof value['result']['id'] === 'string' &&
-  typeof value['result']['lastQueued'] === 'string' &&
-  typeof value['result']['name'] === 'string' &&
+  isObject(value) &&
+  hasKeys(value, ['errors', 'messages', 'result']) &&
+  Array.isArray(value.errors) &&
+  Array.isArray(value.messages) &&
+  isObject(value.result) &&
+  hasKeys(value.result, ['id', 'lastQueued', 'name', 'status', 'url']) &&
+  typeof value.result.id === 'string' &&
+  typeof value.result.lastQueued === 'string' &&
+  typeof value.result.name === 'string' &&
   // Technical debt: `status` should be a string literal, like 'ONLINE'.
-  typeof value['result']['status'] === 'string' &&
-  typeof value['result']['url'] === 'string';
+  typeof value.result.status === 'string' &&
+  typeof value.result.url === 'string';
 
 const validateUptimeChecks = (value: unknown): UptimeChecks => {
   if (!findUptimeChecks(value)) {

@@ -1,7 +1,7 @@
 import type Worker from '@quisido/worker';
+import { isRecord } from 'fmrs';
 import { OAuthProvider } from '../../constants/oauth-provider.js';
 import writeOAuthResponse from '../../features/shared/write-oauth-response.js';
-import isObject from '../../utils/is-object.js';
 import mapToOptionalBoolean from '../../utils/map-to-optional-boolean.js';
 import mapToOptionalString from '../../utils/map-to-optional-string.js';
 import handleInvalidPatreonIdentityAttributes from './handle-invalid-patreon-identity-attributes.js';
@@ -15,7 +15,7 @@ export default function parsePatreonIdentity(
   identity: Record<string, unknown>,
 ): PatreonIdentity {
   const { data } = identity;
-  if (!isObject(data)) {
+  if (!isRecord(data)) {
     return handleInvalidPatreonIdentityData.call(this, data);
   }
 
@@ -28,7 +28,7 @@ export default function parsePatreonIdentity(
     writeOAuthResponse.call(this, OAuthProvider.Patreon, id, identity),
   );
 
-  if (!isObject(attributes)) {
+  if (!isRecord(attributes)) {
     return handleInvalidPatreonIdentityAttributes.call(this, {
       attributes,
       data,

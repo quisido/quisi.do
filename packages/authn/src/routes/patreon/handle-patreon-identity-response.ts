@@ -1,5 +1,5 @@
 import type Worker from '@quisido/worker';
-import isObject from '../../utils/is-object.js';
+import { isRecord } from 'fmrs';
 import handleForbiddenPatreonIdentityResponse from './handle-forbidden-patreon-identity-response.js';
 import handleInvalidPatreonIdentityResponse from './handle-invalid-patreon-identity-response.js';
 import handleInvalidPatreonIdentity from './handle-invalid-patreon-identity.js';
@@ -41,7 +41,7 @@ export default async function handlePatreonIdentityResponse(
         );
       }
 
-      if (!isObject(identity)) {
+      if (!isRecord(identity)) {
         return handleInvalidPatreonIdentity.call(this, identity);
       }
 

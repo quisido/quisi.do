@@ -1,6 +1,6 @@
 {
   "name": "cloudflare-utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "quisi.do <cloudflare-utils@quisi.do>",
   "description": "utilities for Cloudflare workers",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/cloudflare-utils#readme",
@@ -42,7 +42,8 @@
     "vitest:watch": "vitest watch"
   },
   "dependencies": {
-    "@cloudflare/workers-types": "^4.20241018.0"
+    "@cloudflare/workers-types": "^4.20241018.0",
+    "fmrs": "workspace:^"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",

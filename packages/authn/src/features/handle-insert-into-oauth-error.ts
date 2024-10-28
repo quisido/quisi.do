@@ -1,6 +1,6 @@
 import { Snapshot } from '@quisido/proposal-async-context';
 import type Worker from '@quisido/worker';
-import { mapUnknownToError } from 'fmrs';
+import { mapToError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
 
 export default function handleInsertIntoOAuthError(
@@ -13,7 +13,7 @@ export default function handleInsertIntoOAuthError(
   const handleCatch = (err: unknown): void => {
     snapshot.run((): void => {
       const endTime: number = this.getNow();
-      this.logPrivateError(mapUnknownToError(err));
+      this.logPrivateError(mapToError(err));
 
       this.emitPrivateMetric({
         duration: endTime - startTime,
