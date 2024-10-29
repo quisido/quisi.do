@@ -95,6 +95,20 @@ export default class Worker {
     return state;
   }
 
+  public fetchJson = async <T>(
+    requestInfo: RequestInfo,
+    init: RequestInit,
+    handleResponse: (value: unknown) => T,
+  ): Promise<T> => {
+    const fetch: Fetcher['fetch'] = this.getFetch();
+    return await this.snapshot(
+      fetch(requestInfo, init),
+      async (response: Response): Promise<T> => {
+        return await this.snapshot(response.json(), handleResponse);
+      },
+    );
+  };
+
   public getAnalyticsEngineDataset = (name: string): AnalyticsEngineDataset => {
     return this.#fetchContext.getAnalyticsEngineDataset(name);
   };

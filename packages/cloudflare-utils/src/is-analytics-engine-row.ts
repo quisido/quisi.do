@@ -24,7 +24,6 @@ const NUMBER_KEYS = [
   'double18',
   'double19',
   'double20',
-  'timestamp',
 ] as const;
 
 const STRING_KEYS = [
@@ -50,6 +49,7 @@ const STRING_KEYS = [
   'blob20',
   'dataset',
   'index1',
+  'timestamp',
 ] as const;
 
 export default function isAnalyticsEngineRow(

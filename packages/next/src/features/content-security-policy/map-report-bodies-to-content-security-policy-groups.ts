@@ -1,7 +1,6 @@
-import { sortEntriesByKey, sortNumbers } from 'fmrs';
+import { not, sortEntriesByKey, sortNumbers } from 'fmrs';
 import EMPTY_ARRAY from '../../constants/empty-array.js';
 import type ReportBody from '../../types/content-security-policy-report-body.js';
-import not from '../../utils/not.js';
 import type Group from './content-security-policy-group.js';
 import type Report from './content-security-policy-report.js';
 import mapBlockedUrlToOriginPathname from './map-blocked-url-to-origin-pathname.js';

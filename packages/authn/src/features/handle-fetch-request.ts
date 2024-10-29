@@ -1,6 +1,6 @@
 import type Worker from '@quisido/worker';
 import handleWhoAmIFetchRequest from '../routes/whoami/handle-whoami-fetch-request.js';
-import handleAnalyticsFetchRequest from './handle-analytics-fetch-request.js';
+import handleAnalyticsFetchRequest from './analytics/handle-analytics-fetch-request.js';
 import handleInvalidPathname from './handle-invalid-pathname.js';
 import handleAuthenticationPathname from './oauth/handle-authentication-pathname.js';
 import isAuthenticationPathname from './oauth/is-authentication-pathname.js';

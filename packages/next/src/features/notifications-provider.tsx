@@ -1,5 +1,6 @@
 'use client';
 
+import { isNot } from 'fmrs';
 import {
   memo,
   useMemo,
@@ -16,7 +17,6 @@ import type Notification from '../types/notification.js';
 import type { WithKey } from '../types/with-key.js';
 import append from '../utils/append.js';
 import filter from '../utils/filter.js';
-import isNot from '../utils/is-not.js';
 import mapErrorToNotification from '../utils/map-error-to-notification.js';
 import type AuthnErrorNotification from './authn-error-notification.js';
 

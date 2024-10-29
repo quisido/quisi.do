@@ -47,7 +47,6 @@ export enum ErrorCode {
 
   // quisi.do
   CSRF = 14,
-  InvalidAnalyticsData = 57,
   InvalidAnalyticsId = 53,
   InvalidAnalyticsSecret = 54,
   InvalidAuthnUserIdsNamespace = 20,
