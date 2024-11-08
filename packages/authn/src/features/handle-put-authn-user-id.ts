@@ -20,7 +20,7 @@ export default function handlePutAuthnUserId(
       setAuthnUserIdInMemory.call(this, authnId, userId);
 
       this.emitPublicMetric({
-        endTime: this.getNow(),
+        endTime: this.now(),
         name: MetricName.AuthnIdCreated,
         startTime,
       });

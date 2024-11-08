@@ -99,5 +99,9 @@
     "eslint.useFlatConfig": true,
     "typescript.enablePromptUseWorkspaceTsdk": true,
     "typescript.tsdk": ".yarn/sdks/typescript/lib",
+
+    "files.associations": {
+      "**/config/api-extractor.json": "jsonc",
+    },
   },
 }

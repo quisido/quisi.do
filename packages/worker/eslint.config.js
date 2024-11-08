@@ -4,6 +4,14 @@ import configs from '@quisido/eslint-config';
 export default [
   ...configs,
 
+  // Rule: no-magic-numbers
+  {
+    files: ['src/metric.ts'],
+    rules: {
+      'no-magic-numbers': 'off',
+    },
+  },
+
   {
     files: [
       'src/account-number.ts',
@@ -68,6 +76,9 @@ export default [
   {
     files: ['src/worker.ts'],
     rules: {
+      '@typescript-eslint/no-this-alias': 'off',
+      'consistent-this': 'off',
+      'max-classes-per-file': 'off',
       'max-params': 'off',
       'no-use-before-define': 'off',
     },

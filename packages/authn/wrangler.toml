@@ -4,6 +4,7 @@ main = "src/index.ts"
 name = "quisido-authn-dev"
 r2_buckets = [{ binding = 'AUTHN_DATA', bucket_name = 'authn-dev' }]
 tsconfig = "./tsconfig.json"
+upload_source_maps = true
 
 analytics_engine_datasets = [
   { binding = "PRIVATE_DATASET", dataset = "AUTHN_PRIVATE_DEV" },

@@ -8,6 +8,6 @@
     "outDir": "dist",
     "rootDir": "src",
     "skipLibCheck": false,
-    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/worker/src/"
+    "sourceRoot": "../src/"
   }
 }

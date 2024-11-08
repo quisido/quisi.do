@@ -1,0 +1,67 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
+  "bundledPackages": [],
+  "enumMemberOrder": "by-name",
+  "projectFolder": "..",
+  "mainEntryPointFilePath": "<projectFolder>/dist/index.d.ts",
+  "newlineKind": "lf",
+  "testMode": false,
+
+  "apiReport": {
+    "enabled": true,
+    "includeForgottenExports": true,
+    "reportFileName": "<unscopedPackageName>",
+    "reportFolder": "<projectFolder>/etc/",
+    "reportTempFolder": "<projectFolder>/temp/",
+    "reportVariants": ["complete"]
+  },
+
+  "compiler": {
+    "skipLibCheck": false,
+    "tsconfigFilePath": "<projectFolder>/tsconfig.prepack.json"
+  },
+
+  "docModel": {
+    "apiJsonFilePath": "<projectFolder>/temp/<unscopedPackageName>.api.json",
+    "enabled": true,
+    "includeForgottenExports": false,
+    "projectFolderUrl": "https://github.com/quisido/quisi.do/tree/main/packages/worker"
+  },
+
+  "dtsRollup": {
+    "alphaTrimmedFilePath": "",
+    "betaTrimmedFilePath": "",
+    "enabled": true,
+    "omitTrimmingComments": true,
+    "publicTrimmedFilePath": "",
+    "untrimmedFilePath": "<projectFolder>/dist/index.d.ts"
+  },
+
+  "tsdocMetadata": {
+    "enabled": true,
+    "tsdocMetadataFilePath": "<projectFolder>/dist/tsdoc-metadata.json"
+  },
+
+  "messages": {
+    "compilerMessageReporting": {
+      "default": {
+        "addToApiReportFile": true,
+        "logLevel": "warning"
+      }
+    },
+
+    "extractorMessageReporting": {
+      "default": {
+        "addToApiReportFile": true,
+        "logLevel": "warning"
+      }
+    },
+
+    "tsdocMessageReporting": {
+      "default": {
+        "addToApiReportFile": true,
+        "logLevel": "warning"
+      }
+    }
+  }
+}

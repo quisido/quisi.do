@@ -10,9 +10,9 @@ import { TEST_CONSOLE } from './test-console.js';
 
 interface Options {
   readonly env?: Partial<Record<string, unknown>>;
-  readonly getNow?: (() => number) | undefined;
+  readonly now?: (() => number) | undefined;
 
-  readonly createExportedHandler: (
+  readonly ExportedHandler: new (
     options: CreateExportedHandlerOptions,
   ) => ExportedHandler;
 }
@@ -30,16 +30,12 @@ export default class WorkerTest {
   readonly #fetchHandlers = new Map<string, Response>();
   readonly #passThroughOnException: () => void = vi.fn();
 
-  public constructor({
-    createExportedHandler,
-    env = DEFAULT_ENV,
-    getNow,
-  }: Options) {
+  public constructor({ ExportedHandler, env = DEFAULT_ENV, now }: Options) {
     this.#env = env;
-    this.#exportedHandler = createExportedHandler({
+    this.#exportedHandler = new ExportedHandler({
       console: TEST_CONSOLE,
       fetch: this.#fetch,
-      getNow,
+      now,
     });
   }
 

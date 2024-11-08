@@ -1,13 +1,13 @@
 /// <reference types="@cloudflare/workers-types" />
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { mapToError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
 import FatalError from '../utils/fatal-error.js';
+import type AuthnFetchHandler from './authn-fetch-handler.js';
 import ErrorResponse from './error-response.js';
 
 export default function handleFetchError(
-  this: Worker,
+  this: AuthnFetchHandler,
   err: unknown,
   returnPath?: string,
 ): Response {

@@ -39,7 +39,7 @@ export default async function handleOptions(
   // Not found
   if (typeof result === 'undefined') {
     // Use({
-    //   Account: AccountNumber.Quisido,
+    //   Account: AccountNumber.quisido,
     //   Count: ONCE,
     //   Project: projectId,
     //   Type: UsageType.D1Read,
@@ -54,7 +54,7 @@ export default async function handleOptions(
   const { origins, userId } = result;
   if (typeof origins !== 'string' || typeof userId !== 'number') {
     // Use({
-    //   Account: AccountNumber.Quisido,
+    //   Account: AccountNumber.quisido,
     //   Count: ONCE,
     //   Project: projectId,
     //   Type: UsageType.D1Read,

@@ -1,9 +1,9 @@
-import type Worker from '@quisido/worker';
 import { MetricName } from '../constants/metric-name.js';
+import type AuthnFetchHandler from './authn-fetch-handler.js';
 
 const DEFAULT_HOST = 'quisi.do';
 
-export default function getHost(this: Worker): string {
+export default function getHost(this: AuthnFetchHandler): string {
   const host: unknown = this.getEnv('HOST');
   if (typeof host === 'string' && host !== '') {
     return host;

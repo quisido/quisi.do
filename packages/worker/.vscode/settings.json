@@ -1,4 +1,8 @@
 {
+  "files.associations": {
+    "**/config/api-extractor.json": "jsonc",
+  },
+
   "files.exclude": {
     "coverage/": true,
     "dist/": true,

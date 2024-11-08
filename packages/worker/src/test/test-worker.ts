@@ -33,7 +33,7 @@ export default class TestWorker extends Worker {
       onFetchRequest,
     });
 
-    const { fetch: handleFetch } = this.createExportedHandler({
+    const { fetch: handleFetch } = new this.ExportedHandler({
       console: TEST_CONSOLE,
       fetch,
     });

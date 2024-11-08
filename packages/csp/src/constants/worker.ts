@@ -8,7 +8,7 @@ export const {
   affect,
   emitPrivateMetric,
   emitPublicMetric,
-  createExportedHandler,
+  ExportedHandler,
   getD1Database,
   getRequestHeaders,
   getRequestMethod,

@@ -4,9 +4,9 @@
  * and cheaper than via the KV namespace.
  */
 
-import type Worker from '@quisido/worker';
 import { MetricName } from '../constants/metric-name.js';
 import { MILLISECONDS_PER_DAY } from '../constants/time.js';
+import type AuthnFetchHandler from './authn-fetch-handler.js';
 
 interface State {
   readonly expiration: number;
@@ -16,7 +16,7 @@ interface State {
 const AUTHN_USER_ID_MAP: Map<string, State> = new Map<string, State>();
 
 export function getAuthnUserIdFromMemory(
-  this: Worker,
+  this: AuthnFetchHandler,
   authnId: string,
 ): number | undefined {
   const state: State | undefined = AUTHN_USER_ID_MAP.get(authnId);
@@ -26,7 +26,7 @@ export function getAuthnUserIdFromMemory(
 
   // Clean up! The cache has expired. 🧼
   const { expiration, userId } = state;
-  if (expiration < this.getNow()) {
+  if (expiration < this.now()) {
     AUTHN_USER_ID_MAP.delete(authnId);
 
     this.emitPublicMetric({
@@ -47,12 +47,12 @@ export function getAuthnUserIdFromMemory(
 }
 
 export function setAuthnUserIdInMemory(
-  this: Worker,
+  this: AuthnFetchHandler,
   authnId: string,
   userId: number,
 ): void {
   AUTHN_USER_ID_MAP.set(authnId, {
-    expiration: this.getNow() + MILLISECONDS_PER_DAY,
+    expiration: this.now() + MILLISECONDS_PER_DAY,
     userId,
   });
 }

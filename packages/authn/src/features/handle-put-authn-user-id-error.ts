@@ -18,7 +18,7 @@ export default function handlePutAuthnUserIdError(
 
   return (err: unknown): void => {
     snapshot.run((): void => {
-      const endTime: number = this.getNow();
+      const endTime: number = this.now();
       const duration: number = endTime - startTime;
 
       // If the KV namespace failed, fallback to the memory cache.

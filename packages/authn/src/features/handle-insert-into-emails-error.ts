@@ -8,11 +8,11 @@ export default function handleInsertIntoEmailsError(
   userId: number,
 ): (err: unknown) => void {
   const snapshot: Snapshot = new Snapshot();
-  const startTime: number = this.getNow();
+  const startTime: number = this.now();
 
   const handleCatch = (err: unknown): void => {
     snapshot.run((): void => {
-      const endTime: number = this.getNow();
+      const endTime: number = this.now();
       const duration: number = endTime - startTime;
       this.logPrivateError(mapToError(err));
 

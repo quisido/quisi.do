@@ -18,11 +18,11 @@ export interface Options extends FetchContextOptions {
   readonly ctx: ExecutionContext;
   readonly env: Readonly<Record<string, unknown>>;
   readonly fetch: Fetcher['fetch'];
-  readonly getNow?: (() => number) | undefined;
   readonly invalidPrivateDatasetMetricName: string;
   readonly invalidPublicDatasetMetricName: string;
   readonly missingPrivateDatasetMetricName: string;
   readonly missingPublicDatasetMetricName: string;
+  readonly now?: (() => number) | undefined;
   readonly request: IncomingRequest;
 }
 
@@ -36,7 +36,7 @@ export default class WorkerFetchContext extends FetchContext {
     ctx,
     env,
     fetch,
-    getNow,
+    now,
     invalidPrivateDatasetMetricName,
     invalidPublicDatasetMetricName,
     invalidTraceParentMetricName,
@@ -48,9 +48,9 @@ export default class WorkerFetchContext extends FetchContext {
     super({
       ctx,
       env,
-      getNow,
       invalidTraceParentMetricName,
       missingTraceParentMetricName,
+      now,
       request,
     });
 

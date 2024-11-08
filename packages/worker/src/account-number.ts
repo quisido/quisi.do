@@ -1,3 +1,3 @@
 export enum AccountNumber {
-  Quisido = 1,
+  quisido = 1,
 }

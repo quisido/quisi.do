@@ -18,7 +18,7 @@ export default async function writeOAuthResponse(
     JSON.stringify(response),
     {
       customMetadata: {
-        timestamp: this.getNow().toString(),
+        timestamp: this.now().toString(),
       },
       httpMetadata: {
         contentType: 'application/json',

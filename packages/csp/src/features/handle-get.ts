@@ -71,7 +71,7 @@ export default async function handleGet(projectId: number): Promise<Response> {
     });
 
     // Use({
-    //   Account: AccountNumber.Quisido,
+    //   Account: AccountNumber.quisido,
     //   Project: DEFAULT_PROJECT_ID,
     //   Type: UsageType.D1Read,
     // });
@@ -99,7 +99,7 @@ export default async function handleGet(projectId: number): Promise<Response> {
     );
 
     // Use({
-    //   Account: AccountNumber.Quisido,
+    //   Account: AccountNumber.quisido,
     //   Project: DEFAULT_PROJECT_ID,
     //   Type: UsageType.D1Read,
     // });

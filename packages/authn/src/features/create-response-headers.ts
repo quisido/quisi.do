@@ -1,7 +1,5 @@
-import type Worker from '@quisido/worker';
 import { SECONDS_PER_DAY } from '../constants/time.js';
-import getCookieDomain from './get-cookie-domain.js';
-import getHost from './get-host.js';
+import type AuthnFetchHandler from './authn-fetch-handler.js';
 
 interface Options {
   readonly authnId: string;
@@ -9,18 +7,17 @@ interface Options {
 }
 
 export default function createResponseHeaders(
-  this: Worker,
+  this: AuthnFetchHandler,
   { authnId, returnPath }: Options,
 ): Headers {
-  const cookieDomain: string = getCookieDomain.call(this);
-  const host: string = getHost.call(this);
+  const { host } = this;
 
   return new Headers({
     'content-location': `https://${host}${returnPath}`,
     location: `https://${host}${returnPath}`,
     'set-cookie': [
       `__Secure-Authentication-ID=${authnId}`,
-      `Domain=${cookieDomain}`,
+      `Domain=${this.cookieDomain}`,
       `Max-Age=${SECONDS_PER_DAY.toString()}`,
       'Partitioned',
       'Path=/',

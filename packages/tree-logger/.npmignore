@@ -1,7 +1,6 @@
 /.vscode/
 /coverage/
 /node_modules/
-/src/
 /.*.json
 /.*ignore
 /.*rc.*

@@ -1,7 +1,7 @@
-import type Worker from '@quisido/worker';
+import type AuthnFetchHandler from './authn-fetch-handler.js';
 
 export default function createThrottler(): (
-  this: Worker,
+  this: AuthnFetchHandler,
   key: number | string | symbol,
   ms: number,
 ) => void {
@@ -11,12 +11,12 @@ export default function createThrottler(): (
   >();
 
   return function throttle(
-    this: Worker,
+    this: AuthnFetchHandler,
     key: number | string | symbol,
     ms: number,
   ): void {
     const lastCallTime: number | undefined = map.get(key);
-    const now: number = this.getNow();
+    const now: number = this.now();
 
     // Throttle if the last call time was less than `ms` ago.
     if (typeof lastCallTime !== 'undefined' && lastCallTime > now - ms) {

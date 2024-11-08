@@ -1,11 +1,12 @@
 /.vscode/
+/config/
 /coverage/
 /node_modules/
-/src/
+/scripts/
 /.*.json
+/.*cache
 /.*ignore
 /.*rc.*
-/.eslintcache
 /*.config.*
 /*.cpuprofile
 /*.iml

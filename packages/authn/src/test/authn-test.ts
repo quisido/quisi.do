@@ -1,7 +1,7 @@
 import { StatusCode } from 'cloudflare-utils';
 import { expect } from 'vitest';
 import { SECONDS_PER_DAY } from '../constants/time.js';
-import { WORKER } from '../constants/worker.js';
+import WORKER from '../constants/worker.js';
 import { EXPECT_ANY_NUMBER } from '../test/expect-any.js';
 import AuthnTestD1Database from './authn-test-d1-database.js';
 import createAuthnTestHeaders from './create-authn-test-headers.js';
@@ -104,7 +104,7 @@ export default class AuthnTest extends WorkerTest {
     );
 
     super({
-      createExportedHandler: WORKER.createExportedHandler,
+      ExportedHandler: WORKER.ExportedHandler,
 
       env: {
         ...getAuthnTestEnv(options),
@@ -114,7 +114,7 @@ export default class AuthnTest extends WorkerTest {
         PATREON_OAUTH_HOST: patreonOAuthHost,
       },
 
-      getNow: (): number => {
+      now: (): number => {
         return this.#now ?? Date.now();
       },
     });
