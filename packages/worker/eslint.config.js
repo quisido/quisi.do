@@ -4,6 +4,14 @@ import configs from '@quisido/eslint-config';
 export default [
   ...configs,
 
+  // Rule: max-statements
+  {
+    files: ['src/exported-handler.ts'],
+    rules: {
+      'max-statements': 'off',
+    },
+  },
+
   // Rule: no-magic-numbers
   {
     files: ['src/metric.ts'],
@@ -34,13 +42,6 @@ export default [
   },
 
   {
-    files: ['src/features/handle-fetch-request.ts'],
-    rules: {
-      'max-statements': 'off',
-    },
-  },
-
-  {
     files: ['src/fetch-context.test.ts'],
     rules: {
       '@typescript-eslint/only-throw-error': 'off',
@@ -59,17 +60,6 @@ export default [
     files: ['src/snapshot.ts'],
     rules: {
       'max-params': 'off',
-    },
-  },
-
-  {
-    files: [
-      'src/test/expect-private-metric.ts',
-      'src/test/expect-public-metric.ts',
-    ],
-
-    rules: {
-      'max-statements': 'off',
     },
   },
 

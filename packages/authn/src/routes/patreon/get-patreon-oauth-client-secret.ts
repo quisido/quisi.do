@@ -1,9 +1,11 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import FatalError from '../../utils/fatal-error.js';
 
-export default function getPatreonOAuthClientSecret(this: Worker): string {
+export default function getPatreonOAuthClientSecret(
+  this: AuthnFetchHandler,
+): string {
   const secret: unknown = this.getEnv('PATREON_OAUTH_CLIENT_SECRET');
 
   if (typeof secret === 'string') {
@@ -11,17 +13,15 @@ export default function getPatreonOAuthClientSecret(this: Worker): string {
   }
 
   if (typeof secret === 'undefined') {
-    this.emitPublicMetric({ name: MetricName.MissingPatreonOAuthClientSecret });
+    this.emitPublicMetric(MetricName.MissingPatreonOAuthClientSecret);
     throw new FatalError(ErrorCode.MissingPatreonOAuthClientSecret);
   }
 
-  this.emitPrivateMetric({
-    name: MetricName.InvalidPatreonOAuthClientSecret,
+  this.emitPrivateMetric(MetricName.InvalidPatreonOAuthClientSecret, {
     value: JSON.stringify(secret),
   });
 
-  this.emitPublicMetric({
-    name: MetricName.InvalidPatreonOAuthClientSecret,
+  this.emitPublicMetric(MetricName.InvalidPatreonOAuthClientSecret, {
     type: typeof secret,
   });
 

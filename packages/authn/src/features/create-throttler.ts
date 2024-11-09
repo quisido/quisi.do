@@ -1,5 +1,9 @@
 import type AuthnFetchHandler from './authn-fetch-handler.js';
 
+/**
+ * TODO: Make each throttler static on the AuthnFetchHandler.
+ */
+
 export default function createThrottler(): (
   this: AuthnFetchHandler,
   key: number | string | symbol,

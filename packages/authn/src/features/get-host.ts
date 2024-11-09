@@ -10,17 +10,15 @@ export default function getHost(this: AuthnFetchHandler): string {
   }
 
   if (typeof host === 'undefined' || host === '') {
-    this.emitPublicMetric({ name: MetricName.MissingHost });
+    this.emitPublicMetric(MetricName.MissingHost);
     return DEFAULT_HOST;
   }
 
-  this.emitPrivateMetric({
-    name: MetricName.InvalidHost,
+  this.emitPrivateMetric(MetricName.InvalidHost, {
     value: JSON.stringify(host),
   });
 
-  this.emitPublicMetric({
-    name: MetricName.InvalidHost,
+  this.emitPublicMetric(MetricName.InvalidHost, {
     type: typeof host,
   });
 

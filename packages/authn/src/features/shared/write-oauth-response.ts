@@ -1,14 +1,13 @@
-import type Worker from '@quisido/worker';
 import { type OAuthProvider } from '../../constants/oauth-provider.js';
-import getDataBucket from '../get-data-bucket.js';
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
 
 export default async function writeOAuthResponse(
-  this: Worker,
+  this: AuthnFetchHandler,
   provider: OAuthProvider,
   id: string,
   response: Record<string, unknown>,
 ): Promise<void> {
-  const dataBucket: R2Bucket | null = getDataBucket.call(this);
+  const { dataBucket } = this;
   if (dataBucket === null) {
     return;
   }

@@ -1,9 +1,9 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
 import FatalError from '../../utils/fatal-error.js';
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
 
-export default function getAnalyticsId(this: Worker): string {
+export default function getAnalyticsId(this: AuthnFetchHandler): string {
   const id: unknown = this.getEnv('ANALYTICS_ID');
   if (typeof id === 'string') {
     return id;
@@ -13,13 +13,11 @@ export default function getAnalyticsId(this: Worker): string {
     throw new FatalError(ErrorCode.MissingAnalyticsId);
   }
 
-  this.emitPrivateMetric({
-    name: MetricName.InvalidAnalyticsId,
+  this.emitPrivateMetric(MetricName.InvalidAnalyticsId, {
     value: JSON.stringify(id),
   });
 
-  this.emitPublicMetric({
-    name: MetricName.InvalidAnalyticsId,
+  this.emitPublicMetric(MetricName.InvalidAnalyticsId, {
     type: typeof id,
   });
 

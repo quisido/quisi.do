@@ -1,17 +1,16 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import FatalError from '../../utils/fatal-error.js';
 
 export default function handleMissingPatreonIdentityId(
-  this: Worker,
+  this: AuthnFetchHandler,
   data: Record<string, unknown>,
 ): never {
-  this.emitPublicMetric({ name: MetricName.MissingPatreonIdentityId });
+  this.emitPublicMetric(MetricName.MissingPatreonIdentityId);
 
-  this.emitPrivateMetric({
+  this.emitPrivateMetric(MetricName.MissingPatreonIdentityId, {
     data: JSON.stringify(data),
-    name: MetricName.MissingPatreonIdentityId,
   });
 
   throw new FatalError(ErrorCode.MissingPatreonIdentityId);

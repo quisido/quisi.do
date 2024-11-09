@@ -1,10 +1,10 @@
-import type Worker from '@quisido/worker';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import handleInvalidInvalidPatreonAccessTokenRequestDescription from './handle-invalid-invalid-patreon-access-token-request-description.js';
 import handleInvalidPatreonAccessTokenRequestDescription from './handle-invalid-patreon-access-token-request-description.js';
 import handleMissingInvalidPatreonAccessTokenRequestDescription from './handle-missing-invalid-patreon-access-token-request-description.js';
 
 export default function handleInvalidPatreonAccessTokenRequest(
-  this: Worker,
+  this: AuthnFetchHandler,
   json: Record<string, unknown>,
 ): never {
   const { error_description: description } = json;

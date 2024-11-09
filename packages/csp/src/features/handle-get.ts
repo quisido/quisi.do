@@ -6,7 +6,6 @@ import {
   emitPublicMetric,
   getD1Database,
   getRequestSearchParam,
-  logPrivateError,
 } from '../constants/worker.js';
 import query from '../utils/query.js';
 
@@ -41,9 +40,7 @@ export default async function handleGet(projectId: number): Promise<Response> {
   // Key
   const key: string | null = getRequestSearchParam('key');
   if (key === null) {
-    emitPublicMetric({
-      name: MetricName.MissingGetKey,
-    });
+    emitPublicMetric(MetricName.MissingGetKey);
 
     return new Response(
       JSON.stringify({
@@ -66,12 +63,10 @@ export default async function handleGet(projectId: number): Promise<Response> {
 
   // Not found
   if (typeof keysRow === 'undefined') {
-    emitPublicMetric({
-      name: MetricName.InvalidGetKey,
-    });
+    emitPublicMetric(MetricName.InvalidGetKey);
 
     // Use({
-    //   Account: AccountNumber.quisido,
+    //   Account: 1,
     //   Project: DEFAULT_PROJECT_ID,
     //   Type: UsageType.D1Read,
     // });
@@ -90,16 +85,14 @@ export default async function handleGet(projectId: number): Promise<Response> {
   // Bad gateway
   const { userId } = keysRow;
   if (typeof userId !== 'number') {
-    emitPublicMetric({
-      name: MetricName.InvalidDatabaseProjectRow,
-    });
+    emitPublicMetric(MetricName.InvalidDatabaseProjectRow);
 
-    logPrivateError(
+    logError(
       new Error(`Invalid database project row: ${projectId.toString()}`),
     );
 
     // Use({
-    //   Account: AccountNumber.quisido,
+    //   Account: 1,
     //   Project: DEFAULT_PROJECT_ID,
     //   Type: UsageType.D1Read,
     // });

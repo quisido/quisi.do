@@ -1,21 +1,19 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import FatalError from '../../utils/fatal-error.js';
 
 export default function handleMissingPatreonAccessTokenErrorCode(
-  this: Worker,
+  this: AuthnFetchHandler,
   body: string,
   json: Record<string, unknown>,
 ): never {
-  this.emitPrivateMetric({
-    name: MetricName.MissingPatreonAccessTokenErrorCode,
+  this.emitPrivateMetric(MetricName.MissingPatreonAccessTokenErrorCode, {
     value: body,
   });
 
-  this.emitPublicMetric({
+  this.emitPublicMetric(MetricName.MissingPatreonAccessTokenErrorCode, {
     keys: Object.keys(json).join(', '),
-    name: MetricName.MissingPatreonAccessTokenErrorCode,
   });
 
   throw new FatalError(ErrorCode.MissingPatreonAccessTokenErrorCode);

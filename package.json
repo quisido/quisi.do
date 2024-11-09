@@ -53,7 +53,7 @@
     "serve": "yarn packages/next run serve",
     "start": "echo \"Please use either `yarn run dev` or `yarn run serve` instead.\" && exit 1",
     "test": "monorepo-template-test",
-    "up": "yarn up \"@!(monorepo-template|quisido)/*\" \"!(aws-rum-react|cjs-ts|cloudflare-utils|fmrs|fullstory-react|lazy-i18n|mock-next-router|number-format-react|proposal-async-context|react-datadog|sentry-react|use-shallow-memo)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode",
+    "up": "yarn up \"@!(monorepo-template|quisido)/*\" \"!(aws-rum-react|cjs-ts|cloudflare-utils|fmrs|fullstory-react|lazy-i18n|mock-next-router|number-format-react|react-datadog|sentry-react|use-shallow-memo)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode",
     "vitest": "vitest",
     "vitest:run": "exit 0 || vitest run",
     "vitest:watch": "vitest watch",

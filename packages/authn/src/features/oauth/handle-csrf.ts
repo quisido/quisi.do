@@ -1,6 +1,6 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import ErrorResponse from '../error-response.js';
 
 interface Options {
@@ -9,14 +9,13 @@ interface Options {
 }
 
 export default function handleCrossSiteRequestForgery(
-  this: Worker,
+  this: AuthnFetchHandler,
   { cookie, state }: Options,
 ): Response {
-  this.emitPublicMetric({ name: MetricName.CSRF });
+  this.emitPublicMetric(MetricName.CSRF);
 
-  this.emitPrivateMetric({
+  this.emitPrivateMetric(MetricName.CSRF, {
     cookie,
-    name: MetricName.CSRF,
     state,
   });
 

@@ -1,18 +1,16 @@
-import type Worker from '@quisido/worker';
 import { DEFAULT_COOKIE_DOMAIN } from '../constants/default-cookie-domain.js';
 import { MetricName } from '../constants/metric-name.js';
+import type AuthnFetchHandler from './authn-fetch-handler.js';
 
 export default function handleInvalidCookieDomain(
-  this: Worker,
+  this: AuthnFetchHandler,
   domain: unknown,
 ): string {
-  this.emitPrivateMetric({
-    name: MetricName.InvalidCookieDomain,
+  this.emitPrivateMetric(MetricName.InvalidCookieDomain, {
     value: JSON.stringify(domain),
   });
 
-  this.emitPublicMetric({
-    name: MetricName.InvalidCookieDomain,
+  this.emitPublicMetric(MetricName.InvalidCookieDomain, {
     type: typeof domain,
   });
 

@@ -1,12 +1,12 @@
-import type Worker from '@quisido/worker';
 import { Gender } from '../../constants/gender.js';
 import { OAuthProvider } from '../../constants/oauth-provider.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import createResponse from '../../features/create-response.js';
 import putDatabaseUser from '../../features/put-database-user.js';
 import type PatreonIdentity from './patreon-identity.js';
 
 export default async function handlePatreonOAuthUserId(
-  this: Worker,
+  this: AuthnFetchHandler,
   userId: number | null,
   identity: PatreonIdentity,
   returnPath: string,
@@ -30,14 +30,17 @@ export default async function handlePatreonOAuthUserId(
     return email;
   };
 
-  return await this.snapshot(
-    putDatabaseUser.call(this, OAuthProvider.Patreon, oAuthId, {
+  const newUserId: number = await putDatabaseUser.call(
+    this,
+    OAuthProvider.Patreon,
+    oAuthId,
+    {
       email: getEmail(),
       firstName,
       fullName,
       gender,
-    }),
-    (newUserId: number): Response =>
-      createResponse.call(this, { returnPath, userId: newUserId }),
+    },
   );
+
+  return createResponse.call(this, { returnPath, userId: newUserId });
 }

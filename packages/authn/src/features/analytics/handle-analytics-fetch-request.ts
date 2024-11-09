@@ -1,7 +1,5 @@
-import type Worker from '@quisido/worker';
 import WhoAmIOptionsResponse from '../../routes/whoami/whoami-options-response.js';
-import getAnalyticsId from './get-analytics-id.js';
-import getAnalyticsSecret from './get-analytics-secret.js';
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import handleAnalyticsEngineResponse from './handle-analytics-engine-response.js';
 
 const ANALYTICS_BODY = `
@@ -11,11 +9,11 @@ ORDER BY timestamp DESC;
 `;
 
 export default async function handleAnalyticsFetchRequest(
-  this: Worker,
+  this: AuthnFetchHandler,
 ): Promise<Response> {
   // Options
-  const method: string = this.getRequestMethod();
-  if (method === 'OPTIONS') {
+  const { requestMethod } = this;
+  if (requestMethod === 'OPTIONS') {
     /**
      *   Technical debt: The `/whoami/` endpoint happens to have the same
      * response headers as we want here. As time permits, we should clone it to
@@ -24,18 +22,18 @@ export default async function handleAnalyticsFetchRequest(
     return new WhoAmIOptionsResponse(this);
   }
 
-  const id: string = getAnalyticsId.call(this);
-  const secret: string = getAnalyticsSecret.call(this);
-  return await this.fetchJson(
-    `https://api.cloudflare.com/client/v4/accounts/${id}/analytics_engine/sql`,
+  const { analyticsId, analyticsSecret } = this;
+  const response: unknown = await this.fetchJson(
+    `https://api.cloudflare.com/client/v4/accounts/${analyticsId}/analytics_engine/sql`,
     {
       body: ANALYTICS_BODY,
       method: 'POST',
 
       headers: new Headers({
-        Authorization: `Bearer ${secret}`,
+        Authorization: `Bearer ${analyticsSecret}`,
       }),
     },
-    handleAnalyticsEngineResponse,
   );
+
+  return handleAnalyticsEngineResponse.call(this, response);
 }

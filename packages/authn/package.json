@@ -40,7 +40,6 @@
   },
   "dependencies": {
     "@quisido/authn-shared": "workspace:^",
-    "@quisido/proposal-async-context": "workspace:^",
     "@quisido/worker": "workspace:^",
     "cloudflare-utils": "workspace:^",
     "fmrs": "workspace:^",

@@ -1,11 +1,11 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import FatalError from '../../utils/fatal-error.js';
 
 export default function handleInvalidPatreonIdentityResponse(
-  this: Worker,
+  this: AuthnFetchHandler,
 ): never {
-  this.emitPublicMetric({ name: MetricName.InvalidPatreonIdentityResponse });
+  this.emitPublicMetric(MetricName.InvalidPatreonIdentityResponse);
   throw new FatalError(ErrorCode.InvalidPatreonIdentityResponse);
 }

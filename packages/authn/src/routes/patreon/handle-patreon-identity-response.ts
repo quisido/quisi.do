@@ -1,5 +1,5 @@
-import type Worker from '@quisido/worker';
 import { isRecord } from 'fmrs';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import handleForbiddenPatreonIdentityResponse from './handle-forbidden-patreon-identity-response.js';
 import handleInvalidPatreonIdentityResponse from './handle-invalid-patreon-identity-response.js';
 import handleInvalidPatreonIdentity from './handle-invalid-patreon-identity.js';
@@ -11,7 +11,7 @@ const FORBIDDEN = 403;
 const HTTP_REDIRECTION = 300;
 
 export default async function handlePatreonIdentityResponse(
-  this: Worker,
+  this: AuthnFetchHandler,
   response: Response,
 ): Promise<PatreonIdentity> {
   const getJson = async (): Promise<unknown> => {
@@ -22,30 +22,26 @@ export default async function handlePatreonIdentityResponse(
     }
   };
 
-  return await this.snapshot(
-    getJson(),
-    (identity: unknown): PatreonIdentity => {
-      if (typeof identity === 'undefined') {
-        return handleInvalidPatreonIdentityResponse.call(this);
-      }
+  const identity: unknown = await getJson();
+  if (typeof identity === 'undefined') {
+    return handleInvalidPatreonIdentityResponse.call(this);
+  }
 
-      if (response.status === FORBIDDEN) {
-        return handleForbiddenPatreonIdentityResponse.call(this, identity);
-      }
+  if (response.status === FORBIDDEN) {
+    return handleForbiddenPatreonIdentityResponse.call(this, identity);
+  }
 
-      if (response.status >= HTTP_REDIRECTION) {
-        return handleUnknownPatreonIdentityError.call(
-          this,
-          response.status,
-          identity,
-        );
-      }
+  if (response.status >= HTTP_REDIRECTION) {
+    return handleUnknownPatreonIdentityError.call(
+      this,
+      response.status,
+      identity,
+    );
+  }
 
-      if (!isRecord(identity)) {
-        return handleInvalidPatreonIdentity.call(this, identity);
-      }
+  if (!isRecord(identity)) {
+    return handleInvalidPatreonIdentity.call(this, identity);
+  }
 
-      return parsePatreonIdentity.call(this, identity);
-    },
-  );
+  return parsePatreonIdentity.call(this, identity);
 }

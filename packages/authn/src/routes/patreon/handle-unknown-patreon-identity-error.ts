@@ -1,21 +1,19 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import FatalError from '../../utils/fatal-error.js';
 
 export default function handleUnknownPatreonIdentityError(
-  this: Worker,
+  this: AuthnFetchHandler,
   status: number,
   identity: unknown,
 ): never {
-  this.emitPrivateMetric({
+  this.emitPrivateMetric(MetricName.UnknownPatreonIdentityError, {
     identity: JSON.stringify(identity),
-    name: MetricName.UnknownPatreonIdentityError,
     status,
   });
 
-  this.emitPublicMetric({
-    name: MetricName.UnknownPatreonIdentityError,
+  this.emitPublicMetric(MetricName.UnknownPatreonIdentityError, {
     status,
   });
 

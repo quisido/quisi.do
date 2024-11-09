@@ -1,12 +1,10 @@
-import type Worker from '@quisido/worker';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import createPatreonIdentityRequestInit from './create-patreon-identity-request-init.js';
 import handlePatreonIdentityRequestInit from './handle-patreon-identity-request-init.js';
 
 export default async function getPatreonIdentityResponse(
-  this: Worker,
+  this: AuthnFetchHandler,
 ): Promise<Response> {
-  return await this.snapshot(
-    createPatreonIdentityRequestInit.call(this),
-    handlePatreonIdentityRequestInit,
-  );
+  const init: RequestInit = await createPatreonIdentityRequestInit.call(this);
+  return await handlePatreonIdentityRequestInit.call(this, init);
 }

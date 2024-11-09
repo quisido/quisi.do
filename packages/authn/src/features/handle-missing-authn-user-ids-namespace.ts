@@ -1,11 +1,11 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../constants/metric-name.js';
 import FatalError from '../utils/fatal-error.js';
+import type AuthnFetchHandler from './authn-fetch-handler.js';
 
 export default function handleMissingAuthnUserIdsNamespace(
-  this: Worker,
+  this: AuthnFetchHandler,
 ): never {
-  this.emitPublicMetric({ name: MetricName.MissingAuthnUserIdsNamespace });
+  this.emitPublicMetric(MetricName.MissingAuthnUserIdsNamespace);
   throw new FatalError(ErrorCode.MissingAuthnUserIdsNamespace);
 }

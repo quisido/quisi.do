@@ -5,10 +5,7 @@ import MethodNotAllowedResponse from '../utils/method-not-allowed-response.js';
 export default function handleNotAllowedMethodResponse(
   method: string,
 ): Response {
-  emitPublicMetric({
-    method,
-    name: MetricName.MethodNotAllowed,
-  });
+  emitPublicMetric(MetricName.MethodNotAllowed);
 
   return new MethodNotAllowedResponse();
 }

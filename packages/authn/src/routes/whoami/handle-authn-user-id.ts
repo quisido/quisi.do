@@ -1,15 +1,14 @@
 import { WhoAmIResponseCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
-import { setAuthnUserIdInMemory } from '../../features/authn-user-id.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import handleInvalidAuthnId from './handle-invalid-authn-id.js';
 import WhoAmIResponse from './whoami-response.js';
 
 const BASE = 10;
 
 export default function handleAuthnUserId(
-  this: Worker,
-  authnId: string,
+  this: AuthnFetchHandler,
+  authnIdCookie: string,
   userIdStr: string | null,
 ): Response {
   /**
@@ -17,21 +16,17 @@ export default function handleAuthnUserId(
    * invalid authentication cookie in case the ID exists in the future.
    */
   if (userIdStr === null) {
-    return handleInvalidAuthnId.call(this, authnId);
+    return handleInvalidAuthnId.call(this, authnIdCookie);
   }
 
   // User found! 🎉
   const userId: number = parseInt(userIdStr, BASE);
-  setAuthnUserIdInMemory.call(this, authnId, userId);
+  this.setAuthnUserIdInMemory(authnIdCookie, userId);
 
-  this.emitPrivateMetric({
-    authnId,
-    name: MetricName.UncachedAuthnId,
+  this.emitPublicMetric(MetricName.UncachedAuthnId);
+  this.emitPrivateMetric(MetricName.UncachedAuthnId, {
+    authnIdCookie,
     userId,
-  });
-
-  this.emitPublicMetric({
-    name: MetricName.UncachedAuthnId,
   });
 
   return new WhoAmIResponse(this, {

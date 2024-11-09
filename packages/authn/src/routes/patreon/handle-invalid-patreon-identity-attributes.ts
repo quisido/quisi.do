@@ -1,5 +1,5 @@
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 
 interface Options {
   readonly attributes: unknown;
@@ -12,17 +12,14 @@ interface Result {
 }
 
 export default function handleInvalidPatreonIdentityAttributes(
-  this: Worker,
+  this: AuthnFetchHandler,
   { attributes, data, id }: Options,
 ): Result {
   if (typeof attributes === 'undefined') {
-    this.emitPublicMetric({
-      name: MetricName.MissingPatreonIdentityAttributes,
-    });
+    this.emitPublicMetric(MetricName.MissingPatreonIdentityAttributes);
 
-    this.emitPrivateMetric({
+    this.emitPrivateMetric(MetricName.MissingPatreonIdentityAttributes, {
       data: JSON.stringify(data),
-      name: MetricName.MissingPatreonIdentityAttributes,
     });
 
     return {
@@ -30,13 +27,11 @@ export default function handleInvalidPatreonIdentityAttributes(
     };
   }
 
-  this.emitPrivateMetric({
-    name: MetricName.InvalidPatreonIdentityAttributes,
+  this.emitPrivateMetric(MetricName.InvalidPatreonIdentityAttributes, {
     value: JSON.stringify(attributes),
   });
 
-  this.emitPublicMetric({
-    name: MetricName.InvalidPatreonIdentityAttributes,
+  this.emitPublicMetric(MetricName.InvalidPatreonIdentityAttributes, {
     type: typeof attributes,
   });
 

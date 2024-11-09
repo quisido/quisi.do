@@ -47,7 +47,6 @@
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20241018.0",
-    "@quisido/proposal-async-context": "workspace:^",
     "cloudflare-utils": "workspace:^",
     "cookie": "^1.0.1",
     "eventemitter3": "^5.0.1",

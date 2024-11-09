@@ -1,15 +1,14 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
 import FatalError from '../../utils/fatal-error.js';
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
 
 export default function handleInvalidOAuthUserId(
-  this: Worker,
+  this: AuthnFetchHandler,
   result: Record<string, unknown>,
 ): never {
-  this.emitPublicMetric({ name: MetricName.InvalidOAuthUserId });
-  this.emitPrivateMetric({
-    name: MetricName.InvalidOAuthUserId,
+  this.emitPublicMetric(MetricName.InvalidOAuthUserId);
+  this.emitPrivateMetric(MetricName.InvalidOAuthUserId, {
     value: JSON.stringify(result),
   });
 

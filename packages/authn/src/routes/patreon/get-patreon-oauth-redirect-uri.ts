@@ -1,9 +1,11 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import FatalError from '../../utils/fatal-error.js';
 
-export default function getPatreonOAuthRedirectUri(this: Worker): string {
+export default function getPatreonOAuthRedirectUri(
+  this: AuthnFetchHandler,
+): string {
   const uri: unknown = this.getEnv('PATREON_OAUTH_REDIRECT_URI');
 
   if (typeof uri === 'string') {
@@ -11,17 +13,15 @@ export default function getPatreonOAuthRedirectUri(this: Worker): string {
   }
 
   if (typeof uri === 'undefined') {
-    this.emitPublicMetric({ name: MetricName.MissingPatreonOAuthRedirectUri });
+    this.emitPublicMetric(MetricName.MissingPatreonOAuthRedirectUri);
     throw new FatalError(ErrorCode.MissingPatreonOAuthRedirectUri);
   }
 
-  this.emitPrivateMetric({
-    name: MetricName.InvalidPatreonOAuthRedirectUri,
+  this.emitPrivateMetric(MetricName.InvalidPatreonOAuthRedirectUri, {
     value: JSON.stringify(uri),
   });
 
-  this.emitPublicMetric({
-    name: MetricName.InvalidPatreonOAuthRedirectUri,
+  this.emitPublicMetric(MetricName.InvalidPatreonOAuthRedirectUri, {
     type: typeof uri,
   });
 

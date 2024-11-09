@@ -6,7 +6,7 @@ export default [
 
   // Rule: no-magic-numbers
   {
-    files: ['src/status-code.ts'],
+    files: ['src/status-code.ts', 'src/usage-type.ts'],
     rules: {
       'no-magic-numbers': 'off',
     },

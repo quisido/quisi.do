@@ -6,7 +6,8 @@ import {
   isR2Bucket,
 } from 'cloudflare-utils';
 import { EventEmitter } from 'eventemitter3';
-import { isRecord } from 'fmrs';
+import { isRecord, mapToError } from 'fmrs';
+import mapMetricDimensionsToDataPoint from './map-metric-dimensions-to-datapoint.js';
 import { MetricName } from './metric-name.js';
 
 interface EventTypes {
@@ -23,16 +24,17 @@ export interface HandlerOptions<Env> {
   readonly now?: (() => number) | undefined;
 }
 
+const EMPTY_OBJECT: Record<string, never> = {};
 const FIRST = 0;
 
 export default class Handler<
-  K extends keyof Required<ExportedHandler>,
+  K extends keyof Required<ExportedHandler> = keyof Required<ExportedHandler>,
   Env = unknown,
   QueueHandlerMessage = unknown,
   CfHostMetadata = unknown,
 > {
   readonly #eventEmitter = new EventEmitter<EventTypes>();
-  #console: Console | undefined;
+  #console: Console = console;
   #env: Env | undefined;
   #fetch: Fetcher['fetch'] | undefined;
   #now: () => number = Date.now.bind(Date);
@@ -87,11 +89,7 @@ export default class Handler<
   };
 
   public get console(): Console {
-    if (typeof this.#console !== 'undefined') {
-      return this.#console;
-    }
-
-    throw new Error('The console may only be accessed during an operation.');
+    return this.#console;
   }
 
   #emit<T extends EventEmitter.EventNames<EventTypes>>(
@@ -106,7 +104,7 @@ export default class Handler<
 
   public emitMetric = (
     name: string,
-    dimensions: Record<string, number | string>,
+    dimensions: Record<string, number | string> = EMPTY_OBJECT,
   ): void => {
     this.#emit('metric', name, {
       ...dimensions,
@@ -119,6 +117,22 @@ export default class Handler<
     }
 
     throw new Error('You may only fetch during an operation.');
+  }
+
+  public async fetchJson(
+    input: RequestInfo,
+    init?: RequestInit,
+  ): Promise<unknown> {
+    const response: Response = await this.fetch(input, init);
+    return await response.json();
+  }
+
+  public async fetchText(
+    input: RequestInfo,
+    init?: RequestInit,
+  ): Promise<string> {
+    const response: Response = await this.fetch(input, init);
+    return await response.text();
   }
 
   public flush = (): void => {
@@ -193,28 +207,69 @@ export default class Handler<
 
   #on<K extends keyof EventTypes>(
     event: K,
-    callback: (...args: EventTypes[K]) => void,
+    callback: (...args: EventTypes[K]) => Promise<void> | void,
   ): void {
-    this.#eventEmitter.on(event, callback);
+    const handleError = (err: unknown): void => {
+      const error: Error = mapToError(err);
+
+      // If errors cannot be emit, use the console.
+      if (event === 'error') {
+        this.console.error(error);
+        return;
+      }
+
+      this.#emit('error', error);
+    };
+
+    const handleEvent = (...args: EventTypes[K]): void => {
+      try {
+        const promise: Promise<void> | void = callback.apply(this, args);
+        if (!(promise instanceof Promise)) {
+          return;
+        }
+
+        promise.catch(handleError);
+      } catch (err: unknown) {
+        handleError(err);
+      }
+    };
+
+    this.#eventEmitter.on(event, handleEvent);
   }
 
-  public onError = (callback: (error: Error) => void): void => {
+  public onError = (callback: (error: Error) => Promise<void> | void): void => {
     this.#on('error', callback);
+  };
+
+  public onLog = (
+    callback: (message: string) => Promise<void> | void,
+  ): void => {
+    this.#on('log', callback);
   };
 
   public onMetric = (
     callback: (
       name: string,
       dimensions: Record<string, number | string>,
-    ) => void,
-  ): this => {
+    ) => Promise<void> | void,
+  ): void => {
     this.#on('metric', callback);
-    return this;
   };
 
   public onSideEffect = (
-    callback: (effect: Promise<unknown>) => void,
+    callback: (effect: Promise<unknown>) => Promise<void> | void,
   ): void => {
     this.#on('effect', callback);
+  };
+
+  public writeMetricDataPoint = (
+    dataset: string,
+    name: string,
+    dimensions: Record<string, number | string>,
+  ): void => {
+    this.getAnalyticsEngineDataset(dataset).writeDataPoint({
+      ...mapMetricDimensionsToDataPoint(dimensions),
+      indexes: [name],
+    });
   };
 }

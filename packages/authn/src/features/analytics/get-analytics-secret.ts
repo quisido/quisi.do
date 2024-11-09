@@ -1,9 +1,9 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
 import FatalError from '../../utils/fatal-error.js';
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
 
-export default function getAnalyticsSecret(this: Worker): string {
+export default function getAnalyticsSecret(this: AuthnFetchHandler): string {
   const secret: unknown = this.getEnv('ANALYTICS_SECRET');
   if (typeof secret === 'string') {
     return secret;
@@ -13,13 +13,11 @@ export default function getAnalyticsSecret(this: Worker): string {
     throw new FatalError(ErrorCode.MissingAnalyticsSecret);
   }
 
-  this.emitPrivateMetric({
-    name: MetricName.InvalidAnalyticsSecret,
+  this.emitPrivateMetric(MetricName.InvalidAnalyticsSecret, {
     value: JSON.stringify(secret),
   });
 
-  this.emitPublicMetric({
-    name: MetricName.InvalidAnalyticsSecret,
+  this.emitPublicMetric(MetricName.InvalidAnalyticsSecret, {
     type: typeof secret,
   });
 

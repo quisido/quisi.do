@@ -1,11 +1,11 @@
-import type Worker from '@quisido/worker';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import handlePatreonAccessTokenError from './handle-patreon-access-token-error.js';
 import mapPatreonOAuthTokenToAccessToken from './map-patreon-oauth-token-to-access-token.js';
 
 const HTTP_REDIRECTION = 300;
 
 export default async function handlePatreonOAuthTokenResponse(
-  this: Worker,
+  this: AuthnFetchHandler,
   response: Response,
 ): Promise<string> {
   if (response.status >= HTTP_REDIRECTION) {
@@ -20,5 +20,6 @@ export default async function handlePatreonOAuthTokenResponse(
     }
   };
 
-  return await this.snapshot(getJson(), mapPatreonOAuthTokenToAccessToken);
+  const json: unknown = await getJson();
+  return mapPatreonOAuthTokenToAccessToken.call(this, json);
 }

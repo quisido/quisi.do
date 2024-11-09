@@ -1,6 +1,6 @@
-import type Worker from '@quisido/worker';
 import { isRecord } from 'fmrs';
 import { OAuthProvider } from '../../constants/oauth-provider.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import writeOAuthResponse from '../../features/shared/write-oauth-response.js';
 import mapToOptionalBoolean from '../../utils/map-to-optional-boolean.js';
 import mapToOptionalString from '../../utils/map-to-optional-string.js';
@@ -11,7 +11,7 @@ import mapPatreonIdentityGenderAttributeToGender from './map-patreon-identity-ge
 import type PatreonIdentity from './patreon-identity.js';
 
 export default function parsePatreonIdentity(
-  this: Worker,
+  this: AuthnFetchHandler,
   identity: Record<string, unknown>,
 ): PatreonIdentity {
   const { data } = identity;

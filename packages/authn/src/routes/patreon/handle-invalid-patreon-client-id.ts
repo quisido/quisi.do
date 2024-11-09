@@ -1,13 +1,15 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import FatalError from '../../utils/fatal-error.js';
-import getPatreonOAuthClientId from './get-patreon-oauth-client-id.js';
 
-export default function handleInvalidPatreonClientId(this: Worker): never {
-  this.emitPublicMetric({
-    clientId: getPatreonOAuthClientId.call(this),
-    name: MetricName.InvalidPatreonClientId,
+export default function handleInvalidPatreonClientId(
+  this: AuthnFetchHandler,
+): never {
+  const { patreonOAuthClientId } = this;
+
+  this.emitPublicMetric(MetricName.InvalidPatreonClientId, {
+    clientId: patreonOAuthClientId,
   });
 
   throw new FatalError(ErrorCode.InvalidPatreonClientId);

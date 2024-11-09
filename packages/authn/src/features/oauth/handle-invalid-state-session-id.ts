@@ -1,6 +1,6 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import ErrorResponse from '../error-response.js';
 
 interface Options {
@@ -10,30 +10,26 @@ interface Options {
 }
 
 export default function handleInvalidStateSessionId(
-  this: Worker,
+  this: AuthnFetchHandler,
   { searchParam, state, value }: Options,
 ): Response {
   if (typeof value === 'undefined') {
-    this.emitPrivateMetric({
-      name: MetricName.MissingStateSessionId,
+    this.emitPrivateMetric(MetricName.MissingStateSessionId, {
       searchParam,
     });
 
-    this.emitPublicMetric({
+    this.emitPublicMetric(MetricName.MissingStateSessionId, {
       keys: Object.keys(state).join(', '),
-      name: MetricName.MissingStateSessionId,
     });
 
     return new ErrorResponse(this, ErrorCode.MissingStateSessionId);
   }
 
-  this.emitPrivateMetric({
-    name: MetricName.InvalidStateSessionId,
+  this.emitPrivateMetric(MetricName.InvalidStateSessionId, {
     value: JSON.stringify(value),
   });
 
-  this.emitPublicMetric({
-    name: MetricName.InvalidStateSessionId,
+  this.emitPublicMetric(MetricName.InvalidStateSessionId, {
     type: typeof value,
   });
 

@@ -1,11 +1,11 @@
-import type Worker from '@quisido/worker';
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { AuthenticationPathname } from './authentication-pathname.js';
 import handleMissingStateSearchParam from './handle-missing-state-search-param.js';
 import handleNonJsonStateSearchParam from './handle-non-json-state-search-param.js';
 import handleState from './handle-state.js';
 
 export default async function handleAuthenticationPathname(
-  this: Worker,
+  this: AuthnFetchHandler,
   pathname: AuthenticationPathname,
 ): Promise<Response> {
   const stateSearchParam: string | null = this.getRequestSearchParam('state');

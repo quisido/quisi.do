@@ -1,6 +1,5 @@
-import type Worker from '@quisido/worker';
 import { SECONDS_PER_MINUTE } from '../../constants/time.js';
-import getAccessControlAllowOrigin from '../../features/get-access-control-allow-origin.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 
 const MAX_AGE_MINUTES = 10;
 
@@ -14,10 +13,11 @@ const HEADERS_INIT: HeadersInit = {
 };
 
 export default function getWhoAmIResponseHeadersInit(
-  this: Worker,
+  this: AuthnFetchHandler,
 ): HeadersInit {
+  const { accessControlAllowOrigin } = this;
   return {
     ...HEADERS_INIT,
-    'access-control-allow-origin': getAccessControlAllowOrigin.call(this),
+    'access-control-allow-origin': accessControlAllowOrigin,
   };
 }

@@ -13,3 +13,4 @@ export { default as isAnalyticsEngineRow } from './is-analytics-engine-row.js';
 export { default as isD1Database } from './is-d1-database.js';
 export { default as isR2Bucket } from './is-r2-bucket.js';
 export { StatusCode } from './status-code.js';
+export { UsageType } from './usage-type.js';

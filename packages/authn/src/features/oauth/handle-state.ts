@@ -1,6 +1,5 @@
-import type Worker from '@quisido/worker';
 import { isRecord } from 'fmrs';
-import getSessionIdCookie from '../get-session-id-cookie.js';
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { AuthenticationPathname } from './authentication-pathname.js';
 import handleCrossSiteRequestForgery from './handle-csrf.js';
 import handleInvalidReturnPath from './handle-invalid-return-path.js';
@@ -15,7 +14,7 @@ interface Options {
 }
 
 export default async function handleState(
-  this: Worker,
+  this: AuthnFetchHandler,
   { pathname, state, stateSearchParam }: Options,
 ): Promise<Response> {
   // Invalid state
@@ -46,7 +45,7 @@ export default async function handleState(
   }
 
   // Cross-site request forgery (CSRF)
-  const sessionIdCookie: string = getSessionIdCookie.call(this);
+  const { sessionIdCookie } = this;
   if (sessionIdCookie !== stateSessionId) {
     return handleCrossSiteRequestForgery.call(this, {
       cookie: sessionIdCookie,

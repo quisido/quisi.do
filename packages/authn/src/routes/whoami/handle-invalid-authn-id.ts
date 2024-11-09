@@ -1,13 +1,15 @@
 import { WhoAmIResponseCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import WhoAmIResponse from './whoami-response.js';
 
 export default function handleInvalidAuthnId(
-  this: Worker,
+  this: AuthnFetchHandler,
   authnId: string,
 ): Response {
-  this.emitPrivateMetric({ authnId, name: MetricName.InvalidAuthnId });
-  this.emitPublicMetric({ name: MetricName.InvalidAuthnId });
+  this.emitPublicMetric(MetricName.InvalidAuthnId);
+  this.emitPrivateMetric(MetricName.InvalidAuthnId, {
+    authnId,
+  });
   return new WhoAmIResponse(this, { code: WhoAmIResponseCode.InvalidAuthnId });
 }

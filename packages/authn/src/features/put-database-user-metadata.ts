@@ -1,11 +1,10 @@
-import type Worker from '@quisido/worker';
 import { MetricName } from '../constants/metric-name.js';
 import { type OAuthProvider } from '../constants/oauth-provider.js';
 import { INSERT_INTO_OAUTH_QUERY } from '../constants/queries.js';
+import type AuthnFetchHandler from './authn-fetch-handler.js';
 import handleInsertIntoOAuthError from './handle-insert-into-oauth-error.js';
 import handleInsertIntoOAuthResponse from './handle-insert-into-oauth-response.js';
 import putDatabaseUserEmail from './put-database-user-email.js';
-import getDatabase from './shared/get-database.js';
 
 interface Options {
   readonly changes: number;
@@ -18,7 +17,7 @@ interface Options {
 }
 
 export default function putDatabaseUserMetadata(
-  this: Worker,
+  this: AuthnFetchHandler,
   {
     changes,
     duration,
@@ -29,20 +28,18 @@ export default function putDatabaseUserMetadata(
     userId,
   }: Options,
 ): number {
-  const db: D1Database = getDatabase.call(this);
-  this.emitPublicMetric({
+  this.emitPublicMetric(MetricName.AuthenticationCreated, {
     changes,
     duration,
-    name: MetricName.AuthenticationCreated,
     sizeAfter,
     userId,
   });
 
   // Associate user ID with OAuth ID.
-  const insertIntoOAuth: Promise<D1Response> = db
-    .prepare(INSERT_INTO_OAUTH_QUERY)
-    .bind(userId, oAuthProvider, oAuthId)
-    .run();
+  const insertIntoOAuth: Promise<D1Response> = this.query(
+    INSERT_INTO_OAUTH_QUERY,
+    [userId, oAuthProvider, oAuthId],
+  );
 
   this.affect(
     insertIntoOAuth

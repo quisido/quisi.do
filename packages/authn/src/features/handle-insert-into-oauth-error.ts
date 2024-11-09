@@ -1,34 +1,28 @@
-import { Snapshot } from '@quisido/proposal-async-context';
-import type Worker from '@quisido/worker';
 import { mapToError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
+import type AuthnFetchHandler from './authn-fetch-handler.js';
 
 export default function handleInsertIntoOAuthError(
-  this: Worker,
+  this: AuthnFetchHandler,
   userId: number,
 ): (err: unknown) => void {
-  const snapshot: Snapshot = new Snapshot();
   const startTime: number = this.now();
 
   const handleCatch = (err: unknown): void => {
-    snapshot.run((): void => {
-      const endTime: number = this.now();
-      this.logPrivateError(mapToError(err));
+    const endTime: number = this.now();
+    this.logError(mapToError(err));
 
-      this.emitPrivateMetric({
-        duration: endTime - startTime,
-        endTime,
-        name: MetricName.OAuthInsertError,
-        startTime,
-        userId,
-      });
+    this.emitPrivateMetric(MetricName.OAuthInsertError, {
+      duration: endTime - startTime,
+      endTime,
+      startTime,
+      userId,
+    });
 
-      this.emitPublicMetric({
-        duration: endTime - startTime,
-        endTime,
-        name: MetricName.OAuthInsertError,
-        startTime,
-      });
+    this.emitPublicMetric(MetricName.OAuthInsertError, {
+      duration: endTime - startTime,
+      endTime,
+      startTime,
     });
   };
 

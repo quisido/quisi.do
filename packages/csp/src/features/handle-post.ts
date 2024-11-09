@@ -43,7 +43,7 @@ export default async function handlePost(projectId: number): Promise<Response> {
     // Log with Worker instance:
     // Console.log('Missing project');
     // Use({
-    //   Account: AccountNumber.quisido,
+    //   Account: 1,
     //   Count: TWICE,
     //   Project: projectId,
     //   Type: UsageType.D1Read,
@@ -58,7 +58,7 @@ export default async function handlePost(projectId: number): Promise<Response> {
     // Log with Worker instance:
     // Console.log('Invalid database project row');
     // Use({
-    //   Account: AccountNumber.quisido,
+    //   Account: 1,
     //   Count: TWICE,
     //   Project: projectId,
     //   Type: UsageType.D1Read,

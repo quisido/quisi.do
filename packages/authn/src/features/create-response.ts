@@ -4,7 +4,6 @@ import nowSeconds from '../features/now-seconds.js';
 import createAuthnId from '../utils/create-authn-id.js';
 import type AuthnFetchHandler from './authn-fetch-handler.js';
 import createResponseHeaders from './create-response-headers.js';
-import getAuthnUserIdsNamespace from './get-authn-user-ids-namespace.js';
 import handlePutAuthnUserIdError from './handle-put-authn-user-id-error.js';
 import handlePutAuthnUserId from './handle-put-authn-user-id.js';
 
@@ -17,8 +16,9 @@ export default function createResponse(
   this: AuthnFetchHandler,
   { returnPath, userId }: Options,
 ): Response {
+  const { authnUserIdsNamespace } = this;
+
   const authnId: string = createAuthnId();
-  const authnUserIds: KVNamespace = getAuthnUserIdsNamespace.call(this);
   const startTimeSeconds: number = nowSeconds.call(this);
 
   /**
@@ -31,7 +31,7 @@ export default function createResponse(
   const startTime: number = this.now();
   const expiration: number = startTimeSeconds + SECONDS_PER_DAY;
   this.affect(
-    authnUserIds
+    authnUserIdsNamespace
       .put(authnId, userId.toString(), {
         expiration,
         expirationTtl: SECONDS_PER_DAY,

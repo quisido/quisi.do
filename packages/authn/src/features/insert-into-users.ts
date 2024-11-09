@@ -1,8 +1,7 @@
-import type Worker from '@quisido/worker';
 import { type Gender } from '../constants/gender.js';
 import { INSERT_INTO_USERS_QUERY } from '../constants/queries.js';
 import nowSeconds from '../features/now-seconds.js';
-import getDatabase from './shared/get-database.js';
+import type AuthnFetchHandler from './authn-fetch-handler.js';
 
 interface Options {
   readonly firstName: string | null;
@@ -11,16 +10,17 @@ interface Options {
 }
 
 export default async function insertIntoUsers(
-  this: Worker,
+  this: AuthnFetchHandler,
   { firstName, fullName, gender }: Options,
 ): Promise<D1Meta> {
-  const db: D1Database = getDatabase.call(this);
   const registrationTimestamp: number = nowSeconds.call(this);
 
-  const { meta } = await db
-    .prepare(INSERT_INTO_USERS_QUERY)
-    .bind(firstName, fullName, gender, registrationTimestamp)
-    .run();
+  const { meta } = await this.query(INSERT_INTO_USERS_QUERY, [
+    firstName,
+    fullName,
+    gender,
+    registrationTimestamp,
+  ]);
 
   return meta;
 }

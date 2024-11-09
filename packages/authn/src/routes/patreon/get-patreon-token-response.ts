@@ -1,10 +1,6 @@
-import type Worker from '@quisido/worker';
 import formUrlEncoded from 'form-urlencoded';
 import { PATREON_USER_AGENT } from '../../constants/patreon-user-agent.js';
-import getPatreonOAuthClientId from './get-patreon-oauth-client-id.js';
-import getPatreonOAuthClientSecret from './get-patreon-oauth-client-secret.js';
-import getPatreonOAuthHost from './get-patreon-oauth-host.js';
-import getPatreonOAuthRedirectUri from './get-patreon-oauth-redirect-uri.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import getPatreonRequestCode from './get-patreon-request-code.js';
 
 const HEADERS: Headers = new Headers({
@@ -13,21 +9,24 @@ const HEADERS: Headers = new Headers({
 });
 
 export default async function getPatreonTokenResponse(
-  this: Worker,
+  this: AuthnFetchHandler,
 ): Promise<Response> {
-  const fetch: Fetcher['fetch'] = this.getFetch();
-  const oAuthHost: string = getPatreonOAuthHost.call(this);
-
-  return await fetch(`${oAuthHost}/api/oauth2/token`, {
+  const {
+    patreonOAuthClientId,
+    patreonOAuthHost,
+    patreonOAuthClientSecret,
+    patreonOAuthRedirectUri,
+  } = this;
+  return await this.fetch(`${patreonOAuthHost}/api/oauth2/token`, {
     headers: HEADERS,
     method: 'POST',
 
     body: formUrlEncoded({
-      client_id: getPatreonOAuthClientId.call(this),
-      client_secret: getPatreonOAuthClientSecret.call(this),
+      client_id: patreonOAuthClientId,
+      client_secret: patreonOAuthClientSecret,
       code: getPatreonRequestCode.call(this),
       grant_type: 'authorization_code',
-      redirect_uri: getPatreonOAuthRedirectUri.call(this),
+      redirect_uri: patreonOAuthRedirectUri,
     }),
   });
 }

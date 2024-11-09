@@ -1,19 +1,15 @@
 import { WhoAmIResponseCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import WhoAmIResponse from './whoami-response.js';
 
 export default function handleCachedAuthnUserId(
-  this: Worker,
+  this: AuthnFetchHandler,
   userId: number,
 ): Response {
-  this.emitPrivateMetric({
-    name: MetricName.CachedAuthnId,
+  this.emitPublicMetric(MetricName.CachedAuthnId);
+  this.emitPrivateMetric(MetricName.CachedAuthnId, {
     userId,
-  });
-
-  this.emitPublicMetric({
-    name: MetricName.CachedAuthnId,
   });
 
   return new WhoAmIResponse(this, {

@@ -1,9 +1,11 @@
 import { WhoAmIResponseCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import WhoAmIResponse from './whoami-response.js';
 
-export default function handleMissingAuthnId(this: Worker): Response {
-  this.emitPublicMetric({ name: MetricName.MissingAuthnId });
+export default function handleMissingAuthnId(
+  this: AuthnFetchHandler,
+): Response {
+  this.emitPublicMetric(MetricName.MissingAuthnId);
   return new WhoAmIResponse(this, { code: WhoAmIResponseCode.MissingAuthnId });
 }

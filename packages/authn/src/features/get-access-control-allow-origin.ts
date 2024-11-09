@@ -1,17 +1,16 @@
-import type Worker from '@quisido/worker';
-import getCookieDomain from './get-cookie-domain.js';
+import type AuthnFetchHandler from './authn-fetch-handler.js';
 
-export default function getAccessControlAllowOrigin(this: Worker): string {
-  const headers: Headers = this.getRequestHeaders();
-
+export default function getAccessControlAllowOrigin(
+  this: AuthnFetchHandler,
+): string {
+  const { origin } = this;
+  if (origin === null) {
+    return '*';
+  }
   /**
    * Allow `localhost` for Lighthouse reports in CI.
    * The HTTP protocol is for `serve`; the HTTPS protocol is for `dev`.
    */
-  const origin: string | null = headers.get('origin');
-  if (origin === null) {
-    return '*';
-  }
 
   if (
     origin === 'http://localhost:3000' ||
@@ -20,6 +19,6 @@ export default function getAccessControlAllowOrigin(this: Worker): string {
     return origin;
   }
 
-  const cookieDomain: string = getCookieDomain.call(this);
+  const { cookieDomain } = this;
   return `https://${cookieDomain}`;
 }

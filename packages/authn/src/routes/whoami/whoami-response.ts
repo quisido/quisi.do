@@ -1,6 +1,6 @@
 import type { WhoAmIResponseCode } from '@quisido/authn-shared';
-import Worker from '@quisido/worker';
 import { StatusCode } from 'cloudflare-utils';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import WhoAmIResponseInit from './whoami-response-init.js';
 
 interface Options {
@@ -11,7 +11,7 @@ interface Options {
 
 export default class WhoAmIResponse extends Response {
   public constructor(
-    worker: Worker,
+    worker: AuthnFetchHandler,
     { code, id, status = StatusCode.OK }: Options,
   ) {
     super(

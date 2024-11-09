@@ -1,15 +1,14 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import ErrorResponse from '../error-response.js';
 
 export default function handleNonJsonStateSearchParam(
-  this: Worker,
+  this: AuthnFetchHandler,
   value: string,
 ): Response {
-  this.emitPublicMetric({ name: MetricName.NonJsonStateSearchParam });
-  this.emitPrivateMetric({
-    name: MetricName.NonJsonStateSearchParam,
+  this.emitPublicMetric(MetricName.NonJsonStateSearchParam);
+  this.emitPrivateMetric(MetricName.NonJsonStateSearchParam, {
     value,
   });
 

@@ -1,8 +1,6 @@
-import { Snapshot } from '@quisido/proposal-async-context';
-import type Worker from '@quisido/worker';
 import { mapToError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
-import { setAuthnUserIdInMemory } from './authn-user-id.js';
+import type AuthnFetchHandler from './authn-fetch-handler.js';
 
 interface Options {
   readonly authnId: string;
@@ -11,36 +9,30 @@ interface Options {
 }
 
 export default function handlePutAuthnUserIdError(
-  this: Worker,
+  this: AuthnFetchHandler,
   { authnId, startTime, userId }: Options,
 ): (error: unknown) => void {
-  const snapshot: Snapshot = new Snapshot();
-
   return (err: unknown): void => {
-    snapshot.run((): void => {
-      const endTime: number = this.now();
-      const duration: number = endTime - startTime;
+    const endTime: number = this.now();
+    const duration: number = endTime - startTime;
 
-      // If the KV namespace failed, fallback to the memory cache.
-      setAuthnUserIdInMemory.call(this, authnId, userId);
+    // If the KV namespace failed, fallback to the memory cache.
+    this.setAuthnUserIdInMemory(authnId, userId);
 
-      this.logPrivateError(mapToError(err));
+    this.logError(mapToError(err));
 
-      this.emitPrivateMetric({
-        authnId,
-        duration,
-        endTime,
-        name: MetricName.AuthnIdError,
-        startTime,
-        userId,
-      });
+    this.emitPrivateMetric(MetricName.AuthnIdError, {
+      authnId,
+      duration,
+      endTime,
+      startTime,
+      userId,
+    });
 
-      this.emitPublicMetric({
-        duration,
-        endTime,
-        name: MetricName.AuthnIdError,
-        startTime,
-      });
+    this.emitPublicMetric(MetricName.AuthnIdError, {
+      duration,
+      endTime,
+      startTime,
     });
   };
 }

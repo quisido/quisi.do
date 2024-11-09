@@ -1,19 +1,17 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import FatalError from '../../utils/fatal-error.js';
 
 export default function handleInvalidPatreonOAuthHost(
-  this: Worker,
+  this: AuthnFetchHandler,
   host: unknown,
 ): never {
-  this.emitPrivateMetric({
-    name: MetricName.InvalidPatreonOAuthHost,
+  this.emitPrivateMetric(MetricName.InvalidPatreonOAuthHost, {
     value: JSON.stringify(host),
   });
 
-  this.emitPublicMetric({
-    name: MetricName.InvalidPatreonOAuthHost,
+  this.emitPublicMetric(MetricName.InvalidPatreonOAuthHost, {
     type: typeof host,
   });
 

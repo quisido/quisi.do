@@ -1,10 +1,9 @@
-import type Worker from '@quisido/worker';
-import getAuthnUserIdsNamespace from '../../features/get-authn-user-ids-namespace.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 
 export default async function getAuthnUserIdFromKVNamespace(
-  this: Worker,
-  authnId: string,
+  this: AuthnFetchHandler,
+  authnIdCookie: string,
 ): Promise<string | null> {
-  const authnUserIds: KVNamespace = getAuthnUserIdsNamespace.call(this);
-  return await authnUserIds.get(authnId, 'text');
+  const { authnUserIdsNamespace } = this;
+  return await authnUserIdsNamespace.get(authnIdCookie, 'text');
 }

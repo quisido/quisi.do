@@ -1,6 +1,6 @@
-import type Worker from '@quisido/worker';
 import { isRecord } from 'fmrs';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import handleInvalidOAuthUserId from './handle-invalid-oauth-user-id.js';
 
 interface Result {
@@ -11,12 +11,11 @@ interface Result {
 }
 
 export default function handleOAuthUserIdResult(
-  this: Worker,
+  this: AuthnFetchHandler,
   { duration, results, rowsRead, sizeAfter }: Result,
 ): number | null {
-  this.emitPublicMetric({
+  this.emitPublicMetric(MetricName.OAuthUserIdSelected, {
     duration,
-    name: MetricName.OAuthUserIdSelected,
     rowsRead,
     sizeAfter,
   });
@@ -33,7 +32,7 @@ export default function handleOAuthUserIdResult(
     return handleInvalidOAuthUserId.call(this, firstResult);
   }
 
-  this.emitPrivateMetric({ name: MetricName.AuthenticationRead, userId });
-  this.emitPublicMetric({ name: MetricName.AuthenticationRead });
+  this.emitPrivateMetric(MetricName.AuthenticationRead, { userId });
+  this.emitPublicMetric(MetricName.AuthenticationRead);
   return userId;
 }

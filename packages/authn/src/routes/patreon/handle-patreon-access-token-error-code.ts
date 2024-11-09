@@ -1,4 +1,4 @@
-import type Worker from '@quisido/worker';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import handleInvalidPatreonAccessTokenRequest from './handle-invalid-patreon-access-token-request.js';
 import handleInvalidPatreonClientId from './handle-invalid-patreon-client-id.js';
 import handleInvalidPatreonGrantCode from './handle-invalid-patreon-grant-code.js';
@@ -10,7 +10,7 @@ interface Options {
 }
 
 export default function handlePatreonAccessTokenErrorCode(
-  this: Worker,
+  this: AuthnFetchHandler,
   { code, json }: Options,
 ): never {
   switch (code) {

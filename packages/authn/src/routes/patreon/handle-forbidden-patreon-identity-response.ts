@@ -1,6 +1,6 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import FatalError from '../../utils/fatal-error.js';
 
 /**
@@ -20,12 +20,11 @@ import FatalError from '../../utils/fatal-error.js';
  */
 
 export default function handleForbiddenPatreonIdentityResponse(
-  this: Worker,
+  this: AuthnFetchHandler,
   json: unknown,
 ): never {
-  this.emitPublicMetric({ name: MetricName.ForbiddenPatreonIdentityResponse });
-  this.emitPrivateMetric({
-    name: MetricName.ForbiddenPatreonIdentityResponse,
+  this.emitPublicMetric(MetricName.ForbiddenPatreonIdentityResponse);
+  this.emitPrivateMetric(MetricName.ForbiddenPatreonIdentityResponse, {
     value: JSON.stringify(json),
   });
 

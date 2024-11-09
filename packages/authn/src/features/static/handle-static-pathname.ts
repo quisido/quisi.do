@@ -1,7 +1,6 @@
-import type Worker from '@quisido/worker';
 import { StatusCode } from 'cloudflare-utils';
 import { MetricName } from '../../constants/metric-name.js';
-import getCookieDomain from '../get-cookie-domain.js';
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import FaviconResponse from './favicon-response.js';
 import RobotsResponse from './robots-response.js';
 import { StaticPathname } from './static-pathname.js';
@@ -16,23 +15,23 @@ import { StaticPathname } from './static-pathname.js';
  */
 
 export default function handleStaticPathname(
-  this: Worker,
+  this: AuthnFetchHandler,
   pathname: StaticPathname,
 ): Response {
   switch (pathname) {
     case StaticPathname.Favicon: {
-      this.emitPublicMetric({ name: MetricName.FaviconIco });
+      this.emitPublicMetric(MetricName.FaviconIco);
       return new FaviconResponse();
     }
 
     case StaticPathname.Robots: {
-      this.emitPublicMetric({ name: MetricName.RobotsTxt });
+      this.emitPublicMetric(MetricName.RobotsTxt);
       return new RobotsResponse();
     }
 
     case StaticPathname.Root: {
-      this.emitPublicMetric({ name: MetricName.RootPathname });
-      const cookieDomain: string = getCookieDomain.call(this);
+      this.emitPublicMetric(MetricName.RootPathname);
+      const { cookieDomain } = this;
       return new Response(null, {
         status: StatusCode.PermanentRedirect,
 

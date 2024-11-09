@@ -1,14 +1,15 @@
-import type Worker from '@quisido/worker';
 import { mapToString } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
+import type AuthnFetchHandler from './authn-fetch-handler.js';
 
-export default function getDataBucket(this: Worker): R2Bucket | null {
+export default function getDataBucket(
+  this: AuthnFetchHandler,
+): R2Bucket | null {
   try {
     return this.getR2Bucket('AUTHN_DATA');
   } catch (err: unknown) {
-    this.emitPrivateMetric({
+    this.emitPrivateMetric(MetricName.InvalidDataBucket, {
       message: mapToString(err),
-      name: MetricName.InvalidDataBucket,
     });
 
     return null;

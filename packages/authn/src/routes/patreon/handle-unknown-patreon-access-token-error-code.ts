@@ -1,20 +1,17 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import type Worker from '@quisido/worker';
 import { mapToString } from 'fmrs';
 import { MetricName } from '../../constants/metric-name.js';
+import type AuthnFetchHandler from '../../features/authn-fetch-handler.js';
 import FatalError from '../../utils/fatal-error.js';
 
 export default function handleUnknownPatreonAccessTokenErrorCode(
-  this: Worker,
+  this: AuthnFetchHandler,
   code: unknown,
   json: Record<string, unknown>,
 ): never {
-  this.emitPublicMetric({
-    name: MetricName.UnknownPatreonAccessTokenErrorCode,
-  });
-  this.emitPrivateMetric({
+  this.emitPublicMetric(MetricName.UnknownPatreonAccessTokenErrorCode);
+  this.emitPrivateMetric(MetricName.UnknownPatreonAccessTokenErrorCode, {
     code: mapToString(code),
-    name: MetricName.UnknownPatreonAccessTokenErrorCode,
     value: JSON.stringify({
       ...json,
       error: undefined,
