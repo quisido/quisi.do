@@ -7,3 +7,4 @@ export {
 export { default as FetchHandler } from './fetch-handler.js';
 export { default as Handler, type HandlerOptions } from './handler.js';
 export { MetricName } from './metric-name.js';
+export { type default as Runnable } from './runnable.js';

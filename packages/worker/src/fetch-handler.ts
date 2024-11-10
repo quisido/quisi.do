@@ -1,5 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 import createTraceId from './create-trace-id.js';
+import handleErrorDefault from './default-error-handler.js';
 import { DEFAULT_TRACE_PARENT_METRIC_DIMENSIONS } from './default-trace-parent-metric-dimensions.js';
 import Handler from './handler.js';
 import mapHeadersToCookies from './map-headers-to-cookies.js';
@@ -23,7 +24,7 @@ export default class FetchHandler<
   #traceId = createTraceId();
 
   public constructor(
-    handler: (
+    handleFetch: (
       request: Request<
         CfHostMetadata,
         IncomingRequestCfProperties<CfHostMetadata>
@@ -31,6 +32,11 @@ export default class FetchHandler<
       env: Env,
       ctx: ExecutionContext,
     ) => ReturnType<ExportedHandlerFetchHandler<Env, CfHostMetadata>>,
+    handleError: (
+      error: unknown,
+    ) => ReturnType<
+      ExportedHandlerFetchHandler<Env, CfHostMetadata>
+    > = handleErrorDefault,
   ) {
     super(
       (
@@ -43,7 +49,15 @@ export default class FetchHandler<
       ): ReturnType<ExportedHandlerFetchHandler<Env, CfHostMetadata>> => {
         this.#ctx = ctx;
         this.#request = request;
-        return handler.call(this, request, env, ctx);
+        try {
+          const result = handleFetch.call(this, request, env, ctx);
+          if (!(result instanceof Promise)) {
+            return result;
+          }
+          return result.catch(handleError);
+        } catch (err: unknown) {
+          return handleError(err);
+        }
       },
     );
   }
@@ -59,6 +73,11 @@ export default class FetchHandler<
 
     throw new Error('The execution context may only be accessed during fetch.');
   }
+
+  public getCookie = (name: string): string | undefined => {
+    const { cookies } = this;
+    return cookies[name];
+  };
 
   public getRequestSearchParam = (key: string): string | null => {
     return this.requestSearchParams.get(key);

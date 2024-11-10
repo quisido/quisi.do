@@ -4,9 +4,17 @@ import configs from '@quisido/eslint-config';
 export default [
   ...configs,
 
+  // Rule: max-lines
+  {
+    files: ['src/handler.ts'],
+    rules: {
+      'max-lines': 'off',
+    },
+  },
+
   // Rule: max-statements
   {
-    files: ['src/exported-handler.ts'],
+    files: ['src/exported-handler.ts', 'src/handler.ts'],
     rules: {
       'max-statements': 'off',
     },

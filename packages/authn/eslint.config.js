@@ -32,18 +32,19 @@ export default [
     },
   },
 
+  // Rule: max-classes-per-file
+  {
+    files: ['src/authn-fetch-handler.ts'],
+    rules: {
+      'max-classes-per-file': 'off',
+    },
+  },
+
   // Rule: max-lines-per-function
   {
     rules: {
       'max-lines-per-function': 'off',
     },
-
-    files: [
-      'src/features/analytics/datum-factory-factory.ts',
-      'src/features/analytics/map-row-to-datum.ts',
-      'src/test/authn-test.ts',
-      'src/test/fetch.ts',
-    ],
   },
 
   // Rule: max-params

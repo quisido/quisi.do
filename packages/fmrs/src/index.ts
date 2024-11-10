@@ -32,7 +32,10 @@ export {
   default as isUndefined,
 } from './is-undefined.js';
 export { default as is } from './is.js';
+export { default as mapBooleanToNumber } from './map-boolean-to-number.js';
 export { default as mapEntriesToRecord } from './map-entries-to-record.js';
+export { default as mapEntryToKey } from './map-entry-to-key.js';
+export { default as mapEntryToValue } from './map-entry-to-value.js';
 export { default as mapMapToEntries } from './map-map-to-entries.js';
 export { default as mapMapToRecord } from './map-map-to-record.js';
 export { default as mapToError } from './map-to-error.js';

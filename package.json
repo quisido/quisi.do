@@ -44,7 +44,7 @@
     "postlighthouse": "yarn packages/next run postlighthouse",
     "prepack": "yarn workspaces foreach --all --exclude \"@quisi/do\" --interlaced --jobs unlimited --parallel --topological-dev --verbose run prepack",
     "prepack:limited": "yarn workspaces foreach --all --exclude \"@quisi/do\" --topological-dev --verbose run prepack",
-    "prepublish": "concurrently --kill-others-on-fail --names eslint,prepublish,publint,test,vitest --prefix-colors auto \"yarn run eslint\" \"yarn run prepublish:workspaces\" \"yarn run publint\" \"yarn run test\" \"yarn run vitest:run\"",
+    "prepublish": "concurrently --names eslint,prepublish,publint,test,vitest --prefix-colors auto \"yarn run eslint\" \"yarn run prepublish:workspaces\" \"yarn run publint\" \"yarn run test\" \"yarn run vitest:run\"",
     "prepublish:workspaces": "yarn workspaces foreach --all --exclude \"@quisi/do\" --verbose run prepublish",
     "publint": "publint",
     "publint:workspaces": "yarn workspaces foreach --all --exclude \"@quisi/do\" --verbose run publint",

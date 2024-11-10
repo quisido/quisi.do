@@ -18,7 +18,7 @@ export interface ExportedHandlerOptions<
   readonly onMetric?:
     | ((
         name: string,
-        dimensions: Record<string, number | string>,
+        dimensions: Record<number | string | symbol, boolean | number | string>,
       ) => Promise<void> | void)
     | undefined;
 }
@@ -57,7 +57,7 @@ export const ExportedHandler = class QuisidoExportedHandler<
         };
 
         try {
-          const { handle, onError, onLog, onMetric, onSideEffect } =
+          const { onError, onLog, onMetric, onSideEffect, run } =
             new FetchHandler();
           if (typeof handleError !== 'undefined') {
             onError(handleError);
@@ -72,7 +72,7 @@ export const ExportedHandler = class QuisidoExportedHandler<
           }
 
           onSideEffect(handleSideEffect);
-          return handle({ console, env, fetch }, request, env, ctx);
+          return run({ console, env, fetch }, request, env, ctx);
         } catch (err: unknown) {
           console.error(err);
           return new InternalServerErrorResponse();

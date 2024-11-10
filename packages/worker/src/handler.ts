@@ -3,18 +3,23 @@
 import {
   isAnalyticsEngineDataset,
   isD1Database,
+  isKVNamespace,
   isR2Bucket,
 } from 'cloudflare-utils';
 import { EventEmitter } from 'eventemitter3';
 import { isRecord, mapToError } from 'fmrs';
 import mapMetricDimensionsToDataPoint from './map-metric-dimensions-to-datapoint.js';
 import { MetricName } from './metric-name.js';
+import type Runnable from './runnable.js';
 
 interface EventTypes {
   readonly effect: [Promise<unknown>];
   readonly error: [Error];
   readonly log: [string];
-  readonly metric: [string, Record<string, number | string>];
+  readonly metric: [
+    string,
+    Record<number | string | symbol, boolean | number | string>,
+  ];
 }
 
 export interface HandlerOptions<Env> {
@@ -24,6 +29,41 @@ export interface HandlerOptions<Env> {
   readonly now?: (() => number) | undefined;
 }
 
+type HandlerParameters<
+  K extends keyof Required<ExportedHandler>,
+  Env,
+  QueueHandlerMessage,
+  CfHostMetadata,
+> = readonly [
+  HandlerOptions<Env>,
+  ...Parameters<
+    Required<ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata>>[K]
+  >,
+];
+
+export interface HandlerD1Response {
+  readonly changedDb: boolean;
+  readonly changes: number;
+  readonly duration: number;
+  readonly lastRowId: number;
+  readonly rowsRead: number;
+  readonly rowsWritten: number;
+  readonly sizeAfter: number;
+}
+
+export interface HandlerD1Results extends HandlerD1Response {
+  readonly results: readonly Record<string, unknown>[];
+}
+
+type HandlerReturnType<
+  K extends keyof Required<ExportedHandler>,
+  Env,
+  QueueHandlerMessage,
+  CfHostMetadata,
+> = ReturnType<
+  Required<ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata>>[K]
+>;
+
 const EMPTY_OBJECT: Record<string, never> = {};
 const FIRST = 0;
 
@@ -32,7 +72,12 @@ export default class Handler<
   Env = unknown,
   QueueHandlerMessage = unknown,
   CfHostMetadata = unknown,
-> {
+> implements
+    Runnable<
+      HandlerReturnType<K, Env, QueueHandlerMessage, CfHostMetadata>,
+      HandlerParameters<K, Env, QueueHandlerMessage, CfHostMetadata>
+    >
+{
   readonly #eventEmitter = new EventEmitter<EventTypes>();
   #console: Console = console;
   #env: Env | undefined;
@@ -40,7 +85,7 @@ export default class Handler<
   #now: () => number = Date.now.bind(Date);
   readonly #queue: (() => void)[] = [];
 
-  public readonly handle: (
+  public readonly run: (
     /**
      *   Technical debt: This should be something like `this: this`, to denote
      * that the `handle` function will be bound to the `Handler` object.
@@ -65,7 +110,27 @@ export default class Handler<
       Required<ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata>>[K]
     >,
   ) {
-    this.handle = (
+    this.affect = this.affect.bind(this);
+    this.emitMetric = this.emitMetric.bind(this);
+    this.fetchJson = this.fetchJson.bind(this);
+    this.fetchText = this.fetchText.bind(this);
+    this.flush = this.flush.bind(this);
+    this.getAnalyticsEngineDataset = this.getAnalyticsEngineDataset.bind(this);
+    this.getD1Database = this.getD1Database.bind(this);
+    this.getD1Results = this.getD1Results.bind(this);
+    this.getEnv = this.getEnv.bind(this);
+    this.getKVNamespace = this.getKVNamespace.bind(this);
+    this.getR2Bucket = this.getR2Bucket.bind(this);
+    this.log = this.log.bind(this);
+    this.logError = this.logError.bind(this);
+    this.now = this.now.bind(this);
+    this.onError = this.onError.bind(this);
+    this.onLog = this.onLog.bind(this);
+    this.onMetric = this.onMetric.bind(this);
+    this.onSideEffect = this.onSideEffect.bind(this);
+    this.writeMetricDataPoint = this.writeMetricDataPoint.bind(this);
+
+    this.run = (
       { console, env, fetch, now }: HandlerOptions<Env>,
       ...params: Parameters<
         Required<ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata>>[K]
@@ -84,9 +149,9 @@ export default class Handler<
     };
   }
 
-  public affect = (promise: Promise<unknown>): void => {
+  public affect(promise: Promise<unknown>): void {
     this.#emit('effect', promise);
-  };
+  }
 
   public get console(): Console {
     return this.#console;
@@ -102,14 +167,17 @@ export default class Handler<
     return true;
   }
 
-  public emitMetric = (
+  public emitMetric(
     name: string,
-    dimensions: Record<string, number | string> = EMPTY_OBJECT,
-  ): void => {
+    dimensions: Record<
+      number | string | symbol,
+      boolean | number | string
+    > = EMPTY_OBJECT,
+  ): void {
     this.#emit('metric', name, {
       ...dimensions,
     });
-  };
+  }
 
   public get fetch(): Fetcher['fetch'] {
     if (typeof this.#fetch !== 'undefined') {
@@ -135,39 +203,86 @@ export default class Handler<
     return await response.text();
   }
 
-  public flush = (): void => {
+  public flush(): void {
     const { length } = this.#queue;
     const queue: (() => void)[] = this.#queue.splice(FIRST, length);
     for (const fn of queue) {
       fn();
     }
-  };
+  }
 
-  public getAnalyticsEngineDataset = (name: string): AnalyticsEngineDataset => {
-    const dataset: unknown = this.getEnv(name);
-    if (isAnalyticsEngineDataset(dataset)) {
-      return dataset;
-    }
+  public getAnalyticsEngineDataset(name: string): AnalyticsEngineDataset {
+    return this.validateEnv(name, isAnalyticsEngineDataset);
+  }
 
-    this.emitMetric(MetricName.InvalidAnalyticsEngineDataset, {
-      name,
-    });
+  public getD1Database(name: string): D1Database {
+    return this.validateEnv(name, isD1Database);
+  }
 
-    throw new Error('Expected an Analytics Engine dataset.');
-  };
+  public async getD1Response(
+    env: string,
+    query: string,
+    bindings: readonly (null | number | string)[],
+  ): Promise<HandlerD1Response> {
+    const {
+      meta: {
+        changed_db: changedDb,
+        changes,
+        duration,
+        last_row_id: lastRowId,
+        rows_read: rowsRead,
+        rows_written: rowsWritten,
+        size_after: sizeAfter,
+      },
+    } = await this.getD1Database(env)
+      .prepare(query)
+      .bind(...bindings)
+      .run();
+    return {
+      changedDb,
+      changes,
+      duration,
+      lastRowId,
+      rowsRead,
+      rowsWritten,
+      sizeAfter,
+    };
+  }
 
-  public getD1Database = (name: string): D1Database => {
-    const db: unknown = this.getEnv(name);
-    if (isD1Database(db)) {
-      return db;
-    }
+  public async getD1Results(
+    env: string,
+    query: string,
+    values: readonly (null | number | string)[],
+  ): Promise<HandlerD1Results> {
+    const statement: D1PreparedStatement = this.getD1Database(env)
+      .prepare(query)
+      .bind(...values);
 
-    this.emitMetric(MetricName.InvalidD1Database, {
-      name,
-    });
+    const {
+      results,
 
-    throw new Error('Expected a D1 database.');
-  };
+      meta: {
+        changed_db: changedDb,
+        changes,
+        duration,
+        last_row_id: lastRowId,
+        rows_read: rowsRead,
+        rows_written: rowsWritten,
+        size_after: sizeAfter,
+      },
+    } = await statement.all();
+
+    return {
+      changedDb,
+      changes,
+      duration,
+      lastRowId,
+      results,
+      rowsRead,
+      rowsWritten,
+      sizeAfter,
+    };
+  }
 
   /**
    *   Technical debt: This should be `<K extends keyof Env>(key: K): Env[K]`,
@@ -176,34 +291,33 @@ export default class Handler<
    * `validateEnv: { [K in keyof Env]: (value: unknown) => value is Env[K] }`
    * type, this may be doable with `this.#validateEnv(this.#env[key])`.
    */
-  public getEnv = (key: string): unknown => {
+  public getEnv(key: string): unknown {
     if (isRecord(this.#env)) {
       return this.#env[key];
     }
 
     throw new Error('The environment may only be accessed during fetch.');
-  };
+  }
 
-  public getR2Bucket = (name: string): R2Bucket => {
-    const bucket: unknown = this.getEnv(name);
-    if (isR2Bucket(bucket)) {
-      return bucket;
-    }
+  public getKVNamespace(name: string): KVNamespace {
+    return this.validateEnv(name, isKVNamespace);
+  }
 
-    this.emitMetric(MetricName.InvalidR2Bucket, {
-      name,
-    });
+  public getR2Bucket(name: string): R2Bucket {
+    return this.validateEnv(name, isR2Bucket);
+  }
 
-    throw new Error('Expected an R2 bucket.');
-  };
+  public log(message: string): void {
+    this.#emit('log', message);
+  }
 
-  public logError = (err: Error): void => {
+  public logError(err: Error): void {
     this.#emit('error', err);
-  };
+  }
 
-  public now = (): number => {
+  public now(): number {
     return this.#now();
-  };
+  }
 
   #on<K extends keyof EventTypes>(
     event: K,
@@ -237,39 +351,60 @@ export default class Handler<
     this.#eventEmitter.on(event, handleEvent);
   }
 
-  public onError = (callback: (error: Error) => Promise<void> | void): void => {
+  public onError(callback: (error: Error) => Promise<void> | void): void {
     this.#on('error', callback);
-  };
+  }
 
-  public onLog = (
-    callback: (message: string) => Promise<void> | void,
-  ): void => {
+  public onLog(callback: (message: string) => Promise<void> | void): void {
     this.#on('log', callback);
-  };
+  }
 
-  public onMetric = (
+  public onMetric(
     callback: (
       name: string,
-      dimensions: Record<string, number | string>,
+      dimensions: Record<number | string | symbol, boolean | number | string>,
     ) => Promise<void> | void,
-  ): void => {
+  ): void {
     this.#on('metric', callback);
-  };
+  }
 
-  public onSideEffect = (
+  public onSideEffect(
     callback: (effect: Promise<unknown>) => Promise<void> | void,
-  ): void => {
+  ): void {
     this.#on('effect', callback);
-  };
+  }
 
-  public writeMetricDataPoint = (
+  public validateEnv<T>(
+    key: string,
+    isValid: (value: unknown) => value is T,
+    defaultValue?: T,
+  ): T {
+    const value: unknown = this.getEnv(key);
+    if (isValid(value)) {
+      return value;
+    }
+
+    this.emitMetric(MetricName.InvalidEnvironmentVariable, {
+      key,
+      type: typeof value,
+      value: JSON.stringify(value),
+    });
+
+    if (typeof defaultValue !== 'undefined') {
+      return defaultValue;
+    }
+
+    throw new Error(`Invalid "${key}" environment variable`);
+  }
+
+  public writeMetricDataPoint(
     dataset: string,
     name: string,
-    dimensions: Record<string, number | string>,
-  ): void => {
+    dimensions: Record<number | string | symbol, boolean | number | string>,
+  ): void {
     this.getAnalyticsEngineDataset(dataset).writeDataPoint({
       ...mapMetricDimensionsToDataPoint(dimensions),
       indexes: [name],
     });
-  };
+  }
 }

@@ -42,7 +42,7 @@
     "lighthouse:report:production": "lighthouse https://quisi.do/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental --save-assets",
     "postlighthouse": "yarn node ./scripts/postlighthouse/index.js",
     "prepack": "yarn run build",
-    "prepublish": "concurrently --kill-others-on-fail --names publint,vitest --prefix-colors auto \"yarn run publint\" \"yarn run vitest:run\"",
+    "prepublish": "concurrently --names publint,vitest --prefix-colors auto \"yarn run publint\" \"yarn run vitest:run\"",
     "publint": "publint",
     "serve": "serve out",
     "vitest": "vitest",

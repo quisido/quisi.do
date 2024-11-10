@@ -1,35 +1,15 @@
-import { sortEntriesByKey } from 'fmrs';
-
-const mapEntryToValue = <T>([, value]: readonly [unknown, T]): T => value;
-
-const reduceValuesToDataPoint = (
-  datapoint: Required<Omit<AnalyticsEngineDataPoint, 'indexes'>>,
-  value: number | string | undefined,
-): Required<Omit<AnalyticsEngineDataPoint, 'indexes'>> => {
-  if (typeof value === 'undefined') {
-    return datapoint;
-  }
-
-  if (typeof value === 'number') {
-    return {
-      ...datapoint,
-      doubles: [...datapoint.doubles, value],
-    };
-  }
-
-  return {
-    ...datapoint,
-    blobs: [...datapoint.blobs, value],
-  };
-};
+import { mapEntryToValue, sortEntriesByKey } from 'fmrs';
+import reduceMetricDimensionValuesToDataPoint from './reduce-metric-dimension-values-to-data-point.js';
 
 export default function mapMetricDimensionsToDataPoint(
-  dimensions: Readonly<Partial<Record<string, number | string>>>,
+  dimensions: Readonly<
+    Partial<Record<number | string | symbol, boolean | number | string>>
+  >,
 ): Required<Omit<AnalyticsEngineDataPoint, 'indexes'>> {
   return Object.entries(dimensions)
     .sort(sortEntriesByKey)
     .map(mapEntryToValue)
-    .reduce(reduceValuesToDataPoint, {
+    .reduce(reduceMetricDimensionValuesToDataPoint, {
       blobs: [],
       doubles: [],
     });

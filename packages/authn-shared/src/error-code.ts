@@ -4,10 +4,10 @@ export enum ErrorCode {
   InvalidStateSessionId = 51,
   MissingCookies = 12,
   MissingSessionIdCookie = 13,
-  MissingState = 4,
   MissingStateReturnPath = 9,
+  MissingStateSearchParam = 4,
   MissingStateSessionId = 10,
-  NonJsonState = 5,
+  NonJsonStateSearchParam = 5,
   NonObjectState = 8,
 
   // Patreon
@@ -55,6 +55,7 @@ export enum ErrorCode {
   InvalidIsolateEnvironment = 6,
   InvalidOAuthUserId = 48,
   InvalidUsageDataset = 50,
+  InvalidUnknownEnv = 57,
   MissingAnalyticsId = 55,
   MissingAnalyticsSecret = 56,
   MissingAuthnUserIdsNamespace = 49,

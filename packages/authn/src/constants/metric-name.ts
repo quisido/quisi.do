@@ -1,11 +1,5 @@
 export enum MetricName {
   ErrorCode = 'error.code',
-  InvalidCookieDomain = 'cookie-domain.invalid',
-  InvalidDataBucket = 'bucket.data.invalid',
-  InvalidEnvironmentName = 'environment-name.invalid',
-  InvalidHost = 'host.invalid',
-  InvalidPrivateDataset = 'dataset.private.invalid',
-  InvalidPublicDataset = 'dataset.public.invalid',
   InvalidTraceParent = 'trace-parent.invalid',
   MissingCookieDomain = 'cookie-domain.missing',
   MissingDataBucket = 'bucket.data.missing',
@@ -17,6 +11,9 @@ export enum MetricName {
   MissingPublicDataset = 'dataset.public.missing',
   MissingTraceParent = 'trace-parent.missing',
   SetAuthnUserId = 'namespace.authn-user-ids.set',
+
+  // FetchHandler
+  InvalidEnvironmentVariable = 'env.invalid',
 
   // OAuth
   AuthenticationCreated = 'authentication.created',
