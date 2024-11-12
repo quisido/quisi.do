@@ -4,6 +4,7 @@ import configs from '@quisido/eslint-config';
 export default [
   ...configs,
 
+  // Rule: capitalized-comments
   {
     files: ['src/error-code.ts'],
     rules: {
@@ -11,8 +12,14 @@ export default [
     },
   },
 
+  // Rule: no-magic-numbers
   {
-    files: ['src/error-code.ts', 'src/whoami-response-code.ts'],
+    files: [
+      'src/analytics-response-code.ts',
+      'src/error-code.ts',
+      'src/whoami-response-code.ts',
+    ],
+
     rules: {
       'no-magic-numbers': 'off',
     },

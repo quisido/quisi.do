@@ -10,10 +10,19 @@ export default [
     },
   },
 
+  // Rule: max-statements
   {
-    files: ['src/constants/*.ts'],
+    files: ['src/features/handle-fetch-request.ts'],
     rules: {
-      'no-magic-numbers': 'off',
+      'max-statements': 'off',
+    },
+  },
+
+  // Rule: no-await-in-loop
+  {
+    files: ['src/utils/map-readable-stream-to-string.ts'],
+    rules: {
+      'no-await-in-loop': 'off',
     },
   },
 
@@ -29,13 +38,6 @@ export default [
       'max-lines-per-function': 'off',
       'max-params': 'off',
       'max-statements': 'off',
-    },
-  },
-
-  {
-    files: ['src/utils/map-readable-stream-to-string.ts'],
-    rules: {
-      'no-await-in-loop': 'off',
     },
   },
 ];

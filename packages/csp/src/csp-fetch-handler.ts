@@ -1,0 +1,39 @@
+import { FetchHandler } from '@quisido/worker';
+import type { MetricName } from './constants/metric-name.js';
+import handleFetchRequest from './features/handle-fetch-request.js';
+import type { Tuple } from './types/type.js';
+import queriesFn from './utils/queries.js';
+
+export default class CspFetchHandler extends FetchHandler {
+  public constructor() {
+    super(handleFetchRequest);
+  }
+
+  public emitPrivateMetric = (
+    name: MetricName,
+    dimensions?: Record<number | string | symbol, boolean | number | string>,
+  ): void => {
+    this.emitMetric(name, {
+      ...dimensions,
+      [Symbol('Public')]: false,
+    });
+  };
+
+  public emitPublicMetric = (
+    name: MetricName,
+    dimensions?: Record<number | string | symbol, boolean | number | string>,
+  ): void => {
+    this.emitMetric(name, {
+      ...dimensions,
+      [Symbol('Public')]: true,
+    });
+  };
+
+  public async queries<N extends number>(
+    name: string,
+    queries: Tuple<readonly [string, ...(readonly unknown[])], N>,
+  ): Promise<Tuple<Record<string, unknown>[], N>> {
+    const db: D1Database = this.getD1Database(name);
+    return await queriesFn<N>(db, queries);
+  }
+}

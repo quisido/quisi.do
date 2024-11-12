@@ -303,6 +303,13 @@ export default class Handler<
     return this.validateEnv(name, isKVNamespace);
   }
 
+  public async getKVNamespaceText(
+    namespace: string,
+    key: string,
+  ): Promise<string | null> {
+    return await this.getKVNamespace(namespace).get(key, 'text');
+  }
+
   public getR2Bucket(name: string): R2Bucket {
     return this.validateEnv(name, isR2Bucket);
   }

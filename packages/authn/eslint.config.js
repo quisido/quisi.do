@@ -19,7 +19,7 @@ export default [
     },
 
     files: [
-      'src/features/analytics/datum-factory-factory.ts',
+      'src/analytics/map-analytics-engine-row-index-to-datum-factory.ts',
       'src/utils/is-console.ts',
     ],
   },
@@ -78,6 +78,7 @@ export default [
     },
 
     files: [
+      'src/analytics/is-zero.ts',
       'src/constants/gender.ts',
       'src/constants/oauth-provider.ts',
       'src/constants/patreon-gender.ts',

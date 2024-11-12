@@ -1,5 +1,5 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import handleAnalyticsFetchRequest from '../_features/analytics/handle-analytics-fetch-request.js';
+import handleAnalyticsFetchRequest from '../analytics/handle-analytics-fetch-request.js';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import handleOAuthPathname from '../oauth/handle-oauth-pathname.js';

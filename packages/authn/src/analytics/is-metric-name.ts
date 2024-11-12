@@ -1,4 +1,4 @@
-import { MetricName } from '../../constants/metric-name.js';
+import { MetricName } from '../constants/metric-name.js';
 
 const METRIC_NAMES = new Set<unknown>(Object.values(MetricName));
 

@@ -1,32 +1,26 @@
 import { WhoAmIResponseCode } from '@quisido/authn-shared';
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
-import { MetricName } from '../../constants/metric-name.js';
-import AuthnTest from '../../test/authn-test.js';
+import { MetricName } from '../constants/metric-name.js';
+import AuthnTest from '../test/authn-test.js';
 
-describe('handleInvalidAuthnId', (): void => {
-  it('should emit and respond', async (): Promise<void> => {
+describe('handleMissingAuthnId', (): void => {
+  it('should response with the correct code', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchWhoAmI } =
-      new AuthnTest();
+    const { expectPublicMetric, fetchWhoAmI } = new AuthnTest();
 
     // Act
     const {
-      expectResponseHeadersToBe,
       expectResponseJsonToBe,
+      expectResponseHeadersToBe,
       expectResponseStatusToBe,
     } = await fetchWhoAmI({
-      cookies: '__Secure-Authentication-ID=abcdef',
+      cookies: '__Secure-Session-ID=abcdef',
     });
 
     // Assert
-    expectPublicMetric({ name: MetricName.InvalidAuthnId });
+    expectPublicMetric({ name: MetricName.MissingAuthnId });
     expectResponseStatusToBe(StatusCode.OK);
-
-    expectPrivateMetric({
-      authnId: 'abcdef',
-      name: MetricName.InvalidAuthnId,
-    });
 
     expectResponseHeadersToBe({
       'access-control-allow-credentials': 'true',
@@ -39,7 +33,7 @@ describe('handleInvalidAuthnId', (): void => {
     });
 
     await expectResponseJsonToBe({
-      code: WhoAmIResponseCode.InvalidAuthnId,
+      code: WhoAmIResponseCode.MissingAuthnId,
     });
   });
 });

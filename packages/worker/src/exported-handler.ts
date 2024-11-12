@@ -8,6 +8,7 @@ export interface ExportedHandlerOptions<
 > {
   readonly console: Console;
   readonly fetch: Fetcher['fetch'];
+  readonly now?: (() => number) | undefined;
   readonly onError?: ((error: Error) => Promise<void> | void) | undefined;
   readonly onLog?: ((message: string) => Promise<void> | void) | undefined;
 
@@ -35,6 +36,7 @@ export const ExportedHandler = class QuisidoExportedHandler<
     console,
     fetch,
     FetchHandler,
+    now,
     onError: handleError,
     onLog: handleLog,
     onMetric: handleMetric,
@@ -57,22 +59,26 @@ export const ExportedHandler = class QuisidoExportedHandler<
         };
 
         try {
-          const { onError, onLog, onMetric, onSideEffect, run } =
-            new FetchHandler();
+          const fetchHandler = new FetchHandler();
           if (typeof handleError !== 'undefined') {
-            onError(handleError);
+            fetchHandler.onError(handleError);
           }
 
           if (typeof handleLog !== 'undefined') {
-            onLog(handleLog);
+            fetchHandler.onLog(handleLog);
           }
 
           if (typeof handleMetric !== 'undefined') {
-            onMetric(handleMetric);
+            fetchHandler.onMetric(handleMetric);
           }
 
-          onSideEffect(handleSideEffect);
-          return run({ console, env, fetch }, request, env, ctx);
+          fetchHandler.onSideEffect(handleSideEffect);
+          return fetchHandler.run(
+            { console, env, fetch, now },
+            request,
+            env,
+            ctx,
+          );
         } catch (err: unknown) {
           console.error(err);
           return new InternalServerErrorResponse();

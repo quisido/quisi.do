@@ -1,11 +1,12 @@
-import type { Metric } from '@quisido/worker';
 import { expect } from 'vitest';
-import { EXPECT_ANY_NUMBER, EXPECT_ANY_STRING } from './expect-any.js';
 import { TEST_CONSOLE_LOG } from './test-console.js';
 
 const JSON_SPACE = 2;
 
-export default function expectPublicMetric(metric: Metric): void {
+export default function expectPublicMetric(
+  name: string,
+  dimensions: Record<string, boolean | number | string>,
+): void {
   const metrics: string[] = [];
   for (const call of TEST_CONSOLE_LOG.mock.calls) {
     const [prefix, metricStr] = call as readonly unknown[];
@@ -15,14 +16,7 @@ export default function expectPublicMetric(metric: Metric): void {
 
     try {
       const metricJson: unknown = JSON.parse(metricStr);
-      expect(metricJson).toEqual({
-        timestamp: EXPECT_ANY_NUMBER,
-        traceFlags: EXPECT_ANY_NUMBER,
-        traceId: EXPECT_ANY_STRING,
-        traceParentId: EXPECT_ANY_STRING,
-        traceVersion: EXPECT_ANY_NUMBER,
-        ...metric,
-      });
+      expect(metricJson).toEqual(dimensions);
       return;
     } catch (_err: unknown) {
       metrics.push(metricStr);
@@ -30,9 +24,9 @@ export default function expectPublicMetric(metric: Metric): void {
     }
   }
 
-  throw new Error(`Expected to emit a public metric:
+  throw new Error(`Expected to emit "${name}" publicly:
 
-${JSON.stringify(metric, null, JSON_SPACE)}
+${JSON.stringify(dimensions, null, JSON_SPACE)}
 
 in:
 

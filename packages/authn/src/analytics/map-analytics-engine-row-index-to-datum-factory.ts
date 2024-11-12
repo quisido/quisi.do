@@ -1,7 +1,7 @@
 import type { AnalyticsEngineRow } from 'cloudflare-utils';
-import { MetricName } from '../../constants/metric-name.js';
-import { MILLISECONDS_PER_SECOND } from '../../constants/time.js';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
+import { MetricName } from '../constants/metric-name.js';
+import { MILLISECONDS_PER_SECOND } from '../constants/time.js';
 import { type Datum } from './datum.js';
 import isMetricName from './is-metric-name.js';
 import mapRowToDatum from './map-row-to-datum.js';
@@ -9,7 +9,7 @@ import mapRowToDatum from './map-row-to-datum.js';
 const mapRowToTimestamp = ({ timestamp }: AnalyticsEngineRow): number =>
   new Date(timestamp).getTime() / MILLISECONDS_PER_SECOND;
 
-export default function datumFactoryFactory(
+export default function mapAnalyticsEngineRowIndexToDatumFactory(
   this: AuthnFetchHandler,
   index: string,
 ): (row: AnalyticsEngineRow) => Datum {
@@ -38,11 +38,8 @@ export default function datumFactoryFactory(
     case MetricName.InvalidAnalyticsSecret:
     case MetricName.InvalidAuthnId:
     case MetricName.InvalidAuthnUserIdsNamespace:
-    case MetricName.InvalidCookieDomain:
-    case MetricName.InvalidDataBucket:
     case MetricName.InvalidDatabase:
-    case MetricName.InvalidEnvironmentName:
-    case MetricName.InvalidHost:
+    case MetricName.InvalidEnvironmentVariable:
     case MetricName.InvalidInvalidPatreonAccessTokenRequestDescription:
     case MetricName.InvalidOAuthUserId:
     case MetricName.InvalidPatreonAccessToken:
@@ -62,8 +59,6 @@ export default function datumFactoryFactory(
     case MetricName.InvalidPatreonOAuthRedirectUri:
     case MetricName.InvalidPatreonOAuthToken:
     case MetricName.InvalidPatreonOAuthTokenResponse:
-    case MetricName.InvalidPrivateDataset:
-    case MetricName.InvalidPublicDataset:
     case MetricName.InvalidReturnPath:
     case MetricName.InvalidStateSessionId:
     case MetricName.InvalidTraceParent:

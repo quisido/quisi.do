@@ -1,16 +1,17 @@
 import { StatusCode } from 'cloudflare-utils';
 import { expect } from 'vitest';
+import AuthnFetchHandler from '../authn-fetch-handler.js';
 import { SECONDS_PER_DAY } from '../constants/time.js';
 import { EXPECT_ANY_NUMBER } from '../test/expect-any.js';
 import AuthnTestD1Database from './authn-test-d1-database.js';
 import createAuthnTestHeaders from './create-authn-test-headers.js';
 import createIp from './create-ip.js';
-import TestD1Database from './d1-database.js';
 import type FetchTest from './fetch-test.js';
 import getAuthnTestEnv from './get-authn-test-env.js';
-import TestKVNamespace from './kv-namespace.js';
-import TestR2Bucket from './r2-bucket.js';
-import WorkerTest from './worker-test.js';
+import TestD1Database from './test-d1-database.js';
+import TestExportedHandler from './test-exported-handler.js';
+import TestKVNamespace from './test-kv-namespace.js';
+import TestR2Bucket from './test-r2-bucket.js';
 
 interface FetchPatreonOptions {
   readonly code?: string | undefined;
@@ -53,11 +54,10 @@ const DEFAULT_AUTHN_USER_IDS: Partial<Record<string, string>> = {};
 const DEFAULT_OPTIONS: Options = {};
 const FIRST = 1;
 
-export default class AuthnTest extends WorkerTest {
+export default class AuthnTest extends TestExportedHandler {
   #authnUserIdsNamespace: unknown;
   #dataBucket: unknown;
   #database: TestD1Database;
-  #now: number | undefined;
 
   public constructor({
     authnUserIds = DEFAULT_AUTHN_USER_IDS,
@@ -103,7 +103,7 @@ export default class AuthnTest extends WorkerTest {
     );
 
     super({
-      ExportedHandler: WORKER.ExportedHandler,
+      FetchHandler: AuthnFetchHandler,
 
       env: {
         ...getAuthnTestEnv(options),
@@ -111,10 +111,6 @@ export default class AuthnTest extends WorkerTest {
         AUTHN_DB: getOption('database', database),
         AUTHN_USER_IDS: authnUserIdsNamespace,
         PATREON_OAUTH_HOST: patreonOAuthHost,
-      },
-
-      now: (): number => {
-        return this.#now ?? Date.now();
       },
     });
 
@@ -258,8 +254,4 @@ export default class AuthnTest extends WorkerTest {
 
     this.onFetch(`${host}/api/oauth2/token`, new Response(body, init));
   }
-
-  public setNow = (now: number): void => {
-    this.#now = now;
-  };
 }

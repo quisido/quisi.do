@@ -4,7 +4,7 @@ import {
   INSERT_INTO_USERS_QUERY,
   SELECT_USERID_FROM_OAUTH_QUERY,
 } from '../constants/queries.js';
-import TestD1Database from './d1-database.js';
+import TestD1Database from './test-d1-database.js';
 
 interface Options {
   readonly insertIntoEmailsError?: Error | undefined;

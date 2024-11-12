@@ -1,43 +1,48 @@
 /// <reference types="@cloudflare/workers-types" />
 import handleStaticPathname from '../constants/handle-static-pathname.js';
-import { getRequestMethod, getRequestPathname } from '../constants/worker.js';
+import { MetricName } from '../constants/metric-name.js';
+import type CspFetchHandler from '../csp-fetch-handler.js';
+import InvalidPathnameResponse from '../utils/invalid-pathname-response.js';
 import isAllowedMethod from '../utils/is-allowed-method.js';
 import isStaticPathname from '../utils/is-static-pathname.js';
 import mapPathnameToProjectId from '../utils/map-pathname-to-project-id.js';
+import MethodNotAllowedResponse from '../utils/method-not-allowed-response.js';
 import Response from '../utils/response.js';
 import handleGet from './handle-get.js';
-import handleInvalidPathname from './handle-invalid-pathname.js';
-import handleNotAllowedMethodResponse from './handle-not-allowed-method-response.js';
 import handleOptions from './handle-options.js';
 import handlePost from './handle-post.js';
 
-export default async function handleFetchRequest(): Promise<Response> {
+export default async function handleFetchRequest(
+  this: CspFetchHandler,
+): Promise<Response> {
   // Method
-  const method: string = getRequestMethod();
-  if (!isAllowedMethod(method)) {
-    return handleNotAllowedMethodResponse(method);
+  const { requestMethod } = this;
+  if (!isAllowedMethod(requestMethod)) {
+    this.emitPublicMetric(MetricName.MethodNotAllowed);
+    return new MethodNotAllowedResponse();
   }
 
   // Static responses
-  const pathname: string = getRequestPathname();
-  if (isStaticPathname(pathname)) {
-    return handleStaticPathname(pathname);
+  const { requestPathname } = this;
+  if (isStaticPathname(requestPathname)) {
+    return handleStaticPathname(requestPathname);
   }
 
   // Project pathnames
-  const projectId: number = mapPathnameToProjectId(pathname);
+  const projectId: number = mapPathnameToProjectId(requestPathname);
   if (Number.isNaN(projectId)) {
-    return handleInvalidPathname(pathname);
+    this.logError(new Error('Invalid pathname', { cause: requestPathname }));
+    return new InvalidPathnameResponse();
   }
 
-  switch (method) {
+  switch (requestMethod) {
     case 'GET':
-      return await handleGet(projectId);
+      return await handleGet.call(this, projectId);
 
     case 'OPTIONS':
-      return await handleOptions(projectId);
+      return await handleOptions.call(this, projectId);
 
     case 'POST':
-      return await handlePost(projectId);
+      return await handlePost.call(this, projectId);
   }
 }
