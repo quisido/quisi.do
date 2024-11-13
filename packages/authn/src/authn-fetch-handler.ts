@@ -3,6 +3,7 @@ import { FetchHandler } from '@quisido/worker';
 import { isR2Bucket, ResponseInitImpl } from 'cloudflare-utils';
 import { isString } from 'fmrs';
 import { EnvironmentName } from './constants/environment-name.js';
+import { PUBLIC } from './constants/metric-dimensions.js';
 import { MetricName } from './constants/metric-name.js';
 import type { OAuthProvider } from './constants/oauth-provider.js';
 import {
@@ -72,7 +73,7 @@ export default class AuthnFetchHandler extends FetchHandler {
   ): void => {
     this.emitMetric(name, {
       ...dimensions,
-      [Symbol('Public')]: false,
+      [PUBLIC]: false,
     });
   };
 
@@ -82,7 +83,7 @@ export default class AuthnFetchHandler extends FetchHandler {
   ): void => {
     this.emitMetric(name, {
       ...dimensions,
-      [Symbol('Public')]: true,
+      [PUBLIC]: true,
     });
   };
 

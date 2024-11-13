@@ -4,6 +4,14 @@ import configs from '@quisido/eslint-config';
 export default [
   ...configs,
 
+  // Rule: @typescript-eslint/no-dynamic-delete
+  {
+    files: ['src/handle-metric.ts'],
+    rules: {
+      '@typescript-eslint/no-dynamic-delete': 'off',
+    },
+  },
+
   // Rule: capitalized-comments
   {
     files: ['src/constants/metric-name.ts'],

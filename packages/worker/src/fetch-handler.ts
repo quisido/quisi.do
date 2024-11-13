@@ -54,9 +54,9 @@ export default class FetchHandler<
           if (!(result instanceof Promise)) {
             return result;
           }
-          return result.catch(handleError);
+          return result.catch(handleError.bind(this));
         } catch (err: unknown) {
-          return handleError(err);
+          return handleError.call(this, err);
         }
       },
     );

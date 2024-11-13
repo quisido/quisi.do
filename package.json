@@ -31,7 +31,7 @@
     "cloudflare-analytics": "yarn packages/cloudflare-analytics run dev",
     "cloudflare-analytics:init": "yarn packages/cloudflare-analytics run init",
     "csp": "yarn packages/csp run dev",
-    "dev": "concurrently --kill-others-on-fail --names authn,csp,next,worker --prefix-colors auto \"yarn run authn\" \"yarn run csp\" \"yarn run next\" \"yarn run worker\"",
+    "dev": "concurrently --kill-others --kill-others-on-fail --names authn,csp,next,worker --prefix-colors auto \"yarn run authn\" \"yarn run csp\" \"yarn run next\" \"yarn run worker\"",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "eslint:fix:workspaces": "yarn workspaces foreach --all --exclude \"@quisi/do\" --exclude \"@quisido/next\" --verbose run eslint:fix",

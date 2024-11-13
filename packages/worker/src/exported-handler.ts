@@ -60,6 +60,8 @@ export const ExportedHandler = class QuisidoExportedHandler<
 
         try {
           const fetchHandler = new FetchHandler();
+          fetchHandler.onSideEffect(handleSideEffect);
+
           if (typeof handleError !== 'undefined') {
             fetchHandler.onError(handleError);
           }
@@ -72,7 +74,6 @@ export const ExportedHandler = class QuisidoExportedHandler<
             fetchHandler.onMetric(handleMetric);
           }
 
-          fetchHandler.onSideEffect(handleSideEffect);
           return fetchHandler.run(
             { console, env, fetch, now },
             request,

@@ -112,6 +112,7 @@ export default class Handler<
   ) {
     this.affect = this.affect.bind(this);
     this.emitMetric = this.emitMetric.bind(this);
+    this.fetch = this.fetch.bind(this);
     this.fetchJson = this.fetchJson.bind(this);
     this.fetchText = this.fetchText.bind(this);
     this.flush = this.flush.bind(this);
@@ -128,6 +129,7 @@ export default class Handler<
     this.onLog = this.onLog.bind(this);
     this.onMetric = this.onMetric.bind(this);
     this.onSideEffect = this.onSideEffect.bind(this);
+    this.validateEnv = this.validateEnv.bind(this);
     this.writeMetricDataPoint = this.writeMetricDataPoint.bind(this);
 
     this.run = (
@@ -145,7 +147,20 @@ export default class Handler<
         this.#now = now;
       }
 
-      return handler.call(this, ...params);
+      const result: ReturnType<
+        Required<ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata>>[K]
+      > = handler.call(this, ...params);
+      if (!(result instanceof Promise)) {
+        this.flush();
+        return result;
+      }
+
+      return result.then(response => {
+        this.flush();
+        return response;
+      }) as ReturnType<
+        Required<ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata>>[K]
+      >;
     };
   }
 
@@ -179,9 +194,11 @@ export default class Handler<
     });
   }
 
-  public get fetch(): Fetcher['fetch'] {
+  public fetch(
+    ...params: Parameters<Fetcher['fetch']>
+  ): ReturnType<Fetcher['fetch']> {
     if (typeof this.#fetch !== 'undefined') {
-      return this.#fetch;
+      return this.#fetch.call(null, ...params);
     }
 
     throw new Error('You may only fetch during an operation.');
@@ -207,7 +224,7 @@ export default class Handler<
     const { length } = this.#queue;
     const queue: (() => void)[] = this.#queue.splice(FIRST, length);
     for (const fn of queue) {
-      fn();
+      fn.call(this);
     }
   }
 
@@ -359,11 +376,11 @@ export default class Handler<
   }
 
   public onError(callback: (error: Error) => Promise<void> | void): void {
-    this.#on('error', callback);
+    this.#on('error', callback.bind(this));
   }
 
   public onLog(callback: (message: string) => Promise<void> | void): void {
-    this.#on('log', callback);
+    this.#on('log', callback.bind(this));
   }
 
   public onMetric(
@@ -372,13 +389,13 @@ export default class Handler<
       dimensions: Record<number | string | symbol, boolean | number | string>,
     ) => Promise<void> | void,
   ): void {
-    this.#on('metric', callback);
+    this.#on('metric', callback.bind(this));
   }
 
   public onSideEffect(
     callback: (effect: Promise<unknown>) => Promise<void> | void,
   ): void {
-    this.#on('effect', callback);
+    this.#on('effect', callback.bind(this));
   }
 
   public validateEnv<T>(

@@ -14,7 +14,7 @@ export default [
 
   // Rule: max-lines-per-function
   {
-    files: ['src/exported-handler.ts'],
+    files: ['src/exported-handler.ts', 'src/handler.ts'],
     rules: {
       'max-lines-per-function': 'off',
     },
