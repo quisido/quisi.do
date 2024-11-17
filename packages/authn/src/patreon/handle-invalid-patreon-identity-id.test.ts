@@ -1,34 +1,31 @@
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
-import { MetricName } from '../../constants/metric-name.js';
-import AuthnTest from '../../test/authn-test.js';
+import { MetricName } from '../constants/metric-name.js';
+import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handleInvalidPatreonIdentityId', (): void => {
   it('should emit and respond', async (): Promise<void> => {
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
-      new AuthnTest({
+      new TestAuthnExportedHandler({
         patreonIdentity: '{"data":{"id":true}}',
       });
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
-      await fetchPatreon();
+    const { expectHeadersToBe, expectStatusCodeToBe } = await fetchPatreon();
 
     // Assert
-    expectResponseStatusToBe(StatusCode.SeeOther);
+    expectStatusCodeToBe(StatusCode.SeeOther);
 
-    expectPrivateMetric({
-      name: MetricName.InvalidPatreonIdentityId,
+    expectPrivateMetric(MetricName.InvalidPatreonIdentityId, {
       value: 'true',
     });
 
-    expectPublicMetric({
-      name: MetricName.InvalidPatreonIdentityId,
+    expectPublicMetric(MetricName.InvalidPatreonIdentityId, {
       type: 'boolean',
     });
 
-    expectResponseHeadersToBe({
+    expectHeadersToBe({
       'access-control-allow-methods': 'GET',
       allow: 'GET',
       'content-location': 'https://test.host/test-return-path/#authn:error=45',

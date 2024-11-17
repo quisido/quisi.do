@@ -193,12 +193,9 @@ export default class AuthnTest extends TestExportedHandler {
       urlSearchParams.set('code', code);
     }
 
-    return this.fetch(
-      `https://localhost/patreon/?${urlSearchParams.toString()}`,
-      {
-        headers,
-      },
-    );
+    return this.fetch(`/patreon/?${urlSearchParams.toString()}`, {
+      headers,
+    });
   };
 
   public fetchWhoAmI = ({
@@ -225,7 +222,7 @@ export default class AuthnTest extends TestExportedHandler {
       origin,
     });
 
-    return this.fetch('https://localhost/whoami/', {
+    return this.fetch('/whoami/', {
       headers,
       method,
     });

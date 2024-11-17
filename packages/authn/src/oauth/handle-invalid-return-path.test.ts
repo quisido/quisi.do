@@ -1,32 +1,31 @@
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
-import { MetricName } from '../../constants/metric-name.js';
-import AuthnTest from '../../test/authn-test.js';
+import { MetricName } from '../constants/metric-name.js';
+import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handleInvalidReturnPath', (): void => {
   it('should emit and respond for missing return path', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } = new AuthnTest();
+    const { expectPrivateMetric, expectPublicMetric, fetch } =
+      new TestAuthnExportedHandler();
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetch(
-      'https://localhost/patreon/?state=%7B%22a%22%3A%22b%22%2C%22c%22%3A%22d%22%7D',
+    const { expectHeadersToBe, expectStatusCodeToBe } = await fetch(
+      '/patreon/?state=%7B%22a%22%3A%22b%22%2C%22c%22%3A%22d%22%7D',
     );
 
     // Assert
-    expectResponseStatusToBe(StatusCode.SeeOther);
+    expectStatusCodeToBe(StatusCode.SeeOther);
 
-    expectPrivateMetric({
-      name: MetricName.MissingReturnPath,
+    expectPrivateMetric(MetricName.MissingReturnPath, {
       searchParam: '{"a":"b","c":"d"}',
     });
 
-    expectPublicMetric({
+    expectPublicMetric(MetricName.MissingReturnPath, {
       keys: 'a, c',
-      name: MetricName.MissingReturnPath,
     });
 
-    expectResponseHeadersToBe({
+    expectHeadersToBe({
       'access-control-allow-methods': 'GET',
       allow: 'GET',
       'content-location': 'https://test.host/#authn:error=9',
@@ -36,27 +35,26 @@ describe('handleInvalidReturnPath', (): void => {
 
   it('should emit and respond for non-string return paths', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } = new AuthnTest();
+    const { expectPrivateMetric, expectPublicMetric, fetch } =
+      new TestAuthnExportedHandler();
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } = await fetch(
-      'https://localhost/patreon/?state=%7B%22returnPath%22%3Atrue%7D',
+    const { expectHeadersToBe, expectStatusCodeToBe } = await fetch(
+      '/patreon/?state=%7B%22returnPath%22%3Atrue%7D',
     );
 
     // Assert
-    expectResponseStatusToBe(StatusCode.SeeOther);
+    expectStatusCodeToBe(StatusCode.SeeOther);
 
-    expectPrivateMetric({
-      name: MetricName.InvalidReturnPath,
+    expectPrivateMetric(MetricName.InvalidReturnPath, {
       value: 'true',
     });
 
-    expectPublicMetric({
-      name: MetricName.InvalidReturnPath,
+    expectPublicMetric(MetricName.InvalidReturnPath, {
       type: 'boolean',
     });
 
-    expectResponseHeadersToBe({
+    expectHeadersToBe({
       'access-control-allow-methods': 'GET',
       allow: 'GET',
       'content-location': 'https://test.host/#authn:error=11',

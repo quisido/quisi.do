@@ -1,12 +1,12 @@
 import { describe, it } from 'vitest';
-import { MetricName } from '../../constants/metric-name.js';
-import AuthnTest from '../../test/authn-test.js';
+import { MetricName } from '../constants/metric-name.js';
+import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handleInvalidPatreonIdentityAttributes', (): void => {
   it('should emit when attributes are missing', async (): Promise<void> => {
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
-      new AuthnTest({
+      new TestAuthnExportedHandler({
         patreonIdentity: '{"data":{"id":"test-id"}}',
       });
 
@@ -14,18 +14,17 @@ describe('handleInvalidPatreonIdentityAttributes', (): void => {
     await fetchPatreon();
 
     // Assert
-    expectPrivateMetric({
+    expectPrivateMetric(MetricName.MissingPatreonIdentityAttributes, {
       data: '{"id":"test-id"}',
-      name: MetricName.MissingPatreonIdentityAttributes,
     });
 
-    expectPublicMetric({ name: MetricName.MissingPatreonIdentityAttributes });
+    expectPublicMetric(MetricName.MissingPatreonIdentityAttributes);
   });
 
   it('should emit when attributes are invalid', async (): Promise<void> => {
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
-      new AuthnTest({
+      new TestAuthnExportedHandler({
         patreonIdentity:
           '{"data":{"attributes":"test-attributes","id":"test-id"}}',
       });
@@ -34,13 +33,11 @@ describe('handleInvalidPatreonIdentityAttributes', (): void => {
     await fetchPatreon();
 
     // Assert
-    expectPrivateMetric({
-      name: MetricName.InvalidPatreonIdentityAttributes,
+    expectPrivateMetric(MetricName.InvalidPatreonIdentityAttributes, {
       value: '"test-attributes"',
     });
 
-    expectPublicMetric({
-      name: MetricName.InvalidPatreonIdentityAttributes,
+    expectPublicMetric(MetricName.InvalidPatreonIdentityAttributes, {
       type: 'string',
     });
   });

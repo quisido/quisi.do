@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import TestKVNamespace from './kv-namespace.js';
+import TestKVNamespace from './test-kv-namespace.js';
 
 describe('TestKVNamespace', (): void => {
   it('should throw an error when getting an unimplemented option', async (): Promise<void> => {

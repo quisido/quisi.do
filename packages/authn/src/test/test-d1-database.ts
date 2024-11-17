@@ -1,4 +1,4 @@
-import { TestD1PreparedStatement } from './d1-prepared-statement.js';
+import { TestD1PreparedStatement } from './test-d1-prepared-statement.js';
 import unimplementedMethod from './unimplemented-method.js';
 
 interface Result {

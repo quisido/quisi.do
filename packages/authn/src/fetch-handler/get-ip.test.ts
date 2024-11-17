@@ -1,13 +1,15 @@
 import { describe, it } from 'vitest';
 import { EnvironmentName } from '../constants/environment-name.js';
 import { MetricName } from '../constants/metric-name.js';
-import AuthnTest from '../test/authn-test.js';
+import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handleWhoAmIThrottle', (): void => {
   it('should be 127.0.0.1 during development', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, fetchWhoAmI } = new AuthnTest({
-      environmentName: EnvironmentName.Development,
+    const { expectPrivateMetric, fetchWhoAmI } = new TestAuthnExportedHandler({
+      env: {
+        ENVIRONMENT_NAME: EnvironmentName.Development,
+      },
     });
 
     // Act
@@ -20,16 +22,17 @@ describe('handleWhoAmIThrottle', (): void => {
     });
 
     // Assert
-    expectPrivateMetric({
+    expectPrivateMetric(MetricName.WhoAmIThrottled, {
       ip: '127.0.0.1',
-      name: MetricName.WhoAmIThrottled,
     });
   });
 
   it('should emit and be 127.0.0.1 when missing', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetchWhoAmI } = new AuthnTest({
-      environmentName: EnvironmentName.Production,
+    const { expectPublicMetric, fetchWhoAmI } = new TestAuthnExportedHandler({
+      env: {
+        ENVIRONMENT_NAME: EnvironmentName.Production,
+      },
     });
 
     // Act
@@ -39,6 +42,6 @@ describe('handleWhoAmIThrottle', (): void => {
     });
 
     // Assert
-    expectPublicMetric({ name: MetricName.MissingIP });
+    expectPublicMetric(MetricName.MissingIP);
   });
 });

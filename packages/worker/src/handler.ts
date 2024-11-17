@@ -9,6 +9,7 @@ import {
 import { EventEmitter } from 'eventemitter3';
 import { isRecord, mapToError } from 'fmrs';
 import mapMetricDimensionsToDataPoint from './map-metric-dimensions-to-datapoint.js';
+import mapRequestInfoToString from './map-request-info-to-string.js';
 import { MetricName } from './metric-name.js';
 import type Runnable from './runnable.js';
 
@@ -194,11 +195,23 @@ export default class Handler<
     });
   }
 
-  public fetch(
-    ...params: Parameters<Fetcher['fetch']>
-  ): ReturnType<Fetcher['fetch']> {
+  public async fetch(
+    input: RequestInfo<unknown, CfProperties>,
+    init?: RequestInit,
+  ): Promise<Response> {
     if (typeof this.#fetch !== 'undefined') {
-      return this.#fetch.call(null, ...params);
+      const startTime: number = this.now();
+      try {
+        const response: Response = await this.#fetch.call(null, input, init);
+        return response;
+      } finally {
+        const url: string = mapRequestInfoToString(input);
+        this.emitMetric(MetricName.Fetch, {
+          endTime: this.now(),
+          startTime,
+          url,
+        });
+      }
     }
 
     throw new Error('You may only fetch during an operation.');

@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import AuthnTest from '../../test/authn-test.js';
+import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('parsePatreonIdentity', (): void => {
   it('should write to data bucket', async (): Promise<void> => {
     // Assemble
-    const { expectDataToHavePut, fetchPatreon } = new AuthnTest({
+    const { expectDataToHavePut, fetchPatreon } = new TestAuthnExportedHandler({
       patreonIdentity: '{"data":{"id":"test-id"}}',
     });
 

@@ -1,24 +1,23 @@
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
-import { MetricName } from '../../constants/metric-name.js';
-import AuthnTest from '../../test/authn-test.js';
+import { MetricName } from '../constants/metric-name.js';
+import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('getPatreonRequestCode', (): void => {
   it('should emit and respond when missing', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetchPatreon } = new AuthnTest();
+    const { expectPublicMetric, fetchPatreon } = new TestAuthnExportedHandler();
 
     // Act
-    const { expectResponseHeadersToBe, expectResponseStatusToBe } =
-      await fetchPatreon({
-        code: undefined,
-      });
+    const { expectHeadersToBe, expectStatusCodeToBe } = await fetchPatreon({
+      code: undefined,
+    });
 
     // Assert
-    expectPublicMetric({ name: MetricName.MissingPatreonRequestCode });
-    expectResponseStatusToBe(StatusCode.SeeOther);
+    expectPublicMetric(MetricName.MissingPatreonRequestCode);
+    expectStatusCodeToBe(StatusCode.SeeOther);
 
-    expectResponseHeadersToBe({
+    expectHeadersToBe({
       'access-control-allow-methods': 'GET',
       allow: 'GET',
       'content-location': 'https://test.host/test-return-path/#authn:error=15',

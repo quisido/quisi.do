@@ -1,22 +1,22 @@
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
-import AuthnTest from '../test/authn-test.js';
+import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handleStaticPathname', (): void => {
   describe('favicon.ico', (): void => {
     it('should emit and respond', async (): Promise<void> => {
       // Assemble
-      const { expectPublicMetric, fetch } = new AuthnTest();
+      const { expectPublicMetric, fetch } = new TestAuthnExportedHandler();
 
       // Act
-      const { expectResponseHeadersToBe, expectResponseStatusToBe } =
-        await fetch('https://localhost/favicon.ico');
+      const { expectHeadersToBe, expectStatusCodeToBe } =
+        await fetch('/favicon.ico');
 
       // Assert
-      expectPublicMetric({ name: MetricName.FaviconIco });
-      expectResponseStatusToBe(StatusCode.OK);
-      expectResponseHeadersToBe({
+      expectPublicMetric(MetricName.FaviconIco);
+      expectStatusCodeToBe(StatusCode.OK);
+      expectHeadersToBe({
         'access-control-allow-methods': 'GET',
         'access-control-max-age': '31536000',
         allow: 'GET',
@@ -29,16 +29,16 @@ describe('handleStaticPathname', (): void => {
   describe('robots.txt', (): void => {
     it('should emit and respond', async (): Promise<void> => {
       // Assemble
-      const { expectPublicMetric, fetch } = new AuthnTest();
+      const { expectPublicMetric, fetch } = new TestAuthnExportedHandler();
 
       // Act
-      const { expectResponseHeadersToBe, expectResponseStatusToBe } =
-        await fetch('https://localhost/robots.txt');
+      const { expectHeadersToBe, expectStatusCodeToBe } =
+        await fetch('/robots.txt');
 
       // Assert
-      expectPublicMetric({ name: MetricName.RobotsTxt });
-      expectResponseStatusToBe(StatusCode.OK);
-      expectResponseHeadersToBe({
+      expectPublicMetric(MetricName.RobotsTxt);
+      expectStatusCodeToBe(StatusCode.OK);
+      expectHeadersToBe({
         'access-control-allow-methods': 'GET',
         'access-control-max-age': '31536000',
         allow: 'GET',

@@ -1,5 +1,6 @@
 'use client';
 
+import I18n from 'lazy-i18n';
 import { memo, type ReactElement } from 'react';
 import useTheme from '../hooks/use-theme.js';
 import validateString from '../utils/validate-string.js';
@@ -38,7 +39,7 @@ function Header(): ReactElement {
           className={TAG_LINE_CLASS_NAME}
           style={{ fontFamily: `"Cairo Play", ${displayFontFamily}` }}
         >
-          software as a service
+          <I18n>front end platform service</I18n>
         </span>
       </div>
       <Authentication />

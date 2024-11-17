@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import TestD1Database from './d1-database.js';
+import TestD1Database from './test-d1-database.js';
 
 describe('TestD1Database', (): void => {
   it('should throw an error when querying unprepared statements', (): void => {
