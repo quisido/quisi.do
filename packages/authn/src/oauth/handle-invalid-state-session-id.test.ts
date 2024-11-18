@@ -4,61 +4,82 @@ import { MetricName } from '../constants/metric-name.js';
 import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handleInvalidStateSessionId', (): void => {
-  it('should emit and respond for missing session IDs', async (): Promise<void> => {
+  it('should emit and respond for a missing state session ID', async (): Promise<void> => {
+    const testState: string = JSON.stringify({
+      a: 1,
+      c: 'str',
+      returnPath: '/',
+    });
+
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler();
+      new TestAuthnExportedHandler({
+        env: {
+          HOST: 'host.test.quisi.do',
+        },
+      });
 
     // Act
-    const { expectHeadersToBe, expectStatusCodeToBe } = await fetch(
-      '/patreon/?state=%7B%22a%22%3A%22b%22%2C%22returnPath%22%3A%22test%22%7D',
-    );
+    const search: string = new URLSearchParams({ state: testState }).toString();
+    const { expectHeadersToBe, expectNoBody, expectStatusCodeToBe } =
+      await fetch(`/patreon/?${search}`);
 
     // Assert
+    expectNoBody();
     expectStatusCodeToBe(StatusCode.SeeOther);
 
+    expectHeadersToBe({
+      'access-control-allow-methods': 'GET',
+      allow: 'GET',
+      'content-location': 'https://host.test.quisi.do/#authn:error=10',
+      location: 'https://host.test.quisi.do/#authn:error=10',
+    });
+
     expectPrivateMetric(MetricName.MissingStateSessionId, {
-      searchParam: '{"a":"b","returnPath":"test"}',
+      searchParam: testState,
     });
 
     expectPublicMetric(MetricName.MissingStateSessionId, {
-      keys: 'a, returnPath',
-    });
-
-    expectHeadersToBe({
-      'access-control-allow-methods': 'GET',
-      allow: 'GET',
-      'content-location': 'https://test.host/#authn:error=10',
-      location: 'https://test.host/#authn:error=10',
+      keys: 'a, c, returnPath',
     });
   });
 
-  it('should emit and respond for invalid session IDs', async (): Promise<void> => {
+  it('should emit and respond for a non-string state session ID', async (): Promise<void> => {
+    const testState: string = JSON.stringify({
+      returnPath: '/',
+      sessionId: null,
+    });
+
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler();
+      new TestAuthnExportedHandler({
+        env: {
+          HOST: 'host.test.quisi.do',
+        },
+      });
 
     // Act
-    const { expectHeadersToBe, expectStatusCodeToBe } = await fetch(
-      '/patreon/?state=%7B%22returnPath%22%3A%22test%22%2C%22sessionId%22%3Atrue%7D',
-    );
+    const search: string = new URLSearchParams({ state: testState }).toString();
+    const { expectHeadersToBe, expectNoBody, expectStatusCodeToBe } =
+      await fetch(`/patreon/?${search}`);
 
     // Assert
+    expectNoBody();
     expectStatusCodeToBe(StatusCode.SeeOther);
-
-    expectPrivateMetric(MetricName.InvalidStateSessionId, {
-      value: 'true',
-    });
-
-    expectPublicMetric(MetricName.InvalidStateSessionId, {
-      type: 'boolean',
-    });
 
     expectHeadersToBe({
       'access-control-allow-methods': 'GET',
       allow: 'GET',
-      'content-location': 'https://test.host/#authn:error=51',
-      location: 'https://test.host/#authn:error=51',
+      'content-location': 'https://host.test.quisi.do/#authn:error=51',
+      location: 'https://host.test.quisi.do/#authn:error=51',
+    });
+
+    expectPrivateMetric(MetricName.InvalidStateSessionId, {
+      value: 'null',
+    });
+
+    expectPublicMetric(MetricName.InvalidStateSessionId, {
+      type: 'object',
     });
   });
 });

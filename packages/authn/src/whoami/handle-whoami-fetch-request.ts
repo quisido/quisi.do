@@ -11,27 +11,28 @@ export default async function handleWhoAmIFetchRequest(
   this: AuthnFetchHandler,
 ): Promise<Response> {
   // Options
-  const { accessControlAllowOrigin, requestMethod } = this;
-  if (requestMethod === 'OPTIONS') {
+  if (this.requestMethod === 'OPTIONS') {
     return new Response(
       null,
-      new WhoAmIResponseInit(StatusCode.OK, { accessControlAllowOrigin }),
+      new WhoAmIResponseInit(StatusCode.OK, {
+        accessControlAllowOrigin: this.accessControlAllowOrigin,
+      }),
     );
   }
 
   // If the user is not authenticated,
-  const { authnIdCookie } = this;
-  if (typeof authnIdCookie === 'undefined') {
+  if (typeof this.authnIdCookie === 'undefined') {
     this.emitPublicMetric(MetricName.MissingAuthnId);
     return new WhoAmIResponse({
-      accessControlAllowOrigin,
+      accessControlAllowOrigin: this.accessControlAllowOrigin,
       code: WhoAmIResponseCode.MissingAuthnId,
     });
   }
 
   // If the authentication ID is cached in memory,
-  const userIdFromMemory: number | undefined =
-    this.getAuthnUserIdFromMemory(authnIdCookie);
+  const userIdFromMemory: number | undefined = this.getAuthnUserIdFromMemory(
+    this.authnIdCookie,
+  );
   if (typeof userIdFromMemory !== 'undefined') {
     this.emitPublicMetric(MetricName.CachedAuthnId);
     this.emitPrivateMetric(MetricName.CachedAuthnId, {
@@ -39,22 +40,21 @@ export default async function handleWhoAmIFetchRequest(
     });
 
     return new WhoAmIResponse({
-      accessControlAllowOrigin,
+      accessControlAllowOrigin: this.accessControlAllowOrigin,
       code: WhoAmIResponseCode.Cached,
       id: userIdFromMemory,
     });
   }
 
   // Throttle
-  const { ip, throttleWhoAmIByIp } = this;
-  if (throttleWhoAmIByIp(ip)) {
+  if (this.throttleWhoAmIByIp(this.ip)) {
     this.emitPublicMetric(MetricName.WhoAmIThrottled);
     this.emitPrivateMetric(MetricName.WhoAmIThrottled, {
-      ip,
+      ip: this.ip,
     });
 
     return new WhoAmIResponse({
-      accessControlAllowOrigin,
+      accessControlAllowOrigin: this.accessControlAllowOrigin,
       code: WhoAmIResponseCode.Throttled,
       status: StatusCode.TooManyRequests,
     });
@@ -62,7 +62,7 @@ export default async function handleWhoAmIFetchRequest(
 
   const userIdStr: string | null = await this.getKVNamespaceText(
     'AUTHN_USER_IDS',
-    authnIdCookie,
+    this.authnIdCookie,
   );
 
   /**
@@ -72,27 +72,27 @@ export default async function handleWhoAmIFetchRequest(
   if (userIdStr === null) {
     this.emitPublicMetric(MetricName.InvalidAuthnId);
     this.emitPrivateMetric(MetricName.InvalidAuthnId, {
-      authnId: authnIdCookie,
+      authnId: this.authnIdCookie,
     });
 
     return new WhoAmIResponse({
-      accessControlAllowOrigin,
+      accessControlAllowOrigin: this.accessControlAllowOrigin,
       code: WhoAmIResponseCode.InvalidAuthnId,
     });
   }
 
   // User found! 🎉
   const userId: number = parseInt(userIdStr, BASE);
-  this.setAuthnUserIdInMemory(authnIdCookie, userId);
+  this.setAuthnUserIdInMemory(this.authnIdCookie, userId);
 
   this.emitPublicMetric(MetricName.UncachedAuthnId);
   this.emitPrivateMetric(MetricName.UncachedAuthnId, {
-    authnIdCookie,
+    authnIdCookie: this.authnIdCookie,
     userId,
   });
 
   return new WhoAmIResponse({
-    accessControlAllowOrigin,
+    accessControlAllowOrigin: this.accessControlAllowOrigin,
     code: WhoAmIResponseCode.Uncached,
     id: userId,
   });

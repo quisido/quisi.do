@@ -15,13 +15,12 @@ export default function handlePatreonTokenErrorResponseBody(
   this: AuthnFetchHandler,
   { body, json, requestCode }: Options,
 ): never {
-  const { emitPrivateMetric, emitPublicMetric } = this;
   if (!isRecord(json)) {
-    emitPrivateMetric(MetricName.InvalidPatreonAccessTokenError, {
+    this.emitPrivateMetric(MetricName.InvalidPatreonAccessTokenError, {
       value: body,
     });
 
-    emitPublicMetric(MetricName.InvalidPatreonAccessTokenError, {
+    this.emitPublicMetric(MetricName.InvalidPatreonAccessTokenError, {
       type: typeof json,
     });
 
@@ -30,11 +29,11 @@ export default function handlePatreonTokenErrorResponseBody(
 
   const { error: errorCode } = json;
   if (typeof errorCode === 'undefined') {
-    emitPrivateMetric(MetricName.MissingPatreonAccessTokenErrorCode, {
+    this.emitPrivateMetric(MetricName.MissingPatreonAccessTokenErrorCode, {
       value: body,
     });
 
-    emitPublicMetric(MetricName.MissingPatreonAccessTokenErrorCode, {
+    this.emitPublicMetric(MetricName.MissingPatreonAccessTokenErrorCode, {
       keys: Object.keys(json).join(', '),
     });
 

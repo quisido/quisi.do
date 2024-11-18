@@ -8,21 +8,20 @@ export default function handleInvalidPatreonIdentityId(
   data: Record<string, unknown>,
   id: unknown,
 ): never {
-  const { emitPrivateMetric, emitPublicMetric } = this;
   if (typeof id === 'undefined') {
-    emitPublicMetric(MetricName.MissingPatreonIdentityId);
-    emitPrivateMetric(MetricName.MissingPatreonIdentityId, {
+    this.emitPublicMetric(MetricName.MissingPatreonIdentityId);
+    this.emitPrivateMetric(MetricName.MissingPatreonIdentityId, {
       data: JSON.stringify(data),
     });
 
     throw new FatalError(ErrorCode.MissingPatreonIdentityId);
   }
 
-  emitPrivateMetric(MetricName.InvalidPatreonIdentityId, {
+  this.emitPrivateMetric(MetricName.InvalidPatreonIdentityId, {
     value: JSON.stringify(id),
   });
 
-  emitPublicMetric(MetricName.InvalidPatreonIdentityId, {
+  this.emitPublicMetric(MetricName.InvalidPatreonIdentityId, {
     type: typeof id,
   });
 

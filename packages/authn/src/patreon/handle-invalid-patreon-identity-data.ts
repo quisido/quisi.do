@@ -7,17 +7,16 @@ export default function handleInvalidPatreonIdentityData(
   this: AuthnFetchHandler,
   data: unknown,
 ): never {
-  const { emitPrivateMetric, emitPublicMetric } = this;
   if (typeof data === 'undefined') {
-    emitPublicMetric(MetricName.MissingPatreonIdentityData);
+    this.emitPublicMetric(MetricName.MissingPatreonIdentityData);
     throw new FatalError(ErrorCode.MissingPatreonIdentityData);
   }
 
-  emitPrivateMetric(MetricName.InvalidPatreonIdentityData, {
+  this.emitPrivateMetric(MetricName.InvalidPatreonIdentityData, {
     value: JSON.stringify(data),
   });
 
-  emitPublicMetric(MetricName.InvalidPatreonIdentityData, {
+  this.emitPublicMetric(MetricName.InvalidPatreonIdentityData, {
     type: typeof data,
   });
 

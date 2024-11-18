@@ -25,18 +25,12 @@ export default {
     'func-name-matching': 'off',
     'no-bitwise': 'off',
     'no-continue': 'off',
+    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'one-var': 'off',
     'sort-imports': 'off',
+    'sort-keys': ['error', 'asc', { allowLineSeparatedGroups: true }],
 
     // Too many false positives.
     'consistent-return': 'off',
-
-    'sort-keys': [
-      'error',
-      'asc',
-      {
-        allowLineSeparatedGroups: true,
-      },
-    ],
   },
 } satisfies Required<Omit<Linter.Config, 'ignores' | 'language' | 'processor'>>;

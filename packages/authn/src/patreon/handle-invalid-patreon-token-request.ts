@@ -8,10 +8,9 @@ export default function handleInvalidPatreonTokenRequest(
   json: Record<string, unknown>,
 ): never {
   const { error_description: description } = json;
-  const { emitPrivateMetric, emitPublicMetric } = this;
   if (typeof description === 'string') {
-    emitPublicMetric(MetricName.InvalidPatreonAccessTokenRequest);
-    emitPrivateMetric(MetricName.InvalidPatreonAccessTokenRequest, {
+    this.emitPublicMetric(MetricName.InvalidPatreonAccessTokenRequest);
+    this.emitPrivateMetric(MetricName.InvalidPatreonAccessTokenRequest, {
       description,
       value: JSON.stringify({
         ...json,
@@ -24,11 +23,11 @@ export default function handleInvalidPatreonTokenRequest(
   }
 
   if (typeof description === 'undefined') {
-    emitPublicMetric(
+    this.emitPublicMetric(
       MetricName.MissingInvalidPatreonAccessTokenRequestDescription,
     );
 
-    emitPrivateMetric(
+    this.emitPrivateMetric(
       MetricName.MissingInvalidPatreonAccessTokenRequestDescription,
       {
         value: JSON.stringify({
@@ -43,7 +42,7 @@ export default function handleInvalidPatreonTokenRequest(
     );
   }
 
-  emitPrivateMetric(
+  this.emitPrivateMetric(
     MetricName.InvalidInvalidPatreonAccessTokenRequestDescription,
     {
       value: JSON.stringify({
@@ -53,7 +52,7 @@ export default function handleInvalidPatreonTokenRequest(
     },
   );
 
-  emitPublicMetric(
+  this.emitPublicMetric(
     MetricName.InvalidInvalidPatreonAccessTokenRequestDescription,
     {
       type: typeof description,

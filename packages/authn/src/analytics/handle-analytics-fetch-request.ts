@@ -15,23 +15,23 @@ export default async function handleAnalyticsFetchRequest(
   this: AuthnFetchHandler,
 ): Promise<Response> {
   // Options
-  const { accessControlAllowOrigin, requestMethod } = this;
-  if (requestMethod === 'OPTIONS') {
+  if (this.requestMethod === 'OPTIONS') {
     return new Response(
       null,
-      new AnalyticsResponseInit(StatusCode.OK, { accessControlAllowOrigin }),
+      new AnalyticsResponseInit(StatusCode.OK, {
+        accessControlAllowOrigin: this.accessControlAllowOrigin,
+      }),
     );
   }
 
-  const { analyticsId, analyticsSecret } = this;
   const json: unknown = await this.fetchJson(
-    `https://api.cloudflare.com/client/v4/accounts/${analyticsId}/analytics_engine/sql`,
+    `https://api.cloudflare.com/client/v4/accounts/${this.analyticsId}/analytics_engine/sql`,
     {
       body: ANALYTICS_BODY,
       method: 'POST',
 
       headers: new Headers({
-        Authorization: `Bearer ${analyticsSecret}`,
+        Authorization: `Bearer ${this.analyticsSecret}`,
       }),
     },
   );
@@ -46,7 +46,7 @@ export default async function handleAnalyticsFetchRequest(
         code: AnalyticsResponseCode.InvalidResponse,
       }),
       new AnalyticsResponseInit(StatusCode.BadGateway, {
-        accessControlAllowOrigin,
+        accessControlAllowOrigin: this.accessControlAllowOrigin,
       }),
     );
   }

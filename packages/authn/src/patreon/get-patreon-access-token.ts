@@ -17,26 +17,19 @@ const HEADERS: Headers = new Headers({
 export default async function getPatreonAccessToken(
   this: AuthnFetchHandler,
 ): Promise<string> {
-  const {
-    patreonOAuthClientId,
-    patreonOAuthClientSecret,
-    patreonOAuthHost,
-    patreonOAuthRedirectUri,
-  } = this;
-
   const requestCode: string = getPatreonRequestCode.call(this);
   const response: Response = await this.fetch(
-    `${patreonOAuthHost}/api/oauth2/token`,
+    `${this.patreonOAuthHost}/api/oauth2/token`,
     {
       headers: HEADERS,
       method: 'POST',
 
       body: formUrlEncoded({
-        client_id: patreonOAuthClientId,
-        client_secret: patreonOAuthClientSecret,
+        client_id: this.patreonOAuthClientId,
+        client_secret: this.patreonOAuthClientSecret,
         code: requestCode,
         grant_type: 'authorization_code',
-        redirect_uri: patreonOAuthRedirectUri,
+        redirect_uri: this.patreonOAuthRedirectUri,
       }),
     },
   );
@@ -52,8 +45,7 @@ export default async function getPatreonAccessToken(
     const json: unknown = await response.json();
     return mapPatreonOAuthTokenToAccessToken.call(this, json);
   } catch (_err: unknown) {
-    const { emitPublicMetric } = this;
-    emitPublicMetric(MetricName.InvalidPatreonOAuthTokenResponse);
+    this.emitPublicMetric(MetricName.InvalidPatreonOAuthTokenResponse);
     throw new FatalError(ErrorCode.InvalidPatreonOAuthTokenResponse);
   }
 }

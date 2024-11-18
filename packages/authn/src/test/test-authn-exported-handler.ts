@@ -1,26 +1,32 @@
+import { mapMetricDimensionsToDataPoint } from '@quisido/worker';
 import AuthnFetchHandler from '../authn-fetch-handler.js';
 import handleError from '../handle-error.js';
 import handleLog from '../handle-log.js';
 import handleMetric from '../handle-metric.js';
 import TestAnalyticsEngineDataset from './test-analytics-engine-dataset.js';
 import TestExportedHandler from './test-exported-handler.js';
+import TestKVNamespace from './test-kv-namespace.js';
 
 interface Options {
+  readonly authnUserIds?: Readonly<Partial<Record<string, string>>>;
   readonly env?: Readonly<Record<string, unknown>> | undefined;
+  readonly now?: (() => number) | undefined;
 }
 
 const JSON_SPACE = 2;
 const NONE = 0;
 
 export default class TestAuthnExportedHandler extends TestExportedHandler {
-  public constructor({ env = {} }: Options = {}) {
+  public constructor({ authnUserIds = {}, env = {}, now }: Options = {}) {
     super({
       FetchHandler: AuthnFetchHandler,
+      now,
       onError: handleError,
       onLog: handleLog,
       onMetric: handleMetric,
 
       env: {
+        AUTHN_USER_IDS: new TestKVNamespace(authnUserIds),
         PRIVATE_DATASET: new TestAnalyticsEngineDataset(),
         PUBLIC_DATASET: new TestAnalyticsEngineDataset(),
         ...env,
@@ -43,8 +49,7 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
     }
 
     this.expectAnalyticsEngineDatasetToWriteDataPoint('PRIVATE_DATASET', {
-      blobs: [],
-      doubles: [],
+      ...mapMetricDimensionsToDataPoint(dimensions),
       indexes: [name],
     });
   };
@@ -64,8 +69,7 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
     }
 
     this.expectAnalyticsEngineDatasetToWriteDataPoint('PUBLIC_DATASET', {
-      blobs: [],
-      doubles: [],
+      ...mapMetricDimensionsToDataPoint(dimensions),
       indexes: [name],
     });
   };

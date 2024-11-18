@@ -3,6 +3,7 @@ import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import handleFetchError from '../fetch-handler/handle-fetch-error.js';
 import handlePatreonFetchRequest from '../patreon/handle-patreon-fetch-request.js';
+import FatalOAuthErrorResponse from './fatal-oauth-error-response.js';
 import { OAuthPathname } from './oauth-pathname.js';
 
 interface Options {
@@ -14,22 +15,18 @@ export default async function handleReturnPath(
   this: AuthnFetchHandler,
   { returnPath }: Options,
 ): Promise<Response> {
-  const {
-    emitPrivateMetric,
-    emitPublicMetric,
-    FatalOAuthErrorResponse,
-    ip,
-    throttleOAuthByIp,
-  } = this;
-
   // Throttle
-  if (throttleOAuthByIp(ip)) {
-    emitPublicMetric(MetricName.OAuthThrottled);
-    emitPrivateMetric(MetricName.OAuthThrottled, {
-      ip,
+  if (this.throttleOAuthByIp(this.ip)) {
+    this.emitPublicMetric(MetricName.OAuthThrottled);
+    this.emitPrivateMetric(MetricName.OAuthThrottled, {
+      ip: this.ip,
     });
 
-    return new FatalOAuthErrorResponse(ErrorCode.TooManyRequests, returnPath);
+    return new FatalOAuthErrorResponse({
+      code: ErrorCode.TooManyRequests,
+      host: this.host,
+      returnPath,
+    });
   }
 
   try {

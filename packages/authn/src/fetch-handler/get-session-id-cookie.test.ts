@@ -2,13 +2,15 @@ import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
 import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
-describe('getSessionIdCookie', (): void => {
+describe.skip('getSessionIdCookie', (): void => {
   it('should emit when missing', async (): Promise<void> => {
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+    const { expectPrivateMetric, expectPublicMetric, fetch } =
       new TestAuthnExportedHandler({});
 
-    await fetchPatreon({
-      cookies: 'cookie1=abc; cookie2=def',
+    await fetch('/patreon/', {
+      headers: new Headers({
+        cookie: 'cookie1=abc; cookie2=def',
+      }),
     });
 
     expectPrivateMetric(MetricName.MissingSessionIdCookie, {

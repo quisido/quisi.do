@@ -2,6 +2,7 @@ import { ErrorCode } from '@quisido/authn-shared';
 import handleAnalyticsFetchRequest from '../analytics/handle-analytics-fetch-request.js';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
+import FatalOAuthErrorResponse from '../oauth/fatal-oauth-error-response.js';
 import handleOAuthPathname from '../oauth/handle-oauth-pathname.js';
 import isOAuthPathname from '../oauth/is-oauth-pathname.js';
 import handleStaticPathname from '../static/handle-static-pathname.js';
@@ -12,28 +13,31 @@ export default async function handleFetchRequest(
   this: AuthnFetchHandler,
 ): Promise<Response> {
   // Analytics
-  const { requestPathname } = this;
-  if (requestPathname === '/analytics/') {
+  if (this.requestPathname === '/analytics/') {
     return await handleAnalyticsFetchRequest.call(this);
   }
 
   // Who am I?
-  if (requestPathname === '/whoami/') {
+  if (this.requestPathname === '/whoami/') {
     return await handleWhoAmIFetchRequest.call(this);
   }
 
   // OAuth
-  if (isOAuthPathname(requestPathname)) {
-    return await handleOAuthPathname.call(this, requestPathname);
+  if (isOAuthPathname(this.requestPathname)) {
+    return await handleOAuthPathname.call(this, this.requestPathname);
   }
 
   // Static
-  if (isStaticPathname(requestPathname)) {
-    return handleStaticPathname.call(this, requestPathname);
+  if (isStaticPathname(this.requestPathname)) {
+    return handleStaticPathname.call(this, this.requestPathname);
   }
 
   // Unknown
-  const { emitPublicMetric, FatalOAuthErrorResponse } = this;
-  emitPublicMetric(MetricName.NotFound, { pathname: requestPathname });
-  return new FatalOAuthErrorResponse(ErrorCode.NotFound);
+  this.emitPublicMetric(MetricName.NotFound, {
+    pathname: this.requestPathname,
+  });
+  return new FatalOAuthErrorResponse({
+    code: ErrorCode.NotFound,
+    host: this.host,
+  });
 }

@@ -1,6 +1,6 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { FetchHandler } from '@quisido/worker';
-import { isR2Bucket, ResponseInitImpl } from 'cloudflare-utils';
+import { isR2Bucket } from 'cloudflare-utils';
 import { isString } from 'fmrs';
 import { EnvironmentName } from './constants/environment-name.js';
 import { PUBLIC } from './constants/metric-dimensions.js';
@@ -10,7 +10,6 @@ import {
   MILLISECONDS_PER_DAY,
   MILLISECONDS_PER_SECOND,
 } from './constants/time.js';
-import createFatalOAuthErrorResponseInit from './fetch-handler/create-fatal-oauth-error-response-init.js';
 import getAccessControlAllowOrigin from './fetch-handler/get-access-control-allow-origin.js';
 import getIp from './fetch-handler/get-ip.js';
 import getSessionIdCookie from './fetch-handler/get-session-id-cookie.js';
@@ -93,30 +92,6 @@ export default class AuthnFetchHandler extends FetchHandler {
       isEnvironmentName,
       EnvironmentName.Unknown,
     );
-  }
-
-  public get FatalOAuthErrorResponse(): new (
-    code: ErrorCode,
-    returnPath?: string,
-  ) => Response {
-    const { FatalOAuthErrorResponseInit } = this;
-    return class FatalOAuthErrorResponse extends Response {
-      public constructor(code: ErrorCode, returnPath?: string) {
-        super(null, new FatalOAuthErrorResponseInit(code, returnPath));
-      }
-    };
-  }
-
-  public get FatalOAuthErrorResponseInit(): new (
-    code: ErrorCode,
-    returnPath?: string,
-  ) => ResponseInit {
-    const { host } = this;
-    return class ErrorResponseInit extends ResponseInitImpl {
-      public constructor(code: ErrorCode, returnPath = '/') {
-        super(createFatalOAuthErrorResponseInit({ code, host, returnPath }));
-      }
-    };
   }
 
   public getAuthnUserIdFromMemory = (authnId: string): number | undefined => {
@@ -205,13 +180,12 @@ export default class AuthnFetchHandler extends FetchHandler {
     id: string,
     response: unknown,
   ): void => {
-    const { dataBucket } = this;
-    if (dataBucket === null) {
+    if (this.dataBucket === null) {
       return;
     }
 
     this.affect(
-      dataBucket.put(
+      this.dataBucket.put(
         `provider-${provider.toString()}/${id}.json`,
         JSON.stringify(response),
         {

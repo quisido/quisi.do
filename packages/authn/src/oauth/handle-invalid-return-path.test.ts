@@ -4,61 +4,80 @@ import { MetricName } from '../constants/metric-name.js';
 import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handleInvalidReturnPath', (): void => {
-  it('should emit and respond for missing return path', async (): Promise<void> => {
+  it('should emit and respond for missing return paths', async (): Promise<void> => {
+    const testState: string = JSON.stringify({
+      a: 1,
+      c: 'str',
+    });
+
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler();
+      new TestAuthnExportedHandler({
+        env: {
+          HOST: 'host.test.quisi.do',
+        },
+      });
 
     // Act
-    const { expectHeadersToBe, expectStatusCodeToBe } = await fetch(
-      '/patreon/?state=%7B%22a%22%3A%22b%22%2C%22c%22%3A%22d%22%7D',
-    );
+    const search: string = new URLSearchParams({ state: testState }).toString();
+    const { expectHeadersToBe, expectNoBody, expectStatusCodeToBe } =
+      await fetch(`/patreon/?${search}`);
 
     // Assert
+    expectNoBody();
     expectStatusCodeToBe(StatusCode.SeeOther);
 
+    expectHeadersToBe({
+      'access-control-allow-methods': 'GET',
+      allow: 'GET',
+      'content-location': 'https://host.test.quisi.do/#authn:error=9',
+      location: 'https://host.test.quisi.do/#authn:error=9',
+    });
+
     expectPrivateMetric(MetricName.MissingReturnPath, {
-      searchParam: '{"a":"b","c":"d"}',
+      searchParam: testState,
     });
 
     expectPublicMetric(MetricName.MissingReturnPath, {
       keys: 'a, c',
     });
-
-    expectHeadersToBe({
-      'access-control-allow-methods': 'GET',
-      allow: 'GET',
-      'content-location': 'https://test.host/#authn:error=9',
-      location: 'https://test.host/#authn:error=9',
-    });
   });
 
   it('should emit and respond for non-string return paths', async (): Promise<void> => {
+    const testState: string = JSON.stringify({
+      returnPath: null,
+    });
+
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler();
+      new TestAuthnExportedHandler({
+        env: {
+          HOST: 'host.test.quisi.do',
+        },
+      });
 
     // Act
-    const { expectHeadersToBe, expectStatusCodeToBe } = await fetch(
-      '/patreon/?state=%7B%22returnPath%22%3Atrue%7D',
-    );
+    const search: string = new URLSearchParams({ state: testState }).toString();
+    const { expectHeadersToBe, expectNoBody, expectStatusCodeToBe } =
+      await fetch(`/patreon/?${search}`);
 
     // Assert
+    expectNoBody();
     expectStatusCodeToBe(StatusCode.SeeOther);
-
-    expectPrivateMetric(MetricName.InvalidReturnPath, {
-      value: 'true',
-    });
-
-    expectPublicMetric(MetricName.InvalidReturnPath, {
-      type: 'boolean',
-    });
 
     expectHeadersToBe({
       'access-control-allow-methods': 'GET',
       allow: 'GET',
-      'content-location': 'https://test.host/#authn:error=11',
-      location: 'https://test.host/#authn:error=11',
+      'content-location': 'https://host.test.quisi.do/#authn:error=11',
+      location: 'https://host.test.quisi.do/#authn:error=11',
+    });
+
+    expectPrivateMetric(MetricName.InvalidReturnPath, {
+      value: 'null',
+    });
+
+    expectPublicMetric(MetricName.InvalidReturnPath, {
+      type: 'object',
     });
   });
 });

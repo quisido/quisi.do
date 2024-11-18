@@ -17,18 +17,16 @@ export default function handlePatreonTokenErrorCode(
 ): never {
   switch (errorCode) {
     case 'invalid_client': {
-      const { emitPublicMetric, patreonOAuthClientId } = this;
-      emitPublicMetric(MetricName.InvalidPatreonClientId, {
-        clientId: patreonOAuthClientId,
+      this.emitPublicMetric(MetricName.InvalidPatreonClientId, {
+        clientId: this.patreonOAuthClientId,
       });
 
       throw new FatalError(ErrorCode.InvalidPatreonClientId);
     }
 
     case 'invalid_grant': {
-      const { emitPrivateMetric, emitPublicMetric } = this;
-      emitPublicMetric(MetricName.InvalidPatreonGrantCode);
-      emitPrivateMetric(MetricName.InvalidPatreonGrantCode, {
+      this.emitPublicMetric(MetricName.InvalidPatreonGrantCode);
+      this.emitPrivateMetric(MetricName.InvalidPatreonGrantCode, {
         code: requestCode,
       });
 
@@ -39,9 +37,8 @@ export default function handlePatreonTokenErrorCode(
       return handleInvalidPatreonTokenRequest.call(this, json);
 
     default: {
-      const { emitPrivateMetric, emitPublicMetric } = this;
-      emitPublicMetric(MetricName.UnknownPatreonAccessTokenErrorCode);
-      emitPrivateMetric(MetricName.UnknownPatreonAccessTokenErrorCode, {
+      this.emitPublicMetric(MetricName.UnknownPatreonAccessTokenErrorCode);
+      this.emitPrivateMetric(MetricName.UnknownPatreonAccessTokenErrorCode, {
         code: mapToString(errorCode),
         value: JSON.stringify({
           ...json,

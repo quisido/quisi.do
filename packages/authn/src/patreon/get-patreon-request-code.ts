@@ -4,12 +4,10 @@ import { MetricName } from '../constants/metric-name.js';
 import FatalError from '../utils/fatal-error.js';
 
 export default function getPatreonRequestCode(this: AuthnFetchHandler): string {
-  const { getRequestSearchParam } = this;
-  const code: string | null = getRequestSearchParam('code');
+  const code: string | null = this.getRequestSearchParam('code');
 
   if (code === null) {
-    const { emitPublicMetric } = this;
-    emitPublicMetric(MetricName.MissingPatreonRequestCode);
+    this.emitPublicMetric(MetricName.MissingPatreonRequestCode);
     throw new FatalError(ErrorCode.MissingPatreonRequestCode);
   }
 

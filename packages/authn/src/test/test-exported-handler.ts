@@ -8,6 +8,7 @@ import TestResponse from './test-response.js';
 interface Options {
   readonly FetchHandler: new () => IFetchHandler;
   readonly env: Readonly<Record<string, unknown>>;
+  readonly now?: (() => number) | undefined;
   readonly onError: (error: Error) => void;
   readonly onLog: (message: string) => void;
 
@@ -28,12 +29,19 @@ export default class TestExportedHandler {
   readonly #exportedHandler: ExportedHandler;
   #now: () => number = Date.now.bind(Date);
 
-  public constructor({ FetchHandler, env, onError, onLog, onMetric }: Options) {
+  public constructor({
+    FetchHandler,
+    env,
+    now = this.getNow.bind(this),
+    onError,
+    onLog,
+    onMetric,
+  }: Options) {
     this.#env = env;
     this.#exportedHandler = new ExportedHandler({
       FetchHandler,
       fetch: TEST_FETCH,
-      now: this.getNow.bind(this),
+      now,
       onError,
       onLog,
       onMetric,

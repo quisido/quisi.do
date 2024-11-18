@@ -14,11 +14,16 @@ export default class Throttler<T extends number | string | symbol>
     limit: number,
     { now = Date.now.bind(Date) }: Options = {},
   ): boolean => {
+    const currentCallTime: number = now();
     const lastCallTime: number | undefined = this.#map.get(input);
-    if (typeof lastCallTime !== 'undefined' && lastCallTime > now() - limit) {
-      return false;
+    if (
+      typeof lastCallTime !== 'undefined' &&
+      lastCallTime > currentCallTime - limit
+    ) {
+      return true;
     }
 
+    this.#map.set(input, currentCallTime);
     return false;
   };
 }

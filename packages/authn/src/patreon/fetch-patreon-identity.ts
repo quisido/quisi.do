@@ -46,16 +46,14 @@ export default async function fetchPatreonIdentity(
   this: AuthnFetchHandler,
   accessToken: string,
 ): Promise<PatreonIdentity> {
-  const { patreonOAuthHost } = this;
   const response: Response = await this.fetch(
-    `${patreonOAuthHost}/api/oauth2/v2/identity?${SEARCH}`,
+    `${this.patreonOAuthHost}/api/oauth2/v2/identity?${SEARCH}`,
     {
       headers: mapAccessTokenToIdentityRequestHeaders(accessToken),
       method: 'GET',
     },
   );
 
-  const { emitPrivateMetric, emitPublicMetric } = this;
   try {
     const identity: unknown = await response.json();
 
@@ -75,8 +73,8 @@ export default async function fetchPatreonIdentity(
      * }
      */
     if (response.status === FORBIDDEN) {
-      emitPublicMetric(MetricName.ForbiddenPatreonIdentityResponse);
-      emitPrivateMetric(MetricName.ForbiddenPatreonIdentityResponse, {
+      this.emitPublicMetric(MetricName.ForbiddenPatreonIdentityResponse);
+      this.emitPrivateMetric(MetricName.ForbiddenPatreonIdentityResponse, {
         value: JSON.stringify(identity),
       });
 
@@ -84,12 +82,12 @@ export default async function fetchPatreonIdentity(
     }
 
     if (response.status >= HTTP_REDIRECTION) {
-      emitPrivateMetric(MetricName.UnknownPatreonIdentityError, {
+      this.emitPrivateMetric(MetricName.UnknownPatreonIdentityError, {
         identity: JSON.stringify(identity),
         status: response.status,
       });
 
-      emitPublicMetric(MetricName.UnknownPatreonIdentityError, {
+      this.emitPublicMetric(MetricName.UnknownPatreonIdentityError, {
         status: response.status,
       });
 
@@ -110,7 +108,7 @@ export default async function fetchPatreonIdentity(
 
     return parsePatreonIdentity.call(this, identity);
   } catch (_err: unknown) {
-    emitPublicMetric(MetricName.InvalidPatreonIdentityResponse);
+    this.emitPublicMetric(MetricName.InvalidPatreonIdentityResponse);
     throw new FatalError(ErrorCode.InvalidPatreonIdentityResponse);
   }
 }

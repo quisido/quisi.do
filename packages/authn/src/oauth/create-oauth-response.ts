@@ -60,16 +60,15 @@ export default function createOAuthResponse(
       }),
   );
 
-  const { cookieDomain, host } = this;
   return new Response(null, {
     status: StatusCode.SeeOther,
 
     headers: new Headers({
-      'content-location': `https://${host}${returnPath}`,
-      location: `https://${host}${returnPath}`,
+      'content-location': `https://${this.host}${returnPath}`,
+      location: `https://${this.host}${returnPath}`,
       'set-cookie': [
         `__Secure-Authentication-ID=${authnId}`,
-        `Domain=${cookieDomain}`,
+        `Domain=${this.cookieDomain}`,
         `Max-Age=${SECONDS_PER_DAY.toString()}`,
         'Partitioned',
         'Path=/',

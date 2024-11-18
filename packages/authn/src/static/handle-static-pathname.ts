@@ -18,23 +18,20 @@ export default function handleStaticPathname(
   this: AuthnFetchHandler,
   pathname: StaticPathname,
 ): Response {
-  const { emitPublicMetric } = this;
   switch (pathname) {
     case StaticPathname.Favicon: {
-      emitPublicMetric(MetricName.FaviconIco);
+      this.emitPublicMetric(MetricName.FaviconIco);
       return new FaviconResponse();
     }
 
     case StaticPathname.Robots: {
-      emitPublicMetric(MetricName.RobotsTxt);
+      this.emitPublicMetric(MetricName.RobotsTxt);
       return new RobotsResponse();
     }
 
     case StaticPathname.Root: {
-      emitPublicMetric(MetricName.RootPathname);
-
-      const { host } = this;
-      return new RootResponse(host);
+      this.emitPublicMetric(MetricName.RootPathname);
+      return new RootResponse(this.host);
     }
   }
 }

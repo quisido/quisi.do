@@ -15,10 +15,9 @@ export default function handleInvalidPatreonIdentityAttributes(
   this: AuthnFetchHandler,
   { attributes, data, id }: Options,
 ): Result {
-  const { emitPrivateMetric, emitPublicMetric } = this;
   if (typeof attributes === 'undefined') {
-    emitPublicMetric(MetricName.MissingPatreonIdentityAttributes);
-    emitPrivateMetric(MetricName.MissingPatreonIdentityAttributes, {
+    this.emitPublicMetric(MetricName.MissingPatreonIdentityAttributes);
+    this.emitPrivateMetric(MetricName.MissingPatreonIdentityAttributes, {
       data: JSON.stringify(data),
     });
 

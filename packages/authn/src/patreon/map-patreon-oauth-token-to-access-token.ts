@@ -8,14 +8,12 @@ export default function mapPatreonOAuthTokenToAccessToken(
   this: AuthnFetchHandler,
   token: unknown,
 ): string {
-  const { emitPrivateMetric, emitPublicMetric } = this;
-
   if (!isRecord(token)) {
-    emitPrivateMetric(MetricName.InvalidPatreonOAuthToken, {
+    this.emitPrivateMetric(MetricName.InvalidPatreonOAuthToken, {
       value: JSON.stringify(token),
     });
 
-    emitPublicMetric(MetricName.InvalidPatreonOAuthToken, {
+    this.emitPublicMetric(MetricName.InvalidPatreonOAuthToken, {
       type: typeof token,
     });
 
@@ -28,8 +26,8 @@ export default function mapPatreonOAuthTokenToAccessToken(
   }
 
   if (typeof accessToken === 'undefined') {
-    emitPublicMetric(MetricName.MissingPatreonAccessToken);
-    emitPrivateMetric(MetricName.MissingPatreonAccessToken, {
+    this.emitPublicMetric(MetricName.MissingPatreonAccessToken);
+    this.emitPrivateMetric(MetricName.MissingPatreonAccessToken, {
       value: JSON.stringify(token),
     });
 

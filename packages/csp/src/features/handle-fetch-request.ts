@@ -16,26 +16,24 @@ export default async function handleFetchRequest(
   this: CspFetchHandler,
 ): Promise<Response> {
   // Method
-  const { requestMethod } = this;
-  if (!isAllowedMethod(requestMethod)) {
+  if (!isAllowedMethod(this.requestMethod)) {
     this.emitPublicMetric(MetricName.MethodNotAllowed);
     return new MethodNotAllowedResponse();
   }
 
   // Static responses
-  const { requestPathname } = this;
-  if (isStaticPathname(requestPathname)) {
-    return handleStaticPathname(requestPathname);
+  if (isStaticPathname(this.requestPathname)) {
+    return handleStaticPathname(this.requestPathname);
   }
 
   // Project pathnames
-  const projectId: number = mapPathnameToProjectId(requestPathname);
+  const projectId: number = mapPathnameToProjectId(this.requestPathname);
   if (Number.isNaN(projectId)) {
-    this.logError(new Error('Invalid pathname', { cause: requestPathname }));
+    this.logError(new Error('Invalid pathname', { cause: this.requestPathname }));
     return new InvalidPathnameResponse();
   }
 
-  switch (requestMethod) {
+  switch (this.requestMethod) {
     case 'GET':
       return await handleGet.call(this, projectId);
 

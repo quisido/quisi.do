@@ -2,6 +2,7 @@ import { WhoAmIResponseCode } from '@quisido/authn-shared';
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
+import mapStringToIp from '../test/map-string-to-ip.js';
 import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 const TEST_USER_ID = 1234;
@@ -9,9 +10,7 @@ const TEST_USER_ID = 1234;
 describe('WhoAmI', (): void => {
   it('should support the OPTIONS method', async (): Promise<void> => {
     // Assemble
-    const { fetch } = new TestAuthnExportedHandler({
-      env: {},
-    });
+    const { fetch } = new TestAuthnExportedHandler();
 
     // Act
     const { expectHeadersToBe, expectNoBody, expectStatusCodeToBe } =
@@ -35,9 +34,7 @@ describe('WhoAmI', (): void => {
 
   it('should support a missing AuthN cookie', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetch } = new TestAuthnExportedHandler({
-      env: {},
-    });
+    const { expectPublicMetric, fetch } = new TestAuthnExportedHandler();
 
     // Act
     const { expectBodyToBe, expectHeadersToBe, expectStatusCodeToBe } =
@@ -66,12 +63,15 @@ describe('WhoAmI', (): void => {
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } =
       new TestAuthnExportedHandler({
-        env: {},
+        authnUserIds: {
+          abcdef: TEST_USER_ID.toString(),
+        },
       });
 
     // Act
     await fetch('/whoami/', {
       headers: new Headers({
+        'cf-connecting-ip': mapStringToIp('whoamiCaching'),
         cookie: '__Secure-Authentication-ID=abcdef',
       }),
     });
@@ -79,6 +79,7 @@ describe('WhoAmI', (): void => {
     const { expectBodyToBe, expectHeadersToBe, expectStatusCodeToBe } =
       await fetch('/whoami/', {
         headers: new Headers({
+          'cf-connecting-ip': mapStringToIp('whoamiCaching'),
           cookie: '__Secure-Authentication-ID=abcdef',
         }),
       });
@@ -89,7 +90,7 @@ describe('WhoAmI', (): void => {
 
     expectBodyToBe({
       code: WhoAmIResponseCode.Cached,
-      userId: TEST_USER_ID,
+      id: TEST_USER_ID,
     });
 
     expectHeadersToBe({
@@ -104,6 +105,50 @@ describe('WhoAmI', (): void => {
 
     expectPrivateMetric(MetricName.CachedAuthnId, {
       userId: TEST_USER_ID,
+    });
+  });
+
+  it('should throttle', async (): Promise<void> => {
+    // Assemble
+    const { expectPrivateMetric, expectPublicMetric, fetch } =
+      new TestAuthnExportedHandler();
+
+    // Act
+    await fetch('/whoami/', {
+      headers: new Headers({
+        'cf-connecting-ip': mapStringToIp('whoamiThrottle'),
+        cookie: '__Secure-Authentication-ID=abcdefg',
+      }),
+    });
+
+    const { expectBodyToBe, expectHeadersToBe, expectStatusCodeToBe } =
+      await fetch('/whoami/', {
+        headers: new Headers({
+          'cf-connecting-ip': mapStringToIp('whoamiThrottle'),
+          cookie: '__Secure-Authentication-ID=bcdefg',
+        }),
+      });
+
+    // Assert
+    expectPublicMetric(MetricName.WhoAmIThrottled);
+    expectStatusCodeToBe(StatusCode.TooManyRequests);
+
+    expectBodyToBe({
+      code: WhoAmIResponseCode.Throttled,
+    });
+
+    expectHeadersToBe({
+      'access-control-allow-credentials': 'true',
+      'access-control-allow-headers': 'Baggage, Sentry-Trace',
+      'access-control-allow-methods': 'GET, OPTIONS',
+      'access-control-allow-origin': '*',
+      'access-control-max-age': '600',
+      allow: 'GET, OPTIONS',
+      'content-type': 'text/json; charset=utf-8',
+    });
+
+    expectPrivateMetric(MetricName.WhoAmIThrottled, {
+      ip: mapStringToIp('whoamiThrottle'),
     });
   });
 });

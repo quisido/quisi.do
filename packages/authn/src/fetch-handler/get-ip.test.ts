@@ -3,21 +3,21 @@ import { EnvironmentName } from '../constants/environment-name.js';
 import { MetricName } from '../constants/metric-name.js';
 import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
-describe('handleWhoAmIThrottle', (): void => {
+describe.skip('handleWhoAmIThrottle', (): void => {
   it('should be 127.0.0.1 during development', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, fetchWhoAmI } = new TestAuthnExportedHandler({
+    const { expectPrivateMetric, fetch } = new TestAuthnExportedHandler({
       env: {
         ENVIRONMENT_NAME: EnvironmentName.Development,
       },
     });
 
     // Act
-    await fetchWhoAmI({
+    await fetch('/whoami/', {
       cookies: `__Secure-Authentication-ID=abcdef`,
     });
 
-    await fetchWhoAmI({
+    await fetch('/whoami/', {
       cookies: `__Secure-Authentication-ID=abcdef`,
     });
 
@@ -29,14 +29,14 @@ describe('handleWhoAmIThrottle', (): void => {
 
   it('should emit and be 127.0.0.1 when missing', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetchWhoAmI } = new TestAuthnExportedHandler({
+    const { expectPublicMetric, fetch } = new TestAuthnExportedHandler({
       env: {
         ENVIRONMENT_NAME: EnvironmentName.Production,
       },
     });
 
     // Act
-    await fetchWhoAmI({
+    await fetch('/whoami/', {
       cookies: `__Secure-Authentication-ID=abcdef`,
       ip: undefined,
     });

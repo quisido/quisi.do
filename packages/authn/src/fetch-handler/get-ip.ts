@@ -3,14 +3,12 @@ import { EnvironmentName } from '../constants/environment-name.js';
 import { MetricName } from '../constants/metric-name.js';
 
 export default function getIp(this: AuthnFetchHandler): string {
-  const { requestHeaders } = this;
-  const ip: string | null = requestHeaders.get('cf-connecting-ip');
+  const ip: string | null = this.requestHeaders.get('cf-connecting-ip');
   if (ip !== null) {
     return ip;
   }
 
-  const { environmentName } = this;
-  if (environmentName !== EnvironmentName.Development) {
+  if (this.environmentName !== EnvironmentName.Development) {
     this.emitPublicMetric(MetricName.MissingIP);
   }
 

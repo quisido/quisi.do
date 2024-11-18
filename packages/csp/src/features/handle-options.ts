@@ -19,8 +19,7 @@ export default async function handleOptions(
   projectId: number,
 ): Promise<Response> {
   // Origin
-  const { origin } = this;
-  if (origin === null) {
+  if (this.origin === null) {
     this.console.log('Missing origin');
     return new MissingOriginResponse();
   }
@@ -48,11 +47,11 @@ export default async function handleOptions(
   // Allow origin
   const originsArr: readonly string[] = origins.split(' ');
   const originsSet: Set<string> = new Set<string>(originsArr);
-  if (!originsSet.has(origin)) {
+  if (!originsSet.has(this.origin)) {
     this.console.log('Invalid origin');
     return new InvalidOriginResponse();
   }
 
-  this.console.log('Options', origin);
-  return new OkResponse(origin);
+  this.console.log('Options', this.origin);
+  return new OkResponse(this.origin);
 }

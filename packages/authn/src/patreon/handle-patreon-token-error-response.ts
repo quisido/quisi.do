@@ -14,13 +14,11 @@ export default async function handlePatreonTokenErrorResponse(
   this: AuthnFetchHandler,
   { requestCode, response }: Options,
 ): Promise<never> {
-  const { emitPublicMetric } = this;
   if (response.body === null) {
-    emitPublicMetric(MetricName.MissingPatreonAccessTokenErrorBody);
+    this.emitPublicMetric(MetricName.MissingPatreonAccessTokenErrorBody);
     throw new FatalError(ErrorCode.MissingPatreonAccessTokenErrorBody);
   }
 
-  const { emitPrivateMetric } = this;
   const body: string = await mapReadableStreamToString(response.body);
 
   try {
@@ -31,8 +29,8 @@ export default async function handlePatreonTokenErrorResponse(
       requestCode,
     });
   } catch (_err: unknown) {
-    emitPublicMetric(MetricName.InvalidPatreonAccessTokenErrorBody);
-    emitPrivateMetric(MetricName.InvalidPatreonAccessTokenErrorBody, {
+    this.emitPublicMetric(MetricName.InvalidPatreonAccessTokenErrorBody);
+    this.emitPrivateMetric(MetricName.InvalidPatreonAccessTokenErrorBody, {
       value: body,
     });
 

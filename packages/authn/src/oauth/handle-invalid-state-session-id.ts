@@ -1,6 +1,7 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
+import FatalOAuthErrorResponse from './fatal-oauth-error-response.js';
 
 interface Options {
   readonly searchParam: string;
@@ -12,26 +13,31 @@ export default function handleInvalidStateSessionId(
   this: AuthnFetchHandler,
   { searchParam, state, value }: Options,
 ): Response {
-  const { emitPrivateMetric, emitPublicMetric, FatalOAuthErrorResponse } = this;
   if (typeof value === 'undefined') {
-    emitPrivateMetric(MetricName.MissingStateSessionId, {
+    this.emitPrivateMetric(MetricName.MissingStateSessionId, {
       searchParam,
     });
 
-    emitPublicMetric(MetricName.MissingStateSessionId, {
+    this.emitPublicMetric(MetricName.MissingStateSessionId, {
       keys: Object.keys(state).join(', '),
     });
 
-    return new FatalOAuthErrorResponse(ErrorCode.MissingStateSessionId);
+    return new FatalOAuthErrorResponse({
+      code: ErrorCode.MissingStateSessionId,
+      host: this.host,
+    });
   }
 
-  emitPrivateMetric(MetricName.InvalidStateSessionId, {
+  this.emitPrivateMetric(MetricName.InvalidStateSessionId, {
     value: JSON.stringify(value),
   });
 
-  emitPublicMetric(MetricName.InvalidStateSessionId, {
+  this.emitPublicMetric(MetricName.InvalidStateSessionId, {
     type: typeof value,
   });
 
-  return new FatalOAuthErrorResponse(ErrorCode.InvalidStateSessionId);
+  return new FatalOAuthErrorResponse({
+    code: ErrorCode.InvalidStateSessionId,
+    host: this.host,
+  });
 }

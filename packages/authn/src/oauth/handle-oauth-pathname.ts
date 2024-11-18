@@ -2,6 +2,7 @@ import { ErrorCode } from '@quisido/authn-shared';
 import { isRecord } from 'fmrs';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
+import FatalOAuthErrorResponse from './fatal-oauth-error-response.js';
 import handleInvalidReturnPath from './handle-invalid-return-path.js';
 import handleInvalidStateSessionId from './handle-invalid-state-session-id.js';
 import handleReturnPath from './handle-return-path.js';
@@ -12,25 +13,29 @@ export default async function handleOAuthPathname(
   pathname: OAuthPathname,
 ): Promise<Response> {
   // Missing state
-  const { emitPublicMetric, getRequestSearchParam } = this;
-  const stateSearchParam: string | null = getRequestSearchParam('state');
+  const stateSearchParam: string | null = this.getRequestSearchParam('state');
   if (stateSearchParam === null) {
-    emitPublicMetric(MetricName.MissingStateSearchParam);
-    return new this.FatalOAuthErrorResponse(ErrorCode.MissingStateSearchParam);
+    this.emitPublicMetric(MetricName.MissingStateSearchParam);
+    return new FatalOAuthErrorResponse({
+      code: ErrorCode.MissingStateSearchParam,
+      host: this.host,
+    });
   }
 
-  const { emitPrivateMetric, FatalOAuthErrorResponse } = this;
   try {
     const state: unknown = JSON.parse(stateSearchParam);
 
     // Invalid state
     if (!isRecord(state)) {
-      emitPublicMetric(MetricName.NonObjectState, { type: typeof state });
-      emitPrivateMetric(MetricName.NonObjectState, {
+      this.emitPublicMetric(MetricName.NonObjectState, { type: typeof state });
+      this.emitPrivateMetric(MetricName.NonObjectState, {
         value: stateSearchParam,
       });
 
-      return new FatalOAuthErrorResponse(ErrorCode.NonObjectState);
+      return new FatalOAuthErrorResponse({
+        code: ErrorCode.NonObjectState,
+        host: this.host,
+      });
     }
 
     // Invalid return path state
@@ -53,25 +58,30 @@ export default async function handleOAuthPathname(
     }
 
     // Cross-site request forgery (CSRF)
-    const { sessionIdCookie } = this;
-    if (sessionIdCookie !== sessionIdState) {
-      emitPublicMetric(MetricName.CSRF);
-      emitPrivateMetric(MetricName.CSRF, {
-        cookie: sessionIdCookie,
+    if (this.sessionIdCookie !== sessionIdState) {
+      this.emitPublicMetric(MetricName.CSRF);
+      this.emitPrivateMetric(MetricName.CSRF, {
+        cookie: this.sessionIdCookie,
         state: sessionIdState,
       });
 
-      return new FatalOAuthErrorResponse(ErrorCode.CSRF);
+      return new FatalOAuthErrorResponse({
+        code: ErrorCode.CSRF,
+        host: this.host,
+      });
     }
 
     // Valid return path
     return await handleReturnPath.call(this, { pathname, returnPath });
   } catch (_err: unknown) {
-    emitPublicMetric(MetricName.NonJsonStateSearchParam);
-    emitPrivateMetric(MetricName.NonJsonStateSearchParam, {
+    this.emitPublicMetric(MetricName.NonJsonStateSearchParam);
+    this.emitPrivateMetric(MetricName.NonJsonStateSearchParam, {
       value: stateSearchParam,
     });
 
-    return new FatalOAuthErrorResponse(ErrorCode.NonJsonStateSearchParam);
+    return new FatalOAuthErrorResponse({
+      code: ErrorCode.NonJsonStateSearchParam,
+      host: this.host,
+    });
   }
 }

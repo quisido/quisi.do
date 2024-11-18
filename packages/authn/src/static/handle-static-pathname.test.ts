@@ -4,6 +4,27 @@ import { MetricName } from '../constants/metric-name.js';
 import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handleStaticPathname', (): void => {
+  describe('root', (): void => {
+    it('should emit and respond', async (): Promise<void> => {
+      // Assemble
+      const { expectPublicMetric, fetch } = new TestAuthnExportedHandler({
+        env: {
+          HOST: 'host.test.quisi.do',
+        },
+      });
+
+      // Act
+      const { expectHeadersToBe, expectStatusCodeToBe } = await fetch('/');
+
+      // Assert
+      expectPublicMetric(MetricName.RootPathname);
+      expectStatusCodeToBe(StatusCode.PermanentRedirect);
+      expectHeadersToBe({
+        location: `https://host.test.quisi.do/`,
+      });
+    });
+  });
+
   describe('favicon.ico', (): void => {
     it('should emit and respond', async (): Promise<void> => {
       // Assemble
