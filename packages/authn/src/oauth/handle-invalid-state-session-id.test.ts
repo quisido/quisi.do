@@ -1,4 +1,4 @@
-import { StatusCode } from 'cloudflare-utils';
+import { ErrorCode } from '@quisido/authn-shared';
 import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
 import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
@@ -6,9 +6,9 @@ import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 describe('handleInvalidStateSessionId', (): void => {
   it('should emit and respond for a missing state session ID', async (): Promise<void> => {
     const testState: string = JSON.stringify({
-      a: 1,
-      c: 'str',
+      num: 1,
       returnPath: '/',
+      str: 'str',
     });
 
     // Assemble
@@ -21,26 +21,17 @@ describe('handleInvalidStateSessionId', (): void => {
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
-    const { expectHeadersToBe, expectNoBody, expectStatusCodeToBe } =
-      await fetch(`/patreon/?${search}`);
+    const { expectErrorResponse } = await fetch(`/patreon/?${search}`);
 
     // Assert
-    expectNoBody();
-    expectStatusCodeToBe(StatusCode.SeeOther);
-
-    expectHeadersToBe({
-      'access-control-allow-methods': 'GET',
-      allow: 'GET',
-      'content-location': 'https://host.test.quisi.do/#authn:error=10',
-      location: 'https://host.test.quisi.do/#authn:error=10',
-    });
+    expectErrorResponse(ErrorCode.MissingStateSessionId);
 
     expectPrivateMetric(MetricName.MissingStateSessionId, {
       searchParam: testState,
     });
 
     expectPublicMetric(MetricName.MissingStateSessionId, {
-      keys: 'a, c, returnPath',
+      keys: 'num, returnPath, str',
     });
   });
 
@@ -60,19 +51,10 @@ describe('handleInvalidStateSessionId', (): void => {
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
-    const { expectHeadersToBe, expectNoBody, expectStatusCodeToBe } =
-      await fetch(`/patreon/?${search}`);
+    const { expectErrorResponse } = await fetch(`/patreon/?${search}`);
 
     // Assert
-    expectNoBody();
-    expectStatusCodeToBe(StatusCode.SeeOther);
-
-    expectHeadersToBe({
-      'access-control-allow-methods': 'GET',
-      allow: 'GET',
-      'content-location': 'https://host.test.quisi.do/#authn:error=51',
-      location: 'https://host.test.quisi.do/#authn:error=51',
-    });
+    expectErrorResponse(ErrorCode.InvalidStateSessionId);
 
     expectPrivateMetric(MetricName.InvalidStateSessionId, {
       value: 'null',

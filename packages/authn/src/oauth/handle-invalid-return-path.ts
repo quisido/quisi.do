@@ -23,7 +23,7 @@ export default function handleInvalidReturnPath(
     });
 
     return new FatalOAuthErrorResponse({
-      code: ErrorCode.MissingStateReturnPath,
+      code: ErrorCode.MissingReturnPath,
       host: this.host,
     });
   }
@@ -37,7 +37,7 @@ export default function handleInvalidReturnPath(
   });
 
   return new FatalOAuthErrorResponse({
-    code: ErrorCode.InvalidStateReturnPath,
+    code: ErrorCode.InvalidReturnPath,
     host: this.host,
   });
 }

@@ -25,6 +25,7 @@
   "scripts": {
     "attw": "attw --exclude-entrypoints .",
     "authn": "yarn packages/authn run dev",
+    "authn:vitest": "concurrently --kill-others --names shared,vitest,worker --prefix-colors auto --restart-tries 9 \"yarn packages/authn-shared run dev\" \"yarn packages/authn run vitest\" \"yarn packages/worker run dev\"",
     "browserslist:update-db": "browserslist --update-db",
     "build": "yarn packages/next run build",
     "clean": "rm -rf .yarn/cache .yarn/sdks .yarn/unplugged coverage node_modules sarif && rm -f .yarn/build-state.yml .yarn/install-state.gz && yarn workspaces foreach --all --exclude \"@quisi/do\" --interlaced --jobs unlimited --parallel --verbose run clean",

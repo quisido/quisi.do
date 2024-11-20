@@ -42,8 +42,7 @@
     "tsc:watch": "tsc --project tsconfig.prepack.json --watch",
     "vitest": "vitest",
     "vitest:run": "vitest run",
-    "vitest:watch": "vitest watch",
-    "init": "api-extractor init"
+    "vitest:watch": "vitest watch"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20241018.0",

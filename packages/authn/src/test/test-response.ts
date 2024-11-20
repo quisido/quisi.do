@@ -1,3 +1,5 @@
+import type { ErrorCode } from '@quisido/authn-shared';
+import { StatusCode } from 'cloudflare-utils';
 import { sortEntriesByKey } from 'fmrs';
 import { expect } from 'vitest';
 
@@ -23,6 +25,19 @@ export default class TestResponse {
     } else {
       expect(JSON.parse(this.#text)).toEqual(body);
     }
+  };
+
+  expectErrorResponse = (code: ErrorCode, returnPath = '/'): void => {
+    const codeStr: string = code.toString();
+
+    this.expectNoBody();
+    this.expectStatusCodeToBe(StatusCode.SeeOther);
+    this.expectHeadersToBe({
+      'access-control-allow-methods': 'GET',
+      allow: 'GET',
+      'content-location': `https://host.test.quisi.do${returnPath}#authn:error=${codeStr}`,
+      location: `https://host.test.quisi.do${returnPath}#authn:error=${codeStr}`,
+    });
   };
 
   expectHeadersToBe = (headers: Record<string, string>): void => {

@@ -1,4 +1,4 @@
-import { StatusCode } from 'cloudflare-utils';
+import { ErrorCode } from '@quisido/authn-shared';
 import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
 import mapStringToIp from '../test/map-string-to-ip.js';
@@ -23,27 +23,19 @@ describe('getPatreonRequestCode', (): void => {
       state: testState,
     }).toString();
 
-    const { expectHeadersToBe, expectNoBody, expectStatusCodeToBe } =
-      await fetch(`/patreon/?${search}`, {
-        headers: new Headers({
-          'cf-connecting-ip': mapStringToIp('patreonRequestCode'),
-          cookie: '__Secure-Session-ID=test-session-id',
-        }),
-      });
+    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
+      headers: new Headers({
+        'cf-connecting-ip': mapStringToIp('patreonRequestCode'),
+        cookie: '__Secure-Session-ID=test-session-id',
+      }),
+    });
 
     // Assert
-    expectNoBody();
     expectPublicMetric(MetricName.MissingPatreonRequestCode);
     expectPublicMetric(MetricName.PatreonRequest);
-    expectStatusCodeToBe(StatusCode.SeeOther);
-
-    expectHeadersToBe({
-      'access-control-allow-methods': 'GET',
-      allow: 'GET',
-      location: 'https://host.test.quisi.do/test-return-path/#authn:error=15',
-
-      'content-location':
-        'https://host.test.quisi.do/test-return-path/#authn:error=15',
-    });
+    expectErrorResponse(
+      ErrorCode.MissingPatreonRequestCode,
+      '/test-return-path/',
+    );
   });
 });

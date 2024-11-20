@@ -28,7 +28,7 @@ export default function mapEnvKeyToErrorCode(key: string): ErrorCode {
       return ErrorCode.InvalidPatreonOAuthHost;
 
     case 'PATREON_OAUTH_REDIRECT_URI':
-      return ErrorCode.MissingPatreonOAuthRedirectUri;
+      return ErrorCode.InvalidPatreonOAuthRedirectUri;
 
     default:
       return ErrorCode.InvalidUnknownEnv;

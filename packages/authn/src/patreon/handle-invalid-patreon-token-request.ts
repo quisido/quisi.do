@@ -9,8 +9,8 @@ export default function handleInvalidPatreonTokenRequest(
 ): never {
   const { error_description: description } = json;
   if (typeof description === 'string') {
-    this.emitPublicMetric(MetricName.InvalidPatreonAccessTokenRequest);
-    this.emitPrivateMetric(MetricName.InvalidPatreonAccessTokenRequest, {
+    this.emitPublicMetric(MetricName.InvalidPatreonTokenRequest);
+    this.emitPrivateMetric(MetricName.InvalidPatreonTokenRequest, {
       description,
       value: JSON.stringify({
         ...json,
@@ -19,16 +19,16 @@ export default function handleInvalidPatreonTokenRequest(
       }),
     });
 
-    throw new FatalError(ErrorCode.InvalidPatreonAccessTokenRequest);
+    throw new FatalError(ErrorCode.InvalidPatreonTokenRequest);
   }
 
   if (typeof description === 'undefined') {
     this.emitPublicMetric(
-      MetricName.MissingInvalidPatreonAccessTokenRequestDescription,
+      MetricName.MissingInvalidPatreonTokenRequestDescription,
     );
 
     this.emitPrivateMetric(
-      MetricName.MissingInvalidPatreonAccessTokenRequestDescription,
+      MetricName.MissingInvalidPatreonTokenRequestDescription,
       {
         value: JSON.stringify({
           ...json,
@@ -38,12 +38,12 @@ export default function handleInvalidPatreonTokenRequest(
     );
 
     throw new FatalError(
-      ErrorCode.MissingInvalidPatreonAccessTokenRequestDescription,
+      ErrorCode.MissingInvalidPatreonTokenRequestDescription,
     );
   }
 
   this.emitPrivateMetric(
-    MetricName.InvalidInvalidPatreonAccessTokenRequestDescription,
+    MetricName.InvalidInvalidPatreonTokenRequestDescription,
     {
       value: JSON.stringify({
         ...json,
@@ -53,13 +53,11 @@ export default function handleInvalidPatreonTokenRequest(
   );
 
   this.emitPublicMetric(
-    MetricName.InvalidInvalidPatreonAccessTokenRequestDescription,
+    MetricName.InvalidInvalidPatreonTokenRequestDescription,
     {
       type: typeof description,
     },
   );
 
-  throw new FatalError(
-    ErrorCode.InvalidInvalidPatreonAccessTokenRequestDescription,
-  );
+  throw new FatalError(ErrorCode.InvalidInvalidPatreonTokenRequestDescription);
 }

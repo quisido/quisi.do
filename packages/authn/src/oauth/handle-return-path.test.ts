@@ -1,4 +1,4 @@
-import { StatusCode } from 'cloudflare-utils';
+import { ErrorCode } from '@quisido/authn-shared';
 import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
 import mapStringToIp from '../test/map-string-to-ip.js';
@@ -29,28 +29,16 @@ describe('handleOAuthPathname', (): void => {
       }),
     });
 
-    const { expectHeadersToBe, expectNoBody, expectStatusCodeToBe } =
-      await fetch(`/patreon/?${search}`, {
-        headers: new Headers({
-          'cf-connecting-ip': testIp,
-          cookie: '__Secure-Session-ID=test-session-id',
-        }),
-      });
-
-    // Assert
-    expectNoBody();
-    expectPublicMetric(MetricName.OAuthThrottled);
-    expectStatusCodeToBe(StatusCode.SeeOther);
-
-    expectHeadersToBe({
-      'access-control-allow-methods': 'GET',
-      allow: 'GET',
-      location: 'https://host.test.quisi.do/test-return-path/#authn:error=429',
-
-      'content-location':
-        'https://host.test.quisi.do/test-return-path/#authn:error=429',
+    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
+      headers: new Headers({
+        'cf-connecting-ip': testIp,
+        cookie: '__Secure-Session-ID=test-session-id',
+      }),
     });
 
+    // Assert
+    expectErrorResponse(ErrorCode.TooManyRequests, '/test-return-path/');
+    expectPublicMetric(MetricName.OAuthThrottled);
     expectPrivateMetric(MetricName.OAuthThrottled, {
       ip: testIp,
     });

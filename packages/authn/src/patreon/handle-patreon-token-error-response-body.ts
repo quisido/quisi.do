@@ -3,7 +3,7 @@ import { isRecord } from 'fmrs';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import FatalError from '../utils/fatal-error.js';
-import handlePatreonTokenErrorCode from './handle-patreon-token-error-code.js';
+import handlePatreonTokenErrorResponseCode from './handle-patreon-token-error-response-code.js';
 
 interface Options {
   readonly body: string;
@@ -16,31 +16,31 @@ export default function handlePatreonTokenErrorResponseBody(
   { body, json, requestCode }: Options,
 ): never {
   if (!isRecord(json)) {
-    this.emitPrivateMetric(MetricName.InvalidPatreonAccessTokenError, {
+    this.emitPrivateMetric(MetricName.InvalidPatreonTokenErrorResponse, {
       value: body,
     });
 
-    this.emitPublicMetric(MetricName.InvalidPatreonAccessTokenError, {
+    this.emitPublicMetric(MetricName.InvalidPatreonTokenErrorResponse, {
       type: typeof json,
     });
 
-    throw new FatalError(ErrorCode.InvalidPatreonAccessTokenError);
+    throw new FatalError(ErrorCode.InvalidPatreonTokenErrorResponse);
   }
 
   const { error: errorCode } = json;
   if (typeof errorCode === 'undefined') {
-    this.emitPrivateMetric(MetricName.MissingPatreonAccessTokenErrorCode, {
+    this.emitPrivateMetric(MetricName.MissingPatreonTokenErrorResponseCode, {
       value: body,
     });
 
-    this.emitPublicMetric(MetricName.MissingPatreonAccessTokenErrorCode, {
+    this.emitPublicMetric(MetricName.MissingPatreonTokenErrorResponseCode, {
       keys: Object.keys(json).join(', '),
     });
 
-    throw new FatalError(ErrorCode.MissingPatreonAccessTokenErrorCode);
+    throw new FatalError(ErrorCode.MissingPatreonTokenErrorResponseCode);
   }
 
-  return handlePatreonTokenErrorCode.call(this, {
+  return handlePatreonTokenErrorResponseCode.call(this, {
     errorCode,
     json,
     requestCode,

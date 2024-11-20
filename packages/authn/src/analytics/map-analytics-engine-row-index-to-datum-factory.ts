@@ -40,17 +40,18 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
     case MetricName.InvalidAuthnUserIdsNamespace:
     case MetricName.InvalidDatabase:
     case MetricName.InvalidEnvironmentVariable:
-    case MetricName.InvalidInvalidPatreonAccessTokenRequestDescription:
     case MetricName.InvalidOAuthUserId:
     case MetricName.InvalidPatreonAccessToken:
-    case MetricName.InvalidPatreonAccessTokenError:
-    case MetricName.InvalidPatreonAccessTokenErrorBody:
-    case MetricName.InvalidPatreonAccessTokenRequest:
     case MetricName.InvalidPatreonClientId:
     case MetricName.InvalidPatreonGrantCode:
     case MetricName.InvalidPatreonIdentity:
     case MetricName.InvalidPatreonIdentityAttributes:
     case MetricName.InvalidPatreonIdentityData:
+    case MetricName.InvalidInvalidPatreonTokenRequestDescription:
+    case MetricName.InvalidPatreonTokenErrorResponse:
+    case MetricName.InvalidPatreonTokenErrorResponseBody:
+    case MetricName.InvalidPatreonTokenRequest:
+    case MetricName.InvalidPatreonTokenResponse:
     case MetricName.InvalidPatreonIdentityId:
     case MetricName.InvalidPatreonIdentityResponse:
     case MetricName.InvalidPatreonOAuthClientId:
@@ -58,11 +59,11 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
     case MetricName.InvalidPatreonOAuthHost:
     case MetricName.InvalidPatreonOAuthRedirectUri:
     case MetricName.InvalidPatreonOAuthToken:
-    case MetricName.InvalidPatreonOAuthTokenResponse:
     case MetricName.InvalidReturnPath:
     case MetricName.InvalidStateSessionId:
     case MetricName.InvalidTraceParent:
     case MetricName.InvalidUsageDataset:
+    case MetricName.InvalidWorkerMetric:
     case MetricName.MissingAuthnUserIdsNamespace:
     case MetricName.MissingCookieDomain:
     case MetricName.MissingDataBucket:
@@ -70,19 +71,18 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
     case MetricName.MissingEnvironmentName:
     case MetricName.MissingHost:
     case MetricName.MissingIP:
-    case MetricName.MissingInvalidPatreonAccessTokenRequestDescription:
+    case MetricName.MissingInvalidPatreonTokenRequestDescription:
     case MetricName.MissingIsolateEnvironment:
     case MetricName.MissingPatreonAccessToken:
-    case MetricName.MissingPatreonAccessTokenErrorBody:
-    case MetricName.MissingPatreonAccessTokenErrorCode:
     case MetricName.MissingPatreonIdentityAttributes:
     case MetricName.MissingPatreonIdentityData:
     case MetricName.MissingPatreonIdentityId:
     case MetricName.MissingPatreonOAuthClientId:
     case MetricName.MissingPatreonOAuthClientSecret:
     case MetricName.MissingPatreonOAuthHost:
-    case MetricName.MissingPatreonOAuthRedirectUri:
     case MetricName.MissingPatreonRequestCode:
+    case MetricName.MissingPatreonTokenErrorResponseBody:
+    case MetricName.MissingPatreonTokenErrorResponseCode:
     case MetricName.MissingPrivateDataset:
     case MetricName.MissingPublicDataset:
     case MetricName.MissingReturnPath:
@@ -99,8 +99,8 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
     case MetricName.OAuthUserIdSelected:
     case MetricName.SetAuthnUserId:
     case MetricName.UnknownError:
-    case MetricName.UnknownPatreonAccessTokenErrorCode:
     case MetricName.UnknownPatreonIdentityError:
+    case MetricName.UnknownPatreonTokenErrorResponseCode:
     case MetricName.WhoAmIThrottled:
       return mapRowToDatum;
 

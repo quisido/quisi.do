@@ -4,6 +4,7 @@ import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import { PATREON_USER_AGENT } from '../constants/patreon-user-agent.js';
 import FatalError from '../utils/fatal-error.js';
+import parseJson from '../utils/parse-json.js';
 import getPatreonRequestCode from './get-patreon-request-code.js';
 import handlePatreonTokenErrorResponse from './handle-patreon-token-error-response.js';
 import mapPatreonOAuthTokenToAccessToken from './map-patreon-oauth-token-to-access-token.js';
@@ -41,11 +42,16 @@ export default async function getPatreonAccessToken(
     });
   }
 
-  try {
-    const json: unknown = await response.json();
-    return mapPatreonOAuthTokenToAccessToken.call(this, json);
-  } catch (_err: unknown) {
-    this.emitPublicMetric(MetricName.InvalidPatreonOAuthTokenResponse);
-    throw new FatalError(ErrorCode.InvalidPatreonOAuthTokenResponse);
+  const text: string = await response.text();
+  const json: unknown = parseJson(text);
+  if (typeof json === 'undefined') {
+    this.emitPublicMetric(MetricName.InvalidPatreonTokenResponse);
+    this.emitPrivateMetric(MetricName.InvalidPatreonTokenResponse, {
+      text,
+    });
+
+    throw new FatalError(ErrorCode.InvalidPatreonTokenResponse);
   }
+
+  return mapPatreonOAuthTokenToAccessToken.call(this, json);
 }

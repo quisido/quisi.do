@@ -11,7 +11,7 @@ interface Options {
   readonly requestCode: string;
 }
 
-export default function handlePatreonTokenErrorCode(
+export default function handlePatreonTokenErrorResponseCode(
   this: AuthnFetchHandler,
   { errorCode, json, requestCode }: Options,
 ): never {
@@ -37,8 +37,8 @@ export default function handlePatreonTokenErrorCode(
       return handleInvalidPatreonTokenRequest.call(this, json);
 
     default: {
-      this.emitPublicMetric(MetricName.UnknownPatreonAccessTokenErrorCode);
-      this.emitPrivateMetric(MetricName.UnknownPatreonAccessTokenErrorCode, {
+      this.emitPublicMetric(MetricName.UnknownPatreonTokenErrorResponseCode);
+      this.emitPrivateMetric(MetricName.UnknownPatreonTokenErrorResponseCode, {
         code: mapToString(errorCode),
         value: JSON.stringify({
           ...json,
@@ -46,7 +46,7 @@ export default function handlePatreonTokenErrorCode(
         }),
       });
 
-      throw new FatalError(ErrorCode.UnknownPatreonAccessTokenErrorCode);
+      throw new FatalError(ErrorCode.UnknownPatreonTokenErrorResponseCode);
     }
   }
 }
