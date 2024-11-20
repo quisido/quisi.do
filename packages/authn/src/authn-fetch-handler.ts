@@ -142,9 +142,9 @@ export default class AuthnFetchHandler extends FetchHandler {
     );
   };
 
-  public throttleOAuthByIp = (ip: string): boolean => {
+  public shouldThrottleOAuthByIp = (): boolean => {
     return AuthnFetchHandler.#OAUTH_IP_THROTTLER.run(
-      ip,
+      this.ip,
       OAUTH_IP_THROTTLE_LIMIT,
       {
         now: this.now.bind(this),
@@ -152,9 +152,9 @@ export default class AuthnFetchHandler extends FetchHandler {
     );
   };
 
-  public throttleWhoAmIByIp = (ip: string): boolean => {
+  public shouldThrottleWhoAmIByIp = (): boolean => {
     return AuthnFetchHandler.#WHOAMI_IP_THROTTLER.run(
-      ip,
+      this.ip,
       WHOAMI_IP_THROTTLE_LIMIT,
       {
         now: this.now.bind(this),

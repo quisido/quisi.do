@@ -16,7 +16,7 @@ import type Runnable from './runnable.js';
 interface EventTypes {
   readonly effect: [Promise<unknown>];
   readonly error: [Error];
-  readonly log: [string];
+  readonly log: string[];
   readonly metric: [
     string,
     Record<number | string | symbol, boolean | number | string>,
@@ -83,6 +83,7 @@ export default class Handler<
   #console: Console = console;
   #env: Env | undefined;
   #fetch: Fetcher['fetch'] | undefined;
+  #flushed = false;
   #now: () => number = Date.now.bind(Date);
   readonly #queue: (() => void)[] = [];
 
@@ -177,6 +178,11 @@ export default class Handler<
     event: T,
     ...args: EventEmitter.EventArgs<EventTypes, T>
   ): boolean {
+    if (this.#flushed) {
+      this.#eventEmitter.emit(event, ...args);
+      return true;
+    }
+
     this.#queue.push((): void => {
       this.#eventEmitter.emit(event, ...args);
     });
@@ -234,6 +240,8 @@ export default class Handler<
   }
 
   public flush(): void {
+    this.#flushed = true;
+
     const { length } = this.#queue;
     const queue: (() => void)[] = this.#queue.splice(FIRST, length);
     for (const fn of queue) {
@@ -344,8 +352,8 @@ export default class Handler<
     return this.validateEnv(name, isR2Bucket);
   }
 
-  public log(message: string): void {
-    this.#emit('log', message);
+  public log(...messages: readonly string[]): void {
+    this.#emit('log', ...messages);
   }
 
   public logError(err: Error): void {
@@ -392,7 +400,9 @@ export default class Handler<
     this.#on('error', callback.bind(this));
   }
 
-  public onLog(callback: (message: string) => Promise<void> | void): void {
+  public onLog(
+    callback: (...messages: readonly string[]) => Promise<void> | void,
+  ): void {
     this.#on('log', callback.bind(this));
   }
 
@@ -421,10 +431,16 @@ export default class Handler<
       return value;
     }
 
+    /**
+     *   We must use `null` to represent `undefined`, because
+     * `JSON.stringify(undefined)` is `undefined`, which will cause the `value`
+     * property to be dropped from the object.
+     */
+    const valueStr: string = JSON.stringify(value ?? 'null');
     this.emitMetric(MetricName.InvalidEnvironmentVariable, {
       key,
       type: typeof value,
-      value: JSON.stringify(value),
+      value: valueStr,
     });
 
     if (typeof defaultValue !== 'undefined') {

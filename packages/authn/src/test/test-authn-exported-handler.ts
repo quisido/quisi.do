@@ -10,6 +10,7 @@ import TestKVNamespace from './test-kv-namespace.js';
 interface Options {
   readonly authnUserIds?: Readonly<Partial<Record<string, string>>>;
   readonly env?: Readonly<Record<string, unknown>> | undefined;
+  readonly mockFetch?: Fetcher['fetch'] | undefined;
   readonly now?: (() => number) | undefined;
 }
 
@@ -17,9 +18,15 @@ const JSON_SPACE = 2;
 const NONE = 0;
 
 export default class TestAuthnExportedHandler extends TestExportedHandler {
-  public constructor({ authnUserIds = {}, env = {}, now }: Options = {}) {
+  public constructor({
+    authnUserIds = {},
+    env = {},
+    mockFetch,
+    now,
+  }: Options = {}) {
     super({
       FetchHandler: AuthnFetchHandler,
+      mockFetch,
       now,
       onError: handleError,
       onLog: handleLog,

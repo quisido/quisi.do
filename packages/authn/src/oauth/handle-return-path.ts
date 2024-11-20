@@ -16,7 +16,7 @@ export default async function handleReturnPath(
   { returnPath }: Options,
 ): Promise<Response> {
   // Throttle
-  if (this.throttleOAuthByIp(this.ip)) {
+  if (this.shouldThrottleOAuthByIp()) {
     this.emitPublicMetric(MetricName.OAuthThrottled);
     this.emitPrivateMetric(MetricName.OAuthThrottled, {
       ip: this.ip,

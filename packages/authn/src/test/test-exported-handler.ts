@@ -8,6 +8,7 @@ import TestResponse from './test-response.js';
 interface Options {
   readonly FetchHandler: new () => IFetchHandler;
   readonly env: Readonly<Record<string, unknown>>;
+  readonly mockFetch?: Fetcher['fetch'] | undefined;
   readonly now?: (() => number) | undefined;
   readonly onError: (error: Error) => void;
   readonly onLog: (message: string) => void;
@@ -32,11 +33,16 @@ export default class TestExportedHandler {
   public constructor({
     FetchHandler,
     env,
+    mockFetch,
     now = this.getNow.bind(this),
     onError,
     onLog,
     onMetric,
   }: Options) {
+    if (typeof mockFetch !== 'undefined') {
+      TEST_FETCH.mockImplementation(mockFetch);
+    }
+
     this.#env = env;
     this.#exportedHandler = new ExportedHandler({
       FetchHandler,

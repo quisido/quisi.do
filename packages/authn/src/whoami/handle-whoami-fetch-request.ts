@@ -47,7 +47,7 @@ export default async function handleWhoAmIFetchRequest(
   }
 
   // Throttle
-  if (this.throttleWhoAmIByIp(this.ip)) {
+  if (this.shouldThrottleWhoAmIByIp()) {
     this.emitPublicMetric(MetricName.WhoAmIThrottled);
     this.emitPrivateMetric(MetricName.WhoAmIThrottled, {
       ip: this.ip,

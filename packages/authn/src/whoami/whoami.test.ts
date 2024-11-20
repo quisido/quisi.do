@@ -60,6 +60,8 @@ describe('WhoAmI', (): void => {
   });
 
   it('should support in-memory caching', async (): Promise<void> => {
+    const testIp: string = mapStringToIp('whoamiCaching');
+
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } =
       new TestAuthnExportedHandler({
@@ -71,7 +73,7 @@ describe('WhoAmI', (): void => {
     // Act
     await fetch('/whoami/', {
       headers: new Headers({
-        'cf-connecting-ip': mapStringToIp('whoamiCaching'),
+        'cf-connecting-ip': testIp,
         cookie: '__Secure-Authentication-ID=abcdef',
       }),
     });
@@ -79,7 +81,7 @@ describe('WhoAmI', (): void => {
     const { expectBodyToBe, expectHeadersToBe, expectStatusCodeToBe } =
       await fetch('/whoami/', {
         headers: new Headers({
-          'cf-connecting-ip': mapStringToIp('whoamiCaching'),
+          'cf-connecting-ip': testIp,
           cookie: '__Secure-Authentication-ID=abcdef',
         }),
       });
@@ -109,6 +111,8 @@ describe('WhoAmI', (): void => {
   });
 
   it('should throttle', async (): Promise<void> => {
+    const testIp: string = mapStringToIp('whoamiThrottle');
+
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } =
       new TestAuthnExportedHandler();
@@ -116,7 +120,7 @@ describe('WhoAmI', (): void => {
     // Act
     await fetch('/whoami/', {
       headers: new Headers({
-        'cf-connecting-ip': mapStringToIp('whoamiThrottle'),
+        'cf-connecting-ip': testIp,
         cookie: '__Secure-Authentication-ID=abcdefg',
       }),
     });
@@ -124,7 +128,7 @@ describe('WhoAmI', (): void => {
     const { expectBodyToBe, expectHeadersToBe, expectStatusCodeToBe } =
       await fetch('/whoami/', {
         headers: new Headers({
-          'cf-connecting-ip': mapStringToIp('whoamiThrottle'),
+          'cf-connecting-ip': testIp,
           cookie: '__Secure-Authentication-ID=bcdefg',
         }),
       });
@@ -148,7 +152,7 @@ describe('WhoAmI', (): void => {
     });
 
     expectPrivateMetric(MetricName.WhoAmIThrottled, {
-      ip: mapStringToIp('whoamiThrottle'),
+      ip: testIp,
     });
   });
 });

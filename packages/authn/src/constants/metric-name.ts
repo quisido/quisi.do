@@ -91,6 +91,7 @@ export enum MetricName {
   InvalidDatabase = 'database.invalid',
   InvalidOAuthUserId = 'database.oauth.user-id.invalid',
   InvalidUsageDataset = 'dataset.usage.invalid',
+  InvalidWorkerMetric = 'worker.metric.invalid',
   MissingAuthnUserIdsNamespace = 'namespace.authn-user-ids.missing',
   MissingDatabase = 'database.missing',
   MissingSessionIdCookie = 'cookie.session-id.missing',

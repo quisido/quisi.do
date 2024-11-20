@@ -1,5 +1,7 @@
-import type { Handler } from '@quisido/worker';
+import { MetricName as WorkerMetricName, type Handler } from '@quisido/worker';
 import { PUBLIC } from './constants/metric-dimensions.js';
+import { MetricName } from './constants/metric-name.js';
+import isWorkerMetricName from './utils/is-worker-metric-name.js';
 
 const JSON_SPACE = 2;
 
@@ -10,21 +12,44 @@ export default function handleMetric(
   isPublic?: boolean,
 ): void {
   if (typeof isPublic === 'undefined') {
+    if (isWorkerMetricName(name)) {
+      switch (name) {
+        case WorkerMetricName.InvalidEnvironmentVariable: {
+          const { key, type, value } = dimensions;
+          if (
+            typeof key !== 'string' ||
+            typeof type !== 'string' ||
+            typeof value !== 'string'
+          ) {
+            handleMetric.call(
+              this,
+              MetricName.InvalidWorkerMetric,
+              { dimensions: JSON.stringify(dimensions), name },
+              false,
+            );
+            return;
+          }
+
+          handleMetric.call(this, name, { key, type }, true);
+          handleMetric.call(this, name, { key, value }, false);
+          return;
+        }
+      }
+    }
+
     if (!Object.hasOwn(dimensions, PUBLIC)) {
-      const err = new Error(
-        'Attempted to emit a metric without explicit accessibility.',
+      this.logError(
+        new Error('Attempted to emit a metric without explicit accessibility.'),
       );
-      this.console.error(err);
-      throw err;
+      return;
     }
 
     const newIsPublic: unknown = dimensions[PUBLIC];
     if (typeof newIsPublic !== 'boolean') {
-      const err = new Error(
-        'Attempted to emit a metric with invalid accessibility.',
+      this.logError(
+        new Error('Attempted to emit a metric with invalid accessibility.'),
       );
-      this.console.error(err);
-      throw err;
+      return;
     }
 
     delete dimensions[PUBLIC];
@@ -32,14 +57,13 @@ export default function handleMetric(
     return;
   }
 
-  const dimensionsStr: string = JSON.stringify(dimensions, null, JSON_SPACE);
-
   // Public metric
+  const dimensionsStr: string = JSON.stringify(dimensions, null, JSON_SPACE);
   if (isPublic) {
     if (dimensionsStr === '{}') {
-      this.console.log('Public metric:', name);
+      this.log('Public metric:', name);
     } else {
-      this.console.log('Public metric:', name, dimensionsStr);
+      this.log('Public metric:', name, dimensionsStr);
     }
 
     this.writeMetricDataPoint('PUBLIC_DATASET', name, dimensions);
@@ -48,9 +72,9 @@ export default function handleMetric(
 
   // Private metric
   if (dimensionsStr === '{}') {
-    this.console.log('Private metric:', name);
+    this.log('Private metric:', name);
   } else {
-    this.console.log('Private metric:', name, dimensionsStr);
+    this.log('Private metric:', name, dimensionsStr);
   }
 
   this.writeMetricDataPoint('PRIVATE_DATASET', name, dimensions);
