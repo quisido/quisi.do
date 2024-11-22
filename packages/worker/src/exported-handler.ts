@@ -30,7 +30,13 @@ export const ExportedHandler = class QuisidoExportedHandler<
   CfHostMetadata = unknown,
 > implements ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata>
 {
+  public readonly email?: EmailExportedHandler<Env>;
   public readonly fetch?: ExportedHandlerFetchHandler<Env, CfHostMetadata>;
+  public readonly queue?: ExportedHandlerQueueHandler<Env, QueueHandlerMessage>;
+  public readonly scheduled?: ExportedHandlerScheduledHandler<Env>;
+  public readonly tail?: ExportedHandlerTailHandler<Env>;
+  public readonly test?: ExportedHandlerTestHandler<Env>;
+  public readonly trace?: ExportedHandlerTraceHandler<Env>;
 
   public constructor({
     console,
@@ -42,10 +48,6 @@ export const ExportedHandler = class QuisidoExportedHandler<
     onMetric: handleMetric,
   }: ExportedHandlerOptions<Env, QueueHandlerMessage, CfHostMetadata>) {
     if (typeof FetchHandler !== 'undefined') {
-      if (typeof this.fetch !== 'undefined') {
-        throw new Error(`An ExportedHandler can only have one fetch handler.`);
-      }
-
       this.fetch = (
         request: Request<
           CfHostMetadata,
@@ -54,6 +56,11 @@ export const ExportedHandler = class QuisidoExportedHandler<
         env: Env,
         ctx: ExecutionContext,
       ): Response | Promise<Response> => {
+        const handleFetchError = (err: unknown): Response => {
+          console.error(err);
+          return new InternalServerErrorResponse();
+        };
+
         const handleSideEffect = (promise: Promise<unknown>): void => {
           ctx.waitUntil(promise);
         };
@@ -74,15 +81,20 @@ export const ExportedHandler = class QuisidoExportedHandler<
             fetchHandler.onMetric(handleMetric);
           }
 
-          return fetchHandler.run(
+          const response: Promise<Response> | Response = fetchHandler.run(
             { console, env, fetch, now },
             request,
             env,
             ctx,
           );
+
+          if (!(response instanceof Promise)) {
+            return response;
+          }
+
+          return response.catch(handleFetchError);
         } catch (err: unknown) {
-          console.error(err);
-          return new InternalServerErrorResponse();
+          return handleFetchError(err);
         }
       };
     }

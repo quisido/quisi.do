@@ -3,6 +3,8 @@
 /coverage/
 /node_modules/
 /scripts/
+/src/**/*.test.ts
+/test/
 /.*.json
 /.*cache
 /.*ignore

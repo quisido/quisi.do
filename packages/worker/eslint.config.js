@@ -4,6 +4,22 @@ import configs from '@quisido/eslint-config';
 export default [
   ...configs,
 
+  // Rule: func-style
+  {
+    files: ['src/exported-handler.test.ts'],
+    rules: {
+      'func-style': 'off',
+    },
+  },
+
+  // Rule: max-classes-per-file
+  {
+    files: ['src/exported-handler.test.ts'],
+    rules: {
+      'max-classes-per-file': 'off',
+    },
+  },
+
   // Rule: max-lines
   {
     files: ['src/handler.ts'],
@@ -22,7 +38,12 @@ export default [
 
   // Rule: max-statements
   {
-    files: ['src/exported-handler.ts', 'src/handler.ts'],
+    files: [
+      'src/exported-handler.ts',
+      'src/exported-handler.test.ts',
+      'src/handler.ts',
+    ],
+
     rules: {
       'max-statements': 'off',
     },

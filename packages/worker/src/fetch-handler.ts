@@ -46,7 +46,7 @@ export default class FetchHandler<
         >,
         env: Env,
         ctx: ExecutionContext,
-      ): ReturnType<ExportedHandlerFetchHandler<Env, CfHostMetadata>> => {
+      ): Promise<Response> | Response => {
         this.#ctx = ctx;
         this.#request = request;
         try {
