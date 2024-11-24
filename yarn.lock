@@ -2486,7 +2486,7 @@ __metadata:
 "@datadog/browser-core@npm:5.29.0":
   version: 5.29.0
   resolution: "@datadog/browser-core@npm:5.29.0"
-  checksum: 10c0/4a6629d53199ccef49151bfbfbf6fc4be7f0222e5ff27daf3d140209209c5975723d1e8a7324ebc59218f5523408ea5ee9ea3b48fc74089098cd2ff179b48d82
+  checksum: 10c0/6fb045ef4d2bccb74f7024b75bf7d4ccdbe991673ca557c1671ccd079bf686b3d833a30193047cea7a033afcffba0329b0beb0aff905a25fc32466ba81def2fd
   languageName: node
   linkType: hard
 
