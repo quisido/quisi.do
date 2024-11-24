@@ -1,6 +1,6 @@
 import { StatusCode, type IncomingRequest } from 'cloudflare-utils';
 import { assert, describe, expect, it, vi } from 'vitest';
-import { TEST_CONSOLE, TEST_CONSOLE_ERROR } from '../test/console.js';
+import { TEST_CONSOLE, TEST_CONSOLE_ERROR } from '../test/test-console.js';
 import {
   TEST_EXECUTION_CONTEXT,
   TEST_WAIT_UNTIL,

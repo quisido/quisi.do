@@ -14,7 +14,11 @@ export default [
 
   // Rule: max-classes-per-file
   {
-    files: ['src/exported-handler.test.ts'],
+    files: [
+      'src/exported-handler.test.ts',
+      'src/fetch-handler.test.ts',
+      'src/handler.test.ts',
+    ],
     rules: {
       'max-classes-per-file': 'off',
     },
@@ -41,6 +45,7 @@ export default [
     files: [
       'src/exported-handler.ts',
       'src/exported-handler.test.ts',
+      'src/fetch-handler.test.ts',
       'src/handler.ts',
     ],
 
@@ -97,17 +102,6 @@ export default [
     files: ['src/snapshot.ts'],
     rules: {
       'max-params': 'off',
-    },
-  },
-
-  {
-    files: ['src/worker.ts'],
-    rules: {
-      '@typescript-eslint/no-this-alias': 'off',
-      'consistent-this': 'off',
-      'max-classes-per-file': 'off',
-      'max-params': 'off',
-      'no-use-before-define': 'off',
     },
   },
 ];
