@@ -58,7 +58,7 @@ describe('ExportedHandler', (): void => {
       );
     });
 
-    it('should support event listeners', async (): Promise<void> => {
+    it('should support synchronous events', async (): Promise<void> => {
       const testError = new Error();
       const testPromise: Promise<unknown> = Promise.resolve();
 
@@ -68,6 +68,49 @@ describe('ExportedHandler', (): void => {
         this.log('test message');
         this.logError(testError);
         return new Response();
+      }
+
+      const exportedHandler = new ExportedHandler({
+        console: TEST_CONSOLE,
+        fetch: vi.fn(),
+        onError: TEST_ERROR_HANDLER,
+        onLog: TEST_LOG_HANDLER,
+        onMetric: TEST_METRIC_HANDLER,
+
+        FetchHandler: class TestFetchHandler extends FetchHandler {
+          public constructor() {
+            super(testFetchHandler);
+          }
+        },
+      });
+
+      assert('fetch' in exportedHandler);
+      await exportedHandler.fetch(
+        TEST_REQUEST,
+        TEST_ENV,
+        TEST_EXECUTION_CONTEXT,
+      );
+
+      expect(TEST_ERROR_HANDLER).toHaveBeenCalledOnce();
+      expect(TEST_ERROR_HANDLER).toHaveBeenLastCalledWith(testError);
+      expect(TEST_LOG_HANDLER).toHaveBeenCalledOnce();
+      expect(TEST_LOG_HANDLER).toHaveBeenLastCalledWith('test message');
+      expect(TEST_METRIC_HANDLER).toHaveBeenCalledOnce();
+      expect(TEST_METRIC_HANDLER).toHaveBeenLastCalledWith('test-metric', {});
+      expect(TEST_WAIT_UNTIL).toHaveBeenCalledOnce();
+      expect(TEST_WAIT_UNTIL).toHaveBeenLastCalledWith(testPromise);
+    });
+
+    it('should support asynchronous events', async (): Promise<void> => {
+      const testError = new Error();
+      const testPromise: Promise<unknown> = Promise.resolve();
+
+      function testFetchHandler(this: FetchHandler): Promise<Response> {
+        this.affect(testPromise);
+        this.emitMetric('test-metric', {});
+        this.log('test message');
+        this.logError(testError);
+        return Promise.resolve(new Response());
       }
 
       const exportedHandler = new ExportedHandler({

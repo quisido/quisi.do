@@ -157,7 +157,8 @@ export default class Handler<
         return result;
       }
 
-      return result.then(response => {
+      // `response` is `Response | void`.
+      return result.then((response: unknown): unknown => {
         this.flush();
         return response;
       }) as ReturnType<
@@ -205,22 +206,22 @@ export default class Handler<
     input: RequestInfo<unknown, CfProperties>,
     init?: RequestInit,
   ): Promise<Response> {
-    if (typeof this.#fetch !== 'undefined') {
-      const startTime: number = this.now();
-      try {
-        const response: Response = await this.#fetch.call(null, input, init);
-        return response;
-      } finally {
-        const url: string = mapRequestInfoToString(input);
-        this.emitMetric(MetricName.Fetch, {
-          endTime: this.now(),
-          startTime,
-          url,
-        });
-      }
+    if (typeof this.#fetch === 'undefined') {
+      throw new Error('You may only fetch during an operation.');
     }
 
-    throw new Error('You may only fetch during an operation.');
+    const startTime: number = this.now();
+    try {
+      const response: Response = await this.#fetch.call(null, input, init);
+      return response;
+    } finally {
+      const url: string = mapRequestInfoToString(input);
+      this.emitMetric(MetricName.Fetch, {
+        endTime: this.now(),
+        startTime,
+        url,
+      });
+    }
   }
 
   public async fetchJson(

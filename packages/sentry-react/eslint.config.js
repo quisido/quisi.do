@@ -1,4 +1,4 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
@@ -18,10 +18,7 @@ export default [
     },
   },
 
-  {
-    files: ['src/components/sentry/sentry.hook.ts'],
-    rules: {
-      camelcase: 'off',
-    },
-  },
+  ...disableRulesForFiles({
+    camelcase: ['src/components/sentry/sentry.hook.ts'],
+  }),
 ];

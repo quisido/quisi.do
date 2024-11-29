@@ -1,13 +1,10 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 
 /** @type {readonly import('eslint').Linter.Config[]} */
 export default [
   ...configs,
 
-  {
-    files: ['src/get-error-code.ts'],
-    rules: {
-      'no-magic-numbers': 'off',
-    },
-  },
+  ...disableRulesForFiles({
+    'no-magic-numbers': ['src/get-error-code.ts'],
+  }),
 ];

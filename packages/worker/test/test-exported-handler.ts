@@ -9,15 +9,22 @@ export class TestExportedHandler<
   QueueHandlerMessage,
   CfHostMetadata,
 > extends ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata> {
-  public constructor(
-    options: Omit<
-      ExportedHandlerOptions<Env, QueueHandlerMessage, CfHostMetadata>,
-      'console' | 'fetch'
-    >,
-  ) {
+  public constructor({
+    fetch = TEST_FETCH,
+    ...options
+  }: Omit<
+    ExportedHandlerOptions<Env, QueueHandlerMessage, CfHostMetadata>,
+    'console' | 'fetch'
+  > &
+    Partial<
+      Pick<
+        ExportedHandlerOptions<Env, QueueHandlerMessage, CfHostMetadata>,
+        'fetch'
+      >
+    >) {
     super({
       console: TEST_CONSOLE,
-      fetch: TEST_FETCH,
+      fetch,
       ...options,
     });
   }

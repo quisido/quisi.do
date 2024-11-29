@@ -1,4 +1,4 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
@@ -18,23 +18,14 @@ export default [
     },
   },
 
-  {
-    files: [
+  ...disableRulesForFiles({
+    'func-style': ['src/utils/map-v2-operation-handlers-to-api.ts'],
+    'max-lines-per-function': ['src/utils/map-v2-operation-handlers-to-api.ts'],
+    'new-cap': ['src/utils/map-v2-operation-handlers-to-api.ts'],
+
+    '@typescript-eslint/consistent-type-assertions': [
       'src/utils/capitalize.ts',
       'src/utils/map-v2-operation-handlers-to-api.ts',
     ],
-
-    rules: {
-      '@typescript-eslint/consistent-type-assertions': 'off',
-    },
-  },
-
-  {
-    files: ['src/utils/map-v2-operation-handlers-to-api.ts'],
-    rules: {
-      'func-style': 'off',
-      'max-lines-per-function': 'off',
-      'new-cap': 'off',
-    },
-  },
+  }),
 ];

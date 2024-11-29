@@ -1,4 +1,4 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
@@ -18,14 +18,11 @@ export default [
     },
   },
 
-  {
-    files: [
+  ...disableRulesForFiles({
+    'no-underscore-dangle': [
       'src/utils/get-next-data.test.ts',
       'src/utils/get-next-data.ts',
       'src/utils/init-next-data.ts',
     ],
-    rules: {
-      'no-underscore-dangle': 'off',
-    },
-  },
+  }),
 ];

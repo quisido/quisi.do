@@ -1,14 +1,12 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 
 /** @type {readonly import('eslint').Linter.Config[]} */
 export default [
   ...configs,
-  {
-    files: ['src/tree-logger.ts'],
-    rules: {
-      'max-lines-per-function': 'off',
-      'max-statements': 'off',
-      'no-console': 'off',
-    },
-  },
+
+  ...disableRulesForFiles({
+    'max-lines-per-function': ['src/tree-logger.ts'],
+    'max-statements': ['src/tree-logger.ts'],
+    'no-console': ['src/tree-logger.ts'],
+  }),
 ];
