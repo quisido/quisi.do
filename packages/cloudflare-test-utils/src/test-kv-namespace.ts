@@ -1,13 +1,20 @@
 /// <reference types="@cloudflare/workers-types" />
-import { vi, type Mock } from 'vitest';
+import { expect, vi } from 'vitest';
 import unimplementedMethod from './unimplemented-method.js';
 
-const put = (): Promise<void> => Promise.resolve();
+const TEST_PUT = (): Promise<void> => Promise.resolve();
 
 export default class TestKVNamespace<Key extends string = string>
   implements KVNamespace<Key>
 {
-  readonly #put: KVNamespace<Key>['put'] = put;
+  readonly #put =
+    vi.fn<
+      (
+        key: Key,
+        value: string | ArrayBuffer | ArrayBufferView | ReadableStream,
+        options?: KVNamespacePutOptions,
+      ) => Promise<void>
+    >(TEST_PUT);
   public delete = unimplementedMethod;
   public getWithMetadata = unimplementedMethod;
   public list = unimplementedMethod;
@@ -17,7 +24,15 @@ export default class TestKVNamespace<Key extends string = string>
     this.#record = record;
   }
 
-  public async get(
+  public expectToHavePut = (
+    key: Key,
+    value: string | ArrayBuffer | ArrayBufferView | ReadableStream,
+    options?: KVNamespacePutOptions,
+  ): void => {
+    expect(this.#put).toHaveBeenCalledWith(key, value, options);
+  };
+
+  public get(
     key: Key,
     options?:
       | Partial<KVNamespaceGetOptions<undefined>>
@@ -63,5 +78,11 @@ export default class TestKVNamespace<Key extends string = string>
     }
   }
 
-  public put: Mock<KVNamespace<Key>['put']> = vi.fn(this.#put);
+  public readonly put: KVNamespace<Key>['put'] = (
+    key: Key,
+    value: string | ArrayBuffer | ArrayBufferView | ReadableStream,
+    options?: KVNamespacePutOptions,
+  ): Promise<void> => {
+    return this.#put(key, value, options);
+  };
 }

@@ -1,4 +1,5 @@
-import { TestD1PreparedStatement } from './test-d1-prepared-statement.js';
+/// <reference types="@cloudflare/workers-types" />
+import TestD1PreparedStatement from './test-d1-prepared-statement.js';
 import unimplementedMethod from './unimplemented-method.js';
 
 interface Result {
@@ -8,19 +9,19 @@ interface Result {
 }
 
 export default class TestD1Database implements D1Database {
-  public batch: D1Database['batch'] = unimplementedMethod;
-  public dump: D1Database['dump'] = unimplementedMethod;
-  public exec: D1Database['exec'] = unimplementedMethod;
+  public readonly batch: D1Database['batch'] = unimplementedMethod;
+  public readonly dump: D1Database['dump'] = unimplementedMethod;
+  public readonly exec: D1Database['exec'] = unimplementedMethod;
   readonly #preparedStatements = new Map<string, TestD1PreparedStatement>();
   readonly #queries = new Map<string, Result>();
 
-  public constructor(queries: Record<string, Result>) {
+  public constructor(queries: Record<string, Result> = {}) {
     for (const [query, result] of Object.entries(queries)) {
       this.#queries.set(query, result);
     }
   }
 
-  public expectToHaveQueried = (
+  public readonly expectToHaveQueried = (
     query: string,
     values: readonly (null | number | string)[],
   ): void => {
@@ -35,7 +36,7 @@ ${query}`);
     expectToHaveBound(...values);
   };
 
-  public prepare = (query: string): D1PreparedStatement => {
+  public readonly prepare = (query: string): D1PreparedStatement => {
     const result: Result | undefined = this.#queries.get(query);
     if (typeof result === 'undefined') {
       throw new Error(`Expected query to be mocked:

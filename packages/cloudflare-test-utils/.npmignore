@@ -1,0 +1,14 @@
+/.vscode/
+/coverage/
+/node_modules/
+/.*.json
+/.*ignore
+/.*rc.*
+/.eslintcache
+/*.config.*
+/*.cpuprofile
+/*.iml
+/*.tsbuildinfo
+/*-*.*.*.tgz
+/tsconfig.*
+.DS_Store

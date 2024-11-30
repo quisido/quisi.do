@@ -1,3 +1,4 @@
+/// <reference types="@cloudflare/workers-types" />
 import { expect } from 'vitest';
 import unimplementedMethod from './unimplemented-method.js';
 
@@ -11,7 +12,7 @@ const DEFAULT_LAST_ROW_ID = 1;
 const DEFAULT_RESULTS: readonly never[] = [];
 const FIRST = 0;
 
-export class TestD1PreparedStatement implements D1PreparedStatement {
+export default class TestD1PreparedStatement implements D1PreparedStatement {
   readonly #boundValues: (null | number | string)[] = [];
   readonly #error: Error | undefined;
   public readonly first = unimplementedMethod;
@@ -30,6 +31,10 @@ export class TestD1PreparedStatement implements D1PreparedStatement {
   }
 
   public all = <T>(): Promise<D1Result<T>> => {
+    if (typeof this.#error !== 'undefined') {
+      return Promise.reject(this.#error);
+    }
+
     return Promise.resolve({
       /**
        *   We need to use `as T[]` here to match the `D1PareparedStatement`

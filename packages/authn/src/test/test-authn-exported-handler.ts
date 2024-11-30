@@ -1,11 +1,13 @@
 import { mapMetricDimensionsToDataPoint } from '@quisido/worker';
+import {
+  TestAnalyticsEngineDataset,
+  TestKVNamespace,
+} from 'cloudflare-test-utils';
 import AuthnFetchHandler from '../authn-fetch-handler.js';
 import handleError from '../handle-error.js';
 import handleLog from '../handle-log.js';
 import handleMetric from '../handle-metric.js';
-import TestAnalyticsEngineDataset from './test-analytics-engine-dataset.js';
 import TestExportedHandler from './test-exported-handler.js';
-import TestKVNamespace from './test-kv-namespace.js';
 
 interface Options {
   readonly authnUserIds?: Readonly<Partial<Record<string, string>>>;

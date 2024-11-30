@@ -335,7 +335,9 @@ export default class Handler<
       return this.#env[key];
     }
 
-    throw new Error('The environment may only be accessed during fetch.');
+    throw new Error(
+      'The environment may only be accessed during an operation.',
+    );
   }
 
   public getKVNamespace(name: string): KVNamespace {

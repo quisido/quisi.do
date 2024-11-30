@@ -1,3 +1,4 @@
+/// <reference types="@cloudflare/workers-types" />
 import { vi } from 'vitest';
 
 export default class TestR2Bucket implements R2Bucket {

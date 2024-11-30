@@ -25,6 +25,10 @@
       "path": "packages/aws-rum-react",
     },
     {
+      "name": "cloudflare-test-utils",
+      "path": "packages/cloudflare-test-utils",
+    },
+    {
       "name": "cloudflare-utils",
       "path": "packages/cloudflare-utils",
     },

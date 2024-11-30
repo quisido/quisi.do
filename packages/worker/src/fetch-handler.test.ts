@@ -1,6 +1,6 @@
+import { TEST_EXECUTION_CONTEXT } from 'cloudflare-test-utils';
 import { StatusCode, type IncomingRequest } from 'cloudflare-utils';
 import { assert, describe, expect, it, vi } from 'vitest';
-import { TEST_EXECUTION_CONTEXT } from '../test/test-execution-context.js';
 import { TestExportedHandler } from '../test/test-exported-handler.js';
 import throwy from '../test/throwy.js';
 import { FetchHandler } from './index.js';

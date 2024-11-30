@@ -5,7 +5,8 @@ export default [
   ...configs,
 
   ...disableRulesForFiles({
-    'func-style': ['src/exported-handler.test.ts', 'src/handler.test.ts'],
+    camelcase: ['test/test-d1-prepared-statement.ts'],
+    'func-style': ['src/exported-handler.test.ts', 'src/handler-*.test.ts'],
     'max-lines': ['src/handler.ts'],
     'max-lines-per-function': ['src/exported-handler.ts', 'src/handler.ts'],
     'no-await-in-loop': ['src/map-readable-stream-to-string.ts'],
