@@ -16,9 +16,9 @@ describe('Handler', (): void => {
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super((): Response => {
-            promise = asyncSetTimeout((): void => {
+            promise = asyncSetTimeout(IMMEDIATE).then((): void => {
               this.log('test message');
-            }, IMMEDIATE);
+            });
             return new Response();
           });
         }

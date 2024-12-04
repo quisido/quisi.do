@@ -1,3 +1,7 @@
+import isStringifiable from './is-stringifiable.js';
+
+const DEFAULT = '[object Object]';
+
 export default function mapToString(value: unknown): string {
   if (typeof value === 'undefined') {
     return 'undefined';
@@ -9,6 +13,17 @@ export default function mapToString(value: unknown): string {
 
   if (value instanceof Error) {
     return value.message;
+  }
+
+  if (isStringifiable(value)) {
+    try {
+      const str: unknown = value.toString();
+      if (typeof str === 'string' && str !== DEFAULT) {
+        return str;
+      }
+    } catch (_err: unknown) {
+      // Do nothing.
+    }
   }
 
   return JSON.stringify(value);

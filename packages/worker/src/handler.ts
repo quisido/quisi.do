@@ -82,10 +82,10 @@ export default class Handler<
   readonly #eventEmitter = new EventEmitter<EventTypes>();
   #console: Console = console;
   #env: Env | undefined;
+  readonly #eventQueue: (() => void)[] = [];
   #fetch: Fetcher['fetch'] | undefined;
   #flushed = false;
   #now: () => number = Date.now.bind(Date);
-  readonly #queue: (() => void)[] = [];
 
   public readonly run: (
     /**
@@ -184,7 +184,7 @@ export default class Handler<
       return true;
     }
 
-    this.#queue.push((): void => {
+    this.#eventQueue.push((): void => {
       this.#eventEmitter.emit(event, ...args);
     });
     return true;
@@ -243,8 +243,8 @@ export default class Handler<
   public flush(): void {
     this.#flushed = true;
 
-    const { length } = this.#queue;
-    const queue: (() => void)[] = this.#queue.splice(FIRST, length);
+    const { length } = this.#eventQueue;
+    const queue: (() => void)[] = this.#eventQueue.splice(FIRST, length);
     for (const fn of queue) {
       fn.call(this);
     }
@@ -390,7 +390,7 @@ export default class Handler<
           return;
         }
 
-        promise.catch(handleError);
+        this.affect(promise.catch(handleError));
       } catch (err: unknown) {
         handleError(err);
       }

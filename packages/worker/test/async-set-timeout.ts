@@ -1,11 +1,5 @@
-export default async function asyncSetTimeout(
-  callback: () => void,
-  delay: number,
-): Promise<void> {
+export default async function asyncSetTimeout(delay: number): Promise<void> {
   return new Promise((resolve): void => {
-    setTimeout((): void => {
-      callback();
-      resolve();
-    }, delay);
+    setTimeout(resolve, delay);
   });
 }
