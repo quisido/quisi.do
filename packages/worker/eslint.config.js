@@ -6,7 +6,7 @@ export default [
 
   ...disableRulesForFiles({
     camelcase: ['test/test-d1-prepared-statement.ts'],
-    'func-style': ['src/exported-handler.test.ts', 'src/handler-*.test.ts'],
+    'func-style': ['src/*.test.ts'],
     'max-classes-per-file': ['src/*.test.ts'],
     'max-lines': ['src/handler.ts'],
     'max-lines-per-function': ['src/exported-handler.ts', 'src/handler.ts'],
@@ -21,6 +21,7 @@ export default [
     ],
 
     'no-magic-numbers': [
+      'src/fetch-handler-trace-parent.test.ts',
       'src/metric.ts',
       'src/modules/trace-parent/constants/trace-flag.ts',
     ],

@@ -1,8 +1,14 @@
 /// <reference types="@cloudflare/workers-types" />
+import createTraceId from './create-trace-id.js';
 import handleErrorDefault from './default-error-handler.js';
+import { DEFAULT_TRACE_PARENT_METRIC_DIMENSIONS } from './default-trace-parent-metric-dimensions.js';
 import Handler from './handler.js';
 import mapHeadersToCookies from './map-headers-to-cookies.js';
 import mapRequestToPathname from './map-request-to-pathname.js';
+import mapRequestToTraceParent from './map-request-to-trace-parent.js';
+import mapTraceParentToMetricDimensions from './map-trace-parent-to-metric-dimensions.js';
+import type { TraceParent } from './modules/trace-parent/index.js';
+import type TraceParentMetricDimensions from './trace-parent-metric-dimensions.js';
 
 export default class FetchHandler<
   Env = unknown,
@@ -15,7 +21,7 @@ export default class FetchHandler<
     | Request<CfHostMetadata, IncomingRequestCfProperties<CfHostMetadata>>
     | undefined;
 
-  // #traceId = createTraceId();
+  #traceId: string = createTraceId();
 
   public constructor(
     handleFetch: (
@@ -109,9 +115,8 @@ export default class FetchHandler<
     return new URL(this.request.url);
   }
 
-  /*
-  Public get traceId(): string {
-    return this.traceId;
+  public get traceId(): string {
+    return this.#traceId;
   }
 
   public get traceParent(): TraceParent | null {
@@ -123,7 +128,7 @@ export default class FetchHandler<
      *   Trace parent is null when it is not present in the request.
      *   Trace parent is undefined when this property is accessed before the
      * constructor completes, e.g. when a metric is emit during construction.
-     * /
+     */
     if (this.traceParent === null || typeof this.traceParent === 'undefined') {
       return {
         ...DEFAULT_TRACE_PARENT_METRIC_DIMENSIONS,
@@ -133,5 +138,4 @@ export default class FetchHandler<
 
     return mapTraceParentToMetricDimensions(this.traceParent);
   }
-  */
 }

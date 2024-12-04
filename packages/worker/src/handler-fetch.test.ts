@@ -1,4 +1,7 @@
-import { TEST_EXECUTION_CONTEXT } from 'cloudflare-test-utils';
+import {
+  EXPECT_ANY_NUMBER,
+  TEST_EXECUTION_CONTEXT,
+} from 'cloudflare-test-utils';
 import { assert, describe, expect, it, vi } from 'vitest';
 import noop from '../test/noop.js';
 import { TestExportedHandler } from '../test/test-exported-handler.js';
@@ -51,6 +54,39 @@ describe('Handler', (): void => {
       expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(MetricName.Fetch, {
         endTime: testEndTime,
         startTime: testStartTime,
+        url: 'https://localhost/test/',
+      });
+    });
+
+    it('should support Request instances', async (): Promise<void> => {
+      async function testFetchHandler(this: FetchHandler): Promise<Response> {
+        return await this.fetch(new Request('https://localhost/test/'));
+      }
+
+      const handler = new TestExportedHandler({
+        onMetric: TEST_METRIC_HANDLER,
+
+        fetch(): Promise<Response> {
+          return Promise.resolve(new Response());
+        },
+
+        FetchHandler: class TestFetchHandler extends FetchHandler {
+          public constructor() {
+            super(testFetchHandler);
+          }
+        },
+      });
+
+      assert('fetch' in handler);
+      await handler.fetch(
+        new Request('https://localhost/'),
+        {},
+        TEST_EXECUTION_CONTEXT,
+      );
+
+      expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(MetricName.Fetch, {
+        endTime: EXPECT_ANY_NUMBER,
+        startTime: EXPECT_ANY_NUMBER,
         url: 'https://localhost/test/',
       });
     });

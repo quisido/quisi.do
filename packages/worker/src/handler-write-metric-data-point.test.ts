@@ -7,6 +7,7 @@ import { TestExportedHandler } from '../test/test-exported-handler.js';
 import { FetchHandler } from './index.js';
 
 const TEST_NUMBER = 1234;
+const TRUE = 1;
 
 describe('Handler', (): void => {
   describe('writeMetricDataPoint', (): void => {
@@ -14,6 +15,7 @@ describe('Handler', (): void => {
       const testDataset = new TestAnalyticsEngineDataset();
       function testFetchHandler(this: FetchHandler): Response {
         this.writeMetricDataPoint('DATASET', 'test name', {
+          isTest: true,
           testNumber: TEST_NUMBER,
           testString: 'test string',
         });
@@ -39,7 +41,7 @@ describe('Handler', (): void => {
 
       testDataset.expectToHaveWrittenDataPoint({
         blobs: ['test string'],
-        doubles: [TEST_NUMBER],
+        doubles: [TRUE, TEST_NUMBER],
         indexes: ['test name'],
       });
     });
