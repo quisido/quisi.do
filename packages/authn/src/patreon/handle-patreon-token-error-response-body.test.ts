@@ -5,14 +5,10 @@ import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
 import mapStringToIp from '../test/map-string-to-ip.js';
 import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
+import { TEST_PATREON_URL } from '../test/test-patreon-search.js';
 
 describe('handlePatreonTokenErrorResponseBody', (): void => {
   it('should emit and respond when the Patreon token error response body is not a record', async (): Promise<void> => {
-    const testState: string = JSON.stringify({
-      returnPath: '/test-return-path/',
-      sessionId: 'test-session-id',
-    });
-
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch, mockResponse } =
       new TestAuthnExportedHandler({
@@ -38,12 +34,7 @@ describe('handlePatreonTokenErrorResponseBody', (): void => {
     );
 
     // Act
-    const search: string = new URLSearchParams({
-      code: 'test-code',
-      state: testState,
-    }).toString();
-
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
+    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
       headers: new Headers({
         'cf-connecting-ip': mapStringToIp('patreonObject'),
         cookie: '__Secure-Session-ID=test-session-id',
@@ -66,11 +57,6 @@ describe('handlePatreonTokenErrorResponseBody', (): void => {
   });
 
   it('should emit and respond when the Patreon token error response is missing an error code ', async (): Promise<void> => {
-    const testState: string = JSON.stringify({
-      returnPath: '/test-return-path/',
-      sessionId: 'test-session-id',
-    });
-
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch, mockResponse } =
       new TestAuthnExportedHandler({
@@ -96,12 +82,7 @@ describe('handlePatreonTokenErrorResponseBody', (): void => {
     );
 
     // Act
-    const search: string = new URLSearchParams({
-      code: 'test-code',
-      state: testState,
-    }).toString();
-
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
+    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
       headers: new Headers({
         'cf-connecting-ip': mapStringToIp('patreonError'),
         cookie: '__Secure-Session-ID=test-session-id',

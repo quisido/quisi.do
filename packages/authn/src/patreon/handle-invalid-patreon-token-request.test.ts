@@ -5,14 +5,10 @@ import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
 import mapStringToIp from '../test/map-string-to-ip.js';
 import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
+import { TEST_PATREON_URL } from '../test/test-patreon-search.js';
 
 describe('handleInvalidPatreonTokenRequest', (): void => {
   it('should emit and respond when Patreon rejects with a description', async (): Promise<void> => {
-    const testState: string = JSON.stringify({
-      returnPath: '/test-return-path/',
-      sessionId: 'test-session-id',
-    });
-
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch, mockResponse } =
       new TestAuthnExportedHandler({
@@ -45,12 +41,7 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
     );
 
     // Act
-    const search: string = new URLSearchParams({
-      code: 'test-code',
-      state: testState,
-    }).toString();
-
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
+    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
       headers: new Headers({
         'cf-connecting-ip': mapStringToIp('patreonDescription'),
         cookie: '__Secure-Session-ID=test-session-id',
@@ -72,11 +63,6 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
   });
 
   it('should emit and respond when Patreon rejects without a description', async (): Promise<void> => {
-    const testState: string = JSON.stringify({
-      returnPath: '/test-return-path/',
-      sessionId: 'test-session-id',
-    });
-
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch, mockResponse } =
       new TestAuthnExportedHandler({
@@ -108,12 +94,7 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
     );
 
     // Act
-    const search: string = new URLSearchParams({
-      code: 'test-code',
-      state: testState,
-    }).toString();
-
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
+    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
       headers: new Headers({
         'cf-connecting-ip': mapStringToIp('patreonNoDescription'),
         cookie: '__Secure-Session-ID=test-session-id',
@@ -137,11 +118,6 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
   });
 
   it('should emit and respond when Patreon rejects with an invalid description', async (): Promise<void> => {
-    const testState: string = JSON.stringify({
-      returnPath: '/test-return-path/',
-      sessionId: 'test-session-id',
-    });
-
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch, mockResponse } =
       new TestAuthnExportedHandler({
@@ -174,12 +150,7 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
     );
 
     // Act
-    const search: string = new URLSearchParams({
-      code: 'test-code',
-      state: testState,
-    }).toString();
-
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
+    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
       headers: new Headers({
         'cf-connecting-ip': mapStringToIp('patreonInvalid'),
         cookie: '__Secure-Session-ID=test-session-id',

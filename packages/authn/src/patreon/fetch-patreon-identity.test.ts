@@ -11,6 +11,7 @@ import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
 import mapStringToIp from '../test/map-string-to-ip.js';
 import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
+import { TEST_PATREON_URL } from '../test/test-patreon-search.js';
 
 const IDENTITY_URL: string = expectStringMatching(
   /^https:\/\/host\.test\.patreon\.com\/api\/oauth2\/v2\/identity\?/u,
@@ -18,11 +19,6 @@ const IDENTITY_URL: string = expectStringMatching(
 
 describe('fetchPatreonIdentity', (): void => {
   it('should emit and respond when the Patreon identity is invalid', async (): Promise<void> => {
-    const testState: string = JSON.stringify({
-      returnPath: '/test-return-path/',
-      sessionId: 'test-session-id',
-    });
-
     // Assemble
     const {
       expectAnalyticsEngineDatasetToWriteDataPoint,
@@ -59,12 +55,7 @@ describe('fetchPatreonIdentity', (): void => {
     );
 
     // Act
-    const search: string = new URLSearchParams({
-      code: 'test-code',
-      state: testState,
-    }).toString();
-
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
+    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
       headers: new Headers({
         'cf-connecting-ip': mapStringToIp('json'),
         cookie: '__Secure-Session-ID=test-session-id',
@@ -94,11 +85,6 @@ describe('fetchPatreonIdentity', (): void => {
   });
 
   it('should emit and respond when the Patreon identity is forbidden', async (): Promise<void> => {
-    const testState: string = JSON.stringify({
-      returnPath: '/test-return-path/',
-      sessionId: 'test-session-id',
-    });
-
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch, mockResponse } =
       new TestAuthnExportedHandler({
@@ -131,12 +117,7 @@ describe('fetchPatreonIdentity', (): void => {
     );
 
     // Act
-    const search: string = new URLSearchParams({
-      code: 'test-code',
-      state: testState,
-    }).toString();
-
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
+    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
       headers: new Headers({
         'cf-connecting-ip': mapStringToIp('forbidden'),
         cookie: '__Secure-Session-ID=test-session-id',
@@ -158,11 +139,6 @@ describe('fetchPatreonIdentity', (): void => {
   });
 
   it('should emit and respond when the Patreon identity is an error', async (): Promise<void> => {
-    const testState: string = JSON.stringify({
-      returnPath: '/test-return-path/',
-      sessionId: 'test-session-id',
-    });
-
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch, mockResponse } =
       new TestAuthnExportedHandler({
@@ -195,12 +171,7 @@ describe('fetchPatreonIdentity', (): void => {
     );
 
     // Act
-    const search: string = new URLSearchParams({
-      code: 'test-code',
-      state: testState,
-    }).toString();
-
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
+    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
       headers: new Headers({
         'cf-connecting-ip': mapStringToIp('error'),
         cookie: '__Secure-Session-ID=test-session-id',
@@ -226,11 +197,6 @@ describe('fetchPatreonIdentity', (): void => {
   });
 
   it('should emit and respond when the Patreon identity is invalid', async (): Promise<void> => {
-    const testState: string = JSON.stringify({
-      returnPath: '/test-return-path/',
-      sessionId: 'test-session-id',
-    });
-
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch, mockResponse } =
       new TestAuthnExportedHandler({
@@ -263,12 +229,7 @@ describe('fetchPatreonIdentity', (): void => {
     );
 
     // Act
-    const search: string = new URLSearchParams({
-      code: 'test-code',
-      state: testState,
-    }).toString();
-
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
+    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
       headers: new Headers({
         'cf-connecting-ip': mapStringToIp('invalid'),
         cookie: '__Secure-Session-ID=test-session-id',
