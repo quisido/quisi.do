@@ -2,9 +2,10 @@ import {
   ExportedHandler,
   type FetchHandler as IFetchHandler,
 } from '@quisido/worker';
-import { isNot } from 'fmrs';
-import { assert, expect, vi } from 'vitest';
+import { is } from 'fmrs';
+import { assert, expect, vi, type Mock } from 'vitest';
 import isEqual from './is-equal.js';
+import mapMockedResponseToUrl from './map-mocked-response-to-url.js';
 import mapRequestInfoToString from './map-request-info-to-string.js';
 import TestResponse from './test-response.js';
 
@@ -21,7 +22,7 @@ interface Options {
   ) => void;
 }
 
-const EMPTY = 0;
+const SINGLE = 1;
 const TEST_PASS_THROUGH_ON_EXCEPTION = vi.fn();
 const TEST_WAIT_UNTIL = vi.fn();
 
@@ -31,7 +32,7 @@ export default class TestExportedHandler {
   readonly #env: Readonly<Record<string, unknown>>;
   readonly #exportedHandler: ExportedHandler;
   readonly #fetchErrors: Error[] = [];
-  readonly #mockedResponses = new Map<string, readonly [unknown, Response][]>();
+  readonly #mockedResponses: (readonly [RequestInfo, unknown, Response])[] = [];
   #now: () => number = Date.now.bind(Date);
 
   public constructor({
@@ -43,13 +44,24 @@ export default class TestExportedHandler {
     onMetric,
   }: Options) {
     this.#env = env;
+    this.expectAnalyticsEngineDatasetToWriteDataPoint =
+      this.expectAnalyticsEngineDatasetToWriteDataPoint.bind(this);
+    this.expectConsoleError = this.expectConsoleError.bind(this);
+    this.expectConsoleLog = this.expectConsoleLog.bind(this);
+    this.expectMetric = this.expectMetric.bind(this);
+    this.fetch = this.fetch.bind(this);
+    this.getNow = this.getNow.bind(this);
+    this.mockResponse = this.mockResponse.bind(this);
+    this.setNow = this.setNow.bind(this);
+
+    this.#handleMetric.mockImplementation(onMetric);
     this.#exportedHandler = new ExportedHandler({
       FetchHandler,
       fetch: this.#mockedFetch,
       now,
       onError,
       onLog,
-      onMetric,
+      onMetric: this.#handleMetric,
 
       console: {
         ...console,
@@ -59,28 +71,35 @@ export default class TestExportedHandler {
     });
   }
 
-  public expectAnalyticsEngineDatasetToWriteDataPoint = (
+  public expectAnalyticsEngineDatasetToWriteDataPoint(
     dataset: string,
     dataPoint: AnalyticsEngineDataPoint,
-  ): void => {
+  ): void {
     assert(typeof this.#env[dataset] === 'object');
     assert(this.#env[dataset] !== null);
     assert('writeDataPoint' in this.#env[dataset]);
     expect(this.#env[dataset].writeDataPoint).toHaveBeenCalledWith(dataPoint);
-  };
+  }
 
-  public expectConsoleError = (...messages: readonly string[]): void => {
+  public expectConsoleError(...messages: readonly unknown[]): void {
     expect(this.#consoleError).toHaveBeenCalledWith(...messages);
-  };
+  }
 
-  public expectConsoleLog = (...messages: readonly string[]): void => {
+  public expectConsoleLog(...messages: readonly unknown[]): void {
     expect(this.#consoleLog).toHaveBeenCalledWith(...messages);
-  };
+  }
 
-  public fetch = async (
+  public expectMetric(
+    name: string,
+    dimensions: Record<string, boolean | number | string>,
+  ): void {
+    expect(this.#handleMetric).toHaveBeenCalledWith(name, dimensions);
+  }
+
+  public async fetch(
     input: string,
     init?: RequestInit<IncomingRequestCfProperties>,
-  ): Promise<TestResponse> => {
+  ): Promise<TestResponse> {
     const request = new Request<unknown, IncomingRequestCfProperties>(
       `https://localhost:1234${input}`,
       init,
@@ -99,50 +118,57 @@ export default class TestExportedHandler {
       throw firstFetchError;
     }
 
-    const [firstMockedRequest] = this.#mockedResponses.keys();
-    if (typeof firstMockedRequest !== 'undefined') {
-      throw new Error(`Unused mocked request: ${firstMockedRequest}`);
+    const [firstMockedResponse] = this.#mockedResponses;
+    if (typeof firstMockedResponse !== 'undefined') {
+      const [mockedInput] = firstMockedResponse;
+      const mockedUrl: string = mapRequestInfoToString(mockedInput);
+      throw new Error(`Unused mocked request: ${mockedUrl}`);
     }
 
     return await TestResponse.from(response);
-  };
+  }
 
-  public getNow = (): number => {
+  public getNow(): number {
     return this.#now();
-  };
+  }
+
+  readonly #handleMetric: Mock<
+    (
+      name: string,
+      dimensions: Record<string, boolean | number | string>,
+    ) => void
+  > = vi.fn();
 
   #mockedFetch = vi.fn(
     (input: RequestInfo, init?: RequestInit): Promise<Response> => {
       const url: string = mapRequestInfoToString(input);
-      const mockedResponses: readonly [unknown, Response][] | undefined =
-        this.#mockedResponses.get(url);
 
-      if (typeof mockedResponses === 'undefined') {
-        this.#fetchErrors.push(new Error(`No responses are mocked for ${url}`));
-        return Promise.resolve(new Response());
-      }
+      for (const mockedData of this.#mockedResponses) {
+        const [mockedInput, mockedInit, mockedResponse] = mockedData;
+        if (!isEqual(url, mockedInput)) {
+          continue;
+        }
 
-      for (const mockedResponseEntry of mockedResponses) {
-        const [mockedInit, mockedResponse] = mockedResponseEntry;
         if (!isEqual(init, mockedInit)) {
           continue;
         }
 
-        const newMockedResponses: readonly [unknown, Response][] =
-          mockedResponses.filter(isNot(mockedResponseEntry));
-        if (newMockedResponses.length === EMPTY) {
-          this.#mockedResponses.delete(url);
-        } else {
-          this.#mockedResponses.set(url, newMockedResponses);
-        }
+        const index: number = this.#mockedResponses.findIndex(is(mockedData));
+        this.#mockedResponses.splice(index, SINGLE);
 
         return Promise.resolve(mockedResponse);
       }
 
       this.#fetchErrors.push(
         new Error(
-          `No response is mocked for ${url} with init:
-${JSON.stringify(init)}`,
+          `No response is mocked for:
+${url}
+
+Initilization:
+${JSON.stringify(init)}
+
+Mocked responses include:
+${this.mockedResponseUrls.join('\n')}`,
         ),
       );
 
@@ -150,22 +176,19 @@ ${JSON.stringify(init)}`,
     },
   );
 
-  public mockResponse = (
+  public mockResponse(
     input: RequestInfo,
     init: RequestInit,
     response: Response,
-  ): void => {
-    const url: string = mapRequestInfoToString(input);
-    const mockedResponses: readonly [unknown, Response][] | undefined =
-      this.#mockedResponses.get(url);
-    if (typeof mockedResponses === 'undefined') {
-      this.#mockedResponses.set(url, [[init, response]]);
-    } else {
-      this.#mockedResponses.set(url, [...mockedResponses, [init, response]]);
-    }
-  };
+  ): void {
+    this.#mockedResponses.push([input, init, response]);
+  }
 
-  public setNow = (timestamp: number): void => {
+  private get mockedResponseUrls(): readonly string[] {
+    return this.#mockedResponses.map(mapMockedResponseToUrl);
+  }
+
+  public setNow(timestamp: number): void {
     this.#now = (): number => timestamp;
-  };
+  }
 }

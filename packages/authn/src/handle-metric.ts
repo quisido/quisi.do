@@ -13,7 +13,176 @@ export default function handleMetric(
 ): void {
   if (typeof isPublic === 'undefined') {
     if (isWorkerMetricName(name)) {
+      const emitInvalidWorkerMetric = (): void => {
+        handleMetric.call(
+          this,
+          MetricName.InvalidWorkerMetric,
+          { dimensions: JSON.stringify(dimensions), name },
+          false,
+        );
+      };
+
+      const emitPrivateMetric = (
+        newDimensions: Record<
+          number | string | symbol,
+          boolean | number | string
+        >,
+      ): void => {
+        handleMetric.call(this, name, newDimensions, false);
+      };
+
+      const emitPublicMetric = (
+        newDimensions: Record<
+          number | string | symbol,
+          boolean | number | string
+        >,
+      ): void => {
+        handleMetric.call(this, name, newDimensions, true);
+      };
+
       switch (name) {
+        case WorkerMetricName.D1All: {
+          const {
+            changedDb,
+            changes,
+            duration,
+            endTime,
+            env,
+            lastRowId,
+            query,
+            results,
+            rowsRead,
+            rowsWritten,
+            sizeAfter,
+            startTime,
+          } = dimensions;
+          if (
+            typeof changedDb !== 'boolean' ||
+            typeof changes !== 'number' ||
+            typeof duration !== 'number' ||
+            typeof endTime !== 'number' ||
+            typeof env !== 'string' ||
+            typeof lastRowId !== 'number' ||
+            typeof query !== 'string' ||
+            typeof results !== 'number' ||
+            typeof rowsRead !== 'number' ||
+            typeof rowsWritten !== 'number' ||
+            typeof sizeAfter !== 'number' ||
+            typeof startTime !== 'number'
+          ) {
+            emitInvalidWorkerMetric();
+            return;
+          }
+
+          emitPrivateMetric({
+            changedDb,
+            changes,
+            duration,
+            endTime,
+            env,
+            lastRowId,
+            query,
+            results,
+            rowsRead,
+            rowsWritten,
+            sizeAfter,
+            startTime,
+          });
+
+          emitPublicMetric({
+            changedDb,
+            changes,
+            duration,
+            endTime,
+            results,
+            rowsRead,
+            rowsWritten,
+            sizeAfter,
+            startTime,
+          });
+          return;
+        }
+
+        case WorkerMetricName.D1Run: {
+          const {
+            changedDb,
+            changes,
+            duration,
+            endTime,
+            env,
+            lastRowId,
+            query,
+            rowsRead,
+            rowsWritten,
+            sizeAfter,
+            startTime,
+          } = dimensions;
+          if (
+            typeof changedDb !== 'boolean' ||
+            typeof changes !== 'number' ||
+            typeof duration !== 'number' ||
+            typeof endTime !== 'number' ||
+            typeof env !== 'string' ||
+            typeof lastRowId !== 'number' ||
+            typeof query !== 'string' ||
+            typeof rowsRead !== 'number' ||
+            typeof rowsWritten !== 'number' ||
+            typeof sizeAfter !== 'number' ||
+            typeof startTime !== 'number'
+          ) {
+            emitInvalidWorkerMetric();
+            return;
+          }
+
+          emitPrivateMetric({
+            changedDb,
+            changes,
+            duration,
+            endTime,
+            env,
+            lastRowId,
+            query,
+            rowsRead,
+            rowsWritten,
+            sizeAfter,
+            startTime,
+          });
+
+          emitPublicMetric({
+            changedDb,
+            changes,
+            duration,
+            endTime,
+            rowsRead,
+            rowsWritten,
+            sizeAfter,
+            startTime,
+          });
+          return;
+        }
+
+        case WorkerMetricName.Fetch: {
+          const { endTime, startTime, url } = dimensions;
+          if (
+            typeof endTime !== 'number' ||
+            typeof startTime !== 'number' ||
+            typeof url !== 'string'
+          ) {
+            emitInvalidWorkerMetric();
+            return;
+          }
+
+          try {
+            const { origin } = new URL(url);
+            emitPrivateMetric({ endTime, startTime, url });
+            emitPublicMetric({ endTime, origin, startTime });
+            return;
+          } catch (_err: unknown) {
+            emitInvalidWorkerMetric();
+            return;
+          }
+        }
+
         case WorkerMetricName.InvalidEnvironmentVariable: {
           const { key, type, value } = dimensions;
           if (
@@ -21,17 +190,29 @@ export default function handleMetric(
             typeof type !== 'string' ||
             typeof value !== 'string'
           ) {
-            handleMetric.call(
-              this,
-              MetricName.InvalidWorkerMetric,
-              { dimensions: JSON.stringify(dimensions), name },
-              false,
-            );
+            emitInvalidWorkerMetric();
             return;
           }
 
-          handleMetric.call(this, name, { key, type }, true);
-          handleMetric.call(this, name, { key, value }, false);
+          emitPrivateMetric({ key, value });
+          emitPublicMetric({ key, type });
+          return;
+        }
+
+        case WorkerMetricName.KVGet: {
+          const { endTime, key, namespace, startTime } = dimensions;
+          if (
+            typeof endTime !== 'number' ||
+            typeof key !== 'string' ||
+            typeof namespace !== 'string' ||
+            typeof startTime !== 'number'
+          ) {
+            emitInvalidWorkerMetric();
+            return;
+          }
+
+          emitPrivateMetric({ endTime, key, namespace, startTime });
+          emitPublicMetric({ endTime, namespace, startTime });
           return;
         }
       }
@@ -44,7 +225,7 @@ export default function handleMetric(
       return;
     }
 
-    const newIsPublic: unknown = dimensions[PUBLIC];
+    const { [PUBLIC]: newIsPublic, ...newDimensions } = dimensions;
     if (typeof newIsPublic !== 'boolean') {
       this.logError(
         new Error('Attempted to emit a metric with invalid accessibility.'),
@@ -52,8 +233,7 @@ export default function handleMetric(
       return;
     }
 
-    delete dimensions[PUBLIC];
-    handleMetric.call(this, name, dimensions, newIsPublic);
+    handleMetric.call(this, name, newDimensions, newIsPublic);
     return;
   }
 

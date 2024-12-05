@@ -35,7 +35,6 @@
     "tsc:no-emit": "tsc --noEmit --skipLibCheck",
     "vitest": "vitest",
     "vitest:run": "vitest run",
-    "vitest:watch": "vitest watch",
     "whoami": "wrangler whoami"
   },
   "dependencies": {

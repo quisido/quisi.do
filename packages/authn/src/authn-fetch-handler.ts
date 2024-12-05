@@ -16,6 +16,15 @@ import getSessionIdCookie from './fetch-handler/get-session-id-cookie.js';
 import handleFetchError from './fetch-handler/handle-fetch-error.js';
 import handleFetchRequest from './fetch-handler/handle-fetch-request.js';
 import mapEnvKeyToErrorCode from './fetch-handler/map-env-key-to-error-code.js';
+import createOAuthResponse from './oauth/create-oauth-response.js';
+import getOAuthUserId from './oauth/get-oauth-user-id.js';
+import fetchPatreonIdentity from './patreon/fetch-patreon-identity.js';
+import getPatreonAccessToken from './patreon/get-patreon-access-token.js';
+import getPatreonRequestCode from './patreon/get-patreon-request-code.js';
+import handlePatreonTokenErrorResponse from './patreon/handle-patreon-token-error-response.js';
+import insertIntoOAuth from './patreon/insert-into-oauth.js';
+import mapPatreonOAuthTokenToAccessToken from './patreon/map-patreon-oauth-token-to-access-token.js';
+import parsePatreonIdentity from './patreon/parse-patreon-identity.js';
 import FatalError from './utils/fatal-error.js';
 import isEnvironmentName from './utils/is-environment-name.js';
 import isNonEmptyString from './utils/is-non-empty-string.js';
@@ -27,7 +36,18 @@ const WHOAMI_IP_THROTTLE_LIMIT = 1000;
 
 export default class AuthnFetchHandler extends FetchHandler {
   static #AUTHN_USER_ID_MAP = new TemporaryMap<number>();
+  public createOAuthResponse = createOAuthResponse.bind(this);
+  public fetchPatreonIdentity = fetchPatreonIdentity.bind(this);
+  public getOAuthUserId = getOAuthUserId.bind(this);
+  public getPatreonAccessToken = getPatreonAccessToken.bind(this);
+  public getPatreonRequestCode = getPatreonRequestCode.bind(this);
+  public handlePatreonTokenErrorResponse =
+    handlePatreonTokenErrorResponse.bind(this);
+  public insertIntoOAuth = insertIntoOAuth.bind(this);
+  public mapPatreonOAuthTokenToAccessToken =
+    mapPatreonOAuthTokenToAccessToken.bind(this);
   static #OAUTH_IP_THROTTLER = new Throttler();
+  public parsePatreonIdentity = parsePatreonIdentity.bind(this);
   static #WHOAMI_IP_THROTTLER = new Throttler();
 
   public constructor() {
@@ -66,25 +86,25 @@ export default class AuthnFetchHandler extends FetchHandler {
     return this.getD1Database('AUTHN_DB');
   }
 
-  public emitPrivateMetric = (
+  public emitPrivateMetric(
     name: MetricName,
     dimensions?: Record<number | string | symbol, boolean | number | string>,
-  ): void => {
+  ): void {
     this.emitMetric(name, {
       ...dimensions,
       [PUBLIC]: false,
     });
-  };
+  }
 
-  public emitPublicMetric = (
+  public emitPublicMetric(
     name: MetricName,
     dimensions?: Record<number | string | symbol, boolean | number | string>,
-  ): void => {
+  ): void {
     this.emitMetric(name, {
       ...dimensions,
       [PUBLIC]: true,
     });
-  };
+  }
 
   public get environmentName(): EnvironmentName {
     return this.validateEnv(
@@ -94,11 +114,11 @@ export default class AuthnFetchHandler extends FetchHandler {
     );
   }
 
-  public getAuthnUserIdFromMemory = (authnId: string): number | undefined => {
+  public getAuthnUserIdFromMemory(authnId: string): number | undefined {
     return AuthnFetchHandler.#AUTHN_USER_ID_MAP.get(authnId, {
       now: this.now.bind(this),
     });
-  };
+  }
 
   public get host(): string {
     return this.validateEnv('HOST', isNonEmptyString, 'quisi.do');
@@ -108,8 +128,9 @@ export default class AuthnFetchHandler extends FetchHandler {
     return getIp.call(this);
   }
 
-  public nowSeconds = (): number =>
-    Math.floor(this.now() / MILLISECONDS_PER_SECOND);
+  public nowSeconds(): number {
+    return Math.floor(this.now() / MILLISECONDS_PER_SECOND);
+  }
 
   public get patreonOAuthClientId(): string {
     return this.validateEnv('PATREON_OAUTH_CLIENT_ID', isString);
@@ -131,7 +152,7 @@ export default class AuthnFetchHandler extends FetchHandler {
     return getSessionIdCookie.call(this);
   }
 
-  public setAuthnUserIdInMemory = (authnId: string, userId: number): void => {
+  public setAuthnUserIdInMemory(authnId: string, userId: number): void {
     AuthnFetchHandler.#AUTHN_USER_ID_MAP.set(
       authnId,
       userId,
@@ -140,9 +161,9 @@ export default class AuthnFetchHandler extends FetchHandler {
         now: this.now.bind(this),
       },
     );
-  };
+  }
 
-  public shouldThrottleOAuthByIp = (): boolean => {
+  public shouldThrottleOAuthByIp(): boolean {
     return AuthnFetchHandler.#OAUTH_IP_THROTTLER.run(
       this.ip,
       OAUTH_IP_THROTTLE_LIMIT,
@@ -150,9 +171,9 @@ export default class AuthnFetchHandler extends FetchHandler {
         now: this.now.bind(this),
       },
     );
-  };
+  }
 
-  public shouldThrottleWhoAmIByIp = (): boolean => {
+  public shouldThrottleWhoAmIByIp(): boolean {
     return AuthnFetchHandler.#WHOAMI_IP_THROTTLER.run(
       this.ip,
       WHOAMI_IP_THROTTLE_LIMIT,
@@ -160,26 +181,26 @@ export default class AuthnFetchHandler extends FetchHandler {
         now: this.now.bind(this),
       },
     );
-  };
+  }
 
-  public override validateEnv = <T>(
+  public override validateEnv<T>(
     key: string,
     isValid: (value: unknown) => value is T,
     defaultValue?: T,
-  ): T => {
+  ): T {
     try {
       return super.validateEnv(key, isValid, defaultValue);
     } catch (_err: unknown) {
       const code: ErrorCode = mapEnvKeyToErrorCode(key);
       throw new FatalError(code);
     }
-  };
+  }
 
-  public writeOAuthResponse = (
+  public writeOAuthResponse(
     provider: OAuthProvider,
     id: string,
     response: unknown,
-  ): void => {
+  ): void {
     if (this.dataBucket === null) {
       return;
     }
@@ -198,5 +219,5 @@ export default class AuthnFetchHandler extends FetchHandler {
         },
       ),
     );
-  };
+  }
 }

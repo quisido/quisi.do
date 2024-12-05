@@ -197,9 +197,7 @@ export default class Handler<
       boolean | number | string
     > = EMPTY_OBJECT,
   ): void {
-    this.#emit('metric', name, {
-      ...dimensions,
-    });
+    this.#emit('metric', name, dimensions);
   }
 
   public async fetch(
@@ -263,6 +261,7 @@ export default class Handler<
     query: string,
     bindings: readonly (null | number | string)[],
   ): Promise<HandlerD1Response> {
+    const startTime: number = this.now();
     const {
       meta: {
         changed_db: changedDb,
@@ -277,6 +276,20 @@ export default class Handler<
       .prepare(query)
       .bind(...bindings)
       .run();
+    this.emitMetric(MetricName.D1Run, {
+      changedDb,
+      changes,
+      duration,
+      endTime: this.now(),
+      env,
+      lastRowId,
+      query,
+      rowsRead,
+      rowsWritten,
+      sizeAfter,
+      startTime,
+    });
+
     return {
       changedDb,
       changes,
@@ -293,9 +306,7 @@ export default class Handler<
     query: string,
     values: readonly (null | number | string)[],
   ): Promise<HandlerD1Results> {
-    const statement: D1PreparedStatement = this.getD1Database(env)
-      .prepare(query)
-      .bind(...values);
+    const startTime: number = this.now();
 
     const {
       results,
@@ -309,7 +320,25 @@ export default class Handler<
         rows_written: rowsWritten,
         size_after: sizeAfter,
       },
-    } = await statement.all();
+    } = await this.getD1Database(env)
+      .prepare(query)
+      .bind(...values)
+      .all();
+
+    this.emitMetric(MetricName.D1All, {
+      changedDb,
+      changes,
+      duration,
+      endTime: this.now(),
+      env,
+      lastRowId,
+      query,
+      results: results.length,
+      rowsRead,
+      rowsWritten,
+      sizeAfter,
+      startTime,
+    });
 
     return {
       changedDb,
@@ -348,7 +377,20 @@ export default class Handler<
     namespace: string,
     key: string,
   ): Promise<string | null> {
-    return await this.getKVNamespace(namespace).get(key, 'text');
+    const startTime: number = this.now();
+
+    const value: string | null = await this.getKVNamespace(namespace).get(
+      key,
+      'text',
+    );
+
+    this.emitMetric(MetricName.KVGet, {
+      endTime: this.now(),
+      key,
+      namespace,
+      startTime,
+    });
+    return value;
   }
 
   public getR2Bucket(name: string): R2Bucket {

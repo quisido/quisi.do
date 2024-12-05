@@ -1,8 +1,8 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { MetricName as WorkerMetricName } from '@quisido/worker';
+import { EXPECT_ANY_HEADERS, EXPECT_ANY_STRING } from 'cloudflare-test-utils';
 import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
-import { EXPECT_ANY_HEADERS, EXPECT_ANY_STRING } from '../test/expect-any.js';
 import mapStringToIp from '../test/map-string-to-ip.js';
 import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 

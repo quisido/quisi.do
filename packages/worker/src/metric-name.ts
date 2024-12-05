@@ -1,8 +1,7 @@
 export enum MetricName {
-  Fetch = '@quisido/worker:7',
-  InvalidAnalyticsEngineDataset = '@quisido/worker:1',
-  InvalidD1Database = '@quisido/worker:2',
-  InvalidEnvironmentVariable = '@quisido/worker:5',
-  InvalidKVNamespace = '@quisido/worker:4',
-  InvalidR2Bucket = '@quisido/worker:3',
+  D1All = '@quisido/worker:4',
+  D1Run = '@quisido/worker:5',
+  Fetch = '@quisido/worker:2',
+  InvalidEnvironmentVariable = '@quisido/worker:1',
+  KVGet = '@quisido/worker:3',
 }

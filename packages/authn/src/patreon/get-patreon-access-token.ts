@@ -5,9 +5,6 @@ import { MetricName } from '../constants/metric-name.js';
 import { PATREON_USER_AGENT } from '../constants/patreon-user-agent.js';
 import FatalError from '../utils/fatal-error.js';
 import parseJson from '../utils/parse-json.js';
-import getPatreonRequestCode from './get-patreon-request-code.js';
-import handlePatreonTokenErrorResponse from './handle-patreon-token-error-response.js';
-import mapPatreonOAuthTokenToAccessToken from './map-patreon-oauth-token-to-access-token.js';
 
 const HTTP_REDIRECTION = 300;
 const HEADERS: Headers = new Headers({
@@ -18,7 +15,7 @@ const HEADERS: Headers = new Headers({
 export default async function getPatreonAccessToken(
   this: AuthnFetchHandler,
 ): Promise<string> {
-  const requestCode: string = getPatreonRequestCode.call(this);
+  const requestCode: string = this.getPatreonRequestCode();
   const response: Response = await this.fetch(
     `${this.patreonOAuthHost}/api/oauth2/token`,
     {
@@ -36,7 +33,7 @@ export default async function getPatreonAccessToken(
   );
 
   if (response.status >= HTTP_REDIRECTION) {
-    return handlePatreonTokenErrorResponse.call(this, {
+    return this.handlePatreonTokenErrorResponse({
       requestCode,
       response,
     });
@@ -53,5 +50,5 @@ export default async function getPatreonAccessToken(
     throw new FatalError(ErrorCode.InvalidPatreonTokenResponse);
   }
 
-  return mapPatreonOAuthTokenToAccessToken.call(this, json);
+  return this.mapPatreonOAuthTokenToAccessToken(json);
 }

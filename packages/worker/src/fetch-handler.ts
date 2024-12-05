@@ -60,6 +60,9 @@ export default class FetchHandler<
         }
       },
     );
+
+    this.getCookie = this.getCookie.bind(this);
+    this.getRequestSearchParam = this.getRequestSearchParam.bind(this);
   }
 
   public get cookies(): Partial<Record<string, string>> {
@@ -74,14 +77,14 @@ export default class FetchHandler<
     throw new Error('The execution context may only be accessed during fetch.');
   }
 
-  public getCookie = (name: string): string | undefined => {
+  public getCookie(name: string): string | undefined {
     const { cookies } = this;
     return cookies[name];
-  };
+  }
 
-  public getRequestSearchParam = (key: string): string | null => {
+  public getRequestSearchParam(key: string): string | null {
     return this.requestSearchParams.get(key);
-  };
+  }
 
   public get origin(): string | null {
     return this.requestHeaders.get('origin');

@@ -15,10 +15,13 @@ interface Options {
   readonly now?: (() => number) | undefined;
 }
 
-const JSON_SPACE = 2;
-const NONE = 0;
-
 export default class TestAuthnExportedHandler extends TestExportedHandler {
+  public override expectAnalyticsEngineDatasetToWriteDataPoint =
+    super.expectAnalyticsEngineDatasetToWriteDataPoint.bind(this);
+  public override expectMetric = super.expectMetric.bind(this);
+  public override fetch = super.fetch.bind(this);
+  public override mockResponse = super.mockResponse.bind(this);
+
   public constructor({ authnUserIds = {}, env = {}, now }: Options = {}) {
     super({
       FetchHandler: AuthnFetchHandler,
@@ -36,40 +39,20 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
     });
   }
 
-  expectPrivateMetric = (
+  public expectPrivateMetric = (
     name: string,
     dimensions: Record<string, boolean | number | string> = {},
   ): void => {
-    if (Object.keys(dimensions).length === NONE) {
-      this.expectConsoleLog('Private metric:', name);
-    } else {
-      this.expectConsoleLog(
-        'Private metric:',
-        name,
-        JSON.stringify(dimensions, null, JSON_SPACE),
-      );
-    }
-
     this.expectAnalyticsEngineDatasetToWriteDataPoint('PRIVATE_DATASET', {
       ...mapMetricDimensionsToDataPoint(dimensions),
       indexes: [name],
     });
   };
 
-  expectPublicMetric = (
+  public expectPublicMetric = (
     name: string,
     dimensions: Record<string, boolean | number | string> = {},
   ): void => {
-    if (Object.keys(dimensions).length === NONE) {
-      this.expectConsoleLog('Public metric:', name);
-    } else {
-      this.expectConsoleLog(
-        'Public metric:',
-        name,
-        JSON.stringify(dimensions, null, JSON_SPACE),
-      );
-    }
-
     this.expectAnalyticsEngineDatasetToWriteDataPoint('PUBLIC_DATASET', {
       ...mapMetricDimensionsToDataPoint(dimensions),
       indexes: [name],

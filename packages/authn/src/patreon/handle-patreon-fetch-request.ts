@@ -2,11 +2,6 @@ import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { Gender } from '../constants/gender.js';
 import { MetricName } from '../constants/metric-name.js';
 import { OAuthProvider } from '../constants/oauth-provider.js';
-import createOAuthResponse from '../oauth/create-oauth-response.js';
-import getOAuthUserId from '../oauth/get-oauth-user-id.js';
-import fetchPatreonIdentity from './fetch-patreon-identity.js';
-import getPatreonAccessToken from './get-patreon-access-token.js';
-import insertIntoOAuth from './insert-into-oauth.js';
 import type PatreonIdentity from './patreon-identity.js';
 
 interface Options {
@@ -19,21 +14,18 @@ export default async function handlePatreonFetchRequest(
 ): Promise<Response> {
   this.emitPublicMetric(MetricName.PatreonRequest);
 
-  const accessToken: string = await getPatreonAccessToken.call(this);
-  const identity: PatreonIdentity = await fetchPatreonIdentity.call(
-    this,
-    accessToken,
-  );
+  const accessToken: string = await this.getPatreonAccessToken();
+  const identity: PatreonIdentity =
+    await this.fetchPatreonIdentity(accessToken);
 
-  const userId: number | null = await getOAuthUserId.call(
-    this,
+  const userId: number | null = await this.getOAuthUserId(
     OAuthProvider.Patreon,
     identity.id,
   );
 
   // Existing user
   if (userId !== null) {
-    return createOAuthResponse.call(this, { returnPath, userId });
+    return this.createOAuthResponse({ returnPath, userId });
   }
 
   const {
@@ -51,8 +43,7 @@ export default async function handlePatreonFetchRequest(
     return email;
   };
 
-  const newUserId: number = await insertIntoOAuth.call(
-    this,
+  const newUserId: number = await this.insertIntoOAuth(
     OAuthProvider.Patreon,
     oAuthId,
     {
@@ -63,5 +54,5 @@ export default async function handlePatreonFetchRequest(
     },
   );
 
-  return createOAuthResponse.call(this, { returnPath, userId: newUserId });
+  return this.createOAuthResponse({ returnPath, userId: newUserId });
 }

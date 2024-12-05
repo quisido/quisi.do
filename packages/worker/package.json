@@ -32,7 +32,8 @@
     "api-extractor": "node --experimental-strip-types scripts/api-extractor.ts",
     "attw": "attw --quiet",
     "clean": "rm -rf coverage dist node_modules && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
-    "dev": "node --experimental-strip-types scripts/dev.ts tsc:watch",
+    "dev": "yarn run tsc:watch",
+    "dev:dependencies": "node --experimental-strip-types scripts/dev.ts",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "yarn run tsc",
@@ -41,7 +42,6 @@
     "tsc": "tsc --project tsconfig.prepack.json",
     "tsc:watch": "tsc --project tsconfig.prepack.json --watch",
     "vitest": "vitest",
-    "vitest:dev": "node --experimental-strip-types scripts/dev.ts",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
   },

@@ -1,4 +1,10 @@
-export { EXPECT_ANY_NUMBER, EXPECT_ANY_STRING } from './expect-any.js';
+export {
+  EXPECT_ANY_HEADERS,
+  EXPECT_ANY_NUMBER,
+  EXPECT_ANY_OBJECT,
+  EXPECT_ANY_STRING,
+} from './expect-any.js';
+export { default as expectStringMatching } from './expect-string-matching.js';
 export { default as TestAnalyticsEngineDataset } from './test-analytics-engine-dataset.js';
 export {
   TEST_CONSOLE,

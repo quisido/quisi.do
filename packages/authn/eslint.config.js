@@ -14,6 +14,7 @@ export default [
 
     complexity: [
       'src/analytics/map-analytics-engine-row-index-to-datum-factory.ts',
+      'src/handle-metric.ts',
       'src/utils/is-console.ts',
     ],
 
