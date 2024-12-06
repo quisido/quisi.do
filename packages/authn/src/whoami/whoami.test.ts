@@ -34,14 +34,14 @@ describe('WhoAmI', (): void => {
 
   it('should support a missing AuthN cookie', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetch } = new TestAuthnExportedHandler();
+    const { expectToHaveEmitPublicMetric, fetch } = new TestAuthnExportedHandler();
 
     // Act
     const { expectBodyToBe, expectHeadersToBe, expectStatusCodeToBe } =
       await fetch('/whoami/');
 
     // Assert
-    expectPublicMetric(MetricName.MissingAuthnId);
+    expectToHaveEmitPublicMetric(MetricName.MissingAuthnId);
     expectStatusCodeToBe(StatusCode.OK);
 
     expectBodyToBe({
@@ -63,7 +63,7 @@ describe('WhoAmI', (): void => {
     const testIp: string = mapStringToIp('whoamiCaching');
 
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
+    const { expectToHaveEmitPrivateMetric, expectToHaveEmitPublicMetric, fetch } =
       new TestAuthnExportedHandler({
         authnUserIds: {
           abcdef: TEST_USER_ID.toString(),
@@ -87,7 +87,7 @@ describe('WhoAmI', (): void => {
       });
 
     // Assert
-    expectPublicMetric(MetricName.CachedAuthnId);
+    expectToHaveEmitPublicMetric(MetricName.CachedAuthnId);
     expectStatusCodeToBe(StatusCode.OK);
 
     expectBodyToBe({
@@ -105,7 +105,7 @@ describe('WhoAmI', (): void => {
       'content-type': 'text/json; charset=utf-8',
     });
 
-    expectPrivateMetric(MetricName.CachedAuthnId, {
+    expectToHaveEmitPrivateMetric(MetricName.CachedAuthnId, {
       userId: TEST_USER_ID,
     });
   });
@@ -114,7 +114,7 @@ describe('WhoAmI', (): void => {
     const testIp: string = mapStringToIp('whoamiThrottle');
 
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
+    const { expectToHaveEmitPrivateMetric, expectToHaveEmitPublicMetric, fetch } =
       new TestAuthnExportedHandler();
 
     // Act
@@ -134,7 +134,7 @@ describe('WhoAmI', (): void => {
       });
 
     // Assert
-    expectPublicMetric(MetricName.WhoAmIThrottled);
+    expectToHaveEmitPublicMetric(MetricName.WhoAmIThrottled);
     expectStatusCodeToBe(StatusCode.TooManyRequests);
 
     expectBodyToBe({
@@ -151,7 +151,7 @@ describe('WhoAmI', (): void => {
       'content-type': 'text/json; charset=utf-8',
     });
 
-    expectPrivateMetric(MetricName.WhoAmIThrottled, {
+    expectToHaveEmitPrivateMetric(MetricName.WhoAmIThrottled, {
       ip: testIp,
     });
   });

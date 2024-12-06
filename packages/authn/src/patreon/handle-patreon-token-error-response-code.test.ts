@@ -7,7 +7,7 @@ import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 describe('handlePatreonTokenErrorResponseCode', (): void => {
   it('should emit and respond when Patreon rejects the client ID', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetchPatreon, mockPatreonToken } =
+    const { expectToHaveEmitPublicMetric, fetchPatreon, mockPatreonToken } =
       new TestAuthnExportedHandler();
 
     mockPatreonToken(
@@ -21,7 +21,7 @@ describe('handlePatreonTokenErrorResponseCode', (): void => {
 
     // Assert
     expectErrorResponse(ErrorCode.InvalidPatreonClientId, '/test-return-path/');
-    expectPublicMetric(MetricName.InvalidPatreonClientId, {
+    expectToHaveEmitPublicMetric(MetricName.InvalidPatreonClientId, {
       clientId: 'test-client-id',
     });
   });
@@ -29,8 +29,8 @@ describe('handlePatreonTokenErrorResponseCode', (): void => {
   it('should emit and respond when Patreon rejects the grant code', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonToken,
     } = new TestAuthnExportedHandler();
@@ -49,8 +49,8 @@ describe('handlePatreonTokenErrorResponseCode', (): void => {
       ErrorCode.InvalidPatreonGrantCode,
       '/test-return-path/',
     );
-    expectPublicMetric(MetricName.InvalidPatreonGrantCode);
-    expectPrivateMetric(MetricName.InvalidPatreonGrantCode, {
+    expectToHaveEmitPublicMetric(MetricName.InvalidPatreonGrantCode);
+    expectToHaveEmitPrivateMetric(MetricName.InvalidPatreonGrantCode, {
       code: 'test-code',
     });
   });
@@ -58,8 +58,8 @@ describe('handlePatreonTokenErrorResponseCode', (): void => {
   it('should emit and respond when Patreon rejects for an unknown reason', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonToken,
     } = new TestAuthnExportedHandler();
@@ -74,14 +74,14 @@ describe('handlePatreonTokenErrorResponseCode', (): void => {
     const { expectErrorResponse } = await fetchPatreon('unknown');
 
     // Assert
-    expectPublicMetric(MetricName.UnknownPatreonTokenErrorResponseCode);
+    expectToHaveEmitPublicMetric(MetricName.UnknownPatreonTokenErrorResponseCode);
 
     expectErrorResponse(
       ErrorCode.UnknownPatreonTokenErrorResponseCode,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(MetricName.UnknownPatreonTokenErrorResponseCode, {
+    expectToHaveEmitPrivateMetric(MetricName.UnknownPatreonTokenErrorResponseCode, {
       code: 'unknown',
       value: '{"message":"test"}',
     });

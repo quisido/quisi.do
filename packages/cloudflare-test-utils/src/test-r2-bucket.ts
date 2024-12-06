@@ -1,5 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
-import { vi } from 'vitest';
+import { expect, vi } from 'vitest';
 
 export default class TestR2Bucket implements R2Bucket {
   public readonly createMultipartUpload = vi.fn();
@@ -9,4 +9,12 @@ export default class TestR2Bucket implements R2Bucket {
   public readonly list = vi.fn();
   public readonly put = vi.fn();
   public readonly resumeMultipartUpload = vi.fn();
+
+  public constructor() {
+    this.expectToHavePut = this.expectToHavePut.bind(this);
+  }
+
+  public expectToHavePut(...params: Parameters<R2Bucket['put']>): void {
+    expect(this.put).toHaveBeenCalledWith(...params);
+  }
 }

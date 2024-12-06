@@ -7,7 +7,7 @@ import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 describe('getPatreonAccessToken', (): void => {
   it('should emit and respond when the Patreon OAuth host is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+    const { expectToHaveEmitPrivateMetric, expectToHaveEmitPublicMetric, fetchPatreon } =
       new TestAuthnExportedHandler({
         env: {
           PATREON_OAUTH_HOST: true,
@@ -18,19 +18,19 @@ describe('getPatreonAccessToken', (): void => {
     const { expectErrorResponse } = await fetchPatreon('host');
 
     // Assert
-    expectPublicMetric(MetricName.PatreonRequest);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
     expectErrorResponse(
       ErrorCode.InvalidPatreonOAuthHost,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
       key: 'PATREON_OAUTH_HOST',
       value: 'true',
     });
 
-    expectPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
       key: 'PATREON_OAUTH_HOST',
       type: 'boolean',
     });
@@ -38,7 +38,7 @@ describe('getPatreonAccessToken', (): void => {
 
   it('should emit and respond when the Patreon OAuth client ID is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+    const { expectToHaveEmitPrivateMetric, expectToHaveEmitPublicMetric, fetchPatreon } =
       new TestAuthnExportedHandler({
         env: {
           PATREON_OAUTH_CLIENT_ID: true,
@@ -49,19 +49,19 @@ describe('getPatreonAccessToken', (): void => {
     const { expectErrorResponse } = await fetchPatreon('client');
 
     // Assert
-    expectPublicMetric(MetricName.PatreonRequest);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
     expectErrorResponse(
       ErrorCode.InvalidPatreonOAuthClientId,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
       key: 'PATREON_OAUTH_CLIENT_ID',
       value: 'true',
     });
 
-    expectPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
       key: 'PATREON_OAUTH_CLIENT_ID',
       type: 'boolean',
     });
@@ -69,7 +69,7 @@ describe('getPatreonAccessToken', (): void => {
 
   it('should emit and respond when the Patreon OAuth client secret is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+    const { expectToHaveEmitPrivateMetric, expectToHaveEmitPublicMetric, fetchPatreon } =
       new TestAuthnExportedHandler({
         env: {
           PATREON_OAUTH_CLIENT_SECRET: true,
@@ -80,19 +80,19 @@ describe('getPatreonAccessToken', (): void => {
     const { expectErrorResponse } = await fetchPatreon('secret');
 
     // Assert
-    expectPublicMetric(MetricName.PatreonRequest);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
     expectErrorResponse(
       ErrorCode.InvalidPatreonOAuthClientSecret,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
       key: 'PATREON_OAUTH_CLIENT_SECRET',
       value: 'true',
     });
 
-    expectPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
       key: 'PATREON_OAUTH_CLIENT_SECRET',
       type: 'boolean',
     });
@@ -100,7 +100,7 @@ describe('getPatreonAccessToken', (): void => {
 
   it('should emit and respond when the Patreon OAuth redirect URI is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
+    const { expectToHaveEmitPrivateMetric, expectToHaveEmitPublicMetric, fetchPatreon } =
       new TestAuthnExportedHandler({
         env: {
           PATREON_OAUTH_REDIRECT_URI: true,
@@ -111,19 +111,19 @@ describe('getPatreonAccessToken', (): void => {
     const { expectErrorResponse } = await fetchPatreon('redirect');
 
     // Assert
-    expectPublicMetric(MetricName.PatreonRequest);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
     expectErrorResponse(
       ErrorCode.InvalidPatreonOAuthRedirectUri,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
       key: 'PATREON_OAUTH_REDIRECT_URI',
       value: 'true',
     });
 
-    expectPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
       key: 'PATREON_OAUTH_REDIRECT_URI',
       type: 'boolean',
     });
@@ -132,8 +132,8 @@ describe('getPatreonAccessToken', (): void => {
   it('should emit and respond when the Patreon token response is invalid', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonToken,
     } = new TestAuthnExportedHandler();
@@ -144,15 +144,15 @@ describe('getPatreonAccessToken', (): void => {
     const { expectErrorResponse } = await fetchPatreon('token');
 
     // Assert
-    expectPublicMetric(MetricName.InvalidPatreonTokenResponse);
-    expectPublicMetric(MetricName.PatreonRequest);
+    expectToHaveEmitPublicMetric(MetricName.InvalidPatreonTokenResponse);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
     expectErrorResponse(
       ErrorCode.InvalidPatreonTokenResponse,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(MetricName.InvalidPatreonTokenResponse, {
+    expectToHaveEmitPrivateMetric(MetricName.InvalidPatreonTokenResponse, {
       text: '/',
     });
   });

@@ -7,13 +7,13 @@ describe('handleStaticPathname', (): void => {
   describe('root', (): void => {
     it('should emit and respond', async (): Promise<void> => {
       // Assemble
-      const { expectPublicMetric, fetch } = new TestAuthnExportedHandler();
+      const { expectToHaveEmitPublicMetric, fetch } = new TestAuthnExportedHandler();
 
       // Act
       const { expectHeadersToBe, expectStatusCodeToBe } = await fetch('/');
 
       // Assert
-      expectPublicMetric(MetricName.RootPathname);
+      expectToHaveEmitPublicMetric(MetricName.RootPathname);
       expectStatusCodeToBe(StatusCode.PermanentRedirect);
       expectHeadersToBe({
         location: `https://host.test.quisi.do/`,
@@ -24,14 +24,14 @@ describe('handleStaticPathname', (): void => {
   describe('favicon.ico', (): void => {
     it('should emit and respond', async (): Promise<void> => {
       // Assemble
-      const { expectPublicMetric, fetch } = new TestAuthnExportedHandler();
+      const { expectToHaveEmitPublicMetric, fetch } = new TestAuthnExportedHandler();
 
       // Act
       const { expectHeadersToBe, expectStatusCodeToBe } =
         await fetch('/favicon.ico');
 
       // Assert
-      expectPublicMetric(MetricName.FaviconIco);
+      expectToHaveEmitPublicMetric(MetricName.FaviconIco);
       expectStatusCodeToBe(StatusCode.OK);
       expectHeadersToBe({
         'access-control-allow-methods': 'GET',
@@ -46,14 +46,14 @@ describe('handleStaticPathname', (): void => {
   describe('robots.txt', (): void => {
     it('should emit and respond', async (): Promise<void> => {
       // Assemble
-      const { expectPublicMetric, fetch } = new TestAuthnExportedHandler();
+      const { expectToHaveEmitPublicMetric, fetch } = new TestAuthnExportedHandler();
 
       // Act
       const { expectHeadersToBe, expectStatusCodeToBe } =
         await fetch('/robots.txt');
 
       // Assert
-      expectPublicMetric(MetricName.RobotsTxt);
+      expectToHaveEmitPublicMetric(MetricName.RobotsTxt);
       expectStatusCodeToBe(StatusCode.OK);
       expectHeadersToBe({
         'access-control-allow-methods': 'GET',

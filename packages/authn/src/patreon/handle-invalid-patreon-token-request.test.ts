@@ -8,8 +8,8 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
   it('should emit and respond when Patreon rejects with a description', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonToken,
     } = new TestAuthnExportedHandler();
@@ -31,14 +31,14 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
     const { expectErrorResponse } = await fetchPatreon('noDescription');
 
     // Assert
-    expectPublicMetric(MetricName.InvalidPatreonTokenRequest);
+    expectToHaveEmitPublicMetric(MetricName.InvalidPatreonTokenRequest);
 
     expectErrorResponse(
       ErrorCode.InvalidPatreonTokenRequest,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(MetricName.InvalidPatreonTokenRequest, {
+    expectToHaveEmitPrivateMetric(MetricName.InvalidPatreonTokenRequest, {
       description: 'test',
       value: '{"key":"value"}',
     });
@@ -47,8 +47,8 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
   it('should emit and respond when Patreon rejects without a description', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonToken,
     } = new TestAuthnExportedHandler();
@@ -69,14 +69,14 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
     const { expectErrorResponse } = await fetchPatreon('description');
 
     // Assert
-    expectPublicMetric(MetricName.MissingInvalidPatreonTokenRequestDescription);
+    expectToHaveEmitPublicMetric(MetricName.MissingInvalidPatreonTokenRequestDescription);
 
     expectErrorResponse(
       ErrorCode.MissingInvalidPatreonTokenRequestDescription,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(
+    expectToHaveEmitPrivateMetric(
       MetricName.MissingInvalidPatreonTokenRequestDescription,
       {
         value: '{"key":"value"}',
@@ -87,8 +87,8 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
   it('should emit and respond when Patreon rejects with an invalid description', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonToken,
     } = new TestAuthnExportedHandler();
@@ -115,14 +115,14 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
       '/test-return-path/',
     );
 
-    expectPrivateMetric(
+    expectToHaveEmitPrivateMetric(
       MetricName.InvalidInvalidPatreonTokenRequestDescription,
       {
         value: '{"error_description":true,"key":"value"}',
       },
     );
 
-    expectPublicMetric(
+    expectToHaveEmitPublicMetric(
       MetricName.InvalidInvalidPatreonTokenRequestDescription,
       {
         type: 'boolean',

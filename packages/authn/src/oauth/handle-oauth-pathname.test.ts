@@ -6,20 +6,24 @@ import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 describe('handleOAuthPathname', (): void => {
   it('should support a missing state search parameter', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetch } = new TestAuthnExportedHandler();
+    const { expectToHaveEmitPublicMetric, fetch } =
+      new TestAuthnExportedHandler();
 
     // Act
     const { expectErrorResponse } = await fetch('/patreon/');
 
     // Assert
     expectErrorResponse(ErrorCode.MissingStateSearchParam);
-    expectPublicMetric(MetricName.MissingStateSearchParam);
+    expectToHaveEmitPublicMetric(MetricName.MissingStateSearchParam);
   });
 
   it('should support an invalid JSON state search parameter', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler();
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetch,
+    } = new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({ state: '/' }).toString();
@@ -27,16 +31,19 @@ describe('handleOAuthPathname', (): void => {
 
     // Assert
     expectErrorResponse(ErrorCode.NonJsonStateSearchParam);
-    expectPublicMetric(MetricName.NonJsonStateSearchParam);
-    expectPrivateMetric(MetricName.NonJsonStateSearchParam, {
+    expectToHaveEmitPublicMetric(MetricName.NonJsonStateSearchParam);
+    expectToHaveEmitPrivateMetric(MetricName.NonJsonStateSearchParam, {
       value: '/',
     });
   });
 
   it('should support a non-object JSON state search parameter', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler();
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetch,
+    } = new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({ state: '1234' }).toString();
@@ -45,11 +52,11 @@ describe('handleOAuthPathname', (): void => {
     // Assert
     expectErrorResponse(ErrorCode.NonObjectState);
 
-    expectPrivateMetric(MetricName.NonObjectState, {
+    expectToHaveEmitPrivateMetric(MetricName.NonObjectState, {
       value: '1234',
     });
 
-    expectPublicMetric(MetricName.NonObjectState, {
+    expectToHaveEmitPublicMetric(MetricName.NonObjectState, {
       type: 'number',
     });
   });
@@ -61,8 +68,11 @@ describe('handleOAuthPathname', (): void => {
     });
 
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler();
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetch,
+    } = new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
@@ -74,8 +84,8 @@ describe('handleOAuthPathname', (): void => {
 
     // Assert
     expectErrorResponse(ErrorCode.CSRF);
-    expectPublicMetric(MetricName.CSRF);
-    expectPrivateMetric(MetricName.CSRF, {
+    expectToHaveEmitPublicMetric(MetricName.CSRF);
+    expectToHaveEmitPrivateMetric(MetricName.CSRF, {
       cookie: 'test-session-id-cookie',
       state: 'test-session-id-state',
     });

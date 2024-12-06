@@ -12,7 +12,7 @@ describe('getPatreonRequestCode', (): void => {
     });
 
     // Assemble
-    const { expectPublicMetric, fetch } = new TestAuthnExportedHandler();
+    const { expectToHaveEmitPublicMetric, fetch } = new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({
@@ -27,8 +27,8 @@ describe('getPatreonRequestCode', (): void => {
     });
 
     // Assert
-    expectPublicMetric(MetricName.MissingPatreonRequestCode);
-    expectPublicMetric(MetricName.PatreonRequest);
+    expectToHaveEmitPublicMetric(MetricName.MissingPatreonRequestCode);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
     expectErrorResponse(
       ErrorCode.MissingPatreonRequestCode,
       '/test-return-path/',

@@ -11,8 +11,11 @@ describe('handleInvalidReturnPath', (): void => {
     });
 
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler();
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetch,
+    } = new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
@@ -21,11 +24,11 @@ describe('handleInvalidReturnPath', (): void => {
     // Assert
     expectErrorResponse(ErrorCode.MissingReturnPath);
 
-    expectPrivateMetric(MetricName.MissingReturnPath, {
+    expectToHaveEmitPrivateMetric(MetricName.MissingReturnPath, {
       searchParam: testState,
     });
 
-    expectPublicMetric(MetricName.MissingReturnPath, {
+    expectToHaveEmitPublicMetric(MetricName.MissingReturnPath, {
       keys: 'num, str',
     });
   });
@@ -36,8 +39,11 @@ describe('handleInvalidReturnPath', (): void => {
     });
 
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler();
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetch,
+    } = new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
@@ -46,11 +52,11 @@ describe('handleInvalidReturnPath', (): void => {
     // Assert
     expectErrorResponse(ErrorCode.InvalidReturnPath);
 
-    expectPrivateMetric(MetricName.InvalidReturnPath, {
+    expectToHaveEmitPrivateMetric(MetricName.InvalidReturnPath, {
       value: 'null',
     });
 
-    expectPublicMetric(MetricName.InvalidReturnPath, {
+    expectToHaveEmitPublicMetric(MetricName.InvalidReturnPath, {
       type: 'object',
     });
   });

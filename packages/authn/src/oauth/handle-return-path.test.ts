@@ -10,8 +10,8 @@ describe('handleOAuthPathname', (): void => {
 
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonIdentity,
       mockPatreonToken,
@@ -26,8 +26,8 @@ describe('handleOAuthPathname', (): void => {
 
     // Assert
     expectErrorResponse(ErrorCode.TooManyRequests, '/test-return-path/');
-    expectPublicMetric(MetricName.OAuthThrottled);
-    expectPrivateMetric(MetricName.OAuthThrottled, {
+    expectToHaveEmitPublicMetric(MetricName.OAuthThrottled);
+    expectToHaveEmitPrivateMetric(MetricName.OAuthThrottled, {
       ip: testIp,
     });
   });

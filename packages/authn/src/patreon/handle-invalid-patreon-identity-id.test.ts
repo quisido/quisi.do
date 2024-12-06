@@ -3,32 +3,8 @@ import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
 import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
-describe('handleInvalidPatreonIdentityData', (): void => {
-  it('should emit and respond when the Patreon identity data is missing', async (): Promise<void> => {
-    // Assemble
-    const {
-      expectToHaveEmitPublicMetric,
-      fetchPatreon,
-      mockPatreonToken,
-      mockPatreonIdentity,
-    } = new TestAuthnExportedHandler();
-
-    mockPatreonToken();
-    mockPatreonIdentity(new Response('{}'));
-
-    // Act
-    const { expectErrorResponse } = await fetchPatreon('missing');
-
-    // Assert
-    expectToHaveEmitPublicMetric(MetricName.MissingPatreonIdentityData);
-    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
-    expectErrorResponse(
-      ErrorCode.MissingPatreonIdentityData,
-      '/test-return-path/',
-    );
-  });
-
-  it('should emit and respond when the Patreon identity data is invalid', async (): Promise<void> => {
+describe('handleInvalidPatreonIdentityId', (): void => {
+  it('should emit and respond when the Patreon identity ID is missing', async (): Promise<void> => {
     // Assemble
     const {
       expectToHaveEmitPrivateMetric,
@@ -39,7 +15,37 @@ describe('handleInvalidPatreonIdentityData', (): void => {
     } = new TestAuthnExportedHandler();
 
     mockPatreonToken();
-    mockPatreonIdentity(new Response('{"data":1234}'));
+    mockPatreonIdentity(new Response('{"data":{"a":"b"}}'));
+
+    // Act
+    const { expectErrorResponse } = await fetchPatreon('missing');
+
+    // Assert
+    expectToHaveEmitPublicMetric(MetricName.MissingPatreonIdentityId);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
+
+    expectErrorResponse(
+      ErrorCode.MissingPatreonIdentityId,
+      '/test-return-path/',
+    );
+
+    expectToHaveEmitPrivateMetric(MetricName.MissingPatreonIdentityId, {
+      data: '{"a":"b"}',
+    });
+  });
+
+  it('should emit and respond when the Patreon identity ID is invalid', async (): Promise<void> => {
+    // Assemble
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetchPatreon,
+      mockPatreonIdentity,
+      mockPatreonToken,
+    } = new TestAuthnExportedHandler();
+
+    mockPatreonToken();
+    mockPatreonIdentity(new Response('{"data":{"id":1234}}'));
 
     // Act
     const { expectErrorResponse } = await fetchPatreon('invalid');
@@ -48,15 +54,15 @@ describe('handleInvalidPatreonIdentityData', (): void => {
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
     expectErrorResponse(
-      ErrorCode.InvalidPatreonIdentityData,
+      ErrorCode.InvalidPatreonIdentityId,
       '/test-return-path/',
     );
 
-    expectToHaveEmitPublicMetric(MetricName.InvalidPatreonIdentityData, {
+    expectToHaveEmitPublicMetric(MetricName.InvalidPatreonIdentityId, {
       type: 'number',
     });
 
-    expectToHaveEmitPrivateMetric(MetricName.InvalidPatreonIdentityData, {
+    expectToHaveEmitPrivateMetric(MetricName.InvalidPatreonIdentityId, {
       value: '1234',
     });
   });

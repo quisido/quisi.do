@@ -7,7 +7,7 @@ import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 describe('handlePatreonTokenErrorResponse', (): void => {
   it('should emit and respond when the Patreon token has no body', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetchPatreon, mockPatreonToken } =
+    const { expectToHaveEmitPublicMetric, fetchPatreon, mockPatreonToken } =
       new TestAuthnExportedHandler();
 
     mockPatreonToken(
@@ -20,7 +20,7 @@ describe('handlePatreonTokenErrorResponse', (): void => {
     const { expectErrorResponse } = await fetchPatreon('noBody');
 
     // Assert
-    expectPublicMetric(MetricName.MissingPatreonTokenErrorResponseBody);
+    expectToHaveEmitPublicMetric(MetricName.MissingPatreonTokenErrorResponseBody);
     expectErrorResponse(
       ErrorCode.MissingPatreonTokenErrorResponseBody,
       '/test-return-path/',
@@ -30,8 +30,8 @@ describe('handlePatreonTokenErrorResponse', (): void => {
   it('should emit and respond when the Patreon token is invalid JSON', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonToken,
     } = new TestAuthnExportedHandler();
@@ -46,14 +46,14 @@ describe('handlePatreonTokenErrorResponse', (): void => {
     const { expectErrorResponse } = await fetchPatreon('invalid');
 
     // Assert
-    expectPublicMetric(MetricName.InvalidPatreonTokenErrorResponseBody);
+    expectToHaveEmitPublicMetric(MetricName.InvalidPatreonTokenErrorResponseBody);
 
     expectErrorResponse(
       ErrorCode.InvalidPatreonTokenErrorResponseBody,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(MetricName.InvalidPatreonTokenErrorResponseBody, {
+    expectToHaveEmitPrivateMetric(MetricName.InvalidPatreonTokenErrorResponseBody, {
       body: '/',
     });
   });

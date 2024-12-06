@@ -7,8 +7,8 @@ describe('mapPatreonOAuthTokenToAccessToken', (): void => {
   it('should emit and respond when the Patreon token is invalid', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonToken,
     } = new TestAuthnExportedHandler();
@@ -19,18 +19,18 @@ describe('mapPatreonOAuthTokenToAccessToken', (): void => {
     const { expectErrorResponse } = await fetchPatreon('record');
 
     // Assert
-    expectPublicMetric(MetricName.PatreonRequest);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
     expectErrorResponse(
       ErrorCode.InvalidPatreonOAuthToken,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(MetricName.InvalidPatreonOAuthToken, {
+    expectToHaveEmitPrivateMetric(MetricName.InvalidPatreonOAuthToken, {
       value: '1234',
     });
 
-    expectPublicMetric(MetricName.InvalidPatreonOAuthToken, {
+    expectToHaveEmitPublicMetric(MetricName.InvalidPatreonOAuthToken, {
       type: 'number',
     });
   });
@@ -38,8 +38,8 @@ describe('mapPatreonOAuthTokenToAccessToken', (): void => {
   it('should emit and respond when the Patreon access token is missing', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonToken,
     } = new TestAuthnExportedHandler();
@@ -50,15 +50,15 @@ describe('mapPatreonOAuthTokenToAccessToken', (): void => {
     const { expectErrorResponse } = await fetchPatreon('missing');
 
     // Assert
-    expectPublicMetric(MetricName.MissingPatreonAccessToken);
-    expectPublicMetric(MetricName.PatreonRequest);
+    expectToHaveEmitPublicMetric(MetricName.MissingPatreonAccessToken);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
     expectErrorResponse(
       ErrorCode.MissingPatreonAccessToken,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(MetricName.MissingPatreonAccessToken, {
+    expectToHaveEmitPrivateMetric(MetricName.MissingPatreonAccessToken, {
       value: '{"key":"value"}',
     });
   });
@@ -66,8 +66,8 @@ describe('mapPatreonOAuthTokenToAccessToken', (): void => {
   it('should emit and respond when the Patreon access token is invalid', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonToken,
     } = new TestAuthnExportedHandler();
@@ -78,18 +78,18 @@ describe('mapPatreonOAuthTokenToAccessToken', (): void => {
     const { expectErrorResponse } = await fetchPatreon('invalid');
 
     // Assert
-    expectPublicMetric(MetricName.PatreonRequest);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
     expectErrorResponse(
       ErrorCode.InvalidPatreonAccessToken,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(MetricName.InvalidPatreonAccessToken, {
+    expectToHaveEmitPrivateMetric(MetricName.InvalidPatreonAccessToken, {
       value: '1234',
     });
 
-    expectPublicMetric(MetricName.InvalidPatreonAccessToken, {
+    expectToHaveEmitPublicMetric(MetricName.InvalidPatreonAccessToken, {
       type: 'number',
     });
   });

@@ -4,6 +4,7 @@ import {
   EXPECT_ANY_STRING,
   TestAnalyticsEngineDataset,
   TestKVNamespace,
+  TestR2Bucket,
 } from 'cloudflare-test-utils';
 import AuthnFetchHandler from '../authn-fetch-handler.js';
 import handleError from '../handle-error.js';
@@ -22,6 +23,7 @@ interface Options {
 }
 
 export default class TestAuthnExportedHandler extends TestExportedHandler {
+  #authnData: TestR2Bucket;
   public override expectAnalyticsEngineDatasetToWriteDataPoint =
     super.expectAnalyticsEngineDatasetToWriteDataPoint.bind(this);
   public override expectMetric = super.expectMetric.bind(this);
@@ -29,6 +31,7 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
   public override mockResponse = super.mockResponse.bind(this);
 
   public constructor({ authnUserIds = {}, env = {}, now }: Options = {}) {
+    const authnData = new TestR2Bucket();
     super({
       FetchHandler: AuthnFetchHandler,
       now,
@@ -37,6 +40,7 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
       onMetric: handleMetric,
 
       env: {
+        AUTHN_DATA: authnData,
         AUTHN_USER_IDS: new TestKVNamespace(authnUserIds),
         HOST: 'host.test.quisi.do',
         PATREON_OAUTH_CLIENT_ID: 'test-client-id',
@@ -48,9 +52,11 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
         ...env,
       },
     });
+
+    this.#authnData = authnData;
   }
 
-  public expectPrivateMetric = (
+  public expectToHaveEmitPrivateMetric = (
     name: string,
     dimensions: Record<string, boolean | number | string> = {},
   ): void => {
@@ -60,7 +66,7 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
     });
   };
 
-  public expectPublicMetric = (
+  public expectToHaveEmitPublicMetric = (
     name: string,
     dimensions: Record<string, boolean | number | string> = {},
   ): void => {
@@ -68,6 +74,12 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
       ...mapMetricDimensionsToDataPoint(dimensions),
       indexes: [name],
     });
+  };
+
+  public expectToHavePutAuthnData = (
+    ...params: Parameters<R2Bucket['put']>
+  ): void => {
+    this.#authnData.expectToHavePut(...params);
   };
 
   public fetchPatreon = async (ip: string): Promise<TestResponse> => {
@@ -79,7 +91,16 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
     });
   };
 
-  public mockPatreonIdentity = (response: Response = new Response()): void => {
+  public mockPatreonIdentity = (
+    response: Response = new Response(
+      JSON.stringify({
+        data: {
+          attributes: {},
+          id: 'test-id',
+        },
+      }),
+    ),
+  ): void => {
     this.mockResponse(
       PATREON_IDENTITY_URL,
       {
@@ -91,7 +112,9 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
   };
 
   public mockPatreonToken = (
-    response: Response = new Response('{"access_token":"test-access-token"}'),
+    response: Response = new Response(
+      JSON.stringify({ access_token: 'test-access-token' }),
+    ),
   ): void => {
     this.mockResponse(
       'https://host.test.patreon.com/api/oauth2/token',

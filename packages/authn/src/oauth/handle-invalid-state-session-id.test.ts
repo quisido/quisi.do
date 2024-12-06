@@ -12,8 +12,11 @@ describe('handleInvalidStateSessionId', (): void => {
     });
 
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler();
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetch,
+    } = new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
@@ -22,11 +25,11 @@ describe('handleInvalidStateSessionId', (): void => {
     // Assert
     expectErrorResponse(ErrorCode.MissingStateSessionId);
 
-    expectPrivateMetric(MetricName.MissingStateSessionId, {
+    expectToHaveEmitPrivateMetric(MetricName.MissingStateSessionId, {
       searchParam: testState,
     });
 
-    expectPublicMetric(MetricName.MissingStateSessionId, {
+    expectToHaveEmitPublicMetric(MetricName.MissingStateSessionId, {
       keys: 'num, returnPath, str',
     });
   });
@@ -38,8 +41,11 @@ describe('handleInvalidStateSessionId', (): void => {
     });
 
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler();
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetch,
+    } = new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
@@ -48,11 +54,11 @@ describe('handleInvalidStateSessionId', (): void => {
     // Assert
     expectErrorResponse(ErrorCode.InvalidStateSessionId);
 
-    expectPrivateMetric(MetricName.InvalidStateSessionId, {
+    expectToHaveEmitPrivateMetric(MetricName.InvalidStateSessionId, {
       value: 'null',
     });
 
-    expectPublicMetric(MetricName.InvalidStateSessionId, {
+    expectToHaveEmitPublicMetric(MetricName.InvalidStateSessionId, {
       type: 'object',
     });
   });

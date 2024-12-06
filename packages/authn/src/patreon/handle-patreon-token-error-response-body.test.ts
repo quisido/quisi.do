@@ -8,8 +8,8 @@ describe('handlePatreonTokenErrorResponseBody', (): void => {
   it('should emit and respond when the Patreon token error response body is not a record', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonToken,
     } = new TestAuthnExportedHandler();
@@ -29,11 +29,11 @@ describe('handlePatreonTokenErrorResponseBody', (): void => {
       '/test-return-path/',
     );
 
-    expectPrivateMetric(MetricName.InvalidPatreonTokenErrorResponse, {
+    expectToHaveEmitPrivateMetric(MetricName.InvalidPatreonTokenErrorResponse, {
       value: 'true',
     });
 
-    expectPublicMetric(MetricName.InvalidPatreonTokenErrorResponse, {
+    expectToHaveEmitPublicMetric(MetricName.InvalidPatreonTokenErrorResponse, {
       type: 'boolean',
     });
   });
@@ -41,8 +41,8 @@ describe('handlePatreonTokenErrorResponseBody', (): void => {
   it('should emit and respond when the Patreon token error response is missing an error code ', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonToken,
     } = new TestAuthnExportedHandler();
@@ -62,11 +62,11 @@ describe('handlePatreonTokenErrorResponseBody', (): void => {
       '/test-return-path/',
     );
 
-    expectPrivateMetric(MetricName.MissingPatreonTokenErrorResponseCode, {
+    expectToHaveEmitPrivateMetric(MetricName.MissingPatreonTokenErrorResponseCode, {
       value: '{}',
     });
 
-    expectPublicMetric(MetricName.MissingPatreonTokenErrorResponseCode, {
+    expectToHaveEmitPublicMetric(MetricName.MissingPatreonTokenErrorResponseCode, {
       keys: '',
     });
   });

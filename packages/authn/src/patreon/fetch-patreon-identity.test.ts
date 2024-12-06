@@ -12,7 +12,7 @@ describe('fetchPatreonIdentity', (): void => {
     // Assemble
     const {
       expectAnalyticsEngineDatasetToWriteDataPoint,
-      expectPublicMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonIdentity,
       mockPatreonToken,
@@ -25,8 +25,8 @@ describe('fetchPatreonIdentity', (): void => {
     const { expectErrorResponse } = await fetchPatreon('json');
 
     // Assert
-    expectPublicMetric(MetricName.InvalidPatreonIdentityResponse);
-    expectPublicMetric(MetricName.PatreonRequest);
+    expectToHaveEmitPublicMetric(MetricName.InvalidPatreonIdentityResponse);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
     expectErrorResponse(
       ErrorCode.InvalidPatreonIdentityResponse,
@@ -49,8 +49,8 @@ describe('fetchPatreonIdentity', (): void => {
   it('should emit and respond when the Patreon identity is forbidden', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonIdentity,
       mockPatreonToken,
@@ -66,15 +66,15 @@ describe('fetchPatreonIdentity', (): void => {
     const { expectErrorResponse } = await fetchPatreon('forbidden');
 
     // Assert
-    expectPublicMetric(MetricName.ForbiddenPatreonIdentityResponse);
-    expectPublicMetric(MetricName.PatreonRequest);
+    expectToHaveEmitPublicMetric(MetricName.ForbiddenPatreonIdentityResponse);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
     expectErrorResponse(
       ErrorCode.ForbiddenPatreonIdentityResponse,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(MetricName.ForbiddenPatreonIdentityResponse, {
+    expectToHaveEmitPrivateMetric(MetricName.ForbiddenPatreonIdentityResponse, {
       value: '{"key":"value"}',
     });
   });
@@ -82,8 +82,8 @@ describe('fetchPatreonIdentity', (): void => {
   it('should emit and respond when the Patreon identity is an error', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonIdentity,
       mockPatreonToken,
@@ -99,19 +99,19 @@ describe('fetchPatreonIdentity', (): void => {
     const { expectErrorResponse } = await fetchPatreon('error');
 
     // Assert
-    expectPublicMetric(MetricName.PatreonRequest);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
     expectErrorResponse(
       ErrorCode.UnknownPatreonIdentityError,
       '/test-return-path/',
     );
 
-    expectPrivateMetric(MetricName.UnknownPatreonIdentityError, {
+    expectToHaveEmitPrivateMetric(MetricName.UnknownPatreonIdentityError, {
       identity: '{"key":"value"}',
       status: StatusCode.BadRequest,
     });
 
-    expectPublicMetric(MetricName.UnknownPatreonIdentityError, {
+    expectToHaveEmitPublicMetric(MetricName.UnknownPatreonIdentityError, {
       status: StatusCode.BadRequest,
     });
   });
@@ -119,8 +119,8 @@ describe('fetchPatreonIdentity', (): void => {
   it('should emit and respond when the Patreon identity is invalid', async (): Promise<void> => {
     // Assemble
     const {
-      expectPrivateMetric,
-      expectPublicMetric,
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
       fetchPatreon,
       mockPatreonIdentity,
       mockPatreonToken,
@@ -134,13 +134,13 @@ describe('fetchPatreonIdentity', (): void => {
 
     // Assert
     expectErrorResponse(ErrorCode.InvalidPatreonIdentity, '/test-return-path/');
-    expectPublicMetric(MetricName.PatreonRequest);
+    expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectPrivateMetric(MetricName.InvalidPatreonIdentity, {
+    expectToHaveEmitPrivateMetric(MetricName.InvalidPatreonIdentity, {
       value: '1234',
     });
 
-    expectPublicMetric(MetricName.InvalidPatreonIdentity, {
+    expectToHaveEmitPublicMetric(MetricName.InvalidPatreonIdentity, {
       type: 'number',
     });
   });
