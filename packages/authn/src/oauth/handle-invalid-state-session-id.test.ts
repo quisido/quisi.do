@@ -13,11 +13,7 @@ describe('handleInvalidStateSessionId', (): void => {
 
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler({
-        env: {
-          HOST: 'host.test.quisi.do',
-        },
-      });
+      new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
@@ -43,11 +39,7 @@ describe('handleInvalidStateSessionId', (): void => {
 
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler({
-        env: {
-          HOST: 'host.test.quisi.do',
-        },
-      });
+      new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();

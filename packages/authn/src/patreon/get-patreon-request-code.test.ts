@@ -12,11 +12,7 @@ describe('getPatreonRequestCode', (): void => {
     });
 
     // Assemble
-    const { expectPublicMetric, fetch } = new TestAuthnExportedHandler({
-      env: {
-        HOST: 'host.test.quisi.do',
-      },
-    });
+    const { expectPublicMetric, fetch } = new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({
@@ -25,7 +21,7 @@ describe('getPatreonRequestCode', (): void => {
 
     const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
       headers: new Headers({
-        'cf-connecting-ip': mapStringToIp('patreonRequestCode'),
+        'cf-connecting-ip': mapStringToIp('code'),
         cookie: '__Secure-Session-ID=test-session-id',
       }),
     });

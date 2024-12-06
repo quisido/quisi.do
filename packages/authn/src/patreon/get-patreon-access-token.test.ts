@@ -1,30 +1,21 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { MetricName as WorkerMetricName } from '@quisido/worker';
-import { EXPECT_ANY_HEADERS, EXPECT_ANY_STRING } from 'cloudflare-test-utils';
 import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
-import mapStringToIp from '../test/map-string-to-ip.js';
 import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
-import { TEST_PATREON_URL } from '../test/test-patreon-search.js';
 
 describe('getPatreonAccessToken', (): void => {
   it('should emit and respond when the Patreon OAuth host is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
       new TestAuthnExportedHandler({
         env: {
-          HOST: 'host.test.quisi.do',
           PATREON_OAUTH_HOST: true,
         },
       });
 
     // Act
-    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
-      headers: new Headers({
-        'cf-connecting-ip': mapStringToIp('patreonOAuthHost'),
-        cookie: '__Secure-Session-ID=test-session-id',
-      }),
-    });
+    const { expectErrorResponse } = await fetchPatreon('host');
 
     // Assert
     expectPublicMetric(MetricName.PatreonRequest);
@@ -47,22 +38,15 @@ describe('getPatreonAccessToken', (): void => {
 
   it('should emit and respond when the Patreon OAuth client ID is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
       new TestAuthnExportedHandler({
         env: {
-          HOST: 'host.test.quisi.do',
           PATREON_OAUTH_CLIENT_ID: true,
-          PATREON_OAUTH_HOST: 'https://host.test.patreon.com',
         },
       });
 
     // Act
-    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
-      headers: new Headers({
-        'cf-connecting-ip': mapStringToIp('patreonOAuthClientId'),
-        cookie: '__Secure-Session-ID=test-session-id',
-      }),
-    });
+    const { expectErrorResponse } = await fetchPatreon('client');
 
     // Assert
     expectPublicMetric(MetricName.PatreonRequest);
@@ -85,23 +69,15 @@ describe('getPatreonAccessToken', (): void => {
 
   it('should emit and respond when the Patreon OAuth client secret is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
       new TestAuthnExportedHandler({
         env: {
-          HOST: 'host.test.quisi.do',
-          PATREON_OAUTH_CLIENT_ID: 'test-client-id',
           PATREON_OAUTH_CLIENT_SECRET: true,
-          PATREON_OAUTH_HOST: 'https://host.test.patreon.com',
         },
       });
 
     // Act
-    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
-      headers: new Headers({
-        'cf-connecting-ip': mapStringToIp('patreonOAuthClientSecret'),
-        cookie: '__Secure-Session-ID=test-session-id',
-      }),
-    });
+    const { expectErrorResponse } = await fetchPatreon('secret');
 
     // Assert
     expectPublicMetric(MetricName.PatreonRequest);
@@ -124,24 +100,15 @@ describe('getPatreonAccessToken', (): void => {
 
   it('should emit and respond when the Patreon OAuth redirect URI is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
+    const { expectPrivateMetric, expectPublicMetric, fetchPatreon } =
       new TestAuthnExportedHandler({
         env: {
-          HOST: 'host.test.quisi.do',
-          PATREON_OAUTH_CLIENT_ID: 'test-client-id',
-          PATREON_OAUTH_CLIENT_SECRET: 'test-client-secret',
-          PATREON_OAUTH_HOST: 'https://host.test.patreon.com',
           PATREON_OAUTH_REDIRECT_URI: true,
         },
       });
 
     // Act
-    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
-      headers: new Headers({
-        'cf-connecting-ip': mapStringToIp('patreonOAuthRedirectUri'),
-        cookie: '__Secure-Session-ID=test-session-id',
-      }),
-    });
+    const { expectErrorResponse } = await fetchPatreon('redirect');
 
     // Assert
     expectPublicMetric(MetricName.PatreonRequest);
@@ -164,34 +131,17 @@ describe('getPatreonAccessToken', (): void => {
 
   it('should emit and respond when the Patreon token response is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch, mockResponse } =
-      new TestAuthnExportedHandler({
-        env: {
-          HOST: 'host.test.quisi.do',
-          PATREON_OAUTH_CLIENT_ID: 'test-client-id',
-          PATREON_OAUTH_CLIENT_SECRET: 'test-client-secret',
-          PATREON_OAUTH_HOST: 'https://host.test.patreon.com',
-          PATREON_OAUTH_REDIRECT_URI: 'https://redirect.test.quisi.do/patreon/',
-        },
-      });
+    const {
+      expectPrivateMetric,
+      expectPublicMetric,
+      fetchPatreon,
+      mockPatreonToken,
+    } = new TestAuthnExportedHandler();
 
-    mockResponse(
-      'https://host.test.patreon.com/api/oauth2/token',
-      {
-        body: EXPECT_ANY_STRING,
-        headers: EXPECT_ANY_HEADERS,
-        method: 'POST',
-      },
-      new Response('/'),
-    );
+    mockPatreonToken(new Response('/'));
 
     // Act
-    const { expectErrorResponse } = await fetch(TEST_PATREON_URL, {
-      headers: new Headers({
-        'cf-connecting-ip': mapStringToIp('patreonToken'),
-        cookie: '__Secure-Session-ID=test-session-id',
-      }),
-    });
+    const { expectErrorResponse } = await fetchPatreon('token');
 
     // Assert
     expectPublicMetric(MetricName.InvalidPatreonTokenResponse);

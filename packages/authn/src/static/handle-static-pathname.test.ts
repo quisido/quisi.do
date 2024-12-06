@@ -7,11 +7,7 @@ describe('handleStaticPathname', (): void => {
   describe('root', (): void => {
     it('should emit and respond', async (): Promise<void> => {
       // Assemble
-      const { expectPublicMetric, fetch } = new TestAuthnExportedHandler({
-        env: {
-          HOST: 'host.test.quisi.do',
-        },
-      });
+      const { expectPublicMetric, fetch } = new TestAuthnExportedHandler();
 
       // Act
       const { expectHeadersToBe, expectStatusCodeToBe } = await fetch('/');

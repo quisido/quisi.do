@@ -6,35 +6,23 @@ import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handleOAuthPathname', (): void => {
   it('should support throttling', async (): Promise<void> => {
-    const testIp: string = mapStringToIp('oauthThrottle');
-    const testState: string = JSON.stringify({
-      returnPath: '/test-return-path/',
-      sessionId: 'test-session-id',
-    });
+    const testIp: string = mapStringToIp('throttle');
 
     // Assemble
-    const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler({
-        env: {
-          HOST: 'host.test.quisi.do',
-        },
-      });
+    const {
+      expectPrivateMetric,
+      expectPublicMetric,
+      fetchPatreon,
+      mockPatreonIdentity,
+      mockPatreonToken,
+    } = new TestAuthnExportedHandler();
+
+    mockPatreonToken();
+    mockPatreonIdentity();
 
     // Act
-    const search: string = new URLSearchParams({ state: testState }).toString();
-    await fetch(`/patreon/?${search}`, {
-      headers: new Headers({
-        'cf-connecting-ip': testIp,
-        cookie: '__Secure-Session-ID=test-session-id',
-      }),
-    });
-
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
-      headers: new Headers({
-        'cf-connecting-ip': testIp,
-        cookie: '__Secure-Session-ID=test-session-id',
-      }),
-    });
+    await fetchPatreon('throttle');
+    const { expectErrorResponse } = await fetchPatreon('throttle');
 
     // Assert
     expectErrorResponse(ErrorCode.TooManyRequests, '/test-return-path/');

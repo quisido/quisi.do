@@ -6,11 +6,7 @@ import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 describe('handleOAuthPathname', (): void => {
   it('should support a missing state search parameter', async (): Promise<void> => {
     // Assemble
-    const { expectPublicMetric, fetch } = new TestAuthnExportedHandler({
-      env: {
-        HOST: 'host.test.quisi.do',
-      },
-    });
+    const { expectPublicMetric, fetch } = new TestAuthnExportedHandler();
 
     // Act
     const { expectErrorResponse } = await fetch('/patreon/');
@@ -23,11 +19,7 @@ describe('handleOAuthPathname', (): void => {
   it('should support an invalid JSON state search parameter', async (): Promise<void> => {
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler({
-        env: {
-          HOST: 'host.test.quisi.do',
-        },
-      });
+      new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({ state: '/' }).toString();
@@ -44,11 +36,7 @@ describe('handleOAuthPathname', (): void => {
   it('should support a non-object JSON state search parameter', async (): Promise<void> => {
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler({
-        env: {
-          HOST: 'host.test.quisi.do',
-        },
-      });
+      new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({ state: '1234' }).toString();
@@ -74,11 +62,7 @@ describe('handleOAuthPathname', (): void => {
 
     // Assemble
     const { expectPrivateMetric, expectPublicMetric, fetch } =
-      new TestAuthnExportedHandler({
-        env: {
-          HOST: 'host.test.quisi.do',
-        },
-      });
+      new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();

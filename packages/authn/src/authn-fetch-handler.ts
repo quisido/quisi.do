@@ -21,6 +21,9 @@ import getOAuthUserId from './oauth/get-oauth-user-id.js';
 import fetchPatreonIdentity from './patreon/fetch-patreon-identity.js';
 import getPatreonAccessToken from './patreon/get-patreon-access-token.js';
 import getPatreonRequestCode from './patreon/get-patreon-request-code.js';
+import handleInvalidPatreonIdentityAttributes from './patreon/handle-invalid-patreon-identity-attributes.js';
+import handleInvalidPatreonIdentityData from './patreon/handle-invalid-patreon-identity-data.js';
+import handleInvalidPatreonIdentityId from './patreon/handle-invalid-patreon-identity-id.js';
 import handlePatreonTokenErrorResponse from './patreon/handle-patreon-token-error-response.js';
 import insertIntoOAuth from './patreon/insert-into-oauth.js';
 import mapPatreonOAuthTokenToAccessToken from './patreon/map-patreon-oauth-token-to-access-token.js';
@@ -41,6 +44,12 @@ export default class AuthnFetchHandler extends FetchHandler {
   public getOAuthUserId = getOAuthUserId.bind(this);
   public getPatreonAccessToken = getPatreonAccessToken.bind(this);
   public getPatreonRequestCode = getPatreonRequestCode.bind(this);
+  public handleInvalidPatreonIdentityAttributes =
+    handleInvalidPatreonIdentityAttributes.bind(this);
+  public handleInvalidPatreonIdentityData =
+    handleInvalidPatreonIdentityData.bind(this);
+  public handleInvalidPatreonIdentityId =
+    handleInvalidPatreonIdentityId.bind(this);
   public handlePatreonTokenErrorResponse =
     handlePatreonTokenErrorResponse.bind(this);
   public insertIntoOAuth = insertIntoOAuth.bind(this);
