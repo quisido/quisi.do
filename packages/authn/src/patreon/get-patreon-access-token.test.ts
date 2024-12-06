@@ -7,12 +7,15 @@ import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 describe('getPatreonAccessToken', (): void => {
   it('should emit and respond when the Patreon OAuth host is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectToHaveEmitPrivateMetric, expectToHaveEmitPublicMetric, fetchPatreon } =
-      new TestAuthnExportedHandler({
-        env: {
-          PATREON_OAUTH_HOST: true,
-        },
-      });
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetchPatreon,
+    } = new TestAuthnExportedHandler({
+      env: {
+        PATREON_OAUTH_HOST: true,
+      },
+    });
 
     // Act
     const { expectErrorResponse } = await fetchPatreon('host');
@@ -38,12 +41,15 @@ describe('getPatreonAccessToken', (): void => {
 
   it('should emit and respond when the Patreon OAuth client ID is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectToHaveEmitPrivateMetric, expectToHaveEmitPublicMetric, fetchPatreon } =
-      new TestAuthnExportedHandler({
-        env: {
-          PATREON_OAUTH_CLIENT_ID: true,
-        },
-      });
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetchPatreon,
+    } = new TestAuthnExportedHandler({
+      env: {
+        PATREON_OAUTH_CLIENT_ID: true,
+      },
+    });
 
     // Act
     const { expectErrorResponse } = await fetchPatreon('client');
@@ -69,12 +75,15 @@ describe('getPatreonAccessToken', (): void => {
 
   it('should emit and respond when the Patreon OAuth client secret is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectToHaveEmitPrivateMetric, expectToHaveEmitPublicMetric, fetchPatreon } =
-      new TestAuthnExportedHandler({
-        env: {
-          PATREON_OAUTH_CLIENT_SECRET: true,
-        },
-      });
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetchPatreon,
+    } = new TestAuthnExportedHandler({
+      env: {
+        PATREON_OAUTH_CLIENT_SECRET: true,
+      },
+    });
 
     // Act
     const { expectErrorResponse } = await fetchPatreon('secret');
@@ -100,12 +109,15 @@ describe('getPatreonAccessToken', (): void => {
 
   it('should emit and respond when the Patreon OAuth redirect URI is invalid', async (): Promise<void> => {
     // Assemble
-    const { expectToHaveEmitPrivateMetric, expectToHaveEmitPublicMetric, fetchPatreon } =
-      new TestAuthnExportedHandler({
-        env: {
-          PATREON_OAUTH_REDIRECT_URI: true,
-        },
-      });
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetchPatreon,
+    } = new TestAuthnExportedHandler({
+      env: {
+        PATREON_OAUTH_REDIRECT_URI: true,
+      },
+    });
 
     // Act
     const { expectErrorResponse } = await fetchPatreon('redirect');

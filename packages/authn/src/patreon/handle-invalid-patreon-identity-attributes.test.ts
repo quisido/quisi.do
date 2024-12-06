@@ -1,4 +1,3 @@
-import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
 import { OAuthProvider } from '../constants/oauth-provider.js';
@@ -7,7 +6,7 @@ import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 const TEST_NOW = 12345678;
 
 describe('handleInvalidPatreonIdentityAttributes', (): void => {
-  it('should emit and respond when the Patreon identity attributes are missing', async (): Promise<void> => {
+  it('should emit, put, and respond when the Patreon identity attributes are missing', async (): Promise<void> => {
     // Assemble
     const {
       expectToHaveEmitPrivateMetric,
@@ -26,12 +25,10 @@ describe('handleInvalidPatreonIdentityAttributes', (): void => {
     mockPatreonIdentity(new Response('{"data":{"id":"test-id"}}'));
 
     // Act
-    const { expectNoBody, expectStatusCodeToBe } =
-      await fetchPatreon('missing');
+    const { expectOAuthSuccessResponse } = await fetchPatreon('missing');
 
     // Assert
-    expectNoBody();
-    expectStatusCodeToBe(StatusCode.SeeOther);
+    expectOAuthSuccessResponse();
     expectToHaveEmitPublicMetric(MetricName.MissingPatreonIdentityAttributes);
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
@@ -53,7 +50,7 @@ describe('handleInvalidPatreonIdentityAttributes', (): void => {
     );
   });
 
-  it('should emit and respond when the Patreon identity attributes are invalid', async (): Promise<void> => {
+  it('should emit, put, and respond when the Patreon identity attributes are invalid', async (): Promise<void> => {
     // Assemble
     const {
       expectToHaveEmitPrivateMetric,
@@ -74,12 +71,10 @@ describe('handleInvalidPatreonIdentityAttributes', (): void => {
     );
 
     // Act
-    const { expectNoBody, expectStatusCodeToBe } =
-      await fetchPatreon('invalid');
+    const { expectOAuthSuccessResponse } = await fetchPatreon('invalid');
 
     // Assert
-    expectNoBody();
-    expectStatusCodeToBe(StatusCode.SeeOther);
+    expectOAuthSuccessResponse();
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
     expectToHaveEmitPublicMetric(MetricName.InvalidPatreonIdentityAttributes, {

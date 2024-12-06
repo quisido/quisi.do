@@ -5,6 +5,7 @@ import { MetricName } from '../constants/metric-name.js';
 import FatalError from '../utils/fatal-error.js';
 import parseJson from '../utils/parse-json.js';
 import mapAccessTokenToIdentityRequestHeaders from './map-access-token-to-identity-request-headers.js';
+import parsePatreonIdentity from './parse-patreon-identity.js';
 import type PatreonIdentity from './patreon-identity.js';
 
 const CAMPAIGN_FIELDS: readonly string[] = ['summary', 'is_monthly'];
@@ -111,5 +112,5 @@ export default async function fetchPatreonIdentity(
     throw new FatalError(ErrorCode.InvalidPatreonIdentity);
   }
 
-  return this.parsePatreonIdentity(identity);
+  return parsePatreonIdentity.call(this, identity);
 }

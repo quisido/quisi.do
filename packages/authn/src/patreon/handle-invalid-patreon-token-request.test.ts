@@ -69,7 +69,9 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
     const { expectErrorResponse } = await fetchPatreon('description');
 
     // Assert
-    expectToHaveEmitPublicMetric(MetricName.MissingInvalidPatreonTokenRequestDescription);
+    expectToHaveEmitPublicMetric(
+      MetricName.MissingInvalidPatreonTokenRequestDescription,
+    );
 
     expectErrorResponse(
       ErrorCode.MissingInvalidPatreonTokenRequestDescription,

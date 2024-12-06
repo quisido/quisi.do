@@ -9,8 +9,8 @@ describe('handleInvalidPatreonIdentityData', (): void => {
     const {
       expectToHaveEmitPublicMetric,
       fetchPatreon,
-      mockPatreonToken,
       mockPatreonIdentity,
+      mockPatreonToken,
     } = new TestAuthnExportedHandler();
 
     mockPatreonToken();

@@ -16,18 +16,6 @@ import getSessionIdCookie from './fetch-handler/get-session-id-cookie.js';
 import handleFetchError from './fetch-handler/handle-fetch-error.js';
 import handleFetchRequest from './fetch-handler/handle-fetch-request.js';
 import mapEnvKeyToErrorCode from './fetch-handler/map-env-key-to-error-code.js';
-import createOAuthResponse from './oauth/create-oauth-response.js';
-import getOAuthUserId from './oauth/get-oauth-user-id.js';
-import fetchPatreonIdentity from './patreon/fetch-patreon-identity.js';
-import getPatreonAccessToken from './patreon/get-patreon-access-token.js';
-import getPatreonRequestCode from './patreon/get-patreon-request-code.js';
-import handleInvalidPatreonIdentityAttributes from './patreon/handle-invalid-patreon-identity-attributes.js';
-import handleInvalidPatreonIdentityData from './patreon/handle-invalid-patreon-identity-data.js';
-import handleInvalidPatreonIdentityId from './patreon/handle-invalid-patreon-identity-id.js';
-import handlePatreonTokenErrorResponse from './patreon/handle-patreon-token-error-response.js';
-import insertIntoOAuth from './patreon/insert-into-oauth.js';
-import mapPatreonOAuthTokenToAccessToken from './patreon/map-patreon-oauth-token-to-access-token.js';
-import parsePatreonIdentity from './patreon/parse-patreon-identity.js';
 import FatalError from './utils/fatal-error.js';
 import isEnvironmentName from './utils/is-environment-name.js';
 import isNonEmptyString from './utils/is-non-empty-string.js';
@@ -39,24 +27,7 @@ const WHOAMI_IP_THROTTLE_LIMIT = 1000;
 
 export default class AuthnFetchHandler extends FetchHandler {
   static #AUTHN_USER_ID_MAP = new TemporaryMap<number>();
-  public createOAuthResponse = createOAuthResponse.bind(this);
-  public fetchPatreonIdentity = fetchPatreonIdentity.bind(this);
-  public getOAuthUserId = getOAuthUserId.bind(this);
-  public getPatreonAccessToken = getPatreonAccessToken.bind(this);
-  public getPatreonRequestCode = getPatreonRequestCode.bind(this);
-  public handleInvalidPatreonIdentityAttributes =
-    handleInvalidPatreonIdentityAttributes.bind(this);
-  public handleInvalidPatreonIdentityData =
-    handleInvalidPatreonIdentityData.bind(this);
-  public handleInvalidPatreonIdentityId =
-    handleInvalidPatreonIdentityId.bind(this);
-  public handlePatreonTokenErrorResponse =
-    handlePatreonTokenErrorResponse.bind(this);
-  public insertIntoOAuth = insertIntoOAuth.bind(this);
-  public mapPatreonOAuthTokenToAccessToken =
-    mapPatreonOAuthTokenToAccessToken.bind(this);
   static #OAUTH_IP_THROTTLER = new Throttler();
-  public parsePatreonIdentity = parsePatreonIdentity.bind(this);
   static #WHOAMI_IP_THROTTLER = new Throttler();
 
   public constructor() {

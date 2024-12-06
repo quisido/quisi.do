@@ -1,7 +1,6 @@
-import type { ErrorCode } from '@quisido/authn-shared';
-import { StatusCode } from 'cloudflare-utils';
-import { sortEntriesByKey } from 'fmrs';
 import { expect } from 'vitest';
+import expectTextToBe from './expect-text-to-be.js';
+import mapHeadersToRecord from './map-headers-to-record.js';
 
 export default class TestResponse {
   public static async from(response: Response): Promise<TestResponse> {
@@ -9,52 +8,30 @@ export default class TestResponse {
     return new TestResponse(response, text);
   }
 
-  readonly #response: Response;
-  readonly #text: string;
+  public readonly expectHeadersToBe: (headers: Record<string, string>) => void;
+  public readonly expectNoBody: () => void;
+  public readonly expectStatusCodeToBe: (code: number) => void;
+
+  public readonly expectBodyToBe: (
+    body: Record<string, boolean | number | string> | string,
+  ) => void;
 
   private constructor(response: Response, text: string) {
-    this.#response = response;
-    this.#text = text;
-  }
+    this.expectBodyToBe = expectTextToBe.bind(null, text);
 
-  expectBodyToBe = (
-    body: Record<string, boolean | number | string> | string,
-  ): void => {
-    if (typeof body === 'string') {
-      expect(this.#text).toBe(body);
-    } else {
-      expect(JSON.parse(this.#text)).toEqual(body);
-    }
-  };
+    this.expectHeadersToBe = (expected: Record<string, string>): void => {
+      const actual: Record<string, string> = mapHeadersToRecord(
+        response.headers,
+      );
+      expect(actual).toEqual(expected);
+    };
 
-  expectErrorResponse = (code: ErrorCode, returnPath = '/'): void => {
-    const codeStr: string = code.toString();
+    this.expectNoBody = (): void => {
+      expect(text).toBe('');
+    };
 
-    this.expectNoBody();
-    this.expectStatusCodeToBe(StatusCode.SeeOther);
-    this.expectHeadersToBe({
-      'access-control-allow-methods': 'GET',
-      allow: 'GET',
-      'content-location': `https://host.test.quisi.do${returnPath}#authn:error=${codeStr}`,
-      location: `https://host.test.quisi.do${returnPath}#authn:error=${codeStr}`,
-    });
-  };
-
-  expectHeadersToBe = (headers: Record<string, string>): void => {
-    expect(this.#headerEntries).toEqual(
-      Object.entries(headers).sort(sortEntriesByKey),
-    );
-  };
-
-  expectNoBody = (): void => {
-    expect(this.#text).toBe('');
-  };
-
-  expectStatusCodeToBe = (code: number): void => {
-    expect(this.#response.status).toBe(code);
-  };
-
-  get #headerEntries(): readonly (readonly [string, string])[] {
-    return [...this.#response.headers.entries()].sort(sortEntriesByKey);
+    this.expectStatusCodeToBe = (code: number): void => {
+      expect(response.status).toBe(code);
+    };
   }
 }

@@ -36,6 +36,7 @@ export default async function handleFetchRequest(
   this.emitPublicMetric(MetricName.NotFound, {
     pathname: this.requestPathname,
   });
+
   return new FatalOAuthErrorResponse({
     code: ErrorCode.NotFound,
     host: this.host,

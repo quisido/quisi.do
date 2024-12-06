@@ -3,13 +3,16 @@ import {
   EXPECT_ANY_HEADERS,
   EXPECT_ANY_STRING,
   TestAnalyticsEngineDataset,
+  TestD1Database,
   TestKVNamespace,
   TestR2Bucket,
 } from 'cloudflare-test-utils';
 import AuthnFetchHandler from '../authn-fetch-handler.js';
+import { SELECT_USERID_FROM_OAUTH_QUERY } from '../constants/queries.js';
 import handleError from '../handle-error.js';
 import handleLog from '../handle-log.js';
 import handleMetric from '../handle-metric.js';
+import AuthnTestResponse from './authn-test-response.js';
 import mapStringToIp from './map-string-to-ip.js';
 import { PATREON_IDENTITY_URL } from './patreon-identity-url.js';
 import TestExportedHandler from './test-exported-handler.js';
@@ -27,7 +30,6 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
   public override expectAnalyticsEngineDatasetToWriteDataPoint =
     super.expectAnalyticsEngineDatasetToWriteDataPoint.bind(this);
   public override expectMetric = super.expectMetric.bind(this);
-  public override fetch = super.fetch.bind(this);
   public override mockResponse = super.mockResponse.bind(this);
 
   public constructor({ authnUserIds = {}, env = {}, now }: Options = {}) {
@@ -49,6 +51,13 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
         PATREON_OAUTH_REDIRECT_URI: 'https://redirect.test.quisi.do/patreon/',
         PRIVATE_DATASET: new TestAnalyticsEngineDataset(),
         PUBLIC_DATASET: new TestAnalyticsEngineDataset(),
+
+        AUTHN_DB: new TestD1Database({
+          [SELECT_USERID_FROM_OAUTH_QUERY]: {
+            results: [{ userId: 1 }],
+          },
+        }),
+
         ...env,
       },
     });
@@ -82,7 +91,15 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
     this.#authnData.expectToHavePut(...params);
   };
 
-  public fetchPatreon = async (ip: string): Promise<TestResponse> => {
+  public override fetch = async (
+    input: string,
+    init?: RequestInit<IncomingRequestCfProperties>,
+  ): Promise<AuthnTestResponse> => {
+    const testResponse: TestResponse = await super.fetch(input, init);
+    return new AuthnTestResponse(testResponse);
+  };
+
+  public fetchPatreon = async (ip: string): Promise<AuthnTestResponse> => {
     return await this.fetch(TEST_PATREON_URL, {
       headers: new Headers({
         'cf-connecting-ip': mapStringToIp(ip),

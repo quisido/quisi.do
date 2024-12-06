@@ -74,16 +74,21 @@ describe('handlePatreonTokenErrorResponseCode', (): void => {
     const { expectErrorResponse } = await fetchPatreon('unknown');
 
     // Assert
-    expectToHaveEmitPublicMetric(MetricName.UnknownPatreonTokenErrorResponseCode);
+    expectToHaveEmitPublicMetric(
+      MetricName.UnknownPatreonTokenErrorResponseCode,
+    );
 
     expectErrorResponse(
       ErrorCode.UnknownPatreonTokenErrorResponseCode,
       '/test-return-path/',
     );
 
-    expectToHaveEmitPrivateMetric(MetricName.UnknownPatreonTokenErrorResponseCode, {
-      code: 'unknown',
-      value: '{"message":"test"}',
-    });
+    expectToHaveEmitPrivateMetric(
+      MetricName.UnknownPatreonTokenErrorResponseCode,
+      {
+        code: 'unknown',
+        value: '{"message":"test"}',
+      },
+    );
   });
 });

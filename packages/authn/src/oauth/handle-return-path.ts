@@ -34,7 +34,7 @@ export default async function handleReturnPath(
      * Whenever we support more than one authentication pathname:
      *   switch (pathname) {
      *     case AuthenticationPathname.Patreon:
-     *       return await handlePatreonFetchRequest.call(this, { returnPath });
+     *       return await this.handlePatreonFetchRequest({ returnPath });
      *   }
      */
     return await handlePatreonFetchRequest.call(this, { returnPath });

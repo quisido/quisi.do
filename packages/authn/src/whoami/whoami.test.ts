@@ -34,7 +34,8 @@ describe('WhoAmI', (): void => {
 
   it('should support a missing AuthN cookie', async (): Promise<void> => {
     // Assemble
-    const { expectToHaveEmitPublicMetric, fetch } = new TestAuthnExportedHandler();
+    const { expectToHaveEmitPublicMetric, fetch } =
+      new TestAuthnExportedHandler();
 
     // Act
     const { expectBodyToBe, expectHeadersToBe, expectStatusCodeToBe } =
@@ -63,12 +64,15 @@ describe('WhoAmI', (): void => {
     const testIp: string = mapStringToIp('whoamiCaching');
 
     // Assemble
-    const { expectToHaveEmitPrivateMetric, expectToHaveEmitPublicMetric, fetch } =
-      new TestAuthnExportedHandler({
-        authnUserIds: {
-          abcdef: TEST_USER_ID.toString(),
-        },
-      });
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetch,
+    } = new TestAuthnExportedHandler({
+      authnUserIds: {
+        abcdef: TEST_USER_ID.toString(),
+      },
+    });
 
     // Act
     await fetch('/whoami/', {
@@ -114,8 +118,11 @@ describe('WhoAmI', (): void => {
     const testIp: string = mapStringToIp('whoamiThrottle');
 
     // Assemble
-    const { expectToHaveEmitPrivateMetric, expectToHaveEmitPublicMetric, fetch } =
-      new TestAuthnExportedHandler();
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetch,
+    } = new TestAuthnExportedHandler();
 
     // Act
     await fetch('/whoami/', {

@@ -62,12 +62,18 @@ describe('handlePatreonTokenErrorResponseBody', (): void => {
       '/test-return-path/',
     );
 
-    expectToHaveEmitPrivateMetric(MetricName.MissingPatreonTokenErrorResponseCode, {
-      value: '{}',
-    });
+    expectToHaveEmitPrivateMetric(
+      MetricName.MissingPatreonTokenErrorResponseCode,
+      {
+        value: '{}',
+      },
+    );
 
-    expectToHaveEmitPublicMetric(MetricName.MissingPatreonTokenErrorResponseCode, {
-      keys: '',
-    });
+    expectToHaveEmitPublicMetric(
+      MetricName.MissingPatreonTokenErrorResponseCode,
+      {
+        keys: '',
+      },
+    );
   });
 });

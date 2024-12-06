@@ -20,7 +20,9 @@ describe('handlePatreonTokenErrorResponse', (): void => {
     const { expectErrorResponse } = await fetchPatreon('noBody');
 
     // Assert
-    expectToHaveEmitPublicMetric(MetricName.MissingPatreonTokenErrorResponseBody);
+    expectToHaveEmitPublicMetric(
+      MetricName.MissingPatreonTokenErrorResponseBody,
+    );
     expectErrorResponse(
       ErrorCode.MissingPatreonTokenErrorResponseBody,
       '/test-return-path/',
@@ -46,15 +48,20 @@ describe('handlePatreonTokenErrorResponse', (): void => {
     const { expectErrorResponse } = await fetchPatreon('invalid');
 
     // Assert
-    expectToHaveEmitPublicMetric(MetricName.InvalidPatreonTokenErrorResponseBody);
+    expectToHaveEmitPublicMetric(
+      MetricName.InvalidPatreonTokenErrorResponseBody,
+    );
 
     expectErrorResponse(
       ErrorCode.InvalidPatreonTokenErrorResponseBody,
       '/test-return-path/',
     );
 
-    expectToHaveEmitPrivateMetric(MetricName.InvalidPatreonTokenErrorResponseBody, {
-      body: '/',
-    });
+    expectToHaveEmitPrivateMetric(
+      MetricName.InvalidPatreonTokenErrorResponseBody,
+      {
+        body: '/',
+      },
+    );
   });
 });

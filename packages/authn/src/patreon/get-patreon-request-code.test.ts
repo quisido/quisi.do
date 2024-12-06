@@ -12,7 +12,8 @@ describe('getPatreonRequestCode', (): void => {
     });
 
     // Assemble
-    const { expectToHaveEmitPublicMetric, fetch } = new TestAuthnExportedHandler();
+    const { expectToHaveEmitPublicMetric, fetch } =
+      new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({
