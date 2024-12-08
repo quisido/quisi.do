@@ -6,6 +6,7 @@ export default [
 
   ...disableRulesForFiles({
     '@typescript-eslint/no-dynamic-delete': ['src/handle-metric.ts'],
+    '@typescript-eslint/unbound-method': ['src/test/test-exported-handler.ts'],
     'capitalized-comments': ['src/constants/metric-name.ts'],
     'func-style': ['src/features/authn-user-id.ts'],
     'max-classes-per-file': ['src/authn-fetch-handler.ts'],

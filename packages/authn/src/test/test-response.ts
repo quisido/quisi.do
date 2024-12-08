@@ -8,6 +8,7 @@ export default class TestResponse {
     return new TestResponse(response, text);
   }
 
+  public readonly expectHeaderToBe: (header: string, value: string) => void;
   public readonly expectHeadersToBe: (headers: Record<string, string>) => void;
   public readonly expectNoBody: () => void;
   public readonly expectStatusCodeToBe: (code: number) => void;
@@ -18,6 +19,11 @@ export default class TestResponse {
 
   private constructor(response: Response, text: string) {
     this.expectBodyToBe = expectTextToBe.bind(null, text);
+
+    this.expectHeaderToBe = (header: string, expected: string): void => {
+      const actual: string | null = response.headers.get(header);
+      expect(actual).toBe(expected);
+    };
 
     this.expectHeadersToBe = (expected: Record<string, string>): void => {
       const actual: Record<string, string> = mapHeadersToRecord(

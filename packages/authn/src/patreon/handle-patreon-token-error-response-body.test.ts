@@ -21,10 +21,10 @@ describe('handlePatreonTokenErrorResponseBody', (): void => {
     );
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('object');
+    const { expectOAuthErrorResponse } = await fetchPatreon('object');
 
     // Assert
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.InvalidPatreonTokenErrorResponse,
       '/test-return-path/',
     );
@@ -54,10 +54,10 @@ describe('handlePatreonTokenErrorResponseBody', (): void => {
     );
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('error');
+    const { expectOAuthErrorResponse } = await fetchPatreon('error');
 
     // Assert
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.MissingPatreonTokenErrorResponseCode,
       '/test-return-path/',
     );

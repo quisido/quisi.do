@@ -11,8 +11,8 @@ describe('fetchPatreonIdentity', (): void => {
   it('should emit and respond when the Patreon identity is invalid', async (): Promise<void> => {
     // Assemble
     const {
-      expectAnalyticsEngineDatasetToWriteDataPoint,
       expectToHaveEmitPublicMetric,
+      expectToHaveWrittenDataPoint,
       fetchPatreon,
       mockPatreonIdentity,
       mockPatreonToken,
@@ -22,24 +22,24 @@ describe('fetchPatreonIdentity', (): void => {
     mockPatreonIdentity(new Response('/'));
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('json');
+    const { expectOAuthErrorResponse } = await fetchPatreon('json');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.InvalidPatreonIdentityResponse);
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.InvalidPatreonIdentityResponse,
       '/test-return-path/',
     );
 
-    expectAnalyticsEngineDatasetToWriteDataPoint('PRIVATE_DATASET', {
+    expectToHaveWrittenDataPoint('PRIVATE_DATASET', {
       blobs: [PATREON_IDENTITY_URL],
       doubles: [EXPECT_ANY_NUMBER, EXPECT_ANY_NUMBER],
       indexes: [WorkerMetricName.Fetch],
     });
 
-    expectAnalyticsEngineDatasetToWriteDataPoint('PUBLIC_DATASET', {
+    expectToHaveWrittenDataPoint('PUBLIC_DATASET', {
       blobs: ['https://host.test.patreon.com'],
       doubles: [EXPECT_ANY_NUMBER, EXPECT_ANY_NUMBER],
       indexes: [WorkerMetricName.Fetch],
@@ -63,13 +63,13 @@ describe('fetchPatreonIdentity', (): void => {
     );
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('forbidden');
+    const { expectOAuthErrorResponse } = await fetchPatreon('forbidden');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.ForbiddenPatreonIdentityResponse);
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.ForbiddenPatreonIdentityResponse,
       '/test-return-path/',
     );
@@ -96,12 +96,12 @@ describe('fetchPatreonIdentity', (): void => {
     );
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('error');
+    const { expectOAuthErrorResponse } = await fetchPatreon('error');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.UnknownPatreonIdentityError,
       '/test-return-path/',
     );
@@ -130,11 +130,15 @@ describe('fetchPatreonIdentity', (): void => {
     mockPatreonIdentity(new Response('1234'));
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('invalid');
+    const { expectOAuthErrorResponse } = await fetchPatreon('invalid');
 
     // Assert
-    expectErrorResponse(ErrorCode.InvalidPatreonIdentity, '/test-return-path/');
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
+
+    expectOAuthErrorResponse(
+      ErrorCode.InvalidPatreonIdentity,
+      '/test-return-path/',
+    );
 
     expectToHaveEmitPrivateMetric(MetricName.InvalidPatreonIdentity, {
       value: '1234',

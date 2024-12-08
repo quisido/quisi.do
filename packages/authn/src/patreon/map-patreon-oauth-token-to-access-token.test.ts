@@ -16,12 +16,12 @@ describe('mapPatreonOAuthTokenToAccessToken', (): void => {
     mockPatreonToken(new Response('1234'));
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('record');
+    const { expectOAuthErrorResponse } = await fetchPatreon('record');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.InvalidPatreonOAuthToken,
       '/test-return-path/',
     );
@@ -47,13 +47,13 @@ describe('mapPatreonOAuthTokenToAccessToken', (): void => {
     mockPatreonToken(new Response('{"key":"value"}'));
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('missing');
+    const { expectOAuthErrorResponse } = await fetchPatreon('missing');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.MissingPatreonAccessToken);
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.MissingPatreonAccessToken,
       '/test-return-path/',
     );
@@ -75,12 +75,12 @@ describe('mapPatreonOAuthTokenToAccessToken', (): void => {
     mockPatreonToken(new Response('{"access_token":1234}'));
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('invalid');
+    const { expectOAuthErrorResponse } = await fetchPatreon('invalid');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.InvalidPatreonAccessToken,
       '/test-return-path/',
     );

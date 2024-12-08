@@ -10,10 +10,10 @@ describe('handleOAuthPathname', (): void => {
       new TestAuthnExportedHandler();
 
     // Act
-    const { expectErrorResponse } = await fetch('/patreon/');
+    const { expectOAuthErrorResponse } = await fetch('/patreon/');
 
     // Assert
-    expectErrorResponse(ErrorCode.MissingStateSearchParam);
+    expectOAuthErrorResponse(ErrorCode.MissingStateSearchParam);
     expectToHaveEmitPublicMetric(MetricName.MissingStateSearchParam);
   });
 
@@ -27,10 +27,10 @@ describe('handleOAuthPathname', (): void => {
 
     // Act
     const search: string = new URLSearchParams({ state: '/' }).toString();
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`);
+    const { expectOAuthErrorResponse } = await fetch(`/patreon/?${search}`);
 
     // Assert
-    expectErrorResponse(ErrorCode.NonJsonStateSearchParam);
+    expectOAuthErrorResponse(ErrorCode.NonJsonStateSearchParam);
     expectToHaveEmitPublicMetric(MetricName.NonJsonStateSearchParam);
     expectToHaveEmitPrivateMetric(MetricName.NonJsonStateSearchParam, {
       value: '/',
@@ -47,10 +47,10 @@ describe('handleOAuthPathname', (): void => {
 
     // Act
     const search: string = new URLSearchParams({ state: '1234' }).toString();
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`);
+    const { expectOAuthErrorResponse } = await fetch(`/patreon/?${search}`);
 
     // Assert
-    expectErrorResponse(ErrorCode.NonObjectState);
+    expectOAuthErrorResponse(ErrorCode.NonObjectState);
 
     expectToHaveEmitPrivateMetric(MetricName.NonObjectState, {
       value: '1234',
@@ -76,14 +76,14 @@ describe('handleOAuthPathname', (): void => {
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
+    const { expectOAuthErrorResponse } = await fetch(`/patreon/?${search}`, {
       headers: new Headers({
         cookie: '__Secure-Session-ID=test-session-id-cookie',
       }),
     });
 
     // Assert
-    expectErrorResponse(ErrorCode.CSRF);
+    expectOAuthErrorResponse(ErrorCode.CSRF);
     expectToHaveEmitPublicMetric(MetricName.CSRF);
     expectToHaveEmitPrivateMetric(MetricName.CSRF, {
       cookie: 'test-session-id-cookie',

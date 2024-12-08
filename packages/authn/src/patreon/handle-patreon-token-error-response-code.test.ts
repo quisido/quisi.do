@@ -17,10 +17,14 @@ describe('handlePatreonTokenErrorResponseCode', (): void => {
     );
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('client');
+    const { expectOAuthErrorResponse } = await fetchPatreon('client');
 
     // Assert
-    expectErrorResponse(ErrorCode.InvalidPatreonClientId, '/test-return-path/');
+    expectOAuthErrorResponse(
+      ErrorCode.InvalidPatreonClientId,
+      '/test-return-path/',
+    );
+
     expectToHaveEmitPublicMetric(MetricName.InvalidPatreonClientId, {
       clientId: 'test-client-id',
     });
@@ -42,10 +46,10 @@ describe('handlePatreonTokenErrorResponseCode', (): void => {
     );
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('grant');
+    const { expectOAuthErrorResponse } = await fetchPatreon('grant');
 
     // Assert
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.InvalidPatreonGrantCode,
       '/test-return-path/',
     );
@@ -71,14 +75,14 @@ describe('handlePatreonTokenErrorResponseCode', (): void => {
     );
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('unknown');
+    const { expectOAuthErrorResponse } = await fetchPatreon('unknown');
 
     // Assert
     expectToHaveEmitPublicMetric(
       MetricName.UnknownPatreonTokenErrorResponseCode,
     );
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.UnknownPatreonTokenErrorResponseCode,
       '/test-return-path/',
     );

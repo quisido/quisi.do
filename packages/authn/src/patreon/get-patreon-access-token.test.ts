@@ -18,12 +18,12 @@ describe('getPatreonAccessToken', (): void => {
     });
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('host');
+    const { expectOAuthErrorResponse } = await fetchPatreon('host');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.InvalidPatreonOAuthHost,
       '/test-return-path/',
     );
@@ -52,12 +52,12 @@ describe('getPatreonAccessToken', (): void => {
     });
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('client');
+    const { expectOAuthErrorResponse } = await fetchPatreon('client');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.InvalidPatreonOAuthClientId,
       '/test-return-path/',
     );
@@ -86,12 +86,12 @@ describe('getPatreonAccessToken', (): void => {
     });
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('secret');
+    const { expectOAuthErrorResponse } = await fetchPatreon('secret');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.InvalidPatreonOAuthClientSecret,
       '/test-return-path/',
     );
@@ -120,12 +120,12 @@ describe('getPatreonAccessToken', (): void => {
     });
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('redirect');
+    const { expectOAuthErrorResponse } = await fetchPatreon('redirect');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.InvalidPatreonOAuthRedirectUri,
       '/test-return-path/',
     );
@@ -153,13 +153,13 @@ describe('getPatreonAccessToken', (): void => {
     mockPatreonToken(new Response('/'));
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('token');
+    const { expectOAuthErrorResponse } = await fetchPatreon('token');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.InvalidPatreonTokenResponse);
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.InvalidPatreonTokenResponse,
       '/test-return-path/',
     );

@@ -20,10 +20,10 @@ describe('handleInvalidStateSessionId', (): void => {
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`);
+    const { expectOAuthErrorResponse } = await fetch(`/patreon/?${search}`);
 
     // Assert
-    expectErrorResponse(ErrorCode.MissingStateSessionId);
+    expectOAuthErrorResponse(ErrorCode.MissingStateSessionId);
 
     expectToHaveEmitPrivateMetric(MetricName.MissingStateSessionId, {
       searchParam: testState,
@@ -49,10 +49,10 @@ describe('handleInvalidStateSessionId', (): void => {
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`);
+    const { expectOAuthErrorResponse } = await fetch(`/patreon/?${search}`);
 
     // Assert
-    expectErrorResponse(ErrorCode.InvalidStateSessionId);
+    expectOAuthErrorResponse(ErrorCode.InvalidStateSessionId);
 
     expectToHaveEmitPrivateMetric(MetricName.InvalidStateSessionId, {
       value: 'null',

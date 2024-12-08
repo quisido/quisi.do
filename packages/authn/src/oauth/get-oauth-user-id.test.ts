@@ -20,13 +20,16 @@ describe('getOAuthUserId', (): void => {
     mockPatreonToken();
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('malformed');
+    const { expectOAuthErrorResponse } = await fetchPatreon('malformed');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.InvalidOAuthUserId);
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(ErrorCode.InvalidOAuthUserId, '/test-return-path/');
+    expectOAuthErrorResponse(
+      ErrorCode.InvalidOAuthUserId,
+      '/test-return-path/',
+    );
 
     expectToHaveEmitPrivateMetric(MetricName.InvalidOAuthUserId, {
       value: '{"userId":"test"}',

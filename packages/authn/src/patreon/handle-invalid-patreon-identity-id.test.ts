@@ -18,13 +18,13 @@ describe('handleInvalidPatreonIdentityId', (): void => {
     mockPatreonIdentity(new Response('{"data":{"a":"b"}}'));
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('missing');
+    const { expectOAuthErrorResponse } = await fetchPatreon('missing');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.MissingPatreonIdentityId);
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.MissingPatreonIdentityId,
       '/test-return-path/',
     );
@@ -48,12 +48,12 @@ describe('handleInvalidPatreonIdentityId', (): void => {
     mockPatreonIdentity(new Response('{"data":{"id":1234}}'));
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('invalid');
+    const { expectOAuthErrorResponse } = await fetchPatreon('invalid');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.InvalidPatreonIdentityId,
       '/test-return-path/',
     );

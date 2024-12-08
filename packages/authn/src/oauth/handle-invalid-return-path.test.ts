@@ -19,10 +19,10 @@ describe('handleInvalidReturnPath', (): void => {
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`);
+    const { expectOAuthErrorResponse } = await fetch(`/patreon/?${search}`);
 
     // Assert
-    expectErrorResponse(ErrorCode.MissingReturnPath);
+    expectOAuthErrorResponse(ErrorCode.MissingReturnPath);
 
     expectToHaveEmitPrivateMetric(MetricName.MissingReturnPath, {
       searchParam: testState,
@@ -47,10 +47,10 @@ describe('handleInvalidReturnPath', (): void => {
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`);
+    const { expectOAuthErrorResponse } = await fetch(`/patreon/?${search}`);
 
     // Assert
-    expectErrorResponse(ErrorCode.InvalidReturnPath);
+    expectOAuthErrorResponse(ErrorCode.InvalidReturnPath);
 
     expectToHaveEmitPrivateMetric(MetricName.InvalidReturnPath, {
       value: 'null',

@@ -36,10 +36,13 @@ const DEFAULT_LAST_USERS_ROW_ID = 1;
 export default class TestAuthnExportedHandler extends TestExportedHandler {
   #authnData: TestR2Bucket;
   #authnDb: TestD1Database;
-  public override expectAnalyticsEngineDatasetToWriteDataPoint =
-    super.expectAnalyticsEngineDatasetToWriteDataPoint.bind(this);
-  public override expectMetric = super.expectMetric.bind(this);
   public override mockResponse = super.mockResponse.bind(this);
+
+  public override expectNotToHaveWrittenDataPoint =
+    super.expectNotToHaveWrittenDataPoint.bind(this);
+
+  public override expectToHaveWrittenDataPoint =
+    super.expectToHaveWrittenDataPoint.bind(this);
 
   public constructor({
     authnUserIds = {},
@@ -87,6 +90,16 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
     this.#authnDb = authnDb;
   }
 
+  public expectNotToHaveEmitPublicMetric = (
+    name: string,
+    dimensions: Record<string, boolean | number | string> = {},
+  ): void => {
+    this.expectNotToHaveWrittenDataPoint('PUBLIC_DATASET', {
+      ...mapMetricDimensionsToDataPoint(dimensions),
+      indexes: [name],
+    });
+  };
+
   public expectNotToHaveQueriedAuthnDb = (query: string): void => {
     this.#authnDb.expectNotToHaveQueried(query);
   };
@@ -95,7 +108,7 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
     name: string,
     dimensions: Record<string, boolean | number | string> = {},
   ): void => {
-    this.expectAnalyticsEngineDatasetToWriteDataPoint('PRIVATE_DATASET', {
+    this.expectToHaveWrittenDataPoint('PRIVATE_DATASET', {
       ...mapMetricDimensionsToDataPoint(dimensions),
       indexes: [name],
     });
@@ -105,7 +118,7 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
     name: string,
     dimensions: Record<string, boolean | number | string> = {},
   ): void => {
-    this.expectAnalyticsEngineDatasetToWriteDataPoint('PUBLIC_DATASET', {
+    this.expectToHaveWrittenDataPoint('PUBLIC_DATASET', {
       ...mapMetricDimensionsToDataPoint(dimensions),
       indexes: [name],
     });

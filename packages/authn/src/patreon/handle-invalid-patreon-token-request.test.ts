@@ -28,12 +28,12 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
     );
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('noDescription');
+    const { expectOAuthErrorResponse } = await fetchPatreon('noDescription');
 
     // Assert
     expectToHaveEmitPublicMetric(MetricName.InvalidPatreonTokenRequest);
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.InvalidPatreonTokenRequest,
       '/test-return-path/',
     );
@@ -66,14 +66,14 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
     );
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('description');
+    const { expectOAuthErrorResponse } = await fetchPatreon('description');
 
     // Assert
     expectToHaveEmitPublicMetric(
       MetricName.MissingInvalidPatreonTokenRequestDescription,
     );
 
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.MissingInvalidPatreonTokenRequestDescription,
       '/test-return-path/',
     );
@@ -109,10 +109,10 @@ describe('handleInvalidPatreonTokenRequest', (): void => {
     );
 
     // Act
-    const { expectErrorResponse } = await fetchPatreon('invalid');
+    const { expectOAuthErrorResponse } = await fetchPatreon('invalid');
 
     // Assert
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.InvalidInvalidPatreonTokenRequestDescription,
       '/test-return-path/',
     );

@@ -22,10 +22,10 @@ describe('handleOAuthPathname', (): void => {
 
     // Act
     await fetchPatreon('throttle');
-    const { expectErrorResponse } = await fetchPatreon('throttle');
+    const { expectOAuthErrorResponse } = await fetchPatreon('throttle');
 
     // Assert
-    expectErrorResponse(ErrorCode.TooManyRequests, '/test-return-path/');
+    expectOAuthErrorResponse(ErrorCode.TooManyRequests, '/test-return-path/');
     expectToHaveEmitPublicMetric(MetricName.OAuthThrottled);
     expectToHaveEmitPrivateMetric(MetricName.OAuthThrottled, {
       ip: testIp,

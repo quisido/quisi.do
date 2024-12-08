@@ -5,24 +5,34 @@ import TestResponse from './test-response.js';
 
 export default class AuthnTestResponse implements TestResponse {
   public readonly expectBodyToBe: TestResponse['expectBodyToBe'];
+  public readonly expectHeaderToBe: TestResponse['expectHeaderToBe'];
   public readonly expectHeadersToBe: TestResponse['expectHeadersToBe'];
+  public readonly expectJsonErrorResponse: (code: ErrorCode) => void;
   public readonly expectNoBody: TestResponse['expectNoBody'];
   public readonly expectOAuthSuccessResponse: () => void;
   public readonly expectStatusCodeToBe: TestResponse['expectStatusCodeToBe'];
 
-  public readonly expectErrorResponse: (
+  public readonly expectOAuthErrorResponse: (
     code: ErrorCode,
     returnPath?: string,
   ) => void;
 
   public constructor(testResponse: TestResponse) {
     this.expectBodyToBe = testResponse.expectBodyToBe.bind(testResponse);
+    this.expectHeaderToBe = testResponse.expectHeaderToBe.bind(testResponse);
     this.expectHeadersToBe = testResponse.expectHeadersToBe.bind(testResponse);
     this.expectNoBody = testResponse.expectNoBody.bind(testResponse);
     this.expectStatusCodeToBe =
       testResponse.expectStatusCodeToBe.bind(testResponse);
 
-    this.expectErrorResponse = (code: ErrorCode, returnPath = '/'): void => {
+    this.expectJsonErrorResponse = (code: ErrorCode): void => {
+      expect();
+    };
+
+    this.expectOAuthErrorResponse = (
+      code: ErrorCode,
+      returnPath = '/',
+    ): void => {
       testResponse.expectNoBody();
       testResponse.expectStatusCodeToBe(StatusCode.SeeOther);
 

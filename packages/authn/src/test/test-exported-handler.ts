@@ -2,6 +2,7 @@ import {
   ExportedHandler,
   type FetchHandler as IFetchHandler,
 } from '@quisido/worker';
+import { isAnalyticsEngineDataset } from 'cloudflare-utils';
 import { is } from 'fmrs';
 import { assert, expect, vi, type Mock } from 'vitest';
 import isEqual from './is-equal.js';
@@ -44,8 +45,6 @@ export default class TestExportedHandler {
     onMetric,
   }: Options) {
     this.#env = env;
-    this.expectAnalyticsEngineDatasetToWriteDataPoint =
-      this.expectAnalyticsEngineDatasetToWriteDataPoint.bind(this);
     this.expectConsoleError = this.expectConsoleError.bind(this);
     this.expectConsoleLog = this.expectConsoleLog.bind(this);
     this.expectMetric = this.expectMetric.bind(this);
@@ -53,6 +52,12 @@ export default class TestExportedHandler {
     this.getNow = this.getNow.bind(this);
     this.mockResponse = this.mockResponse.bind(this);
     this.setNow = this.setNow.bind(this);
+
+    this.expectNotToHaveWrittenDataPoint =
+      this.expectNotToHaveWrittenDataPoint.bind(this);
+
+    this.expectToHaveWrittenDataPoint =
+      this.expectToHaveWrittenDataPoint.bind(this);
 
     this.#handleMetric.mockImplementation(onMetric);
     this.#exportedHandler = new ExportedHandler({
@@ -71,16 +76,6 @@ export default class TestExportedHandler {
     });
   }
 
-  public expectAnalyticsEngineDatasetToWriteDataPoint(
-    dataset: string,
-    dataPoint: AnalyticsEngineDataPoint,
-  ): void {
-    assert(typeof this.#env[dataset] === 'object');
-    assert(this.#env[dataset] !== null);
-    assert('writeDataPoint' in this.#env[dataset]);
-    expect(this.#env[dataset].writeDataPoint).toHaveBeenCalledWith(dataPoint);
-  }
-
   public expectConsoleError(...messages: readonly unknown[]): void {
     expect(this.#consoleError).toHaveBeenCalledWith(...messages);
   }
@@ -94,6 +89,24 @@ export default class TestExportedHandler {
     dimensions: Record<string, boolean | number | string>,
   ): void {
     expect(this.#handleMetric).toHaveBeenCalledWith(name, dimensions);
+  }
+
+  public expectNotToHaveWrittenDataPoint(
+    env: string,
+    dataPoint: AnalyticsEngineDataPoint,
+  ): void {
+    const dataset: unknown = this.#env[env];
+    assert(isAnalyticsEngineDataset(dataset));
+    expect(dataset.writeDataPoint).not.toHaveBeenCalledWith(dataPoint);
+  }
+
+  public expectToHaveWrittenDataPoint(
+    env: string,
+    dataPoint: AnalyticsEngineDataPoint,
+  ): void {
+    const dataset: unknown = this.#env[env];
+    assert(isAnalyticsEngineDataset(dataset));
+    expect(dataset.writeDataPoint).toHaveBeenCalledWith(dataPoint);
   }
 
   public async fetch(

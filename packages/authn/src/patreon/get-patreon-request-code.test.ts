@@ -20,7 +20,7 @@ describe('getPatreonRequestCode', (): void => {
       state: testState,
     }).toString();
 
-    const { expectErrorResponse } = await fetch(`/patreon/?${search}`, {
+    const { expectOAuthErrorResponse } = await fetch(`/patreon/?${search}`, {
       headers: new Headers({
         'cf-connecting-ip': mapStringToIp('code'),
         cookie: '__Secure-Session-ID=test-session-id',
@@ -30,7 +30,7 @@ describe('getPatreonRequestCode', (): void => {
     // Assert
     expectToHaveEmitPublicMetric(MetricName.MissingPatreonRequestCode);
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
-    expectErrorResponse(
+    expectOAuthErrorResponse(
       ErrorCode.MissingPatreonRequestCode,
       '/test-return-path/',
     );
