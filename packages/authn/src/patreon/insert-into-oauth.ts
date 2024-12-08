@@ -1,4 +1,3 @@
-import { mapToError } from 'fmrs';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { type Gender } from '../constants/gender.js';
 import { MetricName } from '../constants/metric-name.js';
@@ -43,94 +42,18 @@ export default async function insertIntoOAuth(
   });
 
   // Associate user ID with OAuth ID.
-  const startTime: number = this.now();
   this.affect(
     this.getD1Response('AUTHN_DB', INSERT_INTO_OAUTH_QUERY, [
       userId,
       oAuthProvider,
       oAuthId,
-    ])
-      .then(({ changes, duration, lastRowId, sizeAfter }): void => {
-        const endTime: number = this.now();
-
-        this.emitPrivateMetric(MetricName.OAuthInserted, {
-          changes,
-          duration,
-          endTime,
-          lastRowId,
-          sizeAfter,
-          startTime,
-          userId,
-        });
-
-        this.emitPublicMetric(MetricName.OAuthInserted, {
-          changes,
-          duration,
-          endTime,
-          sizeAfter,
-          startTime,
-        });
-      })
-      .catch((err: unknown): void => {
-        const endTime: number = this.now();
-        const error: Error = mapToError(err);
-        this.logError(error);
-
-        this.emitPrivateMetric(MetricName.OAuthInsertError, {
-          endTime,
-          startTime,
-          userId,
-        });
-
-        this.emitPublicMetric(MetricName.OAuthInsertError, {
-          endTime,
-          startTime,
-        });
-      }),
+    ]),
   );
 
   // Associate user ID with email.
   if (email !== null) {
-    const startTime: number = this.now();
     this.affect(
-      this.getD1Response('AUTHN_DB', INSERT_INTO_EMAILS_QUERY, [email, userId])
-        .then(({ changes, duration, lastRowId, sizeAfter }): void => {
-          const endTime: number = this.now();
-
-          this.emitPrivateMetric(MetricName.EmailInserted, {
-            changes,
-            duration,
-            endTime,
-            lastRowId,
-            sizeAfter,
-            startTime,
-            userId,
-          });
-
-          this.emitPublicMetric(MetricName.EmailInserted, {
-            changes,
-            duration,
-            endTime,
-            sizeAfter,
-            startTime,
-          });
-        })
-        .catch((err: unknown): void => {
-          const endTime: number = this.now();
-          const error: Error = mapToError(err);
-          this.logError(error);
-
-          this.emitPrivateMetric(MetricName.EmailInsertError, {
-            endTime,
-            startTime,
-            userId,
-          });
-
-          this.emitPublicMetric(MetricName.EmailInsertError, {
-            endTime,
-            startTime,
-          });
-        }),
+      this.getD1Response('AUTHN_DB', INSERT_INTO_EMAILS_QUERY, [email, userId]),
     );
   }
 

@@ -4,10 +4,10 @@ import mapPatreonGenderToGender from '../utils/map-patreon-gender-to-gender.js';
 
 export default function mapPatreonIdentityGenderAttributeToGender(
   value: unknown,
-): Gender {
-  if (isPatreonGender(value)) {
-    return mapPatreonGenderToGender(value);
+): Gender | undefined {
+  if (!isPatreonGender(value)) {
+    return;
   }
 
-  return Gender.Neutral;
+  return mapPatreonGenderToGender(value);
 }

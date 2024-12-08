@@ -262,43 +262,57 @@ export default class Handler<
     bindings: readonly (null | number | string)[],
   ): Promise<HandlerD1Response> {
     const startTime: number = this.now();
-    const {
-      meta: {
-        changed_db: changedDb,
+    try {
+      const {
+        meta: {
+          changed_db: changedDb,
+          changes,
+          duration,
+          last_row_id: lastRowId,
+          rows_read: rowsRead,
+          rows_written: rowsWritten,
+          size_after: sizeAfter,
+        },
+      } = await this.getD1Database(env)
+        .prepare(query)
+        .bind(...bindings)
+        .run();
+      this.emitMetric(MetricName.D1Run, {
+        changedDb,
         changes,
         duration,
-        last_row_id: lastRowId,
-        rows_read: rowsRead,
-        rows_written: rowsWritten,
-        size_after: sizeAfter,
-      },
-    } = await this.getD1Database(env)
-      .prepare(query)
-      .bind(...bindings)
-      .run();
-    this.emitMetric(MetricName.D1Run, {
-      changedDb,
-      changes,
-      duration,
-      endTime: this.now(),
-      env,
-      lastRowId,
-      query,
-      rowsRead,
-      rowsWritten,
-      sizeAfter,
-      startTime,
-    });
+        endTime: this.now(),
+        env,
+        lastRowId,
+        query,
+        rowsRead,
+        rowsWritten,
+        sizeAfter,
+        startTime,
+      });
 
-    return {
-      changedDb,
-      changes,
-      duration,
-      lastRowId,
-      rowsRead,
-      rowsWritten,
-      sizeAfter,
-    };
+      return {
+        changedDb,
+        changes,
+        duration,
+        lastRowId,
+        rowsRead,
+        rowsWritten,
+        sizeAfter,
+      };
+    } catch (err: unknown) {
+      const error: Error = mapToError(err);
+      this.logError(error);
+
+      this.emitMetric(MetricName.D1Error, {
+        endTime: this.now(),
+        env,
+        query,
+        startTime,
+      });
+
+      throw err;
+    }
   }
 
   public async getD1Results(
@@ -308,48 +322,62 @@ export default class Handler<
   ): Promise<HandlerD1Results> {
     const startTime: number = this.now();
 
-    const {
-      results,
+    try {
+      const {
+        results,
 
-      meta: {
-        changed_db: changedDb,
+        meta: {
+          changed_db: changedDb,
+          changes,
+          duration,
+          last_row_id: lastRowId,
+          rows_read: rowsRead,
+          rows_written: rowsWritten,
+          size_after: sizeAfter,
+        },
+      } = await this.getD1Database(env)
+        .prepare(query)
+        .bind(...values)
+        .all();
+
+      this.emitMetric(MetricName.D1All, {
+        changedDb,
         changes,
         duration,
-        last_row_id: lastRowId,
-        rows_read: rowsRead,
-        rows_written: rowsWritten,
-        size_after: sizeAfter,
-      },
-    } = await this.getD1Database(env)
-      .prepare(query)
-      .bind(...values)
-      .all();
+        endTime: this.now(),
+        env,
+        lastRowId,
+        query,
+        results: results.length,
+        rowsRead,
+        rowsWritten,
+        sizeAfter,
+        startTime,
+      });
 
-    this.emitMetric(MetricName.D1All, {
-      changedDb,
-      changes,
-      duration,
-      endTime: this.now(),
-      env,
-      lastRowId,
-      query,
-      results: results.length,
-      rowsRead,
-      rowsWritten,
-      sizeAfter,
-      startTime,
-    });
+      return {
+        changedDb,
+        changes,
+        duration,
+        lastRowId,
+        results,
+        rowsRead,
+        rowsWritten,
+        sizeAfter,
+      };
+    } catch (err: unknown) {
+      const error: Error = mapToError(err);
+      this.logError(error);
 
-    return {
-      changedDb,
-      changes,
-      duration,
-      lastRowId,
-      results,
-      rowsRead,
-      rowsWritten,
-      sizeAfter,
-    };
+      this.emitMetric(MetricName.D1Error, {
+        endTime: this.now(),
+        env,
+        query,
+        startTime,
+      });
+
+      throw err;
+    }
   }
 
   /**
@@ -374,23 +402,32 @@ export default class Handler<
   }
 
   public async getKVNamespaceText(
-    namespace: string,
+    env: string,
     key: string,
   ): Promise<string | null> {
+    const namespace: KVNamespace = this.getKVNamespace(env);
     const startTime: number = this.now();
 
-    const value: string | null = await this.getKVNamespace(namespace).get(
-      key,
-      'text',
-    );
+    try {
+      const value: string | null = await namespace.get(key, 'text');
+      this.emitMetric(MetricName.KVGet, {
+        endTime: this.now(),
+        env,
+        startTime,
+      });
 
-    this.emitMetric(MetricName.KVGet, {
-      endTime: this.now(),
-      key,
-      namespace,
-      startTime,
-    });
-    return value;
+      return value;
+    } catch (err: unknown) {
+      const error: Error = mapToError(err);
+      this.logError(error);
+      this.emitMetric(MetricName.KVGetError, {
+        endTime: this.now(),
+        env,
+        startTime,
+      });
+
+      return null;
+    }
   }
 
   public getR2Bucket(name: string): R2Bucket {
@@ -464,6 +501,32 @@ export default class Handler<
     callback: (effect: Promise<unknown>) => Promise<void> | void,
   ): void {
     this.#on('effect', callback.bind(this));
+  }
+
+  public async putKVNamespace(
+    env: string,
+    key: string,
+    value: ArrayBuffer | ArrayBufferView | ReadableStream | string,
+    options?: KVNamespacePutOptions,
+  ): Promise<void> {
+    const namespace: KVNamespace = this.getKVNamespace(env);
+    const startTime: number = this.now();
+    try {
+      await namespace.put(key, value, options);
+      this.emitMetric(MetricName.KVPut, {
+        endTime: this.now(),
+        env,
+        startTime,
+      });
+    } catch (err: unknown) {
+      const error: Error = mapToError(err);
+      this.logError(error);
+      this.emitMetric(MetricName.KVPutError, {
+        endTime: this.now(),
+        env,
+        startTime,
+      });
+    }
   }
 
   public validateEnv<T>(

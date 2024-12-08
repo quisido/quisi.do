@@ -20,7 +20,6 @@ export enum MetricName {
   AuthenticationRead = 'authentication.read',
   CSRF = 'csrf',
   EmailInsertError = 'query.emails.insert.error',
-  EmailInserted = 'query.emails.insert',
   InvalidReturnPath = 'search.state.return-path.invalid',
   InvalidStateSessionId = 'search.state.session-id.invalid',
   MissingReturnPath = 'search.state.return-path.missing',
@@ -29,8 +28,6 @@ export enum MetricName {
   NonJsonStateSearchParam = 'search.state.invalid.json',
   NonObjectState = 'state.invalid.type',
   OAuthInsertError = 'query.oauth.insert.error',
-  OAuthInserted = 'query.oauth.insert',
-  OAuthUserIdSelected = 'query.oauth.select.user-id',
   OAuthThrottled = 'oauth.throttled.ip',
 
   // Patreon
@@ -77,8 +74,6 @@ export enum MetricName {
   WhoAmIThrottled = 'whoami.throttled.ip',
 
   // quisi.do
-  AuthnIdCreated = 'authn-id.created',
-  AuthnIdError = 'authn-id.error',
   FaviconIco = 'pathname.favicon.ico',
   InvalidAnalyticsId = 'analytics.id.invalid',
   InvalidAnalyticsMetricName = 'analytics.metric-name.invalid',

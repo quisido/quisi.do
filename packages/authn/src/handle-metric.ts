@@ -94,10 +94,37 @@ export default function handleMetric(
             changes,
             duration,
             endTime,
+            env,
             results,
             rowsRead,
             rowsWritten,
             sizeAfter,
+            startTime,
+          });
+          return;
+        }
+        case WorkerMetricName.D1Error: {
+          const { endTime, env, query, startTime } = dimensions;
+          if (
+            typeof endTime !== 'number' ||
+            typeof env !== 'string' ||
+            typeof query !== 'string' ||
+            typeof startTime !== 'number'
+          ) {
+            emitInvalidWorkerMetric();
+            return;
+          }
+
+          emitPrivateMetric({
+            endTime,
+            env,
+            query,
+            startTime,
+          });
+
+          emitPublicMetric({
+            endTime,
+            env,
             startTime,
           });
           return;
@@ -153,6 +180,7 @@ export default function handleMetric(
             changes,
             duration,
             endTime,
+            env,
             rowsRead,
             rowsWritten,
             sizeAfter,
@@ -213,6 +241,51 @@ export default function handleMetric(
 
           emitPrivateMetric({ endTime, key, namespace, startTime });
           emitPublicMetric({ endTime, namespace, startTime });
+          return;
+        }
+
+        case WorkerMetricName.KVGetError: {
+          const { endTime, env, startTime } = dimensions;
+          if (
+            typeof endTime !== 'number' ||
+            typeof env !== 'string' ||
+            typeof startTime !== 'number'
+          ) {
+            emitInvalidWorkerMetric();
+            return;
+          }
+
+          emitPublicMetric({ endTime, env, startTime });
+          return;
+        }
+
+        case WorkerMetricName.KVPut: {
+          const { endTime, env, startTime } = dimensions;
+          if (
+            typeof endTime !== 'number' ||
+            typeof env !== 'string' ||
+            typeof startTime !== 'number'
+          ) {
+            emitInvalidWorkerMetric();
+            return;
+          }
+
+          emitPublicMetric({ endTime, env, startTime });
+          return;
+        }
+
+        case WorkerMetricName.KVPutError: {
+          const { endTime, env, startTime } = dimensions;
+          if (
+            typeof endTime !== 'number' ||
+            typeof env !== 'string' ||
+            typeof startTime !== 'number'
+          ) {
+            emitInvalidWorkerMetric();
+            return;
+          }
+
+          emitPublicMetric({ endTime, env, startTime });
           return;
         }
       }

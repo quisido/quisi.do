@@ -8,7 +8,11 @@ import {
   TestR2Bucket,
 } from 'cloudflare-test-utils';
 import AuthnFetchHandler from '../authn-fetch-handler.js';
-import { SELECT_USERID_FROM_OAUTH_QUERY } from '../constants/queries.js';
+import {
+  INSERT_INTO_EMAILS_QUERY,
+  INSERT_INTO_USERS_QUERY,
+  SELECT_USERID_FROM_OAUTH_QUERY,
+} from '../constants/queries.js';
 import handleError from '../handle-error.js';
 import handleLog from '../handle-log.js';
 import handleMetric from '../handle-metric.js';
@@ -21,19 +25,42 @@ import type TestResponse from './test-response.js';
 
 interface Options {
   readonly authnUserIds?: Readonly<Partial<Record<string, string>>>;
+  readonly lastUsersRowId?: number | undefined;
   readonly env?: Readonly<Record<string, unknown>> | undefined;
   readonly now?: (() => number) | undefined;
+  readonly oAuthResults?: readonly unknown[] | undefined;
 }
+
+const DEFAULT_LAST_USERS_ROW_ID = 1;
 
 export default class TestAuthnExportedHandler extends TestExportedHandler {
   #authnData: TestR2Bucket;
+  #authnDb: TestD1Database;
   public override expectAnalyticsEngineDatasetToWriteDataPoint =
     super.expectAnalyticsEngineDatasetToWriteDataPoint.bind(this);
   public override expectMetric = super.expectMetric.bind(this);
   public override mockResponse = super.mockResponse.bind(this);
 
-  public constructor({ authnUserIds = {}, env = {}, now }: Options = {}) {
+  public constructor({
+    authnUserIds = {},
+    env = {},
+    lastUsersRowId = DEFAULT_LAST_USERS_ROW_ID,
+    now,
+    oAuthResults = [{ userId: 1 }],
+  }: Options = {}) {
     const authnData = new TestR2Bucket();
+    const authnDb = new TestD1Database({
+      [INSERT_INTO_EMAILS_QUERY]: {},
+
+      [INSERT_INTO_USERS_QUERY]: {
+        lastRowId: lastUsersRowId,
+      },
+
+      [SELECT_USERID_FROM_OAUTH_QUERY]: {
+        results: oAuthResults,
+      },
+    });
+
     super({
       FetchHandler: AuthnFetchHandler,
       now,
@@ -43,6 +70,7 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
 
       env: {
         AUTHN_DATA: authnData,
+        AUTHN_DB: authnDb,
         AUTHN_USER_IDS: new TestKVNamespace(authnUserIds),
         HOST: 'host.test.quisi.do',
         PATREON_OAUTH_CLIENT_ID: 'test-client-id',
@@ -51,19 +79,17 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
         PATREON_OAUTH_REDIRECT_URI: 'https://redirect.test.quisi.do/patreon/',
         PRIVATE_DATASET: new TestAnalyticsEngineDataset(),
         PUBLIC_DATASET: new TestAnalyticsEngineDataset(),
-
-        AUTHN_DB: new TestD1Database({
-          [SELECT_USERID_FROM_OAUTH_QUERY]: {
-            results: [{ userId: 1 }],
-          },
-        }),
-
         ...env,
       },
     });
 
     this.#authnData = authnData;
+    this.#authnDb = authnDb;
   }
+
+  public expectNotToHaveQueriedAuthnDb = (query: string): void => {
+    this.#authnDb.expectNotToHaveQueried(query);
+  };
 
   public expectToHaveEmitPrivateMetric = (
     name: string,
@@ -89,6 +115,13 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
     ...params: Parameters<R2Bucket['put']>
   ): void => {
     this.#authnData.expectToHavePut(...params);
+  };
+
+  public expectToHaveQueriedAuthnDb = (
+    query: string,
+    values: readonly (null | number | string)[],
+  ): void => {
+    this.#authnDb.expectToHaveQueried(query, values);
   };
 
   public override fetch = async (

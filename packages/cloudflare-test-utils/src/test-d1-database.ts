@@ -1,4 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
+import { expect } from 'vitest';
 import TestD1PreparedStatement from './test-d1-prepared-statement.js';
 import unimplementedMethod from './unimplemented-method.js';
 
@@ -16,10 +17,18 @@ export default class TestD1Database implements D1Database {
   readonly #queries = new Map<string, Result>();
 
   public constructor(queries: Record<string, Result> = {}) {
+    this.prepare = this.prepare.bind(this);
+
     for (const [query, result] of Object.entries(queries)) {
       this.#queries.set(query, result);
     }
   }
+
+  public readonly expectNotToHaveQueried = (query: string): void => {
+    const statement: TestD1PreparedStatement | undefined =
+      this.#preparedStatements.get(query);
+    expect(statement).not.toBeDefined();
+  };
 
   public readonly expectToHaveQueried = (
     query: string,
@@ -36,7 +45,7 @@ ${query}`);
     expectToHaveBound(...values);
   };
 
-  public readonly prepare = (query: string): D1PreparedStatement => {
+  public prepare(query: string): D1PreparedStatement {
     const result: Result | undefined = this.#queries.get(query);
     if (typeof result === 'undefined') {
       throw new Error(`Expected query to be mocked:
@@ -46,5 +55,5 @@ ${query}`);
     const statement = new TestD1PreparedStatement(result);
     this.#preparedStatements.set(query, statement);
     return statement;
-  };
+  }
 }

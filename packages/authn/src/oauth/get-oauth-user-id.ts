@@ -11,17 +11,11 @@ export default async function getOAuthUserId(
   oAuthProvider: OAuthProvider,
   oAuthId: string,
 ): Promise<number | null> {
-  const { duration, results, rowsRead, sizeAfter } = await this.getD1Results(
+  const { results } = await this.getD1Results(
     'AUTHN_DB',
     SELECT_USERID_FROM_OAUTH_QUERY,
     [oAuthProvider, oAuthId],
   );
-
-  this.emitPublicMetric(MetricName.OAuthUserIdSelected, {
-    duration,
-    rowsRead,
-    sizeAfter,
-  });
 
   // Non-existent user
   const [firstResult] = results;
@@ -29,7 +23,7 @@ export default async function getOAuthUserId(
     return null;
   }
 
-  // Existent user
+  // Malformed database row
   const { userId } = firstResult;
   if (typeof userId !== 'number') {
     this.emitPublicMetric(MetricName.InvalidOAuthUserId);
@@ -40,6 +34,7 @@ export default async function getOAuthUserId(
     throw new FatalError(ErrorCode.InvalidOAuthUserId);
   }
 
+  // Existent user
   this.emitPrivateMetric(MetricName.AuthenticationRead, { userId });
   this.emitPublicMetric(MetricName.AuthenticationRead);
   return userId;

@@ -7,6 +7,7 @@ import { assert, expect, vi, type Mock } from 'vitest';
 import isEqual from './is-equal.js';
 import mapMockedResponseToUrl from './map-mocked-response-to-url.js';
 import mapRequestInfoToString from './map-request-info-to-string.js';
+import noop from './noop.js';
 import TestResponse from './test-response.js';
 
 interface Options {
@@ -24,7 +25,6 @@ interface Options {
 
 const SINGLE = 1;
 const TEST_PASS_THROUGH_ON_EXCEPTION = vi.fn();
-const TEST_WAIT_UNTIL = vi.fn();
 
 export default class TestExportedHandler {
   readonly #consoleError: Console['error'] = vi.fn();
@@ -108,10 +108,16 @@ export default class TestExportedHandler {
     const { fetch } = this.#exportedHandler;
     assert(typeof fetch !== 'undefined');
 
+    const promises: Promise<void>[] = [];
+
     const response: Response = await fetch(request, this.#env, {
       passThroughOnException: TEST_PASS_THROUGH_ON_EXCEPTION,
-      waitUntil: TEST_WAIT_UNTIL,
+      waitUntil(promise: Promise<void>): void {
+        promises.push(promise.catch(noop));
+      },
     });
+
+    await Promise.all(promises);
 
     const [firstFetchError] = this.#fetchErrors;
     if (typeof firstFetchError !== 'undefined') {

@@ -10,6 +10,7 @@ export default [
     'max-classes-per-file': ['src/*.test.ts'],
     'max-lines': ['src/handler.ts'],
     'max-lines-per-function': ['src/exported-handler.ts', 'src/handler.ts'],
+    'max-params': ['src/handler.ts'],
     'no-await-in-loop': ['src/map-readable-stream-to-string.ts'],
     'no-console': ['scripts/dev.ts'],
 

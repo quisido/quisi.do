@@ -1,8 +1,7 @@
 import { StatusCode } from 'cloudflare-utils';
-import { mapToError } from 'fmrs';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
-import { MetricName } from '../constants/metric-name.js';
 import { SECONDS_PER_DAY } from '../constants/time.js';
+import noop from '../test/noop.js';
 import createAuthnId from '../utils/create-authn-id.js';
 
 interface Options {
@@ -23,38 +22,14 @@ export default function createOAuthResponse(
    *   If users are getting unauthenticated errors despite having authenticated,
    * then we can `await` this to fix that issue.
    */
-  const startTime: number = this.now();
   const startTimeSeconds: number = this.nowSeconds();
   const expiration: number = startTimeSeconds + SECONDS_PER_DAY;
   this.affect(
-    this.authnUserIdsNamespace
-      .put(authnId, userId.toString(), {
-        expiration,
-        expirationTtl: SECONDS_PER_DAY,
-      })
-      .then((): void => {
-        this.emitPublicMetric(MetricName.AuthnIdCreated, {
-          endTime: this.now(),
-          startTime,
-        });
-      })
-      .catch((err: unknown): void => {
-        const endTime: number = this.now();
-
-        this.logError(mapToError(err));
-
-        this.emitPrivateMetric(MetricName.AuthnIdError, {
-          authnId,
-          endTime,
-          startTime,
-          userId,
-        });
-
-        this.emitPublicMetric(MetricName.AuthnIdError, {
-          endTime,
-          startTime,
-        });
-      })
+    this.putKVNamespace('AUTHN_USER_IDS', authnId, userId.toString(), {
+      expiration,
+      expirationTtl: SECONDS_PER_DAY,
+    })
+      .catch(noop)
       .finally((): void => {
         this.setAuthnUserIdInMemory(authnId, userId);
       }),

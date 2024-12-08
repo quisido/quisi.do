@@ -9,6 +9,7 @@ export default [
     'capitalized-comments': ['src/constants/metric-name.ts'],
     'func-style': ['src/features/authn-user-id.ts'],
     'max-classes-per-file': ['src/authn-fetch-handler.ts'],
+    'max-lines': ['src/handle-metric.ts'],
     'no-await-in-loop': ['src/utils/map-readable-stream-to-string.ts'],
     'no-console': ['src/features/get-console.ts'],
 
