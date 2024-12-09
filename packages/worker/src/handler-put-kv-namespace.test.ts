@@ -8,22 +8,20 @@ import { TestExportedHandler } from '../test/test-exported-handler.js';
 import { FetchHandler, MetricName } from './index.js';
 
 const TEST_ERROR_HANDLER = vi.fn();
-const TEST_KV_NAMESPACE_GET = vi.fn();
 const TEST_METRIC_HANDLER = vi.fn();
 
 describe('Handler', (): void => {
-  it('should support getting KV Namespace text', async (): Promise<void> => {
-    let text: string | null = null;
-    const testNamespace = new TestKVNamespace({
-      TEST_KEY: 'test value',
-    });
+  it('should support putting to KV namespaces', async (): Promise<void> => {
+    const testNamespace = new TestKVNamespace();
 
     async function testFetchHandler(this: FetchHandler): Promise<Response> {
-      text = await this.getKVNamespaceText('MY_NAMESPACE', 'TEST_KEY');
+      await this.putKVNamespace('MY_NAMESPACE', 'TEST_KEY', 'test value');
       return new Response();
     }
 
     const handler = new TestExportedHandler({
+      onMetric: TEST_METRIC_HANDLER,
+
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super(testFetchHandler);
@@ -40,17 +38,21 @@ describe('Handler', (): void => {
       TEST_EXECUTION_CONTEXT,
     );
 
-    expect(text).toBe('test value');
+    testNamespace.expectToHavePut('TEST_KEY', 'test value');
+    expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(MetricName.KVPut, {
+      endTime: EXPECT_ANY_NUMBER,
+      env: 'MY_NAMESPACE',
+      startTime: EXPECT_ANY_NUMBER,
+    });
   });
 
-  it('should handle KV Namespace get errors', async (): Promise<void> => {
+  it('should handle KV namespace put errors', async (): Promise<void> => {
     const testError = new Error('test');
-    const testNamespace = new TestKVNamespace({});
-    testNamespace.get = TEST_KV_NAMESPACE_GET;
-    TEST_KV_NAMESPACE_GET.mockRejectedValue(testError);
+    const testNamespace = new TestKVNamespace();
+    testNamespace.setPutError(testError);
 
     async function testFetchHandler(this: FetchHandler): Promise<Response> {
-      await this.getKVNamespaceText('MY_NAMESPACE', 'TEST_KEY');
+      await this.putKVNamespace('MY_NAMESPACE', 'TEST_KEY', 'test value');
       return new Response();
     }
 
@@ -74,8 +76,9 @@ describe('Handler', (): void => {
       TEST_EXECUTION_CONTEXT,
     );
 
+    testNamespace.expectToHavePut('TEST_KEY', 'test value');
     expect(TEST_ERROR_HANDLER).toHaveBeenCalledWith(testError);
-    expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(MetricName.KVGetError, {
+    expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(MetricName.KVPutError, {
       endTime: EXPECT_ANY_NUMBER,
       env: 'MY_NAMESPACE',
       startTime: EXPECT_ANY_NUMBER,

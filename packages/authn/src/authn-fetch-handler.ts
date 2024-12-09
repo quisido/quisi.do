@@ -1,6 +1,5 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { FetchHandler } from '@quisido/worker';
-import { isR2Bucket } from 'cloudflare-utils';
 import { isString } from 'fmrs';
 import { EnvironmentName } from './constants/environment-name.js';
 import { PUBLIC } from './constants/metric-dimensions.js';
@@ -50,20 +49,8 @@ export default class AuthnFetchHandler extends FetchHandler {
     return this.getCookie('__Secure-Authentication-ID');
   }
 
-  public get authnUserIdsNamespace(): KVNamespace {
-    return this.getKVNamespace('AUTHN_USER_IDS');
-  }
-
   public get cookieDomain(): string {
     return this.validateEnv('COOKIE_DOMAIN', isNonEmptyString, 'quisi.do');
-  }
-
-  public get dataBucket(): R2Bucket | null {
-    return this.validateEnv('AUTHN_DATA', isR2Bucket, null);
-  }
-
-  public get database(): D1Database {
-    return this.getD1Database('AUTHN_DB');
   }
 
   public emitPrivateMetric(
@@ -181,23 +168,20 @@ export default class AuthnFetchHandler extends FetchHandler {
     id: string,
     response: unknown,
   ): void {
-    if (this.dataBucket === null) {
-      return;
-    }
-
-    this.affect(
-      this.dataBucket.put(
-        `provider-${provider.toString()}/${id}.json`,
-        JSON.stringify(response),
-        {
-          customMetadata: {
-            timestamp: this.now().toString(),
-          },
-          httpMetadata: {
-            contentType: 'application/json',
-          },
+    const promise: Promise<void> = this.putR2Bucket(
+      'AUTHN_DATA',
+      `provider-${provider.toString()}/${id}.json`,
+      JSON.stringify(response),
+      {
+        customMetadata: {
+          timestamp: this.now().toString(),
         },
-      ),
+        httpMetadata: {
+          contentType: 'application/json',
+        },
+      },
     );
+
+    this.affect(promise);
   }
 }

@@ -288,6 +288,36 @@ export default function handleMetric(
           emitPublicMetric({ endTime, env, startTime });
           return;
         }
+
+        case WorkerMetricName.R2Put: {
+          const { endTime, env, startTime } = dimensions;
+          if (
+            typeof endTime !== 'number' ||
+            typeof env !== 'string' ||
+            typeof startTime !== 'number'
+          ) {
+            emitInvalidWorkerMetric();
+            return;
+          }
+
+          emitPublicMetric({ endTime, env, startTime });
+          return;
+        }
+
+        case WorkerMetricName.R2PutError: {
+          const { endTime, env, startTime } = dimensions;
+          if (
+            typeof endTime !== 'number' ||
+            typeof env !== 'string' ||
+            typeof startTime !== 'number'
+          ) {
+            emitInvalidWorkerMetric();
+            return;
+          }
+
+          emitPublicMetric({ endTime, env, startTime });
+          return;
+        }
       }
     }
 

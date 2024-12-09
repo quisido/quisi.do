@@ -21,7 +21,7 @@ export default class TemporaryMap<T> {
 
     // Clean up! The cache has expired. 🧼
     const { expiration, value } = state;
-    if (expiration < now()) {
+    if (expiration <= now()) {
       this.#map.delete(key);
       return;
     }

@@ -8,4 +8,6 @@ export enum MetricName {
   KVGetError = '@quisido/worker:9',
   KVPut = '@quisido/worker:7',
   KVPutError = '@quisido/worker:8',
+  R2Put = '@quisido/worker:10',
+  R2PutError = '@quisido/worker:11',
 }

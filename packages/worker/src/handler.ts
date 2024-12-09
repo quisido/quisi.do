@@ -505,14 +505,12 @@ export default class Handler<
 
   public async putKVNamespace(
     env: string,
-    key: string,
-    value: ArrayBuffer | ArrayBufferView | ReadableStream | string,
-    options?: KVNamespacePutOptions,
+    ...params: Parameters<KVNamespace['put']>
   ): Promise<void> {
     const namespace: KVNamespace = this.getKVNamespace(env);
     const startTime: number = this.now();
     try {
-      await namespace.put(key, value, options);
+      await namespace.put(...params);
       this.emitMetric(MetricName.KVPut, {
         endTime: this.now(),
         env,
@@ -522,6 +520,30 @@ export default class Handler<
       const error: Error = mapToError(err);
       this.logError(error);
       this.emitMetric(MetricName.KVPutError, {
+        endTime: this.now(),
+        env,
+        startTime,
+      });
+    }
+  }
+
+  public async putR2Bucket(
+    env: string,
+    ...params: Parameters<R2Bucket['put']>
+  ): Promise<void> {
+    const bucket: R2Bucket = this.getR2Bucket(env);
+    const startTime: number = this.now();
+    try {
+      await bucket.put(...params);
+      this.emitMetric(MetricName.R2Put, {
+        endTime: this.now(),
+        env,
+        startTime,
+      });
+    } catch (err: unknown) {
+      const error: Error = mapToError(err);
+      this.logError(error);
+      this.emitMetric(MetricName.R2PutError, {
         endTime: this.now(),
         env,
         startTime,

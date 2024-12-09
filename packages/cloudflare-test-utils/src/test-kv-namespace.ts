@@ -20,17 +20,19 @@ export default class TestKVNamespace<Key extends string = string>
   public list = unimplementedMethod;
   #record: Partial<Record<string, string>>;
 
-  public constructor(record: Partial<Record<string, string>>) {
+  public constructor(record: Partial<Record<string, string>> = {}) {
+    this.expectToHavePut = this.expectToHavePut.bind(this);
     this.#record = record;
+    this.setPutError = this.setPutError.bind(this);
   }
 
-  public expectToHavePut = (
+  public expectToHavePut(
     key: Key,
     value: string | ArrayBuffer | ArrayBufferView | ReadableStream,
     options?: KVNamespacePutOptions,
-  ): void => {
+  ): void {
     expect(this.#put).toHaveBeenCalledWith(key, value, options);
-  };
+  }
 
   public get(
     key: Key,
@@ -85,4 +87,8 @@ export default class TestKVNamespace<Key extends string = string>
   ): Promise<void> => {
     return this.#put(key, value, options);
   };
+
+  public setPutError(error: Error): void {
+    this.#put.mockRejectedValue(error);
+  }
 }

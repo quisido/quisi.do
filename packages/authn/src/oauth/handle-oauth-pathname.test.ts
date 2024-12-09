@@ -61,7 +61,44 @@ describe('handleOAuthPathname', (): void => {
     });
   });
 
-  it('should identify CSRF', async (): Promise<void> => {
+  it('should emit and respond when the session ID cookie is missing', async (): Promise<void> => {
+    const testState: string = JSON.stringify({
+      returnPath: '/',
+      sessionId: 'test-session-id-state',
+    });
+
+    // Assemble
+    const {
+      expectToHaveEmitPrivateMetric,
+      expectToHaveEmitPublicMetric,
+      fetch,
+    } = new TestAuthnExportedHandler();
+
+    // Act
+    const search: string = new URLSearchParams({ state: testState }).toString();
+    const { expectOAuthErrorResponse } = await fetch(`/patreon/?${search}`, {
+      headers: new Headers({
+        cookie: 'ab=cd; ef=gh; ij=kl',
+      }),
+    });
+
+    // Assert
+    expectOAuthErrorResponse(ErrorCode.MissingSessionIdCookie);
+
+    expectToHaveEmitPrivateMetric(MetricName.MissingSessionIdCookie, {
+      value: JSON.stringify({
+        ab: 'cd',
+        ef: 'gh',
+        ij: 'kl',
+      }),
+    });
+
+    expectToHaveEmitPublicMetric(MetricName.MissingSessionIdCookie, {
+      keys: 'ab, ef, ij',
+    });
+  });
+
+  it('should emit and respond to CSRF', async (): Promise<void> => {
     const testState: string = JSON.stringify({
       returnPath: '/',
       sessionId: 'test-session-id-state',

@@ -26,7 +26,9 @@ export default class AuthnTestResponse implements TestResponse {
       testResponse.expectStatusCodeToBe.bind(testResponse);
 
     this.expectJsonErrorResponse = (code: ErrorCode): void => {
-      expect();
+      testResponse.expectBodyToBe({
+        error: code,
+      });
     };
 
     this.expectOAuthErrorResponse = (

@@ -1,13 +1,11 @@
-import { ErrorCode } from '@quisido/authn-shared';
 import handleAnalyticsFetchRequest from '../analytics/handle-analytics-fetch-request.js';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
-import { MetricName } from '../constants/metric-name.js';
-import FatalOAuthErrorResponse from '../oauth/fatal-oauth-error-response.js';
 import handleOAuthPathname from '../oauth/handle-oauth-pathname.js';
 import isOAuthPathname from '../oauth/is-oauth-pathname.js';
 import handleStaticPathname from '../static/handle-static-pathname.js';
 import isStaticPathname from '../static/is-static-pathname.js';
 import handleWhoAmIFetchRequest from '../whoami/handle-whoami-fetch-request.js';
+import handleNotFound from './handle-not-found.js';
 
 export default async function handleFetchRequest(
   this: AuthnFetchHandler,
@@ -33,12 +31,5 @@ export default async function handleFetchRequest(
   }
 
   // Unknown
-  this.emitPublicMetric(MetricName.NotFound, {
-    pathname: this.requestPathname,
-  });
-
-  return new FatalOAuthErrorResponse({
-    code: ErrorCode.NotFound,
-    host: this.host,
-  });
+  return handleNotFound.call(this);
 }
