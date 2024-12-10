@@ -1,4 +1,4 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
 

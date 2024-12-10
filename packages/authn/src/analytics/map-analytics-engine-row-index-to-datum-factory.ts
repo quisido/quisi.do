@@ -22,12 +22,7 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
 
   switch (index) {
     case MetricName.AuthenticationCreated:
-    case MetricName.AuthnIdCreated:
-    case MetricName.AuthnIdError:
     case MetricName.CSRF:
-    case MetricName.EmailInsertError:
-    case MetricName.EmailInserted:
-    case MetricName.ErrorCode:
     case MetricName.ExpiredAuthnId:
     case MetricName.ForbiddenPatreonIdentityResponse:
     case MetricName.InvalidAnalyticsId:
@@ -39,7 +34,6 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
     case MetricName.InvalidAuthnId:
     case MetricName.InvalidAuthnUserIdsNamespace:
     case MetricName.InvalidDatabase:
-    case MetricName.InvalidEnvironmentVariable:
     case MetricName.InvalidOAuthUserId:
     case MetricName.InvalidPatreonAccessToken:
     case MetricName.InvalidPatreonClientId:
@@ -61,18 +55,11 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
     case MetricName.InvalidPatreonOAuthToken:
     case MetricName.InvalidReturnPath:
     case MetricName.InvalidStateSessionId:
-    case MetricName.InvalidTraceParent:
     case MetricName.InvalidUsageDataset:
     case MetricName.InvalidWorkerMetric:
     case MetricName.MissingAuthnUserIdsNamespace:
-    case MetricName.MissingCookieDomain:
-    case MetricName.MissingDataBucket:
-    case MetricName.MissingDatabase:
-    case MetricName.MissingEnvironmentName:
-    case MetricName.MissingHost:
     case MetricName.MissingIP:
     case MetricName.MissingInvalidPatreonTokenRequestDescription:
-    case MetricName.MissingIsolateEnvironment:
     case MetricName.MissingPatreonAccessToken:
     case MetricName.MissingPatreonIdentityAttributes:
     case MetricName.MissingPatreonIdentityData:
@@ -83,8 +70,6 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
     case MetricName.MissingPatreonRequestCode:
     case MetricName.MissingPatreonTokenErrorResponseBody:
     case MetricName.MissingPatreonTokenErrorResponseCode:
-    case MetricName.MissingPrivateDataset:
-    case MetricName.MissingPublicDataset:
     case MetricName.MissingReturnPath:
     case MetricName.MissingSessionIdCookie:
     case MetricName.MissingStateSearchParam:
@@ -94,10 +79,7 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
     case MetricName.NonObjectState:
     case MetricName.NotFound:
     case MetricName.OAuthInsertError:
-    case MetricName.OAuthInserted:
     case MetricName.OAuthThrottled:
-    case MetricName.OAuthUserIdSelected:
-    case MetricName.SetAuthnUserId:
     case MetricName.UnknownError:
     case MetricName.UnknownPatreonIdentityError:
     case MetricName.UnknownPatreonTokenErrorResponseCode:
@@ -108,7 +90,6 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
     case MetricName.CachedAuthnId:
     case MetricName.FaviconIco:
     case MetricName.MissingAuthnId:
-    case MetricName.MissingTraceParent:
     case MetricName.PatreonRequest:
     case MetricName.RobotsTxt:
     case MetricName.RootPathname:

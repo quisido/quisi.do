@@ -1,25 +1,10 @@
 export enum MetricName {
-  ErrorCode = 'error.code',
-  InvalidTraceParent = 'trace-parent.invalid',
-  MissingCookieDomain = 'cookie-domain.missing',
-  MissingDataBucket = 'bucket.data.missing',
-  MissingEnvironmentName = 'environment-name.missing',
-  MissingHost = 'host.missing',
   MissingIP = 'ip.missing',
-  MissingIsolateEnvironment = 'isolate-environment.missing',
-  MissingPrivateDataset = 'dataset.private.missing',
-  MissingPublicDataset = 'dataset.public.missing',
-  MissingTraceParent = 'trace-parent.missing',
-  SetAuthnUserId = 'namespace.authn-user-ids.set',
-
-  // FetchHandler
-  InvalidEnvironmentVariable = 'env.invalid',
 
   // OAuth
   AuthenticationCreated = 'authentication.created',
   AuthenticationRead = 'authentication.read',
   CSRF = 'csrf',
-  EmailInsertError = 'query.emails.insert.error',
   InvalidReturnPath = 'search.state.return-path.invalid',
   InvalidStateSessionId = 'search.state.session-id.invalid',
   MissingReturnPath = 'search.state.return-path.missing',
@@ -87,7 +72,6 @@ export enum MetricName {
   InvalidUsageDataset = 'dataset.usage.invalid',
   InvalidWorkerMetric = 'worker.metric.invalid',
   MissingAuthnUserIdsNamespace = 'namespace.authn-user-ids.missing',
-  MissingDatabase = 'database.missing',
   MissingSessionIdCookie = 'cookie.session-id.missing',
   MissingUsageDataset = 'dataset.usage.missing',
   NotFound = 'pathname.invalid',
