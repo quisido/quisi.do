@@ -15,6 +15,10 @@ export default function mapToString(value: unknown): string {
     return value.message;
   }
 
+  if (Array.isArray(value)) {
+    return JSON.stringify(value);
+  }
+
   if (isStringifiable(value)) {
     try {
       const str: unknown = value.toString();

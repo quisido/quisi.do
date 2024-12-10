@@ -7,7 +7,7 @@ describe('isUndefined', (): void => {
       undefined,
     ]);
 
-    expect(isUndefined('str')).toBe(true);
-    expect(isUndefined(undefined)).toBe(false);
+    expect(isUndefined('str')).toBe(false);
+    expect(isUndefined(undefined)).toBe(true);
   });
 });

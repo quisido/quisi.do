@@ -9,7 +9,8 @@ describe('isStringRecord', (): void => {
     expect(isStringRecord(true)).toBe(false);
     expect(isStringRecord(TEST_NUMBER)).toBe(false);
     expect(isStringRecord('str')).toBe(false);
-    expect(isStringRecord([])).toBe(false);
+    expect(isStringRecord([TEST_NUMBER])).toBe(false);
+    expect(isStringRecord(Promise.resolve())).toBe(false);
   });
 
   it('should return false for non-string records', (): void => {

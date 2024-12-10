@@ -7,7 +7,8 @@ describe('handleStaticPathname', (): void => {
   describe('root', (): void => {
     it('should emit and respond', async (): Promise<void> => {
       // Assemble
-      const { expectToHaveEmitPublicMetric, fetch } = new TestAuthnExportedHandler();
+      const { expectToHaveEmitPublicMetric, fetch } =
+        new TestAuthnExportedHandler();
 
       // Act
       const { expectHeadersToBe, expectStatusCodeToBe } = await fetch('/');
@@ -24,7 +25,8 @@ describe('handleStaticPathname', (): void => {
   describe('favicon.ico', (): void => {
     it('should emit and respond', async (): Promise<void> => {
       // Assemble
-      const { expectToHaveEmitPublicMetric, fetch } = new TestAuthnExportedHandler();
+      const { expectToHaveEmitPublicMetric, fetch } =
+        new TestAuthnExportedHandler();
 
       // Act
       const { expectHeadersToBe, expectStatusCodeToBe } =
@@ -46,7 +48,8 @@ describe('handleStaticPathname', (): void => {
   describe('robots.txt', (): void => {
     it('should emit and respond', async (): Promise<void> => {
       // Assemble
-      const { expectToHaveEmitPublicMetric, fetch } = new TestAuthnExportedHandler();
+      const { expectToHaveEmitPublicMetric, fetch } =
+        new TestAuthnExportedHandler();
 
       // Act
       const { expectHeadersToBe, expectStatusCodeToBe } =

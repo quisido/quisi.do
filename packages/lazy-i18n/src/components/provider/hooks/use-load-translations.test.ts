@@ -145,7 +145,7 @@ describe('useLoadTranslations', (): void => {
       initialProps: {
         onLoad: MOCK_LOAD_HANDLER,
         translationsRecord: {
-          [ES_ES]: async (): Promise<Record<string, string>> =>
+          [ES_ES]: (): Promise<Record<string, string>> =>
             Promise.resolve({
               Spanish: 'Espanol',
             }),

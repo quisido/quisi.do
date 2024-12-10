@@ -4,7 +4,7 @@ import isStringTuple from '../is/is-string-tuple.js';
 export default function isStringRecord(
   value: unknown,
 ): value is Record<string, string> {
-  if (!isRecord(value)) {
+  if (!isRecord(value) || value instanceof Promise) {
     return false;
   }
 

@@ -11,5 +11,6 @@ export default function hasKeys<
       return false;
     }
   }
+
   return true;
 }

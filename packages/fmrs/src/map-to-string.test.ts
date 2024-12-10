@@ -19,4 +19,14 @@ describe('mapToString', (): void => {
     expect(mapToString({})).toBe('{}');
     expect(mapToString([])).toBe('[]');
   });
+
+  it('should support stringifiables', (): void => {
+    expect(
+      mapToString({
+        toString(): string {
+          return 'hello';
+        },
+      }),
+    ).toBe('hello');
+  });
 });

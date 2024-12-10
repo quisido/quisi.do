@@ -29,7 +29,9 @@ export default async function handleFetchRequest(
   // Project pathnames
   const projectId: number = mapPathnameToProjectId(this.requestPathname);
   if (Number.isNaN(projectId)) {
-    this.logError(new Error('Invalid pathname', { cause: this.requestPathname }));
+    this.logError(
+      new Error('Invalid pathname', { cause: this.requestPathname }),
+    );
     return new InvalidPathnameResponse();
   }
 

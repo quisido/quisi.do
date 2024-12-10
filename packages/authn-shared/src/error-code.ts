@@ -54,7 +54,7 @@ export enum ErrorCode {
   InvalidIsolateEnvironment = 6,
   InvalidOAuthUserId = 48,
   InvalidUsageDataset = 50,
-  InvalidUnknownEnv = 57,
+  InvalidUnknownEnv = 22,
   MissingAnalyticsId = 55,
   MissingAnalyticsSecret = 56,
   MissingAuthnUserIdsNamespace = 49,
