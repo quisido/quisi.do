@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
 
-export default function expectTextToBe(
+export default function expectStringifiedToBe(
   actual: string,
   expected: Record<string, boolean | number | string> | string,
 ): void {

@@ -9,11 +9,11 @@
       "path": "packages/next",
     },
     {
-      "name": "Authentication",
+      "name": "Authentication (authn)",
       "path": "packages/authn",
     },
     {
-      "name": "Content Security Policy reporting endpoint",
+      "name": "Content Security Policy reporting endpoint (csp)",
       "path": "packages/csp",
     },
     {
@@ -91,6 +91,10 @@
     {
       "name": "worker",
       "path": "packages/worker",
+    },
+    {
+      "name": "worker-test",
+      "path": "packages/worker-test",
     },
   ],
 

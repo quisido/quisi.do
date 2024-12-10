@@ -6,6 +6,7 @@ export enum MetricName {
   InvalidPublicDataset = 'dataset.public.invalid',
   InvalidTraceParent = 'traceparent.invalid',
   InvalidUsageDataset = 'dataset.usage.invalid',
+  InvalidWorkerMetric = 'quisido.worker.metric.invalid',
   MethodNotAllowed = 'http.4xx.method.not-allowed',
   MissingGetKey = 'key.get.missing',
   MissingPrivateDataset = 'dataset.private.missing',

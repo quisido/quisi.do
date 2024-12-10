@@ -1,5 +1,5 @@
 import { expect } from 'vitest';
-import expectTextToBe from './expect-text-to-be.js';
+import expectStringifiedToBe from './expect-stringified-to-be.js';
 import mapHeadersToRecord from './map-headers-to-record.js';
 
 export default class TestResponse {
@@ -18,7 +18,7 @@ export default class TestResponse {
   ) => void;
 
   private constructor(response: Response, text: string) {
-    this.expectBodyToBe = expectTextToBe.bind(null, text);
+    this.expectBodyToBe = expectStringifiedToBe.bind(null, text);
 
     this.expectHeaderToBe = (header: string, expected: string): void => {
       const actual: string | null = response.headers.get(header);

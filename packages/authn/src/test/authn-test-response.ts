@@ -1,7 +1,7 @@
 import type { ErrorCode } from '@quisido/authn-shared';
+import { TestResponse } from '@quisido/worker-test';
 import { expectStringMatching } from 'cloudflare-test-utils';
 import { StatusCode } from 'cloudflare-utils';
-import TestResponse from './test-response.js';
 
 export default class AuthnTestResponse implements TestResponse {
   public readonly expectBodyToBe: TestResponse['expectBodyToBe'];

@@ -9,25 +9,25 @@ export default class CspFetchHandler extends FetchHandler {
     super(handleFetchRequest);
   }
 
-  public emitPrivateMetric = (
+  public emitPrivateMetric(
     name: MetricName,
     dimensions?: Record<number | string | symbol, boolean | number | string>,
-  ): void => {
+  ): void {
     this.emitMetric(name, {
       ...dimensions,
       [Symbol('Public')]: false,
     });
-  };
+  }
 
-  public emitPublicMetric = (
+  public emitPublicMetric(
     name: MetricName,
     dimensions?: Record<number | string | symbol, boolean | number | string>,
-  ): void => {
+  ): void {
     this.emitMetric(name, {
       ...dimensions,
       [Symbol('Public')]: true,
     });
-  };
+  }
 
   public async queries<N extends number>(
     name: string,

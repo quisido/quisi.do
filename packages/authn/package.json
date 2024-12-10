@@ -54,6 +54,7 @@
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "workspace:^",
     "@quisido/vitest-config": "workspace:^",
+    "@quisido/worker-test": "workspace:^",
     "@types/cookie": "^0.6.0",
     "@types/eslint": "^9.6.1",
     "@vitest/coverage-istanbul": "^2.1.3",

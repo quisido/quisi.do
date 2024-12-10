@@ -1,3 +1,4 @@
+/// <reference types="@cloudflare/workers-types" />
 import {
   ExportedHandler,
   type FetchHandler as IFetchHandler,
