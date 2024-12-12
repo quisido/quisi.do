@@ -29,7 +29,6 @@
     "moduleResolution": "NodeNext",
     "noEmit": true,
     "rootDir": "src",
-    "skipLibCheck": false,
     "sourceMap": true,
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/next/src/",
     "target": "ES5"
