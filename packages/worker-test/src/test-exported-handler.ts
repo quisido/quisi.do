@@ -14,15 +14,17 @@ import TestResponse from './test-response.js';
 
 interface Options {
   readonly FetchHandler: new () => IFetchHandler;
-  readonly env: Readonly<Record<string, unknown>>;
+  readonly env?: Readonly<Record<string, unknown>> | undefined;
   readonly now?: (() => number) | undefined;
-  readonly onError: (error: Error) => void;
-  readonly onLog: (message: string) => void;
+  readonly onError?: ((error: Error) => void) | undefined;
+  readonly onLog?: ((message: string) => void) | undefined;
 
-  readonly onMetric: (
-    name: string,
-    dimensions: Record<string, boolean | number | string>,
-  ) => void;
+  readonly onMetric?:
+    | ((
+        name: string,
+        dimensions: Record<string, boolean | number | string>,
+      ) => void)
+    | undefined;
 }
 
 const SINGLE = 1;
@@ -39,15 +41,13 @@ export default class TestExportedHandler {
 
   public constructor({
     FetchHandler,
-    env,
+    env = {},
     now = this.getNow.bind(this),
-    onError,
-    onLog,
-    onMetric,
+    onError = noop,
+    onLog = noop,
+    onMetric = noop,
   }: Options) {
     this.#env = env;
-    this.expectConsoleError = this.expectConsoleError.bind(this);
-    this.expectConsoleLog = this.expectConsoleLog.bind(this);
     this.expectMetric = this.expectMetric.bind(this);
     this.fetch = this.fetch.bind(this);
     this.getNow = this.getNow.bind(this);
@@ -75,14 +75,6 @@ export default class TestExportedHandler {
         log: this.#consoleLog,
       },
     });
-  }
-
-  public expectConsoleError(...messages: readonly unknown[]): void {
-    expect(this.#consoleError).toHaveBeenCalledWith(...messages);
-  }
-
-  public expectConsoleLog(...messages: readonly unknown[]): void {
-    expect(this.#consoleLog).toHaveBeenCalledWith(...messages);
   }
 
   public expectMetric(

@@ -46,6 +46,7 @@
   "dependencies": {
     "@cloudflare/workers-types": "^4.20241018.0",
     "@quisido/worker": "workspace:^",
+    "cloudflare-test-utils": "workspace:^",
     "cloudflare-utils": "workspace:^",
     "fmrs": "workspace:^"
   },
