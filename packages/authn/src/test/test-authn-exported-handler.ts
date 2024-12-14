@@ -1,4 +1,5 @@
 import { mapMetricDimensionsToDataPoint } from '@quisido/worker';
+import { TestExportedHandler, TestResponse } from '@quisido/worker-test';
 import {
   EXPECT_ANY_HEADERS,
   EXPECT_ANY_STRING,
@@ -19,9 +20,7 @@ import handleMetric from '../handle-metric.js';
 import AuthnTestResponse from './authn-test-response.js';
 import mapStringToIp from './map-string-to-ip.js';
 import { PATREON_IDENTITY_URL } from './patreon-identity-url.js';
-import TestExportedHandler from './test-exported-handler.js';
 import { TEST_PATREON_URL } from './test-patreon-url.js';
-import type TestResponse from './test-response.js';
 
 interface Options {
   readonly authnUserIds?: Readonly<Partial<Record<string, string>>>;
