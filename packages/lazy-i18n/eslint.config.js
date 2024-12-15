@@ -1,4 +1,4 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
@@ -18,37 +18,27 @@ export default [
     },
   },
 
-  {
-    files: [
+  ...disableRulesForFiles({
+    'no-useless-return': ['src/runnables/runnable-translate-function.ts'],
+
+    '@typescript-eslint/no-unnecessary-type-assertion': [
+      'src/components/provider/provider.hook.test.ts',
+    ],
+
+    'max-lines-per-function': [
       'src/components/provider/hooks/use-load-translations.ts',
       'src/components/provider/provider.hook.ts',
       'src/runnables/runnable-translate-function.ts',
     ],
 
-    rules: {
-      'max-lines-per-function': 'off',
-      'max-statements': 'off',
-    },
-  },
+    'max-statements': [
+      'src/components/provider/hooks/use-load-translations.ts',
+      'src/components/provider/provider.hook.ts',
+      'src/runnables/runnable-translate-function.ts',
+    ],
 
-  {
-    files: ['src/components/provider/provider.hook.test.ts'],
-    rules: {
-      '@typescript-eslint/no-unnecessary-type-assertion': 'off',
-    },
-  },
-
-  {
-    files: ['src/components/provider/provider.hook.ts'],
-    rules: {
-      'react-compiler/react-compiler': 'off',
-    },
-  },
-
-  {
-    files: ['src/runnables/runnable-translate-function.ts'],
-    rules: {
-      'no-useless-return': 'off',
-    },
-  },
+    'react-compiler/react-compiler': [
+      'src/components/provider/provider.hook.ts',
+    ],
+  }),
 ];

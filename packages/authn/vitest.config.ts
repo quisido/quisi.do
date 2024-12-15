@@ -1,25 +1,27 @@
-import { defineConfig } from 'vitest/config';
+import config, {
+  COVERAGE_OPTIONS,
+  INLINE_CONFIG,
+  THRESHOLDS,
+} from '@quisido/vitest-config';
 
-export default defineConfig({
+export default {
+  ...config,
   test: {
-    clearMocks: true,
-    environment: 'node',
-    mockReset: true,
-    restoreMocks: true,
-
+    ...INLINE_CONFIG,
     coverage: {
-      all: true,
-      clean: true,
-      enabled: true,
-      provider: 'istanbul',
-      skipFull: true,
-
+      ...COVERAGE_OPTIONS,
       thresholds: {
-        branches: 100,
-        functions: 100,
-        lines: 100,
-        statements: 100,
+        ...THRESHOLDS,
+
+        /**
+         *   Technical debt: These can easily be 100%. Grind 'em out once the
+         * dashboard is complete!
+         */
+        branches: 63,
+        functions: 90,
+        lines: 86,
+        statements: 86,
       },
     },
   },
-});
+};

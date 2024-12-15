@@ -1,9 +1,9 @@
 import { StatusCode } from 'cloudflare-utils';
-import Response from './response.js';
+import CspResponse from './csp-response.js';
 
-export default class MethodNotAllowedResponse extends Response {
-  public constructor() {
-    super(StatusCode.MethodNotAllowed, {
+export default class MethodNotAllowedResponse extends CspResponse {
+  public constructor(method: string) {
+    super(StatusCode.MethodNotAllowed, `Method "${method}" not allowed.`, {
       'access-control-max-age': '31536000',
     });
   }

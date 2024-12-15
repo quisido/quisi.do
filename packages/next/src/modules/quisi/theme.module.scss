@@ -43,7 +43,7 @@ $min-width: 320px;
 .theme {
   border-bottom-width: 0;
   border-top-width: 0;
-  padding-bottom: 1rem;
+  padding-bottom: calc(1rem + 1px);
   width: 100%;
 
   @media (max-width: 6in) {

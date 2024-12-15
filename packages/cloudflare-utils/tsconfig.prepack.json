@@ -7,6 +7,6 @@
     "noEmit": false,
     "outDir": "dist",
     "rootDir": "src",
-    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/cloudflare-utils/src/"
+    "sourceRoot": "../src/"
   }
 }

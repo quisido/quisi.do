@@ -1,11 +1,10 @@
 import type TreeLogger from '@monorepo-template/tree-logger';
+import { isString } from 'fmrs';
 import { readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import GitHubWorkflowTest from '../../suites/github-workflow/index.js';
 import type PackageJson from '../../types/package-json.js';
 import type Test from '../../types/test.js';
-import filterByArray from '../../utils/filter-by-array.js';
-import filterByString from '../../utils/filter-by-string.js';
 import mapPathToPackageJson from '../../utils/map-path-to-package-json.js';
 import mapYamlFilePathToName from '../../utils/map-yaml-file-path-to-name.js';
 import MISSING_PACKAGE_WORKSPACES_PROPERTY_ERROR from './constants/missing-package-workspaces-property-error.js';
@@ -63,7 +62,7 @@ export default class GitHubWorkflowsTest implements Test {
       throw MISSING_PACKAGE_WORKSPACES_PROPERTY_ERROR;
     }
 
-    if (!filterByArray(workspaces) || !workspaces.every(filterByString)) {
+    if (!Array.isArray(workspaces) || !workspaces.every(isString)) {
       throw PACKAGE_WORKSPACES_TYPE_ERROR;
     }
 

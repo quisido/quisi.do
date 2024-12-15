@@ -9,11 +9,11 @@
       "path": "packages/next",
     },
     {
-      "name": "Authentication",
+      "name": "Authentication (authn)",
       "path": "packages/authn",
     },
     {
-      "name": "Content Security Policy reporting endpoint",
+      "name": "Content Security Policy reporting endpoint (csp)",
       "path": "packages/csp",
     },
     {
@@ -23,6 +23,10 @@
     {
       "name": "aws-rum-react",
       "path": "packages/aws-rum-react",
+    },
+    {
+      "name": "cloudflare-test-utils",
+      "path": "packages/cloudflare-test-utils",
     },
     {
       "name": "cloudflare-utils",
@@ -61,10 +65,6 @@
       "path": "packages/number-format-react",
     },
     {
-      "name": "proposal-async-context",
-      "path": "packages/proposal-async-context",
-    },
-    {
       "name": "react-datadog",
       "path": "packages/react-datadog",
     },
@@ -81,10 +81,6 @@
       "path": "packages/tree-logger",
     },
     {
-      "name": "unknown2string",
-      "path": "packages/unknown2string",
-    },
-    {
       "name": "use-shallow-memo",
       "path": "packages/use-shallow-memo",
     },
@@ -96,6 +92,10 @@
       "name": "worker",
       "path": "packages/worker",
     },
+    {
+      "name": "worker-test",
+      "path": "packages/worker-test",
+    },
   ],
 
   "settings": {
@@ -103,5 +103,9 @@
     "eslint.useFlatConfig": true,
     "typescript.enablePromptUseWorkspaceTsdk": true,
     "typescript.tsdk": ".yarn/sdks/typescript/lib",
+
+    "files.associations": {
+      "**/config/api-extractor.json": "jsonc",
+    },
   },
 }

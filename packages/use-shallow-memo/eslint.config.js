@@ -1,4 +1,4 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
@@ -18,11 +18,8 @@ export default [
     },
   },
 
-  {
-    files: ['src/hooks/use-shallow-memo.ts'],
-    rules: {
-      // Expected the dependency list for useMemo to be an array literal
-      'react-compiler/react-compiler': 'off',
-    },
-  },
+  ...disableRulesForFiles({
+    // Expected the dependency list for useMemo to be an array literal
+    'react-compiler/react-compiler': ['src/hooks/use-shallow-memo.ts'],
+  }),
 ];

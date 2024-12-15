@@ -13,6 +13,9 @@
   "editor.rulers": [
     80
   ],
+  "files.associations": {
+    "**/config/api-extractor.json": "jsonc"
+  },
   "files.exclude": {
     ".wrangler/": true,
     ".yarn/__virtual__/": true,

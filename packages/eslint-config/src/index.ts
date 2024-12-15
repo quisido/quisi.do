@@ -5,6 +5,8 @@ import JS from './js.js';
 import TEST_TS from './test-ts.js';
 import TS from './ts.js';
 
+export { default as disableRulesForFiles } from './disable-rules-for-files.js';
+
 export default [
   JS,
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import mapMetricDimensionsToDataPoint from './map-metric-dimensions-to-datapoint.js';
+import { mapMetricDimensionsToDataPoint } from './index.js';
 
 describe('mapMetricDimensionsToDataPoint', (): void => {
   it('should handle undefined values', (): void => {

@@ -1,6 +1,0 @@
-/.vscode/
-/dist/tests/
-/.attw.json
-/.gitignore
-/.npmignore
-/webpack.config.cjs

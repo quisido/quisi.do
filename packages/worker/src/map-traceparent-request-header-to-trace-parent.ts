@@ -10,5 +10,9 @@ export default function mapTraceparentRequestHeaderToTraceParent(
     return null;
   }
 
-  return parseTraceParent(traceparent);
+  try {
+    return parseTraceParent(traceparent);
+  } catch (_err: unknown) {
+    return null;
+  }
 }

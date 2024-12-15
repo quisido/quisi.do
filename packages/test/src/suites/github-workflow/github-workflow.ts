@@ -1,10 +1,7 @@
 import type TreeLogger from '@monorepo-template/tree-logger';
+import { isRecord, isString, isUndefined } from 'fmrs';
 import type PackageJson from '../../types/package-json.js';
 import type Test from '../../types/test.js';
-import filterByArray from '../../utils/filter-by-array.js';
-import filterByRecord from '../../utils/filter-by-record.js';
-import filterByString from '../../utils/filter-by-string.js';
-import filterByUndefined from '../../utils/filter-by-undefined.js';
 import filterEntryByRecordValue from '../../utils/filter-entry-by-record-value.js';
 import mapPathToPackageJson from '../../utils/map-path-to-package-json.js';
 import mapYamlPathToJson from '../../utils/map-yaml-path-to-json.js';
@@ -43,7 +40,7 @@ export default class GitHubWorkflowTest implements Test {
       return noop;
     }
 
-    if (!filterByRecord(on)) {
+    if (!isRecord(on)) {
       return function failGitHubWorkflow(this: Readonly<TreeLogger>): void {
         this.addError(EXPECTED_ON_TYPE_ERROR);
       };
@@ -82,7 +79,7 @@ export default class GitHubWorkflowTest implements Test {
       return noop;
     }
 
-    if (!filterByArray(paths) || !paths.every(filterByString)) {
+    if (!Array.isArray(paths) || !paths.every(isString)) {
       return mapGitHubWorkflowEventNameToPathsTypeFail(event);
     }
 
@@ -109,7 +106,7 @@ export default class GitHubWorkflowTest implements Test {
         const workspacePath: string | undefined = mapPathToWorkspace(path);
 
         // Skip. Not a workspace.
-        if (filterByUndefined(workspacePath)) {
+        if (isUndefined(workspacePath)) {
           continue;
         }
 

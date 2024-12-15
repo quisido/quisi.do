@@ -1,14 +1,12 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 
 /** @type {readonly import('eslint').Linter.Config[]} */
 export default [
   ...configs,
 
-  {
-    files: ['src/status-code.ts'],
-
-    rules: {
-      'no-magic-numbers': 'off',
-    },
-  },
+  ...disableRulesForFiles({
+    camelcase: ['src/is-analytics-engine-response.test.ts'],
+    'no-magic-numbers': ['src/status-code.ts', 'src/usage-type.ts'],
+    'no-underscore-dangle': ['src/is-analytics-engine-row.ts'],
+  }),
 ];

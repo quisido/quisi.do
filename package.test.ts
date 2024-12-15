@@ -53,10 +53,9 @@ describe('package.json', (): void => {
           new Set(publicPackageNames.filter(isScoped).map(mapToScope)),
         ).sort();
 
-        const unscopedPackageNames: readonly string[] = [
-          ...publicPackageNames.filter(isUnscoped),
-          'proposal-async-context',
-        ].sort();
+        const unscopedPackageNames: readonly string[] = publicPackageNames
+          .filter(isUnscoped)
+          .sort();
 
         expect(up).toMatch(
           [

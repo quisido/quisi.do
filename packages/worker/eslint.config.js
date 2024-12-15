@@ -1,75 +1,30 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 
 /** @type {readonly import('eslint').Linter.Config[]} */
 export default [
   ...configs,
 
-  {
-    files: [
-      'src/account-number.ts',
+  ...disableRulesForFiles({
+    camelcase: ['test/test-d1-prepared-statement.ts'],
+    'func-style': ['src/*.test.ts'],
+    'max-classes-per-file': ['src/*.test.ts'],
+    'max-lines': ['src/fetch-handler.test.ts', 'src/handler.ts'],
+    'max-lines-per-function': ['src/exported-handler.ts', 'src/handler.ts'],
+    'max-params': ['src/handler.ts'],
+    'no-await-in-loop': ['src/map-readable-stream-to-string.ts'],
+    'no-console': ['scripts/dev.ts'],
+
+    'max-statements': [
+      'src/exported-handler.ts',
+      'src/exported-handler.test.ts',
+      'src/fetch-handler.test.ts',
+      'src/handler.ts',
+    ],
+
+    'no-magic-numbers': [
+      'src/fetch-handler-trace-parent.test.ts',
+      'src/metric.ts',
       'src/modules/trace-parent/constants/trace-flag.ts',
-      'src/product.ts',
-      'src/usage-type.ts',
     ],
-
-    rules: {
-      'no-magic-numbers': 'off',
-    },
-  },
-
-  {
-    files: ['src/create-worker-exported-handler.ts'],
-    rules: {
-      '@typescript-eslint/no-this-alias': 'off',
-      'consistent-this': 'off',
-    },
-  },
-
-  {
-    files: ['src/features/handle-fetch-request.ts'],
-    rules: {
-      'max-statements': 'off',
-    },
-  },
-
-  {
-    files: ['src/fetch-context.test.ts'],
-    rules: {
-      '@typescript-eslint/only-throw-error': 'off',
-      'no-new': 'off',
-    },
-  },
-
-  {
-    files: ['src/map-readable-stream-to-string.ts'],
-    rules: {
-      'no-await-in-loop': 'off',
-    },
-  },
-
-  {
-    files: ['src/snapshot.ts'],
-    rules: {
-      'max-params': 'off',
-    },
-  },
-
-  {
-    files: [
-      'src/test/expect-private-metric.ts',
-      'src/test/expect-public-metric.ts',
-    ],
-
-    rules: {
-      'max-statements': 'off',
-    },
-  },
-
-  {
-    files: ['src/worker.ts'],
-    rules: {
-      'max-params': 'off',
-      'no-use-before-define': 'off',
-    },
-  },
+  }),
 ];

@@ -1,20 +1,16 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 
 /** @type {readonly import('eslint').Linter.Config[]} */
 export default [
   ...configs,
 
-  {
-    files: ['src/error-code.ts'],
-    rules: {
-      'capitalized-comments': 'off',
-    },
-  },
+  ...disableRulesForFiles({
+    'capitalized-comments': ['src/error-code.ts'],
 
-  {
-    files: ['src/error-code.ts', 'src/whoami-response-code.ts'],
-    rules: {
-      'no-magic-numbers': 'off',
-    },
-  },
+    'no-magic-numbers': [
+      'src/analytics-response-code.ts',
+      'src/error-code.ts',
+      'src/whoami-response-code.ts',
+    ],
+  }),
 ];

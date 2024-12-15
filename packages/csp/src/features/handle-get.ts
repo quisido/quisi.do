@@ -1,14 +1,8 @@
 import { GetErrorCode } from '@quisido/csp-shared';
 import { StatusCode } from 'cloudflare-utils';
-import { HEADERS_INIT } from '../constants/headers-init.js';
 import { MetricName } from '../constants/metric-name.js';
-import {
-  emitPublicMetric,
-  getD1Database,
-  getRequestSearchParam,
-  logPrivateError,
-} from '../constants/worker.js';
-import query from '../utils/query.js';
+import type CspFetchHandler from '../csp-fetch-handler.js';
+import CspResponse from '../utils/csp-response.js';
 
 const MILLISECONDS_PER_MONTH = 2629746000;
 
@@ -37,100 +31,59 @@ WHERE \`projectId\` = ?
 AND \`timestamp\` > ?;
 `;
 
-export default async function handleGet(projectId: number): Promise<Response> {
+export default async function handleGet(
+  this: CspFetchHandler,
+  projectId: number,
+): Promise<Response> {
   // Key
-  const key: string | null = getRequestSearchParam('key');
+  const key: string | null = this.getRequestSearchParam('key');
   if (key === null) {
-    emitPublicMetric({
-      name: MetricName.MissingGetKey,
-    });
+    this.emitPublicMetric(MetricName.MissingGetKey);
 
-    return new Response(
-      JSON.stringify({
-        code: GetErrorCode.MissingKey,
-      }),
-      {
-        headers: new Headers(HEADERS_INIT),
-        status: StatusCode.BadRequest,
-      },
-    );
+    return new CspResponse(StatusCode.BadRequest, {
+      code: GetErrorCode.MissingKey,
+    });
   }
 
-  const db: D1Database = getD1Database('CSP_DB');
-  const [keysRow] = await query(
-    db,
-    SELECT_USER_ID_FROM_KEYS_QUERY,
+  const {
+    results: [keysRow],
+  } = await this.getD1Results('CSP_DB', SELECT_USER_ID_FROM_KEYS_QUERY, [
     key,
     projectId,
-  );
+  ]);
 
   // Not found
   if (typeof keysRow === 'undefined') {
-    emitPublicMetric({
-      name: MetricName.InvalidGetKey,
+    this.emitPublicMetric(MetricName.InvalidGetKey);
+    return new CspResponse(StatusCode.NotFound, {
+      code: GetErrorCode.InvalidKey,
     });
-
-    // Use({
-    //   Account: AccountNumber.Quisido,
-    //   Project: DEFAULT_PROJECT_ID,
-    //   Type: UsageType.D1Read,
-    // });
-
-    return new Response(
-      JSON.stringify({
-        code: GetErrorCode.InvalidKey,
-      }),
-      {
-        headers: new Headers(HEADERS_INIT),
-        status: StatusCode.NotFound,
-      },
-    );
   }
 
   // Bad gateway
   const { userId } = keysRow;
   if (typeof userId !== 'number') {
-    emitPublicMetric({
-      name: MetricName.InvalidDatabaseProjectRow,
+    this.emitPublicMetric(MetricName.InvalidDatabaseProjectsRow, {
+      projectId,
     });
 
-    logPrivateError(
-      new Error(`Invalid database project row: ${projectId.toString()}`),
+    const projectIdStr: string = projectId.toString();
+    this.logError(
+      new Error(
+        `The database row for project ID "${projectIdStr}" is invalid.`,
+      ),
     );
 
-    // Use({
-    //   Account: AccountNumber.Quisido,
-    //   Project: DEFAULT_PROJECT_ID,
-    //   Type: UsageType.D1Read,
-    // });
-
-    return new Response(
-      JSON.stringify({
-        code: GetErrorCode.InvalidDatabaseProjectRow,
-      }),
-      {
-        headers: new Headers(HEADERS_INIT),
-        status: StatusCode.BadGateway,
-      },
-    );
+    return new CspResponse(StatusCode.BadGateway, {
+      code: GetErrorCode.InvalidDatabaseProjectRow,
+    });
   }
 
-  const reports: readonly Record<string, unknown>[] = await query(
-    db,
+  const { results: reports } = await this.getD1Results(
+    'CSP_DB',
     SELECT_REPORTS_QUERY,
-    projectId,
-    Date.now() - MILLISECONDS_PER_MONTH,
+    [projectId, Date.now() - MILLISECONDS_PER_MONTH],
   );
 
-  // Use({
-  //   Account: userId,
-  //   Count: ONCE + reports.length,
-  //   Project: projectId,
-  //   Type: UsageType.D1Read,
-  // });
-
-  return new Response(JSON.stringify(reports), {
-    headers: new Headers(HEADERS_INIT),
-    status: StatusCode.OK,
-  });
+  return new CspResponse(StatusCode.OK, reports);
 }

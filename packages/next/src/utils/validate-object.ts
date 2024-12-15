@@ -1,6 +1,6 @@
+import { isRecord } from 'fmrs';
 import EMPTY_ARRAY from '../constants/empty-array.js';
 import assert from './assert.js';
-import isRecord from './is-record.js';
 import mapObjectToKeys from './map-object-to-keys.js';
 
 type Validator<T> = {

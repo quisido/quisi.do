@@ -8,6 +8,6 @@
     "noEmit": false,
     "outDir": "dist",
     "rootDir": "src",
-    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/react-datadog/src/"
+    "sourceRoot": "../src/"
   }
 }

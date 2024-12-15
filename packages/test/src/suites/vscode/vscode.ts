@@ -1,10 +1,10 @@
 import type TreeLogger from '@monorepo-template/tree-logger';
+import { mapToError } from 'fmrs';
 import assert from 'node:assert';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type Test from '../../types/test.js';
 import type VSCodeSettings from '../../types/vscode-settings.js';
-import mapUnknownToError from '../../utils/map-unknown-to-error.js';
 import noop from '../../utils/noop.js';
 import DEFAULT_REQUIRED_SEARCH_EXCLUDE_KEYS from './constants/default-required-search-exclude-keys.js';
 import MISSING_SETTINGS_JSON_FILE from './constants/missing-settings-json.js';
@@ -48,7 +48,7 @@ export default class VSCodeTest implements Test {
       try {
         this.scope('search.exclude', getSearchExcludeTest());
       } catch (err) {
-        this.addError(mapUnknownToError(err));
+        this.addError(mapToError(err));
       }
     };
   }

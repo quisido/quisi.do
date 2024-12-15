@@ -8,6 +8,6 @@
     "noEmit": false,
     "outDir": "dist",
     "rootDir": "src",
-    "sourceRoot": "src"
+    "sourceRoot": "../src/"
   }
 }

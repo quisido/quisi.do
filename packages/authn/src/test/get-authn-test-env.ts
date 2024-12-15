@@ -1,5 +1,5 @@
+import { TestAnalyticsEngineDataset } from 'cloudflare-test-utils';
 import { EnvironmentName } from '../constants/environment-name.js';
-import TestAnalyticsEngineDataset from './analytics-engine-dataset.js';
 
 export default function getAuthnTestEnv(
   options: Partial<Record<string, unknown>>,

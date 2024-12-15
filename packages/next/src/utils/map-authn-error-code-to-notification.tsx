@@ -378,15 +378,6 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.MissingPatreonOAuthRedirectUri:
-      return {
-        Message: UnknownError,
-
-        Header(): ReactElement {
-          return <I18n>Missing redirect URI</I18n>;
-        },
-      };
-
     case ErrorCode.MissingPatreonRequestCode:
       return {
         Header(): ReactElement {
@@ -398,8 +389,8 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.MissingPatreonAccessTokenErrorBody:
-    case ErrorCode.MissingPatreonAccessTokenErrorCode:
+    case ErrorCode.MissingPatreonTokenErrorResponseBody:
+    case ErrorCode.MissingPatreonTokenErrorResponseCode:
       return {
         Header: UnknownError,
 
@@ -483,8 +474,8 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.InvalidPatreonAccessTokenError:
-    case ErrorCode.InvalidPatreonAccessTokenErrorBody:
+    case ErrorCode.InvalidPatreonTokenErrorResponse:
+    case ErrorCode.InvalidPatreonTokenErrorResponseBody:
       return {
         Header(): ReactElement {
           return <I18n>Invalid response</I18n>;
@@ -502,7 +493,7 @@ export default function mapAuthnErrorCodeToNotification(
         },
       };
 
-    case ErrorCode.NonJsonPatreonAccessTokenResponse:
+    case ErrorCode.NonJsonPatreonTokenResponse:
     case ErrorCode.NonObjectPatreonAccessTokenResponse:
       return {
         Header(): ReactElement {

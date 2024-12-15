@@ -1,12 +1,12 @@
 'use client';
 
 import { WhoAmIResponseCode } from '@quisido/authn-shared';
+import { isObject } from 'fmrs';
 import { useEffect, type PropsWithChildren, type ReactElement } from 'react';
 import { WHOAMI } from '../constants/whoami.js';
 import { AuthenticationProvider } from '../contexts/authentication.js';
 import useAsyncState from '../modules/use-async-state/index.js';
 import type AuthenticationType from '../types/authentication.js';
-import isObject from '../utils/is-object.js';
 
 const isUnauthenticatedResponseCode = (code: unknown): boolean =>
   code === WhoAmIResponseCode.InvalidAuthnId ||

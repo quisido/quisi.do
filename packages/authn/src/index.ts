@@ -1,7 +1,14 @@
-/// <reference types="@cloudflare/workers-types" />
-import { WORKER } from './constants/worker.js';
+import { ExportedHandler } from '@quisido/worker';
+import AuthnFetchHandler from './authn-fetch-handler.js';
+import handleError from './handle-error.js';
+import handleLog from './handle-log.js';
+import handleMetric from './handle-metric.js';
 
-export default WORKER.createExportedHandler({
+export default new ExportedHandler({
+  FetchHandler: AuthnFetchHandler,
   console,
   fetch,
-}) satisfies ExportedHandler;
+  onError: handleError,
+  onLog: handleLog,
+  onMetric: handleMetric,
+});

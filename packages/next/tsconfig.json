@@ -17,7 +17,6 @@
     "resolveJsonModule": true,
     "rootDir": ".",
     "sourceRoot": ".",
-    "skipLibCheck": false,
     "strict": true,
     "types": ["node"],
 

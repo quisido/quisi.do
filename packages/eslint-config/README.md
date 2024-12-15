@@ -41,3 +41,20 @@ import TS from '@quisido/eslint-config/ts';
 
 export default [JS, CJS, TS, D_TS, TEST_TS];
 ```
+
+To quickly disable rules for specific files, use the `disableRulesForFiles`
+utility method.
+
+```js
+import configs, { disableRulesForFiles  } from '@quisido/eslint-config';
+
+export default [
+  ...configs,
+  ...disableRulesForFiles({
+    'max-lines': ['eslint.config.js', 'src/index.ts'],
+    'max-lines-per-function': ['src/index.ts'],
+    'no-await-in-loop': ['src/utils/map-readable-stream-to-string.ts'],
+    'no-magic-numbers': ['src/constants/*.ts'],
+  }),
+];
+```

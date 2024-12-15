@@ -37,7 +37,7 @@
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "yarn run tsc",
-    "prepublish": "concurrently --kill-others-on-fail --names attw,eslint,publint --prefix-colors auto \"yarn run attw\" \"yarn run eslint\" \"yarn run publint\"",
+    "prepublish": "concurrently --names attw,eslint,publint --prefix-colors auto \"yarn run attw\" \"yarn run eslint\" \"yarn run publint\"",
     "publint": "publint",
     "tsc": "tsc --project tsconfig.prepack.json",
     "vitest": "vitest",
@@ -48,6 +48,7 @@
     "@monorepo-template/tree-logger": "workspace:^",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.7.7",
+    "fmrs": "workspace:^",
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {

@@ -1,10 +1,11 @@
-import filterByRecord from './filter-by-record.js';
+import { isRecord } from 'fmrs';
 
 export default function validateRecord(
   value: unknown,
 ): Record<string, unknown> {
-  if (!filterByRecord(value)) {
+  if (!isRecord(value)) {
     throw new Error(`Expected value to be a record, but got ${typeof value}.`);
   }
+
   return value;
 }

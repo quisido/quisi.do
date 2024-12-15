@@ -19,3 +19,6 @@ VALUES (1, "demo-get", 2);
 
 INSERT INTO `keys` (`projectId`, `key`, `permission`)
 VALUES (1, "demo-delete", 3);
+
+INSERT INTO `keys` (`projectId`, `key`, `permission`)
+VALUES (1, "demo-analytics", 4);

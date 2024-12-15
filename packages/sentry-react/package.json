@@ -1,6 +1,6 @@
 {
   "name": "sentry-react",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "author": "quisi.do <sentry-react@quisi.do>",
   "description": "A React component for instantiating Sentry",
   "homepage": "https://www.npmjs.com/package/sentry-react",
@@ -40,7 +40,7 @@
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "yarn run tsc",
-    "prepublish": "concurrently --kill-others-on-fail --names eslint,publint,vitest --prefix-colors auto \"yarn run eslint\" \"yarn run publint\" \"yarn run vitest:run\"",
+    "prepublish": "concurrently --names eslint,publint,vitest --prefix-colors auto \"yarn run eslint\" \"yarn run publint\" \"yarn run vitest:run\"",
     "publint": "publint",
     "tsc": "tsc --project tsconfig.prepack.json",
     "vitest": "vitest",
@@ -51,7 +51,7 @@
     "@sentry/browser": "^8.34.0",
     "@sentry/react": "^8.34.0",
     "@sentry/types": "^8.34.0",
-    "unknown2string": "workspace:^",
+    "fmrs": "workspace:^",
     "use-shallow-memo": "workspace:^"
   },
   "devDependencies": {

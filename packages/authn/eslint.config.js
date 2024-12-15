@@ -1,11 +1,27 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 
 /** @type {readonly import('eslint').Linter.Config[]} */
 export default [
   ...configs,
 
-  {
-    files: [
+  ...disableRulesForFiles({
+    '@typescript-eslint/no-dynamic-delete': ['src/handle-metric.ts'],
+    '@typescript-eslint/unbound-method': ['src/test/test-exported-handler.ts'],
+    'capitalized-comments': ['src/constants/metric-name.ts'],
+    'func-style': ['src/features/authn-user-id.ts'],
+    'max-classes-per-file': ['src/authn-fetch-handler.ts'],
+    'max-lines': ['src/handle-metric.ts'],
+    'no-await-in-loop': ['src/utils/map-readable-stream-to-string.ts'],
+    'no-console': ['src/features/get-console.ts'],
+
+    complexity: [
+      'src/analytics/map-analytics-engine-row-index-to-datum-factory.ts',
+      'src/handle-metric.ts',
+      'src/utils/is-console.ts',
+    ],
+
+    'no-magic-numbers': [
+      'src/analytics/is-zero.ts',
       'src/constants/gender.ts',
       'src/constants/oauth-provider.ts',
       'src/constants/patreon-gender.ts',
@@ -15,29 +31,22 @@ export default [
       'src/modules/trace-parent/types/trace-id-length.ts',
     ],
 
-    rules: {
-      'no-magic-numbers': 'off',
-    },
-  },
+    'no-undefined': [
+      'src/routes/patreon/handle-invalid-invalid-patreon-access-token-request-description.ts',
+      'src/routes/patreon/handle-invalid-patreon-access-token-request-description.ts',
+      'src/routes/patreon/handle-missing-invalid-patreon-access-token-request-description.ts',
+    ],
+  }),
 
   {
-    files: ['src/constants/metric-name.ts'],
     rules: {
-      'capitalized-comments': 'off',
-    },
-  },
+      camelcase: 'off',
+      'max-lines-per-function': 'off',
+      'max-statements': 'off',
+      'no-undefined': 'off',
 
-  {
-    files: ['src/features/authn-user-id.ts'],
-    rules: {
-      'func-style': 'off',
-    },
-  },
-
-  {
-    files: ['src/features/get-console.ts'],
-    rules: {
-      'no-console': 'off',
+      // Consider passing parameters as a single object instead.
+      'max-params': 'off',
     },
   },
 
@@ -45,68 +54,6 @@ export default [
     files: ['src/features/authn-state.ts', 'src/features/handle-fetch.ts'],
     rules: {
       'max-params': ['error', { max: 5 }],
-    },
-  },
-
-  {
-    files: [
-      'src/routes/patreon/get-patreon-token-response.ts',
-      'src/routes/patreon/handle-invalid-patreon-access-token-request-description.ts',
-    ],
-
-    rules: {
-      camelcase: 'off',
-    },
-  },
-
-  {
-    files: [
-      'src/routes/patreon/handle-invalid-invalid-patreon-access-token-request-description.ts',
-      'src/routes/patreon/handle-invalid-patreon-access-token-request-description.ts',
-      'src/routes/patreon/handle-missing-invalid-patreon-access-token-request-description.ts',
-    ],
-
-    rules: {
-      'no-undefined': 'off',
-    },
-  },
-
-  {
-    files: ['src/test/authn-test.ts'],
-    rules: {
-      'max-lines-per-function': 'off',
-    },
-  },
-
-  {
-    files: ['src/test/fetch.ts'],
-    rules: {
-      'max-lines-per-function': 'off',
-    },
-  },
-
-  {
-    files: ['src/utils/is-console.ts'],
-    rules: {
-      complexity: 'off',
-    },
-  },
-
-  {
-    files: ['src/utils/map-readable-stream-to-string.ts'],
-    rules: {
-      'no-await-in-loop': 'off',
-    },
-  },
-
-  {
-    rules: {
-      camelcase: 'off',
-      'max-statements': 'off',
-      'no-undefined': 'off',
-
-      // Consider passing parameters as a single object instead.
-      'max-params': 'off',
     },
   },
 ];

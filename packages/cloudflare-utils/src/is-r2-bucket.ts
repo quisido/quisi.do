@@ -1,7 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 
+import { isRecord } from 'fmrs';
 import hasMethods from './has-methods.js';
-import isRecord from './is-record.js';
 
 const REQUIRED_METHODS: readonly (keyof R2Bucket)[] = [
   'createMultipartUpload',

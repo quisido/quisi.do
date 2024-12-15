@@ -1,4 +1,4 @@
-import isRecord from './is-record.js';
+import { isObject } from 'fmrs';
 
 interface SentryError {
   readonly detail: string;
@@ -6,6 +6,6 @@ interface SentryError {
 
 export default function isSentryError(value: unknown): value is SentryError {
   return (
-    isRecord(value) && 'detail' in value && typeof value.detail === 'string'
+    isObject(value) && 'detail' in value && typeof value.detail === 'string'
   );
 }
