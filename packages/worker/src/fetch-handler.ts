@@ -63,6 +63,7 @@ export default class FetchHandler<
 
     this.getCookie = this.getCookie.bind(this);
     this.getRequestSearchParam = this.getRequestSearchParam.bind(this);
+    this.getRequestText = this.getRequestText.bind(this);
   }
 
   public get cookies(): Partial<Record<string, string>> {
@@ -84,6 +85,10 @@ export default class FetchHandler<
 
   public getRequestSearchParam(key: string): string | null {
     return this.requestSearchParams.get(key);
+  }
+
+  public async getRequestText(): Promise<string> {
+    return await this.request.text();
   }
 
   public get origin(): string | null {

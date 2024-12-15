@@ -1,38 +1,49 @@
 /// <reference types="@cloudflare/workers-types" />
-import handleStaticPathname from '../constants/handle-static-pathname.js';
 import { MetricName } from '../constants/metric-name.js';
 import type CspFetchHandler from '../csp-fetch-handler.js';
-import InvalidPathnameResponse from '../utils/invalid-pathname-response.js';
 import isAllowedMethod from '../utils/is-allowed-method.js';
 import isStaticPathname from '../utils/is-static-pathname.js';
 import mapPathnameToProjectId from '../utils/map-pathname-to-project-id.js';
 import MethodNotAllowedResponse from '../utils/method-not-allowed-response.js';
-import Response from '../utils/response.js';
+import NotFoundResponse from '../utils/not-found-response.js';
 import handleGet from './handle-get.js';
 import handleOptions from './handle-options.js';
 import handlePost from './handle-post.js';
+import handleStaticPathname from './handle-static-pathname.js';
 
 export default async function handleFetchRequest(
   this: CspFetchHandler,
 ): Promise<Response> {
   // Method
   if (!isAllowedMethod(this.requestMethod)) {
-    this.emitPublicMetric(MetricName.MethodNotAllowed);
-    return new MethodNotAllowedResponse();
+    this.emitPublicMetric(MetricName.MethodNotAllowed, {
+      method: this.requestMethod,
+    });
+
+    return new MethodNotAllowedResponse(this.requestMethod);
   }
 
   // Static responses
   if (isStaticPathname(this.requestPathname)) {
-    return handleStaticPathname(this.requestPathname);
+    return handleStaticPathname.call(this, this.requestPathname);
   }
 
   // Project pathnames
   const projectId: number = mapPathnameToProjectId(this.requestPathname);
   if (Number.isNaN(projectId)) {
-    this.logError(
-      new Error('Invalid pathname', { cause: this.requestPathname }),
+    const error = new Error(
+      `The pathname "${this.requestPathname}" does not exist.`,
+      {
+        cause: this.requestPathname,
+      },
     );
-    return new InvalidPathnameResponse();
+
+    this.logError(error);
+    this.emitPublicMetric(MetricName.InvalidPathname, {
+      pathname: this.requestPathname,
+    });
+
+    return new NotFoundResponse(this.requestPathname);
   }
 
   switch (this.requestMethod) {

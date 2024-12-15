@@ -1,8 +1,8 @@
 import { GetErrorCode } from '@quisido/csp-shared';
 import { StatusCode } from 'cloudflare-utils';
-import { HEADERS_INIT } from '../constants/headers-init.js';
 import { MetricName } from '../constants/metric-name.js';
 import type CspFetchHandler from '../csp-fetch-handler.js';
+import CspResponse from '../utils/csp-response.js';
 
 const MILLISECONDS_PER_MONTH = 2629746000;
 
@@ -40,15 +40,9 @@ export default async function handleGet(
   if (key === null) {
     this.emitPublicMetric(MetricName.MissingGetKey);
 
-    return new Response(
-      JSON.stringify({
-        code: GetErrorCode.MissingKey,
-      }),
-      {
-        headers: new Headers(HEADERS_INIT),
-        status: StatusCode.BadRequest,
-      },
-    );
+    return new CspResponse(StatusCode.BadRequest, {
+      code: GetErrorCode.MissingKey,
+    });
   }
 
   const {
@@ -61,34 +55,28 @@ export default async function handleGet(
   // Not found
   if (typeof keysRow === 'undefined') {
     this.emitPublicMetric(MetricName.InvalidGetKey);
-    return new Response(
-      JSON.stringify({
-        code: GetErrorCode.InvalidKey,
-      }),
-      {
-        headers: new Headers(HEADERS_INIT),
-        status: StatusCode.NotFound,
-      },
-    );
+    return new CspResponse(StatusCode.NotFound, {
+      code: GetErrorCode.InvalidKey,
+    });
   }
 
   // Bad gateway
   const { userId } = keysRow;
   if (typeof userId !== 'number') {
-    this.emitPublicMetric(MetricName.InvalidDatabaseProjectRow);
+    this.emitPublicMetric(MetricName.InvalidDatabaseProjectsRow, {
+      projectId,
+    });
+
+    const projectIdStr: string = projectId.toString();
     this.logError(
-      new Error(`Invalid database project row: ${projectId.toString()}`),
+      new Error(
+        `The database row for project ID "${projectIdStr}" is invalid.`,
+      ),
     );
 
-    return new Response(
-      JSON.stringify({
-        code: GetErrorCode.InvalidDatabaseProjectRow,
-      }),
-      {
-        headers: new Headers(HEADERS_INIT),
-        status: StatusCode.BadGateway,
-      },
-    );
+    return new CspResponse(StatusCode.BadGateway, {
+      code: GetErrorCode.InvalidDatabaseProjectRow,
+    });
   }
 
   const { results: reports } = await this.getD1Results(
@@ -97,8 +85,5 @@ export default async function handleGet(
     [projectId, Date.now() - MILLISECONDS_PER_MONTH],
   );
 
-  return new Response(JSON.stringify(reports), {
-    headers: new Headers(HEADERS_INIT),
-    status: StatusCode.OK,
-  });
+  return new CspResponse(StatusCode.OK, reports);
 }

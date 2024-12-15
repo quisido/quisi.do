@@ -1,5 +1,6 @@
 import { StatusCode } from 'cloudflare-utils';
-import { mapToError } from 'fmrs';
+import { mapToError, mapToString } from 'fmrs';
+import { MetricName } from '../constants/metric-name.js';
 import { Permission } from '../constants/permission.js';
 import {
   SELECT_PERMISSION_FROM_KEYS,
@@ -8,11 +9,32 @@ import {
 import type CspFetchHandler from '../csp-fetch-handler.js';
 import type { ReportBodyArray } from '../types/report-body-array.js';
 import type ReportBody from '../types/report-body.js';
+import CspResponse from '../utils/csp-response.js';
 import mapReportBodyToArray from '../utils/map-report-body-to-array.js';
 import parseReport from '../utils/parse-report.js';
-import Response from '../utils/response.js';
 
-const SELECT = 'SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?';
+const INSERT_INTO = `
+INSERT INTO \`reports\` (
+  \`projectId\`,
+  \`timestamp\`,
+  \`documentURL\`,
+  \`referrer\`,
+  \`blockedURL\`,
+  \`effectiveDirective\`,
+  \`originalPolicy\`,
+  \`sourceFile\`,
+  \`sample\`,
+  \`disposition\`,
+  \`statusCode\`,
+  \`lineNumber\`,
+  \`columnNumber\`
+)
+`;
+
+const createSelects = (count: number): string =>
+  new Array(count)
+    .fill('SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?')
+    .join(' UNION ALL ');
 
 export default async function handlePost(
   this: CspFetchHandler,
@@ -21,8 +43,8 @@ export default async function handlePost(
   // Key
   const key: string | null = this.getRequestSearchParam('key');
   if (key === null) {
-    this.console.log('Missing key');
-    return new Response(StatusCode.BadRequest);
+    this.emitPublicMetric(MetricName.MissingPostKey);
+    return new CspResponse(StatusCode.BadRequest);
   }
 
   // Queries
@@ -33,91 +55,86 @@ export default async function handlePost(
 
   // Project not found
   if (typeof projectRow === 'undefined') {
-    this.console.log('Missing project');
-    return new Response(StatusCode.NotFound);
+    const projectIdStr: string = projectId.toString();
+    this.emitPublicMetric(MetricName.PostInvalidProjectId);
+    return new CspResponse(
+      StatusCode.NotFound,
+      `Project "${projectIdStr}" does not exist.`,
+    );
   }
 
   // Bad gateway
   const { userId } = projectRow;
   if (typeof userId !== 'number') {
-    this.console.log('Invalid database project row');
-    return new Response(StatusCode.BadGateway);
+    this.emitPrivateMetric(MetricName.InvalidDatabaseProjectsRow, {
+      row: JSON.stringify(projectRow),
+    });
+
+    this.emitPublicMetric(MetricName.InvalidDatabaseProjectsRow, {
+      keys: Object.keys(projectRow).join(', '),
+    });
+
+    return new CspResponse(StatusCode.BadGateway);
   }
 
   // Key not found
   if (typeof keyRow === 'undefined') {
-    this.console.log('Missing key');
-    return new Response(StatusCode.Forbidden);
+    this.emitPublicMetric(MetricName.InvalidPostKey);
+    return new CspResponse(StatusCode.Forbidden, 'The POST key is invalid.');
   }
 
   // Bad permission
   const { permission } = keyRow;
   if (permission !== Permission.Post) {
     if (typeof permission !== 'number') {
-      this.console.log('Invalid database key row');
-      return new Response(StatusCode.BadGateway);
+      this.emitPrivateMetric(MetricName.InvalidDatabaseKeysRow, {
+        row: JSON.stringify(keyRow),
+      });
+
+      this.emitPublicMetric(MetricName.InvalidDatabaseKeysRow, {
+        keys: Object.keys(keyRow).join(', '),
+      });
+
+      return new CspResponse(StatusCode.BadGateway);
     }
-    this.console.log('Wrong permission');
-    return new Response(StatusCode.Forbidden);
+
+    this.emitPrivateMetric(MetricName.InvalidPermission, {
+      actual: permission,
+      expected: Permission.Post,
+    });
+
+    return new CspResponse(
+      StatusCode.Forbidden,
+      'This key is not authorized to post.',
+    );
   }
 
   const mapReportBodyToInsertValues = (
     body: ReportBody,
-  ): [number, number, ...ReportBodyArray] => [
+  ): readonly [number, number, ...ReportBodyArray] => [
     projectId,
     Date.now(),
     ...mapReportBodyToArray(body),
   ];
 
   try {
-    const reports: readonly ReportBody[] = parseReport(
-      await this.request.text(),
-    );
-
-    // There has to be a more accurate way to predict the row size.
-    // Const rowSize: number = reports
-    //   .flatMap(mapReportBodyToValues)
-    //   .join('').length;
-    // Use({
-    //   Account: userId,
-    //   Count: rowSize,
-    //   /**
-    //    *   So as not to double-charge, maybe this should be until end-of-day or
-    //    * End-of-month and let cron take over from there?
-    //    */
-    //   Per: SECONDS_PER_MONTH,
-    //   Project: projectId,
-    //   Type: UsageType.D1Store,
-    // });
-
+    const text: string = await this.getRequestText();
+    const reports: readonly ReportBody[] = parseReport(text);
+    const selects: string = createSelects(reports.length);
+    const values = reports.flatMap(mapReportBodyToInsertValues);
     this.affect(
-      this.getD1Response(
-        'CSP_DB',
-        `
-        INSERT INTO \`reports\` (
-          \`projectId\`,
-          \`timestamp\`,
-          \`documentURL\`,
-          \`referrer\`,
-          \`blockedURL\`,
-          \`effectiveDirective\`,
-          \`originalPolicy\`,
-          \`sourceFile\`,
-          \`sample\`,
-          \`disposition\`,
-          \`statusCode\`,
-          \`lineNumber\`,
-          \`columnNumber\`
-        )
-        ${new Array(reports.length).fill(SELECT).join(' UNION ALL ')}
-        `,
-        reports.flatMap(mapReportBodyToInsertValues),
-      ),
+      this.getD1Response('CSP_DB', `${INSERT_INTO} ${selects}`, values),
     );
 
-    return new Response(StatusCode.OK);
+    return new CspResponse(StatusCode.OK);
   } catch (err: unknown) {
-    this.logError(mapToError(err));
-    return new Response(StatusCode.BadRequest);
+    const error: Error = mapToError(err);
+    this.emitPublicMetric(MetricName.UnknownError);
+    this.logError(error);
+    this.emitPrivateMetric(MetricName.UnknownError, {
+      message: mapToString(err),
+    });
+
+    return new CspResponse(StatusCode.BadRequest);
   }
 }

@@ -1,40 +1,38 @@
+import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
 import { MetricName } from '../constants/metric-name.js';
 import TestCspExportedHandler from '../test/test-csp-exported-handler.js';
 
-describe('handleNotFound', (): void => {
-  it('should emit and respond', async (): Promise<void> => {
+describe('handleFetchRequest', (): void => {
+  it('should handle unallowed methods', async (): Promise<void> => {
     // Assemble
     const { expectToHaveEmitPublicMetric, fetch } =
       new TestCspExportedHandler();
 
     // Act
-    const { expectOAuthErrorResponse } = await fetch('/test-not-found/?a=b');
+    const { expectStatusCodeToBe } = await fetch('/', {
+      method: 'TEST',
+    });
 
     // Assert
-    expectOAuthErrorResponse(ErrorCode.NotFound);
-    expectToHaveEmitPublicMetric(MetricName.NotFound, {
-      pathname: '/test-not-found/',
+    expectStatusCodeToBe(StatusCode.MethodNotAllowed);
+    expectToHaveEmitPublicMetric(MetricName.MethodNotAllowed, {
+      method: 'TEST',
     });
   });
 
-  it('should not emit a metric in development', async (): Promise<void> => {
+  it('should handle invalid pathnames', async (): Promise<void> => {
     // Assemble
-    const { expectNotToHaveEmitPublicMetric, fetch } =
-      new TestCspExportedHandler({
-        env: {
-          ENVIRONMENT_NAME: EnvironmentName.Development,
-        },
-      });
+    const { expectToHaveEmitPublicMetric, fetch } =
+      new TestCspExportedHandler();
 
     // Act
-    await fetch('/whoami/', {
-      headers: new Headers({
-        cookie: '__Secure-Authentication-ID=abcdef',
-      }),
-    });
+    const { expectStatusCodeToBe } = await fetch('//');
 
     // Assert
-    expectNotToHaveEmitPublicMetric(MetricName.MissingIP);
+    expectStatusCodeToBe(StatusCode.NotFound);
+    expectToHaveEmitPublicMetric(MetricName.InvalidPathname, {
+      pathname: '//',
+    });
   });
 });

@@ -1,9 +1,9 @@
 import { StatusCode } from 'cloudflare-utils';
-import Response from './response.js';
+import CspResponse from './csp-response.js';
 
-export default class MissingOriginResponse extends Response {
+export default class MissingOriginResponse extends CspResponse {
   public constructor() {
-    super(StatusCode.BadRequest, {
+    super(StatusCode.BadRequest, null, {
       'access-control-allow-origin': 'null',
       'access-control-max-age': '31536000',
     });

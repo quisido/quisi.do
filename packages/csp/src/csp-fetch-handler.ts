@@ -1,4 +1,5 @@
 import { FetchHandler } from '@quisido/worker';
+import { PUBLIC } from './constants/metric-dimensions.js';
 import type { MetricName } from './constants/metric-name.js';
 import handleFetchRequest from './features/handle-fetch-request.js';
 import type { Tuple } from './types/type.js';
@@ -15,7 +16,7 @@ export default class CspFetchHandler extends FetchHandler {
   ): void {
     this.emitMetric(name, {
       ...dimensions,
-      [Symbol('Public')]: false,
+      [PUBLIC]: false,
     });
   }
 
@@ -25,7 +26,7 @@ export default class CspFetchHandler extends FetchHandler {
   ): void {
     this.emitMetric(name, {
       ...dimensions,
-      [Symbol('Public')]: true,
+      [PUBLIC]: true,
     });
   }
 

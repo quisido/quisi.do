@@ -1,18 +1,10 @@
 import { StatusCode } from 'cloudflare-utils';
+import { MetricName } from '../constants/metric-name.js';
 import { SELECT_ORIGINS_USER_ID_FROM_PROJECTS } from '../constants/queries.js';
 import type CspFetchHandler from '../csp-fetch-handler.js';
+import CspResponse from '../utils/csp-response.js';
 import InvalidOriginResponse from '../utils/invalid-origin-response.js';
 import MissingOriginResponse from '../utils/missing-origin-response.js';
-import Response from '../utils/response.js';
-
-class OkResponse extends Response {
-  public constructor(origin: string) {
-    super(StatusCode.OK, {
-      'access-control-allow-origin': origin,
-      'access-control-max-age': '31536000',
-    });
-  }
-}
 
 export default async function handleOptions(
   this: CspFetchHandler,
@@ -20,38 +12,58 @@ export default async function handleOptions(
 ): Promise<Response> {
   // Origin
   if (this.origin === null) {
-    this.console.log('Missing origin');
+    this.emitPublicMetric(MetricName.MissingOrigin);
     return new MissingOriginResponse();
   }
 
   // Query
   const {
-    results: [result],
+    results: [firstResult],
   } = await this.getD1Results('CSP_DB', SELECT_ORIGINS_USER_ID_FROM_PROJECTS, [
     projectId,
   ]);
 
   // Not found
-  if (typeof result === 'undefined') {
-    this.console.log('Missing project');
-    return new Response(StatusCode.NotFound);
+  if (typeof firstResult === 'undefined') {
+    const projectIdStr: string = projectId.toString();
+    this.emitPublicMetric(MetricName.InvalidOptionsProjectId, {
+      projectId,
+    });
+
+    return new CspResponse(
+      StatusCode.NotFound,
+      `Project "${projectIdStr}" does not exist.`,
+    );
   }
 
   // Bad gateway
-  const { origins, userId } = result;
+  const { origins, userId } = firstResult;
   if (typeof origins !== 'string' || typeof userId !== 'number') {
-    this.console.log('Invalid database table row');
-    return new Response(StatusCode.BadGateway);
+    this.emitPrivateMetric(MetricName.InvalidDatabaseProjectsRow, {
+      row: JSON.stringify(firstResult),
+    });
+
+    this.emitPublicMetric(MetricName.InvalidDatabaseProjectsRow, {
+      keys: Object.keys(firstResult).join(', '),
+    });
+
+    return new CspResponse(StatusCode.BadGateway);
   }
 
   // Allow origin
   const originsArr: readonly string[] = origins.split(' ');
   const originsSet: Set<string> = new Set<string>(originsArr);
   if (!originsSet.has(this.origin)) {
-    this.console.log('Invalid origin');
-    return new InvalidOriginResponse();
+    this.emitPublicMetric(MetricName.InvalidOrigin);
+    this.emitPrivateMetric(MetricName.InvalidOrigin, {
+      origin: this.origin,
+    });
+
+    return new InvalidOriginResponse(this.origin);
   }
 
-  this.console.log('Options', this.origin);
-  return new OkResponse(this.origin);
+  return new CspResponse(StatusCode.OK, null, {
+    'access-control-allow-origin': this.origin,
+    'access-control-max-age': '31536000',
+  });
 }
