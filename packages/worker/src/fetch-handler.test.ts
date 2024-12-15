@@ -181,6 +181,33 @@ describe('FetchHandler', (): void => {
     expect(searchParam).toBe('value');
   });
 
+  it('should vend the request text', async (): Promise<void> => {
+    let value: unknown = null;
+
+    const handler = new TestExportedHandler({
+      FetchHandler: class TestFetchHandler extends FetchHandler {
+        public constructor() {
+          super(async function handle(this: FetchHandler): Promise<Response> {
+            value = await this.getRequestText();
+            return new Response();
+          });
+        }
+      },
+    });
+
+    assert(typeof handler.fetch !== 'undefined');
+    await handler.fetch(
+      new Request('https://localhost/', {
+        body: 'test body',
+        method: 'POST',
+      }),
+      {},
+      TEST_EXECUTION_CONTEXT,
+    );
+
+    expect(value).toBe('test body');
+  });
+
   it('should vend origin', async (): Promise<void> => {
     let originValue: unknown = null;
 

@@ -8,7 +8,7 @@ export default [
     camelcase: ['test/test-d1-prepared-statement.ts'],
     'func-style': ['src/*.test.ts'],
     'max-classes-per-file': ['src/*.test.ts'],
-    'max-lines': ['src/handler.ts'],
+    'max-lines': ['src/fetch-handler.test.ts', 'src/handler.ts'],
     'max-lines-per-function': ['src/exported-handler.ts', 'src/handler.ts'],
     'max-params': ['src/handler.ts'],
     'no-await-in-loop': ['src/map-readable-stream-to-string.ts'],
