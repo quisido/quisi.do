@@ -3,7 +3,7 @@
   vertical-align: bottom;
 
   // Un-invert.
-  // @media (prefers-color-scheme: dark) {
-  //   filter: invert(95%);
-  // }
+  @media (prefers-color-scheme: dark) {
+    filter: invert(95%);
+  }
 }

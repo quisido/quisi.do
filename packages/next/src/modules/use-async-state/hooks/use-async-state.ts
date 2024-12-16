@@ -18,6 +18,10 @@ interface BaseState<T> {
   readonly set: (data: T) => void;
 }
 
+interface Props {
+  readonly onError?: ((error: unknown) => void) | undefined;
+}
+
 export type State<T> = AsyncState<T> & BaseState<T>;
 
 const DEFAULT_ASYNC_STATE = {
@@ -27,7 +31,9 @@ const DEFAULT_ASYNC_STATE = {
   loading: false,
 } satisfies AsyncState<unknown>;
 
-export default function useAsyncState<T = unknown>(): State<T> {
+export default function useAsyncState<T = unknown>({
+  onError,
+}: Props = {}): State<T> {
   // States
   const asyncEffectRef: MutableRefObject<Promise<void> | undefined> =
     useRef(undefined);
@@ -69,6 +75,7 @@ export default function useAsyncState<T = unknown>(): State<T> {
         return;
       }
 
+      onError?.(err);
       const errorStr: string = mapToString(err);
       setAsyncState({
         data: undefined,

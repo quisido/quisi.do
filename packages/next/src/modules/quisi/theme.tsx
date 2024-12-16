@@ -30,7 +30,7 @@ function useBackgroundImage(): string {
 
     const gradient: string = [
       'transparent',
-      `rgba(${invertedRgb.join(', ')}, 0.1) 1px`,
+      `rgba(${invertedRgb.join(', ')}, 0.05) 1px`,
       'transparent 1px',
       'transparent 1rem',
     ].join(', ');

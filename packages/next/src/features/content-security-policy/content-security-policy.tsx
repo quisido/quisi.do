@@ -2,6 +2,9 @@
 
 import { GetErrorCode } from '@quisido/csp-shared';
 import { useEffect, useState, type Attributes, type ReactElement } from 'react';
+import Emoji from '../../components/emoji.jsx';
+import useEmit from '../../hooks/use-emit/index.js';
+import Link from '../../modules/quisi/link.jsx';
 import LoadingIcon from "../../modules/quisi/loading-icon.jsx";
 import Section from "../../modules/quisi/section.jsx";
 import useAsyncState from "../../modules/use-async-state/index.js";
@@ -22,6 +25,7 @@ interface ErrorResponse {
 type CspResponse = ErrorResponse | readonly ReportBody[];
 
 const LIST_CLASS_NAME: string = validateString(styles['list']);
+const NONE = 0;
 const ORIGIN: string = validateString(process.env['CSP_ORIGIN']);
 const REQUEST_INFO = `${ORIGIN}/1/?key=demo-get`;
 
@@ -32,6 +36,9 @@ const mapContentSecurityPolicyListItemPropsToElement =
   mapPropsToElement(ContentSecurityPolicyListItem);
 
 export default function ContentSecurityPolicy(): ReactElement {
+  // Contexts
+  const emit = useEmit();
+
   // States
   const [expandedKey, setExpandedKey] = useState<string | null>(null);
   const {
@@ -40,7 +47,13 @@ export default function ContentSecurityPolicy(): ReactElement {
     initiated,
     loading,
     request,
-  } = useAsyncState<CspResponse>();
+  } = useAsyncState<CspResponse>({
+    onError(): void {
+      emit('ContentSecurityPolicyError', {
+        projectId: 1,
+      });
+    },
+  });
 
   // Effects
   useEffect((): void => {
@@ -59,6 +72,18 @@ export default function ContentSecurityPolicy(): ReactElement {
   }
 
   if (typeof error !== 'undefined') {
+    if (window.location.origin === 'https://localhost:3000' && error === 'Failed to fetch') {
+      return (
+        <Section header="Content Security Policy">
+          To view Content Security Policy reports in development, <Link feature="content-security-policy" href={ORIGIN} title="">trust the security certificate.</Link>
+          <ol>
+            <li>Visit <Link feature="content-security-policy" href="chrome://certificate-manager/localcerts/usercerts" title="Certificate Manager">Google Chrome's certificate manager</Link>.</li>
+            <li>Under <strong>Trusted Certificates</strong>, click <strong>Import</strong>.</li>
+          </ol>
+        </Section>
+      );
+    }
+
     return (
       <Section header="Content Security Policy">
         {error}
@@ -96,6 +121,14 @@ export default function ContentSecurityPolicy(): ReactElement {
           </Section>
         );
     }
+  }
+
+  if (data.length === NONE) {
+    return (
+      <Section header="Content Security Policy">
+        There are no reports of Content Security Policy violations. <Emoji>🎉</Emoji>
+      </Section>
+    );
   }
 
   const groups: readonly ContentSecurityPolicyGroup[] =

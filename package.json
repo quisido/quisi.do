@@ -4,7 +4,7 @@
   "author": "quisi.do <contact@quisi.do>",
   "description": "quisi.do",
   "homepage": "https://quisi.do/",
-  "packageManager": "yarn@4.5.1",
+  "packageManager": "yarn@4.5.3",
   "private": true,
   "type": "module",
   "bugs": {
@@ -52,7 +52,6 @@
     "publish": "yarn workspaces foreach --all --jobs unlimited --no-private --parallel --topological-dev --verbose npm publish --tolerate-republish",
     "reinit": "yarn packages/authn run local:reinit",
     "serve": "yarn packages/next run serve",
-    "start": "echo \"Please use either `yarn run dev` or `yarn run serve` instead.\" && exit 1",
     "test": "monorepo-template-test",
     "up": "yarn up \"@!(monorepo-template|quisido)/*\" \"!(aws-rum-react|cjs-ts|cloudflare-utils|fmrs|fullstory-react|lazy-i18n|mock-next-router|number-format-react|react-datadog|sentry-react|use-shallow-memo)\" && yarn up --recursive \"@*/*\" \"*\" && yarn sdks vscode",
     "vitest": "vitest",
