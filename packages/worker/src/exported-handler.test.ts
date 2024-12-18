@@ -15,12 +15,8 @@ const TEST_METRIC_HANDLER = vi.fn();
 const TEST_REQUEST: IncomingRequest = new Request('https://localhost/');
 
 describe('ExportedHandler', (): void => {
-  it('should construct with no event handlers', (): void => {
-    const exportedHandler = new ExportedHandler({
-      console: TEST_CONSOLE,
-      fetch: vi.fn(),
-    });
-
+  it('should construct with no parameters', (): void => {
+    const exportedHandler = new ExportedHandler();
     expect(exportedHandler.fetch).toBeTypeOf('undefined');
     expect(exportedHandler.email).toBeTypeOf('undefined');
     expect(exportedHandler.queue).toBeTypeOf('undefined');

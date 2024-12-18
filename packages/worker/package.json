@@ -1,6 +1,6 @@
 {
   "name": "@quisido/worker",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "quisi.do <worker@quisi.do>",
   "description": "shared quisi.do Cloudflare workers modules",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/worker#readme",

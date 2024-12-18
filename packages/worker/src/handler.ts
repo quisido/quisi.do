@@ -10,6 +10,7 @@ import { EventEmitter } from 'eventemitter3';
 import { isRecord, mapToError } from 'fmrs';
 import mapMetricDimensionsToDataPoint from './map-metric-dimensions-to-datapoint.js';
 import mapRequestInfoToString from './map-request-info-to-string.js';
+import type { MetricDimensions } from './metric-dimensions.js';
 import { MetricName } from './metric-name.js';
 import type Runnable from './runnable.js';
 
@@ -17,10 +18,7 @@ interface EventTypes {
   readonly effect: [Promise<unknown>];
   readonly error: [Error];
   readonly log: string[];
-  readonly metric: [
-    string,
-    Record<number | string | symbol, boolean | number | string>,
-  ];
+  readonly metric: [string, MetricDimensions];
 }
 
 export interface HandlerOptions<Env> {
@@ -119,9 +117,10 @@ export default class Handler<
     this.fetchText = this.fetchText.bind(this);
     this.flush = this.flush.bind(this);
     this.getAnalyticsEngineDataset = this.getAnalyticsEngineDataset.bind(this);
+    this.getBinding = this.getBinding.bind(this);
     this.getD1Database = this.getD1Database.bind(this);
+    this.getD1Response = this.getD1Response.bind(this);
     this.getD1Results = this.getD1Results.bind(this);
-    this.getEnv = this.getEnv.bind(this);
     this.getKVNamespace = this.getKVNamespace.bind(this);
     this.getR2Bucket = this.getR2Bucket.bind(this);
     this.log = this.log.bind(this);
@@ -131,7 +130,9 @@ export default class Handler<
     this.onLog = this.onLog.bind(this);
     this.onMetric = this.onMetric.bind(this);
     this.onSideEffect = this.onSideEffect.bind(this);
-    this.validateEnv = this.validateEnv.bind(this);
+    this.putKVNamespace = this.putKVNamespace.bind(this);
+    this.putR2Bucket = this.putR2Bucket.bind(this);
+    this.validateBinding = this.validateBinding.bind(this);
     this.writeMetricDataPoint = this.writeMetricDataPoint.bind(this);
 
     this.run = (
@@ -249,11 +250,26 @@ export default class Handler<
   }
 
   public getAnalyticsEngineDataset(name: string): AnalyticsEngineDataset {
-    return this.validateEnv(name, isAnalyticsEngineDataset);
+    return this.validateBinding(name, isAnalyticsEngineDataset);
+  }
+
+  /**
+   *   Technical debt: This should be `<K extends keyof Env>(key: K): Env[K]`,
+   * but that would (1) require `Env` be typed and (2) lose type-safety by
+   * assuming `Env[K]` is the correct type. If the constructor can include a
+   * `validateBinding: Record<keyof Env, (value: unknown) => value is Env[K]>`
+   * type, this may be doable with `this.#validateBinding(this.#env[key])`.
+   */
+  public getBinding(key: string): unknown {
+    if (isRecord(this.#env)) {
+      return this.#env[key];
+    }
+
+    throw new Error('Bindings may only be accessed during an operation.');
   }
 
   public getD1Database(name: string): D1Database {
-    return this.validateEnv(name, isD1Database);
+    return this.validateBinding(name, isD1Database);
   }
 
   public async getD1Response(
@@ -380,25 +396,8 @@ export default class Handler<
     }
   }
 
-  /**
-   *   Technical debt: This should be `<K extends keyof Env>(key: K): Env[K]`,
-   * but that would (1) require `Env` be typed and (2) lose type-safety by
-   * assuming `Env[K]` is the correct type. If the constructor can include a
-   * `validateEnv: { [K in keyof Env]: (value: unknown) => value is Env[K] }`
-   * type, this may be doable with `this.#validateEnv(this.#env[key])`.
-   */
-  public getEnv(key: string): unknown {
-    if (isRecord(this.#env)) {
-      return this.#env[key];
-    }
-
-    throw new Error(
-      'The environment may only be accessed during an operation.',
-    );
-  }
-
   public getKVNamespace(name: string): KVNamespace {
-    return this.validateEnv(name, isKVNamespace);
+    return this.validateBinding(name, isKVNamespace);
   }
 
   public async getKVNamespaceText(
@@ -431,7 +430,7 @@ export default class Handler<
   }
 
   public getR2Bucket(name: string): R2Bucket {
-    return this.validateEnv(name, isR2Bucket);
+    return this.validateBinding(name, isR2Bucket);
   }
 
   public log(...messages: readonly string[]): void {
@@ -491,7 +490,7 @@ export default class Handler<
   public onMetric(
     callback: (
       name: string,
-      dimensions: Record<number | string | symbol, boolean | number | string>,
+      dimensions: MetricDimensions,
     ) => Promise<void> | void,
   ): void {
     this.#on('metric', callback.bind(this));
@@ -551,12 +550,12 @@ export default class Handler<
     }
   }
 
-  public validateEnv<T>(
+  public validateBinding<T>(
     key: string,
     isValid: (value: unknown) => value is T,
     defaultValue?: T,
   ): T {
-    const value: unknown = this.getEnv(key);
+    const value: unknown = this.getBinding(key);
     if (isValid(value)) {
       return value;
     }
@@ -567,7 +566,7 @@ export default class Handler<
      * property to be dropped from the object.
      */
     const valueStr: string = JSON.stringify(value ?? 'null');
-    this.emitMetric(MetricName.InvalidEnvironmentVariable, {
+    this.emitMetric(MetricName.InvalidBinding, {
       key,
       type: typeof value,
       value: valueStr,
@@ -583,7 +582,7 @@ export default class Handler<
   public writeMetricDataPoint(
     dataset: string,
     name: string,
-    dimensions: Record<number | string | symbol, boolean | number | string>,
+    dimensions: MetricDimensions,
   ): void {
     this.getAnalyticsEngineDataset(dataset).writeDataPoint({
       ...mapMetricDimensionsToDataPoint(dimensions),

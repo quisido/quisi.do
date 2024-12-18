@@ -1,4 +1,8 @@
-import { MetricName as WorkerMetricName, type Handler } from '@quisido/worker';
+import {
+  MetricName as WorkerMetricName,
+  type Handler,
+  type MetricDimensions,
+} from '@quisido/worker';
 import { PUBLIC } from './constants/metric-dimensions.js';
 import { MetricName } from './constants/metric-name.js';
 import isWorkerMetricName from './utils/is-worker-metric-name.js';
@@ -8,7 +12,7 @@ const JSON_SPACE = 2;
 export default function handleMetric(
   this: Handler,
   name: string,
-  dimensions: Record<number | string | symbol, boolean | number | string>,
+  dimensions: MetricDimensions,
   isPublic?: boolean,
 ): void {
   if (typeof isPublic === 'undefined') {
@@ -211,7 +215,7 @@ export default function handleMetric(
           }
         }
 
-        case WorkerMetricName.InvalidEnvironmentVariable: {
+        case WorkerMetricName.InvalidBinding: {
           const { key, type, value } = dimensions;
           if (
             typeof key !== 'string' ||

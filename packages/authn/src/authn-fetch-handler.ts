@@ -1,5 +1,5 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import { FetchHandler } from '@quisido/worker';
+import { FetchHandler, type MetricDimensions } from '@quisido/worker';
 import { isString } from 'fmrs';
 import { EnvironmentName } from './constants/environment-name.js';
 import { PUBLIC } from './constants/metric-dimensions.js';
@@ -38,11 +38,11 @@ export default class AuthnFetchHandler extends FetchHandler {
   }
 
   public get analyticsId(): string {
-    return this.validateEnv('ANALYTICS_ID', isString);
+    return this.validateBinding('ANALYTICS_ID', isString);
   }
 
   public get analyticsSecret(): string {
-    return this.validateEnv('ANALYTICS_SECRET', isString);
+    return this.validateBinding('ANALYTICS_SECRET', isString);
   }
 
   public get authnIdCookie(): string | undefined {
@@ -50,12 +50,12 @@ export default class AuthnFetchHandler extends FetchHandler {
   }
 
   public get cookieDomain(): string {
-    return this.validateEnv('COOKIE_DOMAIN', isNonEmptyString, 'quisi.do');
+    return this.validateBinding('COOKIE_DOMAIN', isNonEmptyString, 'quisi.do');
   }
 
   public emitPrivateMetric(
     name: MetricName,
-    dimensions?: Record<number | string | symbol, boolean | number | string>,
+    dimensions?: MetricDimensions,
   ): void {
     this.emitMetric(name, {
       ...dimensions,
@@ -65,7 +65,7 @@ export default class AuthnFetchHandler extends FetchHandler {
 
   public emitPublicMetric(
     name: MetricName,
-    dimensions?: Record<number | string | symbol, boolean | number | string>,
+    dimensions?: MetricDimensions,
   ): void {
     this.emitMetric(name, {
       ...dimensions,
@@ -74,7 +74,7 @@ export default class AuthnFetchHandler extends FetchHandler {
   }
 
   public get environmentName(): EnvironmentName {
-    return this.validateEnv(
+    return this.validateBinding(
       'ENVIRONMENT_NAME',
       isEnvironmentName,
       EnvironmentName.Unknown,
@@ -88,7 +88,7 @@ export default class AuthnFetchHandler extends FetchHandler {
   }
 
   public get host(): string {
-    return this.validateEnv('HOST', isNonEmptyString, 'quisi.do');
+    return this.validateBinding('HOST', isNonEmptyString, 'quisi.do');
   }
 
   public get ip(): string {
@@ -100,19 +100,19 @@ export default class AuthnFetchHandler extends FetchHandler {
   }
 
   public get patreonOAuthClientId(): string {
-    return this.validateEnv('PATREON_OAUTH_CLIENT_ID', isString);
+    return this.validateBinding('PATREON_OAUTH_CLIENT_ID', isString);
   }
 
   public get patreonOAuthClientSecret(): string {
-    return this.validateEnv('PATREON_OAUTH_CLIENT_SECRET', isString);
+    return this.validateBinding('PATREON_OAUTH_CLIENT_SECRET', isString);
   }
 
   public get patreonOAuthHost(): string {
-    return this.validateEnv('PATREON_OAUTH_HOST', isString);
+    return this.validateBinding('PATREON_OAUTH_HOST', isString);
   }
 
   public get patreonOAuthRedirectUri(): string {
-    return this.validateEnv('PATREON_OAUTH_REDIRECT_URI', isString);
+    return this.validateBinding('PATREON_OAUTH_REDIRECT_URI', isString);
   }
 
   public get sessionIdCookie(): string {
@@ -150,13 +150,13 @@ export default class AuthnFetchHandler extends FetchHandler {
     );
   }
 
-  public override validateEnv<T>(
+  public override validateBinding<T>(
     key: string,
     isValid: (value: unknown) => value is T,
     defaultValue?: T,
   ): T {
     try {
-      return super.validateEnv(key, isValid, defaultValue);
+      return super.validateBinding(key, isValid, defaultValue);
     } catch (_err: unknown) {
       const code: ErrorCode = mapEnvKeyToErrorCode(key);
       throw new FatalError(code);

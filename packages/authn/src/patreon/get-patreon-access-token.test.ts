@@ -28,12 +28,12 @@ describe('getPatreonAccessToken', (): void => {
       '/test-return-path/',
     );
 
-    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidBinding, {
       key: 'PATREON_OAUTH_HOST',
       value: 'true',
     });
 
-    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidBinding, {
       key: 'PATREON_OAUTH_HOST',
       type: 'boolean',
     });
@@ -62,12 +62,12 @@ describe('getPatreonAccessToken', (): void => {
       '/test-return-path/',
     );
 
-    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidBinding, {
       key: 'PATREON_OAUTH_CLIENT_ID',
       value: 'true',
     });
 
-    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidBinding, {
       key: 'PATREON_OAUTH_CLIENT_ID',
       type: 'boolean',
     });
@@ -96,12 +96,12 @@ describe('getPatreonAccessToken', (): void => {
       '/test-return-path/',
     );
 
-    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidBinding, {
       key: 'PATREON_OAUTH_CLIENT_SECRET',
       value: 'true',
     });
 
-    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidBinding, {
       key: 'PATREON_OAUTH_CLIENT_SECRET',
       type: 'boolean',
     });
@@ -130,12 +130,12 @@ describe('getPatreonAccessToken', (): void => {
       '/test-return-path/',
     );
 
-    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidBinding, {
       key: 'PATREON_OAUTH_REDIRECT_URI',
       value: 'true',
     });
 
-    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidBinding, {
       key: 'PATREON_OAUTH_REDIRECT_URI',
       type: 'boolean',
     });

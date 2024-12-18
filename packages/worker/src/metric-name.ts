@@ -3,7 +3,7 @@ export enum MetricName {
   D1Error = '@quisido/worker:6',
   D1Run = '@quisido/worker:5',
   Fetch = '@quisido/worker:2',
-  InvalidEnvironmentVariable = '@quisido/worker:1',
+  InvalidBinding = '@quisido/worker:1',
   KVGet = '@quisido/worker:3',
   KVGetError = '@quisido/worker:9',
   KVPut = '@quisido/worker:7',
