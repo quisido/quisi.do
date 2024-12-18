@@ -26,12 +26,12 @@ describe('handleWhoAmIFetchRequest', (): void => {
     // Assert
     expectJsonErrorResponse(ErrorCode.InvalidAuthnUserIdsNamespace);
 
-    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidBinding, {
       key: 'AUTHN_USER_IDS',
       value: 'true',
     });
 
-    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidBinding, {
       key: 'AUTHN_USER_IDS',
       type: 'boolean',
     });

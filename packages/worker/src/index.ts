@@ -11,5 +11,6 @@ export {
   type HandlerOptions,
 } from './handler.js';
 export { default as mapMetricDimensionsToDataPoint } from './map-metric-dimensions-to-datapoint.js';
+export { type MetricDimensions } from './metric-dimensions.js';
 export { MetricName } from './metric-name.js';
 export { type default as Runnable } from './runnable.js';

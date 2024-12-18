@@ -23,12 +23,12 @@ describe('mapEnvKeyToErrorCode', (): void => {
     // Assert
     expectJsonErrorResponse(ErrorCode.InvalidAnalyticsId);
 
-    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidBinding, {
       key: 'ANALYTICS_ID',
       value: 'true',
     });
 
-    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidBinding, {
       key: 'ANALYTICS_ID',
       type: 'boolean',
     });
@@ -53,12 +53,12 @@ describe('mapEnvKeyToErrorCode', (): void => {
     // Assert
     expectJsonErrorResponse(ErrorCode.InvalidAnalyticsSecret);
 
-    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidBinding, {
       key: 'ANALYTICS_SECRET',
       value: 'true',
     });
 
-    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidBinding, {
       key: 'ANALYTICS_SECRET',
       type: 'boolean',
     });

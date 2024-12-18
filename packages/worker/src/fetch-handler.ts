@@ -111,12 +111,12 @@ export default class FetchHandler<
     return this.request.method;
   }
 
-  public get requestSearchParams(): URLSearchParams {
-    return this.requestUrl.searchParams;
-  }
-
   public get requestPathname(): string {
     return mapRequestToPathname(this.request);
+  }
+
+  public get requestSearchParams(): URLSearchParams {
+    return this.requestUrl.searchParams;
   }
 
   public get requestUrl(): URL {

@@ -1,4 +1,4 @@
-import { FetchHandler } from '@quisido/worker';
+import { FetchHandler, type MetricDimensions } from '@quisido/worker';
 import { PUBLIC } from './constants/metric-dimensions.js';
 import type { MetricName } from './constants/metric-name.js';
 import handleFetchRequest from './features/handle-fetch-request.js';
@@ -12,7 +12,7 @@ export default class CspFetchHandler extends FetchHandler {
 
   public emitPrivateMetric(
     name: MetricName,
-    dimensions?: Record<number | string | symbol, boolean | number | string>,
+    dimensions?: MetricDimensions,
   ): void {
     this.emitMetric(name, {
       ...dimensions,
@@ -22,7 +22,7 @@ export default class CspFetchHandler extends FetchHandler {
 
   public emitPublicMetric(
     name: MetricName,
-    dimensions?: Record<number | string | symbol, boolean | number | string>,
+    dimensions?: MetricDimensions,
   ): void {
     this.emitMetric(name, {
       ...dimensions,

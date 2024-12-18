@@ -1,13 +1,16 @@
+/// <reference types="@cloudflare/workers-types" />
+
 import type IFetchHandler from './fetch-handler.js';
 import InternalServerErrorResponse from './internal-server-error-response.js';
+import type { MetricDimensions } from './metric-dimensions.js';
 
 export interface ExportedHandlerOptions<
   Env,
   QueueHandlerMessage,
   CfHostMetadata,
 > {
-  readonly console: Console;
-  readonly fetch: Fetcher['fetch'];
+  readonly console?: Console | undefined;
+  readonly fetch?: Fetcher['fetch'] | undefined;
   readonly now?: (() => number) | undefined;
   readonly onError?: ((error: Error) => Promise<void> | void) | undefined;
   readonly onLog?: ((message: string) => Promise<void> | void) | undefined;
@@ -17,10 +20,7 @@ export interface ExportedHandlerOptions<
     | undefined;
 
   readonly onMetric?:
-    | ((
-        name: string,
-        dimensions: Record<number | string | symbol, boolean | number | string>,
-      ) => Promise<void> | void)
+    | ((name: string, dimensions: MetricDimensions) => Promise<void> | void)
     | undefined;
 }
 
@@ -39,14 +39,14 @@ export const ExportedHandler = class QuisidoExportedHandler<
   public readonly trace?: ExportedHandlerTraceHandler<Env>;
 
   public constructor({
-    console,
-    fetch,
+    console: consoleParam = console,
+    fetch: fetchParam = fetch,
     FetchHandler,
     now,
     onError: handleError,
     onLog: handleLog,
     onMetric: handleMetric,
-  }: ExportedHandlerOptions<Env, QueueHandlerMessage, CfHostMetadata>) {
+  }: ExportedHandlerOptions<Env, QueueHandlerMessage, CfHostMetadata> = {}) {
     if (typeof FetchHandler !== 'undefined') {
       this.fetch = (
         request: Request<
@@ -57,7 +57,7 @@ export const ExportedHandler = class QuisidoExportedHandler<
         ctx: ExecutionContext,
       ): Response | Promise<Response> => {
         const handleFetchError = (err: unknown): Response => {
-          console.error(err);
+          consoleParam.error(err);
           return new InternalServerErrorResponse();
         };
 
@@ -82,7 +82,7 @@ export const ExportedHandler = class QuisidoExportedHandler<
           }
 
           const response: Promise<Response> | Response = fetchHandler.run(
-            { console, env, fetch, now },
+            { console: consoleParam, env, fetch: fetchParam, now },
             request,
             env,
             ctx,

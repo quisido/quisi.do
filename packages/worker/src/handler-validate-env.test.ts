@@ -5,11 +5,11 @@ import { TestExportedHandler } from '../test/test-exported-handler.js';
 import { FetchHandler } from './index.js';
 
 describe('Handler', (): void => {
-  describe('validateEnv', (): void => {
+  describe('validateBinding', (): void => {
     it('should support default values', async (): Promise<void> => {
       function testFetchHandler(this: FetchHandler): Response {
         return new Response(
-          this.validateEnv('TEST_KEY', isString, 'test value'),
+          this.validateBinding('TEST_KEY', isString, 'test value'),
         );
       }
 

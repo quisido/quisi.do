@@ -29,12 +29,12 @@ describe('getOAuthUserId', (): void => {
     expectToHaveEmitPublicMetric(MetricName.PatreonRequest);
     expectOAuthErrorResponse(ErrorCode.InvalidDatabase, '/test-return-path/');
 
-    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidBinding, {
       key: 'AUTHN_DB',
       value: 'true',
     });
 
-    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidEnvironmentVariable, {
+    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidBinding, {
       key: 'AUTHN_DB',
       type: 'boolean',
     });
