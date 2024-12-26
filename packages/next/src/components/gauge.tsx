@@ -34,7 +34,7 @@ export default function Gauge({
         ...newData,
         {
           name: `${label}: ${value}${units}`,
-          value: value,
+          value,
         },
       ];
     };

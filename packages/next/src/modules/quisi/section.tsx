@@ -1,6 +1,11 @@
 'use client';
 
-import { useLayoutEffect, useState, type ReactElement, type ReactNode } from 'react';
+import {
+  useLayoutEffect,
+  useState,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
 import useTheme from '../../hooks/use-theme.js';
 import createRandomNumberGenerator from '../../utils/create-random-number-generator.js';
 import validateString from '../../utils/validate-string.js';
@@ -41,25 +46,25 @@ export default function QuisiSection({
     setRotation(getRotation);
   }, []);
 
+  const negativeRotationStr: string = (NEGATIVE * rotation).toString();
+  const rotationStr: string = rotation.toString();
   return (
     <section
       className={SECTION_CLASS_NAME}
       style={{
         color: foregroundHex,
-        transform: `rotate(${rotation}deg)`,
+        transform: `rotate(${rotationStr}deg)`,
       }}
     >
       <div
         style={{
-          transform: `rotate(${NEGATIVE * rotation}deg)`,
+          transform: `rotate(${negativeRotationStr}deg)`,
         }}
       >
         {typeof header !== 'undefined' && <Header>{header}</Header>}
         <div>{children}</div>
         {typeof actions !== 'undefined' && (
-          <footer className={FOOTER_CLASS_NAME}>
-            {actions}
-          </footer>
+          <footer className={FOOTER_CLASS_NAME}>{actions}</footer>
         )}
       </div>
     </section>

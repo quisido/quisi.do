@@ -1,0 +1,55 @@
+'use client';
+
+import I18n from 'lazy-i18n';
+import { type ReactElement } from 'react';
+import Header from '../modules/quisi/header.jsx';
+import Section from '../modules/quisi/section.jsx';
+import PleasantnessDashboard from './pleasantness-dashboard.jsx';
+
+export default function Dashboard(): ReactElement {
+  return (
+    <Section
+      header={
+        <Header>
+          <I18n>Dashboard</I18n>
+        </Header>
+      }
+    >
+      <ul>
+        {/*
+        <li>
+          <section>
+            <h3>Efficacy</h3>
+            <p>Yes.</p>
+          </section>
+        </li>
+        */}
+        <li>
+          <PleasantnessDashboard />
+        </li>
+        <li>
+          <section>
+            <h3>Scalability</h3>
+            <ul>
+              <li>Requests per second</li>
+              <li>ROI, must be &ge; 1</li>
+              <li>Availability</li>
+              <li>Market funnel, $1 spent &ge; $1 earned</li>
+            </ul>
+          </section>
+        </li>
+        <li>
+          <section>
+            <h3>Security</h3>
+            <ul>
+              <li>CSRF blocked</li>
+              <li>Cloudflare DDoS + blocked IP counts</li>
+              <li>AuthN/AuthZ error counts</li>
+              <li>Anomaly detection on the above ratios</li>
+            </ul>
+          </section>
+        </li>
+      </ul>
+    </Section>
+  );
+}

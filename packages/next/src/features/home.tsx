@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 import Link from '../modules/quisi/link.js';
 import Section from '../modules/quisi/section.js';
-import ContentSecurityPolicy from './content-security-policy/index.js';
+import Dashboard from './dashboard.jsx';
 
 export default function Home(): ReactElement {
   return (
@@ -10,9 +10,9 @@ export default function Home(): ReactElement {
         <Link feature="home" href="/" title="quisi.do">
           quisi.do
         </Link>{' '}
-        is a front end software-as-a-service provider.
+        is an invite-only, front end platform software-as-a-service provider.
       </Section>
-      <ContentSecurityPolicy />
+      <Dashboard />
     </>
   );
 }

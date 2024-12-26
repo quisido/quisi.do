@@ -1,4 +1,4 @@
-import configs, { disableRulesForFiles } from '@quisido/eslint-config';
+import configs from '@quisido/eslint-config';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
@@ -17,10 +17,4 @@ export default [
       'react-refresh/only-export-components': 'error',
     },
   },
-
-  ...disableRulesForFiles({
-    '@typescript-eslint/no-unnecessary-type-parameters': [
-      'src/utils/is-undefined.ts',
-    ],
-  }),
 ];

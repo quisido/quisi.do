@@ -11,8 +11,8 @@ export default function Header({ actions, children }: Props): ReactElement {
       <h2
         style={{
           fontSize: '1rem',
-          lineHeight: '1rem',
           fontWeight: 'bold',
+          lineHeight: '1rem',
           marginBottom: '1rem',
           marginLeft: 0,
           marginRight: 0,

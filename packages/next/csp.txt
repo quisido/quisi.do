@@ -13,6 +13,7 @@ connect-src
   https://edge.fullstory.com/s/settings/o-1X4ZHB-na1/v1/web
   https://localhost:5882/whoami/
   https://localhost:6586/1/
+  https://localhost:9778/
   https://o592283.ingest.sentry.io/api/5740642/envelope/
   https://r.logr-ingest.com/i
   https://r.lrkt-in.com/i

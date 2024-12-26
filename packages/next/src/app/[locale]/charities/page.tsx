@@ -13,9 +13,6 @@ export default function CharitiesPage(): ReactElement {
         legal, financial, and moral implications, the decisions will not be made
         lightly and will be posted after they are ready.
       </Div>
-      <Div element="p">
-        When we take care of nature, nature takes care of us.
-      </Div>
     </Section>
   );
 }
