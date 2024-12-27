@@ -1,5 +1,8 @@
 import { useEffect, type ReactElement } from 'react';
+import Gauge from '../modules/quisi/gauge.jsx';
 import useAsyncState from '../modules/use-async-state/index.js';
+import type DashboardApiResponse from '../types/dashboard-api-response.js';
+import isDashboardApiResponse from '../utils/is-dashboard-api-response.js';
 import validateString from '../utils/validate-string.js';
 
 const DASHBOARD_ENDPOINT: string = validateString(
@@ -7,12 +10,18 @@ const DASHBOARD_ENDPOINT: string = validateString(
 );
 
 export default function PleasantnessDashboard(): ReactElement {
-  const { data, error, initiated, loading, request } = useAsyncState();
+  const { data, error, initiated, loading, request } =
+    useAsyncState<DashboardApiResponse>();
 
   useEffect((): void => {
-    void request(async (): Promise<unknown> => {
+    void request(async (): Promise<DashboardApiResponse> => {
       const response: Response = await window.fetch(DASHBOARD_ENDPOINT);
-      return await response.json();
+      const json: unknown = await response.json();
+      if (!isDashboardApiResponse(json)) {
+        throw new Error('Unknown response');
+      }
+
+      return json;
     });
   }, [request]);
 
@@ -58,15 +67,19 @@ export default function PleasantnessDashboard(): ReactElement {
     );
   }
 
+  const { cls, fcp, inp, lcp, lt } = data;
   return (
     <section>
       <h3>Pleasantness</h3>
       <ul>
-        <li>Cumulative layout shift p75: {data.cls}</li>
-        <li>First contentful paint p75: {data.fcp}ms</li>
-        <li>Interaction to next paint p75: {data.inp}ms</li>
-        <li>Largest contentful paint p75: {data.lcp}ms</li>
-        <li>Loading time p75: {data.lt}ms</li>
+        <li>
+          <p>Cumulative layout shift p75: {cls}</p>
+          <Gauge max={1} min={0} value={cls} />
+        </li>
+        <li>First contentful paint p75: {fcp}ms</li>
+        <li>Interaction to next paint p75: {inp}ms</li>
+        <li>Largest contentful paint p75: {lcp}ms</li>
+        <li>Loading time p75: {lt}ms</li>
       </ul>
     </section>
   );

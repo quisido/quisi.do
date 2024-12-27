@@ -95,7 +95,6 @@
     "react-datadog": "workspace:^",
     "react-dom": "^19.0.0",
     "react-innertext": "^1.1.5",
-    "recharts": "^2.15.0",
     "relative-timestamp": "^1.0.0",
     "sentry-react": "workspace:^",
     "sharp": "^0.33.5",

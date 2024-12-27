@@ -1,5 +1,9 @@
 import { client, v2 } from '@datadog/datadog-api-client';
-import { StatusCode } from 'cloudflare-utils';
+import {
+  FaviconIcoResponse,
+  RobotsTxtResponse,
+  StatusCode,
+} from 'cloudflare-utils';
 import { mapToError } from 'fmrs';
 import { AGGREGATE_DATADOG_RUM_EVENTS_REQUEST } from '../constants/aggregate-datadog-rum-events-request.js';
 import { MetricName } from '../constants/metric-name.js';
@@ -14,15 +18,7 @@ const NANOSECONDS_PER_MILLISECOND = 1_000_000;
 export default async function handleFetch(
   this: DashboardFetchHandler,
 ): Promise<Response> {
-  if (
-    this.requestPathname === '/favicon.ico' ||
-    this.requestPathname === '/robots.txt'
-  ) {
-    return new Response();
-  }
-
   if (this.requestMethod === 'OPTIONS') {
-    this.console.log(`OPTIONS request with ${this.accessControlAllowOrigin}`);
     return new Response(null, {
       status: StatusCode.OK,
 
@@ -30,6 +26,14 @@ export default async function handleFetch(
         'access-control-allow-origin': this.accessControlAllowOrigin,
       }),
     });
+  }
+
+  if (this.requestPathname === '/favicon.ico') {
+    return new FaviconIcoResponse();
+  }
+
+  if (this.requestPathname === '/robots.txt') {
+    return new RobotsTxtResponse();
   }
 
   const datadog = new v2.RUMApi(

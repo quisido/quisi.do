@@ -64,6 +64,7 @@ img-src
   https://www.google.fr/ads/ga-audiences
   https://www.google.it/ads/ga-audiences
   https://www.google.nl/ads/ga-audiences
+  https://www.google.ro/ads/ga-audiences
   https://www.google.ru/ads/ga-audiences
   https://www.googletagmanager.com/a
   https://www.googletagmanager.com/td;
