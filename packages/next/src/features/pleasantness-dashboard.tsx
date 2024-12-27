@@ -2,26 +2,36 @@ import { useEffect, type ReactElement } from 'react';
 import Gauge from '../modules/quisi/gauge.jsx';
 import useAsyncState from '../modules/use-async-state/index.js';
 import type DashboardApiResponse from '../types/dashboard-api-response.js';
-import isDashboardApiResponse from '../utils/is-dashboard-api-response.js';
-import validateString from '../utils/validate-string.js';
 
-const DASHBOARD_ENDPOINT: string = validateString(
+/*
+Const DASHBOARD_ENDPOINT: string = validateString(
   process.env['DASHBOARD_ENDPOINT'],
 );
+*/
 
 export default function PleasantnessDashboard(): ReactElement {
   const { data, error, initiated, loading, request } =
     useAsyncState<DashboardApiResponse>();
 
   useEffect((): void => {
-    void request(async (): Promise<DashboardApiResponse> => {
-      const response: Response = await window.fetch(DASHBOARD_ENDPOINT);
+    void request((): Promise<DashboardApiResponse> => {
+      /*
+      Const response: Response = await window.fetch(DASHBOARD_ENDPOINT);
       const json: unknown = await response.json();
       if (!isDashboardApiResponse(json)) {
         throw new Error('Unknown response');
       }
 
       return json;
+      */
+      return Promise.resolve({
+        cls: 0.0023,
+        code: 1,
+        fcp: 3027,
+        inp: 8,
+        lcp: 3027,
+        lt: 3150,
+      });
     });
   }, [request]);
 
