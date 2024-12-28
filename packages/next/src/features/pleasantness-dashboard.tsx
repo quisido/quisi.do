@@ -1,13 +1,64 @@
 import { useEffect, type ReactElement } from 'react';
-import Gauge from '../modules/quisi/gauge.jsx';
+import Gauge, { type Threshold } from '../modules/quisi/gauge.jsx';
 import useAsyncState from '../modules/use-async-state/index.js';
 import type DashboardApiResponse from '../types/dashboard-api-response.js';
+import validateString from '../utils/validate-string.js';
+import styles from './pleasantness-dashboard.module.scss';
 
 /*
 Const DASHBOARD_ENDPOINT: string = validateString(
   process.env['DASHBOARD_ENDPOINT'],
 );
 */
+
+const GAUGE_NEEDLE_CLASS_NAME: string = validateString(styles['gaugeNeedle']);
+
+const NEGATIVE_ACTIVE_CLASS_NAME: string = validateString(
+  styles['negativeActive'],
+);
+
+const NEGATIVE_INACTIVE_CLASS_NAME: string = validateString(
+  styles['negativeInactive'],
+);
+
+const NEUTRAL_ACTIVE_CLASS_NAME: string = validateString(
+  styles['neutralActive'],
+);
+
+const NEUTRAL_INACTIVE_CLASS_NAME: string = validateString(
+  styles['neutralInactive'],
+);
+
+const POSITIVE_ACTIVE_CLASS_NAME: string = validateString(
+  styles['positiveActive'],
+);
+
+const POSITIVE_INACTIVE_CLASS_NAME: string = validateString(
+  styles['positiveInactive'],
+);
+
+const CLS_THRESHOLDS: readonly Threshold[] = [
+  // Good
+  {
+    activeClassName: POSITIVE_ACTIVE_CLASS_NAME,
+    inactiveClassName: POSITIVE_INACTIVE_CLASS_NAME,
+    to: 0.1,
+  },
+
+  // Needs improvement
+  {
+    activeClassName: NEUTRAL_ACTIVE_CLASS_NAME,
+    inactiveClassName: NEUTRAL_INACTIVE_CLASS_NAME,
+    to: 0.25,
+  },
+
+  // Poor
+  {
+    activeClassName: NEGATIVE_ACTIVE_CLASS_NAME,
+    inactiveClassName: NEGATIVE_INACTIVE_CLASS_NAME,
+    to: 1,
+  },
+];
 
 export default function PleasantnessDashboard(): ReactElement {
   const { data, error, initiated, loading, request } =
@@ -25,7 +76,7 @@ export default function PleasantnessDashboard(): ReactElement {
       return json;
       */
       return Promise.resolve({
-        cls: 0.0023,
+        cls: 0.2,
         code: 1,
         fcp: 3027,
         inp: 8,
@@ -84,7 +135,13 @@ export default function PleasantnessDashboard(): ReactElement {
       <ul>
         <li>
           <p>Cumulative layout shift p75: {cls}</p>
-          <Gauge max={1} min={0} value={cls} />
+          <Gauge
+            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
+            max={1}
+            min={0}
+            thresholds={CLS_THRESHOLDS}
+            value={cls}
+          />
         </li>
         <li>First contentful paint p75: {fcp}ms</li>
         <li>Interaction to next paint p75: {inp}ms</li>

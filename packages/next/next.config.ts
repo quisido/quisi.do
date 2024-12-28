@@ -31,6 +31,7 @@ export default withNextJsBundleAnalyzer({
   trailingSlash: true,
 
   devIndicators: {
+    appIsrStatus: false,
     buildActivity: true,
     buildActivityPosition: 'bottom-right',
   },
