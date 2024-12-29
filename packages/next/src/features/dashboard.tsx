@@ -4,7 +4,11 @@ import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import Header from '../modules/quisi/header.jsx';
 import Section from '../modules/quisi/section.jsx';
+import validateString from '../utils/validate-string.js';
+import styles from './dashboard.module.scss';
 import PleasantnessDashboard from './pleasantness-dashboard.jsx';
+
+const LIST_CLASS_NAME: string = validateString(styles['list']);
 
 export default function Dashboard(): ReactElement {
   return (
@@ -15,7 +19,7 @@ export default function Dashboard(): ReactElement {
         </Header>
       }
     >
-      <ul>
+      <ul className={LIST_CLASS_NAME}>
         {/*
         <li>
           <section>
@@ -29,7 +33,7 @@ export default function Dashboard(): ReactElement {
         </li>
         <li>
           <section>
-            <h3>Scalability</h3>
+            <h3 style={{ margin: 0 }}>Scalability</h3>
             <ul>
               <li>Requests per second</li>
               <li>ROI, must be &ge; 1</li>
@@ -40,7 +44,7 @@ export default function Dashboard(): ReactElement {
         </li>
         <li>
           <section>
-            <h3>Security</h3>
+            <h3 style={{ margin: 0 }}>Security</h3>
             <ul>
               <li>CSRF blocked</li>
               <li>Cloudflare DDoS + blocked IP counts</li>

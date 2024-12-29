@@ -1,9 +1,9 @@
-'use client';
-
-import { arc } from 'd3-shape';
 import { type ReactElement } from 'react';
 import validateString from '../../utils/validate-string.js';
 import styles from './gauge.module.scss';
+import { DIAMETER, NEEDLE_WIDTH, RADIUS } from './gauge/gauge-constants.js';
+import GaugeNeedle from './gauge/gauge-needle.jsx';
+import GaugePath from './gauge/gauge-path.jsx';
 
 export interface Threshold {
   readonly activeClassName?: string | undefined;
@@ -14,6 +14,7 @@ export interface Threshold {
 }
 
 interface Props {
+  readonly className?: string | undefined;
   readonly max: number;
   readonly min?: number | undefined;
   readonly needleClassName?: string | undefined;
@@ -24,100 +25,10 @@ interface Props {
 const CLASS_NAME: string = validateString(styles['gauge']);
 const DECREMENT = -1;
 const DEFAULT_MIN = 0;
-const DOUBLE = 2;
-const HALF = 0.5;
-const DIAMETER = 100;
 const NIL = 0;
-const CIRCLE: number = DOUBLE * Math.PI;
-const D3_ANGLE_OFFSET: number = -Math.PI * HALF;
-const RADIUS: number = DIAMETER * HALF;
-
-interface GaugeNeedleProps {
-  readonly className?: string | undefined;
-  readonly max: number;
-  readonly min: number;
-  readonly value: number;
-}
-
-// Measured in radians.
-const NEEDLE_BUTTON_WIDTH = 0.333;
-const NEEDLE_RADIANS = 0.05;
-const NEEDLE_WIDTH: number = DIAMETER / (Math.PI / NEEDLE_RADIANS);
-
-function GaugeNeedle({
-  className,
-  max,
-  min,
-  value,
-}: GaugeNeedleProps): ReactElement {
-  const percentage: number = (value - min) / (max - min);
-  const gaugeAngle: number = Math.PI * percentage;
-
-  /**
-   *   The needle's arc opens toward the center of the gauge, i.e. 180 degrees
-   * away from the gauge angle (+ Math.PI).
-   */
-  const startAngle: number =
-    D3_ANGLE_OFFSET + gaugeAngle + Math.PI - NEEDLE_RADIANS * HALF;
-
-  const needle = arc();
-  needle.cornerRadius(RADIUS);
-  const arcPathD: string | null = needle({
-    endAngle: startAngle + NEEDLE_RADIANS,
-    innerRadius: 1,
-    outerRadius: RADIUS + NEEDLE_WIDTH,
-    startAngle,
-  });
-
-  const tipX: number = RADIUS + RADIUS * Math.cos(gaugeAngle + Math.PI);
-  const tipY: number = RADIUS - RADIUS * Math.sin(gaugeAngle);
-  return (
-    <path
-      className={className}
-      d={arcPathD ?? ''}
-      fill="inherit"
-      transform={`translate(${tipX}, ${tipY})`}
-    />
-  );
-}
-
-interface GaugePathProps {
-  readonly className?: string | undefined;
-  readonly from: number;
-  readonly max: number;
-  readonly min: number;
-  readonly to: number;
-}
-
-function GaugePath({
-  className,
-  from,
-  max,
-  min,
-  to,
-}: GaugePathProps): ReactElement {
-  const fromPercentage: number = (from - min) / (max - min);
-  const toPercentage: number = (to - min) / (max - min);
-  const angle: number = Math.PI * (toPercentage - fromPercentage);
-  const startAngle: number = D3_ANGLE_OFFSET + Math.PI * fromPercentage;
-  const arcPathD: string | null = arc()({
-    endAngle: startAngle + angle,
-    innerRadius: 0,
-    outerRadius: RADIUS,
-    startAngle,
-  });
-
-  return (
-    <path
-      className={className}
-      d={arcPathD ?? ''}
-      fill="red"
-      transform={`translate(${RADIUS}, ${RADIUS})`}
-    />
-  );
-}
 
 export default function Gauge({
+  className,
   max,
   min = DEFAULT_MIN,
   needleClassName,
@@ -193,9 +104,14 @@ export default function Gauge({
     );
   };
 
+  const classNames: string[] = [CLASS_NAME];
+  if (typeof className !== 'undefined') {
+    classNames.push(className);
+  }
+
   return (
     <svg
-      className={CLASS_NAME}
+      className={classNames.join(' ')}
       viewBox={`0 0 ${DIAMETER} ${RADIUS + NEEDLE_WIDTH}`}
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -205,18 +121,6 @@ export default function Gauge({
         max={max}
         min={min}
         value={value}
-      />
-      <path
-        d={
-          arc()({
-            endAngle: CIRCLE,
-            innerRadius: 0,
-            outerRadius: NEEDLE_WIDTH * NEEDLE_BUTTON_WIDTH,
-            startAngle: 0,
-          }) ?? ''
-        }
-        fill="#c0c0c0"
-        transform={`translate(${RADIUS}, ${RADIUS})`}
       />
     </svg>
   );
