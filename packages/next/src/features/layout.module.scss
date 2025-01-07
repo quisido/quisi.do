@@ -50,9 +50,10 @@ $line-height: 20px;
 }
 
 .html {
-  @include dark-mode.media-query-filter;
   font-size: $line-height;
   height: 100%;
   max-height: 100%;
   min-height: 100%;
+
+  @include dark-mode.media-query-filter;
 }
