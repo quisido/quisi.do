@@ -1,5 +1,6 @@
 import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 import reactCompiler from 'eslint-plugin-react-compiler';
+import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
 /** @type {readonly import('eslint').Linter.Config[]} */
@@ -16,15 +17,18 @@ export default [
     },
   },
 
-  // Plugin: react-compiler
+  // Plugins: react-compiler, react-hooks, react-refresh
   {
     plugins: {
       'react-compiler': reactCompiler,
+      'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
 
     rules: {
       'react-compiler/react-compiler': 'error',
+      'react-hooks/exhaustive-deps': 'error',
+      'react-hooks/rules-of-hooks': 'error',
       'react-refresh/only-export-components': 'error',
     },
   },
@@ -40,6 +44,10 @@ export default [
 
     '@typescript-eslint/no-deprecated': [
       'src/utils/map-navigator-to-semantic-resource-attributes.ts',
+    ],
+
+    '@typescript-eslint/no-explicit-any': [
+      'src/modules/react-google-charts/chart.ts',
     ],
 
     '@typescript-eslint/no-unused-vars': [
@@ -66,6 +74,8 @@ export default [
 
     'no-magic-numbers': [
       'src/constants/*.ts',
+      'src/modules/quisi/heading-level.ts',
+      'src/modules/react-google-charts/chart-options.ts',
       'src/types/log-rocket.ts',
       'src/types/sentry-fullstory-client.ts',
     ],

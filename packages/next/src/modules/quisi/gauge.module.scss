@@ -1,6 +1,5 @@
+@use './dark-mode.scss';
+
 .gauge {
-  // Un-invert.
-  @media (prefers-color-scheme: dark) {
-    filter: invert(95%);
-  }
+  @include dark-mode.media-query-filter;
 }

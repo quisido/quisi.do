@@ -22,7 +22,8 @@ connect-src
   https://rs.fullstory.com/rec/page
   https://stats.g.doubleclick.net/g/collect
   https://sts.us-west-2.amazonaws.com/
-  https://www.clarity.ms/report-err/eusb;
+  https://www.clarity.ms/report-err/eusb
+  https://www.google-analytics.com/g/collect;
 
 default-src
   'none';

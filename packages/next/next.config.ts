@@ -91,10 +91,6 @@ export default withNextJsBundleAnalyzer({
       algorithm: 'sha512',
     },
 
-    turbo: {
-      treeShaking: true,
-    },
-
     // Error: Jest worker encountered 1 child process exceptions, exceeding retry limit
     parallelServerBuildTraces: false,
     parallelServerCompiles: false,

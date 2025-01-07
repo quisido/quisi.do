@@ -4,18 +4,19 @@ import styles from './gauge.module.scss';
 import { DIAMETER, NEEDLE_WIDTH, RADIUS } from './gauge/gauge-constants.js';
 import GaugeNeedle from './gauge/gauge-needle.jsx';
 import GaugePath from './gauge/gauge-path.jsx';
+import mapNumberToPowerOf2 from './map-number-to-power-of-2.js';
 
 export interface Threshold {
   readonly activeClassName?: string | undefined;
   readonly className?: string | undefined;
   readonly inactiveClassName?: string | undefined;
   readonly from?: number | undefined;
-  readonly to: number;
+  readonly to?: number | undefined;
 }
 
 interface Props {
   readonly className?: string | undefined;
-  readonly max: number;
+  readonly max?: number | undefined;
   readonly min?: number | undefined;
   readonly needleClassName?: string | undefined;
   readonly thresholds?: readonly (number | Threshold)[] | undefined;
@@ -25,16 +26,51 @@ interface Props {
 const CLASS_NAME: string = validateString(styles['gauge']);
 const DECREMENT = -1;
 const DEFAULT_MIN = 0;
+const INCRMENT = 1;
 const NIL = 0;
+
+const hasTo = (threshold: Threshold | number): boolean =>
+  typeof threshold === 'number' || typeof threshold.to === 'number';
 
 export default function Gauge({
   className,
-  max,
+  max: maxProp,
   min = DEFAULT_MIN,
   needleClassName,
   thresholds = [],
   value,
 }: Props): ReactElement {
+  const getMaxThreshold = (): number => {
+    const lastThreshold: Threshold | number | undefined =
+      thresholds.findLast(hasTo);
+
+    if (typeof lastThreshold === 'undefined') {
+      return NIL;
+    }
+
+    if (typeof lastThreshold === 'number') {
+      return lastThreshold;
+    }
+
+    const { to } = lastThreshold;
+    if (typeof to === 'number') {
+      return to;
+    }
+
+    return NIL;
+  };
+
+  const getMax = (): number => {
+    if (typeof maxProp === 'number') {
+      return maxProp;
+    }
+
+    const maxThreshold: number = getMaxThreshold();
+    const maxValue: number = Math.max(value, maxThreshold);
+    return mapNumberToPowerOf2(maxValue);
+  };
+  const max: number = getMax();
+
   const mapThresholdToPath = (
     threshold: number | Threshold,
     index: number,
@@ -51,7 +87,22 @@ export default function Gauge({
         return previousThreshold;
       }
 
-      return previousThreshold.to;
+      const { to } = previousThreshold;
+      if (typeof to === 'number') {
+        return to;
+      }
+
+      const nextThreshold: Threshold | number | undefined =
+        thresholds[index + INCRMENT];
+      if (typeof nextThreshold === 'undefined') {
+        return max;
+      }
+
+      if (typeof nextThreshold === 'number') {
+        return nextThreshold;
+      }
+
+      return nextThreshold.from ?? max;
     };
 
     const previousTo: number = getPreviousTo();
@@ -72,7 +123,7 @@ export default function Gauge({
       className,
       from = previousTo,
       inactiveClassName,
-      to,
+      to = max,
     } = threshold;
 
     const getClassName = (): string => {

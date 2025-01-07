@@ -4342,10 +4342,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/env@npm:15.1.1-canary.18":
-  version: 15.1.1-canary.18
-  resolution: "@next/env@npm:15.1.1-canary.18"
-  checksum: 10c0/789499b6a5018d478dac13667ec136251b633fc82347bd17d758cd0824c557f78ea7a9778bf8967629d779091a3a6147963c4c1775745b25f456729fa7869072
+"@next/env@npm:15.1.1-canary.26":
+  version: 15.1.1-canary.26
+  resolution: "@next/env@npm:15.1.1-canary.26"
+  checksum: 10c0/a73fa73f8e2afd5bd6bfb091321c994d034a299538e475f4e9b1e2b3326f059975b15321a6f613eca8b256b1c6626d6d975c7c569f5ca27b77e524aae07ebec8
   languageName: node
   linkType: hard
 
@@ -4365,9 +4365,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-arm64@npm:15.1.1-canary.18":
-  version: 15.1.1-canary.18
-  resolution: "@next/swc-darwin-arm64@npm:15.1.1-canary.18"
+"@next/swc-darwin-arm64@npm:15.1.1-canary.26":
+  version: 15.1.1-canary.26
+  resolution: "@next/swc-darwin-arm64@npm:15.1.1-canary.26"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
@@ -4379,9 +4379,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-x64@npm:15.1.1-canary.18":
-  version: 15.1.1-canary.18
-  resolution: "@next/swc-darwin-x64@npm:15.1.1-canary.18"
+"@next/swc-darwin-x64@npm:15.1.1-canary.26":
+  version: 15.1.1-canary.26
+  resolution: "@next/swc-darwin-x64@npm:15.1.1-canary.26"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
@@ -4393,9 +4393,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-gnu@npm:15.1.1-canary.18":
-  version: 15.1.1-canary.18
-  resolution: "@next/swc-linux-arm64-gnu@npm:15.1.1-canary.18"
+"@next/swc-linux-arm64-gnu@npm:15.1.1-canary.26":
+  version: 15.1.1-canary.26
+  resolution: "@next/swc-linux-arm64-gnu@npm:15.1.1-canary.26"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
@@ -4407,9 +4407,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-musl@npm:15.1.1-canary.18":
-  version: 15.1.1-canary.18
-  resolution: "@next/swc-linux-arm64-musl@npm:15.1.1-canary.18"
+"@next/swc-linux-arm64-musl@npm:15.1.1-canary.26":
+  version: 15.1.1-canary.26
+  resolution: "@next/swc-linux-arm64-musl@npm:15.1.1-canary.26"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
@@ -4421,9 +4421,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-gnu@npm:15.1.1-canary.18":
-  version: 15.1.1-canary.18
-  resolution: "@next/swc-linux-x64-gnu@npm:15.1.1-canary.18"
+"@next/swc-linux-x64-gnu@npm:15.1.1-canary.26":
+  version: 15.1.1-canary.26
+  resolution: "@next/swc-linux-x64-gnu@npm:15.1.1-canary.26"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
@@ -4435,9 +4435,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-musl@npm:15.1.1-canary.18":
-  version: 15.1.1-canary.18
-  resolution: "@next/swc-linux-x64-musl@npm:15.1.1-canary.18"
+"@next/swc-linux-x64-musl@npm:15.1.1-canary.26":
+  version: 15.1.1-canary.26
+  resolution: "@next/swc-linux-x64-musl@npm:15.1.1-canary.26"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
@@ -4449,9 +4449,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-win32-arm64-msvc@npm:15.1.1-canary.18":
-  version: 15.1.1-canary.18
-  resolution: "@next/swc-win32-arm64-msvc@npm:15.1.1-canary.18"
+"@next/swc-win32-arm64-msvc@npm:15.1.1-canary.26":
+  version: 15.1.1-canary.26
+  resolution: "@next/swc-win32-arm64-msvc@npm:15.1.1-canary.26"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
@@ -4463,9 +4463,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-win32-x64-msvc@npm:15.1.1-canary.18":
-  version: 15.1.1-canary.18
-  resolution: "@next/swc-win32-x64-msvc@npm:15.1.1-canary.18"
+"@next/swc-win32-x64-msvc@npm:15.1.1-canary.26":
+  version: 15.1.1-canary.26
+  resolution: "@next/swc-win32-x64-msvc@npm:15.1.1-canary.26"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -5997,6 +5997,7 @@ __metadata:
     "@testing-library/dom": "npm:^10.4.0"
     "@testing-library/react": "npm:^16.1.0"
     "@types/d3-shape": "npm:^3"
+    "@types/google.visualization": "npm:^0.0.74"
     "@types/identity-obj-proxy": "npm:^3.0.2"
     "@types/mixpanel-browser": "npm:^2.50.2"
     "@types/node": "npm:^22.10.2"
@@ -6038,7 +6039,7 @@ __metadata:
     lighthouse: "npm:^12.3.0"
     logrocket: "npm:^9.0.0"
     mixpanel-browser: "npm:^2.58.0"
-    next: "npm:15.1.1-canary.18"
+    next: "npm:15.1.1-canary.26"
     number-format-react: "workspace:^"
     nyc: "npm:^17.1.0"
     postcss: "npm:^8.4.49"
@@ -8035,6 +8036,13 @@ __metadata:
   version: 1.0.6
   resolution: "@types/estree@npm:1.0.6"
   checksum: 10c0/cdfd751f6f9065442cd40957c07fd80361c962869aa853c1c2fd03e101af8b9389d8ff4955a43a6fcfa223dd387a089937f95be0f3eec21ca527039fd2d9859a
+  languageName: node
+  linkType: hard
+
+"@types/google.visualization@npm:^0.0.74":
+  version: 0.0.74
+  resolution: "@types/google.visualization@npm:0.0.74"
+  checksum: 10c0/8947848bcbde7248c7da82b319b258a212770567b1215965a9c62c416eb2b4a535a46a7f44db5ee2b62a54958ae31c65e08c6c918d525fce468de9bdbac8071f
   languageName: node
   linkType: hard
 
@@ -16005,19 +16013,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:15.1.1-canary.18":
-  version: 15.1.1-canary.18
-  resolution: "next@npm:15.1.1-canary.18"
+"next@npm:15.1.1-canary.26":
+  version: 15.1.1-canary.26
+  resolution: "next@npm:15.1.1-canary.26"
   dependencies:
-    "@next/env": "npm:15.1.1-canary.18"
-    "@next/swc-darwin-arm64": "npm:15.1.1-canary.18"
-    "@next/swc-darwin-x64": "npm:15.1.1-canary.18"
-    "@next/swc-linux-arm64-gnu": "npm:15.1.1-canary.18"
-    "@next/swc-linux-arm64-musl": "npm:15.1.1-canary.18"
-    "@next/swc-linux-x64-gnu": "npm:15.1.1-canary.18"
-    "@next/swc-linux-x64-musl": "npm:15.1.1-canary.18"
-    "@next/swc-win32-arm64-msvc": "npm:15.1.1-canary.18"
-    "@next/swc-win32-x64-msvc": "npm:15.1.1-canary.18"
+    "@next/env": "npm:15.1.1-canary.26"
+    "@next/swc-darwin-arm64": "npm:15.1.1-canary.26"
+    "@next/swc-darwin-x64": "npm:15.1.1-canary.26"
+    "@next/swc-linux-arm64-gnu": "npm:15.1.1-canary.26"
+    "@next/swc-linux-arm64-musl": "npm:15.1.1-canary.26"
+    "@next/swc-linux-x64-gnu": "npm:15.1.1-canary.26"
+    "@next/swc-linux-x64-musl": "npm:15.1.1-canary.26"
+    "@next/swc-win32-arm64-msvc": "npm:15.1.1-canary.26"
+    "@next/swc-win32-x64-msvc": "npm:15.1.1-canary.26"
     "@swc/counter": "npm:0.1.3"
     "@swc/helpers": "npm:0.5.15"
     busboy: "npm:1.6.0"
@@ -16062,7 +16070,7 @@ __metadata:
       optional: true
   bin:
     next: dist/bin/next
-  checksum: 10c0/0720eac8b6fe81ca52d85b2a891e67265fa54eea4b508ac69d4f3c1d172995eb87837647da31ff9d68bfe516c65667836389c34a4c5c4d3434247517171bf920
+  checksum: 10c0/0a6e9e0b88a8198215d8915ab8b4e03d5b5ede8be2fd4c47ca5a3947068c4ef1c039a6d3e3e7effd843bde0ee448c21e464e506497b2da5305a47f3b941b8709
   languageName: node
   linkType: hard
 
