@@ -12,10 +12,8 @@ export default function Home(): ReactElement {
     <>
       <Section>
         <Paragraph>
-          <Link feature="home" href="/" title="quisi.do">
-            quisi.do
-          </Link>{' '}
-          is an invite-only, front end platform software-as-a-service provider.
+          quisi.do is an invite-only, front end platform software-as-a-service
+          provider.
         </Paragraph>
         <NoteSection>
           <Note icon={<Emoji>🕰️</Emoji>}>

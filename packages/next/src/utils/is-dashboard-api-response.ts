@@ -1,5 +1,12 @@
-import { isObject } from 'fmrs';
+import { isNumber, isObject } from 'fmrs';
 import type DashboardApiResponse from '../types/dashboard-api-response.js';
+
+const PERCENTILE_COUNT = 2;
+
+const isPercentiles = (value: unknown): value is readonly [number, number] =>
+  Array.isArray(value) &&
+  value.length === PERCENTILE_COUNT &&
+  value.every(isNumber);
 
 export default function isDashboardApiResponse(
   value: unknown,
@@ -10,14 +17,14 @@ export default function isDashboardApiResponse(
 
   return (
     'cls' in value &&
-    typeof value.cls === 'number' &&
+    isPercentiles(value.cls) &&
     'fcp' in value &&
-    typeof value.fcp === 'number' &&
+    isPercentiles(value.fcp) &&
     'inp' in value &&
-    typeof value.inp === 'number' &&
+    isPercentiles(value.inp) &&
     'lcp' in value &&
-    typeof value.lcp === 'number' &&
-    'lt' in value &&
-    typeof value.lt === 'number'
+    isPercentiles(value.lcp) &&
+    'loadingTime' in value &&
+    isPercentiles(value.loadingTime)
   );
 }

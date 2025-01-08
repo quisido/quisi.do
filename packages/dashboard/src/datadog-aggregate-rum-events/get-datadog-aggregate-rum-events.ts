@@ -1,20 +1,28 @@
 import { mapToError } from 'fmrs';
-import { MetricName } from '../constants/metric-name.js';
 import type DashboardFetchHandler from '../dashboard-fetch-handler.js';
 import DatadogRumApi from './datadog-rum-api.js';
+import emitMissingMetrics from './emit-missing-metrics.js';
 import logWarnings from './log-warnings.js';
+import {
+  sanitizeCls,
+  sanitizeFcp,
+  sanitizeInp,
+  sanitizeLcp,
+  sanitizeLoadingTime,
+} from './sanitize.js';
 
 interface DatadogAggregateRumEvents {
-  readonly cumulativeLayoutShift?: number | undefined;
-  readonly firstContentfulPaint?: number | undefined;
-  readonly interactionToNextPaint?: number | undefined;
-  readonly largestContentfulPaint?: number | undefined;
-  readonly loadingTime?: number | undefined;
+  readonly cumulativeLayoutShiftP50?: number | undefined;
+  readonly cumulativeLayoutShiftP75?: number | undefined;
+  readonly firstContentfulPaintP50?: number | undefined;
+  readonly firstContentfulPaintP75?: number | undefined;
+  readonly interactionToNextPaintP50?: number | undefined;
+  readonly interactionToNextPaintP75?: number | undefined;
+  readonly largestContentfulPaintP50?: number | undefined;
+  readonly largestContentfulPaintP75?: number | undefined;
+  readonly loadingTimeP50?: number | undefined;
+  readonly loadingTimeP75?: number | undefined;
 }
-
-const BASE = 10;
-const CUMULATIVE_LAYOUT_SHIFT_DECIMALS = 4;
-const NANOSECONDS_PER_MILLISECOND = 1_000_000;
 
 export default async function getDatadogAggregateRumEvents(
   this: DashboardFetchHandler,
@@ -26,39 +34,55 @@ export default async function getDatadogAggregateRumEvents(
   });
 
   try {
-    const { elapsed, requestId, status, warnings } =
-      await datadog.getAggregateRumEvents();
+    const {
+      cumulativeLayoutShiftP50,
+      cumulativeLayoutShiftP75,
+      elapsed,
+      firstContentfulPaintP50,
+      firstContentfulPaintP75,
+      interactionToNextPaintP50,
+      interactionToNextPaintP75,
+      largestContentfulPaintP50,
+      largestContentfulPaintP75,
+      loadingTimeP50,
+      loadingTimeP75,
+      requestId,
+      status,
+      warnings,
+    } = await datadog.getAggregateRumEvents();
     logWarnings.call(this, warnings);
-
-    if (
-      typeof cls !== 'number' ||
-      typeof fcp !== 'number' ||
-      typeof inp !== 'number' ||
-      typeof lcp !== 'number' ||
-      typeof lt !== 'number'
-    ) {
-      this.emitPublicMetric(MetricName.InvalidDatadogRumResponse, {
+    emitMissingMetrics.call(
+      this,
+      {
+        cumulativeLayoutShiftP50,
+        cumulativeLayoutShiftP75,
+        firstContentfulPaintP50,
+        firstContentfulPaintP75,
+        interactionToNextPaintP50,
+        interactionToNextPaintP75,
+        largestContentfulPaintP50,
+        largestContentfulPaintP75,
+        loadingTimeP50,
+        loadingTimeP75,
+      },
+      {
         elapsed,
         requestId,
         status,
-      });
-
-      this.logError(
-        new Error(`Invalid Datadog RUM response: ${JSON.stringify(data)}`),
-      );
-
-      return {};
-    }
+      },
+    );
 
     return {
-      firstContentfulPaint: Math.round(fcp / NANOSECONDS_PER_MILLISECOND),
-      interactionToNextPaint: Math.round(inp / NANOSECONDS_PER_MILLISECOND),
-      largestContentfulPaint: Math.round(lcp / NANOSECONDS_PER_MILLISECOND),
-      loadingTime: Math.round(lt / NANOSECONDS_PER_MILLISECOND),
-
-      cumulativeLayoutShift:
-        Math.round(cls * BASE ** CUMULATIVE_LAYOUT_SHIFT_DECIMALS) /
-        BASE ** CUMULATIVE_LAYOUT_SHIFT_DECIMALS,
+      cumulativeLayoutShiftP50: sanitizeCls(cumulativeLayoutShiftP50),
+      cumulativeLayoutShiftP75: sanitizeCls(cumulativeLayoutShiftP75),
+      firstContentfulPaintP50: sanitizeFcp(firstContentfulPaintP50),
+      firstContentfulPaintP75: sanitizeFcp(firstContentfulPaintP75),
+      interactionToNextPaintP50: sanitizeInp(interactionToNextPaintP50),
+      interactionToNextPaintP75: sanitizeInp(interactionToNextPaintP75),
+      largestContentfulPaintP50: sanitizeLcp(largestContentfulPaintP50),
+      largestContentfulPaintP75: sanitizeLcp(largestContentfulPaintP75),
+      loadingTimeP50: sanitizeLoadingTime(loadingTimeP50),
+      loadingTimeP75: sanitizeLoadingTime(loadingTimeP75),
     };
   } catch (err: unknown) {
     const error: Error = mapToError(err);

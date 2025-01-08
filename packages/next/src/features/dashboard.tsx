@@ -8,6 +8,7 @@ import {
   type ReactElement,
 } from 'react';
 import Gauge, { type Threshold } from '../modules/quisi/gauge.jsx';
+import Paragraph from '../modules/quisi/paragraph.jsx';
 import Section from '../modules/quisi/section.jsx';
 import useAsyncState from '../modules/use-async-state/index.js';
 import type DashboardApiResponse from '../types/dashboard-api-response.js';
@@ -158,100 +159,78 @@ function Dashboard(): ReactElement {
   }, [request]);
 
   if (!initiated) {
-    return (
-      <DashboardWrapper>
-        <Section header={<I18n>Problems</I18n>}>Initializing</Section>
-        <Section header={<I18n>Warnings</I18n>}>Initializing</Section>
-        <Section header="Health">Initializing</Section>
-        <Section header={<I18n>Audit</I18n>}>Initializing</Section>
-      </DashboardWrapper>
-    );
+    return <DashboardWrapper>Initializing</DashboardWrapper>;
   }
 
   if (loading) {
-    return (
-      <DashboardWrapper>
-        <Section header={<I18n>Problems</I18n>}>Loading</Section>
-        <Section header={<I18n>Warnings</I18n>}>Loading</Section>
-        <Section header="Health">Loading</Section>
-        <Section header={<I18n>Audit</I18n>}>Loading</Section>
-      </DashboardWrapper>
-    );
+    return <DashboardWrapper>Loading</DashboardWrapper>;
   }
 
   if (typeof error !== 'undefined') {
     return (
       <DashboardWrapper>
-        <p style={{ margin: 0 }}>
+        <Paragraph>
           <strong>An error occurred:</strong> {error}
-        </p>
+        </Paragraph>
       </DashboardWrapper>
     );
   }
 
-  const { cls, fcp, inp, lcp, lt } = data;
+  const {
+    cls: [, cls],
+    fcp: [, fcp],
+    inp: [, inp],
+    lcp: [, lcp],
+    loadingTime: [, loadingTime],
+  } = data;
   return (
     <DashboardWrapper>
-      <Section header={<I18n>Problems</I18n>}>
-        <ul className={LIST_CLASS_NAME}>
-          <li>
-            <p style={{ margin: 0 }}>First contentful paint p75: {fcp}ms</p>
-            <Gauge
-              className={GAUGE_CLASS_NAME}
-              needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-              min={0}
-              thresholds={FCP_THRESHOLDS}
-              value={fcp}
-            />
-          </li>
-          <li>
-            <p style={{ margin: 0 }}>Largest contentful paint p75: {lcp}ms</p>
-            <Gauge
-              className={GAUGE_CLASS_NAME}
-              needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-              min={0}
-              thresholds={LCP_THRESHOLDS}
-              value={lcp}
-            />
-          </li>
-        </ul>
-      </Section>
-      <Section header={<I18n>Warnings</I18n>}>
-        <ul className={LIST_CLASS_NAME}>
-          <li>
-            <p style={{ margin: 0 }}>Cumulative layout shift p75: {cls}</p>
-            <Gauge
-              className={GAUGE_CLASS_NAME}
-              needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-              max={1}
-              min={0}
-              thresholds={CLS_THRESHOLDS}
-              value={cls}
-            />
-          </li>
-        </ul>
-      </Section>
-      <Section header="Health">
-        <ul className={LIST_CLASS_NAME}>
-          <li>
-            <p style={{ margin: 0 }}>Interaction to next paint p75: {inp}ms</p>
-            <Gauge
-              className={GAUGE_CLASS_NAME}
-              needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-              min={0}
-              thresholds={INP_THRESHOLDS}
-              value={inp}
-            />
-          </li>
-        </ul>
-      </Section>
-      <Section header={<I18n>Audit</I18n>}>
-        <ul className={LIST_CLASS_NAME}>
-          <li>
-            <p style={{ margin: 0 }}>Loading time p75: {lt}ms</p>
-          </li>
-        </ul>
-      </Section>
+      <ul className={LIST_CLASS_NAME}>
+        <li>
+          <Paragraph>First contentful paint p75: {fcp}ms</Paragraph>
+          <Gauge
+            className={GAUGE_CLASS_NAME}
+            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
+            min={0}
+            thresholds={FCP_THRESHOLDS}
+            value={fcp}
+          />
+        </li>
+        <li>
+          <Paragraph>Largest contentful paint p75: {lcp}ms</Paragraph>
+          <Gauge
+            className={GAUGE_CLASS_NAME}
+            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
+            min={0}
+            thresholds={LCP_THRESHOLDS}
+            value={lcp}
+          />
+        </li>
+        <li>
+          <Paragraph>Cumulative layout shift p75: {cls}</Paragraph>
+          <Gauge
+            className={GAUGE_CLASS_NAME}
+            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
+            max={1}
+            min={0}
+            thresholds={CLS_THRESHOLDS}
+            value={cls}
+          />
+        </li>
+        <li>
+          <Paragraph>Interaction to next paint p75: {inp}ms</Paragraph>
+          <Gauge
+            className={GAUGE_CLASS_NAME}
+            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
+            min={0}
+            thresholds={INP_THRESHOLDS}
+            value={inp}
+          />
+        </li>
+        <li>
+          <Paragraph>Loading time p75: {loadingTime}ms</Paragraph>
+        </li>
+      </ul>
       {/* <h3 style={{ margin: 0 }}>Scalability</h3>
       <ul>
         <li>Requests per second</li>

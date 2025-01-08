@@ -11,6 +11,7 @@ export default [
 
     'max-lines-per-function': [
       'src/features/handle-fetch.ts',
+      'src/datadog-aggregate-rum-events/get-datadog-aggregate-rum-events.ts',
       'src/handle-metric.ts',
     ],
   }),

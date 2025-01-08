@@ -1,26 +1,50 @@
 import type { RUMApiAggregateRUMEventsRequest } from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2/index.js';
+import {
+  MEDIAN,
+  PERCENTILE_75,
+} from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2/models/RUMAggregationFunction.js';
 
 export const AGGREGATE_RUM_EVENTS_REQUEST: RUMApiAggregateRUMEventsRequest = {
   body: {
     compute: [
       {
-        aggregation: 'pc75',
+        aggregation: MEDIAN,
         metric: '@view.cumulative_layout_shift',
       },
       {
-        aggregation: 'pc75',
+        aggregation: PERCENTILE_75,
+        metric: '@view.cumulative_layout_shift',
+      },
+      {
+        aggregation: MEDIAN,
         metric: '@view.first_contentful_paint',
       },
       {
-        aggregation: 'pc75',
+        aggregation: PERCENTILE_75,
+        metric: '@view.first_contentful_paint',
+      },
+      {
+        aggregation: MEDIAN,
         metric: '@view.interaction_to_next_paint',
       },
       {
-        aggregation: 'pc75',
+        aggregation: PERCENTILE_75,
+        metric: '@view.interaction_to_next_paint',
+      },
+      {
+        aggregation: MEDIAN,
         metric: '@view.largest_contentful_paint',
       },
       {
-        aggregation: 'pc75',
+        aggregation: PERCENTILE_75,
+        metric: '@view.largest_contentful_paint',
+      },
+      {
+        aggregation: MEDIAN,
+        metric: '@view.loading_time',
+      },
+      {
+        aggregation: PERCENTILE_75,
         metric: '@view.loading_time',
       },
     ],
