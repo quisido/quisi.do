@@ -1,6 +1,7 @@
 compatibility_date = "2024-11-11"
 main = "src/index.ts"
 name = "quisido-dashboard-dev"
+r2_buckets = [{ binding = 'CACHE', bucket_name = 'CACHE_DEV' }]
 tsconfig = "./tsconfig.json"
 upload_source_maps = true
 
@@ -24,6 +25,7 @@ port = 9778              # parseInt('dashboard', 36) % 9999
 
 [env.production]
 name = "quisido-dashboard"
+r2_buckets = [{ binding = 'CACHE', bucket_name = 'CACHE' }]
 
 analytics_engine_datasets = [
   { binding = "PRIVATE_DATASET", dataset = "DASHBOARD_PRIVATE" },
@@ -41,6 +43,7 @@ ENVIRONMENT_NAME = "production"
 
 [env.staging]
 name = "quisido-dashboard-staging"
+r2_buckets = [{ binding = 'CACHE', bucket_name = 'CACHE_STAGING' }]
 workers_dev = true
 
 analytics_engine_datasets = [

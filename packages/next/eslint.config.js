@@ -63,6 +63,7 @@ export default [
     ],
 
     complexity: [
+      'src/utils/is-dashboard-api-response.ts',
       'src/utils/map-authn-error-code-to-notification.tsx',
       'src/utils/map-oscpu-to-name.ts',
     ],

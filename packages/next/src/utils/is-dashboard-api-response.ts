@@ -1,12 +1,17 @@
 import { isNumber, isObject } from 'fmrs';
 import type DashboardApiResponse from '../types/dashboard-api-response.js';
 
-const PERCENTILE_COUNT = 2;
+const DOUBLE = 2;
+const TRIPLE = 3;
 
-const isPercentiles = (value: unknown): value is readonly [number, number] =>
-  Array.isArray(value) &&
-  value.length === PERCENTILE_COUNT &&
-  value.every(isNumber);
+const isNumberArray = (value: unknown): value is readonly number[] =>
+  Array.isArray(value) && value.every(isNumber);
+
+const isNumberDouble = (value: unknown): value is readonly [number, number] =>
+  isNumberArray(value) && value.length === DOUBLE;
+
+const isNumberTriple = (value: unknown): value is readonly [number, number] =>
+  isNumberArray(value) && value.length === TRIPLE;
 
 export default function isDashboardApiResponse(
   value: unknown,
@@ -17,14 +22,30 @@ export default function isDashboardApiResponse(
 
   return (
     'cls' in value &&
-    isPercentiles(value.cls) &&
+    isNumberDouble(value.cls) &&
+    'dcl' in value &&
+    isNumberDouble(value.dcl) &&
+    'domComplete' in value &&
+    isNumberDouble(value.domComplete) &&
+    'errorCount' in value &&
+    isNumberTriple(value.errorCount) &&
     'fcp' in value &&
-    isPercentiles(value.fcp) &&
+    isNumberDouble(value.fcp) &&
+    'fip' in value &&
+    isNumberDouble(value.fip) &&
+    'firstByte' in value &&
+    isNumberDouble(value.firstByte) &&
     'inp' in value &&
-    isPercentiles(value.inp) &&
+    isNumberDouble(value.inp) &&
     'lcp' in value &&
-    isPercentiles(value.lcp) &&
+    isNumberDouble(value.lcp) &&
+    'loadEvent' in value &&
+    isNumberDouble(value.loadEvent) &&
     'loadingTime' in value &&
-    isPercentiles(value.loadingTime)
+    isNumberDouble(value.loadingTime) &&
+    'sessionTimeSpent' in value &&
+    isNumber(value.sessionTimeSpent) &&
+    'viewTimeSpent' in value &&
+    isNumber(value.viewTimeSpent)
   );
 }

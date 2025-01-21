@@ -7,6 +7,7 @@ import {
   type PropsWithChildren,
   type ReactElement,
 } from 'react';
+import NumberFormat from '../components/number-format.jsx';
 import Gauge, { type Threshold } from '../modules/quisi/gauge.jsx';
 import Paragraph from '../modules/quisi/paragraph.jsx';
 import Section from '../modules/quisi/section.jsx';
@@ -83,6 +84,28 @@ const FCP_THRESHOLDS: readonly Threshold[] = [
     activeClassName: NEUTRAL_ACTIVE_CLASS_NAME,
     inactiveClassName: NEUTRAL_INACTIVE_CLASS_NAME,
     to: 3000,
+  },
+
+  // Poor
+  {
+    activeClassName: NEGATIVE_ACTIVE_CLASS_NAME,
+    inactiveClassName: NEGATIVE_INACTIVE_CLASS_NAME,
+  },
+];
+
+const FIP_THRESHOLDS: readonly Threshold[] = [
+  // Good
+  {
+    activeClassName: POSITIVE_ACTIVE_CLASS_NAME,
+    inactiveClassName: POSITIVE_INACTIVE_CLASS_NAME,
+    to: 100,
+  },
+
+  // Needs improvement
+  {
+    activeClassName: NEUTRAL_ACTIVE_CLASS_NAME,
+    inactiveClassName: NEUTRAL_INACTIVE_CLASS_NAME,
+    to: 300,
   },
 
   // Poor
@@ -178,16 +201,26 @@ function Dashboard(): ReactElement {
 
   const {
     cls: [, cls],
+    dcl: [dcl],
+    domComplete: [domComplete],
+    errorCount: [errorCountP50, errorCountP75, errorCountP90],
     fcp: [, fcp],
+    fip: [, fip],
+    firstByte: [firstByte],
     inp: [, inp],
     lcp: [, lcp],
-    loadingTime: [, loadingTime],
+    loadEvent: [loadEvent],
+    loadingTime: [loadingTime],
+    sessionTimeSpent,
+    viewTimeSpent,
   } = data;
   return (
     <DashboardWrapper>
       <ul className={LIST_CLASS_NAME}>
         <li>
-          <Paragraph>First contentful paint p75: {fcp}ms</Paragraph>
+          <Paragraph>
+            First contentful paint p75: <NumberFormat>{fcp}</NumberFormat>ms
+          </Paragraph>
           <Gauge
             className={GAUGE_CLASS_NAME}
             needleClassName={GAUGE_NEEDLE_CLASS_NAME}
@@ -197,7 +230,9 @@ function Dashboard(): ReactElement {
           />
         </li>
         <li>
-          <Paragraph>Largest contentful paint p75: {lcp}ms</Paragraph>
+          <Paragraph>
+            Largest contentful paint p75: <NumberFormat>{lcp}</NumberFormat>ms
+          </Paragraph>
           <Gauge
             className={GAUGE_CLASS_NAME}
             needleClassName={GAUGE_NEEDLE_CLASS_NAME}
@@ -207,7 +242,9 @@ function Dashboard(): ReactElement {
           />
         </li>
         <li>
-          <Paragraph>Cumulative layout shift p75: {cls}</Paragraph>
+          <Paragraph>
+            Cumulative layout shift p75: <NumberFormat>{cls}</NumberFormat>
+          </Paragraph>
           <Gauge
             className={GAUGE_CLASS_NAME}
             needleClassName={GAUGE_NEEDLE_CLASS_NAME}
@@ -218,7 +255,9 @@ function Dashboard(): ReactElement {
           />
         </li>
         <li>
-          <Paragraph>Interaction to next paint p75: {inp}ms</Paragraph>
+          <Paragraph>
+            Interaction to next paint p75: <NumberFormat>{inp}</NumberFormat>ms
+          </Paragraph>
           <Gauge
             className={GAUGE_CLASS_NAME}
             needleClassName={GAUGE_NEEDLE_CLASS_NAME}
@@ -228,7 +267,66 @@ function Dashboard(): ReactElement {
           />
         </li>
         <li>
-          <Paragraph>Loading time p75: {loadingTime}ms</Paragraph>
+          <Paragraph>
+            DOM complete median: <NumberFormat>{domComplete}</NumberFormat>ms
+          </Paragraph>
+        </li>
+        <li>
+          <Paragraph>
+            DOM content loaded median: <NumberFormat>{dcl}</NumberFormat>ms
+          </Paragraph>
+        </li>
+        <li>
+          <Paragraph>Error counts:</Paragraph>
+          <ul>
+            <li>
+              Median: <NumberFormat>{errorCountP50}</NumberFormat>
+            </li>
+            <li>
+              P75: <NumberFormat>{errorCountP75}</NumberFormat>
+            </li>
+            <li>
+              P90: <NumberFormat>{errorCountP90}</NumberFormat>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <Paragraph>
+            First byte median: <NumberFormat>{firstByte}</NumberFormat>ms
+          </Paragraph>
+        </li>
+        <li>
+          <Paragraph>
+            First input delay p75: <NumberFormat>{fip}</NumberFormat>ms
+          </Paragraph>
+          <Gauge
+            className={GAUGE_CLASS_NAME}
+            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
+            min={0}
+            thresholds={FIP_THRESHOLDS}
+            value={fip}
+          />
+        </li>
+        <li>
+          <Paragraph>
+            Load event median: <NumberFormat>{loadEvent}</NumberFormat>ms
+          </Paragraph>
+        </li>
+        <li>
+          <Paragraph>
+            Loading time p75: <NumberFormat>{loadingTime}</NumberFormat>ms
+          </Paragraph>
+        </li>
+        <li>
+          <Paragraph>Time spent median:</Paragraph>
+          <ul>
+            <li>
+              Session: <NumberFormat>{sessionTimeSpent}</NumberFormat>ms
+            </li>
+            <li>
+              View: <NumberFormat>{viewTimeSpent}</NumberFormat>ms
+            </li>
+          </ul>
         </li>
       </ul>
       {/* <h3 style={{ margin: 0 }}>Scalability</h3>

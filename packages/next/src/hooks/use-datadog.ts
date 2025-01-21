@@ -15,7 +15,6 @@ const PROPS: Required<
     | 'allowedTracingUrls'
     | 'beforeSend'
     | 'datacenter'
-    | 'excludedActivityUrls'
     | 'internalAnalyticsSubdomain'
     | 'proxy'
     | 'remoteConfigurationId'
@@ -59,6 +58,24 @@ const PROPS: Required<
   usePartitionedCrossSiteSessionCookie: true,
   useSecureSessionCookie: true,
   version: GITHUB_SHA ?? 'unknown',
+
+  excludedActivityUrls: [
+    // Content Security Policy connect-src
+    /^https:\/\/(?:[a-z\d]+\.clarity\.ms|analytics\.google\.com|cloudflareinsights\.com|cognito-identity\.[a-z\d-]+\.amazonaws\.com|dataplane\.rum\.[a-z\d-]+\.amazonaws\.com|edge\.fullstory\.com|[a-z\d]+\.ingest\.sentry\.io|r\.logr-ingest\.com|r\.lrkt-in\.com|region\d+\.analytics\.google\.com|rs\.fullstory\.com|stats\.g\.doubleclick\.net|sts\.[a-z\d-]+\.amazonaws\.com|www\.google-analytics\.com)\//u,
+
+    // Content Security Policy frame-src
+    /^https:\/\/(?:td\.td\.doubleclick\.net)\//u,
+
+    // Content Security Policy img-src
+    /^https:\/\/(?:api-js\.mixpanel\.com|c\.bing\.com|c\.clarity\.ms|www\.google\.[a-z]+|www\.google\.co\.[a-z]+|www\.google\.com\.[a-z]+|www\.googletagmanager\.com)\//u,
+
+    // Content Security Policy script-src-elem
+    /^https:\/\/(?:ajax\.cloudflare\.com|cdn\.logr-ingest\.com|cdn\.lrkt-in\.com|edge\.fullstory\.com|static\.cloudflareinsights\.com|www\.clarity\.ms)\//u,
+    'https://quisi.do/cdn-cgi/speculation',
+
+    // Content Security Policy style-src-elem
+    'https://fonts.googleapis.com/css2',
+  ],
 
   // Technical debt: trackingConsent: 'not-granted',
 };
