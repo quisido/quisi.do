@@ -140,7 +140,7 @@ function LogRocket({
 
     const { id, ...traits } = user;
     LogRocket.identify(id, traits);
-  }, [user]);
+  }, [LogRocket, user]);
 
   return null;
 }

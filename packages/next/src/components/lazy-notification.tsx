@@ -37,7 +37,7 @@ export default function LazyNotification({
 
       setNotification(mapErrorToNotification(err));
     });
-  }, [children]);
+  }, [children, isMountedRef]);
 
   return <Notification {...notification} />;
 }

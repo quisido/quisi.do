@@ -54,7 +54,7 @@
     "reinit": "yarn packages/authn run local:reinit",
     "serve": "yarn packages/next run serve",
     "test": "monorepo-template-test",
-    "up": "yarn up \"@!(monorepo-template|quisido)/*\" \"!(aws-rum-react|cjs-ts|cloudflare-test-utils|cloudflare-utils|fmrs|fullstory-react|lazy-i18n|mock-next-router|number-format-react|react-datadog|sentry-react|use-shallow-memo)\" && yarn up --recursive \"@*/*\" \"*\" && yarn packages/next add next@canary && yarn sdks vscode",
+    "up": "yarn up \"@!(monorepo-template|quisido)/*\" \"!(aws-rum-react|cjs-ts|cloudflare-test-utils|cloudflare-utils|fmrs|fullstory-react|lazy-i18n|mock-next-router|number-format-react|react-datadog|sentry-react|use-shallow-memo)\" && yarn up --recursive \"@*/*\" \"*\" && yarn packages/next add eslint-plugin-react-hooks@experimental next@canary react@experimental react-dom@experimental && yarn sdks vscode",
     "vitest": "vitest",
     "vitest:run": "exit 0 || vitest run",
     "vitest:watch": "vitest watch",
@@ -80,7 +80,7 @@
     "@types/node": "^22.10.2",
     "@typescript-eslint/eslint-plugin": "^8.18.1",
     "@typescript-eslint/parser": "^8.18.1",
-    "@vitest/coverage-istanbul": "^2.1.8",
+    "@vitest/coverage-istanbul": "^3.0.4",
     "@yarnpkg/sdks": "^3.2.0",
     "babel-plugin-replace-import-extension": "^1.1.4",
     "browserslist": "^4.24.3",
@@ -95,7 +95,7 @@
     "publint": "^0.2.12",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.1",
-    "vitest": "^2.1.8"
+    "vitest": "^3.0.4"
   },
   "resolutions": {
     "buildcheck@npm:~0.0.6": "patch:buildcheck@npm%3A0.0.6#~/.yarn/patches/buildcheck-npm-0.0.6-46e0f23ecf.patch",
