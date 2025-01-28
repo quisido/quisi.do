@@ -25,5 +25,7 @@ export default [
 
   ...disableRulesForFiles({
     camelcase: ['src/components/sentry/sentry.hook.ts'],
+    'func-style': ['src/**/*.tsx'],
+    'no-console': ['src/components/sentry/sentry.view.test.tsx'],
   }),
 ];

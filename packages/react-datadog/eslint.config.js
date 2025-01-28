@@ -1,4 +1,4 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
@@ -22,4 +22,8 @@ export default [
       'react-refresh/only-export-components': 'error',
     },
   },
+
+  ...disableRulesForFiles({
+    'func-style': ['src/**/*.tsx'],
+  }),
 ];
