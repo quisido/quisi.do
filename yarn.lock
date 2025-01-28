@@ -9466,6 +9466,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     typescript: "npm:^5.7.2"
+    use-shallow-memo: "workspace:^"
     vite: "npm:^6.0.5"
     vitest: "npm:^2.1.8"
     whatwg-fetch: "npm:^3.6.20"

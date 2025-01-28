@@ -1,6 +1,6 @@
 {
   "name": "aws-rum-react",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "author": "quisi.do <aws-rum-react@quisi.do>",
   "description": "Amazon CloudWatch RUM React client",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/aws-rum-react#readme",
@@ -40,6 +40,9 @@
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
+  },
+  "dependencies": {
+    "use-shallow-memo": "workspace:^"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.2",

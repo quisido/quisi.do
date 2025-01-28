@@ -7,13 +7,6 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 export default [
   ...configs,
 
-  ...disableRulesForFiles({
-    'max-lines-per-function': [
-      'src/test/utils/describe-package-json-scripts.ts',
-      'src/test/utils/package-json-should-have.ts',
-    ],
-  }),
-
   // Plugins: react-compiler, react-hooks, react-refresh
   {
     plugins: {
@@ -29,4 +22,14 @@ export default [
       'react-refresh/only-export-components': 'error',
     },
   },
+
+  ...disableRulesForFiles({
+    'func-style': ['src/**/*.tsx'],
+    'react-compiler/react-compiler': ['src/test/utils/render-hook-error.tsx'],
+
+    'max-lines-per-function': [
+      'src/test/utils/describe-package-json-scripts.ts',
+      'src/test/utils/package-json-should-have.ts',
+    ],
+  }),
 ];
