@@ -23,6 +23,8 @@ connect-src
   https://stats.g.doubleclick.net/g/collect
   https://sts.us-west-2.amazonaws.com/
   https://www.clarity.ms/report-err/eusb
+  https://www.google.ca/ads/ga-audiences
+  https://www.google.com.bd/ads/ga-audiences
   https://www.google-analytics.com/g/collect;
 
 default-src
@@ -56,13 +58,16 @@ img-src
   https://www.google.com.br/ads/ga-audiences
   https://www.google.com.hk/ads/ga-audiences
   https://www.google.com.kh/ads/ga-audiences
+  https://www.google.com.mx/ads/ga-audiences
   https://www.google.com.my/ads/ga-audiences
   https://www.google.com.pk/ads/ga-audiences
   https://www.google.com.sg/ads/ga-audiences
   https://www.google.com.tr/ads/ga-audiences
+  https://www.google.com.ua/ads/ga-audiences
   https://www.google.com.vn/ads/ga-audiences
   https://www.google.de/ads/ga-audiences
   https://www.google.fr/ads/ga-audiences
+  https://www.google.ie/ads/ga-audiences
   https://www.google.it/ads/ga-audiences
   https://www.google.nl/ads/ga-audiences
   https://www.google.ro/ads/ga-audiences
