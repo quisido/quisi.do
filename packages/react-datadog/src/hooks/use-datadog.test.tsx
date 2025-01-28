@@ -6,6 +6,7 @@ import DatadogRumContext from '../contexts/datadog-rum.js';
 import useDatadog from '../index.js';
 import type User from '../types/user.js';
 
+const ONCE = 1;
 const TEST_CLEAR_USER = vi.fn();
 const TEST_INIT = vi.fn();
 const TEST_SET_USER = vi.fn();
@@ -127,7 +128,7 @@ describe('useDatadog', (): void => {
       },
     });
 
-    expect(TEST_START_SESSION_REPLAY_RECORDING).toHaveBeenCalledTimes(TWICE);
+    expect(TEST_START_SESSION_REPLAY_RECORDING).toHaveBeenCalledTimes(ONCE);
     expect(TEST_START_SESSION_REPLAY_RECORDING).toHaveBeenLastCalledWith();
   });
 
@@ -171,7 +172,7 @@ describe('useDatadog', (): void => {
 
     unmount();
 
-    expect(TEST_STOP_SESSION_REPLAY_RECORDING).toHaveBeenCalledTimes(TWICE);
+    expect(TEST_STOP_SESSION_REPLAY_RECORDING).toHaveBeenCalledTimes(ONCE);
     expect(TEST_STOP_SESSION_REPLAY_RECORDING).toHaveBeenLastCalledWith();
   });
 
@@ -199,7 +200,7 @@ describe('useDatadog', (): void => {
       },
     });
 
-    expect(TEST_SET_USER).toHaveBeenCalledTimes(TWICE);
+    expect(TEST_SET_USER).toHaveBeenCalledTimes(ONCE);
     expect(TEST_SET_USER).toHaveBeenLastCalledWith(TEST_USER);
   });
 
@@ -216,6 +217,6 @@ describe('useDatadog', (): void => {
 
     unmount();
 
-    expect(TEST_CLEAR_USER).toHaveBeenCalledTimes(TWICE);
+    expect(TEST_CLEAR_USER).toHaveBeenCalledTimes(ONCE);
   });
 });
