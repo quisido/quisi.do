@@ -3,6 +3,7 @@
 import { GetErrorCode } from '@quisido/csp-shared';
 import { useEffect, useState, type Attributes, type ReactElement } from 'react';
 import Emoji from '../../components/emoji.jsx';
+import useEffectEvent from '../../hooks/use-effect-event.js';
 import useEmit from '../../hooks/use-emit/index.js';
 import Link from '../../modules/quisi/link.jsx';
 import LoadingIcon from '../../modules/quisi/loading-icon.jsx';
@@ -54,14 +55,15 @@ export default function ContentSecurityPolicy(): ReactElement {
     });
 
   // Effects
+  const requestEvent = useEffectEvent(request);
   useEffect((): undefined => {
-    void request(async (): Promise<CspResponse> => {
+    void requestEvent(async (): Promise<CspResponse> => {
       const response = await window.fetch(REQUEST_INFO);
 
       // Technical debt: Validate this on the client.
       return (await response.json()) as CspResponse;
     });
-  }, [request]);
+  }, []);
 
   if (!initiated || loading) {
     return (

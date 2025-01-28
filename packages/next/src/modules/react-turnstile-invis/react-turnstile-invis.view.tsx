@@ -138,14 +138,12 @@ export default function Turnstile({
   const containerId: string = useId();
   const [state, setState] = useState<State>(DEFAULT_STATE);
 
-  // Callbacks
+  // Effects
   const handleError = useEffectEvent(onError ?? noop);
   const handleExpired = useEffectEvent(onExpired ?? noop);
   const handleSuccess = useEffectEvent(onSuccess ?? noop);
   const handleTimeout = useEffectEvent(onTimeout ?? noop);
   const handleUnsupported = useEffectEvent(onUnsupported ?? noop);
-
-  // Effects
   useEffect((): void => {
     const scripts: HTMLCollectionOf<HTMLScriptElement> =
       window.document.getElementsByTagName('script');
@@ -251,20 +249,7 @@ export default function Turnstile({
     script.setAttribute('src', SRC);
     window.document.body.appendChild(script);
     readyRender();
-  }, [
-    appearance,
-    containerId,
-    execution,
-    handleError,
-    handleExpired,
-    handleSuccess,
-    handleTimeout,
-    handleUnsupported,
-    language,
-    retry,
-    sitekey,
-    theme,
-  ]);
+  }, [appearance, containerId, execution, language, retry, sitekey, theme]);
 
   return <Context.Provider value={state}>{children}</Context.Provider>;
 }

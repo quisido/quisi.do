@@ -2,7 +2,6 @@
 
 import { mapToString } from 'fmrs';
 import { useCallback, useRef, useState, type RefObject } from 'react';
-import useEffectEvent from '../../../hooks/use-effect-event.js';
 import type AsyncState from '../types/async-state.js';
 import useGetState from './use-get-state.js';
 
@@ -44,19 +43,22 @@ export default function useAsyncState<T = unknown>({
   const getState = useGetState<T>({
     lastGetRef,
 
-    onError: useEffectEvent((err: unknown): void => {
-      onError?.(err);
+    onError: useCallback(
+      (err: unknown): void => {
+        onError?.(err);
 
-      const errorStr: string = mapToString(err);
-      setAsyncState({
-        data: undefined,
-        error: errorStr,
-        initiated: true,
-        loading: false,
-      });
-    }),
+        const errorStr: string = mapToString(err);
+        setAsyncState({
+          data: undefined,
+          error: errorStr,
+          initiated: true,
+          loading: false,
+        });
+      },
+      [onError],
+    ),
 
-    onGetStart: useEffectEvent((get: () => Promise<T>): void => {
+    onGetStart: useCallback((get: () => Promise<T>): void => {
       lastGetRef.current = get;
       setAsyncState({
         data: undefined,
@@ -64,16 +66,16 @@ export default function useAsyncState<T = unknown>({
         initiated: true,
         loading: true,
       });
-    }),
+    }, []),
 
-    onSuccess: useEffectEvent((data: T): void => {
+    onSuccess: useCallback((data: T): void => {
       setAsyncState({
         data,
         error: undefined,
         initiated: true,
         loading: false,
       });
-    }),
+    }, []),
   });
 
   return {
@@ -105,7 +107,7 @@ export default function useAsyncState<T = unknown>({
       await promise;
     }, [getState]),
 
-    set: useEffectEvent((data: T): void => {
+    set: useCallback((data: T): void => {
       asyncEffectRef.current = undefined;
       lastGetRef.current = undefined;
       setAsyncState({
@@ -114,6 +116,6 @@ export default function useAsyncState<T = unknown>({
         initiated: true,
         loading: false,
       });
-    }),
+    }, []),
   };
 }

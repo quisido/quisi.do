@@ -30,13 +30,13 @@ export default function GoogleChart<C extends Chart>({
 }: Props<C>): ReactElement {
   // States
   const elementRef: RefObject<HTMLDivElement | null> = useRef(null);
-  const handleError = useEffectEvent(onError ?? noop);
   const headings = useShallowMemo(headingsProp);
   const packages = useShallowMemo(packagesProp);
 
   // Effects
   const dataStr: string = JSON.stringify(dataProp);
   const optionsStr: string = JSON.stringify(optionsProp);
+  const handleError = useEffectEvent(onError ?? noop);
   useEffect((): void => {
     const element: HTMLDivElement | null = elementRef.current;
     if (element === null) {
@@ -89,7 +89,7 @@ export default function GoogleChart<C extends Chart>({
         const error: Error = mapToError(err);
         handleError(error);
       });
-  }, [chart, dataStr, handleError, headings, optionsStr, packages]);
+  }, [chart, dataStr, headings, optionsStr, packages]);
 
   return <div className={className} ref={elementRef} />;
 }

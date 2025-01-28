@@ -5,6 +5,7 @@ import { isObject } from 'fmrs';
 import { useEffect, type PropsWithChildren, type ReactElement } from 'react';
 import { WHOAMI } from '../constants/whoami.js';
 import { AuthenticationProvider } from '../contexts/authentication.js';
+import useEffectEvent from '../hooks/use-effect-event.js';
 import useAsyncState from '../modules/use-async-state/index.js';
 import type AuthenticationType from '../types/authentication.js';
 
@@ -19,9 +20,9 @@ export default function AuthenticationFeature({
   // States
   const state = useAsyncState<AuthenticationType>();
 
-  const { request } = state;
+  const requestEvent = useEffectEvent(state.request);
   useEffect((): void => {
-    void request(async (): Promise<AuthenticationType> => {
+    void requestEvent(async (): Promise<AuthenticationType> => {
       const response: Response = await fetch(WHOAMI, {
         credentials: 'include',
         redirect: 'error',
@@ -56,7 +57,7 @@ export default function AuthenticationFeature({
         id,
       };
     });
-  }, [request]);
+  }, []);
 
   return (
     <AuthenticationProvider value={state}>{children}</AuthenticationProvider>

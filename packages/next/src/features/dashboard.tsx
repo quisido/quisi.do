@@ -8,6 +8,7 @@ import {
   type ReactElement,
 } from 'react';
 import NumberFormat from '../components/number-format.jsx';
+import useEffectEvent from '../hooks/use-effect-event.js';
 import Gauge, { type Threshold } from '../modules/quisi/gauge.jsx';
 import Paragraph from '../modules/quisi/paragraph.jsx';
 import Section from '../modules/quisi/section.jsx';
@@ -257,8 +258,9 @@ function Dashboard(): ReactElement {
   const { data, error, initiated, loading, request } =
     useAsyncState<DashboardApiResponse>();
 
+  const requestEvent = useEffectEvent(request);
   useEffect((): void => {
-    void request(async (): Promise<DashboardApiResponse> => {
+    void requestEvent(async (): Promise<DashboardApiResponse> => {
       const response: Response = await window.fetch(DASHBOARD_ENDPOINT);
       const json: unknown = await response.json();
       if (!isDashboardApiResponse(json)) {
@@ -267,7 +269,7 @@ function Dashboard(): ReactElement {
 
       return json;
     });
-  }, [request]);
+  }, []);
 
   if (!initiated) {
     return <DashboardWrapper>Initializing</DashboardWrapper>;

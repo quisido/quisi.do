@@ -3,6 +3,7 @@
 import { isNot } from 'fmrs';
 import {
   memo,
+  useCallback,
   useMemo,
   useRef,
   useState,
@@ -55,7 +56,7 @@ function NotificationsProviderFeature({
     },
   );
 
-  const notify = useEffectEvent((notification: Notification): VoidFunction => {
+  const notify = useCallback((notification: Notification): VoidFunction => {
     key.current += INCREMENT;
     const newNotification: WithKey<Notification> = {
       key: key.current,
@@ -68,7 +69,7 @@ function NotificationsProviderFeature({
     return (): void => {
       dismiss(newNotification);
     };
-  });
+  }, []);
 
   return (
     <NotificationsProvider
@@ -119,7 +120,7 @@ function NotificationsProviderFeature({
         };
 
         return [newNotifications.map(mapToDismissable), notify];
-      }, [dismiss, hash, notifications, notify, setHash])}
+      }, [hash, notifications, notify, setHash])}
     >
       {children}
     </NotificationsProvider>

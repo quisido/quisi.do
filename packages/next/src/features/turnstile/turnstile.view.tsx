@@ -7,7 +7,6 @@ import {
   type RefObject,
 } from 'react';
 import { useNotifications } from '../../contexts/notifications.js';
-import useEffectEvent from '../../hooks/use-effect-event.js';
 import Turnstile from '../../modules/react-turnstile-invis/index.js';
 import type Notification from '../../types/notification.js';
 import noop from '../../utils/noop.js';
@@ -28,10 +27,10 @@ export default function AppTurnstile({
 
   // State
   const removeRef: RefObject<VoidFunction> = useRef(noop);
-  const notify = useEffectEvent((notification: Notification): void => {
+  const notify = (notification: Notification): void => {
     removeRef.current();
     removeRef.current = emitNotification(notification);
-  });
+  };
 
   return (
     <Turnstile

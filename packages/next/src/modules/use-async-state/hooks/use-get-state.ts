@@ -1,5 +1,4 @@
-import { type RefObject } from 'react';
-import useEffectEvent from '../../../hooks/use-effect-event.js';
+import { useCallback, type RefObject } from 'react';
 
 interface Options<T> {
   readonly lastGetRef: RefObject<(() => Promise<T>) | undefined>;
@@ -14,25 +13,28 @@ export default function useGetState<T = unknown>({
   onGetStart,
   onSuccess,
 }: Options<T>): (get: () => Promise<T>) => Promise<void> {
-  return useEffectEvent(async (get: () => Promise<T>): Promise<void> => {
-    onGetStart(get);
+  return useCallback(
+    async (get: () => Promise<T>): Promise<void> => {
+      onGetStart(get);
 
-    try {
-      const data: T = await get();
+      try {
+        const data: T = await get();
 
-      // If this data does not belong to this getter, bail.
-      if (get !== lastGetRef.current) {
-        return;
+        // If this data does not belong to this getter, bail.
+        if (get !== lastGetRef.current) {
+          return;
+        }
+
+        onSuccess(data);
+      } catch (err: unknown) {
+        // If this error does not belong to this getter, bail.
+        if (get !== lastGetRef.current) {
+          return;
+        }
+
+        onError(err);
       }
-
-      onSuccess(data);
-    } catch (err: unknown) {
-      // If this error does not belong to this getter, bail.
-      if (get !== lastGetRef.current) {
-        return;
-      }
-
-      onError(err);
-    }
-  });
+    },
+    [lastGetRef, onError, onGetStart, onSuccess],
+  );
 }

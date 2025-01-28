@@ -2,6 +2,7 @@ import { type EventHint, type Event as SentryEvent } from '@sentry/core';
 import { useRecordEvent } from 'aws-rum-react';
 import { useFullstory, type FSApi } from 'fullstory-react';
 import mixpanelBrowser from 'mixpanel-browser';
+import { useCallback } from 'react';
 import { useDatadogRum } from 'react-datadog';
 import { useSentrySdk } from 'sentry-react';
 import { useHostname } from '../../contexts/hostname.js';
@@ -9,7 +10,6 @@ import EMPTY_OBJECT from '../../modules/react-google-analytics/constants/empty-o
 import type { Dimensions } from '../../types/dimensions.js';
 import mapObjectToEntries from '../../utils/map-object-to-entries.js';
 import zarazTrack from '../../utils/zaraz-track.js';
-import useEffectEvent from '../use-effect-event.js';
 import useLogRocket from '../use-log-rocket.js';
 import usePathname from '../use-pathname.js';
 import createSentryEvent from './utils/create-sentry-event.js';
@@ -104,7 +104,7 @@ export default function useEmit(): EventEmitter {
   const { addAction } = useDatadogRum();
 
   // States
-  return useEffectEvent(
+  return useCallback(
     (name: string, dimensions: Readonly<Dimensions> = EMPTY_OBJECT): void => {
       // CloudWatch RUM
       recordEvent(name, dimensions);
@@ -134,5 +134,14 @@ export default function useEmit(): EventEmitter {
       // Zaraz
       zarazTrack(name, dimensions);
     },
+    [
+      LogRocket,
+      addAction,
+      captureEvent,
+      fullstory,
+      hostname,
+      pathname,
+      recordEvent,
+    ],
   );
 }

@@ -1,9 +1,8 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation.js';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { default as Locale, validateLocale } from '../../constants/locale.js';
-import useEffectEvent from '../../hooks/use-effect-event.js';
 import type Params from './types/params.js';
 
 interface Props {
@@ -26,20 +25,23 @@ export default function useLocaleLayout({ params }: Props): State {
   const pathname: string = usePathname();
 
   // Callacks
-  const setLocale = useEffectEvent((newLocale: Locale): void => {
-    if (locale === Locale.English) {
-      router.push(`/${newLocale}/${pathname}`);
-      return;
-    }
+  const setLocale = useCallback(
+    (newLocale: Locale): void => {
+      if (locale === Locale.English) {
+        router.push(`/${newLocale}/${pathname}`);
+        return;
+      }
 
-    const basePathname = pathname.substring(`/${locale}`.length);
-    if (newLocale === Locale.English) {
-      router.push(basePathname);
-      return;
-    }
+      const basePathname = pathname.substring(`/${locale}`.length);
+      if (newLocale === Locale.English) {
+        router.push(basePathname);
+        return;
+      }
 
-    router.push(`/${newLocale}/${basePathname}`);
-  });
+      router.push(`/${newLocale}/${basePathname}`);
+    },
+    [locale, pathname, router],
+  );
 
   return {
     locale,
