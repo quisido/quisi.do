@@ -7,6 +7,14 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 export default [
   ...configs,
 
+  // Next
+  {
+    files: ['next-env.d.ts'],
+    rules: {
+      'capitalized-comments': 'off',
+    },
+  },
+
   // NodeJS
   {
     files: ['scripts/**/*.js'],
