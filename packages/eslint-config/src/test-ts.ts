@@ -3,7 +3,7 @@ import TS from './ts.js';
 
 export default {
   ...TS,
-  files: ['**/*.test.ts'],
+  files: ['**/*.test.ts', '**/*.test.tsx'],
   ignores: [],
   name: '@quisido/test-ts',
 
