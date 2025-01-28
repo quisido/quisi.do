@@ -2,12 +2,11 @@
 
 import {
   useRef,
-  type MutableRefObject,
   type PropsWithChildren,
   type ReactElement,
+  type RefObject,
 } from 'react';
 import { useNotifications } from '../../contexts/notifications.js';
-import useEffectEvent from '../../hooks/use-effect-event.js';
 import Turnstile from '../../modules/react-turnstile-invis/index.js';
 import type Notification from '../../types/notification.js';
 import noop from '../../utils/noop.js';
@@ -27,11 +26,11 @@ export default function AppTurnstile({
   const [, emitNotification] = useNotifications();
 
   // State
-  const removeRef: MutableRefObject<VoidFunction> = useRef(noop);
-  const notify = useEffectEvent((notification: Notification): void => {
+  const removeRef: RefObject<VoidFunction> = useRef(noop);
+  const notify = (notification: Notification): void => {
     removeRef.current();
     removeRef.current = emitNotification(notification);
-  });
+  };
 
   return (
     <Turnstile
@@ -41,9 +40,11 @@ export default function AppTurnstile({
           case CHALLENGE_TIMEOUT:
             notify({
               type: 'warning',
+
               Header(): ReactElement {
                 return <>🐱‍👤 Are you still human?</>;
               },
+
               Message(): string {
                 return 'You probably left this tab open while doing something else.';
               },
@@ -52,9 +53,11 @@ export default function AppTurnstile({
           default:
             notify({
               type: 'error',
+
               Header(): ReactElement {
                 return <>🤖 You may be a robot.</>;
               },
+
               Message(): ReactElement {
                 return (
                   <>
@@ -96,9 +99,11 @@ export default function AppTurnstile({
       onTimeout={(...args: readonly unknown[]): void => {
         notify({
           type: 'error',
+
           Header(): ReactElement {
             return <>You may be 🤖.</>;
           },
+
           Message(): ReactElement {
             return (
               <>
@@ -120,9 +125,11 @@ export default function AppTurnstile({
       onUnsupported={(...args: readonly unknown[]): void => {
         notify({
           type: 'error',
+
           Header(): ReactElement {
             return <>You may be 🤖.</>;
           },
+
           Message(): ReactElement {
             return (
               <>

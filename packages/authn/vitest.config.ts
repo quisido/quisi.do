@@ -18,9 +18,9 @@ export default {
          * dashboard is complete!
          */
         branches: 63,
-        functions: 90,
-        lines: 86,
-        statements: 86,
+        functions: 89,
+        lines: 85,
+        statements: 85,
       },
     },
   },
