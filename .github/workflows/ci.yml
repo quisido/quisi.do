@@ -61,7 +61,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Scan
-        uses: microsoft/DevSkim-Action@v1
+        uses: microsoft/devskim-action@v1
+        with:
+          options-json: config/devskim.json
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v2
         with:
