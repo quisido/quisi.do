@@ -30,7 +30,6 @@ const lightghouseConfig: Config = {
       'https://challenges.cloudflare.com/*',
       'https://clarity.ms/*',
       'https://cloudflareinsights.com/*',
-      'https://cognito-identity.us-west-2.amazonaws.com/*',
       'https://dataplane.rum.us-west-2.amazonaws.com/*',
       'https://edge.fullstory.com/*',
       'https://o592283.ingest.sentry.io/*',
@@ -82,6 +81,9 @@ const lightghouseConfig: Config = {
       'https://www.googleadservices.com/*',
       'https://www.google-analytics.com/*',
       'https://www.googletagmanager.com/*',
+
+      // CWR: Failed to retrieve Cognito identity: TypeError: Failed to fetch
+      // 'https://cognito-identity.us-west-2.amazonaws.com/*',
 
       // Services have an invalid local certificates.
       'https://localhost:5882/*',
