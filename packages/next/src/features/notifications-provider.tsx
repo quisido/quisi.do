@@ -3,12 +3,13 @@
 import { isNot } from 'fmrs';
 import {
   memo,
+  useCallback,
   useMemo,
   useRef,
   useState,
-  type MutableRefObject,
   type PropsWithChildren,
   type ReactElement,
+  type RefObject,
 } from 'react';
 import { NotificationsProvider } from '../contexts/notifications.js';
 import useEffectEvent from '../hooks/use-effect-event.js';
@@ -20,13 +21,14 @@ import filter from '../utils/filter.js';
 import mapErrorToNotification from '../utils/map-error-to-notification.js';
 import type AuthnErrorNotification from './authn-error-notification.js';
 
-type NotificationState = WithKey<Notification> &
-  RequiredDefined<Pick<Notification, 'onDismiss'>>;
-
 type RequiredDefined<T> = {
   [K in keyof T]-?: Exclude<T[K], undefined>;
 };
 
+type NotificationState = WithKey<Notification> &
+  RequiredDefined<Pick<Notification, 'onDismiss'>>;
+
+const INCREMENT = 1;
 const INITIAL_ID = 0;
 const INITIAL_NOTIFICATIONS: readonly WithKey<Notification>[] = [];
 
@@ -41,7 +43,7 @@ function NotificationsProviderFeature({
   const [hash, setHash] = useHash();
 
   // States
-  const key: MutableRefObject<number> = useRef(INITIAL_ID);
+  const key: RefObject<number> = useRef(INITIAL_ID);
   const [notifications, setNotifications] = useState(INITIAL_NOTIFICATIONS);
 
   // Callbacks
@@ -54,8 +56,8 @@ function NotificationsProviderFeature({
     },
   );
 
-  const notify = useEffectEvent((notification: Notification): VoidFunction => {
-    key.current++;
+  const notify = useCallback((notification: Notification): VoidFunction => {
+    key.current += INCREMENT;
     const newNotification: WithKey<Notification> = {
       key: key.current,
       ...notification,
@@ -67,7 +69,7 @@ function NotificationsProviderFeature({
     return (): void => {
       dismiss(newNotification);
     };
-  });
+  }, []);
 
   return (
     <NotificationsProvider
@@ -80,7 +82,7 @@ function NotificationsProviderFeature({
           | WithKey<Notification>
         )[] = [...notifications];
 
-        if (/^#authn:error=\d+$/.test(hash)) {
+        if (/^#authn:error=\d+$/u.test(hash)) {
           const handleDismiss = (): void => {
             setHash('replace', '');
           };
@@ -92,11 +94,13 @@ function NotificationsProviderFeature({
                   AuthnErrorNotification.fromHash(hash),
               )
               .catch(mapErrorToNotification)
-              .then((notification: Notification): WithKey<Notification> => ({
-                ...notification,
-                key: 'authn:error',
-                onDismiss: handleDismiss,
-              })),
+              .then(
+                (notification: Notification): WithKey<Notification> => ({
+                  ...notification,
+                  key: 'authn:error',
+                  onDismiss: handleDismiss,
+                }),
+              ),
           );
         }
 
@@ -116,7 +120,7 @@ function NotificationsProviderFeature({
         };
 
         return [newNotifications.map(mapToDismissable), notify];
-      }, [dismiss, hash, notifications, notify, setHash])}
+      }, [hash, notifications, notify, setHash])}
     >
       {children}
     </NotificationsProvider>

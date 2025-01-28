@@ -1,11 +1,8 @@
-import {
-  type EventHint,
-  type Metrics,
-  type Event as SentryEvent,
-} from '@sentry/types';
+import { type EventHint, type Event as SentryEvent } from '@sentry/core';
 import { useRecordEvent } from 'aws-rum-react';
 import { useFullstory, type FSApi } from 'fullstory-react';
 import mixpanelBrowser from 'mixpanel-browser';
+import { useCallback } from 'react';
 import { useDatadogRum } from 'react-datadog';
 import { useSentrySdk } from 'sentry-react';
 import { useHostname } from '../../contexts/hostname.js';
@@ -13,7 +10,6 @@ import EMPTY_OBJECT from '../../modules/react-google-analytics/constants/empty-o
 import type { Dimensions } from '../../types/dimensions.js';
 import mapObjectToEntries from '../../utils/map-object-to-entries.js';
 import zarazTrack from '../../utils/zaraz-track.js';
-import useEffectEvent from '../use-effect-event.js';
 import useLogRocket from '../use-log-rocket.js';
 import usePathname from '../use-pathname.js';
 import createSentryEvent from './utils/create-sentry-event.js';
@@ -21,25 +17,15 @@ import createSentryEvent from './utils/create-sentry-event.js';
 interface CaptureSentryEventOptions {
   readonly captureEvent: (event: SentryEvent, hint?: EventHint) => string;
   readonly hostname: string;
-  readonly metrics: Metrics;
   readonly pathname: string;
 }
 
 type EventEmitter = (name: string, dimensions?: Readonly<Dimensions>) => void;
 
-const DEFAULT_METRIC_VALUE = 1;
-
-const mapDimensionsToValue = (dimensions: Dimensions): number => {
-  if ('value' in dimensions && typeof dimensions['value'] === 'number') {
-    return dimensions['value'];
-  }
-  return DEFAULT_METRIC_VALUE;
-};
-
 const captureSentryEvent = (
   name: string,
   dimensions: Readonly<Dimensions>,
-  { captureEvent, hostname, metrics, pathname }: CaptureSentryEventOptions,
+  { captureEvent, hostname, pathname }: CaptureSentryEventOptions,
 ): void => {
   const sentryEvent: SentryEvent = createSentryEvent({
     dimensions,
@@ -52,11 +38,6 @@ const captureSentryEvent = (
     mechanism: {
       type: 'generic',
     },
-  });
-
-  metrics.set(name, mapDimensionsToValue(dimensions), {
-    tags: dimensions,
-    timestamp: Date.now(),
   });
 };
 
@@ -119,11 +100,11 @@ export default function useEmit(): EventEmitter {
   const pathname: string = usePathname();
   const recordEvent = useRecordEvent();
   const LogRocket = useLogRocket();
-  const { captureEvent, metrics } = useSentrySdk();
+  const { captureEvent } = useSentrySdk();
   const { addAction } = useDatadogRum();
 
   // States
-  return useEffectEvent(
+  return useCallback(
     (name: string, dimensions: Readonly<Dimensions> = EMPTY_OBJECT): void => {
       // CloudWatch RUM
       recordEvent(name, dimensions);
@@ -147,12 +128,20 @@ export default function useEmit(): EventEmitter {
       captureSentryEvent(name, dimensions, {
         captureEvent,
         hostname,
-        metrics,
         pathname,
       });
 
       // Zaraz
       zarazTrack(name, dimensions);
     },
+    [
+      LogRocket,
+      addAction,
+      captureEvent,
+      fullstory,
+      hostname,
+      pathname,
+      recordEvent,
+    ],
   );
 }

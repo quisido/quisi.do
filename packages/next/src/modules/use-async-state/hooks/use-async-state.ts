@@ -1,14 +1,9 @@
 'use client';
 
 import { mapToString } from 'fmrs';
-import {
-  useCallback,
-  useRef,
-  useState,
-  type MutableRefObject,
-  type RefObject,
-} from 'react';
+import { useCallback, useRef, useState, type RefObject } from 'react';
 import type AsyncState from '../types/async-state.js';
+import useGetState from './use-get-state.js';
 
 interface BaseState<T> {
   readonly asyncEffectRef: RefObject<Promise<void> | undefined>;
@@ -35,56 +30,53 @@ export default function useAsyncState<T = unknown>({
   onError,
 }: Props = {}): State<T> {
   // States
-  const asyncEffectRef: MutableRefObject<Promise<void> | undefined> =
+  const asyncEffectRef: RefObject<Promise<void> | undefined> =
     useRef(undefined);
 
-  const lastGetRef: MutableRefObject<(() => Promise<T>) | undefined> =
+  const lastGetRef: RefObject<(() => Promise<T>) | undefined> =
     useRef(undefined);
 
   const [asyncState, setAsyncState] =
     useState<AsyncState<T>>(DEFAULT_ASYNC_STATE);
 
   // Callbacks
-  const getState = useCallback(async (get: () => Promise<T>): Promise<void> => {
-    lastGetRef.current = get;
+  const getState = useGetState<T>({
+    lastGetRef,
 
-    setAsyncState({
-      data: undefined,
-      error: undefined,
-      initiated: true,
-      loading: true,
-    });
+    onError: useCallback(
+      (err: unknown): void => {
+        onError?.(err);
 
-    try {
-      const data: T = await get();
+        const errorStr: string = mapToString(err);
+        setAsyncState({
+          data: undefined,
+          error: errorStr,
+          initiated: true,
+          loading: false,
+        });
+      },
+      [onError],
+    ),
 
-      // If this data does not belong to this getter, bail.
-      if (get !== lastGetRef.current) {
-        return;
-      }
+    onGetStart: useCallback((get: () => Promise<T>): void => {
+      lastGetRef.current = get;
+      setAsyncState({
+        data: undefined,
+        error: undefined,
+        initiated: true,
+        loading: true,
+      });
+    }, []),
 
+    onSuccess: useCallback((data: T): void => {
       setAsyncState({
         data,
         error: undefined,
         initiated: true,
         loading: false,
       });
-    } catch (err: unknown) {
-      // If this error does not belong to this getter, bail.
-      if (get !== lastGetRef.current) {
-        return;
-      }
-
-      onError?.(err);
-      const errorStr: string = mapToString(err);
-      setAsyncState({
-        data: undefined,
-        error: errorStr,
-        initiated: true,
-        loading: false,
-      });
-    }
-  }, []);
+    }, []),
+  });
 
   return {
     ...asyncState,
