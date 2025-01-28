@@ -33,8 +33,6 @@ export default function isDashboardApiResponse(
     isNumberDouble(value.fcp) &&
     'fip' in value &&
     isNumberDouble(value.fip) &&
-    'firstByte' in value &&
-    isNumberDouble(value.firstByte) &&
     'inp' in value &&
     isNumberDouble(value.inp) &&
     'lcp' in value &&
@@ -45,6 +43,8 @@ export default function isDashboardApiResponse(
     isNumberDouble(value.loadingTime) &&
     'sessionTimeSpent' in value &&
     isNumber(value.sessionTimeSpent) &&
+    'ttfb' in value &&
+    isNumberDouble(value.ttfb) &&
     'viewTimeSpent' in value &&
     isNumber(value.viewTimeSpent)
   );

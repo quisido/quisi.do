@@ -60,12 +60,12 @@ export default async function handleFetch(
         errorCount: [errorCountP50, errorCountP75, errorCountP90],
         fcp: [firstContentfulPaintP50, firstContentfulPaintP75],
         fip: [firstInputDelayP50, firstInputDelayP75],
-        firstByte: [firstByteP50, firstByteP75],
         inp: [interactionToNextPaintP50, interactionToNextPaintP75],
         lcp: [largestContentfulPaintP50, largestContentfulPaintP75],
         loadEvent: [loadEventP50, loadEventP75],
         loadingTime: [loadingTimeP50, loadingTimeP75],
         sessionTimeSpent,
+        ttfb: [firstByteP50, firstByteP75],
         viewTimeSpent,
       },
       {
