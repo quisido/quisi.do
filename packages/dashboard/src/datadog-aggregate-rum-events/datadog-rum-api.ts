@@ -1,12 +1,8 @@
 import { v2 } from '@datadog/datadog-api-client';
 import type { RUMWarning } from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2/index.js';
-import {
-  MEDIAN,
-  PERCENTILE_75,
-  PERCENTILE_90,
-} from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2/models/RUMAggregationFunction.js';
 import mapToOptionalNumber from '../utils/map-to-optional-number.js';
 import createConfiguration from './create-configuration.js';
+import mapToOptionalTimeSeries from './map-to-optional-time-series.js';
 import sanitizeStatus from './sanitize-status.js';
 import type { Status } from './status.js';
 
@@ -18,9 +14,9 @@ interface AggregateRumEvents {
   readonly domContentLoadedP50?: number | undefined;
   readonly domContentLoadedP75?: number | undefined;
   readonly elapsed: number;
-  readonly errorCountP50?: number | undefined;
-  readonly errorCountP75?: number | undefined;
-  readonly errorCountP90?: number | undefined;
+  readonly errorCountP50?: readonly number[] | undefined;
+  readonly errorCountP75?: readonly number[] | undefined;
+  readonly errorCountP90?: readonly number[] | undefined;
   readonly firstByteP50?: number | undefined;
   readonly firstByteP75?: number | undefined;
   readonly firstContentfulPaintP50?: number | undefined;
@@ -61,7 +57,9 @@ export default class DatadogRumApi extends v2.RUMApi {
     );
   }
 
-  public async getAggregateRumEvents(): Promise<AggregateRumEvents> {
+  public async getAggregateRumEvents(
+    applicationId: string,
+  ): Promise<AggregateRumEvents> {
     const [
       {
         data: {
@@ -75,9 +73,6 @@ export default class DatadogRumApi extends v2.RUMApi {
                 c4: domCompleteP75,
                 c5: domContentLoadedP50,
                 c6: domContentLoadedP75,
-                c7: errorCountP50,
-                c8: errorCountP75,
-                c9: errorCountP90,
               } = {},
             } = {},
           ] = [],
@@ -119,50 +114,58 @@ export default class DatadogRumApi extends v2.RUMApi {
           ] = [],
         } = {},
       },
+      {
+        data: {
+          buckets: [
+            {
+              computes: {
+                c0: errorCountP50,
+                c1: errorCountP75,
+                c2: errorCountP90,
+              } = {},
+            } = {},
+          ] = [],
+        } = {},
+      },
     ] = await Promise.all([
       // Computes[0]
       this.aggregateRUMEvents({
         body: {
           compute: [
             {
-              aggregation: MEDIAN,
+              aggregation: 'median',
               metric: '@session.time_spent',
+              type: 'total',
             },
             {
-              aggregation: MEDIAN,
+              aggregation: 'median',
               metric: '@view.cumulative_layout_shift',
+              type: 'total',
             },
             {
-              aggregation: PERCENTILE_75,
+              aggregation: 'pc75',
               metric: '@view.cumulative_layout_shift',
+              type: 'total',
             },
             {
-              aggregation: MEDIAN,
+              aggregation: 'median',
               metric: '@view.dom_complete',
+              type: 'total',
             },
             {
-              aggregation: PERCENTILE_75,
+              aggregation: 'pc75',
               metric: '@view.dom_complete',
+              type: 'total',
             },
             {
-              aggregation: MEDIAN,
+              aggregation: 'median',
               metric: '@view.dom_content_loaded',
+              type: 'total',
             },
             {
-              aggregation: PERCENTILE_75,
+              aggregation: 'pc75',
               metric: '@view.dom_content_loaded',
-            },
-            {
-              aggregation: MEDIAN,
-              metric: '@view.error.count',
-            },
-            {
-              aggregation: PERCENTILE_75,
-              metric: '@view.error.count',
-            },
-            {
-              aggregation: PERCENTILE_90,
-              metric: '@view.error.count',
+              type: 'total',
             },
           ],
 
@@ -173,8 +176,7 @@ export default class DatadogRumApi extends v2.RUMApi {
 
           // @ts-expect-error: 'search' does not exist in type 'RUMAggregateRequest'
           search: {
-            query:
-              '@application.id:e29eb164-e193-4380-b512-ebd70bbfaeb6 @type:view',
+            query: `@application.id:${applicationId} @type:view`,
           },
         },
       }),
@@ -184,44 +186,54 @@ export default class DatadogRumApi extends v2.RUMApi {
         body: {
           compute: [
             {
-              aggregation: MEDIAN,
+              aggregation: 'median',
               metric: '@view.first_byte',
+              type: 'total',
             },
             {
-              aggregation: PERCENTILE_75,
+              aggregation: 'pc75',
               metric: '@view.first_byte',
+              type: 'total',
             },
             {
-              aggregation: MEDIAN,
+              aggregation: 'median',
               metric: '@view.first_contentful_paint',
+              type: 'total',
             },
             {
-              aggregation: PERCENTILE_75,
+              aggregation: 'pc75',
               metric: '@view.first_contentful_paint',
+              type: 'total',
             },
             {
-              aggregation: MEDIAN,
+              aggregation: 'median',
               metric: '@view.first_input_delay',
+              type: 'total',
             },
             {
-              aggregation: PERCENTILE_75,
+              aggregation: 'pc75',
               metric: '@view.first_input_delay',
+              type: 'total',
             },
             {
-              aggregation: MEDIAN,
+              aggregation: 'median',
               metric: '@view.interaction_to_next_paint',
+              type: 'total',
             },
             {
-              aggregation: PERCENTILE_75,
+              aggregation: 'pc75',
               metric: '@view.interaction_to_next_paint',
+              type: 'total',
             },
             {
-              aggregation: MEDIAN,
+              aggregation: 'median',
               metric: '@view.largest_contentful_paint',
+              type: 'total',
             },
             {
-              aggregation: PERCENTILE_75,
+              aggregation: 'pc75',
               metric: '@view.largest_contentful_paint',
+              type: 'total',
             },
           ],
 
@@ -232,8 +244,7 @@ export default class DatadogRumApi extends v2.RUMApi {
 
           // @ts-expect-error: 'search' does not exist in type 'RUMAggregateRequest'
           search: {
-            query:
-              '@application.id:e29eb164-e193-4380-b512-ebd70bbfaeb6 @type:view',
+            query: `@application.id:${applicationId} @type:view`,
           },
         },
       }),
@@ -243,24 +254,29 @@ export default class DatadogRumApi extends v2.RUMApi {
         body: {
           compute: [
             {
-              aggregation: MEDIAN,
+              aggregation: 'median',
               metric: '@view.load_event',
+              type: 'total',
             },
             {
-              aggregation: PERCENTILE_75,
+              aggregation: 'pc75',
               metric: '@view.load_event',
+              type: 'total',
             },
             {
-              aggregation: MEDIAN,
+              aggregation: 'median',
               metric: '@view.loading_time',
+              type: 'total',
             },
             {
-              aggregation: PERCENTILE_75,
+              aggregation: 'pc75',
               metric: '@view.loading_time',
+              type: 'total',
             },
             {
-              aggregation: MEDIAN,
+              aggregation: 'median',
               metric: '@view.time_spent',
+              type: 'total',
             },
           ],
 
@@ -271,8 +287,43 @@ export default class DatadogRumApi extends v2.RUMApi {
 
           // @ts-expect-error: 'search' does not exist in type 'RUMAggregateRequest'
           search: {
-            query:
-              '@application.id:e29eb164-e193-4380-b512-ebd70bbfaeb6 @type:view',
+            query: `@application.id:${applicationId} @type:view`,
+          },
+        },
+      }),
+
+      // Computes[3]
+      this.aggregateRUMEvents({
+        body: {
+          compute: [
+            {
+              aggregation: 'median',
+              interval: '1w',
+              metric: '@view.error.count',
+              type: 'timeseries',
+            },
+            {
+              aggregation: 'pc75',
+              interval: '1w',
+              metric: '@view.error.count',
+              type: 'timeseries',
+            },
+            {
+              aggregation: 'pc90',
+              interval: '1w',
+              metric: '@view.error.count',
+              type: 'timeseries',
+            },
+          ],
+
+          filter: {
+            from: 'now-4w',
+            to: 'now',
+          },
+
+          // @ts-expect-error: 'search' does not exist in type 'RUMAggregateRequest'
+          search: {
+            query: `@application.id:${applicationId} @type:view`,
           },
         },
       }),
@@ -286,9 +337,9 @@ export default class DatadogRumApi extends v2.RUMApi {
       domContentLoadedP50: mapToOptionalNumber(domContentLoadedP50),
       domContentLoadedP75: mapToOptionalNumber(domContentLoadedP75),
       elapsed: meta.elapsed ?? DEFAULT_ELAPSED,
-      errorCountP50: mapToOptionalNumber(errorCountP50),
-      errorCountP75: mapToOptionalNumber(errorCountP75),
-      errorCountP90: mapToOptionalNumber(errorCountP90),
+      errorCountP50: mapToOptionalTimeSeries(errorCountP50),
+      errorCountP75: mapToOptionalTimeSeries(errorCountP75),
+      errorCountP90: mapToOptionalTimeSeries(errorCountP90),
       firstByteP50: mapToOptionalNumber(firstByteP50),
       firstByteP75: mapToOptionalNumber(firstByteP75),
       firstContentfulPaintP50: mapToOptionalNumber(firstContentfulPaintP50),

@@ -18,9 +18,9 @@ interface DatadogAggregateRumEvents {
   readonly domCompleteP75?: number | undefined;
   readonly domContentLoadedP50?: number | undefined;
   readonly domContentLoadedP75?: number | undefined;
-  readonly errorCountP50?: number | undefined;
-  readonly errorCountP75?: number | undefined;
-  readonly errorCountP90?: number | undefined;
+  readonly errorCountP50?: readonly number[] | undefined;
+  readonly errorCountP75?: readonly number[] | undefined;
+  readonly errorCountP90?: readonly number[] | undefined;
   readonly firstByteP50?: number | undefined;
   readonly firstByteP75?: number | undefined;
   readonly firstContentfulPaintP50?: number | undefined;
@@ -113,7 +113,7 @@ export default async function getDatadogAggregateRumEvents(
       status,
       viewTimeSpent,
       warnings,
-    } = await datadog.getAggregateRumEvents();
+    } = await datadog.getAggregateRumEvents(this.datadogApplicationId);
     logWarnings.call(this, warnings);
     emitMissingMetrics.call(
       this,
