@@ -10,7 +10,7 @@ interface Options {
 
 export default function emitMissingMetrics(
   this: DashboardFetchHandler,
-  values: Partial<Record<string, number>>,
+  values: Partial<Record<string, unknown>>,
   { elapsed, requestId, status }: Options,
 ): void {
   for (const [key, value] of Object.entries(values)) {

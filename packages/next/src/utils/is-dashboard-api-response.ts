@@ -2,7 +2,7 @@ import { isNumber, isObject } from 'fmrs';
 import type DashboardApiResponse from '../types/dashboard-api-response.js';
 
 const DOUBLE = 2;
-const TRIPLE = 3;
+const QUADRUPLE = 4;
 
 const isNumberArray = (value: unknown): value is readonly number[] =>
   Array.isArray(value) && value.every(isNumber);
@@ -10,8 +10,10 @@ const isNumberArray = (value: unknown): value is readonly number[] =>
 const isNumberDouble = (value: unknown): value is readonly [number, number] =>
   isNumberArray(value) && value.length === DOUBLE;
 
-const isNumberTriple = (value: unknown): value is readonly [number, number] =>
-  isNumberArray(value) && value.length === TRIPLE;
+const isNumberQuadruple = (
+  value: unknown,
+): value is readonly [number, number, number, number] =>
+  isNumberArray(value) && value.length === QUADRUPLE;
 
 export default function isDashboardApiResponse(
   value: unknown,
@@ -27,8 +29,14 @@ export default function isDashboardApiResponse(
     isNumberDouble(value.dcl) &&
     'domComplete' in value &&
     isNumberDouble(value.domComplete) &&
-    'errorCount' in value &&
-    isNumberTriple(value.errorCount) &&
+    'errorCounts' in value &&
+    isObject(value.errorCounts) &&
+    'P50' in value.errorCounts &&
+    isNumberQuadruple(value.errorCounts.P50) &&
+    'P75' in value.errorCounts &&
+    isNumberQuadruple(value.errorCounts.P75) &&
+    'P90' in value.errorCounts &&
+    isNumberQuadruple(value.errorCounts.P90) &&
     'fcp' in value &&
     isNumberDouble(value.fcp) &&
     'fip' in value &&

@@ -3815,6 +3815,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@kurkle/color@npm:^0.3.0":
+  version: 0.3.4
+  resolution: "@kurkle/color@npm:0.3.4"
+  checksum: 10c0/0e9fd55c614b005c5f0c4c755bca19ec0293bc7513b4ea3ec1725234f9c2fa81afbc78156baf555c8b9cb0d305619253c3f5bca016067daeebb3d00ebb4ea683
+  languageName: node
+  linkType: hard
+
 "@kwsites/file-exists@npm:^1.1.1":
   version: 1.1.1
   resolution: "@kwsites/file-exists@npm:1.1.1"
@@ -5860,6 +5867,7 @@ __metadata:
     babel-plugin-istanbul: "npm:^7.0.0"
     babel-plugin-react-compiler: "npm:19.0.0-beta-201e55d-20241215"
     babel-plugin-replace-import-extension: "npm:^1.1.4"
+    chart.js: "npm:^4.4.7"
     cjs-ts: "workspace:^"
     concurrently: "npm:^9.1.0"
     console-table-printer: "npm:^2.12.1"
@@ -5889,9 +5897,11 @@ __metadata:
     number-format-react: "workspace:^"
     nyc: "npm:^17.1.0"
     postcss: "npm:^8.4.49"
+    posthog-js: "npm:^1.214.0"
     prettier: "npm:^3.4.2"
     publint: "npm:^0.2.12"
     react: "npm:0.0.0-experimental-9eabb373-20250124"
+    react-chartjs-2: "npm:^5.3.0"
     react-datadog: "workspace:^"
     react-dom: "npm:0.0.0-experimental-9eabb373-20250124"
     react-innertext: "npm:^1.1.5"
@@ -9958,6 +9968,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chart.js@npm:^4.4.7":
+  version: 4.4.7
+  resolution: "chart.js@npm:4.4.7"
+  dependencies:
+    "@kurkle/color": "npm:^0.3.0"
+  checksum: 10c0/9db499993c561f11184112003956ba96cf00513e025f58846be36e75ebddc6cbab2f93626c3734c305bc801e9362a9ef193b9591e679c59903b2ecb48cfcb317
+  languageName: node
+  linkType: hard
+
 "check-error@npm:^2.1.1":
   version: 2.1.1
   resolution: "check-error@npm:2.1.1"
@@ -10560,6 +10579,13 @@ __metadata:
   dependencies:
     browserslist: "npm:^4.24.2"
   checksum: 10c0/880579a3dab235e3b6350f1e324269c600753b48e891ea859331618d5051e68b7a95db6a03ad2f3cc7df4397318c25a5bc7740562ad39e94f56568638d09d414
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.38.1":
+  version: 3.40.0
+  resolution: "core-js@npm:3.40.0"
+  checksum: 10c0/db7946ada881e845d8b157061945b1187618fa45cf162f392a151e8a497962aed2da688c982eaa1d444c864be97a70f8be4d73385294b515d224dd164d19f1d4
   languageName: node
   linkType: hard
 
@@ -12558,7 +12584,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fflate@npm:^0.4.4":
+"fflate@npm:^0.4.4, fflate@npm:^0.4.8":
   version: 0.4.8
   resolution: "fflate@npm:0.4.8"
   checksum: 10c0/29d1eddaaa5deab61b1c6b0d21282adacadbc4d2c01e94d8b1ee784398151673b9c563e53f97a801bc410a1ae55e8de5378114a743430e643e7a0644ba8e5a42
@@ -17040,10 +17066,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"posthog-js@npm:^1.214.0":
+  version: 1.214.0
+  resolution: "posthog-js@npm:1.214.0"
+  dependencies:
+    core-js: "npm:^3.38.1"
+    fflate: "npm:^0.4.8"
+    preact: "npm:^10.19.3"
+    web-vitals: "npm:^4.2.0"
+  checksum: 10c0/1e9bef079b08f0c54672d15ee5d28df7dc776a1dbebcc6b704bec3b1d41ede043e751ee654027a6e4ddd970df23c3fcf666543c045496f0efe55b10ecbcfe02a
+  languageName: node
+  linkType: hard
+
 "pprof-format@npm:^2.1.0":
   version: 2.1.0
   resolution: "pprof-format@npm:2.1.0"
   checksum: 10c0/ea96e4efd675fb3f209a2551191deb34263f107f46c386342ad1e7453ce4205926121321f34a28015b83c9c1c446723d3f516f4242401a62fce806fb850d4773
+  languageName: node
+  linkType: hard
+
+"preact@npm:^10.19.3":
+  version: 10.25.4
+  resolution: "preact@npm:10.25.4"
+  checksum: 10c0/33a009d614d2b47df1c867935fe057c1dfd2bae1aaab41d6e981434b761f75b88e82eac7847ae486b4dbcffc74af814b8dc59ccef17b10625e3effefa2e1ef67
   languageName: node
   linkType: hard
 
@@ -17333,6 +17378,16 @@ __metadata:
   bin:
     rc: ./cli.js
   checksum: 10c0/24a07653150f0d9ac7168e52943cc3cb4b7a22c0e43c7dff3219977c2fdca5a2760a304a029c20811a0e79d351f57d46c9bde216193a0f73978496afc2b85b15
+  languageName: node
+  linkType: hard
+
+"react-chartjs-2@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "react-chartjs-2@npm:5.3.0"
+  peerDependencies:
+    chart.js: ^4.1.1
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/4415d40217c084a49f9a936fbd30f67e0e705148e6f8359bec65601033d1076f31085c45793839fc29ec833e6c427b0bf9861a0c54c432c08d35bc9590ffa41a
   languageName: node
   linkType: hard
 
@@ -20317,7 +20372,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web-vitals@npm:^4.2.3":
+"web-vitals@npm:^4.2.0, web-vitals@npm:^4.2.3":
   version: 4.2.4
   resolution: "web-vitals@npm:4.2.4"
   checksum: 10c0/383c9281d5b556bcd190fde3c823aeb005bb8cf82e62c75b47beb411014a4ed13fa5c5e0489ed0f1b8d501cd66b0bebcb8624c1a75750bd5df13e2a3b1b2d194

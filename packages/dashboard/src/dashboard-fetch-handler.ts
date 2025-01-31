@@ -28,6 +28,10 @@ export default class DashboardFetchHandler extends FetchHandler {
     return this.validateBinding('DATADOG_API_KEY', isString);
   }
 
+  public get datadogApplicationId(): string {
+    return this.validateBinding('DATADOG_APPLICATION_ID', isString);
+  }
+
   public get datadogRumReadApplicationKey(): string {
     return this.validateBinding('DATADOG_RUM_READ_APPLICATION_KEY', isString);
   }

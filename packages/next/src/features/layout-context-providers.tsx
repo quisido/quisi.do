@@ -10,6 +10,7 @@ import ThemeFeature from '../features/theme.js';
 import TracerProviderProvider from '../features/tracer-provider-provider.js';
 import withWrappers from '../hocs/with-wrappers/index.js';
 import Theme from '../modules/quisi/theme.jsx';
+import PostHog from './posthog.jsx';
 
 const LayoutContextProviders: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,
@@ -17,6 +18,7 @@ const LayoutContextProviders: ComponentType<PropsWithChildren> = withWrappers(
   Fullstory,
   HostnameProvider,
   NotificationsProvider,
+  PostHog,
   Sentry,
   SessionIdProvider,
   ThemeFeature,
