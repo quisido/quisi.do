@@ -1,24 +1,17 @@
 'use client';
 
-import {
-  CategoryScale,
-  Chart,
-  LinearScale,
-  LineElement,
-  PointElement,
-} from 'chart.js';
 import I18n from 'lazy-i18n';
 import {
   memo,
   useEffect,
-  useLayoutEffect,
   type PropsWithChildren,
   type ReactElement,
 } from 'react';
-import { Line } from 'react-chartjs-2';
 import Gauge from '../components/gauge.jsx';
 import NumberFormat from '../components/number-format.jsx';
+import { MILLISECONDS_PER_MINUTE } from '../constants/time.js';
 import useEffectEvent from '../hooks/use-effect-event.js';
+import LineChart from '../modules/quisi/line-chart.jsx';
 import Paragraph from '../modules/quisi/paragraph.jsx';
 import Section from '../modules/quisi/section.jsx';
 import useAsyncState from '../modules/use-async-state/index.js';
@@ -45,10 +38,6 @@ function Dashboard(): ReactElement {
     useAsyncState<DashboardApiResponse>();
 
   // Effects
-  useLayoutEffect((): void => {
-    Chart.register(CategoryScale, LineElement, LinearScale, PointElement);
-  }, []);
-
   const requestEvent = useEffectEvent(request);
   useEffect((): void => {
     void requestEvent(async (): Promise<DashboardApiResponse> => {
@@ -169,39 +158,13 @@ function Dashboard(): ReactElement {
           </Paragraph>
         </li>
         <li>
-          <Line
+          <LineChart
             title="Error counts"
+            xLabels={['3 weeks ago', '2 weeks ago', 'Last week', 'This week']}
             data={{
-              labels: [
-                'Three weeks ago',
-                'Two weeks ago',
-                'Last week',
-                'This week',
-              ],
-
-              datasets: [
-                {
-                  borderColor: 'rgb(75, 192, 192)',
-                  data: errorCounts.P50,
-                  fill: false,
-                  label: 'Median',
-                  tension: 0.1,
-                },
-                {
-                  borderColor: 'rgb(75, 192, 192)',
-                  data: errorCounts.P75,
-                  fill: false,
-                  label: 'P75',
-                  tension: 0.1,
-                },
-                {
-                  borderColor: 'rgb(75, 192, 192)',
-                  data: errorCounts.P90,
-                  fill: false,
-                  label: 'P90',
-                  tension: 0.1,
-                },
-              ],
+              Median: errorCounts.P50,
+              P75: errorCounts.P75,
+              P90: errorCounts.P90,
             }}
           />
         </li>
@@ -209,10 +172,18 @@ function Dashboard(): ReactElement {
           <Paragraph>Time spent median:</Paragraph>
           <ul>
             <li>
-              Session: <NumberFormat>{sessionTimeSpent}</NumberFormat>ms
+              Session:{' '}
+              <NumberFormat>
+                {Math.round(sessionTimeSpent / MILLISECONDS_PER_MINUTE)}
+              </NumberFormat>{' '}
+              minutes
             </li>
             <li>
-              View: <NumberFormat>{viewTimeSpent}</NumberFormat>ms
+              View:{' '}
+              <NumberFormat>
+                {Math.round(viewTimeSpent / MILLISECONDS_PER_MINUTE)}
+              </NumberFormat>{' '}
+              minutes
             </li>
           </ul>
         </li>

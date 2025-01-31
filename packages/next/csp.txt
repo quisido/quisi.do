@@ -1,3 +1,9 @@
+https://us.i.posthog.com/decide/
+https://us.i.posthog.com/e/
+https://us.i.posthog.com/s/
+https://us-assets.i.posthog.com/array/phc_qgxn9IH7LL0PWTQv12DQa6j65d7bSpkTG2nfTpVtJOW/
+https://us-assets.i.posthog.com/static/
+
 child-src
   'none';
 
