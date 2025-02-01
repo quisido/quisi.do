@@ -2,6 +2,7 @@ import { type EventHint, type Event as SentryEvent } from '@sentry/core';
 import { useRecordEvent } from 'aws-rum-react';
 import { useFullstory, type FSApi } from 'fullstory-react';
 import mixpanelBrowser from 'mixpanel-browser';
+import { usePostHog } from 'posthog-js/react';
 import { useCallback } from 'react';
 import { useDatadogRum } from 'react-datadog';
 import { useSentrySdk } from 'sentry-react';
@@ -95,13 +96,14 @@ const safeMixpanelBrowserTrack = (
  */
 export default function useEmit(): EventEmitter {
   // Context
+  const { addAction } = useDatadogRum();
   const fullstory: FSApi = useFullstory();
   const hostname: string = useHostname();
-  const pathname: string = usePathname();
-  const recordEvent = useRecordEvent();
   const LogRocket = useLogRocket();
+  const pathname: string = usePathname();
+  const posthog = usePostHog();
+  const recordEvent = useRecordEvent();
   const { captureEvent } = useSentrySdk();
-  const { addAction } = useDatadogRum();
 
   // States
   return useCallback(
@@ -124,6 +126,11 @@ export default function useEmit(): EventEmitter {
       // Mixpanel
       safeMixpanelBrowserTrack(name, dimensions);
 
+      // PostHog
+      posthog.capture(name, dimensions, {
+        skip_client_rate_limiting: true,
+      });
+
       // Sentry
       captureSentryEvent(name, dimensions, {
         captureEvent,
@@ -141,6 +148,7 @@ export default function useEmit(): EventEmitter {
       fullstory,
       hostname,
       pathname,
+      posthog,
       recordEvent,
     ],
   );

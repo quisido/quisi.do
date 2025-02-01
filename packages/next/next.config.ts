@@ -53,6 +53,8 @@ export default withNextJsBundleAnalyzer({
     'HONEYCOMB_API_KEY',
     'PATREON_OAUTH_CLIENT_ID',
     'PATREON_OAUTH_REDIRECT_URI',
+    'POSTHOG_HOST',
+    'POSTHOG_KEY',
     'SENTRY_ENVIRONMENT',
     'WHOAMI',
   ]),

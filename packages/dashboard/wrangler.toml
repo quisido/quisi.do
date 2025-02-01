@@ -35,6 +35,7 @@ analytics_engine_datasets = [
 
 [env.production.vars]
 CORS_ORIGIN = "https://quisi.do"
+DATADOG_APPLICATION_ID = "e29eb164-e193-4380-b512-ebd70bbfaeb6"
 ENVIRONMENT_NAME = "production"
 
 ###########
@@ -58,6 +59,7 @@ routes = [
 
 [env.staging.vars]
 CORS_ORIGIN = "https://staging.quisi.do"
+DATADOG_APPLICATION_ID = "3e55f7ef-a00a-41ab-9857-baf7ad00daa1"
 ENVIRONMENT_NAME = "staging"
 
 [observability.logs]
@@ -68,4 +70,5 @@ mode = "smart"
 
 [vars]
 CORS_ORIGIN = "https://localhost:3000"
+DATADOG_APPLICATION_ID = "11b64b43-b9bc-4155-a913-e241f76e35f7"
 ENVIRONMENT_NAME = "development"

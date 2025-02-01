@@ -7,9 +7,11 @@ import {
   type PropsWithChildren,
   type ReactElement,
 } from 'react';
+import Gauge from '../components/gauge.jsx';
 import NumberFormat from '../components/number-format.jsx';
+import { MILLISECONDS_PER_MINUTE } from '../constants/time.js';
 import useEffectEvent from '../hooks/use-effect-event.js';
-import Gauge, { type Threshold } from '../modules/quisi/gauge.jsx';
+import LineChart from '../modules/quisi/line-chart.jsx';
 import Paragraph from '../modules/quisi/paragraph.jsx';
 import Section from '../modules/quisi/section.jsx';
 import useAsyncState from '../modules/use-async-state/index.js';
@@ -18,235 +20,11 @@ import isDashboardApiResponse from '../utils/is-dashboard-api-response.js';
 import validateString from '../utils/validate-string.js';
 import styles from './dashboard.module.scss';
 
-const GAUGE_CLASS_NAME: string = validateString(styles['gauge']);
-const GAUGE_NEEDLE_CLASS_NAME: string = validateString(styles['gaugeNeedle']);
 const LIST_CLASS_NAME: string = validateString(styles['list']);
 
 const DASHBOARD_ENDPOINT: string = validateString(
   process.env['DASHBOARD_ENDPOINT'],
 );
-
-const NEGATIVE_ACTIVE_CLASS_NAME: string = validateString(
-  styles['negativeActive'],
-);
-
-const NEGATIVE_INACTIVE_CLASS_NAME: string = validateString(
-  styles['negativeInactive'],
-);
-
-const NEUTRAL_ACTIVE_CLASS_NAME: string = validateString(
-  styles['neutralActive'],
-);
-
-const NEUTRAL_INACTIVE_CLASS_NAME: string = validateString(
-  styles['neutralInactive'],
-);
-
-const POSITIVE_ACTIVE_CLASS_NAME: string = validateString(
-  styles['positiveActive'],
-);
-
-const POSITIVE_INACTIVE_CLASS_NAME: string = validateString(
-  styles['positiveInactive'],
-);
-
-const CLS_THRESHOLDS: readonly Threshold[] = [
-  // Good
-  {
-    activeClassName: POSITIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: POSITIVE_INACTIVE_CLASS_NAME,
-    to: 0.1,
-  },
-
-  // Needs improvement
-  {
-    activeClassName: NEUTRAL_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEUTRAL_INACTIVE_CLASS_NAME,
-    to: 0.25,
-  },
-
-  // Poor
-  {
-    activeClassName: NEGATIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEGATIVE_INACTIVE_CLASS_NAME,
-  },
-];
-
-const DCL_THRESHOLDS: readonly Threshold[] = [
-  // Good
-  {
-    activeClassName: POSITIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: POSITIVE_INACTIVE_CLASS_NAME,
-    to: 2600,
-  },
-
-  // Needs improvement
-  {
-    activeClassName: NEUTRAL_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEUTRAL_INACTIVE_CLASS_NAME,
-    to: 5000,
-  },
-
-  // Poor
-  {
-    activeClassName: NEGATIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEGATIVE_INACTIVE_CLASS_NAME,
-  },
-];
-
-const DOM_COMPLETE_THRESHOLDS: readonly Threshold[] = [
-  // Good
-  {
-    activeClassName: POSITIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: POSITIVE_INACTIVE_CLASS_NAME,
-    to: 2600,
-  },
-
-  // Needs improvement
-  {
-    activeClassName: NEUTRAL_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEUTRAL_INACTIVE_CLASS_NAME,
-    to: 5000,
-  },
-
-  // Poor
-  {
-    activeClassName: NEGATIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEGATIVE_INACTIVE_CLASS_NAME,
-  },
-];
-
-const FCP_THRESHOLDS: readonly Threshold[] = [
-  // Good
-  {
-    activeClassName: POSITIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: POSITIVE_INACTIVE_CLASS_NAME,
-    to: 1800,
-  },
-
-  // Needs improvement
-  {
-    activeClassName: NEUTRAL_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEUTRAL_INACTIVE_CLASS_NAME,
-    to: 3000,
-  },
-
-  // Poor
-  {
-    activeClassName: NEGATIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEGATIVE_INACTIVE_CLASS_NAME,
-  },
-];
-
-const FIP_THRESHOLDS: readonly Threshold[] = [
-  // Good
-  {
-    activeClassName: POSITIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: POSITIVE_INACTIVE_CLASS_NAME,
-    to: 100,
-  },
-
-  // Needs improvement
-  {
-    activeClassName: NEUTRAL_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEUTRAL_INACTIVE_CLASS_NAME,
-    to: 300,
-  },
-
-  // Poor
-  {
-    activeClassName: NEGATIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEGATIVE_INACTIVE_CLASS_NAME,
-  },
-];
-
-const INP_THRESHOLDS: readonly Threshold[] = [
-  // Good
-  {
-    activeClassName: POSITIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: POSITIVE_INACTIVE_CLASS_NAME,
-    to: 200,
-  },
-
-  // Needs improvement
-  {
-    activeClassName: NEUTRAL_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEUTRAL_INACTIVE_CLASS_NAME,
-    to: 500,
-  },
-
-  // Poor
-  {
-    activeClassName: NEGATIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEGATIVE_INACTIVE_CLASS_NAME,
-  },
-];
-
-const LCP_THRESHOLDS: readonly Threshold[] = [
-  // Good
-  {
-    activeClassName: POSITIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: POSITIVE_INACTIVE_CLASS_NAME,
-    to: 2500,
-  },
-
-  // Needs improvement
-  {
-    activeClassName: NEUTRAL_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEUTRAL_INACTIVE_CLASS_NAME,
-    to: 4000,
-  },
-
-  // Poor
-  {
-    activeClassName: NEGATIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEGATIVE_INACTIVE_CLASS_NAME,
-  },
-];
-
-const LOAD_THRESHOLDS: readonly Threshold[] = [
-  // Good
-  {
-    activeClassName: POSITIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: POSITIVE_INACTIVE_CLASS_NAME,
-    to: 5000,
-  },
-
-  // Needs improvement
-  {
-    activeClassName: NEUTRAL_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEUTRAL_INACTIVE_CLASS_NAME,
-    to: 8200,
-  },
-
-  // Poor
-  {
-    activeClassName: NEGATIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEGATIVE_INACTIVE_CLASS_NAME,
-  },
-];
-
-const TTFB_THRESHOLDS: readonly Threshold[] = [
-  // Good
-  {
-    activeClassName: POSITIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: POSITIVE_INACTIVE_CLASS_NAME,
-    to: 800,
-  },
-
-  // Needs improvement
-  {
-    activeClassName: NEUTRAL_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEUTRAL_INACTIVE_CLASS_NAME,
-    to: 1800,
-  },
-
-  // Poor
-  {
-    activeClassName: NEGATIVE_ACTIVE_CLASS_NAME,
-    inactiveClassName: NEGATIVE_INACTIVE_CLASS_NAME,
-  },
-];
 
 function DashboardWrapper({ children }: PropsWithChildren): ReactElement {
   return (
@@ -255,9 +33,11 @@ function DashboardWrapper({ children }: PropsWithChildren): ReactElement {
 }
 
 function Dashboard(): ReactElement {
+  // States
   const { data, error, initiated, loading, request } =
     useAsyncState<DashboardApiResponse>();
 
+  // Effects
   const requestEvent = useEffectEvent(request);
   useEffect((): void => {
     void requestEvent(async (): Promise<DashboardApiResponse> => {
@@ -293,7 +73,7 @@ function Dashboard(): ReactElement {
     cls: [, cls],
     dcl: [dcl],
     domComplete: [domComplete],
-    errorCount: [errorCountP50, errorCountP75, errorCountP90],
+    errorCounts,
     fcp: [, fcp],
     fip: [, fip],
     inp: [, inp],
@@ -309,157 +89,101 @@ function Dashboard(): ReactElement {
       <ul className={LIST_CLASS_NAME}>
         <li>
           <Paragraph>Cumulative layout shift p75:</Paragraph>
-          <Gauge
-            className={GAUGE_CLASS_NAME}
-            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-            max={1}
-            min={0}
-            thresholds={CLS_THRESHOLDS}
-            value={cls}
-          />
+          <Gauge max={1} severe={0.25} value={cls} warning={0.1} />
           <Paragraph>
             <NumberFormat>{cls}</NumberFormat>
           </Paragraph>
         </li>
         <li>
           <Paragraph>DOM complete median:</Paragraph>
-          <Gauge
-            className={GAUGE_CLASS_NAME}
-            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-            min={0}
-            thresholds={DOM_COMPLETE_THRESHOLDS}
-            value={domComplete}
-          />
+          <Gauge severe={5000} value={domComplete} warning={2600} />
           <Paragraph>
             <NumberFormat>{domComplete}</NumberFormat>ms
           </Paragraph>
         </li>
         <li>
           <Paragraph>DOM content loaded median:</Paragraph>
-          <Gauge
-            className={GAUGE_CLASS_NAME}
-            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-            min={0}
-            thresholds={DCL_THRESHOLDS}
-            value={dcl}
-          />
+          <Gauge severe={5000} value={dcl} warning={2600} />
           <Paragraph>
             <NumberFormat>{dcl}</NumberFormat>ms
           </Paragraph>
         </li>
         <li>
           <Paragraph>First contentful paint p75:</Paragraph>
-          <Gauge
-            className={GAUGE_CLASS_NAME}
-            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-            min={0}
-            thresholds={FCP_THRESHOLDS}
-            value={fcp}
-          />
+          <Gauge severe={3000} value={fcp} warning={1800} />
           <Paragraph>
             <NumberFormat>{fcp}</NumberFormat>ms
           </Paragraph>
         </li>
         <li>
           <Paragraph>First input delay p75:</Paragraph>
-          <Gauge
-            className={GAUGE_CLASS_NAME}
-            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-            min={0}
-            thresholds={FIP_THRESHOLDS}
-            value={fip}
-          />
+          <Gauge severe={300} value={fip} warning={100} />
           <Paragraph>
             <NumberFormat>{fip}</NumberFormat>ms
           </Paragraph>
         </li>
         <li>
           <Paragraph>Interaction to next paint p75:</Paragraph>
-          <Gauge
-            className={GAUGE_CLASS_NAME}
-            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-            min={0}
-            thresholds={INP_THRESHOLDS}
-            value={inp}
-          />
+          <Gauge severe={500} value={inp} warning={200} />
           <Paragraph>
             <NumberFormat>{inp}</NumberFormat>ms
           </Paragraph>
         </li>
         <li>
           <Paragraph>Largest contentful paint p75:</Paragraph>
-          <Gauge
-            className={GAUGE_CLASS_NAME}
-            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-            min={0}
-            thresholds={LCP_THRESHOLDS}
-            value={lcp}
-          />
+          <Gauge severe={4000} value={lcp} warning={2500} />
           <Paragraph>
             <NumberFormat>{lcp}</NumberFormat>ms
           </Paragraph>
         </li>
         <li>
           <Paragraph>Load event median:</Paragraph>
-          <Gauge
-            className={GAUGE_CLASS_NAME}
-            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-            min={0}
-            thresholds={LOAD_THRESHOLDS}
-            value={loadEvent}
-          />
+          <Gauge severe={8200} value={loadEvent} warning={5000} />
           <Paragraph>
             <NumberFormat>{loadEvent}</NumberFormat>ms
           </Paragraph>
         </li>
         <li>
           <Paragraph>Loading time p75:</Paragraph>
-          <Gauge
-            className={GAUGE_CLASS_NAME}
-            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-            min={0}
-            thresholds={LOAD_THRESHOLDS}
-            value={loadingTime}
-          />
+          <Gauge severe={8200} value={loadingTime} warning={5000} />
           <Paragraph>
             <NumberFormat>{loadingTime}</NumberFormat>ms
           </Paragraph>
         </li>
         <li>
           <Paragraph>Time to first byte p75:</Paragraph>
-          <Gauge
-            className={GAUGE_CLASS_NAME}
-            needleClassName={GAUGE_NEEDLE_CLASS_NAME}
-            min={0}
-            thresholds={TTFB_THRESHOLDS}
-            value={ttfb}
-          />
+          <Gauge severe={1800} value={ttfb} warning={800} />
           <Paragraph>
             <NumberFormat>{ttfb}</NumberFormat>ms
           </Paragraph>
         </li>
         <li>
-          <Paragraph>Error counts:</Paragraph>
-          <ul>
-            <li>
-              Median: <NumberFormat>{errorCountP50}</NumberFormat>
-            </li>
-            <li>
-              P75: <NumberFormat>{errorCountP75}</NumberFormat>
-            </li>
-            <li>
-              P90: <NumberFormat>{errorCountP90}</NumberFormat>
-            </li>
-          </ul>
+          <LineChart
+            title="Error counts"
+            xLabels={['3 weeks ago', '2 weeks ago', 'Last week', 'This week']}
+            data={{
+              Median: errorCounts.P50,
+              P75: errorCounts.P75,
+              P90: errorCounts.P90,
+            }}
+          />
         </li>
         <li>
           <Paragraph>Time spent median:</Paragraph>
           <ul>
             <li>
-              Session: <NumberFormat>{sessionTimeSpent}</NumberFormat>ms
+              Session:{' '}
+              <NumberFormat>
+                {Math.round(sessionTimeSpent / MILLISECONDS_PER_MINUTE)}
+              </NumberFormat>{' '}
+              minutes
             </li>
             <li>
-              View: <NumberFormat>{viewTimeSpent}</NumberFormat>ms
+              View:{' '}
+              <NumberFormat>
+                {Math.round(viewTimeSpent / MILLISECONDS_PER_MINUTE)}
+              </NumberFormat>{' '}
+              minutes
             </li>
           </ul>
         </li>

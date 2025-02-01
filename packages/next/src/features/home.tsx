@@ -5,6 +5,7 @@ import NoteSection from '../modules/quisi/note-section.jsx';
 import Note from '../modules/quisi/note.jsx';
 import Paragraph from '../modules/quisi/paragraph.jsx';
 import Section from '../modules/quisi/section.js';
+import ContentSecurityPolicy from './content-security-policy/content-security-policy.jsx';
 import Dashboard from './dashboard.jsx';
 
 export default function Home(): ReactElement {
@@ -43,6 +44,7 @@ export default function Home(): ReactElement {
           </Note>
         </NoteSection>
       </Section>
+      <ContentSecurityPolicy />
       <Dashboard />
     </>
   );
