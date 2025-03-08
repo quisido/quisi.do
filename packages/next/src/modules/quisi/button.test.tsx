@@ -4,7 +4,6 @@ import { MockFullstory } from 'fullstory-react';
 import { type PropsWithChildren, type ReactElement } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import THEME from '../../constants/theme.js';
-import { HostnameProvider } from '../../contexts/hostname.js';
 import Theme from '../../contexts/theme.js';
 import Button from './button.js';
 
@@ -17,11 +16,9 @@ describe('Button', (): void => {
       {
         wrapper({ children }: PropsWithChildren): ReactElement {
           return (
-            <HostnameProvider value="localhost">
-              <MockFullstory FullStory={MOCK_FULLSTORY} orgId="test-org-id">
-                <Theme.Provider value={THEME}>{children}</Theme.Provider>
-              </MockFullstory>
-            </HostnameProvider>
+            <MockFullstory FullStory={MOCK_FULLSTORY} orgId="test-org-id">
+              <Theme.Provider value={THEME}>{children}</Theme.Provider>
+            </MockFullstory>
           );
         },
       },

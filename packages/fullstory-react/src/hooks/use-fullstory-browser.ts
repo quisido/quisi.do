@@ -1,9 +1,12 @@
 'use client';
 
-import * as fullStoryBrowser from '@fullstory/browser';
+import * as fullstoryBrowser from '@fullstory/browser';
 import { useContext } from 'react';
-import FullStoryBrowser from '../contexts/fullstory-browser.js';
+import FullstoryBrowser from '../contexts/fullstory-browser.js';
 
-export default function useFullStoryBrowser(): typeof fullStoryBrowser {
-  return useContext(FullStoryBrowser) ?? fullStoryBrowser;
+export default function useFullstoryBrowser(): Omit<
+  typeof fullstoryBrowser,
+  'default'
+> {
+  return useContext(FullstoryBrowser) ?? fullstoryBrowser;
 }

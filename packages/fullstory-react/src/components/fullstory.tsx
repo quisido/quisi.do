@@ -4,31 +4,24 @@ import type { SnippetOptions } from '@fullstory/browser';
 import { useEffect, type PropsWithChildren, type ReactElement } from 'react';
 import useShallowMemo from 'use-shallow-memo';
 import FullstoryContext from '../contexts/fullstory.js';
-import useFullStoryBrowser from '../hooks/use-fullstory-browser.js';
+import useFullstoryBrowser from '../hooks/use-fullstory-browser.js';
 
-interface Authenticated {
-  readonly identity: object;
-  readonly identityUid: string;
+interface Props extends SnippetOptions {
+  readonly identityProperties?: object | undefined;
+  readonly identityUid?: string | undefined;
 }
-
-interface Unauthenticated {
-  readonly identity?: undefined;
-  readonly identityUid?: undefined;
-}
-
-type Props = SnippetOptions & (Authenticated | Unauthenticated);
 
 function useFullstoryEffects({
-  identity,
+  identityProperties,
   identityUid,
   ...snippetOptions
 }: Props): void {
   // Contexts
   const {
-    FullStory: fullStoryApi,
+    FullStory: fullstoryApi,
     init,
     isInitialized,
-  } = useFullStoryBrowser();
+  } = useFullstoryBrowser();
 
   // States
   const memoizedSnippetOptions: SnippetOptions = useShallowMemo(snippetOptions);
@@ -41,26 +34,29 @@ function useFullstoryEffects({
 
     init(memoizedSnippetOptions);
     return (): void => {
-      fullStoryApi('shutdown');
+      fullstoryApi('shutdown');
     };
-  }, [fullStoryApi, init, isInitialized, memoizedSnippetOptions]);
+  }, [fullstoryApi, init, isInitialized, memoizedSnippetOptions]);
 
   useEffect((): void => {
-    if (typeof identity === 'undefined') {
-      fullStoryApi('setIdentity', {
+    if (
+      typeof identityProperties === 'undefined' &&
+      typeof identityUid === 'undefined'
+    ) {
+      fullstoryApi('setIdentity', {
         anonymous: true,
         consent: false,
       });
       return;
     }
 
-    fullStoryApi('setIdentity', {
+    fullstoryApi('setIdentity', {
       anonymous: false,
       consent: false,
-      properties: identity,
+      properties: identityProperties,
       uid: identityUid,
     });
-  }, [fullStoryApi, identity, identityUid]);
+  }, [fullstoryApi, identityProperties, identityUid]);
 }
 
 export default function Fullstory({
@@ -68,13 +64,13 @@ export default function Fullstory({
   ...props
 }: PropsWithChildren<Props>): ReactElement {
   // Contexts
-  const { FullStory: fullStoryApi } = useFullStoryBrowser();
+  const { FullStory: fullstoryApi } = useFullstoryBrowser();
 
   // Effects
   useFullstoryEffects(props);
 
   return (
-    <FullstoryContext.Provider value={fullStoryApi}>
+    <FullstoryContext.Provider value={fullstoryApi}>
       {children}
     </FullstoryContext.Provider>
   );

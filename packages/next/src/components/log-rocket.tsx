@@ -54,6 +54,7 @@ const CONSOLE: Required<Required<LogRocketOptions>['console']> = {
 
 const DOM: Required<Omit<Required<LogRocketOptions>['dom'], 'baseHref'>> = {
   disablePageTitles: false,
+  disableVisibleElement: false,
   disableWebAnimations: false,
   hiddenAttributes: [],
   inputSanitizer: false,

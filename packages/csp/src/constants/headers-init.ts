@@ -1,4 +1,4 @@
-export const HEADERS_INIT: HeadersInit = {
+export const HEADERS_INIT: Record<string, string> = {
   'access-control-allow-origin': '*',
 
   // Technical debt: After launch, let's set this to like 5 or 10 minutes.

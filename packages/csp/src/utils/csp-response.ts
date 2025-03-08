@@ -17,7 +17,7 @@ export default class CspResponse extends Response {
   public constructor(
     status: StatusCode,
     body: unknown = null,
-    headers: HeadersInit | undefined = {},
+    headers: Record<string, string> | undefined = {},
   ) {
     const newBody: string | null = mapToBody(body);
     super(newBody, {
