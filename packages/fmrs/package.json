@@ -57,7 +57,7 @@
     "babel-plugin-replace-import-extension": "^1.1.4",
     "cjs-ts": "workspace:^",
     "concurrently": "^9.1.0",
-    "eslint": "^9.17.0",
+    "eslint": "^9.21.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",

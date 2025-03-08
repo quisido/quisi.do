@@ -5,6 +5,9 @@ import { TYPESCRIPT_PARSER_OPTIONS } from './typescript-parser-options.js';
 
 export const TYPESCRIPT_LANGUAGE_OPTIONS: Required<ESLintLanguageOptions> = {
   ...LANGUAGE_OPTIONS,
+  ecmaVersion: 'latest',
+  globals: {},
   parser: tsParser,
   parserOptions: TYPESCRIPT_PARSER_OPTIONS,
+  sourceType: 'module',
 };

@@ -7,11 +7,13 @@ import {
   type PropsWithChildren,
   type ReactElement,
 } from 'react';
+import CertificateManagerLink from '../components/certificate-manager-link.jsx';
 import Gauge from '../components/gauge.jsx';
 import NumberFormat from '../components/number-format.jsx';
-import { MILLISECONDS_PER_MINUTE } from '../constants/time.js';
-import useEffectEvent from '../hooks/use-effect-event.js';
+import { MILLISECONDS_PER_SECOND } from '../constants/time.js';
+import useWindow from '../hooks/use-window.js';
 import LineChart from '../modules/quisi/line-chart.jsx';
+import Link from '../modules/quisi/link.jsx';
 import Paragraph from '../modules/quisi/paragraph.jsx';
 import Section from '../modules/quisi/section.jsx';
 import useAsyncState from '../modules/use-async-state/index.js';
@@ -33,14 +35,16 @@ function DashboardWrapper({ children }: PropsWithChildren): ReactElement {
 }
 
 function Dashboard(): ReactElement {
+  // Contexts
+  const wndw: Window | null = useWindow();
+
   // States
   const { data, error, initiated, loading, request } =
     useAsyncState<DashboardApiResponse>();
 
   // Effects
-  const requestEvent = useEffectEvent(request);
   useEffect((): void => {
-    void requestEvent(async (): Promise<DashboardApiResponse> => {
+    void request(async (): Promise<DashboardApiResponse> => {
       const response: Response = await window.fetch(DASHBOARD_ENDPOINT);
       const json: unknown = await response.json();
       if (!isDashboardApiResponse(json)) {
@@ -49,7 +53,7 @@ function Dashboard(): ReactElement {
 
       return json;
     });
-  }, []);
+  }, [request]);
 
   if (!initiated) {
     return <DashboardWrapper>Initializing</DashboardWrapper>;
@@ -60,6 +64,35 @@ function Dashboard(): ReactElement {
   }
 
   if (typeof error !== 'undefined') {
+    if (
+      wndw !== null &&
+      wndw.location.origin === 'https://localhost:3000' &&
+      error === 'Failed to fetch'
+    ) {
+      return (
+        <Section header="Content Security Policy">
+          To view the dashboard in development,{' '}
+          <Link
+            feature="content-security-policy"
+            href={DASHBOARD_ENDPOINT}
+            title=""
+          >
+            trust the security certificate.
+          </Link>
+          <ol>
+            <li>
+              Visit <CertificateManagerLink feature="content-security-policy" />
+              .
+            </li>
+            <li>
+              Under <strong>Trusted Certificates</strong>, click{' '}
+              <strong>Import</strong>.
+            </li>
+          </ol>
+        </Section>
+      );
+    }
+
     return (
       <DashboardWrapper>
         <Paragraph>
@@ -174,16 +207,16 @@ function Dashboard(): ReactElement {
             <li>
               Session:{' '}
               <NumberFormat>
-                {Math.round(sessionTimeSpent / MILLISECONDS_PER_MINUTE)}
+                {Math.round(sessionTimeSpent / MILLISECONDS_PER_SECOND)}
               </NumberFormat>{' '}
-              minutes
+              seconds
             </li>
             <li>
               View:{' '}
               <NumberFormat>
-                {Math.round(viewTimeSpent / MILLISECONDS_PER_MINUTE)}
+                {Math.round(viewTimeSpent / MILLISECONDS_PER_SECOND)}
               </NumberFormat>{' '}
-              minutes
+              seconds
             </li>
           </ul>
         </li>

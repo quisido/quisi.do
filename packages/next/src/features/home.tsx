@@ -18,7 +18,7 @@ export default function Home(): ReactElement {
         </Paragraph>
         <NoteSection>
           <Note icon={<Emoji>🕰️</Emoji>}>
-            Prevent{' '}
+            Detect{' '}
             <Link
               feature="home"
               href="https://en.wikipedia.org/wiki/Cross-site_scripting"

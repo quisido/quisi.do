@@ -3,13 +3,13 @@
 import { identity } from 'fmrs';
 import { memo, useEffect } from 'react';
 import { GITHUB_SHA } from '../constants/github-sha.js';
+import useHostname from '../hooks/use-hostname.js';
 import useLogRocket from '../hooks/use-log-rocket.js';
 import {
   type LogRocketOptions,
   type LogRocketRequest,
   type LogRocketResponse,
 } from '../types/log-rocket.js';
-import getHostname from '../utils/get-hostname.js';
 
 export interface User extends Record<string, number | string> {
   readonly id: string;
@@ -101,12 +101,15 @@ function LogRocket({
   sanitizeResponse = defaultResponseSanitizer,
   user,
 }: Props): null {
+  // Contexts
+  const rootHostname: string = useHostname();
   const LogRocket = useLogRocket();
 
+  // Effects
   useEffect((): void => {
     LogRocket.init(appId, {
       ...OPTIONS,
-      rootHostname: getHostname(),
+      rootHostname,
 
       dom: {
         ...OPTIONS.dom,
@@ -131,7 +134,7 @@ function LogRocket({
         },
       },
     });
-  }, [appId, LogRocket, sanitizeRequest, sanitizeResponse]);
+  }, [appId, LogRocket, rootHostname, sanitizeRequest, sanitizeResponse]);
 
   useEffect((): void => {
     if (typeof user === 'undefined') {

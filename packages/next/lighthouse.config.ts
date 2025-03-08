@@ -30,7 +30,6 @@ const lightghouseConfig: Config = {
       'https://challenges.cloudflare.com/*',
       'https://clarity.ms/*',
       'https://cloudflareinsights.com/*',
-      'https://dataplane.rum.us-west-2.amazonaws.com/*',
       'https://edge.fullstory.com/*',
       'https://o592283.ingest.sentry.io/*',
       'https://quisi.do/cdn-cgi/speculation',
@@ -80,12 +79,6 @@ const lightghouseConfig: Config = {
       'https://www.googleadservices.com/*',
       'https://www.google-analytics.com/*',
       'https://www.googletagmanager.com/*',
-
-      // CWR: Failed to retrieve Cognito identity
-      // 'https://cognito-identity.us-west-2.amazonaws.com/*',
-
-      // CWR: Failed to retrieve credentials from STS
-      // 'https://sts.us-west-2.amazonaws.com/*',
 
       // Services have an invalid local certificates.
       'https://localhost:5882/*',

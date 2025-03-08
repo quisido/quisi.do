@@ -6,10 +6,23 @@ import useShallowMemo from 'use-shallow-memo';
 import FullstoryContext from '../contexts/fullstory.js';
 import useFullStoryBrowser from '../hooks/use-fullstory-browser.js';
 
-export default function Fullstory({
-  children,
+interface Authenticated {
+  readonly identity: object;
+  readonly identityUid: string;
+}
+
+interface Unauthenticated {
+  readonly identity?: undefined;
+  readonly identityUid?: undefined;
+}
+
+type Props = SnippetOptions & (Authenticated | Unauthenticated);
+
+function useFullstoryEffects({
+  identity,
+  identityUid,
   ...snippetOptions
-}: PropsWithChildren<SnippetOptions>): ReactElement {
+}: Props): void {
   // Contexts
   const {
     FullStory: fullStoryApi,
@@ -31,6 +44,34 @@ export default function Fullstory({
       fullStoryApi('shutdown');
     };
   }, [fullStoryApi, init, isInitialized, memoizedSnippetOptions]);
+
+  useEffect((): void => {
+    if (typeof identity === 'undefined') {
+      fullStoryApi('setIdentity', {
+        anonymous: true,
+        consent: false,
+      });
+      return;
+    }
+
+    fullStoryApi('setIdentity', {
+      anonymous: false,
+      consent: false,
+      properties: identity,
+      uid: identityUid,
+    });
+  }, [fullStoryApi, identity, identityUid]);
+}
+
+export default function Fullstory({
+  children,
+  ...props
+}: PropsWithChildren<Props>): ReactElement {
+  // Contexts
+  const { FullStory: fullStoryApi } = useFullStoryBrowser();
+
+  // Effects
+  useFullstoryEffects(props);
 
   return (
     <FullstoryContext.Provider value={fullStoryApi}>

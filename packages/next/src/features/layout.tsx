@@ -3,7 +3,6 @@ import Footer from '../features/footer.js';
 import Header from '../features/header.js';
 import styles from '../features/layout.module.scss';
 import LogRocket from '../features/log-rocket.js';
-import Mixpanel from '../features/mixpanel.js';
 import Notifications from '../features/notifications.js';
 import validateString from '../utils/validate-string.js';
 import Analytics from './analytics.jsx';
@@ -27,14 +26,13 @@ function RootLayout({ children }: Readonly<PropsWithChildren>): ReactElement {
            * want to inadvertently render HTML elements around `<body>`.
            */}
           <LayoutContextProviders>
+            <Analytics />
             <Notifications />
             <Header />
             <main>{children}</main>
             <Footer />
             <LogRocket />
           </LayoutContextProviders>
-          <Analytics />
-          <Mixpanel />
         </body>
       </html>
     </StrictMode>

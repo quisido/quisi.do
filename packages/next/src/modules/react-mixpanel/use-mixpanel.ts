@@ -8,7 +8,7 @@ interface Props extends Partial<Config> {
   readonly token: string;
 }
 
-export default function Mixpanel({ token, ...props }: Props): null {
+export default function useMixpanel({ token, ...props }: Props): void {
   const config: Partial<Config> = useShallowMemo(props);
 
   useEffect((): VoidFunction => {
@@ -17,6 +17,4 @@ export default function Mixpanel({ token, ...props }: Props): null {
       mixpanel.reset();
     };
   }, [config, token]);
-
-  return null;
 }

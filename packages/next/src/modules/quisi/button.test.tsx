@@ -1,6 +1,5 @@
 import { FullStory } from '@fullstory/browser';
 import { render } from '@testing-library/react';
-import { MockAwsRumProvider } from 'aws-rum-react';
 import { MockFullstory } from 'fullstory-react';
 import { type PropsWithChildren, type ReactElement } from 'react';
 import { describe, expect, it, vi } from 'vitest';
@@ -19,11 +18,9 @@ describe('Button', (): void => {
         wrapper({ children }: PropsWithChildren): ReactElement {
           return (
             <HostnameProvider value="localhost">
-              <MockAwsRumProvider>
-                <MockFullstory FullStory={MOCK_FULLSTORY} orgId="test-org-id">
-                  <Theme.Provider value={THEME}>{children}</Theme.Provider>
-                </MockFullstory>
-              </MockAwsRumProvider>
+              <MockFullstory FullStory={MOCK_FULLSTORY} orgId="test-org-id">
+                <Theme.Provider value={THEME}>{children}</Theme.Provider>
+              </MockFullstory>
             </HostnameProvider>
           );
         },

@@ -2,9 +2,12 @@ import {
   TELEMETRY_SDK_LANGUAGE_VALUE_NODEJS,
   TELEMETRY_SDK_LANGUAGE_VALUE_WEBJS,
 } from '@opentelemetry/semantic-conventions';
+import useWindow from '../hooks/use-window.js';
 
-export default function getTelemetrySdkLanguage(): string {
-  if (typeof window === 'undefined') {
+export default function useTelemetrySdkLanguage(): string {
+  const wndw: Window | null = useWindow();
+
+  if (wndw === null) {
     return TELEMETRY_SDK_LANGUAGE_VALUE_NODEJS;
   }
 

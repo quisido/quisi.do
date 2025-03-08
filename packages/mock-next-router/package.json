@@ -1,6 +1,6 @@
 {
   "name": "mock-next-router",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "quisi.do <mock-next-router@quisi.do>",
   "description": "a Next Router for unit tests",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/mock-next-router#readme",
@@ -66,7 +66,7 @@
     "babel-plugin-replace-import-extension": "^1.1.4",
     "cjs-ts": "workspace:^",
     "concurrently": "^9.1.0",
-    "eslint": "^9.17.0",
+    "eslint": "^9.21.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.2.1",
@@ -91,7 +91,6 @@
     "@types/react-dom": "npm:types-react-dom@rc"
   },
   "peerDependencies": {
-    "@awsui/components-react": ">=3.0.0",
     "history": ">=5.0.0",
     "next": ">=13.0.0",
     "react": ">=18.0.0"

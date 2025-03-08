@@ -2,9 +2,11 @@
 
 import { GetErrorCode } from '@quisido/csp-shared';
 import { useEffect, useState, type Attributes, type ReactElement } from 'react';
+import CertificateManagerLink from '../../components/certificate-manager-link.jsx';
 import Emoji from '../../components/emoji.jsx';
 import useEffectEvent from '../../hooks/use-effect-event.js';
 import useEmit from '../../hooks/use-emit/index.js';
+import useWindow from '../../hooks/use-window.js';
 import Link from '../../modules/quisi/link.jsx';
 import LoadingIcon from '../../modules/quisi/loading-icon.jsx';
 import Section from '../../modules/quisi/section.jsx';
@@ -42,6 +44,7 @@ const mapContentSecurityPolicyListItemPropsToElement = mapPropsToElement(
 export default function ContentSecurityPolicy(): ReactElement {
   // Contexts
   const emit = useEmit();
+  const wndw: Window | null = useWindow();
 
   // States
   const [expandedKey, setExpandedKey] = useState<string | null>(null);
@@ -75,7 +78,8 @@ export default function ContentSecurityPolicy(): ReactElement {
 
   if (typeof error !== 'undefined') {
     if (
-      window.location.origin === 'https://localhost:3000' &&
+      wndw !== null &&
+      wndw.location.origin === 'https://localhost:3000' &&
       error === 'Failed to fetch'
     ) {
       return (
@@ -86,14 +90,7 @@ export default function ContentSecurityPolicy(): ReactElement {
           </Link>
           <ol>
             <li>
-              Visit{' '}
-              <Link
-                feature="content-security-policy"
-                href="chrome://certificate-manager/localcerts/usercerts"
-                title="Certificate Manager"
-              >
-                Google Chrome's certificate manager
-              </Link>
+              Visit <CertificateManagerLink feature="content-security-policy" />
               .
             </li>
             <li>

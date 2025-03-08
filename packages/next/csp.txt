@@ -1,9 +1,3 @@
-https://us.i.posthog.com/decide/
-https://us.i.posthog.com/e/
-https://us.i.posthog.com/s/
-https://us-assets.i.posthog.com/array/phc_qgxn9IH7LL0PWTQv12DQa6j65d7bSpkTG2nfTpVtJOW/
-https://us-assets.i.posthog.com/static/
-
 child-src
   'none';
 
@@ -12,12 +6,11 @@ connect-src
   https://*.clarity.ms/collect
   https://a.quisi.do/whoami/
   https://analytics.google.com/g/collect
+  https://browser-intake-datadoghq.com/api/v2/replay
   https://browser-intake-datadoghq.com/api/v2/rum
   https://cloudflareinsights.com/
-  https://cognito-identity.us-west-2.amazonaws.com/
   https://csp.quisi.do/1/
   https://dashboard.quisi.do/
-  https://dataplane.rum.us-west-2.amazonaws.com/appmonitors/8495b9c9-f57e-4395-9ca6-6c01862c107b
   https://edge.fullstory.com/s/settings/o-1X4ZHB-na1/v1/web
   https://localhost:5882/whoami/
   https://localhost:6586/1/
@@ -29,7 +22,10 @@ connect-src
   https://rs.fullstory.com/rec/bundle/v2
   https://rs.fullstory.com/rec/page
   https://stats.g.doubleclick.net/g/collect
-  https://sts.us-west-2.amazonaws.com/
+  https://us.i.posthog.com/decide/
+  https://us.i.posthog.com/e/
+  https://us.i.posthog.com/s/
+  https://us-assets.i.posthog.com/array/
   https://www.clarity.ms/report-err/eusb
   https://www.google.ca/ads/ga-audiences
   https://www.google.com.bd/ads/ga-audiences
@@ -104,6 +100,8 @@ script-src-elem
   https://edge.fullstory.com/s/fs.js
   https://quisi.do/cdn-cgi/speculation
   https://static.cloudflareinsights.com/
+  https://us-assets.i.posthog.com/array/phc_qgxn9IH7LL0PWTQv12DQa6j65d7bSpkTG2nfTpVtJOW/
+  https://us-assets.i.posthog.com/static/
   https://www.clarity.ms/s/
   https://www.clarity.ms/tag/lm4m88gmix
   https://www.googletagmanager.com/gtag/js;

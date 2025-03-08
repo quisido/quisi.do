@@ -61,7 +61,7 @@ const PROPS: Required<
 
   excludedActivityUrls: [
     // Content Security Policy connect-src
-    /^https:\/\/(?:[a-z\d]+\.clarity\.ms|analytics\.google\.com|cloudflareinsights\.com|cognito-identity\.[a-z\d-]+\.amazonaws\.com|dataplane\.rum\.[a-z\d-]+\.amazonaws\.com|edge\.fullstory\.com|[a-z\d]+\.ingest\.sentry\.io|r\.logr-ingest\.com|r\.lrkt-in\.com|region\d+\.analytics\.google\.com|rs\.fullstory\.com|stats\.g\.doubleclick\.net|sts\.[a-z\d-]+\.amazonaws\.com|www\.google-analytics\.com)\//u,
+    /^https:\/\/(?:[a-z\d]+\.clarity\.ms|analytics\.google\.com|cloudflareinsights\.com|edge\.fullstory\.com|[a-z\d]+\.ingest\.sentry\.io|r\.logr-ingest\.com|r\.lrkt-in\.com|region\d+\.analytics\.google\.com|rs\.fullstory\.com|stats\.g\.doubleclick\.net|www\.google-analytics\.com)\//u,
 
     // Content Security Policy frame-src
     /^https:\/\/(?:td\.td\.doubleclick\.net)\//u,

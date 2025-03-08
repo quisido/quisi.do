@@ -1,5 +1,6 @@
 'use client';
 
+import type { User } from '@sentry/core';
 import { memo, type ReactElement, type ReactNode } from 'react';
 import SentryReact from 'sentry-react';
 import useSentryIntegrations from '../hooks/use-sentry-integrations.js';
@@ -11,6 +12,7 @@ interface Props {
   readonly org: string;
   readonly release: string;
   readonly tracePropagationTargets: string[];
+  readonly user?: User | undefined;
 }
 
 function Sentry({
@@ -20,6 +22,7 @@ function Sentry({
   org,
   release,
   tracePropagationTargets,
+  user,
 }: Props): ReactElement {
   const integrations = useSentryIntegrations(org);
 
@@ -40,6 +43,7 @@ function Sentry({
       sendDefaultPii
       tracePropagationTargets={tracePropagationTargets}
       tracesSampleRate={1}
+      user={user}
     >
       {children}
     </SentryReact>
