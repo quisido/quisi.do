@@ -15,6 +15,10 @@ interface Props {
   readonly user?: User | undefined;
 }
 
+const IGNORE_ERRORS: RegExp[] = [
+  /^Object Not Found Matching Id:\d+, MethodName:\w+, ParamCount:\d+$/u,
+];
+
 function Sentry({
   children,
   dsn,
@@ -32,6 +36,7 @@ function Sentry({
       dsn={dsn}
       enabled
       environment={environment}
+      ignoreErrors={IGNORE_ERRORS}
       integrations={integrations}
       normalizeDepth={Number.POSITIVE_INFINITY}
       profilesSampleRate={1}

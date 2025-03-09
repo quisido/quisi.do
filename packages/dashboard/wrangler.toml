@@ -2,6 +2,7 @@ compatibility_date = "2024-11-11"
 main = "src/index.ts"
 name = "quisido-dashboard-dev"
 r2_buckets = [{ binding = 'CACHE', bucket_name = 'dashboard-dev' }]
+send_metrics = true
 tsconfig = "./tsconfig.json"
 upload_source_maps = true
 

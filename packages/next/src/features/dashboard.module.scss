@@ -1,9 +1,7 @@
 .list {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
   list-style-type: none;
   margin: 0;
   padding: 0;

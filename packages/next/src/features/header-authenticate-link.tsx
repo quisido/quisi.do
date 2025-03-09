@@ -8,11 +8,15 @@ import {
 import { useSessionId } from '../contexts/session-id.js';
 import useSearch from '../hooks/use-search.js';
 import Link from '../modules/quisi/link.jsx';
+import validateString from '../utils/validate-string.js';
+import styles from './header-authenticate-link.module.scss';
 
 interface State {
   readonly href: string;
   readonly title: string;
 }
+
+const CLASS_NAME: string = validateString(styles['link']);
 
 const SCOPES: readonly string[] = [
   // 'campaigns',
@@ -57,7 +61,12 @@ export default function AuthenticateLink(): ReactElement {
   const { href, title } = useAuthenticateLink();
 
   return (
-    <Link feature="header/authenticate-link" href={href} title={title}>
+    <Link
+      className={CLASS_NAME}
+      feature="header/authenticate-link"
+      href={href}
+      title={title}
+    >
       <I18n>Authenticate</I18n>
     </Link>
   );

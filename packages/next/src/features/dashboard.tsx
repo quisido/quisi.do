@@ -1,5 +1,6 @@
 'use client';
 
+import { sortStrings } from 'fmrs';
 import I18n from 'lazy-i18n';
 import {
   memo,
@@ -22,11 +23,82 @@ import isDashboardApiResponse from '../utils/is-dashboard-api-response.js';
 import validateString from '../utils/validate-string.js';
 import styles from './dashboard.module.scss';
 
+interface IGauge {
+  readonly name: string;
+  readonly max?: number | undefined;
+  readonly severe: number;
+  readonly value: number;
+  readonly warning: number;
+}
+
 const LIST_CLASS_NAME: string = validateString(styles['list']);
 
 const DASHBOARD_ENDPOINT: string = validateString(
   process.env['DASHBOARD_ENDPOINT'],
 );
+
+const INITIAL_VALUE = 0;
+const INITIAL_TUPLE: readonly [number, number] = [INITIAL_VALUE, INITIAL_VALUE];
+
+const INITIAL_TIMESERIES: readonly [number, number, number, number] = [
+  INITIAL_VALUE,
+  INITIAL_VALUE,
+  INITIAL_VALUE,
+  INITIAL_VALUE,
+];
+
+const INITIAL_DATA = {
+  cls: INITIAL_TUPLE,
+  dcl: INITIAL_TUPLE,
+  domComplete: INITIAL_TUPLE,
+  fcp: INITIAL_TUPLE,
+  fip: INITIAL_TUPLE,
+  inp: INITIAL_TUPLE,
+  lcp: INITIAL_TUPLE,
+  loadEvent: INITIAL_TUPLE,
+  loadingTime: INITIAL_TUPLE,
+  sessionTimeSpent: 0,
+  ttfb: INITIAL_TUPLE,
+  viewTimeSpent: 0,
+
+  errorCounts: {
+    P50: INITIAL_TIMESERIES,
+    P75: INITIAL_TIMESERIES,
+    P90: INITIAL_TIMESERIES,
+  },
+};
+
+const NEXT = 1;
+const PREVIOUS = -1;
+const sortGauges = (
+  { name: aName, severe: aSevere, warning: aWarning, value: aValue }: IGauge,
+  { name: bName, severe: bSevere, warning: bWarning, value: bValue }: IGauge,
+): number => {
+  if (aValue > aSevere) {
+    if (bValue > bSevere) {
+      return sortStrings(aName, bName);
+    }
+
+    return PREVIOUS;
+  }
+
+  if (bValue > bSevere) {
+    return NEXT;
+  }
+
+  if (aValue > aWarning) {
+    if (bValue > bWarning) {
+      return sortStrings(aName, bName);
+    }
+    return PREVIOUS;
+  }
+
+  if (bValue > bWarning) {
+    return NEXT;
+  }
+
+  return sortStrings(aName, bName);
+};
 
 function DashboardWrapper({ children }: PropsWithChildren): ReactElement {
   return (
@@ -39,8 +111,11 @@ function Dashboard(): ReactElement {
   const wndw: Window | null = useWindow();
 
   // States
-  const { data, error, initiated, loading, request } =
-    useAsyncState<DashboardApiResponse>();
+  const {
+    data = INITIAL_DATA,
+    error,
+    request,
+  } = useAsyncState<DashboardApiResponse>();
 
   // Effects
   useEffect((): void => {
@@ -54,14 +129,6 @@ function Dashboard(): ReactElement {
       return json;
     });
   }, [request]);
-
-  if (!initiated) {
-    return <DashboardWrapper>Initializing</DashboardWrapper>;
-  }
-
-  if (loading) {
-    return <DashboardWrapper>Loading</DashboardWrapper>;
-  }
 
   if (typeof error !== 'undefined') {
     if (
@@ -117,80 +184,74 @@ function Dashboard(): ReactElement {
     ttfb: [, ttfb],
     viewTimeSpent,
   } = data;
+
+  const gauges: readonly IGauge[] = [
+    {
+      max: 1,
+      name: 'Cumulative layout shift p75',
+      severe: 0.25,
+      value: cls,
+      warning: 0.1,
+    },
+    {
+      name: 'DOM complete median',
+      severe: 5000,
+      value: domComplete,
+      warning: 2600,
+    },
+    {
+      name: 'DOM content loaded median',
+      severe: 5000,
+      value: dcl,
+      warning: 2600,
+    },
+    {
+      name: 'First contentful paint p75',
+      severe: 3000,
+      value: fcp,
+      warning: 1800,
+    },
+    {
+      name: 'First input delay p75',
+      severe: 300,
+      value: fip,
+      warning: 100,
+    },
+    {
+      name: 'Interaction to next paint p75',
+      severe: 500,
+      value: inp,
+      warning: 200,
+    },
+    {
+      name: 'Largest contentful paint p75',
+      severe: 4000,
+      value: lcp,
+      warning: 2500,
+    },
+    {
+      name: 'Load event median',
+      severe: 8200,
+      value: loadEvent,
+      warning: 5000,
+    },
+    {
+      name: 'Loading time p75',
+      severe: 8200,
+      value: loadingTime,
+      warning: 5000,
+    },
+    {
+      name: 'Time to first byte p75',
+      severe: 1800,
+      value: ttfb,
+      warning: 800,
+    },
+  ];
   return (
     <DashboardWrapper>
       <ul className={LIST_CLASS_NAME}>
-        <li>
-          <Paragraph>Cumulative layout shift p75:</Paragraph>
-          <Gauge max={1} severe={0.25} value={cls} warning={0.1} />
-          <Paragraph>
-            <NumberFormat>{cls}</NumberFormat>
-          </Paragraph>
-        </li>
-        <li>
-          <Paragraph>DOM complete median:</Paragraph>
-          <Gauge severe={5000} value={domComplete} warning={2600} />
-          <Paragraph>
-            <NumberFormat>{domComplete}</NumberFormat>ms
-          </Paragraph>
-        </li>
-        <li>
-          <Paragraph>DOM content loaded median:</Paragraph>
-          <Gauge severe={5000} value={dcl} warning={2600} />
-          <Paragraph>
-            <NumberFormat>{dcl}</NumberFormat>ms
-          </Paragraph>
-        </li>
-        <li>
-          <Paragraph>First contentful paint p75:</Paragraph>
-          <Gauge severe={3000} value={fcp} warning={1800} />
-          <Paragraph>
-            <NumberFormat>{fcp}</NumberFormat>ms
-          </Paragraph>
-        </li>
-        <li>
-          <Paragraph>First input delay p75:</Paragraph>
-          <Gauge severe={300} value={fip} warning={100} />
-          <Paragraph>
-            <NumberFormat>{fip}</NumberFormat>ms
-          </Paragraph>
-        </li>
-        <li>
-          <Paragraph>Interaction to next paint p75:</Paragraph>
-          <Gauge severe={500} value={inp} warning={200} />
-          <Paragraph>
-            <NumberFormat>{inp}</NumberFormat>ms
-          </Paragraph>
-        </li>
-        <li>
-          <Paragraph>Largest contentful paint p75:</Paragraph>
-          <Gauge severe={4000} value={lcp} warning={2500} />
-          <Paragraph>
-            <NumberFormat>{lcp}</NumberFormat>ms
-          </Paragraph>
-        </li>
-        <li>
-          <Paragraph>Load event median:</Paragraph>
-          <Gauge severe={8200} value={loadEvent} warning={5000} />
-          <Paragraph>
-            <NumberFormat>{loadEvent}</NumberFormat>ms
-          </Paragraph>
-        </li>
-        <li>
-          <Paragraph>Loading time p75:</Paragraph>
-          <Gauge severe={8200} value={loadingTime} warning={5000} />
-          <Paragraph>
-            <NumberFormat>{loadingTime}</NumberFormat>ms
-          </Paragraph>
-        </li>
-        <li>
-          <Paragraph>Time to first byte p75:</Paragraph>
-          <Gauge severe={1800} value={ttfb} warning={800} />
-          <Paragraph>
-            <NumberFormat>{ttfb}</NumberFormat>ms
-          </Paragraph>
-        </li>
-        <li>
+        <li style={{ gridColumnEnd: 'span 2' }}>
           <LineChart
             title="Error counts"
             xLabels={['3 weeks ago', '2 weeks ago', 'Last week', 'This week']}
@@ -201,6 +262,22 @@ function Dashboard(): ReactElement {
             }}
           />
         </li>
+        {gauges.toSorted(sortGauges).map(
+          ({ max, name, severe, value, warning }): ReactElement => (
+            <li key={name}>
+              <Paragraph>{name}:</Paragraph>
+              <Gauge
+                max={max}
+                severe={severe}
+                value={value}
+                warning={warning}
+              />
+              <Paragraph>
+                <NumberFormat>{value}</NumberFormat>
+              </Paragraph>
+            </li>
+          ),
+        )}
         <li>
           <Paragraph>Time spent median:</Paragraph>
           <ul>

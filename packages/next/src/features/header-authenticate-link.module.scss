@@ -1,0 +1,50 @@
+@keyframes animation {
+  $rotation-maximum: 8deg;
+  $rotation-minimum: 3deg;
+  $rotations: 3;
+
+  $scale-maximum: 1.025;
+  $scale-minimum: 0.975;
+  $scales: 4;
+
+  $rotation-diff: $rotation-maximum - $rotation-minimum;
+  $rotation-frames: 100 / $rotations;
+  $rotation-frames-half: $rotation-frames / 2;
+  $scale-diff: $scale-maximum - $scale-minimum;
+  $scale-frames: 100 / $scales;
+  $scale-frames-half: $scale-frames / 2;
+  @for $frame from 0 through 100 {
+    $rotation-frame: $frame % $rotation-frames;
+    $scale-frame: $frame % $scale-frames;
+
+    #{$frame}% {
+      transform:
+        rotate(
+          if(
+            $rotation-frame <= $rotation-frames-half,
+            $rotation-minimum + $rotation-frame / $rotation-frames * 2 * $rotation-diff,
+            $rotation-maximum - ($rotation-frame - $rotation-frames-half) / $rotation-frames * 2* $rotation-diff
+          )
+        )
+        scale(
+          if(
+            $scale-frame <= $scale-frames-half,
+            $scale-minimum + $scale-frame / $scale-frames * 2 * $scale-diff,
+            $scale-maximum - ($scale-frame - $scale-frames-half) / $scale-frames * 2 * $scale-diff
+          )
+        );
+    }
+  }
+}
+
+.link {
+  animation-delay: 0s;
+  animation-direction: alternate;
+  animation-duration: 24s;
+  animation-iteration-count: infinite;
+  animation-name: animation;
+  animation-timing-function: linear;
+  font-family: Pangolin, cursive;
+  font-weight: normal;
+  letter-spacing: 0.025em;
+}

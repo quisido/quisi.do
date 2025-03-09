@@ -12,6 +12,8 @@ export default function GoogleFontsFeature(): ReactElement {
       Noto_Color_Emoji={FontWeight.Normal}
       Noto_Sans={NORMAL_BOLD}
       Noto_Sans_Display={FontWeight.Bold}
+      Pangolin={FontWeight.Normal}
+      Protest_Revolution={FontWeight.Normal}
     />
   );
 }

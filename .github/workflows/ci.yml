@@ -25,6 +25,11 @@ jobs:
         uses: actions/checkout@v3
       - name: Analyze
         uses: codacy/codacy-analysis-cli-action@master
+        env:
+          CODACY_ORGANIZATION_PROVIDER: gh
+          CODACY_PROJECT_NAME: quisi.do
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          CODACY_USERNAME: quisido
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           format: sarif
