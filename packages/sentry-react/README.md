@@ -128,8 +128,8 @@ recommends `id`, `email`, `ip_address`, and `username`.
 
 ## Integrations
 
-### FullStory
+### Fullstory
 
-To integrate Sentry with FullStory, go to the Sentry website, under organization
+To integrate Sentry with Fullstory, go to the Sentry website, under organization
 settings, Security & Privacy, Data Scrubbing, and add `fullStoryUrl` to "Global
 Safe Fields."

@@ -9,8 +9,10 @@ import {
   type ReactElement,
 } from 'react';
 import { HoneycombProvider } from '../contexts/honeycomb.js';
-import { useHostname } from '../contexts/hostname.js';
 import Resource from '../features/resource.js';
+import useHostname from '../hooks/use-hostname.js';
+import useTelemetrySdkLanguage from '../hooks/use-telemetry-sdk-language.js';
+import useWindow from '../hooks/use-window.js';
 import noop from '../utils/noop.js';
 
 interface Props {
@@ -37,11 +39,13 @@ export default function Honeycomb({
   serviceName,
 }: PropsWithChildren<Props>): ReactElement {
   const hostname: string = useHostname();
+  const telemetrySdkLanguage: string = useTelemetrySdkLanguage();
+  const wndw: Window | null = useWindow();
 
   const sdk: HoneycombWebSDK | undefined = useMemo(():
     | HoneycombWebSDK
     | undefined => {
-    if (typeof window === 'undefined') {
+    if (wndw === null) {
       return;
     }
 
@@ -49,10 +53,10 @@ export default function Honeycomb({
       apiKey,
       autoDetectResources: true,
       instrumentations: [getWebAutoInstrumentations()],
-      resource: new Resource(hostname),
+      resource: new Resource(hostname, telemetrySdkLanguage),
       serviceName,
     });
-  }, [apiKey, hostname, serviceName]);
+  }, [apiKey, hostname, serviceName, telemetrySdkLanguage, wndw]);
 
   useSdk(sdk);
 

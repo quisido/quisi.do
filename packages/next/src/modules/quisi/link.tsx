@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation.js';
 import {
   useEffect,
+  useState,
   type MouseEvent,
   type ReactElement,
   type ReactNode,
@@ -44,10 +45,44 @@ export default function Link({
   onClick,
   title,
 }: Props): ReactElement {
+  const getInitialTarget = (): string | undefined => {
+    if (follow) {
+      return;
+    }
+    return '_blank';
+  };
+
   // Contexts
   const emit = useEmit();
   const router = useRouter();
   const { primaryHex } = useTheme();
+
+  // States
+  const [target, setTarget] = useState(getInitialTarget);
+
+  // Callbacks
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>): void => {
+    if (target !== '_blank') {
+      event.preventDefault();
+    }
+
+    emit('click', {
+      feature,
+      label: innerText(children),
+      url: href,
+    });
+
+    if (typeof onClick === 'function') {
+      const preventDefault: boolean | undefined = onClick();
+      if (preventDefault === true) {
+        return;
+      }
+    }
+
+    if (target !== '_blank' && typeof href === 'string') {
+      router.push(href);
+    }
+  };
 
   // Effects
   useEffect((): void => {
@@ -57,6 +92,22 @@ export default function Link({
 
     router.prefetch(href);
   }, [href, router]);
+
+  useEffect((): void => {
+    if (typeof href === 'undefined') {
+      return;
+    }
+
+    try {
+      const { host: hrefHost } = new URL(href);
+      const { host: locationHost } = window.location;
+      if (hrefHost !== locationHost) {
+        setTarget('_blank');
+      }
+    } catch (_err: unknown) {
+      // If the `href` is a relative path, the host is implicitly the same.
+    }
+  }, [href]);
 
   const getRel = (): string => {
     const rels: string[] = ['noopener'];
@@ -73,27 +124,10 @@ export default function Link({
       aria-label={ariaLabel}
       className={className}
       href={href}
+      onClick={handleClick}
       rel={rel}
+      target={target}
       title={title}
-      onClick={(event: MouseEvent<HTMLAnchorElement>): void => {
-        event.preventDefault();
-        emit('click', {
-          feature,
-          label: innerText(children),
-          url: href,
-        });
-
-        if (typeof onClick === 'function') {
-          const preventDefault: boolean | undefined = onClick();
-          if (preventDefault === true) {
-            return;
-          }
-        }
-
-        if (typeof href === 'string') {
-          router.push(href);
-        }
-      }}
       style={{
         color: primaryHex,
         textDecoration: 'none',

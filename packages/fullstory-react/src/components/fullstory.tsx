@@ -4,18 +4,24 @@ import type { SnippetOptions } from '@fullstory/browser';
 import { useEffect, type PropsWithChildren, type ReactElement } from 'react';
 import useShallowMemo from 'use-shallow-memo';
 import FullstoryContext from '../contexts/fullstory.js';
-import useFullStoryBrowser from '../hooks/use-fullstory-browser.js';
+import useFullstoryBrowser from '../hooks/use-fullstory-browser.js';
 
-export default function Fullstory({
-  children,
+interface Props extends SnippetOptions {
+  readonly identityProperties?: object | undefined;
+  readonly identityUid?: string | undefined;
+}
+
+function useFullstoryEffects({
+  identityProperties,
+  identityUid,
   ...snippetOptions
-}: PropsWithChildren<SnippetOptions>): ReactElement {
+}: Props): void {
   // Contexts
   const {
-    FullStory: fullStoryApi,
+    FullStory: fullstoryApi,
     init,
     isInitialized,
-  } = useFullStoryBrowser();
+  } = useFullstoryBrowser();
 
   // States
   const memoizedSnippetOptions: SnippetOptions = useShallowMemo(snippetOptions);
@@ -28,12 +34,43 @@ export default function Fullstory({
 
     init(memoizedSnippetOptions);
     return (): void => {
-      fullStoryApi('shutdown');
+      fullstoryApi('shutdown');
     };
-  }, [fullStoryApi, init, isInitialized, memoizedSnippetOptions]);
+  }, [fullstoryApi, init, isInitialized, memoizedSnippetOptions]);
+
+  useEffect((): void => {
+    if (
+      typeof identityProperties === 'undefined' &&
+      typeof identityUid === 'undefined'
+    ) {
+      fullstoryApi('setIdentity', {
+        anonymous: true,
+        consent: false,
+      });
+      return;
+    }
+
+    fullstoryApi('setIdentity', {
+      anonymous: false,
+      consent: false,
+      properties: identityProperties,
+      uid: identityUid,
+    });
+  }, [fullstoryApi, identityProperties, identityUid]);
+}
+
+export default function Fullstory({
+  children,
+  ...props
+}: PropsWithChildren<Props>): ReactElement {
+  // Contexts
+  const { FullStory: fullstoryApi } = useFullstoryBrowser();
+
+  // Effects
+  useFullstoryEffects(props);
 
   return (
-    <FullstoryContext.Provider value={fullStoryApi}>
+    <FullstoryContext.Provider value={fullstoryApi}>
       {children}
     </FullstoryContext.Provider>
   );

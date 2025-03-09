@@ -31,9 +31,7 @@ export default withNextJsBundleAnalyzer({
   trailingSlash: true,
 
   devIndicators: {
-    appIsrStatus: false,
-    buildActivity: true,
-    buildActivityPosition: 'bottom-right',
+    position: 'bottom-right',
   },
 
   env: mapEnvironmentVariableNamesToRecord([
@@ -41,9 +39,6 @@ export default withNextJsBundleAnalyzer({
     'CLOUD_ACCOUNT_ID',
     'CLOUD_PLATFORM',
     'CLOUD_PROVIDER',
-    'CLOUDWATCH_RUM_APPLICATION_ID',
-    'CLOUDWATCH_RUM_GUEST_ROLE_ARN',
-    'CLOUDWATCH_RUM_IDENTITY_POOL_ID',
     'CSP_ORIGIN',
     'DASHBOARD_ENDPOINT',
     'DD_APPLICATION_ID',

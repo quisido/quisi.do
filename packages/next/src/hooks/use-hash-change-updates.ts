@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import useForceUpdate from 'use-force-update';
+import useWindow from './use-window.js';
 
 // Hash changes occur after hash change events.
 const HASH_CHANGE_DELAY = 1;
@@ -7,10 +8,11 @@ const HASH_CHANGE_DELAY = 1;
 export default function useHashChangeUpdates(): void {
   // Contexts
   const forceUpdate = useForceUpdate();
+  const wndw: Window | null = useWindow();
 
   // Effects
   useEffect((): VoidFunction | undefined => {
-    if (typeof window === 'undefined') {
+    if (wndw === null) {
       return;
     }
 
@@ -27,5 +29,5 @@ export default function useHashChangeUpdates(): void {
       window.clearTimeout(forceUpdateTimeout);
       window.removeEventListener('hashchange', handler);
     };
-  }, [forceUpdate]);
+  }, [forceUpdate, wndw]);
 }

@@ -6,7 +6,8 @@ import {
   type PropsWithChildren,
   type ReactElement,
 } from 'react';
-import { useHostname } from '../contexts/hostname.js';
+import useHostname from '../hooks/use-hostname.js';
+import useTelemetrySdkLanguage from '../hooks/use-telemetry-sdk-language.js';
 import TracerProviderProvider from '../modules/react-tracer/index.js';
 import noop from '../utils/noop.js';
 import WebTracerProvider from './web-tracer-provider.js';
@@ -42,11 +43,13 @@ export default function TracerProviderProviderFeature({
 }: PropsWithChildren): ReactElement {
   // Contexts
   const hostname: string = useHostname();
+  const telemetrySdkLanguage: string = useTelemetrySdkLanguage();
 
   // States
   const value: WebTracerProvider = useMemo(
-    (): WebTracerProvider => new WebTracerProvider(hostname),
-    [hostname],
+    (): WebTracerProvider =>
+      new WebTracerProvider(hostname, telemetrySdkLanguage),
+    [hostname, telemetrySdkLanguage],
   );
 
   // Effects

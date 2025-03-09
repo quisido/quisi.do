@@ -317,7 +317,7 @@ export default class DatadogRumApi extends v2.RUMApi {
           ],
 
           filter: {
-            from: 'now-4w',
+            from: 'now-3w',
             to: 'now',
           },
 

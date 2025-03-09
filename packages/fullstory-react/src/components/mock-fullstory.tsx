@@ -1,57 +1,38 @@
 'use client';
 
-import * as fullStoryBrowser from '@fullstory/browser';
-import type { ApiV1, ApiV2, FSApi } from '@fullstory/snippet';
-import { useMemo, type PropsWithChildren, type ReactElement } from 'react';
-import useShallowMemo from 'use-shallow-memo';
+import type * as fullstoryBrowser from '@fullstory/browser';
+import type { FSApi } from '@fullstory/snippet';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import FullstoryBrowser from '../contexts/fullstory-browser.js';
-import mapV2OperationHandlersToApi, {
-  type V2AsyncOperationHandlers,
-  type V2OperationHandlers,
-} from '../utils/map-v2-operation-handlers-to-api.js';
-import merge from '../utils/merge.js';
-import noop from '../utils/noop.js';
+import useMockFullstoryBrowser from '../hooks/use-mock-fullstory-browser.js';
 import Fullstory from './fullstory.js';
 
-type Props = Partial<
-  FSApi &
-    typeof fullStoryBrowser &
-    V2AsyncOperationHandlers &
-    V2OperationHandlers
->;
+interface Props extends Partial<Omit<typeof fullstoryBrowser, 'FullStory'>> {
+  readonly FullStory?: FSApi | undefined;
+  readonly identityProperties?: object | undefined;
+  readonly identityUid?: string | undefined;
+  readonly orgId: string;
+}
 
 export default function MockFullstory({
   children,
+  identityProperties,
+  identityUid,
   orgId,
-  ...props
-}: PropsWithChildren<Props & { orgId: string }>): ReactElement {
-  const memoizedProps: Props = useShallowMemo(props);
-
-  const value: typeof fullStoryBrowser =
-    useMemo((): typeof fullStoryBrowser => {
-      /**
-       * `ApiV2` has a default interface:
-       *   <Op>(operation: Op, options: Options[Op]) => ReturnType[Op]
-       */
-      const apiV2Default: Omit<ApiV2, keyof ApiV2> =
-        mapV2OperationHandlersToApi(memoizedProps);
-
-      const apiV1: ApiV1 = {
-        ...fullStoryBrowser.FullStory,
-        ...memoizedProps,
-      };
-
-      return {
-        ...fullStoryBrowser,
-        init: noop,
-        ...memoizedProps,
-        FullStory: merge(apiV2Default, apiV1),
-      };
-    }, [memoizedProps]);
+  ...partialFullstoryBrowser
+}: PropsWithChildren<Props>): ReactElement {
+  const mockFullstoryBrowser: Omit<typeof fullstoryBrowser, 'default'> =
+    useMockFullstoryBrowser(partialFullstoryBrowser);
 
   return (
-    <FullstoryBrowser.Provider value={value}>
-      <Fullstory orgId={orgId}>{children}</Fullstory>
+    <FullstoryBrowser.Provider value={mockFullstoryBrowser}>
+      <Fullstory
+        identityProperties={identityProperties}
+        identityUid={identityUid}
+        orgId={orgId}
+      >
+        {children}
+      </Fullstory>
     </FullstoryBrowser.Provider>
   );
 }

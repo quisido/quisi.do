@@ -1,1 +1,1 @@
-export { default } from './components/mixpanel.js';
+export { default } from './use-mixpanel.js';

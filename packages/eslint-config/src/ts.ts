@@ -8,7 +8,7 @@ import { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
 export default {
   ...JS,
   files: ['**/*.ts', '**/*.tsx'],
-  ignores: ['**/*.d.ts', '**/*.test.ts'],
+  ignores: ['**/*.d.ts', '**/*.test.ts', '**/*.test.tsx'],
   languageOptions: TYPESCRIPT_LANGUAGE_OPTIONS,
   name: '@quisido/ts',
 

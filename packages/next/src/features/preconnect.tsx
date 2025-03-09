@@ -20,7 +20,6 @@ export default function PreconnectFeature(): ReactElement {
       {process.env.NODE_ENV === 'production' && (
         <Preconnect>https://cloudflareinsights.com</Preconnect>
       )}
-      <Preconnect>https://dataplane.rum.us-west-2.amazonaws.com</Preconnect>
       <Preconnect>https://edge.fullstory.com</Preconnect>
       <Preconnect>https://fonts.googleapis.com</Preconnect>
       {/* <Preconnect>https://fonts.gstatic.com</Preconnect> */}

@@ -1,7 +1,12 @@
 'use client';
 
-import useReactDatadog, { type Props } from 'react-datadog';
+import useReactDatadog, { type Props, type User } from 'react-datadog';
 import { GITHUB_SHA } from '../constants/github-sha.js';
+import {
+  useAuthentication,
+  type AuthenticationState,
+} from '../contexts/authentication.js';
+import type Authentication from '../types/authentication.js';
 import validateString from '../utils/validate-string.js';
 
 const APPLICATION_ID: string = validateString(process.env['DD_APPLICATION_ID']);
@@ -38,6 +43,7 @@ const PROPS: Required<
   env: process.env.NODE_ENV,
   plugins: [],
   service: 'quisi.do',
+  sessionPersistence: 'local-storage',
   sessionReplayRecording: true,
   sessionReplaySampleRate: 100,
   sessionSampleRate: 100,
@@ -50,6 +56,8 @@ const PROPS: Required<
   telemetryUsageSampleRate: 100,
   traceContextInjection: 'all',
   traceSampleRate: 100,
+  trackAnonymousUser: true,
+  trackFeatureFlagsForEvents: ['action', 'long_task', 'resource', 'vital'],
   trackLongTasks: true,
   trackResources: true,
   trackSessionAcrossSubdomains: true,
@@ -61,7 +69,7 @@ const PROPS: Required<
 
   excludedActivityUrls: [
     // Content Security Policy connect-src
-    /^https:\/\/(?:[a-z\d]+\.clarity\.ms|analytics\.google\.com|cloudflareinsights\.com|cognito-identity\.[a-z\d-]+\.amazonaws\.com|dataplane\.rum\.[a-z\d-]+\.amazonaws\.com|edge\.fullstory\.com|[a-z\d]+\.ingest\.sentry\.io|r\.logr-ingest\.com|r\.lrkt-in\.com|region\d+\.analytics\.google\.com|rs\.fullstory\.com|stats\.g\.doubleclick\.net|sts\.[a-z\d-]+\.amazonaws\.com|www\.google-analytics\.com)\//u,
+    /^https:\/\/(?:[a-z\d]+\.clarity\.ms|analytics\.google\.com|cloudflareinsights\.com|edge\.fullstory\.com|[a-z\d]+\.ingest\.sentry\.io|r\.logr-ingest\.com|r\.lrkt-in\.com|region\d+\.analytics\.google\.com|rs\.fullstory\.com|stats\.g\.doubleclick\.net|www\.google-analytics\.com)\//u,
 
     // Content Security Policy frame-src
     /^https:\/\/(?:td\.td\.doubleclick\.net)\//u,
@@ -80,6 +88,31 @@ const PROPS: Required<
   // Technical debt: trackingConsent: 'not-granted',
 };
 
+const mapAuthenticationToUser = (
+  authn: Authentication | undefined,
+): User | undefined => {
+  if (typeof authn === 'undefined') {
+    return;
+  }
+
+  const { id } = authn;
+  if (id === null) {
+    return;
+  }
+
+  return {
+    ...authn,
+    id: id.toString(),
+  };
+};
+
 export default function useDatadog(): void {
-  useReactDatadog(PROPS);
+  // Contexts
+  const { data }: AuthenticationState = useAuthentication();
+
+  // Effects
+  useReactDatadog({
+    ...PROPS,
+    user: mapAuthenticationToUser(data),
+  });
 }

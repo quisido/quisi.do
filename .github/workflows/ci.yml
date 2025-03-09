@@ -106,9 +106,6 @@ jobs:
           CLOUD_ACCOUNT_ID: quisido
           CLOUD_PLATFORM: GitHub
           CLOUD_PROVIDER: GitHub Pages
-          CLOUDWATCH_RUM_APPLICATION_ID: 9be6a855-9bac-4f07-bae8-6ad0d7a00b00
-          CLOUDWATCH_RUM_GUEST_ROLE_ARN: arn:aws:iam::787801101157:role/RUM-Monitor-us-west-2-787801101157-5868679251171-Unauth
-          CLOUDWATCH_RUM_IDENTITY_POOL_ID: us-west-2:9d109fe9-23c3-4e33-a478-143f93445968
           CSP_ORIGIN: https://localhost:6586
           DASHBOARD_ENDPOINT: https://localhost:9778/
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}

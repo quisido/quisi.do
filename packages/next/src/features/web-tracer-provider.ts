@@ -43,11 +43,11 @@ export default class WebTracerProviderImpl extends WebTracerProvider {
   public readonly compositePropagator: CompositePropagator =
     new CompositePropagator();
 
-  public constructor(hostname: string) {
+  public constructor(hostname: string, telemetrySdkLanguage: string) {
     const batchSpanProcessor = new BatchSpanProcessor(hostname);
 
     super({
-      resource: new Resource(hostname),
+      resource: new Resource(hostname, telemetrySdkLanguage),
       spanProcessors: [batchSpanProcessor],
     });
 

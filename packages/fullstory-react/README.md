@@ -1,10 +1,10 @@
-# FullStory for React applications
+# Fullstory for React applications
 
 [![version](https://img.shields.io/npm/v/fullstory-react.svg)](https://www.npmjs.com/package/fullstory-react)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/fullstory-react.svg)](https://www.npmjs.com/package/fullstory-react)
 [![downloads](https://img.shields.io/npm/dt/fullstory-react.svg)](https://www.npmjs.com/package/fullstory-react)
 
-FullStory integration with React
+Fullstory integration with React
 
 ## Install
 
@@ -13,87 +13,57 @@ FullStory integration with React
 
 ## Use
 
-```jsx
-import { useFullStory } from 'fullstory-react';
+```tsx
+// my-component.tsx
+import { type FSApi, useFullstory } from 'fullstory-react';
+import { type ReactElement } from 'react';
 
-export default function App() {
-  const { shutdown } = useFullStory({
-    orgId: 'my-org-id',
-  });
+export default function App(): ReactElement {
+  const fullstory: FSApi = useFullstory();
 
-  // On unmount, shutdown FullStory.
-  useEffect(() => shutdown);
+  useEffect((): void => {
+    fullstory('log', { msg: 'Hello world' });
+  }. [fullstory]);
 
   return <>Hello world!</>;
 }
 ```
 
-The `useFullStory` hook accepts all the same properties that would be passed to
-the FullStory `init` method. The hook returns the `FS` object (type `FSApi`).
-
 ## Testing
 
-To mock the FullStory API in unit tests, wrap your component or hook with the
-`MockFullStory` component.
+To mock the Fullstory API in unit tests, wrap your component or hook with the
+`MockFullstory` component.
 
-```jsx
+```tsx
+// my-component.test.tsx
 import { render } from '@testing-library/react';
-import { MockFullStory } from 'fullstory-react';
+import { MockFullstory } from 'fullstory-react';
+import { type ReactElement } from 'react';
 import { vi } from 'vitest';
 import MyComponent from './my-component.js';
 
-describe('MyComponent', () => {
-  it('should initialize FullStory', () => {
-    const mockInit = vi.fn();
+const mockFSApi = vi.fn();
 
+describe('MyComponent', (): void => {
+  it('should call the Fullstory API', (): void => {
     render(<MyComponent />, {
-      wrapper({ children }) {
-        return <MockFullStory init={mockInit}>{children}</MockFullStory>;
+      wrapper({ children }): ReactElement {
+        return <MockFullstory FullStory={mockFSApi}>{children}</MockFullstory>;
       },
     });
 
-    expect(mockInit).toHaveBeenCalledOnce();
-    expect(mockInit).toHaveBeenLastCalledWith({
-      orgId: 'my-org-id',
-    });
-  });
-
-  it('should shutdown FullStory on unmount', () => {
-    const mockShutdown = vi.fn();
-
-    const { unmount } = render(<MyComponent />, {
-      wrapper({ children }) {
-        return (
-          <MockFullStory
-            init={vi.fn()}
-            onShutdown={mockShutdown}
-          >
-            {children}
-          </MockFullStory>
-        );
-      },
-    });
-
-    expect(mockShutdown).not.toHaveBeenCalled();
-
-    unmount();
-
-    expect(mockShutdown).toHaveBeenCalledOnce();
+    expect(mockFSApi).toHaveBeenCalledOnce();
+    expect(mockFSApi).toHaveBeenLastCalledWith('log', { msg: 'Hello world' });
   });
 });
 ```
-
-The prop names for the `init` and `isInitiated` methods are named `init` and
-`isInitiated` respectively. The prop names for all other operations are
-camel-case: `on{Operation}`. The TypeScript definition for `MockFullStory` will
-help you with auto-completion.
 
 ## Integrations
 
 ### Segment
 
 To integrate with Segment, visit the Segment website, navigate to Catalog,
-select FullStory, then add your FullStory organization ID.
+select FullStory, then add your Fullstory organization ID.
 
 ### Sentry
 
