@@ -86,8 +86,9 @@ export default function ContentSecurityPolicy(): ReactElement {
         <Section header="Content Security Policy">
           To view Content Security Policy reports in development,{' '}
           <Link feature="content-security-policy" href={ORIGIN} title="">
-            trust the security certificate.
+            trust the security certificate
           </Link>
+          .
           <ol>
             <li>
               Visit <CertificateManagerLink feature="content-security-policy" />

@@ -1,5 +1,3 @@
-'use client';
-
 import type { datadogRum } from '@datadog/browser-rum';
 import { isUndefined } from 'fmrs';
 import { useEffect } from 'react';

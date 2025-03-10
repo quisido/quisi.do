@@ -16,6 +16,14 @@ For example:
 
 ## Filters and finders
 
+- boolean (`value is boolean`)
+  - `arr.every(isBoolean)`
+  - `arr.filter(filterByBoolean)`
+  - `arr.find(findBoolean)`
+- defined
+  - `arr.every(isDefined)`
+  - `arr.filter(filterByDefined)`
+  - `arr.find(findDefined)`
 - number (`value is number`)
   - `arr.every(isNumber)`
   - `arr.filter(filterByNumber)`
@@ -32,16 +40,24 @@ For example:
   - `arr.every(isString)`
   - `arr.filter(filterByString)`
   - `arr.find(findString)`
+- undefined (`value is undefined`)
+  - `arr.every(isUndefined)`
+  - `arr.filter(filterByUndefined)`
+  - `arr.find(findUndefined)`
 
 ## Mappers
 
-| from    | to            | example                                  |
-| ------- | ------------- | ---------------------------------------- |
-| entries | Record (`{}`) | `mapEntriesToRecord([['key', 'value']])` |
-| `Map`   | entries       | `mapMapToEntries(new Map())`             |
-| `Map`   | Record (`{}`) | `mapMapToRecord(new Map())`              |
-| unknown | index         | `arr.map(mapToIndex)`                    |
-| unknown | string        | `arr.map(mapToString)`                   |
+| from      | to            | example                                  |
+| --------- | ------------- | ---------------------------------------- |
+| `boolean` | `number`      | `[false, true].map(mapBooleanToNumber)`  |
+| entries   | Record (`{}`) | `mapEntriesToRecord([['key', 'value']])` |
+| entry     | key           | `mapEntryToKey(['key', 'value'])`        |
+| entry     | value         | `mapEntryToValue(['key', 'value'])`      |
+| `Map`     | entries       | `mapMapToEntries(new Map())`             |
+| `Map`     | Record (`{}`) | `mapMapToRecord(new Map())`              |
+| `unknown` | `Error`       | `arr.map(mapToError)`                    |
+| `unknown` | index         | `arr.map(mapToIndex)`                    |
+| `unknown` | `string`      | `arr.map(mapToString)`                   |
 
 ## Reducers
 
@@ -51,9 +67,17 @@ For example:
 
 ## Sorters
 
-| items           | example                          |
-| --------------- | -------------------------------- |
-| any             | `arr.sort(sort)`                 |
-| arrays by index | `arrOfArrs.sort(sortByIndex(0))` |
-| numbers         | `arr.sort(sortNumbers)`          |
-| numbers         | `arr.sort(sortStrings)`          |
+| items     | example                          |
+| --------- | -------------------------------- |
+| `Array`   | `arrOfArrs.sort(sortByIndex(0))` |
+| `number`  | `arr.sort(sortNumbers)`          |
+| `string`  | `arr.sort(sortStrings)`          |
+| `unknown` | `arr.sort(sort)`                 |
+
+## Utilities
+
+| function | example                           |
+| -------- | --------------------------------- |
+| `is`     | `['a', 'b'].filter(is('a'))`      |
+| `isNot`  | `['a', 'b'].filter(isNot('a'))`   |
+| `not`    | `['a', 'b'].filter(not(is('a')))` |

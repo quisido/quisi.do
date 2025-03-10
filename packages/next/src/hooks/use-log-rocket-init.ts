@@ -1,9 +1,5 @@
-'use client';
-
 import { identity } from 'fmrs';
-import { memo, useEffect } from 'react';
-import { GITHUB_SHA } from '../constants/github-sha.js';
-import useHostname from '../hooks/use-hostname.js';
+import { useEffect } from 'react';
 import useLogRocket from '../hooks/use-log-rocket.js';
 import {
   type LogRocketOptions,
@@ -17,6 +13,8 @@ export interface User extends Record<string, number | string> {
 
 export interface Props {
   readonly appId: string;
+  readonly release?: string | undefined;
+  readonly rootHostname?: string | undefined;
   readonly user?: User | undefined;
 
   readonly sanitizeRequest?:
@@ -70,6 +68,7 @@ const OPTIONS: Required<
   Omit<
     LogRocketOptions,
     | 'network'
+    | 'release'
     | 'rootHostname'
     | 'serverURL'
     | 'shouldSendData'
@@ -83,7 +82,6 @@ const OPTIONS: Required<
   dom: DOM,
   mergeIframes: true,
   parentDomain: null,
-  release: GITHUB_SHA ?? 'dev',
   shouldAugmentNPS: true,
   shouldCaptureIP: true,
   shouldDebugLog: false,
@@ -96,21 +94,28 @@ const defaultResponseSanitizer = (
   response: LogRocketResponse,
 ): LogRocketResponse => response;
 
-function LogRocket({
+export default function useLogRocketInit({
   appId,
+  release = 'dev',
+  rootHostname,
   sanitizeRequest = identity,
   sanitizeResponse = defaultResponseSanitizer,
   user,
-}: Props): null {
+}: Props): void {
   // Contexts
-  const rootHostname: string = useHostname();
   const LogRocket = useLogRocket();
 
   // Effects
   useEffect((): void => {
+    const partialOptions: Partial<LogRocketOptions> = {};
+    if (typeof rootHostname !== 'undefined') {
+      partialOptions.rootHostname = rootHostname;
+    }
+
     LogRocket.init(appId, {
       ...OPTIONS,
-      rootHostname,
+      ...partialOptions,
+      release,
 
       dom: {
         ...OPTIONS.dom,
@@ -135,7 +140,14 @@ function LogRocket({
         },
       },
     });
-  }, [appId, LogRocket, rootHostname, sanitizeRequest, sanitizeResponse]);
+  }, [
+    appId,
+    LogRocket,
+    release,
+    rootHostname,
+    sanitizeRequest,
+    sanitizeResponse,
+  ]);
 
   useEffect((): void => {
     if (typeof user === 'undefined') {
@@ -145,8 +157,4 @@ function LogRocket({
     const { id, ...traits } = user;
     LogRocket.identify(id, traits);
   }, [LogRocket, user]);
-
-  return null;
 }
-
-export default memo(LogRocket);

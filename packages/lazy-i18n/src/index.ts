@@ -1,3 +1,5 @@
+'use client';
+
 export { default } from './components/i18n.js';
 export { default as I18nProvider } from './components/provider/index.js';
 export { default as useTranslate } from './hooks/use-translate.js';

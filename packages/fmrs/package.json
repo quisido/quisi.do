@@ -1,6 +1,6 @@
 {
   "name": "fmrs",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "author": "quisi.do <fmrs@quisi.do>",
   "description": "filters/finds, maps, reduces, and sorts",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/fmrs#readme",

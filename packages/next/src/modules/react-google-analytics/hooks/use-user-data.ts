@@ -1,5 +1,3 @@
-'use client';
-
 import { isUndefined } from 'fmrs';
 import { useMemo } from 'react';
 import EMPTY_OBJECT from '../constants/empty-object.js';

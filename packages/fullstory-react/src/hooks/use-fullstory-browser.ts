@@ -1,5 +1,3 @@
-'use client';
-
 import * as fullstoryBrowser from '@fullstory/browser';
 import { useContext } from 'react';
 import FullstoryBrowser from '../contexts/fullstory-browser.js';

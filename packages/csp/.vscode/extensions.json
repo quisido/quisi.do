@@ -1,5 +1,6 @@
 {
   "recommendations": [
-    "alexcvzz.vscode-sqlite"
+    "alexcvzz.vscode-sqlite",
+    "tamasfe.even-better-toml"
   ]
 }

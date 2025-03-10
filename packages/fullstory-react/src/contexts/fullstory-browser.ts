@@ -1,5 +1,3 @@
-'use client';
-
 import type * as fullstoryBrowser from '@fullstory/browser';
 import { createContext } from 'react';
 

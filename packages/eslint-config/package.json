@@ -1,6 +1,6 @@
 {
   "name": "@quisido/eslint-config",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "author": "quisi.do <eslint-config@quisi.do>",
   "description": "ESLint configurations for quisi.do",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/eslint-config#readme",

@@ -1,5 +1,3 @@
-'use client';
-
 import { datadogRum } from '@datadog/browser-rum';
 import { useContext } from 'react';
 import DatadogRumContext from '../contexts/datadog-rum.js';
