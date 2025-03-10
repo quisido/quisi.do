@@ -1,5 +1,3 @@
-'use client';
-
 import useWindow from './use-window.js';
 
 export default function useUserAgent(): string | null {

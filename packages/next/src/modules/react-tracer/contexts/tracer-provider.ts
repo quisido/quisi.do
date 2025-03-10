@@ -1,5 +1,3 @@
-'use client';
-
 import type { TracerProvider } from '@opentelemetry/api';
 import { createContext } from 'react';
 

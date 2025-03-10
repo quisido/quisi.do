@@ -1,5 +1,3 @@
-'use client';
-
 import useUserAgent from './use-user-agent.js';
 
 enum BrowserBrand {

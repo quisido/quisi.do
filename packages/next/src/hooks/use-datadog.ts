@@ -1,5 +1,3 @@
-'use client';
-
 import useReactDatadog, { type Props, type User } from 'react-datadog';
 import { GITHUB_SHA } from '../constants/github-sha.js';
 import {

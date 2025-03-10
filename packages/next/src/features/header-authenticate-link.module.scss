@@ -1,48 +1,53 @@
-@keyframes animation {
-  $rotation-maximum: 8deg;
-  $rotation-minimum: 3deg;
-  $rotations: 3;
+@use 'sass:list';
+@use 'sass:math';
 
-  $scale-maximum: 1.025;
-  $scale-minimum: 0.975;
-  $scales: 4;
+@function list-nth-default($list, $index, $default) {
+  @if length($list) < $index {
+    @return $default;
+  }
+  @return list.nth($list, $index);
+}
 
-  $rotation-diff: $rotation-maximum - $rotation-minimum;
-  $rotation-frames: 100 / $rotations;
-  $rotation-frames-half: $rotation-frames / 2;
-  $scale-diff: $scale-maximum - $scale-minimum;
-  $scale-frames: 100 / $scales;
-  $scale-frames-half: $scale-frames / 2;
-  @for $frame from 0 through 100 {
-    $rotation-frame: $frame % $rotation-frames;
-    $scale-frame: $frame % $scale-frames;
+@mixin transform-keyframes($transform-functions) {
+  @for $animation-frame from 0 through 100 {
+    #{$animation-frame}% {
+      $transform: '';
+      @each $transform-function, $values in $transform-functions {
+        $count: list-nth-default($values, 3, 1);
+        $maximum: list.nth($values, 2);
+        $minimum: list.nth($values, 1);
 
-    #{$frame}% {
-      transform:
-        rotate(
-          if(
-            $rotation-frame <= $rotation-frames-half,
-            $rotation-minimum + $rotation-frame / $rotation-frames * 2 * $rotation-diff,
-            $rotation-maximum - ($rotation-frame - $rotation-frames-half) / $rotation-frames * 2* $rotation-diff
-          )
-        )
-        scale(
-          if(
-            $scale-frame <= $scale-frames-half,
-            $scale-minimum + $scale-frame / $scale-frames * 2 * $scale-diff,
-            $scale-maximum - ($scale-frame - $scale-frames-half) / $scale-frames * 2 * $scale-diff
-          )
+        $transform-frames: math.ceil(math.div(100, $count));
+        $transform-frames-half: math.div($transform-frames, 2);
+        $transform-frame: $animation-frame % $transform-frames;
+
+        $value: if(
+          $transform-frame <= $transform-frames-half,
+          $minimum + math.pow(math.sin(math.div($transform-frame, $transform-frames-half) * math.div(math.$pi, 2)), 2) * ($maximum - $minimum),
+          $maximum - math.pow(math.sin(math.div($transform-frame - $transform-frames-half, $transform-frames-half) * math.div(math.$pi, 2)), 2) * ($maximum - $minimum)
         );
+
+        $transform: #{$transform} #{$transform-function}(#{$value});
+      }
+
+      transform: $transform;
     }
   }
+}
+
+@keyframes animation2 {
+  @include transform-keyframes((
+    "rotate": 4deg 7deg 7,
+    "scale": 0.975 1.025 11
+  ));
 }
 
 .link {
   animation-delay: 0s;
   animation-direction: alternate;
-  animation-duration: 24s;
+  animation-duration: 30s;
   animation-iteration-count: infinite;
-  animation-name: animation;
+  animation-name: animation2;
   animation-timing-function: linear;
   font-family: Pangolin, cursive;
   font-weight: normal;

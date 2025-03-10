@@ -1,5 +1,3 @@
-'use client';
-
 import '../modules/react-mixpanel/img.css';
 import useMixpanelModule from '../modules/react-mixpanel/index.js';
 
