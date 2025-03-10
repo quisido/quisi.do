@@ -1,5 +1,3 @@
-'use client';
-
 import type { FSApi } from '@fullstory/snippet';
 import { useContext } from 'react';
 import Fullstory from '../contexts/fullstory.js';

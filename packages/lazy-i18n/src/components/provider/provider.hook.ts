@@ -1,5 +1,3 @@
-'use client';
-
 import { useCallback, useMemo, useRef, useState, type RefObject } from 'react';
 import mapTranslationsRecordToLoadedTranslationsRecord from '../../map/map-translations-record-to-loaded-translations-record.js';
 import RunnableTranslateFunction from '../../runnables/runnable-translate-function.js';

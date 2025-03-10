@@ -1,5 +1,3 @@
-'use client';
-
 import { usePathname, useRouter } from 'next/navigation.js';
 import { useCallback, useMemo } from 'react';
 import { default as Locale, validateLocale } from '../../constants/locale.js';

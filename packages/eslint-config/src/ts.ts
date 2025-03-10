@@ -26,6 +26,16 @@ export default {
     ...mapConfigsToRules(ts.configs.strictTypeChecked as Linter.Config[]),
     'no-invalid-this': 'off',
 
+    /**
+     *   The ESLint rule is incorrect here when it throws "Explicit undefined is
+     * unnecessary on an optional parameter." The rule does not allow for
+     * `f(x?: X | undefined)` to be called with `f(undefined)`.
+     */
+    '@typescript-eslint/no-duplicate-type-constituents': [
+      'error',
+      { ignoreUnions: true },
+    ],
+
     '@typescript-eslint/no-unused-vars': [
       'error',
       {

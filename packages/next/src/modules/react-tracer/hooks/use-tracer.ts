@@ -1,5 +1,3 @@
-'use client';
-
 import type {
   TracerProvider as ITracerProvider,
   Tracer,

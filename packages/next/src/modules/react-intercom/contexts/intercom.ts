@@ -1,5 +1,3 @@
-'use client';
-
 import { createContext } from 'react';
 import type IntercomFunction from '../types/intercom-function.js';
 

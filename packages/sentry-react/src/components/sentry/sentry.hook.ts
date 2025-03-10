@@ -1,5 +1,3 @@
-'use client';
-
 import { type User } from '@sentry/core';
 import { type BrowserOptions } from '@sentry/react';
 import { useEffect } from 'react';

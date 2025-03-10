@@ -1,5 +1,3 @@
-'use client';
-
 import mixpanel, { type Config } from 'mixpanel-browser';
 import { useEffect } from 'react';
 import useShallowMemo from 'use-shallow-memo';

@@ -1,5 +1,3 @@
-'use client';
-
 import type { RumInitConfiguration } from '@datadog/browser-rum';
 import useShallowMemo from 'use-shallow-memo';
 import type User from '../types/user.js';

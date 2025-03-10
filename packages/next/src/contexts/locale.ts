@@ -1,5 +1,3 @@
-'use client';
-
 import type Locale from '../constants/locale.js';
 import createContextUtils from '../utils/create-context-utils/index.js';
 

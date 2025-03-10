@@ -1,5 +1,3 @@
-'use client';
-
 import useWindow from '../hooks/use-window.js';
 
 export default function useHostname(): string {
