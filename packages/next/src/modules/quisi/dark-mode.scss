@@ -1,5 +1,13 @@
-@mixin media-query-filter {
-  @media (prefers-color-scheme: dark) {
-    filter: invert(95%);
+$filter: invert(95%);
+
+@mixin dark-mode {
+  html[data-color-scheme="dark"] & {
+    filter: $filter;
+  }
+
+  html[data-color-scheme="default"] & {
+    @media (prefers-color-scheme: dark) {
+      filter: $filter;
+    }
   }
 }

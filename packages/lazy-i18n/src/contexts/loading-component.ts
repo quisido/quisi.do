@@ -1,5 +1,3 @@
-'use client';
-
 import { createContext, type ComponentType } from 'react';
 import Loading from '../components/loading/index.js';
 

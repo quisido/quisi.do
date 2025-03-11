@@ -1,5 +1,3 @@
-'use client';
-
 import { useMemo } from 'react';
 import mapValueToDependencies from '../utils/map-value-to-dependencies.js';
 

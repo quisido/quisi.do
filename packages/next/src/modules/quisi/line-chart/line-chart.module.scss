@@ -1,5 +1,5 @@
 @use '../dark-mode.scss';
 
 .chart {
-  @include dark-mode.media-query-filter;
+  @include dark-mode.dark-mode;
 }

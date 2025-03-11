@@ -1,9 +1,6 @@
-@use '../modules/quisi/dark-mode.scss';
-
 $font-size: 14px;
-$line-height: 20px;
 
-.body {
+body {
   -moz-osx-font-smoothing: grayscale;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   -ms-text-size-adjust: none;
@@ -47,13 +44,4 @@ $line-height: 20px;
     padding-left: 1in;
     padding-right: 1in;
   }
-}
-
-.html {
-  font-size: $line-height;
-  height: 100%;
-  max-height: 100%;
-  min-height: 100%;
-
-  @include dark-mode.media-query-filter;
 }

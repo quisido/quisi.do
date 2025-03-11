@@ -3,6 +3,11 @@ import sortArraysByIndex from './sort-arrays-by-index.js';
 export { default as hasKeys } from './has-keys.js';
 export { default as identity } from './identity.js';
 export {
+  default as filterByBoolean,
+  default as findBoolean,
+  default as isBoolean,
+} from './is-boolean.js';
+export {
   default as filterByDefined,
   default as findDefined,
   default as isDefined,

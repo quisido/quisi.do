@@ -1,0 +1,17 @@
+.dark {
+  display: none;
+}
+
+.light {
+  display: inline;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark {
+    display: inline;
+  }
+
+  .light {
+    display: none;
+  }
+}

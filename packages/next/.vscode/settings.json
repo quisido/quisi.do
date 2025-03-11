@@ -21,5 +21,7 @@
     "next.config.js": true,
     "nyc.config.cjs": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
-  }
+  },
+  "scss.validate": false,
+  "stylelint.validate": ["css", "scss"]
 }

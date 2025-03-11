@@ -42,7 +42,7 @@ function useAuthenticationState(): State {
     }
 
     if (typeof error !== 'undefined') {
-      return false;
+      return true;
     }
 
     return true;
