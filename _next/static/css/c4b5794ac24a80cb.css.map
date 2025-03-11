@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://_N_E/src/modules/react-mixpanel/img.css"],"names":[],"mappings":"AAAA,+CACE,QAAS,CACT,MAAO,CACP,iBACF","file":"static/css/c4b5794ac24a80cb.css","sourcesContent":["img[src^=\"https://api-js.mixpanel.com/track/\"] {\n  bottom: 0;\n  left: 0;\n  position: absolute;\n}\n"],"sourceRoot":"","ignoreList":[]}
