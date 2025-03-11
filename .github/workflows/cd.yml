@@ -1,46 +1,7 @@
 name: CI/CD
 
 jobs:
-  # Stage 1: codacy, devskim, install
-  codacy:
-    name: Codacy
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Analyze
-        uses: codacy/codacy-analysis-cli-action@master
-        env:
-          CODACY_ORGANIZATION_PROVIDER: gh
-          CODACY_PROJECT_NAME: quisi.do
-          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          CODACY_USERNAME: quisido
-        with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          format: sarif
-          gh-code-scanning-compat: true
-          max-allowed-issues: 2147483647
-          output: sarif/codacy.sarif
-          verbose: true
-  #     # rejecting SARIF, as there are more runs than allowed (22 > 20)
-  #     - name: Upload SARIF
-  #       if: always()
-  #       uses: github/codeql-action/upload-sarif@main
-  #       with:
-  #         sarif_file: sarif/codacy.sarif
-  #         wait-for-processing: true
-
+  # Stage 1: devskim, install
   devskim:
     name: DevSkim
     runs-on: ubuntu-latest

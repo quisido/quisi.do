@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "arcanis.vscode-zipfs",
-    "codacy-app.codacy",
     "dbaeumer.vscode-eslint",
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",

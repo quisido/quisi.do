@@ -1,7 +1,7 @@
 name: Continuous integration
 
 jobs:
-  # Stage 1: bun, codacy, dependency-review, devskim, install
+  # Stage 1: bun, dependency-review, devskim, install
   # bun:
   #   name: bun
   #   runs-on: ubuntu-latest
@@ -16,33 +16,6 @@ jobs:
   #       run: bun run prepack
   #     - name: Prepublish
   #       run: bun run prepublish
-
-  codacy:
-    name: Codacy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Analyze
-        uses: codacy/codacy-analysis-cli-action@master
-        env:
-          CODACY_ORGANIZATION_PROVIDER: gh
-          CODACY_PROJECT_NAME: quisi.do
-          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          CODACY_USERNAME: quisido
-        with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          format: sarif
-          gh-code-scanning-compat: true
-          max-allowed-issues: 2147483647
-          output: codacy.sarif
-          verbose: true
-  #     - name: Upload SARIF
-  #       if: always()
-  #       uses: github/codeql-action/upload-sarif@main
-  #       with:
-  #         sarif_file: codacy.sarif
-  #         wait-for-processing: true
 
   # dependency-review:
   #   name: Dependency review
