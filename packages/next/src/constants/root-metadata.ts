@@ -18,7 +18,7 @@ export default {
   formatDetection: FORMAT_DETECTION,
   generator: null,
   keywords: [...KEYWORDS],
-  manifest: '/manifest.json',
+  manifest: '/quisido.webmanifest',
   metadataBase: new URL('/', 'https://quisi.do'),
   publisher: 'quisi.do',
   referrer: 'no-referrer-when-downgrade',

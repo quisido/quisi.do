@@ -1,5 +1,6 @@
 import { identity } from 'fmrs';
 import {
+  useCallback,
   useEffect,
   useLayoutEffect,
   useMemo,
@@ -17,18 +18,59 @@ const isState = <T>(value: SetStateAction<T>): value is T =>
 export default function useLocalStorage(
   key: string,
   parse?: undefined,
+  stringify?: undefined,
 ): readonly [string | null, Dispatch<SetStateAction<string | null>>];
 export default function useLocalStorage<T>(
   key: string,
   parse: (value: string) => T,
+  stringify: (value: T) => string,
 ): readonly [T | null, Dispatch<SetStateAction<T | null>>];
 export default function useLocalStorage<T = string>(
   key: string,
   // @ts-expect-error: If `parse` is `undefined`, then `T` is `string`.
   parse: ((value: string) => T) | undefined = identity,
+  // @ts-expect-error: If `stringify` is `undefined`, then `T` is `string`.
+  stringify: ((value: T) => string) | undefined = identity,
 ): readonly [T | null, Dispatch<SetStateAction<T | null>>] {
   // States
-  const [value, setValue] = useState<T | null>(null);
+  const [stateValue, setStateValue] = useState<T | null>(null);
+
+  // Callbacks
+  const setLocalStorageValue = useCallback(
+    (action: SetStateAction<T | null>): void => {
+      const setValues = (newStateValue: T | null): void => {
+        // Set in local storage.
+        if (newStateValue === null) {
+          window.localStorage.removeItem(key);
+        } else {
+          const newLocalStorageValue: string = stringify(newStateValue);
+          window.localStorage.setItem(key, newLocalStorageValue);
+        }
+
+        // Execute callbacks.
+        const setStates: ReadonlySet<(value: unknown) => void> | undefined =
+          STATE_SETTERS.get(key);
+        if (typeof setStates === 'undefined') {
+          throw new Error(
+            `Expected at least one component to be subscribed to local storage item "${key}".`,
+          );
+        }
+
+        for (const setState of setStates) {
+          setState(newStateValue);
+        }
+      };
+
+      if (isState(action)) {
+        setValues(action);
+        return;
+      }
+
+      const newValue: T | null = action(stateValue);
+      setValues(newValue);
+    },
+    [key, stateValue, stringify],
+  );
 
   // Effects
   useLayoutEffect((): void => {
@@ -36,20 +78,20 @@ export default function useLocalStorage<T = string>(
       return;
     }
 
-    const item: string | null = window.localStorage.getItem(key);
-    if (item === null) {
+    const localStorageValue: string | null = window.localStorage.getItem(key);
+    if (localStorageValue === null) {
       return;
     }
 
-    const newValue: T = parse(item);
-    setValue(newValue);
+    const newStateValue: T = parse(localStorageValue);
+    setStateValue(newStateValue);
   }, [key, parse]);
 
   // If another component changes the value,
   useEffect((): VoidFunction => {
     // We're trusting that this function will only be called with `T`.
-    const handleChange = (newValue: unknown): void => {
-      setValue(newValue as T);
+    const handleChange = (newStateValue: unknown): void => {
+      setStateValue(newStateValue as T);
     };
 
     const setStates: ReadonlySet<(value: unknown) => void> | undefined =
@@ -81,18 +123,21 @@ export default function useLocalStorage<T = string>(
 
   // If another tab changes the value,
   useEffect((): VoidFunction => {
-    const handleStorage = ({ key: eventKey, newValue }: StorageEvent): void => {
+    const handleStorage = ({
+      key: eventKey,
+      newValue: newLocalStorageValue,
+    }: StorageEvent): void => {
       if (eventKey !== key) {
         return;
       }
 
-      if (newValue === null) {
-        setValue(null);
+      if (newLocalStorageValue === null) {
+        setStateValue(null);
         return;
       }
 
-      const parsed: T = parse(newValue);
-      setValue(parsed);
+      const newStateValue: T = parse(newLocalStorageValue);
+      setStateValue(newStateValue);
     };
 
     window.addEventListener('storage', handleStorage);
@@ -101,35 +146,11 @@ export default function useLocalStorage<T = string>(
     };
   }, [key, parse]);
 
-  return useMemo((): readonly [
-    T | null,
-    Dispatch<SetStateAction<T | null>>,
-  ] => {
-    return [
-      value,
-      (action: SetStateAction<T | null>): void => {
-        const setValues = (newValue: T | null): void => {
-          const setStates: ReadonlySet<(value: unknown) => void> | undefined =
-            STATE_SETTERS.get(key);
-          if (typeof setStates === 'undefined') {
-            throw new Error(
-              `Expected at least one component to be subscribed to local storage item "${key}".`,
-            );
-          }
-
-          for (const setState of setStates) {
-            setState(newValue);
-          }
-        };
-
-        if (isState(action)) {
-          setValues(action);
-          return;
-        }
-
-        const newValue: T | null = action(value);
-        setValues(newValue);
-      },
-    ];
-  }, [key, value]);
+  return useMemo(
+    (): readonly [T | null, Dispatch<SetStateAction<T | null>>] => [
+      stateValue,
+      setLocalStorageValue,
+    ],
+    [setLocalStorageValue, stateValue],
+  );
 }

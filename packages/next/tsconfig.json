@@ -1,6 +1,5 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts"],
 
   "compilerOptions": {
     "allowJs": false,
@@ -34,5 +33,14 @@
     "cypress/screenshots/",
     "cypress/videos/",
     "out/",
+  ],
+
+  "include": [
+    "**/*.json",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.webmanifest",
+    ".next/types/**/*.ts",
+    "next-env.d.ts"
   ]
 }

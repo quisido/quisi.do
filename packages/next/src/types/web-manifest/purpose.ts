@@ -1,0 +1,16 @@
+export type Purpose =
+  | 'any'
+  | 'any maskable'
+  | 'any maskable monochrome'
+  | 'any monochrome'
+  | 'any monochrome maskable'
+  | 'maskable'
+  | 'maskable any'
+  | 'maskable any monochrome'
+  | 'maskable monochrome'
+  | 'maskable monochrome any'
+  | 'monochrome'
+  | 'monochrome any'
+  | 'monochrome any maskable'
+  | 'monochrome maskable'
+  | 'monochrome maskable any';
