@@ -1,5 +1,15 @@
 $font-size: 14px;
 
+// :host {
+//   -webkit-text-size-adjust: 100%;
+//   text-size-adjust: 100%;
+// }
+
+// [data-nextjs-dialog-backdrop] {
+//   -webkit-backdrop-filter: blur(10px);
+//   backdrop-filter: blur(10px);
+// }
+
 body {
   -moz-osx-font-smoothing: grayscale;
   -ms-overflow-style: -ms-autohiding-scrollbar;

@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import Theme from '../contexts/theme.js';
+import { useCustomTheme } from '../contexts/custom-theme.js';
+import type CustomTheme from '../types/custom-theme.js';
 import type ThemeType from '../types/theme.js';
 import mapRgbToHex from '../utils/map-rgb-to-hex.js';
 import useThemeAlpha from './use-theme-alpha.js';
@@ -15,11 +15,7 @@ interface State extends ThemeType {
 }
 
 export default function useTheme(): State {
-  const theme: ThemeType | null = useContext(Theme);
-
-  if (theme === null) {
-    throw new Error('Expected a theme to be provided.');
-  }
+  const theme: CustomTheme = useCustomTheme();
 
   const { foreground, primary, secondary } = theme;
   return {

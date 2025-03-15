@@ -15,10 +15,6 @@ const BORDER_COLOR_OPACITY = 0.5;
 const CLASS_NAME: string = validateString(styles['theme']);
 const MAX_COLOR = 255;
 
-const DEPLOYMENT_ENVIRONMENT: string = validateString(
-  process.env['DEPLOYMENT_ENVIRONMENT'],
-);
-
 const INNER_BORDER_COLOR_CLASS_NAME: string = validateString(
   styles['border-inner'],
 );
@@ -29,13 +25,11 @@ const OUTER_BORDER_COLOR_CLASS_NAME: string = validateString(
 
 const invert = (color: number): number => MAX_COLOR - color;
 
-const isLocal: boolean = DEPLOYMENT_ENVIRONMENT === 'local';
-
 function useBackgroundImage(): string | undefined {
-  const { background } = useTheme();
+  const { background, lines } = useTheme();
 
   return useMemo((): string | undefined => {
-    if (!isLocal) {
+    if (!lines) {
       return;
     }
 
@@ -52,15 +46,15 @@ function useBackgroundImage(): string | undefined {
     ].join(', ');
 
     return `repeating-linear-gradient(${gradient})`;
-  }, [background]);
+  }, [background, lines]);
 }
 
 export default function Theme({ children }: PropsWithChildren): ReactElement {
-  const { backgroundHex, foregroundHex, secondaryAlpha } = useTheme();
+  const { backgroundHex, foregroundHex, lines, secondaryAlpha } = useTheme();
   const backgroundImage: string | undefined = useBackgroundImage();
 
   const getBorderColor = (): string => {
-    if (!isLocal) {
+    if (!lines) {
       return 'transparent';
     }
 
@@ -88,13 +82,13 @@ export default function Theme({ children }: PropsWithChildren): ReactElement {
     <div
       className={OUTER_BORDER_COLOR_CLASS_NAME}
       style={{
-        borderColor,
+        borderColor: lines ? borderColor : 'transparent',
       }}
     >
       <div
         className={INNER_BORDER_COLOR_CLASS_NAME}
         style={{
-          borderColor: backgroundHex,
+          borderColor: lines ? backgroundHex : 'transparent',
         }}
       >
         <div
