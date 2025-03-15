@@ -4,7 +4,7 @@ import Fullstory from '../features/fullstory.js';
 import NotificationsProvider from '../features/notifications-provider.js';
 import Sentry from '../features/sentry.jsx';
 import SessionIdProvider from '../features/session-id-provider.js';
-import ThemeFeature from '../features/theme.js';
+import ThemeProvider from '../features/theme-provider.js';
 import TracerProviderProvider from '../features/tracer-provider-provider.js';
 import withWrappers from '../hocs/with-wrappers/index.js';
 import Theme from '../modules/quisi/theme.jsx';
@@ -15,7 +15,7 @@ const LayoutContextProviders: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,
   NotificationsProvider,
   SessionIdProvider,
-  ThemeFeature,
+  ThemeProvider,
   WindowProvider,
 
   // Requres `Authentication`.
@@ -23,7 +23,7 @@ const LayoutContextProviders: ComponentType<PropsWithChildren> = withWrappers(
   PostHog,
   Sentry,
 
-  // Requires `ThemeFeature`.
+  // Requires `ThemeProvider`.
   Theme,
 
   // Requires `WindowProvider`.
