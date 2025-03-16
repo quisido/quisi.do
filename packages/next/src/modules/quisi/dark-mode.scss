@@ -1,13 +1,19 @@
 $filter: invert(95%);
 
 @mixin dark-mode {
+  html & {
+    filter: none;
+
+    @media (prefers-color-scheme: dark) {
+      filter: $filter;
+    }
+  }
+
   html[data-color-scheme="dark"] & {
     filter: $filter;
   }
 
-  html[data-color-scheme="default"] & {
-    @media (prefers-color-scheme: dark) {
-      filter: $filter;
-    }
+  html[data-color-scheme="light"] & {
+    filter: none;
   }
 }

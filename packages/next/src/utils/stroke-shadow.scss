@@ -1,0 +1,26 @@
+@use 'sass:list';
+@use 'sass:math';
+
+@mixin stroke-shadow($color, $width) {
+  -webkit-text-stroke-color: $color;
+  -webkit-text-stroke-width: $width;
+  text-shadow: stroke-text-shadow($color, $width);
+}
+
+@function stroke-text-shadow($color, $width) {
+  $shadows: 8;
+  $angleIncrement: math.div(2 * math.$pi, $shadows);
+
+  $shadow: ();
+  @for $index from 0 to $shadows {
+    $angle: $index * $angleIncrement;
+    $offset-x: $width * math.cos($angle);
+    $offset-y: $width * math.sin($angle);
+    $shadow: list.append(
+      $shadow,
+      $color $offset-x $offset-y $width,
+      $separator: comma
+    );
+  }
+  @return $shadow;
+}

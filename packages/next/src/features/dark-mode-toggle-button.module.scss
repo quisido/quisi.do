@@ -1,0 +1,28 @@
+@use '../utils/stroke-shadow.scss';
+
+$stroke-width: 0.0625em;
+$theme-background-color: #f8f4f0;
+$theme-foreground-color: #000000;
+
+$dark-stroke-color: rgba($theme-background-color, 0.5);
+$light-stroke-color: rgba($theme-foreground-color, 0.5);
+
+html[data-color-scheme="dark"] .button {
+  @include stroke-shadow.stroke-shadow($dark-stroke-color, $stroke-width);
+}
+
+html[data-color-scheme="light"] .button {
+  @include stroke-shadow.stroke-shadow($light-stroke-color, $stroke-width);
+}
+
+.button {
+  @include stroke-shadow.stroke-shadow($light-stroke-color, $stroke-width);
+  background-color: transparent;
+  border-width: 0;
+  cursor: pointer;
+  font-size: inherit;
+
+  @media (prefers-color-scheme: dark) {
+    @include stroke-shadow.stroke-shadow($dark-stroke-color, $stroke-width);
+  }
+}

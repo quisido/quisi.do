@@ -28,7 +28,13 @@ export default function ButtonElement({
   );
 
   return (
-    <button {...buttonProps} className={className} id={id} style={style}>
+    <button
+      type="button"
+      {...buttonProps}
+      className={className}
+      id={id}
+      style={style}
+    >
       {children}
     </button>
   );

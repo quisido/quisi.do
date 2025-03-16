@@ -37,24 +37,15 @@ export default function Banner({
   return (
     <aside
       className={CLASS_NAME}
-      style={{
-        backgroundColor: secondaryHex,
-        borderColor: secondaryHex,
-      }}
+      style={{ backgroundColor: secondaryHex, borderColor: secondaryHex }}
     >
       {typeof icon === 'string' && (
         <>
           <Emoji>{icon}</Emoji>{' '}
         </>
       )}
-      <div
-        style={{
-          flexGrow: 1,
-        }}
-      >
-        {children}
-      </div>
-      <button className={BUTTON_CLASS_NAME} {...buttonProps}>
+      <div style={{ flexGrow: 1 }}>{children}</div>
+      <button className={BUTTON_CLASS_NAME} type="button" {...buttonProps}>
         <Emoji>❌</Emoji>
       </button>
     </aside>

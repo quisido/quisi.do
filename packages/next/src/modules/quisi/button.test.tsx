@@ -3,8 +3,7 @@ import { render } from '@testing-library/react';
 import { MockFullstory } from 'fullstory-react';
 import { type PropsWithChildren, type ReactElement } from 'react';
 import { describe, expect, it, vi } from 'vitest';
-import THEME from '../../constants/theme.js';
-import Theme from '../../contexts/theme.js';
+import CustomThemeProvider from '../../features/custom-theme-provider.jsx';
 import Button from './button.js';
 
 const MOCK_FULLSTORY = Object.assign(vi.fn(), FullStory);
@@ -16,9 +15,11 @@ describe('Button', (): void => {
       {
         wrapper({ children }: PropsWithChildren): ReactElement {
           return (
-            <MockFullstory FullStory={MOCK_FULLSTORY} orgId="test-org-id">
-              <Theme.Provider value={THEME}>{children}</Theme.Provider>
-            </MockFullstory>
+            <CustomThemeProvider>
+              <MockFullstory FullStory={MOCK_FULLSTORY} orgId="test-org-id">
+                {children}
+              </MockFullstory>
+            </CustomThemeProvider>
           );
         },
       },

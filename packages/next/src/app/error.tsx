@@ -12,7 +12,9 @@ export default function ErrorBoundary({ error, reset }: Props): ReactElement {
     <div>
       <h2>Something went wrong!</h2>
       <pre>{error.message}</pre>
-      <button onClick={reset}>Try again</button>
+      <button onClick={reset} type="button">
+        Try again
+      </button>
     </div>
   );
 }

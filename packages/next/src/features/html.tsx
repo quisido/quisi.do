@@ -8,9 +8,9 @@ export default function Html({ children }: PropsWithChildren): ReactElement {
   // Contexts
   const [darkMode] = useDarkMode();
 
-  const getColorScheme = (): string => {
+  const getColorScheme = (): string | undefined => {
     if (darkMode === null) {
-      return 'default';
+      return;
     }
 
     if (darkMode) {

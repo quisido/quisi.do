@@ -2,7 +2,7 @@
 @use 'sass:math';
 
 @function list-nth-default($list, $index, $default) {
-  @if length($list) < $index {
+  @if list.length($list) < $index {
     @return $default;
   }
   @return list.nth($list, $index);

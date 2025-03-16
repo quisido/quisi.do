@@ -1,14 +1,11 @@
 import { assert } from 'vitest';
-
-interface Icon {
-  readonly sizes: string;
-  readonly type: string;
-}
+import type Image from '../types/webmanifest/image.js';
 
 const BASE = 10;
 const SPLASH_SCREEN_ICON_SIZE = 512;
 
-export default function findSplashScreenIcon({ sizes, type }: Icon): boolean {
+export default function findSplashScreenIcon({ sizes, type }: Image): boolean {
+  assert(typeof sizes === 'string');
   const sizeMatches: RegExpExecArray | null =
     /^(?<widthStr>\d+)x(?<heightStr>\d+)$/u.exec(sizes);
 

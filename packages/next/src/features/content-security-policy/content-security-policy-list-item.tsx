@@ -96,7 +96,7 @@ export default function ContentSecurityPolicyListItem({
 
   return (
     <li className={className}>
-      <button onClick={onToggle}>
+      <button onClick={onToggle} type="button">
         <span className={dispositionIconClassName}>
           <ContentSecurityPolicyDispositionIcon>
             {disposition}
