@@ -27,6 +27,7 @@ export default function Head(): ReactElement {
       )}
       <GoogleFonts />
       <meta charSet="utf-8" />
+      <meta name="view-transition" content="same-origin" />
       <NetworkErrorLogging
         includeSubdomains
         maxAge={31536000}
