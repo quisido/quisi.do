@@ -3867,7 +3867,7 @@ __metadata:
     publint: "npm:^0.3.8"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   bin:
     monorepo-template-test: ./bin-test.js
@@ -3898,7 +3898,7 @@ __metadata:
     publint: "npm:^0.3.8"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   languageName: unknown
   linkType: soft
@@ -5217,7 +5217,7 @@ __metadata:
     publint: "npm:^0.3.8"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   languageName: unknown
   linkType: soft
@@ -5252,7 +5252,7 @@ __metadata:
     publint: "npm:^0.3.8"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
     wrangler: "npm:^3.114.0"
   languageName: unknown
@@ -5285,7 +5285,7 @@ __metadata:
     publint: "npm:^0.3.8"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   languageName: unknown
   linkType: soft
@@ -5316,7 +5316,7 @@ __metadata:
     fmrs: "workspace:^"
     publint: "npm:^0.3.8"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
     wrangler: "npm:^3.114.0"
   languageName: unknown
@@ -5348,7 +5348,7 @@ __metadata:
     fmrs: "workspace:^"
     publint: "npm:^0.3.8"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
     wrangler: "npm:^3.114.0"
   languageName: unknown
@@ -5515,7 +5515,7 @@ __metadata:
     use-force-update: "npm:^1.0.11"
     use-mui: "npm:^1.0.6"
     use-shallow-memo: "workspace:^"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
     wait-on: "npm:^8.0.2"
     webpack: "npm:^5.98.0"
@@ -5553,7 +5553,7 @@ __metadata:
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
     typescript-eslint: "npm:^8.26.0"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   peerDependencies:
     eslint: ^9.0.0
@@ -5595,7 +5595,7 @@ __metadata:
     publint: "npm:^0.3.8"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   peerDependencies:
     vitest: ">=2.0.0"
@@ -5636,7 +5636,7 @@ __metadata:
     publint: "npm:^0.3.8"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   languageName: unknown
   linkType: soft
@@ -9834,7 +9834,7 @@ __metadata:
     publint: "npm:^0.3.8"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   languageName: unknown
   linkType: soft
@@ -9861,7 +9861,7 @@ __metadata:
     publint: "npm:^0.3.8"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   languageName: unknown
   linkType: soft
@@ -12317,7 +12317,7 @@ __metadata:
     publint: "npm:^0.3.8"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   languageName: unknown
   linkType: soft
@@ -12543,7 +12543,7 @@ __metadata:
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
     use-shallow-memo: "workspace:^"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   peerDependencies:
     react: ">=17.0.0"
@@ -14458,7 +14458,7 @@ __metadata:
     sass: "npm:^1.85.1"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   peerDependencies:
     react: ">=17.0.0"
@@ -15304,7 +15304,7 @@ __metadata:
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
     use-force-update: "npm:^1.0.11"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   peerDependencies:
     history: ">=5.0.0"
@@ -15749,7 +15749,7 @@ __metadata:
     react-dom: "npm:^19.0.0"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   peerDependencies:
     react: ">=16.8.0"
@@ -17016,7 +17016,7 @@ __metadata:
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
     use-shallow-memo: "workspace:^"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   peerDependencies:
     "@datadog/browser-rum": ^5.0.0
@@ -17933,7 +17933,7 @@ __metadata:
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
     use-shallow-memo: "workspace:^"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   peerDependencies:
     react: ">=18.0.0"
@@ -19863,7 +19863,7 @@ __metadata:
     react-dom: "npm:^19.0.0"
     tslib: "npm:^2.8.1"
     typescript: "npm:^5.8.2"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.2.3"
     vitest: "npm:^3.0.8"
   peerDependencies:
     react: ">=16.8.0"
@@ -19942,7 +19942,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.0.0 || ^6.0.0, vite@npm:^6.2.1":
+"vite@npm:^5.0.0 || ^6.0.0":
   version: 6.2.1
   resolution: "vite@npm:6.2.1"
   dependencies:
@@ -19991,6 +19991,58 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10c0/2c024376a840eae2ce9cfba98d62e9f1eae93caa8304875854dbc0740414aedcfbe157c2244567bd456cdb60a300312af02ae9b5c63c147d35cf4da3a0591312
+  languageName: node
+  linkType: hard
+
+"vite@npm:^6.2.3":
+  version: 6.2.3
+  resolution: "vite@npm:6.2.3"
+  dependencies:
+    esbuild: "npm:^0.25.0"
+    fsevents: "npm:~2.3.3"
+    postcss: "npm:^8.5.3"
+    rollup: "npm:^4.30.1"
+  peerDependencies:
+    "@types/node": ^18.0.0 || ^20.0.0 || >=22.0.0
+    jiti: ">=1.21.0"
+    less: "*"
+    lightningcss: ^1.21.0
+    sass: "*"
+    sass-embedded: "*"
+    stylus: "*"
+    sugarss: "*"
+    terser: ^5.16.0
+    tsx: ^4.8.1
+    yaml: ^2.4.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    jiti:
+      optional: true
+    less:
+      optional: true
+    lightningcss:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+    tsx:
+      optional: true
+    yaml:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 10c0/ba6ad7e83e5a63fb0b6f62d3a3963624b8784bdc1bfa2a83e16cf268fb58c76bd9f8e69f39ed34bf8711cdb8fd7702916f878781da53c232c34ef7a85e0600cf
   languageName: node
   linkType: hard
 
