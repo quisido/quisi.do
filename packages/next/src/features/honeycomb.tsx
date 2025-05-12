@@ -3,7 +3,7 @@ import Honeycomb from '../components/honeycomb.jsx';
 import validateString from '../utils/validate-string.js';
 
 const HONEYCOMB_API_KEY: string = validateString(
-  process.env['HONEYCOMB_API_KEY'],
+  import.meta.env.HONEYCOMB_API_KEY,
 );
 
 export default function HoneycombFeature({

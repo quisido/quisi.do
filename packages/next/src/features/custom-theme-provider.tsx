@@ -24,7 +24,7 @@ import toggle from '../utils/toggle.js';
 // });
 
 const IS_DEVELOPMENT: boolean =
-  process.env['DEPLOYMENT_ENVIRONMENT'] === 'local';
+  import.meta.env.DEPLOYMENT_ENVIRONMENT === 'local';
 
 export default function CustomThemeProviderFeature({
   children,

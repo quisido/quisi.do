@@ -1,7 +1,8 @@
-import { usePathname, useRouter } from 'next/navigation.js';
 import { useCallback, useMemo } from 'react';
 import { default as Locale, validateLocale } from '../../constants/locale.js';
 import type Params from './types/params.js';
+import usePathname from '../../hooks/use-pathname.js';
+import useNavigation from '../../hooks/use-navigation.js';
 
 interface Props {
   readonly params: Params;
@@ -19,26 +20,26 @@ export default function useLocaleLayout({ params }: Props): State {
   const locale: Locale = mapParamsToLocale(params);
 
   // Contexts
-  const router = useRouter();
+  const navigate = useNavigation();
   const pathname: string = usePathname();
 
   // Callacks
   const setLocale = useCallback(
     (newLocale: Locale): void => {
       if (locale === Locale.English) {
-        router.push(`/${newLocale}/${pathname}`);
+        navigate(`/${newLocale}/${pathname}`);
         return;
       }
 
       const basePathname = pathname.substring(`/${locale}`.length);
       if (newLocale === Locale.English) {
-        router.push(basePathname);
+        navigate(basePathname);
         return;
       }
 
-      router.push(`/${newLocale}/${basePathname}`);
+      navigate(`/${newLocale}/${basePathname}`);
     },
-    [locale, pathname, router],
+    [locale, navigate, pathname],
   );
 
   return {

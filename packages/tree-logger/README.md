@@ -21,9 +21,3 @@ Parent
 └─ Child 2
     └─ ⚠ Looks bad ⚠
 ```
-
-## Install
-
-```sh
-yarn add --dev "@monorepo-template/tree-logger"
-```

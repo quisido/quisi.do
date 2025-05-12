@@ -30,7 +30,7 @@ type CspResponse = ErrorResponse | readonly ReportBody[];
 const DECREMENT = -1;
 const LIST_CLASS_NAME: string = validateString(styles['list']);
 const NONE = 0;
-const ORIGIN: string = validateString(process.env['CSP_ORIGIN']);
+const ORIGIN: string = validateString(import.meta.env.CSP_ORIGIN);
 const REQUEST_INFO = `${ORIGIN}/1/?key=demo-get`;
 
 // Technical debt: Validate that the `code` property is `GetErrorCode`.
@@ -89,7 +89,7 @@ export default function ContentSecurityPolicy(): ReactElement {
             trust the security certificate
           </Link>
           .
-          <ol>
+          <ol style={{ margin: 0 }}>
             <li>
               Visit <CertificateManagerLink feature="content-security-policy" />
               .

@@ -1,4 +1,4 @@
 # Contributing
 
-Run `yarn packages/csp run local:init` to install a local instance of the D1
-database.
+Run `npm run-script local:init --workspace=packages/csp` to install a local
+instance of the D1 database.

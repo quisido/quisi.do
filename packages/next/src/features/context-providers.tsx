@@ -11,7 +11,7 @@ import CustomThemeProvider from './custom-theme-provider.jsx';
 import PostHog from './posthog.jsx';
 import WindowProvider from './window-provider.jsx';
 
-const LayoutContextProviders: ComponentType<PropsWithChildren> = withWrappers(
+const ContextProviders: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,
   NotificationsProvider,
   SessionIdProvider,
@@ -31,4 +31,4 @@ const LayoutContextProviders: ComponentType<PropsWithChildren> = withWrappers(
   TracerProviderProvider,
 )(Fragment);
 
-export default LayoutContextProviders;
+export default ContextProviders;

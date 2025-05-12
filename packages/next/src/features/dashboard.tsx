@@ -34,7 +34,7 @@ interface IGauge {
 const LIST_CLASS_NAME: string = validateString(styles['list']);
 
 const DASHBOARD_ENDPOINT: string = validateString(
-  process.env['DASHBOARD_ENDPOINT'],
+  import.meta.env.DASHBOARD_ENDPOINT,
 );
 
 const INITIAL_VALUE = 0;
@@ -137,7 +137,7 @@ function Dashboard(): ReactElement {
       error === 'Failed to fetch'
     ) {
       return (
-        <Section header="Content Security Policy">
+        <DashboardWrapper>
           To view the dashboard in development,{' '}
           <Link
             feature="content-security-policy"
@@ -146,7 +146,7 @@ function Dashboard(): ReactElement {
           >
             trust the security certificate.
           </Link>
-          <ol>
+          <ol style={{ margin: 0 }}>
             <li>
               Visit <CertificateManagerLink feature="content-security-policy" />
               .
@@ -156,7 +156,7 @@ function Dashboard(): ReactElement {
               <strong>Import</strong>.
             </li>
           </ol>
-        </Section>
+        </DashboardWrapper>
       );
     }
 

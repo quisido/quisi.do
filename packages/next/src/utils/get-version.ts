@@ -5,12 +5,12 @@ export default function getVersion(): string {
    *   If this build relates to a specific GitHub SHA, then the SHA should be
    * used to generate the version ID.
    */
-  const githubSha: string | undefined = process.env['GITHUB_SHA'];
+  const githubSha: string | undefined = import.meta.env.GITHUB_SHA;
   if (typeof githubSha === 'string') {
     return mapGitHubShaToVersion(githubSha);
   }
 
-  const { NODE_ENV } = process.env;
+  const { NODE_ENV } = import.meta.env;
 
   /**
    *   If we're performing a production build in a non-production environment,

@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation.js';
 import {
   useEffect,
   useState,
@@ -11,6 +10,7 @@ import {
 import innerText from 'react-innertext';
 import useEmit from '../../hooks/use-emit/use-emit.js';
 import useTheme from '../../hooks/use-theme.js';
+import useNavigation from '../../hooks/use-navigation.js';
 
 interface BaseProps {
   readonly children?: ReactNode;
@@ -54,7 +54,7 @@ export default function Link({
 
   // Contexts
   const emit = useEmit();
-  const router = useRouter();
+  const navigate = useNavigation();
   const { primaryHex } = useTheme();
 
   // States
@@ -80,18 +80,9 @@ export default function Link({
     }
 
     if (target !== '_blank' && typeof href === 'string') {
-      router.push(href);
+      navigate(href);
     }
   };
-
-  // Effects
-  useEffect((): void => {
-    if (typeof href === 'undefined') {
-      return;
-    }
-
-    router.prefetch(href);
-  }, [href, router]);
 
   useEffect((): void => {
     if (typeof href === 'undefined') {

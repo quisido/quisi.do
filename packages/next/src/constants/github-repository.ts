@@ -1,1 +1,1 @@
-export const { GITHUB_REPOSITORY } = process.env;
+export const { GITHUB_REPOSITORY } = import.meta.env;

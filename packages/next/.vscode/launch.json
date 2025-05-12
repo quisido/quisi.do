@@ -2,10 +2,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "yarn run dev",
+      "name": "npm run-script start",
       "request": "launch",
-      "runtimeArgs": ["run", "dev"],
-      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["run-script", "start"],
+      "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**"],
       "type": "node"
     },

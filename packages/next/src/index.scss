@@ -1,4 +1,7 @@
+@use './modules/quisi/dark-mode';
+
 $font-size: 14px;
+$line-height: 20px;
 
 @view-transition {
   navigation: auto;
@@ -9,23 +12,15 @@ $font-size: 14px;
 //   text-size-adjust: 100%;
 // }
 
-// [data-nextjs-dialog-backdrop] {
-//   -webkit-backdrop-filter: blur(10px);
-//   backdrop-filter: blur(10px);
-// }
-
 body {
   -moz-osx-font-smoothing: grayscale;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  -ms-text-size-adjust: none;
-  -webkit-font-feature-settings: "pnum";
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
-  -webkit-text-size-adjust: none;
   align-items: center;
   background-color: #f8f4f0; // theme background color
   box-sizing: border-box;
-  color: #000000; // theme foreground color
+  color: #000; // theme foreground color
   display: flex;
   flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -33,29 +28,34 @@ body {
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-feature-settings: "pnum";
   font-size: $font-size;
-  font-smooth: always;
   font-variant-numeric: proportional-nums;
   justify-content: stretch;
   letter-spacing: 0;
   line-height: 1rem;
-  margin-bottom: 0;
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
+  margin: 0;
   min-height: 100%;
   overflow-y: scroll;
   padding-bottom: 0;
   padding-top: 0;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
   text-size-adjust: none;
 
-  @media (max-width: 6in) {
+  @media (width < 6in) {
     padding-left: 0; // 0.5in
     padding-right: 0; // 0.5in
   }
 
-  @media (min-width: 6in) {
+  @media (width >= 6in) {
     padding-left: 1in;
     padding-right: 1in;
   }
+}
+
+html {
+  font-size: $line-height;
+  height: 100%;
+  max-height: 100%;
+  min-height: 100%;
+
+  @include dark-mode.root;
 }

@@ -1,17 +1,11 @@
 /.git/
 /.wrangler/
-/.yarn/cache/
-/.yarn/sdks/
-/.yarn/unplugged/
-/.yarn/build-state.yml
-/.yarn/install-state.gz
 /coverage/
 /sarif/
 /.attach_pid*
 /.eslintcache
 /.pnp.*
 /debug.log
-/yarn-error.log
 .idea/
 node_modules/
 .DS_Store

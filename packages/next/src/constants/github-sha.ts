@@ -1,1 +1,1 @@
-export const { GITHUB_SHA } = process.env;
+export const { GITHUB_SHA } = import.meta.env;

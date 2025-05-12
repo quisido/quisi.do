@@ -1,4 +1,10 @@
-import validateString from './validate-string.js';
+import { config } from 'dotenv';
+
+const processEnv: Record<string, string> = {
+  NODE_ENV: process.env.NODE_ENV,
+};
+
+config({ override: true, processEnv });
 
 export default function reduceEnvironmentVariableNamesToRecord(
   record: Record<string, string | undefined>,
@@ -6,6 +12,6 @@ export default function reduceEnvironmentVariableNamesToRecord(
 ): Record<string, string | undefined> {
   return {
     ...record,
-    [name]: validateString(process.env[name]),
+    [`import.meta.env.${name}`]: JSON.stringify(processEnv[name]),
   };
 }

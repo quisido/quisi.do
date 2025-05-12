@@ -18,7 +18,7 @@ interface State {
   readonly user: User | undefined;
 }
 
-const ENVIRONMENT: string = validateString(process.env['SENTRY_ENVIRONMENT']);
+const ENVIRONMENT: string = validateString(import.meta.env.SENTRY_ENVIRONMENT);
 const RELEASE: string = GITHUB_SHA ?? 'unknown';
 const TRACE_PROPAGATION_TARGETS: string[] = [
   'api.quisi.do',

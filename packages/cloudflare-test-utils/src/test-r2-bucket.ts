@@ -10,25 +10,19 @@ export default class TestR2Bucket implements R2Bucket {
   public readonly put = vi.fn();
   public readonly resumeMultipartUpload = vi.fn();
 
-  public constructor() {
-    this.expectToHaveGot = this.expectToHaveGot.bind(this);
-    this.expectToHavePut = this.expectToHavePut.bind(this);
-    this.setPutError = this.setPutError.bind(this);
-  }
-
-  public expectToHaveGot(...params: Parameters<R2Bucket['get']>): void {
+  public expectToHaveGot = (...params: Parameters<R2Bucket['get']>): void => {
     expect(this.get).toHaveBeenCalledWith(...params);
-  }
+  };
 
-  public expectToHavePut(...params: Parameters<R2Bucket['put']>): void {
+  public expectToHavePut = (...params: Parameters<R2Bucket['put']>): void => {
     expect(this.put).toHaveBeenCalledWith(...params);
-  }
+  };
 
-  public setGettError(error: Error): void {
+  public setGetError = (error: Error): void => {
     this.get.mockRejectedValue(error);
-  }
+  };
 
-  public setPutError(error: Error): void {
+  public setPutError = (error: Error): void => {
     this.put.mockRejectedValue(error);
-  }
+  };
 }

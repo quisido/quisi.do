@@ -1,5 +1,4 @@
 import I18n, { useTranslate, type TranslateFunction } from 'lazy-i18n';
-import { usePathname } from 'next/navigation.js';
 import { useMemo, type ReactElement } from 'react';
 import {
   PATREON_OAUTH_CLIENT_ID,
@@ -10,6 +9,7 @@ import useSearch from '../hooks/use-search.js';
 import Link from '../modules/quisi/link.jsx';
 import validateString from '../utils/validate-string.js';
 import styles from './header-authenticate-link.module.scss';
+import usePathname from '../hooks/use-pathname.js';
 
 interface State {
   readonly href: string;

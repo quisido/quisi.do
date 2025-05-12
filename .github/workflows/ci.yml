@@ -14,8 +14,8 @@ jobs:
   #       run: bun install
   #     - name: Prepack
   #       run: bun run prepack
-  #     - name: Prepublish
-  #       run: bun run prepublish
+  #     - name: Test
+  #       run: bun run test
 
   # dependency-review:
   #   name: Dependency review
@@ -57,10 +57,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
 
   # Stage 2: prepack
   prepack:
@@ -73,12 +73,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
       - name: Prepack
-        run: yarn run --require dd-trace/init prepack
+        run: npm run-script prepack --require dd-trace/init
         env:
           CLARITY_TAG: ln18ya61ca
           CLOUD_ACCOUNT_ID: quisido
@@ -127,14 +127,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
       - name: Audit
-        run: yarn packages/next run lighthouse:report
+        run: npm run lighthouse:report --workspace=packages/next
       - name: Validate
-        run: yarn packages/next run postlighthouse
+        run: npm run postlighthouse --workspace=packages/next
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
@@ -145,8 +145,8 @@ jobs:
             packages/*/lighthouse-*.devtoolslog.json
             packages/*/lighthouse-*.trace.json
 
-  prepublish:
-    name: Prepublish
+  test:
+    name: Test
     needs: prepack
     runs-on: ubuntu-latest
     steps:
@@ -160,19 +160,19 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
-      - name: Prepublish
-        run: yarn prepublish
+        run: npm install --legacy-peer-deps
+      - name: Test
+        run: npm test
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
   # Stage 4: coverage
   # coverage:
   #   name: Coverage
-  #   needs: [prepublish] # cypress
+  #   needs: [test] # cypress
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout repository
@@ -182,20 +182,20 @@ jobs:
   #       with:
   #         name: cypress
   #         path: packages/
-  #     - name: Download prepublish artifacts
+  #     - name: Download test artifacts
   #       uses: actions/download-artifact@v4
   #       with:
-  #         name: prepublish
+  #         name: test
   #         path: /
   #     - name: Setup Node
   #       uses: actions/setup-node@v4
   #       with:
-  #         cache: yarn
+  #         cache: npm
   #         node-version: latest
   #     - name: Install dependencies
-  #       run: yarn install --immutable
+  #       run: npm install --legacy-peer-deps
   #     - name: Report coverage
-  #       run: yarn packages/next run coverage
+  #       run: npm run-script coverage --workspace=packages/next
   #       env:
   #         BRANCHES_COVERAGE_THRESHOLD: 1
   #         FUNCTIONS_COVERAGE_THRESHOLD: 1

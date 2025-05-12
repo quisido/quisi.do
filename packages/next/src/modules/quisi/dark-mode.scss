@@ -1,19 +1,35 @@
 $filter: invert(95%);
 
-@mixin dark-mode {
-  html & {
-    filter: none;
+// Disable dark mode on a specific element by uninverting it.
+@mixin disable {
+  filter: none;
 
-    @media (prefers-color-scheme: dark) {
-      filter: $filter;
-    }
-  }
-
-  html[data-color-scheme="dark"] & {
+  @media (prefers-color-scheme: dark) {
     filter: $filter;
   }
 
-  html[data-color-scheme="light"] & {
+  [data-color-scheme="dark"] & {
+    filter: $filter;
+  }
+
+  [data-color-scheme="light"] & {
+    filter: none;
+  }
+}
+
+// Support dark mode on the root element.
+@mixin root {
+  filter: none;
+
+  @media (prefers-color-scheme: dark) {
+    filter: $filter;
+  }
+
+  &[data-color-scheme="dark"] {
+    filter: $filter;
+  }
+
+  &[data-color-scheme="light"] {
     filter: none;
   }
 }

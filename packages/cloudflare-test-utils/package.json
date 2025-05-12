@@ -1,6 +1,6 @@
 {
   "name": "cloudflare-test-utils",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "quisi.do <cloudflare-test-utils@quisi.do>",
   "description": "test utilities for Cloudflare workers",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/cloudflare-test-utils#readme",
@@ -33,8 +33,8 @@
     "clean": "rm -rf coverage dist node_modules && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
-    "prepack": "yarn run tsc",
-    "prepublish": "concurrently --names attw,eslint,publint,vitest --prefix-colors auto \"yarn run attw\" \"yarn run eslint\" \"yarn run publint\" \"yarn run vitest:run\"",
+    "prepack": "npm run-script tsc",
+    "test": "concurrently --names attw,eslint,publint,vitest --prefix-colors auto \"npm run-script attw\" \"npm run-script eslint\" \"npm run-script publint\" \"npm run-script vitest:run\"",
     "publint": "publint",
     "tsc": "tsc --project tsconfig.prepack.json",
     "vitest": "vitest",
@@ -42,26 +42,26 @@
     "vitest:watch": "vitest watch"
   },
   "dependencies": {
-    "@cloudflare/workers-types": "^4.20250303.0"
+    "@cloudflare/workers-types": "^4.20250425.0"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.4",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@quisido/eslint-config": "workspace:^",
-    "@quisido/vitest-config": "workspace:^",
-    "@typescript-eslint/eslint-plugin": "^8.26.0",
-    "@typescript-eslint/parser": "^8.26.0",
-    "@vitest/coverage-istanbul": "^3.0.8",
+    "@quisido/eslint-config": "^1.0.0",
+    "@quisido/vitest-config": "^1.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.0",
+    "@typescript-eslint/parser": "^8.31.0",
+    "@vitest/coverage-istanbul": "^3.1.2",
     "concurrently": "^9.1.2",
-    "eslint": "^9.22.0",
-    "eslint-config-prettier": "^10.1.1",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-prettier": "^5.2.6",
     "prettier": "^3.5.3",
-    "publint": "^0.3.8",
+    "publint": "^0.3.12",
     "tslib": "^2.8.1",
-    "typescript": "^5.8.2",
-    "vite": "^6.2.1",
-    "vitest": "^3.0.8"
+    "typescript": "^5.8.3",
+    "vite": "^6.3.3",
+    "vitest": "^3.1.2"
   }
 }

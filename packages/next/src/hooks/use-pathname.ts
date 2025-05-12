@@ -1,1 +1,3 @@
-export { usePathname as default } from 'next/navigation.js';
+export default function usePathname(): string {
+  return window.location.pathname;
+}

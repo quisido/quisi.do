@@ -7,9 +7,11 @@ import {
 import type Authentication from '../types/authentication.js';
 import validateString from '../utils/validate-string.js';
 
-const APPLICATION_ID: string = validateString(process.env['DD_APPLICATION_ID']);
-const CLIENT_TOKEN: string = validateString(process.env['DD_CLIENT_TOKEN']);
+const CLIENT_TOKEN: string = validateString(import.meta.env.DD_CLIENT_TOKEN);
 const EXPERIMENTAL_FEATURES: string[] = ['feature_flags'];
+const APPLICATION_ID: string = validateString(
+  import.meta.env.DD_APPLICATION_ID,
+);
 
 const PROPS: Required<
   Omit<
@@ -38,8 +40,10 @@ const PROPS: Required<
   enableExperimentalFeatures: EXPERIMENTAL_FEATURES,
   enablePrivacyForActionName: true,
   enabled: true,
-  env: process.env.NODE_ENV,
+  env: import.meta.env.NODE_ENV,
   plugins: [],
+  profilingSampleRate: 100,
+  propagateTraceBaggage: false,
   service: 'quisi.do',
   sessionPersistence: 'local-storage',
   sessionReplayRecording: true,

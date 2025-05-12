@@ -1,5 +1,5 @@
 @use './dark-mode.scss';
 
 .gauge {
-  @include dark-mode.dark-mode;
+  @include dark-mode.disable;
 }

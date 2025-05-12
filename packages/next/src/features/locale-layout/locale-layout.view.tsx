@@ -5,7 +5,6 @@ import { type ReactElement } from 'react';
 import { default as Locale } from '../../constants/locale.js';
 import TRANSLATIONS from '../../constants/translations.js';
 import { LocaleProvider } from '../../contexts/locale.js';
-// Import Notifications from '../../features/notifications.js';
 import type NextLayoutProps from '../../types/next-layout-props.js';
 import useLocaleLayout from './locale-layout.hook.js';
 import type Params from './types/params.js';

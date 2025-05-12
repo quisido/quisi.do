@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import type { CSSProperties, ReactElement } from 'react';
 import src from './loading-icon.gif';
 
@@ -20,13 +19,7 @@ const SPAN_STYLE: CSSProperties = {
 export default function LoadingIcon(): ReactElement {
   return (
     <span style={SPAN_STYLE}>
-      <Image
-        alt="Loading"
-        priority={false}
-        src={src}
-        style={IMG_STYLE}
-        unoptimized
-      />
+      <img alt="Loading" src={src} style={IMG_STYLE} />
     </span>
   );
 }

@@ -1,3 +1,6 @@
+base-uri
+  'none';
+
 child-src
   'none';
 
@@ -24,6 +27,7 @@ connect-src
   https://stats.g.doubleclick.net/g/collect
   https://us.i.posthog.com/decide/
   https://us.i.posthog.com/e/
+  https://us.i.posthog.com/i/
   https://us.i.posthog.com/s/
   https://us-assets.i.posthog.com/array/
   https://www.clarity.ms/report-err/eusb
@@ -88,22 +92,24 @@ media-src
 object-src
   'none';
 
+require-trusted-types-for
+  'script';
+
 script-src-attr
   'none';
 
 script-src-elem
   'self'
-  'unsafe-inline'
+  'nonce-quisido'
+  'strict-dynamic'
   https://ajax.cloudflare.com/
   https://cdn.logr-ingest.com/logger-1.min.js
   https://cdn.lrkt-in.com/logger-1.min.js
   https://edge.fullstory.com/s/fs.js
   https://quisi.do/cdn-cgi/speculation
-  https://static.cloudflareinsights.com/
   https://us-assets.i.posthog.com/array/phc_qgxn9IH7LL0PWTQv12DQa6j65d7bSpkTG2nfTpVtJOW/
   https://us-assets.i.posthog.com/static/
   https://www.clarity.ms/s/
-  https://www.clarity.ms/tag/lm4m88gmix
   https://www.googletagmanager.com/gtag/js;
 
 style-src-attr
@@ -113,6 +119,9 @@ style-src-elem
   'self'
   'unsafe-inline'
   https://fonts.googleapis.com/css2;
+
+trusted-types
+  quisido;
 
 worker-src
   blob:;

@@ -42,11 +42,11 @@ export default [
   },
 
   ...disableRulesForFiles({
+    '@typescript-eslint/no-empty-object-type': ['src/vite-env.d.ts'],
     '@typescript-eslint/no-non-null-assertion': ['src/utils/split.ts'],
     'func-style': ['src/**/*.tsx'],
     'max-params': ['src/utils/assert.ts'],
     'prefer-named-capture-group': ['src/test/cypress/utils/select.ts'],
-    'prefer-rest-params': ['src/modules/react-google-analytics/**/*.ts'],
     'react-compiler/react-compiler': ['src/test/utils/render-hook-error.tsx'],
     'react-refresh/only-export-components': ['src/app/**/page.tsx'],
 
@@ -77,8 +77,9 @@ export default [
     ],
 
     'id-length': [
-      'src/modules/react-clarity/clarity-api.ts',
+      'src/features/clarity.ts',
       'src/modules/react-intercom/utils/create-intercom.ts',
+      'src/types/clarity-api.ts',
     ],
 
     'no-magic-numbers': [
@@ -98,6 +99,11 @@ export default [
 
     'no-useless-return': [
       'src/utils/map-navigator-to-semantic-resource-attributes.ts',
+    ],
+
+    'prefer-rest-params': [
+      'src/features/clarity.ts',
+      'src/modules/react-google-analytics/**/*.ts',
     ],
   }),
 

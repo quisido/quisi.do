@@ -13,17 +13,12 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "noEmit": true,
+    "plugins": [],
     "resolveJsonModule": true,
     "rootDir": ".",
     "sourceRoot": ".",
     "strict": true,
-    "types": ["node"],
-
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "types": ["node"]
   },
 
   "exclude": [
@@ -39,8 +34,6 @@
     "**/*.json",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.webmanifest",
-    ".next/types/**/*.ts",
-    "next-env.d.ts"
+    "**/*.webmanifest"
   ]
 }

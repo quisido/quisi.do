@@ -59,11 +59,10 @@ describe('package.json', (): void => {
 
         expect(up).toMatch(
           [
-            `yarn up "@!(${scopes.join('|')})/*" "!(${unscopedPackageNames.join(
+            `npm upgrade "@!(${scopes.join('|')})/*" "!(${unscopedPackageNames.join(
               '|',
             )})"`,
-            'yarn up --recursive "@*/*" "*"',
-            'yarn sdks vscode',
+            'npm upgrade "@*/*" "*" --workspaces',
           ].join(' && '),
         );
       });

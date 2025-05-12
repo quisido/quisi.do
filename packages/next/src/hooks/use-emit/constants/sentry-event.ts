@@ -8,13 +8,15 @@ import reactDomPackage from 'react-dom/package.json';
 import reactPackage from 'react/package.json';
 // Import sentryReactPackage2 from 'sentry-react/package.json';
 import VERSION from '../../../constants/version.js';
+import validateString from '../../../utils/validate-string.js';
 
 const APP_START_TIME: string = new Date().toUTCString();
+const NODE_ENV: string = validateString(import.meta.env.NODE_ENV);
 const START_TIMESTAMP: number = Date.now();
 
 export default {
-  dist: process.env.NODE_ENV,
-  environment: process.env.NODE_ENV,
+  dist: NODE_ENV,
+  environment: NODE_ENV,
   level: 'log',
   logger: 'useEvent',
   platform: 'javascript',
@@ -29,7 +31,7 @@ export default {
       app_name: 'quisi.do',
       app_start_time: APP_START_TIME,
       app_version: VERSION,
-      build_type: process.env.NODE_ENV,
+      build_type: NODE_ENV,
     },
 
     culture: {

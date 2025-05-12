@@ -1,7 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 import { expect } from 'vitest';
 import TestD1PreparedStatement from './test-d1-prepared-statement.js';
-import unimplementedMethod from './unimplemented-method.js';
+import createNotImplementedThrower from './create-not-implemented-thrower.js';
 
 interface Result {
   readonly error?: Error | undefined;
@@ -10,9 +10,6 @@ interface Result {
 }
 
 export default class TestD1Database implements D1Database {
-  public readonly batch: D1Database['batch'] = unimplementedMethod;
-  public readonly dump: D1Database['dump'] = unimplementedMethod;
-  public readonly exec: D1Database['exec'] = unimplementedMethod;
   readonly #preparedStatements = new Map<string, TestD1PreparedStatement>();
   readonly #queries = new Map<string, Result>();
 
@@ -23,6 +20,15 @@ export default class TestD1Database implements D1Database {
       this.#queries.set(query, result);
     }
   }
+
+  public readonly batch: D1Database['batch'] =
+    createNotImplementedThrower('batch');
+
+  public readonly dump: D1Database['dump'] =
+    createNotImplementedThrower('dump');
+
+  public readonly exec: D1Database['exec'] =
+    createNotImplementedThrower('exec');
 
   public readonly expectNotToHaveQueried = (query: string): void => {
     const statement: TestD1PreparedStatement | undefined =
@@ -56,4 +62,7 @@ ${query}`);
     this.#preparedStatements.set(query, statement);
     return statement;
   }
+
+  public withSession: D1Database['withSession'] =
+    createNotImplementedThrower('withSession');
 }

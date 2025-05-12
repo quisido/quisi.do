@@ -6,11 +6,6 @@
 
 a React hook for memoizing objects
 
-## Install
-
-- `npm install use-shallow-memo` or
-- `yarn add use-shallow-memo`
-
 ## Use
 
 ```jsx

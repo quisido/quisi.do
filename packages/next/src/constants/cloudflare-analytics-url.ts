@@ -1,5 +1,5 @@
 const ORIGIN: string =
-  process.env['CLOUDFLARE_ANALYTICS_ORIGIN'] ??
+  import.meta.env.CLOUDFLARE_ANALYTICS_ORIGIN ??
   'https://analytics.cloudflare.cscdn.net';
 
 const CLOUDFLARE_ANALYTICS_URL = `${ORIGIN}/cf.json`;

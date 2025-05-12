@@ -126,12 +126,12 @@ class ChildPromise extends Promise<void> {
 }
 
 const mapScriptToProcess = (script: string): Promise<void> => {
-  const command = `yarn run ${script}`;
+  const command = `npm run-script ${script}`;
   return new ChildPromise(command);
 };
 
 const mapWorkspaceDependencyToProcess = (dependency: string): Promise<void> => {
-  const command = `yarn packages/${dependency} run dev`;
+  const command = `npm run-script dev --workspace=packages/${dependency}`;
   return new ChildPromise(command);
 };
 

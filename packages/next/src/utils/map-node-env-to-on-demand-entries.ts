@@ -5,7 +5,7 @@ const MINUTES_PER_HOUR = 60;
 const SECONDS_PER_MINUTE = 60;
 
 export default function mapNodeEnvToOnDemandEntries(
-  env: 'development' | 'production' | 'test',
+  env: NodeJS.ProcessEnv['NODE_ENV'],
 ): NextConfig['onDemandEntries'] {
   if (env !== 'development') {
     return;

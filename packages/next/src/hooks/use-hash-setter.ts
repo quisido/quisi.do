@@ -1,13 +1,13 @@
-import { useRouter } from 'next/navigation.js';
 import { useCallback } from 'react';
 import mapHashToHref from '../utils/map-hash-to-href.js';
+import useNavigation from './use-navigation.js';
 
 export default function useHashSetter(): (
   method: 'push' | 'replace',
   hash: string,
 ) => void {
   // Contexts
-  const router = useRouter();
+  const navigate = useNavigation();
 
   // Callbacks
   return useCallback(
@@ -16,11 +16,8 @@ export default function useHashSetter(): (
         return;
       }
 
-      const scroll: boolean = method === 'push';
       const href: string = mapHashToHref(newHash);
-      router[method](href, {
-        scroll,
-      });
+      navigate(href, method);
 
       const event: HashChangeEvent = new HashChangeEvent('hashchange', {
         newURL: href,
@@ -29,6 +26,6 @@ export default function useHashSetter(): (
 
       window.dispatchEvent(event);
     },
-    [router],
+    [navigate],
   );
 }

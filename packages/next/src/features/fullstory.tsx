@@ -38,7 +38,7 @@ function FullstoryFeature({ children }: PropsWithChildren): ReactNode {
 
   return (
     <Fullstory
-      devMode={process.env.NODE_ENV !== 'production'}
+      devMode={import.meta.env.NODE_ENV !== 'production'}
       orgId="o-1X4ZHB-na1"
       startCaptureManually={false}
       {...state}

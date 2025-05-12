@@ -6,11 +6,6 @@
 
 Fullstory integration with React
 
-## Install
-
-- `npm install fullstory-react` or
-- `yarn add fullstory-react`
-
 ## Use
 
 ```tsx

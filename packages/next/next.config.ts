@@ -7,13 +7,14 @@ import mapNodeEnvToOnDemandEntries from './src/utils/map-node-env-to-on-demand-e
 import mapNodeEnvToOutput from './src/utils/map-node-env-to-output.js';
 import optional from './src/utils/optional.js';
 import withNextJsBundleAnalyzer from './src/utils/with-nextjs-bundle-analyzer.js';
+import assert from 'node:assert';
+
+const { NODE_ENV } = import.meta.env;
+assert(typeof NODE_ENV === 'string');
 
 const cpus: number = getCpus();
-const handleDemandEntries = mapNodeEnvToOnDemandEntries(process.env.NODE_ENV);
-
-const OUTPUT: Required<NextConfig>['output'] = mapNodeEnvToOutput(
-  process.env.NODE_ENV,
-);
+const handleDemandEntries = mapNodeEnvToOnDemandEntries(NODE_ENV);
+const OUTPUT: Required<NextConfig>['output'] = mapNodeEnvToOutput(NODE_ENV);
 
 export default withNextJsBundleAnalyzer({
   assetPrefix: '',
@@ -46,6 +47,7 @@ export default withNextJsBundleAnalyzer({
     'DEPLOYMENT_ENVIRONMENT',
     'GOOGLE_ANALYTICS_TRACKING_ID',
     'HONEYCOMB_API_KEY',
+    'NODE_ENV',
     'PATREON_OAUTH_CLIENT_ID',
     'PATREON_OAUTH_REDIRECT_URI',
     'POSTHOG_HOST',

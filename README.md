@@ -17,12 +17,10 @@ are committed, and an official Code Workspace for the repository can be found in
 To install this repository and begin local development, use the following
 commands in order:
 
-- `yarn set version latest` to keep Yarn up-to-date.
-- On Windows,
-  `set FIND_VISUALSTUDIO_PATH=%CD%\scripts\find-visualstudio.cs&&yarn install`
-  to synchronize Yarn's version with its dependencies.
-- `yarn run up` to upgrade dependencies.
+- `npm install npm@latest --global` to keep NPM up-to-date.
+- `npm install --legacy-peer-deps` to install dependencies.
+- `npm run-script up` to upgrade dependencies.
 
 ## Commands
 
-- `yarn run dev` to run the application and its dependencies.
+- `npm start` to run the application and its dependencies.

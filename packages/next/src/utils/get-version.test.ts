@@ -1,20 +1,22 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import getVersion from './get-version.js';
 
-const setGitHubSha = (value: string): void => {
-  process.env['GITHUB_SHA'] = value;
+const setGitHubSha = (value: string | undefined): void => {
+  Object.assign(import.meta.env, {
+    GITHUB_SHA: value,
+  });
 };
 
 const setNodeEnv = (value: string): void => {
-  Object.assign(process.env, {
+  Object.assign(import.meta.env, {
     NODE_ENV: value,
   });
 };
 
 describe('getVersion', (): void => {
   afterEach((): void => {
+    setGitHubSha(undefined);
     setNodeEnv('test');
-    delete process.env['GITHUB_SHA'];
   });
 
   it('should be the GitHub SHA', (): void => {

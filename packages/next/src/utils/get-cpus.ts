@@ -4,7 +4,7 @@ const BASE = 10;
 const CPUS_COUNT: number = cpus().length;
 
 export default function getCpus(): number {
-  const cpus: string | undefined = process.env['CPUS'];
+  const cpus: string | undefined = import.meta.env.CPUS;
   if (typeof cpus === 'undefined') {
     return CPUS_COUNT;
   }

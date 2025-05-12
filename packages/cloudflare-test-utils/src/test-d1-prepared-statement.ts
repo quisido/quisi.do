@@ -1,6 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 import { expect } from 'vitest';
-import unimplementedMethod from './unimplemented-method.js';
+import createNotImplementedThrower from './create-not-implemented-thrower.js';
 
 interface Options {
   readonly error?: Error | undefined;
@@ -15,9 +15,7 @@ const FIRST = 0;
 export default class TestD1PreparedStatement implements D1PreparedStatement {
   readonly #boundValues: (null | number | string)[] = [];
   readonly #error: Error | undefined;
-  public readonly first = unimplementedMethod;
   readonly #lastRowId: number;
-  public readonly raw = unimplementedMethod;
   readonly #results: readonly unknown[];
 
   public constructor({
@@ -28,9 +26,12 @@ export default class TestD1PreparedStatement implements D1PreparedStatement {
     this.#error = error;
     this.#lastRowId = lastRowId;
     this.#results = results;
+    this.all = this.all.bind(this);
+    this.bind = this.bind.bind(this);
+    this.run = this.run.bind(this);
   }
 
-  public all = <T>(): Promise<D1Result<T>> => {
+  public all<T>(): Promise<D1Result<T>> {
     if (typeof this.#error !== 'undefined') {
       return Promise.reject(this.#error);
     }
@@ -53,14 +54,14 @@ export default class TestD1PreparedStatement implements D1PreparedStatement {
         size_after: 1,
       },
     });
-  };
+  }
 
-  public bind = (
+  public bind(
     ...values: readonly (null | number | string)[]
-  ): D1PreparedStatement => {
+  ): D1PreparedStatement {
     this.#boundValues.splice(FIRST, this.#boundValues.length, ...values);
     return this;
-  };
+  }
 
   public expectToHaveBound = (
     ...values: readonly (null | number | string)[]
@@ -68,7 +69,13 @@ export default class TestD1PreparedStatement implements D1PreparedStatement {
     expect(this.#boundValues).toEqual(values);
   };
 
-  public run = <T = Record<string, unknown>>(): Promise<D1Result<T>> => {
+  public readonly first: D1PreparedStatement['first'] =
+    createNotImplementedThrower('first');
+
+  public readonly raw: D1PreparedStatement['raw'] =
+    createNotImplementedThrower('raw');
+
+  public run<T = Record<string, unknown>>(): Promise<D1Result<T>> {
     if (typeof this.#error !== 'undefined') {
       return Promise.reject(this.#error);
     }
@@ -87,5 +94,5 @@ export default class TestD1PreparedStatement implements D1PreparedStatement {
         size_after: 1,
       },
     });
-  };
+  }
 }

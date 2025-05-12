@@ -6,5 +6,5 @@
   user-select: none;
   vertical-align: bottom;
 
-  @include dark-mode.dark-mode;
+  @include dark-mode.disable;
 }

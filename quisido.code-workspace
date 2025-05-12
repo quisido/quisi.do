@@ -101,10 +101,8 @@
   "settings": {
     "codeQL.createQuery.qlPackLocation": "./",
     "eslint.format.enable": true,
-    "eslint.nodePath": "../../.yarn/sdks",
     "eslint.useFlatConfig": true,
     "typescript.enablePromptUseWorkspaceTsdk": true,
-    "typescript.tsdk": ".yarn/sdks/typescript/lib",
 
     "files.associations": {
       "**/config/api-extractor.json": "jsonc",

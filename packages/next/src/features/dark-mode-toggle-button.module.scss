@@ -7,11 +7,11 @@ $theme-foreground-color: #000000;
 $dark-stroke-color: rgba($theme-background-color, 0.5);
 $light-stroke-color: rgba($theme-foreground-color, 0.5);
 
-html[data-color-scheme="dark"] .button {
+[data-color-scheme="dark"] .button {
   @include stroke-shadow.stroke-shadow($dark-stroke-color, $stroke-width);
 }
 
-html[data-color-scheme="light"] .button {
+[data-color-scheme="light"] .button {
   @include stroke-shadow.stroke-shadow($light-stroke-color, $stroke-width);
 }
 
