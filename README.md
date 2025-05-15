@@ -1,7 +1,7 @@
 # [quisi.do](https://quisi.do/)
 
 This repository serves as a monorepo with each package living in the `packages/`
-directory. The fully integrated application lives in the `packages/next`
+directory. The fully integrated application lives in the `packages/vite`
 directory.
 
 ## Visual Studio Code

@@ -152,9 +152,9 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Audit
-        run: npm run-script lighthouse:report --workspace=packages/next
+        run: npm run-script lighthouse:report --workspace=packages/vite
       - name: Validate
-        run: npm run-script postlighthouse --workspace=packages/next
+        run: npm run-script postlighthouse --workspace=packages/vite
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
@@ -236,7 +236,7 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Test quisi.do
-        run: npm test --workspace=packages/next
+        run: npm test --workspace=packages/vite
 
   # Stage 4: github-pages, npm, sentry-release
   datadog-sourcemaps:
@@ -265,7 +265,7 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Upload Datadog sourcemaps
-        run: npm run-script datadog:sourcemaps --workspace=packages/next
+        run: npm run-script datadog:sourcemaps --workspace=packages/vite
         env:
           DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           RELEASE_VERSION: ${{ github.sha }}
@@ -298,7 +298,7 @@ jobs:
         with:
           branch: gh-pages
           clean: true
-          folder: packages/next/out/
+          folder: packages/vite/dist/
           single-commit: true
 
   npm:
@@ -370,7 +370,7 @@ jobs:
           SENTRY_PROJECT: quisi-do
         with:
           environment: production
-          sourcemaps: packages/next/out
+          sourcemaps: packages/vite/dist
           version: ${{ github.sha }}
 
   # Stage 5: cloudflare-purge, github-packages, wrangler-deploy-*
@@ -589,9 +589,9 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Audit
-        run: npm run-script lighthouse:report:production --workspace=packages/next
+        run: npm run-script lighthouse:report:production --workspace=packages/vite
       - name: Validate
-        run: npm run-script postlighthouse --workspace=packages/next
+        run: npm run-script postlighthouse --workspace=packages/vite
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4

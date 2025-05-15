@@ -6,7 +6,7 @@
     },
     {
       "name": "quisi.do",
-      "path": "packages/next",
+      "path": "packages/vite",
     },
     {
       "name": "Authentication (authn)",

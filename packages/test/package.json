@@ -45,7 +45,7 @@
     "vitest:watch": "vitest watch"
   },
   "dependencies": {
-    "@monorepo-template/tree-logger": "^1.0.0",
+    "@monorepo-template/tree-logger": "^2.0.0",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.15.2",
     "fmrs": "^2.0.0",

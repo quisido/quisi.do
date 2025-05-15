@@ -1,0 +1,38 @@
+{
+  "extends": "../../tsconfig.json",
+
+  "compilerOptions": {
+    "allowJs": false,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "plugins": [],
+    "resolveJsonModule": true,
+    "rootDir": ".",
+    "sourceRoot": ".",
+    "strict": true,
+    "types": ["node"]
+  },
+
+  "exclude": [
+    "cypress/coverage/",
+    "cypress/downloads/",
+    "cypress/screenshots/",
+    "cypress/videos/",
+    "out/",
+  ],
+
+  "include": [
+    "**/*.json",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.webmanifest"
+  ]
+}

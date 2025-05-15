@@ -132,9 +132,9 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Audit
-        run: npm run lighthouse:report --workspace=packages/next
+        run: npm run lighthouse:report --workspace=packages/vite
       - name: Validate
-        run: npm run postlighthouse --workspace=packages/next
+        run: npm run postlighthouse --workspace=packages/vite
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
@@ -195,7 +195,7 @@ jobs:
   #     - name: Install dependencies
   #       run: npm install --legacy-peer-deps
   #     - name: Report coverage
-  #       run: npm run-script coverage --workspace=packages/next
+  #       run: npm run-script coverage --workspace=packages/vite
   #       env:
   #         BRANCHES_COVERAGE_THRESHOLD: 1
   #         FUNCTIONS_COVERAGE_THRESHOLD: 1
