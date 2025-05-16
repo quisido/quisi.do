@@ -19,6 +19,8 @@ export default [
 
   // Plugins: react-compiler, react-hooks, react-refresh
   {
+    files: ['src/**/*.tsx'],
+
     plugins: {
       'react-compiler': reactCompiler,
       'react-hooks': reactHooks,

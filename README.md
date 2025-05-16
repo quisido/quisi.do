@@ -19,7 +19,7 @@ commands in order:
 
 - `npm install npm@latest --global` to keep NPM up-to-date.
 - `npm install --legacy-peer-deps` to install dependencies.
-- `npm run-script up` to upgrade dependencies.
+- `npm run up` to upgrade dependencies.
 
 ## Commands
 

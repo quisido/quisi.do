@@ -23,7 +23,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Scan
         uses: microsoft/devskim-action@v1
         with:
@@ -50,7 +50,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -77,7 +77,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -86,7 +86,7 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Prepack
-        run: npm run-script prepack --require dd-trace/init
+        run: npm run prepack --require dd-trace/init
         env:
           CLARITY_TAG: lm4m88gmix
           CLOUD_ACCOUNT_ID: quisido
@@ -138,7 +138,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -152,9 +152,9 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Audit
-        run: npm run-script lighthouse:report --workspace=packages/vite
+        run: npm run lighthouse:report --workspace=packages/vite
       - name: Validate
-        run: npm run-script postlighthouse --workspace=packages/vite
+        run: npm run postlighthouse --workspace=packages/vite
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
@@ -182,7 +182,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -222,7 +222,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -256,7 +256,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -265,7 +265,7 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Upload Datadog sourcemaps
-        run: npm run-script datadog:sourcemaps --workspace=packages/vite
+        run: npm run datadog:sourcemaps --workspace=packages/vite
         env:
           DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           RELEASE_VERSION: ${{ github.sha }}
@@ -287,7 +287,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -318,7 +318,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -355,7 +355,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -427,7 +427,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -469,7 +469,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -483,7 +483,7 @@ jobs:
           name: prepack
           path: packages/
       - name: Deploy
-        run: npm run-script production:deploy --workspace=packages/authn
+        run: npm run production:deploy --workspace=packages/authn
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
@@ -504,7 +504,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -518,7 +518,7 @@ jobs:
           name: prepack
           path: packages/
       - name: Deploy
-        run: npm run-script production:deploy --workspace=packages/csp
+        run: npm run production:deploy --workspace=packages/csp
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
@@ -539,7 +539,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -553,7 +553,7 @@ jobs:
           name: prepack
           path: packages/
       - name: Deploy
-        run: npm run-script production:deploy --workspace=packages/dashboard
+        run: npm run production:deploy --workspace=packages/dashboard
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
@@ -575,7 +575,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -589,9 +589,9 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Audit
-        run: npm run-script lighthouse:report:production --workspace=packages/vite
+        run: npm run lighthouse:report:production --workspace=packages/vite
       - name: Validate
-        run: npm run-script postlighthouse --workspace=packages/vite
+        run: npm run postlighthouse --workspace=packages/vite
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4

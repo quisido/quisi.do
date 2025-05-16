@@ -11,7 +11,7 @@
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "login": "wrangler login",
     "prepack": "exit 0",
-    "test": "concurrently --names eslint,publint,vitest --prefix-colors auto \"npm run-script eslint\" \"npm run-script publint\" \"npm run-script vitest:run\"",
+    "test": "concurrently --names eslint,publint,vitest --prefix-colors auto \"npm run eslint\" \"npm run publint\" \"npm run vitest:run\"",
     "production:deploy": "wrangler deploy src/index.ts --env production --outdir dist",
     "production:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env production --outdir dist",
     "publint": "publint",

@@ -7,7 +7,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout repo
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Install bun
   #       uses: oven-sh/setup-bun@v1
   #     - name: Install dependencies
@@ -24,7 +24,7 @@ jobs:
   #     pull-requests: write
   #   steps:
   #     - name: Checkout repository
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Review dependencies
   #       uses: actions/dependency-review-action@v2
 
@@ -37,7 +37,7 @@ jobs:
       security-events: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Scan
         uses: microsoft/devskim-action@v1
         with:
@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -78,7 +78,7 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Prepack
-        run: npm run-script prepack --require dd-trace/init
+        run: npm run prepack --require dd-trace/init
         env:
           CLARITY_TAG: ln18ya61ca
           CLOUD_ACCOUNT_ID: quisido
@@ -118,7 +118,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -151,7 +151,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -176,7 +176,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout repository
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Download Cypress artifacts
   #       uses: actions/download-artifact@v4
   #       with:
@@ -195,7 +195,7 @@ jobs:
   #     - name: Install dependencies
   #       run: npm install --legacy-peer-deps
   #     - name: Report coverage
-  #       run: npm run-script coverage --workspace=packages/vite
+  #       run: npm run coverage --workspace=packages/vite
   #       env:
   #         BRANCHES_COVERAGE_THRESHOLD: 1
   #         FUNCTIONS_COVERAGE_THRESHOLD: 1

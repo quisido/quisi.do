@@ -2,9 +2,9 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "npm run-script start",
+      "name": "npm run start",
       "request": "launch",
-      "runtimeArgs": ["run-script", "start"],
+      "runtimeArgs": ["run", "start"],
       "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**"],
       "type": "node"
