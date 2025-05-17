@@ -1,0 +1,61 @@
+@use './modules/quisi/dark-mode';
+
+$font-size: 14px;
+$line-height: 20px;
+
+@view-transition {
+  navigation: auto;
+}
+
+// :host {
+//   -webkit-text-size-adjust: 100%;
+//   text-size-adjust: 100%;
+// }
+
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  align-items: center;
+  background-color: #f8f4f0; // theme background color
+  box-sizing: border-box;
+  color: #000; // theme foreground color
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-feature-settings: "pnum";
+  font-size: $font-size;
+  font-variant-numeric: proportional-nums;
+  justify-content: stretch;
+  letter-spacing: 0;
+  line-height: 1rem;
+  margin: 0;
+  min-height: 100%;
+  overflow-y: scroll;
+  padding-bottom: 0;
+  padding-top: 0;
+  text-rendering: optimizelegibility;
+  text-size-adjust: none;
+
+  @media (width < 6in) {
+    padding-left: 0; // 0.5in
+    padding-right: 0; // 0.5in
+  }
+
+  @media (width >= 6in) {
+    padding-left: 1in;
+    padding-right: 1in;
+  }
+}
+
+html {
+  font-size: $line-height;
+  height: 100%;
+  max-height: 100%;
+  min-height: 100%;
+
+  @include dark-mode.root;
+}

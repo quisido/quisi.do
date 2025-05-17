@@ -1,5 +1,6 @@
 export enum MetricName {
   Favicon = 'pathname.favicon.ico',
+  EmptyReports = 'reports.empty',
   InvalidDatabase = 'database.invalid',
   InvalidDatabaseKeysRow = 'database.keys.row.invalid',
   InvalidDatabaseProjectsRow = 'database.projects.row.invalid',

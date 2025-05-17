@@ -1,9 +1,7 @@
 /.git/
 /.vscode/settings.json
-/.yarn/
 /.pnp.*
-/.yarnrc.yml
 /LICENSE
-/yarn.lock
+/package-lock.json
 node_modules/
 *.gz

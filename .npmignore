@@ -2,7 +2,6 @@
 /.github/
 /.vscode/
 /.wrangler/
-/.yarn/
 /jest/
 /node_modules/
 /packages/
@@ -16,5 +15,5 @@
 /*.code-workspace
 /*.config.*
 /*.test.ts
+/package-lock.json
 /tsconfig.*
-/yarn.lock

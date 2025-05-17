@@ -4,16 +4,10 @@
     {
       "name": "Development server",
       "request": "launch",
-      "runtimeArgs": ["run", "quisido"],
-      "runtimeExecutable": "yarn",
-      "type": "node",
-      "skipFiles": [
-        "<node_internals>/**",
-        "**/.yarn/cache/**",
-        "**/.yarn/__virtual__/**",
-        "**/node_modules/yarn/lib/**",
-        "**/.pnp.cjs"
-      ]
+      "runtimeArgs": ["run", "start"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
     }
   ]
 }

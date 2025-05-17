@@ -1,4 +1,3 @@
-/.yarn/releases/*
 *                  text eol=lf
 *.3gpp             binary
 *.3gp              binary
@@ -11,7 +10,7 @@
 *.bat              text eol=crlf
 *.bmp              binary
 *.cmd              text eol=crlf
-*.css              text diff=css
+*.css              text diff=css eol=lf
 *.eot              binary
 *.eps              binary
 *.exe              binary
@@ -20,8 +19,8 @@
 *.gif              binary
 *.gifv             binary
 *.gz               binary
-*.htm              text diff=html
-*.html             text diff=html
+*.htm              text diff=html eol=lf
+*.html             text diff=html eol=lf
 *.ico              binary
 *.jar              binary
 *.jng              binary
@@ -31,18 +30,18 @@
 *.jpx              binary
 *.jxr              binary
 *.kar              binary
-*.lock             text -diff
+*.lock             text -diff eol=lf
 *.m4a              binary
 *.m4v              binary
-*.map              text -diff
-*.markdown         text diff=markdown
-*.md               text diff=markdown
-*.mdown            text diff=markdown
-*.mdwn             text diff=markdown
+*.map              text -diff eol=lf
+*.markdown         text diff=markdown eol=lf
+*.md               text diff=markdown eol=lf
+*.mdown            text diff=markdown eol=lf
+*.mdwn             text diff=markdown eol=lf
 *.mid              binary
 *.midi             binary
-*.mkd              text diff=markdown
-*.mkdn             text diff=markdown
+*.mkd              text diff=markdown eol=lf
+*.mkdn             text diff=markdown eol=lf
 *.mng              binary
 *.mov              binary
 *.mp3              binary
@@ -53,17 +52,17 @@
 *.ogv              binary
 *.otf              binary
 *.pdf              binary
-*.php              text diff=php
+*.php              text diff=php eol=lf
 *.png              binary
 *.ps1              text eol=crlf
 *.psb              binary
 *.psd              binary
-*.py               text diff=python
+*.py               text diff=python eol=lf
 *.pyc              binary
 *.ra               binary
 *.rar              binary
-*.rb               text diff=ruby
-*.scss             text diff=css
+*.rb               text diff=ruby eol=lf
+*.scss             text diff=css eol=lf
 *.svgz             binary
 *.swc              binary
 *.swf              binary
@@ -71,16 +70,17 @@
 *.tif              binary
 *.tiff             binary
 *.ttf              binary
-*.xhtml            text diff=html
+*.xhtml            text diff=html eol=lf
 *.wbmp             binary
 *.webp             binary
 *.webm             binary
 *.woff             binary
 *.woff2            binary
 *.zip              binary
-.pnp.cjs           text -diff
-.pnp.js            text -diff
-.pnp.loader.mjs    text -diff
+.pnp.cjs           text -diff eol=lf
+.pnp.js            text -diff eol=lf
+.pnp.loader.mjs    text -diff eol=lf
 api-extractor.json linguist-language=JSON-with-Comments
-package-lock.json  text -diff
-pnpm-lock.yaml     text eol=lf -diff
+package-lock.json  text -diff eol=lf
+pnpm-lock.yaml     text -diff eol=lf
+yarn.lock          text -diff eol=lf

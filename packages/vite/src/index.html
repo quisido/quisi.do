@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <title>quisi.do</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="NEL"
+      content='{"include_subdomains":true,"max_age":31536000,"report_to":"quisido"}' />
+    <meta name="view-transition" content="same-origin" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <script nonce="nonce-quisido" src="./features/head.ts"
+      type="module"></script>
+    <script async src="https://www.clarity.ms/tag/%CLARITY_TAG%"
+      type="text/javascript"></script>
+    <link rel="preconnect" href="https://analytics.google.com" />
+    <link rel="preconnect" href="https://api.honeycomb.io" />
+    <link rel="preconnect" href="https://cdn.logr-ingest.com" />
+    <link rel="preconnect" href="https://challenges.cloudflare.com" />
+    <link rel="preconnect" href="https://clarity.ms" />
+    <link rel="preconnect" href="https://edge.fullstory.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" /> -->
+    <link rel="preconnect" href="https://o592283.ingest.sentry.io" />
+    <link rel="preconnect" href="https://r.logr-ingest.com" />
+    <link rel="preconnect" href="https://rs.fullstory.com" />
+    <link rel="preconnect" href="https://rum.browser-intake-datadoghq.com" />
+    <link rel="preconnect"
+      href="https://session-replay.browser-intake-datadoghq.com" />
+    <link rel="preconnect" href="https://static.cloudflareinsights.com" />
+    <link rel="preconnect" href="https://t.clarity.ms" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="stylesheet" type="text/css" href="./index.scss" />
+  </head>
+
+  <body>
+    <noscript>
+      <p>JavaScript is required. Sorry for the inconvenience.</p>
+    </noscript>
+    <div id="root"></div>
+    <script src="./index.tsx" type="module"></script>
+  </body>
+
+</html>

@@ -7,11 +7,6 @@
 `sentry-react` offers a `<Sentry />` component that instantiates Sentry for your
 React application.
 
-## Install
-
-- `npm install sentry-react` or
-- `yarn add sentry-react`
-
 ## Use
 
 Mount `<Sentry />` around your React application, typically alongside your

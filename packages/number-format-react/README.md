@@ -7,11 +7,6 @@
 `number-format-react` is a React component implementation of the
 [`Intl.NumberFormat` global object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat).
 
-## Install
-
-- `npm install number-format-react` or
-- `yarn add number-format-react`
-
 ## Use
 
 ```javascript

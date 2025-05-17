@@ -16,11 +16,12 @@ const DEFAULT_REQUIRED_SEARCH_EXCLUDE_KEYS: readonly string[] = [
   '**/sarif/',
   '**/.attach_pid*',
   '**/.pnp.*',
+  '**/.yarn',
   '**/*.cpuprofile',
   '**/*.tsbuildinfo',
   '**/lighthouse.report.*',
+  '**/package-lock.json',
   '**/yarn.lock',
-  '**/.yarn',
 ];
 
 export default DEFAULT_REQUIRED_SEARCH_EXCLUDE_KEYS;

@@ -7,11 +7,6 @@
 `react-datadog` is a React hook for instantiating Datadog RUM in your React
 application.
 
-## Install
-
-- `npm install react-datadog` or
-- `yarn add react-datadog`
-
 ## Use
 
 ```javascript

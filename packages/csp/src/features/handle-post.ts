@@ -13,6 +13,8 @@ import CspResponse from '../utils/csp-response.js';
 import mapReportBodyToArray from '../utils/map-report-body-to-array.js';
 import parseReport from '../utils/parse-report.js';
 
+const EMPTY = 0;
+
 const INSERT_INTO = `
 INSERT INTO \`reports\` (
   \`projectId\`,
@@ -120,6 +122,11 @@ export default async function handlePost(
   try {
     const text: string = await this.getRequestText();
     const reports: readonly ReportBody[] = parseReport(text);
+    if (reports.length === EMPTY) {
+      this.emitPublicMetric(MetricName.EmptyReports);
+      return new CspResponse(StatusCode.BadRequest);
+    }
+
     const selects: string = createSelects(reports.length);
     const values = reports.flatMap(mapReportBodyToInsertValues);
     this.affect(
@@ -128,6 +135,10 @@ export default async function handlePost(
 
     return new CspResponse(StatusCode.OK);
   } catch (err: unknown) {
+    /**
+     *   This will catch when `getRequestText()` fails and when the submitted
+     * text is not a ReportBody.
+     */
     const error: Error = mapToError(err);
     this.emitPublicMetric(MetricName.UnknownError);
     this.logError(error);
