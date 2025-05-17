@@ -1,5 +1,3 @@
-'use client';
-
 import { isNot } from 'fmrs';
 import {
   memo,
@@ -56,20 +54,23 @@ function NotificationsProviderFeature({
     },
   );
 
-  const notify = useCallback((notification: Notification): VoidFunction => {
-    key.current += INCREMENT;
-    const newNotification: WithKey<Notification> = {
-      key: key.current,
-      ...notification,
-    };
+  const notify = useCallback(
+    (notification: Notification): VoidFunction => {
+      key.current += INCREMENT;
+      const newNotification: WithKey<Notification> = {
+        key: key.current,
+        ...notification,
+      };
 
-    setNotifications(append<WithKey<Notification>>(newNotification));
+      setNotifications(append<WithKey<Notification>>(newNotification));
 
-    // Expose the dismiss handler so that it can be bound to other actions.
-    return (): void => {
-      dismiss(newNotification);
-    };
-  }, []);
+      // Expose the dismiss handler so that it can be bound to other actions.
+      return (): void => {
+        dismiss(newNotification);
+      };
+    },
+    [dismiss],
+  );
 
   return (
     <NotificationsProvider
@@ -120,7 +121,7 @@ function NotificationsProviderFeature({
         };
 
         return [newNotifications.map(mapToDismissable), notify];
-      }, [hash, notifications, notify, setHash])}
+      }, [dismiss, hash, notifications, notify, setHash])}
     >
       {children}
     </NotificationsProvider>

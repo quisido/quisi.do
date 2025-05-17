@@ -13,9 +13,14 @@ const setNodeEnv = (value: string): void => {
   });
 };
 
+const unsetGitHubSha = (): void => {
+  // @ts-expect-error `env` uses readonly properties for runtime code.
+  delete import.meta.env.GITHUB_SHA;
+};
+
 describe('getVersion', (): void => {
   afterEach((): void => {
-    setGitHubSha(undefined);
+    unsetGitHubSha();
     setNodeEnv('test');
   });
 

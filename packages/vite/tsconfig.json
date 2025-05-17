@@ -30,6 +30,7 @@
   ],
 
   "include": [
+    "**/.stylelintrc.ts",
     "**/*.json",
     "**/*.ts",
     "**/*.tsx",

@@ -13,6 +13,7 @@ const USER_CONFIG: UserConfig = {
   base: '/',
   envDir: '../',
   plugins: [react()],
+  publicDir: '../public/',
   root: './src/',
 
   define: [

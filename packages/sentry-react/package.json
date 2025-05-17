@@ -36,7 +36,7 @@
   },
   "scripts": {
     "attw": "attw --quiet",
-    "clean": "rm -rf coverage dist node_modules && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
+    "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.prepack.tsbuildinfo",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "npm run tsc",
@@ -53,7 +53,7 @@
     "@sentry/react": "^9.14.0",
     "@sentry/types": "^9.14.0",
     "fmrs": "^2.0.0",
-    "use-shallow-memo": "^1.0.0"
+    "use-shallow-memo": "^1.1.0"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.4",
@@ -64,7 +64,6 @@
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "^1.0.0",
     "@quisido/vitest-config": "^1.0.0",
-    "@sentry/react": "^9.14.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.3.0",
     "@types/babel__core": "^7.20.5",
@@ -92,14 +91,11 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-test-renderer": "^19.1.0",
+    "rimraf": "^6.0.1",
     "tslib": "^2.8.1",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",
     "vitest": "^3.1.2"
-  },
-  "overrides": {
-    "@types/react": "npm:types-react@rc",
-    "@types/react-dom": "npm:types-react-dom@rc"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

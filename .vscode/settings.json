@@ -8,12 +8,15 @@
   "files.eol": "\n",
   "javascript.preferences.importModuleSpecifierEnding": "js",
   "npm.packageManager": "npm",
+  "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
   "typescript.preferences.importModuleSpecifierEnding": "js",
   "editor.rulers": [
     80
   ],
   "eslint.probe": [
     "html",
+    "javascript",
+    "javascriptreact",
     "json",
     "jsonc",
     "markdown",
@@ -24,6 +27,8 @@
   ],
   "eslint.validate": [
     "html",
+    "javascript",
+    "javascriptreact",
     "json",
     "jsonc",
     "markdown",

@@ -30,7 +30,7 @@
   },
   "scripts": {
     "attw": "attw --quiet",
-    "clean": "rm -rf coverage dist node_modules && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
+    "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.prepack.tsbuildinfo",
     "dev": "tsc --project tsconfig.prepack.json --watch",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "fmrs": "^2.0.0",
-    "use-shallow-memo": "^1.0.0"
+    "use-shallow-memo": "^1.1.0"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.4",
@@ -75,13 +75,11 @@
     "publint": "^0.3.12",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "rimraf": "^6.0.1",
     "tslib": "^2.8.1",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",
     "vitest": "^3.1.2"
-  },
-  "overrides": {
-    "@types/react": "npm:types-react@rc"
   },
   "peerDependencies": {
     "@datadog/browser-rum": "^5.0.0",

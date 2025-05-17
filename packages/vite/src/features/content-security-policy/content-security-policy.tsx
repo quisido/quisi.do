@@ -1,13 +1,8 @@
-'use client';
-
 import { GetErrorCode } from '@quisido/csp-shared';
 import { useEffect, useState, type Attributes, type ReactElement } from 'react';
-import CertificateManagerLink from '../../components/certificate-manager-link.jsx';
 import Emoji from '../../components/emoji.jsx';
 import useEffectEvent from '../../hooks/use-effect-event.js';
 import useEmit from '../../hooks/use-emit/index.js';
-import useWindow from '../../hooks/use-window.js';
-import Link from '../../modules/quisi/link.jsx';
 import LoadingIcon from '../../modules/quisi/loading-icon.jsx';
 import Section from '../../modules/quisi/section.jsx';
 import useAsyncState from '../../modules/use-async-state/index.js';
@@ -44,7 +39,6 @@ const mapContentSecurityPolicyListItemPropsToElement = mapPropsToElement(
 export default function ContentSecurityPolicy(): ReactElement {
   // Contexts
   const emit = useEmit();
-  const wndw: Window | null = useWindow();
 
   // States
   const [expandedKey, setExpandedKey] = useState<string | null>(null);
@@ -66,7 +60,7 @@ export default function ContentSecurityPolicy(): ReactElement {
       // Technical debt: Validate this on the client.
       return (await response.json()) as CspResponse;
     });
-  }, []);
+  }, [requestEvent]);
 
   if (!initiated || loading) {
     return (
@@ -77,32 +71,6 @@ export default function ContentSecurityPolicy(): ReactElement {
   }
 
   if (typeof error !== 'undefined') {
-    if (
-      wndw !== null &&
-      wndw.location.origin === 'https://localhost:3000' &&
-      error === 'Failed to fetch'
-    ) {
-      return (
-        <Section header="Content Security Policy">
-          To view Content Security Policy reports in development,{' '}
-          <Link feature="content-security-policy" href={ORIGIN} title="">
-            trust the security certificate
-          </Link>
-          .
-          <ol style={{ margin: 0 }}>
-            <li>
-              Visit <CertificateManagerLink feature="content-security-policy" />
-              .
-            </li>
-            <li>
-              Under <strong>Trusted Certificates</strong>, click{' '}
-              <strong>Import</strong>.
-            </li>
-          </ol>
-        </Section>
-      );
-    }
-
     return <Section header="Content Security Policy">{error}</Section>;
   }
 

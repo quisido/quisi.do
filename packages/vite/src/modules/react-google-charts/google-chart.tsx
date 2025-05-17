@@ -1,5 +1,3 @@
-'use client';
-
 import { mapToError } from 'fmrs';
 import { useEffect, useRef, type ReactElement, type RefObject } from 'react';
 import useShallowMemo from 'use-shallow-memo';
@@ -89,7 +87,7 @@ export default function GoogleChart<C extends Chart>({
         const error: Error = mapToError(err);
         handleError(error);
       });
-  }, [chart, dataStr, headings, optionsStr, packages]);
+  }, [chart, dataStr, handleError, headings, optionsStr, packages]);
 
   return <div className={className} ref={elementRef} />;
 }

@@ -3,7 +3,6 @@ const DEFAULT_REQUIRED_SEARCH_EXCLUDE_KEYS: readonly string[] = [
   '**/.idea/',
   '**/.next/',
   '**/.nyc_output/',
-  '**/.yarn/',
   '**/build/',
   '**/coverage/',
   '**/cypress/coverage/',
@@ -15,13 +14,10 @@ const DEFAULT_REQUIRED_SEARCH_EXCLUDE_KEYS: readonly string[] = [
   '**/node_modules/',
   '**/sarif/',
   '**/.attach_pid*',
-  '**/.pnp.*',
-  '**/.yarn',
   '**/*.cpuprofile',
   '**/*.tsbuildinfo',
   '**/lighthouse.report.*',
   '**/package-lock.json',
-  '**/yarn.lock',
 ];
 
 export default DEFAULT_REQUIRED_SEARCH_EXCLUDE_KEYS;

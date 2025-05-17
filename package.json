@@ -15,9 +15,6 @@
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
   },
-  "publishConfig": {
-    "access": "restricted"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
@@ -27,7 +24,7 @@
     "authn": "npm run dev --workspace=packages/authn",
     "browserslist:update-db": "browserslist --update-db",
     "build": "npm run build --workspace=packages/vite",
-    "clean": "rm -rf coverage node_modules sarif && npm run clean --if-present --workspaces",
+    "clean": "rimraf coverage node_modules sarif && npm run clean --if-present --workspaces",
     "csp": "npm run dev --workspace=packages/csp",
     "dashboard": "npm run dev --workspace=packages/dashboard",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
@@ -43,12 +40,12 @@
     "publish": "npm publish --workspaces",
     "react-datadog": "npm run dev --workspace=packages/react-datadog",
     "start": "concurrently --kill-others --kill-others-on-fail --names authn,csp,dashboard,fmrs,react-datadog,vite,worker --prefix-colors auto --restart-after exponential --restart-tries 9999 \"npm run authn\" \"npm run csp\" \"npm run dashboard\" \"npm run fmrs\" \"npm run react-datadog\" \"npm run vite\" \"npm run worker\"",
-    "test": "concurrently --names eslint,test,publint,test,vitest --prefix-colors auto \"npm run eslint\" \"npm run test:workspaces\" \"npm run publint\" \"npm run mtt:test\" \"npm run vitest:run\"",
+    "test": "concurrently --names eslint,publint,test,test-workspaces,vitest --prefix-colors auto \"npm run eslint\" \"npm run publint\" \"npm run mtt:test\" \"npm run test:workspaces\" \"npm run vitest:run\"",
     "test:workspaces": "npm run test --workspaces",
-    "up": "npm upgrade --include-workspace-root --workspaces \"@*/*\" \"*\" && npm install --legacy-peer-deps --save-dev --workspace=packages/vite eslint-plugin-react-hooks@experimental && npm install --legacy-peer-deps --save --workspace=packages/vite react@experimental react-dom@experimental",
+    "up": "npm upgrade --include-workspace-root --workspaces \"@*/*\" \"*\"",
     "vite": "npm run start --workspace=packages/vite",
     "vitest": "vitest",
-    "vitest:run": "exit 0 || vitest run",
+    "vitest:run": "vitest run || exit 0",
     "vitest:watch": "vitest watch",
     "worker": "npm run dev --workspace=packages/worker"
   },
@@ -83,8 +80,8 @@
     "eslint-plugin-react": "^7.37.5",
     "prettier": "^3.5.3",
     "publint": "^0.3.12",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.31.0",
     "vitest": "^3.1.2"
   }
 }

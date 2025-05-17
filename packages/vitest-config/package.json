@@ -30,7 +30,7 @@
   },
   "scripts": {
     "attw": "attw --quiet",
-    "clean": "rm -rf coverage dist node_modules && rm -f tsconfig.prepack.tsbuildinfo tsc-output.cpuprofile",
+    "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.prepack.tsbuildinfo",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "prepack": "npm run tsc",
@@ -46,8 +46,7 @@
     "@types/eslint": "^9.6.1",
     "@types/eslint-config-prettier": "^6.11.3",
     "@typescript-eslint/eslint-plugin": "^8.31.0",
-    "@typescript-eslint/parser": "^8.31.0",
-    "typescript-eslint": "^8.31.0"
+    "@typescript-eslint/parser": "^8.31.0"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.4",
@@ -67,6 +66,7 @@
     "eslint-plugin-prettier": "^5.2.6",
     "prettier": "^3.5.3",
     "publint": "^0.3.12",
+    "rimraf": "^6.0.1",
     "tslib": "^2.8.1",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",

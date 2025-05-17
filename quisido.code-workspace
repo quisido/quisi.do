@@ -5,7 +5,7 @@
       "path": ".",
     },
     {
-      "name": "quisi.do",
+      "name": "quisi.do (vite)",
       "path": "packages/vite",
     },
     {
@@ -102,6 +102,7 @@
     "codeQL.createQuery.qlPackLocation": "./",
     "eslint.format.enable": true,
     "eslint.useFlatConfig": true,
+    "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
     "typescript.enablePromptUseWorkspaceTsdk": true,
 
     "files.associations": {

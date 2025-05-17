@@ -1,5 +1,3 @@
-'use client';
-
 import {
   createContext,
   useEffect,
@@ -249,7 +247,20 @@ export default function Turnstile({
     script.setAttribute('src', SRC);
     window.document.body.appendChild(script);
     readyRender();
-  }, [appearance, containerId, execution, language, retry, sitekey, theme]);
+  }, [
+    appearance,
+    containerId,
+    execution,
+    handleError,
+    handleExpired,
+    handleSuccess,
+    handleTimeout,
+    handleUnsupported,
+    language,
+    retry,
+    sitekey,
+    theme,
+  ]);
 
   return <Context.Provider value={state}>{children}</Context.Provider>;
 }

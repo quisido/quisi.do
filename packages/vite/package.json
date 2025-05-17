@@ -14,17 +14,14 @@
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
   },
-  "publishConfig": {
-    "access": "restricted"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "scripts": {
     "attw": "attw --quiet",
-    "build": "vite build",
-    "clean": "rm -rf .wrangler cypress/coverage cypress/downloads cypress/screenshots cypress/videos node_modules out && rm -f .eslintcache tsconfig.prepack.tsbuildinfo",
+    "build": "tsc --skipLibCheck && vite build",
+    "clean": "rimraf .eslintcache .wrangler cypress/coverage cypress/downloads cypress/screenshots cypress/videos dist node_modules tsconfig.tsbuildinfo tsconfig.prepack.tsbuildinfo",
     "coverage": "monorepo-template-coverage",
     "cypress": "concurrently --hide server --kill-others --kill-others-on-fail --names server,cypress --prefix-colors auto --success command-cypress \"vite build && vite preview\" \"npm run cypress:run\"",
     "cypress:open": "wait-on https://localhost:3000/ && cypress open",
@@ -43,7 +40,7 @@
     "prepack": "npm run build",
     "test": "concurrently --names publint,vitest --prefix-colors auto \"npm run publint\" \"npm run vitest:run\"",
     "publint": "publint",
-    "serve": "serve out",
+    "serve": "serve dist",
     "start": "vite",
     "vitest": "vitest",
     "vitest:run": "vitest run",
@@ -96,10 +93,9 @@
     "react-innertext": "^1.1.5",
     "relative-timestamp": "^1.0.0",
     "sentry-react": "^2.0.0",
-    "sharp": "^0.34.1",
     "use-force-update": "^1.0.11",
     "use-mui": "^1.0.6",
-    "use-shallow-memo": "^1.0.0",
+    "use-shallow-memo": "^1.1.0",
     "zone.js": "^0.15.0"
   },
   "devDependencies": {
@@ -155,7 +151,7 @@
     "eslint-plugin-prettier": "^5.2.6",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-compiler": "^19.1.0-rc.1",
-    "eslint-plugin-react-hooks": "^0.0.0-experimental-21fdf308-20250508",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "identity-obj-proxy": "^3.0.0",
     "istanbul-lib-coverage": "^3.2.2",
@@ -166,6 +162,7 @@
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "publint": "^0.3.12",
+    "rimraf": "^6.0.1",
     "sass": "^1.87.0",
     "serve": "^14.2.4",
     "source-map": "^0.7.4",
@@ -176,9 +173,5 @@
     "vitest": "^3.1.2",
     "wait-on": "^8.0.3",
     "webpack": "^5.99.6"
-  },
-  "overrides": {
-    "@types/react": "npm:types-react@rc",
-    "@types/react-dom": "npm:types-react-dom@rc"
   }
 }

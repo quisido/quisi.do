@@ -1,5 +1,3 @@
-'use client';
-
 import { type ReactElement, type ReactNode } from 'react';
 import useElementId from '../../hooks/use-element-id.js';
 import useEmit from '../../hooks/use-emit/index.js';

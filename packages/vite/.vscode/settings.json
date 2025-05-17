@@ -16,6 +16,7 @@
     "lighthouse.report.html": true,
     "lighthouse.report.json": true,
     "nyc.config.cjs": true,
+    "tsconfig.tsbuildinfo": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   },
   "scss.validate": false,
