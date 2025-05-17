@@ -14,12 +14,12 @@ are committed, and an official Code Workspace for the repository can be found in
 
 ## Contributing
 
-To install this repository and begin local development, use the following
-commands in order:
+To install this repository and begin local development, run the following
+commands in sequence:
 
-- `npm install npm@latest --global` to keep NPM up-to-date.
-- `npm install --legacy-peer-deps` to install dependencies.
-- `npm run up` to upgrade dependencies.
+- Update NPM: `npm install npm@latest --global`
+- Install project dependencies: `npm install --legacy-peer-deps`
+- Upgrade all dependencies: `npm run up`
 
 ## Commands
 

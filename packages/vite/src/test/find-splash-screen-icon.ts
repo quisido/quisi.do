@@ -1,5 +1,5 @@
 import { assert } from 'vitest';
-import type Image from '../types/webmanifest/image.js';
+import type Image from '../types/web-manifest/image.js';
 
 const BASE = 10;
 const SPLASH_SCREEN_ICON_SIZE = 512;

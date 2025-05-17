@@ -1,7 +1,8 @@
 import { config } from 'dotenv';
+import validateString from './validate-string.js';
 
 const processEnv: Record<string, string> = {
-  NODE_ENV: process.env.NODE_ENV,
+  NODE_ENV: validateString(process.env['NODE_ENV']),
 };
 
 config({ override: true, processEnv });
