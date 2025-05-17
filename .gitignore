@@ -1,6 +1,7 @@
 /.git/
 /.wrangler/
 /coverage/
+/dist/
 /sarif/
 /.attach_pid*
 /.eslintcache

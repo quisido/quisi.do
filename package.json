@@ -37,7 +37,7 @@
     "lighthouse": "npm run lighthouse --workspace=packages/vite",
     "mtt:test": "monorepo-template-test",
     "postlighthouse": "npm run postlighthouse --workspace=packages/vite",
-    "prepack": "node --experimental-transform-types ./scripts/prepack/index.ts",
+    "prepack": "tsc --outDir dist --skipLibCheck --target ESNext ./scripts/prepack.ts && node ./dist/prepack.js",
     "publint": "publint",
     "publint:workspaces": "npm run publint --workspaces",
     "publish": "npm publish --workspaces",
