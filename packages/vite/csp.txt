@@ -1,0 +1,136 @@
+base-uri
+  'none';
+
+child-src
+  'none';
+
+connect-src
+  'self'
+  https://*.clarity.ms/collect
+  https://a.quisi.do/whoami/
+  https://analytics.google.com/g/collect
+  https://browser-intake-datadoghq.com/api/v2/replay
+  https://browser-intake-datadoghq.com/api/v2/rum
+  https://cloudflareinsights.com/
+  https://csp.quisi.do/1/
+  https://dashboard.quisi.do/
+  https://edge.fullstory.com/s/settings/o-1X4ZHB-na1/v1/web
+  https://localhost:5882/whoami/
+  https://localhost:6586/1/
+  https://localhost:9778/
+  https://o592283.ingest.sentry.io/api/5740642/envelope/
+  https://r.lgrckt-in.com/i
+  https://r.logr-ingest.com/i
+  https://r.lrkt-in.com/i
+  https://region1.analytics.google.com/g/collect
+  https://rs.fullstory.com/rec/bundle/v2
+  https://rs.fullstory.com/rec/page
+  https://stats.g.doubleclick.net/g/collect
+  https://us.i.posthog.com/decide/
+  https://us.i.posthog.com/e/
+  https://us.i.posthog.com/i/
+  https://us.i.posthog.com/s/
+  https://us-assets.i.posthog.com/array/
+  https://www.clarity.ms/report-err/eusb
+  https://www.google.ca/ads/ga-audiences
+  https://www.google.com.bd/ads/ga-audiences
+  https://www.google-analytics.com/g/collect;
+
+default-src
+  'none';
+
+font-src
+  https://fonts.gstatic.com/s/;
+
+frame-src
+  https://td.doubleclick.net/;
+
+img-src
+  'self'
+  https://api-js.mixpanel.com/track/
+  https://c.bing.com/c.gif
+  https://c.clarity.ms/c.gif
+  https://www.google.bg/ads/ga-audiences
+  https://www.google.ca/ads/ga-audiences
+  https://www.google.ch/ads/ga-audiences
+  https://www.google.cl/ads/ga-audiences
+  https://www.google.co.il/ads/ga-audiences
+  https://www.google.co.in/ads/ga-audiences
+  https://www.google.co.jp/ads/ga-audiences
+  https://www.google.co.kr/ads/ga-audiences
+  https://www.google.co.ma/ads/ga-audiences
+  https://www.google.co.uk/ads/ga-audiences
+  https://www.google.co.uz/ads/ga-audiences
+  https://www.google.com.ar/ads/ga-audiences
+  https://www.google.com.au/ads/ga-audiences
+  https://www.google.com.bd/ads/ga-audiences
+  https://www.google.com.br/ads/ga-audiences
+  https://www.google.com.hk/ads/ga-audiences
+  https://www.google.com.kh/ads/ga-audiences
+  https://www.google.com.mx/ads/ga-audiences
+  https://www.google.com.my/ads/ga-audiences
+  https://www.google.com.pk/ads/ga-audiences
+  https://www.google.com.sg/ads/ga-audiences
+  https://www.google.com.tr/ads/ga-audiences
+  https://www.google.com.ua/ads/ga-audiences
+  https://www.google.com.vn/ads/ga-audiences
+  https://www.google.de/ads/ga-audiences
+  https://www.google.fr/ads/ga-audiences
+  https://www.google.ie/ads/ga-audiences
+  https://www.google.it/ads/ga-audiences
+  https://www.google.nl/ads/ga-audiences
+  https://www.google.ro/ads/ga-audiences
+  https://www.google.ru/ads/ga-audiences
+  https://www.googletagmanager.com/a
+  https://www.googletagmanager.com/td;
+
+manifest-src
+  'self';
+
+media-src
+  'self';
+
+object-src
+  'none';
+
+require-trusted-types-for
+  'script';
+
+script-src-attr
+  'none';
+
+script-src-elem
+  'self'
+  'nonce-quisido'
+  'sha256-0t6ckIrYPXCu3XYLIHzDFrPqU4kFcr+tkdZT38h9itg='
+  https://ajax.cloudflare.com/
+  https://cdn.lgrckt-in.com/logger-1.min.js
+  https://cdn.logr-ingest.com/logger-1.min.js
+  https://cdn.lrkt-in.com/logger-1.min.js
+  https://edge.fullstory.com/s/fs.js
+  https://quisi.do/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js
+  https://quisi.do/cdn-cgi/speculation
+  https://static.cloudflareinsights.com/beacon.min.js
+  https://us-assets.i.posthog.com/array/phc_qgxn9IH7LL0PWTQv12DQa6j65d7bSpkTG2nfTpVtJOW/
+  https://us-assets.i.posthog.com/static/
+  https://www.clarity.ms/s/
+  https://www.clarity.ms/tag/lm4m88gmix
+  https://www.clarity.ms/tag/ln17lx0olf
+  https://www.googletagmanager.com/gtag/js;
+
+style-src-attr
+  'unsafe-inline';
+
+style-src-elem
+  'self'
+  'unsafe-inline'
+  https://fonts.googleapis.com/css2;
+
+trusted-types
+  quisido;
+
+worker-src
+  blob:;
+
+report-to
+  quisido

@@ -10,6 +10,8 @@ parameters. It uses the `window`'s `hashchange` event for managing hashes, so
 you will want to use a `jsdom` test environment.
 
 ```sh
+pnpm add --dev history mock-next-router
+npm install --save-dev history mock-next-router
 yarn add --dev history mock-next-router
 ```
 

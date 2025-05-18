@@ -7,15 +7,15 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout repo
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Install bun
   #       uses: oven-sh/setup-bun@v1
   #     - name: Install dependencies
   #       run: bun install
   #     - name: Prepack
   #       run: bun run prepack
-  #     - name: Prepublish
-  #       run: bun run prepublish
+  #     - name: Test
+  #       run: bun run test
 
   # dependency-review:
   #   name: Dependency review
@@ -24,7 +24,7 @@ jobs:
   #     pull-requests: write
   #   steps:
   #     - name: Checkout repository
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Review dependencies
   #       uses: actions/dependency-review-action@v2
 
@@ -37,7 +37,7 @@ jobs:
       security-events: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Scan
         uses: microsoft/devskim-action@v1
         with:
@@ -53,14 +53,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
 
   # Stage 2: prepack
   prepack:
@@ -69,16 +69,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
       - name: Prepack
-        run: yarn run --require dd-trace/init prepack
+        run: npm run prepack
         env:
           CLARITY_TAG: ln18ya61ca
           CLOUD_ACCOUNT_ID: quisido
@@ -98,7 +98,6 @@ jobs:
           GITHUB_SHA: ${{ github.sha }}
           GOOGLE_ANALYTICS_TRACKING_ID: G-GMKFW5ZZ9G
           HONEYCOMB_API_KEY: hcaik_01hwsd84kyjjrwjgg4kqbzzvp2
-          IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
           PATREON_OAUTH_CLIENT_ID: 4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG
           PATREON_OAUTH_REDIRECT_URI: https://localhost:5882/patreon/
           SENTRY_ENVIRONMENT: staging
@@ -118,7 +117,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -127,14 +126,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
       - name: Audit
-        run: yarn packages/next run lighthouse:report
+        run: npm run lighthouse:report --workspace=packages/vite
       - name: Validate
-        run: yarn packages/next run postlighthouse
+        run: npm run postlighthouse --workspace=packages/vite
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
@@ -145,13 +144,13 @@ jobs:
             packages/*/lighthouse-*.devtoolslog.json
             packages/*/lighthouse-*.trace.json
 
-  prepublish:
-    name: Prepublish
+  test:
+    name: Test
     needs: prepack
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -160,42 +159,46 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
-      - name: Prepublish
-        run: yarn prepublish
+        run: npm install --legacy-peer-deps
+      - name: Test
+        run: npm run test
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+          DD_ENV: ci
+          DD_SERVICE: quisi.do
 
   # Stage 4: coverage
   # coverage:
   #   name: Coverage
-  #   needs: [prepublish] # cypress
+  #   needs: [test] # cypress
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout repository
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Download Cypress artifacts
   #       uses: actions/download-artifact@v4
   #       with:
   #         name: cypress
   #         path: packages/
-  #     - name: Download prepublish artifacts
+  #     - name: Download test artifacts
   #       uses: actions/download-artifact@v4
   #       with:
-  #         name: prepublish
+  #         name: test
   #         path: /
   #     - name: Setup Node
   #       uses: actions/setup-node@v4
   #       with:
-  #         cache: yarn
+  #         cache: npm
   #         node-version: latest
   #     - name: Install dependencies
-  #       run: yarn install --immutable
+  #       run: npm install --legacy-peer-deps
   #     - name: Report coverage
-  #       run: yarn packages/next run coverage
+  #       run: npm run coverage --workspace=packages/vite
   #       env:
   #         BRANCHES_COVERAGE_THRESHOLD: 1
   #         FUNCTIONS_COVERAGE_THRESHOLD: 1

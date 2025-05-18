@@ -23,7 +23,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Scan
         uses: microsoft/devskim-action@v1
         with:
@@ -50,14 +50,14 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
 
   # Stage 2: prepack
   prepack:
@@ -77,50 +77,30 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
       - name: Prepack
-        run: yarn run --require dd-trace/init prepack
+        run: npm run prepack
         env:
-          CLARITY_TAG: lm4m88gmix
-          CLOUD_ACCOUNT_ID: quisido
-          CLOUD_PLATFORM: GitHub
-          CLOUD_PROVIDER: GitHub Pages
-          CSP_ORIGIN: https://csp.quisi.do
-          DASHBOARD_ENDPOINT: https://dashboard.quisi.do/
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_APPLICATION_ID: e29eb164-e193-4380-b512-ebd70bbfaeb6
-          DD_CLIENT_TOKEN: pubdb61afd2a8ec4725bfdb7fc4eb4ab6ce
-          DD_ENV: prod
           DD_PROFILING_ENABLED: true
-          DD_SERVICE: quisi.do
           DD_VERSION: ${{ github.sha }}
-          DEPLOYMENT_ENVIRONMENT: live
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
-          GOOGLE_ANALYTICS_TRACKING_ID: G-ZTQ6K5CVQS
-          HONEYCOMB_API_KEY: hcaik_01hwsd84kyjjrwjgg4kqbzzvp2
-          IMAGEKIT_KEY: ${{ secrets.IMAGEKIT_KEY }}
-          PATREON_OAUTH_CLIENT_ID: J_6jrNJZNibHylSF83UVl9I4OHZYf67RAsU0s7_LnH1N5BKF-vgOyweF3KQLOKm1
-          PATREON_OAUTH_REDIRECT_URI: https://a.quisi.do/patreon/
-          SENTRY_ENVIRONMENT: production
-          WHOAMI: https://a.quisi.do/whoami/
+          NODE_ENV: production
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: prepack
-          path: |
-            packages/*/.next/
-            packages/*/dist/
-            packages/*/out/
+          path: packages/*/dist/
 
-  # Stage 3: lighthouse-ci, prepublish, prepublish-applications
+  # Stage 3: lighthouse-ci, test, test-applications
   lighthouse-ci:
     name: Lighthouse (continuous integration)
     needs: prepack
@@ -138,7 +118,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -147,14 +127,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
       - name: Audit
-        run: yarn packages/next run lighthouse:report
+        run: npm run lighthouse:report --workspace=packages/vite
       - name: Validate
-        run: yarn packages/next run postlighthouse
+        run: npm run postlighthouse --workspace=packages/vite
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
@@ -165,8 +145,8 @@ jobs:
             packages/*/lighthouse-*.devtoolslog.json
             packages/*/lighthouse-*.trace.json
 
-  prepublish:
-    name: Prepublish
+  test:
+    name: Test
     needs: prepack
     runs-on: ubuntu-latest
     env:
@@ -182,7 +162,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -191,22 +171,22 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
-      - name: Prepublish
-        run: yarn run --require dd-trace/ci/init prepublish
+        run: npm install --immutable
+      - name: Test
+        run: npm run test
         env:
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
           DD_ENV: ci
           DD_SERVICE: quisi.do
 
-  #   Run prepublish on applications, because prepublish won't be triggered for
-  # applications by the publish step.
-  prepublish-applications:
-    name: Prepublish applications
+  #   Run test on applications, because test won't be triggered for applications
+  # by the publish step.
+  test-applications:
+    name: Test applications
     needs: prepack
     runs-on: ubuntu-latest
     env:
@@ -222,7 +202,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -231,17 +211,17 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
-      - name: Prepublish quisi.do
-        run: yarn packages/next run prepublish
+        run: npm install --legacy-peer-deps
+      - name: Test quisi.do
+        run: npm test --workspace=packages/vite
 
   # Stage 4: github-pages, npm, sentry-release
   datadog-sourcemaps:
     name: Datadog sourcemaps
-    needs: [lighthouse-ci, prepublish-applications]
+    needs: [lighthouse-ci, test-applications]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -256,23 +236,23 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
       - name: Upload Datadog sourcemaps
-        run: yarn packages/next run datadog:sourcemaps
+        run: npm run datadog:sourcemaps --workspace=packages/vite
         env:
           DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           RELEASE_VERSION: ${{ github.sha }}
 
   github-pages:
     name: GitHub Pages
-    needs: [lighthouse-ci, prepublish-applications]
+    needs: [lighthouse-ci, test-applications]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -287,7 +267,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -298,12 +278,12 @@ jobs:
         with:
           branch: gh-pages
           clean: true
-          folder: packages/next/out/
+          folder: packages/vite/dist/
           single-commit: true
 
   npm:
     name: NPM
-    needs: [prepack, prepublish]
+    needs: [prepack, test]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -318,7 +298,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -327,20 +307,20 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
       - name: Publish
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: >
-          yarn config set npmAuthToken $NPM_AUTH_TOKEN;
-          yarn run publish;
+          npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH_TOKEN;
+          npm publish;
 
   sentry-release:
     name: Sentry release
-    needs: [lighthouse-ci, prepublish-applications]
+    needs: [lighthouse-ci, test-applications]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -355,7 +335,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -370,7 +350,7 @@ jobs:
           SENTRY_PROJECT: quisi-do
         with:
           environment: production
-          sourcemaps: packages/next/out
+          sourcemaps: packages/vite/dist
           version: ${{ github.sha }}
 
   # Stage 5: cloudflare-purge, github-packages, wrangler-deploy-*
@@ -427,7 +407,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -436,25 +416,25 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
           registry-url: 'https://npm.pkg.github.com'
           scope: '@${{ github.repository_owner }}'
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
       - name: Publish
         env:
           NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
-          yarn config set npmAuthToken $NPM_AUTH_TOKEN;
-          yarn config set \
+          npm config set npmAuthToken $NPM_AUTH_TOKEN;
+          npm config set \
             npmScopes.${{ github.repository_owner }}.npmPublishRegistry \
             'https://npm.pkg.github.com';
-          yarn run publish;
+          npm publish;
 
   wrangler-deploy-authn:
     name: Wrangler deploy (Authentication)
-    needs: [lighthouse-ci, npm, prepublish-applications]
+    needs: [lighthouse-ci, npm, test-applications]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -469,27 +449,27 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
       - name: Deploy
-        run: yarn packages/authn run production:deploy
+        run: npm run production:deploy --workspace=packages/authn
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
   wrangler-deploy-csp:
     name: Wrangler deploy (Content Security Policy)
-    needs: [lighthouse-ci, npm, prepublish-applications]
+    needs: [lighthouse-ci, npm, test-applications]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -504,27 +484,27 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
       - name: Deploy
-        run: yarn packages/csp run production:deploy
+        run: npm run production:deploy --workspace=packages/csp
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
   wrangler-deploy-dashboard:
     name: Wrangler deploy (Dashboard)
-    needs: [lighthouse-ci, npm, prepublish-applications]
+    needs: [lighthouse-ci, npm, test-applications]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -539,21 +519,21 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           name: prepack
           path: packages/
       - name: Deploy
-        run: yarn packages/dashboard run production:deploy
+        run: npm run production:deploy --workspace=packages/dashboard
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
@@ -575,7 +555,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -584,14 +564,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version: latest
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm install --legacy-peer-deps
       - name: Audit
-        run: yarn packages/next run lighthouse:report:production
+        run: npm run lighthouse:report:production --workspace=packages/vite
       - name: Validate
-        run: yarn packages/next run postlighthouse
+        run: npm run postlighthouse --workspace=packages/vite
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4

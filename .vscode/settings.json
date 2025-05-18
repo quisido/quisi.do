@@ -1,37 +1,55 @@
 {
   "editor.tabSize": 2,
-  "eslint.nodePath": ".yarn/sdks",
-  "eslint.runtime": "node",
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.lintTask.options": "--config eslint.config.js .",
   "eslint.useFlatConfig": true,
   "files.eol": "\n",
   "javascript.preferences.importModuleSpecifierEnding": "js",
-  "prettier.configPath": ".prettierrc.json",
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "npm.packageManager": "npm",
+  "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
   "typescript.preferences.importModuleSpecifierEnding": "js",
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "editor.rulers": [
     80
+  ],
+  "eslint.probe": [
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "jsonc",
+    "markdown",
+    "mdx",
+    "typescript",
+    "typescriptreact",
+    "yaml"
+  ],
+  "eslint.validate": [
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "jsonc",
+    "markdown",
+    "mdx",
+    "typescript",
+    "typescriptreact",
+    "yaml"
   ],
   "files.associations": {
     "**/config/api-extractor.json": "jsonc"
   },
   "files.exclude": {
     ".wrangler/": true,
-    ".yarn/__virtual__/": true,
-    ".yarn/cache/": true,
-    ".yarn/sdks/": true,
-    ".yarn/unplugged/": true,
-    ".yarn/install-state.gz": true,
     "coverage/": true,
-    "node_modules/": true,
     "packages/": true,
     "sarif/": true,
     ".eslintcache": true,
     ".pnp.cjs": true,
     ".pnp.loader.mjs": true,
-    "vitest.config.ts.timestamp-*-*.mjs": true,
-    "yarn.lock": true
+    "package-lock.json": true,
+    "vitest.config.ts.timestamp-*-*.mjs": true
   },
   "search.exclude": {
     "**/.git/": true,
@@ -39,7 +57,6 @@
     "**/.next/": true,
     "**/.nyc_output/": true,
     "**/.wrangler/": true,
-    "**/.yarn/": true,
     "**/build/": true,
     "**/coverage/": true,
     "**/cypress/coverage/": true,
@@ -52,35 +69,33 @@
     "**/sarif/": true,
     "**/.attach_pid*": true,
     "**/.eslintcache": true,
-    "**/.yarn": true,
-    "**/.pnp.*": true,
     "**/*.cpuprofile": true,
     "**/*.tsbuildinfo": true,
     "**/lighthouse.report.*": true,
-    "**/yarn.lock": true
+    "**/package-lock.json": true
   },
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   }
 }

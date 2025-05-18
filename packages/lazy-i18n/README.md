@@ -8,11 +8,6 @@ Lazy i18n is a collection of React components and hooks that support
 internationalization for multiple languages by asynchronously loading key-value
 pair translation files.
 
-## Install
-
-- `npm install lazy-i18n` or
-- `yarn add lazy-i18n`
-
 ## Use
 
 Wrap your application in the `I18nProvider` component. The `locale` prop

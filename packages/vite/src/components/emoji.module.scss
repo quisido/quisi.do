@@ -1,0 +1,11 @@
+@use '../modules/quisi/dark-mode.scss';
+
+.emoji {
+  -webkit-user-select: none;
+  font-family: "Noto Color Emoji";
+  pointer-events: none;
+  user-select: none;
+  vertical-align: bottom;
+
+  @include dark-mode.disable;
+}

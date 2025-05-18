@@ -1,6 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 import { expect, vi } from 'vitest';
-import unimplementedMethod from './unimplemented-method.js';
+import createNotImplementedThrower from './create-not-implemented-thrower.js';
 
 const TEST_PUT = (): Promise<void> => Promise.resolve();
 
@@ -15,52 +15,27 @@ export default class TestKVNamespace<Key extends string = string>
         options?: KVNamespacePutOptions,
       ) => Promise<void>
     >(TEST_PUT);
-  public delete = unimplementedMethod;
-  public getWithMetadata = unimplementedMethod;
-  public list = unimplementedMethod;
-  #record: Partial<Record<string, string>>;
+
+  readonly #record: Partial<Record<string, string>>;
 
   public constructor(record: Partial<Record<string, string>> = {}) {
-    this.expectToHavePut = this.expectToHavePut.bind(this);
     this.#record = record;
-    this.setPutError = this.setPutError.bind(this);
+    this.get = this.get.bind(this);
   }
 
-  public expectToHavePut(
+  public delete: KVNamespace<Key>['delete'] =
+    createNotImplementedThrower('delete');
+
+  public expectToHavePut = (
     key: Key,
     value: string | ArrayBuffer | ArrayBufferView | ReadableStream,
     options?: KVNamespacePutOptions,
-  ): void {
+  ): void => {
     expect(this.#put).toHaveBeenCalledWith(key, value, options);
-  }
+  };
 
-  public get(
-    key: Key,
-    options?:
-      | Partial<KVNamespaceGetOptions<undefined>>
-      | KVNamespaceGetOptions<'text'>,
-  ): Promise<string | null>;
-  public async get(key: Key, type: 'text'): Promise<string | null>;
   public async get<ExpectedValue = unknown>(
-    key: Key,
-    type: 'json',
-  ): Promise<ExpectedValue | null>;
-  public async get(key: Key, type: 'arrayBuffer'): Promise<ArrayBuffer | null>;
-  public async get(key: Key, type: 'stream'): Promise<ReadableStream | null>;
-  public async get<ExpectedValue = unknown>(
-    key: Key,
-    options?: KVNamespaceGetOptions<'json'>,
-  ): Promise<ExpectedValue | null>;
-  public async get(
-    key: Key,
-    options?: KVNamespaceGetOptions<'arrayBuffer'>,
-  ): Promise<ArrayBuffer | null>;
-  public async get(
-    key: Key,
-    options?: KVNamespaceGetOptions<'stream'>,
-  ): Promise<ReadableStream | null>;
-  public async get<ExpectedValue = unknown>(
-    key: string,
+    key: Key | readonly Key[],
     options?:
       | Partial<KVNamespaceGetOptions<undefined>>
       | KVNamespaceGetOptions<'arrayBuffer'>
@@ -71,21 +46,49 @@ export default class TestKVNamespace<Key extends string = string>
       | 'json'
       | 'stream'
       | 'text',
-  ): Promise<ExpectedValue | ReadableStream | string | null> {
+  ): Promise<
+    | ArrayBuffer
+    | ExpectedValue
+    | Map<string, ExpectedValue | string | null>
+    | ReadableStream
+    | string
+    | null
+  > {
+    if (typeof key !== 'string') {
+      return key.reduce(
+        this.#reduceGetKeysToMap,
+        new Map<string, ExpectedValue | string | null>(),
+      );
+    }
+
     switch (options) {
       case 'text':
         return Promise.resolve(this.#record[key] ?? null);
+
       default:
         throw new Error('Not implemented');
     }
   }
 
-  public readonly put: KVNamespace<Key>['put'] = (
+  public getWithMetadata: KVNamespace<Key>['getWithMetadata'] =
+    createNotImplementedThrower('getWithMetadata');
+
+  public list: KVNamespace<Key>['list'] = createNotImplementedThrower('list');
+
+  public put(
     key: Key,
     value: string | ArrayBuffer | ArrayBufferView | ReadableStream,
     options?: KVNamespacePutOptions,
-  ): Promise<void> => {
+  ): Promise<void> {
     return this.#put(key, value, options);
+  }
+
+  #reduceGetKeysToMap = <ExpectedValue>(
+    map: Map<string, ExpectedValue | string | null>,
+    key: Key,
+  ): Map<string, ExpectedValue | string | null> => {
+    map.set(key, this.#record[key] ?? null);
+    return map;
   };
 
   public setPutError(error: Error): void {

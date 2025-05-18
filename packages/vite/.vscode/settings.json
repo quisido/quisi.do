@@ -1,0 +1,24 @@
+{
+  "files.exclude": {
+    ".wrangler/": true,
+    "analyze/": true,
+    "certificates/": true,
+    "coverage/": true,
+    "cypress/downloads/": true,
+    "dist/": true,
+    "node_modules/": true,
+    ".eslintcache": true,
+    "cypress.config.cjs": true,
+    "lighthouse-0.devtoolslog.json": true,
+    "lighthouse-0.trace.json": true,
+    "lighthouse.config.cjs": true,
+    "lighthouse.config.js": true,
+    "lighthouse.report.html": true,
+    "lighthouse.report.json": true,
+    "nyc.config.cjs": true,
+    "tsconfig.tsbuildinfo": true,
+    "vitest.config.ts.timestamp-*-*.mjs": true
+  },
+  "scss.validate": false,
+  "stylelint.validate": ["css", "scss"]
+}

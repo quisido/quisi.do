@@ -3,10 +3,8 @@
     "arcanis.vscode-zipfs",
     "dbaeumer.vscode-eslint",
     "editorconfig.editorconfig",
-    "esbenp.prettier-vscode",
     "github.vscode-codeql",
     "github.vscode-github-actions",
-    "mariusschulz.yarn-lock-syntax",
     "redhat.vscode-yaml"
   ]
 }
