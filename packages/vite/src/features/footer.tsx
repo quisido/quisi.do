@@ -1,17 +1,15 @@
-import I18n from 'lazy-i18n';
 import { memo, type ReactElement } from 'react';
-import Link from '../modules/quisi/link.jsx';
 import validateString from '../utils/validate-string.js';
 import styles from './footer.module.scss';
 import StatusBar from './status-bar.jsx';
 
 const CLASS_NAME: string = validateString(styles['footer']);
-const LIST_CLASS_NAME: string = validateString(styles['list']);
+// Const LIST_CLASS_NAME: string = validateString(styles['list']);
 
 function Footer(): ReactElement | null {
   return (
     <footer className={CLASS_NAME}>
-      <ul className={LIST_CLASS_NAME}>
+      {/* <ul className={LIST_CLASS_NAME}>
         <li>
           <Link
             feature="footer"
@@ -35,7 +33,7 @@ function Footer(): ReactElement | null {
             <I18n>Terms of service</I18n>
           </Link>
         </li>
-      </ul>
+      </ul> */}
       <StatusBar />
     </footer>
   );

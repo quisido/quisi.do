@@ -9,9 +9,16 @@ import react from '@vitejs/plugin-react';
 import reduceEnvironmentVariableNamesToRecord from './src/utils/reduce-environment-variable-names-to-record.js';
 import type { Compulsory } from './src/types/compulsory.js';
 
+const ESBUILD_OPTIONS: ESBuildOptions = {
+  color: true,
+  jsx: 'preserve',
+  sourcesContent: true,
+};
+
 const USER_CONFIG: UserConfig = {
   base: '/',
   envDir: '../',
+  esbuild: ESBUILD_OPTIONS,
   plugins: [react()],
   publicDir: '../public/',
   root: './src/',
@@ -55,8 +62,7 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
   },
 
   esbuild: {
-    color: true,
-    jsx: 'preserve',
+    ...ESBUILD_OPTIONS,
     jsxDev: true,
     lineLimit: 80,
     minifyIdentifiers: false,
@@ -64,8 +70,10 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
     minifyWhitespace: false,
     sourceRoot: './src/',
     sourcemap: 'both',
-    sourcesContent: true,
-    treeShaking: true,
+  },
+
+  server: {
+    port: 3000,
   },
 };
 
@@ -79,15 +87,12 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
   },
 
   esbuild: {
-    color: true,
-    jsx: 'preserve',
+    ...ESBUILD_OPTIONS,
     jsxDev: false,
     minifyIdentifiers: true,
     minifySyntax: true,
     minifyWhitespace: true,
     sourceRoot: prepackTSConfig.compilerOptions.sourceRoot,
-    sourcesContent: true,
-    treeShaking: true,
     tsconfigRaw: prepackTSConfig as Compulsory<ESBuildOptions['tsconfigRaw']>,
   },
 

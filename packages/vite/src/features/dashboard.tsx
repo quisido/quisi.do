@@ -25,18 +25,19 @@ interface IGauge {
   readonly name: string;
   readonly max?: number | undefined;
   readonly severe: number;
+  readonly units: string;
   readonly value: number;
   readonly warning: number;
 }
 
+const INITIAL_VALUE = 0;
+const INITIAL_TUPLE: readonly [number, number] = [INITIAL_VALUE, INITIAL_VALUE];
 const LIST_CLASS_NAME: string = validateString(styles['list']);
+const PERCENT = 100;
 
 const DASHBOARD_ENDPOINT: string = validateString(
   import.meta.env.DASHBOARD_ENDPOINT,
 );
-
-const INITIAL_VALUE = 0;
-const INITIAL_TUPLE: readonly [number, number] = [INITIAL_VALUE, INITIAL_VALUE];
 
 const INITIAL_TIMESERIES: readonly [number, number, number, number] = [
   INITIAL_VALUE,
@@ -99,9 +100,7 @@ const sortGauges = (
 };
 
 function DashboardWrapper({ children }: PropsWithChildren): ReactElement {
-  return (
-    <Section header={<I18n>quisi.do's dashboard</I18n>}>{children}</Section>
-  );
+  return <Section header={<I18n>Dashboard</I18n>}>{children}</Section>;
 }
 
 function Dashboard(): ReactElement {
@@ -131,8 +130,8 @@ function Dashboard(): ReactElement {
   if (typeof error !== 'undefined') {
     if (
       wndw !== null &&
-      wndw.location.origin === 'https://localhost:3000' &&
-      error === 'Failed to fetch'
+      wndw.location.host === 'localhost:3000' &&
+      error.startsWith('Failed to fetch')
     ) {
       return (
         <DashboardWrapper>
@@ -187,65 +186,76 @@ function Dashboard(): ReactElement {
     {
       max: 1,
       name: 'Cumulative layout shift p75',
-      severe: 0.25,
-      value: cls,
-      warning: 0.1,
+      severe: 25,
+      units: '%',
+      value: cls * PERCENT,
+      warning: 10,
     },
     {
       name: 'DOM complete median',
       severe: 5000,
+      units: 'ms',
       value: domComplete,
       warning: 2600,
     },
     {
       name: 'DOM content loaded median',
       severe: 5000,
+      units: 'ms',
       value: dcl,
       warning: 2600,
     },
     {
       name: 'First contentful paint p75',
       severe: 3000,
+      units: 'ms',
       value: fcp,
       warning: 1800,
     },
     {
       name: 'First input delay p75',
       severe: 300,
+      units: 'ms',
       value: fip,
       warning: 100,
     },
     {
       name: 'Interaction to next paint p75',
       severe: 500,
+      units: 'ms',
       value: inp,
       warning: 200,
     },
     {
       name: 'Largest contentful paint p75',
       severe: 4000,
+      units: 'ms',
       value: lcp,
       warning: 2500,
     },
     {
       name: 'Load event median',
       severe: 8200,
+      units: 'ms',
       value: loadEvent,
       warning: 5000,
     },
     {
       name: 'Loading time p75',
       severe: 8200,
+      units: 'ms',
       value: loadingTime,
       warning: 5000,
     },
     {
       name: 'Time to first byte p75',
       severe: 1800,
+      units: 'ms',
       value: ttfb,
       warning: 800,
     },
   ];
+
   return (
     <DashboardWrapper>
       <ul className={LIST_CLASS_NAME}>
@@ -261,7 +271,14 @@ function Dashboard(): ReactElement {
           />
         </li>
         {gauges.toSorted(sortGauges).map(
-          ({ max, name, severe, value, warning }): ReactElement => (
+          ({
+            max,
+            name,
+            severe,
+            units,
+            value,
+            warning,
+          }: IGauge): ReactElement => (
             <li key={name}>
               <Paragraph>{name}:</Paragraph>
               <Gauge
@@ -272,6 +289,7 @@ function Dashboard(): ReactElement {
               />
               <Paragraph>
                 <NumberFormat>{value}</NumberFormat>
+                {units}
               </Paragraph>
             </li>
           ),
