@@ -1,6 +1,7 @@
 /// <reference types="node" />
-import { execSync } from 'node:child_process';
-import { readdirSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
+import getWorkspaceDirectories from './utils/get-workspace-directories.js';
+import npmExecWorkspace from './utils/npm-exec-workspace.js';
 
 interface PackageJson {
   readonly dependencies?: Record<string, string>;
@@ -17,7 +18,7 @@ const WORKSPACE_TOPOLOGICAL_DEPENDENCIES = new Map<
   ReadonlySet<string>
 >();
 
-const workspaceDirectories: readonly string[] = readdirSync('./packages');
+const workspaceDirectories: readonly string[] = getWorkspaceDirectories();
 
 for (const workspaceDirectory of workspaceDirectories) {
   const {
@@ -93,9 +94,7 @@ while (WORKSPACE_TOPOLOGICAL_DEPENDENCIES.size > EMPTY) {
       continue;
     }
 
-    execSync(`npm run build --workspace=packages/${workspaceDirectory}`, {
-      stdio: 'inherit',
-    });
+    npmExecWorkspace(workspaceDirectory, 'run', 'build');
     WORKSPACE_TOPOLOGICAL_DEPENDENCIES.delete(workspaceDirectory);
     deleteTopologicalDependency(workspaceDirectory);
   }
