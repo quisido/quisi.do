@@ -33,13 +33,13 @@
   },
   "scripts": {
     "attw": "attw --quiet",
-    "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.prepack.tsbuildinfo",
+    "build": "npm run tsc",
+    "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
-    "prepack": "npm run tsc",
-    "test": "concurrently --names attw,eslint,publint --prefix-colors auto \"npm run attw\" \"npm run eslint\" \"npm run publint\"",
     "publint": "publint",
-    "tsc": "tsc --project tsconfig.prepack.json"
+    "test": "concurrently --names attw,eslint,publint --prefix-colors auto \"npm run attw\" \"npm run eslint\" \"npm run publint\"",
+    "tsc": "tsc --project tsconfig.build.json"
   },
   "dependencies": {
     "@monorepo-template/tree-logger": "^2.0.0",

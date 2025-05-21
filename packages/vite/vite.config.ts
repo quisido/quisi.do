@@ -1,5 +1,5 @@
 import ddPlugin from 'dd-trace/esbuild';
-import prepackTSConfig from './tsconfig.prepack.json';
+import buildTSConfig from './tsconfig.build.json';
 import {
   defineConfig,
   type ConfigEnv,
@@ -93,8 +93,8 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
     minifyIdentifiers: true,
     minifySyntax: true,
     minifyWhitespace: true,
-    sourceRoot: prepackTSConfig.compilerOptions.sourceRoot,
-    tsconfigRaw: prepackTSConfig as Compulsory<ESBuildOptions['tsconfigRaw']>,
+    sourceRoot: buildTSConfig.compilerOptions.sourceRoot,
+    tsconfigRaw: buildTSConfig as Compulsory<ESBuildOptions['tsconfigRaw']>,
   },
 
   html: {

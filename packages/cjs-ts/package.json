@@ -29,12 +29,12 @@
   },
   "scripts": {
     "attw": "attw --quiet",
+    "build": "exit 0",
     "clean": "exit 0",
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
-    "prepack": "exit 0",
-    "test": "concurrently --names eslint,publint --prefix-colors auto \"npm run eslint\" \"npm run publint\"",
-    "publint": "publint"
+    "publint": "publint",
+    "test": "concurrently --names eslint,publint --prefix-colors auto \"npm run eslint\" \"npm run publint\""
   },
   "dependencies": {
     "@babel/register": "^7.25.9"

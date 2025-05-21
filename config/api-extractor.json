@@ -18,7 +18,7 @@
 
   "compiler": {
     "skipLibCheck": false,
-    "tsconfigFilePath": "<projectFolder>/tsconfig.prepack.json"
+    "tsconfigFilePath": "<projectFolder>/tsconfig.build.json"
   },
 
   "docModel": {

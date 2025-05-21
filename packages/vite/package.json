@@ -21,7 +21,7 @@
   "scripts": {
     "attw": "attw --quiet",
     "build": "tsc --skipLibCheck && vite build",
-    "clean": "rimraf .eslintcache .wrangler cypress/coverage cypress/downloads cypress/screenshots cypress/videos dist node_modules tsconfig.tsbuildinfo tsconfig.prepack.tsbuildinfo",
+    "clean": "rimraf .eslintcache .wrangler cypress/coverage cypress/downloads cypress/screenshots cypress/videos dist node_modules tsconfig.tsbuildinfo tsconfig.build.tsbuildinfo",
     "coverage": "monorepo-template-coverage",
     "cypress": "concurrently --hide server --kill-others --kill-others-on-fail --names server,cypress --prefix-colors auto --success command-cypress \"vite build && vite preview\" \"npm run cypress:run\"",
     "cypress:open": "wait-on https://localhost:3000/ && cypress open",
@@ -37,11 +37,10 @@
     "lighthouse:report:serve": "wait-on http://localhost:3000/ && lighthouse http://localhost:3000/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental --save-assets",
     "lighthouse:report:production": "lighthouse https://quisi.do/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental --save-assets",
     "postlighthouse": "node ./scripts/postlighthouse/index.js",
-    "prepack": "npm run build",
-    "test": "concurrently --names publint,vitest --prefix-colors auto \"npm run publint\" \"npm run vitest:run\"",
     "publint": "publint",
     "serve": "serve dist",
     "start": "vite",
+    "test": "concurrently --names publint,vitest --prefix-colors auto \"npm run publint\" \"npm run vitest:run\"",
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
@@ -94,7 +93,7 @@
     "react-innertext": "^1.1.5",
     "relative-timestamp": "^1.0.0",
     "sentry-react": "^2.0.0",
-    "use-force-update": "^1.0.11",
+    "use-force-update": "^2.0.0",
     "use-mui": "^1.0.6",
     "use-shallow-memo": "^1.1.0",
     "zone.js": "^0.15.0"
