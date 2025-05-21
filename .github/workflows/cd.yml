@@ -59,9 +59,9 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
-  # Stage 2: prepack
-  prepack:
-    name: Prepack
+  # Stage 2: build
+  build:
+    name: Build
     needs: install
     runs-on: ubuntu-latest
     env:
@@ -85,8 +85,8 @@ jobs:
           node-version: latest
       - name: Install dependencies
         run: npm install --legacy-peer-deps
-      - name: Prepack
-        run: npm run prepack
+      - name: Build
+        run: npm run build
         env:
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           DD_PROFILING_ENABLED: true
@@ -97,13 +97,13 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: prepack
+          name: build
           path: packages/*/dist/
 
   # Stage 3: lighthouse-ci, test, test-applications
   lighthouse-ci:
     name: Lighthouse (continuous integration)
-    needs: prepack
+    needs: build
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -122,7 +122,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: prepack
+          name: build
           path: packages/
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -147,7 +147,7 @@ jobs:
 
   test:
     name: Test
-    needs: prepack
+    needs: build
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -166,7 +166,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: prepack
+          name: build
           path: packages/
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -187,7 +187,7 @@ jobs:
   # by the publish step.
   test-applications:
     name: Test applications
-    needs: prepack
+    needs: build
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -206,7 +206,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: prepack
+          name: build
           path: packages/
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -240,7 +240,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: prepack
+          name: build
           path: packages/
       - name: Install dependencies
         run: npm install --legacy-peer-deps
@@ -271,7 +271,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: prepack
+          name: build
           path: packages/
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
@@ -283,7 +283,7 @@ jobs:
 
   npm:
     name: NPM
-    needs: [prepack, test]
+    needs: [build, test]
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -302,7 +302,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: prepack
+          name: build
           path: packages/
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -339,7 +339,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: prepack
+          name: build
           path: packages/
       - name: Sentry release
         uses: getsentry/action-release@v1
@@ -411,7 +411,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: prepack
+          name: build
           path: packages/
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -460,7 +460,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: prepack
+          name: build
           path: packages/
       - name: Deploy
         run: npm run production:deploy --workspace=packages/authn
@@ -495,7 +495,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: prepack
+          name: build
           path: packages/
       - name: Deploy
         run: npm run production:deploy --workspace=packages/csp
@@ -530,7 +530,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: prepack
+          name: build
           path: packages/
       - name: Deploy
         run: npm run production:deploy --workspace=packages/dashboard
@@ -559,7 +559,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: prepack
+          name: build
           path: packages/
       - name: Setup Node
         uses: actions/setup-node@v4

@@ -57,10 +57,6 @@
       "path": "packages/lazy-i18n",
     },
     {
-      "name": "mock-next-router",
-      "path": "packages/mock-next-router",
-    },
-    {
       "name": "number-format-react",
       "path": "packages/number-format-react",
     },
@@ -79,6 +75,10 @@
     {
       "name": "tree-logger",
       "path": "packages/tree-logger",
+    },
+    {
+      "name": "use-force-update",
+      "path": "packages/use-force-update",
     },
     {
       "name": "use-shallow-memo",
@@ -100,6 +100,7 @@
 
   "settings": {
     "codeQL.createQuery.qlPackLocation": "./",
+    "eslint.enable": true,
     "eslint.format.enable": true,
     "eslint.useFlatConfig": true,
     "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
