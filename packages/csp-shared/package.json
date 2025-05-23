@@ -42,7 +42,7 @@
     "vitest:watch": "vitest watch"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.17.4",
+    "@arethetypeswrong/cli": "^0.18.1",
     "@babel/core": "^7.27.1",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
@@ -50,8 +50,8 @@
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "^1.1.6",
     "@quisido/vitest-config": "^1.0.2",
-    "@typescript-eslint/eslint-plugin": "^8.31.0",
-    "@typescript-eslint/parser": "^8.31.0",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
     "@vitest/coverage-istanbul": "^3.1.4",
     "babel-plugin-replace-import-extension": "^1.1.5",
     "cjs-ts": "^1.0.2",
@@ -67,6 +67,6 @@
     "tslib": "^2.8.1",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
-    "vitest": "^3.1.2"
+    "vitest": "^3.1.4"
   }
 }

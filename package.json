@@ -36,9 +36,9 @@
     "publint": "publint",
     "publish": "tsc --outDir dist --skipLibCheck --target ESNext ./scripts/publish.ts && node ./dist/publish.js",
     "react-datadog": "npm run dev --workspace=packages/react-datadog",
-    "start": "concurrently --kill-others --kill-others-on-fail --names authn,csp,dashboard,fmrs,react-datadog,vite,worker --prefix-colors auto --restart-after exponential --restart-tries 9999 \"npm run authn\" \"npm run csp\" \"npm run dashboard\" \"npm run fmrs\" \"npm run react-datadog\" \"npm run vite\" \"npm run worker\"",
+    "start": "concurrently --kill-others --kill-others-on-fail --names authn,csp,dashboard,vite,worker --prefix-colors auto --restart-after exponential --restart-tries 9999 \"npm run authn\" \"npm run csp\" \"npm run dashboard\" \"npm run vite\" \"npm run worker\"",
     "test": "concurrently --names eslint,publint,test --prefix-colors auto \"npm run eslint\" \"npm run publint\" \"npm run mtt:test\"",
-    "up": "npm update --include-workspace-root --save --workspaces \"@*/*\" \"*\"",
+    "update": "tsc --outDir dist --skipLibCheck --target ESNext ./scripts/update.ts && node ./dist/update.js",
     "vite": "npm run start --workspace=packages/vite",
     "worker": "npm run dev --workspace=packages/worker"
   },

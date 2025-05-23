@@ -3,4 +3,5 @@ export default interface PackageJson {
   readonly devDependencies?: Record<string, string>;
   readonly name: string;
   readonly private?: boolean;
+  readonly version: string;
 }
