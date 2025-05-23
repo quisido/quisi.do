@@ -44,14 +44,14 @@
     "vitest:watch": "vitest watch"
   },
   "dependencies": {
-    "@cloudflare/workers-types": "^4.20250521.0",
+    "@cloudflare/workers-types": "^4.20250523.0",
     "@quisido/worker": "^1.0.7",
     "cloudflare-test-utils": "^1.0.2",
     "cloudflare-utils": "^1.0.3",
     "fmrs": "^2.0.4"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.17.4",
+    "@arethetypeswrong/cli": "^0.18.1",
     "@babel/core": "^7.27.1",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
@@ -61,8 +61,8 @@
     "@quisido/eslint-config": "^1.1.6",
     "@quisido/vitest-config": "^1.0.2",
     "@types/cookie": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.31.0",
-    "@typescript-eslint/parser": "^8.31.0",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
     "@vitest/coverage-istanbul": "^3.1.4",
     "babel-plugin-replace-import-extension": "^1.1.5",
     "cjs-ts": "^1.0.2",
@@ -77,7 +77,7 @@
     "tslib": "^2.8.1",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
-    "vitest": "^3.1.2"
+    "vitest": "^3.1.4"
   },
   "peerDependencies": {
     "vitest": ">=2.0.0"

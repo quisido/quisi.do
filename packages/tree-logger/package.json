@@ -42,12 +42,12 @@
     "ansi-styles": "^6.2.1"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.17.4",
+    "@arethetypeswrong/cli": "^0.18.1",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "^1.1.6",
     "@types/node": "^22.15.21",
-    "@typescript-eslint/eslint-plugin": "^8.31.0",
-    "@typescript-eslint/parser": "^8.31.0",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
     "concurrently": "^9.1.2",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",

@@ -1,24 +1,14 @@
 import { useCallback, useMemo } from 'react';
-import { default as Locale, validateLocale } from '../../constants/locale.js';
-import type Params from './types/params.js';
+import { default as Locale } from '../../constants/locale.js';
 import usePathname from '../../hooks/use-pathname.js';
 import useNavigation from '../../hooks/use-navigation.js';
-
-interface Props {
-  readonly params: Params;
-}
 
 interface State {
   readonly locale: Locale;
   readonly localeContextValue: readonly [Locale, (locale: Locale) => void];
 }
 
-const mapParamsToLocale = ({ locale: localeParam }: Readonly<Params>): Locale =>
-  validateLocale(localeParam);
-
-export default function useLocaleLayout({ params }: Props): State {
-  const locale: Locale = mapParamsToLocale(params);
-
+export default function useLocaleLayout(locale: Locale): State {
   // Contexts
   const navigate = useNavigation();
   const pathname: string = usePathname();

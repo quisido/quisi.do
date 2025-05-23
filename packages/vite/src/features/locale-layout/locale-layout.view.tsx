@@ -1,23 +1,23 @@
 import { I18nProvider } from 'lazy-i18n';
-import { type ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import { default as Locale } from '../../constants/locale.js';
 import TRANSLATIONS from '../../constants/translations.js';
 import { LocaleProvider } from '../../contexts/locale.js';
-import type NextLayoutProps from '../../types/next-layout-props.js';
 import useLocaleLayout from './locale-layout.hook.js';
-import type Params from './types/params.js';
 
 /**
  * The `[locale]` layout wraps all content in <body>.
  */
 
+interface Props {
+  readonly locale: Locale;
+}
+
 export default function LocaleLayout({
   children,
-  params,
-}: Readonly<NextLayoutProps<Params>>): ReactElement {
-  const { locale, localeContextValue } = useLocaleLayout({
-    params,
-  });
+  locale,
+}: Readonly<PropsWithChildren<Props>>): ReactElement {
+  const { localeContextValue } = useLocaleLayout(locale);
 
   return (
     <LocaleProvider value={localeContextValue}>

@@ -11,7 +11,7 @@ import Effects from './features/effects.jsx';
 
 ROOT.render(
   <StrictMode>
-    <LocaleLayout params={{ locale: Locale.English }}>
+    <LocaleLayout locale={Locale.English}>
       <ContextProviders>
         <Effects />
         <Notifications />
