@@ -1,3 +1,4 @@
+import basicSsl from '@vitejs/plugin-basic-ssl';
 import ddPlugin from 'dd-trace/esbuild';
 import buildTSConfig from './tsconfig.build.json';
 import {
@@ -20,7 +21,6 @@ const USER_CONFIG: UserConfig = {
   base: '/',
   envDir: '../',
   esbuild: ESBUILD_OPTIONS,
-  plugins: [ddPlugin, react()],
   publicDir: '../public/',
   root: './src/',
 
@@ -57,6 +57,7 @@ const USER_CONFIG: UserConfig = {
 
 const DEVELOPMENT_USER_CONFIG: UserConfig = {
   ...USER_CONFIG,
+  plugins: [basicSsl(), ddPlugin, react()],
 
   css: {
     preprocessorMaxWorkers: true,
@@ -80,6 +81,7 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
 
 const PRODUCTION_USER_CONFIG: UserConfig = {
   ...USER_CONFIG,
+  plugins: [ddPlugin, react()],
 
   build: {
     emptyOutDir: true,

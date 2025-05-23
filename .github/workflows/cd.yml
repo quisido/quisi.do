@@ -287,6 +287,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
+    permissions:
+      id-token: write
     services:
       datadog-agent:
         image: datadog/agent:latest
@@ -314,6 +316,7 @@ jobs:
       - name: Publish
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
         run: >
           npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH_TOKEN;
           npm run publish;
@@ -395,6 +398,7 @@ jobs:
       DD_ENV: ci
     permissions:
       contents: read
+      id-token: write
       packages: write
     services:
       datadog-agent:
@@ -425,12 +429,13 @@ jobs:
       - name: Publish
         env:
           NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
         run: >
           npm config set npmAuthToken $NPM_AUTH_TOKEN;
           npm config set \
             npmScopes.${{ github.repository_owner }}.npmPublishRegistry \
             'https://npm.pkg.github.com';
-          npm publish;
+          npm run publish;
 
   wrangler-deploy-authn:
     name: Wrangler deploy (Authentication)

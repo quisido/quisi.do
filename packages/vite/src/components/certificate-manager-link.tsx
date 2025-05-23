@@ -24,7 +24,7 @@ export default function CertificateManagerLink({
      *   </Link>
      * );
      */
-    return <code>edge://settings/?search=Manage%20certificates</code>;
+    return <code>edge://certificate-manager/</code>;
   }
 
   return (
