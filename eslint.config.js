@@ -1,4 +1,4 @@
-import configs from '@quisido/eslint-config';
+import configs, { disableRulesForFiles } from '@quisido/eslint-config';
 
 /** @type {readonly import('eslint').Linter.Config[]} */
 export default [
@@ -7,4 +7,8 @@ export default [
   {
     ignores: ['packages/**'],
   },
+
+  ...disableRulesForFiles({
+    'no-console': ['scripts/publish.ts'],
+  }),
 ];

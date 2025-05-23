@@ -126,6 +126,7 @@
     "@types/trusted-types": "^2.0.7",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
+    "@vitejs/plugin-basic-ssl": "^2.0.0",
     "@vitejs/plugin-react": "^4.5.0",
     "@vitest/coverage-istanbul": "^3.1.4",
     "autoprefixer": "^10.4.21",
