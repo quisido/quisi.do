@@ -114,6 +114,7 @@
     ".git/",
     ".idea/",
     ".yarn/",
+    "build/",
     "coverage/",
     "node_modules/",
     "packages/",

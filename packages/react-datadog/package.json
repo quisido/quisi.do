@@ -1,6 +1,6 @@
 {
   "name": "react-datadog",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": "quisi.do <react-datadog@quisi.do>",
   "description": "React wrapper for instantiating Datadog",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/react-datadog#readme",
@@ -49,10 +49,6 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.1",
-    "@babel/core": "^7.27.1",
-    "@babel/preset-env": "^7.27.2",
-    "@babel/preset-react": "^7.27.1",
-    "@babel/preset-typescript": "^7.27.1",
     "@datadog/browser-rum": "^6.7.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "^1.1.6",
@@ -62,9 +58,7 @@
     "@types/react": "^19.1.5",
     "@vitejs/plugin-react": "^4.5.0",
     "@vitest/coverage-istanbul": "^3.1.4",
-    "babel-plugin-react-compiler": "^19.1.0-rc.2",
-    "babel-plugin-replace-import-extension": "^1.1.5",
-    "cjs-ts": "^1.0.2",
+    "cjs-ts": "^2.0.0",
     "concurrently": "^9.1.2",
     "eslint": "^9.27.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -83,7 +77,7 @@
     "vitest": "^3.1.4"
   },
   "peerDependencies": {
-    "@datadog/browser-rum": "^6.7.0",
+    "@datadog/browser-rum": ">=6.7.0",
     "react": ">=17.0.0"
   }
 }

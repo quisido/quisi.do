@@ -1,6 +1,6 @@
 {
   "name": "@quisido/vitest-config",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "quisi.do <vitest-config@quisi.do>",
   "description": "vitest configurations for quisi.do",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/vitest-config#readme",
@@ -51,15 +51,10 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.1",
-    "@babel/core": "^7.27.1",
-    "@babel/preset-env": "^7.27.2",
-    "@babel/preset-react": "^7.27.1",
-    "@babel/preset-typescript": "^7.27.1",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@types/node": "^22.15.21",
     "@vitest/coverage-istanbul": "^3.1.4",
-    "babel-plugin-replace-import-extension": "^1.1.5",
-    "cjs-ts": "^1.0.2",
+    "cjs-ts": "^2.0.0",
     "concurrently": "^9.1.2",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",
@@ -74,8 +69,8 @@
     "vitest": "^3.1.4"
   },
   "peerDependencies": {
-    "eslint": "^9.0.0",
-    "vite": "^6.0.0",
-    "vitest": "^3.0.0"
+    "eslint": ">=9.0.0",
+    "vite": ">=6.0.0",
+    "vitest": ">=3.0.0"
   }
 }

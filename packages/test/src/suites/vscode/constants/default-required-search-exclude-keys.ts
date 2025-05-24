@@ -1,7 +1,6 @@
 const DEFAULT_REQUIRED_SEARCH_EXCLUDE_KEYS: readonly string[] = [
   '**/.git/',
   '**/.idea/',
-  '**/.next/',
   '**/.nyc_output/',
   '**/build/',
   '**/coverage/',
@@ -10,7 +9,6 @@ const DEFAULT_REQUIRED_SEARCH_EXCLUDE_KEYS: readonly string[] = [
   '**/cypress/screenshots/',
   '**/cypress/videos/',
   '**/dist/',
-  '**/jest/',
   '**/node_modules/',
   '**/sarif/',
   '**/.attach_pid*',
