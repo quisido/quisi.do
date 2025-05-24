@@ -41,10 +41,6 @@
     "fmrs": "^2.0.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.27.1",
-    "@babel/preset-env": "^7.27.2",
-    "@babel/preset-react": "^7.27.1",
-    "@babel/preset-typescript": "^7.27.1",
     "@cloudflare/workers-types": "^4.20250523.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "^1.1.6",
@@ -52,8 +48,7 @@
     "@quisido/worker-test": "^1.0.1",
     "@types/eslint": "^9.6.1",
     "@vitest/coverage-istanbul": "^3.1.4",
-    "babel-plugin-replace-import-extension": "^1.1.5",
-    "cjs-ts": "^1.0.2",
+    "cjs-ts": "^2.0.0",
     "cloudflare-test-utils": "^1.0.2",
     "concurrently": "^9.1.2",
     "eslint": "^9.27.0",

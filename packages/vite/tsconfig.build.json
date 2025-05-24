@@ -17,7 +17,6 @@
     "./src/*.test.ts",
     "./src/*.test.tsx",
     "./src/test/",
-    "./out/",
     "./.*.json",
     "./*.config.*",
     "./lighthouse.*",

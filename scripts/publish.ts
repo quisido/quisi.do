@@ -26,7 +26,7 @@ for (const publicWorkspaceDirectory of publicWorkspaceDirectories) {
 
     // Tolerate republish
     if (err.message.includes(REPUBLISH_ERROR_MESSAGE)) {
-      console.log('Tolerating republish');
+      console.log(`Tolerating republish for ${publicWorkspaceDirectory}`);
       continue;
     }
 

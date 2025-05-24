@@ -55,7 +55,7 @@ export default function AuthenticationFeature({
         id,
       };
     });
-  }, []);
+  }, [requestEvent]);
 
   return (
     <AuthenticationProvider value={state}>{children}</AuthenticationProvider>

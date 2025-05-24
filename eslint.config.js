@@ -8,7 +8,21 @@ export default [
     ignores: ['packages/**'],
   },
 
+  {
+    rules: {
+      'max-statements': 'off',
+    },
+  },
+
   ...disableRulesForFiles({
-    'no-console': ['scripts/publish.ts'],
+    '@typescript-eslint/only-throw-error': [
+      'scripts/utils/npm-exec-workspace.ts',
+    ],
+
+    'no-console': [
+      'scripts/publish.ts',
+      'scripts/utils/npm-exec-workspace.ts',
+      'scripts/utils/spy-on-console.ts',
+    ],
   }),
 ];

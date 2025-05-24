@@ -1,21 +1,20 @@
 import { type Config } from 'lighthouse';
 
-const lightghouseConfig: Config = {
+export default {
   extends: 'lighthouse:default',
   settings: {
-    /*
-     * BudgetPath: 'lighthouse.budget.json',
-     * chromeFlags: "--headless",
+    /**
+     * CLI settings missing from the `Config` type definition.
+     * budgetPath: 'lighthouse.budget.json',
+     * chromeFlags: '--headless',
      * enableErrorReporting: true,
-     */
-    locale: 'en-US',
-    /*
-     * Output: ['html', 'json'],
-     * outputPath: "lighthouse",
-     * preset: "experimental",
+     * output: ['html', 'json'],
+     * outputPath: 'lighthouse',
+     * preset: 'experimental',
      * saveAssets: true,
      * verbose: false,
      */
+    locale: 'en-US',
 
     blockedUrlPatterns: [
       'https://ajax.cloudflare.com/*',
@@ -86,6 +85,4 @@ const lightghouseConfig: Config = {
       'https://localhost:9778/*',
     ],
   },
-};
-
-export default lightghouseConfig;
+} satisfies Config;

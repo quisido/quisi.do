@@ -1,6 +1,6 @@
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import ddPlugin from 'dd-trace/esbuild';
-import buildTSConfig from './tsconfig.build.json';
+import buildTSConfig from './tsconfig.build.json' with { type: 'json' };
 import {
   defineConfig,
   type ConfigEnv,
