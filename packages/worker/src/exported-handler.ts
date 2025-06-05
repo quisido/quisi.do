@@ -39,7 +39,7 @@ export const ExportedHandler = class QuisidoExportedHandler<
   public readonly trace?: ExportedHandlerTraceHandler<Env>;
 
   public constructor({
-    console: consoleParam = console,
+    console: consoleOption = console,
     fetch: fetchParam = fetch,
     FetchHandler,
     now,
@@ -57,7 +57,7 @@ export const ExportedHandler = class QuisidoExportedHandler<
         ctx: ExecutionContext,
       ): Response | Promise<Response> => {
         const handleFetchError = (err: unknown): Response => {
-          consoleParam.error(err);
+          consoleOption.error(err);
           return new InternalServerErrorResponse();
         };
 
@@ -82,7 +82,7 @@ export const ExportedHandler = class QuisidoExportedHandler<
           }
 
           const response: Promise<Response> | Response = fetchHandler.run(
-            { console: consoleParam, env, fetch: fetchParam, now },
+            { console: consoleOption, env, fetch: fetchParam, now },
             request,
             env,
             ctx,

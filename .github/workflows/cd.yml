@@ -431,7 +431,7 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
         run: >
-          npm config set npmAuthToken $NPM_AUTH_TOKEN;
+          npm config set "//npm.pkg.github.com/:_authToken" $NPM_AUTH_TOKEN;
           npm config set \
             npmScopes.${{ github.repository_owner }}.npmPublishRegistry \
             'https://npm.pkg.github.com';

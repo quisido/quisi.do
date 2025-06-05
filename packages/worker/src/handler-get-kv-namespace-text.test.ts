@@ -75,10 +75,13 @@ describe('Handler', (): void => {
     );
 
     expect(TEST_ERROR_HANDLER).toHaveBeenCalledWith(testError);
-    expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(MetricName.KVGetError, {
-      endTime: EXPECT_ANY_NUMBER,
-      env: 'MY_NAMESPACE',
-      startTime: EXPECT_ANY_NUMBER,
-    });
+    expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(
+      MetricName.KVNamespaceGetError,
+      {
+        endTime: EXPECT_ANY_NUMBER,
+        env: 'MY_NAMESPACE',
+        startTime: EXPECT_ANY_NUMBER,
+      },
+    );
   });
 });

@@ -12,356 +12,337 @@ export default function handleMetric(
   this: Handler,
   name: string,
   dimensions: MetricDimensions,
-  isPublic?: boolean,
 ): void {
-  if (typeof isPublic === 'undefined') {
-    if (isWorkerMetricName(name)) {
-      const emitInvalidWorkerMetric = (): void => {
-        handleMetric.call(
-          this,
-          MetricName.InvalidWorkerMetric,
-          { dimensions: JSON.stringify(dimensions), name },
-          false,
-        );
-      };
+  const emitPublicly = (subdimensions: MetricDimensions): void => {
+    const subdimensionsStr: string = mapDimensionsToString(subdimensions);
+    this.log('------------------------');
+    this.log('Public metric:', name);
+    this.log(subdimensionsStr);
+    this.writeMetricDataPoint('PUBLIC_DATASET', name, subdimensions);
+  };
 
-      const emitPrivateMetric = (
-        newDimensions: Record<
-          number | string | symbol,
-          boolean | number | string
-        >,
-      ): void => {
-        handleMetric.call(this, name, newDimensions, false);
-      };
+  const emitPrivately = (subdimensions: MetricDimensions): void => {
+    const subdimensionsStr: string = mapDimensionsToString(subdimensions);
+    this.log('------------------------');
+    this.log('Private metric:', name);
+    this.log(subdimensionsStr);
+    this.writeMetricDataPoint('PRIVATE_DATASET', name, subdimensions);
+  };
 
-      const emitPublicMetric = (
-        newDimensions: Record<
-          number | string | symbol,
-          boolean | number | string
-        >,
-      ): void => {
-        handleMetric.call(this, name, newDimensions, true);
-      };
+  if (isWorkerMetricName(name)) {
+    const emitInvalidWorkerMetric = (): void => {
+      handleMetric.call(this, MetricName.InvalidWorkerMetric, {
+        dimensions: JSON.stringify(dimensions),
+        name,
+      });
+    };
 
-      switch (name) {
-        case WorkerMetricName.D1All: {
-          const {
-            changedDb,
-            changes,
-            duration,
-            endTime,
-            env,
-            lastRowId,
-            query,
-            results,
-            rowsRead,
-            rowsWritten,
-            sizeAfter,
-            startTime,
-          } = dimensions;
-          if (
-            typeof changedDb !== 'boolean' ||
-            typeof changes !== 'number' ||
-            typeof duration !== 'number' ||
-            typeof endTime !== 'number' ||
-            typeof env !== 'string' ||
-            typeof lastRowId !== 'number' ||
-            typeof query !== 'string' ||
-            typeof results !== 'number' ||
-            typeof rowsRead !== 'number' ||
-            typeof rowsWritten !== 'number' ||
-            typeof sizeAfter !== 'number' ||
-            typeof startTime !== 'number'
-          ) {
-            emitInvalidWorkerMetric();
-            return;
-          }
-
-          emitPrivateMetric({
-            changedDb,
-            changes,
-            duration,
-            endTime,
-            env,
-            lastRowId,
-            query,
-            results,
-            rowsRead,
-            rowsWritten,
-            sizeAfter,
-            startTime,
-          });
-
-          emitPublicMetric({
-            changedDb,
-            changes,
-            duration,
-            endTime,
-            env,
-            results,
-            rowsRead,
-            rowsWritten,
-            sizeAfter,
-            startTime,
-          });
-          return;
-        }
-        case WorkerMetricName.D1Error: {
-          const { endTime, env, query, startTime } = dimensions;
-          if (
-            typeof endTime !== 'number' ||
-            typeof env !== 'string' ||
-            typeof query !== 'string' ||
-            typeof startTime !== 'number'
-          ) {
-            emitInvalidWorkerMetric();
-            return;
-          }
-
-          emitPrivateMetric({
-            endTime,
-            env,
-            query,
-            startTime,
-          });
-
-          emitPublicMetric({
-            endTime,
-            env,
-            startTime,
-          });
+    switch (name) {
+      case WorkerMetricName.D1PreparedStatementAll: {
+        const {
+          changedDb,
+          changes,
+          duration,
+          endTime,
+          env,
+          lastRowId,
+          query,
+          results,
+          rowsRead,
+          rowsWritten,
+          sizeAfter,
+          startTime,
+        } = dimensions;
+        if (
+          typeof changedDb !== 'boolean' ||
+          typeof changes !== 'number' ||
+          typeof duration !== 'number' ||
+          typeof endTime !== 'number' ||
+          typeof env !== 'string' ||
+          typeof lastRowId !== 'number' ||
+          typeof query !== 'string' ||
+          typeof results !== 'number' ||
+          typeof rowsRead !== 'number' ||
+          typeof rowsWritten !== 'number' ||
+          typeof sizeAfter !== 'number' ||
+          typeof startTime !== 'number'
+        ) {
+          emitInvalidWorkerMetric();
           return;
         }
 
-        case WorkerMetricName.D1Run: {
-          const {
-            changedDb,
-            changes,
-            duration,
-            endTime,
-            env,
-            lastRowId,
-            query,
-            rowsRead,
-            rowsWritten,
-            sizeAfter,
-            startTime,
-          } = dimensions;
-          if (
-            typeof changedDb !== 'boolean' ||
-            typeof changes !== 'number' ||
-            typeof duration !== 'number' ||
-            typeof endTime !== 'number' ||
-            typeof env !== 'string' ||
-            typeof lastRowId !== 'number' ||
-            typeof query !== 'string' ||
-            typeof rowsRead !== 'number' ||
-            typeof rowsWritten !== 'number' ||
-            typeof sizeAfter !== 'number' ||
-            typeof startTime !== 'number'
-          ) {
-            emitInvalidWorkerMetric();
-            return;
-          }
+        emitPrivately({
+          changedDb,
+          changes,
+          duration,
+          endTime,
+          env,
+          lastRowId,
+          query,
+          results,
+          rowsRead,
+          rowsWritten,
+          sizeAfter,
+          startTime,
+        });
 
-          emitPrivateMetric({
-            changedDb,
-            changes,
-            duration,
-            endTime,
-            env,
-            lastRowId,
-            query,
-            rowsRead,
-            rowsWritten,
-            sizeAfter,
-            startTime,
-          });
+        emitPublicly({
+          changedDb,
+          changes,
+          duration,
+          endTime,
+          env,
+          results,
+          rowsRead,
+          rowsWritten,
+          sizeAfter,
+          startTime,
+        });
+        return;
+      }
 
-          emitPublicMetric({
-            changedDb,
-            changes,
-            duration,
-            endTime,
-            env,
-            rowsRead,
-            rowsWritten,
-            sizeAfter,
-            startTime,
-          });
+      case WorkerMetricName.D1PreparedStatementAllError:
+      case WorkerMetricName.D1PreparedStatementRunError: {
+        const { endTime, env, query, startTime } = dimensions;
+        if (
+          typeof endTime !== 'number' ||
+          typeof env !== 'string' ||
+          typeof query !== 'string' ||
+          typeof startTime !== 'number'
+        ) {
+          emitInvalidWorkerMetric();
           return;
         }
 
-        case WorkerMetricName.Fetch: {
-          const { endTime, startTime, url } = dimensions;
-          if (
-            typeof endTime !== 'number' ||
-            typeof startTime !== 'number' ||
-            typeof url !== 'string'
-          ) {
-            emitInvalidWorkerMetric();
-            return;
-          }
+        emitPrivately({
+          endTime,
+          env,
+          query,
+          startTime,
+        });
 
-          try {
-            const { origin } = new URL(url);
-            emitPrivateMetric({ endTime, startTime, url });
-            emitPublicMetric({ endTime, origin, startTime });
-            return;
-          } catch (_err: unknown) {
-            emitInvalidWorkerMetric();
-            return;
-          }
-        }
+        emitPublicly({
+          endTime,
+          env,
+          startTime,
+        });
+        return;
+      }
 
-        case WorkerMetricName.InvalidBinding: {
-          const { key, type, value } = dimensions;
-          if (
-            typeof key !== 'string' ||
-            typeof type !== 'string' ||
-            typeof value !== 'string'
-          ) {
-            emitInvalidWorkerMetric();
-            return;
-          }
-
-          emitPrivateMetric({ key, value });
-          emitPublicMetric({ key, type });
+      case WorkerMetricName.D1PreparedStatementRun: {
+        const {
+          changedDb,
+          changes,
+          duration,
+          endTime,
+          env,
+          lastRowId,
+          query,
+          rowsRead,
+          rowsWritten,
+          sizeAfter,
+          startTime,
+        } = dimensions;
+        if (
+          typeof changedDb !== 'boolean' ||
+          typeof changes !== 'number' ||
+          typeof duration !== 'number' ||
+          typeof endTime !== 'number' ||
+          typeof env !== 'string' ||
+          typeof lastRowId !== 'number' ||
+          typeof query !== 'string' ||
+          typeof rowsRead !== 'number' ||
+          typeof rowsWritten !== 'number' ||
+          typeof sizeAfter !== 'number' ||
+          typeof startTime !== 'number'
+        ) {
+          emitInvalidWorkerMetric();
           return;
         }
 
-        case WorkerMetricName.KVGet: {
-          const { endTime, key, namespace, startTime } = dimensions;
-          if (
-            typeof endTime !== 'number' ||
-            typeof key !== 'string' ||
-            typeof namespace !== 'string' ||
-            typeof startTime !== 'number'
-          ) {
-            emitInvalidWorkerMetric();
-            return;
-          }
+        emitPrivately({
+          changedDb,
+          changes,
+          duration,
+          endTime,
+          env,
+          lastRowId,
+          query,
+          rowsRead,
+          rowsWritten,
+          sizeAfter,
+          startTime,
+        });
 
-          emitPrivateMetric({ endTime, key, namespace, startTime });
-          emitPublicMetric({ endTime, namespace, startTime });
+        emitPublicly({
+          changedDb,
+          changes,
+          duration,
+          endTime,
+          env,
+          rowsRead,
+          rowsWritten,
+          sizeAfter,
+          startTime,
+        });
+        return;
+      }
+
+      case WorkerMetricName.Fetch: {
+        const { endTime, startTime, url } = dimensions;
+        if (
+          typeof endTime !== 'number' ||
+          typeof startTime !== 'number' ||
+          typeof url !== 'string'
+        ) {
+          emitInvalidWorkerMetric();
           return;
         }
 
-        case WorkerMetricName.KVGetError: {
-          const { endTime, env, startTime } = dimensions;
-          if (
-            typeof endTime !== 'number' ||
-            typeof env !== 'string' ||
-            typeof startTime !== 'number'
-          ) {
-            emitInvalidWorkerMetric();
-            return;
-          }
-
-          emitPublicMetric({ endTime, env, startTime });
+        try {
+          const { origin } = new URL(url);
+          emitPrivately({ endTime, startTime, url });
+          emitPublicly({ endTime, origin, startTime });
           return;
-        }
-
-        case WorkerMetricName.KVPut: {
-          const { endTime, env, startTime } = dimensions;
-          if (
-            typeof endTime !== 'number' ||
-            typeof env !== 'string' ||
-            typeof startTime !== 'number'
-          ) {
-            emitInvalidWorkerMetric();
-            return;
-          }
-
-          emitPublicMetric({ endTime, env, startTime });
-          return;
-        }
-
-        case WorkerMetricName.KVPutError: {
-          const { endTime, env, startTime } = dimensions;
-          if (
-            typeof endTime !== 'number' ||
-            typeof env !== 'string' ||
-            typeof startTime !== 'number'
-          ) {
-            emitInvalidWorkerMetric();
-            return;
-          }
-
-          emitPublicMetric({ endTime, env, startTime });
-          return;
-        }
-
-        case WorkerMetricName.R2Put: {
-          const { endTime, env, startTime } = dimensions;
-          if (
-            typeof endTime !== 'number' ||
-            typeof env !== 'string' ||
-            typeof startTime !== 'number'
-          ) {
-            emitInvalidWorkerMetric();
-            return;
-          }
-
-          emitPublicMetric({ endTime, env, startTime });
-          return;
-        }
-
-        case WorkerMetricName.R2PutError: {
-          const { endTime, env, startTime } = dimensions;
-          if (
-            typeof endTime !== 'number' ||
-            typeof env !== 'string' ||
-            typeof startTime !== 'number'
-          ) {
-            emitInvalidWorkerMetric();
-            return;
-          }
-
-          emitPublicMetric({ endTime, env, startTime });
+        } catch (_err: unknown) {
+          emitInvalidWorkerMetric();
           return;
         }
       }
-    }
 
-    if (!Object.hasOwn(dimensions, PUBLIC)) {
-      this.logError(
-        new Error('Attempted to emit a metric without explicit accessibility.'),
-      );
-      return;
-    }
+      case WorkerMetricName.InvalidBinding: {
+        const { key, type, value } = dimensions;
+        if (
+          typeof key !== 'string' ||
+          typeof type !== 'string' ||
+          typeof value !== 'string'
+        ) {
+          emitInvalidWorkerMetric();
+          return;
+        }
 
-    const { [PUBLIC]: newIsPublic, ...newDimensions } = dimensions;
-    if (typeof newIsPublic !== 'boolean') {
-      this.logError(
-        new Error('Attempted to emit a metric with invalid accessibility.'),
-      );
-      return;
-    }
+        emitPrivately({ key, value });
+        emitPublicly({ key, type });
+        return;
+      }
 
-    handleMetric.call(this, name, newDimensions, newIsPublic);
+      case WorkerMetricName.KVNamespaceGet: {
+        const { endTime, key, namespace, startTime } = dimensions;
+        if (
+          typeof endTime !== 'number' ||
+          typeof key !== 'string' ||
+          typeof namespace !== 'string' ||
+          typeof startTime !== 'number'
+        ) {
+          emitInvalidWorkerMetric();
+          return;
+        }
+
+        emitPrivately({ endTime, key, namespace, startTime });
+        emitPublicly({ endTime, namespace, startTime });
+        return;
+      }
+
+      case WorkerMetricName.KVNamespaceGetError: {
+        const { endTime, env, startTime } = dimensions;
+        if (
+          typeof endTime !== 'number' ||
+          typeof env !== 'string' ||
+          typeof startTime !== 'number'
+        ) {
+          emitInvalidWorkerMetric();
+          return;
+        }
+
+        emitPublicly({ endTime, env, startTime });
+        return;
+      }
+
+      case WorkerMetricName.KVNamespacePut: {
+        const { endTime, env, startTime } = dimensions;
+        if (
+          typeof endTime !== 'number' ||
+          typeof env !== 'string' ||
+          typeof startTime !== 'number'
+        ) {
+          emitInvalidWorkerMetric();
+          return;
+        }
+
+        emitPublicly({ endTime, env, startTime });
+        return;
+      }
+
+      case WorkerMetricName.KVNamespacePutError: {
+        const { endTime, env, startTime } = dimensions;
+        if (
+          typeof endTime !== 'number' ||
+          typeof env !== 'string' ||
+          typeof startTime !== 'number'
+        ) {
+          emitInvalidWorkerMetric();
+          return;
+        }
+
+        emitPublicly({ endTime, env, startTime });
+        return;
+      }
+
+      case WorkerMetricName.R2BucketPut: {
+        const { endTime, env, startTime } = dimensions;
+        if (
+          typeof endTime !== 'number' ||
+          typeof env !== 'string' ||
+          typeof startTime !== 'number'
+        ) {
+          emitInvalidWorkerMetric();
+          return;
+        }
+
+        emitPublicly({ endTime, env, startTime });
+        return;
+      }
+
+      case WorkerMetricName.R2BucketPutError: {
+        const { endTime, env, startTime } = dimensions;
+        if (
+          typeof endTime !== 'number' ||
+          typeof env !== 'string' ||
+          typeof startTime !== 'number'
+        ) {
+          emitInvalidWorkerMetric();
+          return;
+        }
+
+        emitPublicly({ endTime, env, startTime });
+        return;
+      }
+    }
+  }
+
+  // Custom metrics
+  if (!Object.hasOwn(dimensions, PUBLIC)) {
+    this.logError(
+      new Error('Attempted to emit a metric without explicit accessibility.', {
+        cause: { dimensions, name },
+      }),
+    );
     return;
   }
 
-  // Public metric
-  const dimensionsStr: string = mapDimensionsToString(dimensions);
+  const { [PUBLIC]: isPublic, ...newDimensions } = dimensions;
+  if (typeof isPublic !== 'boolean') {
+    this.logError(
+      new Error('Attempted to emit a metric with invalid accessibility.', {
+        cause: { dimensions, name },
+      }),
+    );
+    return;
+  }
+
   if (isPublic) {
-    if (dimensionsStr === '{}') {
-      this.log('Public metric:', name);
-    } else {
-      this.log('Public metric:', name, dimensionsStr);
-    }
-
-    this.writeMetricDataPoint('PUBLIC_DATASET', name, dimensions);
-    return;
-  }
-
-  // Private metric
-  if (dimensionsStr === '{}') {
-    this.log('Private metric:', name);
+    emitPublicly(newDimensions);
   } else {
-    this.log('Private metric:', name, dimensionsStr);
+    emitPrivately(newDimensions);
   }
-
-  this.writeMetricDataPoint('PRIVATE_DATASET', name, dimensions);
 }

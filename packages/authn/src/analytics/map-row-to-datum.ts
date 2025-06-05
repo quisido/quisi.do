@@ -4,6 +4,7 @@ import { type Datum } from './datum.js';
 import { findEmptyString } from './is-empty-string.js';
 import { findZero } from './is-zero.js';
 
+const ARRAY_INDEX_OFFSET = 1;
 const FIRST = 0;
 
 export default function mapRowToDatum(row: AnalyticsEngineRow): Datum {
@@ -56,8 +57,8 @@ export default function mapRowToDatum(row: AnalyticsEngineRow): Datum {
   const lastBlobIndex: number = blobs.findLastIndex(not(findEmptyString));
   const lastDoubleIndex: number = doubles.findLastIndex(not(findZero));
   return {
-    numbers: doubles.slice(FIRST, lastDoubleIndex),
-    strings: blobs.slice(FIRST, lastBlobIndex),
+    numbers: doubles.slice(FIRST, lastDoubleIndex + ARRAY_INDEX_OFFSET),
+    strings: blobs.slice(FIRST, lastBlobIndex + ARRAY_INDEX_OFFSET),
     timestamp: new Date(row.timestamp).getTime(),
   };
 }

@@ -57,20 +57,14 @@ export default class AuthnFetchHandler extends FetchHandler {
     name: MetricName,
     dimensions?: MetricDimensions,
   ): void {
-    this.emitMetric(name, {
-      ...dimensions,
-      [PUBLIC]: false,
-    });
+    this.emitMetric(name, { ...dimensions, [PUBLIC]: false });
   }
 
   public emitPublicMetric(
     name: MetricName,
     dimensions?: MetricDimensions,
   ): void {
-    this.emitMetric(name, {
-      ...dimensions,
-      [PUBLIC]: true,
-    });
+    this.emitMetric(name, { ...dimensions, [PUBLIC]: true });
   }
 
   public get environmentName(): EnvironmentName {
@@ -124,9 +118,7 @@ export default class AuthnFetchHandler extends FetchHandler {
       authnId,
       userId,
       MILLISECONDS_PER_DAY,
-      {
-        now: this.now.bind(this),
-      },
+      { now: this.now.bind(this) },
     );
   }
 
@@ -134,9 +126,7 @@ export default class AuthnFetchHandler extends FetchHandler {
     return AuthnFetchHandler.#OAUTH_IP_THROTTLER.run(
       this.ip,
       OAUTH_IP_THROTTLE_LIMIT,
-      {
-        now: this.now.bind(this),
-      },
+      { now: this.now.bind(this) },
     );
   }
 
@@ -144,9 +134,7 @@ export default class AuthnFetchHandler extends FetchHandler {
     return AuthnFetchHandler.#WHOAMI_IP_THROTTLER.run(
       this.ip,
       WHOAMI_IP_THROTTLE_LIMIT,
-      {
-        now: this.now.bind(this),
-      },
+      { now: this.now.bind(this) },
     );
   }
 
@@ -173,12 +161,8 @@ export default class AuthnFetchHandler extends FetchHandler {
       `provider-${provider.toString()}/${id}.json`,
       JSON.stringify(response),
       {
-        customMetadata: {
-          timestamp: this.now().toString(),
-        },
-        httpMetadata: {
-          contentType: 'application/json',
-        },
+        customMetadata: { timestamp: this.now().toString() },
+        httpMetadata: { contentType: 'application/json' },
       },
     );
 

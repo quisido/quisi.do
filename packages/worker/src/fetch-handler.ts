@@ -16,12 +16,11 @@ export default class FetchHandler<
   CfHostMetadata = unknown,
 > extends Handler<'fetch', Env, QueueHandlerMessage, CfHostMetadata> {
   #ctx: ExecutionContext | undefined;
+  readonly #traceId: string = createTraceId();
 
   #request:
     | Request<CfHostMetadata, IncomingRequestCfProperties<CfHostMetadata>>
     | undefined;
-
-  #traceId: string = createTraceId();
 
   public constructor(
     handleFetch: (

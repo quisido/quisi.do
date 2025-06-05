@@ -84,6 +84,7 @@ export default class Handler<
   #fetch: Fetcher['fetch'] | undefined;
   #flushed = false;
   #now: () => number = Date.now.bind(Date);
+  readonly #state = new Map<string, unknown>();
 
   public readonly run: (
     /**
@@ -293,7 +294,7 @@ export default class Handler<
         .prepare(query)
         .bind(...bindings)
         .run();
-      this.emitMetric(MetricName.D1Run, {
+      this.emitMetric(MetricName.D1PreparedStatementRun, {
         changedDb,
         changes,
         duration,
@@ -320,7 +321,7 @@ export default class Handler<
       const error: Error = mapToError(err);
       this.logError(error);
 
-      this.emitMetric(MetricName.D1Error, {
+      this.emitMetric(MetricName.D1PreparedStatementRunError, {
         endTime: this.now(),
         env,
         query,
@@ -356,7 +357,7 @@ export default class Handler<
         .bind(...values)
         .all();
 
-      this.emitMetric(MetricName.D1All, {
+      this.emitMetric(MetricName.D1PreparedStatementAll, {
         changedDb,
         changes,
         duration,
@@ -385,7 +386,7 @@ export default class Handler<
       const error: Error = mapToError(err);
       this.logError(error);
 
-      this.emitMetric(MetricName.D1Error, {
+      this.emitMetric(MetricName.D1PreparedStatementAllError, {
         endTime: this.now(),
         env,
         query,
@@ -409,9 +410,10 @@ export default class Handler<
 
     try {
       const value: string | null = await namespace.get(key, 'text');
-      this.emitMetric(MetricName.KVGet, {
+      this.emitMetric(MetricName.KVNamespaceGet, {
         endTime: this.now(),
-        env,
+        key,
+        namespace: env,
         startTime,
       });
 
@@ -419,9 +421,10 @@ export default class Handler<
     } catch (err: unknown) {
       const error: Error = mapToError(err);
       this.logError(error);
-      this.emitMetric(MetricName.KVGetError, {
+      this.emitMetric(MetricName.KVNamespaceGetError, {
         endTime: this.now(),
-        env,
+        key,
+        namespace: env,
         startTime,
       });
 
@@ -431,6 +434,10 @@ export default class Handler<
 
   public getR2Bucket(name: string): R2Bucket {
     return this.validateBinding(name, isR2Bucket);
+  }
+
+  public getState(key: string, value: unknown): void {
+    this.#state.set(key, value);
   }
 
   public log(...messages: readonly string[]): void {
@@ -510,7 +517,7 @@ export default class Handler<
     const startTime: number = this.now();
     try {
       await namespace.put(...params);
-      this.emitMetric(MetricName.KVPut, {
+      this.emitMetric(MetricName.KVNamespacePut, {
         endTime: this.now(),
         env,
         startTime,
@@ -518,7 +525,7 @@ export default class Handler<
     } catch (err: unknown) {
       const error: Error = mapToError(err);
       this.logError(error);
-      this.emitMetric(MetricName.KVPutError, {
+      this.emitMetric(MetricName.KVNamespacePutError, {
         endTime: this.now(),
         env,
         startTime,
@@ -534,7 +541,7 @@ export default class Handler<
     const startTime: number = this.now();
     try {
       await bucket.put(...params);
-      this.emitMetric(MetricName.R2Put, {
+      this.emitMetric(MetricName.R2BucketPut, {
         endTime: this.now(),
         env,
         startTime,
@@ -542,12 +549,16 @@ export default class Handler<
     } catch (err: unknown) {
       const error: Error = mapToError(err);
       this.logError(error);
-      this.emitMetric(MetricName.R2PutError, {
+      this.emitMetric(MetricName.R2BucketPutError, {
         endTime: this.now(),
         env,
         startTime,
       });
     }
+  }
+
+  public setState(key: string, value: unknown): void {
+    this.#state.set(key, value);
   }
 
   public validateBinding<T>(

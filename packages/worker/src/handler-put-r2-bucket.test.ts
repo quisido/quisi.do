@@ -39,7 +39,7 @@ describe('Handler', (): void => {
     );
 
     testBucket.expectToHavePut('test.json', '{}');
-    expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(MetricName.R2Put, {
+    expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(MetricName.R2BucketPut, {
       endTime: EXPECT_ANY_NUMBER,
       env: 'MY_BUCKET',
       startTime: EXPECT_ANY_NUMBER,
@@ -78,10 +78,13 @@ describe('Handler', (): void => {
 
     testBucket.expectToHavePut('test.json', '{}');
     expect(TEST_ERROR_HANDLER).toHaveBeenCalledWith(testError);
-    expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(MetricName.R2PutError, {
-      endTime: EXPECT_ANY_NUMBER,
-      env: 'MY_BUCKET',
-      startTime: EXPECT_ANY_NUMBER,
-    });
+    expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(
+      MetricName.R2BucketPutError,
+      {
+        endTime: EXPECT_ANY_NUMBER,
+        env: 'MY_BUCKET',
+        startTime: EXPECT_ANY_NUMBER,
+      },
+    );
   });
 });

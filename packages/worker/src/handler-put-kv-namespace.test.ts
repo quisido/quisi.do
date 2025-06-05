@@ -39,11 +39,14 @@ describe('Handler', (): void => {
     );
 
     testNamespace.expectToHavePut('TEST_KEY', 'test value');
-    expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(MetricName.KVPut, {
-      endTime: EXPECT_ANY_NUMBER,
-      env: 'MY_NAMESPACE',
-      startTime: EXPECT_ANY_NUMBER,
-    });
+    expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(
+      MetricName.KVNamespacePut,
+      {
+        endTime: EXPECT_ANY_NUMBER,
+        env: 'MY_NAMESPACE',
+        startTime: EXPECT_ANY_NUMBER,
+      },
+    );
   });
 
   it('should handle KV namespace put errors', async (): Promise<void> => {
@@ -78,10 +81,13 @@ describe('Handler', (): void => {
 
     testNamespace.expectToHavePut('TEST_KEY', 'test value');
     expect(TEST_ERROR_HANDLER).toHaveBeenCalledWith(testError);
-    expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(MetricName.KVPutError, {
-      endTime: EXPECT_ANY_NUMBER,
-      env: 'MY_NAMESPACE',
-      startTime: EXPECT_ANY_NUMBER,
-    });
+    expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(
+      MetricName.KVNamespacePutError,
+      {
+        endTime: EXPECT_ANY_NUMBER,
+        env: 'MY_NAMESPACE',
+        startTime: EXPECT_ANY_NUMBER,
+      },
+    );
   });
 });

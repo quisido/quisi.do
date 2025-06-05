@@ -54,12 +54,9 @@ export default async function handleAnalyticsFetchRequest(
       );
     }
 
-    const spacing = 2;
     return new Response(
       JSON.stringify(
         json.data.reduce(reduceAnalyticsEngineRowsToResponse.bind(this), {}),
-        null,
-        spacing,
       ),
     );
   } catch (err: unknown) {

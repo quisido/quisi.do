@@ -220,17 +220,18 @@ common operations. You can access the human-readable `enum` by importing
 
 | Metric name                 | Condition                                          |
 |-----------------------------|----------------------------------------------------|
-| `MetricName.D1All`          | Emits after calling `getD1Results`                 |
-| `MetricName.D1Error`        | Emits when `getD1Response` or `getD1Results` fails |
-| `MetricName.D1Run`          | Emits after calling `getD1Response`                |
+| `MetricName.D1PreparedStatementAll`          | Emits after calling `getD1Results`                 |
+| `MetricName.D1PreparedStatementAllError`        | Emits when `getD1Results` fails |
+| `MetricName.D1PreparedStatementRun`          | Emits after calling `getD1Response`                |
+| `MetricName.D1PreparedStatementRunError`        | Emits when `getD1Response` fails |
 | `MetricName.Fetch`          | Emits after calling `fetch`                        |
 | `MetricName.InvalidBinding` | Emits when `validateBinding` fails                 |
-| `MetricName.KVGet`          | Emits after calling `getKVNamespaceText`           |
-| `MetricName.KVGetError`     | Emits when `getKVNamespaceText` fails              |
-| `MetricName.KVPut`          | Emits after calling `putKVNamespace`               |
-| `MetricName.KVPutError`     | Emits when `putKVNamespace` fails                  |
-| `MetricName.R2Put`          | Emits after calling `putR2Bucket`                  |
-| `MetricName.R2PutError`     | Emits when `putR2Bucket` fails                     |
+| `MetricName.KVNamespaceGet`          | Emits after calling `getKVNamespaceText`           |
+| `MetricName.KVNamespaceGetError`     | Emits when `getKVNamespaceText` fails              |
+| `MetricName.KVNamespacePut`          | Emits after calling `putKVNamespace`               |
+| `MetricName.KVNamespacePutError`     | Emits when `putKVNamespace` fails                  |
+| `MetricName.R2BucketPut`          | Emits after calling `putR2Bucket`                  |
+| `MetricName.R2BucketPutError`     | Emits when `putR2Bucket` fails                     |
 
 ### Dimensions
 
@@ -238,7 +239,7 @@ When each metric is emit, it includes a set of dimensions as defined below.
 
 | Metric name                 | Dimension     | Type      |
 |-----------------------------|---------------|-----------|
-| `MetricName.D1All`          | `changedDb`   | `boolean` |
+| `MetricName.D1PreparedStatementAll`          | `changedDb`   | `boolean` |
 |                             | `changes`     | `number`  |
 |                             | `duration`    | `number`  |
 |                             | `endTime`     | `number`  |
@@ -250,11 +251,11 @@ When each metric is emit, it includes a set of dimensions as defined below.
 |                             | `rowsWritten` | `number`  |
 |                             | `sizeAfter`   | `number`  |
 |                             | `startTime`   | `number`  |
-| `MetricName.D1Error`        | `endTime`     | `number`  |
+| `MetricName.D1PreparedStatementAllError`        | `endTime`     | `number`  |
 |                             | `env`         | `string`  |
 |                             | `query`       | `string`  |
 |                             | `startTime`   | `number`  |
-| `MetricName.D1Run`          | `changedDb`   | `boolean` |
+| `MetricName.D1PreparedStatementRun`          | `changedDb`   | `boolean` |
 |                             | `changes`     | `number`  |
 |                             | `duration`    | `number`  |
 |                             | `endTime`     | `number`  |
@@ -265,28 +266,33 @@ When each metric is emit, it includes a set of dimensions as defined below.
 |                             | `rowsWritten` | `number`  |
 |                             | `sizeAfter`   | `number`  |
 |                             | `startTime`   | `number`  |
+| `MetricName.D1PreparedStatementRunError`        | `endTime`     | `number`  |
+|                             | `env`         | `string`  |
+|                             | `query`       | `string`  |
+|                             | `startTime`   | `number`  |
 | `MetricName.Fetch`          | `endTime`     | `number`  |
 |                             | `startTime`   | `number`  |
 |                             | `url`         | `string`  |
 | `MetricName.InvalidBinding` | `key`         | `string`  |
 |                             | `type`        | `string`  |
 |                             | `value`       | `string`  |
-| `MetricName.KVGet`          | `endTime`     | `number`  |
+| `MetricName.KVNamespaceGet`          | `endTime`     | `number`  |
+|                             | `key`         | `string`  |
+|                             | `namespace`         | `string`  |
+|                             | `startTime`   | `number`  |
+| `MetricName.KVNamespaceGetError`     | `endTime`     | `number`  |
 |                             | `env`         | `string`  |
 |                             | `startTime`   | `number`  |
-| `MetricName.KVGetError`     | `endTime`     | `number`  |
+| `MetricName.KVNamespacePut`          | `endTime`     | `number`  |
 |                             | `env`         | `string`  |
 |                             | `startTime`   | `number`  |
-| `MetricName.KVPut`          | `endTime`     | `number`  |
+| `MetricName.KVNamespacePutError`     | `endTime`     | `number`  |
 |                             | `env`         | `string`  |
 |                             | `startTime`   | `number`  |
-| `MetricName.KVPutError`     | `endTime`     | `number`  |
+| `MetricName.R2BucketPut`          | `endTime`     | `number`  |
 |                             | `env`         | `string`  |
 |                             | `startTime`   | `number`  |
-| `MetricName.R2Put`          | `endTime`     | `number`  |
-|                             | `env`         | `string`  |
-|                             | `startTime`   | `number`  |
-| `MetricName.R2PutError`     | `endTime`     | `number`  |
+| `MetricName.R2BucketPutError`     | `endTime`     | `number`  |
 |                             | `env`         | `string`  |
 |                             | `startTime`   | `number`  |
 
