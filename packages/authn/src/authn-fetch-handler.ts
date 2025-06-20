@@ -20,7 +20,9 @@ import isEnvironmentName from './utils/is-environment-name.js';
 import isNonEmptyString from './utils/is-non-empty-string.js';
 import TemporaryMap from './utils/temporary-map.js';
 import Throttler from './utils/throttler.js';
+import type { Pricing } from 'cloudflare-utils';
 
+const NONE = 0;
 const OAUTH_IP_THROTTLE_LIMIT = 10000;
 const WHOAMI_IP_THROTTLE_LIMIT = 1000;
 
@@ -29,8 +31,14 @@ export default class AuthnFetchHandler extends FetchHandler {
   static #OAUTH_IP_THROTTLER = new Throttler();
   static #WHOAMI_IP_THROTTLER = new Throttler();
 
+  #totalExpense = NONE;
+
   public constructor() {
     super(handleFetchRequest, handleFetchError);
+
+    this.onExpense((pricing: Pricing, amount: number): void => {
+      this.#totalExpense += pricing * amount;
+    });
   }
 
   public get accessControlAllowOrigin(): string {
@@ -136,6 +144,10 @@ export default class AuthnFetchHandler extends FetchHandler {
       WHOAMI_IP_THROTTLE_LIMIT,
       { now: this.now.bind(this) },
     );
+  }
+
+  public get totalExpense(): number {
+    return this.#totalExpense;
   }
 
   public override validateBinding<T>(

@@ -19,6 +19,11 @@ export {
   default as isNumber,
 } from './is-number.js';
 export {
+  default as filterByPromise,
+  default as findPromise,
+  default as isPromise,
+} from './is-promise.js';
+export {
   default as filterByObject,
   default as findObject,
   default as isObject,

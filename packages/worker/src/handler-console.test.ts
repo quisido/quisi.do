@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import noop from '../test/noop.js';
+import noop from './noop.js';
 import { Handler } from './index.js';
 
 describe('Handler', (): void => {

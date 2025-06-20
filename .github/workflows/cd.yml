@@ -432,10 +432,7 @@ jobs:
           NPM_CONFIG_PROVENANCE: true
         run: >
           npm config set "//npm.pkg.github.com/:_authToken" $NPM_AUTH_TOKEN;
-          npm config set \
-            npmScopes.${{ github.repository_owner }}.npmPublishRegistry \
-            'https://npm.pkg.github.com';
-          npm run publish;
+          npm run publish --registry=https://npm.pkg.github.com;
 
   wrangler-deploy-authn:
     name: Wrangler deploy (Authentication)
