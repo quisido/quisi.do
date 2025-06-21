@@ -2,7 +2,6 @@
 import type IFetchHandler from './fetch-handler.js';
 import InternalServerErrorResponse from './internal-server-error-response.js';
 import type { MetricDimensions } from './metric-dimensions.js';
-import noop from './noop.js';
 
 export interface CreateExportedHandlerFetchOptions<
   Env,
@@ -25,6 +24,13 @@ export interface CreateExportedHandlerFetchOptions<
     | undefined;
 }
 
+/**
+ * Creates a Cloudflare Workers-compatible fetch handler that wraps a FetchHandler class.
+ * Manages request processing, error handling, logging, metrics, and side effects.
+ *
+ * @param options - Configuration options including handler class and lifecycle hooks
+ * @returns A fetch handler function compatible with Cloudflare Workers
+ */
 export default function createExportedHandlerFetch<
   Env,
   QueueHandlerMessage,
@@ -33,7 +39,7 @@ export default function createExportedHandlerFetch<
   FetchHandler,
   console: consoleOption,
   fetch: fetchOption,
-  finally: handleFinally,
+  finally: finallyOption,
   now,
   onError: handleError,
   onLog: handleLog,
@@ -49,17 +55,44 @@ export default function createExportedHandlerFetch<
       IncomingRequestCfProperties<CfHostMetadata>
     >,
     env: Env,
-    ctx: ExecutionContext,
+    ctxParam: ExecutionContext,
   ): Response | Promise<Response> {
+    const effects: Promise<unknown>[] = [];
+    const ctx: ExecutionContext = {
+      ...ctxParam,
+      waitUntil(promise: Promise<unknown>): void {
+        effects.push(promise);
+        ctxParam.waitUntil(promise);
+      },
+    };
+
     const handleFetchError = (err: unknown): Response => {
-      consoleOption.error(err);
+      consoleOption.error(`[${request.method}] ${request.url}`, err);
       return new InternalServerErrorResponse();
     };
 
-    const effects: Promise<unknown>[] = [];
+    const handleFinally = (
+      instance: IFetchHandler<
+        Env,
+        QueueHandlerMessage,
+        CfHostMetadata
+      > | null = null,
+    ): void => {
+      if (typeof finallyOption === 'undefined') {
+        return;
+      }
+
+      ctxParam.waitUntil(
+        Promise.allSettled(effects)
+          .then(finallyOption.bind(instance))
+          .catch((err: unknown): void => {
+            consoleOption.error('`finally` threw:', err);
+          }),
+      );
+    };
+
     const handleSideEffect = (promise: Promise<unknown>): void => {
       ctx.waitUntil(promise);
-      effects.push(promise);
     };
 
     try {
@@ -78,52 +111,35 @@ export default function createExportedHandlerFetch<
         fetchHandler.onMetric(handleMetric);
       }
 
-      const afterResponse = (): void => {
-        if (typeof handleFinally === 'undefined') {
-          return;
-        }
-
-        ctx.waitUntil(
-          Promise.allSettled(effects)
-            .then(handleFinally.bind(fetchHandler))
-            .catch(noop),
-        );
-      };
-
       try {
         const response: Promise<Response> | Response = fetchHandler.run(
           { console: consoleOption, env, fetch: fetchOption, now },
           request,
           env,
-          {
-            ...ctx,
-            waitUntil(promise: Promise<unknown>) {
-              effects.push(promise);
-              ctx.waitUntil(promise);
-            },
-          },
+          ctx,
         );
 
-        // Will it actually wait? Will it call the side effects? Will metrics be emit or tracked?
-        // Will costs be tracked if handleFinally calls an API?
-        // Is there a way to make ctx inaccessible to handleFinally?
-        // Should this await handleFinally? Or just ctx.waitUntil(handleFinally) ignoring the result?
-        // Also implement this solution in the `else` for this branch.
-        // What to do with thrown errors?
-
+        // Synchronous response
         if (!(response instanceof Promise)) {
-          afterResponse();
+          handleFinally(fetchHandler);
           return response;
         }
 
-        return response.catch(handleFetchError).finally(afterResponse);
+        // Asynchronous response
+        return response.catch(handleFetchError).finally((): void => {
+          handleFinally(fetchHandler);
+        });
       } catch (err: unknown) {
+        // This error was thrown by the Handler's `run` method.
         const response: Response = handleFetchError(err);
-        afterResponse();
+        handleFinally(fetchHandler);
         return response;
       }
     } catch (err: unknown) {
-      return handleFetchError(err);
+      // This error thrown while instantiating the Handler.
+      const response: Response = handleFetchError(err);
+      handleFinally();
+      return response;
     }
   };
 }

@@ -40,7 +40,7 @@ export default [
     'no-console': ['scripts/start.ts'],
 
     'no-magic-numbers': [
-      'src/fetch-handler-trace-parent.test.ts',
+      'src/*.test.ts',
       'src/metric.ts',
       'src/modules/trace-parent/constants/trace-flag.ts',
     ],

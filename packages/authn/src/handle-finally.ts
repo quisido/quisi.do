@@ -2,6 +2,13 @@ import { Pricing } from 'cloudflare-utils';
 import type AuthnFetchHandler from './authn-fetch-handler.js';
 import { SECONDS_PER_DAY, MINIMUM_DAYS_PER_MONTH } from './constants/time.js';
 
+/**
+ *   WARNING: If this method emits expenses, logs, or metrics, the finally
+ * handler will NOT be called again. For the sake of budgeting, this method
+ * cannot rely on any `expense` events that itself emits. It is responsible for
+ * budgeting any costs that it accrues.
+ */
+
 export default async function handleFinally(
   this: AuthnFetchHandler,
 ): Promise<void> {

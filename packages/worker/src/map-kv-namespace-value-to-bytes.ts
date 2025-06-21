@@ -1,8 +1,10 @@
+import { mapStringToByteLength } from 'fmrs';
+
 export default function mapKVNamespaceValueToBytes(
   value: string | ArrayBuffer | ArrayBufferView | ReadableStream,
 ): number {
   if (typeof value === 'string') {
-    return value.length;
+    return mapStringToByteLength(value);
   }
 
   if (value instanceof ReadableStream) {

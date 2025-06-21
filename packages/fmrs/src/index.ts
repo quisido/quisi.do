@@ -49,6 +49,7 @@ export { default as mapEntryToKey } from './map-entry-to-key.js';
 export { default as mapEntryToValue } from './map-entry-to-value.js';
 export { default as mapMapToEntries } from './map-map-to-entries.js';
 export { default as mapMapToRecord } from './map-map-to-record.js';
+export { default as mapStringToByteLength } from './map-string-to-byte-length.js';
 export { default as mapToError } from './map-to-error.js';
 export { default as mapToIndex } from './map-to-index.js';
 export { default as mapToString } from './map-to-string.js';

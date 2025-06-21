@@ -17,6 +17,7 @@ import type Runnable from './runnable.js';
 import mapKVNamespaceValueToBytes from './map-kv-namespace-value-to-bytes.js';
 import mapR2BucketValueToBytes from './map-r2-bucket-value-to-bytes.js';
 import sanitizeExpenseTtl from './sanitize-expense-ttl.js';
+import createTtl from './create-ttl.js';
 
 interface EventTypes {
   readonly effect: [Promise<unknown>];
@@ -32,6 +33,8 @@ export interface HandlerOptions<Env> {
   readonly fetch: Fetcher['fetch'];
   readonly now?: (() => number) | undefined;
 }
+
+const THIRD = 2;
 
 type HandlerParameters<
   K extends keyof Required<ExportedHandler>,
@@ -70,11 +73,8 @@ type HandlerReturnType<
 
 const EMPTY_OBJECT: Record<string, never> = {};
 const FIRST = 0;
-const MILLISECONDS_PER_SECOND = 1000;
 const SECOND = 1;
 const SINGLE = 1;
-const THIRD = 2;
-const UNDEFINED_TTL = 0;
 
 export default class Handler<
   K extends keyof Required<ExportedHandler> = keyof Required<ExportedHandler>,
@@ -542,29 +542,11 @@ export default class Handler<
     env: string,
     ...params: Parameters<KVNamespace['put']>
   ): Promise<void> {
-    const getTtl = (): number => {
-      const options: KVNamespacePutOptions | undefined = params[THIRD];
-      if (typeof options === 'undefined') {
-        return UNDEFINED_TTL;
-      }
-
-      const { expiration, expirationTtl } = options;
-      if (typeof expirationTtl === 'number') {
-        return expirationTtl;
-      }
-
-      if (typeof expiration === 'number') {
-        return expiration * MILLISECONDS_PER_SECOND - this.now();
-      }
-
-      return UNDEFINED_TTL;
-    };
-
     const namespace: KVNamespace = this.getKVNamespace(env);
     const startTime: number = this.now();
 
     const bytes: number = mapKVNamespaceValueToBytes(params[SECOND]);
-    const ttl: number = getTtl();
+    const ttl: number = createTtl(params[THIRD], this.now.bind(this));
     this.expense(Pricing.KVKeysWritten, SINGLE);
     this.expense(Pricing.KVStoredData, bytes * sanitizeExpenseTtl(ttl));
 

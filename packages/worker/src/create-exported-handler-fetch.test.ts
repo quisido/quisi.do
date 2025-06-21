@@ -153,7 +153,10 @@ describe('createExportedHandlerFetch', (): void => {
     );
 
     expect(TEST_CONSOLE_ERROR).toHaveBeenCalledOnce();
-    expect(TEST_CONSOLE_ERROR).toHaveBeenLastCalledWith(testError);
+    expect(TEST_CONSOLE_ERROR).toHaveBeenLastCalledWith(
+      '[GET] https://localhost/',
+      testError,
+    );
     expect(response.status).toBe(StatusCode.InternalServerError);
   });
 
@@ -186,7 +189,10 @@ describe('createExportedHandlerFetch', (): void => {
     );
 
     expect(TEST_CONSOLE_ERROR).toHaveBeenCalledOnce();
-    expect(TEST_CONSOLE_ERROR).toHaveBeenLastCalledWith(testError);
+    expect(TEST_CONSOLE_ERROR).toHaveBeenLastCalledWith(
+      '[GET] https://localhost/',
+      testError,
+    );
     expect(response.status).toBe(StatusCode.InternalServerError);
   });
 });

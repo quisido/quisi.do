@@ -1,4 +1,4 @@
-export const DAYS_PER_YEAR = 365;
+export const DAYS_PER_YEAR = 365.25;
 export const HOURS_PER_DAY = 24;
 export const MILLISECONDS_PER_SECOND = 1000;
 export const MAXIMUM_DAYS_PER_MONTH = 31;

@@ -1,3 +1,5 @@
+import { mapStringToByteLength } from 'fmrs';
+
 const NONE = 0;
 
 export default function mapR2BucketValueToBytes(
@@ -8,7 +10,7 @@ export default function mapR2BucketValueToBytes(
   }
 
   if (typeof value === 'string') {
-    return value.length;
+    return mapStringToByteLength(value);
   }
 
   if (value instanceof Blob) {
