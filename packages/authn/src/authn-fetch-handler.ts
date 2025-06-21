@@ -22,6 +22,7 @@ import TemporaryMap from './utils/temporary-map.js';
 import Throttler from './utils/throttler.js';
 import type { Pricing } from 'cloudflare-utils';
 
+const DEFAULT_FISCAL_USER_ID = 0;
 const NONE = 0;
 const OAUTH_IP_THROTTLE_LIMIT = 10000;
 const WHOAMI_IP_THROTTLE_LIMIT = 1000;
@@ -31,6 +32,7 @@ export default class AuthnFetchHandler extends FetchHandler {
   static #OAUTH_IP_THROTTLER = new Throttler();
   static #WHOAMI_IP_THROTTLER = new Throttler();
 
+  #fiscalUserId: number | undefined;
   #totalExpense = NONE;
 
   public constructor() {
@@ -83,6 +85,10 @@ export default class AuthnFetchHandler extends FetchHandler {
     );
   }
 
+  public get fiscalUserId(): number {
+    return this.#fiscalUserId ?? DEFAULT_FISCAL_USER_ID;
+  }
+
   public getAuthnUserIdFromMemory(authnId: string): number | undefined {
     return AuthnFetchHandler.#AUTHN_USER_ID_MAP.get(authnId, {
       now: this.now.bind(this),
@@ -128,6 +134,10 @@ export default class AuthnFetchHandler extends FetchHandler {
       MILLISECONDS_PER_DAY,
       { now: this.now.bind(this) },
     );
+  }
+
+  public setFiscalResponsibility(userId: number): void {
+    this.#fiscalUserId = userId;
   }
 
   public shouldThrottleOAuthByIp(): boolean {

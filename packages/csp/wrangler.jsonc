@@ -1,0 +1,102 @@
+{
+  "compatibility_date": "2024-11-11",
+  "main": "src/index.ts",
+  "name": "quisido-csp-dev",
+  "send_metrics": true,
+  "tsconfig": "./tsconfig.json",
+  "upload_source_maps": true,
+  "analytics_engine_datasets": [
+    {
+      "binding": "PRIVATE_DATASET",
+      "dataset": "CSP_PRIVATE_DEV"
+    },
+    {
+      "binding": "PUBLIC_DATASET",
+      "dataset": "CSP_PUBLIC_DEV"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "CSP_DB",
+      "database_id": "CSP",
+      "database_name": "csp-dev"
+    }
+  ],
+  "dev": {
+    "local_protocol": "https",
+    "port": 6586 // parseInt('csp', 36) % 9999
+  },
+  "env": {
+    "production": {
+      "name": "quisido-csp",
+      "analytics_engine_datasets": [
+        {
+          "binding": "PRIVATE_DATASET",
+          "dataset": "CSP_PRIVATE"
+        },
+        {
+          "binding": "PUBLIC_DATASET",
+          "dataset": "CSP_PUBLIC"
+        }
+      ],
+      "d1_databases": [
+        {
+          "binding": "CSP_DB",
+          "database_id": "2ea99634-ee39-491d-94d9-f8e688d1cb92",
+          "database_name": "csp",
+          "preview_database_id": "a5299acf-42a8-47bb-95e7-c062bc772b48"
+        }
+      ],
+      "routes": [
+        {
+          "custom_domain": true,
+          "pattern": "csp.quisi.do"
+        }
+      ],
+      "vars": {
+        "ENVIRONMENT_NAME": "production"
+      }
+    },
+    "staging": {
+      "name": "quisido-csp-staging",
+      "workers_dev": true,
+      "analytics_engine_datasets": [
+        {
+          "binding": "PRIVATE_DATASET",
+          "dataset": "CSP_PRIVATE_STAGING"
+        },
+        {
+          "binding": "PUBLIC_DATASET",
+          "dataset": "CSP_PUBLIC_STAGING"
+        }
+      ],
+      "d1_databases": [
+        {
+          "binding": "CSP_DB",
+          "database_id": "a5299acf-42a8-47bb-95e7-c062bc772b48",
+          "database_name": "csp-staging"
+        }
+      ],
+      "routes": [
+        {
+          "custom_domain": true,
+          "pattern": "staging.csp.quisi.do"
+        }
+      ],
+      "vars": {
+        "ENVIRONMENT_NAME": "staging"
+      }
+    }
+  },
+  "observability": {
+    "logs": {
+      "enabled": true
+    }
+  },
+  "placement": {
+    "mode": "smart"
+  },
+  "vars": {
+    "ENVIRONMENT_NAME": "development"
+  }
+}

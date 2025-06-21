@@ -40,6 +40,7 @@
     "serve": "serve dist",
     "start": "vite",
     "test": "concurrently --names eslint,publint,vitest --prefix-colors auto \"npm run eslint\" \"npm run publint\" \"npm run vitest:run\"",
+    "vite:build": "vite build",
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"

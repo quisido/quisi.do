@@ -3,22 +3,27 @@ import type AuthnFetchHandler from './authn-fetch-handler.js';
 import { SECONDS_PER_DAY, MINIMUM_DAYS_PER_MONTH } from './constants/time.js';
 
 /**
- *   WARNING: If this method emits expenses, logs, or metrics, the finally
- * handler will NOT be called again. For the sake of budgeting, this method
- * cannot rely on any `expense` events that itself emits. It is responsible for
- * budgeting any costs that it accrues.
+ *   WARNING: If this method emits events (expenses, logs, or metrics), it will
+ * NOT be called again. For the sake of budgeting, this method cannot rely on
+ * any `expense` events that itself emits. It is responsible for budgeting any
+ * costs that it accrues.
  */
 
 export default async function handleFinally(
-  this: AuthnFetchHandler,
+  this: AuthnFetchHandler | null,
 ): Promise<void> {
+  if (this === null) {
+    return;
+  }
+
+  const fiscalUserKey: string = this.fiscalUserId.toString();
   const budgetStr: string =
-    (await this.getKVNamespaceText('BUDGET', '<USER_ID_HERE>')) ?? '0';
+    (await this.getKVNamespaceText('BUDGET', fiscalUserKey)) ?? '0';
   const budget: number = parseFloat(budgetStr);
 
   await this.putKVNamespace(
     'BUDGET',
-    '<USER_ID_HERE>',
+    fiscalUserKey,
     (
       budget -
       this.totalExpense -
