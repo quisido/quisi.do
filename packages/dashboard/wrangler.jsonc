@@ -32,6 +32,11 @@
     "port": 9778 // parseInt('dashboard', 36) % 9999
   },
   "env": {
+    "development": {
+      "vars": {
+        "ENVIRONMENT_NAME": "development"
+      }
+    },
     "production": {
       "name": "quisido-dashboard",
       "analytics_engine_datasets": [
@@ -99,6 +104,6 @@
   "vars": {
     "CORS_ORIGIN": "https://localhost:3000",
     "DATADOG_APPLICATION_ID": "11b64b43-b9bc-4155-a913-e241f76e35f7",
-    "ENVIRONMENT_NAME": "development"
+    "ENVIRONMENT_NAME": "unknown"
   }
 }

@@ -27,6 +27,11 @@
     "port": 5882 // parseInt('authn', 36) % 9999
   },
   "env": {
+    "development": {
+      "vars": {
+        "ENVIRONMENT_NAME": "development"
+      }
+    },
     "production": {
       "name": "quisido-authn",
       "analytics_engine_datasets": [
@@ -158,7 +163,7 @@
   ],
   "vars": {
     "COOKIE_DOMAIN": "localhost",
-    "ENVIRONMENT_NAME": "development",
+    "ENVIRONMENT_NAME": "unknown",
     "HOST": "localhost:3000",
     "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
     "PATREON_OAUTH_HOST": "https://www.patreon.com",

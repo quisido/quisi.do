@@ -27,6 +27,11 @@
     "port": 6586 // parseInt('csp', 36) % 9999
   },
   "env": {
+    "development": {
+      "vars": {
+        "ENVIRONMENT_NAME": "development"
+      }
+    },
     "production": {
       "name": "quisido-csp",
       "analytics_engine_datasets": [
@@ -97,6 +102,6 @@
     "mode": "smart"
   },
   "vars": {
-    "ENVIRONMENT_NAME": "development"
+    "ENVIRONMENT_NAME": "unknown"
   }
 }
