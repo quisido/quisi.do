@@ -1,6 +1,16 @@
-const MILLISECONDS_PER_SECOND = 1000;
+import { MILLISECONDS_PER_SECOND } from './time.js';
+
 const UNDEFINED_TTL = 0;
 
+/**
+ * Computes TTL (time-to-live) in milliseconds from KV namespace put options.
+ *
+ * @param options - KV put options containing expiration or expirationTtl
+ * @param now - Function returning current time in milliseconds since epoch
+ * @returns TTL in milliseconds, or 0 if no valid expiration is provided
+ *
+ * Note: expirationTtl (in milliseconds) takes priority over expiration (in seconds)
+ */
 export default function createTtl(
   options: KVNamespacePutOptions | undefined,
   now: () => number,

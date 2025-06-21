@@ -19,7 +19,7 @@ export default async function handleFinally(
   const fiscalUserKey: string = this.fiscalUserId.toString();
   const budgetStr: string =
     (await this.getKVNamespaceText('BUDGET', fiscalUserKey)) ?? '0';
-  const budget: number = parseFloat(budgetStr);
+  const budget: number = Number.parseFloat(budgetStr);
 
   await this.putKVNamespace(
     'BUDGET',
@@ -37,9 +37,9 @@ export default async function handleFinally(
       Pricing.KVStoredData *
         budgetStr.length *
         SECONDS_PER_DAY *
-        MINIMUM_DAYS_PER_MONTH +
+        MINIMUM_DAYS_PER_MONTH -
       // Public metric
-      Pricing.AnalyticsDataPointsWritten +
+      Pricing.AnalyticsDataPointsWritten -
       // Private metric
       Pricing.AnalyticsDataPointsWritten
     ).toString(),
