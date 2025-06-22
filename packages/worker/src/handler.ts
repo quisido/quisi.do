@@ -34,8 +34,6 @@ export interface HandlerOptions<Env> {
   readonly now?: (() => number) | undefined;
 }
 
-const THIRD = 2;
-
 type HandlerParameters<
   K extends keyof Required<ExportedHandler>,
   Env,
@@ -73,7 +71,9 @@ type HandlerReturnType<
 
 const EMPTY_OBJECT: Record<string, never> = {};
 const FIRST = 0;
-const SECOND = 1;
+const KV_PUT_OPTIONS_INDEX = 2;
+const KV_PUT_VALUE_INDEX = 1;
+const R2_PUT_VALUE_INDEX = 1;
 const SINGLE = 1;
 
 export default class Handler<
@@ -94,7 +94,6 @@ export default class Handler<
   #fetch: Fetcher['fetch'] | undefined;
   #flushed = false;
   #now: () => number = Date.now.bind(Date);
-  readonly #state = new Map<string, unknown>();
 
   public readonly run: (
     /**
@@ -213,6 +212,11 @@ export default class Handler<
     this.#emit('metric', name, dimensions);
   }
 
+  /**
+   * Emits an expense event for tracking resource usage costs.
+   * @param pricing - The pricing category from Cloudflare's pricing model
+   * @param amount - The amount of resource units consumed
+   */
   public expense(pricing: Pricing, amount: number): void {
     this.#emit('expense', pricing, amount);
   }
@@ -461,10 +465,6 @@ export default class Handler<
     return this.validateBinding(name, isR2Bucket);
   }
 
-  public getState(key: string, value: unknown): void {
-    this.#state.set(key, value);
-  }
-
   public log(...messages: readonly string[]): void {
     this.#emit('log', ...messages);
   }
@@ -513,6 +513,10 @@ export default class Handler<
     this.#on('error', callback.bind(this));
   }
 
+  /**
+   * Registers a callback to be invoked when expense events are emit.
+   * @param callback - Function to handle expense events
+   */
   public onExpense(callback: (pricing: Pricing, amount: number) => void): void {
     this.#on('expense', callback.bind(this));
   }
@@ -545,10 +549,18 @@ export default class Handler<
     const namespace: KVNamespace = this.getKVNamespace(env);
     const startTime: number = this.now();
 
-    const bytes: number = mapKVNamespaceValueToBytes(params[SECOND]);
-    const ttl: number = createTtl(params[THIRD], this.now.bind(this));
+    const bytes: number = mapKVNamespaceValueToBytes(
+      params[KV_PUT_VALUE_INDEX],
+    );
+    const ttlSeconds: number = createTtl(
+      params[KV_PUT_OPTIONS_INDEX],
+      this.now.bind(this),
+    );
     this.expense(Pricing.KVKeysWritten, SINGLE);
-    this.expense(Pricing.KVStoredData, bytes * sanitizeExpenseTtl(ttl));
+    this.expense(
+      Pricing.KVStoredData,
+      (params[FIRST].length + bytes) * sanitizeExpenseTtl(ttlSeconds),
+    );
 
     try {
       await namespace.put(...params);
@@ -557,7 +569,7 @@ export default class Handler<
         endTime: this.now(),
         env,
         startTime,
-        ttl,
+        ttl: ttlSeconds,
       });
     } catch (err: unknown) {
       const error: Error = mapToError(err);
@@ -577,7 +589,7 @@ export default class Handler<
     const bucket: R2Bucket = this.getR2Bucket(env);
     const startTime: number = this.now();
 
-    const bytes: number = mapR2BucketValueToBytes(params[SECOND]);
+    const bytes: number = mapR2BucketValueToBytes(params[R2_PUT_VALUE_INDEX]);
     this.expense(Pricing.R2ClassAOperations, SINGLE);
     this.expense(Pricing.R2Storage, bytes);
 
@@ -598,10 +610,6 @@ export default class Handler<
         startTime,
       });
     }
-  }
-
-  public setState(key: string, value: unknown): void {
-    this.#state.set(key, value);
   }
 
   public validateBinding<T>(

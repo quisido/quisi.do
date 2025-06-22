@@ -3,13 +3,13 @@ import { MILLISECONDS_PER_SECOND } from './time.js';
 const UNDEFINED_TTL = 0;
 
 /**
- * Computes TTL (time-to-live) in milliseconds from KV namespace put options.
+ * Computes TTL (time-to-live) in seconds from KV namespace put options.
  *
  * @param options - KV put options containing expiration or expirationTtl
  * @param now - Function returning current time in milliseconds since epoch
- * @returns TTL in milliseconds, or 0 if no valid expiration is provided
+ * @returns TTL in seconds, or 0 if no valid expiration is provided
  *
- * Note: expirationTtl (in milliseconds) takes priority over expiration (in seconds)
+ * Note: expirationTtl (in seconds) takes priority over expiration (in seconds)
  */
 export default function createTtl(
   options: KVNamespacePutOptions | undefined,
@@ -25,7 +25,7 @@ export default function createTtl(
   }
 
   if (typeof expiration === 'number') {
-    return expiration * MILLISECONDS_PER_SECOND - now();
+    return expiration - now() / MILLISECONDS_PER_SECOND;
   }
 
   return UNDEFINED_TTL;

@@ -1,12 +1,12 @@
 import { mapStringToByteLength } from 'fmrs';
 
-const NONE = 0;
+const SINGLE = 1;
 
 export default function mapR2BucketValueToBytes(
   value: string | ArrayBuffer | ArrayBufferView | Blob | ReadableStream | null,
 ): number {
   if (value === null) {
-    return NONE;
+    return SINGLE;
   }
 
   if (typeof value === 'string') {

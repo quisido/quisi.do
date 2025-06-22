@@ -7,9 +7,11 @@ import {
 import { StatusCode, type IncomingRequest } from 'cloudflare-utils';
 import { assert, describe, expect, it, vi } from 'vitest';
 import { ExportedHandler, FetchHandler } from './index.js';
+import { EventEmitter } from 'eventemitter3';
 
 const TEST_ENV: unknown = {};
 const TEST_ERROR_HANDLER = vi.fn();
+const TEST_FETCH = vi.fn();
 const TEST_LOG_HANDLER = vi.fn();
 const TEST_METRIC_HANDLER = vi.fn();
 const TEST_REQUEST: IncomingRequest = new Request('https://localhost/');
@@ -194,5 +196,102 @@ describe('createExportedHandlerFetch', (): void => {
       testError,
     );
     expect(response.status).toBe(StatusCode.InternalServerError);
+  });
+
+  it('should support a finally handler', async (): Promise<void> => {
+    const eventEmitter = new EventEmitter();
+    const testError = new Error('test message');
+    const testFinally = vi.fn((): Promise<void> => {
+      return Promise.reject(testError);
+    });
+
+    const exportedHandler = new ExportedHandler({
+      console: TEST_CONSOLE,
+      fetch: TEST_FETCH,
+      finally: testFinally,
+      onError: TEST_ERROR_HANDLER,
+      onLog: TEST_LOG_HANDLER,
+      onMetric: TEST_METRIC_HANDLER,
+
+      FetchHandler: class TestFetchHandler extends FetchHandler {
+        public constructor() {
+          super(
+            (
+              _request: Request,
+              _env: unknown,
+              ctx: ExecutionContext,
+            ): Response => {
+              ctx.waitUntil(
+                new Promise((_resolve, reject): void => {
+                  eventEmitter.once('reject', reject);
+
+                  // We also want to test when `waitUntil` calls `waitUntil`.
+                  ctx.waitUntil(
+                    new Promise((resolve): void => {
+                      eventEmitter.once('resolve', resolve);
+                    }),
+                  );
+                }),
+              );
+              return new Response();
+            },
+          );
+        }
+      },
+    });
+
+    assert('fetch' in exportedHandler);
+    await exportedHandler.fetch(TEST_REQUEST, TEST_ENV, TEST_EXECUTION_CONTEXT);
+
+    // Require successful promises in `waitUntil`.
+    expect(testFinally).not.toHaveBeenCalled();
+    eventEmitter.emit('resolve');
+
+    // Require unsuccessful promises in `waitUntil`.
+    expect(testFinally).not.toHaveBeenCalled();
+    eventEmitter.emit('reject');
+
+    // Await `Promise.allSettled`.
+    await new Promise(setImmediate);
+
+    expect(testFinally).toHaveBeenCalledOnce();
+    expect(TEST_CONSOLE_ERROR).toHaveBeenLastCalledWith(
+      '`finally` threw:',
+      testError,
+    );
+  });
+
+  it('should handle failed handler construction', async (): Promise<void> => {
+    const testError = new Error('test message');
+    const testFinally = vi.fn();
+
+    const exportedHandler = new ExportedHandler({
+      console: TEST_CONSOLE,
+      fetch: TEST_FETCH,
+      finally: testFinally,
+      onError: TEST_ERROR_HANDLER,
+      onLog: TEST_LOG_HANDLER,
+      onMetric: TEST_METRIC_HANDLER,
+
+      FetchHandler: class TestFetchHandler extends FetchHandler {
+        public constructor() {
+          super(
+            // Note: As an IIFE, this will throw when constructed.
+            ((): never => {
+              throw testError;
+            })(),
+          );
+        }
+      },
+    });
+
+    assert('fetch' in exportedHandler);
+    await exportedHandler.fetch(TEST_REQUEST, TEST_ENV, TEST_EXECUTION_CONTEXT);
+
+    expect(testFinally).toHaveBeenCalledOnce();
+    expect(TEST_CONSOLE_ERROR).toHaveBeenLastCalledWith(
+      '[GET] https://localhost/',
+      testError,
+    );
   });
 });

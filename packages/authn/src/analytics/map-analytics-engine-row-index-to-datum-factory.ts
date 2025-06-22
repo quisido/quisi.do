@@ -33,6 +33,7 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
     case MetricName.InvalidAnalyticsSecret:
     case MetricName.InvalidAuthnId:
     case MetricName.InvalidAuthnUserIdsNamespace:
+    case MetricName.InvalidBudget:
     case MetricName.InvalidDatabase:
     case MetricName.InvalidOAuthUserId:
     case MetricName.InvalidPatreonAccessToken:
