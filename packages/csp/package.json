@@ -28,6 +28,7 @@
     "staging:init": "npm run staging:init:projects && npm run staging:init:reports",
     "staging:init:projects": "wrangler d1 execute csp-staging --env staging --file=./sql/projects.sql --remote",
     "staging:init:reports": "wrangler d1 execute csp-staging --env staging --file=./sql/reports.sql --remote",
+    "start": "npm run dev",
     "test": "concurrently --names eslint,publint,vitest --prefix-colors auto \"npm run eslint\" \"npm run publint\" \"npm run vitest:run\"",
     "vitest": "vitest",
     "vitest:run": "vitest run",
@@ -36,27 +37,27 @@
   },
   "dependencies": {
     "@quisido/csp-shared": "^1.0.1",
-    "@quisido/worker": "^1.0.7",
-    "cloudflare-utils": "^1.0.3",
+    "@quisido/worker": "^1.0.8",
+    "cloudflare-utils": "^1.0.4",
     "fmrs": "^2.0.4"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250523.0",
+    "@cloudflare/workers-types": "^4.20250620.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@quisido/eslint-config": "^1.1.6",
-    "@quisido/vitest-config": "^1.0.2",
+    "@quisido/eslint-config": "^1.1.7",
+    "@quisido/vitest-config": "^1.0.3",
     "@quisido/worker-test": "^1.0.1",
     "@types/eslint": "^9.6.1",
-    "@vitest/coverage-istanbul": "^3.1.4",
+    "@vitest/coverage-istanbul": "^3.2.4",
     "cjs-ts": "^2.0.0",
     "cloudflare-test-utils": "^1.0.2",
     "concurrently": "^9.1.2",
-    "eslint": "^9.27.0",
+    "eslint": "^9.29.0",
     "publint": "^0.3.12",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
-    "vitest": "^3.1.4",
-    "wrangler": "^4.16.1"
+    "vitest": "^3.2.4",
+    "wrangler": "^4.20.3"
   }
 }

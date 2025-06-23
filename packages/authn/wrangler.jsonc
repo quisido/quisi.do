@@ -1,0 +1,173 @@
+{
+  "compatibility_date": "2024-11-11",
+  "main": "src/index.ts",
+  "name": "quisido-authn-dev",
+  "send_metrics": true,
+  "tsconfig": "./tsconfig.json",
+  "upload_source_maps": true,
+  "analytics_engine_datasets": [
+    {
+      "binding": "PRIVATE_DATASET",
+      "dataset": "AUTHN_PRIVATE_DEV"
+    },
+    {
+      "binding": "PUBLIC_DATASET",
+      "dataset": "AUTHN_PUBLIC_DEV"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "AUTHN_DB",
+      "database_id": "AUTHN",
+      "database_name": "authn-dev"
+    }
+  ],
+  "dev": {
+    "local_protocol": "https",
+    "port": 5882 // parseInt('authn', 36) % 9999
+  },
+  "env": {
+    "development": {
+      "vars": {
+        "ENVIRONMENT_NAME": "development"
+      }
+    },
+    "production": {
+      "name": "quisido-authn",
+      "analytics_engine_datasets": [
+        {
+          "binding": "PRIVATE_DATASET",
+          "dataset": "AUTHN_PRIVATE"
+        },
+        {
+          "binding": "PUBLIC_DATASET",
+          "dataset": "AUTHN_PUBLIC"
+        }
+      ],
+      "d1_databases": [
+        {
+          "binding": "AUTHN_DB",
+          "database_id": "d0e825fc-b58d-49b3-a86c-a9d967278d80",
+          "database_name": "authn",
+          "preview_database_id": "d546119e-036c-4c3d-a684-953418657a8d"
+        }
+      ],
+      "kv_namespaces": [
+        {
+          "binding": "AUTHN_USER_IDS",
+          "id": "4dca15c74cdb4fba9680ee52d46c1534",
+          "preview_id": "235afbbf5e6a4a6bbadf56ea33d07b3e"
+        },
+        {
+          "binding": "BUDGET",
+          "id": "428454de6b3d4d47be3fa82eda149d3d",
+          "preview_id": "d5a8101e8daf49629fc1e0b64e6e0712"
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "AUTHN_DATA",
+          "bucket_name": "authn"
+        }
+      ],
+      "routes": [
+        {
+          "custom_domain": true,
+          "pattern": "a.quisi.do"
+        }
+      ],
+      "vars": {
+        "COOKIE_DOMAIN": "quisi.do",
+        "ENVIRONMENT_NAME": "production",
+        "HOST": "quisi.do",
+        "PATREON_OAUTH_CLIENT_ID": "J_6jrNJZNibHylSF83UVl9I4OHZYf67RAsU0s7_LnH1N5BKF-vgOyweF3KQLOKm1",
+        "PATREON_OAUTH_HOST": "https://www.patreon.com",
+        "PATREON_OAUTH_REDIRECT_URI": "https://a.quisi.do/patreon/"
+      }
+    },
+    "staging": {
+      "name": "quisido-authn-staging",
+      "workers_dev": true,
+      "analytics_engine_datasets": [
+        {
+          "binding": "PRIVATE_DATASET",
+          "dataset": "AUTHN_PRIVATE_STAGING"
+        },
+        {
+          "binding": "PUBLIC_DATASET",
+          "dataset": "AUTHN_PUBLIC_STAGING"
+        }
+      ],
+      "d1_databases": [
+        {
+          "binding": "AUTHN_DB",
+          "database_id": "d546119e-036c-4c3d-a684-953418657a8d",
+          "database_name": "authn-staging"
+        }
+      ],
+      "kv_namespaces": [
+        {
+          "binding": "AUTHN_USER_IDS",
+          "id": "235afbbf5e6a4a6bbadf56ea33d07b3e"
+        },
+        {
+          "binding": "BUDGET",
+          "id": "d5a8101e8daf49629fc1e0b64e6e0712"
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "AUTHN_DATA",
+          "bucket_name": "authn-staging"
+        }
+      ],
+      "routes": [
+        {
+          "custom_domain": true,
+          "pattern": "staging.a.quisi.do"
+        }
+      ],
+      "vars": {
+        "COOKIE_DOMAIN": "localhost",
+        "ENVIRONMENT_NAME": "staging",
+        "HOST": "localhost:3000",
+        "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
+        "PATREON_OAUTH_HOST": "https://www.patreon.com",
+        "PATREON_OAUTH_REDIRECT_URI": "https://localhost:5882/patreon/"
+      }
+    }
+  },
+  "kv_namespaces": [
+    {
+      "binding": "AUTHN_USER_IDS",
+      "id": "AUTHN_USER_IDS"
+    },
+    {
+      "binding": "BUDGET",
+      "id": "BUDGET"
+    }
+  ],
+  "observability": {
+    "logs": {
+      "enabled": true
+    }
+  },
+  "placement": {
+    "mode": "smart"
+  },
+  "r2_buckets": [
+    {
+      "binding": "AUTHN_DATA",
+      "bucket_name": "authn-dev"
+    }
+  ],
+  "vars": {
+    "COOKIE_DOMAIN": "localhost",
+    "ENVIRONMENT_NAME": "unknown",
+    "HOST": "localhost:3000",
+    "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
+    "PATREON_OAUTH_HOST": "https://www.patreon.com",
+    "PATREON_OAUTH_REDIRECT_URI": "https://localhost:5882/patreon/"
+  }
+}
+

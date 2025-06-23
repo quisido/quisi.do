@@ -17,6 +17,7 @@ const PROPS: Required<
   Omit<
     Props,
     | 'actionNameAttribute'
+    | 'allowedTrackingOrigins'
     | 'allowedTracingUrls'
     | 'beforeSend'
     | 'datacenter'
@@ -59,6 +60,7 @@ const PROPS: Required<
   traceContextInjection: 'all',
   traceSampleRate: 100,
   trackAnonymousUser: true,
+  trackBfcacheViews: true,
   trackFeatureFlagsForEvents: ['action', 'long_task', 'resource', 'vital'],
   trackLongTasks: true,
   trackResources: true,

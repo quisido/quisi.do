@@ -24,5 +24,9 @@ export default [
       'scripts/utils/npm-exec-workspace.ts',
       'scripts/utils/spy-on-console.ts',
     ],
+
+    'no-plusplus': ['scripts/utils/retry.ts'],
+
+    'no-useless-assignment': ['scripts/utils/retry.ts'],
   }),
 ];

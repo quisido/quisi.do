@@ -227,19 +227,19 @@ export default function handleMetric(
       }
 
       case WorkerMetricName.KVNamespaceGet: {
-        const { endTime, key, namespace, startTime } = dimensions;
+        const { endTime, env, key, startTime } = dimensions;
         if (
           typeof endTime !== 'number' ||
+          typeof env !== 'string' ||
           typeof key !== 'string' ||
-          typeof namespace !== 'string' ||
           typeof startTime !== 'number'
         ) {
           emitInvalidWorkerMetric();
           return;
         }
 
-        emitPrivately({ endTime, key, namespace, startTime });
-        emitPublicly({ endTime, namespace, startTime });
+        emitPrivately({ endTime, env, key, startTime });
+        emitPublicly({ endTime, env, startTime });
         return;
       }
 
@@ -259,17 +259,19 @@ export default function handleMetric(
       }
 
       case WorkerMetricName.KVNamespacePut: {
-        const { endTime, env, startTime } = dimensions;
+        const { bytes, endTime, env, startTime, ttl } = dimensions;
         if (
+          typeof bytes !== 'number' ||
           typeof endTime !== 'number' ||
           typeof env !== 'string' ||
-          typeof startTime !== 'number'
+          typeof startTime !== 'number' ||
+          typeof ttl !== 'number'
         ) {
           emitInvalidWorkerMetric();
           return;
         }
 
-        emitPublicly({ endTime, env, startTime });
+        emitPublicly({ bytes, endTime, env, startTime, ttl });
         return;
       }
 
@@ -289,8 +291,9 @@ export default function handleMetric(
       }
 
       case WorkerMetricName.R2BucketPut: {
-        const { endTime, env, startTime } = dimensions;
+        const { bytes, endTime, env, startTime } = dimensions;
         if (
+          typeof bytes !== 'number' ||
           typeof endTime !== 'number' ||
           typeof env !== 'string' ||
           typeof startTime !== 'number'
@@ -299,7 +302,7 @@ export default function handleMetric(
           return;
         }
 
-        emitPublicly({ endTime, env, startTime });
+        emitPublicly({ bytes, endTime, env, startTime });
         return;
       }
 

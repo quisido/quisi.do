@@ -146,7 +146,10 @@ describe('FetchHandler', (): void => {
       TEST_EXECUTION_CONTEXT,
     );
 
-    expect(executionContextValue).toBe(TEST_EXECUTION_CONTEXT);
+    expect(executionContextValue).toStrictEqual({
+      ...TEST_EXECUTION_CONTEXT,
+      waitUntil: expect.any(Function) as () => void,
+    });
   });
 
   it('should not vend execution context outside of fetch', (): void => {

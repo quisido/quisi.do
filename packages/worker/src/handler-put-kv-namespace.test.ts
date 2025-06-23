@@ -42,9 +42,11 @@ describe('Handler', (): void => {
     expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(
       MetricName.KVNamespacePut,
       {
+        bytes: 10,
         endTime: EXPECT_ANY_NUMBER,
         env: 'MY_NAMESPACE',
         startTime: EXPECT_ANY_NUMBER,
+        ttl: 0,
       },
     );
   });

@@ -283,13 +283,15 @@ When each metric is emit, it includes a set of dimensions as defined below.
 | `MetricName.KVNamespaceGetError`     | `endTime`     | `number`  |
 |                             | `env`         | `string`  |
 |                             | `startTime`   | `number`  |
-| `MetricName.KVNamespacePut`          | `endTime`     | `number`  |
+| `MetricName.KVNamespacePut` | `bytes`       | `number`  |
+|                             | `endTime`     | `number`  |
 |                             | `env`         | `string`  |
 |                             | `startTime`   | `number`  |
 | `MetricName.KVNamespacePutError`     | `endTime`     | `number`  |
 |                             | `env`         | `string`  |
 |                             | `startTime`   | `number`  |
-| `MetricName.R2BucketPut`          | `endTime`     | `number`  |
+| `MetricName.R2BucketPut`    | `bytes`       | `number`  |
+|                             | `endTime`     | `number`  |
 |                             | `env`         | `string`  |
 |                             | `startTime`   | `number`  |
 | `MetricName.R2BucketPutError`     | `endTime`     | `number`  |

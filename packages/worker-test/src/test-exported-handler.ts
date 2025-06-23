@@ -23,7 +23,7 @@ interface Options {
     | ((
         name: string,
         dimensions: Record<string, boolean | number | string>,
-      ) => void)
+      ) => Promise<void> | void)
     | undefined;
 }
 
@@ -149,7 +149,7 @@ export default class TestExportedHandler {
     (
       name: string,
       dimensions: Record<string, boolean | number | string>,
-    ) => void
+    ) => Promise<void> | void
   > = vi.fn();
 
   #mockedFetch = vi.fn(

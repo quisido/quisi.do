@@ -7,7 +7,7 @@ interface Props extends Intl.NumberFormatOptions {
 
 const mapChildrenToNumber = (children: number | string): number => {
   if (typeof children === 'string') {
-    return parseFloat(children);
+    return Number.parseFloat(children);
   }
 
   return children;

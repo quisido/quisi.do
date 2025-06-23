@@ -67,6 +67,7 @@ export enum MetricName {
   InvalidAuthnUserIdsNamespace = 'namespace.authn-user-ids.invalid',
   InvalidAnalyticsRowBlobIndex = 'analytics.row.blob-index.invalid',
   InvalidAnalyticsRowDoubleIndex = 'analytics.row.double-index.invalid',
+  InvalidBudget = 'budget.invalid',
   InvalidDatabase = 'database.invalid',
   InvalidOAuthUserId = 'database.oauth.user-id.invalid',
   InvalidUsageDataset = 'dataset.usage.invalid',
