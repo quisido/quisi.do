@@ -1,6 +1,9 @@
 import { execFileSync } from 'node:child_process';
 import isString from './is-string.js';
 import isSpawnSyncReturns from './is-spawn-sync-returns.js';
+import retry from './retry.js';
+
+const ATTEMPTS = 3;
 
 const isActionableMessage = (message: string): boolean =>
   !message.startsWith('npm error A complete log of this run can be found in: ');
@@ -14,13 +17,13 @@ export default function npmExecWorkspace(
   );
 
   try {
-    const result: string = execFileSync(
-      'npm',
-      [...script, `--workspace=packages/${workspaceDirectory}`],
-      { encoding: 'utf-8', shell: true, stdio: 'pipe' },
+    return retry(ATTEMPTS, (): string =>
+      execFileSync(
+        'npm',
+        [...script, `--workspace=packages/${workspaceDirectory}`],
+        { encoding: 'utf-8', shell: true, stdio: 'pipe' },
+      ),
     );
-
-    return result;
   } catch (err: unknown) {
     if (!isSpawnSyncReturns(err)) {
       throw err;

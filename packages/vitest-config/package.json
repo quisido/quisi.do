@@ -43,30 +43,30 @@
     "vitest:watch": "vitest watch"
   },
   "dependencies": {
-    "@eslint/js": "^9.27.0",
+    "@eslint/js": "^9.29.0",
     "@types/eslint": "^9.6.1",
     "@types/eslint-config-prettier": "^6.11.3",
-    "@typescript-eslint/eslint-plugin": "^8.32.1",
-    "@typescript-eslint/parser": "^8.32.1"
+    "@typescript-eslint/eslint-plugin": "^8.34.1",
+    "@typescript-eslint/parser": "^8.34.1"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.18.1",
+    "@arethetypeswrong/cli": "^0.18.2",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@types/node": "^22.15.21",
-    "@vitest/coverage-istanbul": "^3.1.4",
+    "@types/node": "^24.0.3",
+    "@vitest/coverage-istanbul": "^3.2.4",
     "cjs-ts": "^2.0.0",
     "concurrently": "^9.1.2",
-    "eslint": "^9.27.0",
+    "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.4.0",
+    "eslint-plugin-prettier": "^5.5.0",
     "prettier": "^3.5.3",
     "publint": "^0.3.12",
     "rimraf": "^6.0.1",
     "tslib": "^2.8.1",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
-    "vitest": "^3.1.4"
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
     "eslint": ">=9.0.0",

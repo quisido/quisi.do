@@ -5,6 +5,7 @@ import {
   isD1Database,
   isKVNamespace,
   isR2Bucket,
+  Pricing,
 } from 'cloudflare-utils';
 import { EventEmitter } from 'eventemitter3';
 import { isRecord, mapToError } from 'fmrs';
@@ -13,10 +14,15 @@ import mapRequestInfoToString from './map-request-info-to-string.js';
 import type { MetricDimensions } from './metric-dimensions.js';
 import { MetricName } from './metric-name.js';
 import type Runnable from './runnable.js';
+import mapKVNamespaceValueToBytes from './map-kv-namespace-value-to-bytes.js';
+import mapR2BucketValueToBytes from './map-r2-bucket-value-to-bytes.js';
+import sanitizeExpenseTtl from './sanitize-expense-ttl.js';
+import createTtl from './create-ttl.js';
 
 interface EventTypes {
   readonly effect: [Promise<unknown>];
   readonly error: [Error];
+  readonly expense: [Pricing, number];
   readonly log: string[];
   readonly metric: [string, MetricDimensions];
 }
@@ -65,6 +71,10 @@ type HandlerReturnType<
 
 const EMPTY_OBJECT: Record<string, never> = {};
 const FIRST = 0;
+const KV_PUT_OPTIONS_INDEX = 2;
+const KV_PUT_VALUE_INDEX = 1;
+const R2_PUT_VALUE_INDEX = 1;
+const SINGLE = 1;
 
 export default class Handler<
   K extends keyof Required<ExportedHandler> = keyof Required<ExportedHandler>,
@@ -84,7 +94,6 @@ export default class Handler<
   #fetch: Fetcher['fetch'] | undefined;
   #flushed = false;
   #now: () => number = Date.now.bind(Date);
-  readonly #state = new Map<string, unknown>();
 
   public readonly run: (
     /**
@@ -154,6 +163,7 @@ export default class Handler<
       const result: ReturnType<
         Required<ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata>>[K]
       > = handler.call(this, ...params);
+
       if (!(result instanceof Promise)) {
         this.flush();
         return result;
@@ -200,6 +210,15 @@ export default class Handler<
     > = EMPTY_OBJECT,
   ): void {
     this.#emit('metric', name, dimensions);
+  }
+
+  /**
+   * Emits an expense event for tracking resource usage costs.
+   * @param pricing - The pricing category from Cloudflare's pricing model
+   * @param amount - The amount of resource units consumed
+   */
+  public expense(pricing: Pricing, amount: number): void {
+    this.#emit('expense', pricing, amount);
   }
 
   public async fetch(
@@ -308,6 +327,10 @@ export default class Handler<
         startTime,
       });
 
+      // https://github.com/quisido/quisi.do/issues/273
+      this.expense(Pricing.D1RowsRead, rowsRead);
+      this.expense(Pricing.D1RowsWritten, rowsWritten);
+
       return {
         changedDb,
         changes,
@@ -372,6 +395,10 @@ export default class Handler<
         startTime,
       });
 
+      // https://github.com/quisido/quisi.do/issues/273
+      this.expense(Pricing.D1RowsRead, rowsRead);
+      this.expense(Pricing.D1RowsWritten, rowsWritten);
+
       return {
         changedDb,
         changes,
@@ -409,11 +436,13 @@ export default class Handler<
     const startTime: number = this.now();
 
     try {
+      this.expense(Pricing.KVKeysRead, SINGLE);
       const value: string | null = await namespace.get(key, 'text');
+
       this.emitMetric(MetricName.KVNamespaceGet, {
         endTime: this.now(),
+        env,
         key,
-        namespace: env,
         startTime,
       });
 
@@ -423,8 +452,8 @@ export default class Handler<
       this.logError(error);
       this.emitMetric(MetricName.KVNamespaceGetError, {
         endTime: this.now(),
+        env,
         key,
-        namespace: env,
         startTime,
       });
 
@@ -434,10 +463,6 @@ export default class Handler<
 
   public getR2Bucket(name: string): R2Bucket {
     return this.validateBinding(name, isR2Bucket);
-  }
-
-  public getState(key: string, value: unknown): void {
-    this.#state.set(key, value);
   }
 
   public log(...messages: readonly string[]): void {
@@ -488,6 +513,14 @@ export default class Handler<
     this.#on('error', callback.bind(this));
   }
 
+  /**
+   * Registers a callback to be invoked when expense events are emit.
+   * @param callback - Function to handle expense events
+   */
+  public onExpense(callback: (pricing: Pricing, amount: number) => void): void {
+    this.#on('expense', callback.bind(this));
+  }
+
   public onLog(
     callback: (...messages: readonly string[]) => Promise<void> | void,
   ): void {
@@ -515,12 +548,28 @@ export default class Handler<
   ): Promise<void> {
     const namespace: KVNamespace = this.getKVNamespace(env);
     const startTime: number = this.now();
+
+    const bytes: number = mapKVNamespaceValueToBytes(
+      params[KV_PUT_VALUE_INDEX],
+    );
+    const ttlSeconds: number = createTtl(
+      params[KV_PUT_OPTIONS_INDEX],
+      this.now.bind(this),
+    );
+    this.expense(Pricing.KVKeysWritten, SINGLE);
+    this.expense(
+      Pricing.KVStoredData,
+      (params[FIRST].length + bytes) * sanitizeExpenseTtl(ttlSeconds),
+    );
+
     try {
       await namespace.put(...params);
       this.emitMetric(MetricName.KVNamespacePut, {
+        bytes,
         endTime: this.now(),
         env,
         startTime,
+        ttl: ttlSeconds,
       });
     } catch (err: unknown) {
       const error: Error = mapToError(err);
@@ -539,9 +588,15 @@ export default class Handler<
   ): Promise<void> {
     const bucket: R2Bucket = this.getR2Bucket(env);
     const startTime: number = this.now();
+
+    const bytes: number = mapR2BucketValueToBytes(params[R2_PUT_VALUE_INDEX]);
+    this.expense(Pricing.R2ClassAOperations, SINGLE);
+    this.expense(Pricing.R2Storage, bytes);
+
     try {
       await bucket.put(...params);
       this.emitMetric(MetricName.R2BucketPut, {
+        bytes,
         endTime: this.now(),
         env,
         startTime,
@@ -555,10 +610,6 @@ export default class Handler<
         startTime,
       });
     }
-  }
-
-  public setState(key: string, value: unknown): void {
-    this.#state.set(key, value);
   }
 
   public validateBinding<T>(
@@ -595,6 +646,8 @@ export default class Handler<
     name: string,
     dimensions: MetricDimensions,
   ): void {
+    this.expense(Pricing.AnalyticsDataPointsWritten, SINGLE);
+
     this.getAnalyticsEngineDataset(dataset).writeDataPoint({
       ...mapMetricDimensionsToDataPoint(dimensions),
       indexes: [name],

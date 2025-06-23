@@ -5,8 +5,10 @@ export default [
   ...configs,
 
   ...disableRulesForFiles({
+    '@typescript-eslint/no-duplicate-enum-values': ['src/pricing.ts'],
+    '@typescript-eslint/prefer-literal-enum-member': ['src/pricing.ts'],
     camelcase: ['src/is-analytics-engine-response.test.ts'],
-    'no-magic-numbers': ['src/status-code.ts', 'src/usage-type.ts'],
+    'no-magic-numbers': ['src/pricing.ts', 'src/status-code.ts'],
     'no-underscore-dangle': ['src/is-analytics-engine-row.ts'],
   }),
 ];

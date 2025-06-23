@@ -8,11 +8,11 @@ import { MetricName } from './constants/metric-name.js';
 import isWorkerMetricName from './utils/is-worker-metric-name.js';
 import mapDimensionsToString from './utils/map-dimensions-to-string.js';
 
-export default function handleMetric(
+export default async function handleMetric(
   this: Handler,
   name: string,
   dimensions: MetricDimensions,
-): void {
+): Promise<void> {
   const emitPublicly = (subdimensions: MetricDimensions): void => {
     const subdimensionsStr: string = mapDimensionsToString(subdimensions);
     this.log('------------------------');
@@ -30,8 +30,8 @@ export default function handleMetric(
   };
 
   if (isWorkerMetricName(name)) {
-    const emitInvalidWorkerMetric = (): void => {
-      handleMetric.call(this, MetricName.InvalidWorkerMetric, {
+    const emitInvalidWorkerMetric = async (): Promise<void> => {
+      await handleMetric.call(this, MetricName.InvalidWorkerMetric, {
         dimensions: JSON.stringify(dimensions),
         name,
       });
@@ -67,7 +67,7 @@ export default function handleMetric(
           typeof sizeAfter !== 'number' ||
           typeof startTime !== 'number'
         ) {
-          emitInvalidWorkerMetric();
+          await emitInvalidWorkerMetric();
           return;
         }
 
@@ -98,6 +98,7 @@ export default function handleMetric(
           sizeAfter,
           startTime,
         });
+
         return;
       }
 
@@ -110,7 +111,7 @@ export default function handleMetric(
           typeof query !== 'string' ||
           typeof startTime !== 'number'
         ) {
-          emitInvalidWorkerMetric();
+          await emitInvalidWorkerMetric();
           return;
         }
 
@@ -156,7 +157,7 @@ export default function handleMetric(
           typeof sizeAfter !== 'number' ||
           typeof startTime !== 'number'
         ) {
-          emitInvalidWorkerMetric();
+          await emitInvalidWorkerMetric();
           return;
         }
 
@@ -185,6 +186,7 @@ export default function handleMetric(
           sizeAfter,
           startTime,
         });
+
         return;
       }
 
@@ -195,7 +197,7 @@ export default function handleMetric(
           typeof startTime !== 'number' ||
           typeof url !== 'string'
         ) {
-          emitInvalidWorkerMetric();
+          await emitInvalidWorkerMetric();
           return;
         }
 
@@ -205,7 +207,7 @@ export default function handleMetric(
           emitPublicly({ endTime, origin, startTime });
           return;
         } catch (_err: unknown) {
-          emitInvalidWorkerMetric();
+          await emitInvalidWorkerMetric();
           return;
         }
       }
@@ -217,7 +219,7 @@ export default function handleMetric(
           typeof type !== 'string' ||
           typeof value !== 'string'
         ) {
-          emitInvalidWorkerMetric();
+          await emitInvalidWorkerMetric();
           return;
         }
 
@@ -227,19 +229,19 @@ export default function handleMetric(
       }
 
       case WorkerMetricName.KVNamespaceGet: {
-        const { endTime, key, namespace, startTime } = dimensions;
+        const { endTime, env, key, startTime } = dimensions;
         if (
           typeof endTime !== 'number' ||
+          typeof env !== 'string' ||
           typeof key !== 'string' ||
-          typeof namespace !== 'string' ||
           typeof startTime !== 'number'
         ) {
-          emitInvalidWorkerMetric();
+          await emitInvalidWorkerMetric();
           return;
         }
 
-        emitPrivately({ endTime, key, namespace, startTime });
-        emitPublicly({ endTime, namespace, startTime });
+        emitPrivately({ endTime, env, key, startTime });
+        emitPublicly({ endTime, env, startTime });
         return;
       }
 
@@ -250,7 +252,7 @@ export default function handleMetric(
           typeof env !== 'string' ||
           typeof startTime !== 'number'
         ) {
-          emitInvalidWorkerMetric();
+          await emitInvalidWorkerMetric();
           return;
         }
 
@@ -259,17 +261,19 @@ export default function handleMetric(
       }
 
       case WorkerMetricName.KVNamespacePut: {
-        const { endTime, env, startTime } = dimensions;
+        const { bytes, endTime, env, startTime, ttl } = dimensions;
         if (
+          typeof bytes !== 'number' ||
           typeof endTime !== 'number' ||
           typeof env !== 'string' ||
-          typeof startTime !== 'number'
+          typeof startTime !== 'number' ||
+          typeof ttl !== 'number'
         ) {
-          emitInvalidWorkerMetric();
+          await emitInvalidWorkerMetric();
           return;
         }
 
-        emitPublicly({ endTime, env, startTime });
+        emitPublicly({ bytes, endTime, env, startTime, ttl });
         return;
       }
 
@@ -280,7 +284,7 @@ export default function handleMetric(
           typeof env !== 'string' ||
           typeof startTime !== 'number'
         ) {
-          emitInvalidWorkerMetric();
+          await emitInvalidWorkerMetric();
           return;
         }
 
@@ -289,17 +293,18 @@ export default function handleMetric(
       }
 
       case WorkerMetricName.R2BucketPut: {
-        const { endTime, env, startTime } = dimensions;
+        const { bytes, endTime, env, startTime } = dimensions;
         if (
+          typeof bytes !== 'number' ||
           typeof endTime !== 'number' ||
           typeof env !== 'string' ||
           typeof startTime !== 'number'
         ) {
-          emitInvalidWorkerMetric();
+          await emitInvalidWorkerMetric();
           return;
         }
 
-        emitPublicly({ endTime, env, startTime });
+        emitPublicly({ bytes, endTime, env, startTime });
         return;
       }
 
@@ -310,7 +315,7 @@ export default function handleMetric(
           typeof env !== 'string' ||
           typeof startTime !== 'number'
         ) {
-          emitInvalidWorkerMetric();
+          await emitInvalidWorkerMetric();
           return;
         }
 

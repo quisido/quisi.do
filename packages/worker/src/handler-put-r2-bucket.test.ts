@@ -40,6 +40,7 @@ describe('Handler', (): void => {
 
     testBucket.expectToHavePut('test.json', '{}');
     expect(TEST_METRIC_HANDLER).toHaveBeenCalledWith(MetricName.R2BucketPut, {
+      bytes: 2,
       endTime: EXPECT_ANY_NUMBER,
       env: 'MY_BUCKET',
       startTime: EXPECT_ANY_NUMBER,

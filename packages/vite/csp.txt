@@ -9,6 +9,7 @@ connect-src
   https://*.clarity.ms/collect
   https://a.quisi.do/whoami/
   https://analytics.google.com/g/collect
+  https://browser-intake-datadoghq.com/api/v2/profile
   https://browser-intake-datadoghq.com/api/v2/replay
   https://browser-intake-datadoghq.com/api/v2/rum
   https://cloudflareinsights.com/
@@ -28,6 +29,7 @@ connect-src
   https://stats.g.doubleclick.net/g/collect
   https://us.i.posthog.com/decide/
   https://us.i.posthog.com/e/
+  https://us.i.posthog.com/flags/
   https://us.i.posthog.com/i/
   https://us.i.posthog.com/s/
   https://us-assets.i.posthog.com/array/

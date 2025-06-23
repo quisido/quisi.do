@@ -80,6 +80,7 @@ describe('Handler', (): void => {
       {
         endTime: EXPECT_ANY_NUMBER,
         env: 'MY_NAMESPACE',
+        key: 'TEST_KEY',
         startTime: EXPECT_ANY_NUMBER,
       },
     );

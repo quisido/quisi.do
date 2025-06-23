@@ -3,7 +3,7 @@ import {
   TEST_EXECUTION_CONTEXT,
 } from 'cloudflare-test-utils';
 import { assert, describe, expect, it, vi } from 'vitest';
-import noop from '../test/noop.js';
+import noop from './noop.js';
 import { TestExportedHandler } from '../test/test-exported-handler.js';
 import { FetchHandler, Handler, MetricName } from './index.js';
 

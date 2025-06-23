@@ -3,6 +3,7 @@ import assert from 'node:assert';
 import { spawn, type ChildProcessWithoutNullStreams } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 
+const ERROR_EXIT_CODE = 1;
 const pkgBuffer: Buffer = await readFile('./package.json');
 const pkgStr: string = pkgBuffer.toString();
 const pkg: unknown = JSON.parse(pkgStr);
@@ -50,7 +51,7 @@ const handleOut = (chunk: unknown): void => {
 
 const mapCodeToString = (code: null | number): string => {
   if (code === null) {
-    return '0';
+    return '1';
   }
 
   return code.toString();
@@ -91,9 +92,10 @@ class ChildPromise extends Promise<void> {
     child.stderr.addListener('data', handleErr);
     child.stdout.addListener('data', handleOut);
 
-    const handleExit = (code: number): void => {
-      child.kill(code);
+    const handleExit = (): void => {
+      child.kill('SIGTERM');
     };
+
     process.addListener('exit', handleExit);
 
     super((resolve, reject): void => {
@@ -117,7 +119,7 @@ class ChildPromise extends Promise<void> {
 
         const codeStr: string = mapCodeToString(code);
         reject(new Error(`Command "${command}" exited with code ${codeStr}.`));
-        process.exit(code);
+        process.exit(code ?? ERROR_EXIT_CODE);
       };
 
       child.addListener('close', handleClose);
@@ -131,7 +133,7 @@ const mapScriptToProcess = (script: string): Promise<void> => {
 };
 
 const mapWorkspaceDependencyToProcess = (dependency: string): Promise<void> => {
-  const command = `npm run dev --workspace=packages/${dependency}`;
+  const command = `npm run start --workspace=packages/${dependency}`;
   return new ChildPromise(command);
 };
 

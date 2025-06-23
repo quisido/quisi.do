@@ -76,6 +76,10 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
 
   server: {
     port: 3000,
+
+    headers: {
+      'document-policy': 'js-profiling',
+    },
   },
 };
 

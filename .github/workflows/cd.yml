@@ -422,7 +422,7 @@ jobs:
         with:
           cache: npm
           node-version: latest
-          registry-url: 'https://npm.pkg.github.com'
+          registry-url: 'https://npm.pkg.github.com/@quisido'
           scope: '@${{ github.repository_owner }}'
       - name: Install dependencies
         run: npm install --legacy-peer-deps
@@ -432,10 +432,7 @@ jobs:
           NPM_CONFIG_PROVENANCE: true
         run: >
           npm config set "//npm.pkg.github.com/:_authToken" $NPM_AUTH_TOKEN;
-          npm config set \
-            npmScopes.${{ github.repository_owner }}.npmPublishRegistry \
-            'https://npm.pkg.github.com';
-          npm run publish;
+          npm run publish --registry=https://npm.pkg.github.com;
 
   wrangler-deploy-authn:
     name: Wrangler deploy (Authentication)

@@ -37,6 +37,7 @@ export default async function handleWhoAmIFetchRequest(
   );
 
   if (typeof userIdFromMemory !== 'undefined') {
+    this.setFiscalResponsibility(userIdFromMemory);
     this.emitPublicMetric(MetricName.CachedAuthnId);
     this.emitPrivateMetric(MetricName.CachedAuthnId, {
       userId: userIdFromMemory,
@@ -87,6 +88,7 @@ export default async function handleWhoAmIFetchRequest(
 
     // User found! 🎉
     const userId: number = parseInt(userIdStr, BASE);
+    this.setFiscalResponsibility(userId);
     this.setAuthnUserIdInMemory(this.authnIdCookie, userId);
 
     this.emitPublicMetric(MetricName.UncachedAuthnId);
