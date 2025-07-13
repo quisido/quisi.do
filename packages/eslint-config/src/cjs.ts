@@ -1,9 +1,13 @@
-import type { Linter } from 'eslint';
 import JS from './js.js';
+import defineConfig from './define-config.js';
+import { LINTER_OPTIONS } from './linter-options.js';
 
-export default {
+export default defineConfig({
   ...JS,
+  extends: [],
   files: ['**/*.cjs'],
+  ignores: [],
+  linterOptions: LINTER_OPTIONS,
   name: '@quisido/cjs',
 
   languageOptions: {
@@ -13,4 +17,4 @@ export default {
       require: 'writable',
     },
   },
-} satisfies Required<Omit<Linter.Config, 'ignores' | 'language' | 'processor'>>;
+});

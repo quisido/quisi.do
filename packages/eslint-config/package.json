@@ -1,6 +1,6 @@
 {
   "name": "@quisido/eslint-config",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "author": "quisi.do <eslint-config@quisi.do>",
   "description": "ESLint configurations for quisi.do",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/eslint-config#readme",
@@ -71,11 +71,16 @@
     "vitest:watch": "vitest watch"
   },
   "dependencies": {
+    "@eslint/config-helpers": "^0.2.2",
     "@eslint/js": "^9.29.0",
+    "@eslint/json": "^0.13.0",
     "@types/eslint": "^9.6.1",
     "@types/eslint-config-prettier": "^6.11.3",
     "@typescript-eslint/eslint-plugin": "^8.34.1",
     "@typescript-eslint/parser": "^8.34.1",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.5.0",
     "typescript-eslint": "^8.34.1"
   },
   "devDependencies": {
@@ -85,9 +90,6 @@
     "cjs-ts": "^2.0.0",
     "concurrently": "^9.1.2",
     "eslint": "^9.29.0",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.5.0",
     "prettier": "^3.5.3",
     "publint": "^0.3.12",
     "rimraf": "^6.0.1",
@@ -96,6 +98,7 @@
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
-    "eslint": ">=9.1.0"
+    "eslint": ">=9.0.0",
+    "prettier": ">=3.0.0"
   }
 }

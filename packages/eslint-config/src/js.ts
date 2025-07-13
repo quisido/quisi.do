@@ -1,13 +1,15 @@
 import js from '@eslint/js';
-import type { Linter } from 'eslint';
 import prettierConfig from 'eslint-config-prettier';
 import prettierPlugin from 'eslint-plugin-prettier';
 import prettierPluginRecommended from 'eslint-plugin-prettier/recommended';
 import { LANGUAGE_OPTIONS } from './language-options.js';
 import { LINTER_OPTIONS } from './linter-options.js';
+import defineConfig from './define-config.js';
 
-export default {
+export default defineConfig({
+  extends: [],
   files: ['**/*.js', '**/*.jsx', '**/*.mjs'],
+  ignores: [],
   languageOptions: LANGUAGE_OPTIONS,
   linterOptions: LINTER_OPTIONS,
   name: '@quisido/js',
@@ -34,4 +36,4 @@ export default {
     // Too many false positives.
     'consistent-return': 'off',
   },
-} satisfies Required<Omit<Linter.Config, 'ignores' | 'language' | 'processor'>>;
+});

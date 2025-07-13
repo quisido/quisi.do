@@ -2,11 +2,8 @@
 /analyze/
 /certificates/
 /coverage/
-/cypress/coverage/
-/cypress/downloads/
-/cypress/screenshots/
-/cypress/videos/
 /dist/
+/hint-report/
 /node_modules/
 /.eslintcache
 /lighthouse.report.*

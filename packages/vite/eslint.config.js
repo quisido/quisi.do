@@ -40,7 +40,6 @@ export default [
     '@typescript-eslint/no-non-null-assertion': ['src/utils/split.ts'],
     'func-style': ['src/**/*.tsx'],
     'max-params': ['src/utils/assert.ts'],
-    'prefer-named-capture-group': ['src/test/cypress/utils/select.ts'],
     'react-compiler/react-compiler': ['src/test/utils/render-hook-error.tsx'],
     'react-refresh/only-export-components': ['src/app/**/page.tsx'],
 

@@ -69,14 +69,6 @@
       "path": "packages/sentry-react"
     },
     {
-      "name": "test",
-      "path": "packages/test"
-    },
-    {
-      "name": "tree-logger",
-      "path": "packages/tree-logger"
-    },
-    {
       "name": "use-force-update",
       "path": "packages/use-force-update"
     },

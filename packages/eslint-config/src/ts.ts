@@ -4,8 +4,9 @@ import ts from 'typescript-eslint';
 import JS from './js.js';
 import mapConfigsToRules from './map-configs-to-rules.js';
 import { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
+import defineConfig from './define-config.js';
 
-export default {
+export default defineConfig({
   ...JS,
   files: ['**/*.ts', '**/*.tsx'],
   ignores: ['**/*.d.ts', '**/*.test.ts', '**/*.test.tsx'],
@@ -18,9 +19,9 @@ export default {
   },
 
   rules: {
-    ...(JS.rules as Linter.RulesRecord),
-    ...(ts.configs.base.rules as Linter.RulesRecord),
-    ...(ts.configs.eslintRecommended.rules as Linter.RulesRecord),
+    ...JS.rules,
+    ...ts.configs.base.rules,
+    ...ts.configs.eslintRecommended.rules,
     ...mapConfigsToRules(ts.configs.stylisticTypeChecked as Linter.Config[]),
     ...mapConfigsToRules(ts.configs.recommendedTypeChecked as Linter.Config[]),
     ...mapConfigsToRules(ts.configs.strictTypeChecked as Linter.Config[]),
@@ -65,5 +66,5 @@ export default {
 
     // Required for `@typescript-eslint/no-floating-promises`.
     'no-void': ['error', { allowAsStatement: true }],
-  } satisfies Linter.RulesRecord,
-} satisfies Required<Omit<Linter.Config, 'language' | 'processor'>>;
+  },
+});

@@ -1,0 +1,14 @@
+{
+  "extends": ["accessibility", "development", "progressive-web-apps", "web-recommended"],
+  "formatters": ["codeframe", "html", "json", "stylish", "summary"],
+  "hints": {
+    "compat-api/css": ["error", { "ignore": ["-webkit-overflow-scrolling", "text-size-adjust"] }],
+    "compat-api/html": ["error", { "ignore": ["meta[name=theme-color]"] }]
+  },
+  "ignoredUrls": [
+    {
+      "domain": "https://quisi.do/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js",
+      "hints": ["content-type"]
+    }
+  ]
+}
