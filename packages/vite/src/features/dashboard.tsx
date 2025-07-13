@@ -6,7 +6,6 @@ import {
   type PropsWithChildren,
   type ReactElement,
 } from 'react';
-import CertificateManagerLink from '../components/certificate-manager-link.jsx';
 import Gauge from '../components/gauge.jsx';
 import NumberFormat from '../components/number-format.jsx';
 import { MILLISECONDS_PER_SECOND } from '../constants/time.js';
@@ -143,16 +142,6 @@ function Dashboard(): ReactElement {
           >
             trust the security certificate.
           </Link>
-          <ol style={{ margin: 0 }}>
-            <li>
-              Visit <CertificateManagerLink feature="content-security-policy" />
-              .
-            </li>
-            <li>
-              Under <strong>Trusted Certificates</strong>, click{' '}
-              <strong>Import</strong>.
-            </li>
-          </ol>
         </DashboardWrapper>
       );
     }

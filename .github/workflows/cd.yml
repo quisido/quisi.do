@@ -100,7 +100,7 @@ jobs:
           name: build
           path: packages/*/dist/
 
-  # Stage 3: lighthouse-ci, test, test-applications
+  # Stage 3: lighthouse-ci, test, test-applications, webhint-serve
   lighthouse-ci:
     name: Lighthouse (continuous integration)
     needs: build
@@ -217,6 +217,47 @@ jobs:
         run: npm install --legacy-peer-deps
       - name: Test quisi.do
         run: npm test --workspace=packages/vite
+
+  webhint-serve:
+    name: Webhint (local production build)
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          cache: npm
+          node-version: latest
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+      - name: Run Webhint
+        run: npm run webhint:serve --workspace=packages/vite
+        env:
+          CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: webhint-serve
+          path: packages/vite/hint-report
 
   # Stage 4: github-pages, npm, sentry-release
   datadog-sourcemaps:
@@ -539,7 +580,7 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
-  # Stage 6: lighthouse-production
+  # Stage 6: lighthouse-production, webhint-production
   lighthouse-production:
     name: Lighthouse (production)
     needs: cloudflare-purge
@@ -583,6 +624,47 @@ jobs:
             packages/*/lighthouse.report.*
             packages/*/lighthouse-*.devtoolslog.json
             packages/*/lighthouse-*.trace.json
+
+  webhint-production:
+    name: Webhint (production)
+    needs: cloudflare-purge
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: packages/
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          cache: npm
+          node-version: latest
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+      - name: Run webhint
+        run: npm run webhint:production --workspace=packages/vite
+        env:
+          CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: webhint-production
+          path: packages/vite/hint-report
 
 on:
   push:

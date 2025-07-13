@@ -19,6 +19,8 @@ export default function defineConfig(config: Config): Config {
     plugins: {},
     rules: {},
     settings: {},
+
+    // Spread last to allow overriding defaults.
     ...linterConfig,
   };
 }
