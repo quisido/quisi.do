@@ -5,6 +5,7 @@ export default function appendCloudflareInsights(
   const script: HTMLScriptElement = window.document.createElement('script');
   script.dataset['cfBeacon'] = JSON.stringify({ token });
   script.defer = true;
+  script.setAttribute('crossorigin', 'anonymous');
   script.setAttribute('nonce', nonce);
   script.setAttribute(
     'src',

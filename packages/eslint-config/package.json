@@ -34,6 +34,21 @@
       "import": "./dist/js.js",
       "default": "./dist/js.js"
     },
+    "./json": {
+      "types": "./dist/json.d.ts",
+      "import": "./dist/json.js",
+      "default": "./dist/json.js"
+    },
+    "./jsonc": {
+      "types": "./dist/jsonc.d.ts",
+      "import": "./dist/jsonc.js",
+      "default": "./dist/jsonc.js"
+    },
+    "./package-json": {
+      "types": "./dist/package-json.d.ts",
+      "import": "./dist/package-json.js",
+      "default": "./dist/package-json.js"
+    },
     "./test-ts": {
       "types": "./dist/test-ts.d.ts",
       "import": "./dist/test-ts.js",
@@ -64,6 +79,7 @@
     "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
     "publint": "publint",
+    "start": "tsc --project tsconfig.build.json --watch",
     "test": "concurrently --names eslint,publint,vitest --prefix-colors auto \"npm run eslint\" \"npm run publint\" \"npm run vitest:run\"",
     "tsc": "tsc --project tsconfig.build.json",
     "vitest": "vitest",

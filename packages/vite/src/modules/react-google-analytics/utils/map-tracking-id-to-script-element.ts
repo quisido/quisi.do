@@ -5,6 +5,7 @@ export default function mapTrackingIdToScriptElement(
 ): HTMLScriptElement {
   const script: HTMLScriptElement = document.createElement('script');
   script.setAttribute('async', '');
+  script.setAttribute('crossorigin', 'anonymous');
   script.setAttribute('src', mapTrackingIdToScriptSrc(trackingId));
   script.setAttribute('type', 'text/javascript');
   return script;

@@ -20,6 +20,7 @@ interface ImportMetaEnv {
   readonly HONEYCOMB_API_KEY?: string | undefined;
   readonly METICULOUS_RECORDING_TOKEN?: string | undefined;
   readonly MIXPANEL_TOKEN?: string | undefined;
+  readonly NEW_RELIC_LICENSE_KEY?: string | undefined;
   readonly NODE_ENV?: NodeJS.ProcessEnv['NODE_ENV'] | undefined;
   readonly NYC_REPORT_DIR?: string | undefined;
   readonly PATREON_OAUTH_CLIENT_ID?: string | undefined;

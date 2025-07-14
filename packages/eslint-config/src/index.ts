@@ -7,6 +7,7 @@ import TEST_TS from './test-ts.js';
 import TS from './ts.js';
 import { defineConfig } from 'eslint/config';
 import IGNORES from './ignores.js';
+import PACKAGE_JSON from './package-json.js';
 
 export { defineConfig } from 'eslint/config';
 export { default as disableRulesForFiles } from './disable-rules-for-files.js';
@@ -21,6 +22,7 @@ export default defineConfig(
 
   // Extends JSON.
   JSONC,
+  PACKAGE_JSON,
 
   // Extends TS.
   D_TS,

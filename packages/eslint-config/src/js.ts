@@ -33,6 +33,9 @@ export default defineConfig({
     'sort-imports': 'off',
     'sort-keys': ['error', 'asc', { allowLineSeparatedGroups: true }],
 
+    // Commented out code may be lowercase.
+    'capitalized-comments': 'off',
+
     // Too many false positives.
     'consistent-return': 'off',
   },

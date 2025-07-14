@@ -28,8 +28,8 @@
     "lighthouse": "npm run build && npm run lighthouse:report && npm run postlighthouse",
     "lighthouse:report": "concurrently --hide serve --kill-others --kill-others-on-fail --names lighthouse,serve --prefix-colors auto --success command-lighthouse \"npm run lighthouse:report:serve\" \"npm run serve\"",
     "lighthouse:report:dev": "wait-on https://localhost:3000/ && lighthouse https://localhost:3000/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental --save-assets",
-    "lighthouse:report:serve": "wait-on http://localhost:3000/ && lighthouse http://localhost:3000/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental --save-assets",
     "lighthouse:report:production": "lighthouse https://quisi.do/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental --save-assets",
+    "lighthouse:report:serve": "wait-on http://localhost:3000/ && lighthouse http://localhost:3000/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental --save-assets",
     "postlighthouse": "node ./scripts/postlighthouse/index.js",
     "publint": "publint",
     "serve": "serve dist",
@@ -39,9 +39,8 @@
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch",
-    "webhint:serve": "concurrently --hide serve --kill-others --kill-others-on-fail --names serve,webhint --prefix-colors auto --success command-webhint \"npm run serve\" \"wait-on http://localhost:3000/ && hint http://localhost:3000\"",
-    "webhint:staging": "hint https://staging.quisi.do/",
-    "webhint:production": "hint https://quisi.do/"
+    "webhint:production": "hint --config .production.hintrc https://quisi.do/",
+    "webhint:serve": "concurrently --hide serve --kill-others --kill-others-on-fail --names serve,webhint --prefix-colors auto --success command-webhint \"npm run serve\" \"wait-on http://localhost:3000/ && hint --config .serve.hintrc http://localhost:3000\""
   },
   "dependencies": {
     "@datadog/browser-rum": "^6.12.1",
@@ -50,6 +49,7 @@
     "@emotion/styled": "^11.14.0",
     "@fullstory/browser": "^2.0.6",
     "@microsoft/clarity": "^1.0.0",
+    "@newrelic/browser-agent": "^1.293.0",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/context-zone": "^2.0.1",
     "@opentelemetry/exporter-trace-otlp-http": "^0.202.0",

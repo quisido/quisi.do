@@ -8,6 +8,7 @@ export default function appendGoogleFonts(
   const paramsStr: string = params.toString();
 
   const link: HTMLLinkElement = window.document.createElement('link');
+  link.setAttribute('crossorigin', 'anonymous');
   link.setAttribute('href', `https://fonts.googleapis.com/css2?${paramsStr}`);
   link.setAttribute('nonce', nonce);
   link.setAttribute('rel', 'stylesheet');

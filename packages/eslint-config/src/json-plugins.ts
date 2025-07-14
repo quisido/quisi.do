@@ -1,4 +1,4 @@
-import type { ESLint } from "eslint";
+import type { ESLint } from 'eslint';
 import jsonPlugin from '@eslint/json';
 
 export const JSON_PLUGINS: Record<string, ESLint.Plugin> = {

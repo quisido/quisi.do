@@ -1,13 +1,15 @@
-import prettierConfig from 'eslint-config-prettier';
-import prettierPlugin from 'eslint-plugin-prettier';
-import prettierPluginRecommended from 'eslint-plugin-prettier/recommended';
 import jsonPlugin from '@eslint/json';
 import defineConfig from './define-config.js';
 import { LINTER_OPTIONS } from './linter-options.js';
 import { JSON_PLUGINS } from './json-plugins.js';
 
+/**
+ *   We don't use Prettier here, because Prettier does not support empty lines
+ * in JSON files.
+ */
+
 export default defineConfig({
-  extends: ['json/recommended'],
+  extends: [],
   files: ['**/.*.json', '**/*.json'],
   ignores: ['.vscode/*.json'],
   language: 'json/json',
@@ -17,18 +19,24 @@ export default defineConfig({
 
   plugins: {
     ...JSON_PLUGINS,
-    prettier: prettierPlugin,
   },
 
   rules: {
     ...jsonPlugin.configs.recommended.rules,
-    ...prettierConfig.rules,
-    ...prettierPluginRecommended.rules,
-    'no-duplicate-keys': 'error',
-    'no-empty-keys': 'error',
-    'no-unnormalized-keys': 'error',
-    'no-unsafe-values': 'error',
-    'sort-keys': 'error',
-    'top-level-interop': 'error',
+    'json/no-duplicate-keys': 'error',
+    'json/no-empty-keys': 'error',
+    'json/no-unnormalized-keys': 'error',
+    'json/no-unsafe-values': 'error',
+
+    'json/sort-keys': [
+      'error',
+      'asc',
+      {
+        allowLineSeparatedGroups: true,
+        natural: true,
+      },
+    ],
+
+    'json/top-level-interop': 'error',
   },
 });

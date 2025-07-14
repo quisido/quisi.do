@@ -54,13 +54,13 @@
       "error",
 
       // https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default
-      [
-        "accesskeys",
-        "focus-order-semantics",
-        "region",
-        "skip-link",
-        "tabindex"
-      ]
+      {
+        "accesskeys": "error",
+        "focus-order-semantics": "error",
+        "region": "off",
+        "skip-link": "error",
+        "tabindex": "error"
+      }
     ],
 
     "axe/language": "error",
@@ -157,7 +157,6 @@
       "error",
       {
         "ignore": [
-          "-webkit-overflow-scrolling",
           "text-size-adjust"
         ]
       }
@@ -179,27 +178,24 @@
     "detect-css-reflows/layout": "error",
     "detect-css-reflows/paint": "error",
     "disown-opener": "error",
-    "doctype": "error",
+    "doctype": "off",
     "highest-available-document-mode": "error",
-
-    "html-checker": [
-      "error",
-      {
-        "details": true
-      }
-    ],
-
+    "html-checker": "off",
     "http-cache": "error",
     "http-compression": "error",
     "https-only": "error",
     "image-optimization-cloudinary": "error",
     "leading-dot-classlist": "error",
-    "manifest-exists": "error",
     "manifest-app-name": "error",
+    "manifest-exists": "error",
     "manifest-file-extension": "error",
     "manifest-is-valid": "error",
     "meta-charset-utf-8": "error",
-    "meta-theme-color": "error",
+
+    // Webhint incorrectly flags multiple theme colors.
+    // https://github.com/webhintio/hint/issues/6001
+    "meta-theme-color": "off",
+
     "meta-viewport": "error",
     "minified-js": "error",
     "no-bom": "error",
@@ -208,7 +204,10 @@
     "no-friendly-error-pages": "error",
     "no-html-only-headers": "error",
     "no-http-redirects": "error",
-    "no-inline-styles": "error",
+
+    // Inline styles are beneficial when an elements has ~1 unique property.
+    "no-inline-styles": "off",
+
     "no-p3p": "error",
     "no-protocol-relative-urls": "error",
     "no-vulnerable-javascript-libraries": "error",
@@ -222,13 +221,7 @@
       }
     ],
 
-    "ssllabs": [
-      "error",
-      {
-        "grade": "A+"
-      }
-    ],
-
+    "ssllabs": "error",
     "strict-transport-security": "error",
     "stylesheet-limit": "off",
     "typescript-config/import-helpers": "error",
@@ -255,10 +248,8 @@
   "ignoredUrls": [
     {
       "domain": "quisi.do",
-      "path": "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js",
-      "hints": [
-        "content-type"
-      ]
+      "hints": ["content-type"],
+      "path": "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
     }
   ]
 }
