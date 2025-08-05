@@ -9,9 +9,17 @@ import {
   Tooltip,
   type ChartDataset,
 } from 'chart.js';
-import { useLayoutEffect, useMemo, type ReactElement } from 'react';
+import {
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  type ReactElement,
+  type RefObject,
+} from 'react';
 import { Line } from 'react-chartjs-2';
+import useWindow from '../../../hooks/use-window.js';
 import validateString from '../../../utils/validate-string.js';
+import mapWindowToFontSize from '../map-window-to-font-size.js';
 import styles from './line-chart.module.scss';
 
 interface Props {
@@ -22,6 +30,7 @@ interface Props {
 
 const CLASS_NAME: string = validateString(styles['chart']);
 const MAX_HUE = 360;
+const NONE = 0;
 
 const getColors = (count: number): readonly string[] => {
   const colors: string[] = [];
@@ -50,16 +59,25 @@ const mapDataToDatasets = (
   return entries.map(mapEntryToDataset);
 };
 
+const setChartHeight = (chart: Chart<'line'>, height: number): void => {
+  chart.resize(chart.width, height);
+};
+
 export default function LineChart({
   data,
   title,
   xLabels,
 }: Props): ReactElement {
+  // Contexts
+  const window: Window | null = useWindow();
+
   // States
   const datasets = useMemo(
     (): readonly ChartDataset<'line'>[] => mapDataToDatasets(data),
     [data],
   );
+
+  const lineRef: RefObject<Chart<'line'> | null> = useRef(null);
 
   // Effects
   useLayoutEffect((): void => {
@@ -74,15 +92,53 @@ export default function LineChart({
     );
   }, []);
 
+  // Makes the chart height a multiple of 1rem.
+  useLayoutEffect((): VoidFunction | undefined => {
+    const { current: lineChart } = lineRef;
+
+    if (lineChart === null || window === null) {
+      return;
+    }
+
+    const resize = (): void => {
+      const rootFontSize: number = mapWindowToFontSize(window);
+      const { height } = lineChart;
+      const overlap: number = height % rootFontSize;
+
+      if (overlap === NONE) {
+        return;
+      }
+
+      const rootFontSizeDiff: number = rootFontSize - overlap;
+      setChartHeight(lineChart, height + rootFontSizeDiff);
+    };
+
+    resize();
+
+    const observer = new MutationObserver(resize);
+    observer.observe(lineChart.canvas, {
+      attributes: true,
+      characterData: true,
+      childList: true,
+      subtree: true,
+    });
+
+    return (): void => {
+      observer.disconnect();
+    };
+  }, [window]);
+
   return (
     <Line
+      aria-label={title}
       className={CLASS_NAME}
       data={{
         datasets: [...datasets],
         labels: [...xLabels],
       }}
       options={{
-        // Normalized: true,
+        maintainAspectRatio: false,
+        normalized: true,
         responsive: true,
 
         plugins: {
@@ -115,6 +171,7 @@ export default function LineChart({
           },
         },
       }}
+      ref={lineRef}
     />
   );
 }

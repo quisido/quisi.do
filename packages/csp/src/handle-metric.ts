@@ -15,7 +15,7 @@ export default function handleMetric(
 ): void {
   const emitPublicly = (subdimensions: MetricDimensions): void => {
     const subdimensionsStr: string = mapDimensionsToString(subdimensions);
-    this.log('------------------------');
+    this.log('-'.repeat(`Public metric: ${name}`.length));
     this.log('Public metric:', name);
     this.log(subdimensionsStr);
     this.writeMetricDataPoint('PUBLIC_DATASET', name, subdimensions);

@@ -13,6 +13,7 @@ import useHostname from '../use-hostname.js';
 import useLogRocket from '../use-log-rocket.js';
 import usePathname from '../use-pathname.js';
 import createSentryEvent from './utils/create-sentry-event.js';
+import { useNewRelicBrowserAgent } from '../../modules/react-new-relic/index.js';
 
 interface CaptureSentryEventOptions {
   readonly captureEvent: (event: SentryEvent, hint?: EventHint) => string;
@@ -99,6 +100,7 @@ export default function useEmit(): EventEmitter {
   const fullstory: FSApi = useFullstory();
   const hostname: string = useHostname();
   const LogRocket = useLogRocket();
+  const newRelicBrowserAgent = useNewRelicBrowserAgent();
   const pathname: string = usePathname();
   const posthog = usePostHog();
   const { captureEvent } = useSentrySdk();
@@ -121,6 +123,9 @@ export default function useEmit(): EventEmitter {
       // Mixpanel
       safeMixpanelBrowserTrack(name, dimensions);
 
+      // New Relic
+      newRelicBrowserAgent?.recordCustomEvent(name, dimensions);
+
       // PostHog
       posthog.capture(name, dimensions, {
         skip_client_rate_limiting: true,
@@ -142,6 +147,7 @@ export default function useEmit(): EventEmitter {
       captureEvent,
       fullstory,
       hostname,
+      newRelicBrowserAgent,
       pathname,
       posthog,
     ],

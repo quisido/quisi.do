@@ -1,6 +1,247 @@
+// Webhint does not support workspaces; the configuration file must be in root.
+// https://github.com/webhintio/hint/issues/3651
 {
-  "extends": ["development"],
+  "extends": [
+    "accessibility",
+    "development",
+    "progressive-web-apps",
+    "web-recommended"
+  ],
+
+  "formatters": [
+    "codeframe",
+    "html",
+    "json",
+    "stylish",
+    "summary"
+  ],
+
   "hints": {
-    "compat-api/html": ["default", { "ignore": ["meta[name=theme-color]"] }]
+    "apple-touch-icons": "error",
+
+    "axe/aria": [
+      "error",
+
+      // https://webhint.io/docs/user-guide/hints/hint-axe/aria/#additional-rules-off-by-default
+      [
+        "aria-allowed-role",
+        "aria-dialog-name",
+        "aria-text",
+        "aria-treeitem-name",
+        "presentation-role-conflict"
+      ]
+    ],
+
+    "axe/color": [
+      "error",
+
+      // https://webhint.io/docs/user-guide/hints/hint-axe/color/
+      [
+        "link-in-text-block"
+      ]
+    ],
+
+    "axe/forms": [
+      "error",
+
+      // https://webhint.io/docs/user-guide/hints/hint-axe/forms/#additional-rules-off-by-default
+      [
+        "label-title-only"
+      ]
+    ],
+
+    "axe/keyboard": [
+      "error",
+
+      // https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default
+      {
+        "accesskeys": "error",
+        "focus-order-semantics": "error",
+        "region": "off",
+        "skip-link": "error",
+        "tabindex": "error"
+      }
+    ],
+
+    "axe/language": "error",
+
+    "axe/name-role-value": [
+      "error",
+
+      // https://webhint.io/docs/user-guide/hints/hint-axe/name-role-value/#additional-rules-off-by-default
+      [
+        "empty-heading"
+      ]
+    ],
+
+    "axe/parsing": "error",
+
+    "axe/semantics": [
+      "error",
+
+      // https://webhint.io/docs/user-guide/hints/hint-axe/semantics/#additional-rules-off-by-default
+      [
+        "heading-order",
+        "label-content-name-mismatch",
+        "landmark-banner-is-top-level",
+        "landmark-complementary-is-top-level",
+        "landmark-contentinfo-is-top-level",
+        "landmark-main-is-top-level",
+        "landmark-no-duplicate-banner",
+        "landmark-no-duplicate-contentinfo",
+        "landmark-no-duplicate-main",
+        "landmark-one-main",
+        "landmark-unique",
+        "p-as-heading",
+        "page-has-heading-one"
+      ]
+    ],
+
+    "axe/sensory-and-visual-cues": [
+      "error",
+
+      // https://webhint.io/docs/user-guide/hints/hint-axe/sensory-and-visual-cues/#additional-rules-off-by-default
+      [
+        "meta-viewport",
+        "meta-viewport-large"
+      ]
+    ],
+
+    "axe/structure": [
+      "error",
+
+      // https://webhint.io/docs/user-guide/hints/hint-axe/structure/#additional-rules-off-by-default
+      [
+        "css-orientation-lock",
+        "frame-tested",
+        "hidden-content"
+      ]
+    ],
+
+    "axe/tables": [
+      "error",
+
+      // https://webhint.io/docs/user-guide/hints/hint-axe/tables/#additional-rules-off-by-default
+      [
+        "scope-attr-valid",
+        "table-duplicate-name",
+        "table-fake-caption",
+        "td-has-header"
+      ]
+    ],
+
+    "axe/text-alternatives": [
+      "error",
+
+      // https://webhint.io/docs/user-guide/hints/hint-axe/text-alternatives/#additional-rules-off-by-default
+      [
+        "frame-title-unique",
+        "image-redundant-alt",
+        "svg-img-alt"
+      ]
+    ],
+
+    "axe/time-and-media": [
+      "error",
+
+      // https://webhint.io/docs/user-guide/hints/hint-axe/time-and-media/#additional-rules-off-by-default
+      [
+        "no-autoplay-audio"
+      ]
+    ],
+
+    "babel-config/is-valid": "error",
+    "button-type": "error",
+
+    "compat-api/css": [
+      "error",
+      {
+        "ignore": [
+          "text-size-adjust"
+        ]
+      }
+    ],
+
+    "compat-api/html": [
+      "error",
+      {
+        "ignore": [
+          "meta[name=theme-color]"
+        ]
+      }
+    ],
+
+    "content-type": "error",
+    "create-element-svg": "error",
+    "css-prefix-order": "error",
+    "detect-css-reflows/composite": "error",
+    "detect-css-reflows/layout": "error",
+    "detect-css-reflows/paint": "error",
+    "disown-opener": "error",
+    "doctype": "off",
+    "highest-available-document-mode": "error",
+    "html-checker": "off",
+    "http-cache": "error",
+    "http-compression": "error",
+    "https-only": "error",
+    "image-optimization-cloudinary": "error",
+    "leading-dot-classlist": "error",
+    "manifest-app-name": "error",
+    "manifest-exists": "error",
+    "manifest-file-extension": "error",
+    "manifest-is-valid": "error",
+    "meta-charset-utf-8": "error",
+
+    // Webhint incorrectly flags multiple theme colors.
+    // https://github.com/webhintio/hint/issues/6001
+    "meta-theme-color": "off",
+
+    "meta-viewport": "error",
+    "minified-js": "error",
+    "no-bom": "error",
+    "no-broken-links": "error",
+    "no-disallowed-headers": "error",
+    "no-friendly-error-pages": "error",
+    "no-html-only-headers": "error",
+    "no-http-redirects": "error",
+
+    // Inline styles are beneficial when an elements has ~1 unique property.
+    "no-inline-styles": "off",
+
+    "no-p3p": "error",
+    "no-protocol-relative-urls": "error",
+    "no-vulnerable-javascript-libraries": "error",
+    "performance-budget": "error",
+    "scoped-svg-styles": "error",
+
+    "sri": [
+      "error",
+      {
+        "originCriteria": "all"
+      }
+    ],
+
+    "ssllabs": "error",
+    "strict-transport-security": "error",
+    "stylesheet-limit": "off",
+    "typescript-config/import-helpers": "error",
+    "typescript-config/is-valid": "error",
+
+    /**
+     *   Removing comments as part of a separate minification step is
+     * recommended instead. https://github.com/webhintio/hint/issues/4839
+     */
+    "typescript-config/no-comments": "off",
+
+    "typescript-config/strict": "error",
+    "typescript-config/target": "error",
+    "validate-set-cookie-header": "error",
+    "webpack-config/config-exists": "off",
+    "webpack-config/is-installed": "off",
+    "webpack-config/is-valid": "error",
+    "webpack-config/module-esnext-typescript": "error",
+    "webpack-config/modules-false-babel": "error",
+    "webpack-config/no-devtool-in-prod": "error",
+    "x-content-type-options": "error"
   }
 }

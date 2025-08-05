@@ -1,0 +1,5 @@
+// Webhint does not support workspaces; the configuration file must be in root.
+// https://github.com/webhintio/hint/issues/3651
+{
+  "extends": "../../.hintrc"
+}

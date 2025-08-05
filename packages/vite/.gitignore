@@ -2,12 +2,10 @@
 /analyze/
 /certificates/
 /coverage/
-/cypress/coverage/
-/cypress/downloads/
-/cypress/screenshots/
-/cypress/videos/
 /dist/
+/hint-report/
 /node_modules/
+/.env.local
 /.eslintcache
 /lighthouse.report.*
 /lighthouse-0.devtoolslog.json

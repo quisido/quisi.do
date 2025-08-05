@@ -6,7 +6,6 @@ import {
   type PropsWithChildren,
   type ReactElement,
 } from 'react';
-import CertificateManagerLink from '../components/certificate-manager-link.jsx';
 import Gauge from '../components/gauge.jsx';
 import NumberFormat from '../components/number-format.jsx';
 import { MILLISECONDS_PER_SECOND } from '../constants/time.js';
@@ -143,16 +142,6 @@ function Dashboard(): ReactElement {
           >
             trust the security certificate.
           </Link>
-          <ol style={{ margin: 0 }}>
-            <li>
-              Visit <CertificateManagerLink feature="content-security-policy" />
-              .
-            </li>
-            <li>
-              Under <strong>Trusted Certificates</strong>, click{' '}
-              <strong>Import</strong>.
-            </li>
-          </ol>
         </DashboardWrapper>
       );
     }
@@ -294,24 +283,18 @@ function Dashboard(): ReactElement {
             </li>
           ),
         )}
-        <li>
-          <Paragraph>Time spent median:</Paragraph>
-          <ul>
-            <li>
-              Session:{' '}
-              <NumberFormat>
-                {Math.round(sessionTimeSpent / MILLISECONDS_PER_SECOND)}
-              </NumberFormat>{' '}
-              seconds
-            </li>
-            <li>
-              View:{' '}
-              <NumberFormat>
-                {Math.round(viewTimeSpent / MILLISECONDS_PER_SECOND)}
-              </NumberFormat>{' '}
-              seconds
-            </li>
-          </ul>
+        <li style={{ gridColumnEnd: 'span 2' }}>
+          <Paragraph>
+            <abbr title="Median">x&#x303;</abbr> time spent:{' '}
+            <NumberFormat>
+              {Math.round(sessionTimeSpent / MILLISECONDS_PER_SECOND)}
+            </NumberFormat>
+            <abbr title="seconds">s</abbr> per session,{' '}
+            <NumberFormat>
+              {Math.round(viewTimeSpent / MILLISECONDS_PER_SECOND)}
+            </NumberFormat>
+            s per view
+          </Paragraph>
         </li>
       </ul>
       {/* <h3 style={{ margin: 0 }}>Scalability</h3>

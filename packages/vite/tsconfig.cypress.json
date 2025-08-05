@@ -1,8 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "exclude": ["cypress/coverage/", "cypress/screenshots/", "cypress/videos/"],
-  "include": ["cypress.config.cjs", "cypress/**/*.ts", "src/**/*.e2e.ts", "src/test/cypress/"],
-  "compilerOptions": {
-    "baseUrl": "https://localhost:3000/"
-  }
-}

@@ -8,5 +8,5 @@ const mapEntryToString = ([key, value]: readonly [
 export default function mapDimensionsToString(
   dimensions: MetricDimensions,
 ): string {
-  return Object.entries(dimensions).map(mapEntryToString).join(' ');
+  return Object.entries(dimensions).map(mapEntryToString).join(', ');
 }

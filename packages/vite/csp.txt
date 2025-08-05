@@ -112,6 +112,7 @@ script-src-elem
   https://edge.fullstory.com/s/fs.js
   https://quisi.do/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js
   https://quisi.do/cdn-cgi/speculation
+  https://scripts.clarity.ms/
   https://static.cloudflareinsights.com/beacon.min.js
   https://us-assets.i.posthog.com/array/phc_qgxn9IH7LL0PWTQv12DQa6j65d7bSpkTG2nfTpVtJOW/
   https://us-assets.i.posthog.com/static/

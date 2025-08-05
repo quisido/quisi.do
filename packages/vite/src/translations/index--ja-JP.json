@@ -1,8 +1,8 @@
 {
   "Application Performance Index": "Application Performance Index",
   "Authenticate": "Authenticate",
-  "Continuous integration/deployment status": "Continuous integration/deployment status",
   "CPU time": "CPU time",
+  "Continuous integration/deployment status": "Continuous integration/deployment status",
   "Duration": "Duration",
   "First contentful paint": "First contentful paint",
   "First paint": "First paint",
@@ -17,7 +17,7 @@
   "Sentry issues": "Sentry issues",
   "Status": "Status",
   "Tolerated": "Tolerated",
-  "User connection time": "User connection time",
   "User DNS time": "User DNS time",
+  "User connection time": "User connection time",
   "Wall time": "Wall time"
 }

@@ -2,23 +2,6 @@
   "include": ["**/.*.json", "**/*.json", "**/*.ts"],
 
   "compilerOptions": {
-    // "charset": "utf8",
-    // "fallbackPolling": "dynamicPriorityPolling",
-    // "importsNotUsedAsValues": "error",
-    // "jsx": "react-jsx",
-    // "jsxFactory": "React.createElement",
-    // "jsxFragmentFactory": "React.Fragment",
-    // "jsxImportSource": "react",
-    // "listFilesOnly": false,
-    // "mapRoot": "../dist",
-    // "outDir": "dist",
-    // "reactNamespace": "React",
-    // "rootDir": ".",
-    // "sourceRoot": ".",
-    // "typeRoots": [],
-    // "watch": false,
-    // "watchDirectory": "useFsEvents",
-    // "watchFile": "useFsEvents",
     "allowArbitraryExtensions": false,
     "allowImportingTsExtensions": false,
     "allowJs": false,
@@ -40,8 +23,8 @@
     "disableSourceOfProjectReferenceRedirect": false,
     "downlevelIteration": true,
     "emitBOM": false,
-    "emitDecoratorMetadata": true,
     "emitDeclarationOnly": false,
+    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "experimentalDecorators": true,
@@ -64,9 +47,9 @@
     "newLine": "lf",
     "noEmit": false,
     "noEmitHelpers": false,
-    "noFallthroughCasesInSwitch": true,
     "noEmitOnError": false,
     "noErrorTruncation": false,
+    "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
@@ -107,7 +90,7 @@
     "types": [],
     "useDefineForClassFields": true,
     "useUnknownInCatchVariables": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
   },
 
   "exclude": [
@@ -119,6 +102,6 @@
     "node_modules/",
     "packages/",
     "sarif/",
-    ".pnp.*"
-  ]
+    ".pnp.*",
+  ],
 }

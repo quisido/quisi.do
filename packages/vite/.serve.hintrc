@@ -1,0 +1,27 @@
+{
+  "extends": "../../.hintrc",
+
+  "hints": {
+    "axe/keyboard": [
+      "error",
+
+      // https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default
+      {
+        "accesskeys": "error",
+        "focus-order-semantics": "error",
+        "region": "error",
+        "skip-link": "error",
+        "tabindex": "error"
+      }
+    ],
+
+    "doctype": "error",
+
+    "html-checker": [
+      "error",
+      {
+        "details": true
+      }
+    ]
+  }
+}

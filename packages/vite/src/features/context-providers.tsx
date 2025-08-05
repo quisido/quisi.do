@@ -11,24 +11,23 @@ import CustomThemeProvider from './custom-theme-provider.jsx';
 import PostHog from './posthog.jsx';
 import WindowProvider from './window-provider.jsx';
 
-const ContextProviders: ComponentType<PropsWithChildren> = withWrappers(
+export const ContextProviders: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,
   NotificationsProvider,
   SessionIdProvider,
   CustomThemeProvider,
+  // NewRelic,
   WindowProvider,
 
-  // Requres `Authentication`.
+  // Consumes `Authentication`.
   Fullstory,
   PostHog,
   Sentry,
 
-  // Requires `ThemeProvider`.
+  // Consumes `ThemeProvider`.
   Theme,
 
-  // Requires `WindowProvider`.
-  // Honeycomb, // Error: "Critical dependency: the request of a dependency is an expression"
+  // Consumes `WindowProvider`.
+  // Honeycomb, // "Critical dependency: the request of a dependency is an expression"
   TracerProviderProvider,
 )(Fragment);
-
-export default ContextProviders;

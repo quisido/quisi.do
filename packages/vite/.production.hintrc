@@ -1,0 +1,53 @@
+{
+  "extends": "../../.hintrc",
+
+  "hints": {
+    "axe/keyboard": [
+      "error",
+
+      // https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default
+      {
+        "accesskeys": "error",
+        "focus-order-semantics": "error",
+        "region": "error",
+        "skip-link": "error",
+        "tabindex": "error"
+      }
+    ],
+
+    "doctype": "error",
+
+    "html-checker": [
+      "error",
+      {
+        "details": true
+      }
+    ]
+  },
+
+  "ignoredUrls": [
+    {
+      "domain": "quisi.do",
+      "hints": [
+        "content-type",
+        "http-cache",
+        "http-compression",
+        "no-disallowed-headers",
+        "no-html-only-headers",
+        "strict-transport-security"
+      ],
+      "path": "/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    },
+    {
+      "domain": "www.clarity.ms",
+      "hints": [
+        "content-type",
+        "http-cache",
+        "http-compression",
+        "no-disallowed-headers",
+        "strict-transport-security",
+        "x-content-type-options"
+      ]
+    }
+  ]
+}

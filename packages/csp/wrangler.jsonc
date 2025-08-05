@@ -1,10 +1,4 @@
 {
-  "compatibility_date": "2024-11-11",
-  "main": "src/index.ts",
-  "name": "quisido-csp-dev",
-  "send_metrics": true,
-  "tsconfig": "./tsconfig.json",
-  "upload_source_maps": true,
   "analytics_engine_datasets": [
     {
       "binding": "PRIVATE_DATASET",
@@ -15,6 +9,7 @@
       "dataset": "CSP_PUBLIC_DEV"
     }
   ],
+  "compatibility_date": "2025-05-05",
   "d1_databases": [
     {
       "binding": "CSP_DB",
@@ -33,7 +28,6 @@
       }
     },
     "production": {
-      "name": "quisido-csp",
       "analytics_engine_datasets": [
         {
           "binding": "PRIVATE_DATASET",
@@ -52,6 +46,7 @@
           "preview_database_id": "a5299acf-42a8-47bb-95e7-c062bc772b48"
         }
       ],
+      "name": "quisido-csp",
       "routes": [
         {
           "custom_domain": true,
@@ -63,8 +58,6 @@
       }
     },
     "staging": {
-      "name": "quisido-csp-staging",
-      "workers_dev": true,
       "analytics_engine_datasets": [
         {
           "binding": "PRIVATE_DATASET",
@@ -82,6 +75,7 @@
           "database_name": "csp-staging"
         }
       ],
+      "name": "quisido-csp-staging",
       "routes": [
         {
           "custom_domain": true,
@@ -90,9 +84,12 @@
       ],
       "vars": {
         "ENVIRONMENT_NAME": "staging"
-      }
+      },
+      "workers_dev": true
     }
   },
+  "main": "src/index.ts",
+  "name": "quisido-csp-dev",
   "observability": {
     "logs": {
       "enabled": true
@@ -101,6 +98,9 @@
   "placement": {
     "mode": "smart"
   },
+  "send_metrics": true,
+  "tsconfig": "./tsconfig.json",
+  "upload_source_maps": true,
   "vars": {
     "ENVIRONMENT_NAME": "unknown"
   }

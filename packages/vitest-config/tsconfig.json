@@ -1,12 +1,15 @@
 {
-  "exclude": ["coverage/", "dist/", "node_modules/"],
-  "extends": "../../tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
     "rootDir": ".",
     "sourceRoot": ".",
-    "types": ["node"]
-  }
+    "types": ["node"],
+  },
+  "exclude": ["coverage/", "dist/", "node_modules/"],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "references": [
+    { "path": "../eslint-config/tsconfig.build.json" },
+  ],
 }

@@ -2,15 +2,14 @@
   "files.associations": {
     "**/config/api-extractor.json": "jsonc",
   },
-
   "files.exclude": {
+    "*.cpuprofile": true,
+    "*.tsbuildinfo": true,
+    ".attw.json": true,
+    ".eslintcache": true,
     "coverage/": true,
     "dist/": true,
     "node_modules/": true,
-    ".attw.json": true,
-    ".eslintcache": true,
-    "*.cpuprofile": true,
-    "*.tsbuildinfo": true,
-    "vitest.config.ts.timestamp-*-*.mjs": true
-  }
+    "vitest.config.ts.timestamp-*-*.mjs": true,
+  },
 }

@@ -1,6 +1,4 @@
 {
-  "extends": "../../tsconfig.json",
-
   "compilerOptions": {
     "allowJs": false,
     "downlevelIteration": true,
@@ -20,20 +18,13 @@
     "strict": true,
     "types": ["node"]
   },
-
-  "exclude": [
-    "cypress/coverage/",
-    "cypress/downloads/",
-    "cypress/screenshots/",
-    "cypress/videos/",
-    "out/",
-  ],
-
+  "exclude": [],
+  "extends": "../../tsconfig.json",
   "include": [
     "**/.stylelintrc.ts",
     "**/*.json",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.webmanifest"
-  ]
+    "**/*.webmanifest",
+  ],
 }

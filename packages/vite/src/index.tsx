@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import Footer from './features/footer.jsx';
 import Header from './features/header.jsx';
 import Notifications from './features/notifications.jsx';
-import ContextProviders from './features/context-providers.jsx';
+import { ContextProviders } from './features/context-providers.jsx';
 import Home from './features/home.jsx';
 import { ROOT } from './constants/root.js';
 import LocaleLayout from './features/locale-layout/index.js';

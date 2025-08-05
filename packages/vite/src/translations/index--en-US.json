@@ -10,7 +10,6 @@
   "Charities": "Charities",
   "Cookie policy": "Cookie policy",
   "Dashboard": "Dashboard",
-  "front end platform service": "front end platform service",
   "Our Patreon client is misconfigured.": "Our Patreon client is misconfigured.",
   "Privacy policy": "Privacy policy",
   "Problems": "Problems",
@@ -19,5 +18,6 @@
   "Terms of service": "Terms of service",
   "Use dark color scheme": "Use dark color scheme",
   "Use light color scheme": "Use light color scheme",
-  "Warnings": "Warnings"
+  "Warnings": "Warnings",
+  "front end platform service": "front end platform service"
 }

@@ -1,19 +1,35 @@
 {
+  "[css]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  },
+  "[html]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  },
+  "[json]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  },
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.rulers": [80],
   "editor.tabSize": 2,
   "eslint.enable": true,
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
   "eslint.lintTask.options": "--config eslint.config.js .",
-  "eslint.useFlatConfig": true,
-  "files.eol": "\n",
-  "javascript.preferences.importModuleSpecifierEnding": "js",
-  "npm.packageManager": "npm",
-  "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
-  "typescript.preferences.importModuleSpecifierEnding": "js",
-  "editor.rulers": [
-    80
-  ],
   "eslint.probe": [
     "html",
     "javascript",
@@ -26,6 +42,7 @@
     "typescriptreact",
     "yaml"
   ],
+  "eslint.useFlatConfig": true,
   "eslint.validate": [
     "html",
     "javascript",
@@ -41,61 +58,38 @@
   "files.associations": {
     "**/config/api-extractor.json": "jsonc"
   },
+  "files.eol": "\n",
   "files.exclude": {
-    ".wrangler/": true,
-    "coverage/": true,
-    "packages/": true,
-    "sarif/": true,
     ".eslintcache": true,
     ".pnp.cjs": true,
     ".pnp.loader.mjs": true,
+    ".wrangler/": true,
+    "coverage/": true,
     "package-lock.json": true,
+    "packages/": true,
+    "sarif/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   },
+  "javascript.preferences.importModuleSpecifierEnding": "js",
+  "npm.packageManager": "npm",
   "search.exclude": {
+    "**/*.cpuprofile": true,
+    "**/*.tsbuildinfo": true,
+    "**/.attach_pid*": true,
+    "**/.eslintcache": true,
     "**/.git/": true,
     "**/.idea/": true,
     "**/.nyc_output/": true,
     "**/.wrangler/": true,
     "**/build/": true,
     "**/coverage/": true,
-    "**/cypress/coverage/": true,
-    "**/cypress/downloads/": true,
-    "**/cypress/screenshots/": true,
-    "**/cypress/videos/": true,
     "**/dist/": true,
     "**/jest/": true,
-    "**/node_modules/": true,
-    "**/sarif/": true,
-    "**/.attach_pid*": true,
-    "**/.eslintcache": true,
-    "**/*.cpuprofile": true,
-    "**/*.tsbuildinfo": true,
     "**/lighthouse.report.*": true,
-    "**/package-lock.json": true
+    "**/node_modules/": true,
+    "**/package-lock.json": true,
+    "**/sarif/": true,
   },
-  "[css]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[yaml]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  }
+  "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
+  "typescript.preferences.importModuleSpecifierEnding": "js",
 }

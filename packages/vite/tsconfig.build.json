@@ -8,8 +8,6 @@
     "./analyze/",
     "./certificates/",
     "./coverage/",
-    "./cypress/",
-    "./out/",
     "./scripts/",
     "./src/**/*.e2e.ts",
     "./src/**/*.test.ts",

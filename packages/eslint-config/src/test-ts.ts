@@ -1,7 +1,7 @@
-import type { Linter } from 'eslint';
 import TS from './ts.js';
+import defineConfig from './define-config.js';
 
-export default {
+export default defineConfig({
   ...TS,
   files: ['**/*.test.ts', '**/*.test.tsx'],
   ignores: [],
@@ -24,5 +24,5 @@ export default {
      * x(); // Type 'never' has no call signatures. ts(2349)
      */
     'init-declarations': 'off',
-  } satisfies Linter.RulesRecord,
-} satisfies Required<Omit<Linter.Config, 'language' | 'processor'>>;
+  },
+});

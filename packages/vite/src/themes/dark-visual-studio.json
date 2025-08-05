@@ -1,32 +1,39 @@
 {
 	"$schema": "vscode://schemas/color-theme",
-	"name": "Dark (Visual Studio)",
 	"colors": {
+		"actionBar.toggledBackground": "#383a49",
+		"activityBarBadge.background": "#007ACC",
 		"checkbox.border": "#6B6B6B",
 		"editor.background": "#1E1E1E",
 		"editor.foreground": "#D4D4D4",
 		"editor.inactiveSelectionBackground": "#3A3D41",
-		"editorIndentGuide.background1": "#404040",
-		"editorIndentGuide.activeBackground1": "#707070",
 		"editor.selectionHighlightBackground": "#ADD6FF26",
-		"list.dropBackground": "#383B3D",
-		"activityBarBadge.background": "#007ACC",
-		"sideBarTitle.foreground": "#BBBBBB",
+		"editorIndentGuide.activeBackground1": "#707070",
+		"editorIndentGuide.background1": "#404040",
 		"input.placeholderForeground": "#A6A6A6",
+		"list.activeSelectionIconForeground": "#FFF",
+		"list.dropBackground": "#383B3D",
 		"menu.background": "#252526",
+		"menu.border": "#454545",
 		"menu.foreground": "#CCCCCC",
 		"menu.separatorBackground": "#454545",
-		"menu.border": "#454545",
-		"statusBarItem.remoteForeground": "#FFF",
-		"statusBarItem.remoteBackground": "#16825D",
 		"ports.iconRunningProcessForeground": "#369432",
 		"sideBarSectionHeader.background": "#0000",
 		"sideBarSectionHeader.border": "#ccc3",
+		"sideBarTitle.foreground": "#BBBBBB",
+		"statusBarItem.remoteBackground": "#16825D",
+		"statusBarItem.remoteForeground": "#FFF",
 		"tab.lastPinnedBorder": "#ccc3",
-		"list.activeSelectionIconForeground": "#FFF",
 		"terminal.inactiveSelectionBackground": "#3A3D41",
-		"widget.border": "#303031",
-		"actionBar.toggledBackground": "#383a49"
+		"widget.border": "#303031"
+	},
+	"name": "Dark (Visual Studio)",
+	"semanticHighlighting": true,
+	"semanticTokenColors": {
+		"customLiteral": "#D4D4D4",
+		"newOperator": "#d4d4d4",
+		"numberLiteral": "#b5cea8",
+		"stringLiteral": "#ce9178"
 	},
 	"tokenColors": [
 		{
@@ -397,12 +404,5 @@
 				"foreground": "#569cd6"
 			}
 		}
-	],
-	"semanticHighlighting": true,
-	"semanticTokenColors": {
-		"newOperator": "#d4d4d4",
-		"stringLiteral": "#ce9178",
-		"customLiteral": "#D4D4D4",
-		"numberLiteral": "#b5cea8"
-	}
+	]
 }
