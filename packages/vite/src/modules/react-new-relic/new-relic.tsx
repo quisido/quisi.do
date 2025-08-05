@@ -40,7 +40,7 @@ export default function NewRelic({
           distributed_tracing: {
             allowed_origins: [],
             cors_use_newrelic_header: false,
-            cors_use_tracecontext_headers: true,
+            cors_use_tracecontext_headers: false,
             enabled: true,
             exclude_newrelic_header: false,
           },

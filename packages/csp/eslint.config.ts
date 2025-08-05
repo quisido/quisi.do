@@ -1,6 +1,9 @@
-import configs, { disableRulesForFiles } from '@quisido/eslint-config';
+import configs, {
+  defineConfig,
+  disableRulesForFiles,
+} from '@quisido/eslint-config';
 
-export default [
+export default defineConfig(
   ...configs,
 
   ...disableRulesForFiles({
@@ -38,4 +41,4 @@ export default [
       'no-magic-numbers': 'off',
     },
   },
-];
+);

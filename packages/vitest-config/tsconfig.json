@@ -9,4 +9,7 @@
   "exclude": ["coverage/", "dist/", "node_modules/"],
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx"],
+  "references": [
+    { "path": "../eslint-config/tsconfig.build.json" },
+  ],
 }

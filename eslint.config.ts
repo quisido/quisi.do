@@ -1,7 +1,9 @@
-import configs, { disableRulesForFiles } from '@quisido/eslint-config';
+import configs, {
+  defineConfig,
+  disableRulesForFiles,
+} from '@quisido/eslint-config';
 
-/** @type {readonly import('eslint').Linter.Config[]} */
-export default [
+export default defineConfig(
   ...configs,
 
   {
@@ -29,4 +31,4 @@ export default [
 
     'no-useless-assignment': ['scripts/utils/retry.ts'],
   }),
-];
+);

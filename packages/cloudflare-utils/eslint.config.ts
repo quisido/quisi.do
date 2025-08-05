@@ -1,7 +1,9 @@
-import configs, { disableRulesForFiles } from '@quisido/eslint-config';
+import configs, {
+  defineConfig,
+  disableRulesForFiles,
+} from '@quisido/eslint-config';
 
-/** @type {readonly import('eslint').Linter.Config[]} */
-export default [
+export default defineConfig(
   ...configs,
 
   ...disableRulesForFiles({
@@ -11,4 +13,4 @@ export default [
     'no-magic-numbers': ['src/pricing.ts', 'src/status-code.ts'],
     'no-underscore-dangle': ['src/is-analytics-engine-row.ts'],
   }),
-];
+);

@@ -1,4 +1,4 @@
-import config, { disableRulesForFiles } from './dist/index.js';
+import config, { disableRulesForFiles } from './src/index.js';
 
 export default [
   ...config,

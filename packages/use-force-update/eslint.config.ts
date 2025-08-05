@@ -1,10 +1,9 @@
-import configs from '@quisido/eslint-config';
+import configs, { defineConfig } from '@quisido/eslint-config';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
-/** @type {readonly import('eslint').Linter.Config[]} */
-export default [
+export default defineConfig(
   ...configs,
 
   // Plugins: react-compiler, react-hooks, react-refresh
@@ -22,4 +21,4 @@ export default [
       'react-refresh/only-export-components': 'error',
     },
   },
-];
+);
