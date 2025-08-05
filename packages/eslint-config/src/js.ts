@@ -2,9 +2,9 @@ import js from '@eslint/js';
 import prettierConfig from 'eslint-config-prettier';
 import prettierPlugin from 'eslint-plugin-prettier';
 import prettierPluginRecommended from 'eslint-plugin-prettier/recommended';
+import defineConfig from './define-config.js';
 import { LANGUAGE_OPTIONS } from './language-options.js';
 import { LINTER_OPTIONS } from './linter-options.js';
-import defineConfig from './define-config.js';
 
 export default defineConfig({
   extends: [],
@@ -38,5 +38,8 @@ export default defineConfig({
 
     // Too many false positives.
     'consistent-return': 'off',
+
+    // This is better handled by `@stylistic/max-len` or Prettier.
+    'no-inline-comments': 'off',
   },
 });

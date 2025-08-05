@@ -8,6 +8,8 @@ import { MetricName } from './constants/metric-name.js';
 import isWorkerMetricName from './utils/is-worker-metric-name.js';
 import mapDimensionsToString from './utils/map-dimensions-to-string.js';
 
+const MAGIC_NUMBER = 15; // tongue-in-cheek
+
 export default async function handleMetric(
   this: Handler,
   name: string,
@@ -15,7 +17,7 @@ export default async function handleMetric(
 ): Promise<void> {
   const emitPublicly = (subdimensions: MetricDimensions): void => {
     const subdimensionsStr: string = mapDimensionsToString(subdimensions);
-    this.log('------------------------');
+    this.log('-'.repeat(name.length + MAGIC_NUMBER));
     this.log('Public metric:', name);
     this.log(subdimensionsStr);
     this.writeMetricDataPoint('PUBLIC_DATASET', name, subdimensions);

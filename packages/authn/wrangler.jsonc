@@ -1,10 +1,4 @@
 {
-  "compatibility_date": "2024-11-11",
-  "main": "src/index.ts",
-  "name": "quisido-authn-dev",
-  "send_metrics": true,
-  "tsconfig": "./tsconfig.json",
-  "upload_source_maps": true,
   "analytics_engine_datasets": [
     {
       "binding": "PRIVATE_DATASET",
@@ -15,6 +9,7 @@
       "dataset": "AUTHN_PUBLIC_DEV"
     }
   ],
+  "compatibility_date": "2025-05-05",
   "d1_databases": [
     {
       "binding": "AUTHN_DB",
@@ -33,7 +28,6 @@
       }
     },
     "production": {
-      "name": "quisido-authn",
       "analytics_engine_datasets": [
         {
           "binding": "PRIVATE_DATASET",
@@ -64,6 +58,7 @@
           "preview_id": "d5a8101e8daf49629fc1e0b64e6e0712"
         }
       ],
+      "name": "quisido-authn",
       "r2_buckets": [
         {
           "binding": "AUTHN_DATA",
@@ -86,8 +81,6 @@
       }
     },
     "staging": {
-      "name": "quisido-authn-staging",
-      "workers_dev": true,
       "analytics_engine_datasets": [
         {
           "binding": "PRIVATE_DATASET",
@@ -115,6 +108,7 @@
           "id": "d5a8101e8daf49629fc1e0b64e6e0712"
         }
       ],
+      "name": "quisido-authn-staging",
       "r2_buckets": [
         {
           "binding": "AUTHN_DATA",
@@ -134,7 +128,8 @@
         "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
         "PATREON_OAUTH_HOST": "https://www.patreon.com",
         "PATREON_OAUTH_REDIRECT_URI": "https://localhost:5882/patreon/"
-      }
+      },
+      "workers_dev": true
     }
   },
   "kv_namespaces": [
@@ -147,6 +142,8 @@
       "id": "BUDGET"
     }
   ],
+  "main": "src/index.ts",
+  "name": "quisido-authn-dev",
   "observability": {
     "logs": {
       "enabled": true
@@ -161,6 +158,9 @@
       "bucket_name": "authn-dev"
     }
   ],
+  "send_metrics": true,
+  "tsconfig": "./tsconfig.json",
+  "upload_source_maps": true,
   "vars": {
     "COOKIE_DOMAIN": "localhost",
     "ENVIRONMENT_NAME": "unknown",

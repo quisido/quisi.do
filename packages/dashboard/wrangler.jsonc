@@ -1,10 +1,4 @@
 {
-  "compatibility_date": "2024-11-11",
-  "main": "src/index.ts",
-  "name": "quisido-dashboard-dev",
-  "send_metrics": true,
-  "tsconfig": "./tsconfig.json",
-  "upload_source_maps": true,
   "analytics_engine_datasets": [
     {
       "binding": "PRIVATE_DATASET",
@@ -15,18 +9,7 @@
       "dataset": "DASHBOARD_PUBLIC_DEV"
     }
   ],
-  "r2_buckets": [
-    {
-      "binding": "CACHE",
-      "bucket_name": "dashboard-dev"
-    }
-  ],
-  "routes": [
-    {
-      "custom_domain": true,
-      "pattern": "dashboard.quisi.do"
-    }
-  ],
+  "compatibility_date": "2025-05-05",
   "dev": {
     "local_protocol": "https",
     "port": 9778 // parseInt('dashboard', 36) % 9999
@@ -38,7 +21,6 @@
       }
     },
     "production": {
-      "name": "quisido-dashboard",
       "analytics_engine_datasets": [
         {
           "binding": "PRIVATE_DATASET",
@@ -49,6 +31,7 @@
           "dataset": "DASHBOARD_PUBLIC"
         }
       ],
+      "name": "quisido-dashboard",
       "r2_buckets": [
         {
           "binding": "CACHE",
@@ -62,8 +45,6 @@
       }
     },
     "staging": {
-      "name": "quisido-dashboard-staging",
-      "workers_dev": true,
       "analytics_engine_datasets": [
         {
           "binding": "PRIVATE_DATASET",
@@ -74,6 +55,7 @@
           "dataset": "DASHBOARD_PUBLIC_STAGING"
         }
       ],
+      "name": "quisido-dashboard-staging",
       "r2_buckets": [
         {
           "binding": "CACHE",
@@ -90,9 +72,12 @@
         "CORS_ORIGIN": "https://staging.quisi.do",
         "DATADOG_APPLICATION_ID": "3e55f7ef-a00a-41ab-9857-baf7ad00daa1",
         "ENVIRONMENT_NAME": "staging"
-      }
+      },
+      "workers_dev": true
     }
   },
+  "main": "src/index.ts",
+  "name": "quisido-dashboard-dev",
   "observability": {
     "logs": {
       "enabled": true
@@ -101,6 +86,21 @@
   "placement": {
     "mode": "smart"
   },
+  "r2_buckets": [
+    {
+      "binding": "CACHE",
+      "bucket_name": "dashboard-dev"
+    }
+  ],
+  "routes": [
+    {
+      "custom_domain": true,
+      "pattern": "dashboard.quisi.do"
+    }
+  ],
+  "send_metrics": true,
+  "tsconfig": "./tsconfig.json",
+  "upload_source_maps": true,
   "vars": {
     "CORS_ORIGIN": "https://localhost:3000",
     "DATADOG_APPLICATION_ID": "11b64b43-b9bc-4155-a913-e241f76e35f7",

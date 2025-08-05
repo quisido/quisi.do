@@ -283,24 +283,18 @@ function Dashboard(): ReactElement {
             </li>
           ),
         )}
-        <li>
-          <Paragraph>Time spent median:</Paragraph>
-          <ul>
-            <li>
-              Session:{' '}
-              <NumberFormat>
-                {Math.round(sessionTimeSpent / MILLISECONDS_PER_SECOND)}
-              </NumberFormat>{' '}
-              seconds
-            </li>
-            <li>
-              View:{' '}
-              <NumberFormat>
-                {Math.round(viewTimeSpent / MILLISECONDS_PER_SECOND)}
-              </NumberFormat>{' '}
-              seconds
-            </li>
-          </ul>
+        <li style={{ gridColumnEnd: 'span 2' }}>
+          <Paragraph>
+            <abbr title="Median">x&#x303;</abbr> time spent:{' '}
+            <NumberFormat>
+              {Math.round(sessionTimeSpent / MILLISECONDS_PER_SECOND)}
+            </NumberFormat>
+            <abbr title="seconds">s</abbr> per session,{' '}
+            <NumberFormat>
+              {Math.round(viewTimeSpent / MILLISECONDS_PER_SECOND)}
+            </NumberFormat>
+            s per view
+          </Paragraph>
         </li>
       </ul>
       {/* <h3 style={{ margin: 0 }}>Scalability</h3>
