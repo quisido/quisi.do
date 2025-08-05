@@ -1,7 +1,4 @@
 {
-  "extends": "../../tsconfig.json",
-  "exclude": [],
-
   "compilerOptions": {
     "allowJs": false,
     "downlevelIteration": true,
@@ -21,12 +18,13 @@
     "strict": true,
     "types": ["node"]
   },
-
+  "exclude": [],
+  "extends": "../../tsconfig.json",
   "include": [
     "**/.stylelintrc.ts",
     "**/*.json",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.webmanifest"
-  ]
+    "**/*.webmanifest",
+  ],
 }

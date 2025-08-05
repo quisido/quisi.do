@@ -2,6 +2,8 @@ import type { UserConfig } from 'vite';
 import { defineConfig } from 'vitest/config';
 import { INLINE_CONFIG } from './inline-config.js';
 import { PLUGIN_OPTIONS } from './plugin-options.js';
+
+export { defineConfig } from 'vitest/config';
 export { COVERAGE_OPTIONS } from './coverage-options.js';
 export { EXCLUDE } from './exclude.js';
 export { INLINE_CONFIG } from './inline-config.js';

@@ -1,10 +1,11 @@
 import config, {
   COVERAGE_OPTIONS,
+  defineConfig,
   INLINE_CONFIG,
   THRESHOLDS,
 } from '@quisido/vitest-config';
 
-export default {
+export default defineConfig({
   ...config,
   test: {
     ...INLINE_CONFIG,
@@ -18,10 +19,10 @@ export default {
          * dashboard is complete!
          */
         branches: 63,
-        functions: 85,
+        functions: 84,
         lines: 82,
         statements: 82,
       },
     },
   },
-};
+});

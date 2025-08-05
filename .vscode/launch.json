@@ -1,5 +1,4 @@
 {
-  "version": "0.2.0",
   "configurations": [
     {
       "name": "Development server",
@@ -7,7 +6,8 @@
       "runtimeArgs": ["run", "start"],
       "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**"],
-      "type": "node"
-    }
-  ]
+      "type": "node",
+    },
+  ],
+  "version": "0.2.0",
 }

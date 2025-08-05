@@ -1,7 +1,7 @@
 import jsonPlugin from '@eslint/json';
 import defineConfig from './define-config.js';
-import { LINTER_OPTIONS } from './linter-options.js';
 import { JSON_PLUGINS } from './json-plugins.js';
+import { LINTER_OPTIONS } from './linter-options.js';
 
 /**
  *   We don't use Prettier here, because Prettier does not support empty lines
@@ -10,12 +10,18 @@ import { JSON_PLUGINS } from './json-plugins.js';
 
 export default defineConfig({
   extends: [],
-  files: ['**/.*.json', '**/*.json'],
-  ignores: ['.vscode/*.json'],
+  files: ['**/.*.json', '**/*.json', '**/*.webmanifest'],
   language: 'json/json',
   linterOptions: LINTER_OPTIONS,
   name: '@quisido/json',
   settings: {},
+
+  ignores: [
+    '.vscode/*.json',
+    'package-lock.json',
+    'tsconfig.json',
+    'tsconfig.*.json',
+  ],
 
   plugins: {
     ...JSON_PLUGINS,

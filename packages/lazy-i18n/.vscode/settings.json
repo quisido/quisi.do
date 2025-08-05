@@ -1,13 +1,13 @@
 {
   "files.exclude": {
-    "coverage/": true,
-    "dist/": true,
-    "node_modules/": true,
-    ".attw.json": true,
-    ".eslintcache": true,
     "*.cpuprofile": true,
     "*.tsbuildinfo": true,
     "*-*.*.*.tgz": true,
-    "vitest.config.ts.timestamp-*-*.mjs": true
-  }
+    ".attw.json": true,
+    ".eslintcache": true,
+    "coverage/": true,
+    "dist/": true,
+    "node_modules/": true,
+    "vitest.config.ts.timestamp-*-*.mjs": true,
+  },
 }

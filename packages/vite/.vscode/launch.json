@@ -1,5 +1,4 @@
 {
-  "version": "0.2.0",
   "configurations": [
     {
       "name": "npm run start",
@@ -7,14 +6,15 @@
       "runtimeArgs": ["run", "start"],
       "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**"],
-      "type": "node"
+      "type": "node",
     },
     {
       "name": "localhost:3000",
       "request": "launch",
       "type": "chrome",
       "url": "https://localhost:3000",
-      "webRoot": "${workspaceFolder}"
-    }
-  ]
+      "webRoot": "${workspaceFolder}",
+    },
+  ],
+  "version": "0.2.0",
 }

@@ -1,7 +1,4 @@
 {
-  "exclude": ["src/**/*.test.ts", "src/*.test.ts", "src/test/"],
-  "extends": "./tsconfig.json",
-  "include": ["src/"],
   "compilerOptions": {
     "declarationDir": "dist",
     "noEmit": false,
@@ -16,5 +13,8 @@
      * `vite` cannot find name `Worker`.
      */
     "skipLibCheck": true
-  }
+  },
+  "exclude": ["src/**/*.test.ts", "src/*.test.ts", "src/test/"],
+  "extends": "./tsconfig.json",
+  "include": ["src/"],
 }

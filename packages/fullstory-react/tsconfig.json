@@ -1,13 +1,13 @@
 {
-  "exclude": ["coverage/", "dist/", "node_modules/"],
-  "extends": "../../tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
     "exactOptionalPropertyTypes": false, // import('@fullstory/snippet').ApiV2
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
     "rootDir": ".",
-    "sourceRoot": "."
-  }
+    "sourceRoot": ".",
+  },
+  "exclude": ["coverage/", "dist/", "node_modules/"],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*.ts", "**/*.tsx"],
 }

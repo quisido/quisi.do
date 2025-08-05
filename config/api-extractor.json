@@ -2,9 +2,9 @@
   "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
   "bundledPackages": [],
   "enumMemberOrder": "by-name",
-  "projectFolder": "..",
   "mainEntryPointFilePath": "<projectFolder>/dist/index.d.ts",
   "newlineKind": "lf",
+  "projectFolder": "..",
   "testMode": false,
 
   "apiReport": {
