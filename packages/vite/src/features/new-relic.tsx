@@ -1,9 +1,9 @@
 import { useEffect, type PropsWithChildren, type ReactElement } from 'react';
+import { GITHUB_SHA } from '../constants/github-sha.js';
 import NewRelic, {
   useNewRelicBrowserAgent,
   type BrowserAgent,
 } from '../modules/react-new-relic/index.js';
-import { GITHUB_SHA } from '../constants/github-sha.js';
 import validateString from '../utils/validate-string.js';
 
 const LICENSE_KEY: string = validateString(
@@ -24,7 +24,7 @@ export default function QuisidoNewRelic({
   }, [browserAgent]);
 
   return (
-    <NewRelic applicationID="Test" licenseKey={LICENSE_KEY}>
+    <NewRelic applicationID="601567753" licenseKey={LICENSE_KEY}>
       {children}
     </NewRelic>
   );

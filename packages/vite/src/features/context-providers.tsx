@@ -10,14 +10,13 @@ import Theme from '../modules/quisi/theme.jsx';
 import CustomThemeProvider from './custom-theme-provider.jsx';
 import PostHog from './posthog.jsx';
 import WindowProvider from './window-provider.jsx';
-import NewRelic from './new-relic.jsx';
 
 export const ContextProviders: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,
   NotificationsProvider,
   SessionIdProvider,
   CustomThemeProvider,
-  NewRelic,
+  // NewRelic,
   WindowProvider,
 
   // Consumes `Authentication`.

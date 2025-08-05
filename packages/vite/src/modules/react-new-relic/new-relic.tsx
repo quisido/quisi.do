@@ -37,11 +37,12 @@ export default function NewRelic({
             allow_registered_children: true,
           },
 
+          // Fails CORS.
           distributed_tracing: {
             allowed_origins: [],
             cors_use_newrelic_header: false,
             cors_use_tracecontext_headers: false,
-            enabled: true,
+            enabled: false,
             exclude_newrelic_header: false,
           },
 
