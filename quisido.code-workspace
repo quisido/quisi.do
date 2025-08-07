@@ -9,6 +9,10 @@
       "path": "packages/vite"
     },
     {
+      "name": "Game",
+      "path": "packages/game"
+    },
+    {
       "name": "Authentication (authn)",
       "path": "packages/authn"
     },

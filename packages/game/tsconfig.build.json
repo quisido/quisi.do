@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "rootDir": "src",
+    "sourceMap": true,
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/game/src/",
+    "target": "ES5"
+  },
+  "exclude": [
+    "./.vscode/",
+    "./coverage/",
+    "./src/**/*.test.ts",
+    "./src/*.test.ts",
+    "./.*.json",
+    "./*.config.*",
+    "./lighthouse.*",
+    "./tsconfig.*"
+  ],
+  "extends": "./tsconfig.json",
+  "include": ["src/**/*.ts"]
+}

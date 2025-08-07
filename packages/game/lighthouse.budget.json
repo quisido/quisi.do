@@ -1,0 +1,44 @@
+[
+  {
+    "path": "/*",
+
+    "options": {
+      "firstPartyHostnames": [
+        "*.cscdn.net",
+        "*.quisi.do",
+        "*.quisido.com"
+      ]
+    },
+
+    "timings": [
+      {
+        "budget": 0.1,
+        "metric": "cumulative-layout-shift"
+      },
+      {
+        "budget": 1800,
+        "metric": "first-contentful-paint"
+      },
+      {
+        "budget": 5000,
+        "metric": "interactive"
+      },
+      {
+        "budget": 2500,
+        "metric": "largest-contentful-paint"
+      },
+      {
+        "budget": 100,
+        "metric": "max-potential-fid"
+      },
+      {
+        "budget": 3400,
+        "metric": "speed-index"
+      },
+      {
+        "budget": 200,
+        "metric": "total-blocking-time"
+      }
+    ]
+  }
+]

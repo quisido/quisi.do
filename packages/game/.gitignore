@@ -1,0 +1,4 @@
+/hint-report/
+/.env.local
+/.eslintcache
+/tsconfig.tsbuildinfo
