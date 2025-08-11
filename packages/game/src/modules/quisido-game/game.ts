@@ -1,4 +1,8 @@
-import GameObject from './game-object.js';
+import ActionHandlers from './action-handlers.js';
+import type GameObject from './game-object.js';
+import noop from './noop.js';
+import type RenderProps from './render-props.js';
+import RenderQueue from './render-queue.js';
 import {
   ObjectKey,
   type StringifiableGameObject,
@@ -11,10 +15,11 @@ interface AsyncOptions {
   readonly timestamp: number;
 }
 
-interface Options {
+interface Options<Actions extends object> {
   readonly entry?: string | undefined;
-  readonly game: (this: GameObject) => void;
+  readonly game: (this: GameObject<Actions>) => void;
   readonly objects: Readonly<Record<string, StringifiableGameObject>>;
+  readonly onRender?: ((id: string, props: RenderProps) => void) | undefined;
   readonly seed: number;
   readonly timestamp: number;
   readonly version?: number | undefined;
@@ -24,13 +29,15 @@ const UUID_CHARACTERS =
   '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const VERSION = 1;
 
-export default class Game {
+export default class Game<Actions extends object> {
   public static VERSION: number = VERSION;
 
+  readonly #actionHandlers = new ActionHandlers<Actions>();
+  readonly #components: Record<string, () => void> = {};
   #entry: string;
-  #objectFunctions: Readonly<Record<string, () => void>> = {};
-  #objects: Readonly<Record<string, StringifiableGameObject>>;
-  #render: Readonly<Record<string, () => void>> = {};
+  readonly #objects: Record<string, StringifiableGameObject>;
+  readonly #render: Record<string, () => RenderProps> = {};
+  #renderQueue = new RenderQueue();
   #seed: number;
   #timestamp: number;
 
@@ -38,10 +45,11 @@ export default class Game {
     entry,
     game,
     objects,
+    onRender,
     seed,
     timestamp,
     version = Game.VERSION,
-  }: Options) {
+  }: Options<Actions>) {
     if (version !== Game.VERSION) {
       throw new Error('Game versions are not yet backwards compatible.');
     }
@@ -58,13 +66,16 @@ export default class Game {
       this.#entry = entry;
     }
 
-    this.setObjectFunction(this.#entry, game, {});
+    this.setComponent(this.#entry, game, {});
+    if (typeof onRender !== 'undefined') {
+      this.setRenderHandler(onRender);
+    }
   }
 
   public addChild<P>(
     parentId: string,
     key: string,
-    objectFunction: (this: GameObject, props: P) => void,
+    component: (this: GameObject<Actions>, props: P) => void,
     props: P,
   ): void {
     const parentObject: StringifiableGameObject = this.getObject(parentId);
@@ -75,16 +86,13 @@ export default class Game {
     }
 
     const childId: string = this.getObjectChildId(parentId, key);
-    this.setObjectFunction(childId, objectFunction, props);
+    this.setComponent(childId, component, props);
   }
 
   private createObject(id: string): void {
-    this.#objects = {
-      ...this.#objects,
-      [id]: {
-        [ObjectKey.Children]: {},
-        [ObjectKey.State]: {},
-      },
+    this.#objects[id] = {
+      [ObjectKey.Children]: {},
+      [ObjectKey.State]: {},
     };
   }
 
@@ -93,6 +101,10 @@ export default class Game {
       .fill(null)
       .map(this.getRandomUuidCharacter.bind(this))
       .join('');
+  }
+
+  public dispatch<K extends keyof Actions>(name: K, payload: Actions[K]): void {
+    window.console.log(this, name, payload);
   }
 
   private getObject(id: string): StringifiableGameObject {
@@ -133,48 +145,75 @@ export default class Game {
     return this.getRandomCharacter(UUID_CHARACTERS);
   }
 
-  private setChild(parentId: string, key: string, childId: string): void {
-    const parentObject: StringifiableGameObject = this.getObject(parentId);
-    this.#objects = {
-      ...this.#objects,
-      [parentId]: {
-        ...parentObject,
-        [ObjectKey.Children]: {
-          ...parentObject[ObjectKey.Children],
-          [key]: childId,
-        },
-      },
-    };
+  private onAction<K extends keyof Actions>(
+    name: K,
+    handler: (payload: Actions[K]) => void,
+  ): void {
+    this.#actionHandlers.add(name, handler);
   }
 
-  private setObjectFunction<P>(
+  public render: VoidFunction = noop;
+
+  private setChild(parentId: string, key: string, childId: string): void {
+    const parentObject = this.#objects[parentId];
+    if (typeof parentObject === 'undefined') {
+      throw new Error(
+        `Child "${key}" could not be set on missing parent "${parentId}"`,
+      );
+    }
+
+    parentObject[ObjectKey.Children][key] = childId;
+  }
+
+  private setComponent<P>(
     id: string,
-    objectFunction: (this: GameObject, props: P) => void,
+    component: (this: GameObject<Actions>, props: P) => void,
     props: P,
   ): void {
-    this.#objectFunctions = {
-      ...this.#objectFunctions,
-      [id]: (): void => {
-        objectFunction.call(new GameObject({ game: this, id }), props);
-      },
+    this.#components[id] = (): void => {
+      component.call(
+        {
+          addChild: <P>(
+            key: string,
+            component: (this: GameObject<Actions>, props: P) => void,
+            props: P,
+          ): void => {
+            this.addChild(id, key, component, props);
+          },
+          onAction: this.onAction.bind(this),
+          render: (callback: () => RenderProps): void => {
+            this.#render[id] = callback;
+          },
+        },
+        props,
+      );
     };
   }
 
   public setOptions({ entry, objects, seed, timestamp }: AsyncOptions): void {
     this.#entry = entry;
-    this.#objects = objects;
+    Object.assign(this.#objects, objects);
     this.#seed = seed;
     this.#timestamp = timestamp;
   }
 
-  public setRender(id: string, callback: () => void): void {
-    this.#render = {
-      ...this.#render,
-      [id]: callback,
+  public setRender(id: string, callback: () => RenderProps): void {
+    this.#render[id] = callback;
+  }
+
+  private setRenderHandler(
+    handler: (id: string, props: RenderProps) => void,
+  ): void {
+    this.render = (): void => {
+      const entries: MapIterator<[string, RenderProps]> =
+        this.#renderQueue.flush();
+      for (const [id, props] of entries) {
+        handler(id, props);
+      }
     };
   }
 
-  public toJSON(): Omit<Options, 'game'> {
+  public toJSON(): Omit<Options<Actions>, 'game' | 'onRender'> {
     return {
       entry: this.#entry,
       objects: this.#objects,

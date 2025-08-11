@@ -7,6 +7,7 @@ export default [
   {
     rules: {
       '@typescript-eslint/no-non-null-assertion': 'off',
+      'id-length': ['error', { properties: 'never' }],
       'max-params': 'off',
       'max-statements': 'off',
       'no-magic-numbers': 'off',
