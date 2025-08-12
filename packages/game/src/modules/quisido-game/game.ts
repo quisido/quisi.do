@@ -1,30 +1,35 @@
 import ActionHandlers from './action-handlers.js';
+import Children from './children.js';
 import type GameObject from './game-object.js';
 import noop from './noop.js';
+import type { PartialReadonlyRecord } from './partial-readonly-record.js';
 import type RenderProps from './render-props.js';
 import RenderQueue from './render-queue.js';
-import {
-  ObjectKey,
-  type StringifiableGameObject,
-} from './stringifiable-game-object.js';
+import type { Stringifiable } from './stringifiable.js';
 
 interface AsyncOptions {
-  readonly entry: string;
-  readonly objects: Readonly<Record<string, StringifiableGameObject>>;
+  readonly children?:
+    | PartialReadonlyRecord<string, PartialReadonlyRecord<string, string>>
+    | undefined;
   readonly seed: number;
-  readonly timestamp: number;
-}
-
-interface Options<Actions extends object> {
-  readonly entry?: string | undefined;
-  readonly game: (this: GameObject<Actions>) => void;
-  readonly objects: Readonly<Record<string, StringifiableGameObject>>;
-  readonly onRender?: ((id: string, props: RenderProps) => void) | undefined;
-  readonly seed: number;
+  readonly states?: PartialReadonlyRecord<string, Stringifiable> | undefined;
   readonly timestamp: number;
   readonly version?: number | undefined;
 }
 
+interface Options<Actions extends object> {
+  readonly children?:
+    | PartialReadonlyRecord<string, PartialReadonlyRecord<string, string>>
+    | undefined;
+  readonly game: (this: GameObject<Actions>) => void;
+  readonly onRender?: ((id: string, props: RenderProps) => void) | undefined;
+  readonly seed: number;
+  readonly states?: PartialReadonlyRecord<string, Stringifiable> | undefined;
+  readonly timestamp: number;
+  readonly version?: number | undefined;
+}
+
+const ROOT_OBJECT_ID = '#';
 const UUID_CHARACTERS =
   '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const VERSION = 1;
@@ -33,20 +38,20 @@ export default class Game<Actions extends object> {
   public static VERSION: number = VERSION;
 
   readonly #actionHandlers = new ActionHandlers<Actions>();
+  readonly #children: Children;
   readonly #components: Record<string, () => void> = {};
-  #entry: string;
-  readonly #objects: Record<string, StringifiableGameObject>;
   readonly #render: Record<string, () => RenderProps> = {};
   #renderQueue = new RenderQueue();
   #seed: number;
+  #states: Partial<Record<string, Stringifiable>>;
   #timestamp: number;
 
   public constructor({
-    entry,
+    children,
     game,
-    objects,
     onRender,
     seed,
+    states = {},
     timestamp,
     version = Game.VERSION,
   }: Options<Actions>) {
@@ -54,46 +59,15 @@ export default class Game<Actions extends object> {
       throw new Error('Game versions are not yet backwards compatible.');
     }
 
-    this.#objects = objects;
+    this.#children = new Children(children);
     this.#seed = seed;
+    this.#states = states;
     this.#timestamp = timestamp;
 
-    if (typeof entry === 'undefined') {
-      const uuid: string = this.createUuid();
-      this.#entry = uuid;
-      this.createObject(uuid);
-    } else {
-      this.#entry = entry;
-    }
-
-    this.setComponent(this.#entry, game, {});
+    this.setComponent(ROOT_OBJECT_ID, game, {});
     if (typeof onRender !== 'undefined') {
       this.setRenderHandler(onRender);
     }
-  }
-
-  public addChild<P>(
-    parentId: string,
-    key: string,
-    component: (this: GameObject<Actions>, props: P) => void,
-    props: P,
-  ): void {
-    const parentObject: StringifiableGameObject = this.getObject(parentId);
-    if (!Object.hasOwn(parentObject[ObjectKey.Children], key)) {
-      const childId: string = this.createUuid();
-      this.createObject(childId);
-      this.setChild(parentId, key, childId);
-    }
-
-    const childId: string = this.getObjectChildId(parentId, key);
-    this.setComponent(childId, component, props);
-  }
-
-  private createObject(id: string): void {
-    this.#objects[id] = {
-      [ObjectKey.Children]: {},
-      [ObjectKey.State]: {},
-    };
   }
 
   private createUuid(): string {
@@ -107,21 +81,19 @@ export default class Game<Actions extends object> {
     window.console.log(this, name, payload);
   }
 
-  private getObject(id: string): StringifiableGameObject {
-    const object: StringifiableGameObject | undefined = this.#objects[id];
-    if (typeof object === 'undefined') {
-      throw new Error(`Could not find object "${id}".`);
-    }
-    return object;
-  }
+  private getChildId(parentId: string, childKey: string): string {
+    const childId: string | undefined = this.#children.getChildId(
+      parentId,
+      childKey,
+    );
 
-  private getObjectChildId(parentId: string, key: string): string {
-    const object: StringifiableGameObject = this.getObject(parentId);
-    const childId: string | undefined = object[ObjectKey.Children][key];
-    if (typeof childId === 'undefined') {
-      throw new Error(`Child "${key}" not found in object "${parentId}".`);
+    if (typeof childId !== 'undefined') {
+      return childId;
     }
-    return childId;
+
+    const newChildId: string = this.createUuid();
+    this.#children.setChild(parentId, childKey, newChildId);
+    return newChildId;
   }
 
   private getRandomCharacter(str: string): string {
@@ -145,6 +117,10 @@ export default class Game<Actions extends object> {
     return this.getRandomCharacter(UUID_CHARACTERS);
   }
 
+  private getState(objectId: string): Stringifiable | undefined {
+    return this.#states[objectId];
+  }
+
   private onAction<K extends keyof Actions>(
     name: K,
     handler: (payload: Actions[K]) => void,
@@ -154,45 +130,71 @@ export default class Game<Actions extends object> {
 
   public render: VoidFunction = noop;
 
-  private setChild(parentId: string, key: string, childId: string): void {
-    const parentObject = this.#objects[parentId];
-    if (typeof parentObject === 'undefined') {
-      throw new Error(
-        `Child "${key}" could not be set on missing parent "${parentId}"`,
-      );
-    }
-
-    parentObject[ObjectKey.Children][key] = childId;
-  }
-
-  private setComponent<P>(
-    id: string,
-    component: (this: GameObject<Actions>, props: P) => void,
+  private setChild<P extends object, S extends Stringifiable>(
+    parentId: string,
+    childKey: string,
+    component: (this: GameObject<Actions, S>, props: P) => void,
     props: P,
   ): void {
-    this.#components[id] = (): void => {
+    const childId: string = this.getChildId(parentId, childKey);
+    this.setComponent(childId, component, props);
+  }
+
+  private setComponent<P extends object, S extends Stringifiable>(
+    objectId: string,
+    component: (this: GameObject<Actions, S>, props: P) => void,
+    props: P,
+  ): void {
+    this.#components[objectId] = (): void => {
       component.call(
         {
-          addChild: <P>(
-            key: string,
-            component: (this: GameObject<Actions>, props: P) => void,
-            props: P,
+          /**
+           *   These methods are re-implemented instead of using
+           * `.bind(this, id)`. This prevents the Game object (`this`) from
+           * being accessible within a component.
+           */
+          onAction: <K extends keyof Actions>(
+            name: K,
+            callback: (payload: Actions[K]) => void,
           ): void => {
-            this.addChild(id, key, component, props);
+            this.onAction(name, callback);
           },
-          onAction: this.onAction.bind(this),
-          render: (callback: () => RenderProps): void => {
-            this.#render[id] = callback;
+          render: (props: RenderProps): void => {
+            this.#renderQueue.set(objectId, props);
           },
+          setChild: <
+            ChildProps extends object,
+            ChildState extends Stringifiable,
+          >(
+            key: string,
+            component: (
+              this: GameObject<Actions, ChildState>,
+              props: ChildProps,
+            ) => void,
+            props: ChildProps,
+          ): void => {
+            this.setChild(objectId, key, component, props);
+          },
+          setState: <K extends keyof S>(
+            key: K,
+            value: (oldValue: S[K]) => S[K],
+          ): void => {
+            this.setState(
+              objectId,
+              key,
+              value(this.getState(objectId) as S[K]),
+            );
+          },
+          state: this.getState(objectId),
         },
         props,
       );
     };
   }
 
-  public setOptions({ entry, objects, seed, timestamp }: AsyncOptions): void {
-    this.#entry = entry;
-    Object.assign(this.#objects, objects);
+  public setOptions({ children, seed, states, timestamp }: AsyncOptions): void {
+    this.#children.set(children);
+    this.#states = states ?? {};
     this.#seed = seed;
     this.#timestamp = timestamp;
   }
@@ -213,11 +215,15 @@ export default class Game<Actions extends object> {
     };
   }
 
+  public setState(objectId: string, key: string, value: Stringifiable): void {
+    this.getState(objectId).set(key, value);
+  }
+
   public toJSON(): Omit<Options<Actions>, 'game' | 'onRender'> {
     return {
-      entry: this.#entry,
-      objects: this.#objects,
+      children: this.#children.toJSON(),
       seed: this.#seed,
+      states: this.#states,
       timestamp: this.#timestamp,
       version: Game.VERSION,
     };

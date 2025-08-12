@@ -1,10 +1,10 @@
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import type { ESLint, Linter } from 'eslint';
 import ts from 'typescript-eslint';
+import defineConfig from './define-config.js';
 import JS from './js.js';
 import mapConfigsToRules from './map-configs-to-rules.js';
 import { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
-import defineConfig from './define-config.js';
 
 export default defineConfig({
   ...JS,
@@ -25,6 +25,14 @@ export default defineConfig({
     ...mapConfigsToRules(ts.configs.stylisticTypeChecked as Linter.Config[]),
     ...mapConfigsToRules(ts.configs.recommendedTypeChecked as Linter.Config[]),
     ...mapConfigsToRules(ts.configs.strictTypeChecked as Linter.Config[]),
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      { fixStyle: 'inline-type-imports', prefer: 'type-imports' },
+    ],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { caughtErrorsIgnorePattern: '^_' },
+    ],
     'no-invalid-this': 'off',
 
     /**
@@ -35,13 +43,6 @@ export default defineConfig({
     '@typescript-eslint/no-duplicate-type-constituents': [
       'error',
       { ignoreUnions: true },
-    ],
-
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      {
-        caughtErrorsIgnorePattern: '^_',
-      },
     ],
 
     '@typescript-eslint/restrict-template-expressions': [
