@@ -1,25 +1,52 @@
 import { type default as Actions, type TapAction } from '../actions.js';
-import { type GameObject } from '../modules/quisido-game/index.js';
-import character from './character.js';
+import {
+  type GameObject,
+  type StringifiableRecord,
+} from '../modules/quisido-game/index.js';
+import character, { type Character } from './character.js';
 
-interface State {
+export interface WorldState extends StringifiableRecord {
+  readonly characters: readonly Character[];
   readonly destination: readonly [number, number];
 }
 
-export default function world(this: GameObject<Actions, State>): void {
-  this.onAction('tap', ({ x, y }: TapAction): void => {
-    this.setChild('shadow', character, {
-      name: 'Shadow',
-      type: 'villain',
-      x,
-      y,
-    });
-  });
+const handleTapCharacters = (
+  characters: readonly Character[],
+  payload: TapAction,
+): readonly Character[] => {};
 
-  this.setChild('main', character, {
-    name: 'Ace',
-    type: 'hero',
-    x: 0,
-    y: 0,
-  });
+function handleTap(
+  this: GameObject<Actions, WorldState>,
+  payload: TapAction,
+): void {
+  this.setState(
+    'characters',
+    (characters: readonly Character[] = []): readonly Character[] =>
+      handleTapCharacters(characters, payload),
+  );
+}
+
+export default function world(this: GameObject<Actions, WorldState>): void {
+  this.onAction('tap', handleTap);
+
+  return {
+    main: [
+      character,
+      {
+        name: 'Ace',
+        type: 'hero',
+        x: 0,
+        y: 0,
+      },
+    ],
+    shadow: [
+      character,
+      {
+        name: 'Shadow',
+        type: 'villain',
+        x,
+        y,
+      },
+    ],
+  };
 }

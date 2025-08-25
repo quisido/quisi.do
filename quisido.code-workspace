@@ -93,17 +93,15 @@
       "path": "packages/worker-test"
     }
   ],
-
   "settings": {
-    "codeQL.createQuery.qlPackLocation": "./",
     "eslint.enable": true,
     "eslint.format.enable": true,
     "eslint.useFlatConfig": true,
-    "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
-    "typescript.enablePromptUseWorkspaceTsdk": true,
-
     "files.associations": {
       "**/config/api-extractor.json": "jsonc",
     },
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+    "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
   },
 }

@@ -3,6 +3,8 @@
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
     "rootDir": ".",
+    // eslint-plugin-sort-keys-custom-order
+    "skipLibCheck": true,
     "sourceRoot": ".",
   },
   "exclude": ["coverage/", "dist/", "node_modules/"],

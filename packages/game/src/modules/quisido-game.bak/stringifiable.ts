@@ -5,6 +5,6 @@ export type Stringifiable =
 
 type StringifiablePrimitive = boolean | null | number | string;
 
-type StringifiableRecord = {
-  readonly [K in string]?: Stringifiable;
+export type StringifiableRecord = {
+  readonly [K in string]?: Stringifiable | undefined;
 };

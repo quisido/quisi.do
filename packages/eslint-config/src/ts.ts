@@ -1,5 +1,6 @@
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import type { ESLint, Linter } from 'eslint';
+import sortKeysCustomOrder from 'eslint-plugin-sort-keys-custom-order';
 import ts from 'typescript-eslint';
 import defineConfig from './define-config.js';
 import JS from './js.js';
@@ -16,6 +17,7 @@ export default defineConfig({
   plugins: {
     ...JS.plugins,
     '@typescript-eslint': tsPlugin as unknown as ESLint.Plugin,
+    'sort-keys-custom-order': sortKeysCustomOrder as unknown as ESLint.Plugin,
   },
 
   rules: {
@@ -25,15 +27,11 @@ export default defineConfig({
     ...mapConfigsToRules(ts.configs.stylisticTypeChecked as Linter.Config[]),
     ...mapConfigsToRules(ts.configs.recommendedTypeChecked as Linter.Config[]),
     ...mapConfigsToRules(ts.configs.strictTypeChecked as Linter.Config[]),
+
     '@typescript-eslint/consistent-type-imports': [
       'error',
       { fixStyle: 'inline-type-imports', prefer: 'type-imports' },
     ],
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      { caughtErrorsIgnorePattern: '^_' },
-    ],
-    'no-invalid-this': 'off',
 
     /**
      *   The ESLint rule is incorrect here when it throws "Explicit undefined is
@@ -43,6 +41,16 @@ export default defineConfig({
     '@typescript-eslint/no-duplicate-type-constituents': [
       'error',
       { ignoreUnions: true },
+    ],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        args: 'all',
+        argsIgnorePattern: '^_',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '^_',
+        ignoreRestSiblings: false,
+      },
     ],
 
     '@typescript-eslint/restrict-template-expressions': [
@@ -55,6 +63,7 @@ export default defineConfig({
 
     // Exhaustive `switch`es do not require a default case.
     'default-case': 'off',
+    'no-invalid-this': 'off',
 
     /**
      *   ESLint incorrectly flags shadowing in TypeScript: (1) `enum`s and (2)
@@ -67,5 +76,6 @@ export default defineConfig({
 
     // Required for `@typescript-eslint/no-floating-promises`.
     'no-void': ['error', { allowAsStatement: true }],
+    'sort-keys-custom-order/type-keys': ['error', { sorting: 'asc' }],
   },
 });

@@ -1,17 +1,20 @@
-import type Actions from './actions.js';
 import world from './components/world.js';
-import Game, { type RenderProps } from './modules/quisido-game/index.js';
+import QuisidoGame from './modules/quisido-game/index.js';
 
-interface Options {
-  readonly onRender?: ((id: string, props: RenderProps) => void) | undefined;
+interface TestGameOptions {
+  readonly cancelTimeout: (id: number) => void;
+  readonly scheduleTimeout: (
+    fn: (...args: unknown[]) => unknown,
+    delay?: number | undefined,
+  ) => number;
 }
 
-export default class TestGame extends Game<Actions> {
-  public constructor({ onRender }: Options) {
+export default class TestGame extends QuisidoGame<unknown, unknown> {
+  public constructor({ cancelTimeout, scheduleTimeout }: TestGameOptions) {
     super({
-      game: world,
-      objects: {},
-      onRender,
+      cancelTimeout,
+      Game: world,
+      scheduleTimeout,
       seed: 1,
       timestamp: Date.now(),
     });

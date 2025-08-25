@@ -1,7 +1,10 @@
 import type Actions from '../actions.js';
-import type { GameObject } from '../modules/quisido-game/index.js';
+import type {
+  GameObject,
+  StringifiableRecord,
+} from '../modules/quisido-game/index.js';
 
-interface Props {
+export interface Character extends StringifiableRecord {
   readonly name: string;
   readonly type: 'hero' | 'villain';
   readonly x: number;
@@ -10,7 +13,7 @@ interface Props {
 
 export default function character(
   this: GameObject<Actions>,
-  { type, x, y }: Props,
+  { type, x, y }: Character,
 ): void {
   switch (type) {
     case 'hero':

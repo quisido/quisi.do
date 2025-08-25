@@ -1,4 +1,3 @@
-import type RenderProps from './modules/quisido-game/render-props.js';
 import TestGame from './test-game.js';
 
 const CANVAS: HTMLCanvasElement | null = window.document
@@ -10,9 +9,19 @@ if (CANVAS === null) {
 }
 
 const game = new TestGame({
-  onRender(id: string, props: RenderProps): void {
-    window.console.log(id, props);
+  cancelTimeout(id: number): void {
+    window.clearTimeout(id);
   },
+  scheduleTimeout(
+    fn: (...args: unknown[]) => unknown,
+    delay?: number | undefined,
+  ): number {
+    return window.setTimeout(fn, delay);
+  },
+});
+
+game.start(CANVAS, (error: Error): void => {
+  window.console.log(error);
 });
 
 window.addEventListener('click', (ev: MouseEvent): void => {

@@ -1,30 +1,46 @@
+import { isDefined } from 'fmrs';
 import ActionHandlers from './action-handlers.js';
+import assert from './assert.js';
 import Children from './children.js';
 import type GameObject from './game-object.js';
 import noop from './noop.js';
 import type { PartialReadonlyRecord } from './partial-readonly-record.js';
 import type RenderProps from './render-props.js';
 import RenderQueue from './render-queue.js';
-import type { Stringifiable } from './stringifiable.js';
+import States from './states.js';
+import type { Stringifiable, StringifiableRecord } from './stringifiable.js';
 
 interface AsyncOptions {
   readonly children?:
     | PartialReadonlyRecord<string, PartialReadonlyRecord<string, string>>
     | undefined;
   readonly seed: number;
-  readonly states?: PartialReadonlyRecord<string, Stringifiable> | undefined;
+  readonly states?:
+    | PartialReadonlyRecord<
+        string,
+        PartialReadonlyRecord<string, Stringifiable>
+      >
+    | undefined;
   readonly timestamp: number;
   readonly version?: number | undefined;
 }
 
-interface Options<Actions extends object> {
+interface Options<
+  Actions extends object,
+  State extends StringifiableRecord = StringifiableRecord,
+> {
   readonly children?:
     | PartialReadonlyRecord<string, PartialReadonlyRecord<string, string>>
     | undefined;
-  readonly game: (this: GameObject<Actions>) => void;
+  readonly game: (this: GameObject<Actions, State>) => void;
   readonly onRender?: ((id: string, props: RenderProps) => void) | undefined;
   readonly seed: number;
-  readonly states?: PartialReadonlyRecord<string, Stringifiable> | undefined;
+  readonly states?:
+    | PartialReadonlyRecord<
+        string,
+        PartialReadonlyRecord<string, Stringifiable>
+      >
+    | undefined;
   readonly timestamp: number;
   readonly version?: number | undefined;
 }
@@ -34,7 +50,10 @@ const UUID_CHARACTERS =
   '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const VERSION = 1;
 
-export default class Game<Actions extends object> {
+export default class Game<
+  Actions extends object,
+  State extends StringifiableRecord = StringifiableRecord,
+> {
   public static VERSION: number = VERSION;
 
   readonly #actionHandlers = new ActionHandlers<Actions>();
@@ -43,7 +62,7 @@ export default class Game<Actions extends object> {
   readonly #render: Record<string, () => RenderProps> = {};
   #renderQueue = new RenderQueue();
   #seed: number;
-  #states: Partial<Record<string, Stringifiable>>;
+  readonly #states: States;
   #timestamp: number;
 
   public constructor({
@@ -51,17 +70,17 @@ export default class Game<Actions extends object> {
     game,
     onRender,
     seed,
-    states = {},
+    states,
     timestamp,
     version = Game.VERSION,
-  }: Options<Actions>) {
+  }: Options<Actions, State>) {
     if (version !== Game.VERSION) {
       throw new Error('Game versions are not yet backwards compatible.');
     }
 
     this.#children = new Children(children);
     this.#seed = seed;
-    this.#states = states;
+    this.#states = new States(states);
     this.#timestamp = timestamp;
 
     this.setComponent(ROOT_OBJECT_ID, game, {});
@@ -99,26 +118,36 @@ export default class Game<Actions extends object> {
   private getRandomCharacter(str: string): string {
     const charIndex: number = this.getRandomNumber(0, str.length - 1);
     const char: string | undefined = str[charIndex];
-    if (typeof char === 'undefined') {
-      throw new Error(
-        `Character at index ${charIndex} not found in string "${str}".`,
-      );
-    }
+    assert(
+      isDefined(char),
+      `Character at index ${charIndex} not found in string "${str}".`,
+    );
 
     return char;
   }
 
+  // Generates a random number between `min` and `max`, inclusive.
   private getRandomNumber(min: number, max: number): number {
-    this.#seed += max;
-    return (this.#seed % (max - min + 1)) + min;
+    const diff: number = max - min;
+    this.#seed += diff;
+    return (this.#seed % (diff + 1)) + min;
   }
 
   private getRandomUuidCharacter(): string {
     return this.getRandomCharacter(UUID_CHARACTERS);
   }
 
-  private getState(objectId: string): Stringifiable | undefined {
-    return this.#states[objectId];
+  private getState(
+    objectId: string,
+    stateKey: string,
+  ): Stringifiable | undefined {
+    return this.#states.getValue(objectId, stateKey);
+  }
+
+  private getStates(
+    objectId: string,
+  ): PartialReadonlyRecord<string, Stringifiable> | undefined {
+    return this.#states.getStates(objectId);
   }
 
   private onAction<K extends keyof Actions>(
@@ -130,7 +159,7 @@ export default class Game<Actions extends object> {
 
   public render: VoidFunction = noop;
 
-  private setChild<P extends object, S extends Stringifiable>(
+  private setChild<P extends object, S extends StringifiableRecord>(
     parentId: string,
     childKey: string,
     component: (this: GameObject<Actions, S>, props: P) => void,
@@ -140,10 +169,16 @@ export default class Game<Actions extends object> {
     this.setComponent(childId, component, props);
   }
 
-  private setComponent<P extends object, S extends Stringifiable>(
+  private setComponent<
+    ChildProps extends object,
+    ChildState extends StringifiableRecord,
+  >(
     objectId: string,
-    component: (this: GameObject<Actions, S>, props: P) => void,
-    props: P,
+    component: (
+      this: GameObject<Actions, ChildState>,
+      props: ChildProps,
+    ) => void,
+    props: ChildProps,
   ): void {
     this.#components[objectId] = (): void => {
       component.call(
@@ -155,37 +190,64 @@ export default class Game<Actions extends object> {
            */
           onAction: <K extends keyof Actions>(
             name: K,
-            callback: (payload: Actions[K]) => void,
+            callback: (
+              this: GameObject<Actions, ChildState>,
+              payload: Actions[K],
+            ) => void,
           ): void => {
             this.onAction(name, callback);
           },
+
           render: (props: RenderProps): void => {
             this.#renderQueue.set(objectId, props);
           },
+
           setChild: <
-            ChildProps extends object,
-            ChildState extends Stringifiable,
+            GrandchildProps extends object,
+            GrandchildState extends StringifiableRecord,
           >(
             key: string,
             component: (
-              this: GameObject<Actions, ChildState>,
-              props: ChildProps,
+              this: GameObject<Actions, GrandchildState>,
+              props: GrandchildProps,
             ) => void,
-            props: ChildProps,
+            props: GrandchildProps,
           ): void => {
             this.setChild(objectId, key, component, props);
           },
-          setState: <K extends keyof S>(
-            key: K,
-            value: (oldValue: S[K]) => S[K],
+
+          setState: <K extends keyof ChildState>(
+            stateKey: K,
+            value: (oldValue: ChildState[K] | undefined) => ChildState[K],
           ): void => {
+            const oldValue: ChildState[K] | undefined = this.getState(
+              objectId,
+
+              /**
+               *   We use `as string`, because TypeScript believes
+               * `keyof Record` to be `string | number | symbol`.
+               */
+              stateKey as string,
+            ) as ChildState[K] | undefined;
+
             this.setState(
               objectId,
-              key,
-              value(this.getState(objectId) as S[K]),
+
+              /**
+               *   We use `as string`, because TypeScript believes
+               * `keyof Record` to be `string | number | symbol`.
+               */
+              stateKey as string,
+
+              /**
+               *   We use `as string`, because TypeScript cannot infer that
+               * `Record<K, V>[keyof Record<K, V>]` is `V`.
+               */
+              value(oldValue) as Stringifiable,
             );
           },
-          state: this.getState(objectId),
+
+          state: this.getStates(objectId) as Partial<ChildState>,
         },
         props,
       );
@@ -194,7 +256,7 @@ export default class Game<Actions extends object> {
 
   public setOptions({ children, seed, states, timestamp }: AsyncOptions): void {
     this.#children.set(children);
-    this.#states = states ?? {};
+    this.#states.set(states);
     this.#seed = seed;
     this.#timestamp = timestamp;
   }
@@ -216,14 +278,14 @@ export default class Game<Actions extends object> {
   }
 
   public setState(objectId: string, key: string, value: Stringifiable): void {
-    this.getState(objectId).set(key, value);
+    this.#states.setValue(objectId, key, value);
   }
 
   public toJSON(): Omit<Options<Actions>, 'game' | 'onRender'> {
     return {
       children: this.#children.toJSON(),
       seed: this.#seed,
-      states: this.#states,
+      states: this.#states.toJSON(),
       timestamp: this.#timestamp,
       version: Game.VERSION,
     };

@@ -23,6 +23,7 @@
   "include": [
     "**/*.json",
     "**/*.ts",
+    "**/*.tsx",
     "**/*.webmanifest",
   ],
 }
