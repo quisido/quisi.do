@@ -1,19 +1,19 @@
-import { type EventHint, type Event as SentryEvent } from '@sentry/core';
-import { useFullstory, type FSApi } from 'fullstory-react';
+import { type Event as SentryEvent, type EventHint } from '@sentry/core';
+import { mapObjectToEntries } from 'fmrs';
+import { type FSApi, useFullstory } from 'fullstory-react';
 import mixpanelBrowser from 'mixpanel-browser';
 import { usePostHog } from 'posthog-js/react';
 import { useCallback } from 'react';
 import { useDatadogRum } from 'react-datadog';
 import { useSentrySdk } from 'sentry-react';
 import EMPTY_OBJECT from '../../modules/react-google-analytics/constants/empty-object.js';
+import { useNewRelicBrowserAgent } from '../../modules/react-new-relic/index.js';
 import type { Dimensions } from '../../types/dimensions.js';
-import mapObjectToEntries from '../../utils/map-object-to-entries.js';
 import zarazTrack from '../../utils/zaraz-track.js';
 import useHostname from '../use-hostname.js';
 import useLogRocket from '../use-log-rocket.js';
 import usePathname from '../use-pathname.js';
 import createSentryEvent from './utils/create-sentry-event.js';
-import { useNewRelicBrowserAgent } from '../../modules/react-new-relic/index.js';
 
 interface CaptureSentryEventOptions {
   readonly captureEvent: (event: SentryEvent, hint?: EventHint) => string;

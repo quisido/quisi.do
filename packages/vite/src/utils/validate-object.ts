@@ -1,7 +1,6 @@
-import { isRecord } from 'fmrs';
+import { isRecord, mapObjectToKeys } from 'fmrs';
 import EMPTY_ARRAY from '../constants/empty-array.js';
 import assert from './assert.js';
-import mapObjectToKeys from './map-object-to-keys.js';
 
 type Validator<T> = {
   [K in keyof T]: (value: unknown, context: readonly string[]) => T[K];

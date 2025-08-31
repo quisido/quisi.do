@@ -1,4 +1,5 @@
-import TestGame from './test-game.js';
+import World from './components/world.js';
+import BrowserGame from './modules/quisido-browser-game/index.js';
 
 const CANVAS: HTMLCanvasElement | null = window.document
   .getElementsByTagName('canvas')
@@ -8,17 +9,7 @@ if (CANVAS === null) {
   throw new Error('Failed to find canvas.');
 }
 
-const game = new TestGame({
-  cancelTimeout(id: number): void {
-    window.clearTimeout(id);
-  },
-  scheduleTimeout(
-    fn: (...args: unknown[]) => unknown,
-    delay?: number | undefined,
-  ): number {
-    return window.setTimeout(fn, delay);
-  },
-});
+const game = new BrowserGame(World);
 
 game.start(CANVAS, (error: Error): void => {
   window.console.log(error);

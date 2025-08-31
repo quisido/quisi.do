@@ -54,22 +54,22 @@ export default function validateSentryIssue(
       isPublic: validateBoolean,
       isSubscribed: validateBoolean,
       lastSeen: validateString,
+
+      // Example: 'error'
+      level: validateString,
       metadata: validateMetadata,
       numComments: validateNumber,
       permalink: validateString,
       shortId: validateString,
       stats: validateStats,
-      title: validateString,
-      userCount: validateNumber,
-
-      // Example: 'error'
-      level: validateString,
 
       // Example: 'unresolved'
       status: validateString,
+      title: validateString,
 
       // Example: 'default'
       type: validateString,
+      userCount: validateNumber,
     },
     context,
   );

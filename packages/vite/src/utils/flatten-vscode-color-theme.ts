@@ -1,3 +1,5 @@
+import { mapObjectToEntries } from 'fmrs';
+
 type RecordKeyOf<T> = T extends Record<infer U, unknown> ? U : never;
 
 interface TokenColors {
@@ -29,10 +31,6 @@ type FlatVSCodeColorTheme<T extends VSCodeColorTheme> = T['colors'] &
   FlatTokenColors<T>;
 
 const EMPTY_OBJECT: Readonly<Record<string, never>> = {};
-
-const mapObjectToEntries = <T extends Record<string, unknown>>(
-  obj: Partial<T>,
-): [keyof T, T[keyof T]][] => Object.entries(obj) as [keyof T, T[keyof T]][];
 
 const mapTokenColorsToRecord = <T extends VSCodeColorTheme>(
   // Compulsory<T['tokenColors']>[number]
