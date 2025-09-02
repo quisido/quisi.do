@@ -1,7 +1,7 @@
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import {
-  defineConfig,
   type ConfigEnv,
+  defineConfig,
   type ESBuildOptions,
   type UserConfig,
 } from 'vite';
@@ -9,7 +9,7 @@ import buildTSConfig from './tsconfig.build.json' with { type: 'json' };
 
 const ESBUILD_OPTIONS: ESBuildOptions = {
   color: true,
-  jsx: 'preserve',
+  jsx: 'automatic',
   sourcesContent: true,
 };
 
@@ -33,8 +33,8 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
     minifyIdentifiers: false,
     minifySyntax: false,
     minifyWhitespace: false,
-    sourceRoot: './src/',
     sourcemap: 'both',
+    sourceRoot: './src/',
   },
   plugins: [basicSsl()],
   server: {

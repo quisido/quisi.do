@@ -11,5 +11,5 @@ export {
   type Props,
   type TextProps,
 } from './props.js';
-export { default } from './quisido-game.js';
+export { default, type State } from './quisido-game.js';
 export { Type } from './type.js';

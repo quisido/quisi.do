@@ -15,20 +15,11 @@ game.start(CANVAS, (error: Error): void => {
   window.console.log(error);
 });
 
-window.addEventListener('click', (ev: MouseEvent): void => {
-  game.dispatch('tap', { x: ev.clientX, y: ev.clientY });
-});
+// window.addEventListener('click', (ev: MouseEvent): void => {
+//   game.dispatch('tap', { x: ev.clientX, y: ev.clientY });
+// });
 
-const animate = (): void => {
-  window.requestAnimationFrame((): void => {
-    game.render();
-    animate();
-  });
-};
-
-animate();
-
-const INTERVAL = 10_000;
-window.setInterval((): void => {
-  window.console.log(game.toJSON());
-}, INTERVAL);
+// const INTERVAL = 10_000;
+// window.setInterval((): void => {
+//   window.console.log(game.toJSON());
+// }, INTERVAL);

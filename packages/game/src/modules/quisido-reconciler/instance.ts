@@ -11,8 +11,8 @@ export default interface Instance<
     child: Child | Txt,
     beforeChild: Child | Txt, // | SuspenseInstance,
   ) => void;
-  readonly resetTextContent: () => void;
   readonly removeChild: (instance: Child | Txt) => void;
+  readonly resetTextContent: () => void;
   readonly unhide: (props: Props[InstanceType]) => void;
   readonly update: (
     prevProps: Props[InstanceType],

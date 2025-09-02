@@ -13,6 +13,10 @@ import QuisidoReactContext from './quisido-react-context.js';
 import type TextInstance from './text-instance.js';
 import { TransitionStatus } from './transition-status.js';
 
+interface HostContext<Root> {
+  readonly rootContainer: Root;
+}
+
 export type FormInstance = never;
 export type SuspenseInstance = unknown;
 
@@ -37,7 +41,10 @@ export interface QuisidoReconcilerOptions<
     fn: (...args: readonly unknown[]) => unknown,
     delay?: number | undefined,
   ) => number;
-  readonly shouldSetTextContent: <T extends Type>(type: T, props: Props[T]) => boolean;
+  readonly shouldSetTextContent: <T extends Type>(
+    type: T,
+    props: Props[T],
+  ) => boolean;
 }
 
 export default class QuisidoReconciler<
@@ -248,11 +255,11 @@ export default class QuisidoReconciler<
       },
 
       getChildHostContext(
-        _parentHostContext: null,
+        parentHostContext: HostContext<Root>,
         _type: string,
         _rootContainer: Root,
-      ): null {
-        return null;
+      ): HostContext<Root> {
+        return parentHostContext;
       },
 
       // eslint-disable-next-line no-warning-comments
@@ -283,8 +290,10 @@ export default class QuisidoReconciler<
         return instance;
       },
 
-      getRootHostContext(_rootContainer: Root): null {
-        return null;
+      getRootHostContext(rootContainer: Root): HostContext<Root> {
+        return {
+          rootContainer,
+        };
       },
 
       hideInstance(instance: Family): void {
@@ -301,7 +310,6 @@ export default class QuisidoReconciler<
         value: TransitionStatus.NotPendingTransition,
       }),
 
-      // HostTransitionContext: {},
       insertBefore(
         parentInstance: Family,
         child: Family | Txt,
@@ -513,7 +521,11 @@ export default class QuisidoReconciler<
     Family | Txt
   >[K] {
     // @ts-expect-error This works.
-    return this.#reconciler[method].bind(this.#reconciler);
+    return (...args: readonly unknown[]): unknown => {
+      // @ts-expect-error This works.
+
+      return this.#reconciler[method](...args);
+    };
   }
 
   public readonly createComponentSelector = this.#method(
@@ -577,4 +589,7 @@ export default class QuisidoReconciler<
   public readonly shouldError = this.#method('shouldError');
   public readonly shouldSuspend = this.#method('shouldSuspend');
   public readonly injectIntoDevTools = this.#method('injectIntoDevTools');
+
+  // @ts-expect-error The types are wrong.
+  public readonly updateContainerSync = this.#method('updateContainerSync');
 }

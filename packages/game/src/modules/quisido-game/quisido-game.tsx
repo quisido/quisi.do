@@ -36,11 +36,14 @@ export interface QuisidoGameOptions<
     delay?: number | undefined,
   ) => number;
   readonly seed: number;
-  readonly shouldSetTextContent: <T extends Type>(type: T, props: Props[T]) => boolean;
+  readonly shouldSetTextContent: <T extends Type>(
+    type: T,
+    props: Props[T],
+  ) => boolean;
   readonly timestamp: number;
 }
 
-interface State {
+export interface State {
   readonly seed: number;
   readonly timestamp: number;
 }
@@ -124,7 +127,7 @@ export default class QuisidoGame<
   ): void {
     const opaqueRoot: OpaqueRoot = this.#getOpaqueRoot(container, onError);
     const Game: FunctionComponent = this.#Game;
-    this.#reconciler.updateContainer(
+    this.#reconciler.updateContainerSync(
       <Game />,
       opaqueRoot,
       DEFAULT_PARENT_COMPONENT,

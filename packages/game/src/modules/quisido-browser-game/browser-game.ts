@@ -3,6 +3,7 @@ import QuisidoGame, {
   type AudioProps,
   type ImageProps,
   type Props,
+  type State,
   type TextProps,
   Type,
 } from '../quisido-game/index.js';
@@ -14,6 +15,7 @@ import BrowserTextInstance from './browser-text-instance.js';
 import ImageInstance from './image-instance.js';
 
 export default class BrowserGame {
+  #animationFrameHandles = new WeakMap<HTMLCanvasElement, number>();
   #game: QuisidoGame<BrowserTextInstance, BrowserFamily, BrowserContainer>;
 
   public constructor(Game: FunctionComponent) {
@@ -63,12 +65,45 @@ export default class BrowserGame {
     });
   }
 
+  #render = (canvas: HTMLCanvasElement, container: BrowserContainer): void => {
+    container.render();
+
+    const handle: number = window.requestAnimationFrame((): void => {
+      this.#render(canvas, container);
+    });
+    this.#animationFrameHandles.set(canvas, handle);
+  };
+
+  public dispatch(type: string, payload: unknown): void {
+    this.#game.dispatch(type, payload);
+  }
+
   public start(
     canvas: HTMLCanvasElement,
     onError: (error: Error) => void,
     callback?: VoidFunction | undefined,
-  ): void {
+  ): VoidFunction {
     const container = new BrowserContainer(canvas);
-    this.#game.start(container, onError, callback);
+    this.#game.start(container, onError, (): void => {
+      this.#render(canvas, container);
+      callback?.();
+    });
+
+    return (): void => {
+      this.stop(canvas);
+    };
+  }
+
+  public stop(canvas: HTMLCanvasElement): void {
+    const handle: number | undefined = this.#animationFrameHandles.get(canvas);
+    if (typeof handle === 'undefined') {
+      return;
+    }
+
+    window.cancelAnimationFrame(handle);
+  }
+
+  public toJSON(): State {
+    return this.#game.toJSON();
   }
 }

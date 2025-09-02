@@ -7,7 +7,7 @@ export default class BrowserInstance<T extends Type = Type>
   implements Instance<Type, Props, BrowserTextInstance, BrowserFamily, T>
 {
   #hidden = false;
-  readonly #props: Props[T];
+  #props: Props[T];
   readonly #updates: Partial<Props[T]> = {};
 
   public constructor(props: Props[T]) {
@@ -17,6 +17,14 @@ export default class BrowserInstance<T extends Type = Type>
   // eslint-disable-next-line class-methods-use-this
   public appendChild(_instance: BrowserFamily | BrowserTextInstance): void {
     throw new Error('Browser instances cannot have children.');
+  }
+  public flush(): Props[T] {
+    const newProps: Props[T] = {
+      ...this.#props,
+      ...this.#updates,
+    };
+    this.#props = newProps;
+    return newProps;
   }
 
   public get hidden(): boolean {

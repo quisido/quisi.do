@@ -1,6 +1,12 @@
-import type { Container, Props, Type } from '../quisido-game/index.js';
+import type {
+  Container,
+  ImageProps,
+  Props,
+  Type,
+} from '../quisido-game/index.js';
 import type { BrowserFamily } from './browser-family.js';
 import type BrowserTextInstance from './browser-text-instance.js';
+import ImageInstance from './image-instance.js';
 
 export default class BrowserContainer
   implements Container<Type, Props, BrowserTextInstance, BrowserFamily>
@@ -46,5 +52,20 @@ export default class BrowserContainer
 
   public removeChild(instance: BrowserFamily | BrowserTextInstance): void {
     this.#children.delete(instance);
+  }
+
+  public render(): void {
+    for (const child of this.#children) {
+      if (child instanceof ImageInstance) {
+        const props: ImageProps = child.flush();
+        this.#renderingContext.drawImage(
+          child.canvasImageSource,
+          0,
+          0,
+          props.width,
+          props.height,
+        );
+      }
+    }
   }
 }

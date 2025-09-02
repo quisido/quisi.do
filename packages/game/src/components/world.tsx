@@ -8,7 +8,9 @@ export interface WorldState {
 }
 
 export default function World(): JSX {
-  const characters = useState();
+  const [characters] = useState([
+    { name: 'Mario', type: 'hero' as const, x: 0, y: 0 },
+  ]);
 
   return (
     <>
