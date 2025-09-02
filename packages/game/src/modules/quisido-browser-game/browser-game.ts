@@ -12,11 +12,17 @@ import AudioInstance from './audio-instance.js';
 import BrowserContainer from './browser-container.js';
 import type { BrowserFamily } from './browser-family.js';
 import BrowserTextInstance from './browser-text-instance.js';
+import FpsCounter from './fps-counter.js';
 import ImageInstance from './image-instance.js';
 
 export default class BrowserGame {
-  #animationFrameHandles = new WeakMap<HTMLCanvasElement, number>();
-  #game: QuisidoGame<BrowserTextInstance, BrowserFamily, BrowserContainer>;
+  readonly #animationFrameHandles = new WeakMap<HTMLCanvasElement, number>();
+  readonly #fpsCounter = new FpsCounter(5_000);
+  readonly #game: QuisidoGame<
+    BrowserTextInstance,
+    BrowserFamily,
+    BrowserContainer
+  >;
 
   public constructor(Game: FunctionComponent) {
     this.#game = new QuisidoGame({
@@ -66,6 +72,7 @@ export default class BrowserGame {
   }
 
   #render = (canvas: HTMLCanvasElement, container: BrowserContainer): void => {
+    this.#fpsCounter.tick();
     container.render();
 
     const handle: number = window.requestAnimationFrame((): void => {
