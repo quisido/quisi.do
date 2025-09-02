@@ -1,15 +1,16 @@
-import type { Props, Type } from './types.js';
+import type Instance from './instance.js';
 
-export default interface Instance<
+export default interface Container<
+  Type extends string,
+  Props extends Record<Type, object>,
   Txt,
-  Child extends Instance<Txt, Child>,
-  T extends Type = Type,
+  Child extends Instance<Type, Props, Txt, Child>,
 > {
   readonly appendChild: (instance: Child | Txt) => void;
+  readonly clear: () => void;
   readonly insertBefore: (
     child: Child | Txt,
     beforeChild: Child | Txt, // | SuspenseInstance,
   ) => void;
   readonly removeChild: (instance: Child | Txt) => void;
-  readonly update: (prevProps: Props[T], nextProps: Props[T]) => void;
 }

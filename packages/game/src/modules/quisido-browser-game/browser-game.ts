@@ -1,22 +1,20 @@
 import type { FunctionComponent } from 'react';
 import QuisidoGame, {
+  type AudioProps,
   type ImageProps,
-  type MusicProps,
   type Props,
-  type Type,
+  type TextProps,
+  Type,
 } from '../quisido-game/index.js';
+import type { FamilyMember } from '../quisido-reconciler/index.js';
+import AudioInstance from './audio-instance.js';
 import BrowserContainer from './browser-container.js';
-import type BrowserElementInstance from './browser-element-instance.js';
-import BrowserNodeInstance from './browser-node-instance.js';
+import type { BrowserFamily } from './browser-family.js';
+import BrowserTextInstance from './browser-text-instance.js';
 import ImageInstance from './image-instance.js';
-import MusicInstance from './music-instance.js';
 
 export default class BrowserGame {
-  #game: QuisidoGame<
-    BrowserNodeInstance,
-    BrowserElementInstance,
-    BrowserContainer
-  >;
+  #game: QuisidoGame<BrowserTextInstance, BrowserFamily, BrowserContainer>;
 
   public constructor(Game: FunctionComponent) {
     this.#game = new QuisidoGame({
@@ -27,23 +25,26 @@ export default class BrowserGame {
       createInstance: <T extends Type>(
         type: T,
         props: Props[T],
-      ): BrowserElementInstance<T> => {
+      ): FamilyMember<Type, Props, BrowserTextInstance, BrowserFamily, T> => {
         switch (type) {
-          case 'image':
-            // @ts-expect-error TypeScript cannot infer that `T` is 'image'.
+          case Type.Audio:
+            return new AudioInstance(props as AudioProps);
+          case Type.Image:
             return new ImageInstance(props as ImageProps);
-          case 'music':
-            // @ts-expect-error TypeScript cannot infer that `T` is 'music'.
-            return new MusicInstance(props as MusicProps);
+          case Type.Text:
+            return new BrowserTextInstance((props as TextProps).children);
         }
       },
 
-      createTextInstance(text: string): BrowserNodeInstance {
-        const node: Text = window.document.createTextNode(text);
-        return new BrowserNodeInstance(node);
+      createTextInstance(text: string): BrowserTextInstance {
+        return new BrowserTextInstance(text);
       },
 
       Game,
+
+      scheduleMicrotask(fn: VoidFunction): void {
+        window.queueMicrotask(fn);
+      },
 
       scheduleTimeout(
         fn: (...args: unknown[]) => unknown,
@@ -53,6 +54,11 @@ export default class BrowserGame {
       },
 
       seed: 1,
+
+      shouldSetTextContent(type: Type): boolean {
+        return type === Type.Text;
+      },
+
       timestamp: Date.now(),
     });
   }
@@ -60,7 +66,7 @@ export default class BrowserGame {
   public start(
     canvas: HTMLCanvasElement,
     onError: (error: Error) => void,
-    callback?: (() => void) | undefined,
+    callback?: VoidFunction | undefined,
   ): void {
     const container = new BrowserContainer(canvas);
     this.#game.start(container, onError, callback);

@@ -1,5 +1,5 @@
 import type { ReactContext, ReactProviderType } from 'react-reconciler';
-import QuisidoReactProviderType from './react-provider-type.js';
+import QuisidoReactProviderType from './quisido-react-provider-type.js';
 
 interface Options<T> {
   readonly threadCount: number;
