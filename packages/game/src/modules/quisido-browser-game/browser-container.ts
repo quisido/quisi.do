@@ -1,6 +1,6 @@
 import type {
   Container,
-  ImageProps,
+  DrawImageProps,
   Props,
   Type,
 } from '../quisido-game/index.js';
@@ -55,13 +55,14 @@ export default class BrowserContainer
   }
 
   public render(): void {
+    this.clear();
     for (const child of this.#children) {
       if (child instanceof ImageInstance) {
-        const props: ImageProps = child.flush();
+        const props: DrawImageProps = child.flush();
         this.#renderingContext.drawImage(
           child.canvasImageSource,
-          0,
-          0,
+          props.x,
+          props.y,
           props.width,
           props.height,
         );

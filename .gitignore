@@ -4,6 +4,7 @@
 /dist/
 /sarif/
 /.attach_pid*
+/.env.local
 /.eslintcache
 /.pnp.*
 /debug.log

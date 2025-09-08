@@ -5,7 +5,7 @@ type RecordKeyOf<T> = T extends Record<infer U, unknown> ? U : never;
 interface TokenColors {
   // Readonly name?: string;
   readonly scope: string | readonly string[];
-  readonly settings: Partial<Readonly<Record<string, string>>>;
+  readonly settings: Partial<Readonly<Record<string, string | undefined>>>;
 }
 
 type TokenColorKeys<T extends readonly TokenColors[]> =
@@ -40,11 +40,17 @@ const mapTokenColorsToRecord = <T extends VSCodeColorTheme>(
   if (typeof scope === 'string') {
     const reduceEntriesToRecord = (
       settingsRecord: FlatTokenColors<T>,
-      [key, value]: readonly [string, string],
-    ): FlatTokenColors<T> => ({
-      ...settingsRecord,
-      [key]: value,
-    });
+      [key, value]: readonly [string, string | undefined],
+    ): FlatTokenColors<T> => {
+      if (typeof value === 'undefined') {
+        return settingsRecord;
+      }
+      return {
+        ...settingsRecord,
+        [key]: value,
+      };
+    };
+
     return mapObjectToEntries(settings).reduce<FlatTokenColors<T>>(
       reduceEntriesToRecord,
       EMPTY_OBJECT,

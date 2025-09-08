@@ -7,7 +7,7 @@ export {
 export { type default as GameObject } from './game-object.js';
 export {
   type AudioProps,
-  type ImageProps,
+  type DrawImageProps,
   type Props,
   type TextProps,
 } from './props.js';

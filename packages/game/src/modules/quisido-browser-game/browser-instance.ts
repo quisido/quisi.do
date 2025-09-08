@@ -60,6 +60,8 @@ export default class BrowserInstance<T extends Type = Type>
   public update(_prevProps: Props[T], nextProps: Props[T]): void {
     for (const [key, value] of mapObjectToEntries(nextProps)) {
       if (this.#props[key] === value) {
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+        delete this.#updates[key];
         continue;
       }
 

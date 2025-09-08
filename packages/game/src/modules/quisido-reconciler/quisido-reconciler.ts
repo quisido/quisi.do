@@ -34,7 +34,7 @@ export interface QuisidoReconcilerOptions<
     type: T,
     props: Props[T],
     rootContainer: Root,
-  ) => FamilyMember<Type, Props, Txt, Family, T>;
+  ) => Family;
   readonly createTextInstance: (text: string, rootContainer: Root) => Txt;
   readonly scheduleMicrotask: (fn: () => void) => void;
   readonly scheduleTimeout: (
@@ -233,9 +233,8 @@ export default class QuisidoReconciler<
         type: T,
         props: Props[T],
         rootContainer: Root,
-      ): FamilyMember<Type, Props, Txt, Family, T> => {
-        const instance: FamilyMember<Type, Props, Txt, Family, T> =
-          createInstance(type, props, rootContainer);
+      ): Family => {
+        const instance: Family = createInstance(type, props, rootContainer);
         this.#instanceCreated.set(instance, Date.now());
         return instance;
       },
@@ -590,6 +589,7 @@ export default class QuisidoReconciler<
   public readonly shouldSuspend = this.#method('shouldSuspend');
   public readonly injectIntoDevTools = this.#method('injectIntoDevTools');
 
+  // no-dd-sa:typescript-code-style/ban-ts-comment
   // @ts-expect-error The types are wrong.
   public readonly updateContainerSync = this.#method('updateContainerSync');
 }

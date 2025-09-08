@@ -1,5 +1,5 @@
 export enum Type {
   Audio = 'audio',
-  Image = 'img',
+  DrawImage = 'draw-image',
   Text = 'text',
 }

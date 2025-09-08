@@ -184,7 +184,14 @@
     "http-cache": "error",
     "http-compression": "error",
     "https-only": "error",
-    "image-optimization-cloudinary": "error",
+    // Env: webhint_hints_image-optimization-cloudinary_1_apiSecret
+    "image-optimization-cloudinary": [
+      "error",
+      {
+        "apiKey": "516889177257495",
+        "cloudName": "dcbaafknx"
+      }
+    ],
     "leading-dot-classlist": "error",
     "manifest-app-name": "error",
     "manifest-exists": "error",

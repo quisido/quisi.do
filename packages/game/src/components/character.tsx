@@ -11,9 +11,11 @@ export interface Props {
 export default function Character({ type, x, y }: Props): ReactElement {
   switch (type) {
     case 'hero':
-      return <img height={64} src={hero} width={48} x={x} y={y} />;
+      return <draw-image height={64} src={hero} width={48} x={x} y={y} />;
 
     case 'villain':
-      return <img height={64} src="villain.png" width={48} x={x} y={y} />;
+      return (
+        <draw-image height={64} src="villain.png" width={48} x={x} y={y} />
+      );
   }
 }

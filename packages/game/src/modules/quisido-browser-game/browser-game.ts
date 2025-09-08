@@ -1,19 +1,19 @@
 import type { FunctionComponent } from 'react';
 import QuisidoGame, {
   type AudioProps,
-  type ImageProps,
+  type DrawImageProps,
   type Props,
   type State,
   type TextProps,
   Type,
 } from '../quisido-game/index.js';
-import type { FamilyMember } from '../quisido-reconciler/index.js';
 import AudioInstance from './audio-instance.js';
 import BrowserContainer from './browser-container.js';
 import type { BrowserFamily } from './browser-family.js';
 import BrowserTextInstance from './browser-text-instance.js';
 import FpsCounter from './fps-counter.js';
 import ImageInstance from './image-instance.js';
+import TextInstance from './text-instance.js';
 
 export default class BrowserGame {
   readonly #animationFrameHandles = new WeakMap<HTMLCanvasElement, number>();
@@ -33,14 +33,14 @@ export default class BrowserGame {
       createInstance: <T extends Type>(
         type: T,
         props: Props[T],
-      ): FamilyMember<Type, Props, BrowserTextInstance, BrowserFamily, T> => {
+      ): BrowserFamily => {
         switch (type) {
           case Type.Audio:
             return new AudioInstance(props as AudioProps);
-          case Type.Image:
-            return new ImageInstance(props as ImageProps);
+          case Type.DrawImage:
+            return new ImageInstance(props as DrawImageProps);
           case Type.Text:
-            return new BrowserTextInstance((props as TextProps).children);
+            return new TextInstance(props as TextProps);
         }
       },
 

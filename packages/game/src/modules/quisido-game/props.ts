@@ -6,15 +6,17 @@ export interface AudioProps {
   readonly volume: number;
 }
 
-export interface ImageProps {
+export interface DrawImageProps {
   readonly height: number;
   readonly src: string;
   readonly width: number;
+  readonly x: number;
+  readonly y: number;
 }
 
 export interface Props {
   readonly [Type.Audio]: AudioProps;
-  readonly [Type.Image]: ImageProps;
+  readonly [Type.DrawImage]: DrawImageProps;
   readonly [Type.Text]: TextProps;
 }
 

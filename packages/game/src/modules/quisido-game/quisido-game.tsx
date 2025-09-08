@@ -7,7 +7,6 @@ import type {
 } from 'react-reconciler';
 import QuisidoReconciler, {
   type Container,
-  type FamilyMember,
   type Instance,
   type SuspenseInstance,
 } from '../quisido-reconciler/index.js';
@@ -27,7 +26,7 @@ export interface QuisidoGameOptions<
     type: T,
     props: Props[T],
     rootContainer: Root,
-  ) => FamilyMember<Type, Props, Txt, Family, T>;
+  ) => Family;
   readonly createTextInstance: (text: string, rootContainer: Root) => Txt;
   readonly Game: FunctionComponent;
   readonly scheduleMicrotask: (fn: () => void) => void;
@@ -127,6 +126,9 @@ export default class QuisidoGame<
   ): void {
     const opaqueRoot: OpaqueRoot = this.#getOpaqueRoot(container, onError);
     const Game: FunctionComponent = this.#Game;
+
+    // no-dd-sa:typescript-code-style/ban-ts-comment
+    // @ts-expect-error Shrug emoji
     this.#reconciler.updateContainerSync(
       <Game />,
       opaqueRoot,
