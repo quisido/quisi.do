@@ -5,6 +5,7 @@
 /dist/
 /hint-report/
 /node_modules/
+/playwright/storage-state.json
 /.env.local
 /.eslintcache
 /lighthouse.report.*

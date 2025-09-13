@@ -9,6 +9,9 @@ if (CANVAS === null) {
   throw new Error('Failed to find canvas.');
 }
 
+CANVAS.setAttribute('height', CANVAS.clientHeight.toString());
+CANVAS.setAttribute('width', CANVAS.clientWidth.toString());
+
 const game = new BrowserGame(World);
 
 game.start(CANVAS, (error: Error): void => {

@@ -3,23 +3,23 @@
 	"servers": {
     "context7": {
       "type": "http",
-      "url": "https://mcp.context7.com/mcp",
+      "url": "https://mcp.context7.com/mcp"
     },
     "github": {
       "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/",
+      "url": "https://api.githubcopilot.com/mcp/"
     },
     "playwright": {
       "args": [
         "@playwright/mcp@latest",
         "--isolated",
-        "--storage-state=playwright/storage-state.json",
+        "--storage-state=playwright/storage-state.json"
       ],
-      "command": "npx",
+      "command": "npx"
     },
 		"sentry": {
 			"type": "http",
-			"url": "https://mcp.sentry.dev/mcp",
+			"url": "https://mcp.sentry.dev/mcp"
 		}
 	},
 }

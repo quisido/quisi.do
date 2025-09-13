@@ -11,7 +11,7 @@ applyTo: "**/*.tsx"
 ---
 
 Apply the [React coding guidelines](./instructions/react.instructions.md) to all
-code.
+TSX files.
 
 ---
 applyTo: "**/*.ts,**/*.tsx"

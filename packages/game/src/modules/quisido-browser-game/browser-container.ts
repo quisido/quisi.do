@@ -35,12 +35,15 @@ export default class BrowserContainer
   }
 
   public clear(): void {
+    // this.#renderingContext.save();
+    // this.#renderingContext.resetTransform();
     this.#renderingContext.clearRect(
       0,
       0,
       this.#renderingContext.canvas.width,
       this.#renderingContext.canvas.height,
     );
+    // this.#renderingContext.restore();
   }
 
   public insertBefore(

@@ -2,6 +2,7 @@
 /.wrangler/
 /coverage/
 /dist/
+/playwright/storage-state.json
 /sarif/
 /.attach_pid*
 /.env.local
