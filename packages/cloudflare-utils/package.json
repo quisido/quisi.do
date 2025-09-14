@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20250620.0",
-    "fmrs": "^2.0.4"
+    "fmrs": "^2.1.1"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",

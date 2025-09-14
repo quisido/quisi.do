@@ -26,7 +26,8 @@ export default defineConfig({
   name: '@quisido/jsonc',
   plugins: {
     ...JSON.plugins,
-    jsonc: jsonc as unknown as ESLint.Plugin,
+    // @ts-expect-error The dependency is incorrectly typed.
+    jsonc: jsonc as ESLint.Plugin,
   },
   rules: {
     'jsonc/no-bigint-literals': 'error',
@@ -50,16 +51,6 @@ export default defineConfig({
     'jsonc/no-undefined-value': 'error',
     'jsonc/no-unicode-codepoint-escapes': 'error',
     'jsonc/no-useless-escape': 'error',
-    'jsonc/sort-keys': [
-      'error',
-      'asc',
-      {
-        allowLineSeparatedGroups: false,
-        caseSensitive: true,
-        minKeys: 2,
-        natural: false,
-      },
-    ],
     'jsonc/valid-json-number': 'error',
     'jsonc/vue-custom-block/no-parsing-error': 'error',
     'no-unused-expressions': 'off',

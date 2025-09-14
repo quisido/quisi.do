@@ -44,7 +44,7 @@
     "vitest:watch": "vitest watch"
   },
   "dependencies": {
-    "fmrs": "^2.0.4",
+    "fmrs": "^2.1.1",
     "use-shallow-memo": "^1.1.0"
   },
   "devDependencies": {

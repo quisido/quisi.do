@@ -51,7 +51,7 @@
     "cloudflare-utils": "^1.0.4",
     "cookie": "^1.0.2",
     "eventemitter3": "^5.0.1",
-    "fmrs": "^2.0.4"
+    "fmrs": "^2.1.1"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",

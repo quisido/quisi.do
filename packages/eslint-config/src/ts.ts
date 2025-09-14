@@ -27,12 +27,10 @@ export default defineConfig({
     ...mapConfigsToRules(ts.configs.stylisticTypeChecked as Linter.Config[]),
     ...mapConfigsToRules(ts.configs.recommendedTypeChecked as Linter.Config[]),
     ...mapConfigsToRules(ts.configs.strictTypeChecked as Linter.Config[]),
-
     '@typescript-eslint/consistent-type-imports': [
       'error',
       { fixStyle: 'inline-type-imports', prefer: 'type-imports' },
     ],
-
     /**
      *   The ESLint rule is incorrect here when it throws "Explicit undefined is
      * unnecessary on an optional parameter." The rule does not allow for
@@ -52,7 +50,6 @@ export default defineConfig({
         ignoreRestSiblings: false,
       },
     ],
-
     '@typescript-eslint/restrict-template-expressions': [
       'error',
       {
@@ -60,20 +57,16 @@ export default defineConfig({
         allowNumber: true,
       },
     ],
-
     // Exhaustive `switch`es do not require a default case.
     'default-case': 'off',
     'no-invalid-this': 'off',
-
     /**
      *   ESLint incorrectly flags shadowing in TypeScript: (1) `enum`s and (2)
      * functions with `this` inside other functions with `this`.
      */
     'no-shadow': 'off',
-
     // https://eslint.org/docs/latest/rules/no-undef#handled_by_typescript
     'no-undef': 'off',
-
     // Required for `@typescript-eslint/no-floating-promises`.
     'no-void': ['error', { allowAsStatement: true }],
     'sort-keys-custom-order/type-keys': ['error', { sorting: 'asc' }],

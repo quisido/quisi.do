@@ -18,7 +18,8 @@ export default defineConfig({
 
   plugins: {
     prettier: prettierPlugin,
-    'sort-keys-custom-order': sortKeysCustomOrder as unknown as ESLint.Plugin,
+    // @ts-expect-error The dependency is incorrectly typed.
+    'sort-keys-custom-order': sortKeysCustomOrder as ESLint.Plugin,
   },
 
   rules: {

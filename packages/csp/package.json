@@ -39,7 +39,7 @@
     "@quisido/csp-shared": "^1.0.1",
     "@quisido/worker": "^1.0.8",
     "cloudflare-utils": "^1.0.4",
-    "fmrs": "^2.0.4"
+    "fmrs": "^2.1.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250620.0",

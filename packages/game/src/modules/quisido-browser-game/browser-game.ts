@@ -1,12 +1,14 @@
 import type { FunctionComponent } from 'react';
 import QuisidoGame, {
+  type Actions,
   type AudioProps,
   type DrawImageProps,
   type Props,
-  type State,
+  type Stringifiable,
   type TextProps,
   Type,
 } from '../quisido-game/index.js';
+import type { Reducer } from '../quisido-game/reducer.js';
 import AudioInstance from './audio-instance.js';
 import BrowserContainer from './browser-container.js';
 import type { BrowserFamily } from './browser-family.js';
@@ -15,16 +17,23 @@ import FpsCounter from './fps-counter.js';
 import ImageInstance from './image-instance.js';
 import TextInstance from './text-instance.js';
 
-export default class BrowserGame {
+interface Options<State extends Stringifiable> {
+  readonly Game: FunctionComponent<State>;
+  readonly initialState: State;
+  readonly reducer: Reducer<State>;
+}
+
+export default class BrowserGame<State extends Stringifiable> {
   readonly #animationFrameHandles = new WeakMap<HTMLCanvasElement, number>();
   readonly #fpsCounter = new FpsCounter(5_000);
   readonly #game: QuisidoGame<
+    State,
     BrowserTextInstance,
     BrowserFamily,
     BrowserContainer
   >;
 
-  public constructor(Game: FunctionComponent) {
+  public constructor({ Game, initialState, reducer }: Options<State>) {
     this.#game = new QuisidoGame({
       cancelTimeout(id: number): void {
         window.clearTimeout(id);
@@ -49,6 +58,8 @@ export default class BrowserGame {
       },
 
       Game,
+      initialState,
+      reducer,
 
       scheduleMicrotask(fn: VoidFunction): void {
         window.queueMicrotask(fn);
@@ -81,7 +92,7 @@ export default class BrowserGame {
     this.#animationFrameHandles.set(canvas, handle);
   };
 
-  public dispatch(type: string, payload: unknown): void {
+  public dispatch<K extends keyof Actions>(type: K, payload: Actions[K]): void {
     this.#game.dispatch(type, payload);
   }
 
