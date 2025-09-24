@@ -1,12 +1,17 @@
 /* eslint-disable max-lines */
+import type { Component, ReactNode } from 'react';
 import createReactReconciler, {
   type EventPriority,
   type Fiber,
+  type OpaqueHandle,
+  type OpaqueRoot,
   type Reconciler,
+  type RootTag,
+  type SuspenseHydrationCallbacks,
+  type TransitionTracingCallbacks,
 } from 'react-reconciler';
 import { DEVELOPMENT_BUNDLE_TYPE, VERSION } from './constants.js';
 import type Container from './container.js';
-import type { FamilyMember } from './family-member.js';
 import type Instance from './instance.js';
 import type { MethodKeys } from './method-keys.js';
 import QuisidoReactContext from './quisido-react-context.js';
@@ -26,8 +31,8 @@ export interface QuisidoReconcilerOptions<
   Type extends string,
   Props extends Record<Type, object>,
   Txt extends TextInstance,
-  Family extends Instance<Type, Props, Txt, Family>,
-  Root extends Container<Type, Props, Txt, Family>,
+  Family extends Instance<Props[Type], Txt, Family>,
+  Root extends Container<Txt, Family>,
 > {
   readonly cancelTimeout: (id: number) => void;
   readonly createInstance: <T extends Type>(
@@ -36,6 +41,9 @@ export interface QuisidoReconcilerOptions<
     rootContainer: Root,
   ) => Family;
   readonly createTextInstance: (text: string, rootContainer: Root) => Txt;
+  readonly maySuspendCommit?:
+    | (<T extends Type>(type: T, props: Props[T]) => boolean)
+    | undefined;
   readonly scheduleMicrotask: (fn: () => void) => void;
   readonly scheduleTimeout: (
     fn: (...args: readonly unknown[]) => unknown,
@@ -47,17 +55,30 @@ export interface QuisidoReconcilerOptions<
   ) => boolean;
 }
 
+const defaultMaySuspendCommit = (): boolean => false;
+
+const CONCURRENT_UPDATES_BY_DEFAULT_OVERRIDE: null | boolean = null;
+const DEFAULT_PARENT_COMPONENT: Component<unknown, unknown> | null = null;
+const HYDRATION_CALLBACKS: null | SuspenseHydrationCallbacks<SuspenseInstance> =
+  null;
+const IDENTIFIER_PREFIX = 'quisido';
+const STRICT_MODE = true;
+const TAG: RootTag = 2; // 0 = Legacy, 1 = Blocking, 2 = Concurrent
+const TRANSITION_TRACING_CALLBACKS: null | TransitionTracingCallbacks = null;
+
 export default class QuisidoReconciler<
   Type extends string,
   Props extends Record<Type, object>,
   Txt extends TextInstance,
-  Family extends Instance<Type, Props, Txt, Family>,
-  Root extends Container<Type, Props, Txt, Family>,
+  Family extends Instance<Props[Type], Txt, Family>,
+  Root extends Container<Txt, Family>,
 > implements
     Reconciler<Root, Family, Txt, SuspenseInstance, FormInstance, Family | Txt>
 {
   #initialChildrenFinalized = new WeakMap<Family, number>();
   #instanceCreated = new WeakMap<WeakKey, number>();
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-arguments
+  readonly #opaqueRoots = new WeakMap<Root, OpaqueRoot>();
   #reconciler: Reconciler<
     Root,
     Family,
@@ -71,6 +92,7 @@ export default class QuisidoReconciler<
     cancelTimeout,
     createInstance,
     createTextInstance,
+    maySuspendCommit = defaultMaySuspendCommit,
     scheduleMicrotask,
     scheduleTimeout,
     shouldSetTextContent,
@@ -221,7 +243,7 @@ export default class QuisidoReconciler<
       },
 
       commitUpdate: <T extends Type>(
-        instance: FamilyMember<Type, Props, Txt, Family, T>,
+        instance: Family,
         _type: T,
         prevProps: Props[T],
         nextProps: Props[T],
@@ -233,6 +255,8 @@ export default class QuisidoReconciler<
         type: T,
         props: Props[T],
         rootContainer: Root,
+        _hostContext: HostContext<Root>,
+        _internalHandle: OpaqueHandle,
       ): Family => {
         const instance: Family = createInstance(type, props, rootContainer);
         this.#instanceCreated.set(instance, Date.now());
@@ -326,13 +350,7 @@ export default class QuisidoReconciler<
       },
 
       isPrimaryRenderer: true,
-
-      // eslint-disable-next-line no-warning-comments
-      // TODO: Use this to preload external resources before rendering?
-      maySuspendCommit(_type: string, _props: object): boolean {
-        return true;
-      },
-
+      maySuspendCommit,
       noTimeout: -1,
       NotPendingTransition: TransitionStatus.NotPendingTransition,
 
@@ -457,7 +475,7 @@ export default class QuisidoReconciler<
       },
 
       unhideInstance<T extends Type>(
-        instance: FamilyMember<Type, Props, Txt, Family, T>,
+        instance: Instance<Props[T], Txt, Family>,
         props: Props[T],
       ): void {
         instance.unhide(props);
@@ -496,6 +514,41 @@ export default class QuisidoReconciler<
       rendererPackageName: 'quisi.do',
       version: VERSION,
     });
+  }
+
+  #getOpaqueRoot(container: Root, onError: (error: Error) => void): OpaqueRoot {
+    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+    const opaqueRoot: OpaqueRoot | undefined = this.#opaqueRoots.get(container);
+    if (typeof opaqueRoot !== 'undefined') {
+      return opaqueRoot;
+    }
+
+    const newOpaqueRoot: OpaqueRoot = this.#reconciler.createContainer(
+      container,
+      TAG,
+      HYDRATION_CALLBACKS,
+      STRICT_MODE,
+      CONCURRENT_UPDATES_BY_DEFAULT_OVERRIDE,
+      IDENTIFIER_PREFIX,
+      onError,
+      TRANSITION_TRACING_CALLBACKS,
+    );
+    this.#opaqueRoots.set(container, newOpaqueRoot);
+    return newOpaqueRoot;
+  }
+
+  public update(
+    element: ReactNode,
+    container: Root,
+    onError: (error: Error) => void,
+    callback?: (() => void) | undefined,
+  ): void {
+    this.updateContainer(
+      element,
+      this.#getOpaqueRoot(container, onError),
+      DEFAULT_PARENT_COMPONENT,
+      callback,
+    );
   }
 
   #method<
@@ -589,7 +642,5 @@ export default class QuisidoReconciler<
   public readonly shouldSuspend = this.#method('shouldSuspend');
   public readonly injectIntoDevTools = this.#method('injectIntoDevTools');
 
-  // no-dd-sa:typescript-code-style/ban-ts-comment
-  // @ts-expect-error The types are wrong.
-  public readonly updateContainerSync = this.#method('updateContainerSync');
+  // public readonly updateContainerSync = this.#method('updateContainerSync');
 }

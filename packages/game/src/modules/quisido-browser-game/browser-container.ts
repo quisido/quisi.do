@@ -1,15 +1,13 @@
-import type {
-  Container,
-  DrawImageProps,
-  Props,
-  Type,
-} from '../quisido-game/index.js';
+import type { Container } from '../quisido-game/index.js';
 import type { BrowserFamily } from './browser-family.js';
+import BrowserInstance from './browser-instance.js';
 import type BrowserTextInstance from './browser-text-instance.js';
 import ImageInstance from './image-instance.js';
+import type { Props } from './props.js';
+import type { Type } from './type.js';
 
 export default class BrowserContainer
-  implements Container<Type, Props, BrowserTextInstance, BrowserFamily>
+  implements Container<BrowserTextInstance, BrowserFamily>
 {
   readonly #children = new Set<BrowserFamily | BrowserTextInstance>();
   readonly #renderingContext: CanvasRenderingContext2D;
@@ -31,7 +29,23 @@ export default class BrowserContainer
   }
 
   public appendChild(instance: BrowserFamily | BrowserTextInstance): void {
-    this.#children.add(instance);
+    if (!(instance instanceof BrowserInstance)) {
+      return;
+    }
+
+    instance.onUpdate(
+      <T extends Type>(child: BrowserInstance<T>, props: Props[T]): void => {
+        if (child instanceof ImageInstance) {
+          this.#renderingContext.drawImage(
+            child.canvasImageSource,
+            props.x,
+            props.y,
+            props.width,
+            props.height,
+          );
+        }
+      },
+    );
   }
 
   public clear(): void {
@@ -50,26 +64,10 @@ export default class BrowserContainer
     child: BrowserFamily | BrowserTextInstance,
     _beforeChild: BrowserFamily | BrowserTextInstance, // | SuspenseInstance,
   ): void {
-    this.#children.add(child);
+    this.appendChild(child);
   }
 
   public removeChild(instance: BrowserFamily | BrowserTextInstance): void {
     this.#children.delete(instance);
-  }
-
-  public render(): void {
-    this.clear();
-    for (const child of this.#children) {
-      if (child instanceof ImageInstance) {
-        const props: DrawImageProps = child.flush();
-        this.#renderingContext.drawImage(
-          child.canvasImageSource,
-          props.x,
-          props.y,
-          props.width,
-          props.height,
-        );
-      }
-    }
   }
 }

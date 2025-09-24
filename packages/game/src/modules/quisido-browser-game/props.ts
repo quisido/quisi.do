@@ -6,9 +6,21 @@ export interface AudioProps {
   readonly volume: number;
 }
 
-export interface DrawImageProps {
+interface DrawImageSource {
   readonly height: number;
+  readonly width: number;
+  readonly x: number;
+  readonly y: number;
+}
+
+/** Based on @type CanvasDrawImage['drawImage'] */
+export interface DrawImageProps extends DrawImageSource {
+  readonly source?: DrawImageSource | undefined;
   readonly src: string;
+}
+
+export interface LayerProps {
+  readonly height: number;
   readonly width: number;
   readonly x: number;
   readonly y: number;
@@ -17,6 +29,7 @@ export interface DrawImageProps {
 export interface Props {
   readonly [Type.Audio]: AudioProps;
   readonly [Type.DrawImage]: DrawImageProps;
+  readonly [Type.Layer]: LayerProps;
   readonly [Type.Text]: TextProps;
 }
 

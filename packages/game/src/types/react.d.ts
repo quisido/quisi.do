@@ -1,18 +1,16 @@
 import 'react';
-
-interface DrawImage {
-  readonly height: number;
-  readonly src: string;
-  readonly width: number;
-  readonly x: number;
-  readonly y: number;
-}
+import type {
+  AudioProps,
+  DrawImageProps,
+  LayerProps,
+} from '../modules/quisido-browser-game/index.js';
 
 declare module 'react' {
-  // import { type JSX } from 'react';
   namespace JSX {
     interface IntrinsicElements {
-      readonly 'draw-image': DrawImage;
+      readonly audio: AudioProps;
+      readonly 'draw-image': DrawImageProps;
+      readonly layer: LayerProps;
     }
   }
 }

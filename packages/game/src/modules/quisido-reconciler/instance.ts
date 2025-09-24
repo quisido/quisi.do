@@ -1,21 +1,22 @@
-export default interface Instance<
-  Type extends string,
-  Props extends Record<Type, object>,
-  Txt,
-  Child extends Instance<Type, Props, Txt, Child>,
-  InstanceType extends Type = Type,
-> {
+export default interface Instance<Props extends object, Txt, Child> {
   readonly appendChild: (instance: Child | Txt) => void;
+
   readonly hide: () => void;
+
   readonly insertBefore: (
     child: Child | Txt,
     beforeChild: Child | Txt, // | SuspenseInstance,
   ) => void;
+
   readonly removeChild: (instance: Child | Txt) => void;
+
   readonly resetTextContent: () => void;
-  readonly unhide: (props: Props[InstanceType]) => void;
-  readonly update: (
-    prevProps: Props[InstanceType],
-    nextProps: Props[InstanceType],
-  ) => void;
+
+  readonly unhide: (props: Props) => void;
+
+  /**
+   *   This method represents the React Reconciler commit phase, instructing the
+   * instance to draw to the screen.
+   */
+  readonly update: (prevProps: Props, nextProps: Props) => void;
 }

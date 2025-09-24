@@ -1,5 +1,4 @@
 export { type default as Container } from './container.js';
-export { type FamilyMember } from './family-member.js';
 export { type default as Instance } from './instance.js';
 export {
   default,

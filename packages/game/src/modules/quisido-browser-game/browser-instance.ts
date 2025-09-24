@@ -1,30 +1,38 @@
-import { mapObjectToEntries } from 'fmrs';
-import type { Instance, Props, Type } from '../quisido-game/index.js';
+import type { Instance } from '../quisido-game/index.js';
 import type { BrowserFamily } from './browser-family.js';
 import type BrowserTextInstance from './browser-text-instance.js';
+import type { Props } from './props.js';
+import type { Type } from './type.js';
 
 export default class BrowserInstance<T extends Type = Type>
-  implements Instance<Type, Props, BrowserTextInstance, BrowserFamily, T>
+  implements Instance<Props[T], BrowserTextInstance, BrowserFamily>
 {
+  readonly #childSubscriptions = new WeakMap<BrowserFamily, () => void>();
   #hidden = false;
-  #props: Props[T];
-  readonly #updates: Partial<Props[T]> = {};
 
-  public constructor(props: Props[T]) {
-    this.#props = props;
-  }
+  public appendChild(instance: BrowserFamily | BrowserTextInstance): void {
+    if (!(instance instanceof BrowserInstance)) {
+      return;
+    }
 
-  // eslint-disable-next-line class-methods-use-this
-  public appendChild(_instance: BrowserFamily | BrowserTextInstance): void {
-    throw new Error('Browser instances cannot have children.');
-  }
-  public flush(): Props[T] {
-    const newProps: Props[T] = {
-      ...this.#props,
-      ...this.#updates,
+    const handleUpdate = <T extends Type>(
+      descendent: BrowserInstance<T>,
+      props: Props[T],
+    ): void => {
+      this.#callUpdateCallbacks(descendent, props);
     };
-    this.#props = newProps;
-    return newProps;
+
+    const unsubscribe = instance.onUpdate(handleUpdate);
+    this.#childSubscriptions.set(instance, unsubscribe);
+  }
+
+  #callUpdateCallbacks<T extends Type>(
+    descendent: BrowserInstance<T>,
+    props: Props[T],
+  ): void {
+    for (const callback of this.#updateCallbacks) {
+      callback(descendent, props);
+    }
   }
 
   public get hidden(): boolean {
@@ -35,17 +43,32 @@ export default class BrowserInstance<T extends Type = Type>
     this.#hidden = true;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   public insertBefore(
-    _child: BrowserFamily | BrowserTextInstance,
+    child: BrowserFamily | BrowserTextInstance,
     _beforeChild: BrowserFamily | BrowserTextInstance, // | SuspenseInstance,
   ): void {
-    throw new Error('Browser instances cannot insert children.');
+    this.appendChild(child);
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  public removeChild(_instance: BrowserFamily | BrowserTextInstance): void {
-    throw new Error('Browser instances cannot remove children.');
+  public onUpdate(
+    callback: <T extends Type>(
+      instance: BrowserInstance<T>,
+      props: Props[T],
+    ) => void,
+  ): () => void {
+    this.#updateCallbacks.add(callback);
+    return (): void => {
+      this.#updateCallbacks.delete(callback);
+    };
+  }
+
+  public removeChild(instance: BrowserFamily | BrowserTextInstance): void {
+    if (!(instance instanceof BrowserInstance)) {
+      return;
+    }
+
+    const unsubscribe = this.#childSubscriptions.get(instance);
+    unsubscribe?.();
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -58,14 +81,12 @@ export default class BrowserInstance<T extends Type = Type>
   }
 
   public update(_prevProps: Props[T], nextProps: Props[T]): void {
-    for (const [key, value] of mapObjectToEntries(nextProps)) {
-      if (this.#props[key] === value) {
-        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-        delete this.#updates[key];
-        continue;
-      }
-
-      this.#updates[key] = value;
+    for (const callback of this.#updateCallbacks) {
+      callback(this, nextProps);
     }
   }
+
+  readonly #updateCallbacks = new Set<
+    <T extends Type>(instance: BrowserInstance<T>, props: Props[T]) => void
+  >();
 }
