@@ -543,7 +543,8 @@ export default class QuisidoReconciler<
     onError: (error: Error) => void,
     callback?: (() => void) | undefined,
   ): void {
-    this.updateContainer(
+    // @ts-expect-error The type definitions are wrong.
+    this.updateContainerSync(
       element,
       this.#getOpaqueRoot(container, onError),
       DEFAULT_PARENT_COMPONENT,
@@ -575,7 +576,6 @@ export default class QuisidoReconciler<
     // @ts-expect-error This works.
     return (...args: readonly unknown[]): unknown => {
       // @ts-expect-error This works.
-
       return this.#reconciler[method](...args);
     };
   }
@@ -642,5 +642,6 @@ export default class QuisidoReconciler<
   public readonly shouldSuspend = this.#method('shouldSuspend');
   public readonly injectIntoDevTools = this.#method('injectIntoDevTools');
 
-  // public readonly updateContainerSync = this.#method('updateContainerSync');
+  // @ts-expect-error The type definitions are wrong.
+  public readonly updateContainerSync = this.#method('updateContainerSync');
 }

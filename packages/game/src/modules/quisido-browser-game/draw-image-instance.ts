@@ -14,13 +14,14 @@ const resizeCanvasImageSource = (
   canvasImageSource: CanvasImageSource,
   {
     height: resizeHeight,
+    quality: resizeQuality = 'high',
     source,
     width: resizeWidth,
   }: Omit<DrawImageProps, 'src' | 'x' | 'y'>,
 ): Promise<CanvasImageSource> => {
   const options: ImageBitmapOptions = {
     resizeHeight,
-    resizeQuality: 'high',
+    resizeQuality,
     resizeWidth,
   };
 
@@ -45,6 +46,7 @@ const throwChildMethodError = (): never => {
 
 const mapPropsToCanvasImageSource = ({
   height,
+  quality,
   source,
   src,
   width,
@@ -55,6 +57,7 @@ const mapPropsToCanvasImageSource = ({
   if (!(canvasImageSource instanceof Promise)) {
     return resizeCanvasImageSource(canvasImageSource, {
       height,
+      quality,
       source,
       width,
     });
@@ -64,6 +67,7 @@ const mapPropsToCanvasImageSource = ({
     (loadedCanvasImageSource: CanvasImageSource): Promise<CanvasImageSource> =>
       resizeCanvasImageSource(loadedCanvasImageSource, {
         height,
+        quality,
         source,
         width,
       }),
@@ -82,9 +86,18 @@ export default class DrawImageInstance
   public readonly removeChild = throwChildMethodError;
   readonly #renderCallbacks = new Set<VoidFunction>();
 
-  public constructor({ height, source, src, width, x, y }: DrawImageProps) {
+  public constructor({
+    height,
+    quality,
+    source,
+    src,
+    width,
+    x,
+    y,
+  }: DrawImageProps) {
     this.#canvasImageSource = this.#mapPropsToCanvasImageSource({
       height,
+      quality,
       source,
       src,
       width,
@@ -160,10 +173,11 @@ export default class DrawImageInstance
   // Delay the commit via `maySuspendCommit` until the image has loaded.
   public update(
     _prevProps: DrawImageProps,
-    { height, source, src, width, x, y }: DrawImageProps,
+    { height, quality, source, src, width, x, y }: DrawImageProps,
   ): void {
     this.#canvasImageSource = this.#mapPropsToCanvasImageSource({
       height,
+      quality,
       source,
       src,
       width,

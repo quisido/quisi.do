@@ -15,6 +15,7 @@ export interface DrawImageSource {
 
 /** Based on @type CanvasDrawImage['drawImage'] */
 export interface DrawImageProps extends DrawImageSource {
+  readonly quality?: ResizeQuality | undefined;
   readonly source?: DrawImageSource | undefined;
   readonly src: string;
 }

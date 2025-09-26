@@ -49,8 +49,6 @@ export default class BrowserGame<State extends StringifiableRecord> {
         window.console.error(error);
       },
     );
-
-    console.log('should have rendered', state);
   };
 
   public start(): void {

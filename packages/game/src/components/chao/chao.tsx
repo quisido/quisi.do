@@ -39,7 +39,7 @@ export default function Chao({
   return (
     <draw-image
       height={height}
-      source={{ height: 24, width: 24, x: 0, y: 8 }}
+      source={{ height: 24, width: 22, x: 0, y: 10 }}
       src={path}
       width={width}
       x={x}
