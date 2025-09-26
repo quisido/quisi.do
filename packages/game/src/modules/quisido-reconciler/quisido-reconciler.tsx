@@ -31,7 +31,7 @@ export interface QuisidoReconcilerOptions<
   Type extends string,
   Props extends Record<Type, object>,
   Txt extends TextInstance,
-  Family extends Instance<Props[Type], Txt, Family>,
+  Family extends { [T in Type]: Instance<Props[T], Txt, Family> }[Type],
   Root extends Container<Txt, Family>,
 > {
   readonly cancelTimeout: (id: number) => void;
@@ -70,7 +70,7 @@ export default class QuisidoReconciler<
   Type extends string,
   Props extends Record<Type, object>,
   Txt extends TextInstance,
-  Family extends Instance<Props[Type], Txt, Family>,
+  Family extends { [T in Type]: Instance<Props[T], Txt, Family> }[Type],
   Root extends Container<Txt, Family>,
 > implements
     Reconciler<Root, Family, Txt, SuspenseInstance, FormInstance, Family | Txt>
@@ -379,15 +379,15 @@ export default class QuisidoReconciler<
         child: Family | Txt, // | SuspenseInstance,
       ): void {
         parentInstance.removeChild(child);
+        child.remove?.();
       },
 
       removeChildFromContainer(
         container: Root,
         child: Family | Txt, // | SuspenseInstance,
       ): void {
-        // eslint-disable-next-line no-warning-comments
-        // TODO: Handle SuspenseInstance properly.
         container.removeChild(child);
+        child.remove?.();
       },
 
       // eslint-disable-next-line no-warning-comments
@@ -407,7 +407,7 @@ export default class QuisidoReconciler<
       },
 
       resetTextContent(instance: Family): void {
-        instance.resetTextContent();
+        instance.resetTextContent?.();
       },
 
       // eslint-disable-next-line no-warning-comments

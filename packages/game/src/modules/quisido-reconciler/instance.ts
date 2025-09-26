@@ -1,6 +1,5 @@
 export default interface Instance<Props extends object, Txt, Child> {
   readonly appendChild: (instance: Child | Txt) => void;
-
   readonly hide: () => void;
 
   readonly insertBefore: (
@@ -8,10 +7,9 @@ export default interface Instance<Props extends object, Txt, Child> {
     beforeChild: Child | Txt, // | SuspenseInstance,
   ) => void;
 
+  readonly remove?: (() => void) | undefined;
   readonly removeChild: (instance: Child | Txt) => void;
-
-  readonly resetTextContent: () => void;
-
+  readonly resetTextContent?: (() => void) | undefined;
   readonly unhide: (props: Props) => void;
 
   /**

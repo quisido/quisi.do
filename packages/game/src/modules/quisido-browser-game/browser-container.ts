@@ -1,16 +1,19 @@
 import type { Container } from '../quisido-game/index.js';
 import type { BrowserFamily } from './browser-family.js';
-import BrowserInstance from './browser-instance.js';
 import type BrowserTextInstance from './browser-text-instance.js';
-import ImageInstance from './image-instance.js';
-import type { Props } from './props.js';
-import type { Type } from './type.js';
+import type DrawImageInstance from './draw-image-instance.js';
+import isRenderableInstance from './is-renderable-instance.js';
+import type LayerInstance from './layer-instance.js';
 
 export default class BrowserContainer
   implements Container<BrowserTextInstance, BrowserFamily>
 {
-  readonly #children = new Set<BrowserFamily | BrowserTextInstance>();
+  readonly #children = new Set<DrawImageInstance | LayerInstance>();
   readonly #renderingContext: CanvasRenderingContext2D;
+  readonly #unsubscriptions = new WeakMap<
+    DrawImageInstance | LayerInstance,
+    VoidFunction
+  >();
 
   public constructor(canvas: HTMLCanvasElement) {
     const renderingContext: CanvasRenderingContext2D | null = canvas.getContext(
@@ -22,30 +25,23 @@ export default class BrowserContainer
         willReadFrequently: false,
       },
     );
+
     if (renderingContext === null) {
       throw new Error('Canvas does not have a 2D rendering context.');
     }
+
     this.#renderingContext = renderingContext;
   }
 
   public appendChild(instance: BrowserFamily | BrowserTextInstance): void {
-    if (!(instance instanceof BrowserInstance)) {
+    if (!isRenderableInstance(instance)) {
       return;
     }
 
-    instance.onUpdate(
-      <T extends Type>(child: BrowserInstance<T>, props: Props[T]): void => {
-        if (child instanceof ImageInstance) {
-          this.#renderingContext.drawImage(
-            child.canvasImageSource,
-            props.x,
-            props.y,
-            props.width,
-            props.height,
-          );
-        }
-      },
-    );
+    const unsubscribe = instance.onRender(this.#render);
+
+    this.#children.add(instance);
+    this.#unsubscriptions.set(instance, unsubscribe);
   }
 
   public clear(): void {
@@ -68,6 +64,17 @@ export default class BrowserContainer
   }
 
   public removeChild(instance: BrowserFamily | BrowserTextInstance): void {
+    if (!isRenderableInstance(instance)) {
+      return;
+    }
+
     this.#children.delete(instance);
+    this.#unsubscriptions.get(instance)?.();
   }
+
+  #render = (): void => {
+    for (const { canvasImageSource, height, width, x, y } of this.#children) {
+      this.#renderingContext.drawImage(canvasImageSource, x, y, width, height);
+    }
+  };
 }

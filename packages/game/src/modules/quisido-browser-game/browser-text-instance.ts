@@ -1,4 +1,10 @@
 import { type TextInstance } from '../quisido-game/index.js';
+import noop from './noop.js';
+
+/**
+ *   `BrowserTextInstance` is for plain text.
+ *   For stylized text, such as speech bubbles, see `TextInstance`.
+ */
 
 export default class BrowserTextInstance implements TextInstance {
   #hidden = false;
@@ -15,6 +21,8 @@ export default class BrowserTextInstance implements TextInstance {
   public hide(): void {
     this.#hidden = true;
   }
+
+  public remove = noop;
 
   public reset(): void {
     this.#text = '';

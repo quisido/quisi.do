@@ -6,7 +6,7 @@ export interface AudioProps {
   readonly volume: number;
 }
 
-interface DrawImageSource {
+export interface DrawImageSource {
   readonly height: number;
   readonly width: number;
   readonly x: number;

@@ -6,9 +6,7 @@ import QuisidoGame, {
 } from '../quisido-game/index.js';
 import type { Export } from '../quisido-game/quisido-game.js';
 import type { Reducer } from '../quisido-game/reducer.js';
-import type BrowserContainer from './browser-container.js';
 import BrowserReconciler from './browser-reconciler.js';
-import FpsCounter from './fps-counter.js';
 
 interface Options<State extends Stringifiable> {
   readonly canvas: HTMLCanvasElement;
@@ -18,9 +16,7 @@ interface Options<State extends Stringifiable> {
 }
 
 export default class BrowserGame<State extends StringifiableRecord> {
-  readonly #animationFrameHandles = new WeakMap<HTMLCanvasElement, number>();
   readonly #canvas: HTMLCanvasElement;
-  readonly #fpsCounter = new FpsCounter(5_000);
   readonly #Game: FunctionComponent<State>;
   readonly #game: QuisidoGame<State>;
   readonly #reconciler = new BrowserReconciler();
@@ -39,31 +35,27 @@ export default class BrowserGame<State extends StringifiableRecord> {
     this.start();
   }
 
-  #render = (canvas: HTMLCanvasElement, container: BrowserContainer): void => {
-    this.#fpsCounter.tick();
-
-    const handle: number = window.requestAnimationFrame((): void => {
-      this.#render(canvas, container);
-    });
-    this.#animationFrameHandles.set(canvas, handle);
-  };
-
   public dispatch<K extends keyof Actions>(type: K, payload: Actions[K]): void {
     this.#game.dispatch(type, payload);
   }
 
-  public start(): void {
-    this.#unsubscribe = this.#game.onChange((state: State): void => {
-      const Game: FunctionComponent<State> = this.#Game;
+  #render = (state: State): void => {
+    const Game: FunctionComponent<State> = this.#Game;
 
-      this.#reconciler.render(
-        <Game {...state} />,
-        this.#canvas,
-        (error: Error): void => {
-          window.console.error(error);
-        },
-      );
-    });
+    this.#reconciler.render(
+      <Game {...state} />,
+      this.#canvas,
+      (error: Error): void => {
+        window.console.error(error);
+      },
+    );
+
+    console.log('should have rendered', state);
+  };
+
+  public start(): void {
+    this.#unsubscribe = this.#game.onChange(this.#render);
+    this.#render(this.#game.state);
   }
 
   public stop(): void {

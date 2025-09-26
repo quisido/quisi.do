@@ -39,11 +39,17 @@ export default defineConfig({
     'func-name-matching': 'off',
     'no-bitwise': 'off',
     'no-continue': 'off',
+    'no-global-assign': 'error',
 
     // This is better handled by `@stylistic/max-len` or Prettier.
     'no-inline-comments': 'off',
 
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    'no-shadow-restricted-names': 'error',
+
+    // This is handled by `no-global-assign` and `no-shadow-restricted-names`.
+    'no-undefined': 'off',
+
     'one-var': 'off',
     'sort-imports': 'off',
     'sort-keys': [

@@ -1,9 +1,9 @@
 {
   "configurations": [
     {
-      "name": "Development server",
+      "name": "Build",
       "request": "launch",
-      "runtimeArgs": ["run", "start"],
+      "runtimeArgs": ["run", "build"],
       "runtimeExecutable": "npm",
       "type": "node",
     },

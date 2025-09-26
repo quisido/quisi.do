@@ -3,5 +3,6 @@ import type State from '../state.js';
 import Chao from './chao/chao.js';
 
 export default function World({ facing: _facing, x, y }: State): JSX {
+  console.log('rendered world');
   return <Chao type="neutral" height={12} width={12} x={x} y={y} />;
 }

@@ -4,7 +4,8 @@ import AudioInstance from './audio-instance.js';
 import BrowserContainer from './browser-container.js';
 import type { BrowserFamily } from './browser-family.js';
 import BrowserTextInstance from './browser-text-instance.js';
-import ImageInstance from './image-instance.js';
+import DrawImageInstance from './draw-image-instance.js';
+import LayerInstance from './layer-instance.js';
 import type {
   AudioProps,
   DrawImageProps,
@@ -27,7 +28,7 @@ const createInstance = <T extends Type>(
     case Type.Audio:
       return new AudioInstance(props as AudioProps);
     case Type.DrawImage:
-      return new ImageInstance(props as DrawImageProps);
+      return new DrawImageInstance(props as DrawImageProps);
     case Type.Layer:
       return new LayerInstance(props as LayerProps);
     case Type.Text:

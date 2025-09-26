@@ -49,6 +49,10 @@ export default class QuisidoGame<State extends StringifiableRecord> {
     };
   }
 
+  public get state(): State {
+    return this.#state;
+  }
+
   public toJSON(): Export<State> {
     return {
       seed: this.#seed,

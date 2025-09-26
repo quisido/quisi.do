@@ -36,7 +36,7 @@ describe('web manifest', (): void => {
     expect(typeof name).toBe('string');
     expect(typeof themeColor).toBe('string');
 
-    assert(typeof icons !== 'undefined');
+    assert(icons !== undefined);
     expect(icons.find(findSplashScreenIcon)).toBeDefined();
   });
 });

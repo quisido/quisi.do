@@ -1,16 +1,27 @@
 import AsyncMap from './async-map.js';
+import { EMPTY_OFFSCREEN_CANVAS } from './empty-offscreen-canvas.js';
+import SyncMap from './sync-map.js';
 
-const createEmptyImageBitmap = (): ImageBitmap => new ImageBitmap();
-
-const mapSrcToImageBitmap = (src: string): Promise<ImageBitmap> => {
-  const image = new Image();
-  image.setAttribute('src', src);
-  return createImageBitmap(image).catch(createEmptyImageBitmap);
+const createHtmlImageElement = (src: string): HTMLImageElement => {
+  const element: HTMLImageElement = new Image();
+  element.setAttribute('src', src);
+  return element;
 };
 
-const IMAGE_PRELOADER = new AsyncMap(mapSrcToImageBitmap);
+const HtmlImageElements = new SyncMap(createHtmlImageElement);
 
-export const getImage = (src: string): ImageBitmap | Promise<ImageBitmap> => {
+const mapSrcToCanvasImageSource = (src: string): Promise<CanvasImageSource> => {
+  const element: HTMLImageElement = HtmlImageElements.get(src);
+  return window
+    .createImageBitmap(element)
+    .catch((): CanvasImageSource => EMPTY_OFFSCREEN_CANVAS);
+};
+
+const IMAGE_PRELOADER = new AsyncMap(mapSrcToCanvasImageSource);
+
+export const getImage = (
+  src: string,
+): CanvasImageSource | Promise<CanvasImageSource> => {
   return IMAGE_PRELOADER.get(src);
 };
 
