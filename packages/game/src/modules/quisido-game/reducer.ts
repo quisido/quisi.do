@@ -1,8 +1,6 @@
-import type { Actions } from './index.js';
 import type { Stringifiable } from './stringifiable.js';
 
-export type Reducer<State extends Stringifiable> = <K extends keyof Actions>(
+export type Reducer<State extends Stringifiable, Action> = (
   state: State,
-  action: K,
-  payload: Actions[K],
-) => unknown;
+  action: Action,
+) => State;

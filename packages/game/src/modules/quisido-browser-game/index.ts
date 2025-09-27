@@ -1,8 +1,15 @@
-export { type GameObject, type JSX, useState } from '../quisido-game/index.js';
+import type { ReactElement } from 'react';
+import type { AudioProps, DrawImageProps, LayerProps } from './props.js';
+
 export { default } from './browser-game.js';
-export { getImage, preloadImage, preloadImages } from './image-preloader.js';
+export { preloadImage, preloadImages } from './image-preloader.js';
 export {
   type AudioProps,
   type DrawImageProps,
   type LayerProps,
 } from './props.js';
+
+export type JSX =
+  | ReactElement<AudioProps, 'audio'>
+  | ReactElement<DrawImageProps, 'draw-image'>
+  | ReactElement<LayerProps, 'layer'>;

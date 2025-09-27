@@ -1,4 +1,3 @@
-import type { Actions } from './actions.js';
 import type { Reducer } from './reducer.js';
 import type { Stringifiable, StringifiableRecord } from './stringifiable.js';
 
@@ -8,18 +7,18 @@ export interface Export<State extends Stringifiable> {
   readonly timestamp: number;
 }
 
-export interface QuisidoGameOptions<State extends Stringifiable> {
+export interface QuisidoGameOptions<State extends Stringifiable, Action> {
   readonly initialState: State;
-  readonly reducer: Reducer<State>;
+  readonly reducer: Reducer<State, Action>;
   readonly seed: number;
   readonly timestamp: number;
 }
 
-export default class QuisidoGame<State extends StringifiableRecord> {
+export default class QuisidoGame<State extends StringifiableRecord, Action> {
   readonly #changeListeners = new Set<(state: State) => void>();
-  readonly #reducer: Reducer<State>;
+  readonly #reducer: Reducer<State, Action>;
   readonly #seed: number;
-  readonly #state: State;
+  #state: State;
   readonly #timestamp: number;
 
   public constructor({
@@ -27,18 +26,19 @@ export default class QuisidoGame<State extends StringifiableRecord> {
     reducer,
     seed,
     timestamp,
-  }: QuisidoGameOptions<State>) {
+  }: QuisidoGameOptions<State, Action>) {
     this.#reducer = reducer;
     this.#seed = seed;
     this.#state = initialState;
     this.#timestamp = timestamp;
   }
 
-  public dispatch<K extends keyof Actions>(
-    action: K,
-    payload: Actions[K],
-  ): void {
-    this.#reducer(this.#state, action, payload);
+  public dispatch(action: Action): void {
+    const newState: State = this.#reducer(this.#state, action);
+    this.#state = newState;
+    for (const callback of this.#changeListeners) {
+      callback(newState);
+    }
   }
 
   public onChange(listener: (state: State) => void): () => void {

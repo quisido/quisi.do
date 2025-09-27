@@ -1,11 +1,8 @@
-export { type ReactNode as JSX, useState } from 'react';
 export {
   type Container,
   type Instance,
   type TextInstance,
 } from '../quisido-reconciler/index.js';
-export { type Actions, type ButtonPayload } from './actions.js';
-export { type default as GameObject } from './game-object.js';
 export { default } from './quisido-game.js';
 export {
   type Stringifiable,

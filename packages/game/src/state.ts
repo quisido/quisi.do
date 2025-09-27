@@ -1,9 +1,8 @@
 import type { StringifiableRecord } from './modules/quisido-game/index.js';
 
 export default interface State extends StringifiableRecord {
-  readonly acceleration: number;
-  readonly facing: number;
-  readonly velocity: number;
-  readonly x: number;
-  readonly y: number;
+  readonly acceleration: readonly [number, number];
+  readonly isAccelerating: readonly [boolean, boolean, boolean, boolean];
+  readonly position: readonly [number, number];
+  readonly velocity: readonly [number, number];
 }

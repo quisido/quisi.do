@@ -8,7 +8,7 @@ export default [
     rules: {
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',
-      'id-length': ['error', { properties: 'never' }],
+      'id-length': ['error', { exceptions: ['x', 'y'], properties: 'never' }],
       'max-lines-per-function': 'off',
       'max-params': 'off',
       'max-statements': 'off',
