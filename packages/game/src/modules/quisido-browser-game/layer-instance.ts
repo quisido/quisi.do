@@ -4,41 +4,44 @@ import type BrowserTextInstance from './browser-text-instance.js';
 import type DrawImageInstance from './draw-image-instance.js';
 import { EMPTY_OFFSCREEN_CANVAS } from './empty-offscreen-canvas.js';
 import isRenderableInstance from './is-renderable-instance.js';
+import mapOffscreenCanvasTo2DRenderingContext from './map-offscreen-canvas-to-2d-rendering-context.js';
+import noop from './noop.js';
 import type { LayerProps } from './props.js';
+import Tuple from './tuple.js';
 
 const HEIGHT_DIMENSION_INDEX = 1;
 const WIDTH_DIMENSION_INDEX = 0;
 const X_COORDINATE_INDEX = 0;
 const Y_COORDINATE_INDEX = 1;
 
-const GET_CONTEXT_OPTIONS = {
-  alpha: true,
-  colorSpace: 'display-p3',
-  desynchronized: true,
-  willReadFrequently: false,
-};
-
 export default class LayerInstance
   implements Instance<LayerProps, BrowserTextInstance, BrowserFamily>
 {
-  readonly #canvas: OffscreenCanvas;
-  readonly #children = new Set<DrawImageInstance | LayerInstance>();
-  #coordinates: readonly [number, number];
-  #dimensions: readonly [number, number];
+  readonly #coordinates: Tuple<number>;
+  readonly #dimensions: Tuple<number>;
+  readonly #handleError: (error: Error) => void;
   #hidden = false;
+  readonly #offscreenCanvas: OffscreenCanvas;
   readonly #renderCallbacks = new Set<VoidFunction>();
-  readonly #renderingContext: OffscreenCanvasRenderingContext2D | null;
-  readonly #unsubscriptions = new WeakMap<
+  readonly #renderableChildren = new Set<DrawImageInstance | LayerInstance>();
+  readonly #renderingContext: OffscreenCanvasRenderingContext2D;
+  readonly #renderUnsubscriptions = new WeakMap<
     DrawImageInstance | LayerInstance,
     VoidFunction
   >();
 
-  public constructor({ height, width, x, y }: LayerProps) {
-    const canvas = new OffscreenCanvas(width, height);
-    this.#canvas = canvas;
-    this.#coordinates = [x, y];
-    this.#dimensions = [width, height];
-    this.#renderingContext = canvas.getContext('2d', GET_CONTEXT_OPTIONS);
+  public constructor(
+    { height, width, x, y }: LayerProps,
+    onError?: ((error: Error) => void) | undefined,
+  ) {
+    const offscreenCanvas = new OffscreenCanvas(width, height);
+
+    this.#coordinates = new Tuple(x, y);
+    this.#dimensions = new Tuple(width, height);
+    this.#handleError = onError ?? noop;
+    this.#offscreenCanvas = offscreenCanvas;
+    this.#renderingContext =
+      mapOffscreenCanvasTo2DRenderingContext(offscreenCanvas);
   }
 
   public appendChild(instance: BrowserFamily | BrowserTextInstance) {
@@ -46,9 +49,8 @@ export default class LayerInstance
       return;
     }
 
-    this.#children.add(instance);
-    const unsubscribe = instance.onRender(this.#render);
-    this.#unsubscriptions.set(instance, unsubscribe);
+    this.#renderableChildren.add(instance);
+    this.#subscribeToRender(instance);
   }
 
   public get canvasImageSource(): CanvasImageSource {
@@ -56,7 +58,29 @@ export default class LayerInstance
       return EMPTY_OFFSCREEN_CANVAS;
     }
 
-    return this.#canvas;
+    return this.#offscreenCanvas;
+  }
+
+  public clear(): void {
+    // this.#renderingContext.save();
+    // this.#renderingContext.resetTransform();
+    this.#renderingContext.clearRect(
+      0,
+      0,
+      this.#renderingContext.canvas.width,
+      this.#renderingContext.canvas.height,
+    );
+    // this.#renderingContext.restore();
+  }
+
+  #drawImage(
+    image: CanvasImageSource,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+  ): void {
+    this.#renderingContext.drawImage(image, x, y, width, height);
   }
 
   public get height(): number {
@@ -84,25 +108,20 @@ export default class LayerInstance
       return;
     }
 
-    this.#children.delete(instance);
-    this.#unsubscriptions.get(instance)?.();
+    this.#renderableChildren.delete(instance);
+    this.#unsubscribeFromRender(instance);
   }
 
-  #render = (): void => {
-    const [width, height] = this.#dimensions;
-    this.#canvas.height = height;
-    this.#canvas.width = width;
+  #renderOffscreen = (): void => {
+    this.clear();
 
-    if (this.#renderingContext !== null) {
-      for (const { canvasImageSource, height, width, x, y } of this.#children) {
-        this.#renderingContext.drawImage(
-          canvasImageSource,
-          x,
-          y,
-          width,
-          height,
-        );
-      }
+    const [width, height] = this.#dimensions;
+    this.#offscreenCanvas.height = height;
+    this.#offscreenCanvas.width = width;
+
+    for (const { canvasImageSource, height, width, x, y } of this
+      .#renderableChildren) {
+      this.#drawImage(canvasImageSource, x, y, width, height);
     }
 
     for (const callback of this.#renderCallbacks) {
@@ -110,33 +129,49 @@ export default class LayerInstance
     }
   };
 
+  #subscribeToRender(instance: DrawImageInstance | LayerInstance): void {
+    const unsubscribe = instance.onRender(this.#renderOffscreen);
+    this.#renderUnsubscriptions.set(instance, unsubscribe);
+  }
+
   public unhide(): void {
     this.#hidden = false;
+  }
+
+  #unsubscribeFromRender(instance: DrawImageInstance | LayerInstance): void {
+    const unsubscribe: VoidFunction | undefined =
+      this.#renderUnsubscriptions.get(instance);
+
+    // This should never happen, so we emit an error for monitoring.
+    if (typeof unsubscribe === 'undefined') {
+      this.#handleError(
+        new Error('Container is not subscribed to instance', {
+          cause: instance,
+        }),
+      );
+      return;
+    }
+
+    unsubscribe();
   }
 
   public update(
     _prevProps: LayerProps,
     { height, width, x, y }: LayerProps,
   ): void {
-    this.#coordinates = [x, y];
-    this.#dimensions = [width, height];
-    /**
-     *   We don't need to regenerate the OffscreenCanvas here, but there is no
-     * need to optimize prematurely.
-     */
-    this.#render();
+    this.#coordinates.set(x, y);
+    this.#dimensions.set(width, height);
+    this.#renderOffscreen();
   }
 
   public get width(): number {
     return this.#dimensions[WIDTH_DIMENSION_INDEX];
   }
 
-  // eslint-disable-next-line id-length
   public get x(): number {
     return this.#coordinates[X_COORDINATE_INDEX];
   }
 
-  // eslint-disable-next-line id-length
   public get y(): number {
     return this.#coordinates[Y_COORDINATE_INDEX];
   }

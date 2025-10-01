@@ -1,5 +1,4 @@
-import type { ReactElement } from 'react';
-import { preloadImages } from '../../modules/quisido-browser-game/index.js';
+import { type Jsx, preloadImages } from '../../modules/quisido-browser-game/index.js';
 import darkSrc from './dark.png';
 import heroSrc from './hero.png';
 import neutralSrc from './neutral.png';
@@ -33,7 +32,7 @@ export default function Chao({
   width,
   x,
   y,
-}: Props): ReactElement {
+}: Props): Jsx {
   const path: string = mapTypeToPath(type);
 
   return (

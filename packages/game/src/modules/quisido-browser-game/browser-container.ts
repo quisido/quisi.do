@@ -4,33 +4,26 @@ import type BrowserTextInstance from './browser-text-instance.js';
 import type DrawImageInstance from './draw-image-instance.js';
 import isRenderableInstance from './is-renderable-instance.js';
 import type LayerInstance from './layer-instance.js';
+import mapCanvasTo2DRenderingContext from './map-canvas-to-2d-rendering-context.js';
+import noop from './noop.js';
 
 export default class BrowserContainer
   implements Container<BrowserTextInstance, BrowserFamily>
 {
-  readonly #children = new Set<DrawImageInstance | LayerInstance>();
+  readonly #handleError: (error: Error) => void;
+  readonly #renderableChildren = new Set<DrawImageInstance | LayerInstance>();
   readonly #renderingContext: CanvasRenderingContext2D;
-  readonly #unsubscriptions = new WeakMap<
+  readonly #renderUnsubscriptions = new WeakMap<
     DrawImageInstance | LayerInstance,
     VoidFunction
   >();
 
-  public constructor(canvas: HTMLCanvasElement) {
-    const renderingContext: CanvasRenderingContext2D | null = canvas.getContext(
-      '2d',
-      {
-        alpha: true,
-        colorSpace: 'display-p3',
-        desynchronized: true,
-        willReadFrequently: false,
-      },
-    );
-
-    if (renderingContext === null) {
-      throw new Error('Canvas does not have a 2D rendering context.');
-    }
-
-    this.#renderingContext = renderingContext;
+  public constructor(
+    canvas: HTMLCanvasElement,
+    onError?: ((error: Error) => void) | undefined,
+  ) {
+    this.#handleError = onError ?? noop;
+    this.#renderingContext = mapCanvasTo2DRenderingContext(canvas);
   }
 
   public appendChild(instance: BrowserFamily | BrowserTextInstance): void {
@@ -38,10 +31,8 @@ export default class BrowserContainer
       return;
     }
 
-    const unsubscribe = instance.onRender(this.#render);
-
-    this.#children.add(instance);
-    this.#unsubscriptions.set(instance, unsubscribe);
+    this.#renderableChildren.add(instance);
+    this.#subscribeToRender(instance);
   }
 
   public clear(): void {
@@ -56,6 +47,16 @@ export default class BrowserContainer
     // this.#renderingContext.restore();
   }
 
+  #drawImage(
+    image: CanvasImageSource,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+  ): void {
+    this.#renderingContext.drawImage(image, x, y, width, height);
+  }
+
   public insertBefore(
     child: BrowserFamily | BrowserTextInstance,
     _beforeChild: BrowserFamily | BrowserTextInstance, // | SuspenseInstance,
@@ -68,13 +69,38 @@ export default class BrowserContainer
       return;
     }
 
-    this.#children.delete(instance);
-    this.#unsubscriptions.get(instance)?.();
+    this.#renderableChildren.delete(instance);
+    this.#unsubscribeFromRender(instance);
   }
 
   #render = (): void => {
-    for (const { canvasImageSource, height, width, x, y } of this.#children) {
-      this.#renderingContext.drawImage(canvasImageSource, x, y, width, height);
+    this.clear();
+
+    for (const { canvasImageSource, height, width, x, y } of this
+      .#renderableChildren) {
+      this.#drawImage(canvasImageSource, x, y, width, height);
     }
   };
+
+  #subscribeToRender(instance: DrawImageInstance | LayerInstance): void {
+    const unsubscribe = instance.onRender(this.#render);
+    this.#renderUnsubscriptions.set(instance, unsubscribe);
+  }
+
+  #unsubscribeFromRender(instance: DrawImageInstance | LayerInstance): void {
+    const unsubscribe: VoidFunction | undefined =
+      this.#renderUnsubscriptions.get(instance);
+
+    // This should never happen, so we emit an error for monitoring.
+    if (typeof unsubscribe === 'undefined') {
+      this.#handleError(
+        new Error('Container is not subscribed to instance', {
+          cause: instance,
+        }),
+      );
+      return;
+    }
+
+    unsubscribe();
+  }
 }
