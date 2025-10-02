@@ -1,4 +1,4 @@
-import { Fragment, type ComponentType, type PropsWithChildren } from 'react';
+import { type ComponentType, Fragment, type PropsWithChildren } from 'react';
 import Authentication from '../features/authentication.js';
 import Fullstory from '../features/fullstory.js';
 import NotificationsProvider from '../features/notifications-provider.js';

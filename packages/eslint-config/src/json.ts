@@ -24,7 +24,6 @@ export default defineConfig({
   plugins: {
     ...jsonPlugin.configs.recommended.plugins,
     json: jsonPlugin,
-    // @ts-expect-error The dependency is incorrectly typed.
     jsonc: jsonc as ESLint.Plugin,
   },
   rules: {

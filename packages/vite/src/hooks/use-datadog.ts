@@ -24,14 +24,17 @@ const PROPS: Required<
     | 'internalAnalyticsSubdomain'
     | 'proxy'
     | 'remoteConfigurationId'
+    | 'remoteConfigurationProxy'
     | 'replica'
+    | 'source' | 'sdkVersion'
     | 'subdomain'
     | 'trackingConsent'
     | 'useCrossSiteSessionCookie'
-    | 'user'
+    | 'user' | 'variant'
     | 'workerUrl'
   >
 > = {
+  trackEarlyRequests: true, allowedGraphQlUrls: [],
   allowFallbackToLocalStorage: true,
   allowUntrustedEvents: true,
   applicationId: APPLICATION_ID,

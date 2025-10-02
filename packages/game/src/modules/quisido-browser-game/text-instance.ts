@@ -18,16 +18,16 @@ export default class TextInstance
   public readonly appendChild = throwError;
   public readonly hide = throwError;
   public readonly insertBefore = throwError;
-  #props: TextProps;
+  // #props: TextProps;
   public readonly removeChild = throwError;
   public readonly resetTextContent = throwError;
   public readonly unhide = throwError;
 
-  public constructor(props: TextProps) {
-    this.#props = props;
+  public constructor(_props: TextProps) {
+    // this.#props = props;
   }
 
-  public update(_prevProps: TextProps, nextProps: TextProps): void {
-    this.#props = nextProps;
+  public update(_prevProps: TextProps, _nextProps: TextProps): void {
+    // this.#props = nextProps;
   }
 }

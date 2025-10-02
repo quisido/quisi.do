@@ -1,68 +1,100 @@
 {
-  "name": "@quisido/eslint-config",
-  "version": "1.1.8",
   "author": "quisi.do <eslint-config@quisi.do>",
-  "description": "ESLint configurations for quisi.do",
-  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/eslint-config#readme",
-  "license": "MIT",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "type": "module",
-  "types": "./dist/index.d.ts",
   "bugs": {
     "email": "eslint-config@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "dependencies": {
+    "@eslint/config-helpers": "^0.4.0",
+    "@eslint/js": "^9.36.0",
+    "@eslint/json": "^0.13.2",
+    "@types/eslint": "^9.6.1",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsonc": "^2.20.1",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-sort-keys-custom-order": "^2.2.1",
+    "jsonc-eslint-parser": "^2.4.1",
+    "typescript-eslint": "^8.45.0"
+  },
+  "description": "ESLint configurations for quisi.do",
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@microsoft/eslint-formatter-sarif": "^3.1.0",
+    "@vitest/coverage-istanbul": "^3.2.4",
+    "cjs-ts": "^2.0.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.36.0",
+    "jiti": "^2.6.1",
+    "prettier": "^3.6.2",
+    "publint": "^0.3.13",
+    "rimraf": "^6.0.1",
+    "tslib": "^2.8.1",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  },
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js",
       "import": "./dist/index.js",
-      "default": "./dist/index.js"
+      "types": "./dist/index.d.ts"
     },
     "./cjs": {
-      "types": "./dist/cjs.d.ts",
+      "default": "./dist/cjs.js",
       "import": "./dist/cjs.js",
-      "default": "./dist/cjs.js"
+      "types": "./dist/cjs.d.ts"
     },
     "./d-ts": {
-      "types": "./dist/d-ts.d.ts",
+      "default": "./dist/d-ts.js",
       "import": "./dist/d-ts.js",
-      "default": "./dist/d-ts.js"
+      "types": "./dist/d-ts.d.ts"
     },
     "./js": {
-      "types": "./dist/js.d.ts",
+      "default": "./dist/js.js",
       "import": "./dist/js.js",
-      "default": "./dist/js.js"
+      "types": "./dist/js.d.ts"
     },
     "./json": {
-      "types": "./dist/json.d.ts",
+      "default": "./dist/json.js",
       "import": "./dist/json.js",
-      "default": "./dist/json.js"
+      "types": "./dist/json.d.ts"
     },
     "./jsonc": {
-      "types": "./dist/jsonc.d.ts",
+      "default": "./dist/jsonc.js",
       "import": "./dist/jsonc.js",
-      "default": "./dist/jsonc.js"
+      "types": "./dist/jsonc.d.ts"
     },
     "./package-json": {
-      "types": "./dist/package-json.d.ts",
+      "default": "./dist/package-json.js",
       "import": "./dist/package-json.js",
-      "default": "./dist/package-json.js"
+      "types": "./dist/package-json.d.ts"
     },
     "./test-ts": {
-      "types": "./dist/test-ts.d.ts",
+      "default": "./dist/test-ts.js",
       "import": "./dist/test-ts.js",
-      "default": "./dist/test-ts.js"
+      "types": "./dist/test-ts.d.ts"
     },
     "./ts": {
-      "types": "./dist/ts.d.ts",
+      "default": "./dist/ts.js",
       "import": "./dist/ts.js",
-      "default": "./dist/ts.js"
+      "types": "./dist/ts.d.ts"
     }
   },
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
+  },
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/eslint-config#readme",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "name": "@quisido/eslint-config",
+  "peerDependencies": {
+    "eslint": ">=9.0.0",
+    "prettier": ">=3.0.0"
   },
   "publishConfig": {
     "access": "public",
@@ -86,39 +118,7 @@
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
   },
-  "dependencies": {
-    "@eslint/config-helpers": "^0.2.2",
-    "@eslint/js": "^9.29.0",
-    "@eslint/json": "^0.13.0",
-    "@types/eslint": "^9.6.1",
-    "@types/eslint-config-prettier": "^6.11.3",
-    "@typescript-eslint/eslint-plugin": "^8.34.1",
-    "@typescript-eslint/parser": "^8.34.1",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jsonc": "^2.20.1",
-    "eslint-plugin-prettier": "^5.5.0",
-    "eslint-plugin-sort-keys-custom-order": "^2.2.1",
-    "jsonc-eslint-parser": "^2.4.0",
-    "typescript-eslint": "^8.34.1"
-  },
-  "devDependencies": {
-    "@arethetypeswrong/cli": "^0.18.2",
-    "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@vitest/coverage-istanbul": "^3.2.4",
-    "cjs-ts": "^2.0.0",
-    "concurrently": "^9.1.2",
-    "eslint": "^9.29.0",
-    "jiti": "^2.5.1",
-    "prettier": "^3.5.3",
-    "publint": "^0.3.12",
-    "rimraf": "^6.0.1",
-    "tslib": "^2.8.1",
-    "typescript": "^5.8.3",
-    "vitest": "^3.2.4"
-  },
-  "peerDependencies": {
-    "eslint": ">=9.0.0",
-    "prettier": ">=3.0.0"
-  }
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "version": "1.1.8"
 }

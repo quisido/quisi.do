@@ -38,10 +38,10 @@
     "test": "concurrently --names eslint,publint --prefix-colors auto \"npm run eslint\" \"npm run publint\""
   },
   "dependencies": {
-    "@babel/core": "^7.27.4",
-    "@babel/preset-env": "^7.27.2",
+    "@babel/core": "^7.28.4",
+    "@babel/preset-env": "^7.28.3",
     "@babel/preset-typescript": "^7.27.1",
-    "@babel/register": "^7.27.1",
+    "@babel/register": "^7.28.3",
     "babel-plugin-replace-import-extension": "^1.1.5"
   },
   "devDependencies": {
@@ -50,14 +50,14 @@
     "@types/babel__core": "^7.20.5",
     "@types/babel__preset-env": "^7.10.0",
     "@types/babel__register": "^7.17.3",
-    "@typescript-eslint/eslint-plugin": "^8.34.1",
-    "@typescript-eslint/parser": "^8.34.1",
-    "concurrently": "^9.1.2",
-    "eslint": "^9.29.0",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-prettier": "^5.5.0",
-    "prettier": "^3.5.3",
-    "publint": "^0.3.12",
-    "typescript": "^5.8.3"
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.6.2",
+    "publint": "^0.3.13",
+    "typescript": "^5.9.3"
   }
 }

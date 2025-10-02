@@ -7,18 +7,17 @@ import {
 } from 'react';
 import innerText from 'react-innertext';
 import useEmit from '../../hooks/use-emit/use-emit.js';
-import useTheme from '../../hooks/use-theme.js';
 import useNavigation from '../../hooks/use-navigation.js';
+import useTheme from '../../hooks/use-theme.js';
 
 interface BaseProps {
   readonly children?: ReactNode;
   readonly className?: string | undefined;
+  // Used for tracking events
+  readonly feature: string;
   readonly follow?: boolean | undefined;
   readonly label?: string | undefined;
   readonly title: string;
-
-  // Used for tracking events
-  readonly feature: string;
 }
 
 interface HrefProps {

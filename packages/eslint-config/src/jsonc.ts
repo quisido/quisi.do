@@ -26,7 +26,6 @@ export default defineConfig({
   name: '@quisido/jsonc',
   plugins: {
     ...JSON.plugins,
-    // @ts-expect-error The dependency is incorrectly typed.
     jsonc: jsonc as ESLint.Plugin,
   },
   rules: {

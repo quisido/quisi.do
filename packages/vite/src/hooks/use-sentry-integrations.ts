@@ -3,7 +3,6 @@ import {
   replayIntegration,
 } from '@sentry/browser';
 import type { Integration } from '@sentry/core';
-import { fullStoryIntegration } from '@sentry/fullstory';
 import { useFullstory, type FSApi } from 'fullstory-react';
 import { useMemo } from 'react';
 
@@ -20,11 +19,6 @@ export default function useSentryIntegrations(
   return useMemo(
     (): Integration[] => [
       browserProfilingIntegration(),
-
-      fullStoryIntegration(sentryOrg, {
-        client: fullstory,
-      }),
-
       REPLAY_INTEGRATION,
     ],
     [fullstory, sentryOrg],
