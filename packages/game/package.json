@@ -1,33 +1,8 @@
 {
-  "name": "@quisido/game",
-  "version": "0.0.1",
   "author": "quisi.do <game@quisi.do>",
-  "license": "UNLICENSED",
-  "private": true,
-  "type": "module",
   "bugs": {
     "email": "game@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
-  },
-  "funding": {
-    "type": "individual",
-    "url": "https://github.com/sponsors/quisido"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git"
-  },
-  "scripts": {
-    "build": "tsc --skipLibCheck && vite build",
-    "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
-    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
-    "publint": "publint",
-    "serve": "serve dist",
-    "start": "vite",
-    "test": "concurrently --names eslint,publint,vitest --prefix-colors auto \"npm run eslint\" \"npm run publint\" \"npm run vitest:run\"",
-    "vite:build": "vite build",
-    "vitest": "vitest",
-    "vitest:run": "vitest run"
   },
   "dependencies": {
     "fmrs": "^2.1.1",
@@ -80,5 +55,30 @@
     "vite": "^7.1.7",
     "vitest": "^3.2.4",
     "wait-on": "^9.0.1"
-  }
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quisido"
+  },
+  "license": "UNLICENSED",
+  "name": "@quisido/game",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git"
+  },
+  "scripts": {
+    "build": "tsc --skipLibCheck && vite build",
+    "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
+    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
+    "publint": "publint",
+    "serve": "serve dist",
+    "start": "vite",
+    "test": "concurrently --names eslint,publint,vitest --prefix-colors auto \"npm run eslint\" \"npm run publint\" \"npm run vitest:run\"",
+    "vite:build": "vite build",
+    "vitest": "vitest",
+    "vitest:run": "vitest run"
+  },
+  "type": "module",
+  "version": "0.0.1"
 }

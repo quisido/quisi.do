@@ -1,26 +1,41 @@
 {
-  "name": "@quisido/authn-shared",
-  "version": "1.1.5",
   "author": "quisi.do <authn-shared@quisi.do>",
-  "description": "isomorphic authentication modules",
-  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/authn-shared#readme",
-  "license": "MIT",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "type": "module",
-  "types": "./dist/index.d.ts",
   "bugs": {
     "email": "authn-shared@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "description": "isomorphic authentication modules",
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@microsoft/eslint-formatter-sarif": "^3.1.0",
+    "@quisido/eslint-config": "^1.1.8",
+    "@quisido/vitest-config": "^1.0.3",
+    "@vitest/coverage-istanbul": "^3.2.4",
+    "cjs-ts": "^2.0.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.36.0",
+    "fmrs": "^2.1.1",
+    "prettier": "^3.6.2",
+    "publint": "^0.3.13",
+    "rimraf": "^6.0.1",
+    "tslib": "^2.8.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.7",
+    "vitest": "^3.2.4"
+  },
   "exports": {
-    "types": "./dist/index.d.ts",
-    "default": "./dist/index.js"
+    "default": "./dist/index.js",
+    "types": "./dist/index.d.ts"
   },
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
   },
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/authn-shared#readme",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "name": "@quisido/authn-shared",
   "publishConfig": {
     "access": "public",
     "provenance": true
@@ -44,22 +59,7 @@
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
   },
-  "devDependencies": {
-    "@arethetypeswrong/cli": "^0.18.2",
-    "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@quisido/eslint-config": "^1.1.8",
-    "@quisido/vitest-config": "^1.0.3",
-    "@vitest/coverage-istanbul": "^3.2.4",
-    "cjs-ts": "^2.0.0",
-    "concurrently": "^9.2.1",
-    "eslint": "^9.36.0",
-    "fmrs": "^2.1.1",
-    "prettier": "^3.6.2",
-    "publint": "^0.3.13",
-    "rimraf": "^6.0.1",
-    "tslib": "^2.8.1",
-    "typescript": "^5.9.3",
-    "vite": "^7.1.7",
-    "vitest": "^3.2.4"
-  }
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "version": "1.1.5"
 }

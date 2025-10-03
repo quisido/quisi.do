@@ -7,14 +7,14 @@ export interface Export<State extends Stringifiable> {
   readonly timestamp: number;
 }
 
-export interface QuisidoGameOptions<State extends Stringifiable, Action> {
+export interface Options<State extends Stringifiable, Action> {
   readonly initialState: State;
   readonly reducer: Reducer<State, Action>;
   readonly seed: number;
   readonly timestamp: number;
 }
 
-export default class QuisidoGame<State extends StringifiableRecord, Action> {
+export default class QuisidoStore<State extends StringifiableRecord, Action> {
   readonly #changeListeners = new Set<(state: State) => void>();
   readonly #reducer: Reducer<State, Action>;
   readonly #seed: number;
@@ -26,7 +26,7 @@ export default class QuisidoGame<State extends StringifiableRecord, Action> {
     reducer,
     seed,
     timestamp,
-  }: QuisidoGameOptions<State, Action>) {
+  }: Options<State, Action>) {
     this.#reducer = reducer;
     this.#seed = seed;
     this.#state = initialState;

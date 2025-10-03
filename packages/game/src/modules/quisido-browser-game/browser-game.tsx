@@ -1,10 +1,10 @@
 import type { FunctionComponent } from 'react';
-import QuisidoGame, {
+import QuisidoStore, {
+  type Export,
+  type Reducer,
   type Stringifiable,
   type StringifiableRecord,
-} from '../quisido-game/index.js';
-import type { Export } from '../quisido-game/quisido-game.js';
-import type { Reducer } from '../quisido-game/reducer.js';
+} from '../quisido-store/index.js';
 import BrowserReconciler from './browser-reconciler.js';
 
 interface Options<State extends Stringifiable, Actions> {
@@ -17,7 +17,7 @@ interface Options<State extends Stringifiable, Actions> {
 export default class BrowserGame<State extends StringifiableRecord, Action> {
   readonly #canvas: HTMLCanvasElement;
   readonly #Game: FunctionComponent<State>;
-  readonly #game: QuisidoGame<State, Action>;
+  readonly #store: QuisidoStore<State, Action>;
   readonly #reconciler = new BrowserReconciler();
   #unsubscribe: VoidFunction | undefined;
 
@@ -31,7 +31,7 @@ export default class BrowserGame<State extends StringifiableRecord, Action> {
     this.#Game = Game;
 
     // Replace this class with a QuisidoStore from Redux.
-    this.#game = new QuisidoGame({
+    this.#store = new QuisidoStore({
       initialState,
       reducer,
       seed: 1,
@@ -42,7 +42,7 @@ export default class BrowserGame<State extends StringifiableRecord, Action> {
   }
 
   public dispatch(action: Action): void {
-    this.#game.dispatch(action);
+    this.#store.dispatch(action);
   }
 
   #render = (state: State): void => {
@@ -58,8 +58,8 @@ export default class BrowserGame<State extends StringifiableRecord, Action> {
   };
 
   public start(): void {
-    this.#unsubscribe = this.#game.onChange(this.#render);
-    this.#render(this.#game.state);
+    this.#unsubscribe = this.#store.onChange(this.#render);
+    this.#render(this.#store.state);
   }
 
   public stop(): void {
@@ -67,6 +67,6 @@ export default class BrowserGame<State extends StringifiableRecord, Action> {
   }
 
   public toJSON(): Export<State> {
-    return this.#game.toJSON();
+    return this.#store.toJSON();
   }
 }
