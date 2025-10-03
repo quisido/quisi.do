@@ -1,4 +1,4 @@
-import type { Instance } from '../quisido-game/index.js';
+import type { Instance } from '../quisido-reconciler/index.js';
 import type { BrowserFamily } from './browser-family.js';
 import type BrowserTextInstance from './browser-text-instance.js';
 import { EMPTY_OFFSCREEN_CANVAS } from './empty-offscreen-canvas.js';
@@ -196,12 +196,10 @@ export default class DrawImageInstance
     return this.#dimensions[WIDTH_DIMENSION_INDEX];
   }
 
-  // eslint-disable-next-line id-length
   public get x(): number {
     return this.#coordinates[X_COORDINATE_INDEX];
   }
 
-  // eslint-disable-next-line id-length
   public get y(): number {
     return this.#coordinates[Y_COORDINATE_INDEX];
   }

@@ -1,4 +1,4 @@
-import type { Instance } from '../quisido-game/index.js';
+import type { Instance } from '../quisido-reconciler/index.js';
 import type { BrowserFamily } from './browser-family.js';
 import type BrowserTextInstance from './browser-text-instance.js';
 import type { TextProps } from './props.js';
@@ -23,10 +23,12 @@ export default class TextInstance
   public readonly resetTextContent = throwError;
   public readonly unhide = throwError;
 
+  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   public constructor(_props: TextProps) {
     // this.#props = props;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   public update(_prevProps: TextProps, _nextProps: TextProps): void {
     // this.#props = nextProps;
   }

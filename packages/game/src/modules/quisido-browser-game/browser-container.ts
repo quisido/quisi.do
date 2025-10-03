@@ -1,4 +1,4 @@
-import type { Container } from '../quisido-game/index.js';
+import type { Container } from '../quisido-reconciler/index.js';
 import type { BrowserFamily } from './browser-family.js';
 import type BrowserTextInstance from './browser-text-instance.js';
 import type DrawImageInstance from './draw-image-instance.js';

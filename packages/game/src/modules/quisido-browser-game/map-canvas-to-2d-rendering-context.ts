@@ -1,7 +1,8 @@
 const CANVAS_RENDERING_CONTEXT_2D_SETTINGS: CanvasRenderingContext2DSettings = {
   alpha: true,
   colorSpace: 'display-p3',
-  // TODO: Research if this should be true or false. Which has better performance when we render 60fps?
+  // TODO: Research if this should be true or false. Which has better
+  // performance when we render 60fps?
   desynchronized: true,
   willReadFrequently: false,
 };

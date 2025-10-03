@@ -1,4 +1,4 @@
-import { type TextInstance } from '../quisido-game/index.js';
+import { type TextInstance } from '../quisido-reconciler/index.js';
 import noop from './noop.js';
 
 /**

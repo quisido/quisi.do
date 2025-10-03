@@ -1,5 +1,5 @@
-import type { ReactElement } from "react";
-import type { AudioProps, DrawImageProps, LayerProps } from "./props.js";
+import type { ReactElement } from 'react';
+import type { AudioProps, DrawImageProps, LayerProps } from './props.js';
 
 export type Jsx =
   | ReactElement<AudioProps, 'audio'>

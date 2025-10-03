@@ -1,4 +1,4 @@
-import type { StringifiableRecord } from './modules/quisido-game/index.js';
+import type { StringifiableRecord } from './modules/quisido-browser-game/index.js';
 
 export default interface State extends StringifiableRecord {
   readonly acceleration: readonly [number, number];
