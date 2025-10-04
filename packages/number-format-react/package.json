@@ -2,10 +2,6 @@
   "name": "number-format-react",
   "version": "2.0.1",
   "author": "quisi.do <number-format-react@quisi.do>",
-  "bugs": {
-    "email": "number-format-react@quisi.do",
-    "url": "https://github.com/quisido/quisi.do/issues"
-  },
   "description": "the Intl.NumberFormat class as a React component",
   "exports": {
     "types": "./dist/index.d.ts",
@@ -14,25 +10,29 @@
   "homepage": "https://www.npmjs.com/package/number-format-react",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git"
-  },
+  "type": "module",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "attw": "attw --quiet",
     "build": "npm run tsc",
-    "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",
-    "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
-    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
-    "publint": "publint",
     "test": "concurrently --names eslint,publint,vitest --prefix-colors auto \"npm run eslint\" \"npm run publint\" \"npm run vitest:run\"",
+    "attw": "attw --quiet",
+    "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",
+    "eslint": "eslint . --cache --color --exit-on-fatal-error",
+    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
+    "publint": "publint",
     "tsc": "tsc --project tsconfig.build.json",
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
   },
-  "type": "module",
-  "types": "./dist/index.d.ts",
+  "bugs": {
+    "email": "number-format-react@quisi.do",
+    "url": "https://github.com/quisido/quisi.do/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git"
+  },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",

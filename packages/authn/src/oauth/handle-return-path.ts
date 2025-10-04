@@ -4,7 +4,7 @@ import { MetricName } from '../constants/metric-name.js';
 import handleFetchError from '../fetch-handler/handle-fetch-error.js';
 import handlePatreonFetchRequest from '../patreon/handle-patreon-fetch-request.js';
 import FatalOAuthErrorResponse from './fatal-oauth-error-response.js';
-import { OAuthPathname } from './oauth-pathname.js';
+import { type OAuthPathname } from './oauth-pathname.js';
 
 interface Options {
   readonly pathname: OAuthPathname;

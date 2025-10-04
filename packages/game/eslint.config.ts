@@ -7,13 +7,15 @@ export default [
   {
     name: '@quisido/game',
     rules: {
-      '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/no-unsafe-assignment': 'off',
-      'id-length': ['error', { exceptions: ['x', 'y'], properties: 'never' }],
-      'max-lines-per-function': 'off',
-      'max-params': 'off',
-      'max-statements': 'off',
-      'no-magic-numbers': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'warn',
+      '@typescript-eslint/no-unsafe-assignment': 'warn',
+      'id-length': ['warn', { exceptions: ['x', 'y'], properties: 'never' }],
+      'max-lines-per-function': 'warn',
+      'max-params': 'warn',
+      'max-statements': 'warn',
+      'no-magic-numbers': 'warn',
+      'no-ternary': 'warn',
+      'no-warning-comments': 'warn',
     },
   },
 ] satisfies readonly Linter.Config[];

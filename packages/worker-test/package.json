@@ -2,18 +2,10 @@
   "name": "@quisido/worker-test",
   "version": "1.0.1",
   "author": "quisi.do <worker-test@quisi.do>",
-  "bugs": {
-    "email": "worker-test@quisi.do",
-    "url": "https://github.com/quisido/quisi.do/issues"
-  },
   "description": "shared testing utilities for quisi.do Cloudflare workers modules",
   "exports": {
     "types": "./dist/index.d.ts",
     "default": "./dist/index.js"
-  },
-  "funding": {
-    "type": "individual",
-    "url": "https://github.com/sponsors/quisido"
   },
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/worker-test#readme",
   "license": "MIT",
@@ -23,26 +15,34 @@
     "access": "public",
     "provenance": true
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git"
-  },
+  "type": "module",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "attw": "attw --quiet",
     "build": "npm run tsc",
-    "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",
-    "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
-    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
-    "publint": "publint",
     "start": "tsc --project tsconfig.build.json --watch",
     "test": "concurrently --names attw,eslint,publint,vitest --prefix-colors auto \"npm run attw\" \"npm run eslint\" \"npm run publint\" \"npm run vitest:run\"",
+    "attw": "attw --quiet",
+    "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",
+    "eslint": "eslint . --cache --color --exit-on-fatal-error",
+    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
+    "publint": "publint",
     "tsc": "tsc --project tsconfig.build.json",
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
   },
-  "type": "module",
-  "types": "./dist/index.d.ts",
+  "bugs": {
+    "email": "worker-test@quisi.do",
+    "url": "https://github.com/quisido/quisi.do/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quisido"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git"
+  },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20251001.0",
     "@quisido/worker": "^1.0.8",

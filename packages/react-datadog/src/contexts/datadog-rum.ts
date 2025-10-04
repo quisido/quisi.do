@@ -1,5 +1,5 @@
 import type { datadogRum } from '@datadog/browser-rum';
-import { createContext, type Context } from 'react';
+import { type Context, createContext } from 'react';
 
 const DatadogRumContext: Context<typeof datadogRum | null> = createContext<
   typeof datadogRum | null

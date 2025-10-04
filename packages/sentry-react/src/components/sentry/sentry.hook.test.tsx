@@ -23,8 +23,6 @@ function Wrapper({ children }: PropsWithChildren): ReactElement {
 describe('useSentry', (): void => {
   it('should call init', (): void => {
     renderHook(useSentry, {
-      wrapper: Wrapper,
-
       initialProps: {
         allowUrls: [],
         attachStacktrace: true,
@@ -47,11 +45,12 @@ describe('useSentry', (): void => {
         release: 'test-release',
         sampleRate: 1,
         shutdownTimeout: 1,
-        tracesSampleRate: 1,
         tracesSampler: TEST_TRACES_SAMPLER,
+        tracesSampleRate: 1,
         transport: TEST_TRANSPORT,
         tunnel: 'test-tunnel',
       },
+      wrapper: Wrapper,
     });
 
     expect(TEST_INIT).toHaveBeenCalledOnce();
@@ -77,8 +76,8 @@ describe('useSentry', (): void => {
       release: 'test-release',
       sampleRate: 1,
       shutdownTimeout: 1,
-      tracesSampleRate: 1,
       tracesSampler: TEST_TRACES_SAMPLER,
+      tracesSampleRate: 1,
       transport: TEST_TRANSPORT,
       tunnel: 'test-tunnel',
     });
@@ -86,11 +85,10 @@ describe('useSentry', (): void => {
 
   it('should support a default user', (): void => {
     renderHook(useSentry, {
-      wrapper: Wrapper,
-
       initialProps: {
         dsn: 'test-dsn',
       },
+      wrapper: Wrapper,
     });
 
     expect(TEST_SET_USER).toHaveBeenCalledOnce();
@@ -106,12 +104,11 @@ describe('useSentry', (): void => {
     };
 
     renderHook(useSentry, {
-      wrapper: Wrapper,
-
       initialProps: {
         dsn: 'test-dsn',
         user: TEST_USER,
       },
+      wrapper: Wrapper,
     });
 
     expect(TEST_SET_USER).toHaveBeenCalledOnce();

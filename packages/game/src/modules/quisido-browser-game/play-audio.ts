@@ -25,6 +25,7 @@ export default function playAudio({
   const element: HTMLAudioElement = HtmlAudioElements.get(src);
   element.loop = loop;
   element.volume = volume / 100;
+
   void element.play().catch(handlePlayError);
 
   return (): void => {

@@ -16,8 +16,6 @@ export default function getAuthnTestEnv(
     COOKIE_DOMAIN: getOption('cookieDomain', 'localhost'),
     ENVIRONMENT_NAME: getOption('environmentName', EnvironmentName.Test),
     HOST: getOption('host', 'test.host'),
-    PRIVATE_DATASET: new TestAnalyticsEngineDataset(),
-    PUBLIC_DATASET: new TestAnalyticsEngineDataset(),
 
     PATREON_OAUTH_CLIENT_ID: getOption(
       'patreonOAuthClientId',
@@ -33,5 +31,7 @@ export default function getAuthnTestEnv(
       'patreonOAuthRedirectUri',
       'https://localhost/patreon/callback',
     ),
+    PRIVATE_DATASET: new TestAnalyticsEngineDataset(),
+    PUBLIC_DATASET: new TestAnalyticsEngineDataset(),
   };
 }

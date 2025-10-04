@@ -2,18 +2,10 @@
   "name": "cjs-ts",
   "version": "2.0.0",
   "author": "quisi.do <cjs-ts@quisi.do>",
-  "bugs": {
-    "email": "cjs-ts@quisi.do",
-    "url": "https://github.com/quisido/quisi.do/issues"
-  },
   "description": "a Babel preconfiguration to bridge CommonJS and TypeScript files",
   "exports": {
     "types": "./index.d.ts",
     "default": "./index.cjs"
-  },
-  "funding": {
-    "type": "individual",
-    "url": "https://github.com/sponsors/quisido"
   },
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/cjs-ts#readme",
   "license": "MIT",
@@ -22,21 +14,29 @@
     "access": "public",
     "provenance": true
   },
+  "type": "commonjs",
+  "types": "./index.d.ts",
+  "scripts": {
+    "build": "exit 0",
+    "test": "concurrently --names eslint,publint --prefix-colors auto \"npm run eslint\" \"npm run publint\"",
+    "attw": "attw --quiet",
+    "clean": "exit 0",
+    "eslint": "eslint . --cache --color --exit-on-fatal-error",
+    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
+    "publint": "publint"
+  },
+  "bugs": {
+    "email": "cjs-ts@quisi.do",
+    "url": "https://github.com/quisido/quisi.do/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quisido"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
-  "scripts": {
-    "attw": "attw --quiet",
-    "build": "exit 0",
-    "clean": "exit 0",
-    "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
-    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
-    "publint": "publint",
-    "test": "concurrently --names eslint,publint --prefix-colors auto \"npm run eslint\" \"npm run publint\""
-  },
-  "type": "commonjs",
-  "types": "./index.d.ts",
   "dependencies": {
     "@babel/core": "^7.28.4",
     "@babel/preset-env": "^7.28.3",

@@ -24,9 +24,9 @@ export const ExportedHandler = class QuisidoExportedHandler<
   public readonly trace?: ExportedHandlerTraceHandler<Env>;
 
   public constructor({
-    FetchHandler,
     console: consoleOption = console,
     fetch: fetchOption = fetch,
+    FetchHandler,
     finally: handleFinally,
     now,
     onError,
@@ -35,9 +35,9 @@ export const ExportedHandler = class QuisidoExportedHandler<
   }: ExportedHandlerOptions<Env, QueueHandlerMessage, CfHostMetadata> = {}) {
     if (typeof FetchHandler !== 'undefined') {
       this.fetch = createExportedHandlerFetch({
-        FetchHandler,
         console: consoleOption,
         fetch: fetchOption,
+        FetchHandler,
         finally: handleFinally,
         now,
         onError,

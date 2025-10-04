@@ -1,5 +1,5 @@
 import { TEST_EXECUTION_CONTEXT } from 'cloudflare-test-utils';
-import { StatusCode, type IncomingRequest } from 'cloudflare-utils';
+import { type IncomingRequest, StatusCode } from 'cloudflare-utils';
 import { assert, describe, expect, it, vi } from 'vitest';
 import { TestExportedHandler } from '../test/test-exported-handler.js';
 import throwy from '../test/throwy.js';
@@ -11,8 +11,6 @@ describe('FetchHandler', (): void => {
   it('should handle errors by default', async (): Promise<void> => {
     const testError = new Error();
     const handler = new TestExportedHandler({
-      onError: TEST_ERROR_HANDLER,
-
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super((): never => {
@@ -20,6 +18,7 @@ describe('FetchHandler', (): void => {
           });
         }
       },
+      onError: TEST_ERROR_HANDLER,
     });
 
     assert(typeof handler.fetch !== 'undefined');
@@ -38,8 +37,6 @@ describe('FetchHandler', (): void => {
     const testError = new Error();
     const testResponse = new Response();
     const handler = new TestExportedHandler({
-      onError: TEST_ERROR_HANDLER,
-
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super(
@@ -53,6 +50,7 @@ describe('FetchHandler', (): void => {
           );
         }
       },
+      onError: TEST_ERROR_HANDLER,
     });
 
     assert(typeof handler.fetch !== 'undefined');

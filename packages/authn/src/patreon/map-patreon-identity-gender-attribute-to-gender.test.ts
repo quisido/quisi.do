@@ -23,11 +23,10 @@ describe('mapPatreonIdentityGenderAttributeToGender', (): void => {
       new Response(
         JSON.stringify({
           data: {
-            id: 'test-id',
-
             attributes: {
               gender: PatreonGender.Female,
             },
+            id: 'test-id',
           },
         }),
       ),
@@ -63,11 +62,10 @@ describe('mapPatreonIdentityGenderAttributeToGender', (): void => {
       new Response(
         JSON.stringify({
           data: {
-            id: 'test-id',
-
             attributes: {
               gender: PatreonGender.Male,
             },
+            id: 'test-id',
           },
         }),
       ),
@@ -103,11 +101,10 @@ describe('mapPatreonIdentityGenderAttributeToGender', (): void => {
       new Response(
         JSON.stringify({
           data: {
-            id: 'test-id',
-
             attributes: {
               gender: PatreonGender.Neutral,
             },
+            id: 'test-id',
           },
         }),
       ),

@@ -1,5 +1,5 @@
-import type { RumInitConfiguration, datadogRum } from '@datadog/browser-rum';
-import { useEffect, useRef, type RefObject } from 'react';
+import type { datadogRum, RumInitConfiguration } from '@datadog/browser-rum';
+import { type RefObject, useEffect, useRef } from 'react';
 import useDatadogRum from './use-datadog-rum.js';
 
 interface Props {

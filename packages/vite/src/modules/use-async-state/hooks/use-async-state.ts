@@ -1,5 +1,5 @@
 import { mapToString } from 'fmrs';
-import { useCallback, useRef, useState, type RefObject } from 'react';
+import { type RefObject, useCallback, useRef, useState } from 'react';
 import type AsyncState from '../types/async-state.js';
 import useGetState from './use-get-state.js';
 

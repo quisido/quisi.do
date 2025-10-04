@@ -1,9 +1,9 @@
-import { ErrorCode } from '@quisido/authn-shared';
+import { type ErrorCode } from '@quisido/authn-shared';
 import { FetchHandler, type MetricDimensions } from '@quisido/worker';
 import { isString } from 'fmrs';
 import { EnvironmentName } from './constants/environment-name.js';
 import { PUBLIC } from './constants/metric-dimensions.js';
-import { MetricName } from './constants/metric-name.js';
+import { type MetricName } from './constants/metric-name.js';
 import type { OAuthProvider } from './constants/oauth-provider.js';
 import {
   MILLISECONDS_PER_DAY,

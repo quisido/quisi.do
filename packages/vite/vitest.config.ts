@@ -12,11 +12,8 @@ export default defineConfig({
   plugins: [...PLUGIN_OPTIONS, ...viteReact()],
   test: {
     ...INLINE_CONFIG,
-    environment: 'jsdom',
-
     coverage: {
       ...COVERAGE_OPTIONS,
-
       thresholds: {
         branches: 3,
         functions: 5,
@@ -24,9 +21,9 @@ export default defineConfig({
         statements: 6,
       },
     } as CoverageOptions,
-
     env: {
       CLARITY_TAG: 'test-clarity-tag',
     },
+    environment: 'jsdom',
   },
 });

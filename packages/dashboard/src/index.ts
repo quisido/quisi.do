@@ -7,9 +7,9 @@ import handleLog from './handle-log.js';
 import handleMetric from './handle-metric.js';
 
 export default new ExportedHandler({
-  FetchHandler: DashboardFetchHandler,
   console,
   fetch,
+  FetchHandler: DashboardFetchHandler,
   onError: handleError,
   onLog: handleLog,
   onMetric: handleMetric,

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState, type RefObject } from 'react';
+import { type RefObject, useCallback, useMemo, useRef, useState } from 'react';
 import mapTranslationsRecordToLoadedTranslationsRecord from '../../map/map-translations-record-to-loaded-translations-record.js';
 import RunnableTranslateFunction from '../../runnables/runnable-translate-function.js';
 import type TranslateFunction from '../../types/translate-function.js';
@@ -57,9 +57,6 @@ export default function useProvider<
   );
 
   const loadTranslations = useLoadTranslations({
-    onLoadError,
-    translationsRecord,
-
     onLoad: useCallback(
       (newLocale: keyof T, newTranslations: Record<string, string>): void => {
         setLoadedTranslationsRecord(
@@ -73,6 +70,8 @@ export default function useProvider<
       },
       [],
     ),
+    onLoadError,
+    translationsRecord,
   });
 
   const getLoadedFallbackTranslations = ():

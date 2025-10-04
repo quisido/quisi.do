@@ -12,12 +12,11 @@ export default class FatalOAuthErrorResponseInit extends ResponseInitImpl {
     const location = `https://${host}${returnPath}#authn:error=${code.toString()}`;
 
     super({
-      status: StatusCode.SeeOther,
-
       headers: new Headers({
         'content-location': location,
         location,
       }),
+      status: StatusCode.SeeOther,
     });
   }
 }

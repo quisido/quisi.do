@@ -1,4 +1,4 @@
-import { useCallback, useRef, type RefObject } from 'react';
+import { type RefObject, useCallback, useRef } from 'react';
 import isDefaultStringRecordExport from '../../../is/is-default-string-record-export.js';
 import isStringRecord from '../../../is/is-string-record.js';
 import type { DefaultExport } from '../../../types/default-export.js';
@@ -13,12 +13,12 @@ type LazyTranslations = Promise<EagerTranslations>;
 export type State<T> = (locale: T) => Promise<void> | null;
 
 export interface Props<T> {
-  readonly onLoadError?: ((locale: keyof T, err: unknown) => void) | undefined;
-  readonly translationsRecord: T;
   readonly onLoad: (
     locale: keyof T,
     translations: Record<string, string>,
   ) => void;
+  readonly onLoadError?: ((locale: keyof T, err: unknown) => void) | undefined;
+  readonly translationsRecord: T;
 }
 
 const DEFAULT_IS_FETCHED: Readonly<

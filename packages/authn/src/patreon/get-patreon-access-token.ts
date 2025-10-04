@@ -22,9 +22,6 @@ export default async function getPatreonAccessToken(
   const response: Response = await this.fetch(
     `${this.patreonOAuthHost}/api/oauth2/token`,
     {
-      headers: HEADERS,
-      method: 'POST',
-
       body: formUrlEncoded({
         client_id: this.patreonOAuthClientId,
         client_secret: this.patreonOAuthClientSecret,
@@ -32,6 +29,8 @@ export default async function getPatreonAccessToken(
         grant_type: 'authorization_code',
         redirect_uri: this.patreonOAuthRedirectUri,
       }),
+      headers: HEADERS,
+      method: 'POST',
     },
   );
 

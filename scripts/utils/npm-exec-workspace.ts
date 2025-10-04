@@ -1,10 +1,10 @@
 import { execFileSync } from 'node:child_process';
 import isSpawnSyncReturns from './is-spawn-sync-returns.js';
 import isString from './is-string.js';
+import logCommand from './log-command.js';
 import retry from './retry.js';
 
 const ATTEMPTS = 3;
-const MAX_LINE_LENGTH = 80;
 
 const isActionableMessage = (message: string): boolean =>
   !message.startsWith('npm error A complete log of this run can be found in: ');
@@ -13,34 +13,7 @@ export default function npmExecWorkspace(
   workspaceDirectory: string,
   ...script: string[]
 ): string {
-  const words: string[] = [
-    'npm',
-    ...script,
-    `--workspace=packages/${workspaceDirectory}`,
-  ];
-
-  const logLineChunks: string[] = [];
-  let logLineLength = 0;
-  for (const word of words) {
-    if (logLineLength === 0) {
-      logLineChunks.push(word);
-      logLineLength += word.length;
-      continue;
-    }
-
-    if (logLineLength + word.length + 3 <= MAX_LINE_LENGTH) {
-      logLineChunks.push(' ');
-      logLineChunks.push(word);
-      logLineLength += word.length + 1;
-      continue;
-    }
-
-    logLineChunks.push(' \\\n    ');
-    logLineChunks.push(word);
-    logLineLength = word.length;
-  }
-
-  console.log(logLineChunks.join(''));
+  logCommand('npm', ...script, `--workspace=packages/${workspaceDirectory}`);
 
   try {
     return retry(ATTEMPTS, (): string =>

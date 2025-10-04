@@ -90,12 +90,11 @@ export default defineConfig(
     'react-refresh/only-export-components': ['src/app/**/page.tsx'],
   }),
 
-  // Technical debt: Refactor large files after launching.
   {
     rules: {
-      'max-lines': 'off',
-      'max-lines-per-function': 'off',
-      'max-statements': 'off',
+      'max-lines': 'warn',
+      // 'max-lines-per-function': 'warn',
+      'max-statements': 'warn',
     },
   },
 );

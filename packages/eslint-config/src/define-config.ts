@@ -3,7 +3,10 @@ import { defineConfig as eslintDefineConfig } from 'eslint/config';
 import { LINTER_OPTIONS } from './linter-options.js';
 import type { PickPartial } from './pick-partial.js';
 
-export type Config = PickPartial<Required<ConfigWithExtends>, 'basePath' | 'language' | 'languageOptions' | 'processor'>;
+export type Config = PickPartial<
+  Required<ConfigWithExtends>,
+  'basePath' | 'language' | 'languageOptions' | 'processor'
+>;
 
 export default function defineConfig(config: Config): Config {
   const [linterConfig] = eslintDefineConfig(config);

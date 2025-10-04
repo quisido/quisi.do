@@ -1,5 +1,5 @@
 import { mapMetricDimensionsToDataPoint } from '@quisido/worker';
-import { TestExportedHandler, TestResponse } from '@quisido/worker-test';
+import { TestExportedHandler, type TestResponse } from '@quisido/worker-test';
 import { TestAnalyticsEngineDataset } from 'cloudflare-test-utils';
 import CspFetchHandler from '../csp-fetch-handler.js';
 import handleError from '../handle-error.js';
@@ -23,17 +23,16 @@ export default class TestCspExportedHandler extends TestExportedHandler {
 
   public constructor({ env = {}, now }: Options = {}) {
     super({
-      FetchHandler: CspFetchHandler,
-      now,
-      onError: handleError,
-      onLog: handleLog,
-      onMetric: handleMetric,
-
       env: {
         PRIVATE_DATASET: new TestAnalyticsEngineDataset(),
         PUBLIC_DATASET: new TestAnalyticsEngineDataset(),
         ...env,
       },
+      FetchHandler: CspFetchHandler,
+      now,
+      onError: handleError,
+      onLog: handleLog,
+      onMetric: handleMetric,
     });
   }
 

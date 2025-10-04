@@ -7,8 +7,6 @@ export default defineConfig({
   extends: [],
   files: ['**/*.cjs'],
   ignores: [],
-  linterOptions: LINTER_OPTIONS,
-  name: '@quisido/cjs',
 
   languageOptions: {
     ...JS.languageOptions,
@@ -17,4 +15,6 @@ export default defineConfig({
       require: 'writable',
     },
   },
+  linterOptions: LINTER_OPTIONS,
+  name: '@quisido/cjs',
 });

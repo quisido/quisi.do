@@ -3,6 +3,9 @@ import type Fingerprint from './fingerprint.js';
 export type Platform = 'chrome_web_store' | 'itunes' | 'play' | 'windows';
 
 export default interface ExternalApplication {
+  /** An array of fingerprint objects used for verifying the application. */
+  readonly fingerprints?: readonly Fingerprint[] | undefined;
+
   /** Information additional to the URL or instead of the URL, depending on the platform. */
   readonly id?: string | undefined;
 
@@ -14,7 +17,4 @@ export default interface ExternalApplication {
 
   /** The URL where the application can be found. */
   readonly url?: string | undefined;
-
-  /** An array of fingerprint objects used for verifying the application. */
-  readonly fingerprints?: readonly Fingerprint[] | undefined;
 }

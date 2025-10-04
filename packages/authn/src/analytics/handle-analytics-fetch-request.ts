@@ -31,11 +31,11 @@ export default async function handleAnalyticsFetchRequest(
       `https://api.cloudflare.com/client/v4/accounts/${this.analyticsId}/analytics_engine/sql`,
       {
         body: ANALYTICS_BODY,
-        method: 'POST',
 
         headers: new Headers({
           Authorization: `Bearer ${this.analyticsSecret}`,
         }),
+        method: 'POST',
       },
     );
 

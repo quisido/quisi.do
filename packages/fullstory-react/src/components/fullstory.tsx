@@ -1,7 +1,7 @@
 'use client';
 
 import type { SnippetOptions } from '@fullstory/browser';
-import { useEffect, type PropsWithChildren, type ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
 import useShallowMemo from 'use-shallow-memo';
 import FullstoryContext from '../contexts/fullstory.js';
 import useFullstoryBrowser from '../hooks/use-fullstory-browser.js';

@@ -54,12 +54,11 @@ describe('mapPatreonIdentityToUserRow', (): void => {
       new Response(
         JSON.stringify({
           data: {
-            id: 'test-id',
-
             attributes: {
               email: 'test@quisi.do',
               is_email_verified: true,
             },
+            id: 'test-id',
           },
         }),
       ),
@@ -93,12 +92,11 @@ describe('mapPatreonIdentityToUserRow', (): void => {
       new Response(
         JSON.stringify({
           data: {
-            id: 'test-id',
-
             attributes: {
               email: 'test@quisi.do',
               is_email_verified: false,
             },
+            id: 'test-id',
           },
         }),
       ),

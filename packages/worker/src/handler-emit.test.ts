@@ -11,8 +11,6 @@ describe('Handler', (): void => {
   it('should emit after flushing', async (): Promise<void> => {
     let promise: Promise<void> = Promise.resolve();
     const handler = new TestExportedHandler({
-      onLog: TEST_LOG_HANDLER,
-
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super((): Response => {
@@ -23,6 +21,7 @@ describe('Handler', (): void => {
           });
         }
       },
+      onLog: TEST_LOG_HANDLER,
     });
 
     assert(typeof handler.fetch !== 'undefined');

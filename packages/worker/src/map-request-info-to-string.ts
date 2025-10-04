@@ -3,5 +3,5 @@ export default function mapRequestInfoToString(input: RequestInfo): string {
     return input.url;
   }
 
-  return input.toString();
+  return input;
 }

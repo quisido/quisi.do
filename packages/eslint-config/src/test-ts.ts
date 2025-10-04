@@ -1,5 +1,5 @@
-import TS from './ts.js';
 import defineConfig from './define-config.js';
+import TS from './ts.js';
 
 export default defineConfig({
   ...TS,
@@ -9,9 +9,6 @@ export default defineConfig({
 
   rules: {
     ...TS.rules,
-    'max-lines-per-function': 'off',
-    'no-undefined': 'off',
-
     /**
      *   This rule is incompatible with TypeScript when setting a variable in a
      * callback.
@@ -24,5 +21,7 @@ export default defineConfig({
      * x(); // Type 'never' has no call signatures. ts(2349)
      */
     'init-declarations': 'off',
+    'max-lines-per-function': 'off',
+    'no-undefined': 'off',
   },
 });

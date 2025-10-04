@@ -2,6 +2,7 @@ import type { Type } from './type.js';
 
 export interface AudioProps {
   readonly loop: boolean;
+  readonly src: string;
   /** Zero to 100 */
   readonly volume: number;
 }

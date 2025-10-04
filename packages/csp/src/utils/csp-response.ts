@@ -1,4 +1,4 @@
-import { StatusCode } from 'cloudflare-utils';
+import { type StatusCode } from 'cloudflare-utils';
 import CspHeaders from './csp-headers.js';
 
 const mapToBody = (body: unknown): string | null => {

@@ -10,9 +10,9 @@ export default class RobotsTxtResponse extends Response {
     newHeaders.set('content-type', 'text/plain; charset=utf-8');
 
     super(BODY, {
-      status: StatusCode.OK,
-      ...init,
       headers: newHeaders,
+      ...init,
+      status: StatusCode.OK,
     });
   }
 }

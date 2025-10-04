@@ -16,6 +16,10 @@ interface HttpRequests1hGroups {
   readonly bytes_sum: number;
   readonly cachedBytes_sum: number;
   readonly cachedRequests_sum: number;
+  readonly clientSSLMap_sum: readonly WithKey<
+    string,
+    Record<'requests', number>
+  >[];
   readonly countryMap_sum: Dimension<string, 'bytes' | 'requests' | 'threats'>;
   readonly encryptedBytes_sum: number;
   readonly encryptedRequests_sum: number;
@@ -25,19 +29,15 @@ interface HttpRequests1hGroups {
   readonly threatPathingMap_sum: Dimension<string, 'requests'>;
   readonly threats_sum: number;
   readonly uniques_uniq: number;
-  readonly clientSSLMap_sum: readonly WithKey<
-    string,
-    Record<'requests', number>
-  >[];
 }
 
 export default interface CloudflareAnalyticsDatasets {
   readonly httpRequests1hGroups: HttpRequests1hGroups;
-  readonly rumPerformanceEventsAdaptiveGroups: CloudflareRumPerformanceEvents;
-  readonly workersAnalyticsEngineAdaptiveGroups: Record<'count', number>;
-  readonly workersInvocationsAdaptive: CloudflareWorkersInvocations;
   readonly rumPageloadEventsAdaptiveGroups: Record<
     'count' | 'sampleInterval_avg' | 'visits_sum',
     number
   >;
+  readonly rumPerformanceEventsAdaptiveGroups: CloudflareRumPerformanceEvents;
+  readonly workersAnalyticsEngineAdaptiveGroups: Record<'count', number>;
+  readonly workersInvocationsAdaptive: CloudflareWorkersInvocations;
 }

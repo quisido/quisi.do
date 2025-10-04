@@ -6,11 +6,7 @@
 
 export default interface TraceParentMetricDimensions {
   readonly traceFlags: number;
+  readonly traceId: string; // 32 hexadecimal characters
+  readonly traceParentId: string; // 16 hexadecimal characters
   readonly traceVersion: number;
-
-  // 32 hexadecimal characters
-  readonly traceId: string;
-
-  // 16 hexadecimal characters
-  readonly traceParentId: string;
 }

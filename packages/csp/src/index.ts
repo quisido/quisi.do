@@ -7,9 +7,9 @@ import handleLog from './handle-log.js';
 import handleMetric from './handle-metric.js';
 
 export default new ExportedHandler({
-  FetchHandler: CspFetchHandler,
   console,
   fetch,
+  FetchHandler: CspFetchHandler,
   onError: handleError,
   onLog: handleLog,
   onMetric: handleMetric,

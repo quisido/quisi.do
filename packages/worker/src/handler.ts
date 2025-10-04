@@ -364,8 +364,6 @@ export default class Handler<
 
     try {
       const {
-        results,
-
         meta: {
           changed_db: changedDb,
           changes,
@@ -375,6 +373,7 @@ export default class Handler<
           rows_written: rowsWritten,
           size_after: sizeAfter,
         },
+        results,
       } = await this.getD1Database(env)
         .prepare(query)
         .bind(...values)

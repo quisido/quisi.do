@@ -8,8 +8,6 @@ describe('Handler', (): void => {
     let nowValue = 0;
     const testNow = 1234;
     const handler = new TestExportedHandler({
-      now: (): number => testNow,
-
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super((): Response => {
@@ -18,6 +16,7 @@ describe('Handler', (): void => {
           });
         }
       },
+      now: (): number => testNow,
     });
 
     assert(typeof handler.fetch !== 'undefined');

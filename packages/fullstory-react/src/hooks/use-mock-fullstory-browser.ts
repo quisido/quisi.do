@@ -32,9 +32,9 @@ export default function useMockFullstoryBrowser(
   const isInitialized = useCallback((): boolean => initialized, [initialized]);
 
   return useShallowMemo({
-    init,
-    isInitialized,
-    ...partial,
     FullStory,
+    init,
+    ...partial,
+    isInitialized,
   });
 }

@@ -2,6 +2,20 @@
   "name": "@quisido/game",
   "version": "0.0.1",
   "author": "quisi.do <game@quisi.do>",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --skipLibCheck && vite build",
+    "start": "vite",
+    "test": "concurrently --names eslint,vitest --prefix-colors auto \"npm run eslint\" \"npm run vitest:run\"",
+    "eslint": "eslint . --cache --color --exit-on-fatal-error",
+    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
+    "serve": "serve dist",
+    "vite:build": "vite build",
+    "vitest": "vitest",
+    "vitest:run": "vitest run"
+  },
   "bugs": {
     "email": "game@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
@@ -10,24 +24,10 @@
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
   },
-  "license": "UNLICENSED",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
-  "scripts": {
-    "build": "tsc --skipLibCheck && vite build",
-    "eslint": "eslint . --cache --color --exit-on-fatal-error --max-warnings 0",
-    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix --max-warnings 0",
-    "serve": "serve dist",
-    "start": "vite",
-    "test": "concurrently --names eslint,vitest --prefix-colors auto \"npm run eslint\" \"npm run vitest:run\"",
-    "vite:build": "vite build",
-    "vitest": "vitest",
-    "vitest:run": "vitest run"
-  },
-  "type": "module",
   "dependencies": {
     "fmrs": "^2.1.1",
     "react": "^19.2.0",

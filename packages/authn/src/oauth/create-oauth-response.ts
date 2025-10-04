@@ -36,8 +36,6 @@ export default function createOAuthResponse(
   );
 
   return new Response(null, {
-    status: StatusCode.SeeOther,
-
     headers: new Headers({
       'content-location': `https://${this.host}${returnPath}`,
       location: `https://${this.host}${returnPath}`,
@@ -51,5 +49,6 @@ export default function createOAuthResponse(
         'Secure',
       ].join('; '),
     }),
+    status: StatusCode.SeeOther,
   });
 }

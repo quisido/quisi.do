@@ -37,13 +37,6 @@ export default class TestD1PreparedStatement implements D1PreparedStatement {
     }
 
     return Promise.resolve({
-      /**
-       *   We need to use `as T[]` here to match the `D1PareparedStatement`
-       * behavior. Typechecking will be up to the runtime code.
-       */
-      results: this.#results as T[],
-      success: true,
-
       meta: {
         changed_db: true,
         changes: 1,
@@ -53,6 +46,12 @@ export default class TestD1PreparedStatement implements D1PreparedStatement {
         rows_written: 1,
         size_after: 1,
       },
+      /**
+       *   We need to use `as T[]` here to match the `D1PareparedStatement`
+       * behavior. Typechecking will be up to the runtime code.
+       */
+      results: this.#results as T[],
+      success: true,
     });
   }
 
@@ -81,9 +80,6 @@ export default class TestD1PreparedStatement implements D1PreparedStatement {
     }
 
     return Promise.resolve({
-      results: [],
-      success: true,
-
       meta: {
         changed_db: true,
         changes: 1,
@@ -93,6 +89,8 @@ export default class TestD1PreparedStatement implements D1PreparedStatement {
         rows_written: 1,
         size_after: 1,
       },
+      results: [],
+      success: true,
     });
   }
 }

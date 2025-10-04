@@ -57,6 +57,11 @@ export default async function handleFetch(
         cls: [cumulativeLayoutShiftP50, cumulativeLayoutShiftP75],
         dcl: [domContentLoadedP50, domContentLoadedP75],
         domComplete: [domCompleteP50, domCompleteP75],
+        errorCounts: {
+          P50: errorCountP50,
+          P75: errorCountP75,
+          P90: errorCountP90,
+        },
         fcp: [firstContentfulPaintP50, firstContentfulPaintP75],
         fip: [firstInputDelayP50, firstInputDelayP75],
         inp: [interactionToNextPaintP50, interactionToNextPaintP75],
@@ -66,12 +71,6 @@ export default async function handleFetch(
         sessionTimeSpent,
         ttfb: [firstByteP50, firstByteP75],
         viewTimeSpent,
-
-        errorCounts: {
-          P50: errorCountP50,
-          P75: errorCountP75,
-          P90: errorCountP90,
-        },
       },
       {
         accessControlAllowOrigin: this.accessControlAllowOrigin,

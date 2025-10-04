@@ -184,13 +184,12 @@ export default async function getDatadogAggregateRumEvents(
     );
     this.affect(
       cache.put('/datadog-aggregate-rum-events', JSON.stringify(value), {
-        storageClass: 'Standard',
-
         httpMetadata: {
           cacheControl: `immutable, max-age=${CACHE_EXPIRY_MINUTES * SECONDS_PER_MINUTE}, public`,
           cacheExpiry,
           contentType: 'application/json',
         },
+        storageClass: 'Standard',
       }),
     );
 

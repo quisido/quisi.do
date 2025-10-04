@@ -12,25 +12,21 @@ import type FallbackRenderParams from '../../types/fallback-render-params.js';
 import useSentry from './sentry.hook.js';
 
 interface Props extends Readonly<BrowserOptions> {
-  readonly children: ReactNode;
-  readonly errorBoundaryDialogOptions?: ReportDialogOptions | undefined;
-  readonly onErrorBoundaryMount?: (() => void) | undefined;
-  readonly showErrorBoundaryDialog?: boolean | undefined;
-  readonly user?: User | undefined;
-
-  /**
-   * `ErrorBoundaryFallback` is a React `FunctionComponent` without the `null`
-   *   return type.
-   */
-  readonly ErrorBoundaryFallback?:
-    | ((props: FallbackRenderParams) => ReactElement)
-    | undefined;
   readonly beforeErrorBoundaryCapture?:
     | ((
         scope: Readonly<Scope>,
         error: unknown,
         componentStack: string | undefined,
       ) => void)
+    | undefined;
+  readonly children: ReactNode;
+  readonly errorBoundaryDialogOptions?: ReportDialogOptions | undefined;
+  /**
+   *   `ErrorBoundaryFallback` is a React `FunctionComponent` without the `null`
+   * return type.
+   */
+  readonly ErrorBoundaryFallback?:
+    | ((props: FallbackRenderParams) => ReactElement)
     | undefined;
   readonly onErrorBoundaryError?:
     | ((
@@ -39,6 +35,7 @@ interface Props extends Readonly<BrowserOptions> {
         eventId: string,
       ) => void)
     | undefined;
+  readonly onErrorBoundaryMount?: (() => void) | undefined;
   readonly onErrorBoundaryReset?:
     | ((
         error: unknown,
@@ -53,13 +50,15 @@ interface Props extends Readonly<BrowserOptions> {
         eventId: string | null,
       ) => void)
     | undefined;
+  readonly showErrorBoundaryDialog?: boolean | undefined;
+  readonly user?: User | undefined;
 }
 
 export default function Sentry({
-  ErrorBoundaryFallback = DefaultErrorBoundaryFallback,
   beforeErrorBoundaryCapture,
   children,
   errorBoundaryDialogOptions,
+  ErrorBoundaryFallback = DefaultErrorBoundaryFallback,
   onErrorBoundaryError,
   onErrorBoundaryMount,
   onErrorBoundaryReset,

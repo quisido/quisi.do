@@ -23,7 +23,7 @@ export default defineConfig(
 
     'no-console': [
       'scripts/publish.ts',
-      'scripts/utils/npm-exec-workspace.ts',
+      'scripts/utils/log-command.ts',
       'scripts/utils/spy-on-console.ts',
     ],
 
