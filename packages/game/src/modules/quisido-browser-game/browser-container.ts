@@ -31,7 +31,6 @@ export default class BrowserContainer
       return;
     }
 
-    this.#renderableChildren.add(instance);
     this.#subscribeToRender(instance);
   }
 
@@ -69,7 +68,6 @@ export default class BrowserContainer
       return;
     }
 
-    this.#renderableChildren.delete(instance);
     this.#unsubscribeFromRender(instance);
   }
 
@@ -83,7 +81,25 @@ export default class BrowserContainer
   };
 
   #subscribeToRender(instance: DrawImageInstance | LayerInstance): void {
+    const previousUnsubscribe: VoidFunction | undefined =
+      this.#renderUnsubscriptions.get(instance);
+
+    /**
+     *   This should never happen, but it would be a memory leak if it did so
+     * it's important to monitor in case it does.
+     */
+    if (typeof previousUnsubscribe !== 'undefined') {
+      this.#handleError(
+        new Error('Container is already subscribed to instance', {
+          cause: instance,
+        }),
+      );
+
+      previousUnsubscribe();
+    }
+
     const unsubscribe = instance.onRender(this.#render);
+    this.#renderableChildren.add(instance);
     this.#renderUnsubscriptions.set(instance, unsubscribe);
   }
 
@@ -101,6 +117,7 @@ export default class BrowserContainer
       return;
     }
 
+    this.#renderableChildren.delete(instance);
     unsubscribe();
   }
 }

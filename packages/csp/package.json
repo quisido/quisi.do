@@ -1,31 +1,7 @@
 {
-  "dependencies": {
-    "@quisido/csp-shared": "^1.0.1",
-    "@quisido/worker": "^1.0.8",
-    "cloudflare-utils": "^1.0.4",
-    "fmrs": "^2.1.1"
-  },
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20251001.0",
-    "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@quisido/eslint-config": "^1.1.8",
-    "@quisido/vitest-config": "^1.0.3",
-    "@quisido/worker-test": "^1.0.1",
-    "@types/eslint": "^9.6.1",
-    "@vitest/coverage-istanbul": "^3.2.4",
-    "cjs-ts": "^2.0.0",
-    "cloudflare-test-utils": "^1.0.2",
-    "concurrently": "^9.2.1",
-    "eslint": "^9.36.0",
-    "publint": "^0.3.13",
-    "rimraf": "^6.0.1",
-    "typescript": "^5.9.3",
-    "vite": "^7.1.7",
-    "vitest": "^3.2.4",
-    "wrangler": "^4.40.3"
-  },
-  "license": "UNLICENSED",
   "name": "@quisido/csp",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
   "private": true,
   "scripts": {
     "build": "exit 0",
@@ -59,5 +35,29 @@
     "whoami": "wrangler whoami"
   },
   "type": "module",
-  "version": "1.0.0"
+  "dependencies": {
+    "@quisido/csp-shared": "^1.0.1",
+    "@quisido/worker": "^1.0.8",
+    "cloudflare-utils": "^1.0.4",
+    "fmrs": "^2.1.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20251001.0",
+    "@microsoft/eslint-formatter-sarif": "^3.1.0",
+    "@quisido/eslint-config": "^1.1.8",
+    "@quisido/vitest-config": "^1.0.3",
+    "@quisido/worker-test": "^1.0.1",
+    "@types/eslint": "^9.6.1",
+    "@vitest/coverage-istanbul": "^3.2.4",
+    "cjs-ts": "^2.0.0",
+    "cloudflare-test-utils": "^1.0.2",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.36.0",
+    "publint": "^0.3.13",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.7",
+    "vitest": "^3.2.4",
+    "wrangler": "^4.40.3"
+  }
 }

@@ -2,17 +2,11 @@
   "name": "react-datadog",
   "version": "3.0.1",
   "author": "quisi.do <react-datadog@quisi.do>",
-  "description": "React wrapper for instantiating Datadog",
-  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/react-datadog#readme",
-  "license": "MIT",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "type": "module",
-  "types": "./dist/index.d.ts",
   "bugs": {
     "email": "react-datadog@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "description": "React wrapper for instantiating Datadog",
   "exports": {
     "types": "./dist/index.d.ts",
     "default": "./dist/index.js"
@@ -21,6 +15,10 @@
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
   },
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/react-datadog#readme",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "publishConfig": {
     "access": "public",
     "provenance": true
@@ -43,6 +41,8 @@
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
   },
+  "type": "module",
+  "types": "./dist/index.d.ts",
   "dependencies": {
     "fmrs": "^2.1.1",
     "use-shallow-memo": "^1.1.0"

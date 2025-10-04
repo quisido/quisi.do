@@ -5,6 +5,7 @@ export default [
   ...configs,
 
   {
+    name: '@quisido/game',
     rules: {
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',

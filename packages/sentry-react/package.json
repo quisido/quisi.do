@@ -2,17 +2,11 @@
   "name": "sentry-react",
   "version": "2.1.3",
   "author": "quisi.do <sentry-react@quisi.do>",
-  "description": "A React component for instantiating Sentry",
-  "homepage": "https://www.npmjs.com/package/sentry-react",
-  "license": "MIT",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "type": "module",
-  "types": "./dist/index.d.ts",
   "bugs": {
     "email": "sentry-react@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "description": "A React component for instantiating Sentry",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -27,6 +21,10 @@
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
   },
+  "homepage": "https://www.npmjs.com/package/sentry-react",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "publishConfig": {
     "access": "public",
     "provenance": true
@@ -48,6 +46,8 @@
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
   },
+  "type": "module",
+  "types": "./dist/index.d.ts",
   "dependencies": {
     "@sentry/browser": "^10.17.0",
     "@sentry/core": "^10.17.0",

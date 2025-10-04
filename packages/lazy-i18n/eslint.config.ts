@@ -11,12 +11,12 @@ export default defineConfig(
 
   // Plugins: react-compiler, react-hooks, react-refresh
   {
+    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       'react-compiler': reactCompiler,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
-
     rules: {
       'react-compiler/react-compiler': 'error',
       'react-hooks/exhaustive-deps': 'error',
@@ -26,10 +26,6 @@ export default defineConfig(
   },
 
   ...disableRulesForFiles({
-    'func-style': ['src/**/*.tsx'],
-    'no-magic-numbers': ['src/components/loading-dot/loading-dot.view.tsx'],
-    'no-useless-return': ['src/runnables/runnable-translate-function.ts'],
-
     '@typescript-eslint/no-floating-promises': [
       'src/utils/create-new-items.ts',
       'src/utils/replace-variables.tsx',
@@ -38,6 +34,7 @@ export default defineConfig(
     '@typescript-eslint/no-unnecessary-type-assertion': [
       'src/components/provider/provider.hook.test.ts',
     ],
+    'func-style': ['src/**/*.tsx'],
 
     'max-lines-per-function': [
       'src/components/provider/hooks/use-load-translations.ts',
@@ -51,6 +48,8 @@ export default defineConfig(
       'src/runnables/runnable-translate-function.ts',
       'src/utils/replace-variables.tsx',
     ],
+    'no-magic-numbers': ['src/components/loading-dot/loading-dot.view.tsx'],
+    'no-useless-return': ['src/runnables/runnable-translate-function.ts'],
 
     'react-compiler/react-compiler': [
       'src/components/provider/provider.hook.ts',

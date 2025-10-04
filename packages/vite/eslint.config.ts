@@ -21,14 +21,12 @@ export default defineConfig(
 
   // Plugins: react-compiler, react-hooks, react-refresh
   {
-    files: ['src/**/*.tsx'],
-
+    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       'react-compiler': reactCompiler,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
-
     rules: {
       'react-compiler/react-compiler': 'error',
       'react-hooks/exhaustive-deps': 'error',
@@ -38,25 +36,17 @@ export default defineConfig(
   },
 
   ...disableRulesForFiles({
-    '@typescript-eslint/no-empty-object-type': ['src/vite-env.d.ts'],
-    '@typescript-eslint/no-non-null-assertion': ['src/utils/split.ts'],
-    'func-style': ['src/**/*.tsx'],
-    'max-params': ['src/utils/assert.ts'],
-    'react-compiler/react-compiler': ['src/test/utils/render-hook-error.tsx'],
-    'react-refresh/only-export-components': ['src/app/**/page.tsx'],
-
     '@typescript-eslint/no-deprecated': [
       'src/utils/map-navigator-to-semantic-resource-attributes.ts',
     ],
-
+    '@typescript-eslint/no-empty-object-type': ['src/vite-env.d.ts'],
     '@typescript-eslint/no-explicit-any': [
       'src/modules/react-google-charts/chart.ts',
     ],
-
+    '@typescript-eslint/no-non-null-assertion': ['src/utils/split.ts'],
     '@typescript-eslint/no-unused-vars': [
       'src/modules/react-google-analytics/**/*.ts',
     ],
-
     camelcase: [
       'src/features/header-authenticate-link.tsx',
       'src/hooks/use-effect-event.ts',
@@ -64,19 +54,18 @@ export default defineConfig(
       'src/hooks/use-emit/utils/create-sentry-event.ts',
       'src/modules/react-google-analytics/**/*.ts',
     ],
-
     complexity: [
       'src/utils/is-dashboard-api-response.ts',
       'src/utils/map-authn-error-code-to-notification.tsx',
       'src/utils/map-oscpu-to-name.ts',
     ],
-
+    'func-style': ['src/**/*.tsx'],
     'id-length': [
       'src/features/clarity.ts',
       'src/modules/react-intercom/utils/create-intercom.ts',
       'src/types/clarity-api.ts',
     ],
-
+    'max-params': ['src/utils/assert.ts'],
     'no-magic-numbers': [
       'src/constants/*.ts',
       'src/modules/quisi/heading-level.ts',
@@ -84,22 +73,21 @@ export default defineConfig(
       'src/types/log-rocket.ts',
       'src/types/sentry-fullstory-client.ts',
     ],
-
     'no-undefined': [
       'src/hooks/use-emit/use-emit.ts',
       'src/hooks/use-google-analytics.ts',
       'src/modules/use-async-state/hooks/use-async-state.ts',
       'src/modules/use-async-state/hooks/use-get-state.ts',
     ],
-
     'no-useless-return': [
       'src/utils/map-navigator-to-semantic-resource-attributes.ts',
     ],
-
     'prefer-rest-params': [
       'src/features/clarity.ts',
       'src/modules/react-google-analytics/**/*.ts',
     ],
+    'react-compiler/react-compiler': ['src/test/utils/render-hook-error.tsx'],
+    'react-refresh/only-export-components': ['src/app/**/page.tsx'],
   }),
 
   // Technical debt: Refactor large files after launching.

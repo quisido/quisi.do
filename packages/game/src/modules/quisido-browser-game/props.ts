@@ -2,7 +2,7 @@ import type { Type } from './type.js';
 
 export interface AudioProps {
   readonly loop: boolean;
-  readonly src: string;
+  /** Zero to 100 */
   readonly volume: number;
 }
 
@@ -13,7 +13,7 @@ interface DrawImageSource {
   readonly y: number;
 }
 
-/** Based on @type CanvasDrawImage['drawImage'] */
+/** Based on @see CanvasDrawImage['drawImage'] */
 export interface DrawImageProps extends DrawImageSource {
   readonly quality?: ResizeQuality | undefined;
   readonly source?: DrawImageSource | undefined;

@@ -11,12 +11,12 @@ export default defineConfig(
 
   // Plugins: react-compiler, react-hooks, react-refresh
   {
+    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       'react-compiler': reactCompiler,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
-
     rules: {
       'react-compiler/react-compiler': 'error',
       'react-hooks/exhaustive-deps': 'error',
@@ -26,18 +26,16 @@ export default defineConfig(
   },
 
   ...disableRulesForFiles({
-    'max-lines-per-function': ['src/utils/map-v2-operation-handlers-to-api.ts'],
-    'new-cap': ['src/utils/map-v2-operation-handlers-to-api.ts'],
-    'no-console': ['src/test/expect-to-throw.tsx'],
-
     '@typescript-eslint/consistent-type-assertions': [
       'src/utils/capitalize.ts',
       'src/utils/map-v2-operation-handlers-to-api.ts',
     ],
-
     'func-style': [
       'src/**/*.tsx',
       'src/utils/map-v2-operation-handlers-to-api.ts',
     ],
+    'max-lines-per-function': ['src/utils/map-v2-operation-handlers-to-api.ts'],
+    'new-cap': ['src/utils/map-v2-operation-handlers-to-api.ts'],
+    'no-console': ['src/test/expect-to-throw.tsx'],
   }),
 );

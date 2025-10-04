@@ -7,13 +7,15 @@
     "rootDir": "src",
     "sourceMap": true,
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/game/src/",
-    "target": "ES5"
+    "target": "ES2022"
   },
   "exclude": [
     "./.vscode/",
     "./coverage/",
     "./src/**/*.test.ts",
+    "./src/**/*.test.tsx",
     "./src/*.test.ts",
+    "./src/*.test.tsx",
     "./.*.json",
     "./*.config.*",
     "./lighthouse.*",

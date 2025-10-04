@@ -1,46 +1,18 @@
 {
+  "name": "@quisi/do",
+  "version": "1.0.0",
   "author": "quisi.do <contact@quisi.do>",
   "bugs": {
     "email": "bugs@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
   "description": "quisi.do",
-  "devDependencies": {
-    "@arethetypeswrong/cli": "^0.17.4",
-    "@hint/formatter-codeframe": "^3.1.36",
-    "@hint/formatter-html": "^4.3.17",
-    "@hint/formatter-json": "^3.1.36",
-    "@hint/formatter-stylish": "^3.1.36",
-    "@hint/formatter-summary": "^3.0.39",
-    "@hint/hint-doctype": "^3.3.27",
-    "@hint/hint-https-only": "^2.4.27",
-    "@hint/hint-meta-theme-color": "^4.0.23",
-    "@hint/hint-minified-js": "^2.4.27",
-    "@hint/hint-no-broken-links": "^4.2.27",
-    "@hint/hint-no-p3p": "^3.3.27",
-    "@hint/hint-performance-budget": "^2.4.27",
-    "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@quisido/eslint-config": "^1.1.8",
-    "@types/eslint": "^9.6.1",
-    "@types/node": "^22.15.21",
-    "browserslist": "^4.24.5",
-    "canvas": "^3.1.2",
-    "cjs-ts": "^2.0.0",
-    "concurrently": "^9.1.2",
-    "eslint": "^9.27.0",
-    "hint": "^7.1.13",
-    "prettier": "^3.5.3",
-    "publint": "^0.3.12",
-    "rimraf": "^6.0.1",
-    "typescript": "^5.8.3"
-  },
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
   },
   "homepage": "https://quisi.do/",
   "license": "UNLICENSED",
-  "name": "@quisi/do",
   "private": true,
   "repository": {
     "type": "git",
@@ -71,8 +43,36 @@
     "worker": "npm run start --workspace=packages/worker"
   },
   "type": "module",
-  "version": "1.0.0",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.17.4",
+    "@hint/formatter-codeframe": "^3.1.36",
+    "@hint/formatter-html": "^4.3.17",
+    "@hint/formatter-json": "^3.1.36",
+    "@hint/formatter-stylish": "^3.1.36",
+    "@hint/formatter-summary": "^3.0.39",
+    "@hint/hint-doctype": "^3.3.27",
+    "@hint/hint-https-only": "^2.4.27",
+    "@hint/hint-meta-theme-color": "^4.0.23",
+    "@hint/hint-minified-js": "^2.4.27",
+    "@hint/hint-no-broken-links": "^4.2.27",
+    "@hint/hint-no-p3p": "^3.3.27",
+    "@hint/hint-performance-budget": "^2.4.27",
+    "@microsoft/eslint-formatter-sarif": "^3.1.0",
+    "@quisido/eslint-config": "^1.1.8",
+    "@types/eslint": "^9.6.1",
+    "@types/node": "^22.15.21",
+    "browserslist": "^4.24.5",
+    "canvas": "^3.1.2",
+    "cjs-ts": "^2.0.0",
+    "concurrently": "^9.1.2",
+    "eslint": "^9.27.0",
+    "hint": "^7.1.13",
+    "prettier": "^3.5.3",
+    "publint": "^0.3.12",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.8.3"
+  }
 }

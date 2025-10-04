@@ -1,7 +1,5 @@
 [
   {
-    "path": "/*",
-
     "options": {
       "firstPartyHostnames": [
         "*.cscdn.net",
@@ -9,7 +7,7 @@
         "*.quisido.com"
       ]
     },
-
+    "path": "/*",
     "timings": [
       {
         "budget": 0.1,
@@ -22,6 +20,10 @@
       {
         "budget": 5000,
         "metric": "interactive"
+      },
+      {
+        "budget": 200,
+        "metric": "interaction-to-next-paint"
       },
       {
         "budget": 2500,

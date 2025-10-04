@@ -2,17 +2,11 @@
   "name": "@quisido/worker-test",
   "version": "1.0.1",
   "author": "quisi.do <worker-test@quisi.do>",
-  "description": "shared testing utilities for quisi.do Cloudflare workers modules",
-  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/worker-test#readme",
-  "license": "MIT",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "type": "module",
-  "types": "./dist/index.d.ts",
   "bugs": {
     "email": "worker-test@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "description": "shared testing utilities for quisi.do Cloudflare workers modules",
   "exports": {
     "types": "./dist/index.d.ts",
     "default": "./dist/index.js"
@@ -21,6 +15,10 @@
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
   },
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/worker-test#readme",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "publishConfig": {
     "access": "public",
     "provenance": true
@@ -43,6 +41,8 @@
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
   },
+  "type": "module",
+  "types": "./dist/index.d.ts",
   "dependencies": {
     "@cloudflare/workers-types": "^4.20251001.0",
     "@quisido/worker": "^1.0.8",

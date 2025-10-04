@@ -2,20 +2,18 @@
   "name": "number-format-react",
   "version": "2.0.1",
   "author": "quisi.do <number-format-react@quisi.do>",
-  "description": "the Intl.NumberFormat class as a React component",
-  "homepage": "https://www.npmjs.com/package/number-format-react",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "type": "module",
-  "types": "./dist/index.d.ts",
   "bugs": {
     "email": "number-format-react@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "description": "the Intl.NumberFormat class as a React component",
   "exports": {
     "types": "./dist/index.d.ts",
     "default": "./dist/index.js"
   },
+  "homepage": "https://www.npmjs.com/package/number-format-react",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
@@ -33,6 +31,8 @@
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
   },
+  "type": "module",
+  "types": "./dist/index.d.ts",
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",

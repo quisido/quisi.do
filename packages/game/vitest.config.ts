@@ -9,7 +9,7 @@ import type { CoverageOptions } from 'vitest/dist/node.js';
 
 export default defineConfig({
   ...CONFIG,
-  plugins: [...PLUGIN_OPTIONS, ...viteReact()],
+  plugins: [...PLUGIN_OPTIONS, viteReact()],
   test: {
     ...INLINE_CONFIG,
     coverage: {

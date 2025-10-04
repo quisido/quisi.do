@@ -10,7 +10,37 @@ export default defineConfig({
   rules: {
     ...JSON.rules,
 
-    // `exports.types` has to be first.
     'json/sort-keys': 'off',
+    'jsonc/sort-keys': [
+      'error',
+      {
+        allowLineSeparatedGroups: false,
+        order: [
+          'name',
+          'version',
+          {
+            keyPattern: '^(?!(dependencies|devDependencies|peerDependencies)$)',
+            order: { type: 'asc' },
+          },
+          'dependencies',
+          'devDependencies',
+          'peerDependencies',
+        ],
+        pathPattern: '^$',
+      },
+      {
+        allowLineSeparatedGroups: false,
+        order: [
+          'types',
+          { keyPattern: '^(?!(default)$)', order: { type: 'asc' } },
+          'default',
+        ],
+        pathPattern: 'exports',
+      },
+      {
+        order: { type: 'asc' },
+        pathPattern: '.*',
+      },
+    ],
   },
 });

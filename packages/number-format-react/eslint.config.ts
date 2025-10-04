@@ -8,12 +8,12 @@ export default defineConfig(
 
   // Plugins: react-compiler, react-hooks, react-refresh
   {
+    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       'react-compiler': reactCompiler,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
-
     rules: {
       'react-compiler/react-compiler': 'error',
       'react-hooks/exhaustive-deps': 'error',
