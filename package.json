@@ -20,7 +20,7 @@
     "dashboard": "npm run start --workspace=packages/dashboard",
     "eslint": "eslint . --cache --color --exit-on-fatal-error",
     "eslint-config": "npm run start --workspace=packages/eslint-config",
-    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix && npm run eslint:fix --if-present --workspaces",
+    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
     "fmrs": "npm run start --workspace=packages/fmrs",
     "lighthouse": "npm run lighthouse --workspace=packages/vite",
     "postlighthouse": "npm run postlighthouse --workspace=packages/vite",

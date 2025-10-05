@@ -91,9 +91,10 @@ export default defineConfig(
   }),
 
   {
+    files: ['**/*.ts', '**/*.tsx'],
     rules: {
       'max-lines': 'warn',
-      // 'max-lines-per-function': 'warn',
+      'max-lines-per-function': 'warn',
       'max-statements': 'warn',
     },
   },

@@ -44,6 +44,7 @@ export default defineConfig({
         natural: false,
       },
     ],
+    'max-lines-per-function': 'off',
   },
   settings: {},
 });

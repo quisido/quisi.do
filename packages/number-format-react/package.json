@@ -3,10 +3,6 @@
   "version": "2.0.1",
   "author": "quisi.do <number-format-react@quisi.do>",
   "description": "the Intl.NumberFormat class as a React component",
-  "exports": {
-    "types": "./dist/index.d.ts",
-    "default": "./dist/index.js"
-  },
   "homepage": "https://www.npmjs.com/package/number-format-react",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -28,6 +24,10 @@
   "bugs": {
     "email": "number-format-react@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
+  },
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
   },
   "repository": {
     "type": "git",

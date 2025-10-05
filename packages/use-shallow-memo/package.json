@@ -3,18 +3,10 @@
   "version": "1.1.0",
   "author": "quisi.do <use-shallow-memo@quisi.do>",
   "description": "a simple useMemo for objects",
-  "exports": {
-    "types": "./dist/index.d.ts",
-    "default": "./dist/index.js"
-  },
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/use-shallow-memo#readme",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -34,9 +26,17 @@
     "email": "use-shallow-memo@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
+  },
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "repository": {
     "type": "git",

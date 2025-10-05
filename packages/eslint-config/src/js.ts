@@ -52,11 +52,7 @@ export default defineConfig({
 
     'one-var': 'off',
     'sort-imports': 'off',
-    'sort-keys': [
-      'error',
-      'asc',
-      { allowLineSeparatedGroups: true, caseSensitive: false, natural: true },
-    ],
+    'sort-keys': 'off',
     'sort-keys-custom-order/export-object-keys': ['error', { sorting: 'asc' }],
     'sort-keys-custom-order/import-object-keys': ['error', { sorting: 'asc' }],
     'sort-keys-custom-order/object-keys': ['error', { sorting: 'asc' }],

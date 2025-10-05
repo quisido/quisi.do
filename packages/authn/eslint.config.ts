@@ -38,12 +38,12 @@ export default defineConfig(
   }),
 
   {
+    files: ['**/*.ts', '**/*.tsx'],
     rules: {
       camelcase: 'off',
-      'max-lines-per-function': 'off',
-      // Consider passing parameters as a single object instead.
-      'max-params': 'off',
-      'max-statements': 'off',
+      'max-lines-per-function': 'warn',
+      'max-params': 'warn',
+      'max-statements': 'warn',
       'no-undefined': 'off',
     },
   },

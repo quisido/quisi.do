@@ -3,18 +3,10 @@
   "version": "1.0.3",
   "author": "quisi.do <vitest-config@quisi.do>",
   "description": "vitest configurations for quisi.do",
-  "exports": {
-    "types": "./dist/index.d.ts",
-    "default": "./dist/index.js"
-  },
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/vitest-config#readme",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -34,9 +26,17 @@
     "email": "vitest-config@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
+  },
   "funding": {
-    "type": "",
+    "type": "individual",
     "url": "https://github.com/sponsors/quisido"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "repository": {
     "type": "git",

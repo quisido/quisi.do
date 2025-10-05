@@ -3,18 +3,10 @@
   "version": "1.0.1",
   "author": "quisi.do <csp-shared@quisi.do>",
   "description": "isomorphic Content Security Policy modules",
-  "exports": {
-    "types": "./dist/index.d.ts",
-    "default": "./dist/index.js"
-  },
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/csp-shared#readme",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -34,9 +26,17 @@
     "email": "csp-shared@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
+  },
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "repository": {
     "type": "git",

@@ -47,7 +47,7 @@ export default class TestD1PreparedStatement implements D1PreparedStatement {
         size_after: 1,
       },
       /**
-       *   We need to use `as T[]` here to match the `D1PareparedStatement`
+       *   We need to use `as T[]` here to match the `D1PreparedStatement`
        * behavior. Typechecking will be up to the runtime code.
        */
       results: this.#results as T[],

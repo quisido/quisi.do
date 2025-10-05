@@ -3,18 +3,10 @@
   "version": "3.0.0",
   "author": "quisi.do <fullstory-react@quisi.do>",
   "description": "Fullstory integration with React",
-  "exports": {
-    "types": "./dist/index.d.ts",
-    "default": "./dist/index.js"
-  },
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/fullstory-react#readme",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -34,9 +26,17 @@
     "email": "fullstory-react@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
+  },
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "repository": {
     "type": "git",

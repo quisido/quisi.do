@@ -2,7 +2,9 @@ const TRAILING_ROOT_KEYS: readonly string[] = [
   'scripts',
 
   'bugs',
+  'exports',
   'funding',
+  'publishConfig',
   'repository',
   'workspaces',
 

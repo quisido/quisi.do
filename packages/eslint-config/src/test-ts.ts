@@ -3,6 +3,7 @@ import TS from './ts.js';
 
 export default defineConfig({
   ...TS,
+
   files: ['**/*.test.ts', '**/*.test.tsx'],
   ignores: [],
   name: '@quisido/test-ts',

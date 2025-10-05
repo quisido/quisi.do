@@ -15,24 +15,6 @@ export default defineConfig(
 
     'max-classes-per-file': ['src/*.test.ts'],
 
-    'max-lines': ['src/fetch-handler.test.ts', 'src/handler.ts'],
-
-    'max-lines-per-function': [
-      'src/create-exported-handler-fetch.ts',
-      'src/fetch-handler.ts',
-      'src/handler.ts',
-    ],
-
-    'max-params': ['src/handler.ts'],
-
-    'max-statements': [
-      'src/create-exported-handler-fetch.ts',
-      'src/create-exported-handler-fetch.test.ts',
-      'src/fetch-handler.ts',
-      'src/fetch-handler.test.ts',
-      'src/handler.ts',
-    ],
-
     'no-await-in-loop': [
       'src/all-settled-mutable.ts',
       'src/create-exported-handler-fetch.ts',
@@ -49,4 +31,14 @@ export default defineConfig(
 
     'no-undefined': ['src/fetch-handler.ts'],
   }),
+
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    rules: {
+      'max-lines': 'warn',
+      'max-lines-per-function': 'warn',
+      'max-params': 'warn',
+      'max-statements': 'warn',
+    },
+  },
 );

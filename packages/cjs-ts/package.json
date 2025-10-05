@@ -3,17 +3,9 @@
   "version": "2.0.0",
   "author": "quisi.do <cjs-ts@quisi.do>",
   "description": "a Babel preconfiguration to bridge CommonJS and TypeScript files",
-  "exports": {
-    "types": "./index.d.ts",
-    "default": "./index.cjs"
-  },
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/cjs-ts#readme",
   "license": "MIT",
   "main": "./index.cjs",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
   "type": "commonjs",
   "types": "./index.d.ts",
   "scripts": {
@@ -29,9 +21,17 @@
     "email": "cjs-ts@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "exports": {
+    "types": "./index.d.ts",
+    "default": "./index.cjs"
+  },
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "repository": {
     "type": "git",

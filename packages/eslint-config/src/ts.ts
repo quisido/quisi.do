@@ -7,6 +7,8 @@ import JS from './js.js';
 import mapConfigsToRules from './map-configs-to-rules.js';
 import { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
 
+export { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
+
 export default defineConfig({
   ...JS,
   files: ['**/*.ts', '**/*.tsx'],

@@ -34,20 +34,8 @@ export default defineConfig(
     '@typescript-eslint/no-unnecessary-type-assertion': [
       'src/components/provider/provider.hook.test.ts',
     ],
+
     'func-style': ['src/**/*.tsx'],
-
-    'max-lines-per-function': [
-      'src/components/provider/hooks/use-load-translations.ts',
-      'src/components/provider/provider.hook.ts',
-      'src/runnables/runnable-translate-function.ts',
-    ],
-
-    'max-statements': [
-      'src/components/provider/hooks/use-load-translations.ts',
-      'src/components/provider/provider.hook.ts',
-      'src/runnables/runnable-translate-function.ts',
-      'src/utils/replace-variables.tsx',
-    ],
     'no-magic-numbers': ['src/components/loading-dot/loading-dot.view.tsx'],
     'no-useless-return': ['src/runnables/runnable-translate-function.ts'],
 
@@ -55,4 +43,12 @@ export default defineConfig(
       'src/components/provider/provider.hook.ts',
     ],
   }),
+
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    rules: {
+      'max-lines-per-function': 'warn',
+      'max-statements': 'warn',
+    },
+  },
 );
