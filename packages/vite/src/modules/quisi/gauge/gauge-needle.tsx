@@ -1,5 +1,5 @@
 import { arc } from 'd3-shape';
-import { useEffect, useState, type ReactElement } from 'react';
+import { type ReactElement, useEffect, useState } from 'react';
 import validateString from '../../../utils/validate-string.js';
 import { NEEDLE_RADIANS, NEEDLE_WIDTH, RADIUS } from './gauge-constants.js';
 import GaugeNeedleButton from './gauge-needle-button.jsx';

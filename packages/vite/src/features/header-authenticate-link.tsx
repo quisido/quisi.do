@@ -1,15 +1,15 @@
-import I18n, { useTranslate, type TranslateFunction } from 'lazy-i18n';
-import { useMemo, type ReactElement } from 'react';
+import I18n, { type TranslateFunction, useTranslate } from 'lazy-i18n';
+import { type ReactElement, useMemo } from 'react';
 import {
   PATREON_OAUTH_CLIENT_ID,
   PATREON_OAUTH_REDIRECT_URI,
 } from '../constants/patreon-oauth.js';
 import { useSessionId } from '../contexts/session-id.js';
+import usePathname from '../hooks/use-pathname.js';
 import useSearch from '../hooks/use-search.js';
 import Link from '../modules/quisi/link.jsx';
 import validateString from '../utils/validate-string.js';
 import styles from './header-authenticate-link.module.scss';
-import usePathname from '../hooks/use-pathname.js';
 
 interface State {
   readonly href: string;
@@ -38,8 +38,6 @@ function useAuthenticateLink(): State {
 
   // States
   return {
-    title: translate('Authenticate') ?? 'Authenticate',
-
     href: useMemo((): string => {
       const authSearch: string = new URLSearchParams({
         client_id: PATREON_OAUTH_CLIENT_ID,
@@ -54,6 +52,7 @@ function useAuthenticateLink(): State {
 
       return `https://www.patreon.com/oauth2/authorize?${authSearch}`;
     }, [pathname, search, sessionId]),
+    title: translate('Authenticate') ?? 'Authenticate',
   };
 }
 

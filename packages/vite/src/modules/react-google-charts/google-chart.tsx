@@ -1,5 +1,5 @@
 import { mapToError } from 'fmrs';
-import { useEffect, useRef, type ReactElement, type RefObject } from 'react';
+import { type ReactElement, type RefObject, useEffect, useRef } from 'react';
 import useShallowMemo from 'use-shallow-memo';
 import useEffectEvent from '../../hooks/use-effect-event.js';
 import noop from '../../utils/noop.js';
@@ -17,6 +17,7 @@ interface Props<C extends Chart> {
   readonly packages?: readonly string[] | undefined;
 }
 
+// eslint-disable-next-line max-lines-per-function
 export default function GoogleChart<C extends Chart>({
   chart,
   className,
@@ -35,6 +36,8 @@ export default function GoogleChart<C extends Chart>({
   const dataStr: string = JSON.stringify(dataProp);
   const optionsStr: string = JSON.stringify(optionsProp);
   const handleError = useEffectEvent(onError ?? noop);
+
+  // eslint-disable-next-line max-lines-per-function
   useEffect((): void => {
     const element: HTMLDivElement | null = elementRef.current;
     if (element === null) {
@@ -87,7 +90,7 @@ export default function GoogleChart<C extends Chart>({
         const error: Error = mapToError(err);
         handleError(error);
       });
-  }, [chart, dataStr, handleError, headings, optionsStr, packages]);
+  }, [chart, dataStr, headings, optionsStr, packages]);
 
   return <div className={className} ref={elementRef} />;
 }

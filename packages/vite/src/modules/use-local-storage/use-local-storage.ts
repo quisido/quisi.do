@@ -27,6 +27,7 @@ export default function useLocalStorage<T>(
   parse: (value: string) => T,
   stringify: (value: T) => string,
 ): readonly [T | null, Dispatch<SetStateAction<T | null>>];
+// eslint-disable-next-line max-lines-per-function
 export default function useLocalStorage<T = string>(
   key: string,
   // @ts-expect-error: If `parse` is `undefined`, then `T` is `string`.

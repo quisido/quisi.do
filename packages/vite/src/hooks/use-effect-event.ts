@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useRef, type RefObject } from 'react';
+import { type RefObject, useCallback, useLayoutEffect, useRef } from 'react';
 
 export default function useEffectEvent<A extends readonly unknown[], T>(
   fn: (...args: A) => T,

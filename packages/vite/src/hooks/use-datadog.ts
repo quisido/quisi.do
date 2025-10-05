@@ -1,8 +1,8 @@
 import useReactDatadog, { type Props, type User } from 'react-datadog';
 import { GITHUB_SHA } from '../constants/github-sha.js';
 import {
-  useAuthentication,
   type AuthenticationState,
+  useAuthentication,
 } from '../contexts/authentication.js';
 import type Authentication from '../types/authentication.js';
 import validateString from '../utils/validate-string.js';
@@ -26,25 +26,44 @@ const PROPS: Required<
     | 'remoteConfigurationId'
     | 'remoteConfigurationProxy'
     | 'replica'
-    | 'source' | 'sdkVersion'
+    | 'source'
+    | 'sdkVersion'
     | 'subdomain'
     | 'trackingConsent'
     | 'useCrossSiteSessionCookie'
-    | 'user' | 'variant'
+    | 'user'
+    | 'variant'
     | 'workerUrl'
   >
 > = {
-  trackEarlyRequests: true, allowedGraphQlUrls: [],
+  allowedGraphQlUrls: [],
   allowFallbackToLocalStorage: true,
   allowUntrustedEvents: true,
   applicationId: APPLICATION_ID,
   clientToken: CLIENT_TOKEN,
   compressIntakeRequests: true,
   defaultPrivacyLevel: 'mask-user-input',
+  enabled: true,
   enableExperimentalFeatures: EXPERIMENTAL_FEATURES,
   enablePrivacyForActionName: true,
-  enabled: true,
   env: import.meta.env.NODE_ENV,
+  excludedActivityUrls: [
+    // Content Security Policy connect-src
+    /^https:\/\/(?:[a-z\d]+\.clarity\.ms|analytics\.google\.com|cloudflareinsights\.com|edge\.fullstory\.com|[a-z\d]+\.ingest\.sentry\.io|r\.logr-ingest\.com|r\.lrkt-in\.com|region\d+\.analytics\.google\.com|rs\.fullstory\.com|stats\.g\.doubleclick\.net|www\.google-analytics\.com)\//u,
+
+    // Content Security Policy frame-src
+    /^https:\/\/(?:td\.td\.doubleclick\.net)\//u,
+
+    // Content Security Policy img-src
+    /^https:\/\/(?:api-js\.mixpanel\.com|c\.bing\.com|c\.clarity\.ms|www\.google\.[a-z]+|www\.google\.co\.[a-z]+|www\.google\.com\.[a-z]+|www\.googletagmanager\.com)\//u,
+
+    // Content Security Policy script-src-elem
+    /^https:\/\/(?:ajax\.cloudflare\.com|cdn\.logr-ingest\.com|cdn\.lrkt-in\.com|edge\.fullstory\.com|static\.cloudflareinsights\.com|www\.clarity\.ms)\//u,
+    'https://quisi.do/cdn-cgi/speculation',
+
+    // Content Security Policy style-src-elem
+    'https://fonts.googleapis.com/css2',
+  ],
   plugins: [],
   profilingSampleRate: 100,
   propagateTraceBaggage: false,
@@ -64,35 +83,17 @@ const PROPS: Required<
   traceSampleRate: 100,
   trackAnonymousUser: true,
   trackBfcacheViews: true,
+  trackEarlyRequests: true,
   trackFeatureFlagsForEvents: ['action', 'long_task', 'resource', 'vital'],
   trackLongTasks: true,
   trackResources: true,
   trackSessionAcrossSubdomains: true,
   trackUserInteractions: true,
   trackViewsManually: false,
+  // trackingConsent: 'not-granted',
   usePartitionedCrossSiteSessionCookie: true,
   useSecureSessionCookie: true,
   version: GITHUB_SHA ?? 'unknown',
-
-  excludedActivityUrls: [
-    // Content Security Policy connect-src
-    /^https:\/\/(?:[a-z\d]+\.clarity\.ms|analytics\.google\.com|cloudflareinsights\.com|edge\.fullstory\.com|[a-z\d]+\.ingest\.sentry\.io|r\.logr-ingest\.com|r\.lrkt-in\.com|region\d+\.analytics\.google\.com|rs\.fullstory\.com|stats\.g\.doubleclick\.net|www\.google-analytics\.com)\//u,
-
-    // Content Security Policy frame-src
-    /^https:\/\/(?:td\.td\.doubleclick\.net)\//u,
-
-    // Content Security Policy img-src
-    /^https:\/\/(?:api-js\.mixpanel\.com|c\.bing\.com|c\.clarity\.ms|www\.google\.[a-z]+|www\.google\.co\.[a-z]+|www\.google\.com\.[a-z]+|www\.googletagmanager\.com)\//u,
-
-    // Content Security Policy script-src-elem
-    /^https:\/\/(?:ajax\.cloudflare\.com|cdn\.logr-ingest\.com|cdn\.lrkt-in\.com|edge\.fullstory\.com|static\.cloudflareinsights\.com|www\.clarity\.ms)\//u,
-    'https://quisi.do/cdn-cgi/speculation',
-
-    // Content Security Policy style-src-elem
-    'https://fonts.googleapis.com/css2',
-  ],
-
-  // Technical debt: trackingConsent: 'not-granted',
 };
 
 const mapAuthenticationToUser = (

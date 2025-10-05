@@ -1,10 +1,10 @@
 import {
   createContext,
+  type PropsWithChildren,
+  type ReactElement,
   useEffect,
   useId,
   useState,
-  type PropsWithChildren,
-  type ReactElement,
 } from 'react';
 import useEffectEvent from '../../hooks/use-effect-event.js';
 import noop from '../../utils/noop.js';
@@ -118,6 +118,7 @@ const DEFAULT_STATE: State = {
   token: null,
 };
 
+// eslint-disable-next-line max-lines-per-function
 export default function Turnstile({
   appearance,
   children,
@@ -142,10 +143,13 @@ export default function Turnstile({
   const handleSuccess = useEffectEvent(onSuccess ?? noop);
   const handleTimeout = useEffectEvent(onTimeout ?? noop);
   const handleUnsupported = useEffectEvent(onUnsupported ?? noop);
+
+  // eslint-disable-next-line max-lines-per-function
   useEffect((): void => {
     const scripts: HTMLCollectionOf<HTMLScriptElement> =
       window.document.getElementsByTagName('script');
 
+    // eslint-disable-next-line max-lines-per-function
     const readyRender = (attempt: number = NONE): void => {
       if (!hasTurnstile(window)) {
         if (attempt < MAX_ATTEMPTS) {
@@ -164,12 +168,6 @@ export default function Turnstile({
 
       window.turnstile.render(`#${id}`, {
         appearance,
-        execution,
-        language,
-        retry,
-        sitekey,
-        theme,
-
         callback(newToken: string): void {
           setState({
             error: null,
@@ -179,7 +177,6 @@ export default function Turnstile({
             timeout: false,
             token: newToken,
           });
-
           handleSuccess(newToken);
         },
 
@@ -195,6 +192,7 @@ export default function Turnstile({
 
           handleError(code);
         },
+        execution,
 
         'expired-callback'(oldToken: string): void {
           setState({
@@ -208,6 +206,10 @@ export default function Turnstile({
 
           handleExpired(oldToken);
         },
+        language,
+        retry,
+        sitekey,
+        theme,
 
         'timeout-callback'(...args: readonly unknown[]): void {
           setState({
@@ -247,20 +249,7 @@ export default function Turnstile({
     script.setAttribute('src', SRC);
     window.document.body.appendChild(script);
     readyRender();
-  }, [
-    appearance,
-    containerId,
-    execution,
-    handleError,
-    handleExpired,
-    handleSuccess,
-    handleTimeout,
-    handleUnsupported,
-    language,
-    retry,
-    sitekey,
-    theme,
-  ]);
+  }, [appearance, containerId, execution, language, retry, sitekey, theme]);
 
   return <Context.Provider value={state}>{children}</Context.Provider>;
 }

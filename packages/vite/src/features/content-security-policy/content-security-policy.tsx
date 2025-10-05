@@ -1,5 +1,5 @@
 import { GetErrorCode } from '@quisido/csp-shared';
-import { useEffect, useState, type Attributes, type ReactElement } from 'react';
+import { type Attributes, type ReactElement, useEffect, useState } from 'react';
 import Emoji from '../../components/emoji.jsx';
 import useEffectEvent from '../../hooks/use-effect-event.js';
 import useEmit from '../../hooks/use-emit/index.js';
@@ -36,6 +36,7 @@ const mapContentSecurityPolicyListItemPropsToElement = mapPropsToElement(
   ContentSecurityPolicyListItem,
 );
 
+// eslint-disable-next-line max-lines-per-function
 export default function ContentSecurityPolicy(): ReactElement {
   // Contexts
   const emit = useEmit();
@@ -60,7 +61,7 @@ export default function ContentSecurityPolicy(): ReactElement {
       // Technical debt: Validate this on the client.
       return (await response.json()) as CspResponse;
     });
-  }, [requestEvent]);
+  }, []);
 
   if (!initiated || loading) {
     return (
@@ -134,12 +135,9 @@ export default function ContentSecurityPolicy(): ReactElement {
       effectiveDirective,
       expanded: key === expandedKey,
       firstDisposition: disposition !== previousDisposition,
-      key,
-      originPathname,
-
       firstEffectiveDirective:
         effectiveDirective !== previousEffectiveDirective,
-
+      key,
       onToggle(): void {
         setExpandedKey((oldExpandedKey: string | null): string | null => {
           if (oldExpandedKey === key) {
@@ -148,6 +146,7 @@ export default function ContentSecurityPolicy(): ReactElement {
           return key;
         });
       },
+      originPathname,
     };
   };
 

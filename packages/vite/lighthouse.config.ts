@@ -14,8 +14,6 @@ export default {
      * saveAssets: true,
      * verbose: false,
      */
-    locale: 'en-US',
-
     blockedUrlPatterns: [
       'https://ajax.cloudflare.com/*',
       'https://analytics.google.com/*',
@@ -84,5 +82,6 @@ export default {
       'https://localhost:6586/*',
       'https://localhost:9778/*',
     ],
+    locale: 'en-US',
   },
 } satisfies Config;

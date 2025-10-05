@@ -1,8 +1,8 @@
 import {
-  useLayoutEffect,
-  useMemo,
   type PropsWithChildren,
   type ReactElement,
+  useLayoutEffect,
+  useMemo,
 } from 'react';
 import useTheme from '../../hooks/use-theme.js';
 import map from '../../utils/map.js';

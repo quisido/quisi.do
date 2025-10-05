@@ -1,3 +1,4 @@
+// eslint-disable-next-line max-lines-per-function
 export default function mapOscpuToName(
   oscpu: string | undefined,
 ): string | undefined {

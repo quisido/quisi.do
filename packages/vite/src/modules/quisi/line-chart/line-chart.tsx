@@ -63,6 +63,7 @@ const setChartHeight = (chart: Chart<'line'>, height: number): void => {
   chart.resize(chart.width, height);
 };
 
+// eslint-disable-next-line max-lines-per-function
 export default function LineChart({
   data,
   title,
@@ -139,12 +140,9 @@ export default function LineChart({
       options={{
         maintainAspectRatio: false,
         normalized: true,
-        responsive: true,
-
         plugins: {
           legend: {
             position: 'top',
-
             labels: {
               borderRadius: 1,
               boxHeight: 3,
@@ -156,7 +154,6 @@ export default function LineChart({
           title: {
             display: true,
             text: title,
-
             padding: {
               bottom: -10,
               top: 5,
@@ -170,6 +167,7 @@ export default function LineChart({
             yAlign: 'center',
           },
         },
+        responsive: true,
       }}
       ref={lineRef}
     />

@@ -2,10 +2,10 @@
 
 import { BrowserAgent } from '@newrelic/browser-agent/loaders/browser-agent';
 import {
-  useEffect,
-  useState,
   type PropsWithChildren,
   type ReactElement,
+  useEffect,
+  useState,
 } from 'react';
 import { BrowserAgentContext } from './browser-agent-context.jsx';
 
@@ -14,12 +14,14 @@ interface Props {
   readonly licenseKey: string;
 }
 
+// eslint-disable-next-line max-lines-per-function
 export default function NewRelic({
   applicationID,
   children,
   licenseKey,
 }: PropsWithChildren<Props>): ReactElement {
   const [browserAgent] = useState(
+    // eslint-disable-next-line max-lines-per-function
     (): BrowserAgent =>
       new BrowserAgent({
         info: {

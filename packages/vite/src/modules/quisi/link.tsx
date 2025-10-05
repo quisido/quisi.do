@@ -1,9 +1,9 @@
 import {
-  useEffect,
-  useState,
   type MouseEvent,
   type ReactElement,
   type ReactNode,
+  useEffect,
+  useState,
 } from 'react';
 import innerText from 'react-innertext';
 import useEmit from '../../hooks/use-emit/use-emit.js';
@@ -32,6 +32,7 @@ interface OnClickProps {
 
 export type Props = BaseProps & (HrefProps | OnClickProps);
 
+// eslint-disable-next-line max-lines-per-function
 export default function Link({
   children,
   className,

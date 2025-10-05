@@ -1,7 +1,7 @@
 import {
+  memo,
   type PropsWithChildren,
   type ReactElement,
-  memo,
   useLayoutEffect,
   useState,
 } from 'react';

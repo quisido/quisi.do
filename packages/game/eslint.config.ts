@@ -1,11 +1,15 @@
 import configs from '@quisido/eslint-config';
-import type { Linter } from 'eslint';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
+import type { ESLint, Linter } from 'eslint';
 
 export default [
   ...configs,
 
   {
     name: '@quisido/game',
+    plugins: {
+      '@typescript-eslint': tsPlugin as unknown as ESLint.Plugin,
+    },
     rules: {
       '@typescript-eslint/no-non-null-assertion': 'warn',
       '@typescript-eslint/no-unsafe-assignment': 'warn',

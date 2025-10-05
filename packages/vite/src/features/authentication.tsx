@@ -1,6 +1,6 @@
 import { WhoAmIResponseCode } from '@quisido/authn-shared';
 import { isObject } from 'fmrs';
-import { useEffect, type PropsWithChildren, type ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
 import { WHOAMI } from '../constants/whoami.js';
 import { AuthenticationProvider } from '../contexts/authentication.js';
 import useEffectEvent from '../hooks/use-effect-event.js';
@@ -55,7 +55,7 @@ export default function AuthenticationFeature({
         id,
       };
     });
-  }, [requestEvent]);
+  }, []);
 
   return (
     <AuthenticationProvider value={state}>{children}</AuthenticationProvider>

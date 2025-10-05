@@ -1,8 +1,8 @@
 import {
-  useRef,
   type PropsWithChildren,
   type ReactElement,
   type RefObject,
+  useRef,
 } from 'react';
 import { useNotifications } from '../../contexts/notifications.js';
 import Turnstile from '../../modules/react-turnstile-invis/index.js';
@@ -17,6 +17,7 @@ import noop from '../../utils/noop.js';
 
 const CHALLENGE_TIMEOUT = 110600;
 
+// eslint-disable-next-line max-lines-per-function
 export default function AppTurnstile({
   children,
 }: PropsWithChildren): ReactElement {
@@ -37,25 +38,20 @@ export default function AppTurnstile({
         switch (code) {
           case CHALLENGE_TIMEOUT:
             notify({
-              type: 'warning',
-
               Header(): ReactElement {
                 return <>🐱‍👤 Are you still human?</>;
               },
-
               Message(): string {
                 return 'You probably left this tab open while doing something else.';
               },
+              type: 'warning',
             });
             break;
           default:
             notify({
-              type: 'error',
-
               Header(): ReactElement {
                 return <>🤖 You may be a robot.</>;
               },
-
               Message(): ReactElement {
                 return (
                   <>
@@ -64,44 +60,38 @@ export default function AppTurnstile({
                   </>
                 );
               },
+              type: 'error',
             });
             break;
         }
       }}
       onExpired={(): void => {
         notify({
-          type: 'warning',
-
           Header(): ReactElement {
             return <>🐱‍👤 Are you still human?</>;
           },
-
           Message(): string {
             return 'Your Turnstile session has expired.';
           },
+          type: 'warning',
         });
       }}
       onSuccess={(): void => {
         notify({
-          type: 'info',
-
           Header(): ReactElement {
             return <>🧑 You are human!</>;
           },
-
           Message(): string {
             return 'Turnstile has validated your session.';
           },
+          type: 'info',
         });
       }}
       onTimeout={(...args: readonly unknown[]): void => {
         notify({
-          type: 'error',
-
           Header(): ReactElement {
             return <>You may be 🤖.</>;
           },
-
           Message(): ReactElement {
             return (
               <>
@@ -118,16 +108,14 @@ export default function AppTurnstile({
               </>
             );
           },
+          type: 'error',
         });
       }}
       onUnsupported={(...args: readonly unknown[]): void => {
         notify({
-          type: 'error',
-
           Header(): ReactElement {
             return <>You may be 🤖.</>;
           },
-
           Message(): ReactElement {
             return (
               <>
@@ -144,6 +132,7 @@ export default function AppTurnstile({
               </>
             );
           },
+          type: 'error',
         });
       }}
       sitekey="0x4AAAAAAAK2L9AbDrFo9T77"

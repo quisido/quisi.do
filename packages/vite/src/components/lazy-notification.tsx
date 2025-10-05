@@ -1,5 +1,5 @@
 import I18n from 'lazy-i18n';
-import { useEffect, useState, type ReactElement, type RefObject } from 'react';
+import { type ReactElement, type RefObject, useEffect, useState } from 'react';
 import useMountedRef from '../hooks/use-mounted-ref.js';
 import type NotificationType from '../types/notification.js';
 import mapErrorToNotification from '../utils/map-error-to-notification.js';
@@ -11,11 +11,11 @@ interface LazyNotificationProps {
 
 const LOADING_NOTIFICATION: NotificationType = {
   icon: '⏳',
-  type: 'info',
 
   Message(): ReactElement {
     return <I18n>Loading</I18n>;
   },
+  type: 'info',
 };
 
 export default function LazyNotification({

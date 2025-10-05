@@ -1,10 +1,10 @@
 import type { User } from '@sentry/core';
-import { memo, useMemo, type ReactElement, type ReactNode } from 'react';
+import { memo, type ReactElement, type ReactNode, useMemo } from 'react';
 import Sentry from '../components/sentry.jsx';
 import { GITHUB_SHA } from '../constants/github-sha.js';
 import {
-  useAuthentication,
   type AuthenticationState,
+  useAuthentication,
 } from '../contexts/authentication.js';
 import validateString from '../utils/validate-string.js';
 
