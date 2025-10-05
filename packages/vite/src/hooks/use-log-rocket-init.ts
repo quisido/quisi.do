@@ -1,12 +1,12 @@
 import { identity } from 'fmrs';
 import { useEffect } from 'react';
 import useLogRocket from '../hooks/use-log-rocket.js';
+import type { Compulsory } from '../types/compulsory.js';
 import {
   type LogRocketOptions,
   type LogRocketRequest,
   type LogRocketResponse,
 } from '../types/log-rocket.js';
-import type { Compulsory } from '../types/compulsory.js';
 
 export interface User extends Record<string, number | string> {
   readonly id: string;
@@ -16,18 +16,16 @@ export interface Props {
   readonly appId: string;
   readonly release?: string | undefined;
   readonly rootHostname?: string | undefined;
-  readonly user?: User | undefined;
-
   readonly sanitizeRequest?:
     | ((request: LogRocketRequest) => LogRocketRequest | null)
     | undefined;
-
   readonly sanitizeResponse?:
     | ((
         request: LogRocketRequest | undefined,
         response: LogRocketResponse,
       ) => LogRocketResponse | null)
     | undefined;
+  readonly user?: User | undefined;
 }
 
 const BROWSER: Required<Compulsory<LogRocketOptions['browser']>> = {
@@ -95,6 +93,7 @@ const defaultResponseSanitizer = (
   response: LogRocketResponse,
 ): LogRocketResponse => response;
 
+// eslint-disable-next-line max-lines-per-function
 export default function useLogRocketInit({
   appId,
   release = 'dev',
@@ -116,21 +115,16 @@ export default function useLogRocketInit({
     LogRocket.init(appId, {
       ...OPTIONS,
       ...partialOptions,
-      release,
-
       dom: {
         ...OPTIONS.dom,
         baseHref: `${window.location.origin}/`,
       },
-
       network: {
         isEnabled: true,
-
         requestSanitizer(request: LogRocketRequest): LogRocketRequest | null {
           NETWORK_REQUESTS.set(request.reqId, request);
           return sanitizeRequest(request);
         },
-
         responseSanitizer(
           response: LogRocketResponse,
         ): LogRocketResponse | null {
@@ -140,6 +134,7 @@ export default function useLogRocketInit({
           return sanitizeResponse(request, response);
         },
       },
+      release,
     });
   }, [
     appId,

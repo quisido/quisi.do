@@ -15,15 +15,6 @@ const NODE_ENV: string = validateString(import.meta.env.NODE_ENV);
 const START_TIMESTAMP: number = Date.now();
 
 export default {
-  dist: NODE_ENV,
-  environment: NODE_ENV,
-  level: 'log',
-  logger: 'useEvent',
-  platform: 'javascript',
-  release: `quisi.do@${VERSION}`,
-  start_timestamp: START_TIMESTAMP,
-  type: 'transaction',
-
   contexts: {
     app: {
       app_build: VERSION,
@@ -33,7 +24,6 @@ export default {
       app_version: VERSION,
       build_type: NODE_ENV,
     },
-
     culture: {
       /*
        * Calendar?: string;
@@ -43,7 +33,6 @@ export default {
        * timezone?: string;
        */
     },
-
     device: {
       /*
        * Arch?: string;
@@ -85,7 +74,6 @@ export default {
        * usable_memory?: number;
        */
     },
-
     os: {
       /*
        * Build?: string;
@@ -95,7 +83,10 @@ export default {
        */
     },
   },
-
+  dist: NODE_ENV,
+  environment: NODE_ENV,
+  level: 'log',
+  logger: 'useEvent',
   modules: {
     '@sentry/browser': sentryBrowserPackage.version,
     '@sentry/core': sentryCorePackage.version,
@@ -106,8 +97,11 @@ export default {
     'react-dom': reactDomPackage.version,
     // 'sentry-react': sentryReactPackage2.version,
   },
-
+  platform: 'javascript',
+  release: `quisi.do@${VERSION}`,
+  start_timestamp: START_TIMESTAMP,
   transaction_info: {
     source: 'route',
   },
+  type: 'transaction',
 } satisfies Event;

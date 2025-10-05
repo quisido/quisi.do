@@ -7,7 +7,6 @@ interface ImportMetaEnv {
   readonly CLOUD_PROVIDER?: string | undefined;
   readonly CLOUDFLARE_ANALYTICS_ORIGIN?: string | undefined;
   readonly CLOUDFLARE_INSIGHTS_TOKEN?: string | undefined;
-  readonly CPUS?: string | undefined;
   readonly CSP_ORIGIN?: string | undefined;
   readonly CYPRESS_SCREENSHOTS_SUBFOLDER?: string | undefined;
   readonly DASHBOARD_ENDPOINT?: string | undefined;

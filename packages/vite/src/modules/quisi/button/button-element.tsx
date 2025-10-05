@@ -1,9 +1,9 @@
 import { useButton } from '@react-aria/button';
 import {
-  useRef,
   type CSSProperties,
   type PropsWithChildren,
   type ReactElement,
+  useRef,
 } from 'react';
 
 interface Props {

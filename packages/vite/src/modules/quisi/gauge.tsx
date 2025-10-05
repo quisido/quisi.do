@@ -9,8 +9,8 @@ import mapNumberToPowerOf2 from './map-number-to-power-of-2.js';
 export interface Threshold {
   readonly activeClassName?: string | undefined;
   readonly className?: string | undefined;
-  readonly inactiveClassName?: string | undefined;
   readonly from?: number | undefined;
+  readonly inactiveClassName?: string | undefined;
   readonly to?: number | undefined;
 }
 
@@ -32,6 +32,7 @@ const NIL = 0;
 const hasTo = (threshold: Threshold | number): boolean =>
   typeof threshold === 'number' || typeof threshold.to === 'number';
 
+// eslint-disable-next-line max-lines-per-function
 export default function Gauge({
   className,
   max: maxProp,
@@ -71,6 +72,7 @@ export default function Gauge({
   };
   const max: number = getMax();
 
+  // eslint-disable-next-line max-lines-per-function
   const mapThresholdToPath = (
     threshold: number | Threshold,
     index: number,

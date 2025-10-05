@@ -1,10 +1,10 @@
 import {
+  type RefObject,
   useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
   useState,
-  type RefObject,
 } from 'react';
 
 interface State<T extends HTMLElement> {

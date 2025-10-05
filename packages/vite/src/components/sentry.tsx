@@ -7,7 +7,6 @@ interface Props {
   readonly children: ReactNode;
   readonly dsn: string;
   readonly environment: string;
-  readonly org: string;
   readonly release: string;
   readonly tracePropagationTargets: string[];
   readonly user?: User | undefined;
@@ -21,12 +20,11 @@ function Sentry({
   children,
   dsn,
   environment,
-  org,
   release,
   tracePropagationTargets,
   user,
 }: Props): ReactElement {
-  const integrations = useSentryIntegrations(org);
+  const integrations = useSentryIntegrations();
 
   return (
     <SentryReact

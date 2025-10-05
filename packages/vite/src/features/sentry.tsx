@@ -57,7 +57,6 @@ function SentryFeature({ children }: Props): ReactElement {
     <Sentry
       dsn="https://a36b53fdd093405eb597a945f49a70f2@o592283.ingest.sentry.io/5740642"
       environment={ENVIRONMENT}
-      org="quisido"
       release={RELEASE}
       tracePropagationTargets={TRACE_PROPAGATION_TARGETS}
       user={user}

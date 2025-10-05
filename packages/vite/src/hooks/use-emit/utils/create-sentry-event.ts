@@ -20,14 +20,6 @@ export default function createSentryEvent({
 
   return {
     ...SENTRY_EVENT,
-    event_id: mapNumberToSentryEventId(now),
-    extra: dimensions,
-    fingerprint: [name, ...mapDimensionsToFingerprints(dimensions)],
-    message: name,
-    server_name: hostname,
-    timestamp: now,
-    transaction: pathname,
-
     contexts: {
       ...SENTRY_EVENT.contexts,
       device: {
@@ -35,5 +27,12 @@ export default function createSentryEvent({
         name: window.navigator.userAgent,
       },
     },
+    event_id: mapNumberToSentryEventId(now),
+    extra: dimensions,
+    fingerprint: [name, ...mapDimensionsToFingerprints(dimensions)],
+    message: name,
+    server_name: hostname,
+    timestamp: now,
+    transaction: pathname,
   };
 }

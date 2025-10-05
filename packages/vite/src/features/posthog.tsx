@@ -2,14 +2,14 @@ import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';
 import {
   memo,
-  useEffect,
-  useLayoutEffect,
   type PropsWithChildren,
   type ReactElement,
+  useEffect,
+  useLayoutEffect,
 } from 'react';
 import {
-  useAuthentication,
   type AuthenticationState,
+  useAuthentication,
 } from '../contexts/authentication.js';
 import validateString from '../utils/validate-string.js';
 

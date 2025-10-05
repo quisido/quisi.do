@@ -1,20 +1,20 @@
 import {
   CategoryScale,
   Chart,
+  type ChartDataset,
   Legend,
   LinearScale,
   LineElement,
   PointElement,
   Title,
   Tooltip,
-  type ChartDataset,
 } from 'chart.js';
 import {
+  type ReactElement,
+  type RefObject,
   useLayoutEffect,
   useMemo,
   useRef,
-  type ReactElement,
-  type RefObject,
 } from 'react';
 import { Line } from 'react-chartjs-2';
 import useWindow from '../../../hooks/use-window.js';
@@ -142,7 +142,6 @@ export default function LineChart({
         normalized: true,
         plugins: {
           legend: {
-            position: 'top',
             labels: {
               borderRadius: 1,
               boxHeight: 3,
@@ -150,14 +149,15 @@ export default function LineChart({
               padding: 20,
               useBorderRadius: true,
             },
+            position: 'top',
           },
           title: {
             display: true,
-            text: title,
             padding: {
               bottom: -10,
               top: 5,
             },
+            text: title,
           },
           tooltip: {
             displayColors: true,
