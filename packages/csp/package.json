@@ -35,6 +35,10 @@
     "vitest:watch": "vitest watch",
     "whoami": "wrangler whoami"
   },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quisido"
+  },
   "dependencies": {
     "@quisido/csp-shared": "^1.0.1",
     "@quisido/worker": "^1.0.8",

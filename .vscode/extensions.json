@@ -5,6 +5,7 @@
     "editorconfig.editorconfig",
     "github.vscode-codeql",
     "github.vscode-github-actions",
-    "redhat.vscode-yaml"
+    "redhat.vscode-yaml",
+    "vitest.explorer"
   ]
 }

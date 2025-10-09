@@ -29,6 +29,10 @@
     "types": "./dist/index.d.ts",
     "default": "./dist/index.js"
   },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quisido"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"

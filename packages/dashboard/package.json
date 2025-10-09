@@ -23,6 +23,10 @@
     "vitest:watch": "vitest watch",
     "whoami": "wrangler whoami"
   },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quisido"
+  },
   "dependencies": {
     "@datadog/datadog-api-client": "^1.45.0",
     "@quisido/worker": "^1.0.8",

@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import type PackageJson from './types/package-json.js';
+import type PackageJson from '../types/package-json.js';
 import getWorkspaceDirectories from './utils/get-workspace-directories.js';
 import npmExecWorkspace from './utils/npm-exec-workspace.js';
 

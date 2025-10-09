@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import type PackageJson from '../types/package-json.js';
+import type PackageJson from '../../types/package-json.js';
 
 export default function isPublicWorkspaceDirectory(
   workspaceDirectory: string,

@@ -7,7 +7,7 @@ applyTo: "**"
 - Use PascalCase for classes, components, enums, interfaces, and type aliases.
 - Use camelCase for variables, functions, and methods.
 - Do not prefix interfaces with `I` (e.g., use `User` instead of `IUser`).
-- Prefer private member variables with `#` over `private`.
+- Prefer private member variables with # over `private`.
 - Use ALL_CAPS for constants
 - Use meaningful and descriptive names.
 - Avoid abbreviations unless they are widely recognized.

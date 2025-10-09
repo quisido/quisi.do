@@ -22,6 +22,7 @@
     "eslint-config": "npm run start --workspace=packages/eslint-config",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
     "fmrs": "npm run start --workspace=packages/fmrs",
+    "game": "npm run start --workspace=packages/game",
     "lighthouse": "npm run lighthouse --workspace=packages/vite",
     "postlighthouse": "npm run postlighthouse --workspace=packages/vite",
     "publint": "publint",
@@ -29,6 +30,7 @@
     "react-datadog": "npm run start --workspace=packages/react-datadog",
     "update": "tsc --outDir dist --skipLibCheck --target ESNext ./scripts/update.ts && node ./dist/update.js",
     "vite": "npm run start --workspace=packages/vite",
+    "vitest": "vitest run",
     "worker": "npm run start --workspace=packages/worker"
   },
   "bugs": {
@@ -62,6 +64,7 @@
     "@hint/hint-performance-budget": "^2.4.27",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "^1.1.8",
+    "@quisido/vitest-config": "^1.0.3",
     "@types/eslint": "^9.6.1",
     "@types/node": "^22.15.21",
     "browserslist": "^4.24.5",
@@ -73,6 +76,7 @@
     "prettier": "^3.5.3",
     "publint": "^0.3.12",
     "rimraf": "^6.0.1",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   }
 }

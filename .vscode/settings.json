@@ -103,4 +103,5 @@
   },
   "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
   "typescript.preferences.importModuleSpecifierEnding": "js",
+  "vitest.maximumConfigs": 99
 }

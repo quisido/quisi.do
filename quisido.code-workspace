@@ -1,4 +1,9 @@
 {
+  "extensions": {
+    "recommendations": [
+      "vitest.explorer"
+    ]
+  },
   "folders": [
     {
       "name": "$root",
@@ -103,5 +108,6 @@
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
     "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
     "typescript.enablePromptUseWorkspaceTsdk": true,
-  },
+    "vitest.maximumConfigs": 99
+  }
 }

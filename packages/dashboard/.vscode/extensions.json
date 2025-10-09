@@ -1,3 +1,7 @@
 {
-  "recommendations": ["alexcvzz.vscode-sqlite", "tamasfe.even-better-toml"]
+  "recommendations": [
+    "alexcvzz.vscode-sqlite",
+    "tamasfe.even-better-toml",
+    "vitest.explorer"
+  ]
 }

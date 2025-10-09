@@ -39,6 +39,10 @@
     "vitest:run": "vitest run",
     "whoami": "wrangler whoami"
   },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quisido"
+  },
   "dependencies": {
     "@quisido/authn-shared": "^1.1.5",
     "@quisido/worker": "^1.0.8",
