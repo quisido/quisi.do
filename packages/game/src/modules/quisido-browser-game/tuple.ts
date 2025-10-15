@@ -10,7 +10,7 @@ export default class Tuple<T> {
   }
 
   public get 1(): T {
-    return this.#elements[0];
+    return this.#elements[1];
   }
 
   public [Symbol.iterator](): IterableIterator<T> {
