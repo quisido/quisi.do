@@ -15,6 +15,7 @@ applyTo: "**/*.tsx"
 - Prefer className composition over inline styles; allow inline only for
   dynamic, computed styles.
 - Type props explicitly; avoid `React.FC`. Prefer:
+
   ```ts
   interface Props {
     // ...
@@ -24,6 +25,7 @@ applyTo: "**/*.tsx"
     // ...
   }
   ```
+
 - Prefer named default exports for components.
 - Always provide stable keys in lists. Avoid using array indices as keys.
 - Avoid `setState`/`useState` updates based on stale closures. Prefer functional

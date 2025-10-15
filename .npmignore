@@ -6,6 +6,8 @@
 /node_modules/
 /packages/
 /sarif/
+/.*.json
+/.*.yml
 /.*ignore
 /.*rc.*
 /.editorconfig
