@@ -1,2 +1,5 @@
-github: [quisido]
-patreon: [quisido]
+# yaml-language-server: $schema=https://www.schemastore.org/github-funding.json
+github:
+  - quisido
+patreon: quisido
+thanks_dev: u/gh/quisido

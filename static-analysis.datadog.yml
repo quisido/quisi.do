@@ -1,4 +1,3 @@
-schema-version: v1
 rulesets:
   - github-actions
   - tsx-react
@@ -9,3 +8,4 @@ rulesets:
   - typescript-express
   - typescript-inclusive
   - typescript-node-security
+schema-version: v1

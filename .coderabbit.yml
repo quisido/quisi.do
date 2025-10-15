@@ -1,6 +1,4 @@
 # yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
-language: en-US
-
 chat:
   art: true
   auto_reply: true
@@ -15,7 +13,6 @@ code_generation:
     language: en-US
 
 knowledge_base:
-  opt_out: false
   code_guidelines:
     enabled: true
     # Common files are included by default, e.g.
@@ -38,49 +35,44 @@ knowledge_base:
   learnings:
     scope: auto
   linear:
-    usage: enabled
     team_keys:
       - ENG
+    usage: enabled
   mcp:
     usage: enabled
+  opt_out: false
   pull_requests:
     scope: auto
   web_search:
     enabled: true
+
+language: en-US
 
 reviews:
   abort_on_close: true
   assess_linked_issues: true
   auto_apply_labels: false
   auto_assign_reviewers: false
+  auto_review:
+    auto_incremental_review: true
+    drafts: true
+    enabled: true
+    ignore_usernames:
+      - dependabot
   changed_files_summary: false
   collapse_walkthrough: false
   commit_status: false
   disable_cache: false
   estimate_code_review_effort: true
   fail_commit_status: false
-  high_level_summary: true
-  high_level_summary_in_walkthrough: true
-  in_progress_fortune: true
-  poem: true
-  profile: assertive
-  related_issues: true
-  related_prs: true
-  request_changes_workflow: true
-  review_status: false
-  sequence_diagrams: true
-  suggested_labels: false
-  suggested_reviewers: false
-  auto_review:
-    auto_incremental_review: true
-    drafts: true
-    enabled: true
-    ignore_usernames: dependabot
   finishing_touches:
     docstrings:
       enabled: true
     unit_tests:
       enabled: true
+  high_level_summary: true
+  high_level_summary_in_walkthrough: true
+  in_progress_fortune: true
   path_filters:
     - "**/.*.hintrc"
     - "**/.*.json"
@@ -107,18 +99,19 @@ reviews:
     - "**/*.vars"
     - "**/*.yml"
     - "**/LICENSE"
+  poem: true
   pre_merge_checks:
     custom_checks:
-      - name: Code Quality Check
-        instructions: >
+      - instructions: >
           Ensure all new code follows the project's coding standards and best
           practices.
         mode: warning
-      - name: Security Review
-        mode: warning
-        instructions: >
+        name: Code Quality Check
+      - instructions: >
           Check for any security vulnerabilities or sensitive information in the
           code.
+        mode: warning
+        name: Security Review
     description:
       mode: warning
     docstrings:
@@ -130,6 +123,14 @@ reviews:
       mode: warning
       requirements: >
         Title should be concise and descriptive, ideally under 50 characters
+  profile: assertive
+  related_issues: true
+  related_prs: true
+  request_changes_workflow: true
+  review_status: false
+  sequence_diagrams: true
+  suggested_labels: false
+  suggested_reviewers: false
   tools:
     actionlint:
       enabled: true
@@ -182,9 +183,9 @@ reviews:
       enabled: true
     phpcs:
       enabled: false
-    phpstan:
-      enabled: false
     phpmd:
+      enabled: false
+    phpstan:
       enabled: false
     pmd:
       enabled: false
