@@ -6,7 +6,7 @@
       "runtimeArgs": ["run", "build"],
       "runtimeExecutable": "npm",
       "type": "node",
-    },
+    }
   ],
   "version": "0.2.0"
 }

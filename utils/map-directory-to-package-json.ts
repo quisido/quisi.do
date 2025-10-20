@@ -12,7 +12,10 @@ export default async function mapDirectoryToPackageJson(
   const entries: readonly Dirent[] = await mapDirectoryToEntries(entry);
   const packageJson: Dirent | undefined = entries.find(isPackageJson);
 
-  assert(typeof packageJson !== 'undefined');
+  assert(
+    typeof packageJson !== 'undefined',
+    'Expected a package.json file to exist.',
+  );
 
   const packageJsonStr: string = await readFile(
     join(packageJson.parentPath, packageJson.name),

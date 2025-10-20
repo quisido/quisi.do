@@ -200,7 +200,6 @@ reviews:
     ruff:
       enabled: false
     semgrep:
-      config_file: auto
       enabled: true
     shellcheck:
       enabled: true
