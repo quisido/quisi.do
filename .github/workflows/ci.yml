@@ -169,6 +169,24 @@ jobs:
           DD_ENV: ci
           DD_SERVICE: quisi.do
 
+  # This requires some more setup to work. Configure the test step to upload report artifacts.
+  # Then add this to the CD file.
+  sentry-prevent:
+    name: Sentry Prevent
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: test
+          path: packages/*/
+      - name: Upload test results
+        if: ${{ !cancelled() }}
+        uses: getsentry/prevent-action@v0
+
   # Stage 4: coverage
   # coverage:
   #   name: Coverage
