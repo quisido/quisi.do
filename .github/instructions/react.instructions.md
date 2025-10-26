@@ -16,17 +16,22 @@ applyTo: "**/*.tsx"
   dynamic, computed styles.
 - Type props explicitly; avoid `React.FC`. Prefer:
 
-  ```ts
+  ```tsx
+  import { type ReactElement, type ReactNode } from 'react';
+
   interface Props {
-    // ...
+    readonly children: ReactNode;
   }
 
-  function Component(props: Props): ReactElement {
+  export default function Component({ children }: Props): ReactElement {
     // ...
   }
   ```
 
-- Prefer named default exports for components.
+  - Use the `type` qualifier when importing types.
+  - Destructure props in the function signature.
+  - Use `ReactElement` as the return type for components that return JSX.
+- Prefer default exports for components (with explicit function names).
 - Always provide stable keys in lists. Avoid using array indices as keys.
 - Avoid `setState`/`useState` updates based on stale closures. Prefer functional
   updates when derived from previous state.

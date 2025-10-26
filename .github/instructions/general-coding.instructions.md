@@ -11,7 +11,8 @@ applyTo: "**"
 - Use ALL_CAPS for constants
 - Use meaningful and descriptive names.
 - Avoid abbreviations unless they are widely recognized.
-- External payloads may keep their original casing; map at boundaries if needed.
+- Third party API calls may keep their original casing; that casing may be
+  converted to this repository's casing at API call boundaries.
 - Use singular nouns for types and interfaces, plural for arrays.
 - Use verbs for function and method names.
 - Use `on<Event>` for event handler functions (e.g., `onClick`, `onSubmit`).

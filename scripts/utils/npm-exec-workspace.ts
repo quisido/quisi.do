@@ -1,6 +1,6 @@
 import { execFileSync } from 'node:child_process';
+import isString from '../../utils/is-string.js';
 import isSpawnSyncReturns from './is-spawn-sync-returns.js';
-import isString from './is-string.js';
 import logCommand from './log-command.js';
 import retry from './retry.js';
 
