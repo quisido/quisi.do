@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/jshintrc",
+  "$schema": "https://www.schemastore.org/jshintrc.json",
   "asi": false,
   "bitwise": false,
   "boss": false,

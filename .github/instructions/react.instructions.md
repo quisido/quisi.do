@@ -35,3 +35,11 @@ applyTo: "**/*.tsx"
 - Always provide stable keys in lists. Avoid using array indices as keys.
 - Avoid `setState`/`useState` updates based on stale closures. Prefer functional
   updates when derived from previous state.
+
+  ```ts
+  // Prefer:
+  setCount((oldCount: number): number => oldCount + 1)
+
+  // Over:
+  setCount(oldCount + 1)
+  ```

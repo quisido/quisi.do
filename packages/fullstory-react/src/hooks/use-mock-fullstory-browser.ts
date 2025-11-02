@@ -6,7 +6,7 @@ import useShallowMemo from 'use-shallow-memo';
 import merge from '../utils/merge.js';
 
 export default function useMockFullstoryBrowser(
-  partial: Partial<Omit<typeof fullstoryBrowser, 'default'>>,
+  partial: Partial<Omit<typeof fullstoryBrowser, 'default'>> = {},
 ): Omit<typeof fullstoryBrowser, 'default'> {
   // States
   const [initialized, setInitialized] = useState(false);
@@ -32,9 +32,12 @@ export default function useMockFullstoryBrowser(
   const isInitialized = useCallback((): boolean => initialized, [initialized]);
 
   return useShallowMemo({
-    FullStory,
     init,
     ...partial,
+
+    // Sorted keys should not move between before/after object spread.
+    // eslint-disable-next-line sort-keys-custom-order/object-keys
+    FullStory,
     isInitialized,
   });
 }

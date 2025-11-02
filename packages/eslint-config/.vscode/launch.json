@@ -1,11 +1,13 @@
 {
   "configurations": [
     {
+      "console": "integratedTerminal",
       "name": "Build",
       "request": "launch",
       "runtimeArgs": ["run", "build"],
       "runtimeExecutable": "npm",
-      "type": "node",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
     }
   ],
   "version": "0.2.0"

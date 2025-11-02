@@ -47,7 +47,7 @@ export default defineConfig({
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'no-shadow-restricted-names': 'error',
 
-    // This is handled by `no-global-assign` and `no-shadow-restricted-names`.
+    // This is safe due to `no-global-assign` and `no-shadow-restricted-names`.
     'no-undefined': 'off',
 
     'one-var': 'off',
