@@ -1,14 +1,20 @@
+/* eslint-disable no-console */
+
 export default function retry<T>(attempts: number, fn: () => T): T {
-  let attempt = 1;
   let lastError: unknown = null;
 
-  do {
+  for (let attempt = 1; attempt <= attempts; attempt++) {
     try {
       return fn();
     } catch (err: unknown) {
       lastError = err;
     }
-  } while (++attempt <= attempts);
+    if (attempt === attempts) {
+      console.log(`Attempt ${attempt} failed.`);
+    } else {
+      console.log(`Attempt ${attempt} failed. Retrying...`);
+    }
+  }
 
   throw lastError;
 }

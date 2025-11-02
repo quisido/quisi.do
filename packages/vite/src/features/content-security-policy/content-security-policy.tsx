@@ -36,7 +36,7 @@ const mapContentSecurityPolicyListItemPropsToElement = mapPropsToElement(
   ContentSecurityPolicyListItem,
 );
 
-// eslint-disable-next-line max-lines-per-function
+// eslint-disable-next-line max-lines-per-function, max-statements
 export default function ContentSecurityPolicy(): ReactElement {
   // Contexts
   const emit = useEmit();

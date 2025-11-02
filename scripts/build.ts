@@ -94,7 +94,7 @@ while (WORKSPACE_TOPOLOGICAL_DEPENDENCIES.size > EMPTY) {
       continue;
     }
 
-    npmExecWorkspace(workspaceDirectory, 'run', 'build');
+    npmExecWorkspace(workspaceDirectory, 'run-script', 'build');
     WORKSPACE_TOPOLOGICAL_DEPENDENCIES.delete(workspaceDirectory);
     deleteTopologicalDependency(workspaceDirectory);
   }
