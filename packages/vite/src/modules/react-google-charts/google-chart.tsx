@@ -17,7 +17,6 @@ interface Props<C extends Chart> {
   readonly packages?: readonly string[] | undefined;
 }
 
-// eslint-disable-next-line max-lines-per-function
 export default function GoogleChart<C extends Chart>({
   chart,
   className,
@@ -37,7 +36,6 @@ export default function GoogleChart<C extends Chart>({
   const optionsStr: string = JSON.stringify(optionsProp);
   const handleError = useEffectEvent(onError ?? noop);
 
-  // eslint-disable-next-line max-lines-per-function
   useEffect((): void => {
     const element: HTMLDivElement | null = elementRef.current;
     if (element === null) {

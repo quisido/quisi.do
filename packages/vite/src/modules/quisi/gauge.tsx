@@ -32,7 +32,6 @@ const NIL = 0;
 const hasTo = (threshold: Threshold | number): boolean =>
   typeof threshold === 'number' || typeof threshold.to === 'number';
 
-// eslint-disable-next-line max-lines-per-function
 export default function Gauge({
   className,
   max: maxProp,
@@ -72,7 +71,6 @@ export default function Gauge({
   };
   const max: number = getMax();
 
-  // eslint-disable-next-line max-lines-per-function
   const mapThresholdToPath = (
     threshold: number | Threshold,
     index: number,

@@ -46,7 +46,6 @@ const mapDispositionEntryToGroups = ([
     .flatMap(mapEffectiveDirectiveEntriesToGroups);
 };
 
-// eslint-disable-next-line max-lines-per-function
 export default function mapReportBodiesToContentSecurityPolicyGroups(
   bodies: readonly ReportBody[],
 ): readonly Group[] {

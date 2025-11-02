@@ -41,7 +41,6 @@ const reduceUrlsToCount = (
 const mapUrlsToCount = (urls: readonly ContentSecurityPolicyReport[]): number =>
   urls.reduce(reduceUrlsToCount, NONE);
 
-// eslint-disable-next-line max-lines-per-function
 export default function ContentSecurityPolicyListItem({
   disposition,
   effectiveDirective,

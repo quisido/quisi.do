@@ -94,7 +94,6 @@ const safeMixpanelBrowserTrack = (
  *   Viewed Promotion
  *   Shipping Info Entered
  */
-// eslint-disable-next-line max-lines-per-function
 export default function useEmit(): EventEmitter {
   // Context
   const { addAction } = useDatadogRum();

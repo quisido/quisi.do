@@ -24,7 +24,6 @@ const DEFAULT_ASYNC_STATE = {
   loading: false,
 } satisfies AsyncState<unknown>;
 
-// eslint-disable-next-line max-lines-per-function
 export default function useAsyncState<T = unknown>({
   onError,
 }: Props = {}): State<T> {

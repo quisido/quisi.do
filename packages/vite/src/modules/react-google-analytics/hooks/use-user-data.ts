@@ -5,7 +5,6 @@ import type GoogleAnalyticsUserDataAddress from '../types/google-analytics-user-
 import type GoogleAnalyticsUserData from '../types/google-analytics-user-data.js';
 import type UserData from '../types/user-data.js';
 
-// eslint-disable-next-line max-lines-per-function
 export default function useUserData(
   userData: UserData = EMPTY_OBJECT,
 ): GoogleAnalyticsUserData | undefined {

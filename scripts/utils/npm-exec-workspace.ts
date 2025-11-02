@@ -1,20 +1,12 @@
 import { execFileSync } from 'node:child_process';
-import { dirname, join } from 'node:path';
 import isString from '../../utils/is-string.js';
+import getNpmCommand from './get-npm-command.js';
 import isSpawnSyncReturns from './is-spawn-sync-returns.js';
 import logCommand from './log-command.js';
 import retry from './retry.js';
 
 const ATTEMPTS = 3;
-const { execPath: EXEC_PATH } = process;
-
-const NPM_CLI_PATH: string = join(
-  dirname(EXEC_PATH),
-  'node_modules',
-  'npm',
-  'bin',
-  'npm-cli.js',
-);
+const [FILE, ...ARGS] = getNpmCommand();
 
 const isActionableMessage = (message: string): boolean =>
   !message.startsWith('npm error A complete log of this run can be found in: ');
@@ -24,8 +16,8 @@ export default function npmExecWorkspace(
   ...script: string[]
 ): string {
   logCommand(
-    EXEC_PATH,
-    NPM_CLI_PATH,
+    FILE,
+    ...ARGS,
     ...script,
     `--workspace=packages/${workspaceDirectory}`,
   );
@@ -33,8 +25,8 @@ export default function npmExecWorkspace(
   try {
     return retry(ATTEMPTS, (): string =>
       execFileSync(
-        EXEC_PATH,
-        [NPM_CLI_PATH, ...script, `--workspace=packages/${workspaceDirectory}`],
+        FILE,
+        [...ARGS, ...script, `--workspace=packages/${workspaceDirectory}`],
         { encoding: 'utf-8', shell: false, stdio: 'pipe' },
       ),
     );

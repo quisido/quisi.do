@@ -17,7 +17,6 @@ import noop from '../../utils/noop.js';
 
 const CHALLENGE_TIMEOUT = 110600;
 
-// eslint-disable-next-line max-lines-per-function
 export default function AppTurnstile({
   children,
 }: PropsWithChildren): ReactElement {

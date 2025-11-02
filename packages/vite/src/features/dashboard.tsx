@@ -102,7 +102,6 @@ function DashboardWrapper({ children }: PropsWithChildren): ReactElement {
   return <Section header={<I18n>Dashboard</I18n>}>{children}</Section>;
 }
 
-// eslint-disable-next-line max-lines-per-function
 function Dashboard(): ReactElement {
   // Contexts
   const wndw: Window | null = useWindow();

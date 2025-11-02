@@ -85,7 +85,3 @@ const chao = new Chao({
 });
 
 window.console.log(chao);
-
-class QuisidoGameEntity {}
-
-class QuisidoGameSystem {}

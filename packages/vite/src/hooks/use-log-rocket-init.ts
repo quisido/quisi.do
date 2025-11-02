@@ -93,7 +93,6 @@ const defaultResponseSanitizer = (
   response: LogRocketResponse,
 ): LogRocketResponse => response;
 
-// eslint-disable-next-line max-lines-per-function
 export default function useLogRocketInit({
   appId,
   release = 'dev',

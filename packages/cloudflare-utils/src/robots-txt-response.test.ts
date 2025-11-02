@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { RobotsTxtResponse, StatusCode } from './index.js';
+import { RobotsTxtResponse } from './index.js';
 
 describe('RobotsTxtResponse', (): void => {
   it('should set appropriate headers', (): void => {
@@ -21,10 +21,10 @@ describe('RobotsTxtResponse', (): void => {
   });
 
   it('should set custom init', (): void => {
-    const { status } = new RobotsTxtResponse({
-      status: StatusCode.InternalServerError,
+    const { statusText } = new RobotsTxtResponse({
+      statusText: 'Test Status Text',
     });
 
-    expect(status).toBe(StatusCode.InternalServerError);
+    expect(statusText).toBe('Test Status Text');
   });
 });

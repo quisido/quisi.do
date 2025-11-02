@@ -63,7 +63,6 @@ const setChartHeight = (chart: Chart<'line'>, height: number): void => {
   chart.resize(chart.width, height);
 };
 
-// eslint-disable-next-line max-lines-per-function
 export default function LineChart({
   data,
   title,

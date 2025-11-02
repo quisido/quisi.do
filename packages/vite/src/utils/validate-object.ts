@@ -14,7 +14,7 @@ export default function validateObject<T>(
   assert(isRecord(value), value, 'an object', context);
 
   for (const key of mapObjectToKeys(validator)) {
-    validator[key](value[key], [...context, key.toString()]);
+    validator[key](value[key], [...context, key]);
   }
 
   return value as T;

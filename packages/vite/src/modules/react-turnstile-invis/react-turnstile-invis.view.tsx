@@ -118,7 +118,6 @@ const DEFAULT_STATE: State = {
   token: null,
 };
 
-// eslint-disable-next-line max-lines-per-function
 export default function Turnstile({
   appearance,
   children,
@@ -144,12 +143,10 @@ export default function Turnstile({
   const handleTimeout = useEffectEvent(onTimeout ?? noop);
   const handleUnsupported = useEffectEvent(onUnsupported ?? noop);
 
-  // eslint-disable-next-line max-lines-per-function
   useEffect((): void => {
     const scripts: HTMLCollectionOf<HTMLScriptElement> =
       window.document.getElementsByTagName('script');
 
-    // eslint-disable-next-line max-lines-per-function
     const readyRender = (attempt: number = NONE): void => {
       if (!hasTurnstile(window)) {
         if (attempt < MAX_ATTEMPTS) {

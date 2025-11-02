@@ -1,11 +1,13 @@
 const EMPTY = 0;
+const END_OF_LINE_LENGTH = ' \\'.length;
+const INDENTATION_LENGTH = '  '.length;
 const MAX_LINE_LENGTH = 80;
-const NEW_LINE_LENGTH = 2;
-const SPACE_LENGTH = 1;
+const SPACE_LENGTH = ' '.length;
 
 export default function logCommand(...words: readonly string[]): void {
   const logLineChunks: string[] = [];
   let logLineLength = 0;
+
   for (const word of words) {
     if (logLineLength === EMPTY) {
       logLineChunks.push(word);
@@ -14,18 +16,18 @@ export default function logCommand(...words: readonly string[]): void {
     }
 
     if (
-      logLineLength + word.length + SPACE_LENGTH + NEW_LINE_LENGTH <=
+      logLineLength + SPACE_LENGTH + word.length + END_OF_LINE_LENGTH <=
       MAX_LINE_LENGTH
     ) {
       logLineChunks.push(' ');
       logLineChunks.push(word);
-      logLineLength += word.length + SPACE_LENGTH;
+      logLineLength += SPACE_LENGTH + word.length;
       continue;
     }
 
-    logLineChunks.push(' \\\n    ');
+    logLineChunks.push(' \\\n  ');
     logLineChunks.push(word);
-    logLineLength = word.length;
+    logLineLength = INDENTATION_LENGTH + word.length;
   }
 
   console.log(logLineChunks.join(''));

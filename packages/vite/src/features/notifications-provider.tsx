@@ -33,7 +33,6 @@ const loadAuthnErrorNotificationModule = async (): Promise<{
   default: typeof AuthnErrorNotification;
 }> => import('./authn-error-notification.js');
 
-// eslint-disable-next-line max-lines-per-function
 function NotificationsProviderFeature({
   children,
 }: PropsWithChildren): ReactElement {

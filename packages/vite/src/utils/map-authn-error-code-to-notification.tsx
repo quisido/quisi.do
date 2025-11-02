@@ -7,7 +7,6 @@ import MisconfiguredPatreonClientMessage from '../components/misconfigured-patre
 import { UnknownErrorMessage } from '../components/unknown-error-message.jsx';
 import type Notification from '../types/notification.js';
 
-// eslint-disable-next-line max-lines-per-function
 export default function mapAuthnErrorCodeToNotification(
   code: ErrorCode,
 ): Pick<Notification, 'Header' | 'Message'> {

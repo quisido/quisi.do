@@ -14,14 +14,12 @@ interface Props {
   readonly licenseKey: string;
 }
 
-// eslint-disable-next-line max-lines-per-function
 export default function NewRelic({
   applicationID,
   children,
   licenseKey,
 }: PropsWithChildren<Props>): ReactElement {
   const [browserAgent] = useState(
-    // eslint-disable-next-line max-lines-per-function
     (): BrowserAgent =>
       new BrowserAgent({
         info: {

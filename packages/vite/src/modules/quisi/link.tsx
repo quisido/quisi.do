@@ -32,7 +32,6 @@ interface OnClickProps {
 
 export type Props = BaseProps & (HrefProps | OnClickProps);
 
-// eslint-disable-next-line max-lines-per-function
 export default function Link({
   children,
   className,
