@@ -1,7 +1,39 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable max-classes-per-file */
 
-class QuisidoGameSystem {
-  public addComponent<P>(component: QuisidoGameComponent<P>): void {}
+type ComponentTuple<S, P = unknown> = [
+  (state: S) => P,
+  QuisidoGameComponent<P>,
+];
+
+class QuisidoGameSystem<S> {
+  #components: ComponentTuple<S>[] = [];
+  #state: S;
+
+  public constructor(initialState: S) {
+    this.#state = initialState;
+  }
+
+  public addComponent<P>(
+    selector: (state: S) => P,
+    setter: (props: P) => S,
+    Component: new (
+      system: QuisidoGameSystem<S>,
+      props: P,
+    ) => QuisidoGameComponent<P>,
+  ): void {
+    const props: P = selector(this.#state);
+    const component: QuisidoGameComponent<P> = new Component(this, props);
+    this.#components.push([selector, component]);
+  }
+
+  public dispatch(action: string, payload: unknown): void {
+    // TODO
+  }
+
+  public get state(): S {
+    return this.#state;
+  }
 }
 
 class QuisidoGameComponent<P> {
@@ -32,6 +64,18 @@ interface ChaoProps {
 class Chao extends QuisidoGameComponent<ChaoProps> {
   public constructor(props: ChaoProps) {
     super(props);
+  }
+}
+
+class MyGame extends QuisidoGameSystem<{ characters: Chao[] }> {
+  public constructor() {
+    super({ characters: [] });
+
+    this.addComponent(
+      state => state.score,
+      score => ({ score }),
+      ScoreComponent,
+    );
   }
 }
 

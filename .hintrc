@@ -1,5 +1,7 @@
-// Webhint does not support workspaces; the configuration file must be in root.
-// https://github.com/webhintio/hint/issues/3651
+/**
+ * Webhint does not support workspaces; the configuration file must be in root.
+ * https://github.com/webhintio/hint/issues/3651
+ */
 {
   "extends": [
     "accessibility",
@@ -199,8 +201,10 @@
     "manifest-is-valid": "error",
     "meta-charset-utf-8": "error",
 
-    // Webhint incorrectly flags multiple theme colors.
-    // https://github.com/webhintio/hint/issues/6001
+    /**
+     * Webhint incorrectly flags multiple theme colors.
+     * https://github.com/webhintio/hint/issues/6001
+     */
     "meta-theme-color": "off",
 
     "meta-viewport": "error",

@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "exit 0",
-    "start": "npm run dev",
-    "test": "concurrently --names eslint,publint,vitest --prefix-colors auto \"npm run eslint\" \"npm run publint\" \"npm run vitest:run\"",
+    "start": "npm run-script dev",
+    "test": "concurrently --names eslint,publint,vitest --prefix-colors auto \"npm run-script eslint\" \"npm run-script publint\" \"npm run-script vitest:run\"",
     "clean": "rimraf .wrangler coverage",
     "dev": "wrangler dev --persist-to ../../.wrangler/state",
     "eslint": "eslint . --cache --color --exit-on-fatal-error",

@@ -10,7 +10,7 @@
   "types": "./index.d.ts",
   "scripts": {
     "build": "exit 0",
-    "test": "concurrently --names eslint,publint --prefix-colors auto \"npm run eslint\" \"npm run publint\"",
+    "test": "concurrently --names eslint,publint --prefix-colors auto \"npm run-script eslint\" \"npm run-script publint\"",
     "attw": "attw --quiet",
     "clean": "exit 0",
     "eslint": "eslint . --cache --color --exit-on-fatal-error",

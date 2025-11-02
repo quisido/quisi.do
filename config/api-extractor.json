@@ -9,6 +9,7 @@
     "reportTempFolder": "<projectFolder>/temp/",
     "reportVariants": ["complete"]
   },
+
   "bundledPackages": [],
 
   "compiler": {
@@ -31,9 +32,9 @@
     "publicTrimmedFilePath": "",
     "untrimmedFilePath": "<projectFolder>/dist/index.d.ts"
   },
+
   "enumMemberOrder": "by-name",
   "mainEntryPointFilePath": "<projectFolder>/dist/index.d.ts",
-
 
   "messages": {
     "compilerMessageReporting": {
@@ -57,9 +58,11 @@
       }
     }
   },
+
   "newlineKind": "lf",
   "projectFolder": "..",
   "testMode": false,
+
   "tsdocMetadata": {
     "enabled": true,
     "tsdocMetadataFilePath": "<projectFolder>/dist/tsdoc-metadata.json"

@@ -1,9 +1,9 @@
 {
   "configurations": [
     {
-      "name": "npm run start",
+      "name": "npm start",
       "request": "launch",
-      "runtimeArgs": ["run", "start"],
+      "runtimeArgs": ["start"],
       "runtimeExecutable": "npm",
       "type": "node",
     },

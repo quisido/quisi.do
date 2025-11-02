@@ -10,8 +10,8 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "npm run tsc",
-    "test": "concurrently --names attw,eslint,publint --prefix-colors auto \"npm run attw\" \"npm run eslint\" \"npm run publint\"",
+    "build": "npm run-script tsc",
+    "test": "concurrently --names attw,eslint,publint --prefix-colors auto \"npm run-script attw\" \"npm run-script eslint\" \"npm run-script publint\"",
     "attw": "attw --quiet",
     "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",
     "eslint": "eslint . --cache --color --exit-on-fatal-error",

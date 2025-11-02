@@ -10,9 +10,9 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "npm run tsc",
-    "start": "npm run tsc:watch",
-    "test": "concurrently --names attw,eslint,publint,vitest --prefix-colors auto \"npm run attw\" \"npm run eslint\" \"npm run publint\" \"npm run vitest:run\"",
+    "build": "npm run-script tsc",
+    "start": "npm run-script tsc:watch",
+    "test": "concurrently --names attw,eslint,publint,vitest --prefix-colors auto \"npm run-script attw\" \"npm run-script eslint\" \"npm run-script publint\" \"npm run-script vitest:run\"",
     "api-extractor": "node --experimental-strip-types scripts/api-extractor.ts",
     "attw": "attw --quiet",
     "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",

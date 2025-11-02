@@ -86,7 +86,7 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Build
-        run: npm run build
+        run: npm run-script build
         env:
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           DD_PROFILING_ENABLED: true
@@ -132,9 +132,9 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Audit
-        run: npm run lighthouse:report --workspace=packages/vite
+        run: npm run-script lighthouse:report --workspace=packages/vite
       - name: Validate
-        run: npm run postlighthouse --workspace=packages/vite
+        run: npm run-script postlighthouse --workspace=packages/vite
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
@@ -176,7 +176,7 @@ jobs:
       - name: Install dependencies
         run: npm install --immutable
       - name: Test
-        run: npm run test
+        run: npm run-script test
         env:
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
@@ -249,7 +249,7 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Run Webhint
-        run: npm run webhint:serve --workspace=packages/vite
+        run: npm run-script webhint:serve --workspace=packages/vite
         env:
           CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
       - name: Upload report
@@ -286,7 +286,7 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Upload Datadog sourcemaps
-        run: npm run datadog:sourcemaps --workspace=packages/vite
+        run: npm run-script datadog:sourcemaps --workspace=packages/vite
         env:
           DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           RELEASE_VERSION: ${{ github.sha }}
@@ -360,7 +360,7 @@ jobs:
           NPM_CONFIG_PROVENANCE: true
         run: >
           npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH_TOKEN;
-          npm run publish;
+          npm run-script publish;
 
   sentry-release:
     name: Sentry release
@@ -473,7 +473,7 @@ jobs:
           NPM_CONFIG_PROVENANCE: true
         run: >
           npm config set "//npm.pkg.github.com/:_authToken" $NPM_AUTH_TOKEN;
-          npm run publish --registry=https://npm.pkg.github.com;
+          npm run-script publish --registry=https://npm.pkg.github.com;
 
   wrangler-deploy-authn:
     name: Wrangler deploy (Authentication)
@@ -506,7 +506,7 @@ jobs:
           name: build
           path: packages/
       - name: Deploy
-        run: npm run production:deploy --workspace=packages/authn
+        run: npm run-script production:deploy --workspace=packages/authn
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
@@ -541,7 +541,7 @@ jobs:
           name: build
           path: packages/
       - name: Deploy
-        run: npm run production:deploy --workspace=packages/csp
+        run: npm run-script production:deploy --workspace=packages/csp
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
@@ -576,7 +576,7 @@ jobs:
           name: build
           path: packages/
       - name: Deploy
-        run: npm run production:deploy --workspace=packages/dashboard
+        run: npm run-script production:deploy --workspace=packages/dashboard
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
@@ -612,9 +612,9 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Audit
-        run: npm run lighthouse:report:production --workspace=packages/vite
+        run: npm run-script lighthouse:report:production --workspace=packages/vite
       - name: Validate
-        run: npm run postlighthouse --workspace=packages/vite
+        run: npm run-script postlighthouse --workspace=packages/vite
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
@@ -656,7 +656,7 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Run webhint
-        run: npm run webhint:production --workspace=packages/vite
+        run: npm run-script webhint:production --workspace=packages/vite
         env:
           CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
       - name: Upload report
