@@ -19,7 +19,7 @@
     "strict": true,
     "types": ["node"]
   },
-  "exclude": [],
+  "exclude": ["./.vitest/"],
   "extends": "../../tsconfig.json",
   "include": [
     "**/*.json",

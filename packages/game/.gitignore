@@ -1,3 +1,4 @@
+/.vitest/
 /dist/
 /hint-report/
 /.env.local

@@ -1,3 +1,4 @@
+/.vitest/
 /.vscode/
 /node_modules/
 /src/**/*.test.*

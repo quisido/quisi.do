@@ -3,6 +3,7 @@
 /.gemini/mcp-oauth-tokens.json
 /.git/
 /.pnp.*
+/.vitest/
 /.wrangler/
 /coverage/
 /debug.log

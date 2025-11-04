@@ -53,6 +53,7 @@
     "@quisido/worker-test": "^1.0.1",
     "@types/eslint": "^9.6.1",
     "@vitest/coverage-istanbul": "^3.2.4",
+    "@vitest/ui": "^4.0.6",
     "cjs-ts": "^2.0.0",
     "cloudflare-test-utils": "^1.0.2",
     "concurrently": "^9.2.1",
@@ -61,7 +62,7 @@
     "rimraf": "^6.0.1",
     "typescript": "^5.9.3",
     "vite": "^7.1.7",
-    "vitest": "^3.2.4",
+    "vitest": "^4.0.6",
     "wrangler": "^4.40.3"
   }
 }

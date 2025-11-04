@@ -1,3 +1,4 @@
+/.vitest/
 /coverage/
 /dist/
 /node_modules/

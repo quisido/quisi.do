@@ -1,3 +1,4 @@
+/.vitest/
 /.vscode/
 /config/
 /coverage/

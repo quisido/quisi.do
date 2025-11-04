@@ -1,3 +1,4 @@
+/.vitest/
 /.wrangler/
 /coverage/
 /dist/

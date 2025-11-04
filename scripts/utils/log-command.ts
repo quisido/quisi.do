@@ -1,7 +1,7 @@
 const EMPTY = 0;
 const END_OF_LINE_LENGTH = ' \\'.length;
 const INDENTATION_LENGTH = '  '.length;
-const MAX_LINE_LENGTH = 80;
+const MAX_LINE_LENGTH = 120;
 const SPACE_LENGTH = ' '.length;
 
 export default function logCommand(...words: readonly string[]): void {

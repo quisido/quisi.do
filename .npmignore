@@ -1,5 +1,6 @@
 /.git/
 /.github/
+/.vitest/
 /.vscode/
 /.wrangler/
 /jest/

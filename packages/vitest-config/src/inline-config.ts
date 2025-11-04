@@ -8,5 +8,12 @@ export const INLINE_CONFIG: InlineConfig = {
   environment: 'node',
   exclude: [...EXCLUDE],
   mockReset: true,
+  reporters: [
+    ['default', { summary: true }],
+    'hanging-process',
+    ['html', { outputFile: '.vitest/report.html' }],
+    ['json', { outputFile: '.vitest/report.json' }],
+    ['junit', { outputFile: '.vitest/report.junit.xml' }],
+  ],
   restoreMocks: true,
 };

@@ -6,7 +6,7 @@
     "sourceRoot": ".",
     "types": [],
   },
-  "exclude": ["coverage/", "dist/", "node_modules/"],
+  "exclude": [".vitest/", "coverage/", "dist/", "node_modules/"],
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx"],
 }

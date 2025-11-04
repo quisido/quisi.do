@@ -10,6 +10,7 @@
     "target": "ES2022"
   },
   "exclude": [
+    "./.vitest/",
     "./.vscode/",
     "./coverage/",
     "./src/**/*.test.ts",

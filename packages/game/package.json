@@ -67,6 +67,7 @@
     "@types/trusted-types": "^2.0.7",
     "@vitejs/plugin-basic-ssl": "^2.1.0",
     "@vitest/coverage-istanbul": "^3.2.4",
+    "@vitest/ui": "^4.0.6",
     "concurrently": "^9.2.1",
     "dompurify": "^3.2.7",
     "eslint": "^9.36.0",
@@ -78,7 +79,7 @@
     "serve": "^14.2.5",
     "typescript": "^5.9.3",
     "vite": "^7.1.7",
-    "vitest": "^3.2.4",
+    "vitest": "^4.0.6",
     "wait-on": "^9.0.1"
   }
 }

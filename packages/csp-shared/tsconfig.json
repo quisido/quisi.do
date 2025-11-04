@@ -5,7 +5,7 @@
     "rootDir": ".",
     "sourceRoot": ".",
   },
-  "exclude": ["coverage/", "dist/"],
+  "exclude": [".vitest/", "coverage/", "dist/"],
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts"],
 }

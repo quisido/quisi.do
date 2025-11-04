@@ -1,2 +1,4 @@
 /.eslintcache
+/.vitest/
+/node_modules/
 /*-*.*.*.tgz
