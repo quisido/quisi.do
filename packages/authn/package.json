@@ -55,7 +55,7 @@
     "@cloudflare/workers-types": "^4.20251014.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "^1.1.9",
-    "@quisido/vitest-config": "^1.0.4",
+    "@quisido/vitest-config": "^1.0.5",
     "@quisido/worker-test": "^1.0.1",
     "@types/cookie": "^1.0.0",
     "@types/eslint": "^9.6.1",

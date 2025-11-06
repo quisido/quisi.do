@@ -63,7 +63,7 @@
     "@opentelemetry/sdk-trace-web": "^2.2.0",
     "@opentelemetry/semantic-conventions": "^1.37.0",
     "@quisido/eslint-config": "^1.1.9",
-    "@quisido/vitest-config": "^1.0.4",
+    "@quisido/vitest-config": "^1.0.5",
     "@types/react-reconciler": "^0.32.3",
     "@types/trusted-types": "^2.0.7",
     "@vitejs/plugin-basic-ssl": "^2.1.0",

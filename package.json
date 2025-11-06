@@ -66,7 +66,7 @@
     "@hint/parser-javascript": "^3.1.25",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "^1.1.8",
-    "@quisido/vitest-config": "^1.0.3",
+    "@quisido/vitest-config": "^1.0.5",
     "@types/eslint": "^9.6.1",
     "@types/node": "^22.15.21",
     "@vitest/ui": "^4.0.6",
