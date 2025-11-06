@@ -4,7 +4,7 @@
       "console": "integratedTerminal",
       "name": "Build",
       "request": "launch",
-      "runtimeArgs": ["run", "build"],
+      "runtimeArgs": ["run-script", "build"],
       "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**"],
       "type": "node"

@@ -1,10 +1,12 @@
 {
   "configurations": [
     {
+      "console": "integratedTerminal",
       "name": "Development server",
       "request": "launch",
-      "runtimeArgs": ["run", "start"],
+      "runtimeArgs": ["start"],
       "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**"],
       "type": "node",
     },
   ],

@@ -9,9 +9,12 @@ runs:
       uses: actions/setup-node@v4
       env:
         INPUT_CACHE: npm
+        INPUT_CACHE_DEPENDENCY_PATH: package-lock.json
         INPUT_CACHE-DEPENDENCY-PATH: package-lock.json
+        INPUT_CHECK_LATEST: true
         INPUT_CHECK-LATEST: true
-        INPUT_NODE-VERSION: latest
+        INPUT_NODE_VERSION_FILE: .nvmrc
+        INPUT_NODE-VERSION-FILE: .nvmrc
     - name: Install dependencies
-      run: npm ci --legacy-peer-deps
+      run: npm ci
       shell: bash

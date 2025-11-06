@@ -17,7 +17,7 @@
     "rootDir": ".",
     "sourceRoot": ".",
     "strict": true,
-    "types": ["node"]
+    "types": ["@types/node"]
   },
   "exclude": ["./.vitest/"],
   "extends": "../../tsconfig.json",

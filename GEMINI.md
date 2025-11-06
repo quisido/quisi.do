@@ -27,7 +27,7 @@ infrastructure: `packages/authn`, `packages/csp`, and `packages/dashboard`.
 * **Building:** `npm run-script build`
 * **Installation:** `npm install`
 * **Linting:** `npm run-script eslint`
-* **Running locally:** `npm run-script dev`
+* **Running locally:** `npm start`
 * **Testing:** `npm run-script test`
 
 ## Conventions

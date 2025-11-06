@@ -18,7 +18,7 @@ To install this repository and begin local development, run the following
 commands in sequence:
 
 - Update NPM: `npm install npm@latest --global`
-- Install project dependencies: `npm install --legacy-peer-deps`
+- Install project dependencies: `npm install`
 - Upgrade all dependencies: `npm run-script update`
 
 ## Commands
