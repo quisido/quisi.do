@@ -7,14 +7,11 @@ runs:
   steps:
     - name: Setup Node
       uses: actions/setup-node@v4
-      env:
-        INPUT_CACHE: npm
-        INPUT_CACHE_DEPENDENCY_PATH: package-lock.json
-        INPUT_CACHE-DEPENDENCY-PATH: package-lock.json
-        INPUT_CHECK_LATEST: true
-        INPUT_CHECK-LATEST: true
-        INPUT_NODE_VERSION_FILE: .nvmrc
-        INPUT_NODE-VERSION-FILE: .nvmrc
+      with:
+        cache: npm
+        cache-dependency-path: package-lock.json
+        check-latest: true
+        node-version-file: .nvmrc
     - name: Install dependencies
       run: npm ci
       shell: bash
