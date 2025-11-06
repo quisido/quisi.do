@@ -10,7 +10,10 @@ const TRAILING_ROOT_KEYS: readonly string[] = [
 
   'dependencies',
   'devDependencies',
+  'overrides',
   'peerDependencies',
+  'peerDependenciesMeta',
+  'resolutions',
 ];
 
 export const PACKAGE_JSON_SORT_KEYS_OPTIONS = [

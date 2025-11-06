@@ -1,9 +1,4 @@
 {
-	"extensions": {
-		"recommendations": [
-			"vitest.explorer"
-		]
-	},
 	"folders": [
 		{
 			"name": "$root",
@@ -100,7 +95,8 @@
 	],
 	"settings": {
 		"files.associations": {
-			"**/config/api-extractor.json": "jsonc"
+      "**/config/api-extractor.json": "jsonc",
+      "**/.aiexclude": "ignore"
 		},
 		"github.copilot.chat.codeGeneration.useInstructionFiles": true,
 		"vitest.maximumConfigs": 99,

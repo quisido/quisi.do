@@ -11,8 +11,8 @@
 /playwright/storage-state.json
 /sarif/
 .DS_Store
-.env.local
 .env.*.local
+.env.local
 .idea/
 *.iml
 node_modules/

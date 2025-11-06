@@ -11,6 +11,7 @@
 /.*cache
 /.*ignore
 /.*rc.*
+/.aiexclude
 /*.config.*
 /*.cpuprofile
 /*.iml

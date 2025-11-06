@@ -6,6 +6,7 @@
 /.*.json
 /.*ignore
 /.*rc.*
+/.aiexclude
 /.eslintcache
 /*.iml
 /*-*.*.*.tgz

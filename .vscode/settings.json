@@ -56,17 +56,21 @@
     "yaml"
   ],
   "files.associations": {
-    "**/config/api-extractor.json": "jsonc"
+    "**/config/api-extractor.json": "jsonc",
+    "**/.aiexclude": "ignore"
   },
   "files.eol": "\n",
   "files.exclude": {
+    "**/.eslintcache": true,
     "**/.wrangler/": true,
     "**/node_modules/": true,
     "**/package-lock.json": true,
     "**/vitest.config.ts.timestamp-*-*.mjs": true,
+    "dist/": true,
     "packages/": true,
   },
   "files.watcherExclude": {
+    "**/.eslintcache": true,
     "**/.wrangler/": true,
     "**/coverage/": true,
     "**/dist/": true,
