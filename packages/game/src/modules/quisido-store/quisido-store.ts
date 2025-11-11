@@ -1,20 +1,19 @@
 import type { Reducer } from './reducer.js';
-import type { Stringifiable, StringifiableRecord } from './stringifiable.js';
 
-export interface Export<State extends Stringifiable> {
+export interface Export<State> {
   readonly seed: number;
   readonly state: State;
   readonly timestamp: number;
 }
 
-export interface Options<State extends Stringifiable, Action> {
+export interface Options<State, Action> {
   readonly initialState: State;
   readonly reducer: Reducer<State, Action>;
   readonly seed: number;
   readonly timestamp: number;
 }
 
-export default class QuisidoStore<State extends StringifiableRecord, Action> {
+export default class QuisidoStore<State, Action> {
   readonly #changeListeners = new Set<(state: State) => void>();
   readonly #reducer: Reducer<State, Action>;
   readonly #seed: number;

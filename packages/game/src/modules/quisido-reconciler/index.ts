@@ -1,3 +1,4 @@
+export { VERSION } from './constants.js';
 export { type default as Container } from './container.js';
 export { type default as Instance } from './instance.js';
 export {
