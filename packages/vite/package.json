@@ -168,7 +168,7 @@
     "stylelint": "^16.21.0",
     "stylelint-config-standard-scss": "^15.0.1",
     "typescript": "^5.8.3",
-    "vite": "^6.3.5",
+    "vite": "^6.4.1",
     "vitest": "^3.2.4",
     "wait-on": "^8.0.3",
     "webpack": "^5.99.9"
