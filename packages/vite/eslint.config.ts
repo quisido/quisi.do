@@ -5,8 +5,9 @@ import configs, {
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import type { Config } from 'eslint/config';
 
-export default defineConfig(
+const CONFIG: readonly Config[] = defineConfig(
   ...configs,
 
   // NodeJS
@@ -24,7 +25,10 @@ export default defineConfig(
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       'react-compiler': reactCompiler,
-      'react-hooks': reactHooks,
+      'react-hooks': {
+        ...reactHooks,
+        configs: {},
+      },
       'react-refresh': reactRefresh,
     },
     rules: {
@@ -50,7 +54,6 @@ export default defineConfig(
     camelcase: [
       'src/features/header-authenticate-link.tsx',
       'src/hooks/use-effect-event.ts',
-      'src/hooks/use-emit/constants/sentry-event.ts',
       'src/hooks/use-emit/utils/create-sentry-event.ts',
       'src/modules/react-google-analytics/**/*.ts',
     ],
@@ -99,3 +102,5 @@ export default defineConfig(
     },
   },
 );
+
+export default CONFIG;

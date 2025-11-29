@@ -1,11 +1,11 @@
 import type { ESLint, Linter } from 'eslint';
 import jsonc from 'eslint-plugin-jsonc';
 import jsoncParser from 'jsonc-eslint-parser';
-import defineConfig from './define-config.js';
+import defineConfig, { type Config } from './define-config.js';
 import JSON from './json.js';
 import mapFlatConfigToRulesRecord from './map-flat-config-to-rules-record.js';
 
-export default defineConfig({
+const JSONC_CONFIG: Config = defineConfig({
   ...JSON,
   files: [
     '.vscode/*.json',
@@ -60,3 +60,5 @@ export default defineConfig({
     ),
   },
 });
+
+export default JSONC_CONFIG;

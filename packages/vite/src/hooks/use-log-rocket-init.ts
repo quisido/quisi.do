@@ -79,6 +79,7 @@ const OPTIONS: Required<
   console: CONSOLE,
   disableBusyFramesTracker: false,
   dom: DOM,
+  forceCleanStart: false,
   mergeIframes: true,
   parentDomain: null,
   shouldAugmentNPS: true,

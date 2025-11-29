@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const EMPTY = 0;
 const END_OF_LINE_LENGTH = ' \\'.length;
 const INDENTATION_LENGTH = '  '.length;

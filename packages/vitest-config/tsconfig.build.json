@@ -4,8 +4,6 @@
     "noEmit": false,
     "outDir": "dist",
     "rootDir": "src",
-    "sourceRoot": "../src/",
-
     // @types/chai@5.0.1 is incompatible with @vitest/expect@3.0.4.
     "skipLibCheck": true,
   },

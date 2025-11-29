@@ -1,9 +1,8 @@
 import {
-  memo,
   type PropsWithChildren,
   type ReactElement,
   useLayoutEffect,
-  useState,
+  useState
 } from 'react';
 import { SessionIdProvider } from '../contexts/session-id.js';
 import getSessionId from '../utils/get-session-id';
@@ -22,4 +21,4 @@ function SessionIdProviderFeature({
   return <SessionIdProvider value={sessionId}>{children}</SessionIdProvider>;
 }
 
-export default memo(SessionIdProviderFeature);
+export default SessionIdProviderFeature;

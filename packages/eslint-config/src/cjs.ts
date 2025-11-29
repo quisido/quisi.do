@@ -1,8 +1,8 @@
+import defineConfig, { type Config } from './define-config.js';
 import JS from './js.js';
-import defineConfig from './define-config.js';
 import { LINTER_OPTIONS } from './linter-options.js';
 
-export default defineConfig({
+const CONFIG: Config = defineConfig({
   ...JS,
   extends: [],
   files: ['**/*.cjs'],
@@ -18,3 +18,5 @@ export default defineConfig({
   linterOptions: LINTER_OPTIONS,
   name: '@quisido/cjs',
 });
+
+export default CONFIG;

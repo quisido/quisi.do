@@ -1,6 +1,5 @@
 import { isNot } from 'fmrs';
 import {
-  memo,
   type PropsWithChildren,
   type ReactElement,
   type RefObject,
@@ -33,7 +32,7 @@ const loadAuthnErrorNotificationModule = async (): Promise<{
   default: typeof AuthnErrorNotification;
 }> => import('./authn-error-notification.js');
 
-function NotificationsProviderFeature({
+export default function NotificationsProviderFeature({
   children,
 }: PropsWithChildren): ReactElement {
   // Contexts
@@ -121,5 +120,3 @@ function NotificationsProviderFeature({
     </NotificationsProvider>
   );
 }
-
-export default memo(NotificationsProviderFeature);

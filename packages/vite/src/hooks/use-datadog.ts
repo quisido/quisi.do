@@ -20,6 +20,7 @@ const PROPS: Required<
     | 'allowedTrackingOrigins'
     | 'allowedTracingUrls'
     | 'beforeSend'
+    | 'betaEncodeCookieOptions'
     | 'datacenter'
     | 'internalAnalyticsSubdomain'
     | 'proxy'

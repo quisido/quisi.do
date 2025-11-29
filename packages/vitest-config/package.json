@@ -1,6 +1,6 @@
 {
   "name": "@quisido/vitest-config",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "quisi.do <vitest-config@quisi.do>",
   "description": "vitest configurations for quisi.do",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/vitest-config#readme",

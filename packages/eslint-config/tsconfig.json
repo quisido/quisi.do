@@ -5,7 +5,6 @@
     "rootDir": ".",
     // eslint-plugin-sort-keys-custom-order
     "skipLibCheck": true,
-    "sourceRoot": ".",
   },
   "exclude": [".vitest/", "coverage/", "dist/", "node_modules/"],
   "extends": "../../tsconfig.json",

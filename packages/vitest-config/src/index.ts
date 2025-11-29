@@ -3,7 +3,9 @@ import { defineConfig } from 'vitest/config';
 import { INLINE_CONFIG } from './inline-config.js';
 import { PLUGIN_OPTIONS } from './plugin-options.js';
 
+export { type UserConfig } from 'vite';
 export { defineConfig } from 'vitest/config';
+export { type CoverageOptions } from 'vitest/node';
 export { COVERAGE_OPTIONS } from './coverage-options.js';
 export { EXCLUDE } from './exclude.js';
 export { INLINE_CONFIG } from './inline-config.js';

@@ -2,7 +2,7 @@ import { type Translations } from 'lazy-i18n';
 import Locale from '../constants/locale.js';
 import english from '../translations/index--en-US.json';
 
-export default {
+export const TRANSLATIONS: Record<Locale, Translations> = {
   [Locale.English]: english,
 
   [Locale.Arabic]: async (): Promise<{ default: Record<string, string> }> =>
@@ -16,4 +16,4 @@ export default {
 
   [Locale.Spanish]: async (): Promise<{ default: Record<string, string> }> =>
     import('../translations/index--es-ES.json'),
-} satisfies Record<Locale, Translations>;
+};

@@ -3,7 +3,7 @@
     "lib": ["ESNext"],
     "noEmit": true,
     "rootDir": ".",
-    "sourceRoot": "."
+    "sourceRoot": null
   },
   "exclude": [".vitest/", "coverage/", "dist/"],
   "extends": "../../tsconfig.json",

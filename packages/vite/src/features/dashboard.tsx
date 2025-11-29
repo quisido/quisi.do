@@ -1,11 +1,6 @@
 import { sortStrings } from 'fmrs';
 import I18n from 'lazy-i18n';
-import {
-  memo,
-  type PropsWithChildren,
-  type ReactElement,
-  useEffect,
-} from 'react';
+import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
 import Gauge from '../components/gauge.jsx';
 import NumberFormat from '../components/number-format.jsx';
 import { MILLISECONDS_PER_SECOND } from '../constants/time.js';
@@ -102,7 +97,7 @@ function DashboardWrapper({ children }: PropsWithChildren): ReactElement {
   return <Section header={<I18n>Dashboard</I18n>}>{children}</Section>;
 }
 
-function Dashboard(): ReactElement {
+export default function Dashboard(): ReactElement {
   // Contexts
   const wndw: Window | null = useWindow();
 
@@ -314,5 +309,3 @@ function Dashboard(): ReactElement {
     </DashboardWrapper>
   );
 }
-
-export default memo(Dashboard);

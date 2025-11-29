@@ -2,6 +2,8 @@ import type { CoverageOptions } from 'vitest/node';
 import { EXCLUDE } from './exclude.js';
 import { THRESHOLDS } from './thresholds.js';
 
+export { type CoverageOptions } from 'vitest/node';
+
 export const COVERAGE_OPTIONS: CoverageOptions<'istanbul'> = {
   clean: true,
   enabled: true,

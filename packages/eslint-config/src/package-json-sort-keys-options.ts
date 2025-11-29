@@ -1,3 +1,5 @@
+import type JsoncSortKeysOption from './jsonc-sort-keys-options.js';
+
 const TRAILING_ROOT_KEYS: readonly string[] = [
   'scripts',
 
@@ -16,7 +18,7 @@ const TRAILING_ROOT_KEYS: readonly string[] = [
   'resolutions',
 ];
 
-export const PACKAGE_JSON_SORT_KEYS_OPTIONS = [
+export const PACKAGE_JSON_SORT_KEYS_OPTIONS: readonly JsoncSortKeysOption[] = [
   {
     allowLineSeparatedGroups: false,
     order: [

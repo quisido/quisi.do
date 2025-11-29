@@ -3,7 +3,6 @@
     "lib": ["ESNext"],
     "noEmit": true,
     "rootDir": ".",
-    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/cjs-ts/",
   },
   "exclude": [".vitest/"],
   "extends": "../../tsconfig.json",

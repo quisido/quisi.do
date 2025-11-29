@@ -1,5 +1,13 @@
+import type { Provider } from 'react';
 import type Locale from '../constants/locale.js';
 import createContextUtils from '../modules/create-context-utils/index.js';
 
-export const { ContextProvider: LocaleProvider, useContextValue: useLocale } =
+const { ContextProvider, useContextValue } =
   createContextUtils<readonly [Locale, (locale: Locale) => void]>();
+
+export const LocaleProvider: Provider<
+  readonly [Locale, (locale: Locale) => void]
+> = ContextProvider;
+
+export const useLocale: () => readonly [Locale, (locale: Locale) => void] =
+  useContextValue;

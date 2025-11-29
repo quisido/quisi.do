@@ -65,5 +65,12 @@ export { sortArraysByIndex };
 const FIRST = 0;
 const SECOND = 1;
 
-export const sortEntriesByKey = sortArraysByIndex(FIRST);
-export const sortEntriesByValue = sortArraysByIndex(SECOND);
+export const sortEntriesByKey: (
+  a: readonly unknown[],
+  b: readonly unknown[],
+) => number = sortArraysByIndex(FIRST);
+
+export const sortEntriesByValue: (
+  a: readonly unknown[],
+  b: readonly unknown[],
+) => number = sortArraysByIndex(SECOND);

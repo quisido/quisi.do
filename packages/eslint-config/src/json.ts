@@ -1,7 +1,7 @@
 import jsonPlugin from '@eslint/json';
 import type { ESLint } from 'eslint';
 import jsonc from 'eslint-plugin-jsonc';
-import defineConfig from './define-config.js';
+import defineConfig, { type Config } from './define-config.js';
 import { LINTER_OPTIONS } from './linter-options.js';
 
 /**
@@ -9,7 +9,7 @@ import { LINTER_OPTIONS } from './linter-options.js';
  * in JSON files.
  */
 
-export default defineConfig({
+const JSON_CONFIG: Config = defineConfig({
   extends: [],
   files: ['**/.*.json', '**/*.json', '**/*.webmanifest'],
   ignores: [
@@ -48,3 +48,5 @@ export default defineConfig({
   },
   settings: {},
 });
+
+export default JSON_CONFIG;

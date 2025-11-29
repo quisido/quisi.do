@@ -118,7 +118,7 @@
     "@opentelemetry/core": "^2.2.0",
     "@opentelemetry/sdk-metrics": "^2.2.0",
     "@quisido/eslint-config": "^1.1.9",
-    "@quisido/vitest-config": "^1.0.5",
+    "@quisido/vitest-config": "^1.0.6",
     "@react-aria/link": "^3.8.6",
     "@sentry/types": "^10.23.0",
     "@stylistic/eslint-plugin-ts": "^4.4.1",
@@ -169,9 +169,17 @@
     "stylelint": "^16.25.0",
     "stylelint-config-standard-scss": "^16.0.0",
     "typescript": "^5.9.3",
-    "vite": "^7.2.1",
+    "vite": "^7.2.4",
     "vitest": "^4.0.7",
     "wait-on": "^9.0.1",
     "webpack": "^5.102.1"
+  },
+  "overrides": {
+    "@hint/connector-puppeteer": {
+      "puppeteer-core": ">=22.11.1"
+    },
+    "eslint-plugin-react-hooks": {
+      "zod-validation-error": "^4.0.0"
+    }
   }
 }

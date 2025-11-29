@@ -1,19 +1,5 @@
 {
   "files.exclude": {
-    ".eslintcache": true,
-    "*.tsbuildinfo": true,
-    "analyze/": true,
-    "certificates/": true,
-    "coverage/": true,
-    "dist/": true,
-    "lighthouse.config.cjs": true,
-    "lighthouse.config.js": true,
-    "lighthouse.report.html": true,
-    "lighthouse.report.json": true,
-    "lighthouse-0.devtoolslog.json": true,
-    "lighthouse-0.trace.json": true,
-    "node_modules/": true,
-    "nyc.config.cjs": true,
     "vitest.config.ts.timestamp-*-*.mjs": true,
   },
   "files.watcherExclude": {

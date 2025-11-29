@@ -6,6 +6,7 @@ import {
   defineConfig,
   type ESBuildOptions,
   type UserConfig,
+  type UserConfigFnObject,
 } from 'vite';
 import type { Compulsory } from './src/types/compulsory.js';
 import reduceEnvironmentVariableNamesToRecord from './src/utils/reduce-environment-variable-names-to-record.js';
@@ -50,8 +51,8 @@ const USER_CONFIG: UserConfig = {
   ].reduce(reduceEnvironmentVariableNamesToRecord, {}),
   envDir: '../',
   esbuild: ESBUILD_OPTIONS,
-  publicDir: '../public/',
-  root: './src/',
+  publicDir: '../public',
+  root: 'src',
 };
 
 const DEVELOPMENT_USER_CONFIG: UserConfig = {
@@ -67,7 +68,7 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
     minifySyntax: false,
     minifyWhitespace: false,
     sourcemap: 'both',
-    sourceRoot: './src/',
+    sourceRoot: 'src',
   },
   plugins: [basicSsl(), ddPlugin, react()],
   server: {
@@ -82,7 +83,7 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
   ...USER_CONFIG,
   build: {
     emptyOutDir: true,
-    outDir: '../dist/',
+    outDir: '../dist', // relative to `root` ('src/')
     sourcemap: true,
   },
   esbuild: {
@@ -100,10 +101,14 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
   plugins: [ddPlugin, react()],
 };
 
-export default defineConfig((env: ConfigEnv): UserConfig => {
-  if (env.mode !== 'production') {
-    return DEVELOPMENT_USER_CONFIG;
-  }
+const CONFIG: UserConfigFnObject = defineConfig(
+  ({ mode }: ConfigEnv): UserConfig => {
+    if (mode !== 'production') {
+      return DEVELOPMENT_USER_CONFIG;
+    }
 
-  return PRODUCTION_USER_CONFIG;
-});
+    return PRODUCTION_USER_CONFIG;
+  },
+);
+
+export default CONFIG;

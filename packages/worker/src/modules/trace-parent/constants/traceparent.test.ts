@@ -1,6 +1,6 @@
 import { assert, describe, expect, it } from 'vitest';
 import type { TraceParentGroups } from '../types/trace-parent-groups.js';
-import TRACEPARENT from './traceparent.js';
+import { TRACEPARENT } from './traceparent.js';
 
 describe('TRACEPARENT', (): void => {
   it('should return trace parent groups', (): void => {

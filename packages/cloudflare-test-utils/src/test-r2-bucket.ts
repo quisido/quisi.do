@@ -1,14 +1,14 @@
 /// <reference types="@cloudflare/workers-types" />
-import { expect, vi } from 'vitest';
+import { expect, type Mock, vi } from 'vitest';
 
 export default class TestR2Bucket implements R2Bucket {
-  public readonly createMultipartUpload = vi.fn();
-  public readonly delete = vi.fn();
-  public readonly get = vi.fn();
-  public readonly head = vi.fn();
-  public readonly list = vi.fn();
-  public readonly put = vi.fn();
-  public readonly resumeMultipartUpload = vi.fn();
+  public readonly createMultipartUpload: Mock = vi.fn();
+  public readonly delete: Mock = vi.fn();
+  public readonly get: Mock = vi.fn();
+  public readonly head: Mock = vi.fn();
+  public readonly list: Mock = vi.fn();
+  public readonly put: Mock = vi.fn();
+  public readonly resumeMultipartUpload: Mock = vi.fn();
 
   public expectToHaveGot = (...params: Parameters<R2Bucket['get']>): void => {
     expect(this.get).toHaveBeenCalledWith(...params);

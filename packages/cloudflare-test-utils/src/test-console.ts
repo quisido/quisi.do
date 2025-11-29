@@ -1,28 +1,28 @@
 /// <reference types="@cloudflare/workers-types" />
-import { vi } from 'vitest';
+import { type Mock, vi } from 'vitest';
 
-export const TEST_CONSOLE_ASSERT = vi.fn();
-export const TEST_CONSOLE_CLEAR = vi.fn();
-export const TEST_CONSOLE_COUNT = vi.fn();
-export const TEST_CONSOLE_COUNT_RESET = vi.fn();
-export const TEST_CONSOLE_DEBUG = vi.fn();
-export const TEST_CONSOLE_DIR = vi.fn();
-export const TEST_CONSOLE_DIRXML = vi.fn();
-export const TEST_CONSOLE_ERROR = vi.fn();
-export const TEST_CONSOLE_GROUP = vi.fn();
-export const TEST_CONSOLE_GROUP_COLLAPSED = vi.fn();
-export const TEST_CONSOLE_GROUP_END = vi.fn();
-export const TEST_CONSOLE_INFO = vi.fn();
-export const TEST_CONSOLE_LOG = vi.fn();
-export const TEST_CONSOLE_PROFILE = vi.fn();
-export const TEST_CONSOLE_PROFILE_END = vi.fn();
-export const TEST_CONSOLE_TABLE = vi.fn();
-export const TEST_CONSOLE_TIME = vi.fn();
-export const TEST_CONSOLE_TIME_END = vi.fn();
-export const TEST_CONSOLE_TIME_LOG = vi.fn();
-export const TEST_CONSOLE_TIME_STAMP = vi.fn();
-export const TEST_CONSOLE_TRACE = vi.fn();
-export const TEST_CONSOLE_WARN = vi.fn();
+export const TEST_CONSOLE_ASSERT: Mock = vi.fn();
+export const TEST_CONSOLE_CLEAR: Mock = vi.fn();
+export const TEST_CONSOLE_COUNT: Mock = vi.fn();
+export const TEST_CONSOLE_COUNT_RESET: Mock = vi.fn();
+export const TEST_CONSOLE_DEBUG: Mock = vi.fn();
+export const TEST_CONSOLE_DIR: Mock = vi.fn();
+export const TEST_CONSOLE_DIRXML: Mock = vi.fn();
+export const TEST_CONSOLE_ERROR: Mock = vi.fn();
+export const TEST_CONSOLE_GROUP: Mock = vi.fn();
+export const TEST_CONSOLE_GROUP_COLLAPSED: Mock = vi.fn();
+export const TEST_CONSOLE_GROUP_END: Mock = vi.fn();
+export const TEST_CONSOLE_INFO: Mock = vi.fn();
+export const TEST_CONSOLE_LOG: Mock = vi.fn();
+export const TEST_CONSOLE_PROFILE: Mock = vi.fn();
+export const TEST_CONSOLE_PROFILE_END: Mock = vi.fn();
+export const TEST_CONSOLE_TABLE: Mock = vi.fn();
+export const TEST_CONSOLE_TIME: Mock = vi.fn();
+export const TEST_CONSOLE_TIME_END: Mock = vi.fn();
+export const TEST_CONSOLE_TIME_LOG: Mock = vi.fn();
+export const TEST_CONSOLE_TIME_STAMP: Mock = vi.fn();
+export const TEST_CONSOLE_TRACE: Mock = vi.fn();
+export const TEST_CONSOLE_WARN: Mock = vi.fn();
 
 class TestConsole implements Console {
   public readonly assert = TEST_CONSOLE_ASSERT;

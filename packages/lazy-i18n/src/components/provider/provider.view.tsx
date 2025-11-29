@@ -1,10 +1,8 @@
 'use client';
 
 import {
-  type ComponentType,
-  memo,
-  type ReactElement,
-  type ReactNode,
+  type ComponentType, type ReactElement,
+  type ReactNode
 } from 'react';
 import Loading from '../../components/loading/index.js';
 import LoadingComponentContext from '../../contexts/loading-component.js';
@@ -45,4 +43,4 @@ function I18nProvider<T extends Record<string, Translations | undefined>>({
   );
 }
 
-export default memo(I18nProvider);
+export default I18nProvider;

@@ -11,7 +11,7 @@ import type Theme from '../types/theme.js';
  * Cloudflare infographic red: #8c3233
  */
 
-export default {
+export const THEME: Theme = {
   background: [0xf8, 0xf4, 0xf0],
   displayFontFamily: '"Noto Sans Display", "Noto Sans", Helvetica, sans-serif',
   displayFontWeight: 700,
@@ -20,4 +20,4 @@ export default {
   primary: [0xe5, 0x3a, 0x35],
   primaryFontWeight: 700,
   secondary: [0x72, 0xbf, 0x80],
-} satisfies Theme;
+};

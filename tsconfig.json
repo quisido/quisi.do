@@ -1,6 +1,4 @@
 {
-  "include": ["**/.*.json", "**/*.json", "**/*.ts"],
-
   "compilerOptions": {
     "allowArbitraryExtensions": false,
     "allowImportingTsExtensions": false,
@@ -15,6 +13,7 @@
     "composite": true,
     "customConditions": [],
     "declaration": true,
+    "declarationDir": null,
     "declarationMap": true,
     "diagnostics": false,
     "disableReferencedProjectLoad": true,
@@ -25,6 +24,7 @@
     "emitBOM": false,
     "emitDeclarationOnly": false,
     "emitDecoratorMetadata": true,
+    "erasableSyntaxOnly": false,
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "experimentalDecorators": true,
@@ -32,19 +32,28 @@
     "forceConsistentCasingInFileNames": true,
     "generateCpuProfile": "profile.cpuprofile",
     "importHelpers": true,
+    // @deprecated
+    // "importsNotUsedAsValues": "error",
     "incremental": true,
     "inlineSourceMap": false,
     "inlineSources": true,
+    "isolatedDeclarations": true,
     "isolatedModules": true,
     "keyofStringsOnly": false,
     "lib": ["ESNext"],
+    // TODO: Determine the best value for this:
+    "libReplacement": true,
     "listEmittedFiles": false,
     "listFiles": false,
+    "mapRoot": null,
+    // Option 'listFilesOnly' can only be specified on command line.
+    // "listFilesOnly": false,
     "maxNodeModuleJsDepth": 0,
     "module": "NodeNext",
     "moduleDetection": "force",
     "moduleResolution": "NodeNext",
     "newLine": "lf",
+    "noCheck": false,
     "noEmit": false,
     "noEmitHelpers": false,
     "noEmitOnError": false,
@@ -60,6 +69,7 @@
     "noResolve": false,
     "noStrictGenericChecks": false,
     "noUncheckedIndexedAccess": true,
+    "noUncheckedSideEffectImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {},
@@ -73,10 +83,12 @@
     "resolveJsonModule": true,
     "resolvePackageJsonExports": true,
     "resolvePackageJsonImports": true,
+    "rootDir": ".",
     "rootDirs": [],
     "skipDefaultLibCheck": false,
     "skipLibCheck": false,
     "sourceMap": true,
+    "sourceRoot": null,
     "strict": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
@@ -90,9 +102,8 @@
     "types": [],
     "useDefineForClassFields": true,
     "useUnknownInCatchVariables": true,
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": true
   },
-
   "exclude": [
     ".git/",
     ".idea/",
@@ -104,4 +115,5 @@
     "sarif/",
     ".pnp.*",
   ],
+  "include": ["**/.*.json", "**/*.json", "**/*.ts"]
 }

@@ -3,10 +3,10 @@ import type { Actions } from '../actions.js';
 import BrowserReconciler from '../modules/quisido-browser-game/browser-reconciler.js';
 import QuisidoStore, { type Export } from '../modules/quisido-store/index.js';
 import addEventListeners from './add-event-listeners.js';
-import Start from './components/start.js';
 
 interface Options<State> {
   readonly canvas: HTMLCanvasElement;
+  readonly Game: FunctionComponent<State>;
   readonly initialState: State;
   readonly window?: Window | undefined;
 }
@@ -20,11 +20,12 @@ export default class BrowserGame<State> {
 
   public constructor({
     canvas,
+    Game,
     initialState,
     window: windowOption = window,
   }: Options<State>) {
     this.#canvas = canvas;
-    this.#Game = Start;
+    this.#Game = Game;
 
     this.#store = new QuisidoStore({
       initialState,

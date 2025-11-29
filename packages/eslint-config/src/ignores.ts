@@ -1,6 +1,6 @@
-import { defineConfig } from '@eslint/config-helpers';
+import { type Config, defineConfig } from '@eslint/config-helpers';
 
-export default defineConfig({
+const IGNORES_CONFIG: readonly Config[] = defineConfig({
   ignores: [
     '.eslintcache',
     '.git/**',
@@ -22,3 +22,5 @@ export default defineConfig({
     'vitest.config.ts.timestamp-*-*.mjs',
   ],
 });
+
+export default IGNORES_CONFIG;

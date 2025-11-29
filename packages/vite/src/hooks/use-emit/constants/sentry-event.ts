@@ -14,7 +14,7 @@ const APP_START_TIME: string = new Date().toUTCString();
 const NODE_ENV: string = validateString(import.meta.env.NODE_ENV);
 const START_TIMESTAMP: number = Date.now();
 
-export default {
+export const SENTRY_EVENT: Event = {
   contexts: {
     app: {
       app_build: VERSION,
@@ -104,4 +104,4 @@ export default {
     source: 'route',
   },
   type: 'transaction',
-} satisfies Event;
+} ;

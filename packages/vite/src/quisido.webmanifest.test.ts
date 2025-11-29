@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { assert, describe, expect, it } from 'vitest';
-import THEME from './constants/theme.js';
+import { THEME } from './constants/theme.js';
 import findSplashScreenIcon from './test/find-splash-screen-icon.js';
 import type WebManifest from './types/web-manifest/web-manifest.js';
 import mapRgbToHex from './utils/map-rgb-to-hex.js';

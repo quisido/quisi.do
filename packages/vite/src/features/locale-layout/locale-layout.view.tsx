@@ -1,7 +1,7 @@
 import { I18nProvider } from 'lazy-i18n';
 import { type PropsWithChildren, type ReactElement } from 'react';
 import { default as Locale } from '../../constants/locale.js';
-import TRANSLATIONS from '../../constants/translations.js';
+import { TRANSLATIONS } from '../../constants/translations.js';
 import { LocaleProvider } from '../../contexts/locale.js';
 import useLocaleLayout from './locale-layout.hook.js';
 

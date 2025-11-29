@@ -1,14 +1,5 @@
+import { CANVAS } from './constants/canvas.js';
 import PikachusBeach from './pikachus-beach/index.js';
-
-const FIRST = 0;
-
-const CANVAS: HTMLCanvasElement | null = window.document
-  .getElementsByTagName('canvas')
-  .item(FIRST);
-
-if (CANVAS === null) {
-  throw new Error('Failed to find canvas.');
-}
 
 const game = new PikachusBeach({
   canvas: CANVAS,
@@ -16,3 +7,5 @@ const game = new PikachusBeach({
     screen: 'start',
   },
 });
+
+window.console.log(game.toJSON());

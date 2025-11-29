@@ -1,5 +1,5 @@
 import type { User } from '@sentry/core';
-import { memo, type ReactElement, type ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import SentryReact from 'sentry-react';
 import useSentryIntegrations from '../hooks/use-sentry-integrations.js';
 
@@ -16,7 +16,7 @@ const IGNORE_ERRORS: RegExp[] = [
   /^Object Not Found Matching Id:\d+, MethodName:\w+, ParamCount:\d+$/u,
 ];
 
-function Sentry({
+export default function Sentry({
   children,
   dsn,
   environment,
@@ -35,7 +35,6 @@ function Sentry({
       ignoreErrors={IGNORE_ERRORS}
       integrations={integrations}
       normalizeDepth={Number.POSITIVE_INFINITY}
-      profilesSampleRate={1}
       release={release}
       replaysOnErrorSampleRate={1}
       replaysSessionSampleRate={1}
@@ -50,5 +49,3 @@ function Sentry({
     </SentryReact>
   );
 }
-
-export default memo(Sentry);

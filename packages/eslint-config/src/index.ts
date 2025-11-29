@@ -1,4 +1,4 @@
-import { defineConfig } from 'eslint/config';
+import { type Config, defineConfig } from 'eslint/config';
 import CJS from './cjs.js';
 import D_TS from './d-ts.js';
 import IGNORES from './ignores.js';
@@ -12,7 +12,7 @@ import TS from './ts.js';
 export { defineConfig } from 'eslint/config';
 export { default as disableRulesForFiles } from './disable-rules-for-files.js';
 
-export default defineConfig(
+const CONFIG: Config[] = defineConfig(
   JS,
   JSON,
 
@@ -30,3 +30,5 @@ export default defineConfig(
 
   ...IGNORES,
 );
+
+export default CONFIG;

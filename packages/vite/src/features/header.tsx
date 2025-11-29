@@ -1,5 +1,5 @@
 import I18n from 'lazy-i18n';
-import { memo, type ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import useTheme from '../hooks/use-theme.js';
 import validateString from '../utils/validate-string.js';
 import Authentication from './header-authentication.js';
@@ -22,7 +22,7 @@ function useHeader(): State {
   };
 }
 
-function Header(): ReactElement {
+export default function Header(): ReactElement {
   const { backgroundColor } = useHeader();
   const { displayFontFamily } = useTheme();
 
@@ -41,5 +41,3 @@ function Header(): ReactElement {
     </header>
   );
 }
-
-export default memo(Header);

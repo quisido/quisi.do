@@ -1,7 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 
 export {
-  ExportedHandler,
+  default as ExportedHandler,
   type ExportedHandlerOptions,
 } from './exported-handler.js';
 export { default as FetchHandler } from './fetch-handler.js';

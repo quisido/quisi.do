@@ -1,13 +1,11 @@
-import defineConfig from './define-config.js';
+import defineConfig, { type Config } from './define-config.js';
 import TS from './ts.js';
 
-export default defineConfig({
+const TEST_TS_CONFIG: Config = defineConfig({
   ...TS,
-
   files: ['**/*.test.ts', '**/*.test.tsx'],
   ignores: [],
   name: '@quisido/test-ts',
-
   rules: {
     ...TS.rules,
     /**
@@ -26,3 +24,5 @@ export default defineConfig({
     'no-undefined': 'off',
   },
 });
+
+export default TEST_TS_CONFIG;

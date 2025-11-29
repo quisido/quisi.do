@@ -3,10 +3,11 @@
     {
       "console": "integratedTerminal",
       "name": "Build",
+      "outFiles": ["${workspaceFolder}/dist/**/*"],
       "request": "launch",
       "runtimeArgs": ["run-script", "build"],
       "runtimeExecutable": "npm",
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
       "type": "node"
     }
   ],

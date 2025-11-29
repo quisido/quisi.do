@@ -1,6 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 
-import { expect, vi } from 'vitest';
+import { expect, type Mock, vi } from 'vitest';
 
 export default class TestAnalyticsEngineDataset
   implements AnalyticsEngineDataset
@@ -11,6 +11,7 @@ export default class TestAnalyticsEngineDataset
     expect(this.writeDataPoint).toHaveBeenCalledWith(event);
   };
 
-  public readonly writeDataPoint =
-    vi.fn<(event?: AnalyticsEngineDataPoint) => void>();
+  public readonly writeDataPoint: Mock<
+    (event?: AnalyticsEngineDataPoint) => void
+  > = vi.fn<(event?: AnalyticsEngineDataPoint) => void>();
 }

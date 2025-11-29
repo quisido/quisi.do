@@ -1,11 +1,10 @@
 import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';
 import {
-  memo,
   type PropsWithChildren,
   type ReactElement,
   useEffect,
-  useLayoutEffect,
+  useLayoutEffect
 } from 'react';
 import {
   type AuthenticationState,
@@ -50,4 +49,4 @@ function PostHog({ children }: PropsWithChildren): ReactElement {
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
 }
 
-export default memo(PostHog);
+export default PostHog;

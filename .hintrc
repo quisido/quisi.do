@@ -4,14 +4,12 @@
  */
 {
   // "$schema": "https://raw.githubusercontent.com/webhintio/hint/main/packages/hint/src/lib/config/config-schema.json",
-
   "extends": [
     "accessibility",
     "development",
     "progressive-web-apps",
     "web-recommended"
   ],
-
   "formatters": [
     "codeframe",
     "html",
@@ -19,13 +17,10 @@
     "stylish",
     "summary"
   ],
-
   "hints": {
     "apple-touch-icons": "error",
-
     "axe/aria": [
       "error",
-
       // https://webhint.io/docs/user-guide/hints/hint-axe/aria/#additional-rules-off-by-default
       [
         "aria-allowed-role",
@@ -35,28 +30,22 @@
         "presentation-role-conflict"
       ]
     ],
-
     "axe/color": [
       "error",
-
       // https://webhint.io/docs/user-guide/hints/hint-axe/color/
       [
         "link-in-text-block"
       ]
     ],
-
     "axe/forms": [
       "error",
-
       // https://webhint.io/docs/user-guide/hints/hint-axe/forms/#additional-rules-off-by-default
       [
         "label-title-only"
       ]
     ],
-
     "axe/keyboard": [
       "error",
-
       // https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default
       {
         "accesskeys": "error",
@@ -66,23 +55,17 @@
         "tabindex": "error"
       }
     ],
-
     "axe/language": "error",
-
     "axe/name-role-value": [
       "error",
-
       // https://webhint.io/docs/user-guide/hints/hint-axe/name-role-value/#additional-rules-off-by-default
       [
         "empty-heading"
       ]
     ],
-
     "axe/parsing": "error",
-
     "axe/semantics": [
       "error",
-
       // https://webhint.io/docs/user-guide/hints/hint-axe/semantics/#additional-rules-off-by-default
       [
         "heading-order",
@@ -100,20 +83,16 @@
         "page-has-heading-one"
       ]
     ],
-
     "axe/sensory-and-visual-cues": [
       "error",
-
       // https://webhint.io/docs/user-guide/hints/hint-axe/sensory-and-visual-cues/#additional-rules-off-by-default
       [
         "meta-viewport",
         "meta-viewport-large"
       ]
     ],
-
     "axe/structure": [
       "error",
-
       // https://webhint.io/docs/user-guide/hints/hint-axe/structure/#additional-rules-off-by-default
       [
         "css-orientation-lock",
@@ -121,10 +100,8 @@
         "hidden-content"
       ]
     ],
-
     "axe/tables": [
       "error",
-
       // https://webhint.io/docs/user-guide/hints/hint-axe/tables/#additional-rules-off-by-default
       [
         "scope-attr-valid",
@@ -133,10 +110,8 @@
         "td-has-header"
       ]
     ],
-
     "axe/text-alternatives": [
       "error",
-
       // https://webhint.io/docs/user-guide/hints/hint-axe/text-alternatives/#additional-rules-off-by-default
       [
         "frame-title-unique",
@@ -144,19 +119,15 @@
         "svg-img-alt"
       ]
     ],
-
     "axe/time-and-media": [
       "error",
-
       // https://webhint.io/docs/user-guide/hints/hint-axe/time-and-media/#additional-rules-off-by-default
       [
         "no-autoplay-audio"
       ]
     ],
-
     "babel-config/is-valid": "error",
     "button-type": "error",
-
     "compat-api/css": [
       "error",
       {
@@ -165,7 +136,6 @@
         ]
       }
     ],
-
     "compat-api/html": [
       "error",
       {
@@ -174,7 +144,6 @@
         ]
       }
     ],
-
     "content-type": "error",
     "create-element-svg": "error",
     "css-prefix-order": "error",
@@ -197,7 +166,6 @@
         "cloudName": "dcbaafknx"
       }
     ],
-
     "leading-dot-classlist": "error",
     "manifest-app-name": "error",
     "manifest-exists": "error",
@@ -228,14 +196,12 @@
     // TODO: Reenable this once the Microsoft Edge Tools VS Code extension can find the dependency.
     // "performance-budget": "error",
     "scoped-svg-styles": "error",
-
     "sri": [
       "error",
       {
         "originCriteria": "all"
       }
     ],
-
     "ssllabs": "error",
     "strict-transport-security": "error",
     "stylesheet-limit": "off",

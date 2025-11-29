@@ -2,8 +2,9 @@ import configs, {
   defineConfig,
   disableRulesForFiles,
 } from '@quisido/eslint-config';
+import type { Config } from 'eslint/config';
 
-export default defineConfig(
+const FLAT_CONFIG: Config[] = defineConfig(
   ...configs,
 
   {
@@ -20,15 +21,9 @@ export default defineConfig(
     '@typescript-eslint/only-throw-error': [
       'scripts/utils/npm-exec-workspace.ts',
     ],
-
-    'no-console': [
-      'scripts/publish.ts',
-      'scripts/utils/log-command.ts',
-      'scripts/utils/spy-on-console.ts',
-    ],
-
     'no-plusplus': ['scripts/utils/retry.ts'],
-
     'no-useless-assignment': ['scripts/utils/retry.ts'],
   }),
 );
+
+export default FLAT_CONFIG;

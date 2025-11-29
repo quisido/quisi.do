@@ -9,12 +9,11 @@ export type ExportedHandlerOptions<Env, QueueHandlerMessage, CfHostMetadata> =
     CreateExportedHandlerFetchOptions<Env, QueueHandlerMessage, CfHostMetadata>
   >;
 
-export const ExportedHandler = class QuisidoExportedHandler<
+export default class QuisidoExportedHandler<
   Env = unknown,
   QueueHandlerMessage = unknown,
   CfHostMetadata = unknown,
-> implements ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata>
-{
+> implements ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata> {
   public readonly email?: EmailExportedHandler<Env>;
   public readonly fetch?: ExportedHandlerFetchHandler<Env, CfHostMetadata>;
   public readonly queue?: ExportedHandlerQueueHandler<Env, QueueHandlerMessage>;
@@ -46,4 +45,4 @@ export const ExportedHandler = class QuisidoExportedHandler<
       });
     }
   }
-};
+}

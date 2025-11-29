@@ -66,7 +66,7 @@
     "@hint/parser-javascript": "^3.1.25",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "^1.1.8",
-    "@quisido/vitest-config": "^1.0.5",
+    "@quisido/vitest-config": "^1.0.6",
     "@types/eslint": "^9.6.1",
     "@types/node": "^22.15.21",
     "@vitest/ui": "^4.0.6",
@@ -75,6 +75,7 @@
     "cjs-ts": "^2.0.0",
     "concurrently": "^9.1.2",
     "eslint": "^9.27.0",
+    "fmrs": "2.1.1",
     "hint": "^7.1.13",
     "prettier": "^3.5.3",
     "publint": "^0.3.12",
@@ -85,6 +86,9 @@
   "overrides": {
     "@hint/connector-puppeteer": {
       "puppeteer-core": ">=22.11.1"
+    },
+    "eslint-plugin-react-hooks": {
+      "zod-validation-error": "^4.0.0"
     }
   }
 }
