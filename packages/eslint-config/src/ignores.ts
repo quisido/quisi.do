@@ -6,6 +6,7 @@ const IGNORES_CONFIG: readonly Config[] = defineConfig({
     '.git/**',
     '.idea/**',
     '.pnp.*',
+    '.vitest/**',
     '.wrangler/**',
     '.yarn/**',
     '*.tsbuildinfo',

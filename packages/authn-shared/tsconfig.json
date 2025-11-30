@@ -3,10 +3,9 @@
     "declarationDir": "dist",
     "lib": ["ESNext"],
     "noEmit": true,
-    "rootDir": ".",
-    "sourceRoot": null
+    "rootDir": "."
   },
   "exclude": [".vitest/", "coverage/", "dist/"],
   "extends": "../../tsconfig.json",
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts"]
 }

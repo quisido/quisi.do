@@ -1,4 +1,4 @@
-import { type Actions } from './actions.js';
+import { type Actions } from '../actions.js';
 import reduceKeydown from './reducer/keydown.js';
 import reduceKeyup from './reducer/keyup.js';
 import type State from './state.js';

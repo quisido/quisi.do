@@ -1,4 +1,4 @@
-import type { Jsx } from '../modules/quisido-browser-game/index.js';
+import type { Jsx } from '../../modules/quisido-browser-game/index.js';
 import type State from '../state.js';
 import Chao from './chao/chao.js';
 
