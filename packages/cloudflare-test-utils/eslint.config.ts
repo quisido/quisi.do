@@ -2,11 +2,14 @@ import configs, {
   defineConfig,
   disableRulesForFiles,
 } from '@quisido/eslint-config';
+import type { Config } from 'eslint/config';
 
-export default defineConfig(
+const CONFIG: readonly Config[] = defineConfig(
   ...configs,
 
   ...disableRulesForFiles({
     camelcase: ['src/test-d1-prepared-statement.ts'],
   }),
 );
+
+export default CONFIG;

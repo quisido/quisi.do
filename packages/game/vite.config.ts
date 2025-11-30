@@ -4,6 +4,7 @@ import {
   defineConfig,
   type ESBuildOptions,
   type UserConfig,
+  type UserConfigFnObject,
 } from 'vite';
 import buildTSConfig from './tsconfig.build.json' with { type: 'json' };
 
@@ -67,10 +68,14 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
   plugins: [],
 };
 
-export default defineConfig((env: ConfigEnv): UserConfig => {
-  if (env.mode !== 'production') {
-    return DEVELOPMENT_USER_CONFIG;
-  }
+const CONFIG: UserConfigFnObject = defineConfig(
+  (env: ConfigEnv): UserConfig => {
+    if (env.mode !== 'production') {
+      return DEVELOPMENT_USER_CONFIG;
+    }
 
-  return PRODUCTION_USER_CONFIG;
-});
+    return PRODUCTION_USER_CONFIG;
+  },
+);
+
+export default CONFIG;

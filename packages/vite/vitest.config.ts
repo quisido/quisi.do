@@ -4,7 +4,7 @@ import DEFAULT_CONFIG, {
   defineConfig,
   INLINE_CONFIG,
   PLUGIN_OPTIONS,
-  type UserConfig
+  type UserConfig,
 } from '@quisido/vitest-config';
 import viteReact from '@vitejs/plugin-react';
 

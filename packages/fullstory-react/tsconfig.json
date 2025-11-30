@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "declarationDir": "dist",
     "exactOptionalPropertyTypes": false, // import('@fullstory/snippet').ApiV2
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],

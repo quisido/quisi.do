@@ -5,8 +5,9 @@ import configs, {
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import type { Config } from 'eslint/config';
 
-export default defineConfig(
+const CONFIG: readonly Config[] = defineConfig(
   ...configs,
 
   // Plugins: react-compiler, react-hooks, react-refresh
@@ -14,7 +15,10 @@ export default defineConfig(
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       'react-compiler': reactCompiler,
-      'react-hooks': reactHooks,
+      'react-hooks': {
+        ...reactHooks,
+        configs: {},
+      },
       'react-refresh': reactRefresh,
     },
     rules: {
@@ -31,3 +35,5 @@ export default defineConfig(
     'no-console': ['src/components/sentry/sentry.view.test.tsx'],
   }),
 );
+
+export default CONFIG;

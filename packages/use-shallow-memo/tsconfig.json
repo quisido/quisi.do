@@ -3,6 +3,7 @@
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
+    "declarationDir": "dist",
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],
     "noEmit": true,

@@ -1,14 +1,15 @@
-import CONFIG, {
+import DEFAULT_CONFIG, {
   COVERAGE_OPTIONS,
+  type CoverageOptions,
+  defineConfig,
   INLINE_CONFIG,
   PLUGIN_OPTIONS,
+  type UserConfig,
 } from '@quisido/vitest-config';
 import viteReact from '@vitejs/plugin-react';
-import { defineConfig } from 'vitest/config';
-import type { CoverageOptions } from 'vitest/dist/node.js';
 
-export default defineConfig({
-  ...CONFIG,
+const CONFIG: UserConfig = defineConfig({
+  ...DEFAULT_CONFIG,
   plugins: [...PLUGIN_OPTIONS, viteReact()],
   test: {
     ...INLINE_CONFIG,
@@ -24,3 +25,5 @@ export default defineConfig({
     environment: 'jsdom',
   },
 });
+
+export default CONFIG;

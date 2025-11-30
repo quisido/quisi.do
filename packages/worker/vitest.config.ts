@@ -1,11 +1,12 @@
 import config, {
   COVERAGE_OPTIONS,
+  defineConfig,
   EXCLUDE,
   INLINE_CONFIG,
+  type UserConfig,
 } from '@quisido/vitest-config';
-import { defineConfig } from 'vite';
 
-export default defineConfig({
+const CONFIG: UserConfig = defineConfig({
   ...config,
   test: {
     ...INLINE_CONFIG,
@@ -15,3 +16,5 @@ export default defineConfig({
     },
   },
 });
+
+export default CONFIG;

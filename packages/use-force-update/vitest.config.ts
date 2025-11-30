@@ -1,10 +1,15 @@
-import config, { INLINE_CONFIG } from '@quisido/vitest-config';
-import { defineConfig } from 'vite';
+import DEFAULT_CONFIG, {
+  defineConfig,
+  INLINE_CONFIG,
+  type UserConfig,
+} from '@quisido/vitest-config';
 
-export default defineConfig({
-  ...config,
+const CONFIG: UserConfig = defineConfig({
+  ...DEFAULT_CONFIG,
   test: {
     ...INLINE_CONFIG,
     environment: 'jsdom',
   },
 });
+
+export default CONFIG;
