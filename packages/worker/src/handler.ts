@@ -9,15 +9,15 @@ import {
 } from 'cloudflare-utils';
 import { EventEmitter } from 'eventemitter3';
 import { isRecord, mapToError } from 'fmrs';
+import createTtl from './create-ttl.js';
+import mapKVNamespaceValueToBytes from './map-kv-namespace-value-to-bytes.js';
 import mapMetricDimensionsToDataPoint from './map-metric-dimensions-to-datapoint.js';
+import mapR2BucketValueToBytes from './map-r2-bucket-value-to-bytes.js';
 import mapRequestInfoToString from './map-request-info-to-string.js';
 import type { MetricDimensions } from './metric-dimensions.js';
 import { MetricName } from './metric-name.js';
 import type Runnable from './runnable.js';
-import mapKVNamespaceValueToBytes from './map-kv-namespace-value-to-bytes.js';
-import mapR2BucketValueToBytes from './map-r2-bucket-value-to-bytes.js';
 import sanitizeExpenseTtl from './sanitize-expense-ttl.js';
-import createTtl from './create-ttl.js';
 
 interface EventTypes {
   readonly effect: [Promise<unknown>];
@@ -81,12 +81,10 @@ export default class Handler<
   Env = unknown,
   QueueHandlerMessage = unknown,
   CfHostMetadata = unknown,
-> implements
-    Runnable<
-      HandlerReturnType<K, Env, QueueHandlerMessage, CfHostMetadata>,
-      HandlerParameters<K, Env, QueueHandlerMessage, CfHostMetadata>
-    >
-{
+> implements Runnable<
+  HandlerReturnType<K, Env, QueueHandlerMessage, CfHostMetadata>,
+  HandlerParameters<K, Env, QueueHandlerMessage, CfHostMetadata>
+> {
   readonly #eventEmitter = new EventEmitter<EventTypes>();
   #console: Console = console;
   #env: Env | undefined;

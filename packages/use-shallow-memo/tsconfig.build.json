@@ -4,9 +4,9 @@
     "jsx": "react-jsx",
     "noEmit": false,
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": "src"
   },
   "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/*.test.ts", "src/*.test.tsx", "src/test/"],
   "extends": "./tsconfig.json",
-  "include": ["src/"],
+  "include": ["src/"]
 }

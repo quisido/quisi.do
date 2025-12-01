@@ -1,8 +1,10 @@
 import type * as fullstoryBrowser from '@fullstory/browser';
-import { createContext, type Context } from 'react';
+import { type Context, createContext } from 'react';
 
-const FullstoryBrowserContext: Context<Omit<typeof fullstoryBrowser, 'default'> | null>
-= createContext<Omit<typeof fullstoryBrowser, 'default'> | null>(
+const FullstoryBrowserContext: Context<Omit<
+  typeof fullstoryBrowser,
+  'default'
+> | null> = createContext<Omit<typeof fullstoryBrowser, 'default'> | null>(
   null,
 );
 

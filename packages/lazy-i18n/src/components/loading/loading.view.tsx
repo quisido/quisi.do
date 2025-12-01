@@ -1,9 +1,9 @@
 import type { ReactElement } from 'react';
-// Import Dot from '../../components/loading-dot';
+// import Dot from '../../components/loading-dot';
 
 /**
- * Techncial debt: Determine how to make the loading view pretty without the
- *   complexities of a CSS dependency.
+ *   Techncial debt: Determine how to make the loading view pretty without the
+ * complexities of a CSS dependency.
  */
 
 export default function I18nLoading(): ReactElement {

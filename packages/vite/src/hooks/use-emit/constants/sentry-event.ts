@@ -6,7 +6,7 @@ import sentryTracingPackage from '@sentry/tracing/package.json';
 import sentryTypesPackage from '@sentry/types/package.json';
 import reactDomPackage from 'react-dom/package.json';
 import reactPackage from 'react/package.json';
-// Import sentryReactPackage2 from 'sentry-react/package.json';
+// import sentryReactPackage2 from 'sentry-react/package.json';
 import VERSION from '../../../constants/version.js';
 import validateString from '../../../utils/validate-string.js';
 
@@ -104,4 +104,4 @@ export const SENTRY_EVENT: Event = {
     source: 'route',
   },
   type: 'transaction',
-} ;
+};

@@ -9,16 +9,16 @@ import { CustomThemeProvider } from '../contexts/custom-theme.js';
 import type CustomTheme from '../types/custom-theme.js';
 import toggle from '../utils/toggle.js';
 
-// Import darkVisualStudio from '../themes/dark-visual-studio.json';
-// Import flattenVSCodeColorTheme from '../utils/flatten-vscode-color-theme.js';
-// Const flatDarkVisualStudio = flattenVSCodeColorTheme(darkVisualStudio);
-// Const mapVSCodeColorThemeToTheme = theme => ({
-//   BackgroundColor: flatDarkVisualStudio['editor.background'],
-//   DisplayFontWeight: 700,
-//   ForegroundColor: flatDarkVisualStudio['editor.foreground'],
-//   Primary: [200, 240, 160],
-//   PrimaryFontWeight: 700,
-//   DisplayFontFamily: '"Noto Sans Display", "Noto Sans", Helvetica, sans-serif',
+// import darkVisualStudio from '../themes/dark-visual-studio.json';
+// import flattenVSCodeColorTheme from '../utils/flatten-vscode-color-theme.js';
+// const flatDarkVisualStudio = flattenVSCodeColorTheme(darkVisualStudio);
+// const mapVSCodeColorThemeToTheme = theme => ({
+//   backgroundColor: flatDarkVisualStudio['editor.background'],
+//   displayFontWeight: 700,
+//   foregroundColor: flatDarkVisualStudio['editor.foreground'],
+//   primary: [200, 240, 160],
+//   primaryFontWeight: 700,
+//   displayFontFamily: '"Noto Sans Display", "Noto Sans", Helvetica, sans-serif',
 // });
 
 const IS_DEVELOPMENT: boolean =

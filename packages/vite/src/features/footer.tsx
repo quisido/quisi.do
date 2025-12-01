@@ -4,7 +4,7 @@ import styles from './footer.module.scss';
 import StatusBar from './status-bar.jsx';
 
 const CLASS_NAME: string = validateString(styles['footer']);
-// Const LIST_CLASS_NAME: string = validateString(styles['list']);
+// const LIST_CLASS_NAME: string = validateString(styles['list']);
 
 export default function Footer(): ReactElement | null {
   return (

@@ -4,7 +4,7 @@ import {
   type PropsWithChildren,
   type ReactElement,
   useEffect,
-  useLayoutEffect
+  useLayoutEffect,
 } from 'react';
 import {
   type AuthenticationState,

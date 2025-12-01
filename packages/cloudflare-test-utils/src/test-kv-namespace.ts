@@ -4,9 +4,9 @@ import createNotImplementedThrower from './create-not-implemented-thrower.js';
 
 const TEST_PUT = (): Promise<void> => Promise.resolve();
 
-export default class TestKVNamespace<Key extends string = string>
-  implements KVNamespace<Key>
-{
+export default class TestKVNamespace<
+  Key extends string = string,
+> implements KVNamespace<Key> {
   readonly #put =
     vi.fn<
       (

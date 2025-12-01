@@ -2,9 +2,7 @@
 
 import { expect, type Mock, vi } from 'vitest';
 
-export default class TestAnalyticsEngineDataset
-  implements AnalyticsEngineDataset
-{
+export default class TestAnalyticsEngineDataset implements AnalyticsEngineDataset {
   public readonly expectToHaveWrittenDataPoint = (
     event?: AnalyticsEngineDataPoint,
   ): void => {

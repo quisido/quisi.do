@@ -1,5 +1,5 @@
 {
   "files.exclude": {
-    "vitest.config.ts.timestamp-*-*.mjs": true,
-  },
+    "vitest.config.ts.timestamp-*-*.mjs": true
+  }
 }

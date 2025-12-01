@@ -4,9 +4,9 @@ interface Options {
   readonly now?: (() => number) | undefined;
 }
 
-export default class Throttler<T extends number | string | symbol>
-  implements Runnable<boolean, [T, number, Options?]>
-{
+export default class Throttler<
+  T extends number | string | symbol,
+> implements Runnable<boolean, [T, number, Options?]> {
   readonly #map = new Map<T, number>();
 
   public run = (

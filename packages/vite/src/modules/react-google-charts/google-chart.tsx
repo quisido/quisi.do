@@ -13,7 +13,7 @@ interface Props<C extends Chart> {
   readonly data: readonly (readonly (number | string)[])[];
   readonly headings?: readonly string[] | undefined;
   readonly onError?: ((error: Error) => void) | undefined;
-  readonly options?: ChartOptions<C> | undefined;
+  readonly options?: ChartOptions<C>;
   readonly packages?: readonly string[] | undefined;
 }
 
