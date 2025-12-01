@@ -155,6 +155,7 @@ jobs:
   # Then add this to the CD file.
   sentry-prevent:
     name: Sentry Prevent
+    if: false
     needs: test
     runs-on: ubuntu-latest
     permissions:
