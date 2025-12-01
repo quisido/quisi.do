@@ -1,5 +1,7 @@
 import getReportDir from './src/test/utils/get-nyc-report-dir.js';
 
-export default {
+const CONFIG: Record<string, unknown> = {
   'report-dir': getReportDir(),
-} satisfies Record<string, unknown>;
+};
+
+export default CONFIG;

@@ -4,10 +4,10 @@ import {
   TEST_EXECUTION_CONTEXT,
   TEST_WAIT_UNTIL,
 } from 'cloudflare-test-utils';
-import { StatusCode, type IncomingRequest } from 'cloudflare-utils';
+import { type IncomingRequest, StatusCode } from 'cloudflare-utils';
+import { EventEmitter } from 'eventemitter3';
 import { assert, describe, expect, it, vi } from 'vitest';
 import { ExportedHandler, FetchHandler } from './index.js';
-import { EventEmitter } from 'eventemitter3';
 
 const TEST_ENV: unknown = {};
 const TEST_ERROR_HANDLER = vi.fn();
@@ -27,7 +27,6 @@ describe('createExportedHandlerFetch', (): void => {
     const exportedHandler = new ExportedHandler({
       console: TEST_CONSOLE,
       fetch: vi.fn(),
-
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super(testFetchHandler);
@@ -61,15 +60,14 @@ describe('createExportedHandlerFetch', (): void => {
     const exportedHandler = new ExportedHandler({
       console: TEST_CONSOLE,
       fetch: vi.fn(),
-      onError: TEST_ERROR_HANDLER,
-      onLog: TEST_LOG_HANDLER,
-      onMetric: TEST_METRIC_HANDLER,
-
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super(testFetchHandler);
         }
       },
+      onError: TEST_ERROR_HANDLER,
+      onLog: TEST_LOG_HANDLER,
+      onMetric: TEST_METRIC_HANDLER,
     });
 
     assert('fetch' in exportedHandler);
@@ -100,15 +98,14 @@ describe('createExportedHandlerFetch', (): void => {
     const exportedHandler = new ExportedHandler({
       console: TEST_CONSOLE,
       fetch: vi.fn(),
-      onError: TEST_ERROR_HANDLER,
-      onLog: TEST_LOG_HANDLER,
-      onMetric: TEST_METRIC_HANDLER,
-
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super(testFetchHandler);
         }
       },
+      onError: TEST_ERROR_HANDLER,
+      onLog: TEST_LOG_HANDLER,
+      onMetric: TEST_METRIC_HANDLER,
     });
 
     assert('fetch' in exportedHandler);
@@ -129,10 +126,6 @@ describe('createExportedHandlerFetch', (): void => {
     const exportedHandler = new ExportedHandler({
       console: TEST_CONSOLE,
       fetch: vi.fn(),
-      onError: TEST_ERROR_HANDLER,
-      onLog: TEST_LOG_HANDLER,
-      onMetric: TEST_METRIC_HANDLER,
-
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super(
@@ -145,6 +138,9 @@ describe('createExportedHandlerFetch', (): void => {
           );
         }
       },
+      onError: TEST_ERROR_HANDLER,
+      onLog: TEST_LOG_HANDLER,
+      onMetric: TEST_METRIC_HANDLER,
     });
 
     assert('fetch' in exportedHandler);
@@ -167,10 +163,6 @@ describe('createExportedHandlerFetch', (): void => {
     const exportedHandler = new ExportedHandler({
       console: TEST_CONSOLE,
       fetch: vi.fn(),
-      onError: TEST_ERROR_HANDLER,
-      onLog: TEST_LOG_HANDLER,
-      onMetric: TEST_METRIC_HANDLER,
-
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super(
@@ -181,6 +173,9 @@ describe('createExportedHandlerFetch', (): void => {
           );
         }
       },
+      onError: TEST_ERROR_HANDLER,
+      onLog: TEST_LOG_HANDLER,
+      onMetric: TEST_METRIC_HANDLER,
     });
 
     assert('fetch' in exportedHandler);
@@ -208,11 +203,6 @@ describe('createExportedHandlerFetch', (): void => {
     const exportedHandler = new ExportedHandler({
       console: TEST_CONSOLE,
       fetch: TEST_FETCH,
-      finally: testFinally,
-      onError: TEST_ERROR_HANDLER,
-      onLog: TEST_LOG_HANDLER,
-      onMetric: TEST_METRIC_HANDLER,
-
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super(
@@ -238,6 +228,10 @@ describe('createExportedHandlerFetch', (): void => {
           );
         }
       },
+      finally: testFinally,
+      onError: TEST_ERROR_HANDLER,
+      onLog: TEST_LOG_HANDLER,
+      onMetric: TEST_METRIC_HANDLER,
     });
 
     assert('fetch' in exportedHandler);
@@ -268,11 +262,6 @@ describe('createExportedHandlerFetch', (): void => {
     const exportedHandler = new ExportedHandler({
       console: TEST_CONSOLE,
       fetch: TEST_FETCH,
-      finally: testFinally,
-      onError: TEST_ERROR_HANDLER,
-      onLog: TEST_LOG_HANDLER,
-      onMetric: TEST_METRIC_HANDLER,
-
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super(
@@ -283,6 +272,10 @@ describe('createExportedHandlerFetch', (): void => {
           );
         }
       },
+      finally: testFinally,
+      onError: TEST_ERROR_HANDLER,
+      onLog: TEST_LOG_HANDLER,
+      onMetric: TEST_METRIC_HANDLER,
     });
 
     assert('fetch' in exportedHandler);

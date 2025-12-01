@@ -1,9 +1,9 @@
 import {
+  type ReactElement,
+  type ReactNode,
   use,
   useLayoutEffect,
   useState,
-  type ReactElement,
-  type ReactNode,
 } from 'react';
 import useTheme from '../../hooks/use-theme.js';
 import createRandomNumberGenerator from '../../utils/create-random-number-generator.js';

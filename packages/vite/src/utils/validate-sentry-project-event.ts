@@ -41,6 +41,21 @@ export default function validateSentryProjectEvent(
   return validateObject(
     value,
     {
+      /*
+       * Type: 'error',
+       * user: User,
+       */
+
+      contexts(
+        contexts: unknown,
+        contextsContext: readonly string[],
+      ): Contexts {
+        return validateObject(
+          contexts,
+          { browser: validateContextsBrowser },
+          contextsContext,
+        );
+      },
       dateCreated: validateString,
       dateReceived: validateString,
       /*
@@ -60,21 +75,6 @@ export default function validateSentryProjectEvent(
       size: validateNumber,
       // Tags: readonly Tag[],
       title: validateString,
-      /*
-       * Type: 'error',
-       * user: User,
-       */
-
-      contexts(
-        contexts: unknown,
-        contextsContext: readonly string[],
-      ): Contexts {
-        return validateObject(
-          contexts,
-          { browser: validateContextsBrowser },
-          contextsContext,
-        );
-      },
     },
     context,
   );

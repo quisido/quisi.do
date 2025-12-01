@@ -1,4 +1,4 @@
-import { ErrorCode, isErrorCode } from '@quisido/authn-shared';
+import { type ErrorCode, isErrorCode } from '@quisido/authn-shared';
 
 export default function mapHashToAuthnErrorCode(
   hash: string,

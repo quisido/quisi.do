@@ -2,35 +2,28 @@ import configs, {
   defineConfig,
   disableRulesForFiles,
 } from '@quisido/eslint-config';
+import type { Config } from 'eslint/config';
 
-export default defineConfig(
+const CONFIG: readonly Config[] = defineConfig(
   ...configs,
 
   ...disableRulesForFiles({
-    'max-params': ['src/handle-metric.ts'],
-
     complexity: [
       'src/datadog-aggregate-rum-events/datadog-rum-api.ts',
       'src/features/handle-fetch.ts',
       'src/handle-metric.ts',
     ],
-
-    'max-lines': [
-      'src/datadog-aggregate-rum-events/datadog-rum-api.ts',
-      'src/handle-metric.ts',
-    ],
-
-    'max-lines-per-function': [
-      'src/features/handle-fetch.ts',
-      'src/datadog-aggregate-rum-events/datadog-rum-api.ts',
-      'src/datadog-aggregate-rum-events/get-datadog-aggregate-rum-events.ts',
-      'src/handle-metric.ts',
-    ],
-
-    'max-statements': [
-      'src/datadog-aggregate-rum-events/get-datadog-aggregate-rum-events.ts',
-      'src/features/handle-fetch.ts',
-      'src/handle-metric.ts',
-    ],
   }),
+
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    rules: {
+      'max-lines': 'warn',
+      'max-lines-per-function': 'warn',
+      'max-params': 'warn',
+      'max-statements': 'warn',
+    },
+  },
 );
+
+export default CONFIG;

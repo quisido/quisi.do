@@ -1,15 +1,16 @@
 import basicSsl from '@vitejs/plugin-basic-ssl';
+import react from '@vitejs/plugin-react';
 import ddPlugin from 'dd-trace/esbuild';
-import buildTSConfig from './tsconfig.build.json' with { type: 'json' };
 import {
-  defineConfig,
   type ConfigEnv,
+  defineConfig,
   type ESBuildOptions,
   type UserConfig,
+  type UserConfigFnObject,
 } from 'vite';
-import react from '@vitejs/plugin-react';
-import reduceEnvironmentVariableNamesToRecord from './src/utils/reduce-environment-variable-names-to-record.js';
 import type { Compulsory } from './src/types/compulsory.js';
+import reduceEnvironmentVariableNamesToRecord from './src/utils/reduce-environment-variable-names-to-record.js';
+import buildTSConfig from './tsconfig.build.json' with { type: 'json' };
 
 const ESBUILD_OPTIONS: ESBuildOptions = {
   color: true,
@@ -19,11 +20,6 @@ const ESBUILD_OPTIONS: ESBuildOptions = {
 
 const USER_CONFIG: UserConfig = {
   base: '/',
-  envDir: '../',
-  esbuild: ESBUILD_OPTIONS,
-  publicDir: '../public/',
-  root: './src/',
-
   define: [
     'CLARITY_TAG',
     'CLOUD_ACCOUNT_ID',
@@ -31,7 +27,6 @@ const USER_CONFIG: UserConfig = {
     'CLOUD_PROVIDER',
     'CLOUDFLARE_ANALYTICS_ORIGIN',
     'CLOUDFLARE_INSIGHTS_TOKEN',
-    'CPUS',
     'CSP_ORIGIN',
     'CYPRESS_SCREENSHOTS_SUBFOLDER',
     'DASHBOARD_ENDPOINT',
@@ -54,16 +49,17 @@ const USER_CONFIG: UserConfig = {
     'SENTRY_ENVIRONMENT',
     'WHOAMI',
   ].reduce(reduceEnvironmentVariableNamesToRecord, {}),
+  envDir: '../',
+  esbuild: ESBUILD_OPTIONS,
+  publicDir: '../public',
+  root: 'src',
 };
 
 const DEVELOPMENT_USER_CONFIG: UserConfig = {
   ...USER_CONFIG,
-  plugins: [basicSsl(), ddPlugin, react()],
-
   css: {
     preprocessorMaxWorkers: true,
   },
-
   esbuild: {
     ...ESBUILD_OPTIONS,
     jsxDev: true,
@@ -71,29 +67,25 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
     minifyIdentifiers: false,
     minifySyntax: false,
     minifyWhitespace: false,
-    sourceRoot: './src/',
     sourcemap: 'both',
+    sourceRoot: 'src',
   },
-
+  plugins: [basicSsl(), ddPlugin, react()],
   server: {
-    port: 3000,
-
     headers: {
       'document-policy': 'js-profiling',
     },
+    port: 3000,
   },
 };
 
 const PRODUCTION_USER_CONFIG: UserConfig = {
   ...USER_CONFIG,
-  plugins: [ddPlugin, react()],
-
   build: {
     emptyOutDir: true,
-    outDir: '../dist/',
+    outDir: '../dist', // relative to `root` ('src/')
     sourcemap: true,
   },
-
   esbuild: {
     ...ESBUILD_OPTIONS,
     jsxDev: false,
@@ -103,16 +95,20 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
     sourceRoot: buildTSConfig.compilerOptions.sourceRoot,
     tsconfigRaw: buildTSConfig as Compulsory<ESBuildOptions['tsconfigRaw']>,
   },
-
   html: {
     cspNonce: 'nonce-quisido',
   },
+  plugins: [ddPlugin, react()],
 };
 
-export default defineConfig((env: ConfigEnv): UserConfig => {
-  if (env.mode !== 'production') {
-    return DEVELOPMENT_USER_CONFIG;
-  }
+const CONFIG: UserConfigFnObject = defineConfig(
+  ({ mode }: ConfigEnv): UserConfig => {
+    if (mode !== 'production') {
+      return DEVELOPMENT_USER_CONFIG;
+    }
 
-  return PRODUCTION_USER_CONFIG;
-});
+    return PRODUCTION_USER_CONFIG;
+  },
+);
+
+export default CONFIG;

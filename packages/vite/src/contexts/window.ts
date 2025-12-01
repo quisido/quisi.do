@@ -1,3 +1,7 @@
-import { createContext } from 'react';
+import { type Context, createContext } from 'react';
 
-export default createContext<Window | null>(null);
+const WindowContext: Context<Window | null> = createContext<Window | null>(
+  null,
+);
+
+export default WindowContext;

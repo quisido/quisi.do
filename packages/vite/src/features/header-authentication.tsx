@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactElement } from 'react';
+import { type ReactElement, useEffect, useState } from 'react';
 import { useAuthentication } from '../contexts/authentication.js';
 import LoadingIcon from '../modules/quisi/loading-icon.js';
 import AuthenticateLink from './header-authenticate-link.js';
@@ -13,7 +13,7 @@ interface State {
 const SHOW_LOADING_TIMEOUT = 200;
 
 function useAuthenticationState(): State {
-  const { initiated, data, error, loading } = useAuthentication();
+  const { data, error, initiated, loading } = useAuthentication();
   const [showLoading, setShowLoading] = useState(false);
 
   useEffect((): VoidFunction | undefined => {

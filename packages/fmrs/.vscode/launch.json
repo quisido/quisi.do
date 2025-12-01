@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "console": "integratedTerminal",
+      "name": "Build",
+      "outFiles": ["${workspaceFolder}/dist/**/*"],
+      "request": "launch",
+      "runtimeArgs": ["run-script", "build"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "type": "node"
+    },
+    {
+      "console": "integratedTerminal",
+      "name": "Unit test",
+      "outFiles": ["${workspaceFolder}/dist/**/*"],
+      "request": "launch",
+      "runtimeArgs": ["run-script", "vitest"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "type": "node"
+    }
+  ],
+  "version": "0.2.0"
+}

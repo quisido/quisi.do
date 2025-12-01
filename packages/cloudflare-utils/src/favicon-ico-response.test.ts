@@ -1,9 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  FaviconIcoResponse,
-  StatusCode,
-  TransparentIcoResponse,
-} from './index.js';
+import { FaviconIcoResponse, TransparentIcoResponse } from './index.js';
 
 describe('FaviconIcoResponse', (): void => {
   it('should be a transparent icon response', (): void => {
@@ -29,10 +25,10 @@ describe('FaviconIcoResponse', (): void => {
   });
 
   it('should set custom init', (): void => {
-    const { status } = new FaviconIcoResponse({
-      status: StatusCode.InternalServerError,
+    const { statusText } = new FaviconIcoResponse({
+      statusText: 'Test Status Text',
     });
 
-    expect(status).toBe(StatusCode.InternalServerError);
+    expect(statusText).toBe('Test Status Text');
   });
 });

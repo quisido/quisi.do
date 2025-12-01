@@ -1,6 +1,10 @@
-import { createContext } from 'react';
+import { type Context, createContext } from 'react';
 import { type HeadingLevel } from './heading-level.js';
 
 const DEFAULT_HEADING_LEVEL = 2;
 
-export default createContext<HeadingLevel>(DEFAULT_HEADING_LEVEL);
+const SectionLevelContext: Context<HeadingLevel> = createContext<HeadingLevel>(
+  DEFAULT_HEADING_LEVEL,
+);
+
+export default SectionLevelContext;

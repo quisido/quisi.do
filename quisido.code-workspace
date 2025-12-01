@@ -1,105 +1,105 @@
 {
-  "folders": [
-    {
-      "name": "$root",
-      "path": "."
-    },
-    {
-      "name": "quisi.do (vite)",
-      "path": "packages/vite"
-    },
-    {
-      "name": "Authentication (authn)",
-      "path": "packages/authn"
-    },
-    {
-      "name": "Content Security Policy reporting endpoint (csp)",
-      "path": "packages/csp"
-    },
-    {
-      "name": "Dashboard",
-      "path": "packages/dashboard"
-    },
-    {
-      "name": "authn-shared",
-      "path": "packages/authn-shared"
-    },
-    {
-      "name": "cloudflare-test-utils",
-      "path": "packages/cloudflare-test-utils"
-    },
-    {
-      "name": "cloudflare-utils",
-      "path": "packages/cloudflare-utils"
-    },
-    {
-      "name": "cjs-ts",
-      "path": "packages/cjs-ts"
-    },
-    {
-      "name": "csp-shared",
-      "path": "packages/csp-shared"
-    },
-    {
-      "name": "eslint-config",
-      "path": "packages/eslint-config"
-    },
-    {
-      "name": "fmrs",
-      "path": "packages/fmrs"
-    },
-    {
-      "name": "fullstory-react",
-      "path": "packages/fullstory-react"
-    },
-    {
-      "name": "lazy-i18n",
-      "path": "packages/lazy-i18n"
-    },
-    {
-      "name": "number-format-react",
-      "path": "packages/number-format-react"
-    },
-    {
-      "name": "react-datadog",
-      "path": "packages/react-datadog"
-    },
-    {
-      "name": "sentry-react",
-      "path": "packages/sentry-react"
-    },
-    {
-      "name": "use-force-update",
-      "path": "packages/use-force-update"
-    },
-    {
-      "name": "use-shallow-memo",
-      "path": "packages/use-shallow-memo"
-    },
-    {
-      "name": "vitest-config",
-      "path": "packages/vitest-config"
-    },
-    {
-      "name": "worker",
-      "path": "packages/worker"
-    },
-    {
-      "name": "worker-test",
-      "path": "packages/worker-test"
-    }
-  ],
-
-  "settings": {
-    "codeQL.createQuery.qlPackLocation": "./",
-    "eslint.enable": true,
-    "eslint.format.enable": true,
-    "eslint.useFlatConfig": true,
-    "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
-    "typescript.enablePromptUseWorkspaceTsdk": true,
-
-    "files.associations": {
+	"folders": [
+		{
+			"name": "$root",
+			"path": "."
+		},
+		{
+			"name": "quisi.do (vite)",
+			"path": "packages/vite"
+		},
+		{
+			"name": "Game",
+			"path": "packages/game"
+		},
+		{
+			"name": "Authentication (authn)",
+			"path": "packages/authn"
+		},
+		{
+			"name": "Content Security Policy reporting endpoint (csp)",
+			"path": "packages/csp"
+		},
+		{
+			"name": "Dashboard",
+			"path": "packages/dashboard"
+		},
+		{
+			"name": "authn-shared",
+			"path": "packages/authn-shared"
+		},
+		{
+			"name": "cloudflare-test-utils",
+			"path": "packages/cloudflare-test-utils"
+		},
+		{
+			"name": "cloudflare-utils",
+			"path": "packages/cloudflare-utils"
+		},
+		{
+			"name": "cjs-ts",
+			"path": "packages/cjs-ts"
+		},
+		{
+			"name": "csp-shared",
+			"path": "packages/csp-shared"
+		},
+		{
+			"name": "eslint-config",
+			"path": "packages/eslint-config"
+		},
+		{
+			"name": "fmrs",
+			"path": "packages/fmrs"
+		},
+		{
+			"name": "fullstory-react",
+			"path": "packages/fullstory-react"
+		},
+		{
+			"name": "lazy-i18n",
+			"path": "packages/lazy-i18n"
+		},
+		{
+			"name": "number-format-react",
+			"path": "packages/number-format-react"
+		},
+		{
+			"name": "react-datadog",
+			"path": "packages/react-datadog"
+		},
+		{
+			"name": "sentry-react",
+			"path": "packages/sentry-react"
+		},
+		{
+			"name": "use-force-update",
+			"path": "packages/use-force-update"
+		},
+		{
+			"name": "use-shallow-memo",
+			"path": "packages/use-shallow-memo"
+		},
+		{
+			"name": "vitest-config",
+			"path": "packages/vitest-config"
+		},
+		{
+			"name": "worker",
+			"path": "packages/worker"
+		},
+		{
+			"name": "worker-test",
+			"path": "packages/worker-test"
+		}
+	],
+	"settings": {
+		"files.associations": {
       "**/config/api-extractor.json": "jsonc",
-    },
-  },
+      "**/.aiexclude": "ignore"
+		},
+		"github.copilot.chat.codeGeneration.useInstructionFiles": true,
+		"vitest.maximumConfigs": 99,
+		"yaml.keyOrdering": false
+	}
 }

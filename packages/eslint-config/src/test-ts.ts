@@ -1,17 +1,13 @@
+import defineConfig, { type Config } from './define-config.js';
 import TS from './ts.js';
-import defineConfig from './define-config.js';
 
-export default defineConfig({
+const TEST_TS_CONFIG: Config = defineConfig({
   ...TS,
   files: ['**/*.test.ts', '**/*.test.tsx'],
   ignores: [],
   name: '@quisido/test-ts',
-
   rules: {
     ...TS.rules,
-    'max-lines-per-function': 'off',
-    'no-undefined': 'off',
-
     /**
      *   This rule is incompatible with TypeScript when setting a variable in a
      * callback.
@@ -24,5 +20,9 @@ export default defineConfig({
      * x(); // Type 'never' has no call signatures. ts(2349)
      */
     'init-declarations': 'off',
+    'max-lines-per-function': 'off',
+    'no-undefined': 'off',
   },
 });
+
+export default TEST_TS_CONFIG;

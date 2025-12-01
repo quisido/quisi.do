@@ -39,8 +39,8 @@ const POSITIVE_INACTIVE_CLASS_NAME: string = validateString(
 );
 
 export default function Gauge({
-  min,
   max,
+  min,
   severe,
   value,
   warning,

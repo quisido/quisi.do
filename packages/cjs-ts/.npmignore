@@ -1,3 +1,4 @@
+/.vitest/
 /.vscode/
 /node_modules/
 /src/**/*.test.*
@@ -5,6 +6,7 @@
 /.*.json
 /.*ignore
 /.*rc.*
+/.aiexclude
 /.eslintcache
 /*.iml
 /*-*.*.*.tgz

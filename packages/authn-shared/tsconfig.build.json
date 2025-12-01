@@ -4,7 +4,6 @@
     "noEmit": false,
     "outDir": "dist",
     "rootDir": "src",
-    "sourceRoot": "../src/"
   },
   "exclude": ["src/**/*.test.ts", "src/*.test.ts", "src/test/"],
   "extends": "./tsconfig.json",

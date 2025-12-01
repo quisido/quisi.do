@@ -1,0 +1,10 @@
+{
+  "exclude": [],
+  "extends": "./tsconfig.json",
+  "include": ["scripts/", "types/", "utils/"],
+  "compilerOptions": {
+    "generateCpuProfile": "tsconfig.build.cpuprofile",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext"
+  }
+}

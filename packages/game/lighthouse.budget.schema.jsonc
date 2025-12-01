@@ -1,0 +1,76 @@
+// https://github.com/GoogleChrome/budget.json
+{
+  "additionalProperties": false,
+  "definitions": {
+    "budget": {
+      "properties": {
+        "$schema": {
+          "description": "Part of the JSON Schema standard, this optional keyword declares the URL of the schema that the file conforms to. Editors may download the schema and use it to perform syntax highlighting.",
+          "type": "string"
+        },
+        "path": {
+          "description": "The `path` property indicates the pages that a budget applies to. This string should follow the [robots.txt](https://developers.google.com/search/reference/robots_txt#examples-of-valid-robotstxt-urls) format.\n\nIf `path` is not supplied, a budget will apply to all pages.\n\nIf a page's URL path matches the path property of more than one budget in `budget.json`, then the last matching budget will be applied. As a result, global budgets (e.g. `\"path\": \"/*\"`) should be listed first in `budget.json`, followed by the budgets that override the global budget (e.g. `\"path\": \"/blog\"`).\n\n**Examples**\n\nMatch all URL paths.\n`\"path\": \"/\"` (This is equivalent to writing `\"path\": \"/*\"`)\n\nMatch all URL paths starting with `/articles`.\n`\"path\": \"/articles\"`\n\nMatch URL paths within the `uk/` directory and ending with `shopping-cart`.\n\n`\"path\": \"/uk/*/shopping-cart$\"`",
+          "type": "string"
+        },
+        "resourceCounts": {
+          "description": "This is an array of `resourceCountBudget` objects.",
+          "items": {
+            "$ref": "#/definitions/resourceCountBudget"
+          },
+          "type": "array"
+        },
+        "resourceSizes": {
+          "description": "This is an array of `resourceSizeBudget` objects.",
+          "items": {
+            "$ref": "#/definitions/resourceSizeBudget"
+          },
+          "type": "array"
+        },
+        "resourceType": {
+          "enum": ["document", "font", "image", "media", "other", "script", "stylesheet", "third-party", "total"],
+          "type": "string"
+        }
+      },
+      "required": ["resourceType"],
+      "type": "object"
+    },
+    "resourceCountBudget": {
+      "additionalProperties": false,
+      "description": "A `resourceCountBudget` object consists of two required properties: `resourceType` and `budget`.",
+      "properties": {
+        "budget": {
+          "description": "the number of requests",
+          "type": "number"
+        },
+        "resourceType": {
+          "$ref": "#/definitions/resourceType"
+        }},
+      "required": ["budget", "resourceType"],
+      "type": "object"
+    },
+    "resourceSizeBudget": {
+      "additionalProperties": false,
+      "description": "A `resourceSizeBudget` object contains two properties: `resourceType` and `budget`.",
+      "properties": {
+        "budget": {
+          "description": "the _transfer size_ of a resource, in kilobytes",
+          "type": "number"
+        },
+        "resourceType": {
+          "$ref": "#/definitions/resourceType"
+        }
+      },
+      "type": "object"
+    },
+    "resourceType": {
+      "description": "one of the [resource types](https://github.com/GoogleChrome/budget.json#resourcetype) supported by `budget.json`",
+      "type": "string"
+    }
+  },
+  "description": "the format used by Lighthouse for declaring performance budgets",
+  "items": {
+    "$ref": "#/definitions/budget"
+  },
+  "title": "Lighthouse budget",
+  "type": "array"
+}

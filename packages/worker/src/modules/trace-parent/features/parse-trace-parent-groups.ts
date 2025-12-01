@@ -54,19 +54,18 @@ export default function parseTraceParentGroups({
 
   const traceFlags: number = mapHexToNumber(traceFlagsStr);
   return {
-    traceFlagRandom: hasTraceFlag(traceFlags, TraceFlag.Random),
-    traceFlagSampled: hasTraceFlag(traceFlags, TraceFlag.Sampled),
-    traceFlags,
-    version: mapHexToNumber(version),
-
     parentId: tupleMap(
       splitByLength(parentId, BYTES_PER_HEX) as ParentId,
       mapHexToNumber,
     ),
+    traceFlagRandom: hasTraceFlag(traceFlags, TraceFlag.Random),
+    traceFlags,
+    traceFlagSampled: hasTraceFlag(traceFlags, TraceFlag.Sampled),
 
     traceId: tupleMap(
       splitByLength(traceId, BYTES_PER_HEX) as TraceId,
       mapHexToNumber,
     ),
+    version: mapHexToNumber(version),
   };
 }

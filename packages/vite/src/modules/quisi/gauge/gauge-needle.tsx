@@ -1,5 +1,5 @@
 import { arc } from 'd3-shape';
-import { useEffect, useState, type ReactElement } from 'react';
+import { type ReactElement, useEffect, useState } from 'react';
 import validateString from '../../../utils/validate-string.js';
 import { NEEDLE_RADIANS, NEEDLE_WIDTH, RADIUS } from './gauge-constants.js';
 import GaugeNeedleButton from './gauge-needle-button.jsx';
@@ -41,8 +41,8 @@ export default function GaugeNeedle({
     startAngle: Math.PI - NEEDLE_RADIANS * HALF,
   });
 
-  // Const tipX: number = RADIUS + RADIUS * Math.cos(gaugeAngle + Math.PI);
-  // Const tipY: number = RADIUS - RADIUS * Math.sin(gaugeAngle);
+  // const tipX: number = RADIUS + RADIUS * Math.cos(gaugeAngle + Math.PI);
+  // const tipY: number = RADIUS - RADIUS * Math.sin(gaugeAngle);
   const classNames: string[] = [CLASS_NAME];
   if (typeof classNameProp === 'string') {
     classNames.push(classNameProp);

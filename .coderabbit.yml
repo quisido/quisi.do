@@ -1,0 +1,213 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+chat:
+  art: true
+  auto_reply: true
+  integrations:
+    jira:
+      usage: disabled
+    linear:
+      usage: disabled
+
+code_generation:
+  docstrings:
+    language: en-US
+
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    # Common files are included by default, e.g.
+    # filePatterns:
+    # - .github/copilot-instructions.md
+    # - .github/instructions/.instructions.md
+    # - "**/.clinerules/"
+    # - "**/.cursorrules"
+    # - "**/.cursor/rules/"
+    # - "**/.rules/"
+    # - "**/.windsurfrules"
+    # - "**/AGENT.md"
+    # - "**/AGENTS.md"
+    # - "**/CLAUDE.md"
+    # - "**/GEMINI.md"
+  issues:
+    scope: auto
+  jira:
+    usage: enabled
+  learnings:
+    scope: auto
+  linear:
+    team_keys:
+      - ENG
+    usage: enabled
+  mcp:
+    usage: enabled
+  opt_out: false
+  pull_requests:
+    scope: auto
+  web_search:
+    enabled: true
+
+language: en-US
+
+reviews:
+  abort_on_close: true
+  assess_linked_issues: true
+  auto_apply_labels: false
+  auto_assign_reviewers: false
+  auto_review:
+    auto_incremental_review: true
+    drafts: true
+    enabled: true
+    ignore_usernames:
+      - dependabot
+  changed_files_summary: false
+  collapse_walkthrough: false
+  commit_status: false
+  disable_cache: false
+  estimate_code_review_effort: true
+  fail_commit_status: false
+  finishing_touches:
+    docstrings:
+      enabled: true
+    unit_tests:
+      enabled: true
+  high_level_summary: true
+  high_level_summary_in_walkthrough: true
+  in_progress_fortune: true
+  path_filters:
+    - "**/.*.hintrc"
+    - "**/.*.json"
+    - "**/.*.yml"
+    - "**/.*config"
+    - "**/.*ignore"
+    - "**/.*rc"
+    - "**/.*rc.ts"
+    - "**/.env"
+    - "**/.env.*"
+    - "**/.gitattributes"
+    - "**/*.code-workspace"
+    - "**/*.css"
+    - "**/*.d.ts"
+    - "**/*.html"
+    - "**/*.json"
+    - "**/*.jsonc"
+    - "**/*.md"
+    - "**/*.scss"
+    - "**/*.sql"
+    - "**/*.ts"
+    - "**/*.tsx"
+    - "**/*.txt"
+    - "**/*.vars"
+    - "**/*.yml"
+    - "**/LICENSE"
+  poem: true
+  pre_merge_checks:
+    custom_checks:
+      - instructions: >
+          Ensure all new code follows the project's coding standards and best
+          practices.
+        mode: warning
+        name: Code Quality Check
+      - instructions: >
+          Check for any security vulnerabilities or sensitive information in the
+          code.
+        mode: warning
+        name: Security Review
+    description:
+      mode: warning
+    docstrings:
+      mode: warning
+      threshold: 100
+    issue_assessment:
+      mode: warning
+    title:
+      mode: warning
+      requirements: >
+        Title should be concise and descriptive, ideally under 50 characters
+  profile: assertive
+  related_issues: true
+  related_prs: true
+  request_changes_workflow: true
+  review_status: false
+  sequence_diagrams: true
+  suggested_labels: false
+  suggested_reviewers: false
+  tools:
+    actionlint:
+      enabled: true
+    biome:
+      enabled: true
+    brakeman:
+      enabled: false
+    buf:
+      enabled: false
+    checkmake:
+      enabled: false
+    checkov:
+      enabled: true
+    circleci:
+      enabled: false
+    clippy:
+      enabled: false
+    cppcheck:
+      enabled: false
+    detekt:
+      enabled: false
+    dotenvLint:
+      enabled: true
+    eslint:
+      enabled: true
+    flake8:
+      enabled: false
+    github-checks:
+      enabled: true
+      timeout_ms: 900000 # 15 minutes
+    gitleaks:
+      enabled: true
+    golangci-lint:
+      enabled: false
+    hadolint:
+      enabled: true
+    htmlhint:
+      enabled: true
+    languagetool:
+      enabled: true
+      enabled_only: false
+      level: picky # | 'default'
+    luacheck:
+      enabled: true
+    markdownlint:
+      enabled: true
+    osvScanner:
+      enabled: true
+    oxc:
+      enabled: true
+    phpcs:
+      enabled: false
+    phpmd:
+      enabled: false
+    phpstan:
+      enabled: false
+    pmd:
+      enabled: false
+    prismaLint:
+      enabled: false
+    pylint:
+      enabled: false
+    regal:
+      enabled: false
+    rubocop:
+      enabled: false
+    ruff:
+      enabled: false
+    semgrep:
+      enabled: true
+    shellcheck:
+      enabled: true
+    shopifyThemeCheck:
+      enabled: false
+    sqlfluff:
+      enabled: true
+    swiftlint:
+      enabled: false
+    yamllint:
+      enabled: true

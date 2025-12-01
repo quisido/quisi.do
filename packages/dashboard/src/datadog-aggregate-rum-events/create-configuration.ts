@@ -12,15 +12,13 @@ export default function createConfiguration({
   rumReadApplicationKey,
 }: Options): client.Configuration {
   return client.createConfiguration({
-    debug: true,
-    enableRetry: true,
-    fetch,
-
     authMethods: {
       apiKeyAuth: apiKey,
       appKeyAuth: rumReadApplicationKey,
     },
-
+    debug: true,
+    enableRetry: true,
+    fetch,
     httpConfig: {
       compress: true,
     },

@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { GITHUB_SHA } from '../constants/github-sha.js';
 import {
-  useAuthentication,
   type AuthenticationState,
+  useAuthentication,
 } from '../contexts/authentication.js';
 import sanitizeLogRocketRequest from '../utils/sanitize-log-rocket-request.js';
 import sanitizeLogRocketResponse from '../utils/sanitize-log-rocket-response.js';

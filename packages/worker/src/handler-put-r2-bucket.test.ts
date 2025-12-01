@@ -20,13 +20,12 @@ describe('Handler', (): void => {
     }
 
     const handler = new TestExportedHandler({
-      onMetric: TEST_METRIC_HANDLER,
-
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super(testFetchHandler);
         }
       },
+      onMetric: TEST_METRIC_HANDLER,
     });
 
     assert('fetch' in handler);
@@ -58,14 +57,13 @@ describe('Handler', (): void => {
     }
 
     const handler = new TestExportedHandler({
-      onError: TEST_ERROR_HANDLER,
-      onMetric: TEST_METRIC_HANDLER,
-
       FetchHandler: class TestFetchHandler extends FetchHandler {
         public constructor() {
           super(testFetchHandler);
         }
       },
+      onError: TEST_ERROR_HANDLER,
+      onMetric: TEST_METRIC_HANDLER,
     });
 
     assert('fetch' in handler);

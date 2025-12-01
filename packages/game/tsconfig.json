@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "isolatedModules": true,
+    "jsx": "react-jsxdev",
+    // "jsxImportSource": "./src/modules/quisido-game",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "plugins": [],
+    "resolveJsonModule": true,
+    "rootDir": ".",
+    "strict": true,
+    "types": ["@types/node"]
+  },
+  "exclude": ["./.vitest/"],
+  "extends": "../../tsconfig.json",
+  "include": [
+    "**/*.json",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.webmanifest"
+  ]
+}

@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://www.schemastore.org/github-action.json
+name: Setup
+description: Sets up Node and installs dependencies
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        cache: npm
+        cache-dependency-path: package-lock.json
+        check-latest: true
+        node-version-file: .nvmrc
+    - name: Install dependencies
+      run: npm ci
+      shell: bash

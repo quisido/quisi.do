@@ -8,7 +8,7 @@ export default class AuditDetailsTableHeadingsToRowReducer {
     this.#item = item;
   }
 
-  #mapHeadingToValue = ({ valueType, key, ...heading }) => {
+  #mapHeadingToValue = ({ key, valueType, ...heading }) => {
     switch (valueType) {
       case 'code':
       case 'text':

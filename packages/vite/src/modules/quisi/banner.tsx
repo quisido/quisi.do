@@ -1,5 +1,5 @@
 import { useButton } from '@react-aria/button';
-import { useRef, type ReactElement, type ReactNode } from 'react';
+import { type ReactElement, type ReactNode, useRef } from 'react';
 import Emoji from '../../components/emoji.js';
 import useTheme from '../../hooks/use-theme.js';
 import optional from '../../utils/optional.js';

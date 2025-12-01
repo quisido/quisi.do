@@ -1,6 +1,6 @@
 import { type Config } from 'lighthouse';
 
-export default {
+const CONFIG: Config = {
   extends: 'lighthouse:default',
   settings: {
     /**
@@ -14,8 +14,6 @@ export default {
      * saveAssets: true,
      * verbose: false,
      */
-    locale: 'en-US',
-
     blockedUrlPatterns: [
       'https://ajax.cloudflare.com/*',
       'https://analytics.google.com/*',
@@ -84,5 +82,8 @@ export default {
       'https://localhost:6586/*',
       'https://localhost:9778/*',
     ],
+    locale: 'en-US',
   },
-} satisfies Config;
+};
+
+export default CONFIG;

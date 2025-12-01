@@ -8,11 +8,10 @@ describe('getAccessControlAllowOrigin', (): void => {
 
     // Act
     const { expectHeaderToBe } = await fetch('/whoami/', {
-      method: 'OPTIONS',
-
       headers: new Headers({
         origin: 'http://localhost:3000',
       }),
+      method: 'OPTIONS',
     });
 
     // Assert
@@ -25,11 +24,10 @@ describe('getAccessControlAllowOrigin', (): void => {
 
     // Act
     const { expectHeaderToBe } = await fetch('/whoami/', {
-      method: 'OPTIONS',
-
       headers: new Headers({
         origin: 'https://localhost:3000',
       }),
+      method: 'OPTIONS',
     });
 
     // Assert
@@ -46,11 +44,10 @@ describe('getAccessControlAllowOrigin', (): void => {
 
     // Act
     const { expectHeaderToBe } = await fetch('/whoami/', {
-      method: 'OPTIONS',
-
       headers: new Headers({
         origin: 'https://test.quisi.do',
       }),
+      method: 'OPTIONS',
     });
 
     // Assert

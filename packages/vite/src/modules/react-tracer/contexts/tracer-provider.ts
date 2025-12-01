@@ -1,5 +1,8 @@
-import type { TracerProvider } from '@opentelemetry/api';
-import { createContext } from 'react';
+import type { TracerProvider as TracerProviderType } from '@opentelemetry/api';
+import { type Context, createContext } from 'react';
 
-// `TraceProvider` loads asynchronously. `null` represents a loading state.
-export default createContext<TracerProvider | null>(null);
+// `TracerProvider` loads asynchronously. `null` represents a loading state.
+const TracerProvider: Context<TracerProviderType | null> =
+  createContext<TracerProviderType | null>(null);
+
+export default TracerProvider;

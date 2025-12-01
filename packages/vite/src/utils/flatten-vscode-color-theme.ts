@@ -1,9 +1,11 @@
+import { mapObjectToEntries } from 'fmrs';
+
 type RecordKeyOf<T> = T extends Record<infer U, unknown> ? U : never;
 
 interface TokenColors {
-  // Readonly name?: string;
+  // readonly name?: string;
   readonly scope: string | readonly string[];
-  readonly settings: Partial<Readonly<Record<string, string>>>;
+  readonly settings: Partial<Readonly<Record<string, string | undefined>>>;
 }
 
 type TokenColorKeys<T extends readonly TokenColors[]> =
@@ -12,9 +14,9 @@ type TokenColorKeys<T extends readonly TokenColors[]> =
     : `${T[number]['scope'][number]}.${RecordKeyOf<T[number]['settings']>}`;
 
 interface VSCodeColorTheme {
-  // Readonly $schema: string; // 'vscode://schemas/color-theme'
+  // readonly $schema: string; // 'vscode://schemas/color-theme'
   readonly colors?: Readonly<Record<string, string>> | undefined;
-  // Readonly name: string;
+  // readonly name: string;
   readonly semanticTokenColors?: Readonly<Record<string, string>> | undefined;
   readonly tokenColors?: readonly TokenColors[] | undefined;
 }
@@ -24,15 +26,12 @@ type FlatTokenColors<T extends VSCodeColorTheme> =
     ? Readonly<Record<TokenColorKeys<T['tokenColors']>, string>>
     : Readonly<Record<string, never>>;
 
-type FlatVSCodeColorTheme<T extends VSCodeColorTheme> = T['colors'] &
-  T['semanticTokenColors'] &
+type FlatVSCodeColorTheme<T extends VSCodeColorTheme> =
+  // T['colors'] &
+  // T['semanticTokenColors'] &
   FlatTokenColors<T>;
 
 const EMPTY_OBJECT: Readonly<Record<string, never>> = {};
-
-const mapObjectToEntries = <T extends Record<string, unknown>>(
-  obj: Partial<T>,
-): [keyof T, T[keyof T]][] => Object.entries(obj) as [keyof T, T[keyof T]][];
 
 const mapTokenColorsToRecord = <T extends VSCodeColorTheme>(
   // Compulsory<T['tokenColors']>[number]
@@ -42,11 +41,17 @@ const mapTokenColorsToRecord = <T extends VSCodeColorTheme>(
   if (typeof scope === 'string') {
     const reduceEntriesToRecord = (
       settingsRecord: FlatTokenColors<T>,
-      [key, value]: readonly [string, string],
-    ): FlatTokenColors<T> => ({
-      ...settingsRecord,
-      [key]: value,
-    });
+      [key, value]: readonly [string, string | undefined],
+    ): FlatTokenColors<T> => {
+      if (typeof value === 'undefined') {
+        return settingsRecord;
+      }
+      return {
+        ...settingsRecord,
+        [key]: value,
+      };
+    };
+
     return mapObjectToEntries(settings).reduce<FlatTokenColors<T>>(
       reduceEntriesToRecord,
       EMPTY_OBJECT,

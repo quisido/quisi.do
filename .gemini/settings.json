@@ -1,0 +1,17 @@
+{
+  "mcp": {
+    "allowed": ["chrome-devtools", "sentry"]
+  },
+  "mcpServers": {
+    "chrome-devtools": {
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ],
+      "command": "npx"
+    },
+    "sentry": {
+      "httpUrl": "https://mcp.sentry.dev/mcp"
+    }
+  }
+}

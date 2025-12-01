@@ -11,8 +11,8 @@ export default interface TraceParent {
     number,
   ];
   readonly traceFlagRandom: boolean;
-  readonly traceFlagSampled: boolean;
   readonly traceFlags: number;
+  readonly traceFlagSampled: boolean;
   readonly traceId: readonly [
     number,
     number,

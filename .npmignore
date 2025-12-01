@@ -1,11 +1,14 @@
 /.git/
 /.github/
+/.vitest/
 /.vscode/
 /.wrangler/
 /jest/
 /node_modules/
 /packages/
 /sarif/
+/.*.json
+/.*.yml
 /.*ignore
 /.*rc.*
 /.editorconfig

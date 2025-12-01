@@ -1,4 +1,4 @@
-/// <reference types="node" />
+/* eslint-disable no-console */
 import getWorkspaceDirectories from './utils/get-workspace-directories.js';
 import isPublicWorkspaceDirectory from './utils/is-public-workspace-directory.js';
 import npmExecWorkspace from './utils/npm-exec-workspace.js';

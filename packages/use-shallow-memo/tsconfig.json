@@ -1,13 +1,12 @@
 {
-  "exclude": ["coverage/", "dist/", "node_modules/"],
+  "exclude": [".vitest/", "coverage/", "dist/", "node_modules/"],
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx"],
-
   "compilerOptions": {
+    "declarationDir": "dist",
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
-    "rootDir": ".",
-    "sourceRoot": "."
+    "rootDir": "."
   }
 }

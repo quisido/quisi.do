@@ -1,16 +1,14 @@
 import { isNot } from 'fmrs';
 import {
-  memo,
+  type PropsWithChildren,
+  type ReactElement,
+  type RefObject,
   useCallback,
   useMemo,
   useRef,
   useState,
-  type PropsWithChildren,
-  type ReactElement,
-  type RefObject,
 } from 'react';
 import { NotificationsProvider } from '../contexts/notifications.js';
-import useEffectEvent from '../hooks/use-effect-event.js';
 import useHash from '../hooks/use-hash.js';
 import type Notification from '../types/notification.js';
 import type { WithKey } from '../types/with-key.js';
@@ -34,7 +32,7 @@ const loadAuthnErrorNotificationModule = async (): Promise<{
   default: typeof AuthnErrorNotification;
 }> => import('./authn-error-notification.js');
 
-function NotificationsProviderFeature({
+export default function NotificationsProviderFeature({
   children,
 }: PropsWithChildren): ReactElement {
   // Contexts
@@ -45,32 +43,27 @@ function NotificationsProviderFeature({
   const [notifications, setNotifications] = useState(INITIAL_NOTIFICATIONS);
 
   // Callbacks
-  const dismiss = useEffectEvent(
-    (notification: WithKey<Notification>): void => {
-      setNotifications(filter(isNot<WithKey<Notification>>(notification)));
-      if (typeof notification.onDismiss === 'function') {
-        notification.onDismiss();
-      }
-    },
-  );
+  const dismiss = (notification: WithKey<Notification>): void => {
+    setNotifications(filter(isNot<WithKey<Notification>>(notification)));
+    if (typeof notification.onDismiss === 'function') {
+      notification.onDismiss();
+    }
+  };
 
-  const notify = useCallback(
-    (notification: Notification): VoidFunction => {
-      key.current += INCREMENT;
-      const newNotification: WithKey<Notification> = {
-        key: key.current,
-        ...notification,
-      };
+  const notify = useCallback((notification: Notification): VoidFunction => {
+    key.current += INCREMENT;
+    const newNotification: WithKey<Notification> = {
+      key: key.current,
+      ...notification,
+    };
 
-      setNotifications(append<WithKey<Notification>>(newNotification));
+    setNotifications(append<WithKey<Notification>>(newNotification));
 
-      // Expose the dismiss handler so that it can be bound to other actions.
-      return (): void => {
-        dismiss(newNotification);
-      };
-    },
-    [dismiss],
-  );
+    // Expose the dismiss handler so that it can be bound to other actions.
+    return (): void => {
+      dismiss(newNotification);
+    };
+  }, []);
 
   return (
     <NotificationsProvider
@@ -121,11 +114,9 @@ function NotificationsProviderFeature({
         };
 
         return [newNotifications.map(mapToDismissable), notify];
-      }, [dismiss, hash, notifications, notify, setHash])}
+      }, [hash, notifications, notify, setHash])}
     >
       {children}
     </NotificationsProvider>
   );
 }
-
-export default memo(NotificationsProviderFeature);

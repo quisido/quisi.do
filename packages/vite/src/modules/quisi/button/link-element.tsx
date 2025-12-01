@@ -1,9 +1,9 @@
 import { useLink } from '@react-aria/link';
 import {
-  useRef,
   type CSSProperties,
   type PropsWithChildren,
   type ReactElement,
+  useRef,
 } from 'react';
 import optional from '../../../utils/optional.js';
 

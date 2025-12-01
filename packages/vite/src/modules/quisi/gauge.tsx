@@ -9,8 +9,8 @@ import mapNumberToPowerOf2 from './map-number-to-power-of-2.js';
 export interface Threshold {
   readonly activeClassName?: string | undefined;
   readonly className?: string | undefined;
-  readonly inactiveClassName?: string | undefined;
   readonly from?: number | undefined;
+  readonly inactiveClassName?: string | undefined;
   readonly to?: number | undefined;
 }
 

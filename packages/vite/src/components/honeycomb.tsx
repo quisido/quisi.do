@@ -1,10 +1,10 @@
 import { HoneycombWebSDK } from '@honeycombio/opentelemetry-web';
 import { getWebAutoInstrumentations } from '@opentelemetry/auto-instrumentations-web';
 import {
-  useEffect,
-  useMemo,
   type PropsWithChildren,
   type ReactElement,
+  useEffect,
+  useMemo,
 } from 'react';
 import { HoneycombProvider } from '../contexts/honeycomb.js';
 import Resource from '../features/resource.js';

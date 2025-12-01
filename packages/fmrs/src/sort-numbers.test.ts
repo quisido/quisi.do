@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import sortNumbers from './sort-numbers.js';
+import { sortNumbers } from './index.js';
 
 const FIFTH = 5;
 const FIRST = 1;

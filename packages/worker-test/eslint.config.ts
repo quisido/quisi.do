@@ -2,8 +2,9 @@ import configs, {
   defineConfig,
   disableRulesForFiles,
 } from '@quisido/eslint-config';
+import type { Config } from 'eslint/config';
 
-export default defineConfig(
+const CONFIG: readonly Config[] = defineConfig(
   ...configs,
 
   ...disableRulesForFiles({
@@ -13,3 +14,5 @@ export default defineConfig(
     'max-statements': ['src/test-exported-handler.ts'],
   }),
 );
+
+export default CONFIG;

@@ -1,12 +1,18 @@
-import CONFIG, { INLINE_CONFIG, PLUGIN_OPTIONS } from '@quisido/vitest-config';
+import DEFAULT_CONFIG, {
+  defineConfig,
+  INLINE_CONFIG,
+  PLUGIN_OPTIONS,
+  type UserConfig,
+} from '@quisido/vitest-config';
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vitest/config';
 
-export default defineConfig({
-  ...CONFIG,
+const CONFIG: UserConfig = defineConfig({
+  ...DEFAULT_CONFIG,
   plugins: [...PLUGIN_OPTIONS, react()],
   test: {
     ...INLINE_CONFIG,
     environment: 'jsdom',
   },
 });
+
+export default CONFIG;

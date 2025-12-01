@@ -7,7 +7,6 @@ interface ImportMetaEnv {
   readonly CLOUD_PROVIDER?: string | undefined;
   readonly CLOUDFLARE_ANALYTICS_ORIGIN?: string | undefined;
   readonly CLOUDFLARE_INSIGHTS_TOKEN?: string | undefined;
-  readonly CPUS?: string | undefined;
   readonly CSP_ORIGIN?: string | undefined;
   readonly CYPRESS_SCREENSHOTS_SUBFOLDER?: string | undefined;
   readonly DASHBOARD_ENDPOINT?: string | undefined;
@@ -21,7 +20,7 @@ interface ImportMetaEnv {
   readonly METICULOUS_RECORDING_TOKEN?: string | undefined;
   readonly MIXPANEL_TOKEN?: string | undefined;
   readonly NEW_RELIC_LICENSE_KEY?: string | undefined;
-  readonly NODE_ENV?: NodeJS.ProcessEnv['NODE_ENV'] | undefined;
+  readonly NODE_ENV?: NodeJS.ProcessEnv['NODE_ENV'];
   readonly NYC_REPORT_DIR?: string | undefined;
   readonly PATREON_OAUTH_CLIENT_ID?: string | undefined;
   readonly PATREON_OAUTH_REDIRECT_URI?: string | undefined;

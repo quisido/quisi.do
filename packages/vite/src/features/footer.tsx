@@ -1,12 +1,12 @@
-import { memo, type ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import validateString from '../utils/validate-string.js';
 import styles from './footer.module.scss';
 import StatusBar from './status-bar.jsx';
 
 const CLASS_NAME: string = validateString(styles['footer']);
-// Const LIST_CLASS_NAME: string = validateString(styles['list']);
+// const LIST_CLASS_NAME: string = validateString(styles['list']);
 
-function Footer(): ReactElement | null {
+export default function Footer(): ReactElement | null {
   return (
     <footer className={CLASS_NAME}>
       {/* <ul className={LIST_CLASS_NAME}>
@@ -38,5 +38,3 @@ function Footer(): ReactElement | null {
     </footer>
   );
 }
-
-export default memo(Footer);

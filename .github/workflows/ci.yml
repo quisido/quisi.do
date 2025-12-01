@@ -1,7 +1,11 @@
 name: Continuous integration
 
+concurrency:
+  cancel-in-progress: true
+  group: pull-request-${{ github.event.pull_request.number }}
+
 jobs:
-  # Stage 1: bun, dependency-review, devskim, install
+  # Stage 1: bun, dependency-review, devskim
   # bun:
   #   name: bun
   #   runs-on: ubuntu-latest
@@ -17,16 +21,16 @@ jobs:
   #     - name: Test
   #       run: bun run test
 
-  # dependency-review:
-  #   name: Dependency review
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     pull-requests: write
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #     - name: Review dependencies
-  #       uses: actions/dependency-review-action@v2
+  dependency-review:
+    name: Dependency review
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Review
+        uses: actions/dependency-review-action@v2
 
   devskim:
     name: DevSkim
@@ -36,49 +40,29 @@ jobs:
       contents: read
       security-events: write
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
       - name: Scan
         uses: microsoft/devskim-action@v1
         with:
           options-json: config/devskim.json
-      - name: Upload SARIF
+      - name: Upload
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: devskim-results.sarif
           wait-for-processing: true
 
-  install:
-    name: Install
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
   # Stage 2: build
   build:
     name: Build
-    needs: install
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Build
-        run: npm run build
+        run: npm run-script build
         env:
           CLARITY_TAG: ln18ya61ca
           CLOUD_ACCOUNT_ID: quisido
@@ -102,7 +86,7 @@ jobs:
           PATREON_OAUTH_REDIRECT_URI: https://localhost:5882/patreon/
           SENTRY_ENVIRONMENT: staging
           WHOAMI: https://localhost:5882/whoami/
-      - name: Upload artifacts
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: build
@@ -113,25 +97,22 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifacts
+      - name: Setup Node
+        uses: actions/setup-node@v4
+      - name: Download build
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Audit
-        run: npm run lighthouse:report --workspace=packages/vite
+        run: npm run-script lighthouse:report --workspace=packages/vite
       - name: Validate
-        run: npm run postlighthouse --workspace=packages/vite
-      - name: Upload report
+        run: npm run-script postlighthouse --workspace=packages/vite
+      - name: Upload
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -146,28 +127,48 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifacts
+      - name: Download build
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Test
-        run: npm run test --include-workspace-root --workspaces
+        run: npm run-script test --include-workspace-root --workspaces
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
           DD_ENV: ci
           DD_SERVICE: quisi.do
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test
+          path: packages/*/.vitest/
+
+  # This requires some more setup to work. Configure the test step to upload report artifacts.
+  # Then add this to the CD file.
+  sentry-prevent:
+    name: Sentry Prevent
+    if: false
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Download
+        uses: actions/download-artifact@v4
+        with:
+          name: test
+          path: packages/*/
+      - name: Upload
+        if: ${{ !cancelled() }}
+        uses: getsentry/prevent-action@v0
 
   # Stage 4: coverage
   # coverage:
@@ -175,7 +176,7 @@ jobs:
   #   needs: [test] # cypress
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - name: Checkout repository
+  #     - name: Checkout
   #       uses: actions/checkout@v4
   #     - name: Download Cypress artifacts
   #       uses: actions/download-artifact@v4
@@ -187,15 +188,10 @@ jobs:
   #       with:
   #         name: test
   #         path: /
-  #     - name: Setup Node
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         cache: npm
-  #         node-version: latest
-  #     - name: Install dependencies
-  #       run: npm install --legacy-peer-deps
+  #     - name: Setup
+  #       uses: ./.github/actions/setup
   #     - name: Report coverage
-  #       run: npm run coverage --workspace=packages/vite
+  #       run: npm run-script coverage --workspace=packages/vite
   #       env:
   #         BRANCHES_COVERAGE_THRESHOLD: 1
   #         FUNCTIONS_COVERAGE_THRESHOLD: 1

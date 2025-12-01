@@ -1,14 +1,14 @@
 import { identity } from 'fmrs';
 import {
+  type Dispatch,
+  type SetStateAction,
   useEffect,
   useLayoutEffect,
   useMemo,
   useState,
-  type Dispatch,
-  type SetStateAction,
 } from 'react';
-import useLocalStorageWindow from './use-local-storage-window.js';
 import SetMap from './set-map.js';
+import useLocalStorageWindow from './use-local-storage-window.js';
 
 type StateSetter = (value: unknown) => void;
 

@@ -1,5 +1,5 @@
 import { mapToError } from 'fmrs';
-import { useEffect, useRef, type ReactElement, type RefObject } from 'react';
+import { type ReactElement, type RefObject, useEffect, useRef } from 'react';
 import useShallowMemo from 'use-shallow-memo';
 import useEffectEvent from '../../hooks/use-effect-event.js';
 import noop from '../../utils/noop.js';
@@ -13,7 +13,7 @@ interface Props<C extends Chart> {
   readonly data: readonly (readonly (number | string)[])[];
   readonly headings?: readonly string[] | undefined;
   readonly onError?: ((error: Error) => void) | undefined;
-  readonly options?: ChartOptions<C> | undefined;
+  readonly options?: ChartOptions<C>;
   readonly packages?: readonly string[] | undefined;
 }
 
@@ -35,6 +35,7 @@ export default function GoogleChart<C extends Chart>({
   const dataStr: string = JSON.stringify(dataProp);
   const optionsStr: string = JSON.stringify(optionsProp);
   const handleError = useEffectEvent(onError ?? noop);
+
   useEffect((): void => {
     const element: HTMLDivElement | null = elementRef.current;
     if (element === null) {
@@ -87,7 +88,7 @@ export default function GoogleChart<C extends Chart>({
         const error: Error = mapToError(err);
         handleError(error);
       });
-  }, [chart, dataStr, handleError, headings, optionsStr, packages]);
+  }, [chart, dataStr, headings, optionsStr, packages]);
 
   return <div className={className} ref={elementRef} />;
 }

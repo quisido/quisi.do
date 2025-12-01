@@ -7,8 +7,8 @@ import parseJson from '../utils/parse-json.js';
 import handlePatreonTokenErrorResponseBody from './handle-patreon-token-error-response-body.js';
 
 interface Options {
-  readonly response: Response;
   readonly requestCode: string;
+  readonly response: Response;
 }
 
 export default async function handlePatreonTokenErrorResponse(

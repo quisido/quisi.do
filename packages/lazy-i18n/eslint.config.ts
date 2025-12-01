@@ -5,18 +5,22 @@ import configs, {
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import type { Config } from 'eslint/config';
 
-export default defineConfig(
+const CONFIG: readonly Config[] = defineConfig(
   ...configs,
 
   // Plugins: react-compiler, react-hooks, react-refresh
   {
+    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       'react-compiler': reactCompiler,
-      'react-hooks': reactHooks,
+      'react-hooks': {
+        ...reactHooks,
+        configs: {},
+      },
       'react-refresh': reactRefresh,
     },
-
     rules: {
       'react-compiler/react-compiler': 'error',
       'react-hooks/exhaustive-deps': 'error',
@@ -26,10 +30,6 @@ export default defineConfig(
   },
 
   ...disableRulesForFiles({
-    'func-style': ['src/**/*.tsx'],
-    'no-magic-numbers': ['src/components/loading-dot/loading-dot.view.tsx'],
-    'no-useless-return': ['src/runnables/runnable-translate-function.ts'],
-
     '@typescript-eslint/no-floating-promises': [
       'src/utils/create-new-items.ts',
       'src/utils/replace-variables.tsx',
@@ -39,21 +39,22 @@ export default defineConfig(
       'src/components/provider/provider.hook.test.ts',
     ],
 
-    'max-lines-per-function': [
-      'src/components/provider/hooks/use-load-translations.ts',
-      'src/components/provider/provider.hook.ts',
-      'src/runnables/runnable-translate-function.ts',
-    ],
-
-    'max-statements': [
-      'src/components/provider/hooks/use-load-translations.ts',
-      'src/components/provider/provider.hook.ts',
-      'src/runnables/runnable-translate-function.ts',
-      'src/utils/replace-variables.tsx',
-    ],
+    'func-style': ['src/**/*.tsx'],
+    'no-magic-numbers': ['src/components/loading-dot/loading-dot.view.tsx'],
+    'no-useless-return': ['src/runnables/runnable-translate-function.ts'],
 
     'react-compiler/react-compiler': [
       'src/components/provider/provider.hook.ts',
     ],
   }),
+
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    rules: {
+      'max-lines-per-function': 'warn',
+      'max-statements': 'warn',
+    },
+  },
 );
+
+export default CONFIG;

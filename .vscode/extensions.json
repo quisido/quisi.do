@@ -1,10 +1,12 @@
 {
   "recommendations": [
-    "arcanis.vscode-zipfs",
+    "coderabbit.coderabbit-vscode",
     "dbaeumer.vscode-eslint",
     "editorconfig.editorconfig",
+    "github.copilot",
     "github.vscode-codeql",
     "github.vscode-github-actions",
-    "redhat.vscode-yaml"
+    "redhat.vscode-yaml",
+    "vitest.explorer"
   ]
 }

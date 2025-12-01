@@ -1,4 +1,4 @@
-import { memo, type ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { useNotifications } from '../contexts/notifications.js';
 import mapNotificationToElement from '../utils/map-notification-to-element.jsx';
 import validateString from '../utils/validate-string.js';
@@ -17,4 +17,4 @@ function Notifications(): ReactElement {
   );
 }
 
-export default memo(Notifications);
+export default Notifications;

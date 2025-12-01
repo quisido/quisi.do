@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
+    "declarationDir": "dist",
     "lib": ["ESNext"],
     "noEmit": true,
     "rootDir": ".",
-    "sourceRoot": ".",
   },
-  "exclude": ["coverage/", "dist/"],
+  "exclude": [".vitest/", "coverage/", "dist/"],
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts"],
 }

@@ -56,14 +56,14 @@ describe('FetchHandler', (): void => {
       expect(await response.json()).toEqual({
         parentId: [238, 237, 236, 235, 234, 233, 232, 231],
         traceFlagRandom: true,
-        traceFlagSampled: false,
         traceFlags: 230,
-        version: 255,
+        traceFlagSampled: false,
 
         traceId: [
           254, 253, 252, 251, 250, 249, 248, 247, 246, 245, 244, 243, 242, 241,
           240, 239,
         ],
+        version: 255,
       });
     });
   });

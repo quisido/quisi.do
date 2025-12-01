@@ -1,6 +1,6 @@
 import { isRecord, mapToString } from 'fmrs';
 import assert from 'node:assert';
-import { spawn, type ChildProcessWithoutNullStreams } from 'node:child_process';
+import { type ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 
 const ERROR_EXIT_CODE = 1;
@@ -64,10 +64,6 @@ const spawnChild = (command: string): ChildProcessWithoutNullStreams => {
   return spawn(argv0, args, {
     cwd: CWD,
     detached: false,
-    serialization: 'json',
-    shell: true,
-    stdio: 'pipe',
-    windowsHide: true,
 
     env: {
       ...process.env,
@@ -76,6 +72,10 @@ const spawnChild = (command: string): ChildProcessWithoutNullStreams => {
         ...workspaceDependencies,
       ].join('|'),
     },
+    serialization: 'json',
+    shell: true,
+    stdio: 'pipe',
+    windowsHide: true,
   });
 };
 
@@ -128,12 +128,12 @@ class ChildPromise extends Promise<void> {
 }
 
 const mapScriptToProcess = (script: string): Promise<void> => {
-  const command = `npm run ${script}`;
+  const command = `npm run-script ${script}`;
   return new ChildPromise(command);
 };
 
 const mapWorkspaceDependencyToProcess = (dependency: string): Promise<void> => {
-  const command = `npm run start --workspace=packages/${dependency}`;
+  const command = `npm start --workspace=packages/${dependency}`;
   return new ChildPromise(command);
 };
 

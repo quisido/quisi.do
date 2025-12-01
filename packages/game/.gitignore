@@ -1,0 +1,6 @@
+/.vitest/
+/dist/
+/hint-report/
+/.env.local
+/.eslintcache
+/*.tsbuildinfo

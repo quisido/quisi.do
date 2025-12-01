@@ -1,4 +1,4 @@
-import CLOUDFLARE_ANALYTICS_URL from '../constants/cloudflare-analytics-url.js';
+import { CLOUDFLARE_ANALYTICS_URL } from '../constants/cloudflare-analytics-url.js';
 import type CloudflareAnalytics from '../types/cloudflare-analytics.js';
 import validateCloudflareAnalytics from './validate-cloudflare-analytics.js';
 

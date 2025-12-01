@@ -137,38 +137,34 @@ export default function mapAuthnErrorCodeToNotification(
 
     case ErrorCode.InvalidPatreonOAuthClientId:
       return {
-        Message: MisconfiguredPatreonClientMessage,
-
         Header(): ReactElement {
           return <I18n>Invalid client ID</I18n>;
         },
+        Message: MisconfiguredPatreonClientMessage,
       };
 
     case ErrorCode.InvalidPatreonOAuthClientSecret:
       return {
-        Message: MisconfiguredPatreonClientMessage,
-
         Header(): ReactElement {
           return <I18n>Invalid client secret</I18n>;
         },
+        Message: MisconfiguredPatreonClientMessage,
       };
 
     case ErrorCode.InvalidPatreonOAuthHost:
       return {
-        Message: MisconfiguredPatreonClientMessage,
-
         Header(): ReactElement {
           return <I18n>Invalid host</I18n>;
         },
+        Message: MisconfiguredPatreonClientMessage,
       };
 
     case ErrorCode.InvalidPatreonOAuthRedirectUri:
       return {
-        Message: MisconfiguredPatreonClientMessage,
-
         Header(): ReactElement {
           return <I18n>Invalid redirect URI</I18n>;
         },
+        Message: MisconfiguredPatreonClientMessage,
       };
 
     case ErrorCode.InvalidUsageDataset:
@@ -296,11 +292,10 @@ export default function mapAuthnErrorCodeToNotification(
 
     case ErrorCode.MissingPatreonOAuthClientSecret:
       return {
-        Message: MisconfiguredPatreonClientMessage,
-
         Header(): ReactElement {
           return <I18n>Missing client secret</I18n>;
         },
+        Message: MisconfiguredPatreonClientMessage,
       };
 
     case ErrorCode.MissingPatreonRequestCode:

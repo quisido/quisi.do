@@ -9,12 +9,11 @@ export type ExportedHandlerOptions<Env, QueueHandlerMessage, CfHostMetadata> =
     CreateExportedHandlerFetchOptions<Env, QueueHandlerMessage, CfHostMetadata>
   >;
 
-export const ExportedHandler = class QuisidoExportedHandler<
+export default class QuisidoExportedHandler<
   Env = unknown,
   QueueHandlerMessage = unknown,
   CfHostMetadata = unknown,
-> implements ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata>
-{
+> implements ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata> {
   public readonly email?: EmailExportedHandler<Env>;
   public readonly fetch?: ExportedHandlerFetchHandler<Env, CfHostMetadata>;
   public readonly queue?: ExportedHandlerQueueHandler<Env, QueueHandlerMessage>;
@@ -24,9 +23,9 @@ export const ExportedHandler = class QuisidoExportedHandler<
   public readonly trace?: ExportedHandlerTraceHandler<Env>;
 
   public constructor({
-    FetchHandler,
     console: consoleOption = console,
     fetch: fetchOption = fetch,
+    FetchHandler,
     finally: handleFinally,
     now,
     onError,
@@ -35,9 +34,9 @@ export const ExportedHandler = class QuisidoExportedHandler<
   }: ExportedHandlerOptions<Env, QueueHandlerMessage, CfHostMetadata> = {}) {
     if (typeof FetchHandler !== 'undefined') {
       this.fetch = createExportedHandlerFetch({
-        FetchHandler,
         console: consoleOption,
         fetch: fetchOption,
+        FetchHandler,
         finally: handleFinally,
         now,
         onError,
@@ -46,4 +45,4 @@ export const ExportedHandler = class QuisidoExportedHandler<
       });
     }
   }
-};
+}

@@ -1,18 +1,17 @@
-import config, {
+import DEFAULT_CONFIG, {
   COVERAGE_OPTIONS,
+  defineConfig,
   INLINE_CONFIG,
   THRESHOLDS,
+  type UserConfig,
 } from '@quisido/vitest-config';
-import { defineConfig } from 'vite';
 
-export default defineConfig({
-  ...config,
+const CONFIG: UserConfig = defineConfig({
+  ...DEFAULT_CONFIG,
   test: {
     ...INLINE_CONFIG,
     coverage: {
       ...COVERAGE_OPTIONS,
-
-      // @ts-expect-error: 'thresholds' does not exist in type...
       thresholds: {
         ...THRESHOLDS,
         branches: 6,
@@ -23,3 +22,5 @@ export default defineConfig({
     },
   },
 });
+
+export default CONFIG;

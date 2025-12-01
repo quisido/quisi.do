@@ -1,10 +1,10 @@
 import type { User } from '@sentry/core';
-import { memo, useMemo, type ReactElement, type ReactNode } from 'react';
+import { type ReactElement, type ReactNode, useMemo } from 'react';
 import Sentry from '../components/sentry.jsx';
 import { GITHUB_SHA } from '../constants/github-sha.js';
 import {
-  useAuthentication,
   type AuthenticationState,
+  useAuthentication,
 } from '../contexts/authentication.js';
 import validateString from '../utils/validate-string.js';
 
@@ -57,7 +57,6 @@ function SentryFeature({ children }: Props): ReactElement {
     <Sentry
       dsn="https://a36b53fdd093405eb597a945f49a70f2@o592283.ingest.sentry.io/5740642"
       environment={ENVIRONMENT}
-      org="quisido"
       release={RELEASE}
       tracePropagationTargets={TRACE_PROPAGATION_TARGETS}
       user={user}
@@ -67,4 +66,4 @@ function SentryFeature({ children }: Props): ReactElement {
   );
 }
 
-export default memo(SentryFeature);
+export default SentryFeature;

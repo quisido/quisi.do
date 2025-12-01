@@ -3,8 +3,9 @@ import { defaultExclude } from 'vitest/config';
 export const EXCLUDE: readonly string[] = [
   ...defaultExclude,
   '.next/**',
-  '.yarn/**',
+  '.vitest/**',
   '.wrangler/**',
+  '.yarn/**',
   'certificates/**',
   'coverage/**',
   'cypress/**',

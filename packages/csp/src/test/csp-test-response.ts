@@ -1,4 +1,4 @@
-import { TestResponse } from '@quisido/worker-test';
+import { type TestResponse } from '@quisido/worker-test';
 
 export default class AuthnTestResponse implements TestResponse {
   public readonly expectBodyToBe: TestResponse['expectBodyToBe'];

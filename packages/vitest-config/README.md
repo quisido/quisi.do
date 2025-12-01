@@ -19,11 +19,15 @@ To extend the configuration, you may spread the default export.
 
 ```js
 // vitest.config.js
-import { defineConfig } from 'vitest/config';
-import USER_CONFIG from '@quisido/vitest-config';
+import USER_CONFIG, {
+  defineConfig,
+  type UserConfig,
+} from '@quisido/vitest-config';
 
-export default defineConfig({
+const CONFIG: UserConfig = defineConfig({
   ...USER_CONFIG,
   // Add your custom configuration here.
-]);
+});
+
+export default CONFIG;
 ```

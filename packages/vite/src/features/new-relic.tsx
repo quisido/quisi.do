@@ -1,8 +1,8 @@
-import { useEffect, type PropsWithChildren, type ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
 import { GITHUB_SHA } from '../constants/github-sha.js';
 import NewRelic, {
-  useNewRelicBrowserAgent,
   type BrowserAgent,
+  useNewRelicBrowserAgent,
 } from '../modules/react-new-relic/index.js';
 import validateString from '../utils/validate-string.js';
 

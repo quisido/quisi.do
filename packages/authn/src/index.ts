@@ -6,9 +6,9 @@ import handleMetric from './handle-metric.js';
 import handleFinally from './handle-finally.js';
 
 export default new ExportedHandler({
-  FetchHandler: AuthnFetchHandler,
   console,
   fetch,
+  FetchHandler: AuthnFetchHandler,
   finally: handleFinally,
   onError: handleError,
   onLog: handleLog,

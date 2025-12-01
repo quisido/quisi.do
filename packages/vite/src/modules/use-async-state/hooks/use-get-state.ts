@@ -1,4 +1,4 @@
-import { useCallback, type RefObject } from 'react';
+import { type RefObject, useCallback } from 'react';
 
 interface Options<T> {
   readonly lastGetRef: RefObject<(() => Promise<T>) | undefined>;

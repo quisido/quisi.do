@@ -11,5 +11,7 @@ enum Locale {
 export default Locale;
 
 const { isType, validateType } = createEnumUtils(Locale, 'a locale');
-export const isLocale = isType;
-export const validateLocale = validateType;
+
+export const isLocale: (value: unknown) => value is Locale = isType;
+
+export const validateLocale: (value: unknown) => Locale = validateType;

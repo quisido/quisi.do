@@ -19,15 +19,15 @@ export {
   default as isNumber,
 } from './is-number.js';
 export {
-  default as filterByPromise,
-  default as findPromise,
-  default as isPromise,
-} from './is-promise.js';
-export {
   default as filterByObject,
   default as findObject,
   default as isObject,
 } from './is-object.js';
+export {
+  default as filterByPromise,
+  default as findPromise,
+  default as isPromise,
+} from './is-promise.js';
 export {
   default as filterByRecord,
   default as findRecord,
@@ -49,6 +49,8 @@ export { default as mapEntryToKey } from './map-entry-to-key.js';
 export { default as mapEntryToValue } from './map-entry-to-value.js';
 export { default as mapMapToEntries } from './map-map-to-entries.js';
 export { default as mapMapToRecord } from './map-map-to-record.js';
+export { default as mapObjectToEntries } from './map-object-to-entries.js';
+export { default as mapObjectToKeys } from './map-object-to-keys.js';
 export { default as mapStringToByteLength } from './map-string-to-byte-length.js';
 export { default as mapToError } from './map-to-error.js';
 export { default as mapToIndex } from './map-to-index.js';
@@ -63,5 +65,12 @@ export { sortArraysByIndex };
 const FIRST = 0;
 const SECOND = 1;
 
-export const sortEntriesByKey = sortArraysByIndex(FIRST);
-export const sortEntriesByValue = sortArraysByIndex(SECOND);
+export const sortEntriesByKey: (
+  a: readonly unknown[],
+  b: readonly unknown[],
+) => number = sortArraysByIndex(FIRST);
+
+export const sortEntriesByValue: (
+  a: readonly unknown[],
+  b: readonly unknown[],
+) => number = sortArraysByIndex(SECOND);

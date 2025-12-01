@@ -30,13 +30,7 @@ const validateStats = (
   value: unknown,
   context: readonly string[],
 ): Record<'24h', readonly (readonly [number, number])[]> =>
-  validateObject(
-    value,
-    {
-      '24h': validateStatsValue,
-    },
-    context,
-  );
+  validateObject(value, { '24h': validateStatsValue }, context);
 
 export default function validateSentryIssue(
   value: unknown,
@@ -54,22 +48,16 @@ export default function validateSentryIssue(
       isPublic: validateBoolean,
       isSubscribed: validateBoolean,
       lastSeen: validateString,
+      level: validateString, // Example: 'error'
       metadata: validateMetadata,
       numComments: validateNumber,
       permalink: validateString,
       shortId: validateString,
       stats: validateStats,
+      status: validateString, // Example: 'unresolved'
       title: validateString,
+      type: validateString, // Example: 'default'
       userCount: validateNumber,
-
-      // Example: 'error'
-      level: validateString,
-
-      // Example: 'unresolved'
-      status: validateString,
-
-      // Example: 'default'
-      type: validateString,
     },
     context,
   );

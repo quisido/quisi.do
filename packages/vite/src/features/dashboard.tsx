@@ -1,11 +1,6 @@
 import { sortStrings } from 'fmrs';
 import I18n from 'lazy-i18n';
-import {
-  memo,
-  useEffect,
-  type PropsWithChildren,
-  type ReactElement,
-} from 'react';
+import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
 import Gauge from '../components/gauge.jsx';
 import NumberFormat from '../components/number-format.jsx';
 import { MILLISECONDS_PER_SECOND } from '../constants/time.js';
@@ -21,8 +16,8 @@ import validateString from '../utils/validate-string.js';
 import styles from './dashboard.module.scss';
 
 interface IGauge {
-  readonly name: string;
   readonly max?: number | undefined;
+  readonly name: string;
   readonly severe: number;
   readonly units: string;
   readonly value: number;
@@ -49,6 +44,12 @@ const INITIAL_DATA = {
   cls: INITIAL_TUPLE,
   dcl: INITIAL_TUPLE,
   domComplete: INITIAL_TUPLE,
+
+  errorCounts: {
+    P50: INITIAL_TIMESERIES,
+    P75: INITIAL_TIMESERIES,
+    P90: INITIAL_TIMESERIES,
+  },
   fcp: INITIAL_TUPLE,
   fip: INITIAL_TUPLE,
   inp: INITIAL_TUPLE,
@@ -58,19 +59,13 @@ const INITIAL_DATA = {
   sessionTimeSpent: 0,
   ttfb: INITIAL_TUPLE,
   viewTimeSpent: 0,
-
-  errorCounts: {
-    P50: INITIAL_TIMESERIES,
-    P75: INITIAL_TIMESERIES,
-    P90: INITIAL_TIMESERIES,
-  },
 };
 
 const NEXT = 1;
 const PREVIOUS = -1;
 const sortGauges = (
-  { name: aName, severe: aSevere, warning: aWarning, value: aValue }: IGauge,
-  { name: bName, severe: bSevere, warning: bWarning, value: bValue }: IGauge,
+  { name: aName, severe: aSevere, value: aValue, warning: aWarning }: IGauge,
+  { name: bName, severe: bSevere, value: bValue, warning: bWarning }: IGauge,
 ): number => {
   if (aValue > aSevere) {
     if (bValue > bSevere) {
@@ -102,7 +97,7 @@ function DashboardWrapper({ children }: PropsWithChildren): ReactElement {
   return <Section header={<I18n>Dashboard</I18n>}>{children}</Section>;
 }
 
-function Dashboard(): ReactElement {
+export default function Dashboard(): ReactElement {
   // Contexts
   const wndw: Window | null = useWindow();
 
@@ -314,5 +309,3 @@ function Dashboard(): ReactElement {
     </DashboardWrapper>
   );
 }
-
-export default memo(Dashboard);

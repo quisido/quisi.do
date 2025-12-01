@@ -1,6 +1,6 @@
 import { type Config } from 'stylelint';
 
-export default {
+const CONFIG: Config = {
   extends: 'stylelint-config-standard-scss',
   rules: {
     'font-family-no-missing-generic-family-keyword': [
@@ -8,4 +8,6 @@ export default {
       { ignoreFontFamilies: 'Noto Color Emoji' },
     ],
   },
-} satisfies Config;
+};
+
+export default CONFIG;

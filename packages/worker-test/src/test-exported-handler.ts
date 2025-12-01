@@ -5,7 +5,7 @@ import {
 } from '@quisido/worker';
 import { isAnalyticsEngineDataset } from 'cloudflare-utils';
 import { is } from 'fmrs';
-import { assert, expect, vi, type Mock } from 'vitest';
+import { assert, expect, type Mock, vi } from 'vitest';
 import isEqual from './is-equal.js';
 import mapMockedResponseToUrl from './map-mocked-response-to-url.js';
 import mapRequestInfoToString from './map-request-info-to-string.js';
@@ -13,8 +13,8 @@ import noop from './noop.js';
 import TestResponse from './test-response.js';
 
 interface Options {
-  readonly FetchHandler: new () => IFetchHandler;
   readonly env?: Readonly<Record<string, unknown>> | undefined;
+  readonly FetchHandler: new () => IFetchHandler;
   readonly now?: (() => number) | undefined;
   readonly onError?: ((error: Error) => void) | undefined;
   readonly onLog?: ((message: string) => void) | undefined;
@@ -40,8 +40,8 @@ export default class TestExportedHandler {
   #now: () => number = Date.now.bind(Date);
 
   public constructor({
-    FetchHandler,
     env = {},
+    FetchHandler,
     now = this.getNow.bind(this),
     onError = noop,
     onLog = noop,
@@ -62,18 +62,17 @@ export default class TestExportedHandler {
 
     this.#handleMetric.mockImplementation(onMetric);
     this.#exportedHandler = new ExportedHandler({
-      FetchHandler,
-      fetch: this.#mockedFetch,
-      now,
-      onError,
-      onLog,
-      onMetric: this.#handleMetric,
-
       console: {
         ...console,
         error: this.#consoleError,
         log: this.#consoleLog,
       },
+      fetch: this.#mockedFetch,
+      FetchHandler,
+      now,
+      onError,
+      onLog,
+      onMetric: this.#handleMetric,
     });
   }
 

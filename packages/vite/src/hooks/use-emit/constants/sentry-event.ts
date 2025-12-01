@@ -6,7 +6,7 @@ import sentryTracingPackage from '@sentry/tracing/package.json';
 import sentryTypesPackage from '@sentry/types/package.json';
 import reactDomPackage from 'react-dom/package.json';
 import reactPackage from 'react/package.json';
-// Import sentryReactPackage2 from 'sentry-react/package.json';
+// import sentryReactPackage2 from 'sentry-react/package.json';
 import VERSION from '../../../constants/version.js';
 import validateString from '../../../utils/validate-string.js';
 
@@ -14,16 +14,7 @@ const APP_START_TIME: string = new Date().toUTCString();
 const NODE_ENV: string = validateString(import.meta.env.NODE_ENV);
 const START_TIMESTAMP: number = Date.now();
 
-export default {
-  dist: NODE_ENV,
-  environment: NODE_ENV,
-  level: 'log',
-  logger: 'useEvent',
-  platform: 'javascript',
-  release: `quisi.do@${VERSION}`,
-  start_timestamp: START_TIMESTAMP,
-  type: 'transaction',
-
+export const SENTRY_EVENT: Event = {
   contexts: {
     app: {
       app_build: VERSION,
@@ -33,7 +24,6 @@ export default {
       app_version: VERSION,
       build_type: NODE_ENV,
     },
-
     culture: {
       /*
        * Calendar?: string;
@@ -43,7 +33,6 @@ export default {
        * timezone?: string;
        */
     },
-
     device: {
       /*
        * Arch?: string;
@@ -85,7 +74,6 @@ export default {
        * usable_memory?: number;
        */
     },
-
     os: {
       /*
        * Build?: string;
@@ -95,7 +83,10 @@ export default {
        */
     },
   },
-
+  dist: NODE_ENV,
+  environment: NODE_ENV,
+  level: 'log',
+  logger: 'useEvent',
   modules: {
     '@sentry/browser': sentryBrowserPackage.version,
     '@sentry/core': sentryCorePackage.version,
@@ -106,8 +97,11 @@ export default {
     'react-dom': reactDomPackage.version,
     // 'sentry-react': sentryReactPackage2.version,
   },
-
+  platform: 'javascript',
+  release: `quisi.do@${VERSION}`,
+  start_timestamp: START_TIMESTAMP,
   transaction_info: {
     source: 'route',
   },
-} satisfies Event;
+  type: 'transaction',
+};

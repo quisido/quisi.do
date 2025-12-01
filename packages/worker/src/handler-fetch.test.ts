@@ -29,9 +29,6 @@ describe('Handler', (): void => {
 
       TEST_NOW.mockReturnValue(testStartTime);
       const handler = new TestExportedHandler({
-        now: TEST_NOW,
-        onMetric: TEST_METRIC_HANDLER,
-
         fetch(): Promise<Response> {
           TEST_NOW.mockReturnValue(testEndTime);
           return Promise.resolve(new Response());
@@ -42,6 +39,8 @@ describe('Handler', (): void => {
             super(testFetchHandler);
           }
         },
+        now: TEST_NOW,
+        onMetric: TEST_METRIC_HANDLER,
       });
 
       assert('fetch' in handler);
@@ -64,8 +63,6 @@ describe('Handler', (): void => {
       }
 
       const handler = new TestExportedHandler({
-        onMetric: TEST_METRIC_HANDLER,
-
         fetch(): Promise<Response> {
           return Promise.resolve(new Response());
         },
@@ -75,6 +72,7 @@ describe('Handler', (): void => {
             super(testFetchHandler);
           }
         },
+        onMetric: TEST_METRIC_HANDLER,
       });
 
       assert('fetch' in handler);

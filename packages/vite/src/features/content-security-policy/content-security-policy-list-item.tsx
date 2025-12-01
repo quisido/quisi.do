@@ -9,8 +9,7 @@ import ContentSecurityPolicyReportListItem from './content-security-policy-repor
 import type ContentSecurityPolicyReport from './content-security-policy-report.js';
 import mapContentSecurityPolicyReportToListItemProps from './map-content-security-policy-report-to-list-item-props.js';
 
-export interface ContentSecurityPolicyListItemProps
-  extends ContentSecurityPolicyGroup {
+export interface ContentSecurityPolicyListItemProps extends ContentSecurityPolicyGroup {
   readonly expanded: boolean;
   readonly firstDisposition: boolean;
   readonly firstEffectiveDirective: boolean;

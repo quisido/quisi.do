@@ -1,0 +1,17 @@
+# Credits
+
+- [Sonikku](https://www.spriters-resource.com/profile/sonikku/)
+  - [Amethyst Chao](./amethyst.png)
+  - [Aquamarine Chao](./aquamarine.png)
+  - [Dark Chao](./dark.png)
+  - [Emerald Chao](./emerald.png)
+  - [Garnet Chao](./garnet.png)
+  - [Gold Chao](./gold.png)
+  - [Hero Chao](./hero.png)
+  - [Neutral Chao](./neutral.png)
+  - [Onyx Chao](./onyx.png)
+  - [Peridot Chao](./peridot.png)
+  - [Ruby Chao](./ruby.png)
+  - [Sapphire Chao](./sapphire.png)
+  - [Silver Chao](./silver.png)
+  - [Topaz Chao](./topaz.png)

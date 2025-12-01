@@ -2,10 +2,10 @@
 
 import { BrowserAgent } from '@newrelic/browser-agent/loaders/browser-agent';
 import {
-  useEffect,
-  useState,
   type PropsWithChildren,
   type ReactElement,
+  useEffect,
+  useState,
 } from 'react';
 import { BrowserAgentContext } from './browser-agent-context.jsx';
 

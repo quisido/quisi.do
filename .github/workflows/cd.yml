@@ -1,7 +1,7 @@
 name: CI/CD
 
 jobs:
-  # Stage 1: devskim, install
+  # Stage 1: devskim
   devskim:
     name: DevSkim
     runs-on: ubuntu-latest
@@ -22,7 +22,7 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
       - name: Scan
         uses: microsoft/devskim-action@v1
@@ -34,35 +34,9 @@ jobs:
           sarif_file: devskim-results.sarif
           wait-for-processing: true
 
-  install:
-    name: Install
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
   # Stage 2: build
   build:
     name: Build
-    needs: install
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -76,17 +50,12 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Build
-        run: npm run build
+        run: npm run-script build
         env:
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           DD_PROFILING_ENABLED: true
@@ -94,7 +63,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
           NODE_ENV: production
-      - name: Upload artifacts
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: build
@@ -117,25 +86,20 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifacts
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Audit
-        run: npm run lighthouse:report --workspace=packages/vite
+        run: npm run-script lighthouse:report --workspace=packages/vite
       - name: Validate
-        run: npm run postlighthouse --workspace=packages/vite
-      - name: Upload report
+        run: npm run-script postlighthouse --workspace=packages/vite
+      - name: Upload
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -161,22 +125,17 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifacts
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --immutable
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Test
-        run: npm run test
+        run: npm run-script test
         env:
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
@@ -201,21 +160,16 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifacts
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      - name: Test quisi.do
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Test
         run: npm test --workspace=packages/vite
 
   webhint-serve:
@@ -234,25 +188,20 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      - name: Run Webhint
-        run: npm run webhint:serve --workspace=packages/vite
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Run
+        run: npm run-script webhint:serve --workspace=packages/vite
         env:
           CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
-      - name: Upload report
+      - name: Upload
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -276,17 +225,17 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifacts
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      - name: Upload Datadog sourcemaps
-        run: npm run datadog:sourcemaps --workspace=packages/vite
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Upload
+        run: npm run-script datadog:sourcemaps --workspace=packages/vite
         env:
           DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           RELEASE_VERSION: ${{ github.sha }}
@@ -307,9 +256,9 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifacts
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: build
@@ -340,27 +289,22 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifacts
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Publish
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
         run: >
           npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH_TOKEN;
-          npm run publish;
+          npm run-script publish;
 
   sentry-release:
     name: Sentry release
@@ -378,9 +322,9 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifacts
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: build
@@ -451,29 +395,22 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifacts
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-          registry-url: 'https://npm.pkg.github.com/@quisido'
-          scope: '@${{ github.repository_owner }}'
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Publish
         env:
           NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
         run: >
           npm config set "//npm.pkg.github.com/:_authToken" $NPM_AUTH_TOKEN;
-          npm run publish --registry=https://npm.pkg.github.com;
+          npm run-script publish --registry=https://npm.pkg.github.com;
 
   wrangler-deploy-authn:
     name: Wrangler deploy (Authentication)
@@ -491,22 +428,17 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      - name: Download artifacts
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Deploy
-        run: npm run production:deploy --workspace=packages/authn
+        run: npm run-script production:deploy --workspace=packages/authn
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
@@ -526,22 +458,17 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      - name: Download artifacts
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Deploy
-        run: npm run production:deploy --workspace=packages/csp
+        run: npm run-script production:deploy --workspace=packages/csp
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
@@ -561,22 +488,17 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      - name: Download artifacts
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Deploy
-        run: npm run production:deploy --workspace=packages/dashboard
+        run: npm run-script production:deploy --workspace=packages/dashboard
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
 
@@ -597,25 +519,20 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifacts
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Audit
-        run: npm run lighthouse:report:production --workspace=packages/vite
+        run: npm run-script lighthouse:report:production --workspace=packages/vite
       - name: Validate
-        run: npm run postlighthouse --workspace=packages/vite
-      - name: Upload report
+        run: npm run-script postlighthouse --workspace=packages/vite
+      - name: Upload
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -641,25 +558,20 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifacts
+      - name: Download
         uses: actions/download-artifact@v4
         with:
           name: build
           path: packages/
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: latest
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-      - name: Run webhint
-        run: npm run webhint:production --workspace=packages/vite
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Run
+        run: npm run-script webhint:production --workspace=packages/vite
         env:
           CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
-      - name: Upload report
+      - name: Upload
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -668,5 +580,6 @@ jobs:
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:

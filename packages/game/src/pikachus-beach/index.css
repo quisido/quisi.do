@@ -1,0 +1,34 @@
+body {
+  align-items: center;
+  background-color: #78c878;
+  background-image: url('./assets/frame.gif');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+}
+
+/**
+ * The frame is 256x224. The canvas is 160x144.
+ * Of the 100% width, 96/256 = 37.5% is the frame.
+ * The remaining 160/256 = 62.5% is the canvas.
+ * The height/width ratio 144/160 would dictate a canvas height of
+ *   144/160 = h/62.5vw
+ *   h = 144 * 62.5vw / 160 = 56.25vw
+ */
+canvas {
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 56.25vw;
+  width: 62.5vw;
+}
+
+html {
+  height: 100vh;
+  width: 100%;
+}

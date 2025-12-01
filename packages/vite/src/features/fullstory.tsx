@@ -1,8 +1,8 @@
 import { Fullstory } from 'fullstory-react';
-import { memo, type PropsWithChildren, type ReactNode } from 'react';
+import { type PropsWithChildren, type ReactNode } from 'react';
 import {
-  useAuthentication,
   type AuthenticationState,
+  useAuthentication,
 } from '../contexts/authentication.js';
 import type Authentication from '../types/authentication.js';
 
@@ -31,7 +31,9 @@ function useFullstory(): State {
   };
 }
 
-function FullstoryFeature({ children }: PropsWithChildren): ReactNode {
+export default function FullstoryFeature({
+  children,
+}: PropsWithChildren): ReactNode {
   const state: State = useFullstory();
 
   return (
@@ -45,5 +47,3 @@ function FullstoryFeature({ children }: PropsWithChildren): ReactNode {
     </Fullstory>
   );
 }
-
-export default memo(FullstoryFeature);

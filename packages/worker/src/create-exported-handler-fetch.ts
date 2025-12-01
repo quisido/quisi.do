@@ -8,13 +8,13 @@ export interface CreateExportedHandlerFetchOptions<
   QueueHandlerMessage,
   CfHostMetadata,
 > {
+  readonly console: Console;
+  readonly fetch: Fetcher['fetch'];
   readonly FetchHandler: new () => IFetchHandler<
     Env,
     QueueHandlerMessage,
     CfHostMetadata
   >;
-  readonly console: Console;
-  readonly fetch: Fetcher['fetch'];
   readonly finally?: (() => Promise<void> | void) | undefined;
   readonly now?: (() => number) | undefined;
   readonly onError?: ((error: Error) => Promise<void> | void) | undefined;
@@ -36,9 +36,9 @@ export default function createExportedHandlerFetch<
   QueueHandlerMessage,
   CfHostMetadata,
 >({
-  FetchHandler,
   console: consoleOption,
   fetch: fetchOption,
+  FetchHandler,
   finally: finallyOption,
   now,
   onError: handleError,

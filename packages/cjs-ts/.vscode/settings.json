@@ -1,8 +1,5 @@
 {
   "files.exclude": {
-    "*-*.*.*.tgz": true,
-    ".attw.json": true,
-    ".eslintcache": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   }
 }

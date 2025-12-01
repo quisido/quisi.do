@@ -1,5 +1,5 @@
 import { mapMetricDimensionsToDataPoint } from '@quisido/worker';
-import { TestExportedHandler, TestResponse } from '@quisido/worker-test';
+import { TestExportedHandler, type TestResponse } from '@quisido/worker-test';
 import {
   EXPECT_ANY_HEADERS,
   EXPECT_ANY_STRING,
@@ -24,8 +24,8 @@ import { TEST_PATREON_URL } from './test-patreon-url.js';
 
 interface Options {
   readonly authnUserIds?: Readonly<Partial<Record<string, string>>>;
-  readonly lastUsersRowId?: number | undefined;
   readonly env?: Readonly<Record<string, unknown>> | undefined;
+  readonly lastUsersRowId?: number | undefined;
   readonly now?: (() => number) | undefined;
   readonly oAuthResults?: readonly unknown[] | undefined;
 }
@@ -64,12 +64,6 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
     });
 
     super({
-      FetchHandler: AuthnFetchHandler,
-      now,
-      onError: handleError,
-      onLog: handleLog,
-      onMetric: handleMetric,
-
       env: {
         AUTHN_DATA: authnData,
         AUTHN_DB: authnDb,
@@ -83,6 +77,11 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
         PUBLIC_DATASET: new TestAnalyticsEngineDataset(),
         ...env,
       },
+      FetchHandler: AuthnFetchHandler,
+      now,
+      onError: handleError,
+      onLog: handleLog,
+      onMetric: handleMetric,
     });
 
     this.#authnData = authnData;

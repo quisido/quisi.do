@@ -7,7 +7,7 @@ import FatalOAuthErrorResponse from './fatal-oauth-error-response.js';
 import handleInvalidReturnPath from './handle-invalid-return-path.js';
 import handleInvalidStateSessionId from './handle-invalid-state-session-id.js';
 import handleReturnPath from './handle-return-path.js';
-import { OAuthPathname } from './oauth-pathname.js';
+import { type OAuthPathname } from './oauth-pathname.js';
 
 export default async function handleOAuthPathname(
   this: AuthnFetchHandler,

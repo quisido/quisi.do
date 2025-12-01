@@ -2,8 +2,9 @@ import configs, {
   defineConfig,
   disableRulesForFiles,
 } from '@quisido/eslint-config';
+import type { Config } from 'eslint/config';
 
-export default defineConfig(
+const CONFIG: readonly Config[] = defineConfig(
   ...configs,
 
   ...disableRulesForFiles({
@@ -14,3 +15,5 @@ export default defineConfig(
     'no-underscore-dangle': ['src/is-analytics-engine-row.ts'],
   }),
 );
+
+export default CONFIG;

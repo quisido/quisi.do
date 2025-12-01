@@ -1,8 +1,8 @@
 import {
-  useLayoutEffect,
-  useState,
   type PropsWithChildren,
   type ReactElement,
+  useLayoutEffect,
+  useState,
 } from 'react';
 import WindowContext from '../contexts/window.js';
 import { LocalStorageWindowContext } from '../modules/use-local-storage/local-storage-window-context.js';

@@ -1,11 +1,12 @@
-import CONFIG, {
+import DEFAULT_CONFIG, {
   COVERAGE_OPTIONS,
+  defineConfig,
   INLINE_CONFIG,
+  type UserConfig,
 } from '@quisido/vitest-config';
-import { defineConfig } from 'vitest/config';
 
-export default defineConfig({
-  ...CONFIG,
+const CONFIG: UserConfig = defineConfig({
+  ...DEFAULT_CONFIG,
   test: {
     ...INLINE_CONFIG,
 
@@ -21,3 +22,5 @@ export default defineConfig({
     },
   },
 });
+
+export default CONFIG;
