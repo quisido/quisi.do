@@ -2,13 +2,16 @@ import { type Config, defineConfig } from '@eslint/config-helpers';
 
 const IGNORES_CONFIG: readonly Config[] = defineConfig({
   ignores: [
+    '.cache/**',
     '.eslintcache',
     '.git/**',
     '.idea/**',
     '.pnp.*',
+    '.tests/**',
     '.vitest/**',
     '.wrangler/**',
     '.yarn/**',
+    '*.tgz',
     '*.tsbuildinfo',
     'analyze/**',
     'certificates/**',

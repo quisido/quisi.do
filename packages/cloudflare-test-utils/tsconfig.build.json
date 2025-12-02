@@ -4,16 +4,16 @@
     "noEmit": false,
     "outDir": "dist",
     "rootDir": "src",
-
     /**
      * `@cloudflare/workers-types` clashes with `@types/node`.
      * `@vitest/expect/dist/chai.d.ts` redeclares `@types/chai`.
      * `tinybench` incorrectly extends `EventTarget`.
      * `vite` cannot find name `Worker`.
      */
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo",
   },
-  "exclude": ["src/**/*.test.ts", "src/*.test.ts", "src/test/"],
+  "exclude": ["*.test.ts"],
   "extends": "./tsconfig.json",
   "include": ["src/"],
 }

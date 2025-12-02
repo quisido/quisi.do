@@ -1,14 +1,2 @@
-/.vitest/
-/.vscode/
-/node_modules/
-/src/**/*.test.*
-/src/test/
-/.*.json
-/.*ignore
-/.*rc.*
-/.aiexclude
-/.eslintcache
-/*.iml
-/*-*.*.*.tgz
-/tsconfig.*
-.DS_Store
+*
+!src/**
