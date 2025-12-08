@@ -1,0 +1,5 @@
+{
+  "files.exclude": {
+    "vitest.config.ts.timestamp-*-*.mjs": true
+  }
+}

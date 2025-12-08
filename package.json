@@ -27,6 +27,7 @@
     "postlighthouse": "npm start --workspace=packages/vite",
     "publint": "publint",
     "publish": "npm run-script tsc:build && node ./dist/scripts/publish.js",
+    "quisi": "npm run-script build --workspace=packages/quisi && npm run-script quisi --workspace=packages/cloudflare-test-utils",
     "react-datadog": "npm start --workspace=packages/react-datadog",
     "tsc:build": "tsc --outDir dist --project tsconfig.build.json --skipLibCheck",
     "update": "npm run-script tsc:build && node ./dist/scripts/update.js",

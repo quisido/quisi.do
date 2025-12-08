@@ -65,6 +65,10 @@
 			"path": "packages/number-format-react"
 		},
 		{
+			"name": "quisi",
+			"path": "packages/quisi"
+		},
+		{
 			"name": "react-datadog",
 			"path": "packages/react-datadog"
 		},

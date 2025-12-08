@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "declarationDir": "dist",
+    "lib": ["ESNext"],
+    "noEmit": true,
+    "rootDir": ".",
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo",
+    "types": ["node"]
+  },
+  "exclude": [".cache/", ".tests/"],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*", "**/*.json", "**/.*", "**/.*.json"]
+}
