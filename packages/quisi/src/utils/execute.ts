@@ -25,7 +25,7 @@ export default function execute(
     const childProcess: ChildProcess = execFile(
       command,
       args,
-      { encoding: 'utf-8', shell: false },
+      { cwd: process.cwd(), encoding: 'utf-8', shell: false },
       (err: ExecFileException | null, stdout: string, stderr: string): void => {
         if (err === null) {
           resolve({ stderr, stdout });

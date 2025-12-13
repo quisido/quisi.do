@@ -2,15 +2,15 @@
   "name": "quisi",
   "version": "0.0.1",
   "author": "quisi.do <quisi@quisi.do>",
+  "bin": {
+    "quisi": "./dist/quisi.js"
+  },
   "description": "all-in-one",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/quisi#readme",
   "license": "MIT",
   "main": "./dist/index.js",
   "type": "module",
   "types": "./dist/index.d.ts",
-  "bin": {
-    "quisi": "./dist/quisi.js"
-  },
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "start": "tsc --project tsconfig.build.json --watch",
@@ -21,8 +21,10 @@
     "url": "https://github.com/quisido/quisi.do/issues"
   },
   "exports": {
-    "types": "./dist/index.d.ts",
-    "default": "./dist/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   },
   "funding": {
     "type": "individual",
