@@ -17,7 +17,7 @@
     "eslint": "sh scripts/eslint.sh",
     "eslint:fix": "eslint . --cache --cache-location .cache/eslint.json --color --config eslint.config.ts --exit-on-fatal-error --fix --max-warnings -1 --no-config-lookup",
     "publint": "publint",
-    "quisi": "quisi",
+    "quisi": "quisi build && quisi test",
     "tsc": "tsc --project tsconfig.build.json",
     "vitest": "vitest",
     "vitest:run": "vitest run",

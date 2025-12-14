@@ -1,4 +1,4 @@
-import { number, object, type ZodType } from 'zod';
+import { boolean, number, object, type ZodType } from 'zod';
 import type { Config } from './config.js';
 import type { Coverage } from './coverage.js';
 
@@ -11,6 +11,7 @@ const ZodCoverage: ZodType<Coverage> = object({
 
 const ZodConfig: ZodType<Config> = object({
   coverage: ZodCoverage.optional(),
+  skipLibCheck: boolean().optional(),
 }).partial();
 
 export default function validateConfig(config: unknown): Config {

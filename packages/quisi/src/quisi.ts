@@ -1,42 +1,31 @@
 #!/usr/bin/env node
-import type { DisposableTempDir } from 'node:fs';
+import build from './features/build/build.js';
 import type { Config } from './features/config/config.js';
 import loadConfig from './features/config/load-config.js';
-import Quisi from './features/quisi.js';
-import makeDisposableTempDir from './utils/make-disposable-temp-dir.js';
+import test from './features/test/test.js';
+import debug from './utils/debug.js';
+import { handleExit } from './utils/exit.js';
+import mapToString from './utils/map-to-string.js';
 
-const onDebug = (message: string): void => {
-  // eslint-disable-next-line no-console
-  console.debug(`[quisi] ${message}`);
-};
-
-const disposableTempDir: DisposableTempDir = await makeDisposableTempDir();
-onDebug(`Created temporary directory: ${disposableTempDir.path}`);
+const FIRST_ARG = 2;
 
 process.on('exit', (): void => {
-  void disposableTempDir.remove();
-  onDebug(`Removed temporary directory: ${disposableTempDir.path}`);
+  void handleExit();
 });
 
-const config: Config = await (async (): Promise<Config> => {
-  try {
-    return await loadConfig({
-      tempDir: disposableTempDir.path,
-    });
-  } catch (err: unknown) {
-    // eslint-disable-next-line no-console
-    console.error('Failed to load `quisi.config.ts`:', err);
-    return {};
-  }
-})();
+const handleLoadConfigError = (err: unknown) => {
+  debug(`Failed to load \`quisi.config.ts\`: ${mapToString(err)}`);
+  return {};
+};
 
-const QUISI: Quisi = new Quisi({
-  ...config,
-  onDebug(message: string): void {
-    // eslint-disable-next-line no-console
-    console.debug(`[quisi] ${message}`);
-  },
-});
+const config: Config = await loadConfig().catch(handleLoadConfigError);
 
-// eslint-disable-next-line no-console
-console.log(QUISI.coverage);
+switch (process.argv[FIRST_ARG]) {
+  case 'build':
+    await build(config);
+    break;
+
+  case 'test':
+    await test(config);
+    break;
+}
