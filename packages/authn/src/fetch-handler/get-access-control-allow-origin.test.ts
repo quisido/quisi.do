@@ -1,5 +1,5 @@
 import { describe, it } from 'vitest';
-import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
+import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 
 describe('getAccessControlAllowOrigin', (): void => {
   it('should support insecure localhost', async (): Promise<void> => {

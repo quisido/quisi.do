@@ -4,12 +4,13 @@
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
     "rootDir": ".",
-    "types": ["node"],
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/vitest-config/src/",
+    "types": ["node"]
   },
   "exclude": [".vitest/", "coverage/", "dist/", "node_modules/"],
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx"],
   "references": [
-    { "path": "../eslint-config/tsconfig.build.json" },
-  ],
+    { "path": "../eslint-config/tsconfig.json" }
+  ]
 }

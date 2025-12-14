@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import expectToEventuallyThrow from '../../../test/utils/expect-to-eventually-throw.js';
-import noop from '../../../test/utils/noop.js';
+import expectToEventuallyThrow from '../../../../test/expect-to-eventually-throw.js';
+import noop from '../../../../test/noop.js';
 import type { DefaultExport } from '../../../types/default-export.js';
 import type { Translations } from '../../../types/translations.js';
 import {

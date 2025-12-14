@@ -1,8 +1,8 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { describe, it } from 'vitest';
+import mapStringToIp from '../../test/map-string-to-ip.js';
+import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { MetricName } from '../constants/metric-name.js';
-import mapStringToIp from '../test/map-string-to-ip.js';
-import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handleOAuthPathname', (): void => {
   it('should support throttling', async (): Promise<void> => {

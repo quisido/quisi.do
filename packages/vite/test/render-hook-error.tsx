@@ -7,6 +7,7 @@ const TEST_ID = 'render-hook-error';
 export default function renderHookError(useHook: () => unknown): string {
   const TestHookErrorComponent = (): ReactElement | null => {
     try {
+      // eslint-disable-next-line react-compiler/react-compiler
       useHook();
       return null;
     } catch (err: unknown) {

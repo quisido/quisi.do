@@ -6,11 +6,12 @@
     "rootDir": ".",
     // eslint-plugin-sort-keys-custom-order
     "skipLibCheck": true,
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/eslint-config/src/"
   },
   "exclude": [".vitest/", "coverage/", "dist/", "node_modules/"],
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx"],
   "references": [
-    { "path": "../vitest-config/tsconfig.build.json" },
-  ],
+    { "path": "../vitest-config/tsconfig.json" }
+  ]
 }

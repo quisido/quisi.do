@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, it, vi } from 'vitest';
+import CustomErrorBoundaryFallback from '../../../test/custom-error-boundary-fallback.js';
+import ThrowError from '../../../test/throw-error.js';
 import Sentry from '../../index.js';
-import CustomErrorBoundaryFallback from '../../test/components/custom-error-boundary-fallback/index.js';
-import ThrowError from '../../test/components/throw-error/index.js';
 
 describe('Sentry', (): void => {
   it('should render children', (): void => {

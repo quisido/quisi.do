@@ -1,7 +1,7 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { describe, it } from 'vitest';
+import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { MetricName } from '../constants/metric-name.js';
-import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handleInvalidStateSessionId', (): void => {
   it('should emit and respond for a missing state session ID', async (): Promise<void> => {

@@ -11,12 +11,7 @@ export default function npmExecWorkspace(
   workspaceDirectory: string,
   ...script: string[]
 ): string {
-  logCommand(
-    FILE,
-    ...ARGS,
-    ...script,
-    `--workspace=packages/${workspaceDirectory}`,
-  );
+  logCommand('npm', ...script, `--workspace=packages/${workspaceDirectory}`);
 
   try {
     return retry(ATTEMPTS, (): string =>

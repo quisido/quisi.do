@@ -89,7 +89,6 @@ const CONFIG: readonly Config[] = defineConfig(
       'src/features/clarity.ts',
       'src/modules/react-google-analytics/**/*.ts',
     ],
-    'react-compiler/react-compiler': ['src/test/utils/render-hook-error.tsx'],
     'react-refresh/only-export-components': ['src/app/**/page.tsx'],
   }),
 

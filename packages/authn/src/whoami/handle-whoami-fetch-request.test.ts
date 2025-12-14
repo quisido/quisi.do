@@ -1,7 +1,7 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { MetricName as WorkerMetricName } from '@quisido/worker';
 import { describe, it } from 'vitest';
-import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
+import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 
 describe('handleWhoAmIFetchRequest', (): void => {
   it('should emit and respond when the KV namespace is invalid', async (): Promise<void> => {

@@ -10,14 +10,13 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "npm run-script tsc",
+    "build": "quisi build",
     "test": "concurrently --names attw,eslint,publint,vitest --prefix-colors auto \"npm run-script attw\" \"npm run-script eslint\" \"npm run-script publint\" \"npm run-script vitest:run\"",
     "attw": "attw --quiet",
     "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",
     "eslint": "eslint . --cache --color --exit-on-fatal-error",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
     "publint": "publint",
-    "tsc": "tsc --project tsconfig.build.json",
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
@@ -64,6 +63,7 @@
     "jsdom": "^27.1.0",
     "prettier": "^3.6.2",
     "publint": "^0.3.15",
+    "quisi": "^0.0.1",
     "react": "^19.2.0",
     "rimraf": "^6.1.0",
     "tslib": "^2.8.1",

@@ -1,9 +1,9 @@
 import { EXPECT_ANY_NUMBER } from 'cloudflare-test-utils';
 import { describe, it } from 'vitest';
+import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { Gender } from '../constants/gender.js';
 import { PatreonGender } from '../constants/patreon-gender.js';
 import { INSERT_INTO_USERS_QUERY } from '../constants/queries.js';
-import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('mapPatreonIdentityGenderAttributeToGender', (): void => {
   it('should support females', async (): Promise<void> => {

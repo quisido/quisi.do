@@ -15,6 +15,8 @@ export const handleExit = async (): Promise<void> => {
   const promises: Promise<void>[] = [];
 
   for (const callback of EXIT_HANDLERS) {
+    EXIT_HANDLERS.delete(callback);
+
     try {
       const result: Promise<void> | void = callback();
       if (result instanceof Promise) {

@@ -9,7 +9,7 @@ import mapToString from './utils/map-to-string.js';
 
 const FIRST_ARG = 2;
 
-process.on('exit', (): void => {
+process.on('beforeExit', (): void => {
   void handleExit();
 });
 

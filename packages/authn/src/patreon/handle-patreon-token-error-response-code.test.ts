@@ -1,8 +1,8 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
+import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { MetricName } from '../constants/metric-name.js';
-import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handlePatreonTokenErrorResponseCode', (): void => {
   it('should emit and respond when Patreon rejects the client ID', async (): Promise<void> => {

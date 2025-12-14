@@ -1,3 +1,4 @@
+/.cache/
 /.vitest/
 /coverage/
 /dist/

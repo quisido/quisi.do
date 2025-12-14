@@ -39,7 +39,6 @@ const CONFIG: readonly Config[] = defineConfig(
       'src/utils/map-v2-operation-handlers-to-api.ts',
     ],
     'new-cap': ['src/utils/map-v2-operation-handlers-to-api.ts'],
-    'no-console': ['src/test/expect-to-throw.tsx'],
   }),
 
   {

@@ -1,7 +1,7 @@
 import { describe, it } from 'vitest';
+import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import { OAuthProvider } from '../constants/oauth-provider.js';
-import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 const TEST_NOW = 12345678;
 

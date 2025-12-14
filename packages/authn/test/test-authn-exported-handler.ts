@@ -8,15 +8,15 @@ import {
   TestKVNamespace,
   TestR2Bucket,
 } from 'cloudflare-test-utils';
-import AuthnFetchHandler from '../authn-fetch-handler.js';
+import AuthnFetchHandler from '../src/authn-fetch-handler.js';
 import {
   INSERT_INTO_EMAILS_QUERY,
   INSERT_INTO_USERS_QUERY,
   SELECT_USERID_FROM_OAUTH_QUERY,
-} from '../constants/queries.js';
-import handleError from '../handle-error.js';
-import handleLog from '../handle-log.js';
-import handleMetric from '../handle-metric.js';
+} from '../src/constants/queries.js';
+import handleError from '../src/handle-error.js';
+import handleLog from '../src/handle-log.js';
+import handleMetric from '../src/handle-metric.js';
 import AuthnTestResponse from './authn-test-response.js';
 import mapStringToIp from './map-string-to-ip.js';
 import { PATREON_IDENTITY_URL } from './patreon-identity-url.js';

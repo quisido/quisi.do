@@ -1,4 +1,6 @@
+import { stat } from 'node:fs/promises';
 import { join } from 'node:path';
+import debug from '../../utils/debug.js';
 import getDisposableTempDir from '../../utils/get-disposable-temp-dir.js';
 import platformImport from '../../utils/platform-import.js';
 import tsc from '../tsc/tsc.js';
@@ -6,6 +8,16 @@ import type { Config } from './config.js';
 import validateConfig from './validate-config.js';
 
 export default async function loadConfig(): Promise<Config> {
+  const cwd: string = process.cwd();
+
+  // Check if a config file exists.
+  try {
+    await stat(join(cwd, 'quisi.config.ts'));
+  } catch {
+    debug('No `quisi.config.ts` file found.');
+    return {};
+  }
+
   const outDir: string = await getDisposableTempDir();
   await tsc(
     '--assumeChangesOnlyAffectDirectDependencies',
@@ -17,7 +29,7 @@ export default async function loadConfig(): Promise<Config> {
     outDir,
     '--pretty',
     '--rootDir',
-    process.cwd(),
+    cwd,
     '--skipLibCheck',
     '--target',
     'ESNext',

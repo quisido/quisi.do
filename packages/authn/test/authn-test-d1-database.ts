@@ -4,7 +4,7 @@ import {
   INSERT_INTO_OAUTH_QUERY,
   INSERT_INTO_USERS_QUERY,
   SELECT_USERID_FROM_OAUTH_QUERY,
-} from '../constants/queries.js';
+} from '../src/constants/queries.js';
 
 interface Options {
   readonly insertIntoEmailsError?: Error | undefined;

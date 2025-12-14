@@ -1,4 +1,4 @@
-.cache/
-.tests/
-dist/
-node_modules/
+/.cache/
+/.tests/
+/dist/
+/node_modules/

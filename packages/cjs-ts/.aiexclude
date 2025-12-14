@@ -1,3 +1,4 @@
+/.cache/
 /.eslintcache
 /.vitest/
 /node_modules/

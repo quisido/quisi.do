@@ -10,14 +10,13 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "npm run-script tsc",
+    "build": "quisi build",
     "test": "concurrently --names attw,eslint,publint --prefix-colors auto \"npm run-script attw\" \"npm run-script eslint\" \"npm run-script publint\"",
     "attw": "attw --quiet",
     "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",
     "eslint": "eslint . --cache --color --exit-on-fatal-error",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
     "publint": "publint",
-    "tsc": "tsc --project tsconfig.build.json",
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
@@ -52,7 +51,7 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@types/node": "^24.10.0",
+    "@types/node": "^24.10.1",
     "@vitest/coverage-istanbul": "^4.0.7",
     "@vitest/ui": "^4.0.7",
     "cjs-ts": "^2.0.0",
@@ -63,6 +62,7 @@
     "eslint-plugin-prettier": "^5.5.4",
     "prettier": "^3.6.2",
     "publint": "^0.3.15",
+    "quisi": "^0.0.1",
     "rimraf": "^6.1.0",
     "tslib": "^2.8.1",
     "typescript": "^5.9.3",
