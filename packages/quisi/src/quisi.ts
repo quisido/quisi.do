@@ -2,6 +2,7 @@
 import build from './features/build/build.js';
 import type { Config } from './features/config/config.js';
 import loadConfig from './features/config/load-config.js';
+import start from './features/start/start.js';
 import test from './features/test/test.js';
 import debug from './utils/debug.js';
 import { handleExit } from './utils/exit.js';
@@ -23,6 +24,10 @@ const config: Config = await loadConfig().catch(handleLoadConfigError);
 switch (process.argv[FIRST_ARG]) {
   case 'build':
     await build(config);
+    break;
+
+  case 'start':
+    await start(config);
     break;
 
   case 'test':
