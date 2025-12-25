@@ -47,14 +47,6 @@ const CONFIG: readonly Config[] = defineConfig(
       'src/components/provider/provider.hook.ts',
     ],
   }),
-
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    rules: {
-      'max-lines-per-function': 'warn',
-      'max-statements': 'warn',
-    },
-  },
 );
 
 export default CONFIG;

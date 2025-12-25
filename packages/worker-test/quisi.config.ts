@@ -1,6 +1,6 @@
-import type { Config } from 'quisi';
+import type { BuildConfig } from 'quisi';
 
-const CONFIG: Config = {
+export const BUILD: BuildConfig = {
   /**
    * `@cloudflare/workers-types` clashes with `@types/node`.
    * `@vitest/expect/dist/chai.d.ts` redeclares `@types/chai`.
@@ -9,5 +9,3 @@ const CONFIG: Config = {
    */
   skipLibCheck: true,
 };
-
-export default CONFIG;

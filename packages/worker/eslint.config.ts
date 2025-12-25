@@ -32,16 +32,6 @@ const CONFIG: readonly Config[] = defineConfig(
 
     'no-undefined': ['src/fetch-handler.ts'],
   }),
-
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    rules: {
-      'max-lines': 'warn',
-      'max-lines-per-function': 'warn',
-      'max-params': 'warn',
-      'max-statements': 'warn',
-    },
-  },
 );
 
 export default CONFIG;

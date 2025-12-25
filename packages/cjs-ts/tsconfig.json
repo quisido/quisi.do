@@ -4,6 +4,8 @@
     "lib": ["ESNext"],
     "noEmit": true,
     "rootDir": ".",
+    // Necessary for `quisi.config.ts` to export top-level values.
+    "verbatimModuleSyntax": false
   },
   "exclude": [".vitest/"],
   "extends": "../../tsconfig.json",

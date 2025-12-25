@@ -1,18 +1,29 @@
-import { writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
-import getDisposableTempDir from '../../utils/get-disposable-temp-dir.js';
-import type { Config } from '../config/config.js';
+import mapToString from '../../utils/map-to-string.js';
+import type BuildConfig from '../config/build-config.js';
 import tsc from '../tsc/tsc.js';
-import createTSConfig from './create-tsconfig.js';
+import createTSConfigFile from './create-tsconfig-file.js';
 
-export default async function build({ skipLibCheck }: Config): Promise<void> {
-  const tempDir: string = await getDisposableTempDir();
+export default async function build({
+  skipLibCheck,
+}: BuildConfig): Promise<void> {
+  const errorLogs: string[] = [];
 
-  const tsconfigPath: string = join(tempDir, 'tsconfig.build.json');
-  const tsconfig: Record<string, unknown> = await createTSConfig({
-    skipLibCheck,
-  });
-  await writeFile(tsconfigPath, JSON.stringify(tsconfig), { encoding: 'utf8' });
+  // tsc
+  /**
+   *   If this fails because `@types/node` mismatches, then a package has an
+   * outdated version in `node_modules/`. `npm install @types/node@latest` does
+   * not seem to fix it; you can delete `node_modules/` and remove references to
+   * "packages/__/node_modules/@types/node" in `pacxkage-lock.json`. You can
+   * find these references by Ctrl-F for "/@types/node" with the `/` prefix.
+   */
+  try {
+    const tsconfigFile: string = await createTSConfigFile({ skipLibCheck });
+    await tsc('--project', tsconfigFile);
+  } catch (err: unknown) {
+    errorLogs.push(mapToString(err));
+    process.exitCode = 1;
+  }
 
-  await tsc('--project', tsconfigPath);
+  // eslint-disable-next-line no-console
+  console.error(...errorLogs);
 }

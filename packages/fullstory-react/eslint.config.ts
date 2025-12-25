@@ -40,13 +40,6 @@ const CONFIG: readonly Config[] = defineConfig(
     ],
     'new-cap': ['src/utils/map-v2-operation-handlers-to-api.ts'],
   }),
-
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    rules: {
-      'max-lines-per-function': 'warn',
-    },
-  },
 );
 
 export default CONFIG;

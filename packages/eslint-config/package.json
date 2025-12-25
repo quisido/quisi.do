@@ -1,6 +1,6 @@
 {
   "name": "@quisido/eslint-config",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "author": "quisi.do <eslint-config@quisi.do>",
   "description": "ESLint configurations for quisi.do",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/eslint-config#readme",
@@ -12,10 +12,9 @@
   "scripts": {
     "build": "quisi build",
     "start": "quisi start",
-    "test": "concurrently --names eslint,publint,vitest --prefix-colors auto \"npm run-script eslint\" \"npm run-script publint\" \"npm run-script vitest:run\"",
+    "test": "quisi test && concurrently --names publint,vitest --prefix-colors auto \"npm run-script publint\" \"npm run-script vitest:run\"",
     "attw": "attw --quiet",
     "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",
-    "eslint": "eslint . --cache --color --exit-on-fatal-error",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
     "publint": "publint",
     "vitest": "vitest",
@@ -104,7 +103,7 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@types/node": "^24.10.1",
+    "@types/node": "^24.10.4",
     "@vitest/coverage-istanbul": "^4.0.7",
     "@vitest/ui": "^4.0.7",
     "cjs-ts": "^2.0.0",

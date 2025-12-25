@@ -14,16 +14,6 @@ const CONFIG: readonly Config[] = defineConfig(
       'src/handle-metric.ts',
     ],
   }),
-
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    rules: {
-      'max-lines': 'warn',
-      'max-lines-per-function': 'warn',
-      'max-params': 'warn',
-      'max-statements': 'warn',
-    },
-  },
 );
 
 export default CONFIG;

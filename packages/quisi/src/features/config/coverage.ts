@@ -1,4 +1,4 @@
-export interface Coverage {
+export default interface Coverage {
   readonly branches?: number | undefined;
   readonly functions?: number | undefined;
   readonly lines?: number | undefined;

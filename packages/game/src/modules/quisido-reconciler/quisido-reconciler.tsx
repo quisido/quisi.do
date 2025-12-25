@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import type { Component, ReactNode } from 'react';
 import createReactReconciler, {
   type EventPriority,
@@ -72,9 +71,14 @@ export default class QuisidoReconciler<
   Txt extends TextInstance,
   Family extends { [T in Type]: Instance<Props[T], Txt, Family> }[Type],
   Root extends Container<Txt, Family>,
-> implements
-    Reconciler<Root, Family, Txt, SuspenseInstance, FormInstance, Family | Txt>
-{
+> implements Reconciler<
+  Root,
+  Family,
+  Txt,
+  SuspenseInstance,
+  FormInstance,
+  Family | Txt
+> {
   #initialChildrenFinalized = new WeakMap<Family, number>();
   #instanceCreated = new WeakMap<WeakKey, number>();
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-arguments

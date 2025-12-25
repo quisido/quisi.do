@@ -12,10 +12,9 @@
   "scripts": {
     "build": "quisi build",
     "start": "quisi start",
-    "test": "concurrently --names eslint,publint,vitest --prefix-colors auto \"npm run-script eslint\" \"npm run-script publint\" \"npm run-script vitest:run\"",
+    "test": "quisi test && concurrently --names publint,vitest --prefix-colors auto \"npm run-script publint\" \"npm run-script vitest:run\"",
     "attw": "attw --quiet",
     "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",
-    "eslint": "eslint . --cache --color --exit-on-fatal-error",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
     "publint": "publint",
     "vitest": "vitest",

@@ -68,7 +68,6 @@ const CONFIG: readonly Config[] = defineConfig(
       'src/modules/react-intercom/utils/create-intercom.ts',
       'src/types/clarity-api.ts',
     ],
-    'max-params': ['src/utils/assert.ts'],
     'no-magic-numbers': [
       'src/constants/*.ts',
       'src/modules/quisi/heading-level.ts',
@@ -91,15 +90,6 @@ const CONFIG: readonly Config[] = defineConfig(
     ],
     'react-refresh/only-export-components': ['src/app/**/page.tsx'],
   }),
-
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    rules: {
-      'max-lines': 'warn',
-      'max-lines-per-function': 'warn',
-      'max-statements': 'warn',
-    },
-  },
 );
 
 export default CONFIG;

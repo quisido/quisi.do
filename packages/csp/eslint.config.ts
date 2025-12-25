@@ -15,10 +15,6 @@ const CONFIG: readonly Config[] = defineConfig(
   {
     files: ['**/*.ts', '**/*.tsx'],
     rules: {
-      'max-lines': 'warn',
-      'max-lines-per-function': 'warn',
-      'max-params': 'warn',
-      'max-statements': 'warn',
       // The `queries` function uses numbers as a generic.
       'no-magic-numbers': 'off',
     },

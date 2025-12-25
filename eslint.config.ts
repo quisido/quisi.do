@@ -11,12 +11,6 @@ const FLAT_CONFIG: Config[] = defineConfig(
     ignores: ['packages/**'],
   },
 
-  {
-    rules: {
-      'max-statements': 'off',
-    },
-  },
-
   ...disableRulesForFiles({
     '@typescript-eslint/only-throw-error': [
       'scripts/utils/npm-exec-workspace.ts',

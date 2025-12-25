@@ -1,4 +1,5 @@
 import { join } from 'node:path';
+import type TSConfig from '../../types/tsconfig.js';
 import createCompilerOptions from './create-compiler-options.js';
 
 interface Options {
@@ -7,7 +8,7 @@ interface Options {
 
 export default async function createTSConfig({
   skipLibCheck,
-}: Options): Promise<Record<string, unknown>> {
+}: Options): Promise<TSConfig> {
   const cwd: string = process.cwd();
 
   return {

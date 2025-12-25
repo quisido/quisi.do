@@ -10,10 +10,9 @@
   "types": "./index.d.ts",
   "scripts": {
     "build": "exit 0",
-    "test": "concurrently --names eslint,publint --prefix-colors auto \"npm run-script eslint\" \"npm run-script publint\"",
+    "test": "quisi test && npm run-script publint",
     "attw": "attw --quiet",
     "clean": "exit 0",
-    "eslint": "eslint . --cache --color --exit-on-fatal-error",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
     "publint": "publint"
   },
@@ -54,8 +53,6 @@
     "@typescript-eslint/parser": "^8.46.3",
     "concurrently": "^9.2.1",
     "eslint": "^9.39.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
     "prettier": "^3.6.2",
     "publint": "^0.3.15",
     "typescript": "^5.9.3"

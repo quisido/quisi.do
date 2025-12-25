@@ -51,8 +51,6 @@ import configs, { disableRulesForFiles  } from '@quisido/eslint-config';
 export default [
   ...configs,
   ...disableRulesForFiles({
-    'max-lines': ['eslint.config.js', 'src/index.ts'],
-    'max-lines-per-function': ['src/index.ts'],
     'no-await-in-loop': ['src/utils/map-readable-stream-to-string.ts'],
     'no-magic-numbers': ['src/constants/*.ts'],
   }),

@@ -14,16 +14,8 @@ const CONFIG: readonly Config[] = defineConfig(
     '@typescript-eslint/prefer-reduce-type-parameter': [
       'src/map-entries-to-record.ts',
     ],
-    'max-statements': ['src/map-to-string.ts'],
     'no-magic-numbers': ['src/*.test.ts'],
   }),
-
-  {
-    files: ['src/reduce-entries-to-record.ts'],
-    rules: {
-      'max-params': ['error', { max: 4 }],
-    },
-  },
 );
 
 export default CONFIG;
