@@ -5,6 +5,7 @@ import {
   type ReactElement,
   useRef,
 } from 'react';
+import { Link } from 'react-router';
 import optional from '../../../utils/optional.js';
 
 interface Props {
@@ -32,8 +33,8 @@ export default function LinkElement({
   );
 
   return (
-    <a {...linkProps} className={className} id={id} style={style}>
+    <Link {...linkProps} className={className} id={id} style={style} to={href}>
       {children}
-    </a>
+    </Link>
   );
 }
