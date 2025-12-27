@@ -5,6 +5,5 @@ export default async function npx(
   ...args: readonly string[]
 ): Promise<ExecutionResult> {
   const [npxFile, ...npxArgs] = NPX_COMMAND;
-  const { stderr, stdout } = await execute(npxFile, [...npxArgs, ...args]);
-  return { stderr, stdout };
+  return await execute(npxFile, [...npxArgs, ...args]);
 }

@@ -7,6 +7,7 @@ import { EOL } from 'node:os';
 import hasToStringMethod from './has-to-string-method.js';
 
 export interface ExecutionResult {
+  readonly exitCode: number;
   readonly stderr: string;
   readonly stdout: string;
 }
@@ -15,6 +16,9 @@ interface Options {
   readonly onStdErr?: undefined | ((data: string) => void);
   readonly onStdOut?: undefined | ((data: string) => void);
 }
+
+const ERROR_STATUS_CODE = 1;
+const SUCCESS_STATUS_CODE = 0;
 
 export default function execute(
   command: string,
@@ -27,12 +31,30 @@ export default function execute(
       args,
       { cwd: process.cwd(), encoding: 'utf-8', shell: false },
       (err: ExecFileException | null, stdout: string, stderr: string): void => {
+        const { exitCode } = childProcess;
+
         if (err === null) {
-          resolve({ stderr, stdout });
+          resolve({
+            exitCode: exitCode ?? SUCCESS_STATUS_CODE,
+            stderr,
+            stdout,
+          });
           return;
         }
 
-        resolve({ stderr: `${stderr}${EOL}${err.message}`, stdout });
+        if (stderr === '') {
+          resolve({
+            exitCode: exitCode ?? ERROR_STATUS_CODE,
+            stderr: err.message,
+            stdout,
+          });
+        }
+
+        resolve({
+          exitCode: exitCode ?? ERROR_STATUS_CODE,
+          stderr: `${stderr}${EOL}${err.message}`,
+          stdout,
+        });
       },
     );
 

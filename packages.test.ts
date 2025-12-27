@@ -24,6 +24,7 @@ const FILE_EXTENSIONS: Record<string, string> = {
 
 describeWorkspaces(async (dirent: Dirent): Promise<void> => {
   const packageJson: PackageJson = await mapDirectoryToPackageJson(dirent);
+  const isApplication: boolean = packageJson.private === true;
 
   describe('.vscode/extensions.json', async (): Promise<void> => {
     const extensions: VSCodeExtensionsJson =
@@ -58,6 +59,11 @@ describeWorkspaces(async (dirent: Dirent): Promise<void> => {
         type: 'individual',
         url: 'https://github.com/sponsors/quisido',
       });
+    });
+
+    // Modules should be tested with quisi.
+    it.runIf(!isApplication)('should test with quisi', (): void => {
+      expect(packageJson.scripts?.['test']).toMatch(/^quisi test\b/u);
     });
   });
 });

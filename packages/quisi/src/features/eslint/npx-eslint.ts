@@ -1,5 +1,7 @@
 import npx from '../npx/npx.js';
 
+const SUCCESS_STATUS_CODE = 0;
+
 export default async function npxEslint(
   ...args: readonly string[]
 ): Promise<void> {
@@ -21,10 +23,12 @@ export default async function npxEslint(
     ...args,
   ];
 
-  const { stdout } = await npx(...npxArgs);
+  const { exitCode, stdout } = await npx(...npxArgs);
 
   // `eslint` emits errors via stdout.
-  if (stdout !== '') {
-    throw new Error(stdout, { cause: npxArgs.join(' ') });
+  if (exitCode !== SUCCESS_STATUS_CODE) {
+    throw new Error(stdout, {
+      cause: npxArgs.join(' '),
+    });
   }
 }

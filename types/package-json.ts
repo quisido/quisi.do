@@ -4,5 +4,6 @@ export default interface PackageJson {
   readonly funding?: unknown;
   readonly name: string;
   readonly private?: boolean;
+  readonly scripts?: Record<string, string>;
   readonly version: string;
 }

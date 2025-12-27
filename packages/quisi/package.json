@@ -14,7 +14,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "start": "tsc --project tsconfig.build.json --watch",
-    "test": "exit 0",
+    "test": "quisi test",
     "clean": "rm -rf .cache dist node_modules"
   },
   "bugs": {
