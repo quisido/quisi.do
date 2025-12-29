@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { Route, Routes } from 'react-router';
 import CookiePolicy from './cookie-policy.jsx';
 import DataRetentionPolicy from './data-retention-policy.jsx';

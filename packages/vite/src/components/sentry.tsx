@@ -1,4 +1,4 @@
-import type { User } from '@sentry/core';
+import { type User } from '@sentry/core';
 import { type ReactElement, type ReactNode } from 'react';
 import SentryReact from 'sentry-react';
 import useSentryIntegrations from '../hooks/use-sentry-integrations.js';

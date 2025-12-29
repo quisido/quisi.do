@@ -8,7 +8,7 @@ import {
   type UserConfig,
   type UserConfigFnObject,
 } from 'vite';
-import type { Compulsory } from './src/types/compulsory.js';
+import { type Compulsory } from './src/types/compulsory.js';
 import reduceEnvironmentVariableNamesToRecord from './src/utils/reduce-environment-variable-names-to-record.js';
 import buildTSConfig from './tsconfig.build.json' with { type: 'json' };
 

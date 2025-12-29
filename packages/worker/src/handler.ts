@@ -14,7 +14,7 @@ import mapKVNamespaceValueToBytes from './map-kv-namespace-value-to-bytes.js';
 import mapMetricDimensionsToDataPoint from './map-metric-dimensions-to-datapoint.js';
 import mapR2BucketValueToBytes from './map-r2-bucket-value-to-bytes.js';
 import mapRequestInfoToString from './map-request-info-to-string.js';
-import type { MetricDimensions } from './metric-dimensions.js';
+import { type MetricDimensions } from './metric-dimensions.js';
 import { MetricName } from './metric-name.js';
 import type Runnable from './runnable.js';
 import sanitizeExpenseTtl from './sanitize-expense-ttl.js';

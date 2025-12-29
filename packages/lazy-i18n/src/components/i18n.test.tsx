@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react';
-import { act, type PropsWithChildren, type ReactElement } from 'react';
+import { act, render } from '@testing-library/react';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import { describe, it, vi } from 'vitest';
 import I18n, { I18nProvider } from '../index.js';
 

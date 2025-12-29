@@ -9,7 +9,7 @@ import useTheme from '../../hooks/use-theme.js';
 import createRandomNumberGenerator from '../../utils/create-random-number-generator.js';
 import validateString from '../../utils/validate-string.js';
 import Header from './header.js';
-import type { HeadingLevel } from './heading-level.js';
+import { type HeadingLevel } from './heading-level.js';
 import incrementHeadingLevel from './increment-heading-level.js';
 import SectionLevelContext from './section-level-context.js';
 import styles from './section.module.scss';

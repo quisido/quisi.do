@@ -1,5 +1,5 @@
-import type { TracerProvider as ITracerProvider } from '@opentelemetry/api';
-import type { ReactElement, ReactNode } from 'react';
+import { type TracerProvider as ITracerProvider } from '@opentelemetry/api';
+import { type ReactElement, type ReactNode } from 'react';
 import TracerProvider from '../contexts/tracer-provider.js';
 
 interface Props {

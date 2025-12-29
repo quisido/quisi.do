@@ -3,8 +3,8 @@ import { type ReactElement, type RefObject, useEffect, useRef } from 'react';
 import useShallowMemo from 'use-shallow-memo';
 import useEffectEvent from '../../hooks/use-effect-event.js';
 import noop from '../../utils/noop.js';
-import type { ChartOptions } from './chart-options.js';
-import type { Chart } from './chart.js';
+import { type ChartOptions } from './chart-options.js';
+import { type Chart } from './chart.js';
 import loadGoogleChartsLoader from './load-google-charts-loader.js';
 
 interface Props<C extends Chart> {

@@ -1,4 +1,4 @@
-import type { Provider } from 'react';
+import { type Provider } from 'react';
 import createContextUtils from '../modules/create-context-utils/index.js';
 import type CustomTheme from '../types/custom-theme.js';
 

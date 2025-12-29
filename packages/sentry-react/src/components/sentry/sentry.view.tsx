@@ -6,7 +6,7 @@ import {
   ErrorBoundary,
   type ReportDialogOptions,
 } from '@sentry/react';
-import type { ReactElement, ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import DefaultErrorBoundaryFallback from '../../components/default-error-boundary-fallback/index.js';
 import type FallbackRenderParams from '../../types/fallback-render-params.js';
 import useSentry from './sentry.hook.js';

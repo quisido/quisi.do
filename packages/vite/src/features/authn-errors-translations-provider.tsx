@@ -1,5 +1,5 @@
 import { I18nProvider } from 'lazy-i18n';
-import type { PropsWithChildren, ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import { AUTHN_ERRORS_TRANSLATIONS } from '../constants/authn-errors-translations.js';
 import { useLocale } from '../contexts/locale.js';
 

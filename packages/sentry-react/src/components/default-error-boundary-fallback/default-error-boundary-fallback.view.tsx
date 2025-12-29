@@ -1,5 +1,5 @@
 import { mapToString } from 'fmrs';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
 interface Props {
   readonly error: unknown;

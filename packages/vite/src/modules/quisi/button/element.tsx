@@ -1,4 +1,8 @@
-import type { CSSProperties, PropsWithChildren, ReactElement } from 'react';
+import {
+  type CSSProperties,
+  type PropsWithChildren,
+  type ReactElement,
+} from 'react';
 import ButtonElement from './button-element.jsx';
 import LinkElement from './link-element.jsx';
 

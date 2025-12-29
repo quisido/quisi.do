@@ -1,5 +1,5 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Emoji from '../components/emoji.jsx';
 import useColorScheme from '../hooks/use-color-scheme.js';
 import DarkModeDefaultToggle from './dark-mode-default-toggle.jsx';

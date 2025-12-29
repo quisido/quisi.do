@@ -1,3 +1,4 @@
+import { type Attributes, type AttributeValue } from '@opentelemetry/api';
 import {
   type RawResourceAttribute,
   type Resource as ResourceType,
@@ -25,7 +26,6 @@ import { GITHUB_SHA } from '../constants/github-sha.js';
 import getSemanticResourceNavigatorAttributes from '../utils/get-semantic-resource-navigator-attributes';
 import mapPackageToSemanticResourceAttributes from '../utils/map-package-to-semantic-resource-attributes.js';
 import validateString from '../utils/validate-string.js';
-import type { Attributes, AttributeValue } from '@opentelemetry/api';
 
 const { description: viteDescription, version: viteVersion } = vitePackageJson;
 const {

@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
 interface Props extends Intl.NumberFormatOptions {
   readonly children: number | string;

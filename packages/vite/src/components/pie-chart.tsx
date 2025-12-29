@@ -1,5 +1,5 @@
 import { mapToString } from 'fmrs';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import useEmit from '../hooks/use-emit/use-emit.js';
 import { PieChart as GooglePieChart } from '../modules/react-google-charts/index.js';
 

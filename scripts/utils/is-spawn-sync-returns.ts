@@ -1,4 +1,4 @@
-import type { SpawnSyncReturns } from 'node:child_process';
+import { type SpawnSyncReturns } from 'node:child_process';
 
 const isOutput = (value: unknown): value is readonly unknown[] | null =>
   value === null || Array.isArray(value);

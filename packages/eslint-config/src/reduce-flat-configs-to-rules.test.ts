@@ -1,4 +1,4 @@
-import type { Linter } from 'eslint';
+import { type Linter } from 'eslint';
 import { describe, expect, it } from 'vitest';
 import reduceConfigsToRules from './reduce-configs-to-rules.js';
 

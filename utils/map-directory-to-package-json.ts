@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import type { Dirent } from 'node:fs';
+import { type Dirent } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import type PackageJson from '../types/package-json.js';

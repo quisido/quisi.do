@@ -1,4 +1,4 @@
-import type { Provider } from 'react';
+import { type Provider } from 'react';
 import createContextUtils from '../modules/create-context-utils/index.js';
 import type Notification from '../types/notification.js';
 import { type WithKey } from '../types/with-key.js';

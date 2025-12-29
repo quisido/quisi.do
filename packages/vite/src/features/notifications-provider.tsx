@@ -11,7 +11,7 @@ import {
 import { NotificationsProvider } from '../contexts/notifications.js';
 import useHash from '../hooks/use-hash.js';
 import type Notification from '../types/notification.js';
-import type { WithKey } from '../types/with-key.js';
+import { type WithKey } from '../types/with-key.js';
 import append from '../utils/append.js';
 import filter from '../utils/filter.js';
 import mapErrorToNotification from '../utils/map-error-to-notification.js';

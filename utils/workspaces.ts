@@ -1,4 +1,4 @@
-import type { Dirent } from 'node:fs';
+import { type Dirent } from 'node:fs';
 import { readdir } from 'node:fs/promises';
 import isDirectory from './is-directory.js';
 

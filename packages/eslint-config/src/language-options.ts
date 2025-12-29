@@ -1,4 +1,4 @@
-import type { ESLintLanguageOptions } from './eslint-language-options.js';
+import { type ESLintLanguageOptions } from './eslint-language-options.js';
 import { PARSER_OPTIONS } from './parser-options.js';
 
 export const LANGUAGE_OPTIONS: Required<Omit<ESLintLanguageOptions, 'parser'>> =

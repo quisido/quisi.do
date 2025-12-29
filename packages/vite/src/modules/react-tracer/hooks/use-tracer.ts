@@ -1,7 +1,7 @@
-import type {
-  Tracer,
-  TracerOptions,
-  TracerProvider as ITracerProvider,
+import {
+  type Tracer,
+  type TracerOptions,
+  type TracerProvider as ITracerProvider,
 } from '@opentelemetry/api';
 import { useContext, useMemo } from 'react';
 import useShallowMemo from 'use-shallow-memo';

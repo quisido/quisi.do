@@ -1,5 +1,5 @@
 import { TraceFlag } from '../constants/trace-flag.js';
-import type { TraceParentGroups } from '../types/trace-parent-groups.js';
+import { type TraceParentGroups } from '../types/trace-parent-groups.js';
 import type TraceParent from '../types/trace-parent.js';
 import hasTraceFlag from '../utils/has-trace-flag.js';
 import mapHexToNumber from '../utils/map-hex-to-number.js';

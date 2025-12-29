@@ -2,7 +2,7 @@ import configs, {
   defineConfig,
   disableRulesForFiles,
 } from '@quisido/eslint-config';
-import type { Config } from 'eslint/config';
+import { type Config } from 'eslint/config';
 
 const FLAT_CONFIG: Config[] = defineConfig(
   ...configs,

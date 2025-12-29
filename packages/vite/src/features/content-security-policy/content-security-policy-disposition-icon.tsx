@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Emoji from '../../components/emoji.jsx';
 
 interface Props {

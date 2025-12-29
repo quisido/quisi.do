@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import LazyNotification from '../components/lazy-notification.jsx';
 import Notification from '../components/notification.jsx';
 import type NotificationType from '../types/notification.js';

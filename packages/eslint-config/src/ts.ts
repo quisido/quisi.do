@@ -1,5 +1,5 @@
 import tsPlugin from '@typescript-eslint/eslint-plugin';
-import type { ESLint, Linter } from 'eslint';
+import { type ESLint, type Linter } from 'eslint';
 import sortKeysCustomOrder from 'eslint-plugin-sort-keys-custom-order';
 import ts from 'typescript-eslint';
 import defineConfig, { type Config } from './define-config.js';

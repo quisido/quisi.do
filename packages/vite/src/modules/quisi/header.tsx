@@ -1,4 +1,4 @@
-import type { ReactElement, ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import validateString from '../../utils/validate-string.js';
 import styles from './header.module.scss';
 import type { HeadingLevel } from './heading-level.js';
