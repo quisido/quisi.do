@@ -1,7 +1,7 @@
 import { StatusCode } from 'cloudflare-utils';
+import noop from '../../test/noop.js';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { SECONDS_PER_DAY } from '../constants/time.js';
-import noop from '../test/noop.js';
 import createAuthnId from '../utils/create-authn-id.js';
 
 interface Options {

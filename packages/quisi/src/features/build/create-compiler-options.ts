@@ -1,5 +1,5 @@
 import { join } from 'node:path';
-import type { CompilerOptions, JsxEmit } from 'typescript';
+import type { server } from 'typescript';
 import createJsx from './create-jsx.js';
 
 interface Options {
@@ -8,10 +8,10 @@ interface Options {
 
 export default async function createCompilerOptions({
   skipLibCheck = false,
-}: Options): Promise<CompilerOptions> {
+}: Options): Promise<server.protocol.CompilerOptions> {
   const cwd: string = process.cwd();
 
-  const compilerOptions: CompilerOptions = {
+  const compilerOptions: server.protocol.CompilerOptions = {
     declarationDir: join(cwd, 'dist'),
     generateCpuProfile: join(cwd, '.cache', 'quisi-build.cpuprofile'),
     noEmit: false,
@@ -21,7 +21,7 @@ export default async function createCompilerOptions({
     tsBuildInfoFile: join(cwd, '.cache', 'quisi-build.tsbuildinfo'),
   };
 
-  const jsx: JsxEmit | undefined = await createJsx();
+  const jsx: server.protocol.JsxEmit | undefined = await createJsx();
   if (typeof jsx !== 'undefined') {
     compilerOptions.jsx = jsx;
   }

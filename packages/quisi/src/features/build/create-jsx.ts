@@ -1,7 +1,9 @@
-import { JsxEmit } from 'typescript';
+import { server } from 'typescript';
 import getPackageJson from '../../utils/get-package-json.js';
 
-export default async function createJsx(): Promise<JsxEmit | undefined> {
+export default async function createJsx(): Promise<
+  server.protocol.JsxEmit | undefined
+> {
   const { dependencies, devDependencies } = await getPackageJson();
 
   if (
@@ -9,7 +11,7 @@ export default async function createJsx(): Promise<JsxEmit | undefined> {
     dependencies !== null &&
     'react' in dependencies
   ) {
-    return JsxEmit.ReactJSX; // 'react-jsx'
+    return server.protocol.JsxEmit.ReactJSX;
   }
 
   if (
@@ -17,7 +19,7 @@ export default async function createJsx(): Promise<JsxEmit | undefined> {
     devDependencies !== null &&
     'react' in devDependencies
   ) {
-    return JsxEmit.ReactJSX; // 'react-jsx'
+    return server.protocol.JsxEmit.ReactJSX;
   }
 
   return undefined;
