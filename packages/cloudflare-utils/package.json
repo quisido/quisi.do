@@ -12,11 +12,12 @@
   "scripts": {
     "build": "quisi build",
     "start": "quisi start",
-    "test": "quisi test && concurrently --names attw,publint,vitest --prefix-colors auto \"npm run-script attw\" \"npm run-script publint\" \"npm run-script vitest:run\"",
-    "attw": "attw --quiet",
+    "test": "quisi test && npm run-script vitest:run",
+    "attw": "quisi attw",
     "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",
+    "eslint": "quisi eslint",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
-    "publint": "publint",
+    "publint": "quisi publint",
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
@@ -46,7 +47,6 @@
     "fmrs": "^2.1.1"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.18.2",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "^1.1.9",
     "@quisido/vitest-config": "^1.0.6",
@@ -57,7 +57,6 @@
     "concurrently": "^9.2.1",
     "eslint": "^9.39.1",
     "prettier": "^3.6.2",
-    "publint": "^0.3.15",
     "quisi": "^0.0.1",
     "rimraf": "^6.1.0",
     "tslib": "^2.8.1",

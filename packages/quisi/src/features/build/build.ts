@@ -8,6 +8,11 @@ export default async function build({
 }: BuildConfig): Promise<void> {
   const errorLogs: string[] = [];
 
+  const handleError = (err: unknown): void => {
+    errorLogs.push(mapToString(err));
+    process.exitCode = 1;
+  };
+
   // tsc
   /**
    *   If this fails because `@types/node` mismatches, then a package has an
@@ -20,8 +25,7 @@ export default async function build({
     const tsconfigFile: string = await createTSConfigFile({ skipLibCheck });
     await tsc('--project', tsconfigFile);
   } catch (err: unknown) {
-    errorLogs.push(mapToString(err));
-    process.exitCode = 1;
+    handleError(err);
   }
 
   // eslint-disable-next-line no-console

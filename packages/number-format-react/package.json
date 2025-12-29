@@ -4,17 +4,19 @@
   "author": "quisi.do <number-format-react@quisi.do>",
   "description": "the Intl.NumberFormat class as a React component",
   "homepage": "https://www.npmjs.com/package/number-format-react",
+  "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "quisi build",
-    "test": "quisi test && concurrently --names publint,vitest --prefix-colors auto \"npm run-script publint\" \"npm run-script vitest:run\"",
-    "attw": "attw --quiet",
+    "test": "quisi test && npm run-script vitest:run",
+    "attw": "quisi attw",
     "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",
+    "eslint": "quisi eslint",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
-    "publint": "publint",
+    "publint": "quisi publint",
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch"
@@ -36,7 +38,6 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.18.2",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "^1.1.9",
     "@quisido/vitest-config": "^1.0.6",
@@ -58,7 +59,6 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "happy-dom": "^20.0.10",
     "prettier": "^3.6.2",
-    "publint": "^0.3.15",
     "quisi": "^0.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

@@ -9,6 +9,7 @@ import mapDirectoryToVsCodeExtensionsJson from './utils/map-directory-to-vs-code
 
 const DEPENDENCY_EXTENSIONS: Record<string, string> = {
   eslint: 'dbaeumer.vscode-eslint',
+  publint: 'kravets.vscode-publint',
   stylelint: 'stylelint.vscode-stylelint',
   vitest: 'vitest.explorer',
 };

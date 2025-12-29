@@ -15,7 +15,9 @@
     "build": "tsc --project tsconfig.build.json",
     "start": "tsc --project tsconfig.build.json --watch",
     "test": "quisi test",
-    "clean": "rm -rf .cache dist node_modules"
+    "clean": "rm -rf .cache dist node_modules",
+    "eslint": "quisi eslint",
+    "publint": "quisi publint"
   },
   "bugs": {
     "email": "quisi@quisi.do",
@@ -44,7 +46,6 @@
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "^8.46.3",
     "@typescript-eslint/parser": "^8.46.3",
-    "concurrently": "^9.2.1",
     "prettier": "^3.6.2",
     "publint": "^0.3.15",
     "zod": "^3.25.76"
