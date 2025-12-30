@@ -11,7 +11,6 @@
     "build": "npm run-script tsc:build && node ./dist/scripts/build.js",
     "start": "concurrently --kill-others --kill-others-on-fail --names \"authn           \",\"cloudflare-utils\",\"csp             \",\"dashboard       \",\"eslint-config   \",\"fmrs            \",\"vite            \",\"worker          \" --prefix-colors auto --restart-after exponential --restart-tries 9999 \"npm run-script authn\" \"npm run-script cloudflare-utils\" \"npm run-script csp\" \"npm run-script dashboard\" \"npm run-script eslint-config\" \"npm run-script fmrs\" \"npm run-script vite\" \"npm run-script worker\"",
     "test": "concurrently --names eslint,publint --prefix-colors auto \"npm run-script eslint\" \"npm run-script publint\" && npm run-script test --workspaces",
-    "attw": "attw --exclude-entrypoints .",
     "authn": "npm start --workspace=packages/authn",
     "browserslist:update-db": "browserslist --update-db",
     "clean": "rimraf coverage node_modules sarif && npm run-script clean --if-present --workspaces",

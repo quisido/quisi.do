@@ -1,4 +1,5 @@
 import process from 'node:process';
+import getPackageJson from '../../utils/get-package-json.js';
 import mapToString from '../../utils/map-to-string.js';
 import attw from '../attw/attw.js';
 import type TestConfig from '../config/test-config.js';
@@ -16,7 +17,12 @@ export default async function test({
     process.exitCode = 1;
   };
 
-  await attw().catch(handleError);
+  const { private: isPrivate } = await getPackageJson();
+
+  if (isPrivate !== true) {
+    await attw().catch(handleError);
+  }
+
   await eslint({ eslintConfigFile }).catch(handleError);
   await publint().catch(handleError);
   // await vitest().catch(handleError);
