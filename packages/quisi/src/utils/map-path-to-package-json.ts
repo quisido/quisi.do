@@ -4,6 +4,9 @@ import debug from './debug.js';
 
 const CACHE = new Map<string, Record<string, unknown>>();
 
+/**
+ * Warning: Do not pass user input to this function.
+ */
 export default async function mapPathToPackageJson(
   path: string,
 ): Promise<Record<string, unknown>> {

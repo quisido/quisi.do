@@ -15,7 +15,7 @@
     "build": "tsc --project tsconfig.build.json",
     "start": "tsc --project tsconfig.build.json --watch",
     "test": "quisi test",
-    "clean": "rm -rf .cache dist node_modules",
+    "clean": "rm -rf .cache .tests dist node_modules",
     "eslint": "quisi eslint",
     "publint": "quisi publint"
   },
@@ -27,6 +27,9 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./.attw.json": {
+      "default": "./.attw.json"
     }
   },
   "funding": {

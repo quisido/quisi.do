@@ -1,0 +1,10 @@
+{
+  "color": true,
+  "emoji": true,
+  "ignoreRules": [
+    "cjs-resolves-to-esm"
+  ],
+  "pack": ".",
+  "profile": "strict",
+  "summary": true
+}

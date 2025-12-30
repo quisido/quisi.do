@@ -15,6 +15,7 @@ const MIN_CONCURRENCY = 1;
 export default async function eslint({
   eslintConfigFile = 'eslint.config.ts',
 }: Options): Promise<void> {
+  debug('[eslint]⏳');
   const concurrency: number = randomInt(MIN_CONCURRENCY, MAX_CONCURRENCY);
 
   const { duration: resultsDuration, error: resultsError } = await withDuration(
@@ -28,20 +29,21 @@ export default async function eslint({
       );
     },
   );
-  debug(`ESLint results took ${resultsDuration}s with ${concurrency} threads.`);
 
   if (resultsError !== null) {
+    debug(`[eslint] ❌  (${resultsDuration} seconds, ${concurrency} threads)`);
     throw mapToError(resultsError);
   }
 
+  debug(`[eslint] ✔️  (${resultsDuration} seconds, ${concurrency} threads)`);
   const { duration: reportsDuration, error: reportsError } = await withDuration(
     async (): Promise<void> => {
       await report({ eslintConfigFile, format: 'html' });
       await report({ eslintConfigFile, format: 'json' });
     },
   );
-  debug(`ESLint reports took ${reportsDuration}s.`);
 
+  debug(`[eslint] Generated reports in ${reportsDuration} seconds.`);
   if (reportsError !== null) {
     throw mapToError(reportsError);
   }

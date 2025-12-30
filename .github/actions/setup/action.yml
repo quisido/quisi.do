@@ -13,5 +13,9 @@ runs:
         check-latest: true
         node-version-file: .nvmrc
     - name: Install dependencies
-      run: npm ci
+      # Build `quisi` then reinstall so that it's a symlinked Node module.
+      run: >
+        npm ci;
+        npm run-script build --workspace=packages/quisi;
+        npm ci;
       shell: bash
