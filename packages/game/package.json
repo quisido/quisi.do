@@ -8,9 +8,9 @@
   "scripts": {
     "build": "exit 0 || npm run-script tsc && npm run-script vite:build",
     "start": "vite",
-    "test": "concurrently --names eslint,vitest --prefix-colors auto \"npm run-script eslint\" \"npm run-script vitest:run\"",
-    "eslint": "exit 0 || eslint . --cache --color --exit-on-fatal-error",
-    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
+    "test": "exit 0 || concurrently --names eslint,vitest --prefix-colors auto \"npm run-script eslint\" \"npm run-script vitest:run\"",
+    "eslint": "quisi eslint",
+    "publint": "quisi publint",
     "serve": "serve dist",
     "tsc": "tsc --skipLibCheck",
     "vite:build": "vite build",
