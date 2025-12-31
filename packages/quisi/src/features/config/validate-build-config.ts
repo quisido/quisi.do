@@ -1,7 +1,7 @@
-import { boolean, object, type ZodType } from 'zod';
+import { boolean, strictObject, type ZodType } from 'zod';
 import type BuildConfig from './build-config.js';
 
-const ZodBuildConfig: ZodType<BuildConfig> = object({
+const ZodBuildConfig: ZodType<BuildConfig> = strictObject({
   skipLibCheck: boolean().optional(),
 }).partial();
 

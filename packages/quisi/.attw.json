@@ -5,6 +5,6 @@
     "cjs-resolves-to-esm"
   ],
   "pack": ".",
-  "profile": "strict",
+  "profile": "node16",
   "summary": true
 }

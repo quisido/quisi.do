@@ -18,8 +18,8 @@ export default async function build({
    *   If this fails because `@types/node` mismatches, then a package has an
    * outdated version in `node_modules/`. `npm install @types/node@latest` does
    * not seem to fix it; you can delete `node_modules/` and remove references to
-   * "packages/__/node_modules/@types/node" in `pacxkage-lock.json`. You can
-   * find these references by Ctrl-F for "/@types/node" with the `/` prefix.
+   * "packages/__/node_modules/@types/node" in `package-lock.json`. You can find
+   * these references by Ctrl-F for "/@types/node" with the `/` prefix.
    */
   try {
     const tsconfigFile: string = await createTSConfigFile({ skipLibCheck });
