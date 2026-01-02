@@ -16,7 +16,7 @@ export default async function createCompilerOptions({
     generateCpuProfile: join(cwd, '.cache', 'quisi-build.cpuprofile'),
     noEmit: false,
     outDir: join(cwd, 'dist'),
-    rootDir: join(cwd, 'src'),
+    rootDir: cwd,
     skipLibCheck,
     tsBuildInfoFile: join(cwd, '.cache', 'quisi-build.tsbuildinfo'),
   };

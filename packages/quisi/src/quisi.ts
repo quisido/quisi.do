@@ -20,6 +20,7 @@ switch (process.argv[FIRST_ARG]) {
   case 'vitest': {
     // eslint-disable-next-line no-console
     console.warn('Individual tool execution is not yet supported.');
+    process.exitCode = 1;
     break;
   }
 

@@ -4,9 +4,9 @@
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
-    "rootDir": ".",
+    "rootDir": "."
   },
   "exclude": [".vitest/", "coverage/", "dist/", "node_modules/"],
   "extends": "../../tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx"]
 }
