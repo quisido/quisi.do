@@ -8,8 +8,9 @@ export { defineConfig } from 'vitest/config';
 export { type CoverageOptions } from 'vitest/node';
 export { COVERAGE_OPTIONS } from './coverage-options.js';
 export { EXCLUDE } from './exclude.js';
+export { IMPORT_CODE_WORKSPACE_PLUGIN } from './import-code-workspace-plugin.js';
 export { INLINE_CONFIG } from './inline-config.js';
-export { PLUGIN_OPTIONS } from './plugin-options.js';
+export { PLUGIN_OPTIONS, type PluginOptions } from './plugin-options.js';
 export { THRESHOLDS } from './thresholds.js';
 
 const USER_CONFIG: UserConfig = defineConfig({

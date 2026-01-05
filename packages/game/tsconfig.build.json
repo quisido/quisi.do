@@ -10,6 +10,8 @@
     "target": "ES2022"
   },
   "exclude": [
+    "./.cache/",
+    "./.tests/",
     "./.vitest/",
     "./.vscode/",
     "./coverage/",

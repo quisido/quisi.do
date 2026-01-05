@@ -1,6 +1,6 @@
 import { type Dirent, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { assert, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type PackageJson from './types/package-json.js';
 import type VSCodeExtensionsJson from './types/vs-code-extensions-json.js';
 import describeWorkspaces from './utils/describe-workspaces.js';
@@ -32,12 +32,17 @@ describeWorkspaces(async (dirent: Dirent): Promise<void> => {
       await mapDirectoryToVsCodeExtensionsJson(dirent);
 
     it('should recommend relevant extensions', (): void => {
-      assert('devDependencies' in packageJson, 'Expected dev dependencies');
+      const dependencies = new Set<string>(
+        Object.keys({
+          ...packageJson.dependencies,
+          ...packageJson.devDependencies,
+        }),
+      );
 
       for (const [dependency, extension] of Object.entries(
         DEPENDENCY_EXTENSIONS,
       )) {
-        if (dependency in packageJson.devDependencies) {
+        if (dependencies.has(dependency)) {
           expect(extensions.recommendations).toContain(extension);
         } else {
           expect(extensions.recommendations).not.toContain(extension);

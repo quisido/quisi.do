@@ -3,7 +3,9 @@
 /.git/
 /.pnp.*
 /debug.log
+.cache/
 .idea/
+.tests/
 .vitest/
 .wrangler/
 coverage/

@@ -1,27 +1,27 @@
 {
   "[css]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[html]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[json]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[yaml]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.rulers": [80],
@@ -61,7 +61,7 @@
   },
   "files.eol": "\n",
   "files.exclude": {
-    "packages/": true,
+    "packages/": true
   },
   "files.watcherExclude": {
     "**/.eslintcache": true,
@@ -70,7 +70,7 @@
     "**/dist/": true,
     "**/node_modules/": true,
     "**/packages/": true,
-    "**/sarif/": true,
+    "**/sarif/": true
   },
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
   "javascript.preferences.importModuleSpecifierEnding": "js",
@@ -91,11 +91,13 @@
     "**/lighthouse.report.*": true,
     "**/node_modules/": true,
     "**/package-lock.json": true,
-    "**/sarif/": true,
+    "**/sarif/": true
   },
   "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
+  "testExplorer.useNativeTesting": true,
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.preferences.importModuleSpecifierEnding": "js",
   "vitest.maximumConfigs": 99,
+  "vitest.shellType": "terminal",
   "yaml.keyOrdering": false
 }

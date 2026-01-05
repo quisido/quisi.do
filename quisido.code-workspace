@@ -103,6 +103,7 @@
       "**/.aiexclude": "ignore"
 		},
 		"github.copilot.chat.codeGeneration.useInstructionFiles": true,
+    "typescript.enablePromptUseWorkspaceTsdk": true,
 		"vitest.maximumConfigs": 99,
 		"yaml.keyOrdering": false
 	}

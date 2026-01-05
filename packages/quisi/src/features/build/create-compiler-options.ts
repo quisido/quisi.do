@@ -16,7 +16,12 @@ export default async function createCompilerOptions({
     generateCpuProfile: join(cwd, '.cache', 'quisi-build.cpuprofile'),
     noEmit: false,
     outDir: join(cwd, 'dist'),
-    rootDir: cwd,
+    /**
+     *   While the `rootDir` for development and testing is `/` to include all
+     * files, the `rootDir` for the production build is `src` so that only
+     * source files are emitted.
+     */
+    rootDir: join(cwd, 'src'),
     skipLibCheck,
     tsBuildInfoFile: join(cwd, '.cache', 'quisi-build.tsbuildinfo'),
   };

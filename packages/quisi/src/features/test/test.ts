@@ -7,6 +7,8 @@ import eslint from '../eslint/eslint.js';
 import publint from '../publint/publint.js';
 // import vitest from '../vitest/vitest.js';
 
+const EMPTY = 0;
+
 export default async function test({
   eslintConfigFile,
 }: TestConfig): Promise<void> {
@@ -27,6 +29,8 @@ export default async function test({
   await publint().catch(handleError);
   // await vitest().catch(handleError);
 
-  // eslint-disable-next-line no-console
-  console.error(...errorLogs);
+  if (errorLogs.length > EMPTY) {
+    // eslint-disable-next-line no-console
+    console.error(...errorLogs);
+  }
 }
