@@ -1,13 +1,13 @@
 import { StrictMode } from 'react';
+import Locale from './constants/locale.js';
+import { ROOT } from './constants/root.js';
+import { ContextProviders } from './features/context-providers.jsx';
+import Effects from './features/effects.jsx';
 import Footer from './features/footer.jsx';
 import Header from './features/header.jsx';
-import Notifications from './features/notifications.jsx';
-import { ContextProviders } from './features/context-providers.jsx';
-import Home from './features/home.jsx';
-import { ROOT } from './constants/root.js';
 import LocaleLayout from './features/locale-layout/index.js';
-import Locale from './constants/locale.js';
-import Effects from './features/effects.jsx';
+import Notifications from './features/notifications.jsx';
+import Routes from './features/routes.jsx';
 
 ROOT.render(
   <StrictMode>
@@ -17,7 +17,7 @@ ROOT.render(
         <Notifications />
         <Header />
         <main>
-          <Home />
+          <Routes />
         </main>
         <Footer />
       </ContextProviders>

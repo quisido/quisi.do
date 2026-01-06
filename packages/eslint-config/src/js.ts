@@ -1,5 +1,5 @@
 import js from '@eslint/js';
-import type { ESLint } from 'eslint';
+import { type ESLint } from 'eslint';
 import prettierConfig from 'eslint-config-prettier';
 import prettierPlugin from 'eslint-plugin-prettier';
 import prettierPluginRecommended from 'eslint-plugin-prettier/recommended';
@@ -37,6 +37,10 @@ const JS_CONFIG: Config = defineConfig({
     'consistent-return': 'off',
 
     'func-name-matching': 'off',
+    'max-lines': 'warn',
+    'max-lines-per-function': 'warn',
+    'max-params': 'warn',
+    'max-statements': 'warn',
     'no-bitwise': 'off',
     'no-continue': 'off',
     'no-global-assign': 'error',

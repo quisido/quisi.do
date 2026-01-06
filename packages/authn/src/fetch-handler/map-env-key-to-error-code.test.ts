@@ -1,7 +1,7 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { MetricName as WorkerMetricName } from '@quisido/worker';
 import { describe, expect, it } from 'vitest';
-import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
+import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import mapEnvKeyToErrorCode from './map-env-key-to-error-code.js';
 
 describe('mapEnvKeyToErrorCode', (): void => {

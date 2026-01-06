@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import packageJson from './package.json' with { type: 'json' };
-import reduceWorkspaceEntriesToOverrides from './utils/reduce-workspace-entries-to-overrides.js';
+import type PackageJson from './types/package-json.js';
+import mapDirectoryToPackageJson from './utils/map-directory-to-package-json.js';
+import reducePackageJsonsToOverrides from './utils/reduce-package-jsons-to-overrides.js';
 import { WORKSPACES } from './utils/workspaces.js';
 
 describe('package.json', (): void => {
@@ -10,9 +12,12 @@ describe('package.json', (): void => {
    * autonomously if it were ever to split from the monorepo.
    */
   describe('overrides', (): void => {
-    it('should contain workspace overrides', (): void => {
+    it('should contain workspace overrides', async (): Promise<void> => {
+      const packageJsons: readonly PackageJson[] = await Promise.all(
+        WORKSPACES.map(mapDirectoryToPackageJson),
+      );
       const rootOverrides: Record<string, Record<string, string> | string> =
-        WORKSPACES.reduce(reduceWorkspaceEntriesToOverrides, {});
+        packageJsons.reduce(reducePackageJsonsToOverrides, {});
       expect(packageJson.overrides).toStrictEqual(rootOverrides);
     });
   });

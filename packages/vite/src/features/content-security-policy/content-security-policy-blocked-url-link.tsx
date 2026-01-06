@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Link from '../../modules/quisi/link.jsx';
 import mapUrlToHref from '../../utils/map-url-to-href.js';
 

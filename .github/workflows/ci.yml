@@ -149,7 +149,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test
-          path: packages/*/.vitest/
+          path: packages/*/.tests/
 
   # This requires some more setup to work. Configure the test step to upload report artifacts.
   # Then add this to the CD file.

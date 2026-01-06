@@ -20,7 +20,7 @@ export const COVERAGE_OPTIONS: CoverageOptions<'istanbul'> = {
       'html',
       {
         skipEmpty: true,
-        verbose: true,
+        verbose: false,
       },
     ],
     [
@@ -28,7 +28,7 @@ export const COVERAGE_OPTIONS: CoverageOptions<'istanbul'> = {
       {
         metricsToShow: ['branches', 'functions', 'lines', 'statements'],
         skipEmpty: true,
-        verbose: true,
+        verbose: false,
       },
     ],
     ['teamcity', { file: 'teamcity.txt' }],
@@ -44,7 +44,7 @@ export const COVERAGE_OPTIONS: CoverageOptions<'istanbul'> = {
     ['text-summary', { file: 'text-summary.txt' }],
   ],
   reportOnFailure: true,
-  reportsDirectory: '.vitest/coverage',
+  reportsDirectory: '.tests/vitest/coverage',
   skipFull: true,
   thresholds: THRESHOLDS,
 };

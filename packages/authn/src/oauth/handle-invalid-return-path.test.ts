@@ -1,7 +1,7 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { describe, it } from 'vitest';
+import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { MetricName } from '../constants/metric-name.js';
-import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handleInvalidReturnPath', (): void => {
   it('should emit and respond for missing return paths', async (): Promise<void> => {

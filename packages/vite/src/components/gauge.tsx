@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import QuisiGauge from '../modules/quisi/gauge.jsx';
 import validateString from '../utils/validate-string.js';
 import styles from './gauge.module.scss';

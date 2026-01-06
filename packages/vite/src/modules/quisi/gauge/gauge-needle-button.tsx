@@ -1,5 +1,5 @@
 import { arc } from 'd3-shape';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import {
   NEEDLE_BUTTON_WIDTH,
   NEEDLE_WIDTH,

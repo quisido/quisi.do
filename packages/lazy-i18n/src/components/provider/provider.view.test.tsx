@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { render } from '@testing-library/react';
 import assert from 'node:assert';
 import {

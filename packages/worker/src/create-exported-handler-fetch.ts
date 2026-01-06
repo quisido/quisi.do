@@ -1,7 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 import type IFetchHandler from './fetch-handler.js';
 import InternalServerErrorResponse from './internal-server-error-response.js';
-import type { MetricDimensions } from './metric-dimensions.js';
+import { type MetricDimensions } from './metric-dimensions.js';
 
 export interface CreateExportedHandlerFetchOptions<
   Env,

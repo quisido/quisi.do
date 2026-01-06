@@ -1,4 +1,4 @@
-import type { PropsWithChildren, ReactElement } from 'react';
+import { type PropsWithChildren, type ReactElement } from 'react';
 import validateString from '../../utils/validate-string.js';
 import styles from './note-section.module.scss';
 import Section from './section.jsx';

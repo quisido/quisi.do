@@ -1,9 +1,7 @@
+/.cache/
+/.tests/
 /.vitest/
-/coverage/
 /dist/
 /node_modules/
-/.eslintcache
-/*.cpuprofile
-/*.iml
-/*.tsbuildinfo
 /*-*.*.*.tgz
+vitest.config.ts.timestamp-*-*.mjs

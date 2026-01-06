@@ -65,6 +65,10 @@
 			"path": "packages/number-format-react"
 		},
 		{
+			"name": "quisi",
+			"path": "packages/quisi"
+		},
+		{
 			"name": "react-datadog",
 			"path": "packages/react-datadog"
 		},
@@ -99,6 +103,7 @@
       "**/.aiexclude": "ignore"
 		},
 		"github.copilot.chat.codeGeneration.useInstructionFiles": true,
+    "typescript.enablePromptUseWorkspaceTsdk": true,
 		"vitest.maximumConfigs": 99,
 		"yaml.keyOrdering": false
 	}

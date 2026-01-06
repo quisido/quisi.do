@@ -1,7 +1,7 @@
 import { isNumber, sort } from 'fmrs';
 import { describe, expect, it } from 'vitest';
+import createAscendingArray from '../test/create-ascending-array.js';
 import { AnalyticsResponseCode } from './index.js';
-import createAscendingArray from './test/create-ascending-array.js';
 
 const RESPONSE_CODES: readonly number[] = Object.values(
   AnalyticsResponseCode,

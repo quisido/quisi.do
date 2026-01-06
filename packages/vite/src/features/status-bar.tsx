@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import validateString from '../utils/validate-string.js';
 import DarkModeToggle from './dark-mode-toggle.jsx';
 import NotebookToggle from './notebook-toggle.jsx';

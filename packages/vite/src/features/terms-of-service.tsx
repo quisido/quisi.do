@@ -1,5 +1,5 @@
 import I18n from 'lazy-i18n';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Div from '../modules/quisi/div.js';
 import Section from '../modules/quisi/section.js';
 

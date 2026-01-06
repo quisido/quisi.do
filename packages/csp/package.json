@@ -7,7 +7,7 @@
   "scripts": {
     "build": "exit 0",
     "start": "npm run-script dev",
-    "test": "concurrently --names eslint,publint,vitest --prefix-colors auto \"npm run-script eslint\" \"npm run-script publint\" \"npm run-script vitest:run\"",
+    "test": "concurrently --names eslint,vitest --prefix-colors auto \"npm run-script eslint\" \"npm run-script vitest:run\"",
     "clean": "rimraf .wrangler coverage",
     "dev": "wrangler dev --persist-to ../../.wrangler/state",
     "eslint": "eslint . --cache --color --exit-on-fatal-error",
@@ -24,7 +24,6 @@
     "production:init": "npm run-script production:init:projects && npm run-script production:init:reports",
     "production:init:projects": "wrangler d1 execute csp --env production --file=./sql/projects.sql --remote",
     "production:init:reports": "wrangler d1 execute csp --env production --file=./sql/reports.sql --remote",
-    "publint": "publint",
     "staging:deploy": "wrangler deploy src/index.ts --env staging --outdir dist --remote",
     "staging:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env staging --outdir dist --remote",
     "staging:init": "npm run-script staging:init:projects && npm run-script staging:init:reports",
@@ -48,7 +47,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20251014.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@quisido/eslint-config": "^1.1.9",
+    "@quisido/eslint-config": "^1.1.11",
     "@quisido/vitest-config": "^1.0.6",
     "@quisido/worker-test": "^1.0.1",
     "@types/eslint": "^9.6.1",
@@ -58,7 +57,6 @@
     "cloudflare-test-utils": "^1.0.2",
     "concurrently": "^9.2.1",
     "eslint": "^9.39.1",
-    "publint": "^0.3.15",
     "rimraf": "^6.1.0",
     "typescript": "^5.9.3",
     "vite": "^7.2.1",

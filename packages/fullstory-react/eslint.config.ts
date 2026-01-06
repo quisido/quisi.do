@@ -5,7 +5,7 @@ import configs, {
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
-import type { Config } from 'eslint/config';
+import { type Config } from 'eslint/config';
 
 const CONFIG: readonly Config[] = defineConfig(
   ...configs,
@@ -39,15 +39,7 @@ const CONFIG: readonly Config[] = defineConfig(
       'src/utils/map-v2-operation-handlers-to-api.ts',
     ],
     'new-cap': ['src/utils/map-v2-operation-handlers-to-api.ts'],
-    'no-console': ['src/test/expect-to-throw.tsx'],
   }),
-
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    rules: {
-      'max-lines-per-function': 'warn',
-    },
-  },
 );
 
 export default CONFIG;

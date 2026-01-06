@@ -6,6 +6,7 @@ import {
   useState,
 } from 'react';
 import innerText from 'react-innertext';
+import { Link as ReactRouterLink } from 'react-router';
 import useEmit from '../../hooks/use-emit/use-emit.js';
 import useNavigation from '../../hooks/use-navigation.js';
 import useTheme from '../../hooks/use-theme.js';
@@ -107,21 +108,40 @@ export default function Link({
   };
 
   const rel: string | undefined = getRel();
+  if (typeof href === 'undefined') {
+    return (
+      <a
+        aria-label={ariaLabel}
+        className={className}
+        onClick={handleClick}
+        rel={rel}
+        target={target}
+        title={title}
+        style={{
+          color: primaryHex,
+          textDecoration: 'none',
+        }}
+      >
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <a
+    <ReactRouterLink
       aria-label={ariaLabel}
       className={className}
-      href={href}
       onClick={handleClick}
       rel={rel}
       target={target}
       title={title}
+      to={href}
       style={{
         color: primaryHex,
         textDecoration: 'none',
       }}
     >
       {children}
-    </a>
+    </ReactRouterLink>
   );
 }

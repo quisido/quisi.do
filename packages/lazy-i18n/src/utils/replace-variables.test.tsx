@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { describe, expect, it } from 'vitest';
-import inner from '../test/utils/inner.js';
+import inner from '../../test/inner.js';
 import replaceVariables from './replace-variables.js';
 
 function TestHello(): ReactElement {

@@ -1,4 +1,4 @@
-import type { Linter } from 'eslint';
+import { type Linter } from 'eslint';
 
 export default function reduceConfigsToRules<T extends Linter.RulesRecord>(
   previousRules: T,

@@ -1,5 +1,5 @@
 import jsonPlugin from '@eslint/json';
-import type { ESLint } from 'eslint';
+import { type ESLint } from 'eslint';
 import jsonc from 'eslint-plugin-jsonc';
 import defineConfig, { type Config } from './define-config.js';
 import { LINTER_OPTIONS } from './linter-options.js';

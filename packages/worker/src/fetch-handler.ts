@@ -7,7 +7,7 @@ import mapHeadersToCookies from './map-headers-to-cookies.js';
 import mapRequestToPathname from './map-request-to-pathname.js';
 import mapRequestToTraceParent from './map-request-to-trace-parent.js';
 import mapTraceParentToMetricDimensions from './map-trace-parent-to-metric-dimensions.js';
-import type { TraceParent } from './modules/trace-parent/index.js';
+import { type TraceParent } from './modules/trace-parent/index.js';
 import type TraceParentMetricDimensions from './trace-parent-metric-dimensions.js';
 
 export default class FetchHandler<

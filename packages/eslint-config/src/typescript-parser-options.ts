@@ -1,5 +1,5 @@
 /// <reference types="@types/node" />
-import type { Linter } from 'eslint';
+import { type Linter } from 'eslint';
 import { cwd } from 'node:process';
 import { PARSER_OPTIONS } from './parser-options.js';
 

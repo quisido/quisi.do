@@ -1,8 +1,17 @@
 import I18n from 'lazy-i18n';
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Div from '../modules/quisi/div.js';
 import Link from '../modules/quisi/link.js';
 import Section from '../modules/quisi/section.js';
+
+/**
+ *   Developing a comprehensive privacy policy for an application is essential.
+ * This policy should clearly outline how user data is collected, used, stored,
+ * and protected, as well as the rights of users regarding their personal
+ * information. Having a well-defined privacy policy not only helps ensure
+ * compliance with legal and regulatory requirements but also builds trust with
+ * users by demonstrating your commitment to protecting their privacy.
+ */
 
 export default function PrivacyPolicy(): ReactElement {
   return (

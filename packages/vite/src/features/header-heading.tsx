@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import useTheme from '../hooks/use-theme.js';
 import validateString from '../utils/validate-string.js';
 import Text from './header-heading-text.jsx';

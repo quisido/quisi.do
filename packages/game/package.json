@@ -6,16 +6,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "exit 0 || npm run-script tsc && npm run-script vite:build",
+    "build": "exit 0",
     "start": "vite",
-    "test": "concurrently --names eslint,vitest --prefix-colors auto \"npm run-script eslint\" \"npm run-script vitest:run\"",
-    "eslint": "exit 0 || eslint . --cache --color --exit-on-fatal-error",
-    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
+    "test": "exit 0",
+    "eslint": "quisi eslint",
     "serve": "serve dist",
     "tsc": "tsc --skipLibCheck",
     "vite:build": "vite build",
     "vitest": "vitest",
-    "vitest:run": "exit 0 || vitest run"
+    "vitest:run": "vitest run"
   },
   "bugs": {
     "email": "game@quisi.do",
@@ -62,7 +61,7 @@
     "@opentelemetry/sdk-metrics": "^2.2.0",
     "@opentelemetry/sdk-trace-web": "^2.2.0",
     "@opentelemetry/semantic-conventions": "^1.37.0",
-    "@quisido/eslint-config": "^1.1.9",
+    "@quisido/eslint-config": "^1.1.11",
     "@quisido/vitest-config": "^1.0.6",
     "@types/react-reconciler": "^0.32.3",
     "@types/trusted-types": "^2.0.7",
@@ -76,7 +75,6 @@
     "jsdom": "^27.1.0",
     "lighthouse": "^13.0.1",
     "prettier": "^3.6.2",
-    "publint": "^0.3.15",
     "serve": "^14.2.5",
     "typescript": "^5.9.3",
     "vite": "^7.2.1",

@@ -4,9 +4,10 @@
     "lib": ["ESNext"],
     "noEmit": true,
     "rootDir": ".",
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo",
     "types": []
   },
-  "exclude": [".vitest/", "coverage/", "dist/", "node_modules/"],
+  "exclude": [".cache/", ".tests/", "dist/", "node_modules/"],
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx"],
 }

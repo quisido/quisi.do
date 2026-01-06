@@ -1,7 +1,7 @@
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
+import TestCspExportedHandler from '../../test/test-csp-exported-handler.js';
 import { MetricName } from '../constants/metric-name.js';
-import TestCspExportedHandler from '../test/test-csp-exported-handler.js';
 
 describe('handleStaticPathname', (): void => {
   it('should handle favicon', async (): Promise<void> => {

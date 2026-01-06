@@ -2,7 +2,7 @@ import configs, {
   defineConfig,
   disableRulesForFiles,
 } from '@quisido/eslint-config';
-import type { Config } from 'eslint/config';
+import { type Config } from 'eslint/config';
 
 const CONFIG: readonly Config[] = defineConfig(
   ...configs,
@@ -18,7 +18,6 @@ const CONFIG: readonly Config[] = defineConfig(
     ],
     'func-style': ['src/features/authn-user-id.ts'],
     'max-classes-per-file': ['src/authn-fetch-handler.ts'],
-    'max-lines': ['src/handle-metric.ts'],
     'no-await-in-loop': ['src/utils/map-readable-stream-to-string.ts'],
     'no-console': ['src/features/get-console.ts'],
     'no-magic-numbers': [
@@ -42,17 +41,7 @@ const CONFIG: readonly Config[] = defineConfig(
     files: ['**/*.ts', '**/*.tsx'],
     rules: {
       camelcase: 'off',
-      'max-lines-per-function': 'warn',
-      'max-params': 'warn',
-      'max-statements': 'warn',
       'no-undefined': 'off',
-    },
-  },
-
-  {
-    files: ['src/features/authn-state.ts', 'src/features/handle-fetch.ts'],
-    rules: {
-      'max-params': ['error', { max: 5 }],
     },
   },
 );

@@ -1,7 +1,7 @@
 import { act, render } from '@testing-library/react';
 import { beforeEach, describe, expect, it } from 'vitest';
+import validateDefined from '../test/validate-defined.js';
 import useForceUpdate from './index.js';
-import validateDefined from './test/validate-defined.js';
 
 const FIRST = 0;
 const NONE = 0;

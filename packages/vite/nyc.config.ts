@@ -1,4 +1,4 @@
-import getReportDir from './src/test/utils/get-nyc-report-dir.js';
+import getReportDir from './test/get-nyc-report-dir.js';
 
 const CONFIG: Record<string, unknown> = {
   'report-dir': getReportDir(),

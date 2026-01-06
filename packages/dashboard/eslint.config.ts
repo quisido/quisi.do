@@ -2,7 +2,7 @@ import configs, {
   defineConfig,
   disableRulesForFiles,
 } from '@quisido/eslint-config';
-import type { Config } from 'eslint/config';
+import { type Config } from 'eslint/config';
 
 const CONFIG: readonly Config[] = defineConfig(
   ...configs,
@@ -14,16 +14,6 @@ const CONFIG: readonly Config[] = defineConfig(
       'src/handle-metric.ts',
     ],
   }),
-
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    rules: {
-      'max-lines': 'warn',
-      'max-lines-per-function': 'warn',
-      'max-params': 'warn',
-      'max-statements': 'warn',
-    },
-  },
 );
 
 export default CONFIG;

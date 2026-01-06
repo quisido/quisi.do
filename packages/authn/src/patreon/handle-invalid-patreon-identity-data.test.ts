@@ -1,7 +1,7 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { describe, it } from 'vitest';
+import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { MetricName } from '../constants/metric-name.js';
-import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('handleInvalidPatreonIdentityData', (): void => {
   it('should emit and respond when the Patreon identity data is missing', async (): Promise<void> => {

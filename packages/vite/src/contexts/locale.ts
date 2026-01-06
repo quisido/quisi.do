@@ -1,4 +1,4 @@
-import type { Provider } from 'react';
+import { type Provider } from 'react';
 import type Locale from '../constants/locale.js';
 import createContextUtils from '../modules/create-context-utils/index.js';
 

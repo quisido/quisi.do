@@ -1,3 +1,5 @@
+/.cache/
+/.tests/
 /.vitest/
 /dist/
 /hint-report/

@@ -1,8 +1,10 @@
 /.attach_pid*
+/.cache/
 /.eslintcache
 /.gemini/mcp-oauth-tokens.json
 /.git/
 /.pnp.*
+/.tests/
 /.vitest/
 /.wrangler/
 /coverage/

@@ -5,7 +5,7 @@
     "noEmit": true,
     "rootDir": "."
   },
-  "exclude": [".vitest/", "coverage/", "dist/"],
+  "exclude": [".cache/", ".tests/", ".vitest/", "coverage/", "dist/"],
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts"]
 }

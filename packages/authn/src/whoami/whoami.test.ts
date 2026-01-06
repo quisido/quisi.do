@@ -1,10 +1,10 @@
 import { WhoAmIResponseCode } from '@quisido/authn-shared';
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
+import mapStringToIp from '../../test/map-string-to-ip.js';
+import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import { MILLISECONDS_PER_DAY } from '../constants/time.js';
-import mapStringToIp from '../test/map-string-to-ip.js';
-import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 const TEST_USER_ID = 1234;
 

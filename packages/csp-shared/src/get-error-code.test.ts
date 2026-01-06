@@ -1,7 +1,7 @@
 import { isNumber, sort } from 'fmrs';
 import { describe, expect, it } from 'vitest';
+import createAscendingArray from '../test/create-ascending-array.js';
 import { GetErrorCode } from './index.js';
-import createAscendingArray from './test/create-ascending-array.js';
 
 const GET_ERROR_CODES: readonly number[] =
   Object.values(GetErrorCode).filter(isNumber);

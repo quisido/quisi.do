@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import useBrowserBrand from '../hooks/use-browser-brand.js';
 import Link from '../modules/quisi/link.jsx';
 

@@ -1,7 +1,7 @@
 import { describe, it } from 'vitest';
+import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { EnvironmentName } from '../constants/environment-name.js';
 import { MetricName } from '../constants/metric-name.js';
-import TestAuthnExportedHandler from '../test/test-authn-exported-handler.js';
 
 describe('getIp', (): void => {
   it('should emit a metric', async (): Promise<void> => {

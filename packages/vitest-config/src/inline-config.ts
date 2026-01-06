@@ -11,9 +11,9 @@ export const INLINE_CONFIG: InlineConfig = {
   reporters: [
     ['default', { summary: true }],
     'hanging-process',
-    ['html', { outputFile: '.vitest/report.html' }],
-    ['json', { outputFile: '.vitest/report.json' }],
-    ['junit', { outputFile: '.vitest/report.junit.xml' }],
+    ['html', { outputFile: '.tests/vitest/report.html' }],
+    ['json', { outputFile: '.tests/vitest/report.json' }],
+    ['junit', { outputFile: '.tests/vitest/report.junit.xml' }],
   ],
   restoreMocks: true,
 };

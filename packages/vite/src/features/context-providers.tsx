@@ -1,4 +1,5 @@
 import { type ComponentType, Fragment, type PropsWithChildren } from 'react';
+import { BrowserRouter } from 'react-router';
 import Authentication from '../features/authentication.js';
 import Fullstory from '../features/fullstory.js';
 import NotificationsProvider from '../features/notifications-provider.js';
@@ -13,6 +14,7 @@ import WindowProvider from './window-provider.jsx';
 
 export const ContextProviders: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,
+  BrowserRouter,
   NotificationsProvider,
   SessionIdProvider,
   CustomThemeProvider,

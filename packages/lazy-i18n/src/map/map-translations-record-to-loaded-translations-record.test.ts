@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import mapTranslationsRecordToLoadedTranslationsRecord from './map-translations-record-to-loaded-translations-record.js';
 
 describe('mapTranslationsRecordToLoadedTranslationsRecord', (): void => {
@@ -13,7 +13,8 @@ describe('mapTranslationsRecordToLoadedTranslationsRecord', (): void => {
             three: 'four',
           },
         },
-        testC: vi.fn(),
+        testC: (): Promise<never> =>
+          Promise.reject(new Error('Expected error')),
       }),
     ).toEqual({
       testA: {

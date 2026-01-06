@@ -1,0 +1,5 @@
+*
+!.attw.json
+!dist/**
+!src/**
+!!src/**/*.test.ts

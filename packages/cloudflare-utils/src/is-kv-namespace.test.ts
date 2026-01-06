@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import noop from '../test/noop.js';
 import { isKVNamespace } from './index.js';
-import noop from './test/noop.js';
 
 describe('isKVNamespace', (): void => {
   it('should return false for non-KV Namespaces', (): void => {
