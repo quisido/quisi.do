@@ -15,7 +15,7 @@ const MIN_CONCURRENCY = 1;
 export default async function eslint({
   eslintConfigFile = 'eslint.config.ts',
 }: Options): Promise<void> {
-  debug('[eslint]⏳');
+  debug('[eslint] ⏳');
   const concurrency: number = randomInt(MIN_CONCURRENCY, MAX_CONCURRENCY);
 
   const { duration: resultsDuration, error: resultsError } = await withDuration(

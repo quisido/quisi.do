@@ -5,5 +5,9 @@ import type FallbackRenderParams from '../src/types/fallback-render-params.js';
 export default function CustomErrorBoundaryFallback({
   error,
 }: FallbackRenderParams): ReactElement {
-  return <>{mapToString(error)}</>;
+  return (
+    <div aria-live="assertive" role="alert">
+      {mapToString(error)}
+    </div>
+  );
 }

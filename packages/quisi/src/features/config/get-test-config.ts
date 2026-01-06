@@ -7,7 +7,7 @@ import validateTestConfig from './validate-test-config.js';
 export default async function getTestConfig(): Promise<TestConfig> {
   const config: object = await getConfig();
   if (!('TEST' in config)) {
-    debug('No test configuration found.');
+    // debug('No test configuration found.');
     return {};
   }
 

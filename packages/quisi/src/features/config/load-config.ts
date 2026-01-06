@@ -13,7 +13,7 @@ export default async function loadConfig(): Promise<object> {
   try {
     await stat(join(cwd, 'quisi.config.ts'));
   } catch {
-    debug('No `quisi.config.ts` file found.');
+    // debug('No `quisi.config.ts` file found.');
     return {};
   }
 

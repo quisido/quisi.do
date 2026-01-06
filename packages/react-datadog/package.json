@@ -49,7 +49,7 @@
   "devDependencies": {
     "@datadog/browser-rum": "^6.23.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@quisido/eslint-config": "^1.1.9",
+    "@quisido/eslint-config": "^1.1.11",
     "@quisido/vitest-config": "^1.0.6",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.0",

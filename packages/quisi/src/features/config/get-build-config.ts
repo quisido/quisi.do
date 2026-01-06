@@ -7,7 +7,7 @@ import validateBuildConfig from './validate-build-config.js';
 export default async function getBuildConfig(): Promise<BuildConfig> {
   const config: object = await getConfig();
   if (!('BUILD' in config)) {
-    debug('No build configuration found.');
+    // debug('No build configuration found.');
     return {};
   }
 

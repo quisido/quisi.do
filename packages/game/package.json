@@ -6,16 +6,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "exit 0 || npm run-script tsc && npm run-script vite:build",
+    "build": "exit 0",
     "start": "vite",
-    "test": "exit 0 || concurrently --names eslint,vitest --prefix-colors auto \"npm run-script eslint\" \"npm run-script vitest:run\"",
+    "test": "exit 0",
     "eslint": "quisi eslint",
     "publint": "quisi publint",
     "serve": "serve dist",
     "tsc": "tsc --skipLibCheck",
     "vite:build": "vite build",
     "vitest": "vitest",
-    "vitest:run": "exit 0 || vitest run"
+    "vitest:run": "vitest run"
   },
   "bugs": {
     "email": "game@quisi.do",
@@ -62,7 +62,7 @@
     "@opentelemetry/sdk-metrics": "^2.2.0",
     "@opentelemetry/sdk-trace-web": "^2.2.0",
     "@opentelemetry/semantic-conventions": "^1.37.0",
-    "@quisido/eslint-config": "^1.1.9",
+    "@quisido/eslint-config": "^1.1.11",
     "@quisido/vitest-config": "^1.0.6",
     "@types/react-reconciler": "^0.32.3",
     "@types/trusted-types": "^2.0.7",

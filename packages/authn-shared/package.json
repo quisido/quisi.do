@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@quisido/eslint-config": "^1.1.9",
+    "@quisido/eslint-config": "^1.1.11",
     "@quisido/vitest-config": "^1.0.6",
     "@vitest/coverage-istanbul": "^4.0.7",
     "@vitest/ui": "^4.0.7",
