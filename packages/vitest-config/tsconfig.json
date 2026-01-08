@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "declarationDir": "dist",
+    "declarationDir": null,
     "lib": ["DOM", "ESNext"],
-    "noEmit": true,
+    "noEmit": false,
     "rootDir": ".",
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/vitest-config/src/",
     "types": ["node"]

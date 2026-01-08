@@ -11,7 +11,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "quisi build",
-    "test": "quisi test && npm run-script vitest:run",
+    "test": "quisi test && npm run vitest:run",
     "attw": "quisi attw",
     "clean": "rimraf .cache dist",
     "eslint": "quisi eslint",

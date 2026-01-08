@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "declarationDir": "dist",
+    "declarationDir": null,
     "lib": ["DOM", "ESNext"],
-    "noEmit": true,
+    "noEmit": false,
     "rootDir": ".",
     // eslint-plugin-sort-keys-custom-order
     "skipLibCheck": true,

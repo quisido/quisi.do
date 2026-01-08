@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import type { Dirent } from 'node:fs';
 import getWorkspaceDirectories from './utils/get-workspace-directories.js';
 import isPublicWorkspaceDirectory from './utils/is-public-workspace-directory.js';
 import npmExecWorkspace from './utils/npm-exec-workspace.js';
@@ -6,13 +7,19 @@ import npmExecWorkspace from './utils/npm-exec-workspace.js';
 const REPUBLISH_ERROR_MESSAGE =
   'You cannot publish over the previously published versions:';
 
-const publicWorkspaceDirectories: readonly string[] =
-  getWorkspaceDirectories().filter(isPublicWorkspaceDirectory);
+const workspaceDirectories: readonly Dirent[] = await getWorkspaceDirectories();
 
-for (const publicWorkspaceDirectory of publicWorkspaceDirectories) {
+for (const workspaceDirectory of workspaceDirectories) {
+  const isPublic: boolean =
+    // eslint-disable-next-line no-await-in-loop
+    await isPublicWorkspaceDirectory(workspaceDirectory);
+  if (!isPublic) {
+    continue;
+  }
+
   try {
     npmExecWorkspace(
-      publicWorkspaceDirectory,
+      workspaceDirectory.name,
       'publish',
       '--access',
       'public',
@@ -26,7 +33,7 @@ for (const publicWorkspaceDirectory of publicWorkspaceDirectories) {
 
     // Tolerate republish
     if (err.message.includes(REPUBLISH_ERROR_MESSAGE)) {
-      console.log(`Tolerating republish for ${publicWorkspaceDirectory}`);
+      console.log(`Tolerating republish for ${workspaceDirectory.name}`);
       continue;
     }
 

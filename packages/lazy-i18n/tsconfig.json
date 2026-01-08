@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "declarationDir": "dist",
+    "declarationDir": null,
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],
     "noEmit": true,

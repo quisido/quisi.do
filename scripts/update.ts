@@ -1,17 +1,17 @@
-import { readFileSync } from 'node:fs';
-import type PackageJson from '../types/package-json.js';
+import { type Dirent } from 'node:fs';
 import getWorkspaceDirectories from './utils/get-workspace-directories.js';
+import mapDirentToPackageJson from './utils/map-dirent-to-package-json.js';
 import npmExecWorkspace from './utils/npm-exec-workspace.js';
 
 const save = new Map<string, Set<string>>();
 const saveDev = new Map<string, Set<string>>();
-const workspaceDirectories: readonly string[] = getWorkspaceDirectories();
+const workspaceDirectories: readonly Dirent[] = await getWorkspaceDirectories();
 const workspacePackageVersions = new Map<string, string>();
 
 for (const workspaceDirectory of workspaceDirectories) {
-  const { dependencies, devDependencies, name, version } = JSON.parse(
-    readFileSync(`packages/${workspaceDirectory}/package.json`, 'utf8'),
-  ) as PackageJson;
+  const { dependencies, devDependencies, name, version } =
+    // eslint-disable-next-line no-await-in-loop
+    await mapDirentToPackageJson(workspaceDirectory);
 
   workspacePackageVersions.set(name, version);
 
@@ -23,21 +23,21 @@ for (const workspaceDirectory of workspaceDirectories) {
       workspaceSave.add(name);
     }
 
-    save.set(workspaceDirectory, workspaceSave);
+    save.set(workspaceDirectory.name, workspaceSave);
   }
 
   if (typeof devDependencies === 'object') {
     for (const name of Object.keys(devDependencies)) {
       if (workspaceSave.has(name)) {
         throw new Error(
-          `${workspaceDirectory} has ${name} as both a dependency and dev dependency.`,
+          `${workspaceDirectory.name} has ${name} as both a dependency and dev dependency.`,
         );
       }
 
       workspaceSaveDev.add(name);
     }
 
-    saveDev.set(workspaceDirectory, workspaceSaveDev);
+    saveDev.set(workspaceDirectory.name, workspaceSaveDev);
   }
 }
 

@@ -1,13 +1,8 @@
 /// <reference types="node" />
-import { readFileSync } from 'node:fs';
+import { type Dirent } from 'node:fs';
 import getWorkspaceDirectories from './utils/get-workspace-directories.js';
+import mapDirentToPackageJson from './utils/map-dirent-to-package-json.js';
 import npmExecWorkspace from './utils/npm-exec-workspace.js';
-
-interface PackageJson {
-  readonly dependencies?: Record<string, string>;
-  readonly devDependencies?: Record<string, string>;
-  readonly name: string;
-}
 
 const EMPTY = 0;
 const EMPTY_SET: ReadonlySet<never> = new Set();
@@ -18,20 +13,19 @@ const WORKSPACE_TOPOLOGICAL_DEPENDENCIES = new Map<
   ReadonlySet<string>
 >();
 
-const workspaceDirectories: readonly string[] = getWorkspaceDirectories();
+const workspaceDirectories: readonly Dirent[] = await getWorkspaceDirectories();
 
 for (const workspaceDirectory of workspaceDirectories) {
   const {
     dependencies = {},
     devDependencies = {},
     name,
-  } = JSON.parse(
-    readFileSync(`./packages/${workspaceDirectory}/package.json`).toString(),
-  ) as PackageJson;
+    // eslint-disable-next-line no-await-in-loop
+  } = await mapDirentToPackageJson(workspaceDirectory);
 
-  PACKAGE_WORKSPACE_DIRECTORIES.set(name, workspaceDirectory);
+  PACKAGE_WORKSPACE_DIRECTORIES.set(name, workspaceDirectory.name);
   WORKSPACE_DEPENDENCIES.set(
-    workspaceDirectory,
+    workspaceDirectory.name,
     new Set<string>([
       ...Object.keys(dependencies),
       ...Object.keys(devDependencies),
@@ -94,7 +88,7 @@ while (WORKSPACE_TOPOLOGICAL_DEPENDENCIES.size > EMPTY) {
       continue;
     }
 
-    npmExecWorkspace(workspaceDirectory, 'run-script', 'build');
+    npmExecWorkspace(workspaceDirectory, 'run', 'build');
     WORKSPACE_TOPOLOGICAL_DEPENDENCIES.delete(workspaceDirectory);
     deleteTopologicalDependency(workspaceDirectory);
   }

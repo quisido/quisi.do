@@ -16,4 +16,7 @@ export const INLINE_CONFIG: InlineConfig = {
     ['junit', { outputFile: '.tests/vitest/report.junit.xml' }],
   ],
   restoreMocks: true,
+  typecheck: {
+    enabled: false,
+  },
 };

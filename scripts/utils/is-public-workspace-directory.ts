@@ -1,16 +1,11 @@
-import { readFileSync } from 'node:fs';
-import type PackageJson from '../../types/package-json.js';
+import { type Dirent } from 'node:fs';
+import mapDirentToPackageJson from './map-dirent-to-package-json.js';
 
-export default function isPublicWorkspaceDirectory(
-  workspaceDirectory: string,
-): boolean {
-  const packageJsonStr: string = readFileSync(
-    `./packages/${workspaceDirectory}/package.json`,
-  ).toString();
-
-  const { private: isPrivate = false } = JSON.parse(
-    packageJsonStr,
-  ) as PackageJson;
+export default async function isPublicWorkspaceDirectory(
+  workspaceDirectory: Dirent,
+): Promise<boolean> {
+  const { private: isPrivate = false } =
+    await mapDirentToPackageJson(workspaceDirectory);
 
   return !isPrivate;
 }

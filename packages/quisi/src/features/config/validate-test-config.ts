@@ -1,4 +1,4 @@
-import { boolean, number, strictObject, string, type ZodType } from 'zod';
+import { number, strictObject, string, type ZodType } from 'zod';
 import type Coverage from './coverage.js';
 import type TestConfig from './test-config.js';
 
@@ -12,7 +12,6 @@ const ZodCoverage: ZodType<Coverage> = strictObject({
 const ZodTestConfig: ZodType<TestConfig> = strictObject({
   coverage: ZodCoverage.optional(),
   eslintConfigFile: string().optional(),
-  skipLibCheck: boolean().optional(),
 }).partial();
 
 export default function validateTestConfig(config: unknown): TestConfig {

@@ -12,7 +12,7 @@
   "scripts": {
     "build": "quisi build",
     "start": "quisi start",
-    "test": "quisi test && npm run-script vitest:run",
+    "test": "quisi test && npm run vitest:run",
     "api-extractor": "node --experimental-strip-types scripts/api-extractor.ts",
     "attw": "quisi attw",
     "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",

@@ -1,0 +1,9 @@
+import type { Dirent } from 'node:fs';
+import getWorkspaceDirectories from './utils/get-workspace-directories.js';
+import npmExecWorkspace from './utils/npm-exec-workspace.js';
+
+const workspaceDirectories: readonly Dirent[] = await getWorkspaceDirectories();
+
+for (const workspaceDirectory of workspaceDirectories) {
+  npmExecWorkspace(workspaceDirectory.name, 'test');
+}

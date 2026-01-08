@@ -128,7 +128,7 @@ class ChildPromise extends Promise<void> {
 }
 
 const mapScriptToProcess = (script: string): Promise<void> => {
-  const command = `npm run-script ${script}`;
+  const command = `npm run ${script}`;
   return new ChildPromise(command);
 };
 

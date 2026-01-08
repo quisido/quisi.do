@@ -27,7 +27,7 @@ const IGNORED_AUDITS = new Set([
 if (!existsSync(REPORT_PATH)) {
   throw new Error(`Expected Lighthouse report to exist at path: ${REPORT_PATH}
 
-Did you forget to run \`npm run-script lighthouse\`?`);
+Did you forget to run \`npm run lighthouse\`?`);
 }
 
 const resultStr = readFileSync(REPORT_PATH).toString();
