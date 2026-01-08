@@ -1,9 +1,13 @@
-import { readdirSync } from 'node:fs';
+import type { Dirent } from 'node:fs';
+import { readdir } from 'node:fs/promises';
 import isDirectory from '../../utils/is-directory.js';
-import mapDirentToName from '../../utils/map-dirent-to-name.js';
 
-export default function getWorkspaceDirectories(): readonly string[] {
-  return readdirSync('./packages', { withFileTypes: true })
-    .filter(isDirectory)
-    .map(mapDirentToName);
+export default async function getWorkspaceDirectories(): Promise<
+  readonly Dirent[]
+> {
+  const packages: Dirent[] = await readdir('./packages', {
+    withFileTypes: true,
+  });
+
+  return packages.filter(isDirectory);
 }

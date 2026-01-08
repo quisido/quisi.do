@@ -19,7 +19,7 @@ export default async function mapDirectoryToPackageJson(
 
   const packageJsonStr: string = await readFile(
     join(packageJson.parentPath, packageJson.name),
-    { encoding: 'utf-8' },
+    'utf8',
   );
 
   return JSON.parse(packageJsonStr) as PackageJson;

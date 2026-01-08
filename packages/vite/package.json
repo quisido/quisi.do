@@ -9,13 +9,13 @@
   "scripts": {
     "build": "tsc --skipLibCheck && vite build",
     "start": "vite",
-    "test": "quisi test && npm run-script vitest:run",
+    "test": "quisi test && npm run vitest:run",
     "attw": "quisi attw",
     "clean": "rimraf .eslintcache .wrangler dist node_modules tsconfig.tsbuildinfo tsconfig.build.tsbuildinfo",
     "datadog:sourcemaps": "datadog-ci sourcemaps upload dist --minified-path-prefix=https://quisi.do/dist --release-version=$RELEASE_VERSION --service=quisi.do",
     "eslint": "quisi eslint",
-    "lighthouse": "npm run-script build && npm run-script lighthouse:report && npm run-script postlighthouse",
-    "lighthouse:report": "concurrently --hide serve --kill-others --kill-others-on-fail --names lighthouse,serve --prefix-colors auto --success command-lighthouse \"npm run-script lighthouse:report:serve\" \"npm run-script serve\"",
+    "lighthouse": "npm run build && npm run lighthouse:report && npm run postlighthouse",
+    "lighthouse:report": "concurrently --hide serve --kill-others --kill-others-on-fail --names lighthouse,serve --prefix-colors auto --success command-lighthouse \"npm run lighthouse:report:serve\" \"npm run serve\"",
     "lighthouse:report:dev": "wait-on https://localhost:3000/ && lighthouse https://localhost:3000/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental --save-assets",
     "lighthouse:report:production": "lighthouse https://quisi.do/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental --save-assets",
     "lighthouse:report:serve": "wait-on http://localhost:3000/ && lighthouse http://localhost:3000/ --budget-path=lighthouse.budget.json --chrome-flags=\"--headless\" --config-path=lighthouse.config.js --enable-error-reporting --output=html,json --output-path=lighthouse --preset=experimental --save-assets",
@@ -26,7 +26,7 @@
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch",
     "webhint:production": "hint --config .production.hintrc https://quisi.do/",
-    "webhint:serve": "concurrently --hide serve --kill-others --kill-others-on-fail --names serve,webhint --prefix-colors auto --success command-webhint \"npm run-script serve\" \"wait-on http://localhost:3000/ && hint --config .serve.hintrc http://localhost:3000\""
+    "webhint:serve": "concurrently --hide serve --kill-others --kill-others-on-fail --names serve,webhint --prefix-colors auto --success command-webhint \"npm run serve\" \"wait-on http://localhost:3000/ && hint --config .serve.hintrc http://localhost:3000\""
   },
   "bugs": {
     "email": "vite@quisi.do",

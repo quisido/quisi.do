@@ -1,12 +1,12 @@
 {
-  "exclude": [".cache/", ".tests/", ".vitest/", "coverage/", "dist/", "node_modules/"],
-  "extends": "../../tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
-    "declarationDir": "dist",
+    "declarationDir": null,
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
     "rootDir": "."
-  }
+  },
+  "exclude": [".cache/", ".tests/", ".vitest/", "coverage/", "dist/", "node_modules/"],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*.ts", "**/*.tsx"]
 }

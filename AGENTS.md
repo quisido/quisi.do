@@ -24,11 +24,11 @@ infrastructure: `packages/authn`, `packages/csp`, and `packages/dashboard`.
 
 ## Development
 
-* **Building:** `npm run-script build`
+* **Building:** `npm run build`
 * **Installation:** `npm install`
-* **Linting:** `npm run-script eslint`
+* **Linting:** `npm run eslint`
 * **Running locally:** `npm start`
-* **Testing:** `npm run-script test`
+* **Testing:** `npm test`
 
 ## Conventions
 

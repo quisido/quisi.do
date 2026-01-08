@@ -5,7 +5,7 @@
       "name": "Build",
       "outFiles": ["${workspaceFolder}/dist/**/*"],
       "request": "launch",
-      "runtimeArgs": ["run-script", "build"],
+      "runtimeArgs": ["run", "build"],
       "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
       "type": "node"

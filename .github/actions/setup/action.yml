@@ -16,6 +16,6 @@ runs:
       # Build `quisi` then reinstall so that it's a symlinked Node module.
       run: >
         npm ci;
-        npm run-script build --workspace=packages/quisi;
+        npm run build --workspace=packages/quisi;
         npm ci;
       shell: bash

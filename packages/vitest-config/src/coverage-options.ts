@@ -10,19 +10,13 @@ export const COVERAGE_OPTIONS: CoverageOptions<'istanbul'> = {
   exclude: [...EXCLUDE],
   provider: 'istanbul',
   reporter: [
-    ['clover', { file: 'clover.xml' }],
-    ['cobertura', { file: 'cobertura.xml' }],
-    ['json', { file: 'coverage.json' }],
-    ['json-summary', { file: 'coverage-summary.json' }],
-    ['lcov', { file: 'lcov.info' }],
-    ['lcovonly', { file: 'lcov-only.info' }],
-    [
-      'html',
-      {
-        skipEmpty: true,
-        verbose: false,
-      },
-    ],
+    ['clover', { file: 'vitest/coverage/clover.xml' }],
+    ['cobertura', { file: 'vitest/coverage/cobertura.xml' }],
+    ['json', { file: 'vitest/coverage/coverage.json' }],
+    ['json-summary', { file: 'vitest/coverage/coverage-summary.json' }],
+    ['lcov', { file: 'vitest/coverage/lcov.info' }],
+    ['lcovonly', { file: 'vitest/coverage/lcov-only.info' }],
+    ['html', { skipEmpty: true, verbose: false }],
     [
       'html-spa',
       {
@@ -31,20 +25,20 @@ export const COVERAGE_OPTIONS: CoverageOptions<'istanbul'> = {
         verbose: false,
       },
     ],
-    ['teamcity', { file: 'teamcity.txt' }],
+    ['teamcity', { file: 'vitest/coverage/teamcity.txt' }],
     [
       'text',
       {
-        file: 'text.txt',
+        file: 'vitest/coverage/text.txt',
         maxCols: 80,
         skipEmpty: true,
         skipFull: true,
       },
     ],
-    ['text-summary', { file: 'text-summary.txt' }],
+    ['text-summary', { file: 'vitest/coverage/text-summary.txt' }],
   ],
   reportOnFailure: true,
-  reportsDirectory: '.tests/vitest/coverage',
+  reportsDirectory: '.tests',
   skipFull: true,
   thresholds: THRESHOLDS,
 };

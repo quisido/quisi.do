@@ -19,7 +19,7 @@ commands in sequence:
 
 - Update NPM: `npm install npm@latest --global`
 - Install project dependencies: `npm install`
-- Upgrade all dependencies: `npm run-script update`
+- Upgrade all dependencies: `npm run update`
 
 ## Commands
 

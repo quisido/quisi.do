@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "declarationDir": "dist",
+    "declarationDir": null,
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
     "rootDir": ".",
