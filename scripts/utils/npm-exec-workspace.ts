@@ -4,7 +4,6 @@ import getNpmCommand from './get-npm-command.js';
 import handleNpmExecWorkspaceError from './handle-npm-exec-workspace-error.js';
 import logCommand from './log-command.js';
 
-const EMPTY = 0;
 const [FILE, ...ARGS] = getNpmCommand();
 const execFileAsync = promisify(execFile);
 
@@ -19,16 +18,12 @@ export default async function npmExecWorkspace(
       FILE,
       [...ARGS, ...script, `--workspace=packages/${workspaceDirectory}`],
       {
-        encoding: 'buffer',
+        encoding: 'utf8',
         shell: false,
       },
     );
 
-    if (stderr.length > EMPTY) {
-      throw new Error(stderr.toString('utf8'));
-    }
-
-    return stdout.toString('utf8');
+    return stdout + stderr;
   } catch (err: unknown) {
     return handleNpmExecWorkspaceError(err, script);
   }

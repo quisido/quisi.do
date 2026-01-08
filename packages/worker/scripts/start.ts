@@ -4,8 +4,7 @@ import { type ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 
 const ERROR_EXIT_CODE = 1;
-const pkgBuffer: Buffer = await readFile('./package.json');
-const pkgStr: string = pkgBuffer.toString();
+const pkgStr: string = await readFile('./package.json', 'utf8');
 const pkg: unknown = JSON.parse(pkgStr);
 
 const [, , ...scripts] = process.argv;

@@ -7,7 +7,6 @@ export default async function mapDirentToPackageJson(
   dirent: Dirent,
 ): Promise<PackageJson> {
   const packageJsonPath = join(dirent.parentPath, dirent.name, 'package.json');
-  const contentsBuffer: Buffer = await readFile(packageJsonPath);
-  const contentsStr: string = contentsBuffer.toString();
-  return JSON.parse(contentsStr) as PackageJson;
+  const contents: string = await readFile(packageJsonPath, 'utf8');
+  return JSON.parse(contents) as PackageJson;
 }

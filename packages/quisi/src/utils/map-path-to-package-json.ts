@@ -19,9 +19,7 @@ export default async function mapPathToPackageJson(
 
   try {
     const json: unknown = JSON.parse(
-      await readFile(join(path, 'package.json'), {
-        encoding: 'utf8',
-      }),
+      await readFile(join(path, 'package.json'), 'utf8'),
     );
 
     if (typeof json !== 'object' || json === null || Array.isArray(json)) {

@@ -9,7 +9,7 @@ export default async function mapDirectoryToVsCodeExtensionsJson(
 ): Promise<VSCodeExtensionsJson> {
   const contents: string = await readFile(
     join(dirent.parentPath, dirent.name, '.vscode', 'extensions.json'),
-    { encoding: 'utf-8' },
+    'utf8',
   );
 
   const json: unknown = JSON.parse(contents);
