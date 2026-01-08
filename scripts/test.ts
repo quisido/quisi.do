@@ -5,5 +5,6 @@ import npmExecWorkspace from './utils/npm-exec-workspace.js';
 const workspaceDirectories: readonly Dirent[] = await getWorkspaceDirectories();
 
 for (const workspaceDirectory of workspaceDirectories) {
-  npmExecWorkspace(workspaceDirectory.name, 'test');
+  // eslint-disable-next-line no-await-in-loop
+  await npmExecWorkspace(workspaceDirectory.name, 'test');
 }

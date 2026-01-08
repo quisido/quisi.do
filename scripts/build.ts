@@ -88,7 +88,8 @@ while (WORKSPACE_TOPOLOGICAL_DEPENDENCIES.size > EMPTY) {
       continue;
     }
 
-    npmExecWorkspace(workspaceDirectory, 'run', 'build');
+    // eslint-disable-next-line no-await-in-loop
+    await npmExecWorkspace(workspaceDirectory, 'run', 'build');
     WORKSPACE_TOPOLOGICAL_DEPENDENCIES.delete(workspaceDirectory);
     deleteTopologicalDependency(workspaceDirectory);
   }

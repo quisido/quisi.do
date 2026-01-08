@@ -50,7 +50,8 @@ const mapToLatest = (dependency: string): string => {
 };
 
 for (const [workspaceDirectory, dependencies] of save.entries()) {
-  npmExecWorkspace(
+  // eslint-disable-next-line no-await-in-loop
+  await npmExecWorkspace(
     workspaceDirectory,
     'install',
     '--save',
@@ -59,7 +60,8 @@ for (const [workspaceDirectory, dependencies] of save.entries()) {
 }
 
 for (const [workspaceDirectory, devDependencies] of saveDev.entries()) {
-  npmExecWorkspace(
+  // eslint-disable-next-line no-await-in-loop
+  await npmExecWorkspace(
     workspaceDirectory,
     'install',
     '--save-dev',

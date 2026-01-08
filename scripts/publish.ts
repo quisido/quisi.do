@@ -18,7 +18,8 @@ for (const workspaceDirectory of workspaceDirectories) {
   }
 
   try {
-    npmExecWorkspace(
+    // eslint-disable-next-line no-await-in-loop
+    await npmExecWorkspace(
       workspaceDirectory.name,
       'publish',
       '--access',
