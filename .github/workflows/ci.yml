@@ -11,7 +11,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout repo
-  #       uses: actions/checkout@v4
+  #       uses: actions/checkout@v6
   #     - name: Install bun
   #       uses: oven-sh/setup-bun@v1
   #     - name: Install dependencies
@@ -28,9 +28,9 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Review
-        uses: actions/dependency-review-action@v2
+        uses: actions/dependency-review-action@v4
 
   devskim:
     name: DevSkim
@@ -41,13 +41,13 @@ jobs:
       security-events: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Scan
         uses: microsoft/devskim-action@v1
         with:
           options-json: config/devskim.json
       - name: Upload
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: devskim-results.sarif
           wait-for-processing: true
@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Setup
         uses: ./.github/actions/setup
       - name: Build
@@ -87,7 +87,7 @@ jobs:
           SENTRY_ENVIRONMENT: staging
           WHOAMI: https://localhost:5882/whoami/
       - name: Upload
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: build
           path: packages/*/dist/
@@ -98,11 +98,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
       - name: Download build
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: build
           path: packages/
@@ -114,7 +114,7 @@ jobs:
         run: npm run postlighthouse --workspace=packages/vite
       - name: Upload
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: lighthouse
           path: |
@@ -128,9 +128,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Download build
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: build
           path: packages/
@@ -146,7 +146,7 @@ jobs:
           DD_SERVICE: quisi.do
       - name: Upload
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: test
           path: packages/*/.tests/
@@ -162,7 +162,7 @@ jobs:
       id-token: write
     steps:
       - name: Download
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: test
           path: packages/*/
@@ -177,14 +177,14 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v4
+  #       uses: actions/checkout@v6
   #     - name: Download Cypress artifacts
-  #       uses: actions/download-artifact@v4
+  #       uses: actions/download-artifact@v7
   #       with:
   #         name: cypress
   #         path: packages/
   #     - name: Download test artifacts
-  #       uses: actions/download-artifact@v4
+  #       uses: actions/download-artifact@v7
   #       with:
   #         name: test
   #         path: /
@@ -199,7 +199,7 @@ jobs:
   #         STATEMENTS_COVERAGE_THRESHOLD: 1
   #     - name: Upload coverage
   #       if: always()
-  #       uses: actions/upload-artifact@v4
+  #       uses: actions/upload-artifact@v6
   #       with:
   #         name: coverage
   #         path: |
