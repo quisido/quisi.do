@@ -19,9 +19,8 @@ updates:
   - package-ecosystem: npm
     assignees:
       - quisido
-    directories:
-      - "/"
-      - "/packages/*/"
+    # Dependabot should automatically discover workspaces in `packages/`.
+    directory: "/"
     groups:
       dependencies:
         applies-to: version-updates
