@@ -25,8 +25,8 @@
     "vitest": "vitest",
     "vitest:run": "vitest run",
     "vitest:watch": "vitest watch",
-    "webhint:production": "hint --config .production.hintrc https://quisi.do/",
-    "webhint:serve": "concurrently --hide serve --kill-others --kill-others-on-fail --names serve,webhint --prefix-colors auto --success command-webhint \"npm run serve\" \"wait-on http://localhost:3000/ && hint --config .serve.hintrc http://localhost:3000\""
+    "webhint:production": "hint --config hintrc.production.json https://quisi.do/",
+    "webhint:serve": "concurrently --hide serve --kill-others --kill-others-on-fail --names serve,webhint --prefix-colors auto --success command-webhint \"npm run serve\" \"wait-on http://localhost:3000/ && hint --config hintrc.serve.json http://localhost:3000\""
   },
   "bugs": {
     "email": "vite@quisi.do",
@@ -109,7 +109,6 @@
     "@hint/hint-no-broken-links": "^4.2.27",
     "@hint/hint-no-p3p": "^3.3.27",
     "@hint/hint-performance-budget": "^2.4.27",
-    "@hint/parser-css": "^3.0.39",
     "@hint/parser-javascript": "^3.1.25",
     "@honeycombio/opentelemetry-web": "^1.1.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",

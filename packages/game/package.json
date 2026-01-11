@@ -46,7 +46,6 @@
     "@hint/hint-no-broken-links": "^4.2.27",
     "@hint/hint-no-p3p": "^3.3.27",
     "@hint/hint-performance-budget": "^2.4.27",
-    "@hint/parser-javascript": "^3.1.25",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/auto-instrumentations-web": "^0.53.0",
     "@opentelemetry/context-zone": "^2.2.0",

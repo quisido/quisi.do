@@ -1,4 +1,7 @@
 {
+  "files.associations": {
+    "hintrc.*.json": "jsonc"
+  },
   "files.exclude": {
     "vitest.config.ts.timestamp-*-*.mjs": true,
   },

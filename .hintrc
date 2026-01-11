@@ -4,6 +4,21 @@
  */
 {
   // "$schema": "https://raw.githubusercontent.com/webhintio/hint/main/packages/hint/src/lib/config/config-schema.json",
+  "connector": {
+    "name": "./dist/utils/webhint-puppeteer-connector.js"
+    /*
+    Enable and configure options when they're confirmed not to crash.
+    "options": {
+      "headless": true,
+      "ignoreHTTPSErrors": false,
+      "puppeteerOptions": {
+        "detached": true,
+        "dumpio": true
+      },
+      "waitUntil": "networkidle0"
+    }
+    */
+  },
   "extends": [
     "accessibility",
     "development",
@@ -222,5 +237,6 @@
     "webpack-config/modules-false-babel": "error",
     "webpack-config/no-devtool-in-prod": "error",
     "x-content-type-options": "error"
-  }
+  },
+  "parsers": ["css", "html", "javascript", "jsx", "manifest", "package-json", "sass", "typescript", "typescript-config"]
 }

@@ -56,8 +56,9 @@
     "yaml"
   ],
   "files.associations": {
+    "**/.aiexclude": "ignore",
     "**/config/api-extractor.json": "jsonc",
-    "**/.aiexclude": "ignore"
+    "**/hintrc.*.json": "jsonc"
   },
   "files.eol": "\n",
   "files.exclude": {
