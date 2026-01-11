@@ -67,7 +67,9 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: build
-          path: packages/*/dist/
+          path: |
+            dist/
+            packages/*/dist/
 
   # Stage 3: lighthouse-ci, test, test-applications, webhint-serve
   lighthouse-ci:
@@ -92,7 +94,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Audit
@@ -131,11 +133,11 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Test
-        run: npm run test
+        run: npm test
         env:
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
@@ -166,7 +168,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Test
@@ -190,11 +192,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Download artifacts
+      - name: Download build
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Run
@@ -206,7 +208,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: webhint-serve
-          path: packages/vite/hint-report
+          path: packages/vite/.tests/webhint
 
   # Stage 4: github-pages, npm, sentry-release
   datadog-sourcemaps:
@@ -231,7 +233,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Upload
@@ -262,7 +264,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
@@ -295,7 +297,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Publish
@@ -328,7 +330,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Sentry release
         uses: getsentry/action-release@v3
         env:
@@ -401,7 +403,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Publish
@@ -434,7 +436,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Deploy
@@ -464,7 +466,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Deploy
@@ -494,7 +496,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Deploy
@@ -525,7 +527,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Audit
@@ -564,7 +566,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Run
@@ -576,7 +578,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: webhint-production
-          path: packages/vite/hint-report
+          path: packages/vite/.tests/webhint
 
 on:
   push:

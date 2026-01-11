@@ -90,7 +90,9 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: build
-          path: packages/*/dist/
+          path: |
+            dist/
+            packages/*/dist/
 
   lighthouse:
     name: Lighthouse
@@ -105,7 +107,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Audit
@@ -133,11 +135,11 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: packages/
+          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Test
-        run: npm run test --include-workspace-root --workspaces
+        run: npm test
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
@@ -150,6 +152,42 @@ jobs:
         with:
           name: test
           path: packages/*/.tests/
+
+  webhint:
+    name: Webhint
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Download build
+        uses: actions/download-artifact@v7
+        with:
+          name: build
+          path: /
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Run
+        run: npm run webhint:serve --workspace=packages/vite
+        env:
+          CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: webhint-serve
+          path: packages/vite/.tests/webhint
 
   # This requires some more setup to work. Configure the test step to upload report artifacts.
   # Then add this to the CD file.

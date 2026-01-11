@@ -1,9 +1,10 @@
+/.cache/
+/.tests/
 /.wrangler/
 /analyze/
 /certificates/
 /coverage/
 /dist/
-/hint-report/
 /node_modules/
 /playwright/storage-state.json
 /.env.*.local
@@ -14,3 +15,6 @@
 /lighthouse-0.trace.json
 /localhost_*-*-*_*-*-*.report.*
 /tsconfig.tsbuildinfo
+
+# Webhint
+/browser.info

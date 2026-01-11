@@ -1,14 +1,13 @@
 /.cache/
 /.tests/
-/.vitest/
 /.wrangler/
 /analyze/
 /certificates/
 /coverage/
 /dist/
-/hint-report/
 /node_modules/
 /playwright/storage-state.json
+/.env.*.local
 /.env.local
 /.eslintcache
 /lighthouse.report.*

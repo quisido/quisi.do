@@ -27,9 +27,9 @@
   ],
   "formatters": [
     "codeframe",
-    "html",
-    "json",
-    "stylish",
+    "./dist/utils/webhint-html-formatter.js",
+    "./dist/utils/webhint-json-formatter.js",
+    // "stylish", // This is just a worse version of `codeframe`.
     "summary"
   ],
   "hints": {
@@ -238,5 +238,17 @@
     "webpack-config/no-devtool-in-prod": "error",
     "x-content-type-options": "error"
   },
-  "parsers": ["css", "html", "javascript", "jsx", "manifest", "package-json", "sass", "typescript", "typescript-config"]
+  "parsers": [
+    "babel-config",
+    "css",
+    "html",
+    "javascript",
+    "jsx",
+    "manifest",
+    "package-json",
+    "sass",
+    "typescript",
+    "typescript-config",
+    "webpack-config"
+  ]
 }
