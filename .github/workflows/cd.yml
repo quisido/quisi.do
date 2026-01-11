@@ -94,7 +94,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Audit
@@ -133,7 +132,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Test
@@ -168,7 +166,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Test
@@ -196,7 +193,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Run
@@ -233,7 +229,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Upload
@@ -264,7 +259,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
@@ -297,7 +291,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Publish
@@ -330,7 +323,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Sentry release
         uses: getsentry/action-release@v3
         env:
@@ -403,7 +395,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Publish
@@ -436,7 +427,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Deploy
@@ -466,7 +456,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Deploy
@@ -496,7 +485,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Deploy
@@ -527,7 +515,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Audit
@@ -566,7 +553,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-          path: /
       - name: Setup
         uses: ./.github/actions/setup
       - name: Run
