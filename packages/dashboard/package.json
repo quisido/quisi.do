@@ -27,13 +27,13 @@
     "url": "https://github.com/sponsors/quisido"
   },
   "dependencies": {
-    "@datadog/datadog-api-client": "^1.46.0",
+    "@datadog/datadog-api-client": "^1.50.0",
     "@quisido/worker": "^1.0.8",
     "cloudflare-utils": "^1.0.4",
     "fmrs": "^2.1.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20251014.0",
+    "@cloudflare/workers-types": "^4.20260113.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "^1.1.11",
     "@quisido/vitest-config": "^1.0.6",
