@@ -6,21 +6,32 @@ export default function handleNpmExecWorkspaceError(
   err: unknown,
   script: readonly string[],
 ): never {
-  if (!isSpawnSyncReturns(err)) {
-    console.info(
-      `NPM workspace command "${script.join(' ')}" failed with a non-SpawnSyncReturns error.`,
-    );
+  if (isSpawnSyncReturns(err)) {
+    console.info(...err.output);
+    const message: string = mapSpawnSyncReturnsToErrorMessage(err);
+    throw new Error(message, {
+      cause: {
+        ...err,
+        output: undefined,
+        stderr: undefined,
+        stdout: undefined,
+      },
+    });
+  }
+
+  if (err instanceof Error) {
+    // `ExecException` is an error with additional properties.
+    if ('stdout' in err) {
+      console.log(err.stdout);
+    }
+    if ('stderr' in err) {
+      console.error(err.stderr);
+    }
     throw err;
   }
 
-  console.info(...err.output);
-  const message: string = mapSpawnSyncReturnsToErrorMessage(err);
-  throw new Error(message, {
-    cause: {
-      ...err,
-      output: undefined,
-      stderr: undefined,
-      stdout: undefined,
-    },
-  });
+  console.log(
+    `NPM workspace command "${script.join(' ')}" failed with an unknown error.`,
+  );
+  throw new Error(JSON.stringify(err));
 }

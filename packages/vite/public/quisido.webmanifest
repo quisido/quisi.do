@@ -12,6 +12,12 @@
       "sizes": "180x180",
       "src": "/apple-icon.png",
       "type": "image/png"
+    },
+    {
+      "purpose": "any maskable monochrome",
+      "sizes": "512x512",
+      "src": "/splash-screen.png",
+      "type": "image/png"
     }
   ],
   "name": "quisi.do",

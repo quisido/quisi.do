@@ -34,6 +34,7 @@
     "react-reconciler": "^0.33.0"
   },
   "devDependencies": {
+    "@hint/connector-puppeteer": "^2.5.25",
     "@hint/formatter-codeframe": "^3.1.36",
     "@hint/formatter-html": "^4.3.17",
     "@hint/formatter-json": "^3.1.36",

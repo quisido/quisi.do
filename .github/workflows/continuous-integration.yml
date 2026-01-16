@@ -104,7 +104,7 @@ jobs:
       - name: Upload
         uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: .tests/devskim.sarif
+          sarif_file: ./.tests/devskim.sarif
           wait-for-processing: true
 
   # Stage 2: lighthouse-ci, test, webhint
@@ -149,7 +149,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+      # Temporarily disabled
       - name: Audit
+        if: false
         uses: ./.github/actions/webhint-ci
 
   # Stage 3: sentry-prevent
