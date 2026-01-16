@@ -45,7 +45,7 @@
     "fmrs": "^2.1.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20251014.0",
+    "@cloudflare/workers-types": "^4.20260116.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@quisido/eslint-config": "^1.1.11",
     "@quisido/vitest-config": "^1.0.6",
