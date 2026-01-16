@@ -67,7 +67,6 @@
   "files.watcherExclude": {
     "**/.eslintcache": true,
     "**/.wrangler/": true,
-    "**/coverage/": true,
     "**/dist/": true,
     "**/node_modules/": true,
     "**/packages/": true,
@@ -86,7 +85,6 @@
     "**/*.cpuprofile": true,
     "**/*.tsbuildinfo": true,
     "**/build/": true,
-    "**/coverage/": true,
     "**/dist/": true,
     "**/jest/": true,
     "**/lighthouse.report.*": true,

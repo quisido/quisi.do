@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://www.schemastore.org/github-action.json
+name: Cloudflare purge
+description: Purges files from Cloudflare cache
+
+inputs:
+  api-token:
+    description: Cloudflare API Token with cache purge permissions
+    required: true
+  zone-id:
+    description: Cloudflare Zone ID
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Purge Cloudflare cache
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ inputs.api-token }}
+        CLOUDFLARE_ZONE_ID: ${{ inputs.zone-id }}
+      run: >
+        curl \
+          --data '{
+            "files": [
+              "https://quisi.do",
+              "https://quisi.do/index.html"
+            ]
+          }' \
+          --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+          --header "Content-Type:application/json" \
+          --request POST \
+          "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache"
+      shell: bash

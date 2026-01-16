@@ -1,40 +1,7 @@
 name: CI/CD
 
 jobs:
-  # Stage 1: devskim
-  devskim:
-    name: DevSkim
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-        - 8126:8126
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Scan
-        uses: microsoft/devskim-action@v1
-        with:
-          options-json: config/devskim.json
-      - name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@v4
-        with:
-          sarif_file: devskim-results.sarif
-          wait-for-processing: true
-
-  # Stage 2: build
+  # Stage 1: build, dependency-review, devskim
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -54,6 +21,8 @@ jobs:
         uses: actions/checkout@v6
       - name: Setup
         uses: ./.github/actions/setup
+        with:
+          download-build: false
       - name: Build
         run: npm run build
         env:
@@ -71,9 +40,93 @@ jobs:
             dist/
             packages/*/dist/
 
-  # Stage 3: lighthouse-ci, test, test-applications, webhint-serve
+  dependency-review:
+    name: Dependency review
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Review
+        uses: actions/dependency-review-action@v4
+
+  devskim:
+    name: DevSkim
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Scan
+        uses: microsoft/devskim-action@v1
+        with:
+          options-json: config/devskim.json
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: .tests/devskim.sarif
+          wait-for-processing: true
+
+  # Stage 2: datadog-sourcemaps, lighthouse-ci, sentry-release, test,
+  #          webhint-serve
+  datadog-sourcemaps:
+    name: Datadog sourcemaps
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Upload
+        env:
+          DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          RELEASE_VERSION: ${{ github.sha }}
+        run: |
+          npx datadog-ci sourcemaps upload dist \
+            --minified-path-prefix=https://quisi.do/dist \
+            --release-version=$RELEASE_VERSION \
+            --service=quisi.do \
+            --workspace=packages/vite;
+
   lighthouse-ci:
     name: Lighthouse (continuous integration)
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Lighthouse
+        uses: ./.github/actions/lighthouse-ci
+
+  sentry-release:
+    name: Sentry release
     needs: build
     runs-on: ubuntu-latest
     env:
@@ -94,21 +147,17 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: build
-      - name: Setup
-        uses: ./.github/actions/setup
-      - name: Audit
-        run: npm run lighthouse:report --workspace=packages/vite
-      - name: Validate
-        run: npm run postlighthouse --workspace=packages/vite
-      - name: Upload
-        if: always()
-        uses: actions/upload-artifact@v6
+      - name: Sentry release
+        uses: getsentry/action-release@v3
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_LOG_LEVEL: info
+          SENTRY_ORG: quisido
+          SENTRY_PROJECT: quisi-do
         with:
-          name: lighthouse-ci
-          path: |
-            packages/*/lighthouse.report.*
-            packages/*/lighthouse-*.devtoolslog.json
-            packages/*/lighthouse-*.trace.json
+          environment: production
+          release: ${{ github.sha }}
+          sourcemaps: packages/vite/dist
 
   test:
     name: Test
@@ -128,10 +177,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Download
-        uses: actions/download-artifact@v7
-        with:
-          name: build
       - name: Setup
         uses: ./.github/actions/setup
       - name: Test
@@ -142,10 +187,8 @@ jobs:
           DD_ENV: ci
           DD_SERVICE: quisi.do
 
-  #   Run test on applications, because test won't be triggered for applications
-  # by the publish step.
-  test-applications:
-    name: Test applications
+  webhint-ci:
+    name: Webhint (continuous integration)
     needs: build
     runs-on: ubuntu-latest
     env:
@@ -162,84 +205,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Download
-        uses: actions/download-artifact@v7
-        with:
-          name: build
-      - name: Setup
-        uses: ./.github/actions/setup
-      - name: Test
-        run: npm test --workspace=packages/vite
+      - name: Audit
+        uses: ./.github/actions/webhint-ci
 
-  webhint-serve:
-    name: Webhint (local production build)
-    needs: build
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Download build
-        uses: actions/download-artifact@v7
-        with:
-          name: build
-      - name: Setup
-        uses: ./.github/actions/setup
-      - name: Run
-        run: npm run webhint:serve --workspace=packages/vite
-        env:
-          CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
-      - name: Upload
-        if: always()
-        uses: actions/upload-artifact@v6
-        with:
-          name: webhint-serve
-          path: packages/vite/.tests/webhint
-
-  # Stage 4: github-pages, npm, sentry-release
-  datadog-sourcemaps:
-    name: Datadog sourcemaps
-    needs: [lighthouse-ci, test-applications]
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Download
-        uses: actions/download-artifact@v7
-        with:
-          name: build
-      - name: Setup
-        uses: ./.github/actions/setup
-      - name: Upload
-        run: npm run datadog:sourcemaps --workspace=packages/vite
-        env:
-          DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          RELEASE_VERSION: ${{ github.sha }}
-
+  # Stage 3: github-pages, npm, sentry-prevent
   github-pages:
     name: GitHub Pages
-    needs: [lighthouse-ci, test-applications]
+    needs:
+      - lighthouse-ci
+      - test
+      - webhint-ci
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -269,7 +244,39 @@ jobs:
 
   npm:
     name: NPM
-    needs: [build, test]
+    runs-on: ubuntu-latest
+    env:
+      DD_ENV: ci
+    needs:
+      - build
+      - test
+    permissions:
+      id-token: write
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Publish
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
+        run: >
+          npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH_TOKEN;
+          npm run publish;
+
+  sentry-prevent:
+    name: Sentry Prevent
+    needs: test
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -287,55 +294,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - name: Download
         uses: actions/download-artifact@v7
         with:
-          name: build
-      - name: Setup
-        uses: ./.github/actions/setup
-      - name: Publish
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
-        run: >
-          npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH_TOKEN;
-          npm run publish;
+          name: test
+          path: packages/
+      - name: Upload
+        uses: getsentry/prevent-action@v0
 
-  sentry-release:
-    name: Sentry release
-    needs: [lighthouse-ci, test-applications]
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Download
-        uses: actions/download-artifact@v7
-        with:
-          name: build
-      - name: Sentry release
-        uses: getsentry/action-release@v3
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_LOG_LEVEL: info
-          SENTRY_ORG: quisido
-          SENTRY_PROJECT: quisi-do
-        with:
-          environment: production
-          sourcemaps: packages/vite/dist
-          version: ${{ github.sha }}
-
-  # Stage 5: cloudflare-purge, github-packages, wrangler-deploy-*
+  # Stage 4: cloudflare-purge, github-packages, wrangler-deploy-*
   cloudflare-purge:
     name: Cloudflare purge
     needs: github-pages
@@ -352,22 +321,11 @@ jobs:
         ports:
           - 8126:8126
     steps:
-      - name: Purge Cloudflare files
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_PURGE_API_TOKEN }}
-          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-        run: >
-          curl \
-            --data '{
-              "files": [
-                "https://quisi.do",
-                "https://quisi.do/index.html"
-              ]
-            }' \
-            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
-            --header "Content-Type:application/json" \
-            --request POST \
-            "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache"
+      - name: Purge Cloudflare cache
+        uses: ./.github/actions/cloudflare-purge
+        with:
+          api-token: ${{ secrets.CLOUDFLARE_PURGE_API_TOKEN }}
+          zone-id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
 
   github-packages:
     name: GitHub Packages
@@ -391,10 +349,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Download
-        uses: actions/download-artifact@v7
-        with:
-          name: build
       - name: Setup
         uses: ./.github/actions/setup
       - name: Publish
@@ -407,7 +361,10 @@ jobs:
 
   wrangler-deploy-authn:
     name: Wrangler deploy (Authentication)
-    needs: [lighthouse-ci, npm, test-applications]
+    needs:
+      - lighthouse-ci
+      - npm
+      - webhint-ci
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -423,20 +380,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Download
-        uses: actions/download-artifact@v7
-        with:
-          name: build
       - name: Setup
         uses: ./.github/actions/setup
       - name: Deploy
-        run: npm run production:deploy --workspace=packages/authn
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
+        run: |
+          npx wrangler deploy src/index.ts \
+            --env production \
+            --outdir dist \
+            --workspace=packages/authn;
 
   wrangler-deploy-csp:
     name: Wrangler deploy (Content Security Policy)
-    needs: [lighthouse-ci, npm, test-applications]
+    needs:
+      - lighthouse-ci
+      - npm
+      - webhint-ci
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -452,20 +412,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Download
-        uses: actions/download-artifact@v7
-        with:
-          name: build
       - name: Setup
         uses: ./.github/actions/setup
       - name: Deploy
-        run: npm run production:deploy --workspace=packages/csp
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
+        run: |
+          npx wrangler deploy src/index.ts \
+            --env production \
+            --outdir dist \
+            --workspace=packages/csp;
 
   wrangler-deploy-dashboard:
     name: Wrangler deploy (Dashboard)
-    needs: [lighthouse-ci, npm, test-applications]
+    needs:
+      - lighthouse-ci
+      - npm
+      - webhint-ci
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -481,21 +444,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Download
-        uses: actions/download-artifact@v7
-        with:
-          name: build
       - name: Setup
         uses: ./.github/actions/setup
       - name: Deploy
-        run: npm run production:deploy --workspace=packages/dashboard
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
+        run: |
+          npx wrangler deploy src/index.ts \
+            --env production \
+            --outdir dist \
+            --workspace=packages/dashboard;
 
-  # Stage 6: lighthouse-production, webhint-production
+  # Stage 5: lighthouse-production, webhint-production
   lighthouse-production:
     name: Lighthouse (production)
-    needs: cloudflare-purge
+    needs:
+      - cloudflare-purge
+      - wrangler-deploy-authn
+      - wrangler-deploy-csp
+      - wrangler-deploy-dashboard
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -511,16 +478,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Download
-        uses: actions/download-artifact@v7
-        with:
-          name: build
       - name: Setup
         uses: ./.github/actions/setup
       - name: Audit
-        run: npm run lighthouse:report:production --workspace=packages/vite
+        working-directory: packages/vite
+        run: |
+          npx lighthouse https://quisi.do/ \
+            --budget-path=lighthouse.budget.json \
+            --chrome-flags="--headless" \
+            --config-path=lighthouse.config.js \
+            --enable-error-reporting \
+            --output=html,json \
+            --output-path=lighthouse \
+            --preset=experimental \
+            --save-assets;
       - name: Validate
-        run: npm run postlighthouse --workspace=packages/vite
+        run: node ./scripts/postlighthouse/index.js
+        shell: bash
+        working-directory: packages/vite
       - name: Upload
         if: always()
         uses: actions/upload-artifact@v6
@@ -533,7 +508,11 @@ jobs:
 
   webhint-production:
     name: Webhint (production)
-    needs: cloudflare-purge
+    needs:
+      - cloudflare-purge
+      - wrangler-deploy-authn
+      - wrangler-deploy-csp
+      - wrangler-deploy-dashboard
     runs-on: ubuntu-latest
     env:
       DD_ENV: ci
@@ -549,16 +528,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Download
-        uses: actions/download-artifact@v7
-        with:
-          name: build
       - name: Setup
         uses: ./.github/actions/setup
       - name: Run
-        run: npm run webhint:production --workspace=packages/vite
-        env:
-          CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
+        run: npx hint --config hintrc.production.json https://quisi.do/
+        working-directory: packages/vite
       - name: Upload
         if: always()
         uses: actions/upload-artifact@v6

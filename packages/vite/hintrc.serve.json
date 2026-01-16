@@ -3,27 +3,21 @@
 
   "extends": ["../../.hintrc"],
 
-  "hints": {
-    "axe/keyboard": [
-      "error",
-
-      // https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default
-      {
-        "accesskeys": "error",
-        "focus-order-semantics": "error",
-        "region": "error",
-        "skip-link": "error",
-        "tabindex": "error"
-      }
-    ],
-
-    "doctype": "error",
-
-    "html-checker": [
-      "error",
-      {
-        "details": true
-      }
-    ]
-  }
+  "ignoredUrls": [
+    {
+      "domain": "^(?!localhost:3000$).*",
+      "hints": [
+        "content-type",
+        "http-cache",
+        "http-compression",
+        "no-disallowed-headers",
+        "no-html-only-headers",
+        "no-http-redirects",
+        "sri",
+        "strict-transport-security",
+        "validate-set-cookie-header",
+        "x-content-type-options"
+      ]
+    }
+  ]
 }

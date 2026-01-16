@@ -1,0 +1,176 @@
+name: Continuous integration
+
+concurrency:
+  cancel-in-progress: true
+  group: pull-request-${{ github.event.pull_request.number }}
+
+jobs:
+  # Stage 1: build, bun, dependency-review, devskim
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    services:
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          download-build: false
+      - name: Build
+        run: npm run build
+        env:
+          CLARITY_TAG: ln18ya61ca
+          CLOUD_ACCOUNT_ID: quisido
+          CLOUD_PLATFORM: GitHub
+          CLOUD_PROVIDER: GitHub Pages
+          CSP_ORIGIN: https://localhost:6586
+          DASHBOARD_ENDPOINT: https://localhost:9778/
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_APPLICATION_ID: 3e55f7ef-a00a-41ab-9857-baf7ad00daa1
+          DD_CLIENT_TOKEN: pubee0abcc4e08cef309eda284ba1d44e32
+          DD_ENV: staging
+          DD_PROFILING_ENABLED: true
+          DD_SERVICE: quisi.do-(staging)
+          DD_VERSION: ${{ github.sha }}
+          DEPLOYMENT_ENVIRONMENT: integration
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GOOGLE_ANALYTICS_TRACKING_ID: G-GMKFW5ZZ9G
+          HONEYCOMB_API_KEY: hcaik_01hwsd84kyjjrwjgg4kqbzzvp2
+          PATREON_OAUTH_CLIENT_ID: 4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG
+          PATREON_OAUTH_REDIRECT_URI: https://localhost:5882/patreon/
+          SENTRY_ENVIRONMENT: staging
+          WHOAMI: https://localhost:5882/whoami/
+      - name: Upload
+        uses: actions/upload-artifact@v6
+        with:
+          name: build
+          path: |
+            dist/
+            packages/*/dist/
+
+  bun:
+    name: bun
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Install bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install dependencies
+        run: |
+          bun install;
+          bun run build --filter=./packages/quisi;
+          bun install;
+      - name: Build
+        run: bun run build
+      - name: Test
+        run: bun run test
+
+  dependency-review:
+    name: Dependency review
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Review
+        uses: actions/dependency-review-action@v4
+
+  devskim:
+    name: DevSkim
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Scan
+        uses: microsoft/devskim-action@v1
+        with:
+          options-json: config/devskim.json
+      - name: Upload
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: .tests/devskim.sarif
+          wait-for-processing: true
+
+  # Stage 2: lighthouse-ci, test, webhint
+  lighthouse:
+    name: Lighthouse
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Lighthouse
+        uses: ./.github/actions/lighthouse-ci
+
+  test:
+    name: Test
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Test
+        run: npm test
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+          DD_ENV: ci
+          DD_SERVICE: quisi.do
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: test
+          path: packages/*/.tests/
+
+  webhint:
+    name: Webhint
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Audit
+        uses: ./.github/actions/webhint-ci
+
+  # Stage 3: sentry-prevent
+  sentry-prevent:
+    name: Sentry Prevent
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Download
+        uses: actions/download-artifact@v7
+        with:
+          name: test
+          path: packages/
+      - name: Upload
+        uses: getsentry/prevent-action@v0
+
+on:
+  pull_request:

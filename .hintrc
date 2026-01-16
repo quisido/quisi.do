@@ -65,7 +65,7 @@
       {
         "accesskeys": "error",
         "focus-order-semantics": "error",
-        "region": "off",
+        "region": "error",
         "skip-link": "error",
         "tabindex": "error"
       }
@@ -166,9 +166,14 @@
     "detect-css-reflows/layout": "error",
     "detect-css-reflows/paint": "error",
     "disown-opener": "error",
-    "doctype": "off",
+    "doctype": "error",
     "highest-available-document-mode": "error",
-    "html-checker": "off",
+    "html-checker": [
+      "error",
+      {
+        "details": true
+      }
+    ],
     "http-cache": "error",
     "http-compression": "error",
     // TODO: Reenable this once the Microsoft Edge Tools VS Code extension can find the dependency.

@@ -7,7 +7,6 @@
 /.tests/
 /.vitest/
 /.wrangler/
-/coverage/
 /debug.log
 /dist/
 /playwright/storage-state.json

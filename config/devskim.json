@@ -1,6 +1,6 @@
 {
   "file-format": "sarif",
   "ignore-rule-ids": "DS162092",
-  "output-file": "devskim-results.sarif",
+  "output-file": ".tests/devskim.sarif",
   "skip-git-ignored-files": true
 }
