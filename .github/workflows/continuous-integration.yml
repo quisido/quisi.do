@@ -77,7 +77,7 @@ jobs:
         run: bun run test
       - name: Warning
         if: failure()
-        run: echo "Bun tests failed"
+        run: echo "::warning title=Bun Tests::Bun tests failed - check the Test step output for details"
 
   dependency-review:
     name: Dependency review

@@ -9,7 +9,7 @@ export default async function testAiExclude(): Promise<void> {
 
   const gitIgnore: string | null = await readPackageFile('.gitignore');
   if (gitIgnore === null) {
-    throw new Error('Expected package to contain an .gitignore file.');
+    throw new Error('Expected package to contain a .gitignore file.');
   }
 
   const aiExcludeLines = new Set<string>(mapStringToLines(aiExclude));
