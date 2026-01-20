@@ -1,6 +1,5 @@
 /.attach_pid*
 /.cache/
-/.eslintcache
 /.gemini/mcp-oauth-tokens.json
 /.git/
 /.tests/

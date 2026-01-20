@@ -3,5 +3,4 @@
 /.vitest/
 /dist/
 /.env.local
-/.eslintcache
 /*.tsbuildinfo

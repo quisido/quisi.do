@@ -8,7 +8,6 @@
 /playwright/storage-state.json
 /.env.*.local
 /.env.local
-/.eslintcache
 /lighthouse.report.*
 /lighthouse-0.devtoolslog.json
 /lighthouse-0.trace.json

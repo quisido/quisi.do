@@ -75,6 +75,9 @@ jobs:
         run: bun run build
       - name: Test
         run: bun run test
+      - name: Warning
+        if: failure()
+        run: echo "Bun tests failed"
 
   dependency-review:
     name: Dependency review

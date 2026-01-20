@@ -6,4 +6,3 @@
 /dist/
 /node_modules/
 /.dev.vars
-/.eslintcache

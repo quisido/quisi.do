@@ -7,7 +7,6 @@
   },
   "files.watcherExclude": {
     ".cache/": true,
-    ".eslintcache": true,
     ".tests/": true,
     "*.tsbuildinfo": true,
     "analyze/": true,
@@ -26,7 +25,6 @@
   "scss.validate": false,
   "search.exclude": {
     ".cache/": true,
-    ".eslintcache": true,
     ".tests/": true,
     "*.tsbuildinfo": true,
     "analyze/": true,
