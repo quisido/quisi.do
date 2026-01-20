@@ -26,9 +26,9 @@ const IGNORES_CONFIG: readonly Config[] = defineConfig({
     'certificates/**',
 
     // Node
+    '*-*.*.*.tgz',
     'dist/**',
     'node_modules/**',
-    '*.tgz',
 
     // quisi
     '.cache/**',

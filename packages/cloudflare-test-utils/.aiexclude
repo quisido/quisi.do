@@ -2,5 +2,5 @@
 /.tests/
 /dist/
 /node_modules/
-*.tgz
+/*-*.*.*.tgz
 vitest.config.ts.timestamp-*-*.mjs

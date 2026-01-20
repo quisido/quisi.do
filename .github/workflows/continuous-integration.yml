@@ -140,6 +140,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: test
+          if-no-files-found: error
           path: packages/*/.tests/
 
   webhint:
@@ -149,7 +150,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      # Temporarily disabled
+      # Temporarily disabled while focus is on customer value.
       - name: Audit
         if: false
         uses: ./.github/actions/webhint-ci

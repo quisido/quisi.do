@@ -2,6 +2,7 @@
 /.tests/
 /.vitest/
 /dist/
+/node_modules/
 /.env.local
 /.eslintcache
 /*.tsbuildinfo

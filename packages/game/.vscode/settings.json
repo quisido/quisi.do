@@ -3,13 +3,17 @@
     "vitest.config.ts.timestamp-*-*.mjs": true
   },
   "files.watcherExclude": {
+    ".cache/": true,
     ".eslintcache": true,
+    ".tests/": true,
     "*.tsbuildinfo": true,
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   },
   "search.exclude": {
+    ".cache/": true,
     ".eslintcache": true,
+    ".tests/": true,
     "*.tsbuildinfo": true,
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true

@@ -1,0 +1,13 @@
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+
+export default async function readPackageFile(
+  path: string,
+): Promise<string | null> {
+  const cwd: string = process.cwd();
+  try {
+    return await readFile(join(cwd, path), 'utf8');
+  } catch (_err: unknown) {
+    return null;
+  }
+}

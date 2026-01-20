@@ -186,6 +186,13 @@ jobs:
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
           DD_ENV: ci
           DD_SERVICE: quisi.do
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: test
+          if-no-files-found: error
+          path: packages/*/.tests/
 
   webhint-ci:
     name: Webhint (continuous integration)

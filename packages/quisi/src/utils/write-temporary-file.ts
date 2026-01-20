@@ -8,6 +8,6 @@ export default async function writeTemporaryFile(
 ): Promise<string> {
   const tempDir: string = await getDisposableTempDir();
   const tempFilePath: string = join(tempDir, path);
-  await writeFile(tempFilePath, content, { encoding: 'utf8' });
+  await writeFile(tempFilePath, content, 'utf8');
   return tempFilePath;
 }

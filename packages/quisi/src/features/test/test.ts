@@ -5,6 +5,7 @@ import attw from '../attw/attw.js';
 import type TestConfig from '../config/test-config.js';
 import eslint from '../eslint/eslint.js';
 import publint from '../publint/publint.js';
+import quisiTest from './quisi-test.js';
 // import vitest from '../vitest/vitest.js';
 
 const EMPTY = 0;
@@ -27,6 +28,7 @@ export default async function test({
 
   await eslint({ eslintConfigFile }).catch(handleError);
   await publint().catch(handleError);
+  await quisiTest().catch(handleError);
   // await vitest().catch(handleError);
 
   if (errorLogs.length > EMPTY) {
