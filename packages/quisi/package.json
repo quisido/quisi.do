@@ -47,11 +47,11 @@
   "dependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@typescript-eslint/eslint-plugin": "^8.46.3",
-    "@typescript-eslint/parser": "^8.46.3",
-    "prettier": "^3.6.2",
-    "publint": "^0.3.15",
-    "zod": "^3.25.76"
+    "@typescript-eslint/eslint-plugin": "^8.53.1",
+    "@typescript-eslint/parser": "^8.53.1",
+    "prettier": "^3.8.1",
+    "publint": "^0.3.17",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/node": "^24.10.4",
