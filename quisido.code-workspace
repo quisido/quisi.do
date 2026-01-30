@@ -9,6 +9,10 @@
 			"path": "packages/vite"
 		},
 		{
+			"name": "AI",
+			"path": "packages/ai"
+		},
+		{
 			"name": "Game",
 			"path": "packages/game"
 		},

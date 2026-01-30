@@ -1,7 +1,5 @@
 /.cache/
 /.tests/
-/.vitest/
-/coverage/
 /dist/
 /node_modules
 /*.cpuprofile

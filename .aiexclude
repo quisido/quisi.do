@@ -3,10 +3,10 @@
 /.gemini/mcp-oauth-tokens.json
 /.git/
 /.tests/
-/.vitest/
 /.wrangler/
 /debug.log
 /dist/
+/node_modules/
 /playwright/storage-state.json
 .DS_Store
 .env.*.local

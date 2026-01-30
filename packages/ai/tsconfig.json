@@ -4,9 +4,9 @@
     "lib": ["ESNext"],
     "noEmit": true,
     "rootDir": ".",
-    "types": [],
+    "types": []
   },
   "exclude": [".cache/", ".tests/", "dist/"],
   "extends": "../../tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts"]
 }

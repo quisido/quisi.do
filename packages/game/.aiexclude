@@ -1,6 +1,5 @@
 /.cache/
 /.tests/
-/.vitest/
 /dist/
 /.env.local
 /*.tsbuildinfo
