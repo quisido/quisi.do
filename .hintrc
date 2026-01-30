@@ -4,6 +4,21 @@
  */
 {
   // "$schema": "https://raw.githubusercontent.com/webhintio/hint/main/packages/hint/src/lib/config/config-schema.json",
+  "connector": {
+    "name": "./dist/utils/webhint-puppeteer-connector.js"
+    /*
+    Enable and configure options when they're confirmed not to crash.
+    "options": {
+      "headless": true,
+      "ignoreHTTPSErrors": false,
+      "puppeteerOptions": {
+        "detached": true,
+        "dumpio": true
+      },
+      "waitUntil": "networkidle0"
+    }
+    */
+  },
   "extends": [
     "accessibility",
     "development",
@@ -12,9 +27,9 @@
   ],
   "formatters": [
     "codeframe",
-    "html",
-    "json",
-    "stylish",
+    "./dist/utils/webhint-html-formatter.js",
+    "./dist/utils/webhint-json-formatter.js",
+    // "stylish", // This is just a worse version of `codeframe`.
     "summary"
   ],
   "hints": {
@@ -50,7 +65,7 @@
       {
         "accesskeys": "error",
         "focus-order-semantics": "error",
-        "region": "off",
+        "region": "error",
         "skip-link": "error",
         "tabindex": "error"
       }
@@ -151,9 +166,14 @@
     "detect-css-reflows/layout": "error",
     "detect-css-reflows/paint": "error",
     "disown-opener": "error",
-    "doctype": "off",
+    "doctype": "error",
     "highest-available-document-mode": "error",
-    "html-checker": "off",
+    "html-checker": [
+      "error",
+      {
+        "details": true
+      }
+    ],
     "http-cache": "error",
     "http-compression": "error",
     // TODO: Reenable this once the Microsoft Edge Tools VS Code extension can find the dependency.
@@ -222,5 +242,18 @@
     "webpack-config/modules-false-babel": "error",
     "webpack-config/no-devtool-in-prod": "error",
     "x-content-type-options": "error"
-  }
+  },
+  "parsers": [
+    "babel-config",
+    "css",
+    "html",
+    "javascript",
+    "jsx",
+    "manifest",
+    "package-json",
+    "sass",
+    "typescript",
+    "typescript-config",
+    "webpack-config"
+  ]
 }

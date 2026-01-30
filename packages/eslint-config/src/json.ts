@@ -11,7 +11,14 @@ import { LINTER_OPTIONS } from './linter-options.js';
 
 const JSON_CONFIG: Config = defineConfig({
   extends: [],
-  files: ['**/.*.json', '**/*.json', '**/*.webmanifest'],
+  files: [
+    '**/.*.json',
+    '**/*.json',
+    '**/*.webmanifest',
+
+    // Webhint
+    '**/browser.info',
+  ],
   ignores: [
     '.vscode/*.json',
     'package-lock.json',

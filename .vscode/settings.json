@@ -56,17 +56,20 @@
     "yaml"
   ],
   "files.associations": {
+    "**/.aiexclude": "ignore",
     "**/config/api-extractor.json": "jsonc",
-    "**/.aiexclude": "ignore"
+    "**/hintrc.*.json": "jsonc"
   },
   "files.eol": "\n",
   "files.exclude": {
     "packages/": true
   },
   "files.watcherExclude": {
-    "**/.eslintcache": true,
+    "**/.cache/": true,
+    "**/.git/": true,
+    "**/.tests/": true,
     "**/.wrangler/": true,
-    "**/coverage/": true,
+    "**/_site/": true,
     "**/dist/": true,
     "**/node_modules/": true,
     "**/packages/": true,
@@ -77,15 +80,16 @@
   "npm.packageManager": "npm",
   "search.exclude": {
     "**/.attach_pid*": true,
-    "**/.eslintcache": true,
+    "**/.cache/": true,
     "**/.git/": true,
     "**/.idea/": true,
     "**/.nyc_output/": true,
+    "**/.tests/": true,
     "**/.wrangler/": true,
     "**/*.cpuprofile": true,
     "**/*.tsbuildinfo": true,
+    "**/_site/": true,
     "**/build/": true,
-    "**/coverage/": true,
     "**/dist/": true,
     "**/jest/": true,
     "**/lighthouse.report.*": true,

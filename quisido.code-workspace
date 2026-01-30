@@ -9,6 +9,10 @@
 			"path": "packages/vite"
 		},
 		{
+			"name": "AI",
+			"path": "packages/ai"
+		},
+		{
 			"name": "Game",
 			"path": "packages/game"
 		},
@@ -99,8 +103,9 @@
 	],
 	"settings": {
 		"files.associations": {
-      "**/config/api-extractor.json": "jsonc",
-      "**/.aiexclude": "ignore"
+      "**/.aiexclude": "ignore",
+			"**/config/api-extractor.json": "jsonc",
+			"**/hintrc.*.json": "jsonc"
 		},
 		"github.copilot.chat.codeGeneration.useInstructionFiles": true,
     "typescript.enablePromptUseWorkspaceTsdk": true,

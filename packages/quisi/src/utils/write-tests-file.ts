@@ -14,6 +14,6 @@ export default async function writeTestsFile(
   await mkdir(testsDir, { recursive: true });
 
   const testsPath: string = join(testsDir, path);
-  await writeFile(testsPath, content, { encoding: 'utf8' });
+  await writeFile(testsPath, content, 'utf8');
   return testsPath;
 }

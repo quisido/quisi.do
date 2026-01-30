@@ -1,5 +1,17 @@
 {
   "files.exclude": {
     "vitest.config.ts.timestamp-*-*.mjs": true
+  },
+  "files.watcherExclude": {
+    ".cache/": true,
+    ".tests/": true,
+    "dist/": true,
+    "node_modules/": true
+  },
+  "search.exclude": {
+    ".cache/": true,
+    ".tests/": true,
+    "dist/": true,
+    "node_modules/": true
   }
 }

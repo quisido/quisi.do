@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "AbsolutePaths": {
+      "description": "Output absolute paths (overrides --base-path).",
+      "type": "boolean"
+    },
+    "AllowGlobs": {
+      "description": "Files must match one of these globs to be analyzed",
+      "items": { "type": "string" },
+      "type": "array"
+    },
+    "BasePath": {
+      "description": "Specify what path to root result URIs in Sarif results with.",
+      "type": "string"
+    },
+    "CommentsPath": {
+      "description": "Path to custom json formatted Comments file to specify languages",
+      "type": "string"
+    },
+    "Confidences": {
+      "description": "Confidences to match",
+      "items": {
+        "enum": [
+          "High",
+          "Medium"
+        ],
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "CrawlArchives": {
+      "description": "Analyze files contained inside of archives",
+      "type": "boolean"
+    },
+    "DisableParallel": {
+      "description": "Disable parallel processing",
+      "type": "boolean"
+    },
+    "DisableSuppression": {
+      "description": "Disable comment suppressions",
+      "type": "boolean"
+    },
+    "ExitCodeIsNumIssues": {
+      "description": "Use exit code for number of issues. Negative on error.",
+      "type": "boolean"
+    },
+    "Globs": {
+      "description": "Globs for files to skip analyzing",
+      "items": { "type": "string" },
+      "type": "array"
+    },
+    "IgnoreDefaultRules": {
+      "description": "Ignore default rules",
+      "type": "boolean"
+    },
+    "IgnoreRuleIds": {
+      "description": "List of rule IDs to ignore",
+      "items": { "type": "string" },
+      "type": "array"
+    },
+    "LanguagesPath": {
+      "description": "Path to custom json formatted Language file to specify languages",
+      "type": "string"
+    },
+    "OutputFile": {
+      "description": "Filename for result file, uses stdout if not set.",
+      "type": "string"
+    },
+    "OutputFileFormat": {
+      "description": "Format type for output.",
+      "enum": ["text", "sarif", "vs"],
+      "type": "string"
+    },
+    "OutputTextFormat": {
+      "description": "Format for output text.",
+      "type": "string"
+    },
+    "Path": {
+      "description": "Path to a directory containing files to scan or a single file to scan",
+      "type": "string"
+    },
+    "RespectGitIgnore": {
+      "description": "Set to skip files which are ignored by .gitignore.",
+      "type": "boolean"
+    },
+    "RuleIds": {
+      "description": "List of rule IDs to limit analysis to",
+      "items": { "type": "string" },
+      "type": "array"
+    },
+    "Rules": {
+      "description": "List of paths to rules files to use",
+      "items": { "type": "string" },
+      "type": "array"
+    },
+    "Severities": {
+      "description": "Severities to match",
+      "items": {
+        "enum": [
+          "Critical",
+          "Important",
+          "Moderate",
+          "BestPractice",
+          "ManualReview"
+        ],
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "SkipExcerpts": {
+      "description": "Set to skip gathering excerpts and samples to include in the report.",
+      "type": "boolean"
+    }
+  },
+  "required": ["Path"],
+  "title": "DevSkim Scan Configuration",
+  "type": "object"
+}

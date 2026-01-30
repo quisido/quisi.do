@@ -6,7 +6,6 @@
     "./.wrangler/",
     "./analyze/",
     "./certificates/",
-    "./coverage/",
     "./dist/",
     "./scripts/",
     "./src/**/*.e2e.ts",

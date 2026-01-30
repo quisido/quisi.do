@@ -6,7 +6,7 @@
     // Necessary for `quisi.config.ts` to export top-level values.
     "verbatimModuleSyntax": false
   },
-  "exclude": [".cache/", ".tests/", ".vitest/"],
+  "exclude": [".cache/", ".tests/"],
   "extends": "../../tsconfig.json",
   "include": ["**/*", "**/*.json", "**/.*", "**/.*.json"],
 }

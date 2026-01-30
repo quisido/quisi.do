@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=https://www.schemastore.org/github-action.json
+name: Lighthouse
+description: Runs Lighthouse audits
+
+runs:
+  using: composite
+  steps:
+    - name: Setup
+      uses: ./.github/actions/setup
+    - name: Audit
+      run: |
+        npx concurrently \
+          --hide serve \
+          --kill-others \
+          --kill-others-on-fail \
+          --names lighthouse,serve \
+          --prefix-colors auto \
+          --success command-lighthouse \
+          "\
+            npx wait-on http://localhost:3000/ && \
+            npx lighthouse http://localhost:3000/ \
+              --budget-path=lighthouse.budget.json \
+              --chrome-flags="--headless" \
+              --config-path=lighthouse.config.js \
+              --enable-error-reporting \
+              --output=html,json \
+              --output-path=lighthouse \
+              --preset=experimental \
+              --save-assets \
+          " \
+          "npx serve dist";
+      shell: bash
+      working-directory: packages/vite
+    - name: Validate
+      run: node ./scripts/postlighthouse/index.js
+      shell: bash
+      working-directory: packages/vite
+    - name: Upload
+      if: always()
+      uses: actions/upload-artifact@v6
+      with:
+        name: lighthouse-ci
+        path: |
+          packages/*/lighthouse.report.*
+          packages/*/lighthouse-*.devtoolslog.json
+          packages/*/lighthouse-*.trace.json

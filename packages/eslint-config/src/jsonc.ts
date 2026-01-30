@@ -13,7 +13,7 @@ const JSONC_CONFIG: Config = defineConfig({
     '**/*.json5',
     '**/*.jsonc',
     '.hintrc',
-    '*.hintrc',
+    'hintrc.*.json',
     'tsconfig.json',
     'tsconfig.*.json',
   ],

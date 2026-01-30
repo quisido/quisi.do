@@ -1,10 +1,7 @@
 /.cache/
 /.tests/
-/.vitest/
-/coverage/
 /dist/
 /node_modules/
-/.eslintcache
 /*.cpuprofile
 /*.iml
 /*.tsbuildinfo

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://www.schemastore.org/github-action.json
+name: Webhint
+description: Runs Webhint audits
+
+runs:
+  using: composite
+  steps:
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Audit
+        shell: bash
+        working-directory: packages/vite
+        run: |
+          npx concurrently \
+            --hide serve \
+            --kill-others \
+            --kill-others-on-fail \
+            --names serve,webhint \
+            --prefix-colors auto \
+            --success command-webhint \
+            "npx serve dist" \
+            "\
+              npx wait-on http://localhost:3000/ && \
+              npx hint --config hintrc.serve.json http://localhost:3000 \
+            "
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: webhint-ci
+          path: packages/vite/.tests/webhint

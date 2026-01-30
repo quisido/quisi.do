@@ -1,0 +1,23 @@
+{
+  // "$schema": "https://raw.githubusercontent.com/webhintio/hint/main/packages/hint/src/lib/config/config-schema.json",
+
+  "extends": ["../../.hintrc"],
+
+  "ignoredUrls": [
+    {
+      "domain": "^(?!localhost:3000$).*",
+      "hints": [
+        "content-type",
+        "http-cache",
+        "http-compression",
+        "no-disallowed-headers",
+        "no-html-only-headers",
+        "no-http-redirects",
+        "sri",
+        "strict-transport-security",
+        "validate-set-cookie-header",
+        "x-content-type-options"
+      ]
+    }
+  ]
+}
