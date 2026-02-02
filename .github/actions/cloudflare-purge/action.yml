@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://www.schemastore.org/github-action.json
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
 name: Cloudflare purge
 description: Purges files from Cloudflare cache
 
@@ -14,6 +14,7 @@ runs:
   using: composite
   steps:
     - name: Purge Cloudflare cache
+      shell: bash
       env:
         CLOUDFLARE_API_TOKEN: ${{ inputs.api-token }}
         CLOUDFLARE_ZONE_ID: ${{ inputs.zone-id }}
@@ -25,8 +26,8 @@ runs:
               "https://quisi.do/index.html"
             ]
           }' \
+          --fail \
           --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
           --header "Content-Type:application/json" \
           --request POST \
           "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache"
-      shell: bash

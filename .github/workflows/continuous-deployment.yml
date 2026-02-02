@@ -1,17 +1,20 @@
-name: CI/CD
+name: Continuous deployment
+
+concurrency:
+  cancel-in-progress: false
+  group: main
 
 jobs:
-  # Stage 1: build, dependency-review, devskim
+  # Stage 1: build, devskim
   build:
     name: Build
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
     services:
-      datadog-agent:
+      datadog-agent: &datadog-agent
         image: datadog/agent:latest
         env:
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_ENV: ci
           DD_HOSTNAME: none
           DD_INSIDE_CI: true
         ports:
@@ -19,37 +22,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Setup
-        uses: ./.github/actions/setup
-        with:
-          download-build: false
       - name: Build
-        run: npm run build
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_PROFILING_ENABLED: true
-          DD_VERSION: ${{ github.sha }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_SHA: ${{ github.sha }}
-          NODE_ENV: production
-      - name: Upload
-        uses: actions/upload-artifact@v6
+        uses: ./.github/actions/build
         with:
-          name: build
-          path: |
-            dist/
-            packages/*/dist/
-
-  dependency-review:
-    name: Dependency review
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Review
-        uses: actions/dependency-review-action@v4
+          environment: production
 
   devskim:
     name: DevSkim
@@ -62,63 +38,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Scan
-        uses: microsoft/devskim-action@v1
-        with:
-          options-json: config/devskim.json
-      - name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@v4
-        with:
-          sarif_file: ./.tests/devskim.sarif
-          wait-for-processing: true
+        uses: ./.github/actions/devskim
 
-  # Stage 2: datadog-sourcemaps, lighthouse-ci, sentry-release, test,
-  #          webhint-serve
+  # Stage 2: datadog-sourcemaps, lighthouse-ci, sentry-release, test, webhint-ci
   datadog-sourcemaps:
     name: Datadog sourcemaps
     needs: build
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Setup
-        uses: ./.github/actions/setup
       - name: Upload
-        env:
-          DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          RELEASE_VERSION: ${{ github.sha }}
-        run: |
-          npx datadog-ci sourcemaps upload dist \
-            --minified-path-prefix=https://quisi.do/dist \
-            --release-version=$RELEASE_VERSION \
-            --service=quisi.do \
-            --workspace=packages/vite;
+        uses: ./.github/actions/datadog-sourcemaps
+        with:
+          datadog-api-key: ${{ secrets.DATADOG_API_KEY }}
 
   lighthouse-ci:
     name: Lighthouse (continuous integration)
     needs: build
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
     services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
+      datadog-agent: *datadog-agent
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -129,111 +69,48 @@ jobs:
     name: Sentry release
     needs: build
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Download
-        uses: actions/download-artifact@v7
+      - name: Release
+        uses: ./.github/actions/sentry-release
         with:
-          name: build
-      - name: Sentry release
-        uses: getsentry/action-release@v3
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_LOG_LEVEL: info
-          SENTRY_ORG: quisido
-          SENTRY_PROJECT: quisi-do
-        with:
-          environment: production
-          release: ${{ github.sha }}
-          sourcemaps: packages/vite/dist
+          auth-token: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
   test:
     name: Test
     needs: build
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
     services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
+      datadog-agent: *datadog-agent
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Setup
-        uses: ./.github/actions/setup
       - name: Test
-        run: npm test
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
-          DD_ENV: ci
-          DD_SERVICE: quisi.do
-      - name: Upload
-        if: always()
-        uses: actions/upload-artifact@v6
-        with:
-          name: test
-          if-no-files-found: error
-          path: packages/*/.tests/
+        uses: ./.github/actions/test
 
   webhint-ci:
     name: Webhint (continuous integration)
     needs: build
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
     services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
+      datadog-agent: *datadog-agent
     steps:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Audit
         uses: ./.github/actions/webhint-ci
 
-  # Stage 3: github-pages, npm, sentry-prevent
+  # Stage 3: github-pages, npm-publish, sentry-prevent
   github-pages:
     name: GitHub Pages
+    runs-on: ubuntu-latest
     needs:
       - lighthouse-ci
       - test
       - webhint-ci
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
     services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
+      datadog-agent: *datadog-agent
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -246,89 +123,52 @@ jobs:
         with:
           branch: gh-pages
           clean: true
-          folder: packages/vite/dist/
+          folder: packages/vite/_site/
           single-commit: true
 
-  npm:
+  npm-publish:
     name: NPM
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
     needs:
       - build
       - test
     permissions:
       id-token: write
     services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
+      datadog-agent: *datadog-agent
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Setup
-        uses: ./.github/actions/setup
       - name: Publish
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
-        run: >
-          npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH_TOKEN;
-          npm run publish;
+        uses: ./.github/actions/npm-publish
+        with:
+          auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
 
   sentry-prevent:
     name: Sentry Prevent
     needs: test
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
     permissions:
       id-token: write
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - name: Download
-        uses: actions/download-artifact@v7
-        with:
-          name: test
-          path: packages/
-      - name: Upload
-        uses: getsentry/prevent-action@v0
+      - name: Scan
+        uses: ./.github/actions/sentry-prevent
 
-  # Stage 4: cloudflare-purge, github-packages, wrangler-deploy-*
+  # Stage 4: cloudflare-purge, github-packages, wrangler-deploy
   cloudflare-purge:
-    name: Cloudflare purge
+    name: Cloudflare
     needs: github-pages
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
     services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
+      datadog-agent: *datadog-agent
     steps:
-      - name: Purge Cloudflare cache
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Purge cache
         uses: ./.github/actions/cloudflare-purge
         with:
           api-token: ${{ secrets.CLOUDFLARE_PURGE_API_TOKEN }}
@@ -336,202 +176,72 @@ jobs:
 
   github-packages:
     name: GitHub Packages
-    needs: npm
+    needs: npm-publish
     runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
     permissions:
       contents: read
       id-token: write
       packages: write
     services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
+      datadog-agent: *datadog-agent
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Setup
-        uses: ./.github/actions/setup
       - name: Publish
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
-        run: >
-          npm config set "//npm.pkg.github.com/:_authToken" $NPM_AUTH_TOKEN;
-          npm run publish --registry=https://npm.pkg.github.com;
+        uses: ./.github/actions/github-packages
+        with:
+          auth-token: ${{ secrets.GITHUB_TOKEN }}
 
-  wrangler-deploy-authn:
-    name: Wrangler deploy (Authentication)
+  wrangler-deploy:
+    name: Wrangler deploy (${{ matrix.service }})
+    runs-on: ubuntu-latest
     needs:
       - lighthouse-ci
-      - npm
+      - npm-publish
       - webhint-ci
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
     services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
+      datadog-agent: *datadog-agent
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Setup
-        uses: ./.github/actions/setup
       - name: Deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
-        run: |
-          npx wrangler deploy src/index.ts \
-            --env production \
-            --outdir dist \
-            --workspace=packages/authn;
-
-  wrangler-deploy-csp:
-    name: Wrangler deploy (Content Security Policy)
-    needs:
-      - lighthouse-ci
-      - npm
-      - webhint-ci
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Setup
-        uses: ./.github/actions/setup
-      - name: Deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
-        run: |
-          npx wrangler deploy src/index.ts \
-            --env production \
-            --outdir dist \
-            --workspace=packages/csp;
-
-  wrangler-deploy-dashboard:
-    name: Wrangler deploy (Dashboard)
-    needs:
-      - lighthouse-ci
-      - npm
-      - webhint-ci
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
-    services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Setup
-        uses: ./.github/actions/setup
-      - name: Deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
-        run: |
-          npx wrangler deploy src/index.ts \
-            --env production \
-            --outdir dist \
-            --workspace=packages/dashboard;
+        uses: ./.github/actions/wrangler-deploy
+        with:
+          api-token: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
+          workspace: ${{ matrix.workspace }}
+    strategy:
+      matrix:
+        include:
+          - service: Authentication
+            workspace: authn
+          - service: Content Security Policy
+            workspace: csp
+          - service: Dashboard
+            workspace: dashboard
 
   # Stage 5: lighthouse-production, webhint-production
   lighthouse-production:
     name: Lighthouse (production)
+    runs-on: ubuntu-latest
     needs:
       - cloudflare-purge
-      - wrangler-deploy-authn
-      - wrangler-deploy-csp
-      - wrangler-deploy-dashboard
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
+      - wrangler-deploy
     services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
+      datadog-agent: *datadog-agent
     steps:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup
-        uses: ./.github/actions/setup
-      - name: Audit
-        working-directory: packages/vite
-        run: |
-          npx lighthouse https://quisi.do/ \
-            --budget-path=lighthouse.budget.json \
-            --chrome-flags="--headless" \
-            --config-path=lighthouse.config.js \
-            --enable-error-reporting \
-            --output=html,json \
-            --output-path=lighthouse \
-            --preset=experimental \
-            --save-assets;
-      - name: Validate
-        run: node ./scripts/postlighthouse/index.js
-        shell: bash
-        working-directory: packages/vite
-      - name: Upload
-        if: always()
-        uses: actions/upload-artifact@v6
-        with:
-          name: lighthouse-production
-          path: |
-            packages/*/lighthouse.report.*
-            packages/*/lighthouse-*.devtoolslog.json
-            packages/*/lighthouse-*.trace.json
+        uses: ./.github/actions/lighthouse-production
 
   webhint-production:
     name: Webhint (production)
+    runs-on: ubuntu-latest
     needs:
       - cloudflare-purge
-      - wrangler-deploy-authn
-      - wrangler-deploy-csp
-      - wrangler-deploy-dashboard
-    runs-on: ubuntu-latest
-    env:
-      DD_ENV: ci
+      - wrangler-deploy
     services:
-      datadog-agent:
-        image: datadog/agent:latest
-        env:
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DD_HOSTNAME: none
-          DD_INSIDE_CI: true
-        ports:
-          - 8126:8126
+      datadog-agent: *datadog-agent
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -545,6 +255,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: webhint-production
+          if-no-files-found: error
           path: packages/vite/.tests/webhint
 
 on:

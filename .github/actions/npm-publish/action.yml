@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
+name: NPM
+description: Publishes packages to NPM
+
+inputs:
+  auth-token:
+    description: NPM auth token
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Setup
+      uses: ./.github/actions/setup
+    - name: Publish
+      run: ./.github/actions/npm-publish/npm-publish.sh
+      shell: bash
+      env:
+        NPM_AUTH_TOKEN: ${{ inputs.auth-token }}
+        NPM_CONFIG_PROVENANCE: true

@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
+name: Test
+description: Tests the repository
+
+runs:
+  using: composite
+  steps:
+    - name: Setup
+      uses: ./.github/actions/setup
+    - name: Test
+      run: npm test
+      shell: bash
+    - name: Upload
+      if: always()
+      uses: actions/upload-artifact@v6
+      with:
+        name: test
+        if-no-files-found: error
+        path: |
+          .tests/
+          packages/*/.tests/

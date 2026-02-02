@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
+name: Sentry release
+description: Uploads a Sentry release with sourcemaps
+
+inputs:
+  auth-token:
+    description: Sentry auth token
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Download
+      uses: actions/download-artifact@v7
+      with:
+        name: build
+    - name: Sentry release
+      uses: getsentry/action-release@v3
+      env:
+        SENTRY_AUTH_TOKEN: ${{ inputs.auth-token }}
+        SENTRY_LOG_LEVEL: info
+        SENTRY_ORG: quisido
+        SENTRY_PROJECT: quisi-do
+      with:
+        environment: production
+        release: ${{ github.sha }}
+        sourcemaps: packages/vite/_site

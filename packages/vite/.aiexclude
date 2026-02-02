@@ -1,9 +1,9 @@
 /.cache/
 /.tests/
 /.wrangler/
+/_site/
 /analyze/
 /certificates/
-/dist/
 /node_modules/
 /playwright/storage-state.json
 /.env.*.local

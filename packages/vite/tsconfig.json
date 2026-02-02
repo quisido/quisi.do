@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": false,
-    "declarationDir": "dist",
+    "declarationDir": "_site",
     "downlevelIteration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://www.schemastore.org/github-action.json
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
 name: Webhint
 description: Runs Webhint audits
 
@@ -20,7 +20,7 @@ runs:
             --success command-webhint \
             "npx serve dist" \
             "\
-              npx wait-on http://localhost:3000/ && \
+              npx wait-on http://localhost:3000/ --timeout 30s && \
               npx hint --config hintrc.serve.json http://localhost:3000 \
             "
       - name: Upload
@@ -28,4 +28,6 @@ runs:
         uses: actions/upload-artifact@v6
         with:
           name: webhint-ci
+          if-no-files-found: error
           path: packages/vite/.tests/webhint
+

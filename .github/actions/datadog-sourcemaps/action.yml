@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
+name: Datadog Sourcemaps
+description: Uploads sourcemaps to Datadog for better error tracking
+
+inputs:
+  datadog-api-key:
+    description: Datadog API Key
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Setup
+      uses: ./.github/actions/setup
+    - name: Upload
+      run: ./.github/actions/datadog-sourcemaps/datadog-sourcemaps.sh
+      shell: bash
+      env:
+        DATADOG_API_KEY: ${{ inputs.datadog-api-key }}
+        RELEASE_VERSION: ${{ github.sha }}

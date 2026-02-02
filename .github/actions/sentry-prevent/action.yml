@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
+name: Sentry Prevent
+description: Runs Sentry Prevent to block commits that introduce new Sentry issues
+
+runs:
+  using: composite
+  steps:
+    - name: Scan
+      uses: microsoft/devskim-action@v1
+      with:
+        options-json: config/devskim.json
+    - name: Upload
+      uses: github/codeql-action/upload-sarif@v4
+      with:
+        sarif_file: ./.tests/devskim.sarif
+        wait-for-processing: true

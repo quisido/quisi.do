@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://www.schemastore.org/github-action.json
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
 name: Setup
 description: Sets up Node and installs dependencies
 
@@ -24,9 +24,9 @@ runs:
       with:
         name: build
     - name: Install dependencies
-      # Build `quisi` then reinstall so that it's a symlinked Node module.
+      shell: bash
+      # Build `quisi` then re-install to symlink the dependency.
       run: >
         npm ci;
         npm run build --workspace=packages/quisi;
         npm ci;
-      shell: bash

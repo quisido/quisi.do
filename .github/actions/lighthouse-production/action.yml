@@ -8,7 +8,7 @@ runs:
     - name: Setup
       uses: ./.github/actions/setup
     - name: Audit
-      run: ./scripts/lighthouse-serve.sh
+      run: ./scripts/lighthouse-production.sh
       shell: bash
       working-directory: packages/vite
     - name: Validate
@@ -19,7 +19,7 @@ runs:
       if: always()
       uses: actions/upload-artifact@v6
       with:
-        name: lighthouse-ci
+        name: lighthouse-production
         if-no-files-found: error
         path: |
           packages/vite/lighthouse.report.*
