@@ -16,7 +16,7 @@ export default function testFilesWatcherExclude(settings: object): void {
 
   for (const file of FILES) {
     const value: unknown =
-      // @ts-expect-error: TypeScript won't allow variable indicies, even if you
+      // @ts-expect-error: TypeScript won't allow variable indices, even if you
       // check that they exist first.
       filesWatcherExclude[file] ?? filesWatcherExclude[`**/${file}`];
     if (typeof value !== 'boolean' || !value) {

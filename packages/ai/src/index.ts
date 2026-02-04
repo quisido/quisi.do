@@ -1,5 +1,14 @@
 /// <reference types="bun-types" />
-import ollama, { type Message } from 'ollama';
+import { mapToString } from 'fmrs';
+import ollama, {
+  type AbortableAsyncIterator,
+  type ChatResponse,
+  type Message,
+} from 'ollama';
+
+interface Options {
+  readonly onChunk: (chunk: string) => void;
+}
 
 enum Model {
   DeepSeek_R1_14b = 'deepseek-r1:14b',
@@ -21,24 +30,51 @@ enum Role {
   User = 'user',
 }
 
-export default async function chat(prompt: string): Promise<Message> {
+const MAX_ATTEMPTS = 3;
+
+export default async function chat(
+  model: Model,
+  prompt: string,
+  { onChunk }: Options,
+): Promise<Message> {
+  const messages: Message[] = [{ content: prompt, role: Role.User }];
+
   const chatImpl = async (attempt: number): Promise<Message> => {
     try {
-      const response = await ollama.chat({
-        messages: [
-          {
-            content: prompt,
-            role: Role.User,
-          },
-        ],
-        model: Model.Qwen3_14b,
+      const responseItr: AbortableAsyncIterator<ChatResponse> =
+        await ollama.chat({
+          messages,
+          model,
+          stream: true,
+          think: true,
+        });
+
+      let lastMessage: Message = { content: '', role: Role.Assistant };
+      for await (const { message } of responseItr) {
+        lastMessage = message;
+        onChunk(message.content);
+      }
+
+      messages.push(lastMessage);
+
+      return lastMessage;
+    } catch (err: unknown) {
+      messages.push({
+        content: `The Ollama \`chat\` API threw an error: ${mapToString(err)}.`,
+        role: Role.System,
       });
 
-      return response.message;
-    } catch (_err: unknown) {
+      if (attempt >= MAX_ATTEMPTS) {
+        throw new Error(
+          'Failed to get response from Ollama after 3 attempts.',
+          { cause: err },
+        );
+      }
+
       return chatImpl(attempt + 1);
     }
   };
+
   return chatImpl(1);
 }
 
@@ -47,6 +83,8 @@ if (prompt === undefined) {
   throw new Error('No prompt provided.');
 }
 
-const response: Message = await chat(prompt);
-
-globalThis.console.log(response.content);
+await chat(Model.Qwen3_14b, prompt, {
+  onChunk(chunk: string): void {
+    globalThis.console.log(chunk);
+  },
+});

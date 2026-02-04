@@ -21,7 +21,7 @@ export default function handleNpmExecWorkspaceError(
   if (err instanceof Error) {
     // `ExecException` is an error with additional properties.
     if ('stdout' in err) {
-      globalThis.console.log(err.stdout);
+      globalThis.console.info(err.stdout);
     }
     if ('stderr' in err) {
       globalThis.console.error(err.stderr);
@@ -30,7 +30,7 @@ export default function handleNpmExecWorkspaceError(
     throw new Error(err.message);
   }
 
-  globalThis.console.log(
+  globalThis.console.info(
     `NPM workspace command "${script.join(' ')}" failed with an unknown error.`,
   );
   throw new Error(JSON.stringify(err));

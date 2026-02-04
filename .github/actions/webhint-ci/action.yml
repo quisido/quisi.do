@@ -18,7 +18,7 @@ runs:
           --names serve,webhint \
           --prefix-colors auto \
           --success command-webhint \
-          "npx serve dist" \
+          "npx serve _site" \
           "\
             npx wait-on http://localhost:3000/ --timeout 30s && \
             npx hint --config hintrc.serve.json http://localhost:3000 \
