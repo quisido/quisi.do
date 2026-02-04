@@ -129,7 +129,6 @@
     "babel-plugin-istanbul": "^7.0.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "babel-plugin-replace-import-extension": "^1.1.5",
-    "canvas": "^3.2.0",
     "cjs-ts": "^2.0.0",
     "concurrently": "^9.2.1",
     "console-table-printer": "^2.15.0",

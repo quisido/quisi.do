@@ -76,6 +76,7 @@
     "jsdom": "^27.1.0",
     "lighthouse": "^13.0.1",
     "prettier": "^3.6.2",
+    "rimraf": "^6.1.0",
     "serve": "^14.2.5",
     "typescript": "^5.9.3",
     "vite": "^7.2.1",
