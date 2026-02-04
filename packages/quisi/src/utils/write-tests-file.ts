@@ -1,3 +1,5 @@
+/// <reference types="@types/node" />
+import process from 'node:process';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 

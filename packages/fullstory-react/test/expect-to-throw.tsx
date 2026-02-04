@@ -11,8 +11,9 @@ interface State {
   readonly error?: Error | undefined;
 }
 
-// eslint-disable-next-line no-console
-const CONSOLE_ERROR: Console['error'] = console.error;
+const CONSOLE_ERROR: Console['error'] = globalThis.console.error.bind(
+  globalThis.console,
+);
 
 const testGetDerivedStateFromErrorImpl = (err: Error): State => ({
   error: err,
@@ -22,8 +23,7 @@ export default function expectToThrow(
   useHook: VoidFunction,
   message: string,
 ): void {
-  // eslint-disable-next-line no-console
-  console.error = vi.fn();
+  globalThis.console.error = vi.fn();
 
   const testGetDerivedStateFromError = vi.fn(testGetDerivedStateFromErrorImpl);
 
@@ -54,6 +54,5 @@ export default function expectToThrow(
 
   expect(testGetDerivedStateFromError).toHaveBeenCalledWith(new Error(message));
 
-  // eslint-disable-next-line no-console
-  console.error = CONSOLE_ERROR;
+  globalThis.console.error = CONSOLE_ERROR;
 }

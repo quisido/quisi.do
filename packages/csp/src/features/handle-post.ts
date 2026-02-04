@@ -50,6 +50,7 @@ export default async function handlePost(
   }
 
   // Queries
+  // eslint-disable-next-line no-magic-numbers
   const [[keyRow], [projectRow]] = await this.queries<2>('CSP_DB', [
     [SELECT_PERMISSION_FROM_KEYS, key, projectId],
     [SELECT_USER_ID_FROM_PROJECTS, projectId],

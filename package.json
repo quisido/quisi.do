@@ -9,11 +9,11 @@
   "type": "module",
   "scripts": {
     "build": "npm run tsc:build && node ./dist/scripts/build.js",
-    "start": "concurrently --kill-others --kill-others-on-fail --names \"authn           \",\"cloudflare-utils\",\"csp             \",\"dashboard       \",\"eslint-config   \",\"fmrs            \",\"vite            \",\"worker          \" --prefix-colors auto --restart-after exponential --restart-tries 9999 \"npm run authn\" \"npm run cloudflare-utils\" \"npm run csp\" \"npm run dashboard\" \"npm run eslint-config\" \"npm run fmrs\" \"npm run vite\" \"npm run worker\"",
+    "start": "npm run tsc:build && node ./dist/scripts/start.js",
     "test": "quisi test && npm run test:workspaces",
     "authn": "npm start --workspace=packages/authn",
     "browserslist:update-db": "browserslist --update-db",
-    "clean": "rimraf coverage node_modules sarif && npm run clean --if-present --workspaces",
+    "clean": "rimraf .cache .tests dist node_modules && npm run clean --if-present --workspaces",
     "cloudflare-utils": "npm start --workspace=packages/cloudflare-utils",
     "csp": "npm start --workspace=packages/csp",
     "dashboard": "npm start --workspace=packages/dashboard",

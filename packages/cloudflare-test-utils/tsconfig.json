@@ -4,7 +4,6 @@
     "lib": ["ESNext"],
     "noEmit": true,
     "rootDir": ".",
-    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo",
     "types": []
   },
   "exclude": [".cache/", ".tests/", "dist/", "node_modules/"],

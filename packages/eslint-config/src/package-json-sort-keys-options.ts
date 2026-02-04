@@ -3,6 +3,7 @@ import type JsoncSortKeysOption from './jsonc-sort-keys-options.js';
 const TRAILING_ROOT_KEYS: readonly string[] = [
   'scripts',
 
+  'bin',
   'bugs',
   'exports',
   'funding',

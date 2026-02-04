@@ -32,7 +32,6 @@ export default async function test({
   // await vitest().catch(handleError);
 
   if (errorLogs.length > EMPTY) {
-    // eslint-disable-next-line no-console
-    console.error(...errorLogs);
+    globalThis.console.error(...errorLogs);
   }
 }

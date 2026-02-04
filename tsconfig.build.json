@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "generateCpuProfile": "tsconfig.build.cpuprofile",
     "module": "NodeNext",
     "moduleResolution": "nodenext",
     "noEmit": false

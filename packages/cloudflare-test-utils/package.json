@@ -11,9 +11,10 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "quisi build",
+    "start": "quisi start",
     "test": "quisi test && npm run vitest:run",
     "attw": "quisi attw",
-    "clean": "rimraf .cache dist",
+    "clean": "rimraf .cache .tests dist node_modules",
     "eslint": "quisi eslint",
     "eslint:fix": "eslint . --cache --cache-location .cache/eslint.json --color --config eslint.config.ts --exit-on-fatal-error --fix --max-warnings -1 --no-config-lookup",
     "publint": "quisi publint",

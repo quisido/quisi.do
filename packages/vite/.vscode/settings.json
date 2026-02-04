@@ -8,10 +8,7 @@
   "files.watcherExclude": {
     ".cache/": true,
     ".tests/": true,
-    "*.tsbuildinfo": true,
-    "analyze/": true,
-    "certificates/": true,
-    "dist/": true,
+    "_site/": true,
     "lighthouse.config.cjs": true,
     "lighthouse.config.js": true,
     "lighthouse.report.html": true,
@@ -26,10 +23,7 @@
   "search.exclude": {
     ".cache/": true,
     ".tests/": true,
-    "*.tsbuildinfo": true,
-    "analyze/": true,
-    "certificates/": true,
-    "dist/": true,
+    "_site": true,
     "lighthouse.config.cjs": true,
     "lighthouse.config.js": true,
     "lighthouse.report.html": true,

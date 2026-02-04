@@ -11,7 +11,7 @@
     "start": "vite",
     "test": "quisi test && npm run vitest:run",
     "attw": "quisi attw",
-    "clean": "rimraf .wrangler dist node_modules tsconfig.tsbuildinfo tsconfig.build.tsbuildinfo",
+    "clean": "rimraf .cache .tests .wrangler _site node_modules",
     "eslint": "quisi eslint",
     "vite:build": "vite build",
     "vitest": "vitest",

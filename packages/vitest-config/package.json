@@ -11,9 +11,10 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "quisi build",
+    "start": "quisi start",
     "test": "quisi test",
     "attw": "quisi attw",
-    "clean": "rimraf coverage dist node_modules tsc-output.cpuprofile tsconfig.build.tsbuildinfo",
+    "clean": "rimraf .cache .tests dist node_modules",
     "eslint": "quisi eslint",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
     "publint": "quisi publint",

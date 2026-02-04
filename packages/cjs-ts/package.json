@@ -10,9 +10,10 @@
   "types": "./index.d.ts",
   "scripts": {
     "build": "exit 0",
+    "start": "exit 0",
     "test": "quisi test",
     "attw": "quisi attw",
-    "clean": "exit 0",
+    "clean": "rimraf .cache .tests node_modules",
     "eslint": "quisi eslint",
     "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
     "publint": "quisi publint"

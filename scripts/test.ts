@@ -9,8 +9,7 @@ for (const workspaceDirectory of workspaceDirectories) {
     // eslint-disable-next-line no-await-in-loop
     await npmExecWorkspace(workspaceDirectory.name, 'test');
   } catch (err: unknown) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+    globalThis.console.error(err);
     process.exitCode = 1;
     break;
   }

@@ -23,6 +23,14 @@
   "[yaml]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "never",
+    "source.fixAll.ts": "never",
+    "source.organizeImports": "never",
+    "source.removeUnused.ts": "never",
+    "source.sort.json": "never",
+    "source.sortImports": "never"
+  },
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.rulers": [80],
   "editor.tabSize": 2,
@@ -72,10 +80,10 @@
     "**/_site/": true,
     "**/dist/": true,
     "**/node_modules/": true,
-    "**/packages/": true,
-    "**/sarif/": true
+    "packages/": true
   },
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  "javascript.preferences.importModuleSpecifier": "project-relative",
   "javascript.preferences.importModuleSpecifierEnding": "js",
   "npm.packageManager": "npm",
   "search.exclude": {
@@ -86,20 +94,16 @@
     "**/.nyc_output/": true,
     "**/.tests/": true,
     "**/.wrangler/": true,
-    "**/*.cpuprofile": true,
-    "**/*.tsbuildinfo": true,
     "**/_site/": true,
-    "**/build/": true,
     "**/dist/": true,
-    "**/jest/": true,
     "**/lighthouse.report.*": true,
     "**/node_modules/": true,
-    "**/package-lock.json": true,
-    "**/sarif/": true
+    "**/package-lock.json": true
   },
   "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
   "testExplorer.useNativeTesting": true,
   "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifier": "project-relative",
   "typescript.preferences.importModuleSpecifierEnding": "js",
   "vitest.maximumConfigs": 99,
   "vitest.shellType": "terminal",

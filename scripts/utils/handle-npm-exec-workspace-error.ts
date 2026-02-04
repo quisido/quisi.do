@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import isSpawnSyncReturns from './is-spawn-sync-returns.js';
 import mapSpawnSyncReturnsToErrorMessage from './map-spawn-sync-returns-to-error-message.js';
 
@@ -7,7 +6,7 @@ export default function handleNpmExecWorkspaceError(
   script: readonly string[],
 ): never {
   if (isSpawnSyncReturns(err)) {
-    console.info(...err.output);
+    globalThis.console.info(...err.output);
     const message: string = mapSpawnSyncReturnsToErrorMessage(err);
     throw new Error(message, {
       cause: {
@@ -22,15 +21,16 @@ export default function handleNpmExecWorkspaceError(
   if (err instanceof Error) {
     // `ExecException` is an error with additional properties.
     if ('stdout' in err) {
-      console.log(err.stdout);
+      globalThis.console.log(err.stdout);
     }
     if ('stderr' in err) {
-      console.error(err.stderr);
+      globalThis.console.error(err.stderr);
     }
-    throw err;
+
+    throw new Error(err.message);
   }
 
-  console.log(
+  globalThis.console.log(
     `NPM workspace command "${script.join(' ')}" failed with an unknown error.`,
   );
   throw new Error(JSON.stringify(err));

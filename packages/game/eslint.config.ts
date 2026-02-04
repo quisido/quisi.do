@@ -10,8 +10,6 @@ const CONFIG: Linter.Config[] = [
     files: ['**/*.ts', '**/*.tsx'],
     name: '@quisido/game',
     rules: {
-      'id-length': ['warn', { exceptions: ['x', 'y'], properties: 'never' }],
-      'no-magic-numbers': 'warn',
       'no-ternary': 'warn',
       'no-warning-comments': 'warn',
     },

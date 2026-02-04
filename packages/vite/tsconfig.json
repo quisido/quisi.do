@@ -11,7 +11,7 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "noEmit": true,
-    "outDir": "dist",
+    "outDir": "_site",
     "plugins": [],
     "resolveJsonModule": true,
     "rootDir": ".",

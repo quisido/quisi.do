@@ -9,6 +9,7 @@
     "build": "exit 0",
     "start": "vite",
     "test": "exit 0",
+    "clean": "rimraf .cache .tests node_modules",
     "eslint": "quisi eslint",
     "serve": "serve dist",
     "tsc": "tsc --skipLibCheck",

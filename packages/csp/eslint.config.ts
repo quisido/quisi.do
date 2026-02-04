@@ -11,14 +11,6 @@ const CONFIG: readonly Config[] = defineConfig(
     complexity: ['src/handle-metric.ts'],
     'no-await-in-loop': ['src/utils/map-readable-stream-to-string.ts'],
   }),
-
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    rules: {
-      // The `queries` function uses numbers as a generic.
-      'no-magic-numbers': 'off',
-    },
-  },
 );
 
 export default CONFIG;

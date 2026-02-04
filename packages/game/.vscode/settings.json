@@ -5,14 +5,14 @@
   "files.watcherExclude": {
     ".cache/": true,
     ".tests/": true,
-    "*.tsbuildinfo": true,
+    "_site/": true,
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   },
   "search.exclude": {
     ".cache/": true,
     ".tests/": true,
-    "*.tsbuildinfo": true,
+    "_site/": true,
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   }

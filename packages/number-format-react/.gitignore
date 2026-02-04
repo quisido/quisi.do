@@ -2,7 +2,5 @@
 /.tests/
 /dist/
 /node_modules
-/*.cpuprofile
 /*.iml
-/*.tsbuildinfo
 /*-*.*.*.tgz

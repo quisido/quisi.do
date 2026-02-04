@@ -4,11 +4,11 @@
   "CrawlArchives": false,
   "DisableParallel": false,
   "IgnoreDefaultRules": false,
-  "IgnoreRuleIds": ["DS162092"],
+  "IgnoreRuleIds": [],
   "OutputFile": "./.tests/devskim.sarif",
   "OutputFileFormat": "sarif",
   "Path": "./",
   "RespectGitIgnore": true,
-  "Severities": ["BestPractice","Critical","Important","ManualReview","Moderate"],
+  "Severities": ["BestPractice", "Critical", "Important", "ManualReview", "Moderate"],
   "SkipExcerpts": true
 }
