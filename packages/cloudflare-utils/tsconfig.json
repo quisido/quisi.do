@@ -6,7 +6,7 @@
     "rootDir": ".",
     "types": [],
   },
-  "exclude": [".cache/", ".tests/", ".vitest/", "coverage/", "dist/"],
+  "exclude": [".cache/", ".tests/", "dist/"],
   "extends": "../../tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx"],
 }

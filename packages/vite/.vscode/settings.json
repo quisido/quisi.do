@@ -1,14 +1,14 @@
 {
+  "files.associations": {
+    "hintrc.*.json": "jsonc"
+  },
   "files.exclude": {
-    "vitest.config.ts.timestamp-*-*.mjs": true,
+    "vitest.config.ts.timestamp-*-*.mjs": true
   },
   "files.watcherExclude": {
-    ".eslintcache": true,
-    "*.tsbuildinfo": true,
-    "analyze/": true,
-    "certificates/": true,
-    "coverage/": true,
-    "dist/": true,
+    ".cache/": true,
+    ".tests/": true,
+    "_site/": true,
     "lighthouse.config.cjs": true,
     "lighthouse.config.js": true,
     "lighthouse.report.html": true,
@@ -17,16 +17,13 @@
     "lighthouse-0.trace.json": true,
     "node_modules/": true,
     "nyc.config.cjs": true,
-    "vitest.config.ts.timestamp-*-*.mjs": true,
+    "vitest.config.ts.timestamp-*-*.mjs": true
   },
   "scss.validate": false,
   "search.exclude": {
-    ".eslintcache": true,
-    "*.tsbuildinfo": true,
-    "analyze/": true,
-    "certificates/": true,
-    "coverage/": true,
-    "dist/": true,
+    ".cache/": true,
+    ".tests/": true,
+    "_site": true,
     "lighthouse.config.cjs": true,
     "lighthouse.config.js": true,
     "lighthouse.report.html": true,
@@ -35,7 +32,7 @@
     "lighthouse-0.trace.json": true,
     "node_modules/": true,
     "nyc.config.cjs": true,
-    "vitest.config.ts.timestamp-*-*.mjs": true,
+    "vitest.config.ts.timestamp-*-*.mjs": true
   },
-  "stylelint.validate": ["css", "scss"],
+  "stylelint.validate": ["css", "scss"]
 }

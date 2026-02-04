@@ -1,21 +1,32 @@
-# yaml-language-server: $schema=https://www.schemastore.org/github-action.json
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
 name: Setup
 description: Sets up Node and installs dependencies
+
+inputs:
+  download-build:
+    default: 'true'
+    description: Whether to download the build artifact
+    required: false
 
 runs:
   using: composite
   steps:
     - name: Setup Node
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         cache: npm
         cache-dependency-path: package-lock.json
         check-latest: true
         node-version-file: .nvmrc
+    - name: Download build
+      if: ${{ inputs.download-build == 'true' }}
+      uses: actions/download-artifact@v7
+      with:
+        name: build
     - name: Install dependencies
-      # Build `quisi` then reinstall so that it's a symlinked Node module.
+      shell: bash
+      # Build `quisi` then re-install to symlink the dependency.
       run: >
         npm ci;
         npm run build --workspace=packages/quisi;
         npm ci;
-      shell: bash

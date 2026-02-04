@@ -1,8 +1,5 @@
 /.cache/
 /.tests/
-/.vitest/
 /dist/
-/hint-report/
+/node_modules/
 /.env.local
-/.eslintcache
-/*.tsbuildinfo

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
+name: Wrangler
+description: Deploys the repository's services
+
+inputs:
+  api-token:
+    description: The Cloudflare API token to use for deployment
+    required: true
+  workspace:
+    description: The workspace to deploy
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Setup
+      uses: ./.github/actions/setup
+    - name: Deploy
+      run: ./.github/actions/wrangler-deploy/wrangler-deploy.sh
+      shell: bash
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ inputs.api-token }}
+        WORKSPACE: ${{ inputs.workspace }}

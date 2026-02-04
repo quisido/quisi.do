@@ -1,0 +1,116 @@
+name: Continuous integration
+
+concurrency:
+  cancel-in-progress: true
+  group: pull-request-${{ github.event.pull_request.number }}
+
+jobs:
+  # Stage 1: build, bun, dependency-review, devskim
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    services:
+      datadog-agent: &datadog-agent
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_ENV: ci
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Build
+        uses: ./.github/actions/build
+        with:
+          environment: staging
+
+  bun:
+    name: bun
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Run
+        uses: ./.github/actions/bun
+
+  dependency-review:
+    name: Dependency review
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Review
+        uses: actions/dependency-review-action@v4
+
+  devskim:
+    name: DevSkim
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Scan
+        uses: ./.github/actions/devskim
+
+  # Stage 2: lighthouse, test, webhint
+  lighthouse:
+    name: Lighthouse
+    needs: build
+    runs-on: ubuntu-latest
+    services:
+      datadog-agent: *datadog-agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Lighthouse
+        uses: ./.github/actions/lighthouse-ci
+
+  test:
+    name: Test
+    needs: build
+    runs-on: ubuntu-latest
+    services:
+      datadog-agent: *datadog-agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Test
+        uses: ./.github/actions/test
+
+  webhint:
+    name: Webhint
+    needs: build
+    runs-on: ubuntu-latest
+    services:
+      datadog-agent: *datadog-agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Audit
+        uses: ./.github/actions/webhint-ci
+
+  # Stage 3: sentry-prevent
+  sentry-prevent:
+    name: Sentry Prevent
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Scan
+        uses: ./.github/actions/sentry-prevent
+
+on:
+  pull_request:

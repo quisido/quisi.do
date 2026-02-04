@@ -1,0 +1,5 @@
+{
+  // "$schema": "https://raw.githubusercontent.com/webhintio/hint/main/packages/hint/src/lib/config/config-schema.json",
+
+  "extends": ["../../.hintrc"]
+}

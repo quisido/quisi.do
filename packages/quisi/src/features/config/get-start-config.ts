@@ -7,7 +7,7 @@ import validateStartConfig from './validate-start-config.js';
 export default async function getStartConfig(): Promise<StartConfig> {
   const config: object = await getConfig();
   if (!('START' in config)) {
-    debug('No start configuration found.');
+    // debug('No start configuration found.');
     return {};
   }
 

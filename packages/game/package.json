@@ -9,6 +9,7 @@
     "build": "exit 0",
     "start": "vite",
     "test": "exit 0",
+    "clean": "rimraf .cache .tests node_modules",
     "eslint": "quisi eslint",
     "serve": "serve dist",
     "tsc": "tsc --skipLibCheck",
@@ -34,6 +35,7 @@
     "react-reconciler": "^0.33.0"
   },
   "devDependencies": {
+    "@hint/connector-puppeteer": "^2.5.25",
     "@hint/formatter-codeframe": "^3.1.36",
     "@hint/formatter-html": "^4.3.17",
     "@hint/formatter-json": "^3.1.36",
@@ -46,7 +48,6 @@
     "@hint/hint-no-broken-links": "^4.2.27",
     "@hint/hint-no-p3p": "^3.3.27",
     "@hint/hint-performance-budget": "^2.4.27",
-    "@hint/parser-javascript": "^3.1.25",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/auto-instrumentations-web": "^0.53.0",
     "@opentelemetry/context-zone": "^2.2.0",
@@ -75,6 +76,7 @@
     "jsdom": "^27.1.0",
     "lighthouse": "^13.0.1",
     "prettier": "^3.6.2",
+    "rimraf": "^6.1.0",
     "serve": "^14.2.5",
     "typescript": "^5.9.3",
     "vite": "^7.2.1",

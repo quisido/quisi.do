@@ -1,6 +1,15 @@
 {
-  "file-format": "sarif",
-  "ignore-rule-ids": "DS162092",
-  "output-file": "devskim-results.sarif",
-  "skip-git-ignored-files": true
+  "$schema": "../schemas/devskim.json",
+  "Confidences": ["High", "Medium"],
+  "CrawlArchives": false,
+  "DisableParallel": false,
+  "Globs": [".cache/", ".git/", ".tests/", ".wrangler/", "dist/", "node_modules/"],
+  "IgnoreDefaultRules": false,
+  "IgnoreRuleIds": [],
+  "OutputFile": ".tests/devskim.sarif",
+  "OutputFileFormat": "sarif",
+  "Path": "./",
+  "RespectGitIgnore": true,
+  "Severities": ["BestPractice", "Critical", "Important", "ManualReview", "Moderate"],
+  "SkipExcerpts": true
 }

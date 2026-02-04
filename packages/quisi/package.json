@@ -2,9 +2,6 @@
   "name": "quisi",
   "version": "0.0.1",
   "author": "quisi.do <quisi@quisi.do>",
-  "bin": {
-    "quisi": "./dist/quisi.js"
-  },
   "description": "all-in-one",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/quisi#readme",
   "license": "MIT",
@@ -18,6 +15,9 @@
     "clean": "rm -rf .cache .tests dist node_modules",
     "eslint": "quisi eslint",
     "publint": "quisi publint"
+  },
+  "bin": {
+    "quisi": "./dist/quisi.js"
   },
   "bugs": {
     "email": "quisi@quisi.do",

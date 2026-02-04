@@ -12,9 +12,7 @@
   "exclude": [
     "./.cache/",
     "./.tests/",
-    "./.vitest/",
     "./.vscode/",
-    "./coverage/",
     "./src/**/*.test.ts",
     "./src/**/*.test.tsx",
     "./src/*.test.ts",

@@ -9,12 +9,6 @@ const CONFIG: readonly Config[] = defineConfig(
 
   ...disableRulesForFiles({
     'capitalized-comments': ['src/error-code.ts'],
-
-    'no-magic-numbers': [
-      'src/analytics-response-code.ts',
-      'src/error-code.ts',
-      'src/whoami-response-code.ts',
-    ],
   }),
 );
 

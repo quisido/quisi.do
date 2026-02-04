@@ -1,0 +1,265 @@
+name: Continuous deployment
+
+concurrency:
+  cancel-in-progress: false
+  group: main
+
+jobs:
+  # Stage 1: build, devskim
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    services:
+      datadog-agent: &datadog-agent
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_ENV: ci
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Build
+        uses: ./.github/actions/build
+        with:
+          environment: production
+
+  devskim:
+    name: DevSkim
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Scan
+        uses: ./.github/actions/devskim
+
+  # Stage 2: datadog-sourcemaps, lighthouse-ci, sentry-release, test, webhint-ci
+  datadog-sourcemaps:
+    name: Datadog sourcemaps
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Upload
+        uses: ./.github/actions/datadog-sourcemaps
+        with:
+          datadog-api-key: ${{ secrets.DATADOG_API_KEY }}
+
+  lighthouse-ci:
+    name: Lighthouse (continuous integration)
+    needs: build
+    runs-on: ubuntu-latest
+    services:
+      datadog-agent: *datadog-agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Lighthouse
+        uses: ./.github/actions/lighthouse-ci
+
+  sentry-release:
+    name: Sentry release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Release
+        uses: ./.github/actions/sentry-release
+        with:
+          auth-token: ${{ secrets.SENTRY_AUTH_TOKEN }}
+
+  test:
+    name: Test
+    needs: build
+    runs-on: ubuntu-latest
+    services:
+      datadog-agent: *datadog-agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Test
+        uses: ./.github/actions/test
+
+  webhint-ci:
+    name: Webhint (continuous integration)
+    needs: build
+    runs-on: ubuntu-latest
+    services:
+      datadog-agent: *datadog-agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Audit
+        uses: ./.github/actions/webhint-ci
+
+  # Stage 3: github-pages, npm-publish, sentry-prevent
+  github-pages:
+    name: GitHub Pages
+    runs-on: ubuntu-latest
+    needs:
+      - lighthouse-ci
+      - test
+      - webhint-ci
+    services:
+      datadog-agent: *datadog-agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Download
+        uses: actions/download-artifact@v7
+        with:
+          name: build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          clean: true
+          folder: packages/vite/_site/
+          single-commit: true
+
+  npm-publish:
+    name: NPM
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - test
+    permissions:
+      id-token: write
+    services:
+      datadog-agent: *datadog-agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Publish
+        uses: ./.github/actions/npm-publish
+        with:
+          auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
+
+  sentry-prevent:
+    name: Sentry Prevent
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Scan
+        uses: ./.github/actions/sentry-prevent
+
+  # Stage 4: cloudflare-purge, github-packages, wrangler-deploy
+  cloudflare-purge:
+    name: Cloudflare
+    needs: github-pages
+    runs-on: ubuntu-latest
+    services:
+      datadog-agent: *datadog-agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Purge cache
+        uses: ./.github/actions/cloudflare-purge
+        with:
+          api-token: ${{ secrets.CLOUDFLARE_PURGE_API_TOKEN }}
+          zone-id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+
+  github-packages:
+    name: GitHub Packages
+    needs: npm-publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
+    services:
+      datadog-agent: *datadog-agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Publish
+        uses: ./.github/actions/github-packages
+        with:
+          auth-token: ${{ secrets.GITHUB_TOKEN }}
+
+  wrangler-deploy:
+    name: Wrangler deploy (${{ matrix.service }})
+    runs-on: ubuntu-latest
+    needs:
+      - lighthouse-ci
+      - npm-publish
+      - webhint-ci
+    services:
+      datadog-agent: *datadog-agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Deploy
+        uses: ./.github/actions/wrangler-deploy
+        with:
+          api-token: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
+          workspace: ${{ matrix.workspace }}
+    strategy:
+      matrix:
+        include:
+          - service: Authentication
+            workspace: authn
+          - service: Content Security Policy
+            workspace: csp
+          - service: Dashboard
+            workspace: dashboard
+
+  # Stage 5: lighthouse-production, webhint-production
+  lighthouse-production:
+    name: Lighthouse (production)
+    runs-on: ubuntu-latest
+    needs:
+      - cloudflare-purge
+      - wrangler-deploy
+    services:
+      datadog-agent: *datadog-agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup
+        uses: ./.github/actions/lighthouse-production
+
+  webhint-production:
+    name: Webhint (production)
+    runs-on: ubuntu-latest
+    needs:
+      - cloudflare-purge
+      - wrangler-deploy
+    services:
+      datadog-agent: *datadog-agent
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Run
+        run: npx hint --config hintrc.production.json https://quisi.do/
+        working-directory: packages/vite
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: webhint-production
+          if-no-files-found: error
+          path: packages/vite/.tests/webhint
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:

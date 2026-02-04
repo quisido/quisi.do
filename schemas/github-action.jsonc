@@ -1,0 +1,159 @@
+/**
+ *   This entire file exists just to change
+ * `/definitions/runs-composite/properties/steps/items/properties/with` to
+ * support `additionalProperties: true`.
+ */
+{
+  "$comment": "https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions",
+  "$id": "@quisido/quisi.do/github-action.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "definitions": {
+    "expressionSyntax": {
+      "$ref": "https://www.schemastore.org/github-action.json#/definitions/expressionSyntax"
+    },
+    "outputs": {
+      "$ref": "https://www.schemastore.org/github-action.json#/definitions/outputs"
+    },
+    "outputs-composite": {
+      "$ref": "https://www.schemastore.org/github-action.json#/definitions/outputs-composite"
+    },
+    "post-if": {
+      "$ref": "https://www.schemastore.org/github-action.json#/definitions/post-if"
+    },
+    "pre-if": {
+      "$ref": "https://www.schemastore.org/github-action.json#/definitions/pre-if"
+    },
+    "runs-composite": {
+      "$comment": "https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions",
+      "additionalProperties": false,
+      "description": "Configures the path to the composite action, and the application used to execute the code.",
+      "properties": {
+        "steps": {
+          "$comment": "https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runssteps",
+          "description": "The run steps that you plan to run in this action.",
+          "items": {
+            "additionalProperties": false,
+            "oneOf": [
+              { "required": ["run", "shell"] },
+              { "required": ["uses"] }
+            ],
+            "properties": {
+              "continue-on-error": {
+                "$ref": "https://www.schemastore.org/github-action.json#/definitions/runs-composite/properties/steps/items/properties/continue-on-error"
+              },
+              "env": {
+                "$ref": "https://www.schemastore.org/github-action.json#/definitions/runs-composite/properties/steps/items/properties/env"
+              },
+              "id": {
+                "$ref": "https://www.schemastore.org/github-action.json#/definitions/runs-composite/properties/steps/items/properties/id"
+              },
+              "if": {
+                "$ref": "https://www.schemastore.org/github-action.json#/definitions/runs-composite/properties/steps/items/properties/if"
+              },
+              "name": {
+                "$ref": "https://www.schemastore.org/github-action.json#/definitions/runs-composite/properties/steps/items/properties/name"
+              },
+              "run": {
+                "$ref": "https://www.schemastore.org/github-action.json#/definitions/runs-composite/properties/steps/items/properties/run"
+              },
+              "shell": {
+                "$ref": "https://www.schemastore.org/github-action.json#/definitions/runs-composite/properties/steps/items/properties/shell"
+              },
+              "uses": {
+                "$ref": "https://www.schemastore.org/github-action.json#/definitions/runs-composite/properties/steps/items/properties/uses"
+              },
+              "with": {
+                "$comment": "https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runsstepswith",
+
+                // This entire file exists just to change this one property.
+                "additionalProperties": true,
+                "description": "A map of the input parameters defined by the action. Each input parameter is a key/value pair. Input parameters are set as environment variables. The variable is prefixed with INPUT_ and converted to upper case.",
+                "type": "object"
+              },
+              "working-directory": {
+                "$ref": "https://www.schemastore.org/github-action.json#/definitions/runs-composite/properties/steps/items/properties/working-directory"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "using": {
+          "$ref": "https://www.schemastore.org/github-action.json#/definitions/runs-composite/properties/using"
+        }
+      },
+      "required": ["using", "steps"],
+      "type": "object"
+    },
+    "runs-docker": {
+      "$ref": "https://www.schemastore.org/github-action.json#/definitions/runs-docker"
+    },
+    "runs-javascript": {
+      "$ref": "https://www.schemastore.org/github-action.json#/definitions/runs-javascript"
+    },
+    "stringContainingExpressionSyntax": {
+      "$ref": "https://www.schemastore.org/github-action.json#/definitions/stringContainingExpressionSyntax"
+    }
+  },
+  "else": {
+    "properties": {
+      "outputs": {
+        "$ref": "#/definitions/outputs"
+      }
+    }
+  },
+  "if": {
+    "properties": {
+      "runs": {
+        "properties": {
+          "using": {
+            "const": "composite"
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "author": {
+      "$ref": "https://www.schemastore.org/github-action.json#/properties/author"
+    },
+    "branding": {
+      "$ref": "https://www.schemastore.org/github-action.json#/properties/branding"
+    },
+    "description": {
+      "$ref": "https://www.schemastore.org/github-action.json#/properties/description"
+    },
+    "inputs": {
+      "$ref": "https://www.schemastore.org/github-action.json#/properties/inputs"
+    },
+    "name": {
+      "$ref": "https://www.schemastore.org/github-action.json#/properties/name"
+    },
+    "outputs": {
+      "$ref": "https://www.schemastore.org/github-action.json#/properties/outputs"
+    },
+    "runs": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/runs-javascript"
+        },
+        {
+          "$ref": "#/definitions/runs-composite"
+        },
+        {
+          "$ref": "#/definitions/runs-docker"
+        }
+      ]
+    }
+  },
+  "required": ["name", "description", "runs"],
+  "then": {
+    "properties": {
+      "outputs": {
+        "$ref": "#/definitions/outputs-composite"
+      }
+    }
+  },
+  "type": "object"
+}

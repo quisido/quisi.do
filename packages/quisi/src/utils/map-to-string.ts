@@ -1,4 +1,3 @@
-// eslint-disable-next-line max-statements
 export default function mapToString(value: unknown): string {
   if (typeof value === 'string') {
     return value;

@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "declarationDir": null,
+    "lib": ["ESNext"],
+    "noEmit": true,
+    "rootDir": ".",
+    "types": []
+  },
+  "exclude": [".cache/", ".tests/", "dist/"],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*.ts"]
+}

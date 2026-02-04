@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
+name: Lighthouse
+description: Runs Lighthouse audits
+
+runs:
+  using: composite
+  steps:
+    - name: Setup
+      uses: ./.github/actions/setup
+    - name: Audit
+      run: ./scripts/lighthouse-production.sh
+      shell: bash
+      working-directory: packages/vite
+    - name: Validate
+      run: node ./scripts/postlighthouse/index.js
+      shell: bash
+      working-directory: packages/vite
+    - name: Upload
+      if: always()
+      uses: actions/upload-artifact@v6
+      with:
+        name: lighthouse-production
+        if-no-files-found: error
+        path: |
+          packages/vite/lighthouse.report.*
+          packages/vite/lighthouse-*.devtoolslog.json
+          packages/vite/lighthouse-*.trace.json

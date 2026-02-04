@@ -63,18 +63,6 @@ const CONFIG: readonly Config[] = defineConfig(
       'src/utils/map-oscpu-to-name.ts',
     ],
     'func-style': ['src/**/*.tsx'],
-    'id-length': [
-      'src/features/clarity.ts',
-      'src/modules/react-intercom/utils/create-intercom.ts',
-      'src/types/clarity-api.ts',
-    ],
-    'no-magic-numbers': [
-      'src/constants/*.ts',
-      'src/modules/quisi/heading-level.ts',
-      'src/modules/react-google-charts/chart-options.ts',
-      'src/types/log-rocket.ts',
-      'src/types/sentry-fullstory-client.ts',
-    ],
     'no-undefined': [
       'src/hooks/use-emit/use-emit.ts',
       'src/hooks/use-google-analytics.ts',

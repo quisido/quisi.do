@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
+name: DevSkim
+description: Runs DevSkim security scans on the repository
+
+runs:
+  using: composite
+  steps:
+    - name: Scan
+      uses: microsoft/DevSkim-Action@v1
+      with:
+        options-json: config/devskim.json
+        extra-options: >
+          --console-verbosity Information
+          --log-file-level Warning
+          --log-file-path ".tests/devskim.log"
+          --skip-git-ignored-files
+    - name: Upload
+      uses: github/codeql-action/upload-sarif@v4
+      with:
+        sarif_file: .tests/devskim.sarif
+        wait-for-processing: true

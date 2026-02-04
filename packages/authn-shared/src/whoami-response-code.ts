@@ -1,3 +1,5 @@
+/* eslint-disable no-magic-numbers */
+
 export enum WhoAmIResponseCode {
   Cached = 2,
   InvalidAuthnId = 3,

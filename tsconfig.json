@@ -112,7 +112,6 @@
     ".wrangler/",
     ".yarn/",
     "build/",
-    "coverage/",
     "dist/",
     "node_modules/",
     "packages/",
