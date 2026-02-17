@@ -1,90 +1,76 @@
-/// <reference types="bun-types" />
-import { mapToString } from 'fmrs';
-import ollama, {
-  type AbortableAsyncIterator,
-  type ChatResponse,
-  type Message,
-} from 'ollama';
+import parseRequest from './parse-request.js';
+import runAiTask from './run-ai-task.js';
+import type Task from './task.js';
+import VitestTask from './vitest-task.js';
 
-interface Options {
-  readonly onChunk: (chunk: string) => void;
+interface Env {
+  readonly ACCESS_TOKEN: string;
+  readonly AI: Ai;
+  readonly SENTRY_AUTH_TOKEN: string;
 }
 
-enum Model {
-  DeepSeek_R1_14b = 'deepseek-r1:14b',
-  Qwen3_14b = 'qwen3:14b',
-}
-
-enum Role {
-  Assistant = 'assistant',
-  // Error = 'error',
-  /**
-   *   This role is used for system-level instructions or messages that guide
-   * the behavior of the assistant. For example, you might use a "system"
-   * message to set the tone, define constraints, or provide context for the
-   * conversation.
-   */
-  System = 'system',
-  // ToolCall = 'tool_call',
-  // ToolResponse = 'tool_response',
-  User = 'user',
-}
-
-const MAX_ATTEMPTS = 3;
-
-export default async function chat(
-  model: Model,
-  prompt: string,
-  { onChunk }: Options,
-): Promise<Message> {
-  const messages: Message[] = [{ content: prompt, role: Role.User }];
-
-  const chatImpl = async (attempt: number): Promise<Message> => {
-    try {
-      const responseItr: AbortableAsyncIterator<ChatResponse> =
-        await ollama.chat({
-          messages,
-          model,
-          stream: true,
-          think: true,
-        });
-
-      let lastMessage: Message = { content: '', role: Role.Assistant };
-      for await (const { message } of responseItr) {
-        lastMessage = message;
-        onChunk(message.content);
-      }
-
-      messages.push(lastMessage);
-
-      return lastMessage;
-    } catch (err: unknown) {
-      messages.push({
-        content: `The Ollama \`chat\` API threw an error: ${mapToString(err)}.`,
-        role: Role.System,
+const handler: ExportedHandler<Env> = {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    // 401 Unauthorized
+    const authHeader: string = request.headers.get('Authorization') ?? '';
+    if (authHeader !== `Bearer ${env.ACCESS_TOKEN}`) {
+      return new Response('Unauthorized: Invalid access token', {
+        status: 401,
       });
-
-      if (attempt >= MAX_ATTEMPTS) {
-        throw new Error(
-          'Failed to get response from Ollama after 3 attempts.',
-          { cause: err },
-        );
-      }
-
-      return chatImpl(attempt + 1);
     }
-  };
 
-  return chatImpl(1);
-}
+    // 405 Method Not Allowed
+    if (request.method !== 'POST') {
+      return new Response('Method Not Allowed', { status: 405 });
+    }
 
-const [, , prompt] = process.argv;
-if (prompt === undefined) {
-  throw new Error('No prompt provided.');
-}
+    const { vitest } = await parseRequest(request);
 
-await chat(Model.Qwen3_14b, prompt, {
-  onChunk(chunk: string): void {
-    globalThis.console.log(chunk);
+    const tasks: Task[] = [];
+    if (typeof vitest !== 'undefined') {
+      tasks.push(new VitestTask(vitest));
+    }
+
+    if (tasks.length === 0) {
+      return new Response(
+        JSON.stringify({ error: 'No valid test report provided' }),
+        { status: 400 },
+      );
+    }
+
+    const mapTaskToRun = (task: Task): Promise<string> =>
+      runAiTask(env.AI, task);
+
+    try {
+      const taskResults: PromiseSettledResult<string>[] =
+        await Promise.allSettled(tasks.map(mapTaskToRun));
+
+      return new Response(
+        taskResults
+          // ESLint is wrong here when switch-case has no fallthrough.
+          // eslint-disable-next-line array-callback-return
+          .map((result: PromiseSettledResult<string>): string => {
+            switch (result.status) {
+              case 'fulfilled': {
+                return result.value;
+              }
+
+              case 'rejected': {
+                return JSON.stringify({
+                  error: (result.reason as Error).message,
+                });
+              }
+            }
+          })
+          .join('\n'),
+        { status: 200 },
+      );
+    } catch (err: unknown) {
+      return new Response(JSON.stringify({ error: (err as Error).message }), {
+        status: 500,
+      });
+    }
   },
-});
+};
+
+export default handler;

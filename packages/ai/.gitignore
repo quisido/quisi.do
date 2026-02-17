@@ -1,3 +1,8 @@
 /.cache/
 /.tests/
+/.wrangler/
 /node_modules/
+/.dev.vars*
+/.env*
+!/.dev.vars.example
+!/.env.example

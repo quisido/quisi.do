@@ -7,14 +7,15 @@
     "allowUnusedLabels": false,
     "alwaysStrict": true,
     "checkJs": false,
-    "declaration": false,
+    "declaration": true,
+    "declarationDir": "dist",
     "declarationMap": false,
     "downlevelIteration": false,
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "incremental": false,
+    "incremental": true,
     "inlineSourceMap": false,
     "isolatedModules": true,
     "lib": ["ESNext"],
@@ -52,5 +53,8 @@
     "types": [],
     "useUnknownInCatchVariables": true,
     "verbatimModuleSyntax": true
-  }
+  },
+  "exclude": [".cache/", ".tests/", ".wrangler/", "dist/"],
+  "extends": "quisi/tsconfig.json",
+  "include": ["**/*.ts"]
 }

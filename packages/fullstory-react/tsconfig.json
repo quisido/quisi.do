@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "declarationDir": null,
+    "declarationDir": "dist",
     "exactOptionalPropertyTypes": false, // import('@fullstory/snippet').ApiV2
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],
@@ -8,6 +8,6 @@
     "rootDir": ".",
   },
   "exclude": [".cache/", ".tests/", "dist/", "node_modules/"],
-  "extends": "../../tsconfig.json",
+  "extends": "quisi/tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx"],
 }

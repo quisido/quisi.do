@@ -19,7 +19,7 @@ export default function testFilesWatcherExclude(settings: object): void {
       // @ts-expect-error: TypeScript won't allow variable indices, even if you
       // check that they exist first.
       filesWatcherExclude[file] ?? filesWatcherExclude[`**/${file}`];
-    if (typeof value !== 'boolean' || !value) {
+    if (value !== true) {
       throw new Error(
         `Expected .vscode/settings.json "files.watcherExclude" value for "${file}" to be true.`,
       );

@@ -1,15 +1,6 @@
-import configs, {
-  defineConfig,
-  disableRulesForFiles,
-} from '@quisido/eslint-config';
-import reactCompiler from 'eslint-plugin-react-compiler';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import { type Config } from 'eslint/config';
+import { defineESLintConfig, type ESLintConfig } from 'quisi';
 
-const CONFIG: readonly Config[] = defineConfig(
-  ...configs,
-
+const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
   // Plugins: react-compiler, react-hooks, react-refresh
   {
     files: ['**/*.ts', '**/*.tsx'],
@@ -28,18 +19,6 @@ const CONFIG: readonly Config[] = defineConfig(
       'react-refresh/only-export-components': 'error',
     },
   },
-
-  ...disableRulesForFiles({
-    '@typescript-eslint/consistent-type-assertions': [
-      'src/utils/capitalize.ts',
-      'src/utils/map-v2-operation-handlers-to-api.ts',
-    ],
-    'func-style': [
-      'src/**/*.tsx',
-      'src/utils/map-v2-operation-handlers-to-api.ts',
-    ],
-    'new-cap': ['src/utils/map-v2-operation-handlers-to-api.ts'],
-  }),
 );
 
 export default CONFIG;

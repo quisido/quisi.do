@@ -1,26 +1,5 @@
-import DEFAULT_CONFIG, {
-  COVERAGE_OPTIONS,
-  defineConfig,
-  INLINE_CONFIG,
-  THRESHOLDS,
-  type UserConfig,
-} from '@quisido/vitest-config';
+import { defineVitestConfig, type VitestConfig } from 'quisi';
 
-const CONFIG: UserConfig = defineConfig({
-  ...DEFAULT_CONFIG,
-  test: {
-    ...INLINE_CONFIG,
-    coverage: {
-      ...COVERAGE_OPTIONS,
-      thresholds: {
-        ...THRESHOLDS,
-        branches: 6,
-        functions: 16,
-        lines: 51,
-        statements: 50,
-      },
-    },
-  },
-});
+const CONFIG: VitestConfig = await defineVitestConfig({});
 
 export default CONFIG;

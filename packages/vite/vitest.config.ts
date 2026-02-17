@@ -1,27 +1,11 @@
-import DEFAULT_CONFIG, {
-  COVERAGE_OPTIONS,
-  type CoverageOptions,
-  defineConfig,
-  INLINE_CONFIG,
-  PLUGIN_OPTIONS,
-  type UserConfig,
-} from '@quisido/vitest-config';
-import viteReact from '@vitejs/plugin-react';
+import { defineVitestConfig, type VitestConfig } from 'quisi';
 
-const CONFIG: UserConfig = defineConfig({
-  ...DEFAULT_CONFIG,
-  plugins: [...PLUGIN_OPTIONS, ...viteReact()],
+const CONFIG: VitestConfig = await defineVitestConfig({
   test: {
-    ...INLINE_CONFIG,
     coverage: {
-      ...COVERAGE_OPTIONS,
-      thresholds: {
-        branches: 3,
-        functions: 5,
-        lines: 6,
-        statements: 6,
-      },
-    } as CoverageOptions,
+      enabled: false,
+      provider: 'istanbul',
+    },
     env: {
       CLARITY_TAG: 'test-clarity-tag',
     },

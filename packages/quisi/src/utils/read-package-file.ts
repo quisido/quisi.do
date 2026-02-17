@@ -1,16 +1,17 @@
 import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import joinCwdPath from './join-path.js';
 
 export default async function readPackageFile(
   path: string,
 ): Promise<string | null> {
-  const cwd: string = process.cwd();
   try {
-    return await readFile(join(cwd, path), 'utf8');
+    return await readFile(joinCwdPath(path), 'utf8');
   } catch (err: unknown) {
+    // If the file doesn't exist, simply return null.
     if (err instanceof Error && 'code' in err && err.code === 'ENOENT') {
       return null;
     }
+
     throw err;
   }
 }

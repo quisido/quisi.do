@@ -1,23 +1,7 @@
-import configs, {
-  defineConfig,
-  disableRulesForFiles,
-} from '@quisido/eslint-config';
-import { type Config } from 'eslint/config';
+import { defineESLintConfig, type ESLintConfig } from 'quisi';
 
-const FLAT_CONFIG: Config[] = defineConfig(
-  ...configs,
+const CONFIG: readonly ESLintConfig[] = defineESLintConfig({
+  ignores: ['packages/**'],
+});
 
-  {
-    ignores: ['packages/**'],
-  },
-
-  ...disableRulesForFiles({
-    '@typescript-eslint/only-throw-error': [
-      'scripts/utils/npm-exec-workspace.ts',
-    ],
-    'no-plusplus': ['scripts/utils/retry.ts'],
-    'no-useless-assignment': ['scripts/utils/retry.ts'],
-  }),
-);
-
-export default FLAT_CONFIG;
+export default CONFIG;

@@ -2,7 +2,9 @@
   "compilerOptions": {
     "module": "NodeNext",
     "moduleResolution": "nodenext",
-    "noEmit": false
+    "noEmit": false,
+    "outDir": "dist",
+    "skipLibCheck": true
   },
   "exclude": [],
   "extends": "./tsconfig.json",

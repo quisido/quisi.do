@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "declarationDir": null,
-    "lib": ["ESNext"],
+    "declarationDir": "dist",
     "noEmit": true,
     "rootDir": "."
   },
   "exclude": [".cache/", ".tests/", "dist/"],
-  "extends": "../../tsconfig.json",
+  "extends": "quisi/tsconfig.json",
   "include": ["**/*.ts"]
 }

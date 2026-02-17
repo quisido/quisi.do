@@ -1,17 +1,5 @@
-import configs, {
-  defineConfig,
-  disableRulesForFiles,
-} from '@quisido/eslint-config';
-import { type Config } from 'eslint/config';
+import { defineESLintConfig, type ESLintConfig } from 'quisi';
 
-const CONFIG: readonly Config[] = defineConfig(
-  ...configs,
-
-  ...disableRulesForFiles({
-    '@typescript-eslint/unbound-method': ['src/test-exported-handler.ts'],
-    'func-style': ['src/test-exported-handler.test.ts'],
-    'max-classes-per-file': ['src/test-exported-handler.test.ts'],
-  }),
-);
+const CONFIG: readonly ESLintConfig[] = defineESLintConfig({});
 
 export default CONFIG;

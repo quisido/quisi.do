@@ -28,7 +28,7 @@
     "quisi": "npm start --workspace=packages/quisi",
     "react-datadog": "npm start --workspace=packages/react-datadog",
     "test:workspaces": "node ./dist/scripts/test.js",
-    "tsc:build": "tsc --outDir dist --project tsconfig.build.json --skipLibCheck",
+    "tsc:build": "tsc --project tsconfig.build.json",
     "update": "node ./dist/scripts/update.js",
     "vite": "npm start --workspace=packages/vite",
     "vitest": "vitest run",
@@ -78,21 +78,17 @@
     "@hint/parser-typescript-config": "^2.4.31",
     "@hint/parser-webpack-config": "^2.1.42",
     "@hint/utils-types": "^1.2.1",
-    "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@quisido/eslint-config": "^1.1.11",
-    "@quisido/vitest-config": "^1.0.6",
     "@types/eslint": "^9.6.1",
     "@types/node": "^24.10.4",
     "@vitest/ui": "^4.0.6",
     "browserslist": "^4.24.5",
-    "cjs-ts": "^2.0.0",
     "concurrently": "^9.1.2",
     "hint": "^7.1.13",
-    "publint": "^0.3.12",
     "puppeteer-core": "^24.35.0",
+    "quisi": "^0.0.1",
     "rimraf": "^6.1.0",
     "typescript": "^5.8.3",
-    "vitest": "^4.0.6"
+    "vitest": "^4.0.7"
   },
   "overrides": {
     "@hint/connector-puppeteer": {

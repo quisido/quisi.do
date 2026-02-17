@@ -1,4 +1,6 @@
 {
+	"$schema": "../../node_modules/wrangler/config-schema.json",
+
   "analytics_engine_datasets": [
     {
       "binding": "PRIVATE_DATASET",
@@ -79,6 +81,7 @@
   "main": "src/index.ts",
   "name": "quisido-dashboard-dev",
   "observability": {
+    "enabled": true,
     "logs": {
       "enabled": true
     }

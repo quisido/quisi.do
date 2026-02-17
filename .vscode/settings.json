@@ -83,8 +83,8 @@
     "packages/": true
   },
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
-  "javascript.preferences.importModuleSpecifier": "project-relative",
-  "javascript.preferences.importModuleSpecifierEnding": "js",
+  "js.preferences.importModuleSpecifier": "project-relative",
+  "js.preferences.importModuleSpecifierEnding": "js",
   "npm.packageManager": "npm",
   "search.exclude": {
     "**/.attach_pid*": true,
@@ -101,10 +101,11 @@
     "**/package-lock.json": true
   },
   "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
+  "terminal.integrated.shellIntegration.enabled": true,
   "testExplorer.useNativeTesting": true,
+  "ts.preferences.importModuleSpecifier": "project-relative",
+  "ts.preferences.importModuleSpecifierEnding": "js",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.preferences.importModuleSpecifier": "project-relative",
-  "typescript.preferences.importModuleSpecifierEnding": "js",
   "vitest.maximumConfigs": 99,
   "vitest.shellType": "terminal",
   "yaml.keyOrdering": false

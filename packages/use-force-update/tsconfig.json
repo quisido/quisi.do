@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "declarationDir": null,
+    "declarationDir": "dist",
     "jsx": "react-jsxdev",
     "lib": ["DOM", "ESNext"],
     "noEmit": true,
     "rootDir": ".",
   },
   "exclude": [".cache/", ".tests/", "dist/", "node_modules/"],
-  "extends": "../../tsconfig.json",
+  "extends": "quisi/tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx"],
 }

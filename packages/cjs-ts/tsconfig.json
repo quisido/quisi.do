@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext"],
+    "declarationDir": "dist",
     "noEmit": true,
     "rootDir": ".",
     // Necessary for `quisi.config.ts` to export top-level values.
     "verbatimModuleSyntax": false
   },
   "exclude": [".cache/", ".tests/"],
-  "extends": "../../tsconfig.json",
+  "extends": "quisi/tsconfig.json",
   "include": ["**/*", "**/*.json", "**/.*", "**/.*.json"],
 }

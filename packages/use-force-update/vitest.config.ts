@@ -1,13 +1,7 @@
-import DEFAULT_CONFIG, {
-  defineConfig,
-  INLINE_CONFIG,
-  type UserConfig,
-} from '@quisido/vitest-config';
+import { defineVitestConfig, type VitestConfig } from 'quisi';
 
-const CONFIG: UserConfig = defineConfig({
-  ...DEFAULT_CONFIG,
+const CONFIG: VitestConfig = await defineVitestConfig({
   test: {
-    ...INLINE_CONFIG,
     environment: 'jsdom',
   },
 });

@@ -1,15 +1,6 @@
-import configs, {
-  defineConfig,
-  disableRulesForFiles,
-} from '@quisido/eslint-config';
-import reactCompiler from 'eslint-plugin-react-compiler';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import { type Config } from 'eslint/config';
+import { defineESLintConfig, type ESLintConfig } from 'quisi';
 
-const CONFIG: readonly Config[] = defineConfig(
-  ...configs,
-
+const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
   // Plugins: react-compiler, react-hooks, react-refresh
   {
     files: ['**/*.ts', '**/*.tsx'],
@@ -28,11 +19,6 @@ const CONFIG: readonly Config[] = defineConfig(
       'react-refresh/only-export-components': 'error',
     },
   },
-
-  ...disableRulesForFiles({
-    'react-compiler/react-compiler': ['src/hooks/use-shallow-memo.ts'],
-    'react-hooks/exhaustive-deps': ['src/hooks/use-shallow-memo.ts'],
-  }),
 );
 
 export default CONFIG;
