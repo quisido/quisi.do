@@ -21,6 +21,7 @@ export default async function defineVitestInlineConfig({
     environment: 'node',
     exclude: [...EXCLUDE, ...exclude],
     mockReset: true,
+    name: 'Vitest',
     restoreMocks: true,
     ...vitestInlineConfig,
 
