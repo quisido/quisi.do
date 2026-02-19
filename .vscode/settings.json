@@ -70,6 +70,12 @@
   },
   "files.eol": "\n",
   "files.exclude": {
+    ".cache/": true,
+    ".tests/": true,
+    ".wrangler/": true,
+    "CLAUDE.md": true,
+    "debug.log": true,
+    "dist/": true,
     "packages/": true
   },
   "files.watcherExclude": {

@@ -42,17 +42,18 @@ export default function execute(
           return;
         }
 
-        if (stderr === '') {
-          resolve({
-            exitCode: exitCode ?? ERROR_STATUS_CODE,
-            stderr: err.message,
-            stdout,
-          });
-        }
+        /**
+         *   Non-null assertion is acceptable here, because `.split()[0]` always
+         * returns a string.
+         */
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const errMessage: string = err.message
+          .split('Command failed: ')[0]!
+          .trim();
 
         resolve({
           exitCode: exitCode ?? ERROR_STATUS_CODE,
-          stderr: `${stderr}${EOL}${err.message}`,
+          stderr: [stderr, errMessage].join(EOL),
           stdout,
         });
       },

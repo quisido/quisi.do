@@ -1,3 +1,4 @@
+import { EOL } from 'node:os';
 import npx from '../npx/npx.js';
 
 const SUCCESS_STATUS_CODE = 0;
@@ -23,9 +24,20 @@ export default async function npxEslint(
     ...args,
   ];
 
-  const { exitCode, stdout } = await npx(...npxArgs);
+  const { exitCode, stderr, stdout } = await npx(...npxArgs);
 
-  // `eslint` emits errors via stdout.
+  /**
+   *   When the `eslint` command fails, it will emit via stderr, e.g.
+   * Error: The 'jiti' library is required for loading TypeScript configuration
+   * files. Make sure to install it.
+   */
+  if (stderr !== '') {
+    throw new Error(stderr + EOL + stdout, {
+      cause: npxArgs.join(' '),
+    });
+  }
+
+  // When `eslint` encounters linting errors, it logs via stdout.
   if (exitCode !== SUCCESS_STATUS_CODE) {
     throw new Error(stdout, {
       cause: npxArgs.join(' '),

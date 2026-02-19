@@ -1,95 +1,95 @@
 {
   "folders": [
     {
-      "name": "$root",
+      "name": "~",
       "path": "."
     },
     {
-      "name": "quisi.do (vite)",
+      "name": "📱 quisi.do",
       "path": "packages/vite"
     },
     {
-      "name": "AI",
-      "path": "packages/ai"
-    },
-    {
-      "name": "Game",
+      "name": "📱 Untitled Game",
       "path": "packages/game"
     },
     {
-      "name": "Authentication (authn)",
+      "name": "⚙️ AI",
+      "path": "packages/ai"
+    },
+    {
+      "name": "⚙️ Authentication",
       "path": "packages/authn"
     },
     {
-      "name": "Content Security Policy reporting endpoint (csp)",
+      "name": "⚙️ Content Security Policy reporting endpoint",
       "path": "packages/csp"
     },
     {
-      "name": "Dashboard",
+      "name": "⚙️ Dashboard",
       "path": "packages/dashboard"
     },
     {
-      "name": "authn-shared",
+      "name": "📦 authn-shared",
       "path": "packages/authn-shared"
     },
     {
-      "name": "cloudflare-test-utils",
+      "name": "📦 cloudflare-test-utils",
       "path": "packages/cloudflare-test-utils"
     },
     {
-      "name": "cloudflare-utils",
+      "name": "📦 cloudflare-utils",
       "path": "packages/cloudflare-utils"
     },
     {
-      "name": "cjs-ts",
+      "name": "📦 cjs-ts",
       "path": "packages/cjs-ts"
     },
     {
-      "name": "csp-shared",
+      "name": "📦 csp-shared",
       "path": "packages/csp-shared"
     },
     {
-      "name": "fmrs",
+      "name": "📦 fmrs",
       "path": "packages/fmrs"
     },
     {
-      "name": "fullstory-react",
+      "name": "📦 fullstory-react",
       "path": "packages/fullstory-react"
     },
     {
-      "name": "lazy-i18n",
+      "name": "📦 lazy-i18n",
       "path": "packages/lazy-i18n"
     },
     {
-      "name": "number-format-react",
+      "name": "📦 number-format-react",
       "path": "packages/number-format-react"
     },
     {
-      "name": "quisi",
+      "name": "📦 quisi",
       "path": "packages/quisi"
     },
     {
-      "name": "react-datadog",
+      "name": "📦 react-datadog",
       "path": "packages/react-datadog"
     },
     {
-      "name": "sentry-react",
+      "name": "📦 sentry-react",
       "path": "packages/sentry-react"
     },
     {
-      "name": "use-force-update",
+      "name": "📦 use-force-update",
       "path": "packages/use-force-update"
     },
     {
-      "name": "use-shallow-memo",
+      "name": "📦 use-shallow-memo",
       "path": "packages/use-shallow-memo"
     },
     {
-      "name": "worker",
+      "name": "📦 worker",
       "path": "packages/worker"
     },
     {
-      "name": "worker-test",
+      "name": "📦 worker-test",
       "path": "packages/worker-test"
     }
   ],
