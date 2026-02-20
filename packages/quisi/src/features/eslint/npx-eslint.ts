@@ -1,7 +1,8 @@
 import { EOL } from 'node:os';
 import npx from '../npx/npx.js';
+import debug from '../../utils/debug.js';
 
-const MAX_ATTEMPTS = 3;
+const MAX_ATTEMPTS = 5;
 const SUCCESS_STATUS_CODE = 0;
 
 export default async function npxEslint(
@@ -36,9 +37,11 @@ export default async function npxEslint(
      */
     if (exitCode !== SUCCESS_STATUS_CODE) {
       // Sometimes ESLint fails with console output, but succeeds on retry.
+      // e.g. exit code 3221226356, which likely indicates heap corruption.
       const message = [stderr, stdout].join(EOL).trim();
       if (message === '') {
         if (attempt < MAX_ATTEMPTS) {
+          debug(`Retrying after exit code: ${exitCode}`);
           await lint(attempt + 1);
           return;
         }

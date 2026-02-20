@@ -1,3 +1,5 @@
+/* eslint-disable no-magic-numbers */
+
 export enum GetErrorCode {
   InvalidDatabaseProjectRow = 3,
   InvalidIsolateEnvironment = 5,
