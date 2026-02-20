@@ -1,6 +1,7 @@
 import { EOL } from 'node:os';
 import npx from '../npx/npx.js';
 
+const MAX_ATTEMPTS = 3;
 const SUCCESS_STATUS_CODE = 0;
 
 export default async function npxEslint(
@@ -24,23 +25,34 @@ export default async function npxEslint(
     ...args,
   ];
 
-  const { exitCode, stderr, stdout } = await npx(...npxArgs);
+  const lint = async (attempt: number): Promise<void> => {
+    const { exitCode, stderr, stdout } = await npx(...npxArgs);
 
-  /**
-   *   When the `eslint` command fails, it will emit via stderr, e.g.
-   * Error: The 'jiti' library is required for loading TypeScript configuration
-   * files. Make sure to install it.
-   */
-  if (stderr !== '') {
-    throw new Error(stderr + EOL + stdout, {
-      cause: npxArgs.join(' '),
-    });
-  }
+    /**
+     *   When the `eslint` command fails, it will emit via stderr, e.g.
+     * Error: The 'jiti' library is required for loading TypeScript configuration
+     * files. Make sure to install it.
+     *   When `eslint` encounters linting errors, it logs via stdout.
+     */
+    if (exitCode !== SUCCESS_STATUS_CODE) {
+      // Sometimes ESLint fails with console output, but succeeds on retry.
+      const message = [stderr, stdout].join(EOL).trim();
+      if (message === '') {
+        if (attempt < MAX_ATTEMPTS) {
+          await lint(attempt + 1);
+          return;
+        }
 
-  // When `eslint` encounters linting errors, it logs via stdout.
-  if (exitCode !== SUCCESS_STATUS_CODE) {
-    throw new Error(stdout, {
-      cause: npxArgs.join(' '),
-    });
-  }
+        throw new Error(`ESLint failed with an unknown error: ${exitCode}`, {
+          cause: npxArgs.join(' '),
+        });
+      }
+
+      throw new Error(message, {
+        cause: npxArgs.join(' '),
+      });
+    }
+  };
+
+  await lint(1);
 }

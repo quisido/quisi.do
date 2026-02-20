@@ -11,7 +11,7 @@ import quisiTest from './quisi-test.js';
 const EMPTY = 0;
 
 export default async function test({
-  eslintConfigFile,
+  coverage: _coverage,
 }: TestConfig): Promise<void> {
   const errorLogs: string[] = [];
 
@@ -26,7 +26,7 @@ export default async function test({
     await attw().catch(handleError);
   }
 
-  await eslint({ eslintConfigFile }).catch(handleError);
+  await eslint().catch(handleError);
   await publint().catch(handleError);
   await quisiTest().catch(handleError);
   // await vitest().catch(handleError);
