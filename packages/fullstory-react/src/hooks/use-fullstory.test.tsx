@@ -10,7 +10,9 @@ const TEST_FULLSTORY = Object.assign(vi.fn(), FullStory);
 const TEST_INIT = vi.fn();
 const TEST_IS_INITIALIZED = vi.fn();
 
-function TestWrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
+const TestWrapper = ({
+  children,
+}: Readonly<PropsWithChildren>): ReactElement => {
   return (
     <MockFullstory
       FullStory={TEST_FULLSTORY}
@@ -21,7 +23,7 @@ function TestWrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
       {children}
     </MockFullstory>
   );
-}
+};
 
 describe('useFullstory', (): void => {
   beforeEach((): void => {

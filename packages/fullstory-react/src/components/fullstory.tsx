@@ -11,11 +11,11 @@ interface Props extends SnippetOptions {
   readonly identityUid?: string | undefined;
 }
 
-function useFullstoryEffects({
+const useFullstoryEffects = ({
   identityProperties,
   identityUid,
   ...snippetOptions
-}: Props): void {
+}: Props): void => {
   // Contexts
   const {
     FullStory: fullstoryApi,
@@ -57,7 +57,7 @@ function useFullstoryEffects({
       uid: identityUid,
     });
   }, [fullstoryApi, identityProperties, identityUid]);
-}
+};
 
 export default function Fullstory({
   children,
