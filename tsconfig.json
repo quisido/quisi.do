@@ -14,5 +14,12 @@
     "packages/"
   ],
   "extends": "quisi/tsconfig.json",
-  "include": ["**/.*.json", "**/*.json", "**/*.ts"]
+  "include": [
+    "**/.*/**/*.ts",
+    "**/.*/**/.*.json",
+    "**/.*/**/*.json",
+    "**/.*.json",
+    "**/*.json",
+    "**/*.ts"
+  ]
 }

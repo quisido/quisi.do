@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "fmrs": "^2.1.1",
-    "react": "^19.2.0",
+    "react": "^19.2.4",
     "react-reconciler": "^0.33.0"
   },
   "devDependencies": {

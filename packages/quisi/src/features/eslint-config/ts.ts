@@ -6,13 +6,14 @@ import defineConfig, { type Config } from './define-config.js';
 import JS from './js.js';
 import mapConfigsToRules from './map-configs-to-rules.js';
 import { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
+import fileGlobsByExtension from './file-globs-by-extension.js';
 
 export { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
 
 const TS_CONFIG: Config = defineConfig({
   ...JS,
-  files: ['**/*.ts', '**/*.tsx'],
-  ignores: ['**/*.d.ts', '**/*.test.ts', '**/*.test.tsx'],
+  files: fileGlobsByExtension('ts', 'tsx'),
+  ignores: fileGlobsByExtension('d.ts', 'test.ts', 'test.tsx'),
   languageOptions: TYPESCRIPT_LANGUAGE_OPTIONS,
   name: '@quisido/ts',
 

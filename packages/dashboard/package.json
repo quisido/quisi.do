@@ -25,7 +25,7 @@
     "url": "https://github.com/sponsors/quisido"
   },
   "dependencies": {
-    "@datadog/datadog-api-client": "^1.46.0",
+    "@datadog/datadog-api-client": "^1.52.0",
     "@quisido/worker": "^1.0.8",
     "cloudflare-utils": "^1.0.4",
     "fmrs": "^2.1.1"

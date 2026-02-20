@@ -39,10 +39,10 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
     "@babel/preset-typescript": "^7.28.5",
-    "@babel/register": "^7.28.3",
+    "@babel/register": "^7.28.6",
     "babel-plugin-replace-import-extension": "^1.1.5"
   },
   "devDependencies": {

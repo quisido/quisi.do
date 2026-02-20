@@ -3,6 +3,7 @@ import { type ESLint } from 'eslint';
 import jsonc from 'eslint-plugin-jsonc';
 import defineConfig, { type Config } from './define-config.js';
 import { LINTER_OPTIONS } from './linter-options.js';
+import fileGlobsByExtension from './file-globs-by-extension.js';
 
 /**
  *   We don't use Prettier here, because Prettier does not support empty lines
@@ -13,9 +14,7 @@ const JSON_CONFIG: Config = defineConfig({
   extends: [],
 
   files: [
-    '**/.*.json',
-    '**/*.json',
-    '**/*.webmanifest',
+    ...fileGlobsByExtension('json', 'webmanifest'),
 
     // Webhint
     '**/browser.info',

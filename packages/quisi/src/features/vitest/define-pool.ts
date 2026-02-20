@@ -1,13 +1,13 @@
-import debug from '../../utils/debug.js';
-import hasPackageFile from '../../utils/has-package-file.js';
-import joinCwdPath from '../../utils/join-path.js';
 import type QuisiVitestInlineConfig from './quisi-vitest-inline-config.js';
 
+// eslint-disable-next-line @typescript-eslint/require-await
 export default async function definePool(): Promise<
-  Pick<QuisiVitestInlineConfig, 'pool' | 'poolOptions'>
+  Pick<QuisiVitestInlineConfig, never /* 'pool' | 'poolOptions' */>
 > {
+  /**
+   *   The Cloudflare Vitest pool workers extension is disabled until it
+   * supports vitest@^4.
   const hasWrangler: boolean = await hasPackageFile('wrangler.jsonc');
-
   if (hasWrangler) {
     debug('Using Cloudflare Workers pool.');
     return {
@@ -21,6 +21,7 @@ export default async function definePool(): Promise<
       },
     };
   }
+  */
 
   return {};
 }

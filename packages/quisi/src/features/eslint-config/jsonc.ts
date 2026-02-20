@@ -4,12 +4,12 @@ import jsoncParser from 'jsonc-eslint-parser';
 import defineConfig, { type Config } from './define-config.js';
 import JSON from './json.js';
 import mapFlatConfigToRulesRecord from './map-flat-config-to-rules-record.js';
+import fileGlobsByExtension from './file-globs-by-extension.js';
 
 const JSONC_CONFIG: Config = defineConfig({
   ...JSON,
   files: [
-    '**/*.json5',
-    '**/*.jsonc',
+    ...fileGlobsByExtension('code-workspace', 'json5', 'jsonc'),
 
     // TypeScript
     '**/tsconfig.json',
@@ -17,7 +17,6 @@ const JSONC_CONFIG: Config = defineConfig({
 
     // VS Code
     '**/.vscode/*.json',
-    '**/*.code-workspace',
 
     // Webhint
     '**/.hintrc',
@@ -26,7 +25,7 @@ const JSONC_CONFIG: Config = defineConfig({
     // Wrangler
     '**/wrangler.json',
   ],
-  ignores: ['node_modules/'],
+  ignores: [],
   language: 'json/jsonc',
   languageOptions: {
     allowTrailingCommas: true,

@@ -53,7 +53,7 @@ export default function execute(
 
         resolve({
           exitCode: exitCode ?? ERROR_STATUS_CODE,
-          stderr: [stderr, errMessage].join(EOL),
+          stderr: [stderr, errMessage].join(EOL).trim(),
           stdout,
         });
       },

@@ -7,10 +7,11 @@ import sortKeysCustomOrder from 'eslint-plugin-sort-keys-custom-order';
 import defineConfig, { type Config } from './define-config.js';
 import { LANGUAGE_OPTIONS } from './language-options.js';
 import { LINTER_OPTIONS } from './linter-options.js';
+import fileGlobsByExtension from './file-globs-by-extension.js';
 
 const JS_CONFIG: Config = defineConfig({
   extends: [],
-  files: ['**/*.js', '**/*.jsx', '**/*.mjs'],
+  files: fileGlobsByExtension('js', 'jsx', 'mjs'),
   ignores: [],
   languageOptions: LANGUAGE_OPTIONS,
   linterOptions: LINTER_OPTIONS,
@@ -32,6 +33,8 @@ const JS_CONFIG: Config = defineConfig({
 
     // Commented out code may be lowercase.
     'capitalized-comments': 'off',
+
+    complexity: 'warn',
 
     // Too many false positives.
     'consistent-return': 'off',
