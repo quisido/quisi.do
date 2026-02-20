@@ -1,4 +1,7 @@
 import { defineESLintConfig, type ESLintConfig } from 'quisi';
+import reactCompiler from 'eslint-plugin-react-compiler';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
 
 const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
   // Plugins: react-compiler, react-hooks, react-refresh
