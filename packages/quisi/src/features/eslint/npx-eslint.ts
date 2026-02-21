@@ -14,7 +14,6 @@ const RETRYABLE_EXIT_CODES = new Set<number>([
 export default async function npxEslint(
   ...args: readonly string[]
 ): Promise<void> {
-  // Set NODE_OPTIONS env to "--disable-warning=ESLintPoorConcurrencyWarning"
   const npxArgs: readonly string[] = [
     'eslint',
     '.',
@@ -33,13 +32,21 @@ export default async function npxEslint(
   ];
 
   const lint = async (attempt: number): Promise<void> => {
-    const { exitCode, stderr, stdout } = await npx(...npxArgs);
+    const { exitCode, stderr, stdout } = await npx(
+      {
+        env: { NODE_OPTIONS: '--disable-warning=ESLintPoorConcurrencyWarning' },
+      },
+      ...npxArgs,
+    );
+
     if (exitCode === 0) {
       return;
     }
 
     if (RETRYABLE_EXIT_CODES.has(exitCode) && attempt < MAX_ATTEMPTS) {
-      debug(`[eslint] Retrying after exit code: ${exitCode}`);
+      debug(
+        `[eslint] Retrying after ${ExitCode[exitCode]} exit code (${exitCode})`,
+      );
       await lint(attempt + 1);
       return;
     }

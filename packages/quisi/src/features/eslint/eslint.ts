@@ -24,12 +24,12 @@ export default async function eslint(): Promise<void> {
     },
   );
 
-  if (resultsError !== null) {
+  if (resultsError === null) {
+    debug(`[eslint] ✔️  (${resultsDuration} seconds, ${concurrency} threads)`);
+  } else {
     debug(`[eslint] ❌  (${resultsDuration} seconds, ${concurrency} threads)`);
-    throw mapToError(resultsError);
   }
 
-  debug(`[eslint] ✔️  (${resultsDuration} seconds, ${concurrency} threads)`);
   const { duration: reportsDuration, error: reportsError } = await withDuration(
     async (): Promise<void> => {
       await report({ format: 'html' });
@@ -38,6 +38,11 @@ export default async function eslint(): Promise<void> {
   );
 
   debug(`[eslint] Generated reports in ${reportsDuration} seconds.`);
+
+  if (resultsError !== null) {
+    throw mapToError(resultsError);
+  }
+
   if (reportsError !== null) {
     throw mapToError(reportsError);
   }

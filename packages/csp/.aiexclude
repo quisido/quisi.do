@@ -1,6 +1,0 @@
-/.cache/
-/.tests/
-/.wrangler/
-/dist/
-/node_modules/
-/.dev.vars
