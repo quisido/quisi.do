@@ -1,13 +1,12 @@
 import mapToString from '../../utils/map-to-string.js';
-import type BuildConfig from '../config/build-config.js';
+import getBuildConfig from '../config/get-build-config.js';
 import tsc from '../tsc/tsc.js';
 import createTSConfigFile from './create-tsconfig-file.js';
 
 const EMPTY = 0;
 
-export default async function build({
-  skipLibCheck,
-}: BuildConfig): Promise<void> {
+export default async function build(): Promise<void> {
+  const { skipLibCheck } = await getBuildConfig();
   const errorLogs: string[] = [];
 
   const handleError = (err: unknown): void => {

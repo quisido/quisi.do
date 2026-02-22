@@ -1,13 +1,12 @@
 import mapToString from '../../utils/map-to-string.js';
-import type StartConfig from '../config/start-config.js';
+import getStartConfig from '../config/get-start-config.js';
 import tsc from '../tsc/tsc.js';
 import createTSConfigFile from './create-tsconfig-file.js';
 
-export default async function start({
-  skipLibCheck,
-}: StartConfig): Promise<void> {
-  const errorLogs: string[] = [];
+export default async function start(): Promise<void> {
+  const { skipLibCheck } = await getStartConfig();
 
+  const errorLogs: string[] = [];
   const handleError = (err: unknown): void => {
     errorLogs.push(mapToString(err));
     process.exitCode = 1;
