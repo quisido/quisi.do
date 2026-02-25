@@ -54,8 +54,8 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@types/node": "^24.10.4",
-    "eslint": "^9.39.2",
+    "@types/node": "^25.3.0",
+    "eslint": "^10.0.2",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
