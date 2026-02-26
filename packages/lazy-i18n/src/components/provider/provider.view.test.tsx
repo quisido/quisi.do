@@ -27,7 +27,7 @@ describe('Provider', (): void => {
     let LoadingComponent: ComponentType<unknown> | null = null;
     let translate: TranslateFunctionType | undefined;
 
-    function TestComponent(): null {
+    const TestComponent = (): null => {
       const loadingComponent = useContext(LoadingComponentContext);
       const translateFunction = useContext(TranslateFunctionContext);
 
@@ -37,7 +37,7 @@ describe('Provider', (): void => {
       }, [loadingComponent, translateFunction]);
 
       return null;
-    }
+    };
 
     render(<TestComponent />, {
       wrapper({ children }: PropsWithChildren): ReactElement {
@@ -57,7 +57,7 @@ describe('Provider', (): void => {
   it('should set the contexts to the user-specified props', (): void => {
     let LoadingComponent: ComponentType<unknown> | null = null;
 
-    function TestComponent(): null {
+    const TestComponent = (): null => {
       const loadingComponent = useContext(LoadingComponentContext);
 
       useEffect((): void => {
@@ -65,7 +65,7 @@ describe('Provider', (): void => {
       }, [loadingComponent]);
 
       return null;
-    }
+    };
 
     const TestLoadingComponent = vi.fn();
 

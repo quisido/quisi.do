@@ -31,7 +31,34 @@ export default async function runAiTask(
     const output: AiTextGenerationOutput = (await ai.run(
       model as unknown as keyof AiModels,
       // Warning: This shape depends on the model specified above.
-      { messages: [SYSTEM_MESSAGE, taskMessage], tools },
+      {
+        messages: [SYSTEM_MESSAGE, taskMessage],
+        /**
+         * Force a JSON response:
+        response_format: {
+          json_schema: {
+            properties: {
+              capital: {
+                type: 'string',
+              },
+              languages: {
+                items: {
+                  type: 'string',
+                },
+                type: 'array',
+              },
+              name: {
+                type: 'string',
+              },
+            },
+            required: ['name', 'capital', 'languages'],
+            type: 'object',
+          },
+          type: 'json_schema',
+        },
+         */
+        tools,
+      },
     )) as AiTextGenerationOutput;
 
     // WARNING: EMIT USAGE METRICS HERE, EVEN IF RETRYING THE ATTEMPT

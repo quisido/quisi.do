@@ -21,7 +21,6 @@
     "url": "https://github.com/sponsors/quisido"
   },
   "dependencies": {
-    "@cloudflare/ai": "^1.2.2",
     "ollama": "^0.6.3"
   },
   "devDependencies": {

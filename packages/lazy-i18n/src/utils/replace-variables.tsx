@@ -39,6 +39,8 @@ export default function replaceVariables(
        */
       const item: string = newTranslation[translationIndex] as string;
       const newItems: ReactNode[] = createNewItems(item, variable, value);
+
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       newTranslation.splice(
         translationIndex,
         VARIABLE_PREFIX.length,

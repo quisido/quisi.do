@@ -3,7 +3,7 @@ import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { MockSentrySdk } from '../../index.js';
-import useSentry from './sentry.hook.js';
+import useSentry, { type Props } from './sentry.hook.js';
 
 const TEST_BEFORE_BREADCRUMB = vi.fn();
 const TEST_BEFORE_SEND = vi.fn();
@@ -12,13 +12,11 @@ const TEST_SET_USER = vi.fn();
 const TEST_TRACES_SAMPLER = vi.fn();
 const TEST_TRANSPORT = vi.fn();
 
-function Wrapper({ children }: PropsWithChildren): ReactElement {
-  return (
-    <MockSentrySdk init={TEST_INIT} setUser={TEST_SET_USER}>
-      {children}
-    </MockSentrySdk>
-  );
-}
+const Wrapper = ({ children }: PropsWithChildren): ReactElement => (
+  <MockSentrySdk init={TEST_INIT} setUser={TEST_SET_USER}>
+    {children}
+  </MockSentrySdk>
+);
 
 describe('useSentry', (): void => {
   it('should call init', (): void => {
@@ -26,7 +24,6 @@ describe('useSentry', (): void => {
       initialProps: {
         allowUrls: [],
         attachStacktrace: true,
-        autoSessionTracking: true,
         beforeBreadcrumb: TEST_BEFORE_BREADCRUMB,
         beforeSend: TEST_BEFORE_SEND,
         debug: true,
@@ -44,7 +41,6 @@ describe('useSentry', (): void => {
         normalizeDepth: 1,
         release: 'test-release',
         sampleRate: 1,
-        shutdownTimeout: 1,
         tracesSampler: TEST_TRACES_SAMPLER,
         tracesSampleRate: 1,
         transport: TEST_TRANSPORT,
@@ -57,7 +53,6 @@ describe('useSentry', (): void => {
     expect(TEST_INIT).toHaveBeenLastCalledWith({
       allowUrls: [],
       attachStacktrace: true,
-      autoSessionTracking: true,
       beforeBreadcrumb: TEST_BEFORE_BREADCRUMB,
       beforeSend: TEST_BEFORE_SEND,
       debug: true,
@@ -75,12 +70,11 @@ describe('useSentry', (): void => {
       normalizeDepth: 1,
       release: 'test-release',
       sampleRate: 1,
-      shutdownTimeout: 1,
       tracesSampler: TEST_TRACES_SAMPLER,
       tracesSampleRate: 1,
       transport: TEST_TRANSPORT,
       tunnel: 'test-tunnel',
-    });
+    } satisfies Props);
   });
 
   it('should support a default user', (): void => {

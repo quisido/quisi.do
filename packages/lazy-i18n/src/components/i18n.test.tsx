@@ -3,9 +3,7 @@ import { type PropsWithChildren, type ReactElement } from 'react';
 import { describe, it, vi } from 'vitest';
 import I18n, { I18nProvider } from '../index.js';
 
-function TestLoadingComponent(): ReactElement {
-  return <>test loading component</>;
-}
+const TestLoadingComponent = (): ReactElement => <>test loading component</>;
 
 describe('I18n', (): void => {
   it('should render the loading component then the translation', async (): Promise<void> => {

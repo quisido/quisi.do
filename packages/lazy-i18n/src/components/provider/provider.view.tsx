@@ -16,7 +16,9 @@ interface Props<T extends Record<string, Translations | undefined>> {
   readonly translations: T;
 }
 
-function I18nProvider<T extends Record<string, Translations | undefined>>({
+export default function I18nProvider<
+  T extends Record<string, Translations | undefined>,
+>({
   children,
   fallbackLocale,
   LoadingComponent,
@@ -39,5 +41,3 @@ function I18nProvider<T extends Record<string, Translations | undefined>>({
     </LoadingComponentContext.Provider>
   );
 }
-
-export default I18nProvider;

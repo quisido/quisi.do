@@ -17,6 +17,6 @@ export default async function testVsCodeSettings(): Promise<void> {
     throw new Error('Expected .vscode/settings.json to contain JSON.');
   }
 
-  testFilesWatcherExclude(settings);
-  testSearchExclude(settings);
+  await testFilesWatcherExclude(settings);
+  await testSearchExclude(settings);
 }

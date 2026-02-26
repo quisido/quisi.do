@@ -4,13 +4,8 @@ import { describe, expect, it } from 'vitest';
 import inner from '../../test/inner.js';
 import replaceVariables from './replace-variables.js';
 
-function TestHello(): ReactElement {
-  return <strong>olleh</strong>;
-}
-
-function TestWorld(): ReactElement {
-  return <em>dlrow</em>;
-}
+const TestHello = (): ReactElement => <strong>olleh</strong>;
+const TestWorld = (): ReactElement => <em>dlrow</em>;
 
 describe('replaceVariables', (): void => {
   it('should return strings with no variables', (): void => {

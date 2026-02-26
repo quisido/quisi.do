@@ -1,8 +1,12 @@
 import { render } from '@testing-library/react';
-import { afterEach, beforeEach, describe, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, it } from 'vitest';
 import CustomErrorBoundaryFallback from '../../../test/custom-error-boundary-fallback.js';
 import ThrowError from '../../../test/throw-error.js';
 import Sentry from '../../index.js';
+import {
+  mockConsoleError,
+  restoreConsoleError,
+} from '../../../test/console-error.js';
 
 describe('Sentry', (): void => {
   it('should render children', (): void => {
@@ -16,14 +20,8 @@ describe('Sentry', (): void => {
 
   describe('error boundary', (): void => {
     // Disable console.error, because the thrown error is expected to be logged.
-    const consoleError = console.error;
-    beforeEach((): void => {
-      console.error = vi.fn();
-    });
-
-    afterEach((): void => {
-      console.error = consoleError;
-    });
+    beforeEach(mockConsoleError);
+    afterEach(restoreConsoleError);
 
     it('should support a custom error boundary fallback', (): void => {
       const { getByText } = render(

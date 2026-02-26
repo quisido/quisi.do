@@ -42,7 +42,7 @@ export default class RunnableTranslateFunction
     // Load target locale.
     if (typeof this.#translations === 'undefined') {
       this.emit('loadTranslations', str);
-      return;
+      return undefined;
     }
 
     // Use target translation.
@@ -54,7 +54,7 @@ export default class RunnableTranslateFunction
     // Load fallback locale.
     if (typeof this.#fallbackTranslations === 'undefined') {
       this.emit('loadFallbackTranslations', str);
-      return;
+      return undefined;
     }
 
     // Use fallback translation.
@@ -65,6 +65,6 @@ export default class RunnableTranslateFunction
     }
 
     this.emit('notFound', str);
-    return;
+    return undefined;
   }
 }

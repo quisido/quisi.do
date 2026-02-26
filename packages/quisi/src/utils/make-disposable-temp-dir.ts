@@ -1,7 +1,6 @@
 import type { DisposableTempDir } from 'node:fs';
 import { mkdir, mkdtempDisposable } from 'node:fs/promises';
 import { join } from 'node:path';
-import debug from './debug.js';
 import { onExit } from './exit.js';
 
 const QUISI_ROOT_DIR: string = join(import.meta.dirname, '..', '..');
@@ -21,11 +20,14 @@ export default async function makeDisposableTempDir(): Promise<DisposableTempDir
     encoding: 'utf8',
   });
 
-  debug(`Created temporary directory: ${disposableTempDir.path}`);
+  // This has been reliable. The log can be disabled until needed again.
+  // debug(`Created temporary directory: ${disposableTempDir.path}`);
 
   onExit(async (): Promise<void> => {
     await disposableTempDir.remove();
-    debug(`Removed temporary directory: ${disposableTempDir.path}`);
+
+    // This has been reliable. The log can be disabled until needed again.
+    // debug(`Removed temporary directory: ${disposableTempDir.path}`);
   });
 
   return disposableTempDir;

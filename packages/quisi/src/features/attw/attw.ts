@@ -1,6 +1,5 @@
 import type Report from '../../types/report.js';
 import ReportingTool from '../../utils/reporting-tool.js';
-import debug from '../../utils/debug.js';
 import getPackageJson from '../../utils/get-package-json.js';
 import requireResolve from '../../utils/require-resolve.js';
 import writeTestsFile from '../../utils/write-tests-file.js';
@@ -13,13 +12,12 @@ export const attw: ReportingTool = new ReportingTool(
   async (): Promise<Omit<Report, 'tool'>> => {
     const { private: isPrivate } = await getPackageJson();
     if (isPrivate === true) {
-      debug('[attw] ⏩️ The package is private.');
       return {
+        message: 'The package is private.',
         status: 'skipped',
       };
     }
 
-    debug('[attw] ⏳');
     const { exitCode, stdout: json } = await npx(
       'attw',
       '--config-path',
@@ -31,14 +29,11 @@ export const attw: ReportingTool = new ReportingTool(
     const testsPath: string = await writeTestsFile('attw.json', json);
 
     if (exitCode === 0) {
-      debug('[attw] ✔️');
       return {
         path: testsPath,
         status: 'success',
       };
     }
-
-    debug('[attw] ❌');
 
     const { stdout: tableFlipped } = await npx(
       'attw',
@@ -55,7 +50,7 @@ export const attw: ReportingTool = new ReportingTool(
          * ESM-only") is ignored. Unless that context proves beneficial, it is
          * excluded here.
          */
-        "`arethetypeswrong` CLI attempted to analyze this package's contents for issues with its TypeScript types, particularly ESM-related module resolution issues. It used the Node16 module resolution module.",
+        "`arethetypeswrong` CLI attempted to analyze this package's contents for issues with its TypeScript types, particularly ESM-related module resolution issues. It used Node16 module resolution.",
       message: tableFlipped,
       path: testsPath,
       status: 'failure',

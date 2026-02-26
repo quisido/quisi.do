@@ -1,4 +1,3 @@
-/// <reference types="@cloudflare/vitest-pool-workers" />
 /// <reference types="../worker-configuration.d.ts" />
 import { describe, it } from 'vitest';
 
