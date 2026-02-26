@@ -2,7 +2,7 @@
 import { describe, it } from 'vitest';
 
 /**
- * `cloudflare:test` isn't suported in vitest^4.
+ * `cloudflare:test` isn't supported in vitest^4.
 import {
   createExecutionContext,
   env,
