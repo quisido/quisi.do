@@ -165,7 +165,7 @@ export default async function runAiTask(
     }
 
     if (initialResponse !== undefined) {
-      return `The AI model responded to its tool calls with more tool calls, but gave an initial response:A ${initialResponse}`;
+      return `The AI model responded to its tool calls with more tool calls, but gave an initial response: ${initialResponse}`;
     }
 
     throw new Error(
