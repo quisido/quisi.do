@@ -1,4 +1,4 @@
-import { join, relative, resolve } from 'node:path';
+import { isAbsolute, relative, resolve } from 'node:path';
 import process from 'node:process';
 
 /**
@@ -11,9 +11,14 @@ export default function joinCwdPath(...segments: readonly string[]): string {
   const resolvedPath: string = resolve(cwd, ...segments);
   const relativePath: string = relative(cwd, resolvedPath);
 
-  if (relativePath.startsWith('..') || resolve(relativePath) !== resolvedPath) {
+  if (
+    // e.g. changing the drive letter on Windows
+    isAbsolute(relativePath) ||
+    relativePath.startsWith('..') ||
+    resolve(relativePath) !== resolvedPath
+  ) {
     throw new Error(`Path traversal detected: ${segments.join('/')}`);
   }
 
-  return join(cwd, ...segments);
+  return resolvedPath;
 }

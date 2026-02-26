@@ -15,13 +15,14 @@ const spawnAsync = async (
 ): Promise<string> => {
   const childProcess: ChildProcess = spawn(command, args, {
     shell: false,
-    stdio: 'inherit',
+    stdio: ['inherit', 'pipe', 'pipe'],
   });
 
   return new Promise((resolve, reject): void => {
     const messages: string[] = [];
 
     childProcess.on('message', (message: Serializable): void => {
+      globalThis.console.log(message);
       // eslint-disable-next-line @typescript-eslint/no-base-to-string
       messages.push(message.toString());
     });

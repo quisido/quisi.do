@@ -13,7 +13,7 @@
     "composite": true,
     "customConditions": [],
     "declaration": true,
-    "declarationDir": null,
+    "declarationDir": "dist",
     "declarationMap": true,
     "diagnostics": false,
     "disableReferencedProjectLoad": true,

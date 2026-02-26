@@ -59,10 +59,6 @@ const TS_CONFIG: Config = defineConfig({
         argsIgnorePattern: '^_',
         caughtErrors: 'all',
         caughtErrorsIgnorePattern: '^_',
-        // Unexpected property "enableAutofixRemoval".
-        // enableAutofixRemoval: {
-        //   imports: true,
-        // },
         ignoreRestSiblings: false,
       },
     ],

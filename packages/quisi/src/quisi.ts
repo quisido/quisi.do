@@ -59,6 +59,12 @@ switch (command) {
     process.exitCode = 1;
     break;
   }
+
+  default: {
+    globalThis.console.error(`Unknown command: ${command}`);
+    process.exitCode = 1;
+    break;
+  }
 }
 
 const settledReports: PromiseSettledResult<Report>[] =

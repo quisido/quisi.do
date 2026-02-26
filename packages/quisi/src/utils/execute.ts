@@ -54,10 +54,10 @@ export default function execute(
          *   Non-null assertion is acceptable here, because `.split()[0]` always
          * returns a string.
          */
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const errMessage: string = err.message
-          .split('Command failed: ')[0]!
-          .trim();
+
+        const errMessage: string = (
+          err.message.split('Command failed: ')[0] ?? ''
+        ).trim();
 
         resolve({
           exitCode: exitCode ?? ERROR_STATUS_CODE,
