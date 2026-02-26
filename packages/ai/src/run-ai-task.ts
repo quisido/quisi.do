@@ -174,7 +174,7 @@ export default async function runAiTask(
     );
   }
 
-  // If no tool calls were valid, provide the initial respose.
+  // If no tool calls were valid, provide the initial response.
   if (initialResponse !== undefined) {
     return initialResponse;
   }
