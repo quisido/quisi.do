@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "declarationDir": "dist",
+    "generateCpuProfile": ".cache/tsconfig.build.cpuprofile",
     "noEmit": false,
     "outDir": "dist",
     "rootDir": "src",

@@ -1,3 +1,4 @@
+/// <reference types="../worker-configuration.d.ts" />
 import mapStringToListItem from './map-string-to-list-item.js';
 import { Role } from './role.js';
 

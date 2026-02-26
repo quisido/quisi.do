@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "declarationDir": "dist",
     "rootDir": "."
   },
   "exclude": [".cache/", ".tests/"],

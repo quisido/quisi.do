@@ -1,3 +1,4 @@
+/// <reference types="../worker-configuration.d.ts" />
 import type { Model } from './model.js';
 
 export default interface Task {
