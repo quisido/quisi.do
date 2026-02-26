@@ -8,8 +8,8 @@ import { type Page } from 'puppeteer-core';
 function patchedRemoveListener(
   this: Page,
   ...args: Parameters<Page['off']>
-): void {
-  this.off(...args);
+): Page {
+  return this.off(...args);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

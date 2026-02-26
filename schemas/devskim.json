@@ -6,7 +6,7 @@
       "type": "string"
     },
     "AbsolutePaths": {
-      "description": "Output absolute paths (overrides --base-path).",
+      "description": "Output absolute paths (overrides --base-path)",
       "type": "boolean"
     },
     "AllowGlobs": {
