@@ -51,18 +51,39 @@ const spawnAsync = async (
   });
 
   return new Promise((resolve, reject): void => {
-    childProcess.on('exit', (code: number | null) => {
-      if (code === 0) {
-        resolve(stdoutChunks.join(''));
-      } else {
-        reject(
-          new Error(
-            `Command "${command} ${args.join(' ')}" failed (exit code ${code}):
+    childProcess.on(
+      'exit',
+      (code: number | null, signal: NodeJS.Signals | null) => {
+        stderr.destroy();
+        stdout.destroy();
+
+        if (code === 0) {
+          resolve(stdoutChunks.join(''));
+        } else {
+          const getReason = (): string => {
+            if (code !== null) {
+              return `exit code ${code}`;
+            }
+
+            if (signal !== null) {
+              return `signal ${signal}`;
+            }
+
+            return 'unknown reason';
+          };
+
+          const reason: string = getReason();
+
+          reject(
+            new Error(
+              `Command "${command} ${args.join(' ')}" failed (${reason}):
+${stdoutChunks.join('')}
 ${stderrChunks.join('')}`,
-          ),
-        );
-      }
-    });
+            ),
+          );
+        }
+      },
+    );
   });
 };
 
@@ -70,9 +91,9 @@ export default async function npmExecWorkspace(
   workspaceDirectory: string,
   ...script: string[]
 ): Promise<string> {
-  globalThis.console.log('');
+  globalThis.console.log(' ');
   globalThis.console.log('-'.repeat(MAX_CONSOLE_LENGTH));
-  globalThis.console.log('');
+  globalThis.console.log(' ');
   logCommand('npm', ...script, `--workspace=packages/${workspaceDirectory}`);
 
   try {

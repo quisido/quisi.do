@@ -12,7 +12,7 @@ export default function getScriptCommand(): readonly [
   }
 
   // NPM on Windows is actually `node .../npm-cli.js`.
-  if (PLATFORM === 'win32' && /node(?:\.exe)?$/iu.test(EXEC_PATH)) {
+  if (PLATFORM === 'win32') {
     const execDir: string = dirname(EXEC_PATH);
     const npmCliPath: string = join(
       execDir,
