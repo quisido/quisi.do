@@ -2,7 +2,7 @@ name: Continuous deployment
 
 concurrency:
   cancel-in-progress: false
-  group: main
+  group: branch-main
 
 jobs:
   # Stage 1: build, devskim

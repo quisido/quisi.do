@@ -16,7 +16,7 @@ export const publint: ReportingTool = new ReportingTool(
     return {
       context:
         'The Publint tool threw an error while analyzing this package for ' +
-        'best practices,configuration mistakes, and environment ' +
+        'best practices, configuration mistakes, and environment ' +
         'compatibility (Node, Rollup, Vite, Webpack, etc.).',
       message: stdout,
       status: 'failure',
