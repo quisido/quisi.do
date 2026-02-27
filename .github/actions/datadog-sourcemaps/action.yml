@@ -13,7 +13,7 @@ runs:
     - name: Setup
       uses: ./.github/actions/setup
     - name: Upload
-      run: ./.github/actions/datadog-sourcemaps/datadog-sourcemaps.sh
+      run: sh ./.github/actions/datadog-sourcemaps/datadog-sourcemaps.sh
       shell: bash
       env:
         DATADOG_API_KEY: ${{ inputs.datadog-api-key }}

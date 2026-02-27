@@ -13,7 +13,7 @@ runs:
     - name: Setup
       uses: ./.github/actions/setup
     - name: Publish
-      run: ./.github/actions/npm-publish/npm-publish.sh
+      run: sh ./.github/actions/npm-publish/npm-publish.sh
       shell: bash
       env:
         NPM_AUTH_TOKEN: ${{ inputs.auth-token }}

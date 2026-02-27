@@ -13,6 +13,7 @@ interface Options {
 enum Model {
   DeepSeek_R1_14b = 'deepseek-r1:14b',
   Qwen3_14b = 'qwen3:14b',
+  Qwen3_Coder_30b = 'qwen3-coder:30b',
 }
 
 enum Role {
@@ -83,7 +84,7 @@ if (prompt === undefined) {
   throw new Error('No prompt provided.');
 }
 
-const response: Message = await chat(Model.Qwen3_14b, prompt, {
+const response: Message = await chat(Model.Qwen3_Coder_30b, prompt, {
   onChunk(_chunk: string): void {
     // console.log(chunk);
   },

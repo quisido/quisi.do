@@ -17,7 +17,7 @@ const spawnAsync = async (
   const childProcess: ChildProcess = spawn(command, args, {
     shell: false,
     stdio: ['inherit', 'pipe', 'pipe'],
-    timeout: 300000, // 5 minutes
+    timeout: 900000, // 15 minutes
   });
 
   const { stderr, stdout } = childProcess;
@@ -38,14 +38,14 @@ const spawnAsync = async (
 
   stderr.on('data', (chunk: Serializable): void => {
     // eslint-disable-next-line @typescript-eslint/no-base-to-string
-    globalThis.console.error(chunk.toString());
+    globalThis.console.error(chunk.toString().replace(/\r?\n$/u, ''));
     // eslint-disable-next-line @typescript-eslint/no-base-to-string
     stderrChunks.push(chunk.toString());
   });
 
   stdout.on('data', (chunk: Serializable): void => {
     // eslint-disable-next-line @typescript-eslint/no-base-to-string
-    globalThis.console.log(chunk.toString());
+    globalThis.console.log(chunk.toString().replace(/\r?\n$/u, ''));
     // eslint-disable-next-line @typescript-eslint/no-base-to-string
     stdoutChunks.push(chunk.toString());
   });

@@ -16,7 +16,7 @@ runs:
     - name: Setup
       uses: ./.github/actions/setup
     - name: Deploy
-      run: ./.github/actions/wrangler-deploy/wrangler-deploy.sh
+      run: sh ./.github/actions/wrangler-deploy/wrangler-deploy.sh
       shell: bash
       env:
         CLOUDFLARE_API_TOKEN: ${{ inputs.api-token }}
