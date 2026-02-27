@@ -7,5 +7,5 @@ npx concurrently \
   --names lighthouse,serve \
   --prefix-colors auto \
   --success command-lighthouse \
-  "./lighthouse-localhost.sh" \
+  "bash ./lighthouse-localhost.sh" \
   "npx serve _site";

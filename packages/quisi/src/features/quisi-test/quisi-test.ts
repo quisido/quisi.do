@@ -4,7 +4,7 @@ import ReportingTool from '../../utils/reporting-tool.js';
 import testVsCodeSettings from './test-vscode-settings.js';
 
 export const quisiTest: ReportingTool = new ReportingTool(
-  'quisi',
+  'quisi:test',
   async (): Promise<Omit<Report, 'tool'>> => {
     try {
       await testVsCodeSettings();
