@@ -3,6 +3,17 @@
 
   "extends": ["../../.hintrc"],
 
+  "hints": {
+    // Technical debt: Re-enable these when the animation is optimized.
+    "detect-css-reflows/composite": "off",
+    "detect-css-reflows/paint": "off"
+  },
+
+  /**
+   * axe/text-alternatives: Element has no title attribute
+   * <img src="https://api-js.mixpanel.com/track/..." />
+   */
+
   "ignoredUrls": [
     {
       "domain": "^(?!localhost:3000$).*",

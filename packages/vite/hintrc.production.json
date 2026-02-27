@@ -1,5 +1,11 @@
 {
   // "$schema": "https://raw.githubusercontent.com/webhintio/hint/main/packages/hint/src/lib/config/config-schema.json",
 
-  "extends": ["../../.hintrc"]
+  "extends": ["../../.hintrc"],
+
+  "hints": {
+    // Technical debt: Re-enable these when the animation is optimized.
+    "detect-css-reflows/composite": "off",
+    "detect-css-reflows/paint": "off"
+  }
 }

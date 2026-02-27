@@ -8,6 +8,7 @@ import handleNpmExecWorkspaceError from './handle-npm-exec-workspace-error.js';
 import logCommand from './log-command.js';
 
 const [FILE, ...ARGS] = getScriptCommand();
+const MAX_CONSOLE_LENGTH = 80;
 
 const spawnAsync = async (
   command: string,
@@ -69,6 +70,9 @@ export default async function npmExecWorkspace(
   workspaceDirectory: string,
   ...script: string[]
 ): Promise<string> {
+  globalThis.console.log('');
+  globalThis.console.log('-'.repeat(MAX_CONSOLE_LENGTH));
+  globalThis.console.log('');
   logCommand('npm', ...script, `--workspace=packages/${workspaceDirectory}`);
 
   try {

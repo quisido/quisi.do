@@ -34,7 +34,7 @@ export default function execute(
       args,
       {
         cwd: process.cwd(),
-        encoding: 'utf-8',
+        encoding: 'utf8',
         env: { ...process.env, ...env },
         shell: false,
       },

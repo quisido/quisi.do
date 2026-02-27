@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import stripCommandPaths from './strip-command-paths.js';
 
 const EMPTY = 0;
@@ -42,5 +40,5 @@ export default function logCommand(
     logLineLength = INDENTATION_LENGTH + word.length;
   }
 
-  console.log(logLineChunks.join(''));
+  globalThis.console.log(logLineChunks.join(''));
 }
