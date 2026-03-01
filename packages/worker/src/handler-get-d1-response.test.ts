@@ -22,6 +22,11 @@ describe('Handler', (): void => {
       },
     });
 
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     async function testFetchHandler(this: FetchHandler): Promise<Response> {
       successResponse = await this.getD1Response(
         'MY_DATABASE',

@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { describe, expect, it } from 'vitest';
 import mapKVNamespaceValueToBytes from './map-kv-namespace-value-to-bytes.js';
 

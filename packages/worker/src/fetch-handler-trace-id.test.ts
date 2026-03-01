@@ -6,6 +6,11 @@ import FetchHandler from './fetch-handler.js';
 describe('FetchHandler', (): void => {
   describe('traceId', (): void => {
     it('should contain a trace ID', async (): Promise<void> => {
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       function testHandler(this: FetchHandler): Response {
         return new Response(this.traceId);
       }

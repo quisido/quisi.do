@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import {
   EXPECT_ANY_NUMBER,
   TEST_EXECUTION_CONTEXT,
@@ -22,6 +23,12 @@ describe('Handler', (): void => {
     it('should emit a duration metric', async (): Promise<void> => {
       const testEndTime = 2345;
       const testStartTime = 1234;
+
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       async function testFetchHandler(this: FetchHandler): Promise<Response> {
         await this.fetch('https://localhost/test/');
         return new Response();
@@ -58,6 +65,11 @@ describe('Handler', (): void => {
     });
 
     it('should support Request instances', async (): Promise<void> => {
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       async function testFetchHandler(this: FetchHandler): Promise<Response> {
         return await this.fetch(new Request('https://localhost/test/'));
       }

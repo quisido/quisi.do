@@ -9,6 +9,11 @@ describe('Handler', (): void => {
     let validDatabase: D1Database | null = null;
     const testDatabase = new TestD1Database();
 
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     function testFetchHandler(this: FetchHandler): Response {
       validDatabase = this.getD1Database('VALID');
       try {

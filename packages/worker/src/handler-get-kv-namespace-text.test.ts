@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import {
   EXPECT_ANY_NUMBER,
   TEST_EXECUTION_CONTEXT,
@@ -18,6 +19,11 @@ describe('Handler', (): void => {
       TEST_KEY: 'test value',
     });
 
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     async function testFetchHandler(this: FetchHandler): Promise<Response> {
       text = await this.getKVNamespaceText('MY_NAMESPACE', 'TEST_KEY');
       return new Response();
@@ -49,6 +55,11 @@ describe('Handler', (): void => {
     testNamespace.get = TEST_KV_NAMESPACE_GET;
     TEST_KV_NAMESPACE_GET.mockRejectedValue(testError);
 
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     async function testFetchHandler(this: FetchHandler): Promise<Response> {
       await this.getKVNamespaceText('MY_NAMESPACE', 'TEST_KEY');
       return new Response();

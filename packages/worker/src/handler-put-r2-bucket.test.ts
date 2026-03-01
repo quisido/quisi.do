@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import {
   EXPECT_ANY_NUMBER,
   TEST_EXECUTION_CONTEXT,
@@ -14,6 +15,11 @@ describe('Handler', (): void => {
   it('should support putting to R2 buckets', async (): Promise<void> => {
     const testBucket = new TestR2Bucket();
 
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     async function testFetchHandler(this: FetchHandler): Promise<Response> {
       await this.putR2Bucket('MY_BUCKET', 'test.json', '{}');
       return new Response();
@@ -51,6 +57,11 @@ describe('Handler', (): void => {
     const testError = new Error('test');
     testBucket.setPutError(testError);
 
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     async function testFetchHandler(this: FetchHandler): Promise<Response> {
       await this.putR2Bucket('MY_BUCKET', 'test.json', '{}');
       return new Response();

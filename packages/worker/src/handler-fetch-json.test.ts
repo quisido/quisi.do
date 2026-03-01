@@ -11,6 +11,12 @@ describe('Handler', (): void => {
     };
 
     let response: unknown = null;
+
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     async function testFetchHandler(this: FetchHandler): Promise<Response> {
       response = await this.fetchJson('https://localhost/');
       return new Response();

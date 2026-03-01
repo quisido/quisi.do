@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { describe, expect, it, vi } from 'vitest';
 import Handler from './handler.js';
 import {
@@ -38,7 +39,6 @@ describe('Handler', (): void => {
     );
 
     expect(testExpenseHandler).toHaveBeenCalledTimes(2);
-
     expect(testExpenseHandler).toHaveBeenCalledWith(Pricing.KVKeysWritten, 1);
     expect(testExpenseHandler).toHaveBeenCalledWith(
       Pricing.KVStoredData,

@@ -40,12 +40,12 @@ for (const [name, version] of Object.entries(dependencies)) {
 
 const handleErr = (chunk: unknown): void => {
   const chunkStr: string = mapToString(chunk);
-  console.error(chunkStr);
+  globalThis.console.error(chunkStr);
 };
 
 const handleOut = (chunk: unknown): void => {
   const chunkStr: string = mapToString(chunk);
-  console.log(chunkStr);
+  globalThis.console.log(chunkStr);
 };
 
 const mapCodeToString = (code: null | number): string => {

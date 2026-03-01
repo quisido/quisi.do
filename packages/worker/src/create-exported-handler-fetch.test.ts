@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import {
   TEST_CONSOLE,
   TEST_CONSOLE_ERROR,
@@ -49,6 +50,11 @@ describe('createExportedHandlerFetch', (): void => {
     const testError = new Error();
     const testPromise: Promise<unknown> = Promise.resolve();
 
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     function testFetchHandler(this: FetchHandler): Response {
       this.affect(testPromise);
       this.emitMetric('test-metric', {});
@@ -87,6 +93,11 @@ describe('createExportedHandlerFetch', (): void => {
     const testError = new Error();
     const testPromise: Promise<unknown> = Promise.resolve();
 
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     function testFetchHandler(this: FetchHandler): Promise<Response> {
       this.affect(testPromise);
       this.emitMetric('test-metric', {});
