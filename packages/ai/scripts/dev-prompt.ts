@@ -1,14 +1,5 @@
 /// <reference types="bun-types" />
-import { mapToString } from 'fmrs';
-import ollama, {
-  type AbortableAsyncIterator,
-  type ChatResponse,
-  type Message,
-} from 'ollama';
-
-interface Options {
-  readonly onChunk: (chunk: string) => void;
-}
+import ollama, { type AbortableAsyncIterator, type ChatResponse } from 'ollama';
 
 enum Model {
   DeepSeek_R1_14b = 'deepseek-r1:14b',
@@ -32,39 +23,56 @@ enum Role {
 }
 
 const MAX_ATTEMPTS = 3;
+const THINKING_MODELS = new Set<Model>([
+  Model.DeepSeek_R1_14b,
+  Model.Qwen3_14b,
+]);
+
+const SYSTEM_PROMPT: Record<'eslint' | 'vitest', string> = {
+  eslint: `You are a specialized ESLint and Static Analysis architect. You view code through the lens of strict maintainability and type safety.
+
+## Constraints
+
+When presented with an ESLint error, first explain the underlying best practice that motivates the rule exists.
+Do not suggest \`eslint-disable\` comments.
+If the error involves TypeScript types, prioritize fixing the \`interface\` or \`type\` definition over using \`any\`.`,
+  vitest: `You are a Vitest Debugging Agent. You approach failures using a 'Red-Green-Refactor' mental model.
+
+Always follow these steps:
+1. Identify the 'Actual' vs 'Expected' values in the failed assertion.
+2. Trace the data flow from the test setup (BeforeEach/Mocks) to the failing line.
+3. Check for common 'Test Smells': Unawaited promises, shared state between tests, or leaked timers.
+4. Provide a failure summary: A concise explanation of why the assertion failed.
+5. Identify if the culprit is a logic error, a mocking failure, or an environment issue (e.g., missing env vars).
+6. Provide the exact code patch to fix the failure.`,
+};
 
 export default async function chat(
   model: Model,
   prompt: string,
-  { onChunk }: Options,
-): Promise<Message> {
-  const messages: Message[] = [{ content: prompt, role: Role.User }];
-
-  const chatImpl = async (attempt: number): Promise<Message> => {
+): Promise<string> {
+  const chatImpl = async (attempt: number): Promise<string> => {
     try {
       const responseItr: AbortableAsyncIterator<ChatResponse> =
         await ollama.chat({
-          messages,
+          messages: [
+            { content: SYSTEM_PROMPT.eslint, role: Role.System },
+            { content: prompt, role: Role.User },
+          ],
           model,
           stream: true,
-          think: true,
+          think: THINKING_MODELS.has(model),
         });
 
-      let lastMessage: Message = { content: '', role: Role.Assistant };
+      const contents: string[] = [];
       for await (const { message } of responseItr) {
-        lastMessage = message;
-        onChunk(message.content);
+        contents.push(message.content);
       }
 
-      messages.push(lastMessage);
+      const message: string = contents.join('');
 
-      return lastMessage;
+      return message;
     } catch (err: unknown) {
-      messages.push({
-        content: `The Ollama \`chat\` API threw an error: ${mapToString(err)}.`,
-        role: Role.System,
-      });
-
       if (attempt >= MAX_ATTEMPTS) {
         throw new Error(
           'Failed to get response from Ollama after 3 attempts.',
@@ -81,14 +89,10 @@ export default async function chat(
 
 const [, , prompt] = process.argv;
 if (prompt === undefined) {
-  throw new Error('No prompt provided.');
+  throw new Error(`No prompt provided.`);
 }
 
-const response: Message = await chat(Model.Qwen3_Coder_30b, prompt, {
-  onChunk(_chunk: string): void {
-    // console.log(chunk);
-  },
-});
+const response: string = await chat(Model.Qwen3_Coder_30b, prompt);
 
 // eslint-disable-next-line no-console
-console.log(response.content);
+console.log(response);
