@@ -13,14 +13,14 @@ interface State {
 const CLASS_NAME: string = validateString(styles['header']);
 const TAG_LINE_CLASS_NAME: string = validateString(styles['tag-line']);
 
-function useHeader(): State {
+const useHeader = (): State => {
   // Contexts
   const { backgroundHex } = useTheme();
 
   return {
     backgroundColor: backgroundHex,
   };
-}
+};
 
 export default function Header(): ReactElement {
   const { backgroundColor } = useHeader();

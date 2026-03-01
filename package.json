@@ -23,6 +23,7 @@
     "game": "npm start --workspace=packages/game",
     "lighthouse": "npm start --workspace=packages/vite",
     "postlighthouse": "npm start --workspace=packages/vite",
+    "prompt": "quisido-ai",
     "publint": "quisi publint",
     "publish": "node ./dist/scripts/publish.js",
     "quisi": "npm start --workspace=packages/quisi",

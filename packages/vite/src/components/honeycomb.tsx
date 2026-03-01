@@ -18,7 +18,7 @@ interface Props {
   readonly serviceName: string;
 }
 
-function useSdk(sdk: HoneycombWebSDK | undefined): void {
+const useSdk = (sdk: HoneycombWebSDK | undefined): void => {
   useEffect((): VoidFunction | undefined => {
     if (typeof sdk === 'undefined') {
       return;
@@ -29,7 +29,7 @@ function useSdk(sdk: HoneycombWebSDK | undefined): void {
       sdk.shutdown().catch(noop);
     };
   }, [sdk]);
-}
+};
 
 export default function Honeycomb({
   apiKey,

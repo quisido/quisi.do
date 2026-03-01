@@ -11,13 +11,13 @@ interface State {
   readonly locale: Locale;
 }
 
-function useNumberFormat(): State {
+const useNumberFormat = (): State => {
   const [locale] = useLocale();
 
   return {
     locale,
   };
-}
+};
 
 export default function CustomNumberFormat({ children }: Props): ReactElement {
   const { locale } = useNumberFormat();

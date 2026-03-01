@@ -11,14 +11,14 @@ interface State {
 
 const CLASS_NAME: string = validateString(styles['heading']);
 
-function useHeaderHeading(): State {
+const useHeaderHeading = (): State => {
   const { displayFontFamily, displayFontWeight } = useTheme();
 
   return {
     fontFamily: `"Cairo Play", ${displayFontFamily}`,
     fontWeight: displayFontWeight,
   };
-}
+};
 
 export default function Heading(): ReactElement {
   const { fontFamily, fontWeight } = useHeaderHeading();

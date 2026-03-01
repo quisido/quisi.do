@@ -3,5 +3,5 @@ export default function split(
   delimeter: string,
 ): [string, ...(string | undefined)[]] {
   const [first, ...rest] = value.split(delimeter);
-  return [first!, ...rest];
+  return [first ?? '', ...rest];
 }

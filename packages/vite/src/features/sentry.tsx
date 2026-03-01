@@ -24,7 +24,7 @@ const TRACE_PROPAGATION_TARGETS: string[] = [
   'quisi.do',
 ];
 
-function useSentry(): State {
+const useSentry = (): State => {
   // Contexts
   const authn: AuthenticationState = useAuthentication();
 
@@ -48,9 +48,9 @@ function useSentry(): State {
   return {
     user,
   };
-}
+};
 
-function SentryFeature({ children }: Props): ReactElement {
+export default function SentryFeature({ children }: Props): ReactElement {
   const { user } = useSentry();
 
   return (
@@ -65,5 +65,3 @@ function SentryFeature({ children }: Props): ReactElement {
     </Sentry>
   );
 }
-
-export default SentryFeature;

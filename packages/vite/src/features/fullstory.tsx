@@ -13,7 +13,7 @@ interface AuthenticatedState {
 
 type State = AuthenticatedState | Record<string, never>;
 
-function useFullstory(): State {
+const useFullstory = (): State => {
   // Contexts
   const authn: AuthenticationState = useAuthentication();
 
@@ -29,7 +29,7 @@ function useFullstory(): State {
     identity: authn.data,
     identityUid: authn.data.id.toString(),
   };
-}
+};
 
 export default function FullstoryFeature({
   children,

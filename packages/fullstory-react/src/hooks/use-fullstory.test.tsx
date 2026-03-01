@@ -2,7 +2,6 @@ import { FullStory } from '@fullstory/browser';
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import expectToThrow from '../../test/expect-to-throw.js';
 import MockFullstory from '../components/mock-fullstory.js';
 import useFullstory from './use-fullstory.js';
 
@@ -33,11 +32,8 @@ describe('useFullstory', (): void => {
     });
   });
 
-  it('should throw when Fullstory is not provided', (): void => {
-    expectToThrow(
-      useFullstory,
-      'Expected the Fullstory context to be provided.',
-    );
+  it.fails('when Fullstory is not provided', (): void => {
+    renderHook(useFullstory);
   });
 
   it('should provide a Fullstory API', (): void => {

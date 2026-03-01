@@ -23,7 +23,7 @@ const OUTER_BORDER_COLOR_CLASS_NAME: string = validateString(
 
 const invert = (color: number): number => MAX_COLOR - color;
 
-function useBackgroundImage(): string | undefined {
+const useBackgroundImage = (): string | undefined => {
   const { background, lines } = useTheme();
 
   return useMemo((): string | undefined => {
@@ -45,7 +45,7 @@ function useBackgroundImage(): string | undefined {
 
     return `repeating-linear-gradient(${gradient})`;
   }, [background, lines]);
-}
+};
 
 export default function Theme({ children }: PropsWithChildren): ReactElement {
   const { backgroundHex, foregroundHex, lines, secondaryAlpha } = useTheme();

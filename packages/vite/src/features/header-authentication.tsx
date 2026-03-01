@@ -12,7 +12,7 @@ interface State {
 
 const SHOW_LOADING_TIMEOUT = 200;
 
-function useAuthenticationState(): State {
+const useAuthenticationState = (): State => {
   const { data, error, initiated, loading } = useAuthentication();
   const [showLoading, setShowLoading] = useState(false);
 
@@ -51,7 +51,7 @@ function useAuthenticationState(): State {
     show: getShow(),
     showLoading: loading && showLoading,
   };
-}
+};
 
 export default function Authentication(): ReactElement | null {
   const { id, show, showLoading } = useAuthenticationState();

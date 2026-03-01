@@ -29,7 +29,7 @@ const SCOPES: readonly string[] = [
   // 'identity.memberships',
 ];
 
-function useAuthenticateLink(): State {
+const useAuthenticateLink = (): State => {
   // Contexts
   const pathname: string = usePathname();
   const search: string = useSearch();
@@ -54,7 +54,7 @@ function useAuthenticateLink(): State {
     }, [pathname, search, sessionId]),
     title: translate('Authenticate') ?? 'Authenticate',
   };
-}
+};
 
 export default function AuthenticateLink(): ReactElement {
   const { href, title } = useAuthenticateLink();

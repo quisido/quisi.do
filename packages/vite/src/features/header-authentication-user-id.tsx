@@ -12,7 +12,7 @@ interface State {
   readonly handleUnauthenticateClick: () => false;
 }
 
-function useHeaderAuthenticationUserId(): State {
+const useHeaderAuthenticationUserId = (): State => {
   const { set } = useAuthentication();
 
   return {
@@ -31,7 +31,7 @@ function useHeaderAuthenticationUserId(): State {
       return false;
     },
   };
-}
+};
 
 export default function HeaderAuthenticationUserId({
   children,

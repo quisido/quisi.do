@@ -6,7 +6,7 @@ import styles from './notifications.module.scss';
 
 const CLASS_NAME: string = validateString(styles['notifications']);
 
-function Notifications(): ReactElement {
+export default function Notifications(): ReactElement {
   // Context
   const [notifications] = useNotifications();
 
@@ -16,5 +16,3 @@ function Notifications(): ReactElement {
     </div>
   );
 }
-
-export default Notifications;

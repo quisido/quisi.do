@@ -10,6 +10,9 @@ const IGNORES_CONFIG: readonly Config[] = defineConfig({
     // git
     '**/.git/**',
 
+    // GitHub Pages
+    '**/_site/**',
+
     // Jest
     '**/jest/**',
 

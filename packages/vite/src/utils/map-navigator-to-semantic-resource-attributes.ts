@@ -3,8 +3,8 @@ import {
   ATTR_OS_NAME,
   ATTR_OS_TYPE,
   ATTR_WEBENGINE_DESCRIPTION,
-  ATTR_WEBENGINE_NAME,
-  ATTR_WEBENGINE_VERSION,
+  type ATTR_WEBENGINE_NAME,
+  type ATTR_WEBENGINE_VERSION,
 } from '@opentelemetry/semantic-conventions/incubating';
 import mapOscpuToName from './map-oscpu-to-name.js';
 import mapOscpuToType from './map-oscpu-to-type.js';
@@ -28,7 +28,7 @@ export type SemanticResourceNavigatorAttributes = Record<
 export default function mapNavigatorToSemanticResourceAttributes(
   navigator: Navigator,
 ): SemanticResourceNavigatorAttributes {
-  const { productSub, userAgent, vendor } = navigator;
+  const { userAgent } = navigator;
 
   const getOscpu = (): string | undefined => {
     if (!('oscpu' in navigator)) {
@@ -39,7 +39,7 @@ export default function mapNavigatorToSemanticResourceAttributes(
       return validateString(navigator.oscpu);
     } catch (_err: unknown) {
       // Fail gracefully.
-      return;
+      return undefined;
     }
   };
 
@@ -49,7 +49,7 @@ export default function mapNavigatorToSemanticResourceAttributes(
     [ATTR_OS_NAME]: mapOscpuToName(oscpu),
     [ATTR_OS_TYPE]: mapOscpuToType(oscpu),
     [ATTR_WEBENGINE_DESCRIPTION]: userAgent,
-    [ATTR_WEBENGINE_NAME]: vendor,
-    [ATTR_WEBENGINE_VERSION]: productSub,
+    // [ATTR_WEBENGINE_NAME]: vendor,
+    // [ATTR_WEBENGINE_VERSION]: productSub,
   };
 }
