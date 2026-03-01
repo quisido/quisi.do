@@ -1,3 +1,4 @@
+/* stylelint-disable declaration-block-no-redundant-longhand-properties */
 $hover-offset: -2px;
 $outline-width: 4px;
 $raised-offset: -3px;
@@ -27,6 +28,18 @@ $raised-offset: -3px;
   transition-property: box-shadow, margin-bottom, margin-left, margin-right, margin-top;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
+
+  &:hover {
+    margin-bottom: ($outline-width - $hover-offset) !important;
+    margin-left: ($outline-width + $hover-offset) !important;
+    margin-right: ($outline-width - $hover-offset) !important;
+    margin-top: ($outline-width + $hover-offset) !important;
+  }
+
+  &:not(:focus-visible) {
+    outline-style: solid;
+    outline-width: $outline-width;
+  }
 }
 
 .button:active,
@@ -35,16 +48,4 @@ $raised-offset: -3px;
   margin-left: $outline-width !important;
   margin-right: $outline-width !important;
   margin-top: $outline-width !important;
-}
-
-.button:hover {
-  margin-bottom: ($outline-width - $hover-offset) !important;
-  margin-left: ($outline-width + $hover-offset) !important;
-  margin-right: ($outline-width - $hover-offset) !important;
-  margin-top: ($outline-width + $hover-offset) !important;
-}
-
-.button:not(:focus-visible) {
-  outline-style: solid;
-  outline-width: $outline-width;
 }
