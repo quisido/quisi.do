@@ -1,9 +1,9 @@
 /// <reference types="node" />
 
-import { readFileSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 
 globalThis.console.log(
   JSON.stringify({
-    vitest: JSON.parse(readFileSync('./.tests/vitest/report.json')),
+    vitest: JSON.parse(await readFile('./.tests/vitest/report.json', 'utf8')),
   }),
 );

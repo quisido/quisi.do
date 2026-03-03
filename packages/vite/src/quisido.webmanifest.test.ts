@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { assert, describe, expect, it } from 'vitest';
 import findSplashScreenIcon from '../test/find-splash-screen-icon.js';
@@ -22,7 +22,7 @@ const {
   name,
   theme_color: themeColor,
 } = JSON.parse(
-  readFileSync(join(__dirname, '../public/quisido.webmanifest')).toString(),
+  await readFile(join(__dirname, '../public/quisido.webmanifest'), 'utf8'),
 ) as WebManifest;
 
 describe('web manifest', (): void => {
