@@ -256,6 +256,7 @@ jobs:
         with:
           name: webhint-production
           if-no-files-found: error
+          include-hidden-files: true
           path: packages/vite/.tests/webhint
 
 on:

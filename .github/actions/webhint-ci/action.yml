@@ -29,5 +29,6 @@ runs:
       with:
         name: webhint-ci
         if-no-files-found: error
+        include-hidden-files: true
         path: packages/vite/.tests/webhint
 

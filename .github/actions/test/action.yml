@@ -16,6 +16,7 @@ runs:
       with:
         name: test
         if-no-files-found: error
+        include-hidden-files: true
         path: |
           .tests/
           packages/*/.tests/
