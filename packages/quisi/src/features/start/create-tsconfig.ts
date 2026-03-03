@@ -2,17 +2,11 @@ import { join } from 'node:path';
 import type TSConfig from '../../types/tsconfig.js';
 import createCompilerOptions from './create-compiler-options.js';
 
-interface Options {
-  readonly skipLibCheck?: boolean | undefined;
-}
-
-export default async function createTSConfig({
-  skipLibCheck,
-}: Options): Promise<TSConfig> {
+export default async function createTSConfig(): Promise<TSConfig> {
   const cwd: string = process.cwd();
 
   return {
-    compilerOptions: await createCompilerOptions({ skipLibCheck }),
+    compilerOptions: await createCompilerOptions(),
     exclude: [
       join(cwd, 'src', '**', '*.test.ts'),
       join(cwd, 'src', '**', '*.test.tsx'),

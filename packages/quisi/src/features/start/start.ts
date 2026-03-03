@@ -1,11 +1,8 @@
 import mapToString from '../../utils/map-to-string.js';
-import getStartConfig from '../config/get-start-config.js';
 import tsc from '../tsc/tsc.js';
 import createTSConfigFile from './create-tsconfig-file.js';
 
 export default async function start(): Promise<void> {
-  const { skipLibCheck } = await getStartConfig();
-
   const errorLogs: string[] = [];
   const handleError = (err: unknown): void => {
     errorLogs.push(mapToString(err));
@@ -21,7 +18,7 @@ export default async function start(): Promise<void> {
    * these references by Ctrl-F for "/@types/node" with the `/` prefix.
    */
   try {
-    const tsconfigFile: string = await createTSConfigFile({ skipLibCheck });
+    const tsconfigFile: string = await createTSConfigFile();
     await tsc('--project', tsconfigFile, '--watch');
   } catch (err: unknown) {
     handleError(err);

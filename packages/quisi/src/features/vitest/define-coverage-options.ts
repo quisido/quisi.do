@@ -5,11 +5,11 @@ import { EXCLUDE } from './exclude.js';
 
 export { type CoverageOptions } from 'vitest/node';
 
-export default async function defineCoverageOptions({
+export default function defineCoverageOptions({
   exclude = [],
   thresholds = {},
   ...coverageOptions
-}: CoverageOptions<'istanbul'>): Promise<CoverageOptions<'istanbul'>> {
+}: CoverageOptions<'istanbul'>): CoverageOptions<'istanbul'> {
   return {
     clean: true,
     enabled: true,
@@ -17,7 +17,7 @@ export default async function defineCoverageOptions({
     reportOnFailure: true,
     reportsDirectory: '.tests',
     skipFull: true,
-    thresholds: await defineThresholds(thresholds),
+    thresholds: defineThresholds(thresholds),
     ...coverageOptions,
 
     provider: 'istanbul',

@@ -1,12 +1,10 @@
 import mapToString from '../../utils/map-to-string.js';
-import getBuildConfig from '../config/get-build-config.js';
 import tsc from '../tsc/tsc.js';
 import createTSConfigFile from './create-tsconfig-file.js';
 
 const EMPTY = 0;
 
 export default async function build(): Promise<void> {
-  const { skipLibCheck } = await getBuildConfig();
   const errorLogs: string[] = [];
 
   const handleError = (err: unknown): void => {
@@ -23,7 +21,7 @@ export default async function build(): Promise<void> {
    * these references by Ctrl-F for "/@types/node" with the `/` prefix.
    */
   try {
-    const tsconfigFile: string = await createTSConfigFile({ skipLibCheck });
+    const tsconfigFile: string = await createTSConfigFile();
     await tsc('--project', tsconfigFile);
   } catch (err: unknown) {
     handleError(err);

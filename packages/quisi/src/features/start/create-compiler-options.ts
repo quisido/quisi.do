@@ -2,13 +2,7 @@ import { join } from 'node:path';
 import type { server } from 'typescript';
 import createJsx from './create-jsx.js';
 
-interface Options {
-  readonly skipLibCheck?: boolean | undefined;
-}
-
-export default async function createCompilerOptions({
-  skipLibCheck = false,
-}: Options): Promise<server.protocol.CompilerOptions> {
+export default async function createCompilerOptions(): Promise<server.protocol.CompilerOptions> {
   const cwd: string = process.cwd();
 
   const compilerOptions: server.protocol.CompilerOptions = {
@@ -22,7 +16,7 @@ export default async function createCompilerOptions({
      * source files are emitted.
      */
     rootDir: join(cwd, 'src'),
-    skipLibCheck,
+    skipLibCheck: true,
     tsBuildInfoFile: join(cwd, '.cache', 'quisi-start.tsbuildinfo'),
   };
 

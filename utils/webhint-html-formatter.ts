@@ -6,7 +6,7 @@ export default class PatchedHTMLFormatter extends HTMLFormatter.default {
   override format(
     problems: Problem[],
     options: FormatterOptions = {},
-  ): ReturnType<HTMLFormatter.default['format']> {
+  ): ReturnType<InstanceType<typeof HTMLFormatter.default>['format']> {
     return super.format(problems, {
       ...options,
       output: options.output ?? '.tests/webhint',

@@ -17,7 +17,7 @@ export default async function defineVitestInlineConfig({
 }: QuisiVitestInlineConfig): Promise<QuisiVitestInlineConfig> {
   return {
     clearMocks: true,
-    coverage: await defineCoverageOptions(coverage),
+    coverage: defineCoverageOptions(coverage),
     environment: 'node',
     exclude: [...EXCLUDE, ...exclude],
     mockReset: true,

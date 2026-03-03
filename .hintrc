@@ -226,7 +226,13 @@
     "strict-transport-security": "error",
     "stylesheet-limit": "off",
     "typescript-config/import-helpers": "error",
-    "typescript-config/is-valid": "error",
+    /**
+     *   TypeScript already handles configuration file validation. Webhint's
+     * validation contains inaccuracies, like "generateCpuProfile, mapRoot,
+     * sourceRoot, and tsBuildInfoFile must be 'string'" despite `null` being a
+     * valid value.
+     */
+    "typescript-config/is-valid": "off",
     /**
      *   Removing comments as part of a separate minification step is
      * recommended instead. https://github.com/webhintio/hint/issues/4839
