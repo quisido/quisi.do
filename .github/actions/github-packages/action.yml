@@ -13,8 +13,10 @@ runs:
     - name: Setup
       uses: ./.github/actions/setup
     - name: Publish
-      run: ./.github/actions/github-packages/github-packages-publish.sh
       shell: bash
       env:
         NPM_AUTH_TOKEN: ${{ inputs.auth-token }}
         NPM_CONFIG_PROVENANCE: true
+      run: |
+        chmod +x ./.github/actions/github-packages/github-packages-publish.sh &&
+        ./.github/actions/github-packages/github-packages-publish.sh;

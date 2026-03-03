@@ -8,9 +8,11 @@ runs:
     - name: Setup
       uses: ./.github/actions/setup
     - name: Audit
-      run: ./scripts/lighthouse-production.sh
       shell: bash
       working-directory: packages/vite
+      run: |
+        chmod +x ./scripts/lighthouse-production.sh &&
+        ./scripts/lighthouse-production.sh;
     - name: Validate
       run: node ./scripts/postlighthouse/index.js
       shell: bash
