@@ -7,7 +7,7 @@ import {
 import { SessionIdProvider } from '../contexts/session-id.js';
 import getSessionId from '../utils/get-session-id';
 
-function SessionIdProviderFeature({
+export default function SessionIdProviderFeature({
   children,
 }: PropsWithChildren): ReactElement {
   // States
@@ -20,5 +20,3 @@ function SessionIdProviderFeature({
 
   return <SessionIdProvider value={sessionId}>{children}</SessionIdProvider>;
 }
-
-export default SessionIdProviderFeature;

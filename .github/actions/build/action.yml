@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
+name: Build
+description: Builds the repository
+
+inputs:
+  environment:
+    default: development
+    description: The environment being built (e.g. production, staging)
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Setup
+      uses: ./.github/actions/setup
+      with:
+        download-build: false
+    - name: Build
+      run: npm run build
+      shell: bash
+      env:
+        DD_PROFILING_ENABLED: true
+        DD_VERSION: ${{ github.sha }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        GITHUB_SHA: ${{ github.sha }}
+        NODE_ENV: ${{ inputs.environment }}
+    - name: Upload
+      uses: actions/upload-artifact@v6
+      with:
+        name: build
+        if-no-files-found: error
+        path: |
+          dist/
+          packages/*/_site/
+          packages/*/dist/

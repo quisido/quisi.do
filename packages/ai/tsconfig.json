@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "declarationDir": "dist",
+    "noEmit": true,
+    "rootDir": ".",
+		"skipLibCheck": true
+  },
+  "exclude": [".cache/", ".tests/", "dist/"],
+  "extends": "quisi/tsconfig.json",
+  "include": ["**/*.ts"]
+}

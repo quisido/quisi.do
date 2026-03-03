@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import useShallowMemo from 'use-shallow-memo';
 import useSentrySdk from '../../hooks/use-sentry-sdk.js';
 
-interface Props extends Readonly<BrowserOptions> {
+export interface Props extends Readonly<BrowserOptions> {
   readonly user?: User | undefined;
 }
 

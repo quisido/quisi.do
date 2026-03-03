@@ -4,6 +4,7 @@ import {
   type ExecFileException,
 } from 'node:child_process';
 import { EOL } from 'node:os';
+import process from 'node:process';
 import hasToStringMethod from './has-to-string-method.js';
 
 export interface ExecutionResult {
@@ -13,23 +14,30 @@ export interface ExecutionResult {
 }
 
 interface Options {
+  readonly env?: Partial<Record<string, string | undefined>> | undefined;
   readonly onStdErr?: undefined | ((data: string) => void);
   readonly onStdOut?: undefined | ((data: string) => void);
 }
 
 const ERROR_STATUS_CODE = 1;
+const DEFAULT_ENV: Partial<Record<string, string | undefined>> = {};
 const SUCCESS_STATUS_CODE = 0;
 
 export default function execute(
   command: string,
   args: readonly string[],
-  { onStdErr, onStdOut }: Options = {},
+  { env = DEFAULT_ENV, onStdErr, onStdOut }: Options = {},
 ): Promise<ExecutionResult> {
   return new Promise<ExecutionResult>((resolve): void => {
     const childProcess: ChildProcess = execFile(
       command,
       args,
-      { cwd: process.cwd(), encoding: 'utf-8', shell: false },
+      {
+        cwd: process.cwd(),
+        encoding: 'utf8',
+        env: { ...process.env, ...env },
+        shell: false,
+      },
       (err: ExecFileException | null, stdout: string, stderr: string): void => {
         const { exitCode } = childProcess;
 
@@ -42,17 +50,18 @@ export default function execute(
           return;
         }
 
-        if (stderr === '') {
-          resolve({
-            exitCode: exitCode ?? ERROR_STATUS_CODE,
-            stderr: err.message,
-            stdout,
-          });
-        }
+        /**
+         *   Non-null assertion is acceptable here, because `.split()[0]` always
+         * returns a string.
+         */
+
+        const errMessage: string = (
+          err.message.split('Command failed: ')[0] ?? ''
+        ).trim();
 
         resolve({
           exitCode: exitCode ?? ERROR_STATUS_CODE,
-          stderr: `${stderr}${EOL}${err.message}`,
+          stderr: [stderr, errMessage].join(EOL).trim(),
           stdout,
         });
       },

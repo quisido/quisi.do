@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { FetchHandler } from '@quisido/worker';
 import { TestAnalyticsEngineDataset } from 'cloudflare-test-utils';
 import { describe, it } from 'vitest';
@@ -6,6 +7,11 @@ import { TestExportedHandler } from './index.js';
 describe('TestExportedHandler', (): void => {
   describe('expectMetric', (): void => {
     it('should spy on the metric handler', async (): Promise<void> => {
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       function testFetchHandler(this: FetchHandler): Response {
         this.emitMetric('name', { key: 'value' });
         return new Response();
@@ -29,6 +35,11 @@ describe('TestExportedHandler', (): void => {
 
   describe('expectNotToHaveWrittenDataPoint', (): void => {
     it('should spy on an Analytics Engine dataset', async (): Promise<void> => {
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       function testFetchHandler(this: FetchHandler): Response {
         this.writeMetricDataPoint('MY_DATASET', 'name', { key: 'value' });
         return new Response();

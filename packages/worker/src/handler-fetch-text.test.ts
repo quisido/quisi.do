@@ -5,6 +5,11 @@ import { FetchHandler } from './index.js';
 
 describe('Handler', (): void => {
   it('should support fetching text', async (): Promise<void> => {
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     async function testFetchHandler(this: FetchHandler): Promise<Response> {
       return new Response(await this.fetchText('https://localhost/'));
     }

@@ -14,6 +14,7 @@ export default async function mapReadableStreamToString<
   };
 
   do {
+    // eslint-disable-next-line no-await-in-loop
     const { done, value } = await reader.read();
     if (typeof value !== 'undefined') {
       state.value += new TextDecoder().decode(value);

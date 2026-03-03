@@ -1,18 +1,9 @@
-import config, {
-  COVERAGE_OPTIONS,
-  defineConfig,
-  EXCLUDE,
-  INLINE_CONFIG,
-  type UserConfig,
-} from '@quisido/vitest-config';
+import { defineVitestConfig, type VitestConfig } from 'quisi';
 
-const CONFIG: UserConfig = defineConfig({
-  ...config,
+const CONFIG: VitestConfig = await defineVitestConfig({
   test: {
-    ...INLINE_CONFIG,
     coverage: {
-      ...COVERAGE_OPTIONS,
-      exclude: [...EXCLUDE, 'scripts/'],
+      exclude: ['scripts/'],
     },
   },
 });

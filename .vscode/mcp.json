@@ -1,6 +1,13 @@
 {
 	"inputs": [],
 	"servers": {
+    "chrome-devtools": {
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ],
+      "command": "npx"
+    },
     "context7": {
       "url": "https://mcp.context7.com/mcp",
       "type": "http"

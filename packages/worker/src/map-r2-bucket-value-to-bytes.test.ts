@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { describe, expect, it } from 'vitest';
 import mapR2BucketValueToBytes from './map-r2-bucket-value-to-bytes.js';
 

@@ -7,11 +7,16 @@ import describeWorkspaces from './utils/describe-workspaces.js';
 import mapDirectoryToPackageJson from './utils/map-directory-to-package-json.js';
 import mapDirectoryToVsCodeExtensionsJson from './utils/map-directory-to-vs-code-extensions-json.js';
 
-const DEPENDENCY_EXTENSIONS: Record<string, string> = {
-  eslint: 'dbaeumer.vscode-eslint',
-  publint: 'kravets.vscode-publint',
-  stylelint: 'stylelint.vscode-stylelint',
-  vitest: 'vitest.explorer',
+const DEPENDENCY_EXTENSIONS: Record<string, readonly string[]> = {
+  eslint: ['dbaeumer.vscode-eslint'],
+  publint: ['kravets.vscode-publint'],
+  quisi: [
+    'dbaeumer.vscode-eslint',
+    'kravets.vscode-publint',
+    'vitest.explorer',
+  ],
+  stylelint: ['stylelint.vscode-stylelint'],
+  vitest: ['vitest.explorer'],
 };
 
 const FILE_EXTENSIONS: Record<string, string> = {
@@ -39,13 +44,13 @@ describeWorkspaces(async (dirent: Dirent): Promise<void> => {
         }),
       );
 
-      for (const [dependency, extension] of Object.entries(
+      for (const [dependency, dependencyExtensions] of Object.entries(
         DEPENDENCY_EXTENSIONS,
       )) {
         if (dependencies.has(dependency)) {
-          expect(extensions.recommendations).toContain(extension);
-        } else {
-          expect(extensions.recommendations).not.toContain(extension);
+          for (const dependencyExtension of dependencyExtensions) {
+            expect(extensions.recommendations).toContain(dependencyExtension);
+          }
         }
       }
 

@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import {
   EXPECT_ANY_STRING,
   TEST_EXECUTION_CONTEXT,
@@ -9,6 +10,11 @@ import FetchHandler from './fetch-handler.js';
 describe('FetchHandler', (): void => {
   describe('traceParentMetricDimensions', (): void => {
     it('should exist when there is no trace parent', async (): Promise<void> => {
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       function testHandler(this: FetchHandler): Response {
         return new Response(JSON.stringify(this.traceParentMetricDimensions));
       }
@@ -37,6 +43,11 @@ describe('FetchHandler', (): void => {
     });
 
     it('should contain the trace parent as metric dimensions', async (): Promise<void> => {
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       function testHandler(this: FetchHandler): Response {
         return new Response(JSON.stringify(this.traceParentMetricDimensions));
       }
@@ -70,6 +81,11 @@ describe('FetchHandler', (): void => {
     });
 
     it('should handle invalid traceparents', async (): Promise<void> => {
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       function testHandler(this: FetchHandler): Response {
         return new Response(JSON.stringify(this.traceParentMetricDimensions));
       }
@@ -102,6 +118,11 @@ describe('FetchHandler', (): void => {
     });
 
     it('should handle invalid trace IDs', async (): Promise<void> => {
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       function testHandler(this: FetchHandler): Response {
         return new Response(JSON.stringify(this.traceParentMetricDimensions));
       }
@@ -135,6 +156,11 @@ describe('FetchHandler', (): void => {
     });
 
     it('should handle invalid parent trace IDs', async (): Promise<void> => {
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       function testHandler(this: FetchHandler): Response {
         return new Response(JSON.stringify(this.traceParentMetricDimensions));
       }

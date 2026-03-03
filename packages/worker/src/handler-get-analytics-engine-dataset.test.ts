@@ -12,6 +12,11 @@ describe('Handler', (): void => {
     let validDataset: AnalyticsEngineDataset | null = null;
     const testDataset = new TestAnalyticsEngineDataset();
 
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     function testFetchHandler(this: FetchHandler): Response {
       validDataset = this.getAnalyticsEngineDataset('VALID');
       try {

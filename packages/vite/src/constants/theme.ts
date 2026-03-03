@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import type Theme from '../types/theme.js';
 
 /**

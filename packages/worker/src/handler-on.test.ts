@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import {
   TEST_CONSOLE_ERROR,
   TEST_EXECUTION_CONTEXT,
@@ -15,6 +16,12 @@ describe('Handler', (): void => {
   describe('#on', (): void => {
     it('should handle asynchronous listeners', async (): Promise<void> => {
       let testMessage: string | null = null;
+
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       function testFetchHandler(this: FetchHandler): Response {
         this.onLog(async (message: string): Promise<void> => {
           await asyncSetTimeout(IMMEDIATE);
@@ -51,6 +58,11 @@ describe('Handler', (): void => {
     });
 
     it('should handle listener errors', async (): Promise<void> => {
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       function testFetchHandler(this: FetchHandler): Response {
         this.onLog(throwy);
         this.onError((): void => {

@@ -1,16 +1,22 @@
 {
   "files.exclude": {
+    ".cache/": true,
+    ".tests/": true,
+    "_site/": true,
+    "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   },
   "files.watcherExclude": {
-    ".eslintcache": true,
-    "*.tsbuildinfo": true,
+    ".cache/": true,
+    ".tests/": true,
+    "_site/": true,
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   },
   "search.exclude": {
-    ".eslintcache": true,
-    "*.tsbuildinfo": true,
+    ".cache/": true,
+    ".tests/": true,
+    "_site/": true,
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   }

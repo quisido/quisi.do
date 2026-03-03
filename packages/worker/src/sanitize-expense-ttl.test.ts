@@ -8,6 +8,7 @@ describe('sanitizeExpenseTtl', (): void => {
   });
 
   it('should return non-zero TTLs', (): void => {
-    expect(sanitizeExpenseTtl(1234)).toBe(1234);
+    const ttl = 1234;
+    expect(sanitizeExpenseTtl(ttl)).toBe(ttl);
   });
 });

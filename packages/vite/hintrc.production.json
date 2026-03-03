@@ -1,0 +1,35 @@
+{
+  // "$schema": "https://raw.githubusercontent.com/webhintio/hint/main/packages/hint/src/lib/config/config-schema.json",
+
+  "extends": ["../../.hintrc"],
+
+  "hints": {
+    // Technical debt: Re-enable this when the theme is finalized.
+    "axe/color": "off",
+
+    // Technical debt: Re-enable this when `api-js.mixpanel.com` is blocked.
+    "axe/keyboard": "off",
+
+    // Technical debt: Re-enable this when `api-js.mixpanel.com` is blocked.
+    "axe/text-alternatives": "off",
+
+    /**
+     *   Technical debt: Re-enable this after debugging why the hint options in
+     * `~/.hintrc` are ignored.
+     */
+    "compat-api/css": "off",
+
+    // Technical debt: Re-enable these when the animation is optimized.
+    "detect-css-reflows/composite": "off",
+    "detect-css-reflows/paint": "off",
+
+    /**
+     * "Could not get results from HTML checker for '...'.
+     * Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+     */
+    "html-checker": "off",
+
+    // "No valid configuration for Cloudinary found. Hint could not run."
+    "image-optimization-cloudinary": "off"
+  }
+}

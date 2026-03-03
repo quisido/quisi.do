@@ -1,21 +1,21 @@
 import npxEslint from './npx-eslint.js';
 
 interface Options {
-  readonly eslintConfigFile: string;
   readonly format: 'html' | 'json';
 }
 
-export default async function report({
-  eslintConfigFile,
-  format,
-}: Options): Promise<void> {
+export default async function report({ format }: Options): Promise<string> {
+  const outputFile: string = `.tests/eslint.${format}`;
+
   await npxEslint(
     '--config',
-    eslintConfigFile,
+    'eslint.config.ts',
     '--format',
     format,
     '--output-file',
-    `.tests/eslint.${format}`,
+    outputFile,
     '--stats',
   );
+
+  return outputFile;
 }

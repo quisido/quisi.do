@@ -1,0 +1,88 @@
+{
+	"$schema": "../../node_modules/wrangler/config-schema.json",
+
+  "ai": {
+    "binding": "AI"
+  },
+
+  "analytics_engine_datasets": [
+    { "binding": "PRIVATE_DATASET", "dataset": "AI_PRIVATE_DEV" },
+    { "binding": "PUBLIC_DATASET", "dataset": "AI_PUBLIC_DEV" }
+  ],
+
+	"compatibility_date": "2026-02-05",
+	"compatibility_flags": [
+    "nodejs_compat",
+
+    // Vitest
+    "enable_nodejs_fs_module",
+    "enable_nodejs_http_modules",
+    "enable_nodejs_perf_hooks_module",
+    "enable_nodejs_tty_module",
+  ],
+
+	"dev": {
+    "local_protocol": "https",
+    "port": 378 // parseInt('ai', 36) % 9999
+  },
+
+	"env": {
+    "development": {
+      "vars": {
+        "ENVIRONMENT_NAME": "development"
+      }
+    },
+		
+
+    "production": {
+      "analytics_engine_datasets": [
+        { "binding": "PRIVATE_DATASET", "dataset": "AI_PRIVATE" },
+        { "binding": "PUBLIC_DATASET", "dataset": "AI_PUBLIC" }
+      ],
+      "name": "quisido-ai",
+			"routes": [
+        { "custom_domain": true, "pattern": "ai.quisi.do" }
+      ],
+			"vars": {
+        "ENVIRONMENT_NAME": "production"
+      }
+    },
+
+    "staging": {
+      "analytics_engine_datasets": [
+        { "binding": "PRIVATE_DATASET", "dataset": "AI_PRIVATE_STAGING" },
+        { "binding": "PUBLIC_DATASET", "dataset": "AI_PUBLIC_STAGING" }
+      ],
+			"name": "quisido-ai-staging",
+			"routes": [
+        { "custom_domain": true, "pattern": "staging.ai.quisi.do" }
+      ],
+      "vars": {
+        "ENVIRONMENT_NAME": "staging"
+      },
+			"workers_dev": true
+    }
+	},
+
+	"main": "src/index.ts",
+	"name": "quisido-ai",
+
+	"observability": {
+		"enabled": true,
+		"logs": {
+			"enabled": true
+		}
+	},
+
+  "placement": {
+    "mode": "smart"
+  },
+
+	"send_metrics": true,
+  "tsconfig": "./tsconfig.json",
+  "upload_source_maps": true,
+
+	"vars": {
+    "ENVIRONMENT_NAME": "unknown"
+  }
+}

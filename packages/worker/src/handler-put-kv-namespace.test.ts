@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import {
   EXPECT_ANY_NUMBER,
   TEST_EXECUTION_CONTEXT,
@@ -14,6 +15,11 @@ describe('Handler', (): void => {
   it('should support putting to KV namespaces', async (): Promise<void> => {
     const testNamespace = new TestKVNamespace();
 
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     async function testFetchHandler(this: FetchHandler): Promise<Response> {
       await this.putKVNamespace('MY_NAMESPACE', 'TEST_KEY', 'test value');
       return new Response();
@@ -55,6 +61,11 @@ describe('Handler', (): void => {
     const testNamespace = new TestKVNamespace();
     testNamespace.setPutError(testError);
 
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     async function testFetchHandler(this: FetchHandler): Promise<Response> {
       await this.putKVNamespace('MY_NAMESPACE', 'TEST_KEY', 'test value');
       return new Response();

@@ -74,7 +74,6 @@ reviews:
   high_level_summary_in_walkthrough: true
   in_progress_fortune: true
   path_filters:
-    - "**/.*.hintrc"
     - "**/.*.json"
     - "**/.*.yml"
     - "**/.*config"

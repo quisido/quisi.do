@@ -8,6 +8,11 @@ describe('Handler', (): void => {
     let bucket: R2Bucket | null = null;
     const testBucket = new TestR2Bucket();
 
+    /**
+     *   Technical debt: ESLint should not expect function expressions for
+     * functions typed with `this`.
+     */
+    // eslint-disable-next-line func-style
     function testFetchHandler(this: FetchHandler): Response {
       bucket = this.getR2Bucket('MY_BUCKET');
       return new Response();

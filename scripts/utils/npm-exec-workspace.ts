@@ -1,29 +1,107 @@
-import { execFile } from 'node:child_process';
-import { promisify } from 'node:util';
-import getNpmCommand from './get-npm-command.js';
+import {
+  type ChildProcess,
+  type Serializable,
+  spawn,
+} from 'node:child_process';
+import getScriptCommand from './get-script-command.js';
 import handleNpmExecWorkspaceError from './handle-npm-exec-workspace-error.js';
 import logCommand from './log-command.js';
 
-const [FILE, ...ARGS] = getNpmCommand();
-const execFileAsync = promisify(execFile);
+const [FILE, ...ARGS] = getScriptCommand();
+const MAX_CONSOLE_LENGTH = 80;
+
+const spawnAsync = async (
+  command: string,
+  args: readonly string[],
+): Promise<string> => {
+  const childProcess: ChildProcess = spawn(command, args, {
+    shell: false,
+    stdio: ['inherit', 'pipe', 'pipe'],
+    timeout: 900000, // 15 minutes
+  });
+
+  const { stderr, stdout } = childProcess;
+  if (stderr === null) {
+    throw new Error(
+      `Expected child process to have an error stream for ${command} ${args.join(' ')}.`,
+    );
+  }
+
+  if (stdout === null) {
+    throw new Error(
+      `Expected child process to have an output stream for ${command} ${args.join(' ')}.`,
+    );
+  }
+
+  const stderrChunks: string[] = [];
+  const stdoutChunks: string[] = [];
+
+  stderr.on('data', (chunk: Serializable): void => {
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string
+    globalThis.console.error(chunk.toString().replace(/\r?\n$/u, ''));
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string
+    stderrChunks.push(chunk.toString());
+  });
+
+  stdout.on('data', (chunk: Serializable): void => {
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string
+    globalThis.console.log(chunk.toString().replace(/\r?\n$/u, ''));
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string
+    stdoutChunks.push(chunk.toString());
+  });
+
+  return new Promise((resolve, reject): void => {
+    childProcess.on(
+      'exit',
+      (code: number | null, signal: NodeJS.Signals | null) => {
+        stderr.destroy();
+        stdout.destroy();
+
+        if (code === 0) {
+          resolve(stdoutChunks.join(''));
+        } else {
+          const getReason = (): string => {
+            if (code !== null) {
+              return `exit code ${code}`;
+            }
+
+            if (signal !== null) {
+              return `signal ${signal}`;
+            }
+
+            return 'unknown reason';
+          };
+
+          const reason: string = getReason();
+
+          reject(
+            new Error(
+              `Command "${command} ${args.join(' ')}" failed (${reason}):
+${stdoutChunks.join('')}
+${stderrChunks.join('')}`,
+            ),
+          );
+        }
+      },
+    );
+  });
+};
 
 export default async function npmExecWorkspace(
   workspaceDirectory: string,
   ...script: string[]
 ): Promise<string> {
+  globalThis.console.log(' ');
+  globalThis.console.log('-'.repeat(MAX_CONSOLE_LENGTH));
+  globalThis.console.log(' ');
   logCommand('npm', ...script, `--workspace=packages/${workspaceDirectory}`);
 
   try {
-    const { stderr, stdout } = await execFileAsync(
-      FILE,
-      [...ARGS, ...script, `--workspace=packages/${workspaceDirectory}`],
-      {
-        encoding: 'utf8',
-        shell: false,
-      },
-    );
-
-    return stdout + stderr;
+    return await spawnAsync(FILE, [
+      ...ARGS,
+      ...script,
+      `--workspace=packages/${workspaceDirectory}`,
+    ]);
   } catch (err: unknown) {
     return handleNpmExecWorkspaceError(err, script);
   }

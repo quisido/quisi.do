@@ -1,9 +1,16 @@
 {
   "compilerOptions": {
     "declarationDir": "dist",
+    "generateCpuProfile": ".cache/tsconfig.build.cpuprofile",
     "noEmit": false,
     "outDir": "dist",
     "rootDir": "src",
+    /**
+     *   Relative import paths need explicit file extensions in ECMAScript
+     * imports when '--moduleResolution' is 'node16' or 'nodenext'. Consider
+     * adding an extension to the import path. ts(2834)
+     */
+    "skipLibCheck": true,
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
   "exclude": ["src/**/*.test.ts", "src/*.test.ts"],

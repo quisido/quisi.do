@@ -1,1 +1,5 @@
-export { default } from '@quisido/eslint-config';
+import { defineESLintConfig, type ESLintConfig } from 'quisi';
+
+const CONFIG: readonly ESLintConfig[] = defineESLintConfig({});
+
+export default CONFIG;

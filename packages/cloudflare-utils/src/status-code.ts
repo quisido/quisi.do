@@ -1,3 +1,5 @@
+/* eslint-disable no-magic-numbers */
+
 export enum StatusCode {
   ATimeoutOccurred = 524,
   Accepted = 202,

@@ -8,6 +8,7 @@
     "alwaysStrict": true,
     "checkJs": false,
     "declaration": false,
+    "declarationDir": "dist",
     "declarationMap": false,
     "downlevelIteration": false,
     "esModuleInterop": true,
@@ -52,5 +53,8 @@
     "types": [],
     "useUnknownInCatchVariables": true,
     "verbatimModuleSyntax": true
-  }
+  },
+  "exclude": [".cache/", ".tests/", ".wrangler/", "dist/"],
+  "extends": "quisi/tsconfig.json",
+  "include": ["**/*.ts"]
 }

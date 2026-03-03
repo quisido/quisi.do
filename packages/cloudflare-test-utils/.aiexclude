@@ -1,6 +1,0 @@
-/.cache/
-/.tests/
-/dist/
-/node_modules/
-*.tgz
-vitest.config.ts.timestamp-*-*.mjs

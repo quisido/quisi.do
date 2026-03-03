@@ -83,7 +83,7 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
   ...USER_CONFIG,
   build: {
     emptyOutDir: true,
-    outDir: '../dist', // relative to `root` ('src/')
+    outDir: '../_site', // relative to `root` ('src/')
     sourcemap: true,
   },
   esbuild: {

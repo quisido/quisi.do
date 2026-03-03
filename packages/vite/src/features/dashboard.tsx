@@ -93,9 +93,9 @@ const sortGauges = (
   return sortStrings(aName, bName);
 };
 
-function DashboardWrapper({ children }: PropsWithChildren): ReactElement {
+const DashboardWrapper = ({ children }: PropsWithChildren): ReactElement => {
   return <Section header={<I18n>Dashboard</I18n>}>{children}</Section>;
-}
+};
 
 export default function Dashboard(): ReactElement {
   // Contexts

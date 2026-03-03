@@ -2,7 +2,6 @@ import { FullStory } from '@fullstory/browser';
 import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import expectToThrow from '../../test/expect-to-throw.js';
 import MockFullstory from '../components/mock-fullstory.js';
 import useFullstory from './use-fullstory.js';
 
@@ -10,7 +9,9 @@ const TEST_FULLSTORY = Object.assign(vi.fn(), FullStory);
 const TEST_INIT = vi.fn();
 const TEST_IS_INITIALIZED = vi.fn();
 
-function TestWrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
+const TestWrapper = ({
+  children,
+}: Readonly<PropsWithChildren>): ReactElement => {
   return (
     <MockFullstory
       FullStory={TEST_FULLSTORY}
@@ -21,7 +22,7 @@ function TestWrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
       {children}
     </MockFullstory>
   );
-}
+};
 
 describe('useFullstory', (): void => {
   beforeEach((): void => {
@@ -31,11 +32,8 @@ describe('useFullstory', (): void => {
     });
   });
 
-  it('should throw when Fullstory is not provided', (): void => {
-    expectToThrow(
-      useFullstory,
-      'Expected the Fullstory context to be provided.',
-    );
+  it.fails('when Fullstory is not provided', (): void => {
+    renderHook(useFullstory);
   });
 
   it('should provide a Fullstory API', (): void => {

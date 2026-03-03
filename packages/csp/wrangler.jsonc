@@ -1,42 +1,33 @@
 {
+	"$schema": "../../node_modules/wrangler/config-schema.json",
+
   "analytics_engine_datasets": [
-    {
-      "binding": "PRIVATE_DATASET",
-      "dataset": "CSP_PRIVATE_DEV"
-    },
-    {
-      "binding": "PUBLIC_DATASET",
-      "dataset": "CSP_PUBLIC_DEV"
-    }
+    { "binding": "PRIVATE_DATASET", "dataset": "CSP_PRIVATE_DEV" },
+    { "binding": "PUBLIC_DATASET", "dataset": "CSP_PUBLIC_DEV" }
   ],
+
   "compatibility_date": "2025-05-05",
+
   "d1_databases": [
-    {
-      "binding": "CSP_DB",
-      "database_id": "CSP",
-      "database_name": "csp-dev"
-    }
+    { "binding": "CSP_DB", "database_id": "CSP", "database_name": "csp-dev" }
   ],
+
   "dev": {
     "local_protocol": "https",
     "port": 6586 // parseInt('csp', 36) % 9999
   },
+
   "env": {
     "development": {
       "vars": {
         "ENVIRONMENT_NAME": "development"
       }
     },
+
     "production": {
       "analytics_engine_datasets": [
-        {
-          "binding": "PRIVATE_DATASET",
-          "dataset": "CSP_PRIVATE"
-        },
-        {
-          "binding": "PUBLIC_DATASET",
-          "dataset": "CSP_PUBLIC"
-        }
+        { "binding": "PRIVATE_DATASET", "dataset": "CSP_PRIVATE" },
+        { "binding": "PUBLIC_DATASET", "dataset": "CSP_PUBLIC" }
       ],
       "d1_databases": [
         {
@@ -48,25 +39,17 @@
       ],
       "name": "quisido-csp",
       "routes": [
-        {
-          "custom_domain": true,
-          "pattern": "csp.quisi.do"
-        }
+        { "custom_domain": true, "pattern": "csp.quisi.do" }
       ],
       "vars": {
         "ENVIRONMENT_NAME": "production"
       }
     },
+
     "staging": {
       "analytics_engine_datasets": [
-        {
-          "binding": "PRIVATE_DATASET",
-          "dataset": "CSP_PRIVATE_STAGING"
-        },
-        {
-          "binding": "PUBLIC_DATASET",
-          "dataset": "CSP_PUBLIC_STAGING"
-        }
+        { "binding": "PRIVATE_DATASET", "dataset": "CSP_PRIVATE_STAGING" },
+        { "binding": "PUBLIC_DATASET", "dataset": "CSP_PUBLIC_STAGING" }
       ],
       "d1_databases": [
         {
@@ -77,10 +60,7 @@
       ],
       "name": "quisido-csp-staging",
       "routes": [
-        {
-          "custom_domain": true,
-          "pattern": "staging.csp.quisi.do"
-        }
+        { "custom_domain": true, "pattern": "staging.csp.quisi.do" }
       ],
       "vars": {
         "ENVIRONMENT_NAME": "staging"
@@ -88,19 +68,25 @@
       "workers_dev": true
     }
   },
+
   "main": "src/index.ts",
   "name": "quisido-csp-dev",
+
   "observability": {
+    "enabled": true,
     "logs": {
       "enabled": true
     }
   },
+
   "placement": {
     "mode": "smart"
   },
+
   "send_metrics": true,
   "tsconfig": "./tsconfig.json",
   "upload_source_maps": true,
+
   "vars": {
     "ENVIRONMENT_NAME": "unknown"
   }

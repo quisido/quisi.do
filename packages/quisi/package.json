@@ -2,9 +2,6 @@
   "name": "quisi",
   "version": "0.0.1",
   "author": "quisi.do <quisi@quisi.do>",
-  "bin": {
-    "quisi": "./dist/quisi.js"
-  },
   "description": "all-in-one",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/quisi#readme",
   "license": "MIT",
@@ -19,6 +16,9 @@
     "eslint": "quisi eslint",
     "publint": "quisi publint"
   },
+  "bin": {
+    "quisi": "./dist/quisi.js"
+  },
   "bugs": {
     "email": "quisi@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
@@ -30,6 +30,9 @@
     },
     "./.attw.json": {
       "default": "./.attw.json"
+    },
+    "./tsconfig.json": {
+      "default": "./src/tsconfig.json"
     }
   },
   "funding": {
@@ -46,20 +49,31 @@
   },
   "dependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
+    "@eslint/config-helpers": "^0.4.2",
+    "@eslint/json": "^1.0.1",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "^8.46.3",
     "@typescript-eslint/parser": "^8.46.3",
+    "@vitest/coverage-istanbul": "^4.0.7",
+    "eslint": ">=9.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsonc": "^2.21.1",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-sort-keys-custom-order": "^3.0.1",
+    "jsonc-eslint-parser": "^2.4.2",
     "prettier": "^3.6.2",
     "publint": "^0.3.15",
+    "typescript-eslint": "^8.56.0",
+    "vite": "^7.2.1",
     "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/node": "^24.10.4",
-    "eslint": "^9.39.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.7"
   },
   "peerDependencies": {
-    "eslint": ">=9.0.0",
-    "typescript": ">=5.0.0"
+    "typescript": ">=5.0.0",
+    "vitest": ">=4.0.0"
   }
 }

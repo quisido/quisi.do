@@ -1,5 +1,5 @@
 import { mkdir, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import joinCwdPath from './join-path.js';
 
 // Writes a test output file to the `.tests` directory.
 
@@ -7,13 +7,12 @@ export default async function writeTestsFile(
   path: string,
   content: string,
 ): Promise<string> {
-  const cwd: string = process.cwd();
-  const testsDir: string = join(cwd, '.tests');
+  const testsDir: string = joinCwdPath('.tests');
 
   // Ensure the directory exists before writing to it.
   await mkdir(testsDir, { recursive: true });
 
-  const testsPath: string = join(testsDir, path);
-  await writeFile(testsPath, content, { encoding: 'utf8' });
+  const testsPath: string = joinCwdPath('.tests', path);
+  await writeFile(testsPath, content, 'utf8');
   return testsPath;
 }

@@ -19,6 +19,7 @@ export default function createNewItems(
     itemIndex < items.length - LAST_ITEM;
     itemIndex += SKIP
   ) {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     items.splice(itemIndex + ARRAY_INDEX_OFFSET, START, value as ReactNode);
   }
 

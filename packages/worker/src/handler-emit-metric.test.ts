@@ -8,6 +8,11 @@ const TEST_METRIC_HANDLER = vi.fn();
 describe('Handler', (): void => {
   describe('emitMetric', (): void => {
     it('should default to empty dimensions', async (): Promise<void> => {
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       function testFetchHandler(this: FetchHandler): Response {
         this.emitMetric('test name');
         return new Response();

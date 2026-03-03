@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
+name: Sentry Prevent
+description: Runs Sentry Prevent to block commits that introduce new Sentry issues
+
+runs:
+  using: composite
+  steps:
+    - name: Download
+      uses: actions/download-artifact@v7
+      with:
+        name: test
+        path: packages
+    - name: Upload
+      if: ${{ !cancelled() }}
+      uses: getsentry/prevent-action@v0

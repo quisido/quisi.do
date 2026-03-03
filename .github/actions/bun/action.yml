@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
+name: Bun
+description: Tries to build and test with Bun
+
+runs:
+  using: composite
+  steps:
+    - name: Install bun
+      uses: oven-sh/setup-bun@v1
+    - name: Install dependencies
+      shell: bash
+      # Build `quisi` then re-install to symlink the dependency.
+      run: |
+        bun install;
+        bun run build --filter=./packages/quisi;
+        bun install;
+    - name: Build
+      run: bun run build
+      shell: bash
+    - name: Test
+      # Bun isn't required. Convert the failure to a success.
+      continue-on-error: true
+      run: bun run test
+      shell: bash

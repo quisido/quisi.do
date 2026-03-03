@@ -35,4 +35,5 @@ interface ImportMeta {
 }
 
 // This line makes the type of ImportMetaEnv strict to disallow unknown keys.
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface ViteTypeOptions {}

@@ -7,13 +7,11 @@
   "scripts": {
     "build": "exit 0",
     "start": "npm run dev",
-    "test": "concurrently --names eslint,vitest --prefix-colors auto \"npm run eslint\" \"npm run vitest:run\"",
-    "clean": "rimraf .wrangler coverage",
+    "test": "quisi test && npm run vitest:run",
+    "clean": "rimraf .cache .tests .wrangler dist node_modules",
     "dev": "wrangler dev --persist-to ../../.wrangler/state",
-    "eslint": "eslint . --cache --color --exit-on-fatal-error",
-    "eslint:fix": "eslint . --cache --color --exit-on-fatal-error --fix",
+    "eslint": "quisi eslint",
     "login": "wrangler login",
-    "production:deploy": "wrangler deploy src/index.ts --env production --outdir dist",
     "production:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env production --outdir dist",
     "staging:deploy": "wrangler deploy src/index.ts --env staging --outdir dist --remote",
     "staging:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env staging --outdir dist --remote",
@@ -27,27 +25,21 @@
     "url": "https://github.com/sponsors/quisido"
   },
   "dependencies": {
-    "@datadog/datadog-api-client": "^1.46.0",
+    "@datadog/datadog-api-client": "^1.52.0",
     "@quisido/worker": "^1.0.8",
     "cloudflare-utils": "^1.0.4",
     "fmrs": "^2.1.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20251014.0",
-    "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@quisido/eslint-config": "^1.1.11",
-    "@quisido/vitest-config": "^1.0.6",
     "@quisido/worker-test": "^1.0.1",
     "@types/eslint": "^9.6.1",
-    "@vitest/coverage-istanbul": "^4.0.7",
     "@vitest/ui": "^4.0.7",
-    "cjs-ts": "^2.0.0",
     "cloudflare-test-utils": "^1.0.2",
     "concurrently": "^9.2.1",
-    "eslint": "^9.39.1",
+    "quisi": "^0.0.1",
     "rimraf": "^6.1.0",
     "typescript": "^5.9.3",
-    "vite": "^7.2.1",
     "vitest": "^4.0.7",
     "wrangler": "^4.59.1"
   }

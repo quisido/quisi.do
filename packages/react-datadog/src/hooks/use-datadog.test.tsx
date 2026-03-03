@@ -20,17 +20,24 @@ const TEST_RUM: typeof datadogRum = {
   addError: vi.fn(),
   addFeatureFlagEvaluation: vi.fn(),
   addTiming: vi.fn(),
+  clearAccount: vi.fn(),
   clearGlobalContext: vi.fn(),
   clearUser: TEST_CLEAR_USER,
+  failFeatureOperation: vi.fn(),
+  getAccount: vi.fn(),
   getGlobalContext: vi.fn(),
   getInitConfiguration: vi.fn(),
   getInternalContext: vi.fn(),
   getSessionReplayLink: vi.fn(),
   getUser: vi.fn(),
+  getViewContext: vi.fn(),
   init: TEST_INIT,
   onReady: vi.fn(),
+  removeAccountProperty: vi.fn(),
   removeGlobalContextProperty: vi.fn(),
   removeUserProperty: vi.fn(),
+  setAccount: vi.fn(),
+  setAccountProperty: vi.fn(),
   setGlobalContext: vi.fn(),
   setGlobalContextProperty: vi.fn(),
   setTrackingConsent: vi.fn(),
@@ -40,11 +47,13 @@ const TEST_RUM: typeof datadogRum = {
   setViewContextProperty: vi.fn(),
   setViewName: vi.fn(),
   startDurationVital: vi.fn(),
+  startFeatureOperation: vi.fn(),
   startSessionReplayRecording: TEST_START_SESSION_REPLAY_RECORDING,
   startView: vi.fn() as (typeof datadogRum)['startView'],
   stopDurationVital: vi.fn(),
   stopSession: vi.fn(),
   stopSessionReplayRecording: TEST_STOP_SESSION_REPLAY_RECORDING,
+  succeedFeatureOperation: vi.fn(),
   version: '0.0.0',
 };
 
@@ -54,15 +63,13 @@ const TEST_USER: User = {
   name: 'test-name',
 };
 
-function Wrapper({ children }: Readonly<PropsWithChildren>): ReactElement {
-  return (
-    <StrictMode>
-      <DatadogRumContext.Provider value={TEST_RUM}>
-        {children}
-      </DatadogRumContext.Provider>
-    </StrictMode>
-  );
-}
+const Wrapper = ({ children }: Readonly<PropsWithChildren>): ReactElement => (
+  <StrictMode>
+    <DatadogRumContext.Provider value={TEST_RUM}>
+      {children}
+    </DatadogRumContext.Provider>
+  </StrictMode>
+);
 
 describe('useDatadog', (): void => {
   it('should call `init`', (): void => {

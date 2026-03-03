@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": false,
+    "declarationDir": "dist",
     "downlevelIteration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -18,8 +19,8 @@
     "strict": true,
     "types": ["@types/node"]
   },
-  "exclude": ["./.cache/", "./.tests/", "./.vitest/"],
-  "extends": "../../tsconfig.json",
+  "exclude": ["./.cache/", "./.tests/"],
+  "extends": "quisi/tsconfig.json",
   "include": [
     "**/*.json",
     "**/*.ts",

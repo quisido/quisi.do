@@ -1,3 +1,4 @@
+/* eslint-disable prefer-rest-params */
 import type GoogleAnalyticsWindow from '../types/google-analytics-window.js';
 
 export default function gtag(..._args: readonly unknown[]): void {

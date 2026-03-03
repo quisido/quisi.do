@@ -89,6 +89,7 @@ export default class TestExportedHandler {
   ): void {
     const dataset: unknown = this.#env[env];
     assert(isAnalyticsEngineDataset(dataset));
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(dataset.writeDataPoint).not.toHaveBeenCalledWith(dataPoint);
   }
 
@@ -98,6 +99,7 @@ export default class TestExportedHandler {
   ): void {
     const dataset: unknown = this.#env[env];
     assert(isAnalyticsEngineDataset(dataset));
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(dataset.writeDataPoint).toHaveBeenCalledWith(dataPoint);
   }
 

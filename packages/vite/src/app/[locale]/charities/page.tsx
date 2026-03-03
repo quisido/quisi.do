@@ -3,8 +3,6 @@ import { type ReactElement } from 'react';
 import Div from '../../../modules/quisi/div.jsx';
 import Section from '../../../modules/quisi/section.jsx';
 
-export { default as generateStaticParams } from '../../../features/generate-locale-static-params.js';
-
 export default function CharitiesPage(): ReactElement {
   return (
     <Section header={<I18n>Charities</I18n>}>

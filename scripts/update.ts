@@ -3,6 +3,8 @@ import getWorkspaceDirectories from './utils/get-workspace-directories.js';
 import mapDirentToPackageJson from './utils/map-dirent-to-package-json.js';
 import npmExecWorkspace from './utils/npm-exec-workspace.js';
 
+// Update the nested dependency `baseline-browser-mapping` to `latest`.
+
 const save = new Map<string, Set<string>>();
 const saveDev = new Map<string, Set<string>>();
 const workspaceDirectories: readonly Dirent[] = await getWorkspaceDirectories();

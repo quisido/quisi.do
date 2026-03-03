@@ -13,6 +13,11 @@ describe('Handler', (): void => {
   describe('writeMetricDataPoint', (): void => {
     it('should write a standardized Analytics Engine data point', async (): Promise<void> => {
       const testDataset = new TestAnalyticsEngineDataset();
+      /**
+       *   Technical debt: ESLint should not expect function expressions for
+       * functions typed with `this`.
+       */
+      // eslint-disable-next-line func-style
       function testFetchHandler(this: FetchHandler): Response {
         this.writeMetricDataPoint('DATASET', 'test name', {
           isTest: true,

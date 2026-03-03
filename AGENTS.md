@@ -1,34 +1,21 @@
-# Project: quisi.do
+# Instructions for agents
 
 ## Overview
 
-This is a monorepo containing various packages for a web application, including
-authentication services, UI components, and Cloudflare workers.
+`quisi.do` is a monorepo using NPM workspaces that contain web-oriented packages
+that can be grouped into 3 categories: front end applications (e.g. HTML, SPAs),
+back end services (Cloudflare workers), and libraries (Node modules).
 
-## Tech Stack
-
-* **Languages:** TypeScript
-* **Libraries:** React
-* **Formatting and linting:** ESLint
-* **Package manager:** npm (with workspaces)
-* **Testing:** Vitest
-
-## Architecture
-
-The project is a monorepo managed by `npm` workspaces, located in the `packages`
-directory. The primary applications are (1) a still-being-developed,
-browser-based video game and engine located in `packages/game` and (2) a
-front-end oriented software-as-a-service provider located in `packages/vite`.
-The next most important services are those that power the front end
-infrastructure: `packages/authn`, `packages/csp`, and `packages/dashboard`.
+`packages/quisi` contains a custom build and test tool used by all other
+packages in this repository. It ensures a consistent standard across every
+package in the monorepo, including ESLint, publint, and Vitest.
 
 ## Development
 
-* **Building:** `npm run build`
-* **Installation:** `npm install`
-* **Linting:** `npm run eslint`
-* **Running locally:** `npm start`
-* **Testing:** `npm test`
+* `npm install` installs the monorepo's dependencies.
+* `npm run build` builds all packages for deployment.
+* `npm start` runs the packages locally in watch mode.
+* `npm test` tests all packages.
 
 ## Conventions
 

@@ -21,6 +21,7 @@ export default function mapToString(value: unknown): string {
 
   if (isStringifiable(value)) {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
       const str: unknown = value.toString();
       if (typeof str === 'string' && str !== DEFAULT) {
         return str;

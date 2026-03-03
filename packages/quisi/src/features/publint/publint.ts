@@ -1,18 +1,25 @@
-import debug from '../../utils/debug.js';
+import type Report from '../../types/report.js';
+import ReportingTool from '../../utils/reporting-tool.js';
 import npx from '../npx/npx.js';
 
-const SUCCESS_STATUS_CODE = 0;
+export const publint: ReportingTool = new ReportingTool(
+  'publint',
+  async (): Promise<Omit<Report, 'tool'>> => {
+    const { exitCode, stdout } = await npx('publint', '--strict');
 
-export default async function publint(): Promise<void> {
-  debug('[publint] ⏳');
-  const { exitCode, stdout } = await npx('publint', '--strict');
+    if (exitCode === 0) {
+      return {
+        status: 'success',
+      };
+    }
 
-  if (exitCode !== SUCCESS_STATUS_CODE) {
-    debug('[publint] ❌');
-    throw new Error(stdout, {
-      cause: 'publint --strict',
-    });
-  }
-
-  debug('[publint] ✔️');
-}
+    return {
+      context:
+        'The Publint tool threw an error while analyzing this package for ' +
+        'best practices, configuration mistakes, and environment ' +
+        'compatibility (Node, Rollup, Vite, Webpack, etc.).',
+      message: stdout,
+      status: 'failure',
+    };
+  },
+);
