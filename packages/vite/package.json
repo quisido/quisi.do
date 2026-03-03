@@ -154,7 +154,7 @@
     "typescript": "^5.9.3",
     "vitest": "^4.0.7",
     "wait-on": "^9.0.1",
-    "webpack": "^5.102.1"
+    "webpack": "^5.104.1"
   },
   "overrides": {
     "@hint/connector-puppeteer": {
