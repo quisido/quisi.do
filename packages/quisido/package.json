@@ -41,7 +41,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "provenance": false
+    "provenance": true
   },
   "repository": {
     "type": "git",
