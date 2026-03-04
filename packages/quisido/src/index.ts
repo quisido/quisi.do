@@ -4,5 +4,5 @@ export {
 } from './features/eslint/define-eslint-config.js';
 export {
   default as defineVitestConfig,
-  type QuisiUserConfig as VitestConfig,
+  type QuisidoUserConfig as VitestConfig,
 } from './features/vitest/define-vitest-config.js';
