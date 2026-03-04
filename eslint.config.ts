@@ -1,4 +1,4 @@
-import { defineESLintConfig, type ESLintConfig } from 'quisi';
+import { defineESLintConfig, type ESLintConfig } from 'quisido';
 
 const CONFIG: readonly ESLintConfig[] = defineESLintConfig({
   ignores: ['packages/**'],

@@ -7,7 +7,7 @@ export default async function createCompilerOptions(): Promise<server.protocol.C
 
   const compilerOptions: server.protocol.CompilerOptions = {
     declarationDir: join(cwd, 'dist'),
-    generateCpuProfile: join(cwd, '.cache', 'quisi-build.cpuprofile'),
+    generateCpuProfile: join(cwd, '.cache', 'quisido-build.cpuprofile'),
     noEmit: false,
     outDir: join(cwd, 'dist'),
     /**

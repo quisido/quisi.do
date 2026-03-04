@@ -20,7 +20,7 @@
     "types": ["node"]
   },
   "exclude": [],
-  "extends": "quisi/tsconfig.json",
+  "extends": "quisido/tsconfig.json",
   "include": [
     "**/.stylelintrc.ts",
     "**/*.json",

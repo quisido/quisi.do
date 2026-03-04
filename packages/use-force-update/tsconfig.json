@@ -7,6 +7,6 @@
     "rootDir": ".",
   },
   "exclude": [".cache/", ".tests/", "dist/", "node_modules/"],
-  "extends": "quisi/tsconfig.json",
+  "extends": "quisido/tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx"],
 }

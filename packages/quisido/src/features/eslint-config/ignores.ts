@@ -28,7 +28,7 @@ const IGNORES_CONFIG: readonly Config[] = defineConfig({
     '**/*-*.*.*.tgz',
     '**/node_modules/**',
 
-    // quisi
+    // quisido
     '**/.cache/**',
     '**/.tests/**',
 

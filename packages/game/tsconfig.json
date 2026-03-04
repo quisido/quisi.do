@@ -20,7 +20,7 @@
     "types": ["@types/node"]
   },
   "exclude": ["./.cache/", "./.tests/"],
-  "extends": "quisi/tsconfig.json",
+  "extends": "quisido/tsconfig.json",
   "include": [
     "**/*.json",
     "**/*.ts",

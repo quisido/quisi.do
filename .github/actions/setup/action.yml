@@ -25,10 +25,10 @@ runs:
         name: build
     - name: Install dependencies
       shell: bash
-      # Build `quisi` then re-install to symlink the dependency.
+      # Build `quisido` then re-install to symlink the dependency.
       # We must use `npm install` instead of `npm ci` due to the dependency
       # differences between Linux and Windows.
       run: >
         npm install;
-        npm run build --workspace=packages/quisi;
+        npm run build --workspace=packages/quisido;
         npm install;

@@ -1,9 +1,9 @@
 {
-  "name": "quisi",
+  "name": "quisido",
   "version": "0.0.1",
-  "author": "quisi.do <quisi@quisi.do>",
+  "author": "quisi.do <quisido@quisi.do>",
   "description": "all-in-one",
-  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/quisi#readme",
+  "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/quisido#readme",
   "license": "MIT",
   "main": "./dist/index.js",
   "type": "module",
@@ -11,16 +11,16 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "start": "tsc --project tsconfig.build.json --watch",
-    "test": "quisi test",
+    "test": "quisido test",
     "clean": "rm -rf .cache .tests dist node_modules",
-    "eslint": "quisi eslint",
-    "publint": "quisi publint"
+    "eslint": "quisido eslint",
+    "publint": "quisido publint"
   },
   "bin": {
-    "quisi": "./dist/quisi.js"
+    "quisido": "./dist/quisido.js"
   },
   "bugs": {
-    "email": "quisi@quisi.do",
+    "email": "quisido@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
   "exports": {
@@ -41,7 +41,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "provenance": true
+    "provenance": false
   },
   "repository": {
     "type": "git",
