@@ -80,17 +80,17 @@
     "@hint/parser-webpack-config": "^2.1.42",
     "@hint/utils-types": "^1.2.1",
     "@types/eslint": "^9.6.1",
-    "@types/node": "^24.10.4",
-    "@vitest/ui": "^4.0.6",
-    "browserslist": "^4.24.5",
+    "@types/node": "^25.3.3",
+    "@vitest/ui": "^4.0.18",
+    "browserslist": "^4.28.1",
     "concurrently": "^9.1.2",
     "hint": "^7.1.13",
     "jiti": "^2.6.1",
-    "puppeteer-core": "^24.35.0",
+    "puppeteer-core": "^24.38.0",
     "quisido": "^0.0.1",
-    "rimraf": "^6.1.0",
+    "rimraf": "^6.1.3",
     "typescript": "^5.8.3",
-    "vitest": "^4.0.7"
+    "vitest": "^4.0.18"
   },
   "overrides": {
     "@hint/connector-puppeteer": {
