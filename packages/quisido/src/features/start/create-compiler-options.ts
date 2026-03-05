@@ -17,7 +17,7 @@ export default async function createCompilerOptions(): Promise<server.protocol.C
      */
     rootDir: join(cwd, 'src'),
     skipLibCheck: true,
-    tsBuildInfoFile: join(cwd, '.cache', 'quisi-start.tsbuildinfo'),
+    tsBuildInfoFile: join(cwd, '.cache', 'quisido-start.tsbuildinfo'),
   };
 
   const jsx: server.protocol.JsxEmit | undefined = await createJsx();
