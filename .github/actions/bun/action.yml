@@ -9,10 +9,10 @@ runs:
       uses: oven-sh/setup-bun@v1
     - name: Install dependencies
       shell: bash
-      # Build `quisi` then re-install to symlink the dependency.
+      # Build `quisido` then re-install to symlink the dependency.
       run: |
         bun install;
-        bun run build --filter=./packages/quisi;
+        bun run build --filter=./packages/quisido;
         bun install;
     - name: Build
       run: bun run build

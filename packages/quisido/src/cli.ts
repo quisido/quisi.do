@@ -4,7 +4,7 @@ import { attw } from './features/attw/attw.js';
 import build from './features/build/build.js';
 import { eslint } from './features/eslint/eslint.js';
 import { publint } from './features/publint/publint.js';
-import { quisiTest } from './features/quisi-test/quisi-test.js';
+import { quisidoTest } from './features/quisido-test/quisido-test.js';
 import start from './features/start/start.js';
 import type Report from './types/report.js';
 import { handleExit } from './utils/exit.js';
@@ -50,7 +50,7 @@ switch (command) {
     eventualReports.push(attw.run());
     eventualReports.push(eslint.run());
     eventualReports.push(publint.run());
-    eventualReports.push(quisiTest.run());
+    eventualReports.push(quisidoTest.run());
     break;
   }
 

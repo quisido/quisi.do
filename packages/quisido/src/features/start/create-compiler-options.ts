@@ -7,17 +7,17 @@ export default async function createCompilerOptions(): Promise<server.protocol.C
 
   const compilerOptions: server.protocol.CompilerOptions = {
     declarationDir: join(cwd, 'dist'),
-    generateCpuProfile: join(cwd, '.cache', 'quisi-build.cpuprofile'),
+    generateCpuProfile: join(cwd, '.cache', 'quisido-start.cpuprofile'),
     noEmit: false,
     outDir: join(cwd, 'dist'),
     /**
      *   While the `rootDir` for development and testing is `/` to include all
-     * files, the `rootDir` for the production build is `src` so that only
+     * files, the `rootDir` for the development server is `src` so that only
      * source files are emitted.
      */
     rootDir: join(cwd, 'src'),
     skipLibCheck: true,
-    tsBuildInfoFile: join(cwd, '.cache', 'quisi-build.tsbuildinfo'),
+    tsBuildInfoFile: join(cwd, '.cache', 'quisido-start.tsbuildinfo'),
   };
 
   const jsx: server.protocol.JsxEmit | undefined = await createJsx();

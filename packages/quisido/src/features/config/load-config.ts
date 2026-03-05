@@ -11,9 +11,9 @@ export default async function loadConfig(): Promise<object> {
 
   // Check if a config file exists.
   try {
-    await stat(join(cwd, 'quisi.config.ts'));
+    await stat(join(cwd, 'quisido.config.ts'));
   } catch {
-    // debug('No `quisi.config.ts` file found.');
+    // debug('No `quisido.config.ts` file found.');
     return {};
   }
 
@@ -31,15 +31,15 @@ export default async function loadConfig(): Promise<object> {
     '--skipLibCheck',
     '--target',
     'ESNext',
-    'quisi.config.ts',
+    'quisido.config.ts',
   );
 
   const getConfigPath = async (): Promise<string> => {
     const { type } = await getPackageJson();
-    const jsPath: string = join(outDir, 'quisi.config.js');
+    const jsPath: string = join(outDir, 'quisido.config.js');
     if (type === 'commonjs') {
       debug('Renaming CommonJS config file to `.cjs`.');
-      const cjsPath: string = join(outDir, 'quisi.config.cjs');
+      const cjsPath: string = join(outDir, 'quisido.config.cjs');
       await rename(jsPath, cjsPath);
       return cjsPath;
     }
@@ -51,7 +51,7 @@ export default async function loadConfig(): Promise<object> {
   const importedConfig: unknown = await platformImport(configPath);
 
   if (typeof importedConfig !== 'object' || importedConfig === null) {
-    throw new Error('`quisi.config.ts` must contain module exports.', {
+    throw new Error('`quisido.config.ts` must contain module exports.', {
       cause: JSON.stringify(importedConfig),
     });
   }

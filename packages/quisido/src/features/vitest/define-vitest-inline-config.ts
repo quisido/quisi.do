@@ -4,7 +4,7 @@ import defineCoverageOptions, {
 } from './define-coverage-options.js';
 import definePool from './define-pool.js';
 import { EXCLUDE } from './exclude.js';
-import type QuisiVitestInlineConfig from './quisi-vitest-inline-config.js';
+import type QuisidoVitestInlineConfig from './quisido-vitest-inline-config.js';
 
 const DEFAULT_COVERAGE_OPTIONS: CoverageOptions<'istanbul'> = {
   provider: 'istanbul',
@@ -14,7 +14,7 @@ export default async function defineVitestInlineConfig({
   coverage = DEFAULT_COVERAGE_OPTIONS,
   exclude = [],
   ...vitestInlineConfig
-}: QuisiVitestInlineConfig): Promise<QuisiVitestInlineConfig> {
+}: QuisidoVitestInlineConfig): Promise<QuisidoVitestInlineConfig> {
   return {
     clearMocks: true,
     coverage: defineCoverageOptions(coverage),

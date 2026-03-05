@@ -10,7 +10,7 @@ import mapDirectoryToVsCodeExtensionsJson from './utils/map-directory-to-vs-code
 const DEPENDENCY_EXTENSIONS: Record<string, readonly string[]> = {
   eslint: ['dbaeumer.vscode-eslint'],
   publint: ['kravets.vscode-publint'],
-  quisi: [
+  quisido: [
     'dbaeumer.vscode-eslint',
     'kravets.vscode-publint',
     'vitest.explorer',
@@ -72,9 +72,9 @@ describeWorkspaces(async (dirent: Dirent): Promise<void> => {
       });
     });
 
-    // Modules should be tested with quisi.
-    it.runIf(!isApplication)('should test with quisi', (): void => {
-      expect(packageJson.scripts?.['test']).toMatch(/^quisi test\b/u);
+    // Modules should be tested with quisido.
+    it.runIf(!isApplication)('should test with quisido', (): void => {
+      expect(packageJson.scripts?.['test']).toMatch(/^quisido test\b/u);
     });
   });
 });

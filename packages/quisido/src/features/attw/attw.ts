@@ -5,7 +5,7 @@ import requireResolve from '../../utils/require-resolve.js';
 import writeTestsFile from '../../utils/write-tests-file.js';
 import npx from '../npx/npx.js';
 
-const CONFIG_PATH: string = requireResolve('quisi/.attw.json');
+const CONFIG_PATH: string = requireResolve('quisido/.attw.json');
 
 export const attw: ReportingTool = new ReportingTool(
   'attw',
