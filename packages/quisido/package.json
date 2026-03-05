@@ -17,7 +17,7 @@
     "publint": "quisido publint"
   },
   "bin": {
-    "quisido": "./dist/quisido.js"
+    "quisido": "./dist/cli.js"
   },
   "bugs": {
     "email": "quisido@quisi.do",
