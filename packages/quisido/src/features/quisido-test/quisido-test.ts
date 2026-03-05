@@ -3,8 +3,8 @@ import mapToString from '../../utils/map-to-string.js';
 import ReportingTool from '../../utils/reporting-tool.js';
 import testVsCodeSettings from './test-vscode-settings.js';
 
-export const quisiTest: ReportingTool = new ReportingTool(
-  'quisi:test',
+export const quisidoTest: ReportingTool = new ReportingTool(
+  'quisido:test',
   async (): Promise<Omit<Report, 'tool'>> => {
     try {
       await testVsCodeSettings();

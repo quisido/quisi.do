@@ -17,7 +17,7 @@ export const EXCLUDE: readonly string[] = [
   // Node
   'packages/**',
 
-  // quisi
+  // quisido
   '.cache/**',
   '.tests/**',
 

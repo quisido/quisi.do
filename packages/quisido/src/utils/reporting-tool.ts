@@ -18,11 +18,11 @@ export default class ReportingTool {
   }
 
   public logError(message: string): void {
-    globalThis.console.error(`[quisi] [${this.#toolName}] ${message}`);
+    globalThis.console.error(`[quisido] [${this.#toolName}] ${message}`);
   }
 
   public logInfo(message: string): void {
-    globalThis.console.info(`[quisi] [${this.#toolName}] ${message}`);
+    globalThis.console.info(`[quisido] [${this.#toolName}] ${message}`);
   }
 
   public async run(): Promise<Report> {

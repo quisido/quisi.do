@@ -2,11 +2,9 @@
   "compilerOptions": {
     "declarationDir": "dist",
     "noEmit": true,
-    "rootDir": ".",
-    // Necessary for `quisi.config.ts` to export top-level values.
-    "verbatimModuleSyntax": false
+    "rootDir": "."
   },
   "exclude": [".cache/", ".tests/"],
-  "extends": "quisi/tsconfig.json",
+  "extends": "quisido/tsconfig.json",
   "include": ["**/*", "**/*.json", "**/.*", "**/.*.json"],
 }

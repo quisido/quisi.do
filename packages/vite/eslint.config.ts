@@ -1,4 +1,4 @@
-import { defineESLintConfig, type ESLintConfig } from 'quisi';
+import { defineESLintConfig, type ESLintConfig } from 'quisido';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';

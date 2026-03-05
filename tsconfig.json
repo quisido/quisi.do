@@ -13,7 +13,7 @@
     "node_modules/",
     "packages/"
   ],
-  "extends": "quisi/tsconfig.json",
+  "extends": "quisido/tsconfig.json",
   "include": [
     "**/.*/**/*.ts",
     "**/.*/**/.*.json",

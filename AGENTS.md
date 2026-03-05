@@ -6,7 +6,7 @@
 that can be grouped into 3 categories: front end applications (e.g. HTML, SPAs),
 back end services (Cloudflare workers), and libraries (Node modules).
 
-`packages/quisi` contains a custom build and test tool used by all other
+`packages/quisido` contains a custom build and test tool used by all other
 packages in this repository. It ensures a consistent standard across every
 package in the monorepo, including ESLint, publint, and Vitest.
 

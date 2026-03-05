@@ -3,9 +3,9 @@ import { mkdir, mkdtempDisposable } from 'node:fs/promises';
 import { join } from 'node:path';
 import { onExit } from './exit.js';
 
-const QUISI_ROOT_DIR: string = join(import.meta.dirname, '..', '..');
-const TEMP_DIR: string = join(QUISI_ROOT_DIR, '.cache', '.temp');
-const PREFIX: string = join(TEMP_DIR, '.quisi-');
+const QUISIDO_ROOT_DIR: string = join(import.meta.dirname, '..', '..');
+const TEMP_DIR: string = join(QUISIDO_ROOT_DIR, '.cache', '.temp');
+const PREFIX: string = join(TEMP_DIR, '.quisido-');
 
 export default async function makeDisposableTempDir(): Promise<DisposableTempDir> {
   /**

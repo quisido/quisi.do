@@ -6,6 +6,6 @@
 		"skipLibCheck": true
   },
   "exclude": [".cache/", ".tests/", "dist/"],
-  "extends": "quisi/tsconfig.json",
+  "extends": "quisido/tsconfig.json",
   "include": ["**/*.ts"]
 }

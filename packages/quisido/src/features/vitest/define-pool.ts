@@ -1,8 +1,8 @@
-import type QuisiVitestInlineConfig from './quisi-vitest-inline-config.js';
+import type QuisidoVitestInlineConfig from './quisido-vitest-inline-config.js';
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export default async function definePool(): Promise<
-  Pick<QuisiVitestInlineConfig, never /* 'pool' | 'poolOptions' */>
+  Pick<QuisidoVitestInlineConfig, never /* 'pool' | 'poolOptions' */>
 > {
   /**
    *   The Cloudflare Vitest pool workers extension is disabled until it

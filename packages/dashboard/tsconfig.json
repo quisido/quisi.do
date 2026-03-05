@@ -55,6 +55,6 @@
     "verbatimModuleSyntax": true
   },
   "exclude": [".cache/", ".tests/", ".wrangler/", "dist/"],
-  "extends": "quisi/tsconfig.json",
+  "extends": "quisido/tsconfig.json",
   "include": ["**/*.ts"]
 }
