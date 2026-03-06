@@ -1,6 +1,6 @@
 {
   "name": "cjs-ts",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "quisi.do <cjs-ts@quisi.do>",
   "description": "a Babel preconfiguration to bridge CommonJS and TypeScript files",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/cjs-ts#readme",

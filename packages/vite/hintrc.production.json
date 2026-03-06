@@ -10,7 +10,11 @@
     // Technical debt: Re-enable this when `api-js.mixpanel.com` is blocked.
     "axe/keyboard": "off",
 
-    // Technical debt: Re-enable this when `api-js.mixpanel.com` is blocked.
+    /**
+     * Technical debt: Re-enable this when `api-js.mixpanel.com` is blocked.
+     * axe/text-alternatives: Element has no title attribute
+     * <img src="https://api-js.mixpanel.com/track/..." />
+     */
     "axe/text-alternatives": "off",
 
     /**
@@ -31,5 +35,23 @@
 
     // "No valid configuration for Cloudinary found. Hint could not run."
     "image-optimization-cloudinary": "off"
-  }
+  },
+
+  "ignoredUrls": [
+    {
+      "domain": "^(?![\\d\\w]+.clarity.ms|analytics.google.com|browser-intake-datadoghq.com|cloudflareinsights.com|edge.fullstory.com|o592283.ingest.sentry.io|r.lgrckt-in.com|r.logr-ingest.com|r.lrkt-in.com|region1.analytics.google.com|rs.fullstory.com|stats.g.doubleclick.net|us.i.posthog.com|us-assets.i.posthog.com|www.google.ca|www.google.com.bd|www.google-analytics.com$).*",
+      "hints": [
+        "content-type",
+        "http-cache",
+        "http-compression",
+        "no-disallowed-headers",
+        "no-html-only-headers",
+        "no-http-redirects",
+        "sri",
+        "strict-transport-security",
+        "validate-set-cookie-header",
+        "x-content-type-options"
+      ]
+    }
+  ]
 }

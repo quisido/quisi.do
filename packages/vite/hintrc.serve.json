@@ -10,7 +10,11 @@
     // Technical debt: Re-enable this when `api-js.mixpanel.com` is blocked.
     "axe/keyboard": "off",
 
-    // Technical debt: Re-enable this when `api-js.mixpanel.com` is blocked.
+    /**
+     * Technical debt: Re-enable this when `api-js.mixpanel.com` is blocked.
+     * axe/text-alternatives: Element has no title attribute
+     * <img src="https://api-js.mixpanel.com/track/..." />
+     */
     "axe/text-alternatives": "off",
 
     /**
@@ -32,11 +36,6 @@
     // "No valid configuration for Cloudinary found. Hint could not run."
     "image-optimization-cloudinary": "off"
   },
-
-  /**
-   * axe/text-alternatives: Element has no title attribute
-   * <img src="https://api-js.mixpanel.com/track/..." />
-   */
 
   "ignoredUrls": [
     {
