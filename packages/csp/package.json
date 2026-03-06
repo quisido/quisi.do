@@ -43,7 +43,7 @@
     "fmrs": "^2.1.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20251014.0",
+    "@cloudflare/workers-types": "^4.20260305.1",
     "@quisido/worker-test": "^1.0.1",
     "@types/eslint": "^9.6.1",
     "@vitest/ui": "^4.0.7",
