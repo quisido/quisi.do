@@ -102,7 +102,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Download
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: build
       - name: Deploy
@@ -240,7 +240,7 @@ jobs:
         working-directory: packages/vite
       - name: Upload
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: webhint-production
           if-no-files-found: error
