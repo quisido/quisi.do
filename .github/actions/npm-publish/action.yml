@@ -13,10 +13,10 @@ runs:
     - name: Setup
       uses: ./.github/actions/setup
     - name: Publish
-      run: |
-        chmod +x ./.github/actions/npm-publish/npm-publish.sh &&
-        ./.github/actions/npm-publish/npm-publish.sh;
       shell: bash
       env:
         NPM_AUTH_TOKEN: ${{ inputs.auth-token }}
         NPM_CONFIG_PROVENANCE: true
+      run: |
+        chmod +x ./.github/actions/npm-publish/npm-publish.sh &&
+        ./.github/actions/npm-publish/npm-publish.sh;
