@@ -1,64 +1,18 @@
 import type { MetricDimensions } from '@quisido/worker';
 import type MetricResult from './metric-result.js';
+import validateD1Dimensions from './validate-d1-dimensions.js';
 
 export default function handleD1Run(
   dimensions: MetricDimensions,
 ): MetricResult | null {
-  const {
-    changedDb,
-    changes,
-    duration,
-    endTime,
-    env,
-    lastRowId,
-    query,
-    rowsRead,
-    rowsWritten,
-    sizeAfter,
-    startTime,
-  } = dimensions;
-
-  if (
-    typeof changedDb !== 'boolean' ||
-    typeof changes !== 'number' ||
-    typeof duration !== 'number' ||
-    typeof endTime !== 'number' ||
-    typeof env !== 'string' ||
-    typeof lastRowId !== 'number' ||
-    typeof query !== 'string' ||
-    typeof rowsRead !== 'number' ||
-    typeof rowsWritten !== 'number' ||
-    typeof sizeAfter !== 'number' ||
-    typeof startTime !== 'number'
-  ) {
+  const validated = validateD1Dimensions(dimensions);
+  if (validated === null) {
     return null;
   }
 
+  const { lastRowId, query, ...publicFields } = validated;
   return {
-    privateDimensions: {
-      changedDb,
-      changes,
-      duration,
-      endTime,
-      env,
-      lastRowId,
-      query,
-      rowsRead,
-      rowsWritten,
-      sizeAfter,
-      startTime,
-    },
-
-    publicDimensions: {
-      changedDb,
-      changes,
-      duration,
-      endTime,
-      env,
-      rowsRead,
-      rowsWritten,
-      sizeAfter,
-      startTime,
-    },
+    privateDimensions: validated,
+    publicDimensions: publicFields,
   };
 }
