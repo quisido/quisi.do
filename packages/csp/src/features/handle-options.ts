@@ -61,7 +61,7 @@ const validateProjectOrigin = (
     return handleInvalidProjectRow(handler, firstResult);
   }
 
-  if (!origins.split(' ').includes(origin)) {
+  if (!new Set(origins.split(' ')).has(origin)) {
     return handleInvalidOrigin(handler, origin);
   }
 
