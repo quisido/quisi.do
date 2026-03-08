@@ -8,6 +8,7 @@ jobs:
   # Stage 1: build, bun, dependency-review
   build:
     name: Build
+    environment: continuous-integration
     runs-on: ubuntu-latest
     services:
       datadog-agent: &datadog-agent
@@ -27,17 +28,9 @@ jobs:
         with:
           environment: staging
 
-  bun:
-    name: bun
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v6
-      - name: Run
-        uses: ./.github/actions/bun
-
   dependency-review:
     name: Dependency review
+    environment: continuous-integration
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -50,6 +43,7 @@ jobs:
   # Stage 2: lighthouse, test, webhint
   lighthouse:
     name: Lighthouse
+    environment: continuous-integration
     needs: build
     runs-on: ubuntu-latest
     services:
@@ -62,6 +56,7 @@ jobs:
 
   test:
     name: Test
+    environment: continuous-integration
     needs: build
     runs-on: ubuntu-latest
     services:
@@ -74,6 +69,7 @@ jobs:
 
   webhint:
     name: Webhint
+    environment: continuous-integration
     needs: build
     runs-on: ubuntu-latest
     services:
@@ -87,6 +83,7 @@ jobs:
   # Stage 3: sentry-prevent
   sentry-prevent:
     name: Sentry Prevent
+    environment: continuous-integration
     needs: test
     runs-on: ubuntu-latest
     permissions:

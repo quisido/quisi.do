@@ -8,6 +8,7 @@ jobs:
   # Stage 1: build
   build:
     name: Build
+    environment: continuous-deployment
     runs-on: ubuntu-latest
     services:
       datadog-agent: &datadog-agent
@@ -30,6 +31,7 @@ jobs:
   # Stage 2: datadog-sourcemaps, lighthouse-ci, sentry-release, test, webhint-ci
   datadog-sourcemaps:
     name: Datadog sourcemaps
+    environment: continuous-deployment
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -42,6 +44,7 @@ jobs:
 
   lighthouse-ci:
     name: Lighthouse (continuous integration)
+    environment: continuous-deployment
     needs: build
     runs-on: ubuntu-latest
     services:
@@ -54,6 +57,7 @@ jobs:
 
   sentry-release:
     name: Sentry release
+    environment: continuous-deployment
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -62,10 +66,11 @@ jobs:
       - name: Release
         uses: ./.github/actions/sentry-release
         with:
-          auth-token: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          auth-token: ${{ secrets.SENTRY_RELEASE_TOKEN }}
 
   test:
     name: Test
+    environment: continuous-deployment
     needs: build
     runs-on: ubuntu-latest
     services:
@@ -78,6 +83,7 @@ jobs:
 
   webhint-ci:
     name: Webhint (continuous integration)
+    environment: continuous-deployment
     needs: build
     runs-on: ubuntu-latest
     services:
@@ -91,6 +97,7 @@ jobs:
   # Stage 3: github-pages, npm-publish, sentry-prevent
   github-pages:
     name: GitHub Pages
+    environment: production
     runs-on: ubuntu-latest
     needs:
       - lighthouse-ci
@@ -127,13 +134,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Publish
-        uses: ./.github/actions/npm-publish
-        with:
-          auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: npm publish
 
   sentry-prevent:
     name: Sentry Prevent
+    environment: continuous-deployment
     needs: test
     runs-on: ubuntu-latest
     permissions:
@@ -149,6 +157,7 @@ jobs:
   # Stage 4: cloudflare-purge, github-packages, wrangler-deploy
   cloudflare-purge:
     name: Cloudflare
+    environment: production
     needs: github-pages
     runs-on: ubuntu-latest
     services:
@@ -159,11 +168,13 @@ jobs:
       - name: Purge cache
         uses: ./.github/actions/cloudflare-purge
         with:
-          api-token: ${{ secrets.CLOUDFLARE_PURGE_API_TOKEN }}
-          zone-id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          api-token: ${{ secrets.CLOUDFLARE_PURGE_TOKEN }}
+          quisi-do-zone-id: ${{ secrets.CLOUDFLARE_QUISI_DO_ZONE_ID }}
+          quisido-dev-zone-id: ${{ secrets.CLOUDFLARE_QUISIDO_DEV_ZONE_ID }}
 
   github-packages:
     name: GitHub Packages
+    environment: production
     needs: npm-publish
     runs-on: ubuntu-latest
     permissions:
@@ -182,6 +193,7 @@ jobs:
 
   wrangler-deploy:
     name: Wrangler deploy (${{ matrix.service }})
+    environment: production
     runs-on: ubuntu-latest
     needs:
       - lighthouse-ci
@@ -195,7 +207,7 @@ jobs:
       - name: Deploy
         uses: ./.github/actions/wrangler-deploy
         with:
-          api-token: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_API_TOKEN }}
+          api-token: ${{ secrets.CLOUDFLARE_EDIT_WORKERS_TOKEN }}
           workspace: ${{ matrix.workspace }}
     strategy:
       matrix:
@@ -210,6 +222,7 @@ jobs:
   # Stage 5: lighthouse-production, webhint-production
   lighthouse-production:
     name: Lighthouse (production)
+    environment: continuous-deployment
     runs-on: ubuntu-latest
     needs:
       - cloudflare-purge
@@ -224,6 +237,7 @@ jobs:
 
   webhint-production:
     name: Webhint (production)
+    environment: continuous-deployment
     runs-on: ubuntu-latest
     needs:
       - cloudflare-purge

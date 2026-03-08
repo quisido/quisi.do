@@ -1,11 +1,19 @@
 {
   "compilerOptions": {
-    "declarationDir": "dist",
-    "noEmit": true,
-    "rootDir": ".",
-		"skipLibCheck": true
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "importHelpers": true,
+    "incremental": false,
+    "inlineSourceMap": false,
+    "inlineSources": false,
+    "isolatedDeclarations": false,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "noPropertyAccessFromIndexSignature": true,
+    "rootDir": "src"
   },
-  "exclude": [".cache/", ".tests/", "dist/"],
+  "exclude": [".cache/", ".tests/", ".wrangler/", "dist/"],
   "extends": "quisido/tsconfig.json",
   "include": ["**/*.ts"]
 }

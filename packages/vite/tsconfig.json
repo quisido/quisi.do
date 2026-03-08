@@ -1,23 +1,12 @@
 {
   "compilerOptions": {
-    "allowJs": false,
     "declarationDir": "_site",
-    "downlevelIteration": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
     "jsx": "preserve",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "noEmit": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "outDir": "_site",
-    "plugins": [],
-    "resolveJsonModule": true,
-    "rootDir": ".",
-    "sourceRoot": ".",
-    "strict": true,
-    "types": ["node"]
+    "rootDir": "src"
   },
   "exclude": [],
   "extends": "quisido/tsconfig.json",
