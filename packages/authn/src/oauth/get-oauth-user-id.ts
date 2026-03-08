@@ -1,10 +1,9 @@
-import { ErrorCode } from '@quisido/authn-shared';
 import { isRecord } from 'fmrs';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import { type OAuthProvider } from '../constants/oauth-provider.js';
 import { SELECT_USERID_FROM_OAUTH_QUERY } from '../constants/queries.js';
-import FatalError from '../utils/fatal-error.js';
+import handleInvalidOAuthUserId from './handle-invalid-oauth-user-id.js';
 
 export default async function getOAuthUserId(
   this: AuthnFetchHandler,
@@ -26,12 +25,7 @@ export default async function getOAuthUserId(
   // Malformed database row
   const { userId } = firstResult;
   if (typeof userId !== 'number') {
-    this.emitPublicMetric(MetricName.InvalidOAuthUserId);
-    this.emitPrivateMetric(MetricName.InvalidOAuthUserId, {
-      value: JSON.stringify(firstResult),
-    });
-
-    throw new FatalError(ErrorCode.InvalidOAuthUserId);
+    handleInvalidOAuthUserId.call(this, firstResult);
   }
 
   // Existent user
