@@ -31,18 +31,63 @@ WHERE \`projectId\` = ?
 AND \`timestamp\` > ?;
 `;
 
+const handleMissingKey = (handler: CspFetchHandler): CspResponse => {
+  handler.emitPublicMetric(MetricName.MissingGetKey);
+  return new CspResponse(StatusCode.BadRequest, {
+    code: GetErrorCode.MissingKey,
+  });
+};
+
+const handleInvalidKey = (handler: CspFetchHandler): CspResponse => {
+  handler.emitPublicMetric(MetricName.InvalidGetKey);
+  return new CspResponse(StatusCode.NotFound, {
+    code: GetErrorCode.InvalidKey,
+  });
+};
+
+const handleInvalidProjectRow = (
+  handler: CspFetchHandler,
+  projectId: number,
+): CspResponse => {
+  handler.emitPublicMetric(MetricName.InvalidDatabaseProjectsRow, {
+    projectId,
+  });
+
+  handler.logError(
+    new Error(
+      `The database row for project ID "${projectId.toString()}" is invalid.`,
+    ),
+  );
+
+  return new CspResponse(StatusCode.BadGateway, {
+    code: GetErrorCode.InvalidDatabaseProjectRow,
+  });
+};
+
+const validateKeysRow = (
+  handler: CspFetchHandler,
+  keysRow: Record<string, unknown> | undefined,
+  projectId: number,
+): CspResponse | undefined => {
+  if (typeof keysRow === 'undefined') {
+    return handleInvalidKey(handler);
+  }
+
+  const { userId } = keysRow;
+  if (typeof userId !== 'number') {
+    return handleInvalidProjectRow(handler, projectId);
+  }
+
+  return undefined;
+};
+
 export default async function handleGet(
   this: CspFetchHandler,
   projectId: number,
 ): Promise<Response> {
-  // Key
   const key: string | null = this.getRequestSearchParam('key');
   if (key === null) {
-    this.emitPublicMetric(MetricName.MissingGetKey);
-
-    return new CspResponse(StatusCode.BadRequest, {
-      code: GetErrorCode.MissingKey,
-    });
+    return handleMissingKey(this);
   }
 
   const {
@@ -52,31 +97,13 @@ export default async function handleGet(
     projectId,
   ]);
 
-  // Not found
-  if (typeof keysRow === 'undefined') {
-    this.emitPublicMetric(MetricName.InvalidGetKey);
-    return new CspResponse(StatusCode.NotFound, {
-      code: GetErrorCode.InvalidKey,
-    });
-  }
-
-  // Bad gateway
-  const { userId } = keysRow;
-  if (typeof userId !== 'number') {
-    this.emitPublicMetric(MetricName.InvalidDatabaseProjectsRow, {
-      projectId,
-    });
-
-    const projectIdStr: string = projectId.toString();
-    this.logError(
-      new Error(
-        `The database row for project ID "${projectIdStr}" is invalid.`,
-      ),
-    );
-
-    return new CspResponse(StatusCode.BadGateway, {
-      code: GetErrorCode.InvalidDatabaseProjectRow,
-    });
+  const keysError: CspResponse | undefined = validateKeysRow(
+    this,
+    keysRow,
+    projectId,
+  );
+  if (keysError !== undefined) {
+    return keysError;
   }
 
   const { results: reports } = await this.getD1Results(
