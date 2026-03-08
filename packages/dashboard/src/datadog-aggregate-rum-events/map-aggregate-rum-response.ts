@@ -5,51 +5,80 @@ import sanitizeStatus from './sanitize-status.js';
 
 const DEFAULT_ELAPSED = 0;
 
-function extractComputes(response: RUMAnalyticsAggregateResponse) {
-  return response.data?.buckets?.[0]?.computes;
+interface AggregateResponses {
+  readonly errorCountResponse: RUMAnalyticsAggregateResponse;
+  readonly loadTimingResponse: RUMAnalyticsAggregateResponse;
+  readonly performanceTimingResponse: RUMAnalyticsAggregateResponse;
+  readonly sessionAndLayoutResponse: RUMAnalyticsAggregateResponse;
 }
 
-export default function mapAggregateRumResponse(
-  sessionAndLayoutResponse: RUMAnalyticsAggregateResponse,
-  performanceTimingResponse: RUMAnalyticsAggregateResponse,
-  loadTimingResponse: RUMAnalyticsAggregateResponse,
-  errorCountResponse: RUMAnalyticsAggregateResponse,
-) {
-  const sessionAndLayout = extractComputes(sessionAndLayoutResponse);
-  const performanceTiming = extractComputes(performanceTimingResponse);
-  const loadTiming = extractComputes(loadTimingResponse);
-  const errorCount = extractComputes(errorCountResponse);
-  const meta = sessionAndLayoutResponse.meta;
+const extractComputes = (
+  response: RUMAnalyticsAggregateResponse,
+): Record<string, unknown> =>
+  response.data?.buckets?.[0]?.computes ?? {};
 
+const mapSessionAndLayout = (
+  computes: Record<string, unknown>,
+): Record<string, number | undefined> => ({
+  cumulativeLayoutShiftP50: mapToOptionalNumber(computes['c1']),
+  cumulativeLayoutShiftP75: mapToOptionalNumber(computes['c2']),
+  domCompleteP50: mapToOptionalNumber(computes['c3']),
+  domCompleteP75: mapToOptionalNumber(computes['c4']),
+  domContentLoadedP50: mapToOptionalNumber(computes['c5']),
+  domContentLoadedP75: mapToOptionalNumber(computes['c6']),
+  sessionTimeSpent: mapToOptionalNumber(computes['c0']),
+});
+
+const mapPerformanceTiming = (
+  computes: Record<string, unknown>,
+): Record<string, number | undefined> => ({
+  firstByteP50: mapToOptionalNumber(computes['c0']),
+  firstByteP75: mapToOptionalNumber(computes['c1']),
+  firstContentfulPaintP50: mapToOptionalNumber(computes['c2']),
+  firstContentfulPaintP75: mapToOptionalNumber(computes['c3']),
+  firstInputDelayP50: mapToOptionalNumber(computes['c4']),
+  firstInputDelayP75: mapToOptionalNumber(computes['c5']),
+  interactionToNextPaintP50: mapToOptionalNumber(computes['c6']),
+  interactionToNextPaintP75: mapToOptionalNumber(computes['c7']),
+  largestContentfulPaintP50: mapToOptionalNumber(computes['c8']),
+  largestContentfulPaintP75: mapToOptionalNumber(computes['c9']),
+});
+
+const mapLoadTiming = (
+  computes: Record<string, unknown>,
+): Record<string, number | undefined> => ({
+  loadEventP50: mapToOptionalNumber(computes['c0']),
+  loadEventP75: mapToOptionalNumber(computes['c1']),
+  loadingTimeP50: mapToOptionalNumber(computes['c2']),
+  loadingTimeP75: mapToOptionalNumber(computes['c3']),
+  viewTimeSpent: mapToOptionalNumber(computes['c4']),
+});
+
+const mapErrorCount = (
+  computes: Record<string, unknown>,
+): Record<string, readonly number[] | undefined> => ({
+  errorCountP50: mapToOptionalTimeSeries(computes['c0']),
+  errorCountP75: mapToOptionalTimeSeries(computes['c1']),
+  errorCountP90: mapToOptionalTimeSeries(computes['c2']),
+});
+
+const mapAggregateRumResponse = ({
+  errorCountResponse,
+  loadTimingResponse,
+  performanceTimingResponse,
+  sessionAndLayoutResponse,
+}: AggregateResponses) => {
+  const meta = sessionAndLayoutResponse.meta;
   return {
-    cumulativeLayoutShiftP50: mapToOptionalNumber(sessionAndLayout?.['c1']),
-    cumulativeLayoutShiftP75: mapToOptionalNumber(sessionAndLayout?.['c2']),
-    domCompleteP50: mapToOptionalNumber(sessionAndLayout?.['c3']),
-    domCompleteP75: mapToOptionalNumber(sessionAndLayout?.['c4']),
-    domContentLoadedP50: mapToOptionalNumber(sessionAndLayout?.['c5']),
-    domContentLoadedP75: mapToOptionalNumber(sessionAndLayout?.['c6']),
+    ...mapSessionAndLayout(extractComputes(sessionAndLayoutResponse)),
+    ...mapPerformanceTiming(extractComputes(performanceTimingResponse)),
+    ...mapLoadTiming(extractComputes(loadTimingResponse)),
+    ...mapErrorCount(extractComputes(errorCountResponse)),
     elapsed: meta?.elapsed ?? DEFAULT_ELAPSED,
-    errorCountP50: mapToOptionalTimeSeries(errorCount?.['c0']),
-    errorCountP75: mapToOptionalTimeSeries(errorCount?.['c1']),
-    errorCountP90: mapToOptionalTimeSeries(errorCount?.['c2']),
-    firstByteP50: mapToOptionalNumber(performanceTiming?.['c0']),
-    firstByteP75: mapToOptionalNumber(performanceTiming?.['c1']),
-    firstContentfulPaintP50: mapToOptionalNumber(performanceTiming?.['c2']),
-    firstContentfulPaintP75: mapToOptionalNumber(performanceTiming?.['c3']),
-    firstInputDelayP50: mapToOptionalNumber(performanceTiming?.['c4']),
-    firstInputDelayP75: mapToOptionalNumber(performanceTiming?.['c5']),
-    interactionToNextPaintP50: mapToOptionalNumber(performanceTiming?.['c6']),
-    interactionToNextPaintP75: mapToOptionalNumber(performanceTiming?.['c7']),
-    largestContentfulPaintP50: mapToOptionalNumber(performanceTiming?.['c8']),
-    largestContentfulPaintP75: mapToOptionalNumber(performanceTiming?.['c9']),
-    loadEventP50: mapToOptionalNumber(loadTiming?.['c0']),
-    loadEventP75: mapToOptionalNumber(loadTiming?.['c1']),
-    loadingTimeP50: mapToOptionalNumber(loadTiming?.['c2']),
-    loadingTimeP75: mapToOptionalNumber(loadTiming?.['c3']),
     requestId: meta?.requestId ?? '',
-    sessionTimeSpent: mapToOptionalNumber(sessionAndLayout?.['c0']),
     status: sanitizeStatus(meta?.status),
-    viewTimeSpent: mapToOptionalNumber(loadTiming?.['c4']),
     warnings: meta?.warnings ?? [],
   };
-}
+};
+
+export default mapAggregateRumResponse;

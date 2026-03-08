@@ -101,11 +101,11 @@ export default class DatadogRumApi extends v2.RUMApi {
       ),
     ]);
 
-    return mapAggregateRumResponse(
-      sessionAndLayoutResponse,
-      performanceTimingResponse,
-      loadTimingResponse,
+    return mapAggregateRumResponse({
       errorCountResponse,
-    );
+      loadTimingResponse,
+      performanceTimingResponse,
+      sessionAndLayoutResponse,
+    });
   }
 }
