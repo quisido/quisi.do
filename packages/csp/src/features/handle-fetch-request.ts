@@ -4,8 +4,8 @@ import type CspFetchHandler from '../csp-fetch-handler.js';
 import isStaticPathname from '../utils/is-static-pathname.js';
 import mapPathnameToProjectId from '../utils/map-pathname-to-project-id.js';
 import MethodNotAllowedResponse from '../utils/method-not-allowed-response.js';
-import NotFoundResponse from '../utils/not-found-response.js';
 import handleGet from './handle-get.js';
+import handleInvalidPathname from './handle-invalid-pathname.js';
 import handleOptions from './handle-options.js';
 import handlePost from './handle-post.js';
 import handleStaticPathname from './handle-static-pathname.js';
@@ -21,19 +21,7 @@ export default async function handleFetchRequest(
   // Project pathnames
   const projectId: number = mapPathnameToProjectId(this.requestPathname);
   if (Number.isNaN(projectId)) {
-    const error = new Error(
-      `The pathname "${this.requestPathname}" does not exist.`,
-      {
-        cause: this.requestPathname,
-      },
-    );
-
-    this.logError(error);
-    this.emitPublicMetric(MetricName.InvalidPathname, {
-      pathname: this.requestPathname,
-    });
-
-    return new NotFoundResponse(this.requestPathname);
+    return handleInvalidPathname.call(this);
   }
 
   switch (this.requestMethod) {

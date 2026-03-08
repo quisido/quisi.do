@@ -6,60 +6,90 @@ import CspResponse from '../utils/csp-response.js';
 import InvalidOriginResponse from '../utils/invalid-origin-response.js';
 import MissingOriginResponse from '../utils/missing-origin-response.js';
 
+const handleMissingOrigin = (
+  handler: CspFetchHandler,
+): MissingOriginResponse => {
+  handler.emitPublicMetric(MetricName.MissingOrigin);
+  return new MissingOriginResponse();
+};
+
+const handleMissingProject = (
+  handler: CspFetchHandler,
+  projectId: number,
+): CspResponse => {
+  handler.emitPublicMetric(MetricName.InvalidOptionsProjectId, {
+    projectId,
+  });
+
+  return new CspResponse(
+    StatusCode.NotFound,
+    `Project "${projectId.toString()}" does not exist.`,
+  );
+};
+
+const handleInvalidProjectRow = (
+  handler: CspFetchHandler,
+  firstResult: Record<string, unknown>,
+): CspResponse => {
+  handler.emitPrivateMetric(MetricName.InvalidDatabaseProjectsRow, {
+    row: JSON.stringify(firstResult),
+  });
+
+  handler.emitPublicMetric(MetricName.InvalidDatabaseProjectsRow, {
+    keys: Object.keys(firstResult).join(', '),
+  });
+
+  return new CspResponse(StatusCode.BadGateway);
+};
+
+const handleInvalidOrigin = (
+  handler: CspFetchHandler,
+  origin: string,
+): InvalidOriginResponse => {
+  handler.emitPublicMetric(MetricName.InvalidOrigin);
+  handler.emitPrivateMetric(MetricName.InvalidOrigin, { origin });
+  return new InvalidOriginResponse(origin);
+};
+
+const validateProjectOrigin = (
+  handler: CspFetchHandler,
+  firstResult: Record<string, unknown>,
+  origin: string,
+): CspResponse | InvalidOriginResponse | undefined => {
+  const { origins, userId } = firstResult;
+  if (typeof origins !== 'string' || typeof userId !== 'number') {
+    return handleInvalidProjectRow(handler, firstResult);
+  }
+
+  if (!new Set(origins.split(' ')).has(origin)) {
+    return handleInvalidOrigin(handler, origin);
+  }
+
+  return undefined;
+};
+
 export default async function handleOptions(
   this: CspFetchHandler,
   projectId: number,
 ): Promise<Response> {
-  // Origin
   if (this.origin === null) {
-    this.emitPublicMetric(MetricName.MissingOrigin);
-    return new MissingOriginResponse();
+    return handleMissingOrigin(this);
   }
 
-  // Query
   const {
     results: [firstResult],
   } = await this.getD1Results('CSP_DB', SELECT_ORIGINS_USER_ID_FROM_PROJECTS, [
     projectId,
   ]);
 
-  // Not found
   if (typeof firstResult === 'undefined') {
-    const projectIdStr: string = projectId.toString();
-    this.emitPublicMetric(MetricName.InvalidOptionsProjectId, {
-      projectId,
-    });
-
-    return new CspResponse(
-      StatusCode.NotFound,
-      `Project "${projectIdStr}" does not exist.`,
-    );
+    return handleMissingProject(this, projectId);
   }
 
-  // Bad gateway
-  const { origins, userId } = firstResult;
-  if (typeof origins !== 'string' || typeof userId !== 'number') {
-    this.emitPrivateMetric(MetricName.InvalidDatabaseProjectsRow, {
-      row: JSON.stringify(firstResult),
-    });
-
-    this.emitPublicMetric(MetricName.InvalidDatabaseProjectsRow, {
-      keys: Object.keys(firstResult).join(', '),
-    });
-
-    return new CspResponse(StatusCode.BadGateway);
-  }
-
-  // Allow origin
-  const originsArr: readonly string[] = origins.split(' ');
-  const originsSet: Set<string> = new Set<string>(originsArr);
-  if (!originsSet.has(this.origin)) {
-    this.emitPublicMetric(MetricName.InvalidOrigin);
-    this.emitPrivateMetric(MetricName.InvalidOrigin, {
-      origin: this.origin,
-    });
-
-    return new InvalidOriginResponse(this.origin);
+  const validationError: CspResponse | InvalidOriginResponse | undefined =
+    validateProjectOrigin(this, firstResult, this.origin);
+  if (validationError !== undefined) {
+    return validationError;
   }
 
   return new CspResponse(StatusCode.OK, null, {
