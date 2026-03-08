@@ -14,8 +14,7 @@ interface AggregateResponses {
 
 const extractComputes = (
   response: RUMAnalyticsAggregateResponse,
-): Record<string, unknown> =>
-  response.data?.buckets?.[0]?.computes ?? {};
+): Record<string, unknown> => response.data?.buckets?.[0]?.computes ?? {};
 
 const mapSessionAndLayout = (
   computes: Record<string, unknown>,
