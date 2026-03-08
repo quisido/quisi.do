@@ -1,17 +1,20 @@
-import {
-  type Handler,
-  type MetricDimensions,
-} from '@quisido/worker';
+import { type Handler, type MetricDimensions } from '@quisido/worker';
 import { PUBLIC } from './constants/metric-dimensions.js';
 import { MetricName } from './constants/metric-name.js';
 import emitWorkerMetric from './utils/emit-worker-metric.js';
 import isWorkerMetricName from './utils/is-worker-metric-name.js';
 import mapDimensionsToString from './utils/map-dimensions-to-string.js';
 
-const createEmitPublicly = (
-  handler: Handler,
-  name: string,
-): ((subdimensions: MetricDimensions) => void) =>
+type EmitFn = (subdimensions: MetricDimensions) => void;
+
+interface CustomMetricContext {
+  readonly emitPrivately: EmitFn;
+  readonly emitPublicly: EmitFn;
+  readonly name: string;
+}
+
+const createEmitPublicly =
+  (handler: Handler, name: string): EmitFn =>
   (subdimensions: MetricDimensions): void => {
     const subdimensionsStr: string = mapDimensionsToString(subdimensions);
     handler.log('-'.repeat(`Public metric: ${name}`.length));
@@ -20,10 +23,8 @@ const createEmitPublicly = (
     handler.writeMetricDataPoint('PUBLIC_DATASET', name, subdimensions);
   };
 
-const createEmitPrivately = (
-  handler: Handler,
-  name: string,
-): ((subdimensions: MetricDimensions) => void) =>
+const createEmitPrivately =
+  (handler: Handler, name: string): EmitFn =>
   (subdimensions: MetricDimensions): void => {
     const subdimensionsStr: string = mapDimensionsToString(subdimensions);
     handler.log('------------------------');
@@ -34,8 +35,8 @@ const createEmitPrivately = (
 
 const emitCustomMetric = (
   handler: Handler,
-  name: string,
   dimensions: MetricDimensions,
+  { emitPrivately, emitPublicly, name }: CustomMetricContext,
 ): void => {
   if (!Object.hasOwn(dimensions, PUBLIC)) {
     handler.logError(
@@ -57,9 +58,9 @@ const emitCustomMetric = (
   }
 
   if (isPublic) {
-    createEmitPublicly(handler, name)(newDimensions);
+    emitPublicly(newDimensions);
   } else {
-    createEmitPrivately(handler, name)(newDimensions);
+    emitPrivately(newDimensions);
   }
 };
 
@@ -85,5 +86,5 @@ export default function handleMetric(
     return;
   }
 
-  emitCustomMetric(this, name, dimensions);
+  emitCustomMetric(this, dimensions, { emitPrivately, emitPublicly, name });
 }
