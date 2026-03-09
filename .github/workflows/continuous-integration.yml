@@ -5,7 +5,7 @@ concurrency:
   group: pull-request-${{ github.event.pull_request.number }}
 
 jobs:
-  # Stage 1: build, bun, dependency-review
+  # Stage 1: build, dependency-review
   build:
     name: Build
     environment: continuous-integration

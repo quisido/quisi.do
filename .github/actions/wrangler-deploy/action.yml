@@ -17,7 +17,7 @@ runs:
       uses: ./.github/actions/setup
     - name: Deploy
       run: |
-        chmod +x ./.github/actions/wrangler-deploy/wrangler-deploy.sh &&
+        chmod +x ./.github/actions/wrangler-deploy/wrangler-deploy.sh;
         ./.github/actions/wrangler-deploy/wrangler-deploy.sh;
       shell: bash
       env:

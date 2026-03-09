@@ -137,7 +137,7 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
       - name: Publish
-        run: npm publish
+        run: npm run publish
 
   sentry-prevent:
     name: Sentry Prevent
