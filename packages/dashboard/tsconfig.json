@@ -2,6 +2,7 @@
   "compilerOptions": {
     "composite": false,
     "declaration": false,
+    "declarationDir": "dist",
     "declarationMap": false,
     "importHelpers": true,
     "incremental": false,
@@ -11,6 +12,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "noPropertyAccessFromIndexSignature": true,
+    "outDir": "dist",
     "rootDir": ".",
     "sourceMap": false,
     "sourceRoot": "src"
