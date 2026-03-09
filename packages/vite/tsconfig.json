@@ -6,7 +6,8 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "outDir": "_site",
-    "rootDir": "."
+    "rootDir": ".",
+    "sourceRoot": "src"
   },
   "exclude": [],
   "extends": "quisido/tsconfig.json",

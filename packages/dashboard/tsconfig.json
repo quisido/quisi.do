@@ -12,7 +12,8 @@
     "moduleResolution": "bundler",
     "noPropertyAccessFromIndexSignature": true,
     "rootDir": ".",
-    "sourceMap": false
+    "sourceMap": false,
+    "sourceRoot": "src"
   },
   "exclude": [".cache/", ".tests/", ".wrangler/", "dist/"],
   "extends": "quisido/tsconfig.json",

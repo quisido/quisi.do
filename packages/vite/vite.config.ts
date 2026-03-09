@@ -11,6 +11,7 @@ import {
 import { type Compulsory } from './src/types/compulsory.js';
 import reduceEnvironmentVariableNamesToRecord from './src/utils/reduce-environment-variable-names-to-record.js';
 import buildTSConfig from './tsconfig.build.json' with { type: 'json' };
+import tsconfig from './tsconfig.json' with { type: 'json' };
 
 const ESBUILD_OPTIONS: ESBuildOptions = {
   color: true,
@@ -92,7 +93,7 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
     minifyIdentifiers: true,
     minifySyntax: true,
     minifyWhitespace: true,
-    sourceRoot: buildTSConfig.compilerOptions.sourceRoot,
+    sourceRoot: tsconfig.compilerOptions.sourceRoot,
     tsconfigRaw: buildTSConfig as Compulsory<ESBuildOptions['tsconfigRaw']>,
   },
   html: {
