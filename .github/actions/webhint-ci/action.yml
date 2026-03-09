@@ -10,7 +10,7 @@ runs:
     - name: Audit
       shell: bash
       working-directory: packages/vite
-      run: |
+      run: >
         npx concurrently \
           --hide serve \
           --kill-others \

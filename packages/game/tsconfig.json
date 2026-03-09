@@ -16,6 +16,7 @@
     "plugins": [],
     "resolveJsonModule": true,
     "rootDir": ".",
+    "sourceRoot": "src",
     "strict": true,
     "types": ["@types/node"]
   },

@@ -18,5 +18,5 @@ runs:
         NPM_AUTH_TOKEN: ${{ inputs.auth-token }}
         NPM_CONFIG_PROVENANCE: true
       run: |
-        chmod +x ./.github/actions/github-packages/github-packages-publish.sh &&
+        chmod +x ./.github/actions/github-packages/github-packages-publish.sh;
         ./.github/actions/github-packages/github-packages-publish.sh;
