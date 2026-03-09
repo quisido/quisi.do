@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Enable
-        run: gh pr merge --auto --merge "$PR_HTML_URL"
+        run: gh pr merge --auto --rebase "$PR_HTML_URL"
         env:
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
           PR_HTML_URL: ${{github.event.pull_request.html_url}}
