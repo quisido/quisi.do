@@ -28,7 +28,7 @@ runs:
       # Build `quisido` then re-install to symlink the dependency.
       # We must use `npm install` instead of `npm ci` due to the dependency
       # differences between Linux and Windows.
-      run: >
+      run: |
         npm install;
         npm run build --workspace=packages/quisido;
         npm install;

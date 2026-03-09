@@ -34,7 +34,10 @@
     "html-checker": "off",
 
     // "No valid configuration for Cloudinary found. Hint could not run."
-    "image-optimization-cloudinary": "off"
+    "image-optimization-cloudinary": "off",
+
+    // We don't use SSL on localhost.
+    "ssllabs": "off"
   },
 
   "ignoredUrls": [
@@ -42,6 +45,7 @@
       "domain": "^(?!localhost:3000$).*",
       "hints": [
         "content-type",
+        "doctype",
         "http-cache",
         "http-compression",
         "no-disallowed-headers",

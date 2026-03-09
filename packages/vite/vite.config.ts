@@ -11,6 +11,7 @@ import {
 import { type Compulsory } from './src/types/compulsory.js';
 import reduceEnvironmentVariableNamesToRecord from './src/utils/reduce-environment-variable-names-to-record.js';
 import buildTSConfig from './tsconfig.build.json' with { type: 'json' };
+import tsconfig from './tsconfig.json' with { type: 'json' };
 
 const ESBUILD_OPTIONS: ESBuildOptions = {
   color: true,
@@ -37,7 +38,6 @@ const USER_CONFIG: UserConfig = {
     'GITHUB_SHA',
     'GOOGLE_ANALYTICS_TRACKING_ID',
     'HONEYCOMB_API_KEY',
-    'METICULOUS_RECORDING_TOKEN',
     'MIXPANEL_TOKEN',
     'NEW_RELIC_LICENSE_KEY',
     'NODE_ENV',
@@ -68,7 +68,7 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
     minifySyntax: false,
     minifyWhitespace: false,
     sourcemap: 'both',
-    sourceRoot: 'src',
+    sourceRoot: tsconfig.compilerOptions.sourceRoot,
   },
   plugins: [basicSsl(), ddPlugin, react()],
   server: {
