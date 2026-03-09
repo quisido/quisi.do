@@ -11,7 +11,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "noPropertyAccessFromIndexSignature": true,
-    "rootDir": "src",
+    "rootDir": ".",
     "sourceMap": false
   },
   "exclude": [".cache/", ".tests/", ".wrangler/", "dist/"],
