@@ -11,7 +11,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "noPropertyAccessFromIndexSignature": true,
-    "rootDir": "src"
+    "rootDir": "."
   },
   "exclude": [".cache/", ".tests/", ".wrangler/", "dist/"],
   "extends": "quisido/tsconfig.json",
