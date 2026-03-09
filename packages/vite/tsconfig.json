@@ -12,7 +12,8 @@
   "exclude": [],
   "extends": "quisido/tsconfig.json",
   "include": [
-    "**/.stylelintrc.ts",
+    "**/.*.json",
+    "**/.*.ts",
     "**/*.json",
     "**/*.ts",
     "**/*.tsx",

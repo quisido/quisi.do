@@ -38,7 +38,6 @@ const USER_CONFIG: UserConfig = {
     'GITHUB_SHA',
     'GOOGLE_ANALYTICS_TRACKING_ID',
     'HONEYCOMB_API_KEY',
-    'METICULOUS_RECORDING_TOKEN',
     'MIXPANEL_TOKEN',
     'NEW_RELIC_LICENSE_KEY',
     'NODE_ENV',
@@ -69,7 +68,7 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
     minifySyntax: false,
     minifyWhitespace: false,
     sourcemap: 'both',
-    sourceRoot: 'src',
+    sourceRoot: tsconfig.compilerOptions.sourceRoot,
   },
   plugins: [basicSsl(), ddPlugin, react()],
   server: {
@@ -93,7 +92,7 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
     minifyIdentifiers: true,
     minifySyntax: true,
     minifyWhitespace: true,
-    sourceRoot: tsconfig.compilerOptions.sourceRoot,
+    sourceRoot: buildTSConfig.compilerOptions.sourceRoot,
     tsconfigRaw: buildTSConfig as Compulsory<ESBuildOptions['tsconfigRaw']>,
   },
   html: {
