@@ -6,7 +6,9 @@ export default function mapPatreonOAuthTokenToAccessToken(
   this: AuthnFetchHandler,
   token: unknown,
 ): string {
-  const record: Record<string, unknown> =
-    validatePatreonOAuthToken.call(this, token);
+  const record: Record<string, unknown> = validatePatreonOAuthToken.call(
+    this,
+    token,
+  );
   return extractPatreonAccessToken.call(this, record);
 }

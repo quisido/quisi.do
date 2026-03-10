@@ -1,6 +1,6 @@
-import {
-  type Handler,
-  type MetricDimensions,
+import type {
+  Handler,
+  MetricDimensions,
   MetricName as WorkerMetricName,
 } from '@quisido/worker';
 import { MetricName } from '../constants/metric-name.js';

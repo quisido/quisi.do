@@ -10,9 +10,24 @@ export default function handleD1All(
     return null;
   }
 
-  const { lastRowId, query, results, ...publicFields } = validated;
+  const { results } = dimensions;
+  if (typeof results !== 'number') {
+    return null;
+  }
+
   return {
-    privateDimensions: validated,
-    publicDimensions: publicFields,
+    privateDimensions: { ...validated, results },
+    publicDimensions: {
+      changedDb: validated.changedDb,
+      changes: validated.changes,
+      duration: validated.duration,
+      endTime: validated.endTime,
+      env: validated.env,
+      results,
+      rowsRead: validated.rowsRead,
+      rowsWritten: validated.rowsWritten,
+      sizeAfter: validated.sizeAfter,
+      startTime: validated.startTime,
+    },
   };
 }

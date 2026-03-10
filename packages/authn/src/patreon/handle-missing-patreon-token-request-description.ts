@@ -21,7 +21,5 @@ export default function handleMissingPatreonTokenRequestDescription(
     },
   );
 
-  throw new FatalError(
-    ErrorCode.MissingInvalidPatreonTokenRequestDescription,
-  );
+  throw new FatalError(ErrorCode.MissingInvalidPatreonTokenRequestDescription);
 }

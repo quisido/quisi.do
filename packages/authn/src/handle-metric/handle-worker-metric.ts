@@ -54,4 +54,6 @@ export default function handleWorkerMetric(
     case WorkerMetricName.R2BucketPutError:
       return handleR2PutError(dimensions);
   }
+
+  return null;
 }

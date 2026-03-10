@@ -28,8 +28,9 @@ export default async function handleWhoAmIFetchRequest(
     });
   }
 
-  const userIdFromMemory: number | undefined =
-    this.getAuthnUserIdFromMemory(this.authnIdCookie);
+  const userIdFromMemory: number | undefined = this.getAuthnUserIdFromMemory(
+    this.authnIdCookie,
+  );
 
   if (typeof userIdFromMemory !== 'undefined') {
     return handleCachedAuthnId.call(this, userIdFromMemory);

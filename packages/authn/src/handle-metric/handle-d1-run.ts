@@ -10,9 +10,18 @@ export default function handleD1Run(
     return null;
   }
 
-  const { lastRowId, query, ...publicFields } = validated;
   return {
     privateDimensions: validated,
-    publicDimensions: publicFields,
+    publicDimensions: {
+      changedDb: validated.changedDb,
+      changes: validated.changes,
+      duration: validated.duration,
+      endTime: validated.endTime,
+      env: validated.env,
+      rowsRead: validated.rowsRead,
+      rowsWritten: validated.rowsWritten,
+      sizeAfter: validated.sizeAfter,
+      startTime: validated.startTime,
+    },
   };
 }
