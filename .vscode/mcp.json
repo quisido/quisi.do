@@ -1,6 +1,10 @@
 {
 	"inputs": [],
 	"servers": {
+    "cloudflare": {
+      "type": "http",
+      "url": "https://mcp.cloudflare.com/sse"
+    },
     "chrome-devtools": {
       "args": [
         "-y",
