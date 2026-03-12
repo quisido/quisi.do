@@ -94,127 +94,158 @@ const handleD1PreparedStatementError = createHandler(
   { excludeFromPublic: ['query'] },
 );
 
-const HANDLERS: Partial<Record<WorkerMetricName, WorkerMetricHandlerFn>> = {
-  [WorkerMetricName.D1PreparedStatementAll]: createHandler(
-    {
-      changedDb: 'boolean',
-      changes: 'number',
-      duration: 'number',
-      endTime: 'number',
-      env: 'string',
-      lastRowId: 'number',
-      query: 'string',
-      results: 'number',
-      rowsRead: 'number',
-      rowsWritten: 'number',
-      sizeAfter: 'number',
-      startTime: 'number',
-    },
-    { excludeFromPublic: ['lastRowId', 'query'] },
-  ),
+const HANDLERS = new Map<WorkerMetricName, WorkerMetricHandlerFn>([
+  [
+    WorkerMetricName.D1PreparedStatementAll,
+    createHandler(
+      {
+        changedDb: 'boolean',
+        changes: 'number',
+        duration: 'number',
+        endTime: 'number',
+        env: 'string',
+        lastRowId: 'number',
+        query: 'string',
+        results: 'number',
+        rowsRead: 'number',
+        rowsWritten: 'number',
+        sizeAfter: 'number',
+        startTime: 'number',
+      },
+      { excludeFromPublic: ['lastRowId', 'query'] },
+    ),
+  ],
 
-  [WorkerMetricName.D1PreparedStatementAllError]:
+  [
+    WorkerMetricName.D1PreparedStatementAllError,
     handleD1PreparedStatementError,
+  ],
 
-  [WorkerMetricName.D1PreparedStatementRun]: createHandler(
-    {
-      changedDb: 'boolean',
-      changes: 'number',
-      duration: 'number',
-      endTime: 'number',
-      env: 'string',
-      lastRowId: 'number',
-      query: 'string',
-      rowsRead: 'number',
-      rowsWritten: 'number',
-      sizeAfter: 'number',
-      startTime: 'number',
-    },
-    { excludeFromPublic: ['lastRowId', 'query'] },
-  ),
+  [
+    WorkerMetricName.D1PreparedStatementRun,
+    createHandler(
+      {
+        changedDb: 'boolean',
+        changes: 'number',
+        duration: 'number',
+        endTime: 'number',
+        env: 'string',
+        lastRowId: 'number',
+        query: 'string',
+        rowsRead: 'number',
+        rowsWritten: 'number',
+        sizeAfter: 'number',
+        startTime: 'number',
+      },
+      { excludeFromPublic: ['lastRowId', 'query'] },
+    ),
+  ],
 
-  [WorkerMetricName.D1PreparedStatementRunError]:
+  [
+    WorkerMetricName.D1PreparedStatementRunError,
     handleD1PreparedStatementError,
+  ],
 
-  [WorkerMetricName.Fetch]: handleFetch,
+  [WorkerMetricName.Fetch, handleFetch],
 
-  [WorkerMetricName.InvalidBinding]: createHandler(
-    {
-      key: 'string',
-      type: 'string',
-      value: 'string',
-    },
-    {
-      excludeFromPrivate: ['type'],
-      excludeFromPublic: ['value'],
-    },
-  ),
+  [
+    WorkerMetricName.InvalidBinding,
+    createHandler(
+      {
+        key: 'string',
+        type: 'string',
+        value: 'string',
+      },
+      {
+        excludeFromPrivate: ['type'],
+        excludeFromPublic: ['value'],
+      },
+    ),
+  ],
 
-  [WorkerMetricName.KVNamespaceGet]: createHandler(
-    {
-      endTime: 'number',
-      env: 'string',
-      key: 'string',
-      startTime: 'number',
-    },
-    { excludeFromPublic: ['key'] },
-  ),
+  [
+    WorkerMetricName.KVNamespaceGet,
+    createHandler(
+      {
+        endTime: 'number',
+        env: 'string',
+        key: 'string',
+        startTime: 'number',
+      },
+      { excludeFromPublic: ['key'] },
+    ),
+  ],
 
-  [WorkerMetricName.KVNamespaceGetError]: createHandler(
-    {
-      endTime: 'number',
-      env: 'string',
-      startTime: 'number',
-    },
-    { publicOnly: true },
-  ),
+  [
+    WorkerMetricName.KVNamespaceGetError,
+    createHandler(
+      {
+        endTime: 'number',
+        env: 'string',
+        startTime: 'number',
+      },
+      { publicOnly: true },
+    ),
+  ],
 
-  [WorkerMetricName.KVNamespacePut]: createHandler(
-    {
-      bytes: 'number',
-      endTime: 'number',
-      env: 'string',
-      startTime: 'number',
-      ttl: 'number',
-    },
-    { publicOnly: true },
-  ),
+  [
+    WorkerMetricName.KVNamespacePut,
+    createHandler(
+      {
+        bytes: 'number',
+        endTime: 'number',
+        env: 'string',
+        startTime: 'number',
+        ttl: 'number',
+      },
+      { publicOnly: true },
+    ),
+  ],
 
-  [WorkerMetricName.KVNamespacePutError]: createHandler(
-    {
-      endTime: 'number',
-      env: 'string',
-      startTime: 'number',
-    },
-    { publicOnly: true },
-  ),
+  [
+    WorkerMetricName.KVNamespacePutError,
+    createHandler(
+      {
+        endTime: 'number',
+        env: 'string',
+        startTime: 'number',
+      },
+      { publicOnly: true },
+    ),
+  ],
 
-  [WorkerMetricName.R2BucketPut]: createHandler(
-    {
-      bytes: 'number',
-      endTime: 'number',
-      env: 'string',
-      startTime: 'number',
-    },
-    { publicOnly: true },
-  ),
+  [
+    WorkerMetricName.R2BucketPut,
+    createHandler(
+      {
+        bytes: 'number',
+        endTime: 'number',
+        env: 'string',
+        startTime: 'number',
+      },
+      { publicOnly: true },
+    ),
+  ],
 
-  [WorkerMetricName.R2BucketPutError]: createHandler(
-    {
-      endTime: 'number',
-      env: 'string',
-      startTime: 'number',
-    },
-    { publicOnly: true },
-  ),
-};
+  [
+    WorkerMetricName.R2BucketPutError,
+    createHandler(
+      {
+        endTime: 'number',
+        env: 'string',
+        startTime: 'number',
+      },
+      { publicOnly: true },
+    ),
+  ],
+]);
 
 const handleWorkerMetric = (
   name: WorkerMetricName,
   dimensions: MetricDimensions,
   emitters: MetricEmitters,
 ): boolean => {
-  const handler = HANDLERS[name];
+  const handler = HANDLERS.get(name);
   if (handler === undefined) {
     return false;
   }
