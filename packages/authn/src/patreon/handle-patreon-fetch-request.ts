@@ -37,11 +37,12 @@ export default async function handlePatreonFetchRequest(
     return createOAuthResponse.call(this, { returnPath, userId });
   }
 
-  const newUserId: number = await insertIntoOAuth.call(this, {
-    ...mapPatreonIdentityToUserRow(identity),
-    oAuthId: identity.id,
-    oAuthProvider: OAuthProvider.Patreon,
-  });
+  const newUserId: number = await insertIntoOAuth.call(
+    this,
+    OAuthProvider.Patreon,
+    identity.id,
+    mapPatreonIdentityToUserRow(identity),
+  );
 
   this.setFiscalResponsibility(newUserId);
   return createOAuthResponse.call(this, { returnPath, userId: newUserId });

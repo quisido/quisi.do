@@ -13,13 +13,13 @@ interface Options {
   readonly firstName: string | null;
   readonly fullName: string | null;
   readonly gender: Gender;
-  readonly oAuthId: string;
-  readonly oAuthProvider: OAuthProvider;
 }
 
 export default async function insertIntoOAuth(
   this: AuthnFetchHandler,
-  { email, firstName, fullName, gender, oAuthId, oAuthProvider }: Options,
+  oAuthProvider: OAuthProvider,
+  oAuthId: string,
+  { email, firstName, fullName, gender }: Options,
 ): Promise<number> {
   const registrationTimestamp: number = this.nowSeconds();
   const {
