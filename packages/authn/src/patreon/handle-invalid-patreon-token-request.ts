@@ -1,7 +1,7 @@
-import { ErrorCode } from '@quisido/authn-shared';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
-import { MetricName } from '../constants/metric-name.js';
-import FatalError from '../utils/fatal-error.js';
+import handleInvalidPatreonTokenRequestDescription from './handle-invalid-patreon-token-request-description.js';
+import handleMissingPatreonTokenRequestDescription from './handle-missing-patreon-token-request-description.js';
+import handleStringPatreonTokenRequestDescription from './handle-string-patreon-token-request-description.js';
 
 export default function handleInvalidPatreonTokenRequest(
   this: AuthnFetchHandler,
@@ -9,55 +9,20 @@ export default function handleInvalidPatreonTokenRequest(
 ): never {
   const { error_description: description } = json;
   if (typeof description === 'string') {
-    this.emitPublicMetric(MetricName.InvalidPatreonTokenRequest);
-    this.emitPrivateMetric(MetricName.InvalidPatreonTokenRequest, {
+    return handleStringPatreonTokenRequestDescription.call(
+      this,
+      json,
       description,
-      value: JSON.stringify({
-        ...json,
-        error: undefined,
-        error_description: undefined,
-      }),
-    });
-
-    throw new FatalError(ErrorCode.InvalidPatreonTokenRequest);
+    );
   }
 
   if (typeof description === 'undefined') {
-    this.emitPublicMetric(
-      MetricName.MissingInvalidPatreonTokenRequestDescription,
-    );
-
-    this.emitPrivateMetric(
-      MetricName.MissingInvalidPatreonTokenRequestDescription,
-      {
-        value: JSON.stringify({
-          ...json,
-          error: undefined,
-        }),
-      },
-    );
-
-    throw new FatalError(
-      ErrorCode.MissingInvalidPatreonTokenRequestDescription,
-    );
+    return handleMissingPatreonTokenRequestDescription.call(this, json);
   }
 
-  this.emitPrivateMetric(
-    MetricName.InvalidInvalidPatreonTokenRequestDescription,
-    {
-      value: JSON.stringify({
-        ...json,
-        error: undefined,
-      }),
-    },
+  return handleInvalidPatreonTokenRequestDescription.call(
+    this,
+    json,
+    description,
   );
-
-  this.emitPublicMetric(
-    MetricName.InvalidInvalidPatreonTokenRequestDescription,
-    {
-      type: typeof description,
-    },
-  );
-
-  throw new FatalError(ErrorCode.InvalidInvalidPatreonTokenRequestDescription);
 }

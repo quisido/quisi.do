@@ -1,16 +1,11 @@
-import { ErrorCode } from '@quisido/authn-shared';
-import { isRecord } from 'fmrs';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
-import { MetricName } from '../constants/metric-name.js';
-import FatalError from '../utils/fatal-error.js';
 import parseJson from '../utils/parse-json.js';
 import mapAccessTokenToIdentityRequestHeaders from './map-access-token-to-identity-request-headers.js';
 import parsePatreonIdentity from './parse-patreon-identity.js';
 import type PatreonIdentity from './patreon-identity.js';
+import validatePatreonIdentityResponse from './validate-patreon-identity-response.js';
 
 const CAMPAIGN_FIELDS: readonly string[] = ['summary', 'is_monthly'];
-const FORBIDDEN = 403;
-const HTTP_REDIRECTION = 300;
 
 const USER_FIELDS: readonly string[] = [
   'about',
@@ -58,59 +53,8 @@ export default async function fetchPatreonIdentity(
   const identityStr: string = await response.text();
   const identity: unknown = parseJson(identityStr);
 
-  if (typeof identity === 'undefined') {
-    this.emitPublicMetric(MetricName.InvalidPatreonIdentityResponse);
-    throw new FatalError(ErrorCode.InvalidPatreonIdentityResponse);
-  }
+  const validIdentity: Record<string, unknown> =
+    validatePatreonIdentityResponse.call(this, response, identity);
 
-  /**
-   * {
-   *   "errors": [
-   *     {
-   *       "code": null,
-   *       "code_name": "OAuthClientViewForbidden",
-   *       "id": "00000000-0000-0000-0000-000000000000",
-   *       "status": "403",
-   *       "title": "You do not have permission to view this OAuth Client.",
-   *       "detail": "You do not have permission to view OAuth Client with id
-   *                  0123456789abcdef0123456789abcdef0123456789abcdef.",
-   *     }
-   *   ]
-   * }
-   */
-  if (response.status === FORBIDDEN) {
-    this.emitPublicMetric(MetricName.ForbiddenPatreonIdentityResponse);
-    this.emitPrivateMetric(MetricName.ForbiddenPatreonIdentityResponse, {
-      value: JSON.stringify(identity),
-    });
-
-    throw new FatalError(ErrorCode.ForbiddenPatreonIdentityResponse);
-  }
-
-  if (response.status >= HTTP_REDIRECTION) {
-    this.emitPrivateMetric(MetricName.UnknownPatreonIdentityError, {
-      identity: JSON.stringify(identity),
-      status: response.status,
-    });
-
-    this.emitPublicMetric(MetricName.UnknownPatreonIdentityError, {
-      status: response.status,
-    });
-
-    throw new FatalError(ErrorCode.UnknownPatreonIdentityError);
-  }
-
-  if (!isRecord(identity)) {
-    this.emitPrivateMetric(MetricName.InvalidPatreonIdentity, {
-      value: JSON.stringify(identity),
-    });
-
-    this.emitPublicMetric(MetricName.InvalidPatreonIdentity, {
-      type: typeof identity,
-    });
-
-    throw new FatalError(ErrorCode.InvalidPatreonIdentity);
-  }
-
-  return parsePatreonIdentity.call(this, identity);
+  return parsePatreonIdentity.call(this, validIdentity);
 }
