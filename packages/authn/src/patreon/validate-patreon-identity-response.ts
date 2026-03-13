@@ -3,9 +3,7 @@ import { isRecord } from 'fmrs';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import FatalError from '../utils/fatal-error.js';
-
-const FORBIDDEN = 403;
-const HTTP_REDIRECTION = 300;
+import validatePatreonResponseStatus from './validate-patreon-response-status.js';
 
 export default function validatePatreonIdentityResponse(
   this: AuthnFetchHandler,
@@ -17,24 +15,7 @@ export default function validatePatreonIdentityResponse(
     throw new FatalError(ErrorCode.InvalidPatreonIdentityResponse);
   }
 
-  if (response.status === FORBIDDEN) {
-    this.emitPublicMetric(MetricName.ForbiddenPatreonIdentityResponse);
-    this.emitPrivateMetric(MetricName.ForbiddenPatreonIdentityResponse, {
-      value: JSON.stringify(identity),
-    });
-    throw new FatalError(ErrorCode.ForbiddenPatreonIdentityResponse);
-  }
-
-  if (response.status >= HTTP_REDIRECTION) {
-    this.emitPrivateMetric(MetricName.UnknownPatreonIdentityError, {
-      identity: JSON.stringify(identity),
-      status: response.status,
-    });
-    this.emitPublicMetric(MetricName.UnknownPatreonIdentityError, {
-      status: response.status,
-    });
-    throw new FatalError(ErrorCode.UnknownPatreonIdentityError);
-  }
+  validatePatreonResponseStatus.call(this, response.status, identity);
 
   if (!isRecord(identity)) {
     this.emitPrivateMetric(MetricName.InvalidPatreonIdentity, {
