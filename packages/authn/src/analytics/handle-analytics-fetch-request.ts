@@ -1,12 +1,11 @@
-import { isAnalyticsEngineResponse } from 'cloudflare-utils';
+import { isAnalyticsEngineResponse, StatusCode } from 'cloudflare-utils';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import reduceAnalyticsEngineRowsToResponse from './reduce-analytics-engine-rows-to-response.js';
 import AnalyticsOptionsResponse from './options-response.js';
 import handleInvalidAnalyticsResponse from './handle-invalid-analytics-response.js';
 import fetchAnalytics from './fetch-analytics.js';
 import handleAnalyticsError from './handle-analytics-error.js';
-
-
+import AnalyticsResponseInit from './analytics-response-init.js';
 
 export default async function handleAnalyticsFetchRequest(
   this: AuthnFetchHandler,
@@ -26,6 +25,9 @@ export default async function handleAnalyticsFetchRequest(
       JSON.stringify(
         json.data.reduce(reduceAnalyticsEngineRowsToResponse.bind(this), {}),
       ),
+      new AnalyticsResponseInit(StatusCode.OK, {
+        accessControlAllowOrigin: this.accessControlAllowOrigin,
+      }),
     );
   } catch (err: unknown) {
     return handleAnalyticsError.call(this, err);

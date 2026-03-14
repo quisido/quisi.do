@@ -1,4 +1,4 @@
-import type AuthnFetchHandler from "../authn-fetch-handler.js";
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
 
 const ANALYTICS_BODY = `
 SELECT *

@@ -1,7 +1,6 @@
 
 
 <details>
-/gemini
-@gemini-code-assist review
+/gemini review
 @sentry review
 </details>
