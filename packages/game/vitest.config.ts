@@ -4,7 +4,6 @@ const CONFIG: VitestConfig = await defineVitestConfig({
   test: {
     coverage: {
       enabled: false,
-      provider: 'istanbul',
     },
     environment: 'jsdom',
   },

@@ -1,10 +1,8 @@
-interface Stringifiable {
-  readonly toString: () => unknown;
-}
+import type Stringifiable from './stringifiable.js';
 
-export default function isStringifiable(
+export default function isStringifiable<T = unknown>(
   value: unknown,
-): value is Stringifiable {
+): value is Stringifiable<T> {
   return (
     typeof value === 'object' &&
     value !== null &&

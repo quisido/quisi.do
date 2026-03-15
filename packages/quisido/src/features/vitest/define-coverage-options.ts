@@ -9,7 +9,7 @@ export default function defineCoverageOptions({
   exclude = [],
   thresholds = {},
   ...coverageOptions
-}: CoverageOptions<'istanbul'>): CoverageOptions<'istanbul'> {
+}: Omit<CoverageOptions<'istanbul'>, 'provider'>): CoverageOptions<'istanbul'> {
   return {
     clean: true,
     enabled: true,

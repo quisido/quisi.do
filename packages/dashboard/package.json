@@ -36,7 +36,7 @@
     "@types/eslint": "^9.6.1",
     "@vitest/ui": "^4.0.7",
     "concurrently": "^9.2.1",
-    "quisido": "^0.0.1",
+    "quisido": "^0.0.2",
     "rimraf": "^6.1.0",
     "typescript": "^5.9.3",
     "vitest": "^4.0.7",

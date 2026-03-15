@@ -1,17 +1,11 @@
 /* eslint-disable sort-keys-custom-order/object-keys */
-import defineCoverageOptions, {
-  type CoverageOptions,
-} from './define-coverage-options.js';
+import defineCoverageOptions from './define-coverage-options.js';
 import definePool from './define-pool.js';
 import { EXCLUDE } from './exclude.js';
 import type QuisidoVitestInlineConfig from './quisido-vitest-inline-config.js';
 
-const DEFAULT_COVERAGE_OPTIONS: CoverageOptions<'istanbul'> = {
-  provider: 'istanbul',
-};
-
 export default async function defineVitestInlineConfig({
-  coverage = DEFAULT_COVERAGE_OPTIONS,
+  coverage = {},
   exclude = [],
   ...vitestInlineConfig
 }: QuisidoVitestInlineConfig): Promise<QuisidoVitestInlineConfig> {

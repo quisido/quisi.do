@@ -2,13 +2,14 @@
   "configurations": [
     {
       "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
       "name": "Development server",
       "request": "launch",
       "runtimeArgs": ["start"],
       "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**"],
-      "type": "node",
-    },
+      "type": "node"
+    }
   ],
-  "version": "0.2.0",
+  "version": "0.2.0"
 }

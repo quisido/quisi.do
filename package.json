@@ -87,7 +87,7 @@
     "hint": "^7.1.13",
     "jiti": "^2.6.1",
     "puppeteer-core": "^24.35.0",
-    "quisido": "^0.0.1",
+    "quisido": "^0.0.2",
     "rimraf": "^6.1.0",
     "typescript": "^5.8.3",
     "vitest": "^4.0.7"

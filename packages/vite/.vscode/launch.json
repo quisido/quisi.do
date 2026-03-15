@@ -1,19 +1,21 @@
 {
   "configurations": [
     {
-      "name": "npm start",
-      "request": "launch",
-      "runtimeArgs": ["start"],
-      "runtimeExecutable": "npm",
-      "type": "node",
-    },
-    {
-      "name": "localhost:3000",
+      "cwd": "${workspaceFolder}",
+      "name": "Open in browser",
       "request": "launch",
       "type": "chrome",
       "url": "https://localhost:3000",
-      "webRoot": "${workspaceFolder}",
+      "webRoot": "${workspaceFolder}"
     },
+    {
+      "cwd": "${workspaceFolder}",
+      "name": "Start",
+      "request": "launch",
+      "runtimeArgs": ["start"],
+      "runtimeExecutable": "npm",
+      "type": "node"
+    }
   ],
   "version": "0.2.0",
 }

@@ -10,7 +10,6 @@ import type Report from './types/report.js';
 import { handleExit } from './utils/exit.js';
 import handleReadReportFileError from './utils/handle-read-report-file-error.js';
 import handleReadReportFile from './utils/handle-read-report-file.js';
-import debug from './utils/debug.js';
 
 const [, , command] = process.argv;
 
@@ -69,8 +68,6 @@ switch (command) {
 
 const settledReports: PromiseSettledResult<Report>[] =
   await Promise.allSettled(eventualReports);
-
-debug('All reports have been settled.');
 
 const mapReportPathToContext = async (
   path: string | undefined,

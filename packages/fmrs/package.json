@@ -1,6 +1,6 @@
 {
   "name": "fmrs",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "author": "quisi.do <fmrs@quisi.do>",
   "description": "filters/finds, maps, reduces, and sorts",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/fmrs#readme",
@@ -44,7 +44,7 @@
   "devDependencies": {
     "@vitest/ui": "^4.0.7",
     "concurrently": "^9.2.1",
-    "quisido": "^0.0.1",
+    "quisido": "^0.0.2",
     "rimraf": "^6.1.0",
     "tslib": "^2.8.1",
     "typescript": "^5.9.3",

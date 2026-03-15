@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { mapToIndex } from './index.js';
+import { mapToIndex, toIndex } from './index.js';
 
 const FIRST = 0;
 const SECOND = 1;
@@ -11,5 +11,6 @@ describe('mapToIndex', (): void => {
     const INDICES: readonly number[] = [FIRST, SECOND, THIRD];
     const VALUES: readonly unknown[] = [true, TEST_NUMBER, 'str'];
     expect(VALUES.map(mapToIndex)).toEqual(INDICES);
+    expect(VALUES.map(toIndex)).toEqual(INDICES);
   });
 });
