@@ -1,5 +1,6 @@
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 
+// Technical debt: Do these rows expire, or do we need to LIMIT this?
 const ANALYTICS_BODY = `
 SELECT *
 FROM AUTHN_PUBLIC

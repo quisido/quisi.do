@@ -1,20 +1,13 @@
 {
   "compilerOptions": {
-    "composite": true,
-    "declaration": true,
+    "composite": false,
+    // The declaration directory is required, else Vitest will throw an error.
     "declarationDir": "dist",
-    "declarationMap": false,
-    "importHelpers": true,
-    "incremental": true,
-    "inlineSourceMap": false,
-    "inlineSources": true,
-    "isolatedDeclarations": false,
+    "incremental": false,
     "module": "esnext",
     "moduleResolution": "bundler",
-    "noPropertyAccessFromIndexSignature": true,
     "outDir": "dist",
     "rootDir": ".",
-    "sourceMap": true,
     "sourceRoot": "src"
   },
   "exclude": [".cache/", ".tests/", ".wrangler/", "dist/"],
