@@ -2,6 +2,7 @@
   "configurations": [
     {
       "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
       "name": "Build",
       "outFiles": ["${workspaceFolder}/dist/**/*"],
       "request": "launch",
@@ -12,6 +13,7 @@
     },
     {
       "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
       "name": "Start",
       "outFiles": ["${workspaceFolder}/dist/**/*"],
       "request": "launch",

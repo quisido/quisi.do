@@ -12,7 +12,7 @@ export {
   default as findDefined,
   default as isDefined,
 } from './is-defined.js';
-export { default as isNot } from './is-not.js';
+export { default as isNot, default as isNotEqualTo } from './is-not.js';
 export {
   default as filterByNumber,
   default as findNumber,
@@ -42,7 +42,7 @@ export {
   default as filterByUndefined,
   default as isUndefined,
 } from './is-undefined.js';
-export { default as is } from './is.js';
+export { default as is, default as isEqualTo } from './is.js';
 export { default as mapBooleanToNumber } from './map-boolean-to-number.js';
 export { default as mapEntriesToRecord } from './map-entries-to-record.js';
 export { default as mapEntryToKey } from './map-entry-to-key.js';
@@ -52,14 +52,18 @@ export { default as mapMapToRecord } from './map-map-to-record.js';
 export { default as mapObjectToEntries } from './map-object-to-entries.js';
 export { default as mapObjectToKeys } from './map-object-to-keys.js';
 export { default as mapStringToByteLength } from './map-string-to-byte-length.js';
-export { default as mapToError } from './map-to-error.js';
-export { default as mapToIndex } from './map-to-index.js';
-export { default as mapToString } from './map-to-string.js';
+export { default as mapToError, default as toError } from './map-to-error.js';
+export { default as mapToIndex, default as toIndex } from './map-to-index.js';
+export {
+  default as mapToString,
+  default as toString,
+} from './map-to-string.js';
 export { default as not } from './not.js';
 export { default as reduceEntriesToRecord } from './reduce-entries-to-record.js';
 export { default as sortNumbers } from './sort-numbers.js';
 export { default as sortStrings } from './sort-strings.js';
 export { default as sort } from './sort.js';
+export { type default as Stringifiable } from './stringifiable.js';
 export { sortArraysByIndex };
 
 const FIRST = 0;

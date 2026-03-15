@@ -9,5 +9,5 @@ import type { CoverageOptions, InlineConfig } from 'vitest/node';
 export default interface QuisidoVitestInlineConfig
   // Omit<CloudflareWorkersVitestInlineConfig, 'coverage'>,
   extends Omit<InlineConfig, 'coverage' | 'pool'> {
-  readonly coverage?: CoverageOptions<'istanbul'> | undefined;
+  readonly coverage?: Omit<CoverageOptions<'istanbul'>, 'provider'> | undefined;
 }
