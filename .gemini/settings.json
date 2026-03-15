@@ -3,16 +3,16 @@
     "allowed": ["chrome-devtools", "sentry"]
   },
   "mcpServers": {
-    "cloudflare": {
-      "type": "http",
-      "url": "https://mcp.cloudflare.com/sse"
-    },
     "chrome-devtools": {
       "args": [
         "-y",
         "chrome-devtools-mcp@latest"
       ],
       "command": "npx"
+    },
+    "cloudflare": {
+      "type": "http",
+      "url": "https://mcp.cloudflare.com/sse"
     },
     "context7": {
       "type": "http",

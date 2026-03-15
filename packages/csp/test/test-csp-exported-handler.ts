@@ -13,13 +13,21 @@ interface Options {
 }
 
 export default class TestCspExportedHandler extends TestExportedHandler {
-  public override mockResponse = super.mockResponse.bind(this);
+  public override mockResponse: (
+    input: RequestInfo<unknown, CfProperties>,
+    init: RequestInit,
+    response: Response,
+  ) => void = super.mockResponse.bind(this);
 
-  public override expectNotToHaveWrittenDataPoint =
-    super.expectNotToHaveWrittenDataPoint.bind(this);
+  public override expectNotToHaveWrittenDataPoint: (
+    env: string,
+    dataPoint: AnalyticsEngineDataPoint,
+  ) => void = super.expectNotToHaveWrittenDataPoint.bind(this);
 
-  public override expectToHaveWrittenDataPoint =
-    super.expectToHaveWrittenDataPoint.bind(this);
+  public override expectToHaveWrittenDataPoint: (
+    env: string,
+    dataPoint: AnalyticsEngineDataPoint,
+  ) => void = super.expectToHaveWrittenDataPoint.bind(this);
 
   public constructor({ env = {}, now }: Options = {}) {
     super({

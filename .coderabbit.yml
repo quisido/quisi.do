@@ -15,19 +15,6 @@ code_generation:
 knowledge_base:
   code_guidelines:
     enabled: true
-    # Common files are included by default, e.g.
-    # filePatterns:
-    # - .github/copilot-instructions.md
-    # - .github/instructions/.instructions.md
-    # - "**/.clinerules/"
-    # - "**/.cursorrules"
-    # - "**/.cursor/rules/"
-    # - "**/.rules/"
-    # - "**/.windsurfrules"
-    # - "**/AGENT.md"
-    # - "**/AGENTS.md"
-    # - "**/CLAUDE.md"
-    # - "**/GEMINI.md"
   issues:
     scope: auto
   jira:

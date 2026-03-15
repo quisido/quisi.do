@@ -3,7 +3,7 @@ import process from 'node:process';
 
 /**
  *   Joins the given path segments with the current working directory, ensuring
- * that the resulting path does not traverse outside of the current working
+ * that the resulting path does not traverse outside the current working
  * directory.
  */
 export default function joinCwdPath(...segments: readonly string[]): string {

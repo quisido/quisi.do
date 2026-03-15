@@ -1,16 +1,16 @@
 {
 	"inputs": [],
 	"servers": {
-    "cloudflare": {
-      "type": "http",
-      "url": "https://mcp.cloudflare.com/sse"
-    },
     "chrome-devtools": {
       "args": [
         "-y",
         "chrome-devtools-mcp@latest"
       ],
       "command": "npx"
+    },
+    "cloudflare": {
+      "type": "http",
+      "url": "https://mcp.cloudflare.com/sse"
     },
     "context7": {
       "url": "https://mcp.context7.com/mcp",

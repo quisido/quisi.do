@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
+    "composite": false,
     "declarationDir": "_site",
+    "incremental": false,
     "jsx": "preserve",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "esnext",

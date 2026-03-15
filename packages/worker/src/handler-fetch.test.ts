@@ -13,7 +13,7 @@ const TEST_NOW = vi.fn();
 
 describe('Handler', (): void => {
   describe('fetch', (): void => {
-    it('should throw an error when fetching outside of an operation', async (): Promise<void> => {
+    it('should throw an error when fetching outside an operation', async (): Promise<void> => {
       const handler = new Handler(noop);
       await expect(async (): Promise<void> => {
         await handler.fetch('');
