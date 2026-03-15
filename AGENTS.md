@@ -1,6 +1,6 @@
 # Instructions for agents
 
-`quisi.do` is a front end engineering playground for technologically-complex,
+`quisi.do` is a front-end engineering playground for technologically-complex,
 boundary-pushing, browser-oriented applications and the open-source libraries
 that power them.
 
@@ -10,7 +10,7 @@ services that power those applications, and the NPM package libraries that power
 both.
 
 By keeping these technologies on the bleeding edge, it serves as an educational
-and reusable tool both during development and as an open source publication.
+and reusable tool both during development and as an open-source publication.
 
 ## Architecture
 
@@ -24,15 +24,15 @@ packages:
   authentication, monitoring, persistent state, and other features that cannot
   securely be ran on the client's device.
 - **Libraries** are reusable code shared by the applications and services. They
-  offer value outside of the `quisi.do` ecosystem and are published publicly for
+  offer value outside the `quisi.do` ecosystem and are published publicly for
   any developer to use.
 
 ### Technologies
 
 - **ESNext** is the target output language. Backwards compatibility is not a
   concern.
-- **GitHub Actions/Workflows** define the continuously integration and
-  deployment pipelines.
+- **GitHub Actions/Workflows** define the continuous integration and deployment
+  pipelines.
 - **quisido** is a custom build and test tool that consolidates the
   configuration and tooling used by all packages in this repository, such as:
   - **ESLint** lints the code.

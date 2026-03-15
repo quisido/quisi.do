@@ -35,7 +35,6 @@
     "@quisido/worker-test": "^1.0.1",
     "@types/eslint": "^9.6.1",
     "@vitest/ui": "^4.0.7",
-    "cloudflare-test-utils": "^1.0.2",
     "concurrently": "^9.2.1",
     "quisido": "^0.0.1",
     "rimraf": "^6.1.0",

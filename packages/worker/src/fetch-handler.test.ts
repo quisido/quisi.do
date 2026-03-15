@@ -151,7 +151,7 @@ describe('FetchHandler', (): void => {
     });
   });
 
-  it('should not vend execution context outside of fetch', (): void => {
+  it('should not vend execution context outside fetch', (): void => {
     const handler = new FetchHandler(throwy);
 
     expect((): ExecutionContext => {
@@ -259,7 +259,7 @@ describe('FetchHandler', (): void => {
     expect(requestValue).toBe(testRequest);
   });
 
-  it('should not vend the request outside of fetch', (): void => {
+  it('should not vend the request outside fetch', (): void => {
     const handler = new FetchHandler(throwy);
 
     expect((): Request => {

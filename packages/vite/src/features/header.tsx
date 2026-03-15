@@ -34,7 +34,7 @@ export default function Header(): ReactElement {
           className={TAG_LINE_CLASS_NAME}
           style={{ fontFamily: `"Cairo Play", ${displayFontFamily}` }}
         >
-          <I18n>front end platform service</I18n>
+          <I18n>front-end platform service</I18n>
         </span>
       </div>
       <Authentication />

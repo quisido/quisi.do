@@ -1,10 +1,11 @@
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 
-// Technical debt: Do these rows expire, or do we need to LIMIT this?
+// Technical debt: Arbitrary limit prevents excess. Do these rows expire?
 const ANALYTICS_BODY = `
 SELECT *
 FROM AUTHN_PUBLIC
-ORDER BY timestamp DESC;
+ORDER BY timestamp DESC
+LIMIT 1000;
 `;
 
 export default async function fetchAnalytics(

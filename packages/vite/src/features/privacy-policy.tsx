@@ -17,7 +17,7 @@ export default function PrivacyPolicy(): ReactElement {
   return (
     <Section header={<I18n>Privacy policy</I18n>}>
       <Div element="p" marginBottom="medium">
-        quisi.do is a completely open source software-as-a-service provider. As
+        quisi.do is a completely open-source software-as-a-service provider. As
         such, it offers full transparency into its collection and use of your
         personal data.
       </Div>
