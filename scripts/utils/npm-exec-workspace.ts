@@ -94,13 +94,13 @@ export default async function npmExecWorkspace(
   globalThis.console.log(' ');
   globalThis.console.log('-'.repeat(MAX_CONSOLE_LENGTH));
   globalThis.console.log(' ');
-  logCommand('pnpm', ...script, `--filter=./packages/${workspaceDirectory}`);
+  logCommand('pnpm', `--filter=./packages/${workspaceDirectory}`, ...script);
 
   try {
     return await spawnAsync(FILE, [
       ...ARGS,
-      ...script,
       `--filter=./packages/${workspaceDirectory}`,
+      ...script,
     ]);
   } catch (err: unknown) {
     return handleNpmExecWorkspaceError(err, script);

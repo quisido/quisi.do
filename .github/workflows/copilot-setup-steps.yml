@@ -33,5 +33,5 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
-          pnpm run build --filter=./packages/quisido
+          pnpm --filter=./packages/quisido run build
           pnpm install
