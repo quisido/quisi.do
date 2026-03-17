@@ -38,7 +38,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git"
+    "url": "git+https://github.com/quisido/quisi.do.git",
+    "directory": "packages/authn-shared"
   },
   "devDependencies": {
     "@vitest/ui": "^4.0.7",

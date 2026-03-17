@@ -40,7 +40,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git"
+    "url": "git+https://github.com/quisido/quisi.do.git",
+    "directory": "packages/csp-shared"
   },
   "devDependencies": {
     "@vitest/ui": "^4.0.7",

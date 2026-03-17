@@ -39,7 +39,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git"
+    "url": "git+https://github.com/quisido/quisi.do.git",
+    "directory": "packages/worker-test"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20251014.0",

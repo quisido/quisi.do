@@ -34,5 +34,10 @@
     "typescript": "^5.9.3",
     "vitest": "^4.0.7",
     "wrangler": "^4.63.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git",
+    "directory": "packages/ai"
   }
 }

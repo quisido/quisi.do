@@ -39,7 +39,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git"
+    "url": "git+https://github.com/quisido/quisi.do.git",
+    "directory": "packages/lazy-i18n"
   },
   "dependencies": {
     "fmrs": "^2.1.1"
