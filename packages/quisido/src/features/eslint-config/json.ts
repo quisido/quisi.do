@@ -21,8 +21,8 @@ const JSON_CONFIG: Config = defineConfig({
   ],
 
   ignores: [
-    // NPM
-    '**/package-lock.json',
+    // pnpm
+    '**/pnpm-lock.yaml',
 
     // TypeScript
     '**/tsconfig.json',

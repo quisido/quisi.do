@@ -8,32 +8,32 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "npm run tsc:build && node ./dist/scripts/build.js",
-    "start": "npm run tsc:build && node ./dist/scripts/start.js",
-    "test": "quisido test && npm run test:workspaces",
-    "authn": "npm start --workspace=packages/authn",
+    "build": "pnpm run tsc:build && node ./dist/scripts/build.js",
+    "start": "pnpm run tsc:build && node ./dist/scripts/start.js",
+    "test": "quisido test && pnpm run test:workspaces",
+    "authn": "pnpm start --filter=packages/authn",
     "browserslist:update-db": "browserslist --update-db",
-    "clean": "rimraf .cache .tests dist node_modules && npm run clean --if-present --workspaces",
-    "cloudflare-utils": "npm start --workspace=packages/cloudflare-utils",
-    "csp": "npm start --workspace=packages/csp",
-    "dashboard": "npm start --workspace=packages/dashboard",
+    "clean": "rimraf .cache .tests dist node_modules && pnpm -r --if-present run clean",
+    "cloudflare-utils": "pnpm start --filter=packages/cloudflare-utils",
+    "csp": "pnpm start --filter=packages/csp",
+    "dashboard": "pnpm start --filter=packages/dashboard",
     "eslint": "quisido eslint",
-    "eslint-config": "npm start --workspace=packages/eslint-config",
-    "fmrs": "npm start --workspace=packages/fmrs",
-    "game": "npm start --workspace=packages/game",
-    "lighthouse": "npm start --workspace=packages/vite",
-    "postlighthouse": "npm start --workspace=packages/vite",
+    "eslint-config": "pnpm start --filter=packages/eslint-config",
+    "fmrs": "pnpm start --filter=packages/fmrs",
+    "game": "pnpm start --filter=packages/game",
+    "lighthouse": "pnpm start --filter=packages/vite",
+    "postlighthouse": "pnpm start --filter=packages/vite",
     "prompt": "quisido-ai",
     "publint": "quisido publint",
     "publish": "node ./dist/scripts/publish.js",
-    "quisido": "npm start --workspace=packages/quisido",
-    "react-datadog": "npm start --workspace=packages/react-datadog",
+    "quisido": "pnpm start --filter=packages/quisido",
+    "react-datadog": "pnpm start --filter=packages/react-datadog",
     "test:workspaces": "node ./dist/scripts/test.js",
     "tsc:build": "tsc --project tsconfig.build.json",
     "update": "node ./dist/scripts/update.js",
-    "vite": "npm start --workspace=packages/vite",
+    "vite": "pnpm start --filter=packages/vite",
     "vitest": "vitest run",
-    "worker": "npm start --workspace=packages/worker"
+    "worker": "pnpm start --filter=packages/worker"
   },
   "bugs": {
     "email": "bugs@quisi.do",
@@ -47,9 +47,6 @@
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "dependencies": {
     "fmrs": "^2.1.1"
   },
@@ -92,12 +89,27 @@
     "typescript": "^5.8.3",
     "vitest": "^4.0.7"
   },
-  "overrides": {
-    "@hint/connector-puppeteer": {
-      "puppeteer-core": ">=22.11.1"
+  "pnpm": {
+    "overrides": {
+      "@hint/connector-puppeteer>puppeteer-core": ">=22.11.1",
+      "eslint-plugin-react-hooks>zod-validation-error": "^4.0.0"
     },
-    "eslint-plugin-react-hooks": {
-      "zod-validation-error": "^4.0.0"
-    }
+    "onlyBuiltDependencies": [
+      "@datadog/native-appsec",
+      "@datadog/native-iast-taint-tracking",
+      "@datadog/native-metrics",
+      "@datadog/pprof",
+      "@parcel/watcher",
+      "@sentry-internal/node-cpu-profiler",
+      "canvas",
+      "core-js",
+      "cpu-features",
+      "dd-trace",
+      "esbuild",
+      "protobufjs",
+      "sharp",
+      "ssh2",
+      "workerd"
+    ]
   }
 }

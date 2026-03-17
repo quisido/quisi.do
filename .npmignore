@@ -17,5 +17,5 @@
 /*.code-workspace
 /*.config.*
 /*.test.ts
-/package-lock.json
+/pnpm-lock.yaml
 /tsconfig.*

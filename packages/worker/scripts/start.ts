@@ -127,12 +127,12 @@ class ChildPromise extends Promise<void> {
 }
 
 const mapScriptToProcess = (script: string): Promise<void> => {
-  const command = `npm run ${script}`;
+  const command = `pnpm run ${script}`;
   return new ChildPromise(command);
 };
 
 const mapWorkspaceDependencyToProcess = (dependency: string): Promise<void> => {
-  const command = `npm start --workspace=packages/${dependency}`;
+  const command = `pnpm start --filter=packages/${dependency}`;
   return new ChildPromise(command);
 };
 

@@ -12,9 +12,9 @@ export default async function start(): Promise<void> {
   // tsc
   /**
    *   If this fails because `@types/node` mismatches, then a package has an
-   * outdated version in `node_modules/`. `npm install @types/node@latest` does
+   * outdated version in `node_modules/`. `pnpm add @types/node@latest` does
    * not seem to fix it; you can delete `node_modules/` and remove references to
-   * "packages/__/node_modules/@types/node" in `package-lock.json`. You can find
+   * "packages/__/node_modules/@types/node" in `pnpm-lock.yaml`. You can find
    * these references by Ctrl-F for "/@types/node" with the `/` prefix.
    */
   try {

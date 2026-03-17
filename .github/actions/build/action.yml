@@ -16,7 +16,7 @@ runs:
       with:
         download-build: false
     - name: Build
-      run: npm run build
+      run: pnpm run build
       shell: bash
       env:
         DD_PROFILING_ENABLED: true

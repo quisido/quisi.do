@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc --skipLibCheck && vite build",
     "start": "vite",
-    "test": "quisido test && npm run vitest:run",
+    "test": "quisido test && pnpm run vitest:run",
     "attw": "quisido attw",
     "clean": "rimraf .cache .tests .wrangler _site node_modules",
     "eslint": "quisido eslint",

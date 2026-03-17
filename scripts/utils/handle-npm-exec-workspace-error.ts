@@ -31,7 +31,7 @@ export default function handleNpmExecWorkspaceError(
   }
 
   globalThis.console.info(
-    `NPM workspace command "${script.join(' ')}" failed with an unknown error.`,
+    `Workspace command "${script.join(' ')}" failed with an unknown error.`,
   );
   throw new Error(JSON.stringify(err));
 }

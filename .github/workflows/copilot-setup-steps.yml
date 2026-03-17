@@ -20,16 +20,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          cache: npm
-          cache-dependency-path: package-lock.json
+          cache: pnpm
           check-latest: true
           node-version-file: .nvmrc
 
       - name: Install dependencies
         run: |
-          npm install
-          npm run build --workspace=packages/quisido
-          npm install
+          pnpm install
+          pnpm run build --filter=quisido
+          pnpm install

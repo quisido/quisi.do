@@ -91,7 +91,7 @@
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
   "js.preferences.importModuleSpecifier": "project-relative",
   "js.preferences.importModuleSpecifierEnding": "js",
-  "npm.packageManager": "npm",
+  "npm.packageManager": "pnpm",
   "search.exclude": {
     "**/.attach_pid*": true,
     "**/.cache/": true,
@@ -104,7 +104,7 @@
     "**/dist/": true,
     "**/lighthouse.report.*": true,
     "**/node_modules/": true,
-    "**/package-lock.json": true
+    "**/pnpm-lock.yaml": true
   },
   "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
   "terminal.integrated.shellIntegration.enabled": true,

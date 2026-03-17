@@ -11,11 +11,12 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
     - name: Setup Node
       uses: actions/setup-node@v6
       with:
-        cache: npm
-        cache-dependency-path: package-lock.json
+        cache: pnpm
         check-latest: true
         node-version-file: .nvmrc
     - name: Download build
@@ -26,9 +27,7 @@ runs:
     - name: Install dependencies
       shell: bash
       # Build `quisido` then re-install to symlink the dependency.
-      # We must use `npm install` instead of `npm ci` due to the dependency
-      # differences between Linux and Windows.
       run: |
-        npm install;
-        npm run build --workspace=packages/quisido;
-        npm install;
+        pnpm install;
+        pnpm run build --filter=quisido;
+        pnpm install;
