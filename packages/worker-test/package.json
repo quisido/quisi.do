@@ -38,9 +38,9 @@
     "provenance": true
   },
   "repository": {
+    "directory": "packages/worker-test",
     "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git",
-    "directory": "packages/worker-test"
+    "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20251014.0",

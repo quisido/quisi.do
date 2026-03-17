@@ -27,9 +27,9 @@
     "url": "https://github.com/sponsors/quisido"
   },
   "repository": {
+    "directory": "packages/vite",
     "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git",
-    "directory": "packages/vite"
+    "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
     "@datadog/browser-rum": "^6.23.0",

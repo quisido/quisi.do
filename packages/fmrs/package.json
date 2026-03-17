@@ -38,9 +38,9 @@
     "provenance": true
   },
   "repository": {
+    "directory": "packages/fmrs",
     "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git",
-    "directory": "packages/fmrs"
+    "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "devDependencies": {
     "@vitest/ui": "^4.0.7",

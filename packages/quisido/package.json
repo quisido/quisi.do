@@ -44,9 +44,9 @@
     "provenance": true
   },
   "repository": {
+    "directory": "packages/quisido",
     "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git",
-    "directory": "packages/quisido"
+    "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
     "@arethetypeswrong/cli": "^0.18.2",

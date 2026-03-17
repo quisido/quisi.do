@@ -26,9 +26,9 @@
     "url": "https://github.com/sponsors/quisido"
   },
   "repository": {
+    "directory": "packages/game",
     "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git",
-    "directory": "packages/game"
+    "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
     "fmrs": "^2.1.1",

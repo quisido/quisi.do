@@ -38,9 +38,9 @@
     "provenance": true
   },
   "repository": {
+    "directory": "packages/use-shallow-memo",
     "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git",
-    "directory": "packages/use-shallow-memo"
+    "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
     "fmrs": "^2.1.1"

@@ -38,9 +38,9 @@
     "provenance": true
   },
   "repository": {
+    "directory": "packages/cloudflare-utils",
     "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git",
-    "directory": "packages/cloudflare-utils"
+    "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20260227.0",

@@ -35,9 +35,9 @@
     "provenance": true
   },
   "repository": {
+    "directory": "packages/cjs-ts",
     "type": "git",
-    "url": "git+https://github.com/quisido/quisi.do.git",
-    "directory": "packages/cjs-ts"
+    "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
     "@babel/core": "^7.29.0",
