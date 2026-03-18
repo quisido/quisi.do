@@ -45,8 +45,8 @@
   "devDependencies": {
     "@vitest/ui": "^4.0.7",
     "concurrently": "^9.2.1",
-    "fmrs": "^2.1.1",
-    "quisido": "^0.0.2",
+    "fmrs": "workspace:*",
+    "quisido": "workspace:*",
     "rimraf": "^6.1.0",
     "tslib": "^2.8.1",
     "typescript": "^5.9.3",

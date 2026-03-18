@@ -35,13 +35,21 @@ const DEFAULT_LAST_USERS_ROW_ID = 1;
 export default class TestAuthnExportedHandler extends TestExportedHandler {
   #authnData: TestR2Bucket;
   #authnDb: TestD1Database;
-  public override mockResponse = super.mockResponse.bind(this);
+  public override mockResponse: (
+    input: RequestInfo<unknown, CfProperties>,
+    init: RequestInit,
+    response: Response,
+  ) => void = super.mockResponse.bind(this);
 
-  public override expectNotToHaveWrittenDataPoint =
-    super.expectNotToHaveWrittenDataPoint.bind(this);
+  public override expectNotToHaveWrittenDataPoint: (
+    env: string,
+    dataPoint: AnalyticsEngineDataPoint,
+  ) => void = super.expectNotToHaveWrittenDataPoint.bind(this);
 
-  public override expectToHaveWrittenDataPoint =
-    super.expectToHaveWrittenDataPoint.bind(this);
+  public override expectToHaveWrittenDataPoint: (
+    env: string,
+    dataPoint: AnalyticsEngineDataPoint,
+  ) => void = super.expectToHaveWrittenDataPoint.bind(this);
 
   public constructor({
     authnUserIds = {},

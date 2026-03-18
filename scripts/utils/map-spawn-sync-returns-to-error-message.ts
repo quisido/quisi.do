@@ -9,8 +9,9 @@ const EMPTY = 0;
 const isString = (value: unknown): value is string => typeof value === 'string';
 
 const isActionableMessage = (message: string): boolean =>
-  !message.startsWith('npm error A complete log of this run can be found in: ') &&
-  !message.startsWith(' ERR_PNPM');
+  !message.startsWith(
+    'npm error A complete log of this run can be found in: ',
+  ) && !message.startsWith(' ERR_PNPM');
 
 export default function mapSpawnSyncReturnsToErrorMessage(
   ret: SpawnSyncReturns<unknown>,

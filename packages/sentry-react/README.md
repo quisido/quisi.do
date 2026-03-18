@@ -4,13 +4,21 @@
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/sentry-react.svg)](https://www.npmjs.com/package/sentry-react)
 [![downloads](https://img.shields.io/npm/dt/sentry-react.svg)](https://www.npmjs.com/package/sentry-react)
 
-`sentry-react` offers a `<Sentry />` component that instantiates Sentry for your
+`sentry-react` offers a `<Sentry>` component that instantiates Sentry for your
 React application.
+
+```sh
+# Install sentry-react.
+npm install --save sentry-react
+
+# Install peer dependencies.
+npm install --save @sentry/browser @sentry/core @sentry/react @sentry/types
+```
 
 ## Use
 
-Mount `<Sentry />` around your React application, typically alongside your
-context providers.
+Mount `<Sentry>` around your React application, typically alongside your context
+providers.
 
 ```javascript
 import { render } from 'react-dom';

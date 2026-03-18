@@ -37,19 +37,19 @@
     "url": "https://github.com/sponsors/quisido"
   },
   "dependencies": {
-    "@quisido/csp-shared": "^1.0.1",
-    "@quisido/worker": "^1.0.8",
-    "cloudflare-utils": "^1.0.4",
-    "fmrs": "^2.1.1"
+    "@quisido/csp-shared": "workspace:*",
+    "@quisido/worker": "workspace:*",
+    "cloudflare-utils": "workspace:*",
+    "fmrs": "workspace:*"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20251014.0",
-    "@quisido/worker-test": "^1.0.1",
+    "@quisido/worker-test": "workspace:*",
     "@types/eslint": "^9.6.1",
     "@vitest/ui": "^4.0.7",
-    "cloudflare-test-utils": "^1.0.2",
+    "cloudflare-test-utils": "workspace:*",
     "concurrently": "^9.2.1",
-    "quisido": "^0.0.2",
+    "quisido": "workspace:*",
     "rimraf": "^6.1.0",
     "typescript": "^5.9.3",
     "vitest": "^4.0.7",

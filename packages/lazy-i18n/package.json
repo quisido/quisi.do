@@ -42,7 +42,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "fmrs": "^2.1.1"
+    "fmrs": "workspace:*"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.1",
@@ -57,7 +57,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "jsdom": "^27.1.0",
-    "quisido": "^0.0.2",
+    "quisido": "workspace:*",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-test-renderer": "^19.2.0",

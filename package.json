@@ -6,6 +6,29 @@
   "homepage": "https://quisi.do/",
   "license": "UNLICENSED",
   "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@datadog/native-appsec",
+      "@datadog/native-iast-taint-tracking",
+      "@datadog/native-metrics",
+      "@datadog/pprof",
+      "@parcel/watcher",
+      "@sentry-internal/node-cpu-profiler",
+      "canvas",
+      "core-js",
+      "cpu-features",
+      "dd-trace",
+      "esbuild",
+      "protobufjs",
+      "sharp",
+      "ssh2",
+      "workerd"
+    ],
+    "overrides": {
+      "@hint/connector-puppeteer>puppeteer-core": ">=22.11.1",
+      "eslint-plugin-react-hooks>zod-validation-error": "^4.0.0"
+    }
+  },
   "private": true,
   "type": "module",
   "scripts": {
@@ -49,7 +72,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "fmrs": "^2.1.1"
+    "fmrs": "workspace:*"
   },
   "devDependencies": {
     "@hint/connector-puppeteer": "^2.5.25",
@@ -85,32 +108,9 @@
     "hint": "^7.1.13",
     "jiti": "^2.6.1",
     "puppeteer-core": "^24.35.0",
-    "quisido": "^0.0.2",
+    "quisido": "workspace:*",
     "rimraf": "^6.1.0",
     "typescript": "^5.8.3",
     "vitest": "^4.0.7"
-  },
-  "pnpm": {
-    "overrides": {
-      "@hint/connector-puppeteer>puppeteer-core": ">=22.11.1",
-      "eslint-plugin-react-hooks>zod-validation-error": "^4.0.0"
-    },
-    "onlyBuiltDependencies": [
-      "@datadog/native-appsec",
-      "@datadog/native-iast-taint-tracking",
-      "@datadog/native-metrics",
-      "@datadog/pprof",
-      "@parcel/watcher",
-      "@sentry-internal/node-cpu-profiler",
-      "canvas",
-      "core-js",
-      "cpu-features",
-      "dd-trace",
-      "esbuild",
-      "protobufjs",
-      "sharp",
-      "ssh2",
-      "workerd"
-    ]
   }
 }

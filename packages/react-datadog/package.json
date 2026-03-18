@@ -42,8 +42,8 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "fmrs": "^2.1.1",
-    "use-shallow-memo": "^1.1.0"
+    "fmrs": "workspace:*",
+    "use-shallow-memo": "workspace:*"
   },
   "devDependencies": {
     "@datadog/browser-rum": "^6.23.0",
@@ -59,7 +59,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "jsdom": "^27.1.0",
-    "quisido": "^0.0.2",
+    "quisido": "workspace:*",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "rimraf": "^6.1.0",
