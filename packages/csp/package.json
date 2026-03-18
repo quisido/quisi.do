@@ -36,6 +36,11 @@
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
   },
+  "repository": {
+    "directory": "packages/csp",
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git"
+  },
   "dependencies": {
     "@quisido/csp-shared": "^1.0.1",
     "@quisido/worker": "^1.0.8",

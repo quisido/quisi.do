@@ -39,6 +39,7 @@
     "provenance": true
   },
   "repository": {
+    "directory": "packages/cloudflare-test-utils",
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
   },

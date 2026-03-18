@@ -44,6 +44,7 @@
     "provenance": true
   },
   "repository": {
+    "directory": "packages/quisido",
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
   },

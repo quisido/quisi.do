@@ -27,6 +27,7 @@
     "url": "https://github.com/sponsors/quisido"
   },
   "repository": {
+    "directory": "packages/vite",
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
   },

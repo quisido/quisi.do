@@ -39,6 +39,7 @@
     "provenance": true
   },
   "repository": {
+    "directory": "packages/csp-shared",
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
   },

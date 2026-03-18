@@ -40,6 +40,11 @@
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
   },
+  "repository": {
+    "directory": "packages/authn",
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git"
+  },
   "dependencies": {
     "@quisido/authn-shared": "^1.1.5",
     "@quisido/worker": "^1.0.8",

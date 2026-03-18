@@ -34,6 +34,7 @@
     "url": "https://github.com/sponsors/quisido"
   },
   "repository": {
+    "directory": "packages/number-format-react",
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
   },

@@ -26,6 +26,7 @@
     "url": "https://github.com/sponsors/quisido"
   },
   "repository": {
+    "directory": "packages/game",
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
   },

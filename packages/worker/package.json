@@ -40,6 +40,7 @@
     "provenance": true
   },
   "repository": {
+    "directory": "packages/worker",
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
   },

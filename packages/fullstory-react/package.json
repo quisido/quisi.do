@@ -38,6 +38,7 @@
     "provenance": true
   },
   "repository": {
+    "directory": "packages/fullstory-react",
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
   },

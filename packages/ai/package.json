@@ -21,6 +21,11 @@
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
   },
+  "repository": {
+    "directory": "packages/ai",
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git"
+  },
   "dependencies": {
     "ollama": "^0.6.3"
   },
