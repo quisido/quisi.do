@@ -1,6 +1,5 @@
 import { type Event as SentryEvent, type EventHint } from '@sentry/core';
 import { mapObjectToEntries } from 'fmrs';
-import { type FSApi, useFullstory } from 'fullstory-react';
 import mixpanelBrowser from 'mixpanel-browser';
 import { usePostHog } from 'posthog-js/react';
 import { useCallback } from 'react';
@@ -97,7 +96,6 @@ const safeMixpanelBrowserTrack = (
 export default function useEmit(): EventEmitter {
   // Context
   const { addAction } = useDatadogRum();
-  const fullstory: FSApi = useFullstory();
   const hostname: string = useHostname();
   const LogRocket = useLogRocket();
   const newRelicBrowserAgent = useNewRelicBrowserAgent();
@@ -110,12 +108,6 @@ export default function useEmit(): EventEmitter {
     (name: string, dimensions: Readonly<Dimensions> = EMPTY_OBJECT): void => {
       // Datadog
       addAction(name, dimensions);
-
-      // Fullstory
-      fullstory('trackEvent', {
-        name,
-        properties: dimensions,
-      });
 
       // LogRocket
       LogRocket.track(name, removeNullValues(dimensions));
@@ -145,7 +137,6 @@ export default function useEmit(): EventEmitter {
       LogRocket,
       addAction,
       captureEvent,
-      fullstory,
       hostname,
       newRelicBrowserAgent,
       pathname,

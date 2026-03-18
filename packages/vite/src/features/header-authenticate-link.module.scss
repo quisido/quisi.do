@@ -5,6 +5,7 @@
   @if list.length($list) < $index {
     @return $default;
   }
+
   @return list.nth($list, $index);
 }
 
@@ -12,21 +13,17 @@
   @for $animation-frame from 0 through 100 {
     #{$animation-frame}% {
       $transform: '';
+
       @each $transform-function, $values in $transform-functions {
         $count: list-nth-default($values, 3, 1);
         $maximum: list.nth($values, 2);
         $minimum: list.nth($values, 1);
-
         $transform-frames: math.ceil(math.div(100, $count));
         $transform-frames-half: math.div($transform-frames, 2);
         $transform-frame: $animation-frame % $transform-frames;
-
-        $value: if(
-          $transform-frame <= $transform-frames-half,
-          $minimum + math.pow(math.sin(math.div($transform-frame, $transform-frames-half) * math.div(math.$pi, 2)), 2) * ($maximum - $minimum),
-          $maximum - math.pow(math.sin(math.div($transform-frame - $transform-frames-half, $transform-frames-half) * math.div(math.$pi, 2)), 2) * ($maximum - $minimum)
-        );
-
+        $value: if($transform-frame <= $transform-frames-half,
+            $minimum + math.pow(math.sin(math.div($transform-frame, $transform-frames-half) * math.div(math.$pi, 2)), 2) * ($maximum - $minimum),
+            $maximum - math.pow(math.sin(math.div($transform-frame - $transform-frames-half, $transform-frames-half) * math.div(math.$pi, 2)), 2) * ($maximum - $minimum));
         $transform: #{$transform} #{$transform-function}(#{$value});
       }
 
@@ -36,10 +33,8 @@
 }
 
 @keyframes animation2 {
-  @include transform-keyframes((
-    "rotate": 4deg 7deg 7,
-    "scale": 0.975 1.025 11
-  ));
+  @include transform-keyframes(("rotate": 4deg 7deg 7,
+      "scale": 0.975 1.025 11));
 }
 
 .link {

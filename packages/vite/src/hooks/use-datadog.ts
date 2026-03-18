@@ -50,7 +50,7 @@ const PROPS: Required<
   env: import.meta.env.NODE_ENV,
   excludedActivityUrls: [
     // Content Security Policy connect-src
-    /^https:\/\/(?:[a-z\d]+\.clarity\.ms|analytics\.google\.com|cloudflareinsights\.com|edge\.fullstory\.com|[a-z\d]+\.ingest\.sentry\.io|r\.logr-ingest\.com|r\.lrkt-in\.com|region\d+\.analytics\.google\.com|rs\.fullstory\.com|stats\.g\.doubleclick\.net|www\.google-analytics\.com)\//u,
+    /^https:\/\/(?:[a-z\d]+\.clarity\.ms|analytics\.google\.com|cloudflareinsights\.com|[a-z\d]+\.ingest\.sentry\.io|r\.logr-ingest\.com|r\.lrkt-in\.com|region\d+\.analytics\.google\.com|stats\.g\.doubleclick\.net|www\.google-analytics\.com)\//u,
 
     // Content Security Policy frame-src
     /^https:\/\/(?:td\.td\.doubleclick\.net)\//u,
@@ -59,7 +59,7 @@ const PROPS: Required<
     /^https:\/\/(?:api-js\.mixpanel\.com|c\.bing\.com|c\.clarity\.ms|www\.google\.[a-z]+|www\.google\.co\.[a-z]+|www\.google\.com\.[a-z]+|www\.googletagmanager\.com)\//u,
 
     // Content Security Policy script-src-elem
-    /^https:\/\/(?:ajax\.cloudflare\.com|cdn\.logr-ingest\.com|cdn\.lrkt-in\.com|edge\.fullstory\.com|static\.cloudflareinsights\.com|www\.clarity\.ms)\//u,
+    /^https:\/\/(?:ajax\.cloudflare\.com|cdn\.logr-ingest\.com|cdn\.lrkt-in\.com|static\.cloudflareinsights\.com|www\.clarity\.ms)\//u,
     'https://quisi.do/cdn-cgi/speculation',
 
     // Content Security Policy style-src-elem

@@ -15,7 +15,6 @@ connect-src
   https://cloudflareinsights.com/
   https://csp.quisi.do/1/
   https://dashboard.quisi.do/
-  https://edge.fullstory.com/s/settings/o-1X4ZHB-na1/v1/web
   https://localhost:5882/whoami/
   https://localhost:6586/1/
   https://localhost:9778/
@@ -24,8 +23,6 @@ connect-src
   https://r.logr-ingest.com/i
   https://r.lrkt-in.com/i
   https://region1.analytics.google.com/g/collect
-  https://rs.fullstory.com/rec/bundle/v2
-  https://rs.fullstory.com/rec/page
   https://stats.g.doubleclick.net/g/collect
   https://us.i.posthog.com/decide/
   https://us.i.posthog.com/e/
@@ -109,7 +106,6 @@ script-src-elem
   https://cdn.lgrckt-in.com/logger-1.min.js
   https://cdn.logr-ingest.com/logger-1.min.js
   https://cdn.lrkt-in.com/logger-1.min.js
-  https://edge.fullstory.com/s/fs.js
   https://quisi.do/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js
   https://quisi.do/cdn-cgi/speculation
   https://scripts.clarity.ms/

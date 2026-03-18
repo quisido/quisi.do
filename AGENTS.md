@@ -82,8 +82,8 @@ All packages are located in the `packages/` directory.
   access to your bindings through a simplified API.
 - `worker-test/` contains utilities for testing the aforementioned workers.
 
-`fullstory-react/`, `react-datadog/`, and `sentry-react/` integrate React
-applications with Fullstory, Datadog, and Sentry respectively.
+`react-datadog/`, and `sentry-react/` integrate React applications with Datadog
+and Sentry respectively.
 
 ## Workflows
 
