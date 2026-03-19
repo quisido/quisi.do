@@ -19,7 +19,6 @@ const JS_CONFIG: Config = defineConfig({
 
   plugins: {
     prettier: prettierPlugin,
-    // @ts-expect-error The dependency is incorrectly typed.
     'sort-keys-custom-order': sortKeysCustomOrder as ESLint.Plugin,
   },
 
