@@ -5,13 +5,15 @@ import mapToString from './map-to-string.js';
  *   This class will execute a tool call, but handle any unexpected errors that
  * occur, ensuring that a valid Report is generated.
  */
-export default class ReportingTool {
-  #callTool: () => Promise<Omit<Report, 'tool'>>;
+export default class ReportingTool<
+  Options extends readonly unknown[] = readonly never[],
+> {
+  #callTool: (...options: Options) => Promise<Omit<Report, 'tool'>>;
   #toolName: string;
 
   public constructor(
     toolName: string,
-    callTool: () => Promise<Omit<Report, 'tool'>>,
+    callTool: (...options: Options) => Promise<Omit<Report, 'tool'>>,
   ) {
     this.#callTool = callTool;
     this.#toolName = toolName;
@@ -25,11 +27,11 @@ export default class ReportingTool {
     globalThis.console.info(`[quisido] [${this.#toolName}] ${message}`);
   }
 
-  public async run(): Promise<Report> {
+  public async run(...options: Options): Promise<Report> {
     this.logInfo('⏳');
 
     try {
-      const report: Omit<Report, 'tool'> = await this.#callTool();
+      const report: Omit<Report, 'tool'> = await this.#callTool(...options);
 
       switch (report.status) {
         case 'failure':
@@ -68,7 +70,7 @@ Press any other key to RETRY.
         });
 
         if (key.toLowerCase() !== 'q') {
-          return await this.run();
+          return await this.run(...options);
         }
       }
 

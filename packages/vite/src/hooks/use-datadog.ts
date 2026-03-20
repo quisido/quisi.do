@@ -41,6 +41,7 @@ const PROPS: Required<
   allowFallbackToLocalStorage: true,
   allowUntrustedEvents: true,
   applicationId: APPLICATION_ID,
+  betaTrackActionsInShadowDom: true,
   clientToken: CLIENT_TOKEN,
   compressIntakeRequests: true,
   defaultPrivacyLevel: 'mask-user-input',

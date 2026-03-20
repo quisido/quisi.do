@@ -1,11 +1,21 @@
+import type Report from '../../types/report.js';
+import ReportingTool from '../../utils/reporting-tool.js';
 import npx from '../npx/npx.js';
 
-const SUCCESS_STATUS_CODE = 0;
+export const vitest: ReportingTool = new ReportingTool(
+  'vitest',
+  async (): Promise<Omit<Report, 'tool'>> => {
+    const { exitCode, stdout } = await npx('vitest', 'run');
+    if (exitCode === 0) {
+      return {
+        status: 'success',
+      };
+    }
 
-export default async function vitest(): Promise<void> {
-  const { exitCode, stdout } = await npx('vitest', 'run');
-
-  if (exitCode !== SUCCESS_STATUS_CODE) {
-    throw new Error(stdout, { cause: 'vitest run' });
-  }
-}
+    return {
+      context: 'Vitest threw an error while testing this package.',
+      message: stdout,
+      status: 'failure',
+    };
+  },
+);

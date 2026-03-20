@@ -1,18 +1,43 @@
+import createTSConfigFile from './create-tsconfig-file.js';
+import type Report from '../../types/report.js';
+import ReportingTool from '../../utils/reporting-tool.js';
 import npx from '../npx/npx.js';
 
-export default async function tsc(...args: readonly string[]): Promise<void> {
-  const npxArgs: readonly string[] = ['tsc', ...args];
-  const { stdout } = await npx(...npxArgs);
-
-  /**
-   *  `tsc` emits errors via stdout.
-   *   VS Code pollutes `stderr` with "Debugger attached." and "Waiting for the
-   * debugger to disconnect..." when using Run & Debug mode, so we cannot rely
-   * on `stderr` for messaging [not that it was used by `tsc` anyway].
-   */
-  if (stdout !== '') {
-    throw new Error(stdout, {
-      cause: npxArgs.join(' '),
-    });
-  }
+interface Options {
+  readonly args?: readonly string[] | undefined;
+  readonly id: string;
 }
+
+export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
+  'tsc',
+  async ({ args = [], id }: Options): Promise<Omit<Report, 'tool'>> => {
+    /**
+     *   If this fails because `@types/node` mismatches, then a package has an
+     * outdated version in `node_modules/`. `npm install @types/node@latest`
+     * does not seem to fix it; you can delete `node_modules/` and remove
+     * references to "packages/__/node_modules/@types/node" in
+     * `package-lock.json`. You can find these references by Ctrl-F for
+     * "/@types/node" with the `/` prefix.
+     */
+    const tsconfigFile: string = await createTSConfigFile({ id });
+    const { exitCode, stdout } = await npx(
+      'tsc',
+      '--project',
+      tsconfigFile,
+      ...args,
+    );
+    if (exitCode === 0) {
+      return {
+        status: 'success',
+      };
+    }
+
+    return {
+      context:
+        'The TypeScript compiler threw an error while transpiling this ' +
+        'package.',
+      message: stdout,
+      status: 'failure',
+    };
+  },
+);

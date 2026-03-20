@@ -2,11 +2,17 @@ import { join } from 'node:path';
 import type TSConfig from '../../types/tsconfig.js';
 import createCompilerOptions from './create-compiler-options.js';
 
-export default async function createTSConfig(): Promise<TSConfig> {
+interface Options {
+  readonly id: string;
+}
+
+export default async function createTSConfig({
+  id,
+}: Options): Promise<TSConfig> {
   const cwd: string = process.cwd();
 
   return {
-    compilerOptions: await createCompilerOptions(),
+    compilerOptions: await createCompilerOptions({ id }),
     exclude: [
       join(cwd, 'src', '**', '*.test.ts'),
       join(cwd, 'src', '**', '*.test.tsx'),

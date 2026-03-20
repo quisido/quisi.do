@@ -12,7 +12,7 @@
   "scripts": {
     "build": "quisido build",
     "start": "quisido start",
-    "test": "quisido test && npm run vitest:run",
+    "test": "quisido test",
     "api-extractor": "node --experimental-strip-types scripts/api-extractor.ts",
     "attw": "quisido attw",
     "clean": "rimraf .cache .tests dist node_modules",

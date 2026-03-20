@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 import { readFile } from 'node:fs/promises';
 import { attw } from './features/attw/attw.js';
-import build from './features/build/build.js';
 import { eslint } from './features/eslint/eslint.js';
 import { publint } from './features/publint/publint.js';
 import { quisidoTest } from './features/quisido-test/quisido-test.js';
-import start from './features/start/start.js';
+import { tsc } from './features/tsc/tsc.js';
 import type Report from './types/report.js';
 import { handleExit } from './utils/exit.js';
 import handleReadReportFileError from './utils/handle-read-report-file-error.js';
 import handleReadReportFile from './utils/handle-read-report-file.js';
+import { vitest } from './features/vitest/vitest.js';
 
 const [, , command] = process.argv;
 
@@ -26,7 +26,11 @@ switch (command) {
   }
 
   case 'build': {
-    await build();
+    eventualReports.push(
+      tsc.run({
+        id: 'build',
+      }),
+    );
     break;
   }
 
@@ -41,7 +45,12 @@ switch (command) {
   }
 
   case 'start': {
-    await start();
+    eventualReports.push(
+      tsc.run({
+        args: ['--watch'],
+        id: 'start',
+      }),
+    );
     break;
   }
 
@@ -50,6 +59,7 @@ switch (command) {
     eventualReports.push(eslint.run());
     eventualReports.push(publint.run());
     eventualReports.push(quisidoTest.run());
+    eventualReports.push(vitest.run());
     break;
   }
 

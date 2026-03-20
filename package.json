@@ -13,7 +13,7 @@
     "test": "quisido test && npm run test:workspaces",
     "authn": "npm start --workspace=packages/authn",
     "browserslist:update-db": "browserslist --update-db",
-    "clean": "rimraf .cache .tests dist node_modules && npm run clean --if-present --workspaces",
+    "clean": "rimraf .cache .tests dist && npm run clean --if-present --workspaces && rimraf node_modules",
     "cloudflare-utils": "npm start --workspace=packages/cloudflare-utils",
     "csp": "npm start --workspace=packages/csp",
     "dashboard": "npm start --workspace=packages/dashboard",
