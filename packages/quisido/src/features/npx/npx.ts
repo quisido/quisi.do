@@ -4,6 +4,7 @@ import { NPX_COMMAND } from './npx-command.js';
 interface Options {
   readonly env?: Partial<Record<string, string | undefined>> | undefined;
 }
+
 export default async function npx(
   options: Options,
   ...args: readonly string[]

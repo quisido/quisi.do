@@ -2,6 +2,7 @@
 import type { CoverageOptions } from 'vitest/node';
 import defineThresholds from './define-thresholds.js';
 import { EXCLUDE } from './exclude.js';
+import { join } from 'node:path';
 
 export { type CoverageOptions } from 'vitest/node';
 
@@ -15,19 +16,21 @@ export default function defineCoverageOptions({
     enabled: true,
     exclude: [...EXCLUDE, ...exclude],
     reportOnFailure: true,
-    reportsDirectory: '.tests',
+    // THE ERROR IS HERE
+    // It is trying to copy this directory for some reason, causing it to fail.
+    reportsDirectory: join('.tests', 'vitest'),
     skipFull: true,
     thresholds: defineThresholds(thresholds),
     ...coverageOptions,
 
     provider: 'istanbul',
     reporter: [
-      ['clover', { file: 'vitest/coverage/clover.xml' }],
-      ['cobertura', { file: 'vitest/coverage/cobertura.xml' }],
-      ['json', { file: 'vitest/coverage/coverage.json' }],
-      ['json-summary', { file: 'vitest/coverage/coverage-summary.json' }],
-      ['lcov', { file: 'vitest/coverage/lcov.info' }],
-      ['lcovonly', { file: 'vitest/coverage/lcov-only.info' }],
+      ['clover', { file: join('coverage', 'clover.xml') }],
+      ['cobertura', { file: join('coverage', 'cobertura.xml') }],
+      ['json', { file: join('coverage', 'coverage.json') }],
+      ['json-summary', { file: join('coverage', 'coverage-summary.json') }],
+      ['lcov', { file: join('coverage', 'lcov.info') }],
+      ['lcovonly', { file: join('coverage', 'lcov-only.info') }],
       ['html', { skipEmpty: true, verbose: false }],
       [
         'html-spa',
@@ -37,17 +40,17 @@ export default function defineCoverageOptions({
           verbose: false,
         },
       ],
-      ['teamcity', { file: 'vitest/coverage/teamcity.txt' }],
+      ['teamcity', { file: join('coverage', 'teamcity.txt') }],
       [
         'text',
         {
-          file: 'vitest/coverage/text.txt',
+          file: join('coverage', 'text.txt'),
           maxCols: 80,
           skipEmpty: true,
           skipFull: true,
         },
       ],
-      ['text-summary', { file: 'vitest/coverage/text-summary.txt' }],
+      ['text-summary', { file: join('coverage', 'text-summary.txt') }],
     ],
   };
 }
