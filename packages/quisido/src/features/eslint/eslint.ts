@@ -1,5 +1,6 @@
-import type Report from '../../types/report.js';
-import ReportingTool from '../../utils/reporting-tool.js';
+import ReportingTool, {
+  type ReportingToolResult,
+} from '../../utils/reporting-tool.js';
 import mapToString from '../../utils/map-to-string.js';
 import randomInt from '../../utils/random-int.js';
 import withDuration from '../../utils/with-duration.js';
@@ -11,7 +12,7 @@ const MIN_CONCURRENCY = 1;
 
 export const eslint: ReportingTool = new ReportingTool(
   'eslint',
-  async (): Promise<Omit<Report, 'tool'>> => {
+  async (): Promise<ReportingToolResult> => {
     const concurrency: number = randomInt(MIN_CONCURRENCY, MAX_CONCURRENCY);
 
     const { duration: resultsDuration, error: resultsError } =

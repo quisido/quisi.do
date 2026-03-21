@@ -1,11 +1,12 @@
-import type Report from '../../types/report.js';
 import mapToString from '../../utils/map-to-string.js';
-import ReportingTool from '../../utils/reporting-tool.js';
+import ReportingTool, {
+  type ReportingToolResult,
+} from '../../utils/reporting-tool.js';
 import testVsCodeSettings from './test-vscode-settings.js';
 
 export const quisidoTest: ReportingTool = new ReportingTool(
   'quisido:test',
-  async (): Promise<Omit<Report, 'tool'>> => {
+  async (): Promise<ReportingToolResult> => {
     try {
       await testVsCodeSettings();
       return {
@@ -13,6 +14,7 @@ export const quisidoTest: ReportingTool = new ReportingTool(
       };
     } catch (err: unknown) {
       return {
+        context: 'The quisido built-in tests failed.',
         message: mapToString(err),
         status: 'failure',
       };

@@ -1,6 +1,7 @@
 import createTSConfigFile from './create-tsconfig-file.js';
-import type Report from '../../types/report.js';
-import ReportingTool from '../../utils/reporting-tool.js';
+import ReportingTool, {
+  type ReportingToolResult,
+} from '../../utils/reporting-tool.js';
 import npx from '../npx/npx.js';
 
 interface Options {
@@ -10,7 +11,7 @@ interface Options {
 
 export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
   'tsc',
-  async ({ args = [], id }: Options): Promise<Omit<Report, 'tool'>> => {
+  async ({ args = [], id }: Options): Promise<ReportingToolResult> => {
     /**
      *   If this fails because `@types/node` mismatches, then a package has an
      * outdated version in `node_modules/`. `npm install @types/node@latest`

@@ -1,10 +1,11 @@
-import type Report from '../../types/report.js';
-import ReportingTool from '../../utils/reporting-tool.js';
+import ReportingTool, {
+  type ReportingToolResult,
+} from '../../utils/reporting-tool.js';
 import npx from '../npx/npx.js';
 
 export const publint: ReportingTool = new ReportingTool(
   'publint',
-  async (): Promise<Omit<Report, 'tool'>> => {
+  async (): Promise<ReportingToolResult> => {
     const { exitCode, stdout } = await npx('publint', '--strict');
 
     if (exitCode === 0) {

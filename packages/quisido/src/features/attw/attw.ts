@@ -1,5 +1,6 @@
-import type Report from '../../types/report.js';
-import ReportingTool from '../../utils/reporting-tool.js';
+import ReportingTool, {
+  type ReportingToolResult,
+} from '../../utils/reporting-tool.js';
 import getPackageJson from '../../utils/get-package-json.js';
 import requireResolve from '../../utils/require-resolve.js';
 import writeTestsFile from '../../utils/write-tests-file.js';
@@ -9,7 +10,7 @@ const CONFIG_PATH: string = requireResolve('quisido/.attw.json');
 
 export const attw: ReportingTool = new ReportingTool(
   'attw',
-  async (): Promise<Omit<Report, 'tool'>> => {
+  async (): Promise<ReportingToolResult> => {
     const { private: isPrivate } = await getPackageJson();
     if (isPrivate === true) {
       return {
