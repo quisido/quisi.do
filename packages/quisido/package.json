@@ -16,8 +16,8 @@
     "eslint": "quisido eslint",
     "publint": "quisido publint",
     "vitest": "vitest",
-    "vitest:run": "vitest:run",
-    "vitest:watch": "vitest:watch"
+    "vitest:run": "vitest run",
+    "vitest:watch": "vitest watch"
   },
   "bin": {
     "quisido": "./dist/cli.js"
