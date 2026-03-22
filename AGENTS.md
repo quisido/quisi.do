@@ -7,8 +7,9 @@ As a monorepo, it hosts a few applications (e.g. a not-for-profit
 software-as-a-service and a browser-based game engine), the Cloudflare Worker
 services behind those applications, and NPM package libraries that power both.
 
-By keeping these technologies bleeding-edge, it serves as an educational and
-reusable tool both during development and as an open-source publication.
+By keeping these technologies bleeding-edge, the monorepo serves as an
+educational and reusable tool both during development and as an open-source
+publication.
 
 ## Instruction files
 
@@ -17,6 +18,7 @@ Use the files' _front matter_ to determine if the instructions apply to your
 current task.
 
 For example:
+
 - When coding, ignore instructions that include `excludeAgent: "coding-agent"`.
 - When editing/reviewing a `.go` file, ignore instructions that do not apply to
   that file, e.g. `applyTo: "**/*.tsx"`.

@@ -7,11 +7,18 @@ import npx from '../npx/npx.js';
 interface Options {
   readonly args?: readonly string[] | undefined;
   readonly id: string;
+  readonly onStdErr?: ((data: string) => void) | undefined;
+  readonly onStdOut?: ((data: string) => void) | undefined;
 }
 
 export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
   'tsc',
-  async ({ args = [], id }: Options): Promise<ReportingToolResult> => {
+  async ({
+    args = [],
+    id,
+    onStdErr,
+    onStdOut,
+  }: Options): Promise<ReportingToolResult> => {
     /**
      *   If this fails because `@types/node` mismatches, then a package has an
      * outdated version in `node_modules/`. `npm install @types/node@latest`
@@ -22,6 +29,7 @@ export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
      */
     const tsconfigFile: string = await createTSConfigFile({ id });
     const { exitCode, stdout } = await npx(
+      { onStdErr, onStdOut },
       'tsc',
       '--project',
       tsconfigFile,

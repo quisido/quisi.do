@@ -44,12 +44,16 @@ switch (command) {
   }
 
   case 'start': {
-    eventualReports.push(
-      tsc.run({
-        args: ['--watch'],
-        id: 'start',
-      }),
-    );
+    void tsc.run({
+      args: ['--watch'],
+      id: 'start',
+      onStdErr(data: string): void {
+        globalThis.console.error(data);
+      },
+      onStdOut(data: string): void {
+        globalThis.console.log(data);
+      },
+    });
     break;
   }
 

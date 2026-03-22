@@ -51,6 +51,8 @@ const spawnAsync = async (
   });
 
   return new Promise((resolve, reject): void => {
+    childProcess.on('error', reject);
+
     childProcess.on(
       'exit',
       (code: number | null, signal: NodeJS.Signals | null) => {

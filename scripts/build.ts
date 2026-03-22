@@ -104,6 +104,7 @@ while (WORKSPACE_TOPOLOGICAL_DEPENDENCIES.size > EMPTY) {
       ),
     ) as PackageJson;
     if (bin !== undefined) {
+      // Consider `npmExec('link', '--workspace=...'')`.
       // eslint-disable-next-line no-await-in-loop
       await npmExec('install');
     }
