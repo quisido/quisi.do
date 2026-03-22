@@ -4,7 +4,7 @@ import debug from '../../utils/debug.js';
 import getDisposableTempDir from '../../utils/get-disposable-temp-dir.js';
 import getPackageJson from '../../utils/get-package-json.js';
 import platformImport from '../../utils/platform-import.js';
-import tsc from '../tsc/tsc.js';
+import npxTsc from '../npx-tsc/npx-tsc.js';
 
 export default async function loadConfig(): Promise<object> {
   const cwd: string = process.cwd();
@@ -18,7 +18,7 @@ export default async function loadConfig(): Promise<object> {
   }
 
   const outDir: string = await getDisposableTempDir();
-  await tsc(
+  await npxTsc(
     '--module',
     'NodeNext',
     '--moduleResolution',

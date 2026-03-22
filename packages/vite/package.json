@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc --skipLibCheck && vite build",
     "start": "vite",
-    "test": "quisido test && npm run vitest:run",
+    "test": "quisido test",
     "attw": "quisido attw",
     "clean": "rimraf .cache .tests .wrangler _site node_modules",
     "eslint": "quisido eslint",
@@ -127,7 +127,6 @@
     "babel-plugin-istanbul": "^7.0.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "babel-plugin-replace-import-extension": "^1.1.5",
-    "cjs-ts": "^2.0.1",
     "concurrently": "^9.2.1",
     "console-table-printer": "^2.15.0",
     "dd-trace": "^5.76.0",

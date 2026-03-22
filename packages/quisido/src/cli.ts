@@ -1,15 +1,14 @@
 #!/usr/bin/env node
-import { readFile } from 'node:fs/promises';
 import { attw } from './features/attw/attw.js';
-import build from './features/build/build.js';
 import { eslint } from './features/eslint/eslint.js';
 import { publint } from './features/publint/publint.js';
 import { quisidoTest } from './features/quisido-test/quisido-test.js';
-import start from './features/start/start.js';
-import type Report from './types/report.js';
+import { tsc } from './features/tsc/tsc.js';
+import { type Report } from './types/report.js';
 import { handleExit } from './utils/exit.js';
-import handleReadReportFileError from './utils/handle-read-report-file-error.js';
-import handleReadReportFile from './utils/handle-read-report-file.js';
+import { vitest } from './features/vitest/vitest.js';
+import writeTestsFile from './utils/write-tests-file.js';
+import logFailureReport from './utils/log-failure-report.js';
 
 const [, , command] = process.argv;
 
@@ -26,7 +25,11 @@ switch (command) {
   }
 
   case 'build': {
-    await build();
+    eventualReports.push(
+      tsc.run({
+        id: 'build',
+      }),
+    );
     break;
   }
 
@@ -41,7 +44,16 @@ switch (command) {
   }
 
   case 'start': {
-    await start();
+    void tsc.run({
+      args: ['--watch'],
+      id: 'start',
+      onStdErr(data: string): void {
+        globalThis.console.error(data);
+      },
+      onStdOut(data: string): void {
+        globalThis.console.log(data);
+      },
+    });
     break;
   }
 
@@ -50,12 +62,12 @@ switch (command) {
     eventualReports.push(eslint.run());
     eventualReports.push(publint.run());
     eventualReports.push(quisidoTest.run());
+    eventualReports.push(vitest.run());
     break;
   }
 
   case 'vitest': {
-    globalThis.console.warn('Vitest is not yet supported.');
-    process.exitCode = 1;
+    eventualReports.push(vitest.run());
     break;
   }
 
@@ -69,44 +81,20 @@ switch (command) {
 const settledReports: PromiseSettledResult<Report>[] =
   await Promise.allSettled(eventualReports);
 
-const mapReportPathToContext = async (
-  path: string | undefined,
-): Promise<string | undefined> => {
-  if (path === undefined) {
-    return;
-  }
-
-  return await readFile(path, 'utf8')
-    .then(handleReadReportFile)
-    .catch(handleReadReportFileError);
-};
+if (settledReports.length > 0) {
+  await writeTestsFile(
+    `quisido.${command}.json`,
+    JSON.stringify(settledReports),
+  );
+}
 
 for (const settledReport of settledReports) {
   switch (settledReport.status) {
     case 'fulfilled': {
-      const {
-        value: { context, message, path, status, tool },
-      } = settledReport;
-      switch (status) {
+      const { value: report } = settledReport;
+      switch (report.status) {
         case 'failure': {
-          // eslint-disable-next-line no-await-in-loop
-          const report: string | undefined = await mapReportPathToContext(path);
-          globalThis.console.error(
-            `
---------------------------------------------------------------------------------
-⚠️  ${tool} ⚠️
---------------------------------------------------------------------------------
-${context ?? ''}
-
-## Error message
-
-\`\`\`
-${message ?? ''}
-\`\`\`
-
-${report ?? ''}
-`.trim(),
-          );
+          logFailureReport(report);
           process.exitCode = 1;
           break;
         }
@@ -124,7 +112,10 @@ ${report ?? ''}
      * with `status: 'failure'`, this case should not be possible.
      */
     case 'rejected': {
-      globalThis.console.error(settledReport.reason);
+      globalThis.console.error(
+        '[quisido] Unexpected settled report error:',
+        settledReport.reason,
+      );
       process.exitCode = 1;
       break;
     }

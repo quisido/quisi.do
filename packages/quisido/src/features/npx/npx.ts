@@ -3,7 +3,10 @@ import { NPX_COMMAND } from './npx-command.js';
 
 interface Options {
   readonly env?: Partial<Record<string, string | undefined>> | undefined;
+  readonly onStdErr?: ((data: string) => void) | undefined;
+  readonly onStdOut?: ((data: string) => void) | undefined;
 }
+
 export default async function npx(
   options: Options,
   ...args: readonly string[]

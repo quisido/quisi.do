@@ -66,9 +66,10 @@ export default async function npxEslint(
       );
     }
 
-    throw new Error(message, {
-      cause: npxArgs.join(' '),
-    });
+    throw new Error(
+      [`ESLint failed with exit code ${exitCode}`, message].join(EOL),
+      { cause: npxArgs.join(' ') },
+    );
   };
 
   await lint(1);

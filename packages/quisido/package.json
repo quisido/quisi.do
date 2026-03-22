@@ -14,7 +14,10 @@
     "test": "quisido test",
     "clean": "rm -rf .cache .tests dist node_modules",
     "eslint": "quisido eslint",
-    "publint": "quisido publint"
+    "publint": "quisido publint",
+    "vitest": "vitest",
+    "vitest:run": "vitest run",
+    "vitest:watch": "vitest watch"
   },
   "bin": {
     "quisido": "./dist/cli.js"
@@ -55,7 +58,6 @@
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "^8.46.3",
     "@typescript-eslint/parser": "^8.46.3",
-    "@vitest/coverage-istanbul": "^4.0.7",
     "eslint": ">=9.0.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsonc": "^2.21.1",
@@ -70,11 +72,21 @@
   },
   "devDependencies": {
     "@types/node": "^24.10.4",
+    "@vitest/coverage-istanbul": "^4.0.7",
     "typescript": "^5.9.3",
     "vitest": "^4.0.7"
   },
   "peerDependencies": {
+    "@vitest/coverage-istanbul": ">=4.0.0",
     "typescript": ">=5.0.0",
     "vitest": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vitest/coverage-istanbul": {
+      "optional": true
+    },
+    "vitest": {
+      "optional": true
+    }
   }
 }

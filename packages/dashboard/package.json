@@ -7,7 +7,7 @@
   "scripts": {
     "build": "exit 0",
     "start": "npm run dev",
-    "test": "quisido test && npm run vitest:run",
+    "test": "quisido test",
     "clean": "rimraf .cache .tests .wrangler dist node_modules",
     "dev": "wrangler dev --persist-to ../../.wrangler/state",
     "eslint": "quisido eslint",

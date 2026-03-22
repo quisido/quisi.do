@@ -1,5 +1,8 @@
-import type { DisposableTempDir } from 'node:fs';
-import { mkdir, mkdtempDisposable } from 'node:fs/promises';
+import {
+  type DisposableTempDir,
+  mkdir,
+  mkdtempDisposable,
+} from 'node:fs/promises';
 import { join } from 'node:path';
 import { onExit } from './exit.js';
 

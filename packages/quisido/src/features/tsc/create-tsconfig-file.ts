@@ -2,11 +2,17 @@ import type TSConfig from '../../types/tsconfig.js';
 import writeTemporaryFile from '../../utils/write-temporary-file.js';
 import createTSConfig from './create-tsconfig.js';
 
-export default async function createTSConfigFile(): Promise<string> {
-  const tsconfig: TSConfig = await createTSConfig();
+interface Options {
+  readonly id: string;
+}
+
+export default async function createTSConfigFile({
+  id,
+}: Options): Promise<string> {
+  const tsconfig: TSConfig = await createTSConfig({ id });
 
   const tsconfigPath: string = await writeTemporaryFile(
-    'tsconfig.start.json',
+    `tsconfig.${id}.json`,
     JSON.stringify(tsconfig),
   );
 

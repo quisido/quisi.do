@@ -41,10 +41,6 @@
       "path": "packages/cloudflare-utils"
     },
     {
-      "name": "📦 cjs-ts",
-      "path": "packages/cjs-ts"
-    },
-    {
       "name": "📦 csp-shared",
       "path": "packages/csp-shared"
     },
@@ -102,10 +98,10 @@
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
     "js.preferences.importModuleSpecifier": "project-relative",
     "js.preferences.importModuleSpecifierEnding": "js",
+    "js/ts.tsdk.promptToUseWorkspaceVersion": true,
     "terminal.integrated.shellIntegration.enabled": true,
     "ts.preferences.importModuleSpecifier": "project-relative",
     "ts.preferences.importModuleSpecifierEnding": "js",
-    "typescript.enablePromptUseWorkspaceTsdk": true,
     "vitest.maximumConfigs": 99,
     "yaml.keyOrdering": false
   }

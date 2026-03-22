@@ -4,20 +4,20 @@ import ddPlugin from 'dd-trace/esbuild';
 import {
   type ConfigEnv,
   defineConfig,
-  type ESBuildOptions,
   type UserConfig,
   type UserConfigFnObject,
 } from 'vite';
-import { type Compulsory } from './src/types/compulsory.js';
 import reduceEnvironmentVariableNamesToRecord from './src/utils/reduce-environment-variable-names-to-record.js';
-import buildTSConfig from './tsconfig.build.json' with { type: 'json' };
-import tsconfig from './tsconfig.json' with { type: 'json' };
 
+/**
+ *   Disabled because "Both esbuild and oxc options were set. oxc options will
+ * be used and esbuild options will be ignored."
 const ESBUILD_OPTIONS: ESBuildOptions = {
   color: true,
   jsx: 'preserve',
   sourcesContent: true,
 };
+ */
 
 const USER_CONFIG: UserConfig = {
   base: '/',
@@ -41,7 +41,6 @@ const USER_CONFIG: UserConfig = {
     'MIXPANEL_TOKEN',
     'NEW_RELIC_LICENSE_KEY',
     'NODE_ENV',
-    'NYC_REPORT_DIR',
     'PATREON_OAUTH_CLIENT_ID',
     'PATREON_OAUTH_REDIRECT_URI',
     'POSTHOG_HOST',
@@ -50,7 +49,11 @@ const USER_CONFIG: UserConfig = {
     'WHOAMI',
   ].reduce(reduceEnvironmentVariableNamesToRecord, {}),
   envDir: '../',
+  /**
+   *   Disabled because "Both esbuild and oxc options were set. oxc options will
+   * be used and esbuild options will be ignored."
   esbuild: ESBUILD_OPTIONS,
+   */
   publicDir: '../public',
   root: 'src',
 };
@@ -60,6 +63,9 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
   css: {
     preprocessorMaxWorkers: true,
   },
+  /**
+   *   Disabled because "Both esbuild and oxc options were set. oxc options will
+   * be used and esbuild options will be ignored." 
   esbuild: {
     ...ESBUILD_OPTIONS,
     jsxDev: true,
@@ -70,6 +76,7 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
     sourcemap: 'both',
     sourceRoot: tsconfig.compilerOptions.sourceRoot,
   },
+   */
   plugins: [basicSsl(), ddPlugin, react()],
   server: {
     headers: {
@@ -86,6 +93,9 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
     outDir: '../_site', // relative to `root` ('src/')
     sourcemap: true,
   },
+  /**
+   *   Disabled because "Both esbuild and oxc options were set. oxc options will
+   * be used and esbuild options will be ignored."
   esbuild: {
     ...ESBUILD_OPTIONS,
     jsxDev: false,
@@ -95,6 +105,7 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
     sourceRoot: buildTSConfig.compilerOptions.sourceRoot,
     tsconfigRaw: buildTSConfig as Compulsory<ESBuildOptions['tsconfigRaw']>,
   },
+   */
   html: {
     cspNonce: 'nonce-quisido',
   },
