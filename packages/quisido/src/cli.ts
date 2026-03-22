@@ -63,8 +63,7 @@ switch (command) {
   }
 
   case 'vitest': {
-    globalThis.console.warn('Vitest is not yet supported.');
-    process.exitCode = 1;
+    eventualReports.push(vitest.run());
     break;
   }
 
