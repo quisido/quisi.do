@@ -1,0 +1,22 @@
+export const MONOGATARI_SHELL_HTML: string = `
+  <visual-novel>
+    <loading-screen></loading-screen>
+    <main-screen>
+      <main-menu></main-menu>
+    </main-screen>
+    <game-screen>
+      <dialog-log></dialog-log>
+      <quick-menu></quick-menu>
+      <text-box></text-box>
+    </game-screen>
+    <load-screen></load-screen>
+    <save-screen></save-screen>
+    <settings-screen></settings-screen>
+    <help-screen></help-screen>
+    <gallery-screen></gallery-screen>
+    <credits-screen></credits-screen>
+    <language-selection-screen></language-selection-screen>
+    <message-modal></message-modal>
+    <alert-modal></alert-modal>
+  </visual-novel>
+`.trim();

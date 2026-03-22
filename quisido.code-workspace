@@ -13,6 +13,10 @@
       "path": "packages/game"
     },
     {
+      "name": "📱 Behind the Velvet Curtain",
+      "path": "packages/behind-the-velvet-curtain"
+    },
+    {
       "name": "⚙️ AI",
       "path": "packages/ai"
     },

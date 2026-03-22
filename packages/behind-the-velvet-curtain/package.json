@@ -1,0 +1,52 @@
+{
+  "name": "@quisido/behind-the-velvet-curtain",
+  "version": "0.0.1",
+  "author": "quisi.do <game@quisi.do>",
+  "description": "Monogatari boilerplate visual novel",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --skipLibCheck && vite build",
+    "start": "vite",
+    "test": "quisido test && npm run vitest:run && npm run vitest:browser",
+    "clean": "rimraf .cache .tests dist node_modules",
+    "eslint": "quisido eslint",
+    "serve": "serve dist",
+    "tsc": "tsc --skipLibCheck",
+    "vitest": "vitest",
+    "vitest:browser": "vitest run --config vitest.browser.config.ts",
+    "vitest:run": "vitest run"
+  },
+  "bugs": {
+    "email": "game@quisi.do",
+    "url": "https://github.com/quisido/quisi.do/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quisido"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git"
+  },
+  "dependencies": {
+    "@monogatari/core": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "@vitejs/plugin-basic-ssl": "^2.2.0",
+    "@vitest/browser": "^4.1.0",
+    "@vitest/browser-playwright": "^4.1.0",
+    "autoprefixer": "^10.4.27",
+    "jsdom": "^29.0.0",
+    "playwright": "^1.58.2",
+    "postcss": "^8.5.8",
+    "rimraf": "^6.1.3",
+    "serve": "^14.2.6",
+    "typescript": "^5.9.3",
+    "vite": "^8.0.0",
+    "vite-plugin-pwa": "^1.2.0",
+    "vitest": "^4.1.0"
+  }
+}

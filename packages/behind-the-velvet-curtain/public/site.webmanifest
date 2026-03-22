@@ -1,0 +1,28 @@
+{
+  "background_color": "#13060d",
+  "description": "A Monogatari-powered visual novel boilerplate for the web and Electron.",
+  "display": "standalone",
+  "icons": [
+    {
+      "sizes": "192x192",
+      "src": "./pwa-192x192.png",
+      "type": "image/png"
+    },
+    {
+      "sizes": "512x512",
+      "src": "./pwa-512x512.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "./pwa-512x512.png",
+      "type": "image/png"
+    }
+  ],
+  "name": "Behind the Velvet Curtain",
+  "scope": "./",
+  "short_name": "Velvet Curtain",
+  "start_url": "./",
+  "theme_color": "#7b1637"
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="backstage" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#1b1121" />
+      <stop offset="100%" stop-color="#09070f" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#backstage)" />
+  <rect y="630" width="1600" height="270" fill="#120d10" />
+  <path d="M180 140h210l40 520H150Z" fill="#3a1826" />
+  <path d="M1420 140h-210l-40 520h280Z" fill="#3a1826" />
+  <rect x="530" y="110" width="540" height="420" rx="22" fill="#24161e" stroke="#8a6c4a" stroke-width="8" />
+  <circle cx="800" cy="320" r="120" fill="#f6c874" opacity="0.22" />
+  <path d="M640 560h320l70 120H570Z" fill="#28151d" stroke="#a67c24" stroke-width="5" />
+  <g stroke="#7d1736" stroke-width="18" opacity="0.8">
+    <path d="M250 120v520" />
+    <path d="M1350 120v520" />
+    <path d="M520 150l-95 150" />
+    <path d="M1080 150l95 150" />
+  </g>
+  <text x="800" y="760" fill="#f6ecd4" font-family="Georgia, serif" font-size="44" text-anchor="middle">Backstage Crossroads</text>
+</svg>
