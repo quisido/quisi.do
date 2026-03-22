@@ -5,7 +5,7 @@ import mapR2BucketValueToBytes from './map-r2-bucket-value-to-bytes.js';
 describe('mapR2BucketValueToBytes', (): void => {
   it('should throw for ReadableStreams', (): void => {
     const stream = new ReadableStream();
-    expect((): number => mapR2BucketValueToBytes(stream)).toThrowError();
+    expect((): number => mapR2BucketValueToBytes(stream)).toThrow();
   });
 
   it('should support other value types', (): void => {

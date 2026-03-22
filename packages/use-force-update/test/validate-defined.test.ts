@@ -5,6 +5,6 @@ describe('validateDefined', (): void => {
   it('should throw when undefined', (): void => {
     expect((): void => {
       validateDefined(undefined);
-    }).toThrowError();
+    }).toThrow();
   });
 });

@@ -5,7 +5,7 @@ import mapKVNamespaceValueToBytes from './map-kv-namespace-value-to-bytes.js';
 describe('mapKVNamespaceValueToBytes', (): void => {
   it('should throw for ReadableStreams', (): void => {
     const stream = new ReadableStream();
-    expect((): number => mapKVNamespaceValueToBytes(stream)).toThrowError();
+    expect((): number => mapKVNamespaceValueToBytes(stream)).toThrow();
   });
 
   it('should support other value types', (): void => {
