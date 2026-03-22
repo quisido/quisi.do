@@ -20,7 +20,6 @@ interface ImportMetaEnv {
   readonly MIXPANEL_TOKEN?: string | undefined;
   readonly NEW_RELIC_LICENSE_KEY?: string | undefined;
   readonly NODE_ENV?: NodeJS.ProcessEnv['NODE_ENV'];
-  readonly NYC_REPORT_DIR?: string | undefined;
   readonly PATREON_OAUTH_CLIENT_ID?: string | undefined;
   readonly PATREON_OAUTH_REDIRECT_URI?: string | undefined;
   readonly POSTHOG_HOST?: string | undefined;

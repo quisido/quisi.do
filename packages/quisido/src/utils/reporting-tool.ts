@@ -75,7 +75,7 @@ export default class ReportingTool<
           break;
 
         case 'skipped':
-          this.logInfo(`⏭️ Skipped: ${result.message}`);
+          this.logInfo(`⏭️  Skipped: ${result.message}`);
           break;
 
         case 'success':

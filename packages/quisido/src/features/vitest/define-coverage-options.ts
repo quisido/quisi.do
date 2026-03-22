@@ -18,19 +18,19 @@ export default function defineCoverageOptions({
     reportOnFailure: true,
     // THE ERROR IS HERE
     // It is trying to copy this directory for some reason, causing it to fail.
-    reportsDirectory: join('.tests', 'vitest'),
+    reportsDirectory: join('.tests', 'vitest-coverage'),
     skipFull: true,
     thresholds: defineThresholds(thresholds),
     ...coverageOptions,
 
     provider: 'istanbul',
     reporter: [
-      ['clover', { file: join('coverage', 'clover.xml') }],
-      ['cobertura', { file: join('coverage', 'cobertura.xml') }],
-      ['json', { file: join('coverage', 'coverage.json') }],
-      ['json-summary', { file: join('coverage', 'coverage-summary.json') }],
-      ['lcov', { file: join('coverage', 'lcov.info') }],
-      ['lcovonly', { file: join('coverage', 'lcov-only.info') }],
+      ['clover', { file: 'clover.xml' }],
+      ['cobertura', { file: 'cobertura.xml' }],
+      ['json', { file: 'coverage.json' }],
+      ['json-summary', { file: 'coverage-summary.json' }],
+      ['lcov', { file: 'lcov.info' }],
+      ['lcovonly', { file: 'lcov-only.info' }],
       ['html', { skipEmpty: true, verbose: false }],
       [
         'html-spa',
@@ -40,17 +40,17 @@ export default function defineCoverageOptions({
           verbose: false,
         },
       ],
-      ['teamcity', { file: join('coverage', 'teamcity.txt') }],
+      ['teamcity', { file: 'teamcity.txt' }],
       [
         'text',
         {
-          file: join('coverage', 'text.txt'),
+          file: 'text.txt',
           maxCols: 80,
           skipEmpty: true,
           skipFull: true,
         },
       ],
-      ['text-summary', { file: join('coverage', 'text-summary.txt') }],
+      ['text-summary', { file: 'text-summary.txt' }],
     ],
   };
 }

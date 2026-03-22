@@ -1,7 +1,7 @@
 import isSpawnSyncReturns from './is-spawn-sync-returns.js';
 import mapSpawnSyncReturnsToErrorMessage from './map-spawn-sync-returns-to-error-message.js';
 
-export default function handleNpmExecWorkspaceError(
+export default function handleNpmExecError(
   err: unknown,
   script: readonly string[],
 ): never {
@@ -31,7 +31,7 @@ export default function handleNpmExecWorkspaceError(
   }
 
   globalThis.console.info(
-    `NPM workspace command "${script.join(' ')}" failed with an unknown error.`,
+    `NPM command "${script.join(' ')}" failed with an unknown error.`,
   );
   throw new Error(JSON.stringify(err));
 }

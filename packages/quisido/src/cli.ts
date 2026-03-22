@@ -91,8 +91,7 @@ for (const settledReport of settledReports) {
       const { value: report } = settledReport;
       switch (report.status) {
         case 'failure': {
-          // eslint-disable-next-line no-await-in-loop
-          await logFailureReport(report);
+          logFailureReport(report);
           process.exitCode = 1;
           break;
         }

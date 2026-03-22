@@ -41,10 +41,6 @@
       "path": "packages/cloudflare-utils"
     },
     {
-      "name": "📦 cjs-ts",
-      "path": "packages/cjs-ts"
-    },
-    {
       "name": "📦 csp-shared",
       "path": "packages/csp-shared"
     },

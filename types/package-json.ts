@@ -1,6 +1,7 @@
 export default interface PackageJson {
-  readonly dependencies?: Record<string, string>;
-  readonly devDependencies?: Record<string, string>;
+  readonly bin?: Partial<Record<string, string>> | string;
+  readonly dependencies?: Partial<Record<string, string>>;
+  readonly devDependencies?: Partial<Record<string, string>>;
   readonly funding?: unknown;
   readonly name: string;
   readonly overrides?: Record<string, Record<string, string> | string>;

@@ -1,21 +1,29 @@
 # Instructions for agents
 
-`quisi.do` is a front-end engineering playground for technologically-complex,
-boundary-pushing, browser-oriented applications and the open-source libraries
-that power them.
+`quisi.do` is a front-end engineering playground for boundary-pushing,
+browser-oriented applications and the open-source libraries that power them.
 
 As a monorepo, it hosts a few applications (e.g. a not-for-profit
 software-as-a-service and a browser-based game engine), the Cloudflare Worker
-services that power those applications, and the NPM package libraries that power
-both.
+services behind those applications, and NPM package libraries that power both.
 
-By keeping these technologies on the bleeding edge, it serves as an educational
-and reusable tool both during development and as an open-source publication.
+By keeping these technologies bleeding-edge, it serves as an educational and
+reusable tool both during development and as an open-source publication.
+
+## Instruction files
+
+Follow all instructions in `.github/instructions/**/*.instructions.md` files.
+Use the files' _front matter_ to determine if the instructions apply to your
+current task.
+
+For example:
+- When coding, ignore instructions that include `excludeAgent: "coding-agent"`.
+- When editing/reviewing a `.go` file, ignore instructions that do not apply to
+  that file, e.g. `applyTo: "**/*.tsx"`.
 
 ## Architecture
 
-`quisi.do` is a monorepo using NPM workspaces. It is composed of three types of
-packages:
+`quisi.do` uses NPM workspaces to compose three types of packages:
 
 - **Applications** are bundled into static assets (HTML, JS, etc.) and deployed
   with aggressive caching. These serve as the primary entry point for users to

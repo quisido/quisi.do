@@ -3,6 +3,10 @@ import { type Dirent } from 'node:fs';
 import getWorkspaceDirectories from './utils/get-workspace-directories.js';
 import mapDirentToPackageJson from './utils/map-dirent-to-package-json.js';
 import npmExecWorkspace from './utils/npm-exec-workspace.js';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import type PackageJson from '../types/package-json.js';
+import npmExec from './utils/npm-exec.js';
 
 const EMPTY = 0;
 const EMPTY_SET: ReadonlySet<never> = new Set();
@@ -90,6 +94,19 @@ while (WORKSPACE_TOPOLOGICAL_DEPENDENCIES.size > EMPTY) {
 
     // eslint-disable-next-line no-await-in-loop
     await npmExecWorkspace(workspaceDirectory, 'run', 'build');
+
+    // Symlink bin scripts.
+    const { bin } = JSON.parse(
+      // eslint-disable-next-line no-await-in-loop
+      await readFile(
+        join(process.cwd(), 'packages', workspaceDirectory, 'package.json'),
+        'utf-8',
+      ),
+    ) as PackageJson;
+    if (bin !== undefined) {
+      // eslint-disable-next-line no-await-in-loop
+      await npmExec('install');
+    }
     WORKSPACE_TOPOLOGICAL_DEPENDENCIES.delete(workspaceDirectory);
     deleteTopologicalDependency(workspaceDirectory);
   }

@@ -6,7 +6,7 @@ import npx from '../npx/npx.js';
 export const vitest: ReportingTool = new ReportingTool(
   'vitest',
   async (): Promise<ReportingToolResult> => {
-    const { exitCode, stdout } = await npx('vitest', 'run');
+    const { exitCode, stderr } = await npx('vitest', 'run');
     if (exitCode === 0) {
       return {
         status: 'success',
@@ -15,7 +15,7 @@ export const vitest: ReportingTool = new ReportingTool(
 
     return {
       context: 'Vitest threw an error while testing this package.',
-      message: stdout,
+      message: stderr,
       status: 'failure',
     };
   },
