@@ -44,7 +44,7 @@
     "quisido": "^0.0.2",
     "rimraf": "^6.1.0",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.7",
+    "vitest": "^4.1.0",
     "wrangler": "^4.59.1"
   }
 }

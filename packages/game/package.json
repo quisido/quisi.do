@@ -75,7 +75,7 @@
     "rimraf": "^6.1.0",
     "serve": "^14.2.5",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.7",
+    "vitest": "^4.1.0",
     "wait-on": "^9.0.1"
   },
   "overrides": {

@@ -1,4 +1,3 @@
-import basicSsl from '@vitejs/plugin-basic-ssl';
 import { VitePWA as vitePWA } from 'vite-plugin-pwa';
 import {
   type ConfigEnv,
@@ -36,7 +35,7 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
     sourcemap: 'both',
     sourceRoot: './src/',
   },
-  plugins: [basicSsl()],
+  plugins: [],
   server: {
     headers: {
       'document-policy': 'js-profiling',

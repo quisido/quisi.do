@@ -9,12 +9,12 @@
       "path": "packages/vite"
     },
     {
-      "name": "📱 Untitled Game",
-      "path": "packages/game"
-    },
-    {
       "name": "📱 Behind the Velvet Curtain",
       "path": "packages/behind-the-velvet-curtain"
+    },
+    {
+      "name": "📱 Untitled Game",
+      "path": "packages/game"
     },
     {
       "name": "⚙️ AI",
