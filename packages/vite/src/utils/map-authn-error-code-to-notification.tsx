@@ -335,11 +335,7 @@ export default function mapAuthnErrorCodeToNotification(
 
         Message(): ReactElement {
           return (
-            <I18n
-              csrf={
-                <CsrfLink feature="authn-error-code/messing-session-id-cookie" />
-              }
-            >
+            <I18n csrf={<CsrfLink />}>
               Ensure cookies are enabled. To prevent $csrf, authentication
               requires visiting this website first.
             </I18n>
@@ -355,11 +351,7 @@ export default function mapAuthnErrorCodeToNotification(
 
         Message(): ReactElement {
           return (
-            <I18n
-              csrf={
-                <CsrfLink feature="authn-error-code/missing-state-session-id" />
-              }
-            >
+            <I18n csrf={<CsrfLink />}>
               To prevent $csrf, authentication must originate from this website.
             </I18n>
           );
@@ -374,9 +366,7 @@ export default function mapAuthnErrorCodeToNotification(
 
         Message(): ReactElement {
           return (
-            <I18n
-              csrf={<CsrfLink feature="authn-error-code/non-object-state" />}
-            >
+            <I18n csrf={<CsrfLink />}>
               To prevent $csrf, authentication must originate from this website.
             </I18n>
           );

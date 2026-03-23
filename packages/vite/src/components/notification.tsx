@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
-import Banner from '../modules/quisi/banner.js';
-import type NotificationType from '../types/notification.js';
+import AlertDialog from '../design-systems/template/alert-dialog.jsx';
+import type { NotificationProps } from '../contexts/notifications.js';
 
 export default function Notification({
   Header,
@@ -8,13 +8,24 @@ export default function Notification({
   Message,
   onDismiss,
   type,
-}: NotificationType): ReactElement {
+}: NotificationProps): ReactElement {
+  const labelProps = (() => {
+    if (Header === undefined) {
+      return {
+        label: 'Notification',
+      };
+    }
+
+    return {
+      heading: <Header />,
+    };
+  })();
+
   return (
-    <Banner icon={icon} onDismiss={onDismiss} type={type}>
-      {typeof Header !== 'undefined' && <Header />}
+    <AlertDialog {...labelProps} icon={icon} onDismiss={onDismiss} type={type}>
       <span style={{ fontSize: '0.8em' }}>
         <Message />
       </span>
-    </Banner>
+    </AlertDialog>
   );
 }

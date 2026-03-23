@@ -3,8 +3,6 @@ import { type Attributes, type ReactElement, useEffect, useState } from 'react';
 import Emoji from '../../components/emoji.jsx';
 import useEffectEvent from '../../hooks/use-effect-event.js';
 import useEmit from '../../hooks/use-emit/index.js';
-import LoadingIcon from '../../modules/quisi/loading-icon.jsx';
-import Section from '../../modules/quisi/section.jsx';
 import useAsyncState from '../../modules/use-async-state/index.js';
 import type ReportBody from '../../types/content-security-policy-report-body.js';
 import mapPropsToElement from '../../utils/map-props-to-element.jsx';
@@ -15,6 +13,8 @@ import ContentSecurityPolicyListItem, {
 } from './content-security-policy-list-item.jsx';
 import styles from './content-security-policy.module.scss';
 import mapReportBodiesToContentSecurityPolicyGroups from './map-report-bodies-to-content-security-policy-groups.js';
+import { Region } from '../../design-systems/template/index.js';
+import LoadingIcon from '../../components/loading-icon.jsx';
 
 interface ErrorResponse {
   readonly code: GetErrorCode;
@@ -64,46 +64,46 @@ export default function ContentSecurityPolicy(): ReactElement {
 
   if (!initiated || loading) {
     return (
-      <Section header="Content Security Policy">
+      <Region heading="Content Security Policy">
         <LoadingIcon /> Loading
-      </Section>
+      </Region>
     );
   }
 
   if (typeof error !== 'undefined') {
-    return <Section header="Content Security Policy">{error}</Section>;
+    return <Region heading="Content Security Policy">{error}</Region>;
   }
 
   if (isErrorResponse(data)) {
     switch (data.code) {
       case GetErrorCode.InvalidDatabaseProjectRow:
         return (
-          <Section header="Content Security Policy">
+          <Region heading="Content Security Policy">
             Invalid database project row
-          </Section>
+          </Region>
         );
 
       case GetErrorCode.InvalidKey:
-        return <Section header="Content Security Policy">Invalid key</Section>;
+        return <Region heading="Content Security Policy">Invalid key</Region>;
 
       case GetErrorCode.MissingKey:
-        return <Section header="Content Security Policy">Missing key</Section>;
+        return <Region heading="Content Security Policy">Missing key</Region>;
 
       default:
         return (
-          <Section header="Content Security Policy">
+          <Region heading="Content Security Policy">
             Unknown error code: {data.code}
-          </Section>
+          </Region>
         );
     }
   }
 
   if (data.length === NONE) {
     return (
-      <Section header="Content Security Policy">
+      <Region heading="Content Security Policy">
         There are no reports of Content Security Policy violations.{' '}
         <Emoji>🎉</Emoji>
-      </Section>
+      </Region>
     );
   }
 
@@ -152,10 +152,10 @@ export default function ContentSecurityPolicy(): ReactElement {
   const props: readonly (Required<Attributes> &
     ContentSecurityPolicyListItemProps)[] = groups.map(mapGroupToProps);
   return (
-    <Section header="quisi.do's Content Security Policy">
+    <Region heading="quisi.do's Content Security Policy">
       <ul className={LIST_CLASS_NAME} data-nosnippet>
         {props.map(mapContentSecurityPolicyListItemPropsToElement)}
       </ul>
-    </Section>
+    </Region>
   );
 }

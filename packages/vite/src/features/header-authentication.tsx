@@ -1,8 +1,8 @@
 import { type ReactElement, useEffect, useState } from 'react';
 import { useAuthentication } from '../contexts/authentication.js';
-import LoadingIcon from '../modules/quisi/loading-icon.js';
 import AuthenticateLink from './header-authenticate-link.js';
 import HeaderAuthenticationUserId from './header-authentication-user-id.js';
+import LoadingIcon from '../components/loading-icon.jsx';
 
 interface State {
   readonly id: number | null;

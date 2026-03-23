@@ -3,8 +3,14 @@ import createContextUtils from '../modules/create-context-utils/index.js';
 import type Notification from '../types/notification.js';
 import { type WithKey } from '../types/with-key.js';
 
+interface BaseNotificationProps {
+  readonly onDismiss: VoidFunction;
+}
+
+export type NotificationProps = BaseNotificationProps & Notification;
+
 type Notifications = readonly [
-  readonly (Promise<WithKey<Notification>> | WithKey<Notification>)[],
+  readonly (Promise<WithKey<NotificationProps>> | WithKey<NotificationProps>)[],
   (notification: Notification) => VoidFunction,
 ];
 

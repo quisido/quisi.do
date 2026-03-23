@@ -4,7 +4,6 @@ interface BaseNotification {
   readonly Header?: ComponentType | undefined;
   readonly icon?: string | undefined;
   readonly Message: ComponentType;
-  readonly onDismiss?: VoidFunction | undefined;
   readonly type: 'error' | 'info' | 'success' | 'warning';
 }
 

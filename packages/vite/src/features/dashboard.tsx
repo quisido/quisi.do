@@ -1,19 +1,20 @@
 import { sortStrings } from 'fmrs';
 import I18n from 'lazy-i18n';
 import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
-import Gauge from '../components/gauge.jsx';
 import NumberFormat from '../components/number-format.jsx';
 import { MILLISECONDS_PER_SECOND } from '../constants/time.js';
 import useWindow from '../hooks/use-window.js';
-import LineChart from '../modules/quisi/line-chart.jsx';
-import Link from '../modules/quisi/link.jsx';
-import Paragraph from '../modules/quisi/paragraph.jsx';
-import Section from '../modules/quisi/section.jsx';
 import useAsyncState from '../modules/use-async-state/index.js';
 import type DashboardApiResponse from '../types/dashboard-api-response.js';
 import isDashboardApiResponse from '../utils/is-dashboard-api-response.js';
 import validateString from '../utils/validate-string.js';
 import styles from './dashboard.module.scss';
+import {
+  Link,
+  Paragraph,
+  Region,
+  Strong,
+} from '../design-systems/template/index.js';
 
 interface IGauge {
   readonly max?: number | undefined;
@@ -94,7 +95,7 @@ const sortGauges = (
 };
 
 const DashboardWrapper = ({ children }: PropsWithChildren): ReactElement => {
-  return <Section header={<I18n>Dashboard</I18n>}>{children}</Section>;
+  return <Region heading={<I18n>Dashboard</I18n>}>{children}</Region>;
 };
 
 export default function Dashboard(): ReactElement {
@@ -130,11 +131,7 @@ export default function Dashboard(): ReactElement {
       return (
         <DashboardWrapper>
           To view the dashboard in development,{' '}
-          <Link
-            feature="content-security-policy"
-            href={DASHBOARD_ENDPOINT}
-            title=""
-          >
+          <Link href={DASHBOARD_ENDPOINT} title="">
             trust the security certificate.
           </Link>
         </DashboardWrapper>
@@ -144,7 +141,7 @@ export default function Dashboard(): ReactElement {
     return (
       <DashboardWrapper>
         <Paragraph>
-          <strong>An error occurred:</strong> {error}
+          <Strong>An error occurred:</Strong> {error}
         </Paragraph>
       </DashboardWrapper>
     );
@@ -154,7 +151,8 @@ export default function Dashboard(): ReactElement {
     cls: [, cls],
     dcl: [dcl],
     domComplete: [domComplete],
-    errorCounts,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    errorCounts: _errorCounts,
     fcp: [, fcp],
     fip: [, fip],
     inp: [, inp],
@@ -244,7 +242,7 @@ export default function Dashboard(): ReactElement {
     <DashboardWrapper>
       <ul className={LIST_CLASS_NAME}>
         <li style={{ gridColumnEnd: 'span 2' }}>
-          <LineChart
+          {/* <LineChart
             title="Error counts"
             xLabels={['3 weeks ago', '2 weeks ago', 'Last week', 'This week']}
             data={{
@@ -252,25 +250,25 @@ export default function Dashboard(): ReactElement {
               P75: errorCounts.P75,
               P90: errorCounts.P90,
             }}
-          />
+          /> */}
         </li>
         {gauges.toSorted(sortGauges).map(
           ({
-            max,
+            // max,
             name,
-            severe,
+            // severe,
             units,
             value,
-            warning,
+            // warning,
           }: IGauge): ReactElement => (
             <li key={name}>
               <Paragraph>{name}:</Paragraph>
-              <Gauge
+              {/* <Gauge
                 max={max}
                 severe={severe}
                 value={value}
                 warning={warning}
-              />
+              /> */}
               <Paragraph>
                 <NumberFormat>{value}</NumberFormat>
                 {units}
