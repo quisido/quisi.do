@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
+    "generateCpuProfile": ".cache/tsconfig.build.cpuprofile",
     "module": "NodeNext",
     "moduleResolution": "nodenext",
     "noEmit": false,
     "outDir": "dist",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
   "exclude": [],
   "extends": "./tsconfig.json",

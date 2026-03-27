@@ -8,7 +8,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "npm run tsc:build && node ./dist/scripts/build.js",
+    "build": "npm run tsc:version && npm run tsc:build && node ./dist/scripts/build.js",
     "start": "npm run tsc:build && node ./dist/scripts/start.js",
     "test": "quisido test && npm run test:workspaces",
     "authn": "npm start --workspace=packages/authn",
@@ -30,6 +30,7 @@
     "react-datadog": "npm start --workspace=packages/react-datadog",
     "test:workspaces": "node ./dist/scripts/test.js",
     "tsc:build": "tsc --project tsconfig.build.json",
+    "tsc:version": "tsc --version",
     "update": "node ./dist/scripts/update.js",
     "vite": "npm start --workspace=packages/vite",
     "vitest": "vitest run",
