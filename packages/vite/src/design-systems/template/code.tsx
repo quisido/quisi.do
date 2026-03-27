@@ -2,11 +2,15 @@ import type { ReactElement, ReactNode } from 'react';
 
 export interface CodeProps {
   readonly children: ReactNode;
+  readonly describedBy?: string | undefined;
 }
 
 /**
  * A section representing a fragment of computer code.
  */
-export default function Code({ children }: CodeProps): ReactElement {
-  return <code>{children}</code>;
+export default function Code({
+  children,
+  describedBy,
+}: CodeProps): ReactElement {
+  return <code aria-describedby={describedBy}>{children}</code>;
 }

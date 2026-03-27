@@ -3,7 +3,7 @@ import useElementId from '../../hooks/use-element-id.js';
 import Heading from './heading.js';
 
 interface BaseAlertProps {
-  readonly children: ReactElement;
+  readonly children: ReactNode;
   readonly heading?: ReactNode | undefined;
   readonly icon?: string | undefined;
   readonly type: 'error' | 'info' | 'success' | 'warning';
@@ -92,7 +92,11 @@ export default function Alert({
     <div aria-label={label} aria-labelledby={labelledBy} role="alert">
       {icon && <span>{icon}</span>}
       <div>
-        {heading !== undefined && <Heading level={2}>{heading}</Heading>}
+        {heading !== undefined && (
+          <Heading id={headingId} level={2}>
+            {heading}
+          </Heading>
+        )}
         <div id={descriptionId}>{children}</div>
       </div>
     </div>

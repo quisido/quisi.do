@@ -10,5 +10,5 @@ export interface AssociationListItemValueProps {
 export default function AssociationListItemValue({
   children,
 }: AssociationListItemValueProps): ReactElement {
-  return <dd>{children}</dd>;
+  return <dd role="associationlistitemvalue">{children}</dd>;
 }

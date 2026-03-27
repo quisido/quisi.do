@@ -10,5 +10,5 @@ export interface AssociationListItemKeyProps {
 export default function AssociationListItemKey({
   children,
 }: AssociationListItemKeyProps): ReactElement {
-  return <dt>{children}</dt>;
+  return <dt role="associationlistitemkey">{children}</dt>;
 }

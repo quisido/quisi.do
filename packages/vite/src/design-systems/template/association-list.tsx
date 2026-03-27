@@ -11,5 +11,5 @@ export interface AssociationListProps {
 export default function AssociationList({
   children,
 }: AssociationListProps): ReactElement {
-  return <dl>{children}</dl>;
+  return <dl role="associationlist">{children}</dl>;
 }

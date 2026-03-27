@@ -8,7 +8,7 @@ describe('Heading', (): void => {
     'should support level %i',
     (level: number): void => {
       const { getByRole } = render(<Heading level={level}>Test</Heading>);
-      getByRole(`heading`, { level, name: 'Test' });
+      getByRole('heading', { level, name: 'Test' });
     },
   );
 });

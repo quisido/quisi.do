@@ -2,6 +2,7 @@ import type { ReactElement, ReactNode } from 'react';
 
 export interface SuperscriptProps {
   readonly children: ReactNode;
+  readonly describedBy?: string | undefined;
 }
 
 /**
@@ -10,6 +11,7 @@ export interface SuperscriptProps {
  */
 export default function Superscript({
   children,
+  describedBy,
 }: SuperscriptProps): ReactElement {
-  return <sup>{children}</sup>;
+  return <sup aria-describedby={describedBy}>{children}</sup>;
 }

@@ -28,3 +28,16 @@ export {
   type AlertDialogProps,
 } from './alert-dialog.js';
 export { default as Alert, type AlertProps } from './alert.js';
+export { default as Tooltip, type TooltipProps } from './tooltip.js';
+export { default as Toolbar, type ToolbarProps } from './toolbar.js';
+export { default as Time, type TimeProps } from './time.js';
+export { default as Term, type TermProps } from './term.js';
+export {
+  default as Superscript,
+  type SuperscriptProps,
+} from './superscript.js';
+export { default as Subscript, type SubscriptProps } from './subscript.js';
+export { default as Mark, type MarkProps } from './mark.js';
+export { default as Insertion, type InsertionProps } from './insertion.js';
+export { default as Deletion, type DeletionProps } from './deletion.js';
+export { default as Image, type ImageProps } from './image.js';
