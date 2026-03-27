@@ -1,6 +1,7 @@
 import type { ReactElement, ReactNode } from 'react';
 import Heading from './heading.js';
 import useElementId from '../../hooks/use-element-id.js';
+import useAlertDialog from './use-alert-dialog.js';
 
 interface BaseAlertDialogProps {
   readonly children: ReactNode;
@@ -33,19 +34,18 @@ export type AlertDialogProps =
   | LabelledByAlertDialogProps;
 
 /**
- *   The `AlertDialog` component is a modal alert dialog that notifies users of
- * urgent information that demands their immediate attention by interrupting
- * their workflow and requiring a response.
- *   For example:
- * - error messages that require confirmation
- * - action confirmation prompts
- *   As the name implies, an alert dialog is a mashup of the `Alert` and
- * `Dialog` components. It is a type of dialog with similar use cases as an
- * alert, but for when a user response is required.
- *   An alert dialog must have at least one focusable control (e.g. Confirm,
- * Close, or Cancel) and focus must be moved to that control when the alert
- * dialog appears. Alert dialogs can have additional interactive controls such
- * as text fields and checkboxes.
+ *   An `AlertDialog` is a type of dialog that contains an alert message, where
+ * initial focus goes to an element within the dialog.
+ *   Alert dialogs are used to convey messages to alert the user. The
+ * `AlertDialog` component contains both the alert message and the rest of the
+ * dialog.
+ *   An alert dialog is a special type of dialog that is intended to cause an
+ * immediate, alert-level notification.
+ *   Unlike alerts, alert dialogs can receive a response from the user. For
+ * example, to confirm that the user understands the alert being generated. When
+ * the alert dialog is displayed, an active element within the alert dialog,
+ * such as a form control or confirmation button, should receive focus.
+ * @see https://w3c.github.io/aria/#alertdialog
  */
 export default function AlertDialog({
   children,
@@ -58,6 +58,8 @@ export default function AlertDialog({
 }: AlertDialogProps): ReactElement {
   const descriptionId: string = useElementId();
   const headingId: string = useElementId();
+
+  useAlertDialog();
 
   const icon = ((): ReactNode => {
     if (iconProp !== undefined) {
@@ -93,6 +95,7 @@ export default function AlertDialog({
       aria-describedby={descriptionId}
       aria-label={label}
       aria-labelledby={labelledBy}
+      aria-modal
       data-type={type}
       role="alertdialog"
     >
@@ -107,7 +110,6 @@ export default function AlertDialog({
       </div>
       <button
         aria-label="Dismiss"
-        autoFocus
         onClick={(): void => {
           onDismiss();
         }}

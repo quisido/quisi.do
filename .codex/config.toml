@@ -1,0 +1,21 @@
+sandbox_mode = "workspace-write"
+
+[features]
+js_repl = true
+multi_agent = true
+
+[mcp_servers.playwright]
+args = ["@playwright/mcp@latest"]
+command = "npx"
+
+[plugins."build-web-apps@openai-curated"]
+enabled = true
+
+[plugins."cloudflare@openai-curated"]
+enabled = true
+
+[plugins."sentry@openai-curated"]
+enabled = true
+
+[sandbox_workspace_write]
+network_access = true

@@ -3,9 +3,17 @@ import useElementId from '../../hooks/use-element-id.js';
 import Heading from './heading.js';
 
 interface BaseAlertProps {
+  /**
+   * @default true
+   */
+  readonly atomic?: boolean | undefined;
   readonly children: ReactNode;
   readonly heading?: ReactNode | undefined;
   readonly icon?: string | undefined;
+  /**
+   * @default 'assertive'
+   */
+  readonly live?: 'off' | 'assertive' | 'polite' | undefined;
   readonly type: 'error' | 'info' | 'success' | 'warning';
 }
 
@@ -33,27 +41,30 @@ export type AlertProps =
   | LabelledByAlertProps;
 
 /**
- *   The `Alert` component communicates important, and usually time-sensitive,
- * information. It is a type of status processed as an atomic live region.
- *   An alert should only be used for information that requires the user's
- * immediate attention. For example:
- * - An invalid value was entered into a form field.
- * - The user's login session is about to expire.
- * - The connection to the server was lost so local changes will not be saved.
- *   An alert should only be used for text content, not interactive elements
- * such as links or buttons. The element with the alert role does not have to be
- * able to receive focus, as screen readers (speech or braille) will
- * automatically announce the updated content regardless of where keyboard is
- * focused.
- *  If the user is expected to close the alert, then the `AlertDialog` component
- * should be used instead.
+ *   An `Alert` component is a live region with important, and usually
+ * time-sensitive, information.
+ *   Alerts are used to convey messages that will be immediately important to
+ * users. In the case of audio warnings, visibly displayed alerts provide an
+ * accessible alternative to audible alerts for Deaf or hard-of-hearing users.
+ * Likewise, alerts can provide an accessible alternative to the visible alerts
+ * for blind, deaf-blind, or low-vision users, and others with certain
+ * developmental disabilities. The `Alert` component contains the alert message.
+ *   An alert is a special type of assertive live region that is intended to
+ * cause immediate notification for users.
+ *   You are not required to set or manage focus to an alert. Therefore, you
+ * also should not require users to close alerts.
+ *   If focus should be moved to an alert when it is conveyed, use an
+ * `AlertDialog` component instead.
+ * @see https://w3c.github.io/aria/#alert
  */
 export default function Alert({
+  atomic = true,
   children,
   heading,
   icon: iconProp,
   label,
   labelledBy: labelledByProp,
+  live = 'assertive',
   type,
 }: AlertProps): ReactElement {
   const descriptionId: string = useElementId();
@@ -89,7 +100,13 @@ export default function Alert({
   })();
 
   return (
-    <div aria-label={label} aria-labelledby={labelledBy} role="alert">
+    <div
+      aria-atomic={atomic}
+      aria-label={label}
+      aria-labelledby={labelledBy}
+      aria-live={live}
+      role="alert"
+    >
       {icon && <span>{icon}</span>}
       <div>
         {heading !== undefined && (

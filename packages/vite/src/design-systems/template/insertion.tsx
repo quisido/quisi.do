@@ -6,8 +6,12 @@ export interface InsertionProps {
 }
 
 /**
- *   Content that is marked as added or content that is being suggested for
- * addition.
+ *   An insertion contains content that is marked as added or content that is
+ * being suggested for addition.
+ *   Insertions are typically used to either mark differences between two
+ * versions of content or to designate content suggested for addition in
+ * scenarios where multiple people are revising content.
+ * @see https://w3c.github.io/aria/#insertion
  */
 export default function Insertion({
   children,

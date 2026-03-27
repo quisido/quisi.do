@@ -77,8 +77,24 @@ describe('AlertDialog', (): void => {
     });
   });
 
-  /**
-   * Keyboard focus must be managed correctly
-   * The alertdialog must have an accessible name, defined with aria-labelledby or aria-label. The alert dialog text must have an accessible description using .
-   */
+  it('should be modal', async (): Promise<void> => {
+    const { getByRole } = render(
+      <>
+        <button>First button</button>
+        <AlertDialog label="Test modal label" onDismiss={handleTestDismiss}>
+          <button autoFocus>Second button</button>
+        </AlertDialog>
+        ,<button>Third button</button>
+      </>,
+    );
+
+    const secondButton: HTMLElement = getByRole('button', {
+      name: 'Second button',
+    });
+    expect(window.document.activeElement).toBe(secondButton);
+    await USER.tab();
+    expect(window.document.activeElement).toBe(secondButton);
+    await USER.tab();
+    expect(window.document.activeElement).toBe(secondButton);
+  });
 });
