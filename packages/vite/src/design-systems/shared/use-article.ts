@@ -5,8 +5,8 @@ import useHeadingLevel from './use-heading-level.js';
 
 export interface ArticleState {
   readonly headingId: string;
+  readonly headingLevel: number;
   readonly labelledBy: string | undefined;
-  readonly level: number;
 }
 
 interface Props {
@@ -24,7 +24,7 @@ export default function useArticle({
 
   return {
     headingId,
+    headingLevel: useHeadingLevel(),
     labelledBy: useHeadingOrLabel({ heading, headingId, label, labelledBy }),
-    level: useHeadingLevel(),
   };
 }

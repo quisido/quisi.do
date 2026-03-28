@@ -1,7 +1,55 @@
 import type { ReactElement } from 'react';
-import type { FeedArticle, FeedProps } from '../shared/feed-props.js';
+import type { FeedProps } from '../shared/feed-props.js';
 import useFeed from '../shared/use-feed.js';
-import Article from './article.jsx';
+import type { FeedArticle } from '../shared/feed-article.js';
+import useHeadingOrLabel from '../shared/use-heading-or-label.js';
+import useId from '../shared/use-id.js';
+import Heading from './heading.jsx';
+import HeadingLevelProvider from '../shared/heading-level-provider.jsx';
+import useHeadingLevel from '../shared/use-heading-level.js';
+
+interface FeedArticleProps {
+  readonly onFocus: VoidFunction;
+  readonly positionInSet: number;
+  readonly setSize?: number | undefined;
+}
+
+const FeedArticleComponent = ({
+  children,
+  heading,
+  label,
+  labelledBy: labelledByProp,
+  onFocus,
+  positionInSet,
+  setSize,
+}: FeedArticle & FeedArticleProps): ReactElement => {
+  const headingId: string = useId();
+  const headingLevel: number = useHeadingLevel();
+  const labelledBy: string | undefined = useHeadingOrLabel({
+    heading,
+    headingId,
+    label,
+    labelledBy: labelledByProp,
+  });
+
+  return (
+    <article
+      aria-label={label}
+      aria-labelledby={labelledBy}
+      aria-posinset={positionInSet}
+      aria-setsize={setSize}
+      onFocus={onFocus}
+      tabIndex={0}
+    >
+      <Heading id={headingId} level={headingLevel}>
+        {heading}
+      </Heading>
+      <HeadingLevelProvider increment={heading !== undefined}>
+        {children}
+      </HeadingLevelProvider>
+    </article>
+  );
+};
 
 /**
  *   A `Feed` component is a scrollable list of `Article` components where
@@ -22,15 +70,14 @@ import Article from './article.jsx';
  * as widgets for sharing and commenting. As a reads and interacts with each
  * story and moves the reading cursor from story to story, each story scrolls
  * into view and, as needed, new stories are loaded.
- *   A feed is a container element whose children have role article.
- * 
- *   Authors SHOULD avoid inserting or removing articles in the middle of a feed. These requirements help assistive technologies gracefully respond to changes in the feed content that occur simultaneously with user commands to move the reading cursor within the feed.
+ *   A feed is a container element whose children are articles.
+ *   Avoid inserting or removing articles in the middle of a feed. These
+ * requirements help assistive technologies gracefully respond to changes in the
+ * feed content that occur simultaneously with user commands to move the reading
+ * cursor within the feed.
+ *   
 
-Authors SHOULD make each article in a feed focusable and ensure that the application scrolls an article into view when user agent focus is set on the article or one of its descendant elements. For example, in HTML, each article element should have a tabindex value of either -1 or 0.
 
-When an assistive technology reading cursor moves from one article to another, assistive technologies SHOULD set user agent focus on the article that contains the reading cursor. If the reading cursor lands on a focusable element inside the article, the assistive technology MAY set focus on that element in lieu of setting focus on the containing article.
-
-Because the ability to scroll to another article with an assistive technology reading cursor depends on the presence of another article in the page, authors SHOULD attempt to load additional articles before user agent focus reaches an article at either end of the set of articles that has been loaded. Alternatively, authors MAY include an article at either or both ends of the loaded set of articles that includes an element, such as a button, that lets the user request more articles to be loaded.
 
 In addition to providing a brief label, authors MAY apply aria-describedby to article elements in a feed to suggest to screen readers which elements to speak after the label when users navigate by article. Screen readers MAY provide users with a way to quickly scan feed content by speaking both the label and accessible description when navigating by article, enabling the user to ignore repetitive or less important elements, such as embedded interaction widgets, that the author has left out of the description.
 
@@ -42,26 +89,66 @@ If the number of articles available in a feed supply is static, authors MAY spec
 export default function Feed({
   articles,
   articlesOffset = 0,
+  onAppend,
+  onPrepend,
   setSize,
 }: FeedProps): ReactElement {
-  const { busy } = useFeed();
+  const {
+    appending,
+    busy,
+    errorMessage,
+    errorMessageId,
+    handleAppend,
+    handlePrepend,
+    prepending,
+  } = useFeed({
+    onAppend,
+    onPrepend,
+  });
 
   return (
-    <section aria-busy={busy} role="feed">
+    <section aria-busy={busy} aria-errormessage={errorMessageId} role="feed">
+      {errorMessage !== undefined && (
+        <div id={errorMessageId}>{errorMessage}</div>
+      )}
+      {handlePrepend !== undefined && (
+        <div>
+          <button disabled={prepending} onClick={handlePrepend}>
+            Prepend articles
+          </button>
+        </div>
+      )}
       {articles.map(
-        (
-          { children, key, label }: FeedArticle,
-          index: number,
-        ): ReactElement => (
-          <Article
-            key={key}
-            label={label}
-            positionInSet={articlesOffset + index + 1}
-            setSize={setSize}
-          >
-            {children}
-          </Article>
-        ),
+        (articleProps: FeedArticle, index: number): ReactElement => {
+          const handleFocus = (): void => {
+            // At the second article, prepend more.
+            if (index <= 1 && handlePrepend) {
+              handlePrepend();
+            }
+
+            // At the second-to-last article, append more.
+            // eslint-disable-next-line no-magic-numbers
+            if (index >= articles.length - 2 && handleAppend) {
+              handleAppend();
+            }
+          };
+
+          return (
+            <FeedArticleComponent
+              {...articleProps}
+              onFocus={handleFocus}
+              positionInSet={articlesOffset + index + 1}
+              setSize={setSize}
+            />
+          );
+        },
+      )}
+      {handleAppend !== undefined && (
+        <div>
+          <button disabled={appending} onClick={handleAppend}>
+            Append articles
+          </button>
+        </div>
       )}
     </section>
   );

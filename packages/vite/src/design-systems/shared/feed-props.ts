@@ -1,10 +1,4 @@
-import type { ReactNode } from 'react';
-
-export interface FeedArticle {
-  readonly children: ReactNode;
-  readonly key: number | string;
-  readonly label: string;
-}
+import type { FeedArticle } from './feed-article.js';
 
 export interface FeedProps {
   readonly articles: readonly FeedArticle[];
@@ -14,5 +8,9 @@ export interface FeedProps {
    * @default 0
    */
   readonly articlesOffset?: number | undefined;
+  /** Callback when more articles need to be appended. */
+  readonly onAppend?: (() => Promise<void>) | undefined;
+  /** Callback when more articles need to be prepended. */
+  readonly onPrepend?: (() => Promise<void>) | undefined;
   readonly setSize?: number | undefined;
 }

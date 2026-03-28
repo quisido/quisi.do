@@ -22,26 +22,20 @@ export default function Region({
   label,
   labelledBy: labelledByProp,
 }: RegionProps): ReactElement {
-  const { headingId, labelledBy, level } = useRegion({
+  const { headingId, headingLevel, labelledBy } = useRegion({
     heading,
     label,
     labelledBy: labelledByProp,
   });
 
-  if (heading === undefined) {
-    return (
-      <section aria-label={label} aria-labelledby={labelledBy}>
-        {children}
-      </section>
-    );
-  }
-
   return (
     <section aria-label={label} aria-labelledby={labelledBy}>
-      <Heading id={headingId} level={level}>
+      <Heading id={headingId} level={headingLevel}>
         {heading}
       </Heading>
-      <HeadingLevelProvider>{children}</HeadingLevelProvider>
+      <HeadingLevelProvider increment={heading !== undefined}>
+        {children}
+      </HeadingLevelProvider>
     </section>
   );
 }

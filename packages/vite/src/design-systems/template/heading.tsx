@@ -9,7 +9,11 @@ export default function Heading({
   children,
   id,
   level,
-}: HeadingProps): ReactElement {
+}: HeadingProps): ReactElement | null {
+  if (children === undefined) {
+    return null;
+  }
+
   const Component = ((): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' => {
     switch (level) {
       case 1:

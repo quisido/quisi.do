@@ -11,8 +11,8 @@ interface Props {
 
 export interface RegionState {
   readonly headingId: string;
+  readonly headingLevel: number;
   readonly labelledBy: string | undefined;
-  readonly level: number;
 }
 
 export default function useRegion({
@@ -24,6 +24,7 @@ export default function useRegion({
 
   return {
     headingId,
+    headingLevel: useHeadingLevel(),
 
     labelledBy: useHeadingOrLabel({
       heading,
@@ -31,7 +32,5 @@ export default function useRegion({
       label,
       labelledBy: labelledByProp,
     }),
-
-    level: useHeadingLevel(),
   };
 }

@@ -30,39 +30,21 @@ export default function Article({
   heading,
   label,
   labelledBy: labelledByProp,
-  positionInSet,
-  setSize,
 }: ArticleProps): ReactElement {
-  const { headingId, labelledBy, level } = useArticle({
+  const { headingId, headingLevel, labelledBy } = useArticle({
     heading,
     label,
     labelledBy: labelledByProp,
   });
 
-  if (heading === undefined) {
-    return (
-      <article
-        aria-label={label}
-        aria-labelledby={labelledBy}
-        aria-posinset={positionInSet}
-        aria-setsize={setSize}
-      >
-        {children}
-      </article>
-    );
-  }
-
   return (
-    <article
-      aria-label={label}
-      aria-labelledby={labelledBy}
-      aria-posinset={positionInSet}
-      aria-setsize={setSize}
-    >
-      <Heading id={headingId} level={level}>
+    <article aria-label={label} aria-labelledby={labelledBy}>
+      <Heading id={headingId} level={headingLevel}>
         {heading}
       </Heading>
-      <HeadingLevelProvider>{children}</HeadingLevelProvider>
+      <HeadingLevelProvider increment={heading !== undefined}>
+        {children}
+      </HeadingLevelProvider>
     </article>
   );
 }
