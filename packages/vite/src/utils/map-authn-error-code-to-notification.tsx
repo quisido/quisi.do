@@ -1,10 +1,10 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import AlarmExistsMessage from '../components/alarm-exists-message.jsx';
-import CsrfLink from '../components/csrf-link.jsx';
-import MisconfiguredPatreonClientMessage from '../components/misconfigured-patreon-client-message.jsx';
-import UnknownErrorMessage from '../components/unknown-error-message.jsx';
+import AlarmExistsMessage from '../components/alarm-exists-message.js';
+import CsrfLink from '../components/csrf-link.js';
+import MisconfiguredPatreonClientMessage from '../components/misconfigured-patreon-client-message.js';
+import UnknownErrorMessage from '../components/unknown-error-message.js';
 import type Notification from '../types/notification.js';
 
 export default function mapAuthnErrorCodeToNotification(

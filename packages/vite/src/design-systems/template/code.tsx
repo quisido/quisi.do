@@ -6,7 +6,7 @@ export interface CodeProps {
 }
 
 /**
- * A section representing a fragment of computer code.
+ * A `Code` component is a section representing a fragment of computer code.
  */
 export default function Code({
   children,

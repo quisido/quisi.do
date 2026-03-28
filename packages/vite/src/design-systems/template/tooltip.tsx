@@ -1,5 +1,5 @@
 import { type ReactElement, type ReactNode } from 'react';
-import useTooltip from './use-tooltip.js';
+import useTooltip from '../shared/use-tooltip.js';
 
 export interface TooltipProps {
   readonly children: ReactNode;

@@ -1,11 +1,7 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface ApplicationProps {
-  readonly children: ReactNode;
-  readonly describedBy?: string | undefined;
-  readonly label: string;
-  readonly roleDescription?: string | undefined;
-}
+import type { ReactElement } from 'react';
+import OwnsBanner from '../shared/owns-banner.js';
+import Banner from './banner.js';
+import type { ApplicationProps } from '../shared/application-props.js';
 
 /**
  *   An `Application` is a structure containing one or more focusable elements
@@ -16,19 +12,20 @@ export interface ApplicationProps {
  * and used to control a reading cursor. This browse mode behavior prevents
  * elements that do not have a widget role from receiving and using such
  * keyboard and gesture events to provide interactive functionality.
- *   Use an `Application` component when you need to create a component with an
- * interaction model that is not supported by any of the other components. When
- * a user navigates into an application, assistive technologies that intercept
- * standard input events _should_ switch to a mode that passes most or all
- * standard input events through to the web application.
+ *   Use an application when you need to create a component with an interaction
+ * model that is not supported by any of the other components. When a user
+ * navigates into an application, assistive technologies that intercept standard
+ * input events _should_ switch to a mode that passes most or all standard input
+ * events through to the web application.
  *   For example, a presentation slide editor uses arrow keys to change the
  * positions of textbox and image elements on the slide. There are not any
  * components that correspond to such an interaction model so the slide is
  * contained with an application with the role description "Slide Editor", and
  * described by its provided instructions.
- * @see https://w3c.github.io/aria/#application
+ * @see {@link https://w3c.github.io/aria/#application | WAI-ARIA `application` role}
  */
 export default function Application({
+  banner,
   children,
   describedBy,
   label,
@@ -41,7 +38,10 @@ export default function Application({
       aria-roledescription={roleDescription}
       role="application"
     >
-      {children}
+      <OwnsBanner>
+        {banner !== undefined && <Banner>{banner}</Banner>}
+        {children}
+      </OwnsBanner>
     </div>
   );
 }

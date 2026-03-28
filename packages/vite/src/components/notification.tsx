@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import AlertDialog from '../design-systems/template/alert-dialog.jsx';
+import AlertDialog from '../design-systems/template/alert-dialog.js';
 import type { NotificationProps } from '../contexts/notifications.js';
 
 export default function Notification({

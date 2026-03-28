@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import Dashboard from './dashboard.jsx';
+import Dashboard from './dashboard.js';
 import { Paragraph, Region } from '../design-systems/template/index.js';
 
 export default function Home(): ReactElement {

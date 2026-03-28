@@ -2,7 +2,7 @@ import { type ReactElement, useEffect, useState } from 'react';
 import { useAuthentication } from '../contexts/authentication.js';
 import AuthenticateLink from './header-authenticate-link.js';
 import HeaderAuthenticationUserId from './header-authentication-user-id.js';
-import LoadingIcon from '../components/loading-icon.jsx';
+import LoadingIcon from '../components/loading-icon.js';
 
 interface State {
   readonly id: number | null;

@@ -1,20 +1,20 @@
 import { GetErrorCode } from '@quisido/csp-shared';
 import { type Attributes, type ReactElement, useEffect, useState } from 'react';
-import Emoji from '../../components/emoji.jsx';
+import Emoji from '../../components/emoji.js';
 import useEffectEvent from '../../hooks/use-effect-event.js';
 import useEmit from '../../hooks/use-emit/index.js';
 import useAsyncState from '../../modules/use-async-state/index.js';
 import type ReportBody from '../../types/content-security-policy-report-body.js';
-import mapPropsToElement from '../../utils/map-props-to-element.jsx';
+import mapPropsToElement from '../../utils/map-props-to-element.js';
 import validateString from '../../utils/validate-string.js';
 import type ContentSecurityPolicyGroup from './content-security-policy-group.js';
 import ContentSecurityPolicyListItem, {
   type ContentSecurityPolicyListItemProps,
-} from './content-security-policy-list-item.jsx';
+} from './content-security-policy-list-item.js';
 import styles from './content-security-policy.module.scss';
 import mapReportBodiesToContentSecurityPolicyGroups from './map-report-bodies-to-content-security-policy-groups.js';
 import { Region } from '../../design-systems/template/index.js';
-import LoadingIcon from '../../components/loading-icon.jsx';
+import LoadingIcon from '../../components/loading-icon.js';
 
 interface ErrorResponse {
   readonly code: GetErrorCode;

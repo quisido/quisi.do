@@ -3,13 +3,13 @@ import { BrowserRouter } from 'react-router';
 import Authentication from '../features/authentication.js';
 import Fullstory from '../features/fullstory.js';
 import NotificationsProvider from '../features/notifications-provider.js';
-import Sentry from '../features/sentry.jsx';
+import Sentry from '../features/sentry.js';
 import SessionIdProvider from '../features/session-id-provider.js';
 import TracerProviderProvider from '../features/tracer-provider-provider.js';
 import withWrappers from '../hocs/with-wrappers/index.js';
-import CustomThemeProvider from './custom-theme-provider.jsx';
-import PostHog from './posthog.jsx';
-import WindowProvider from './window-provider.jsx';
+import CustomThemeProvider from './custom-theme-provider.js';
+import PostHog from './posthog.js';
+import WindowProvider from './window-provider.js';
 
 export const ContextProviders: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,

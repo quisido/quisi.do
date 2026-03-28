@@ -1,10 +1,10 @@
 import { type ErrorCode } from '@quisido/authn-shared';
 import { type ComponentType, type ReactElement } from 'react';
-import UnknownErrorMessage from '../components/unknown-error-message.jsx';
+import UnknownErrorMessage from '../components/unknown-error-message.js';
 import { type NoActionNotification } from '../types/notification.js';
-import mapAuthnErrorCodeToNotification from '../utils/map-authn-error-code-to-notification.jsx';
+import mapAuthnErrorCodeToNotification from '../utils/map-authn-error-code-to-notification.js';
 import mapHashToAuthnErrorCode from '../utils/map-hash-to-authn-error-code';
-import AuthnErrorsTranslationsProvider from './authn-errors-translations-provider.jsx';
+import AuthnErrorsTranslationsProvider from './authn-errors-translations-provider.js';
 
 export default class AuthnErrorNotification implements NoActionNotification {
   public readonly icon = '⚠️';

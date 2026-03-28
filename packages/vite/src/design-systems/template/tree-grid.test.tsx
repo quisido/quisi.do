@@ -16,4 +16,6 @@ describe('TreeGrid', (): void => {
 
     getByRole('treegrid', { name: 'Test tree grid' });
   });
+
+  // TODO: If a caption exists, it must be the first non-generic descendant.
 });

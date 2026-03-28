@@ -13,7 +13,7 @@ export interface StrongProps {
  * component only if its absence would change the meaning of the content.
  *   The `Strong` component is not intended to convey stress or emphasis; for
  * that purpose, the `Emphasis` component is more appropriate.
- * @see https://w3c.github.io/aria/#strong
+ * @see {@link https://w3c.github.io/aria/#strong | WAI-ARIA `strong` role}
  */
 export default function Strong({
   children,

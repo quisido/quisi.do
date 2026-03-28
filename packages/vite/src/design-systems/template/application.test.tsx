@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import { describe, it } from 'vitest';
-import { Application } from './index.js';
+import { describe, expect, it } from 'vitest';
+import { Application, Banner } from './index.js';
 
 describe('Application', (): void => {
   it('should be an application', (): void => {
@@ -11,18 +11,21 @@ describe('Application', (): void => {
     getByRole('application', { name: 'Test application' });
   });
 
-  // TODO:
-  /**
-   *   Because only the focusable elements contained in an application are
-   * accessible to users of some assistive technologies, authors MUST use one of
-   * the following techniques to ensure all non-decorative static text or image
-   * content inside an application is accessible:
-   * = Associate the content with a focusable element using aria-labelledby or
-   *   aria-describedby.
-   * - Place the content in a focusable element that has role document or
-   *   article.
-   * - Manage focus of accessibility descendants as described in Managing Focus,
-   *   updating the value of aria-activedescendant to reference the element
-   *   containing the focused content.
-   */
+  it('should render a banner', (): void => {
+    const { getByRole } = render(
+      <Application banner="Test banner">Test content</Application>,
+    );
+
+    expect(getByRole('banner').textContent).toBe('Test banner');
+  });
+
+  it('should not contain more than 1 banner', (): void => {
+    expect((): void => {
+      render(
+        <Application banner="First banner">
+          <Banner>Second banner</Banner>
+        </Application>,
+      );
+    }).toThrow('An application or document cannot own more than one banner.');
+  });
 });

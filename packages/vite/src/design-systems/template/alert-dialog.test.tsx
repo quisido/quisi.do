@@ -82,19 +82,22 @@ describe('AlertDialog', (): void => {
       <>
         <button>First button</button>
         <AlertDialog label="Test modal label" onDismiss={handleTestDismiss}>
-          <button autoFocus>Second button</button>
+          <button>Second button</button>
         </AlertDialog>
         ,<button>Third button</button>
       </>,
     );
 
+    const dismissButton: HTMLElement = getByRole('button', { name: 'Dismiss' });
     const secondButton: HTMLElement = getByRole('button', {
       name: 'Second button',
     });
     expect(window.document.activeElement).toBe(secondButton);
     await USER.tab();
-    expect(window.document.activeElement).toBe(secondButton);
+    expect(window.document.activeElement).toBe(dismissButton);
     await USER.tab();
     expect(window.document.activeElement).toBe(secondButton);
+    await USER.tab();
+    expect(window.document.activeElement).toBe(dismissButton);
   });
 });

@@ -1,12 +1,9 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface BlockQuoteProps {
-  readonly children: ReactNode;
-}
+import type { ReactElement } from 'react';
+import type { BlockQuoteProps } from '../shared/block-quote-props.js';
 
 /**
  * A section of content that is quoted from another source.
- * @see https://w3c.github.io/aria/#blockquote
+ * @see {@link https://w3c.github.io/aria/#blockquote | WAI-ARIA `blockquote` role}
  */
 export default function BlockQuote({
   children,

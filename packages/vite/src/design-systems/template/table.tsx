@@ -1,10 +1,35 @@
-import type { ReactElement, ReactNode } from 'react';
+import type { Attributes, ReactElement } from 'react';
+import type { RowProps } from '../shared/row-props.js';
+import type { CellProps } from '../shared/cell-props.js';
 
 export interface TableProps {
-  readonly children: ReactNode;
-  readonly label: string;
+  readonly caption: string;
+  readonly rows: readonly (RowProps & Required<Attributes>)[];
 }
 
-export default function Table({ children, label }: TableProps): ReactElement {
-  return <table aria-label={label}>{children}</table>;
+export default function Table({ caption, rows }: TableProps): ReactElement {
+  return (
+    <table>
+      <caption>{caption}</caption>
+      <tbody>
+        {rows.map(
+          ({
+            cells,
+            key: rowKey,
+          }: RowProps & Required<Attributes>): ReactElement => (
+            <tr key={rowKey}>
+              {cells.map(
+                ({
+                  children,
+                  key: cellKey,
+                }: CellProps & Required<Attributes>): ReactElement => (
+                  <td key={cellKey}>{children}</td>
+                ),
+              )}
+            </tr>
+          ),
+        )}
+      </tbody>
+    </table>
+  );
 }

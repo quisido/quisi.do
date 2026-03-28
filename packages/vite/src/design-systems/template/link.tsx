@@ -18,7 +18,7 @@ export interface LinkProps {
  *   A `Link` component is an interactive reference to an internal or external
  * resource that, when activated, causes the user agent to navigate to that
  * resource.
- * @see https://w3c.github.io/aria/#link
+ * @see {@link https://w3c.github.io/aria/#link | WAI-ARIA `link` role}
  */
 export default function Link({
   children,

@@ -12,4 +12,6 @@ describe('RadioGroup', (): void => {
 
     getByRole('radiogroup', { name: 'Test radio group' });
   });
+
+  // TODO: If a caption exists, it must be the first non-generic descendant.
 });

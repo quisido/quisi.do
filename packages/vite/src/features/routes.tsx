@@ -1,12 +1,12 @@
 import { type ReactElement } from 'react';
 import { Route, Routes } from 'react-router';
-import CookiePolicy from './cookie-policy.jsx';
-import DataRetentionPolicy from './data-retention-policy.jsx';
-import Home from './home.jsx';
-import NotFound from './not-found.jsx';
-import PrivacyPolicy from './privacy-policy.jsx';
-import Support from './support.jsx';
-import TermsOfService from './terms-of-service.jsx';
+import CookiePolicy from './cookie-policy.js';
+import DataRetentionPolicy from './data-retention-policy.js';
+import Home from './home.js';
+import NotFound from './not-found.js';
+import PrivacyPolicy from './privacy-policy.js';
+import Support from './support.js';
+import TermsOfService from './terms-of-service.js';
 
 export default function RoutesFeature(): ReactElement {
   return (

@@ -1,11 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface ArticleProps {
-  readonly children: ReactNode;
-  readonly label: string;
-  readonly positionInSet?: number | undefined;
-  readonly setSize?: number | undefined;
-}
+import type { ReactElement } from 'react';
+import type { ArticleProps } from '../shared/article-props.js';
 
 /**
  *   An `Article` component is a section of a page that consists of a
@@ -24,9 +18,9 @@ export interface ArticleProps {
  * could represent the comments as articles nested within the article for the
  * web log entry. Author, heading, date, or other information associated with an
  * article does not apply to nested articles.
- *   When an article is in the context of a feed, you may specify values for
- * `positionInSet` and `setSize`.
- * @see https://w3c.github.io/aria/#article
+ *   When an article is in the context of a feed, you may specify its
+ * position-in-set and set-size.
+ * @see {@link https://w3c.github.io/aria/#article | WAI-ARIA `article` role}
  */
 export default function Article({
   children,

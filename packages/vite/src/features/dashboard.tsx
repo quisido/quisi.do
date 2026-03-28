@@ -1,7 +1,7 @@
 import { sortStrings } from 'fmrs';
 import I18n from 'lazy-i18n';
 import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
-import NumberFormat from '../components/number-format.jsx';
+import NumberFormat from '../components/number-format.js';
 import { MILLISECONDS_PER_SECOND } from '../constants/time.js';
 import useWindow from '../hooks/use-window.js';
 import useAsyncState from '../modules/use-async-state/index.js';

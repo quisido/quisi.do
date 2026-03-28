@@ -71,6 +71,7 @@
     "number-format-react": "^2.0.1",
     "posthog-js": "^1.288.0",
     "react": "^19.2.4",
+    "react-aria": "^3.47.0",
     "react-chartjs-2": "^5.3.1",
     "react-datadog": "^3.0.1",
     "react-dom": "^19.2.4",

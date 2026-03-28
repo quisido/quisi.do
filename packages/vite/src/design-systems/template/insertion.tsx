@@ -11,7 +11,7 @@ export interface InsertionProps {
  *   Insertions are typically used to either mark differences between two
  * versions of content or to designate content suggested for addition in
  * scenarios where multiple people are revising content.
- * @see https://w3c.github.io/aria/#insertion
+ * @see {@link https://w3c.github.io/aria/#insertion | WAI-ARIA `insertion` role}
  */
 export default function Insertion({
   children,

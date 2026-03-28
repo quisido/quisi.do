@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import Emoji from '../../components/emoji.jsx';
+import Emoji from '../../components/emoji.js';
 
 interface Props {
   readonly children: string;

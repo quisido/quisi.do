@@ -10,4 +10,6 @@ describe('Group', (): void => {
 
     getByRole('group', { name: 'Test group' });
   });
+
+  // TODO: If a caption exists, it must be the first non-generic descendant.
 });

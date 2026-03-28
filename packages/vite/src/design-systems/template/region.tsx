@@ -1,8 +1,8 @@
 import type { ReactElement, ReactNode } from 'react';
 import useElementId from '../../hooks/use-element-id.js';
-import Heading from './heading.jsx';
+import Heading from './heading.js';
 import useLevel from '../../contexts/level/use-level.js';
-import LevelProvider from '../../contexts/level/provider.jsx';
+import LevelProvider from '../../contexts/level/provider.js';
 
 interface BaseRegionProps {
   readonly children: ReactNode;

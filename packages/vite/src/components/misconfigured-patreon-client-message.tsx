@@ -1,6 +1,6 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import AlarmExistsMessage from './alarm-exists-message.jsx';
+import AlarmExistsMessage from './alarm-exists-message.js';
 
 export default function MisconfiguredPatreonClientMessage(): ReactElement {
   return (

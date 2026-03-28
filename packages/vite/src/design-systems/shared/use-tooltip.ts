@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import useElementId from '../../hooks/use-element-id.js';
+import useId from './use-id.js';
 
 const setProperty = (
   element: HTMLElement,
@@ -26,7 +26,7 @@ const setProperty = (
 };
 
 export default function useTooltip(htmlFor: string): string {
-  const id: string = useElementId();
+  const id: string = useId();
 
   useLayoutEffect((): VoidFunction => {
     const described: HTMLElement | null =

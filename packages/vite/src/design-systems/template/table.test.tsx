@@ -16,4 +16,6 @@ describe('Table', (): void => {
 
     getByRole('table', { name: 'Test table' });
   });
+
+  // TODO: If a caption exists, it must be the first non-generic descendant.
 });
