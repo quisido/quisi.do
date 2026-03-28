@@ -12,6 +12,7 @@ const CONFIG: VitestConfig = await defineVitestConfig({
           environment: 'jsdom',
           exclude: ['src/**/browser-smoke.test.ts'],
           include: ['src/**/*.test.ts'],
+          name: 'unit',
         },
       },
       {
@@ -27,6 +28,7 @@ const CONFIG: VitestConfig = await defineVitestConfig({
             provider: playwright({}),
           },
           include: ['src/**/browser-smoke.test.ts'],
+          name: 'browser',
         },
       },
     ],

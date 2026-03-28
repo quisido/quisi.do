@@ -9,12 +9,14 @@
   "scripts": {
     "build": "tsc --skipLibCheck && vite build",
     "start": "vite",
-    "test": "quisido test",
+    "test": "quisido test && npm run vitest:run && npm run vitest:browser",
     "clean": "rimraf .cache .tests dist node_modules",
     "eslint": "quisido eslint",
     "serve": "serve dist",
     "tsc": "tsc --skipLibCheck",
-    "vitest": "quisido vitest"
+    "vitest": "quisido vitest",
+    "vitest:browser": "vitest run --project browser",
+    "vitest:run": "vitest run --project unit"
   },
   "bugs": {
     "email": "game@quisi.do",

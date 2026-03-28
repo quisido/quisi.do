@@ -47,10 +47,53 @@ describe('resolveEndingBranch', (): void => {
     ).toBe('SecretEnding');
   });
 
+  it('does not grant the secret ending to the illusionist role', (): void => {
+    expect(
+      resolveEndingBranch({
+        ...DEFAULT_STORAGE,
+        acceptedMask: true,
+        foundInvitation: true,
+        role: 'illusionist',
+      }),
+    ).toBe('SoloEnding');
+  });
+
+  it('requires the invitation for the secret ending', (): void => {
+    expect(
+      resolveEndingBranch({
+        ...DEFAULT_STORAGE,
+        acceptedMask: true,
+        foundInvitation: false,
+        role: 'investigator',
+      }),
+    ).toBe('SoloEnding');
+  });
+
+  it('requires accepting the mask for the secret ending', (): void => {
+    expect(
+      resolveEndingBranch({
+        ...DEFAULT_STORAGE,
+        acceptedMask: false,
+        foundInvitation: true,
+        role: 'investigator',
+      }),
+    ).toBe('SoloEnding');
+  });
+
   it('routes to the reconciliation ending when trust was established', (): void => {
     expect(
       resolveEndingBranch({
         ...DEFAULT_STORAGE,
+        trustedStagehand: true,
+      }),
+    ).toBe('ReconciliationEnding');
+  });
+
+  it('prefers reconciliation over solo when stagehand is trusted', (): void => {
+    expect(
+      resolveEndingBranch({
+        ...DEFAULT_STORAGE,
+        role: 'illusionist',
         trustedStagehand: true,
       }),
     ).toBe('ReconciliationEnding');

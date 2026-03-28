@@ -16,7 +16,5 @@ export const MONOGATARI_SHELL_HTML: string = `
     <gallery-screen></gallery-screen>
     <credits-screen></credits-screen>
     <language-selection-screen></language-selection-screen>
-    <message-modal></message-modal>
-    <alert-modal></alert-modal>
   </visual-novel>
 `.trim();
