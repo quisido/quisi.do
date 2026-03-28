@@ -5,6 +5,11 @@ export interface NavigationProps {
   readonly label: string;
 }
 
+/**
+ *   A `Navigation` component is a landmark containing a collection of
+ * navigational elements, usually links, for moving through the current or
+ * related documents.
+ */
 export default function Navigation({
   children,
   label,

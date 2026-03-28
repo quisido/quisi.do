@@ -1,9 +1,5 @@
 import type { ReactElement } from 'react';
-
-export interface ImageProps {
-  readonly name: string;
-  readonly src: string;
-}
+import type { ImageProps } from '../shared/image-props.js';
 
 /**
  *   Container for a collection of elements that form an image. An accessible

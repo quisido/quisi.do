@@ -7,6 +7,11 @@ export interface TableProps {
   readonly rows: readonly (RowProps & Required<Attributes>)[];
 }
 
+/**
+ *   A `Table` component contains data arranged in rows and columns. Use
+ * `Grid` or `TreeGrid` instead when the container is interactive or manages
+ * its own selection and navigation behavior.
+ */
 export default function Table({ caption, rows }: TableProps): ReactElement {
   return (
     <table>

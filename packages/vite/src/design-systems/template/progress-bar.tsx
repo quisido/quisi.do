@@ -8,6 +8,11 @@ export interface ProgressBarProps {
   readonly value?: number | undefined;
 }
 
+/**
+ *   A `ProgressBar` component displays the progress status for tasks that take
+ * a long time. It communicates that a request has been received and work is
+ * advancing toward completion.
+ */
 export default function ProgressBar({
   label,
   max = DEFAULT_MAX,

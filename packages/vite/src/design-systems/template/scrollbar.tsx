@@ -6,6 +6,11 @@ export interface ScrollbarProps {
   readonly orientation?: 'horizontal' | 'vertical' | undefined;
 }
 
+/**
+ *   A `Scrollbar` component controls the scrolling of content within a viewing
+ * area. Its thumb position represents the current value and range of possible
+ * scroll positions.
+ */
 export default function Scrollbar({
   controls,
   label,

@@ -5,6 +5,10 @@ export interface TreeProps {
   readonly label: string;
 }
 
+/**
+ *   A `Tree` component is a widget that lets the user select one or more items
+ * from a hierarchically organized collection.
+ */
 export default function Tree({ children, label }: TreeProps): ReactElement {
   /**
    *   Focus MUST be managed on this container role.

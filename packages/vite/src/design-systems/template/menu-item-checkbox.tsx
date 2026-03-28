@@ -5,6 +5,10 @@ export interface MenuItemCheckboxProps {
   readonly children: ReactNode;
 }
 
+/**
+ *   A `MenuItemCheckbox` component is a `MenuItem` with a checkable state
+ * whose value may be `true`, `false`, or `mixed`.
+ */
 export default function MenuItemCheckbox({
   checked = false,
   children,

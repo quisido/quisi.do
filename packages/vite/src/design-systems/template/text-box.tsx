@@ -5,6 +5,11 @@ export interface TextBoxProps {
   readonly multiline?: boolean | undefined;
 }
 
+/**
+ *   A `TextBox` component is an input that accepts free-form text as its
+ * value. When `aria-multiline` is true, it behaves like a multiline text
+ * field.
+ */
 export default function TextBox({
   label,
   multiline = false,

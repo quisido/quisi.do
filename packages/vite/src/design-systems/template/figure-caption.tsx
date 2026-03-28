@@ -7,6 +7,11 @@ interface FigureCaptionProps {
   readonly nameId: string;
 }
 
+/**
+ *   A `FigureCaption` component exposes the `caption` role as visible content
+ * that names or describes its containing `Figure`. It can also serve as the
+ * accessible name for the containing element when referenced.
+ */
 export default function FigureCaption({
   description,
   descriptionId,

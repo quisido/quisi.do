@@ -5,6 +5,10 @@ export interface MarqueeProps {
   readonly label: string;
 }
 
+/**
+ *   A `Marquee` component contains non-essential information that changes
+ * frequently, such as a stock ticker or rotating promotional content.
+ */
 export default function Marquee({
   children,
   label,

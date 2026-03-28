@@ -6,6 +6,10 @@ export interface RowGroupProps {
   readonly section?: 'body' | 'footer' | 'head' | undefined;
 }
 
+/**
+ *   A `RowGroup` component contains one or more tabular rows. It is the
+ * structural equivalent of a table's `thead`, `tbody`, or `tfoot`.
+ */
 export default function RowGroup({
   children,
   label,

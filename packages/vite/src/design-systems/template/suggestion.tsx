@@ -5,6 +5,11 @@ export interface SuggestionProps {
   readonly label: string;
 }
 
+/**
+ *   A `Suggestion` component represents a single proposed change to content.
+ * It is used to wrap the associated `Insertion` and/or `Deletion` content for
+ * that proposed edit.
+ */
 export default function Suggestion({
   children,
   label,

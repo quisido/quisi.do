@@ -8,6 +8,11 @@ export interface DocumentProps {
   readonly label?: string | undefined;
 }
 
+/**
+ *   A `Document` component contains content that assistive technology users may
+ * want to browse in a reading mode. It is most useful as a focusable child of
+ * an `Application` or other widget context.
+ */
 export default function Document({
   banner,
   children,

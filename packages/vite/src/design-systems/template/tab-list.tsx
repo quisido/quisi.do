@@ -5,6 +5,10 @@ export interface TabListProps {
   readonly label: string;
 }
 
+/**
+ *   A `TabList` component contains `Tab` elements that reference associated
+ * `TabPanel` elements.
+ */
 export default function TabList({
   children,
   label,

@@ -5,6 +5,10 @@ export interface RadioGroupProps {
   readonly label: string;
 }
 
+/**
+ *   A `RadioGroup` component groups `Radio` buttons so only one item in the
+ * set can be checked at a time.
+ */
 export default function RadioGroup({
   children,
   label,

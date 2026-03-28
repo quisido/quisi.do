@@ -5,6 +5,10 @@ export interface MenuItemRadioProps {
   readonly children: ReactNode;
 }
 
+/**
+ *   A `MenuItemRadio` component is a checkable `MenuItem` in a set where only
+ * one item can be checked at a time.
+ */
 export default function MenuItemRadio({
   checked = false,
   children,

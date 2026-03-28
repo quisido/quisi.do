@@ -5,6 +5,11 @@ export interface ListBoxProps {
   readonly label: string;
 }
 
+/**
+ *   A `ListBox` component lets the user choose one or more items from a list
+ * of choices. Its children should be `Option` components or `Group`
+ * components that contain `Option` components.
+ */
 export default function ListBox({
   children,
   label,

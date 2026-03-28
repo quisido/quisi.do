@@ -5,6 +5,10 @@ export interface SwitchProps {
   readonly label: string;
 }
 
+/**
+ *   A `Switch` component is a type of checkbox that represents on and off
+ * values rather than checked and unchecked values.
+ */
 export default function Switch({
   checked = false,
   label,

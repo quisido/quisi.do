@@ -5,6 +5,10 @@ export interface TabPanelProps {
   readonly label: string;
 }
 
+/**
+ *   A `TabPanel` component contains the resources associated with a `Tab` in a
+ * `TabList`.
+ */
 export default function TabPanel({
   children,
   label,

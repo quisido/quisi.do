@@ -5,6 +5,10 @@ export interface TreeGridProps {
   readonly label: string;
 }
 
+/**
+ *   A `TreeGrid` component is a `Grid` whose rows can be expanded and
+ * collapsed in the same manner as a `Tree`.
+ */
 export default function TreeGrid({
   children,
   label,

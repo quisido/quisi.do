@@ -5,6 +5,12 @@ export interface GridProps {
   readonly label: string;
 }
 
+/**
+ *   A `Grid` component is a composite widget containing rows and cells where
+ * some or all cells are focusable through two-dimensional navigation. It
+ * describes relationships among elements and does not require a tabular visual
+ * presentation.
+ */
 export default function Grid({ children, label }: GridProps): ReactElement {
   /**
    *   Focus MUST be managed on this container role.

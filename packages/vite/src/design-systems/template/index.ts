@@ -1,6 +1,31 @@
 export { type ButtonProps } from '../shared/button-props.js';
 export { type BlockQuoteProps } from '../shared/block-quote-props.js';
 export { type CellProps } from '../shared/cell-props.js';
+export { type ComboBoxProps } from '../shared/combo-box-props.js';
+export { type DefinitionProps } from '../shared/definition-props.js';
+export { type DialogProps } from '../shared/dialog-props.js';
+export { type DirectoryProps } from '../shared/directory-props.js';
+export { type DocumentProps } from '../shared/document-props.js';
+export { type FeedProps } from '../shared/feed-props.js';
+export { type FormProps } from '../shared/form-props.js';
+export { type GridProps } from '../shared/grid-props.js';
+export { type GroupProps } from '../shared/group-props.js';
+export { type HeadingProps } from './heading.js';
+export { type EmphasisProps } from './emphasis.js';
+export { type CodeProps } from './code.js';
+export { type ImageProps } from './image.js';
+export { type CommentProps } from './comment.js';
+export { type ComplementaryProps } from './complementary.js';
+export { type ContentInfoProps } from './content-info.js';
+export { type DialogProps } from './dialog.js';
+export { type DirectoryProps } from './directory.js';
+export { type DocumentProps } from './document.js';
+export { type FeedProps } from './feed.js';
+export { type FormProps } from './form.js';
+export { type GridProps } from './grid.js';
+export { type GroupProps } from './group.js';
+export { type ListBoxProps } from './list-box.js';
+export { type LogProps } from './log.js';
 export { default as Provider } from '../shared/provider.js';
 export { default as Button } from './button.js';
 export { default as Heading, type HeadingProps } from './heading.js';
@@ -41,16 +66,16 @@ export { default as Subscript, type SubscriptProps } from './subscript.js';
 export { default as Mark, type MarkProps } from './mark.js';
 export { default as Insertion, type InsertionProps } from './insertion.js';
 export { default as Deletion, type DeletionProps } from './deletion.js';
-export { default as Image, type ImageProps } from './image.js';
+export { default as Image } from './image.js';
 export { default as Article } from './article.js';
 export { default as Banner } from './banner.js';
 export { default as Checkbox } from './checkbox.js';
-export { default as Comment, type CommentProps } from './comment.js';
+export { default as Comment } from './comment.js';
 export {
   default as Complementary,
   type ComplementaryProps,
 } from './complementary.js';
-export { default as ComboBox, type ComboBoxProps } from './combo-box.js';
+export { default as ComboBox } from './combo-box.js';
 export {
   default as ContentInfo,
   type ContentInfoProps,
