@@ -1,18 +1,18 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface ContentInfoProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { ContentInfoProps } from '../shared/content-info-props.js';
+import useContentInfo from '../shared/use-content-info.js';
 
 /**
  *   A `ContentInfo` component is a landmark that contains information about
- * the parent document, such as copyright information or links to privacy
- * statements.
+ * the parent document. Examples of information are copyrights and links to
+ * privacy statements.
+ *   A page should have at most one content info landmark.
+ * @see {@link https://w3c.github.io/aria/#contentinfo | WAI-ARIA `contentinfo` role}
  */
 export default function ContentInfo({
   children,
-  label,
 }: ContentInfoProps): ReactElement {
-  return <footer aria-label={label}>{children}</footer>;
+  const id: string = useContentInfo();
+
+  return <footer id={id}>{children}</footer>;
 }

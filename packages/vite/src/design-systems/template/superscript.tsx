@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface SuperscriptProps {
-  readonly children: ReactNode;
-  readonly describedBy?: string | undefined;
-}
+import type { ReactElement } from 'react';
+import type { SuperscriptProps } from '../shared/superscript-props.js';
 
 /**
  * One or more superscripted characters.

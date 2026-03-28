@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface LogProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { LogProps } from '../shared/log-props.js';
 
 /**
  *   A `Log` component is a live region where new information is appended in a

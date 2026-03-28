@@ -1,8 +1,5 @@
 import type { ReactElement } from 'react';
-
-export interface RadioProps {
-  readonly label: string;
-}
+import type { RadioProps } from '../shared/radio-props.js';
 
 /**
  *   A `Radio` component is a checkable input in a same-role group where only

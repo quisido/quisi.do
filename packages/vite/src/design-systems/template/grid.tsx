@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface GridProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { GridProps } from '../shared/grid-props.js';
 
 /**
  *   A `Grid` component is a composite widget containing rows and cells where

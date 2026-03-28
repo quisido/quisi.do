@@ -1,11 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface ListProps {
-  readonly children: ReactNode;
-  readonly label?: string | undefined;
-  readonly labelledBy?: string | undefined;
-  readonly ordered?: boolean | undefined;
-}
+import type { ReactElement } from 'react';
+import type { ListProps } from '../shared/list-props.js';
 
 /**
  * A section containing `ListItem` elements.

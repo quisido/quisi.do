@@ -2,6 +2,8 @@ import type { ReactElement } from 'react';
 import OwnsBanner from '../shared/owns-banner.js';
 import Banner from './banner.js';
 import type { ApplicationProps } from '../shared/application-props.js';
+import OwnsContentInfo from '../shared/owns-content-info.jsx';
+import ContentInfo from './content-info.js';
 
 /**
  *   An `Application` is a structure containing one or more focusable elements
@@ -27,6 +29,7 @@ import type { ApplicationProps } from '../shared/application-props.js';
 export default function Application({
   banner,
   children,
+  contentInfo,
   describedBy,
   label,
   roleDescription,
@@ -39,8 +42,13 @@ export default function Application({
       role="application"
     >
       <OwnsBanner>
-        {banner !== undefined && <Banner>{banner}</Banner>}
-        {children}
+        <OwnsContentInfo>
+          {banner !== undefined && <Banner>{banner}</Banner>}
+          {children}
+          {contentInfo !== undefined && (
+            <ContentInfo>{contentInfo}</ContentInfo>
+          )}
+        </OwnsContentInfo>
       </OwnsBanner>
     </div>
   );

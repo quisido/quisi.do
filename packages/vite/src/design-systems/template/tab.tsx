@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface TabProps {
-  readonly children: ReactNode;
-  readonly selected?: boolean | undefined;
-}
+import type { ReactElement } from 'react';
+import type { TabProps } from '../shared/tab-props.js';
 
 /**
  *   A `Tab` component provides the label and selection mechanism for the tab

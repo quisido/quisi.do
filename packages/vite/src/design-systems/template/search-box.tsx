@@ -1,8 +1,5 @@
 import type { ReactElement } from 'react';
-
-export interface SearchBoxProps {
-  readonly label: string;
-}
+import type { SearchBoxProps } from '../shared/search-box-props.js';
 
 /**
  *   A `SearchBox` component is a type of text box intended for specifying

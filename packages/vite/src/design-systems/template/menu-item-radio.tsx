@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface MenuItemRadioProps {
-  readonly checked?: boolean | undefined;
-  readonly children: ReactNode;
-}
+import type { ReactElement } from 'react';
+import type { MenuItemRadioProps } from '../shared/menu-item-radio-props.js';
 
 /**
  *   A `MenuItemRadio` component is a checkable `MenuItem` in a set where only

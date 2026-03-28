@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface MenuProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { MenuProps } from '../shared/menu-props.js';
 
 /**
  *   A `Menu` component is a widget that offers a list of choices to the user.

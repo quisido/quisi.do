@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface TreeGridProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { TreeGridProps } from '../shared/tree-grid-props.js';
 
 /**
  *   A `TreeGrid` component is a `Grid` whose rows can be expanded and

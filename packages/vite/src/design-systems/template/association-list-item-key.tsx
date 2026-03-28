@@ -1,8 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface AssociationListItemKeyProps {
-  readonly children: ReactNode;
-}
+import type { ReactElement } from 'react';
+import type { AssociationListItemKeyProps } from '../shared/association-list-item-key-props.js';
 
 /**
  * Must be contained in an `AssociationList`.

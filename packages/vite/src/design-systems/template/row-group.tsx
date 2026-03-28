@@ -1,10 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface RowGroupProps {
-  readonly children: ReactNode;
-  readonly label: string;
-  readonly section?: 'body' | 'footer' | 'head' | undefined;
-}
+import type { ReactElement } from 'react';
+import type { RowGroupProps } from '../shared/row-group-props.js';
 
 /**
  *   A `RowGroup` component contains one or more tabular rows. It is the

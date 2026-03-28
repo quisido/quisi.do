@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { Application, Banner } from './index.js';
+import { Application, Banner, ContentInfo } from './index.js';
 
 describe('Application', (): void => {
   it('should be an application', (): void => {
@@ -26,6 +26,24 @@ describe('Application', (): void => {
           <Banner>Second banner</Banner>
         </Application>,
       );
-    }).toThrow('An application or document cannot own more than one banner.');
+    }).toThrow('An application or document cannot own multiple banners.');
+  });
+
+  it('should render content info', (): void => {
+    const { getByRole } = render(
+      <Application contentInfo="Test content info">Test content</Application>,
+    );
+
+    expect(getByRole('contentinfo').textContent).toBe('Test content info');
+  });
+
+  it('should not contain more than 1 content info', (): void => {
+    expect((): void => {
+      render(
+        <Application contentInfo="First content info">
+          <ContentInfo>Second content info</ContentInfo>
+        </Application>,
+      );
+    }).toThrow('An application or document cannot own multiple content info.');
   });
 });

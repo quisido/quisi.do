@@ -1,24 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-interface BaseToolbarProps {
-  readonly children: ReactNode;
-  /**
-   * @default 'horizontal'
-   */
-  readonly orientation?: 'horizontal' | 'vertical' | undefined;
-}
-
-export interface LabelToolbarProps extends BaseToolbarProps {
-  readonly label: string;
-  readonly labelledBy?: undefined;
-}
-
-export interface LabelledByToolbarProps extends BaseToolbarProps {
-  readonly label?: undefined;
-  readonly labelledBy: string;
-}
-
-export type ToolbarProps = LabelToolbarProps | LabelledByToolbarProps;
+import type { ReactElement } from 'react';
+import type { ToolbarProps } from '../shared/toolbar-props.js';
 
 /**
  *   The `Toolbar` component is a collection of commonly used controls, such as

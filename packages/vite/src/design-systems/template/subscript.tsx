@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface SubscriptProps {
-  readonly children: ReactNode;
-  readonly describedBy?: string | undefined;
-}
+import type { ReactElement } from 'react';
+import type { SubscriptProps } from '../shared/subscript-props.js';
 
 /**
  * One or more subscripted characters.

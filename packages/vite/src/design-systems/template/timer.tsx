@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface TimerProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { TimerProps } from '../shared/timer-props.js';
 
 /**
  *   A `Timer` component contains a numerical counter showing elapsed time from

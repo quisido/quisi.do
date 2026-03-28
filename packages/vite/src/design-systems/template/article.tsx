@@ -1,5 +1,8 @@
 import type { ReactElement } from 'react';
 import type { ArticleProps } from '../shared/article-props.js';
+import useArticle from '../shared/use-article.js';
+import Heading from './heading.jsx';
+import HeadingLevelProvider from '../shared/heading-level-provider.jsx';
 
 /**
  *   An `Article` component is a section of a page that consists of a
@@ -24,17 +27,42 @@ import type { ArticleProps } from '../shared/article-props.js';
  */
 export default function Article({
   children,
+  heading,
   label,
+  labelledBy: labelledByProp,
   positionInSet,
   setSize,
 }: ArticleProps): ReactElement {
+  const { headingId, labelledBy, level } = useArticle({
+    heading,
+    label,
+    labelledBy: labelledByProp,
+  });
+
+  if (heading === undefined) {
+    return (
+      <article
+        aria-label={label}
+        aria-labelledby={labelledBy}
+        aria-posinset={positionInSet}
+        aria-setsize={setSize}
+      >
+        {children}
+      </article>
+    );
+  }
+
   return (
     <article
       aria-label={label}
+      aria-labelledby={labelledBy}
       aria-posinset={positionInSet}
       aria-setsize={setSize}
     >
-      {children}
+      <Heading id={headingId} level={level}>
+        {heading}
+      </Heading>
+      <HeadingLevelProvider>{children}</HeadingLevelProvider>
     </article>
   );
 }

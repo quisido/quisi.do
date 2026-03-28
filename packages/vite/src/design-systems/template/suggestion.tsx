@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface SuggestionProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { SuggestionProps } from '../shared/suggestion-props.js';
 
 /**
  *   A `Suggestion` component represents a single proposed change to content.

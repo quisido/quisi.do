@@ -1,12 +1,7 @@
 import type { ReactElement } from 'react';
+import type { ProgressBarProps } from '../shared/progress-bar-props.js';
 
 const DEFAULT_MAX = 100;
-
-export interface ProgressBarProps {
-  readonly label: string;
-  readonly max?: number | undefined;
-  readonly value?: number | undefined;
-}
 
 /**
  *   A `ProgressBar` component displays the progress status for tasks that take

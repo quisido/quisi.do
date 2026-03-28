@@ -1,8 +1,5 @@
 import type { ReactElement } from 'react';
-
-export interface SliderProps {
-  readonly label: string;
-}
+import type { SliderProps } from '../shared/slider-props.js';
 
 /**
  *   A `Slider` component lets the user select a value from within a given

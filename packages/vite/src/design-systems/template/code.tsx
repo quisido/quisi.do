@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface CodeProps {
-  readonly children: ReactNode;
-  readonly describedBy?: string | undefined;
-}
+import type { ReactElement } from 'react';
+import type { CodeProps } from '../shared/code-props.js';
 
 /**
  * A `Code` component is a section representing a fragment of computer code.

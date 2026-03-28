@@ -1,9 +1,5 @@
 import type { ReactElement } from 'react';
-
-export interface TextBoxProps {
-  readonly label: string;
-  readonly multiline?: boolean | undefined;
-}
+import type { TextBoxProps } from '../shared/text-box-props.js';
 
 /**
  *   A `TextBox` component is an input that accepts free-form text as its

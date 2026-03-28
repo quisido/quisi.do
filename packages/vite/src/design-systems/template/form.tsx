@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface FormProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { FormProps } from '../shared/form-props.js';
 
 /**
  *   A `Form` component is a landmark region containing items and objects that,

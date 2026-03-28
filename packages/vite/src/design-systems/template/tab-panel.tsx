@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface TabPanelProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { TabPanelProps } from '../shared/tab-panel-props.js';
 
 /**
  *   A `TabPanel` component contains the resources associated with a `Tab` in a

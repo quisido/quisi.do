@@ -1,8 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface TreeItemProps {
-  readonly children: ReactNode;
-}
+import type { ReactElement } from 'react';
+import type { TreeItemProps } from '../shared/tree-item-props.js';
 
 /**
  *   A `TreeItem` component represents an item in a `Tree`. It can contain a

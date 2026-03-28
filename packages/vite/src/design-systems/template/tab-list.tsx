@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface TabListProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { TabListProps } from '../shared/tab-list-props.js';
 
 /**
  *   A `TabList` component contains `Tab` elements that reference associated

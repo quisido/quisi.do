@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import useId from './use-id.js';
+import useHeadingOrLabel from './use-heading-or-label.js';
 
 interface Props {
   readonly heading?: ReactNode | undefined;
@@ -24,21 +25,11 @@ export default function useAlertDialog({
   return {
     descriptionId,
     headingId,
-
-    labelledBy: ((): string | undefined => {
-      if (typeof label === 'string') {
-        return;
-      }
-
-      if (typeof labelledBy === 'string') {
-        return labelledBy;
-      }
-
-      if (heading === undefined) {
-        return;
-      }
-
-      return headingId;
-    })(),
+    labelledBy: useHeadingOrLabel({
+      heading,
+      headingId,
+      label,
+      labelledBy,
+    }),
   };
 }

@@ -1,9 +1,5 @@
 import type { ReactElement } from 'react';
-
-export interface SwitchProps {
-  readonly checked?: boolean | undefined;
-  readonly label: string;
-}
+import type { SwitchProps } from '../shared/switch-props.js';
 
 /**
  *   A `Switch` component is a type of checkbox that represents on and off

@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface MenuBarProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { MenuBarProps } from '../shared/menu-bar-props.js';
 
 /**
  *   A `MenuBar` component presents a `Menu` that usually remains visible and

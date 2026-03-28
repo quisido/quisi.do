@@ -18,7 +18,7 @@ export default function useBannerOwner(bannerId: string): void {
     // If the banner owner already owns another banner,
     if (ownedBannerId !== null && ownedBannerId !== bannerId) {
       throw new Error(
-        'An application or document cannot own more than one banner.',
+        'An application or document cannot own multiple banners.',
         { cause: ownedBannerId },
       );
     }

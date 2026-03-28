@@ -1,8 +1,6 @@
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactElement } from 'react';
+import type { AssociationListItemValueProps } from '../shared/association-list-item-value-props.js';
 
-export interface AssociationListItemValueProps {
-  readonly children: ReactNode;
-}
 /**
  * Always a sibling following an `AssociationListItemKey`.
  */

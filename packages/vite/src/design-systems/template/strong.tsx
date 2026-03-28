@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface StrongProps {
-  readonly children: ReactNode;
-  readonly describedBy?: string | undefined;
-}
+import type { ReactElement } from 'react';
+import type { StrongProps } from '../shared/strong-props.js';
 
 /**
  *   `Strong` denotes content that is important, serious, or urgent.

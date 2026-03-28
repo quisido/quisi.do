@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface ComplementaryProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { ComplementaryProps } from '../shared/complementary-props.js';
 
 /**
  *   A `Complementary` component is a landmark that is designed be complementary
@@ -18,7 +14,6 @@ export interface ComplementaryProps {
  */
 export default function Complementary({
   children,
-  label,
 }: ComplementaryProps): ReactElement {
-  return <aside aria-label={label}>{children}</aside>;
+  return <aside>{children}</aside>;
 }

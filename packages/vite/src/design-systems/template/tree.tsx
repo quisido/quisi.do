@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface TreeProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { TreeProps } from '../shared/tree-props.js';
 
 /**
  *   A `Tree` component is a widget that lets the user select one or more items

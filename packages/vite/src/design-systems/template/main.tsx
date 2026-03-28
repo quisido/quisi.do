@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface MainProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { MainProps } from '../shared/main-props.js';
 
 /**
  *   A `Main` component is a landmark containing the primary content of a

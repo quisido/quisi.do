@@ -1,14 +1,11 @@
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { Banner, Document } from './index.js';
+import { Banner, ContentInfo, Document } from './index.js';
 
 describe('Document', (): void => {
   it('should be a document', (): void => {
-    const { getByRole } = render(
-      <Document label="Test document">Test content</Document>,
-    );
-
-    getByRole('document', { name: 'Test document' });
+    const { getByRole } = render(<Document>Test content</Document>);
+    expect(getByRole('document').textContent).toBe('Test content');
   });
 
   it('should render a banner', (): void => {
@@ -26,6 +23,24 @@ describe('Document', (): void => {
           <Banner>Second banner</Banner>
         </Document>,
       );
-    }).toThrow('An application or document cannot own more than one banner.');
+    }).toThrow('An application or document cannot own multiple banners.');
+  });
+
+  it('should render content info', (): void => {
+    const { getByRole } = render(
+      <Document contentInfo="Test content info">Test content</Document>,
+    );
+
+    expect(getByRole('contentinfo').textContent).toBe('Test content info');
+  });
+
+  it('should not contain more than 1 content info', (): void => {
+    expect((): void => {
+      render(
+        <Document contentInfo="First content info">
+          <ContentInfo>Second content info</ContentInfo>
+        </Document>,
+      );
+    }).toThrow('An application or document cannot own multiple content info.');
   });
 });

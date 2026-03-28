@@ -3,16 +3,8 @@ import type {
   MouseEvent,
   MouseEventHandler,
   ReactElement,
-  ReactNode,
 } from 'react';
-
-export interface LinkProps {
-  readonly children: ReactNode;
-  readonly className?: string | undefined;
-  readonly href: string;
-  readonly onClick?: (() => void) | undefined;
-  readonly title?: string | undefined;
-}
+import type { LinkProps } from '../shared/link-props.js';
 
 /**
  *   A `Link` component is an interactive reference to an internal or external

@@ -1,10 +1,5 @@
 import type { ReactElement } from 'react';
-
-export interface ScrollbarProps {
-  readonly controls: string;
-  readonly label: string;
-  readonly orientation?: 'horizontal' | 'vertical' | undefined;
-}
+import type { ScrollbarProps } from '../shared/scrollbar-props.js';
 
 /**
  *   A `Scrollbar` component controls the scrolling of content within a viewing

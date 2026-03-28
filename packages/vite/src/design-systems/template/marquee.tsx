@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface MarqueeProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { MarqueeProps } from '../shared/marquee-props.js';
 
 /**
  *   A `Marquee` component contains non-essential information that changes

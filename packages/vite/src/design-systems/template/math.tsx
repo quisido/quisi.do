@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface MathProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { MathProps } from '../shared/math-props.js';
 
 /**
  *   The `Math` component marks content in an accessible format such as MathML,

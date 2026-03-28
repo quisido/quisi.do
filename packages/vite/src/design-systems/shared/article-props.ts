@@ -1,8 +1,10 @@
 import type { ReactNode } from 'react';
+import type { HeadingOrLabel } from './heading-or-label.js';
 
-export interface ArticleProps {
+interface Props {
   readonly children: ReactNode;
-  readonly label: string;
   readonly positionInSet?: number | undefined;
   readonly setSize?: number | undefined;
 }
+
+export type ArticleProps = HeadingOrLabel<Props>;

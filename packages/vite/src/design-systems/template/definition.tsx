@@ -1,21 +1,19 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface DefinitionProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { DefinitionProps } from '../shared/definition-props.js';
 
 /**
- *   A `Definition` component provides the definition of a term or concept. It
- * should be paired with the related `Term` component that identifies what is
- * being defined.
+ *   A `Definition` component marks the definition of a term or concept.
+ *   Set the `Term` component's `definitionId` prop to this component's ID.
+ *   _Do not_ use interactive elements such as form controls within a
+ * definition.
+ * @see {@link https://w3c.github.io/aria/#definition | WAI-ARIA `definition` role}
  */
 export default function Definition({
   children,
-  label,
+  id,
 }: DefinitionProps): ReactElement {
   return (
-    <dfn aria-label={label} role="definition">
+    <dfn id={id} role="definition">
       {children}
     </dfn>
   );

@@ -1,35 +1,8 @@
-import type { ReactElement, ReactNode } from 'react';
-import useElementId from '../../hooks/use-element-id.js';
+import type { ReactElement } from 'react';
 import Heading from './heading.js';
-import useLevel from '../../contexts/level/use-level.js';
-import LevelProvider from '../../contexts/level/provider.js';
-
-interface BaseRegionProps {
-  readonly children: ReactNode;
-}
-
-export interface HeadingRegionProps extends BaseRegionProps {
-  readonly heading: Exclude<ReactNode, undefined>;
-  readonly label?: undefined;
-  readonly labelledBy?: undefined;
-}
-
-export interface LabelRegionProps extends BaseRegionProps {
-  readonly heading?: undefined;
-  readonly label: string;
-  readonly labelledBy?: undefined;
-}
-
-export interface LabelledByRegionProps extends BaseRegionProps {
-  readonly heading?: undefined;
-  readonly label?: undefined;
-  readonly labelledBy: string;
-}
-
-export type RegionProps =
-  | HeadingRegionProps
-  | LabelRegionProps
-  | LabelledByRegionProps;
+import type { RegionProps } from '../shared/region-props.js';
+import HeadingLevelProvider from '../shared/heading-level-provider.jsx';
+import useRegion from '../shared/use-region.js';
 
 /**
  *   The `Region` component is used to identify document areas the author deems
@@ -49,29 +22,26 @@ export default function Region({
   label,
   labelledBy: labelledByProp,
 }: RegionProps): ReactElement {
-  const level: number = useLevel();
-  const headingId: string = useElementId();
+  const { headingId, labelledBy, level } = useRegion({
+    heading,
+    label,
+    labelledBy: labelledByProp,
+  });
 
-  const labelledBy: string | undefined = ((): string | undefined => {
-    if (typeof heading === 'string') {
-      return headingId;
-    }
-
-    if (typeof label === 'string') {
-      return;
-    }
-
-    return labelledByProp;
-  })();
+  if (heading === undefined) {
+    return (
+      <section aria-label={label} aria-labelledby={labelledBy}>
+        {children}
+      </section>
+    );
+  }
 
   return (
     <section aria-label={label} aria-labelledby={labelledBy}>
-      {typeof heading === 'string' && (
-        <Heading id={headingId} level={level}>
-          {heading}
-        </Heading>
-      )}
-      <LevelProvider>{children}</LevelProvider>
+      <Heading id={headingId} level={level}>
+        {heading}
+      </Heading>
+      <HeadingLevelProvider>{children}</HeadingLevelProvider>
     </section>
   );
 }

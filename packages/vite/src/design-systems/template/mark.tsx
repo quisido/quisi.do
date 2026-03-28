@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface MarkProps {
-  readonly children: ReactNode;
-  readonly describedBy?: string | undefined;
-}
+import type { ReactElement } from 'react';
+import type { MarkProps } from '../shared/mark-props.js';
 
 /**
  * Marked or highlighted for reference or notation purposes.

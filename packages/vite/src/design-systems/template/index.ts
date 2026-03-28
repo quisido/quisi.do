@@ -1,135 +1,156 @@
-export { type ButtonProps } from '../shared/button-props.js';
+export { type AlertDialogProps } from '../shared/alert-dialog-props.js';
+export { type ApplicationProps } from '../shared/application-props.js';
+export { type ArticleProps } from '../shared/article-props.js';
+export { type AssociationListItemKeyProps } from '../shared/association-list-item-key-props.js';
+export { type AssociationListItemValueProps } from '../shared/association-list-item-value-props.js';
+export { type AssociationListProps } from '../shared/association-list-props.js';
+export { type BannerProps } from '../shared/banner-props.js';
 export { type BlockQuoteProps } from '../shared/block-quote-props.js';
+export { type ButtonProps } from '../shared/button-props.js';
 export { type CellProps } from '../shared/cell-props.js';
+export { type CheckboxProps } from '../shared/checkbox-props.js';
+export { type CodeProps } from '../shared/code-props.js';
 export { type ComboBoxProps } from '../shared/combo-box-props.js';
+export { type CommentProps } from '../shared/comment-props.js';
+export { type ComplementaryProps } from '../shared/complementary-props.js';
+export { type ContentInfoProps } from '../shared/content-info-props.js';
 export { type DefinitionProps } from '../shared/definition-props.js';
+export { type DeletionProps } from '../shared/deletion-props.js';
 export { type DialogProps } from '../shared/dialog-props.js';
-export { type DirectoryProps } from '../shared/directory-props.js';
 export { type DocumentProps } from '../shared/document-props.js';
+export { type EmphasisProps } from '../shared/emphasis-props.js';
 export { type FeedProps } from '../shared/feed-props.js';
+export { type FigureProps } from '../shared/figure-props.js';
 export { type FormProps } from '../shared/form-props.js';
 export { type GridProps } from '../shared/grid-props.js';
 export { type GroupProps } from '../shared/group-props.js';
-export { type HeadingProps } from './heading.js';
-export { type EmphasisProps } from './emphasis.js';
-export { type CodeProps } from './code.js';
-export { type ImageProps } from './image.js';
-export { type CommentProps } from './comment.js';
-export { type ComplementaryProps } from './complementary.js';
-export { type ContentInfoProps } from './content-info.js';
-export { type DialogProps } from './dialog.js';
-export { type DirectoryProps } from './directory.js';
-export { type DocumentProps } from './document.js';
-export { type FeedProps } from './feed.js';
-export { type FormProps } from './form.js';
-export { type GridProps } from './grid.js';
-export { type GroupProps } from './group.js';
-export { type ListBoxProps } from './list-box.js';
-export { type LogProps } from './log.js';
+export { type HeadingProps } from '../shared/heading-props.js';
+export { type ImageProps } from '../shared/image-props.js';
+export { type InsertionProps } from '../shared/insertion-props.js';
+export { type LinkProps } from '../shared/link-props.js';
+export { type ListBoxProps } from '../shared/list-box-props.js';
+export { type ListItemProps } from '../shared/list-item-props.js';
+export { type ListProps } from '../shared/list-props.js';
+export { type LogProps } from '../shared/log-props.js';
+export { type MainProps } from '../shared/main-props.js';
+export { type MarkProps } from '../shared/mark-props.js';
+export { type MarqueeProps } from '../shared/marquee-props.js';
+export { type MathProps } from '../shared/math-props.js';
+export { type MenuBarProps } from '../shared/menu-bar-props.js';
+export { type MenuItemCheckboxProps } from '../shared/menu-item-checkbox-props.js';
+export { type MenuItemProps } from '../shared/menu-item-props.js';
+export { type MenuItemRadioProps } from '../shared/menu-item-radio-props.js';
+export { type MenuProps } from '../shared/menu-props.js';
+export { type MeterProps } from '../shared/meter-props.js';
+export { type NavigationProps } from '../shared/navigation-props.js';
+export { type OptionProps } from '../shared/option-props.js';
+export { type ParagraphProps } from '../shared/paragraph-props.js';
+export { type ProgressBarProps } from '../shared/progress-bar-props.js';
+export { type RadioGroupProps } from '../shared/radio-group-props.js';
+export { type RadioProps } from '../shared/radio-props.js';
+export { type RegionProps } from '../shared/region-props.js';
+export { type RowGroupProps } from '../shared/row-group-props.js';
+export { type RowHeaderProps } from '../shared/row-header-props.js';
+export { type ScrollbarProps } from '../shared/scrollbar-props.js';
+export { type SearchBoxProps } from '../shared/search-box-props.js';
+export { type SearchProps } from '../shared/search-props.js';
+export { type SliderProps } from '../shared/slider-props.js';
+export { type SpinButtonProps } from '../shared/spin-button-props.js';
+export { type StatusProps } from '../shared/status-props.js';
+export { type StrongProps } from '../shared/strong-props.js';
+export { type SubscriptProps } from '../shared/subscript-props.js';
+export { type SuggestionProps } from '../shared/suggestion-props.js';
+export { type SuperscriptProps } from '../shared/superscript-props.js';
+export { type SwitchProps } from '../shared/switch-props.js';
+export { type TabListProps } from '../shared/tab-list-props.js';
+export { type TabPanelProps } from '../shared/tab-panel-props.js';
+export { type TabProps } from '../shared/tab-props.js';
+export { type TableProps } from '../shared/table-props.js';
+export { type TermProps } from '../shared/term-props.js';
+export { type TextBoxProps } from '../shared/text-box-props.js';
+export { type TimeProps } from '../shared/time-props.js';
+export { type TimerProps } from '../shared/timer-props.js';
+export { type ToolbarProps } from '../shared/toolbar-props.js';
+export { type TooltipProps } from '../shared/tooltip-props.js';
+export { type TreeGridProps } from '../shared/tree-grid-props.js';
+export { type TreeItemProps } from '../shared/tree-item-props.js';
+export { type TreeProps } from '../shared/tree-props.js';
 export { default as Provider } from '../shared/provider.js';
 export { default as Button } from './button.js';
-export { default as Heading, type HeadingProps } from './heading.js';
-export { default as Emphasis, type EmphasisProps } from './emphasis.js';
-export { default as Code, type CodeProps } from './code.js';
+export { default as Heading } from './heading.js';
+export { default as Emphasis } from './emphasis.js';
+export { default as Code } from './code.js';
 export { default as BlockQuote } from './block-quote.js';
-export { default as Meter, type MeterProps } from './meter.js';
-export {
-  default as AssociationList,
-  type AssociationListProps,
-} from './association-list.js';
-export {
-  default as AssociationListItemKey,
-  type AssociationListItemKeyProps,
-} from './association-list-item-key.js';
-export {
-  default as AssociationListItemValue,
-  type AssociationListItemValueProps,
-} from './association-list-item-value.js';
-export { default as Region, type RegionProps } from './region.js';
+export { default as Meter } from './meter.js';
+export { default as AssociationList } from './association-list.js';
+export { default as AssociationListItemKey } from './association-list-item-key.js';
+export { default as AssociationListItemValue } from './association-list-item-value.js';
+export { default as Region } from './region.js';
 export { default as Separator } from './separator.js';
-export { default as Link, type LinkProps } from './link.js';
-export { default as List, type ListProps } from './list.js';
-export { default as ListItem, type ListItemProps } from './list-item.js';
-export { default as Paragraph, type ParagraphProps } from './paragraph.js';
-export { default as Strong, type StrongProps } from './strong.js';
+export { default as Link } from './link.js';
+export { default as List } from './list.js';
+export { default as ListItem } from './list-item.js';
+export { default as Paragraph } from './paragraph.js';
+export { default as Strong } from './strong.js';
 export { default as AlertDialog } from './alert-dialog.js';
 export { default as Alert } from './alert.js';
-export { default as Tooltip, type TooltipProps } from './tooltip.js';
-export { default as Toolbar, type ToolbarProps } from './toolbar.js';
-export { default as Time, type TimeProps } from './time.js';
-export { default as Term, type TermProps } from './term.js';
-export {
-  default as Superscript,
-  type SuperscriptProps,
-} from './superscript.js';
-export { default as Subscript, type SubscriptProps } from './subscript.js';
-export { default as Mark, type MarkProps } from './mark.js';
-export { default as Insertion, type InsertionProps } from './insertion.js';
-export { default as Deletion, type DeletionProps } from './deletion.js';
+export { default as Tooltip } from './tooltip.js';
+export { default as Toolbar } from './toolbar.js';
+export { default as Time } from './time.js';
+export { default as Term } from './term.js';
+export { default as Superscript } from './superscript.js';
+export { default as Subscript } from './subscript.js';
+export { default as Mark } from './mark.js';
+export { default as Insertion } from './insertion.js';
+export { default as Deletion } from './deletion.js';
 export { default as Image } from './image.js';
 export { default as Article } from './article.js';
 export { default as Banner } from './banner.js';
 export { default as Checkbox } from './checkbox.js';
 export { default as Comment } from './comment.js';
-export {
-  default as Complementary,
-  type ComplementaryProps,
-} from './complementary.js';
+export { default as Complementary } from './complementary.js';
 export { default as ComboBox } from './combo-box.js';
-export {
-  default as ContentInfo,
-  type ContentInfoProps,
-} from './content-info.js';
-export { default as Definition, type DefinitionProps } from './definition.js';
-export { default as Dialog, type DialogProps } from './dialog.js';
-export { default as Directory, type DirectoryProps } from './directory.js';
-export { default as Document, type DocumentProps } from './document.js';
-export { default as Feed, type FeedProps } from './feed.js';
+export { default as ContentInfo } from './content-info.js';
+export { default as Definition } from './definition.js';
+export { default as Dialog } from './dialog.js';
+export { default as Document } from './document.js';
+export { default as Feed } from './feed.js';
 export { default as Figure } from './figure.js';
-export { default as Form, type FormProps } from './form.js';
-export { default as Grid, type GridProps } from './grid.js';
-export { default as Group, type GroupProps } from './group.js';
-export { default as ListBox, type ListBoxProps } from './list-box.js';
-export { default as Log, type LogProps } from './log.js';
-export { default as Main, type MainProps } from './main.js';
-export { default as Marquee, type MarqueeProps } from './marquee.js';
-export { default as Math, type MathProps } from './math.js';
-export { default as Menu, type MenuProps } from './menu.js';
-export { default as MenuBar, type MenuBarProps } from './menu-bar.js';
-export { default as MenuItem, type MenuItemProps } from './menu-item.js';
-export {
-  default as MenuItemCheckbox,
-  type MenuItemCheckboxProps,
-} from './menu-item-checkbox.js';
-export {
-  default as MenuItemRadio,
-  type MenuItemRadioProps,
-} from './menu-item-radio.js';
-export { default as Navigation, type NavigationProps } from './navigation.js';
-export { default as Option, type OptionProps } from './option.js';
-export {
-  default as ProgressBar,
-  type ProgressBarProps,
-} from './progress-bar.js';
-export { default as Radio, type RadioProps } from './radio.js';
-export { default as RadioGroup, type RadioGroupProps } from './radio-group.js';
-export { default as RowGroup, type RowGroupProps } from './row-group.js';
-export { default as RowHeader, type RowHeaderProps } from './row-header.js';
-export { default as Scrollbar, type ScrollbarProps } from './scrollbar.js';
-export { default as Search, type SearchProps } from './search.js';
-export { default as SearchBox, type SearchBoxProps } from './search-box.js';
-export { default as Slider, type SliderProps } from './slider.js';
-export { default as SpinButton, type SpinButtonProps } from './spin-button.js';
-export { default as Status, type StatusProps } from './status.js';
-export { default as Suggestion, type SuggestionProps } from './suggestion.js';
-export { default as Switch, type SwitchProps } from './switch.js';
-export { default as Tab, type TabProps } from './tab.js';
-export { default as Table, type TableProps } from './table.js';
-export { default as TabList, type TabListProps } from './tab-list.js';
-export { default as TabPanel, type TabPanelProps } from './tab-panel.js';
-export { default as TextBox, type TextBoxProps } from './text-box.js';
-export { default as Timer, type TimerProps } from './timer.js';
-export { default as Tree, type TreeProps } from './tree.js';
-export { default as TreeGrid, type TreeGridProps } from './tree-grid.js';
-export { default as TreeItem, type TreeItemProps } from './tree-item.js';
+export { default as Form } from './form.js';
+export { default as Grid } from './grid.js';
+export { default as Group } from './group.js';
+export { default as ListBox } from './list-box.js';
+export { default as Log } from './log.js';
+export { default as Main } from './main.js';
+export { default as Marquee } from './marquee.js';
+export { default as Math } from './math.js';
+export { default as Menu } from './menu.js';
+export { default as MenuBar } from './menu-bar.js';
+export { default as MenuItem } from './menu-item.js';
+export { default as MenuItemCheckbox } from './menu-item-checkbox.js';
+export { default as MenuItemRadio } from './menu-item-radio.js';
+export { default as Navigation } from './navigation.js';
+export { default as Option } from './option.js';
+export { default as ProgressBar } from './progress-bar.js';
+export { default as Radio } from './radio.js';
+export { default as RadioGroup } from './radio-group.js';
+export { default as RowGroup } from './row-group.js';
+export { default as RowHeader } from './row-header.js';
+export { default as Scrollbar } from './scrollbar.js';
+export { default as Search } from './search.js';
+export { default as SearchBox } from './search-box.js';
+export { default as Slider } from './slider.js';
+export { default as SpinButton } from './spin-button.js';
+export { default as Status } from './status.js';
+export { default as Suggestion } from './suggestion.js';
+export { default as Switch } from './switch.js';
+export { default as Tab } from './tab.js';
+export { default as Table } from './table.js';
+export { default as TabList } from './tab-list.js';
+export { default as TabPanel } from './tab-panel.js';
+export { default as TextBox } from './text-box.js';
+export { default as Timer } from './timer.js';
+export { default as Tree } from './tree.js';
+export { default as TreeGrid } from './tree-grid.js';
+export { default as TreeItem } from './tree-item.js';
 export { default as Application } from './application.js';

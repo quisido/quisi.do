@@ -1,11 +1,6 @@
 /* eslint-disable no-magic-numbers */
-import type { ReactElement, ReactNode } from 'react';
-
-export interface HeadingProps {
-  readonly children: ReactNode;
-  readonly id?: string | undefined;
-  readonly level: number;
-}
+import type { ReactElement } from 'react';
+import type { HeadingProps } from '../shared/heading-props.js';
 
 /**
  * A heading for a section of the page.

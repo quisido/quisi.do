@@ -1,11 +1,7 @@
 import type { Attributes, ReactElement } from 'react';
 import type { RowProps } from '../shared/row-props.js';
 import type { CellProps } from '../shared/cell-props.js';
-
-export interface TableProps {
-  readonly caption: string;
-  readonly rows: readonly (RowProps & Required<Attributes>)[];
-}
+import type { TableProps } from '../shared/table-props.js';
 
 /**
  *   A `Table` component contains data arranged in rows and columns. Use

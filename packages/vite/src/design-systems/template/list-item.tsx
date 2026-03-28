@@ -1,8 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface ListItemProps {
-  readonly children: ReactNode;
-}
+import type { ReactElement } from 'react';
+import type { ListItemProps } from '../shared/list-item-props.js';
 
 /**
  * A single item in a list or directory.

@@ -1,8 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface RowHeaderProps {
-  readonly children: ReactNode;
-}
+import type { ReactElement } from 'react';
+import type { RowHeaderProps } from '../shared/row-header-props.js';
 
 /**
  *   A `RowHeader` component identifies a cell as header information for a row

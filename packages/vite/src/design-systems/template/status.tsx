@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface StatusProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { StatusProps } from '../shared/status-props.js';
 
 /**
  *   A `Status` component is a live region for advisory information that is not

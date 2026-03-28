@@ -1,16 +1,17 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface TermProps {
-  readonly children: ReactNode;
-  readonly describedBy?: string | undefined;
-}
+import type { ReactElement } from 'react';
+import type { TermProps } from '../shared/term-props.js';
 
 /**
- * Word or phrase with an optional corresponding definition.
+ *   A `Term` component represents a word or phrase with an optional
+ * corresponding definition.
+ *   A term is used to explicitly identify a word or phrase for which a
+ * definition has been provided or is expected to be provided by the user.
+ *   _Do not_ use interactive elements such as links within a term.
+ * @see {@link https://w3c.github.io/aria/#term | WAI-ARIA `term` role}
  */
 export default function Term({
   children,
-  describedBy,
+  definitionId,
 }: TermProps): ReactElement {
-  return <dfn aria-describedby={describedBy}>{children}</dfn>;
+  return <dfn aria-details={definitionId}>{children}</dfn>;
 }

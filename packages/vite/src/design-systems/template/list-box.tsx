@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface ListBoxProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { ListBoxProps } from '../shared/list-box-props.js';
 
 /**
  *   A `ListBox` component lets the user choose one or more items from a list

@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface NavigationProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { NavigationProps } from '../shared/navigation-props.js';
 
 /**
  *   A `Navigation` component is a landmark containing a collection of

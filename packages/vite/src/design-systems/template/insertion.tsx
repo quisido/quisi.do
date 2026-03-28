@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface InsertionProps {
-  readonly children: ReactNode;
-  readonly describedBy?: string | undefined;
-}
+import type { ReactElement } from 'react';
+import type { InsertionProps } from '../shared/insertion-props.js';
 
 /**
  *   An insertion contains content that is marked as added or content that is

@@ -3,13 +3,13 @@ interface DisabledProps {
    * @default false
    */
   readonly disabled?: boolean | undefined;
-  readonly readOnly?: undefined;
+  readonly readOnly?: false | undefined;
 }
 
 export type DisabledOrReadOnly<T> = T & (DisabledProps | ReadOnlyProps);
 
 interface ReadOnlyProps {
-  readonly disabled?: undefined;
+  readonly disabled?: false | undefined;
   /**
    * @default false
    */

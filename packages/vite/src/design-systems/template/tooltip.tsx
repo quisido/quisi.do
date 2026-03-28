@@ -1,10 +1,6 @@
-import { type ReactElement, type ReactNode } from 'react';
+import type { ReactElement } from 'react';
 import useTooltip from '../shared/use-tooltip.js';
-
-export interface TooltipProps {
-  readonly children: ReactNode;
-  readonly htmlFor: string;
-}
+import type { TooltipProps } from '../shared/tooltip-props.js';
 
 /**
  *   A `Tooltip` component provides contextual information about an element when

@@ -1,16 +1,12 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface ParagraphProps {
-  readonly children: ReactNode;
-  readonly describedBy?: string | undefined;
-}
+import type { ReactElement } from 'react';
+import type { ParagraphProps } from '../shared/paragraph-props.js';
 
 /**
  * A paragraph of content.
  */
 export default function Paragraph({
   children,
-  describedBy,
+  id,
 }: ParagraphProps): ReactElement {
-  return <p aria-describedby={describedBy}>{children}</p>;
+  return <p id={id}>{children}</p>;
 }

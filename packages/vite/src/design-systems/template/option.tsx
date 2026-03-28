@@ -1,8 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface OptionProps {
-  readonly children: ReactNode;
-}
+import type { ReactElement } from 'react';
+import type { OptionProps } from '../shared/option-props.js';
 
 /**
  *   An `Option` component represents an item in a `ListBox`. It should be an

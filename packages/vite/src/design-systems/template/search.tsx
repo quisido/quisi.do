@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface SearchProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { SearchProps } from '../shared/search-props.js';
 
 /**
  *   A `Search` component is a landmark region containing items and objects

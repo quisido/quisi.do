@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface EmphasisProps {
-  readonly children: ReactNode;
-  readonly describedBy?: string | undefined;
-}
+import type { ReactElement } from 'react';
+import type { EmphasisProps } from '../shared/emphasis-props.js';
 
 /**
  *   An `Emphasis` component contains one or more emphasized characters.
@@ -15,9 +11,6 @@ export interface EmphasisProps {
  * `Strong` component is more appropriate.
  * @see {@link https://w3c.github.io/aria/#emphasis | WAI-ARIA `emphasis` role}
  */
-export default function Emphasis({
-  children,
-  describedBy,
-}: EmphasisProps): ReactElement {
-  return <em aria-describedby={describedBy}>{children}</em>;
+export default function Emphasis({ children }: EmphasisProps): ReactElement {
+  return <em>{children}</em>;
 }

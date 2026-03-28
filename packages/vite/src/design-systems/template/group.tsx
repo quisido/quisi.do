@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface GroupProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { GroupProps } from '../shared/group-props.js';
 
 /**
  *   A `Group` component collects related interface objects and information that

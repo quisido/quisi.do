@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface TimeProps {
-  readonly children: ReactNode;
-  readonly describedBy?: string | undefined;
-}
+import type { ReactElement } from 'react';
+import type { TimeProps } from '../shared/time-props.js';
 
 /**
  * A valid date or time string format list a specific point in time.

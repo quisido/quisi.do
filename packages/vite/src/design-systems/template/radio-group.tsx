@@ -1,9 +1,5 @@
-import type { ReactElement, ReactNode } from 'react';
-
-export interface RadioGroupProps {
-  readonly children: ReactNode;
-  readonly label: string;
-}
+import type { ReactElement } from 'react';
+import type { RadioGroupProps } from '../shared/radio-group-props.js';
 
 /**
  *   A `RadioGroup` component groups `Radio` buttons so only one item in the
