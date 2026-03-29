@@ -1,0 +1,56 @@
+name: Copilot Autofix
+
+jobs:
+  notify-copilot:
+    name: Notify Copilot
+    if: github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      pull-requests: write
+    steps:
+      - name: Post comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pullRequests = context.payload.workflow_run.pull_requests;
+            if (!pullRequests || pullRequests.length === 0) return;
+
+            const prNumber = pullRequests[0].number;
+            const runId = context.payload.workflow_run.id;
+            const runName = context.payload.workflow_run.name;
+            const runUrl = context.payload.workflow_run.html_url;
+
+            const { data: { jobs } } = await github.rest.actions.listJobsForWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: runId,
+            });
+
+            const failedJobs = jobs.filter(job => job.conclusion === 'failure');
+            const jobList = failedJobs
+              .map(job => `- [${job.name}](${job.html_url})`)
+              .join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: [
+                `@github-copilot The CI pipeline ("${runName}") failed for this pull request.`,
+                ``,
+                `Please analyze the failure(s) and implement a fix.`,
+                ``,
+                `**Failed job${failedJobs.length === 1 ? '' : 's'}:**`,
+                jobList,
+                ``,
+                `Full run: ${runUrl}`,
+              ].join('\n'),
+            });
+
+on:
+  workflow_run:
+    workflows:
+      - Continuous integration
+    types:
+      - completed
