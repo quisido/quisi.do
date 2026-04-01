@@ -7,6 +7,11 @@ runs:
   steps:
     - name: Setup
       uses: ./.github/actions/setup
+    - name: Install browsers
+      shell: bash
+      run: |
+        npx playwright install --only-shell --with-deps \
+          chromium-headless-shell firefox webkit
     - name: Test
       run: npm test
       shell: bash

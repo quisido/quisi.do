@@ -14,6 +14,8 @@ interface FeedArticleProps {
   readonly setSize?: number | undefined;
 }
 
+const UNKNOWN_SET_SIZE = -1;
+
 const FeedArticleComponent = ({
   children,
   heading,
@@ -55,8 +57,8 @@ const FeedArticleComponent = ({
  *   A `Feed` component is a scrollable list of `Article` components where
  * articles may be added to or removed from either end of the list as the user
  * reads and scrolls through the content.
- * 
- * 
+ *
+ *
  *   A `Feed` component is a scrollable list of articles where scrolling might
  * cause articles to be added to or removed from either end of the list.
  *   A feed enables users to both read and scroll through a stream of rich
@@ -75,15 +77,6 @@ const FeedArticleComponent = ({
  * requirements help assistive technologies gracefully respond to changes in the
  * feed content that occur simultaneously with user commands to move the reading
  * cursor within the feed.
- *   
-
-
-
-In addition to providing a brief label, authors MAY apply aria-describedby to article elements in a feed to suggest to screen readers which elements to speak after the label when users navigate by article. Screen readers MAY provide users with a way to quickly scan feed content by speaking both the label and accessible description when navigating by article, enabling the user to ignore repetitive or less important elements, such as embedded interaction widgets, that the author has left out of the description.
-
-Authors SHOULD provide keyboard commands for moving focus among articles in a feed so users who do not utilize an assistive technology that provides article navigation features can use the keyboard to navigate the feed.
-
-If the number of articles available in a feed supply is static, authors MAY specify aria-setsize on article elements in that feed. However, if the total number is extremely large, indefinite, or changes often, authors MAY set aria-setsize to -1 to communicate the unknown size of the set.
  * @see {@link https://w3c.github.io/aria/#feed | WAI-ARIA `feed` role}
  */
 export default function Feed({
@@ -93,7 +86,7 @@ export default function Feed({
   labelledBy,
   onAppend,
   onPrepend,
-  setSize,
+  setSize = UNKNOWN_SET_SIZE,
 }: FeedProps): ReactElement {
   const {
     appending,
@@ -127,7 +120,10 @@ export default function Feed({
         </div>
       )}
       {articles.map(
-        (articleProps: FeedArticle, index: number): ReactElement => {
+        (
+          { key, ...articleProps }: FeedArticle,
+          index: number,
+        ): ReactElement => {
           const handleFocus = (): void => {
             // At the second article, prepend more.
             if (index <= 1 && handlePrepend) {
@@ -144,6 +140,7 @@ export default function Feed({
           return (
             <FeedArticleComponent
               {...articleProps}
+              key={key}
               onFocus={handleFocus}
               positionInSet={articlesOffset + index + 1}
               setSize={setSize}

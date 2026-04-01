@@ -1,4 +1,4 @@
-import { type Ref, useLayoutEffect, useRef } from 'react';
+import { type Ref, type RefObject, useLayoutEffect, useRef } from 'react';
 import assert from './assert.js';
 
 /**
@@ -9,7 +9,7 @@ import assert from './assert.js';
 export default function useIndeterminate(
   value: boolean | 'mixed',
 ): Ref<HTMLInputElement> {
-  const ref: Ref<HTMLInputElement> = useRef(null);
+  const ref: RefObject<HTMLInputElement | null> = useRef(null);
 
   useLayoutEffect((): void => {
     const { current: element } = ref;

@@ -8,5 +8,9 @@ export default function Code({
   children,
   describedBy,
 }: CodeProps): ReactElement {
-  return <code aria-describedby={describedBy}>{children}</code>;
+  return (
+    <code aria-describedby={describedBy} role="code">
+      {children}
+    </code>
+  );
 }

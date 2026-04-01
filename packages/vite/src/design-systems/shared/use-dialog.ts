@@ -1,4 +1,10 @@
-import { type ReactNode, type Ref, useLayoutEffect, useRef } from 'react';
+import {
+  type ReactNode,
+  type Ref,
+  type RefObject,
+  useLayoutEffect,
+  useRef,
+} from 'react';
 import useHeadingOrLabel from './use-heading-or-label.js';
 import useId from './use-id.js';
 import validateNonNull from '../../utils/validate-non-null.js';
@@ -28,7 +34,7 @@ export default function useDialog({
 }: Props): DialogState {
   const descriptionId: string = useId();
   const headingId: string = useId();
-  const ref: Ref<HTMLDialogElement> = useRef(null);
+  const ref: RefObject<HTMLDialogElement | null> = useRef(null);
 
   useLayoutEffect((): VoidFunction | undefined => {
     if (!modal) {

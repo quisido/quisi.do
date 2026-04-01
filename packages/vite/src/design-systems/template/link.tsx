@@ -19,6 +19,8 @@ export default function Link({
   onClick,
   title,
 }: LinkProps): ReactElement {
+  const isExternal: boolean = /^(?:https?:)?\/\//u.test(href);
+
   const handleClick = ((): MouseEventHandler<HTMLAnchorElement> | undefined => {
     if (onClick === undefined) {
       return;
@@ -30,16 +32,16 @@ export default function Link({
     };
   })();
 
-  const rel = ((): string => {
-    if (href.startsWith('http')) {
-      return 'nofollow noopener noreferrer';
+  const rel = ((): string | undefined => {
+    if (!isExternal) {
+      return;
     }
 
-    return 'noreferrer';
+    return 'nofollow noopener noreferrer';
   })();
 
   const target = ((): HTMLAttributeAnchorTarget | undefined => {
-    if (!href.startsWith('http')) {
+    if (!isExternal) {
       return;
     }
 

@@ -8,5 +8,9 @@ export default function Mark({
   children,
   describedBy,
 }: MarkProps): ReactElement {
-  return <mark aria-describedby={describedBy}>{children}</mark>;
+  return (
+    <mark aria-describedby={describedBy} role="mark">
+      {children}
+    </mark>
+  );
 }
