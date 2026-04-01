@@ -3,6 +3,13 @@
   "version": "2.1.3",
   "author": "quisi.do <sentry-react@quisi.do>",
   "description": "A React component for instantiating Sentry",
+  "keywords": [
+    "error-tracking",
+    "monitoring",
+    "observability",
+    "react",
+    "sentry"
+  ],
   "homepage": "https://www.npmjs.com/package/sentry-react",
   "license": "MIT",
   "main": "./dist/index.js",

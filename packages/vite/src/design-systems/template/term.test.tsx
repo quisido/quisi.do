@@ -7,7 +7,7 @@ describe('Term', (): void => {
     const { getByRole } = render(
       <>
         <span id="test-id">Test description</span>
-        <Term describedBy="test-id">Test term</Term>
+        <Term definitionId="test-id">Test term</Term>
       </>,
     );
     getByRole('term', { description: 'Test description' });

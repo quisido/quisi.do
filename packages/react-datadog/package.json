@@ -3,6 +3,13 @@
   "version": "3.0.1",
   "author": "quisi.do <react-datadog@quisi.do>",
   "description": "React wrapper for instantiating Datadog",
+  "keywords": [
+    "analytics",
+    "datadog",
+    "monitoring",
+    "observability",
+    "react"
+  ],
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/react-datadog#readme",
   "license": "MIT",
   "main": "./dist/index.js",

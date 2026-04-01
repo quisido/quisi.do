@@ -3,6 +3,14 @@
   "version": "1.0.1",
   "author": "quisi.do <csp-shared@quisi.do>",
   "description": "isomorphic Content Security Policy modules",
+  "keywords": [
+    "content-security-policy",
+    "csp",
+    "isomorphic",
+    "security",
+    "shared",
+    "typescript"
+  ],
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/csp-shared#readme",
   "license": "MIT",
   "main": "./dist/index.js",

@@ -3,6 +3,14 @@
   "version": "3.0.4",
   "author": "quisi.do <lazy-i18n@quisi.do>",
   "description": "Lazy loads translations for React apps",
+  "keywords": [
+    "i18n",
+    "internationalization",
+    "lazy-loading",
+    "localization",
+    "react",
+    "translations"
+  ],
   "homepage": "https://www.npmjs.com/package/lazy-i18n",
   "license": "MIT",
   "main": "./dist/index.js",

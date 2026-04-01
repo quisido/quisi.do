@@ -1,13 +1,11 @@
 import { render } from '@testing-library/react';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { ContentInfo } from './index.js';
 
 describe('ContentInfo', (): void => {
   it('should be content info', (): void => {
-    const { getByRole } = render(
-      <ContentInfo label="Test content info">Test content</ContentInfo>,
-    );
+    const { getByRole } = render(<ContentInfo>Test content</ContentInfo>);
 
-    getByRole('contentinfo', { name: 'Test content info' });
+    expect(getByRole('contentinfo').textContent).toBe('Test content');
   });
 });

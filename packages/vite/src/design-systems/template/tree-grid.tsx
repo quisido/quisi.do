@@ -6,14 +6,15 @@ import type { TreeGridProps } from '../shared/tree-grid-props.js';
  * collapsed in the same manner as a `Tree`.
  */
 export default function TreeGrid({
+  caption,
   children,
-  label,
 }: TreeGridProps): ReactElement {
   /**
    *   Focus MUST be managed on this container role.
    */
   return (
-    <table aria-label={label} role="treegrid">
+    <table role="treegrid">
+      <caption>{caption}</caption>
       {children}
     </table>
   );

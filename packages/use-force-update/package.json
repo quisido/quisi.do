@@ -3,6 +3,13 @@
   "version": "2.0.0",
   "author": "quisi.do <use-force-update@quisi.do>",
   "description": "React hook to force your function component to re-render",
+  "keywords": [
+    "force-update",
+    "hook",
+    "hooks",
+    "react",
+    "rerender"
+  ],
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/use-force-update#readme",
   "license": "MIT",
   "main": "./dist/index.js",

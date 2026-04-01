@@ -3,6 +3,13 @@
   "version": "1.1.0",
   "author": "quisi.do <use-shallow-memo@quisi.do>",
   "description": "a simple useMemo for objects",
+  "keywords": [
+    "hook",
+    "hooks",
+    "memoization",
+    "react",
+    "shallow-equal"
+  ],
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/use-shallow-memo#readme",
   "license": "MIT",
   "main": "./dist/index.js",

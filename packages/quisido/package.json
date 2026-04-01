@@ -3,6 +3,14 @@
   "version": "0.0.2",
   "author": "quisi.do <quisido@quisi.do>",
   "description": "all-in-one",
+  "keywords": [
+    "build-tool",
+    "cli",
+    "eslint",
+    "typescript",
+    "vite",
+    "vitest"
+  ],
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/quisido#readme",
   "license": "MIT",
   "main": "./dist/index.js",

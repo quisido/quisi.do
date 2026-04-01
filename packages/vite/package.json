@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "author": "quisi.do <vite@quisi.do>",
   "description": "quisi.do",
+  "keywords": [
+    "analytics",
+    "frontend",
+    "observability",
+    "react",
+    "typescript",
+    "vite"
+  ],
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
@@ -79,8 +87,7 @@
     "react-router": "^7.11.0",
     "sentry-react": "^2.1.3",
     "use-force-update": "^2.0.0",
-    "use-shallow-memo": "^1.1.0",
-    "zone.js": "^0.15.1"
+    "use-shallow-memo": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.28.5",

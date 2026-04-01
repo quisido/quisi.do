@@ -5,6 +5,13 @@
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
+  "keywords": [
+    "browser-game",
+    "game-engine",
+    "react",
+    "typescript",
+    "vite"
+  ],
   "scripts": {
     "build": "exit 0",
     "start": "vite",

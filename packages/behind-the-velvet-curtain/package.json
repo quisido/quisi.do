@@ -3,6 +3,13 @@
   "version": "0.0.1",
   "author": "quisi.do <game@quisi.do>",
   "description": "Monogatari boilerplate visual novel",
+  "keywords": [
+    "game",
+    "monogatari",
+    "typescript",
+    "visual-novel",
+    "vite"
+  ],
   "license": "UNLICENSED",
   "private": true,
   "type": "module",

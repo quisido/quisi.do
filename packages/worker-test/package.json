@@ -3,6 +3,14 @@
   "version": "1.0.1",
   "author": "quisi.do <worker-test@quisi.do>",
   "description": "shared testing utilities for quisi.do Cloudflare workers modules",
+  "keywords": [
+    "cloudflare",
+    "cloudflare-workers",
+    "test-utils",
+    "testing",
+    "vitest",
+    "worker"
+  ],
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/worker-test#readme",
   "license": "MIT",
   "main": "./dist/index.js",

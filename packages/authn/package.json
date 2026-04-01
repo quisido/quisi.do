@@ -4,6 +4,14 @@
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
+  "keywords": [
+    "authentication",
+    "cloudflare-workers",
+    "d1",
+    "oauth",
+    "patreon",
+    "serverless"
+  ],
   "scripts": {
     "build": "exit 0",
     "start": "npm run dev",

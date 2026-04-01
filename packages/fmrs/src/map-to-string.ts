@@ -2,6 +2,13 @@ import isStringifiable from './is-stringifiable.js';
 
 const DEFAULT = '[object Object]';
 
+/**
+ * Converts a value into a readable string.
+ *
+ * @example
+ * values.map(mapToString);
+ * const message = toString(value);
+ */
 export default function mapToString(value: unknown): string {
   if (typeof value === 'undefined') {
     return 'undefined';

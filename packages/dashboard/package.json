@@ -4,6 +4,14 @@
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
+  "keywords": [
+    "analytics",
+    "cloudflare-workers",
+    "dashboard",
+    "datadog",
+    "monitoring",
+    "observability"
+  ],
   "scripts": {
     "build": "exit 0",
     "start": "npm run dev",

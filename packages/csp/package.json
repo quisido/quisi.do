@@ -4,6 +4,14 @@
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
+  "keywords": [
+    "cloudflare-workers",
+    "content-security-policy",
+    "csp",
+    "reporting",
+    "security",
+    "serverless"
+  ],
   "scripts": {
     "build": "exit 0",
     "start": "npm run dev",
