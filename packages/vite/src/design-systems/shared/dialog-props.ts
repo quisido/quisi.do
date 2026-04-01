@@ -8,6 +8,7 @@ interface Props {
    * @default false
    */
   readonly modal?: boolean | undefined;
+  readonly onDismiss?: VoidFunction | undefined;
 }
 
 export type DialogProps = HeadingOrLabel<Props>;

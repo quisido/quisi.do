@@ -1,13 +1,14 @@
 import { type ReactElement } from 'react';
-import AlertDialog from '../design-systems/template/alert-dialog.js';
 import type { NotificationProps } from '../contexts/notifications.js';
+import { Dialog } from '../design-systems/template/index.js';
 
 export default function Notification({
+  description,
   Header,
   icon,
   Message,
   onDismiss,
-  type,
+  // type,
 }: NotificationProps): ReactElement {
   const labelProps = (() => {
     if (Header === undefined) {
@@ -22,10 +23,12 @@ export default function Notification({
   })();
 
   return (
-    <AlertDialog {...labelProps} icon={icon} onDismiss={onDismiss} type={type}>
+    // type={type}
+    <Dialog {...labelProps} description={description} onDismiss={onDismiss}>
+      {icon}
       <span style={{ fontSize: '0.8em' }}>
         <Message />
       </span>
-    </AlertDialog>
+    </Dialog>
   );
 }

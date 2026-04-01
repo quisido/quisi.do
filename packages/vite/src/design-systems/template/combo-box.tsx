@@ -34,15 +34,17 @@ export default function ComboBox({
   const expanded = false;
 
   return (
-    <label aria-expanded={expanded} aria-haspopup="listbox" role="combobox">
-      <span>{label}</span>
-      <select
-        aria-disabled={disabled}
-        aria-readonly={readOnly}
-        disabled={disabled}
-      >
-        {children}
-      </select>
-    </label>
+    <div aria-expanded={expanded} aria-haspopup="listbox" role="combobox">
+      <label>
+        <span>{label}</span>
+        <select
+          aria-disabled={disabled}
+          aria-readonly={readOnly}
+          disabled={disabled}
+        >
+          {children}
+        </select>
+      </label>
+    </div>
   );
 }

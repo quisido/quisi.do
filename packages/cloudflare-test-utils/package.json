@@ -3,14 +3,6 @@
   "version": "1.0.3",
   "author": "quisi.do <cloudflare-test-utils@quisi.do>",
   "description": "test utilities for Cloudflare workers",
-  "keywords": [
-    "cloudflare",
-    "cloudflare-workers",
-    "test-utils",
-    "testing",
-    "typescript",
-    "vitest"
-  ],
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/cloudflare-test-utils#readme",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -38,6 +30,14 @@
     "types": "./dist/index.d.ts",
     "default": "./dist/index.js"
   },
+  "keywords": [
+    "cloudflare",
+    "cloudflare-workers",
+    "test-utils",
+    "testing",
+    "typescript",
+    "vitest"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"

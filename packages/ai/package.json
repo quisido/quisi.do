@@ -4,13 +4,6 @@
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
-  "keywords": [
-    "ai",
-    "cloudflare-workers",
-    "developer-tools",
-    "llm",
-    "ollama"
-  ],
   "scripts": {
     "build": "wrangler types",
     "start": "wrangler types && wrangler dev",
@@ -24,6 +17,13 @@
   "bin": {
     "quisido-ai": "./scripts/dev-prompt.sh"
   },
+  "keywords": [
+    "ai",
+    "cloudflare-workers",
+    "developer-tools",
+    "llm",
+    "ollama"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"

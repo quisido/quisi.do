@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import Heading from './heading.js';
 import type { RegionProps } from '../shared/region-props.js';
-import HeadingLevelProvider from '../shared/heading-level-provider.jsx';
+import HeadingLevelProvider from '../shared/heading-level-provider.js';
 import useRegion from '../shared/use-region.js';
 
 /**

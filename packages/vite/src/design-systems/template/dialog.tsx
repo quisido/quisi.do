@@ -2,8 +2,8 @@ import type { ReactElement } from 'react';
 import type { DialogProps } from '../shared/dialog-props.js';
 import { FocusScope } from 'react-aria';
 import useDialog from '../shared/use-dialog.js';
-import Paragraph from './paragraph.jsx';
-import Heading from './heading.jsx';
+import Paragraph from './paragraph.js';
+import Heading from './heading.js';
 
 /**
  *   A `Dialog` component is a descendant window of the primary window of a web
@@ -25,12 +25,16 @@ export default function Dialog({
   label,
   labelledBy: labelledByProp,
   modal = false,
+  onDismiss,
 }: DialogProps): ReactElement {
-  const { descriptionId, headingId, labelledBy } = useDialog({
-    heading,
-    label,
-    labelledBy: labelledByProp,
-  });
+  const { descriptionId, handleDismiss, headingId, labelledBy, ref } =
+    useDialog({
+      heading,
+      label,
+      labelledBy: labelledByProp,
+      modal,
+      onDismiss,
+    });
 
   return (
     <dialog
@@ -38,16 +42,20 @@ export default function Dialog({
       aria-label={label}
       aria-labelledby={labelledBy}
       aria-modal={modal}
-      open
+      open={!modal}
+      ref={ref}
     >
       <FocusScope autoFocus={modal} contain={modal} restoreFocus>
-        {heading !== undefined && (
-          <Heading id={headingId} level={3}>
-            {heading}
-          </Heading>
-        )}
-        {children}
-        <Paragraph id={descriptionId}>{description}</Paragraph>
+        <div>
+          {heading !== undefined && (
+            <Heading id={headingId} level={3}>
+              {heading}
+            </Heading>
+          )}
+          {children}
+          <Paragraph id={descriptionId}>{description}</Paragraph>
+        </div>
+        <button onClick={handleDismiss}>Close</button>
       </FocusScope>
     </dialog>
   );

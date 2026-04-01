@@ -7,12 +7,10 @@ import mapHashToAuthnErrorCode from '../utils/map-hash-to-authn-error-code';
 import AuthnErrorsTranslationsProvider from './authn-errors-translations-provider.js';
 
 export default class AuthnErrorNotification implements NoActionNotification {
+  public readonly description = 'An authentication error occurred.';
   public readonly icon = '⚠️';
-
   readonly #Header: ComponentType | undefined;
-
   readonly #Message: ComponentType;
-
   public readonly type = 'error';
 
   public constructor(code: ErrorCode | null) {

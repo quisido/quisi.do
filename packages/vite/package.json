@@ -3,14 +3,6 @@
   "version": "1.0.0",
   "author": "quisi.do <vite@quisi.do>",
   "description": "quisi.do",
-  "keywords": [
-    "analytics",
-    "frontend",
-    "observability",
-    "react",
-    "typescript",
-    "vite"
-  ],
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
@@ -30,6 +22,14 @@
     "email": "vite@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "keywords": [
+    "analytics",
+    "frontend",
+    "observability",
+    "react",
+    "typescript",
+    "vite"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"

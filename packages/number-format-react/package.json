@@ -3,14 +3,6 @@
   "version": "2.0.1",
   "author": "quisi.do <number-format-react@quisi.do>",
   "description": "the Intl.NumberFormat class as a React component",
-  "keywords": [
-    "formatting",
-    "internationalization",
-    "intl",
-    "localization",
-    "number-format",
-    "react"
-  ],
   "homepage": "https://www.npmjs.com/package/number-format-react",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -37,6 +29,14 @@
     "types": "./dist/index.d.ts",
     "default": "./dist/index.js"
   },
+  "keywords": [
+    "formatting",
+    "internationalization",
+    "intl",
+    "localization",
+    "number-format",
+    "react"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"

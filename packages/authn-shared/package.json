@@ -3,14 +3,6 @@
   "version": "1.1.5",
   "author": "quisi.do <authn-shared@quisi.do>",
   "description": "isomorphic authentication modules",
-  "keywords": [
-    "auth",
-    "authentication",
-    "isomorphic",
-    "oauth",
-    "shared",
-    "typescript"
-  ],
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/authn-shared#readme",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -36,6 +28,14 @@
     "types": "./dist/index.d.ts",
     "default": "./dist/index.js"
   },
+  "keywords": [
+    "auth",
+    "authentication",
+    "isomorphic",
+    "oauth",
+    "shared",
+    "typescript"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"

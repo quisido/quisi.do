@@ -1,6 +1,7 @@
 import type { FeedArticle } from './feed-article.js';
+import type { WithLabel } from './with-label.js';
 
-export interface FeedProps {
+interface Props {
   readonly articles: readonly FeedArticle[];
   /**
    *   The articles offset is the number of articles missing from the beginning
@@ -14,3 +15,5 @@ export interface FeedProps {
   readonly onPrepend?: (() => Promise<void>) | undefined;
   readonly setSize?: number | undefined;
 }
+
+export type FeedProps = WithLabel<Props>;

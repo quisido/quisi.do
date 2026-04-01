@@ -3,14 +3,6 @@
   "version": "1.0.8",
   "author": "quisi.do <worker@quisi.do>",
   "description": "shared quisi.do Cloudflare workers modules",
-  "keywords": [
-    "cloudflare",
-    "cloudflare-workers",
-    "serverless",
-    "typescript",
-    "utilities",
-    "worker"
-  ],
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/worker#readme",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -39,6 +31,14 @@
     "types": "./dist/index.d.ts",
     "default": "./dist/index.js"
   },
+  "keywords": [
+    "cloudflare",
+    "cloudflare-workers",
+    "serverless",
+    "typescript",
+    "utilities",
+    "worker"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"

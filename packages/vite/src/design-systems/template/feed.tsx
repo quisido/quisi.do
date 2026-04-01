@@ -4,8 +4,8 @@ import useFeed from '../shared/use-feed.js';
 import type { FeedArticle } from '../shared/feed-article.js';
 import useHeadingOrLabel from '../shared/use-heading-or-label.js';
 import useId from '../shared/use-id.js';
-import Heading from './heading.jsx';
-import HeadingLevelProvider from '../shared/heading-level-provider.jsx';
+import Heading from './heading.js';
+import HeadingLevelProvider from '../shared/heading-level-provider.js';
 import useHeadingLevel from '../shared/use-heading-level.js';
 
 interface FeedArticleProps {
@@ -89,6 +89,8 @@ If the number of articles available in a feed supply is static, authors MAY spec
 export default function Feed({
   articles,
   articlesOffset = 0,
+  label,
+  labelledBy,
   onAppend,
   onPrepend,
   setSize,
@@ -107,7 +109,13 @@ export default function Feed({
   });
 
   return (
-    <section aria-busy={busy} aria-errormessage={errorMessageId} role="feed">
+    <section
+      aria-busy={busy}
+      aria-errormessage={errorMessageId}
+      aria-label={label}
+      aria-labelledby={labelledBy}
+      role="feed"
+    >
       {errorMessage !== undefined && (
         <div id={errorMessageId}>{errorMessage}</div>
       )}

@@ -3,15 +3,6 @@
   "version": "2.1.2",
   "author": "quisi.do <fmrs@quisi.do>",
   "description": "filters/finds, maps, reduces, and sorts",
-  "keywords": [
-    "filter",
-    "functional-programming",
-    "map",
-    "reduce",
-    "sort",
-    "typescript",
-    "utilities"
-  ],
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/fmrs#readme",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -38,6 +29,15 @@
     "types": "./dist/index.d.ts",
     "default": "./dist/index.js"
   },
+  "keywords": [
+    "filter",
+    "functional-programming",
+    "map",
+    "reduce",
+    "sort",
+    "typescript",
+    "utilities"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"

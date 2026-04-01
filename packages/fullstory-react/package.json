@@ -3,13 +3,6 @@
   "version": "3.0.0",
   "author": "quisi.do <fullstory-react@quisi.do>",
   "description": "Fullstory integration with React",
-  "keywords": [
-    "analytics",
-    "fullstory",
-    "monitoring",
-    "observability",
-    "react"
-  ],
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/fullstory-react#readme",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -36,6 +29,13 @@
     "types": "./dist/index.d.ts",
     "default": "./dist/index.js"
   },
+  "keywords": [
+    "analytics",
+    "fullstory",
+    "monitoring",
+    "observability",
+    "react"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"

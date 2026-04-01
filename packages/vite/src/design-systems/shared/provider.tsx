@@ -1,6 +1,6 @@
 import type { PropsWithChildren, ReactElement } from 'react';
-import OwnsBanner from './owns-banner.jsx';
-import OwnsContentInfo from './owns-content-info.jsx';
+import OwnsBanner from './owns-banner.js';
+import OwnsContentInfo from './owns-content-info.js';
 
 /**
  * A page should contain at most one banner.

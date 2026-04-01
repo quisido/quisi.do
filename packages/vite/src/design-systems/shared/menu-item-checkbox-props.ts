@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
 export interface MenuItemCheckboxProps {
-  readonly checked?: boolean | undefined;
+  readonly checked?: 'mixed' | boolean | undefined;
   readonly children: ReactNode;
 }

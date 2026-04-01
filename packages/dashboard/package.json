@@ -4,14 +4,6 @@
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
-  "keywords": [
-    "analytics",
-    "cloudflare-workers",
-    "dashboard",
-    "datadog",
-    "monitoring",
-    "observability"
-  ],
   "scripts": {
     "build": "exit 0",
     "start": "npm run dev",
@@ -28,6 +20,14 @@
     "vitest:watch": "vitest watch",
     "whoami": "wrangler whoami"
   },
+  "keywords": [
+    "analytics",
+    "cloudflare-workers",
+    "dashboard",
+    "datadog",
+    "monitoring",
+    "observability"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"

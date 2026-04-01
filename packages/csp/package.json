@@ -4,14 +4,6 @@
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
-  "keywords": [
-    "cloudflare-workers",
-    "content-security-policy",
-    "csp",
-    "reporting",
-    "security",
-    "serverless"
-  ],
   "scripts": {
     "build": "exit 0",
     "start": "npm run dev",
@@ -40,6 +32,14 @@
     "vitest:watch": "vitest watch",
     "whoami": "wrangler whoami"
   },
+  "keywords": [
+    "cloudflare-workers",
+    "content-security-policy",
+    "csp",
+    "reporting",
+    "security",
+    "serverless"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"

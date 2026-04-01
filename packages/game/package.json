@@ -5,13 +5,6 @@
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
-  "keywords": [
-    "browser-game",
-    "game-engine",
-    "react",
-    "typescript",
-    "vite"
-  ],
   "scripts": {
     "build": "exit 0",
     "start": "vite",
@@ -28,6 +21,13 @@
     "email": "game@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "keywords": [
+    "browser-game",
+    "game-engine",
+    "react",
+    "typescript",
+    "vite"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
