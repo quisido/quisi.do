@@ -12,6 +12,7 @@ interface LazyNotificationProps {
 }
 
 const LOADING_NOTIFICATION: NotificationProps = {
+  description: 'This notification is loading.',
   icon: '⏳',
   Message(): ReactElement {
     return <I18n>Loading</I18n>;
