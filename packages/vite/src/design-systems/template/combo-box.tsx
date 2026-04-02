@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import { type ReactElement, useState } from 'react';
 import type { ComboBoxProps } from '../shared/combo-box-props.js';
 import useId from '../shared/use-id.js';
 
@@ -27,14 +27,24 @@ The changes introduced in ARIA 1.2 improve interoperability with assistive techn
  * @see {@link https://w3c.github.io/aria/#combobox | WAI-ARIA `combobox` role}
  */
 export default function ComboBox({
-  children,
   disabled = false,
   label,
+  onChange,
+  options,
   readOnly = false,
+  value,
 }: ComboBoxProps): ReactElement {
   const labelId: string = useId();
   const selectId: string = useId();
-  const expanded = false;
+  const [expanded, setExpanded] = useState(false);
+
+  const handleListBoxBlur = (): void => {
+    setExpanded(false);
+  };
+
+  const handleListBoxFocus = (): void => {
+    setExpanded(true);
+  };
 
   return (
     <div
@@ -43,17 +53,32 @@ export default function ComboBox({
       aria-labelledby={labelId}
       role="combobox"
     >
-      <label htmlFor={selectId} id={labelId}>
-        {label}
-      </label>
-      <select
+      <span id={labelId}>{label}</span>
+      <div
         aria-disabled={disabled}
         aria-readonly={readOnly}
-        disabled={disabled}
         id={selectId}
+        onBlur={handleListBoxBlur}
+        onFocus={handleListBoxFocus}
+        role="listbox"
+        tabIndex={0}
       >
-        {children}
-      </select>
+        {options.map(
+          (option: string): ReactElement => (
+            <div
+              aria-selected={option === value}
+              key={option}
+              onClick={(): void => {
+                onChange(option);
+                setExpanded(false);
+              }}
+              role="option"
+            >
+              {option}
+            </div>
+          ),
+        )}
+      </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { Definition, Term } from './index.js';
 import { render } from '@testing-library/react';
 
@@ -10,6 +10,7 @@ describe('Term', (): void => {
         <Definition id="test-id">Test definition</Definition>
       </>,
     );
-    getByRole('term', { description: 'Test description' });
+
+    expect(getByRole('term').textContent).toBe('Test term');
   });
 });

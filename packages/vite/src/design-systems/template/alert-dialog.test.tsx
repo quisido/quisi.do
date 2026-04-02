@@ -78,7 +78,7 @@ describe('AlertDialog', (): void => {
   });
 
   it('should be modal', async (): Promise<void> => {
-    render(
+    const { container, getByRole } = render(
       <>
         <button>First button</button>
         <AlertDialog label="Test modal label" onDismiss={handleTestDismiss}>
@@ -88,12 +88,19 @@ describe('AlertDialog', (): void => {
       </>,
     );
 
-    expect(window.document.activeElement).toHaveAccessibleName('Second button');
+    const dismissButton: HTMLElement | null = container.querySelector(
+      '[aria-label="Dismiss"]',
+    );
+    assert(dismissButton !== null);
+    const secondButton: HTMLElement = getByRole('button', {
+      name: 'Second button',
+    });
+    expect(window.document.activeElement).toBe(secondButton);
     await USER.tab();
-    expect(window.document.activeElement).toHaveAccessibleName('Dismiss');
+    expect(window.document.activeElement).toBe(dismissButton);
     await USER.tab();
-    expect(window.document.activeElement).toHaveAccessibleName('Second button');
+    expect(window.document.activeElement).toBe(secondButton);
     await USER.tab();
-    expect(window.document.activeElement).toHaveAccessibleName('Dismiss');
+    expect(window.document.activeElement).toBe(dismissButton);
   });
 });
