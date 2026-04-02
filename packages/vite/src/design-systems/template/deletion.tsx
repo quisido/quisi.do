@@ -11,5 +11,5 @@ import type { DeletionProps } from '../shared/deletion-props.js';
  * @see {@link https://w3c.github.io/aria/#deletion | WAI-ARIA `deletion` role}
  */
 export default function Deletion({ children }: DeletionProps): ReactElement {
-  return <del>{children}</del>;
+  return <del role="deletion">{children}</del>;
 }

@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { ComboBoxProps } from '../shared/combo-box-props.js';
+import useId from '../shared/use-id.js';
 
 /**
  *   A `ComboBox` component is an input that controls another element, such as a
@@ -31,20 +32,28 @@ export default function ComboBox({
   label,
   readOnly = false,
 }: ComboBoxProps): ReactElement {
+  const labelId: string = useId();
+  const selectId: string = useId();
   const expanded = false;
 
   return (
-    <div aria-expanded={expanded} aria-haspopup="listbox" role="combobox">
-      <label>
-        <span>{label}</span>
-        <select
-          aria-disabled={disabled}
-          aria-readonly={readOnly}
-          disabled={disabled}
-        >
-          {children}
-        </select>
+    <div
+      aria-expanded={expanded}
+      aria-haspopup="listbox"
+      aria-labelledby={labelId}
+      role="combobox"
+    >
+      <label htmlFor={selectId} id={labelId}>
+        {label}
       </label>
+      <select
+        aria-disabled={disabled}
+        aria-readonly={readOnly}
+        disabled={disabled}
+        id={selectId}
+      >
+        {children}
+      </select>
     </div>
   );
 }

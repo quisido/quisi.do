@@ -78,7 +78,7 @@ describe('AlertDialog', (): void => {
   });
 
   it('should be modal', async (): Promise<void> => {
-    const { getByRole } = render(
+    render(
       <>
         <button>First button</button>
         <AlertDialog label="Test modal label" onDismiss={handleTestDismiss}>
@@ -88,16 +88,12 @@ describe('AlertDialog', (): void => {
       </>,
     );
 
-    const dismissButton: HTMLElement = getByRole('button', { name: 'Dismiss' });
-    const secondButton: HTMLElement = getByRole('button', {
-      name: 'Second button',
-    });
-    expect(window.document.activeElement).toBe(secondButton);
+    expect(window.document.activeElement).toHaveAccessibleName('Second button');
     await USER.tab();
-    expect(window.document.activeElement).toBe(dismissButton);
+    expect(window.document.activeElement).toHaveAccessibleName('Dismiss');
     await USER.tab();
-    expect(window.document.activeElement).toBe(secondButton);
+    expect(window.document.activeElement).toHaveAccessibleName('Second button');
     await USER.tab();
-    expect(window.document.activeElement).toBe(dismissButton);
+    expect(window.document.activeElement).toHaveAccessibleName('Dismiss');
   });
 });

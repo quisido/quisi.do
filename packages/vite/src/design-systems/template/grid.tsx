@@ -1,5 +1,7 @@
-import type { ReactElement } from 'react';
+import type { Attributes, ReactElement } from 'react';
 import type { GridProps } from '../shared/grid-props.js';
+import type { CellProps } from '../shared/cell-props.js';
+import type { RowProps } from '../shared/row-props.js';
 
 /**
  *   A `Grid` component is a composite widget containing rows and cells where
@@ -7,13 +9,32 @@ import type { GridProps } from '../shared/grid-props.js';
  * describes relationships among elements and does not require a tabular visual
  * presentation.
  */
-export default function Grid({ children, label }: GridProps): ReactElement {
+export default function Grid({ caption, rows }: GridProps): ReactElement {
   /**
    *   Focus MUST be managed on this container role.
    */
   return (
-    <table aria-label={label} role="grid">
-      {children}
+    <table role="grid">
+      <caption>{caption}</caption>
+      {rows.map(
+        ({
+          cells,
+          key: rowKey,
+        }: RowProps & Required<Attributes>): ReactElement => (
+          <tr key={rowKey} role="row">
+            {cells.map(
+              ({
+                children,
+                key: cellKey,
+              }: CellProps & Required<Attributes>): ReactElement => (
+                <td key={cellKey} role="gridcell">
+                  {children}
+                </td>
+              ),
+            )}
+          </tr>
+        ),
+      )}
     </table>
   );
 }

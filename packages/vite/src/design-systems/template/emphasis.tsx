@@ -12,5 +12,5 @@ import type { EmphasisProps } from '../shared/emphasis-props.js';
  * @see {@link https://w3c.github.io/aria/#emphasis | WAI-ARIA `emphasis` role}
  */
 export default function Emphasis({ children }: EmphasisProps): ReactElement {
-  return <em>{children}</em>;
+  return <em role="emphasis">{children}</em>;
 }

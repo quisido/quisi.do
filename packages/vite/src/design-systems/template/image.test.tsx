@@ -4,7 +4,9 @@ import { render } from '@testing-library/react';
 
 describe('Image', (): void => {
   it('should be an image', (): void => {
-    const { getByRole } = render(<Image name="Test image" src="" />);
+    const { getByRole } = render(
+      <Image name="Test image" src="file://test.png" />,
+    );
     getByRole('img', { name: 'Test image' });
   });
 });

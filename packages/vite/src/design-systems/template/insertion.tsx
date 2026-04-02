@@ -9,9 +9,6 @@ import type { InsertionProps } from '../shared/insertion-props.js';
  * scenarios where multiple people are revising content.
  * @see {@link https://w3c.github.io/aria/#insertion | WAI-ARIA `insertion` role}
  */
-export default function Insertion({
-  children,
-  describedBy,
-}: InsertionProps): ReactElement {
-  return <ins aria-describedby={describedBy}>{children}</ins>;
+export default function Insertion({ children }: InsertionProps): ReactElement {
+  return <ins role="insertion">{children}</ins>;
 }

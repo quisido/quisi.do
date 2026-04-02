@@ -1,6 +1,7 @@
-import type { ReactNode } from 'react';
+import type { Attributes } from 'react';
+import type { RowProps } from './row-props.js';
 
 export interface TreeGridProps {
   readonly caption: string;
-  readonly children: ReactNode;
+  readonly rows: readonly (RowProps & Required<Attributes>)[];
 }

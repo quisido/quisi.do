@@ -1,15 +1,10 @@
 import { render } from '@testing-library/react';
 import { describe, it } from 'vitest';
-import { Grid, RowGroup } from './index.js';
+import { Grid } from './index.js';
 
 describe('Grid', (): void => {
   it('should be a grid', (): void => {
-    const { getByRole } = render(
-      <Grid label="Test grid">
-        <RowGroup label="Test row group">&nbsp;</RowGroup>
-      </Grid>,
-    );
-
+    const { getByRole } = render(<Grid caption="Test grid" rows={[]} />);
     getByRole('grid', { name: 'Test grid' });
   });
 

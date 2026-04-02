@@ -5,7 +5,7 @@ import { TreeGrid } from './index.js';
 describe('TreeGrid', (): void => {
   it('should be a tree grid', (): void => {
     const { getByRole } = render(
-      <TreeGrid caption="Test tree grid">&nbsp;</TreeGrid>,
+      <TreeGrid caption="Test tree grid" rows={[]} />,
     );
 
     getByRole('treegrid', { name: 'Test tree grid' });

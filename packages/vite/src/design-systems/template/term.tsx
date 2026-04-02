@@ -13,5 +13,9 @@ export default function Term({
   children,
   definitionId,
 }: TermProps): ReactElement {
-  return <dfn aria-details={definitionId}>{children}</dfn>;
+  return (
+    <dfn aria-details={definitionId} role="term">
+      {children}
+    </dfn>
+  );
 }

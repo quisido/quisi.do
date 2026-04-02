@@ -36,13 +36,21 @@ export default function Dialog({
       onDismiss,
     });
 
+  const open = ((): true | undefined => {
+    if (modal) {
+      return;
+    }
+
+    return true;
+  })();
+
   return (
     <dialog
       aria-describedby={descriptionId}
       aria-label={label}
       aria-labelledby={labelledBy}
       aria-modal={modal}
-      open={!modal}
+      open={open}
       ref={ref}
     >
       <FocusScope autoFocus={modal} contain={modal} restoreFocus>
@@ -55,7 +63,9 @@ export default function Dialog({
           {children}
           <Paragraph id={descriptionId}>{description}</Paragraph>
         </div>
-        <button onClick={handleDismiss}>Close</button>
+        <button onClick={handleDismiss} type="button">
+          Close
+        </button>
       </FocusScope>
     </dialog>
   );

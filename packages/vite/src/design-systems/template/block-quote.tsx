@@ -8,5 +8,5 @@ import type { BlockQuoteProps } from '../shared/block-quote-props.js';
 export default function BlockQuote({
   children,
 }: BlockQuoteProps): ReactElement {
-  return <blockquote>{children}</blockquote>;
+  return <blockquote role="blockquote">{children}</blockquote>;
 }

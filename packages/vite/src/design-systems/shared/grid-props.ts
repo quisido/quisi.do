@@ -1,6 +1,7 @@
-import type { ReactNode } from 'react';
+import type { Attributes } from 'react';
+import type { RowProps } from './row-props.js';
 
 export interface GridProps {
-  readonly children: ReactNode;
-  readonly label: string;
+  readonly caption: string;
+  readonly rows: readonly (RowProps & Required<Attributes>)[];
 }

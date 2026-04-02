@@ -6,9 +6,14 @@ import type { SearchProps } from '../shared/search-props.js';
  * that, together, create a search facility.
  */
 export default function Search({ children, label }: SearchProps): ReactElement {
+  /**
+   * `jsdom` does not support the <search> element:
+   *   The tag <search> is unrecognized in this browser. If you meant to render a
+   * React component, start its name with an uppercase letter.
+   */
   return (
-    <search aria-label={label} role="search">
+    <div aria-label={label} role="search">
       {children}
-    </search>
+    </div>
   );
 }

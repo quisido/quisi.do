@@ -32,6 +32,13 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
       'react-refresh/only-export-components': 'error',
     },
   },
+
+  // Temporary rules
+  {
+    rules: {
+      'no-warning-comments': 'warn',
+    },
+  },
 );
 
 export default CONFIG;
