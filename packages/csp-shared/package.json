@@ -30,6 +30,14 @@
     "types": "./dist/index.d.ts",
     "default": "./dist/index.js"
   },
+  "keywords": [
+    "content-security-policy",
+    "csp",
+    "isomorphic",
+    "security",
+    "shared",
+    "typescript"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
@@ -51,6 +59,6 @@
     "rimraf": "^6.1.0",
     "tslib": "^2.8.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.7"
+    "vitest": "^4.1.0"
   }
 }

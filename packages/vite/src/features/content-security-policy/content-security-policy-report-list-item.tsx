@@ -3,7 +3,7 @@ import useTheme from '../../hooks/use-theme.js';
 import validateString from '../../utils/validate-string.js';
 import styles from './content-security-policy-report-list-item.module.scss';
 import type ContentSecurityPolicyReport from './content-security-policy-report.js';
-import ContentSecurityPolicySourceFile from './content-security-policy-source-file.jsx';
+import ContentSecurityPolicySourceFile from './content-security-policy-source-file.js';
 
 const CLASS_NAME: string = validateString(styles['listItem']);
 const COUNT_CLASS_NAME: string = validateString(styles['count']);

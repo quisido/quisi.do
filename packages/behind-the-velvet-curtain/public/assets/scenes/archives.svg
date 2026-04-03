@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="wall" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#102031" />
+      <stop offset="100%" stop-color="#050a12" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#wall)" />
+  <rect y="650" width="1600" height="250" fill="#110d12" />
+  <g fill="#20181f" stroke="#927040" stroke-width="5">
+    <rect x="120" y="130" width="260" height="540" rx="10" />
+    <rect x="420" y="130" width="260" height="540" rx="10" />
+    <rect x="920" y="130" width="260" height="540" rx="10" />
+    <rect x="1220" y="130" width="260" height="540" rx="10" />
+  </g>
+  <g fill="#7d1736">
+    <rect x="150" y="170" width="40" height="420" />
+    <rect x="200" y="170" width="54" height="420" />
+    <rect x="265" y="170" width="60" height="420" />
+    <rect x="450" y="170" width="42" height="420" />
+    <rect x="504" y="170" width="68" height="420" />
+    <rect x="586" y="170" width="44" height="420" />
+    <rect x="950" y="170" width="52" height="420" />
+    <rect x="1012" y="170" width="70" height="420" />
+    <rect x="1100" y="170" width="42" height="420" />
+    <rect x="1250" y="170" width="48" height="420" />
+    <rect x="1308" y="170" width="56" height="420" />
+    <rect x="1374" y="170" width="50" height="420" />
+  </g>
+  <rect x="690" y="240" width="220" height="350" rx="12" fill="#251520" stroke="#d8b979" stroke-width="6" />
+  <path d="M700 260h200v330H700Z" fill="#e6d8b2" opacity="0.07" />
+  <path d="M720 300c80-55 180-55 160 70-20 110-110 40-160 150Z" fill="#d8b979" opacity="0.25" />
+  <text x="800" y="720" fill="#f6ecd4" font-family="Georgia, serif" font-size="44" text-anchor="middle">Dusty Archives</text>
+</svg>

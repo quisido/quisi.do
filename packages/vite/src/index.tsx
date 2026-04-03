@@ -1,13 +1,13 @@
 import { StrictMode } from 'react';
 import Locale from './constants/locale.js';
 import { ROOT } from './constants/root.js';
-import { ContextProviders } from './features/context-providers.jsx';
-import Effects from './features/effects.jsx';
-import Footer from './features/footer.jsx';
-import Header from './features/header.jsx';
+import { ContextProviders } from './features/context-providers.js';
+import Effects from './features/effects.js';
+import Footer from './features/footer.js';
+import Header from './features/header.js';
 import LocaleLayout from './features/locale-layout/index.js';
-import Notifications from './features/notifications.jsx';
-import Routes from './features/routes.jsx';
+import Notifications from './features/notifications.js';
+import Routes from './features/routes.js';
 
 ROOT.render(
   <StrictMode>

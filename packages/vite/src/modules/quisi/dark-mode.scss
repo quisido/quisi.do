@@ -1,6 +1,7 @@
 $filter: invert(95%);
 
 // Disable dark mode on a specific element by uninverting it.
+
 @mixin disable {
   filter: none;
 
@@ -18,6 +19,7 @@ $filter: invert(95%);
 }
 
 // Support dark mode on the root element.
+
 @mixin root {
   filter: none;
 

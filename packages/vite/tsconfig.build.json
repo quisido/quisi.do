@@ -29,6 +29,6 @@
     "rootDir": "src",
     "sourceMap": true,
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/vite/src/",
-    "target": "ES5"
+    "target": "es2023"
   }
 }

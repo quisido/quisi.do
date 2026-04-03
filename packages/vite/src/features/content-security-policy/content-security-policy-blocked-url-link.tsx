@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
-import Link from '../../modules/quisi/link.jsx';
 import mapUrlToHref from '../../utils/map-url-to-href.js';
+import { Link } from '../../design-systems/template/index.js';
 
 interface Props {
   readonly children: string | null;
@@ -17,12 +17,9 @@ export default function ContentSecurityPolicyBlockedUrlLink({
   if (href === null) {
     return null;
   }
+
   return (
-    <Link
-      feature="content-security-policy/blocked-url-link"
-      href={href}
-      title=""
-    >
+    <Link href={href} title="">
       {children}
     </Link>
   );

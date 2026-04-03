@@ -100,5 +100,16 @@ applications with Fullstory, Datadog, and Sentry respectively.
 - `npm install` installs all dependencies. Run this first.
 - `npm run build` builds all packages in topological order.
   - `npm run build --workspace=packages/<WORKSPACE>` builds a specific package.
+- `npm run vitest --workspace=packages/<WORKSPACE>` runs a workspace's Vitest
+  entrypoint directly.
+  - Many packages also expose `npm run vitest:run --workspace=packages/<WORKSPACE>`
+    and `npm run vitest:watch --workspace=packages/<WORKSPACE>`.
+- `npm run clean` removes all build and cache artifacts.
+  - `npm run clean --workspace=packages/<WORKSPACE>` removes the build and cache
+    artifacts from a specific package.
 - `npm test` runs all test suites for all packages.
   - `npm test --workspace=packages/<WORKSPACE>` tests a specific package.
+- `npx --workspace=packages/<WORKSPACE> quisido eslint` lints a specific
+  package.
+- `npx --workspace=packages/<WORKSPACE> quisido vitest` unit tests a specific
+  package.

@@ -1,10 +1,13 @@
-const FALSE = 0;
-const TRUE = 1;
-
+/**
+ * Maps `true` to `1` and `false` to `0`.
+ *
+ * @example
+ * flags.map(mapBooleanToNumber);
+ */
 export default function mapBooleanToNumber(value: boolean): number {
   if (value) {
-    return TRUE;
+    return 1;
   }
 
-  return FALSE;
+  return 0;
 }

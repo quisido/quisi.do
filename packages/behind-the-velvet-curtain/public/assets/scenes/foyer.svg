@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="sky" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#2d0f1a" />
+      <stop offset="100%" stop-color="#0b0915" />
+    </linearGradient>
+    <linearGradient id="floor" x1="0%" x2="0%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#2f1d1c" />
+      <stop offset="100%" stop-color="#120b10" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)" />
+  <circle cx="820" cy="160" r="170" fill="#f3c36d" opacity="0.18" />
+  <rect y="610" width="1600" height="290" fill="url(#floor)" />
+  <rect x="180" y="140" width="1240" height="420" rx="28" fill="#1b0d15" stroke="#8f6b3b" stroke-width="8" />
+  <path d="M250 170h180l50 310H250Z" fill="#651531" />
+  <path d="M1350 170h-180l-50 310h230Z" fill="#651531" />
+  <rect x="585" y="240" width="430" height="210" rx="18" fill="#20162a" stroke="#d0a765" stroke-width="6" />
+  <path d="M585 345h430" stroke="#d0a765" stroke-width="4" opacity="0.5" />
+  <circle cx="800" cy="345" r="54" fill="#d0a765" opacity="0.82" />
+  <rect x="530" y="680" width="540" height="70" rx="35" fill="#2f1621" stroke="#a67c24" stroke-width="5" />
+  <text x="800" y="725" fill="#f6ecd4" font-family="Georgia, serif" font-size="44" text-anchor="middle">The Velvet Foyer</text>
+</svg>

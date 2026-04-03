@@ -1,14 +1,8 @@
 import { type ReactElement } from 'react';
 import useBrowserBrand from '../hooks/use-browser-brand.js';
-import Link from '../modules/quisi/link.jsx';
+import { Link } from '../design-systems/template/index.js';
 
-interface Props {
-  readonly feature: string;
-}
-
-export default function CertificateManagerLink({
-  feature,
-}: Props): ReactElement {
+export default function CertificateManagerLink(): ReactElement {
   const browserBrand: string | null = useBrowserBrand();
   if (browserBrand === 'Edge') {
     /**
@@ -29,7 +23,6 @@ export default function CertificateManagerLink({
 
   return (
     <Link
-      feature={feature}
       href="chrome://certificate-manager/localcerts/usercerts"
       title="Certificate Manager"
     >

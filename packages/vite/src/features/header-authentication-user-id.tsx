@@ -1,8 +1,7 @@
 import { type ReactElement } from 'react';
 import { useAuthentication } from '../contexts/authentication.js';
-import Div from '../modules/quisi/div.jsx';
-import Link from '../modules/quisi/link.jsx';
 import setCookie from '../utils/set-cookie.js';
+import { Link } from '../design-systems/template/index.js';
 
 interface Props {
   readonly children: number;
@@ -38,16 +37,11 @@ export default function HeaderAuthenticationUserId({
 }: Props): ReactElement {
   const { handleUnauthenticateClick } = useHeaderAuthenticationUserId();
   return (
-    <Div>
-      <Div marginBottom="small">User #{children}</Div>
-      <Link
-        feature="header-authentication"
-        href="/"
-        onClick={handleUnauthenticateClick}
-        title=""
-      >
+    <div>
+      <div>User #{children}</div>
+      <Link href="/" onClick={handleUnauthenticateClick} title="">
         Unauthenticate
       </Link>
-    </Div>
+    </div>
   );
 }

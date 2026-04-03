@@ -1,1 +1,1 @@
-export { default } from './content-security-policy.jsx';
+export { default } from './content-security-policy.js';

@@ -1,20 +1,34 @@
 import { type ReactElement } from 'react';
-import Banner from '../modules/quisi/banner.js';
-import type NotificationType from '../types/notification.js';
+import type { NotificationProps } from '../contexts/notifications.js';
+import { Dialog } from '../design-systems/template/index.js';
 
 export default function Notification({
+  description,
   Header,
   icon,
   Message,
   onDismiss,
-  type,
-}: NotificationType): ReactElement {
+  // type,
+}: NotificationProps): ReactElement {
+  const labelProps = (() => {
+    if (Header === undefined) {
+      return {
+        label: 'Notification',
+      };
+    }
+
+    return {
+      heading: <Header />,
+    };
+  })();
+
   return (
-    <Banner icon={icon} onDismiss={onDismiss} type={type}>
-      {typeof Header !== 'undefined' && <Header />}
+    // type={type}
+    <Dialog {...labelProps} description={description} onDismiss={onDismiss}>
+      {icon}
       <span style={{ fontSize: '0.8em' }}>
         <Message />
       </span>
-    </Banner>
+    </Dialog>
   );
 }

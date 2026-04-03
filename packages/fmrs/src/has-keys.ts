@@ -1,3 +1,9 @@
+/**
+ * Returns `true` when `value` contains every key in `keys`.
+ *
+ * @example
+ * hasKeys(user, ['id', 'name']);
+ */
 export default function hasKeys<
   K extends number | string | symbol,
   V,
