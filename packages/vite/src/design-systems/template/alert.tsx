@@ -59,6 +59,7 @@ export default function Alert({
   return (
     <div
       aria-atomic={atomic}
+      aria-describedby={descriptionId}
       aria-label={label}
       aria-labelledby={labelledBy}
       aria-live={live}

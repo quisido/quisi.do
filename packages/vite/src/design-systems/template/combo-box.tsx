@@ -35,7 +35,7 @@ export default function ComboBox({
   value,
 }: ComboBoxProps): ReactElement {
   const labelId: string = useId();
-  const selectId: string = useId();
+  const listBoxId: string = useId();
   const [expanded, setExpanded] = useState(false);
 
   const handleListBoxBlur = (): void => {
@@ -48,6 +48,7 @@ export default function ComboBox({
 
   return (
     <div
+      aria-controls={listBoxId}
       aria-expanded={expanded}
       aria-haspopup="listbox"
       aria-labelledby={labelId}
@@ -57,7 +58,7 @@ export default function ComboBox({
       <div
         aria-disabled={disabled}
         aria-readonly={readOnly}
-        id={selectId}
+        id={listBoxId}
         onBlur={handleListBoxBlur}
         onFocus={handleListBoxFocus}
         role="listbox"
