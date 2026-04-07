@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { MenuBarProps } from '../shared/menu-bar-props.js';
+import type { MenuBarProps } from '../core/menu-bar-props.js';
 
 /**
  *   A `MenuBar` component presents a `Menu` that usually remains visible and

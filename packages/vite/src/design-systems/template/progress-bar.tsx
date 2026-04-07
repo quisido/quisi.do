@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { ProgressBarProps } from '../shared/progress-bar-props.js';
+import type { ProgressBarProps } from '../core/progress-bar-props.js';
 
 const DEFAULT_MAX = 100;
 

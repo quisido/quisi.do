@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { ButtonProps } from '../shared/button-props.js';
+import type { ButtonProps } from '../core/button-props.js';
 
 /**
  *   A `Button` component is an input that allows for user-triggered actions

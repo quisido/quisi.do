@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { CodeProps } from '../shared/code-props.js';
+import type { CodeProps } from '../core/code-props.js';
 
 /**
  * A `Code` component is a section representing a fragment of computer code.

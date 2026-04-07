@@ -1,12 +1,12 @@
 import type { ReactElement } from 'react';
-import type { FeedProps } from '../shared/feed-props.js';
-import useFeed from '../shared/use-feed.js';
-import type { FeedArticle } from '../shared/feed-article.js';
-import useHeadingOrLabel from '../shared/use-heading-or-label.js';
-import useId from '../shared/use-id.js';
+import type { FeedProps } from '../core/feed-props.js';
+import useFeed from '../core/use-feed.js';
+import type { FeedArticle } from '../core/feed-article.js';
+import useHeadingOrLabel from '../core/use-heading-or-label.js';
+import useId from '../core/use-id.js';
 import Heading from './heading.js';
-import HeadingLevelProvider from '../shared/heading-level-provider.js';
-import useHeadingLevel from '../shared/use-heading-level.js';
+import HeadingLevelProvider from '../core/heading-level-provider.js';
+import useHeadingLevel from '../core/use-heading-level.js';
 
 interface FeedArticleProps {
   readonly onFocus: VoidFunction;

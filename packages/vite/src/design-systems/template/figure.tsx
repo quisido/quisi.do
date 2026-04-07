@@ -1,6 +1,6 @@
 import type { ReactElement, ReactNode } from 'react';
-import useFigure from '../shared/use-figure.js';
-import type { FigureProps } from '../shared/figure-props.js';
+import useFigure from '../core/use-figure.js';
+import type { FigureProps } from '../core/figure-props.js';
 
 interface FigureCaptionProps {
   readonly description?: ReactNode | undefined;

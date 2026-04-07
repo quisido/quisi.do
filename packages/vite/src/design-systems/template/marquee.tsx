@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { MarqueeProps } from '../shared/marquee-props.js';
+import type { MarqueeProps } from '../core/marquee-props.js';
 
 /**
  *   A `Marquee` component contains non-essential information that changes

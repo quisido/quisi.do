@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { DeletionProps } from '../shared/deletion-props.js';
+import type { DeletionProps } from '../core/deletion-props.js';
 
 /**
  *   A `Deletion` component represents content that is marked as removed,

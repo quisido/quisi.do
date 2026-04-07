@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { EmphasisProps } from '../shared/emphasis-props.js';
+import type { EmphasisProps } from '../core/emphasis-props.js';
 
 /**
  *   An `Emphasis` component contains one or more emphasized characters.

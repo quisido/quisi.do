@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { ImageProps } from '../shared/image-props.js';
+import type { ImageProps } from '../core/image-props.js';
 
 /**
  *   Container for a collection of elements that form an image. An accessible

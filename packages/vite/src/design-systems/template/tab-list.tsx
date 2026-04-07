@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { TabListProps } from '../shared/tab-list-props.js';
+import type { TabListProps } from '../core/tab-list-props.js';
 
 /**
  *   A `TabList` component contains `Tab` elements that reference associated

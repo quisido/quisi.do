@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { ToolbarProps } from '../shared/toolbar-props.js';
+import type { ToolbarProps } from '../core/toolbar-props.js';
 
 /**
  *   The `Toolbar` component is a collection of commonly used controls, such as

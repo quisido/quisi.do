@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { MeterProps } from '../shared/meter-props.js';
+import type { MeterProps } from '../core/meter-props.js';
 
 /**
  * A scalar measurement within a known range, or a fractional value.

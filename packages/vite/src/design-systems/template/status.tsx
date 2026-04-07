@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { StatusProps } from '../shared/status-props.js';
+import type { StatusProps } from '../core/status-props.js';
 
 /**
  *   A `Status` component is a live region for advisory information that is not

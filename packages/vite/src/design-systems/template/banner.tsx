@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
-import useBanner from '../shared/use-banner.js';
-import type { BannerProps } from '../shared/banner-props.js';
+import useBanner from '../core/use-banner.js';
+import type { BannerProps } from '../core/banner-props.js';
 
 /**
  *   A `Banner` component is a landmark that contains mostly site-oriented

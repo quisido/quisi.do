@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { BlockQuoteProps } from '../shared/block-quote-props.js';
+import type { BlockQuoteProps } from '../core/block-quote-props.js';
 
 /**
  * A section of content that is quoted from another source.

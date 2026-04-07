@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { SwitchProps } from '../shared/switch-props.js';
+import type { SwitchProps } from '../core/switch-props.js';
 
 /**
  *   A `Switch` component is a type of checkbox that represents on and off

@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { DefinitionProps } from '../shared/definition-props.js';
+import type { DefinitionProps } from '../core/definition-props.js';
 
 /**
  *   A `Definition` component marks the definition of a term or concept.

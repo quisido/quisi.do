@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
-import type { ContentInfoProps } from '../shared/content-info-props.js';
-import useContentInfo from '../shared/use-content-info.js';
+import type { ContentInfoProps } from '../core/content-info-props.js';
+import useContentInfo from '../core/use-content-info.js';
 
 /**
  *   A `ContentInfo` component is a landmark that contains information about

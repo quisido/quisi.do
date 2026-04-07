@@ -4,7 +4,7 @@ import type {
   MouseEventHandler,
   ReactElement,
 } from 'react';
-import type { LinkProps } from '../shared/link-props.js';
+import type { LinkProps } from '../core/link-props.js';
 
 /**
  *   A `Link` component is an interactive reference to an internal or external

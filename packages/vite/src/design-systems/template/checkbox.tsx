@@ -1,7 +1,7 @@
 import { type ChangeEvent, type ReactElement, type Ref } from 'react';
-import useIndeterminate from '../shared/use-indeterminate.js';
-import toChecked from '../shared/to-checked.js';
-import type { CheckboxProps } from '../shared/checkbox-props.js';
+import useIndeterminate from '../core/use-indeterminate.js';
+import toChecked from '../core/to-checked.js';
+import type { CheckboxProps } from '../core/checkbox-props.js';
 
 /**
  *   A `Checkbox` component is a checkable input that has three possible values:

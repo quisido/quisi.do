@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { TabProps } from '../shared/tab-props.js';
+import type { TabProps } from '../core/tab-props.js';
 
 /**
  *   A `Tab` component provides the label and selection mechanism for the tab

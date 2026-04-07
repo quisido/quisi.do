@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { SearchProps } from '../shared/search-props.js';
+import type { SearchProps } from '../core/search-props.js';
 
 /**
  *   A `Search` component is a landmark region containing items and objects

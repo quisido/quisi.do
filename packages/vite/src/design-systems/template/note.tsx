@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { NoteProps } from '../shared/note-props.js';
+import type { NoteProps } from '../core/note-props.js';
 
 /**
  *   A `Note` component adds parenthetic or ancillary content when no other

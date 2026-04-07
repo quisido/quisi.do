@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { StrongProps } from '../shared/strong-props.js';
+import type { StrongProps } from '../core/strong-props.js';
 
 /**
  *   `Strong` denotes content that is important, serious, or urgent.

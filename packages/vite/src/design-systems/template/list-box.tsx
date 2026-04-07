@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { ListBoxProps } from '../shared/list-box-props.js';
+import type { ListBoxProps } from '../core/list-box-props.js';
 
 /**
  *   A `ListBox` component lets the user choose one or more items from a list

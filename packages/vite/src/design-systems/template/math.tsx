@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { MathProps } from '../shared/math-props.js';
+import type { MathProps } from '../core/math-props.js';
 
 /**
  *   The `Math` component marks content in an accessible format such as MathML,

@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { SuggestionProps } from '../shared/suggestion-props.js';
+import type { SuggestionProps } from '../core/suggestion-props.js';
 
 /**
  *   A `Suggestion` component represents a single proposed change to content.

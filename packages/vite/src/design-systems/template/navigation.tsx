@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { NavigationProps } from '../shared/navigation-props.js';
+import type { NavigationProps } from '../core/navigation-props.js';
 
 /**
  *   A `Navigation` component is a landmark containing a collection of

@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { TextBoxProps } from '../shared/text-box-props.js';
+import type { TextBoxProps } from '../core/text-box-props.js';
 
 /**
  *   A `TextBox` component is an input that accepts free-form text as its

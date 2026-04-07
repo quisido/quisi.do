@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { TimerProps } from '../shared/timer-props.js';
+import type { TimerProps } from '../core/timer-props.js';
 
 /**
  *   A `Timer` component contains a numerical counter showing elapsed time from
