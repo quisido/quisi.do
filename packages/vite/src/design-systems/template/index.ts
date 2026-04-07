@@ -128,7 +128,6 @@ export { default as Tabs } from './tabs.js';
 export { default as Table } from './table.js';
 export { default as TextBox } from './text-box.js';
 export { default as Timer } from './timer.js';
-export { default as Tree } from './tree.js';
 export { default as TreeGrid } from './tree-grid.js';
 export { default as Application } from './application.js';
 export { default as SeparatorWidget } from './separator-widget.js';

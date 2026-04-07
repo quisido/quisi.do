@@ -1,6 +1,5 @@
 import { type Key, type ReactElement, useMemo } from 'react';
-import type { GridProps, GridRow } from '../core/grid-props.js';
-import type { RowCell } from '../core/row-props.js';
+import type { GridCell, GridProps, GridRow } from '../core/grid-props.js';
 import useElementId from '../../hooks/use-element-id.js';
 import classes from './grid.module.scss';
 
@@ -54,7 +53,7 @@ export default function Grid({
           return (
             <tr key={rowKey} role="row">
               {cells.map(
-                ({ children, key: cellKey }: RowCell): ReactElement => {
+                ({ content, key: cellKey }: GridCell): ReactElement => {
                   /**
                    *   A grid cell can be focusable, editable, and selectable. A
                    * grid cell can have relationships such as aria-controls to
@@ -74,7 +73,7 @@ export default function Grid({
                       key={cellKey}
                       role="gridcell"
                     >
-                      {children}
+                      {content}
                     </td>
                   );
                 },
