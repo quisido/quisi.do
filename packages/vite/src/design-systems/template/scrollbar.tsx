@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { ScrollbarProps } from '../shared/scrollbar-props.js';
+import type { ScrollbarProps } from '../core/scrollbar-props.js';
 
 /**
  *   A `Scrollbar` component controls the scrolling of content within a viewing

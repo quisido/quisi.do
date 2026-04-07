@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { MainProps } from '../shared/main-props.js';
+import type { MainProps } from '../core/main-props.js';
 
 /**
  *   A `Main` component is a landmark containing the primary content of a

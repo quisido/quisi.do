@@ -1,7 +1,7 @@
 import type { Attributes, ReactElement } from 'react';
-import type { RowProps } from '../shared/row-props.js';
-import type { CellProps } from '../shared/cell-props.js';
-import type { TableProps } from '../shared/table-props.js';
+import type { RowProps } from '../core/row-props.js';
+import type { CellProps } from '../core/cell-props.js';
+import type { TableProps } from '../core/table-props.js';
 
 /**
  *   A `Table` component contains data arranged in rows and columns. Use

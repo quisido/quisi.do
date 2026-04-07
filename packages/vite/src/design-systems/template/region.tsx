@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
 import Heading from './heading.js';
-import type { RegionProps } from '../shared/region-props.js';
-import HeadingLevelProvider from '../shared/heading-level-provider.js';
-import useRegion from '../shared/use-region.js';
+import type { RegionProps } from '../core/region-props.js';
+import HeadingLevelProvider from '../core/heading-level-provider.js';
+import useRegion from '../core/use-region.js';
 
 /**
  *   The `Region` component is used to identify document areas the author deems

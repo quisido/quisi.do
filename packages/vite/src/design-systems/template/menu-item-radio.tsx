@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { MenuItemRadioProps } from '../shared/menu-item-radio-props.js';
+import type { MenuItemRadioProps } from '../core/menu-item-radio-props.js';
 
 /**
  *   A `MenuItemRadio` component is a checkable `MenuItem` in a set where only

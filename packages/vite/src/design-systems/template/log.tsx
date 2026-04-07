@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { LogProps } from '../shared/log-props.js';
+import type { LogProps } from '../core/log-props.js';
 
 /**
  *   A `Log` component is a live region where new information is appended in a

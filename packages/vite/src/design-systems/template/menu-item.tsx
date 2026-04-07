@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { MenuItemProps } from '../shared/menu-item-props.js';
+import type { MenuItemProps } from '../core/menu-item-props.js';
 
 /**
  *   A `MenuItem` component is an option in a set of choices contained by a

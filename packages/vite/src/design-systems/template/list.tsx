@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { ListProps } from '../shared/list-props.js';
+import type { ListProps } from '../core/list-props.js';
 
 /**
  * A section containing `ListItem` elements.

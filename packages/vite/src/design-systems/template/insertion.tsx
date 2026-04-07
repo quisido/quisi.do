@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { InsertionProps } from '../shared/insertion-props.js';
+import type { InsertionProps } from '../core/insertion-props.js';
 
 /**
  *   An insertion contains content that is marked as added or content that is

@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { RadioGroupProps } from '../shared/radio-group-props.js';
+import type { RadioGroupProps } from '../core/radio-group-props.js';
 
 /**
  *   A `RadioGroup` component groups `Radio` buttons so only one item in the

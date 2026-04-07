@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
-import OwnsBanner from '../shared/owns-banner.js';
+import OwnsBanner from '../core/owns-banner.js';
 import Banner from './banner.js';
-import type { ApplicationProps } from '../shared/application-props.js';
-import OwnsContentInfo from '../shared/owns-content-info.js';
+import type { ApplicationProps } from '../core/application-props.js';
+import OwnsContentInfo from '../core/owns-content-info.js';
 import ContentInfo from './content-info.js';
 
 /**

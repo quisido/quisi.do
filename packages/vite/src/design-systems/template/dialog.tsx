@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
-import type { DialogProps } from '../shared/dialog-props.js';
+import type { DialogProps } from '../core/dialog-props.js';
 import { FocusScope } from 'react-aria';
-import useDialog from '../shared/use-dialog.js';
+import useDialog from '../core/use-dialog.js';
 import Paragraph from './paragraph.js';
 import Heading from './heading.js';
 

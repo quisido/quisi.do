@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { CommentProps } from '../shared/comment-props.js';
+import type { CommentProps } from '../core/comment-props.js';
 
 /**
  *   A `Comment` component contains content expressing a reaction to other

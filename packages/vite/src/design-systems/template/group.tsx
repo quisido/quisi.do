@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { GroupProps } from '../shared/group-props.js';
+import type { GroupProps } from '../core/group-props.js';
 
 /**
  *   A `Group` component collects related interface objects and information that

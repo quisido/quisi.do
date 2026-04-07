@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
-import type { ArticleProps } from '../shared/article-props.js';
-import useArticle from '../shared/use-article.js';
+import type { ArticleProps } from '../core/article-props.js';
+import useArticle from '../core/use-article.js';
 import Heading from './heading.js';
-import HeadingLevelProvider from '../shared/heading-level-provider.js';
+import HeadingLevelProvider from '../core/heading-level-provider.js';
 
 /**
  *   An `Article` component is a section of a page that consists of a

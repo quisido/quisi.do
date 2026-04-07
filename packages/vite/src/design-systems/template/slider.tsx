@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { SliderProps } from '../shared/slider-props.js';
+import type { SliderProps } from '../core/slider-props.js';
 
 /**
  *   A `Slider` component lets the user select a value from within a given

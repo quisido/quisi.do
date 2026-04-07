@@ -1,7 +1,7 @@
 import type { Attributes, ReactElement } from 'react';
-import type { GridProps } from '../shared/grid-props.js';
-import type { CellProps } from '../shared/cell-props.js';
-import type { RowProps } from '../shared/row-props.js';
+import type { GridProps } from '../core/grid-props.js';
+import type { CellProps } from '../core/cell-props.js';
+import type { RowProps } from '../core/row-props.js';
 
 /**
  *   A `Grid` component is a composite widget containing rows and cells where

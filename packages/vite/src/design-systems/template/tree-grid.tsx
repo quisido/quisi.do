@@ -1,7 +1,7 @@
 import type { Attributes, ReactElement } from 'react';
-import type { TreeGridProps } from '../shared/tree-grid-props.js';
-import type { RowProps } from '../shared/row-props.js';
-import type { CellProps } from '../shared/cell-props.js';
+import type { TreeGridProps } from '../core/tree-grid-props.js';
+import type { RowProps } from '../core/row-props.js';
+import type { CellProps } from '../core/cell-props.js';
 
 /**
  *   A `TreeGrid` component is a `Grid` whose rows can be expanded and

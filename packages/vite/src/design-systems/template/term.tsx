@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { TermProps } from '../shared/term-props.js';
+import type { TermProps } from '../core/term-props.js';
 
 /**
  *   A `Term` component represents a word or phrase with an optional

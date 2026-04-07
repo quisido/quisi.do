@@ -1,7 +1,7 @@
 import type { ReactElement, ReactNode } from 'react';
 import useElementId from '../../hooks/use-element-id.js';
 import Heading from './heading.js';
-import type { AlertProps } from '../../hooks/alert-props.js';
+import type { AlertProps } from '../core/alert-props.js';
 
 /**
  *   An `Alert` component is a live region with important, and usually

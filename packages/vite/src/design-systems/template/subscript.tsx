@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { SubscriptProps } from '../shared/subscript-props.js';
+import type { SubscriptProps } from '../core/subscript-props.js';
 
 /**
  * One or more subscripted characters.

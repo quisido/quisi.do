@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import type { ReactElement } from 'react';
-import type { HeadingProps } from '../shared/heading-props.js';
+import type { HeadingProps } from '../core/heading-props.js';
 
 /**
  * A heading for a section of the page.

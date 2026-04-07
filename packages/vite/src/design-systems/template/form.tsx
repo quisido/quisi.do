@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { FormProps } from '../shared/form-props.js';
+import type { FormProps } from '../core/form-props.js';
 
 /**
  *   A `Form` component is a landmark region containing items and objects that,

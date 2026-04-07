@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { SuperscriptProps } from '../shared/superscript-props.js';
+import type { SuperscriptProps } from '../core/superscript-props.js';
 
 /**
  * One or more superscripted characters.

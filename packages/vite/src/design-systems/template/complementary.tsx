@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { ComplementaryProps } from '../shared/complementary-props.js';
+import type { ComplementaryProps } from '../core/complementary-props.js';
 
 /**
  *   A `Complementary` component is a landmark that is designed be complementary

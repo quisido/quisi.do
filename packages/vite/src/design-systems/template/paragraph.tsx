@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { ParagraphProps } from '../shared/paragraph-props.js';
+import type { ParagraphProps } from '../core/paragraph-props.js';
 
 /**
  * A paragraph of content.

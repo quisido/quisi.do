@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { ListItemProps } from '../shared/list-item-props.js';
+import type { ListItemProps } from '../core/list-item-props.js';
 
 /**
  * A single item in a list or directory.

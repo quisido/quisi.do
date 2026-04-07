@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { MarkProps } from '../shared/mark-props.js';
+import type { MarkProps } from '../core/mark-props.js';
 
 /**
  * Marked or highlighted for reference or notation purposes.

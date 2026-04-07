@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { MenuItemCheckboxProps } from '../shared/menu-item-checkbox-props.js';
+import type { MenuItemCheckboxProps } from '../core/menu-item-checkbox-props.js';
 
 /**
  *   A `MenuItemCheckbox` component is a `MenuItem` with a checkable state

@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
-import useTooltip from '../shared/use-tooltip.js';
-import type { TooltipProps } from '../shared/tooltip-props.js';
+import useTooltip from '../core/use-tooltip.js';
+import type { TooltipProps } from '../core/tooltip-props.js';
 
 /**
  *   A `Tooltip` component provides contextual information about an element when

@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { MenuProps } from '../shared/menu-props.js';
+import type { MenuProps } from '../core/menu-props.js';
 
 /**
  *   A `Menu` component is a widget that offers a list of choices to the user.
