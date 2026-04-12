@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { MenuBarProps } from '../core/menu-bar-props.js';
@@ -14,13 +14,13 @@ export default function testMenuBar(
 ): void {
   describe('MenuBar', (): void => {
     it('should be a menu bar', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <MenuBar label="Test menu bar">
           <MenuItem>Test menu item</MenuItem>
         </MenuBar>,
       );
 
-      getByRole('menubar', { name: 'Test menu bar' });
+      getByName('menubar', 'Test menu bar');
     });
   });
 }

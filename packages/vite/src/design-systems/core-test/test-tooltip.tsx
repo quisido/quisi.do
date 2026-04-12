@@ -1,6 +1,6 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'vitest';
 import type { TooltipProps } from '../core/tooltip-props.js';
 
 export default function testTooltip(
@@ -8,19 +8,20 @@ export default function testTooltip(
 ): void {
   describe('Tooltip', (): void => {
     it('should describe an element', (): void => {
-      const { getByRole } = render(
+      const { getByDescription } = render(
         <>
-          <button id="test-id">Test button</button>
-          <Tooltip htmlFor="test-id">Test tooltip</Tooltip>
+          <button id="test-tooltip-for-id">Test button</button>
+          <Tooltip htmlFor="test-tooltip-for-id">Test tooltip</Tooltip>
         </>,
       );
-      getByRole('button', { description: 'Test tooltip' });
+      getByDescription('button', 'Test tooltip');
     });
 
     it('should throw when not describing an element', (): void => {
-      expect((): void => {
-        render(<Tooltip htmlFor="non-existent-id">Test tooltip</Tooltip>);
-      }).toThrow('A tooltip must describe an element.');
+      const { expectToHaveThrown } = render(
+        <Tooltip htmlFor="non-existent-id">Test tooltip</Tooltip>,
+      );
+      expectToHaveThrown('A tooltip must describe an element.');
     });
   });
 }

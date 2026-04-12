@@ -1,9 +1,9 @@
-import { render } from '@testing-library/react';
 import type { ComponentType } from 'react';
 import { describe, expect, it } from 'vitest';
 import { not } from 'fmrs';
 import type { FigureProps } from '../core/figure-props.js';
 import isGenericRole from '../../../test/is-generic.js';
+import render from './render.js';
 
 const isNonGenericRole = not(isGenericRole);
 
@@ -21,28 +21,27 @@ export default function testFigure(Figure: ComponentType<FigureProps>): void {
   describe('Figure', (): void => {
     describe('caption', (): void => {
       it('should be supported', (): void => {
-        const { getByRole } = render(
+        const { getByName } = render(
           <Figure caption="Test caption">Test content</Figure>,
         );
 
-        const figure: HTMLElement = getByRole('figure', {
-          name: 'Test caption',
-        });
+        const figure: HTMLElement = getByName('figure', 'Test caption');
         const figureCaption: HTMLElement = getFigureCaption(figure);
         expect(figureCaption.textContent).toBe('Test caption');
       });
 
       describe('position', (): void => {
         it('should default to start or end', (): void => {
-          const { getByRole } = render(
+          const { getByName } = render(
             <Figure caption="Test default caption position">
               Test content
             </Figure>,
           );
 
-          const figure: HTMLElement = getByRole('figure', {
-            name: 'Test default caption position',
-          });
+          const figure: HTMLElement = getByName(
+            'figure',
+            'Test default caption position',
+          );
 
           const figureCaption: HTMLElement = getFigureCaption(figure);
           const nonGenericChildren: Element[] = [...figure.children].filter(
@@ -55,7 +54,7 @@ export default function testFigure(Figure: ComponentType<FigureProps>): void {
         });
 
         it('should support start', (): void => {
-          const { getByRole } = render(
+          const { getByName } = render(
             <Figure
               caption="Test start caption position"
               captionPosition="start"
@@ -64,9 +63,10 @@ export default function testFigure(Figure: ComponentType<FigureProps>): void {
             </Figure>,
           );
 
-          const figure: HTMLElement = getByRole('figure', {
-            name: 'Test start caption position',
-          });
+          const figure: HTMLElement = getByName(
+            'figure',
+            'Test start caption position',
+          );
 
           const figureCaption: HTMLElement = getFigureCaption(figure);
           expect(figureCaption).toBe(
@@ -75,15 +75,16 @@ export default function testFigure(Figure: ComponentType<FigureProps>): void {
         });
 
         it('should support end', (): void => {
-          const { getByRole } = render(
+          const { getByName } = render(
             <Figure caption="Test end caption position" captionPosition="end">
               Test content
             </Figure>,
           );
 
-          const figure: HTMLElement = getByRole('figure', {
-            name: 'Test end caption position',
-          });
+          const figure: HTMLElement = getByName(
+            'figure',
+            'Test end caption position',
+          );
 
           const figureCaption: HTMLElement = getFigureCaption(figure);
           expect(figureCaption).toBe(
@@ -94,32 +95,32 @@ export default function testFigure(Figure: ComponentType<FigureProps>): void {
     });
 
     it('should support descriptions', (): void => {
-      const { getByRole } = render(
+      const { getByDescription } = render(
         <Figure description="Test description" label="Test description label">
           Test content
         </Figure>,
       );
 
-      getByRole('figure', { description: 'Test description' });
+      getByDescription('figure', 'Test description');
     });
 
     it('should support labels', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <Figure label="Test label">Test content</Figure>,
       );
 
-      getByRole('figure', { name: 'Test label' });
+      getByName('figure', 'Test label');
     });
 
     it('should support labelled by', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <>
-          <span id="test-id">Test labelled by</span>
-          <Figure labelledBy="test-id">Test content</Figure>
+          <span id="test-figure-label-id">Test labelled by</span>
+          <Figure labelledBy="test-figure-label-id">Test content</Figure>
         </>,
       );
 
-      getByRole('figure', { name: 'Test labelled by' });
+      getByName('figure', 'Test labelled by');
     });
   });
 }

@@ -29,7 +29,7 @@ export default function Region({
   });
 
   return (
-    <section aria-label={label} aria-labelledby={labelledBy}>
+    <section aria-label={label} aria-labelledby={labelledBy} role="region">
       <Heading id={headingId} level={headingLevel}>
         {heading}
       </Heading>

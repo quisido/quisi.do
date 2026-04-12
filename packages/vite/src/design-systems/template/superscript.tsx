@@ -7,7 +7,6 @@ import type { SuperscriptProps } from '../core/superscript-props.js';
  */
 export default function Superscript({
   children,
-  describedBy,
 }: SuperscriptProps): ReactElement {
-  return <sup aria-describedby={describedBy}>{children}</sup>;
+  return <sup role="superscript">{children}</sup>;
 }

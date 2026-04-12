@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { TabPanelProps } from '../core/tab-panel-props.js';
@@ -8,11 +8,11 @@ export default function testTabPanel(
 ): void {
   describe('TabPanel', (): void => {
     it('should be a tab panel', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <TabPanel label="Test tab panel">Test content</TabPanel>,
       );
 
-      getByRole('tabpanel', { name: 'Test tab panel' });
+      getByName('tabpanel', 'Test tab panel');
     });
   });
 }

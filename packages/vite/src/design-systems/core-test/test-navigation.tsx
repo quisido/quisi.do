@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { NavigationProps } from '../core/navigation-props.js';
@@ -8,11 +8,10 @@ export default function testNavigation(
 ): void {
   describe('Navigation', (): void => {
     it('should be navigation', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <Navigation label="Test navigation">Test content</Navigation>,
       );
-
-      getByRole('navigation', { name: 'Test navigation' });
+      getByName('navigation', 'Test navigation');
     });
   });
 }

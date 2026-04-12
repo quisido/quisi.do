@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { TabListProps } from '../core/tab-list-props.js';
@@ -14,13 +14,13 @@ export default function testTab(
 ): void {
   describe('Tab', (): void => {
     it('should be a tab', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <TabList label="Test tab list">
           <Tab>Test tab</Tab>
         </TabList>,
       );
 
-      getByRole('tab', { name: 'Test tab' });
+      getByName('tab', 'Test tab');
     });
   });
 }

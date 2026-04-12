@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { SpinButtonProps } from '../core/spin-button-props.js';
@@ -8,9 +8,9 @@ export default function testSpinButton(
 ): void {
   describe('SpinButton', (): void => {
     it('should be a spin button', (): void => {
-      const { getByRole } = render(<SpinButton label="Test spin button" />);
+      const { getByName } = render(<SpinButton label="Test spin button" />);
 
-      getByRole('spinbutton', { name: 'Test spin button' });
+      getByName('spinbutton', 'Test spin button');
     });
   });
 }

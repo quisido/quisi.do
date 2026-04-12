@@ -1,8 +1,8 @@
-import { render } from '@testing-library/react';
 import type { ComponentType } from 'react';
 import { describe, expect, it } from 'vitest';
 import type { ContentInfoProps } from '../core/content-info-props.js';
 import type { DocumentProps } from '../core/document-props.js';
+import render from './render.js';
 
 interface Options {
   readonly Document: ComponentType<DocumentProps>;
@@ -14,11 +14,14 @@ export default function testContentInfo(
 ): void {
   describe('ContentInfo', (): void => {
     it('should be content info', (): void => {
-      const { getByRole } = render(<ContentInfo>Test content</ContentInfo>, {
-        wrapper: Document,
-      });
+      const { getByRole } = render(
+        <Document>
+          <ContentInfo>Test content</ContentInfo>
+        </Document>,
+      );
 
-      expect(getByRole('contentinfo').textContent).toBe('Test content');
+      const contentInfo: HTMLElement = getByRole('contentinfo');
+      expect(contentInfo.textContent).toBe('Test content');
     });
   });
 }

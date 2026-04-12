@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react';
+/* eslint-disable no-magic-numbers */
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { RegionProps } from '../core/region-props.js';
@@ -6,39 +7,39 @@ import type { RegionProps } from '../core/region-props.js';
 export default function testRegion(Region: ComponentType<RegionProps>): void {
   describe('Region', (): void => {
     it('should support headings', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <Region heading="Test heading">Test content</Region>,
       );
-      getByRole('region', { name: 'Test heading' });
+      getByName('region', 'Test heading');
     });
 
     it('should support labels', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <Region label="Test label">Test content</Region>,
       );
-      getByRole('region', { name: 'Test label' });
+      getByName('region', 'Test label');
     });
 
     it('should support external labels', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <>
-          <span id="test-id">Test labelled by</span>
-          <Region labelledBy="test-id">Test content</Region>,
+          <span id="test-region-label-id">Test labelled by</span>
+          <Region labelledBy="test-region-label-id">Test content</Region>,
         </>,
       );
-      getByRole('region', { name: 'Test labelled by' });
+      getByName('region', 'Test labelled by');
     });
 
     describe('levels', (): void => {
       it('should default to 2', (): void => {
-        const { getByRole } = render(
+        const { getHeadingByLevel } = render(
           <Region heading="Test level 12">Test content</Region>,
         );
-        getByRole('heading', { level: 2, name: 'Test level 12' });
+        getHeadingByLevel('Test level 12', 2);
       });
 
       it('should increment children but not siblings', (): void => {
-        const { getByRole } = render(
+        const { getHeadingByLevel } = render(
           <>
             <Region heading="Brother">
               <Region heading="Niece">
@@ -50,15 +51,15 @@ export default function testRegion(Region: ComponentType<RegionProps>): void {
             </Region>
           </>,
         );
-        getByRole('heading', { level: 2, name: 'Brother' });
-        getByRole('heading', { level: 2, name: 'Sister' });
-        getByRole('heading', { level: 3, name: 'Nephew' });
-        getByRole('heading', { level: 3, name: 'Niece' });
-        getByRole('heading', { level: 4, name: 'Cousin' });
+        getHeadingByLevel('Brother', 2);
+        getHeadingByLevel('Sister', 2);
+        getHeadingByLevel('Nephew', 3);
+        getHeadingByLevel('Niece', 3);
+        getHeadingByLevel('Cousin', 4);
       });
 
       it('should support levels >6', (): void => {
-        const { getByRole } = render(
+        const { getHeadingByLevel } = render(
           <Region heading="Second">
             <Region heading="Third">
               <Region heading="Fourth">
@@ -71,12 +72,12 @@ export default function testRegion(Region: ComponentType<RegionProps>): void {
             </Region>
           </Region>,
         );
-        getByRole('heading', { level: 2, name: 'Second' });
-        getByRole('heading', { level: 3, name: 'Third' });
-        getByRole('heading', { level: 4, name: 'Fourth' });
-        getByRole('heading', { level: 5, name: 'Fifth' });
-        getByRole('heading', { level: 6, name: 'Sixth' });
-        getByRole('heading', { level: 7, name: 'Seventh' });
+        getHeadingByLevel('Second', 2);
+        getHeadingByLevel('Third', 3);
+        getHeadingByLevel('Fourth', 4);
+        getHeadingByLevel('Fifth', 5);
+        getHeadingByLevel('Sixth', 6);
+        getHeadingByLevel('Seventh', 7);
       });
     });
   });

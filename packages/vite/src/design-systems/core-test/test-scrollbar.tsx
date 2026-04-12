@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { ScrollbarProps } from '../core/scrollbar-props.js';
@@ -8,14 +8,14 @@ export default function testScrollbar(
 ): void {
   describe('Scrollbar', (): void => {
     it('should be a scrollbar', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <>
           <div id="test-region">Test content</div>
           <Scrollbar controls="test-region" label="Test scrollbar" />
         </>,
       );
 
-      getByRole('scrollbar', { name: 'Test scrollbar' });
+      getByName('scrollbar', 'Test scrollbar');
     });
   });
 }

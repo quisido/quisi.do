@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, expect, it } from 'vitest';
 import type { DefinitionProps } from '../core/definition-props.js';
@@ -16,12 +16,13 @@ export default function testTerm(
     it('should be a term', (): void => {
       const { getByRole } = render(
         <>
-          <Term definitionId="test-id">Test term</Term>
-          <Definition id="test-id">Test definition</Definition>
+          <Term definitionId="test-term-definition-id">Test term</Term>
+          <Definition id="test-term-definition-id">Test definition</Definition>
         </>,
       );
 
-      expect(getByRole('term').textContent).toBe('Test term');
+      const term: HTMLElement = getByRole('term');
+      expect(term.textContent).toBe('Test term');
     });
   });
 }

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { TextBoxProps } from '../core/text-box-props.js';
@@ -8,17 +8,17 @@ export default function testTextBox(
 ): void {
   describe('TextBox', (): void => {
     it('should be a text box', (): void => {
-      const { getByRole } = render(<TextBox label="Test text box" />);
+      const { getByName } = render(<TextBox label="Test text box" />);
 
-      getByRole('textbox', { name: 'Test text box' });
+      getByName('textbox', 'Test text box');
     });
 
     it('should support multiline text boxes', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <TextBox label="Test multiline text box" multiline />,
       );
 
-      getByRole('textbox', { name: 'Test multiline text box' });
+      getByName('textbox', 'Test multiline text box');
     });
   });
 }
