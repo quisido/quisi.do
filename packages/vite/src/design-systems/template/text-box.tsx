@@ -2,9 +2,8 @@ import type { ReactElement } from 'react';
 import type { TextBoxProps } from '../core/text-box-props.js';
 
 /**
- *   A `TextBox` component is an input that accepts free-form text as its
- * value. When `aria-multiline` is true, it behaves like a multiline text
- * field.
+ *   A text box...
+ * @see {@link https://w3c.github.io/aria/#textbox | WAI-ARIA `textbox` role}
  */
 export default function TextBox({
   label,

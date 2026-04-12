@@ -2,8 +2,8 @@ import type { ReactElement } from 'react';
 import type { TabProps } from '../core/tab-props.js';
 
 /**
- *   A `Tab` component provides the label and selection mechanism for the tab
- * content that should be rendered to the user.
+ *   A tab...
+ * @see {@link https://w3c.github.io/aria/#tab | WAI-ARIA `tab` role}
  */
 export default function Tab({
   children,

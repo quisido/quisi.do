@@ -2,9 +2,8 @@ import type { ReactElement } from 'react';
 import type { ToolbarProps } from '../core/toolbar-props.js';
 
 /**
- *   The `Toolbar` component is a collection of commonly used controls, such as
- * buttons or checkboxes, grouped together in a compact visual form. Only use a
- * `Toolbar` component to group 3 or more controls.
+ *   A toolbar...
+ * @see {@link https://w3c.github.io/aria/#toolbar | WAI-ARIA `toolbar` role}
  */
 export default function Toolbar({
   children,

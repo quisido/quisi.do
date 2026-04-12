@@ -3,7 +3,8 @@ import type { TreeProps, TreeRow } from '../core/tree-props.js';
 import type { RowCell } from '../core/row-props.js';
 
 /**
- *   A `Tree` component can be expanded and collapsed.
+ *   A tree...
+ * @see {@link https://w3c.github.io/aria/#tree | WAI-ARIA `tree` role}
  */
 export default function Tree({ caption, rows }: TreeProps): ReactElement {
   return (

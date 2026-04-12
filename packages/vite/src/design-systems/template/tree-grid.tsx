@@ -3,8 +3,8 @@ import type { TreeGridProps, TreeGridRow } from '../core/tree-grid-props.js';
 import type { RowCell } from '../core/row-props.js';
 
 /**
- *   A `TreeGrid` component is a `Grid` whose rows can be expanded and
- * collapsed in the same manner as a `Tree`.
+ *   A tree grid...
+ * @see {@link https://w3c.github.io/aria/#treegrid | WAI-ARIA `treegrid` role}
  */
 export default function TreeGrid({
   caption,

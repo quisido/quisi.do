@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { WithLabel } from './with-label.js';
+import type { LabelProps } from './label-props.js';
 
 interface Props {
   readonly children: ReactNode;
@@ -9,4 +9,4 @@ interface Props {
   readonly orientation?: 'horizontal' | 'vertical' | undefined;
 }
 
-export type ToolbarProps = WithLabel<Props>;
+export type ToolbarProps = LabelProps & Props;

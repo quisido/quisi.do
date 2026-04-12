@@ -2,9 +2,8 @@ import type { ReactElement } from 'react';
 import type { SliderProps } from '../core/slider-props.js';
 
 /**
- *   A `Slider` component lets the user select a value from within a given
- * range. Its thumb position represents the current value and the available
- * bounds.
+ *   A slider...
+ * @see {@link https://w3c.github.io/aria/#slider | WAI-ARIA `slider` role}
  */
 export default function Slider({ label }: SliderProps): ReactElement {
   return (

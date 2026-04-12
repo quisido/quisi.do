@@ -2,8 +2,8 @@ import type { ReactElement } from 'react';
 import type { SwitchProps } from '../core/switch-props.js';
 
 /**
- *   A `Switch` component is a type of checkbox that represents on and off
- * values rather than checked and unchecked values.
+ *   A switch...
+ * @see {@link https://w3c.github.io/aria/#switch | WAI-ARIA `switch` role}
  */
 export default function Switch({
   checked = false,

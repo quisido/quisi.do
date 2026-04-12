@@ -2,8 +2,8 @@ import type { ReactElement } from 'react';
 import type { RadioGroupProps } from '../core/radio-group-props.js';
 
 /**
- *   A `RadioGroup` component groups `Radio` buttons so only one item in the
- * set can be checked at a time.
+ *   A radio group...
+ * @see {@link https://w3c.github.io/aria/#radiogroup | WAI-ARIA `radiogroup` role}
  */
 export default function RadioGroup({
   children,
