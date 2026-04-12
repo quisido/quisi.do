@@ -23,6 +23,11 @@ export default function testRadioGroup(
       getByName('radiogroup', 'Test radio group');
     });
 
+    /**
+     * TODO: "Authors MUST manage focus on this container role."
+     * @see {@link https://w3c.github.io/aria/#managingfocus_authors}
+     */
+
     // TODO: If a caption exists, it must be the first non-generic descendant.
   });
 }

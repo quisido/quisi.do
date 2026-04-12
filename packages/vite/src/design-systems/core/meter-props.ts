@@ -1,7 +1,14 @@
-import type { WithLabel } from './with-label.js';
-
-interface Props {
+export interface MeterProps {
+  readonly high?: number | undefined;
+  readonly low?: number | undefined;
+  /**
+   * @default 100
+   */
+  readonly max?: number | undefined;
+  /**
+   * @default 0
+   */
+  readonly min?: number | undefined;
+  readonly optimum?: number | undefined;
   readonly value: number;
 }
-
-export type MeterProps = WithLabel<Props>;

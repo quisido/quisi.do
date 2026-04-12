@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import type { EmphasisProps } from '../core/emphasis-props.js';
 
 /**
- *   An `Emphasis` component contains one or more emphasized characters.
+ *   Emphasis contains one or more emphasized characters.
  *   An emphasis stresses or emphasizes content. It is not for communicating
  * changes in typographical presentation that do not impact the meaning of the
  * content. Use emphasis only if its absence would change the meaning of the

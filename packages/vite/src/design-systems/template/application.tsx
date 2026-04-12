@@ -4,9 +4,10 @@ import Banner from './banner.js';
 import type { ApplicationProps } from '../core/application-props.js';
 import OwnsContentInfo from '../core/owns-content-info.js';
 import ContentInfo from './content-info.js';
+import OwnsMain from '../core/owns-main.jsx';
 
 /**
- *   An `Application` is a structure containing one or more focusable elements
+ *   An application is a structure containing one or more focusable elements
  * requiring user input, such as keyboard or gesture events, that do not follow
  * a standard interaction pattern supported by a widget role.
  *   Some user agents and assistive technologies have a browse mode where
@@ -43,11 +44,13 @@ export default function Application({
     >
       <OwnsBanner>
         <OwnsContentInfo>
-          {banner !== undefined && <Banner>{banner}</Banner>}
-          {children}
-          {contentInfo !== undefined && (
-            <ContentInfo>{contentInfo}</ContentInfo>
-          )}
+          <OwnsMain>
+            {banner !== undefined && <Banner>{banner}</Banner>}
+            {children}
+            {contentInfo !== undefined && (
+              <ContentInfo>{contentInfo}</ContentInfo>
+            )}
+          </OwnsMain>
         </OwnsContentInfo>
       </OwnsBanner>
     </div>

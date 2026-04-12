@@ -33,9 +33,9 @@ const FigureCaption = ({
 };
 
 /**
- *   A `Figure` component is a a perceivable section of content that typically
- * contains a graphical document, images, media player, code snippets, or
- * example text. The parts of a figure may be user-navigable.
+ *   A figure is a a perceivable section of content that typically contains a
+ * graphical document, images, media player, code snippets, or example text. The
+ * parts of a figure may be user-navigable.
  *   A figure should be referenced by the main text, but does not have to be
  * displayed at the same location.
  * @see {@link https://w3c.github.io/aria/#figure | WAI-ARIA `figure` role}

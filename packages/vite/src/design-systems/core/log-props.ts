@@ -2,5 +2,8 @@ import type { ReactNode } from 'react';
 
 export interface LogProps {
   readonly children: ReactNode;
-  readonly label: string;
+  /**
+   * @default 'polite'
+   */
+  readonly live?: 'off' | 'polite' | 'assertive' | undefined;
 }

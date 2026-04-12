@@ -1,16 +1,11 @@
 import type { ReactElement } from 'react';
 import type { MathProps } from '../core/math-props.js';
 
+// TODO: Use MathML and fallback with a polyfill.
+
 /**
- *   The `Math` component marks content in an accessible format such as MathML,
- * or with another type of textual representation such as TeX or LaTeX, which
- * can be converted to an accessible format by native browser implementations or
- * a polyfill library.
- *   While it is not ideal to use an image of a mathematical expression, there
- * exists a significant amount of legacy content where images are used to
- * represent mathematical expressions. Authors _should_ ensure that images of
- * math are labeled by text that describes the mathematical expression as it
- * might be spoken.
+ *   Math represents a mathematical expression.
+ * @see {@link https://w3c.github.io/aria/#math | WAI-ARIA `math` role}
  */
 export default function Math({ children, label }: MathProps): ReactElement {
   return (

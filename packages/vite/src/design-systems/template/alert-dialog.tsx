@@ -21,7 +21,7 @@ const toIcon = (type: AlertDialogType): string => {
 };
 
 /**
- *   An `AlertDialog` is a type of dialog that contains an alert message, where
+ *   An alert dialog is a type of dialog that contains an alert message, where
  * initial focus goes to an element within the dialog.
  *   Alert dialogs are used to convey messages to alert the user. The alert
  * dialog contains both the alert message and the rest of the dialog.

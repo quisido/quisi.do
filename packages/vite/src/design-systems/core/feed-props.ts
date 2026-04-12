@@ -1,5 +1,12 @@
-import type { FeedArticle } from './feed-article.js';
-import type { WithLabel } from './with-label.js';
+import type { ReactNode } from 'react';
+import type { HeadingOrLabelProps } from './heading-or-label-props.js';
+import type { LabelProps } from './label-props.js';
+
+export type FeedArticle = HeadingOrLabelProps & {
+  readonly children: ReactNode;
+  readonly describedBy?: string | undefined;
+  readonly key: number | string;
+};
 
 interface Props {
   readonly articles: readonly FeedArticle[];
@@ -16,4 +23,4 @@ interface Props {
   readonly setSize?: number | undefined;
 }
 
-export type FeedProps = WithLabel<Props>;
+export type FeedProps = LabelProps & Props;

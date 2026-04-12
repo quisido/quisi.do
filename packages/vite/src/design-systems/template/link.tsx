@@ -7,9 +7,8 @@ import type {
 import type { LinkProps } from '../core/link-props.js';
 
 /**
- *   A `Link` component is an interactive reference to an internal or external
- * resource that, when activated, causes the user agent to navigate to that
- * resource.
+ *   A link is an interactive reference to an internal or external resource
+ * that, when activated, causes the user agent to navigate to that resource.
  * @see {@link https://w3c.github.io/aria/#link | WAI-ARIA `link` role}
  */
 export default function Link({

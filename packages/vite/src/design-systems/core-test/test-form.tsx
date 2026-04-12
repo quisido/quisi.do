@@ -1,14 +1,56 @@
+/* eslint-disable no-magic-numbers */
 import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { FormProps } from '../core/form-props.js';
+import type { RegionProps } from '../core/region-props.js';
 
-export default function testForm(Form: ComponentType<FormProps>): void {
+interface Options {
+  readonly Region: ComponentType<RegionProps>;
+}
+
+export default function testForm(
+  Form: ComponentType<FormProps>,
+  { Region }: Options,
+): void {
   describe('Form', (): void => {
-    it('should be a form', (): void => {
-      const { getByName } = render(<Form label="Test form">Test content</Form>);
+    describe('heading', (): void => {
+      it('should be supported', (): void => {
+        const { getByName } = render(
+          <Form heading="Test heading">Test content</Form>,
+        );
 
-      getByName('form', 'Test form');
+        getByName('form', 'Test heading');
+      });
+
+      it('should increment', (): void => {
+        const { getHeadingByLevel } = render(
+          <Form heading="Test form heading">
+            <Region heading="Test region heading">Test content</Region>
+          </Form>,
+        );
+
+        getHeadingByLevel('Test form heading', 2);
+        getHeadingByLevel('Test region heading', 3);
+      });
+    });
+
+    it('should support labels', (): void => {
+      const { getByName } = render(
+        <Form label="Test label">Test content</Form>,
+      );
+
+      getByName('form', 'Test label');
+    });
+
+    it('should support external labels', (): void => {
+      const { getByName } = render(
+        <>
+          <span id="test-form-label-id">Test labelled by</span>
+          <Form labelledBy="test-form-label-id">Test content</Form>,
+        </>,
+      );
+      getByName('form', 'Test labelled by');
     });
   });
 }

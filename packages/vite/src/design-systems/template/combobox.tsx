@@ -8,14 +8,16 @@ import {
   useRef,
   useState,
 } from 'react';
-import type { ComboBoxProps } from '../core/combo-box-props.js';
+import type { ComboboxProps } from '../core/combobox-props.js';
 import useId from '../core/use-id.js';
 
 /**
- *   A `ComboBox` component is an input that controls another element, such as a
- * list box or grid, that can dynamically pop up to help the user set the value
- * of the input.
- *   A combobox functionally combines a named input field with the ability to assist value selection via a supplementary popup element. A combobox input MAY be either a single-line text field that supports editing and typing or an element that only displays the current value of the combobox. If the combobox supports text input and provides autocompletion behavior as described in aria-autocomplete, authors MUST set aria-autocomplete on the combobox element to the value that corresponds to the provided behavior.
+ *   A combobox is an input that controls another element, such as a list box or
+ * grid, that can dynamically pop up to help the user set the value of the
+ * input.
+ *   A combobox functionally combines a named input field with the ability to
+ * assist value selection via a supplementary popup element. A combobox input is
+ * a single-line text field that supports editing and typing.
 
 Typically, the initial state of a combobox is collapsed. In the collapsed state, only the combobox element and a separate, optional popup control button are visible. A combobox is said to be expanded when both the combobox element showing its current value and its associated popup element are visible. Authors MUST set aria-expanded to true on an element with role combobox when it is expanded and false when it is collapsed.
 
@@ -36,14 +38,14 @@ The changes introduced in ARIA 1.2 improve interoperability with assistive techn
  * @see {@link https://www.w3.org/WAI/ARIA/apg/patterns/combobox/ | Combobox pattern}
  * @see {@link https://w3c.github.io/aria/#combobox | WAI-ARIA `combobox` role}
  */
-export default function ComboBox({
+export default function Combobox({
   disabled = false,
   label,
   onChange,
   options,
   readOnly = false,
   value,
-}: ComboBoxProps): ReactElement {
+}: ComboboxProps): ReactElement {
   const inputId: string = useId();
   const listBoxId: string = useId();
   const optionIdPrefix: string = useId();
@@ -257,7 +259,7 @@ export default function ComboBox({
           nextOptionIndex = (activeOptionIndex + 1) % filteredOptions.length;
         }
 
-        const nextOption: string = filteredOptions[nextOptionIndex];
+        const nextOption: string = filteredOptions[nextOptionIndex] ?? '';
         setInputValue(nextOption);
         selectionRangeRef.current = {
           end: nextOption.length,
@@ -292,7 +294,7 @@ export default function ComboBox({
             filteredOptions.length;
         }
 
-        const nextOption: string = filteredOptions[nextOptionIndex];
+        const nextOption: string = filteredOptions[nextOptionIndex] ?? '';
         setInputValue(nextOption);
         selectionRangeRef.current = {
           end: nextOption.length,
@@ -357,7 +359,7 @@ export default function ComboBox({
   return (
     <div ref={rootRef}>
       <label htmlFor={inputId}>{label}</label>
-      <div className="group">
+      <div>
         <input
           aria-activedescendant={activeDescendant}
           aria-autocomplete="both"

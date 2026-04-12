@@ -7,7 +7,7 @@ import type { ApplicationProps } from '../core/application-props.js';
 import type { DocumentProps } from '../core/document-props.js';
 import type { ButtonProps } from '../core/button-props.js';
 import type { CheckboxProps } from '../core/checkbox-props.js';
-import type { ComboBoxProps } from '../core/combo-box-props.js';
+import type { ComboboxProps } from '../core/combobox-props.js';
 import type { DialogProps } from '../core/dialog-props.js';
 import type { FormProps } from '../core/form-props.js';
 import type { GridProps } from '../core/grid-props.js';
@@ -15,14 +15,9 @@ import type { HeadingProps } from '../core/heading-props.js';
 import type { ImageProps } from '../core/image-props.js';
 import type { LinkProps } from '../core/link-props.js';
 import type { ListProps } from '../core/list-props.js';
-import type { ListItemProps } from '../core/list-item-props.js';
 import type { MenuProps } from '../core/menu-props.js';
 import type { MenuBarProps } from '../core/menu-bar-props.js';
-import type { MenuItemProps } from '../core/menu-item-props.js';
-import type { MenuItemCheckboxProps } from '../core/menu-item-checkbox-props.js';
-import type { MenuItemRadioProps } from '../core/menu-item-radio-props.js';
 import type { NavigationProps } from '../core/navigation-props.js';
-import type { OptionProps } from '../core/option-props.js';
 import type { ParagraphProps } from '../core/paragraph-props.js';
 import type { ProgressBarProps } from '../core/progress-bar-props.js';
 import type { RadioProps } from '../core/radio-props.js';
@@ -53,17 +48,13 @@ import testImage from './test-image.js';
 import testLink from './test-link.js';
 import testParagraph from './test-paragraph.js';
 import testCheckbox from './test-checkbox.js';
-import testComboBox from './test-combo-box.js';
+import testCombobox from './test-combobox.js';
 import testDialog from './test-dialog.js';
 import testForm from './test-form.js';
 import testGrid from './test-grid.js';
 import testMenuBar from './test-menu-bar.js';
-import testMenuItemCheckbox from './test-menu-item-checkbox.js';
-import testMenuItemRadio from './test-menu-item-radio.js';
-import testMenuItem from './test-menu-item.js';
 import testMenu from './test-menu.js';
 import testNavigation from './test-navigation.js';
-import testOption from './test-option.js';
 import testProgressBar from './test-progress-bar.js';
 import testRadioGroup from './test-radio-group.js';
 import testRadio from './test-radio.js';
@@ -85,7 +76,6 @@ import testToolbar from './test-toolbar.js';
 import type { ListBoxProps } from '../core/list-box-props.js';
 import testAlertDialog from './test-alert-dialog.js';
 import testList from './test-list.js';
-import testListItem from './test-list-item.js';
 import testArticle from './test-article.js';
 import testBlockQuote from './test-block-quote.js';
 import testCode from './test-code.js';
@@ -100,7 +90,6 @@ import testDeletion from './test-deletion.js';
 import testEmphasis from './test-emphasis.js';
 import testFeed from './test-feed.js';
 import testFigure from './test-figure.js';
-import testGroup from './test-group.js';
 import testInsertion from './test-insertion.js';
 import testListBox from './test-list-box.js';
 import testLog from './test-log.js';
@@ -128,7 +117,6 @@ import type { DeletionProps } from '../core/deletion-props.js';
 import type { EmphasisProps } from '../core/emphasis-props.js';
 import type { FeedProps } from '../core/feed-props.js';
 import type { FigureProps } from '../core/figure-props.js';
-import type { GroupProps } from '../core/group-props.js';
 import type { InsertionProps } from '../core/insertion-props.js';
 import type { LogProps } from '../core/log-props.js';
 import type { MainProps } from '../core/main-props.js';
@@ -154,7 +142,7 @@ interface DesignSystem {
   readonly Button: ComponentType<ButtonProps>;
   readonly Checkbox: ComponentType<CheckboxProps>;
   readonly Code: ComponentType<CodeProps>;
-  readonly ComboBox: ComponentType<ComboBoxProps>;
+  readonly Combobox: ComponentType<ComboboxProps>;
   readonly Comment: ComponentType<CommentProps>;
   readonly Complementary: ComponentType<ComplementaryProps>;
   readonly ContentInfo: ComponentType<ContentInfoProps>;
@@ -167,14 +155,12 @@ interface DesignSystem {
   readonly Figure: ComponentType<FigureProps>;
   readonly Form: ComponentType<FormProps>;
   readonly Grid: ComponentType<GridProps>;
-  readonly Group: ComponentType<GroupProps>;
   readonly Heading: ComponentType<HeadingProps>;
   readonly Image: ComponentType<ImageProps>;
   readonly Insertion: ComponentType<InsertionProps>;
   readonly Link: ComponentType<LinkProps>;
   readonly List: ComponentType<ListProps>;
   readonly ListBox: ComponentType<ListBoxProps>;
-  readonly ListItem: ComponentType<ListItemProps>;
   readonly Log: ComponentType<LogProps>;
   readonly Main: ComponentType<MainProps>;
   readonly Mark: ComponentType<MarkProps>;
@@ -182,13 +168,9 @@ interface DesignSystem {
   readonly Math: ComponentType<MathProps>;
   readonly Menu: ComponentType<MenuProps>;
   readonly MenuBar: ComponentType<MenuBarProps>;
-  readonly MenuItem: ComponentType<MenuItemProps>;
-  readonly MenuItemCheckbox: ComponentType<MenuItemCheckboxProps>;
-  readonly MenuItemRadio: ComponentType<MenuItemRadioProps>;
   readonly Meter: ComponentType<MeterProps>;
   readonly Navigation: ComponentType<NavigationProps>;
   readonly Note: ComponentType<NoteProps>;
-  readonly Option: ComponentType<OptionProps>;
   readonly Paragraph: ComponentType<ParagraphProps>;
   readonly ProgressBar: ComponentType<ProgressBarProps>;
   readonly Radio: ComponentType<RadioProps>;
@@ -229,7 +211,7 @@ export default function testDesignSystem({
   Button,
   Checkbox,
   Code,
-  ComboBox,
+  Combobox,
   Comment,
   Complementary,
   ContentInfo,
@@ -242,14 +224,12 @@ export default function testDesignSystem({
   Figure,
   Form,
   Grid,
-  Group,
   Heading,
   Image,
   Insertion,
   Link,
   List,
   ListBox,
-  ListItem,
   Log,
   Main,
   Mark,
@@ -257,13 +237,9 @@ export default function testDesignSystem({
   Math,
   Menu,
   MenuBar,
-  MenuItem,
-  MenuItemCheckbox,
-  MenuItemRadio,
   Meter,
   Navigation,
   Note,
-  Option,
   Paragraph,
   ProgressBar,
   Radio,
@@ -303,7 +279,7 @@ export default function testDesignSystem({
     testButton(Button);
     testCheckbox(Checkbox);
     testCode(Code);
-    testComboBox(ComboBox);
+    testCombobox(Combobox);
     testComplementary(Complementary);
     testComment(Comment);
     testContentInfo(ContentInfo, { Document });
@@ -314,30 +290,24 @@ export default function testDesignSystem({
     testEmphasis(Emphasis);
     testFeed(Feed);
     testFigure(Figure);
-    testForm(Form);
+    testForm(Form, { Region });
     testGrid(Grid);
-    testGroup(Group);
     testHeading(Heading);
     testImage(Image);
     testInsertion(Insertion);
     testLink(Link);
-    testList(List, { ListItem });
-    testListBox(ListBox, { Option });
-    testListItem(ListItem, { List });
+    testList(List);
+    testListBox(ListBox);
     testLog(Log);
     testMain(Main);
     testMark(Mark);
     testMarquee(Marquee);
     testMath(Math);
-    testMenu(Menu, { MenuItem });
-    testMenuBar(MenuBar, { MenuItem });
-    testMenuItem(MenuItem, { Menu });
-    testMenuItemCheckbox(MenuItemCheckbox, { Menu });
-    testMenuItemRadio(MenuItemRadio, { Menu });
+    testMenu(Menu);
+    testMenuBar(MenuBar);
     testMeter(Meter);
     testNavigation(Navigation);
     testNote(Note);
-    testOption(Option, { ListBox });
     testParagraph(Paragraph);
     testProgressBar(ProgressBar);
     testRadio(Radio);

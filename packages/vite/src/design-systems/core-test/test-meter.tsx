@@ -5,28 +5,23 @@ import render from './render.js';
 
 export default function testMeter(Meter: ComponentType<MeterProps>): void {
   describe('Meter', (): void => {
-    it('should support internal labels', (): void => {
-      const { getByName } = render(<Meter label="Test label" value={1} />);
-      getByName('meter', 'Test label');
+    it('should default to a minimum of 0', (): void => {
+      const { expectToHaveThrown } = render(<Meter value={-1} />);
+      expectToHaveThrown(
+        "A meter's value cannot be less than its minimum: -1 < 0",
+      );
     });
 
-    it('should support external labels', (): void => {
-      const { getByName } = render(
-        <>
-          <span id="test-meter-label-id">Test labelled by</span>
-          <Meter labelledBy="test-meter-label-id" value={1} />
-        </>,
+    it('should default to a maximum of 100', (): void => {
+      const { expectToHaveThrown } = render(<Meter value={101} />);
+      expectToHaveThrown(
+        "A meter's value cannot be greater than its maximum: 101 > 100",
       );
-      getByName('meter', 'Test labelled by');
     });
 
     it('should support values', (): void => {
-      const { getByValue } = render(
-        <Meter label="Test value label" value={2} />,
-      );
-
-      // eslint-disable-next-line no-magic-numbers
-      getByValue('meter', 2);
+      const { getByValue } = render(<Meter value={1} />);
+      getByValue('meter', 1);
     });
   });
 }

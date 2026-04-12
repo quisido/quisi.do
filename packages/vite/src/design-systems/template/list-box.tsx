@@ -1,22 +1,37 @@
 import type { ReactElement } from 'react';
-import type { ListBoxProps } from '../core/list-box-props.js';
+import type { ListBoxOption, ListBoxProps } from '../core/list-box-props.js';
+import useElementId from '../../hooks/use-element-id.js';
 
 /**
- *   A `ListBox` component lets the user choose one or more items from a list
- * of choices. Its children should be `Option` components or `Group`
- * components that contain `Option` components.
+ *   A list box is a widget that allows the user to select one or more items
+ * from a list of choices.
+ *   Items within the list are static and, unlike standard HTML select elements,
+ * can contain images. List boxes contain options or groups which in turn
+ * contain options.
+ * @see {@link https://w3c.github.io/aria/#listbox | WAI-ARIA `listbox` role}
  */
 export default function ListBox({
-  children,
   label,
+  labelledBy,
+  options,
+  orientation = 'vertical',
 }: ListBoxProps): ReactElement {
-  /**
-   *   Focus MUST be managed on this container role.
-   */
+  const selectId: string = useElementId();
+
   return (
-    <label>
-      {label}
-      <select multiple>{children}</select>
-    </label>
+    <div
+      aria-labelledby={labelledBy}
+      aria-orientation={orientation}
+      role="listbox"
+    >
+      {label && <label htmlFor={selectId}>{label}</label>}
+      <select id={selectId} multiple>
+        {options.map(
+          ({ children, key }: ListBoxOption): ReactElement => (
+            <option key={key}>{children}</option>
+          ),
+        )}
+      </select>
+    </div>
   );
 }

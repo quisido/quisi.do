@@ -1,20 +1,30 @@
 import type { ReactElement } from 'react';
-import type { ListProps } from '../core/list-props.js';
+import type { ListItem, ListProps } from '../core/list-props.js';
 
 /**
- * A section containing `ListItem` elements.
+ *   A list is a section containing list items.
+ * @see {@link https://w3c.github.io/aria/#list | WAI-ARIA `list` role}
  */
 export default function List({
-  children,
+  items,
   label,
   labelledBy,
   ordered = false,
 }: ListProps): ReactElement {
-  // eslint-disable-next-line no-ternary
-  const Component = ordered ? 'ol' : 'ul';
+  const Component = ((): 'ol' | 'ul' => {
+    if (ordered) {
+      return 'ol';
+    }
+    return 'ul';
+  })();
+
   return (
     <Component aria-label={label} aria-labelledby={labelledBy}>
-      {children}
+      {items.map(
+        ({ children, key }: ListItem): ReactElement => (
+          <li key={key}>{children}</li>
+        ),
+      )}
     </Component>
   );
 }

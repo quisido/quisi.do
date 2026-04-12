@@ -6,7 +6,7 @@ interface DisabledProps {
   readonly readOnly?: false | undefined;
 }
 
-export type DisabledOrReadOnly<T> = T & (DisabledProps | ReadOnlyProps);
+export type DisabledOrReadOnlyProps = DisabledProps | ReadOnlyProps;
 
 interface ReadOnlyProps {
   readonly disabled?: false | undefined;

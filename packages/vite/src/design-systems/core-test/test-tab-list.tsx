@@ -23,4 +23,9 @@ export default function testTabList(
       getByName('tablist', 'Test tab list');
     });
   });
+
+  /**
+   * TODO: "Authors MUST manage focus on this container role."
+   * @see {@link https://w3c.github.io/aria/#managingfocus_authors}
+   */
 }

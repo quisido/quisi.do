@@ -13,6 +13,7 @@ export default function useHeadingOrLabel({
   label,
   labelledBy,
 }: Props): string | undefined {
+  // `aria-labelledby`
   return ((): string | undefined => {
     if (typeof label === 'string') {
       return;

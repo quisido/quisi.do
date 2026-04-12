@@ -2,9 +2,9 @@ import type { ReactElement } from 'react';
 import type { DeletionProps } from '../core/deletion-props.js';
 
 /**
- *   A `Deletion` component represents content that is marked as removed,
- * content that is being suggested for removal, or content that is no longer
- * relevant in the context of its accompanying content.
+ *   A deletion represents content that is marked as removed, content that is
+ * being suggested for removal, or content that is no longer relevant in the
+ * context of its accompanying content.
  *   Deletions are typically used to either mark differences between two
  * versions of content or to designate content suggested for removal in
  * scenarios where multiple people are revising content.

@@ -4,9 +4,10 @@ import toChecked from '../core/to-checked.js';
 import type { CheckboxProps } from '../core/checkbox-props.js';
 
 /**
- *   A `Checkbox` component is a checkable input that has three possible values:
- * true, false, or 'mixed'. If the checkbox controls a group of elements have a
+ *   A checkbox is a checkable input that has three possible values: true,
+ * false, or 'mixed'. If the checkbox controls a group of elements have a
  * mixture of checked and unchecked values, use 'mixed'.
+ * @see {@link https://w3c.github.io/aria/#checkbox | WAI-ARIA `checkbox` role}
  */
 export default function Checkbox({
   disabled = false,

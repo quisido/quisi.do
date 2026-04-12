@@ -13,5 +13,10 @@ export default function testTreeGrid(
       );
       getByName('treegrid', 'Test caption');
     });
+
+    /**
+     * TODO: "Authors MUST manage focus on this container role."
+     * @see {@link https://w3c.github.io/aria/#managingfocus_authors}
+     */
   });
 }

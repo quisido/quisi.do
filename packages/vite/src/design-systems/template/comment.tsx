@@ -2,8 +2,7 @@ import type { ReactElement } from 'react';
 import type { CommentProps } from '../core/comment-props.js';
 
 /**
- *   A `Comment` component contains content expressing a reaction to other
- * content.
+ *   A comment contains content expressing a reaction to other content.
  *   Comments can annotate any visible content, from small spans of text, to
  * other comments, to entire articles.
  *   If the comment is a reply to another comment, make each reply comment a

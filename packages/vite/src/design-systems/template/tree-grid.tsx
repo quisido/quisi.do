@@ -1,7 +1,6 @@
-import type { Attributes, ReactElement } from 'react';
-import type { TreeGridProps } from '../core/tree-grid-props.js';
-import type { RowProps } from '../core/row-props.js';
-import type { CellProps } from '../core/cell-props.js';
+import type { ReactElement } from 'react';
+import type { TreeGridProps, TreeGridRow } from '../core/tree-grid-props.js';
+import type { RowCell } from '../core/row-props.js';
 
 /**
  *   A `TreeGrid` component is a `Grid` whose rows can be expanded and
@@ -11,23 +10,22 @@ export default function TreeGrid({
   caption,
   rows,
 }: TreeGridProps): ReactElement {
-  /**
-   *   Focus MUST be managed on this container role.
-   */
   return (
     <table role="treegrid">
       <caption>{caption}</caption>
       {rows.map(
-        ({
-          cells,
-          key: rowKey,
-        }: RowProps & Required<Attributes>): ReactElement => (
+        ({ cells, key: rowKey }: TreeGridRow): ReactElement => (
           <tr key={rowKey} role="row">
             {cells.map(
-              ({
-                children,
-                key: cellKey,
-              }: CellProps & Required<Attributes>): ReactElement => (
+              ({ children, key: cellKey }: RowCell): ReactElement => (
+                /**
+                 *  In a tree grid, authors MAY define a grid cell as expandable
+                 * by using the aria-expanded attribute. If the aria-expanded
+                 * attribute is provided, it applies only to the individual
+                 * cell. It is not a proxy for the container row, which also can
+                 * be expanded. The main use case for providing this attribute
+                 * on a gridcell is pivot table behavior.
+                 */
                 <td key={cellKey} role="gridcell">
                   {children}
                 </td>

@@ -6,8 +6,7 @@ import Paragraph from './paragraph.js';
 import Heading from './heading.js';
 
 /**
- *   A `Dialog` component is a descendant window of the primary window of a web
- * application.
+ *   A dialog is a descendant window of the primary window of a web application.
  *   Dialogs are often used to prompt the user to enter or respond to
  * information, or can represent content related to understanding or modifying
  * the content of the primary application window. A dialog that is designed to
