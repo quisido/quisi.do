@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { SuggestionProps } from '../core/suggestion-props.js';
@@ -8,13 +8,13 @@ export default function testSuggestion(
 ): void {
   describe('Suggestion', (): void => {
     it('should be a suggestion', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <Suggestion label="Test suggestion">
           Test suggestion content
         </Suggestion>,
       );
 
-      getByRole('suggestion', { name: 'Test suggestion' });
+      getByName('suggestion', 'Test suggestion');
     });
   });
 }

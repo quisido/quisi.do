@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { RadioGroupProps } from '../core/radio-group-props.js';
@@ -14,13 +14,13 @@ export default function testRadioGroup(
 ): void {
   describe('RadioGroup', (): void => {
     it('should be a radio group', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <RadioGroup label="Test radio group">
           <Radio label="Test radio" />
         </RadioGroup>,
       );
 
-      getByRole('radiogroup', { name: 'Test radio group' });
+      getByName('radiogroup', 'Test radio group');
     });
 
     // TODO: If a caption exists, it must be the first non-generic descendant.

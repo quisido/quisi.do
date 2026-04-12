@@ -1,49 +1,51 @@
-import { render } from '@testing-library/react';
-import { assert, describe, expect, it, vi } from 'vitest';
-import { userEvent, type UserEvent } from '@testing-library/user-event';
+import { describe, expect, it, vi } from 'vitest';
+import { userEvent } from '@testing-library/user-event';
 import type { ComponentType } from 'react';
 import type { AlertDialogProps } from '../core/alert-dialog-props.js';
+import render from './render.js';
 
 const handleTestDismiss = vi.fn();
-const USER: UserEvent = userEvent.setup();
 
 export default function testAlertDialog(
   AlertDialog: ComponentType<AlertDialogProps>,
 ): void {
   describe('AlertDialog', (): void => {
     it('should support headings', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <AlertDialog heading="Test heading" onDismiss={handleTestDismiss}>
           Test content
         </AlertDialog>,
       );
-      getByRole('alertdialog', { name: 'Test heading' });
+      getByName('alertdialog', 'Test heading');
     });
 
     it('should support labels', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <AlertDialog label="Test label" onDismiss={handleTestDismiss}>
           Test content
         </AlertDialog>,
       );
-      getByRole('alertdialog', { name: 'Test label' });
+      getByName('alertdialog', 'Test label');
     });
 
     it('should support labelled by', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <>
-          <span id="test-id">Test labelled by</span>
-          <AlertDialog labelledBy="test-id" onDismiss={handleTestDismiss}>
+          <span id="test-alert-dialog-label-id">Test labelled by</span>
+          <AlertDialog
+            labelledBy="test-alert-dialog-label-id"
+            onDismiss={handleTestDismiss}
+          >
             Test content
           </AlertDialog>
           ,
         </>,
       );
-      getByRole('alertdialog', { name: 'Test labelled by' });
+      getByName('alertdialog', 'Test labelled by');
     });
 
     it('should support dismissing', async (): Promise<void> => {
-      const { getAllByRole, getByRole } = render(
+      const { getByName } = render(
         <AlertDialog
           label="Test dismissable label"
           onDismiss={handleTestDismiss}
@@ -52,40 +54,23 @@ export default function testAlertDialog(
         </AlertDialog>,
       );
 
-      const alertDialog: HTMLElement = getByRole('alertdialog', {
-        name: 'Test dismissable label',
-      });
-
-      const isDescendant = (element: HTMLElement): boolean =>
-        alertDialog.contains(element);
-
-      const dismissButtons: readonly HTMLElement[] = getAllByRole('button', {
-        name: 'Dismiss',
-      });
-
-      const dismissButton: HTMLElement | undefined =
-        dismissButtons.find(isDescendant);
-
-      assert(dismissButton !== undefined, 'Expected to find a dismiss button.');
-      await USER.click(dismissButton);
+      const dismissButton: HTMLElement = getByName('button', 'Dismiss');
+      await userEvent.click(dismissButton);
       expect(handleTestDismiss).toHaveBeenCalledExactlyOnceWith();
     });
 
     it('must be described', (): void => {
-      const { getByRole } = render(
+      const { getByDescription } = render(
         <AlertDialog label="Test described label" onDismiss={handleTestDismiss}>
           Test content
         </AlertDialog>,
       );
 
-      getByRole('alertdialog', {
-        description: 'Test content',
-        name: 'Test described label',
-      });
+      getByDescription('alertdialog', 'Test content');
     });
 
-    it('should be modal', async (): Promise<void> => {
-      const { container, getByRole } = render(
+    it('should be modal (capture keyboard navigation)', async (): Promise<void> => {
+      const { getByName } = render(
         <>
           <button>First button</button>
           <AlertDialog label="Test modal label" onDismiss={handleTestDismiss}>
@@ -95,20 +80,17 @@ export default function testAlertDialog(
         </>,
       );
 
-      const dismissButton: HTMLElement | null = container.querySelector(
-        '[aria-label="Dismiss"]',
-      );
-      assert(dismissButton !== null);
-      const secondButton: HTMLElement = getByRole('button', {
-        name: 'Second button',
-      });
-      expect(window.document.activeElement).toBe(secondButton);
-      await USER.tab();
-      expect(window.document.activeElement).toBe(dismissButton);
-      await USER.tab();
-      expect(window.document.activeElement).toBe(secondButton);
-      await USER.tab();
-      expect(window.document.activeElement).toBe(dismissButton);
+      const dismissButton: HTMLElement = getByName('button', 'Dismiss');
+      const secondButton: HTMLElement = getByName('button', 'Second button');
+      // eslint-disable-next-line no-magic-numbers
+      for (let loop = 0; loop < 5; loop++) {
+        expect(window.document.activeElement).toBe(secondButton);
+        // eslint-disable-next-line no-await-in-loop
+        await userEvent.tab();
+        expect(window.document.activeElement).toBe(dismissButton);
+        // eslint-disable-next-line no-await-in-loop
+        await userEvent.tab();
+      }
     });
   });
 }

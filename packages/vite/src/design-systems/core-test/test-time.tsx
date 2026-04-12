@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { TimeProps } from '../core/time-props.js';
@@ -6,13 +6,8 @@ import type { TimeProps } from '../core/time-props.js';
 export default function testTime(Time: ComponentType<TimeProps>): void {
   describe('Time', (): void => {
     it('should be a time', (): void => {
-      const { getByRole } = render(
-        <>
-          <span id="test-id">Test description</span>
-          <Time describedBy="test-id">2018-07-07</Time>
-        </>,
-      );
-      getByRole('time', { description: 'Test description' });
+      const { getByRole } = render(<Time>2003-02-01</Time>);
+      getByRole('time');
     });
   });
 }

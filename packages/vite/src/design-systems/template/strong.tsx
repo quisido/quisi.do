@@ -11,9 +11,6 @@ import type { StrongProps } from '../core/strong-props.js';
  * that purpose, the `Emphasis` component is more appropriate.
  * @see {@link https://w3c.github.io/aria/#strong | WAI-ARIA `strong` role}
  */
-export default function Strong({
-  children,
-  describedBy,
-}: StrongProps): ReactElement {
-  return <strong aria-describedby={describedBy}>{children}</strong>;
+export default function Strong({ children }: StrongProps): ReactElement {
+  return <strong role="strong">{children}</strong>;
 }

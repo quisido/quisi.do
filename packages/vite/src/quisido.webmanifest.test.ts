@@ -1,10 +1,8 @@
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
 import { assert, describe, expect, it } from 'vitest';
-import findSplashScreenIcon from '../test/find-splash-screen-icon.js';
-import { THEME } from './constants/theme.js';
 import type WebManifest from './types/web-manifest/web-manifest.js';
+import findSplashScreenIcon from '../test/find-splash-screen-icon.js';
 import mapRgbToHex from './utils/map-rgb-to-hex.js';
+import { THEME } from './constants/theme.js';
 
 /**
  * TypeScript cannot read JSON from non-JSON file extensions.
@@ -16,16 +14,15 @@ import mapRgbToHex from './utils/map-rgb-to-hex.js';
  * } from '../public/quisido.webmanifest' assert { type: 'json' };
  */
 
-const {
-  background_color: backgroundColor,
-  icons,
-  name,
-  theme_color: themeColor,
-} = JSON.parse(
-  await readFile(join(__dirname, '../public/quisido.webmanifest'), 'utf8'),
-) as WebManifest;
+describe('web manifest', async (): Promise<void> => {
+  const response: Response = await window.fetch('/quisido.webmanifest');
+  const {
+    background_color: backgroundColor,
+    icons,
+    name,
+    theme_color: themeColor,
+  } = (await response.json()) as WebManifest;
 
-describe('web manifest', (): void => {
   it('should match the theme', (): void => {
     expect(backgroundColor).toBe(mapRgbToHex(THEME.background));
   });

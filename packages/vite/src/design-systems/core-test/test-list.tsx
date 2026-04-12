@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, expect, it } from 'vitest';
 import type { ListItemProps } from '../core/list-item-props.js';
@@ -14,25 +14,23 @@ export default function testList(
 ): void {
   describe('List', (): void => {
     it('should default to unordered', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <List label="unordered list">
           <ListItem>Test unordered list item</ListItem>
         </List>,
       );
-      expect(getByRole('list', { name: 'unordered list' })).toBeInstanceOf(
-        HTMLUListElement,
-      );
+      const list: HTMLElement = getByName('list', 'unordered list');
+      expect(list).toBeInstanceOf(HTMLUListElement);
     });
 
     it('should support ordered', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <List label="ordered list" ordered>
           <ListItem>Test ordered list item</ListItem>
         </List>,
       );
-      expect(getByRole('list', { name: 'ordered list' })).toBeInstanceOf(
-        HTMLOListElement,
-      );
+      const list: HTMLElement = getByName('list', 'ordered list');
+      expect(list).toBeInstanceOf(HTMLOListElement);
     });
   });
 }

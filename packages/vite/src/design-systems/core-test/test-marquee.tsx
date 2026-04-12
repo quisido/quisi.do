@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { MarqueeProps } from '../core/marquee-props.js';
@@ -8,11 +8,11 @@ export default function testMarquee(
 ): void {
   describe('Marquee', (): void => {
     it('should be a marquee', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <Marquee label="Test marquee">Test content</Marquee>,
       );
 
-      getByRole('marquee', { name: 'Test marquee' });
+      getByName('marquee', 'Test marquee');
     });
   });
 }
