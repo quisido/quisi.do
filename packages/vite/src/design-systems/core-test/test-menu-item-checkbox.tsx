@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { MenuItemCheckboxProps } from '../core/menu-item-checkbox-props.js';
@@ -14,13 +14,13 @@ export default function testMenuItemCheckbox(
 ): void {
   describe('MenuItemCheckbox', (): void => {
     it('should be a menu item checkbox', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <Menu label="Test menu">
           <MenuItemCheckbox>Test menu item checkbox</MenuItemCheckbox>
         </Menu>,
       );
 
-      getByRole('menuitemcheckbox', { name: 'Test menu item checkbox' });
+      getByName('menuitemcheckbox', 'Test menu item checkbox');
     });
   });
 }

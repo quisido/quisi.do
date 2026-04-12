@@ -7,7 +7,6 @@ export default function testLog(Log: ComponentType<LogProps>): void {
   describe('Log', (): void => {
     it('should be a log', (): void => {
       const { getByRole } = render(<Log>Test content</Log>);
-
       const log: HTMLElement = getByRole('log');
       expect(log).toHaveTextContent('Test content');
     });

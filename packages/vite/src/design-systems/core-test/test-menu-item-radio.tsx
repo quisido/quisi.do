@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { MenuItemRadioProps } from '../core/menu-item-radio-props.js';
@@ -14,13 +14,13 @@ export default function testMenuItemRadio(
 ): void {
   describe('MenuItemRadio', (): void => {
     it('should be a menu item radio', (): void => {
-      const { getByRole } = render(
+      const { getByName } = render(
         <Menu label="Test menu">
           <MenuItemRadio>Test menu item radio</MenuItemRadio>
         </Menu>,
       );
 
-      getByRole('menuitemradio', { name: 'Test menu item radio' });
+      getByName('menuitemradio', 'Test menu item radio');
     });
   });
 }

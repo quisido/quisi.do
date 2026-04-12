@@ -82,7 +82,6 @@ export default function testAlertDialog(
 
       const dismissButton: HTMLElement = getByName('button', 'Dismiss');
       const secondButton: HTMLElement = getByName('button', 'Second button');
-
       for (let loop = 0; loop < 5; loop++) {
         expect(window.document.activeElement).toBe(secondButton);
         // eslint-disable-next-line no-await-in-loop

@@ -314,6 +314,7 @@ export default function testDesignSystem(
     testSlider(Slider);
     testSpinButton(SpinButton);
     testSectionHeader(SectionHeader);
+    testSeparatorWidget(SeparatorWidget);
     testStatus(Status);
     testStrong(Strong);
     testSubscript(Subscript);
@@ -329,6 +330,5 @@ export default function testDesignSystem(
     testToolbar(Toolbar);
     testTooltip(Tooltip);
     testTreeGrid(TreeGrid);
-    testSeparatorWidget(SeparatorWidget);
   });
 }
