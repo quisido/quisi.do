@@ -3,7 +3,10 @@ import type { ReactElement } from 'react';
 import type { HeadingProps } from '../core/heading-props.js';
 
 /**
- * A heading for a section of the page.
+ *   A heading is a heading for a section of the page.
+ *   To ensure headings are organized into a logical outline, use the `level`
+ * prop to indicate the proper nesting level.
+ * @see {@link https://w3c.github.io/aria/#heading | WAI-ARIA `heading` role}
  */
 export default function Heading({
   children,

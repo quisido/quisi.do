@@ -1,26 +1,19 @@
 import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
-import type { MenuItemProps } from '../core/menu-item-props.js';
 import type { MenuProps } from '../core/menu-props.js';
 
-interface Options {
-  readonly MenuItem: ComponentType<MenuItemProps>;
-}
-
-export default function testMenu(
-  Menu: ComponentType<MenuProps>,
-  { MenuItem }: Options,
-): void {
+export default function testMenu(Menu: ComponentType<MenuProps>): void {
   describe('Menu', (): void => {
     it('should be a menu', (): void => {
-      const { getByName } = render(
-        <Menu label="Test menu">
-          <MenuItem>Test menu item</MenuItem>
-        </Menu>,
-      );
+      const { getByName } = render(<Menu items={[]} label="Test menu" />);
 
       getByName('menu', 'Test menu');
     });
+
+    /**
+     * DO: "Authors MUST manage focus on this container role."
+     * @see {@link https://w3c.github.io/aria/#managingfocus_authors}
+     */
   });
 }

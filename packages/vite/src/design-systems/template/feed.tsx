@@ -1,7 +1,6 @@
 import type { ReactElement } from 'react';
-import type { FeedProps } from '../core/feed-props.js';
+import type { FeedArticle, FeedProps } from '../core/feed-props.js';
 import useFeed from '../core/use-feed.js';
-import type { FeedArticle } from '../core/feed-article.js';
 import useHeadingOrLabel from '../core/use-heading-or-label.js';
 import useId from '../core/use-id.js';
 import Heading from './heading.js';
@@ -54,13 +53,8 @@ const FeedArticleComponent = ({
 };
 
 /**
- *   A `Feed` component is a scrollable list of `Article` components where
- * articles may be added to or removed from either end of the list as the user
- * reads and scrolls through the content.
- *
- *
- *   A `Feed` component is a scrollable list of articles where scrolling might
- * cause articles to be added to or removed from either end of the list.
+ *   A feed is a scrollable list of articles where scrolling might cause
+ * articles to be added to or removed from either end of the list.
  *   A feed enables users to both read and scroll through a stream of rich
  * content that might continue scrolling infinitely by loading more content as
  * the user reads. In a feed, assistive technologies provide a web application

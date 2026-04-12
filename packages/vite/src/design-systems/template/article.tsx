@@ -5,8 +5,8 @@ import Heading from './heading.js';
 import HeadingLevelProvider from '../core/heading-level-provider.js';
 
 /**
- *   An `Article` component is a section of a page that consists of a
- * composition that forms an independent part of a document, page, or site.
+ *   An article is a section of a page that consists of a composition that forms
+ * an independent part of a document, page, or site.
  *   An article is not a navigational landmark, but can be nested to form a
  * discussion where assistive technologies could pay attention to article
  * nesting to assist the user in following the discussion. An article could be a

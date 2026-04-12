@@ -1,7 +1,6 @@
-import type { Attributes, ReactElement } from 'react';
-import type { RowProps } from '../core/row-props.js';
-import type { CellProps } from '../core/cell-props.js';
-import type { TableProps } from '../core/table-props.js';
+import type { ReactElement } from 'react';
+import type { RowCell } from '../core/row-props.js';
+import type { TableProps, TableRow } from '../core/table-props.js';
 
 /**
  *   A `Table` component contains data arranged in rows and columns. Use
@@ -14,16 +13,10 @@ export default function Table({ caption, rows }: TableProps): ReactElement {
       <caption>{caption}</caption>
       <tbody>
         {rows.map(
-          ({
-            cells,
-            key: rowKey,
-          }: RowProps & Required<Attributes>): ReactElement => (
+          ({ cells, key: rowKey }: TableRow): ReactElement => (
             <tr key={rowKey}>
               {cells.map(
-                ({
-                  children,
-                  key: cellKey,
-                }: CellProps & Required<Attributes>): ReactElement => (
+                ({ children, key: cellKey }: RowCell): ReactElement => (
                   <td key={cellKey}>{children}</td>
                 ),
               )}

@@ -1,18 +1,18 @@
 import type { ComponentType } from 'react';
 import { describe, expect, it, vi } from 'vitest';
-import type { ComboBoxProps } from '../core/combo-box-props.js';
+import type { ComboboxProps } from '../core/combobox-props.js';
 import render from './render.js';
 import { userEvent } from '@testing-library/user-event';
 
 const handleTestChange = vi.fn();
 
-export default function testComboBox(
-  ComboBox: ComponentType<ComboBoxProps>,
+export default function testCombobox(
+  Combobox: ComponentType<ComboboxProps>,
 ): void {
-  describe('ComboBox', (): void => {
+  describe('Combobox', (): void => {
     it('should be a combo box', (): void => {
       const { getByName } = render(
-        <ComboBox
+        <Combobox
           label="Test combo box"
           onChange={handleTestChange}
           options={[]}
@@ -25,7 +25,7 @@ export default function testComboBox(
 
     it('should support keyboard selection', async (): Promise<void> => {
       const { getByName } = render(
-        <ComboBox
+        <Combobox
           label="States"
           onChange={handleTestChange}
           options={['Alabama', 'Alaska', 'California']}
@@ -48,7 +48,7 @@ export default function testComboBox(
 
     it('should support pointer selection', async (): Promise<void> => {
       const { getByName } = render(
-        <ComboBox
+        <Combobox
           label="States"
           onChange={handleTestChange}
           options={['Alabama', 'Alaska', 'California']}

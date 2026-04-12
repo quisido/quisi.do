@@ -4,8 +4,8 @@ import Heading from './heading.js';
 import type { AlertProps } from '../core/alert-props.js';
 
 /**
- *   An `Alert` component is a live region with important, and usually
- * time-sensitive, information.
+ *   An alert is a live region with important, and usually time-sensitive,
+ * information.
  *   Alerts are used to convey messages that will be immediately important to
  * users.
  *   An alert is a special type of assertive live region that is intended to

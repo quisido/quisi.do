@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { HeadingOrLabel } from './heading-or-label.js';
+import type { HeadingOrLabelProps } from './heading-or-label-props.js';
 
 export type AlertDialogType = 'error' | 'info' | 'success' | 'warning';
 
@@ -10,4 +10,4 @@ interface Props {
   readonly type?: AlertDialogType | undefined;
 }
 
-export type AlertDialogProps = HeadingOrLabel<Props>;
+export type AlertDialogProps = HeadingOrLabelProps & Props;

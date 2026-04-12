@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
+import type { HeadingOrLabelProps } from './heading-or-label-props.js';
 
-export interface FormProps {
+interface Props {
   readonly children: ReactNode;
-  readonly label: string;
 }
+
+export type FormProps = HeadingOrLabelProps & Props;

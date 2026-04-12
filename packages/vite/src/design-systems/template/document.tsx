@@ -4,10 +4,11 @@ import Banner from './banner.js';
 import type { DocumentProps } from '../core/document-props.js';
 import ContentInfo from './content-info.js';
 import OwnsContentInfo from '../core/owns-content-info.js';
+import OwnsMain from '../core/owns-main.js';
 
 /**
- *   A `Document` component contains content that users may want to browse in a
- * reading mode.
+ *   A document contains content that users may want to browse in a reading
+ * mode.
  *   When user agent focus moves to an element assigned the role of document,
  * assistive technologies having a reading mode for browsing static content may
  * switch to that reading mode and intercept standard input events, such as Up
@@ -20,6 +21,7 @@ import OwnsContentInfo from '../core/owns-content-info.js';
  * use a document to contain the text and give it a tabindex of 0. When a screen
  * reader user presses the Tab key and places focus on the document, the user
  * will be able to read the text with the screen reader's reading cursor.
+ * @see {@link https://w3c.github.io/aria/#document | WAI-ARIA `document` role}
  */
 export default function Document({
   banner,
@@ -31,11 +33,13 @@ export default function Document({
     <div role="document" tabIndex={tabIndex}>
       <OwnsBanner>
         <OwnsContentInfo>
-          {banner !== undefined && <Banner>{banner}</Banner>}
-          {children}
-          {contentInfo !== undefined && (
-            <ContentInfo>{contentInfo}</ContentInfo>
-          )}
+          <OwnsMain>
+            {banner !== undefined && <Banner>{banner}</Banner>}
+            {children}
+            {contentInfo !== undefined && (
+              <ContentInfo>{contentInfo}</ContentInfo>
+            )}
+          </OwnsMain>
         </OwnsContentInfo>
       </OwnsBanner>
     </div>

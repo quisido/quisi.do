@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { HeadingOrLabel } from './heading-or-label.js';
+import type { HeadingOrLabelProps } from './heading-or-label-props.js';
 
 interface Props {
   readonly children: ReactNode;
@@ -11,4 +11,4 @@ interface Props {
   readonly onDismiss?: VoidFunction | undefined;
 }
 
-export type DialogProps = HeadingOrLabel<Props>;
+export type DialogProps = HeadingOrLabelProps & Props;

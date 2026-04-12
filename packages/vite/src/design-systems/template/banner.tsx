@@ -3,7 +3,7 @@ import useBanner from '../core/use-banner.js';
 import type { BannerProps } from '../core/banner-props.js';
 
 /**
- *   A `Banner` component is a landmark that contains mostly site-oriented
+ *   A banner component is a landmark that contains mostly site-oriented
  * content, rather than page-specific content.
  *   Site-oriented content typically includes things such as the logo or
  * identity of the site sponsor, and a site-specific search tool. A banner
