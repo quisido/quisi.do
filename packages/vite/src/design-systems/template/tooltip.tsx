@@ -3,12 +3,12 @@ import useTooltip from '../core/use-tooltip.js';
 import type { TooltipProps } from '../core/tooltip-props.js';
 
 /**
- *   A `Tooltip` component provides contextual information about an element when
- * that owning element receives focus or is hovered over, but is otherwise not
- * visible on the page. The tooltip is displayed automatically, after a brief
- * delay; the user does not request it. While a tooltip can be placed on any
- * content, they generally are tips for tools or controls, such as providing
- * additional content for icons that have brief labels.
+ *   A tooltip provides contextual information about an element when that owning
+ * element receives focus or is hovered over, but is otherwise not visible on
+ * the page. The tooltip is displayed automatically, after a brief delay; the
+ * user does not request it. While a tooltip can be placed on any content, they
+ * generally are tips for tools or controls, such as providing additional
+ * content for icons that have brief labels.
  *   A tooltip typically becomes visible, after a short delay of generally one
  * to five seconds, in response to a mouse hover, or after the owning element
  * receives keyboard focus. Just as it is opened automatically, without user
@@ -21,6 +21,7 @@ import type { TooltipProps } from '../core/tooltip-props.js';
  *   The tooltip is not the appropriate role for the more information "i" icon,
  * ⓘ. A tooltip is directly associated with the owning element. The ⓘ isn't
  * 'described by' detailed information; the tool or control is.
+ * @see {@link https://w3c.github.io/aria/#tooltip | WAI-ARIA `tooltip` role}
  */
 export default function Tooltip({
   children,

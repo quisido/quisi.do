@@ -2,8 +2,8 @@ import type { ReactElement } from 'react';
 import type { TimerProps } from '../core/timer-props.js';
 
 /**
- *   A `Timer` component contains a numerical counter showing elapsed time from
- * a start point or the time remaining until an end point.
+ *   A timer...
+ * @see {@link https://w3c.github.io/aria/#timer | WAI-ARIA `timer` role}
  */
 export default function Timer({ children, label }: TimerProps): ReactElement {
   return (

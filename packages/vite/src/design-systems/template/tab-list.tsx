@@ -2,8 +2,8 @@ import type { ReactElement } from 'react';
 import type { TabListProps } from '../core/tab-list-props.js';
 
 /**
- *   A `TabList` component contains `Tab` elements that reference associated
- * `TabPanel` elements.
+ *   A tab list...
+ * @see {@link https://w3c.github.io/aria/#tablist | WAI-ARIA `tablist` role}
  */
 export default function TabList({
   children,

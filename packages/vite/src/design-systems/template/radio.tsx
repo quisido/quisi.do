@@ -2,9 +2,8 @@ import type { ReactElement } from 'react';
 import type { RadioProps } from '../core/radio-props.js';
 
 /**
- *   A `Radio` component is a checkable input in a same-role group where only
- * one item can be checked at a time. Radios should be explicitly grouped
- * within a `RadioGroup`.
+ *   A radio...
+ * @see {@link https://w3c.github.io/aria/#radio | WAI-ARIA `radio` role}
  */
 export default function Radio({ label }: RadioProps): ReactElement {
   return (

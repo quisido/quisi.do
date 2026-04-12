@@ -1,9 +1,8 @@
 import type { ReactElement } from 'react';
 
 /**
- *   A `Separator` component distinguishes sections of content or groups of
- * menu items. It can be either a static structural divider or a focusable,
- * movable widget.
+ *   A separator...
+ *@see {@link https://w3c.github.io/aria/#separator | WAI-ARIA `separator` role}
  */
 export default function Separator(): ReactElement {
   return <hr />;

@@ -2,8 +2,8 @@ import type { ReactElement } from 'react';
 import type { SpinButtonProps } from '../core/spin-button-props.js';
 
 /**
- *   A `SpinButton` component is a form of range input for selecting from
- * discrete choices, typically with increment and decrement controls.
+ *   A spin button...
+ * @see {@link https://w3c.github.io/aria/#spinbutton | WAI-ARIA `spinbutton` role}
  */
 export default function SpinButton({ label }: SpinButtonProps): ReactElement {
   return (

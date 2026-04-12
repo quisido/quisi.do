@@ -2,9 +2,8 @@ import type { ReactElement } from 'react';
 import type { ScrollbarProps } from '../core/scrollbar-props.js';
 
 /**
- *   A `Scrollbar` component controls the scrolling of content within a viewing
- * area. Its thumb position represents the current value and range of possible
- * scroll positions.
+ *   A scrollbar...
+ * @see {@link https://w3c.github.io/aria/#scrollbar | WAI-ARIA `scrollbar` role}
  */
 export default function Scrollbar({
   controls,

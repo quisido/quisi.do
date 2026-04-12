@@ -2,8 +2,8 @@ import type { ReactElement } from 'react';
 import type { TabPanelProps } from '../core/tab-panel-props.js';
 
 /**
- *   A `TabPanel` component contains the resources associated with a `Tab` in a
- * `TabList`.
+ *   A tab panel...
+ * @see {@link https://w3c.github.io/aria/#tabpanel | WAI-ARIA `tabpanel` role}
  */
 export default function TabPanel({
   children,

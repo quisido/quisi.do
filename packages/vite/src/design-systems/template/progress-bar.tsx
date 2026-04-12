@@ -4,9 +4,8 @@ import type { ProgressBarProps } from '../core/progress-bar-props.js';
 const DEFAULT_MAX = 100;
 
 /**
- *   A `ProgressBar` component displays the progress status for tasks that take
- * a long time. It communicates that a request has been received and work is
- * advancing toward completion.
+ *   A progress bar...
+ * @see {@link https://w3c.github.io/aria/#progressbar | WAI-ARIA `progressbar` role}
  */
 export default function ProgressBar({
   label,
