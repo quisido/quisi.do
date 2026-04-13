@@ -20,9 +20,9 @@ import type { MenuBarProps } from '../core/menu-bar-props.js';
 import type { NavigationProps } from '../core/navigation-props.js';
 import type { ParagraphProps } from '../core/paragraph-props.js';
 import type { ProgressBarProps } from '../core/progress-bar-props.js';
-import type { RadioProps } from '../core/radio-props.js';
 import type { RadioGroupProps } from '../core/radio-group-props.js';
 import type { SearchProps } from '../core/search-props.js';
+import type { SectionFooterProps } from '../core/section-footer-props.js';
 import type { SearchBoxProps } from '../core/search-box-props.js';
 import type { SliderProps } from '../core/slider-props.js';
 import type { SpinButtonProps } from '../core/spin-button-props.js';
@@ -57,9 +57,11 @@ import testMenu from './test-menu.js';
 import testNavigation from './test-navigation.js';
 import testProgressBar from './test-progress-bar.js';
 import testRadioGroup from './test-radio-group.js';
-import testRadio from './test-radio.js';
 import testSearchBox from './test-search-box.js';
+import testSectionFooter from './test-section-footer.js';
+import testSectionHeader from './test-section-header.js';
 import testSearch from './test-search.js';
+import testSeparatorWidget from './test-separator-widget.js';
 import testSlider from './test-slider.js';
 import testSpinButton from './test-spin-button.js';
 import testStatus from './test-status.js';
@@ -131,6 +133,9 @@ import type { StrongProps } from '../core/strong-props.js';
 import type { TreeGridProps } from '../core/tree-grid-props.js';
 import testTreeGrid from './test-tree-grid.js';
 import { describe } from 'vitest';
+import type { SectionHeaderProps } from '../core/section-header-props.js';
+import type { SeparatorProps } from '../core/separator-props.js';
+import type { SeparatorWidgetProps } from '../core/separator-widget-props.js';
 
 interface DesignSystem {
   readonly Alert: ComponentType<AlertProps>;
@@ -173,13 +178,15 @@ interface DesignSystem {
   readonly Note: ComponentType<NoteProps>;
   readonly Paragraph: ComponentType<ParagraphProps>;
   readonly ProgressBar: ComponentType<ProgressBarProps>;
-  readonly Radio: ComponentType<RadioProps>;
   readonly RadioGroup: ComponentType<RadioGroupProps>;
   readonly Region: ComponentType<RegionProps>;
   readonly Scrollbar: ComponentType<ScrollbarProps>;
   readonly Search: ComponentType<SearchProps>;
   readonly SearchBox: ComponentType<SearchBoxProps>;
-  readonly Separator: ComponentType;
+  readonly SectionFooter: ComponentType<SectionFooterProps>;
+  readonly SectionHeader: ComponentType<SectionHeaderProps>;
+  readonly Separator: ComponentType<SeparatorProps>;
+  readonly SeparatorWidget: ComponentType<SeparatorWidgetProps>;
   readonly Slider: ComponentType<SliderProps>;
   readonly SpinButton: ComponentType<SpinButtonProps>;
   readonly Status: ComponentType<StatusProps>;
@@ -242,13 +249,15 @@ export default function testDesignSystem({
   Note,
   Paragraph,
   ProgressBar,
-  Radio,
   RadioGroup,
   Region,
   Scrollbar,
   Search,
   SearchBox,
+  SectionFooter,
+  SectionHeader,
   Separator,
+  SeparatorWidget,
   Slider,
   SpinButton,
   Status,
@@ -310,15 +319,16 @@ export default function testDesignSystem({
     testNote(Note);
     testParagraph(Paragraph);
     testProgressBar(ProgressBar);
-    testRadio(Radio);
-    testRadioGroup(RadioGroup, { Radio });
+    testRadioGroup(RadioGroup);
     testRegion(Region);
     testScrollbar(Scrollbar);
     testSearch(Search);
     testSearchBox(SearchBox);
+    testSectionFooter(SectionFooter);
     testSeparator(Separator);
     testSlider(Slider);
     testSpinButton(SpinButton);
+    testSectionHeader(SectionHeader);
     testStatus(Status);
     testStrong(Strong);
     testSubscript(Subscript);
@@ -336,5 +346,6 @@ export default function testDesignSystem({
     testToolbar(Toolbar);
     testTooltip(Tooltip);
     testTreeGrid(TreeGrid);
+    testSeparatorWidget(SeparatorWidget);
   });
 }

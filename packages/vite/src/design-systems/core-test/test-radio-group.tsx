@@ -1,26 +1,116 @@
 import render from './render.js';
 import type { ComponentType } from 'react';
-import { describe, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import type { RadioGroupProps } from '../core/radio-group-props.js';
-import type { RadioProps } from '../core/radio-props.js';
-
-interface Options {
-  readonly Radio: ComponentType<RadioProps>;
-}
+import userEvent from '@testing-library/user-event';
 
 export default function testRadioGroup(
   RadioGroup: ComponentType<RadioGroupProps>,
-  { Radio }: Options,
 ): void {
-  describe('RadioGroup', (): void => {
-    it('should be a radio group', (): void => {
-      const { getByName } = render(
-        <RadioGroup label="Test radio group">
-          <Radio label="Test radio" />
-        </RadioGroup>,
-      );
+  const handleTestChange = vi.fn();
 
-      getByName('radiogroup', 'Test radio group');
+  describe('radio group', (): void => {
+    describe('label', (): void => {
+      it('should be supported', (): void => {
+        const { getByName } = render(
+          <RadioGroup label="Label" onChange={handleTestChange} radios={[]} />,
+        );
+        getByName('radiogroup', 'Label');
+      });
+    });
+
+    describe('labelledBy', (): void => {
+      it('should be supported', (): void => {
+        const { getByName } = render(
+          <>
+            <span id="test-radio-group-labelled-by-id">Labelled by</span>
+            <RadioGroup
+              labelledBy="test-radio-group-labelled-by-id"
+              onChange={handleTestChange}
+              radios={[]}
+            />
+          </>,
+        );
+        getByName('radiogroup', 'Labelled by');
+      });
+    });
+
+    describe('owns', (): void => {
+      it('should support strings', (): void => {
+        const { getByName } = render(
+          <RadioGroup
+            label="Owns"
+            onChange={handleTestChange}
+            owns="first second"
+            radios={[]}
+          />,
+        );
+        const radioGroup: HTMLElement = getByName('radiogroup', 'Owns');
+        expect(radioGroup).toHaveAttribute('aria-owns', 'first second');
+      });
+
+      it('should support arrays', (): void => {
+        const { getByName } = render(
+          <RadioGroup
+            label="Owns"
+            onChange={handleTestChange}
+            owns={['first', 'second']}
+            radios={[]}
+          />,
+        );
+        const radioGroup: HTMLElement = getByName('radiogroup', 'Owns');
+        expect(radioGroup).toHaveAttribute('aria-owns', 'first second');
+      });
+
+      it('should support sets', (): void => {
+        const { getByName } = render(
+          <RadioGroup
+            label="Owns"
+            onChange={handleTestChange}
+            owns={new Set(['first', 'second'])}
+            radios={[]}
+          />,
+        );
+        const radioGroup: HTMLElement = getByName('radiogroup', 'Owns');
+        expect(radioGroup).toHaveAttribute('aria-owns', 'first second');
+      });
+    });
+
+    describe('radios', (): void => {
+      it('should be supported', async (): Promise<void> => {
+        const { getByValue } = render(
+          <RadioGroup
+            label="Radios"
+            onChange={handleTestChange}
+            radios={[
+              {
+                key: 1,
+                label: 'First',
+                value: 1,
+              },
+              {
+                key: 2,
+                label: 'Second',
+                value: 2,
+              },
+            ]}
+            value={1}
+          />,
+        );
+
+        const first: HTMLElement = getByValue('radio', 'First', 1);
+        expect(first).toHaveAttribute('aria-checked', 'true');
+        expect(first).toHaveAttribute('aria-posinset', '1');
+        expect(first).toHaveAttribute('aria-setsize', '2');
+
+        const second: HTMLElement = getByValue('radio', 'Second', 2);
+        expect(second).toHaveAttribute('aria-checked', 'false');
+        expect(second).toHaveAttribute('aria-posinset', '2');
+        expect(second).toHaveAttribute('aria-setsize', '2');
+
+        await userEvent.click(second);
+        expect(handleTestChange).toHaveBeenCalledExactlyOnceWith(2);
+      });
     });
 
     /**

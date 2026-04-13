@@ -1,5 +1,6 @@
 export interface MeterProps {
   readonly high?: number | undefined;
+  readonly labelledBy?: string | undefined;
   readonly low?: number | undefined;
   /**
    * @default 100

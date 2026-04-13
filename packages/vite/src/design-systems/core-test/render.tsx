@@ -5,11 +5,25 @@ import { expect } from 'vitest';
 import noop from '../../utils/noop.js';
 
 export interface RenderTest {
-  readonly expectToHaveThrown: (message: string) => void;
+  readonly expectToHaveThrown: (message: RegExp | string) => void;
   readonly getByDescription: (role: string, description: string) => HTMLElement;
+  readonly getByMaxValue: (
+    role: string,
+    name: string,
+    max: number,
+  ) => HTMLElement;
+  readonly getByMinValue: (
+    role: string,
+    name: string,
+    min: number,
+  ) => HTMLElement;
   readonly getByName: (role: string, name: string) => HTMLElement;
   readonly getByRole: (role: string) => HTMLElement;
-  readonly getByValue: (role: string, value: number) => HTMLElement;
+  readonly getByValue: (
+    role: string,
+    name: string,
+    value: number,
+  ) => HTMLElement;
   readonly getHeadingByLevel: (name: string, level: number) => HTMLElement;
 }
 
@@ -33,13 +47,25 @@ export default function render(node: ReactNode): RenderTest {
   });
 
   return {
-    expectToHaveThrown(message: string): void {
+    expectToHaveThrown(message: RegExp | string): void {
       const element: HTMLElement = getByTestId('error-boundary-error-message');
-      expect(element.textContent).toBe(message);
+      if (typeof message === 'string') {
+        expect(element.textContent).toBe(message);
+      } else {
+        expect(element.textContent).toMatch(message);
+      }
     },
 
     getByDescription(role: string, description: string): HTMLElement {
       return getByRole(role, { description });
+    },
+
+    getByMaxValue(role: string, name: string, max: number): HTMLElement {
+      return getByRole(role, { name, value: { max } });
+    },
+
+    getByMinValue(role: string, name: string, min: number): HTMLElement {
+      return getByRole(role, { name, value: { min } });
     },
 
     getByName(role: string, name: string): HTMLElement {
@@ -48,8 +74,8 @@ export default function render(node: ReactNode): RenderTest {
 
     getByRole,
 
-    getByValue(role: string, value: number): HTMLElement {
-      return getByRole(role, { value: { now: value } });
+    getByValue(role: string, name: string, value: number): HTMLElement {
+      return getByRole(role, { name, value: { now: value } });
     },
 
     getHeadingByLevel(name: string, level: number): HTMLElement {

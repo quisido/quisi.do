@@ -4,6 +4,14 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
 const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
+  // Design System core-test
+  {
+    files: ['src/design-systems/core-test/test-*.tsx'],
+    rules: {
+      'no-magic-numbers': 'off',
+    },
+  },
+
   // NodeJS
   {
     files: ['scripts/**/*.js'],

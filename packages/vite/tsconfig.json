@@ -11,7 +11,10 @@
     "rootDir": ".",
     "sourceRoot": "src"
   },
-  "exclude": [],
+  "exclude": [
+    "src/design-systems/core-test/*.ts",
+    "src/design-systems/core-test/*.tsx"
+  ],
   "extends": "quisido/tsconfig.json",
   "include": [
     "**/.*.json",

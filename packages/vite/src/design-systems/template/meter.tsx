@@ -2,6 +2,8 @@ import type { ReactElement } from 'react';
 import type { MeterProps } from '../core/meter-props.js';
 import useMeter from '../core/use-meter.js';
 
+const DEFAULT_MAX = 100;
+
 /**
  *   Meter represents a scalar measurement within a known range, or a fractional
  * value.
@@ -13,9 +15,9 @@ import useMeter from '../core/use-meter.js';
  */
 export default function Meter({
   high,
+  labelledBy,
   low,
-  // eslint-disable-next-line no-magic-numbers
-  max = 100,
+  max = DEFAULT_MAX,
   min = 0,
   optimum,
   value,
@@ -24,6 +26,7 @@ export default function Meter({
 
   return (
     <meter
+      aria-labelledby={labelledBy}
       aria-valuemin={min}
       aria-valuemax={max}
       aria-valuenow={value}

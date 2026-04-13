@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
 
-export interface SearchProps {
+export interface SectionFooterProps {
   readonly children: ReactNode;
 }

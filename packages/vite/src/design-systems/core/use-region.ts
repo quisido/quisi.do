@@ -1,11 +1,8 @@
-import type { ReactNode } from 'react';
 import useId from './use-id.js';
 import useHeadingLevel from './use-heading-level.js';
-import useHeadingOrLabel from './use-heading-or-label.js';
 
 interface Props {
-  readonly heading: ReactNode | undefined;
-  readonly label: string | undefined;
+  readonly hasLabel: boolean;
   readonly labelledBy: string | undefined;
 }
 
@@ -16,8 +13,7 @@ export interface RegionState {
 }
 
 export default function useRegion({
-  heading,
-  label,
+  hasLabel,
   labelledBy: labelledByProp,
 }: Props): RegionState {
   const headingId: string = useId();
@@ -26,11 +22,12 @@ export default function useRegion({
     headingId,
     headingLevel: useHeadingLevel(),
 
-    labelledBy: useHeadingOrLabel({
-      heading,
-      headingId,
-      label,
-      labelledBy: labelledByProp,
-    }),
+    labelledBy: ((): string | undefined => {
+      if (hasLabel) {
+        return headingId;
+      }
+
+      return labelledByProp;
+    })(),
   };
 }
