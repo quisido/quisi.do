@@ -1,5 +1,4 @@
-export interface ScrollbarProps {
-  readonly controls: string;
+export interface SeparatorWidgetProps {
   /**
    * @default false
    */
@@ -13,7 +12,7 @@ export interface ScrollbarProps {
    */
   readonly min?: number | undefined;
   /**
-   * @default 'vertical'
+   * @default 'horizontal'
    */
   readonly orientation?: 'horizontal' | 'vertical' | undefined;
   readonly value: number;

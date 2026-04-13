@@ -20,8 +20,14 @@ export default function testMeter(Meter: ComponentType<MeterProps>): void {
     });
 
     it('should support values', (): void => {
-      const { getByValue } = render(<Meter value={1} />);
-      getByValue('meter', 1);
+      const { getByValue } = render(
+        <>
+          <span id="test-value-label-id">Test value</span>
+          <Meter labelledBy="test-value-label-id" value={50} />
+        </>,
+      );
+
+      getByValue('meter', 'Test value', 50);
     });
   });
 }

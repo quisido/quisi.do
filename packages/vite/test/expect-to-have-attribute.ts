@@ -5,24 +5,29 @@ import { expect } from 'vitest';
  *   Provides missing `@testing-library/jest-dom` matchers without installing
  * the dependency.
  */
+
+const getVerb = (isNot: boolean): string => {
+  if (isNot) {
+    return 'should not have';
+  }
+  return 'should have';
+};
+
 expect.extend({
   toHaveAttribute(
     received: HTMLElement,
     attribute: string,
-    value: string,
+    expectedValue: string | null = null,
   ): ExpectationResult {
+    const actualValue: string | null = received.getAttribute(attribute);
+
     return {
       message: (): string => {
-        const verb = ((): string => {
-          if (this.isNot) {
-            return 'does not have';
-          }
-          return 'has';
-        })();
-
-        return `Element ${verb} attribute ${attribute} with value ${value}`;
+        const verb: string = getVerb(this.isNot);
+        return `Element ${verb} ${attribute} ${JSON.stringify(expectedValue)}`;
       },
-      pass: received.getAttribute(attribute) === value,
+
+      pass: actualValue === expectedValue,
     };
   },
 });

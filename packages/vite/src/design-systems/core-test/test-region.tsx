@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
@@ -6,34 +5,31 @@ import type { RegionProps } from '../core/region-props.js';
 
 export default function testRegion(Region: ComponentType<RegionProps>): void {
   describe('Region', (): void => {
-    it('should support headings', (): void => {
-      const { getByName } = render(
-        <Region heading="Test heading">Test content</Region>,
-      );
-      getByName('region', 'Test heading');
+    describe('label', (): void => {
+      it('should be supported', (): void => {
+        const { getByName } = render(
+          <Region label="Test label">Test content</Region>,
+        );
+        getByName('region', 'Test label');
+      });
     });
 
-    it('should support labels', (): void => {
-      const { getByName } = render(
-        <Region label="Test label">Test content</Region>,
-      );
-      getByName('region', 'Test label');
-    });
-
-    it('should support external labels', (): void => {
-      const { getByName } = render(
-        <>
-          <span id="test-region-label-id">Test labelled by</span>
-          <Region labelledBy="test-region-label-id">Test content</Region>,
-        </>,
-      );
-      getByName('region', 'Test labelled by');
+    describe('labelledBy', (): void => {
+      it('should be supported', (): void => {
+        const { getByName } = render(
+          <>
+            <span id="test-region-label-id">Test labelled by</span>
+            <Region labelledBy="test-region-label-id">Test content</Region>,
+          </>,
+        );
+        getByName('region', 'Test labelled by');
+      });
     });
 
     describe('levels', (): void => {
       it('should default to 2', (): void => {
         const { getHeadingByLevel } = render(
-          <Region heading="Test level 12">Test content</Region>,
+          <Region label="Test level 12">Test content</Region>,
         );
         getHeadingByLevel('Test level 12', 2);
       });
@@ -41,13 +37,13 @@ export default function testRegion(Region: ComponentType<RegionProps>): void {
       it('should increment children but not siblings', (): void => {
         const { getHeadingByLevel } = render(
           <>
-            <Region heading="Brother">
-              <Region heading="Niece">
-                <Region heading="Cousin">Test content</Region>
+            <Region label="Brother">
+              <Region label="Niece">
+                <Region label="Cousin">Test content</Region>
               </Region>
             </Region>
-            <Region heading="Sister">
-              <Region heading="Nephew">Test content</Region>
+            <Region label="Sister">
+              <Region label="Nephew">Test content</Region>
             </Region>
           </>,
         );
@@ -60,12 +56,12 @@ export default function testRegion(Region: ComponentType<RegionProps>): void {
 
       it('should support levels >6', (): void => {
         const { getHeadingByLevel } = render(
-          <Region heading="Second">
-            <Region heading="Third">
-              <Region heading="Fourth">
-                <Region heading="Fifth">
-                  <Region heading="Sixth">
-                    <Region heading="Seventh">Test content</Region>
+          <Region label="Second">
+            <Region label="Third">
+              <Region label="Fourth">
+                <Region label="Fifth">
+                  <Region label="Sixth">
+                    <Region label="Seventh">Test content</Region>
                   </Region>
                 </Region>
               </Region>
