@@ -91,6 +91,8 @@
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
   "js.preferences.importModuleSpecifier": "project-relative",
   "js.preferences.importModuleSpecifierEnding": "js",
+  "js/ts.tsdk.path": "~\\node_modules\\typescript\\lib",
+  "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "npm.packageManager": "npm",
   "search.exclude": {
     "**/.attach_pid*": true,
