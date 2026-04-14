@@ -1,13 +1,13 @@
 import type { ReactNode } from 'react';
 
-interface LabelProps {
+interface HeadingProps {
   /** describes the purpose of the content in the region */
-  readonly label: string;
+  readonly heading: string;
   readonly labelledBy?: undefined;
 }
 
 interface LabelledByProps {
-  readonly label?: undefined;
+  readonly heading?: undefined;
   readonly labelledBy: string;
 }
 
@@ -15,4 +15,4 @@ interface Props {
   readonly children: ReactNode;
 }
 
-export type RegionProps = (LabelProps | LabelledByProps) & Props;
+export type RegionProps = (HeadingProps | LabelledByProps) & Props;

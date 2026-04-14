@@ -33,7 +33,7 @@ export default function Slider({
     <label>
       {label}
       <input
-        aria-activedescendant={orientation}
+        aria-orientation={orientation}
         aria-valuemax={max}
         aria-valuemin={min}
         aria-valuenow={value}

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import type { ComponentType } from 'react';
 import type { AlertProps } from '../core/alert-props.js';
 import type { AlertDialogProps } from '../core/alert-dialog-props.js';
@@ -208,6 +209,7 @@ interface DesignSystem {
   readonly TreeGrid: ComponentType<TreeGridProps>;
 }
 
+// eslint-disable-next-line max-lines-per-function
 export default function testDesignSystem({
   Alert,
   AlertDialog,
@@ -278,6 +280,7 @@ export default function testDesignSystem({
   Tooltip,
   TreeGrid,
 }: DesignSystem): void {
+  // eslint-disable-next-line max-lines-per-function, max-statements
   describe('Design System', (): void => {
     testAlert(Alert);
     testAlertDialog(AlertDialog);
@@ -308,7 +311,7 @@ export default function testDesignSystem({
     testList(List);
     testListBox(ListBox);
     testLog(Log);
-    testMain(Main);
+    testMain(Main, { Document });
     testMark(Mark);
     testMarquee(Marquee);
     testMath(Math);

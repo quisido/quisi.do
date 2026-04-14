@@ -1,8 +1,8 @@
 import { render as testingLibraryRender } from '@testing-library/react';
 import { type ReactNode } from 'react';
-import ErrorBoundary from './error-boundary.js';
 import { expect } from 'vitest';
 import noop from '../../utils/noop.js';
+import RenderWrapper from './render-wrapper.js';
 
 export interface RenderTest {
   readonly expectToHaveThrown: (message: RegExp | string) => void;
@@ -25,6 +25,8 @@ export interface RenderTest {
     value: number,
   ) => HTMLElement;
   readonly getHeadingByLevel: (name: string, level: number) => HTMLElement;
+  readonly getOptionalByRole: (role: string) => HTMLElement | null;
+  readonly getRoleCount: (role: string) => number;
 }
 
 export default function render(node: ReactNode): RenderTest {
@@ -38,13 +40,16 @@ export default function render(node: ReactNode): RenderTest {
    * not share the same one (`document.body`). Otherwise, `getBy*` queries will
    * fail when an element exists in a parallel test (e.g. a "Dismiss" button).
    */
-  const { getByRole, getByTestId } = testingLibraryRender(node, {
-    container,
-    onCaughtError: noop,
-    onRecoverableError: noop,
-    reactStrictMode: true,
-    wrapper: ErrorBoundary,
-  });
+  const { getByRole, getByTestId, queryAllByRole } = testingLibraryRender(
+    node,
+    {
+      container,
+      onCaughtError: noop,
+      onRecoverableError: noop,
+      reactStrictMode: true,
+      wrapper: RenderWrapper,
+    },
+  );
 
   return {
     expectToHaveThrown(message: RegExp | string): void {
@@ -80,6 +85,20 @@ export default function render(node: ReactNode): RenderTest {
 
     getHeadingByLevel(name: string, level: number): HTMLElement {
       return getByRole('heading', { level, name });
+    },
+
+    getOptionalByRole(role: string): HTMLElement | null {
+      const [element, ...elements] = queryAllByRole(role);
+      if (elements.length > 0) {
+        throw new Error(
+          `Expected at most one element with role ${role}, but found ${elements.length + 1}.`,
+        );
+      }
+      return element ?? null;
+    },
+
+    getRoleCount(role: string): number {
+      return queryAllByRole(role).length;
     },
   };
 }

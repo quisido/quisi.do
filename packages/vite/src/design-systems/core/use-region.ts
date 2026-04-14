@@ -2,7 +2,7 @@ import useId from './use-id.js';
 import useHeadingLevel from './use-heading-level.js';
 
 interface Props {
-  readonly hasLabel: boolean;
+  readonly hasHeading: boolean;
   readonly labelledBy: string | undefined;
 }
 
@@ -13,7 +13,7 @@ export interface RegionState {
 }
 
 export default function useRegion({
-  hasLabel,
+  hasHeading,
   labelledBy: labelledByProp,
 }: Props): RegionState {
   const headingId: string = useId();
@@ -23,7 +23,7 @@ export default function useRegion({
     headingLevel: useHeadingLevel(),
 
     labelledBy: ((): string | undefined => {
-      if (hasLabel) {
+      if (hasHeading) {
         return headingId;
       }
 

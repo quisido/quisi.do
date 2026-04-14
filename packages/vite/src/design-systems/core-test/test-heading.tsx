@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';

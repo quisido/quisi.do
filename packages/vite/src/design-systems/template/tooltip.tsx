@@ -3,6 +3,10 @@ import useTooltip from '../core/use-tooltip.js';
 import type { TooltipProps } from '../core/tooltip-props.js';
 
 /**
+ *   A contextual popup that displays a description for an element.
+
+The tooltip typically becomes visible, after a short delay, in response to a mouse hover, or after the accessibility parent receives keyboard focus. The use of a WAI-ARIA tooltip is a supplement to the normal tooltip behavior of the user agent.
+
  *   A tooltip provides contextual information about an element when that owning
  * element receives focus or is hovered over, but is otherwise not visible on
  * the page. The tooltip is displayed automatically, after a brief delay; the

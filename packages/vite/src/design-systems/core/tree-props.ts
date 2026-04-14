@@ -3,7 +3,9 @@ import type KeyProps from './key-props.js';
 
 export interface TreeProps {
   readonly caption: string;
-  readonly rows: readonly TreeRow[];
+  readonly items: readonly TreeItem[];
+  readonly orientation?: 'vertical' | 'horizontal' | undefined;
+  readonly required?: boolean | undefined;
 }
 
-export type TreeRow = KeyProps & RowProps;
+export type TreeItem = KeyProps & RowProps;
