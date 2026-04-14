@@ -27,6 +27,7 @@ export interface RenderTest {
   readonly getHeadingByLevel: (name: string, level: number) => HTMLElement;
   readonly getOptionalByRole: (role: string) => HTMLElement | null;
   readonly getRoleCount: (role: string) => number;
+  readonly rerender: (node: ReactNode) => void;
 }
 
 export default function render(node: ReactNode): RenderTest {
@@ -40,16 +41,14 @@ export default function render(node: ReactNode): RenderTest {
    * not share the same one (`document.body`). Otherwise, `getBy*` queries will
    * fail when an element exists in a parallel test (e.g. a "Dismiss" button).
    */
-  const { getByRole, getByTestId, queryAllByRole } = testingLibraryRender(
-    node,
-    {
+  const { getByRole, getByTestId, queryAllByRole, rerender } =
+    testingLibraryRender(node, {
       container,
       onCaughtError: noop,
       onRecoverableError: noop,
       reactStrictMode: true,
       wrapper: RenderWrapper,
-    },
-  );
+    });
 
   return {
     expectToHaveThrown(message: RegExp | string): void {
@@ -100,5 +99,7 @@ export default function render(node: ReactNode): RenderTest {
     getRoleCount(role: string): number {
       return queryAllByRole(role).length;
     },
+
+    rerender,
   };
 }
