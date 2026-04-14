@@ -16,21 +16,21 @@ import useRegion from '../core/use-region.js';
  */
 export default function Region({
   children,
-  label,
+  heading,
   labelledBy: labelledByProp,
 }: RegionProps): ReactElement {
-  const hasLabel: boolean = label !== undefined;
+  const hasHeading: boolean = heading !== undefined;
   const { headingId, headingLevel, labelledBy } = useRegion({
-    hasLabel,
+    hasHeading,
     labelledBy: labelledByProp,
   });
 
   return (
     <section aria-labelledby={labelledBy} role="region">
       <Heading id={headingId} level={headingLevel}>
-        {label}
+        {heading}
       </Heading>
-      <HeadingLevelProvider increment={hasLabel}>
+      <HeadingLevelProvider increment={hasHeading}>
         {children}
       </HeadingLevelProvider>
     </section>

@@ -95,6 +95,7 @@ export default function testProgressBar(
         const { getByValue } = render(
           <ProgressBar busy label="Value" value={50} />,
         );
+
         getByValue('progressbar', 'Value', 50);
       });
     });

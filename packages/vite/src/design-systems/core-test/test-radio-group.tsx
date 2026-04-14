@@ -78,7 +78,7 @@ export default function testRadioGroup(
 
     describe('radios', (): void => {
       it('should be supported', async (): Promise<void> => {
-        const { getByValue } = render(
+        const { getByName } = render(
           <RadioGroup
             label="Radios"
             onChange={handleTestChange}
@@ -86,30 +86,32 @@ export default function testRadioGroup(
               {
                 key: 1,
                 label: 'First',
-                value: 1,
+                value: 'apple',
               },
               {
                 key: 2,
                 label: 'Second',
-                value: 2,
+                value: 'banana',
               },
             ]}
-            value={1}
+            value="apple"
           />,
         );
 
-        const first: HTMLElement = getByValue('radio', 'First', 1);
+        const first: HTMLElement = getByName('radio', 'First');
+        expect(first).toBeChecked();
         expect(first).toHaveAttribute('aria-checked', 'true');
         expect(first).toHaveAttribute('aria-posinset', '1');
         expect(first).toHaveAttribute('aria-setsize', '2');
 
-        const second: HTMLElement = getByValue('radio', 'Second', 2);
+        const second: HTMLElement = getByName('radio', 'Second');
+        expect(second).not.toBeChecked();
         expect(second).toHaveAttribute('aria-checked', 'false');
         expect(second).toHaveAttribute('aria-posinset', '2');
         expect(second).toHaveAttribute('aria-setsize', '2');
 
         await userEvent.click(second);
-        expect(handleTestChange).toHaveBeenCalledExactlyOnceWith(2);
+        expect(handleTestChange).toHaveBeenCalledExactlyOnceWith('banana');
       });
     });
 

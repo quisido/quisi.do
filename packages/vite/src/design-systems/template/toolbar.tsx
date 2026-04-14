@@ -2,7 +2,13 @@ import type { ReactElement } from 'react';
 import type { ToolbarProps } from '../core/toolbar-props.js';
 
 /**
- *   A toolbar...
+ *   A toolbar... A collection of commonly used function buttons or controls represented in compact visual form.
+
+The toolbar is often a subset of functions found in a menubar, designed to reduce user effort in using these functions. Authors MUST supply a label on each toolbar when the application contains more than one toolbar.
+
+Authors MAY manage focus of descendants for all instances of this role, as described in Managing Focus.
+
+Elements with the role toolbar have an implicit aria-orientation value of horizontal.
  * @see {@link https://w3c.github.io/aria/#toolbar | WAI-ARIA `toolbar` role}
  */
 export default function Toolbar({

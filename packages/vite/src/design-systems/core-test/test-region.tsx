@@ -5,45 +5,24 @@ import type { RegionProps } from '../core/region-props.js';
 
 export default function testRegion(Region: ComponentType<RegionProps>): void {
   describe('Region', (): void => {
-    describe('label', (): void => {
-      it('should be supported', (): void => {
-        const { getByName } = render(
-          <Region label="Test label">Test content</Region>,
-        );
-        getByName('region', 'Test label');
-      });
-    });
-
-    describe('labelledBy', (): void => {
-      it('should be supported', (): void => {
-        const { getByName } = render(
-          <>
-            <span id="test-region-label-id">Test labelled by</span>
-            <Region labelledBy="test-region-label-id">Test content</Region>,
-          </>,
-        );
-        getByName('region', 'Test labelled by');
-      });
-    });
-
-    describe('levels', (): void => {
-      it('should default to 2', (): void => {
+    describe('heading', (): void => {
+      it('should default to level 2', (): void => {
         const { getHeadingByLevel } = render(
-          <Region label="Test level 12">Test content</Region>,
+          <Region heading="Test level 12">Test content</Region>,
         );
         getHeadingByLevel('Test level 12', 2);
       });
 
-      it('should increment children but not siblings', (): void => {
+      it('should increment levels for children but not siblings', (): void => {
         const { getHeadingByLevel } = render(
           <>
-            <Region label="Brother">
-              <Region label="Niece">
-                <Region label="Cousin">Test content</Region>
+            <Region heading="Brother">
+              <Region heading="Niece">
+                <Region heading="Cousin">Test content</Region>
               </Region>
             </Region>
-            <Region label="Sister">
-              <Region label="Nephew">Test content</Region>
+            <Region heading="Sister">
+              <Region heading="Nephew">Test content</Region>
             </Region>
           </>,
         );
@@ -56,12 +35,12 @@ export default function testRegion(Region: ComponentType<RegionProps>): void {
 
       it('should support levels >6', (): void => {
         const { getHeadingByLevel } = render(
-          <Region label="Second">
-            <Region label="Third">
-              <Region label="Fourth">
-                <Region label="Fifth">
-                  <Region label="Sixth">
-                    <Region label="Seventh">Test content</Region>
+          <Region heading="Second">
+            <Region heading="Third">
+              <Region heading="Fourth">
+                <Region heading="Fifth">
+                  <Region heading="Sixth">
+                    <Region heading="Seventh">Test content</Region>
                   </Region>
                 </Region>
               </Region>
@@ -75,6 +54,17 @@ export default function testRegion(Region: ComponentType<RegionProps>): void {
         getHeadingByLevel('Sixth', 6);
         getHeadingByLevel('Seventh', 7);
       });
+    });
+
+    it('should support external labels', (): void => {
+      const { getByName } = render(
+        <>
+          <span id="test-region-label-id">External label</span>
+          <Region labelledBy="test-region-label-id">Test content</Region>,
+        </>,
+      );
+
+      getByName('region', 'External label');
     });
   });
 }
