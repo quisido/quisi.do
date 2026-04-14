@@ -89,11 +89,9 @@ import type { CodeProps } from '../core/code-props.js';
 import type { CommentProps } from '../core/comment-props.js';
 import testComplementary from './test-complementary.js';
 import testDefinition from './test-definition.js';
-import testDeletion from './test-deletion.js';
 import testEmphasis from './test-emphasis.js';
 import testFeed from './test-feed.js';
 import testFigure from './test-figure.js';
-import testInsertion from './test-insertion.js';
 import testListBox from './test-list-box.js';
 import testLog from './test-log.js';
 import testMain from './test-main.js';
@@ -116,11 +114,9 @@ import type { SuggestionProps } from '../core/suggestion-props.js';
 import type { SubscriptProps } from '../core/subscript-props.js';
 import type { ComplementaryProps } from '../core/complementary-props.js';
 import type { DefinitionProps } from '../core/definition-props.js';
-import type { DeletionProps } from '../core/deletion-props.js';
 import type { EmphasisProps } from '../core/emphasis-props.js';
 import type { FeedProps } from '../core/feed-props.js';
 import type { FigureProps } from '../core/figure-props.js';
-import type { InsertionProps } from '../core/insertion-props.js';
 import type { LogProps } from '../core/log-props.js';
 import type { MainProps } from '../core/main-props.js';
 import type { MarkProps } from '../core/mark-props.js';
@@ -153,7 +149,6 @@ interface DesignSystem {
   readonly Complementary: ComponentType<ComplementaryProps>;
   readonly ContentInfo: ComponentType<ContentInfoProps>;
   readonly Definition: ComponentType<DefinitionProps>;
-  readonly Deletion: ComponentType<DeletionProps>;
   readonly Dialog: ComponentType<DialogProps>;
   readonly Document: ComponentType<DocumentProps>;
   readonly Emphasis: ComponentType<EmphasisProps>;
@@ -163,7 +158,6 @@ interface DesignSystem {
   readonly Grid: ComponentType<GridProps>;
   readonly Heading: ComponentType<HeadingProps>;
   readonly Image: ComponentType<ImageProps>;
-  readonly Insertion: ComponentType<InsertionProps>;
   readonly Link: ComponentType<LinkProps>;
   readonly List: ComponentType<ListProps>;
   readonly ListBox: ComponentType<ListBoxProps>;
@@ -225,7 +219,6 @@ export default function testDesignSystem({
   Complementary,
   ContentInfo,
   Definition,
-  Deletion,
   Dialog,
   Document,
   Emphasis,
@@ -235,7 +228,6 @@ export default function testDesignSystem({
   Grid,
   Heading,
   Image,
-  Insertion,
   Link,
   List,
   ListBox,
@@ -296,7 +288,6 @@ export default function testDesignSystem({
     testComment(Comment);
     testContentInfo(ContentInfo, { Document });
     testDefinition(Definition);
-    testDeletion(Deletion);
     testDialog(Dialog);
     testDocument(Document, { Banner, ContentInfo });
     testEmphasis(Emphasis);
@@ -306,7 +297,6 @@ export default function testDesignSystem({
     testGrid(Grid);
     testHeading(Heading);
     testImage(Image);
-    testInsertion(Insertion);
     testLink(Link);
     testList(List);
     testListBox(ListBox);
