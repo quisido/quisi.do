@@ -12,7 +12,6 @@ export { type CommentProps } from '../core/comment-props.js';
 export { type ComplementaryProps } from '../core/complementary-props.js';
 export { type ContentInfoProps } from '../core/content-info-props.js';
 export { type DefinitionProps } from '../core/definition-props.js';
-export { type DeletionProps } from '../core/deletion-props.js';
 export { type DialogProps } from '../core/dialog-props.js';
 export { type DocumentProps } from '../core/document-props.js';
 export { type EmphasisProps } from '../core/emphasis-props.js';
@@ -22,7 +21,6 @@ export { type FormProps } from '../core/form-props.js';
 export { type GridProps } from '../core/grid-props.js';
 export { type HeadingProps } from '../core/heading-props.js';
 export { type ImageProps } from '../core/image-props.js';
-export { type InsertionProps } from '../core/insertion-props.js';
 export { type LinkProps } from '../core/link-props.js';
 export { type ListBoxProps } from '../core/list-box-props.js';
 export { type ListProps } from '../core/list-props.js';
@@ -66,7 +64,7 @@ export { type TimeProps } from '../core/time-props.js';
 export { type TimerProps } from '../core/timer-props.js';
 export { type ToolbarProps } from '../core/toolbar-props.js';
 export { type TooltipProps } from '../core/tooltip-props.js';
-export { type TreeProps, type TreeRow } from '../core/tree-props.js';
+export { type TreeItem, type TreeProps } from '../core/tree-props.js';
 export {
   type TreeGridProps,
   type TreeGridRow,
@@ -94,8 +92,6 @@ export { default as Term } from './term.js';
 export { default as Superscript } from './superscript.js';
 export { default as Subscript } from './subscript.js';
 export { default as Mark } from './mark.js';
-export { default as Insertion } from './insertion.js';
-export { default as Deletion } from './deletion.js';
 export { default as Image } from './image.js';
 export { default as Article } from './article.js';
 export { default as Banner } from './banner.js';
