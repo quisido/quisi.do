@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { StrongProps } from '../core/strong-props.js';
+import classes from './strong.module.scss';
 
 /**
  *   Strong content communicates importance, seriousness, or urgency. It is not
@@ -11,5 +12,9 @@ import type { StrongProps } from '../core/strong-props.js';
  * @see {@link https://w3c.github.io/aria/#strong | WAI-ARIA `strong` role}
  */
 export default function Strong({ children }: StrongProps): ReactElement {
-  return <strong role="strong">{children}</strong>;
+  return (
+    <strong className={classes['root']} role="strong">
+      {children}
+    </strong>
+  );
 }

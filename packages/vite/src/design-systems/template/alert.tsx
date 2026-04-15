@@ -2,6 +2,7 @@ import type { ReactElement, ReactNode } from 'react';
 import useElementId from '../../hooks/use-element-id.js';
 import Heading from './heading.js';
 import type { AlertProps } from '../core/alert-props.js';
+import classes from './alert.module.scss';
 
 /**
  *   An alert is a live region with important, and usually time-sensitive,
@@ -58,6 +59,7 @@ export default function Alert({
 
   return (
     <div
+      className={classes['root']}
       aria-atomic={atomic}
       aria-describedby={descriptionId}
       aria-label={label}

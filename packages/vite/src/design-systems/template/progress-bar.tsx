@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import type { ProgressBarProps } from '../core/progress-bar-props.js';
 import useProgressBar from '../core/use-progress-bar.js';
+import classes from './progress-bar.module.scss';
 
 const DEFAULT_MAX = 100;
 
@@ -28,7 +29,7 @@ export default function ProgressBar({
   const { id } = useProgressBar({ busy, describes, id: idProp });
 
   return (
-    <label>
+    <label className={classes['root']}>
       {label}
       <progress
         aria-readonly

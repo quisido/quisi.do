@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { ScrollbarProps } from '../core/scrollbar-props.js';
+import classes from './scrollbar.module.scss';
 
 const DEFAULT_MAX = 100;
 
@@ -26,6 +27,7 @@ export default function Scrollbar({
 }: ScrollbarProps): ReactElement {
   return (
     <div
+      className={classes['root']}
       aria-controls={controls}
       aria-disabled={disabled}
       aria-orientation={orientation}

@@ -5,6 +5,7 @@ import type {
   ReactElement,
 } from 'react';
 import type { LinkProps } from '../core/link-props.js';
+import classes from './link.module.scss';
 
 /**
  *   A link is an interactive reference to an internal or external resource
@@ -47,6 +48,12 @@ export default function Link({
     return '_blank';
   })();
 
+  let rootClassName: string = classes['root'];
+
+  if (className !== undefined) {
+    rootClassName += ` ${className}`;
+  }
+
   /**
    *   Where possible, it is recommended that you use a native <a> element
    * rather than another element with `role="link"`, as native elements are more
@@ -56,7 +63,7 @@ export default function Link({
    */
   return (
     <a
-      className={className}
+      className={rootClassName}
       href={href}
       onClick={handleClick}
       rel={rel}

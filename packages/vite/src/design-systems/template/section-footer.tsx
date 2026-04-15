@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { SectionFooterProps } from '../core/section-footer-props.js';
+import classes from './section-footer.module.scss';
 
 /**
  *   A section footer is a set of user interface objects and information
@@ -16,5 +17,9 @@ import type { SectionFooterProps } from '../core/section-footer-props.js';
 export default function SectionFooter({
   children,
 }: SectionFooterProps): ReactElement {
-  return <footer role="sectionfooter">{children}</footer>;
+  return (
+    <footer className={classes['root']} role="sectionfooter">
+      {children}
+    </footer>
+  );
 }

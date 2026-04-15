@@ -1,6 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import type { ReactElement } from 'react';
 import type { HeadingProps } from '../core/heading-props.js';
+import classes from './heading.module.scss';
 
 /**
  *   A heading is a heading for a section of the page.
@@ -37,7 +38,12 @@ export default function Heading({
   })();
 
   return (
-    <Component aria-level={level} id={id} role="heading">
+    <Component
+      className={classes['root']}
+      aria-level={level}
+      id={id}
+      role="heading"
+    >
       {children}
     </Component>
   );

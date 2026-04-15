@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { SeparatorProps } from '../core/separator-props.js';
+import classes from './separator.module.scss';
 
 /**
  *   A separator structure provides a visible boundary that separates and
@@ -12,5 +13,11 @@ import type { SeparatorProps } from '../core/separator-props.js';
 export default function Separator({
   orientation,
 }: SeparatorProps): ReactElement {
-  return <hr aria-orientation={orientation} role="separator" />;
+  return (
+    <hr
+      className={classes['root']}
+      aria-orientation={orientation}
+      role="separator"
+    />
+  );
 }

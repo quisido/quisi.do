@@ -6,6 +6,7 @@ import useId from '../core/use-id.js';
 import Heading from './heading.js';
 import HeadingLevelProvider from '../core/heading-level-provider.js';
 import useHeadingLevel from '../core/use-heading-level.js';
+import classes from './feed.module.scss';
 
 interface FeedArticleProps {
   readonly onFocus: VoidFunction;
@@ -97,6 +98,7 @@ export default function Feed({
 
   return (
     <section
+      className={classes['root']}
       aria-busy={busy}
       aria-errormessage={errorMessageId}
       aria-label={label}

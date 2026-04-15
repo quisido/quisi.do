@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { ParagraphProps } from '../core/paragraph-props.js';
+import classes from './paragraph.module.scss';
 
 /**
  *   A paragraph is a a paragraph of content.
@@ -9,5 +10,9 @@ export default function Paragraph({
   children,
   id,
 }: ParagraphProps): ReactElement {
-  return <p id={id}>{children}</p>;
+  return (
+    <p className={classes['root']} id={id}>
+      {children}
+    </p>
+  );
 }

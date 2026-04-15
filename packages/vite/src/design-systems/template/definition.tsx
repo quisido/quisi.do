@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { DefinitionProps } from '../core/definition-props.js';
+import classes from './definition.module.scss';
 
 /**
  *   A definition marks the definition of a term or concept.
@@ -13,7 +14,7 @@ export default function Definition({
   id,
 }: DefinitionProps): ReactElement {
   return (
-    <dfn id={id} role="definition">
+    <dfn className={classes['root']} id={id} role="definition">
       {children}
     </dfn>
   );

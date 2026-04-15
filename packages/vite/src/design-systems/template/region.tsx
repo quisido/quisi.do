@@ -3,6 +3,7 @@ import Heading from './heading.js';
 import type { RegionProps } from '../core/region-props.js';
 import HeadingLevelProvider from '../core/heading-level-provider.js';
 import useRegion from '../core/use-region.js';
+import classes from './region.module.scss';
 
 /**
  *   A region landmark contains content that is relevant to a specific purpose
@@ -26,7 +27,11 @@ export default function Region({
   });
 
   return (
-    <section aria-labelledby={labelledBy} role="region">
+    <section
+      className={classes['root']}
+      aria-labelledby={labelledBy}
+      role="region"
+    >
       <Heading id={headingId} level={headingLevel}>
         {heading}
       </Heading>

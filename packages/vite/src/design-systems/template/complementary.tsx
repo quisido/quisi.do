@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { ComplementaryProps } from '../core/complementary-props.js';
+import classes from './complementary.module.scss';
 
 /**
  *   A complementary landmark designates complements the main content to which
@@ -15,5 +16,5 @@ import type { ComplementaryProps } from '../core/complementary-props.js';
 export default function Complementary({
   children,
 }: ComplementaryProps): ReactElement {
-  return <aside>{children}</aside>;
+  return <aside className={classes['root']}>{children}</aside>;
 }

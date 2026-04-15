@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { TimerProps } from '../core/timer-props.js';
+import classes from './timer.module.scss';
 
 /**
  *   A timer... A section of content containing a numerical counter which indicates an amount of elapsed time from a start point, or the time remaining until an end point.
@@ -9,7 +10,7 @@ The text contents of the timer object indicate the current time measurement, and
  */
 export default function Timer({ children, label }: TimerProps): ReactElement {
   return (
-    <div aria-label={label} role="timer">
+    <div className={classes['root']} aria-label={label} role="timer">
       {children}
     </div>
   );

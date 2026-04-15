@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { MenuItem, MenuProps } from '../core/menu-props.js';
+import classes from './menu.module.scss';
 
 /**
  *   A menu is a type of widget that offers a list of choices to the user.
@@ -21,7 +22,12 @@ export default function Menu({
   orientation = 'vertical',
 }: MenuProps): ReactElement {
   return (
-    <ul aria-label={label} aria-orientation={orientation} role="menu">
+    <ul
+      className={classes['root']}
+      aria-label={label}
+      aria-orientation={orientation}
+      role="menu"
+    >
       {items.map(
         ({ children, disabled, items, key }: MenuItem): ReactElement => (
           <li

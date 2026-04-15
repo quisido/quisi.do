@@ -6,6 +6,7 @@ import type {
   AlertDialogProps,
   AlertDialogType,
 } from '../core/alert-dialog-props.js';
+import classes from './alert-dialog.module.scss';
 
 const toIcon = (type: AlertDialogType): string => {
   switch (type) {
@@ -50,6 +51,7 @@ export default function AlertDialog({
 
   return (
     <div
+      className={classes['root']}
       aria-describedby={descriptionId}
       aria-label={label}
       aria-labelledby={labelledBy}

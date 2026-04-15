@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { ImageProps } from '../core/image-props.js';
+import classes from './image.module.scss';
 
 /**
  *   An image is a container for a collection of elements that form an image.
@@ -17,6 +18,7 @@ export default function Image({
 }: ImageProps): ReactElement {
   return (
     <img
+      className={classes['root']}
       alt={alt}
       aria-label={label}
       aria-labelledby={labelledBy}

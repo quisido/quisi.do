@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { CommentProps } from '../core/comment-props.js';
+import classes from './comment.module.scss';
 
 /**
  *   A comment contains content expressing a reaction to other content.
@@ -23,6 +24,7 @@ export default function Comment({
 }: CommentProps): ReactElement {
   return (
     <div
+      className={classes['root']}
       aria-label={label}
       aria-level={level}
       aria-posinset={positionInSet}

@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import type { MeterProps } from '../core/meter-props.js';
 import useMeter from '../core/use-meter.js';
+import classes from './meter.module.scss';
 
 const DEFAULT_MAX = 100;
 
@@ -26,6 +27,7 @@ export default function Meter({
 
   return (
     <meter
+      className={classes['root']}
       aria-labelledby={labelledBy}
       aria-valuemin={min}
       aria-valuemax={max}

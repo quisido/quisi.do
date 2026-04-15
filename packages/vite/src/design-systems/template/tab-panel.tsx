@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { TabPanelProps } from '../core/tab-panel-props.js';
+import classes from './tab-panel.module.scss';
 
 /**
  *   A tab panel...
@@ -10,7 +11,7 @@ export default function TabPanel({
   label,
 }: TabPanelProps): ReactElement {
   return (
-    <div aria-label={label} role="tabpanel">
+    <div className={classes['root']} aria-label={label} role="tabpanel">
       {children}
     </div>
   );

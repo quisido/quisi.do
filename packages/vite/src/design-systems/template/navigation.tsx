@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { NavigationProps } from '../core/navigation-props.js';
+import classes from './navigation.module.scss';
 
 /**
  *   A navigation landmark contains a collection of navigational elements
@@ -10,5 +11,9 @@ export default function Navigation({
   children,
   label,
 }: NavigationProps): ReactElement {
-  return <nav aria-label={label}>{children}</nav>;
+  return (
+    <nav className={classes['root']} aria-label={label}>
+      {children}
+    </nav>
+  );
 }

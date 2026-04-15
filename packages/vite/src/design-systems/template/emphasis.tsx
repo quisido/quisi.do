@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { EmphasisProps } from '../core/emphasis-props.js';
+import classes from './emphasis.module.scss';
 
 /**
  *   Emphasis contains one or more emphasized characters.
@@ -12,5 +13,9 @@ import type { EmphasisProps } from '../core/emphasis-props.js';
  * @see {@link https://w3c.github.io/aria/#emphasis | WAI-ARIA `emphasis` role}
  */
 export default function Emphasis({ children }: EmphasisProps): ReactElement {
-  return <em role="emphasis">{children}</em>;
+  return (
+    <em className={classes['root']} role="emphasis">
+      {children}
+    </em>
+  );
 }

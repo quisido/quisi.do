@@ -4,6 +4,7 @@ import { FocusScope } from 'react-aria';
 import useDialog from '../core/use-dialog.js';
 import Paragraph from './paragraph.js';
 import Heading from './heading.js';
+import classes from './dialog.module.scss';
 
 /**
  *   A dialog is a descendant window of the primary window of a web application.
@@ -45,6 +46,7 @@ export default function Dialog({
 
   return (
     <dialog
+      className={classes['root']}
       aria-describedby={descriptionId}
       aria-label={label}
       aria-labelledby={labelledBy}

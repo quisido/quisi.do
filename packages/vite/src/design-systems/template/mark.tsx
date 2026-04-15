@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { MarkProps } from '../core/mark-props.js';
+import classes from './mark.module.scss';
 
 /**
  *   Marked content is marked or highlighted for reference or notation purposes,
@@ -17,7 +18,7 @@ export default function Mark({
   describedBy,
 }: MarkProps): ReactElement {
   return (
-    <mark aria-describedby={describedBy} role="mark">
+    <mark className={classes['root']} aria-describedby={describedBy} role="mark">
       {children}
     </mark>
   );

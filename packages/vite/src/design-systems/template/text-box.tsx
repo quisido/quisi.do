@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { TextBoxProps } from '../core/text-box-props.js';
+import classes from './text-box.module.scss';
 
 /**
  *   A text box... A type of input that allows free-form text as its value.
@@ -26,7 +27,7 @@ export default function TextBox({
   }
 
   return (
-    <label>
+    <label className={classes['root']}>
       {label}
       {control}
     </label>

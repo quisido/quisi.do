@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import useTooltip from '../core/use-tooltip.js';
 import type { TooltipProps } from '../core/tooltip-props.js';
+import classes from './tooltip.module.scss';
 
 /**
  *   A contextual popup that displays a description for an element.
@@ -34,7 +35,7 @@ export default function Tooltip({
   const id: string = useTooltip(htmlFor);
 
   return (
-    <span id={id} role="tooltip">
+    <span className={classes['root']} id={id} role="tooltip">
       {children}
     </span>
   );

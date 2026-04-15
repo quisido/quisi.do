@@ -5,6 +5,7 @@ import type { DocumentProps } from '../core/document-props.js';
 import ContentInfo from './content-info.js';
 import OwnsContentInfo from '../core/owns-content-info.js';
 import OwnsMain from '../core/owns-main.js';
+import classes from './document.module.scss';
 
 /**
  *   A document contains content that users may want to browse in a reading
@@ -30,7 +31,7 @@ export default function Document({
   tabIndex,
 }: DocumentProps): ReactElement {
   return (
-    <div role="document" tabIndex={tabIndex}>
+    <div className={classes['root']} role="document" tabIndex={tabIndex}>
       <OwnsBanner>
         <OwnsContentInfo>
           <OwnsMain>

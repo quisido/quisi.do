@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import type { TreeItem, TreeProps } from '../core/tree-props.js';
 import type { RowCell } from '../core/row-props.js';
+import classes from './tree.module.scss';
 
 /**
  *   A tree... A widget that allows the user to select one or more items from a hierarchically organized collection.
@@ -18,7 +19,12 @@ export default function Tree({
   required = false,
 }: TreeProps): ReactElement {
   return (
-    <table aria-orientation={orientation} aria-required={required} role="tree">
+    <table
+      className={classes['root']}
+      aria-orientation={orientation}
+      aria-required={required}
+      role="tree"
+    >
       <caption>{caption}</caption>
       {items.map(
         ({ cells, key: rowKey }: TreeItem): ReactElement => (

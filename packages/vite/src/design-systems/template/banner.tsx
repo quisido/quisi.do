@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import useBanner from '../core/use-banner.js';
 import type { BannerProps } from '../core/banner-props.js';
+import classes from './banner.module.scss';
 
 /**
  *   A banner component is a landmark that contains mostly site-oriented
@@ -14,7 +15,7 @@ export default function Banner({ children, label }: BannerProps): ReactElement {
   const id: string = useBanner();
 
   return (
-    <header aria-label={label} id={id}>
+    <header className={classes['root']} aria-label={label} id={id}>
       {children}
     </header>
   );

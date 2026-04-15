@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { describe, expect, it, vi } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
 import type { ComponentType } from 'react';
@@ -82,7 +83,7 @@ export default function testAlertDialog(
 
       const dismissButton: HTMLElement = getByName('button', 'Dismiss');
       const secondButton: HTMLElement = getByName('button', 'Second button');
-      // eslint-disable-next-line no-magic-numbers
+
       for (let loop = 0; loop < 5; loop++) {
         expect(window.document.activeElement).toBe(secondButton);
         // eslint-disable-next-line no-await-in-loop

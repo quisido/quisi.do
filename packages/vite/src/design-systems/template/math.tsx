@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { MathProps } from '../core/math-props.js';
+import classes from './math.module.scss';
 
 // TODO: Use MathML and fallback with a polyfill.
 
@@ -9,7 +10,7 @@ import type { MathProps } from '../core/math-props.js';
  */
 export default function Math({ children, label }: MathProps): ReactElement {
   return (
-    <div aria-label={label} role="math">
+    <div className={classes['root']} aria-label={label} role="math">
       {children}
     </div>
   );

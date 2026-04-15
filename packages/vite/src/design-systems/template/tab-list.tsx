@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { TabListProps } from '../core/tab-list-props.js';
+import classes from './tab-list.module.scss';
 
 /**
  *   A tab list...
@@ -13,7 +14,7 @@ export default function TabList({
    *   Focus MUST be managed on this container role.
    */
   return (
-    <div aria-label={label} role="tablist">
+    <div className={classes['root']} aria-label={label} role="tablist">
       {children}
     </div>
   );

@@ -2,6 +2,7 @@ import { type ChangeEvent, type ReactElement, type Ref } from 'react';
 import useIndeterminate from '../core/use-indeterminate.js';
 import toChecked from '../core/to-checked.js';
 import type { CheckboxProps } from '../core/checkbox-props.js';
+import classes from './checkbox.module.scss';
 
 /**
  *   A checkbox is a checkable input that has three possible values: true,
@@ -31,7 +32,7 @@ export default function Checkbox({
   };
 
   return (
-    <label>
+    <label className={classes['root']}>
       <input
         /**
          *   Due to the strong native semantics of HTML's native checkbox, use

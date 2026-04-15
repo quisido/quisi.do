@@ -1,6 +1,7 @@
 import type { ChangeEvent, ReactElement } from 'react';
 import type { Radio, RadioGroupProps } from '../core/radio-group-props.js';
 import useRadioGroup from '../core/use-radio-group.js';
+import classes from './radio-group.module.scss';
 
 /**
  *   A radio group is group of radio buttons, checkable inputs only one of which
@@ -44,6 +45,7 @@ export default function RadioGroup<
 
   return (
     <div
+      className={classes['root']}
       aria-labelledby={labelledBy}
       aria-owns={owns}
       aria-readonly={readOnly}

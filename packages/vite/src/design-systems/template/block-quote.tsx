@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { BlockQuoteProps } from '../core/block-quote-props.js';
+import classes from './block-quote.module.scss';
 
 /**
  *   A block quote is a section of content that is quoted from another source.
@@ -8,5 +9,9 @@ import type { BlockQuoteProps } from '../core/block-quote-props.js';
 export default function BlockQuote({
   children,
 }: BlockQuoteProps): ReactElement {
-  return <blockquote role="blockquote">{children}</blockquote>;
+  return (
+    <blockquote className={classes['root']} role="blockquote">
+      {children}
+    </blockquote>
+  );
 }

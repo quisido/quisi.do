@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { SuggestionProps } from '../core/suggestion-props.js';
+import classes from './suggestion.module.scss';
 
 /**
  *   A suggestion is a single proposed change to content.
@@ -19,7 +20,7 @@ export default function Suggestion({
   insertion,
 }: SuggestionProps): ReactElement {
   return (
-    <span role="suggestion">
+    <span className={classes['root']} role="suggestion">
       {insertion && <ins role="insertion">{insertion}</ins>}
       {deletion && <del role="deletion">{deletion}</del>}
     </span>
