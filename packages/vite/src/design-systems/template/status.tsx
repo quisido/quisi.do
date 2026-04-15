@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { StatusProps } from '../core/status-props.js';
+import classes from './status.module.scss';
 
 /**
  *   Status is a type of live region whose content is advisory information for
@@ -16,7 +17,13 @@ export default function Status({
   live = 'polite',
 }: StatusProps): ReactElement {
   return (
-    <output aria-atomic={atomic} aria-live={live} id={id} role="status">
+    <output
+      className={classes['root']}
+      aria-atomic={atomic}
+      aria-live={live}
+      id={id}
+      role="status"
+    >
       {children}
     </output>
   );

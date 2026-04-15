@@ -1,6 +1,7 @@
 import type { ReactElement, ReactNode } from 'react';
 import useFigure from '../core/use-figure.js';
 import type { FigureProps } from '../core/figure-props.js';
+import classes from './figure.module.scss';
 
 interface FigureCaptionProps {
   readonly description?: ReactNode | undefined;
@@ -59,6 +60,7 @@ export default function Figure({
 
   return (
     <figure
+      className={classes['root']}
       aria-describedby={describedBy}
       aria-details={details}
       aria-label={label}

@@ -6,7 +6,7 @@ import type { TreeProps } from '../core/tree-props.js';
 export default function testTree(Tree: ComponentType<TreeProps>): void {
   describe('Tree', (): void => {
     it('should render a tree', (): void => {
-      const { getByName } = render(<Tree caption="Test caption" rows={[]} />);
+      const { getByName } = render(<Tree caption="Test caption" items={[]} />);
       getByName('tree', 'Test caption');
     });
 

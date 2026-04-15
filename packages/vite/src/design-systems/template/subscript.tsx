@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { SubscriptProps } from '../core/subscript-props.js';
+import classes from './subscript.module.scss';
 
 /**
  *   Subscript denotes one or more subscripted characters.
@@ -10,5 +11,9 @@ import type { SubscriptProps } from '../core/subscript-props.js';
  * @see {@link https://w3c.github.io/aria/#subscript | WAI-ARIA `subscript` role}
  */
 export default function Subscript({ children }: SubscriptProps): ReactElement {
-  return <sub role="subscript">{children}</sub>;
+  return (
+    <sub className={classes['root']} role="subscript">
+      {children}
+    </sub>
+  );
 }

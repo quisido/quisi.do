@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { ToolbarProps } from '../core/toolbar-props.js';
+import classes from './toolbar.module.scss';
 
 /**
  *   A toolbar... A collection of commonly used function buttons or controls represented in compact visual form.
@@ -40,6 +41,7 @@ export default function Toolbar({
    */
   return (
     <div
+      className={classes['root']}
       aria-label={label}
       aria-labelledby={labelledBy}
       aria-orientation={orientation}

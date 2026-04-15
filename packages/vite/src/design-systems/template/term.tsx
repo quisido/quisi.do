@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { TermProps } from '../core/term-props.js';
+import classes from './term.module.scss';
 
 /**
  *   A term represents a word or phrase with an optional corresponding
@@ -14,7 +15,7 @@ export default function Term({
   definitionId,
 }: TermProps): ReactElement {
   return (
-    <dfn aria-details={definitionId} role="term">
+    <dfn className={classes['root']} aria-details={definitionId} role="term">
       {children}
     </dfn>
   );

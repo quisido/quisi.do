@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { LogProps } from '../core/log-props.js';
+import classes from './log.module.scss';
 
 /**
  *   A log is a live region where new information is appended in a meaningful
@@ -16,7 +17,7 @@ export default function Log({
   live = 'polite',
 }: LogProps): ReactElement {
   return (
-    <div aria-live={live} role="log">
+    <div className={classes['root']} aria-live={live} role="log">
       {children}
     </div>
   );

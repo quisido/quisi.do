@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { TabProps } from '../core/tab-props.js';
+import classes from './tab.module.scss';
 
 /**
  *   A tab...
@@ -10,7 +11,12 @@ export default function Tab({
   selected = false,
 }: TabProps): ReactElement {
   return (
-    <button aria-selected={selected} role="tab" type="button">
+    <button
+      className={classes['root']}
+      aria-selected={selected}
+      role="tab"
+      type="button"
+    >
       {children}
     </button>
   );

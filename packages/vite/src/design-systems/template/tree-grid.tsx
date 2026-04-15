@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import type { TreeGridProps, TreeGridRow } from '../core/tree-grid-props.js';
 import type { RowCell } from '../core/row-props.js';
+import classes from './tree-grid.module.scss';
 
 /**
  *   A tree grid... A grid whose rows can be expanded and collapsed in the same manner as for a tree.
@@ -19,7 +20,7 @@ export default function TreeGrid({
   rows,
 }: TreeGridProps): ReactElement {
   return (
-    <table role="treegrid">
+    <table className={classes['root']} role="treegrid">
       <caption>{caption}</caption>
       {rows.map(
         ({ cells, key: rowKey }: TreeGridRow): ReactElement => (

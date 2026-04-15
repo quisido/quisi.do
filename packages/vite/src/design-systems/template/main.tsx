@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import type { MainProps } from '../core/main-props.js';
 import useMain from '../core/use-main.js';
+import classes from './main.module.scss';
 
 /**
  *   The main landmark contains the main content of a document.
@@ -12,7 +13,7 @@ import useMain from '../core/use-main.js';
 export default function Main({ children, label }: MainProps): ReactElement {
   const id: string = useMain();
   return (
-    <main aria-label={label} id={id}>
+    <main className={classes['root']} aria-label={label} id={id}>
       {children}
     </main>
   );

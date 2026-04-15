@@ -3,6 +3,7 @@ import type { ArticleProps } from '../core/article-props.js';
 import useArticle from '../core/use-article.js';
 import Heading from './heading.js';
 import HeadingLevelProvider from '../core/heading-level-provider.js';
+import classes from './article.module.scss';
 
 /**
  *   An article is a section of a page that consists of a composition that forms
@@ -38,7 +39,11 @@ export default function Article({
   });
 
   return (
-    <article aria-label={label} aria-labelledby={labelledBy}>
+    <article
+      className={classes['root']}
+      aria-label={label}
+      aria-labelledby={labelledBy}
+    >
       <Heading id={headingId} level={headingLevel}>
         {heading}
       </Heading>

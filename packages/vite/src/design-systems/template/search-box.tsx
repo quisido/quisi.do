@@ -1,5 +1,6 @@
 import type { ChangeEvent, ReactElement } from 'react';
 import type { SearchBoxProps } from '../core/search-box-props.js';
+import classes from './search-box.module.scss';
 
 /**
  *   A search box is a type of textbox intended for specifying search criteria.
@@ -18,7 +19,7 @@ export default function SearchBox({
   };
 
   return (
-    <label>
+    <label className={classes['root']}>
       {label}
       <input
         aria-disabled={disabled}

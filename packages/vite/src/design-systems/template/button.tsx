@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { ButtonProps } from '../core/button-props.js';
+import classes from './button.module.scss';
 
 /**
  *   A button is an input that allows for user-triggered actions when clicked or
@@ -13,7 +14,7 @@ export default function Button({
   onClick,
 }: ButtonProps): ReactElement {
   return (
-    <button onClick={onClick} type="button">
+    <button className={classes['root']} onClick={onClick} type="button">
       {children}
     </button>
   );

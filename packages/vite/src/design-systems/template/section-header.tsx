@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { SectionHeaderProps } from '../core/section-header-props.js';
+import classes from './section-header.module.scss';
 
 /**
  *   A section header is a set of user interface objects and information that
@@ -15,5 +16,9 @@ import type { SectionHeaderProps } from '../core/section-header-props.js';
 export default function SectionHeader({
   children,
 }: SectionHeaderProps): ReactElement {
-  return <header role="sectionheader">{children}</header>;
+  return (
+    <header className={classes['root']} role="sectionheader">
+      {children}
+    </header>
+  );
 }

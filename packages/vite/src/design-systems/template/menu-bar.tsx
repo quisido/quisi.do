@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { MenuBarProps } from '../core/menu-bar-props.js';
+import classes from './menu-bar.module.scss';
 
 /**
  *   A menu bar is a presentation of menu that usually remains visible and is
@@ -15,7 +16,12 @@ export default function MenuBar({
   orientation = 'horizontal',
 }: MenuBarProps): ReactElement {
   return (
-    <div aria-label={label} aria-orientation={orientation} role="menubar">
+    <div
+      className={classes['root']}
+      aria-label={label}
+      aria-orientation={orientation}
+      role="menubar"
+    >
       {children}
     </div>
   );

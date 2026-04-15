@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { MarqueeProps } from '../core/marquee-props.js';
+import classes from './marquee.module.scss';
 
 /**
  *   A marquee is a section of content where non-essential information changes
@@ -12,7 +13,7 @@ export default function Marquee({
   label,
 }: MarqueeProps): ReactElement {
   return (
-    <div aria-label={label} role="marquee">
+    <div className={classes['root']} aria-label={label} role="marquee">
       {children}
     </div>
   );

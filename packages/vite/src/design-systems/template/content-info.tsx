@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import type { ContentInfoProps } from '../core/content-info-props.js';
 import useContentInfo from '../core/use-content-info.js';
+import classes from './content-info.module.scss';
 
 /**
  *   Content info landmarks contains information about the parent document.
@@ -13,5 +14,9 @@ export default function ContentInfo({
 }: ContentInfoProps): ReactElement {
   const id: string = useContentInfo();
 
-  return <footer id={id}>{children}</footer>;
+  return (
+    <footer className={classes['root']} id={id}>
+      {children}
+    </footer>
+  );
 }

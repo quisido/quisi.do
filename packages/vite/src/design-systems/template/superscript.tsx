@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { SuperscriptProps } from '../core/superscript-props.js';
+import classes from './superscript.module.scss';
 
 /**
  *   Superscript denotes one or more superscripted characters.
@@ -12,5 +13,9 @@ import type { SuperscriptProps } from '../core/superscript-props.js';
 export default function Superscript({
   children,
 }: SuperscriptProps): ReactElement {
-  return <sup role="superscript">{children}</sup>;
+  return (
+    <sup className={classes['root']} role="superscript">
+      {children}
+    </sup>
+  );
 }

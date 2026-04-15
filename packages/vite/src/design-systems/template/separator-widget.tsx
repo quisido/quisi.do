@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { SeparatorWidgetProps } from '../core/separator-widget-props.js';
+import classes from './separator-widget.module.scss';
 
 const DEFAULT_MAX = 100;
 
@@ -25,6 +26,7 @@ export default function SeparatorWidget({
 }: SeparatorWidgetProps): ReactElement {
   return (
     <hr
+      className={classes['root']}
       aria-disabled={disabled}
       aria-orientation={orientation}
       aria-valuemax={max}

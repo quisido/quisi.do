@@ -10,6 +10,7 @@ import {
 } from 'react';
 import type { ComboboxProps } from '../core/combobox-props.js';
 import useId from '../core/use-id.js';
+import classes from './combobox.module.scss';
 
 /**
  *   A combobox is an input that controls another element, such as a list box or
@@ -357,7 +358,7 @@ export default function Combobox({
   };
 
   return (
-    <div ref={rootRef}>
+    <div className={classes['root']} ref={rootRef}>
       <label htmlFor={inputId}>{label}</label>
       <div>
         <input

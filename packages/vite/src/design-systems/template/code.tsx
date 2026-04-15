@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { CodeProps } from '../core/code-props.js';
+import classes from './code.module.scss';
 
 /**
  *   Code is a section representing a fragment of computer code.
@@ -10,7 +11,7 @@ export default function Code({
   describedBy,
 }: CodeProps): ReactElement {
   return (
-    <code aria-describedby={describedBy} role="code">
+    <code className={classes['root']} aria-describedby={describedBy} role="code">
       {children}
     </code>
   );

@@ -2,6 +2,7 @@ import { type Key, type ReactElement, useMemo } from 'react';
 import type { GridProps, GridRow } from '../core/grid-props.js';
 import type { RowCell } from '../core/row-props.js';
 import useElementId from '../../hooks/use-element-id.js';
+import classes from './grid.module.scss';
 
 const EMPTY_MAP: ReadonlyMap<Key, never> = new Map<Key, never>();
 const EMPTY_SET: ReadonlySet<never> = new Set<never>();
@@ -39,6 +40,7 @@ export default function Grid({
 
   return (
     <table
+      className={classes['root']}
       aria-readonly={readOnly}
       aria-labelledby={captionId}
       aria-multiselectable={selected instanceof Map}

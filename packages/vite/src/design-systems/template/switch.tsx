@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { SwitchProps } from '../core/switch-props.js';
+import classes from './switch.module.scss';
 
 /**
  *   A switch is a type of checkbox that represents on/off values, as opposed to
@@ -13,7 +14,7 @@ export default function Switch({ label, off, on }: SwitchProps): ReactElement {
   const checked: boolean = on ?? !off;
 
   return (
-    <label>
+    <label className={classes['root']}>
       {label}
       <input
         aria-checked={checked}

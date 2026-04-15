@@ -1,5 +1,6 @@
 import type { ChangeEvent, ReactElement } from 'react';
 import type { SpinButtonProps } from '../core/spin-button-props.js';
+import classes from './spin-button.module.scss';
 
 /**
  *   A spin button is a form of range that expects the user to select from among
@@ -35,7 +36,7 @@ export default function SpinButton({
   };
 
   return (
-    <label>
+    <label className={classes['root']}>
       {label}
       <input
         aria-valuemax={max}

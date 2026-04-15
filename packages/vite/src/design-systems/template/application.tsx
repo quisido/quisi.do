@@ -5,6 +5,7 @@ import type { ApplicationProps } from '../core/application-props.js';
 import OwnsContentInfo from '../core/owns-content-info.js';
 import ContentInfo from './content-info.js';
 import OwnsMain from '../core/owns-main.jsx';
+import classes from './application.module.scss';
 
 /**
  *   An application is a structure containing one or more focusable elements
@@ -37,6 +38,7 @@ export default function Application({
 }: ApplicationProps): ReactElement {
   return (
     <div
+      className={classes['root']}
       aria-describedby={describedBy}
       aria-label={label}
       aria-roledescription={roleDescription}

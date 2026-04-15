@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import type { ListBoxOption, ListBoxProps } from '../core/list-box-props.js';
 import useElementId from '../../hooks/use-element-id.js';
+import classes from './list-box.module.scss';
 
 /**
  *   A list box is a widget that allows the user to select one or more items
@@ -20,6 +21,7 @@ export default function ListBox({
 
   return (
     <div
+      className={classes['root']}
       aria-labelledby={labelledBy}
       aria-orientation={orientation}
       role="listbox"

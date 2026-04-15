@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import type { RowCell } from '../core/row-props.js';
 import type { TableProps, TableRow } from '../core/table-props.js';
+import classes from './table.module.scss';
 
 /**
  *   A table... A section containing data arranged in rows and columns. See related grid.
@@ -14,7 +15,7 @@ Authors SHOULD prefer the use of the host language's semantics for table wheneve
  */
 export default function Table({ caption, rows }: TableProps): ReactElement {
   return (
-    <table>
+    <table className={classes['root']}>
       <caption>{caption}</caption>
       <tbody>
         {rows.map(

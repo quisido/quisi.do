@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { ListItem, ListProps } from '../core/list-props.js';
+import classes from './list.module.scss';
 
 /**
  *   A list is a section containing list items.
@@ -19,7 +20,11 @@ export default function List({
   })();
 
   return (
-    <Component aria-label={label} aria-labelledby={labelledBy}>
+    <Component
+      className={classes['root']}
+      aria-label={label}
+      aria-labelledby={labelledBy}
+    >
       {items.map(
         ({ children, key }: ListItem): ReactElement => (
           <li key={key}>{children}</li>

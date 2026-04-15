@@ -3,6 +3,7 @@ import type { FormProps } from '../core/form-props.js';
 import useForm from '../core/use-form.js';
 import Heading from './heading.jsx';
 import HeadingLevelProvider from '../core/heading-level-provider.jsx';
+import classes from './form.module.scss';
 
 /**
  *   A form is a landmark region containing items and objects that, as a whole,
@@ -25,7 +26,11 @@ export default function Form({
   });
 
   return (
-    <form aria-label={label} aria-labelledby={labelledBy}>
+    <form
+      className={classes['root']}
+      aria-label={label}
+      aria-labelledby={labelledBy}
+    >
       {heading && (
         <Heading id={headingId} level={headingLevel}>
           {heading}

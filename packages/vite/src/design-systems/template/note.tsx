@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { NoteProps } from '../core/note-props.js';
+import classes from './note.module.scss';
 
 /**
  *   A note section represents additional information or parenthetical context
@@ -47,7 +48,7 @@ import type { NoteProps } from '../core/note-props.js';
  */
 export default function Note({ children, id }: NoteProps): ReactElement {
   return (
-    <div id={id} role="note">
+    <div className={classes['root']} id={id} role="note">
       {children}
     </div>
   );
