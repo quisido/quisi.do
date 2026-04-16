@@ -345,10 +345,15 @@ export default function Combobox({
   };
 
   return (
+<<<<<<< HEAD
     <div aria-haspopup="listbox" className={classes['root']} ref={rootRef}>
       <label className={classes['label']} htmlFor={inputId}>
         {label}
       </label>
+=======
+    <div aria-haspopup="listbox" className={classes['combobox']} ref={rootRef}>
+      <label htmlFor={inputId}>{label}</label>
+>>>>>>> 2b8f2b12 (add class names)
       <div>
         <input
           aria-activedescendant={activeDescendant}
@@ -397,6 +402,7 @@ export default function Combobox({
           </svg>
         </button>
       </div>
+<<<<<<< HEAD
       <ul
         aria-disabled={disabled}
         aria-readonly={readOnly}
@@ -429,6 +435,40 @@ export default function Combobox({
           ),
         )}
       </ul>
+=======
+      <div>
+        <ul
+          aria-disabled={disabled}
+          aria-readonly={readOnly}
+          hidden={!listboxVisible}
+          id={listBoxId}
+          role="listbox"
+        >
+          {filteredOptions.map(
+            (option: string, index: number): ReactElement => (
+              <li
+                aria-selected={index === activeOptionIndex}
+                id={`${optionIdPrefix}-${index}`}
+                key={option}
+                onClick={(): void => {
+                  onOptionClick(option);
+                }}
+                onMouseDown={onOptionMouseDown}
+                onPointerEnter={(): void => {
+                  setActiveOptionIndex(index);
+                }}
+                ref={(node: HTMLLIElement | null): void => {
+                  optionRefs.current[index] = node;
+                }}
+                role="option"
+              >
+                {option}
+              </li>
+            ),
+          )}
+        </ul>
+      </div>
+>>>>>>> 2b8f2b12 (add class names)
     </div>
   );
 }

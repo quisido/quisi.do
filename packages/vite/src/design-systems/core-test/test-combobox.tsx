@@ -57,11 +57,18 @@ export default function testCombobox(
         <Combobox
           label="Expandable"
           onChange={handleTestChange}
+<<<<<<< HEAD
           options={['Test option']}
           value=""
         />,
       );
 
+=======
+          options={[]}
+          value=""
+        />,
+      );
+>>>>>>> 2b8f2b12 (add class names)
       const combobox: HTMLElement = getByName('combobox', 'Expandable');
       expect(combobox).toHaveAttribute('aria-expanded', 'false');
       await userEvent.click(combobox);

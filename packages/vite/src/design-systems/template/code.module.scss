@@ -1,4 +1,5 @@
 /**
+<<<<<<< HEAD
  *   This element represents the ink on the canvas, not the canvas itself. Use a
  * subtle background tint, a thin border, and/or an organic `clip-path`
  * background to signal a shift from human prose to programmatic logic.
@@ -10,4 +11,12 @@
   border-width: 1px;
   display: inline;
   font-family: monospace;
+=======
+ * Be creative! Use images and shapes.
+ * This element should look hand-drawn, like a poster.
+ */
+
+.code {
+  display: inline;
+>>>>>>> 2b8f2b12 (add class names)
 }

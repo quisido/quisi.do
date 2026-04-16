@@ -254,8 +254,15 @@ export default function testDesignSystem(
     Suggestion,
     Superscript,
     Switch,
+<<<<<<< HEAD
     Table,
     Tabs,
+=======
+    Tab,
+    Table,
+    TabList,
+    TabPanel,
+>>>>>>> 2b8f2b12 (add class names)
     Term,
     TextBox,
     Time,

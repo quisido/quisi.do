@@ -15,7 +15,11 @@ export default function Banner({ children }: BannerProps): ReactElement {
   const id: string = useBanner();
 
   return (
+<<<<<<< HEAD
     <header className={classes['banner']} id={id}>
+=======
+    <header className={classes['banner']} aria-label={label} id={id}>
+>>>>>>> 2b8f2b12 (add class names)
       {children}
     </header>
   );

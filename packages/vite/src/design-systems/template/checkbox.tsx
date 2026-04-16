@@ -32,7 +32,7 @@ export default function Checkbox({
   };
 
   return (
-    <label className={classes['root']}>
+    <label className={classes['checkbox']}>
       <input
         /**
          *   Due to the strong native semantics of HTML's native checkbox, use

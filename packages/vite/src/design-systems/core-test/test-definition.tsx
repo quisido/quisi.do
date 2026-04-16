@@ -16,6 +16,10 @@ export default function testDefinition(
       expect(definition).toHaveTextContent('Definition content');
     });
 
+<<<<<<< HEAD
     // TODO: DO NOT use interactive elements such as form controls within a definition.
+=======
+    //  *   DO NOT use interactive elements such as form controls within a definition.
+>>>>>>> 2b8f2b12 (add class names)
   });
 }
