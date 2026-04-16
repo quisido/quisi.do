@@ -7,11 +7,13 @@ import NotFound from './not-found.js';
 import PrivacyPolicy from './privacy-policy.js';
 import Support from './support.js';
 import TermsOfService from './terms-of-service.js';
+import DesignSystemDemo from '../design-systems/demo.js';
 
 export default function RoutesFeature(): ReactElement {
   return (
     <Routes>
       <Route path="/data/" element={<DataRetentionPolicy />} />
+      <Route path="/design-systems/" element={<DesignSystemDemo />} />
       <Route path="/cookies/" element={<CookiePolicy />} />
       <Route path="/privacy/" element={<PrivacyPolicy />} />
       <Route path="/support/" element={<Support />} />

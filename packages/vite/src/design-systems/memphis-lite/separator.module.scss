@@ -1,0 +1,5 @@
+@use './theme';
+
+.root {
+  @include theme.separator-line(theme.$pink);
+}

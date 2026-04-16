@@ -1,0 +1,9 @@
+@use './theme';
+
+.root {
+  @include theme.panel(theme.$paper, theme.$teal);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+}

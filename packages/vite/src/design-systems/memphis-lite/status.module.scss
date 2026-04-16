@@ -1,0 +1,13 @@
+@use './theme';
+
+.root {
+  @include theme.panel(theme.$paper-alt, theme.$pink);
+
+  > * + * {
+    margin-block-start: 0.8rem;
+  }
+
+  :where(a) {
+    color: theme.$blue;
+  }
+}
