@@ -25,6 +25,7 @@ interface ImportMetaEnv {
   readonly POSTHOG_HOST?: string | undefined;
   readonly POSTHOG_KEY?: string | undefined;
   readonly SENTRY_ENVIRONMENT?: string | undefined;
+  readonly TEST_DESIGN_SYSTEM?: string | undefined;
   readonly WHOAMI?: string | undefined;
 }
 

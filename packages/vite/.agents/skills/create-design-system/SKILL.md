@@ -8,7 +8,7 @@ description: Use this skill to create a new design system.
 Before getting started, you need to know:
 - The "name" of the design system.
 - The "description" of the design system. It should be a few sentences long and
-  packaged with artistic keywords that inspire the design system's visuals.
+  packed with artistic keywords that inspire the design system's aesthetic.
 - The "slug" for the design system. It should be short, alphanumeric, lowercase,
   and use hyphens instead of spaces.
 - (Optional) A screenshot to use as a visual reference.
@@ -16,7 +16,7 @@ Before getting started, you need to know:
 1. **Copy the template files:** From this package's root directory, execute this
    skill's `copy-template.sh` script with the _slug_ as the first argument, i.e.
   ```bash
-  bash ./.agents/skills/create-design-system/copy-template.sh my-slug
+  bash ./.agents/skills/create-design-system/copy-template.sh my-example-slug
   ```
 2. **Test-driven development:** From this package's root directory, execute
    `npx vitest run src/design-systems/$slug.test.ts` to verify this design
@@ -52,10 +52,15 @@ Before getting started, you need to know:
       comment. Determine how many DOM nodes you will need to achieve the target
       aesthetic (minimal design → less shapes → less nodes; maximal design →
       more shapes → more nodes), then adjust the JSX accordingly.
-   3. Run the test suite to verify feature completeness and accessibility
-      compliance. If the test suite is failing, adjust your implementation until
-      it is passing. `npx vitest run src/design-systems/$slug.test.ts`
-   4. Create a sibling `$component.module.scss` file and write CSS for this
+   3. Test this component for feature completeness and accessibility compliance
+      by executing this command, passing the _slug_ and _component name_ as
+      arguments:
+      ```bash
+      # Example
+      bash ./.agents/skills/create-design-system/test-component.sh polaris "BlockQuote"
+      ```
+      If the test suite is failing, adjust your implementation until it passes.
+   4. In the sibling `$component.module.scss` file, write CSS for this
       component. Use the design system's description and design token _values_
       to stylize this component to match the design system's aesthetic. _Do not_
       use the tokens themselves; they do not exist. The values are provided only
@@ -63,9 +68,8 @@ Before getting started, you need to know:
       `transform` properties so that content feels more like a hand-drawn piece
       or poster; add `box-shadow` for depth and elevation. You may re-adjust the
       JSX to accomplish your goals.
-   5. Re-run the test suite to verify feature completeness and accessibility
-      compliance. If the test suite is failing, adjust your implementation until
-      it is passing. `npx vitest run src/design-systems/$slug.test.ts`
+   5. Test this component again. If the test suite is failing, adjust your
+      implementation until it passes.
    6. You may create as many files as you need to organize your component, but
       you _may not_ edit any files outside of the design system's `$slug/`
       directory. This especially means you cannot edit any files in `../core/`

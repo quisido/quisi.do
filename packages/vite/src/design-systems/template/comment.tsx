@@ -24,11 +24,11 @@ export default function Comment({
 }: CommentProps): ReactElement {
   return (
     <div
-      className={classes['root']}
       aria-label={label}
       aria-level={level}
       aria-posinset={positionInSet}
       aria-setsize={setSize}
+      className={classes['comment']}
       id={id}
       role="comment"
     >

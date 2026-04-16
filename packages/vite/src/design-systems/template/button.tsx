@@ -14,7 +14,7 @@ export default function Button({
   onClick,
 }: ButtonProps): ReactElement {
   return (
-    <button className={classes['root']} onClick={onClick} type="button">
+    <button className={classes['button']} onClick={onClick} type="button">
       {children}
     </button>
   );

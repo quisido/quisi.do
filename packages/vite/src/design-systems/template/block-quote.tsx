@@ -10,7 +10,7 @@ export default function BlockQuote({
   children,
 }: BlockQuoteProps): ReactElement {
   return (
-    <blockquote className={classes['root']} role="blockquote">
+    <blockquote className={classes['block-quote']} role="blockquote">
       {children}
     </blockquote>
   );

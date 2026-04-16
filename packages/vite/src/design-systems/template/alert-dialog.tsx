@@ -51,7 +51,7 @@ export default function AlertDialog({
 
   return (
     <div
-      className={classes['root']}
+      className={classes['alert-dialog']}
       aria-describedby={descriptionId}
       aria-label={label}
       aria-labelledby={labelledBy}
