@@ -1,0 +1,257 @@
+$ink: #121212;
+$paper: #fff9f1;
+$paper-alt: #fff4cf;
+$teal: #18d2cb;
+$yellow: #ffe35a;
+$pink: #ff5f87;
+$blue: #2c57ff;
+$mint: #95f1d5;
+$red: #ff6b45;
+$shadow: #121212;
+$squiggle: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='24' viewBox='0 0 120 24'%3E%3Cpath d='M2 14 C12 2, 24 2, 34 14 S56 26, 66 14 S88 2, 98 14 S110 26, 118 14' fill='none' stroke='%23121212' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E";
+
+@mixin base-root($background, $accent, $display: block) {
+  position: relative;
+  display: $display;
+  color: $ink;
+  font-family: 'Space Grotesk', 'Trebuchet MS', sans-serif;
+  text-decoration-color: $ink;
+
+  >* {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@mixin confetti($background, $accent) {
+  background:
+    radial-gradient(circle at 14% 20%, rgba($accent, 0.95) 0 0.45rem, transparent 0.5rem),
+    radial-gradient(circle at 86% 22%, rgba($pink, 0.95) 0 0.35rem, transparent 0.4rem),
+    linear-gradient(132deg, transparent 0 72%, rgba($blue, 0.22) 72% 78%, transparent 78%),
+    linear-gradient(-38deg, transparent 0 60%, rgba($yellow, 0.5) 60% 68%, transparent 68%),
+    linear-gradient($background, $background);
+}
+
+@mixin panel($background, $accent) {
+  @include base-root($background, $accent);
+  @include confetti($background, $accent);
+
+  border: 0.24rem solid $ink;
+  border-radius: 1.25rem 0.7rem 1.4rem 0.9rem;
+  box-shadow: 0.42rem 0.42rem 0 $shadow;
+  overflow: hidden;
+  padding: 1rem 1.15rem 1.1rem;
+
+  &::before,
+  &::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+  }
+
+  &::before {
+    background:
+      linear-gradient(90deg, transparent 0 12%, $ink 12% 15%, transparent 15% 100%),
+      linear-gradient($teal, $teal);
+    border: 0.18rem solid $ink;
+    border-radius: 999px;
+    height: 0.85rem;
+    right: 0.85rem;
+    top: 0.7rem;
+    transform: rotate(-7deg);
+    width: 3.5rem;
+  }
+
+  &::after {
+    background-image: url($squiggle);
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: 0.35rem;
+    height: 1rem;
+    left: 0.7rem;
+    opacity: 0.95;
+    width: 5rem;
+  }
+
+  :where(h1, h2, h3, h4, h5, h6, strong, b, th, figcaption, legend) {
+    font-family: Bungee, 'Arial Black', sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  :where(p, li, dd, dt, figcaption, label, span, td, time, code) {
+    line-height: 1.45;
+  }
+
+  :where(ul, ol, menu) {
+    padding-left: 1.2rem;
+  }
+}
+
+@mixin control($background, $accent) {
+  @include panel($background, $accent);
+
+  display: grid;
+  gap: 0.75rem;
+  align-items: start;
+
+  :where(label, span:first-child) {
+    font-family: Bungee, 'Arial Black', sans-serif;
+    font-size: 0.86rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  :where(input, textarea, select, button, progress) {
+    position: relative;
+    z-index: 1;
+  }
+
+  :where(input:not([type='checkbox'], [type='radio'], [type='range']), textarea, select) {
+    background: $paper;
+    border: 0.18rem solid $ink;
+    border-radius: 1rem 0.45rem 0.85rem 0.55rem;
+    box-shadow: 0.28rem 0.28rem 0 rgba($ink, 0.95);
+    color: $ink;
+    font: inherit;
+    min-height: 2.9rem;
+    padding: 0.7rem 0.9rem;
+    width: 100%;
+  }
+
+  :where(button, input[type='button'], input[type='submit']) {
+    background: $yellow;
+    border: 0.18rem solid $ink;
+    border-radius: 999px;
+    box-shadow: 0.24rem 0.24rem 0 rgba($ink, 0.95);
+    font-family: Bungee, 'Arial Black', sans-serif;
+    min-height: 2.4rem;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+  }
+
+  :where(input[type='checkbox'], input[type='radio']) {
+    accent-color: $pink;
+    inline-size: 1.15rem;
+    block-size: 1.15rem;
+  }
+
+  :where(input[type='range']) {
+    accent-color: $blue;
+    inline-size: 100%;
+  }
+
+  :where(progress) {
+    accent-color: $blue;
+    inline-size: 100%;
+    min-block-size: 1.1rem;
+  }
+
+  :where(input, textarea, select, button):focus-visible {
+    outline: 0.2rem dashed $blue;
+    outline-offset: 0.18rem;
+  }
+}
+
+@mixin button-like($background, $accent, $display: inline-flex) {
+  @include base-root($background, $accent, $display);
+
+  align-items: center;
+  gap: 0.55rem;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba($yellow, 0.7), rgba($yellow, 0) 42%),
+    linear-gradient($background, $background);
+  border: 0.2rem solid $ink;
+  border-radius: 999px;
+  box-shadow: 0.34rem 0.34rem 0 $shadow;
+  font-family: Bungee, 'Arial Black', sans-serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  padding: 0.78rem 1.2rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    background-color 140ms ease;
+
+  &::after {
+    content: '';
+    background: $pink;
+    border: 0.15rem solid $ink;
+    border-radius: 999px;
+    block-size: 0.72rem;
+    inline-size: 0.72rem;
+  }
+
+  &:hover {
+    transform: translate(-0.08rem, -0.08rem) rotate(-1.5deg);
+    box-shadow: 0.46rem 0.46rem 0 $shadow;
+  }
+
+  &:focus-visible {
+    outline: 0.22rem dashed $blue;
+    outline-offset: 0.2rem;
+  }
+}
+
+@mixin inline-accent($background, $accent) {
+  @include base-root($background, $accent, inline-block);
+
+  background:
+    linear-gradient(180deg, transparent 0 62%, rgba($background, 0.98) 62% 100%),
+    linear-gradient(90deg, rgba($accent, 0.45), rgba($yellow, 0.55));
+  border: 0.14rem solid $ink;
+  border-radius: 0.6rem 0.25rem 0.65rem 0.2rem;
+  box-decoration-break: clone;
+  font-weight: 700;
+  padding: 0.12rem 0.45rem 0.22rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: auto 0.2rem -0.32rem auto;
+    background-image: url($squiggle);
+    background-repeat: no-repeat;
+    background-size: contain;
+    block-size: 0.65rem;
+    inline-size: 2.7rem;
+  }
+}
+
+@mixin text-block($background, $accent) {
+  @include panel($background, $accent);
+
+  font-size: 1rem;
+}
+
+@mixin media($background, $accent) {
+  @include panel($background, $accent);
+
+  display: grid;
+  gap: 0.8rem;
+
+  :where(img, svg, video, canvas) {
+    background:
+      linear-gradient(135deg, rgba($yellow, 0.75), rgba($yellow, 0) 42%),
+      linear-gradient(315deg, rgba($teal, 0.5), rgba($teal, 0) 44%),
+      $paper;
+    border: 0.18rem solid $ink;
+    border-radius: 1rem 0.35rem 1.2rem 0.55rem;
+    box-shadow: 0.34rem 0.34rem 0 rgba($ink, 0.95);
+    max-inline-size: 100%;
+    padding: 0.35rem;
+  }
+}
+
+@mixin separator-line($accent) {
+  @include base-root(transparent, $accent);
+
+  background:
+    linear-gradient(90deg, $ink 0 14%, transparent 14% 18%, $accent 18% 34%, transparent 34% 100%);
+  block-size: 0.75rem;
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0.18rem 0.18rem 0 rgba($ink, 0.95);
+}

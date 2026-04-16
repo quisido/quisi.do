@@ -1,0 +1,11 @@
+@use './theme';
+
+.root {
+  @include theme.text-block(theme.$paper-alt, theme.$pink);
+
+  max-inline-size: 42rem;
+
+  >*+* {
+    margin-block-start: 0.8rem;
+  }
+}

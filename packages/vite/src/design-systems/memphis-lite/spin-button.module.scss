@@ -1,0 +1,30 @@
+@use './theme';
+
+.root {
+  @include theme.control(theme.$paper, theme.$teal);
+
+  > label, > span, > div > label {
+    display: flex;
+    gap: 0.55rem;
+    align-items: center;
+  }
+
+  > label {
+    flex-wrap: wrap;
+  }
+
+  :where(ul, ol) {
+    display: grid;
+    gap: 0.45rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  :where(li) {
+    background: rgba(theme.$paper-alt, 0.96);
+    border: 0.14rem solid theme.$ink;
+    border-radius: 0.75rem 0.25rem 0.8rem 0.35rem;
+    padding: 0.55rem 0.75rem;
+  }
+}

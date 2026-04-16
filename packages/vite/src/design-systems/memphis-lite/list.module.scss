@@ -1,0 +1,17 @@
+@use './theme';
+
+.root {
+  @include theme.panel(theme.$paper, theme.$yellow);
+  display: grid;
+  gap: 0.55rem;
+  list-style-position: inside;
+  padding-left: 1rem;
+
+  :where(li) {
+    background: rgba(theme.$paper-alt, 0.95);
+    border: 0.14rem solid theme.$ink;
+    border-radius: 0.7rem 0.3rem 0.85rem 0.4rem;
+    margin-block: 0.3rem;
+    padding: 0.45rem 0.65rem;
+  }
+}

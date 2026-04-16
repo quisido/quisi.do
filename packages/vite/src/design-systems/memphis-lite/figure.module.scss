@@ -1,0 +1,5 @@
+@use './theme';
+
+.root {
+  @include theme.media(theme.$paper, theme.$teal);
+}
