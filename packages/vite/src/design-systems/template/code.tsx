@@ -11,7 +11,11 @@ export default function Code({
   describedBy,
 }: CodeProps): ReactElement {
   return (
-    <code className={classes['root']} aria-describedby={describedBy} role="code">
+    <code
+      aria-describedby={describedBy}
+      className={classes['code']}
+      role="code"
+    >
       {children}
     </code>
   );

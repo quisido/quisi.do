@@ -14,7 +14,7 @@ import classes from './emphasis.module.scss';
  */
 export default function Emphasis({ children }: EmphasisProps): ReactElement {
   return (
-    <em className={classes['root']} role="emphasis">
+    <em className={classes['emphasis']} role="emphasis">
       {children}
     </em>
   );

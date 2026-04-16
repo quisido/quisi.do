@@ -6,7 +6,7 @@ import type { ProgressBarProps } from '../core/progress-bar-props.js';
 export default function testProgressBar(
   ProgressBar: ComponentType<ProgressBarProps>,
 ): void {
-  describe('progress bar', (): void => {
+  describe('ProgressBar', (): void => {
     describe('describes', (): void => {
       it('should enforce described element validity', (): void => {
         const { expectToHaveThrown } = render(

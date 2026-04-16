@@ -46,11 +46,11 @@ export default function Dialog({
 
   return (
     <dialog
-      className={classes['root']}
       aria-describedby={descriptionId}
       aria-label={label}
       aria-labelledby={labelledBy}
       aria-modal={modal}
+      className={classes['dialog']}
       open={open}
       ref={ref}
     >

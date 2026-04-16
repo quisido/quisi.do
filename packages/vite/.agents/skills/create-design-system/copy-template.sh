@@ -5,5 +5,5 @@ cp --no-clobber --one-file-system --preserve \
   "./src/design-systems/template.test.ts" \
   "./src/design-systems/$1.test.ts";
 sed --in-place \
-  "s/.\\/template\\/index.js/.\\/$1\\/index.js/" \
+  "s/template/$1/g" \
   "./src/design-systems/$1.test.ts";

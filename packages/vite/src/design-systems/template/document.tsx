@@ -31,7 +31,7 @@ export default function Document({
   tabIndex,
 }: DocumentProps): ReactElement {
   return (
-    <div className={classes['root']} role="document" tabIndex={tabIndex}>
+    <div className={classes['document']} role="document" tabIndex={tabIndex}>
       <OwnsBanner>
         <OwnsContentInfo>
           <OwnsMain>

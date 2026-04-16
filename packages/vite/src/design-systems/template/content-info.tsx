@@ -15,7 +15,7 @@ export default function ContentInfo({
   const id: string = useContentInfo();
 
   return (
-    <footer className={classes['root']} id={id}>
+    <footer className={classes['content-info']} id={id}>
       {children}
     </footer>
   );

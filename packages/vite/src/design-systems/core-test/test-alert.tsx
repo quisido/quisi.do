@@ -30,7 +30,6 @@ export default function testAlert(Alert: ComponentType<AlertProps>): void {
           <Alert labelledBy="test-alert-label-id" type="info">
             Test alert
           </Alert>
-          ,
         </>,
       );
       getByName('alert', 'Test labelled by');

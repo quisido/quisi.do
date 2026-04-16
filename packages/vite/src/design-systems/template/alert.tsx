@@ -59,12 +59,12 @@ export default function Alert({
 
   return (
     <div
-      className={classes['root']}
       aria-atomic={atomic}
       aria-describedby={descriptionId}
       aria-label={label}
       aria-labelledby={labelledBy}
       aria-live={live}
+      className={classes['alert']}
       role="alert"
     >
       {icon && <span>{icon}</span>}

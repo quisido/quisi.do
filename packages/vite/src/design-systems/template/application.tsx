@@ -38,10 +38,10 @@ export default function Application({
 }: ApplicationProps): ReactElement {
   return (
     <div
-      className={classes['root']}
       aria-describedby={describedBy}
       aria-label={label}
       aria-roledescription={roleDescription}
+      className={classes['application']}
       role="application"
     >
       <OwnsBanner>

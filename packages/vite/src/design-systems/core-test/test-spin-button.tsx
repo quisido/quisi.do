@@ -17,7 +17,7 @@ const ROLE_LIMITS: ReadonlyMap<ARIARole, number> = new Map([
 export default function testSpinButton(
   SpinButton: ComponentType<SpinButtonProps>,
 ): void {
-  describe('spin button', (): void => {
+  describe('SpinButton', (): void => {
     /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
     it('must limit accessibility children to a textbox and/or two buttons', (): void => {
       const { getRoleCount } = render(

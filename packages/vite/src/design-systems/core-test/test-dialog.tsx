@@ -40,5 +40,7 @@ export default function testDialog(Dialog: ComponentType<DialogProps>): void {
 
       getByName('dialog', 'Test labelled by');
     });
+
+    //  *   Dialogs must have at least one focusable descendant element.
   });
 }

@@ -40,9 +40,9 @@ export default function Article({
 
   return (
     <article
-      className={classes['root']}
       aria-label={label}
       aria-labelledby={labelledBy}
+      className={classes['article']}
     >
       <Heading id={headingId} level={headingLevel}>
         {heading}

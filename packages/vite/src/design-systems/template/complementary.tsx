@@ -16,5 +16,5 @@ import classes from './complementary.module.scss';
 export default function Complementary({
   children,
 }: ComplementaryProps): ReactElement {
-  return <aside className={classes['root']}>{children}</aside>;
+  return <aside className={classes['complementary']}>{children}</aside>;
 }

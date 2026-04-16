@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { describe, expect, it, vi } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
 import type { ComponentType } from 'react';
@@ -73,11 +72,11 @@ export default function testAlertDialog(
     it('should be modal (capture keyboard navigation)', async (): Promise<void> => {
       const { getByName } = render(
         <>
-          <button>First button</button>
+          <button type="button">First button</button>
           <AlertDialog label="Test modal label" onDismiss={handleTestDismiss}>
-            <button>Second button</button>
+            <button type="button">Second button</button>
           </AlertDialog>
-          ,<button>Third button</button>
+          ,<button type="button">Third button</button>
         </>,
       );
 

@@ -9,7 +9,7 @@ export default function testRadioGroup(
 ): void {
   const handleTestChange = vi.fn();
 
-  describe('radio group', (): void => {
+  describe('RadioGroup', (): void => {
     describe('label', (): void => {
       it('should be supported', (): void => {
         const { getByName } = render(

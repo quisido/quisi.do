@@ -40,6 +40,7 @@ const FeedArticleComponent = ({
       aria-labelledby={labelledBy}
       aria-posinset={positionInSet}
       aria-setsize={setSize}
+      className={classes['article']}
       onFocus={onFocus}
       tabIndex={0}
     >
@@ -98,11 +99,11 @@ export default function Feed({
 
   return (
     <section
-      className={classes['root']}
       aria-busy={busy}
       aria-errormessage={errorMessageId}
       aria-label={label}
       aria-labelledby={labelledBy}
+      className={classes['feed']}
       role="feed"
     >
       {errorMessage !== undefined && (
@@ -110,7 +111,7 @@ export default function Feed({
       )}
       {handlePrepend !== undefined && (
         <div>
-          <button disabled={prepending} onClick={handlePrepend}>
+          <button disabled={prepending} onClick={handlePrepend} type="button">
             Prepend articles
           </button>
         </div>
@@ -146,7 +147,7 @@ export default function Feed({
       )}
       {handleAppend !== undefined && (
         <div>
-          <button disabled={appending} onClick={handleAppend}>
+          <button disabled={appending} onClick={handleAppend} type="button">
             Append articles
           </button>
         </div>
