@@ -54,7 +54,11 @@ export default function RadioGroup<
       role="radiogroup"
     >
       {label && (
-        <label htmlFor={labelledBy} id={labelledBy}>
+        <label
+          className={classes['radio-group-label']}
+          htmlFor={labelledBy}
+          id={labelledBy}
+        >
           {label}
         </label>
       )}
@@ -75,15 +79,16 @@ export default function RadioGroup<
           };
 
           return (
-            <label key={key}>
+            <label className={classes['radio-label']} key={key}>
               <input
                 aria-checked={checked}
                 aria-posinset={positionInSet}
                 aria-readonly={readOnly}
                 aria-required={required}
                 aria-setsize={setSize}
-                onChange={handleChange}
                 checked={checked}
+                className={classes['input']}
+                onChange={handleChange}
                 readOnly={readOnly}
                 required={required}
                 role="radio"

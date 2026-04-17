@@ -5,4 +5,14 @@
 
 .button {
   display: inline-block;
+
+  // Use Google Fonts to find a font family that matches the aesthetic.
+  font-family: sans-serif;
+
+  &:focus-visible {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
 }

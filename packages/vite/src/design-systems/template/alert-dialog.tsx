@@ -51,18 +51,18 @@ export default function AlertDialog({
 
   return (
     <div
-      className={classes['alert-dialog']}
       aria-describedby={descriptionId}
       aria-label={label}
       aria-labelledby={labelledBy}
       aria-modal
+      className={classes['alert-dialog']}
       role="alertdialog"
     >
       <FocusScope autoFocus contain restoreFocus>
-        <span>{icon ?? toIcon(type)}</span>
+        <span className={classes['icon']}>{icon ?? toIcon(type)}</span>
         <div>
           {heading !== undefined && (
-            <Heading id={headingId} level={3}>
+            <Heading className={classes['heading']} id={headingId} level={3}>
               {heading}
             </Heading>
           )}
@@ -70,6 +70,7 @@ export default function AlertDialog({
         </div>
         <button
           aria-label="Dismiss"
+          className={classes['dismiss-button']}
           onClick={(): void => {
             onDismiss();
           }}

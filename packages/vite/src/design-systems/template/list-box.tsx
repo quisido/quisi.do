@@ -1,7 +1,15 @@
-import type { ReactElement } from 'react';
+import type { ChangeEvent, ReactElement } from 'react';
 import type { ListBoxOption, ListBoxProps } from '../core/list-box-props.js';
 import useElementId from '../../hooks/use-element-id.js';
 import classes from './list-box.module.scss';
+
+const reduceOptionsToValues = (
+  values: Set<string>,
+  option: HTMLOptionElement,
+): Set<string> => {
+  values.add(option.value);
+  return values;
+};
 
 /**
  *   A list box is a widget that allows the user to select one or more items
@@ -14,10 +22,17 @@ import classes from './list-box.module.scss';
 export default function ListBox({
   label,
   labelledBy,
+  onChange,
   options,
   orientation = 'vertical',
+  values,
 }: ListBoxProps): ReactElement {
   const selectId: string = useElementId();
+  const handleChange = ({
+    currentTarget: { selectedOptions },
+  }: ChangeEvent<HTMLSelectElement>): void => {
+    onChange([...selectedOptions].reduce(reduceOptionsToValues, new Set()));
+  };
 
   return (
     <div
@@ -26,11 +41,27 @@ export default function ListBox({
       className={classes['list-box']}
       role="listbox"
     >
-      {label && <label htmlFor={selectId}>{label}</label>}
-      <select id={selectId} multiple>
+      {label && (
+        <label className={classes['label']} htmlFor={selectId}>
+          {label}
+        </label>
+      )}
+      <select
+        className={classes['select']}
+        id={selectId}
+        multiple
+        onChange={handleChange}
+      >
         {options.map(
-          ({ children, key }: ListBoxOption): ReactElement => (
-            <option key={key}>{children}</option>
+          ({ children, value }: ListBoxOption): ReactElement => (
+            <option
+              className={classes['option']}
+              key={value}
+              selected={values.has(value)}
+              value={value}
+            >
+              {children}
+            </option>
           ),
         )}
       </select>

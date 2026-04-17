@@ -14,6 +14,16 @@
 // The `input` class is the single-line <input> element.
 .input {
   display: inline-block;
+
+  // Use Google Fonts to find a font family that matches the aesthetic.
+  font-family: sans-serif;
+
+  &:focus-visible {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
 }
 
 /**
@@ -27,5 +37,8 @@
 // The `textarea` class is the multi-line <textarea> element.
 .textarea {
   display: inline-block;
+
+  // Use Google Fonts to find a font family that matches the aesthetic.
+  font-family: serif;
   width: 100%;
 }

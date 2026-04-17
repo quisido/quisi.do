@@ -2,6 +2,7 @@
 import type { ReactElement } from 'react';
 import type { HeadingProps } from '../core/heading-props.js';
 import classes from './heading.module.scss';
+import isDefined from '../../utils/is-defined.js';
 
 /**
  *   A heading is a heading for a section of the page.
@@ -11,6 +12,7 @@ import classes from './heading.module.scss';
  */
 export default function Heading({
   children,
+  className,
   id,
   level,
 }: HeadingProps): ReactElement | null {
@@ -40,7 +42,7 @@ export default function Heading({
   return (
     <Component
       aria-level={level}
-      className={classes['heading']}
+      className={[className, classes['heading']].filter(isDefined).join(' ')}
       id={id}
       role="heading"
     >

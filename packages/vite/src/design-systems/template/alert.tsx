@@ -67,14 +67,16 @@ export default function Alert({
       className={classes['alert']}
       role="alert"
     >
-      {icon && <span>{icon}</span>}
+      {icon && <span className={classes['icon']}>{icon}</span>}
       <div>
         {heading !== undefined && (
-          <Heading id={headingId} level={2}>
+          <Heading className={classes['heading']} id={headingId} level={2}>
             {heading}
           </Heading>
         )}
-        <div id={descriptionId}>{children}</div>
+        <div className={classes['description']} id={descriptionId}>
+          {children}
+        </div>
       </div>
     </div>
   );
