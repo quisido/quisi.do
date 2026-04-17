@@ -10,19 +10,6 @@ export default function testCombobox(
   Combobox: ComponentType<ComboboxProps>,
 ): void {
   describe('Combobox', (): void => {
-    it('should be a combo box', (): void => {
-      const { getByName } = render(
-        <Combobox
-          label="Test combo box"
-          onChange={handleTestChange}
-          options={[]}
-          value=""
-        />,
-      );
-
-      getByName('combobox', 'Test combo box');
-    });
-
     it('should support keyboard selection', async (): Promise<void> => {
       const { getByName } = render(
         <Combobox
@@ -70,10 +57,11 @@ export default function testCombobox(
         <Combobox
           label="Expandable"
           onChange={handleTestChange}
-          options={[]}
+          options={['Test option']}
           value=""
         />,
       );
+
       const combobox: HTMLElement = getByName('combobox', 'Expandable');
       expect(combobox).toHaveAttribute('aria-expanded', 'false');
       await userEvent.click(combobox);

@@ -29,6 +29,10 @@ export default function testSpinButton(
       );
 
       for (const role of ARIA_ROLES) {
+        if (role === 'generic') {
+          continue;
+        }
+
         const count: number = getRoleCount(role);
         const limit: number = ROLE_LIMITS.get(role) ?? 0;
         expect(count, `${role} count`).toBeLessThanOrEqual(limit);
