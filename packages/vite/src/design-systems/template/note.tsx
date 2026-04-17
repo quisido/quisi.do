@@ -48,7 +48,7 @@ import classes from './note.module.scss';
  */
 export default function Note({ children, id }: NoteProps): ReactElement {
   return (
-    <div className={classes['root']} id={id} role="note">
+    <div className={classes['note']} id={id} role="note">
       {children}
     </div>
   );

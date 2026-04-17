@@ -14,6 +14,10 @@
   "[jsonc]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
+  "[scss]": {
+    // Stylelint is required to recognize variables in keyframes.
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
@@ -89,11 +93,14 @@
     "packages/": true
   },
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
-  "js.preferences.importModuleSpecifier": "project-relative",
-  "js.preferences.importModuleSpecifierEnding": "js",
   "js/ts.tsdk.path": "./node_modules/typescript/lib",
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "npm.packageManager": "npm",
+  "scss.completion.completePropertyWithSemicolon": true,
+  "scss.format.braceStyle": "collapse",
+  "scss.format.enable": true,
+  "scss.format.newlineBetweenRules": true,
+  "scss.format.spaceAroundSelectorSeparator": true,
   "search.exclude": {
     "**/.attach_pid*": true,
     "**/.cache/": true,
@@ -111,10 +118,6 @@
   "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
   "terminal.integrated.shellIntegration.enabled": true,
   "testExplorer.useNativeTesting": true,
-  "ts.preferences.importModuleSpecifier": "project-relative",
-  "ts.preferences.importModuleSpecifierEnding": "js",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "vitest.maximumConfigs": 99,
   "vitest.shellType": "terminal",
   "yaml.keyOrdering": false
 }

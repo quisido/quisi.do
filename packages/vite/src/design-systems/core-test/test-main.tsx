@@ -1,6 +1,6 @@
 import render from './render.js';
 import type { ComponentType } from 'react';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { MainProps } from '../core/main-props.js';
 import type { DocumentProps } from '../core/document-props.js';
 
@@ -14,13 +14,13 @@ export default function testMain(
 ): void {
   describe('Main', (): void => {
     it('should be main content', (): void => {
-      const { getByName } = render(
+      const { getByRole } = render(
         <Document>
-          <Main label="Test main">Test content</Main>
+          <Main>Test content</Main>
         </Document>,
       );
 
-      getByName('main', 'Test main');
+      expect(getByRole('main')).toHaveTextContent('Test content');
     });
   });
 }

@@ -17,7 +17,7 @@ export default function Log({
   live = 'polite',
 }: LogProps): ReactElement {
   return (
-    <div className={classes['root']} aria-live={live} role="log">
+    <div aria-live={live} className={classes['log']} role="log">
       {children}
     </div>
   );

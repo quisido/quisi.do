@@ -14,11 +14,12 @@ export default function Switch({ label, off, on }: SwitchProps): ReactElement {
   const checked: boolean = on ?? !off;
 
   return (
-    <label className={classes['root']}>
-      {label}
+    <label className={classes['switch']}>
+      <span className={classes['label']}>{label}</span>
       <input
         aria-checked={checked}
         checked={checked}
+        className={classes['input']}
         role="switch"
         type="checkbox"
       />

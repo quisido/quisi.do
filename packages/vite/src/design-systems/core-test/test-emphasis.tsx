@@ -10,7 +10,7 @@ export default function testEmphasis(
     it('should emphasize text', (): void => {
       const { getByRole } = render(<Emphasis>Test emphasis</Emphasis>);
       const emphasis: HTMLElement = getByRole('emphasis');
-      expect(emphasis.textContent).toBe('Test emphasis');
+      expect(emphasis).toHaveTextContent('Test emphasis');
     });
   });
 }

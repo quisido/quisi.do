@@ -27,13 +27,13 @@ export default function Scrollbar({
 }: ScrollbarProps): ReactElement {
   return (
     <div
-      className={classes['root']}
       aria-controls={controls}
       aria-disabled={disabled}
       aria-orientation={orientation}
       aria-valuemax={max}
       aria-valuemin={min}
       aria-valuenow={value}
+      className={classes['scrollbar']}
       role="scrollbar"
     />
   );

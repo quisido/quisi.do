@@ -12,7 +12,7 @@ import classes from './subscript.module.scss';
  */
 export default function Subscript({ children }: SubscriptProps): ReactElement {
   return (
-    <sub className={classes['root']} role="subscript">
+    <sub className={classes['subscript']} role="subscript">
       {children}
     </sub>
   );

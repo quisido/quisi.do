@@ -18,7 +18,7 @@ export default function testDocument(
     it('should be a document', (): void => {
       const { getByRole } = render(<Document>Test content</Document>);
       const doc: HTMLElement = getByRole('document');
-      expect(doc.textContent).toBe('Test content');
+      expect(doc).toHaveTextContent('Test content');
     });
 
     it('should render a banner', (): void => {
@@ -27,7 +27,7 @@ export default function testDocument(
       );
 
       const banner: HTMLElement = getByRole('banner');
-      expect(banner.textContent).toBe('Test banner');
+      expect(banner).toHaveTextContent('Test banner');
     });
 
     it('should not contain more than 1 banner', (): void => {
@@ -48,7 +48,7 @@ export default function testDocument(
       );
 
       const contentInfo: HTMLElement = getByRole('contentinfo');
-      expect(contentInfo.textContent).toBe('Test content info');
+      expect(contentInfo).toHaveTextContent('Test content info');
     });
 
     it('should not contain more than 1 content info', (): void => {

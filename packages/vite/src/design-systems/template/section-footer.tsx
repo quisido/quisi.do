@@ -18,7 +18,7 @@ export default function SectionFooter({
   children,
 }: SectionFooterProps): ReactElement {
   return (
-    <footer className={classes['root']} role="sectionfooter">
+    <footer className={classes['section-footer']} role="sectionfooter">
       {children}
     </footer>
   );

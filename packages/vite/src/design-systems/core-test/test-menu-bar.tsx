@@ -1,6 +1,6 @@
 import render from './render.js';
 import type { ComponentType } from 'react';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { MenuBarProps } from '../core/menu-bar-props.js';
 
 export default function testMenuBar(
@@ -8,11 +8,10 @@ export default function testMenuBar(
 ): void {
   describe('MenuBar', (): void => {
     it('should be a menu bar', (): void => {
-      const { getByName } = render(
-        <MenuBar items={[]} label="Test menu bar" />,
-      );
+      const { getByRole } = render(<MenuBar>Test content</MenuBar>);
 
-      getByName('menubar', 'Test menu bar');
+      const menuBar: HTMLElement = getByRole('menubar');
+      expect(menuBar).toHaveTextContent('Test content');
     });
 
     /**

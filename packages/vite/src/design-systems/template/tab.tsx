@@ -12,8 +12,8 @@ export default function Tab({
 }: TabProps): ReactElement {
   return (
     <button
-      className={classes['root']}
       aria-selected={selected}
+      className={classes['tab']}
       role="tab"
       type="button"
     >

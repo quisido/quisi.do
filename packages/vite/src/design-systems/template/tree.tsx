@@ -20,9 +20,9 @@ export default function Tree({
 }: TreeProps): ReactElement {
   return (
     <table
-      className={classes['root']}
       aria-orientation={orientation}
       aria-required={required}
+      className={classes['tree']}
       role="tree"
     >
       <caption>{caption}</caption>

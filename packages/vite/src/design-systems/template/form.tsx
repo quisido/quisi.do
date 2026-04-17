@@ -27,9 +27,9 @@ export default function Form({
 
   return (
     <form
-      className={classes['root']}
       aria-label={label}
       aria-labelledby={labelledBy}
+      className={classes['form']}
     >
       {heading && (
         <Heading id={headingId} level={headingLevel}>

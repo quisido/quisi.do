@@ -18,10 +18,10 @@ export default function Image({
 }: ImageProps): ReactElement {
   return (
     <img
-      className={classes['root']}
       alt={alt}
       aria-label={label}
       aria-labelledby={labelledBy}
+      className={classes['image']}
       role="image"
       src={src}
     />

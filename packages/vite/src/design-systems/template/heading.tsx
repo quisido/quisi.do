@@ -39,8 +39,8 @@ export default function Heading({
 
   return (
     <Component
-      className={classes['root']}
       aria-level={level}
+      className={classes['heading']}
       id={id}
       role="heading"
     >

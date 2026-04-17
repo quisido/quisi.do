@@ -31,16 +31,17 @@ export default function Slider({
   };
 
   return (
-    <label className={classes['root']}>
-      {label}
+    <label className={classes['slider']}>
+      <span className={classes['label']}>{label}</span>
       <input
         aria-orientation={orientation}
         aria-valuemax={max}
         aria-valuemin={min}
         aria-valuenow={value}
-        onChange={handleChange}
+        className={classes['input']}
         max={max}
         min={min}
+        onChange={handleChange}
         role="slider"
         type="range"
         value={value}

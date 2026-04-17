@@ -10,7 +10,7 @@ export default function testSectionHeader(
     it('should be a section header', (): void => {
       const { getByRole } = render(<SectionHeader>Test content</SectionHeader>);
       const sectionHeader: HTMLElement = getByRole('sectionheader');
-      expect(sectionHeader.textContent).toBe('Test content');
+      expect(sectionHeader).toHaveTextContent('Test content');
     });
   });
 }

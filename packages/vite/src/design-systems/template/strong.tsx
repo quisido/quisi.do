@@ -13,7 +13,7 @@ import classes from './strong.module.scss';
  */
 export default function Strong({ children }: StrongProps): ReactElement {
   return (
-    <strong className={classes['root']} role="strong">
+    <strong className={classes['strong']} role="strong">
       {children}
     </strong>
   );

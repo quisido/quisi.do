@@ -6,6 +6,9 @@ import type {
 } from 'react';
 import type { LinkProps } from '../core/link-props.js';
 import classes from './link.module.scss';
+import validateString from '../../utils/validate-string.js';
+
+const linkClassName: string = validateString(classes['link']);
 
 /**
  *   A link is an interactive reference to an internal or external resource
@@ -48,10 +51,10 @@ export default function Link({
     return '_blank';
   })();
 
-  let rootClassName: string = classes['root'];
+  const classNames: string[] = [linkClassName];
 
   if (className !== undefined) {
-    rootClassName += ` ${className}`;
+    classNames.push(className);
   }
 
   /**
@@ -63,7 +66,7 @@ export default function Link({
    */
   return (
     <a
-      className={rootClassName}
+      className={classNames.join(' ')}
       href={href}
       onClick={handleClick}
       rel={rel}

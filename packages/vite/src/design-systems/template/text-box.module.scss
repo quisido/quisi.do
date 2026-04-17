@@ -1,4 +1,31 @@
-.root {
-  // Be creative! Use images and shapes.
-  // This element should look hand-drawn, like a poster.
+/**
+ * Be creative! Use images and shapes.
+ * This element should look hand-drawn, like a poster.
+ */
+
+/**
+ *   The `text-box` class wraps the entire component, including the label and
+ * the element with the 'textbox' role.
+ */
+.text-box {
+  display: inline-block;
+}
+
+// The `input` class is the single-line <input> element.
+.input {
+  display: inline-block;
+}
+
+/**
+ *   The `label` class wraps the text for the label, but is not the <label>
+ * element per se.
+ */
+.label {
+  display: inline;
+}
+
+// The `textarea` class is the multi-line <textarea> element.
+.textarea {
+  display: inline-block;
+  width: 100%;
 }

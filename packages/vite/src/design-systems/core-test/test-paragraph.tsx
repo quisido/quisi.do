@@ -10,7 +10,7 @@ export default function testParagraph(
     it('should be a paragraph', (): void => {
       const { getByRole } = render(<Paragraph>Test paragraph</Paragraph>);
       const paragraph: HTMLElement = getByRole('paragraph');
-      expect(paragraph.textContent).toBe('Test paragraph');
+      expect(paragraph).toHaveTextContent('Test paragraph');
     });
   });
 }

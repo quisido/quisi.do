@@ -40,10 +40,10 @@ export default function Grid({
 
   return (
     <table
-      className={classes['root']}
       aria-readonly={readOnly}
       aria-labelledby={captionId}
       aria-multiselectable={selected instanceof Map}
+      className={classes['grid']}
       role="grid"
     >
       <caption id={captionId}>{caption}</caption>

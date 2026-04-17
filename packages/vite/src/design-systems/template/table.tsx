@@ -15,7 +15,7 @@ Authors SHOULD prefer the use of the host language's semantics for table wheneve
  */
 export default function Table({ caption, rows }: TableProps): ReactElement {
   return (
-    <table className={classes['root']}>
+    <table className={classes['table']} role="table">
       <caption>{caption}</caption>
       <tbody>
         {rows.map(

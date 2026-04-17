@@ -1,14 +1,17 @@
 import render from './render.js';
 import type { ComponentType } from 'react';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { MenuProps } from '../core/menu-props.js';
 
 export default function testMenu(Menu: ComponentType<MenuProps>): void {
   describe('Menu', (): void => {
     it('should be a menu', (): void => {
-      const { getByName } = render(<Menu items={[]} label="Test menu" />);
+      const { getByRole } = render(
+        <Menu items={[{ children: 'Test menu item', key: 1 }]} />,
+      );
 
-      getByName('menu', 'Test menu');
+      const menu: HTMLElement = getByRole('menu');
+      expect(menu).toHaveTextContent('Test menu item');
     });
 
     /**

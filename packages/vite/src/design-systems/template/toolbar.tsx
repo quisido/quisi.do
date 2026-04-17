@@ -41,10 +41,10 @@ export default function Toolbar({
    */
   return (
     <div
-      className={classes['root']}
       aria-label={label}
       aria-labelledby={labelledBy}
       aria-orientation={orientation}
+      className={classes['toolbar']}
       role="toolbar"
     >
       {children}

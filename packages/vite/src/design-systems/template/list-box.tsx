@@ -21,9 +21,9 @@ export default function ListBox({
 
   return (
     <div
-      className={classes['root']}
       aria-labelledby={labelledBy}
       aria-orientation={orientation}
+      className={classes['list-box']}
       role="listbox"
     >
       {label && <label htmlFor={selectId}>{label}</label>}

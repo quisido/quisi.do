@@ -11,7 +11,7 @@ export default function testBlockQuote(
       const { getByRole } = render(<BlockQuote>Test block quote</BlockQuote>);
 
       const blockQuote: HTMLElement = getByRole('blockquote');
-      expect(blockQuote.textContent).toBe('Test block quote');
+      expect(blockQuote).toHaveTextContent('Test block quote');
     });
   });
 }

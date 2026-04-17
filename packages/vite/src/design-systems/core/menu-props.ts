@@ -9,7 +9,6 @@ interface MenuItemProps {
 
 export interface MenuProps {
   readonly items: readonly MenuItem[];
-  readonly label: string;
   /**
    * @default 'vertical'
    */

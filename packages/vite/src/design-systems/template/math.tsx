@@ -8,9 +8,9 @@ import classes from './math.module.scss';
  *   Math represents a mathematical expression.
  * @see {@link https://w3c.github.io/aria/#math | WAI-ARIA `math` role}
  */
-export default function Math({ children, label }: MathProps): ReactElement {
+export default function Math({ children }: MathProps): ReactElement {
   return (
-    <div className={classes['root']} aria-label={label} role="math">
+    <div className={classes['math']} role="math">
       {children}
     </div>
   );

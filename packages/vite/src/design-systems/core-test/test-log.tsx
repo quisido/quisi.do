@@ -9,7 +9,7 @@ export default function testLog(Log: ComponentType<LogProps>): void {
       const { getByRole } = render(<Log>Test content</Log>);
 
       const log: HTMLElement = getByRole('log');
-      expect(log.textContent).toBe('Test content');
+      expect(log).toHaveTextContent('Test content');
     });
   });
 }

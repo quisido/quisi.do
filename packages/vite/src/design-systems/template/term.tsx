@@ -15,7 +15,7 @@ export default function Term({
   definitionId,
 }: TermProps): ReactElement {
   return (
-    <dfn className={classes['root']} aria-details={definitionId} role="term">
+    <dfn aria-details={definitionId} className={classes['term']} role="term">
       {children}
     </dfn>
   );

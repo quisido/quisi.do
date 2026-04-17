@@ -18,9 +18,9 @@ export default function Status({
 }: StatusProps): ReactElement {
   return (
     <output
-      className={classes['root']}
       aria-atomic={atomic}
       aria-live={live}
+      className={classes['status']}
       id={id}
       role="status"
     >

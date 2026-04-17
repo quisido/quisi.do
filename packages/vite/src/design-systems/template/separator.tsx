@@ -15,8 +15,8 @@ export default function Separator({
 }: SeparatorProps): ReactElement {
   return (
     <hr
-      className={classes['root']}
       aria-orientation={orientation}
+      className={classes['separator']}
       role="separator"
     />
   );

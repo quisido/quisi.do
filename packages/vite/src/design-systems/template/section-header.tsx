@@ -17,7 +17,7 @@ export default function SectionHeader({
   children,
 }: SectionHeaderProps): ReactElement {
   return (
-    <header className={classes['root']} role="sectionheader">
+    <header className={classes['section-header']} role="sectionheader">
       {children}
     </header>
   );

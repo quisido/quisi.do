@@ -26,12 +26,12 @@ export default function SeparatorWidget({
 }: SeparatorWidgetProps): ReactElement {
   return (
     <hr
-      className={classes['root']}
       aria-disabled={disabled}
       aria-orientation={orientation}
       aria-valuemax={max}
       aria-valuemin={min}
       aria-valuenow={value}
+      className={classes['separator-widget']}
       role="separator"
     />
   );

@@ -6,15 +6,9 @@ import classes from './tab-list.module.scss';
  *   A tab list...
  * @see {@link https://w3c.github.io/aria/#tablist | WAI-ARIA `tablist` role}
  */
-export default function TabList({
-  children,
-  label,
-}: TabListProps): ReactElement {
-  /**
-   *   Focus MUST be managed on this container role.
-   */
+export default function TabList({ children }: TabListProps): ReactElement {
   return (
-    <div className={classes['root']} aria-label={label} role="tablist">
+    <div className={classes['tab-list']} role="tablist">
       {children}
     </div>
   );

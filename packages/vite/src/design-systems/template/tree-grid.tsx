@@ -20,7 +20,7 @@ export default function TreeGrid({
   rows,
 }: TreeGridProps): ReactElement {
   return (
-    <table className={classes['root']} role="treegrid">
+    <table className={classes['tree-grid']} role="treegrid">
       <caption>{caption}</caption>
       {rows.map(
         ({ cells, key: rowKey }: TreeGridRow): ReactElement => (

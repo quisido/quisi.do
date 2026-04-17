@@ -18,16 +18,10 @@ import classes from './menu.module.scss';
  */
 export default function Menu({
   items,
-  label,
   orientation = 'vertical',
 }: MenuProps): ReactElement {
   return (
-    <ul
-      className={classes['root']}
-      aria-label={label}
-      aria-orientation={orientation}
-      role="menu"
-    >
+    <ul aria-orientation={orientation} className={classes['menu']} role="menu">
       {items.map(
         ({ children, disabled, items, key }: MenuItem): ReactElement => (
           <li

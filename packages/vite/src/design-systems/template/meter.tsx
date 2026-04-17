@@ -27,11 +27,11 @@ export default function Meter({
 
   return (
     <meter
-      className={classes['root']}
       aria-labelledby={labelledBy}
       aria-valuemin={min}
       aria-valuemax={max}
       aria-valuenow={value}
+      className={classes['meter']}
       high={high}
       low={low}
       max={max}
