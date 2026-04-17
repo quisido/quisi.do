@@ -10,7 +10,7 @@ export default function testSectionFooter(
     it('should be a section footer', (): void => {
       const { getByRole } = render(<SectionFooter>Test content</SectionFooter>);
       const sectionFooter: HTMLElement = getByRole('sectionfooter');
-      expect(sectionFooter.textContent).toBe('Test content');
+      expect(sectionFooter).toHaveTextContent('Test content');
     });
   });
 }

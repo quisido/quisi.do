@@ -6,6 +6,7 @@ export default function inner(text: string): MatcherFunction {
   const hasTextContent = (element: Element): boolean =>
     element.textContent === text;
   const hasNoTextContent = negate(hasTextContent);
+
   return (_content: string, element: Element | null | undefined): boolean => {
     if (!isElement(element) || !hasTextContent(element)) {
       return false;

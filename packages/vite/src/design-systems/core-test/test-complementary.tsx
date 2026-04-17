@@ -11,7 +11,7 @@ export default function testComplementary(
       const { getByRole } = render(<Complementary>Test content</Complementary>);
 
       const complementary: HTMLElement = getByRole('complementary');
-      expect(complementary.textContent).toBe('Test content');
+      expect(complementary).toHaveTextContent('Test content');
     });
   });
 }

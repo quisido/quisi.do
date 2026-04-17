@@ -1,6 +1,6 @@
 import render from './render.js';
 import type { ComponentType } from 'react';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { MarqueeProps } from '../core/marquee-props.js';
 
 export default function testMarquee(
@@ -8,11 +8,10 @@ export default function testMarquee(
 ): void {
   describe('Marquee', (): void => {
     it('should be a marquee', (): void => {
-      const { getByName } = render(
-        <Marquee label="Test marquee">Test content</Marquee>,
-      );
+      const { getByRole } = render(<Marquee>Test content</Marquee>);
 
-      getByName('marquee', 'Test marquee');
+      const marquee: HTMLElement = getByRole('marquee');
+      expect(marquee).toHaveTextContent('Test content');
     });
   });
 }

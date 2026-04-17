@@ -29,7 +29,7 @@ export default function testApplication(
       );
 
       const banner: HTMLElement = getByRole('banner');
-      expect(banner.textContent).toBe('Test banner');
+      expect(banner).toHaveTextContent('Test banner');
     });
 
     it('should not contain more than 1 banner', (): void => {
@@ -50,7 +50,7 @@ export default function testApplication(
       );
 
       const contentInfo: HTMLElement = getByRole('contentinfo');
-      expect(contentInfo.textContent).toBe('Test content info');
+      expect(contentInfo).toHaveTextContent('Test content info');
     });
 
     it('should not contain more than 1 content info', (): void => {

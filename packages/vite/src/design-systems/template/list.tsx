@@ -21,9 +21,9 @@ export default function List({
 
   return (
     <Component
-      className={classes['root']}
       aria-label={label}
       aria-labelledby={labelledBy}
+      className={classes['list']}
     >
       {items.map(
         ({ children, key }: ListItem): ReactElement => (

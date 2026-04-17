@@ -22,7 +22,7 @@ export default function testTerm(
       );
 
       const term: HTMLElement = getByRole('term');
-      expect(term.textContent).toBe('Test term');
+      expect(term).toHaveTextContent('Test term');
     });
   });
 }

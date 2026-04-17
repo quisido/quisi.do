@@ -27,7 +27,7 @@ export default function testFigure(Figure: ComponentType<FigureProps>): void {
 
         const figure: HTMLElement = getByName('figure', 'Test caption');
         const figureCaption: HTMLElement = getFigureCaption(figure);
-        expect(figureCaption.textContent).toBe('Test caption');
+        expect(figureCaption).toHaveTextContent('Test caption');
       });
 
       describe('position', (): void => {

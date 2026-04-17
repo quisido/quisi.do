@@ -21,7 +21,7 @@ export default function testContentInfo(
       );
 
       const contentInfo: HTMLElement = getByRole('contentinfo');
-      expect(contentInfo.textContent).toBe('Test content');
+      expect(contentInfo).toHaveTextContent('Test content');
     });
   });
 }

@@ -8,5 +8,5 @@ import classes from './time.module.scss';
  * @see {@link https://w3c.github.io/aria/#time | WAI-ARIA `time` role}
  */
 export default function Time({ children }: TimeProps): ReactElement {
-  return <time className={classes['root']}>{children}</time>;
+  return <time className={classes['time']}>{children}</time>;
 }

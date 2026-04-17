@@ -11,7 +11,7 @@ export default function Paragraph({
   id,
 }: ParagraphProps): ReactElement {
   return (
-    <p className={classes['root']} id={id}>
+    <p className={classes['paragraph']} id={id}>
       {children}
     </p>
   );

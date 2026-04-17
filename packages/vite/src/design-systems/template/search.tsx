@@ -11,13 +11,13 @@ import classes from './search.module.scss';
  */
 export default function Search({ children }: SearchProps): ReactElement {
   /**
-   * `jsdom` does not support the <search> element:
-   *   The tag <search> is unrecognized in this browser. If you meant to render a
-   * React component, start its name with an uppercase letter.
+   *   Note: `jsdom` does not support the <search> element: The tag <search> is
+   * unrecognized in this browser. If you meant to render a React component,
+   * start its name with an uppercase letter.
    */
   return (
-    <div className={classes['root']} role="search">
+    <search className={classes['search']} role="search">
       {children}
-    </div>
+    </search>
   );
 }

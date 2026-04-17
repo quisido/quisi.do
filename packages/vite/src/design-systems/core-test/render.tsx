@@ -54,9 +54,9 @@ export default function render(node: ReactNode): RenderTest {
     expectToHaveThrown(message: RegExp | string): void {
       const element: HTMLElement = getByTestId('error-boundary-error-message');
       if (typeof message === 'string') {
-        expect(element.textContent).toBe(message);
+        expect(element).toHaveTextContent(message);
       } else {
-        expect(element.textContent).toMatch(message);
+        expect(element).toHaveTextContent(message);
       }
     },
 

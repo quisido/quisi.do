@@ -12,14 +12,12 @@ import classes from './menu-bar.module.scss';
  */
 export default function MenuBar({
   children,
-  label,
   orientation = 'horizontal',
 }: MenuBarProps): ReactElement {
   return (
     <div
-      className={classes['root']}
-      aria-label={label}
       aria-orientation={orientation}
+      className={classes['menu-bar']}
       role="menubar"
     >
       {children}

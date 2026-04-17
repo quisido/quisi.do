@@ -28,8 +28,8 @@ export default function Region({
 
   return (
     <section
-      className={classes['root']}
       aria-labelledby={labelledBy}
+      className={classes['region']}
       role="region"
     >
       <Heading id={headingId} level={headingLevel}>

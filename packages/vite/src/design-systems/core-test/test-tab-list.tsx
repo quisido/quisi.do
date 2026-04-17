@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { TabListProps } from '../core/tab-list-props.js';
 import type { TabProps } from '../core/tab-props.js';
 import render from './render.js';
@@ -14,13 +14,13 @@ export default function testTabList(
 ): void {
   describe('TabList', (): void => {
     it('should be a tab list', (): void => {
-      const { getByName } = render(
-        <TabList label="Test tab list">
+      const { getByRole } = render(
+        <TabList>
           <Tab>Test tab</Tab>
         </TabList>,
       );
 
-      getByName('tablist', 'Test tab list');
+      expect(getByRole('tablist')).toHaveTextContent('Test tab');
     });
   });
 

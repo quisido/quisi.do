@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import type { ChangeEvent, InputHTMLAttributes, ReactElement } from 'react';
 import type { TextBoxProps } from '../core/text-box-props.js';
 import classes from './text-box.module.scss';
 
@@ -19,17 +19,49 @@ In most user agent implementations, the default behavior of the ENTER or RETURN 
 export default function TextBox({
   label,
   multiline = false,
+  onChange,
+  value,
 }: TextBoxProps): ReactElement {
-  let control: ReactElement = <input type="text" />;
+  const [Component, props] = ((): [
+    'input' | 'textarea',
+    InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>,
+  ] => {
+    if (multiline) {
+      return [
+        'textarea',
+        {
+          children: value,
+          className: classes['textarea'],
+          value,
+        },
+      ];
+    }
 
-  if (multiline) {
-    control = <textarea />;
-  }
+    return [
+      'input',
+      {
+        className: classes['input'],
+        type: 'text',
+        value,
+      },
+    ];
+  })();
+
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ): void => {
+    onChange(event.currentTarget.value);
+  };
 
   return (
-    <label className={classes['root']}>
-      {label}
-      {control}
+    <label className={classes['text-box']}>
+      <span className={classes['label']}>{label}</span>
+      <Component
+        aria-multiline={multiline}
+        onChange={handleChange}
+        role="textbox"
+        {...props}
+      />
     </label>
   );
 }

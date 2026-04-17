@@ -18,7 +18,11 @@ export default function Mark({
   describedBy,
 }: MarkProps): ReactElement {
   return (
-    <mark className={classes['root']} aria-describedby={describedBy} role="mark">
+    <mark
+      aria-describedby={describedBy}
+      className={classes['mark']}
+      role="mark"
+    >
       {children}
     </mark>
   );

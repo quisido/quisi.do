@@ -26,7 +26,7 @@ const FigureCaption = ({
   }
 
   return (
-    <figcaption role="caption">
+    <figcaption className={classes['caption']} role="caption">
       {name !== undefined && <div id={nameId}>{name}</div>}
       {description !== undefined && <div id={descriptionId}>{description}</div>}
     </figcaption>
@@ -60,11 +60,11 @@ export default function Figure({
 
   return (
     <figure
-      className={classes['root']}
       aria-describedby={describedBy}
       aria-details={details}
       aria-label={label}
       aria-labelledby={labelledBy}
+      className={classes['figure']}
       id={id}
     >
       {captionPosition === 'start' && (

@@ -6,12 +6,9 @@ import classes from './tab-panel.module.scss';
  *   A tab panel...
  * @see {@link https://w3c.github.io/aria/#tabpanel | WAI-ARIA `tabpanel` role}
  */
-export default function TabPanel({
-  children,
-  label,
-}: TabPanelProps): ReactElement {
+export default function TabPanel({ children }: TabPanelProps): ReactElement {
   return (
-    <div className={classes['root']} aria-label={label} role="tabpanel">
+    <div className={classes['tab-panel']} role="tabpanel">
       {children}
     </div>
   );

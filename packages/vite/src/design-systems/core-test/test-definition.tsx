@@ -13,9 +13,9 @@ export default function testDefinition(
       );
 
       const definition: HTMLElement = getByRole('definition');
-      expect(definition.textContent).toBe('Definition content');
+      expect(definition).toHaveTextContent('Definition content');
     });
 
-    //  *   DO NOT use interactive elements such as form controls within a definition.
+    // TODO: DO NOT use interactive elements such as form controls within a definition.
   });
 }

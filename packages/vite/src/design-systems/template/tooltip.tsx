@@ -35,7 +35,7 @@ export default function Tooltip({
   const id: string = useTooltip(htmlFor);
 
   return (
-    <span className={classes['root']} id={id} role="tooltip">
+    <span className={classes['tooltip']} id={id} role="tooltip">
       {children}
     </span>
   );

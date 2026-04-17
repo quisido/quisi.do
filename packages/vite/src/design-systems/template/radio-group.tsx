@@ -45,11 +45,11 @@ export default function RadioGroup<
 
   return (
     <div
-      className={classes['root']}
       aria-labelledby={labelledBy}
       aria-owns={owns}
       aria-readonly={readOnly}
       aria-required={required}
+      className={classes['radio-group']}
       id={id}
       role="radiogroup"
     >

@@ -20,7 +20,7 @@ export default function Suggestion({
   insertion,
 }: SuggestionProps): ReactElement {
   return (
-    <span className={classes['root']} role="suggestion">
+    <span className={classes['suggestion']} role="suggestion">
       {insertion && <ins role="insertion">{insertion}</ins>}
       {deletion && <del role="deletion">{deletion}</del>}
     </span>

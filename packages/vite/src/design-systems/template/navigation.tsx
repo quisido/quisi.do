@@ -12,7 +12,7 @@ export default function Navigation({
   label,
 }: NavigationProps): ReactElement {
   return (
-    <nav className={classes['root']} aria-label={label}>
+    <nav aria-label={label} className={classes['navigation']}>
       {children}
     </nav>
   );

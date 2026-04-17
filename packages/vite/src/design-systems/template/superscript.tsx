@@ -14,7 +14,7 @@ export default function Superscript({
   children,
 }: SuperscriptProps): ReactElement {
   return (
-    <sup className={classes['root']} role="superscript">
+    <sup className={classes['superscript']} role="superscript">
       {children}
     </sup>
   );
