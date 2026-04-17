@@ -5,4 +5,19 @@
 
 .checkbox {
   display: inline;
+
+  &:has(> .input:focus-visible) {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
+}
+
+.input {
+  display: inline-block;
+}
+
+.label {
+  display: inline;
 }

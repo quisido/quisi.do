@@ -346,13 +346,16 @@ export default function Combobox({
 
   return (
     <div aria-haspopup="listbox" className={classes['combobox']} ref={rootRef}>
-      <label htmlFor={inputId}>{label}</label>
+      <label className={classes['label']} htmlFor={inputId}>
+        {label}
+      </label>
       <div>
         <input
           aria-activedescendant={activeDescendant}
           aria-autocomplete="both"
           aria-controls={listBoxId}
           aria-expanded={listboxVisible}
+          className={classes['input']}
           disabled={disabled}
           id={inputId}
           onBlur={onInputBlur}
@@ -371,6 +374,7 @@ export default function Combobox({
           aria-expanded={listboxVisible}
           aria-label={`Show ${label} options`}
           disabled={!interactive || filteredOptions.length === 0}
+          className={classes['button']}
           onClick={onButtonClick}
           onMouseDown={onButtonMouseDown}
           tabIndex={-1}
@@ -393,38 +397,38 @@ export default function Combobox({
           </svg>
         </button>
       </div>
-      <div>
-        <ul
-          aria-disabled={disabled}
-          aria-readonly={readOnly}
-          hidden={!listboxVisible}
-          id={listBoxId}
-          role="listbox"
-        >
-          {filteredOptions.map(
-            (option: string, index: number): ReactElement => (
-              <li
-                aria-selected={index === activeOptionIndex}
-                id={`${optionIdPrefix}-${index}`}
-                key={option}
-                onClick={(): void => {
-                  onOptionClick(option);
-                }}
-                onMouseDown={onOptionMouseDown}
-                onPointerEnter={(): void => {
-                  setActiveOptionIndex(index);
-                }}
-                ref={(node: HTMLLIElement | null): void => {
-                  optionRefs.current[index] = node;
-                }}
-                role="option"
-              >
-                {option}
-              </li>
-            ),
-          )}
-        </ul>
-      </div>
+      <ul
+        aria-disabled={disabled}
+        aria-readonly={readOnly}
+        className={classes['listbox']}
+        hidden={!listboxVisible}
+        id={listBoxId}
+        role="listbox"
+      >
+        {filteredOptions.map(
+          (option: string, index: number): ReactElement => (
+            <li
+              aria-selected={index === activeOptionIndex}
+              className={classes['option']}
+              id={`${optionIdPrefix}-${index}`}
+              key={option}
+              onClick={(): void => {
+                onOptionClick(option);
+              }}
+              onMouseDown={onOptionMouseDown}
+              onPointerEnter={(): void => {
+                setActiveOptionIndex(index);
+              }}
+              ref={(node: HTMLLIElement | null): void => {
+                optionRefs.current[index] = node;
+              }}
+              role="option"
+            >
+              {option}
+            </li>
+          ),
+        )}
+      </ul>
     </div>
   );
 }

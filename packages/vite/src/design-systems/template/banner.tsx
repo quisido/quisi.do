@@ -11,11 +11,11 @@ import classes from './banner.module.scss';
  * usually appears at the top of the page and typically spans the full width.
  * @see {@link https://w3c.github.io/aria/#banner | WAI-ARIA `banner` role}
  */
-export default function Banner({ children, label }: BannerProps): ReactElement {
+export default function Banner({ children }: BannerProps): ReactElement {
   const id: string = useBanner();
 
   return (
-    <header className={classes['banner']} aria-label={label} id={id}>
+    <header className={classes['banner']} id={id}>
       {children}
     </header>
   );

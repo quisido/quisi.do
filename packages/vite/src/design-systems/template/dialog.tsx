@@ -64,7 +64,11 @@ export default function Dialog({
           {children}
           <Paragraph id={descriptionId}>{description}</Paragraph>
         </div>
-        <button onClick={handleDismiss} type="button">
+        <button
+          className={classes['close-button']}
+          onClick={handleDismiss}
+          type="button"
+        >
           Close
         </button>
       </FocusScope>

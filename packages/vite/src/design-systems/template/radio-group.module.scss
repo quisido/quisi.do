@@ -7,3 +7,28 @@
   display: flex;
   flex-direction: column;
 }
+
+.input {
+  &[checked] {
+    // Style the checked state.
+  }
+
+  &:not([checked]) {
+    // Style the unchecked state.
+  }
+}
+
+.radio-group-label {
+  display: block;
+}
+
+.radio-label {
+  display: block;
+
+  &:has(> .input:focus-visible) {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
+}

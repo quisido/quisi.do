@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { BannerProps } from '../core/banner-props.js';
 import type { DocumentProps } from '../core/document-props.js';
 import render from './render.js';
@@ -14,13 +14,13 @@ export default function testBanner(
 ): void {
   describe('Banner', (): void => {
     it('should be a banner', (): void => {
-      const { getByName } = render(
+      const { getByRole } = render(
         <Document>
-          <Banner label="Test banner">Test content</Banner>
+          <Banner>Test content</Banner>
         </Document>,
       );
 
-      getByName('banner', 'Test banner');
+      expect(getByRole('banner')).toHaveTextContent('Test content');
     });
   });
 }

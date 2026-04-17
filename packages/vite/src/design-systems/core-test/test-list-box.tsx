@@ -1,18 +1,29 @@
 import render from './render.js';
 import type { ComponentType } from 'react';
-import { describe, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import type { ListBoxProps } from '../core/list-box-props.js';
+import userEvent from '@testing-library/user-event';
 
 export default function testListBox(
   ListBox: ComponentType<ListBoxProps>,
 ): void {
+  const handleTestChange = vi.fn();
+
   describe('ListBox', (): void => {
-    it('should be a list box', (): void => {
+    it('should emit a change event', async (): Promise<void> => {
       const { getByName } = render(
-        <ListBox label="Test list box" options={[]} />,
+        <ListBox
+          label="Change handler"
+          onChange={handleTestChange}
+          options={[{ children: 'First', value: 1 }]}
+          values={new Set()}
+        />,
       );
 
-      getByName('listbox', 'Test list box');
+      const option: HTMLElement = getByName('option', 'First');
+      await userEvent.click(option);
+
+      expect(handleTestChange).toHaveBeenCalledExactlyOnceWith(new Set([1]));
     });
 
     /**

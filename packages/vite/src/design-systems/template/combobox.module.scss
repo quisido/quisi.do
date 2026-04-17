@@ -7,10 +7,41 @@
   display: inline-block;
 }
 
+.button {
+  display: inline-block;
+}
+
 .input {
   background-color: transparent;
   border-width: 0;
   height: 1px;
   outline-width: 0;
   width: 1px;
+}
+
+.label {
+  display: inline;
+}
+
+.listbox {
+  display: flex;
+  flex-direction: column;
+
+  &:focus-visible {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
+}
+
+.option {
+  display: block;
+
+  &:focus-visible {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
 }

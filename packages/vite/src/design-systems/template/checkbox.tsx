@@ -44,6 +44,7 @@ export default function Checkbox({
         aria-readonly={readOnly}
         aria-required={required}
         checked={checked}
+        className={classes['input']}
         disabled={disabled}
         onChange={handleChange}
         readOnly={readOnly}
@@ -51,7 +52,7 @@ export default function Checkbox({
         ref={ref}
         type="checkbox"
       />
-      <span>{label}</span>
+      <span className={classes['label']}>{label}</span>
     </label>
   );
 }

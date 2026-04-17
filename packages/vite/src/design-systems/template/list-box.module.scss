@@ -7,3 +7,35 @@
   display: flex;
   flex-direction: column;
 }
+
+.label {
+  display: block;
+}
+
+.option {
+  display: block;
+
+  &:focus-visible {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
+}
+
+.select {
+  &:focus-visible {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
+
+  &:not([selected]) {
+    // Style for unselected options
+  }
+
+  &[selected] {
+    // Style for selected options
+  }
+}

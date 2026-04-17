@@ -17,22 +17,39 @@ import classes from './menu.module.scss';
  * @see {@link https://w3c.github.io/aria/#menu | WAI-ARIA `menu` role}
  */
 export default function Menu({
-  items,
+  items: menuItems,
   orientation = 'vertical',
 }: MenuProps): ReactElement {
   return (
     <ul aria-orientation={orientation} className={classes['menu']} role="menu">
-      {items.map(
-        ({ children, disabled, items, key }: MenuItem): ReactElement => (
-          <li
-            aria-disabled={disabled}
-            aria-haspopup={items !== undefined}
-            key={key}
-            role="menuitem"
-          >
-            {children}
-          </li>
-        ),
+      {menuItems.map(
+        ({
+          children,
+          disabled,
+          items: menuItemItems,
+          key,
+        }: MenuItem): ReactElement => {
+          const tabIndex = ((): number | undefined => {
+            if (disabled) {
+              return;
+            }
+
+            return 0;
+          })();
+
+          return (
+            <li
+              aria-disabled={disabled}
+              aria-haspopup={menuItemItems !== undefined}
+              className={classes['menu-item']}
+              key={key}
+              role="menuitem"
+              tabIndex={tabIndex}
+            >
+              {children}
+            </li>
+          );
+        },
       )}
     </ul>
   );
