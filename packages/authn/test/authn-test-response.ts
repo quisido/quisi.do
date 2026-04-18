@@ -1,6 +1,6 @@
 import type { ErrorCode } from '@quisido/authn-shared';
 import { type TestResponse } from '@quisido/worker-test';
-import { expectStringMatching } from 'cloudflare-test-utils';
+import { expectStringMatching } from './cloudflare-mocks.js';
 import { StatusCode } from 'cloudflare-utils';
 
 export default class AuthnTestResponse implements TestResponse {

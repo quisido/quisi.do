@@ -1,7 +1,13 @@
 /* eslint-disable max-classes-per-file */
 import { FetchHandler } from '@quisido/worker';
-import { TestAnalyticsEngineDataset } from 'cloudflare-test-utils';
-import { describe, it } from 'vitest';
+import { describe, expect, it, type Mock, vi } from 'vitest';
+
+class TestAnalyticsEngineDataset implements AnalyticsEngineDataset {
+  public readonly writeDataPoint: Mock<
+    (event?: AnalyticsEngineDataPoint) => void
+  > = vi.fn<(event?: AnalyticsEngineDataPoint) => void>();
+}
+
 import { TestExportedHandler } from './index.js';
 
 describe('TestExportedHandler', (): void => {

@@ -1,4 +1,4 @@
-import { TestD1Database } from 'cloudflare-test-utils';
+import { TestD1Database } from './cloudflare-mocks.js';
 import {
   INSERT_INTO_EMAILS_QUERY,
   INSERT_INTO_OAUTH_QUERY,

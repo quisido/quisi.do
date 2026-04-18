@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { TEST_EXECUTION_CONTEXT } from 'cloudflare-test-utils';
+import { TEST_EXECUTION_CONTEXT } from '../test/cloudflare-mocks.js';
 import { type IncomingRequest, StatusCode } from 'cloudflare-utils';
 import { assert, describe, expect, it, vi } from 'vitest';
 import { TestExportedHandler } from '../test/test-exported-handler.js';

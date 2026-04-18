@@ -2,7 +2,7 @@
 import {
   TEST_CONSOLE_ERROR,
   TEST_EXECUTION_CONTEXT,
-} from 'cloudflare-test-utils';
+} from '../test/cloudflare-mocks.js';
 import { assert, describe, expect, it } from 'vitest';
 import asyncSetTimeout from '../test/async-set-timeout.js';
 import { TestExportedHandler } from '../test/test-exported-handler.js';

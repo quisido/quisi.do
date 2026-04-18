@@ -1,7 +1,7 @@
 import {
   TEST_EXECUTION_CONTEXT,
   TestAnalyticsEngineDataset,
-} from 'cloudflare-test-utils';
+} from '../test/cloudflare-mocks.js';
 import { assert, describe, expect, it } from 'vitest';
 import { TestExportedHandler } from '../test/test-exported-handler.js';
 import { FetchHandler } from './index.js';

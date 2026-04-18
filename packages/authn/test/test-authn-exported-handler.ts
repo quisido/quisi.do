@@ -7,7 +7,7 @@ import {
   TestD1Database,
   TestKVNamespace,
   TestR2Bucket,
-} from 'cloudflare-test-utils';
+} from './cloudflare-mocks.js';
 import AuthnFetchHandler from '../src/authn-fetch-handler.js';
 import {
   INSERT_INTO_EMAILS_QUERY,
