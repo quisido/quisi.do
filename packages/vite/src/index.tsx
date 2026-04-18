@@ -1,7 +1,6 @@
 import { StrictMode } from 'react';
 import Locale from './constants/locale.js';
 import { ROOT } from './constants/root.js';
-import './i18n.js';
 import { ContextProviders } from './features/context-providers.jsx';
 import Effects from './features/effects.jsx';
 import Footer from './features/footer.jsx';

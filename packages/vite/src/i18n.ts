@@ -1,8 +1,6 @@
-import i18next from 'i18next';
+import i18next, { type i18n } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Locale from './constants/locale.js';
-
-const FALLBACK_LOCALE: Locale = Locale.English;
 
 const SUPPORTED_LOCALES: readonly Locale[] = [
   Locale.Arabic,
@@ -19,20 +17,21 @@ const SUPPORTED_LOCALES: readonly Locale[] = [
  *   translations at runtime. Populating these resources (and switching
  *   components to consume react-i18next) is left for a follow-up commit.
  */
-await i18next.use(initReactI18next).init({
-  defaultNS: 'translation',
-  fallbackLng: FALLBACK_LOCALE,
-  interpolation: {
-    escapeValue: false,
-  },
-  lng: FALLBACK_LOCALE,
-  resources: Object.fromEntries(
-    SUPPORTED_LOCALES.map((locale: Locale) => [
-      locale,
-      { translation: {} },
-    ]),
-  ),
-  supportedLngs: SUPPORTED_LOCALES,
-});
+export default function initI18next(locale: Locale): i18n {
+  if (!i18next.isInitialized) {
+    void i18next.use(initReactI18next).init({
+      defaultNS: 'translation',
+      fallbackLng: Locale.English,
+      interpolation: {
+        escapeValue: false,
+      },
+      lng: locale,
+      resources: Object.fromEntries(
+        SUPPORTED_LOCALES.map((l: Locale) => [l, { translation: {} }]),
+      ),
+      supportedLngs: SUPPORTED_LOCALES,
+    });
+  }
 
-export default i18next;
+  return i18next;
+}
