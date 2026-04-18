@@ -25,8 +25,8 @@ Do not review or comment on code that was not changed in this PR.
 ### Confident Fixes
 
 If you identify an issue and are **confident** the fix is correct — for example,
-a clear bug, a typo, a missing null check, or a style violation defined in the
-project's coding standards — **edit the file directly** to apply the fix.
+a clear bug, a typo, a missing `readonly` modifier, or a style violation defined
+in the project's coding standards — **edit the file directly** to apply the fix.
 
 ### Unconfident Concerns
 

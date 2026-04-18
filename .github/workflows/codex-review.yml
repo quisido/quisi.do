@@ -116,10 +116,18 @@ jobs:
 
       - name: Apply fixes and push
         run: |
+          if ! git apply --check codex-fixes.patch; then
+            echo "::warning::Codex patch does not apply cleanly; skipping."
+            exit 0
+          fi
           git apply codex-fixes.patch
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
+          if git diff --cached --quiet; then
+            echo "No effective changes after applying patch; skipping commit."
+            exit 0
+          fi
           git commit -m "fix: apply Codex code review suggestions"
           git push
 
