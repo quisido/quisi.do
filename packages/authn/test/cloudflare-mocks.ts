@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file, max-lines */
 /// <reference types="@cloudflare/workers-types" />
 import { expect, type Mock, vi } from 'vitest';
 
@@ -6,6 +7,7 @@ export const EXPECT_ANY_HEADERS: Headers = expect.any(Headers) as Headers;
 export const EXPECT_ANY_NUMBER: number = expect.any(Number) as number;
 export const EXPECT_ANY_STRING: string = expect.any(String) as string;
 
+// eslint-disable-next-line func-style
 export function expectStringMatching(expected: RegExp | string): string {
   return expect.stringMatching(expected) as string;
 }
@@ -23,6 +25,7 @@ export class TestAnalyticsEngineDataset implements AnalyticsEngineDataset {
   > = vi.fn<(event?: AnalyticsEngineDataPoint) => void>();
 }
 
+// eslint-disable-next-line func-style
 function createNotImplementedThrower(methodName: string): () => never {
   return (): never => {
     throw new Error(`\`${methodName}\` is not implemented.`);
@@ -187,16 +190,17 @@ ${query}`);
 // KV Namespace mock
 const TEST_KV_PUT = (): Promise<void> => Promise.resolve();
 
-export class TestKVNamespace<Key extends string = string>
-  implements KVNamespace<Key>
-{
-  readonly #put = vi.fn<
-    (
-      key: Key,
-      value: string | ArrayBuffer | ArrayBufferView | ReadableStream,
-      options?: KVNamespacePutOptions,
-    ) => Promise<void>
-  >(TEST_KV_PUT);
+export class TestKVNamespace<
+  Key extends string = string,
+> implements KVNamespace<Key> {
+  readonly #put =
+    vi.fn<
+      (
+        key: Key,
+        value: string | ArrayBuffer | ArrayBufferView | ReadableStream,
+        options?: KVNamespacePutOptions,
+      ) => Promise<void>
+    >(TEST_KV_PUT);
 
   readonly #record: Partial<Record<string, string>>;
 

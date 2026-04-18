@@ -1,14 +1,13 @@
 /* eslint-disable max-classes-per-file */
 import { FetchHandler } from '@quisido/worker';
-import { describe, expect, it, type Mock, vi } from 'vitest';
+import { describe, it, type Mock, vi } from 'vitest';
+import { TestExportedHandler } from './index.js';
 
 class TestAnalyticsEngineDataset implements AnalyticsEngineDataset {
   public readonly writeDataPoint: Mock<
     (event?: AnalyticsEngineDataPoint) => void
   > = vi.fn<(event?: AnalyticsEngineDataPoint) => void>();
 }
-
-import { TestExportedHandler } from './index.js';
 
 describe('TestExportedHandler', (): void => {
   describe('expectMetric', (): void => {
