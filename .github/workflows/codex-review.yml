@@ -1,0 +1,151 @@
+name: Codex Code Review
+
+on:
+  pull_request:
+    types: [opened]
+
+# Top-level permissions are restrictive; each job requests only what it needs.
+permissions: {}
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Job 1 — Run Codex to review the PR diff.
+  #
+  # Codex runs with the default `drop-sudo` safety strategy and
+  # `workspace-write` sandbox. It may edit files for confident fixes and will
+  # emit unconfident concerns via its final-message output.
+  #
+  # Security: this job only has read access to the repository. Write operations
+  # (pushing commits, posting comments) happen in dedicated downstream jobs
+  # that run on a fresh runner.
+  # ---------------------------------------------------------------------------
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      final_message: ${{ steps.codex.outputs.final-message }}
+      has_changes: ${{ steps.detect-changes.outputs.has_changes }}
+    steps:
+      - name: Checkout merge commit
+        uses: actions/checkout@v6
+        with:
+          ref: refs/pull/${{ github.event.pull_request.number }}/merge
+
+      - name: Fetch base and head refs
+        env:
+          PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          git fetch --no-tags origin \
+            "$PR_BASE_REF" \
+            "+refs/pull/$PR_NUMBER/head"
+
+      - name: Prepare prompt
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          REPO: ${{ github.repository }}
+        run: |
+          {
+            cat .github/codex-review-prompt.md
+            printf '\n---\n\n## Pull Request Context\n\n'
+            printf -- '- **Repository**: `%s`\n' "$REPO"
+            printf -- '- **PR**: #%s — %s\n' "$PR_NUMBER" "$PR_TITLE"
+            printf -- '- **Base SHA**: `%s`\n' "$PR_BASE_SHA"
+            printf -- '- **Head SHA**: `%s`\n' "$PR_HEAD_SHA"
+            printf '\nTo view only the changes introduced by this PR:\n\n'
+            printf '```sh\ngit diff %s...%s\n```\n' "$PR_BASE_SHA" "$PR_HEAD_SHA"
+          } > .codex-review-prompt-full.md
+
+      - name: Run Codex
+        id: codex
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt-file: .codex-review-prompt-full.md
+
+      # After Codex: detect whether it applied any file edits.
+      # The `drop-sudo` safety strategy limits what Codex can tamper with,
+      # and these steps use only simple shell built-ins.
+      - name: Detect file changes
+        id: detect-changes
+        run: |
+          if git diff --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+            git diff > /tmp/codex-fixes.patch
+          fi
+
+      - name: Upload patch
+        if: steps.detect-changes.outputs.has_changes == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: codex-fixes
+          path: /tmp/codex-fixes.patch
+          retention-days: 1
+
+  # ---------------------------------------------------------------------------
+  # Job 2 — Apply confident fixes to the PR branch.
+  #
+  # Runs on a fresh runner so it is not affected by any runner-state mutations
+  # from the Codex sandbox. Only triggers for same-repo PRs (fork PRs cannot
+  # be pushed to with GITHUB_TOKEN).
+  # ---------------------------------------------------------------------------
+  apply-fixes:
+    needs: review
+    if: >
+      needs.review.outputs.has_changes == 'true' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Download patch
+        uses: actions/download-artifact@v4
+        with:
+          name: codex-fixes
+
+      - name: Apply fixes and push
+        run: |
+          git apply codex-fixes.patch
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "fix: apply Codex code review suggestions"
+          git push
+
+  # ---------------------------------------------------------------------------
+  # Job 3 — Post the review summary as a PR comment.
+  #
+  # Runs on a fresh runner. Uses `actions/github-script` to comment so that
+  # the Codex output is never interpolated into a shell command.
+  # ---------------------------------------------------------------------------
+  post-review:
+    needs: review
+    if: needs.review.outputs.final_message != ''
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Post review comment
+        uses: actions/github-script@v7
+        env:
+          CODEX_FINAL_MESSAGE: ${{ needs.review.outputs.final_message }}
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: process.env.CODEX_FINAL_MESSAGE,
+            });
