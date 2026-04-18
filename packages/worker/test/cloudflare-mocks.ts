@@ -186,17 +186,11 @@ export class TestD1PreparedStatement implements D1PreparedStatement {
 }
 
 // D1 Database mock
-interface D1Result {
-  readonly error?: Error | undefined;
-  readonly lastRowId?: number | undefined;
-  readonly results?: readonly unknown[] | undefined;
-}
-
 export class TestD1Database implements D1Database {
   readonly #preparedStatements = new Map<string, TestD1PreparedStatement>();
-  readonly #queries = new Map<string, D1Result>();
+  readonly #queries = new Map<string, D1StatementOptions>();
 
-  public constructor(queries: Record<string, D1Result> = {}) {
+  public constructor(queries: Record<string, D1StatementOptions> = {}) {
     this.prepare = this.prepare.bind(this);
 
     for (const [query, result] of Object.entries(queries)) {
@@ -235,7 +229,7 @@ ${query}`);
   };
 
   public prepare(query: string): D1PreparedStatement {
-    const result: D1Result | undefined = this.#queries.get(query);
+    const result: D1StatementOptions | undefined = this.#queries.get(query);
     if (typeof result === 'undefined') {
       throw new Error(`Expected query to be mocked:
 ${query}`);
