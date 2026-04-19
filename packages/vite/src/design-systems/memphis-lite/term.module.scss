@@ -1,5 +1,0 @@
-@use './theme';
-
-.root {
-  @include theme.inline-accent(theme.$paper-alt, theme.$teal);
-}

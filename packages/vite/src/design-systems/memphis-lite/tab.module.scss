@@ -1,5 +1,0 @@
-@use './theme';
-
-.root {
-  @include theme.button-like(theme.$yellow, theme.$pink);
-}

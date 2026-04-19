@@ -12,7 +12,7 @@ import {
   Navigation,
   Paragraph,
   Region,
-} from './memphis-lite/index.js';
+} from './template/index.js';
 
 export default function DesignSystemDemo(): ReactElement {
   const [checked, setChecked] = useState(false);

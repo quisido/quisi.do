@@ -27,7 +27,9 @@ export default function List({
     >
       {items.map(
         ({ children, key }: ListItem): ReactElement => (
-          <li key={key}>{children}</li>
+          <li className={classes['list-item']} key={key}>
+            {children}
+          </li>
         ),
       )}
     </Component>
