@@ -15,15 +15,15 @@ export default function testListBox(
         <ListBox
           label="Change handler"
           onChange={handleTestChange}
-          options={[{ children: 'First', value: 1 }]}
+          options={[{ children: 'First', value: '1' }]}
           values={new Set()}
         />,
       );
 
-      const option: HTMLElement = getByName('option', 'First');
-      await userEvent.click(option);
+      const listBox: HTMLElement = getByName('listbox', 'Change handler');
+      await userEvent.selectOptions(listBox, ['1']);
 
-      expect(handleTestChange).toHaveBeenCalledExactlyOnceWith(new Set([1]));
+      expect(handleTestChange).toHaveBeenCalledExactlyOnceWith(new Set(['1']));
     });
 
     /**
