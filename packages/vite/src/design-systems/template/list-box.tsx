@@ -39,7 +39,6 @@ export default function ListBox({
       aria-labelledby={labelledBy}
       aria-orientation={orientation}
       className={classes['list-box']}
-      role="listbox"
     >
       {label && (
         <label className={classes['label']} htmlFor={selectId}>
@@ -51,6 +50,8 @@ export default function ListBox({
         id={selectId}
         multiple
         onChange={handleChange}
+        role="listbox"
+        value={[...values]}
       >
         {options.map(
           ({ children, value }: ListBoxOption): ReactElement => (

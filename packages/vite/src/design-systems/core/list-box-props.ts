@@ -3,17 +3,17 @@ import type { LabelProps } from './label-props.js';
 
 export interface ListBoxOption {
   readonly children: ReactNode;
-  readonly value: number | string;
+  readonly value: string;
 }
 
 export type ListBoxProps = LabelProps & Props;
 
 interface Props {
-  readonly onChange: (values: ReadonlySet<number | string>) => void;
+  readonly onChange: (values: ReadonlySet<string>) => void;
   readonly options: readonly ListBoxOption[];
   /**
    * @default 'vertical'
    */
   readonly orientation?: 'horizontal' | 'vertical' | undefined;
-  readonly values: ReadonlySet<number | string>;
+  readonly values: ReadonlySet<string>;
 }
