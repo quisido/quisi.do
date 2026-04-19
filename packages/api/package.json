@@ -1,0 +1,49 @@
+{
+  "name": "@quisido/api",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "exit 0",
+    "start": "npm run dev",
+    "test": "quisido test",
+    "clean": "rimraf .cache .tests .wrangler dist node_modules",
+    "dev": "wrangler dev --persist-to ../../.wrangler/state",
+    "eslint": "quisido eslint",
+    "local:drop": "wrangler d1 execute api-dev --file=./sql/drop.sql --local --persist-to ../../.wrangler/state",
+    "local:init": "wrangler d1 execute api-dev --file=./sql/items.sql --local --persist-to ../../.wrangler/state",
+    "local:reinit": "npm run local:drop && npm run local:init",
+    "vitest": "vitest",
+    "vitest:run": "vitest run",
+    "vitest:watch": "vitest watch"
+  },
+  "keywords": [
+    "api",
+    "cloudflare-workers",
+    "hono",
+    "serverless",
+    "typescript"
+  ],
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quisido"
+  },
+  "repository": {
+    "directory": "packages/api",
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git"
+  },
+  "dependencies": {
+    "hono": "^4.12.14"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260227.0",
+    "@vitest/ui": "^4.0.7",
+    "quisido": "^0.0.2",
+    "rimraf": "^6.1.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.0",
+    "wrangler": "^4.59.1"
+  }
+}

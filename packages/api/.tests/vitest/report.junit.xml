@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="21" failures="0" errors="0" time="0.048931767">
+    <testsuite name="src/index.test.ts" timestamp="2026-04-19T03:35:11.283Z" hostname="runnervmeorf1" tests="21" failures="0" errors="0" skipped="0" time="0.048931767">
+        <testcase classname="src/index.test.ts" name="api &gt; CORS &gt; includes CORS headers for allowed origins" time="0.027269071">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; CORS &gt; excludes CORS headers for disallowed origins" time="0.000829078">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; CORS &gt; handles preflight requests for allowed origins" time="0.001093141">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; security headers &gt; includes protective security headers" time="0.000779235">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; GET /health &gt; returns status ok" time="0.001851536">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; GET /items &gt; returns items from D1" time="0.000848915">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; GET /items &gt; returns 500 when the database is unavailable" time="0.000754259">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; POST /items &gt; returns 413 when the body exceeds the size limit" time="0.000993064">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; POST /items &gt; returns 415 when Content-Type is not application/json" time="0.003713361">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; POST /items &gt; returns 400 for malformed JSON" time="0.001260754">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; POST /items &gt; returns 400 when the body is not an object" time="0.000687543">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; POST /items &gt; returns 400 when the body is null" time="0.000611843">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; POST /items &gt; returns 400 when name is missing" time="0.000597114">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; POST /items &gt; returns 400 when name is not a string" time="0.000591815">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; POST /items &gt; returns 400 when name is empty" time="0.000477882">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; POST /items &gt; returns 400 when name is only whitespace" time="0.000548974">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; POST /items &gt; returns 400 when name exceeds the maximum length" time="0.00050365">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; POST /items &gt; creates an item with valid input" time="0.000648541">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; POST /items &gt; trims whitespace from the name" time="0.001641284">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; POST /items &gt; returns 500 when the database insert fails" time="0.000651266">
+        </testcase>
+        <testcase classname="src/index.test.ts" name="api &gt; unknown routes &gt; returns 404 for unrecognized paths" time="0.000507427">
+        </testcase>
+    </testsuite>
+</testsuites>
