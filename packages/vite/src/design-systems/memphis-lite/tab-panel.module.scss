@@ -1,6 +1,0 @@
-@use './theme';
-
-.root {
-  @include theme.panel(theme.$paper-alt, theme.$pink);
-  min-block-size: 10rem;
-}

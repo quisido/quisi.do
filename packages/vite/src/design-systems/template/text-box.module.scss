@@ -1,7 +1,4 @@
-/**
- * Be creative! Use images and shapes.
- * This element should look hand-drawn, like a poster.
- */
+// This element represents a widget. Visually enclose it.
 
 /**
  *   The `text-box` class wraps the entire component, including the label and
@@ -13,10 +10,12 @@
 
 // The `input` class is the single-line <input> element.
 .input {
+  background-color: inherit;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 1px;
   display: inline-block;
-
-  // Use Google Fonts to find a font family that matches the aesthetic.
-  font-family: sans-serif;
+  font-family: serif;
 
   &:focus-visible {
     outline-color: inherit;
@@ -32,13 +31,23 @@
  */
 .label {
   display: inline;
+  font-family: serif;
 }
 
 // The `textarea` class is the multi-line <textarea> element.
 .textarea {
+  background-color: transparent;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 1px;
   display: inline-block;
-
-  // Use Google Fonts to find a font family that matches the aesthetic.
   font-family: serif;
   width: 100%;
+
+  &:focus-visible {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
 }

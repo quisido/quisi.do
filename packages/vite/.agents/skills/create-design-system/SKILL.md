@@ -49,6 +49,10 @@ design tokens and their values. Create as many or as few as you need.
 Components in the design system are located at `src/design-systems/$slug/*.tsx`
 and their CSS files are co-located at `src/design-systems/$slug/*.module.scss`.
 
+_Do not_ look at other design systems in the repository, and **do not** create a
+shared theme file for each component to use. That would just lead to each
+component looking identical.
+
 To prevent context bloat, use a separate subagent to implement each component.
 Give the subagent the design system's slug, description, optional screenshot,
 design decisions, its specific component's TSX and SCSS, and the following
