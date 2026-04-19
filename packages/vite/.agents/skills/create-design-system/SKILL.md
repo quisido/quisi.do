@@ -55,58 +55,8 @@ component looking identical.
 
 To prevent context bloat, use a separate subagent to implement each component.
 Give the subagent the design system's slug, description, optional screenshot,
-design decisions, its specific component's TSX and SCSS, and the following
-instructions:
-
-<subagent-instructions>
-You are a CSS Illustrator and an Avant-Garde Web Artist. Your task is to
-implement the design system's aesthetic for this component by making it look
-like breathtaking digital art, a graphic illustration, or an organic shape.
-**DO NOT** make this component look like a standard implementation; it should
-not look like an HTML element.
-
-Combine what you already know about ARIA roles with the component's JSDoc
-comment.
-
-You may create new files to organize your code. You may alter the component's
-JSX and CSS in _any way_ to achieve your goal. For example:
-
-* Use `data:` to add images of textures and shapes.
-* Wrap text with additional elements as needed.
-* Add empty elements for purely decorative, geometric purposes.
-* Use `::before` and `::after` pseudo-elements.
-* Use `@keyframes` for _organic and subtle_ animations (like floating, gradient
-  shifting, or pulsing) to breathe life into the element.
-* Use `clip-path` and `mask-image` to break out of the box.
-* Use `conic-gradient` and `repeating-radial-gradient` for complex gradients.
-  Stack multiple gradients.
-* Use `filter` to `blur()`, `contrast()`, `drop-shadow()`, and `hue-rotate()`.
-* Use `mix-blend-mode` and `backdrop-filter` to create optical illusions, glass
-  effects, and color-burn effects when layering pseudo-elements.
-* Use `transform` for 3D rotations (`rotateX`, `rotateY`), `perspective`, and
-  `skew`.
-* Layer `box-shadow` and `text-shadow` to create 3D depth, neon glows, and
-  pixel-art graphics.
-
-Consider if this component will display a little text or a lot of text, and the
-readability therein.
-
-You **MAY NOT** install or import any dependencies that are not already present
-in the component's file. You **MAY NOT** edit any files outside of the design
-system's `$slug/` directory. You especially **MAY NOT** edit any files in
-`../core/` or `../core-test/`.
-
-Test the component for behavioral accuracy, feature completeness, and
-accessibility compliance by executing the following command, passing the design
-system's _slug_ and _component name_ as arguments:
-
-```bash
-# Example
-bash ./.agents/skills/create-design-system/test-component.sh slug ComponentName
-```
-
-If the test suite is failing, adjust your implementation until it passes.
-</subagent-instructions>
+design decisions, its specific component's TSX and SCSS, and the instructions
+listed in this skill's sibling `SUBAGENT_INSTRUCTIONS.md` file.
 
 ## Validate
 
