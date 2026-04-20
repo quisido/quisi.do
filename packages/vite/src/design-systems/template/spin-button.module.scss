@@ -1,6 +1,5 @@
 // This element represents a widget. Visually enclose it.
-
-.spin-button {
+.root {
   background-color: inherit;
   border-color: inherit;
   border-style: solid;
@@ -8,7 +7,11 @@
   display: inline-block;
 }
 
-.input {
+.label {
+  display: inline;
+}
+
+.spin-button {
   display: inline-block;
   font-family: sans-serif;
 
@@ -18,8 +21,4 @@
     outline-offset: 2px;
     outline-width: 2px;
   }
-}
-
-.label {
-  display: inline;
 }

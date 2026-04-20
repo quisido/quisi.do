@@ -29,16 +29,17 @@ export default function ProgressBar({
   const { id } = useProgressBar({ busy, describes, id: idProp });
 
   return (
-    <label className={classes['progress-bar']}>
+    <label className={classes['root']}>
       <span className={classes['label']}>{label}</span>
       <progress
         aria-readonly
         aria-valuemax={max}
         aria-valuemin={min}
         aria-valuenow={value}
-        className={classes['progress']}
+        className={classes['progress-bar']}
         id={id}
         max={max}
+        role="progressbar"
         value={value}
       />
     </label>

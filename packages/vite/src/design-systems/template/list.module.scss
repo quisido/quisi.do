@@ -9,10 +9,12 @@
   display: flex;
   flex-direction: column;
   font-family: serif;
+  list-style-type: none;
   padding: 1em;
 }
 
 .list-item {
   background-color: transparent;
   font-family: serif;
+  list-style-type: none;
 }

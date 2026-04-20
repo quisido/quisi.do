@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
-import type KeyProps from './key-props.js';
 
-interface MenuItemProps {
+export interface MenuItem {
   readonly children: ReactNode;
   readonly disabled?: boolean | undefined;
   readonly items?: readonly MenuItem[] | undefined;
+  readonly key: number | string;
 }
 
 export interface MenuProps {
@@ -14,5 +14,3 @@ export interface MenuProps {
    */
   readonly orientation?: 'horizontal' | 'vertical' | undefined;
 }
-
-export type MenuItem = KeyProps & MenuItemProps;

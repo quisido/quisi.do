@@ -1,13 +1,12 @@
 // This element represents a widget. Visually enclose it.
-
-.checkbox {
+.root {
   background-color: inherit;
   border-color: inherit;
   border-style: solid;
   border-width: 1px;
   display: inline;
 
-  &:has(> .input:focus-visible) {
+  &:has(> .checkbox:focus-visible) {
     outline-color: inherit;
     outline-style: solid;
     outline-offset: 2px;
@@ -15,7 +14,7 @@
   }
 }
 
-.input {
+.checkbox {
   display: inline-block;
 }
 

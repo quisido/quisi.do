@@ -1,7 +1,9 @@
-import type { PropsWithChildren } from 'react';
-import type KeyProps from './key-props.js';
+import type { ReactNode } from 'react';
 
-export type ListItem = KeyProps & PropsWithChildren;
+export interface ListItem {
+  readonly children: ReactNode;
+  readonly key: number | string;
+}
 
 export interface ListProps {
   readonly items: readonly ListItem[];

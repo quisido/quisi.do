@@ -36,13 +36,13 @@ export default function SpinButton({
   };
 
   return (
-    <label className={classes['spin-button']}>
+    <label className={classes['root']}>
       <span className={classes['label']}>{label}</span>
       <input
         aria-valuemax={max}
         aria-valuemin={min}
         aria-valuenow={value}
-        className={classes['input']}
+        className={classes['spin-button']}
         max={max}
         min={min}
         name={name}

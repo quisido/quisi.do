@@ -3,30 +3,34 @@ import { type ReactNode } from 'react';
 import { expect } from 'vitest';
 import noop from '../../utils/noop.js';
 import RenderWrapper from './render-wrapper.js';
+import type { ARIARole } from 'aria-query';
 
 export interface RenderTest {
   readonly expectToHaveThrown: (message: RegExp | string) => void;
-  readonly getByDescription: (role: string, description: string) => HTMLElement;
+  readonly getByDescription: (
+    role: ARIARole,
+    description: string,
+  ) => HTMLElement;
   readonly getByMaxValue: (
-    role: string,
+    role: ARIARole,
     name: string,
     max: number,
   ) => HTMLElement;
   readonly getByMinValue: (
-    role: string,
+    role: ARIARole,
     name: string,
     min: number,
   ) => HTMLElement;
-  readonly getByName: (role: string, name: string) => HTMLElement;
-  readonly getByRole: (role: string) => HTMLElement;
+  readonly getByName: (role: ARIARole, name: string) => HTMLElement;
+  readonly getByRole: (role: ARIARole) => HTMLElement;
   readonly getByValue: (
-    role: string,
+    role: ARIARole,
     name: string,
     value: number,
   ) => HTMLElement;
   readonly getHeadingByLevel: (name: string, level: number) => HTMLElement;
-  readonly getOptionalByRole: (role: string) => HTMLElement | null;
-  readonly getRoleCount: (role: string) => number;
+  readonly getOptionalByRole: (role: ARIARole) => HTMLElement | null;
+  readonly getRoleCount: (role: ARIARole) => number;
   readonly rerender: (node: ReactNode) => void;
 }
 

@@ -1,6 +1,5 @@
 // This element represents a widget. Visually enclose it.
-
-.progress-bar {
+.root {
   display: flex;
   flex-direction: column;
 }
@@ -9,6 +8,6 @@
   display: inline;
 }
 
-.progress {
+.progress-bar {
   display: inline-block;
 }

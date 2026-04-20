@@ -1,6 +1,5 @@
 // This element represents a widget. Visually enclose it.
-
-.slider {
+.root {
   background-color: inherit;
   border-color: inherit;
   border-style: solid;
@@ -8,7 +7,11 @@
   display: inline-block;
 }
 
-.input {
+.label {
+  display: inline;
+}
+
+.slider {
   display: inline-block;
 
   &:focus-visible {
@@ -17,8 +20,4 @@
     outline-offset: 2px;
     outline-width: 2px;
   }
-}
-
-.label {
-  display: inline;
 }

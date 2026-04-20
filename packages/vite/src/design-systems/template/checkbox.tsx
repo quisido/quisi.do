@@ -32,7 +32,7 @@ export default function Checkbox({
   };
 
   return (
-    <label className={classes['checkbox']}>
+    <label className={classes['root']}>
       <input
         /**
          *   Due to the strong native semantics of HTML's native checkbox, use
@@ -44,12 +44,13 @@ export default function Checkbox({
         aria-readonly={readOnly}
         aria-required={required}
         checked={checked}
-        className={classes['input']}
+        className={classes['checkbox']}
         disabled={disabled}
         onChange={handleChange}
         readOnly={readOnly}
         required={required}
         ref={ref}
+        role="checkbox"
         type="checkbox"
       />
       <span className={classes['label']}>{label}</span>
