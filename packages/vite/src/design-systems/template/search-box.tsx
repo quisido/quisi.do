@@ -19,13 +19,13 @@ export default function SearchBox({
   };
 
   return (
-    <label className={classes['search-box']}>
+    <label className={classes['root']}>
       <span className={classes['label']}>{label}</span>
       <input
         aria-disabled={disabled}
         aria-readonly={readOnly}
         aria-required={required}
-        className={classes['input']}
+        className={classes['search-box']}
         disabled={disabled}
         onChange={handleChange}
         readOnly={readOnly}

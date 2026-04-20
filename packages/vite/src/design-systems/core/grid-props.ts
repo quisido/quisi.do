@@ -1,6 +1,9 @@
-import type { Key } from 'react';
-import type { RowProps } from './row-props.js';
-import type KeyProps from './key-props.js';
+import type { Key, ReactNode } from 'react';
+
+export interface GridCell {
+  readonly content: ReactNode;
+  readonly key: number | string;
+}
 
 export interface GridProps {
   readonly caption: string;
@@ -13,4 +16,7 @@ export interface GridProps {
     | undefined;
 }
 
-export type GridRow = KeyProps & RowProps;
+export interface GridRow {
+  readonly cells: readonly GridCell[];
+  readonly key: number | string;
+}

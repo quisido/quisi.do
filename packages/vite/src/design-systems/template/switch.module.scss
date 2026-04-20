@@ -1,6 +1,5 @@
 // This element represents a widget. Visually enclose it.
-
-.switch {
+.root {
   background-color: inherit;
   border-color: inherit;
   border-style: solid;
@@ -12,7 +11,7 @@
   display: inline;
 }
 
-.input {
+.switch {
   display: inline-block;
 
   &[checked] {

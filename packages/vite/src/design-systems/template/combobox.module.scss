@@ -1,6 +1,5 @@
 // This element represents a widget. Visually enclose it.
-
-.combobox {
+.root {
   display: inline-block;
 }
 
@@ -8,7 +7,7 @@
   display: inline-block;
 }
 
-.input {
+.combobox {
   background-color: transparent;
   border-width: 0;
   height: 1px;

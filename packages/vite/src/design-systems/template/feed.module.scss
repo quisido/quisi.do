@@ -3,6 +3,9 @@
  * use a subtle decorative accent and/or the Gestalt principle of proximity
  * (negative space) to segregate it from other content.
  */
+.feed {
+  display: block;
+}
 
 .article {
   display: block;
@@ -13,8 +16,4 @@
     outline-offset: 2px;
     outline-width: 2px;
   }
-}
-
-.feed {
-  display: block;
 }

@@ -4,7 +4,6 @@ export { type ArticleProps } from '../core/article-props.js';
 export { type BannerProps } from '../core/banner-props.js';
 export { type BlockQuoteProps } from '../core/block-quote-props.js';
 export { type ButtonProps } from '../core/button-props.js';
-export { type CellProps } from '../core/cell-props.js';
 export { type CheckboxProps } from '../core/checkbox-props.js';
 export { type CodeProps } from '../core/code-props.js';
 export { type ComboboxProps } from '../core/combobox-props.js';
@@ -37,7 +36,6 @@ export { type NoteProps } from '../core/note-props.js';
 export { type ParagraphProps } from '../core/paragraph-props.js';
 export { type ProgressBarProps } from '../core/progress-bar-props.js';
 export { type Radio, type RadioGroupProps } from '../core/radio-group-props.js';
-export { type RowCell, type RowProps } from '../core/row-props.js';
 export { type RegionProps } from '../core/region-props.js';
 export { type ScrollbarProps } from '../core/scrollbar-props.js';
 export { type SectionFooterProps } from '../core/section-footer-props.js';
@@ -54,9 +52,7 @@ export { type SubscriptProps } from '../core/subscript-props.js';
 export { type SuggestionProps } from '../core/suggestion-props.js';
 export { type SuperscriptProps } from '../core/superscript-props.js';
 export { type SwitchProps } from '../core/switch-props.js';
-export { type TabListProps } from '../core/tab-list-props.js';
-export { type TabPanelProps } from '../core/tab-panel-props.js';
-export { type TabProps } from '../core/tab-props.js';
+export { type Tab, type TabsProps } from '../core/tabs-props.js';
 export { type TableProps } from '../core/table-props.js';
 export { type TermProps } from '../core/term-props.js';
 export { type TextBoxProps } from '../core/text-box-props.js';
@@ -66,6 +62,7 @@ export { type ToolbarProps } from '../core/toolbar-props.js';
 export { type TooltipProps } from '../core/tooltip-props.js';
 export { type TreeItem, type TreeProps } from '../core/tree-props.js';
 export {
+  type TreeGridCell,
   type TreeGridProps,
   type TreeGridRow,
 } from '../core/tree-grid-props.js';
@@ -127,10 +124,8 @@ export { default as SpinButton } from './spin-button.js';
 export { default as Status } from './status.js';
 export { default as Suggestion } from './suggestion.js';
 export { default as Switch } from './switch.js';
-export { default as Tab } from './tab.js';
+export { default as Tabs } from './tabs.js';
 export { default as Table } from './table.js';
-export { default as TabList } from './tab-list.js';
-export { default as TabPanel } from './tab-panel.js';
 export { default as TextBox } from './text-box.js';
 export { default as Timer } from './timer.js';
 export { default as Tree } from './tree.js';

@@ -1,9 +1,16 @@
-import type KeyProps from './key-props.js';
-import type { RowProps } from './row-props.js';
+import type { ReactNode } from 'react';
+
+export interface TableCell {
+  readonly content: ReactNode;
+  readonly key: number | string;
+}
 
 export interface TableProps {
   readonly caption: string;
   readonly rows: readonly TableRow[];
 }
 
-export type TableRow = KeyProps & RowProps;
+export interface TableRow {
+  readonly cells: readonly TableCell[];
+  readonly key: number | string;
+}

@@ -7,3 +7,17 @@
 .tree {
   display: table;
 }
+
+.caption {
+  // This is the tree caption.
+}
+
+.group {
+  > .item {
+    // This tree item is nested in a group.
+  }
+}
+
+.item {
+  // This is all tree items, nested or not.
+}

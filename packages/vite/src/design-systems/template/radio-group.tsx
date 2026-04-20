@@ -87,7 +87,7 @@ export default function RadioGroup<
                 aria-required={required}
                 aria-setsize={setSize}
                 checked={checked}
-                className={classes['input']}
+                className={classes['radio']}
                 onChange={handleChange}
                 readOnly={readOnly}
                 required={required}

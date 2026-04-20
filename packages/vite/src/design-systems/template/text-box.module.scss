@@ -1,28 +1,10 @@
-// This element represents a widget. Visually enclose it.
-
-/**
- *   The `text-box` class wraps the entire component, including the label and
- * the element with the 'textbox' role.
- */
-.text-box {
+.root {
   display: inline-block;
 }
 
 // The `input` class is the single-line <input> element.
 .input {
-  background-color: inherit;
-  border-color: inherit;
-  border-style: solid;
-  border-width: 1px;
   display: inline-block;
-  font-family: serif;
-
-  &:focus-visible {
-    outline-color: inherit;
-    outline-style: solid;
-    outline-offset: 2px;
-    outline-width: 2px;
-  }
 }
 
 /**
@@ -34,15 +16,14 @@
   font-family: serif;
 }
 
-// The `textarea` class is the multi-line <textarea> element.
-.textarea {
-  background-color: transparent;
+// This element represents a widget. Visually enclose it.
+// The `text-box` class applies to both single- and multi-line elements.
+.text-box {
+  background-color: inherit;
   border-color: inherit;
   border-style: solid;
   border-width: 1px;
-  display: inline-block;
   font-family: serif;
-  width: 100%;
 
   &:focus-visible {
     outline-color: inherit;
@@ -50,4 +31,10 @@
     outline-offset: 2px;
     outline-width: 2px;
   }
+}
+
+// The `textarea` class is the multi-line <textarea> element.
+.textarea {
+  display: inline-block;
+  width: 100%;
 }

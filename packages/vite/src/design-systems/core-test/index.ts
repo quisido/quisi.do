@@ -28,10 +28,8 @@ import type { SliderProps } from '../core/slider-props.js';
 import type { SpinButtonProps } from '../core/spin-button-props.js';
 import type { StatusProps } from '../core/status-props.js';
 import type { SwitchProps } from '../core/switch-props.js';
-import type { TabProps } from '../core/tab-props.js';
-import type { TabListProps } from '../core/tab-list-props.js';
+import type { TabsProps } from '../core/tabs-props.js';
 import type { TableProps } from '../core/table-props.js';
-import type { TabPanelProps } from '../core/tab-panel-props.js';
 import type { TextBoxProps } from '../core/text-box-props.js';
 import type { TimeProps } from '../core/time-props.js';
 import type { TimerProps } from '../core/timer-props.js';
@@ -66,9 +64,7 @@ import testSlider from './test-slider.js';
 import testSpinButton from './test-spin-button.js';
 import testStatus from './test-status.js';
 import testSwitch from './test-switch.js';
-import testTabList from './test-tab-list.js';
-import testTabPanel from './test-tab-panel.js';
-import testTab from './test-tab.js';
+import testTabs from './test-tabs.js';
 import testTable from './test-table.js';
 import testTextBox from './test-text-box.js';
 import testTime from './test-time.js';
@@ -189,10 +185,8 @@ interface DesignSystem {
   readonly Suggestion: ComponentType<SuggestionProps>;
   readonly Superscript: ComponentType<SuperscriptProps>;
   readonly Switch: ComponentType<SwitchProps>;
-  readonly Tab: ComponentType<TabProps>;
   readonly Table: ComponentType<TableProps>;
-  readonly TabList: ComponentType<TabListProps>;
-  readonly TabPanel: ComponentType<TabPanelProps>;
+  readonly Tabs: ComponentType<TabsProps>;
   readonly Term: ComponentType<TermProps>;
   readonly TextBox: ComponentType<TextBoxProps>;
   readonly Time: ComponentType<TimeProps>;
@@ -260,10 +254,8 @@ export default function testDesignSystem(
     Suggestion,
     Superscript,
     Switch,
-    Tab,
     Table,
-    TabList,
-    TabPanel,
+    Tabs,
     Term,
     TextBox,
     Time,
@@ -328,12 +320,10 @@ export default function testDesignSystem(
     testSuggestion(Suggestion);
     testSuperscript(Superscript);
     testSwitch(Switch);
-    testTab(Tab, { TabList });
-    testTabList(TabList, { Tab });
-    testTabPanel(TabPanel);
+    testTabs(Tabs);
     testTable(Table);
     testTerm(Term, { Definition });
-    testTextBox(TextBox);
+    testTextBox(TextBox, { Form });
     testTime(Time);
     testTimer(Timer);
     testToolbar(Toolbar);

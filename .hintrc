@@ -127,6 +127,7 @@
       "error",
       {
         "ignore": [
+          "backdrop-filter",
           "text-size-adjust"
         ]
       }

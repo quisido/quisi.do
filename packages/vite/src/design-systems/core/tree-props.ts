@@ -1,11 +1,18 @@
-import type { RowProps } from './row-props.js';
-import type KeyProps from './key-props.js';
+import type { ReactNode } from 'react';
+
+export interface TreeGroup {
+  readonly items: readonly TreeItem[];
+  readonly key: number | string;
+}
 
 export interface TreeProps {
   readonly caption: string;
-  readonly items: readonly TreeItem[];
+  readonly items: readonly (TreeGroup | TreeItem)[];
   readonly orientation?: 'vertical' | 'horizontal' | undefined;
   readonly required?: boolean | undefined;
 }
 
-export type TreeItem = KeyProps & RowProps;
+export interface TreeItem {
+  readonly content: ReactNode;
+  readonly key: number | string;
+}

@@ -345,7 +345,7 @@ export default function Combobox({
   };
 
   return (
-    <div aria-haspopup="listbox" className={classes['combobox']} ref={rootRef}>
+    <div aria-haspopup="listbox" className={classes['root']} ref={rootRef}>
       <label className={classes['label']} htmlFor={inputId}>
         {label}
       </label>
@@ -355,7 +355,7 @@ export default function Combobox({
           aria-autocomplete="both"
           aria-controls={listBoxId}
           aria-expanded={listboxVisible}
-          className={classes['input']}
+          className={classes['combobox']}
           disabled={disabled}
           id={inputId}
           onBlur={onInputBlur}
@@ -373,8 +373,8 @@ export default function Combobox({
           aria-controls={listBoxId}
           aria-expanded={listboxVisible}
           aria-label={`Show ${label} options`}
-          disabled={!interactive || filteredOptions.length === 0}
           className={classes['button']}
+          disabled={!interactive || filteredOptions.length === 0}
           onClick={onButtonClick}
           onMouseDown={onButtonMouseDown}
           tabIndex={-1}
