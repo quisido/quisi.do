@@ -1,18 +1,7 @@
 import type { ReactNode } from 'react';
 
-interface HeadingProps {
-  /** describes the purpose of the content in the region */
-  readonly heading: string;
-  readonly labelledBy?: undefined;
-}
-
-interface LabelledByProps {
-  readonly heading?: undefined;
-  readonly labelledBy: string;
-}
-
-interface Props {
+export interface RegionProps {
   readonly children: ReactNode;
+  /** describes the purpose of the content in the region */
+  readonly heading: Exclude<ReactNode, boolean | null | undefined>;
 }
-
-export type RegionProps = (HeadingProps | LabelledByProps) & Props;

@@ -128,7 +128,7 @@
       {
         "ignore": [
           "backdrop-filter",
-          "text-size-adjust"
+          "text-size-adjust: none"
         ]
       }
     ],

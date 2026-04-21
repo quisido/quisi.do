@@ -3,6 +3,7 @@ import type { ReactElement } from 'react';
 import type { HeadingProps } from '../core/heading-props.js';
 import classes from './heading.module.scss';
 import isDefined from '../../utils/is-defined.js';
+import useHeadingLevel from '../core/use-heading-level.js';
 
 /**
  *   A heading is a heading for a section of the page.
@@ -14,8 +15,9 @@ export default function Heading({
   children,
   className,
   id,
-  level,
 }: HeadingProps): ReactElement | null {
+  const { level, ref } = useHeadingLevel<HTMLHeadingElement>();
+
   if (children === undefined) {
     return null;
   }
@@ -44,6 +46,7 @@ export default function Heading({
       aria-level={level}
       className={[className, classes['heading']].filter(isDefined).join(' ')}
       id={id}
+      ref={ref}
       role="heading"
     >
       {children}

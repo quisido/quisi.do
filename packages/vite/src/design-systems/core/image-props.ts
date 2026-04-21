@@ -1,8 +1,5 @@
-import type { LabelProps } from './label-props.js';
-
-interface Props {
+export interface ImageProps {
   readonly alt: string;
+  readonly labelledBy?: string | undefined;
   readonly src: string;
 }
-
-export type ImageProps = LabelProps & Props;

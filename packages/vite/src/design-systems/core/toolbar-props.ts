@@ -1,5 +1,10 @@
 import type { ReactNode } from 'react';
-import type { LabelledByProps, LabelProps } from './label-props.js';
+import type { OneOf } from './one-of.js';
+
+interface OneOfProps {
+  readonly label: string;
+  readonly labelledBy: string;
+}
 
 interface Props {
   readonly children: ReactNode;
@@ -9,4 +14,4 @@ interface Props {
   readonly orientation?: 'horizontal' | 'vertical' | undefined;
 }
 
-export type ToolbarProps = (LabelProps | LabelledByProps) & Props;
+export type ToolbarProps = OneOf<OneOfProps> & Props;

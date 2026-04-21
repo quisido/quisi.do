@@ -5,33 +5,17 @@ import {
   Button,
   Checkbox,
   Code,
-  Document,
-  Heading,
-  Link,
-  List,
-  Navigation,
   Paragraph,
   Region,
-} from './template/index.js';
+} from '../design-systems/template/index.js';
+import Page from './page.jsx';
 
 export default function DesignSystemDemo(): ReactElement {
   const [checked, setChecked] = useState(false);
 
   return (
-    <Document
-      banner={
-        <>
-          <Heading level={1}>Design System Demo</Heading>
-          <Navigation label="Navigation">
-            <List
-              items={[{ children: <Link href="/">Home</Link>, key: 'home' }]}
-            />
-          </Navigation>
-        </>
-      }
-      contentInfo="&copy; quisi.do"
-    >
-      <Region heading="Region">
+    <Page>
+      <Region heading="Design System Demo">
         <Paragraph>This is a region.</Paragraph>
         <Article heading="Article">This article is in the region.</Article>
         <BlockQuote>This quote is from the article.</BlockQuote>
@@ -57,6 +41,6 @@ export default function DesignSystemDemo(): ReactElement {
           value={checked}
         />
       </Region>
-    </Document>
+    </Page>
   );
 }
