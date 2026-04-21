@@ -1,14 +1,13 @@
 import type { ReactNode } from 'react';
-import type { HeadingOrLabelProps } from './heading-or-label-props.js';
-import type { LabelProps } from './label-props.js';
+import type { OneOf } from './one-of.js';
 
-export type FeedArticle = HeadingOrLabelProps & {
+export type FeedArticle = OneOf<OneOfFeedArticleProps> & {
   readonly children: ReactNode;
   readonly describedBy?: string | undefined;
   readonly key: number | string;
 };
 
-interface Props {
+export interface FeedProps {
   readonly articles: readonly FeedArticle[];
   /**
    *   The articles offset is the number of articles missing from the beginning
@@ -16,6 +15,7 @@ interface Props {
    * @default 0
    */
   readonly articlesOffset?: number | undefined;
+  readonly labelledBy: string;
   /** Callback when more articles need to be appended. */
   readonly onAppend?: (() => Promise<void>) | undefined;
   /** Callback when more articles need to be prepended. */
@@ -23,4 +23,7 @@ interface Props {
   readonly setSize?: number | undefined;
 }
 
-export type FeedProps = LabelProps & Props;
+interface OneOfFeedArticleProps {
+  readonly heading: Exclude<ReactNode, boolean | null | undefined>;
+  readonly labelledBy: string;
+}

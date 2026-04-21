@@ -7,7 +7,7 @@ import NotFound from './not-found.js';
 import PrivacyPolicy from './privacy-policy.js';
 import Support from './support.js';
 import TermsOfService from './terms-of-service.js';
-import DesignSystemDemo from '../design-systems/demo.js';
+import DesignSystemDemo from './design-system-demo.js';
 
 export default function RoutesFeature(): ReactElement {
   return (

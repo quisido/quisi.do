@@ -1,5 +1,10 @@
 import type { ReactNode } from 'react';
-import type { HeadingOrLabelProps } from './heading-or-label-props.js';
+import type { OneOf } from './one-of.js';
+
+interface OneOfProps {
+  readonly heading: Exclude<ReactNode, boolean | null | undefined>;
+  readonly labelledBy: string;
+}
 
 interface Props {
   readonly children: ReactNode;
@@ -11,4 +16,4 @@ interface Props {
   readonly onDismiss?: VoidFunction | undefined;
 }
 
-export type DialogProps = HeadingOrLabelProps & Props;
+export type DialogProps = OneOf<OneOfProps> & Props;

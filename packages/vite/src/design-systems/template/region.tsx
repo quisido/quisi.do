@@ -1,9 +1,9 @@
 import type { ReactElement } from 'react';
 import Heading from './heading.js';
 import type { RegionProps } from '../core/region-props.js';
-import HeadingLevelProvider from '../core/heading-level-provider.js';
 import useRegion from '../core/use-region.js';
 import classes from './region.module.scss';
+import SectionHeader from './section-header.jsx';
 
 /**
  *   A region landmark contains content that is relevant to a specific purpose
@@ -12,32 +12,24 @@ import classes from './region.module.scss';
  *   Limit use of regions to sections containing content with a purpose that is
  * not accurately described by banners, complementary landmarks, content info,
  * forms, main landmarks, navigation landmarks, or searches.
- *   Authors SHOULD include the label inside of a heading whenever possible. The heading MAY be an instance of the standard host language heading element or an instance of an element with role heading.
  * @see {@link https://w3c.github.io/aria/#region | WAI-ARIA `region` role}
  */
 export default function Region({
   children,
   heading,
-  labelledBy: labelledByProp,
 }: RegionProps): ReactElement {
-  const hasHeading: boolean = heading !== undefined;
-  const { headingId, headingLevel, labelledBy } = useRegion({
-    hasHeading,
-    labelledBy: labelledByProp,
-  });
+  const { headingId } = useRegion();
 
   return (
     <section
-      aria-labelledby={labelledBy}
+      aria-labelledby={headingId}
       className={classes['region']}
       role="region"
     >
-      <Heading id={headingId} level={headingLevel}>
-        {heading}
-      </Heading>
-      <HeadingLevelProvider increment={hasHeading}>
-        {children}
-      </HeadingLevelProvider>
+      <SectionHeader>
+        <Heading id={headingId}>{heading}</Heading>
+      </SectionHeader>
+      <div>{children}</div>
     </section>
   );
 }
