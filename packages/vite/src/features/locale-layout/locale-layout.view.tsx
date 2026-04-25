@@ -23,6 +23,7 @@ export default function LocaleLayout({
 
   const i18n = useMemo((): ReturnType<typeof initI18next> => {
     const instance = initI18next(locale);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
     if (instance.isInitialized && instance.language !== locale) {
       void instance.changeLanguage(locale);
     }

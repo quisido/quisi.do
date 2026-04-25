@@ -1,14 +1,17 @@
-import i18next, { type i18n } from 'i18next';
+import i18next, { type i18n, type ResourceLanguage } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Locale from './constants/locale.js';
+import { mapObjectToKeys } from 'fmrs';
 
-const SUPPORTED_LOCALES: readonly Locale[] = [
-  Locale.Arabic,
-  Locale.English,
-  Locale.Spanish,
-  Locale.Filipino,
-  Locale.Japanese,
-];
+const LOCALES_RECORD: Record<Locale, true> = {
+  [Locale.Arabic]: true,
+  [Locale.English]: true,
+  [Locale.Spanish]: true,
+  [Locale.Filipino]: true,
+  [Locale.Japanese]: true,
+};
+
+const LOCALES: readonly Locale[] = mapObjectToKeys(LOCALES_RECORD);
 
 /**
  *   Initialize i18next with react-i18next bindings.
@@ -27,9 +30,14 @@ export default function initI18next(locale: Locale): i18n {
       },
       lng: locale,
       resources: Object.fromEntries(
-        SUPPORTED_LOCALES.map((l: Locale) => [l, { translation: {} }]),
+        LOCALES.map(
+          (supportedLocale: Locale): readonly [Locale, ResourceLanguage] => [
+            supportedLocale,
+            { translation: {} },
+          ],
+        ),
       ),
-      supportedLngs: SUPPORTED_LOCALES,
+      supportedLngs: LOCALES,
     });
   }
 

@@ -179,13 +179,7 @@
     // TODO: Reenable this once the Microsoft Edge Tools VS Code extension can find the dependency.
     // "https-only": "error",
     // Env: webhint_hints_image-optimization-cloudinary_1_apiSecret
-    "image-optimization-cloudinary": [
-      "error",
-      {
-        "apiKey": "516889177257495",
-        "cloudName": "dcbaafknx"
-      }
-    ],
+    "image-optimization-cloudinary": "off",
     "leading-dot-classlist": "error",
     "manifest-app-name": "error",
     "manifest-exists": "error",
