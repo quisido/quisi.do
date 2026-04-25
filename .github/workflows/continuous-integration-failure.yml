@@ -27,8 +27,8 @@ jobs:
         with:
           script: |
             /**
-             *   If the run failure was not during a pull request, do not notify
-             * Copilot, because there will be no pull request for it to amend.
+             *   Deliberately ignore forked pull requests. They will not be in
+             * this array.
              */
             const [pullRequest] =
               context.payload.workflow_run.pull_requests ?? [];
