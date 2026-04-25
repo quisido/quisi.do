@@ -1,0 +1,72 @@
+name: Continuous integration failure
+
+on:
+  workflow_run:
+    types:
+      - completed
+    workflows:
+      - Continuous integration
+
+jobs:
+  copilot:
+    name: Copilot
+    if: github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            /**
+             *   If the run failure was not during a pull request, do not notify
+             * Copilot, because there will be no pull request for it to amend.
+             */
+            const [pullRequest] =
+              context.payload.workflow_run.pull_requests ?? [];
+            if (pullRequest === undefined) {
+              return;
+            }
+
+            const { owner, repo } = context.repo;
+            const { html_url: runUrl, id: runId, name: runName } =
+              context.payload.workflow_run;
+
+            const { data: { jobs } } =
+              await github.rest.actions.listJobsForWorkflowRun({
+                owner,
+                repo,
+                run_id: runId,
+              });
+
+            /**
+             *   If the run failure was not due to a specific job (e.g.
+             * infrastructure), do not notify Copilot.
+             */
+            const isFailed = ({ conclusion }) => conclusion === 'failure';
+            const failedJobs = jobs.filter(isFailed);
+            if (failedJobs.length === 0) {
+              return;
+            }
+
+            const toListMarkdown = ({ html_url: url, name }) =>
+              `- [${name}](${url})`;
+
+            const { number: prNumber, url: prUrl } = pullRequest;
+            await github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner,
+              repo,
+              body: [
+                '@github-copilot Continuous integration run ' +
+                `["${runName}"](${runUrl}) ` +
+                'failed for ' +
+                `[pull request #${prNumber}](${prUrl}).`,
+                'Please analyze the failures and implement a fix.',
+                '**Failed jobs:**\n' +
+                `${failedJobs.map(toListMarkdown).join('\n')}`,
+              ].join('\n\n'),
+            });

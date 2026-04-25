@@ -1,4 +1,4 @@
-name: "Copilot Setup Steps"
+name: Copilot setup steps
 
 on:
   workflow_dispatch:
@@ -12,19 +12,12 @@ on:
 jobs:
   copilot-setup-steps:
     runs-on: ubuntu-latest
-
     permissions:
       contents: read
-
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v6
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+      - name: Build
+        uses: ./.github/actions/build
         with:
-          cache: npm
-          cache-dependency-path: package-lock.json
-          check-latest: true
-          node-version-file: .nvmrc
-      - name: Install dependencies
-        run: npm install
+          environment: development
