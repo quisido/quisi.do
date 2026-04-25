@@ -2,7 +2,7 @@ name: Continuous integration failure
 
 concurrency:
   cancel-in-progress: true
-  group: workflow-run-${{ github.event.workflow_run.name }}
+  group: workflow-run-${{ github.event.workflow_run.id }}
 
 on:
   workflow_run:
@@ -61,7 +61,9 @@ jobs:
             const toListMarkdown = ({ html_url: url, name }) =>
               `- [${name}](${url})`;
 
-            const { number: prNumber, url: prUrl } = pullRequest;
+            const { serverUrl } = context;
+            const { number: prNumber } = pullRequest;
+            const prUrl = `${serverUrl}/${owner}/${repo}/pull/${prNumber}`;
             await github.rest.issues.createComment({
               issue_number: prNumber,
               owner,
