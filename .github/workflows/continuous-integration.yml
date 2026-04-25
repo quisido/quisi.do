@@ -104,8 +104,10 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - name: Act
+      - name: Upload
         uses: ./.github/actions/codecov
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
 on:
   pull_request:
