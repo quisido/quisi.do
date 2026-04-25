@@ -1,8 +1,8 @@
 import { type ReactNode } from 'react';
 import usePathname from '../hooks/use-pathname.js';
-import Link from '../modules/quisi/link.jsx';
 import validateString from '../utils/validate-string.js';
 import styles from './header-heading-text.module.scss';
+import { Link } from '../design-systems/template/index.js';
 
 const TEXT_CLASS_NAME: string = validateString(styles['text']);
 
@@ -13,7 +13,7 @@ export default function HeaderHeadingText(): ReactNode {
   }
 
   return (
-    <Link feature="header-heading-text" href="/" title="quisi.do">
+    <Link href="/" title="quisi.do">
       <span className={TEXT_CLASS_NAME}>quisi.do</span>
     </Link>
   );

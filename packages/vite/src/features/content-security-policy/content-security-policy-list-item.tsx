@@ -1,11 +1,11 @@
 import { type ReactElement } from 'react';
 import useTheme from '../../hooks/use-theme.js';
-import mapPropsToElement from '../../utils/map-props-to-element.jsx';
+import mapPropsToElement from '../../utils/map-props-to-element.js';
 import validateString from '../../utils/validate-string.js';
-import ContentSecurityPolicyDispositionIcon from './content-security-policy-disposition-icon.jsx';
+import ContentSecurityPolicyDispositionIcon from './content-security-policy-disposition-icon.js';
 import type ContentSecurityPolicyGroup from './content-security-policy-group.js';
 import styles from './content-security-policy-list-item.module.scss';
-import ContentSecurityPolicyReportListItem from './content-security-policy-report-list-item.jsx';
+import ContentSecurityPolicyReportListItem from './content-security-policy-report-list-item.js';
 import type ContentSecurityPolicyReport from './content-security-policy-report.js';
 import mapContentSecurityPolicyReportToListItemProps from './map-content-security-policy-report-to-list-item-props.js';
 

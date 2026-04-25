@@ -24,6 +24,10 @@ export default async function npx(
     return await execute(npxFile, [...npxArgs, options, ...args]);
   }
 
-  const { env } = options;
-  return await execute(npxFile, [...npxArgs, ...args], { env });
+  const { env, onStdErr, onStdOut } = options;
+  return await execute(npxFile, [...npxArgs, ...args], {
+    env,
+    onStdErr,
+    onStdOut,
+  });
 }

@@ -37,6 +37,7 @@ export default function AppTurnstile({
         switch (code) {
           case CHALLENGE_TIMEOUT:
             notify({
+              description: 'Your session has timed out.',
               Header(): ReactElement {
                 return <>🐱‍👤 Are you still human?</>;
               },
@@ -46,8 +47,10 @@ export default function AppTurnstile({
               type: 'warning',
             });
             break;
+
           default:
             notify({
+              description: 'Your session could not be verified.',
               Header(): ReactElement {
                 return <>🤖 You may be a robot.</>;
               },
@@ -66,6 +69,7 @@ export default function AppTurnstile({
       }}
       onExpired={(): void => {
         notify({
+          description: 'Your session has expired.',
           Header(): ReactElement {
             return <>🐱‍👤 Are you still human?</>;
           },
@@ -77,6 +81,7 @@ export default function AppTurnstile({
       }}
       onSuccess={(): void => {
         notify({
+          description: 'Your session has been validated.',
           Header(): ReactElement {
             return <>🧑 You are human!</>;
           },
@@ -88,6 +93,7 @@ export default function AppTurnstile({
       }}
       onTimeout={(...args: readonly unknown[]): void => {
         notify({
+          description: 'Your session has timed out.',
           Header(): ReactElement {
             return <>You may be 🤖.</>;
           },
@@ -112,6 +118,7 @@ export default function AppTurnstile({
       }}
       onUnsupported={(...args: readonly unknown[]): void => {
         notify({
+          description: 'Your device is not supported.',
           Header(): ReactElement {
             return <>You may be 🤖.</>;
           },

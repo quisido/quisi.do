@@ -29,6 +29,15 @@
     "types": "./dist/index.d.ts",
     "default": "./dist/index.js"
   },
+  "keywords": [
+    "filter",
+    "functional-programming",
+    "map",
+    "reduce",
+    "sort",
+    "typescript",
+    "utilities"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
@@ -49,6 +58,6 @@
     "rimraf": "^6.1.0",
     "tslib": "^2.8.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.7"
+    "vitest": "^4.1.0"
   }
 }

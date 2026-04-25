@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 import useTheme from '../hooks/use-theme.js';
 import validateString from '../utils/validate-string.js';
-import Text from './header-heading-text.jsx';
+import Text from './header-heading-text.js';
 import styles from './header-heading.module.scss';
 
 interface State {

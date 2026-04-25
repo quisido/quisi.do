@@ -1,9 +1,9 @@
 import { type ReactElement } from 'react';
-import Link from '../../modules/quisi/link.jsx';
 import mapUrlToHref from '../../utils/map-url-to-href.js';
 import validateString from '../../utils/validate-string.js';
 import styles from './content-security-policy-source-file.module.scss';
 import formatLineColumnNumbers from './format-line-column-numbers.js';
+import { Link } from '../../design-systems/template/index.js';
 
 interface Props {
   readonly children: string;
@@ -34,13 +34,7 @@ export default function ContentSecurityPolicySourceFile({
   }
 
   return (
-    <Link
-      className={CLASS_NAME}
-      feature="content-security-policy"
-      follow={false}
-      href={href}
-      title=""
-    >
+    <Link className={CLASS_NAME} href={href} title="">
       {children}
       {lineColumn}
     </Link>

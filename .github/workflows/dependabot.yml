@@ -6,17 +6,19 @@ on:
       - main
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   merge:
     name: Auto-merge
     if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Enable
-        run: gh pr merge --auto --rebase "$PR_HTML_URL"
+        run: gh pr merge --auto --squash "$PR_HTML_URL"
         env:
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
           PR_HTML_URL: ${{github.event.pull_request.html_url}}

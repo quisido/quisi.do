@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "rootDir": "src",
+    "sourceMap": true,
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/behind-the-velvet-curtain/src/",
+    "target": "ES2022"
+  },
+  "exclude": [
+    "./.cache/",
+    "./.tests/",
+    "./src/**/*.test.ts",
+    "./src/**/*.test.tsx",
+    "./src/**/*.browser-smoke.test.ts",
+    "./src/*.test.ts",
+    "./src/*.test.tsx",
+    "./.*.json",
+    "./*.config.*",
+    "./tsconfig.*"
+  ],
+  "extends": "./tsconfig.json",
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}

@@ -1,9 +1,9 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Emoji from '../components/emoji.jsx';
+import Emoji from '../components/emoji.js';
 import useColorScheme from '../hooks/use-color-scheme.js';
-import DarkModeDefaultToggle from './dark-mode-default-toggle.jsx';
-import DarkModeToggleButton from './dark-mode-toggle-button.jsx';
+import DarkModeDefaultToggle from './dark-mode-default-toggle.js';
+import DarkModeToggleButton from './dark-mode-toggle-button.js';
 
 export default function DarkModeToggle(): ReactElement {
   const [colorScheme, setColorScheme] = useColorScheme();

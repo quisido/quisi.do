@@ -1,10 +1,10 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import AlarmExistsMessage from '../components/alarm-exists-message.jsx';
-import CsrfLink from '../components/csrf-link.jsx';
-import MisconfiguredPatreonClientMessage from '../components/misconfigured-patreon-client-message.jsx';
-import UnknownErrorMessage from '../components/unknown-error-message.jsx';
+import AlarmExistsMessage from '../components/alarm-exists-message.js';
+import CsrfLink from '../components/csrf-link.js';
+import MisconfiguredPatreonClientMessage from '../components/misconfigured-patreon-client-message.js';
+import UnknownErrorMessage from '../components/unknown-error-message.js';
 import type Notification from '../types/notification.js';
 
 export default function mapAuthnErrorCodeToNotification(
@@ -335,11 +335,7 @@ export default function mapAuthnErrorCodeToNotification(
 
         Message(): ReactElement {
           return (
-            <I18n
-              csrf={
-                <CsrfLink feature="authn-error-code/messing-session-id-cookie" />
-              }
-            >
+            <I18n csrf={<CsrfLink />}>
               Ensure cookies are enabled. To prevent $csrf, authentication
               requires visiting this website first.
             </I18n>
@@ -355,11 +351,7 @@ export default function mapAuthnErrorCodeToNotification(
 
         Message(): ReactElement {
           return (
-            <I18n
-              csrf={
-                <CsrfLink feature="authn-error-code/missing-state-session-id" />
-              }
-            >
+            <I18n csrf={<CsrfLink />}>
               To prevent $csrf, authentication must originate from this website.
             </I18n>
           );
@@ -374,9 +366,7 @@ export default function mapAuthnErrorCodeToNotification(
 
         Message(): ReactElement {
           return (
-            <I18n
-              csrf={<CsrfLink feature="authn-error-code/non-object-state" />}
-            >
+            <I18n csrf={<CsrfLink />}>
               To prevent $csrf, authentication must originate from this website.
             </I18n>
           );

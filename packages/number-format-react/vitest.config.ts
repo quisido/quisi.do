@@ -4,7 +4,7 @@ import { defineVitestConfig, type VitestConfig } from 'quisido';
 const CONFIG: VitestConfig = await defineVitestConfig({
   plugins: [react()],
   test: {
-    environment: 'happy-dom',
+    environment: 'jsdom',
   },
 });
 

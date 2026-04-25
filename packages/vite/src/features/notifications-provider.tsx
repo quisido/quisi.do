@@ -8,7 +8,10 @@ import {
   useRef,
   useState,
 } from 'react';
-import { NotificationsProvider } from '../contexts/notifications.js';
+import {
+  type NotificationProps,
+  NotificationsProvider,
+} from '../contexts/notifications.js';
 import useHash from '../hooks/use-hash.js';
 import type Notification from '../types/notification.js';
 import { type WithKey } from '../types/with-key.js';
@@ -17,16 +20,7 @@ import filter from '../utils/filter.js';
 import mapErrorToNotification from '../utils/map-error-to-notification.js';
 import type AuthnErrorNotification from './authn-error-notification.js';
 
-type RequiredDefined<T> = {
-  [K in keyof T]-?: Exclude<T[K], undefined>;
-};
-
-type NotificationState = WithKey<Notification> &
-  RequiredDefined<Pick<Notification, 'onDismiss'>>;
-
-const INCREMENT = 1;
-const INITIAL_ID = 0;
-const INITIAL_NOTIFICATIONS: readonly WithKey<Notification>[] = [];
+const INITIAL_NOTIFICATIONS: readonly never[] = [];
 
 const loadAuthnErrorNotificationModule = async (): Promise<{
   default: typeof AuthnErrorNotification;
@@ -39,25 +33,28 @@ export default function NotificationsProviderFeature({
   const [hash, setHash] = useHash();
 
   // States
-  const key: RefObject<number> = useRef(INITIAL_ID);
-  const [notifications, setNotifications] = useState(INITIAL_NOTIFICATIONS);
+  const key: RefObject<number> = useRef(0);
+  const [notifications, setNotifications] = useState<
+    readonly WithKey<NotificationProps>[]
+  >(INITIAL_NOTIFICATIONS);
 
   // Callbacks
-  const dismiss = (notification: WithKey<Notification>): void => {
-    setNotifications(filter(isNot<WithKey<Notification>>(notification)));
-    if (typeof notification.onDismiss === 'function') {
-      notification.onDismiss();
-    }
+  const dismiss = (notification: WithKey<NotificationProps>): void => {
+    setNotifications(filter(isNot<WithKey<NotificationProps>>(notification)));
+    notification.onDismiss();
   };
 
   const notify = useCallback((notification: Notification): VoidFunction => {
-    key.current += INCREMENT;
-    const newNotification: WithKey<Notification> = {
+    key.current += 1;
+    const newNotification: WithKey<NotificationProps> = {
       key: key.current,
       ...notification,
+      onDismiss: (): void => {
+        dismiss(newNotification);
+      },
     };
 
-    setNotifications(append<WithKey<Notification>>(newNotification));
+    setNotifications(append<WithKey<NotificationProps>>(newNotification));
 
     // Expose the dismiss handler so that it can be bound to other actions.
     return (): void => {
@@ -68,12 +65,15 @@ export default function NotificationsProviderFeature({
   return (
     <NotificationsProvider
       value={useMemo((): readonly [
-        readonly (Promise<NotificationState> | NotificationState)[],
+        readonly (
+          | Promise<WithKey<NotificationProps>>
+          | WithKey<NotificationProps>
+        )[],
         (notification: Notification) => VoidFunction,
       ] => {
         const newNotifications: (
-          | Promise<WithKey<Notification>>
-          | WithKey<Notification>
+          | Promise<WithKey<NotificationProps>>
+          | WithKey<NotificationProps>
         )[] = [...notifications];
 
         if (/^#authn:error=\d+$/u.test(hash)) {
@@ -89,7 +89,7 @@ export default function NotificationsProviderFeature({
               )
               .catch(mapErrorToNotification)
               .then(
-                (notification: Notification): WithKey<Notification> => ({
+                (notification: Notification): WithKey<NotificationProps> => ({
                   ...notification,
                   key: 'authn:error',
                   onDismiss: handleDismiss,
@@ -100,17 +100,19 @@ export default function NotificationsProviderFeature({
 
         const mapToDismissable = (
           notification: Promise<WithKey<Notification>> | WithKey<Notification>,
-        ): Promise<NotificationState> | NotificationState => {
+        ): Promise<WithKey<NotificationProps>> | WithKey<NotificationProps> => {
           if (notification instanceof Promise) {
             return notification.then(mapToDismissable);
           }
 
-          return {
+          const newNotification: WithKey<NotificationProps> = {
             ...notification,
             onDismiss(): void {
-              dismiss(notification);
+              dismiss(newNotification);
             },
           };
+
+          return newNotification;
         };
 
         return [newNotifications.map(mapToDismissable), notify];

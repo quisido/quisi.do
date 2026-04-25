@@ -2,12 +2,16 @@ name: Continuous integration
 
 concurrency:
   cancel-in-progress: true
-  group: pull-request-${{ github.event.pull_request.number }}
+  group: continuous-integration-${{ github.event.pull_request.number }}
+
+permissions:
+  contents: read
 
 jobs:
   # Stage 1: build, dependency-review
   build:
     name: Build
+    if: github.event.pull_request.head.repo.full_name == github.repository
     environment: continuous-integration
     runs-on: ubuntu-latest
     services:
@@ -30,9 +34,11 @@ jobs:
 
   dependency-review:
     name: Dependency review
+    if: github.event.pull_request.head.repo.full_name == github.repository
     environment: continuous-integration
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pull-requests: write
     steps:
       - name: Checkout
@@ -43,6 +49,7 @@ jobs:
   # Stage 2: lighthouse, test, webhint
   lighthouse:
     name: Lighthouse
+    if: github.event.pull_request.head.repo.full_name == github.repository
     environment: continuous-integration
     needs: build
     runs-on: ubuntu-latest
@@ -56,6 +63,7 @@ jobs:
 
   test:
     name: Test
+    if: github.event.pull_request.head.repo.full_name == github.repository
     environment: continuous-integration
     needs: build
     runs-on: ubuntu-latest
@@ -69,6 +77,7 @@ jobs:
 
   webhint:
     name: Webhint
+    if: github.event.pull_request.head.repo.full_name == github.repository
     environment: continuous-integration
     needs: build
     runs-on: ubuntu-latest
@@ -80,21 +89,24 @@ jobs:
       - name: Audit
         uses: ./.github/actions/webhint-ci
 
-  # Stage 3: sentry-prevent
-  sentry-prevent:
-    name: Sentry Prevent
+  # Stage 3: codecov
+  codecov:
+    name: Codecov
+    if: github.event.pull_request.head.repo.full_name == github.repository
     environment: continuous-integration
     needs: test
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - name: Scan
-        uses: ./.github/actions/sentry-prevent
+      - name: Upload
+        uses: ./.github/actions/codecov
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
 on:
   pull_request:

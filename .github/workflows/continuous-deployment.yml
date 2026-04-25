@@ -4,6 +4,9 @@ concurrency:
   cancel-in-progress: false
   group: branch-main
 
+permissions:
+  contents: read
+
 jobs:
   # Stage 1: build
   build:
@@ -94,7 +97,24 @@ jobs:
       - name: Audit
         uses: ./.github/actions/webhint-ci
 
-  # Stage 3: github-pages, npm-publish, sentry-prevent
+  # Stage 3: codecov, github-pages, npm-publish
+  codecov:
+    name: Codecov
+    environment: continuous-deployment
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Upload
+        uses: ./.github/actions/codecov
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
   github-pages:
     name: GitHub Pages
     environment: production
@@ -103,6 +123,8 @@ jobs:
       - lighthouse-ci
       - test
       - webhint-ci
+    permissions:
+      contents: write
     services:
       datadog-agent: *datadog-agent
     steps:
@@ -128,6 +150,7 @@ jobs:
       - build
       - test
     permissions:
+      contents: read
       id-token: write
     services:
       datadog-agent: *datadog-agent
@@ -138,21 +161,6 @@ jobs:
         uses: ./.github/actions/setup
       - name: Publish
         run: npm run publish
-
-  sentry-prevent:
-    name: Sentry Prevent
-    environment: continuous-deployment
-    needs: test
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-      - name: Scan
-        uses: ./.github/actions/sentry-prevent
 
   # Stage 4: cloudflare-purge, github-packages, wrangler-deploy
   cloudflare-purge:

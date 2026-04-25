@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 import validateString from '../utils/validate-string.js';
 import styles from './footer.module.scss';
-import StatusBar from './status-bar.jsx';
+import StatusBar from './status-bar.js';
 
 const CLASS_NAME: string = validateString(styles['footer']);
 // const LIST_CLASS_NAME: string = validateString(styles['list']);

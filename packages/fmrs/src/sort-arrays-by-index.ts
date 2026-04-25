@@ -1,5 +1,11 @@
 import sort from './sort.js';
 
+/**
+ * Creates a comparator that sorts arrays by the value at `index`.
+ *
+ * @example
+ * entries.sort(sortArraysByIndex(0));
+ */
 export default function sortArraysByIndex(
   index: number,
 ): (a: readonly unknown[], b: readonly unknown[]) => number {

@@ -66,15 +66,24 @@ export { default as sort } from './sort.js';
 export { type default as Stringifiable } from './stringifiable.js';
 export { sortArraysByIndex };
 
-const FIRST = 0;
-const SECOND = 1;
-
+/**
+ * Sorts entry-like arrays by their first item.
+ *
+ * @example
+ * entries.sort(sortEntriesByKey);
+ */
 export const sortEntriesByKey: (
   a: readonly unknown[],
   b: readonly unknown[],
-) => number = sortArraysByIndex(FIRST);
+) => number = sortArraysByIndex(0);
 
+/**
+ * Sorts entry-like arrays by their second item.
+ *
+ * @example
+ * entries.sort(sortEntriesByValue);
+ */
 export const sortEntriesByValue: (
   a: readonly unknown[],
   b: readonly unknown[],
-) => number = sortArraysByIndex(SECOND);
+) => number = sortArraysByIndex(1);

@@ -1,6 +1,6 @@
 import { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Emoji from '../components/emoji.jsx';
+import Emoji from '../components/emoji.js';
 import { useCustomTheme } from '../contexts/custom-theme.js';
 import validateString from '../utils/validate-string.js';
 import styles from './notebook-toggle.module.scss';
