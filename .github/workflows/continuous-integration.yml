@@ -2,7 +2,7 @@ name: Continuous integration
 
 concurrency:
   cancel-in-progress: true
-  group: pull-request-${{ github.event.pull_request.number }}
+  group: continuous-integration-${{ github.event.pull_request.number }}
 
 permissions:
   contents: read
