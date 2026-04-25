@@ -14,8 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       actions: read
-      pull-requests: write
       issues: write
+      # Add this permission if Copilot inherits this job's GITHUB_TOKEN.
+      # pull-requests: write
     steps:
       - name: Comment
         uses: actions/github-script@v7
@@ -65,8 +66,10 @@ jobs:
                 `["${runName}"](${runUrl}) ` +
                 'failed for ' +
                 `[pull request #${prNumber}](${prUrl}).`,
-                'Please analyze the failures and implement a fix.',
+                'Please analyze the failures and implement the smallest ' +
+                'possible fix.',
                 '**Failed jobs:**\n' +
                 `${failedJobs.map(toListMarkdown).join('\n')}`,
+                '**Acceptance criteria:** `npm test` must pass.',
               ].join('\n\n'),
             });
