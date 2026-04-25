@@ -97,7 +97,23 @@ jobs:
       - name: Audit
         uses: ./.github/actions/webhint-ci
 
-  # Stage 3: github-pages, npm-publish, sentry-prevent
+  # Stage 3: codecov, github-pages, npm-publish
+  codecov:
+    name: Codecov
+    environment: continuous-deployment
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Act
+        uses: ./.github/actions/codecov
+
   github-pages:
     name: GitHub Pages
     environment: production
@@ -144,22 +160,6 @@ jobs:
         uses: ./.github/actions/setup
       - name: Publish
         run: npm run publish
-
-  sentry-prevent:
-    name: Sentry Prevent
-    environment: continuous-deployment
-    needs: test
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-      - name: Scan
-        uses: ./.github/actions/sentry-prevent
 
   # Stage 4: cloudflare-purge, github-packages, wrangler-deploy
   cloudflare-purge:

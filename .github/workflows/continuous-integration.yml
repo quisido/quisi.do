@@ -89,9 +89,9 @@ jobs:
       - name: Audit
         uses: ./.github/actions/webhint-ci
 
-  # Stage 3: sentry-prevent
-  sentry-prevent:
-    name: Sentry Prevent
+  # Stage 3: codecov
+  codecov:
+    name: Codecov
     if: github.event.pull_request.head.repo.full_name == github.repository
     environment: continuous-integration
     needs: test
@@ -104,8 +104,8 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - name: Scan
-        uses: ./.github/actions/sentry-prevent
+      - name: Act
+        uses: ./.github/actions/codecov
 
 on:
   pull_request:

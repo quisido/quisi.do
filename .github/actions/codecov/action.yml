@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=../../../schemas/github-action.jsonc
-name: Sentry Prevent
-description: Runs Sentry Prevent to block commits that introduce new Sentry issues
+name: Codecov
+description: Uploads test artifacts to Codecov
 
 runs:
   using: composite
@@ -12,4 +12,6 @@ runs:
         path: packages
     - name: Upload
       if: ${{ !cancelled() }}
-      uses: getsentry/prevent-action@v0
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
