@@ -1,5 +1,9 @@
 name: Continuous integration failure
 
+concurrency:
+  cancel-in-progress: true
+  group: workflow-run-${{ github.event.workflow_run.name }}
+
 on:
   workflow_run:
     types:
@@ -37,6 +41,7 @@ jobs:
               context.payload.workflow_run;
 
             const { data: { jobs } } =
+              // Default maximum: 30 jobs
               await github.rest.actions.listJobsForWorkflowRun({
                 owner,
                 repo,
@@ -62,7 +67,7 @@ jobs:
               owner,
               repo,
               body: [
-                '@github-copilot Continuous integration run ' +
+                '@copilot Continuous integration run ' +
                 `["${runName}"](${runUrl}) ` +
                 'failed for ' +
                 `[pull request #${prNumber}](${prUrl}).`,
