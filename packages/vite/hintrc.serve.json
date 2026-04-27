@@ -7,8 +7,21 @@
     // Technical debt: Re-enable this when the theme is finalized.
     "axe/color": "off",
 
-    // Technical debt: Re-enable this when `api-js.mixpanel.com` is blocked.
+    // Technical debt: Re-enable when "api-js.mixpanel.com" is fixed.
     "axe/keyboard": "off",
+    /*
+    [
+      "error",
+      // https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default
+      {
+        "accesskeys": "error",
+        "focus-order-semantics": "error",
+        "region": "error",
+        "skip-link": "error",
+        "tabindex": "error"
+      }
+    ],
+    */
 
     /**
      * Technical debt: Re-enable this when `api-js.mixpanel.com` is blocked.
@@ -26,10 +39,12 @@
     // Technical debt: Re-enable these when the animation is optimized.
     "detect-css-reflows/composite": "off",
     "detect-css-reflows/paint": "off",
+    "doctype": "error",
 
     /**
-     * "Could not get results from HTML checker for '...'.
-     * Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+     * Technical debt: Could not get results from HTML checker for
+     * 'http://localhost:3000/'. Error: 'Unexpected token '<', "<!DOCTYPE "...
+     * is not valid JSON'. (html-checker) at http://localhost:3000/
      */
     "html-checker": "off",
 
