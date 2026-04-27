@@ -7,7 +7,10 @@
     // Technical debt: Re-enable this when the theme is finalized.
     "axe/color": "off",
 
-    "axe/keyboard": [
+    // Technical debt: Re-enable when "api-js.mixpanel.com" is fixed.
+    "axe/keyboard": "off",
+    /*
+    [
       "error",
       // https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default
       {
@@ -18,6 +21,7 @@
         "tabindex": "error"
       }
     ],
+    */
 
     /**
      * Technical debt: Re-enable this when `api-js.mixpanel.com` is blocked.
@@ -36,12 +40,13 @@
     "detect-css-reflows/composite": "off",
     "detect-css-reflows/paint": "off",
     "doctype": "error",
-    "html-checker": [
-      "error",
-      {
-        "details": true
-      }
-    ],
+
+    /**
+     * Technical debt: Could not get results from HTML checker for
+     * 'http://localhost:3000/'. Error: 'Unexpected token '<', "<!DOCTYPE "...
+     * is not valid JSON'. (html-checker) at http://localhost:3000/
+     */
+    "html-checker": "off",
 
     // "No valid configuration for Cloudinary found. Hint could not run."
     "image-optimization-cloudinary": "off",
