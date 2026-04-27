@@ -68,10 +68,8 @@ jobs:
               owner,
               repo,
               body: [
-                '@copilot Continuous integration run ' +
-                `["${runName}"](${runUrl}) ` +
-                'failed for ' +
-                `[pull request #${prNumber}](${prUrl}).`,
+                `Continuous integration run ["${runName}"](${runUrl}) failed ` +
+                `for [pull request #${prNumber}](${prUrl}).`,
 
                 'Please analyze the failures and submit a pull request that ' +
                 'contains the smallest possible fix.',
