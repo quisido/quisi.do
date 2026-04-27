@@ -45,7 +45,7 @@ export default function I18nProvider({
 
       // If a non-English locale failed to initialize, fallback to English.
       window.console.error(
-        `Failed to initialize i18next for language "${locale}."`,
+        `Failed to initialize i18next for language "${locale}".`,
         err,
       );
       setLocale(Locale.English);

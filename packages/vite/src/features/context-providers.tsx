@@ -10,7 +10,7 @@ import withWrappers from '../hocs/with-wrappers/index.js';
 import CustomThemeProvider from './custom-theme-provider.js';
 import PostHog from './posthog.js';
 import WindowProvider from './window-provider.js';
-import I18nProvider from './i18n-provider.jsx';
+import I18nProvider from './i18n-provider.js';
 
 export const ContextProviders: ComponentType<PropsWithChildren> = withWrappers(
   Authentication,
