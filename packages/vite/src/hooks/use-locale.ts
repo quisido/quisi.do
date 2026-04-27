@@ -1,17 +1,28 @@
+import Locale from '../constants/locale.js';
+import usePathname from '../hooks/use-pathname.js';
 import { useCallback, useMemo } from 'react';
-import { default as Locale } from '../../constants/locale.js';
-import usePathname from '../../hooks/use-pathname.js';
-import useNavigation from '../../hooks/use-navigation.js';
+import useNavigation from './use-navigation.js';
 
-interface State {
-  readonly locale: Locale;
-  readonly localeContextValue: readonly [Locale, (locale: Locale) => void];
-}
-
-export default function useLocaleLayout(locale: Locale): State {
+export default function useLocale(): readonly [
+  Locale,
+  (locale: Locale) => void,
+] {
   // Contexts
   const navigate = useNavigation();
   const pathname: string = usePathname();
+
+  // States
+  const locale: Locale = useMemo((): Locale => {
+    for (const localeValue of Object.values(Locale)) {
+      if (!pathname.startsWith(`/${localeValue}/`)) {
+        continue;
+      }
+
+      return localeValue;
+    }
+
+    return Locale.English;
+  }, [pathname]);
 
   // Callacks
   const setLocale = useCallback(
@@ -32,12 +43,5 @@ export default function useLocaleLayout(locale: Locale): State {
     [locale, navigate, pathname],
   );
 
-  return {
-    locale,
-
-    localeContextValue: useMemo(
-      (): readonly [Locale, (locale: Locale) => void] => [locale, setLocale],
-      [locale, setLocale],
-    ),
-  };
+  return [locale, setLocale];
 }

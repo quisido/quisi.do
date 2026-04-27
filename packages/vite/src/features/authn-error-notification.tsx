@@ -4,7 +4,6 @@ import UnknownErrorMessage from '../components/unknown-error-message.js';
 import { type NoActionNotification } from '../types/notification.js';
 import mapAuthnErrorCodeToNotification from '../utils/map-authn-error-code-to-notification.js';
 import mapHashToAuthnErrorCode from '../utils/map-hash-to-authn-error-code';
-import AuthnErrorsTranslationsProvider from './authn-errors-translations-provider.js';
 
 export default class AuthnErrorNotification implements NoActionNotification {
   public readonly description = 'An authentication error occurred.';
@@ -36,21 +35,13 @@ export default class AuthnErrorNotification implements NoActionNotification {
     }
 
     return function HeaderImpl(): ReactElement {
-      return (
-        <AuthnErrorsTranslationsProvider>
-          <Component />
-        </AuthnErrorsTranslationsProvider>
-      );
+      return <Component />;
     };
   }
 
   public Message(): ReactElement {
     const Component: ComponentType = this.#Message;
-    return (
-      <AuthnErrorsTranslationsProvider>
-        <Component />
-      </AuthnErrorsTranslationsProvider>
-    );
+    return <Component />;
   }
 
   public static fromHash(hash: string): AuthnErrorNotification {

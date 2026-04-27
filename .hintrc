@@ -59,17 +59,7 @@
         "label-title-only"
       ]
     ],
-    "axe/keyboard": [
-      "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default
-      {
-        "accesskeys": "error",
-        "focus-order-semantics": "error",
-        "region": "error",
-        "skip-link": "error",
-        "tabindex": "error"
-      }
-    ],
+    "axe/keyboard": "off",
     "axe/language": "error",
     "axe/name-role-value": [
       "error",
@@ -166,26 +156,15 @@
     "detect-css-reflows/layout": "error",
     "detect-css-reflows/paint": "error",
     "disown-opener": "error",
-    "doctype": "error",
+    "doctype": "off",
     "highest-available-document-mode": "error",
-    "html-checker": [
-      "error",
-      {
-        "details": true
-      }
-    ],
+    "html-checker": "off",
     "http-cache": "error",
     "http-compression": "error",
     // TODO: Reenable this once the Microsoft Edge Tools VS Code extension can find the dependency.
     // "https-only": "error",
     // Env: webhint_hints_image-optimization-cloudinary_1_apiSecret
-    "image-optimization-cloudinary": [
-      "error",
-      {
-        "apiKey": "516889177257495",
-        "cloudName": "dcbaafknx"
-      }
-    ],
+    "image-optimization-cloudinary": "off",
     "leading-dot-classlist": "error",
     "manifest-app-name": "error",
     "manifest-exists": "error",
