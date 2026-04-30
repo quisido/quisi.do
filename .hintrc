@@ -155,6 +155,10 @@
     "http-compression": "error",
     // TODO: Reenable this once the Microsoft Edge Tools VS Code extension can find the dependency.
     // "https-only": "error",
+<<<<<<< HEAD
+=======
+    // Env: webhint_hints_image-optimization-cloudinary_1_apiSecret
+>>>>>>> main
     "image-optimization-cloudinary": "off",
     "leading-dot-classlist": "error",
     "manifest-app-name": "error",
