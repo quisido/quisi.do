@@ -12,12 +12,15 @@ export default function testListBox(
   describe('ListBox', (): void => {
     it('should emit a change event', async (): Promise<void> => {
       const { getByName } = render(
-        <ListBox
-          label="Change handler"
-          onChange={handleTestChange}
-          options={[{ children: 'First', value: '1' }]}
-          values={new Set()}
-        />,
+        <>
+          <span id="test-list-box-labelled-by-id">Test list box label</span>
+          <ListBox
+            labelledBy="test-list-box-labelled-by-id"
+            onChange={handleTestChange}
+            options={[{ children: 'First', value: '1' }]}
+            values={new Set()}
+          />
+        </>,
       );
 
       const listBox: HTMLElement = getByName('listbox', 'Change handler');

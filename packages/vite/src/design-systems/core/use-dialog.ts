@@ -1,17 +1,8 @@
-import {
-  type ReactNode,
-  type Ref,
-  type RefObject,
-  useLayoutEffect,
-  useRef,
-} from 'react';
-import useHeadingOrLabel from './use-heading-or-label.js';
+import { type Ref, type RefObject, useLayoutEffect, useRef } from 'react';
 import useId from './use-id.js';
 import validateNonNull from '../../utils/validate-non-null.js';
 
 interface Props {
-  readonly heading?: ReactNode | undefined;
-  readonly label?: string | undefined;
   readonly labelledBy?: string | undefined;
   readonly modal: boolean;
   readonly onDismiss?: VoidFunction | undefined;
@@ -26,8 +17,6 @@ export interface DialogState {
 }
 
 export default function useDialog({
-  heading,
-  label,
   labelledBy,
   modal,
   onDismiss,
@@ -60,12 +49,7 @@ export default function useDialog({
       }
     },
     headingId,
-    labelledBy: useHeadingOrLabel({
-      heading,
-      headingId,
-      label,
-      labelledBy,
-    }),
+    labelledBy: labelledBy ?? headingId,
     ref,
   };
 }

@@ -7,12 +7,23 @@ export default function testArticle(
   Article: ComponentType<ArticleProps>,
 ): void {
   describe('Article', (): void => {
-    it('should be an article', (): void => {
+    it('should support a heading', (): void => {
       const { getByName } = render(
-        <Article label="Test article">Test content</Article>,
+        <Article heading="Test heading">Test content</Article>,
       );
 
-      getByName('article', 'Test article');
+      getByName('article', 'Test heading');
+    });
+
+    it('should support an external label', (): void => {
+      const { getByName } = render(
+        <>
+          <span id="test-article-labelled-by">Test label</span>
+          <Article heading="Test heading">Test content</Article>
+        </>,
+      );
+
+      getByName('article', 'Test label');
     });
   });
 }

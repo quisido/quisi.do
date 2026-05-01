@@ -5,12 +5,6 @@ import type { FeedProps } from '../core/feed-props.js';
 
 export default function testFeed(Feed: ComponentType<FeedProps>): void {
   describe('Feed', (): void => {
-    it('should support labels', (): void => {
-      const { getByName } = render(<Feed articles={[]} label="Test label" />);
-
-      getByName('feed', 'Test label');
-    });
-
     it('should support labelled by', (): void => {
       const { getByName } = render(
         <>

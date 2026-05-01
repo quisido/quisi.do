@@ -5,32 +5,41 @@ import noop from '../../utils/noop.js';
 import RenderWrapper from './render-wrapper.js';
 import type { ARIARole } from 'aria-query';
 
+type DesignSystemRole =
+  | Exclude<ARIARole, 'img'>
+  | 'comment'
+  | 'image'
+  | 'mark'
+  | 'sectionfooter'
+  | 'sectionheader'
+  | 'suggestion';
+
 export interface RenderTest {
   readonly expectToHaveThrown: (message: RegExp | string) => void;
   readonly getByDescription: (
-    role: ARIARole,
+    role: DesignSystemRole,
     description: string,
   ) => HTMLElement;
   readonly getByMaxValue: (
-    role: ARIARole,
+    role: DesignSystemRole,
     name: string,
     max: number,
   ) => HTMLElement;
   readonly getByMinValue: (
-    role: ARIARole,
+    role: DesignSystemRole,
     name: string,
     min: number,
   ) => HTMLElement;
-  readonly getByName: (role: ARIARole, name: string) => HTMLElement;
-  readonly getByRole: (role: ARIARole) => HTMLElement;
+  readonly getByName: (role: DesignSystemRole, name: string) => HTMLElement;
+  readonly getByRole: (role: DesignSystemRole) => HTMLElement;
   readonly getByValue: (
-    role: ARIARole,
+    role: DesignSystemRole,
     name: string,
     value: number,
   ) => HTMLElement;
   readonly getHeadingByLevel: (name: string, level: number) => HTMLElement;
-  readonly getOptionalByRole: (role: ARIARole) => HTMLElement | null;
-  readonly getRoleCount: (role: ARIARole) => number;
+  readonly getOptionalByRole: (role: DesignSystemRole) => HTMLElement | null;
+  readonly getRoleCount: (role: DesignSystemRole) => number;
   readonly rerender: (node: ReactNode) => void;
 }
 

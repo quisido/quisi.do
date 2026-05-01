@@ -46,7 +46,7 @@ export default function testTextBox(
       const handleTestSubmit = vi.fn();
 
       const { getByName } = render(
-        <Form label="Single-line Enter form" onSubmit={handleTestSubmit}>
+        <Form heading="Single-line Enter form" onSubmit={handleTestSubmit}>
           <TextBox
             label="Single-line Enter text box"
             onChange={handleTestChange}
@@ -71,7 +71,7 @@ export default function testTextBox(
       const handleTestSubmit = vi.fn();
 
       const { getByName } = render(
-        <Form label="Multiline Enter form" onSubmit={handleTestSubmit}>
+        <Form heading="Multiline Enter form" onSubmit={handleTestSubmit}>
           <TextBox
             label="Multiline Enter text box"
             multiline

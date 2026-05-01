@@ -1,96 +1,85 @@
 import { describe, expect, it, vi } from 'vitest';
-import { userEvent } from '@testing-library/user-event';
+import { userEvent, type UserEvent } from '@testing-library/user-event';
 import type { ComponentType } from 'react';
 import type { AlertDialogProps } from '../core/alert-dialog-props.js';
-import render from './render.js';
+import render, { type RenderTest } from './render.js';
+import noop from '../../utils/noop.js';
 
-const handleTestDismiss = vi.fn();
+interface AlertDialogTest extends RenderTest {
+  readonly clickDismiss: () => Promise<void>;
+}
 
 export default function testAlertDialog(
   AlertDialog: ComponentType<AlertDialogProps>,
 ): void {
+  const renderAlertDialog = (
+    props: Partial<AlertDialogProps>,
+  ): AlertDialogTest => {
+    const user: UserEvent = userEvent.setup();
+    const result: RenderTest = render(
+      <AlertDialog heading="Heading" onDismiss={noop} {...props}>
+        Content
+      </AlertDialog>,
+    );
+
+    return {
+      ...result,
+      async clickDismiss(): Promise<void> {
+        const dismissButton: HTMLElement = result.getByName(
+          'button',
+          'Dismiss',
+        );
+        await user.click(dismissButton);
+      },
+    };
+  };
+
   describe('AlertDialog', (): void => {
-    it('should support headings', (): void => {
-      const { getByName } = render(
-        <AlertDialog heading="Test heading" onDismiss={handleTestDismiss}>
-          Test content
-        </AlertDialog>,
-      );
-      getByName('alertdialog', 'Test heading');
-    });
-
-    it('should support labels', (): void => {
-      const { getByName } = render(
-        <AlertDialog label="Test label" onDismiss={handleTestDismiss}>
-          Test content
-        </AlertDialog>,
-      );
-      getByName('alertdialog', 'Test label');
-    });
-
-    it('should support labelled by', (): void => {
-      const { getByName } = render(
-        <>
-          <span id="test-alert-dialog-label-id">Test labelled by</span>
-          <AlertDialog
-            labelledBy="test-alert-dialog-label-id"
-            onDismiss={handleTestDismiss}
-          >
-            Test content
-          </AlertDialog>
-          ,
-        </>,
-      );
-      getByName('alertdialog', 'Test labelled by');
+    it('should be labelled by its heading', (): void => {
+      const { getByName } = renderAlertDialog({ heading: 'Heading label' });
+      getByName('alertdialog', 'Heading label');
     });
 
     it('should support dismissing', async (): Promise<void> => {
-      const { getByName } = render(
-        <AlertDialog
-          label="Test dismissable label"
-          onDismiss={handleTestDismiss}
-        >
-          Test content
-        </AlertDialog>,
-      );
-
-      const dismissButton: HTMLElement = getByName('button', 'Dismiss');
-      await userEvent.click(dismissButton);
-      expect(handleTestDismiss).toHaveBeenCalledExactlyOnceWith();
+      const handleDismiss = vi.fn();
+      const { clickDismiss } = renderAlertDialog({ onDismiss: handleDismiss });
+      await clickDismiss();
+      expect(handleDismiss).toHaveBeenCalledExactlyOnceWith();
     });
 
     it('must be described', (): void => {
-      const { getByDescription } = render(
-        <AlertDialog label="Test described label" onDismiss={handleTestDismiss}>
-          Test content
-        </AlertDialog>,
-      );
-
+      const { getByDescription } = renderAlertDialog({
+        children: 'Test content',
+      });
       getByDescription('alertdialog', 'Test content');
     });
 
     it('should be modal (capture keyboard navigation)', async (): Promise<void> => {
+      const user: UserEvent = userEvent.setup();
       const { getByName } = render(
         <>
-          <button type="button">First button</button>
-          <AlertDialog label="Test modal label" onDismiss={handleTestDismiss}>
-            <button type="button">Second button</button>
+          <button type="button">Before button</button>
+          <AlertDialog heading="Modal" onDismiss={noop}>
+            <button type="button">Child button</button>
           </AlertDialog>
-          ,<button type="button">Third button</button>
+          ,<button type="button">After button</button>
         </>,
       );
 
+      const childButton: HTMLElement = getByName('button', 'Child button');
       const dismissButton: HTMLElement = getByName('button', 'Dismiss');
-      const secondButton: HTMLElement = getByName('button', 'Second button');
 
-      for (let loop = 0; loop < 5; loop++) {
-        expect(window.document.activeElement).toBe(secondButton);
-        // eslint-disable-next-line no-await-in-loop
-        await userEvent.tab();
-        expect(window.document.activeElement).toBe(dismissButton);
-        // eslint-disable-next-line no-await-in-loop
-        await userEvent.tab();
-      }
+      expect(window.document.activeElement).toBe(childButton);
+      await user.tab();
+      expect(window.document.activeElement).toBe(dismissButton);
+      await user.tab();
+      expect(window.document.activeElement).toBe(childButton);
+      await user.tab();
+      expect(window.document.activeElement).toBe(dismissButton);
+      await user.tab();
+      expect(window.document.activeElement).toBe(childButton);
+      await user.tab();
+      expect(window.document.activeElement).toBe(dismissButton);
     });
   });
 }

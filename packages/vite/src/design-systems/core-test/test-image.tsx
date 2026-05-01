@@ -9,11 +9,7 @@ export default function testImage(Image: ComponentType<ImageProps>): void {
   describe('Image', (): void => {
     it('should support labels', (): void => {
       const { getByName } = render(
-        <Image
-          alt="Test image"
-          label="Test image label"
-          src="file://test.png"
-        />,
+        <Image alt="Test image" src="file://test.png" />,
       );
       getByName('image', 'Test image label');
     });

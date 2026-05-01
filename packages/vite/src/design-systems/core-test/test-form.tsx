@@ -3,6 +3,7 @@ import type { ComponentType } from 'react';
 import { describe, it } from 'vitest';
 import type { FormProps } from '../core/form-props.js';
 import type { RegionProps } from '../core/region-props.js';
+import noop from '../../utils/noop.js';
 
 interface Options {
   readonly Region: ComponentType<RegionProps>;
@@ -16,7 +17,9 @@ export default function testForm(
     describe('heading', (): void => {
       it('should be supported', (): void => {
         const { getByName } = render(
-          <Form heading="Test heading">Test content</Form>,
+          <Form heading="Test heading" onSubmit={noop}>
+            Test content
+          </Form>,
         );
 
         getByName('form', 'Test heading');
@@ -24,7 +27,7 @@ export default function testForm(
 
       it('should increment', (): void => {
         const { getHeadingByLevel } = render(
-          <Form heading="Test form heading">
+          <Form heading="Test form heading" onSubmit={noop}>
             <Region heading="Test region heading">Test content</Region>
           </Form>,
         );
@@ -34,19 +37,14 @@ export default function testForm(
       });
     });
 
-    it('should support labels', (): void => {
-      const { getByName } = render(
-        <Form label="Test label">Test content</Form>,
-      );
-
-      getByName('form', 'Test label');
-    });
-
     it('should support external labels', (): void => {
       const { getByName } = render(
         <>
           <span id="test-form-label-id">Test labelled by</span>
-          <Form labelledBy="test-form-label-id">Test content</Form>,
+          <Form labelledBy="test-form-label-id" onSubmit={noop}>
+            Test content
+          </Form>
+          ,
         </>,
       );
       getByName('form', 'Test labelled by');

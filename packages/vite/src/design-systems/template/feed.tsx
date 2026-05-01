@@ -1,10 +1,8 @@
 import type { ReactElement } from 'react';
 import type { FeedArticle, FeedProps } from '../core/feed-props.js';
 import useFeed from '../core/use-feed.js';
-import useHeadingOrLabel from '../core/use-heading-or-label.js';
 import useId from '../core/use-id.js';
 import Heading from './heading.js';
-import HeadingLevelProvider from '../core/heading-level-provider.js';
 import useHeadingLevel from '../core/use-heading-level.js';
 import classes from './feed.module.scss';
 
@@ -19,37 +17,27 @@ const UNKNOWN_SET_SIZE = -1;
 const FeedArticleComponent = ({
   children,
   heading,
-  label,
   labelledBy: labelledByProp,
   onFocus,
   positionInSet,
   setSize,
 }: FeedArticle & FeedArticleProps): ReactElement => {
   const headingId: string = useId();
-  const headingLevel: number = useHeadingLevel();
-  const labelledBy: string | undefined = useHeadingOrLabel({
-    heading,
-    headingId,
-    label,
-    labelledBy: labelledByProp,
-  });
+  const { level: headingLevel, ref: headingRef } = useHeadingLevel();
 
   return (
     <article
-      aria-label={label}
-      aria-labelledby={labelledBy}
+      aria-labelledby={labelledByProp ?? headingId}
       aria-posinset={positionInSet}
       aria-setsize={setSize}
       className={classes['article']}
       onFocus={onFocus}
       tabIndex={0}
     >
-      <Heading id={headingId} level={headingLevel}>
+      <Heading id={headingId} level={headingLevel} ref={headingRef}>
         {heading}
       </Heading>
-      <HeadingLevelProvider increment={heading !== undefined}>
-        {children}
-      </HeadingLevelProvider>
+      {children}
     </article>
   );
 };
@@ -78,7 +66,6 @@ const FeedArticleComponent = ({
 export default function Feed({
   articles,
   articlesOffset = 0,
-  label,
   labelledBy,
   onAppend,
   onPrepend,
@@ -101,7 +88,6 @@ export default function Feed({
     <section
       aria-busy={busy}
       aria-errormessage={errorMessageId}
-      aria-label={label}
       aria-labelledby={labelledBy}
       className={classes['feed']}
       role="feed"

@@ -6,7 +6,7 @@ import type { SwitchProps } from '../core/switch-props.js';
 export default function testSwitch(Switch: ComponentType<SwitchProps>): void {
   describe('Switch', (): void => {
     it('should be a switch', (): void => {
-      const { getByName } = render(<Switch label="Test switch" />);
+      const { getByName } = render(<Switch label="Test switch" on />);
 
       getByName('switch', 'Test switch');
     });

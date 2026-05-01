@@ -15,16 +15,6 @@ export default function testDialog(Dialog: ComponentType<DialogProps>): void {
       getByName('dialog', 'Test heading');
     });
 
-    it('should support a label', (): void => {
-      const { getByName } = render(
-        <Dialog description="Test description" label="Test label">
-          Test content
-        </Dialog>,
-      );
-
-      getByName('dialog', 'Test label');
-    });
-
     it('should support an external label', (): void => {
       const { getByName } = render(
         <>

@@ -14,7 +14,7 @@ export default function testGrid(Grid: ComponentType<GridProps>): void {
       const { getByName } = render(
         <Grid
           caption="Test grid"
-          rows={[{ cells: [{ children: 'Test grid cell', key: 1 }], key: 1 }]}
+          rows={[{ cells: [{ content: 'Test grid cell', key: 1 }], key: 1 }]}
         />,
       );
 

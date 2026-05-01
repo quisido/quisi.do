@@ -55,16 +55,5 @@ export default function testRegion(Region: ComponentType<RegionProps>): void {
         getHeadingByLevel('Seventh', 7);
       });
     });
-
-    it('should support external labels', (): void => {
-      const { getByName } = render(
-        <>
-          <span id="test-region-label-id">External label</span>
-          <Region labelledBy="test-region-label-id">Test content</Region>,
-        </>,
-      );
-
-      getByName('region', 'External label');
-    });
   });
 }

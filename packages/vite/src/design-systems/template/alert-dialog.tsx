@@ -38,21 +38,14 @@ export default function AlertDialog({
   children,
   heading,
   icon,
-  label,
-  labelledBy: labelledByProp,
   onDismiss,
   type = 'info',
 }: AlertDialogProps): ReactElement {
-  const { descriptionId, headingId, labelledBy } = useAlertDialog({
-    heading,
-    label,
-    labelledBy: labelledByProp,
-  });
+  const { descriptionId, headingId, labelledBy } = useAlertDialog();
 
   return (
     <div
       aria-describedby={descriptionId}
-      aria-label={label}
       aria-labelledby={labelledBy}
       aria-modal
       className={classes['alert-dialog']}
@@ -61,11 +54,9 @@ export default function AlertDialog({
       <FocusScope autoFocus contain restoreFocus>
         <span className={classes['icon']}>{icon ?? toIcon(type)}</span>
         <div>
-          {heading !== undefined && (
-            <Heading className={classes['heading']} id={headingId} level={3}>
-              {heading}
-            </Heading>
-          )}
+          <Heading className={classes['heading']} id={headingId} level={3}>
+            {heading}
+          </Heading>
           <div id={descriptionId}>{children}</div>
         </div>
         <button
