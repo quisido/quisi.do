@@ -66,7 +66,6 @@ export {
   type TreeGridProps,
   type TreeGridRow,
 } from '../core/tree-grid-props.js';
-export { default as Provider } from '../core/provider.js';
 export { default as Button } from './button.js';
 export { default as Heading } from './heading.js';
 export { default as Emphasis } from './emphasis.js';

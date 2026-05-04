@@ -12,7 +12,7 @@ const PREFIX: string = join(TEMP_DIR, '.quisido-');
 
 export default async function makeDisposableTempDir(): Promise<DisposableTempDir> {
   /**
-   *   While we could make the temporary directory in the module scope, a
+   * While we could make the temporary directory in the module scope, a
    * failure there would exit the entire process instead of just the subtask
    * that needed the directory. By failing here, we can continue to run parallel
    * tasks that do not need this temporary directory.

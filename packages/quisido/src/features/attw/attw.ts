@@ -47,7 +47,7 @@ export const attw: ReportingTool = new ReportingTool(
     return {
       context:
         /**
-         *   Additionally, the rule "cjs-resolves-to-esm" ("Entrypoint is
+         * Additionally, the rule "cjs-resolves-to-esm" ("Entrypoint is
          * ESM-only") is ignored. Unless that context proves beneficial, it is
          * excluded here.
          */

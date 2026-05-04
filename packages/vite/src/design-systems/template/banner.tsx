@@ -1,5 +1,4 @@
 import type { ReactElement } from 'react';
-import useBanner from '../core/use-banner.js';
 import type { BannerProps } from '../core/banner-props.js';
 import classes from './banner.module.scss';
 
@@ -12,11 +11,5 @@ import classes from './banner.module.scss';
  * @see {@link https://w3c.github.io/aria/#banner | WAI-ARIA `banner` role}
  */
 export default function Banner({ children }: BannerProps): ReactElement {
-  const id: string = useBanner();
-
-  return (
-    <header className={classes['banner']} id={id}>
-      {children}
-    </header>
-  );
+  return <header className={classes['banner']}>{children}</header>;
 }

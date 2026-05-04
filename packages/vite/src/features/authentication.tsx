@@ -27,7 +27,7 @@ export default function AuthenticationFeature({
       });
 
       /**
-       *   Technical debt: We want to emit the following errors, but our
+       * Technical debt: We want to emit the following errors, but our
        * monitoring services depend on our authentication. 🥲
        */
       const json: unknown = await response.json();

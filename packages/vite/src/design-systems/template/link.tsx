@@ -58,7 +58,7 @@ export default function Link({
   }
 
   /**
-   *   Where possible, it is recommended that you use a native <a> element
+   * Where possible, it is recommended that you use a native <a> element
    * rather than another element with `role="link"`, as native elements are more
    * widely supported by user agents and assistive technology. Native <a>
    * elements also support keyboard and focus requirements by default, without

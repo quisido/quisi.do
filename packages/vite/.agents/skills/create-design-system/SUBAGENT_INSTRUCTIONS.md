@@ -38,7 +38,7 @@ system's _slug_ and _component name_ as arguments:
 
 ```bash
 # Example
-bash ./.agents/skills/create-design-system/test-component.sh slug ComponentName
+npm run design-system:test-component my-example-slug ComponentName
 ```
 
 If the test suite is failing, adjust your implementation until it passes.

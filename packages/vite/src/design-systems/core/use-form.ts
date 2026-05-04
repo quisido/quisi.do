@@ -1,26 +1,25 @@
-import type { RefObject } from 'react';
 import useElementId from '../../hooks/use-element-id.js';
-import useHeadingLevel from './use-heading-level.js';
 
 interface Props {
+  readonly label: string | undefined;
   readonly labelledBy: string | undefined;
 }
 
 interface State {
   readonly headingId: string;
-  readonly headingLevel: number | undefined;
-  readonly headingRef: RefObject<HTMLElement | null>;
-  readonly labelledBy: string;
+  readonly labelledBy: string | undefined;
 }
 
-export default function useForm({ labelledBy }: Props): State {
+export default function useForm({ label, labelledBy }: Props): State {
   const headingId: string = useElementId();
-  const { level: headingLevel, ref: headingRef } = useHeadingLevel();
 
   return {
     headingId,
-    headingLevel,
-    headingRef,
-    labelledBy: labelledBy ?? headingId,
+    labelledBy: ((): string | undefined => {
+      if (label !== undefined) {
+        return;
+      }
+      return labelledBy ?? headingId;
+    })(),
   };
 }

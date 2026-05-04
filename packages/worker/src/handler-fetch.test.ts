@@ -25,7 +25,7 @@ describe('Handler', (): void => {
       const testStartTime = 1234;
 
       /**
-       *   Technical debt: ESLint should not expect function expressions for
+       * Technical debt: ESLint should not expect function expressions for
        * functions typed with `this`.
        */
       // eslint-disable-next-line func-style
@@ -66,7 +66,7 @@ describe('Handler', (): void => {
 
     it('should support Request instances', async (): Promise<void> => {
       /**
-       *   Technical debt: ESLint should not expect function expressions for
+       * Technical debt: ESLint should not expect function expressions for
        * functions typed with `this`.
        */
       // eslint-disable-next-line func-style

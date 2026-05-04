@@ -42,7 +42,7 @@ export default function useLocalStorage<T = string>(
 
   // Effects
   /**
-   *   Set the component state to the local storage value. We do this as a
+   * Set the component state to the local storage value. We do this as a
    * side-effect so that client-side renders (with local storage) hydrate
    * correctly against a server-side render (without local storage).
    */
@@ -52,7 +52,7 @@ export default function useLocalStorage<T = string>(
     }
 
     /**
-     *   If the provided Window changes (which realistically should never
+     * If the provided Window changes (which realistically should never
      * happen), and the new value does not exist, erase the component state too.
      */
     const storageValue: string | null = wndw.localStorage.getItem(key);
@@ -66,7 +66,7 @@ export default function useLocalStorage<T = string>(
   }, [key, parse, wndw]);
 
   /**
-   *   Add the state setter to the callback Map so that whichever component sets
+   * Add the state setter to the callback Map so that whichever component sets
    * the storage item can also update this component state's.
    */
   useEffect((): VoidFunction => {
@@ -78,7 +78,7 @@ export default function useLocalStorage<T = string>(
   }, [key]);
 
   /**
-   *   Listen for a `storage` event, which only fires when a separate tab sets
+   * Listen for a `storage` event, which only fires when a separate tab sets
    * a storage item.
    */
   useEffect((): VoidFunction | undefined => {

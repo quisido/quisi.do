@@ -95,7 +95,7 @@ export default class Handler<
 
   public readonly run: (
     /**
-     *   Technical debt: This should be something like `this: this`, to denote
+     * Technical debt: This should be something like `this: this`, to denote
      * that the `handle` function will be bound to the `Handler` object.
      * However, doing so results in an error: classes that extend `Handler`
      * cannot be assigned to `new () => Handler`, because their `handle`'s
@@ -272,7 +272,7 @@ export default class Handler<
   }
 
   /**
-   *   Technical debt: This should be `<K extends keyof Env>(key: K): Env[K]`,
+   * Technical debt: This should be `<K extends keyof Env>(key: K): Env[K]`,
    * but that would (1) require `Env` be typed and (2) lose type-safety by
    * assuming `Env[K]` is the correct type. If the constructor can include a
    * `validateBinding: Record<keyof Env, (value: unknown) => value is Env[K]>`
@@ -620,7 +620,7 @@ export default class Handler<
     }
 
     /**
-     *   We must use `null` to represent `undefined`, because
+     * We must use `null` to represent `undefined`, because
      * `JSON.stringify(undefined)` is `undefined`, which will cause the `value`
      * property to be dropped from the object.
      */

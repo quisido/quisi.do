@@ -41,7 +41,7 @@ export default function TreeGrid({
                 expanded,
                 key: cellKey,
                 /**
-                 *   `readOnly: false` on a focusable cell indicates that the
+                 * `readOnly: false` on a focusable cell indicates that the
                  * cell is editable.
                  */
                 readOnly: isGridCellReadOnly = isTreeGridReadOnly,

@@ -1,26 +1,30 @@
 import useId from './use-id.js';
-import useHeadingLevel from './use-heading-level.js';
-import type { RefObject } from 'react';
 
 export interface ArticleState {
   readonly headingId: string;
-  readonly headingLevel: number | undefined;
-  readonly headingRef: RefObject<HTMLElement | null>;
   readonly labelledBy: string | undefined;
+  readonly tabIndex: 0 | -1;
 }
 
 interface Props {
   readonly labelledBy: string | undefined;
+  readonly tabbable: boolean;
 }
 
-export default function useArticle({ labelledBy }: Props): ArticleState {
+export default function useArticle({
+  labelledBy,
+  tabbable,
+}: Props): ArticleState {
   const headingId: string = useId();
-  const { level: headingLevel, ref: headingRef } = useHeadingLevel();
 
   return {
     headingId,
-    headingLevel,
-    headingRef,
     labelledBy: labelledBy ?? headingId,
+    tabIndex: ((): 0 | -1 => {
+      if (tabbable) {
+        return 0;
+      }
+      return -1;
+    })(),
   };
 }

@@ -8,7 +8,7 @@ import {
   Paragraph,
   Region,
 } from '../design-systems/template/index.js';
-import Page from './page.jsx';
+import Page from './page.js';
 
 export default function DesignSystemDemo(): ReactElement {
   const [checked, setChecked] = useState(false);

@@ -10,7 +10,7 @@ describe('Handler', (): void => {
     const testDatabase = new TestD1Database();
 
     /**
-     *   Technical debt: ESLint should not expect function expressions for
+     * Technical debt: ESLint should not expect function expressions for
      * functions typed with `this`.
      */
     // eslint-disable-next-line func-style

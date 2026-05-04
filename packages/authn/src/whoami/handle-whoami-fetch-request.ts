@@ -71,7 +71,7 @@ export default async function handleWhoAmIFetchRequest(
     );
 
     /**
-     *   Authentication is eventually consistent. We don't want to delete the
+     * Authentication is eventually consistent. We don't want to delete the
      * invalid authentication cookie in case the ID exists in the future.
      */
     if (userIdStr === null) {

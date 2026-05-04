@@ -25,7 +25,7 @@ export default function useInit({
     }
 
     /**
-     *   When using React in both strict and development modes, effect
+     * When using React in both strict and development modes, effect
      * fire twice. This condition fixes the Datadog error, "Datadog Browser SDK:
      * SDK is loaded more than once. This is unsupported and might have
      * unexpected behavior."

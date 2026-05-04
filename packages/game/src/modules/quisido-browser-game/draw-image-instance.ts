@@ -74,9 +74,11 @@ const mapPropsToCanvasImageSource = ({
   );
 };
 
-export default class DrawImageInstance
-  implements Instance<DrawImageProps, BrowserTextInstance, BrowserFamily>
-{
+export default class DrawImageInstance implements Instance<
+  DrawImageProps,
+  BrowserTextInstance,
+  BrowserFamily
+> {
   public readonly appendChild = throwChildMethodError;
   #canvasImageSource: CanvasImageSource | Promise<CanvasImageSource>;
   #coordinates: readonly [number, number];
@@ -186,7 +188,7 @@ export default class DrawImageInstance
     this.#dimensions = [width, height];
 
     /**
-     *   Render immediately to remove the previous the current image, even if
+     * Render immediately to remove the previous the current image, even if
      * the new image has not loaded yet.
      */
     this.#render();

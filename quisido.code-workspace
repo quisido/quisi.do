@@ -94,6 +94,10 @@
     }
   ],
   "settings": {
+    "eslint.workingDirectories": [
+      ".",
+      { "pattern": "packages/*" }
+    ],
     "files.associations": {
       "**/.aiexclude": "ignore",
       "**/config/api-extractor.json": "jsonc",

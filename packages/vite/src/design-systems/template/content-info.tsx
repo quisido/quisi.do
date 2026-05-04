@@ -1,6 +1,5 @@
 import type { ReactElement } from 'react';
 import type { ContentInfoProps } from '../core/content-info-props.js';
-import useContentInfo from '../core/use-content-info.js';
 import classes from './content-info.module.scss';
 
 /**
@@ -12,11 +11,5 @@ import classes from './content-info.module.scss';
 export default function ContentInfo({
   children,
 }: ContentInfoProps): ReactElement {
-  const id: string = useContentInfo();
-
-  return (
-    <footer className={classes['content-info']} id={id}>
-      {children}
-    </footer>
-  );
+  return <footer className={classes['content-info']}>{children}</footer>;
 }

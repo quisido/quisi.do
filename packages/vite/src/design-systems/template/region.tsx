@@ -3,7 +3,7 @@ import Heading from './heading.js';
 import type { RegionProps } from '../core/region-props.js';
 import useRegion from '../core/use-region.js';
 import classes from './region.module.scss';
-import SectionHeader from './section-header.jsx';
+import SectionHeader from './section-header.js';
 
 /**
  *   A region landmark contains content that is relevant to a specific purpose

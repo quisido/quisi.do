@@ -2,7 +2,7 @@ import mapGitHubShaToVersion from '../utils/map-github-sha-to-version.js';
 
 export default function getVersion(): string {
   /**
-   *   If this build relates to a specific GitHub SHA, then the SHA should be
+   * If this build relates to a specific GitHub SHA, then the SHA should be
    * used to generate the version ID.
    */
   const githubSha: string | undefined = import.meta.env.GITHUB_SHA;
@@ -13,7 +13,7 @@ export default function getVersion(): string {
   const { NODE_ENV } = import.meta.env;
 
   /**
-   *   If we're performing a production build in a non-production environment,
+   * If we're performing a production build in a non-production environment,
    * then we call it the gamma build.
    */
   if (NODE_ENV === 'production') {
@@ -21,7 +21,7 @@ export default function getVersion(): string {
   }
 
   /**
-   *   If we're in development mode, then we call it the alpha build. `NODE_ENV`
+   * If we're in development mode, then we call it the alpha build. `NODE_ENV`
    * is `undefined` in the client instance of a NextJS application.
    */
   if (NODE_ENV === 'development' || typeof NODE_ENV === 'undefined') {

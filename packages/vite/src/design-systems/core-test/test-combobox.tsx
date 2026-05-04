@@ -71,7 +71,7 @@ export default function testCombobox(
     // TODO: Comboboxes have an implicit aria-haspopup value of listbox. If the combobox popup element has a role other than listbox, authors MUST specify an aria-haspopup value of tree, grid, menu, or dialog that corresponds to the role of its popup.
 
     /**
-     *   If the user interface includes an additional icon that allows the
+     * If the user interface includes an additional icon that allows the
      * visibility of the popup to be controlled via pointer and touch events,
      * ensure that element has role button, that it is focusable but not
      * included in the page Tab sequence, and that it is not a descendant of

@@ -14,11 +14,11 @@ Before getting started, you need to know:
 
 ## Copy the template files
 
-From this package's root directory, execute this skill's `copy-template.sh`
-script with the _slug_ as the first argument:
+From this package's root directory, execute the `design-system:copy-template`
+script, passing the _slug_ as an argument.
 
 ```bash
-bash ./.agents/skills/create-design-system/copy-template.sh my-example-slug
+npm run design-system:copy-template my-example-slug
 ```
 
 ## Test-driven development
@@ -50,8 +50,8 @@ Components in the design system are located at `src/design-systems/$slug/*.tsx`
 and their CSS files are co-located at `src/design-systems/$slug/*.module.scss`.
 
 _Do not_ look at other design systems in the repository, and **do not** create a
-shared theme file for each component to use. That would just lead to each
-component looking identical.
+shared theme file for each component to use. That would lead to each component
+looking identical.
 
 To prevent context bloat, use a separate subagent to implement each component.
 Give the subagent the design system's slug, description, optional screenshot,

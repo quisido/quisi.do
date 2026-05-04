@@ -132,8 +132,8 @@ export default class FetchHandler<
 
   get traceParentMetricDimensions(): TraceParentMetricDimensions {
     /**
-     *   Trace parent is null when it is not present in the request.
-     *   Trace parent is undefined when this property is accessed before the
+     * Trace parent is null when it is not present in the request.
+     * Trace parent is undefined when this property is accessed before the
      * constructor completes, e.g. when a metric is emit during construction.
      */
     if (this.traceParent === null || typeof this.traceParent === 'undefined') {

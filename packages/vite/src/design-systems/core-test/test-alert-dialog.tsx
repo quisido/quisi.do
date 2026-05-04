@@ -1,62 +1,68 @@
 import { describe, expect, it, vi } from 'vitest';
-import { userEvent, type UserEvent } from '@testing-library/user-event';
 import type { ComponentType } from 'react';
 import type { AlertDialogProps } from '../core/alert-dialog-props.js';
 import render, { type RenderTest } from './render.js';
 import noop from '../../utils/noop.js';
-
-interface AlertDialogTest extends RenderTest {
-  readonly clickDismiss: () => Promise<void>;
-}
+import expectActiveElementToBe from './expect-active-element-to-be.js';
+import { within } from '@testing-library/react';
 
 export default function testAlertDialog(
   AlertDialog: ComponentType<AlertDialogProps>,
 ): void {
-  const renderAlertDialog = (
-    props: Partial<AlertDialogProps>,
-  ): AlertDialogTest => {
-    const user: UserEvent = userEvent.setup();
-    const result: RenderTest = render(
+  const renderAlertDialog = (props: Partial<AlertDialogProps>): RenderTest =>
+    render(
       <AlertDialog heading="Heading" onDismiss={noop} {...props}>
-        Content
+        {props.children ?? 'Content'}
       </AlertDialog>,
     );
 
-    return {
-      ...result,
-      async clickDismiss(): Promise<void> {
-        const dismissButton: HTMLElement = result.getByName(
-          'button',
-          'Dismiss',
-        );
-        await user.click(dismissButton);
-      },
-    };
-  };
-
   describe('AlertDialog', (): void => {
+    it('should be described', (): void => {
+      const { getByDescription } = renderAlertDialog({
+        children: 'Description',
+      });
+      getByDescription('alertdialog', 'Description');
+    });
+
+    it('should be dismissible', async (): Promise<void> => {
+      const handleDismiss = vi.fn();
+      const { clickButton } = renderAlertDialog({ onDismiss: handleDismiss });
+      await clickButton('Dismiss');
+      expect(handleDismiss).toHaveBeenCalledExactlyOnceWith();
+    });
+
     it('should be labelled by its heading', (): void => {
       const { getByName } = renderAlertDialog({ heading: 'Heading label' });
       getByName('alertdialog', 'Heading label');
     });
 
-    it('should support dismissing', async (): Promise<void> => {
-      const handleDismiss = vi.fn();
-      const { clickDismiss } = renderAlertDialog({ onDismiss: handleDismiss });
-      await clickDismiss();
-      expect(handleDismiss).toHaveBeenCalledExactlyOnceWith();
+    it('should be modal', (): void => {
+      const { getByName } = renderAlertDialog({ heading: 'Modal' });
+      const modal: HTMLElement = getByName('alertdialog', 'Modal');
+      expect(modal).toHaveAttribute('aria-modal', 'true');
     });
 
-    it('must be described', (): void => {
-      const { getByDescription } = renderAlertDialog({
-        children: 'Test content',
-      });
-      getByDescription('alertdialog', 'Test content');
+    // Technical debt: I think userEvents does not respect z-index.
+    it.skip('should block pointer events', async (): Promise<void> => {
+      const handleClick = vi.fn();
+      const { clickButton } = render(
+        <>
+          <button onClick={handleClick} type="button">
+            Background button
+          </button>
+          <AlertDialog heading="Modal" onDismiss={noop}>
+            Content
+          </AlertDialog>
+        </>,
+      );
+
+      await clickButton('Background button');
+      expect(handleClick).not.toHaveBeenCalled();
     });
 
-    it('should be modal (capture keyboard navigation)', async (): Promise<void> => {
-      const user: UserEvent = userEvent.setup();
-      const { getByName } = render(
+    // This test is the behavioral implications of being modal.
+    it('should capture keyboard navigation', async (): Promise<void> => {
+      const { getByName, shiftTab, tab } = render(
         <>
           <button type="button">Before button</button>
           <AlertDialog heading="Modal" onDismiss={noop}>
@@ -69,17 +75,31 @@ export default function testAlertDialog(
       const childButton: HTMLElement = getByName('button', 'Child button');
       const dismissButton: HTMLElement = getByName('button', 'Dismiss');
 
-      expect(window.document.activeElement).toBe(childButton);
-      await user.tab();
-      expect(window.document.activeElement).toBe(dismissButton);
-      await user.tab();
-      expect(window.document.activeElement).toBe(childButton);
-      await user.tab();
-      expect(window.document.activeElement).toBe(dismissButton);
-      await user.tab();
-      expect(window.document.activeElement).toBe(childButton);
-      await user.tab();
-      expect(window.document.activeElement).toBe(dismissButton);
+      expectActiveElementToBe(childButton);
+      await tab();
+      expectActiveElementToBe(dismissButton);
+      await tab();
+      expectActiveElementToBe(childButton);
+      await tab();
+      expectActiveElementToBe(dismissButton);
+      await tab();
+      expectActiveElementToBe(childButton);
+      await shiftTab();
+      expectActiveElementToBe(dismissButton);
+      await shiftTab();
+      expectActiveElementToBe(childButton);
+      await shiftTab();
+      expectActiveElementToBe(dismissButton);
+      await shiftTab();
+      expectActiveElementToBe(childButton);
+    });
+
+    it('should contain the alert message', (): void => {
+      const { getByName } = renderAlertDialog({
+        children: 'Alert message',
+        heading: 'Container',
+      });
+      within(getByName('alertdialog', 'Container')).getByText('Alert message');
     });
   });
 }

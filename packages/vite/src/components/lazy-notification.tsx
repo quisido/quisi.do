@@ -48,10 +48,10 @@ export default function LazyNotification({
   }, [children, isMountedRef]);
 
   /**
-   *   Technical debt: The `onDismiss` handler for lazy notifications should not
+   * Technical debt: The `onDismiss` handler for lazy notifications should not
    * require a successful Promise resolution. Consider a shape like
    * `[Promise, { onDismiss }]` that always exposes `onDismiss`.
-   *   If an error occurred while loading the notification, then that error was
+   * If an error occurred while loading the notification, then that error was
    * dismissed.
    */
   if (notification === null) {

@@ -4,5 +4,6 @@ export interface DocumentProps {
   readonly banner?: ReactNode | undefined;
   readonly children: ReactNode;
   readonly contentInfo?: ReactNode | undefined;
-  readonly tabIndex?: number | undefined;
+  /** @default false */
+  readonly tabbable?: boolean | undefined;
 }

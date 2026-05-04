@@ -1,5 +1,4 @@
 import { type RefObject, useLayoutEffect, useRef, useState } from 'react';
-import getRefValue from './get-ref-value.js';
 import mapElementToLevel from './map-element-to-level.js';
 
 interface State<T> {
@@ -7,14 +6,23 @@ interface State<T> {
   readonly ref: RefObject<T | null>;
 }
 
-export default function useHeadingLevel<T extends HTMLElement>(): State<T> {
+/**
+ *   The `useLevel` hook calculates the logical level for an element, based on
+ * the levels of its sibling and parent elements.
+ */
+
+export default function useLevel<T extends HTMLElement>(): State<T> {
   const ref: RefObject<T | null> = useRef(null);
-  const [level, setLevel] = useState<number>();
+  const [level, setLevel] = useState<number | undefined>();
 
   useLayoutEffect((): void => {
-    const element: T = getRefValue(ref);
+    const { current: element } = ref;
+    if (element === null) {
+      return;
+    }
+
     const newLevel: number = mapElementToLevel(element);
-    setLevel(newLevel + 1);
+    setLevel(newLevel);
   }, []);
 
   return {

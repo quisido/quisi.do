@@ -8,7 +8,7 @@ describe('FetchHandler', (): void => {
   describe('traceParent', (): void => {
     it('should be null when there is no trace parent', async (): Promise<void> => {
       /**
-       *   Technical debt: ESLint should not expect function expressions for
+       * Technical debt: ESLint should not expect function expressions for
        * functions typed with `this`.
        */
       // eslint-disable-next-line func-style
@@ -36,7 +36,7 @@ describe('FetchHandler', (): void => {
 
     it('should contain the trace parent when present', async (): Promise<void> => {
       /**
-       *   Technical debt: ESLint should not expect function expressions for
+       * Technical debt: ESLint should not expect function expressions for
        * functions typed with `this`.
        */
       // eslint-disable-next-line func-style

@@ -9,7 +9,7 @@ describe('Handler', (): void => {
   describe('emitMetric', (): void => {
     it('should default to empty dimensions', async (): Promise<void> => {
       /**
-       *   Technical debt: ESLint should not expect function expressions for
+       * Technical debt: ESLint should not expect function expressions for
        * functions typed with `this`.
        */
       // eslint-disable-next-line func-style

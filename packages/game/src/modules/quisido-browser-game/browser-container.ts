@@ -7,9 +7,10 @@ import type LayerInstance from './layer-instance.js';
 import mapCanvasTo2DRenderingContext from './map-canvas-to-2d-rendering-context.js';
 import noop from './noop.js';
 
-export default class BrowserContainer
-  implements Container<BrowserTextInstance, BrowserFamily>
-{
+export default class BrowserContainer implements Container<
+  BrowserTextInstance,
+  BrowserFamily
+> {
   readonly #handleError: (error: Error) => void;
   readonly #renderableChildren = new Set<DrawImageInstance | LayerInstance>();
   readonly #renderingContext: CanvasRenderingContext2D;
@@ -85,7 +86,7 @@ export default class BrowserContainer
       this.#renderUnsubscriptions.get(instance);
 
     /**
-     *   This should never happen, but it would be a memory leak if it did so
+     * This should never happen, but it would be a memory leak if it did so
      * it's important to monitor in case it does.
      */
     if (typeof previousUnsubscribe !== 'undefined') {

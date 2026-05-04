@@ -1,29 +1,62 @@
-const BASE = 10;
+import safeParseInt from './safe-parse-int.js';
 
-export default function mapElementToLevel(element: HTMLElement | null): number {
-  if (element === null) {
+interface State {
+  readonly checked: Set<Element>;
+  readonly element: Element;
+  readonly isParent: boolean;
+}
+
+const getElementLevel = ({ checked, element, isParent }: State): number => {
+  checked.add(element);
+
+  // If this element has an explicit level,
+  const levelAttribute: string | null = element.getAttribute('aria-level');
+  if (levelAttribute !== null) {
+    try {
+      return safeParseInt(levelAttribute);
+    } catch (err: unknown) {
+      throw new Error(
+        `Invalid level for ${element.nodeName} element: ${levelAttribute}`,
+        { cause: err },
+      );
+    }
+  }
+
+  // If this element has an external label,
+  const labelId: string | null = element.getAttribute('aria-labelledby');
+  if (labelId !== null) {
+    const label: HTMLElement | null = window.document.getElementById(labelId);
+    if (label !== null && !checked.has(label)) {
+      return getElementLevel({ checked, element: label, isParent });
+    }
+  }
+
+  // If this element's previous sibling has a level,
+  // Note: This is recurse through all previous siblings.
+  const sibling: Element | null = element.previousElementSibling;
+  if (sibling !== null && !checked.has(sibling)) {
+    return getElementLevel({ checked, element: sibling, isParent });
+  }
+
+  // If this element's parent has a level, increment this element's level.
+  const parent: HTMLElement | null = element.parentElement;
+  if (parent === null || checked.has(parent)) {
     return 1;
   }
 
-  const labelId: string | null = element.getAttribute('aria-labelledby');
-  if (labelId === null) {
-    return mapElementToLevel(element.parentElement);
+  // If we're already traversing parents, do not increment the level again.
+  if (isParent) {
+    return getElementLevel({ checked, element: parent, isParent: true });
   }
 
-  const label: HTMLElement | null = window.document.getElementById(labelId);
-  if (label === null) {
-    throw new Error(`Expected a label with ID #${labelId}`, { cause: element });
-  }
+  // This element's level is one higher than its parent's level.
+  return getElementLevel({ checked, element: parent, isParent: true }) + 1;
+};
 
-  const levelStr: string | null = label.getAttribute('aria-level');
-  if (levelStr === null) {
-    return mapElementToLevel(element.parentElement);
-  }
-
-  const levelInt: number = parseInt(levelStr, BASE);
-  if (isNaN(levelInt)) {
-    return mapElementToLevel(element.parentElement);
-  }
-
-  return levelInt;
+export default function mapElementToLevel(element: Element): number {
+  return getElementLevel({
+    checked: new Set(),
+    element,
+    isParent: false,
+  });
 }

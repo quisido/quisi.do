@@ -1,8 +1,8 @@
 import type { ReactElement, ReactNode } from 'react';
-import useElementId from '../../hooks/use-element-id.js';
 import Heading from './heading.js';
 import type { AlertProps } from '../core/alert-props.js';
 import classes from './alert.module.scss';
+import useAlert from '../core/use-alert.js';
 
 /**
  *   An alert is a live region with important, and usually time-sensitive,
@@ -20,13 +20,10 @@ export default function Alert({
   children,
   heading,
   icon: iconProp,
-  label,
-  labelledBy: labelledByProp,
   live = 'assertive',
   type,
 }: AlertProps): ReactElement {
-  const descriptionId: string = useElementId();
-  const headingId: string = useElementId();
+  const { descriptionId, headingId, labelledBy } = useAlert();
 
   const icon = ((): ReactNode => {
     if (iconProp !== undefined) {
@@ -45,23 +42,10 @@ export default function Alert({
     }
   })();
 
-  const labelledBy = ((): string | undefined => {
-    if (heading !== undefined) {
-      return headingId;
-    }
-
-    if (labelledByProp !== undefined) {
-      return labelledByProp;
-    }
-
-    return undefined;
-  })();
-
   return (
     <div
       aria-atomic={atomic}
       aria-describedby={descriptionId}
-      aria-label={label}
       aria-labelledby={labelledBy}
       aria-live={live}
       className={classes['alert']}
@@ -69,11 +53,9 @@ export default function Alert({
     >
       {icon && <span className={classes['icon']}>{icon}</span>}
       <div>
-        {heading !== undefined && (
-          <Heading className={classes['heading']} id={headingId} level={2}>
-            {heading}
-          </Heading>
-        )}
+        <Heading className={classes['heading']} id={headingId}>
+          {heading}
+        </Heading>
         <div className={classes['description']} id={descriptionId}>
           {children}
         </div>

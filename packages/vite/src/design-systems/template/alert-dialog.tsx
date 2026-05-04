@@ -41,35 +41,49 @@ export default function AlertDialog({
   onDismiss,
   type = 'info',
 }: AlertDialogProps): ReactElement {
-  const { descriptionId, headingId, labelledBy } = useAlertDialog();
+  const {
+    descriptionId,
+    headingId,
+    labelledBy,
+    overlayProps,
+    ref,
+    underlayProps,
+  } = useAlertDialog<HTMLDivElement>({ onDismiss });
+
+  const handleDismissClick = (): void => {
+    onDismiss();
+  };
 
   return (
-    <div
-      aria-describedby={descriptionId}
-      aria-labelledby={labelledBy}
-      aria-modal
-      className={classes['alert-dialog']}
-      role="alertdialog"
-    >
-      <FocusScope autoFocus contain restoreFocus>
-        <span className={classes['icon']}>{icon ?? toIcon(type)}</span>
-        <div>
-          <Heading className={classes['heading']} id={headingId} level={3}>
-            {heading}
-          </Heading>
-          <div id={descriptionId}>{children}</div>
-        </div>
-        <button
-          aria-label="Dismiss"
-          className={classes['dismiss-button']}
-          onClick={(): void => {
-            onDismiss();
-          }}
-          type="button"
-        >
-          &times;
-        </button>
-      </FocusScope>
-    </div>
+    <>
+      <div {...underlayProps} className={classes['underlay']} />
+      <div
+        {...overlayProps}
+        aria-describedby={descriptionId}
+        aria-labelledby={labelledBy}
+        aria-modal
+        className={classes['alert-dialog']}
+        ref={ref}
+        role="alertdialog"
+      >
+        <FocusScope autoFocus contain restoreFocus>
+          <span className={classes['icon']}>{icon ?? toIcon(type)}</span>
+          <div>
+            <Heading className={classes['heading']} id={headingId}>
+              {heading}
+            </Heading>
+            <div id={descriptionId}>{children}</div>
+          </div>
+          <button
+            aria-label="Dismiss"
+            className={classes['dismiss-button']}
+            onClick={handleDismissClick}
+            type="button"
+          >
+            &times;
+          </button>
+        </FocusScope>
+      </div>
+    </>
   );
 }

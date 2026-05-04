@@ -1,8 +1,7 @@
 import type { ReactElement } from 'react';
 import type { FormProps } from '../core/form-props.js';
 import useForm from '../core/use-form.js';
-import Heading from './heading.jsx';
-import HeadingLevelProvider from '../core/heading-level-provider.jsx';
+import Heading from './heading.js';
 import classes from './form.module.scss';
 
 /**
@@ -19,8 +18,7 @@ export default function Form({
   label,
   labelledBy: labelledByProp,
 }: FormProps): ReactElement {
-  const { headingId, headingLevel, labelledBy } = useForm({
-    heading,
+  const { headingId, labelledBy } = useForm({
     label,
     labelledBy: labelledByProp,
   });
@@ -31,14 +29,10 @@ export default function Form({
       aria-labelledby={labelledBy}
       className={classes['form']}
     >
-      {heading && (
-        <Heading id={headingId} level={headingLevel}>
-          {heading}
-        </Heading>
-      )}
-      <HeadingLevelProvider increment={heading !== undefined}>
-        {children}
-      </HeadingLevelProvider>
+      <Heading className={classes['heading']} id={headingId}>
+        {heading}
+      </Heading>
+      {children}
     </form>
   );
 }

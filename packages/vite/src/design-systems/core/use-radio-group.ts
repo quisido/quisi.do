@@ -45,7 +45,7 @@ export default function useRadioGroup({
     labelId,
 
     /**
-     *   Because the inputs are either `{ hasLabel: true }` or
+     * Because the inputs are either `{ hasLabel: true }` or
      * `{ hasLabel: false, labelledBy: string }`, this value will technically
      * always be a string. This type strictness is not worth the added type
      * complexity, though.

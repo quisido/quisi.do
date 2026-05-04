@@ -1,9 +1,14 @@
-import { render as testingLibraryRender } from '@testing-library/react';
+import {
+  fireEvent,
+  render as testingLibraryRender,
+} from '@testing-library/react';
 import { type ReactNode } from 'react';
 import { expect } from 'vitest';
 import noop from '../../utils/noop.js';
 import RenderWrapper from './render-wrapper.js';
 import type { ARIARole } from 'aria-query';
+import createContainer from './create-container.js';
+import { userEvent, type UserEvent } from '@testing-library/user-event';
 
 type DesignSystemRole =
   | Exclude<ARIARole, 'img'>
@@ -15,7 +20,9 @@ type DesignSystemRole =
   | 'suggestion';
 
 export interface RenderTest {
+  readonly clickButton: (name: string) => Promise<void>;
   readonly expectToHaveThrown: (message: RegExp | string) => void;
+  readonly focus: (element: HTMLElement) => void;
   readonly getByDescription: (
     role: DesignSystemRole,
     description: string,
@@ -41,16 +48,17 @@ export interface RenderTest {
   readonly getOptionalByRole: (role: DesignSystemRole) => HTMLElement | null;
   readonly getRoleCount: (role: DesignSystemRole) => number;
   readonly rerender: (node: ReactNode) => void;
+  readonly shiftTab: () => Promise<void>;
+  readonly tab: () => Promise<void>;
 }
 
 export default function render(node: ReactNode): RenderTest {
-  const container: HTMLDivElement = window.document.createElement('div');
-  container.setAttribute('focusable', 'true');
-  container.setAttribute('tabindex', '-1');
+  const container: HTMLDivElement = createContainer();
   window.document.body.appendChild(container);
+  const user: UserEvent = userEvent.setup();
 
   /**
-   *   We have to explicitly provide a container if we want parallel tests to
+   * We have to explicitly provide a container if we want parallel tests to
    * not share the same one (`document.body`). Otherwise, `getBy*` queries will
    * fail when an element exists in a parallel test (e.g. a "Dismiss" button).
    */
@@ -64,13 +72,18 @@ export default function render(node: ReactNode): RenderTest {
     });
 
   return {
+    async clickButton(name: string): Promise<void> {
+      const button: HTMLElement = getByRole('button', { name });
+      await user.click(button);
+    },
+
     expectToHaveThrown(message: RegExp | string): void {
       const element: HTMLElement = getByTestId('error-boundary-error-message');
-      if (typeof message === 'string') {
-        expect(element).toHaveTextContent(message);
-      } else {
-        expect(element).toHaveTextContent(message);
-      }
+      expect(element).toHaveTextContent(message);
+    },
+
+    focus(element: HTMLElement): void {
+      fireEvent.focus(element);
     },
 
     getByDescription(role: string, description: string): HTMLElement {
@@ -114,5 +127,13 @@ export default function render(node: ReactNode): RenderTest {
     },
 
     rerender,
+
+    async shiftTab(): Promise<void> {
+      await user.tab({ shift: true });
+    },
+
+    async tab(): Promise<void> {
+      await user.tab();
+    },
   };
 }

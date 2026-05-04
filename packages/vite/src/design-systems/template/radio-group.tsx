@@ -32,7 +32,7 @@ export default function RadioGroup<
   });
 
   /**
-   *   If the radio group owns any other elements, we cannot infer a radio's
+   * If the radio group owns any other elements, we cannot infer a radio's
    * position in the set.
    */
   const getPositionInSet = (index: number): number | undefined => {

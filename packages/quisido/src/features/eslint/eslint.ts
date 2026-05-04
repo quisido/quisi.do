@@ -6,8 +6,9 @@ import randomInt from '../../utils/random-int.js';
 import withDuration from '../../utils/with-duration.js';
 import npxEslint from './npx-eslint.js';
 import report from './report.js';
+import { cpus } from 'node:os';
 
-const MAX_CONCURRENCY = 4;
+const MAX_CONCURRENCY: number = cpus().length;
 const MIN_CONCURRENCY = 1;
 
 export const eslint: ReportingTool = new ReportingTool(

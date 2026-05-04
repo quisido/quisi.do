@@ -16,7 +16,7 @@ export default async function putBudget(
   const now: number = this.now();
 
   /**
-   *   Pay until the end of the month to support read access. Pay for an
+   * Pay until the end of the month to support read access. Pay for an
    * additional month to maintain the data even if payment is not made on time.
    */
   const nextNextMonth: number = mapTimeToNextNextMonth(now);

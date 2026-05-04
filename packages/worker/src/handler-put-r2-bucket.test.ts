@@ -16,7 +16,7 @@ describe('Handler', (): void => {
     const testBucket = new TestR2Bucket();
 
     /**
-     *   Technical debt: ESLint should not expect function expressions for
+     * Technical debt: ESLint should not expect function expressions for
      * functions typed with `this`.
      */
     // eslint-disable-next-line func-style
@@ -58,7 +58,7 @@ describe('Handler', (): void => {
     testBucket.setPutError(testError);
 
     /**
-     *   Technical debt: ESLint should not expect function expressions for
+     * Technical debt: ESLint should not expect function expressions for
      * functions typed with `this`.
      */
     // eslint-disable-next-line func-style

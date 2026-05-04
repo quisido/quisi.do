@@ -8,7 +8,7 @@ describe('Handler', (): void => {
   describe('validateBinding', (): void => {
     it('should support default values', async (): Promise<void> => {
       /**
-       *   Technical debt: ESLint should not expect function expressions for
+       * Technical debt: ESLint should not expect function expressions for
        * functions typed with `this`.
        */
       // eslint-disable-next-line func-style

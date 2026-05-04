@@ -10,7 +10,7 @@ const TEST_TS_CONFIG: Config = defineConfig({
   rules: {
     ...TS.rules,
     /**
-     *   This rule is incompatible with TypeScript when setting a variable in a
+     * This rule is incompatible with TypeScript when setting a variable in a
      * callback.
      *
      * let x: (() => void) | undefined = undefined;

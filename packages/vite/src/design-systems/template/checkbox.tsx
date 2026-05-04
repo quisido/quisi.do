@@ -35,7 +35,7 @@ export default function Checkbox({
     <label className={classes['root']}>
       <input
         /**
-         *   Due to the strong native semantics of HTML's native checkbox, use
+         * Due to the strong native semantics of HTML's native checkbox, use
          * its `checked` attribute and `indeterminate` IDL attribute to specify
          * its checked and mixed states, respectively.
          */

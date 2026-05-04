@@ -1,6 +1,5 @@
 import { type Key, type ReactElement, useMemo } from 'react';
-import type { GridProps, GridRow } from '../core/grid-props.js';
-import type { RowCell } from '../core/row-props.js';
+import type { GridCell, GridProps, GridRow } from '../core/grid-props.js';
 import useElementId from '../../hooks/use-element-id.js';
 import classes from './grid.module.scss';
 
@@ -54,12 +53,12 @@ export default function Grid({
           return (
             <tr key={rowKey} role="row">
               {cells.map(
-                ({ children, key: cellKey }: RowCell): ReactElement => {
+                ({ content, key: cellKey }: GridCell): ReactElement => {
                   /**
-                   *   A grid cell can be focusable, editable, and selectable. A
+                   * A grid cell can be focusable, editable, and selectable. A
                    * grid cell can have relationships such as aria-controls to
                    * address the application of functional relationships.
-                   *   If an author intends a grid cell to have a row header, column
+                   * If an author intends a grid cell to have a row header, column
                    * header, or both, and if the relevant headers cannot be
                    * determined from the DOM structure, authors SHOULD explicitly
                    * indicate which header cells are relevant to the grid cell by
@@ -74,7 +73,7 @@ export default function Grid({
                       key={cellKey}
                       role="gridcell"
                     >
-                      {children}
+                      {content}
                     </td>
                   );
                 },

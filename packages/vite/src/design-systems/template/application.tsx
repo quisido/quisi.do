@@ -1,11 +1,10 @@
 import type { ReactElement } from 'react';
-import OwnsBanner from '../core/owns-banner.js';
 import Banner from './banner.js';
 import type { ApplicationProps } from '../core/application-props.js';
-import OwnsContentInfo from '../core/owns-content-info.js';
 import ContentInfo from './content-info.js';
-import OwnsMain from '../core/owns-main.jsx';
 import classes from './application.module.scss';
+import Heading from './heading.jsx';
+import useApplication from '../core/use-application.js';
 
 /**
  *   An application is a structure containing one or more focusable elements
@@ -33,28 +32,28 @@ export default function Application({
   children,
   contentInfo,
   describedBy,
+  heading,
   label,
+  labelledBy: labelledByProp,
   roleDescription,
 }: ApplicationProps): ReactElement {
+  const { headingId, labelledBy } = useApplication({
+    labelledBy: labelledByProp,
+  });
+
   return (
     <div
       aria-describedby={describedBy}
       aria-label={label}
+      aria-labelledby={labelledBy}
       aria-roledescription={roleDescription}
       className={classes['application']}
       role="application"
     >
-      <OwnsBanner>
-        <OwnsContentInfo>
-          <OwnsMain>
-            {banner !== undefined && <Banner>{banner}</Banner>}
-            {children}
-            {contentInfo !== undefined && (
-              <ContentInfo>{contentInfo}</ContentInfo>
-            )}
-          </OwnsMain>
-        </OwnsContentInfo>
-      </OwnsBanner>
+      {banner !== undefined && <Banner>{banner}</Banner>}
+      <Heading id={headingId}>{heading}</Heading>
+      {children}
+      {contentInfo !== undefined && <ContentInfo>{contentInfo}</ContentInfo>}
     </div>
   );
 }

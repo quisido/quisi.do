@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { OneOf } from './one-of.js';
+import type { RequiredReactNode } from './required-react-node.js';
 
 export type FeedArticle = OneOf<OneOfFeedArticleProps> & {
   readonly children: ReactNode;
@@ -10,7 +11,7 @@ export type FeedArticle = OneOf<OneOfFeedArticleProps> & {
 export interface FeedProps {
   readonly articles: readonly FeedArticle[];
   /**
-   *   The articles offset is the number of articles missing from the beginning
+   * The articles offset is the number of articles missing from the beginning
    * of the `articles` array prop.
    * @default 0
    */
@@ -24,6 +25,6 @@ export interface FeedProps {
 }
 
 interface OneOfFeedArticleProps {
-  readonly heading: Exclude<ReactNode, boolean | null | undefined>;
+  readonly heading: RequiredReactNode;
   readonly labelledBy: string;
 }

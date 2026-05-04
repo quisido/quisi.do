@@ -2,7 +2,6 @@ import type { ReactElement } from 'react';
 import type { ArticleProps } from '../core/article-props.js';
 import useArticle from '../core/use-article.js';
 import Heading from './heading.js';
-import HeadingLevelProvider from '../core/heading-level-provider.js';
 import classes from './article.module.scss';
 
 /**
@@ -29,27 +28,22 @@ import classes from './article.module.scss';
 export default function Article({
   children,
   heading,
-  label,
   labelledBy: labelledByProp,
+  tabbable = false,
 }: ArticleProps): ReactElement {
-  const { headingId, headingLevel, labelledBy } = useArticle({
-    heading,
-    label,
+  const { headingId, labelledBy, tabIndex } = useArticle({
     labelledBy: labelledByProp,
+    tabbable,
   });
 
   return (
     <article
-      aria-label={label}
       aria-labelledby={labelledBy}
       className={classes['article']}
+      tabIndex={tabIndex}
     >
-      <Heading id={headingId} level={headingLevel}>
-        {heading}
-      </Heading>
-      <HeadingLevelProvider increment={heading !== undefined}>
-        {children}
-      </HeadingLevelProvider>
+      <Heading id={headingId}>{heading}</Heading>
+      {children}
     </article>
   );
 }

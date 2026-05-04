@@ -38,7 +38,7 @@ export default function testSuggestion(
     });
 
     /**
-     *   TODO: Authors MAY use aria-details or aria-description to associate the
+     * TODO: Authors MAY use aria-details or aria-description to associate the
      * suggestion with related information such as comments, authoring info, and
      * time stamps.
      */

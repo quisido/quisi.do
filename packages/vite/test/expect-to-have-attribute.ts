@@ -24,7 +24,7 @@ expect.extend({
 
     try {
       /**
-       *   This format allows `expect.any(String) as string`, because
+       * This format allows `expect.any(String) as string`, because
        * `expect.any`'s return type is not known to type the `expectedValue`
        * parameter.
        */

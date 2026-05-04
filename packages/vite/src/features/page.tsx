@@ -1,5 +1,5 @@
 import type { PropsWithChildren, ReactElement } from 'react';
-import Document from '../design-systems/template/document.jsx';
+import Document from '../design-systems/template/document.js';
 
 const YEAR: number = new Date().getFullYear();
 

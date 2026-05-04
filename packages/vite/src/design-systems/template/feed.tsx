@@ -3,8 +3,8 @@ import type { FeedArticle, FeedProps } from '../core/feed-props.js';
 import useFeed from '../core/use-feed.js';
 import useId from '../core/use-id.js';
 import Heading from './heading.js';
-import useHeadingLevel from '../core/use-heading-level.js';
 import classes from './feed.module.scss';
+import useLevel from '../core/use-level.js';
 
 interface FeedArticleProps {
   readonly onFocus: VoidFunction;
@@ -23,7 +23,7 @@ const FeedArticleComponent = ({
   setSize,
 }: FeedArticle & FeedArticleProps): ReactElement => {
   const headingId: string = useId();
-  const { level: headingLevel, ref: headingRef } = useHeadingLevel();
+  const { level: headingLevel, ref: headingRef } = useLevel();
 
   return (
     <article

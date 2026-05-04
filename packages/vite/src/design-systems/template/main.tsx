@@ -1,6 +1,5 @@
 import type { ReactElement } from 'react';
 import type { MainProps } from '../core/main-props.js';
-import useMain from '../core/use-main.js';
 import classes from './main.module.scss';
 
 /**
@@ -11,11 +10,5 @@ import classes from './main.module.scss';
  * @see {@link https://w3c.github.io/aria/#main | WAI-ARIA `main` role}
  */
 export default function Main({ children }: MainProps): ReactElement {
-  const id: string = useMain();
-
-  return (
-    <main className={classes['main']} id={id}>
-      {children}
-    </main>
-  );
+  return <main className={classes['main']}>{children}</main>;
 }

@@ -9,6 +9,8 @@
     "src/**/*.e2e.ts",
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
+    "src/design-systems/core-test/*.ts",
+    "src/design-systems/core-test/*.tsx",
     "src/*.test.ts",
     "src/*.test.tsx",
     "src/test/",

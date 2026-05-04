@@ -14,7 +14,7 @@ describe('Handler', (): void => {
     it('should write a standardized Analytics Engine data point', async (): Promise<void> => {
       const testDataset = new TestAnalyticsEngineDataset();
       /**
-       *   Technical debt: ESLint should not expect function expressions for
+       * Technical debt: ESLint should not expect function expressions for
        * functions typed with `this`.
        */
       // eslint-disable-next-line func-style

@@ -52,11 +52,11 @@ export default async function npxEslint(
     }
 
     /**
-     *   When the `eslint` command fails, it will emit via stderr, e.g.
+     * When the `eslint` command fails, it will emit via stderr, e.g.
      * Error: The 'jiti' library is required for loading TypeScript configuration
      * files. Make sure to install it.
-     *   When `eslint` encounters linting errors, it logs via stdout.
-     *   For posterity, include both.
+     * When `eslint` encounters linting errors, it logs via stdout.
+     * For posterity, include both.
      */
     const message = [stderr, stdout].join(EOL).trim();
     if (message === '') {

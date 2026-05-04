@@ -268,7 +268,7 @@ export default function testDesignSystem(
   describe(`Design System: ${slug}`, (): void => {
     testAlert(Alert);
     testAlertDialog(AlertDialog);
-    testApplication(Application, { Banner, ContentInfo });
+    testApplication(Application, { Article, Document });
     testArticle(Article);
     testBanner(Banner, { Document });
     testBlockQuote(BlockQuote);

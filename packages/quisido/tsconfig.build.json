@@ -6,7 +6,7 @@
     "outDir": "dist",
     "rootDir": "src",
     /**
-     *   Relative import paths need explicit file extensions in ECMAScript
+     * Relative import paths need explicit file extensions in ECMAScript
      * imports when '--moduleResolution' is 'node16' or 'nodenext'. Consider
      * adding an extension to the import path. ts(2834)
      */
