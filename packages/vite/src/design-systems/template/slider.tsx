@@ -5,9 +5,9 @@ import classes from './slider.module.scss';
 const DEFAULT_MAX = 100;
 
 /**
- *   A slider is an input where the user selects a value from within a given
+ * A slider is an input where the user selects a value from within a given
  * range.
- *   A slider represents the current value and range of possible values via the
+ * A slider represents the current value and range of possible values via the
  * size of the slider and position of the thumb. It is typically possible to add
  * to or subtract from the current value by using directional keys such as arrow
  * keys.

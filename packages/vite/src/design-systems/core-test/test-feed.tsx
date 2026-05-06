@@ -1,6 +1,6 @@
 import render from './render.js';
 import type { ComponentType } from 'react';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { FeedProps } from '../core/feed-props.js';
 
 export default function testFeed(Feed: ComponentType<FeedProps>): void {
@@ -24,7 +24,56 @@ export default function testFeed(Feed: ComponentType<FeedProps>): void {
 
     describe('articles', (): void => {
       it('should be focusable', (): void => {
-        // TODO
+        const { getByName } = render(
+          <>
+            <span id="test-feed-label-id">Test feed</span>
+            <Feed
+              articles={[
+                {
+                  children: 'First content',
+                  heading: 'First article',
+                  key: 'first',
+                },
+              ]}
+              labelledBy="test-feed-label-id"
+            />
+          </>,
+        );
+
+        const article: HTMLElement = getByName('article', 'First article');
+        expect(article).toHaveAttribute('tabindex', '0');
+      });
+
+      it('should support position in set and set size', (): void => {
+        const { getByName } = render(
+          <>
+            <span id="test-feed-label-id">Test feed</span>
+            <Feed
+              articles={[
+                {
+                  children: 'First content',
+                  heading: 'First article',
+                  key: 'first',
+                },
+                {
+                  children: 'Second content',
+                  heading: 'Second article',
+                  key: 'second',
+                },
+              ]}
+              articlesOffset={2}
+              labelledBy="test-feed-label-id"
+              setSize={5}
+            />
+          </>,
+        );
+
+        const first: HTMLElement = getByName('article', 'First article');
+        const second: HTMLElement = getByName('article', 'Second article');
+        expect(first).toHaveAttribute('aria-posinset', '3');
+        expect(first).toHaveAttribute('aria-setsize', '5');
+        expect(second).toHaveAttribute('aria-posinset', '4');
+        expect(second).toHaveAttribute('aria-setsize', '5');
       });
     });
   });

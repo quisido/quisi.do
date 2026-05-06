@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 // import Dot from '../../components/loading-dot';
 
 /**
- *   Techncial debt: Determine how to make the loading view pretty without the
+ * Techncial debt: Determine how to make the loading view pretty without the
  * complexities of a CSS dependency.
  */
 

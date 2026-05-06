@@ -2,8 +2,8 @@ import { type TextInstance } from '../quisido-reconciler/index.js';
 import noop from './noop.js';
 
 /**
- *   `BrowserTextInstance` is for plain text.
- *   For stylized text, such as speech bubbles, see `TextInstance`.
+ * `BrowserTextInstance` is for plain text.
+ * For stylized text, such as speech bubbles, see `TextInstance`.
  */
 
 export default class BrowserTextInstance implements TextInstance {
@@ -22,7 +22,7 @@ export default class BrowserTextInstance implements TextInstance {
     this.#hidden = true;
   }
 
-  public remove = noop;
+  public remove: VoidFunction = noop;
 
   public reset(): void {
     this.#text = '';

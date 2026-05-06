@@ -2,7 +2,7 @@ import { isAbsolute, relative, resolve } from 'node:path';
 import process from 'node:process';
 
 /**
- *   Joins the given path segments with the current working directory, ensuring
+ * Joins the given path segments with the current working directory, ensuring
  * that the resulting path does not traverse outside the current working
  * directory.
  */

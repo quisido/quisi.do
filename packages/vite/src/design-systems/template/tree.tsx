@@ -3,7 +3,7 @@ import type { TreeGroup, TreeItem, TreeProps } from '../core/tree-props.js';
 import classes from './tree.module.scss';
 
 /**
- *   A tree is a widget that allows the user to select one or more items from a
+ * A tree is a widget that allows the user to select one or more items from a
  * hierarchically organized collection.
  * @see {@link https://w3c.github.io/aria/#tree | WAI-ARIA `tree` role}
  * @see {@link https://w3c.github.io/aria/#treeitem | WAI-ARIA `treeitem` role}

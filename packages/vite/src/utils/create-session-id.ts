@@ -1,5 +1,5 @@
 /**
- *   At 54 characters long, \w{18}-\w{18}-\w{18}, there are more possibilities
+ * At 54 characters long, \w{18}-\w{18}-\w{18}, there are more possibilities
  * than atoms in the universe. 36^54 ~= 10^84, which is > 10^82.
  */
 const CHARACTERS = '0123456789abcdefghijklmnopqrstuvwxyz';

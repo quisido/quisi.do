@@ -4,7 +4,7 @@ import classes from './tabs.module.scss';
 import useTabs from '../core/use-tabs.js';
 
 /**
- *   Tabs contain a tab list and tab panel.
+ * Tabs contain a tab list and tab panel.
  * @see {@link https://w3c.github.io/aria/#tablist | WAI-ARIA `tablist` role}
  */
 export default function Tabs({

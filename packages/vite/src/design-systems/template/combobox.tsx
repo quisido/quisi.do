@@ -13,13 +13,13 @@ import useId from '../core/use-id.js';
 import classes from './combobox.module.scss';
 
 /**
- *   A combobox is an input that controls another element, such as a list box or
+ * A combobox is an input that controls another element, such as a list box or
  * grid, that can dynamically pop up to help the user set the value of the
  * input.
- *   A combobox functionally combines a named input field with the ability to
+ * A combobox functionally combines a named input field with the ability to
  * assist value selection via a supplementary popup element. A combobox input is
  * a single-line text field that supports editing and typing.
- *   The initial state of a combobox is collapsed. In the collapsed state, only
+ * The initial state of a combobox is collapsed. In the collapsed state, only
  * the combobox element and a separate, optional popup control button are
  * visible. A combobox is said to be expanded when both the combobox element
  * showing its current value and its associated popup element are visible.

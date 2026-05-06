@@ -7,10 +7,10 @@ const EMPTY_MAP: ReadonlyMap<Key, never> = new Map<Key, never>();
 const EMPTY_SET: ReadonlySet<never> = new Set<never>();
 
 /**
- *   A grid is a composite widget containing a collection of one or more rows
+ * A grid is a composite widget containing a collection of one or more rows
  * with one or more cells where some or all cells in the grid are focusable by
  * using methods of two-dimensional navigation.
- *   A grid does not imply a specific visual, e.g. tabular. It describes
+ * A grid does not imply a specific visual, e.g. tabular. It describes
  * relationships among elements. It can be used for purposes as simple as
  * grouping a collection of checkboxes or navigation links or as complex as
  * creating a full-featured spreadsheet application.

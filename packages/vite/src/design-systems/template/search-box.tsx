@@ -3,7 +3,7 @@ import type { SearchBoxProps } from '../core/search-box-props.js';
 import classes from './search-box.module.scss';
 
 /**
- *   A search box is a type of textbox intended for specifying search criteria.
+ * A search box is a type of textbox intended for specifying search criteria.
  * @see {@link https://w3c.github.io/aria/#searchbox | WAI-ARIA `searchbox` role}
  */
 export default function SearchBox({

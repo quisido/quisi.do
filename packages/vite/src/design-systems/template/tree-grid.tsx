@@ -7,7 +7,7 @@ import type {
 import classes from './tree-grid.module.scss';
 
 /**
- *   A tree grid is a grid with rows that can be expanded and collapsed in the
+ * A tree grid is a grid with rows that can be expanded and collapsed in the
  * same manner as for a tree.
 
 In a treegrid that provides content editing functions, if the content of a focusable gridcell element is not editable, authors MAY set aria-readonly to true on the gridcell element. However, if a treegrid presents a collection of elements that do not support aria-readonly, such as a collection of link elements, it is not necessary for the author to specify a value for aria-readonly.

@@ -5,10 +5,10 @@ import classes from './scrollbar.module.scss';
 const DEFAULT_MAX = 100;
 
 /**
- *   A scrollbar is a graphical object that controls the scrolling of content
+ * A scrollbar is a graphical object that controls the scrolling of content
  * within a viewing area, regardless of whether the content is fully displayed
  * within the viewing area.
- *   A scrollbar represents the current value and range of possible values via
+ * A scrollbar represents the current value and range of possible values via
  * the size of the scrollbar and position of the thumb with respect to the
  * visible range of the orientation (horizontal or vertical) it controls. Its
  * orientation represents the orientation of the scrollbar and the scrolling

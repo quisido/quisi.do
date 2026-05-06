@@ -6,10 +6,10 @@ import classes from './region.module.scss';
 import SectionHeader from './section-header.js';
 
 /**
- *   A region landmark contains content that is relevant to a specific purpose
+ * A region landmark contains content that is relevant to a specific purpose
  * and sufficiently important that users will likely want to be able to navigate
  * to the section easily and to have it listed in a summary of the page.
- *   Limit use of regions to sections containing content with a purpose that is
+ * Limit use of regions to sections containing content with a purpose that is
  * not accurately described by banners, complementary landmarks, content info,
  * forms, main landmarks, navigation landmarks, or searches.
  * @see {@link https://w3c.github.io/aria/#region | WAI-ARIA `region` role}

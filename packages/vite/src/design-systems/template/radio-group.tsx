@@ -4,9 +4,9 @@ import useRadioGroup from '../core/use-radio-group.js';
 import classes from './radio-group.module.scss';
 
 /**
- *   A radio group is group of radio buttons, checkable inputs only one of which
+ * A radio group is group of radio buttons, checkable inputs only one of which
  * can be checked at a time.
- *   A radio group is a type of select list that can only have a single entry
+ * A radio group is a type of select list that can only have a single entry
  * checked at any one time. When one item in the group is checked, the
  * previously checked item becomes unchecked.
  * @see {@link https://w3c.github.io/aria/#radiogroup | WAI-ARIA `radiogroup` role}

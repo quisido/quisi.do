@@ -4,7 +4,6 @@ import useFeed from '../core/use-feed.js';
 import useId from '../core/use-id.js';
 import Heading from './heading.js';
 import classes from './feed.module.scss';
-import useLevel from '../core/use-level.js';
 
 interface FeedArticleProps {
   readonly onFocus: VoidFunction;
@@ -23,8 +22,6 @@ const FeedArticleComponent = ({
   setSize,
 }: FeedArticle & FeedArticleProps): ReactElement => {
   const headingId: string = useId();
-  const { level: headingLevel, ref: headingRef } = useLevel();
-
   return (
     <article
       aria-labelledby={labelledByProp ?? headingId}
@@ -34,30 +31,28 @@ const FeedArticleComponent = ({
       onFocus={onFocus}
       tabIndex={0}
     >
-      <Heading id={headingId} level={headingLevel} ref={headingRef}>
-        {heading}
-      </Heading>
+      <Heading id={headingId}>{heading}</Heading>
       {children}
     </article>
   );
 };
 
 /**
- *   A feed is a scrollable list of articles where scrolling might cause
+ * A feed is a scrollable list of articles where scrolling might cause
  * articles to be added to or removed from either end of the list.
- *   A feed enables users to both read and scroll through a stream of rich
+ * A feed enables users to both read and scroll through a stream of rich
  * content that might continue scrolling infinitely by loading more content as
  * the user reads. In a feed, assistive technologies provide a web application
  * with signals of the user's reading cursor movement by moving user agent
  * focus, enabling the application to both add new content and visually position
  * content as the user browses the page.
- *   For example, a feed could be used to present a stream of news stories where
+ * For example, a feed could be used to present a stream of news stories where
  * each article contains a story with text, links, images, and comments as well
  * as widgets for sharing and commenting. As a reads and interacts with each
  * story and moves the reading cursor from story to story, each story scrolls
  * into view and, as needed, new stories are loaded.
- *   A feed is a container element whose children are articles.
- *   Avoid inserting or removing articles in the middle of a feed. These
+ * A feed is a container element whose children are articles.
+ * Avoid inserting or removing articles in the middle of a feed. These
  * requirements help assistive technologies gracefully respond to changes in the
  * feed content that occur simultaneously with user commands to move the reading
  * cursor within the feed.

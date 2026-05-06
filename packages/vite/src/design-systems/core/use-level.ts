@@ -7,7 +7,7 @@ interface State<T> {
 }
 
 /**
- *   The `useLevel` hook calculates the logical level for an element, based on
+ * The `useLevel` hook calculates the logical level for an element, based on
  * the levels of its sibling and parent elements.
  */
 

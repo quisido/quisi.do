@@ -5,13 +5,13 @@ import classes from './alert.module.scss';
 import useAlert from '../core/use-alert.js';
 
 /**
- *   An alert is a live region with important, and usually time-sensitive,
+ * An alert is a live region with important, and usually time-sensitive,
  * information.
- *   Alerts are used to convey messages that will be immediately important to
+ * Alerts are used to convey messages that will be immediately important to
  * users.
- *   An alert is a special type of assertive live region that is intended to
+ * An alert is a special type of assertive live region that is intended to
  * cause immediate notification for users.
- *   If focus should be moved to an alert when it is conveyed, use an alert
+ * If focus should be moved to an alert when it is conveyed, use an alert
  * dialog instead.
  * @see {@link https://w3c.github.io/aria/#alert | WAI-ARIA `alert` role}
  */

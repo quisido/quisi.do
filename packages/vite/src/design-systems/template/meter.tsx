@@ -6,11 +6,11 @@ import classes from './meter.module.scss';
 const DEFAULT_MAX = 100;
 
 /**
- *   Meter represents a scalar measurement within a known range, or a fractional
+ * Meter represents a scalar measurement within a known range, or a fractional
  * value.
- *   Set `min` and `max` to indicate the minimum and maximum values for the
+ * Set `min` and `max` to indicate the minimum and maximum values for the
  * meter.
- *   DO NOT use a meter to indicate progress; progress bars exist to address
+ * DO NOT use a meter to indicate progress; progress bars exist to address
  * that need.
  * @see {@link https://w3c.github.io/aria/#meter | WAI-ARIA `meter` role}
  */

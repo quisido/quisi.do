@@ -3,7 +3,7 @@ import type { ListItem, ListProps } from '../core/list-props.js';
 import classes from './list.module.scss';
 
 /**
- *   A list is a section containing list items.
+ * A list is a section containing list items.
  * @see {@link https://w3c.github.io/aria/#list | WAI-ARIA `list` role}
  */
 export default function List({

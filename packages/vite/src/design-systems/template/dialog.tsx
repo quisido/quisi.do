@@ -7,15 +7,15 @@ import Heading from './heading.js';
 import classes from './dialog.module.scss';
 
 /**
- *   A dialog is a descendant window of the primary window of a web application.
- *   Dialogs are often used to prompt the user to enter or respond to
+ * A dialog is a descendant window of the primary window of a web application.
+ * Dialogs are often used to prompt the user to enter or respond to
  * information, or can represent content related to understanding or modifying
  * the content of the primary application window. A dialog that is designed to
  * interrupt workflow and prevent users from interacting with the primary web
  * application is usually modal. A dialog that allows for the user to switch
  * between interacting with the content of the primary web application and the
  * content the dialog is usually modeless (i.e., non-modal).
- *   Dialogs must have at least one focusable descendant element.
+ * Dialogs must have at least one focusable descendant element.
  * @see {@link https://w3c.github.io/aria/#dialog | WAI-ARIA `dialog` role}
  */
 export default function Dialog({

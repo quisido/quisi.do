@@ -3,12 +3,12 @@ import type { NoteProps } from '../core/note-props.js';
 import classes from './note.module.scss';
 
 /**
- *   A note section represents additional information or parenthetical context
+ * A note section represents additional information or parenthetical context
  * to the primary content it supplements.
- *   A note is content provided by the author of the page or document, it is not
+ * A note is content provided by the author of the page or document, it is not
  * to be used for providing reactions or suggestions. For these purposes, please
  * review comment and suggestion.
- *   When used within the normal flow of a page's content, a note has an
+ * When used within the normal flow of a page's content, a note has an
  * implicit association with the content that it supplements. The following
  * example demonstrates using a note to call out additional information in the
  * natural reading order of a page:
@@ -27,7 +27,7 @@ import classes from './note.module.scss';
  * </Note>
  * <Paragraph>...</Paragraph>
  * ```
- *   In cases where a note has been determined to need a programmatic
+ * In cases where a note has been determined to need a programmatic
  * association with the content it supplements, use one of the following
  * mechanisms to associate the elements:
  * - If the note contains structured or interactive content (for example, a

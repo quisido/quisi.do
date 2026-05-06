@@ -1,5 +1,5 @@
 /**
- *   `${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}
+ * `${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}${Hex}
  * ${Hex}${Hex}${Hex}${Hex}` produces a union type that is too complex to
  * represent.
  */

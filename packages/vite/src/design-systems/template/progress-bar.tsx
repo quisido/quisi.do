@@ -6,12 +6,12 @@ import classes from './progress-bar.module.scss';
 const DEFAULT_MAX = 100;
 
 /**
- *   A progress bar displays the progress status for tasks that take a long
+ * A progress bar displays the progress status for tasks that take a long
  * time.
- *   A progress bar indicates that the user's request has been received and the
+ * A progress bar indicates that the user's request has been received and the
  * application is making progress toward completing the requested action.
- *   Set `min` and `max` props to indicate the minimum and maximum progress indicator values.
- *   If the progress bar is describing the loading progress of a particular
+ * Set `min` and `max` props to indicate the minimum and maximum progress indicator values.
+ * If the progress bar is describing the loading progress of a particular
  * region of a page, set the `describes` prop to that region's ID. It is not
  * possible for the user to alter the value of a progressbar because it is
  * always read-only.

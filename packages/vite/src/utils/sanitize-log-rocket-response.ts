@@ -5,7 +5,7 @@ import type {
 } from '../types/log-rocket.js';
 
 /**
- *   Don't risk logging the response of an unknown request. It may contain
+ * Don't risk logging the response of an unknown request. It may contain
  * sensitive information,
  */
 

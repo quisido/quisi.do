@@ -10,7 +10,7 @@ import {
 import reduceEnvironmentVariableNamesToRecord from './src/utils/reduce-environment-variable-names-to-record.js';
 
 /**
- *   Disabled because "Both esbuild and oxc options were set. oxc options will
+ * Disabled because "Both esbuild and oxc options were set. oxc options will
  * be used and esbuild options will be ignored."
 const ESBUILD_OPTIONS: ESBuildOptions = {
   color: true,

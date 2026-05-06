@@ -11,8 +11,8 @@ import noop from '../../utils/noop.js';
 
 /**
  * Technical debt: If this banner is always present, we could generate it with
- *   `useMemo` in the `<Notifications />` component by consuming the Turnstile
- *   context.
+ * `useMemo` in the `<Notifications />` component by consuming the Turnstile
+ * context.
  */
 
 const CHALLENGE_TIMEOUT = 110600;

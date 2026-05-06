@@ -5,9 +5,9 @@ import Heading from './heading.js';
 import classes from './form.module.scss';
 
 /**
- *   A form is a landmark region containing items and objects that, as a whole,
+ * A form is a landmark region containing items and objects that, as a whole,
  * combine to create a form.
- *   A form can contain a mix of host language form controls, scripted controls,
+ * A form can contain a mix of host language form controls, scripted controls,
  * and hyperlinks. If the purpose of a form is to submit search criteria, use
  * the `Search` component instead.
  * @see {@link https://w3c.github.io/aria/#form | WAI-ARIA `form` role}

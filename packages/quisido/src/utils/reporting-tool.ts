@@ -18,7 +18,7 @@ Press any other key to RETRY.
 `;
 
 /**
- *   This class will execute a tool call, but handle any unexpected errors that
+ * This class will execute a tool call, but handle any unexpected errors that
  * occur, ensuring that a valid Report is generated.
  */
 export default class ReportingTool<

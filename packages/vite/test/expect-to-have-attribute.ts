@@ -3,7 +3,7 @@ import { mapToString } from 'fmrs';
 import { expect } from 'vitest';
 
 /**
- *   Provides missing `@testing-library/jest-dom` matchers without installing
+ * Provides missing `@testing-library/jest-dom` matchers without installing
  * the dependency.
  */
 

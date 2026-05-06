@@ -3,8 +3,8 @@ import type { TextBoxProps } from '../core/text-box-props.js';
 import classes from './text-box.module.scss';
 
 /**
- *   A text box is a type of input that allows free-form text as its value.
- *   If the `multiline` prop is `true`, the widget accepts line breaks within
+ * A text box is a type of input that allows free-form text as its value.
+ * If the `multiline` prop is `true`, the widget accepts line breaks within
  * the input. Otherwise, this is a simple text box.
 
 Examples include:

@@ -10,7 +10,7 @@ const HEX = 16;
 const OPAGUE = 1;
 
 /**
- *   Two hexadecimal digits can represent 256 values. These values are denoted
+ * Two hexadecimal digits can represent 256 values. These values are denoted
  * by 00 through FF, the equivalent of 0 through 255 in decimal. The number of
  * possible values (256) is a natural number, while the possible values
  * themselves (0-255) are whole numbers.

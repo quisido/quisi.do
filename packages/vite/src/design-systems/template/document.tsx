@@ -6,13 +6,13 @@ import classes from './document.module.scss';
 import { useDocument } from '../core/index.js';
 
 /**
- *   A document contains content that users may want to browse in a reading
+ * A document contains content that users may want to browse in a reading
  * mode.
- *   When user agent focus moves to an element assigned the role of document,
+ * When user agent focus moves to an element assigned the role of document,
  * assistive technologies having a reading mode for browsing static content may
  * switch to that reading mode and intercept standard input events, such as Up
  * or Down arrow keyboard events, to control the reading cursor.
- *   Because assistive technologies that have a reading mode default to that
+ * Because assistive technologies that have a reading mode default to that
  * mode for all elements except for widgets and applications, the only
  * circumstance where a document is useful for changing assistive technology
  * behavior is when it is a focusable child of a widget or application. For

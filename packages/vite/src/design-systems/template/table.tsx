@@ -4,9 +4,9 @@ import classes from './table.module.scss';
 import useTable from '../core/use-table.js';
 
 /**
- *   A table is a section containing data arranged in rows and columns. See
+ * A table is a section containing data arranged in rows and columns. See
  * related grid.
- *   A table is intended for tabular containers which are not interactive. If
+ * A table is intended for tabular containers which are not interactive. If
  * the tabular container maintains a selection state, provides its own
  * two-dimensional navigation, or allows the user to rearrange or otherwise
  * manipulate its contents or the display thereof, use grid or tree grid

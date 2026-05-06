@@ -5,7 +5,7 @@ import type { CheckboxProps } from '../core/checkbox-props.js';
 import classes from './checkbox.module.scss';
 
 /**
- *   A checkbox is a checkable input that has three possible values: true,
+ * A checkbox is a checkable input that has three possible values: true,
  * false, or 'mixed'. If the checkbox controls a group of elements have a
  * mixture of checked and unchecked values, use 'mixed'.
  * @see {@link https://w3c.github.io/aria/#checkbox | WAI-ARIA `checkbox` role}

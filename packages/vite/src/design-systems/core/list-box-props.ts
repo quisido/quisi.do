@@ -10,7 +10,7 @@ export interface ListBoxOption {
 export type ListBoxProps = OneOf<OneOfProps> & Props;
 
 interface OneOfProps {
-  readonly heading: RequiredReactNode;
+  readonly label: RequiredReactNode;
   readonly labelledBy: string;
 }
 

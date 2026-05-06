@@ -3,9 +3,9 @@ import type { LogProps } from '../core/log-props.js';
 import classes from './log.module.scss';
 
 /**
- *   A log is a live region where new information is appended in a meaningful
+ * A log is a live region where new information is appended in a meaningful
  * order and older information may disappear.
- *   Examples include chat logs, messaging history, game log, or an error log.
+ * Examples include chat logs, messaging history, game log, or an error log.
  * In contrast to other live regions, in logs there is a relationship between
  * the arrival of new items in the log and the reading order. The log contains a
  * meaningful sequence and new information is added only to the end of the log,

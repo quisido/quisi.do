@@ -7,8 +7,8 @@ import useLevel from '../core/use-level.js';
 import isRequiredReactNode from './is-required-react-node.js';
 
 /**
- *   A heading is a heading for a section of the page.
- *   To ensure headings are organized into a logical outline, use the `level`
+ * A heading is a heading for a section of the page.
+ * To ensure headings are organized into a logical outline, use the `level`
  * prop to indicate the proper nesting level.
  * @see {@link https://w3c.github.io/aria/#heading | WAI-ARIA `heading` role}
  */

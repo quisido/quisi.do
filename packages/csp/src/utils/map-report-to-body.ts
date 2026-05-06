@@ -1,7 +1,7 @@
 import type ReportBody from '../types/report-body.js';
 
 /**
- *   We use `Required` in the return type to ensure that new properties on the
+ * We use `Required` in the return type to ensure that new properties on the
  * `ReportBody` type get added to the runtime code.
  */
 

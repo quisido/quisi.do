@@ -2,9 +2,9 @@ import { type Ref, type RefObject, useLayoutEffect, useRef } from 'react';
 import assert from './assert.js';
 
 /**
- *   For native checkboxes, this hook will manage its `indeterminate` IDL
+ * For native checkboxes, this hook will manage its `indeterminate` IDL
  * attribute.
- *   For non-native checkboxes, use `aria-checked` instead.
+ * For non-native checkboxes, use `aria-checked` instead.
  */
 export default function useIndeterminate(
   value: boolean | 'mixed',

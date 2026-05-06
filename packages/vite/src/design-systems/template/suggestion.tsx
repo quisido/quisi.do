@@ -3,8 +3,8 @@ import type { SuggestionProps } from '../core/suggestion-props.js';
 import classes from './suggestion.module.scss';
 
 /**
- *   A suggestion is a single proposed change to content.
- *   For example, in an editing system that supports multiple users, one user
+ * A suggestion is a single proposed change to content.
+ * For example, in an editing system that supports multiple users, one user
  * can suggest a change, and another user would be responsible for accepting or
  * rejecting the suggestion.
  * ```tsx

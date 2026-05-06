@@ -12,9 +12,9 @@ const reduceOptionsToValues = (
 };
 
 /**
- *   A list box is a widget that allows the user to select one or more items
+ * A list box is a widget that allows the user to select one or more items
  * from a list of choices.
- *   Items within the list are static and, unlike standard HTML select elements,
+ * Items within the list are static and, unlike standard HTML select elements,
  * can contain images. List boxes contain options or groups which in turn
  * contain options.
  * @see {@link https://w3c.github.io/aria/#listbox | WAI-ARIA `listbox` role}

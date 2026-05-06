@@ -3,9 +3,9 @@ import type { SearchProps } from '../core/search-props.js';
 import classes from './search.module.scss';
 
 /**
- *   A search landmark contains a collection of items and objects that, as a
+ * A search landmark contains a collection of items and objects that, as a
  * whole, combine to create a search facility.
- *   A search region can be a mix of form controls, scripted controls, and
+ * A search region can be a mix of form controls, scripted controls, and
  * hyperlinks.
  * @see {@link https://w3c.github.io/aria/#search | WAI-ARIA `search` role}
  */

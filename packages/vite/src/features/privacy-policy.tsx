@@ -4,7 +4,7 @@ import { Link, Paragraph, Region } from '../design-systems/template/index.js';
 import Page from './page.js';
 
 /**
- *   Developing a comprehensive privacy policy for an application is essential.
+ * Developing a comprehensive privacy policy for an application is essential.
  * This policy should clearly outline how user data is collected, used, stored,
  * and protected, as well as the rights of users regarding their personal
  * information. Having a well-defined privacy policy not only helps ensure

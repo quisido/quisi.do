@@ -11,7 +11,7 @@ import validateString from '../../utils/validate-string.js';
 const linkClassName: string = validateString(classes['link']);
 
 /**
- *   A link is an interactive reference to an internal or external resource
+ * A link is an interactive reference to an internal or external resource
  * that, when activated, causes the user agent to navigate to that resource.
  * @see {@link https://w3c.github.io/aria/#link | WAI-ARIA `link` role}
  */
