@@ -25,6 +25,15 @@ export default function useDialog({
   const headingId: string = useId();
   const ref: RefObject<HTMLDialogElement | null> = useRef(null);
 
+  const handleDismiss = (): void => {
+    const dialog: HTMLDialogElement = validateNonNull(ref.current);
+    dialog.close();
+
+    if (onDismiss !== undefined) {
+      onDismiss();
+    }
+  };
+
   useLayoutEffect((): VoidFunction | undefined => {
     if (!modal) {
       return;
@@ -40,14 +49,7 @@ export default function useDialog({
 
   return {
     descriptionId,
-    handleDismiss: (): void => {
-      const dialog: HTMLDialogElement = validateNonNull(ref.current);
-      dialog.close();
-
-      if (onDismiss !== undefined) {
-        onDismiss();
-      }
-    },
+    handleDismiss,
     headingId,
     labelledBy: labelledBy ?? headingId,
     ref,

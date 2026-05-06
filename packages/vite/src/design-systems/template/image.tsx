@@ -12,14 +12,12 @@ import classes from './image.module.scss';
  */
 export default function Image({
   alt,
-  label,
   labelledBy,
   src,
 }: ImageProps): ReactElement {
   return (
     <img
       alt={alt}
-      aria-label={label}
       aria-labelledby={labelledBy}
       className={classes['image']}
       role="image"

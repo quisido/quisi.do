@@ -1,14 +1,13 @@
-import { type ARIARole } from 'aria-query';
 import render from './render.js';
 import type { ComponentType } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import type { SpinButtonProps } from '../core/spin-button-props.js';
-import { ARIA_ROLES } from './aria-roles.js';
+import { type DesignSystemRole, ROLES } from './roles.js';
 import { userEvent } from 'vitest/browser';
 
 const handleTestChange = vi.fn();
 
-const ROLE_LIMITS: ReadonlyMap<ARIARole, number> = new Map([
+const ROLE_LIMITS: ReadonlyMap<DesignSystemRole, number> = new Map([
   ['button', 2],
   ['spinbutton', 1],
   ['textbox', 1],
@@ -28,7 +27,7 @@ export default function testSpinButton(
         />,
       );
 
-      for (const role of ARIA_ROLES) {
+      for (const role of ROLES) {
         if (role === 'generic') {
           continue;
         }

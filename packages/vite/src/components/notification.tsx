@@ -1,4 +1,4 @@
-import { type ReactElement } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import type { NotificationProps } from '../contexts/notifications.js';
 import { Dialog } from '../design-systems/template/index.js';
 
@@ -10,21 +10,20 @@ export default function Notification({
   onDismiss,
   // type,
 }: NotificationProps): ReactElement {
-  const labelProps = (() => {
+  const Heading = (): ReactNode => {
     if (Header === undefined) {
-      return {
-        label: 'Notification',
-      };
+      return 'Notification';
     }
 
-    return {
-      heading: <Header />,
-    };
-  })();
+    return <Header />;
+  };
 
   return (
-    // type={type}
-    <Dialog {...labelProps} description={description} onDismiss={onDismiss}>
+    <Dialog
+      description={description}
+      heading={<Heading />}
+      onDismiss={onDismiss}
+    >
       {icon}
       <span style={{ fontSize: '0.8em' }}>
         <Message />

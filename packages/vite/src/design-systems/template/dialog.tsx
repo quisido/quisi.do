@@ -22,15 +22,12 @@ export default function Dialog({
   children,
   description,
   heading,
-  label,
   labelledBy: labelledByProp,
   modal = false,
   onDismiss,
 }: DialogProps): ReactElement {
   const { descriptionId, handleDismiss, headingId, labelledBy, ref } =
     useDialog({
-      heading,
-      label,
       labelledBy: labelledByProp,
       modal,
       onDismiss,
@@ -47,7 +44,6 @@ export default function Dialog({
   return (
     <dialog
       aria-describedby={descriptionId}
-      aria-label={label}
       aria-labelledby={labelledBy}
       aria-modal={modal}
       className={classes['dialog']}
@@ -56,11 +52,7 @@ export default function Dialog({
     >
       <FocusScope autoFocus={modal} contain={modal} restoreFocus>
         <div>
-          {heading !== undefined && (
-            <Heading id={headingId} level={3}>
-              {heading}
-            </Heading>
-          )}
+          <Heading id={headingId}>{heading}</Heading>
           {children}
           <Paragraph id={descriptionId}>{description}</Paragraph>
         </div>

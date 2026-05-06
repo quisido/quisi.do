@@ -1,7 +1,16 @@
-import { type ARIARole } from 'aria-query';
+import type { ARIARole } from 'aria-query';
 import { mapObjectToKeys } from 'fmrs';
 
-const RECORD: Readonly<Record<ARIARole, boolean>> = {
+export type DesignSystemRole =
+  | Exclude<ARIARole, 'img'>
+  | 'comment'
+  | 'image'
+  | 'mark'
+  | 'sectionfooter'
+  | 'sectionheader'
+  | 'suggestion';
+
+const RECORD: Readonly<Record<DesignSystemRole, boolean>> = {
   alert: true,
   alertdialog: true,
   application: true,
@@ -15,6 +24,7 @@ const RECORD: Readonly<Record<ARIARole, boolean>> = {
   code: true,
   columnheader: true,
   combobox: true,
+  comment: true,
   complementary: true,
   contentinfo: true,
   definition: true,
@@ -31,7 +41,7 @@ const RECORD: Readonly<Record<ARIARole, boolean>> = {
   gridcell: true,
   group: true,
   heading: true,
-  img: true,
+  image: true,
   insertion: true,
   link: true,
   list: true,
@@ -39,6 +49,7 @@ const RECORD: Readonly<Record<ARIARole, boolean>> = {
   listitem: true,
   log: true,
   main: true,
+  mark: true,
   marquee: true,
   math: true,
   menu: true,
@@ -63,12 +74,15 @@ const RECORD: Readonly<Record<ARIARole, boolean>> = {
   scrollbar: true,
   search: true,
   searchbox: true,
+  sectionfooter: true,
+  sectionheader: true,
   separator: true,
   slider: true,
   spinbutton: true,
   status: true,
   strong: true,
   subscript: true,
+  suggestion: true,
   superscript: true,
   switch: true,
   tab: true,
@@ -86,6 +100,6 @@ const RECORD: Readonly<Record<ARIARole, boolean>> = {
   treeitem: true,
 };
 
-export const ARIA_ROLES: ReadonlySet<ARIARole> = new Set(
+export const ROLES: ReadonlySet<DesignSystemRole> = new Set(
   mapObjectToKeys(RECORD),
 );

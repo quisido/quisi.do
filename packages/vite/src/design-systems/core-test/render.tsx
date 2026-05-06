@@ -6,18 +6,9 @@ import { type ReactNode } from 'react';
 import { expect } from 'vitest';
 import noop from '../../utils/noop.js';
 import RenderWrapper from './render-wrapper.js';
-import type { ARIARole } from 'aria-query';
 import createContainer from './create-container.js';
 import { userEvent, type UserEvent } from '@testing-library/user-event';
-
-type DesignSystemRole =
-  | Exclude<ARIARole, 'img'>
-  | 'comment'
-  | 'image'
-  | 'mark'
-  | 'sectionfooter'
-  | 'sectionheader'
-  | 'suggestion';
+import type { DesignSystemRole } from './roles.js';
 
 export interface RenderTest {
   readonly clickButton: (name: string) => Promise<void>;
