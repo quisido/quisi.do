@@ -18,7 +18,7 @@ From this package's root directory, execute the `design-system:copy-template`
 script, passing the _slug_ as an argument.
 
 ```bash
-npm run design-system:copy-template my-example-slug
+npm run design-system:copy-template -- my-example-slug
 ```
 
 ## Test-driven development

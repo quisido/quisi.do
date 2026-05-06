@@ -19,8 +19,8 @@ export default function testArticle(
     it('should support an external label', (): void => {
       const { getByName } = render(
         <>
-          <span id="test-article-labelled-by">Labelled Article</span>
-          <Article labelledBy="test-article-labelled-by">Content</Article>
+          <span id="external-article-label">Labelled Article</span>
+          <Article labelledBy="external-article-label">Content</Article>
         </>,
       );
 
@@ -38,6 +38,16 @@ export default function testArticle(
       await tab();
       expect(article).toHaveFocus();
       expectActiveElementToBe(article);
+    });
+
+    it('should support nested article names', (): void => {
+      const { getByName } = render(
+        <Article heading="Parent article">
+          <Article heading="Related comment">Comment content</Article>
+        </Article>,
+      );
+
+      getByName('article', 'Related comment');
     });
   });
 }
