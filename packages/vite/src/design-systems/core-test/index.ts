@@ -27,6 +27,7 @@ import type { SearchBoxProps } from '../core/search-box-props.js';
 import type { SliderProps } from '../core/slider-props.js';
 import type { SpinButtonProps } from '../core/spin-button-props.js';
 import type { StatusProps } from '../core/status-props.js';
+import type { ToggleButtonProps } from '../core/toggle-button-props.js';
 import type { SwitchProps } from '../core/switch-props.js';
 import type { TabsProps } from '../core/tabs-props.js';
 import type { TableProps } from '../core/table-props.js';
@@ -70,6 +71,7 @@ import testTextBox from './test-text-box.js';
 import testTime from './test-time.js';
 import testTimer from './test-timer.js';
 import testTooltip from './test-tooltip.js';
+import testToggleButton from './test-toggle-button.jsx';
 import testToolbar from './test-toolbar.js';
 import type { ListBoxProps } from '../core/list-box-props.js';
 import testAlertDialog from './test-alert-dialog.js';
@@ -191,6 +193,7 @@ interface DesignSystem {
   readonly TextBox: ComponentType<TextBoxProps>;
   readonly Time: ComponentType<TimeProps>;
   readonly Timer: ComponentType<TimerProps>;
+  readonly ToggleButton: ComponentType<ToggleButtonProps>;
   readonly Toolbar: ComponentType<ToolbarProps>;
   readonly Tooltip: ComponentType<TooltipProps>;
   readonly TreeGrid: ComponentType<TreeGridProps>;
@@ -260,6 +263,7 @@ export default function testDesignSystem(
     TextBox,
     Time,
     Timer,
+    ToggleButton,
     Toolbar,
     Tooltip,
     TreeGrid,
@@ -311,6 +315,7 @@ export default function testDesignSystem(
     testSearchBox(SearchBox);
     testSectionFooter(SectionFooter);
     testSeparator(Separator);
+    testSeparatorWidget(SeparatorWidget);
     testSlider(Slider);
     testSpinButton(SpinButton);
     testSectionHeader(SectionHeader);
@@ -328,7 +333,7 @@ export default function testDesignSystem(
     testTimer(Timer);
     testToolbar(Toolbar);
     testTooltip(Tooltip);
+    testToggleButton(ToggleButton);
     testTreeGrid(TreeGrid);
-    testSeparatorWidget(SeparatorWidget);
   });
 }

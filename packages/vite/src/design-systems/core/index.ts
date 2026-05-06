@@ -10,3 +10,4 @@ export { type ContentInfoProps } from './content-info-props.js';
 export { type DocumentProps } from './document-props.js';
 export { type RequiredReactNode } from './required-react-node.js';
 export { type DocumentState, default as useDocument } from './use-document.js';
+export { type ToggleButtonProps } from './toggle-button-props.js';

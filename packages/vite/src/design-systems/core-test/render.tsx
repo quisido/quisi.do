@@ -12,6 +12,7 @@ import type { DesignSystemRole } from './roles.js';
 
 export interface RenderTest {
   readonly clickButton: (name: string) => Promise<void>;
+  readonly enter: () => Promise<void>;
   readonly expectToHaveThrown: (message: RegExp | string) => void;
   readonly focus: (element: HTMLElement) => void;
   readonly getByDescription: (
@@ -40,6 +41,7 @@ export interface RenderTest {
   readonly getRoleCount: (role: DesignSystemRole) => number;
   readonly rerender: (node: ReactNode) => void;
   readonly shiftTab: () => Promise<void>;
+  readonly space: () => Promise<void>;
   readonly tab: () => Promise<void>;
 }
 
@@ -63,47 +65,51 @@ export default function render(node: ReactNode): RenderTest {
     });
 
   return {
-    async clickButton(name: string): Promise<void> {
+    clickButton: async (name: string): Promise<void> => {
       const button: HTMLElement = getByRole('button', { name });
       await user.click(button);
     },
 
-    expectToHaveThrown(message: RegExp | string): void {
+    enter: async (): Promise<void> => {
+      await user.keyboard('{Enter}');
+    },
+
+    expectToHaveThrown: (message: RegExp | string): void => {
       const element: HTMLElement = getByTestId('error-boundary-error-message');
       expect(element).toHaveTextContent(message);
     },
 
-    focus(element: HTMLElement): void {
+    focus: (element: HTMLElement): void => {
       fireEvent.focus(element);
     },
 
-    getByDescription(role: string, description: string): HTMLElement {
+    getByDescription: (role: string, description: string): HTMLElement => {
       return getByRole(role, { description });
     },
 
-    getByMaxValue(role: string, name: string, max: number): HTMLElement {
+    getByMaxValue: (role: string, name: string, max: number): HTMLElement => {
       return getByRole(role, { name, value: { max } });
     },
 
-    getByMinValue(role: string, name: string, min: number): HTMLElement {
+    getByMinValue: (role: string, name: string, min: number): HTMLElement => {
       return getByRole(role, { name, value: { min } });
     },
 
-    getByName(role: string, name: string): HTMLElement {
+    getByName: (role: string, name: string): HTMLElement => {
       return getByRole(role, { name });
     },
 
     getByRole,
 
-    getByValue(role: string, name: string, value: number): HTMLElement {
+    getByValue: (role: string, name: string, value: number): HTMLElement => {
       return getByRole(role, { name, value: { now: value } });
     },
 
-    getHeadingByLevel(name: string, level: number): HTMLElement {
+    getHeadingByLevel: (name: string, level: number): HTMLElement => {
       return getByRole('heading', { level, name });
     },
 
-    getOptionalByRole(role: string): HTMLElement | null {
+    getOptionalByRole: (role: string): HTMLElement | null => {
       const [element, ...elements] = queryAllByRole(role);
       if (elements.length > 0) {
         throw new Error(
@@ -113,17 +119,21 @@ export default function render(node: ReactNode): RenderTest {
       return element ?? null;
     },
 
-    getRoleCount(role: string): number {
+    getRoleCount: (role: string): number => {
       return queryAllByRole(role).length;
     },
 
     rerender,
 
-    async shiftTab(): Promise<void> {
+    shiftTab: async (): Promise<void> => {
       await user.tab({ shift: true });
     },
 
-    async tab(): Promise<void> {
+    space: async (): Promise<void> => {
+      await user.keyboard('[Space]');
+    },
+
+    tab: async (): Promise<void> => {
       await user.tab();
     },
   };
