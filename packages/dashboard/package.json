@@ -38,13 +38,13 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "@datadog/datadog-api-client": "^1.52.0",
+    "@datadog/datadog-api-client": "^1.57.0",
     "@quisido/worker": "^1.0.8",
     "cloudflare-utils": "^1.0.4",
     "fmrs": "^2.1.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20251014.0",
+    "@cloudflare/workers-types": "^4.20260507.1",
     "@quisido/worker-test": "^1.0.1",
     "@types/eslint": "^9.6.1",
     "@vitest/ui": "^4.0.7",
