@@ -4,68 +4,165 @@ import type { CheckboxProps } from '../core/checkbox-props.js';
 import validateChecked from '../../../test/validate-checked.js';
 import render, { type RenderTest } from './render.js';
 import { userEvent } from '@testing-library/user-event';
+import expectToBeReadOnly from '../../../test/expect-to-be-readonly.js';
 
-const handleTestCheck = vi.fn();
-const handleTestUncheck = vi.fn();
+interface CheckboxTest extends RenderTest {
+  readonly checkbox: HTMLInputElement;
+  readonly handleCheck: VoidFunction;
+  readonly handleUncheck: VoidFunction;
+}
 
 export default function testCheckbox(
   Checkbox: ComponentType<CheckboxProps>,
 ): void {
-  const renderCheckbox = (props: Partial<CheckboxProps>): RenderTest =>
-    render(
+  const renderCheckbox = ({
+    label = 'Test label',
+    onCheck: handleCheck = vi.fn(),
+    onUncheck: handleUncheck = vi.fn(),
+    value = false,
+    ...props
+  }: Partial<CheckboxProps> = {}): CheckboxTest => {
+    const result: RenderTest = render(
       <Checkbox
-        label="Test label"
-        onCheck={handleTestCheck}
-        onUncheck={handleTestUncheck}
-        value="mixed"
+        label={label}
+        onCheck={handleCheck}
+        onUncheck={handleUncheck}
+        value={value}
         {...props}
       />,
     );
 
-  describe('Checkbox', (): void => {
-    it('should support indeterminate', (): void => {
-      const { getByName } = renderCheckbox({
-        label: 'Test indeterminate checkbox',
-        value: 'mixed',
-      });
+    const checkbox: HTMLElement = result.getByName('checkbox', label);
 
-      const checkbox: HTMLElement = getByName(
-        'checkbox',
-        'Test indeterminate checkbox',
-      );
-      validateChecked(checkbox, 'mixed');
+    return {
+      ...result,
+      checkbox: checkbox as HTMLInputElement,
+      handleCheck,
+      handleUncheck,
+    };
+  };
+
+  describe('Checkbox', (): void => {
+    it('should be a named native checkbox', (): void => {
+      const { checkbox } = renderCheckbox({ label: 'Named checkbox' });
+
+      expect(checkbox.tagName).toBe('INPUT');
+      expect(checkbox).toHaveAttribute('type', 'checkbox');
     });
 
-    it('should support checked', async (): Promise<void> => {
-      const { getByName } = renderCheckbox({
+    it('should not use aria-checked on native checkboxes', (): void => {
+      const { checkbox } = renderCheckbox({ value: true });
+
+      expect(checkbox).not.toHaveAttribute('aria-checked');
+    });
+
+    it('should support checked', (): void => {
+      const { checkbox } = renderCheckbox({
         label: 'Test checked checkbox',
         value: true,
       });
 
-      const checkbox: HTMLElement = getByName(
-        'checkbox',
-        'Test checked checkbox',
-      );
       validateChecked(checkbox, true);
-
-      await userEvent.click(checkbox);
-      expect(handleTestUncheck).toHaveBeenCalledExactlyOnceWith();
     });
 
-    it('should support unchecked', async (): Promise<void> => {
-      const { getByName } = renderCheckbox({
+    it('should support unchecked', (): void => {
+      const { checkbox } = renderCheckbox({
         label: 'Test unchecked checkbox',
         value: false,
       });
 
-      const checkbox: HTMLElement = getByName(
-        'checkbox',
-        'Test unchecked checkbox',
-      );
       validateChecked(checkbox, false);
+    });
+
+    it('should support mixed', (): void => {
+      const { checkbox } = renderCheckbox({
+        label: 'Test mixed checkbox',
+        value: 'mixed',
+      });
+
+      validateChecked(checkbox, 'mixed');
+    });
+
+    it('should call onUncheck when a checked checkbox is clicked', async (): Promise<void> => {
+      const { checkbox, handleCheck, handleUncheck } = renderCheckbox({
+        label: 'Test checked checkbox',
+        value: true,
+      });
 
       await userEvent.click(checkbox);
-      expect(handleTestCheck).toHaveBeenCalledExactlyOnceWith();
+      expect(handleCheck).not.toHaveBeenCalled();
+      expect(handleUncheck).toHaveBeenCalledExactlyOnceWith();
+    });
+
+    it('should call onCheck when an unchecked checkbox is clicked', async (): Promise<void> => {
+      const { checkbox, handleCheck, handleUncheck } = renderCheckbox({
+        label: 'Test unchecked checkbox',
+        value: false,
+      });
+
+      await userEvent.click(checkbox);
+      expect(handleCheck).toHaveBeenCalledExactlyOnceWith();
+      expect(handleUncheck).not.toHaveBeenCalled();
+    });
+
+    it('should call onCheck when a mixed checkbox is clicked', async (): Promise<void> => {
+      const { checkbox, handleCheck, handleUncheck } = renderCheckbox({
+        label: 'Test mixed checkbox',
+        value: 'mixed',
+      });
+
+      await userEvent.click(checkbox);
+      expect(handleCheck).toHaveBeenCalledExactlyOnceWith();
+      expect(handleUncheck).not.toHaveBeenCalled();
+    });
+
+    it('should toggle with the Space key', async (): Promise<void> => {
+      const { checkbox, handleCheck, handleUncheck } = renderCheckbox({
+        label: 'Keyboard checkbox',
+        value: false,
+      });
+
+      checkbox.focus();
+      expect(checkbox).toHaveFocus();
+
+      await userEvent.keyboard('[Space]');
+      expect(handleCheck).toHaveBeenCalledExactlyOnceWith();
+      expect(handleUncheck).not.toHaveBeenCalled();
+    });
+
+    it('should be reachable with keyboard navigation', async (): Promise<void> => {
+      const { checkbox, tab } = renderCheckbox({ label: 'Tab checkbox' });
+
+      await tab();
+      expect(checkbox).toHaveFocus();
+    });
+
+    it('should support required', (): void => {
+      const { checkbox } = renderCheckbox({ required: true });
+      expect(checkbox).toBeRequired();
+    });
+
+    it('should support disabled', async (): Promise<void> => {
+      const { checkbox, handleCheck, handleUncheck } = renderCheckbox({
+        disabled: true,
+        label: 'Disabled checkbox',
+        value: false,
+      });
+
+      expect(checkbox).toBeDisabled();
+
+      await userEvent.click(checkbox);
+      expect(handleCheck).not.toHaveBeenCalled();
+      expect(handleUncheck).not.toHaveBeenCalled();
+    });
+
+    it('should support read only', (): void => {
+      const { checkbox } = renderCheckbox({
+        label: 'Read only checkbox',
+        readOnly: true,
+      });
+
+      expectToBeReadOnly(checkbox);
     });
   });
 }

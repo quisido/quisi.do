@@ -1,71 +1,75 @@
-export { type AlertDialogProps } from '../core/alert-dialog-props.js';
-export { type ApplicationProps } from '../core/application-props.js';
-export { type ArticleProps } from '../core/article-props.js';
-export { type BannerProps } from '../core/banner-props.js';
-export { type BlockQuoteProps } from '../core/block-quote-props.js';
-export { type ButtonProps } from '../core/button-props.js';
-export { type CheckboxProps } from '../core/checkbox-props.js';
-export { type CodeProps } from '../core/code-props.js';
-export { type ComboboxProps } from '../core/combobox-props.js';
-export { type CommentProps } from '../core/comment-props.js';
-export { type ComplementaryProps } from '../core/complementary-props.js';
-export { type ContentInfoProps } from '../core/content-info-props.js';
-export { type DefinitionProps } from '../core/definition-props.js';
-export { type DialogProps } from '../core/dialog-props.js';
-export { type DocumentProps } from '../core/document-props.js';
-export { type EmphasisProps } from '../core/emphasis-props.js';
-export { type FeedProps } from '../core/feed-props.js';
-export { type FigureProps } from '../core/figure-props.js';
-export { type FormProps } from '../core/form-props.js';
-export { type GridProps } from '../core/grid-props.js';
-export { type HeadingProps } from '../core/heading-props.js';
-export { type ImageProps } from '../core/image-props.js';
-export { type LinkProps } from '../core/link-props.js';
-export { type ListBoxProps } from '../core/list-box-props.js';
-export { type ListProps } from '../core/list-props.js';
-export { type LogProps } from '../core/log-props.js';
-export { type MainProps } from '../core/main-props.js';
-export { type MarkProps } from '../core/mark-props.js';
-export { type MarqueeProps } from '../core/marquee-props.js';
-export { type MathProps } from '../core/math-props.js';
-export { type MenuBarProps } from '../core/menu-bar-props.js';
-export { type MenuProps } from '../core/menu-props.js';
-export { type MeterProps } from '../core/meter-props.js';
-export { type NavigationProps } from '../core/navigation-props.js';
-export { type NoteProps } from '../core/note-props.js';
-export { type ParagraphProps } from '../core/paragraph-props.js';
-export { type ProgressBarProps } from '../core/progress-bar-props.js';
-export { type Radio, type RadioGroupProps } from '../core/radio-group-props.js';
-export { type RegionProps } from '../core/region-props.js';
-export { type ScrollbarProps } from '../core/scrollbar-props.js';
-export { type SectionFooterProps } from '../core/section-footer-props.js';
-export { type SectionHeaderProps } from '../core/section-header-props.js';
-export { type SearchBoxProps } from '../core/search-box-props.js';
-export { type SearchProps } from '../core/search-props.js';
-export { type SliderProps } from '../core/slider-props.js';
-export { type SeparatorProps } from '../core/separator-props.js';
-export { type SeparatorWidgetProps } from '../core/separator-widget-props.js';
-export { type SpinButtonProps } from '../core/spin-button-props.js';
-export { type StatusProps } from '../core/status-props.js';
-export { type StrongProps } from '../core/strong-props.js';
-export { type SubscriptProps } from '../core/subscript-props.js';
-export { type SuggestionProps } from '../core/suggestion-props.js';
-export { type SuperscriptProps } from '../core/superscript-props.js';
-export { type SwitchProps } from '../core/switch-props.js';
-export { type Tab, type TabsProps } from '../core/tabs-props.js';
-export { type TableProps } from '../core/table-props.js';
-export { type TermProps } from '../core/term-props.js';
-export { type TextBoxProps } from '../core/text-box-props.js';
-export { type TimeProps } from '../core/time-props.js';
-export { type TimerProps } from '../core/timer-props.js';
-export { type ToolbarProps } from '../core/toolbar-props.js';
-export { type TooltipProps } from '../core/tooltip-props.js';
-export { type TreeItem, type TreeProps } from '../core/tree-props.js';
 export {
+  type AlertDialogProps,
+  type ApplicationProps,
+  type ArticleProps,
+  type BannerProps,
+  type BlockQuoteProps,
+  type ButtonProps,
+  type CheckboxProps,
+  type CodeProps,
+  type ComboboxProps,
+  type CommentProps,
+  type ComplementaryProps,
+  type ContentInfoProps,
+  type DefinitionProps,
+  type DialogProps,
+  type DocumentProps,
+  type EmphasisProps,
+  type FeedProps,
+  type FigureProps,
+  type FormProps,
+  type GridProps,
+  type HeadingProps,
+  type ImageProps,
+  type LinkProps,
+  type ListBoxProps,
+  type ListProps,
+  type LogProps,
+  type MainProps,
+  type MarkProps,
+  type MarqueeProps,
+  type MathProps,
+  type MenuBarProps,
+  type MenuProps,
+  type MeterProps,
+  type NavigationProps,
+  type NoteProps,
+  type ParagraphProps,
+  type ProgressBarProps,
+  type Radio,
+  type RadioGroupProps,
+  type RegionProps,
+  type ScrollbarProps,
+  type SearchBoxProps,
+  type SearchProps,
+  type SectionFooterProps,
+  type SectionHeaderProps,
+  type SeparatorProps,
+  type SeparatorWidgetProps,
+  type SliderProps,
+  type SpinButtonProps,
+  type StatusProps,
+  type StrongProps,
+  type SubscriptProps,
+  type SuggestionProps,
+  type SuperscriptProps,
+  type SwitchProps,
+  type Tab,
+  type TableProps,
+  type TabsProps,
+  type TermProps,
+  type TextBoxProps,
+  type TimeProps,
+  type TimerProps,
+  type ToggleButtonProps,
+  type ToolbarProps,
+  type TooltipProps,
   type TreeGridCell,
   type TreeGridProps,
   type TreeGridRow,
-} from '../core/tree-grid-props.js';
+  type TreeItem,
+  type TreeProps,
+} from '../core/index.js';
 export { default as Button } from './button.js';
 export { default as Heading } from './heading.js';
 export { default as Emphasis } from './emphasis.js';
@@ -131,3 +135,4 @@ export { default as Tree } from './tree.js';
 export { default as TreeGrid } from './tree-grid.js';
 export { default as Application } from './application.js';
 export { default as SeparatorWidget } from './separator-widget.js';
+export { default as ToggleButton } from './toggle-button.js';

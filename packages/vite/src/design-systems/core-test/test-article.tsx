@@ -2,7 +2,6 @@ import type { ComponentType } from 'react';
 import { describe, expect, it } from 'vitest';
 import type { ArticleProps } from '../core/article-props.js';
 import render from './render.js';
-import expectActiveElementToBe from './expect-active-element-to-be.js';
 
 export default function testArticle(
   Article: ComponentType<ArticleProps>,
@@ -37,7 +36,6 @@ export default function testArticle(
       const article: HTMLElement = getByName('article', 'Tabbable');
       await tab();
       expect(article).toHaveFocus();
-      expectActiveElementToBe(article);
     });
 
     it('should support nested article names', (): void => {

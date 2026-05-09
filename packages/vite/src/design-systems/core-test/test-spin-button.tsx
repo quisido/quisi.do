@@ -53,12 +53,10 @@ export default function testSpinButton(
       spinButton.focus();
 
       if (textbox === null) {
-        expect(window.document.activeElement).toBe(spinButton);
         expect(spinButton).toHaveFocus();
         return;
       }
 
-      expect(window.document.activeElement).toBe(textbox);
       expect(textbox).toHaveFocus();
     });
 
@@ -110,11 +108,9 @@ export default function testSpinButton(
       spinButton.focus();
 
       await userEvent.keyboard('{Tab}');
-      expect(window.document.activeElement).toBe(spinButton);
       expect(spinButton).toHaveFocus();
 
       await userEvent.keyboard('{Tab}');
-      expect(window.document.activeElement).toBe(spinButton);
       expect(spinButton).toHaveFocus();
     });
 

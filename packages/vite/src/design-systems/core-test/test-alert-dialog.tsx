@@ -3,7 +3,6 @@ import type { ComponentType } from 'react';
 import type { AlertDialogProps } from '../core/alert-dialog-props.js';
 import render, { type RenderTest } from './render.js';
 import noop from '../../utils/noop.js';
-import expectActiveElementToBe from './expect-active-element-to-be.js';
 import { within } from '@testing-library/react';
 
 export default function testAlertDialog(
@@ -75,23 +74,23 @@ export default function testAlertDialog(
       const childButton: HTMLElement = getByName('button', 'Child button');
       const dismissButton: HTMLElement = getByName('button', 'Dismiss');
 
-      expectActiveElementToBe(childButton);
+      expect(childButton).toHaveFocus();
       await tab();
-      expectActiveElementToBe(dismissButton);
+      expect(dismissButton).toHaveFocus();
       await tab();
-      expectActiveElementToBe(childButton);
+      expect(childButton).toHaveFocus();
       await tab();
-      expectActiveElementToBe(dismissButton);
+      expect(dismissButton).toHaveFocus();
       await tab();
-      expectActiveElementToBe(childButton);
+      expect(childButton).toHaveFocus();
       await shiftTab();
-      expectActiveElementToBe(dismissButton);
+      expect(dismissButton).toHaveFocus();
       await shiftTab();
-      expectActiveElementToBe(childButton);
+      expect(childButton).toHaveFocus();
       await shiftTab();
-      expectActiveElementToBe(dismissButton);
+      expect(dismissButton).toHaveFocus();
       await shiftTab();
-      expectActiveElementToBe(childButton);
+      expect(childButton).toHaveFocus();
     });
 
     it('should contain the alert message', (): void => {

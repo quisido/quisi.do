@@ -17,7 +17,7 @@ export default function testLink(Link: ComponentType<LinkProps>): void {
 
       const link: HTMLElement = getByName('link', 'Keyboard test');
       link.focus();
-      expect(window.document.activeElement).toBe(link);
+      expect(link).toHaveFocus();
       await userEvent.keyboard('{Enter}');
       expect(handleTestClick).toHaveBeenCalledExactlyOnceWith();
     });
