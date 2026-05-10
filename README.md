@@ -24,3 +24,4 @@ commands in sequence:
 ## Commands
 
 - `npm start` to run the application and its dependencies.
+
