@@ -23,7 +23,7 @@ export default function ToggleButton({
       aria-disabled={disabled}
       aria-pressed={pressed}
       className={classes['toggle-button']}
-      disabled
+      disabled={disabled}
       onClick={handleClick}
       type="button"
     >

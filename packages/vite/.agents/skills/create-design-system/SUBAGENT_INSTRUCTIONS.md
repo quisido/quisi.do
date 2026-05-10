@@ -33,12 +33,12 @@ system's `$slug/` directory. You especially **MAY NOT** edit any files in
 `../core/` or `../core-test/`.
 
 Test the component for behavioral accuracy, feature completeness, and
-accessibility compliance by executing the following command, passing the design
-system's _slug_ and _component name_ as arguments:
+accessibility compliance by executing the following command, using the design
+system's _slug_ and _component name_ in kebab-case:
 
 ```bash
 # Example
-npm run design-system:test-component -- my-example-slug ComponentName
+VITE_TESTED_DESIGN_SYSTEM=my-example-slug npx vitest run src/design-systems/core-test/component-name
 ```
 
 If the test suite is failing, adjust your implementation until it passes.

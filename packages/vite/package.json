@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "author": "quisi.do <vite@quisi.do>",
   "description": "quisi.do",
+  "keywords": [
+    "analytics",
+    "frontend",
+    "observability",
+    "react",
+    "typescript",
+    "vite"
+  ],
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
@@ -25,14 +33,6 @@
     "email": "vite@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
-  "keywords": [
-    "analytics",
-    "frontend",
-    "observability",
-    "react",
-    "typescript",
-    "vite"
-  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
@@ -159,7 +159,7 @@
     "logrocket": "^10.1.0",
     "nyc": "^17.1.0",
     "postcss": "^8.5.10",
-    "quisido": "^0.0.2",
+    "quisido": "^0.0.3",
     "rimraf": "^6.1.0",
     "sass": "^1.93.3",
     "serve": "^14.2.5",

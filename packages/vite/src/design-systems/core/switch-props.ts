@@ -1,15 +1,5 @@
-interface Props {
+export interface SwitchProps {
   readonly label: string;
-}
-
-interface OffProps {
-  readonly off: boolean;
-  readonly on?: undefined;
-}
-
-interface OnProps {
-  readonly off?: undefined;
   readonly on: boolean;
+  readonly onToggle: (on: boolean) => void;
 }
-
-export type SwitchProps = (OffProps | OnProps) & Props;

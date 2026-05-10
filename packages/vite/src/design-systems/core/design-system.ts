@@ -64,6 +64,7 @@ import type { DocumentProps } from './document-props.js';
 import type { CommentProps } from './comment-props.js';
 import type { CheckboxProps } from './checkbox-props.js';
 import type { ButtonProps } from './button-props.js';
+import type { TreeProps } from './tree-props.js';
 
 export default interface DesignSystem {
   readonly Alert: ComponentType<AlertProps>;
@@ -130,5 +131,6 @@ export default interface DesignSystem {
   readonly ToggleButton: ComponentType<ToggleButtonProps>;
   readonly Toolbar: ComponentType<ToolbarProps>;
   readonly Tooltip: ComponentType<TooltipProps>;
+  readonly Tree: ComponentType<TreeProps>;
   readonly TreeGrid: ComponentType<TreeGridProps>;
 }

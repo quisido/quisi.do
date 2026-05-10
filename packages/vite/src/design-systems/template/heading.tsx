@@ -3,8 +3,8 @@ import type { ReactElement } from 'react';
 import type { HeadingProps } from '../core/heading-props.js';
 import classes from './heading.module.scss';
 import isDefined from '../../utils/is-defined.js';
-import useLevel from '../core/use-level.js';
 import isRequiredReactNode from './is-required-react-node.js';
+import useHeading from '../core/use-heading.js';
 
 /**
  * A heading is a heading for a section of the page.
@@ -16,9 +16,11 @@ export default function Heading({
   children,
   className,
   id,
-  level: levelExplicit,
+  level: levelProp,
 }: HeadingProps): ReactElement | null {
-  const { level: levelImplicit, ref } = useLevel<HTMLHeadingElement>();
+  const { level, ref } = useHeading<HTMLHeadingElement>({
+    level: levelProp,
+  });
 
   /**
    * If there is no heading, render nothing. This utility condition is easier
@@ -27,8 +29,6 @@ export default function Heading({
   if (!isRequiredReactNode(children)) {
     return null;
   }
-
-  const level: number | undefined = levelExplicit ?? levelImplicit;
 
   const Component = ((): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' => {
     switch (level) {

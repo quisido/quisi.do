@@ -1,6 +1,10 @@
 import type { ReactElement } from 'react';
-import type { TreeGroup, TreeItem, TreeProps } from '../core/tree-props.js';
 import classes from './tree.module.scss';
+import {
+  type TreeGroup,
+  type TreeItem,
+  type TreeProps,
+} from '../core/index.js';
 
 /**
  * A tree is a widget that allows the user to select one or more items from a
@@ -9,7 +13,6 @@ import classes from './tree.module.scss';
  * @see {@link https://w3c.github.io/aria/#treeitem | WAI-ARIA `treeitem` role}
  */
 export default function Tree({
-  caption,
   items,
   orientation = 'vertical',
   required = false,
@@ -21,7 +24,6 @@ export default function Tree({
       className={classes['tree']}
       role="tree"
     >
-      <caption className={classes['caption']}>{caption}</caption>
       {items.map(
         ({ key: groupKey, ...group }: TreeGroup | TreeItem): ReactElement => {
           if ('items' in group) {

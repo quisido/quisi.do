@@ -32,5 +32,6 @@
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   },
-  "stylelint.validate": ["css", "scss"]
+  "stylelint.validate": ["css", "scss"],
+  "vitest.nodeExecArgs": ["--env-file", ".env.vitest-explorer"]
 }

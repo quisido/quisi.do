@@ -14,14 +14,6 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
     },
   },
 
-  // Design systems core-test
-  {
-    files: ['src/design-systems/core-test/test-*.tsx'],
-    rules: {
-      'no-magic-numbers': 'off',
-    },
-  },
-
   // NodeJS
   {
     files: ['scripts/**/*.js'],

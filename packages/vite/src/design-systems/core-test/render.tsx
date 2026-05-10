@@ -11,6 +11,7 @@ import { userEvent, type UserEvent } from '@testing-library/user-event';
 import type { DesignSystemRole } from './roles.js';
 
 export interface RenderTest {
+  readonly click: (element: HTMLElement) => Promise<void>;
   readonly clickButton: (name: string) => Promise<void>;
   readonly enter: () => Promise<void>;
   readonly expectToHaveThrown: (message: RegExp | string) => void;
@@ -65,6 +66,10 @@ export default function render(node: ReactNode): RenderTest {
     });
 
   return {
+    click: async (element: HTMLElement): Promise<void> => {
+      await user.click(element);
+    },
+
     clickButton: async (name: string): Promise<void> => {
       const button: HTMLElement = getByRole('button', { name });
       await user.click(button);

@@ -34,17 +34,18 @@ export default function Tabs({
         })}
       </div>
       {tabs.map(
-        ({ key, panel }: Tab): ReactElement => (
-          <div
-            aria-labelledby={`${idPrefix}-tab-${key}`}
-            className={classes['tab-panel']}
-            key={key}
-            id={`${idPrefix}-panel-${key}`}
-            role="tabpanel"
-          >
-            {panel}
-          </div>
-        ),
+        ({ active, key, panel }: Tab): ReactElement | false =>
+          active && (
+            <div
+              aria-labelledby={`${idPrefix}-tab-${key}`}
+              className={classes['tab-panel']}
+              key={key}
+              id={`${idPrefix}-panel-${key}`}
+              role="tabpanel"
+            >
+              {panel}
+            </div>
+          ),
       )}
     </div>
   );

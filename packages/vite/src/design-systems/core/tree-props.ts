@@ -6,7 +6,6 @@ export interface TreeGroup {
 }
 
 export interface TreeProps {
-  readonly caption: string;
   readonly items: readonly (TreeGroup | TreeItem)[];
   readonly orientation?: 'vertical' | 'horizontal' | undefined;
   readonly required?: boolean | undefined;

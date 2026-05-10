@@ -23,6 +23,9 @@ const CONFIG: VitestConfig = await defineVitestConfig({
       './test/cleanup-react-testing-library.ts',
       './test/expect-to-have-attribute.ts',
     ],
+
+    // Allow more time for slower devices to support browsers.
+    testTimeout: 10_000,
   },
 });
 

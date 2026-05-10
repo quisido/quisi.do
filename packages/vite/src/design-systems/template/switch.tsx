@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import type { ChangeEvent, ReactElement } from 'react';
 import type { SwitchProps } from '../core/switch-props.js';
 import classes from './switch.module.scss';
 
@@ -10,16 +10,23 @@ import classes from './switch.module.scss';
  * the widget in a fashion consistent with its on-screen appearance.
  * @see {@link https://w3c.github.io/aria/#switch | WAI-ARIA `switch` role}
  */
-export default function Switch({ label, off, on }: SwitchProps): ReactElement {
-  const checked: boolean = on ?? !off;
+export default function Switch({
+  label,
+  on,
+  onToggle,
+}: SwitchProps): ReactElement {
+  const handleChange = (ev: ChangeEvent<HTMLInputElement>): void => {
+    onToggle(ev.currentTarget.checked);
+  };
 
   return (
     <label className={classes['root']}>
       <span className={classes['label']}>{label}</span>
       <input
-        aria-checked={checked}
-        checked={checked}
+        aria-checked={on}
+        checked={on}
         className={classes['switch']}
+        onChange={handleChange}
         role="switch"
         type="checkbox"
       />

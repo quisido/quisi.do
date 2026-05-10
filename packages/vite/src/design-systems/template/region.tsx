@@ -18,11 +18,11 @@ export default function Region({
   children,
   heading,
 }: RegionProps): ReactElement {
-  const { headingId } = useRegion();
+  const { headingId, labelledBy } = useRegion();
 
   return (
     <section
-      aria-labelledby={headingId}
+      aria-labelledby={labelledBy}
       className={classes['region']}
       role="region"
     >

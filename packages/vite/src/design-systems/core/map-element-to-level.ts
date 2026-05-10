@@ -6,7 +6,11 @@ interface State {
   readonly isParent: boolean;
 }
 
-const getElementLevel = ({ checked, element, isParent }: State): number => {
+const getElementLevel = ({
+  checked,
+  element,
+  isParent,
+}: State): number | undefined => {
   checked.add(element);
 
   // If this element has an explicit level,
@@ -31,32 +35,67 @@ const getElementLevel = ({ checked, element, isParent }: State): number => {
     }
   }
 
-  // If this element's previous sibling has a level,
-  // Note: This is recurse through all previous siblings.
-  const sibling: Element | null = element.previousElementSibling;
-  if (sibling !== null && !checked.has(sibling)) {
-    return getElementLevel({ checked, element: sibling, isParent });
+  // If this element has a previous sibling with level,
+  const getPreviousSibling = (el: Element): Element | null => {
+    const previousSibling: Element | null = el.previousElementSibling;
+    if (previousSibling === null) {
+      return null;
+    }
+
+    if (checked.has(previousSibling)) {
+      return getPreviousSibling(previousSibling);
+    }
+
+    return previousSibling;
+  };
+
+  const previousSibling: Element | null = getPreviousSibling(element);
+  if (previousSibling !== null) {
+    return getElementLevel({
+      checked,
+      element: previousSibling,
+      isParent: false,
+    });
   }
 
-  // If this element's parent has a level, increment this element's level.
-  const parent: HTMLElement | null = element.parentElement;
-  if (parent === null || checked.has(parent)) {
-    return 1;
+  // If this element has a parent with a level,
+  const getParent = (el: Element): HTMLElement | null => {
+    const parent: HTMLElement | null = el.parentElement;
+    if (parent === null) {
+      return null;
+    }
+
+    if (checked.has(parent)) {
+      return getParent(parent);
+    }
+
+    return parent;
+  };
+
+  const parent: HTMLElement | null = getParent(element);
+  if (parent === null) {
+    return;
   }
 
-  // If we're already traversing parents, do not increment the level again.
-  if (isParent) {
-    return getElementLevel({ checked, element: parent, isParent: true });
+  const parentLevel: number | undefined = getElementLevel({
+    checked,
+    element: parent,
+    isParent: true,
+  });
+
+  if (parentLevel === undefined) {
+    return;
   }
 
-  // This element's level is one higher than its parent's level.
-  return getElementLevel({ checked, element: parent, isParent: true }) + 1;
+  return parentLevel + (isParent ? 0 : 1);
 };
 
 export default function mapElementToLevel(element: Element): number {
-  return getElementLevel({
-    checked: new Set(),
-    element,
-    isParent: false,
-  });
+  return (
+    getElementLevel({
+      checked: new Set(),
+      element,
+      isParent: false,
+    }) ?? 1
+  );
 }

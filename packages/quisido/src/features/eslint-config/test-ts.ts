@@ -22,6 +22,7 @@ const TEST_TS_CONFIG: Config = defineConfig({
      */
     'init-declarations': 'off',
     'max-lines-per-function': 'off',
+    'no-magic-numbers': 'off',
     'no-undefined': 'off',
   },
 });

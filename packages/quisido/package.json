@@ -1,6 +1,6 @@
 {
   "name": "quisido",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "quisi.do <quisido@quisi.do>",
   "description": "all-in-one",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/quisido#readme",
@@ -36,6 +36,10 @@
     },
     "./tsconfig.json": {
       "default": "./src/tsconfig.json"
+    },
+    "./vitest-setup-file.js": {
+      "types": "./dist/features/vitest/setup-file.d.ts",
+      "default": "./dist/features/vitest/setup-file.js"
     }
   },
   "keywords": [
