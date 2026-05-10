@@ -116,15 +116,16 @@ describe('Checkbox', (): void => {
   });
 
   it('should toggle with the Space key', async (): Promise<void> => {
-    const { checkbox, focus, handleCheck, handleUncheck } = renderCheckbox({
-      label: 'Keyboard checkbox',
-      value: false,
-    });
+    const { checkbox, focus, handleCheck, handleUncheck, space } =
+      renderCheckbox({
+        label: 'Keyboard checkbox',
+        value: false,
+      });
 
     focus(checkbox);
     expect(checkbox).toHaveFocus();
 
-    await userEvent.keyboard('[Space]');
+    await space();
     expect(handleCheck).toHaveBeenCalledExactlyOnceWith();
     expect(handleUncheck).not.toHaveBeenCalled();
   });

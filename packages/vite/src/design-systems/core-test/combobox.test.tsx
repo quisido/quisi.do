@@ -9,7 +9,7 @@ const { Combobox } = await importTestedDesignSystem();
 
 describe('Combobox', (): void => {
   it('should support keyboard selection', async (): Promise<void> => {
-    const { getByName } = render(
+    const { enter, getByName } = render(
       <Combobox
         label="States"
         onChange={handleTestChange}
@@ -27,7 +27,7 @@ describe('Combobox', (): void => {
     const option: HTMLElement = getByName('option', 'Alaska');
     expect(option).toHaveAttribute('aria-selected', 'true');
 
-    await userEvent.keyboard('{Enter}');
+    await enter();
     expect(handleTestChange).toHaveBeenCalledExactlyOnceWith('Alaska');
   });
 

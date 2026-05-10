@@ -28,7 +28,7 @@ export default function useHeading<T extends HTMLElement>({
   return {
     level: explicitLevel ?? implicitLevel,
     ref: (element: T | null): void => {
-      if (element === null) {
+      if (element === null || explicitLevel !== undefined) {
         return;
       }
 

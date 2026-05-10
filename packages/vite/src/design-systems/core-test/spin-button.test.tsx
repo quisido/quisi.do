@@ -4,7 +4,7 @@ import { type DesignSystemRole, ROLES } from './roles.js';
 import { userEvent } from 'vitest/browser';
 import importTestedDesignSystem from './import-tested-design-system.js';
 
-const handleTestChange = vi.fn();
+const handleChange = vi.fn();
 
 const ROLE_LIMITS: ReadonlyMap<DesignSystemRole, number> = new Map([
   ['button', 2],
@@ -18,11 +18,7 @@ describe('SpinButton', (): void => {
   /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
   it('must limit accessibility children to a textbox and/or two buttons', (): void => {
     const { getRoleCount } = render(
-      <SpinButton
-        label="Test spin button"
-        onChange={handleTestChange}
-        value={1}
-      />,
+      <SpinButton label="Test spin button" onChange={handleChange} value={1} />,
     );
 
     for (const role of ROLES) {
@@ -39,11 +35,7 @@ describe('SpinButton', (): void => {
   /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
   it('should focus the textbox if present', (): void => {
     const { focus, getByName, getOptionalByRole } = render(
-      <SpinButton
-        label="Textbox focus"
-        onChange={handleTestChange}
-        value={1}
-      />,
+      <SpinButton label="Textbox focus" onChange={handleChange} value={1} />,
     );
 
     const spinButton: HTMLElement = getByName('spinbutton', 'Textbox focus');
@@ -63,7 +55,7 @@ describe('SpinButton', (): void => {
     const { focus, getByName } = render(
       <SpinButton
         label="Increment key"
-        onChange={handleTestChange}
+        onChange={handleChange}
         step={2}
         value={1}
       />,
@@ -71,10 +63,8 @@ describe('SpinButton', (): void => {
 
     const spinButton: HTMLElement = getByName('spinbutton', 'Increment key');
     focus(spinButton);
-
     await userEvent.keyboard('{ArrowUp}');
-
-    expect(handleTestChange).toHaveBeenCalledExactlyOnceWith(3);
+    expect(handleChange).toHaveBeenCalledExactlyOnceWith(3);
   });
 
   /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
@@ -82,7 +72,7 @@ describe('SpinButton', (): void => {
     const { focus, getByName } = render(
       <SpinButton
         label="Decrement key"
-        onChange={handleTestChange}
+        onChange={handleChange}
         step={2}
         value={3}
       />,
@@ -93,29 +83,29 @@ describe('SpinButton', (): void => {
 
     await userEvent.keyboard('{ArrowDown}');
 
-    expect(handleTestChange).toHaveBeenCalledExactlyOnceWith(1);
+    expect(handleChange).toHaveBeenCalledExactlyOnceWith(1);
   });
 
   /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
   it('should not include the increment and decrement buttons in the primary navigation ring (the Tab ring)', async (): Promise<void> => {
-    const { focus, getByName } = render(
-      <SpinButton label="Tab ring" onChange={handleTestChange} value={1} />,
+    const { focus, getByName, tab } = render(
+      <SpinButton label="Tab ring" onChange={handleChange} value={1} />,
     );
 
     const spinButton: HTMLElement = getByName('spinbutton', 'Tab ring');
     focus(spinButton);
 
-    await userEvent.keyboard('{Tab}');
+    await tab();
     expect(spinButton).toHaveFocus();
 
-    await userEvent.keyboard('{Tab}');
+    await tab();
     expect(spinButton).toHaveFocus();
   });
 
   /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
   it('should set the `aria-valuenow` attribute when it has a value', (): void => {
     const { getByValue } = render(
-      <SpinButton label="Value" onChange={handleTestChange} value={50} />,
+      <SpinButton label="Value" onChange={handleChange} value={50} />,
     );
 
     getByValue('spinbutton', 'Value', 50);
@@ -124,12 +114,7 @@ describe('SpinButton', (): void => {
   /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
   it('should set the `aria-valuemin` attribute when it has a minimum value', (): void => {
     const { getByMinValue } = render(
-      <SpinButton
-        label="Min"
-        onChange={handleTestChange}
-        min={25}
-        value={50}
-      />,
+      <SpinButton label="Min" onChange={handleChange} min={25} value={50} />,
     );
 
     getByMinValue('spinbutton', 'Min', 25);
@@ -138,12 +123,7 @@ describe('SpinButton', (): void => {
   /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
   it('should set the `aria-valuemax` attribute when it has a maximum value', (): void => {
     const { getByMaxValue } = render(
-      <SpinButton
-        label="Max"
-        onChange={handleTestChange}
-        max={75}
-        value={50}
-      />,
+      <SpinButton label="Max" onChange={handleChange} max={75} value={50} />,
     );
 
     getByMaxValue('spinbutton', 'Max', 75);

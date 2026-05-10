@@ -27,14 +27,15 @@ describe('TextBox', (): void => {
   });
 
   it('should submit the form when Enter is pressed in single-line', async (): Promise<void> => {
-    const { enter, focus, getByName } = render(
+    const { enter, getByName, tab } = render(
       <Form heading="Submittable form" onSubmit={handleSubmit}>
         <TextBox label="Press Enter" onChange={handleChange} value="" />
       </Form>,
     );
 
     const textBox: HTMLElement = getByName('textbox', 'Press Enter');
-    focus(textBox);
+    await tab();
+    expect(textBox).toHaveFocus();
     await enter();
     expect(handleChange).not.toHaveBeenCalled();
     expect(handleSubmit).toHaveBeenCalledExactlyOnceWith();

@@ -50,8 +50,13 @@ describe('TabList', (): void => {
         />,
       );
 
+      const tab: HTMLElement = getByName('tab', 'First');
       const tabPanel: HTMLElement = getByName('tabpanel', 'First');
-      expect(tabPanel).toHaveAttribute('aria-controls');
+      const tabControls: string | null = tab.getAttribute('aria-controls');
+      const tabPanelId: string | null = tabPanel.getAttribute('id');
+      expect(tab).toHaveAttribute('aria-controls');
+      expect(tabControls).not.toBeNull();
+      expect(tabControls).toBe(tabPanelId);
     });
   });
 
