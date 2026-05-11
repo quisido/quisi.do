@@ -3,14 +3,6 @@
   "version": "1.0.0",
   "author": "quisi.do <vite@quisi.do>",
   "description": "quisi.do",
-  "keywords": [
-    "analytics",
-    "frontend",
-    "observability",
-    "react",
-    "typescript",
-    "vite"
-  ],
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
@@ -21,7 +13,6 @@
     "attw": "quisido attw",
     "clean": "rimraf .cache .tests .wrangler _site node_modules",
     "design-system:copy-template": "bash ./.agents/skills/create-design-system/copy-template.sh",
-    "design-system:test-component": "bash ./scripts/test-design-system-component.sh",
     "eslint": "quisido eslint",
     "postinstall": "vite optimize",
     "vite:build": "vite build",
@@ -33,6 +24,14 @@
     "email": "vite@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
+  "keywords": [
+    "analytics",
+    "frontend",
+    "observability",
+    "react",
+    "typescript",
+    "vite"
+  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"

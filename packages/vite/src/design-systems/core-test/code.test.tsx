@@ -5,6 +5,15 @@ import importTestedDesignSystem from './import-tested-design-system.js';
 const { Code } = await importTestedDesignSystem();
 
 describe('Code', (): void => {
+  it('should expose a code fragment through the code role', (): void => {
+    const source = 'const value = 1;';
+    const { getByRole, getRoleCount } = render(<Code>{source}</Code>);
+
+    const code: HTMLElement = getByRole('code');
+    expect(getRoleCount('code')).toBe(1);
+    expect(code).toHaveTextContent(source);
+  });
+
   it('should not be focusable', (): void => {
     const { focus, getByRole } = render(<Code>const value = 1;</Code>);
     const code: HTMLElement = getByRole('code');
@@ -12,23 +21,26 @@ describe('Code', (): void => {
     expect(code).not.toHaveFocus();
   });
 
-  it('should preserve nested code content', (): void => {
-    const { getByRole } = render(
+  it('should preserve nested content inside the code fragment', (): void => {
+    const { getByRole, getRoleCount } = render(
       <Code>
         <span>npm</span> run test
       </Code>,
     );
 
     const code: HTMLElement = getByRole('code');
+    expect(getRoleCount('code')).toBe(1);
     expect(code).toHaveTextContent('npm run test');
   });
 
-  it('should preserve punctuation-heavy code text', (): void => {
-    const text = 'const value = items?.map((item) => item - 1) ?? [];';
-    const { getByRole } = render(<Code>{text}</Code>);
+  it('should preserve punctuation-heavy code for full punctuation verbosity', (): void => {
+    const source =
+      "const slug = input?.trim().replace(/[\\s-]+/g, '-');\n" +
+      "return items.map((item) => item.id - 1).join(', ');";
+    const { getByRole } = render(<Code>{source}</Code>);
 
     const code: HTMLElement = getByRole('code');
-    expect(code.textContent).toBe(text);
+    expect(code.textContent).toBe(source);
   });
 
   it('should support descriptions', (): void => {
