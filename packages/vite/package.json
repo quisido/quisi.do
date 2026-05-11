@@ -14,7 +14,6 @@
     "clean": "rimraf .cache .tests .wrangler _site node_modules",
     "design-system:copy-template": "bash ./.agents/skills/create-design-system/copy-template.sh",
     "eslint": "quisido eslint",
-    "postinstall": "vite optimize",
     "vite:build": "vite build",
     "vitest": "vitest",
     "vitest:run": "vitest run",
