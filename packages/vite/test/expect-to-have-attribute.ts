@@ -28,7 +28,7 @@ expect.extend({
        * `expect.any`'s return type is not known to type the `expectedValue`
        * parameter.
        */
-      expect(actualValue).toBe(expectedValue);
+      expect(actualValue).toStrictEqual(expectedValue);
       return {
         message: (): string => {
           const verb: string = getPassingVerb(this.isNot);

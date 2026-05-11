@@ -24,10 +24,10 @@ npm run design-system:copy-template -- my-example-slug
 ## Test-driven development
 
 From this package's root directory, execute
-`npx vitest run src/design-systems/$slug.test.ts` to verify the new design
-system files' test suite is accurate and passing. If the test suite is failing
-on this step, stop and notify the user that something is wrong with the design
-system template's test suite.
+`VITE_TESTED_DESIGN_SYSTEM=$slug npx vitest run src/design-systems/core-test/`
+to verify the new design system files accurately pass the test suite. If the
+test suite is failing on this step, stop and notify the user that something is
+wrong with the design system template or test suite.
 
 ## Design decisions
 

@@ -3,7 +3,7 @@ import render from './render.js';
 import { userEvent } from '@testing-library/user-event';
 import importTestedDesignSystem from './import-tested-design-system.js';
 
-const handleTestChange = vi.fn();
+const handleChange = vi.fn();
 
 const { Combobox } = await importTestedDesignSystem();
 
@@ -12,7 +12,7 @@ describe('Combobox', (): void => {
     const { enter, getByName } = render(
       <Combobox
         label="States"
-        onChange={handleTestChange}
+        onChange={handleChange}
         options={['Alabama', 'Alaska', 'California']}
         value=""
       />,
@@ -28,14 +28,14 @@ describe('Combobox', (): void => {
     expect(option).toHaveAttribute('aria-selected', 'true');
 
     await enter();
-    expect(handleTestChange).toHaveBeenCalledExactlyOnceWith('Alaska');
+    expect(handleChange).toHaveBeenCalledExactlyOnceWith('Alaska');
   });
 
   it('should support pointer selection', async (): Promise<void> => {
     const { getByName } = render(
       <Combobox
         label="States"
-        onChange={handleTestChange}
+        onChange={handleChange}
         options={['Alabama', 'Alaska', 'California']}
         value=""
       />,
@@ -47,14 +47,14 @@ describe('Combobox', (): void => {
     const option: HTMLElement = getByName('option', 'California');
     await userEvent.click(option);
 
-    expect(handleTestChange).toHaveBeenCalledExactlyOnceWith('California');
+    expect(handleChange).toHaveBeenCalledExactlyOnceWith('California');
   });
 
   it('should be expandable', async (): Promise<void> => {
     const { getByName } = render(
       <Combobox
         label="Expandable"
-        onChange={handleTestChange}
+        onChange={handleChange}
         options={['Test option']}
         value=""
       />,

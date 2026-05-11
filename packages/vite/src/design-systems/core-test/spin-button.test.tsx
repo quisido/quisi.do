@@ -69,7 +69,7 @@ describe('SpinButton', (): void => {
 
   /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
   it('should be decremented by the down arrow key', async (): Promise<void> => {
-    const { focus, getByName } = render(
+    const { getByName, tab } = render(
       <SpinButton
         label="Decrement key"
         onChange={handleChange}
@@ -79,25 +79,21 @@ describe('SpinButton', (): void => {
     );
 
     const spinButton: HTMLElement = getByName('spinbutton', 'Decrement key');
-    focus(spinButton);
-
+    await tab();
+    expect(spinButton).toHaveFocus();
     await userEvent.keyboard('{ArrowDown}');
-
     expect(handleChange).toHaveBeenCalledExactlyOnceWith(1);
   });
 
   /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
   it('should not include the increment and decrement buttons in the primary navigation ring (the Tab ring)', async (): Promise<void> => {
-    const { focus, getByName, tab } = render(
+    const { getByName, tab } = render(
       <SpinButton label="Tab ring" onChange={handleChange} value={1} />,
     );
 
     const spinButton: HTMLElement = getByName('spinbutton', 'Tab ring');
-    focus(spinButton);
-
     await tab();
     expect(spinButton).toHaveFocus();
-
     await tab();
     expect(spinButton).toHaveFocus();
   });

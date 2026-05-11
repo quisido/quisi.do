@@ -4,14 +4,14 @@ import importTestedDesignSystem from './import-tested-design-system.js';
 
 const { Slider } = await importTestedDesignSystem();
 
-const handleTestChange = vi.fn();
+const handleChange = vi.fn();
 
 describe('Slider', (): void => {
   it('should be a slider', (): void => {
     const { getByName } = render(
       <Slider
         label="Slider"
-        onChange={handleTestChange}
+        onChange={handleChange}
         max={3}
         min={1}
         orientation="vertical"
@@ -28,7 +28,7 @@ describe('Slider', (): void => {
 
   it('should have defaults', (): void => {
     const { getByName } = render(
-      <Slider label="Defaults" onChange={handleTestChange} value={50} />,
+      <Slider label="Defaults" onChange={handleChange} value={50} />,
     );
 
     const slider: HTMLElement = getByName('slider', 'Defaults');

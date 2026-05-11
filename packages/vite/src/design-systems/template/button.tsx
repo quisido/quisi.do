@@ -14,12 +14,16 @@ export default function Button({
   disabled,
   onClick,
 }: ButtonProps): ReactElement {
+  const handleClick = (): void => {
+    onClick();
+  };
+
   return (
     <button
       aria-disabled={disabled}
       className={classes['button']}
-      disabled
-      onClick={onClick}
+      disabled={disabled}
+      onClick={handleClick}
       type="button"
     >
       {children}

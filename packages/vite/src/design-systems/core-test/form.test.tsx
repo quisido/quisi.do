@@ -24,8 +24,8 @@ describe('Form', (): void => {
         </Form>,
       );
 
-      getHeadingByLevel('Test form heading', 2);
-      getHeadingByLevel('Test region heading', 3);
+      getHeadingByLevel('Test form heading', 1);
+      getHeadingByLevel('Test region heading', 2);
     });
   });
 

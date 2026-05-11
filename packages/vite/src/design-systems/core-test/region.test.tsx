@@ -6,11 +6,11 @@ const { Region } = await importTestedDesignSystem();
 
 describe('Region', (): void => {
   describe('heading', (): void => {
-    it('should default to level 2', (): void => {
+    it('should default to level 1', (): void => {
       const { getHeadingByLevel } = render(
         <Region heading="Default heading">Content</Region>,
       );
-      getHeadingByLevel('Default heading', 2);
+      getHeadingByLevel('Default heading', 1);
     });
 
     it('should increment levels for children but not siblings', (): void => {

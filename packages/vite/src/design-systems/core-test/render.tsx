@@ -16,6 +16,7 @@ export interface RenderTest {
   readonly enter: () => Promise<void>;
   readonly expectToHaveThrown: (message: RegExp | string) => void;
   readonly focus: (element: HTMLElement) => void;
+  readonly getByAltText: (id: string) => HTMLElement;
   readonly getByDescription: (
     role: DesignSystemRole,
     description: string,
@@ -56,7 +57,7 @@ export default function render(node: ReactNode): RenderTest {
    * not share the same one (`document.body`). Otherwise, `getBy*` queries will
    * fail when an element exists in a parallel test (e.g. a "Dismiss" button).
    */
-  const { getByRole, getByTestId, queryAllByRole, rerender } =
+  const { getByAltText, getByRole, getByTestId, queryAllByRole, rerender } =
     testingLibraryRender(node, {
       container,
       onCaughtError: noop,
@@ -86,6 +87,10 @@ export default function render(node: ReactNode): RenderTest {
 
     focus: (element: HTMLElement): void => {
       fireEvent.focus(element);
+    },
+
+    getByAltText: (id: string): HTMLElement => {
+      return getByAltText(id, { exact: true });
     },
 
     getByDescription: (role: string, description: string): HTMLElement => {

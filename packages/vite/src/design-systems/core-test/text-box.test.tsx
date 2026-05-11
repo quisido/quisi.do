@@ -42,7 +42,7 @@ describe('TextBox', (): void => {
   });
 
   it('should not submit a form when Enter is pressed in multiline', async (): Promise<void> => {
-    const { enter, focus, getByName } = render(
+    const { enter, getByName, tab } = render(
       <Form heading="Unsubmittable form" onSubmit={handleSubmit}>
         <TextBox
           label="Press Enter or don't"
@@ -54,7 +54,8 @@ describe('TextBox', (): void => {
     );
 
     const textBox: HTMLElement = getByName('textbox', "Press Enter or don't");
-    focus(textBox);
+    await tab();
+    expect(textBox).toHaveFocus();
     await enter();
     expect(handleChange).toHaveBeenCalledExactlyOnceWith('\n');
     expect(handleSubmit).not.toHaveBeenCalled();

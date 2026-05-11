@@ -5,13 +5,13 @@ import importTestedDesignSystem from './import-tested-design-system.js';
 
 const { RadioGroup } = await importTestedDesignSystem();
 
-const handleTestChange = vi.fn();
+const handleChange = vi.fn();
 
 describe('RadioGroup', (): void => {
   describe('label', (): void => {
     it('should be supported', (): void => {
       const { getByName } = render(
-        <RadioGroup label="Label" onChange={handleTestChange} radios={[]} />,
+        <RadioGroup label="Label" onChange={handleChange} radios={[]} />,
       );
       getByName('radiogroup', 'Label');
     });
@@ -24,7 +24,7 @@ describe('RadioGroup', (): void => {
           <span id="test-radio-group-labelled-by-id">Labelled by</span>
           <RadioGroup
             labelledBy="test-radio-group-labelled-by-id"
-            onChange={handleTestChange}
+            onChange={handleChange}
             radios={[]}
           />
         </>,
@@ -38,7 +38,7 @@ describe('RadioGroup', (): void => {
       const { getByName } = render(
         <RadioGroup
           label="Owns"
-          onChange={handleTestChange}
+          onChange={handleChange}
           owns="first second"
           radios={[]}
         />,
@@ -51,7 +51,7 @@ describe('RadioGroup', (): void => {
       const { getByName } = render(
         <RadioGroup
           label="Owns"
-          onChange={handleTestChange}
+          onChange={handleChange}
           owns={['first', 'second']}
           radios={[]}
         />,
@@ -64,7 +64,7 @@ describe('RadioGroup', (): void => {
       const { getByName } = render(
         <RadioGroup
           label="Owns"
-          onChange={handleTestChange}
+          onChange={handleChange}
           owns={new Set(['first', 'second'])}
           radios={[]}
         />,
@@ -79,7 +79,7 @@ describe('RadioGroup', (): void => {
       const { getByName } = render(
         <RadioGroup
           label="Radios"
-          onChange={handleTestChange}
+          onChange={handleChange}
           radios={[
             {
               key: 1,
@@ -109,7 +109,7 @@ describe('RadioGroup', (): void => {
       expect(second).toHaveAttribute('aria-setsize', '2');
 
       await userEvent.click(second);
-      expect(handleTestChange).toHaveBeenCalledExactlyOnceWith('banana');
+      expect(handleChange).toHaveBeenCalledExactlyOnceWith('banana');
     });
   });
 

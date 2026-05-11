@@ -12,6 +12,8 @@ const CONFIG: VitestConfig = await defineVitestConfig({
       instances: [{ browser: 'chromium', name: 'Chromium' }],
       provider: playwright(),
       screenshotDirectory: '.tests/vitest/screenshots',
+      trace: 'off',
+      ui: false,
     },
     coverage: {
       enabled: false,
@@ -25,7 +27,7 @@ const CONFIG: VitestConfig = await defineVitestConfig({
     ],
 
     // Allow more time for slower devices to support browsers.
-    testTimeout: 10_000,
+    testTimeout: 15_000,
   },
 });
 

@@ -7,24 +7,24 @@ import importTestedDesignSystem from './import-tested-design-system.js';
 const { Image } = await importTestedDesignSystem();
 
 describe('Image', (): void => {
-  it('should support labels', (): void => {
-    const { getByName } = render(
-      <Image alt="Test image" src="file://test.png" />,
+  it('should support alt text', (): void => {
+    const { getByAltText } = render(
+      <Image alt="alternative text" src="file://test.png" />,
     );
-    getByName('image', 'Test image label');
+    getByAltText('alternative text');
   });
 
-  it('should support labelled by', (): void => {
+  it('should support external labels', (): void => {
     const { getByName } = render(
       <>
-        <span id="test-image-label-id">Test image labelled by</span>
+        <span id="test-image-label-id">Labelled image</span>
         <Image
-          alt="Test image"
+          alt="Image"
           labelledBy="test-image-label-id"
           src="file://test.png"
         />
       </>,
     );
-    getByName('image', 'Test image labelled by');
+    getByName('image', 'Labelled image');
   });
 });

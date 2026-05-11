@@ -46,24 +46,26 @@ describe('Button', (): void => {
 
   it('should support the Enter key', async (): Promise<void> => {
     const handleClick = vi.fn();
-    const { enter, focus, getByName } = render(
+    const { enter, getByName, tab } = render(
       <Button onClick={handleClick}>Enter button</Button>,
     );
 
     const button: HTMLElement = getByName('button', 'Enter button');
-    focus(button);
+    await tab();
+    expect(button).toHaveFocus();
     await enter();
     expect(handleClick).toHaveBeenCalledExactlyOnceWith();
   });
 
   it('should support the Space key', async (): Promise<void> => {
     const handleClick = vi.fn();
-    const { focus, getByName, space } = render(
+    const { getByName, space, tab } = render(
       <Button onClick={handleClick}>Space button</Button>,
     );
 
     const button: HTMLElement = getByName('button', 'Space button');
-    focus(button);
+    await tab();
+    expect(button).toHaveFocus();
     await space();
     expect(handleClick).toHaveBeenCalledExactlyOnceWith();
   });

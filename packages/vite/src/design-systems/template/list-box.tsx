@@ -35,17 +35,15 @@ export default function ListBox({
   };
 
   return (
-    <div
-      aria-labelledby={labelledBy}
-      aria-orientation={orientation}
-      className={classes['list-box']}
-    >
+    <div className={classes['list-box']}>
       {label && (
         <label className={classes['label']} htmlFor={selectId}>
           {label}
         </label>
       )}
       <select
+        aria-labelledby={labelledBy}
+        aria-orientation={orientation}
         className={classes['select']}
         id={selectId}
         multiple
@@ -58,7 +56,8 @@ export default function ListBox({
             <option
               className={classes['option']}
               key={value}
-              selected={values.has(value)}
+              // React does not let you set `selected` on option elements.
+              // selected={values.has(value)}
               value={value}
             >
               {children}

@@ -8,20 +8,21 @@ const { Alert } = await importTestedDesignSystem();
 describe('Alert', (): void => {
   it('should be described', (): void => {
     const { getByDescription } = render(
-      <Alert heading="Described" type="info">
+      <Alert heading="Described alert" type="info">
         Description
       </Alert>,
     );
-    getByDescription('alertdialog', 'Description');
+    getByDescription('alert', 'Description');
   });
 
   it('should be labelled by its heading', (): void => {
     const { getByName } = render(
-      <Alert heading="Heading label" type="info">
+      <Alert heading="Alert with heading" type="info">
         Content
       </Alert>,
     );
-    getByName('alert', 'Test heading');
+
+    getByName('alert', 'Alert with heading');
   });
 
   it('should contain the alert message', (): void => {
@@ -30,7 +31,7 @@ describe('Alert', (): void => {
         Alert message
       </Alert>,
     );
-    within(getByName('alert', 'getByName')).getByText('Alert message');
+    within(getByName('alert', 'Container')).getByText('Alert message');
   });
 
   it('should not move focus', (): void => {
@@ -67,7 +68,7 @@ describe('Alert', (): void => {
         </Alert>,
       );
 
-      const alertDialog: HTMLElement = getByName('alertdialog', 'Atomic');
+      const alertDialog: HTMLElement = getByName('alert', 'Atomic');
       expect(alertDialog).toHaveAttribute('aria-atomic', 'true');
     });
 
@@ -78,7 +79,7 @@ describe('Alert', (): void => {
         </Alert>,
       );
 
-      const alertDialog: HTMLElement = getByName('alertdialog', 'Non-atomic');
+      const alertDialog: HTMLElement = getByName('alert', 'Non-atomic');
       expect(alertDialog).toHaveAttribute('aria-atomic', 'false');
     });
   });
@@ -91,29 +92,29 @@ describe('Alert', (): void => {
         </Alert>,
       );
 
-      const alertDialog: HTMLElement = getByName('alertdialog', 'Assertive');
+      const alertDialog: HTMLElement = getByName('alert', 'Assertive');
       expect(alertDialog).toHaveAttribute('aria-live', 'assertive');
     });
 
     it('should support off', (): void => {
       const { getByName } = render(
-        <Alert heading="Off" type="info">
+        <Alert heading="Off" live="off" type="info">
           Content
         </Alert>,
       );
 
-      const alertDialog: HTMLElement = getByName('alertdialog', 'Off');
+      const alertDialog: HTMLElement = getByName('alert', 'Off');
       expect(alertDialog).toHaveAttribute('aria-live', 'off');
     });
 
     it('should support polite', (): void => {
       const { getByName } = render(
-        <Alert heading="Polite" type="info">
+        <Alert heading="Polite" live="polite" type="info">
           Content
         </Alert>,
       );
 
-      const alertDialog: HTMLElement = getByName('alertdialog', 'Polite');
+      const alertDialog: HTMLElement = getByName('alert', 'Polite');
       expect(alertDialog).toHaveAttribute('aria-live', 'polite');
     });
   });

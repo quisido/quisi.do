@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import type { ReactElement, SubmitEvent } from 'react';
 import type { FormProps } from '../core/form-props.js';
 import useForm from '../core/use-form.js';
 import Heading from './heading.js';
@@ -17,17 +17,24 @@ export default function Form({
   heading,
   label,
   labelledBy: labelledByProp,
+  onSubmit,
 }: FormProps): ReactElement {
   const { headingId, labelledBy } = useForm({
     label,
     labelledBy: labelledByProp,
   });
 
+  const handleSubmit = (ev: SubmitEvent<HTMLFormElement>): void => {
+    ev.preventDefault();
+    onSubmit();
+  };
+
   return (
     <form
       aria-label={label}
       aria-labelledby={labelledBy}
       className={classes['form']}
+      onSubmit={handleSubmit}
     >
       <Heading className={classes['heading']} id={headingId}>
         {heading}

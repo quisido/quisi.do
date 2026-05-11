@@ -5,26 +5,25 @@ import importTestedDesignSystem from './import-tested-design-system.js';
 
 const { ListBox } = await importTestedDesignSystem();
 
-const handleTestChange = vi.fn();
+const handleChange = vi.fn();
 
 describe('ListBox', (): void => {
   it('should emit a change event', async (): Promise<void> => {
     const { getByName } = render(
       <>
-        <span id="test-list-box-labelled-by-id">Test list box label</span>
+        <span id="test-list-box-external-label-id">Changeable</span>
         <ListBox
-          labelledBy="test-list-box-labelled-by-id"
-          onChange={handleTestChange}
+          labelledBy="test-list-box-external-label-id"
+          onChange={handleChange}
           options={[{ children: 'First', value: '1' }]}
           values={new Set()}
         />
       </>,
     );
 
-    const listBox: HTMLElement = getByName('listbox', 'Change handler');
+    const listBox: HTMLElement = getByName('listbox', 'Changeable');
     await userEvent.selectOptions(listBox, ['1']);
-
-    expect(handleTestChange).toHaveBeenCalledExactlyOnceWith(new Set(['1']));
+    expect(handleChange).toHaveBeenCalledExactlyOnceWith(new Set(['1']));
   });
 
   /**
