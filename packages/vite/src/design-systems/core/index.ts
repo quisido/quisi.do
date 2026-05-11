@@ -72,6 +72,11 @@ export {
   type TreeGridProps,
   type TreeGridRow,
 } from './tree-grid-props.js';
-export { type TreeGroup, type TreeItem, type TreeProps } from './tree-props.js';
+export {
+  type TreeGroup,
+  type TreeItem,
+  type TreeItemKey,
+  type TreeProps,
+} from './tree-props.js';
 export { type ToggleButtonProps } from './toggle-button-props.js';
 export { type TreeState, default as useTree } from './use-tree.js';

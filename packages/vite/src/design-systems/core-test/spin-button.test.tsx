@@ -1,58 +1,98 @@
+import { fireEvent } from '@testing-library/react';
 import render from './render.js';
-import { describe, expect, it, vi } from 'vitest';
-import { type DesignSystemRole, ROLES } from './roles.js';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 import importTestedDesignSystem from './import-tested-design-system.js';
 
 const handleChange = vi.fn();
 
-const ROLE_LIMITS: ReadonlyMap<DesignSystemRole, number> = new Map([
-  ['button', 2],
-  ['spinbutton', 1],
-  ['textbox', 1],
-]);
-
 const { SpinButton } = await importTestedDesignSystem();
 
 describe('SpinButton', (): void => {
-  /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
-  it('must limit accessibility children to a textbox and/or two buttons', (): void => {
+  beforeEach((): void => {
+    handleChange.mockClear();
+  });
+
+  it('should expose a named numeric spinbutton with its current value', (): void => {
+    const { getByName, getByValue } = render(
+      <SpinButton
+        label="Quantity"
+        name="quantity"
+        onChange={handleChange}
+        value={5}
+      />,
+    );
+
+    const spinButton: HTMLElement = getByName('spinbutton', 'Quantity');
+    expect(spinButton.tagName).toBe('INPUT');
+    expect(spinButton).toHaveAttribute('type', 'number');
+    expect(spinButton).toHaveAttribute('name', 'quantity');
+    expect(spinButton).toHaveAttribute('aria-valuenow', '5');
+    expect(spinButton).toHaveValue(5);
+    expect(getByValue('spinbutton', 'Quantity', 5)).toBe(spinButton);
+  });
+
+  it('should set minimum and maximum values when the range is bounded', (): void => {
+    const { getByMaxValue, getByMinValue, getByName } = render(
+      <SpinButton
+        label="Bounded quantity"
+        max={75}
+        min={25}
+        onChange={handleChange}
+        value={50}
+      />,
+    );
+
+    const spinButton: HTMLElement = getByName('spinbutton', 'Bounded quantity');
+    expect(spinButton).toHaveAttribute('aria-valuemax', '75');
+    expect(spinButton).toHaveAttribute('aria-valuemin', '25');
+    expect(spinButton).toHaveAttribute('max', '75');
+    expect(spinButton).toHaveAttribute('min', '25');
+    expect(getByMinValue('spinbutton', 'Bounded quantity', 25)).toBe(
+      spinButton,
+    );
+    expect(getByMaxValue('spinbutton', 'Bounded quantity', 75)).toBe(
+      spinButton,
+    );
+  });
+
+  it('should omit minimum and maximum attributes when the range is unbounded', (): void => {
+    const { getByName } = render(
+      <SpinButton label="Unbounded" onChange={handleChange} value={1} />,
+    );
+
+    const spinButton: HTMLElement = getByName('spinbutton', 'Unbounded');
+    expect(spinButton).not.toHaveAttribute('aria-valuemin');
+    expect(spinButton).not.toHaveAttribute('aria-valuemax');
+    expect(spinButton).not.toHaveAttribute('min');
+    expect(spinButton).not.toHaveAttribute('max');
+  });
+
+  it('should limit accessibility descendants to the native input implementation', (): void => {
     const { getRoleCount } = render(
-      <SpinButton label="Test spin button" onChange={handleChange} value={1} />,
+      <SpinButton label="Native spinbutton" onChange={handleChange} value={1} />,
     );
 
-    for (const role of ROLES) {
-      if (role === 'generic') {
-        continue;
-      }
-
-      const count: number = getRoleCount(role);
-      const limit: number = ROLE_LIMITS.get(role) ?? 0;
-      expect(count, `${role} count`).toBeLessThanOrEqual(limit);
-    }
+    expect(getRoleCount('spinbutton')).toBe(1);
+    expect(getRoleCount('textbox')).toBe(0);
+    expect(getRoleCount('button')).toBe(0);
   });
 
-  /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
-  it('should focus the textbox if present', (): void => {
-    const { focus, getByName, getOptionalByRole } = render(
-      <SpinButton label="Textbox focus" onChange={handleChange} value={1} />,
+  it('should place focus on the spinbutton input in the primary tab ring', async (): Promise<void> => {
+    const { getByName, tab } = render(
+      <SpinButton label="Focusable quantity" onChange={handleChange} value={1} />,
     );
 
-    const spinButton: HTMLElement = getByName('spinbutton', 'Textbox focus');
-    const textbox: HTMLElement | null = getOptionalByRole('textbox');
-    focus(spinButton);
-
-    if (textbox === null) {
-      expect(spinButton).toHaveFocus();
-      return;
-    }
-
-    expect(textbox).toHaveFocus();
+    const spinButton: HTMLElement = getByName(
+      'spinbutton',
+      'Focusable quantity',
+    );
+    await tab();
+    expect(spinButton).toHaveFocus();
   });
 
-  /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
-  it('should be incremented by the up arrow key', async (): Promise<void> => {
-    const { focus, getByName } = render(
+  it('should increment by the configured step with the up arrow key', async (): Promise<void> => {
+    const { getByName } = render(
       <SpinButton
         label="Increment key"
         onChange={handleChange}
@@ -62,14 +102,13 @@ describe('SpinButton', (): void => {
     );
 
     const spinButton: HTMLElement = getByName('spinbutton', 'Increment key');
-    focus(spinButton);
+    spinButton.focus();
     await userEvent.keyboard('{ArrowUp}');
     expect(handleChange).toHaveBeenCalledExactlyOnceWith(3);
   });
 
-  /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
-  it('should be decremented by the down arrow key', async (): Promise<void> => {
-    const { getByName, tab } = render(
+  it('should decrement by the configured step with the down arrow key', async (): Promise<void> => {
+    const { getByName } = render(
       <SpinButton
         label="Decrement key"
         onChange={handleChange}
@@ -79,49 +118,29 @@ describe('SpinButton', (): void => {
     );
 
     const spinButton: HTMLElement = getByName('spinbutton', 'Decrement key');
-    await tab();
+    spinButton.focus();
     expect(spinButton).toHaveFocus();
     await userEvent.keyboard('{ArrowDown}');
     expect(handleChange).toHaveBeenCalledExactlyOnceWith(1);
   });
 
-  /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
-  it('should not include the increment and decrement buttons in the primary navigation ring (the Tab ring)', async (): Promise<void> => {
-    const { getByName, tab } = render(
-      <SpinButton label="Tab ring" onChange={handleChange} value={1} />,
+  it('should emit numeric values when edited as text', async (): Promise<void> => {
+    const { getByName } = render(
+      <SpinButton label="Editable quantity" onChange={handleChange} value={1} />,
     );
 
-    const spinButton: HTMLElement = getByName('spinbutton', 'Tab ring');
-    await tab();
-    expect(spinButton).toHaveFocus();
-    await tab();
-    expect(spinButton).toHaveFocus();
+    await userEvent.fill(getByName('spinbutton', 'Editable quantity'), '42');
+    expect(handleChange).toHaveBeenCalledWith(42);
   });
 
-  /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
-  it('should set the `aria-valuenow` attribute when it has a value', (): void => {
-    const { getByValue } = render(
-      <SpinButton label="Value" onChange={handleChange} value={50} />,
+  it('should ignore text input that cannot be parsed as a number', async (): Promise<void> => {
+    const { getByName } = render(
+      <SpinButton label="Numeric only" onChange={handleChange} value={1} />,
     );
 
-    getByValue('spinbutton', 'Value', 50);
-  });
-
-  /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
-  it('should set the `aria-valuemin` attribute when it has a minimum value', (): void => {
-    const { getByMinValue } = render(
-      <SpinButton label="Min" onChange={handleChange} min={25} value={50} />,
-    );
-
-    getByMinValue('spinbutton', 'Min', 25);
-  });
-
-  /** @see {@link https://w3c.github.io/aria/#spinbutton | Source} */
-  it('should set the `aria-valuemax` attribute when it has a maximum value', (): void => {
-    const { getByMaxValue } = render(
-      <SpinButton label="Max" onChange={handleChange} max={75} value={50} />,
-    );
-
-    getByMaxValue('spinbutton', 'Max', 75);
+    fireEvent.change(getByName('spinbutton', 'Numeric only'), {
+      target: { value: 'abc' },
+    });
+    expect(handleChange).not.toHaveBeenCalled();
   });
 });
