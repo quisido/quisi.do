@@ -1,6 +1,5 @@
 import type {
   HTMLAttributeAnchorTarget,
-  MouseEvent,
   MouseEventHandler,
   ReactElement,
 } from 'react';
@@ -29,8 +28,7 @@ export default function Link({
       return;
     }
 
-    return (ev: MouseEvent<HTMLAnchorElement>): void => {
-      ev.preventDefault();
+    return (): void => {
       onClick();
     };
   })();

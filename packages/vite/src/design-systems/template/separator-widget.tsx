@@ -1,8 +1,9 @@
-import type { ReactElement } from 'react';
+import type { KeyboardEvent, ReactElement } from 'react';
 import type { SeparatorWidgetProps } from '../core/separator-widget-props.js';
 import classes from './separator-widget.module.scss';
 
 const DEFAULT_MAX = 100;
+const STEP = 1;
 
 /**
  * A separator widget is interactive widget that separates and distinguishes
@@ -18,21 +19,87 @@ const DEFAULT_MAX = 100;
  *@see {@link https://w3c.github.io/aria/#separator | WAI-ARIA `separator` role}
  */
 export default function SeparatorWidget({
-  disabled,
+  disabled = false,
+  label,
+  labelledBy,
   max = DEFAULT_MAX,
   min = 0,
+  onChange,
   orientation = 'horizontal',
   value,
+  valueText,
 }: SeparatorWidgetProps): ReactElement {
+  if (value < min) {
+    throw new Error(
+      `A separator's value cannot be less than its minimum: ${value} < ${min}`,
+    );
+  }
+
+  if (value > max) {
+    throw new Error(
+      `A separator's value cannot be greater than its maximum: ${value} > ${max}`,
+    );
+  }
+
+  const changeValue = (offset: number): void => {
+    if (disabled || onChange === undefined) {
+      return;
+    }
+
+    const nextValue: number = Math.min(max, Math.max(min, value + offset));
+    onChange(nextValue);
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLHRElement>): void => {
+    switch (event.key) {
+      case 'ArrowDown': {
+        if (orientation === 'vertical') {
+          event.preventDefault();
+          changeValue(STEP);
+        }
+        break;
+      }
+
+      case 'ArrowLeft': {
+        if (orientation === 'horizontal') {
+          event.preventDefault();
+          changeValue(-STEP);
+        }
+        break;
+      }
+
+      case 'ArrowRight': {
+        if (orientation === 'horizontal') {
+          event.preventDefault();
+          changeValue(STEP);
+        }
+        break;
+      }
+
+      case 'ArrowUp': {
+        if (orientation === 'vertical') {
+          event.preventDefault();
+          changeValue(-STEP);
+        }
+        break;
+      }
+    }
+  };
+
   return (
     <hr
       aria-disabled={disabled}
+      aria-label={label}
+      aria-labelledby={labelledBy}
       aria-orientation={orientation}
       aria-valuemax={max}
       aria-valuemin={min}
       aria-valuenow={value}
+      aria-valuetext={valueText}
       className={classes['separator-widget']}
+      onKeyDown={handleKeyDown}
       role="separator"
+      tabIndex={disabled ? -1 : 0}
     />
   );
 }

@@ -1,6 +1,7 @@
-import type { Key } from 'react';
+import type { Key, ReactNode } from 'react';
 
 interface Props<T extends string | number = string | number> {
+  readonly children?: ReactNode | undefined;
   readonly onChange: (value: T) => void;
   readonly owns?: readonly string[] | ReadonlySet<string> | string | undefined;
   readonly radios: readonly Radio<T>[];

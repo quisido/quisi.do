@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import type { FocusEvent, ReactElement } from 'react';
 import type { FeedArticle, FeedProps } from '../core/feed-props.js';
 import useFeed from '../core/use-feed.js';
 import useId from '../core/use-id.js';
@@ -11,10 +11,17 @@ interface FeedArticleProps {
   readonly setSize?: number | undefined;
 }
 
+interface FeedControlArticleProps {
+  readonly buttonText: string;
+  readonly disabled: boolean;
+  readonly onClick: VoidFunction;
+}
+
 const UNKNOWN_SET_SIZE = -1;
 
 const FeedArticleComponent = ({
   children,
+  describedBy,
   heading,
   labelledBy: labelledByProp,
   onFocus,
@@ -22,17 +29,49 @@ const FeedArticleComponent = ({
   setSize,
 }: FeedArticle & FeedArticleProps): ReactElement => {
   const headingId: string = useId();
+
+  const handleFocus = (event: FocusEvent<HTMLElement>): void => {
+    event.currentTarget.scrollIntoView({ block: 'nearest' });
+    onFocus();
+  };
+
   return (
     <article
+      aria-describedby={describedBy}
       aria-labelledby={labelledByProp ?? headingId}
       aria-posinset={positionInSet}
       aria-setsize={setSize}
       className={classes['article']}
-      onFocus={onFocus}
+      onFocus={handleFocus}
       tabIndex={0}
     >
       <Heading id={headingId}>{heading}</Heading>
       {children}
+    </article>
+  );
+};
+
+const FeedControlArticle = ({
+  buttonText,
+  disabled,
+  onClick,
+}: FeedControlArticleProps): ReactElement => {
+  const buttonId: string = useId();
+
+  const handleFocus = (event: FocusEvent<HTMLElement>): void => {
+    event.currentTarget.scrollIntoView({ block: 'nearest' });
+  };
+
+  return (
+    <article
+      aria-labelledby={buttonId}
+      className={classes['article']}
+      onFocus={handleFocus}
+      tabIndex={0}
+    >
+      <button disabled={disabled} id={buttonId} onClick={onClick} type="button">
+        {buttonText}
+      </button>
     </article>
   );
 };
@@ -91,11 +130,11 @@ export default function Feed({
         <div id={errorMessageId}>{errorMessage}</div>
       )}
       {handlePrepend !== undefined && (
-        <div>
-          <button disabled={prepending} onClick={handlePrepend} type="button">
-            Prepend articles
-          </button>
-        </div>
+        <FeedControlArticle
+          buttonText="Prepend articles"
+          disabled={prepending}
+          onClick={handlePrepend}
+        />
       )}
       {articles.map(
         (
@@ -127,11 +166,11 @@ export default function Feed({
         },
       )}
       {handleAppend !== undefined && (
-        <div>
-          <button disabled={appending} onClick={handleAppend} type="button">
-            Append articles
-          </button>
-        </div>
+        <FeedControlArticle
+          buttonText="Append articles"
+          disabled={appending}
+          onClick={handleAppend}
+        />
       )}
     </section>
   );

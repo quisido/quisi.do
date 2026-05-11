@@ -15,6 +15,7 @@ import classes from './radio-group.module.scss';
 export default function RadioGroup<
   T extends string | number = string | number,
 >({
+  children,
   label,
   labelledBy: labelledByProp,
   onChange,
@@ -72,6 +73,10 @@ export default function RadioGroup<
             positionInSetProp ?? getPositionInSet(index);
 
           const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+            if (readOnly) {
+              return;
+            }
+
             if (!event.currentTarget.checked) {
               return;
             }
@@ -88,6 +93,7 @@ export default function RadioGroup<
                 aria-setsize={setSize}
                 checked={checked}
                 className={classes['radio']}
+                name={id}
                 onChange={handleChange}
                 readOnly={readOnly}
                 required={required}
@@ -100,6 +106,7 @@ export default function RadioGroup<
           );
         },
       )}
+      {children}
     </div>
   );
 }

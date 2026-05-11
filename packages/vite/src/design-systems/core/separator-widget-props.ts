@@ -3,6 +3,8 @@ export interface SeparatorWidgetProps {
    * @default false
    */
   readonly disabled?: boolean | undefined;
+  readonly label?: string | undefined;
+  readonly labelledBy?: string | undefined;
   /**
    * @default 100
    */
@@ -15,5 +17,7 @@ export interface SeparatorWidgetProps {
    * @default 'horizontal'
    */
   readonly orientation?: 'horizontal' | 'vertical' | undefined;
+  readonly onChange?: ((value: number) => void) | undefined;
   readonly value: number;
+  readonly valueText?: string | undefined;
 }

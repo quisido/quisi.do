@@ -7,6 +7,9 @@ interface Props {
   readonly busy: boolean;
   readonly describes: string | undefined;
   readonly id: string | undefined;
+  readonly max: number;
+  readonly min: number;
+  readonly value: number | undefined;
 }
 
 interface State {
@@ -17,6 +20,9 @@ export default function useProgressBar({
   busy,
   describes,
   id: idProp,
+  max,
+  min,
+  value,
 }: Props): State {
   const idState: string = useId();
   const id: string = idProp ?? idState;
@@ -41,6 +47,26 @@ export default function useProgressBar({
       removeDescribedBy();
     };
   }, [busy, describes, id]);
+
+  useLayoutEffect((): void => {
+    if (value === undefined || value <= max) {
+      return;
+    }
+
+    throw new Error(
+      `A progress bar's value cannot be greater than its maximum: ${value} > ${max}`,
+    );
+  }, [max, value]);
+
+  useLayoutEffect((): void => {
+    if (value === undefined || value >= min) {
+      return;
+    }
+
+    throw new Error(
+      `A progress bar's value cannot be less than its minimum: ${value} < ${min}`,
+    );
+  }, [min, value]);
 
   return {
     id,

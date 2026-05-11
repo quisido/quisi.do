@@ -1,10 +1,79 @@
 import render from './render.js';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import importTestedDesignSystem from './import-tested-design-system.js';
 
-const { Region } = await importTestedDesignSystem();
+const {
+  Complementary,
+  Document,
+  Link,
+  Main,
+  Navigation,
+  Region,
+  Search,
+} = await importTestedDesignSystem();
 
 describe('Region', (): void => {
+  it('should expose a named region landmark for important content', (): void => {
+    const { getByName, getRoleCount } = render(
+      <Region heading="Service health">All systems operational.</Region>,
+    );
+
+    const region: HTMLElement = getByName('region', 'Service health');
+    expect(region.tagName).toBe('SECTION');
+    expect(region).toHaveTextContent('All systems operational.');
+    expect(getRoleCount('region')).toBe(1);
+  });
+
+  it('should use its visible heading as the accessible name', (): void => {
+    const { getByName, getHeadingByLevel } = render(
+      <Region heading="Release notes">Version details</Region>,
+    );
+
+    const region: HTMLElement = getByName('region', 'Release notes');
+    const heading: HTMLElement = getHeadingByLevel('Release notes', 1);
+
+    expect(region).toHaveAttribute('aria-labelledby', heading.id);
+    expect(region).not.toHaveAttribute('aria-label');
+    expect(region).toContainElement(heading);
+  });
+
+  it('should allow multiple regions when each has a distinct purpose label', (): void => {
+    const { getByName, getRoleCount } = render(
+      <>
+        <Region heading="Account security">Security content</Region>
+        <Region heading="Billing summary">Billing content</Region>
+      </>,
+    );
+
+    expect(getByName('region', 'Account security')).toHaveTextContent(
+      'Security content',
+    );
+    expect(getByName('region', 'Billing summary')).toHaveTextContent(
+      'Billing content',
+    );
+    expect(getRoleCount('region')).toBe(2);
+  });
+
+  it('should not replace more specific landmark roles', (): void => {
+    const { getRoleCount } = render(
+      <Document>
+        <Main>Main content</Main>
+        <Complementary>Related content</Complementary>
+        <Navigation label="Document navigation">
+          <Link href="/contents">Contents</Link>
+        </Navigation>
+        <Search>Search controls</Search>
+        <Region heading="Feature support matrix">Matrix content</Region>
+      </Document>,
+    );
+
+    expect(getRoleCount('main')).toBe(1);
+    expect(getRoleCount('complementary')).toBe(1);
+    expect(getRoleCount('navigation')).toBe(1);
+    expect(getRoleCount('search')).toBe(1);
+    expect(getRoleCount('region')).toBe(1);
+  });
+
   describe('heading', (): void => {
     it('should default to level 1', (): void => {
       const { getHeadingByLevel } = render(

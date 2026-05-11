@@ -6,4 +6,5 @@ export interface ProgressBarProps {
   readonly max?: number | undefined;
   readonly min?: number | undefined;
   readonly value?: number | undefined;
+  readonly valueText?: string | undefined;
 }

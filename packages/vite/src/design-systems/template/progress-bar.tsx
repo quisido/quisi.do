@@ -25,8 +25,16 @@ export default function ProgressBar({
   max = DEFAULT_MAX,
   min = 0,
   value,
+  valueText,
 }: ProgressBarProps): ReactElement {
-  const { id } = useProgressBar({ busy, describes, id: idProp });
+  const { id } = useProgressBar({
+    busy,
+    describes,
+    id: idProp,
+    max,
+    min,
+    value,
+  });
 
   return (
     <label className={classes['root']}>
@@ -36,6 +44,7 @@ export default function ProgressBar({
         aria-valuemax={max}
         aria-valuemin={min}
         aria-valuenow={value}
+        aria-valuetext={valueText}
         className={classes['progress-bar']}
         id={id}
         max={max}

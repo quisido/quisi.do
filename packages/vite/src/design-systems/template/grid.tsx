@@ -1,10 +1,46 @@
-import { type Key, type ReactElement, useMemo } from 'react';
+import {
+  type Key,
+  type KeyboardEvent,
+  type ReactElement,
+  useCallback,
+  useMemo,
+  useRef,
+} from 'react';
 import type { GridCell, GridProps, GridRow } from '../core/grid-props.js';
 import useElementId from '../../hooks/use-element-id.js';
 import classes from './grid.module.scss';
 
 const EMPTY_MAP: ReadonlyMap<Key, never> = new Map<Key, never>();
 const EMPTY_SET: ReadonlySet<never> = new Set<never>();
+
+const getGridCellTabIndex = (rowIndex: number, cellIndex: number): number => {
+  if (rowIndex === 0 && cellIndex === 0) {
+    return 0;
+  }
+
+  return -1;
+};
+
+const getGridCellSelected = (
+  selected: GridProps['selected'],
+  isSelected: boolean,
+): boolean | undefined => {
+  if (selected === undefined) {
+    return undefined;
+  }
+
+  return isSelected;
+};
+
+const getGridMultiSelectable = (
+  selected: GridProps['selected'],
+): true | undefined => {
+  if (selected instanceof Map) {
+    return true;
+  }
+
+  return undefined;
+};
 
 /**
  * A grid is a composite widget containing a collection of one or more rows
@@ -18,11 +54,12 @@ const EMPTY_SET: ReadonlySet<never> = new Set<never>();
  */
 export default function Grid({
   caption,
-  readOnly = false,
+  readOnly,
   rows,
   selected,
 }: GridProps): ReactElement {
   const captionId: string = useElementId();
+  const gridRef = useRef<HTMLTableElement>(null);
 
   const selectedMap = useMemo((): ReadonlyMap<Key, ReadonlySet<Key>> => {
     if (selected === undefined) {
@@ -37,23 +74,94 @@ export default function Grid({
     return selected;
   }, [selected]);
 
+  const focusCell = useCallback((rowIndex: number, cellIndex: number): void => {
+    const rowElements: HTMLElement[] = Array.from(
+      gridRef.current?.querySelectorAll<HTMLElement>('[role="row"]') ?? [],
+    );
+    const rowElement: HTMLElement | undefined = rowElements[rowIndex];
+    const cellElements: HTMLElement[] = Array.from(
+      rowElement?.querySelectorAll<HTMLElement>('[role="gridcell"]') ?? [],
+    );
+    const cellElement: HTMLElement | undefined = cellElements[cellIndex];
+
+    if (cellElement === undefined) {
+      return;
+    }
+
+    for (const element of rowElements.flatMap(
+      (row: HTMLElement): HTMLElement[] =>
+        Array.from(row.querySelectorAll<HTMLElement>('[role="gridcell"]')),
+    )) {
+      if (element === cellElement) {
+        element.tabIndex = 0;
+      } else {
+        element.tabIndex = -1;
+      }
+    }
+
+    cellElement.focus();
+  }, []);
+
+  const handleGridCellKeyDown = useCallback(
+    (
+      event: KeyboardEvent<HTMLTableCellElement>,
+      rowIndex: number,
+      cellIndex: number,
+    ): void => {
+      switch (event.key) {
+        case 'ArrowDown': {
+          event.preventDefault();
+          focusCell(rowIndex + 1, cellIndex);
+          break;
+        }
+
+        case 'ArrowLeft': {
+          event.preventDefault();
+          focusCell(rowIndex, cellIndex - 1);
+          break;
+        }
+
+        case 'ArrowRight': {
+          event.preventDefault();
+          focusCell(rowIndex, cellIndex + 1);
+          break;
+        }
+
+        case 'ArrowUp': {
+          event.preventDefault();
+          focusCell(rowIndex - 1, cellIndex);
+          break;
+        }
+
+        default: {
+          break;
+        }
+      }
+    },
+    [focusCell],
+  );
+
   return (
     <table
       aria-readonly={readOnly}
       aria-labelledby={captionId}
-      aria-multiselectable={selected instanceof Map}
+      aria-multiselectable={getGridMultiSelectable(selected)}
       className={classes['grid']}
+      ref={gridRef}
       role="grid"
     >
       <caption id={captionId}>{caption}</caption>
       <tbody role="rowgroup">
-        {rows.map(({ cells, key: rowKey }: GridRow): ReactElement => {
+        {rows.map(({ cells, key: rowKey }: GridRow, rowIndex): ReactElement => {
           const selectedCells: ReadonlySet<Key> =
             selectedMap.get(rowKey) ?? EMPTY_SET;
           return (
             <tr key={rowKey} role="row">
               {cells.map(
-                ({ content, key: cellKey }: GridCell): ReactElement => {
+                (
+                  { content, key: cellKey }: GridCell,
+                  cellIndex,
+                ): ReactElement => {
                   /**
                    * A grid cell can be focusable, editable, and selectable. A
                    * grid cell can have relationships such as aria-controls to
@@ -69,9 +177,15 @@ export default function Grid({
                   return (
                     <td
                       aria-readonly={readOnly}
-                      aria-selected={isSelected}
+                      aria-selected={getGridCellSelected(selected, isSelected)}
                       key={cellKey}
+                      onKeyDown={(
+                        event: KeyboardEvent<HTMLTableCellElement>,
+                      ): void => {
+                        handleGridCellKeyDown(event, rowIndex, cellIndex);
+                      }}
                       role="gridcell"
+                      tabIndex={getGridCellTabIndex(rowIndex, cellIndex)}
                     >
                       {content}
                     </td>
