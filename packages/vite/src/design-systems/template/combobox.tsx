@@ -35,6 +35,7 @@ export default function Combobox({
   value,
 }: ComboboxProps): ReactElement {
   const inputId: string = useId();
+  const labelId: string = useId();
   const listBoxId: string = useId();
   const optionIdPrefix: string = useId();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -346,7 +347,7 @@ export default function Combobox({
 
   return (
     <div aria-haspopup="listbox" className={classes['root']} ref={rootRef}>
-      <label className={classes['label']} htmlFor={inputId}>
+      <label className={classes['label']} htmlFor={inputId} id={labelId}>
         {label}
       </label>
       <div>
@@ -399,6 +400,7 @@ export default function Combobox({
       </div>
       <ul
         aria-disabled={disabled}
+        aria-labelledby={labelId}
         aria-readonly={readOnly}
         className={classes['listbox']}
         hidden={!listboxVisible}
