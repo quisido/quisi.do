@@ -1,6 +1,6 @@
 import { type ESLint, type Linter } from 'eslint';
 import jsonc from 'eslint-plugin-jsonc';
-import jsoncParser from 'jsonc-eslint-parser';
+import * as jsoncParser from 'jsonc-eslint-parser';
 import defineConfig, { type Config } from './define-config.js';
 import JSON from './json.js';
 import mapFlatConfigToRulesRecord from './map-flat-config-to-rules-record.js';

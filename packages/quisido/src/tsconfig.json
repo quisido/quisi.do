@@ -72,7 +72,14 @@
     "noUncheckedSideEffectImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "paths": {},
+    "paths": {
+      // eslint-plugin-sort-keys-custom-order@3.0.2 was published with
+      // "types": "./dist/index.d.ts" in its exports field, but the actual
+      // types file is located at "./dist/src/index.d.ts".
+      "eslint-plugin-sort-keys-custom-order": [
+        "../node_modules/eslint-plugin-sort-keys-custom-order/dist/src/index.d.ts"
+      ]
+    },
     "plugins": [],
     "preserveConstEnums": true,
     "preserveSymlinks": true,
