@@ -7,11 +7,20 @@ runs:
   steps:
     - name: Setup
       uses: ./.github/actions/setup
+    - name: Install browser dependencies
+      shell: bash
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        npx playwright install-deps \
+          chromium-headless-shell firefox webkit;
     - name: Install browsers
       shell: bash
+      env:
+        DEBIAN_FRONTEND: noninteractive
       run: |
-        npx playwright install --only-shell --with-deps \
-          chromium-headless-shell firefox webkit
+        npx playwright install --only-shell \
+          chromium-headless-shell firefox webkit;
     - name: Test
       run: npm test
       shell: bash
