@@ -74,7 +74,7 @@
     "dompurify": "^3.4.1",
     "fmrs": "^2.1.1",
     "fullstory-react": "^3.0.0",
-    "i18next": "^26.0.3",
+    "i18next": "^26.0.6",
     "lazy-i18n": "^3.0.4",
     "mixpanel-browser": "^2.71.1",
     "number-format-react": "^2.0.1",
