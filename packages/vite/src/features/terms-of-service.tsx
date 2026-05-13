@@ -2,16 +2,19 @@ import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 import { Main, Paragraph, Region } from '../design-systems/template/index.js';
 import Page from './page.js';
+import useLocale from '../hooks/use-locale.js';
 
 const LAST_UPDATED: Date = new Date('2024-03-21');
 
 export default function TermsOfService(): ReactElement {
+  const [locale] = useLocale();
+
   return (
     <Page>
       <Main>
         <Region heading={<I18n>Terms of service</I18n>}>
           <Paragraph>
-            Last updated {LAST_UPDATED.toLocaleDateString()}
+            Last updated {LAST_UPDATED.toLocaleDateString(locale)}
           </Paragraph>
           <Paragraph>These terms of service may change at any time.</Paragraph>
           <Paragraph>
