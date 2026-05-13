@@ -14,7 +14,7 @@ export default function Support(): ReactElement {
       <Main>
         <Region heading={<I18n>Support</I18n>}>
           If you have any questions or concerns, please feel free to text us at{' '}
-          <Link href="tel:+19207868379">1-920-786-8379</Link> or email us at{' '}
+          <Link href="sms://+19207868379">1-920-786-8379</Link> or email us at{' '}
           <Link href="mailto:support@quisi.do">support@quisi.do</Link>. We are
           here to help you with any issues you may have.
         </Region>
