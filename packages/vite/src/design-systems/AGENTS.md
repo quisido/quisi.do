@@ -1,4 +1,4 @@
-# Instructions for design systems
+# Instructions for Design Systems
 
 The design system directory is intended to by used by AI agents to generate
 accessibility- and standards-compliant components using a rigorously-vetted API
@@ -14,6 +14,12 @@ and test suite.
   this template before applying limitless implementation details and styles. As
   long as the implementation adheres to the `core` API and passes the
   `core-test` test suite, the agent has creative license.
+
+## Testing Philosophy
+
+- Tests should validate the component's behavior, not its implementation
+  details. **Note:** ARIA attributes are considered a component's behavior; they
+  integrate the component with assistive technologies.
 
 ## Sources
 
