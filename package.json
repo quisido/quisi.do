@@ -99,6 +99,7 @@
     },
     "eslint-plugin-react-hooks": {
       "zod-validation-error": "^4.0.0"
-    }
+    },
+    "zod@<4.4.0": "^4.4.0"
   }
 }
