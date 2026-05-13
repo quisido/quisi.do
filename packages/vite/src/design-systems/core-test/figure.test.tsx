@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { assert, describe, expect, it } from 'vitest';
 import { not } from 'fmrs';
 import isGenericRole from '../../../test/is-generic.js';
 import render from './render.js';
@@ -40,8 +40,7 @@ describe('Figure', (): void => {
       const figureCaption: HTMLElement = getFigureCaption(figure);
       const [captionLabel]: HTMLCollectionOf<HTMLElement> =
         figureCaption.getElementsByTagName('div');
-
-      expect(captionLabel).toBeDefined();
+      assert(captionLabel !== undefined);
       expect(figure).toHaveAttribute('aria-labelledby', captionLabel.id);
       expect(figure).not.toHaveAttribute('aria-label');
     });
@@ -63,9 +62,7 @@ describe('Figure', (): void => {
     describe('position', (): void => {
       it('should default to start or end', (): void => {
         const { getByName } = render(
-          <Figure caption="Test default caption position">
-            Test content
-          </Figure>,
+          <Figure caption="Test default caption position">Test content</Figure>,
         );
 
         const figure: HTMLElement = getByName(
@@ -85,10 +82,7 @@ describe('Figure', (): void => {
 
       it('should support start', (): void => {
         const { getByName } = render(
-          <Figure
-            caption="Test start caption position"
-            captionPosition="start"
-          >
+          <Figure caption="Test start caption position" captionPosition="start">
             Test content
           </Figure>,
         );
@@ -99,9 +93,7 @@ describe('Figure', (): void => {
         );
 
         const figureCaption: HTMLElement = getFigureCaption(figure);
-        expect(figureCaption).toBe(
-          [...figure.children].find(isNonGenericRole),
-        );
+        expect(figureCaption).toBe([...figure.children].find(isNonGenericRole));
       });
 
       it('should support end', (): void => {
@@ -142,7 +134,8 @@ describe('Figure', (): void => {
     );
 
     const figure: HTMLElement = getByDescription('figure', 'Visible summary');
-    const descriptionId: string | null = figure.getAttribute('aria-describedby');
+    const descriptionId: string | null =
+      figure.getAttribute('aria-describedby');
     if (descriptionId === null) {
       throw new Error('Expected figure to reference a description.');
     }
@@ -177,9 +170,8 @@ describe('Figure', (): void => {
       throw new Error('Expected figure to reference detailed content.');
     }
 
-    const details: HTMLElement | null = window.document.getElementById(
-      detailsId,
-    );
+    const details: HTMLElement | null =
+      window.document.getElementById(detailsId);
     if (details === null) {
       throw new Error('Expected figure details element.');
     }

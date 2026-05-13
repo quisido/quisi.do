@@ -5,39 +5,146 @@ import importTestedDesignSystem from './import-tested-design-system.js';
 const { Suggestion } = await importTestedDesignSystem();
 
 describe('Suggestion', (): void => {
-  it('should support insertions', (): void => {
-    const { getByRole } = render(<Suggestion insertion="Insertion" />);
-    expect(getByRole('insertion')).toHaveTextContent('Insertion');
-    expect(getByRole('suggestion')).toHaveTextContent('Insertion');
+  describe('insertion-only suggestion', (): void => {
+    it('should expose a suggestion role', (): void => {
+      const { getByRole } = render(<Suggestion insertion="dog" />);
+      expect(getByRole('suggestion')).toBeInTheDocument();
+    });
+
+    it('should expose an insertion role', (): void => {
+      const { getByRole } = render(<Suggestion insertion="dog" />);
+      expect(getByRole('insertion')).toBeInTheDocument();
+    });
+
+    it('should contain the inserted text within the insertion', (): void => {
+      const { getByRole } = render(<Suggestion insertion="dog" />);
+      expect(getByRole('insertion')).toHaveTextContent('dog');
+    });
+
+    it('should contain the inserted text within the suggestion', (): void => {
+      const { getByRole } = render(<Suggestion insertion="dog" />);
+      expect(getByRole('suggestion')).toHaveTextContent('dog');
+    });
+
+    it('should use a semantic ins element for the insertion', (): void => {
+      const { getByRole } = render(<Suggestion insertion="dog" />);
+      expect(getByRole('insertion').tagName).toBe('INS');
+    });
+
+    it('should contain only the insertion child', (): void => {
+      const { getByRole } = render(<Suggestion insertion="dog" />);
+      expect(getByRole('suggestion').childNodes).toHaveLength(1);
+    });
   });
 
-  it('should support deletions', (): void => {
-    const { getByRole } = render(<Suggestion deletion="Deletion" />);
-    expect(getByRole('deletion')).toHaveTextContent('Deletion');
-    expect(getByRole('suggestion')).toHaveTextContent('Deletion');
+  describe('deletion-only suggestion', (): void => {
+    it('should expose a suggestion role', (): void => {
+      const { getByRole } = render(<Suggestion deletion="cat" />);
+      expect(getByRole('suggestion')).toBeInTheDocument();
+    });
+
+    it('should expose a deletion role', (): void => {
+      const { getByRole } = render(<Suggestion deletion="cat" />);
+      expect(getByRole('deletion')).toBeInTheDocument();
+    });
+
+    it('should contain the deleted text within the deletion', (): void => {
+      const { getByRole } = render(<Suggestion deletion="cat" />);
+      expect(getByRole('deletion')).toHaveTextContent('cat');
+    });
+
+    it('should contain the deleted text within the suggestion', (): void => {
+      const { getByRole } = render(<Suggestion deletion="cat" />);
+      expect(getByRole('suggestion')).toHaveTextContent('cat');
+    });
+
+    it('should use a semantic del element for the deletion', (): void => {
+      const { getByRole } = render(<Suggestion deletion="cat" />);
+      expect(getByRole('deletion').tagName).toBe('DEL');
+    });
+
+    it('should contain only the deletion child', (): void => {
+      const { getByRole } = render(<Suggestion deletion="cat" />);
+      expect(getByRole('suggestion').childNodes).toHaveLength(1);
+    });
   });
 
-  it('should support both insertions and deletions', (): void => {
-    const { getByRole } = render(
-      <Suggestion deletion="Deletion" insertion="Insertion" />,
-    );
+  describe('suggestion with both an insertion and a deletion', (): void => {
+    it('should expose a suggestion role', (): void => {
+      const { getByRole } = render(
+        <Suggestion deletion="cat" insertion="dog" />,
+      );
+      expect(getByRole('suggestion')).toBeInTheDocument();
+    });
 
-    expect(getByRole('deletion')).toHaveTextContent('Deletion');
-    expect(getByRole('insertion')).toHaveTextContent('Insertion');
-  });
+    it('should expose an insertion role', (): void => {
+      const { getByRole } = render(
+        <Suggestion deletion="cat" insertion="dog" />,
+      );
+      expect(getByRole('insertion')).toBeInTheDocument();
+    });
 
-  it('should not have other children', (): void => {
-    const { getByRole } = render(
-      <Suggestion deletion="Deletion" insertion="Insertion" />,
-    );
+    it('should expose a deletion role', (): void => {
+      const { getByRole } = render(
+        <Suggestion deletion="cat" insertion="dog" />,
+      );
+      expect(getByRole('deletion')).toBeInTheDocument();
+    });
 
-    const suggestion: HTMLElement = getByRole('suggestion');
-    expect(suggestion.childNodes).toHaveLength(2);
+    it('should contain the inserted text within the insertion', (): void => {
+      const { getByRole } = render(
+        <Suggestion deletion="cat" insertion="dog" />,
+      );
+      expect(getByRole('insertion')).toHaveTextContent('dog');
+    });
+
+    it('should contain the deleted text within the deletion', (): void => {
+      const { getByRole } = render(
+        <Suggestion deletion="cat" insertion="dog" />,
+      );
+      expect(getByRole('deletion')).toHaveTextContent('cat');
+    });
+
+    it('should contain all proposed content within the suggestion', (): void => {
+      const { getByRole } = render(
+        <Suggestion deletion="cat" insertion="dog" />,
+      );
+      const suggestion: HTMLElement = getByRole('suggestion');
+      expect(suggestion).toHaveTextContent('dog');
+      expect(suggestion).toHaveTextContent('cat');
+    });
+
+    it('should use a semantic ins element for the insertion', (): void => {
+      const { getByRole } = render(
+        <Suggestion deletion="cat" insertion="dog" />,
+      );
+      expect(getByRole('insertion').tagName).toBe('INS');
+    });
+
+    it('should use a semantic del element for the deletion', (): void => {
+      const { getByRole } = render(
+        <Suggestion deletion="cat" insertion="dog" />,
+      );
+      expect(getByRole('deletion').tagName).toBe('DEL');
+    });
+
+    it('should contain only the insertion and deletion children', (): void => {
+      const { getByRole } = render(
+        <Suggestion deletion="cat" insertion="dog" />,
+      );
+      expect(getByRole('suggestion').childNodes).toHaveLength(2);
+    });
   });
 
   /**
-   * TODO: Authors MAY use aria-details or aria-description to associate the
-   * suggestion with related information such as comments, authoring info, and
-   * time stamps.
+   * TODO: Authors MAY use aria-details to associate the suggestion with
+   * related information such as comments, authoring info, and time stamps.
+   * @see {@link https://w3c.github.io/aria/#aria-details}
+   */
+
+  /**
+   * TODO: Authors MAY use aria-description to associate the suggestion with
+   * related information such as comments, authoring info, and time stamps.
+   * @see {@link https://w3c.github.io/aria/#aria-description}
    */
 });

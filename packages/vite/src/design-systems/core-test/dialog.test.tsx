@@ -6,10 +6,15 @@ import importTestedDesignSystem from './import-tested-design-system.js';
 
 const { Dialog } = await importTestedDesignSystem();
 
-const renderDialog = (props: Partial<DialogProps> = {}): RenderTest =>
+const renderDialog = ({
+  children = 'Test content',
+  description = 'Test description',
+  heading = 'Test heading',
+  ...props
+}: Partial<Omit<DialogProps, 'labelledBy'>> = {}): RenderTest =>
   render(
-    <Dialog description="Test description" heading="Test heading" {...props}>
-      {props.children ?? 'Test content'}
+    <Dialog description={description} heading={heading} {...props}>
+      {children}
     </Dialog>,
   );
 

@@ -20,10 +20,11 @@ export default function Tabs({
         className={classes['tab-list']}
         role="tablist"
       >
-        {tabs.map(({ key, label }: Tab): ReactElement => {
+        {tabs.map(({ active, key, label }: Tab): ReactElement => {
           return (
             <div
               aria-controls={`${idPrefix}-panel-${key}`}
+              aria-selected={active}
               id={`${idPrefix}-tab-${key}`}
               key={key}
               role="tab"

@@ -15,7 +15,6 @@
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[scss]": {
-    // Stylelint is required to recognize variables in keyframes.
     "editor.defaultFormatter": "stylelint.vscode-stylelint"
   },
   "[typescript]": {
