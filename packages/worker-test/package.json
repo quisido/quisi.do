@@ -58,7 +58,7 @@
     "fmrs": "^2.1.1"
   },
   "devDependencies": {
-    "@microsoft/api-extractor": "^7.54.0",
+    "@microsoft/api-extractor": "^7.58.1",
     "@types/cookie": "^1.0.0",
     "@vitest/ui": "^4.0.7",
     "concurrently": "^9.2.1",
