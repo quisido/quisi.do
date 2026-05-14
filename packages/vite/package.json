@@ -157,6 +157,7 @@
     "lighthouse": "^13.0.1",
     "logrocket": "^10.1.0",
     "nyc": "^17.1.0",
+    "playwright": "^1.60.0",
     "postcss": "^8.5.10",
     "quisido": "^0.0.3",
     "rimraf": "^6.1.0",

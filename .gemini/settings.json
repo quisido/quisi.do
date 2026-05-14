@@ -1,13 +1,17 @@
 {
   "mcp": {
-    "allowed": ["chrome-devtools", "sentry"]
+    "allowed": [
+      "chrome-devtools",
+      "cloudflare",
+      "context7",
+      "github",
+      "playwright",
+      "sentry"
+    ]
   },
   "mcpServers": {
     "chrome-devtools": {
-      "args": [
-        "-y",
-        "chrome-devtools-mcp@latest"
-      ],
+      "args": ["chrome-devtools-mcp"],
       "command": "npx"
     },
     "cloudflare": {
@@ -24,9 +28,15 @@
     },
     "playwright": {
       "args": [
-        "@playwright/mcp@latest",
+        "@playwright/mcp",
+        "--caps",
+        "devtools,vision",
+        "--console-level",
+        "warning",
+        "--headless",
         "--isolated",
-        "--storage-state=playwright/storage-state.json"
+        "--sandbox",
+        "--storage-state=.cache/playwright-mcp/storage-state.json"
       ],
       "command": "npx"
     },
