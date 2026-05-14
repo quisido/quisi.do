@@ -7,6 +7,10 @@ inputs:
     default: 'true'
     description: Whether to download the build artifact
     required: false
+  install-browsers:
+    default: 'false'
+    description: Whether to install browsers
+    required: false
 
 runs:
   using: composite
@@ -27,6 +31,7 @@ runs:
       shell: bash
       run: npm install
     - name: Install browsers
+      if: ${{ inputs.install-browsers == 'true' }}
       shell: bash
       env:
         DEBIAN_FRONTEND: noninteractive
