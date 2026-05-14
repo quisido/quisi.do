@@ -21,6 +21,9 @@ runs:
         cache: npm
         cache-dependency-path: package-lock.json
         check-latest: true
+        # Playwright fails to install on Node 26.
+        # https://github.com/microsoft/playwright/pull/40747
+        node-version: ${{ inputs.install-browsers == 'true' && 'lts/*' || '' }}
         node-version-file: .nvmrc
     - name: Download build
       if: ${{ inputs.download-build == 'true' }}
