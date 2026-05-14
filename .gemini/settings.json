@@ -27,18 +27,8 @@
       "url": "https://api.githubcopilot.com/mcp/"
     },
     "playwright": {
-      "args": [
-        "@playwright/mcp",
-        "--caps",
-        "devtools,vision",
-        "--console-level",
-        "warning",
-        "--headless",
-        "--isolated",
-        "--sandbox",
-        "--storage-state=.cache/playwright-mcp/storage-state.json"
-      ],
-      "command": "npx"
+      "args": ["run", "playwright-mcp"],
+      "command": "npm"
     },
 		"sentry": {
 			"type": "http",

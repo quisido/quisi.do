@@ -22,6 +22,7 @@
     "fmrs": "npm start --workspace=packages/fmrs",
     "game": "npm start --workspace=packages/game",
     "lighthouse": "npm start --workspace=packages/vite",
+    "playwright-mcp": "npx @playwright/mcp --caps devtools,vision --console-level warning --headless --isolated --sandbox --storage-state=.cache/playwright-mcp/storage-state.json",
     "postlighthouse": "npm start --workspace=packages/vite",
     "prompt": "quisido-ai",
     "publint": "quisido publint",
