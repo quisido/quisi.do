@@ -23,6 +23,9 @@ runs:
       uses: actions/download-artifact@v7
       with:
         name: build
+    - name: Install dependencies
+      shell: bash
+      run: npm install
     - name: Install browsers
       shell: bash
       env:
@@ -30,6 +33,3 @@ runs:
       run: |
         npx playwright install --only-shell --with-deps \
           chromium-headless-shell firefox webkit;
-    - name: Install dependencies
-      shell: bash
-      run: npm install
