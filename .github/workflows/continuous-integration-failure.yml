@@ -26,7 +26,7 @@ jobs:
         with:
           script: |
             /**
-             *   Deliberately ignore forked pull requests. They will not be in
+             * Deliberately ignore forked pull requests. They will not be in
              * this array.
              */
             const [pullRequest] =
@@ -48,7 +48,7 @@ jobs:
               });
 
             /**
-             *   If the run failure was not due to a specific job (e.g.
+             * If the run failure was not due to a specific job (e.g.
              * infrastructure), do not notify Copilot.
              */
             const isFailed = ({ conclusion }) => conclusion === 'failure';

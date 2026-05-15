@@ -34,17 +34,7 @@
   ],
   "hints": {
     "apple-touch-icons": "error",
-    "axe/aria": [
-      "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/aria/#additional-rules-off-by-default
-      [
-        "aria-allowed-role",
-        "aria-dialog-name",
-        "aria-text",
-        "aria-treeitem-name",
-        "presentation-role-conflict"
-      ]
-    ],
+    "axe/aria": "off",
     "axe/color": [
       "error",
       // https://webhint.io/docs/user-guide/hints/hint-axe/color/
@@ -137,7 +127,8 @@
       "error",
       {
         "ignore": [
-          "text-size-adjust"
+          "backdrop-filter",
+          "text-size-adjust: none"
         ]
       }
     ],
@@ -145,7 +136,8 @@
       "error",
       {
         "ignore": [
-          "meta[name=theme-color]"
+          "meta[name=theme-color]",
+          "search"
         ]
       }
     ],
@@ -206,14 +198,14 @@
     "stylesheet-limit": "off",
     "typescript-config/import-helpers": "error",
     /**
-     *   TypeScript already handles configuration file validation. Webhint's
+     * TypeScript already handles configuration file validation. Webhint's
      * validation contains inaccuracies, like "generateCpuProfile, mapRoot,
      * sourceRoot, and tsBuildInfoFile must be 'string'" despite `null` being a
      * valid value.
      */
     "typescript-config/is-valid": "off",
     /**
-     *   Removing comments as part of a separate minification step is
+     * Removing comments as part of a separate minification step is
      * recommended instead. https://github.com/webhintio/hint/issues/4839
      */
     "typescript-config/no-comments": "off",

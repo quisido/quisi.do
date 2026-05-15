@@ -1,14 +1,19 @@
 import type { ReactElement } from 'react';
-import type { NavigationProps } from '../shared/navigation-props.js';
+import type { NavigationProps } from '../core/navigation-props.js';
+import classes from './navigation.module.scss';
 
 /**
- *   A `Navigation` component is a landmark containing a collection of
- * navigational elements, usually links, for moving through the current or
- * related documents.
+ * A navigation landmark contains a collection of navigational elements
+ * (usually links) for navigating the document or related documents.
+ * @see {@link https://w3c.github.io/aria/#navigation | WAI-ARIA `navigation` role}
  */
 export default function Navigation({
   children,
   label,
 }: NavigationProps): ReactElement {
-  return <nav aria-label={label}>{children}</nav>;
+  return (
+    <nav aria-label={label} className={classes['navigation']}>
+      {children}
+    </nav>
+  );
 }

@@ -7,14 +7,13 @@ runs:
   steps:
     - name: Setup
       uses: ./.github/actions/setup
-    - name: Install browsers
-      shell: bash
-      run: |
-        npx playwright install --only-shell --with-deps \
-          chromium-headless-shell firefox webkit
+      with:
+        install-browsers: true
     - name: Test
       run: npm test
       shell: bash
+      env:
+        VITE_TESTED_DESIGN_SYSTEM: template
     - name: Upload
       if: always()
       uses: actions/upload-artifact@v6

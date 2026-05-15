@@ -1,0 +1,40 @@
+.root {
+  display: inline-block;
+}
+
+// The `input` class is the single-line <input> element.
+.input {
+  display: inline-block;
+}
+
+/**
+ * The `label` class wraps the text for the label, but is not the <label>
+ * element per se.
+ */
+.label {
+  display: inline;
+  font-family: serif;
+}
+
+// This element represents a widget. Visually enclose it.
+// The `text-box` class applies to both single- and multi-line elements.
+.text-box {
+  background-color: inherit;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 1px;
+  font-family: serif;
+
+  &:focus-visible {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
+}
+
+// The `textarea` class is the multi-line <textarea> element.
+.textarea {
+  display: inline-block;
+  width: 100%;
+}

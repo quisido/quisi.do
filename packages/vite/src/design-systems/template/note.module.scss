@@ -1,0 +1,10 @@
+/**
+ * This element represents the ink on the canvas, not the canvas itself. This
+ * is a "callout." Use a background color (yellow, blue, or light gray), a
+ * prominant side-border, or an organic `clip-path` background to indicate that
+ * it is a side-comment, not a part of the main narrative flow.
+ */
+.note {
+  display: inline;
+  font-family: serif;
+}

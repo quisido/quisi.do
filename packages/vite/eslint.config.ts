@@ -4,6 +4,16 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
 const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
+  // Design systems
+  {
+    files: ['src/design-systems/**/*.ts', 'src/design-systems/**/*.tsx'],
+    rules: {
+      'max-lines': 'off',
+      'max-lines-per-function': 'off',
+      'max-statements': 'off',
+    },
+  },
+
   // NodeJS
   {
     files: ['scripts/**/*.js'],

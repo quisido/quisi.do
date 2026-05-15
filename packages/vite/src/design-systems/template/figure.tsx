@@ -1,6 +1,7 @@
 import type { ReactElement, ReactNode } from 'react';
-import useFigure from '../shared/use-figure.js';
-import type { FigureProps } from '../shared/figure-props.js';
+import useFigure from '../core/use-figure.js';
+import type { FigureProps } from '../core/figure-props.js';
+import classes from './figure.module.scss';
 
 interface FigureCaptionProps {
   readonly description?: ReactNode | undefined;
@@ -10,7 +11,7 @@ interface FigureCaptionProps {
 }
 
 /**
- *   A `FigureCaption` component exposes the `caption` role as visible content
+ * A `FigureCaption` component exposes the `caption` role as visible content
  * that names or describes its containing `Figure`. It can also serve as the
  * accessible name for the containing element when referenced.
  */
@@ -25,7 +26,7 @@ const FigureCaption = ({
   }
 
   return (
-    <figcaption role="caption">
+    <figcaption className={classes['caption']} role="caption">
       {name !== undefined && <div id={nameId}>{name}</div>}
       {description !== undefined && <div id={descriptionId}>{description}</div>}
     </figcaption>
@@ -33,10 +34,10 @@ const FigureCaption = ({
 };
 
 /**
- *   A `Figure` component is a a perceivable section of content that typically
- * contains a graphical document, images, media player, code snippets, or
- * example text. The parts of a figure may be user-navigable.
- *   A figure should be referenced by the main text, but does not have to be
+ * A figure is a a perceivable section of content that typically contains a
+ * graphical document, images, media player, code snippets, or example text. The
+ * parts of a figure may be user-navigable.
+ * A figure should be referenced by the main text, but does not have to be
  * displayed at the same location.
  * @see {@link https://w3c.github.io/aria/#figure | WAI-ARIA `figure` role}
  */
@@ -63,6 +64,7 @@ export default function Figure({
       aria-details={details}
       aria-label={label}
       aria-labelledby={labelledBy}
+      className={classes['figure']}
       id={id}
     >
       {captionPosition === 'start' && (

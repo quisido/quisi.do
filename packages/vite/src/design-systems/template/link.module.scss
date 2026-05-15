@@ -1,0 +1,17 @@
+// This element represents a widget.
+
+.link {
+  border-width: 0;
+  display: inline;
+
+  &:focus-visible {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
+
+  &:hover {
+    // Style for hovered links
+  }
+}

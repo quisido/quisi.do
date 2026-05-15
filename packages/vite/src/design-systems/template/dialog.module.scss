@@ -1,0 +1,17 @@
+// This element is floating. Visually enclose it.
+.dialog {
+  background-color: inherit;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 1px;
+  display: block;
+}
+
+.close-button {
+  &:focus-visible {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
+}

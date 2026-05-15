@@ -1,17 +1,18 @@
 import { type ReactElement } from 'react';
-import Dashboard from './dashboard.js';
-import { Paragraph, Region } from '../design-systems/template/index.js';
+import { Main, Paragraph, Region } from '../design-systems/template/index.js';
+import Page from './page.js';
 
 export default function Home(): ReactElement {
   return (
-    <>
-      <Region label="About">
-        <Paragraph>
-          quisi.do is an invite-only, software-as-a-service provider for front
-          end platforms.
-        </Paragraph>
-      </Region>
-      <Dashboard />
-    </>
+    <Page>
+      <Main>
+        <Region heading="About">
+          <Paragraph>
+            quisi.do is an invite-only, software-as-a-service provider for front
+            end platforms.
+          </Paragraph>
+        </Region>
+      </Main>
+    </Page>
   );
 }

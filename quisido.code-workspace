@@ -94,19 +94,20 @@
     }
   ],
   "settings": {
+    "eslint.workingDirectories": [
+      ".",
+      { "pattern": "packages/*" }
+    ],
     "files.associations": {
       "**/.aiexclude": "ignore",
       "**/config/api-extractor.json": "jsonc",
       "**/hintrc.*.json": "jsonc"
     },
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
-    "js.preferences.importModuleSpecifier": "project-relative",
-    "js.preferences.importModuleSpecifierEnding": "js",
+    "js/ts.tsdk.path": "./node_modules/typescript/lib",
     "js/ts.tsdk.promptToUseWorkspaceVersion": true,
+    "scss.format.enable": true,
     "terminal.integrated.shellIntegration.enabled": true,
-    "ts.preferences.importModuleSpecifier": "project-relative",
-    "ts.preferences.importModuleSpecifierEnding": "js",
-    "vitest.maximumConfigs": 99,
     "yaml.keyOrdering": false
   }
 }

@@ -27,7 +27,7 @@
     "axe/text-alternatives": "off",
 
     /**
-     *   Technical debt: Re-enable this after debugging why the hint options in
+     * Technical debt: Re-enable this after debugging why the hint options in
      * `~/.hintrc` are ignored.
      */
     "compat-api/css": "off",

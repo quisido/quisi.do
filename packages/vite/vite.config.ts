@@ -10,7 +10,7 @@ import {
 import reduceEnvironmentVariableNamesToRecord from './src/utils/reduce-environment-variable-names-to-record.js';
 
 /**
- *   Disabled because "Both esbuild and oxc options were set. oxc options will
+ * Disabled because "Both esbuild and oxc options were set. oxc options will
  * be used and esbuild options will be ignored."
 const ESBUILD_OPTIONS: ESBuildOptions = {
   color: true,
@@ -50,7 +50,7 @@ const USER_CONFIG: UserConfig = {
   ].reduce(reduceEnvironmentVariableNamesToRecord, {}),
   envDir: '../',
   /**
-   *   Disabled because "Both esbuild and oxc options were set. oxc options will
+   * Disabled because "Both esbuild and oxc options were set. oxc options will
    * be used and esbuild options will be ignored."
   esbuild: ESBUILD_OPTIONS,
    */
@@ -64,7 +64,7 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
     preprocessorMaxWorkers: true,
   },
   /**
-   *   Disabled because "Both esbuild and oxc options were set. oxc options will
+   * Disabled because "Both esbuild and oxc options were set. oxc options will
    * be used and esbuild options will be ignored." 
   esbuild: {
     ...ESBUILD_OPTIONS,
@@ -94,7 +94,7 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
     sourcemap: true,
   },
   /**
-   *   Disabled because "Both esbuild and oxc options were set. oxc options will
+   * Disabled because "Both esbuild and oxc options were set. oxc options will
    * be used and esbuild options will be ignored."
   esbuild: {
     ...ESBUILD_OPTIONS,

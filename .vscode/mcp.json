@@ -2,10 +2,7 @@
 	"inputs": [],
 	"servers": {
     "chrome-devtools": {
-      "args": [
-        "-y",
-        "chrome-devtools-mcp@latest"
-      ],
+      "args": ["chrome-devtools-mcp"],
       "command": "npx"
     },
     "cloudflare": {
@@ -21,12 +18,8 @@
       "url": "https://api.githubcopilot.com/mcp/"
     },
     "playwright": {
-      "args": [
-        "@playwright/mcp@latest",
-        "--isolated",
-        "--storage-state=playwright/storage-state.json"
-      ],
-      "command": "npx"
+      "args": ["run", "playwright-mcp"],
+      "command": "npm"
     },
 		"sentry": {
 			"type": "http",

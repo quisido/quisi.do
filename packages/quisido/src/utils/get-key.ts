@@ -1,7 +1,7 @@
 import type { ReadStream } from 'node:tty';
 
 /**
- *   We actually pass `NodeJS.ReadStream` to this function; but as long as it's
+ * We actually pass `NodeJS.ReadStream` to this function; but as long as it's
  * type-safe, we can use the more generic `ReadStream` type.
  */
 export default function getKey(stdin: ReadStream): Promise<string> {

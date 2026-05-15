@@ -6,7 +6,7 @@ import { LINTER_OPTIONS } from './linter-options.js';
 import fileGlobsByExtension from './file-globs-by-extension.js';
 
 /**
- *   We don't use Prettier here, because Prettier does not support empty lines
+ * We don't use Prettier here, because Prettier does not support empty lines
  * in JSON files.
  */
 

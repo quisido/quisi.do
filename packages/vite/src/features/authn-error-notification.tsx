@@ -14,7 +14,7 @@ export default class AuthnErrorNotification implements NoActionNotification {
 
   public constructor(code: ErrorCode | null) {
     /**
-     *   This should only happen if the user manually entered an invalid error
+     * This should only happen if the user manually entered an invalid error
      * code into their address bar.
      */
     if (code === null) {

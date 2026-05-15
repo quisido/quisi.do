@@ -6,7 +6,7 @@ import parseJson from './utils/parse-json.js';
 import putBudget from './features/put-budget.js';
 
 /**
- *   WARNING: If this method emits events (expenses, logs, or metrics), it will
+ * WARNING: If this method emits events (expenses, logs, or metrics), it will
  * NOT be called again. For the sake of budgeting, this method cannot rely on
  * any `expense` events that itself emits. It is responsible for budgeting any
  * costs that it accrues.

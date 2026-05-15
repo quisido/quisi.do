@@ -108,7 +108,7 @@ for (const settledReport of settledReports) {
     }
 
     /**
-     *   Since each ReportingTool is wrapped in a try/catch to return a `Report`
+     * Since each ReportingTool is wrapped in a try/catch to return a `Report`
      * with `status: 'failure'`, this case should not be possible.
      */
     case 'rejected': {

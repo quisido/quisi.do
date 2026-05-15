@@ -1,15 +1,17 @@
 import type {
   HTMLAttributeAnchorTarget,
-  MouseEvent,
   MouseEventHandler,
   ReactElement,
 } from 'react';
-import type { LinkProps } from '../shared/link-props.js';
+import type { LinkProps } from '../core/link-props.js';
+import classes from './link.module.scss';
+import validateString from '../../utils/validate-string.js';
+
+const linkClassName: string = validateString(classes['link']);
 
 /**
- *   A `Link` component is an interactive reference to an internal or external
- * resource that, when activated, causes the user agent to navigate to that
- * resource.
+ * A link is an interactive reference to an internal or external resource
+ * that, when activated, causes the user agent to navigate to that resource.
  * @see {@link https://w3c.github.io/aria/#link | WAI-ARIA `link` role}
  */
 export default function Link({
@@ -26,8 +28,7 @@ export default function Link({
       return;
     }
 
-    return (ev: MouseEvent<HTMLAnchorElement>): void => {
-      ev.preventDefault();
+    return (): void => {
       onClick();
     };
   })();
@@ -48,8 +49,14 @@ export default function Link({
     return '_blank';
   })();
 
+  const classNames: string[] = [linkClassName];
+
+  if (className !== undefined) {
+    classNames.push(className);
+  }
+
   /**
-   *   Where possible, it is recommended that you use a native <a> element
+   * Where possible, it is recommended that you use a native <a> element
    * rather than another element with `role="link"`, as native elements are more
    * widely supported by user agents and assistive technology. Native <a>
    * elements also support keyboard and focus requirements by default, without
@@ -57,7 +64,7 @@ export default function Link({
    */
   return (
     <a
-      className={className}
+      className={classNames.join(' ')}
       href={href}
       onClick={handleClick}
       rel={rel}

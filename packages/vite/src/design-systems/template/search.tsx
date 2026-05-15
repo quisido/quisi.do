@@ -1,19 +1,23 @@
 import type { ReactElement } from 'react';
-import type { SearchProps } from '../shared/search-props.js';
+import type { SearchProps } from '../core/search-props.js';
+import classes from './search.module.scss';
 
 /**
- *   A `Search` component is a landmark region containing items and objects
- * that, together, create a search facility.
+ * A search landmark contains a collection of items and objects that, as a
+ * whole, combine to create a search facility.
+ * A search region can be a mix of form controls, scripted controls, and
+ * hyperlinks.
+ * @see {@link https://w3c.github.io/aria/#search | WAI-ARIA `search` role}
  */
-export default function Search({ children, label }: SearchProps): ReactElement {
+export default function Search({ children }: SearchProps): ReactElement {
   /**
-   * `jsdom` does not support the <search> element:
-   *   The tag <search> is unrecognized in this browser. If you meant to render a
-   * React component, start its name with an uppercase letter.
+   * Note: `jsdom` does not support the <search> element: The tag <search> is
+   * unrecognized in this browser. If you meant to render a React component,
+   * start its name with an uppercase letter.
    */
   return (
-    <div aria-label={label} role="search">
+    <search className={classes['search']} role="search">
       {children}
-    </div>
+    </search>
   );
 }

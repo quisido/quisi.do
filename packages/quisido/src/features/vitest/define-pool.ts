@@ -5,7 +5,7 @@ export default async function definePool(): Promise<
   Pick<QuisidoVitestInlineConfig, never /* 'pool' | 'poolOptions' */>
 > {
   /**
-   *   The Cloudflare Vitest pool workers extension is disabled until it
+   * The Cloudflare Vitest pool workers extension is disabled until it
    * supports vitest@^4.
   const hasWrangler: boolean = await hasPackageFile('wrangler.jsonc');
   if (hasWrangler) {

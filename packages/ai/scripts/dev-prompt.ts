@@ -11,7 +11,7 @@ enum Role {
   Assistant = 'assistant',
   // Error = 'error',
   /**
-   *   This role is used for system-level instructions or messages that guide
+   * This role is used for system-level instructions or messages that guide
    * the behavior of the assistant. For example, you might use a "system"
    * message to set the tone, define constraints, or provide context for the
    * conversation.

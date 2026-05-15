@@ -22,7 +22,7 @@ interface Props extends Readonly<BrowserOptions> {
   readonly children: ReactNode;
   readonly errorBoundaryDialogOptions?: ReportDialogOptions | undefined;
   /**
-   *   `ErrorBoundaryFallback` is a React `FunctionComponent` without the `null`
+   * `ErrorBoundaryFallback` is a React `FunctionComponent` without the `null`
    * return type.
    */
   readonly ErrorBoundaryFallback?:

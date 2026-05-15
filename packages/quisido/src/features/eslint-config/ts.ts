@@ -37,7 +37,7 @@ const TS_CONFIG: Config = defineConfig({
     ],
 
     /**
-     *   The ESLint rule is incorrect here when it throws "Explicit undefined is
+     * The ESLint rule is incorrect here when it throws "Explicit undefined is
      * unnecessary on an optional parameter." The rule does not allow for
      * `f(x?: X | undefined)` to be called with `f(undefined)`.
      */
@@ -47,7 +47,7 @@ const TS_CONFIG: Config = defineConfig({
     ],
 
     /**
-     *   Until this rule can be disabled for exports, it is incompatible with
+     * Until this rule can be disabled for exports, it is incompatible with
      * `isolatedDeclarations`, e.g. `export const x: string = 'hello';`.
      */
     '@typescript-eslint/no-inferrable-types': 'off',
@@ -76,7 +76,7 @@ const TS_CONFIG: Config = defineConfig({
     'no-invalid-this': 'off',
 
     /**
-     *   ESLint incorrectly flags shadowing in TypeScript: (1) `enum`s and (2)
+     * ESLint incorrectly flags shadowing in TypeScript: (1) `enum`s and (2)
      * functions with `this` inside other functions with `this`.
      */
     'no-shadow': 'off',
@@ -88,7 +88,7 @@ const TS_CONFIG: Config = defineConfig({
     'no-void': ['error', { allowAsStatement: true }],
 
     /**
-     *   Until this rule can be disabled for exports, it is incompatible with
+     * Until this rule can be disabled for exports, it is incompatible with
      * `isolatedDeclarations`, e.g. `export const { property } = object;`.
      */
     'prefer-destructuring': 'off',

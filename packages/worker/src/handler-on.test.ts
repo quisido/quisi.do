@@ -18,7 +18,7 @@ describe('Handler', (): void => {
       let testMessage: string | null = null;
 
       /**
-       *   Technical debt: ESLint should not expect function expressions for
+       * Technical debt: ESLint should not expect function expressions for
        * functions typed with `this`.
        */
       // eslint-disable-next-line func-style
@@ -59,7 +59,7 @@ describe('Handler', (): void => {
 
     it('should handle listener errors', async (): Promise<void> => {
       /**
-       *   Technical debt: ESLint should not expect function expressions for
+       * Technical debt: ESLint should not expect function expressions for
        * functions typed with `this`.
        */
       // eslint-disable-next-line func-style

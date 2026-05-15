@@ -3,7 +3,7 @@ import { type SpawnSyncReturns } from 'node:child_process';
 const EMPTY = 0;
 
 /**
- *   We cannot import this function from `fmrs`, because it has not been built
+ * We cannot import this function from `fmrs`, because it has not been built
  * yet.
  */
 const isString = (value: unknown): value is string => typeof value === 'string';

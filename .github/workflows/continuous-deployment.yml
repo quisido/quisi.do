@@ -240,7 +240,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Setup
+      - name: Audit
         uses: ./.github/actions/lighthouse-production
 
   webhint-production:

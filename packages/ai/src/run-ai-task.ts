@@ -81,7 +81,7 @@ export default async function runAiTask(
     response: initialResponse,
     tool_calls: initialToolCalls = [],
     /**
-     *   Warning: Be sure NOT to double-emit this usage, if it's already emit in
+     * Warning: Be sure NOT to double-emit this usage, if it's already emit in
      * the `initiateTask` function.
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -138,7 +138,7 @@ export default async function runAiTask(
     } = (await ai.run(model as unknown as keyof AiModels, {
       messages: [SYSTEM_MESSAGE, taskMessage, ...toolMessages],
       /**
-       *   While we can remove this to produce just a summary, we include it so
+       * While we can remove this to produce just a summary, we include it so
        * that the model remembers the tool definitions. If models keep getting
        * stuck on repeated tool calls, we can remove this.
        */
@@ -152,7 +152,7 @@ export default async function runAiTask(
     if (finalToolCalls.length === 0) {
       if (initialResponse !== undefined) {
         /**
-         *   TODO: This function should return the `response` separately from
+         * TODO: This function should return the `response` separately from
          * this informative description so that it can be formatted for display
          * by the caller.
          */

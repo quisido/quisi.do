@@ -51,7 +51,7 @@ export default function execute(
         }
 
         /**
-         *   Non-null assertion is acceptable here, because `.split()[0]` always
+         * Non-null assertion is acceptable here, because `.split()[0]` always
          * returns a string.
          */
 

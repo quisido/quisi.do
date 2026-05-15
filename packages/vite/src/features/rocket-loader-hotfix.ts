@@ -1,5 +1,5 @@
 /**
- *   The Rocket Loader hotfix loads synchronously, before the Rocket Loader
+ * The Rocket Loader hotfix loads synchronously, before the Rocket Loader
  * script and before any other scripts that may add unload event listeners.
  */
 

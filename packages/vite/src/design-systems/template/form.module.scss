@@ -1,0 +1,16 @@
+/**
+ * This element represents the canvas. Instead of a visual enclosure (border),
+ * use a subtle background to group the form elements and distinguish the task
+ * area from the general reading content.
+ */
+.form {
+  background-color: rgb(0 0 0 / 5%);
+  display: block;
+  font-family: serif;
+  padding: 1em;
+}
+
+.heading {
+  display: block;
+  font-family: sans-serif;
+}

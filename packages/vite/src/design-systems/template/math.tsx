@@ -1,21 +1,24 @@
-import type { ReactElement } from 'react';
-import type { MathProps } from '../shared/math-props.js';
+import { createElement, type ReactElement } from 'react';
+import type { MathProps } from '../core/math-props.js';
+import classes from './math.module.scss';
 
 /**
- *   The `Math` component marks content in an accessible format such as MathML,
- * or with another type of textual representation such as TeX or LaTeX, which
- * can be converted to an accessible format by native browser implementations or
- * a polyfill library.
- *   While it is not ideal to use an image of a mathematical expression, there
- * exists a significant amount of legacy content where images are used to
- * represent mathematical expressions. Authors _should_ ensure that images of
- * math are labeled by text that describes the mathematical expression as it
- * might be spoken.
+ * Math represents a mathematical expression.
+ * @see {@link https://w3c.github.io/aria/#math | WAI-ARIA `math` role}
  */
-export default function Math({ children, label }: MathProps): ReactElement {
-  return (
-    <div aria-label={label} role="math">
-      {children}
-    </div>
+export default function Math({
+  children,
+  label,
+  labelledBy,
+}: MathProps): ReactElement {
+  return createElement(
+    'math',
+    {
+      'aria-label': label,
+      'aria-labelledby': labelledBy,
+      className: classes['math'],
+      role: 'math',
+    },
+    children,
   );
 }

@@ -5,7 +5,7 @@ import getDefault from '../utils/get-default.js';
 import noop from '../utils/noop.js';
 
 /**
- *   When ran server-side, importing `logrocket` results in the error:
+ * When ran server-side, importing `logrocket` results in the error:
  * TypeError: Cannot create property '_interopRequireDefault' on number '0'
  */
 const importLogRocket = () => import('logrocket').then(getDefault);

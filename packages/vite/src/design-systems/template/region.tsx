@@ -1,41 +1,35 @@
 import type { ReactElement } from 'react';
 import Heading from './heading.js';
-import type { RegionProps } from '../shared/region-props.js';
-import HeadingLevelProvider from '../shared/heading-level-provider.js';
-import useRegion from '../shared/use-region.js';
+import type { RegionProps } from '../core/region-props.js';
+import useRegion from '../core/use-region.js';
+import classes from './region.module.scss';
+import SectionHeader from './section-header.js';
 
 /**
- *   The `Region` component is used to identify document areas the author deems
- * significant. It is a generic landmark available to aid in navigation when
- * none of the other landmark roles are appropriate.
- *   The `Region` component should be reserved for sections of content
- * sufficiently important that users will likely want to navigate to the section
- * easily and to have it listed in a summary of the page. The `Region` component
- * is a more generic term, and should only be used if the section needing to be
- * identified is not accurately described by one of the other landmark
- * components, such as `Banner`, `Complementary`, `ContentInfo`, `Main`, or
- * `Navigation`.
+ * A region landmark contains content that is relevant to a specific purpose
+ * and sufficiently important that users will likely want to be able to navigate
+ * to the section easily and to have it listed in a summary of the page.
+ * Limit use of regions to sections containing content with a purpose that is
+ * not accurately described by banners, complementary landmarks, content info,
+ * forms, main landmarks, navigation landmarks, or searches.
+ * @see {@link https://w3c.github.io/aria/#region | WAI-ARIA `region` role}
  */
 export default function Region({
   children,
   heading,
-  label,
-  labelledBy: labelledByProp,
 }: RegionProps): ReactElement {
-  const { headingId, headingLevel, labelledBy } = useRegion({
-    heading,
-    label,
-    labelledBy: labelledByProp,
-  });
+  const { headingId, labelledBy } = useRegion();
 
   return (
-    <section aria-label={label} aria-labelledby={labelledBy}>
-      <Heading id={headingId} level={headingLevel}>
-        {heading}
-      </Heading>
-      <HeadingLevelProvider increment={heading !== undefined}>
-        {children}
-      </HeadingLevelProvider>
+    <section
+      aria-labelledby={labelledBy}
+      className={classes['region']}
+      role="region"
+    >
+      <SectionHeader>
+        <Heading id={headingId}>{heading}</Heading>
+      </SectionHeader>
+      <div>{children}</div>
     </section>
   );
 }

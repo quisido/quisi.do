@@ -1,0 +1,29 @@
+// This element is floating. Visually enclose it.
+.alert-dialog {
+  background-color: inherit;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 1px;
+  display: block;
+}
+
+.dismiss-button {
+  display: inline-block;
+}
+
+.heading {
+  display: block;
+}
+
+.icon {
+  display: inline-block;
+}
+
+.underlay {
+  background: #00000020;
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}

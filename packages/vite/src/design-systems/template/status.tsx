@@ -1,15 +1,30 @@
 import type { ReactElement } from 'react';
-import type { StatusProps } from '../shared/status-props.js';
+import type { StatusProps } from '../core/status-props.js';
+import classes from './status.module.scss';
 
 /**
- *   A `Status` component is a live region for advisory information that is not
- * important enough to justify an `Alert`. It is often presented like a status
- * bar and should not take focus when it updates.
+ * Status is a type of live region whose content is advisory information for
+ * the user but is not important enough to justify an alert, often but not
+ * necessarily presented as a status bar.
+ * If another part of the page controls what appears in the status, set that
+ * element's `controls` prop to the status's ID.
+ * @see {@link https://w3c.github.io/aria/#status | WAI-ARIA `status` role}
  */
-export default function Status({ children, label }: StatusProps): ReactElement {
+export default function Status({
+  atomic = true,
+  children,
+  id,
+  live = 'polite',
+}: StatusProps): ReactElement {
   return (
-    <div aria-label={label} role="status">
+    <output
+      aria-atomic={atomic}
+      aria-live={live}
+      className={classes['status']}
+      id={id}
+      role="status"
+    >
       {children}
-    </div>
+    </output>
   );
 }

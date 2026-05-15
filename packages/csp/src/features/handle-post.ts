@@ -137,7 +137,7 @@ export default async function handlePost(
     return new CspResponse(StatusCode.OK);
   } catch (err: unknown) {
     /**
-     *   This will catch when `getRequestText()` fails and when the submitted
+     * This will catch when `getRequestText()` fails and when the submitted
      * text is not a ReportBody.
      */
     const error: Error = mapToError(err);

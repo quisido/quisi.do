@@ -1,5 +1,5 @@
 /**
- *   This entire file exists just to change
+ * This entire file exists just to change
  * `/definitions/runs-composite/properties/steps/items/properties/with` to
  * support `additionalProperties: true`.
  */

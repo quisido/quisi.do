@@ -1,0 +1,41 @@
+/**
+ * This element represents the canvas. Instead of a visual enclosure (border),
+ * use a subtle decorative accent and/or the Gestalt principle of proximity
+ * (negative space) to segregate it from other content.
+ */
+.list-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: block;
+}
+
+.option {
+  display: block;
+
+  &:focus-visible {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
+}
+
+.select {
+  &:focus-visible {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
+
+  &:not([selected]) {
+    // Style for unselected options
+  }
+
+  &[selected] {
+    // Style for selected options
+  }
+}

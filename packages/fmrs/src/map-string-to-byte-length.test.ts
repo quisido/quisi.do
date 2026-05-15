@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import { describe, expect, it } from 'vitest';
 import { mapStringToByteLength } from './index.js';
 

@@ -1,22 +1,70 @@
-import type { ReactElement } from 'react';
-import type { ListBoxProps } from '../shared/list-box-props.js';
+import type { ChangeEvent, ReactElement } from 'react';
+import type { ListBoxOption, ListBoxProps } from '../core/list-box-props.js';
+import useElementId from '../../hooks/use-element-id.js';
+import classes from './list-box.module.scss';
+
+const reduceOptionsToValues = (
+  values: Set<string>,
+  option: HTMLOptionElement,
+): Set<string> => {
+  values.add(option.value);
+  return values;
+};
 
 /**
- *   A `ListBox` component lets the user choose one or more items from a list
- * of choices. Its children should be `Option` components or `Group`
- * components that contain `Option` components.
+ * A list box is a widget that allows the user to select one or more items
+ * from a list of choices.
+ * Items within the list are static and, unlike standard HTML select elements,
+ * can contain images. List boxes contain options or groups which in turn
+ * contain options.
+ * @see {@link https://w3c.github.io/aria/#listbox | WAI-ARIA `listbox` role}
  */
 export default function ListBox({
-  children,
   label,
+  labelledBy,
+  onChange,
+  options,
+  orientation = 'vertical',
+  values,
 }: ListBoxProps): ReactElement {
-  /**
-   *   Focus MUST be managed on this container role.
-   */
+  const selectId: string = useElementId();
+  const handleChange = ({
+    currentTarget: { selectedOptions },
+  }: ChangeEvent<HTMLSelectElement>): void => {
+    onChange([...selectedOptions].reduce(reduceOptionsToValues, new Set()));
+  };
+
   return (
-    <label>
-      {label}
-      <select multiple>{children}</select>
-    </label>
+    <div className={classes['list-box']}>
+      {label && (
+        <label className={classes['label']} htmlFor={selectId}>
+          {label}
+        </label>
+      )}
+      <select
+        aria-labelledby={labelledBy}
+        aria-orientation={orientation}
+        className={classes['select']}
+        id={selectId}
+        multiple
+        onChange={handleChange}
+        role="listbox"
+        value={[...values]}
+      >
+        {options.map(
+          ({ children, value }: ListBoxOption): ReactElement => (
+            <option
+              className={classes['option']}
+              key={value}
+              // React does not let you set `selected` on option elements.
+              // selected={values.has(value)}
+              value={value}
+            >
+              {children}
+            </option>
+          ),
+        )}
+      </select>
+    </div>
   );
 }

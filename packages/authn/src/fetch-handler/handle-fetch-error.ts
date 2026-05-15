@@ -13,7 +13,7 @@ export default function handleFetchError(
 ): Response {
   if (err instanceof FatalError) {
     /**
-     *   We do not need to emit or log here, because the code that threw the
+     * We do not need to emit or log here, because the code that threw the
      * error should have already done so.
      */
     return new FatalOAuthErrorResponse({

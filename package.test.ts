@@ -7,7 +7,7 @@ import { WORKSPACES } from './utils/workspaces.js';
 
 describe('package.json', (): void => {
   /**
-   *   NPM only respects `overrides` in the root `package.json`, but including
+   * NPM only respects `overrides` in the root `package.json`, but including
    * them in the workspace `package.json` allows the workspace to function
    * autonomously if it were ever to split from the monorepo.
    */

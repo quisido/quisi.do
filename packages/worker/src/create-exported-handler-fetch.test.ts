@@ -51,7 +51,7 @@ describe('createExportedHandlerFetch', (): void => {
     const testPromise: Promise<unknown> = Promise.resolve();
 
     /**
-     *   Technical debt: ESLint should not expect function expressions for
+     * Technical debt: ESLint should not expect function expressions for
      * functions typed with `this`.
      */
     // eslint-disable-next-line func-style
@@ -94,7 +94,7 @@ describe('createExportedHandlerFetch', (): void => {
     const testPromise: Promise<unknown> = Promise.resolve();
 
     /**
-     *   Technical debt: ESLint should not expect function expressions for
+     * Technical debt: ESLint should not expect function expressions for
      * functions typed with `this`.
      */
     // eslint-disable-next-line func-style

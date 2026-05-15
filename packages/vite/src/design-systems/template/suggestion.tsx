@@ -1,18 +1,28 @@
 import type { ReactElement } from 'react';
-import type { SuggestionProps } from '../shared/suggestion-props.js';
+import type { SuggestionProps } from '../core/suggestion-props.js';
+import classes from './suggestion.module.scss';
 
 /**
- *   A `Suggestion` component represents a single proposed change to content.
- * It is used to wrap the associated `Insertion` and/or `Deletion` content for
- * that proposed edit.
+ * A suggestion is a single proposed change to content.
+ * For example, in an editing system that supports multiple users, one user
+ * can suggest a change, and another user would be responsible for accepting or
+ * rejecting the suggestion.
+ * ```tsx
+ * <Paragraph>
+ *   The best pet is a{' '}
+ *   <Suggestion deletion="cat" insertion="dog" />
+ * </Paragraph>
+ * ```
+ * @see {@link https://w3c.github.io/aria/#suggestion | WAI-ARIA `suggestion` role}
  */
 export default function Suggestion({
-  children,
-  label,
+  deletion,
+  insertion,
 }: SuggestionProps): ReactElement {
   return (
-    <ins aria-label={label} role="suggestion">
-      {children}
-    </ins>
+    <span className={classes['suggestion']} role="suggestion">
+      {insertion && <ins role="insertion">{insertion}</ins>}
+      {deletion && <del role="deletion">{deletion}</del>}
+    </span>
   );
 }

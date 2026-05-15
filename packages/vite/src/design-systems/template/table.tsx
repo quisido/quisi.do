@@ -1,30 +1,37 @@
-import type { Attributes, ReactElement } from 'react';
-import type { RowProps } from '../shared/row-props.js';
-import type { CellProps } from '../shared/cell-props.js';
-import type { TableProps } from '../shared/table-props.js';
+import type { ReactElement } from 'react';
+import type { TableCell, TableProps, TableRow } from '../core/table-props.js';
+import classes from './table.module.scss';
+import useTable from '../core/use-table.js';
 
 /**
- *   A `Table` component contains data arranged in rows and columns. Use
- * `Grid` or `TreeGrid` instead when the container is interactive or manages
- * its own selection and navigation behavior.
+ * A table is a section containing data arranged in rows and columns. See
+ * related grid.
+ * A table is intended for tabular containers which are not interactive. If
+ * the tabular container maintains a selection state, provides its own
+ * two-dimensional navigation, or allows the user to rearrange or otherwise
+ * manipulate its contents or the display thereof, use grid or tree grid
+ * instead.
+ * @see {@link https://w3c.github.io/aria/#table | WAI-ARIA `table` role}
  */
 export default function Table({ caption, rows }: TableProps): ReactElement {
+  const { captionId } = useTable();
+
   return (
-    <table>
-      <caption>{caption}</caption>
+    <table
+      aria-labelledby={captionId}
+      className={classes['table']}
+      role="table"
+    >
+      <caption id={captionId}>{caption}</caption>
       <tbody>
         {rows.map(
-          ({
-            cells,
-            key: rowKey,
-          }: RowProps & Required<Attributes>): ReactElement => (
-            <tr key={rowKey}>
+          ({ cells, key: rowKey }: TableRow): ReactElement => (
+            <tr className={classes['row']} key={rowKey} role="row">
               {cells.map(
-                ({
-                  children,
-                  key: cellKey,
-                }: CellProps & Required<Attributes>): ReactElement => (
-                  <td key={cellKey}>{children}</td>
+                ({ content, key: cellKey }: TableCell): ReactElement => (
+                  <td className={classes['cell']} key={cellKey} role="cell">
+                    {content}
+                  </td>
                 ),
               )}
             </tr>

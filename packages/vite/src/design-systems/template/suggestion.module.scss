@@ -1,0 +1,23 @@
+/**
+ * This element represents the ink on the canvas, not the canvas itself. Do
+ * not visually separate it from its container (e.g. with a border). Instead,
+ * style the foreground, negative space, and _subtle_ decorative accents.
+ */
+
+.suggestion {
+  display: inline;
+
+  // Deletion: use a red background or strikethrough
+  > del {
+    background-color: rgb(255 0 0 / 5%);
+    display: inline;
+    text-decoration-line: line-through;
+  }
+
+  // Insertion: use a green background or underline
+  > ins {
+    background-color: rgb(0 255 0 / 5%);
+    display: inline;
+    text-decoration-line: underline;
+  }
+}

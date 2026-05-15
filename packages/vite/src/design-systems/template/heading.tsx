@@ -1,16 +1,32 @@
 /* eslint-disable no-magic-numbers */
 import type { ReactElement } from 'react';
-import type { HeadingProps } from '../shared/heading-props.js';
+import type { HeadingProps } from '../core/heading-props.js';
+import classes from './heading.module.scss';
+import isDefined from '../../utils/is-defined.js';
+import isRequiredReactNode from './is-required-react-node.js';
+import useHeading from '../core/use-heading.js';
 
 /**
- * A heading for a section of the page.
+ * A heading is a heading for a section of the page.
+ * To ensure headings are organized into a logical outline, use the `level`
+ * prop to indicate the proper nesting level.
+ * @see {@link https://w3c.github.io/aria/#heading | WAI-ARIA `heading` role}
  */
 export default function Heading({
   children,
+  className,
   id,
-  level,
+  level: levelProp,
 }: HeadingProps): ReactElement | null {
-  if (children === undefined) {
+  const { level, ref } = useHeading<HTMLHeadingElement>({
+    level: levelProp,
+  });
+
+  /**
+   * If there is no heading, render nothing. This utility condition is easier
+   * than conditionally rendering headings, `{ heading && <Heading /> }`.
+   */
+  if (!isRequiredReactNode(children)) {
     return null;
   }
 
@@ -34,7 +50,13 @@ export default function Heading({
   })();
 
   return (
-    <Component aria-level={level} id={id} role="heading">
+    <Component
+      aria-level={level}
+      className={[className, classes['heading']].filter(isDefined).join(' ')}
+      id={id}
+      ref={ref}
+      role="heading"
+    >
       {children}
     </Component>
   );

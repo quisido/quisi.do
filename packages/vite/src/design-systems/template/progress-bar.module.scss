@@ -1,0 +1,13 @@
+// This element represents a widget. Visually enclose it.
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: inline;
+}
+
+.progress-bar {
+  display: inline-block;
+}

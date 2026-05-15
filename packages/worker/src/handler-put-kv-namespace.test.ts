@@ -16,7 +16,7 @@ describe('Handler', (): void => {
     const testNamespace = new TestKVNamespace();
 
     /**
-     *   Technical debt: ESLint should not expect function expressions for
+     * Technical debt: ESLint should not expect function expressions for
      * functions typed with `this`.
      */
     // eslint-disable-next-line func-style
@@ -62,7 +62,7 @@ describe('Handler', (): void => {
     testNamespace.setPutError(testError);
 
     /**
-     *   Technical debt: ESLint should not expect function expressions for
+     * Technical debt: ESLint should not expect function expressions for
      * functions typed with `this`.
      */
     // eslint-disable-next-line func-style

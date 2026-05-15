@@ -1,0 +1,9 @@
+{
+	"servers": {
+		"design-mcp": {
+			"url": "https://design.googleapis.com/mcp",
+			"type": "http"
+		}
+	},
+	"inputs": []
+}

@@ -1,13 +1,13 @@
 import type { ReactElement } from 'react';
-import type { ArticleProps } from '../shared/article-props.js';
-import useArticle from '../shared/use-article.js';
+import type { ArticleProps } from '../core/article-props.js';
+import useArticle from '../core/use-article.js';
 import Heading from './heading.js';
-import HeadingLevelProvider from '../shared/heading-level-provider.js';
+import classes from './article.module.scss';
 
 /**
- *   An `Article` component is a section of a page that consists of a
- * composition that forms an independent part of a document, page, or site.
- *   An article is not a navigational landmark, but can be nested to form a
+ * An article is a section of a page that consists of a composition that forms
+ * an independent part of a document, page, or site.
+ * An article is not a navigational landmark, but can be nested to form a
  * discussion where assistive technologies could pay attention to article
  * nesting to assist the user in following the discussion. An article could be a
  * forum post, a magazine or newspaper article, a web log entry, a
@@ -21,30 +21,29 @@ import HeadingLevelProvider from '../shared/heading-level-provider.js';
  * could represent the comments as articles nested within the article for the
  * web log entry. Author, heading, date, or other information associated with an
  * article does not apply to nested articles.
- *   When an article is in the context of a feed, you may specify its
+ * When an article is in the context of a feed, you may specify its
  * position-in-set and set-size.
  * @see {@link https://w3c.github.io/aria/#article | WAI-ARIA `article` role}
  */
 export default function Article({
   children,
   heading,
-  label,
   labelledBy: labelledByProp,
+  tabbable = false,
 }: ArticleProps): ReactElement {
-  const { headingId, headingLevel, labelledBy } = useArticle({
-    heading,
-    label,
+  const { headingId, labelledBy, tabIndex } = useArticle({
     labelledBy: labelledByProp,
+    tabbable,
   });
 
   return (
-    <article aria-label={label} aria-labelledby={labelledBy}>
-      <Heading id={headingId} level={headingLevel}>
-        {heading}
-      </Heading>
-      <HeadingLevelProvider increment={heading !== undefined}>
-        {children}
-      </HeadingLevelProvider>
+    <article
+      aria-labelledby={labelledBy}
+      className={classes['article']}
+      tabIndex={tabIndex}
+    >
+      <Heading id={headingId}>{heading}</Heading>
+      {children}
     </article>
   );
 }

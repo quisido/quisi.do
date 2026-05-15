@@ -1,0 +1,20 @@
+// This element is floating. Visually enclose it.
+.alert {
+  background-color: inherit;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 1px;
+  display: block;
+}
+
+.description {
+  display: block;
+}
+
+.heading {
+  display: block;
+}
+
+.icon {
+  display: inline-block;
+}

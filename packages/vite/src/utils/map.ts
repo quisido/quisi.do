@@ -1,5 +1,5 @@
 /**
- *   `map` is a type-safe variant of `Array.prototype.map`. It accomodates
+ * `map` is a type-safe variant of `Array.prototype.map`. It accomodates
  * arrays of known length.
  */
 

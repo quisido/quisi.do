@@ -11,7 +11,7 @@
     "rootDir": ".",
     "sourceRoot": "src"
   },
-  "exclude": [],
+  "exclude": [".cache/", ".tests/", ".wrangler/", "_site/", "node_modules/"],
   "extends": "quisido/tsconfig.json",
   "include": [
     "**/.*.json",

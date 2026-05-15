@@ -8,7 +8,7 @@ describe('TestExportedHandler', (): void => {
   describe('expectMetric', (): void => {
     it('should spy on the metric handler', async (): Promise<void> => {
       /**
-       *   Technical debt: ESLint should not expect function expressions for
+       * Technical debt: ESLint should not expect function expressions for
        * functions typed with `this`.
        */
       // eslint-disable-next-line func-style
@@ -36,7 +36,7 @@ describe('TestExportedHandler', (): void => {
   describe('expectNotToHaveWrittenDataPoint', (): void => {
     it('should spy on an Analytics Engine dataset', async (): Promise<void> => {
       /**
-       *   Technical debt: ESLint should not expect function expressions for
+       * Technical debt: ESLint should not expect function expressions for
        * functions typed with `this`.
        */
       // eslint-disable-next-line func-style

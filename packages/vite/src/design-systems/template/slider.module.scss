@@ -1,0 +1,23 @@
+// This element represents a widget. Visually enclose it.
+.root {
+  background-color: inherit;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 1px;
+  display: inline-block;
+}
+
+.label {
+  display: inline;
+}
+
+.slider {
+  display: inline-block;
+
+  &:focus-visible {
+    outline-color: inherit;
+    outline-style: solid;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
+}

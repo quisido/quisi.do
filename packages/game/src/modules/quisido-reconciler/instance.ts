@@ -11,7 +11,7 @@ export default interface Instance<Props extends object, Txt, Child> {
   readonly unhide: (props: Props) => void;
 
   /**
-   *   This method represents the React Reconciler commit phase, instructing the
+   * This method represents the React Reconciler commit phase, instructing the
    * instance to draw to the screen.
    */
   readonly update: (prevProps: Props, nextProps: Props) => void;

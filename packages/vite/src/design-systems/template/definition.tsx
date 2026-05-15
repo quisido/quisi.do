@@ -1,11 +1,10 @@
 import type { ReactElement } from 'react';
-import type { DefinitionProps } from '../shared/definition-props.js';
+import type { DefinitionProps } from '../core/definition-props.js';
+import classes from './definition.module.scss';
 
 /**
- *   A `Definition` component marks the definition of a term or concept.
- *   Set the `Term` component's `definitionId` prop to this component's ID.
- *   _Do not_ use interactive elements such as form controls within a
- * definition.
+ * A definition marks the definition of a term or concept.
+ * Set the `Term` component's `definitionId` prop to this component's `id`.
  * @see {@link https://w3c.github.io/aria/#definition | WAI-ARIA `definition` role}
  */
 export default function Definition({
@@ -13,7 +12,7 @@ export default function Definition({
   id,
 }: DefinitionProps): ReactElement {
   return (
-    <dfn id={id} role="definition">
+    <dfn className={classes['definition']} id={id} role="definition">
       {children}
     </dfn>
   );

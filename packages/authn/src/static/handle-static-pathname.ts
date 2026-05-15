@@ -5,7 +5,7 @@ import RootResponse from './root-response.js';
 import { StaticPathname } from './static-pathname.js';
 
 /**
- *   You can only construct a `Response` during a request, so we must keep these
+ * You can only construct a `Response` during a request, so we must keep these
  * parameters deconstructed for now.
  *
  * https://dev.to/kleeut/
