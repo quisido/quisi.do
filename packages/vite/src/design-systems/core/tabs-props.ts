@@ -1,4 +1,18 @@
 import type { ReactNode } from 'react';
+import type { OneOf } from './one-of.js';
+
+interface OneOfProps {
+  readonly label: string;
+  readonly labelledBy: string;
+}
+
+interface Props {
+  /**
+   * @default 'horizontal'
+   */
+  readonly orientation?: 'horizontal' | 'vertical' | undefined;
+  readonly tabs: readonly Tab[];
+}
 
 export interface Tab {
   readonly active: boolean;
@@ -7,10 +21,4 @@ export interface Tab {
   readonly panel: ReactNode;
 }
 
-export interface TabsProps {
-  /**
-   * @default 'horizontal'
-   */
-  readonly orientation?: 'horizontal' | 'vertical' | undefined;
-  readonly tabs: readonly Tab[];
-}
+export type TabsProps = OneOf<OneOfProps> & Props;
