@@ -71,7 +71,6 @@ describe('FetchHandler', (): void => {
         traceFlagSampled: false,
         traceId: [
           254, 253, 252, 251, 250, 249, 248, 247, 246, 245, 244, 243, 242, 241,
-
           240, 239,
         ],
         version: 255,
