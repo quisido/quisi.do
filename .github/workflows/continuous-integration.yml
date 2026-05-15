@@ -44,7 +44,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Review
-        uses: actions/dependency-review-action@v4
+        uses: actions/dependency-review-action@v5
 
   # Stage 2: lighthouse, test, webhint
   lighthouse:
