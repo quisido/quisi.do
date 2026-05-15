@@ -47,12 +47,12 @@
     "@cloudflare/workers-types": "^4.20251014.0",
     "@quisido/worker-test": "^1.0.1",
     "@types/eslint": "^9.6.1",
-    "@vitest/ui": "^4.0.7",
+    "@vitest/ui": "^4.1.6",
     "concurrently": "^9.2.1",
     "quisido": "^0.0.3",
     "rimraf": "^6.1.0",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vitest": "^4.1.0",
-    "wrangler": "^4.59.1"
+    "wrangler": "^4.91.0"
   }
 }
