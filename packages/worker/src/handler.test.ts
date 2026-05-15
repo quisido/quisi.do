@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import { describe, expect, it, vi } from 'vitest';
 import Handler from './handler.js';
 import {

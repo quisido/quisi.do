@@ -65,16 +65,13 @@ describe('FetchHandler', (): void => {
       );
 
       expect(await response.json()).toEqual({
-        // eslint-disable-next-line no-magic-numbers
         parentId: [238, 237, 236, 235, 234, 233, 232, 231],
         traceFlagRandom: true,
         traceFlags: 230,
         traceFlagSampled: false,
-
         traceId: [
-          // eslint-disable-next-line no-magic-numbers
           254, 253, 252, 251, 250, 249, 248, 247, 246, 245, 244, 243, 242, 241,
-          // eslint-disable-next-line no-magic-numbers
+
           240, 239,
         ],
         version: 255,
