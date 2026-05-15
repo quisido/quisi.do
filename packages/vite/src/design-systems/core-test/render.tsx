@@ -45,6 +45,7 @@ export interface RenderTest {
   readonly shiftTab: () => Promise<void>;
   readonly space: () => Promise<void>;
   readonly tab: () => Promise<void>;
+  readonly type: (element: HTMLElement, text: string) => Promise<void>;
 }
 
 export default function render(node: ReactNode): RenderTest {
@@ -145,6 +146,10 @@ export default function render(node: ReactNode): RenderTest {
 
     tab: async (): Promise<void> => {
       await user.tab();
+    },
+
+    type: async (element: HTMLElement, text: string): Promise<void> => {
+      await user.type(element, text);
     },
   };
 }

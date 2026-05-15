@@ -38,10 +38,7 @@ describe('SearchBox', (): void => {
       <SearchBox label="Controlled query" onChange={handleChange} value="" />,
     );
 
-    const searchBox: HTMLElement = getByName(
-      'searchbox',
-      'Controlled query',
-    );
+    const searchBox: HTMLElement = getByName('searchbox', 'Controlled query');
 
     rerender(
       <SearchBox
@@ -57,7 +54,12 @@ describe('SearchBox', (): void => {
   it('should support disabled state', (): void => {
     const handleChange = vi.fn();
     const { getByName } = render(
-      <SearchBox disabled label="Disabled query" onChange={handleChange} value="" />,
+      <SearchBox
+        disabled
+        label="Disabled query"
+        onChange={handleChange}
+        value=""
+      />,
     );
 
     const searchBox: HTMLElement = getByName('searchbox', 'Disabled query');
@@ -85,7 +87,12 @@ describe('SearchBox', (): void => {
   it('should support required state', (): void => {
     const handleChange = vi.fn();
     const { getByName } = render(
-      <SearchBox label="Required query" onChange={handleChange} required value="" />,
+      <SearchBox
+        label="Required query"
+        onChange={handleChange}
+        required
+        value=""
+      />,
     );
 
     const searchBox: HTMLElement = getByName('searchbox', 'Required query');

@@ -99,7 +99,12 @@ export default function SeparatorWidget({
       className={classes['separator-widget']}
       onKeyDown={handleKeyDown}
       role="separator"
-      tabIndex={disabled ? -1 : 0}
+      tabIndex={((): -1 | 0 => {
+        if (disabled) {
+          return -1;
+        }
+        return 0;
+      })()}
     />
   );
 }

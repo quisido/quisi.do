@@ -31,7 +31,9 @@ describe('SectionHeader', (): void => {
     const sectionHeader: HTMLElement = getByRole('sectionheader');
     expect(article).toContainElement(sectionHeader);
     expect(sectionHeader).toHaveTextContent('Highlights');
-    expect(sectionHeader).toHaveTextContent('Important changes in this release.');
+    expect(sectionHeader).toHaveTextContent(
+      'Important changes in this release.',
+    );
   });
 
   it('should support section-specific headings and metadata', (): void => {

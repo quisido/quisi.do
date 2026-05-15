@@ -6,9 +6,7 @@ const { Article } = await importTestedDesignSystem();
 
 describe('Article', (): void => {
   it('should support a heading', (): void => {
-    const { getByName } = render(
-      <Article heading="Heading">Content</Article>,
-    );
+    const { getByName } = render(<Article heading="Heading">Content</Article>);
 
     getByName('article', 'Heading');
   });

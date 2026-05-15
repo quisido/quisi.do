@@ -1,8 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { assert, describe, expect, it } from 'vitest';
 import render from './render.js';
 import importTestedDesignSystem from './import-tested-design-system.js';
 
 const { Link, Navigation } = await importTestedDesignSystem();
+
+const toTextContent = ({ textContent }: HTMLAnchorElement): string =>
+  textContent;
 
 describe('Navigation', (): void => {
   it('should expose a named navigation landmark', (): void => {
@@ -52,7 +55,7 @@ describe('Navigation', (): void => {
     );
     const links: readonly string[] = Array.from(
       navigation.querySelectorAll('a'),
-      (link: HTMLAnchorElement): string => link.textContent ?? '',
+      toTextContent,
     );
 
     expect(links).toStrictEqual(['Intro', 'Setup', 'Deploy']);
@@ -94,9 +97,10 @@ describe('Navigation', (): void => {
     const first: HTMLElement = getByName('link', 'First link');
     const second: HTMLElement = getByName('link', 'Second link');
 
-    if (!(before instanceof HTMLElement)) {
-      throw new Error('Expected navigation to follow a focusable element.');
-    }
+    assert(
+      before instanceof HTMLElement,
+      'Expected navigation to follow a focusable element.',
+    );
 
     await click(before);
     expect(before).toHaveFocus();

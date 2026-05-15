@@ -79,10 +79,7 @@ describe('Application', (): void => {
       </Application>,
     );
 
-    const application: HTMLElement = getByName(
-      'application',
-      'Described role',
-    );
+    const application: HTMLElement = getByName('application', 'Described role');
     expect(application).toHaveAttribute('aria-roledescription', 'test app');
   });
 

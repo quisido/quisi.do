@@ -54,7 +54,9 @@ export default function Menu({
       ({ key: itemKey }: MenuItem): boolean => itemKey === key,
     );
     const nextItem: MenuItem | undefined =
-      enabledItems[(index + offset + enabledItems.length) % enabledItems.length];
+      enabledItems[
+        (index + offset + enabledItems.length) % enabledItems.length
+      ];
 
     if (nextItem !== undefined) {
       focusItem(nextItem.key);
@@ -63,72 +65,70 @@ export default function Menu({
 
   return (
     <ul aria-orientation={orientation} className={classes['menu']} role="menu">
-      {menuItems.map(
-        (item: MenuItem): ReactElement => {
-          const { children, disabled, items: menuItemItems, key } = item;
-          const tabIndex = ((): number => {
-            if (disabled) {
-              return -1;
-            }
-
-            if (key === activeKey) {
-              return 0;
-            }
-
+      {menuItems.map((item: MenuItem): ReactElement => {
+        const { children, disabled, items: menuItemItems, key } = item;
+        const tabIndex = ((): number => {
+          if (disabled) {
             return -1;
-          })();
+          }
 
-          const handleClick = (ev: MouseEvent<HTMLLIElement>): void => {
-            ev.preventDefault();
-            activateItem(item);
-          };
+          if (key === activeKey) {
+            return 0;
+          }
 
-          const handleKeyDown = (ev: KeyboardEvent<HTMLLIElement>): void => {
-            switch (ev.key) {
-              case 'ArrowDown': {
-                ev.preventDefault();
-                focusRelativeItem(key, 1);
-                break;
-              }
+          return -1;
+        })();
 
-              case 'ArrowUp': {
-                ev.preventDefault();
-                focusRelativeItem(key, -1);
-                break;
-              }
+        const handleClick = (ev: MouseEvent<HTMLLIElement>): void => {
+          ev.preventDefault();
+          activateItem(item);
+        };
 
-              case 'Enter':
-              case ' ': {
-                ev.preventDefault();
-                activateItem(item);
-                break;
-              }
+        const handleKeyDown = (ev: KeyboardEvent<HTMLLIElement>): void => {
+          switch (ev.key) {
+            case 'ArrowDown': {
+              ev.preventDefault();
+              focusRelativeItem(key, 1);
+              break;
             }
-          };
 
-          return (
-            <li
-              aria-disabled={disabled}
-              aria-haspopup={menuItemItems !== undefined}
-              className={classes['menu-item']}
-              key={key}
-              onClick={handleClick}
-              onKeyDown={handleKeyDown}
-              ref={(element: HTMLLIElement | null): void => {
-                if (element === null) {
-                  itemRefs.current.delete(key);
-                } else {
-                  itemRefs.current.set(key, element);
-                }
-              }}
-              role="menuitem"
-              tabIndex={tabIndex}
-            >
-              {children}
-            </li>
-          );
-        },
-      )}
+            case 'ArrowUp': {
+              ev.preventDefault();
+              focusRelativeItem(key, -1);
+              break;
+            }
+
+            case 'Enter':
+            case ' ': {
+              ev.preventDefault();
+              activateItem(item);
+              break;
+            }
+          }
+        };
+
+        return (
+          <li
+            aria-disabled={disabled}
+            aria-haspopup={menuItemItems !== undefined}
+            className={classes['menu-item']}
+            key={key}
+            onClick={handleClick}
+            onKeyDown={handleKeyDown}
+            ref={(element: HTMLLIElement | null): void => {
+              if (element === null) {
+                itemRefs.current.delete(key);
+              } else {
+                itemRefs.current.set(key, element);
+              }
+            }}
+            role="menuitem"
+            tabIndex={tabIndex}
+          >
+            {children}
+          </li>
+        );
+      })}
     </ul>
   );
 }

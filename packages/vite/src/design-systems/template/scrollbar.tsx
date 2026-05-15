@@ -97,7 +97,12 @@ export default function Scrollbar({
       className={classes['scrollbar']}
       onKeyDown={handleKeyDown}
       role="scrollbar"
-      tabIndex={disabled ? -1 : 0}
+      tabIndex={((): -1 | 0 => {
+        if (disabled) {
+          return -1;
+        }
+        return 0;
+      })()}
     />
   );
 }

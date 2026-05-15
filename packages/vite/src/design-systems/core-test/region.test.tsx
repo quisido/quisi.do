@@ -2,15 +2,8 @@ import render from './render.js';
 import { describe, expect, it } from 'vitest';
 import importTestedDesignSystem from './import-tested-design-system.js';
 
-const {
-  Complementary,
-  Document,
-  Link,
-  Main,
-  Navigation,
-  Region,
-  Search,
-} = await importTestedDesignSystem();
+const { Complementary, Document, Link, Main, Navigation, Region, Search } =
+  await importTestedDesignSystem();
 
 describe('Region', (): void => {
   it('should expose a named region landmark for important content', (): void => {

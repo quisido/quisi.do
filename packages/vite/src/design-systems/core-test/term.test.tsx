@@ -2,7 +2,7 @@ import render from './render.js';
 import { describe, expect, it } from 'vitest';
 import importTestedDesignSystem from './import-tested-design-system.js';
 
-const { Term, Definition } = await importTestedDesignSystem();
+const { Definition, Term } = await importTestedDesignSystem();
 
 describe('Term', (): void => {
   it('should be a term', (): void => {

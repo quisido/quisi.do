@@ -178,10 +178,7 @@ describe('Feed', (): void => {
     const fourth: HTMLElement = getByName('article', 'Fourth article');
     const append: HTMLElement = getByName('article', 'Append articles');
     expect(feed).toHaveAttribute('aria-busy', 'true');
-    expect(Array.from(feed.children).slice(-2)).toStrictEqual([
-      fourth,
-      append,
-    ]);
+    expect(Array.from(feed.children).slice(-2)).toStrictEqual([fourth, append]);
 
     resolveAppend();
     await waitFor((): void => {

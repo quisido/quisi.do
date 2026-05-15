@@ -10,13 +10,14 @@ describe('RadioGroup', (): void => {
     it('should provide a visible accessible name', (): void => {
       const handleChange = vi.fn();
       const { getByName } = render(
-        <RadioGroup label="Shipping speed" onChange={handleChange} radios={[]} />,
+        <RadioGroup
+          label="Shipping speed"
+          onChange={handleChange}
+          radios={[]}
+        />,
       );
 
-      const radioGroup: HTMLElement = getByName(
-        'radiogroup',
-        'Shipping speed',
-      );
+      const radioGroup: HTMLElement = getByName('radiogroup', 'Shipping speed');
       const labelId: string | null = radioGroup.getAttribute('aria-labelledby');
 
       if (labelId === null) {
@@ -44,10 +45,7 @@ describe('RadioGroup', (): void => {
         </>,
       );
 
-      const radioGroup: HTMLElement = getByName(
-        'radiogroup',
-        'Payment method',
-      );
+      const radioGroup: HTMLElement = getByName('radiogroup', 'Payment method');
       expect(radioGroup).toHaveAttribute(
         'aria-labelledby',
         'test-radio-group-labelled-by-id',
@@ -66,10 +64,7 @@ describe('RadioGroup', (): void => {
           radios={[]}
         />,
       );
-      const radioGroup: HTMLElement = getByName(
-        'radiogroup',
-        'Owned radios',
-      );
+      const radioGroup: HTMLElement = getByName('radiogroup', 'Owned radios');
       expect(radioGroup).toHaveAttribute('aria-owns', 'first second');
     });
 
@@ -83,10 +78,7 @@ describe('RadioGroup', (): void => {
           radios={[]}
         />,
       );
-      const radioGroup: HTMLElement = getByName(
-        'radiogroup',
-        'Owned radios',
-      );
+      const radioGroup: HTMLElement = getByName('radiogroup', 'Owned radios');
       expect(radioGroup).toHaveAttribute('aria-owns', 'first second');
     });
 
@@ -100,10 +92,7 @@ describe('RadioGroup', (): void => {
           radios={[]}
         />,
       );
-      const radioGroup: HTMLElement = getByName(
-        'radiogroup',
-        'Owned radios',
-      );
+      const radioGroup: HTMLElement = getByName('radiogroup', 'Owned radios');
       expect(radioGroup).toHaveAttribute('aria-owns', 'first second');
     });
 

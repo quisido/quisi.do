@@ -13,9 +13,9 @@ export interface TreeGroup {
 }
 
 export interface TreeProps {
+  readonly items: readonly (TreeGroup | TreeItem)[];
   readonly label?: string | undefined;
   readonly labelledBy?: string | undefined;
-  readonly items: readonly (TreeGroup | TreeItem)[];
   readonly multiselectable?: boolean | undefined;
   readonly onSelect?: ((key: TreeItemKey) => void) | undefined;
   readonly onToggle?: ((key: TreeItemKey) => void) | undefined;

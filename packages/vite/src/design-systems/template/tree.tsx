@@ -18,9 +18,10 @@ interface VisibleTreeItem {
   readonly parentKey?: TreeItemKey | undefined;
 }
 
-const getAccessibleName = ({ content, label }: TreeGroup | TreeItem):
-  | string
-  | undefined => {
+const getAccessibleName = ({
+  content,
+  label,
+}: TreeGroup | TreeItem): string | undefined => {
   if (label !== undefined) {
     return label;
   }
@@ -66,9 +67,9 @@ const reduceItemsToVisibleItems = (
  * @see {@link https://w3c.github.io/aria/#treeitem | WAI-ARIA `treeitem` role}
  */
 export default function Tree({
+  items,
   label,
   labelledBy,
-  items,
   multiselectable = false,
   onSelect,
   onToggle,
@@ -89,7 +90,10 @@ export default function Tree({
     itemRefs.current.get(key)?.focus();
   };
 
-  const focusItemAtOffset = (item: TreeGroup | TreeItem, offset: number): void => {
+  const focusItemAtOffset = (
+    item: TreeGroup | TreeItem,
+    offset: number,
+  ): void => {
     const itemIndex: number = visibleItems.findIndex(
       ({ item: visibleItem }: VisibleTreeItem): boolean =>
         visibleItem.key === item.key,
@@ -216,7 +220,12 @@ export default function Tree({
     return (
       <div
         aria-checked={item.checked}
-        aria-expanded={childItems === undefined ? undefined : isExpanded}
+        aria-expanded={((): boolean | undefined => {
+          if (childItems === undefined) {
+            return;
+          }
+          return isExpanded;
+        })()}
         aria-label={getAccessibleName(item)}
         aria-selected={item.selected}
         className={classes['item']}
@@ -236,7 +245,12 @@ export default function Tree({
           itemRefs.current.set(item.key, element);
         }}
         role="treeitem"
-        tabIndex={item.key === effectiveActiveKey ? 0 : -1}
+        tabIndex={((): -1 | 0 => {
+          if (item.key === effectiveActiveKey) {
+            return 0;
+          }
+          return -1;
+        })()}
       >
         {item.content}
         {childItems !== undefined && isExpanded && (

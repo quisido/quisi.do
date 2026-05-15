@@ -1,4 +1,3 @@
-import { fireEvent } from '@testing-library/react';
 import render from './render.js';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
@@ -70,7 +69,11 @@ describe('SpinButton', (): void => {
 
   it('should limit accessibility descendants to the native input implementation', (): void => {
     const { getRoleCount } = render(
-      <SpinButton label="Native spinbutton" onChange={handleChange} value={1} />,
+      <SpinButton
+        label="Native spinbutton"
+        onChange={handleChange}
+        value={1}
+      />,
     );
 
     expect(getRoleCount('spinbutton')).toBe(1);
@@ -80,7 +83,11 @@ describe('SpinButton', (): void => {
 
   it('should place focus on the spinbutton input in the primary tab ring', async (): Promise<void> => {
     const { getByName, tab } = render(
-      <SpinButton label="Focusable quantity" onChange={handleChange} value={1} />,
+      <SpinButton
+        label="Focusable quantity"
+        onChange={handleChange}
+        value={1}
+      />,
     );
 
     const spinButton: HTMLElement = getByName(
@@ -126,7 +133,11 @@ describe('SpinButton', (): void => {
 
   it('should emit numeric values when edited as text', async (): Promise<void> => {
     const { getByName } = render(
-      <SpinButton label="Editable quantity" onChange={handleChange} value={1} />,
+      <SpinButton
+        label="Editable quantity"
+        onChange={handleChange}
+        value={1}
+      />,
     );
 
     await userEvent.fill(getByName('spinbutton', 'Editable quantity'), '42');
@@ -134,13 +145,12 @@ describe('SpinButton', (): void => {
   });
 
   it('should ignore text input that cannot be parsed as a number', async (): Promise<void> => {
-    const { getByName } = render(
+    const { getByName, type } = render(
       <SpinButton label="Numeric only" onChange={handleChange} value={1} />,
     );
 
-    fireEvent.change(getByName('spinbutton', 'Numeric only'), {
-      target: { value: 'abc' },
-    });
+    const spinButton: HTMLElement = getByName('spinbutton', 'Numeric only');
+    await type(spinButton, 'abc');
     expect(handleChange).not.toHaveBeenCalled();
   });
 });

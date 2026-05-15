@@ -100,7 +100,9 @@ describe('Menu', (): void => {
     const handleSelect = vi.fn();
     const { click, getByName } = render(
       <Menu
-        items={[{ children: 'Archive', key: 'archive', onSelect: handleSelect }]}
+        items={[
+          { children: 'Archive', key: 'archive', onSelect: handleSelect },
+        ]}
         onDismiss={handleDismiss}
       />,
     );

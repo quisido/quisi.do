@@ -2,7 +2,7 @@ import render from './render.js';
 import { describe, expect, it } from 'vitest';
 import importTestedDesignSystem from './import-tested-design-system.js';
 
-const { Main, Document } = await importTestedDesignSystem();
+const { Document, Main } = await importTestedDesignSystem();
 
 describe('Main', (): void => {
   it('should be main content', (): void => {

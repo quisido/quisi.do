@@ -6,9 +6,7 @@ const { SeparatorWidget } = await importTestedDesignSystem();
 
 describe('SeparatorWidget', (): void => {
   it('should be a separator', (): void => {
-    const { getByRole } = render(
-      <SeparatorWidget max={3} min={1} value={2} />,
-    );
+    const { getByRole } = render(<SeparatorWidget max={3} min={1} value={2} />);
     const separator: HTMLElement = getByRole('separator');
     expect(separator).toHaveAttribute('aria-valuemax', '3');
     expect(separator).toHaveAttribute('aria-valuemin', '1');

@@ -121,11 +121,7 @@ describe('ProgressBar', (): void => {
         <ProgressBar busy label="Max" max={50} />,
       );
 
-      const progressBar: HTMLElement = getByMaxValue(
-        'progressbar',
-        'Max',
-        50,
-      );
+      const progressBar: HTMLElement = getByMaxValue('progressbar', 'Max', 50);
       expect(progressBar).toHaveAttribute('aria-valuemax', '50');
       expect(progressBar).toHaveAttribute('max', '50');
     });
@@ -160,11 +156,7 @@ describe('ProgressBar', (): void => {
         <ProgressBar busy label="Min" min={10} />,
       );
 
-      const progressBar: HTMLElement = getByMinValue(
-        'progressbar',
-        'Min',
-        10,
-      );
+      const progressBar: HTMLElement = getByMinValue('progressbar', 'Min', 10);
       expect(progressBar).toHaveAttribute('aria-valuemin', '10');
     });
 
@@ -181,9 +173,7 @@ describe('ProgressBar', (): void => {
 
   describe('value', (): void => {
     it('should not have a value when indeterminate', (): void => {
-      const { getByName } = render(
-        <ProgressBar busy label="Default value" />,
-      );
+      const { getByName } = render(<ProgressBar busy label="Default value" />);
 
       const progressBar: HTMLElement = getByName(
         'progressbar',

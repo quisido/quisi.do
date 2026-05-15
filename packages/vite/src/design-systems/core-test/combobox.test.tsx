@@ -49,10 +49,10 @@ const getOptions = (listBox: HTMLElement): readonly HTMLElement[] => {
   return Array.from(listBox.querySelectorAll('[role="option"]'));
 };
 
+const toTextContent = ({ textContent }: Element): string => textContent;
+
 const getOptionNames = (listBox: HTMLElement): readonly string[] => {
-  return getOptions(listBox).map(
-    (option: Element): string => option.textContent ?? '',
-  );
+  return getOptions(listBox).map(toTextContent);
 };
 
 describe('Combobox', (): void => {

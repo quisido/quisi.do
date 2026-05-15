@@ -14,10 +14,11 @@ const createMathElement = (
   children: ReactNode | readonly ReactNode[],
   props?: Record<string, string>,
 ): ReactElement => {
-  const childNodes: readonly ReactNode[] = Array.isArray(children)
-    ? children
-    : [children];
-  return createElement(type, props, ...childNodes);
+  if (Array.isArray(children)) {
+    return createElement(type, props, ...(children as readonly ReactNode[]));
+  }
+
+  return createElement(type, props, children);
 };
 
 describe('Math', (): void => {
