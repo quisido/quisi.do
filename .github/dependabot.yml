@@ -1,47 +1,97 @@
 # yaml-language-server: $schema=https://www.schemastore.org/dependabot-2.0.json
 
 updates:
-  - package-ecosystem: github-actions
-    assignees:
-      - quisido
-    directory: "/"
-    groups:
-      all-actions:
-        applies-to: version-updates
-        patterns:
-          - "*"
-        update-types:
-          - major
-          - minor
-          - patch
-    schedule:
-      interval: daily
-  - package-ecosystem: npm
-    assignees:
-      - quisido
-    # Dependabot should automatically discover workspaces in `packages/`.
-    directory: "/"
-    groups:
-      dependencies:
-        applies-to: version-updates
-        dependency-type: production
-        patterns:
-          - "*"
-        update-types:
-          - major
-          - minor
-          - patch
-      dev-dependencies:
-        applies-to: version-updates
-        dependency-type: development
-        patterns:
-          - "*"
-        update-types:
-          - major
-          - minor
-          - patch
-    schedule:
-      interval: daily
-    versioning-strategy: increase
+- package-ecosystem: github-actions
+  assignees:
+  - quisido
+  directory: /
+  groups:
+    github-actions:
+      patterns:
+      - "*"
+  schedule:
+    interval: daily
+
+- package-ecosystem: npm
+  assignees:
+  - quisido
+  # Dependabot should automatically discover workspaces in `packages/`.
+  directory: /
+  groups:
+    babel:
+      patterns:
+      - "@babel/*"
+      - babel-loader
+      - babel-plugin-*
+
+    eslint:
+      patterns:
+      - "@*/eslint-plugin"
+      - "@*/eslint-plugin-*"
+      - "@eslint/*"
+      - "@microsoft/eslint-formatter-sarif"
+      - "@types/eslint"
+      - "@typescript-eslint/*"
+      - eslint
+      - "eslint-config-*"
+      - "eslint-plugin-*"
+      - jsonc-eslint-parser
+      - typescript-eslint
+
+    opentelemetry:
+      patterns:
+      - "@opentelemetry/*"
+
+    playwright:
+      patterns:
+      - "@playwright/mcp"
+      - playwright
+
+    react:
+      patterns:
+      - "@testing-library/react"
+      - "@types/react"
+      - "@types/react-dom"
+      - react
+      - react-dom
+
+    sentry:
+      patterns:
+      - "@sentry/*"
+
+    typescript:
+      patterns:
+      - tslib
+      - typescript
+
+    vite:
+      patterns:
+      - "@vitejs/*"
+      - vite
+      - "vite-plugin-*"
+
+    vitest:
+      patterns:
+      - "@vitest/*"
+      - vitest
+
+    webhint:
+      patterns:
+      - "@hint/*"
+      - hint
+
+    dependencies:
+      dependency-type: production
+      patterns:
+      - "*"
+
+    dev-dependencies:
+      dependency-type: development
+      patterns:
+      - "*"
+
+  schedule:
+    interval: daily
+  versioning-strategy: increase
 
 version: 2
