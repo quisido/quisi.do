@@ -23,7 +23,7 @@ runs:
         check-latest: true
         # Playwright fails to install on Node 26.
         # https://github.com/microsoft/playwright/pull/40747
-        node-version: ${{ inputs.install-browsers == 'true' && 'lts/*' || '' }}
+        node-version: ${{ inputs.install-browsers != 'false' && 'lts/*' || '' }}
         node-version-file: .nvmrc
     - name: Download build
       if: ${{ inputs.download-build == 'true' }}
@@ -34,7 +34,7 @@ runs:
       shell: bash
       run: npm install
     - name: Install browsers
-      if: ${{ inputs.install-browsers == 'true' }}
+      if: ${{ inputs.install-browsers != 'false' }}
       shell: bash
       env:
         DEBIAN_FRONTEND: noninteractive
