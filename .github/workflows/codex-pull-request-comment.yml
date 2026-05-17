@@ -20,14 +20,10 @@ jobs:
     name: Codex
     runs-on: ubuntu-latest
     if: |
-      github.event.action != 'deleted' &&
-      github.event.issue.pull_request != null &&
       contains(github.event.comment.body, '@codex') &&
-      (
-        github.event.comment.author_association == 'COLLABORATOR' ||
-        github.event.comment.author_association == 'MEMBER' ||
-        github.event.comment.author_association == 'OWNER'
-      )
+      github.event.action != 'deleted' &&
+      github.event.comment.author_association == 'OWNER' &&
+      github.event.issue.pull_request != null
     permissions:
       actions: read
       contents: write
@@ -37,8 +33,6 @@ jobs:
       - name: Git
         id: git
         uses: actions/github-script@v9
-        env:
-          SCRIPT_PATH: ${{ github.workspace }}/.github/workflows/codex-pull-request-comment.js
         with:
           script: |
             const {
@@ -93,14 +87,14 @@ jobs:
             Codex action via a pull request comment. The pull request branch is
             already checked out locally.
 
-            ## Issue
+            ### Issue
 
             **Title:** ${{ github.event.issue.title }}
             **Comment (stringified):** ${{ steps.comment.outputs.stringified }}
 
             Focus your actions and analysis to the scope of this pull request.
 
-            ## Tasks
+            ### Tasks
 
             1. Resolve the user's request.
             2. Push your changes to the pull request branch.
