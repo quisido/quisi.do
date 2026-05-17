@@ -41,17 +41,40 @@ jobs:
           SCRIPT_PATH: ${{ github.workspace }}/.github/workflows/codex-pull-request-comment.js
         with:
           script: |
-            await import('${{ env.SCRIPT_PATH }}')({
-              context,
-              github,
-              pullNumber: context.payload.issue.number,
+            const {
+              data: {
+                base: { sha: baseSha },
+                head: {
+                  ref,
+                  repo: { full_name: fullName },
+                  sha: headSha,
+                },
+                title,
+              },
+            } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              pull_number: context.payload.issue.number,
+              repo: context.repo.repo,
             });
+
+            if (fullName !== `${context.repo.owner}/${context.repo.repo}`) {
+              throw new Error('The Codex action does not support forks.', {
+                cause: fullName,
+              });
+            }
+
+            core.setOutput('baseSha', baseSha);
+            core.setOutput('headSha', headSha);
+            core.setOutput('ref', ref);
+            core.setOutput('title', title);
+
       - name: Checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 9
           ref: ${{ steps.git.outputs.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Sanitize
         id: comment
         env:
@@ -60,6 +83,7 @@ jobs:
           node --eval \
             'const { COMMENT_BODY = "" } = process.env; process.stdout.write(`stringified=${JSON.stringify(COMMENT_BODY)}\n`);' \
             > "$GITHUB_OUTPUT";
+
       - name: Execute
         uses: ./.github/actions/codex
         with:

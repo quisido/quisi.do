@@ -24,8 +24,6 @@ runs:
       run: |
         mkdir -p "$RUNNER_TEMP/.codex";
         cp .github/actions/codex/config.toml "$RUNNER_TEMP/.codex/config.toml";
-        cp .github/actions/codex/requirements.toml \
-          "$RUNNER_TEMP/.codex/requirements.toml";
 
     - name: Execute
       uses: openai/codex-action@v1
