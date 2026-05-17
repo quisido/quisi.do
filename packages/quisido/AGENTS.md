@@ -24,10 +24,6 @@ Use TypeScript for new code and keep the existing ESM style with explicit `.js` 
 
 Use Vitest (`describe`, `it`, `expect`) for unit and integration tests. Name tests `*.test.ts` and place them beside the source file under test. Write tests around observable behavior, group related cases with `describe`, and use sentence-like `it` names. Do not commit `it.only` or `describe.only`.
 
-## Commit & Pull Request Guidelines
-
-Recent commits use short imperative summaries such as `add ci files` and `fix CI`; dependency bumps may use bot-style titles. Keep commits focused and mention the affected package when helpful. Pull requests should include a concise description, linked issue or context, the commands run, and screenshots only when UI output changes.
-
 ## Agent-Specific Instructions
 
 Before editing, check applicable files in `.github/instructions/**/*.instructions.md` at the monorepo root. Do not edit generated output in `dist/` unless the task explicitly requires it.

@@ -43,17 +43,6 @@ Arrange-Act-Assert. Co-locate new tests beside the covered source file, and use
 descriptive test names that read as sentences. Never commit `it.only` or
 `describe.only`.
 
-## Commit & Pull Request Guidelines
-
-Recent commits use short, imperative subjects such as `fix CI` and `add ci
-files`; dependency updates may use automated `Bump ...` subjects. Keep commit
-messages concise and focused on one change.
-
-Pull requests should describe the behavior change, list tests run, and link the
-related issue when one exists. Include screenshots only for visible React UI
-changes. Note package API changes clearly because this library publishes public
-exports from `src/index.ts`.
-
 ## Agent-Specific Instructions
 
 Before coding, read applicable files in `.github/instructions/**/*.instructions.md`

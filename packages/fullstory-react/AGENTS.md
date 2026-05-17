@@ -42,14 +42,6 @@ structure. Co-locate tests beside their source file, for example
 `src/hooks/use-fullstory.ts` and `src/hooks/use-fullstory.test.tsx`. Do not
 commit `it.only` or `describe.only`.
 
-## Commit & Pull Request Guidelines
-
-Recent commit history uses short imperative summaries such as `fix CI` and
-`add ci files`; dependency bumps may include the PR number. Keep commit subjects
-concise and action-oriented. Pull requests should describe the change, explain
-test coverage or commands run, link related issues when applicable, and include
-screenshots only for visible React behavior.
-
 ## Security & Configuration Tips
 
 Do not log secrets or personally identifiable information. When handling

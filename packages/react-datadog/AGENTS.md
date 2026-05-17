@@ -42,14 +42,6 @@ observable behavior and side effects, not private implementation details. Use
 Arrange-Act-Assert structure, descriptive test names, and never commit
 `it.only` or `describe.only`.
 
-## Commit & Pull Request Guidelines
-
-Recent history uses short, imperative commit subjects such as `fix CI` and
-`add ci files`; dependency automation may use `Bump ... (#123)`. Keep commits
-focused and explain user-visible changes in the pull request description. Link
-issues when relevant, include screenshots only for UI-facing changes, and note
-which commands you ran, such as `npm run vitest:run` and `npm run eslint`.
-
 ## Agent-Specific Instructions
 
 Before editing, check root instruction files under

@@ -21,7 +21,3 @@ Use TypeScript for new code. Follow the root instruction files in `../../.github
 ## Testing Guidelines
 
 Tests use Vitest, jsdom, and Testing Library React. Co-locate tests with the source file they cover and name them `*.test.ts` or `*.test.tsx`. Group related cases with `describe`, write sentence-like `it` names, and assert observable rendered behavior rather than implementation details. Never commit `it.only` or `describe.only`.
-
-## Commit & Pull Request Guidelines
-
-Recent commits use short imperative subjects such as `add ci files` and `fix CI`, with dependency bumps often retaining bot-style titles and PR numbers. Keep commits focused and describe the user-visible or maintenance outcome. Pull requests should include a concise description, linked issue when applicable, test results for the commands run, and screenshots only when UI output changes.

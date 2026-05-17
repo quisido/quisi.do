@@ -24,10 +24,6 @@ Use TypeScript and the shared `quisido` ESLint/TS configs. Follow the existing E
 
 Use Vitest with `describe`, `it`, and `expect`. Co-locate tests with source files using `helper-name.test.ts`. Write tests around observable inputs and outputs, not implementation details, and keep test names sentence-like, for example `it('should identify booleans', ...)`. Never commit `it.only` or `describe.only`.
 
-## Commit & Pull Request Guidelines
-
-Recent commits use short imperative summaries such as `fix CI`, `add fmrs aliases`, and dependency bumps with PR numbers. Keep commit subjects concise and scoped to the change. Pull requests should describe the behavioral change, list validation commands run, link related issues when applicable, and include screenshots only for user-facing UI changes.
-
 ## Agent-Specific Instructions
 
 Before editing code, check `.github/instructions/**/*.instructions.md` from the monorepo and apply files whose front matter matches your task. For this package, the general TypeScript and testing instructions usually apply.

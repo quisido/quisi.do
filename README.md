@@ -4,6 +4,7 @@
 front-end software.
 
 As a monorepo, it composes three types of packages:
+
 - **Applications** are bundled into static assets (HTML, JS, etc.) and deployed
   with aggressive caching. They serve as the primary entry point for users to
   interface with the final products. For example, **quisi.do**

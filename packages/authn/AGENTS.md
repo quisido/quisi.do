@@ -25,10 +25,6 @@ Use TypeScript for new code and follow `.github/instructions/`. Prefer `const`, 
 
 Use Vitest with `describe`, `it`, and `expect`. Keep tests close to the code they cover using `*.test.ts` names, for example `src/oauth/get-oauth-user-id.test.ts`. Test observable behavior and side effects, not private implementation details. Avoid committed `it.only`, `describe.only`, arbitrary sleeps, or timeout-dependent tests.
 
-## Commit & Pull Request Guidelines
-
-Recent commits use short imperative subjects such as `fix CI` and `add ci files`; dependency updates often use `Bump ... (#123)`. Keep commit subjects concise and focused. Pull requests should describe the behavior change, list relevant test commands run, link related issues when available, and call out Cloudflare binding, D1 schema, or environment changes.
-
 ## Security & Configuration Tips
 
 Never hard-code secrets or credentials. Keep local secrets in `.dev.vars` or environment-specific configuration outside committed code. Use parameterized D1 queries with `?` placeholders, and keep staging and production bindings separated in `wrangler.jsonc`.

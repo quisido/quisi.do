@@ -25,10 +25,6 @@ Use TypeScript for new code and prefer immutable values (`const`, `readonly`) an
 
 Use Vitest with `describe`, `it`, and `expect`. Name tests with descriptive sentences and test observable behavior rather than implementation details. Prefer colocated `*.test.ts` or `*.test.tsx` files for source coverage; place reusable helpers in `test/`. Do not commit `it.only` or `describe.only`. Run `npm run vitest:run` for focused test verification and `npm test` before submitting broader changes.
 
-## Commit & Pull Request Guidelines
-
-Recent history uses short, imperative commit subjects such as `fix CI`, `add ci files`, and `move Vitest to quisido`; many merged changes include PR numbers. Keep commits focused and concise. Pull requests should describe the behavior changed, note relevant package commands run, link related issues, and include screenshots only for UI-facing changes.
-
 ## Agent-Specific Instructions
 
 Follow applicable files in `C:\git\quisi.do\.github\instructions\*.instructions.md`, using their front matter to decide scope. For this package, the general coding, TypeScript, React, and test instructions commonly apply.

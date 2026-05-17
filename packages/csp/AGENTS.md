@@ -43,15 +43,6 @@ tests with source files, for example `src/features/handle-post.ts` and
 statements and follow Arrange-Act-Assert; this repo labels those phases as
 `Assemble`, `Act`, and `Assert`. Do not commit `it.only` or `describe.only`.
 
-## Commit & Pull Request Guidelines
-
-Recent history uses short, imperative subjects such as `fix CI` and `add ci
-files`, with dependency updates often preserving bot-generated titles. Keep
-commits focused and describe the observable change. Pull requests should include
-a concise summary, relevant issue or PR links, test results, and any deployment
-or D1 migration notes. Include screenshots only when UI or rendered output is
-affected.
-
 ## Security & Configuration Tips
 
 Never hard-code credentials, dataset names, or user input into SQL. Use typed

@@ -42,15 +42,6 @@ Place tests beside implementation files, for example
 observable behavior rather than implementation details, and never commit
 `it.only` or `describe.only`.
 
-## Commit & Pull Request Guidelines
-
-Recent history uses short, imperative commit subjects such as `fix CI` and
-`add ci files`; dependency updates may use the generated `Bump ... (#123)`
-format. Keep commits focused on one change. Pull requests should describe the
-behavioral change, link related issues when applicable, and include the commands
-run for verification. Add screenshots only for UI-facing changes, which are
-unlikely in this hook package.
-
 ## Agent-Specific Instructions
 
 Before changing code, check applicable files in `.github/instructions/` using
