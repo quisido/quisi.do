@@ -15,6 +15,7 @@ on:
 jobs:
   codex:
     name: Codex
+    environment: development
     runs-on: ubuntu-latest
     if: |
       contains(github.event.issue.body, '@codex') &&
