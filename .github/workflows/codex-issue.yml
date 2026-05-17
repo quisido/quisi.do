@@ -35,6 +35,14 @@ jobs:
         with:
           fetch-depth: 9
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Sanitize
+        id: body
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          node --eval \
+            'const { ISSUE_BODY = "" } = process.env; process.stdout.write(`stringified=${JSON.stringify(ISSUE_BODY)}\n`);' \
+            > "$GITHUB_OUTPUT";
       - name: Execute
         uses: ./.github/actions/codex
         with:
@@ -44,12 +52,10 @@ jobs:
             Codex action in an issue. The repository is already checked out
             locally.
 
-            ## User comment
-            \`\`\`markdown
-            # ${{ github.event.issue.title }}
+            ## Issue
 
-            ${{ github.event.issue.body }}
-            \`\`\`
+            **Title:** ${{ github.event.issue.title }}
+            **Body (stringified):** ${{ steps.body.outputs.stringified }}
 
             ## Tasks
 

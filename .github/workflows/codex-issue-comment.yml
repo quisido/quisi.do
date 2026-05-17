@@ -39,21 +39,27 @@ jobs:
         with:
           fetch-depth: 9
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Sanitize
+        id: comment
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+        run: |
+          node --eval \
+            'const { COMMENT_BODY = "" } = process.env; process.stdout.write(`stringified=${JSON.stringify(COMMENT_BODY)}\n`);' \
+            > "$GITHUB_OUTPUT";
       - name: Execute
         uses: ./.github/actions/codex
         with:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
           prompt: |
             GitHub user `${{ github.event.comment.user.login }}` triggered the
-            Codex action in an issue comment. The repository is already checked
+            Codex action via an issue comment. The repository is already checked
             out locally.
 
-            ## User comment
-            \`\`\`markdown
-            # ${{ github.event.issue.title }}
+            ## Issue
 
-            ${{ github.event.comment.body }}
-            \`\`\`
+            **Title:** ${{ github.event.issue.title }}
+            **Comment (stringified):** ${{ steps.comment.outputs.stringified }}
 
             ## Tasks
 

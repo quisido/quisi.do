@@ -52,6 +52,14 @@ jobs:
           fetch-depth: 9
           ref: ${{ steps.git.outputs.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Sanitize
+        id: comment
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+        run: |
+          node --eval \
+            'const { COMMENT_BODY = "" } = process.env; process.stdout.write(`stringified=${JSON.stringify(COMMENT_BODY)}\n`);' \
+            > "$GITHUB_OUTPUT";
       - name: Execute
         uses: ./.github/actions/codex
         with:
@@ -61,12 +69,10 @@ jobs:
             Codex action via a pull request comment. The pull request branch is
             already checked out locally.
 
-            ## User comment
-            \`\`\`markdown
-            # ${{ steps.git.outputs.title }}
+            ## Issue
 
-            ${{ github.event.comment.body }}
-            \`\`\`
+            **Title:** ${{ github.event.issue.title }}
+            **Comment (stringified):** ${{ steps.comment.outputs.stringified }}
 
             Focus your actions and analysis to the scope of this pull request.
 
