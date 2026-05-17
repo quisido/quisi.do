@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../schemas/github-workflow.jsonc
 name: Codex (issue comment)
 
 # When a comment is edited or deleted, cancel any in-progress runs.

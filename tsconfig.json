@@ -3,6 +3,7 @@
     "declarationDir": "dist",
     "generateCpuProfile": ".cache/tsconfig.cpuprofile",
     "rootDir": ".",
+    "skipLibCheck": true,
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "exclude": [

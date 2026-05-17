@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../schemas/github-workflow.jsonc
 name: Codex (pull request comment)
 
 # When a comment is edited or deleted, cancel any in-progress runs.
@@ -40,7 +41,6 @@ jobs:
               data: {
                 base: { sha: baseSha },
                 head: {
-                  ref,
                   repo: { full_name: fullName },
                   sha: headSha,
                 },
@@ -60,14 +60,13 @@ jobs:
 
             core.setOutput('baseSha', baseSha);
             core.setOutput('headSha', headSha);
-            core.setOutput('ref', ref);
             core.setOutput('title', title);
 
       - name: Checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 9
-          ref: ${{ steps.git.outputs.ref }}
+          ref: ${{ steps.git.outputs.headSha }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Sanitize

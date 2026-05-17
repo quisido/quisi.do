@@ -5,7 +5,6 @@
     "moduleResolution": "nodenext",
     "noEmit": false,
     "outDir": "dist",
-    "skipLibCheck": true,
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
   "exclude": [],
