@@ -105,8 +105,12 @@ while (WORKSPACE_TOPOLOGICAL_DEPENDENCIES.size > EMPTY) {
     ) as PackageJson;
     if (bin !== undefined) {
       // Consider `npmExec('link', '--workspace=...'')`.
+      // `--include=dev` ensures devDependencies are not pruned when this
+      // script runs with `NODE_ENV=production` (e.g. continuous deployment),
+      // since later workspace builds still depend on devDependencies such as
+      // `vitest` for type checking.
       // eslint-disable-next-line no-await-in-loop
-      await npmExec('install');
+      await npmExec('install', '--include=dev');
     }
     WORKSPACE_TOPOLOGICAL_DEPENDENCIES.delete(workspaceDirectory);
     deleteTopologicalDependency(workspaceDirectory);
