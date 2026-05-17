@@ -1,0 +1,78 @@
+name: Codex (pull request comment)
+
+# When a comment is edited or deleted, cancel any in-progress runs.
+concurrency:
+  cancel-in-progress: true
+  group: >-
+    codex__pull-request-comment__
+    ${{ github.event.issue.number }}__
+    ${{ github.event.comment.id }}
+
+on:
+  issue_comment:
+    types:
+      - created
+      - deleted
+      - edited
+
+jobs:
+  codex:
+    name: Codex
+    runs-on: ubuntu-latest
+    if: |
+      github.event.action != 'deleted' &&
+      github.event.issue.pull_request != null &&
+      contains(github.event.comment.body, '@codex') &&
+      (
+        github.event.comment.author_association == 'COLLABORATOR' ||
+        github.event.comment.author_association == 'MEMBER' ||
+        github.event.comment.author_association == 'OWNER'
+      )
+    permissions:
+      actions: read
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Git
+        id: git
+        uses: actions/github-script@v9
+        env:
+          SCRIPT_PATH: ${{ github.workspace }}/.github/workflows/codex-pull-request-comment.js
+        with:
+          script: |
+            await import('${{ env.SCRIPT_PATH }}')({
+              context,
+              github,
+              pullNumber: context.payload.issue.number,
+            });
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 9
+          ref: ${{ steps.git.outputs.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Execute
+        uses: ./.github/actions/codex
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt: |
+            GitHub user `${{ github.event.comment.user.login }}` triggered the
+            Codex action via a pull request comment. The pull request branch is
+            already checked out locally.
+
+            ## User comment
+            \`\`\`markdown
+            # ${{ steps.git.outputs.title }}
+
+            ${{ github.event.comment.body }}
+            \`\`\`
+
+            Focus your actions and analysis to the scope of this pull request.
+
+            ## Tasks
+
+            1. Resolve the user's request.
+            2. Push your changes to the pull request branch.
+            3. Reply to the user's comment with a concise summary of the changes
+               you made and any verification steps you took.

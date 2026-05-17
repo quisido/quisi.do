@@ -1,7 +1,0 @@
-# Adjust this file to change the Codex CI tool policy.
-allowed_approval_policies = ["never"]
-allowed_sandbox_modes = ["workspace-write"]
-allowed_web_search_modes = ["disabled"]
-
-[features]
-shell_tool = true

@@ -7,6 +7,10 @@ inputs:
     default: development
     description: The environment being built (e.g. production, staging)
     required: true
+  upload:
+    default: 'true'
+    description: Upload the build artifacts?
+    required: false
 
 runs:
   using: composite
@@ -25,6 +29,7 @@ runs:
         GITHUB_SHA: ${{ github.sha }}
         NODE_ENV: ${{ inputs.environment }}
     - name: Upload
+      if: ${{ inputs.upload == 'true' }}
       uses: actions/upload-artifact@v6
       with:
         name: build
