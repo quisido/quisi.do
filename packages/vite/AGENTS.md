@@ -1,0 +1,31 @@
+# Repository Guidelines
+
+## Project Structure & Module Organization
+
+This package lives at `packages/vite` in the `quisi.do` monorepo. Application entry files are in `src/index.html`, `src/index.tsx`, and `src/index.scss`. Route-style pages live under `src/app`, reusable React UI in `src/components`, hooks in `src/hooks`, contexts in `src/contexts`, constants in `src/constants`, and feature code in `src/features`, `src/modules`, and `src/utils`. Static assets belong in `public`. Build and maintenance scripts live in `scripts`. Design-system work has its own guide at `src/design-systems/AGENTS.md`.
+
+## Build, Test, and Development Commands
+
+- `npm start --workspace=@quisido/vite`: run the Vite dev server.
+- `npm run build --workspace=@quisido/vite`: type-check with `tsc --skipLibCheck` and produce a production Vite build.
+- `npm test --workspace=@quisido/vite`: run the package test command through `quisido test`.
+- `npm run vitest:run --workspace=@quisido/vite`: run Vitest once.
+- `npm run vitest:watch --workspace=@quisido/vite`: run Vitest in watch mode.
+- `npm run eslint --workspace=@quisido/vite`: run the project ESLint configuration.
+- `npm run clean --workspace=@quisido/vite`: remove generated caches, test output, Wrangler output, `_site`, and `node_modules`.
+
+## Coding Style & Naming Conventions
+
+Use TypeScript for new code and prefer immutable values with `const` and `readonly`. Follow the repo instructions in `.github/instructions`: PascalCase for components, classes, interfaces, enums, and type aliases; camelCase for variables and functions; ALL_CAPS for constants. React code should use named function components, hooks, explicit prop interfaces, `type` imports for types, and `ReactElement` return types. Prefer CSS modules named `component-name.module.scss` and class composition over inline styles. ESLint is configured in `eslint.config.ts`; SCSS style rules are in `.stylelintrc.ts`.
+
+## Testing Guidelines
+
+Use Vitest with `describe`, `it`, and `expect`. Co-locate tests with the covered source as `foo.test.ts` or `foo.test.tsx`; shared design-system conformance tests live in `src/design-systems/core-test`. Test observable behavior and accessibility semantics, not private implementation details. For design systems, set `VITE_TESTED_DESIGN_SYSTEM`, for example: `VITE_TESTED_DESIGN_SYSTEM=template npx vitest run src/design-systems/core-test/`.
+
+## Commit & Pull Request Guidelines
+
+Recent history uses short imperative commit subjects such as `fix CI` and `add ci files`; dependency automation uses `Bump ... (#123)`. Keep commits focused and describe the user-visible or build-visible change. Pull requests should include a concise summary, linked issue when available, test results, and screenshots or recordings for UI changes.
+
+## Agent-Specific Instructions
+
+Before editing, apply any matching `.github/instructions/**/*.instructions.md` files from the monorepo root. For files under `src/design-systems`, also follow `src/design-systems/AGENTS.md`.
