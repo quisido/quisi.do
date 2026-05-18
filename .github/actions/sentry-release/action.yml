@@ -15,7 +15,7 @@ runs:
       with:
         name: build
     - name: Sentry release
-      uses: getsentry/action-release@v3
+      uses: getsentry/action-release@5657c9e888b4e2cc85f4d29143ea4131fde4a73a # v3.6.0
       env:
         SENTRY_AUTH_TOKEN: ${{ inputs.auth-token }}
         SENTRY_LOG_LEVEL: info
