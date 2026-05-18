@@ -59,7 +59,7 @@ publication.
   - **ESLint** lints the code.
   - **Vitest** runs the test suites.
 - **React** renders the majority of UIs.
-- **React Router DOM** handles the browser navigation/routing.
+- **React Router** handles the browser navigation/routing.
 - **TypeScript** is the primary language used for all packages.
 - **Vite** powers the build and development servers.
 - **Visual Studio Code** is the intended development environment. Its
