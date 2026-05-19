@@ -24,4 +24,4 @@ runs:
       with:
         environment: production
         release: ${{ github.sha }}
-        sourcemaps: packages/vite/_site
+        sourcemaps: packages/saas/_site

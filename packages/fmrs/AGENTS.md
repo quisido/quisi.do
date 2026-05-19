@@ -14,7 +14,8 @@
 - `npm run attw` and `npm run publint` validate package publishing/types behavior.
 - `npm run clean` removes generated caches, reports, `dist/`, and `node_modules/`.
 
-From the monorepo root, prefer workspace-scoped commands such as `npm test --workspace=packages/fmrs`.
+From the monorepo root, prefer workspace-scoped commands such as
+`npm --workspace=packages/fmrs test`.
 
 ## Coding Style & Naming Conventions
 

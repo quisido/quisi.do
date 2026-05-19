@@ -4,5 +4,5 @@ export default async function npmExecWorkspace(
   workspaceDirectory: string,
   ...script: string[]
 ): Promise<string> {
-  return await npmExec(...script, `--workspace=packages/${workspaceDirectory}`);
+  return await npmExec(`--workspace=packages/${workspaceDirectory}`, ...script);
 }

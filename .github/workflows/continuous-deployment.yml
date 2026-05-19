@@ -140,7 +140,7 @@ jobs:
         with:
           branch: gh-pages
           clean: true
-          folder: packages/vite/_site/
+          folder: packages/saas/_site/
           single-commit: true
 
   npm-publish:
@@ -260,7 +260,7 @@ jobs:
         uses: ./.github/actions/setup
       - name: Run
         run: npx hint --config hintrc.production.json https://quisi.do/
-        working-directory: packages/vite
+        working-directory: packages/saas
       - name: Upload
         if: always()
         uses: actions/upload-artifact@v7
@@ -268,7 +268,7 @@ jobs:
           name: webhint-production
           if-no-files-found: error
           include-hidden-files: true
-          path: packages/vite/.tests/webhint
+          path: packages/saas/.tests/webhint
 
 on:
   push:

@@ -14,7 +14,8 @@ This package is the `quisido` TypeScript CLI and shared tooling library. Source 
 - `npm run vitest:watch`: run Vitest in watch mode.
 - `npm run clean`: remove `.cache`, `.tests`, `dist`, and `node_modules`.
 
-From the monorepo root, prefer workspace commands such as `npm test --workspace=packages/quisido`.
+From the monorepo root, prefer workspace commands such as
+`npm --workspace=packages/quisido test`.
 
 ## Coding Style & Naming Conventions
 

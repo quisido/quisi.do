@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-This package lives at `packages/vite` in the `quisi.do` monorepo. Application
+This package lives at `packages/saas` in the `quisi.do` monorepo. Application
 entry files are in `src/index.html`, `src/index.tsx`, and `src/index.scss`.
 Route-style pages live under `src/app`, reusable React UI in `src/components`,
 hooks in `src/hooks`, contexts in `src/contexts`, constants in `src/constants`,
@@ -12,16 +12,16 @@ Design-system work has its own guide at `src/design-systems/AGENTS.md`.
 
 ## Build, Test, and Development Commands
 
-- `npm start --workspace=@quisido/vite`: run the Vite dev server.
-- `npm run build --workspace=@quisido/vite`: type-check with
+- `npm --workspace=packages/saas start`: run the Vite dev server.
+- `npm --workspace=packages/saas run build`: type-check with
   `tsc --skipLibCheck` and produce a production Vite build.
-- `npm test --workspace=@quisido/vite`: run the package test command through
+- `npm --workspace=packages/saas`: run the package test command through
   `quisido test`.
-- `npm run vitest:run --workspace=@quisido/vite`: run Vitest once.
-- `npm run vitest:watch --workspace=@quisido/vite`: run Vitest in watch mode.
-- `npm run eslint --workspace=@quisido/vite`: run the project ESLint
+- `npm --workspace=packages/saas run vitest:run`: run Vitest once.
+- `npm --workspace=packages/saas run vitest:watch`: run Vitest in watch mode.
+- `npm --workspace=packages/saas run eslint`: run the project ESLint
   configuration.
-- `npm run clean --workspace=@quisido/vite`: remove generated caches, test
+- `npm --workspace=packages/saas run clean`: remove generated caches, test
   output, Wrangler output, `_site`, and `node_modules`.
 
 ## Coding Style & Naming Conventions

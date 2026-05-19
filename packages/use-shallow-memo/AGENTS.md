@@ -21,7 +21,7 @@ Use npm scripts from this package directory:
 - `npm run clean` removes `.cache`, `.tests`, `dist`, and `node_modules`.
 
 From the monorepo root, scope commands with
-`npm run <script> --workspace=packages/use-shallow-memo` when needed.
+`npm --workspace=packages/use-shallow-memo run <script>` when needed.
 
 ## Coding Style & Naming Conventions
 

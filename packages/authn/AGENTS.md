@@ -6,7 +6,8 @@ This package is the `@quisido/authn` Cloudflare Worker for quisi.do authenticati
 
 ## Build, Test, and Development Commands
 
-Run commands from this package directory, or from the monorepo root with `--workspace=packages/authn`.
+Run commands from this package directory, or from the monorepo root with
+`--workspace=packages/authn`.
 
 - `npm run dev`: start `wrangler dev` with persisted local Worker state.
 - `npm run local:init`: initialize local D1 tables and clear rows.

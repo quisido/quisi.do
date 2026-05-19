@@ -9,14 +9,14 @@ runs:
       uses: ./.github/actions/setup
     - name: Audit
       shell: bash
-      working-directory: packages/vite
+      working-directory: packages/saas
       run: |
         chmod +x ./scripts/lighthouse-production.sh;
         ./scripts/lighthouse-production.sh;
     - name: Validate
       run: node ./scripts/postlighthouse/index.js
       shell: bash
-      working-directory: packages/vite
+      working-directory: packages/saas
     - name: Upload
       if: always()
       uses: actions/upload-artifact@v6
@@ -24,6 +24,6 @@ runs:
         name: lighthouse-production
         if-no-files-found: error
         path: |
-          packages/vite/lighthouse.report.*
-          packages/vite/lighthouse-*.devtoolslog.json
-          packages/vite/lighthouse-*.trace.json
+          packages/saas/lighthouse.report.*
+          packages/saas/lighthouse-*.devtoolslog.json
+          packages/saas/lighthouse-*.trace.json
