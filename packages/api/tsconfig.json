@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "composite": false,
+    "declarationDir": "dist",
+    "incremental": false,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "outDir": "dist",
+    "rootDir": ".",
+    "sourceRoot": "src"
+  },
+  "exclude": [".cache/", ".tests/", ".wrangler/", "dist/"],
+  "extends": "quisido/tsconfig.json",
+  "include": ["**/*.ts"]
+}

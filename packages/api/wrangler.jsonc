@@ -1,0 +1,73 @@
+{
+	"$schema": "../../node_modules/wrangler/config-schema.json",
+
+  "compatibility_date": "2025-05-05",
+
+  "d1_databases": [
+    { "binding": "DB", "database_id": "API", "database_name": "api-dev" }
+  ],
+
+  "dev": {
+    "local_protocol": "https",
+    "port": 3879 // parseInt('api', 36) % 9999
+  },
+
+  "env": {
+    "development": {
+      "vars": {
+        "ENVIRONMENT_NAME": "development"
+      }
+    },
+
+    "production": {
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_id": "placeholder",
+          "database_name": "api"
+        }
+      ],
+      "name": "quisido-api",
+      "vars": {
+        "ENVIRONMENT_NAME": "production"
+      }
+    },
+
+    "staging": {
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_id": "placeholder",
+          "database_name": "api-staging"
+        }
+      ],
+      "name": "quisido-api-staging",
+      "vars": {
+        "ENVIRONMENT_NAME": "staging"
+      },
+      "workers_dev": true
+    }
+  },
+
+  "main": "src/index.ts",
+  "name": "quisido-api-dev",
+
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true
+    }
+  },
+
+  "placement": {
+    "mode": "smart"
+  },
+
+  "send_metrics": true,
+  "tsconfig": "./tsconfig.json",
+  "upload_source_maps": true,
+
+  "vars": {
+    "ENVIRONMENT_NAME": "unknown"
+  }
+}
