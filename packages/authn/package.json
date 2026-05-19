@@ -67,7 +67,6 @@
     "@types/cookie": "^1.0.0",
     "@types/eslint": "^9.6.1",
     "@vitest/ui": "^4.0.7",
-    "cloudflare-test-utils": "^1.0.2",
     "concurrently": "^9.2.1",
     "cookie": "^1.0.2",
     "quisido": "^0.0.3",

@@ -1,4 +1,4 @@
-import { TEST_CONSOLE } from 'cloudflare-test-utils';
+import { TEST_CONSOLE } from './cloudflare-mocks.js';
 import { vi } from 'vitest';
 import { ExportedHandler, type ExportedHandlerOptions } from '../src/index.js';
 

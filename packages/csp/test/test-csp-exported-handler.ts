@@ -1,6 +1,6 @@
 import { mapMetricDimensionsToDataPoint } from '@quisido/worker';
 import { TestExportedHandler, type TestResponse } from '@quisido/worker-test';
-import { TestAnalyticsEngineDataset } from 'cloudflare-test-utils';
+import { TestAnalyticsEngineDataset } from './cloudflare-mocks.js';
 import CspFetchHandler from '../src/csp-fetch-handler.js';
 import handleError from '../src/handle-error.js';
 import handleLog from '../src/handle-log.js';

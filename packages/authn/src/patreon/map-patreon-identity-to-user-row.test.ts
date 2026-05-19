@@ -1,4 +1,4 @@
-import { EXPECT_ANY_NUMBER } from 'cloudflare-test-utils';
+import { EXPECT_ANY_NUMBER } from '../../test/cloudflare-mocks.js';
 import { describe, it } from 'vitest';
 import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { Gender } from '../constants/gender.js';

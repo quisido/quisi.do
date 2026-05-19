@@ -4,7 +4,7 @@ import {
   TEST_CONSOLE_ERROR,
   TEST_EXECUTION_CONTEXT,
   TEST_WAIT_UNTIL,
-} from 'cloudflare-test-utils';
+} from '../test/cloudflare-mocks.js';
 import { type IncomingRequest, StatusCode } from 'cloudflare-utils';
 import { EventEmitter } from 'eventemitter3';
 import { assert, describe, expect, it, vi } from 'vitest';

@@ -4,7 +4,7 @@ import {
   TEST_CONSOLE,
   TEST_EXECUTION_CONTEXT,
   TestKVNamespace,
-} from 'cloudflare-test-utils';
+} from '../test/cloudflare-mocks.js';
 import { Pricing } from 'cloudflare-utils';
 import { SECONDS_PER_YEAR } from './time.js';
 

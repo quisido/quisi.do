@@ -3,7 +3,7 @@ import {
   EXPECT_ANY_NUMBER,
   TEST_EXECUTION_CONTEXT,
   TestR2Bucket,
-} from 'cloudflare-test-utils';
+} from '../test/cloudflare-mocks.js';
 import { assert, describe, expect, it, vi } from 'vitest';
 import { TestExportedHandler } from '../test/test-exported-handler.js';
 import { FetchHandler, MetricName } from './index.js';
