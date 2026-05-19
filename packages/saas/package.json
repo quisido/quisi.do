@@ -1,7 +1,7 @@
 {
   "name": "@quisido/saas",
   "version": "1.0.0",
-  "author": "quisi.do <vite@quisi.do>",
+  "author": "quisi.do <saas@quisi.do>",
   "description": "quisi.do",
   "license": "UNLICENSED",
   "private": true,
@@ -20,7 +20,7 @@
     "vitest:watch": "vitest watch"
   },
   "bugs": {
-    "email": "vite@quisi.do",
+    "email": "saas@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
   "keywords": [
@@ -28,8 +28,7 @@
     "frontend",
     "observability",
     "react",
-    "typescript",
-    "vite"
+    "typescript"
   ],
   "funding": {
     "type": "individual",
