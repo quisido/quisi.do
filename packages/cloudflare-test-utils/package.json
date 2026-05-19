@@ -52,7 +52,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "@cloudflare/workers-types": "^4.20260227.0"
+    "@cloudflare/workers-types": "^4.20260519.1"
   },
   "devDependencies": {
     "@vitest/ui": "^4.0.7",
