@@ -1,5 +1,5 @@
 {
-  "name": "@quisido/vite",
+  "name": "@quisido/saas",
   "version": "1.0.0",
   "author": "quisi.do <vite@quisi.do>",
   "description": "quisi.do",
@@ -36,7 +36,7 @@
     "url": "https://github.com/sponsors/quisido"
   },
   "repository": {
-    "directory": "packages/vite",
+    "directory": "packages/saas",
     "type": "git",
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
