@@ -118,7 +118,7 @@
     "**/node_modules/": true,
     "**/package-lock.json": true
   },
-  "stylelint.configFile": "./packages/vite/.stylelintrc.ts",
+  "stylelint.configFile": "./packages/saas/.stylelintrc.ts",
   "terminal.integrated.shellIntegration.enabled": true,
   "testExplorer.useNativeTesting": true,
   "vitest.shellType": "terminal",

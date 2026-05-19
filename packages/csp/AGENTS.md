@@ -12,18 +12,18 @@ configuration is in `wrangler.jsonc`.
 
 ## Build, Test, and Development Commands
 
-- `npm run dev --workspace=packages/csp`: start `wrangler dev` with persisted
+- `npm --workspace=packages/csp run dev`: start `wrangler dev` with persisted
   local state under `../../.wrangler/state`.
-- `npm run local:init --workspace=packages/csp`: create local D1 tables from
-  `sql/` scripts.
-- `npm run local:reinit --workspace=packages/csp`: drop and recreate local D1
-  tables.
-- `npm test --workspace=packages/csp`: run the package test command.
-- `npm run vitest:run --workspace=packages/csp`: run Vitest once.
-- `npm run eslint --workspace=packages/csp`: run the shared `quisido` ESLint
+- `npm --workspace=packages/csp run eslint`: run the shared `quisido` ESLint
   configuration.
-- `npm run staging:deploy:dry-run --workspace=packages/csp`: validate Worker
+- `npm --workspace=packages/csp run local:init`: create local D1 tables from
+  `sql/` scripts.
+- `npm --workspace=packages/csp run local:reinit`: drop and recreate local D1
+  tables.
+- `npm --workspace=packages/csp run staging:deploy:dry-run`: validate Worker
   deployment output before remote deployment.
+- `npm --workspace=packages/csp run vitest:run`: run Vitest once.
+- `npm --workspace=packages/csp test`: run the package test command.
 
 ## Coding Style & Naming Conventions
 

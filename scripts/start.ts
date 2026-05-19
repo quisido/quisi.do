@@ -29,7 +29,7 @@ for (const workspaceDirectory of workspaceDirectories) {
 const mapWorkspaceToConcurrentlyCommandInput = (
   workspace: string,
 ): ConcurrentlyCommandInput => ({
-  command: `npm start --workspace=packages/${workspace}`,
+  command: `npm --workspace=packages/${workspace} start`,
   name: workspace,
 });
 

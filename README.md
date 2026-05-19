@@ -71,13 +71,13 @@ publication.
 ## Commands
 
 - `npm run build` builds all packages in topological order.
-  - `npm run build --workspace=packages/<PATH>` builds a specific package.
+  - `npm --workspace=packages/<PATH> run build` builds a specific package.
 - `npm run clean` removes all build and cache artifacts.
-  - `npm run clean --workspace=packages/<PATH>` removes the build and cache
+  - `npm --workspace=packages/<PATH> run clean` removes the build and cache
     artifacts from a specific package.
 - `npm run update` upgrades all dependencies.
 - `npm start` runs all applications, services, and dependencies locally.
 - `npm test` runs all test suites for all packages.
-  - `npm test --workspace=packages/<PATH>` tests a specific package.
+  - `npm --workspace=packages/<PATH> test` tests a specific package.
 - `npx --workspace=packages/<PATH> eslint .` lints a specific package.
 - `npx --workspace=packages/<PATH> vitest run` unit tests a specific package.

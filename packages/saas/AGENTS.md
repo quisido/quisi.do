@@ -12,16 +12,16 @@ Design-system work has its own guide at `src/design-systems/AGENTS.md`.
 
 ## Build, Test, and Development Commands
 
-- `npm start --workspace=packages/saas`: run the Vite dev server.
-- `npm run build --workspace=packages/saas`: type-check with
+- `npm --workspace=packages/saas start`: run the Vite dev server.
+- `npm --workspace=packages/saas run build`: type-check with
   `tsc --skipLibCheck` and produce a production Vite build.
-- `npm test --workspace=packages/saas`: run the package test command through
+- `npm --workspace=packages/saas`: run the package test command through
   `quisido test`.
-- `npm run vitest:run --workspace=packages/saas`: run Vitest once.
-- `npm run vitest:watch --workspace=packages/saas`: run Vitest in watch mode.
-- `npm run eslint --workspace=packages/saas`: run the project ESLint
+- `npm --workspace=packages/saas run vitest:run`: run Vitest once.
+- `npm --workspace=packages/saas run vitest:watch`: run Vitest in watch mode.
+- `npm --workspace=packages/saas run eslint`: run the project ESLint
   configuration.
-- `npm run clean --workspace=packages/saas`: remove generated caches, test
+- `npm --workspace=packages/saas run clean`: remove generated caches, test
   output, Wrangler output, `_site`, and `node_modules`.
 
 ## Coding Style & Naming Conventions

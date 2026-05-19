@@ -132,7 +132,7 @@ const mapScriptToProcess = (script: string): Promise<void> => {
 };
 
 const mapWorkspaceDependencyToProcess = (dependency: string): Promise<void> => {
-  const command = `npm start --workspace=packages/${dependency}`;
+  const command = `npm --workspace=packages/${dependency} start`;
   return new ChildPromise(command);
 };
 
