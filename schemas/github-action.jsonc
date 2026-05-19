@@ -2,6 +2,7 @@
  * This entire file exists just to change
  * `/definitions/runs-composite/properties/steps/items/properties/with` to
  * support `additionalProperties: true`.
+ * @see https://raw.githubusercontent.com/SchemaStore/schemastore/refs/heads/master/src/schemas/json/github-action.json
  */
 {
   "$comment": "https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions",
