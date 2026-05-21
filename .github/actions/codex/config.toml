@@ -3,7 +3,7 @@
 approval_policy = "never"
 hide_agent_reasoning = true
 model_reasoning_effort = "high"
-model_reasoning_summary = "off"
+model_reasoning_summary = "none"
 model_verbosity = "low"
 personality = "pragmatic"
 plan_mode_reasoning_effort = "high"
