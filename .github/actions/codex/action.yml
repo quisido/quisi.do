@@ -20,6 +20,10 @@ runs:
         environment: development
         upload: false
 
+    - name: Install dependencies
+      shell: bash
+      run: sudo apt install bubblewrap
+
     - name: Prepare
       shell: bash
       run: |

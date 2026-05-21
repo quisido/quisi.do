@@ -94,7 +94,9 @@ jobs:
 
             ### Tasks
 
-            1. Resolve the user's request.
-            2. Push your changes to the pull request branch.
-            3. Reply to the user's comment with a concise summary of the changes
-               you made and any verification steps you took.
+            1. Create a plan for how you will resolve this issue.
+            2. Reply to the user with a comment stating your plan.
+            3. Execute your plan and resolve the issue.
+            4. Commit and push your changes to the pull request branch.
+            5. Edit the previous comment you made to include a link to the pull
+               request.

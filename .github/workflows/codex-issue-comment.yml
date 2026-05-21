@@ -61,14 +61,15 @@ jobs:
 
             ### Tasks
 
-            1. Create branch
+            1. Create a plan for how you will resolve this issue.
+            2. Reply to the user with a comment stating your plan.
+            3. Create branch
                `codex/issue-${{ github.event.issue.number }}-comment-${{ github.event.comment.id }}`.
-            2. Resolve the user's request.
-            3. Push your branch to the remote repository.
-            4. Open a pull request targeting the default branch with the title
-               "${{ github.event.issue.title }}" and a description that contains
-               "resolves #${{ github.event.issue.number }}" and a summary of the
-               changes you made.
-            5. Reply to the issue comment with a concise summary of the changes
-               you made, any verification steps you took, and a link to the pull
+            4. Execute your plan and resolve the issue.
+            5. Commit and push your branch.
+            6. Open a pull request targeting the default branch with the title
+               "${{ github.event.issue.title }}", a description that contains
+               "resolves #${{ github.event.issue.number }}", and a summary of
+               the changes you made.
+            7. Edit the previous comment you made to include a link to the pull
                request.

@@ -1,6 +1,7 @@
 # Codex config for GitHub Actions
 #:schema https://developers.openai.com/codex/config-schema.json
 approval_policy = "never"
+approvals_reviewer = "auto_review"
 hide_agent_reasoning = true
 model_reasoning_effort = "high"
 model_reasoning_summary = "none"
