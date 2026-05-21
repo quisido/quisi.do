@@ -3,6 +3,10 @@ name: Build
 description: Builds the repository
 
 inputs:
+  continue-on-error:
+    default: 'false'
+    description: Continue the workflow even if the build fails?
+    required: false
   environment:
     default: development
     description: The environment being built (e.g. production, staging)
@@ -19,7 +23,9 @@ runs:
       uses: ./.github/actions/setup
       with:
         download-build: false
+
     - name: Build
+      continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       run: npm run build
       shell: bash
       env:
@@ -28,6 +34,7 @@ runs:
         GITHUB_REPOSITORY: ${{ github.repository }}
         GITHUB_SHA: ${{ github.sha }}
         NODE_ENV: ${{ inputs.environment }}
+
     - name: Upload
       if: ${{ inputs.upload == 'true' }}
       uses: actions/upload-artifact@v6

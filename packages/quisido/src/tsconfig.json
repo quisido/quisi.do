@@ -40,8 +40,7 @@
     "isolatedModules": true,
     "keyofStringsOnly": false,
     "lib": ["ESNext"],
-    // TODO: Determine the best value for this:
-    "libReplacement": true,
+    "libReplacement": false,
     "listEmittedFiles": false,
     "listFiles": false,
     "mapRoot": null,
