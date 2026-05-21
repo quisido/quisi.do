@@ -33,6 +33,7 @@ jobs:
         with:
           fetch-depth: 9
           token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Sanitize
         id: body
         env:
@@ -41,6 +42,7 @@ jobs:
           node --eval \
             'const { ISSUE_BODY = "" } = process.env; process.stdout.write(`stringified=${JSON.stringify(ISSUE_BODY)}\n`);' \
             > "$GITHUB_OUTPUT";
+
       - name: Execute
         uses: ./.github/actions/codex
         with:

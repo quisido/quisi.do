@@ -16,6 +16,7 @@ runs:
     - name: Build
       uses: ./.github/actions/build
       with:
+        continue-on-error: true
         environment: development
         upload: false
 
@@ -29,7 +30,6 @@ runs:
       uses: openai/codex-action@e0fdf01220eb9a88167c4898839d273e3f2609d1 # v1
       id: execution
       with:
-        codex-args: '["--ask-for-approval", "never"]'
         codex-home: ${{ runner.temp }}/.codex
         effort: high
         openai-api-key: ${{ inputs.openai-api-key }}
