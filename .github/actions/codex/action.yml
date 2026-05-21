@@ -37,6 +37,7 @@ runs:
         codex-home: ${{ runner.temp }}/.codex
         effort: high
         openai-api-key: ${{ inputs.openai-api-key }}
+        output-file: codex-output.txt
         prompt: |
           # Instructions for Codex GitHub Action
 
@@ -55,3 +56,10 @@ runs:
           ## User Request
 
           ${{ inputs.prompt }}
+
+    - name: Upload
+      uses: actions/upload-artifact@v6
+      with:
+        name: output
+        if-no-files-found: error
+        path: codex-output.txt
