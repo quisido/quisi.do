@@ -83,7 +83,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@types/node": "^24.10.4",
+    "@types/node": "^25.9.1",
     "@vitest/coverage-istanbul": "^4.0.7",
     "typescript": "^6.0.3",
     "vitest": "^4.1.0"
