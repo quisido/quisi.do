@@ -33,10 +33,15 @@ runs:
         cp .github/actions/codex/config.toml "$CODEX_HOME/config.toml";
 
     - name: Authenticate
-      uses: ./.github/actions/codex-auth
-      with:
-        auth-json: ${{ inputs.auth-json }}
-        home: ${{ runner.temp }}/.codex
+      shell: bash
+      env:
+        CODEX_AUTH_JSON: ${{ inputs.auth-json }}
+        CODEX_HOME: ${{ runner.temp }}/.codex
+      run: >-
+        mkdir --parents "$CODEX_HOME";
+        printf '%s' "$CODEX_AUTH_JSON" |
+        base64 --decode > "$CODEX_HOME/auth.json";
+        chmod 600 "$CODEX_HOME/auth.json";
 
     - name: Execute
       run: codex exec --color always --ephemeral --strict-config "$PROMPT"

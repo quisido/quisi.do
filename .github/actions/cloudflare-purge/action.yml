@@ -26,7 +26,7 @@ runs:
         --data '{"files": ["https://quisi.do", "https://quisi.do/index.html"]}'
         --fail
         --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN"
-        --header "Content-Type:application/json"
+        --header "Content-Type: application/json"
         --request POST
         "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache"
     - name: Purge quisido.dev cache

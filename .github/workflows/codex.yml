@@ -35,7 +35,8 @@ jobs:
     if: >-
       github.event.action != 'deleted' &&
       github.event.issue.author_association == 'OWNER' &&
-      contains(github.event.issue.body, '@codex')
+      contains(github.event.issue.body, '@codex') &&
+      github.event_name == 'issues'
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -89,7 +90,8 @@ jobs:
       github.event.action != 'deleted' &&
       github.event.comment.author_association == 'OWNER' &&
       contains(github.event.comment.body, '@codex') &&
-      github.event.issue.pull_request == null
+      github.event.issue.pull_request == null &&
+      github.event_name == 'issue_comment'
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -144,7 +146,8 @@ jobs:
       github.event.action != 'deleted' &&
       github.event.comment.author_association == 'OWNER' &&
       contains(github.event.comment.body, '@codex') &&
-      github.event.issue.pull_request != null
+      github.event.issue.pull_request != null &&
+      github.event_name == 'issue_comment'
     steps:
       - name: Get head ref
         id: ref

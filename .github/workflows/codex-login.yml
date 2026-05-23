@@ -21,11 +21,28 @@ jobs:
     environment: codex
     runs-on: ubuntu-latest
     steps:
-      - name: Restore
-        uses: ./.github/actions/codex-auth
+      - name: Setup Node
+        uses: actions/setup-node@v6
         with:
-          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
-          home: ${{ runner.temp }}/.codex
+          check-latest: true
+          node-version: lts/*
+
+      - name: Install bubblewrap
+        continue-on-error: true
+        run: sudo apt-get install --yes bubblewrap
+
+      - name: Install Codex
+        run: npm install --global @openai/codex
+
+      - name: Restore
+        env:
+          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
+          CODEX_HOME: ${{ runner.temp }}/.codex
+        run: >-
+          mkdir --parents "$CODEX_HOME";
+          printf '%s' "$CODEX_AUTH_JSON" |
+          base64 --decode > "$CODEX_HOME/auth.json";
+          chmod 600 "$CODEX_HOME/auth.json";
 
       - name: Login
         env:
@@ -34,9 +51,17 @@ jobs:
           codex debug models |
           jq --raw-output '.models[0].base_instructions';
 
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.WRITE_SECRETS_APP_ID }}
+          private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
+
       - name: Store
         env:
           CODEX_HOME: ${{ runner.temp }}/.codex
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: >-
           base64 --wrap 0 "$CODEX_HOME/auth.json" |
           gh secret set CODEX_AUTH_JSON --app actions --env codex;
