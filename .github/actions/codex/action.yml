@@ -16,7 +16,7 @@ runs:
     - name: Build
       uses: ./.github/actions/build
       with:
-        continue-on-error: 'true'
+        continue-on-error: true
         environment: development
         upload: false
 
@@ -44,7 +44,7 @@ runs:
         chmod 600 "$CODEX_HOME/auth.json";
 
     - name: Execute
-      run: codex exec --color always --ephemeral --strict-config "$PROMPT"
+      run: npx codex exec --color always --ephemeral --strict-config "$PROMPT"
       shell: bash
       env:
         CODEX_HOME: ${{ runner.temp }}/.codex
