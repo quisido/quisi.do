@@ -44,7 +44,7 @@ runs:
         chmod 600 "$CODEX_HOME/auth.json";
 
     - name: Execute
-      run: npx codex exec --color always --ephemeral --strict-config "$PROMPT"
+      run: npx codex exec --color always --ephemeral "$PROMPT"
       shell: bash
       env:
         CODEX_HOME: ${{ runner.temp }}/.codex
