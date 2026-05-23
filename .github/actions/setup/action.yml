@@ -25,7 +25,7 @@ runs:
         cache: npm
         cache-dependency-path: package-lock.json
         check-latest: true
-        # Playwright fails to install on Node 26.
+        # Playwright fails to install on Node 26, so fallback to LTS (v24).
         # https://github.com/microsoft/playwright/pull/40747
         node-version: ${{ inputs.install-browsers != 'false' && 'lts/*' || '' }}
         node-version-file: .nvmrc
@@ -47,6 +47,8 @@ runs:
       shell: bash
       env:
         DEBIAN_FRONTEND: noninteractive
-      run: |
-        npx playwright install --only-shell --with-deps \
-          chromium-headless-shell firefox webkit;
+      run: >-
+        npx playwright install
+        --only-shell
+        --with-deps
+        chromium-headless-shell firefox webkit;

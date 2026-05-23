@@ -1,6 +1,6 @@
-# Codex config quisi.do
 #:schema https://developers.openai.com/codex/config-schema.json
-# approval_policy = "granular"
+
+# Codex config for the `quisi.do` repository
 hide_agent_reasoning = true
 model_reasoning_effort = "high"
 model_reasoning_summary = "concise"

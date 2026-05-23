@@ -21,34 +21,26 @@ runs:
       env:
         CLOUDFLARE_API_TOKEN: ${{ inputs.api-token }}
         CLOUDFLARE_ZONE_ID: ${{ inputs.quisi-do-zone-id }}
-      run: >
-        curl \
-          --data '{
-            "files": [
-              "https://quisi.do",
-              "https://quisi.do/index.html"
-            ]
-          }' \
-          --fail \
-          --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
-          --header "Content-Type:application/json" \
-          --request POST \
-          "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache"
+      run: >-
+        curl
+        --data '{"files": ["https://quisi.do", "https://quisi.do/index.html"]}'
+        --fail
+        --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+        --header "Content-Type:application/json"
+        --request POST
+        "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache"
     - name: Purge quisido.dev cache
       shell: bash
       env:
         CLOUDFLARE_API_TOKEN: ${{ inputs.api-token }}
         CLOUDFLARE_ZONE_ID: ${{ inputs.quisido-dev-zone-id }}
-      run: >
-        curl \
-          --data '{
-            "files": [
-              "https://quisido.dev",
-              "https://quisido.dev/index.html"
-            ]
-          }' \
-          --fail \
-          --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
-          --header "Content-Type:application/json" \
-          --request POST \
-          "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache"
+      run: >-
+        curl
+        --data '{
+        "files": ["https://quisido.dev", "https://quisido.dev/index.html"]
+        }'
+        --fail
+        --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+        --header "Content-Type:application/json"
+        --request POST
+        "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache"

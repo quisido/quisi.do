@@ -30,9 +30,9 @@ permissions:
 jobs:
   issue:
     name: Issue
-    environment: development
+    environment: codex
     runs-on: ubuntu-latest
-    if: |
+    if: >-
       github.event.action != 'deleted' &&
       github.event.issue.author_association == 'OWNER' &&
       contains(github.event.issue.body, '@codex')
@@ -47,16 +47,17 @@ jobs:
         id: body
         env:
           BODY: ${{ github.event.issue.body }}
-        run: |
-          node --eval \
-            'const { BODY = "" } = process.env; process.stdout.write(`stringified=${JSON.stringify(BODY)}\n`);' \
-            > "$GITHUB_OUTPUT";
+        run: >-
+          node --eval '
+          const { BODY = "" } = process.env;
+          process.stdout.write(`stringified=${JSON.stringify(BODY)}\n`);
+          ' > "$GITHUB_OUTPUT";
 
       - name: Execute
         uses: ./.github/actions/codex
         with:
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-          prompt: |
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          prompt: |-
             GitHub user `${{ github.event.issue.user.login }}` triggered the
             Codex action via an issue. The repository is already checked out
             locally.
@@ -82,9 +83,9 @@ jobs:
 
   issue-comment:
     name: Issue comment
-    environment: development
+    environment: codex
     runs-on: ubuntu-latest
-    if: |
+    if: >-
       github.event.action != 'deleted' &&
       github.event.comment.author_association == 'OWNER' &&
       contains(github.event.comment.body, '@codex') &&
@@ -100,16 +101,17 @@ jobs:
         id: body
         env:
           BODY: ${{ github.event.comment.body }}
-        run: |
-          node --eval \
-            'const { BODY = "" } = process.env; process.stdout.write(`stringified=${JSON.stringify(BODY)}\n`);' \
-            > "$GITHUB_OUTPUT";
+        run: >-
+          node --eval '
+          const { BODY = "" } = process.env;
+          process.stdout.write(`stringified=${JSON.stringify(BODY)}\n`);
+          ' > "$GITHUB_OUTPUT";
 
       - name: Execute
         uses: ./.github/actions/codex
         with:
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-          prompt: |
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          prompt: |-
             GitHub user `${{ github.event.comment.user.login }}` triggered the
             Codex action via an issue comment. The repository is already checked
             out locally.
@@ -136,9 +138,9 @@ jobs:
 
   pull-request:
     name: Pull request
-    environment: development
+    environment: codex
     runs-on: ubuntu-latest
-    if: |
+    if: >-
       github.event.action != 'deleted' &&
       github.event.comment.author_association == 'OWNER' &&
       contains(github.event.comment.body, '@codex') &&
@@ -149,7 +151,7 @@ jobs:
         uses: actions/github-script@v9
         with:
           result-encoding: string
-          script: |
+          script: |-
             const {
               data: {
                 head: {
@@ -183,16 +185,17 @@ jobs:
         id: body
         env:
           BODY: ${{ github.event.comment.body }}
-        run: |
-          node --eval \
-            'const { BODY = "" } = process.env; process.stdout.write(`stringified=${JSON.stringify(BODY)}\n`);' \
-            > "$GITHUB_OUTPUT";
+        run: >-
+          node --eval '
+          const { BODY = "" } = process.env;
+          process.stdout.write(`stringified=${JSON.stringify(BODY)}\n`);
+          ' > "$GITHUB_OUTPUT";
 
       - name: Execute
         uses: ./.github/actions/codex
         with:
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-          prompt: |
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          prompt: |-
             GitHub user `${{ github.event.comment.user.login }}` triggered the
             Codex action via a pull request comment. The pull request branch is
             already checked out locally.

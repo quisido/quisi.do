@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schemas/github-workflow.jsonc
+name: Codex login
+
+concurrency:
+  cancel-in-progress: true
+  group: codex-login
+
+on:
+  schedule:
+    # every 5 days
+    - cron: '21 21 1/5 * *'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  login:
+    name: Login
+    environment: codex
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore
+        uses: ./.github/actions/codex-auth
+        with:
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          home: ${{ runner.temp }}/.codex
+
+      - name: Login
+        env:
+          CODEX_HOME: ${{ runner.temp }}/.codex
+        run: >-
+          codex debug models |
+          jq --raw-output '.models[0].base_instructions';
+
+      - name: Store
+        env:
+          CODEX_HOME: ${{ runner.temp }}/.codex
+        run: >-
+          base64 --wrap 0 "$CODEX_HOME/auth.json" |
+          gh secret set CODEX_AUTH_JSON --app actions --env codex;
