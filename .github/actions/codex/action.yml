@@ -20,19 +20,13 @@ runs:
         environment: development
         upload: false
 
-    - name: Install dependencies
+    - name: Enable Bubblewrap
       shell: bash
-      run: sudo apt-get install --yes bubblewrap
-
-    - name: Prepare
-      shell: bash
-      env:
-        CODEX_HOME: ${{ runner.temp }}/.codex
       run: >-
-        mkdir -p "$CODEX_HOME";
-        cp .github/actions/codex/config.toml "$CODEX_HOME/config.toml";
+        sudo apt-get install --yes bubblewrap;
+        sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0;
 
-    - name: Authenticate
+    - name: Configure Codex
       shell: bash
       env:
         CODEX_AUTH_JSON: ${{ inputs.auth-json }}
@@ -42,6 +36,7 @@ runs:
         printf '%s' "$CODEX_AUTH_JSON" |
         base64 --decode > "$CODEX_HOME/auth.json";
         chmod 600 "$CODEX_HOME/auth.json";
+        cp .github/actions/codex/config.toml "$CODEX_HOME/config.toml";
 
     - name: Execute
       run: npx codex exec --color always --ephemeral "$PROMPT"
