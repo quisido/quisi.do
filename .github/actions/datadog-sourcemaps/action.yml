@@ -17,6 +17,6 @@ runs:
       env:
         DATADOG_API_KEY: ${{ inputs.datadog-api-key }}
         RELEASE_VERSION: ${{ github.sha }}
-      run: |
+      run: >-
         chmod +x ./.github/actions/datadog-sourcemaps/datadog-sourcemaps.sh;
         ./.github/actions/datadog-sourcemaps/datadog-sourcemaps.sh;

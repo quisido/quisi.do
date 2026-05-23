@@ -10,7 +10,7 @@ runs:
     - name: Audit
       shell: bash
       working-directory: packages/saas
-      run: |
+      run: >-
         chmod +x ./scripts/lighthouse-production.sh;
         ./scripts/lighthouse-production.sh;
     - name: Validate
