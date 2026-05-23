@@ -16,7 +16,7 @@ runs:
     - name: Build
       uses: ./.github/actions/build
       with:
-        continue-on-error: true
+        continue-on-error: 'true'
         environment: development
         upload: false
 
