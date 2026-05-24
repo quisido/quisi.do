@@ -40,7 +40,7 @@ const patchStorage = (
             currentStorage[key as keyof StoryStorage],
           ],
         ),
-      ) as Partial<StoryStorage>;
+      );
       monogatari.storage(patch);
     },
     onRevert: (): void => {
