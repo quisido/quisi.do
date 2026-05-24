@@ -168,8 +168,8 @@ jobs:
             7. Edit the previous comment you made to include a link to the pull
                request.
 
-  pull-request:
-    name: Pull request
+  pull-request-comment:
+    name: Pull request comment
     environment: codex
     runs-on: ubuntu-latest
     if: >-
@@ -216,7 +216,7 @@ jobs:
           private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
 
       - name: Configure git
-        run: |
+        run: >-
           git config --global user.name "quisi-do-codex[bot]";
           git config --global
             user.email "quisi-do-codex[bot]@users.noreply.github.com";
