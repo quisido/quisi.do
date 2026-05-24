@@ -33,10 +33,6 @@ export default function NewRelic({
             deny_list: [],
           },
 
-          api: {
-            allow_registered_children: true,
-          },
-
           // Fails CORS.
           distributed_tracing: {
             allowed_origins: [],
