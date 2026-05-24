@@ -3,6 +3,10 @@ name: Setup
 description: Sets up Node and installs dependencies
 
 inputs:
+  continue-on-error:
+    default: 'false'
+    description: Continue the workflow even if the build fails?
+    required: false
   download-build:
     default: 'true'
     description: Whether to download the build artifact
@@ -21,23 +25,31 @@ runs:
         cache: npm
         cache-dependency-path: package-lock.json
         check-latest: true
-        # Playwright fails to install on Node 26.
+        # Playwright fails to install on Node 26, so fallback to LTS (v24).
         # https://github.com/microsoft/playwright/pull/40747
-        node-version: ${{ inputs.install-browsers != 'false' && 'lts/*' || '' }}
         node-version-file: .nvmrc
+        node-version: >-
+          ${{ inputs.install-browsers != 'false' && '24.15.0' || '' }}
+
     - name: Download build
       if: ${{ inputs.download-build == 'true' }}
       uses: actions/download-artifact@v7
       with:
         name: build
+
     - name: Install dependencies
+      continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       shell: bash
       run: npm install --include dev
+
     - name: Install browsers
+      continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       if: ${{ inputs.install-browsers != 'false' }}
       shell: bash
       env:
         DEBIAN_FRONTEND: noninteractive
-      run: |
-        npx playwright install --only-shell --with-deps \
-          chromium-headless-shell firefox webkit;
+      run: >-
+        npx playwright install
+        --only-shell
+        --with-deps
+        chromium-headless-shell firefox webkit;
