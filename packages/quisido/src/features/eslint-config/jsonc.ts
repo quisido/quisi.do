@@ -1,4 +1,3 @@
-import { type ESLint, type Linter } from 'eslint';
 import jsonc from 'eslint-plugin-jsonc';
 import jsoncParser from 'jsonc-eslint-parser';
 import defineConfig, { type Config } from './define-config.js';
@@ -34,7 +33,7 @@ const JSONC_CONFIG: Config = defineConfig({
   name: '@quisido/jsonc',
   plugins: {
     ...JSON.plugins,
-    jsonc: jsonc as ESLint.Plugin,
+    jsonc,
   },
   rules: {
     'jsonc/no-bigint-literals': 'error',
@@ -63,9 +62,7 @@ const JSONC_CONFIG: Config = defineConfig({
     'no-unused-expressions': 'off',
     'no-unused-vars': 'off',
     strict: 'off',
-    ...mapFlatConfigToRulesRecord(
-      jsonc.configs['flat/prettier'] as readonly Linter.Config[],
-    ),
+    ...mapFlatConfigToRulesRecord(jsonc.configs['flat/prettier']),
   },
 });
 
