@@ -30,6 +30,7 @@ const PROPS: Required<
     | 'source'
     | 'sdkVersion'
     | 'subdomain'
+    | 'trackResourceHeaders'
     | 'trackingConsent'
     | 'useCrossSiteSessionCookie'
     | 'user'
@@ -38,10 +39,8 @@ const PROPS: Required<
   >
 > = {
   allowedGraphQlUrls: [],
-  allowFallbackToLocalStorage: true,
   allowUntrustedEvents: true,
   applicationId: APPLICATION_ID,
-  betaTrackActionsInShadowDom: true,
   clientToken: CLIENT_TOKEN,
   compressIntakeRequests: true,
   defaultPrivacyLevel: 'mask-user-input',
@@ -84,8 +83,6 @@ const PROPS: Required<
   traceContextInjection: 'all',
   traceSampleRate: 100,
   trackAnonymousUser: true,
-  trackBfcacheViews: true,
-  trackEarlyRequests: true,
   trackFeatureFlagsForEvents: ['action', 'long_task', 'resource', 'vital'],
   trackLongTasks: true,
   trackResources: true,
