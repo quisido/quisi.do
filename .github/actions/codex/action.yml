@@ -9,6 +9,9 @@ inputs:
   prompt:
     description: additional prompt context
     required: true
+  token:
+    description: GitHub token for Codex to use
+    required: true
 
 runs:
   using: composite
@@ -20,18 +23,15 @@ runs:
         environment: development
         upload: false
 
-    - name: Enable Bubblewrap
-      shell: bash
-      run: >-
-        sudo apt-get install --yes bubblewrap;
-        sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0;
-
+    # Configure Bubblewrap, `auth.json`, and `config.toml`.
     - name: Configure Codex
       shell: bash
       env:
         CODEX_AUTH_JSON: ${{ inputs.auth-json }}
         CODEX_HOME: ${{ runner.temp }}/.codex
       run: >-
+        sudo apt-get install --yes bubblewrap;
+        sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0;
         mkdir --parents "$CODEX_HOME";
         printf '%s' "$CODEX_AUTH_JSON" |
         base64 --decode > "$CODEX_HOME/auth.json";
@@ -43,6 +43,7 @@ runs:
       shell: bash
       env:
         CODEX_HOME: ${{ runner.temp }}/.codex
+        GITHUB_TOKEN: ${{ inputs.token }}
         PROMPT: |-
           # Instructions for Codex GitHub Action
 

@@ -27,11 +27,7 @@ jobs:
           check-latest: true
           node-version: lts/*
 
-      - name: Install bubblewrap
-        continue-on-error: true
-        run: sudo apt-get install --yes bubblewrap
-
-      - name: Install Codex
+      - name: Install
         run: npm install --global @openai/codex
 
       - name: Restore
