@@ -47,10 +47,10 @@ jobs:
           private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
 
       - name: Configure git
-        run: |
+        run: >-
           git config --global user.name "quisi-do-codex[bot]";
           git config --global
-            user.email "quisi-do-codex[bot]@users.noreply.github.com";
+          user.email "quisi-do-codex[bot]@users.noreply.github.com";
 
       - name: Checkout
         uses: actions/checkout@v6
@@ -117,10 +117,10 @@ jobs:
           private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
 
       - name: Configure git
-        run: |
+        run: >-
           git config --global user.name "quisi-do-codex[bot]";
           git config --global
-            user.email "quisi-do-codex[bot]@users.noreply.github.com";
+          user.email "quisi-do-codex[bot]@users.noreply.github.com";
 
       - name: Checkout
         uses: actions/checkout@v6
@@ -219,7 +219,7 @@ jobs:
         run: >-
           git config --global user.name "quisi-do-codex[bot]";
           git config --global
-            user.email "quisi-do-codex[bot]@users.noreply.github.com";
+          user.email "quisi-do-codex[bot]@users.noreply.github.com";
 
       - name: Checkout
         uses: actions/checkout@v6
