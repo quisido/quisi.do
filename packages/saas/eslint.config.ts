@@ -3,6 +3,8 @@ import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
+type ESLintPlugin = NonNullable<ESLintConfig['plugins']>[string];
+
 const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
   // Design systems
   {
@@ -28,12 +30,12 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
   {
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
-      'react-compiler': reactCompiler,
+      'react-compiler': reactCompiler as ESLintPlugin,
       'react-hooks': {
         ...reactHooks,
         configs: {},
-      },
-      'react-refresh': reactRefresh,
+      } as ESLintPlugin,
+      'react-refresh': reactRefresh as ESLintPlugin,
     },
     rules: {
       'react-compiler/react-compiler': 'error',
