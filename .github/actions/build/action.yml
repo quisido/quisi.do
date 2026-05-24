@@ -20,14 +20,14 @@ runs:
   using: composite
   steps:
     - name: Setup
-      continue-on-error: ${{ inputs.continue-on-error == 'true' }}
+      continue-on-error: ${{ inputs.continue-on-error != 'false' }}
       uses: ./.github/actions/setup
       with:
-        continue-on-error: ${{ inputs.continue-on-error == 'true' }}
+        continue-on-error: ${{ inputs.continue-on-error != 'false' }}
         download-build: false
 
     - name: Build
-      continue-on-error: ${{ inputs.continue-on-error == 'true' }}
+      continue-on-error: ${{ inputs.continue-on-error != 'false' }}
       id: build
       run: npm run build
       shell: bash
