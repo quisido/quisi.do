@@ -54,10 +54,12 @@ const DOM: Required<Omit<Compulsory<LogRocketOptions['dom']>, 'baseHref'>> = {
   disableVisibleElement: false,
   disableWebAnimations: false,
   hiddenAttributes: [],
+  imageSanitizer: false,
   inputSanitizer: false,
   isEnabled: true,
   privateAttributeBlocklist: [],
   privateClassNameBlocklist: [],
+  shouldLogDroppedStyleDiagnostics: false,
   textSanitizer: false,
 };
 
@@ -82,6 +84,7 @@ const OPTIONS: Required<
   forceCleanStart: false,
   mergeIframes: true,
   parentDomain: null,
+  persistUserIdInfo: false,
   shouldAugmentNPS: true,
   shouldCaptureIP: true,
   shouldDebugLog: false,
