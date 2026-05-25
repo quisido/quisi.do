@@ -42,12 +42,30 @@ runs:
       shell: bash
       run: npm install --include dev
 
+    - name: Get Playwright version
+      id: playwright-version
+      run: echo "value=$(npx playwright --version)" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Cache browsers
+      id: cache-playwright
+      if: inputs.install-browsers != 'false'
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: >-
+          playwright-
+          ${{ runner.os }}-
+          ${{ steps.playwright-version.outputs.value }}
+
     - name: Install browsers
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
-      if: ${{ inputs.install-browsers != 'false' }}
       shell: bash
       env:
         DEBIAN_FRONTEND: noninteractive
+      if: >-
+        inputs.install-browsers != 'false' ||
+        steps.playwright-cache.outputs.cache-hit != 'true'
       run: >-
         npx playwright install
         --only-shell
