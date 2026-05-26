@@ -40,7 +40,11 @@ runs:
         cp .github/actions/codex/config.toml "$CODEX_HOME/config.toml";
 
     - name: Execute
-      run: npx codex exec --color always --ephemeral "$PROMPT"
+      run: >-
+        npx codex exec
+        --add-dir "$(npm config get prefix)"
+        --color always
+        --ephemeral "$PROMPT"
       shell: bash
       env:
         CODEX_HOME: ${{ runner.temp }}/.codex
