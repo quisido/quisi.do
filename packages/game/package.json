@@ -73,7 +73,7 @@
     "@types/react-reconciler": "^0.32.3",
     "@types/trusted-types": "^2.0.7",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
-    "@vitest/ui": "^4.0.7",
+    "@vitest/ui": "^4.1.7",
     "concurrently": "^9.2.1",
     "dompurify": "^3.4.2",
     "hint": "^7.1.13",
