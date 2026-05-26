@@ -3,6 +3,7 @@ import {
   type ConfigEnv,
   defineConfig,
   type ESBuildOptions,
+  type PluginOption,
   type UserConfig,
   type UserConfigFnObject,
 } from 'vite';
@@ -65,7 +66,7 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
     >,
   },
   plugins: [
-    vitePWA({
+    ...(vitePWA({
       includeAssets: [
         'apple-touch-icon.png',
         'favicon.svg',
@@ -82,7 +83,7 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
         globPatterns: ['**/*.{css,html,js,png,svg,webmanifest}'],
         sourcemap: true,
       },
-    }),
+    }) as unknown as readonly PluginOption[]),
   ],
 };
 
