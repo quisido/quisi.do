@@ -68,7 +68,7 @@
   },
   "overrides": {
     "eslint-plugin-react-hooks": {
-      "zod-validation-error": "^4.0.0"
+      "zod-validation-error": "^4.0.2"
     }
   },
   "peerDependencies": {
