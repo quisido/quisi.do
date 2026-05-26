@@ -10,6 +10,8 @@ import fileGlobsByExtension from './file-globs-by-extension.js';
 
 export { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
 
+const SORT_KEYS_CUSTOM_ORDER_PLUGIN = sortKeysCustomOrder as ESLint.Plugin;
+
 const TS_CONFIG: Config = defineConfig({
   ...JS,
   files: fileGlobsByExtension('ts', 'tsx'),
@@ -20,7 +22,7 @@ const TS_CONFIG: Config = defineConfig({
   plugins: {
     ...JS.plugins,
     '@typescript-eslint': tsPlugin as unknown as ESLint.Plugin,
-    'sort-keys-custom-order': sortKeysCustomOrder as unknown as ESLint.Plugin,
+    'sort-keys-custom-order': SORT_KEYS_CUSTOM_ORDER_PLUGIN,
   },
 
   rules: {

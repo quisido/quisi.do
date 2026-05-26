@@ -5,6 +5,8 @@ import defineConfig, { type Config } from './define-config.js';
 import { LINTER_OPTIONS } from './linter-options.js';
 import fileGlobsByExtension from './file-globs-by-extension.js';
 
+const JSON_PLUGIN = jsonPlugin as ESLint.Plugin;
+
 /**
  * We don't use Prettier here, because Prettier does not support empty lines
  * in JSON files.
@@ -46,7 +48,7 @@ const JSON_CONFIG: Config = defineConfig({
 
   plugins: {
     ...jsonPlugin.configs.recommended.plugins,
-    json: jsonPlugin as unknown as ESLint.Plugin,
+    json: JSON_PLUGIN,
     jsonc,
   },
 
