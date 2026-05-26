@@ -1,5 +1,5 @@
 import jsonc from 'eslint-plugin-jsonc';
-import jsoncParser from 'jsonc-eslint-parser';
+import { meta, parseForESLint } from 'jsonc-eslint-parser';
 import defineConfig, { type Config } from './define-config.js';
 import JSON from './json.js';
 import mapFlatConfigToRulesRecord from './map-flat-config-to-rules-record.js';
@@ -28,7 +28,7 @@ const JSONC_CONFIG: Config = defineConfig({
   language: 'json/jsonc',
   languageOptions: {
     allowTrailingCommas: true,
-    parser: jsoncParser,
+    parser: { meta, parseForESLint },
   },
   name: '@quisido/jsonc',
   plugins: {
