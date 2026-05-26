@@ -21,6 +21,7 @@ runs:
       with:
         continue-on-error: true
         environment: development
+        install-browsers: true
         upload: false
 
     # Configure Bubblewrap, `auth.json`, and `config.toml`.
