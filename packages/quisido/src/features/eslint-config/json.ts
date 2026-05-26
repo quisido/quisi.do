@@ -47,7 +47,7 @@ const JSON_CONFIG: Config = defineConfig({
   plugins: {
     ...jsonPlugin.configs.recommended.plugins,
     json: jsonPlugin as unknown as ESLint.Plugin,
-    jsonc: jsonc as ESLint.Plugin,
+    jsonc,
   },
 
   rules: {

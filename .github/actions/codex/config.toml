@@ -42,6 +42,7 @@ enabled = true
 
 [sandbox_workspace_write]
 network_access = true
+writable_roots = ["/home/runner/.cache", "/home/runner/.npm", "/tmp"]
 
 [shell_environment_policy]
 inherit = "core"

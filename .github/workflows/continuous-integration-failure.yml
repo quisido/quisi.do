@@ -58,7 +58,7 @@ jobs:
               return;
             }
 
-            const toListMarkdown = ({ html_url: url, name }) =>
+            const toMarkdown = ({ html_url: url, name }) =>
               `- [${name}](${url})`;
 
             const { serverUrl } = context;
@@ -68,16 +68,9 @@ jobs:
               issue_number: prNumber,
               owner,
               repo,
-              body: [
-                `Continuous integration run ["${runName}"](${runUrl}) failed ` +
-                `for [pull request #${prNumber}](${prUrl}).`,
-
-                'Please analyze the failures and submit a pull request that ' +
-                'contains the smallest possible fix.',
-
-                '**Failed jobs:**\n' +
-                `${failedJobs.map(toListMarkdown).join('\n')}`,
-
-                '**Acceptance criteria:** `npm test` must pass.',
-              ].join('\n\n'),
+              body:
+                '## Failed jobs\n\n' +
+                `### [Pull request #${prNumber}](${prUrl})\n\n` +
+                `#### [${runName}](${runUrl})\n\n` +
+                `${failedJobs.map(toMarkdown).join('\n')}`,
             });

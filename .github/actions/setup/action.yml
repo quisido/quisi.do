@@ -25,7 +25,7 @@ runs:
         cache: npm
         cache-dependency-path: package-lock.json
         check-latest: true
-        # Playwright fails to install on Node 26, so fallback to LTS (v24).
+        # Playwright fails to install on Node >=24.15.0.
         # https://github.com/microsoft/playwright/pull/40747
         node-version-file: .nvmrc
         node-version: >-
@@ -39,15 +39,34 @@ runs:
 
     - name: Install dependencies
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
-      shell: bash
       run: npm install --include dev
+      shell: bash
+
+    - name: Get Playwright version
+      id: playwright-version
+      if: inputs.install-browsers != 'false'
+      run: echo "value=$(npx playwright --version)" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Cache browsers
+      id: cache-playwright
+      if: inputs.install-browsers != 'false'
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: >-
+          playwright-
+          ${{ runner.os }}-
+          ${{ steps.playwright-version.outputs.value }}
 
     - name: Install browsers
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
-      if: ${{ inputs.install-browsers != 'false' }}
       shell: bash
       env:
         DEBIAN_FRONTEND: noninteractive
+      if: >-
+        inputs.install-browsers != 'false' &&
+        steps.playwright-cache.outputs.cache-hit != 'true'
       run: >-
         npx playwright install
         --only-shell

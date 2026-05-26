@@ -1,5 +1,5 @@
 import tsPlugin from '@typescript-eslint/eslint-plugin';
-import { type ESLint, type Linter } from 'eslint';
+import { type ESLint } from 'eslint';
 import sortKeysCustomOrder from 'eslint-plugin-sort-keys-custom-order';
 import ts from 'typescript-eslint';
 import defineConfig, { type Config } from './define-config.js';
@@ -27,9 +27,9 @@ const TS_CONFIG: Config = defineConfig({
     ...JS.rules,
     ...ts.configs.base.rules,
     ...ts.configs.eslintRecommended.rules,
-    ...mapConfigsToRules(ts.configs.stylisticTypeChecked as Linter.Config[]),
-    ...mapConfigsToRules(ts.configs.recommendedTypeChecked as Linter.Config[]),
-    ...mapConfigsToRules(ts.configs.strictTypeChecked as Linter.Config[]),
+    ...mapConfigsToRules(ts.configs.stylisticTypeChecked),
+    ...mapConfigsToRules(ts.configs.recommendedTypeChecked),
+    ...mapConfigsToRules(ts.configs.strictTypeChecked),
 
     '@typescript-eslint/consistent-type-imports': [
       'error',
