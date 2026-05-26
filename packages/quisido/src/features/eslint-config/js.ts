@@ -9,7 +9,8 @@ import { LANGUAGE_OPTIONS } from './language-options.js';
 import { LINTER_OPTIONS } from './linter-options.js';
 import fileGlobsByExtension from './file-globs-by-extension.js';
 
-const SORT_KEYS_CUSTOM_ORDER_PLUGIN = sortKeysCustomOrder as ESLint.Plugin;
+const SORT_KEYS_CUSTOM_ORDER_PLUGIN =
+  sortKeysCustomOrder as unknown as ESLint.Plugin;
 
 const JS_CONFIG: Config = defineConfig({
   extends: [],

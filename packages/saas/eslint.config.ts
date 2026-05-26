@@ -35,7 +35,7 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
         ...reactHooks,
         configs: {},
       } as ESLintPlugin,
-      'react-refresh': reactRefresh as ESLintPlugin,
+      'react-refresh': reactRefresh,
     },
     rules: {
       'react-compiler/react-compiler': 'error',
