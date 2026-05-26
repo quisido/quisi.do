@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "npx --no-install jiti \"$(git rev-parse --show-toplevel)/.codex/hooks/format-files.ts\"",
+            "statusMessage": "Formatting edited files",
+            "timeout": 120,
+            "type": "command"
+          }
+        ],
+        "matcher": "apply_patch|Edit|Write"
+      }
+    ]
+  }
+}
