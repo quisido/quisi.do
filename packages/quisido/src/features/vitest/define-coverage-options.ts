@@ -6,11 +6,17 @@ import { join } from 'node:path';
 
 export { type CoverageOptions } from 'vitest/node';
 
+export interface IstanbulCoverageOptions extends CoverageOptions {
+  readonly provider: 'istanbul';
+}
+
+export type QuisidoCoverageOptions = Omit<IstanbulCoverageOptions, 'provider'>;
+
 export default function defineCoverageOptions({
   exclude = [],
   thresholds = {},
   ...coverageOptions
-}: Omit<CoverageOptions<'istanbul'>, 'provider'>): CoverageOptions<'istanbul'> {
+}: QuisidoCoverageOptions): IstanbulCoverageOptions {
   return {
     clean: true,
     enabled: true,

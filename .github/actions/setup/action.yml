@@ -68,7 +68,5 @@ runs:
         inputs.install-browsers != 'false' &&
         steps.playwright-cache.outputs.cache-hit != 'true'
       run: >-
-        npx playwright install
-        --only-shell
-        --with-deps
+        npx playwright install --only-shell --with-deps
         chromium-headless-shell firefox webkit;

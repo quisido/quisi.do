@@ -1,8 +1,8 @@
-import type { BaseCoverageOptions } from 'vitest/node';
+import type { CoverageOptions } from 'vitest/node';
 
 // eslint-disable-next-line no-magic-numbers
 type MaxThreshold = 100;
-type Thresholds = Required<BaseCoverageOptions>['thresholds'];
+type Thresholds = Required<CoverageOptions>['thresholds'];
 
 type GlobThresholds = Partial<
   Record<

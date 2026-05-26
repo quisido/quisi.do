@@ -11,6 +11,10 @@ inputs:
     default: development
     description: The environment being built (e.g. production, staging)
     required: true
+  install-browsers:
+    default: 'false'
+    description: Whether to install browsers
+    required: false
   upload:
     default: 'true'
     description: Upload the build artifacts?
@@ -25,6 +29,7 @@ runs:
       with:
         continue-on-error: ${{ inputs.continue-on-error != 'false' }}
         download-build: false
+        install-browsers: ${{ inputs.install-browsers }}
 
     - name: Build
       continue-on-error: ${{ inputs.continue-on-error != 'false' }}

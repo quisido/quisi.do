@@ -1,5 +1,6 @@
 // import type { WorkersUserConfig } from '@cloudflare/vitest-pool-workers/config';
-import type { CoverageOptions, InlineConfig } from 'vitest/node';
+import type { QuisidoCoverageOptions } from './define-coverage-options.js';
+import type { InlineConfig } from 'vitest/node';
 
 // type CloudflareWorkersVitestInlineConfig = Exclude<
 //   WorkersUserConfig<UserConfig>['test'],
@@ -9,5 +10,5 @@ import type { CoverageOptions, InlineConfig } from 'vitest/node';
 export default interface QuisidoVitestInlineConfig
   // Omit<CloudflareWorkersVitestInlineConfig, 'coverage'>,
   extends Omit<InlineConfig, 'coverage' | 'pool'> {
-  readonly coverage?: Omit<CoverageOptions<'istanbul'>, 'provider'> | undefined;
+  readonly coverage?: QuisidoCoverageOptions | undefined;
 }
