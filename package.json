@@ -82,7 +82,7 @@
     "@hint/parser-typescript-config": "^2.4.31",
     "@hint/parser-webpack-config": "^2.1.42",
     "@hint/utils-types": "^1.2.1",
-    "@openai/codex": "^0.133.0",
+    "@openai/codex": "^0.134.0",
     "@playwright/mcp": "^0.0.75",
     "@types/eslint": "^9.6.1",
     "@types/node": "^25.9.1",
@@ -97,7 +97,7 @@
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.0",
-    "zod-validation-error": "^4.0.2"
+    "zod-validation-error": "^5.0.0"
   },
   "overrides": {
     "@hint/connector-puppeteer": {
