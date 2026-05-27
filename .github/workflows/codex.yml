@@ -229,13 +229,25 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Sanitize
-        id: body
+        id: sanitized
         env:
-          BODY: ${{ github.event.comment.body }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_DIFF_HUNK: ${{ github.event.comment.diff_hunk }}
+          COMMENT_LINE: ${{ github.event.comment.line }}
+          COMMENT_START_LINE: ${{ github.event.comment.start_line }}
         run: >-
           node --eval '
-          const { BODY = "" } = process.env;
-          process.stdout.write(`stringified=${JSON.stringify(BODY)}\n`);
+          const {
+          COMMENT_BODY = "", COMMENT_DIFF_HUNK = "", COMMENT_LINE = "",
+          COMMENT_START_LINE = "",
+          } = process.env;
+          const getLines = () =>
+          COMMENT_START_LINE === "" ? COMMENT_LINE :
+          `${COMMENT_START_LINE}-${COMMENT_LINE}`;
+          const lines = getLines();
+          process.stdout.write(`body=${JSON.stringify(COMMENT_BODY)}\n`);
+          process.stdout.write(`diff_hunk=${JSON.stringify(COMMENT_DIFF_HUNK)}\n`);
+          process.stdout.write(`lines=${lines}\n`);
           ' > "$GITHUB_OUTPUT";
 
       - name: Execute
@@ -251,7 +263,9 @@ jobs:
             ### Issue
 
             **Title:** ${{ github.event.issue.title }}
-            **Comment (stringified):** ${{ steps.body.outputs.stringified }}
+            **Path:** `${{ github.event.comment.path }}:${{ steps.sanitized.outputs.lines }}`
+            **Diff (stringified):** ${{ steps.sanitized.outputs.diff_hunk }}
+            **Comment (stringified):** ${{ steps.sanitized.outputs.body }}
 
             Focus your actions and analysis to the scope of this pull request.
 
@@ -260,6 +274,8 @@ jobs:
             1. Create a plan for how you will resolve this issue.
             2. Reply to the user with a comment stating your plan.
             3. Execute your plan and resolve the issue.
-            4. Commit and push your changes to the pull request branch.
-            5. Edit the previous comment you made to confirm that your changes
+            4. Verify that `npm run build` and `npm test` both pass. If not,
+               resolve any errors.
+            5. Commit and push your changes to the pull request branch.
+            6. Edit the previous comment you made to confirm that your changes
                have been pushed.
