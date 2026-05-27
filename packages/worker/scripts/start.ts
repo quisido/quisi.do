@@ -1,6 +1,7 @@
 import { isRecord, mapToString } from 'fmrs';
 import assert from 'node:assert';
 import { type ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
+import nodeConsole from 'node:console';
 import { readFile } from 'node:fs/promises';
 
 const ERROR_EXIT_CODE = 1;
@@ -40,12 +41,12 @@ for (const [name, version] of Object.entries(dependencies)) {
 
 const handleErr = (chunk: unknown): void => {
   const chunkStr: string = mapToString(chunk);
-  globalThis.console.error(chunkStr);
+  nodeConsole.error(chunkStr);
 };
 
 const handleOut = (chunk: unknown): void => {
   const chunkStr: string = mapToString(chunk);
-  globalThis.console.log(chunkStr);
+  nodeConsole.log(chunkStr);
 };
 
 const mapCodeToString = (code: null | number): string => {
