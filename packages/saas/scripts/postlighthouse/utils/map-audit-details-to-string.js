@@ -2,42 +2,52 @@ import AuditDetailsTable from './audit-details-table.js';
 import mapAuditDetailsDebugDataToString from './map-audit-details-debug-data-to-string.js';
 import mapNodeToString from './map-node-to-string.js';
 
-function mapAuditDetailsListSectionToString({ description, title, value }) {
-  return [title, description, mapAuditDetailsToString(value)]
+const mapAuditDetailsListSectionToString = (
+  { description, title, value },
+  stringifyAuditDetails,
+) => {
+  return [title, description, stringifyAuditDetails(value)]
     .filter(string => string !== undefined)
     .join('\n');
-}
+};
 
-function mapAuditDetailsListItemToString({ type, ...details }) {
+const mapAuditDetailsListItemToString = (
+  { type, ...details },
+  stringifyAuditDetails,
+) => {
   switch (type) {
     case 'list-section':
-      return mapAuditDetailsListSectionToString(details);
+      return mapAuditDetailsListSectionToString(details, stringifyAuditDetails);
     case 'node':
       return mapNodeToString(details);
     case 'text':
       return details.value;
     default:
-      return mapAuditDetailsToString({
+      return stringifyAuditDetails({
         ...details,
         type,
       });
   }
-}
+};
 
-function mapAuditDetailsListToString({ items }) {
-  return items.map(mapAuditDetailsListItemToString).join('\n');
-}
+const mapAuditDetailsListToString = ({ items }, stringifyAuditDetails) => {
+  return items
+    .map(item => mapAuditDetailsListItemToString(item, stringifyAuditDetails))
+    .join('\n');
+};
 
-export default function mapAuditDetailsToString({ type, ...details }) {
+const mapAuditDetailsToString = ({ type, ...details }) => {
   switch (type) {
     case 'debugdata':
       return mapAuditDetailsDebugDataToString(details);
     case 'list':
-      return mapAuditDetailsListToString(details);
+      return mapAuditDetailsListToString(details, mapAuditDetailsToString);
     case 'table':
       return new AuditDetailsTable(details).toString();
     default:
       throw new Error(`Unexpected audit detail type: ${type}
 ${JSON.stringify(details)}`);
   }
-}
+};
+
+export default mapAuditDetailsToString;
