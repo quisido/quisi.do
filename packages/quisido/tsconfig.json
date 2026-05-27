@@ -6,6 +6,7 @@
        * file here, despite advertising ./dist/index.d.ts in package.json.
        */
       "eslint-plugin-sort-keys-custom-order": [
+        "../../node_modules/eslint-plugin-sort-keys-custom-order/dist/src/index.d.ts",
         "./node_modules/eslint-plugin-sort-keys-custom-order/dist/src/index.d.ts"
       ]
     },

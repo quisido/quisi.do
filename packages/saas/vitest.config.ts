@@ -20,6 +20,7 @@ const CONFIG: VitestConfig = await defineVitestConfig({
     },
     env: {
       CLARITY_TAG: 'test-clarity-tag',
+      VITE_TESTED_DESIGN_SYSTEM: 'template',
     },
     setupFiles: [
       './test/cleanup-react-testing-library.ts',
