@@ -47,8 +47,6 @@ export { type RegionProps } from './region-props.js';
 export { type ScrollbarProps } from './scrollbar-props.js';
 export { type SearchBoxProps } from './search-box-props.js';
 export { type SearchProps } from './search-props.js';
-export { type SectionFooterProps } from './section-footer-props.js';
-export { type SectionHeaderProps } from './section-header-props.js';
 export { type SeparatorProps } from './separator-props.js';
 export { type SeparatorWidgetProps } from './separator-widget-props.js';
 export { type SliderProps } from './slider-props.js';

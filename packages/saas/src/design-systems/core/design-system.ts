@@ -32,8 +32,6 @@ import type { RegionProps } from './region-props.js';
 import type { ScrollbarProps } from './scrollbar-props.js';
 import type { SearchBoxProps } from './search-box-props.js';
 import type { SearchProps } from './search-props.js';
-import type { SectionFooterProps } from './section-footer-props.js';
-import type { SectionHeaderProps } from './section-header-props.js';
 import type { SeparatorWidgetProps } from './separator-widget-props.js';
 import type { SliderProps } from './slider-props.js';
 import type { SpinButtonProps } from './spin-button-props.js';
@@ -110,8 +108,6 @@ export default interface DesignSystem {
   readonly Scrollbar: ComponentType<ScrollbarProps>;
   readonly Search: ComponentType<SearchProps>;
   readonly SearchBox: ComponentType<SearchBoxProps>;
-  readonly SectionFooter: ComponentType<SectionFooterProps>;
-  readonly SectionHeader: ComponentType<SectionHeaderProps>;
   readonly Separator: ComponentType<SeparatorProps>;
   readonly SeparatorWidget: ComponentType<SeparatorWidgetProps>;
   readonly Slider: ComponentType<SliderProps>;

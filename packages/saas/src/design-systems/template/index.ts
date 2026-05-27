@@ -42,8 +42,6 @@ export {
   type ScrollbarProps,
   type SearchBoxProps,
   type SearchProps,
-  type SectionFooterProps,
-  type SectionHeaderProps,
   type SeparatorProps,
   type SeparatorWidgetProps,
   type SliderProps,
@@ -120,8 +118,6 @@ export { default as RadioGroup } from './radio-group.js';
 export { default as Scrollbar } from './scrollbar.js';
 export { default as Search } from './search.js';
 export { default as SearchBox } from './search-box.js';
-export { default as SectionFooter } from './section-footer.js';
-export { default as SectionHeader } from './section-header.js';
 export { default as Slider } from './slider.js';
 export { default as SpinButton } from './spin-button.js';
 export { default as Status } from './status.js';

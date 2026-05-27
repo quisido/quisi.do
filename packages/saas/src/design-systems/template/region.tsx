@@ -3,7 +3,6 @@ import Heading from './heading.js';
 import type { RegionProps } from '../core/region-props.js';
 import useRegion from '../core/use-region.js';
 import classes from './region.module.scss';
-import SectionHeader from './section-header.js';
 
 /**
  * A region landmark contains content that is relevant to a specific purpose
@@ -26,9 +25,9 @@ export default function Region({
       className={classes['region']}
       role="region"
     >
-      <SectionHeader>
+      <header>
         <Heading id={headingId}>{heading}</Heading>
-      </SectionHeader>
+      </header>
       <div>{children}</div>
     </section>
   );
