@@ -142,7 +142,7 @@
     "babel-plugin-replace-import-extension": "^1.1.5",
     "cjs-ts": "^2.0.1",
     "concurrently": "^9.2.1",
-    "console-table-printer": "^2.15.0",
+    "console-table-printer": "^2.15.2",
     "dd-trace": "^5.104.0",
     "dotenv": "^17.4.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
