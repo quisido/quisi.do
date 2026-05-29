@@ -68,6 +68,7 @@ const PROPS: Required<
   plugins: [],
   profilingSampleRate: 100,
   propagateTraceBaggage: false,
+  remoteConfiguration: undefined,
   service: 'quisi.do',
   sessionPersistence: 'local-storage',
   sessionReplayRecording: true,
