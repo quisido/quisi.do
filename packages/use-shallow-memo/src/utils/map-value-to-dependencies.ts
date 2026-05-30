@@ -1,5 +1,4 @@
 import { sortEntriesByKey } from 'fmrs';
-import reduceEntriesToDependencies from './reduce-entries-to-dependencies.js';
 
 export default function mapValueToDependencies(
   value: boolean | null | number | object | string | undefined,
@@ -14,5 +13,8 @@ export default function mapValueToDependencies(
 
   return Object.entries(value)
     .sort(sortEntriesByKey)
-    .reduce(reduceEntriesToDependencies, []);
+    .flatMap(([key, value]: readonly [string, unknown]): readonly unknown[] => [
+      key,
+      value,
+    ]);
 }
