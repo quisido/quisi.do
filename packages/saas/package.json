@@ -64,7 +64,6 @@
     "@react-aria/overlays": "^3.32.1",
     "@sentry/browser": "^10.55.0",
     "@sentry/core": "^10.23.0",
-    "@sentry/profiling-node": "^10.55.0",
     "@sentry/react": "^10.55.0",
     "@sentry/tracing": "^7.120.4",
     "@types/google.visualization": "^0.0.74",
@@ -136,7 +135,6 @@
     "@vitest/ui": "^4.1.7",
     "aria-query": "^5.3.2",
     "autoprefixer": "^10.5.0",
-    "babel-loader": "^10.0.0",
     "babel-plugin-istanbul": "^8.0.0",
     "babel-plugin-react-compiler": "^1.0.0",
     "babel-plugin-replace-import-extension": "^1.1.5",
@@ -167,8 +165,7 @@
     "stylelint-config-standard-scss": "^17.0.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.0",
-    "wait-on": "^9.0.10",
-    "webpack": "^5.107.1"
+    "wait-on": "^9.0.10"
   },
   "overrides": {
     "@hint/connector-puppeteer": {
