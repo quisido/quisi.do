@@ -64,7 +64,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "@arethetypeswrong/cli": "^0.18.2",
+    "@arethetypeswrong/cli": "^0.18.3",
     "@eslint/config-helpers": "^0.6.0",
     "@eslint/json": "^2.0.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
