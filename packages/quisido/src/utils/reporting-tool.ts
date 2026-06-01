@@ -5,7 +5,7 @@ import {
   type SuccessReport,
 } from '../types/report.js';
 import getKey from './get-key.js';
-import mapToString from './map-to-string.js';
+import toString from './to-string.js';
 
 export type ReportingToolResult =
   | Omit<FailureReport, 'tool'>
@@ -91,7 +91,7 @@ export default class ReportingTool<
       this.logInfo('❌');
       return {
         context: `An unexpected error occurred while executing the "${this.#toolName}" tool. This likely indicates an issue with the tool itself or the environment in which the tool is being executed, rather than with the package being analyzed.`,
-        message: mapToString(err),
+        message: toString(err),
         status: 'failure',
         tool: this.#toolName,
       };

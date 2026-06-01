@@ -1,4 +1,4 @@
-import mapToString from './map-to-string.js';
+import toString from './to-string.js';
 import sortNumbers from './sort-numbers.js';
 
 /**
@@ -12,7 +12,7 @@ export default function sort(first: unknown, second: unknown): number {
     return sortNumbers(first, second);
   }
 
-  const firstStr: string = mapToString(first);
-  const secondStr: string = mapToString(second);
+  const firstStr: string = toString(first);
+  const secondStr: string = toString(second);
   return firstStr.localeCompare(secondStr);
 }

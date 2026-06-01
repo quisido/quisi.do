@@ -57,7 +57,7 @@
     "cloudflare-utils": "^1.0.4",
     "cookie": "^1.0.2",
     "eventemitter3": "^5.0.1",
-    "fmrs": "^2.1.1"
+    "fmrs": "^3.0.0"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.58.7",

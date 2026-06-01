@@ -1,5 +1,5 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import { mapToString } from 'fmrs';
+import { toString } from 'fmrs';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import FatalError from '../utils/fatal-error.js';
@@ -39,7 +39,7 @@ export default function handlePatreonTokenErrorResponseCode(
     default: {
       this.emitPublicMetric(MetricName.UnknownPatreonTokenErrorResponseCode);
       this.emitPrivateMetric(MetricName.UnknownPatreonTokenErrorResponseCode, {
-        code: mapToString(errorCode),
+        code: toString(errorCode),
         value: JSON.stringify({
           ...json,
           error: undefined,

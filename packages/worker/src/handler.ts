@@ -8,7 +8,7 @@ import {
   Pricing,
 } from 'cloudflare-utils';
 import { EventEmitter } from 'eventemitter3';
-import { isRecord, mapToError } from 'fmrs';
+import { isRecord, toError } from 'fmrs';
 import createTtl from './create-ttl.js';
 import mapKVNamespaceValueToBytes from './map-kv-namespace-value-to-bytes.js';
 import mapMetricDimensionsToDataPoint from './map-metric-dimensions-to-datapoint.js';
@@ -339,7 +339,7 @@ export default class Handler<
         sizeAfter,
       };
     } catch (err: unknown) {
-      const error: Error = mapToError(err);
+      const error: Error = toError(err);
       this.logError(error);
 
       this.emitMetric(MetricName.D1PreparedStatementRunError, {
@@ -407,7 +407,7 @@ export default class Handler<
         sizeAfter,
       };
     } catch (err: unknown) {
-      const error: Error = mapToError(err);
+      const error: Error = toError(err);
       this.logError(error);
 
       this.emitMetric(MetricName.D1PreparedStatementAllError, {
@@ -445,7 +445,7 @@ export default class Handler<
 
       return value;
     } catch (err: unknown) {
-      const error: Error = mapToError(err);
+      const error: Error = toError(err);
       this.logError(error);
       this.emitMetric(MetricName.KVNamespaceGetError, {
         endTime: this.now(),
@@ -479,7 +479,7 @@ export default class Handler<
     callback: (...args: EventTypes[K]) => Promise<void> | void,
   ): void {
     const handleError = (err: unknown): void => {
-      const error: Error = mapToError(err);
+      const error: Error = toError(err);
 
       // If errors cannot be emit, use the console.
       if (event === 'error') {
@@ -569,7 +569,7 @@ export default class Handler<
         ttl: ttlSeconds,
       });
     } catch (err: unknown) {
-      const error: Error = mapToError(err);
+      const error: Error = toError(err);
       this.logError(error);
       this.emitMetric(MetricName.KVNamespacePutError, {
         endTime: this.now(),
@@ -599,7 +599,7 @@ export default class Handler<
         startTime,
       });
     } catch (err: unknown) {
-      const error: Error = mapToError(err);
+      const error: Error = toError(err);
       this.logError(error);
       this.emitMetric(MetricName.R2BucketPutError, {
         endTime: this.now(),

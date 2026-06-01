@@ -1,7 +1,7 @@
 ---
 applyTo: "**/*.tsx"
 ---
-# Project coding standards for React
+# React guidelines
 
 - Apply the [general coding guidelines](./general-coding.instructions.md) to all
   code.

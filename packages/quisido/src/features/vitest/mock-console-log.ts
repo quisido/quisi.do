@@ -1,5 +1,5 @@
 import { type MockInstance, vi } from 'vitest';
-import mapToString from '../../utils/map-to-string.js';
+import toString from '../../utils/to-string.js';
 
 type Procedure<
   A extends readonly unknown[] = readonly unknown[],
@@ -10,7 +10,7 @@ const createThrowyFunction = <A extends readonly unknown[]>(
   name: string,
 ): Procedure<A, never> => {
   return (...messages: A): never => {
-    const message: string = messages.map(mapToString).join(' ');
+    const message: string = messages.map(toString).join(' ');
     throw new Error(message, { cause: name });
   };
 };

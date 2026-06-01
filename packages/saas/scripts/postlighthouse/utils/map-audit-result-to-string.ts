@@ -1,6 +1,12 @@
+import type { AuditResult } from './adult-result.js';
 import mapAuditDetailsToString from './map-audit-details-to-string.js';
 
-export default function mapAuditToString({ description, details, id, title }) {
+export default function mapAuditResultToString({
+  description,
+  details,
+  id,
+  title,
+}: AuditResult): string {
   const strings = [`${id}:`, title, description];
 
   if (details !== undefined) {

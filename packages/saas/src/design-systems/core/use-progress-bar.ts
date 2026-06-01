@@ -1,7 +1,7 @@
 import { useLayoutEffect } from 'react';
 import useId from './use-id.js';
 import appendDescribedBy from './append-described-by.js';
-import { mapToString } from 'fmrs';
+import { toString } from 'fmrs';
 
 interface Props {
   readonly busy: boolean;
@@ -40,7 +40,7 @@ export default function useProgressBar({
       );
     }
 
-    described.setAttribute('aria-busy', mapToString(busy));
+    described.setAttribute('aria-busy', toString(busy));
     const removeDescribedBy: VoidFunction = appendDescribedBy(described, id);
     return (): void => {
       described.removeAttribute('aria-busy');

@@ -5,6 +5,12 @@ concurrency:
   cancel-in-progress: false
   group: branch-main
 
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
 permissions:
   contents: read
 
@@ -269,9 +275,3 @@ jobs:
           if-no-files-found: error
           include-hidden-files: true
           path: packages/saas/.tests/webhint
-
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:

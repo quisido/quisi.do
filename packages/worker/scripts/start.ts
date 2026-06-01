@@ -1,4 +1,4 @@
-import { isRecord, mapToString } from 'fmrs';
+import { isRecord, toString } from 'fmrs';
 import assert from 'node:assert';
 import { type ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 import nodeConsole from 'node:console';
@@ -40,12 +40,12 @@ for (const [name, version] of Object.entries(dependencies)) {
 }
 
 const handleErr = (chunk: unknown): void => {
-  const chunkStr: string = mapToString(chunk);
+  const chunkStr: string = toString(chunk);
   nodeConsole.error(chunkStr);
 };
 
 const handleOut = (chunk: unknown): void => {
-  const chunkStr: string = mapToString(chunk);
+  const chunkStr: string = toString(chunk);
   nodeConsole.log(chunkStr);
 };
 

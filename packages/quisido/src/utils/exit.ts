@@ -1,5 +1,5 @@
 import debug from './debug.js';
-import mapToString from './map-to-string.js';
+import toString from './to-string.js';
 
 const EXIT_HANDLERS = new Set<() => Promise<void> | void>();
 
@@ -8,7 +8,7 @@ export const onExit = (callback: () => Promise<void> | void): void => {
 };
 
 const handleExitError = (err: unknown): void => {
-  debug(`An error occurred while exiting: ${mapToString(err)}`);
+  debug(`An error occurred while exiting: ${toString(err)}`);
 };
 
 export const handleExit = async (): Promise<void> => {

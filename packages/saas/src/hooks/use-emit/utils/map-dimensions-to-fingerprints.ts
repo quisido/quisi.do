@@ -1,4 +1,4 @@
-import { mapObjectToEntries, mapToString, sortEntriesByKey } from 'fmrs';
+import { mapObjectToEntries, sortEntriesByKey, toString } from 'fmrs';
 
 export default function mapDimensionsToFingerprints(
   dimensions: Record<string, unknown>,
@@ -9,7 +9,7 @@ export default function mapDimensionsToFingerprints(
   entries.sort(sortEntriesByKey);
   for (const [key, value] of entries) {
     fingerprints.push(key);
-    fingerprints.push(mapToString(value));
+    fingerprints.push(toString(value));
   }
 
   return fingerprints;

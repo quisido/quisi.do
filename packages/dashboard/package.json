@@ -41,7 +41,7 @@
     "@datadog/datadog-api-client": "^1.58.0",
     "@quisido/worker": "^1.0.8",
     "cloudflare-utils": "^1.0.4",
-    "fmrs": "^2.1.1"
+    "fmrs": "^3.0.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260529.1",

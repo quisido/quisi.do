@@ -13,10 +13,7 @@ runs:
       run: >-
         chmod +x ./scripts/lighthouse-production.sh;
         ./scripts/lighthouse-production.sh;
-    - name: Validate
-      run: node ./scripts/postlighthouse/index.js
-      shell: bash
-      working-directory: packages/saas
+        node --experimental-strip-types ./scripts/postlighthouse/index.ts;
     - name: Upload
       if: always()
       uses: actions/upload-artifact@v6
