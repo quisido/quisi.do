@@ -1,5 +1,5 @@
 import { FaviconIcoResponse, RobotsTxtResponse } from 'cloudflare-utils';
-import { mapToError } from 'fmrs';
+import { toError } from 'fmrs';
 import type DashboardFetchHandler from '../dashboard-fetch-handler.js';
 import getDatadogAggregateRumEvents from '../datadog-aggregate-rum-events/get-datadog-aggregate-rum-events.js';
 import InternalServerErrorResponse from './internal-server-error-response.js';
@@ -77,7 +77,7 @@ export default async function handleFetch(
       },
     );
   } catch (err: unknown) {
-    const error: Error = mapToError(err);
+    const error: Error = toError(err);
     this.logError(error);
     return new InternalServerErrorResponse(this.accessControlAllowOrigin);
   }

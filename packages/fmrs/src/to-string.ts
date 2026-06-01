@@ -6,10 +6,10 @@ const DEFAULT = '[object Object]';
  * Converts a value into a readable string.
  *
  * @example
- * values.map(mapToString);
+ * values.map(toString);
  * const message = toString(value);
  */
-export default function mapToString(value: unknown): string {
+export default function toString(value: unknown): string {
   if (typeof value === 'undefined') {
     return 'undefined';
   }

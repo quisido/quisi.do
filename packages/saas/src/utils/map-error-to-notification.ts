@@ -1,4 +1,4 @@
-import { mapToString } from 'fmrs';
+import { toString } from 'fmrs';
 import type { NoActionNotification } from '../types/notification.js';
 
 export default function mapErrorToNotification(
@@ -8,7 +8,7 @@ export default function mapErrorToNotification(
     description: 'An error occurred.',
     icon: '⚠',
     Message(): string {
-      return mapToString(err);
+      return toString(err);
     },
     type: 'error',
   };

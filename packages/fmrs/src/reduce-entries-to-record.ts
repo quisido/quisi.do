@@ -11,8 +11,8 @@ export default function reduceEntriesToRecord<
 >(
   record: Readonly<Record<K, V>>,
   [key, value]: readonly [K, V],
-  _currentIndex: number,
-  _arr: readonly (readonly [K, V])[],
+  // _currentIndex: number,
+  // _arr: readonly (readonly [K, V])[],
 ): Record<K, V> {
   return {
     ...record,

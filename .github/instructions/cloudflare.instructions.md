@@ -1,7 +1,7 @@
 ---
 applyTo: "packages/ai/**,packages/authn/**,packages/csp/**,packages/dashboard/**,packages/worker/**"
 ---
-# Cloudflare Workers coding standards
+# Cloudflare Workers guidelines
 
 - Apply the [general coding guidelines](./general-coding.instructions.md) to all
   code.

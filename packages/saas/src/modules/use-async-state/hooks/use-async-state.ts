@@ -1,4 +1,4 @@
-import { mapToString } from 'fmrs';
+import { toString } from 'fmrs';
 import { type RefObject, useCallback, useRef, useState } from 'react';
 import type AsyncState from '../types/async-state.js';
 import useGetState from './use-get-state.js';
@@ -45,7 +45,7 @@ export default function useAsyncState<T = unknown>({
       (err: unknown): void => {
         onError?.(err);
 
-        const errorStr: string = mapToString(err);
+        const errorStr: string = toString(err);
         setAsyncState({
           data: undefined,
           error: errorStr,

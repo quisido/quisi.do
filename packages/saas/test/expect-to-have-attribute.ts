@@ -1,5 +1,5 @@
 import { type ExpectationResult } from '@vitest/expect';
-import { mapToString } from 'fmrs';
+import { toString } from 'fmrs';
 import { expect } from 'vitest';
 
 /**
@@ -39,7 +39,7 @@ expect.extend({
     } catch (err: unknown) {
       return {
         message: (): string => {
-          return mapToString(err);
+          return toString(err);
         },
         pass: false,
       };

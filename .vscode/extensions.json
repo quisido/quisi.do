@@ -2,6 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "github.vscode-github-actions",
+    "ms-vscode.vscode-chat-customizations-evaluations",
     "redhat.vscode-yaml",
     "vitest.explorer"
   ]

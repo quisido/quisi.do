@@ -1,6 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 import { ErrorCode } from '@quisido/authn-shared';
-import { mapToError } from 'fmrs';
+import { toError } from 'fmrs';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import FatalOAuthErrorResponse from '../oauth/fatal-oauth-error-response.js';
@@ -24,7 +24,7 @@ export default function handleFetchError(
   }
 
   this.emitPublicMetric(MetricName.UnknownError);
-  this.logError(mapToError(err));
+  this.logError(toError(err));
   return new FatalOAuthErrorResponse({
     code: ErrorCode.Unknown,
     host: this.host,

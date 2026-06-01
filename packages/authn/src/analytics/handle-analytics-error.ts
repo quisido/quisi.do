@@ -2,7 +2,7 @@ import { StatusCode } from 'cloudflare-utils';
 import AnalyticsResponseInit from './analytics-response-init.js';
 import FatalError from '../utils/fatal-error.js';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
-import { mapToError } from 'fmrs';
+import { toError } from 'fmrs';
 import UnknownAnalyticsErrorResponse from './unknown-analytics-error-response.js';
 
 export default function handleAnalyticsError(
@@ -21,7 +21,7 @@ export default function handleAnalyticsError(
     );
   }
 
-  const error: Error = mapToError(err);
+  const error: Error = toError(err);
   this.logError(error);
   return new UnknownAnalyticsErrorResponse(this.accessControlAllowOrigin);
 }

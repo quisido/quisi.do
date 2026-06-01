@@ -1,6 +1,6 @@
 import { ErrorCode, WhoAmIResponseCode } from '@quisido/authn-shared';
 import { StatusCode } from 'cloudflare-utils';
-import { mapToError } from 'fmrs';
+import { toError } from 'fmrs';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import FatalError from '../utils/fatal-error.js';
@@ -115,7 +115,7 @@ export default async function handleWhoAmIFetchRequest(
       );
     }
 
-    const error: Error = mapToError(err);
+    const error: Error = toError(err);
     this.logError(error);
     return new Response(
       JSON.stringify({

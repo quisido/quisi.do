@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { mapToString } from 'fmrs';
+import { toString } from 'fmrs';
 import { type ReactElement } from 'react';
 
 const TEST_ID = 'render-hook-error';
@@ -11,7 +11,7 @@ export default function renderHookError(useHook: () => unknown): string {
       useHook();
       return null;
     } catch (err: unknown) {
-      const errStr: string = mapToString(err);
+      const errStr: string = toString(err);
       return <span data-testid={TEST_ID}>{errStr}</span>;
     }
   };

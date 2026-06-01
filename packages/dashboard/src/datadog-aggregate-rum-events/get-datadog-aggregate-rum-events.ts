@@ -1,4 +1,4 @@
-import { mapToError } from 'fmrs';
+import { toError } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
 import {
   MILLISECONDS_PER_MINUTE,
@@ -195,7 +195,7 @@ export default async function getDatadogAggregateRumEvents(
 
     return value;
   } catch (err: unknown) {
-    const error: Error = mapToError(err);
+    const error: Error = toError(err);
     this.logError(error);
     return {};
   }

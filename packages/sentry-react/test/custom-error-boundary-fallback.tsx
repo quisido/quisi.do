@@ -1,4 +1,4 @@
-import { mapToString } from 'fmrs';
+import { toString } from 'fmrs';
 import { type ReactElement } from 'react';
 import type FallbackRenderParams from '../src/types/fallback-render-params.js';
 
@@ -7,7 +7,7 @@ export default function CustomErrorBoundaryFallback({
 }: FallbackRenderParams): ReactElement {
   return (
     <div aria-live="assertive" role="alert">
-      {mapToString(error)}
+      {toString(error)}
     </div>
   );
 }

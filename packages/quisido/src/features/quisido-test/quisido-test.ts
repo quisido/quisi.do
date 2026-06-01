@@ -1,4 +1,4 @@
-import mapToString from '../../utils/map-to-string.js';
+import toString from '../../utils/to-string.js';
 import ReportingTool, {
   type ReportingToolResult,
 } from '../../utils/reporting-tool.js';
@@ -15,7 +15,7 @@ export const quisidoTest: ReportingTool = new ReportingTool(
     } catch (err: unknown) {
       return {
         context: 'The quisido built-in tests failed.',
-        message: mapToString(err),
+        message: toString(err),
         status: 'failure',
       };
     }

@@ -50,7 +50,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "fmrs": "^2.1.1"
+    "fmrs": "^3.0.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.1",

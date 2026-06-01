@@ -1,4 +1,4 @@
-export default function mapToString(value: unknown): string {
+export default function toString(value: unknown): string {
   if (typeof value === 'string') {
     return value;
   }

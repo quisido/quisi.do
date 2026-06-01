@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import isPromise from './is-promise.js';
+import { isPromise } from './index.js';
 
 describe('isPromise', (): void => {
   it('should return true for a Promise', (): void => {

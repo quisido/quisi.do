@@ -1,7 +1,7 @@
 import ReportingTool, {
   type ReportingToolResult,
 } from '../../utils/reporting-tool.js';
-import mapToString from '../../utils/map-to-string.js';
+import toString from '../../utils/to-string.js';
 import randomInt from '../../utils/random-int.js';
 import withDuration from '../../utils/with-duration.js';
 import npxEslint from './npx-eslint.js';
@@ -43,9 +43,9 @@ export const eslint: ReportingTool = new ReportingTool(
     eslint.logInfo(`Generated reports in ${reportsDuration} seconds`);
 
     if (reportsError !== null) {
-      const reportsMessage: string = mapToString(reportsError);
+      const reportsMessage: string = toString(reportsError);
       if (resultsError !== null) {
-        const resultsMessage: string = mapToString(resultsError);
+        const resultsMessage: string = toString(resultsError);
 
         return {
           context:
@@ -67,7 +67,7 @@ export const eslint: ReportingTool = new ReportingTool(
       return {
         context:
           "ESLint encountered an error while analyzing this package's contents.",
-        message: mapToString(resultsError),
+        message: toString(resultsError),
         path: reportPath ?? undefined,
         status: 'failure',
       };
