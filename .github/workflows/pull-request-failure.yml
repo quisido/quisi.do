@@ -1,0 +1,147 @@
+# yaml-language-server: $schema=../../schemas/github-workflow.jsonc
+name: Pull request failure
+
+concurrency:
+  cancel-in-progress: true
+  group: pull-request-failure-${{ github.event.workflow_run.pull_requests[0].number }}
+
+on:
+  workflow_run:
+    types:
+      - completed
+    workflows:
+      - Pull request
+
+jobs:
+  codex:
+    name: Codex
+    environment: codex
+    runs-on: ubuntu-latest
+    if: >-
+      github.actor == 'dependabot[bot]' &&
+      github.event.workflow_run.conclusion == 'failure'
+    permissions:
+      actions: read
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Get head ref
+        id: ref
+        uses: actions/github-script@v9
+        with:
+          result-encoding: string
+          script: |-
+            const [pullRequest] =
+              context.payload.workflow_run.pull_requests ?? [];
+            if (pullRequest === undefined) {
+              throw new Error('No pull request found for this workflow run.');
+            }
+
+            const {
+              data: {
+                head: {
+                  ref: headRef,
+                  repo: { full_name: fullName },
+                },
+                title,
+              },
+            } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              pull_number: pullRequest.number,
+              repo: context.repo.repo,
+            });
+
+            if (fullName !== `${context.repo.owner}/${context.repo.repo}`) {
+              throw new Error('The Codex action does not support forks.', {
+                cause: fullName,
+              });
+            }
+
+            return headRef;
+
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.CODEX_APP_ID }}
+          private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
+
+      - name: Configure git
+        run: >-
+          git config --global user.name "quisi-do-codex[bot]";
+          git config --global
+          user.email "quisi-do-codex[bot]@users.noreply.github.com";
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 9
+          ref: ${{ steps.ref.outputs.result }}
+          token: ${{ steps.app-token.outputs.token }}
+
+        # const { owner, repo } = context.repo;
+        # const { html_url: runUrl, id: runId, name: runName } =
+        #   context.payload.workflow_run;
+        # const { data: { jobs } } =
+        #   await github.rest.actions.listJobsForWorkflowRun({
+        #     owner,
+        #     per_page: 100,
+        #     repo,
+        #     run_id: runId,
+        #   });
+        # const isFailed = ({ conclusion }) => conclusion === 'failure';
+        # const failedJobs = jobs.filter(isFailed);
+        # if (failedJobs.length === 0) {
+        #   return;
+        # }
+
+      - name: Execute
+        uses: ./.github/actions/codex
+        with:
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          token: ${{ steps.app-token.outputs.token }}
+          prompt: |-
+            GitHub user `${{ github.event.comment.user.login }}` triggered the
+            Codex action via a pull request comment. The pull request branch is
+            already checked out locally.
+
+            ### Issue
+
+            **Title:** ${{ github.event.issue.title }}
+            **Path:** `${{ github.event.comment.path }}:${{ steps.sanitized.outputs.lines }}`
+            **Diff (stringified):** ${{ steps.sanitized.outputs.diff_hunk }}
+            **Comment (stringified):** ${{ steps.sanitized.outputs.body }}
+
+            Focus your actions and analysis to the scope of this pull request.
+
+            ### Tasks
+
+            1. Create a plan for how you will resolve this issue.
+            2. Reply to the user with a comment stating your plan.
+            3. Execute your plan and resolve the issue.
+            4. Verify that `npm run build` and `npm test` both pass. If not,
+               resolve any errors.
+            5. Commit and push your changes to the pull request branch.
+            6. Edit the previous comment you made to confirm that your changes
+               have been pushed.
+
+      - name: Comment
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const toMarkdown = ({ html_url: url, name }) =>
+              `- [${name}](${url})`;
+
+            const { serverUrl } = context;
+            const { number: prNumber } = pullRequest;
+            const prUrl = `${serverUrl}/${owner}/${repo}/pull/${prNumber}`;
+            await github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner,
+              repo,
+              body:
+                '## Failed jobs\n\n' +
+                `### [Pull request #${prNumber}](${prUrl})\n\n` +
+                `#### [${runName}](${runUrl})\n\n` +
+                `${failedJobs.map(toMarkdown).join('\n')}`,
+            });

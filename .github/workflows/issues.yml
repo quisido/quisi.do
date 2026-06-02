@@ -1,0 +1,89 @@
+# yaml-language-server: $schema=../../schemas/github-workflow.jsonc
+name: Issues
+
+# When a comment or issue is edited or deleted, cancel any in-progress runs.
+concurrency:
+  cancel-in-progress: true
+  group: issues__${{ github.event.issue.number }}
+
+on:
+  issues:
+    types:
+      - deleted
+      - edited
+      - opened
+
+jobs:
+  codex:
+    name: Codex
+    environment: codex
+    runs-on: ubuntu-latest
+    if: >-
+      github.actor != 'quisi-do-codex[bot]' &&
+      github.event.action != 'deleted' &&
+      github.event.issue.author_association == 'OWNER' &&
+      contains(github.event.issue.body, '@codex') &&
+      github.event_name == 'issues'
+    permissions:
+      actions: read
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.CODEX_APP_ID }}
+          private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
+
+      - name: Configure git
+        run: >-
+          git config --global user.name "quisi-do-codex[bot]";
+          git config --global
+          user.email "quisi-do-codex[bot]@users.noreply.github.com";
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 9
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Sanitize
+        id: body
+        env:
+          BODY: ${{ github.event.issue.body }}
+        run: >-
+          node --eval '
+          const { BODY = "" } = process.env;
+          process.stdout.write(`stringified=${JSON.stringify(BODY)}\n`);
+          ' > "$GITHUB_OUTPUT";
+
+      - name: Execute
+        uses: ./.github/actions/codex
+        with:
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          token: ${{ steps.app-token.outputs.token }}
+          prompt: |-
+            GitHub user `${{ github.event.issue.user.login }}` triggered the
+            Codex action via an issue. The repository is already checked out
+            locally.
+
+            ### Issue
+
+            **Title:** ${{ github.event.issue.title }}
+            **Body (stringified):** ${{ steps.body.outputs.stringified }}
+
+            ### Tasks
+
+            1. Create a plan for how you will resolve this issue.
+            2. Reply to the user with a comment stating your plan.
+            3. Create branch `codex/issue-${{ github.event.issue.number }}`.
+            4. Execute your plan and resolve the issue.
+            5. Commit and push your branch.
+            6. Open a pull request targeting the default branch with the title
+               "${{ github.event.issue.title }}", a description that contains
+               "resolves #${{ github.event.issue.number }}", and a summary of
+               the changes you made.
+            7. Edit the previous comment you made to include a link to the pull
+               request.
