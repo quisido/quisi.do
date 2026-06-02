@@ -1,0 +1,123 @@
+# yaml-language-server: $schema=../../schemas/github-workflow.jsonc
+name: Workflow completed
+
+concurrency:
+  cancel-in-progress: true
+  group: workflow-completed-${{ github.event.workflow_run.id }}
+
+on:
+  workflow_run:
+    types:
+      - completed
+    workflows:
+      - Pull request
+
+jobs:
+  dependabot-pull-request-failure:
+    name: Dependabot pull request failure
+    environment: codex
+    runs-on: ubuntu-latest
+    if: >-
+      github.actor == 'dependabot[bot]' &&
+      github.event.workflow.name == 'Pull request' &&
+      github.event.workflow_run.conclusion == 'failure'
+    permissions:
+      actions: read
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Get head ref
+        id: ref
+        uses: actions/github-script@v9
+        with:
+          result-encoding: string
+          script: |-
+            const [pullRequest] =
+              context.payload.workflow_run.pull_requests ?? [];
+            if (pullRequest === undefined) {
+              throw new Error('No pull request found for this workflow run.');
+            }
+
+            const {
+              data: {
+                head: {
+                  ref: headRef,
+                  repo: { full_name: fullName },
+                },
+                title,
+              },
+            } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              pull_number: pullRequest.number,
+              repo: context.repo.repo,
+            });
+
+            if (fullName !== `${context.repo.owner}/${context.repo.repo}`) {
+              throw new Error('The Codex action does not support forks.', {
+                cause: fullName,
+              });
+            }
+
+            return headRef;
+
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.CODEX_APP_ID }}
+          private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
+
+      - name: Configure git
+        run: >-
+          git config --global user.name "quisido-codex[bot]";
+          git config --global
+          user.email "quisido-codex[bot]@users.noreply.github.com";
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 9
+          ref: ${{ steps.ref.outputs.result }}
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Get failed jobs
+        id: failed-jobs
+        uses: actions/github-script@v9
+        with:
+          result-encoding: string
+          script: |-
+            const { owner, repo } = context.repo;
+            const { html_url: runUrl, id: runId, name: runName } =
+              context.payload.workflow_run;
+            const { data: { jobs } } =
+              await github.rest.actions.listJobsForWorkflowRun({
+                owner,
+                per_page: 100,
+                repo,
+                run_id: runId,
+              });
+            const isFailed = ({ conclusion }) => conclusion === 'failure';
+            const failedJobs = jobs.filter(isFailed);
+            if (failedJobs.length === 0) {
+              return;
+            }
+
+      - name: Execute
+        uses: ./.github/actions/codex
+        with:
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          token: ${{ steps.app-token.outputs.token }}
+          prompt: |-
+            Dependabot opened pull request
+            #${{ github.event.workflow_run.pull_requests[0].number }}, and it
+            failed this repository's continuous integration workflow. The pull
+            request branch is checked out locally.
+
+            ### Tasks
+
+            1. Create a plan for how you will resolve the failure(s).
+            2. Post your plan in plain English as a comment on the pull request.
+            3. Execute your plan to resolve the failing workflow.
+            4. Verify that `npm run build` and `npm test` both pass. If not,
+               resolve any errors.
+            5. Commit and push your changes to the pull request branch.
