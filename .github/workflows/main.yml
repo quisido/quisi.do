@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=../../schemas/github-workflow.jsonc
-name: Continuous deployment
+name: Main
 
 concurrency:
-  cancel-in-progress: false
-  group: branch-main
+  cancel-in-progress: true
+  group: main
 
 on:
   push:
