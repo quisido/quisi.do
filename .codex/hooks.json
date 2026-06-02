@@ -4,7 +4,7 @@
       {
         "hooks": [
           {
-            "command": "bash -lc 'set -euo pipefail; root=\"$(git rev-parse --show-toplevel)\"; cd \"$root\"; { git diff --name-only --diff-filter=ACMR -z; git diff --cached --name-only --diff-filter=ACMR -z; } | sort -zu | while IFS= read -r -d \"\" file; do [ -f \"$file\" ] || continue; case \"$file\" in *.cjs|*.js|*.json|*.jsonc|*.jsx|*.mjs|*.ts|*.tsx|*.webmanifest) ;; *) continue ;; esac; directory=\"$(dirname \"$file\")\"; basename=\"$(basename \"$file\")\"; (cd \"$directory\" && npx --no-install eslint --cache --cache-location \"$root/.cache/eslint.json\" --color --exit-on-fatal-error --fix --max-warnings 9999 --report-unused-disable-directives-severity error --report-unused-inline-configs error \"$basename\"); done'",
+            "command": "bash -c 'set -euo pipefail; root=\"$(git rev-parse --show-toplevel)\"; cd \"$root\"; { git diff --name-only --diff-filter=ACMR -z; git diff --cached --name-only --diff-filter=ACMR -z; } | sort -zu | while IFS= read -r -d \"\" file; do [ -f \"$file\" ] || continue; case \"$file\" in *.cjs|*.js|*.json|*.jsonc|*.jsx|*.mjs|*.ts|*.tsx|*.webmanifest) ;; *) continue ;; esac; directory=\"$(dirname \"$file\")\"; basename=\"$(basename \"$file\")\"; (cd \"$directory\" && npx --no-install eslint --cache --cache-location \"$root/.cache/eslint.json\" --color --exit-on-fatal-error --fix --max-warnings 9999 --report-unused-disable-directives-severity error --report-unused-inline-configs error \"$basename\"); done'",
             "statusMessage": "Formatting edited files",
             "timeout": 120,
             "type": "command"
