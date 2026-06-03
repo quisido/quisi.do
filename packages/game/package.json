@@ -74,7 +74,7 @@
     "@types/trusted-types": "^2.0.7",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
     "@vitest/ui": "^4.1.8",
-    "concurrently": "^10.0.0",
+    "concurrently": "^10.0.3",
     "dompurify": "^3.4.7",
     "hint": "^7.1.13",
     "jsdom": "^29.1.1",
