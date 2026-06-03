@@ -55,7 +55,7 @@
     "fmrs": "^2.1.1"
   },
   "devDependencies": {
-    "@vitest/ui": "^4.1.7",
+    "@vitest/ui": "^4.1.8",
     "concurrently": "^10.0.0",
     "quisido": "^0.0.3",
     "rimraf": "^6.1.0",
