@@ -38,10 +38,11 @@ jobs:
           private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
 
       - name: Configure git
+        env:
+          CODEX_EMAIL: quisido-codex[bot]@users.noreply.github.com
         run: >-
+          git config --global user.email "$CODEX_EMAIL";
           git config --global user.name "quisido-codex[bot]";
-          git config --global
-          user.email "quisido-codex[bot]@users.noreply.github.com";
 
       - name: Acknowledge
         run: >-
