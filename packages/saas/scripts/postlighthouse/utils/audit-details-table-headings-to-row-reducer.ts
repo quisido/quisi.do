@@ -1,7 +1,7 @@
 import { isRecord } from 'fmrs';
-import { type default as AuditDetails } from 'lighthouse/types/lhr/audit-details.js';
 import mapNodeToString from './map-node-to-string.js';
 import mapSourceLocationToString from './map-source-location-to-string.js';
+import type { AuditDetails } from './audit-details.js';
 
 const isNodeValue = (value: unknown): value is AuditDetails.NodeValue => {
   return isRecord(value) && value['type'] === 'node';
@@ -43,17 +43,19 @@ const mapMultiValueToString = (value: unknown): string => {
     return mapTableValueToString(value);
   }
 
-  return value.map((item) => {
-    if (isNodeValue(item)) {
-      return mapNodeToString(item);
-    }
+  return value
+    .map(item => {
+      if (isNodeValue(item)) {
+        return mapNodeToString(item);
+      }
 
-    if (isSourceLocationValue(item)) {
-      return mapSourceLocationToString(item);
-    }
+      if (isSourceLocationValue(item)) {
+        return mapSourceLocationToString(item);
+      }
 
-    return mapTableValueToString(item);
-  }).join(', ');
+      return mapTableValueToString(item);
+    })
+    .join(', ');
 };
 
 export default class AuditDetailsTableHeadingsToRowReducer {

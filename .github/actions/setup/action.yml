@@ -68,5 +68,10 @@ runs:
         inputs.install-browsers != 'false' &&
         steps.cache-playwright.outputs.cache-hit != 'true'
       run: >-
-        npx playwright install --only-shell --with-deps
+        npx playwright install --only-shell
         chromium-headless-shell firefox webkit;
+
+    - name: Install browser dependencies
+      if: inputs.install-browsers != 'false'
+      run: npx playwright install-deps
+      shell: bash

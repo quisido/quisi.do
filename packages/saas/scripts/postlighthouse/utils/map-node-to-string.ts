@@ -1,4 +1,4 @@
-import { type default as AuditDetails } from 'lighthouse/types/lhr/audit-details.js';
+import type { AuditDetails } from './audit-details.js';
 
 export default function mapNodeToString({
   nodeLabel,

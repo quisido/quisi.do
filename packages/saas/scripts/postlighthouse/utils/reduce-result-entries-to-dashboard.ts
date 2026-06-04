@@ -1,7 +1,10 @@
-import { type default as Result } from 'lighthouse/types/lhr/lhr.js';
+import type { LighthouseRunResult } from './lighthouse-run-result.js';
 
-type DashboardResultKey = keyof Omit<Result, 'audits'>;
-type DashboardResultValue = Omit<Result, 'audits'>[DashboardResultKey];
+type DashboardResultKey = keyof Omit<LighthouseRunResult, 'audits'>;
+type DashboardResultValue = Omit<
+  LighthouseRunResult,
+  'audits'
+>[DashboardResultKey];
 
 const IGNORED_REPORT_KEYS = new Set([
   'configSettings',

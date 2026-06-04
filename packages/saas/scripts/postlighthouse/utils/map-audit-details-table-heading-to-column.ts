@@ -1,6 +1,8 @@
-import { type ColumnOptionsRaw } from 'console-table-printer/dist/src/models/external-table';
-import { type default as AuditDetails } from 'lighthouse/types/lhr/audit-details.js';
-import { type IcuMessage } from 'lighthouse/types/lhr/i18n.js';
+import type { IcuMessage } from 'lighthouse';
+import type { AuditDetails } from './audit-details.js';
+import type { Table } from 'console-table-printer';
+
+type ColumnOptionsRaw = Exclude<Parameters<Table['addColumn']>[0], string>;
 
 const MAX_LENGTH = 20;
 

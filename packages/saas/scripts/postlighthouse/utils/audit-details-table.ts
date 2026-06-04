@@ -1,7 +1,7 @@
 import { Table } from 'console-table-printer';
-import { type default as AuditDetails } from 'lighthouse/types/lhr/audit-details.js';
 import HeadingsToRowReducer from './audit-details-table-headings-to-row-reducer.js';
 import mapHeadingToColumn from './map-audit-details-table-heading-to-column.js';
+import type { AuditDetails } from './audit-details.js';
 
 export default class AuditDetailsTable {
   #headings: AuditDetails.TableColumnHeading[] = [];

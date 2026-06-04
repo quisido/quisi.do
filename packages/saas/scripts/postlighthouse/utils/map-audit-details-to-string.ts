@@ -1,8 +1,8 @@
-import { type IcuMessage } from 'lighthouse/types/lhr/i18n.js';
 import AuditDetailsTable from './audit-details-table.js';
 import mapAuditDetailsDebugDataToString from './map-audit-details-debug-data-to-string.js';
 import mapNodeToString from './map-node-to-string.js';
 import type { AuditDetails } from './audit-details.js';
+import type { IcuMessage } from 'lighthouse';
 
 const mapMessageToString = (value: IcuMessage | string): string => {
   if (typeof value === 'string') {

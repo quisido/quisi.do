@@ -1,18 +1,21 @@
-import { type default as Result } from 'lighthouse/types/lhr/lhr.js';
+import type { LighthouseRunResult } from './lighthouse-run-result.js';
 import mapAuditsToDashboard from './map-audits-to-dashboard.js';
 import reduceResultEntriesToDashboard, {
   type DashboardResult,
 } from './reduce-result-entries-to-dashboard.js';
 
 type ResultEntry = readonly [
-  keyof Omit<Result, 'audits'>,
-  Omit<Result, 'audits'>[keyof Omit<Result, 'audits'>],
+  keyof Omit<LighthouseRunResult, 'audits'>,
+  Omit<LighthouseRunResult, 'audits'>[keyof Omit<
+    LighthouseRunResult,
+    'audits'
+  >],
 ];
 
 export default function mapResultToDashboard({
   audits,
   ...restResult
-}: Result): string {
+}: LighthouseRunResult): string {
   const resultEntries = Object.entries(restResult) as ResultEntry[];
   const dashboardJson = resultEntries.reduce<DashboardResult>(
     reduceResultEntriesToDashboard,
