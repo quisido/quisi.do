@@ -33,6 +33,24 @@ const mapTableValueToString = (value: unknown): string => {
   return JSON.stringify(value);
 };
 
+const mapMultiValueToString = (value: unknown): string => {
+  if (!Array.isArray(value)) {
+    return mapTableValueToString(value);
+  }
+
+  return value.map((item) => {
+    if (isNodeValue(item)) {
+      return mapNodeToString(item);
+    }
+
+    if (isSourceLocationValue(item)) {
+      return mapSourceLocationToString(item);
+    }
+
+    return mapTableValueToString(item);
+  }).join(', ');
+};
+
 export default class AuditDetailsTableHeadingsToRowReducer {
   #item: AuditDetails.TableItem;
 
@@ -43,7 +61,6 @@ export default class AuditDetailsTableHeadingsToRowReducer {
   #mapHeadingToValue = ({
     key,
     valueType,
-    ...heading
   }: AuditDetails.TableColumnHeading): string => {
     if (key === null) {
       return '';
@@ -52,10 +69,18 @@ export default class AuditDetailsTableHeadingsToRowReducer {
     const value = this.#item[key];
 
     switch (valueType) {
+      case 'bytes':
       case 'code':
+      case 'link':
+      case 'ms':
+      case 'numeric':
       case 'text':
+      case 'thumbnail':
+      case 'timespanMs':
       case 'url':
         return mapTableValueToString(value);
+      case 'multi':
+        return mapMultiValueToString(value);
       case 'node':
         if (isNodeValue(value)) {
           return mapNodeToString(value);
@@ -69,10 +94,7 @@ export default class AuditDetailsTableHeadingsToRowReducer {
 
         return '';
       default:
-        throw new Error(`Unexpected heading value type: ${valueType}
-With heading key: ${key}
-With heading: ${JSON.stringify(heading)}
-With item: ${JSON.stringify(this.#item)}`);
+        return mapTableValueToString(value);
     }
   };
 
