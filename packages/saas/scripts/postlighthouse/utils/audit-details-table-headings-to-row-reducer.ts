@@ -1,10 +1,7 @@
+import { isRecord } from 'fmrs';
 import { type default as AuditDetails } from 'lighthouse/types/lhr/audit-details.js';
 import mapNodeToString from './map-node-to-string.js';
 import mapSourceLocationToString from './map-source-location-to-string.js';
-
-const isRecord = (value: unknown): value is Record<string, unknown> => {
-  return typeof value === 'object' && value !== null;
-};
 
 const isNodeValue = (value: unknown): value is AuditDetails.NodeValue => {
   return isRecord(value) && value['type'] === 'node';
