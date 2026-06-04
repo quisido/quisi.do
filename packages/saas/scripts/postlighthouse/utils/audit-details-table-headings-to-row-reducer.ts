@@ -14,7 +14,7 @@ const isSourceLocationValue = (
 };
 
 const mapTableValueToString = (value: unknown): string => {
-  if (value === undefined) {
+  if (value === undefined || value === null) {
     return '';
   }
 
@@ -26,8 +26,13 @@ const mapTableValueToString = (value: unknown): string => {
     return value.toString();
   }
 
-  if (isRecord(value) && typeof value['value'] === 'string') {
-    return value['value'];
+  if (isRecord(value)) {
+    if (typeof value['formattedDefault'] === 'string') {
+      return value['formattedDefault'];
+    }
+    if (typeof value['value'] === 'string') {
+      return value['value'];
+    }
   }
 
   return JSON.stringify(value);
