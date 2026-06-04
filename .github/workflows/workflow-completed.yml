@@ -226,9 +226,10 @@ jobs:
 
             // mapJobToMarkdown
             const stringify = str => JSON.stringify(str);
+            const toName = ({ name }) => name;
             const mapJobToMarkdown = ({ errorLogs, failedSteps, name }) => {
               const nameStr = stringify(name);
-              const stepsStr = stringify(failedSteps);
+              const stepsStr = stringify(failedSteps.map(toName));
               return [
                 `#### Job ${nameStr}`,
                 `The ${stepsStr} step(s) failed with error logs:`,
