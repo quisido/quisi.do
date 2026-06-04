@@ -11,6 +11,7 @@ applyTo: "**/*.ts,**/*.tsx"
 - Use interfaces for data structures and type definitions
 - When a function only takes one parameter and that parameter is an untyped
   object, name that parameter's interface `Options`.
+
   ```ts
   interface Options { /* ... */ }
   export default function myFn({ /* ... */ }: Options): void {}
