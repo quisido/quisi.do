@@ -1,4 +1,4 @@
-import type { AuditResult } from './adult-result.js';
+import type { AuditResult } from './audit-result.js';
 import mapAuditDetailsToString from './map-audit-details-to-string.js';
 
 export default function mapAuditResultToString({
