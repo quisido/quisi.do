@@ -47,12 +47,12 @@ For example:
 
 ## Sorters
 
-| items     | example                          |
-| --------- | -------------------------------- |
-| arrays    | `arrOfArrs.sort(sortByIndex(0))` |
-| numbers   | `arr.sort(sortNumbers)`          |
-| strings   | `arr.sort(sortStrings)`          |
-| `unknown` | `arr.sort(sort)`                 |
+| items     | example                                |
+| --------- | -------------------------------------- |
+| arrays    | `arrOfArrs.sort(sortArraysByIndex(0))` |
+| numbers   | `arr.sort(sortNumbers)`                |
+| strings   | `arr.sort(sortStrings)`                |
+| `unknown` | `arr.sort(sort)`                       |
 
 ## Utilities
 

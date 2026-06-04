@@ -35,6 +35,33 @@ jobs:
       issues: write
       pull-requests: write
     steps:
+      - name: Get head ref
+        id: ref
+        uses: actions/github-script@v9
+        with:
+          result-encoding: string
+          script: |-
+            const {
+              data: {
+                head: {
+                  ref: headRef,
+                  repo: { full_name: fullName },
+                },
+              },
+            } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              pull_number: context.payload.pull_request.number,
+              repo: context.repo.repo,
+            });
+
+            if (fullName !== `${context.repo.owner}/${context.repo.repo}`) {
+              throw new Error('The Codex action does not support forks.', {
+                cause: fullName,
+              });
+            }
+
+            return headRef;
+
       - name: Create GitHub App token
         id: app-token
         uses: actions/create-github-app-token@v3
@@ -62,6 +89,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 9
+          ref: ${{ steps.ref.outputs.result }}
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Sanitize
