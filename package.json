@@ -82,7 +82,7 @@
     "@hint/parser-typescript-config": "^2.4.31",
     "@hint/parser-webpack-config": "^2.1.42",
     "@hint/utils-types": "^1.2.1",
-    "@openai/codex": "^0.136.0",
+    "@openai/codex": "^0.137.0",
     "@playwright/mcp": "^0.0.75",
     "@types/eslint": "^9.6.1",
     "@types/node": "^25.9.1",
