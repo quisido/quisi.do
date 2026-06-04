@@ -1,4 +1,4 @@
-import type { AuditResult } from './adult-result.js';
+import type { AuditResult } from './audit-result.js';
 
 const IGNORED_SCORE_DISPLAY_MODES = new Set<AuditResult['scoreDisplayMode']>([
   'informative',
