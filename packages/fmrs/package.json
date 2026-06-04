@@ -52,8 +52,8 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "devDependencies": {
-    "@vitest/ui": "^4.1.7",
-    "concurrently": "^10.0.0",
+    "@vitest/ui": "^4.1.8",
+    "concurrently": "^10.0.3",
     "quisido": "^0.0.3",
     "rimraf": "^6.1.0",
     "tslib": "^2.8.1",
