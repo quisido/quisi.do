@@ -1,15 +1,32 @@
 # yaml-language-server: $schema=../../schemas/github-workflow.jsonc
-name: Continuous integration
+name: Pull request
 
 concurrency:
   cancel-in-progress: true
-  group: continuous-integration-${{ github.event.pull_request.number }}
+  group: pull-request-${{ github.event.pull_request.number }}
+
+on:
+  pull_request:
 
 permissions:
   contents: read
 
 jobs:
-  # Stage 1: build, dependency-review
+  # Stage 1: auto-merge, build, dependency-review
+  auto-merge:
+    name: Auto-merge
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Enable
+        run: gh pr merge --auto --squash "$PR_HTML_URL"
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          PR_HTML_URL: ${{github.event.pull_request.html_url}}
+
   build:
     name: Build
     if: github.event.pull_request.head.repo.full_name == github.repository
@@ -108,6 +125,3 @@ jobs:
         uses: ./.github/actions/codecov
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
-on:
-  pull_request:

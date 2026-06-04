@@ -1,0 +1,144 @@
+# yaml-language-server: $schema=../../schemas/github-workflow.jsonc
+name: Pull request review comment
+
+# When a comment is edited or deleted, cancel any in-progress runs.
+concurrency:
+  cancel-in-progress: true
+  group: >-
+    pull-request-review-comment
+    __${{ github.event.pull_request.number }}
+    __${{ github.event.comment.id }}
+
+on:
+  pull_request_review_comment:
+    types:
+      - created
+      - deleted
+      - edited
+
+permissions: {}
+
+jobs:
+  codex:
+    name: Codex
+    environment: codex
+    runs-on: ubuntu-latest
+    if: >-
+      github.actor != 'quisido-codex[bot]' &&
+      github.event.action != 'deleted' &&
+      github.event.comment.author_association == 'OWNER' &&
+      contains(github.event.comment.body, '@codex')
+    permissions:
+      actions: read
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Get head ref
+        id: ref
+        uses: actions/github-script@v9
+        with:
+          result-encoding: string
+          script: |-
+            const {
+              data: {
+                head: {
+                  ref: headRef,
+                  repo: { full_name: fullName },
+                },
+              },
+            } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              pull_number: context.payload.pull_request.number,
+              repo: context.repo.repo,
+            });
+
+            if (fullName !== `${context.repo.owner}/${context.repo.repo}`) {
+              throw new Error('The Codex action does not support forks.', {
+                cause: fullName,
+              });
+            }
+
+            return headRef;
+
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.CODEX_CLIENT_ID }}
+          private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
+
+      - name: Configure git
+        env:
+          CODEX_EMAIL: quisido-codex[bot]@users.noreply.github.com
+        run: >-
+          git config --global user.email "$CODEX_EMAIL";
+          git config --global user.name "quisido-codex[bot]";
+
+      - name: Acknowledge
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: >-
+          gh api
+          /repos/${{ github.repository }}/pulls/comments/${{ github.event.comment.id }}/reactions
+          --field content="eyes"
+          --method POST;
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 9
+          ref: ${{ steps.ref.outputs.result }}
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Sanitize
+        id: stringified
+        env:
+          BODY: ${{ github.event.comment.body }}
+          DIFF_HUNK: ${{ github.event.comment.diff_hunk }}
+          LINE: ${{ github.event.comment.line }}
+          START_LINE: ${{ github.event.comment.start_line }}
+          TITLE: ${{ github.event.pull_request.title }}
+        run: >-
+          node --eval '
+          const {
+          BODY = "", DIFF_HUNK = "", LINE = "", START_LINE = "", TITLE = "",
+          } = process.env;
+          const lines = START_LINE === "" ? LINE : `${START_LINE}-${LINE}`;
+          process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
+          process.stdout.write(`diff_hunk=${JSON.stringify(DIFF_HUNK)}\n`);
+          process.stdout.write(`lines=${lines}\n`);
+          process.stdout.write(`title=${JSON.stringify(TITLE)}\n`);
+          ' > "$GITHUB_OUTPUT";
+
+      - name: Execute
+        uses: ./.github/actions/codex
+        with:
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          token: ${{ steps.app-token.outputs.token }}
+          prompt: |-
+            GitHub user `${{ github.event.comment.user.login }}` triggered the
+            Codex action via a pull request comment. The pull request branch is
+            already checked out locally.
+
+            ### Details
+
+            **Title (stringified):** ${{ steps.stringified.outputs.title }}
+            **File path:** `${{ github.event.comment.path }}:${{ steps.stringified.outputs.lines }}`
+            **Diff hunk (stringified):** ${{ steps.stringified.outputs.diff_hunk }}
+            **Comment (stringified):** ${{ steps.stringified.outputs.body }}
+
+            Focus your actions and analysis to the scope of this pull request.
+
+            ### Tasks
+
+            1. Create a plan for how you will resolve this issue. Use
+               test-driven development to define the test scope.
+            2. Post your plan in plain English as a reply to the user; include
+               any assumptions you are making.
+            3. Execute your plan to resolve the issue.
+            4. Verify that `npm run build` and `npm test` both pass. If not,
+               resolve any errors.
+            5. Commit and push your changes to the pull request branch.
+            6. Edit the previous comment you made to confirm that your changes
+               have been pushed.

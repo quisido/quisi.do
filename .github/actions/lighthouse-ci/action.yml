@@ -13,10 +13,10 @@ runs:
       run: >-
         chmod +x ./scripts/lighthouse-serve.sh;
         ./scripts/lighthouse-serve.sh;
-    - name: Validate
-      run: node ./scripts/postlighthouse/index.js
-      shell: bash
-      working-directory: packages/saas
+        npx esbuild --bundle --format=cjs --platform=node
+        --outfile=./.tests/postlighthouse.cjs
+        ./scripts/postlighthouse/index.ts &&
+        node ./.tests/postlighthouse.cjs;
     - name: Upload
       if: always()
       uses: actions/upload-artifact@v6

@@ -1,10 +1,8 @@
 ---
 applyTo: "**/*.tsx"
 ---
-# Project coding standards for React
+# React guidelines
 
-- Apply the [general coding guidelines](./general-coding.instructions.md) to all
-  code.
 - Use function components with hooks.
 - Follow the React hooks rules (no conditional hooks).
 - Keep components small and focused. Prefer ≤200 lines of code per file and ≤3

@@ -16,63 +16,43 @@ For example:
 
 ## Filters and finders
 
-- boolean (`value is boolean`)
-  - `arr.every(isBoolean)`
-  - `arr.filter(filterByBoolean)`
-  - `arr.find(findBoolean)`
-- defined
-  - `arr.every(isDefined)`
-  - `arr.filter(filterByDefined)`
-  - `arr.find(findDefined)`
-- number (`value is number`)
-  - `arr.every(isNumber)`
-  - `arr.filter(filterByNumber)`
-  - `arr.find(findNumber)`
-- object (`value is object`)
-  - `arr.every(isObject)`
-  - `arr.filter(filterByObject)`
-  - `arr.find(findObject)`
-- record (`value is Record<number | string | symbol, unknown>`)
-  - `arr.every(isRecord)`
-  - `arr.filter(filterByRecord)`
-  - `arr.find(findRecord)`
-- string
-  - `arr.every(isString)`
-  - `arr.filter(filterByString)`
-  - `arr.find(findString)`
-- undefined (`value is undefined`)
-  - `arr.every(isUndefined)`
-  - `arr.filter(filterByUndefined)`
-  - `arr.find(findUndefined)`
+- `Record<number | string | symbol, unknown>` (`isRecord`)
+- array (`isArray`)
+- boolean (`isBoolean`)
+- defined (`isDefined`)
+- number (`isNumber`)
+- object (`isObject`)
+- string (`isString`)
+- undefined (`isUndefined`)
 
 ## Mappers
 
-| from      | to            | example                                  |
-| --------- | ------------- | ---------------------------------------- |
-| `boolean` | `number`      | `[false, true].map(mapBooleanToNumber)`  |
-| entries   | Record (`{}`) | `mapEntriesToRecord([['key', 'value']])` |
-| entry     | key           | `mapEntryToKey(['key', 'value'])`        |
-| entry     | value         | `mapEntryToValue(['key', 'value'])`      |
-| `Map`     | entries       | `mapMapToEntries(new Map())`             |
-| `Map`     | Record (`{}`) | `mapMapToRecord(new Map())`              |
-| `unknown` | `Error`       | `arr.map(mapToError)`                    |
-| `unknown` | index         | `arr.map(mapToIndex)`                    |
-| `unknown` | `string`      | `arr.map(mapToString)`                   |
+| from      | to       | example                                  |
+| --------- | -------- | ---------------------------------------- |
+| boolean   | number   | `[false, true].map(mapBooleanToNumber)`  |
+| entries   | `Record` | `mapEntriesToRecord([['key', 'value']])` |
+| entry     | key      | `mapEntryToKey(['key', 'value'])`        |
+| entry     | value    | `mapEntryToValue(['key', 'value'])`      |
+| `Map`     | entries  | `mapMapToEntries(new Map())`             |
+| `Map`     | `Record` | `mapMapToRecord(new Map())`              |
+| `unknown` | `Error`  | `arr.map(toError)`                       |
+| `unknown` | index    | `arr.map(toIndex)`                       |
+| `unknown` | string   | `arr.map(toString)`                      |
 
 ## Reducers
 
-| from    | to            | example                                                    |
-| ------- | ------------- | ---------------------------------------------------------- |
-| entries | Record (`{}`) | `Object.entries(record).reduce(reduceEntriesToRecord, {})` |
+| from    | to       | example                                                    |
+| ------- | -------- | ---------------------------------------------------------- |
+| entries | `Record` | `Object.entries(record).reduce(reduceEntriesToRecord, {})` |
 
 ## Sorters
 
-| items     | example                          |
-| --------- | -------------------------------- |
-| `Array`   | `arrOfArrs.sort(sortByIndex(0))` |
-| `number`  | `arr.sort(sortNumbers)`          |
-| `string`  | `arr.sort(sortStrings)`          |
-| `unknown` | `arr.sort(sort)`                 |
+| items     | example                                |
+| --------- | -------------------------------------- |
+| arrays    | `arrOfArrs.sort(sortArraysByIndex(0))` |
+| numbers   | `arr.sort(sortNumbers)`                |
+| strings   | `arr.sort(sortStrings)`                |
+| `unknown` | `arr.sort(sort)`                       |
 
 ## Utilities
 

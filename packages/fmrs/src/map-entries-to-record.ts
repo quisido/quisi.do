@@ -10,8 +10,5 @@ export default function mapEntriesToRecord<
   K extends number | string | symbol,
   V,
 >(entries: readonly (readonly [K, V])[]): Record<K, V> {
-  return entries.reduce(
-    (...args) => reduceEntriesToRecord<K, V>(...args),
-    {} as Record<K, V>,
-  );
+  return entries.reduce(reduceEntriesToRecord<K, V>, {} as Record<K, V>);
 }

@@ -1,12 +1,8 @@
 ---
 applyTo: "packages/ai/**,packages/authn/**,packages/csp/**,packages/dashboard/**,packages/worker/**"
 ---
-# Cloudflare Workers coding standards
+# Cloudflare Workers guidelines
 
-- Apply the [general coding guidelines](./general-coding.instructions.md) to all
-  code.
-- Apply the [TypeScript coding guidelines](./typescript.instructions.md) to all
-  TypeScript code.
 - Use the `Request`/`Response` Web APIs (not Node.js `http`) in Worker handlers.
 - Access secrets and bindings exclusively via the typed `Env` interface generated
   in `worker-configuration.d.ts`; never hard-code secrets or credentials.

@@ -1,5 +1,5 @@
 import { StatusCode } from 'cloudflare-utils';
-import { mapToError, mapToString } from 'fmrs';
+import { toError, toString } from 'fmrs';
 import { MetricName } from '../constants/metric-name.js';
 import { Permission } from '../constants/permission.js';
 import {
@@ -140,11 +140,11 @@ export default async function handlePost(
      * This will catch when `getRequestText()` fails and when the submitted
      * text is not a ReportBody.
      */
-    const error: Error = mapToError(err);
+    const error: Error = toError(err);
     this.emitPublicMetric(MetricName.UnknownError);
     this.logError(error);
     this.emitPrivateMetric(MetricName.UnknownError, {
-      message: mapToString(err),
+      message: toString(err),
     });
 
     return new CspResponse(StatusCode.BadRequest);

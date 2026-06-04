@@ -1,7 +1,7 @@
 ---
 applyTo: "**/*.test.ts,**/*.test.tsx"
 ---
-# Testing coding standards
+# Testing guidelines
 
 - Use Vitest (`describe`, `it`, `expect`) for all unit and integration tests.
 - Group related assertions under a `describe` block; use `it` for individual

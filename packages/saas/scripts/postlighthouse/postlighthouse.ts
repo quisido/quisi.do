@@ -1,5 +1,7 @@
+/// <reference types="node" />
+import type { Result } from 'lighthouse';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
-import mapAuditToString from './utils/map-audit-to-string.js';
+import mapAuditResultToString from './utils/map-audit-result-to-string.js';
 import mapResultToDashboard from './utils/map-result-to-dashboard.js';
 
 const CWD = process.cwd();
@@ -25,22 +27,19 @@ Did you forget to run \`npm run lighthouse\`?`);
 }
 
 const resultStr = readFileSync(REPORT_PATH).toString();
-const result = JSON.parse(resultStr);
+const result = JSON.parse(resultStr) as Result;
 const { audits } = result;
 
-const failures = [];
-for (const { id, score, scoreDisplayMode, ...audit } of Object.values(audits)) {
+const failures: string[] = [];
+for (const audit of Object.values(audits)) {
+  const { id, score, scoreDisplayMode } = audit;
+
   if (IGNORED_AUDITS.has(id)) {
     continue;
   }
 
   if (scoreDisplayMode === 'binary' && score !== PERFECT) {
-    failures.push(
-      mapAuditToString({
-        ...audit,
-        id,
-      }),
-    );
+    failures.push(mapAuditResultToString(audit));
   }
 }
 

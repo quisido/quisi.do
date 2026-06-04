@@ -1,0 +1,285 @@
+# yaml-language-server: $schema=../../schemas/github-workflow.jsonc
+name: Workflow completed
+
+concurrency:
+  cancel-in-progress: true
+  group: >-
+    workflow-completed__${{
+      github.event.workflow_run.pull_requests[0].number ||
+      github.event.workflow_run.id
+    }}
+
+on:
+  workflow_run:
+    types:
+      - completed
+    workflows:
+      - Pull request
+
+permissions: {}
+
+jobs:
+  dependabot-pull-request-failure:
+    name: Dependabot pull request failure
+    environment: codex
+    runs-on: ubuntu-latest
+    if: >-
+      github.actor == 'dependabot[bot]' &&
+      github.event.workflow_run.name == 'Pull request' &&
+      github.event.workflow_run.conclusion == 'failure'
+    permissions:
+      actions: read
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Get head ref
+        id: ref
+        uses: actions/github-script@v9
+        with:
+          result-encoding: string
+          script: |-
+            const [pullRequest] =
+              context.payload.workflow_run.pull_requests ?? [];
+            if (pullRequest === undefined) {
+              throw new Error('No pull request found for this workflow run.');
+            }
+
+            const {
+              data: {
+                head: {
+                  ref: headRef,
+                  repo: { full_name: fullName },
+                },
+                title,
+              },
+            } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              pull_number: pullRequest.number,
+              repo: context.repo.repo,
+            });
+
+            if (fullName !== `${context.repo.owner}/${context.repo.repo}`) {
+              throw new Error('The Codex action does not support forks.', {
+                cause: fullName,
+              });
+            }
+
+            return headRef;
+
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.CODEX_CLIENT_ID }}
+          private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
+
+      - name: Configure git
+        env:
+          CODEX_EMAIL: quisido-codex[bot]@users.noreply.github.com
+        run: >-
+          git config --global user.email "$CODEX_EMAIL";
+          git config --global user.name "quisido-codex[bot]";
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 9
+          ref: ${{ steps.ref.outputs.result }}
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Guard Codex retry limit
+        env:
+          CODEX_EMAIL: quisido-codex[bot]@users.noreply.github.com
+          MAX_CODEX_ATTEMPTS: 3
+        run: |-
+          set -euo pipefail
+          attempts=0
+          while IFS='|' read -r author committer; do
+            if [[
+              "$author" == "$CODEX_EMAIL" ||
+              "$committer" == "$CODEX_EMAIL"
+            ]]; then
+              attempts=$((attempts + 1))
+              continue
+            fi
+            break
+          done < <(
+            git log --format='%ae|%ce' --max-count="$MAX_CODEX_ATTEMPTS"
+          )
+          if (( attempts == 0 )); then
+            echo "Codex will attempt to resolve this. (1/$MAX_CODEX_ATTEMPTS)";
+            exit 0;
+          fi
+          if (( attempts < MAX_CODEX_ATTEMPTS )); then
+            attempt=$((attempts + 1))
+            echo "::warning title=Codex is retrying::Codex will attempt to resolve this. ($attempt/$MAX_CODEX_ATTEMPTS)"
+            exit 0;
+          fi
+          echo "::error title=Codex quits::Codex appears unable to resolve this failure after $attempts attempts."
+          exit 1
+
+      - name: Get failed jobs
+        id: failed-jobs
+        uses: actions/github-script@v9
+        with:
+          result-encoding: string
+          script: |-
+            const MAX_ERROR_LOGS_SIZE = 20000;
+
+            const { owner, repo } = context.repo;
+            const { html_url: runUrl, id: runId, name: runName } =
+              context.payload.workflow_run;
+            const jobs = await github.paginate(
+              github.rest.actions.listJobsForWorkflowRun,
+              { owner, per_page: 100, repo, run_id: runId },
+            );
+
+            // isFailed (job or step)
+            const isFailed = ({ conclusion }) => conclusion === 'failure';
+
+            // mapDataToString
+            const mapDataToString = data => {
+              if (typeof data === 'string') {
+                return data;
+              }
+              if (Buffer.isBuffer(data)) {
+                return data.toString('utf8');
+              }
+              if (data instanceof ArrayBuffer) {
+                const buffer = Buffer.from(data);
+                return mapDataToString(buffer);
+              }
+              if (ArrayBuffer.isView(data)) {
+                const buffer = Buffer.from(
+                  data.buffer,
+                  data.byteOffset,
+                  data.byteLength,
+                );
+                return mapDataToString(buffer);
+              }
+              return JSON.stringify(data);
+            };
+
+            // mapErrorLogToMessage
+            const GITHUB_LOG_TIMESTAMP_PATTERN =
+              /^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+Z)\s?(.*)$/u;
+            const mapErrorLogToMessage = line => {
+              const match = line.match(GITHUB_LOG_TIMESTAMP_PATTERN);
+              const message = match?.[2] ?? line;
+              return message
+                .replaceAll('\r', '')
+                .replaceAll('##[error]', '')
+                .replace(/^::error(?: [^:]*)?::/u, '')
+                .trimEnd();
+            };
+
+            // mapJobToErrorLogs
+            const ERROR_LOG_PATTERN = /(?:^|\s)(?:##\[error\]|::error(?:\s|::))/iu;
+            const isErrorLog = log => ERROR_LOG_PATTERN.test(log);
+            const mapJobToErrorLogs = async ({ id, name, steps = [] }) => {
+              const { data } = await github.request(
+                'GET /repos/{owner}/{repo}/actions/jobs/{job_id}/logs',
+                { headers: { accept: 'text/plain' }, job_id: id, owner, repo },
+              );
+              return {
+                errorLogs: mapDataToString(data)
+                  .split('\n')
+                  .filter(isErrorLog)
+                  .map(mapErrorLogToMessage),
+                name,
+                failedSteps: steps.filter(isFailed),
+              };
+            };
+
+            const failedJobs = await Promise.all(
+              jobs.filter(isFailed).map(mapJobToErrorLogs),
+            );
+
+            if (failedJobs.length === 0) {
+              throw new Error(
+                'Expected failed workflow runs to have failed jobs.',
+                { cause: { runName, runUrl } },
+              );
+            }
+
+            // toTruncated
+            const TRUNCATED_MARKER = '... [truncated] ...';
+            const toLength = ({ length }) => length;
+            const toSum = (a, b) => a + b;
+            const truncateLogs = logs => {
+              const truncatedLogs = [...logs];
+              while (
+                truncatedLogs.map(toLength).reduce(toSum, 0) >
+                MAX_ERROR_LOGS_SIZE
+              ) {
+                // Remove the middle log.
+                truncatedLogs.splice(
+                  Math.floor(truncatedLogs.length / 2),
+                  1,
+                );
+              }
+              // If no rows were removed,
+              if (truncatedLogs.length === logs.length) {
+                return truncatedLogs;
+              }
+              const half = Math.floor(truncatedLogs.length / 2);
+              return [
+                ...truncatedLogs.slice(0, half),
+                TRUNCATED_MARKER,
+                ...truncatedLogs.slice(half),
+              ];
+            };
+
+            // mapJobToMarkdown
+            const stringify = str => JSON.stringify(str);
+            const toName = ({ name }) => name;
+            const mapJobToMarkdown = ({ errorLogs, failedSteps, name }) => {
+              const nameStr = stringify(name);
+              const stepsStr = stringify(failedSteps.map(toName));
+              return [
+                `#### Job ${nameStr}`,
+                `The ${stepsStr} step(s) failed with error logs:`,
+                '<stringified>',
+                ...truncateLogs(errorLogs).map(stringify),
+                '</stringified>',
+              ].join('\n');
+            };
+
+            const markdown = failedJobs.map(mapJobToMarkdown).join('\n\n');
+            core.setOutput('markdown', markdown);
+            return markdown;
+
+      - name: Execute
+        uses: ./.github/actions/codex
+        with:
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          token: ${{ steps.app-token.outputs.token }}
+          prompt: |-
+            Dependabot opened pull request
+            #${{ github.event.workflow_run.pull_requests[0].number }}, and it
+            failed this repository's continuous integration workflow. The pull
+            request branch is checked out locally.
+
+            Focus your actions and analysis to the scope of this pull request.
+
+            ### Failed workflow error logs
+
+            ${{ steps.failed-jobs.outputs.markdown }}
+
+            ### Tasks
+
+            1. Create a plan for how you will resolve the failure(s). Use
+               test-driven development to define the test scope.
+            2. Post your plan in plain English as a comment on the pull request;
+               include any assumptions you are making.
+            3. Execute your plan to resolve the failing workflow.
+            4. Verify that `npm run build` and `npm test` both pass. If not,
+               resolve any errors.
+            5. Commit and push your changes to the pull request branch.
+            6. Edit the previous comment you made to confirm that your changes
+               have been pushed.
+
+            ### Constraints
+
+            - Do not downgrade dependencies. That defeats the purpose of
+              Dependabot.

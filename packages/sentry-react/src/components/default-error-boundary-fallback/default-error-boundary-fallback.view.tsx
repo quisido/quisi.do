@@ -1,4 +1,4 @@
-import { mapToString } from 'fmrs';
+import { toString } from 'fmrs';
 import { type ReactElement } from 'react';
 
 interface Props {
@@ -9,5 +9,5 @@ interface Props {
 export default function DefaultErrorBoundaryFallback({
   error,
 }: Props): ReactElement {
-  return <>{mapToString(error)}</>;
+  return <>{toString(error)}</>;
 }

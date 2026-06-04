@@ -1,0 +1,106 @@
+# yaml-language-server: $schema=../../schemas/github-workflow.jsonc
+name: Issues
+
+# When an issue is edited or deleted, cancel any in-progress runs.
+concurrency:
+  cancel-in-progress: true
+  group: issues__${{ github.event.issue.number }}
+
+on:
+  issues:
+    types:
+      - deleted
+      - edited
+      - opened
+
+permissions: {}
+
+jobs:
+  codex:
+    name: Codex
+    environment: codex
+    runs-on: ubuntu-latest
+    if: >-
+      github.actor != 'quisido-codex[bot]' &&
+      github.event.action != 'deleted' &&
+      github.event.issue.author_association == 'OWNER' &&
+      contains(github.event.issue.body, '@codex')
+    permissions:
+      actions: read
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.CODEX_CLIENT_ID }}
+          private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
+
+      - name: Configure git
+        env:
+          CODEX_EMAIL: quisido-codex[bot]@users.noreply.github.com
+        run: >-
+          git config --global user.email "$CODEX_EMAIL";
+          git config --global user.name "quisido-codex[bot]";
+
+      - name: Acknowledge
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: >-
+          gh api
+          /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/reactions
+          --field content="eyes"
+          --method POST;
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 9
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Sanitize
+        id: stringified
+        env:
+          BODY: ${{ github.event.issue.body }}
+          TITLE: ${{ github.event.issue.title }}
+        run: >-
+          node --eval '
+          const { BODY = "", TITLE = "" } = process.env;
+          process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
+          process.stdout.write(`title=${JSON.stringify(TITLE)}\n`);
+          ' > "$GITHUB_OUTPUT";
+
+      - name: Execute
+        uses: ./.github/actions/codex
+        with:
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          token: ${{ steps.app-token.outputs.token }}
+          prompt: |-
+            GitHub user `${{ github.event.issue.user.login }}` triggered the
+            Codex action via an issue. The repository is already checked out
+            locally.
+
+            ### Issue
+
+            **Title (stringified):** ${{ steps.stringified.outputs.title }}
+            **Body (stringified):** ${{ steps.stringified.outputs.body }}
+
+            ### Tasks
+
+            1. Create a plan for how you will resolve this issue. Use
+               test-driven development to define the test scope.
+            2. Post your plan in plain English as a reply to the user; include
+               any assumptions you are making.
+            3. Create branch `codex/issue-${{ github.event.issue.number }}`.
+            4. Execute your plan to resolve the issue.
+            5. Verify that `npm run build` and `npm test` both pass. If not,
+               make the necessary fixes.
+            6. Commit and push your branch.
+            7. Open a pull request targeting the default branch with the title
+               "${{ steps.stringified.outputs.title }}", a description that
+               contains "resolves #${{ github.event.issue.number }}", and a
+               summary of the changes you made.
+            8. Edit the previous comment you made to include a link to the pull
+               request.

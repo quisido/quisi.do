@@ -1,0 +1,227 @@
+# yaml-language-server: $schema=../../schemas/github-workflow.jsonc
+name: Issue comment
+
+# When a comment is edited or deleted, cancel any in-progress runs.
+concurrency:
+  cancel-in-progress: true
+  group: >-
+    issue-comment
+    __${{ github.event.issue.number }}
+    __${{ github.event.comment.id }}
+
+on:
+  issue_comment:
+    types:
+      - created
+      - deleted
+      - edited
+
+permissions: {}
+
+jobs:
+  codex-issue:
+    name: Codex (issue)
+    environment: codex
+    runs-on: ubuntu-latest
+    if: >-
+      github.actor != 'quisido-codex[bot]' &&
+      github.event.action != 'deleted' &&
+      github.event.comment.author_association == 'OWNER' &&
+      contains(github.event.comment.body, '@codex') &&
+      github.event.issue.pull_request == null
+    permissions:
+      actions: read
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.CODEX_CLIENT_ID }}
+          private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
+
+      - name: Configure git
+        env:
+          CODEX_EMAIL: quisido-codex[bot]@users.noreply.github.com
+        run: >-
+          git config --global user.email "$CODEX_EMAIL";
+          git config --global user.name "quisido-codex[bot]";
+
+      - name: Acknowledge
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: >-
+          gh api
+          /repos/${{ github.repository }}/issues/comments/${{ github.event.comment.id }}/reactions
+          --field content="eyes"
+          --method POST;
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 9
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Sanitize
+        id: stringified
+        env:
+          BODY: ${{ github.event.comment.body }}
+          TITLE: ${{ github.event.issue.title }}
+        run: >-
+          node --eval '
+          const { BODY = "", TITLE = "" } = process.env;
+          process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
+          process.stdout.write(`title=${JSON.stringify(TITLE)}\n`);
+          ' > "$GITHUB_OUTPUT";
+
+      - name: Execute
+        uses: ./.github/actions/codex
+        with:
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          token: ${{ steps.app-token.outputs.token }}
+          prompt: |-
+            GitHub user `${{ github.event.comment.user.login }}` triggered the
+            Codex action via an issue comment. The repository is already checked
+            out locally.
+
+            ### Details
+
+            **Issue title (stringified):** ${{ steps.stringified.outputs.title }}
+            **Comment (stringified):** ${{ steps.stringified.outputs.body }}
+
+            ### Tasks
+
+            1. Create a plan for how you will resolve this issue. Use
+               test-driven development to define the test scope.
+            2. Post your plan in plain English as a reply to the user; include
+               any assumptions you are making.
+            3. Create branch
+               `codex/issue-${{ github.event.issue.number }}-comment-${{ github.event.comment.id }}`.
+            4. Execute your plan to resolve the issue.
+            5. Verify that `npm run build` and `npm test` both pass. If not,
+               make the necessary fixes.
+            6. Commit and push your branch.
+            7. Open a pull request targeting the default branch with a concise
+               title and a description that contains
+               "resolves #${{ github.event.issue.number }}" and a brief summary
+               of the changes you made.
+            8. Edit the previous comment you made to include a link to the pull
+               request.
+
+  codex-pull-request:
+    name: Codex (pull request)
+    environment: codex
+    runs-on: ubuntu-latest
+    if: >-
+      github.actor != 'quisido-codex[bot]' &&
+      github.event.action != 'deleted' &&
+      github.event.comment.author_association == 'OWNER' &&
+      contains(github.event.comment.body, '@codex') &&
+      github.event.issue.pull_request != null
+    permissions:
+      actions: read
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Get head ref
+        id: ref
+        uses: actions/github-script@v9
+        with:
+          result-encoding: string
+          script: |-
+            const {
+              data: {
+                head: {
+                  ref: headRef,
+                  repo: { full_name: fullName },
+                },
+                title,
+              },
+            } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              pull_number: context.payload.issue.number,
+              repo: context.repo.repo,
+            });
+
+            if (fullName !== `${context.repo.owner}/${context.repo.repo}`) {
+              throw new Error('The Codex action does not support forks.', {
+                cause: fullName,
+              });
+            }
+
+            return headRef;
+
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.CODEX_CLIENT_ID }}
+          private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
+
+      - name: Configure git
+        env:
+          CODEX_EMAIL: quisido-codex[bot]@users.noreply.github.com
+        run: >-
+          git config --global user.email "$CODEX_EMAIL";
+          git config --global user.name "quisido-codex[bot]";
+
+      - name: Acknowledge
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: >-
+          gh api
+          /repos/${{ github.repository }}/issues/comments/${{ github.event.comment.id }}/reactions
+          --field content="eyes"
+          --method POST;
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 9
+          ref: ${{ steps.ref.outputs.result }}
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Sanitize
+        id: stringified
+        env:
+          BODY: ${{ github.event.comment.body }}
+          TITLE: ${{ github.event.issue.title }}
+        run: >-
+          node --eval '
+          const { BODY = "", TITLE = "" } = process.env;
+          process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
+          process.stdout.write(`title=${JSON.stringify(TITLE)}\n`);
+          ' > "$GITHUB_OUTPUT";
+
+      - name: Execute
+        uses: ./.github/actions/codex
+        with:
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          token: ${{ steps.app-token.outputs.token }}
+          prompt: |-
+            GitHub user `${{ github.event.comment.user.login }}` triggered the
+            Codex action via a pull request comment. The pull request branch is
+            already checked out locally.
+
+            ### Details
+
+            **Pull request title (stringified):** ${{ steps.stringified.outputs.title }}
+            **Comment (stringified):** ${{ steps.stringified.outputs.body }}
+
+            Focus your actions and analysis to the scope of this pull request.
+
+            ### Tasks
+
+            1. Create a plan for how you will resolve this issue. Use
+               test-driven development to define the test scope.
+            2. Post your plan in plain English as a reply to the user; include
+               any assumptions you are making.
+            3. Execute your plan to resolve the issue.
+            4. Verify that `npm run build` and `npm test` both pass. If not,
+               resolve any errors.
+            5. Commit and push your changes to the pull request branch.
+            6. Edit the previous comment you made to confirm that your changes
+               have been pushed.
