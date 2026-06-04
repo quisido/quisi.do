@@ -1,4 +1,4 @@
-import type { AuditResult } from './adult-result.js';
+import type { AuditResult } from './audit-result.js';
 import reduceAuditsToDashboard, {
   type DashboardAudits,
 } from './reduce-audits-to-dashboard.js';
