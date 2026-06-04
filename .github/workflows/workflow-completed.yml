@@ -173,7 +173,7 @@ jobs:
             const mapJobToErrorLogs = async ({ id, name, steps = [] }) => {
               const { data } = await github.request(
                 'GET /repos/{owner}/{repo}/actions/jobs/{job_id}/logs',
-                { headers: { accept: 'text/plain', }, job_id: id, owner, repo },
+                { headers: { accept: 'text/plain' }, job_id: id, owner, repo },
               );
               return {
                 errorLogs: mapDataToString(data)
