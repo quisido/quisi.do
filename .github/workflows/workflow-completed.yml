@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     if: >-
       github.actor == 'dependabot[bot]' &&
-      github.event.workflow.name == 'Pull request' &&
+      github.event.workflow_run.name == 'Pull request' &&
       github.event.workflow_run.conclusion == 'failure'
     permissions:
       actions: read
@@ -170,7 +170,7 @@ jobs:
             // mapJobToErrorLogs
             const ERROR_LOG_PATTERN = /(?:^|\s)(?:##\[error\]|::error(?:\s|::))/iu;
             const isErrorLog = log => ERROR_LOG_PATTERN.test(log);
-            const mapJobToErrorLogs = async ({ id, name }) => {
+            const mapJobToErrorLogs = async ({ id, name, steps = [] }) => {
               const { data } = await github.request(
                 'GET /repos/{owner}/{repo}/actions/jobs/{job_id}/logs',
                 { headers: { accept: 'text/plain', }, job_id: id, owner, repo },
