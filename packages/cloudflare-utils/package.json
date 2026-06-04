@@ -52,11 +52,7 @@
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20260604.1",
-<<<<<<< HEAD
     "fmrs": "^3.0.0"
-=======
-    "fmrs": "^2.1.1"
->>>>>>> origin/main
   },
   "devDependencies": {
     "@vitest/ui": "^4.1.8",
