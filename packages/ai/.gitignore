@@ -4,5 +4,6 @@
 /node_modules/
 /.dev.vars*
 /.env*
+/worker-configuration.d.ts
 !/.dev.vars.example
 !/.env.example

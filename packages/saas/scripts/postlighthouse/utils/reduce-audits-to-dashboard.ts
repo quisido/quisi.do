@@ -7,7 +7,6 @@ const IGNORED_SCORE_DISPLAY_MODES = new Set<AuditResult['scoreDisplayMode']>([
 ]);
 
 export type DashboardAudit = Omit<AuditResult, 'id'>;
-
 export type DashboardAudits = Readonly<Record<string, DashboardAudit>>;
 
 export default function reduceAuditsToDashboard(

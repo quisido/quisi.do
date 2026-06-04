@@ -27,8 +27,7 @@ jobs:
       github.actor != 'quisido-codex[bot]' &&
       github.event.action != 'deleted' &&
       github.event.comment.author_association == 'OWNER' &&
-      contains(github.event.comment.body, '@codex') &&
-      github.event_name == 'pull_request_review_comment'
+      contains(github.event.comment.body, '@codex')
     permissions:
       actions: read
       contents: write

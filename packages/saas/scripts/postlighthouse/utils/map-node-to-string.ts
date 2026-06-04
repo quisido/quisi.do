@@ -1,3 +1,4 @@
+import { isDefined } from 'fmrs';
 import type { AuditDetails } from './audit-details.js';
 
 export default function mapNodeToString({
@@ -5,7 +6,5 @@ export default function mapNodeToString({
   selector,
   snippet,
 }: AuditDetails.NodeValue): string {
-  return [nodeLabel, snippet, selector]
-    .filter((value): value is string => value !== undefined)
-    .join(' ');
+  return [nodeLabel, snippet, selector].filter(isDefined).join(' ');
 }

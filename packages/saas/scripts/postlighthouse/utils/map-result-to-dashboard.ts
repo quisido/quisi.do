@@ -4,13 +4,8 @@ import reduceResultEntriesToDashboard, {
   type DashboardResult,
 } from './reduce-result-entries-to-dashboard.js';
 
-type ResultEntry = readonly [
-  keyof Omit<LighthouseRunResult, 'audits'>,
-  Omit<LighthouseRunResult, 'audits'>[keyof Omit<
-    LighthouseRunResult,
-    'audits'
-  >],
-];
+type RestResult = Omit<LighthouseRunResult, 'audits'>;
+type ResultEntry = readonly [keyof RestResult, RestResult[keyof RestResult]];
 
 export default function mapResultToDashboard({
   audits,
