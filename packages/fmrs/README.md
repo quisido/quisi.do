@@ -17,6 +17,7 @@ For example:
 ## Filters and finders
 
 - `Record<number | string | symbol, unknown>` (`isRecord`)
+- array (`isArray`)
 - boolean (`isBoolean`)
 - defined (`isDefined`)
 - number (`isNumber`)
