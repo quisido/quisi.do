@@ -3,7 +3,11 @@ name: Workflow completed
 
 concurrency:
   cancel-in-progress: true
-  group: workflow-completed-${{ github.event.workflow_run.id }}
+  group: >-
+    workflow-completed__${{
+      github.event.workflow_run.pull_requests[0].number ||
+      github.event.workflow_run.id
+    }}
 
 on:
   workflow_run:
@@ -11,6 +15,8 @@ on:
       - completed
     workflows:
       - Pull request
+
+permissions: {}
 
 jobs:
   dependabot-pull-request-failure:
@@ -64,7 +70,7 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@v3
         with:
-          client-id: ${{ vars.CODEX_APP_ID }}
+          client-id: ${{ vars.CODEX_CLIENT_ID }}
           private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
 
       - name: Configure git
@@ -254,15 +260,26 @@ jobs:
             failed this repository's continuous integration workflow. The pull
             request branch is checked out locally.
 
+            Focus your actions and analysis to the scope of this pull request.
+
             ### Failed workflow error logs
 
             ${{ steps.failed-jobs.outputs.markdown }}
 
             ### Tasks
 
-            1. Create a plan for how you will resolve the failure(s).
-            2. Post your plan in plain English as a comment on the pull request.
+            1. Create a plan for how you will resolve the failure(s). Use
+               test-driven development to define the test scope.
+            2. Post your plan in plain English as a comment on the pull request;
+               include any assumptions you are making.
             3. Execute your plan to resolve the failing workflow.
             4. Verify that `npm run build` and `npm test` both pass. If not,
                resolve any errors.
             5. Commit and push your changes to the pull request branch.
+            6. Edit the previous comment you made to confirm that your changes
+               have been pushed.
+
+            ### Constraints
+
+            - Do not downgrade dependencies. That defeats the purpose of
+              Dependabot.

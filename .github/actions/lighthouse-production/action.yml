@@ -13,7 +13,10 @@ runs:
       run: >-
         chmod +x ./scripts/lighthouse-production.sh;
         ./scripts/lighthouse-production.sh;
-        node --experimental-strip-types ./scripts/postlighthouse/index.ts;
+        npx esbuild --bundle --platform=node
+        --outfile=./.tests/postlighthouse.js
+        ./scripts/postlighthouse/index.ts;
+        node ./.tests/postlighthouse.js;
     - name: Upload
       if: always()
       uses: actions/upload-artifact@v6

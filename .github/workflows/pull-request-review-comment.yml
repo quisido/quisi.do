@@ -1,17 +1,20 @@
 # yaml-language-server: $schema=../../schemas/github-workflow.jsonc
-name: Issues
+name: Pull request review comment
 
-# When an issue is edited or deleted, cancel any in-progress runs.
+# When a comment is edited or deleted, cancel any in-progress runs.
 concurrency:
   cancel-in-progress: true
-  group: issues__${{ github.event.issue.number }}
+  group: >-
+    pull-request-review-comment
+    __${{ github.event.pull_request.number }}
+    __${{ github.event.comment.id }}
 
 on:
-  issues:
+  pull_request_review_comment:
     types:
+      - created
       - deleted
       - edited
-      - opened
 
 permissions: {}
 
@@ -23,8 +26,9 @@ jobs:
     if: >-
       github.actor != 'quisido-codex[bot]' &&
       github.event.action != 'deleted' &&
-      github.event.issue.author_association == 'OWNER' &&
-      contains(github.event.issue.body, '@codex')
+      github.event.comment.author_association == 'OWNER' &&
+      contains(github.event.comment.body, '@codex') &&
+      github.event_name == 'pull_request_review_comment'
     permissions:
       actions: read
       contents: write
@@ -50,7 +54,7 @@ jobs:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: >-
           gh api
-          /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/reactions
+          /repos/${{ github.repository }}/pulls/comments/${{ github.event.comment.id }}/reactions
           --field content="eyes"
           --method POST;
 
@@ -63,12 +67,20 @@ jobs:
       - name: Sanitize
         id: stringified
         env:
-          BODY: ${{ github.event.issue.body }}
-          TITLE: ${{ github.event.issue.title }}
+          BODY: ${{ github.event.comment.body }}
+          DIFF_HUNK: ${{ github.event.comment.diff_hunk }}
+          LINE: ${{ github.event.comment.line }}
+          START_LINE: ${{ github.event.comment.start_line }}
+          TITLE: ${{ github.event.pull_request.title }}
         run: >-
           node --eval '
-          const { BODY = "", TITLE = "" } = process.env;
+          const {
+          BODY = "", DIFF_HUNK = "", LINE = "", START_LINE = "", TITLE = "",
+          } = process.env;
+          const lines = START_LINE === "" ? LINE : `${START_LINE}-${LINE}`;
           process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
+          process.stdout.write(`diff_hunk=${JSON.stringify(DIFF_HUNK)}\n`);
+          process.stdout.write(`lines=${lines}\n`);
           process.stdout.write(`title=${JSON.stringify(TITLE)}\n`);
           ' > "$GITHUB_OUTPUT";
 
@@ -78,14 +90,18 @@ jobs:
           auth-json: ${{ secrets.CODEX_AUTH_JSON }}
           token: ${{ steps.app-token.outputs.token }}
           prompt: |-
-            GitHub user `${{ github.event.issue.user.login }}` triggered the
-            Codex action via an issue. The repository is already checked out
-            locally.
+            GitHub user `${{ github.event.comment.user.login }}` triggered the
+            Codex action via a pull request comment. The pull request branch is
+            already checked out locally.
 
-            ### Issue
+            ### Details
 
             **Title (stringified):** ${{ steps.stringified.outputs.title }}
-            **Body (stringified):** ${{ steps.stringified.outputs.body }}
+            **File path:** `${{ github.event.comment.path }}:${{ steps.stringified.outputs.lines }}`
+            **Diff hunk (stringified):** ${{ steps.stringified.outputs.diff_hunk }}
+            **Comment (stringified):** ${{ steps.stringified.outputs.body }}
+
+            Focus your actions and analysis to the scope of this pull request.
 
             ### Tasks
 
@@ -93,14 +109,9 @@ jobs:
                test-driven development to define the test scope.
             2. Post your plan in plain English as a reply to the user; include
                any assumptions you are making.
-            3. Create branch `codex/issue-${{ github.event.issue.number }}`.
-            4. Execute your plan to resolve the issue.
-            5. Verify that `npm run build` and `npm test` both pass. If not,
-               make the necessary fixes.
-            6. Commit and push your branch.
-            7. Open a pull request targeting the default branch with the title
-               "${{ steps.stringified.outputs.title }}", a description that
-               contains "resolves #${{ github.event.issue.number }}", and a
-               summary of the changes you made.
-            8. Edit the previous comment you made to include a link to the pull
-               request.
+            3. Execute your plan to resolve the issue.
+            4. Verify that `npm run build` and `npm test` both pass. If not,
+               resolve any errors.
+            5. Commit and push your changes to the pull request branch.
+            6. Edit the previous comment you made to confirm that your changes
+               have been pushed.
