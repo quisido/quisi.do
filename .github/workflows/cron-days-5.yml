@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=../../schemas/github-workflow.jsonc
-name: Codex login
+name: Every 5 days
 
 concurrency:
   cancel-in-progress: true
-  group: codex-login
+  group: cron-days-5
 
 on:
   schedule:
@@ -16,8 +16,8 @@ permissions:
   contents: read
 
 jobs:
-  login:
-    name: Login
+  codex-auth:
+    name: Authenticate Codex
     environment: codex
     runs-on: ubuntu-latest
     steps:
@@ -40,7 +40,7 @@ jobs:
           base64 --decode > "$CODEX_HOME/auth.json";
           chmod 600 "$CODEX_HOME/auth.json";
 
-      - name: Login
+      - name: Authenticate
         env:
           CODEX_HOME: ${{ runner.temp }}/.codex
         run: >-
@@ -60,4 +60,7 @@ jobs:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: >-
           base64 --wrap 0 "$CODEX_HOME/auth.json" |
-          gh secret set CODEX_AUTH_JSON --app actions --env codex;
+          gh secret set CODEX_AUTH_JSON
+          --app actions
+          --env codex
+          --repo ${{ github.repository }};
