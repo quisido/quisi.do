@@ -3,8 +3,6 @@ applyTo: "packages/ai/**,packages/authn/**,packages/csp/**,packages/dashboard/**
 ---
 # Cloudflare Workers guidelines
 
-- Apply the [general coding guidelines](./general-coding.instructions.md) to all
-  code.
 - Apply the [TypeScript coding guidelines](./typescript.instructions.md) to all
   TypeScript code.
 - Use the `Request`/`Response` Web APIs (not Node.js `http`) in Worker handlers.
