@@ -49,6 +49,8 @@ jobs:
           git config --global user.name "quisido-codex[bot]";
 
       - name: Acknowledge
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: >-
           gh api
           /repos/${{ github.repository }}/comments/${{ github.event.comment.id }}/reactions
@@ -161,6 +163,8 @@ jobs:
           git config --global user.name "quisido-codex[bot]";
 
       - name: Acknowledge
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: >-
           gh api
           /repos/${{ github.repository }}/comments/${{ github.event.comment.id }}/reactions
