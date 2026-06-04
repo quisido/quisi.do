@@ -60,7 +60,11 @@
     "@sentry/core": "^10.23.0",
     "@sentry/react": "^10.56.0",
     "@sentry/types": "^10.56.0",
+<<<<<<< HEAD
     "fmrs": "^3.0.0",
+=======
+    "fmrs": "^2.1.1",
+>>>>>>> origin/main
     "use-shallow-memo": "^1.1.0"
   },
   "devDependencies": {

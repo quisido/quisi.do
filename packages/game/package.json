@@ -38,7 +38,11 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
+<<<<<<< HEAD
     "fmrs": "^3.0.0",
+=======
+    "fmrs": "^2.1.1",
+>>>>>>> origin/main
     "react": "^19.2.7",
     "react-reconciler": "^0.33.0"
   },
