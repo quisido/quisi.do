@@ -30,37 +30,18 @@ jobs:
       - name: Install
         run: npm install --global @openai/codex
 
-      - name: Restore
-        env:
-          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
-          CODEX_HOME: ${{ runner.temp }}/.codex
-        run: >-
-          mkdir --parents "$CODEX_HOME";
-          printf '%s' "$CODEX_AUTH_JSON" |
-          base64 --decode > "$CODEX_HOME/auth.json";
-          chmod 600 "$CODEX_HOME/auth.json";
-
       - name: Authenticate
+        uses: ./.github/actions/codex-auth
+        with:
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          codex-home: ${{ runner.temp }}/.codex
+          secrets-client-id: ${{ vars.WRITE_SECRETS_CLIENT_ID }}
+          secrets-environment: codex
+          secrets-private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
+
+      - name: Refresh
         env:
           CODEX_HOME: ${{ runner.temp }}/.codex
         run: >-
           codex debug models |
           jq --raw-output '.models[0].base_instructions';
-
-      - name: Create GitHub App token
-        id: app-token
-        uses: actions/create-github-app-token@v3
-        with:
-          client-id: ${{ vars.WRITE_SECRETS_CLIENT_ID }}
-          private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
-
-      - name: Store
-        env:
-          CODEX_HOME: ${{ runner.temp }}/.codex
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-        run: >-
-          base64 --wrap 0 "$CODEX_HOME/auth.json" |
-          gh secret set CODEX_AUTH_JSON
-          --app actions
-          --env codex
-          --repo ${{ github.repository }};

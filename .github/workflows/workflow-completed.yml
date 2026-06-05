@@ -253,7 +253,9 @@ jobs:
         uses: ./.github/actions/codex
         with:
           auth-json: ${{ secrets.CODEX_AUTH_JSON }}
-          token: ${{ steps.app-token.outputs.token }}
+          codex-token: ${{ steps.app-token.outputs.token }}
+          secrets-client-id: ${{ vars.WRITE_SECRETS_CLIENT_ID }}
+          secrets-private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
           prompt: |-
             Dependabot opened pull request
             #${{ github.event.workflow_run.pull_requests[0].number }}, and it

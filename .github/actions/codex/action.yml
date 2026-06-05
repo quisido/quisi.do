@@ -6,11 +6,21 @@ inputs:
   auth-json:
     description: base64-encoded Codex auth.json
     required: true
+  codex-token:
+    description: GitHub token for Codex to use
+    required: true
   prompt:
     description: additional prompt context
     required: true
-  token:
-    description: GitHub token for Codex to use
+  secrets-client-id:
+    description: GitHub App client ID for writing secrets
+    required: true
+  secrets-environment:
+    description: GitHub environment in which to store secrets
+    default: codex
+    required: false
+  secrets-private-key:
+    description: GitHub App private key for writing secrets
     required: true
 
 runs:
@@ -24,8 +34,8 @@ runs:
         install-browsers: true
         upload: false
 
-    # Configure Bubblewrap, `auth.json`, and `config.toml`.
-    - name: Configure Codex
+    # Configure Bubblewrap and `config.toml`.
+    - name: Configure
       shell: bash
       env:
         CODEX_AUTH_JSON: ${{ inputs.auth-json }}
@@ -33,11 +43,16 @@ runs:
       run: >-
         sudo apt-get install --yes bubblewrap;
         sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0;
-        mkdir --parents "$CODEX_HOME";
-        printf '%s' "$CODEX_AUTH_JSON" |
-        base64 --decode > "$CODEX_HOME/auth.json";
-        chmod 600 "$CODEX_HOME/auth.json";
         cp .github/actions/codex/config.toml "$CODEX_HOME/config.toml";
+
+    - name: Authenticate
+      uses: ./.github/actions/codex-auth
+      with:
+        auth-json: ${{ inputs.auth-json }}
+        codex-home: ${{ runner.temp }}/.codex
+        secrets-client-id: ${{ inputs.secrets-client-id }}
+        secrets-environment: ${{ inputs.secrets-environment }}
+        secrets-private-key: ${{ inputs.secrets-private-key }}
 
     - name: Execute
       run: >-
@@ -48,7 +63,7 @@ runs:
       shell: bash
       env:
         CODEX_HOME: ${{ runner.temp }}/.codex
-        GITHUB_TOKEN: ${{ inputs.token }}
+        GITHUB_TOKEN: ${{ inputs.codex-token }}
         PROMPT: |-
           # Instructions for Codex GitHub Action
 
