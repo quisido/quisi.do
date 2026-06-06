@@ -1,30 +1,40 @@
 /// <reference types="node" />
-import { getInput, setFailed } from '@actions/core';
-import { exec } from '@actions/exec';
+import { spawnSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import process from 'node:process';
 
+const escapeData = data =>
+  data.replace(/%/gu, '%25').replace(/\r/gu, '%0D').replace(/\n/gu, '%0A');
+
+const getInput = name =>
+  process.env[`INPUT_${name.replace(/ /gu, '_').toUpperCase()}`] ?? '';
+
+const setFailed = message => {
+  process.exitCode = 1;
+  process.stdout.write(`::error::${escapeData(message)}\n`);
+};
+
 try {
-  const codexHome = getInput('codex-home', { required: true });
+  const codexHome = getInput('codex-home');
   const authJsonPath = join(codexHome, 'auth.json');
-  const originalAuthJsonBase64 = getInput('auth-json', { required: true });
+  const originalAuthJsonBase64 = getInput('auth-json');
   const authJsonBase64 = await readFile(authJsonPath, 'base64');
 
   // If the auth token has changed,
   if (originalAuthJsonBase64 !== authJsonBase64) {
-    const env = getInput('secrets-environment', { required: true });
-    const repo = getInput('repository', { required: true });
+    const env = getInput('secrets-environment');
+    const repo = getInput('repository');
     const flags = ['--app', 'actions', '--env', env, '--repo', repo];
     const args = ['secret', 'set', 'CODEX_AUTH_JSON', ...flags];
-    const exitCode = await exec('gh', args, {
+    const { status: exitCode } = spawnSync('gh', args, {
       env: {
         ...process.env,
-        GH_TOKEN: getInput('github-token', { required: true }),
+        GH_TOKEN: getInput('github-token'),
       },
       /* global Buffer */
       input: Buffer.from(authJsonBase64),
-      silent: true,
+      stdio: 'ignore',
     });
 
     if (exitCode !== 0) {
