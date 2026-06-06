@@ -34,7 +34,7 @@ try {
       },
       /* global Buffer */
       input: Buffer.from(authJsonBase64),
-      stdio: 'ignore',
+      stdio: ['pipe', 'ignore', 'ignore'],
     });
 
     if (exitCode !== 0) {
