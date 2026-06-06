@@ -22,6 +22,6 @@ inputs:
     required: false
 
 runs:
-  main: main.js
-  post: post.js
   using: node24
+  main: main.mjs
+  post: post.mjs
