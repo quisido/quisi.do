@@ -58,6 +58,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 9
+          persist-credentials: true
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Sanitize

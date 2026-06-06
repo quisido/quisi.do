@@ -84,10 +84,11 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 9
+          persist-credentials: true
           ref: ${{ steps.ref.outputs.result }}
           token: ${{ steps.app-token.outputs.token }}
 
-      - name: Guard Codex retry limit
+      - name: Limit retries
         env:
           CODEX_EMAIL: quisido-codex[bot]@users.noreply.github.com
           MAX_CODEX_ATTEMPTS: 3
