@@ -43,6 +43,7 @@ runs:
       run: >-
         sudo apt-get install --yes bubblewrap;
         sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0;
+        mkdir --parents "$CODEX_HOME";
         cp .github/actions/codex/config.toml "$CODEX_HOME/config.toml";
 
     - name: Authenticate
