@@ -28,8 +28,8 @@ runs:
       id: app-token
       uses: actions/create-github-app-token@v3
       with:
-        client-id: ${{ inputs.client-id }}
-        private-key: ${{ inputs.private-key }}
+        client-id: ${{ inputs.secrets-client-id }}
+        private-key: ${{ inputs.secrets-private-key }}
 
     - name: Authenticate
       uses: ./.github/actions/codex-auth-step
