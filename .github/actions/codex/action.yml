@@ -57,6 +57,10 @@ runs:
 
     - name: Execute
       run: >-
+        env
+        -u INPUT_AUTH_JSON
+        -u INPUT_CODEX_TOKEN
+        -u INPUT_SECRETS_PRIVATE_KEY
         npx codex exec
         --add-dir "$(npm config get prefix)"
         --color always
