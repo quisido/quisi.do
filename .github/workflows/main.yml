@@ -33,6 +33,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
       - name: Build
         uses: ./.github/actions/build
         with:
@@ -47,6 +50,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
       - name: Upload
         uses: ./.github/actions/datadog-sourcemaps
         with:
@@ -62,6 +68,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
       - name: Lighthouse
         uses: ./.github/actions/lighthouse-ci
 
@@ -73,6 +82,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
       - name: Release
         uses: ./.github/actions/sentry-release
         with:
@@ -88,6 +100,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
       - name: Test
         uses: ./.github/actions/test
 
@@ -101,6 +116,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
       - name: Audit
         uses: ./.github/actions/webhint-ci
 
@@ -116,7 +134,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0
+          fetch-depth: 2
+          persist-credentials: false
       - name: Upload
         uses: ./.github/actions/codecov
         with:
@@ -137,6 +156,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: true
       - name: Download
         uses: actions/download-artifact@v8
         with:
@@ -164,6 +186,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
       - name: Setup
         uses: ./.github/actions/setup
       - name: Publish
@@ -180,6 +205,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
       - name: Purge cache
         uses: ./.github/actions/cloudflare-purge
         with:
@@ -201,6 +229,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: true
       - name: Publish
         uses: ./.github/actions/github-packages
         with:
@@ -219,6 +250,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
       - name: Deploy
         uses: ./.github/actions/wrangler-deploy
         with:
@@ -247,6 +281,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
       - name: Audit
         uses: ./.github/actions/lighthouse-production
 
@@ -262,6 +299,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
       - name: Setup
         uses: ./.github/actions/setup
       - name: Run

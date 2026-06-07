@@ -21,6 +21,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 9
+          persist-credentials: false
+
       - name: Build
         uses: ./.github/actions/build
         with:

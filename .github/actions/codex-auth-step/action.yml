@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
+name: Authenticate Codex
+description: gets and sets the Codex authentication token
+
+inputs:
+  auth-json:
+    description: base64-encoded Codex auth.json
+    required: true
+  codex-home:
+    default: ${{ runner.temp }}/.codex
+    description: Codex home directory
+    required: false
+  github-token:
+    description: GitHub token for writing secrets
+    required: true
+  repository:
+    description: GitHub repository in which to store the secret (e.g. owner/repo)
+    required: true
+  secrets-environment:
+    description: GitHub environment in which to store the secret
+    default: codex
+    required: false
+
+runs:
+  using: node24
+  main: main.mjs
+  post: post.mjs

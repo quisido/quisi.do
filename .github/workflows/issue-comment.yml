@@ -62,6 +62,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 9
+          persist-credentials: true
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Sanitize
@@ -80,7 +81,9 @@ jobs:
         uses: ./.github/actions/codex
         with:
           auth-json: ${{ secrets.CODEX_AUTH_JSON }}
-          token: ${{ steps.app-token.outputs.token }}
+          codex-token: ${{ steps.app-token.outputs.token }}
+          secrets-client-id: ${{ vars.WRITE_SECRETS_CLIENT_ID }}
+          secrets-private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
           prompt: |-
             GitHub user `${{ github.event.comment.user.login }}` triggered the
             Codex action via an issue comment. The repository is already checked
@@ -181,6 +184,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 9
+          persist-credentials: true
           ref: ${{ steps.ref.outputs.result }}
           token: ${{ steps.app-token.outputs.token }}
 
@@ -200,7 +204,9 @@ jobs:
         uses: ./.github/actions/codex
         with:
           auth-json: ${{ secrets.CODEX_AUTH_JSON }}
-          token: ${{ steps.app-token.outputs.token }}
+          codex-token: ${{ steps.app-token.outputs.token }}
+          secrets-client-id: ${{ vars.WRITE_SECRETS_CLIENT_ID }}
+          secrets-private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
           prompt: |-
             GitHub user `${{ github.event.comment.user.login }}` triggered the
             Codex action via a pull request comment. The pull request branch is

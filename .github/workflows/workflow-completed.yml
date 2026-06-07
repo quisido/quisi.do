@@ -84,10 +84,11 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 9
+          persist-credentials: true
           ref: ${{ steps.ref.outputs.result }}
           token: ${{ steps.app-token.outputs.token }}
 
-      - name: Guard Codex retry limit
+      - name: Limit retries
         env:
           CODEX_EMAIL: quisido-codex[bot]@users.noreply.github.com
           MAX_CODEX_ATTEMPTS: 3
@@ -253,7 +254,9 @@ jobs:
         uses: ./.github/actions/codex
         with:
           auth-json: ${{ secrets.CODEX_AUTH_JSON }}
-          token: ${{ steps.app-token.outputs.token }}
+          codex-token: ${{ steps.app-token.outputs.token }}
+          secrets-client-id: ${{ vars.WRITE_SECRETS_CLIENT_ID }}
+          secrets-private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
           prompt: |-
             Dependabot opened pull request
             #${{ github.event.workflow_run.pull_requests[0].number }}, and it

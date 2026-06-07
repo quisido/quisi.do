@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../../schemas/github-action.jsonc
+name: Authenticate Codex
+description: authenticates Codex
+
+inputs:
+  auth-json:
+    description: base64-encoded Codex auth.json
+    required: true
+  codex-home:
+    default: ${{ runner.temp }}/.codex
+    description: Codex home directory
+    required: false
+  secrets-client-id:
+    description: GitHub App client ID for writing secrets
+    required: true
+  secrets-environment:
+    description: GitHub environment in which to store the secret
+    default: codex
+    required: false
+  secrets-private-key:
+    description: GitHub App private key for writing secrets
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Create GitHub App token
+      id: app-token
+      uses: actions/create-github-app-token@v3
+      with:
+        client-id: ${{ inputs.secrets-client-id }}
+        private-key: ${{ inputs.secrets-private-key }}
+
+    - name: Authenticate
+      uses: ./.github/actions/codex-auth-step
+      with:
+        auth-json: ${{ inputs.auth-json }}
+        codex-home: ${{ inputs.codex-home }}
+        github-token: ${{ steps.app-token.outputs.token }}
+        repository: ${{ github.repository }}
+        secrets-environment: ${{ inputs.secrets-environment }}
