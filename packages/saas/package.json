@@ -152,7 +152,7 @@
     "hint": "^7.1.13",
     "identity-obj-proxy": "^3.0.0",
     "istanbul-lib-coverage": "^3.2.2",
-    "lighthouse": "^13.3.0",
+    "lighthouse": "^13.4.0",
     "logrocket": "^12.1.1",
     "nyc": "^18.0.0",
     "playwright": "^1.60.0",
