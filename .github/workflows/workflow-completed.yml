@@ -24,7 +24,11 @@ jobs:
     environment: codex
     runs-on: ubuntu-latest
     if: >-
-      github.actor == 'dependabot[bot]' &&
+      (
+        github.actor == 'dependabot[bot]' ||
+        github.actor == 'Copilot' ||
+        github.actor == 'quisido-codex[bot]'
+      ) &&
       github.event.workflow_run.name == 'Pull request' &&
       github.event.workflow_run.conclusion == 'failure'
     permissions:
@@ -50,7 +54,9 @@ jobs:
                   ref: headRef,
                   repo: { full_name: fullName },
                 },
+                merged,
                 title,
+                user: { login: userLogin },
               },
             } = await github.rest.pulls.get({
               owner: context.repo.owner,
@@ -62,6 +68,17 @@ jobs:
               throw new Error('The Codex action does not support forks.', {
                 cause: fullName,
               });
+            }
+
+            if (merged) {
+              throw new Error('The pull request was already merged.');
+            }
+
+            if (userLogin !== 'dependabot[bot]') {
+              throw new Error(
+                'The pull request was not opened by dependabot.',
+                { cause: userLogin }
+              );
             }
 
             return headRef;
