@@ -1,4 +1,4 @@
-import { type User } from '@sentry/core';
+import { type DataCollection, type User } from '@sentry/core';
 import { type ReactElement, type ReactNode } from 'react';
 import SentryReact from 'sentry-react';
 import useSentryIntegrations from '../hooks/use-sentry-integrations.js';
@@ -15,6 +15,27 @@ interface Props {
 const IGNORE_ERRORS: RegExp[] = [
   /^Object Not Found Matching Id:\d+, MethodName:\w+, ParamCount:\d+$/u,
 ];
+const SENTRY_DATA_COLLECTION: DataCollection = {
+  cookies: true,
+  frameContextLines: 7,
+  genAI: {
+    inputs: true,
+    outputs: true,
+  },
+  httpBodies: [
+    'incomingRequest',
+    'outgoingRequest',
+    'incomingResponse',
+    'outgoingResponse',
+  ],
+  httpHeaders: {
+    request: true,
+    response: true,
+  },
+  queryParams: true,
+  stackFrameVariables: true,
+  userInfo: true,
+};
 
 export default function Sentry({
   children,
@@ -40,7 +61,7 @@ export default function Sentry({
       replaysSessionSampleRate={1}
       sampleRate={1}
       sendClientReports
-      sendDefaultPii
+      dataCollection={SENTRY_DATA_COLLECTION}
       tracePropagationTargets={tracePropagationTargets}
       tracesSampleRate={1}
       user={user}
