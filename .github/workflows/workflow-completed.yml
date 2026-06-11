@@ -25,8 +25,9 @@ jobs:
     runs-on: ubuntu-latest
     if: >-
       (
-        github.actor == 'dependabot[bot]' ||
         github.actor == 'Copilot' ||
+        github.actor == 'copilot-swe-agent[bot]' ||
+        github.actor == 'dependabot[bot]' ||
         github.actor == 'quisido-codex[bot]'
       ) &&
       github.event.workflow_run.name == 'Pull request' &&
