@@ -15,3 +15,5 @@ applyTo: "**/*.test.ts,**/*.test.tsx"
 - Follow the Arrange-Act-Assert (AAA) pattern: set up preconditions, invoke
   the unit under test, then assert the outcome.
 - Avoid arbitrary timeouts (`setTimeout`, `sleep`) in tests.
+- Never use `vi.mock`. Instead, write testable code and/or use dependency
+  injection.

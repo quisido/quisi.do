@@ -33,8 +33,9 @@ jobs:
       github.event.workflow_run.conclusion == 'failure'
     permissions:
       actions: read
-      issues: write
-      pull-requests: write
+      contents: write      # Codex
+      issues: write        # Codex
+      pull-requests: write # Codex
     steps:
       - name: Get head ref
         id: ref
