@@ -21,23 +21,25 @@ jobs:
       contents: write      # gh pr merge
       pull-requests: write # gh pr merge
     steps:
-      - name: Check commit authors
+      - name: Get authors
         id: commits
         run: |-
-          {
-            printf 'all_commits_are_dependabot='
+          DEPENDABOT=$( \
             gh api \
-              "repos/$GITHUB_REPOSITORY/compare/refs/heads/$DEFAULT_BRANCH...$HEAD_SHA" \
-              --jq '[.commits[] | (.author.login // "")] | all(.[]; . == "dependabot[bot]")'
-          } >> "$GITHUB_OUTPUT"
+              "repos/$GITHUB_REPOSITORY/compare/$DEFAULT_BRANCH...$HEAD_SHA" \
+              --jq '[.commits[] | (.author.login // "")] | all(.[]; . == "dependabot[bot]")' \
+              2>/dev/null || \
+            echo 'false' \
+          );
+          echo "dependabot=$DEPENDABOT" >> "$GITHUB_OUTPUT";
         env:
           DEFAULT_BRANCH: ${{github.event.repository.default_branch}}
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
           HEAD_SHA: ${{github.event.pull_request.head.sha}}
-      - name: ${{ steps.commits.outputs.all_commits_are_dependabot == 'true' && 'Enable' || 'Disable' }}
+      - name: ${{ steps.commits.outputs.dependabot == 'true' && 'Enable' || 'Disable' }}
         run: gh pr merge ${{ env.FLAGS }} "$HTML_URL"
         env:
-          FLAGS: ${{ steps.commits.outputs.all_commits_are_dependabot == 'true' && '--auto --squash' || '--disable-auto' }}
+          FLAGS: ${{ steps.commits.outputs.dependabot == 'true' && '--auto --squash' || '--disable-auto' }}
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
           HTML_URL: ${{github.event.pull_request.html_url}}
 
