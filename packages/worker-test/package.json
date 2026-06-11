@@ -51,7 +51,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "@cloudflare/workers-types": "^4.20260610.1",
+    "@cloudflare/workers-types": "^4.20260611.1",
     "@quisido/worker": "^1.0.8",
     "cloudflare-test-utils": "^1.0.2",
     "cloudflare-utils": "^1.0.4",
