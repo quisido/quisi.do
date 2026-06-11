@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: read # git checkout
 
 jobs:
   # Stage 1: build
@@ -129,7 +129,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: read # git checkout
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -150,7 +150,7 @@ jobs:
       - test
       - webhint-ci
     permissions:
-      contents: write
+      contents: write # git push (`github-pages`)
     services:
       datadog-agent: *datadog-agent
     steps:
@@ -179,8 +179,8 @@ jobs:
       - build
       - test
     permissions:
-      contents: read
-      id-token: write
+      contents: read  # git checkout
+      id-token: write # npm publish
     services:
       datadog-agent: *datadog-agent
     steps:
@@ -221,9 +221,9 @@ jobs:
     needs: npm-publish
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      id-token: write
-      packages: write
+      contents: read  # git checkout
+      id-token: write # npm publish
+      packages: write # npm publish
     services:
       datadog-agent: *datadog-agent
     steps:

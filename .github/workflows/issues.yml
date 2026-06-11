@@ -27,9 +27,9 @@ jobs:
       contains(github.event.issue.body, '@codex')
     permissions:
       actions: read
-      contents: write
-      issues: write
-      pull-requests: write
+      contents: write      # Codex
+      issues: write        # Codex
+      pull-requests: write # Codex
     steps:
       - name: Create GitHub App token
         id: app-token

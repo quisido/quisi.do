@@ -18,8 +18,8 @@ jobs:
     if: github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
+      contents: write      # gh pr merge
+      pull-requests: write # gh pr merge
     steps:
       - name: Get commit author
         id: commit
@@ -72,8 +72,8 @@ jobs:
     environment: continuous-integration
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: write
+      contents: read       # git checkout
+      pull-requests: write # status checks
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -143,7 +143,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: read # git checkout
     steps:
       - name: Checkout
         uses: actions/checkout@v6
