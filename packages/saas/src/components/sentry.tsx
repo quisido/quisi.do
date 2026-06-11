@@ -12,10 +12,7 @@ interface Props {
   readonly user?: User | undefined;
 }
 
-const IGNORE_ERRORS: RegExp[] = [
-  /^Object Not Found Matching Id:\d+, MethodName:\w+, ParamCount:\d+$/u,
-];
-const SENTRY_DATA_COLLECTION: DataCollection = {
+const DATA_COLLECTION: DataCollection = {
   cookies: true,
   frameContextLines: 7,
   genAI: {
@@ -36,6 +33,10 @@ const SENTRY_DATA_COLLECTION: DataCollection = {
   stackFrameVariables: true,
   userInfo: true,
 };
+
+const IGNORE_ERRORS: RegExp[] = [
+  /^Object Not Found Matching Id:\d+, MethodName:\w+, ParamCount:\d+$/u,
+];
 
 export default function Sentry({
   children,
@@ -61,7 +62,7 @@ export default function Sentry({
       replaysSessionSampleRate={1}
       sampleRate={1}
       sendClientReports
-      dataCollection={SENTRY_DATA_COLLECTION}
+      dataCollection={DATA_COLLECTION}
       tracePropagationTargets={tracePropagationTargets}
       tracesSampleRate={1}
       user={user}

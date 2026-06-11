@@ -12,6 +12,8 @@ applyTo: "**/*.tsx"
 - Co-locate styles with the component.
 - Prefer className composition over inline styles; allow inline only for
   dynamic, computed styles.
+- Never use `vi.mock`. Instead, write testable code and/or use dependency
+  injection (e.g. React context).
 - Type props explicitly; avoid `React.FC`. Prefer:
 
   ```tsx

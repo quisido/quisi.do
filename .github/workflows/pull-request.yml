@@ -15,17 +15,30 @@ jobs:
   # Stage 1: auto-merge, build, dependency-review
   auto-merge:
     name: Auto-merge
-    if: github.actor == 'dependabot[bot]'
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
     steps:
-      - name: Enable
-        run: gh pr merge --auto --squash "$PR_HTML_URL"
+      - name: Get commit author
+        id: commit
+        run: |-
+          {
+            printf 'author='
+            gh api \
+              "repos/$GITHUB_REPOSITORY/commits/$HEAD_SHA" \
+              --jq '.author.login'
+          } >> "$GITHUB_OUTPUT"
         env:
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          PR_HTML_URL: ${{github.event.pull_request.html_url}}
+          HEAD_SHA: ${{github.event.pull_request.head.sha}}
+      - name: ${{ steps.commit.outputs.author == 'dependabot[bot]' && 'Enable' || 'Disable' }}
+        run: gh pr merge ${{ env.FLAGS }} "$HTML_URL"
+        env:
+          FLAGS: ${{ steps.commit.outputs.author == 'dependabot[bot]' && '--auto --squash' || '--disable-auto' }}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          HTML_URL: ${{github.event.pull_request.html_url}}
 
   build:
     name: Build
