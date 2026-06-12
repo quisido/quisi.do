@@ -56,15 +56,6 @@ runs:
         secrets-private-key: ${{ inputs.secrets-private-key }}
 
     - name: Execute
-      run: >-
-        env
-        -u INPUT_AUTH_JSON
-        -u INPUT_CODEX_TOKEN
-        -u INPUT_SECRETS_PRIVATE_KEY
-        npx codex exec
-        --add-dir "$(npm config get prefix)"
-        --color always
-        --ephemeral "$PROMPT"
       shell: bash
       env:
         CODEX_HOME: ${{ runner.temp }}/.codex
@@ -87,3 +78,12 @@ runs:
           ## User Request
 
           ${{ inputs.prompt }}
+      run: >-
+        env
+        -u INPUT_AUTH-JSON
+        -u INPUT_CODEX-TOKEN
+        -u INPUT_SECRETS-PRIVATE-KEY
+        npx codex exec
+        --add-dir "$(npm config get prefix)"
+        --color always
+        --ephemeral "$PROMPT"

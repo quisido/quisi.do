@@ -1,6 +1,5 @@
 import { act, render } from '@testing-library/react';
-import { beforeEach, describe, expect, it } from 'vitest';
-import validateDefined from '../test/validate-defined.js';
+import { assert, beforeEach, describe, expect, it } from 'vitest';
 import useForceUpdate from './index.js';
 
 const FIRST = 0;
@@ -23,12 +22,14 @@ describe('forceUpdate', () => {
   });
 
   it('should accept no parameters', (): void => {
-    const forceUpdate = validateDefined(forceUpdates[FIRST]);
+    const forceUpdate: (() => void) | undefined = forceUpdates[FIRST];
+    assert(forceUpdate !== undefined);
     expect(forceUpdate.length).toBe(NONE);
   });
 
   it('should maintain the same reference', (): void => {
-    const forceUpdate = validateDefined(forceUpdates[FIRST]);
+    const forceUpdate: (() => void) | undefined = forceUpdates[FIRST];
+    assert(forceUpdate !== undefined);
 
     act((): void => {
       forceUpdate();
@@ -38,7 +39,8 @@ describe('forceUpdate', () => {
   });
 
   it('should update the component', (): void => {
-    const forceUpdate = validateDefined(forceUpdates[FIRST]);
+    const forceUpdate: (() => void) | undefined = forceUpdates[FIRST];
+    assert(forceUpdate !== undefined);
     expect(forceUpdates.length).toBe(ONCE);
 
     act((): void => {
@@ -46,7 +48,8 @@ describe('forceUpdate', () => {
     });
 
     expect(forceUpdates.length).toBe(TWICE);
-    const forceUpdate2 = validateDefined(forceUpdates[FIRST]);
+    const forceUpdate2: (() => void) | undefined = forceUpdates[FIRST];
+    assert(forceUpdate2 !== undefined);
 
     act((): void => {
       forceUpdate2();

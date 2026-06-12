@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 
+// referential inequality triggers re-render
 const createNewObject = (): Record<string, never> => ({});
 
 export default function useForceUpdate(): () => void {

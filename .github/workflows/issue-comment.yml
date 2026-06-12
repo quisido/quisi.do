@@ -110,8 +110,14 @@ jobs:
                title and a description that contains
                "resolves #${{ github.event.issue.number }}" and a brief summary
                of the changes you made.
-            8. Edit the previous comment you made to include a link to the pull
-               request.
+            8. Edit the previous comment you made to include a
+               **link to the pull request** and answer this retrospective:
+               1. For which files did you have to _search_ to discover how this
+                  repository works? What did you learn that could decrease token
+                  usage or turn counts for future searches?
+               2. Which shell scripts and tool calls were needed to learn how to
+                  accomplish your goal? What did you learn from them? Could any
+                  _series_ of scripts/calls be consolidated to a single command?
 
   codex-pull-request:
     name: Codex (pull request)
@@ -230,4 +236,10 @@ jobs:
                resolve any errors.
             5. Commit and push your changes to the pull request branch.
             6. Edit the previous comment you made to confirm that your changes
-               have been pushed.
+               have been pushed and answer this retrospective:
+               1. For which files did you have to _search_ to discover how this
+                  repository works? What did you learn that could decrease token
+                  usage or turn counts for future searches?
+               2. Which shell scripts and tool calls were needed to learn how to
+                  accomplish your goal? What did you learn from them? Could any
+                  _series_ of scripts/calls be consolidated to a single command?
