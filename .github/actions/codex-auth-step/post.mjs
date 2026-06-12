@@ -21,7 +21,9 @@ try {
   const previousAuthJsonHash = getState('auth-json-hash');
   const authJsonPath = join(codexHome, 'auth.json');
   const authJsonBase64 = await readFile(authJsonPath, 'base64');
-  const authJsonHash = createHash('sha256').update(authJsonBase64).digest('hex');
+  const authJsonHash = createHash('sha256')
+    .update(authJsonBase64)
+    .digest('hex');
 
   // If the auth token has changed,
   if (previousAuthJsonHash !== authJsonHash) {

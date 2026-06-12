@@ -36,7 +36,9 @@ try {
   await chmod(authJsonPath, OWNER_READ_WRITE);
 
   // Save state for `post.mjs`, which does not have access to input.
-  const authJsonHash = createHash('sha256').update(authJsonBase64).digest('hex');
+  const authJsonHash = createHash('sha256')
+    .update(authJsonBase64)
+    .digest('hex');
   const githubToken = getInput('github-token');
   const repository = getInput('repository');
   const secretsEnvironment = getInput('secrets-environment');
