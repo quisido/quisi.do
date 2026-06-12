@@ -23,7 +23,7 @@ try {
   const authJsonHash = createHash('sha256').update(authJsonBase64).digest('hex');
 
   // If the auth token has changed,
-  if (previousAuthJsonHash !== authJsonBase64) {
+  if (previousAuthJsonHash !== authJsonHash) {
     const env = getState('secrets-environment');
     const repo = getState('repository');
     const flags = ['--app', 'actions', '--env', env, '--repo', repo];

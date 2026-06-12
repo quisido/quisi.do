@@ -1,4 +1,5 @@
 import { appendFile, chmod, mkdir, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import process from 'node:process';
 
