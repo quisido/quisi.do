@@ -71,7 +71,7 @@
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "^8.61.0",
     "@typescript-eslint/parser": "^8.46.3",
-    "eslint": ">=10.4.1",
+    "eslint": ">=10.5.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsonc": "^3.2.0",
     "eslint-plugin-prettier": "^5.5.6",
