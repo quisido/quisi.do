@@ -67,7 +67,7 @@
     "@sentry/react": "^10.57.0",
     "@sentry/tracing": "^7.120.4",
     "@types/google.visualization": "^0.0.74",
-    "dompurify": "^3.4.9",
+    "dompurify": "^3.4.10",
     "fmrs": "^3.0.0",
     "fullstory-react": "^3.0.0",
     "i18next": "^26.3.1",
