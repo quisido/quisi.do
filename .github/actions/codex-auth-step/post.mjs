@@ -25,8 +25,13 @@ try {
     .update(authJsonBase64)
     .digest('hex');
 
+  if (previousAuthJsonHash === authJsonHash) {
+    process.stdout.write('Authentication token has not changed.\n');
+  }
+
   // If the auth token has changed,
-  if (previousAuthJsonHash !== authJsonHash) {
+  else {
+    process.stdout.write('Authentication token has changed.\n');
     const env = getState('secrets-environment');
     const repo = getState('repository');
     const flags = ['--app', 'actions', '--env', env, '--repo', repo];
@@ -41,7 +46,9 @@ try {
       stdio: ['pipe', 'ignore', 'ignore'],
     });
 
-    if (exitCode !== 0) {
+    if (exitCode === 0) {
+      process.stdout.write('Successfully updated authentication token.\n');
+    } else {
       setFailed(`Failed to set GitHub secret (code ${exitCode})`);
     }
   }
