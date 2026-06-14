@@ -47,8 +47,10 @@ jobs:
           secrets-private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
 
       - name: Refresh
+        shell: bash
         env:
           CODEX_HOME: ${{ runner.temp }}/.codex
         run: >-
-          codex debug models |
-          jq --raw-output '.models[0].base_instructions';
+          npx codex exec
+          --color always
+          --ephemeral "Reply with exactly: ok";
