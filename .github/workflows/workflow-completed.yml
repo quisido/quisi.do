@@ -138,6 +138,14 @@ jobs:
           echo "::error title=Codex quits::Codex appears unable to resolve this failure after $attempts attempts."
           exit 1
 
+      - name: Build
+        uses: ./.github/actions/build
+        with:
+          continue-on-error: true
+          environment: development
+          install-browsers: true
+          upload: false
+
       - name: Get failed jobs
         id: failed-jobs
         uses: actions/github-script@v9

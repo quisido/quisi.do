@@ -26,14 +26,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Build
-      uses: ./.github/actions/build
-      with:
-        continue-on-error: true
-        environment: development
-        install-browsers: true
-        upload: false
-
     # Configure Bubblewrap and `config.toml`.
     - name: Configure
       shell: bash
@@ -86,4 +78,4 @@ runs:
         npx codex exec
         --add-dir "$(npm config get prefix)"
         --color always
-        --ephemeral "$PROMPT"
+        --ephemeral "$PROMPT";

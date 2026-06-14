@@ -37,20 +37,12 @@ jobs:
       - name: Install
         run: npm install --global @openai/codex
 
-      - name: Authenticate
-        uses: ./.github/actions/codex-auth
+      - name: Refresh
+        uses: ./.github/actions/codex
         with:
           auth-json: ${{ secrets.CODEX_AUTH_JSON }}
-          codex-home: ${{ runner.temp }}/.codex
+          codex-token: ${{ github.token }}
+          prompt: "Reply with exactly: ok"
           secrets-client-id: ${{ vars.WRITE_SECRETS_CLIENT_ID }}
           secrets-environment: codex
           secrets-private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
-
-      - name: Refresh
-        shell: bash
-        env:
-          CODEX_HOME: ${{ runner.temp }}/.codex
-        run: >-
-          npx codex exec
-          --color always
-          --ephemeral "Reply with exactly: ok";
