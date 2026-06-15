@@ -60,7 +60,7 @@
     "fmrs": "^3.0.0"
   },
   "devDependencies": {
-    "@microsoft/api-extractor": "^7.58.8",
+    "@microsoft/api-extractor": "^7.58.9",
     "@types/cookie": "^1.0.0",
     "@vitest/ui": "^4.1.9",
     "cloudflare-test-utils": "^1.0.2",
