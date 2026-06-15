@@ -86,7 +86,7 @@
     "@playwright/mcp": "^0.0.76",
     "@types/eslint": "^9.6.1",
     "@types/node": "^25.9.3",
-    "@vitest/ui": "^4.1.8",
+    "@vitest/ui": "^4.1.9",
     "browserslist": "^4.28.2",
     "chrome-devtools-mcp": "^1.2.0",
     "concurrently": "^10.0.3",
