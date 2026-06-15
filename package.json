@@ -31,7 +31,7 @@
     "react-datadog": "npm --workspace=packages/react-datadog start",
     "saas": "npm --workspace=packages/saas start",
     "test:workspaces": "node ./dist/scripts/test.js",
-    "tsc:build": "tsc --project tsconfig.build.json",
+    "tsc:build": "tsc --build tsconfig.build.json",
     "tsc:version": "tsc --version",
     "update": "node ./dist/scripts/update.js",
     "vitest": "vitest run",

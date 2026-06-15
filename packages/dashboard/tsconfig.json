@@ -1,15 +1,54 @@
 {
   "compilerOptions": {
-    "composite": false,
     "declarationDir": "dist",
-    "incremental": false,
     "module": "esnext",
     "moduleResolution": "bundler",
     "outDir": "dist",
     "rootDir": ".",
-    "sourceRoot": "src"
+    "sourceRoot": "src",
+    "paths": {
+      "@quisido/worker": [
+        "../worker/src/index.ts"
+      ],
+      "@quisido/worker-test": [
+        "../worker-test/src/index.ts"
+      ],
+      "cloudflare-utils": [
+        "../cloudflare-utils/src/index.ts"
+      ],
+      "fmrs": [
+        "../fmrs/src/index.ts"
+      ],
+      "quisido": [
+        "../quisido/src/index.ts"
+      ]
+    }
   },
-  "exclude": [".cache/", ".tests/", ".wrangler/", "dist/"],
+  "exclude": [
+    ".cache/",
+    ".tests/",
+    ".wrangler/",
+    "dist/"
+  ],
   "extends": "quisido/tsconfig.json",
-  "include": ["**/*.ts"]
+  "include": [
+    "**/*.ts"
+  ],
+  "references": [
+    {
+      "path": "../worker/tsconfig.build.json"
+    },
+    {
+      "path": "../worker-test/tsconfig.build.json"
+    },
+    {
+      "path": "../cloudflare-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../fmrs/tsconfig.build.json"
+    },
+    {
+      "path": "../quisido/tsconfig.build.json"
+    }
+  ]
 }

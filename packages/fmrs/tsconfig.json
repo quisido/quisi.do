@@ -1,11 +1,32 @@
 {
   "compilerOptions": {
     "declarationDir": "dist",
-    "lib": ["DOM", "ESNext"],
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
     "noEmit": true,
     "rootDir": ".",
+    "paths": {
+      "quisido": [
+        "../quisido/src/index.ts"
+      ]
+    }
   },
-  "exclude": [".cache/", ".tests/", "dist/", "node_modules/"],
+  "exclude": [
+    ".cache/",
+    ".tests/",
+    "dist/",
+    "node_modules/"
+  ],
   "extends": "quisido/tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "references": [
+    {
+      "path": "../quisido/tsconfig.build.json"
+    }
+  ]
 }

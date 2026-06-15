@@ -4,16 +4,28 @@
     "generateCpuProfile": ".cache/tsconfig.build.cpuprofile",
     "noEmit": false,
     "outDir": "dist",
+    "paths": {
+      "fmrs": [
+        "../fmrs/dist/index.d.ts"
+      ]
+    },
     "rootDir": "src",
     "skipLibCheck": true,
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
   "exclude": [
     "src/**/*.test.ts",
-    "src/*.test.ts"
+    "src/**/*.test.tsx",
+    "src/*.test.ts",
+    "src/*.test.tsx"
   ],
   "extends": "./tsconfig.json",
   "include": [
     "src/"
+  ],
+  "references": [
+    {
+      "path": "../fmrs/tsconfig.build.json"
+    }
   ]
 }

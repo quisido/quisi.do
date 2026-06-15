@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
     "paths": {
-      /**
-       * eslint-plugin-sort-keys-custom-order 3.0.2 publishes its declaration
-       * file here, despite advertising ./dist/index.d.ts in package.json.
-       */
       "eslint-plugin-sort-keys-custom-order": [
         "../../node_modules/eslint-plugin-sort-keys-custom-order/dist/src/index.d.ts",
         "./node_modules/eslint-plugin-sort-keys-custom-order/dist/src/index.d.ts"
@@ -12,7 +8,15 @@
     },
     "rootDir": "."
   },
-  "exclude": [".cache/", ".tests/"],
+  "exclude": [
+    ".cache/",
+    ".tests/"
+  ],
   "extends": "./src/tsconfig.json",
-  "include": ["**/*", "**/*.json", "**/.*", "**/.*.json"]
+  "include": [
+    "**/*",
+    "**/*.json",
+    "**/.*",
+    "**/.*.json"
+  ]
 }

@@ -2,9 +2,45 @@
   "compilerOptions": {
     "declarationDir": "dist",
     "noEmit": true,
-    "rootDir": "."
+    "rootDir": ".",
+    "paths": {
+      "cloudflare-test-utils": [
+        "../cloudflare-test-utils/src/index.ts"
+      ],
+      "cloudflare-utils": [
+        "../cloudflare-utils/src/index.ts"
+      ],
+      "fmrs": [
+        "../fmrs/src/index.ts"
+      ],
+      "quisido": [
+        "../quisido/src/index.ts"
+      ]
+    }
   },
-  "exclude": [".cache/", ".tests/", "dist/", "node_modules/"],
+  "exclude": [
+    ".cache/",
+    ".tests/",
+    "dist/",
+    "node_modules/"
+  ],
   "extends": "quisido/tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "references": [
+    {
+      "path": "../cloudflare-test-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../cloudflare-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../fmrs/tsconfig.build.json"
+    },
+    {
+      "path": "../quisido/tsconfig.build.json"
+    }
+  ]
 }

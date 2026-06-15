@@ -2,11 +2,44 @@
   "compilerOptions": {
     "declarationDir": "dist",
     "jsx": "react-jsxdev",
-    "lib": ["DOM", "ESNext"],
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
     "noEmit": true,
     "rootDir": ".",
+    "paths": {
+      "fmrs": [
+        "../fmrs/src/index.ts"
+      ],
+      "quisido": [
+        "../quisido/src/index.ts"
+      ],
+      "use-shallow-memo": [
+        "../use-shallow-memo/src/index.ts"
+      ]
+    }
   },
-  "exclude": [".cache/", ".tests/", "dist/", "node_modules/"],
+  "exclude": [
+    ".cache/",
+    ".tests/",
+    "dist/",
+    "node_modules/"
+  ],
   "extends": "quisido/tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "references": [
+    {
+      "path": "../fmrs/tsconfig.build.json"
+    },
+    {
+      "path": "../quisido/tsconfig.build.json"
+    },
+    {
+      "path": "../use-shallow-memo/tsconfig.build.json"
+    }
+  ]
 }
