@@ -1,6 +1,7 @@
 import { type Config, defineConfig } from 'eslint/config';
 import CJS from './cjs.js';
 import D_TS from './d-ts.js';
+import GITHUB_WORKFLOW from './github-workflow.js';
 import IGNORES from './ignores.js';
 import JS from './js.js';
 import JSON from './json.js';
@@ -20,6 +21,7 @@ const CONFIG: Config[] = defineConfig(
   // Extends JSON.
   JSONC,
   PACKAGE_JSON,
+  GITHUB_WORKFLOW,
 
   // Extends TS.
   D_TS,
