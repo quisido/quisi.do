@@ -87,11 +87,11 @@
     "use-shallow-memo": "^1.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.7",
-    "@babel/preset-env": "^7.29.7",
-    "@babel/preset-react": "^7.29.7",
-    "@babel/preset-typescript": "^7.29.7",
-    "@babel/register": "^7.29.7",
+    "@babel/core": "^8.0.0",
+    "@babel/preset-env": "^8.0.0",
+    "@babel/preset-react": "^8.0.0",
+    "@babel/preset-typescript": "^8.0.0",
+    "@babel/register": "^8.0.0",
     "@builder.io/partytown": "^0.10.3",
     "@datadog/datadog-ci": "^5.18.0",
     "@hint/connector-puppeteer": "^2.5.25",
