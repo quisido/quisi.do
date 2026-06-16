@@ -15,7 +15,37 @@ permissions:
   contents: read # git checkout
 
 jobs:
-  # Stage 1: build
+  # Stage 1: actionlint, build
+  actionlint:
+    name: Actionlint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Install
+        env:
+          ACTIONLINT_VERSION: 1.7.12
+        run: |-
+          curl \
+            --fail \
+            --location \
+            --silent \
+            --show-error \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" | \
+          tar \
+            --extract \
+            --gzip \
+            --directory "$RUNNER_TEMP" \
+            actionlint;
+      - name: Lint
+        run: |-
+          "$RUNNER_TEMP/actionlint" \
+            .github/workflows/pull-request.yml \
+            .github/workflows/main.yml;
+
   build:
     name: Build
     environment: continuous-deployment
