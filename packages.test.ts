@@ -9,6 +9,7 @@ import mapDirectoryToVsCodeExtensionsJson from './utils/map-directory-to-vs-code
 
 const DEPENDENCY_EXTENSIONS: Record<string, readonly string[]> = {
   eslint: ['dbaeumer.vscode-eslint'],
+  'markdownlint-cli': ['DavidAnson.vscode-markdownlint'],
   publint: ['kravets.vscode-publint'],
   quisido: [
     'dbaeumer.vscode-eslint',

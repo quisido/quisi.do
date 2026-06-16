@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { attw } from './features/attw/attw.js';
 import { eslint } from './features/eslint/eslint.js';
+import { markdownlint } from './features/markdownlint/markdownlint.js';
 import { publint } from './features/publint/publint.js';
 import { quisidoTest } from './features/quisido-test/quisido-test.js';
 import { tsc } from './features/tsc/tsc.js';
@@ -38,6 +39,11 @@ switch (command) {
     break;
   }
 
+  case 'markdownlint': {
+    eventualReports.push(markdownlint.run());
+    break;
+  }
+
   case 'publint': {
     eventualReports.push(publint.run());
     break;
@@ -60,6 +66,7 @@ switch (command) {
   case 'test': {
     eventualReports.push(attw.run());
     eventualReports.push(eslint.run());
+    eventualReports.push(markdownlint.run());
     eventualReports.push(publint.run());
     eventualReports.push(quisidoTest.run());
     eventualReports.push(vitest.run());

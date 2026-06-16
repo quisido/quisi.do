@@ -23,6 +23,7 @@
     "fmrs": "npm --workspace=packages/fmrs start",
     "game": "npm --workspace=packages/game start",
     "gemini": "gemini --approval-mode auto_edit --sandbox",
+    "markdownlint": "quisido markdownlint",
     "playwright-mcp": "npx @playwright/mcp --caps devtools,vision --console-level warning --headless --isolated --sandbox --storage-state=.cache/playwright-mcp/storage-state.json",
     "prompt": "quisido-ai",
     "publint": "quisido publint",
