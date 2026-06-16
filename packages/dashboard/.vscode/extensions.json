@@ -2,6 +2,7 @@
   "recommendations": [
     "alexcvzz.vscode-sqlite",
     "dbaeumer.vscode-eslint",
+    "DavidAnson.vscode-markdownlint",
     "kravets.vscode-publint",
     "vitest.explorer"
   ]

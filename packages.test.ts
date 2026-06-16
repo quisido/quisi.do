@@ -13,6 +13,7 @@ const DEPENDENCY_EXTENSIONS: Record<string, readonly string[]> = {
   publint: ['kravets.vscode-publint'],
   quisido: [
     'dbaeumer.vscode-eslint',
+    'DavidAnson.vscode-markdownlint',
     'kravets.vscode-publint',
     'vitest.explorer',
   ],
