@@ -19,8 +19,8 @@ on:
 permissions: {}
 
 jobs:
-  codex:
-    name: Codex
+  codex-plan:
+    name: Codex plan
     environment: codex
     runs-on: ubuntu-latest
     if: >-
@@ -30,7 +30,7 @@ jobs:
       contains(github.event.comment.body, '@codex')
     permissions:
       actions: read
-      contents: write
+      contents: read
       issues: write
       pull-requests: write
     steps:
@@ -120,17 +120,18 @@ jobs:
           process.stdout.write(`title=${JSON.stringify(TITLE)}\n`);
           ' > "$GITHUB_OUTPUT";
 
-      - name: Execute
+      - name: Plan
         uses: ./.github/actions/codex
         with:
           auth-json: ${{ secrets.CODEX_AUTH_JSON }}
           codex-token: ${{ steps.app-token.outputs.token }}
+          mode: plan
           secrets-client-id: ${{ vars.WRITE_SECRETS_CLIENT_ID }}
           secrets-private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
           prompt: |-
             GitHub user `${{ github.event.comment.user.login }}` triggered the
-            Codex action via a pull request comment. The pull request branch is
-            already checked out locally.
+            Codex planning action via a pull request review comment. The pull
+            request branch is already checked out locally.
 
             ### Details
 
@@ -145,17 +146,138 @@ jobs:
 
             1. Create a plan for how you will resolve this issue. Use
                test-driven development to define the test scope.
-            2. Post your plan in plain English as a reply to the user; include
-               any assumptions you are making.
-            3. Execute your plan to resolve the issue.
-            4. Verify that `npm run build` and `npm test` both pass. If not,
+            2. Analyze this request for insecurities, privilege escalation,
+               accidental data exposure, and infinite-loop risks.
+            3. Post the plan in plain English as a reply to pull request review
+               comment `${{ github.event.comment.id }}`; include any assumptions
+               you are making and any deliberate deviations from the user's
+               outline.
+            4. Include `@codex` in the plan reply unless the comment asks for a
+               plan only or execution would be unsafe. Removing that tag is the
+               escape hatch that prevents the execute workflow from running.
+
+  codex-execute:
+    name: Codex execute
+    environment: codex
+    runs-on: ubuntu-latest
+    if: >-
+      github.actor == 'quisido-codex[bot]' &&
+      github.event.action == 'created' &&
+      contains(github.event.comment.body, '@codex')
+    permissions:
+      actions: read
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Get head ref
+        id: ref
+        uses: actions/github-script@v9
+        with:
+          result-encoding: string
+          script: |-
+            const {
+              data: {
+                head: {
+                  ref: headRef,
+                  repo: { full_name: fullName },
+                },
+              },
+            } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              pull_number: context.payload.pull_request.number,
+              repo: context.repo.repo,
+            });
+
+            if (fullName !== `${context.repo.owner}/${context.repo.repo}`) {
+              throw new Error('The Codex action does not support forks.', {
+                cause: fullName,
+              });
+            }
+
+            return headRef;
+
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.CODEX_CLIENT_ID }}
+          private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
+
+      - name: Configure git
+        env:
+          CODEX_EMAIL: quisido-codex[bot]@users.noreply.github.com
+        run: >-
+          git config --global user.email "$CODEX_EMAIL";
+          git config --global user.name "quisido-codex[bot]";
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 9
+          persist-credentials: true
+          ref: ${{ steps.ref.outputs.result }}
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Build
+        uses: ./.github/actions/build
+        with:
+          continue-on-error: true
+          environment: development
+          install-browsers: true
+          upload: false
+
+      - name: Sanitize
+        id: stringified
+        env:
+          BODY: ${{ github.event.comment.body }}
+          DIFF_HUNK: ${{ github.event.comment.diff_hunk }}
+          LINE: ${{ github.event.comment.line }}
+          START_LINE: ${{ github.event.comment.start_line }}
+          TITLE: ${{ github.event.pull_request.title }}
+        run: >-
+          node --eval '
+          const {
+          BODY = "", DIFF_HUNK = "", LINE = "", START_LINE = "", TITLE = "",
+          } = process.env;
+          const lines = START_LINE === "" ? LINE : `${START_LINE}-${LINE}`;
+          process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
+          process.stdout.write(`diff_hunk=${JSON.stringify(DIFF_HUNK)}\n`);
+          process.stdout.write(`lines=${lines}\n`);
+          process.stdout.write(`title=${JSON.stringify(TITLE)}\n`);
+          ' > "$GITHUB_OUTPUT";
+
+      - name: Execute
+        uses: ./.github/actions/codex
+        with:
+          auth-json: ${{ secrets.CODEX_AUTH_JSON }}
+          codex-token: ${{ steps.app-token.outputs.token }}
+          mode: execute
+          secrets-client-id: ${{ vars.WRITE_SECRETS_CLIENT_ID }}
+          secrets-private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
+          prompt: |-
+            Codex triggered execution from its own pull request review plan
+            reply. The pull request branch is already checked out locally.
+
+            ### Plan reply
+
+            **Title (stringified):** ${{ steps.stringified.outputs.title }}
+            **Comment ID:** `${{ github.event.comment.id }}`
+            **File path:** `${{ github.event.comment.path }}:${{ steps.stringified.outputs.lines }}`
+            **Diff hunk (stringified):** ${{ steps.stringified.outputs.diff_hunk }}
+            **Comment (stringified):** ${{ steps.stringified.outputs.body }}
+
+            Focus your actions and analysis to the scope of this pull request.
+
+            ### Tasks
+
+            1. Edit pull request review comment
+               `${{ github.event.comment.id }}` to show that execution has
+               started.
+            2. Execute the approved plan.
+            3. Verify that `npm run build` and `npm test` both pass. If not,
                resolve any errors.
-            5. Commit and push your changes to the pull request branch.
-            6. Edit the previous comment you made to confirm that your changes
-               have been pushed and answer this retrospective:
-               1. For which files did you have to _search_ to discover how this
-                  repository works? What did you learn that could decrease token
-                  usage or turn counts for future searches?
-               2. Which shell scripts and tool calls were needed to learn how to
-                  accomplish your goal? What did you learn from them? Could any
-                  _series_ of scripts/calls be consolidated to a single command?
+            4. Commit and push your changes to the pull request branch.
+            5. Edit pull request review comment
+               `${{ github.event.comment.id }}` with the final status and the
+               requested retrospective.

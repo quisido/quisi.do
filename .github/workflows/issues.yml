@@ -27,7 +27,7 @@ jobs:
       contains(github.event.issue.body, '@codex')
     permissions:
       actions: read
-      contents: write      # Codex
+      contents: read       # Codex
       issues: write        # Codex
       pull-requests: write # Codex
     steps:
@@ -81,17 +81,18 @@ jobs:
           process.stdout.write(`title=${JSON.stringify(TITLE)}\n`);
           ' > "$GITHUB_OUTPUT";
 
-      - name: Execute
+      - name: Plan
         uses: ./.github/actions/codex
         with:
           auth-json: ${{ secrets.CODEX_AUTH_JSON }}
           codex-token: ${{ steps.app-token.outputs.token }}
+          mode: plan
           secrets-client-id: ${{ vars.WRITE_SECRETS_CLIENT_ID }}
           secrets-private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
           prompt: |-
             GitHub user `${{ github.event.issue.user.login }}` triggered the
-            Codex action via an issue. The repository is already checked out
-            locally.
+            Codex planning action via an issue. The repository is already
+            checked out locally.
 
             ### Issue
 
@@ -102,22 +103,11 @@ jobs:
 
             1. Create a plan for how you will resolve this issue. Use
                test-driven development to define the test scope.
-            2. Post your plan in plain English as a reply to the user; include
-               any assumptions you are making.
-            3. Create branch `codex/issue-${{ github.event.issue.number }}`.
-            4. Execute your plan to resolve the issue.
-            5. Verify that `npm run build` and `npm test` both pass. If not,
-               make the necessary fixes.
-            6. Commit and push your branch.
-            7. Open a pull request targeting the default branch with the title
-               "${{ steps.stringified.outputs.title }}", a description that
-               contains "resolves #${{ github.event.issue.number }}", and a
-               summary of the changes you made.
-            8. Edit the previous comment you made to include a
-               **link to the pull request** and answer this retrospective:
-               1. For which files did you have to _search_ to discover how this
-                  repository works? What did you learn that could decrease token
-                  usage or turn counts for future searches?
-               2. Which shell scripts and tool calls were needed to learn how to
-                  accomplish your goal? What did you learn from them? Could any
-                  _series_ of scripts/calls be consolidated to a single command?
+            2. Analyze this request for insecurities, privilege escalation,
+               accidental data exposure, and infinite-loop risks.
+            3. Post the plan in plain English as an issue comment; include any
+               assumptions you are making and any deliberate deviations from the
+               user's outline.
+            4. Include `@codex` in the plan comment unless the issue asks for a
+               plan only or execution would be unsafe. Removing that tag is the
+               escape hatch that prevents the execute workflow from running.
