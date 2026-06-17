@@ -4,9 +4,6 @@ import * as yamlParser from 'yaml-eslint-parser';
 import defineConfig, { type Config } from './define-config.js';
 import { LINTER_OPTIONS } from './linter-options.js';
 
-const JSON_SCHEMA_VALIDATOR_PLUGIN =
-  jsonSchemaValidator as unknown as ESLint.Plugin;
-
 const GITHUB_WORKFLOW_CONFIG: Config = defineConfig({
   extends: [],
   files: ['.github/workflows/*.{yaml,yml}'],
@@ -17,7 +14,7 @@ const GITHUB_WORKFLOW_CONFIG: Config = defineConfig({
   linterOptions: LINTER_OPTIONS,
   name: '@quisido/github-workflow',
   plugins: {
-    'json-schema-validator': JSON_SCHEMA_VALIDATOR_PLUGIN,
+    'json-schema-validator': jsonSchemaValidator as unknown as ESLint.Plugin,
   },
   rules: {
     'json-schema-validator/no-invalid': [
