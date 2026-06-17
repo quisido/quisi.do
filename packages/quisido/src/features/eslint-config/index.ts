@@ -21,11 +21,13 @@ const CONFIG: Config[] = defineConfig(
   // Extends JSON.
   JSONC,
   PACKAGE_JSON,
-  GITHUB_WORKFLOW,
 
   // Extends TS.
   D_TS,
   TEST_TS,
+
+  // Extends YAML (if there was a YAML config)
+  GITHUB_WORKFLOW,
 
   ...IGNORES,
 );
