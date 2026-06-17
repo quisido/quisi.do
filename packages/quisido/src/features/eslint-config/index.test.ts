@@ -2,8 +2,6 @@ import { describe, expect, it } from 'vitest';
 import config from './index.js';
 import { ESLint } from 'eslint';
 
-const ERROR_SEVERITY = 2;
-
 describe('@quisido/eslint-config', (): void => {
   it('should be a valid ESLint configuration', async (): Promise<void> => {
     const linter = new ESLint({
