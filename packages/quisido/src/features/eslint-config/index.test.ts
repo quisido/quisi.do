@@ -12,22 +12,28 @@ describe('@quisido/eslint-config', (): void => {
     await linter.lintText('{}');
   });
 
-  it('should validate GitHub workflow YAML schemas', async (): Promise<void> => {
+  // When the Schema Store is inaccessible, the linter fails silently.
+  // This test asserts that the Schema Store is functional.
+  it('should use the Schema Store catalog', async (): Promise<void> => {
+    const results = await linter.lintText(
+      'abcdefg: hijkl\n',
+      { filePath: '.github/workflows/test.yml' },
+    );
+    expect(results[0].messages.length).toBeGreaterThan(0);
+  });
+
+  it('should lint GitHub workflows', async (): Promise<void> => {
     const linter = new ESLint({
       overrideConfig: config,
     });
-    const eslintConfig: unknown = await linter.calculateConfigForFile(
+
+    const configForFile: unknown = await linter.calculateConfigForFile(
       '.github/workflows/main.yml',
     );
 
-    expect(eslintConfig).toMatchObject({
+    expect(configForFile).toMatchObject({
       rules: {
-        'json-schema-validator/no-invalid': [
-          ERROR_SEVERITY,
-          {
-            useSchemastoreCatalog: true,
-          },
-        ],
+        'json-schema-validator/no-invalid': expect.anything(),
       },
     });
   });
