@@ -6,7 +6,7 @@
     "outDir": "dist",
     "paths": {
       "fmrs": [
-        "../fmrs/src/index.ts"
+        "../fmrs/dist/index.d.ts"
       ]
     },
     "rootDir": "src",
