@@ -38,7 +38,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "@monogatari/core": "^2.6.0"
+    "@monogatari/core": "^2.8.0"
   },
   "devDependencies": {
     "@types/node": "^25.9.3",
