@@ -25,23 +25,12 @@ jobs:
       - name: Install
         env:
           ACTIONLINT_VERSION: 1.7.12
-        run: |-
-          curl \
-            --fail \
-            --location \
-            --silent \
-            --show-error \
-            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" | \
-          tar \
-            --extract \
-            --gzip \
-            --directory "$RUNNER_TEMP" \
-            actionlint;
+        run: >-
+          curl --fail --location --show-error --silent
+          "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" |
+          tar --directory "$RUNNER_TEMP" --extract --gzip actionlint;
       - name: Lint
-        run: |-
-          "$RUNNER_TEMP/actionlint" \
-            .github/workflows/pull-request.yml \
-            .github/workflows/main.yml;
+        run: "$RUNNER_TEMP/actionlint";
 
   auto-merge:
     name: Auto-merge
