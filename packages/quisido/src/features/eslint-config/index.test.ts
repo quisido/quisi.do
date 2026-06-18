@@ -13,6 +13,9 @@ describe('@quisido/eslint-config', (): void => {
   // When the Schema Store is inaccessible, the linter fails silently.
   // This test asserts that the Schema Store is functional.
   it('should use the Schema Store catalog', async (): Promise<void> => {
+    const linter = new ESLint({
+      overrideConfig: config,
+    });
     const results = await linter.lintText(
       'abcdefg: hijkl\n',
       { filePath: '.github/workflows/test.yml' },
