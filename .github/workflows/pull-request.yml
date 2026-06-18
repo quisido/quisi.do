@@ -60,7 +60,7 @@ jobs:
           - 8126:8126
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
           persist-credentials: false
@@ -79,7 +79,7 @@ jobs:
       pull-requests: write # status checks
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
           persist-credentials: false
@@ -97,7 +97,7 @@ jobs:
       datadog-agent: *datadog-agent
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
           persist-credentials: false
@@ -114,7 +114,7 @@ jobs:
       datadog-agent: *datadog-agent
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
           persist-credentials: false
@@ -131,7 +131,7 @@ jobs:
       datadog-agent: *datadog-agent
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
           persist-credentials: false
@@ -149,7 +149,7 @@ jobs:
       contents: read # git checkout
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 2
           persist-credentials: false
