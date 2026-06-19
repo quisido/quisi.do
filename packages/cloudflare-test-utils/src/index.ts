@@ -36,6 +36,9 @@ export { default as TestD1PreparedStatement } from './test-d1-prepared-statement
 export {
   TEST_EXECUTION_CONTEXT,
   TEST_PASS_THROUGH_ON_EXCEPTION,
+  TEST_SPAN,
+  TEST_SPAN_CONSTRUCTOR,
+  TEST_TRACING,
   TEST_WAIT_UNTIL,
 } from './test-execution-context.js';
 export { default as TestKVNamespace } from './test-kv-namespace.js';
