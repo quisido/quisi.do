@@ -219,7 +219,7 @@ jobs:
       github.event.issue.pull_request != null
     permissions:
       actions: read
-      contents: write      # Codex
+      contents: read       # Codex
       issues: write        # Codex
       pull-requests: write # Codex
     steps:
