@@ -27,4 +27,4 @@ Use Vitest (`describe`, `it`, `expect`) for unit and integration tests. Name tes
 
 ## Agent-Specific Instructions
 
-Before editing, check applicable files in `.github/instructions/**/*.instructions.md` at the monorepo root. Do not edit generated output in `dist/` unless the task explicitly requires it.
+Before editing, check applicable skills in `../../.agents/skills/` at the monorepo root. Do not edit generated output in `dist/` unless the task explicitly requires it.

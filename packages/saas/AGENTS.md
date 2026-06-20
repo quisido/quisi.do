@@ -27,7 +27,7 @@ Design-system work has its own guide at `src/design-systems/AGENTS.md`.
 ## Coding Style & Naming Conventions
 
 Use TypeScript for new code and prefer immutable values with `const` and
-`readonly`. Follow the repo instructions in `.github/instructions`: PascalCase
+`readonly`. Follow applicable repo skills in `../../.agents/skills/`: PascalCase
 for components, classes, interfaces, enums, and type aliases; camelCase for
 variables and functions; ALL_CAPS for constants. React code should use named
 function components, hooks, explicit prop interfaces, `type` imports for types,
@@ -46,6 +46,6 @@ set `VITE_TESTED_DESIGN_SYSTEM`, for example:
 
 ## Agent-Specific Instructions
 
-Before editing, apply any matching `.github/instructions/**/*.instructions.md`
-files from the monorepo root. For files under `src/design-systems`, also follow
+Before editing, apply any matching skills from `../../.agents/skills/` at the
+monorepo root. For files under `src/design-systems`, also follow
 `src/design-systems/AGENTS.md`.

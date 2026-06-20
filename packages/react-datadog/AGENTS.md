@@ -44,6 +44,5 @@ Arrange-Act-Assert structure, descriptive test names, and never commit
 
 ## Agent-Specific Instructions
 
-Before editing, check root instruction files under
-`.github/instructions/**/*.instructions.md` and apply those whose front matter
-matches the files being changed.
+Before editing, check applicable skills under `../../.agents/skills/` and apply
+those that match the files being changed.

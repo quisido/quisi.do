@@ -1,16 +1,13 @@
 # Instructions for agents
 
-## Instruction files
+## Skills
 
-Follow all instructions in `.github/instructions/**/*.instructions.md` files.
-Use the files' _front matter_ to determine if the instructions apply to your
-current task.
+For task-specific guidance, consult the relevant skill in `.agents/skills/`:
 
-For example:
-
-- When coding, ignore instructions with `excludeAgent: "coding-agent"`.
-- When editing/reviewing a `.scss` file, ignore instructions that do not apply
-  to that file, e.g. `applyTo: "**/*.tsx"`.
+- `.agents/skills/cloudflare/` — Cloudflare Worker implementations
+- `.agents/skills/react/` — TSX / React components
+- `.agents/skills/testing/` — End-to-end, integration, and unit tests
+- `.agents/skills/typescript/` — TypeScript source files
 
 ## Guidelines
 

@@ -16,7 +16,7 @@ This package is `packages/number-format-react`, a small TypeScript React wrapper
 
 ## Coding Style & Naming Conventions
 
-Use TypeScript for new code. Follow the root instruction files in `../../.github/instructions/`, especially `general-coding`, `typescript`, `react`, and `testing` when their front matter applies. Use 2-space indentation, single quotes, semicolons, named function components with default exports, and `import type` or inline `type` imports for types. Prefer `const`, `readonly`, interfaces for data shapes, PascalCase for components/types, camelCase for functions and variables, and ALL_CAPS for constants. Keep components small and focused.
+Use TypeScript for new code. Follow the root `AGENTS.md` and applicable skills in `../../.agents/skills/`, especially TypeScript, React, and Testing. Use 2-space indentation, single quotes, semicolons, named function components with default exports, and `import type` or inline `type` imports for types. Prefer `const`, `readonly`, interfaces for data shapes, PascalCase for components/types, camelCase for functions and variables, and ALL_CAPS for constants. Keep components small and focused.
 
 ## Testing Guidelines
 
