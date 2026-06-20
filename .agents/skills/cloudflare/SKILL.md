@@ -1,32 +1,45 @@
 ---
 name: cloudflare
-description: "Cloudflare Workers guidance for packages/ai, packages/authn, packages/csp, packages/dashboard, and packages/worker. Use when editing or reviewing Worker handlers, typed bindings, wrangler configuration, D1 queries, Analytics Engine writes, streams, or Cloudflare deployment commands."
+description: "Code guidelines for Cloudflare Worker implementations. Use when editing, reviewing, or executing a Cloudflare Worker; e.g. D1 queries, handlers, Wrangler commands, and Wrangler configurations."
+allowed-tools: Read Write
+license: MIT
+metadata:
+  author: quisi.do
 ---
-# Cloudflare Workers Guidelines
+# Cloudflare Workers guidelines
 
-Apply this skill when working in `packages/ai/**`, `packages/authn/**`,
-`packages/csp/**`, `packages/dashboard/**`, or `packages/worker/**`.
+## Configuration
 
-- Use the `Request`/`Response` Web APIs (not Node.js `http`) in Worker handlers.
-- Access secrets and bindings exclusively via the typed `Env` interface generated
-  in `worker-configuration.d.ts`; never hard-code secrets or credentials.
+- Keep `wrangler.jsonc` environments separated into `dev`, `staging`, and
+  `production`. Each should each have distinct binding names and dataset names.
+
+## Commands
+
+- Use `wrangler deploy --dry-run` to validate the build output.
+- Use `wrangler dev --persist-to ../../.wrangler/state` for local development
+  so that D1 and KV state is persisted across restarts.
 - Run `wrangler types` to regenerate `worker-configuration.d.ts` whenever new
   bindings are added or changed in `wrangler.jsonc`.
-- Keep `wrangler.jsonc` environments separated: `dev`/`staging`/`production`
-  should each have distinct binding names and dataset names.
-- Use D1 for relational data. Always use parameterized queries (`?` placeholders)
-  to prevent SQL injection. Never interpolate user input into SQL strings.
-- Emit observability data to Cloudflare Analytics Engine (`PRIVATE_DATASET` for
-  sensitive fields, `PUBLIC_DATASET` for aggregatable metrics) using
-  `writeDataPoint`.
-- Use `ctx.waitUntil` for fire-and-forget side effects (e.g., logging, cache
-  writes) that must complete after the `Response` is returned.
-- Always return a `Response` from the `fetch` handler; never let unhandled
+
+Deployments occur through CI/CD. You do not have access to the necessary secrets
+to deploy.
+
+## Conventions
+
+- Access secrets and bindings exclusively via the typed `Env` interface generated
+  in `worker-configuration.d.ts`; never hard-code secrets or credentials.
+- Emit observability data to the Cloudflare Analytics Engine with the
+  `writeDataPoint` method. Emit sensitive fields to the `PRIVATE_DATASET` data
+  set. Emit aggregatable metrics to the `PUBLIC_DATASET` data set.
+- `fetch` handlers should always return a `Response`; never let unhandled
   exceptions propagate to the runtime.
 - Respect Cloudflare Worker CPU-time limits: avoid long synchronous loops;
   prefer streaming responses (`TransformStream`, `ReadableStream`) for large
   payloads.
-- Use `wrangler dev --persist-to ../../.wrangler/state` for local development
-  so that D1 and KV state is persisted across restarts.
-- Use `wrangler deploy --dry-run` to validate the build output before deploying
-  to staging or production.
+- Use the `affect` method (`ctx.waitUntil`) for fire-and-forget side effects
+  (e.g., logging, cache writes) that must complete but can wait until after the
+  `Response` is returned.
+- Use parameterized queries (`?` placeholders) to prevent SQL injection. Never
+  interpolate user input into SQL strings.
+- Use the `Request`/`Response` Web APIs in Worker handlers. Never use Node's
+  built-in `http` module.
