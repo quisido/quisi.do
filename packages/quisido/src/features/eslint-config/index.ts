@@ -1,6 +1,7 @@
 import { type Config, defineConfig } from 'eslint/config';
 import CJS from './cjs.js';
 import D_TS from './d-ts.js';
+import GITHUB_WORKFLOW from './github-workflow.js';
 import IGNORES from './ignores.js';
 import JS from './js.js';
 import JSON from './json.js';
@@ -24,6 +25,9 @@ const CONFIG: Config[] = defineConfig(
   // Extends TS.
   D_TS,
   TEST_TS,
+
+  // Extends YAML (if there was a YAML config)
+  GITHUB_WORKFLOW,
 
   ...IGNORES,
 );

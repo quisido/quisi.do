@@ -12,7 +12,26 @@ permissions:
   contents: read
 
 jobs:
-  # Stage 1: auto-merge, build, dependency-review
+  # Stage 1: actionlint, auto-merge, build, dependency-review
+  actionlint:
+    name: Actionlint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Install
+        env:
+          ACTIONLINT_VERSION: 1.7.12
+        run: >-
+          curl --fail --location --show-error --silent
+          "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" |
+          tar --directory "$RUNNER_TEMP" --extract --gzip actionlint;
+      - name: Lint
+        run: "$RUNNER_TEMP/actionlint";
+
   auto-merge:
     name: Auto-merge
     if: github.event.pull_request.user.login == 'dependabot[bot]'
