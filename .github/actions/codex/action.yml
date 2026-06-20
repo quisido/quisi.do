@@ -172,5 +172,8 @@ runs:
           -u INPUT_SECRETS-PRIVATE-KEY \
         npx codex exec \
           --add-dir "$(npm config get prefix)" \
+          --add-dir "$CODEX_HOME" \
+          --add-dir "$GITHUB_WORKSPACE" \
+          --add-dir "$GITHUB_WORKSPACE/.git" \
           --color always \
           --ephemeral "$PROMPT";

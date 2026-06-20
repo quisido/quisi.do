@@ -30,6 +30,7 @@ const CONFIG: Config = {
       'https://edge.fullstory.com/*',
       'https://o592283.ingest.sentry.io/*',
       'https://quisi.do/cdn-cgi/speculation',
+      'https://r.logr-in.com/*',
       'https://r.logr-ingest.com/*',
       'https://r.lrkt-in.com/*',
       'https://region1.analytics.google.com/*',

@@ -20,7 +20,7 @@ jobs:
       contents: read # git checkout
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 9
           persist-credentials: false

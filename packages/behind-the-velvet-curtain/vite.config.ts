@@ -2,23 +2,19 @@ import { VitePWA as vitePWA } from 'vite-plugin-pwa';
 import {
   type ConfigEnv,
   defineConfig,
-  type ESBuildOptions,
   type PluginOption,
   type UserConfig,
   type UserConfigFnObject,
 } from 'vite';
-import buildTSConfig from './tsconfig.build.json' with { type: 'json' };
-
-const ESBUILD_OPTIONS: ESBuildOptions = {
-  color: true,
-  sourcesContent: true,
-};
+import { MONOGATARI_ALIASES } from './monogatari-aliases.js';
 
 const USER_CONFIG: UserConfig = {
   base: './',
   envDir: '../',
-  esbuild: ESBUILD_OPTIONS,
   publicDir: '../public/',
+  resolve: {
+    alias: MONOGATARI_ALIASES,
+  },
   root: './src/',
 };
 
@@ -26,15 +22,6 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
   ...USER_CONFIG,
   css: {
     preprocessorMaxWorkers: true,
-  },
-  esbuild: {
-    ...ESBUILD_OPTIONS,
-    lineLimit: 80,
-    minifyIdentifiers: false,
-    minifySyntax: false,
-    minifyWhitespace: false,
-    sourcemap: 'both',
-    sourceRoot: './src/',
   },
   plugins: [],
   server: {
@@ -54,17 +41,6 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
     sourcemap: true,
     target: 'esnext',
   },
-  esbuild: {
-    ...ESBUILD_OPTIONS,
-    minifyIdentifiers: true,
-    minifySyntax: true,
-    minifyWhitespace: true,
-    sourceRoot: buildTSConfig.compilerOptions.sourceRoot,
-    tsconfigRaw: buildTSConfig as Exclude<
-      ESBuildOptions['tsconfigRaw'],
-      undefined
-    >,
-  },
   plugins: [
     ...(vitePWA({
       includeAssets: [
@@ -81,6 +57,7 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
       workbox: {
         cleanupOutdatedCaches: true,
         globPatterns: ['**/*.{css,html,js,png,svg,webmanifest}'],
+        maximumFileSizeToCacheInBytes: 3_000_000,
         sourcemap: true,
       },
     }) as unknown as readonly PluginOption[]),
