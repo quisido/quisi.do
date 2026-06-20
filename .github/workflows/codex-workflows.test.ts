@@ -45,6 +45,12 @@ describe('Codex workflows', (): void => {
     expect(workflow).toMatch(
       /codex-issue-execute:[\s\S]*?permissions:[\s\S]*?contents: write/u,
     );
+    expect(workflow).toMatch(
+      /codex-pull-request-plan:[\s\S]*?permissions:[\s\S]*?contents: read/u,
+    );
+    expect(workflow).toMatch(
+      /codex-pull-request-execute:[\s\S]*?permissions:[\s\S]*?contents: write/u,
+    );
   });
 
   it('should execute only newly created Codex review plan replies', async (): Promise<void> => {
