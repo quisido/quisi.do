@@ -166,11 +166,11 @@ runs:
 
         ${USER_PROMPT}"
 
-        env
-        -u INPUT_AUTH-JSON
-        -u INPUT_CODEX-TOKEN
-        -u INPUT_SECRETS-PRIVATE-KEY
-        npx codex exec
-        --add-dir "$(npm config get prefix)"
-        --color always
-        --ephemeral "$PROMPT";
+        env \
+          -u INPUT_AUTH-JSON \
+          -u INPUT_CODEX-TOKEN \
+          -u INPUT_SECRETS-PRIVATE-KEY \
+        npx codex exec \
+          --add-dir "$(npm config get prefix)" \
+          --color always \
+          --ephemeral "$PROMPT";
