@@ -1,7 +1,7 @@
 import {
   type ChildProcess,
+  type ExecException,
   execFile,
-  type ExecFileException,
 } from 'node:child_process';
 import { EOL } from 'node:os';
 import process from 'node:process';
@@ -38,7 +38,7 @@ export default function execute(
         env: { ...process.env, ...env },
         shell: false,
       },
-      (err: ExecFileException | null, stdout: string, stderr: string): void => {
+      (err: ExecException | null, stdout: string, stderr: string): void => {
         const { exitCode } = childProcess;
 
         if (err === null) {
