@@ -1,12 +1,15 @@
 ---
 name: typescript
-description: "TypeScript guidance. Use when editing or reviewing **/*.ts and **/*.tsx files, interfaces, type aliases, optional properties, and TypeScript module patterns."
+description: "TypeScript guidelines. Use when editing or reviewing `**/*.ts` and `**/*.tsx` files."
+allowed-tools: Read Write
+license: MIT
+metadata:
+  author: quisi.do
 ---
-# TypeScript Guidelines
+# TypeScript guidelines
 
-Apply this skill when working with `**/*.ts` or `**/*.tsx` files.
+## Conventions
 
-- Do not prefix interfaces with `I` (e.g., use `User` instead of `IUser`).
 - Follow functional programming principles where possible.
 - Prefer immutable data (`const`, `readonly`).
 - Support `exactOptionalPropertyTypes` by explicitly including `| undefined` in
@@ -19,3 +22,9 @@ Apply this skill when working with `**/*.ts` or `**/*.tsx` files.
   interface Options { /* ... */ }
   export default function myFn({ /* ... */ }: Options): void {}
   ```
+
+## Constraints
+
+- Do not prefix interfaces with `I` (e.g., use `User` instead of `IUser`)
+  unless the name is already taken. For example, if a React component is
+  already named `User`, then fallback to `IUser` for the interface.
