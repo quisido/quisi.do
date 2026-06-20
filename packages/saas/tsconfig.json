@@ -1,17 +1,60 @@
 {
   "compilerOptions": {
-    "composite": false,
     "declarationDir": "_site",
-    "incremental": false,
     "jsx": "preserve",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "module": "esnext",
     "moduleResolution": "bundler",
     "outDir": "_site",
     "rootDir": ".",
-    "sourceRoot": "src"
+    "sourceRoot": "src",
+    "paths": {
+      "@quisido/authn-shared": [
+        "../authn-shared/src/index.ts"
+      ],
+      "@quisido/csp-shared": [
+        "../csp-shared/src/index.ts"
+      ],
+      "fmrs": [
+        "../fmrs/src/index.ts"
+      ],
+      "fullstory-react": [
+        "../fullstory-react/src/index.ts"
+      ],
+      "lazy-i18n": [
+        "../lazy-i18n/src/index.ts"
+      ],
+      "number-format-react": [
+        "../number-format-react/src/index.ts"
+      ],
+      "quisido": [
+        "../quisido/src/index.ts"
+      ],
+      "react-datadog": [
+        "../react-datadog/src/index.ts"
+      ],
+      "sentry-react": [
+        "../sentry-react/src/index.ts"
+      ],
+      "use-force-update": [
+        "../use-force-update/src/index.ts"
+      ],
+      "use-shallow-memo": [
+        "../use-shallow-memo/src/index.ts"
+      ]
+    }
   },
-  "exclude": [".cache/", ".tests/", ".wrangler/", "_site/", "node_modules/"],
+  "exclude": [
+    ".cache/",
+    ".tests/",
+    ".wrangler/",
+    "_site/",
+    "node_modules/"
+  ],
   "extends": "quisido/tsconfig.json",
   "include": [
     "**/.*.json",
@@ -20,5 +63,40 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.webmanifest"
+  ],
+  "references": [
+    {
+      "path": "../authn-shared/tsconfig.build.json"
+    },
+    {
+      "path": "../csp-shared/tsconfig.build.json"
+    },
+    {
+      "path": "../fmrs/tsconfig.build.json"
+    },
+    {
+      "path": "../fullstory-react/tsconfig.build.json"
+    },
+    {
+      "path": "../lazy-i18n/tsconfig.build.json"
+    },
+    {
+      "path": "../number-format-react/tsconfig.build.json"
+    },
+    {
+      "path": "../quisido/tsconfig.build.json"
+    },
+    {
+      "path": "../react-datadog/tsconfig.build.json"
+    },
+    {
+      "path": "../sentry-react/tsconfig.build.json"
+    },
+    {
+      "path": "../use-force-update/tsconfig.build.json"
+    },
+    {
+      "path": "../use-shallow-memo/tsconfig.build.json"
+    }
   ]
 }

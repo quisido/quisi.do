@@ -2,9 +2,32 @@
   "compilerOptions": {
     "declarationDir": "dist",
     "noEmit": true,
-    "rootDir": "."
+    "rootDir": ".",
+    "paths": {
+      "fmrs": [
+        "../fmrs/src/index.ts"
+      ],
+      "quisido": [
+        "../quisido/src/index.ts"
+      ]
+    }
   },
-  "exclude": [".cache/", ".tests/", "dist/"],
+  "exclude": [
+    ".cache/",
+    ".tests/",
+    "dist/"
+  ],
   "extends": "quisido/tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "references": [
+    {
+      "path": "../fmrs/tsconfig.build.json"
+    },
+    {
+      "path": "../quisido/tsconfig.build.json"
+    }
+  ]
 }
