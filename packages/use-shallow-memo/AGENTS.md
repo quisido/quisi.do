@@ -25,8 +25,8 @@ From the monorepo root, scope commands with
 
 ## Coding Style & Naming Conventions
 
-Write new code in TypeScript and follow the shared repo instructions in
-`.github/instructions/`. Prefer functional code, immutable values (`const`,
+Write new code in TypeScript and follow applicable shared repo skills in
+`../../.agents/skills/`. Prefer functional code, immutable values (`const`,
 `readonly`), optional chaining, and nullish coalescing. Use PascalCase for
 types, interfaces, enums, classes, and components; use camelCase for functions,
 variables, and methods; use ALL_CAPS for constants. Do not prefix interfaces
@@ -44,6 +44,6 @@ observable behavior rather than implementation details, and never commit
 
 ## Agent-Specific Instructions
 
-Before changing code, check applicable files in `.github/instructions/` using
-their front matter. Avoid unrelated cleanup, and preserve user or generated
+Before changing code, check applicable skills in `../../.agents/skills/`.
+Avoid unrelated cleanup, and preserve user or generated
 changes already present in the working tree.

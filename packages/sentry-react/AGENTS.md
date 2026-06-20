@@ -45,6 +45,5 @@ descriptive test names that read as sentences. Never commit `it.only` or
 
 ## Agent-Specific Instructions
 
-Before coding, read applicable files in `.github/instructions/**/*.instructions.md`
-and honor their front matter. Ignore generated output and avoid unrelated
-refactors.
+Before coding, read applicable skills in `../../.agents/skills/`. Ignore
+generated output and avoid unrelated refactors.

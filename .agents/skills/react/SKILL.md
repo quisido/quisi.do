@@ -1,11 +1,14 @@
 ---
-applyTo: "**/*.tsx"
+name: react
+description: "React guidance for TSX files. Use when editing or reviewing **/*.tsx files, React components, hooks, contexts, CSS module styling, or component tests."
 ---
-# React guidelines
+# React Guidelines
+
+Apply this skill when working with `**/*.tsx` files.
 
 - Use function components with hooks.
 - Follow the React hooks rules (no conditional hooks).
-- Keep components small and focused. Prefer ≤200 lines of code per file and ≤3
+- Keep components small and focused. Prefer <=200 lines of code per file and <=3
   responsibilities.
 - Extract reusable UI into `src/components` and custom hooks into `src/hooks`.
 - Use CSS modules with the file name convention `component-name.module.scss`.

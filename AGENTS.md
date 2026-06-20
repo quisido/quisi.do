@@ -1,16 +1,15 @@
 # Instructions for agents
 
-## Instruction files
+## Skill files
 
-Follow all instructions in `.github/instructions/**/*.instructions.md` files.
-Use the files' _front matter_ to determine if the instructions apply to your
-current task.
+Follow all applicable skills in `.agents/skills/*/SKILL.md` files. Use each
+skill's `description` front matter and body scope guidance to determine if the
+skill applies to your current task.
 
 For example:
 
-- When coding, ignore instructions with `excludeAgent: "coding-agent"`.
-- When editing/reviewing a `.scss` file, ignore instructions that do not apply
-  to that file, e.g. `applyTo: "**/*.tsx"`.
+- When editing/reviewing a `.tsx` file, apply the React and TypeScript skills.
+- When editing/reviewing a test file, apply the Testing skill.
 
 ## Guidelines
 

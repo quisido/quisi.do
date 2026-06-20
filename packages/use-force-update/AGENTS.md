@@ -27,4 +27,4 @@ Use Vitest with `describe`, `it`, and `expect`. Name tests with descriptive sent
 
 ## Agent-Specific Instructions
 
-Follow applicable files in `.github/instructions/*.instructions.md`, using their front matter to decide scope. For this package, the general coding, TypeScript, React, and test instructions commonly apply.
+Follow applicable skills in `../../.agents/skills/`. For this package, the root `AGENTS.md`, TypeScript, React, and Testing guidance commonly apply.

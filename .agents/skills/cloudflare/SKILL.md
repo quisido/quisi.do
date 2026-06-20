@@ -1,7 +1,11 @@
 ---
-applyTo: "packages/ai/**,packages/authn/**,packages/csp/**,packages/dashboard/**,packages/worker/**"
+name: cloudflare
+description: "Cloudflare Workers guidance for packages/ai, packages/authn, packages/csp, packages/dashboard, and packages/worker. Use when editing or reviewing Worker handlers, typed bindings, wrangler configuration, D1 queries, Analytics Engine writes, streams, or Cloudflare deployment commands."
 ---
-# Cloudflare Workers guidelines
+# Cloudflare Workers Guidelines
+
+Apply this skill when working in `packages/ai/**`, `packages/authn/**`,
+`packages/csp/**`, `packages/dashboard/**`, or `packages/worker/**`.
 
 - Use the `Request`/`Response` Web APIs (not Node.js `http`) in Worker handlers.
 - Access secrets and bindings exclusively via the typed `Env` interface generated

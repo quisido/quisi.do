@@ -27,4 +27,4 @@ Use Vitest with `describe`, `it`, and `expect`. Co-locate tests with source file
 
 ## Agent-Specific Instructions
 
-Before editing code, check `.github/instructions/**/*.instructions.md` from the monorepo and apply files whose front matter matches your task. For this package, the general TypeScript and testing instructions usually apply.
+Before editing code, check applicable skills in `../../.agents/skills/` from the monorepo. For this package, the TypeScript and Testing skills usually apply.
