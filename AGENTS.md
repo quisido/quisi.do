@@ -1,5 +1,14 @@
 # Instructions for agents
 
+## Skills
+
+For task-specific guidance, consult the relevant skill in `.agents/skills/`:
+
+- `.agents/skills/cloudflare/` — Cloudflare Worker implementations
+- `.agents/skills/react/` — TSX / React components
+- `.agents/skills/testing/` — End-to-end, integration, and unit tests
+- `.agents/skills/typescript/` — TypeScript source files
+
 ## Guidelines
 
 - When authoring scripts, use TypeScript exclusively.

@@ -11,7 +11,7 @@ metadata:
 ## Configuration
 
 - Keep `wrangler.jsonc` environments separated into `dev`, `staging`, and
-  `production`. Each should each have distinct binding names and dataset names.
+  `production`. Each should have distinct binding names and dataset names.
 
 ## Commands
 
@@ -36,9 +36,9 @@ to deploy.
 - Respect Cloudflare Worker CPU-time limits: avoid long synchronous loops;
   prefer streaming responses (`TransformStream`, `ReadableStream`) for large
   payloads.
-- Use the `affect` method (`ctx.waitUntil`) for fire-and-forget side effects
-  (e.g., logging, cache writes) that must complete but can wait until after the
-  `Response` is returned.
+- Use `ctx.waitUntil` for fire-and-forget side effects (e.g., logging, cache
+  writes) that must complete but can wait until after the `Response` is
+  returned.
 - Use parameterized queries (`?` placeholders) to prevent SQL injection. Never
   interpolate user input into SQL strings.
 - Use the `Request`/`Response` Web APIs in Worker handlers. Never use Node's
