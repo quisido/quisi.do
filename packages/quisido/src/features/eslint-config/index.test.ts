@@ -16,10 +16,9 @@ describe('@quisido/eslint-config', (): void => {
     const linter = new ESLint({
       overrideConfig: config,
     });
-    const results = await linter.lintText(
-      'abcdefg: hijkl\n',
-      { filePath: '.github/workflows/test.yml' },
-    );
+    const results = await linter.lintText('abcdefg: hijkl\n', {
+      filePath: '.github/workflows/test.yml',
+    });
     expect(results[0].messages.length).toBeGreaterThan(0);
   });
 
@@ -32,10 +31,9 @@ describe('@quisido/eslint-config', (): void => {
       '.github/workflows/main.yml',
     );
 
-    expect(configForFile).toMatchObject({
-      rules: {
-        'json-schema-validator/no-invalid': expect.anything(),
-      },
-    });
+    expect(configForFile).toHaveProperty([
+      'rules',
+      'json-schema-validator/no-invalid',
+    ]);
   });
 });
