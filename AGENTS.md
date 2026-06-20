@@ -1,16 +1,5 @@
 # Instructions for agents
 
-## Skill files
-
-Follow all applicable skills in `.agents/skills/*/SKILL.md` files. Use each
-skill's `description` front matter and body scope guidance to determine if the
-skill applies to your current task.
-
-For example:
-
-- When editing/reviewing a `.tsx` file, apply the React and TypeScript skills.
-- When editing/reviewing a test file, apply the Testing skill.
-
 ## Guidelines
 
 - When authoring scripts, use TypeScript exclusively.
