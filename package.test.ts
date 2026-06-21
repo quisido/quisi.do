@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import packageJson from './package.json' with { type: 'json' };
+import quisidoPackageJson from './packages/quisido/package.json' with { type: 'json' };
 import type PackageJson from './types/package-json.js';
 import mapDirectoryToPackageJson from './utils/map-directory-to-package-json.js';
 import reducePackageJsonsToOverrides from './utils/reduce-package-jsons-to-overrides.js';
@@ -19,6 +20,14 @@ describe('package.json', (): void => {
       const rootOverrides: Record<string, Record<string, string> | string> =
         packageJsons.reduce(reducePackageJsonsToOverrides, {});
       expect(packageJson.overrides).toStrictEqual(rootOverrides);
+    });
+  });
+
+  describe('scripts', (): void => {
+    it('should include Knip validation', (): void => {
+      expect(packageJson.scripts.knip).toBe('quisido knip');
+      expect(quisidoPackageJson.scripts.knip).toBe('quisido knip');
+      expect(quisidoPackageJson.dependencies.knip).toMatch(/^\^/u);
     });
   });
 });
