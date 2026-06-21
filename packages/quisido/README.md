@@ -4,6 +4,7 @@
 tooling, such as:
 
 - **ESLint** to lint code
+- **Knip** to find unused files, dependencies, and exports
 - **Vitest** to run test suites
 
 ## ESLint

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { attw } from './features/attw/attw.js';
 import { eslint } from './features/eslint/eslint.js';
+import { knip } from './features/knip/knip.js';
 import { publint } from './features/publint/publint.js';
 import { quisidoTest } from './features/quisido-test/quisido-test.js';
 import { tsc } from './features/tsc/tsc.js';
@@ -35,6 +36,11 @@ switch (command) {
 
   case 'eslint': {
     eventualReports.push(eslint.run());
+    break;
+  }
+
+  case 'knip': {
+    eventualReports.push(knip.run());
     break;
   }
 
