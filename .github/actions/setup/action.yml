@@ -31,6 +31,42 @@ runs:
         node-version: >-
           ${{ inputs.install-browsers != 'false' && '24.15.0' || '' }}
 
+    - name: Restore TypeScript cache
+      uses: actions/cache/restore@v4
+      with:
+        path: |
+          .cache/*.tsbuildinfo
+          packages/*/.cache/*.tsbuildinfo
+        key: >-
+          typescript-
+          ${{ runner.os }}-
+          ${{ hashFiles('package-lock.json') }}-
+          ${{ github.event.repository.default_branch }}-
+          ${{ github.sha }}
+        restore-keys: >-
+          typescript-
+          ${{ runner.os }}-
+          ${{ hashFiles('package-lock.json') }}-
+          ${{ github.event.repository.default_branch }}-
+
+    - name: Restore ESLint cache
+      uses: actions/cache/restore@v4
+      with:
+        path: |
+          .cache/eslint.json
+          packages/*/.cache/eslint.json
+        key: >-
+          eslint-
+          ${{ runner.os }}-
+          ${{ hashFiles('package-lock.json') }}-
+          ${{ github.event.repository.default_branch }}-
+          ${{ github.sha }}
+        restore-keys: >-
+          eslint-
+          ${{ runner.os }}-
+          ${{ hashFiles('package-lock.json') }}-
+          ${{ github.event.repository.default_branch }}-
+
     - name: Download build
       if: ${{ inputs.download-build == 'true' }}
       uses: actions/download-artifact@v7

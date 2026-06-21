@@ -43,6 +43,24 @@ runs:
         GITHUB_SHA: ${{ github.sha }}
         NODE_ENV: ${{ inputs.environment }}
 
+    - name: Save TypeScript cache
+      if: >-
+        ${{
+          github.ref_name == github.event.repository.default_branch &&
+          steps.build.outcome == 'success'
+        }}
+      uses: actions/cache/save@v4
+      with:
+        path: |
+          .cache/*.tsbuildinfo
+          packages/*/.cache/*.tsbuildinfo
+        key: >-
+          typescript-
+          ${{ runner.os }}-
+          ${{ hashFiles('package-lock.json') }}-
+          ${{ github.event.repository.default_branch }}-
+          ${{ github.sha }}
+
     - name: Upload
       if: ${{ inputs.upload == 'true' && steps.build.outcome == 'success' }}
       uses: actions/upload-artifact@v6
