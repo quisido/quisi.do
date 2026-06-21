@@ -440,7 +440,7 @@ jobs:
 
             ### Tasks
 
-            1. Edit issue comment `${{ github.event.comment.id }}` to show that
+            1. Edit pull request comment `${{ github.event.comment.id }}` to show that
                execution has started.
             2. Execute the approved plan.
             3. Verify that `npm run build` and `npm test` both pass. If not,
