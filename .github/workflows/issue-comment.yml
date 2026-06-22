@@ -39,7 +39,7 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@v3
         with:
-          client-id: ${{ vars.CODEX_CLIENT_ID }}
+          app-id: ${{ vars.CODEX_CLIENT_ID }}
           private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
 
       - name: Configure git
@@ -78,12 +78,12 @@ jobs:
         env:
           BODY: ${{ github.event.comment.body }}
           TITLE: ${{ github.event.issue.title }}
-        run: >-
-          node --eval '
+        run: |-
+          node > "$GITHUB_OUTPUT" <<'EOF'
           const { BODY = "", TITLE = "" } = process.env;
           process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
           process.stdout.write(`title=${JSON.stringify(TITLE)}\n`);
-          ' > "$GITHUB_OUTPUT";
+          EOF
 
       - name: Execute
         uses: ./.github/actions/codex
@@ -175,7 +175,7 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@v3
         with:
-          client-id: ${{ vars.CODEX_CLIENT_ID }}
+          app-id: ${{ vars.CODEX_CLIENT_ID }}
           private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
 
       - name: Configure git
@@ -215,12 +215,12 @@ jobs:
         env:
           BODY: ${{ github.event.comment.body }}
           TITLE: ${{ github.event.issue.title }}
-        run: >-
-          node --eval '
+        run: |-
+          node > "$GITHUB_OUTPUT" <<'EOF'
           const { BODY = "", TITLE = "" } = process.env;
           process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
           process.stdout.write(`title=${JSON.stringify(TITLE)}\n`);
-          ' > "$GITHUB_OUTPUT";
+          EOF
 
       - name: Execute
         uses: ./.github/actions/codex

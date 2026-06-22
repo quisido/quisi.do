@@ -5,19 +5,10 @@
 {
   // "$schema": "https://raw.githubusercontent.com/webhintio/hint/main/packages/hint/src/lib/config/config-schema.json",
   "connector": {
-    "name": "./dist/utils/webhint-puppeteer-connector.js"
-    /*
-    Enable and configure options when they're confirmed not to crash.
+    "name": "./dist/utils/webhint-puppeteer-connector.js",
     "options": {
-      "headless": true,
-      "ignoreHTTPSErrors": false,
-      "puppeteerOptions": {
-        "detached": true,
-        "dumpio": true
-      },
-      "waitUntil": "networkidle0"
+      "headless": true
     }
-    */
   },
   "extends": [
     "accessibility",

@@ -33,7 +33,8 @@ jobs:
           "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" |
           tar --directory "$RUNNER_TEMP" --extract --gzip actionlint;
       - name: Lint
-        run: "$RUNNER_TEMP/actionlint"
+        run: |-
+          "$RUNNER_TEMP/actionlint"
 
   build:
     name: Build
