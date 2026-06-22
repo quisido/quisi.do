@@ -79,11 +79,11 @@ jobs:
           BODY: ${{ github.event.comment.body }}
           TITLE: ${{ github.event.issue.title }}
         run: >-
-          node --eval '
-          const { BODY = "", TITLE = "" } = process.env;
-          process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
-          process.stdout.write(`title=${JSON.stringify(TITLE)}\n`);
-          ' > "$GITHUB_OUTPUT";
+          node --eval "
+          const { BODY = '', TITLE = '' } = process.env;
+          process.stdout.write('body=' + JSON.stringify(BODY) + '\n');
+          process.stdout.write('title=' + JSON.stringify(TITLE) + '\n');
+          " > "$GITHUB_OUTPUT";
 
       - name: Execute
         uses: ./.github/actions/codex
@@ -216,11 +216,11 @@ jobs:
           BODY: ${{ github.event.comment.body }}
           TITLE: ${{ github.event.issue.title }}
         run: >-
-          node --eval '
-          const { BODY = "", TITLE = "" } = process.env;
-          process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
-          process.stdout.write(`title=${JSON.stringify(TITLE)}\n`);
-          ' > "$GITHUB_OUTPUT";
+          node --eval "
+          const { BODY = '', TITLE = '' } = process.env;
+          process.stdout.write('body=' + JSON.stringify(BODY) + '\n');
+          process.stdout.write('title=' + JSON.stringify(TITLE) + '\n');
+          " > "$GITHUB_OUTPUT";
 
       - name: Execute
         uses: ./.github/actions/codex
