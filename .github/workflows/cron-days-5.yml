@@ -42,6 +42,7 @@ jobs:
         with:
           auth-json: ${{ secrets.CODEX_AUTH_JSON }}
           codex-token: ${{ github.token }}
+          datadog-api-key: ${{ secrets.DATADOG_API_KEY }}
           prompt: "Reply with exactly: ok"
           secrets-client-id: ${{ vars.WRITE_SECRETS_CLIENT_ID }}
           secrets-environment: codex

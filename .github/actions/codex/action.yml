@@ -9,6 +9,13 @@ inputs:
   codex-token:
     description: GitHub token for Codex to use
     required: true
+  datadog-api-key:
+    description: Datadog API key for Codex token usage metrics
+    required: false
+  datadog-site:
+    default: datadoghq.com
+    description: Datadog site for Codex token usage metrics
+    required: false
   prompt:
     description: additional prompt context
     required: true
@@ -51,6 +58,8 @@ runs:
       shell: bash
       env:
         CODEX_HOME: ${{ runner.temp }}/.codex
+        CODEX_STATUS_PATH: ${{ runner.temp }}/codex-status
+        CODEX_TOKEN_USAGE_PATH: ${{ runner.temp }}/codex-token-usage.jsonl
         GITHUB_TOKEN: ${{ inputs.codex-token }}
         PROMPT: |-
           # Instructions for Codex GitHub Action
@@ -70,15 +79,45 @@ runs:
           ## User Request
 
           ${{ inputs.prompt }}
-      run: >-
-        env
-        -u INPUT_AUTH-JSON
-        -u INPUT_CODEX-TOKEN
-        -u INPUT_SECRETS-PRIVATE-KEY
-        npx codex exec
-        --add-dir "$(npm config get prefix)"
-        --add-dir "$CODEX_HOME"
-        --add-dir "$GITHUB_WORKSPACE"
-        --add-dir "$GITHUB_WORKSPACE/.git"
-        --color always
-        --ephemeral "$PROMPT";
+      run: |
+        set +e
+        env \
+          -u INPUT_AUTH-JSON \
+          -u INPUT_CODEX-TOKEN \
+          -u INPUT_SECRETS-PRIVATE-KEY \
+          npx codex exec \
+          --add-dir "$(npm config get prefix)" \
+          --add-dir "$CODEX_HOME" \
+          --add-dir "$GITHUB_WORKSPACE" \
+          --add-dir "$GITHUB_WORKSPACE/.git" \
+          --ephemeral \
+          --json \
+          "$PROMPT" 2>&1 | tee "$CODEX_TOKEN_USAGE_PATH"
+        codex_status="${PIPESTATUS[0]}"
+        echo "$codex_status" > "$CODEX_STATUS_PATH"
+
+    - name: Emit token usage metrics
+      shell: bash
+      env:
+        CODEX_TOKEN_USAGE_PATH: ${{ runner.temp }}/codex-token-usage.jsonl
+        CODEX_TELEMETRY_STATUS_PATH: ${{ runner.temp }}/codex-telemetry-status
+        DATADOG_API_KEY: ${{ inputs.datadog-api-key }}
+        DATADOG_SITE: ${{ inputs.datadog-site }}
+      run: |
+        set +e
+        node .github/actions/codex/emit-token-usage.ts
+        telemetry_status="$?"
+        echo "$telemetry_status" > "$CODEX_TELEMETRY_STATUS_PATH"
+
+    - name: Finish
+      shell: bash
+      env:
+        CODEX_STATUS_PATH: ${{ runner.temp }}/codex-status
+        CODEX_TELEMETRY_STATUS_PATH: ${{ runner.temp }}/codex-telemetry-status
+      run: |
+        codex_status="$(cat "$CODEX_STATUS_PATH")"
+        telemetry_status="$(cat "$CODEX_TELEMETRY_STATUS_PATH")"
+        if [ "$codex_status" -ne 0 ]; then
+          exit "$codex_status"
+        fi
+        exit "$telemetry_status"

@@ -86,6 +86,7 @@ jobs:
         with:
           auth-json: ${{ secrets.CODEX_AUTH_JSON }}
           codex-token: ${{ steps.app-token.outputs.token }}
+          datadog-api-key: ${{ secrets.DATADOG_API_KEY }}
           secrets-client-id: ${{ vars.WRITE_SECRETS_CLIENT_ID }}
           secrets-private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
           prompt: |-
