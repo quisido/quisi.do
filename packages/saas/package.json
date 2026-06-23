@@ -130,7 +130,7 @@
     "@vitest/coverage-istanbul": "^4.0.7",
     "@vitest/ui": "^4.1.9",
     "aria-query": "^5.3.2",
-    "autoprefixer": "^10.5.0",
+    "autoprefixer": "^10.5.1",
     "babel-plugin-istanbul": "^8.0.0",
     "babel-plugin-react-compiler": "^1.0.0",
     "babel-plugin-replace-import-extension": "^1.1.5",
