@@ -41,11 +41,11 @@
     "@monogatari/core": "^2.8.0"
   },
   "devDependencies": {
-    "@types/node": "^26.0.0",
+    "@types/node": "^26.0.1",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
     "@vitest/browser": "^4.1.0",
     "@vitest/browser-playwright": "^4.1.0",
-    "autoprefixer": "^10.5.1",
+    "autoprefixer": "^10.5.2",
     "jsdom": "^29.1.1",
     "playwright": "^1.61.1",
     "postcss": "^8.5.15",
