@@ -108,7 +108,8 @@ jobs:
           LINE: ${{ github.event.comment.line }}
           START_LINE: ${{ github.event.comment.start_line }}
           TITLE: ${{ github.event.pull_request.title }}
-        run: >-
+        run: |-
+          # shellcheck disable=SC2016
           node --eval '
           const {
           BODY = "", DIFF_HUNK = "", LINE = "", START_LINE = "", TITLE = "",

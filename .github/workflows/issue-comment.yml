@@ -78,7 +78,8 @@ jobs:
         env:
           BODY: ${{ github.event.comment.body }}
           TITLE: ${{ github.event.issue.title }}
-        run: >-
+        run: |-
+          # shellcheck disable=SC2016
           node --eval '
           const { BODY = "", TITLE = "" } = process.env;
           process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
@@ -215,7 +216,8 @@ jobs:
         env:
           BODY: ${{ github.event.comment.body }}
           TITLE: ${{ github.event.issue.title }}
-        run: >-
+        run: |-
+          # shellcheck disable=SC2016
           node --eval '
           const { BODY = "", TITLE = "" } = process.env;
           process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
