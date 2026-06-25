@@ -1,4 +1,4 @@
-import { parse } from 'cookie';
+import { parseCookie } from 'cookie';
 
 export default function mapHeadersToCookies(
   headers: Headers,
@@ -9,5 +9,12 @@ export default function mapHeadersToCookies(
     return {};
   }
 
-  return parse(cookies);
+  return Object.fromEntries(
+    Object.entries(parseCookie(cookies)).filter(
+      (entry): entry is [string, string] => {
+        const [, value] = entry;
+        return typeof value === 'string';
+      },
+    ),
+  );
 }

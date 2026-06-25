@@ -89,7 +89,7 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@v3
         with:
-          client-id: ${{ vars.CODEX_CLIENT_ID }}
+          app-id: ${{ vars.CODEX_CLIENT_ID }}
           private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
 
       - name: Configure git

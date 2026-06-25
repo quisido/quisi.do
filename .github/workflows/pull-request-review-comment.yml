@@ -65,7 +65,7 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@v3
         with:
-          client-id: ${{ vars.CODEX_CLIENT_ID }}
+          app-id: ${{ vars.CODEX_CLIENT_ID }}
           private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
 
       - name: Configure git
@@ -109,16 +109,18 @@ jobs:
           START_LINE: ${{ github.event.comment.start_line }}
           TITLE: ${{ github.event.pull_request.title }}
         run: >-
-          node --eval '
+          node --eval "
           const {
-          BODY = "", DIFF_HUNK = "", LINE = "", START_LINE = "", TITLE = "",
+          BODY = '', DIFF_HUNK = '', LINE = '', START_LINE = '', TITLE = '',
           } = process.env;
-          const lines = START_LINE === "" ? LINE : `${START_LINE}-${LINE}`;
-          process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
-          process.stdout.write(`diff_hunk=${JSON.stringify(DIFF_HUNK)}\n`);
-          process.stdout.write(`lines=${lines}\n`);
-          process.stdout.write(`title=${JSON.stringify(TITLE)}\n`);
-          ' > "$GITHUB_OUTPUT";
+          const lines = START_LINE === '' ? LINE : START_LINE + '-' + LINE;
+          process.stdout.write('body=' + JSON.stringify(BODY) + '\n');
+          process.stdout.write(
+          'diff_hunk=' + JSON.stringify(DIFF_HUNK) + '\n',
+          );
+          process.stdout.write('lines=' + lines + '\n');
+          process.stdout.write('title=' + JSON.stringify(TITLE) + '\n');
+          " > "$GITHUB_OUTPUT";
 
       - name: Execute
         uses: ./.github/actions/codex
