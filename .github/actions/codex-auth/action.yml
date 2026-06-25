@@ -28,7 +28,7 @@ runs:
       id: app-token
       uses: actions/create-github-app-token@v3
       with:
-        client-id: ${{ inputs.secrets-client-id }}
+        app-id: ${{ inputs.secrets-client-id }}
         private-key: ${{ inputs.secrets-private-key }}
 
     - name: Authenticate

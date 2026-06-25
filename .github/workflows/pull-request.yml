@@ -30,7 +30,7 @@ jobs:
           "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" |
           tar --directory "$RUNNER_TEMP" --extract --gzip actionlint;
       - name: Lint
-        run: "$RUNNER_TEMP/actionlint"
+        run: '"$RUNNER_TEMP/actionlint"'
 
   auto-merge:
     name: Auto-merge
@@ -68,7 +68,7 @@ jobs:
     environment: continuous-integration
     runs-on: ubuntu-latest
     services:
-      datadog-agent: &datadog-agent
+      datadog-agent:
         image: datadog/agent:latest
         env:
           DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
@@ -113,7 +113,15 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     services:
-      datadog-agent: *datadog-agent
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_ENV: ci
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -130,7 +138,15 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     services:
-      datadog-agent: *datadog-agent
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_ENV: ci
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -147,7 +163,15 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     services:
-      datadog-agent: *datadog-agent
+      datadog-agent:
+        image: datadog/agent:latest
+        env:
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DD_ENV: ci
+          DD_HOSTNAME: none
+          DD_INSIDE_CI: true
+        ports:
+          - 8126:8126
     steps:
       - name: Checkout
         uses: actions/checkout@v7

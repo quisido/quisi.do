@@ -35,7 +35,7 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@v3
         with:
-          client-id: ${{ vars.CODEX_CLIENT_ID }}
+          app-id: ${{ vars.CODEX_CLIENT_ID }}
           private-key: ${{ secrets.CODEX_PRIVATE_KEY }}
 
       - name: Configure git
@@ -74,7 +74,8 @@ jobs:
         env:
           BODY: ${{ github.event.issue.body }}
           TITLE: ${{ github.event.issue.title }}
-        run: >-
+        run: |-
+          # shellcheck disable=SC2016
           node --eval '
           const { BODY = "", TITLE = "" } = process.env;
           process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
