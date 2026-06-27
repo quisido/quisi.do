@@ -1,0 +1,12 @@
+{
+  "default": true,
+  // These rule IDs are standard markdownlint rules. They stay disabled because
+  // this repository's docs include long code-oriented lines (MD013), JSX/HTML
+  // examples (MD033), Markdown files that intentionally do not start with an H1
+  // (MD041), and manually aligned tables where pipe-column spacing varies
+  // for readability (MD060).
+  "MD013": false,
+  "MD033": false,
+  "MD041": false,
+  "MD060": false
+}

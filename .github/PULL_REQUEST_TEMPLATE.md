@@ -1,7 +1,5 @@
 # Summary
 
-
-
 <details>
 @claude review
 /gemini review

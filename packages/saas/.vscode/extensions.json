@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
+    "DavidAnson.vscode-markdownlint",
     "kravets.vscode-publint",
     "stylelint.vscode-stylelint",
     "vitest.explorer"
