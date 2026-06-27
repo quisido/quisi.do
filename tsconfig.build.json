@@ -10,6 +10,7 @@
   "exclude": [],
   "extends": "./tsconfig.json",
   "include": [
+    ".github/actions/codex/emit-token-usage.ts",
     "scripts/",
     "types/",
     "utils/"
