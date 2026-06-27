@@ -1,4 +1,18 @@
 {
-  "extends": "../../../config/api-extractor.json",
-  "projectFolder": ".."
+  "compiler": {
+    "overrideTsconfig": {
+      "compilerOptions": {
+        "lib": ["ESNext"],
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "ESNext",
+        "types": ["@cloudflare/workers-types"]
+      },
+      "files": ["dist/index.d.ts"]
+    },
+    "skipLibCheck": true
+  },
+  "extends": "quisido/api-extractor.json"
 }
