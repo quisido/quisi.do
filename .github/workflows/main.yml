@@ -15,7 +15,7 @@ permissions:
   contents: read # git checkout
 
 jobs:
-  # Stage 1: actionlint, build
+  # Stage 1: actionlint, build, skills
   actionlint:
     name: Actionlint
     runs-on: ubuntu-latest
@@ -59,6 +59,33 @@ jobs:
         uses: ./.github/actions/build
         with:
           environment: production
+
+  skills:
+    name: Skills
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Setup
+        uses: astral-sh/setup-uv@v8
+      - name: Validate
+        run: >-
+          uvx
+          --from
+          "git+https://github.com/agentskills/agentskills.git@5d4c1fda3f786fff826c7f56b6cb3341e7f3a911#subdirectory=skills-ref"
+          skills-ref
+          validate
+          ".agents/skills/${{ matrix.skill }}"
+    strategy:
+      matrix:
+        skill:
+          - cloudflare
+          - react
+          - testing
+          - typescript
 
   # Stage 2: datadog-sourcemaps, lighthouse-ci, sentry-release, test, webhint-ci
   datadog-sourcemaps:
