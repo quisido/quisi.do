@@ -1,68 +1,55 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
-
   "apiReport": {
     "enabled": true,
     "includeForgottenExports": true,
-    "reportFileName": "<unscopedPackageName>",
+    "reportFileName": "<unscopedPackageName>.api.md",
     "reportFolder": "<projectFolder>/etc/",
-    "reportTempFolder": "<projectFolder>/temp/",
+    "reportTempFolder": "<projectFolder>/.cache/api-extractor/",
     "reportVariants": ["complete"]
   },
-
   "bundledPackages": [],
-
   "compiler": {
     "skipLibCheck": false,
     "tsconfigFilePath": "<projectFolder>/tsconfig.build.json"
   },
-
   "docModel": {
-    "apiJsonFilePath": "<projectFolder>/temp/<unscopedPackageName>.api.json",
+    "apiJsonFilePath": "<projectFolder>/.tests/api-extractor/<unscopedPackageName>.api.json",
     "enabled": true,
-    "includeForgottenExports": false,
-    "projectFolderUrl": "https://github.com/quisido/quisi.do/tree/main/packages/worker"
+    "includeForgottenExports": true
   },
-
   "dtsRollup": {
     "alphaTrimmedFilePath": "",
     "betaTrimmedFilePath": "",
     "enabled": true,
-    "omitTrimmingComments": true,
+    "omitTrimmingComments": false,
     "publicTrimmedFilePath": "",
-    "untrimmedFilePath": "<projectFolder>/dist/index.d.ts"
+    "untrimmedFilePath": "<projectFolder>/.tests/api-extractor/<unscopedPackageName>.d.ts"
   },
-
   "enumMemberOrder": "by-name",
   "mainEntryPointFilePath": "<projectFolder>/dist/index.d.ts",
-
   "messages": {
     "compilerMessageReporting": {
       "default": {
         "addToApiReportFile": true,
-        "logLevel": "warning"
+        "logLevel": "error"
       }
     },
-
     "extractorMessageReporting": {
       "default": {
         "addToApiReportFile": true,
-        "logLevel": "warning"
+        "logLevel": "error"
       }
     },
-
     "tsdocMessageReporting": {
       "default": {
         "addToApiReportFile": true,
-        "logLevel": "warning"
+        "logLevel": "error"
       }
     }
   },
-
   "newlineKind": "lf",
-  "projectFolder": "..",
   "testMode": false,
-
   "tsdocMetadata": {
     "enabled": true,
     "tsdocMetadataFilePath": "<projectFolder>/dist/tsdoc-metadata.json"
