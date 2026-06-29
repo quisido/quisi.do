@@ -59,11 +59,11 @@ class to Cloudflare's module-worker entry.
   `emitPublicMetric`/`emitPrivateMetric`, `affect(promise)`, and `logError`. The
   handler subscribes (`onMetric`, `onSideEffect`, `onError`) and owns flushing.
   Use `logError(error)` rather than `console.*`; the console is the emitter's
-  last-resort fallback oinly.
+  last-resort fallback only.
 - Every metric must declare accessibility (`emitPublicMetric` versus
   `emitPrivateMetric`). `handle-metric.ts` routes public metrics to
   `PUBLIC_DATASET` and private metrics to `PRIVATE_DATASET`, redacting private
-  fields. A metric emitting withotu explicit accessibility is dropped and
+  fields. A metric emitting without explicit accessibility is dropped and
   logged.
 
 ## Error handling

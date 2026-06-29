@@ -21,7 +21,7 @@ metadata:
   the real clock; never depend on real network or real Cloudflare resources.
 - Test observable behavior (inputs -> outputs, side effects), not internal
   implementation details.
-- Use sentence-like `it` names, e.g. `it('should do something')`.
+- Use sentence-like `it` names, e.g. `it('returns the user when the ID exists')`.
 - Use Vitest (`describe`, `it`, `expect`) for all unit and integration tests.
 
 ## Constraints

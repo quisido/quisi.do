@@ -27,7 +27,7 @@ Design-system work has its own guide at `src/design-systems/AGENTS.md`.
 ## Coding Style & Naming Conventions
 
 Use TypeScript for new code and prefer immutable values with `const` and
-`readonly`. PascalCase
+`readonly`. Use PascalCase
 for components, classes, interfaces, enums, and type aliases; camelCase for
 variables and functions; ALL_CAPS for constants. React code should use named
 function components, hooks, explicit prop interfaces, `type` imports for types,

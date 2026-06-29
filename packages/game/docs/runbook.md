@@ -17,12 +17,10 @@ here is single-node; networking (`engine-net`) is a later plan.
 **Tech Stack:** TypeScript (ESM, `.js` import specifiers, `exactOptionalPropertyTypes`),
 Vitest, the repo's `quisido`/`defineESLintConfig` tooling.
 
-**Scope (from `2026-06-07-deterministic-game-engine-design.md`, items 1–4):**
+**Scope:**
 §2 determinism contract, §3 ECS + derived index, §4 tick loop, PRNG. **Out of
 scope:** persistence/`SessionRecord`, the four windows, rollback, effects,
 adapters, rendering — later plans.
-
-**Reference spec:** `docs/superpowers/specs/2026-06-07-deterministic-game-engine-design.md`
 
 ---
 
@@ -151,9 +149,10 @@ describe('cosineOf', (): void => {
 - [ ] **Step 3: Implement `packages/game/src/engine/math/trigonometry.ts`** using
   **only `+ − × ÷`** (no native trig). Recommended technique (implementer chooses
   exact coefficients, then commits them as the source of truth):
-  1. Range-reduce `x` into `[−π, π]` by subtracting `TWO_PI * round(x / TWO_PI)`
-     (use a committed `PI`/`TWO_PI` constant; `round` via `floor(x + 0.5)`-style
-     arithmetic — no `Math.round` of trig).
+  1. Range-reduce `x` into `[−π, π]` by subtracting
+     `TWO_PI * sign(x) * floor(abs(x) / TWO_PI + 0.5)` (use committed `PI`/`TWO_PI`
+     constants; implement `sign`/`abs`/`floor` with conditional arithmetic —
+     no `Math.round`, no trig).
   2. Evaluate a fixed-degree minimax/Taylor polynomial (degree 7–11) in the
      reduced range with hardcoded `ALL_CAPS` coefficient constants.
   3. `cosineOf(x) = sineOf(x + PI / 2)`.
@@ -370,7 +369,7 @@ export function spawnEntity({
     id,
     world: {
       ...world,
-      entities: { ...world.entities, [id]: { components } },
+      entities: { ...world.entities, [id]: { components: structuredClone(components) } },
       nextEntityId: id + 1,
     },
   };
@@ -398,7 +397,7 @@ export function setComponent<K extends keyof Components>({
     ...world,
     entities: {
       ...world.entities,
-      [id]: { components: { ...entity.components, [key]: value } },
+      [id]: { components: { ...entity.components, [key]: structuredClone(value) } },
     },
   };
 }
@@ -793,12 +792,12 @@ describe('draw', (): void => {
 
 ```ts
 export interface DrawOptions {
-  readonly cursor: number;
+  readonly cursor: number; // uint32: [0, 2^32)
   readonly seed: number;
 }
 
 export interface DrawResult {
-  readonly nextCursor: number;
+  readonly nextCursor: number; // uint32: wraps at 2^32
   readonly value: number;
 }
 
@@ -813,7 +812,7 @@ export default function draw({ cursor, seed }: DrawOptions): DrawResult {
   t = Math.imul(t ^ (t >>> 15), 0x735a2d97);
   t ^= t >>> 15;
   const value: number = (t >>> 0) / UINT32;
-  return { nextCursor: cursor + 1, value };
+  return { nextCursor: (cursor + 1) >>> 0, value };
 }
 ```
 
@@ -1163,7 +1162,7 @@ suite and the public `index.ts`.
 `ALL_CAPS` constants, verb function names, co-located `*.test.ts`, AAA, assert
 through `index.ts` — all per the repo instruction files.
 
-**Review fixes applied (2026-06-08, from two adversarial reviews):**
+**Review fixes applied:**
 - `Event` → `GameEvent` everywhere (DOM-global clash; was a real type error).
 - Story 6 "reaches the wall" was vacuous (one event never integrated → object at
   x=0, asserting `0 ≤ 20`). Rewritten to launch + a later `noop` that drives
