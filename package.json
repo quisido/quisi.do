@@ -8,7 +8,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "npm run tsc:build && npm --workspaces run build",
+    "build": "npm run tsc:build && npm --workspace=packages/quisido run build && npm --bin-links --workspace=packages/quisido link && npm --workspaces run build",
     "start": "npm run tsc:build && node ./dist/scripts/start.js",
     "test": "quisido test && npm run test:workspaces",
     "authn": "npm --workspace=packages/authn start",
