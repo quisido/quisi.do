@@ -66,14 +66,12 @@ export default function NotificationsProviderFeature({
     <NotificationsProvider
       value={useMemo((): readonly [
         readonly (
-          | Promise<WithKey<NotificationProps>>
-          | WithKey<NotificationProps>
+          Promise<WithKey<NotificationProps>> | WithKey<NotificationProps>
         )[],
         (notification: Notification) => VoidFunction,
       ] => {
         const newNotifications: (
-          | Promise<WithKey<NotificationProps>>
-          | WithKey<NotificationProps>
+          Promise<WithKey<NotificationProps>> | WithKey<NotificationProps>
         )[] = [...notifications];
 
         if (/^#authn:error=\d+$/u.test(hash)) {
@@ -83,9 +81,8 @@ export default function NotificationsProviderFeature({
 
           newNotifications.push(
             loadAuthnErrorNotificationModule()
-              .then(
-                ({ default: AuthnErrorNotification }): Notification =>
-                  AuthnErrorNotification.fromHash(hash),
+              .then(({ default: AuthnErrorNotification }): Notification =>
+                AuthnErrorNotification.fromHash(hash),
               )
               .catch(mapErrorToNotification)
               .then(
