@@ -6,6 +6,7 @@ import npx from '../npx/npx.js';
 
 interface Options {
   readonly args?: readonly string[] | undefined;
+  readonly build?: boolean | undefined;
   readonly id: string;
   readonly onStdErr?: ((data: string) => void) | undefined;
   readonly onStdOut?: ((data: string) => void) | undefined;
@@ -15,6 +16,7 @@ export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
   'tsc',
   async ({
     args = [],
+    build = false,
     id,
     onStdErr,
     onStdOut,
@@ -31,10 +33,12 @@ export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
     const { exitCode, stdout } = await npx(
       { onStdErr, onStdOut },
       'tsc',
+      ...(build ? ['--build'] : []),
       '--project',
       tsconfigFile,
       ...args,
     );
+
     if (exitCode === 0) {
       return {
         status: 'success',
