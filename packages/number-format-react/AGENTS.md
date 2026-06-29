@@ -16,8 +16,4 @@ This package is `packages/number-format-react`, a small TypeScript React wrapper
 
 ## Coding Style & Naming Conventions
 
-Use TypeScript for new code. Follow the root `AGENTS.md` and applicable skills in `../../.agents/skills/`, especially TypeScript, React, and Testing. Use 2-space indentation, single quotes, semicolons, named function components with default exports, and `import type` or inline `type` imports for types. Prefer `const`, `readonly`, interfaces for data shapes, PascalCase for components/types, camelCase for functions and variables, and ALL_CAPS for constants. Keep components small and focused.
-
-## Testing Guidelines
-
-Tests use Vitest, jsdom, and Testing Library React. Co-locate tests with the source file they cover and name them `*.test.ts` or `*.test.tsx`. Group related cases with `describe`, write sentence-like `it` names, and assert observable rendered behavior rather than implementation details. Never commit `it.only` or `describe.only`.
+Use 2-space indentation, single quotes, semicolons, named function components with default exports, and `import type` or inline `type` imports for types. Prefer `const`, `readonly`, interfaces for data shapes, PascalCase for components/types, camelCase for functions and variables, and ALL_CAPS for constants. Keep components small and focused.

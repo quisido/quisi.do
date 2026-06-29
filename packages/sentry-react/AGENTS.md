@@ -35,15 +35,6 @@ destructure props in function signatures, import types with `type`, and avoid
 functions where practical. ESLint enforces React Compiler, hooks, exhaustive
 deps, and React Refresh rules.
 
-## Testing Guidelines
-
-Tests use Vitest with `describe`, `it`, and `expect`, running in `jsdom` through
-`vitest.config.ts`. Write tests around observable behavior and follow
-Arrange-Act-Assert. Co-locate new tests beside the covered source file, and use
-descriptive test names that read as sentences. Never commit `it.only` or
-`describe.only`.
-
 ## Agent-Specific Instructions
 
-Before coding, read applicable skills in `../../.agents/skills/`. Ignore
-generated output and avoid unrelated refactors.
+Ignore generated output and avoid unrelated refactors.

@@ -33,16 +33,3 @@ React hook rules. Import types with the `type` qualifier when applicable.
 
 ESLint is configured in `eslint.config.ts` with React Compiler, React Hooks, and
 React Refresh rules. Run `npm run eslint` before opening a pull request.
-
-## Testing Guidelines
-
-Tests use Vitest with `describe`, `it`, and `expect`. Name tests
-`*.test.ts` or `*.test.tsx` and place them beside the implementation. Test
-observable behavior and side effects, not private implementation details. Use
-Arrange-Act-Assert structure, descriptive test names, and never commit
-`it.only` or `describe.only`.
-
-## Agent-Specific Instructions
-
-Before editing, check applicable skills under `../../.agents/skills/` and apply
-those that match the files being changed.
