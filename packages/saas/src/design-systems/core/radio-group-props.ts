@@ -28,7 +28,6 @@ export interface Radio<T extends string | number = string | number> {
 }
 
 export type RadioGroupProps<T extends string | number = string | number> = (
-  | LabelProps
-  | LabelledByProps
+  LabelProps | LabelledByProps
 ) &
   Props<T>;

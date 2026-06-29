@@ -1,8 +1,7 @@
 export default interface JsoncSortKeysOption {
   readonly allowLineSeparatedGroups?: boolean | undefined;
   readonly order:
-    | JsoncSortKeysOrderOption
-    | readonly (JsoncSortKeysOrder | string)[];
+    JsoncSortKeysOrderOption | readonly (JsoncSortKeysOrder | string)[];
   readonly pathPattern: string;
 }
 
