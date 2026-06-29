@@ -298,8 +298,7 @@ jobs:
 
             ### Tasks
 
-            1. Create a plan for how you will resolve the failure(s). Use
-               test-driven development to define the test scope.
+            1. Create a plan for how you will resolve the failure(s).
             2. Post your plan in plain English as a comment on the pull request;
                include any assumptions you are making.
             3. Execute your plan to resolve the failing workflow.
