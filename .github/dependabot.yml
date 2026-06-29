@@ -17,80 +17,78 @@ updates:
   - quisido
   # Dependabot should automatically discover workspaces in `packages/`.
   directory: /
-  # Now that Codex automatically address breaking dependency changes, we can
-  # experimentally remove groups to test the efficacy of fewer commits.
-  # groups:
-  #   babel:
-  #     patterns:
-  #     - "@babel/*"
-  #     - babel-loader
-  #     - babel-plugin-*
+  groups:
+    babel:
+      patterns:
+      - "@babel/*"
+      - babel-loader
+      - babel-plugin-*
 
-  #   eslint:
-  #     patterns:
-  #     - "@*/eslint-plugin"
-  #     - "@*/eslint-plugin-*"
-  #     - "@eslint/*"
-  #     - "@microsoft/eslint-formatter-sarif"
-  #     - "@types/eslint"
-  #     - "@typescript-eslint/*"
-  #     - eslint
-  #     - "eslint-config-*"
-  #     - "eslint-plugin-*"
-  #     - jsonc-eslint-parser
-  #     - typescript-eslint
+    eslint:
+      patterns:
+      - "@*/eslint-plugin"
+      - "@*/eslint-plugin-*"
+      - "@eslint/*"
+      - "@microsoft/eslint-formatter-sarif"
+      - "@types/eslint"
+      - "@typescript-eslint/*"
+      - eslint
+      - "eslint-config-*"
+      - "eslint-plugin-*"
+      - jsonc-eslint-parser
+      - typescript-eslint
 
-  #   opentelemetry:
-  #     patterns:
-  #     - "@opentelemetry/*"
+    opentelemetry:
+      patterns:
+      - "@opentelemetry/*"
 
-  #   playwright:
-  #     patterns:
-  #     - "@playwright/mcp"
-  #     - playwright
+    playwright:
+      patterns:
+      - "@playwright/mcp"
+      - playwright
 
-  #   react:
-  #     patterns:
-  #     - "@testing-library/react"
-  #     - "@types/react"
-  #     - "@types/react-dom"
-  #     - react
-  #     - react-dom
+    react:
+      patterns:
+      - "@testing-library/react"
+      - "@types/react"
+      - "@types/react-dom"
+      - react
+      - react-dom
 
-  #   sentry:
-  #     patterns:
-  #     - "@sentry/*"
+    sentry:
+      patterns:
+      - "@sentry/*"
 
-  #   typescript:
-  #     patterns:
-  #     - tslib
-  #     - typescript
+    typescript:
+      patterns:
+      - tslib
+      - typescript
 
-  #   vite:
-  #     patterns:
-  #     - "@vitejs/*"
-  #     - vite
-  #     - "vite-plugin-*"
+    vite:
+      patterns:
+      - "@vitejs/*"
+      - vite
+      - "vite-plugin-*"
 
-  #   vitest:
-  #     patterns:
-  #     - "@vitest/*"
-  #     - vitest
+    vitest:
+      patterns:
+      - "@vitest/*"
+      - vitest
 
-  #   webhint:
-  #     patterns:
-  #     - "@hint/*"
-  #     - hint
+    webhint:
+      patterns:
+      - "@hint/*"
+      - hint
 
-  #   dependencies:
-  #     dependency-type: production
-  #     patterns:
-  #     - "*"
+    dependencies:
+      dependency-type: production
+      patterns:
+      - "*"
 
-  #   dev-dependencies:
-  #     dependency-type: development
-  #     patterns:
-  #     - "*"
+    dev-dependencies:
+      dependency-type: development
+      patterns:
+      - "*"
 
   schedule:
     interval: daily

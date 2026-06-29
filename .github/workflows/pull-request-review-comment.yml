@@ -108,7 +108,7 @@ jobs:
           LINE: ${{ github.event.comment.line }}
           START_LINE: ${{ github.event.comment.start_line }}
           TITLE: ${{ github.event.pull_request.title }}
-        run: >-
+        run: |-
           node << 'EOF' >> "$GITHUB_OUTPUT"
           const {
           BODY = "", DIFF_HUNK = "", LINE = "", START_LINE = "", TITLE = "",

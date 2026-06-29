@@ -78,7 +78,7 @@ jobs:
         env:
           BODY: ${{ github.event.comment.body }}
           TITLE: ${{ github.event.issue.title }}
-        run: >-
+        run: |-
           node << 'EOF' >> "$GITHUB_OUTPUT"
           const { BODY = "", TITLE = "" } = process.env;
           process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
@@ -215,7 +215,7 @@ jobs:
         env:
           BODY: ${{ github.event.comment.body }}
           TITLE: ${{ github.event.issue.title }}
-        run: >-
+        run: |-
           node << 'EOF' >> "$GITHUB_OUTPUT"
           const { BODY = "", TITLE = "" } = process.env;
           process.stdout.write(`body=${JSON.stringify(BODY)}\n`);
