@@ -30,8 +30,8 @@ export default function useUserData(
 
   // States
   const googleAnalyticsUserDataAddress:
-    GoogleAnalyticsUserDataAddress | undefined = useMemo(():
-    GoogleAnalyticsUserDataAddress | undefined => {
+    | GoogleAnalyticsUserDataAddress
+    | undefined = useMemo((): GoogleAnalyticsUserDataAddress | undefined => {
     const newGoogleAnalyticsUserDataAddress: GoogleAnalyticsUserDataAddress = {
       city,
       country,

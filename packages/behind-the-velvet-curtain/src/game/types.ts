@@ -78,7 +78,10 @@ export interface StoryChoiceBody {
   Dialog?: string;
   Timer?: Record<string, unknown>;
   [key: string]:
-    StoryChoiceOption | string | Record<string, unknown> | undefined;
+    | StoryChoiceOption
+    | string
+    | Record<string, unknown>
+    | undefined;
 }
 
 export interface StoryChoiceStatement {

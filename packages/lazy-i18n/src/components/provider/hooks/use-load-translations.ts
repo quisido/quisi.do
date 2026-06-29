@@ -5,7 +5,8 @@ import type { DefaultExport } from '../../../types/default-export.js';
 import type { Translations } from '../../../types/translations.js';
 
 type EagerTranslations =
-  DefaultExport<Record<string, string>> | Record<string, string>;
+  | DefaultExport<Record<string, string>>
+  | Record<string, string>;
 
 type LazyTranslations = Promise<EagerTranslations>;
 

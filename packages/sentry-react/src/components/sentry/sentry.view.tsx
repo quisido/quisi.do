@@ -26,7 +26,8 @@ interface Props extends Readonly<BrowserOptions> {
    * return type.
    */
   readonly ErrorBoundaryFallback?:
-    ((props: FallbackRenderParams) => ReactElement) | undefined;
+    | ((props: FallbackRenderParams) => ReactElement)
+    | undefined;
   readonly onErrorBoundaryError?:
     | ((
         error: unknown,

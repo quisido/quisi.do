@@ -24,15 +24,19 @@ export default function Table({ caption, rows }: TableProps): ReactElement {
     >
       <caption id={captionId}>{caption}</caption>
       <tbody>
-        {rows.map(({ cells, key: rowKey }: TableRow): ReactElement => (
-          <tr className={classes['row']} key={rowKey} role="row">
-            {cells.map(({ content, key: cellKey }: TableCell): ReactElement => (
-              <td className={classes['cell']} key={cellKey} role="cell">
-                {content}
-              </td>
-            ))}
-          </tr>
-        ))}
+        {rows.map(
+          ({ cells, key: rowKey }: TableRow): ReactElement => (
+            <tr className={classes['row']} key={rowKey} role="row">
+              {cells.map(
+                ({ content, key: cellKey }: TableCell): ReactElement => (
+                  <td className={classes['cell']} key={cellKey} role="cell">
+                    {content}
+                  </td>
+                ),
+              )}
+            </tr>
+          ),
+        )}
       </tbody>
     </table>
   );

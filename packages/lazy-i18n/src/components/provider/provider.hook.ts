@@ -75,7 +75,8 @@ export default function useProvider<
   });
 
   const getLoadedFallbackTranslations = ():
-    Record<string, string> | undefined => {
+    | Record<string, string>
+    | undefined => {
     if (typeof fallbackLocale === 'undefined') {
       return;
     }

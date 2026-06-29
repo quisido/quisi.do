@@ -12,6 +12,14 @@ interface Options {
   readonly onStdOut?: ((data: string) => void) | undefined;
 }
 
+const mapBuildToTscArgument = (build: boolean): '--build' | '--project' => {
+  if (build) {
+    return '--build';
+  }
+
+  return '--project';
+};
+
 export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
   'tsc',
   async ({
@@ -33,7 +41,7 @@ export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
     const { exitCode, stdout } = await npx(
       { onStdErr, onStdOut },
       'tsc',
-      build ? '--build' : '--project',
+      mapBuildToTscArgument(build),
       tsconfigFile,
       ...args,
     );

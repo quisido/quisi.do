@@ -255,8 +255,9 @@ export default function Tree({
         {item.content}
         {childItems !== undefined && isExpanded && (
           <div className={classes['group']} role="group">
-            {childItems.map((childItem: TreeItem): ReactElement =>
-              renderTreeItem(childItem, item.key),
+            {childItems.map(
+              (childItem: TreeItem): ReactElement =>
+                renderTreeItem(childItem, item.key),
             )}
           </div>
         )}

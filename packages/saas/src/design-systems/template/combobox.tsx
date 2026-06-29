@@ -407,27 +407,29 @@ export default function Combobox({
         id={listBoxId}
         role="listbox"
       >
-        {filteredOptions.map((option: string, index: number): ReactElement => (
-          <li
-            aria-selected={index === activeOptionIndex}
-            className={classes['option']}
-            id={`${optionIdPrefix}-${index}`}
-            key={option}
-            onClick={(): void => {
-              onOptionClick(option);
-            }}
-            onMouseDown={onOptionMouseDown}
-            onPointerEnter={(): void => {
-              setActiveOptionIndex(index);
-            }}
-            ref={(node: HTMLLIElement | null): void => {
-              optionRefs.current[index] = node;
-            }}
-            role="option"
-          >
-            {option}
-          </li>
-        ))}
+        {filteredOptions.map(
+          (option: string, index: number): ReactElement => (
+            <li
+              aria-selected={index === activeOptionIndex}
+              className={classes['option']}
+              id={`${optionIdPrefix}-${index}`}
+              key={option}
+              onClick={(): void => {
+                onOptionClick(option);
+              }}
+              onMouseDown={onOptionMouseDown}
+              onPointerEnter={(): void => {
+                setActiveOptionIndex(index);
+              }}
+              ref={(node: HTMLLIElement | null): void => {
+                optionRefs.current[index] = node;
+              }}
+              role="option"
+            >
+              {option}
+            </li>
+          ),
+        )}
       </ul>
     </div>
   );

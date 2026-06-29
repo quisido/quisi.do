@@ -25,11 +25,13 @@ export default function List({
       aria-labelledby={labelledBy}
       className={classes['list']}
     >
-      {items.map(({ children, key }: ListItem): ReactElement => (
-        <li className={classes['list-item']} key={key}>
-          {children}
-        </li>
-      ))}
+      {items.map(
+        ({ children, key }: ListItem): ReactElement => (
+          <li className={classes['list-item']} key={key}>
+            {children}
+          </li>
+        ),
+      )}
     </Component>
   );
 }

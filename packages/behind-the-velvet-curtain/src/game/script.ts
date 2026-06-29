@@ -13,7 +13,8 @@ import {
 
 const getStorage = (): StoryStorage => {
   const storedStorage = monogatari.storage() as
-    Partial<StoryStorage> | undefined;
+    | Partial<StoryStorage>
+    | undefined;
 
   return {
     ...DEFAULT_STORAGE,

@@ -51,17 +51,19 @@ export default function ListBox({
         role="listbox"
         value={[...values]}
       >
-        {options.map(({ children, value }: ListBoxOption): ReactElement => (
-          <option
-            className={classes['option']}
-            key={value}
-            // React does not let you set `selected` on option elements.
-            // selected={values.has(value)}
-            value={value}
-          >
-            {children}
-          </option>
-        ))}
+        {options.map(
+          ({ children, value }: ListBoxOption): ReactElement => (
+            <option
+              className={classes['option']}
+              key={value}
+              // React does not let you set `selected` on option elements.
+              // selected={values.has(value)}
+              value={value}
+            >
+              {children}
+            </option>
+          ),
+        )}
       </select>
     </div>
   );

@@ -41,7 +41,8 @@ export default function Honeycomb({
   const wndw: Window | null = useWindow();
 
   const sdk: HoneycombWebSDK | undefined = useMemo(():
-    HoneycombWebSDK | undefined => {
+    | HoneycombWebSDK
+    | undefined => {
     if (wndw === null) {
       return;
     }

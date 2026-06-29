@@ -17,7 +17,8 @@ export interface Props {
   readonly release?: string | undefined;
   readonly rootHostname?: string | undefined;
   readonly sanitizeRequest?:
-    ((request: LogRocketRequest) => LogRocketRequest | null) | undefined;
+    | ((request: LogRocketRequest) => LogRocketRequest | null)
+    | undefined;
   readonly sanitizeResponse?:
     | ((
         request: LogRocketRequest | undefined,
