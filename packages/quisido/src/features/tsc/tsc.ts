@@ -33,8 +33,7 @@ export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
     const { exitCode, stdout } = await npx(
       { onStdErr, onStdOut },
       'tsc',
-      ...(build ? ['--build'] : []),
-      '--project',
+      build ? '--build' : '--project',
       tsconfigFile,
       ...args,
     );
