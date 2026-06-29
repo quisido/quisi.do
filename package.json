@@ -96,6 +96,7 @@
     "quisido": "^0.0.3",
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
+    "vite": "^8.1.0",
     "vitest": "^4.1.0",
     "zod-validation-error": "^5.0.0"
   },
