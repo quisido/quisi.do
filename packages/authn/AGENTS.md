@@ -20,11 +20,7 @@ Run commands from this package directory, or from the monorepo root with
 
 ## Coding Style & Naming Conventions
 
-Use TypeScript for new code and follow applicable skills in `../../.agents/skills/`. Prefer `const`, immutable data, optional chaining, nullish coalescing, and functional helpers where practical. Use PascalCase for classes, interfaces, enums, and type aliases; camelCase for variables and functions; and ALL_CAPS for constants. Do not prefix interfaces with `I`. Worker code should use Web `Request`/`Response` APIs and typed Cloudflare bindings, not Node HTTP APIs.
-
-## Testing Guidelines
-
-Use Vitest with `describe`, `it`, and `expect`. Keep tests close to the code they cover using `*.test.ts` names, for example `src/oauth/get-oauth-user-id.test.ts`. Test observable behavior and side effects, not private implementation details. Avoid committed `it.only`, `describe.only`, arbitrary sleeps, or timeout-dependent tests.
+Prefer `const`, immutable data, optional chaining, nullish coalescing, and functional helpers where practical. Use PascalCase for classes, interfaces, enums, and type aliases; camelCase for variables and functions; and ALL_CAPS for constants. Do not prefix interfaces with `I`. Worker code should use Web `Request`/`Response` APIs and typed Cloudflare bindings, not Node HTTP APIs.
 
 ## Security & Configuration Tips
 

@@ -27,7 +27,7 @@ Design-system work has its own guide at `src/design-systems/AGENTS.md`.
 ## Coding Style & Naming Conventions
 
 Use TypeScript for new code and prefer immutable values with `const` and
-`readonly`. Follow applicable repo skills in `../../.agents/skills/`: PascalCase
+`readonly`. PascalCase
 for components, classes, interfaces, enums, and type aliases; camelCase for
 variables and functions; ALL_CAPS for constants. React code should use named
 function components, hooks, explicit prop interfaces, `type` imports for types,
@@ -37,15 +37,6 @@ configured in `eslint.config.ts`; SCSS style rules are in `.stylelintrc.ts`.
 
 ## Testing Guidelines
 
-Use Vitest with `describe`, `it`, and `expect`. Co-locate tests with the covered
-source as `foo.test.ts` or `foo.test.tsx`; shared design-system conformance
-tests live in `src/design-systems/core-test`. Test observable behavior and
-accessibility semantics, not private implementation details. For design systems,
-set `VITE_TESTED_DESIGN_SYSTEM`, for example:
+Shared design system conformance tests live in `src/design-systems/core-test`.
+To test a design system, set `VITE_TESTED_DESIGN_SYSTEM`; for example:
 `VITE_TESTED_DESIGN_SYSTEM=template npx vitest run src/design-systems/core-test/`.
-
-## Agent-Specific Instructions
-
-Before editing, apply any matching skills from `../../.agents/skills/` at the
-monorepo root. For files under `src/design-systems`, also follow
-`src/design-systems/AGENTS.md`.
