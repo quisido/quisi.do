@@ -40,7 +40,7 @@ properties of the public engine API**, never internal structure:
 - **Serialization fidelity** — `JSON` round-trip replays identically.
 
 Tests import only from the package entry (`src/engine/index.ts`) — the published
-contract — per `.github/instructions/testing.instructions.md` (libraries assert
+contract — per `.agents/skills/testing/SKILL.md` (libraries assert
 through `index.ts`, AAA, co-located, inject time, no real clock). A test that
 names a private helper is a bug in the test.
 
