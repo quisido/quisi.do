@@ -1,13 +1,10 @@
 # Deterministic, Replayable Game Engine — Design Spec
 
-**Date:** 2026-06-07 (revised 2026-06-08 after adversarial review)
-**Status:** Design approved; awaiting implementation plans. First runbook written:
-`docs/superpowers/plans/2026-06-07-deterministic-engine-core-runbook.md`.
 **Scope:** Full vision (local engine + server persistence + multiplayer rollback)
 captured as a forward-looking design. Implementation proceeds as a series of
 small, individually-planned increments — **not** one plan.
 
-**Revision note (2026-06-08).** An adversarial review corrected several defects:
+An adversarial review corrected several defects:
 the four windows are now **two horizons** (`ADJUST` rollback/snapshot floor vs
 `CATCHUP` log retention) — the earlier "one constant bounds everything forever"
 claim was false; the determinism contract now bans **non-finite/`-0`** state and
@@ -170,13 +167,14 @@ mutation, it equals `buildIndex` of the resulting world.
 predicate is "present *and* non-zero," `detectCollisions` zeroing a velocity
 removes the entity from the moving set — that is the intended "dormant = data"
 behavior. The discipline is therefore: **all component writes go through one
-mutation API** (`setComponent`/`removeComponent`/`spawnEntity`) that recomputes
-the affected index membership from the new value. Systems never reach into
-`world.entities` to mutate a component directly; a write that bypasses the API
-leaves a stale index, which silently desyncs. (For v1 the index is simply rebuilt
-via `buildIndex` each tick — trivially correct; incremental maintenance is a
-later optimization that must preserve the "equals `buildIndex`" invariant, which
-is itself a test.)
+mutation API** (`setComponent`/`removeComponent`/`spawnEntity`) that only mutates
+`world.entities`. Systems never reach into `world.entities` directly; a write
+that bypasses the API leaves `world.entities` in an unexpected state. In v1,
+`buildIndex` then reconstructs index membership from scratch each tick — trivially
+correct. Incremental index maintenance (updating membership on each mutation
+rather than rebuilding) is a later optimization and is **not** implied by the
+current mutation API; when added, it must preserve the "equals `buildIndex`"
+invariant, which is itself a test.
 
 ---
 
@@ -564,7 +562,6 @@ Each becomes its own plan → review → build increment (human- or agent-execut
 
 1. `engine/math` — bit-identical `sin/cos/tan/atan2/hypot/pow/exp/log` + the
    ESLint ban rule (`no-restricted-properties` + `no-restricted-syntax` for `**`).
-   **(Implemented by the first runbook: `2026-06-07-deterministic-engine-core-runbook.md`.)**
 2. ECS core — `World` types, `spawnEntity`/`setComponent`, derived index (with the
    explicit shared membership predicate), system registry with frozen execution
    order. **(First runbook.)**
