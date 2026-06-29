@@ -27,6 +27,7 @@ switch (command) {
   case 'build': {
     eventualReports.push(
       tsc.run({
+        args: ['--build'],
         id: 'build',
       }),
     );
@@ -45,7 +46,7 @@ switch (command) {
 
   case 'start': {
     void tsc.run({
-      args: ['--watch'],
+      args: ['--build', '--watch'],
       id: 'start',
       onStdErr(data: string): void {
         globalThis.console.error(data);

@@ -11,42 +11,7 @@
     "moduleResolution": "bundler",
     "outDir": "_site",
     "rootDir": ".",
-    "sourceRoot": "src",
-    "paths": {
-      "@quisido/authn-shared": [
-        "../authn-shared/src/index.ts"
-      ],
-      "@quisido/csp-shared": [
-        "../csp-shared/src/index.ts"
-      ],
-      "fmrs": [
-        "../fmrs/src/index.ts"
-      ],
-      "fullstory-react": [
-        "../fullstory-react/src/index.ts"
-      ],
-      "lazy-i18n": [
-        "../lazy-i18n/src/index.ts"
-      ],
-      "number-format-react": [
-        "../number-format-react/src/index.ts"
-      ],
-      "quisido": [
-        "../quisido/src/index.ts"
-      ],
-      "react-datadog": [
-        "../react-datadog/src/index.ts"
-      ],
-      "sentry-react": [
-        "../sentry-react/src/index.ts"
-      ],
-      "use-force-update": [
-        "../use-force-update/src/index.ts"
-      ],
-      "use-shallow-memo": [
-        "../use-shallow-memo/src/index.ts"
-      ]
-    }
+    "sourceRoot": "src"
   },
   "exclude": [
     ".cache/",

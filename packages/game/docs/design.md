@@ -326,7 +326,7 @@ So: rollback cost is bounded by `ADJUST_WINDOW`; server log memory is bounded by
 onAuthoritativeEvent(event):            // from authority; carries canonical seq + timestamp
   if (event.timestamp < latestAppliedTimestamp):   // a late event belongs in the past
      insert into log at its (timestamp, seq) position
-     world = replay(snapshot, log.filter(e => e.timestamp >= snapshot.tick))
+     world = replay(snapshot, log.filter(e => e.timestamp > snapshot.tick))
                                                     // rewind to floor, replay only post-floor events
   else:
      world = applyEvent(world, event)              // common case: extend

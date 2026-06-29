@@ -2,12 +2,7 @@
   "compilerOptions": {
     "declarationDir": "dist",
     "noEmit": true,
-    "rootDir": ".",
-    "paths": {
-      "quisido": [
-        "../quisido/src/index.ts"
-      ]
-    }
+    "rootDir": "."
   },
   "exclude": [
     ".cache/",
