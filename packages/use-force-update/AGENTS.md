@@ -20,11 +20,3 @@ Run commands from `packages/use-force-update` unless you need a full monorepo ch
 ## Coding Style & Naming Conventions
 
 Use TypeScript for new code and prefer immutable values (`const`, `readonly`) and functional patterns. Follow the repo formatting: 2-space indentation, LF endings, semicolons, single quotes, trailing commas, and 80-column print width. Use PascalCase for types, interfaces, classes, components, and enums; use camelCase for variables and functions; use ALL_CAPS for constants. Do not prefix interfaces with `I`. Keep React hook code compatible with the Rules of Hooks and the configured React compiler checks.
-
-## Testing Guidelines
-
-Use Vitest with `describe`, `it`, and `expect`. Name tests with descriptive sentences and test observable behavior rather than implementation details. Prefer colocated `*.test.ts` or `*.test.tsx` files for source coverage; place reusable helpers in `test/`. Do not commit `it.only` or `describe.only`. Run `npm run vitest:run` for focused test verification and `npm test` before submitting broader changes.
-
-## Agent-Specific Instructions
-
-Follow applicable skills in `../../.agents/skills/`. For this package, the root `AGENTS.md`, TypeScript, React, and Testing guidance commonly apply.

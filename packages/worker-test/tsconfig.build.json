@@ -4,20 +4,6 @@
     "generateCpuProfile": ".cache/tsconfig.build.cpuprofile",
     "noEmit": false,
     "outDir": "dist",
-    "paths": {
-      "@quisido/worker": [
-        "../worker/dist/index.d.ts"
-      ],
-      "cloudflare-test-utils": [
-        "../cloudflare-test-utils/dist/index.d.ts"
-      ],
-      "cloudflare-utils": [
-        "../cloudflare-utils/dist/index.d.ts"
-      ],
-      "fmrs": [
-        "../fmrs/dist/index.d.ts"
-      ]
-    },
     "rootDir": "src",
     "skipLibCheck": true,
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"

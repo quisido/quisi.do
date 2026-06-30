@@ -14,12 +14,7 @@
     "sourceRoot": "src",
     "types": [
       "@types/node"
-    ],
-    "paths": {
-      "fmrs": [
-        "../fmrs/src/index.ts"
-      ]
-    }
+    ]
   },
   "exclude": [
     "./.cache/",

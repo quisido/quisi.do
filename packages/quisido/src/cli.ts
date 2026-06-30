@@ -27,6 +27,7 @@ switch (command) {
   case 'build': {
     eventualReports.push(
       tsc.run({
+        build: true,
         id: 'build',
       }),
     );

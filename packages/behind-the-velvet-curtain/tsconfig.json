@@ -15,12 +15,7 @@
       "@types/node",
       "vite/client",
       "vite-plugin-pwa/client"
-    ],
-    "paths": {
-      "quisido": [
-        "../quisido/src/index.ts"
-      ]
-    }
+    ]
   },
   "exclude": [
     "./.cache/",

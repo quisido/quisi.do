@@ -25,25 +25,12 @@ From the monorepo root, scope commands with
 
 ## Coding Style & Naming Conventions
 
-Write new code in TypeScript and follow applicable shared repo skills in
-`../../.agents/skills/`. Prefer functional code, immutable values (`const`,
-`readonly`), optional chaining, and nullish coalescing. Use PascalCase for
+Prefer functional code, immutable values (`const`, `readonly`), optional
+chaining, and nullish coalescing. Use PascalCase for
 types, interfaces, enums, classes, and components; use camelCase for functions,
-variables, and methods; use ALL_CAPS for constants. Do not prefix interfaces
-with `I`. Keep React hooks compliant with the Rules of Hooks and the configured
-React compiler, hooks, and refresh ESLint rules.
-
-## Testing Guidelines
-
-Vitest is the test framework, with `jsdom` configured in `vitest.config.ts`.
-Place tests beside implementation files, for example
-`src/utils/map-value-to-dependencies.test.ts`. Structure tests with `describe`,
-`it`, and `expect`; write `it` names as readable behavior statements. Test
-observable behavior rather than implementation details, and never commit
-`it.only` or `describe.only`.
+variables, and methods; use ALL_CAPS for constants. Keep React hooks compliant with the React compiler.
 
 ## Agent-Specific Instructions
 
-Before changing code, check applicable skills in `../../.agents/skills/`.
-Avoid unrelated cleanup, and preserve user or generated
-changes already present in the working tree.
+Avoid unrelated cleanup, and preserve user or generated changes already present
+in the working tree.

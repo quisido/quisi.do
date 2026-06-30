@@ -34,14 +34,6 @@ destructure props in function parameters, import types with `type`, and avoid
 `React.FC`. Keep components focused and prefer reusable components in
 `src/components` and reusable hooks in `src/hooks`.
 
-## Testing Guidelines
-
-Use Vitest with `describe`, `it`, and `expect`. Write tests around observable
-behavior rather than implementation details, and follow Arrange-Act-Assert
-structure. Co-locate tests beside their source file, for example
-`src/hooks/use-fullstory.ts` and `src/hooks/use-fullstory.test.tsx`. Do not
-commit `it.only` or `describe.only`.
-
 ## Security & Configuration Tips
 
 Do not log secrets or personally identifiable information. When handling
