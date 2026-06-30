@@ -1,20 +1,21 @@
-import { dirname, join, resolve } from 'node:path';
+import { resolve } from 'node:path';
 import type { Reference } from '../../types/tsconfig.js';
 import parseJsonFile from '../../utils/parse-json-file.js';
 import isReference from './is-reference.js';
 import createTSConfigFile from './create-tsconfig-file.js';
 
 interface Options {
-  readonly cwd: string;
   readonly id: string;
+  readonly rootDir: string;
+  readonly tsConfigPath: string;
 }
 
 export default async function createReferences({
-  cwd,
   id,
+  rootDir,
+  tsConfigPath,
 }: Options): Promise<readonly Reference[]> {
-  const tsconfigPath: string = join(cwd, 'tsconfig.json');
-  const { references } = await parseJsonFile(tsconfigPath);
+  const { references } = await parseJsonFile(tsConfigPath);
 
   if (!Array.isArray(references)) {
     return [];
@@ -30,9 +31,7 @@ export default async function createReferences({
     return {
       ...reference,
       path: await createTSConfigFile({
-        cwd: reference.path.endsWith('.json')
-          ? dirname(resolve(cwd, reference.path))
-          : resolve(cwd, reference.path),
+        extends: resolve(rootDir, reference.path),
         id,
       }),
     };

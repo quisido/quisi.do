@@ -3,22 +3,22 @@ import type { server } from 'typescript';
 import createJsx from './create-jsx.js';
 
 interface Options {
-  readonly cwd: string;
-  readonly id: string;
+  readonly hash: string;
+  readonly rootDir: string;
 }
 
 export default async function createCompilerOptions({
-  cwd,
-  id,
+  hash,
+  rootDir,
 }: Options): Promise<server.protocol.CompilerOptions> {
   const compilerOptions: server.protocol.CompilerOptions = {
-    declarationDir: join(cwd, 'dist'),
-    generateCpuProfile: join(cwd, '.cache', `quisido-tsc-${id}.cpuprofile`),
+    declarationDir: join(rootDir, 'dist'),
+    generateCpuProfile: join(rootDir, '.cache', `quisido-tsc-${hash}.cpuprofile`),
     noEmit: false,
-    outDir: join(cwd, 'dist'),
-    rootDir: join(cwd, 'src'),
+    outDir: join(rootDir, 'dist'),
+    rootDir: join(rootDir, 'src'),
     skipLibCheck: true,
-    tsBuildInfoFile: join(cwd, '.cache', `quisido-${id}.tsbuildinfo`),
+    tsBuildInfoFile: join(rootDir, '.cache', `quisido-${hash}.tsbuildinfo`),
   };
 
   const jsx: server.protocol.JsxEmit | undefined = await createJsx();

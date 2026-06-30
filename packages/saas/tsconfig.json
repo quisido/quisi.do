@@ -49,7 +49,7 @@
       "path": "../number-format-react/"
     },
     {
-      "path": "../quisido/"
+      "path": "../quisido/tsconfig.build.json"
     },
     {
       "path": "../react-datadog/"

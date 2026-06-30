@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "declarationDir": "dist",
     "lib": [
       "DOM",
       "DOM.Iterable",
@@ -8,7 +7,7 @@
     ],
     "module": "esnext",
     "moduleResolution": "bundler",
-    "outDir": "dist",
+    "noEmit": true,
     "rootDir": ".",
     "sourceRoot": "src",
     "types": [
@@ -18,8 +17,9 @@
     ]
   },
   "exclude": [
-    "./.cache/",
-    "./.tests/"
+    ".cache/",
+    ".tests/",
+    "dist/"
   ],
   "extends": "quisido/tsconfig.json",
   "include": [
@@ -30,7 +30,7 @@
   ],
   "references": [
     {
-      "path": "../quisido/"
+      "path": "../quisido/tsconfig.build.json"
     }
   ]
 }
