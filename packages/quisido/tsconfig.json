@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "declarationDir": "dist",
+    "outDir": "dist",
     "paths": {
       "eslint-plugin-sort-keys-custom-order": [
         "../../node_modules/eslint-plugin-sort-keys-custom-order/dist/src/index.d.ts",

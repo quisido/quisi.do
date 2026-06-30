@@ -9,16 +9,15 @@
     "target": "ES2022"
   },
   "exclude": [
-    "./.cache/",
-    "./.tests/",
-    "./src/**/*.test.ts",
-    "./src/**/*.test.tsx",
-    "./src/**/*.browser-smoke.test.ts",
-    "./src/*.test.ts",
-    "./src/*.test.tsx",
-    "./.*.json",
-    "./*.config.*",
-    "./tsconfig.*"
+    ".cache/",
+    ".tests/",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/*.test.ts",
+    "src/*.test.tsx",
+    ".*.json",
+    "*.config.*",
+    "tsconfig.*"
   ],
   "extends": "./tsconfig.json",
   "include": [

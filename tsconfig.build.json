@@ -13,52 +13,5 @@
     "scripts/",
     "types/",
     "utils/"
-  ],
-  "references": [
-    {
-      "path": "./packages/authn-shared/"
-    },
-    {
-      "path": "./packages/cloudflare-test-utils/"
-    },
-    {
-      "path": "./packages/cloudflare-utils/"
-    },
-    {
-      "path": "./packages/csp-shared/"
-    },
-    {
-      "path": "./packages/fmrs/"
-    },
-    {
-      "path": "./packages/fullstory-react/"
-    },
-    {
-      "path": "./packages/lazy-i18n/"
-    },
-    {
-      "path": "./packages/number-format-react/"
-    },
-    {
-      "path": "./packages/quisido/"
-    },
-    {
-      "path": "./packages/react-datadog/"
-    },
-    {
-      "path": "./packages/sentry-react/"
-    },
-    {
-      "path": "./packages/use-force-update/"
-    },
-    {
-      "path": "./packages/use-shallow-memo/"
-    },
-    {
-      "path": "./packages/worker/"
-    },
-    {
-      "path": "./packages/worker-test/"
-    }
   ]
 }

@@ -24,7 +24,7 @@
       "path": "../fmrs/"
     },
     {
-      "path": "../quisido/"
+      "path": "../quisido/tsconfig.build.json"
     },
     {
       "path": "../use-shallow-memo/"

@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
     "generateCpuProfile": ".cache/tsconfig.cpuprofile",
-    "outDir": "dist",
     "rootDir": "src",
     "skipLibCheck": true,
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "exclude": [
-    ".cache/",
-    ".tests/"
+    "src/**/*.test.ts",
+    "src/*.test.ts"
   ],
   "extends": "./tsconfig.json",
   "include": [
-    "src/",
+    "src/"
   ]
 }
