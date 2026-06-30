@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "declarationDir": "dist",
-    "noEmit": true,
     "rootDir": "."
   },
   "exclude": [
@@ -17,19 +16,19 @@
   ],
   "references": [
     {
-      "path": "../worker/tsconfig.json"
+      "path": "../worker/"
     },
     {
-      "path": "../cloudflare-test-utils/tsconfig.json"
+      "path": "../cloudflare-test-utils/"
     },
     {
-      "path": "../cloudflare-utils/tsconfig.json"
+      "path": "../cloudflare-utils/"
     },
     {
-      "path": "../fmrs/tsconfig.json"
+      "path": "../fmrs/"
     },
     {
-      "path": "../quisido/tsconfig.json"
+      "path": "../quisido/"
     }
   ]
 }

@@ -6,7 +6,6 @@
       "DOM",
       "ESNext"
     ],
-    "noEmit": true,
     "rootDir": "."
   },
   "exclude": [
@@ -22,13 +21,13 @@
   ],
   "references": [
     {
-      "path": "../fmrs/tsconfig.json"
+      "path": "../fmrs/"
     },
     {
-      "path": "../quisido/tsconfig.json"
+      "path": "../quisido/"
     },
     {
-      "path": "../use-shallow-memo/tsconfig.json"
+      "path": "../use-shallow-memo/"
     }
   ]
 }

@@ -16,49 +16,49 @@
   ],
   "references": [
     {
-      "path": "./packages/authn-shared/tsconfig.json"
+      "path": "./packages/authn-shared/"
     },
     {
-      "path": "./packages/cloudflare-test-utils/tsconfig.json"
+      "path": "./packages/cloudflare-test-utils/"
     },
     {
-      "path": "./packages/cloudflare-utils/tsconfig.json"
+      "path": "./packages/cloudflare-utils/"
     },
     {
-      "path": "./packages/csp-shared/tsconfig.json"
+      "path": "./packages/csp-shared/"
     },
     {
-      "path": "./packages/fmrs/tsconfig.json"
+      "path": "./packages/fmrs/"
     },
     {
-      "path": "./packages/fullstory-react/tsconfig.json"
+      "path": "./packages/fullstory-react/"
     },
     {
-      "path": "./packages/lazy-i18n/tsconfig.json"
+      "path": "./packages/lazy-i18n/"
     },
     {
-      "path": "./packages/number-format-react/tsconfig.json"
+      "path": "./packages/number-format-react/"
     },
     {
-      "path": "./packages/quisido/tsconfig.json"
+      "path": "./packages/quisido/"
     },
     {
-      "path": "./packages/react-datadog/tsconfig.json"
+      "path": "./packages/react-datadog/"
     },
     {
-      "path": "./packages/sentry-react/tsconfig.json"
+      "path": "./packages/sentry-react/"
     },
     {
-      "path": "./packages/use-force-update/tsconfig.json"
+      "path": "./packages/use-force-update/"
     },
     {
-      "path": "./packages/use-shallow-memo/tsconfig.json"
+      "path": "./packages/use-shallow-memo/"
     },
     {
-      "path": "./packages/worker/tsconfig.json"
+      "path": "./packages/worker/"
     },
     {
-      "path": "./packages/worker-test/tsconfig.json"
+      "path": "./packages/worker-test/"
     }
   ]
 }

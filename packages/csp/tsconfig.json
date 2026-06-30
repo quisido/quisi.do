@@ -19,25 +19,25 @@
   ],
   "references": [
     {
-      "path": "../csp-shared/tsconfig.json"
+      "path": "../csp-shared/"
     },
     {
-      "path": "../worker/tsconfig.json"
+      "path": "../worker/"
     },
     {
-      "path": "../worker-test/tsconfig.json"
+      "path": "../worker-test/"
     },
     {
-      "path": "../cloudflare-test-utils/tsconfig.json"
+      "path": "../cloudflare-test-utils/"
     },
     {
-      "path": "../cloudflare-utils/tsconfig.json"
+      "path": "../cloudflare-utils/"
     },
     {
-      "path": "../fmrs/tsconfig.json"
+      "path": "../fmrs/"
     },
     {
-      "path": "../quisido/tsconfig.json"
+      "path": "../quisido/"
     }
   ]
 }

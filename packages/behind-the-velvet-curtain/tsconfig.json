@@ -30,7 +30,7 @@
   ],
   "references": [
     {
-      "path": "../quisido/tsconfig.json"
+      "path": "../quisido/"
     }
   ]
 }

@@ -1,4 +1,4 @@
-import { dirname, join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import type { Reference } from '../../types/tsconfig.js';
 import parseJsonFile from '../../utils/parse-json-file.js';
 import isReference from './is-reference.js';
@@ -30,7 +30,9 @@ export default async function createReferences({
     return {
       ...reference,
       path: await createTSConfigFile({
-        cwd: dirname(reference.path),
+        cwd: reference.path.endsWith('.json')
+          ? dirname(resolve(cwd, reference.path))
+          : resolve(cwd, reference.path),
         id,
       }),
     };
