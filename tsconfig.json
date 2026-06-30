@@ -27,49 +27,49 @@
   ],
   "references": [
     {
-      "path": "./packages/authn-shared/tsconfig.build.json"
+      "path": "./packages/authn-shared/tsconfig.json"
     },
     {
-      "path": "./packages/cloudflare-test-utils/tsconfig.build.json"
+      "path": "./packages/cloudflare-test-utils/tsconfig.json"
     },
     {
-      "path": "./packages/cloudflare-utils/tsconfig.build.json"
+      "path": "./packages/cloudflare-utils/tsconfig.json"
     },
     {
-      "path": "./packages/csp-shared/tsconfig.build.json"
+      "path": "./packages/csp-shared/tsconfig.json"
     },
     {
-      "path": "./packages/fmrs/tsconfig.build.json"
+      "path": "./packages/fmrs/tsconfig.json"
     },
     {
-      "path": "./packages/fullstory-react/tsconfig.build.json"
+      "path": "./packages/fullstory-react/tsconfig.json"
     },
     {
-      "path": "./packages/lazy-i18n/tsconfig.build.json"
+      "path": "./packages/lazy-i18n/tsconfig.json"
     },
     {
-      "path": "./packages/number-format-react/tsconfig.build.json"
+      "path": "./packages/number-format-react/tsconfig.json"
     },
     {
-      "path": "./packages/quisido/tsconfig.build.json"
+      "path": "./packages/quisido/tsconfig.json"
     },
     {
-      "path": "./packages/react-datadog/tsconfig.build.json"
+      "path": "./packages/react-datadog/tsconfig.json"
     },
     {
-      "path": "./packages/sentry-react/tsconfig.build.json"
+      "path": "./packages/sentry-react/tsconfig.json"
     },
     {
-      "path": "./packages/use-force-update/tsconfig.build.json"
+      "path": "./packages/use-force-update/tsconfig.json"
     },
     {
-      "path": "./packages/use-shallow-memo/tsconfig.build.json"
+      "path": "./packages/use-shallow-memo/tsconfig.json"
     },
     {
-      "path": "./packages/worker/tsconfig.build.json"
+      "path": "./packages/worker/tsconfig.json"
     },
     {
-      "path": "./packages/worker-test/tsconfig.build.json"
+      "path": "./packages/worker-test/tsconfig.json"
     }
   ]
 }

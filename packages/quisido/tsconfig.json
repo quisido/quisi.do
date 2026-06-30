@@ -5,8 +5,7 @@
         "../../node_modules/eslint-plugin-sort-keys-custom-order/dist/src/index.d.ts",
         "./node_modules/eslint-plugin-sort-keys-custom-order/dist/src/index.d.ts"
       ]
-    },
-    "rootDir": "."
+    }
   },
   "exclude": [
     ".cache/",

@@ -3,14 +3,14 @@ import type { server } from 'typescript';
 import createJsx from './create-jsx.js';
 
 interface Options {
+  readonly cwd: string;
   readonly id: string;
 }
 
 export default async function createCompilerOptions({
+  cwd,
   id,
 }: Options): Promise<server.protocol.CompilerOptions> {
-  const cwd: string = process.cwd();
-
   const compilerOptions: server.protocol.CompilerOptions = {
     declarationDir: join(cwd, 'dist'),
     generateCpuProfile: join(cwd, '.cache', `quisido-tsc-${id}.cpuprofile`),

@@ -22,13 +22,13 @@
   ],
   "references": [
     {
-      "path": "../fmrs/tsconfig.build.json"
+      "path": "../fmrs/tsconfig.json"
     },
     {
-      "path": "../quisido/tsconfig.build.json"
+      "path": "../quisido/tsconfig.json"
     },
     {
-      "path": "../use-shallow-memo/tsconfig.build.json"
+      "path": "../use-shallow-memo/tsconfig.json"
     }
   ]
 }

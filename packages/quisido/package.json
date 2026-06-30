@@ -9,8 +9,8 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "start": "tsc --project tsconfig.build.json --watch",
+    "build": "tsc --build tsconfig.build.json",
+    "start": "tsc --project tsconfig.json --watch",
     "test": "quisido test",
     "clean": "rm -rf .cache .tests dist node_modules",
     "eslint": "quisido eslint",
