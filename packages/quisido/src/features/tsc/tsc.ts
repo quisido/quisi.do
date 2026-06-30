@@ -4,6 +4,8 @@ import ReportingTool, {
 } from '../../utils/reporting-tool.js';
 import npx from '../npx/npx.js';
 import process from 'node:process';
+import { join } from 'node:path';
+import parseJsonFile from '../../utils/parse-json-file.js';
 
 interface Options {
   readonly build?: boolean | undefined;
@@ -22,6 +24,8 @@ export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
     onStdOut,
     watch,
   }: Options): Promise<ReportingToolResult> => {
+    const cwd: string = process.cwd();
+
     /**
      * If this fails because `@types/node` mismatches, then a package has an
      * outdated version in `node_modules/`. `npm install @types/node@latest`
@@ -31,7 +35,7 @@ export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
      * "/@types/node" with the `/` prefix.
      */
     const tsconfigFile: string = await createTSConfigFile({
-      cwd: process.cwd(),
+      extends: join(cwd, 'tsconfig.json'),
       id,
     });
 
@@ -52,10 +56,16 @@ export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
       };
     }
 
+    const cmd: string = ['tsc', ...args].join(' ');
+    const tsConfig: Record<string, unknown> = await parseJsonFile(tsconfigFile);
     return {
       context:
-        'The TypeScript compiler threw an error while transpiling this ' +
-        'package.',
+        'The TypeScript compiler threw an error while transpiling.\n\n' +
+        `**Working directory:** ${cwd}\n` +
+        `**Command:** ${cmd}\n` +
+        '<TypeScript-configuration>\n' +
+        JSON.stringify(tsConfig, null, 2) + '\n' +
+        '</TypeScript-configuration>',
       message: stdout,
       status: 'failure',
     };

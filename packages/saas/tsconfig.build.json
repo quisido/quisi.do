@@ -32,6 +32,7 @@
     "rootDir": "src",
     "sourceMap": true,
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/saas/src/",
-    "target": "es2023"
+    "target": "es2023",
+    "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   }
 }

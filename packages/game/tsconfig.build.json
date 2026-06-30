@@ -7,7 +7,8 @@
     "rootDir": "src",
     "sourceMap": true,
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/game/src/",
-    "target": "ES2022"
+    "target": "ES2022",
+    "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
   "exclude": [
     "./.cache/",

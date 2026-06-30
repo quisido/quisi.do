@@ -15,6 +15,7 @@
   ],
   "extends": "quisido/tsconfig.json",
   "include": [
+    "**/*.json",
     "**/*.ts"
   ],
   "references": [
