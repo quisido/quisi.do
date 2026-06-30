@@ -31,37 +31,37 @@
   ],
   "references": [
     {
-      "path": "../authn-shared/tsconfig.json"
+      "path": "../authn-shared/"
     },
     {
-      "path": "../csp-shared/tsconfig.json"
+      "path": "../csp-shared/"
     },
     {
-      "path": "../fmrs/tsconfig.json"
+      "path": "../fmrs/"
     },
     {
-      "path": "../fullstory-react/tsconfig.json"
+      "path": "../fullstory-react/"
     },
     {
-      "path": "../lazy-i18n/tsconfig.json"
+      "path": "../lazy-i18n/"
     },
     {
-      "path": "../number-format-react/tsconfig.json"
+      "path": "../number-format-react/"
     },
     {
-      "path": "../quisido/tsconfig.json"
+      "path": "../quisido/"
     },
     {
-      "path": "../react-datadog/tsconfig.json"
+      "path": "../react-datadog/"
     },
     {
-      "path": "../sentry-react/tsconfig.json"
+      "path": "../sentry-react/"
     },
     {
-      "path": "../use-force-update/tsconfig.json"
+      "path": "../use-force-update/"
     },
     {
-      "path": "../use-shallow-memo/tsconfig.json"
+      "path": "../use-shallow-memo/"
     }
   ]
 }

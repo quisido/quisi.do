@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "declarationDir": "dist",
-    "noEmit": true,
     "rootDir": "."
   },
   "exclude": [
@@ -17,7 +16,7 @@
   ],
   "references": [
     {
-      "path": "../quisido/tsconfig.json"
+      "path": "../quisido/"
     }
   ]
 }

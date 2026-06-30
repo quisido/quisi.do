@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
+    "declarationDir": "dist",
     "paths": {
       "eslint-plugin-sort-keys-custom-order": [
         "../../node_modules/eslint-plugin-sort-keys-custom-order/dist/src/index.d.ts",
         "./node_modules/eslint-plugin-sort-keys-custom-order/dist/src/index.d.ts"
       ]
-    }
+    },
+    "rootDir": "."
   },
   "exclude": [
     ".cache/",
-    ".tests/"
+    ".tests/",
+    "dist/"
   ],
   "extends": "./src/tsconfig.json",
   "include": [

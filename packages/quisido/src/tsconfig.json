@@ -52,7 +52,7 @@
     "moduleResolution": "NodeNext",
     "newLine": "lf",
     "noCheck": false,
-    "noEmit": true,
+    "noEmit": false,
     "noEmitHelpers": false,
     "noEmitOnError": false,
     "noErrorTruncation": false,

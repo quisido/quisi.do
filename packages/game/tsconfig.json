@@ -29,7 +29,7 @@
   ],
   "references": [
     {
-      "path": "../fmrs/tsconfig.json"
+      "path": "../fmrs/"
     }
   ]
 }
