@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "composite": true,
+    "declarationDir": "dist",
     "lib": [
       "DOM",
       "DOM.Iterable",
@@ -8,8 +10,10 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "noEmit": true,
+    "outDir": "dist",
     "rootDir": ".",
     "sourceRoot": "src",
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo",
     "types": [
       "@types/node",
       "vite/client",
