@@ -62,14 +62,14 @@
     "tslib": "^2.8.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20260629.1",
+    "@cloudflare/workers-types": "^4.20260630.1",
     "@quisido/worker-test": "^1.0.1",
     "@types/cookie": "^1.0.0",
     "@types/eslint": "^9.6.1",
     "@vitest/ui": "^4.1.9",
     "cloudflare-test-utils": "^1.0.2",
     "concurrently": "^10.0.3",
-    "cookie": "^2.0.0",
+    "cookie": "^2.0.1",
     "quisido": "^0.0.3",
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
