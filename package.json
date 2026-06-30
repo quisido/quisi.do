@@ -83,7 +83,7 @@
     "@hint/parser-webpack-config": "^2.1.42",
     "@hint/utils-types": "^1.2.1",
     "@openai/codex": "^0.142.4",
-    "@playwright/mcp": "^0.0.76",
+    "@playwright/mcp": "^0.0.77",
     "@types/eslint": "^9.6.1",
     "@types/node": "^26.0.1",
     "@vitest/ui": "^4.1.9",
