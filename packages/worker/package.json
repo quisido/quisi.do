@@ -55,7 +55,7 @@
   "dependencies": {
     "@cloudflare/workers-types": "^4.20260629.1",
     "cloudflare-utils": "^1.0.4",
-    "cookie": "^2.0.0",
+    "cookie": "^2.0.1",
     "eventemitter3": "^5.0.1",
     "fmrs": "^3.0.0"
   },

@@ -38,7 +38,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "@datadog/datadog-api-client": "^1.59.0",
+    "@datadog/datadog-api-client": "^1.60.0",
     "@quisido/worker": "^1.0.8",
     "cloudflare-utils": "^1.0.4",
     "fmrs": "^3.0.0"
