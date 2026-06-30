@@ -3,31 +3,24 @@ import ReportingTool, {
   type ReportingToolResult,
 } from '../../utils/reporting-tool.js';
 import npx from '../npx/npx.js';
+import process from 'node:process';
 
 interface Options {
-  readonly args?: readonly string[] | undefined;
   readonly build?: boolean | undefined;
   readonly id: string;
   readonly onStdErr?: ((data: string) => void) | undefined;
   readonly onStdOut?: ((data: string) => void) | undefined;
+  readonly watch?: boolean | undefined;
 }
-
-const mapBuildToTscArgument = (build: boolean): '--build' | '--project' => {
-  if (build) {
-    return '--build';
-  }
-
-  return '--project';
-};
 
 export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
   'tsc',
   async ({
-    args = [],
     build = false,
     id,
     onStdErr,
     onStdOut,
+    watch,
   }: Options): Promise<ReportingToolResult> => {
     /**
      * If this fails because `@types/node` mismatches, then a package has an
@@ -37,12 +30,19 @@ export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
      * `package-lock.json`. You can find these references by Ctrl-F for
      * "/@types/node" with the `/` prefix.
      */
-    const tsconfigFile: string = await createTSConfigFile({ id });
+    const tsconfigFile: string = await createTSConfigFile({
+      cwd: process.cwd(),
+      id,
+    });
+
+    const args: string[] = [build ? '--build' : '--project', tsconfigFile];
+    if (watch) {
+      args.push('--watch');
+    }
+
     const { exitCode, stdout } = await npx(
       { onStdErr, onStdOut },
       'tsc',
-      mapBuildToTscArgument(build),
-      tsconfigFile,
       ...args,
     );
 

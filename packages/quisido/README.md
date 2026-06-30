@@ -17,7 +17,6 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig({
   name: 'my-custom-rules',
   rules: {
     '@typescript-eslint/no-non-null-assertion': 'warn',
-    'no-ternary': 'warn',
   },
 });
 

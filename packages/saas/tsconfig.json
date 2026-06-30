@@ -31,37 +31,37 @@
   ],
   "references": [
     {
-      "path": "../authn-shared/tsconfig.build.json"
+      "path": "../authn-shared/tsconfig.json"
     },
     {
-      "path": "../csp-shared/tsconfig.build.json"
+      "path": "../csp-shared/tsconfig.json"
     },
     {
-      "path": "../fmrs/tsconfig.build.json"
+      "path": "../fmrs/tsconfig.json"
     },
     {
-      "path": "../fullstory-react/tsconfig.build.json"
+      "path": "../fullstory-react/tsconfig.json"
     },
     {
-      "path": "../lazy-i18n/tsconfig.build.json"
+      "path": "../lazy-i18n/tsconfig.json"
     },
     {
-      "path": "../number-format-react/tsconfig.build.json"
+      "path": "../number-format-react/tsconfig.json"
     },
     {
-      "path": "../quisido/tsconfig.build.json"
+      "path": "../quisido/tsconfig.json"
     },
     {
-      "path": "../react-datadog/tsconfig.build.json"
+      "path": "../react-datadog/tsconfig.json"
     },
     {
-      "path": "../sentry-react/tsconfig.build.json"
+      "path": "../sentry-react/tsconfig.json"
     },
     {
-      "path": "../use-force-update/tsconfig.build.json"
+      "path": "../use-force-update/tsconfig.json"
     },
     {
-      "path": "../use-shallow-memo/tsconfig.build.json"
+      "path": "../use-shallow-memo/tsconfig.json"
     }
   ]
 }

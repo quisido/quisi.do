@@ -16,10 +16,10 @@
   ],
   "references": [
     {
-      "path": "../fmrs/tsconfig.build.json"
+      "path": "../fmrs/tsconfig.json"
     },
     {
-      "path": "../quisido/tsconfig.build.json"
+      "path": "../quisido/tsconfig.json"
     }
   ]
 }

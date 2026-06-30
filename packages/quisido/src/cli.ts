@@ -46,7 +46,6 @@ switch (command) {
 
   case 'start': {
     void tsc.run({
-      args: ['--watch'],
       id: 'start',
       onStdErr(data: string): void {
         globalThis.console.error(data);
@@ -54,6 +53,7 @@ switch (command) {
       onStdOut(data: string): void {
         globalThis.console.log(data);
       },
+      watch: true,
     });
     break;
   }
