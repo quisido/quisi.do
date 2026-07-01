@@ -1,7 +1,7 @@
 import sentryBrowserPackage from '@sentry/browser/package.json' with { type: 'json' };
 import { type Event } from '@sentry/core';
 import sentryCorePackage from '@sentry/core/package.json' with { type: 'json' };
-import sentryReactPackage1 from '@sentry/react/package.json' with { type: 'json' };
+import sentryReactPackage from '@sentry/react/package.json' with { type: 'json' };
 import sentryTracingPackage from '@sentry/tracing/package.json' with { type: 'json' };
 import sentryTypesPackage from '@sentry/types/package.json' with { type: 'json' };
 import reactDomPackage from 'react-dom/package.json' with { type: 'json' };
@@ -90,7 +90,7 @@ export const SENTRY_EVENT: Event = {
   modules: {
     '@sentry/browser': sentryBrowserPackage.version,
     '@sentry/core': sentryCorePackage.version,
-    '@sentry/react': sentryReactPackage1.version,
+    '@sentry/react': sentryReactPackage.version,
     '@sentry/tracing': sentryTracingPackage.version,
     '@sentry/types': sentryTypesPackage.version,
     react: reactPackage.version,

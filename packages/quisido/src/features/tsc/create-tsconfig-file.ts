@@ -18,9 +18,9 @@ const setCachedTSConfigPath = (
   id: string,
   tsconfigPath: Promise<string> | string,
 ): void => {
-  const cwdCache = new Map<string, Promise<string> | string>(CACHE.get(extendsPath));
-  cwdCache.set(id, tsconfigPath);
-  CACHE.set(extendsPath, cwdCache);
+  const cacheById = new Map<string, Promise<string> | string>(CACHE.get(extendsPath));
+  cacheById.set(id, tsconfigPath);
+  CACHE.set(extendsPath, cacheById);
 };
 
 export default async function createTSConfigFile({
@@ -28,25 +28,25 @@ export default async function createTSConfigFile({
   id,
 }: Options): Promise<string> {
   const cachedTSConfigPath: Promise<string> | string | undefined = getCachedTSConfigPath(extendsPath, id);
-  if (cachedTSConfigPath !== undefined) {
+  if (typeof cachedTSConfigPath === 'string') {
     return cachedTSConfigPath;
   }
 
-  const executor = async (resolve: (value: string) => void, reject: (reason: unknown) => void): Promise<void> => {
-    try {
-      const hash: string = Buffer.from(extendsPath).toString('base64url');
-      const tsconfig: TSConfig = await createTSConfig({ extends: extendsPath, id });
-      const tsconfigPath: string = await writeTemporaryFile(
-        `tsconfig.${hash}.${id}.json`,
-        JSON.stringify(tsconfig),
-      );
-      resolve(tsconfigPath);
-    } catch (err: unknown) {
-      reject(err);
-    }
-  };
+  if (cachedTSConfigPath instanceof Promise) {
+    throw new Error(`A circular reference was detected while creating a TypeScript configuration file for \`${extendsPath}\`.`);
+  }
 
-  const eventualTSConfigPath = new Promise<string>(executor);
+  const eventualTSConfigPath = (async (): Promise<string> => {
+    const hash: string = Buffer.from(extendsPath).toString('base64url');
+    const tsconfig: TSConfig = await createTSConfig({ extends: extendsPath, id });
+    const tsconfigPath: string = await writeTemporaryFile(
+      `tsconfig.${hash}.${id}.json`,
+      JSON.stringify(tsconfig),
+    );
+    setCachedTSConfigPath(extendsPath, id, tsconfigPath);
+    return tsconfigPath;
+  })();
+
   setCachedTSConfigPath(extendsPath, id, eventualTSConfigPath);
   return eventualTSConfigPath;
 }

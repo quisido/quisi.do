@@ -10,5 +10,5 @@ export default interface TSConfig {
   readonly exclude?: string[] | undefined;
   readonly extends?: string | undefined;
   readonly include?: string[] | undefined;
-  readonly references?: readonly Reference[];
+  readonly references?: readonly Reference[] | undefined;
 }
