@@ -12,7 +12,12 @@ export default async function createTSConfig({
   extends: extendsPath,
   id,
 }: Options): Promise<TSConfig> {
-  const { rootDir, tsConfigPath } = extendsPath.endsWith('.json') ? { rootDir: dirname(extendsPath), tsConfigPath: extendsPath } : { rootDir: extendsPath, tsConfigPath: join(extendsPath, 'tsconfig.json') };
+  const { rootDir, tsConfigPath } = extendsPath.endsWith('.json')
+    ? { rootDir: dirname(extendsPath), tsConfigPath: extendsPath }
+    : {
+        rootDir: extendsPath,
+        tsConfigPath: join(extendsPath, 'tsconfig.json'),
+      };
   return {
     compilerOptions: await createCompilerOptions({ rootDir }),
     exclude: [
