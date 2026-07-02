@@ -7,7 +7,6 @@
       "DOM",
       "ESNext"
     ],
-    "noEmit": true,
     "rootDir": "."
   },
   "exclude": [
@@ -26,7 +25,7 @@
       "path": "../quisido/tsconfig.build.json"
     },
     {
-      "path": "../use-shallow-memo/tsconfig.build.json"
+      "path": "../use-shallow-memo/"
     }
   ]
 }

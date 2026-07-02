@@ -1,8 +1,9 @@
-import mapPathToPackageJson from './map-path-to-package-json.js';
+import { join } from 'node:path';
+import parseJsonFile from './parse-json-file.js';
 
 export default async function getPackageJson(): Promise<
   Record<string, unknown>
 > {
   const cwd: string = process.cwd();
-  return await mapPathToPackageJson(cwd);
+  return await parseJsonFile(join(cwd, 'package.json'));
 }

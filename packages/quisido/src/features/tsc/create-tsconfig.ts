@@ -1,25 +1,33 @@
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import type TSConfig from '../../types/tsconfig.js';
 import createCompilerOptions from './create-compiler-options.js';
+import createReferences from './create-references.js';
 
 interface Options {
+  readonly extends: string;
   readonly id: string;
 }
 
 export default async function createTSConfig({
+  extends: extendsPath,
   id,
 }: Options): Promise<TSConfig> {
-  const cwd: string = process.cwd();
-
+  const { rootDir, tsConfigPath } = extendsPath.endsWith('.json')
+    ? { rootDir: dirname(extendsPath), tsConfigPath: extendsPath }
+    : {
+        rootDir: extendsPath,
+        tsConfigPath: join(extendsPath, 'tsconfig.json'),
+      };
   return {
-    compilerOptions: await createCompilerOptions({ id }),
+    compilerOptions: await createCompilerOptions({ rootDir }),
     exclude: [
-      join(cwd, 'src', '**', '*.test.ts'),
-      join(cwd, 'src', '**', '*.test.tsx'),
-      join(cwd, 'src', '*.test.ts'),
-      join(cwd, 'src', '*.test.tsx'),
+      join(rootDir, 'src', '**', '*.test.ts'),
+      join(rootDir, 'src', '**', '*.test.tsx'),
+      join(rootDir, 'src', '*.test.ts'),
+      join(rootDir, 'src', '*.test.tsx'),
     ],
-    extends: join(cwd, 'tsconfig.json'),
-    include: [join(cwd, 'src')],
+    extends: tsConfigPath,
+    include: [join(rootDir, 'src')],
+    references: await createReferences({ id, rootDir, tsConfigPath }),
   };
 }

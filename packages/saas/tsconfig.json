@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "declarationDir": "_site",
+    "declarationDir": "dist",
     "jsx": "preserve",
     "lib": [
       "DOM",
@@ -9,9 +9,11 @@
     ],
     "module": "esnext",
     "moduleResolution": "bundler",
-    "outDir": "_site",
+    "noEmit": true,
+    "outDir": "dist",
     "rootDir": ".",
-    "sourceRoot": "src"
+    "sourceRoot": "src",
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "exclude": [
     ".cache/",
@@ -31,37 +33,37 @@
   ],
   "references": [
     {
-      "path": "../authn-shared/tsconfig.build.json"
+      "path": "../authn-shared/"
     },
     {
-      "path": "../csp-shared/tsconfig.build.json"
+      "path": "../csp-shared/"
     },
     {
-      "path": "../fmrs/tsconfig.build.json"
+      "path": "../fmrs/"
     },
     {
-      "path": "../fullstory-react/tsconfig.build.json"
+      "path": "../fullstory-react/"
     },
     {
-      "path": "../lazy-i18n/tsconfig.build.json"
+      "path": "../lazy-i18n/"
     },
     {
-      "path": "../number-format-react/tsconfig.build.json"
+      "path": "../number-format-react/"
     },
     {
       "path": "../quisido/tsconfig.build.json"
     },
     {
-      "path": "../react-datadog/tsconfig.build.json"
+      "path": "../react-datadog/"
     },
     {
-      "path": "../sentry-react/tsconfig.build.json"
+      "path": "../sentry-react/"
     },
     {
-      "path": "../use-force-update/tsconfig.build.json"
+      "path": "../use-force-update/"
     },
     {
-      "path": "../use-shallow-memo/tsconfig.build.json"
+      "path": "../use-shallow-memo/"
     }
   ]
 }

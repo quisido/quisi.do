@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "declarationDir": "dist",
-    "noEmit": true,
     "rootDir": "."
   },
   "exclude": [
@@ -16,7 +15,7 @@
   ],
   "references": [
     {
-      "path": "../fmrs/tsconfig.build.json"
+      "path": "../fmrs/"
     },
     {
       "path": "../quisido/tsconfig.build.json"

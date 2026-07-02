@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "declarationDir": "dist",
-    "noEmit": true,
     "rootDir": "."
   },
   "exclude": [

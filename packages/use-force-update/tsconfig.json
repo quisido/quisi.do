@@ -6,7 +6,6 @@
       "DOM",
       "ESNext"
     ],
-    "noEmit": true,
     "rootDir": "."
   },
   "exclude": [

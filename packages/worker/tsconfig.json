@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "declarationDir": "dist",
-    "noEmit": true,
     "rootDir": "."
   },
   "exclude": [
@@ -17,13 +16,13 @@
   ],
   "references": [
     {
-      "path": "../cloudflare-test-utils/tsconfig.build.json"
+      "path": "../cloudflare-test-utils/"
     },
     {
-      "path": "../cloudflare-utils/tsconfig.build.json"
+      "path": "../cloudflare-utils/"
     },
     {
-      "path": "../fmrs/tsconfig.build.json"
+      "path": "../fmrs/"
     },
     {
       "path": "../quisido/tsconfig.build.json"

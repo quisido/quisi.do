@@ -1,6 +1,6 @@
 import { type Translations } from 'lazy-i18n';
 import Locale from '../constants/locale.js';
-import english from '../translations/index--en-US.json';
+import english from '../translations/index--en-US.json' with { type: 'json' };
 
 export const TRANSLATIONS: Record<Locale, Translations> = {
   [Locale.English]: english,

@@ -12,6 +12,7 @@
     "src/**/*.e2e.ts",
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
+    "src/design-systems/core-test/",
     "src/*.test.ts",
     "src/*.test.tsx",
     "src/test/",
@@ -21,17 +22,13 @@
     "tsconfig.*"
   ],
   "compilerOptions": {
-    "composite": false,
-    "declarationDir": "_site",
-    "incremental": false,
-    "jsx": "preserve",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "noEmit": false,
-    "outDir": "_site",
+    "noEmit": true,
     "rootDir": "src",
     "sourceMap": true,
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/saas/src/",
-    "target": "es2023"
+    "target": "es2023",
+    "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   }
 }

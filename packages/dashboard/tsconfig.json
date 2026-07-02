@@ -15,20 +15,21 @@
   ],
   "extends": "quisido/tsconfig.json",
   "include": [
+    "**/*.json",
     "**/*.ts"
   ],
   "references": [
     {
-      "path": "../worker/tsconfig.build.json"
+      "path": "../worker/"
     },
     {
-      "path": "../worker-test/tsconfig.build.json"
+      "path": "../worker-test/"
     },
     {
-      "path": "../cloudflare-utils/tsconfig.build.json"
+      "path": "../cloudflare-utils/"
     },
     {
-      "path": "../fmrs/tsconfig.build.json"
+      "path": "../fmrs/"
     },
     {
       "path": "../quisido/tsconfig.build.json"

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "declarationDir": "dist",
     "lib": [
       "DOM",
@@ -8,9 +9,11 @@
     ],
     "module": "esnext",
     "moduleResolution": "bundler",
+    "noEmit": true,
     "outDir": "dist",
     "rootDir": ".",
     "sourceRoot": "src",
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo",
     "types": [
       "@types/node",
       "vite/client",
@@ -18,8 +21,9 @@
     ]
   },
   "exclude": [
-    "./.cache/",
-    "./.tests/"
+    ".cache/",
+    ".tests/",
+    "dist/"
   ],
   "extends": "quisido/tsconfig.json",
   "include": [
