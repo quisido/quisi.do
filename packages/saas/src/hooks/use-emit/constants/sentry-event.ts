@@ -1,11 +1,11 @@
-import sentryBrowserPackage from '@sentry/browser/package.json';
+import sentryBrowserPackage from '@sentry/browser/package.json' with { type: 'json' };
 import { type Event } from '@sentry/core';
-import sentryCorePackage from '@sentry/core/package.json';
-import sentryReactPackage1 from '@sentry/react/package.json';
-import sentryTracingPackage from '@sentry/tracing/package.json';
-import sentryTypesPackage from '@sentry/types/package.json';
-import reactDomPackage from 'react-dom/package.json';
-import reactPackage from 'react/package.json';
+import sentryCorePackage from '@sentry/core/package.json' with { type: 'json' };
+import sentryReactPackage1 from '@sentry/react/package.json' with { type: 'json' };
+import sentryTracingPackage from '@sentry/tracing/package.json' with { type: 'json' };
+import sentryTypesPackage from '@sentry/types/package.json' with { type: 'json' };
+import reactDomPackage from 'react-dom/package.json' with { type: 'json' };
+import reactPackage from 'react/package.json' with { type: 'json' };
 // import sentryReactPackage2 from 'sentry-react/package.json';
 import VERSION from '../../../constants/version.js';
 import validateString from '../../../utils/validate-string.js';

@@ -20,10 +20,10 @@ import {
   ATTR_PROCESS_RUNTIME_VERSION,
   ATTR_SERVICE_INSTANCE_ID,
 } from '@opentelemetry/semantic-conventions/incubating';
-import { default as vitePackageJson } from 'vite/package.json';
-import { default as packageJson } from '../../package.json';
+import { default as vitePackageJson } from 'vite/package.json' with { type: 'json' };
+import { default as packageJson } from '../../package.json' with { type: 'json' };
 import { GITHUB_SHA } from '../constants/github-sha.js';
-import getSemanticResourceNavigatorAttributes from '../utils/get-semantic-resource-navigator-attributes';
+import getSemanticResourceNavigatorAttributes from '../utils/get-semantic-resource-navigator-attributes.js';
 import mapPackageToSemanticResourceAttributes from '../utils/map-package-to-semantic-resource-attributes.js';
 import validateString from '../utils/validate-string.js';
 

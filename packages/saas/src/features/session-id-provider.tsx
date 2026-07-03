@@ -5,7 +5,7 @@ import {
   useState,
 } from 'react';
 import { SessionIdProvider } from '../contexts/session-id.js';
-import getSessionId from '../utils/get-session-id';
+import getSessionId from '../utils/get-session-id.js';
 
 export default function SessionIdProviderFeature({
   children,

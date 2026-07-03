@@ -3,7 +3,7 @@ import { type ComponentType, type ReactElement } from 'react';
 import UnknownErrorMessage from '../components/unknown-error-message.js';
 import { type NoActionNotification } from '../types/notification.js';
 import mapAuthnErrorCodeToNotification from '../utils/map-authn-error-code-to-notification.js';
-import mapHashToAuthnErrorCode from '../utils/map-hash-to-authn-error-code';
+import mapHashToAuthnErrorCode from '../utils/map-hash-to-authn-error-code.js';
 
 export default class AuthnErrorNotification implements NoActionNotification {
   public readonly description = 'An authentication error occurred.';

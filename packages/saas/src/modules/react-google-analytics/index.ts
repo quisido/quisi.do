@@ -1,1 +1,1 @@
-export { default } from './hooks/use-google-analytics';
+export { default } from './hooks/use-google-analytics.js';

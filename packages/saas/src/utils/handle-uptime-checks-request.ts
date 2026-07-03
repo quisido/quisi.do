@@ -1,7 +1,7 @@
 import type UptimeChecks from '../types/uptime-checks.js';
 import OnlineOrNot, {
   type UptimeChecks as OnlineOrNotUptimeChecks,
-} from './online-or-not';
+} from './online-or-not.js';
 
 const mapOnlineOrNotUptimeChecksToUptimeChecks = ({
   errors,
