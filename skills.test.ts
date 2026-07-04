@@ -1,6 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { parse } from 'yaml';
 
 const SKILL_DIRECTORY = join('.agents', 'skills');
 const SKILL_MATRIX_EXPRESSION = `\${{ matrix.skill }}`;
@@ -22,6 +23,7 @@ const skillNames: readonly string[] = (
 describe.each(WORKFLOW_PATHS)('%s', (workflowPath: string): void => {
   it('should validate every agent skill with skills-ref', async (): Promise<void> => {
     const workflow: string = await readFile(workflowPath, 'utf8');
+    const workflowJson: unknown = parse(workflow);
 
     expect(workflow).toMatch(/^ {2}skills:\n {4}name: Skills$/mu);
     expect(workflow).toContain('        uses: astral-sh/setup-uv@v8');
@@ -34,8 +36,9 @@ describe.each(WORKFLOW_PATHS)('%s', (workflowPath: string): void => {
         `          ".agents/skills/${SKILL_MATRIX_EXPRESSION}"`,
     );
 
-    for (const skillName of skillNames) {
-      expect(workflow).toContain(`          - ${skillName}`);
-    }
+    expect(workflowJson).toHaveProperty(
+      'jobs.skills.strategy.matrix.skill',
+      skillNames,
+    );
   });
 });

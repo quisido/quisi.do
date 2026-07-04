@@ -82,7 +82,7 @@ jobs:
     strategy:
       matrix:
         skill:
-          - cloudflare
+          - cloudflare-workers
           - react
           - testing
           - typescript
