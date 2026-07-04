@@ -31,5 +31,40 @@
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/saas/src/",
     "target": "es2023",
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
-  }
+  },
+  "references": [
+    {
+      "path": "../authn-shared/"
+    },
+    {
+      "path": "../csp-shared/"
+    },
+    {
+      "path": "../fmrs/"
+    },
+    {
+      "path": "../fullstory-react/"
+    },
+    {
+      "path": "../lazy-i18n/"
+    },
+    {
+      "path": "../number-format-react/"
+    },
+    {
+      "path": "../quisido/tsconfig.build.json"
+    },
+    {
+      "path": "../react-datadog/"
+    },
+    {
+      "path": "../sentry-react/"
+    },
+    {
+      "path": "../use-force-update/"
+    },
+    {
+      "path": "../use-shallow-memo/"
+    }
+  ]
 }
