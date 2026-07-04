@@ -35,14 +35,6 @@ classes, interfaces, type aliases, and enums; camelCase for variables and
 functions; and ALL_CAPS for constants. Keep Worker code on Web APIs
 (`Request`, `Response`) rather than Node APIs.
 
-## Testing Guidelines
-
-Use Vitest (`describe`, `it`, `expect`) for unit and integration tests. Co-locate
-tests with source files, for example `src/features/handle-post.ts` and
-`src/features/handle-post.test.ts`. Write `it` names as readable behavior
-statements and follow Arrange-Act-Assert; this repo labels those phases as
-`Assemble`, `Act`, and `Assert`. Do not commit `it.only` or `describe.only`.
-
 ## Security & Configuration Tips
 
 Never hard-code credentials, dataset names, or user input into SQL. Use typed

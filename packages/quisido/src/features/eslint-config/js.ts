@@ -61,6 +61,9 @@ const JS_CONFIG: Config = defineConfig({
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'no-shadow-restricted-names': 'error',
 
+    // This rule is a good goal, but some ternaries are better than their alternatives.
+    'no-ternary': 'warn',
+
     // This is safe due to `no-global-assign` and `no-shadow-restricted-names`.
     'no-undefined': 'off',
 

@@ -8,15 +8,7 @@
       "ESNext"
     ],
     "noEmit": true,
-    "rootDir": ".",
-    "paths": {
-      "quisido": [
-        "../quisido/src/index.ts"
-      ],
-      "use-shallow-memo": [
-        "../use-shallow-memo/src/index.ts"
-      ]
-    }
+    "rootDir": "."
   },
   "exclude": [
     ".cache/",

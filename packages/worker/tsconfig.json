@@ -2,21 +2,7 @@
   "compilerOptions": {
     "declarationDir": "dist",
     "noEmit": true,
-    "rootDir": ".",
-    "paths": {
-      "cloudflare-test-utils": [
-        "../cloudflare-test-utils/src/index.ts"
-      ],
-      "cloudflare-utils": [
-        "../cloudflare-utils/src/index.ts"
-      ],
-      "fmrs": [
-        "../fmrs/src/index.ts"
-      ],
-      "quisido": [
-        "../quisido/src/index.ts"
-      ]
-    }
+    "rootDir": "."
   },
   "exclude": [
     ".cache/",

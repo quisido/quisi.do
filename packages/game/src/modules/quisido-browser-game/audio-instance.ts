@@ -8,9 +8,11 @@ const throwChildMethodError = (): never => {
   throw new Error('Audio cannot have children.');
 };
 
-export default class AudioInstance
-  implements Instance<AudioProps, BrowserTextInstance, BrowserFamily>
-{
+export default class AudioInstance implements Instance<
+  AudioProps,
+  BrowserTextInstance,
+  BrowserFamily
+> {
   public readonly appendChild = throwChildMethodError;
   public readonly insertBefore = throwChildMethodError;
   public readonly removeChild = throwChildMethodError;

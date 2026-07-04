@@ -9,7 +9,8 @@ export interface GridProps {
   readonly caption: string;
   readonly readOnly?: boolean | undefined;
   readonly rows: readonly GridRow[];
-  readonly selected?: // Single select
+  readonly selected?:
+    // Single select
     | readonly [Key, Key]
     // Multi select
     | ReadonlyMap<Key, ReadonlySet<Key>>
