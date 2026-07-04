@@ -4,20 +4,24 @@ import createCompilerOptions from './create-compiler-options.js';
 import createReferences from './create-references.js';
 
 interface Options {
+  readonly consumers: readonly string[];
   readonly extends: string;
   readonly id: string;
 }
 
-export default async function createTSConfig({
-  extends: extendsPath,
+interface ImplOptions {
+  readonly consumers: readonly string[];
+  readonly id: string;
+  readonly rootDir: string;
+  readonly tsConfigPath: string;
+}
+
+const createTSConfigWithPaths = async ({
+  consumers,
   id,
-}: Options): Promise<TSConfig> {
-  const { rootDir, tsConfigPath } = extendsPath.endsWith('.json')
-    ? { rootDir: dirname(extendsPath), tsConfigPath: extendsPath }
-    : {
-        rootDir: extendsPath,
-        tsConfigPath: join(extendsPath, 'tsconfig.json'),
-      };
+  rootDir,
+  tsConfigPath,
+}: ImplOptions): Promise<TSConfig> => {
   return {
     compilerOptions: await createCompilerOptions({ rootDir }),
     exclude: [
@@ -28,6 +32,38 @@ export default async function createTSConfig({
     ],
     extends: tsConfigPath,
     include: [join(rootDir, 'src')],
-    references: await createReferences({ id, rootDir, tsConfigPath }),
+    references: await createReferences({
+      consumers,
+      id,
+      rootDir,
+      tsConfigPath,
+    }),
   };
+};
+
+export default function createTSConfig({
+  extends: extendsPath,
+  ...options
+}: Options): Promise<TSConfig> {
+  /**
+   * If we are extending a `.json` file, treat it as the config path and set the
+   * root directory to it's directory.
+   */
+  if (extendsPath.endsWith('.json')) {
+    return createTSConfigWithPaths({
+      ...options,
+      rootDir: dirname(extendsPath),
+      tsConfigPath: extendsPath,
+    });
+  }
+
+  /**
+   * If we are extending a module, treat it as the root directory and its
+   * `tsconfig.json` export as the TSConfig path.
+   */
+  return createTSConfigWithPaths({
+    ...options,
+    rootDir: extendsPath,
+    tsConfigPath: join(extendsPath, 'tsconfig.json'),
+  });
 }

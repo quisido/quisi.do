@@ -110,5 +110,9 @@
     "eslint-plugin-react-hooks": {
       "zod-validation-error": "^4.0.2"
     }
+  },
+  "allowScripts": {
+    "workerd@1.20260701.1": true,
+    "sharp@0.34.5": true
   }
 }

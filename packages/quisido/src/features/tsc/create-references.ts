@@ -5,12 +5,14 @@ import isReference from './is-reference.js';
 import createTSConfigFile from './create-tsconfig-file.js';
 
 interface Options {
+  readonly consumers: readonly string[];
   readonly id: string;
   readonly rootDir: string;
   readonly tsConfigPath: string;
 }
 
 export default async function createReferences({
+  consumers,
   id,
   rootDir,
   tsConfigPath,
@@ -31,6 +33,7 @@ export default async function createReferences({
     return {
       ...reference,
       path: await createTSConfigFile({
+        consumers,
         extends: resolve(rootDir, reference.path),
         id,
       }),
