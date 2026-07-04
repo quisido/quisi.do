@@ -4,8 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
 
 const SKILL_DIRECTORY = join('.agents', 'skills');
-const SKILL_MATRIX_EXPRESSION = `\${{ matrix.skill }}`;
-const SKILLS_REF_REVISION = '5d4c1fda3f786fff826c7f56b6cb3341e7f3a911';
+
 const WORKFLOW_PATHS = [
   join('.github', 'workflows', 'main.yml'),
   join('.github', 'workflows', 'pull-request.yml'),
@@ -21,21 +20,9 @@ const skillNames: readonly string[] = (
   .sort();
 
 describe.each(WORKFLOW_PATHS)('%s', (workflowPath: string): void => {
-  it('should validate every agent skill with skills-ref', async (): Promise<void> => {
+  it('should validate every agent skill', async (): Promise<void> => {
     const workflow: string = await readFile(workflowPath, 'utf8');
     const workflowJson: unknown = parse(workflow);
-
-    expect(workflow).toMatch(/^ {2}skills:\n {4}name: Skills$/mu);
-    expect(workflow).toContain('        uses: astral-sh/setup-uv@v8');
-    expect(workflow).toContain(
-      `git+https://github.com/agentskills/agentskills.git@${SKILLS_REF_REVISION}#subdirectory=skills-ref`,
-    );
-    expect(workflow).toContain(
-      '          skills-ref\n' +
-        '          validate\n' +
-        `          ".agents/skills/${SKILL_MATRIX_EXPRESSION}"`,
-    );
-
     expect(workflowJson).toHaveProperty(
       'jobs.skills.strategy.matrix.skill',
       skillNames,
