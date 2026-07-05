@@ -139,6 +139,7 @@ export default class TestExportedHandler {
     const promises: Promise<void>[] = [];
 
     const response: Response = await fetch(request, this.#env, {
+      exports: {},
       passThroughOnException: TEST_PASS_THROUGH_ON_EXCEPTION,
       props: null,
       tracing: TEST_TRACING,
