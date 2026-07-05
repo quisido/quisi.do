@@ -6,6 +6,7 @@ import type { CompilerOptions } from './assert-compiler-options.js';
 import assertTSConfig from './assert-tsconfig.js';
 
 interface Options {
+  readonly jsx: boolean;
   readonly type: PackageType;
 }
 
@@ -22,13 +23,6 @@ const EXPECTED_APPLICATION_COMPILER_OPTIONS: CompilerOptions = {
   outDir: '_site',
 };
 
-const EXPECTED_EXCLUDE = {
-  'src/**/*.test.ts': 'test files',
-  'src/**/*.test.tsx': 'React test files',
-  'src/*.test.ts': 'test files',
-  'src/*.test.tsx': 'React test files',
-};
-
 const EXPECTED_LIBRARY_COMPILER_OPTIONS: CompilerOptions = {
   ...EXPECTED_COMPILER_OPTIONS,
   declarationDir: 'dist',
@@ -36,7 +30,20 @@ const EXPECTED_LIBRARY_COMPILER_OPTIONS: CompilerOptions = {
   rootDir: 'src',
 };
 
-export default async function testTsConfig({ type }: Options): Promise<void> {
+const EXPECTED_PACKAGE_EXCLUDE: Record<string, string> = {
+  'src/**/*.test.ts': 'test files',
+  'src/*.test.ts': 'test files',
+};
+
+const EXPECTED_REACT_EXCLUDE: Record<string, string> = {
+  'src/**/*.test.tsx': 'React test files',
+  'src/*.test.tsx': 'React test files',
+};
+
+export default async function testTsConfig({
+  jsx,
+  type,
+}: Options): Promise<void> {
   const tsConfigStr: string | null = await readPackageFile('tsconfig.json');
 
   if (tsConfigStr === null) {
@@ -63,7 +70,15 @@ export default async function testTsConfig({ type }: Options): Promise<void> {
   }
 
   // exclude
-  for (const [pattern, description] of Object.entries(EXPECTED_EXCLUDE)) {
+  const expectedExclude: Record<string, string> = {
+    ...EXPECTED_PACKAGE_EXCLUDE,
+  };
+
+  if (jsx) {
+    Object.assign(expectedExclude, EXPECTED_REACT_EXCLUDE);
+  }
+
+  for (const [pattern, description] of Object.entries(expectedExclude)) {
     if (!exclude.includes(pattern)) {
       throw new Error(
         `Expected TypeScript configuration to exclude ${description} (${pattern}).`,

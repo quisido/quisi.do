@@ -6,6 +6,7 @@ import type { CompilerOptions } from './assert-compiler-options.js';
 import assertTSConfig from './assert-tsconfig.js';
 
 interface Options {
+  readonly jsx: boolean;
   readonly type: PackageType;
 }
 
@@ -18,6 +19,11 @@ const EXPECTED_COMPILER_OPTIONS: Pick<CompilerOptions, 'tsBuildInfoFile'> = {
 const EXPECTED_APPLICATION_COMPILER_OPTIONS: CompilerOptions =
   EXPECTED_COMPILER_OPTIONS;
 
+const EXPECTED_JSX_EXCLUDE: Record<string, string> = {
+  'src/**/*.test.tsx': 'React test files',
+  'src/*.test.tsx': 'React test files',
+};
+
 const EXPECTED_LIBRARY_COMPILER_OPTIONS: CompilerOptions = {
   ...EXPECTED_COMPILER_OPTIONS,
   declarationDir: 'dist',
@@ -26,14 +32,13 @@ const EXPECTED_LIBRARY_COMPILER_OPTIONS: CompilerOptions = {
   rootDir: 'src',
 };
 
-const EXPECTED_EXCLUDE = {
+const EXPECTED_PACKAGE_EXCLUDE: Record<string, string> = {
   'src/**/*.test.ts': 'test files',
-  'src/**/*.test.tsx': 'React test files',
   'src/*.test.ts': 'test files',
-  'src/*.test.tsx': 'React test files',
 };
 
 export default async function testTsBuildConfig({
+  jsx,
   type,
 }: Options): Promise<void> {
   const tsConfigStr: string | null = await readPackageFile(
@@ -56,6 +61,7 @@ export default async function testTsBuildConfig({
     type === 'application'
       ? EXPECTED_APPLICATION_COMPILER_OPTIONS
       : EXPECTED_LIBRARY_COMPILER_OPTIONS;
+
   for (const [option, value] of mapObjectToEntries(expectedCompilerOptions)) {
     if (compilerOptions[option] !== value) {
       throw new Error(
@@ -66,7 +72,15 @@ export default async function testTsBuildConfig({
   }
 
   // exclude
-  for (const [pattern, description] of Object.entries(EXPECTED_EXCLUDE)) {
+  const expectedExclude: Record<string, string> = {
+    ...EXPECTED_PACKAGE_EXCLUDE,
+  };
+
+  if (jsx) {
+    Object.assign(expectedExclude, EXPECTED_JSX_EXCLUDE);
+  }
+
+  for (const [pattern, description] of Object.entries(expectedExclude)) {
     if (!exclude.includes(pattern)) {
       throw new Error(
         `Expected TypeScript build configuration to exclude ${description} (${pattern}).`,

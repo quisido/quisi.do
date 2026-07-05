@@ -12,11 +12,39 @@ export const quisidoTest: ReportingTool = new ReportingTool(
   'quisido:test',
   async (): Promise<ReportingToolResult> => {
     try {
-      const { private: isPrivate } = await getPackageJson();
+      const {
+        dependencies,
+        devDependencies,
+        private: isPrivate,
+      } = await getPackageJson();
+
+      // dependencies
+      if (
+        dependencies !== undefined &&
+        (typeof dependencies !== 'object' || dependencies === null)
+      ) {
+        throw new Error('Expected `dependencies` to be an object.');
+      }
+
+      // devDependencies
+      if (
+        devDependencies !== undefined &&
+        (typeof devDependencies !== 'object' || devDependencies === null)
+      ) {
+        throw new Error('Expected `dependencies` to be an object.');
+      }
+
       const type: PackageType = isPrivate === true ? 'application' : 'library';
+      const jsx: boolean = new Set(
+        Object.keys({
+          ...dependencies,
+          ...devDependencies,
+        }),
+      ).has('react');
+
       await Promise.all([
-        testTSBuildConfig({ type }),
-        testTSConfig({ type }),
+        testTSBuildConfig({ jsx, type }),
+        testTSConfig({ jsx, type }),
         testVsCodeSettings(),
       ]);
       return {
