@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "declarationDir": "dist",
-    "generateCpuProfile": ".cache/tsconfig.cpuprofile",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "outDir": "dist",
     "rootDir": ".",
-    "skipLibCheck": true,
-    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
+    "skipLibCheck": true
   },
   "exclude": [
     ".cache/",
@@ -27,49 +28,49 @@
   ],
   "references": [
     {
-      "path": "./packages/authn-shared/"
+      "path": "./packages/authn-shared/tsconfig.build.json"
     },
     {
-      "path": "./packages/cloudflare-test-utils/"
+      "path": "./packages/cloudflare-test-utils/tsconfig.build.json"
     },
     {
-      "path": "./packages/cloudflare-utils/"
+      "path": "./packages/cloudflare-utils/tsconfig.build.json"
     },
     {
-      "path": "./packages/csp-shared/"
+      "path": "./packages/csp-shared/tsconfig.build.json"
     },
     {
-      "path": "./packages/fmrs/"
+      "path": "./packages/fmrs/tsconfig.build.json"
     },
     {
-      "path": "./packages/fullstory-react/"
+      "path": "./packages/fullstory-react/tsconfig.build.json"
     },
     {
-      "path": "./packages/lazy-i18n/"
+      "path": "./packages/lazy-i18n/tsconfig.build.json"
     },
     {
-      "path": "./packages/number-format-react/"
+      "path": "./packages/number-format-react/tsconfig.build.json"
     },
     {
-      "path": "./packages/quisido/"
+      "path": "./packages/quisido/tsconfig.build.json"
     },
     {
-      "path": "./packages/react-datadog/"
+      "path": "./packages/react-datadog/tsconfig.build.json"
     },
     {
-      "path": "./packages/sentry-react/"
+      "path": "./packages/sentry-react/tsconfig.build.json"
     },
     {
-      "path": "./packages/use-force-update/"
+      "path": "./packages/use-force-update/tsconfig.build.json"
     },
     {
-      "path": "./packages/use-shallow-memo/"
+      "path": "./packages/use-shallow-memo/tsconfig.build.json"
     },
     {
-      "path": "./packages/worker/"
+      "path": "./packages/worker/tsconfig.build.json"
     },
     {
-      "path": "./packages/worker-test/"
+      "path": "./packages/worker-test/tsconfig.build.json"
     }
   ]
 }

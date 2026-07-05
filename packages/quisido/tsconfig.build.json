@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "generateCpuProfile": ".cache/tsconfig.cpuprofile",
+    "noEmit": false,
     "rootDir": "src",
     "skipLibCheck": true,
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"

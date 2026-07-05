@@ -26,7 +26,7 @@ export default async function createReferences({
   const toQuisido = async (reference: unknown): Promise<Reference> => {
     if (!isReference(reference)) {
       throw new Error(
-        `Invalid TypeScript configuration reference: ${JSON.stringify(reference)}`,
+        `Invalid TypeScript configuration reference in \`${tsConfigPath}\`: ${JSON.stringify(reference)}`,
       );
     }
 

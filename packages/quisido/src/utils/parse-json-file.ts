@@ -16,6 +16,7 @@ export default async function parseJsonFile(
   }
 
   try {
+    // Technical debt: This should support `.jsonc` as well.
     const json: unknown = JSON.parse(await readFile(path, 'utf8'));
 
     if (isValidJson(json)) {

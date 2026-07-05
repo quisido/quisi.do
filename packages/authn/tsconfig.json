@@ -20,22 +20,22 @@
   ],
   "references": [
     {
-      "path": "../authn-shared/"
+      "path": "../authn-shared/tsconfig.build.json"
     },
     {
-      "path": "../worker/"
+      "path": "../worker/tsconfig.build.json"
     },
     {
-      "path": "../worker-test/"
+      "path": "../worker-test/tsconfig.build.json"
     },
     {
-      "path": "../cloudflare-test-utils/"
+      "path": "../cloudflare-test-utils/tsconfig.build.json"
     },
     {
-      "path": "../cloudflare-utils/"
+      "path": "../cloudflare-utils/tsconfig.build.json"
     },
     {
-      "path": "../fmrs/"
+      "path": "../fmrs/tsconfig.build.json"
     },
     {
       "path": "../quisido/tsconfig.build.json"

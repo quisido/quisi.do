@@ -15,7 +15,7 @@
   ],
   "references": [
     {
-      "path": "../fmrs/"
+      "path": "../fmrs/tsconfig.build.json"
     },
     {
       "path": "../quisido/tsconfig.build.json"

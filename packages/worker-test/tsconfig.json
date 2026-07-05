@@ -16,19 +16,19 @@
   ],
   "references": [
     {
-      "path": "../worker/"
+      "path": "../cloudflare-test-utils/tsconfig.build.json"
     },
     {
-      "path": "../cloudflare-test-utils/"
+      "path": "../cloudflare-utils/tsconfig.build.json"
     },
     {
-      "path": "../cloudflare-utils/"
-    },
-    {
-      "path": "../fmrs/"
+      "path": "../fmrs/tsconfig.build.json"
     },
     {
       "path": "../quisido/tsconfig.build.json"
+    },
+    {
+      "path": "../worker/tsconfig.build.json"
     }
   ]
 }
