@@ -41,8 +41,7 @@ export interface QuisidoReconcilerOptions<
   ) => Family;
   readonly createTextInstance: (text: string, rootContainer: Root) => Txt;
   readonly maySuspendCommit?:
-    | (<T extends Type>(type: T, props: Props[T]) => boolean)
-    | undefined;
+    (<T extends Type>(type: T, props: Props[T]) => boolean) | undefined;
   readonly scheduleMicrotask: (fn: () => void) => void;
   readonly scheduleTimeout: (
     fn: (...args: readonly unknown[]) => unknown,

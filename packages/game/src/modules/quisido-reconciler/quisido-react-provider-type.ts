@@ -5,9 +5,9 @@ interface Options<T> {
   readonly typeOf: symbol | number;
 }
 
-export default class QuisidoReactProviderType<T>
-  implements ReactProviderType<T>
-{
+export default class QuisidoReactProviderType<
+  T,
+> implements ReactProviderType<T> {
   #context: ReactContext<T>;
   #typeof: symbol | number;
 

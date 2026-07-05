@@ -7,15 +7,7 @@
       "ESNext"
     ],
     "noEmit": true,
-    "rootDir": ".",
-    "paths": {
-      "fmrs": [
-        "../fmrs/src/index.ts"
-      ],
-      "quisido": [
-        "../quisido/src/index.ts"
-      ]
-    }
+    "rootDir": "."
   },
   "exclude": [
     ".cache/",

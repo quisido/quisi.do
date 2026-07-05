@@ -1,10 +1,5 @@
 export type Stringifiable =
-  | boolean
-  | null
-  | number
-  | string
-  | StringifiableArray
-  | StringifiableRecord;
+  boolean | null | number | string | StringifiableArray | StringifiableRecord;
 
 export type StringifiableArray = readonly Stringifiable[];
 

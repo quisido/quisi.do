@@ -37,6 +37,4 @@ export interface LabelledByFigureProps extends BaseFigureProps {
 }
 
 export type FigureProps =
-  | CaptionFigureProps
-  | LabelFigureProps
-  | LabelledByFigureProps;
+  CaptionFigureProps | LabelFigureProps | LabelledByFigureProps;

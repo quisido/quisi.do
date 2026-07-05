@@ -4,8 +4,7 @@ import { type Compulsory } from './compulsory.js';
 export type LogRocket = typeof LR;
 
 export type LogRocketOptions = Parameters<LogRocket['init']>[1] extends
-  | infer U
-  | undefined
+  infer U | undefined
   ? U
   : never;
 

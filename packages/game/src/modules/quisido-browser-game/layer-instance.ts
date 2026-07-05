@@ -14,9 +14,11 @@ const WIDTH_DIMENSION_INDEX = 0;
 const X_COORDINATE_INDEX = 0;
 const Y_COORDINATE_INDEX = 1;
 
-export default class LayerInstance
-  implements Instance<LayerProps, BrowserTextInstance, BrowserFamily>
-{
+export default class LayerInstance implements Instance<
+  LayerProps,
+  BrowserTextInstance,
+  BrowserFamily
+> {
   readonly #coordinates: Tuple<number>;
   readonly #dimensions: Tuple<number>;
   readonly #handleError: (error: Error) => void;
