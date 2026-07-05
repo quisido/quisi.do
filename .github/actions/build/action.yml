@@ -58,6 +58,8 @@ runs:
           typescript-
           ${{ runner.os }}-
           ${{ hashFiles('package-lock.json') }}-
+          ${{ hashFiles('tsconfig.json', 'packages/*/tsconfig.json') }}-
+          ${{ hashFiles('tsconfig.build.json', 'packages/*/tsconfig.build.json') }}-
           ${{ github.event.repository.default_branch }}-
           ${{ github.sha }}
 
