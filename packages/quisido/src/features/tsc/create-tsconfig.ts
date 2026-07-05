@@ -22,8 +22,12 @@ const createTSConfigWithPaths = async ({
   rootDir,
   tsConfigPath,
 }: ImplOptions): Promise<TSConfig> => {
+  const [compilerOptions, references] = await Promise.all([
+    createCompilerOptions({ rootDir }),
+    createReferences({ consumers, id, rootDir, tsConfigPath }),
+  ]);
   return {
-    compilerOptions: await createCompilerOptions({ rootDir }),
+    compilerOptions,
     exclude: [
       join(rootDir, 'src', '**', '*.test.ts'),
       join(rootDir, 'src', '**', '*.test.tsx'),
@@ -32,12 +36,7 @@ const createTSConfigWithPaths = async ({
     ],
     extends: tsConfigPath,
     include: [join(rootDir, 'src')],
-    references: await createReferences({
-      consumers,
-      id,
-      rootDir,
-      tsConfigPath,
-    }),
+    references,
   };
 };
 

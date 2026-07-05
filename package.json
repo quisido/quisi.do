@@ -13,7 +13,7 @@
   "scripts": {
     "build": "npm run tsc:build && npm --bin-links --workspace=packages/quisido link && npm --workspaces run build",
     "start": "npm run tsc:build && node ./dist/scripts/start.js",
-    "test": "quisido test && npm run test:workspaces",
+    "test": "npm --workspaces run test",
     "authn": "npm --workspace=packages/authn start",
     "browserslist:update-db": "browserslist --update-db",
     "clean": "rimraf .cache .tests dist && npm run clean --if-present --workspaces && rimraf node_modules",
@@ -34,7 +34,6 @@
     "quisido": "npm --workspace=packages/quisido start",
     "react-datadog": "npm --workspace=packages/react-datadog start",
     "saas": "npm --workspace=packages/saas start",
-    "test:workspaces": "node ./dist/scripts/test.js",
     "tsc:build": "tsc --build tsconfig.build.json",
     "tsc:version": "tsc --version",
     "update": "node ./dist/scripts/update.js",
