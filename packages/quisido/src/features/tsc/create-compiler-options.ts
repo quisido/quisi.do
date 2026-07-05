@@ -11,7 +11,6 @@ export default async function createCompilerOptions({
 }: Options): Promise<server.protocol.CompilerOptions> {
   const compilerOptions: server.protocol.CompilerOptions = {
     declarationDir: join(rootDir, 'dist'),
-    generateCpuProfile: join(rootDir, '.cache', `quisido-tsc.cpuprofile`),
     noEmit: false,
     outDir: join(rootDir, 'dist'),
     rootDir: join(rootDir, 'src'),

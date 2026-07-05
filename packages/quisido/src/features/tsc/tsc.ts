@@ -18,7 +18,7 @@ export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
     build = false,
     onStdErr,
     onStdOut,
-    watch,
+    watch = false,
   }: Options): Promise<ReportingToolResult> => {
     const cwd: string = process.cwd();
 
@@ -36,10 +36,24 @@ export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
     // });
 
     // const args: string[] = [build ? '--build' : '--project', tsconfigFile];
-    const args: string[] = [
-      build ? '--build' : '--project',
-      join(cwd, build ? 'tsconfig.build.json' : 'tsconfig.json'),
-    ];
+    const args: string[] = [];
+
+    if (build) {
+      args.push(
+        '--build',
+        join(cwd, 'tsconfig.build.json'),
+        '--generateCpuProfile',
+        join(cwd, '.cache', 'tsc-output.build.cpuprofile'),
+      );
+    } else {
+      args.push(
+        '--generateCpuProfile',
+        join(cwd, '.cache', 'tsc-output.cpuprofile'),
+        '--project',
+        join(cwd, 'tsconfig.json'),
+      );
+    }
+
     if (watch) {
       args.push('--watch');
     }

@@ -12,9 +12,11 @@ export type ReportingToolResult =
   | Omit<SkippedReport, 'tool'>
   | Omit<SuccessReport, 'tool'>;
 
+// Press F to FIX with AI.
+// Press Q to QUIT watch mode.
 const WATCH_MODE_INSTRUCTIONS = `
-Press Q to QUIT watch mode.
-Press any other key to RETRY.
+Press R to RETRY.
+Press any other key to SKIP this tool.
 `;
 
 /**
@@ -68,7 +70,7 @@ export default class ReportingTool<
             process.stdout.unref();
 
             const key: string = await getKey(this.#stdin);
-            if (key.toLowerCase() !== 'q') {
+            if (key.toLowerCase() === 'r') {
               return await this.run(...options);
             }
           }

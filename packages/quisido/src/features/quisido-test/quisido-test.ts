@@ -13,7 +13,7 @@ export const quisidoTest: ReportingTool = new ReportingTool(
   async (): Promise<ReportingToolResult> => {
     try {
       const { private: isPrivate } = await getPackageJson();
-      const type: PackageType = isPrivate ? 'application' : 'library';
+      const type: PackageType = isPrivate === true ? 'application' : 'library';
       await Promise.all([
         testTSBuildConfig({ type }),
         testTSConfig({ type }),

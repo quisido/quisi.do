@@ -1,6 +1,5 @@
 export interface CompilerOptions {
   readonly declarationDir?: string | undefined;
-  readonly generateCpuProfile?: string | undefined;
   readonly noEmit?: boolean | undefined;
   readonly outDir?: string | undefined;
   readonly rootDir?: string | undefined;
@@ -29,16 +28,6 @@ export default function assertCompilerOptions(
       'Expected TypeScript declaration directory to be a string.',
       { cause: compilerOptions },
     );
-  }
-
-  // generateCpuProfile
-  if (
-    'generateCpuProfile' in compilerOptions &&
-    typeof compilerOptions.generateCpuProfile !== 'string'
-  ) {
-    throw new Error('Expected TypeScript CPU profile to be a string.', {
-      cause: compilerOptions,
-    });
   }
 
   // noEmit

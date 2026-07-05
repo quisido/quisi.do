@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "generateCpuProfile": ".cache/tsconfig.build.cpuprofile",
     "noEmit": false,
     "rootDir": "src",
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/use-shallow-memo/src/",

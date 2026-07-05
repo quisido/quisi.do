@@ -11,11 +11,7 @@ interface Options {
 
 const EMPTY_ARR: readonly never[] = [];
 
-const EXPECTED_COMPILER_OPTIONS: Pick<
-  CompilerOptions,
-  'generateCpuProfile' | 'tsBuildInfoFile'
-> = {
-  generateCpuProfile: '.cache/tsconfig.build.cpuprofile',
+const EXPECTED_COMPILER_OPTIONS: Pick<CompilerOptions, 'tsBuildInfoFile'> = {
   tsBuildInfoFile: '.cache/tsconfig.build.tsbuildinfo',
 };
 
