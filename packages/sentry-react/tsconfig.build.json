@@ -3,13 +3,14 @@
     "generateCpuProfile": ".cache/tsconfig.build.cpuprofile",
     "noEmit": false,
     "rootDir": "src",
-    "skipLibCheck": true,
-    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/quisido/src/",
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/sentry-react/src/",
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
   "exclude": [
     "src/**/*.test.ts",
-    "src/*.test.ts"
+    "src/**/*.test.tsx",
+    "src/*.test.ts",
+    "src/*.test.tsx"
   ],
   "extends": "./tsconfig.json",
   "include": [

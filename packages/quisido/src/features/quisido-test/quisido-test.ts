@@ -14,9 +14,11 @@ export const quisidoTest: ReportingTool = new ReportingTool(
     try {
       const { private: isPrivate } = await getPackageJson();
       const type: PackageType = isPrivate ? 'application' : 'library';
-      await testTSBuildConfig({ type });
-      await testTSConfig({ type });
-      await testVsCodeSettings();
+      await Promise.all([
+        testTSBuildConfig({ type }),
+        testTSConfig({ type }),
+        testVsCodeSettings(),
+      ]);
       return {
         status: 'success',
       };

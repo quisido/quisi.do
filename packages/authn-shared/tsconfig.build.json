@@ -3,8 +3,7 @@
     "generateCpuProfile": ".cache/tsconfig.build.cpuprofile",
     "noEmit": false,
     "rootDir": "src",
-    "skipLibCheck": true,
-    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/quisido/src/",
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/authn-shared/src/",
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
   "exclude": [

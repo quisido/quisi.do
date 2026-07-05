@@ -1,6 +1,9 @@
 {
   "name": "@quisi/do",
   "version": "1.0.0",
+  "allowScripts": {
+    "workerd": "*"
+  },
   "author": "quisi.do <contact@quisi.do>",
   "description": "quisi.do",
   "homepage": "https://quisi.do/",
