@@ -71,8 +71,6 @@ export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
     }
 
     const cmd: string = ['tsc', ...args].join(' ');
-    // const tsConfig: Record<string, unknown> = await parseJsonFile(tsconfigFile);
-    // const tsConfigStr: string = JSON.stringify(tsConfig, null, JSON_SPACES);
     return {
       context:
         `The TypeScript compiler threw an error while transpiling.\n\n` +

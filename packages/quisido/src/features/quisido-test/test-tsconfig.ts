@@ -23,6 +23,11 @@ const EXPECTED_APPLICATION_COMPILER_OPTIONS: CompilerOptions = {
   outDir: '_site',
 };
 
+const EXPECTED_JSX_EXCLUDE: Record<string, string> = {
+  'src/**/*.test.tsx': 'React test files',
+  'src/*.test.tsx': 'React test files',
+};
+
 const EXPECTED_LIBRARY_COMPILER_OPTIONS: CompilerOptions = {
   ...EXPECTED_COMPILER_OPTIONS,
   declarationDir: 'dist',
@@ -33,11 +38,6 @@ const EXPECTED_LIBRARY_COMPILER_OPTIONS: CompilerOptions = {
 const EXPECTED_PACKAGE_EXCLUDE: Record<string, string> = {
   'src/**/*.test.ts': 'test files',
   'src/*.test.ts': 'test files',
-};
-
-const EXPECTED_REACT_EXCLUDE: Record<string, string> = {
-  'src/**/*.test.tsx': 'React test files',
-  'src/*.test.tsx': 'React test files',
 };
 
 export default async function testTsConfig({
@@ -75,7 +75,7 @@ export default async function testTsConfig({
   };
 
   if (jsx) {
-    Object.assign(expectedExclude, EXPECTED_REACT_EXCLUDE);
+    Object.assign(expectedExclude, EXPECTED_JSX_EXCLUDE);
   }
 
   for (const [pattern, description] of Object.entries(expectedExclude)) {

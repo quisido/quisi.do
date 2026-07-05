@@ -31,7 +31,7 @@ export const quisidoTest: ReportingTool = new ReportingTool(
         devDependencies !== undefined &&
         (typeof devDependencies !== 'object' || devDependencies === null)
       ) {
-        throw new Error('Expected `dependencies` to be an object.');
+        throw new Error('Expected `devDependencies` to be an object.');
       }
 
       const type: PackageType = isPrivate === true ? 'application' : 'library';
