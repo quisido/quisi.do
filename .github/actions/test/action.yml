@@ -10,10 +10,28 @@ runs:
       with:
         install-browsers: true
     - name: Test
+      id: test
       run: npm test
       shell: bash
       env:
         VITE_TESTED_DESIGN_SYSTEM: template
+    - name: Save ESLint cache
+      if: >-
+        ${{
+          github.ref_name == github.event.repository.default_branch &&
+          steps.test.outcome == 'success'
+        }}
+      uses: actions/cache/save@v4
+      with:
+        path: |
+          .cache/eslint.json
+          packages/*/.cache/eslint.json
+        key: >-
+          eslint-
+          ${{ runner.os }}-
+          ${{ hashFiles('package-lock.json') }}-
+          ${{ github.event.repository.default_branch }}-
+          ${{ github.sha }}
     - name: Upload
       if: always()
       uses: actions/upload-artifact@v6
