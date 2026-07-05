@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
           persist-credentials: false
@@ -30,7 +30,7 @@ jobs:
           "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" |
           tar --directory "$RUNNER_TEMP" --extract --gzip actionlint;
       - name: Lint
-        run: "$RUNNER_TEMP/actionlint"
+        run: '"$RUNNER_TEMP/actionlint"'
 
   auto-merge:
     name: Auto-merge

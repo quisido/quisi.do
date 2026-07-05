@@ -14,9 +14,7 @@ const mapMessageToString = (value: IcuMessage | string): string => {
 
 export default function mapAuditDetailsToString(
   details:
-    | AuditDetails
-    | AuditDetails.ListSectionItem
-    | AuditDetails.ListableDetail,
+    AuditDetails | AuditDetails.ListSectionItem | AuditDetails.ListableDetail,
 ): string {
   switch (details.type) {
     case 'checklist':

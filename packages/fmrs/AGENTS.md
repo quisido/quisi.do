@@ -20,11 +20,3 @@ From the monorepo root, prefer workspace-scoped commands such as
 ## Coding Style & Naming Conventions
 
 Use TypeScript and the shared `quisido` ESLint/TS configs. Follow the existing ESM style: import local modules with `.js` extensions, prefer default exports for single-helper modules, and re-export public APIs from `src/index.ts`. Use two-space indentation, `const` by default, immutable `readonly` types where useful, optional chaining, and nullish coalescing. Name functions with verbs in `camelCase`; use `PascalCase` for types and do not prefix interfaces with `I`.
-
-## Testing Guidelines
-
-Use Vitest with `describe`, `it`, and `expect`. Co-locate tests with source files using `helper-name.test.ts`. Write tests around observable inputs and outputs, not implementation details, and keep test names sentence-like, for example `it('should identify booleans', ...)`. Never commit `it.only` or `describe.only`.
-
-## Agent-Specific Instructions
-
-Before editing code, check applicable skills in `../../.agents/skills/` from the monorepo. For this package, the TypeScript and Testing skills usually apply.

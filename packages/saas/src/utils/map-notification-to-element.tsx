@@ -6,8 +6,7 @@ import type { NotificationProps } from '../contexts/notifications.js';
 
 export default function mapNotificationToElement(
   notification:
-    | Promise<WithKey<NotificationProps>>
-    | WithKey<NotificationProps>,
+    Promise<WithKey<NotificationProps>> | WithKey<NotificationProps>,
 ): ReactElement {
   if (notification instanceof Promise) {
     return <LazyNotification>{notification}</LazyNotification>;
