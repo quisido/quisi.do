@@ -8,7 +8,8 @@
         "./node_modules/eslint-plugin-sort-keys-custom-order/dist/src/index.d.ts"
       ]
     },
-    "rootDir": "."
+    "rootDir": ".",
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "exclude": [
     ".cache/",

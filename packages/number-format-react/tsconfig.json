@@ -5,7 +5,9 @@
       "DOM",
       "ESNext"
     ],
-    "rootDir": "."
+    "outDir": "dist",
+    "rootDir": ".",
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "exclude": [
     ".cache/",

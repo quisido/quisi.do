@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "declarationDir": "dist",
-    "rootDir": "."
+    "outDir": "dist",
+    "rootDir": ".",
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "exclude": [
     ".cache/",
