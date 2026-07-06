@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "author": "quisi.do <saas@quisi.do>",
   "description": "quisi.do",
+  "homepage": "https://quisi.do/",
   "license": "UNLICENSED",
   "private": true,
   "type": "module",

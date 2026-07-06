@@ -5,7 +5,8 @@
     "moduleResolution": "bundler",
     "outDir": "dist",
     "rootDir": ".",
-    "sourceRoot": "src"
+    "sourceRoot": "src",
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "exclude": [
     ".cache/",

@@ -1,6 +1,6 @@
 import mapObjectToEntries from '../../utils/map-object-to-entries.js';
 import type { PackageType } from '../../utils/package-type.js';
-import parseJson from '../../utils/parse-json.js';
+import { parse as parseJsonC } from 'jsonc-parser';
 import readPackageFile from '../../utils/read-package-file.js';
 import type { CompilerOptions } from './assert-compiler-options.js';
 import assertTSConfig from './assert-tsconfig.js';
@@ -12,24 +12,24 @@ interface Options {
 
 const EMPTY_ARR: readonly never[] = [];
 
-const EXPECTED_COMPILER_OPTIONS: Pick<CompilerOptions, 'tsBuildInfoFile'> = {
-  tsBuildInfoFile: '.cache/tsconfig.build.tsbuildinfo',
+const EXPECTED_COMPILER_OPTIONS: Record<PackageType, CompilerOptions> = {
+  application: {
+    tsBuildInfoFile: '.cache/tsconfig.build.tsbuildinfo',
+  },
+  library: {
+    noEmit: false,
+    rootDir: 'src',
+    tsBuildInfoFile: '.cache/tsconfig.build.tsbuildinfo',
+  },
+  service: {
+    rootDir: 'src',
+    tsBuildInfoFile: '.cache/tsconfig.build.tsbuildinfo',
+  },
 };
-
-const EXPECTED_APPLICATION_COMPILER_OPTIONS: CompilerOptions =
-  EXPECTED_COMPILER_OPTIONS;
 
 const EXPECTED_JSX_EXCLUDE: Record<string, string> = {
   'src/**/*.test.tsx': 'React test files',
   'src/*.test.tsx': 'React test files',
-};
-
-const EXPECTED_LIBRARY_COMPILER_OPTIONS: CompilerOptions = {
-  ...EXPECTED_COMPILER_OPTIONS,
-  declarationDir: 'dist',
-  noEmit: false,
-  outDir: 'dist',
-  rootDir: 'src',
 };
 
 const EXPECTED_PACKAGE_EXCLUDE: Record<string, string> = {
@@ -51,16 +51,14 @@ export default async function testTsBuildConfig({
     );
   }
 
-  const tsConfig: unknown = parseJson(tsConfigStr);
+  const tsConfig: unknown = parseJsonC(tsConfigStr);
   assertTSConfig(tsConfig);
 
   const { compilerOptions, exclude = EMPTY_ARR } = tsConfig;
 
   // compilerOptions
   const expectedCompilerOptions: CompilerOptions =
-    type === 'application'
-      ? EXPECTED_APPLICATION_COMPILER_OPTIONS
-      : EXPECTED_LIBRARY_COMPILER_OPTIONS;
+    EXPECTED_COMPILER_OPTIONS[type];
 
   for (const [option, value] of mapObjectToEntries(expectedCompilerOptions)) {
     if (compilerOptions[option] !== value) {

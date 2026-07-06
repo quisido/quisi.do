@@ -8,6 +8,25 @@ import testVsCodeSettings from './test-vscode-settings.js';
 import getPackageJson from '../../utils/get-package-json.js';
 import type { PackageType } from '../../utils/package-type.js';
 
+const getType = ({
+  homepage,
+  isPrivate,
+}: Record<'homepage' | 'isPrivate', unknown>): PackageType => {
+  if (
+    typeof homepage === 'string' &&
+    !homepage.startsWith('https://github.com/') &&
+    !homepage.startsWith('https://www.npmjs.com/')
+  ) {
+    return 'application';
+  }
+
+  if (isPrivate === true) {
+    return 'service';
+  }
+
+  return 'library';
+};
+
 export const quisidoTest: ReportingTool = new ReportingTool(
   'quisido:test',
   async (): Promise<ReportingToolResult> => {
@@ -15,6 +34,7 @@ export const quisidoTest: ReportingTool = new ReportingTool(
       const {
         dependencies,
         devDependencies,
+        homepage,
         private: isPrivate,
       } = await getPackageJson();
 
@@ -34,7 +54,7 @@ export const quisidoTest: ReportingTool = new ReportingTool(
         throw new Error('Expected `devDependencies` to be an object.');
       }
 
-      const type: PackageType = isPrivate === true ? 'application' : 'library';
+      const type: PackageType = getType({ homepage, isPrivate });
       const jsx: boolean = new Set(
         Object.keys({
           ...dependencies,
@@ -44,7 +64,7 @@ export const quisidoTest: ReportingTool = new ReportingTool(
 
       await Promise.all([
         testTSBuildConfig({ jsx, type }),
-        testTSConfig({ jsx, type }),
+        testTSConfig({ type }),
         testVsCodeSettings(),
       ]);
       return {

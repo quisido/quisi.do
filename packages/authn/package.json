@@ -1,6 +1,7 @@
 {
   "name": "@quisido/authn",
   "version": "1.0.0",
+  "author": "quisi.do <authn@quisi.do>",
   "license": "UNLICENSED",
   "private": true,
   "type": "module",

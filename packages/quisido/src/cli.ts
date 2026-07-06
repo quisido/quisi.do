@@ -118,7 +118,7 @@ for (const settledReport of settledReports) {
      */
     case 'rejected': {
       globalThis.console.error(
-        '[quisido] Unexpected settled report error:',
+        'Unexpected settled report error:',
         settledReport.reason,
       );
       process.exitCode = 1;

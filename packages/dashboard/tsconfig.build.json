@@ -1,15 +1,12 @@
 {
   "compilerOptions": {
-    "noEmit": false,
     "rootDir": "src",
-    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/fullstory-react/src/",
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/dashboard/src/",
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
   "exclude": [
     "src/**/*.test.ts",
-    "src/**/*.test.tsx",
-    "src/*.test.ts",
-    "src/*.test.tsx"
+    "src/*.test.ts"
   ],
   "extends": "./tsconfig.json",
   "include": [

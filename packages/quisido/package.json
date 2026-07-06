@@ -80,6 +80,7 @@
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-sort-keys-custom-order": "^3.0.2",
     "jsonc-eslint-parser": "^3.1.0",
+    "jsonc-parser": "^3.3.1",
     "knip": "^6.17.1",
     "prettier": "^3.9.4",
     "publint": "^0.3.21",
