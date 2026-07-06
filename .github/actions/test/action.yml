@@ -9,13 +9,15 @@ runs:
       uses: ./.github/actions/setup
       with:
         install-browsers: true
+
     - name: Test
       id: test
       run: npm test
       shell: bash
       env:
         VITE_TESTED_DESIGN_SYSTEM: template
-    - name: Save ESLint cache
+
+    - name: Cache
       if: >-
         ${{
           github.ref_name == github.event.repository.default_branch &&
@@ -32,6 +34,7 @@ runs:
           ${{ hashFiles('package-lock.json') }}-
           ${{ github.event.repository.default_branch }}-
           ${{ github.sha }}
+
     - name: Upload
       if: always()
       uses: actions/upload-artifact@v6

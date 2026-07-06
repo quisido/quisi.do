@@ -87,6 +87,7 @@ jobs:
         uses: ./.github/actions/build
         with:
           environment: staging
+          upload: true
 
   dependency-review:
     name: Dependency review

@@ -28,4 +28,7 @@ jobs:
       - name: Build
         uses: ./.github/actions/build
         with:
+          continue-on-error: true
           environment: development
+          install-browsers: false
+          upload: false

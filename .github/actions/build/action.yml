@@ -16,7 +16,6 @@ inputs:
     description: Whether to install browsers
     required: false
   upload:
-    default: 'true'
     description: Upload the build artifacts?
     required: false
 
@@ -43,10 +42,11 @@ runs:
         GITHUB_SHA: ${{ github.sha }}
         NODE_ENV: ${{ inputs.environment }}
 
-    - name: Save TypeScript cache
+    - name: Cache
       if: >-
         ${{
           github.ref_name == github.event.repository.default_branch &&
+          inputs.upload == 'true' &&
           steps.build.outcome == 'success'
         }}
       uses: actions/cache/save@v4
