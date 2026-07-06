@@ -60,7 +60,7 @@
   "devDependencies": {
     "@microsoft/api-extractor": "^7.58.9",
     "@types/cookie": "^1.0.0",
-    "@vitest/ui": "^4.1.9",
+    "@vitest/ui": "^4.1.10",
     "concurrently": "^10.0.3",
     "quisido": "^0.0.3",
     "rimraf": "^6.1.0",
