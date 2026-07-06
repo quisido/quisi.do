@@ -10,15 +10,10 @@
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
   "exclude": [
-    ".cache/",
-    ".tests/",
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
     "src/*.test.ts",
-    "src/*.test.tsx",
-    ".*.json",
-    "*.config.*",
-    "tsconfig.*"
+    "src/*.test.tsx"
   ],
   "extends": "./tsconfig.json",
   "include": [
