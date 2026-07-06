@@ -11,5 +11,28 @@
   "extends": "./tsconfig.json",
   "include": [
     "src/"
+  ],
+  "references": [
+    {
+      "path": "../authn-shared/tsconfig.build.json"
+    },
+    {
+      "path": "../worker/tsconfig.build.json"
+    },
+    {
+      "path": "../worker-test/tsconfig.build.json"
+    },
+    {
+      "path": "../cloudflare-test-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../cloudflare-utils/tsconfig.build.json"
+    },
+    {
+      "path": "../fmrs/tsconfig.build.json"
+    },
+    {
+      "path": "../quisido/tsconfig.build.json"
+    }
   ]
 }

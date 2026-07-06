@@ -14,5 +14,10 @@
   "extends": "./tsconfig.json",
   "include": [
     "src/"
+  ],
+  "references": [
+    {
+      "path": "../quisido/tsconfig.build.json"
+    }
   ]
 }

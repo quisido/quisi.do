@@ -1,6 +1,6 @@
 import mapObjectToEntries from '../../utils/map-object-to-entries.js';
 import type { PackageType } from '../../utils/package-type.js';
-import { parse as parseJsonC } from 'jsonc-parser';
+import parseJsonC from '../../utils/parse-jsonc.js';
 import readPackageFile from '../../utils/read-package-file.js';
 import type { CompilerOptions } from './assert-compiler-options.js';
 import assertTSConfig from './assert-tsconfig.js';
