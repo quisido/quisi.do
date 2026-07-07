@@ -8,11 +8,7 @@ export interface CompilerOptions {
 
 export default function assertCompilerOptions(
   compilerOptions: unknown,
-): asserts compilerOptions is CompilerOptions | undefined {
-  if (compilerOptions === undefined) {
-    return;
-  }
-
+): asserts compilerOptions is CompilerOptions {
   if (typeof compilerOptions !== 'object' || compilerOptions === null) {
     throw new Error('Expected TypeScript compiler options to be an object.', {
       cause: compilerOptions,

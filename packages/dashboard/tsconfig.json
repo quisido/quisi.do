@@ -12,7 +12,8 @@
     ".cache/",
     ".tests/",
     ".wrangler/",
-    "dist/"
+    "dist/",
+    "node_modules/"
   ],
   "extends": "quisido/tsconfig.json",
   "include": [

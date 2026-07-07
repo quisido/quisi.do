@@ -14,7 +14,8 @@
   "exclude": [
     ".cache/",
     ".tests/",
-    "dist/"
+    "dist/",
+    "node_modules/"
   ],
   "extends": "./src/tsconfig.json",
   "include": [

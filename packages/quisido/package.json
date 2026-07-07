@@ -91,9 +91,9 @@
   },
   "devDependencies": {
     "@types/node": "^26.1.0",
-    "@vitest/coverage-istanbul": "^4.0.7",
+    "@vitest/coverage-istanbul": "^4.1.10",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.10"
   },
   "peerDependencies": {
     "@vitest/coverage-istanbul": ">=4.0.0",

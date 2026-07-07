@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "composite": true,
-    "declarationDir": "dist",
+    "declarationDir": "_site",
     "lib": [
       "DOM",
       "DOM.Iterable",
@@ -10,7 +10,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "noEmit": true,
-    "outDir": "dist",
+    "outDir": "_site",
     "rootDir": ".",
     "sourceRoot": "src",
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo",
@@ -23,7 +23,8 @@
   "exclude": [
     ".cache/",
     ".tests/",
-    "dist/"
+    "_site/",
+    "node_modules/"
   ],
   "extends": "quisido/tsconfig.json",
   "include": [

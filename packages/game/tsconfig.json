@@ -17,8 +17,10 @@
     ]
   },
   "exclude": [
-    "./.cache/",
-    "./.tests/"
+    ".cache/",
+    ".tests/",
+    "_site/",
+    "node_modules/"
   ],
   "extends": "quisido/tsconfig.json",
   "include": [
