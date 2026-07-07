@@ -1,0 +1,11 @@
+{
+  "extends": "../api-extractor.json",
+  "messages": {
+    "extractorMessageReporting": {
+      "ae-wrong-input-file-type": {
+        "addToApiReportFile": false,
+        "logLevel": "none"
+      }
+    }
+  }
+}

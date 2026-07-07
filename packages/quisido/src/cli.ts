@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { attw } from './features/attw/attw.js';
+import { apiExtractor } from './features/api-extractor/api-extractor.js';
 import { eslint } from './features/eslint/eslint.js';
 import { knip } from './features/knip/knip.js';
 import { publint } from './features/publint/publint.js';
@@ -65,6 +66,7 @@ switch (command) {
   }
 
   case 'test': {
+    eventualReports.push(apiExtractor.run());
     eventualReports.push(attw.run());
     eventualReports.push(eslint.run());
     eventualReports.push(publint.run());

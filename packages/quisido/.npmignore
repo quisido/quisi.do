@@ -1,5 +1,6 @@
 *
 !.attw.json
+!api-extractor.json
 !dist/**
 !src/**
 !!src/**/*.test.ts
