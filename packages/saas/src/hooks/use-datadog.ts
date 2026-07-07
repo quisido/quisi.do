@@ -41,6 +41,7 @@ const PROPS: Required<
   allowedGraphQlUrls: [],
   allowUntrustedEvents: true,
   applicationId: APPLICATION_ID,
+  betaEnableViewUpdates: false,
   clientToken: CLIENT_TOKEN,
   compressIntakeRequests: true,
   defaultPrivacyLevel: 'mask-user-input',
