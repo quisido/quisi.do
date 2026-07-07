@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "author": "quisi.do <game@quisi.do>",
   "description": "Monogatari boilerplate visual novel",
+  "homepage": "https://quisido.dev/",
   "license": "UNLICENSED",
   "private": true,
   "type": "module",

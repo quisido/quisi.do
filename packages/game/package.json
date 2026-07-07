@@ -2,6 +2,7 @@
   "name": "@quisido/game",
   "version": "0.0.1",
   "author": "quisi.do <game@quisi.do>",
+  "homepage": "https://quisido.dev/",
   "license": "UNLICENSED",
   "private": true,
   "type": "module",

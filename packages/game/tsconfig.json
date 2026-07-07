@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "declarationDir": "dist",
+    "declarationDir": "_site",
     "jsx": "react-jsxdev",
     "lib": [
       "DOM",
@@ -9,7 +9,7 @@
     ],
     "module": "esnext",
     "moduleResolution": "bundler",
-    "outDir": "dist",
+    "outDir": "_site",
     "rootDir": ".",
     "sourceRoot": "src",
     "types": [
