@@ -70,7 +70,7 @@ jobs:
         with:
           continue-on-error: true
           environment: development
-          install-browsers: true
+          install-browsers: false
           upload: false
 
       - name: Sanitize
@@ -207,7 +207,7 @@ jobs:
         with:
           continue-on-error: true
           environment: development
-          install-browsers: true
+          install-browsers: false
           upload: false
 
       - name: Sanitize

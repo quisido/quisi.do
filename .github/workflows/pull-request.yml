@@ -87,6 +87,7 @@ jobs:
         uses: ./.github/actions/build
         with:
           environment: staging
+          install-browsers: true
           upload: true
 
   dependency-review:

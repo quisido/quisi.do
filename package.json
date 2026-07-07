@@ -11,7 +11,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "npm run tsc:build && npm --bin-links --workspace=packages/quisido link && npm --workspaces run build",
+    "build": "npm run tsc:build && npm run quisido:build && npm run quisido:link && npm --workspaces run build",
     "start": "npm run tsc:build && node ./dist/scripts/start.js",
     "test": "npm --workspaces run test",
     "authn": "npm --workspace=packages/authn start",
@@ -32,6 +32,8 @@
     "publint": "quisido publint",
     "publish": "node ./dist/scripts/publish.js",
     "quisido": "npm --workspace=packages/quisido start",
+    "quisido:build": "npm --workspace=packages/quisido run build",
+    "quisido:link": "npm --workspace=packages/quisido link",
     "react-datadog": "npm --workspace=packages/react-datadog start",
     "saas": "npm --workspace=packages/saas start",
     "tsc:build": "tsc --build tsconfig.build.json",

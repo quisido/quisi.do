@@ -34,15 +34,15 @@ runs:
     - name: Restore ESLint cache
       uses: actions/cache/restore@v4
       with:
-        path: |
-          .cache/eslint.json
-          packages/*/.cache/eslint.json
         key: >-
           eslint-
           ${{ runner.os }}-
           ${{ hashFiles('package-lock.json') }}-
           ${{ github.event.repository.default_branch }}-
           ${{ github.sha }}
+        path: |
+          .cache/eslint.json
+          packages/*/.cache/eslint.json
         restore-keys: >-
           eslint-
           ${{ runner.os }}-
@@ -50,7 +50,6 @@ runs:
           ${{ github.event.repository.default_branch }}-
 
     - name: Restore TypeScript cache
-      if: ${{ inputs.download-build == 'true' }}
       uses: actions/cache/restore@v4
       with:
         key: >-

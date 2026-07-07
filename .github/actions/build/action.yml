@@ -14,10 +14,10 @@ inputs:
   install-browsers:
     default: 'false'
     description: Whether to install browsers
-    required: false
+    required: true
   upload:
     description: Upload the build artifacts?
-    required: false
+    required: true
 
 runs:
   using: composite

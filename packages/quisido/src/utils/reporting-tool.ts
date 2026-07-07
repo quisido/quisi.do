@@ -13,7 +13,6 @@ export type ReportingToolResult =
   | Omit<SuccessReport, 'tool'>;
 
 // Press F to FIX with AI.
-// Press Q to QUIT watch mode.
 const WATCH_MODE_INSTRUCTIONS = `
 Press R to RETRY.
 Press any other key to SKIP this tool.
