@@ -82,7 +82,7 @@
     "lighthouse": "^13.4.0",
     "rimraf": "^6.1.0",
     "serve": "^14.2.5",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vitest": "^4.1.10",
     "wait-on": "^9.0.10"
   },

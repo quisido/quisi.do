@@ -73,7 +73,7 @@
     "cookie": "^2.0.1",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vitest": "^4.1.10",
     "wrangler": "^4.111.0"
   }
