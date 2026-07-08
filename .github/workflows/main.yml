@@ -59,6 +59,8 @@ jobs:
         uses: ./.github/actions/build
         with:
           environment: production
+          install-browsers: true
+          upload: true
 
   # Stage 2: datadog-sourcemaps, lighthouse-ci, sentry-release, test, webhint-ci
   datadog-sourcemaps:

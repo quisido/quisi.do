@@ -20,7 +20,7 @@
     "local_protocol": "https",
     "port": 5882 // parseInt('authn', 36) % 9999
   },
-  
+
   "env": {
     "development": {
       "vars": {
@@ -132,7 +132,7 @@
   ],
 
   "send_metrics": true,
-  "tsconfig": "./tsconfig.json",
+  "tsconfig": "./tsconfig.build.json",
   "upload_source_maps": true,
 
   "vars": {

@@ -12,7 +12,7 @@ and tool artifacts may appear in `.tests/` and `.cache/`.
 
 ## Build, Test, and Development Commands
 
-- `npm run build`: compile the package with `tsc --project tsconfig.build.json`.
+- `npm run build`: compile the package with `tsc --build tsconfig.build.json`.
 - `npm run start`: run TypeScript in watch mode for local development.
 - `npm test`: run the full `quisido test` suite, including ATTW, ESLint,
   publint, package checks, and Vitest.

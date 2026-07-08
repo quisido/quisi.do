@@ -70,6 +70,7 @@
     "noUncheckedSideEffectImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "outDir": null,
     "paths": {},
     "plugins": [],
     "preserveConstEnums": true,

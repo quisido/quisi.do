@@ -1,1 +1,1 @@
-export { default } from './use-emit';
+export { default } from './use-emit.js';

@@ -47,7 +47,14 @@ const JS_CONFIG: Config = defineConfig({
       { exceptions: ['_', 'x', 'y'], properties: 'never' },
     ],
     'max-lines': 'warn',
-    'max-lines-per-function': 'warn',
+    'max-lines-per-function': [
+      'warn',
+      {
+        IIFEs: true,
+        skipBlankLines: true,
+        skipComments: true,
+      },
+    ],
     'max-params': 'warn',
     'max-statements': 'warn',
     'no-bitwise': 'off',

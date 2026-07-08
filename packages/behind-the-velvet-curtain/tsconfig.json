@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "declarationDir": "dist",
+    "composite": true,
+    "declarationDir": "_site",
     "lib": [
       "DOM",
       "DOM.Iterable",
@@ -8,9 +9,11 @@
     ],
     "module": "esnext",
     "moduleResolution": "bundler",
-    "outDir": "dist",
+    "noEmit": true,
+    "outDir": "_site",
     "rootDir": ".",
     "sourceRoot": "src",
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo",
     "types": [
       "@types/node",
       "vite/client",
@@ -18,8 +21,10 @@
     ]
   },
   "exclude": [
-    "./.cache/",
-    "./.tests/"
+    ".cache/",
+    ".tests/",
+    "_site/",
+    "node_modules/"
   ],
   "extends": "quisido/tsconfig.json",
   "include": [

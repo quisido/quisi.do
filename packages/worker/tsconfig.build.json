@@ -1,18 +1,13 @@
 {
   "compilerOptions": {
-    "declarationDir": "dist",
-    "generateCpuProfile": ".cache/tsconfig.build.cpuprofile",
     "noEmit": false,
-    "outDir": "dist",
     "rootDir": "src",
-    "skipLibCheck": true,
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/worker/src/",
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
   "exclude": [
     "src/**/*.test.ts",
-    "src/**/*.test.tsx",
-    "src/*.test.ts",
-    "src/*.test.tsx"
+    "src/*.test.ts"
   ],
   "extends": "./tsconfig.json",
   "include": [
@@ -20,10 +15,16 @@
   ],
   "references": [
     {
+      "path": "../cloudflare-test-utils/tsconfig.build.json"
+    },
+    {
       "path": "../cloudflare-utils/tsconfig.build.json"
     },
     {
       "path": "../fmrs/tsconfig.build.json"
+    },
+    {
+      "path": "../quisido/tsconfig.build.json"
     }
   ]
 }

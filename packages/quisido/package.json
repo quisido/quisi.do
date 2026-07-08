@@ -1,6 +1,6 @@
 {
   "name": "quisido",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "quisi.do <quisido@quisi.do>",
   "description": "all-in-one",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/quisido#readme",
@@ -9,8 +9,8 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "start": "tsc --project tsconfig.build.json --watch",
+    "build": "tsc --build tsconfig.build.json",
+    "start": "tsc --project tsconfig.json --watch",
     "test": "quisido test",
     "clean": "rm -rf .cache .tests dist node_modules",
     "eslint": "quisido eslint",
@@ -73,13 +73,14 @@
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "^8.63.0",
     "@typescript-eslint/parser": "^8.46.3",
-    "eslint": ">=10.6.0",
+    "eslint": "^10.6.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-json-schema-validator": "^6.2.0",
     "eslint-plugin-jsonc": "^3.2.0",
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-sort-keys-custom-order": "^3.0.3",
     "jsonc-eslint-parser": "^3.1.0",
+    "jsonc-parser": "^3.3.1",
     "knip": "^6.25.0",
     "prettier": "^3.9.4",
     "publint": "^0.3.21",
@@ -90,9 +91,9 @@
   },
   "devDependencies": {
     "@types/node": "^26.1.0",
-    "@vitest/coverage-istanbul": "^4.0.7",
+    "@vitest/coverage-istanbul": "^4.1.10",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.10"
   },
   "peerDependencies": {
     "@vitest/coverage-istanbul": ">=4.0.0",

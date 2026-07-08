@@ -5,16 +5,19 @@
     "moduleResolution": "bundler",
     "outDir": "dist",
     "rootDir": ".",
-    "sourceRoot": "src"
+    "sourceRoot": "src",
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "exclude": [
     ".cache/",
     ".tests/",
     ".wrangler/",
-    "dist/"
+    "dist/",
+    "node_modules/"
   ],
   "extends": "quisido/tsconfig.json",
   "include": [
+    "**/*.json",
     "**/*.ts"
   ]
 }

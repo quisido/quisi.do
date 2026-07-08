@@ -12,9 +12,10 @@ export type ReportingToolResult =
   | Omit<SkippedReport, 'tool'>
   | Omit<SuccessReport, 'tool'>;
 
+// Press F to FIX with AI.
 const WATCH_MODE_INSTRUCTIONS = `
-Press Q to QUIT watch mode.
-Press any other key to RETRY.
+Press R to RETRY.
+Press any other key to SKIP this tool.
 `;
 
 /**
@@ -46,11 +47,11 @@ export default class ReportingTool<
   }
 
   public logError(message: string): void {
-    globalThis.console.error(`[quisido] [${this.#toolName}] ${message}`);
+    globalThis.console.error(`[${this.#toolName}] ${message}`);
   }
 
   public logInfo(message: string): void {
-    globalThis.console.info(`[quisido] [${this.#toolName}] ${message}`);
+    globalThis.console.info(`[${this.#toolName}] ${message}`);
   }
 
   public async run(...options: Options): Promise<Report> {
@@ -68,7 +69,7 @@ export default class ReportingTool<
             process.stdout.unref();
 
             const key: string = await getKey(this.#stdin);
-            if (key.toLowerCase() !== 'q') {
+            if (key.toLowerCase() === 'r') {
               return await this.run(...options);
             }
           }

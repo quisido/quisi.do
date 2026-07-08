@@ -29,7 +29,6 @@ switch (command) {
     eventualReports.push(
       tsc.run({
         build: true,
-        id: 'build',
       }),
     );
     break;
@@ -52,14 +51,13 @@ switch (command) {
 
   case 'start': {
     void tsc.run({
-      args: ['--watch'],
-      id: 'start',
       onStdErr(data: string): void {
         globalThis.console.error(data);
       },
       onStdOut(data: string): void {
         globalThis.console.log(data);
       },
+      watch: true,
     });
     break;
   }
@@ -120,7 +118,7 @@ for (const settledReport of settledReports) {
      */
     case 'rejected': {
       globalThis.console.error(
-        '[quisido] Unexpected settled report error:',
+        'Unexpected settled report error:',
         settledReport.reason,
       );
       process.exitCode = 1;

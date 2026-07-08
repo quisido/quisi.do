@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { assert, describe, expect, it } from 'vitest';
 import config from './index.js';
 import { ESLint } from 'eslint';
 
@@ -16,10 +16,11 @@ describe('@quisido/eslint-config', (): void => {
     const linter = new ESLint({
       overrideConfig: config,
     });
-    const results = await linter.lintText('abcdefg: hijkl\n', {
+    const [firstResult] = await linter.lintText('abcdefg: hijkl\n', {
       filePath: '.github/workflows/test.yml',
     });
-    expect(results[0].messages.length).toBeGreaterThan(0);
+    assert(firstResult !== undefined);
+    expect(firstResult.messages.length).toBeGreaterThan(0);
   });
 
   it('should lint GitHub workflows', async (): Promise<void> => {

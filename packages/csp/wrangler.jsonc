@@ -84,7 +84,7 @@
   },
 
   "send_metrics": true,
-  "tsconfig": "./tsconfig.json",
+  "tsconfig": "./tsconfig.build.json",
   "upload_source_maps": true,
 
   "vars": {

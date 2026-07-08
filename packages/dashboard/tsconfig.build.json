@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/dashboard/src/",
+    "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
+  },
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/*.test.ts"
+  ],
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/"
+  ]
+}

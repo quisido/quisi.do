@@ -1,21 +1,27 @@
 {
   "compilerOptions": {
-    "declarationDir": "dist",
-    "generateCpuProfile": ".cache/tsconfig.build.cpuprofile",
     "noEmit": false,
-    "outDir": "dist",
     "rootDir": "src",
+    /**
+     * tinybench: error TS2416: Property 'addEventListener' in type 'Task' is
+     * not assignable to the same property in base type
+     * 'EventTarget<Record<string, Event>>'.
+     */
     "skipLibCheck": true,
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/cloudflare-test-utils/src/",
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
   "exclude": [
     "src/**/*.test.ts",
-    "src/**/*.test.tsx",
-    "src/*.test.ts",
-    "src/*.test.tsx"
+    "src/*.test.ts"
   ],
   "extends": "./tsconfig.json",
   "include": [
     "src/"
+  ],
+  "references": [
+    {
+      "path": "../quisido/tsconfig.build.json"
+    }
   ]
 }

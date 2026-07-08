@@ -5,7 +5,7 @@ import { TRANSLATIONS } from '../constants/translations.js';
 import i18next, { type i18n, type ResourceLanguage } from 'i18next';
 import Locale from '../constants/locale.js';
 import useLocale from '../hooks/use-locale.js';
-import enUs from '../translations/index--en-US.json';
+import enUs from '../translations/index--en-US.json' with { type: 'json' };
 
 const RESOURCES: Record<Locale, ResourceLanguage> = {
   [Locale.Arabic]: { index: {} },

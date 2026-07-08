@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "declarationDir": "dist",
-    "noEmit": true,
-    "rootDir": "."
+    "outDir": "dist",
+    "rootDir": ".",
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "exclude": [
     ".cache/",
@@ -17,9 +18,6 @@
   ],
   "references": [
     {
-      "path": "../worker/tsconfig.build.json"
-    },
-    {
       "path": "../cloudflare-test-utils/tsconfig.build.json"
     },
     {
@@ -30,6 +28,9 @@
     },
     {
       "path": "../quisido/tsconfig.build.json"
+    },
+    {
+      "path": "../worker/tsconfig.build.json"
     }
   ]
 }

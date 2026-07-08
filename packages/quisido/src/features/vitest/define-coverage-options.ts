@@ -22,8 +22,6 @@ export default function defineCoverageOptions({
     enabled: true,
     exclude: [...EXCLUDE, ...exclude],
     reportOnFailure: true,
-    // THE ERROR IS HERE
-    // It is trying to copy this directory for some reason, causing it to fail.
     reportsDirectory: join('.tests', 'vitest-coverage'),
     skipFull: true,
     thresholds: defineThresholds(thresholds),

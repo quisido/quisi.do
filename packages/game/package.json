@@ -2,6 +2,7 @@
   "name": "@quisido/game",
   "version": "0.0.1",
   "author": "quisi.do <game@quisi.do>",
+  "homepage": "https://quisido.dev/",
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
@@ -82,7 +83,7 @@
     "rimraf": "^6.1.0",
     "serve": "^14.2.5",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.0",
+    "vitest": "^4.1.10",
     "wait-on": "^9.0.10"
   },
   "overrides": {

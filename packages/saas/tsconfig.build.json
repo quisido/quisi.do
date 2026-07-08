@@ -1,6 +1,14 @@
 {
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "src",
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/saas/src/",
+    "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
+  },
   "extends": "./tsconfig.json",
   "include": [
+    "src/**/*.json",
     "src/**/*.ts",
     "src/**/*.tsx"
   ],
@@ -12,6 +20,7 @@
     "src/**/*.e2e.ts",
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
+    "src/design-systems/core-test/",
     "src/*.test.ts",
     "src/*.test.tsx",
     "src/test/",
@@ -20,18 +29,39 @@
     "lighthouse.*",
     "tsconfig.*"
   ],
-  "compilerOptions": {
-    "composite": false,
-    "declarationDir": "_site",
-    "incremental": false,
-    "jsx": "preserve",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "noEmit": false,
-    "outDir": "_site",
-    "rootDir": "src",
-    "sourceMap": true,
-    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/saas/src/",
-    "target": "es2023"
-  }
+  "references": [
+    {
+      "path": "../authn-shared/tsconfig.build.json"
+    },
+    {
+      "path": "../csp-shared/tsconfig.build.json"
+    },
+    {
+      "path": "../fmrs/tsconfig.build.json"
+    },
+    {
+      "path": "../fullstory-react/tsconfig.build.json"
+    },
+    {
+      "path": "../lazy-i18n/tsconfig.build.json"
+    },
+    {
+      "path": "../number-format-react/tsconfig.build.json"
+    },
+    {
+      "path": "../quisido/tsconfig.build.json"
+    },
+    {
+      "path": "../react-datadog/tsconfig.build.json"
+    },
+    {
+      "path": "../sentry-react/tsconfig.build.json"
+    },
+    {
+      "path": "../use-force-update/tsconfig.build.json"
+    },
+    {
+      "path": "../use-shallow-memo/tsconfig.build.json"
+    }
+  ]
 }

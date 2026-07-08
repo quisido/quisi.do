@@ -1,1 +1,1 @@
-export { default } from './with-wrappers';
+export { default } from './with-wrappers.js';

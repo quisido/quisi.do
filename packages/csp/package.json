@@ -62,10 +62,10 @@
     "@vitest/ui": "^4.1.10",
     "cloudflare-test-utils": "^1.0.2",
     "concurrently": "^10.0.3",
-    "quisido": "^0.0.3",
+    "quisido": "^0.0.4",
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.0",
+    "vitest": "^4.1.10",
     "wrangler": "^4.108.0"
   }
 }

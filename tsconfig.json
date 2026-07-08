@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "declarationDir": "dist",
-    "generateCpuProfile": ".cache/tsconfig.cpuprofile",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "outDir": "dist",
     "rootDir": ".",
-    "skipLibCheck": true,
-    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
+    "skipLibCheck": true
   },
   "exclude": [
     ".cache/",

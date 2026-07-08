@@ -1,11 +1,8 @@
 {
   "compilerOptions": {
-    "declarationDir": "dist",
-    "generateCpuProfile": ".cache/tsconfig.build.cpuprofile",
     "noEmit": false,
-    "outDir": "dist",
     "rootDir": "src",
-    "skipLibCheck": true,
+    "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/use-force-update/src/",
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
   "exclude": [
@@ -17,5 +14,10 @@
   "extends": "./tsconfig.json",
   "include": [
     "src/"
+  ],
+  "references": [
+    {
+      "path": "../quisido/tsconfig.build.json"
+    }
   ]
 }
