@@ -38,6 +38,10 @@
     "./tsconfig.json": {
       "default": "./src/tsconfig.json"
     },
+    "./vitest": {
+      "types": "./dist/vitest.d.ts",
+      "default": "./dist/vitest.js"
+    },
     "./vitest-setup-file.js": {
       "types": "./dist/features/vitest/setup-file.d.ts",
       "default": "./dist/features/vitest/setup-file.js"

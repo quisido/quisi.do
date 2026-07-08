@@ -9,7 +9,10 @@ import withDuration from '../../utils/with-duration.js';
 import getDisposableTempDir from '../../utils/get-disposable-temp-dir.js';
 import npx from '../npx/npx.js';
 import writeTemporaryFile from '../../utils/write-temporary-file.js';
-import type { CompilerOptions } from 'typescript';
+import type { CompilerOptions } from 'typescript/unstable/proto';
+import isTypeScriptESLintSupported, {
+  TYPESCRIPT_VERSION,
+} from './is-typescript-eslint-supported.js';
 // import { cpus } from 'node:os';
 
 const MAX_CONCURRENCY = 1; // : number = cpus().length;
@@ -18,6 +21,15 @@ const MIN_CONCURRENCY = 1;
 export const eslint: ReportingTool = new ReportingTool(
   'eslint',
   async (): Promise<ReportingToolResult> => {
+    if (!isTypeScriptESLintSupported()) {
+      return {
+        message:
+          '@typescript-eslint requires the TypeScript compiler API, which ' +
+          `is not exposed by TypeScript ${TYPESCRIPT_VERSION}.`,
+        status: 'skipped',
+      };
+    }
+
     const cwd: string = process.cwd();
     const outDir: string = join(await getDisposableTempDir(), 'eslint-config');
     const project: string = await writeTemporaryFile(

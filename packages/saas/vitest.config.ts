@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react';
 import { playwright } from '@vitest/browser-playwright';
-import { defineVitestConfig, type VitestConfig } from 'quisido';
+import { defineVitestConfig, type VitestConfig } from 'quisido/vitest';
 
 const CONFIG: VitestConfig = await defineVitestConfig({
   plugins: [react()],

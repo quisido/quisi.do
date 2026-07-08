@@ -1,5 +1,5 @@
 import { join } from 'node:path';
-import type { server } from 'typescript';
+import type { CompilerOptions } from 'typescript/unstable/proto';
 import createJsx from './create-jsx.js';
 
 interface Options {
@@ -8,8 +8,8 @@ interface Options {
 
 export default async function createCompilerOptions({
   rootDir,
-}: Options): Promise<server.protocol.CompilerOptions> {
-  const compilerOptions: server.protocol.CompilerOptions = {
+}: Options): Promise<CompilerOptions> {
+  const compilerOptions: CompilerOptions = {
     declarationDir: join(rootDir, 'dist'),
     noEmit: false,
     outDir: join(rootDir, 'dist'),
@@ -18,7 +18,7 @@ export default async function createCompilerOptions({
     tsBuildInfoFile: join(rootDir, '.cache', `quisido.tsbuildinfo`),
   };
 
-  const jsx: server.protocol.JsxEmit | undefined = await createJsx();
+  const jsx: CompilerOptions['jsx'] = await createJsx();
   if (typeof jsx !== 'undefined') {
     compilerOptions.jsx = jsx;
   }

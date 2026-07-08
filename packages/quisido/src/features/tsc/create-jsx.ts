@@ -1,9 +1,9 @@
-import { server } from 'typescript';
+import type { CompilerOptions } from 'typescript/unstable/proto';
 import getPackageJson from '../../utils/get-package-json.js';
 
-export default async function createJsx(): Promise<
-  server.protocol.JsxEmit | undefined
-> {
+const REACT_JSX_EMIT: NonNullable<CompilerOptions['jsx']> = 4;
+
+export default async function createJsx(): Promise<CompilerOptions['jsx']> {
   const { dependencies, devDependencies } = await getPackageJson();
 
   if (
@@ -11,7 +11,7 @@ export default async function createJsx(): Promise<
     dependencies !== null &&
     'react' in dependencies
   ) {
-    return server.protocol.JsxEmit.ReactJSX;
+    return REACT_JSX_EMIT;
   }
 
   if (
@@ -19,7 +19,7 @@ export default async function createJsx(): Promise<
     devDependencies !== null &&
     'react' in devDependencies
   ) {
-    return server.protocol.JsxEmit.ReactJSX;
+    return REACT_JSX_EMIT;
   }
 
   return undefined;

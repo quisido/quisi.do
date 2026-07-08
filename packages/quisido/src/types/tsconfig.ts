@@ -1,4 +1,4 @@
-import type { server } from 'typescript';
+import type { CompilerOptions } from 'typescript/unstable/proto';
 
 export interface Reference {
   readonly path: string;
@@ -6,7 +6,7 @@ export interface Reference {
 }
 
 export default interface TSConfig {
-  readonly compilerOptions: server.protocol.CompilerOptions;
+  readonly compilerOptions: CompilerOptions;
   readonly exclude?: string[] | undefined;
   readonly extends?: string | undefined;
   readonly include?: string[] | undefined;

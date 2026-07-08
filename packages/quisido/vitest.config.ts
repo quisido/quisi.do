@@ -1,4 +1,4 @@
-import { defineVitestConfig, type VitestConfig } from './dist/index.js';
+import { defineVitestConfig, type VitestConfig } from './dist/vitest.js';
 
 const CONFIG: VitestConfig = await defineVitestConfig({});
 
