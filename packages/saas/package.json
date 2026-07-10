@@ -138,7 +138,7 @@
     "cjs-ts": "^2.0.1",
     "concurrently": "^10.0.3",
     "console-table-printer": "^2.16.1",
-    "dd-trace": "^6.1.0",
+    "dd-trace": "^6.2.0",
     "dotenv": "^17.4.2",
     "esbuild": "^0.28.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
