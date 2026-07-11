@@ -22,7 +22,7 @@ runs:
       uses: actions/upload-artifact@v6
       with:
         name: lighthouse-ci
-        if-no-files-found: warn
+        if-no-files-found: error
         path: |
           packages/saas/lighthouse.report.*
           packages/saas/lighthouse-*.devtoolslog.json
