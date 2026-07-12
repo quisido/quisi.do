@@ -63,7 +63,7 @@
     "tslib": "^2.8.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20260707.1",
+    "@cloudflare/workers-types": "^5.20260710.1",
     "@quisido/worker-test": "^1.0.1",
     "@types/cookie": "^1.0.0",
     "@types/eslint": "^9.6.1",
@@ -75,6 +75,6 @@
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.10",
-    "wrangler": "^4.108.0"
+    "wrangler": "^4.110.0"
   }
 }
