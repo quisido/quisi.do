@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react';
-import { defineVitestConfig, type VitestConfig } from 'quisido/vitest';
+import { defineVitestConfig, type VitestConfig } from 'quisido';
 
 const CONFIG: VitestConfig = await defineVitestConfig({
   plugins: [react()],

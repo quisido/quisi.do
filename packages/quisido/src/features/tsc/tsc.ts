@@ -12,6 +12,14 @@ interface Options {
   readonly watch?: boolean | undefined;
 }
 
+/**
+ * If this fails because `@types/node` mismatches, then a package has an
+ * outdated version in `node_modules/`. `npm install @types/node@latest`
+ * does not seem to fix it; you can delete `node_modules/` and remove
+ * references to "packages/__/node_modules/@types/node" in
+ * `package-lock.json`. You can find these references by Ctrl-F for
+ * "/@types/node" with the `/` prefix.
+ */
 export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
   'tsc',
   async ({
@@ -20,23 +28,8 @@ export const tsc: ReportingTool<[Options]> = new ReportingTool<[Options]>(
     onStdOut,
     watch = false,
   }: Options): Promise<ReportingToolResult> => {
-    const cwd: string = process.cwd();
-
-    /**
-     * If this fails because `@types/node` mismatches, then a package has an
-     * outdated version in `node_modules/`. `npm install @types/node@latest`
-     * does not seem to fix it; you can delete `node_modules/` and remove
-     * references to "packages/__/node_modules/@types/node" in
-     * `package-lock.json`. You can find these references by Ctrl-F for
-     * "/@types/node" with the `/` prefix.
-     */
-    // const tsconfigFile: string = await createTSConfigFile({
-    //   extends: join(cwd, 'tsconfig.json'),
-    //   id,
-    // });
-
-    // const args: string[] = [build ? '--build' : '--project', tsconfigFile];
     const args: string[] = [];
+    const cwd: string = process.cwd();
 
     if (build) {
       args.push(

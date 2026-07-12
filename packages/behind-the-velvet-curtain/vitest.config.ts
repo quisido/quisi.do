@@ -1,19 +1,10 @@
 import { playwright } from '@vitest/browser-playwright';
-import { defineVitestConfig, type VitestConfig } from 'quisido/vitest';
+import { defineVitestConfig, type VitestConfig } from 'quisido';
 import { MONOGATARI_ALIASES } from './monogatari-aliases.js';
 
 const RESOLVE_CONFIG = {
   alias: MONOGATARI_ALIASES,
 };
-
-const BROWSER_INSTANCES =
-  process.env['PLAYWRIGHT_FULL_BROWSER_MATRIX'] === 'true'
-    ? [
-        { browser: 'chromium' as const, name: 'chromium' },
-        { browser: 'firefox' as const, name: 'firefox' },
-        { browser: 'webkit' as const, name: 'webkit' },
-      ]
-    : [{ browser: 'chromium' as const, name: 'chromium' }];
 
 const CONFIG: VitestConfig = await defineVitestConfig({
   resolve: RESOLVE_CONFIG,
@@ -37,7 +28,11 @@ const CONFIG: VitestConfig = await defineVitestConfig({
           browser: {
             enabled: true,
             headless: true,
-            instances: BROWSER_INSTANCES,
+            instances: [
+              { browser: 'chromium', name: 'chromium' },
+              { browser: 'firefox', name: 'firefox' },
+              { browser: 'webkit', name: 'webkit' },
+            ],
             provider: playwright({}),
           },
           include: ['src/**/browser-smoke.test.ts'],
