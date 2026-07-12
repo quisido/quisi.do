@@ -17,7 +17,6 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
   // Plugins: react-compiler, react-hooks, react-refresh
   {
     files: ['**/*.ts', '**/*.tsx'],
-    ignores: ['test/e2e.ts'],
     plugins: {
       'react-compiler': reactCompiler,
       'react-hooks': {
@@ -31,6 +30,17 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
       'react-hooks/exhaustive-deps': 'error',
       'react-hooks/rules-of-hooks': 'error',
       'react-refresh/only-export-components': 'error',
+    },
+  },
+
+  // Playwright
+  {
+    ignores: ['**/*.e2e.ts', 'test/e2e.ts'],
+    rules: {
+      'react-compiler/react-compiler': 'off',
+      'react-hooks/exhaustive-deps': 'off',
+      'react-hooks/rules-of-hooks': 'off',
+      'react-refresh/only-export-components': 'off',
     },
   },
 

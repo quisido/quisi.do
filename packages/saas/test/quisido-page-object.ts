@@ -1,7 +1,7 @@
 import type { Locator, Page } from '@playwright/test';
 
 export default class QuisidoPageObject {
-  #page: Page;
+  readonly #page: Page;
 
   public constructor(page: Page) {
     this.#page = page;

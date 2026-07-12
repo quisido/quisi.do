@@ -1,7 +1,10 @@
-import { test } from '@playwright/test';
+import { test } from '../../test/e2e.js';
+import type { TestArgs, WorkerArgs } from '../../test/playwright.js';
 
 test.describe('Home', (): void => {
-  test("should show this year's copyright", (): void => {
-    // Do nothing
+  test("should show this year's copyright", async ({
+    quisido,
+  }: TestArgs & WorkerArgs): Promise<void> => {
+    await quisido.goto('/');
   });
 });
