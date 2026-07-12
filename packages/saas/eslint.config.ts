@@ -17,6 +17,7 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
   // Plugins: react-compiler, react-hooks, react-refresh
   {
     files: ['**/*.ts', '**/*.tsx'],
+    ignores: ['test/e2e.ts'],
     plugins: {
       'react-compiler': reactCompiler,
       'react-hooks': {

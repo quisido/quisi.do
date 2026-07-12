@@ -13,21 +13,13 @@
     "src/**/*.tsx"
   ],
   "exclude": [
-    ".vscode/",
-    ".wrangler/",
-    "_site/",
-    "scripts/",
     "src/**/*.e2e.ts",
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
     "src/design-systems/core-test/",
     "src/*.test.ts",
     "src/*.test.tsx",
-    "src/test/",
-    ".*.json",
-    "*.config.*",
-    "lighthouse.*",
-    "tsconfig.*"
+    "src/test/"
   ],
   "references": [
     {
