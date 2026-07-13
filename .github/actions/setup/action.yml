@@ -80,15 +80,15 @@ runs:
     - name: Install Debian dependencies
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       shell: bash
-      run: >-
+      run: |-
         sudo apt-get update;
-        sudo apt-get install --yes
-        build-essential
-        libcairo2-dev
-        libgif-dev
-        libjpeg-dev
-        libpango1.0-dev
-        librsvg2-dev;
+        sudo apt-get install --yes \
+          build-essential \
+          libcairo2-dev \
+          libgif-dev \
+          libjpeg-dev \
+          libpango1.0-dev \
+          librsvg2-dev;
 
     - name: Install NPM dependencies
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
@@ -104,22 +104,25 @@ runs:
     - name: Cache browsers
       id: cache-playwright
       if: inputs.install-browsers != 'false'
-      uses: actions/cache@v4
+      # For the main branch, restore and save the browser cache.
+      # For all other branches, only restore. We don't want to allow pull
+      # requests to cache arbitrary files they place in the cached directory.
+      uses: >-
+        ${{
+          github.ref_name == github.event.repository.default_branch &&
+          'actions/cache@v4' ||
+          'actions/cache/restore@v4'
+        }}
       with:
+        key: playwright-${{ runner.os }}
         path: ~/.cache/ms-playwright
-        key: >-
-          playwright-
-          ${{ runner.os }}-
-          ${{ steps.playwright-version.outputs.value }}
 
     - name: Install browsers
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
+      if: inputs.install-browsers != 'false'
       shell: bash
       env:
         DEBIAN_FRONTEND: noninteractive
-      if: >-
-        inputs.install-browsers != 'false' &&
-        steps.cache-playwright.outputs.cache-hit != 'true'
       run: >-
         npx playwright install --only-shell
         chromium-headless-shell firefox webkit;
