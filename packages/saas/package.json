@@ -154,7 +154,7 @@
     "logrocket": "^12.1.1",
     "nyc": "^18.0.0",
     "playwright": "^1.61.1",
-    "postcss": "^8.5.16",
+    "postcss": "^8.5.19",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",
     "sass": "^1.101.0",
