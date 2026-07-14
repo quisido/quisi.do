@@ -46,7 +46,7 @@
     "@vitejs/plugin-basic-ssl": "^2.3.0",
     "@vitest/browser": "^4.1.10",
     "@vitest/browser-playwright": "^4.1.10",
-    "autoprefixer": "^10.5.2",
+    "autoprefixer": "^10.5.3",
     "jsdom": "^29.1.1",
     "playwright": "^1.61.1",
     "postcss": "^8.5.19",
