@@ -2,6 +2,7 @@ import jsonSchemaValidator from 'eslint-plugin-json-schema-validator';
 import * as yamlParser from 'yaml-eslint-parser';
 import defineConfig, { type Config } from './define-config.js';
 import { LINTER_OPTIONS } from './linter-options.js';
+import type { Plugin } from '@eslint/config-helpers';
 
 const GITHUB_WORKFLOW_CONFIG: Config = defineConfig({
   extends: [],
@@ -13,7 +14,8 @@ const GITHUB_WORKFLOW_CONFIG: Config = defineConfig({
   linterOptions: LINTER_OPTIONS,
   name: '@quisido/github-workflow',
   plugins: {
-    'json-schema-validator': jsonSchemaValidator,
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    'json-schema-validator': jsonSchemaValidator as Plugin,
   },
   rules: {
     'json-schema-validator/no-invalid': [

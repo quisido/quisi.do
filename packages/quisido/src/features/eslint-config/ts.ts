@@ -7,6 +7,7 @@ import JS from './js.js';
 import mapConfigsToRules from './map-configs-to-rules.js';
 import { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
 import fileGlobsByExtension from './file-globs-by-extension.js';
+import type { Plugin } from '@eslint/config-helpers';
 
 export { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
 
@@ -22,8 +23,9 @@ const TS_CONFIG: Config = defineConfig({
 
   plugins: {
     ...JS.plugins,
-    '@typescript-eslint': tsPlugin as unknown as ESLint.Plugin,
-    'sort-keys-custom-order': SORT_KEYS_CUSTOM_ORDER_PLUGIN,
+    '@typescript-eslint': tsPlugin as unknown as Plugin,
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    'sort-keys-custom-order': SORT_KEYS_CUSTOM_ORDER_PLUGIN as Plugin,
   },
 
   rules: {

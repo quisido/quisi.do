@@ -8,6 +8,7 @@ import defineConfig, { type Config } from './define-config.js';
 import { LANGUAGE_OPTIONS } from './language-options.js';
 import { LINTER_OPTIONS } from './linter-options.js';
 import fileGlobsByExtension from './file-globs-by-extension.js';
+import type { Plugin } from '@eslint/config-helpers';
 
 const SORT_KEYS_CUSTOM_ORDER_PLUGIN =
   sortKeysCustomOrder as unknown as ESLint.Plugin;
@@ -21,8 +22,10 @@ const JS_CONFIG: Config = defineConfig({
   name: '@quisido/js',
 
   plugins: {
-    prettier: prettierPlugin,
-    'sort-keys-custom-order': SORT_KEYS_CUSTOM_ORDER_PLUGIN,
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    prettier: prettierPlugin as Plugin,
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    'sort-keys-custom-order': SORT_KEYS_CUSTOM_ORDER_PLUGIN as Plugin,
   },
 
   rules: {
