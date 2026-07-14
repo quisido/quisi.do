@@ -108,7 +108,7 @@ const CONFIG: PlaywrightTestConfig<TestArgs, WorkerArgs> = defineConfig<
     baseURL: BASE_URL,
     colorScheme: COLOR_SCHEME,
     locale: 'en-US',
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
   },
   /*
   This is only beneficial for localhost, but we want our configuration to
