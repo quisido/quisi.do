@@ -7,8 +7,6 @@ runs:
   steps:
     - name: Setup
       uses: ./.github/actions/setup
-      with:
-        install-browsers: true
 
     - name: Test
       id: test
