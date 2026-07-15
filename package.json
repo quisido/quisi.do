@@ -55,6 +55,16 @@
     "packages/*"
   ],
   "allowScripts": {
+    "@datadog/native-appsec@*": true,
+    "@datadog/native-iast-taint-tracking@*": true,
+    "@datadog/native-metrics@*": true,
+    "@datadog/pprof@*": true,
+    "@github/keytar@*": true,
+    "canvas@*": true,
+    "core-js@*": true,
+    "node-pty@*": true,
+    "protobufjs@*": true,
+    "sharp@*": true,
     "workerd@*": true
   },
   "dependencies": {
@@ -96,7 +106,6 @@
     "chrome-devtools-mcp": "^1.5.0",
     "concurrently": "^10.0.3",
     "hint": "^7.1.13",
-    "jiti": "^2.7.0",
     "puppeteer-core": "^25.3.0",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",

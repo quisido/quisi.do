@@ -79,5 +79,5 @@ publication.
 - `npm start` runs all applications, services, and dependencies locally.
 - `npm test` runs all test suites for all packages.
   - `npm --workspace=packages/<PATH> test` tests a specific package.
-- `npx --workspace=packages/<PATH> eslint .` lints a specific package.
+- `npx --workspace=packages/<PATH> quisido eslint` lints a specific package.
 - `npx --workspace=packages/<PATH> vitest run` unit tests a specific package.

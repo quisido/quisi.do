@@ -1,8 +1,8 @@
 ---
 name: typescript
 description: "TypeScript guidelines. Use when editing or reviewing `**/*.ts` and `**/*.tsx` files."
-allowed-tools: Read Write
 license: MIT
+user-invocable: false
 metadata:
   author: quisi.do
 ---

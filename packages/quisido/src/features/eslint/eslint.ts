@@ -8,6 +8,14 @@ import npxEslint from './npx-eslint.js';
 import report from './report.js';
 // import { cpus } from 'node:os';
 
+/**
+ * Technical debt: To bypass the need to calculate the `eslint` executable path,
+ * we should `import { ESLint } from 'eslint'` and manually invoke
+ * `new ESLint(config).doSomething()`. This should also allow us to generate
+ * reports in the same invocation, instead of requiring 2 separate report
+ * invocations.
+ */
+
 const MAX_CONCURRENCY = 1; // : number = cpus().length;
 const MIN_CONCURRENCY = 1;
 

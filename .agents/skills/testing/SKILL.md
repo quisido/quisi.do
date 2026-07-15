@@ -1,8 +1,8 @@
 ---
 name: testing
 description: "Code guidelines for JavaScript/TypeScript end-to-end, integration, and unit tests. Use when authoring or reviewing `**/*.test.ts` and `**/*.test.tsx` files, e.g. Playwright, Vitest."
-allowed-tools: Read Write
 license: MIT
+user-invocable: false
 metadata:
   author: quisi.do
 ---

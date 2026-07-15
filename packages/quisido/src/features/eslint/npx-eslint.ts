@@ -1,7 +1,13 @@
 import { EOL } from 'node:os';
-import npx from '../npx/npx.js';
 import debug from '../../utils/debug.js';
 import { ExitCode } from '../../utils/exit-code.js';
+import process from 'node:process';
+import { fileURLToPath } from 'node:url';
+import execute from '../../utils/execute.js';
+
+const ESLINT_CLI_PATH: string = fileURLToPath(
+  new URL('./bin/eslint.js', import.meta.resolve('eslint/package.json')),
+);
 
 const MAX_ATTEMPTS = 9;
 
@@ -14,8 +20,7 @@ const RETRYABLE_EXIT_CODES = new Set<number>([
 export default async function npxEslint(
   ...args: readonly string[]
 ): Promise<void> {
-  const npxArgs: readonly string[] = [
-    'eslint',
+  const eslintArgs: readonly string[] = [
     '.',
     '--cache',
     '--cache-location',
@@ -32,11 +37,10 @@ export default async function npxEslint(
   ];
 
   const lint = async (attempt: number): Promise<void> => {
-    const { exitCode, stderr, stdout } = await npx(
+    const { exitCode, stderr, stdout } = await execute(process.execPath, [ESLINT_CLI_PATH, ...eslintArgs],
       {
         env: { NODE_OPTIONS: '--disable-warning=ESLintPoorConcurrencyWarning' },
       },
-      ...npxArgs,
     );
 
     if (exitCode === 0) {
@@ -62,13 +66,13 @@ export default async function npxEslint(
     if (message === '') {
       throw new Error(
         `ESLint failed with an unknown error (exit code ${exitCode})`,
-        { cause: npxArgs.join(' ') },
+        { cause: ['eslint', ...eslintArgs].join(' ') },
       );
     }
 
     throw new Error(
       [`ESLint failed with exit code ${exitCode}`, message].join(EOL),
-      { cause: npxArgs.join(' ') },
+      { cause: ['eslint', ...eslintArgs].join(' ') },
     );
   };
 
