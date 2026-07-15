@@ -100,8 +100,9 @@ runs:
       if: inputs.install-browsers != 'false'
       uses: actions/cache/restore@v4
       with:
-        key: playwright-${{ runner.os }}
+        key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
         path: ~/.cache/ms-playwright
+        restore-keys: playwright-${{ runner.os }}-
 
     - name: Install browsers
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
