@@ -94,7 +94,8 @@ const CONFIG: PlaywrightTestConfig<TestArgs, WorkerArgs> = defineConfig<
     threshold: 300_000,
   },
   respectGitIgnore: true,
-  retries: 0,
+  // Retrying once allows us to only collect traces on the first retry.
+  retries: IS_CI ? 1 : 0,
   shard: {
     current: 1,
     total: 1,
@@ -108,7 +109,7 @@ const CONFIG: PlaywrightTestConfig<TestArgs, WorkerArgs> = defineConfig<
     baseURL: BASE_URL,
     colorScheme: COLOR_SCHEME,
     locale: 'en-US',
-    trace: 'retain-on-failure',
+    trace: 'on-first-retry',
   },
   /*
   This is only beneficial for localhost, but we want our configuration to
