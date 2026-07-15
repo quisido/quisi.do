@@ -73,7 +73,7 @@
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "^8.64.0",
     "@typescript-eslint/parser": "^8.46.3",
-    "eslint": "^10.7.0",
+    "@typescript-eslint/utils": "^8.64.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-json-schema-validator": "^6.3.0",
     "eslint-plugin-jsonc": "^3.3.0",
@@ -93,11 +93,13 @@
   "devDependencies": {
     "@types/node": "^26.1.1",
     "@vitest/coverage-istanbul": "^4.1.10",
+    "eslint": "^10.7.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.10"
   },
   "peerDependencies": {
     "@vitest/coverage-istanbul": ">=4.0.0",
+    "eslint": "^10.7.0",
     "typescript": ">=5.0.0",
     "vitest": ">=4.0.0"
   },

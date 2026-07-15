@@ -1,13 +1,7 @@
 import { EOL } from 'node:os';
 import debug from '../../utils/debug.js';
 import { ExitCode } from '../../utils/exit-code.js';
-import process from 'node:process';
-import { fileURLToPath } from 'node:url';
-import execute from '../../utils/execute.js';
-
-const ESLINT_CLI_PATH: string = fileURLToPath(
-  new URL('./bin/eslint.js', import.meta.resolve('eslint/package.json')),
-);
+import npx from '../npx/npx.js';
 
 const MAX_ATTEMPTS = 9;
 
@@ -37,10 +31,12 @@ export default async function npxEslint(
   ];
 
   const lint = async (attempt: number): Promise<void> => {
-    const { exitCode, stderr, stdout } = await execute(process.execPath, [ESLINT_CLI_PATH, ...eslintArgs],
+    const { exitCode, stderr, stdout } = await npx(
       {
         env: { NODE_OPTIONS: '--disable-warning=ESLintPoorConcurrencyWarning' },
       },
+      'eslint',
+      ...eslintArgs,
     );
 
     if (exitCode === 0) {

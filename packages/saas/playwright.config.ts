@@ -26,7 +26,7 @@ if (!isColorScheme(COLOR_SCHEME)) {
   throw new Error(`Invalid color scheme: ${COLOR_SCHEME}`);
 }
 
-const REPORTERS: ReporterDescription[] = [
+const REPORTERS: readonly ReporterDescription[] = [
   [
     'html',
     {
@@ -41,8 +41,7 @@ const REPORTERS: ReporterDescription[] = [
   ['null'],
 ];
 
-if (IS_CI) {
-  REPORTERS.push(
+const CI_REPORTERS: readonly ReporterDescription[] = [
     ['blob', { fileName: 'blob.zip', outputDir: '.tests/playwright' }],
     ['dot'],
     ['github'],
@@ -55,10 +54,12 @@ if (IS_CI) {
         stripANSIControlSequences: true,
       },
     ],
-  );
-} else {
-  REPORTERS.push(['list', { printFailuresInline: true, printSteps: true }]);
-}
+  ];
+
+const LOCAL_REPORTERS: readonly ReporterDescription[] = [
+  ['list', { printFailuresInline: true, printSteps: true }]
+];
+
 
 const CONFIG: PlaywrightTestConfig<TestArgs, WorkerArgs> = defineConfig<
   TestArgs,
@@ -88,7 +89,7 @@ const CONFIG: PlaywrightTestConfig<TestArgs, WorkerArgs> = defineConfig<
   ],
   quiet: false,
   repeatEach: 0,
-  reporter: REPORTERS,
+  reporter: [...REPORTERS, ...(IS_CI ? CI_REPORTERS : LOCAL_REPORTERS)],
   reportSlowTests: {
     max: 5,
     threshold: 300_000,

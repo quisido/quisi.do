@@ -50,11 +50,6 @@ export default function execute(
           return;
         }
 
-        /**
-         * Non-null assertion is acceptable here, because `.split()[0]` always
-         * returns a string.
-         */
-
         const errMessage: string = (
           err.message.split('Command failed: ')[0] ?? ''
         ).trim();

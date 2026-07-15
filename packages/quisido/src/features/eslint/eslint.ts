@@ -1,20 +1,16 @@
+import { ESLint } from 'eslint';
+import { join, resolve } from 'node:path';
 import ReportingTool, {
   type ReportingToolResult,
 } from '../../utils/reporting-tool.js';
 import toString from '../../utils/to-string.js';
 import randomInt from '../../utils/random-int.js';
 import withDuration from '../../utils/with-duration.js';
-import npxEslint from './npx-eslint.js';
-import report from './report.js';
+import getDisposableTempDir from '../../utils/get-disposable-temp-dir.js';
+import npx from '../npx/npx.js';
+import writeTemporaryFile from '../../utils/write-temporary-file.js';
+import type { CompilerOptions } from 'typescript';
 // import { cpus } from 'node:os';
-
-/**
- * Technical debt: To bypass the need to calculate the `eslint` executable path,
- * we should `import { ESLint } from 'eslint'` and manually invoke
- * `new ESLint(config).doSomething()`. This should also allow us to generate
- * reports in the same invocation, instead of requiring 2 separate report
- * invocations.
- */
 
 const MAX_CONCURRENCY = 1; // : number = cpus().length;
 const MIN_CONCURRENCY = 1;
@@ -22,67 +18,60 @@ const MIN_CONCURRENCY = 1;
 export const eslint: ReportingTool = new ReportingTool(
   'eslint',
   async (): Promise<ReportingToolResult> => {
+    const cwd: string = process.cwd();
+    const outDir: string = join(await getDisposableTempDir(), 'eslint-config');
+    const project: string = await writeTemporaryFile('tsconfig.eslint-config.json', JSON.stringify({
+      compilerOptions: {
+        declarationDir: outDir,
+        noEmit: false,
+        outDir,
+        skipLibCheck: true,
+      } satisfies CompilerOptions,
+      extends: resolve(cwd, 'tsconfig.json'),
+      include: [resolve(cwd, 'eslint.config.ts')],
+    }));
+
+    const { exitCode, stderr } = await npx(
+      'tsc',
+      '--project',
+      project,
+    );
+
+    if (exitCode === 1) {
+      throw new Error(`Failed to transpile ESLint configuration: ${stderr}`);
+    }
+
     const concurrency: number = randomInt(MIN_CONCURRENCY, MAX_CONCURRENCY);
+    const linter: ESLint = new ESLint({
+      cache: true,
+      cacheLocation: '.cache/eslint.json',
+      concurrency: concurrency === 1 ? 'off' : concurrency,
+      cwd,
+      overrideConfigFile: resolve(outDir, 'eslint.config.js'),
+      stats: true,
+    });
 
     const { duration: resultsDuration, error: resultsError } =
       await withDuration(async (): Promise<void> => {
-        await npxEslint(
-          '--color',
-          '--concurrency',
-          concurrency.toString(),
-          '--config',
-          'eslint.config.ts',
-        );
+        await linter.lintFiles('.');
       });
 
     eslint.logInfo(
       `Linted in ${resultsDuration} seconds (${concurrency} threads)`,
     );
 
-    const {
-      duration: reportsDuration,
-      error: reportsError,
-      result: reportPath,
-    } = await withDuration(async (): Promise<string> => {
-      await report({ format: 'html' });
-      return await report({ format: 'json' });
-    });
-
-    eslint.logInfo(`Generated reports in ${reportsDuration} seconds`);
-
-    if (reportsError !== null) {
-      const reportsMessage: string = toString(reportsError);
-      if (resultsError !== null) {
-        const resultsMessage: string = toString(resultsError);
-
-        return {
-          context:
-            "ESLint encountered an error while analyzing this package's " +
-            'contents and again while generating its report.',
-          message: [resultsMessage, reportsMessage].join('\n\n'),
-          status: 'failure',
-        };
-      }
-
-      return {
-        context: 'ESLint encountered an error while generating its report.',
-        message: reportsMessage,
-        status: 'failure',
-      };
-    }
-
     if (resultsError !== null) {
       return {
         context:
           "ESLint encountered an error while analyzing this package's contents.",
         message: toString(resultsError),
-        path: reportPath ?? undefined,
+        path: '.tests/eslint.json',
         status: 'failure',
       };
     }
 
     return {
-      path: reportPath ?? undefined,
+      path: '.tests/eslint.json',
       status: 'success',
     };
   },

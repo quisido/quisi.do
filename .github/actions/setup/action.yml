@@ -120,13 +120,6 @@ runs:
         npx playwright install --only-shell
         chromium-headless-shell firefox webkit;
 
-    - name: Install browser dependencies
-      continue-on-error: ${{ inputs.continue-on-error == 'true' }}
-      id: install-browser-dependencies
-      if: steps.restore-browser-cache.outputs.cache-hit != 'true'
-      run: npx playwright install-deps
-      shell: bash
-
     - name: Save browser cache
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       uses: actions/cache/save@v4
@@ -136,11 +129,16 @@ runs:
         github.ref_name == github.event.repository.default_branch &&
         steps.playwright-version.outcome == 'success' &&
         steps.restore-browser-cache.outputs.cache-hit != 'true' &&
-        steps.install-browsers.outcome == 'success' &&
-        steps.install-browser-dependencies.outcome == 'success'
+        steps.install-browsers.outcome == 'success'
       with:
         path: ~/.cache/ms-playwright
         key: >-
           playwright-
           ${{ runner.os }}-
           ${{ steps.playwright-version.outputs.value }}
+
+    - name: Install browser dependencies
+      continue-on-error: ${{ inputs.continue-on-error == 'true' }}
+      id: install-browser-dependencies
+      run: npx playwright install-deps
+      shell: bash

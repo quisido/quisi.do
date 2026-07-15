@@ -22,7 +22,7 @@ export const test: TestType<TestArgs, WorkerArgs> = base.extend<
       PlaywrightWorkerOptions,
     use: (value: QuisidoPageObject) => Promise<void>,
   ): Promise<void> => {
-    const po = new QuisidoPageObject(page);
-    await use(po);
+    const quisido = new QuisidoPageObject(page);
+    await use(quisido);
   },
 });
