@@ -10,5 +10,13 @@
     "scripts/",
     "types/",
     "utils/"
+  ],
+  "references": [
+    {
+      "path": "./packages/fmrs/tsconfig.build.json"
+    },
+    {
+      "path": "./packages/quisido/tsconfig.build.json"
+    }
   ]
 }

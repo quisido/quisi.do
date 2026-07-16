@@ -97,7 +97,6 @@ jobs:
         with:
           continue-on-error: true
           environment: development
-          install-browsers: false
           upload: false
 
       - name: Sanitize

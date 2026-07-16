@@ -15,6 +15,7 @@
     "clean": "rimraf .cache .tests .wrangler _site node_modules",
     "design-system:copy-template": "bash ./.agents/skills/create-design-system/copy-template.sh",
     "eslint": "quisido eslint",
+    "playwright": "playwright test --config playwright.config.ts",
     "vite:build": "vite build",
     "vitest": "vitest",
     "vitest:run": "vitest run",
@@ -24,13 +25,6 @@
     "email": "saas@quisi.do",
     "url": "https://github.com/quisido/quisi.do/issues"
   },
-  "keywords": [
-    "analytics",
-    "frontend",
-    "observability",
-    "react",
-    "typescript"
-  ],
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
@@ -113,6 +107,7 @@
     "@opentelemetry/auto-instrumentations-web": "^0.65.0",
     "@opentelemetry/core": "^2.9.0",
     "@opentelemetry/sdk-metrics": "^2.2.0",
+    "@playwright/test": "^1.61.1",
     "@react-aria/link": "^3.9.1",
     "@sentry/types": "^10.65.0",
     "@stylistic/eslint-plugin-ts": "^4.4.1",
@@ -153,7 +148,6 @@
     "lighthouse": "^13.4.0",
     "logrocket": "^12.1.1",
     "nyc": "^18.0.0",
-    "playwright": "^1.61.1",
     "postcss": "^8.5.19",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",

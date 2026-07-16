@@ -1,8 +1,8 @@
 ---
 name: cloudflare-workers
 description: "Code guidelines for Cloudflare Worker implementations. Use when editing, reviewing, or executing a Cloudflare Worker; e.g. D1 queries, handlers, Wrangler commands, and Wrangler configurations."
-allowed-tools: Read Write
 license: MIT
+user-invocable: false
 metadata:
   author: quisi.do
 ---

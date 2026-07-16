@@ -1,8 +1,8 @@
 ---
 name: react
 description: "Code guidelines for TSX files. Use when editing or reviewing `.tsx` files, i.e. TypeScript React components."
-allowed-tools: Read Write
 license: MIT
+user-invocable: false
 metadata:
   author: quisi.do
 ---

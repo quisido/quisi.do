@@ -32,9 +32,9 @@ const EXPECTED_COMPILER_OPTIONS: Record<PackageType, CompilerOptions> = {
 };
 
 const EXPECTED_EXCLUDE: Record<PackageType, readonly string[]> = {
-  application: ['.cache/', '.tests/', '_site/'],
-  library: ['.cache/', '.tests/', 'dist/'],
-  service: ['.cache/', '.tests/', 'dist/'],
+  application: ['.cache/', '.tests/', '_site/', 'node_modules/'],
+  library: ['.cache/', '.tests/', 'dist/', 'node_modules/'],
+  service: ['.cache/', '.tests/', 'dist/', 'node_modules/'],
 };
 
 export default async function testTsConfig({ type }: Options): Promise<void> {

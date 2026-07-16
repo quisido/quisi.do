@@ -12,6 +12,7 @@ const TRAILING_ROOT_KEYS: readonly string[] = [
   'repository',
   'workspaces',
 
+  'allowScripts',
   'dependencies',
   'devDependencies',
   'overrides',

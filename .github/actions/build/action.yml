@@ -11,10 +11,6 @@ inputs:
     default: development
     description: The environment being built (e.g. production, staging)
     required: true
-  install-browsers:
-    default: 'false'
-    description: Whether to install browsers
-    required: true
   upload:
     description: Upload the build artifacts?
     required: true
@@ -28,7 +24,6 @@ runs:
       with:
         continue-on-error: ${{ inputs.continue-on-error != 'false' }}
         download-build: false
-        install-browsers: ${{ inputs.install-browsers }}
 
     - name: Build
       continue-on-error: ${{ inputs.continue-on-error != 'false' }}
@@ -42,7 +37,7 @@ runs:
         GITHUB_SHA: ${{ github.sha }}
         NODE_ENV: ${{ inputs.environment }}
 
-    - name: Cache
+    - name: Save cache
       if: >-
         ${{
           github.ref_name == github.event.repository.default_branch &&
@@ -51,9 +46,6 @@ runs:
         }}
       uses: actions/cache/save@v4
       with:
-        path: |
-          .cache/*.tsbuildinfo
-          packages/*/.cache/*.tsbuildinfo
         key: >-
           typescript-
           ${{ runner.os }}-
@@ -62,6 +54,9 @@ runs:
           ${{ hashFiles('tsconfig.build.json', 'packages/*/tsconfig.build.json') }}-
           ${{ github.event.repository.default_branch }}-
           ${{ github.sha }}
+        path: |
+          .cache/*.tsbuildinfo
+          packages/*/.cache/*.tsbuildinfo
 
     - name: Upload
       if: ${{ inputs.upload == 'true' && steps.build.outcome == 'success' }}

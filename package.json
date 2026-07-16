@@ -1,9 +1,6 @@
 {
   "name": "@quisi/do",
   "version": "1.0.0",
-  "allowScripts": {
-    "workerd": "*"
-  },
   "author": "quisi.do <contact@quisi.do>",
   "description": "quisi.do",
   "homepage": "https://quisi.do/",
@@ -33,7 +30,7 @@
     "publish": "node ./dist/scripts/publish.js",
     "quisido": "npm --workspace=packages/quisido start",
     "quisido:build": "npm --workspace=packages/quisido run build",
-    "quisido:link": "npm --workspace=packages/quisido link",
+    "quisido:link": "npm --workspace=packages/quisido link || exit 0",
     "react-datadog": "npm --workspace=packages/react-datadog start",
     "saas": "npm --workspace=packages/saas start",
     "tsc:build": "tsc --build tsconfig.build.json",
@@ -57,6 +54,19 @@
   "workspaces": [
     "packages/*"
   ],
+  "allowScripts": {
+    "@datadog/native-appsec@*": true,
+    "@datadog/native-iast-taint-tracking@*": true,
+    "@datadog/native-metrics@*": true,
+    "@datadog/pprof@*": true,
+    "@github/keytar@*": true,
+    "canvas@*": true,
+    "core-js@*": true,
+    "node-pty@*": true,
+    "protobufjs@*": true,
+    "sharp@*": true,
+    "workerd@*": true
+  },
   "dependencies": {
     "fmrs": "^3.0.0"
   },
@@ -95,8 +105,8 @@
     "browserslist": "^4.28.6",
     "chrome-devtools-mcp": "^1.6.0",
     "concurrently": "^10.0.3",
+    "eslint": "^10.7.0",
     "hint": "^7.1.13",
-    "jiti": "^2.7.0",
     "puppeteer-core": "^25.3.0",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",

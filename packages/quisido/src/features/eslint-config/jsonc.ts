@@ -4,6 +4,7 @@ import defineConfig, { type Config } from './define-config.js';
 import JSON from './json.js';
 import mapFlatConfigToRulesRecord from './map-flat-config-to-rules-record.js';
 import fileGlobsByExtension from './file-globs-by-extension.js';
+import type { Plugin } from '@eslint/config-helpers';
 
 const JSONC_CONFIG: Config = defineConfig({
   ...JSON,
@@ -33,7 +34,8 @@ const JSONC_CONFIG: Config = defineConfig({
   name: '@quisido/jsonc',
   plugins: {
     ...JSON.plugins,
-    jsonc,
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    jsonc: jsonc as Plugin,
   },
   rules: {
     'jsonc/no-bigint-literals': 'error',

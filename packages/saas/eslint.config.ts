@@ -33,6 +33,17 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
     },
   },
 
+  // Playwright
+  {
+    files: ['**/*.e2e.ts', 'test/e2e.ts'],
+    rules: {
+      'react-compiler/react-compiler': 'off',
+      'react-hooks/exhaustive-deps': 'off',
+      'react-hooks/rules-of-hooks': 'off',
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+
   // Temporary rules
   {
     rules: {

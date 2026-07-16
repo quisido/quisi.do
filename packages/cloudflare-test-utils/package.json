@@ -16,7 +16,6 @@
     "attw": "quisido attw",
     "clean": "rimraf .cache .tests dist node_modules",
     "eslint": "quisido eslint",
-    "eslint:fix": "eslint . --cache --cache-location .cache/eslint.json --color --config eslint.config.ts --exit-on-fatal-error --fix --max-warnings -1 --no-config-lookup",
     "publint": "quisido publint",
     "vitest": "vitest",
     "vitest:run": "vitest run",

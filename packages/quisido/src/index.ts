@@ -1,7 +1,8 @@
 export {
-  default as defineESLintConfig,
+  defineESLintConfig,
+  default as ESLINT_CONFIG,
   type Config as ESLintConfig,
-} from './features/eslint/define-eslint-config.js';
+} from './features/eslint-config/index.js';
 export {
   default as defineVitestConfig,
   type QuisidoUserConfig as VitestConfig,

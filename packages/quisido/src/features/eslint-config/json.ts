@@ -1,11 +1,9 @@
 import jsonPlugin from '@eslint/json';
-import { type ESLint } from 'eslint';
 import jsonc from 'eslint-plugin-jsonc';
 import defineConfig, { type Config } from './define-config.js';
 import { LINTER_OPTIONS } from './linter-options.js';
 import fileGlobsByExtension from './file-globs-by-extension.js';
-
-const JSON_PLUGIN = jsonPlugin as ESLint.Plugin;
+import type { Plugin } from '@eslint/config-helpers';
 
 /**
  * We don't use Prettier here, because Prettier does not support empty lines
@@ -48,8 +46,9 @@ const JSON_CONFIG: Config = defineConfig({
 
   plugins: {
     ...jsonPlugin.configs.recommended.plugins,
-    json: JSON_PLUGIN,
-    jsonc,
+    json: jsonPlugin,
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    jsonc: jsonc as Plugin,
   },
 
   rules: {

@@ -1,17 +1,17 @@
-import { type Linter } from 'eslint';
+import type { Config, RuleConfig } from '@eslint/config-helpers';
+
+export type RulesRecord = Partial<Record<string, RuleConfig>>;
 
 const reduceToRecord = (
-  record: Linter.RulesRecord,
-  config: Linter.Config,
-): Linter.RulesRecord => {
-  return {
-    ...record,
-    ...(config.rules as Linter.RulesRecord),
-  };
-};
+  record: RulesRecord,
+  config: Config,
+): RulesRecord => ({
+  ...record,
+  ...config.rules,
+});
 
 export default function mapFlatConfigToRulesRecord(
-  configs: readonly Linter.Config[],
-): Linter.RulesRecord {
+  configs: readonly Partial<Record<'rules', RulesRecord>>[],
+): RulesRecord {
   return configs.reduce(reduceToRecord, {});
 }

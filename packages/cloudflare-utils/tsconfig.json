@@ -8,7 +8,8 @@
   "exclude": [
     ".cache/",
     ".tests/",
-    "dist/"
+    "dist/",
+    "node_modules/"
   ],
   "extends": "quisido/tsconfig.json",
   "include": [
