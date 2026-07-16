@@ -111,7 +111,7 @@
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
-    "vite": "^8.1.4",
+    "vite": "^8.1.5",
     "vitest": "^4.1.10",
     "zod-validation-error": "^5.0.0"
   },

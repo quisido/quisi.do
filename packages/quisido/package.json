@@ -86,7 +86,7 @@
     "prettier": "^3.9.5",
     "publint": "^0.3.21",
     "typescript-eslint": "^8.64.0",
-    "vite": "^8.1.4",
+    "vite": "^8.1.5",
     "yaml-eslint-parser": "^2.1.0",
     "zod": "^4.4.3"
   },
