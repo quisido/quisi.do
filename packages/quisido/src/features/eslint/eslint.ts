@@ -20,22 +20,21 @@ export const eslint: ReportingTool = new ReportingTool(
   async (): Promise<ReportingToolResult> => {
     const cwd: string = process.cwd();
     const outDir: string = join(await getDisposableTempDir(), 'eslint-config');
-    const project: string = await writeTemporaryFile('tsconfig.eslint-config.json', JSON.stringify({
-      compilerOptions: {
-        declarationDir: outDir,
-        noEmit: false,
-        outDir,
-        skipLibCheck: true,
-      } satisfies CompilerOptions,
-      extends: resolve(cwd, 'tsconfig.json'),
-      include: [resolve(cwd, 'eslint.config.ts')],
-    }));
-
-    const { exitCode, stderr } = await npx(
-      'tsc',
-      '--project',
-      project,
+    const project: string = await writeTemporaryFile(
+      'tsconfig.eslint-config.json',
+      JSON.stringify({
+        compilerOptions: {
+          declarationDir: outDir,
+          noEmit: false,
+          outDir,
+          skipLibCheck: true,
+        } satisfies CompilerOptions,
+        extends: resolve(cwd, 'tsconfig.json'),
+        include: [resolve(cwd, 'eslint.config.ts')],
+      }),
     );
+
+    const { exitCode, stderr } = await npx('tsc', '--project', project);
 
     if (exitCode === 1) {
       throw new Error(`Failed to transpile ESLint configuration: ${stderr}`);
