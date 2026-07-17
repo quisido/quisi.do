@@ -10,7 +10,7 @@ import PACKAGE_JSON from './package-json.js';
 import TEST_TS from './test-ts.js';
 import TS from './ts.js';
 
-const CONFIG: Config[] = defineConfig(
+const CONFIG: readonly Config[] = defineConfig(
   JS,
   JSON,
 
