@@ -75,6 +75,6 @@
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.10",
-    "wrangler": "^4.112.0"
+    "wrangler": "^4.113.0"
   }
 }
