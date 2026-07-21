@@ -148,17 +148,17 @@
     "lighthouse": "^13.4.1",
     "logrocket": "^12.1.1",
     "nyc": "^18.0.0",
-    "postcss": "^8.5.20",
+    "postcss": "^8.5.21",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",
-    "sass": "^1.101.0",
+    "sass": "^1.101.3",
     "serve": "^14.2.5",
     "source-map": "^0.8.0",
     "stylelint": "^17.14.1",
     "stylelint-config-standard-scss": "^17.0.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.10",
-    "wait-on": "^9.0.10"
+    "wait-on": "^9.1.0"
   },
   "overrides": {
     "@hint/connector-puppeteer": {
