@@ -1,4 +1,4 @@
-import { ESLint } from 'eslint';
+import { ESLint, type Linter } from 'eslint';
 import { join, resolve } from 'node:path';
 import ReportingTool, {
   type ReportingToolResult,
@@ -9,11 +9,36 @@ import withDuration from '../../utils/with-duration.js';
 import getDisposableTempDir from '../../utils/get-disposable-temp-dir.js';
 import npx from '../npx/npx.js';
 import writeTemporaryFile from '../../utils/write-temporary-file.js';
-import type { CompilerOptions } from 'typescript';
+import type { CompilerOptions } from 'typescript/unstable/proto';
 // import { cpus } from 'node:os';
 
 const MAX_CONCURRENCY = 1; // : number = cpus().length;
 const MIN_CONCURRENCY = 1;
+
+const isDefined = <T>(value: T | undefined): value is T =>
+  typeof value !== 'undefined';
+
+const isErrorResult = ({
+  errorCount,
+  fatalErrorCount,
+}: ESLint.LintResult): boolean => errorCount > 0 || fatalErrorCount > 0;
+
+const toMessage = ({ filePath, messages }: ESLint.LintResult): string => {
+  const toString = ({
+    column,
+    endColumn,
+    endLine,
+    line,
+    message,
+    ruleId,
+  }: Linter.LintMessage): string => {
+    const columns: string = [column, endColumn].filter(isDefined).join('-');
+    const lines: string = [line, endLine].filter(isDefined).join('-');
+    return `:${lines}:${columns} [${ruleId}] ${message}`;
+  };
+
+  return `${filePath}:\n${messages.map(toString).join('\n')}`;
+};
 
 export const eslint: ReportingTool = new ReportingTool(
   'eslint',
@@ -36,7 +61,7 @@ export const eslint: ReportingTool = new ReportingTool(
 
     const { exitCode, stderr } = await npx('tsc', '--project', project);
 
-    if (exitCode === 1) {
+    if (exitCode !== 0) {
       throw new Error(`Failed to transpile ESLint configuration: ${stderr}`);
     }
 
@@ -52,7 +77,13 @@ export const eslint: ReportingTool = new ReportingTool(
 
     const { duration: resultsDuration, error: resultsError } =
       await withDuration(async (): Promise<void> => {
-        await linter.lintFiles('.');
+        const results: readonly ESLint.LintResult[] =
+          await linter.lintFiles('.');
+        const errors: readonly ESLint.LintResult[] =
+          results.filter(isErrorResult);
+        if (errors.length > 0) {
+          throw new Error(errors.map(toMessage).join('\n'), { cause: results });
+        }
       });
 
     eslint.logInfo(
@@ -64,13 +95,11 @@ export const eslint: ReportingTool = new ReportingTool(
         context:
           "ESLint encountered an error while analyzing this package's contents.",
         message: toString(resultsError),
-        path: '.tests/eslint.json',
         status: 'failure',
       };
     }
 
     return {
-      path: '.tests/eslint.json',
       status: 'success',
     };
   },

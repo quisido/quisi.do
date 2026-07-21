@@ -64,7 +64,7 @@
     "concurrently": "^10.0.3",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vitest": "^4.1.10",
     "wrangler": "^4.112.0"
   }

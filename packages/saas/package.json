@@ -156,7 +156,7 @@
     "source-map": "^0.8.0",
     "stylelint": "^17.14.1",
     "stylelint-config-standard-scss": "^17.0.0",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vitest": "^4.1.10",
     "wait-on": "^9.0.10"
   },
