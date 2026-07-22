@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsx": "react-jsx",
     "noEmit": false,
     "rootDir": "src",
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/sentry-react/src/",

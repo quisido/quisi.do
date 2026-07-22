@@ -12,7 +12,7 @@ runs:
       working-directory: packages/saas
       run: >-
         chmod +x ./scripts/lighthouse-serve.sh;
-        ./scripts/lighthouse-serve.sh;
+        ./scripts/lighthouse-serve.sh || ./scripts/lighthouse-serve.sh;
         npx esbuild --bundle --format=cjs --platform=node
         --outfile=./.tests/postlighthouse.cjs
         ./scripts/postlighthouse/index.ts &&
