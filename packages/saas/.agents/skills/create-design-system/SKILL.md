@@ -14,61 +14,40 @@ Before getting started, you need to know:
 
 ## Copy the template files
 
-From this package's root directory, execute the `design-system:copy-template`
-script, passing the _slug_ as an argument.
+From this package's root directory, define the `SLUG` environment variable and
+execute this script.
 
 ```bash
-npm run design-system:copy-template -- my-example-slug
+SLUG=my-example-slug
+cp --no-clobber --one-file-system --preserve --recursive \
+  "./src/design-systems/template/." \
+  "./src/design-systems/$SLUG/";
 ```
 
-## Test-driven development
+## Components
 
-From this package's root directory, execute
-`VITE_TESTED_DESIGN_SYSTEM=$slug npx vitest run src/design-systems/core-test/`
-to verify the new design system files accurately pass the test suite. If the
-test suite is failing on this step, stop and notify the user that something is
-wrong with the design system template or test suite.
+For now, the alert dialog is the only component being implemented.
 
-## Design decisions
+### Alert Dialog
 
-Use the provided description and screenshot to determine useful _semantic_
-design tokens and their values. Create as many or as few as you need.
+Use a subagent to generate the design:
 
-**Considerations:**
-- _Primary colors_ for calls to action
-- _Accent colors_ for highlights and emphasis
-- _Font families_ for sans-serif display text (headings) and serif base text
-  (body); only use font families from Google Fonts
-- Should the _border radius_ be soft or sharp?
-- Should the _border widths_ be thick or thin?
-- Should the _box shadows_ be elevated low or high?
-- Should the _padding_ be spacious or dense?
+- From this package's root directory, open the
+  `src/design-systems/$SLUG/alert-dialog.png` file to see a placeholder
+  screenshot of an alert dialog.
+- Use the design system's description to create an artistic variant of the
+  image. Remember: An alert dialog is floating, so visually enclose it.
+- Replace the placeholder image.
 
-## Implementation
-
-Components in the design system are located at `src/design-systems/$slug/*.tsx`
-and their CSS files are co-located at `src/design-systems/$slug/*.module.scss`.
-
-_Do not_ look at other design systems in the repository, and **do not** create a
-shared theme file for each component to use. That would lead to each component
-looking identical.
-
-To prevent context bloat, use a separate subagent to implement each component.
-Give the subagent the design system's slug, description, optional screenshot,
-design decisions, its specific component's TSX and SCSS, and the instructions
-listed in this skill's sibling `SUBAGENT_INSTRUCTIONS.md` file.
-
-## Validate
-
-Once all components are implemented, review them holistically. Does the design
-system align with the original description? Do the components look visually
-cohesive when used together? If not, make any necessary adjustments.
+Use a subagent to implement the component:
+- Use `src/design-systems/$SLUG/alert-dialog.png` as a reference.
+- Implement `src/design-systems/$SLUG/alert-dialog.tsx` and
+  `src/design-systems/$SLUG/alert-dialog.module.scss` to match the image.
+- You may create image files for textures and shapes too difficult to create
+  with pure CSS.
 
 ## Test
 
-As a final check, run the design system's test suite. If any tests are failing,
-adjust the implementation until all tests pass.
-
-```bash
-npx vitest run src/design-systems/$slug.test.ts
-```
+Run the design system's test suite with
+`VITE_TESTED_DESIGN_SYSTEM=$SLUG npx vitest run src/design-systems/core-test/`.
+If any tests are failing, adjust the implementation until all tests pass.

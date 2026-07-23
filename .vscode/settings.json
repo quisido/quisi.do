@@ -99,6 +99,23 @@
   "js/ts.tsdk.path": "./node_modules/typescript/lib",
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "npm.packageManager": "npm",
+  "remote.portsAttributes": {
+    "378": {
+      "protocol": "https"
+    },
+    "3000": {
+      "protocol": "https"
+    },
+    "5882": {
+      "protocol": "https"
+    },
+    "6586": {
+      "protocol": "https"
+    },
+    "9778": {
+      "protocol": "https"
+    }
+  },
   "scss.completion.completePropertyWithSemicolon": true,
   "scss.format.braceStyle": "collapse",
   "scss.format.enable": true,

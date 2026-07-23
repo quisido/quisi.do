@@ -10,6 +10,10 @@ export default async function importTestedDesignSystem(): Promise<DesignSystem> 
   }
 
   switch (VITE_TESTED_DESIGN_SYSTEM) {
+    case 'forest': {
+      return await import('../forest/index.js');
+    }
+
     case 'template': {
       return await import('../template/index.js');
     }
