@@ -4,6 +4,7 @@ import render, { type RenderTest } from './render.js';
 import noop from '../../utils/noop.js';
 import { within } from '@testing-library/react';
 import importTestedDesignSystem from './import-tested-design-system.js';
+import itShouldBeModal from './modal.test.jsx';
 
 const { AlertDialog } = await importTestedDesignSystem();
 
@@ -99,4 +100,14 @@ describe('AlertDialog', (): void => {
     });
     within(getByName('alertdialog', 'Container')).getByText('Alert message');
   });
+
+  itShouldBeModal(
+    <AlertDialog heading="Modal" onDismiss={noop}>
+      Content
+    </AlertDialog>,
+    {
+      getElement: ({ getByName }: RenderTest): HTMLElement =>
+        getByName('alertdialog', 'Modal'),
+    },
+  );
 });
