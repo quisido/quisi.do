@@ -1,7 +1,5 @@
 import removeDescribedBy from './remove-described-by.js';
 
-const EMPTY_ARRAY: readonly never[] = [];
-
 const toString = (set: ReadonlySet<string>): string => [...set].join(' ');
 
 export default function appendDescribedBy(
@@ -9,10 +7,14 @@ export default function appendDescribedBy(
   id: string,
 ): VoidFunction {
   const attr: string | null = element.getAttribute('aria-describedby');
-  const arr: readonly string[] = attr?.split(/\s+/u) ?? EMPTY_ARRAY;
-  const set: ReadonlySet<string> = new Set([...arr, id]);
-  const nextStr: string = toString(set);
-  element.setAttribute('aria-describedby', nextStr);
+  if (attr === null) {
+    element.setAttribute('aria-describedby', id);
+  } else {
+    const prevIdsArr: readonly string[] = attr.split(/\s+/u);
+    const prevIdsSet: ReadonlySet<string> = new Set([...prevIdsArr, id]);
+    const nextDescribedBy: string = toString(prevIdsSet);
+    element.setAttribute('aria-describedby', nextDescribedBy);
+  }
 
   return (): void => {
     removeDescribedBy(element, id);
