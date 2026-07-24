@@ -35,7 +35,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "@datadog/browser-rum": "^7.6.0",
+    "@datadog/browser-rum": "^7.6.1",
     "@datadog/datadog-api-client": "^1.60.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
