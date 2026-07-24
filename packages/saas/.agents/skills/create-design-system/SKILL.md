@@ -26,7 +26,9 @@ cp --no-clobber --one-file-system --preserve --recursive \
 
 ## Components
 
-For now, the alert dialog is the only component being implemented.
+### Alert
+
+TODO
 
 ### Alert Dialog
 
@@ -45,6 +47,254 @@ Use a subagent to implement the component:
   `src/design-systems/$SLUG/alert-dialog.module.scss` to match the image.
 - You may create image files for textures and shapes too difficult to create
   with pure CSS.
+
+### Application
+
+TODO
+
+### Article
+
+TODO
+
+### Banner
+
+TODO
+
+### Block quote
+
+TODO
+
+### Button
+
+TODO
+
+### Checkbox
+
+TODO
+
+### Code
+
+TODO
+
+### Combobox
+
+TODO
+
+### Comment
+
+TODO
+
+### Complementary
+
+TODO
+
+### Content info
+
+TODO
+
+### Definition
+
+TODO
+
+### Dialog
+
+TODO
+
+### Document
+
+TODO
+
+### Emphasis
+
+TODO
+
+### Feed
+
+TODO
+
+### Figure
+
+TODO
+
+### Form
+
+TODO
+
+### Grid
+
+TODO
+
+### Heading
+
+TODO
+
+### Image
+
+TODO
+
+### Link
+
+TODO
+
+### List
+
+TODO
+
+### List box
+
+TODO
+
+### Log
+
+TODO
+
+### Main
+
+TODO
+
+### Mark
+
+TODO
+
+### Marquee
+
+TODO
+
+### Math
+
+TODO
+
+### Menu
+
+TODO
+
+### Menu bar
+
+TODO
+
+### Meter
+
+TODO
+
+### Navigation
+
+TODO
+
+### Note
+
+TODO
+
+### Paragraph
+
+TODO
+
+### Progress bar
+
+TODO
+
+### Radio group
+
+TODO
+
+### Region
+
+TODO
+
+### Scrollbar
+
+TODO
+
+### Search
+
+TODO
+
+### Search box
+
+TODO
+
+### Separator
+
+TODO
+
+### Separator widget
+
+TODO
+
+### Slider
+
+TODO
+
+### Spin button
+
+TODO
+
+### Status
+
+TODO
+
+### Strong
+
+TODO
+
+### Subscript
+
+TODO
+
+### Suggestion
+
+TODO
+
+### Superscript
+
+TODO
+
+### Switch
+
+TODO
+
+### Table
+
+TODO
+
+### Tabs
+
+TODO
+
+### Turn
+
+TODO
+
+### Text box
+
+TODO
+
+### Time
+
+TODO
+
+### Timer
+
+TODO
+
+### Toggle button
+
+TODO
+
+### Toolbar
+
+TODO
+
+### Tooltip
+
+TODO
+
+### Tree
+
+TODO
+
+### Tree grid
+
+TODO
 
 ## Test
 
