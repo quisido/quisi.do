@@ -48,7 +48,7 @@
     "@vitest/browser-playwright": "^4.1.10",
     "autoprefixer": "^10.5.4",
     "jsdom": "^29.1.1",
-    "playwright": "^1.61.1",
+    "playwright": "^1.62.0",
     "postcss": "^8.5.22",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.3",
