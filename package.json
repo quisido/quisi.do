@@ -104,7 +104,7 @@
     "@vitest/ui": "^4.1.10",
     "browserslist": "^4.28.7",
     "chrome-devtools-mcp": "^1.6.0",
-    "concurrently": "^10.0.3",
+    "concurrently": "^10.0.4",
     "eslint": "^10.8.0",
     "hint": "^7.1.13",
     "puppeteer-core": "^25.3.0",
