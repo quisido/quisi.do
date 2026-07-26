@@ -1,5 +1,3 @@
-# Deterministic, Replayable Game Engine — Design Spec
-
 **Scope:** Full vision (local engine + server persistence + multiplayer rollback)
 captured as a forward-looking design. Implementation proceeds as a series of
 small, individually-planned increments — **not** one plan.
