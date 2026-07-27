@@ -78,7 +78,7 @@
     "concurrently": "^10.0.4",
     "dompurify": "^3.4.12",
     "hint": "^7.1.13",
-    "jsdom": "^29.1.1",
+    "jsdom": "^30.0.0",
     "lighthouse": "^13.4.1",
     "rimraf": "^6.1.0",
     "serve": "^14.2.5",
