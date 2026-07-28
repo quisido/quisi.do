@@ -49,7 +49,7 @@
     "autoprefixer": "^10.5.4",
     "jsdom": "^30.0.0",
     "playwright": "^1.62.0",
-    "postcss": "^8.5.22",
+    "postcss": "^8.5.24",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.3",
     "serve": "^14.2.6",
