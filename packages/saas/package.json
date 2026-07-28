@@ -148,7 +148,7 @@
     "lighthouse": "^13.4.1",
     "logrocket": "^12.1.1",
     "nyc": "^18.0.0",
-    "postcss": "^8.5.22",
+    "postcss": "^8.5.24",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",
     "sass": "^1.102.0",
