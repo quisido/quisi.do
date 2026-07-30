@@ -1,8 +1,7 @@
-import { describe, expect, it, vi } from 'vitest';
+import { assert, describe, expect, it, vi } from 'vitest';
 import type { AlertDialogProps } from '../core/alert-dialog-props.js';
 import render, { type RenderTest } from './render.js';
 import noop from '../../utils/noop.js';
-import { within } from '@testing-library/react';
 import importTestedDesignSystem from './import-tested-design-system.js';
 import itShouldBeModal from './modal.test.jsx';
 
@@ -10,12 +9,27 @@ const { AlertDialog } = await importTestedDesignSystem();
 
 const renderAlertDialog = (props: Partial<AlertDialogProps>): RenderTest =>
   render(
-    <AlertDialog heading="Heading" onDismiss={noop} {...props}>
-      {props.children ?? 'Content'}
-    </AlertDialog>,
+    <AlertDialog
+      children="Content"
+      heading="Heading"
+      onDismiss={noop}
+      {...props}
+    />,
   );
 
 describe('AlertDialog', (): void => {
+  it('should focus an element within itself', (): void => {
+    const { getByName } = renderAlertDialog({
+      children: 'Focus is set to an element within the alert dialog.',
+      heading: 'Focus',
+    });
+
+    const { activeElement } = window.document;
+    const alertDialog: HTMLElement = getByName('alertdialog', 'Focus');
+    assert(activeElement instanceof HTMLElement);
+    expect(alertDialog).toContainElement(activeElement);
+  });
+
   it('should be described', (): void => {
     const { getByDescription } = renderAlertDialog({
       children: 'Description',
@@ -98,7 +112,9 @@ describe('AlertDialog', (): void => {
       children: 'Alert message',
       heading: 'Container',
     });
-    within(getByName('alertdialog', 'Container')).getByText('Alert message');
+
+    const alertDialog: HTMLElement = getByName('alertdialog', 'Container');
+    expect(alertDialog).toContainHTML('Alert message');
   });
 
   itShouldBeModal(
