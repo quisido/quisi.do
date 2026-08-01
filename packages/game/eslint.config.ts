@@ -30,6 +30,13 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
           property: 'random',
         },
       ],
+      'no-restricted-syntax': [
+        'error',
+        {
+          message: 'Use deterministic engine math.',
+          selector: "BinaryExpression[operator='**']",
+        },
+      ],
     },
   },
 );
