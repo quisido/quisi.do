@@ -66,7 +66,7 @@ export default class QuisidoPageObject {
   }
 
   public getButton(name: string): Locator {
-    return this.#page.getByRole('article', { exact: true, name });
+    return this.#page.getByRole('button', { exact: true, name });
   }
 
   public getCheckbox(name: string): Locator {
