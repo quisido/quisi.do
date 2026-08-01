@@ -4,6 +4,7 @@ import render, { type RenderTest } from './render.js';
 import noop from '../../utils/noop.js';
 import importTestedDesignSystem from './import-tested-design-system.js';
 import itShouldBeModal from './modal.test.jsx';
+import { within } from '@testing-library/dom';
 
 const { AlertDialog } = await importTestedDesignSystem();
 
@@ -114,7 +115,7 @@ describe('AlertDialog', (): void => {
     });
 
     const alertDialog: HTMLElement = getByName('alertdialog', 'Container');
-    expect(alertDialog).toContainHTML('Alert message');
+    within(alertDialog).getByText('Alert message');
   });
 
   itShouldBeModal(

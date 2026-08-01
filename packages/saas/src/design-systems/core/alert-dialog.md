@@ -8,9 +8,10 @@ Alert dialogs are used to convey messages to alert the user.
 
 As a modal element, the alert dialog's precludes usage of other content on the
 page. It is expected that the user's interaction is limited to the contents of
-the alert dialog, until the dialog loses focus or is no longer displayed.
+the alert dialog, until the dialog loses focus (e.g. programmatically) or is no
+longer displayed.
 
-An alert dialog is a special type of dialog that is inteded to cause an
+An alert dialog is a special type of dialog that is intended to cause an
 immediate, alert-level notification.
 
 Unlike an alert, an alert dialog can receive a response from the user. For

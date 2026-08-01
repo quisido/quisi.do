@@ -11,7 +11,7 @@ describe('VS Code workspace', (): void => {
     it.each(settingsEntries)(
       'should match the VS Code root directory "%s" setting',
       (key: string, value: unknown): void => {
-        expect(vsCodeSettings).toHaveProperty(key, value);
+        expect(vsCodeSettings).toHaveProperty([key], value);
       },
     );
   });
