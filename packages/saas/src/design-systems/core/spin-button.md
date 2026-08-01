@@ -1,7 +1,5 @@
 # Spin button
 
-TODO
+TODO[^1].
 
-## References
-
-- [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `spinbutton` role](https://w3c.github.io/aria/#spinbutton)
+[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `spinbutton` role](https://w3c.github.io/aria/#spinbutton)
