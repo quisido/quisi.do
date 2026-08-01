@@ -1,7 +1,5 @@
 # Math
 
-TODO
+TODO[^1].
 
-## References
-
-- [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `math` role](https://w3c.github.io/aria/#math)
+[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `math` role](https://w3c.github.io/aria/#math)

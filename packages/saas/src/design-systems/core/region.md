@@ -1,7 +1,5 @@
 # Region
 
-TODO
+TODO[^1].
 
-## References
-
-- [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `region` role](https://w3c.github.io/aria/#region)
+[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `region` role](https://w3c.github.io/aria/#region)

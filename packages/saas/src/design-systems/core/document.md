@@ -1,7 +1,5 @@
 # Document
 
-TODO
+TODO[^1].
 
-## References
-
-- [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `document` role](https://w3c.github.io/aria/#document)
+[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `document` role](https://w3c.github.io/aria/#document)

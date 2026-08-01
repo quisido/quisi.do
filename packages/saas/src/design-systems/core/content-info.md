@@ -1,7 +1,5 @@
 # Content info
 
-TODO
+TODO[^1].
 
-## References
-
-- [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `contentinfo` role](https://w3c.github.io/aria/#contentinfo)
+[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `contentinfo` role](https://w3c.github.io/aria/#contentinfo)
