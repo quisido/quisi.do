@@ -1,5 +1,6 @@
 # Combobox
 
-TODO[^1].
+TODO
 
-[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `combobox` role](https://w3c.github.io/aria/#combobox)
+[^1]: https://w3c.github.io/aria/#combobox
+[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/

@@ -1,5 +1,5 @@
 # Status
 
-TODO[^1].
+TODO
 
-[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `status` role](https://w3c.github.io/aria/#status)
+[^1]: https://w3c.github.io/aria/#status

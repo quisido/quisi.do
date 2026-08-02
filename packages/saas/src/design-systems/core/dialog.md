@@ -1,5 +1,6 @@
 # Dialog
 
-TODO[^1].
+TODO
 
-[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `dialog` role](https://w3c.github.io/aria/#dialog)
+[^1]: https://w3c.github.io/aria/#dialog
+[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
