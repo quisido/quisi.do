@@ -23,4 +23,6 @@ and test suite.
 
 ## Sources
 
-- [WAI ARIA role definitions](https://w3c.github.io/aria/#role_definitions)
+- [Accessible Rich Internet Applications (WAI-ARIA) 1.3 role definitions](https://w3c.github.io/aria/#role_definitions)
+- [ARIA Authoring Practices Guide (APG)](https://www.w3.org/WAI/ARIA/apg/)
+- [Assistive Technology Interoperability Reports](https://aria-at.w3.org/reports)
