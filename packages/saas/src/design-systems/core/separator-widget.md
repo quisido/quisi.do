@@ -1,5 +1,7 @@
 # Separator widget
 
-TODO[^1].
+TODO
 
-[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `separator` role](https://w3c.github.io/aria/#separator)
+[^1]: https://w3c.github.io/aria/#separator
+[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
+[^3]: https://www.w3.org/WAI/ARIA/apg/practices/range-related-properties/

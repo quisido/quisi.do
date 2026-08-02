@@ -1,5 +1,6 @@
 # Complementary
 
-TODO[^1].
+TODO
 
-[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `complementary` role](https://w3c.github.io/aria/#complementary)
+[^1]: https://w3c.github.io/aria/#complementary
+[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/complementary.html

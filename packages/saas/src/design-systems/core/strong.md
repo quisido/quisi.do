@@ -8,4 +8,4 @@ would change the meaning of the content[^1].
 Strong content is not intended to convey stress or emphasis; for that purpose,
 Emphasis component is more appropriate.[^1].
 
-[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `strong` role](https://w3c.github.io/aria/#strong)
+[^1]: https://w3c.github.io/aria/#strong
