@@ -1,5 +1,7 @@
 # Menu bar
 
-TODO[^1].
+TODO
 
-[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `menubar` role](https://w3c.github.io/aria/#menubar)
+[^1]: https://w3c.github.io/aria/#menubar
+[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/
+[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/menubar/

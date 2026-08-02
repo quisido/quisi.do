@@ -16,6 +16,11 @@ immediate, alert-level notification[^1].
 Unlike an alert, an alert dialog can receive a response from the user. For
 example, to confirm that the user understands the alert being generated[^1].
 
+An alert dialog is a modal dialog that interrupts the user's workflow to
+communicate an important message and acquire a response. Examples include action
+confirmation prompts and error message confirmations[^2].
+
 See related [alert](./alert.md) and [dialog](./dialog.md).
 
-[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `alertdialog` role](https://w3c.github.io/aria/#alertdialog)
+[^1]: https://w3c.github.io/aria/#alertdialog
+[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/

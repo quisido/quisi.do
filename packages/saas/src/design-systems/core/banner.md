@@ -1,5 +1,6 @@
 # Banner
 
-TODO[^1].
+TODO
 
-[^1]: [Accessible Rich Internet Applications (WAI-ARIA) 1.3 `banner` role](https://w3c.github.io/aria/#banner)
+[^1]: https://w3c.github.io/aria/#banner
+[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/banner.html
