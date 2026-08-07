@@ -42,6 +42,7 @@ const PROPS: Required<
   allowUntrustedEvents: true,
   applicationId: APPLICATION_ID,
   betaEnableViewUpdates: false,
+  betaTrackWebSockets: false,
   clientToken: CLIENT_TOKEN,
   compressIntakeRequests: true,
   defaultPrivacyLevel: 'mask-user-input',
