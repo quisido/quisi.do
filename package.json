@@ -107,7 +107,7 @@
     "concurrently": "^10.0.4",
     "eslint": "^10.8.0",
     "hint": "^7.1.13",
-    "puppeteer-core": "^25.4.0",
+    "puppeteer-core": "^25.5.0",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
