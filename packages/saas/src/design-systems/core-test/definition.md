@@ -1,1 +1,2 @@
-- TODO
+- It has a `definition` role.
+- It defines an element that has the role `term`.
