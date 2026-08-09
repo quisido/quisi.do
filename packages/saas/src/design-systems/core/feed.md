@@ -107,7 +107,5 @@ article that provide the title and the primary content, assistive technologies
 can provide functions that enable users to jump from article to article and
 efficiently discern which articles may be worthy of more attention[^2].
 
-
-
 [^1]: https://w3c.github.io/aria/#feed
 [^2]: https://www.w3.org/WAI/ARIA/apg/patterns/feed/
