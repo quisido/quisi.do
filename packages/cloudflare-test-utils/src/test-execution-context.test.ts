@@ -14,4 +14,22 @@ describe('TEST_EXECUTION_CONTEXT', (): void => {
 
     expect(result).toBe('result');
   });
+
+  it('should start spans with the test span', (): void => {
+    const span: Span = TEST_EXECUTION_CONTEXT.tracing.startSpan('test');
+
+    expect(span).toBe(TEST_SPAN);
+  });
+
+  it('should set attributes on the test span', (): void => {
+    const setAttributeResult: Span = TEST_SPAN.setAttribute('key', 'value');
+    const setAttributesResult: Span = TEST_SPAN.setAttributes({
+      key: 'value',
+    });
+
+    expect(setAttributeResult).toBe(TEST_SPAN);
+    expect(setAttributesResult).toBe(TEST_SPAN);
+    expect(TEST_SPAN.setAttribute).toHaveBeenCalledWith('key', 'value');
+    expect(TEST_SPAN.setAttributes).toHaveBeenCalledWith({ key: 'value' });
+  });
 });

@@ -7,7 +7,8 @@ export const TEST_SPAN: Span = {
   get isTraced(): boolean {
     return false;
   },
-  setAttribute: vi.fn(),
+  setAttribute: vi.fn((): Span => TEST_SPAN),
+  setAttributes: vi.fn((): Span => TEST_SPAN),
 };
 export const TEST_SPAN_CONSTRUCTOR: typeof Span = vi.fn();
 export const TEST_TRACING: Tracing = {
@@ -22,6 +23,7 @@ export const TEST_TRACING: Tracing = {
     callback: (span: Span, ...args: A) => T,
     ...args: A
   ): T => callback(TEST_SPAN, ...args),
+  startSpan: (_name: string): Span => TEST_SPAN,
 };
 export const TEST_WAIT_UNTIL: Mock = vi.fn();
 
