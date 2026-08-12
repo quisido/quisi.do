@@ -35,6 +35,7 @@ const TEST_SPAN: Span = {
     return false;
   },
   setAttribute: vi.fn(),
+  setAttributes: vi.fn(),
 };
 const TEST_SPAN_CONSTRUCTOR: typeof Span = vi.fn();
 const TEST_TRACING: Tracing = {
@@ -49,6 +50,7 @@ const TEST_TRACING: Tracing = {
     callback: (span: Span, ...args: A) => T,
     ...args: A
   ): T => callback(TEST_SPAN, ...args),
+  startSpan: (_name: string): Span => TEST_SPAN,
 };
 
 export default class TestExportedHandler {
@@ -139,6 +141,7 @@ export default class TestExportedHandler {
     const promises: Promise<void>[] = [];
 
     const response: Response = await fetch(request, this.#env, {
+      abort: vi.fn(),
       exports: {},
       passThroughOnException: TEST_PASS_THROUGH_ON_EXCEPTION,
       props: null,

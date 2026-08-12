@@ -2,6 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { TEST_EXECUTION_CONTEXT, TEST_SPAN } from './test-execution-context.js';
 
 describe('TEST_EXECUTION_CONTEXT', (): void => {
+  it('should start with the test span', (): void => {
+    expect(TEST_EXECUTION_CONTEXT.tracing.startSpan('test')).toBe(TEST_SPAN);
+  });
+
   it('should enter spans with the test span', (): void => {
     const result = TEST_EXECUTION_CONTEXT.tracing.enterSpan(
       'test',
