@@ -103,7 +103,7 @@
     "@types/node": "^26.2.0",
     "@vitest/ui": "^4.1.10",
     "browserslist": "^4.28.8",
-    "chrome-devtools-mcp": "^1.6.0",
+    "chrome-devtools-mcp": "^1.7.0",
     "concurrently": "^10.0.4",
     "eslint": "^10.8.1",
     "hint": "^7.1.13",
