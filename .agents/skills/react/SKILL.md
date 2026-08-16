@@ -1,11 +1,12 @@
 ---
 name: react
-description: "Code guidelines for TSX files. Use when editing or reviewing `.tsx` files, i.e. TypeScript React components."
+description: "Use these React guidelines when editing or reviewing `.tsx` files, i.e. TypeScript React components."
 license: MIT
 user-invocable: false
 metadata:
   author: quisi.do
 ---
+
 # React guidelines
 
 ## Conventions
