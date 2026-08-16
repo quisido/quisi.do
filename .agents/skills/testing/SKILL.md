@@ -1,11 +1,12 @@
 ---
 name: testing
-description: "Code guidelines for JavaScript/TypeScript end-to-end, integration, and unit tests. Use when authoring or reviewing `**/*.test.ts` and `**/*.test.tsx` files, e.g. Playwright, Vitest."
+description: "Use these testing guidelines when authoring or reviewing end-to-end, integration, or unit tests (`**/*.test.ts`, `**/*.test.tsx`), e.g. Playwright, Vitest."
 license: MIT
 user-invocable: false
 metadata:
   author: quisi.do
 ---
+
 # Testing guidelines
 
 ## Conventions
