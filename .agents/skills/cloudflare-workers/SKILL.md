@@ -1,6 +1,6 @@
 ---
 name: cloudflare-workers
-description: "Code guidelines for Cloudflare Worker implementations. Use when editing, reviewing, or executing a Cloudflare Worker; e.g. D1 queries, handlers, Wrangler commands, and Wrangler configurations."
+description: "Use these Cloudflare Worker guidelines when editing, reviewing, or executing a Cloudflare Worker; e.g. D1 queries, handlers, Wrangler commands, and Wrangler configurations."
 license: MIT
 user-invocable: false
 metadata:
