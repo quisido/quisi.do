@@ -1,9 +1,9 @@
 /// <reference types="bun-types" />
+import type { Subprocess } from 'bun';
 import { join } from 'node:path';
 import cloneTemplate from './clone-template.js';
 import { type Component, COMPONENTS } from './components.js';
 import { type Model, MODEL_OPTIONS } from './models.js';
-import type { Subprocess } from 'bun';
 
 interface Options {
   readonly description: string;
@@ -13,6 +13,15 @@ interface Options {
   readonly slug: string;
 }
 
+const WRITE_DIRECTORIES: readonly string[] = [
+  join(import.meta.dir, '..', '..', '..', '..', 'node_modules', '.vite'),
+  join(import.meta.dir, '..', '..', '..', '..', 'node_modules', '.vite-temp'),
+  join(import.meta.dir, '..', '..', '.cache'),
+  join(import.meta.dir, '..', '..', '.tests'),
+  join(import.meta.dir, '..', '..', 'node_modules', '.vite'),
+  join(import.meta.dir, '..', '..', 'node_modules', '.vite-temp'),
+];
+
 export default async function createDesignSystem({
   description: designSystemDescription,
   designSystemsDir,
@@ -20,7 +29,7 @@ export default async function createDesignSystem({
   screenshotPath: designSystemScreenshotPath,
   slug: designSystemSlug,
 }: Options): Promise<void> {
-  const { command, parallel } = MODEL_OPTIONS[model];
+  const { command, format, parallel } = MODEL_OPTIONS[model];
 
   const designSystemDir: string = await cloneTemplate({
     dir: designSystemsDir,
@@ -31,10 +40,18 @@ export default async function createDesignSystem({
     join(import.meta.dir, 'PROMPT.md'),
   ).text();
 
+  let begin = false;
   const toSubprocess = async ({
     descriptionFile: componentDescriptionFile,
     slug: componentSlug,
   }: Component): Promise<void> => {
+    if (componentSlug === 'link') {
+      begin = true;
+    }
+    if (!begin) {
+      return;
+    }
+
     const componentDescriptionPath: string = join(
       designSystemsDir,
       componentDescriptionFile,
@@ -76,12 +93,42 @@ Implement the JSX and SCSS to match the image variant.
           : '',
       );
 
-    const execution: Subprocess<'inherit', 'inherit', 'pipe'> = Bun.spawn(
-      [...command({ directory: designSystemDir, prompt })],
-      { stderr: 'pipe', stdin: 'inherit', stdout: 'inherit' },
+    // eslint-disable-next-line no-console
+    console.log(`---------- Generating component: ${componentSlug} ----------`);
+
+    const execution: Subprocess<'pipe', 'pipe', 'pipe'> = Bun.spawn(
+      [
+        ...command({
+          workingDirectory: designSystemDir,
+          writeDirectories: WRITE_DIRECTORIES,
+        }),
+      ],
+      { stderr: 'pipe', stdin: 'pipe', stdout: 'pipe' },
     );
 
+    await execution.stdin.write(prompt);
+    await execution.stdin.end();
+
+    let newLine: boolean = false;
+    for await (const chunk of execution.stdout) {
+      const stdOut: string = new TextDecoder().decode(chunk);
+      const text: string | undefined = format(stdOut);
+      if (text === undefined) {
+        continue;
+      }
+
+      // Skip new lines if we're already on one.
+      if (newLine && text.startsWith('\n')) {
+        await Bun.write(Bun.stdout, text.slice(1));
+      } else {
+        await Bun.write(Bun.stdout, text);
+      }
+
+      newLine = text.endsWith('\n');
+    }
+
     const exitCode: number = await execution.exited;
+    await Bun.write(Bun.stdout, '\n');
     if (exitCode === 0) {
       return;
     }
