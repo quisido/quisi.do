@@ -1,48 +1,92 @@
+import { type Subprocess } from 'bun';
 import cloneTemplate from './clone-template.js';
 import { type Component, COMPONENTS } from './components.js';
-import type { ModelOptions } from './models.js';
+import { type Model, MODEL_OPTIONS } from './models.js';
 
 interface Options {
   readonly description: string;
-  readonly modelOptions: ModelOptions;
+  readonly designSystemsDir: string;
+  readonly model: Model;
   readonly screenshotPath?: string | undefined;
   readonly slug: string;
 }
 
 export default async function createDesignSystem({
   description: designSystemDescription,
-  modelOptions: { parallel },
-  screenshotPath,
+  designSystemsDir,
+  model,
+  screenshotPath: designSystemScreenshotPath,
   slug: designSystemSlug,
 }: Options): Promise<void> {
-  await cloneTemplate(designSystemSlug);
+  const { command, parallel } = MODEL_OPTIONS[model];
+
+  const designSystemDir: string = await cloneTemplate({
+    dir: designSystemsDir,
+    slug: designSystemSlug,
+  });
+
+  const promptTemplate: string = await Bun.file(
+    await Bun.resolve('PROMPT.md', import.meta.dir),
+  ).text();
 
   const toSubprocess = async ({
-    instructions,
+    descriptionFile: componentDescriptionFile,
     slug: componentSlug,
   }: Component): Promise<void> => {
-    const prompt = `Create a design system named "${designSystemSlug}".
+    const componentDescriptionPath: string = await Bun.resolve(
+      componentDescriptionFile,
+      designSystemsDir,
+    );
 
-    Description: ${designSystemDescription}
+    // Replaces a relative [link](./path/) with an absolute [link](/to/path/).
+    const toAbsoluteLink = (_: string, name: string, path: string): string =>
+      `[${name}](${Bun.resolveSync(path, componentDescriptionPath)})`;
 
-    Component slug: ${componentSlug}
-    Component instructions: ${instructions}
+    const componentDescription: string = (
+      await Bun.file(componentDescriptionPath).text()
+    ).replaceAll(/\[(?<name>[^\]]+)\]\((?<path>[^)]+)\)/gu, toAbsoluteLink);
 
-    Screenshot: ${screenshotPath}`;
+    const componentScreenshotPath: string = await Bun.resolve(
+      `${componentSlug}.png`,
+      designSystemDir,
+    );
 
-    const codex: Bun.Subprocess<'inherit', 'inherit', 'pipe'> = Bun.spawn(
-      ['codex', 'exec', '--ephemeral', prompt],
+    const prompt: string = promptTemplate
+      .replaceAll('$_COMPONENT_DESCRIPTION_$', componentDescription)
+      .replaceAll('$_COMPONENT_SLUG_$', componentSlug)
+      .replaceAll(
+        '$_DESIGN_SYSTEM_DESCRIPTION_$',
+        designSystemDescription +
+          (designSystemScreenshotPath === undefined
+            ? ''
+            : ` The screenshot \`${designSystemScreenshotPath}\` can be used for inspiration.`),
+      )
+      .replaceAll('$_DESIGN_SYSTEM_DIRECTORY_$', designSystemDir)
+      .replaceAll('$_DESIGN_SYSTEM_SLUG_$', designSystemSlug)
+      .replaceAll(
+        '$_INSTRUCTIONS_$',
+        (await Bun.file(componentScreenshotPath).exists())
+          ? `
+Use the design system's description to **replace** the placeholder example
+screenshot located at \`${componentScreenshotPath}\` with an artistic variation.
+Implement the JSX and SCSS to match the image variant.
+`
+          : '',
+      );
+
+    const execution: Subprocess<'inherit', 'inherit', 'pipe'> = Bun.spawn(
+      [...command({ directory: designSystemDir, prompt })],
       { stderr: 'pipe', stdin: 'inherit', stdout: 'inherit' },
     );
 
-    const exitCode: number = await codex.exited;
+    const exitCode: number = await execution.exited;
     if (exitCode === 0) {
       return;
     }
 
-    const stdErr: string = await new Response(codex.stderr).text();
+    const stdErr: string = await new Response(execution.stderr).text();
     throw new Error(
-      `[Error #${exitCode}] Failed to generate component: ${componentSlug}\n${stdErr}`,
+      `[Code ${exitCode}] Failed to generate component: ${componentSlug}\n${stdErr}`,
     );
   };
 
