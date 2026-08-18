@@ -1,4 +1,5 @@
 /// <reference types="bun-types" />
+import { join } from 'node:path';
 import createDesignSystem from './create-design-system/index.js';
 import { isModel } from './create-design-system/models.js';
 
@@ -31,10 +32,7 @@ if (!isModel(model)) {
 
 await createDesignSystem({
   description,
-  designSystemsDir: await Bun.resolve(
-    RELATIVE_DESIGN_SYSTEMS_DIR,
-    import.meta.dir,
-  ),
+  designSystemsDir: join(import.meta.dir, RELATIVE_DESIGN_SYSTEMS_DIR),
   model,
   screenshotPath,
   slug: designSystemSlug,
