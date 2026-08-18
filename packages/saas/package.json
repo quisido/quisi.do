@@ -131,7 +131,7 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "babel-plugin-replace-import-extension": "^1.1.5",
     "cjs-ts": "^2.0.1",
-    "concurrently": "^10.0.4",
+    "concurrently": "^10.0.5",
     "console-table-printer": "^2.16.1",
     "dd-trace": "^6.10.0",
     "dotenv": "^17.4.2",
