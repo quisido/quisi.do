@@ -1,15 +1,26 @@
 /// <reference types="bun-types" />
+import { type Subprocess } from 'bun';
 
-export default async function cloneTemplate(slug: string): Promise<void> {
-  const cp: Bun.Subprocess = Bun.spawn(
+interface Options {
+  readonly dir: string;
+  readonly slug: string;
+}
+
+export default async function cloneTemplate({
+  dir,
+  slug,
+}: Options): Promise<string> {
+  const newDir: string = await Bun.resolve(slug, dir);
+
+  const cp: Subprocess = Bun.spawn(
     [
       'cp',
       '--no-clobber',
       '--one-file-system',
       '--preserve',
       '--recursive',
-      './src/design-systems/template/.',
-      `./src/design-systems/${slug}/`,
+      await Bun.resolve('template/.', dir),
+      newDir,
     ],
     {
       stderr: 'inherit',
@@ -24,4 +35,6 @@ export default async function cloneTemplate(slug: string): Promise<void> {
       cause: exitCode,
     });
   }
+
+  return newDir;
 }

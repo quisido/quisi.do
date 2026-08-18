@@ -53,7 +53,6 @@
     "typescriptreact",
     "yaml"
   ],
-  "eslint.useFlatConfig": true,
   "eslint.validate": [
     "html",
     "javascript",

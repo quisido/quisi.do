@@ -9,16 +9,17 @@ export default async function importTestedDesignSystem(): Promise<DesignSystem> 
     );
   }
 
-  switch (VITE_TESTED_DESIGN_SYSTEM) {
-    case 'forest': {
-      return await import('../forest/index.js');
-    }
-
-    case 'template': {
-      return await import('../template/index.js');
-    }
-
-    default:
-      throw new Error(`Unknown design system: ${VITE_TESTED_DESIGN_SYSTEM}`);
+  if (
+    VITE_TESTED_DESIGN_SYSTEM.includes('.') ||
+    VITE_TESTED_DESIGN_SYSTEM.includes('/') ||
+    VITE_TESTED_DESIGN_SYSTEM.includes('\\')
+  ) {
+    throw new Error('Invalid VITE_TESTED_DESIGN_SYSTEM environment variable.', {
+      cause: VITE_TESTED_DESIGN_SYSTEM,
+    });
   }
+
+  return (await import(
+    `../${VITE_TESTED_DESIGN_SYSTEM}/index.js`
+  )) as DesignSystem;
 }
