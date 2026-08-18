@@ -45,15 +45,19 @@ Test the component for behavioral accuracy, feature completeness, and
 accessibility compliance by executing:
 
 ```bash
-VITE_TESTED_DESIGN_SYSTEM=$_DESIGN_SYSTEM_SLUG_$ npx vitest run src/design-systems/core-test/$_COMPONENT_SLUG_$.test.tsx
+VITE_TESTED_DESIGN_SYSTEM=$_DESIGN_SYSTEM_SLUG_$ npx vitest run \
+  src/design-systems/core-test/$_COMPONENT_SLUG_$.test.tsx
 ```
 
 If the test suite is failing, adjust your implementation until it passes.
 
 ## Constraints
 
+- You may **only** modify files in the `$_DESIGN_SYSTEM_DIRECTORY_$/` directory.
+  You **do not** have write access to other directories, including the workspace
+  root, package root, `src/design-systems/core/`, and
+  `src/design-systems/core-test/` directories.
 - **DO NOT** install any new dependencies.
 - **DO NOT** make this component look like a standard implementation; it should
   not look like an HTML element.
-- **DO NOT** edit any files outside of the design system's directory,
-  `$_DESIGN_SYSTEM_DIRECTORY_$/`.
+- Use `npx.cmd` instead of `npx.ps1`.

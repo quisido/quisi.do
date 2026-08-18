@@ -1,9 +1,12 @@
 ---
 name: create-design-system
-description: Use this skill to create a new design system.
+description: Use this skill to create every component in a design system. Do not use it for single components.
 ---
 
 # Instructions for creating a design system
+
+This skill is for creating every component in a design system.
+**Do not use this skill to create only a single component.**
 
 Before getting started, you need to know:
 - The "slug" for the design system. It should be short, alphanumeric, lowercase,
