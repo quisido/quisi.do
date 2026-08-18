@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import type { DesignSystem } from '../core/index.js';
 
 export default async function importTestedDesignSystem(): Promise<DesignSystem> {
@@ -19,7 +20,18 @@ export default async function importTestedDesignSystem(): Promise<DesignSystem> 
     });
   }
 
-  return (await import(
-    `../${VITE_TESTED_DESIGN_SYSTEM}/index.js`
-  )) as DesignSystem;
+  const modules: Record<string, () => Promise<unknown>> = import.meta.glob(
+    '../*/index.ts',
+  );
+
+  const designSystemModule: (() => Promise<unknown>) | undefined =
+    modules[`../${VITE_TESTED_DESIGN_SYSTEM}/index.ts`];
+
+  if (designSystemModule === undefined) {
+    throw new Error(`Design system not found: ${VITE_TESTED_DESIGN_SYSTEM}`, {
+      cause: modules,
+    });
+  }
+
+  return (await designSystemModule()) as DesignSystem;
 }

@@ -20,7 +20,7 @@ export default async function cloneTemplate({
       '--one-file-system',
       '--preserve',
       '--recursive',
-      join(dir, 'template/.'),
+      `${join(dir, 'template')}/.`,
       newDir,
     ],
     {
