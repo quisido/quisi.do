@@ -16,7 +16,7 @@ A template for this component's JSX and SCSS is ready to be modified at
 `$_DESIGN_SYSTEM_DIRECTORY_$/$_COMPONENT_SLUG_$.tsx` and
 `$_DESIGN_SYSTEM_DIRECTORY_$/$_COMPONENT_SLUG_$.module.scss`.
 
-$INSTRUCTIONS$
+$_INSTRUCTIONS_$
 
 You may create new files to organize your code. You may alter the component's
 JSX and CSS in _any way_ to achieve your goal. For example:
