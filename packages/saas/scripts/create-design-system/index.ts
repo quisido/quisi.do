@@ -1,7 +1,9 @@
-import { type Subprocess } from 'bun';
+/// <reference types="bun-types" />
+import { join } from 'node:path';
 import cloneTemplate from './clone-template.js';
 import { type Component, COMPONENTS } from './components.js';
 import { type Model, MODEL_OPTIONS } from './models.js';
+import type { Subprocess } from 'bun';
 
 interface Options {
   readonly description: string;
@@ -26,29 +28,29 @@ export default async function createDesignSystem({
   });
 
   const promptTemplate: string = await Bun.file(
-    await Bun.resolve('PROMPT.md', import.meta.dir),
+    join(import.meta.dir, 'PROMPT.md'),
   ).text();
 
   const toSubprocess = async ({
     descriptionFile: componentDescriptionFile,
     slug: componentSlug,
   }: Component): Promise<void> => {
-    const componentDescriptionPath: string = await Bun.resolve(
-      componentDescriptionFile,
+    const componentDescriptionPath: string = join(
       designSystemsDir,
+      componentDescriptionFile,
     );
 
     // Replaces a relative [link](./path/) with an absolute [link](/to/path/).
     const toAbsoluteLink = (_: string, name: string, path: string): string =>
-      `[${name}](${Bun.resolveSync(path, componentDescriptionPath)})`;
+      `[${name}](${join(componentDescriptionPath, path)})`;
 
     const componentDescription: string = (
       await Bun.file(componentDescriptionPath).text()
     ).replaceAll(/\[(?<name>[^\]]+)\]\((?<path>[^)]+)\)/gu, toAbsoluteLink);
 
-    const componentScreenshotPath: string = await Bun.resolve(
-      `${componentSlug}.png`,
+    const componentScreenshotPath: string = join(
       designSystemDir,
+      `${componentSlug}.png`,
     );
 
     const prompt: string = promptTemplate

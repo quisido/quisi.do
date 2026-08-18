@@ -1,5 +1,6 @@
 /// <reference types="bun-types" />
 import { type Subprocess } from 'bun';
+import { join } from 'node:path';
 
 interface Options {
   readonly dir: string;
@@ -10,7 +11,7 @@ export default async function cloneTemplate({
   dir,
   slug,
 }: Options): Promise<string> {
-  const newDir: string = await Bun.resolve(slug, dir);
+  const newDir: string = join(dir, slug);
 
   const cp: Subprocess = Bun.spawn(
     [
@@ -19,7 +20,7 @@ export default async function cloneTemplate({
       '--one-file-system',
       '--preserve',
       '--recursive',
-      await Bun.resolve('template/.', dir),
+      join(dir, 'template/.'),
       newDir,
     ],
     {
