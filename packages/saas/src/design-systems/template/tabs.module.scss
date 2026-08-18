@@ -3,7 +3,6 @@
   flex-direction: column;
 }
 
-// A tab is a widget. Visually enclose it.
 .tab {
   display: inline-block;
 
@@ -15,17 +14,11 @@
   }
 }
 
-/**
- * The tab list represents a canvas. Instead of a visual enclosure (border),
- * use a subtle decorative accent and/or the Gestalt principle of proximity
- * (negative space) to segregate it from other content.
- */
 .tab-list {
   display: flex;
   flex-direction: row;
 }
 
-// A tab panel is floating. Visually enclose it.
 .tab-panel {
   border-color: black;
   border-style: solid;
