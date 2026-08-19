@@ -9,7 +9,7 @@ import {
   Main,
   Paragraph,
   Region,
-} from '../design-systems/template/index.js';
+} from '../components/design-system.js';
 import Page from './page.js';
 
 export default function DesignSystemDemo(): ReactElement {
