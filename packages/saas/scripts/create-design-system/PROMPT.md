@@ -60,4 +60,3 @@ If the test suite is failing, adjust your implementation until it passes.
 - **DO NOT** install any new dependencies.
 - **DO NOT** make this component look like a standard implementation; it should
   not look like an HTML element.
-- Use `npx.cmd` instead of `npx.ps1`.
