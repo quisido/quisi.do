@@ -1,6 +1,27 @@
-- The combobox is in the page `Tab` sequence[^1].
-- The popup indicator icon or button (if present), the popup, and the popup
-  descendants are excluded from the page `Tab` sequence[^1].
+- The combobox exposes a named, editable `combobox` value with list
+  autocomplete[^1][^2].
+- The combobox is in the page `Tab` sequence. Its popup, popup options, and
+  separate popup-control button are excluded from that sequence[^1].
+- `aria-expanded` is `true` exactly while the popup is visible, and
+  `aria-controls` identifies the controlled `listbox` popup[^1][^2].
+- Only matching suggestions are exposed as `option` descendants while the
+  popup is expanded[^1].
+- `Down Arrow` and `Up Arrow` open the popup and activate the first and last
+  matching options, respectively[^1].
+- Pointer and arrow-key navigation identify the active option with
+  `aria-activedescendant` while DOM focus remains on the combobox[^1][^2].
+- Pointer activation selects an option, and `Tab` commits the active option
+  before moving focus away[^1].
+- Typing filters suggestions and exposes inline completion through the input
+  value; unmatched input remains available without exposing an empty
+  popup[^1].
+- `Escape` closes the popup and restores the previously committed value[^1].
+- A separate popup-control button toggles the popup without changing the
+  current value[^1].
+- Controlled value changes remain synchronized with the displayed input
+  value[^2].
+- Disabled and read-only comboboxes expose their state and do not open their
+  popup in response to editing interaction[^2].
 - When focus is in the combobox[^1]:
   - If the popup is available, `Down Arrow` moves focus into the popup:
     - If the autocomplete behavior automatically selected a suggestion before
@@ -118,8 +139,6 @@
   - Horizontal key navigation may wrap from one row to another.
   - Vertical arrow key navigation does not wrap from one column to another.
 
-- TODO: Tree Popup Keyboard Interaction: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
-- TODO: Dialog Popup Keyboard Interaction: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
-- TODO: WAI-ARIA Roles, States, and Properties: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
-
 [^1]: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
+
+[^2]: https://w3c.github.io/aria/#combobox

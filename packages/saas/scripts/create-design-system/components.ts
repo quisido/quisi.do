@@ -11,9 +11,14 @@ const canvas = (slug: string): Component => ({
   slug,
 });
 
-const floating = (slug: string): Component => ({
+const floating = (
+  slug: string,
+  instructions?: string | undefined,
+): Component => ({
   descriptionFile: `core/${slug}.md`,
-  instructions: 'This element is floating. Visually enclose it.',
+  instructions: `This element is floating. Visually enclose it.${
+    instructions ? ` ${instructions}` : ''
+  }`,
   slug,
 });
 
@@ -32,7 +37,10 @@ const widget = (slug: string): Component => ({
 
 export const COMPONENTS: Component[] = [
   floating('alert'),
-  floating('alert-dialog'),
+  floating(
+    'alert-dialog',
+    'This element should be floating in the middle of the screen; it should not cover the entire screen. Obscure the content outside of the modal.',
+  ),
   canvas('application'),
   canvas('article'),
   {
@@ -65,7 +73,10 @@ export const COMPONENTS: Component[] = [
     slug: 'content-info',
   },
   ink('definition'),
-  floating('dialog'),
+  floating(
+    'dialog',
+    'This element should be floating in the middle of the screen; it should not cover the entire screen. Obscure the content outside of the modal.',
+  ),
   canvas('document'),
   ink('emphasis'),
   canvas('feed'),

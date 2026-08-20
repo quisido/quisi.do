@@ -2,6 +2,7 @@ import render from './render.js';
 import { describe, expect, it, vi } from 'vitest';
 import importTestedDesignSystem from './import-tested-design-system.js';
 import { waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 const { Feed } = await importTestedDesignSystem();
 
@@ -312,6 +313,42 @@ describe('Feed', (): void => {
     }
 
     expect(errorMessage).toHaveTextContent('Unable to append articles');
+  });
+
+  it('should move focus between articles with Page Up and Page Down', async (): Promise<void> => {
+    const { focus, getByName } = render(
+      <>
+        <span id="test-feed-label-id">Keyboard feed</span>
+        <Feed articles={ARTICLES} labelledBy="test-feed-label-id" />
+      </>,
+    );
+
+    const first: HTMLElement = getByName('article', 'First article');
+    const second: HTMLElement = getByName('article', 'Second article');
+    focus(first);
+    await userEvent.keyboard('{PageDown}');
+    expect(second).toHaveFocus();
+    await userEvent.keyboard('{PageUp}');
+    expect(first).toHaveFocus();
+  });
+
+  it('should move focus outside the feed with Control Home and Control End', async (): Promise<void> => {
+    const { getByName } = render(
+      <>
+        <button type="button">Before feed</button>
+        <span id="test-feed-label-id">Bounded feed</span>
+        <Feed articles={ARTICLES} labelledBy="test-feed-label-id" />
+        <button type="button">After feed</button>
+      </>,
+    );
+
+    getByName('article', 'Second article').focus();
+    await userEvent.keyboard('{Control>}{Home}{/Control}');
+    expect(getByName('button', 'Before feed')).toHaveFocus();
+
+    getByName('article', 'Second article').focus();
+    await userEvent.keyboard('{Control>}{End}{/Control}');
+    expect(getByName('button', 'After feed')).toHaveFocus();
   });
 
   describe('articles', (): void => {
