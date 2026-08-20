@@ -1,8 +1,8 @@
-- The modal has an `aria-modal` attribute.
-- User interaction is limited to the modal's contents.
-- When the modal loses focus (e.g. programmatically), user interaction is no
-  longer limited to the modal's contents.
-- When the modal is removed, user interaction is no longer limited to the
-  modal's contents.
-- All controls (e.g. a close button) must be descendants of the modal.
-- All sibling content should be marked as inert ("inert subtree" in HTML).
+- A modal dialog has `aria-modal="true"` only when content outside it is inert
+  for all users[^1].
+- While the modal is open, `Tab` and `Shift + Tab` keep keyboard focus among its
+  focusable descendants[^2].
+
+[^1]: https://w3c.github.io/aria/#aria-modal
+
+[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/

@@ -20,5 +20,7 @@
 - Tab lists have an implicit `aria-orientation` value of `'horizontal'`[^2].
 
 [^1]: https://w3c.github.io/aria/#tab
+
 [^2]: https://w3c.github.io/aria/#tablist
+
 [^3]: https://aria-at.w3.org/report/163664

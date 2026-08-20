@@ -82,4 +82,24 @@ describe('ToggleButton', (): void => {
     await clickButton('Unpress me');
     expect(handleUnpress).toHaveBeenCalledExactlyOnceWith();
   });
+
+  it('should keep the same accessible name when its pressed state changes', (): void => {
+    const { getByName, rerender } = render(
+      <ToggleButton onPress={noop} onUnpress={noop} pressed={false}>
+        Pin message
+      </ToggleButton>,
+    );
+
+    const toggleButton: HTMLElement = getByName('button', 'Pin message');
+    expect(toggleButton).toHaveAttribute('aria-pressed', 'false');
+    rerender(
+      <ToggleButton onPress={noop} onUnpress={noop} pressed>
+        Pin message
+      </ToggleButton>,
+    );
+    expect(getByName('button', 'Pin message')).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+  });
 });

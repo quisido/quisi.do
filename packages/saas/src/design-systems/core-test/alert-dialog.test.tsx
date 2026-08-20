@@ -3,8 +3,9 @@ import type { AlertDialogProps } from '../core/alert-dialog-props.js';
 import render, { type RenderTest } from './render.js';
 import noop from '../../utils/noop.js';
 import importTestedDesignSystem from './import-tested-design-system.js';
-import itShouldBeModal from './modal.test.jsx';
+import itShouldBeModal from './modal-test-suite.jsx';
 import { within } from '@testing-library/dom';
+import userEvent from '@testing-library/user-event';
 
 const { AlertDialog } = await importTestedDesignSystem();
 
@@ -45,6 +46,14 @@ describe('AlertDialog', (): void => {
     expect(handleDismiss).toHaveBeenCalledExactlyOnceWith();
   });
 
+  it('should dismiss with Escape', async (): Promise<void> => {
+    const handleDismiss = vi.fn();
+    renderAlertDialog({ onDismiss: handleDismiss });
+
+    await userEvent.keyboard('{Escape}');
+    expect(handleDismiss).toHaveBeenCalledExactlyOnceWith();
+  });
+
   it('should be labelled by its heading', (): void => {
     const { getByName } = renderAlertDialog({ heading: 'Heading label' });
     getByName('alertdialog', 'Heading label');
@@ -54,24 +63,6 @@ describe('AlertDialog', (): void => {
     const { getByName } = renderAlertDialog({ heading: 'Modal' });
     const modal: HTMLElement = getByName('alertdialog', 'Modal');
     expect(modal).toHaveAttribute('aria-modal', 'true');
-  });
-
-  // Technical debt: I think userEvents does not respect z-index.
-  it.skip('should block pointer events', async (): Promise<void> => {
-    const handleClick = vi.fn();
-    const { clickButton } = render(
-      <>
-        <button onClick={handleClick} type="button">
-          Background button
-        </button>
-        <AlertDialog heading="Modal" onDismiss={noop}>
-          Content
-        </AlertDialog>
-      </>,
-    );
-
-    await clickButton('Background button');
-    expect(handleClick).not.toHaveBeenCalled();
   });
 
   // This test is the behavioral implications of being modal.
@@ -116,6 +107,13 @@ describe('AlertDialog', (): void => {
 
     const alertDialog: HTMLElement = getByName('alertdialog', 'Container');
     within(alertDialog).getByText('Alert message');
+  });
+
+  it('should not be hidden by an ancestor', (): void => {
+    const { getByName } = renderAlertDialog({ heading: 'Visible modal' });
+    const alertDialog: HTMLElement = getByName('alertdialog', 'Visible modal');
+
+    expect(alertDialog.closest('[aria-hidden="true"]')).toBeNull();
   });
 
   itShouldBeModal(

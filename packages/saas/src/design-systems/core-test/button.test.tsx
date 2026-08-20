@@ -27,12 +27,13 @@ describe('Button', (): void => {
 
   it('should support click events', async (): Promise<void> => {
     const handleClick = vi.fn();
-    const { clickButton } = render(
+    const { clickButton, getByName } = render(
       <Button onClick={handleClick}>Click me</Button>,
     );
 
     await clickButton('Click me');
     expect(handleClick).toHaveBeenCalledExactlyOnceWith();
+    expect(getByName('button', 'Click me')).toHaveFocus();
   });
 
   it('should support disabled', (): void => {

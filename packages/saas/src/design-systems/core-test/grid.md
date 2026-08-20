@@ -19,12 +19,15 @@
   - a widget that requires arrow keys to operate, e.g. a combobox or radio group
   - multiple interactive elements
   - editable content
+- For the text-cell grid supported by this component, arrow keys move focus
+  between `gridcell` elements without moving beyond a grid edge[^1].
 - Indicate that a focusable grid cell is selectable as the object of an action
   with the `aria-selected` attribute[^1].
 - If the grid allows multiple grid cells to be selected, the grid should have a
   `aria-multiselectable` value of `true`[^1].
 - Provide an accessible name for a grid, which can be done with the `aria-label`
-  or `aria-labelledby` attribute.
+  or `aria-labelledby` attribute[^1].
 
 [^1]: https://w3c.github.io/aria/#grid
+
 [^2]: https://aria-at.w3.org/report/163680
