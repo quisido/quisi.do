@@ -7,7 +7,6 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
     rules: {
       '@typescript-eslint/no-non-null-assertion': 'warn',
       '@typescript-eslint/no-unsafe-assignment': 'warn',
-      'no-magic-numbers': 'warn',
       'no-warning-comments': 'warn',
     },
   },
