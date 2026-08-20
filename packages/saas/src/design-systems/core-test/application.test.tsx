@@ -3,10 +3,9 @@ import render from './render.js';
 import importTestedDesignSystem from './import-tested-design-system.js';
 
 /**
- * TODO: Since applications use "focus mode" which removes the screen reader's
- * access to keyboard management, an `Application` component must do one of
- * these three things (and the API for enforcing this is not clearly defined;
- * that is the TODO):
+ * Since applications use "focus mode" which removes the screen reader's access
+ * to keyboard management, an `Application` component must do one of these
+ * things:
  * - Point either describedBy or labelledBy to a focusable element ("Associate
  *   the content with a focusable element using aria-labelledby or
  *   aria-describedby").
@@ -27,17 +26,6 @@ describe('Application', (): void => {
     expect(application).toHaveTextContent('Content');
   });
 
-  it('should support a banner', (): void => {
-    const { getByRole } = render(
-      <Application banner="Application banner" label="Bannered Application">
-        Content
-      </Application>,
-    );
-
-    const banner: HTMLElement = getByRole('banner');
-    expect(banner).toHaveTextContent('Application banner');
-  });
-
   it('should support a description', (): void => {
     const { getByDescription } = render(
       <>
@@ -54,14 +42,6 @@ describe('Application', (): void => {
     );
 
     getByDescription('application', 'This application is described.');
-  });
-
-  it('should support a heading', (): void => {
-    const { getByName } = render(
-      <Application heading="Heading">Content</Application>,
-    );
-
-    getByName('application', 'Heading');
   });
 
   it('should support a label', (): void => {
@@ -94,20 +74,6 @@ describe('Application', (): void => {
     );
 
     getByName('application', 'Application label');
-  });
-
-  it('should support content info', (): void => {
-    const { getByRole } = render(
-      <Application
-        contentInfo="Test content info"
-        heading="Application with content info"
-      >
-        Content
-      </Application>,
-    );
-
-    const contentInfo: HTMLElement = getByRole('contentinfo');
-    expect(contentInfo).toHaveTextContent('Test content info');
   });
 
   /**

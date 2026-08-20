@@ -17,10 +17,17 @@ import classes from './suggestion.module.scss';
  */
 export default function Suggestion({
   deletion,
+  description,
+  detailsId,
   insertion,
 }: SuggestionProps): ReactElement {
   return (
-    <span className={classes['suggestion']} role="suggestion">
+    <span
+      aria-description={description}
+      aria-details={detailsId}
+      className={classes['suggestion']}
+      role="suggestion"
+    >
       {insertion && <ins role="insertion">{insertion}</ins>}
       {deletion && <del role="deletion">{deletion}</del>}
     </span>

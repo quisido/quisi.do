@@ -1,9 +1,10 @@
-import type { FocusEvent, ReactElement } from 'react';
+import { type FocusEvent, type KeyboardEvent, type ReactElement } from 'react';
 import type { FeedArticle, FeedProps } from '../core/feed-props.js';
 import useFeed from '../core/use-feed.js';
 import useId from '../core/use-id.js';
 import Heading from './heading.js';
 import classes from './feed.module.scss';
+import { FOCUSABLE_SELECTORS } from '../core/focusable-selectors.js';
 
 interface FeedArticleProps {
   readonly onFocus: VoidFunction;
@@ -17,7 +18,56 @@ interface FeedControlArticleProps {
   readonly onClick: VoidFunction;
 }
 
+const FOCUSABLE_SELECTOR: string = [...FOCUSABLE_SELECTORS].join(', ');
 const UNKNOWN_SET_SIZE = -1;
+
+const getFeedBoundaryIndex = (
+  feedElementIndexes: readonly number[],
+  direction: 'after' | 'before',
+): number | undefined => {
+  if (direction === 'before') {
+    return feedElementIndexes.at(0);
+  }
+
+  return feedElementIndexes.at(-1);
+};
+
+const getFeedDirectionOffset = (direction: 'after' | 'before'): number => {
+  if (direction === 'before') {
+    return -1;
+  }
+
+  return 1;
+};
+
+const focusOutsideFeed = (
+  feed: HTMLElement,
+  direction: 'after' | 'before',
+): void => {
+  const focusableElements: readonly HTMLElement[] = Array.from(
+    document.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+  );
+  const feedElementIndexes: readonly number[] = focusableElements.flatMap(
+    (element: HTMLElement, index: number): readonly number[] => {
+      if (feed.contains(element)) {
+        return [index];
+      }
+
+      return [];
+    },
+  );
+  const boundaryIndex: number | undefined = getFeedBoundaryIndex(
+    feedElementIndexes,
+    direction,
+  );
+
+  if (boundaryIndex === undefined) {
+    return;
+  }
+
+  const offset: number = getFeedDirectionOffset(direction);
+  focusableElements[boundaryIndex + offset]?.focus();
+};
 
 const FeedArticleComponent = ({
   children,
@@ -118,12 +168,57 @@ export default function Feed({
     onPrepend,
   });
 
+  const handleKeyDown = (event: KeyboardEvent<HTMLElement>): void => {
+    if (!(event.target instanceof Element)) {
+      return;
+    }
+
+    const eventTarget: Element = event.target;
+    const feed: HTMLElement = event.currentTarget;
+    const articleElements: readonly HTMLElement[] = Array.from(
+      feed.querySelectorAll<HTMLElement>(':scope > article'),
+    );
+    const article: HTMLElement | undefined = articleElements.find(
+      (articleElement: HTMLElement): boolean =>
+        articleElement.contains(eventTarget),
+    );
+    if (article === undefined) {
+      return;
+    }
+
+    const articleIndex: number = articleElements.indexOf(article);
+
+    if (event.ctrlKey && event.key === 'Home') {
+      event.preventDefault();
+      focusOutsideFeed(feed, 'before');
+      return;
+    }
+
+    if (event.ctrlKey && event.key === 'End') {
+      event.preventDefault();
+      focusOutsideFeed(feed, 'after');
+      return;
+    }
+
+    if (event.key === 'PageUp') {
+      event.preventDefault();
+      articleElements[articleIndex - 1]?.focus();
+      return;
+    }
+
+    if (event.key === 'PageDown') {
+      event.preventDefault();
+      articleElements[articleIndex + 1]?.focus();
+    }
+  };
+
   return (
     <section
       aria-busy={busy}
       aria-errormessage={errorMessageId}
       aria-labelledby={labelledBy}
       className={classes['feed']}
+      onKeyDown={handleKeyDown}
       role="feed"
     >
       {errorMessage !== undefined && (

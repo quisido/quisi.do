@@ -12,8 +12,34 @@ describe('MenuBar', (): void => {
     expect(menuBar).toHaveTextContent('Test content');
   });
 
-  /**
-   * TODO: "Authors MUST manage focus on this container role."
-   * @see {@link https://w3c.github.io/aria/#managingfocus_authors}
-   */
+  it('should default to horizontal orientation', (): void => {
+    const { getByRole } = render(<MenuBar>Commands</MenuBar>);
+    expect(getByRole('menubar')).toHaveAttribute(
+      'aria-orientation',
+      'horizontal',
+    );
+  });
+
+  it('should support vertical orientation', (): void => {
+    const { getByRole } = render(
+      <MenuBar orientation="vertical">Commands</MenuBar>,
+    );
+    expect(getByRole('menubar')).toHaveAttribute(
+      'aria-orientation',
+      'vertical',
+    );
+  });
+
+  it('should preserve keyboard focus for interactive descendants', async (): Promise<void> => {
+    const { getByName, tab } = render(
+      <MenuBar>
+        <button type="button">First command</button>
+        <button type="button">Second command</button>
+      </MenuBar>,
+    );
+
+    expect(getByName('button', 'First command')).toHaveFocus();
+    await tab();
+    expect(getByName('button', 'Second command')).toHaveFocus();
+  });
 });
