@@ -73,6 +73,7 @@ const PROPS: Required<
   remoteConfiguration: undefined,
   service: 'quisi.do',
   sessionPersistence: 'local-storage',
+  sessionReplayCanvasRecording: undefined,
   sessionReplayRecording: true,
   sessionReplaySampleRate: 100,
   sessionSampleRate: 100,
