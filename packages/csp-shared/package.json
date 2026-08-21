@@ -51,7 +51,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "devDependencies": {
-    "@vitest/ui": "^4.1.10",
+    "@vitest/ui": "^4.1.11",
     "concurrently": "^10.0.5",
     "fmrs": "^3.0.0",
     "quisido": "^0.0.4",
