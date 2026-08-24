@@ -76,7 +76,7 @@
     "@vitejs/plugin-basic-ssl": "^2.3.0",
     "@vitest/ui": "^4.1.11",
     "concurrently": "^10.0.5",
-    "dompurify": "^3.4.13",
+    "dompurify": "^3.4.14",
     "hint": "^7.1.13",
     "jsdom": "^30.0.1",
     "lighthouse": "^13.4.1",
