@@ -146,7 +146,7 @@
     "immutable": "^5.1.9",
     "istanbul-lib-coverage": "^3.2.2",
     "lighthouse": "^13.4.1",
-    "logrocket": "^12.1.1",
+    "logrocket": "^12.2.0",
     "nyc": "^18.0.0",
     "postcss": "^8.5.26",
     "quisido": "^0.0.4",
