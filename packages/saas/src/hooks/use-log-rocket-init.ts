@@ -49,16 +49,20 @@ const CONSOLE: Required<Compulsory<LogRocketOptions['console']>> = {
 };
 
 const DOM: Required<Omit<Compulsory<LogRocketOptions['dom']>, 'baseHref'>> = {
+  disableHistoryPatching: false,
   disablePageTitles: false,
   disableVisibleElement: false,
   disableWebAnimations: false,
+  hideSelectors: [],
   hiddenAttributes: [],
   imageSanitizer: false,
   inputSanitizer: false,
   isEnabled: true,
   privateAttributeBlocklist: [],
   privateClassNameBlocklist: [],
+  redactSelectors: [],
   shouldLogDroppedStyleDiagnostics: false,
+  snapshotEventDelta: 2500,
   textSanitizer: false,
 };
 
@@ -78,6 +82,7 @@ const OPTIONS: Required<
   browser: BROWSER,
   childDomains: [],
   console: CONSOLE,
+  cookiePolicy: 'lax',
   disableBusyFramesTracker: false,
   dom: DOM,
   forceCleanStart: false,
