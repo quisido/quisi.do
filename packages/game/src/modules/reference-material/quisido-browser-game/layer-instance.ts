@@ -46,7 +46,7 @@ export default class LayerInstance implements Instance<
       mapOffscreenCanvasTo2DRenderingContext(offscreenCanvas);
   }
 
-  public appendChild(instance: BrowserFamily | BrowserTextInstance) {
+  public appendChild(instance: BrowserFamily | BrowserTextInstance): void {
     if (!isRenderableInstance(instance)) {
       return;
     }

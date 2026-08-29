@@ -3,13 +3,13 @@ interface Action<T extends string, P> {
   readonly type: T;
 }
 
-export type Actions =
+export type BrowserGameAction =
   | Action<'axes', readonly number[]>
   | Action<'button', ButtonPayload>
   | Action<'keydown', KeyboardEvent>
   | Action<'keypress', KeyboardEvent>
   | Action<'keyup', KeyboardEvent>
-  | Action<'tap', TapAction>;
+  | Action<'tap', TapPayload>;
 
 export interface ButtonPayload {
   readonly button: 'A' | 'B' | 'X' | 'Y' | 'L' | 'R' | 'Start' | 'Select';
@@ -18,7 +18,7 @@ export interface ButtonPayload {
   readonly value: number;
 }
 
-export interface TapAction {
+export interface TapPayload {
   readonly x: number;
   readonly y: number;
 }
