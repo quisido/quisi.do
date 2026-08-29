@@ -23,6 +23,7 @@ export default class FpsCounter {
       return 0;
     }
 
+    // eslint-disable-next-line no-magic-numbers
     return Math.round((frameCount / this.#duration) * 1_000);
   }
 }
