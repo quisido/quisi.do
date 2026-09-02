@@ -97,7 +97,7 @@
     "@hint/parser-typescript-config": "^2.4.31",
     "@hint/parser-webpack-config": "^2.1.42",
     "@hint/utils-types": "^1.2.1",
-    "@openai/codex": "^0.150.1",
+    "@openai/codex": "^0.151.0",
     "@playwright/mcp": "^0.0.79",
     "@types/eslint": "^9.6.1",
     "@types/node": "^26.4.0",
