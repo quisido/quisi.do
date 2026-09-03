@@ -50,7 +50,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "@fullstory/browser": "^2.0.6",
+    "@fullstory/browser": "^2.1.0",
     "@fullstory/snippet": "^2.0.5",
     "use-shallow-memo": "^1.1.0"
   },
