@@ -1,12 +1,13 @@
 import type GameAction from './types/game-action.js';
+import type GameComponent from './types/game-component.js';
 import type GameEntity from './types/game-entity.js';
 
 export interface GameEngineOptions<GameState, A extends GameAction> {
+  readonly initialState: GameState;
   readonly lastTick?: number | undefined;
   readonly now?: (() => number) | undefined;
   readonly random?: (() => number) | undefined;
-  readonly state: GameState;
-  readonly world: GameEntity<GameState, A>;
+  readonly world: GameComponent<GameState, A>;
 }
 
 const VERSION = 1;
@@ -19,19 +20,21 @@ export default class GameEngine<GameState, A extends GameAction> {
   readonly #entities: readonly GameEntity<unknown>[] = [];
   #lastTick: number;
   readonly #now: () => number;
-  #state: GameState;
   readonly #world: GameEntity<GameState, A>;
 
   public constructor({
+    initialState,
     lastTick,
     now = Date.now.bind(Date),
-    state,
     world,
   }: GameEngineOptions<GameState, A>) {
     this.#lastTick = lastTick ?? now();
     this.#now = now;
-    this.#state = state;
-    this.#world = world;
+    this.#world = {
+      component: world,
+      id: Symbol('world'),
+      value: initialState,
+    };
   }
 
   public dispatch(action: A): void {

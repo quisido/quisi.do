@@ -50,7 +50,7 @@
     "jsdom": "^30.0.1",
     "playwright": "^1.63.0",
     "postcss": "^8.5.28",
-    "quisido": "^0.0.4",
+    "quisido": "^0.0.5",
     "rimraf": "^6.1.3",
     "serve": "^14.2.6",
     "typescript": "^6.0.3",

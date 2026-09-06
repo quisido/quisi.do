@@ -54,7 +54,7 @@
     "@vitest/ui": "^5.0.0",
     "concurrently": "^10.0.5",
     "fmrs": "^3.0.0",
-    "quisido": "^0.0.4",
+    "quisido": "^0.0.5",
     "rimraf": "^6.1.0",
     "tslib": "^2.8.1",
     "typescript": "^6.0.3",

@@ -34,6 +34,9 @@ const JS_CONFIG: Config = defineConfig({
     ...prettierConfig.rules,
     ...prettierPluginRecommended.rules,
 
+    // Prettier takes ~1s to run.
+    'prettier/prettier': 'off',
+
     camelcase: ['error', { properties: 'never' }],
 
     // Commented out code may be lowercase.
