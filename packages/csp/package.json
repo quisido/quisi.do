@@ -59,13 +59,13 @@
     "@cloudflare/workers-types": "^5.20260829.1",
     "@quisido/worker-test": "^1.0.1",
     "@types/eslint": "^9.6.1",
-    "@vitest/ui": "^4.1.11",
+    "@vitest/ui": "^5.0.0",
     "cloudflare-test-utils": "^1.0.2",
     "concurrently": "^10.0.5",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.10",
+    "vitest": "^5.0.0",
     "wrangler": "^4.128.0"
   }
 }
