@@ -40,11 +40,11 @@
     "@cloudflare/workers-types": "^5.20260829.1",
     "@types/node": "^26.4.1",
     "@vitest/coverage-istanbul": "^4.1.10",
-    "bun-types": "^1.4.0",
+    "bun-types": "^1.4.1",
     "eslint": "^10.9.1",
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.10",
-    "wrangler": "^4.128.0"
+    "wrangler": "^4.129.0"
   }
 }
