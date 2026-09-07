@@ -311,7 +311,7 @@ describe('Feed', (): void => {
       throw new Error('Expected feed error message element.');
     }
 
-    expect(errorMessage).toHaveTextContent('Unable to append articles');
+    expect(errorMessage).toMatchTextContent('Unable to append articles');
   });
 
   describe('articles', (): void => {

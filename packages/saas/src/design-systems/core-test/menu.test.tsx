@@ -18,7 +18,7 @@ describe('Menu', (): void => {
     );
 
     const menu: HTMLElement = getByRole('menu');
-    expect(menu).toHaveTextContent('CutCopyPaste');
+    expect(menu).toMatchTextContent('CutCopyPaste');
     expect(getRoleCount('menu')).toBe(1);
     expect(getRoleCount('menuitem')).toBe(3);
   });

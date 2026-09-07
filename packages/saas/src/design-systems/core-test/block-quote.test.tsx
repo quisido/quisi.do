@@ -9,6 +9,6 @@ describe('BlockQuote', (): void => {
     const { getByRole } = render(<BlockQuote>Test block quote</BlockQuote>);
 
     const blockQuote: HTMLElement = getByRole('blockquote');
-    expect(blockQuote).toHaveTextContent('Test block quote');
+    expect(blockQuote).toMatchTextContent('Test block quote');
   });
 });

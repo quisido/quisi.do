@@ -8,6 +8,6 @@ describe('Paragraph', (): void => {
   it('should be a paragraph', (): void => {
     const { getByRole } = render(<Paragraph>Test paragraph</Paragraph>);
     const paragraph: HTMLElement = getByRole('paragraph');
-    expect(paragraph).toHaveTextContent('Test paragraph');
+    expect(paragraph).toMatchTextContent('Test paragraph');
   });
 });

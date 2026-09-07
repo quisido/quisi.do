@@ -13,7 +13,7 @@ describe('Region', (): void => {
 
     const region: HTMLElement = getByName('region', 'Service health');
     expect(region.tagName).toBe('SECTION');
-    expect(region).toHaveTextContent('All systems operational.');
+    expect(region).toMatchTextContent('All systems operational.');
     expect(getRoleCount('region')).toBe(1);
   });
 
@@ -38,10 +38,10 @@ describe('Region', (): void => {
       </>,
     );
 
-    expect(getByName('region', 'Account security')).toHaveTextContent(
+    expect(getByName('region', 'Account security')).toMatchTextContent(
       'Security content',
     );
-    expect(getByName('region', 'Billing summary')).toHaveTextContent(
+    expect(getByName('region', 'Billing summary')).toMatchTextContent(
       'Billing content',
     );
     expect(getRoleCount('region')).toBe(2);

@@ -9,7 +9,7 @@ describe('Status', (): void => {
     const { getByRole, getRoleCount } = render(<Status>Saving…</Status>);
 
     const status: HTMLElement = getByRole('status');
-    expect(status).toHaveTextContent('Saving…');
+    expect(status).toMatchTextContent('Saving…');
     expect(getRoleCount('status')).toBe(1);
   });
 

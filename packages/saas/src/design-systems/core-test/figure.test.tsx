@@ -28,7 +28,7 @@ describe('Figure', (): void => {
       const figure: HTMLElement = getByName('figure', 'Test caption');
       const figureCaption: HTMLElement = getFigureCaption(figure);
       expect(figureCaption).toBe(getByRole('caption'));
-      expect(figureCaption).toHaveTextContent('Test caption');
+      expect(figureCaption).toMatchTextContent('Test caption');
     });
 
     it('should be referenced as the accessible name when no label is provided', (): void => {
@@ -54,7 +54,7 @@ describe('Figure', (): void => {
 
       const figure: HTMLElement = getByName('figure', 'Accessible label');
       const figureCaption: HTMLElement = getFigureCaption(figure);
-      expect(figureCaption).toHaveTextContent('Visible supporting caption');
+      expect(figureCaption).toMatchTextContent('Visible supporting caption');
       expect(figure).toHaveAttribute('aria-label', 'Accessible label');
       expect(figure).not.toHaveAttribute('aria-labelledby');
     });
@@ -146,7 +146,7 @@ describe('Figure', (): void => {
       throw new Error('Expected figure description element.');
     }
 
-    expect(description).toHaveTextContent('Visible summary');
+    expect(description).toMatchTextContent('Visible summary');
     expect(figure).not.toHaveAttribute('aria-details');
   });
 
@@ -176,7 +176,7 @@ describe('Figure', (): void => {
       throw new Error('Expected figure details element.');
     }
 
-    expect(details).toHaveTextContent('Detailed explanation');
+    expect(details).toMatchTextContent('Detailed explanation');
     expect(details).toContainElement(getByName('link', 'source'));
     expect(figure).not.toHaveAttribute('aria-describedby');
   });

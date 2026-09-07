@@ -63,7 +63,7 @@ describe('Dialog', (): void => {
     });
 
     const dialog: HTMLElement = getByName('dialog', 'Related content');
-    expect(dialog).toHaveTextContent('Content related to the primary window');
+    expect(dialog).toMatchTextContent('Content related to the primary window');
   });
 
   it('should include a focusable descendant', (): void => {

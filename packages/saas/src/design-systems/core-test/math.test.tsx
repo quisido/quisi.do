@@ -35,7 +35,7 @@ describe('Math', (): void => {
 
     const math: HTMLElement = getByRole('math');
     expect(math.namespaceURI).toBe('http://www.w3.org/1998/Math/MathML');
-    expect(math).toHaveTextContent('x=2');
+    expect(math).toMatchTextContent('x=2');
     expect(getRoleCount('math')).toBe(1);
   });
 
@@ -80,7 +80,7 @@ describe('Math', (): void => {
       'annotation[encoding="TeX"]',
     );
     expect(annotation).not.toBeNull();
-    expect(annotation).toHaveTextContent(QUADRATIC_FORMULA_TEX);
+    expect(annotation).toMatchTextContent(QUADRATIC_FORMULA_TEX);
   });
 
   it('should support textual representations such as TeX', (): void => {
@@ -89,7 +89,7 @@ describe('Math', (): void => {
     );
 
     const math: HTMLElement = getByName('math', 'Quadratic formula');
-    expect(math).toHaveTextContent(QUADRATIC_FORMULA_TEX);
+    expect(math).toMatchTextContent(QUADRATIC_FORMULA_TEX);
   });
 
   it('should support external labels for spoken math alternatives', (): void => {

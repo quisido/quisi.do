@@ -38,7 +38,7 @@ describe('Form', (): void => {
 
     const form: HTMLElement = getByName('form', 'Account details');
     expect(form.tagName).toBe('FORM');
-    expect(form).toHaveTextContent('Test content');
+    expect(form).toMatchTextContent('Test content');
   });
 
   describe('heading', (): void => {

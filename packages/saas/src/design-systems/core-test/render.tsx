@@ -83,7 +83,7 @@ export default function render(node: ReactNode): RenderTest {
 
     expectToHaveThrown: (message: RegExp | string): void => {
       const element: HTMLElement = getByTestId('error-boundary-error-message');
-      expect(element).toHaveTextContent(message);
+      expect(element).toMatchTextContent(message);
     },
 
     focus: (element: HTMLElement): void => {

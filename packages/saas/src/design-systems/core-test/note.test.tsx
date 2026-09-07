@@ -9,7 +9,7 @@ describe('Note', (): void => {
     const { getByRole, getRoleCount } = render(<Note>Test content</Note>);
 
     const note: HTMLElement = getByRole('note');
-    expect(note).toHaveTextContent('Test content');
+    expect(note).toMatchTextContent('Test content');
     expect(getRoleCount('note')).toBe(1);
     expect(getRoleCount('comment')).toBe(0);
     expect(getRoleCount('suggestion')).toBe(0);
@@ -34,16 +34,16 @@ describe('Note', (): void => {
     );
 
     const note: HTMLElement = getByRole('note');
-    expect(note.previousElementSibling).toHaveTextContent(
+    expect(note.previousElementSibling).toMatchTextContent(
       'The following results outline support for the tested features.',
     );
-    expect(note).toHaveTextContent(
+    expect(note).toMatchTextContent(
       'Please keep in mind that all results were accurate at publication.',
     );
-    expect(note).toHaveTextContent(
+    expect(note).toMatchTextContent(
       'If you find variations in results, please let us know.',
     );
-    expect(note.nextElementSibling).toHaveTextContent(
+    expect(note.nextElementSibling).toMatchTextContent(
       'Continue with the rest of the report.',
     );
   });

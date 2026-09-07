@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { bootGame } from './boot.js';
 
 const captureWindowErrors = (): unknown[] => {
@@ -36,6 +36,9 @@ const waitForMainMenu = async (): Promise<void> => {
 
 describe('bootGame', (): void => {
   it('boots Monogatari and renders the main menu', async (): Promise<void> => {
+    // Monogatari emits expected first-run diagnostics. This test captures
+    // browser errors directly instead of treating all console output as errors.
+    vi.restoreAllMocks();
     document.body.innerHTML = '<div id="monogatari"></div>';
 
     const errors = captureWindowErrors();

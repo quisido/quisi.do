@@ -11,7 +11,7 @@ describe('Code', (): void => {
 
     const code: HTMLElement = getByRole('code');
     expect(getRoleCount('code')).toBe(1);
-    expect(code).toHaveTextContent(source);
+    expect(code).toMatchTextContent(source);
   });
 
   it('should not be focusable', (): void => {
@@ -30,7 +30,7 @@ describe('Code', (): void => {
 
     const code: HTMLElement = getByRole('code');
     expect(getRoleCount('code')).toBe(1);
-    expect(code).toHaveTextContent('npm run test');
+    expect(code).toMatchTextContent('npm run test');
   });
 
   it('should preserve punctuation-heavy code for full punctuation verbosity', (): void => {

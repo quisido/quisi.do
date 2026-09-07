@@ -9,7 +9,7 @@ describe('MenuBar', (): void => {
     const { getByRole } = render(<MenuBar>Test content</MenuBar>);
 
     const menuBar: HTMLElement = getByRole('menubar');
-    expect(menuBar).toHaveTextContent('Test content');
+    expect(menuBar).toMatchTextContent('Test content');
   });
 
   /**
