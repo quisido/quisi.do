@@ -22,6 +22,7 @@ export default async function defineVitestInlineConfig({
   };
 
   return {
+    attachmentsDir: '.tests/vitest/attachments',
     clearMocks: true,
     coverage: defineCoverageOptions(coverage),
     environment: 'node',
@@ -39,7 +40,7 @@ export default async function defineVitestInlineConfig({
     reporters: [
       ['default', { summary: true }],
       'hanging-process',
-      ['html', { outputFile: '.tests/vitest/report.html' }],
+      ['html', { outputDir: '.tests/vitest' }],
       ['json', { outputFile: '.tests/vitest/report.json' }],
       ['junit', { outputFile: '.tests/vitest/report.junit.xml' }],
     ],
