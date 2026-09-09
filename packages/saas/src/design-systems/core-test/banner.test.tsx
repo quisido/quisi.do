@@ -12,6 +12,6 @@ describe('Banner', (): void => {
       </Document>,
     );
 
-    expect(getByRole('banner')).toHaveTextContent('Test content');
+    expect(getByRole('banner')).toMatchTextContent('Test content');
   });
 });

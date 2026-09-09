@@ -12,6 +12,6 @@ describe('Main', (): void => {
       </Document>,
     );
 
-    expect(getByRole('main')).toHaveTextContent('Test content');
+    expect(getByRole('main')).toMatchTextContent('Test content');
   });
 });

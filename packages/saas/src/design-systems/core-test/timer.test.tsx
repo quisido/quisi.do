@@ -9,7 +9,7 @@ describe('Timer', (): void => {
     const { getByRole, getRoleCount } = render(<Timer>00:00</Timer>);
 
     const timer: HTMLElement = getByRole('timer');
-    expect(timer).toHaveTextContent('00:00');
+    expect(timer).toMatchTextContent('00:00');
     expect(getRoleCount('timer')).toBe(1);
   });
 
@@ -19,10 +19,10 @@ describe('Timer', (): void => {
     const timer: HTMLElement = getByRole('timer');
 
     rerender(<Timer>00:01 elapsed</Timer>);
-    expect(timer).toHaveTextContent('00:01 elapsed');
+    expect(timer).toMatchTextContent('00:01 elapsed');
 
     rerender(<Timer>00:02 elapsed</Timer>);
-    expect(timer).toHaveTextContent('00:02 elapsed');
+    expect(timer).toMatchTextContent('00:02 elapsed');
   });
 
   it('should use its text contents as the current remaining time measurement', (): void => {
@@ -31,10 +31,10 @@ describe('Timer', (): void => {
     const timer: HTMLElement = getByRole('timer');
 
     rerender(<Timer>2 seconds remaining</Timer>);
-    expect(timer).toHaveTextContent('2 seconds remaining');
+    expect(timer).toMatchTextContent('2 seconds remaining');
 
     rerender(<Timer>1 second remaining</Timer>);
-    expect(timer).toHaveTextContent('1 second remaining');
+    expect(timer).toMatchTextContent('1 second remaining');
   });
 
   it('should allow non-machine-parsable visible time text', (): void => {
@@ -43,7 +43,7 @@ describe('Timer', (): void => {
     );
 
     const timer: HTMLElement = getByRole('timer');
-    expect(timer).toHaveTextContent('about 1 minute and 30 seconds remaining');
+    expect(timer).toMatchTextContent('about 1 minute and 30 seconds remaining');
     expect(timer).not.toHaveAttribute('aria-valuenow');
     expect(timer).not.toHaveAttribute('aria-valuetext');
     expect(timer).not.toHaveAttribute('aria-valuemin');
@@ -56,7 +56,7 @@ describe('Timer', (): void => {
     const timer: HTMLElement = getByRole('timer');
 
     rerender(<Timer>00:10 paused</Timer>);
-    expect(timer).toHaveTextContent('00:10 paused');
+    expect(timer).toMatchTextContent('00:10 paused');
   });
 
   it('should preserve its text contents after reaching an end point', (): void => {
@@ -65,6 +65,6 @@ describe('Timer', (): void => {
     const timer: HTMLElement = getByRole('timer');
 
     rerender(<Timer>00:00 remaining</Timer>);
-    expect(timer).toHaveTextContent('00:00 remaining');
+    expect(timer).toMatchTextContent('00:00 remaining');
   });
 });

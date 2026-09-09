@@ -54,12 +54,12 @@
     "@cloudflare/workers-types": "^5.20260904.1"
   },
   "devDependencies": {
-    "@vitest/ui": "^4.1.11",
+    "@vitest/ui": "^5.0.0",
     "concurrently": "^10.0.5",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",
     "tslib": "^2.8.1",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.10"
+    "vitest": "^5.0.0"
   }
 }

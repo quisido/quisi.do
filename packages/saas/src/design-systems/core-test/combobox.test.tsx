@@ -115,7 +115,7 @@ describe('Combobox', (): void => {
     await userEvent.type(comboBox, 'A');
     expect(comboBox).toHaveValue('Alabama');
     expect(comboBox).toHaveAttribute('aria-expanded', 'true');
-    expect(getActiveDescendant(comboBox)).toHaveTextContent('Alabama');
+    expect(getActiveDescendant(comboBox)).toMatchTextContent('Alabama');
     await userEvent.keyboard('{ArrowDown}');
     expect(comboBox).toHaveValue('Alaska');
     expect(comboBox).toHaveFocus();
@@ -331,7 +331,7 @@ describe('Combobox', (): void => {
 
     await userEvent.hover(getByName('option', 'Alaska'));
 
-    expect(getActiveDescendant(combobox)).toHaveTextContent('Alaska');
+    expect(getActiveDescendant(combobox)).toMatchTextContent('Alaska');
 
     await userEvent.click(combobox.ownerDocument.body);
 
@@ -368,7 +368,7 @@ describe('Combobox', (): void => {
     expect(listBox.contains(activeDescendant)).toBe(true);
     expect(activeDescendant).toHaveAttribute('role', 'option');
     expect(activeDescendant).toHaveAttribute('aria-selected', 'true');
-    expect(activeDescendant).toHaveTextContent('Alabama');
+    expect(activeDescendant).toMatchTextContent('Alabama');
   });
 
   it('should use aria-activedescendant for popup pointer navigation', async (): Promise<void> => {
@@ -416,7 +416,7 @@ describe('Combobox', (): void => {
     expect(combobox).toHaveFocus();
     expect(combobox).toHaveValue('California');
     expect(combobox).toHaveAttribute('aria-expanded', 'true');
-    expect(activeDescendant).toHaveTextContent('California');
+    expect(activeDescendant).toMatchTextContent('California');
     expect(activeDescendant).toHaveAttribute('aria-selected', 'true');
   });
 
@@ -434,7 +434,7 @@ describe('Combobox', (): void => {
     await userEvent.click(combobox);
     await userEvent.type(combobox, 'A');
 
-    expect(getActiveDescendant(combobox)).toHaveTextContent('Alabama');
+    expect(getActiveDescendant(combobox)).toMatchTextContent('Alabama');
 
     await tab();
 
@@ -486,7 +486,7 @@ describe('Combobox', (): void => {
     expect(combobox).toHaveValue('Alabama');
     expect(combobox.selectionStart).toBe(1);
     expect(combobox.selectionEnd).toBe('Alabama'.length);
-    expect(getActiveDescendant(combobox)).toHaveTextContent('Alabama');
+    expect(getActiveDescendant(combobox)).toMatchTextContent('Alabama');
   });
 
   it('should keep unmatched typed values without exposing an empty popup', async (): Promise<void> => {

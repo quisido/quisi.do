@@ -24,7 +24,7 @@ describe('Table', (): void => {
     const caption: HTMLTableCaptionElement = getCaption(table);
 
     expect(table).toHaveAttribute('aria-labelledby', caption.id);
-    expect(caption).toHaveTextContent('Test table');
+    expect(caption).toMatchTextContent('Test table');
   });
 
   it('should render the caption as the first non-generic descendant', (): void => {

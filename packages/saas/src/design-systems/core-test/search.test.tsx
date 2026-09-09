@@ -10,7 +10,7 @@ describe('Search', (): void => {
 
     const search: HTMLElement = getByRole('search');
     expect(search.tagName).toBe('SEARCH');
-    expect(search).toHaveTextContent('Test content');
+    expect(search).toMatchTextContent('Test content');
     expect(getRoleCount('search')).toBe(1);
   });
 
@@ -55,7 +55,7 @@ describe('Search', (): void => {
     );
 
     const search: HTMLElement = getByRole('search');
-    expect(search).toHaveTextContent(
+    expect(search).toMatchTextContent(
       'CategoryAll resultsDocumentationFilterAdvanced search',
     );
   });

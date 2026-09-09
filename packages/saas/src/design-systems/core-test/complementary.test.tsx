@@ -9,7 +9,7 @@ describe('Complementary', (): void => {
     const { getByRole } = render(<Complementary>Test content</Complementary>);
 
     const complementary: HTMLElement = getByRole('complementary');
-    expect(complementary).toHaveTextContent('Test content');
+    expect(complementary).toMatchTextContent('Test content');
   });
 
   it('should complement sibling main content', (): void => {
@@ -22,7 +22,7 @@ describe('Complementary', (): void => {
 
     const main: HTMLElement = getByRole('main');
     const complementary: HTMLElement = getByRole('complementary');
-    expect(main).toHaveTextContent('Primary portal story');
+    expect(main).toMatchTextContent('Primary portal story');
     expect(main).not.toContainElement(complementary);
     expect(complementary.parentElement).toBe(main.parentElement);
   });
@@ -55,8 +55,8 @@ describe('Complementary', (): void => {
     );
 
     const complementary: HTMLElement = getByRole('complementary');
-    expect(complementary).toHaveTextContent('Stocks to watch');
-    expect(complementary).toHaveTextContent('Quisido Futures');
-    expect(complementary).toHaveTextContent('Browser Runtime Index');
+    expect(complementary).toMatchTextContent('Stocks to watch');
+    expect(complementary).toMatchTextContent('Quisido Futures');
+    expect(complementary).toMatchTextContent('Browser Runtime Index');
   });
 });

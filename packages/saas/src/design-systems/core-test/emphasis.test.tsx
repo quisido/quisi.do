@@ -8,6 +8,6 @@ describe('Emphasis', (): void => {
   it('should emphasize text', (): void => {
     const { getByRole } = render(<Emphasis>Test emphasis</Emphasis>);
     const emphasis: HTMLElement = getByRole('emphasis');
-    expect(emphasis).toHaveTextContent('Test emphasis');
+    expect(emphasis).toMatchTextContent('Test emphasis');
   });
 });

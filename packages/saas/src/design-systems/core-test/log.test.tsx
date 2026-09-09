@@ -13,7 +13,7 @@ describe('Log', (): void => {
     const { getByRole, getRoleCount } = render(<Log>Test content</Log>);
 
     const log: HTMLElement = getByRole('log');
-    expect(log).toHaveTextContent('Test content');
+    expect(log).toMatchTextContent('Test content');
     expect(getRoleCount('log')).toBe(1);
   });
 

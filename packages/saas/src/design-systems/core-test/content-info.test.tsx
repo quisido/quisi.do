@@ -13,6 +13,6 @@ describe('ContentInfo', (): void => {
     );
 
     const contentInfo: HTMLElement = getByRole('contentinfo');
-    expect(contentInfo).toHaveTextContent('Test content');
+    expect(contentInfo).toMatchTextContent('Test content');
   });
 });

@@ -73,8 +73,8 @@ describe('Navigation', (): void => {
       </>,
     );
 
-    expect(getByName('navigation', 'Primary')).toHaveTextContent('Home');
-    expect(getByName('navigation', 'Footer')).toHaveTextContent('Privacy');
+    expect(getByName('navigation', 'Primary')).toMatchTextContent('Home');
+    expect(getByName('navigation', 'Footer')).toMatchTextContent('Privacy');
     expect(getRoleCount('navigation')).toBe(2);
   });
 

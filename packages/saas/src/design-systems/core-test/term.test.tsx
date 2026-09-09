@@ -14,6 +14,6 @@ describe('Term', (): void => {
     );
 
     const term: HTMLElement = getByRole('term');
-    expect(term).toHaveTextContent('Test term');
+    expect(term).toMatchTextContent('Test term');
   });
 });

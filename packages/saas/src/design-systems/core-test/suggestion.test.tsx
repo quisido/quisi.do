@@ -18,12 +18,12 @@ describe('Suggestion', (): void => {
 
     it('should contain the inserted text within the insertion', (): void => {
       const { getByRole } = render(<Suggestion insertion="dog" />);
-      expect(getByRole('insertion')).toHaveTextContent('dog');
+      expect(getByRole('insertion')).toMatchTextContent('dog');
     });
 
     it('should contain the inserted text within the suggestion', (): void => {
       const { getByRole } = render(<Suggestion insertion="dog" />);
-      expect(getByRole('suggestion')).toHaveTextContent('dog');
+      expect(getByRole('suggestion')).toMatchTextContent('dog');
     });
 
     it('should use a semantic ins element for the insertion', (): void => {
@@ -50,12 +50,12 @@ describe('Suggestion', (): void => {
 
     it('should contain the deleted text within the deletion', (): void => {
       const { getByRole } = render(<Suggestion deletion="cat" />);
-      expect(getByRole('deletion')).toHaveTextContent('cat');
+      expect(getByRole('deletion')).toMatchTextContent('cat');
     });
 
     it('should contain the deleted text within the suggestion', (): void => {
       const { getByRole } = render(<Suggestion deletion="cat" />);
-      expect(getByRole('suggestion')).toHaveTextContent('cat');
+      expect(getByRole('suggestion')).toMatchTextContent('cat');
     });
 
     it('should use a semantic del element for the deletion', (): void => {
@@ -95,14 +95,14 @@ describe('Suggestion', (): void => {
       const { getByRole } = render(
         <Suggestion deletion="cat" insertion="dog" />,
       );
-      expect(getByRole('insertion')).toHaveTextContent('dog');
+      expect(getByRole('insertion')).toMatchTextContent('dog');
     });
 
     it('should contain the deleted text within the deletion', (): void => {
       const { getByRole } = render(
         <Suggestion deletion="cat" insertion="dog" />,
       );
-      expect(getByRole('deletion')).toHaveTextContent('cat');
+      expect(getByRole('deletion')).toMatchTextContent('cat');
     });
 
     it('should contain all proposed content within the suggestion', (): void => {
@@ -110,8 +110,8 @@ describe('Suggestion', (): void => {
         <Suggestion deletion="cat" insertion="dog" />,
       );
       const suggestion: HTMLElement = getByRole('suggestion');
-      expect(suggestion).toHaveTextContent('dog');
-      expect(suggestion).toHaveTextContent('cat');
+      expect(suggestion).toMatchTextContent('dog');
+      expect(suggestion).toMatchTextContent('cat');
     });
 
     it('should use a semantic ins element for the insertion', (): void => {

@@ -28,8 +28,8 @@ describe('Separator', (): void => {
     );
 
     const separator: HTMLElement = getByRole('separator');
-    expect(separator.previousElementSibling).toHaveTextContent('Overview');
-    expect(separator.nextElementSibling).toHaveTextContent('Details');
+    expect(separator.previousElementSibling).toMatchTextContent('Overview');
+    expect(separator.nextElementSibling).toMatchTextContent('Details');
     await tab();
     expect(separator).not.toHaveFocus();
   });

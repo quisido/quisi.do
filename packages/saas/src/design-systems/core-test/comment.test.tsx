@@ -11,7 +11,7 @@ describe('Comment', (): void => {
     );
 
     const comment: HTMLElement = getByName('comment', 'Test comment');
-    expect(comment).toHaveTextContent('Test comment content');
+    expect(comment).toMatchTextContent('Test comment content');
   });
 
   it('should support replies as semantic descendants', (): void => {

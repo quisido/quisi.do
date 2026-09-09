@@ -1,5 +1,5 @@
 import { assert, describe, expect, it } from 'vitest';
-import config from './index.js';
+import config, { defineESLintConfig } from './index.js';
 import { ESLint } from 'eslint';
 
 describe('@quisido/eslint-config', (): void => {
@@ -36,5 +36,21 @@ describe('@quisido/eslint-config', (): void => {
       'rules',
       'json-schema-validator/no-invalid',
     ]);
+  });
+
+  it('should extend the default configuration', async (): Promise<void> => {
+    const linter = new ESLint({
+      overrideConfig: defineESLintConfig({
+        rules: {
+          'no-alert': 'error',
+        },
+      }),
+    });
+
+    const [firstResult] = await linter.lintText('alert();');
+    assert(firstResult !== undefined);
+    expect(firstResult.messages).toContainEqual(
+      expect.objectContaining({ ruleId: 'no-alert' }),
+    );
   });
 });

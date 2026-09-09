@@ -1,6 +1,5 @@
-import { type ExpectationResult } from '@vitest/expect';
 import { toString } from 'fmrs';
-import { expect } from 'vitest';
+import { expect, type MatcherResult } from 'vitest';
 
 /**
  * Provides missing `@testing-library/jest-dom` matchers without installing
@@ -19,7 +18,7 @@ expect.extend({
     received: HTMLElement,
     attribute: string,
     expectedValue: string | null | undefined = expect.any(String) as string,
-  ): ExpectationResult {
+  ): MatcherResult {
     const actualValue: string | null = received.getAttribute(attribute);
 
     try {

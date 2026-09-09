@@ -24,7 +24,7 @@ describe('RadioGroup', (): void => {
         throw new Error('Expected radio group to reference a visible label.');
       }
 
-      expect(window.document.getElementById(labelId)).toHaveTextContent(
+      expect(window.document.getElementById(labelId)).toMatchTextContent(
         'Shipping speed',
       );
       expect(radioGroup).not.toHaveAttribute('aria-label');
@@ -328,7 +328,7 @@ describe('RadioGroup', (): void => {
     const radioGroup: HTMLElement = getByName('radiogroup', 'Plan');
     const link: HTMLElement = getByName('link', 'Compare plans');
 
-    expect(radioGroup).toHaveTextContent('Advanced enables usage alerts.');
+    expect(radioGroup).toMatchTextContent('Advanced enables usage alerts.');
     expect(radioGroup).toContainElement(link);
     expect(getRoleCount('radio')).toBe(2);
   });

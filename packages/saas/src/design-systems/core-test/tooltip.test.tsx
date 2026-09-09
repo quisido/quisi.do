@@ -28,7 +28,7 @@ describe('Tooltip', (): void => {
     );
 
     const tooltip: HTMLElement = getByRole('tooltip');
-    expect(tooltip).toHaveTextContent('Test tooltip');
+    expect(tooltip).toMatchTextContent('Test tooltip');
     expect(tooltip).toHaveAttribute('id');
     expect(getRoleCount('tooltip')).toBe(1);
   });

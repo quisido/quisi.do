@@ -25,7 +25,7 @@ describe('Grid', (): void => {
     const caption: HTMLTableCaptionElement = getCaption(grid);
 
     expect(grid).toHaveAttribute('aria-labelledby', caption.id);
-    expect(caption).toHaveTextContent('Test grid');
+    expect(caption).toMatchTextContent('Test grid');
   });
 
   it('should render the caption as the first non-generic descendant', (): void => {

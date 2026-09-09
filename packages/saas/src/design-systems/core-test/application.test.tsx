@@ -24,7 +24,7 @@ describe('Application', (): void => {
     );
 
     const application: HTMLElement = getByRole('application');
-    expect(application).toHaveTextContent('Content');
+    expect(application).toMatchTextContent('Content');
   });
 
   it('should support a banner', (): void => {
@@ -35,7 +35,7 @@ describe('Application', (): void => {
     );
 
     const banner: HTMLElement = getByRole('banner');
-    expect(banner).toHaveTextContent('Application banner');
+    expect(banner).toMatchTextContent('Application banner');
   });
 
   it('should support a description', (): void => {
@@ -107,7 +107,7 @@ describe('Application', (): void => {
     );
 
     const contentInfo: HTMLElement = getByRole('contentinfo');
-    expect(contentInfo).toHaveTextContent('Test content info');
+    expect(contentInfo).toMatchTextContent('Test content info');
   });
 
   /**

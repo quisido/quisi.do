@@ -9,6 +9,6 @@ describe('Marquee', (): void => {
     const { getByRole } = render(<Marquee>Test content</Marquee>);
 
     const marquee: HTMLElement = getByRole('marquee');
-    expect(marquee).toHaveTextContent('Test content');
+    expect(marquee).toMatchTextContent('Test content');
   });
 });

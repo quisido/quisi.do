@@ -11,7 +11,7 @@ describe('Definition', (): void => {
     );
 
     const definition: HTMLElement = getByRole('definition');
-    expect(definition).toHaveTextContent('Definition content');
+    expect(definition).toMatchTextContent('Definition content');
   });
 
   it('should be associated with an identified term', (): void => {
@@ -24,7 +24,7 @@ describe('Definition', (): void => {
 
     const term: HTMLElement = getByRole('term');
     const definition: HTMLElement = getByRole('definition');
-    expect(term).toHaveTextContent('Test term');
+    expect(term).toMatchTextContent('Test term');
     expect(term).toHaveAttribute('aria-details', 'test-definition-id');
     expect(definition).toHaveAttribute('id', 'test-definition-id');
   });
@@ -42,6 +42,6 @@ describe('Definition', (): void => {
     expect(definition).not.toBe(button);
     expect(definition).not.toHaveAttribute('tabindex');
     expect(definition.matches('button, input, select, textarea')).toBe(false);
-    expect(button).toHaveTextContent('Interactive control');
+    expect(button).toMatchTextContent('Interactive control');
   });
 });

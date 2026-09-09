@@ -19,7 +19,7 @@ describe('Mark', (): void => {
       'aria-describedby',
       'test-mark-description-id',
     );
-    expect(mark).toHaveTextContent('Test mark');
+    expect(mark).toMatchTextContent('Test mark');
     expect(getRoleCount('mark')).toBe(1);
   });
 
@@ -43,8 +43,8 @@ describe('Mark', (): void => {
       'mark',
       'Passage of special interest in the quotation',
     );
-    expect(mark).toHaveTextContent('relevant source text');
-    expect(getByRole('blockquote')).toHaveTextContent(
+    expect(mark).toMatchTextContent('relevant source text');
+    expect(getByRole('blockquote')).toMatchTextContent(
       'This quotation includes relevant source text for comparison.',
     );
   });
@@ -59,10 +59,10 @@ describe('Mark', (): void => {
       </Paragraph>,
     );
 
-    expect(getByDescription('mark', 'Search match 1 of 2')).toHaveTextContent(
+    expect(getByDescription('mark', 'Search match 1 of 2')).toMatchTextContent(
       'browser',
     );
-    expect(getByDescription('mark', 'Search match 2 of 2')).toHaveTextContent(
+    expect(getByDescription('mark', 'Search match 2 of 2')).toMatchTextContent(
       'browser',
     );
     expect(getRoleCount('mark')).toBe(2);
