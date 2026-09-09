@@ -8,10 +8,6 @@ runs:
     - name: Setup
       uses: ./.github/actions/setup
 
-    - name: Install Vitest browsers
-      run: node scripts/install-vitest-browser.ts
-      shell: bash
-
     - name: Test
       id: test
       run: npm test
