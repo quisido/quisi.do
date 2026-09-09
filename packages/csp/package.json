@@ -56,7 +56,7 @@
     "fmrs": "^3.0.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20260829.1",
+    "@cloudflare/workers-types": "^5.20260904.1",
     "@quisido/worker-test": "^1.0.1",
     "@types/eslint": "^9.6.1",
     "@vitest/ui": "^5.0.0",
@@ -66,6 +66,6 @@
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
     "vitest": "^5.0.0",
-    "wrangler": "^4.128.0"
+    "wrangler": "^4.129.0"
   }
 }

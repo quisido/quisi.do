@@ -7,6 +7,7 @@ export const TEST_SPAN: Span = {
   get isTraced(): boolean {
     return false;
   },
+  recordException: vi.fn(),
   setAttribute: vi.fn(),
   setAttributes: vi.fn(),
 };
@@ -17,6 +18,7 @@ export const TEST_TRACING: Tracing = {
     callback: (span: Span, ...args: A) => T,
     ...args: A
   ): T => callback(TEST_SPAN, ...args),
+  getActiveSpan: (): Span => TEST_SPAN,
   Span: TEST_SPAN_CONSTRUCTOR,
   startActiveSpan: <T, A extends unknown[]>(
     _name: string,
