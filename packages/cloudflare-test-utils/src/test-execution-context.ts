@@ -7,6 +7,7 @@ export const TEST_SPAN: Span = {
   get isTraced(): boolean {
     return false;
   },
+  recordException: vi.fn(),
   setAttribute: vi.fn(),
   setAttributes: vi.fn(),
 };
