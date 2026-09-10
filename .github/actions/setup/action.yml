@@ -85,46 +85,6 @@ runs:
           libpango1.0-dev \
           librsvg2-dev;
 
-    - name: Install Playwright's Debian dependencies
-      continue-on-error: ${{ inputs.continue-on-error == 'true' }}
-      shell: bash
-      run: |-
-        sudo apt-get update;
-        sudo apt-get install --yes \
-          libavif \
-          libevent \
-          libflite \
-          libflite_cmu_grapheme_lang \
-          libflite_cmu_grapheme_lex \
-          libflite_cmu_indic_lang \
-          libflite_cmu_indic_lex \
-          libflite_cmu_time_awb \
-          libflite_cmu_us_awb \
-          libflite_cmu_us_kal \
-          libflite_cmu_us_kal16 \
-          libflite_cmu_us_rms \
-          libflite_cmu_us_slt \
-          libflite_cmulex \
-          libflite_usenglish \
-          libGLESv2 \
-          libgraphene \
-          libgstallocators \
-          libgstapp \
-          libgstaudio \
-          libgstcodecparsers \
-          libgstfft \
-          libgstgl \
-          libgstpbutils\
-          libgsttag \
-          libgstvideo \
-          libgtk-4 \
-          libhyphen \
-          libmanette-0.2 \
-          libopus \
-          libsecret-1 \
-          libwayland-server \
-          libx264;
-
     - name: Install NPM dependencies
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       run: npm install --include dev
