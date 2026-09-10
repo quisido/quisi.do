@@ -100,7 +100,7 @@
     "@openai/codex": "^0.153.4",
     "@playwright/mcp": "^0.0.80",
     "@types/eslint": "^9.6.1",
-    "@types/node": "^26.4.1",
+    "@types/node": "^26.5.0",
     "@vitest/ui": "^5.0.0",
     "browserslist": "^4.28.9",
     "chrome-devtools-mcp": "^1.8.0",
