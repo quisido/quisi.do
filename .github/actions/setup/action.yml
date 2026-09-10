@@ -109,7 +109,7 @@ runs:
           ${{ runner.os }}-
           ${{ steps.playwright-version.outputs.value }}
 
-    - name: Install browsers
+    - name: Install Playwright browsers
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       id: install-browsers
       shell: bash
@@ -117,9 +117,9 @@ runs:
         DEBIAN_FRONTEND: noninteractive
       run: >-
         npx playwright install --only-shell
-        chromium-headless-shell firefox webkit;}
+        chromium-headless-shell firefox webkit;
 
-    - name: Install browser dependencies
+    - name: Install Playwright browser dependencies
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       run: npx playwright install-deps
       shell: bash
