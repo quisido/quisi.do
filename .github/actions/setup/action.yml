@@ -93,7 +93,7 @@ runs:
     - name: Get Playwright version
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       id: playwright-version
-      run: echo "value=$(npx playwright --version)" >> $GITHUB_OUTPUT
+      run: echo "value=$(node scripts/playwright.ts --version)" >> $GITHUB_OUTPUT
       shell: bash
 
     - name: Restore Playwright cache
@@ -113,7 +113,7 @@ runs:
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       shell: bash
       run: >-
-        npx playwright install-deps
+        node scripts/playwright.ts install-deps
         chromium-headless-shell firefox webkit;
 
     - name: Install Playwright browsers
@@ -123,7 +123,7 @@ runs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: >-
-        npx playwright install --only-shell
+        node scripts/playwright.ts install --only-shell
         chromium-headless-shell firefox webkit;
 
     - name: Save Playwright cache
