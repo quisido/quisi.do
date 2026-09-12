@@ -42,7 +42,7 @@ describe('TestResponse', (): void => {
     testResponse.expectBodyToBe('example');
     testResponse.expectBodyToBe('example');
     expect((): void => testResponse.expectBodyToBe('other')).toThrow();
-    expect(testResponse.expectNoBody).toThrow();
+    expect((): void => testResponse.expectNoBody()).toThrow();
   });
 
   it('checks that an empty response has no body', async (): Promise<void> => {
