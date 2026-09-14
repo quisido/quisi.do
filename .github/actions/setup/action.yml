@@ -93,7 +93,9 @@ runs:
     - name: Get Playwright version
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       id: playwright-version
-      run: echo "value=$(npx playwright --version)" >> $GITHUB_OUTPUT
+      # @playwright/test also exposes a playwright binary, potentially at a
+      # different version from the root package used by Vitest.
+      run: echo "value=$(node node_modules/playwright/cli.js --version)" >> $GITHUB_OUTPUT
       shell: bash
 
     - name: Restore Playwright cache
@@ -113,7 +115,7 @@ runs:
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       shell: bash
       run: >-
-        npx playwright install-deps
+        node node_modules/playwright/cli.js install-deps
         chromium-headless-shell firefox webkit;
 
     - name: Install Playwright browsers
@@ -123,7 +125,7 @@ runs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: >-
-        npx playwright install --only-shell
+        node node_modules/playwright/cli.js install --only-shell
         chromium-headless-shell firefox webkit;
 
     - name: Save Playwright cache

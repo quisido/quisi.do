@@ -2,22 +2,36 @@ import { describe, expect, it } from 'vitest';
 import { TestResponse } from './index.js';
 
 describe('TestResponse', (): void => {
-  it('checks the status and headers of a response', async (): Promise<void> => {
-    const response = new Response(null, {
-      headers: { 'X-Test': 'value' },
+  it('checks the response body, headers, and status', async (): Promise<void> => {
+    const response = new Response('created', {
+      headers: { 'Content-Type': 'text/plain' },
       status: 201,
     });
 
     const testResponse: TestResponse = await TestResponse.from(response);
 
+    testResponse.expectBodyToBe('created');
+    testResponse.expectHeaderToBe('content-type', 'text/plain');
+    testResponse.expectHeadersToBe({ 'content-type': 'text/plain' });
     testResponse.expectStatusCodeToBe(201);
-    testResponse.expectHeaderToBe('x-test', 'value');
-    testResponse.expectHeadersToBe({ 'x-test': 'value' });
-    expect((): void => testResponse.expectStatusCodeToBe(200)).toThrow();
+    expect((): void => testResponse.expectBodyToBe('different')).toThrow();
+    expect((): void => testResponse.expectNoBody()).toThrow();
     expect((): void =>
-      testResponse.expectHeaderToBe('x-test', 'other'),
+      testResponse.expectHeaderToBe('content-type', 'application/json'),
     ).toThrow();
     expect((): void => testResponse.expectHeadersToBe({})).toThrow();
+    expect((): void => testResponse.expectStatusCodeToBe(200)).toThrow();
+  });
+
+  it('compares JSON response bodies as objects', async (): Promise<void> => {
+    const response = Response.json({ success: true });
+
+    const testResponse: TestResponse = await TestResponse.from(response);
+
+    testResponse.expectBodyToBe({ success: true });
+    expect((): void =>
+      testResponse.expectBodyToBe({ success: false }),
+    ).toThrow();
   });
 
   it('checks a text body after reading the response', async (): Promise<void> => {
@@ -28,18 +42,7 @@ describe('TestResponse', (): void => {
     testResponse.expectBodyToBe('example');
     testResponse.expectBodyToBe('example');
     expect((): void => testResponse.expectBodyToBe('other')).toThrow();
-    expect(testResponse.expectNoBody).toThrow();
-  });
-
-  it('compares JSON bodies by value', async (): Promise<void> => {
-    const response = new Response('{"enabled":true,"count":2}');
-
-    const testResponse: TestResponse = await TestResponse.from(response);
-
-    testResponse.expectBodyToBe({ count: 2, enabled: true });
-    expect((): void =>
-      testResponse.expectBodyToBe({ count: 3, enabled: true }),
-    ).toThrow();
+    expect((): void => testResponse.expectNoBody()).toThrow();
   });
 
   it('checks that an empty response has no body', async (): Promise<void> => {
@@ -48,6 +51,7 @@ describe('TestResponse', (): void => {
     const testResponse: TestResponse = await TestResponse.from(response);
 
     testResponse.expectNoBody();
+    testResponse.expectStatusCodeToBe(204);
     expect((): void => testResponse.expectBodyToBe('example')).toThrow();
   });
 });
