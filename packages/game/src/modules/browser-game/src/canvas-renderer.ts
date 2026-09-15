@@ -1,16 +1,39 @@
-interface RenderChunk {}
+import { type GameEntity } from '../../game/src/index.js';
+import type { BrowserGameComponent } from './types/browser-game-entity.js';
+import type { BrowserGameAction } from './types/browser-game-action.js';
 
-export class CanvasRenderer implements Renderer {
-  readonly #ctx: CanvasRenderingContext2D;
+const World = (): void => {
+  // Do nothing.
+};
 
-  constructor(private canvas: HTMLCanvasElement) {
-    this.#ctx = canvas.getContext('2d')!;
-  }
+const game = new GameEngine({
+  initialState: {},
+  world: World,
+});
 
-  public render(...chunks: RenderChunk) {
-    this.#ctx.clearRect(0, 0, 800, 600);
-    this.#ctx.fillStyle = 'red';
-    this.#ctx.fillRect(state.box.x, state.box.y, 50, 50);
-    this.#ctx.fillText(`Score: ${state.score}`, 10, 20);
-  }
+const canvas: HTMLCanvasElement | undefined =
+  window.document.getElementsByTagName('canvas')[0];
+if (canvas === undefined) {
+  throw new Error('Expected a canvas.');
 }
+
+const context: CanvasRenderingContext2D | null = canvas.getContext('2d');
+if (context === null) {
+  throw new Error('Expected a canvas context.');
+}
+
+const isDrawable = (
+  entity: GameEntity<unknown, BrowserGameAction>,
+): entity is GameEntity<unknown, BrowserGameAction> &
+  Record<'component', BrowserGameComponent<unknown, BrowserGameAction>> => {
+  return 'draw' in entity.component;
+};
+
+const draw = (): void => {
+  window.requestAnimationFrame(draw);
+  const drawable = game.getEntities(isDrawable);
+  // loop over each drawable entity
+  // draw it if it has changed
+};
+
+draw();

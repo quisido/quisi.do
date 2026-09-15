@@ -1,12 +1,12 @@
-import { type GameComponent } from '../../../game-engine/src/index.js';
+import { type GameComponent } from '../../../game/src/index.js';
 import type { BrowserGameAction } from './browser-game-action.js';
 
 export interface BrowserGameComponent<
-  T,
-  A extends BrowserGameAction,
-> extends GameComponent<T, A> {
+  State,
+  Action extends BrowserGameAction,
+> extends GameComponent<State, Action> {
   readonly draw: (
-    value: T,
+    value: State,
   ) =>
     | HTMLCanvasElement
     | HTMLImageElement
