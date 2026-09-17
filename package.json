@@ -108,7 +108,7 @@
     "eslint": "^10.10.0",
     "hint": "^7.1.13",
     "playwright": "^1.63.0",
-    "puppeteer-core": "^25.10.0",
+    "puppeteer-core": "^25.11.0",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
