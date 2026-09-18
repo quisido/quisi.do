@@ -101,7 +101,7 @@
     "@playwright/mcp": "^0.0.81",
     "@types/eslint": "^9.6.1",
     "@types/node": "^26.5.1",
-    "@vitest/ui": "^5.0.0",
+    "@vitest/ui": "^5.0.1",
     "browserslist": "^4.28.9",
     "chrome-devtools-mcp": "^1.9.0",
     "concurrently": "^10.0.5",

@@ -47,7 +47,7 @@
     "@cloudflare/workers-types": "^5.20260914.1",
     "@quisido/worker-test": "^1.0.1",
     "@types/eslint": "^9.6.1",
-    "@vitest/ui": "^5.0.0",
+    "@vitest/ui": "^5.0.1",
     "concurrently": "^10.0.5",
     "quisido": "^0.0.4",
     "rimraf": "^6.1.0",
