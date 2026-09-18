@@ -1,15 +1,12 @@
-interface Action<T extends string, P> {
-  readonly payload: P;
-  readonly type: T;
-}
+import type { GameAction } from "../../../game/src/index.js";
 
 export type BrowserGameAction =
-  | Action<'axes', readonly number[]>
-  | Action<'button', ButtonPayload>
-  | Action<'keydown', KeyboardEvent>
-  | Action<'keypress', KeyboardEvent>
-  | Action<'keyup', KeyboardEvent>
-  | Action<'tap', TapPayload>;
+  | GameAction<'axes', readonly number[]>
+  | GameAction<'button', ButtonPayload>
+  | GameAction<'keydown', KeyboardEvent>
+  | GameAction<'keypress', KeyboardEvent>
+  | GameAction<'keyup', KeyboardEvent>
+  | GameAction<'tap', TapPayload>;
 
 export interface ButtonPayload {
   readonly button: 'A' | 'B' | 'X' | 'Y' | 'L' | 'R' | 'Start' | 'Select';

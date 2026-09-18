@@ -38,17 +38,6 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
       ],
     },
   },
-
-  // Temporarily disabled for performance reasons.
-  {
-    rules: {
-      '@typescript-eslint/no-deprecated': 'off', // 2s
-      '@typescript-eslint/no-floating-promises': 'off', // 13s
-      '@typescript-eslint/no-misused-promises': 'off', // 4s
-      '@typescript-eslint/no-unsafe-assignment': 'off', // 6s
-      '@typescript-eslint/no-unused-vars': 'off', // 1s
-    },
-  }
 );
 
 export default CONFIG;

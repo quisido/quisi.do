@@ -1,12 +1,12 @@
 import type GameAction from './game-action.js';
 import type { Selector } from './selector.js';
 
-export type GameComponent<T, A extends GameAction = never> = (
+export type GameComponent<T, A extends GameAction<string, unknown> = never> = (
   this: void,
   props: GameComponentProps<T, A>,
 ) => void;
 
-export interface GameComponentProps<T, Action extends GameAction = never> {
+export interface GameComponentProps<T, Action extends GameAction<string, unknown> = never> {
   readonly listen: <A extends Action>(action: A['type'], callback: (value: T, action: A) => T) => void;
   readonly onTick: (dt: number, value: T) => T;
   readonly register: <U>(

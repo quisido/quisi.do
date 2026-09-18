@@ -3,8 +3,7 @@ import type { BrowserGameAction } from './browser-game-action.js';
 
 export interface BrowserGameComponent<
   State,
-  Action extends BrowserGameAction,
-> extends GameComponent<State, Action> {
+> extends GameComponent<State, BrowserGameAction> {
   readonly draw: (
     value: State,
   ) =>
