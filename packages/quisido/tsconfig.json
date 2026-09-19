@@ -11,17 +11,8 @@
     "rootDir": ".",
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "exclude": [
-    ".cache/",
-    ".tests/",
-    "dist/",
-    "node_modules/"
-  ],
   "extends": "./src/tsconfig.json",
   "include": [
-    "**/*",
-    "**/*.json",
-    "**/.*",
-    "**/.*.json"
+    "src/"
   ]
 }

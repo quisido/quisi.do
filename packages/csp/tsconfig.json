@@ -8,17 +8,9 @@
     "sourceRoot": "src",
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "exclude": [
-    ".cache/",
-    ".tests/",
-    ".wrangler/",
-    "dist/",
-    "node_modules/"
-  ],
   "extends": "quisido/tsconfig.json",
   "include": [
-    "**/*.json",
-    "**/*.ts"
+    "src/"
   ],
   "references": [
     {

@@ -5,7 +5,7 @@ initial focus goes to an element within the dialog[^1].
 
 Alert dialogs are used to convey messages to alert the user[^1].
 
-As a modal element, the alert dialog's precludes usage of other content on the
+As a modal element, the alert dialog precludes usage of other content on the
 page. It is expected that the user's interaction is limited to the contents of
 the alert dialog, until the dialog loses focus (e.g. programmatically) or is no
 longer displayed[^1].

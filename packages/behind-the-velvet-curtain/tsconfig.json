@@ -20,18 +20,9 @@
       "vite-plugin-pwa/client"
     ]
   },
-  "exclude": [
-    ".cache/",
-    ".tests/",
-    "_site/",
-    "node_modules/"
-  ],
   "extends": "quisido/tsconfig.json",
   "include": [
-    "**/*.json",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.webmanifest"
+    "src/"
   ],
   "references": [
     {

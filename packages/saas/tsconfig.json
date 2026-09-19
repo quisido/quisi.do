@@ -14,21 +14,13 @@
     "sourceRoot": "src",
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "exclude": [
-    ".cache/",
-    ".tests/",
-    ".wrangler/",
-    "_site/",
-    "node_modules/"
-  ],
   "extends": "quisido/tsconfig.json",
   "include": [
-    "**/.*.json",
-    "**/.*.ts",
-    "**/*.json",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.webmanifest"
+    ".vscode/",
+    "public/",
+    "scripts/",
+    "src/",
+    "test/"
   ],
   "references": [
     {

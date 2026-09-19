@@ -106,22 +106,20 @@ describe('Dialog', (): void => {
     expect(afterButton).toHaveFocus();
   });
 
-  it('should be modal when requested', (): void => {
-    itShouldBeModal(
-      <Dialog
-        description="Modal description"
-        heading="Modal"
-        modal
-        onDismiss={noop}
-      >
-        Modal content
-      </Dialog>,
-      {
-        getElement: ({ getByName }: RenderTest): HTMLElement =>
-          getByName('dialog', 'Modal'),
-      },
-    );
-  });
+  itShouldBeModal(
+    <Dialog
+      description="Modal description"
+      heading="Modal"
+      modal
+      onDismiss={noop}
+    >
+      Modal content
+    </Dialog>,
+    {
+      getElement: ({ getByName }: RenderTest): HTMLElement =>
+        getByName('dialog', 'Modal'),
+    },
+  );
 
   it('should focus a descendant when displayed as modal', (): void => {
     const { getByName } = renderDialog({

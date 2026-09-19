@@ -40,18 +40,10 @@ export default async function createDesignSystem({
     join(import.meta.dir, 'PROMPT.md'),
   ).text();
 
-  let begin = false;
   const toSubprocess = async ({
     descriptionFile: componentDescriptionFile,
     slug: componentSlug,
   }: Component): Promise<void> => {
-    if (componentSlug === 'link') {
-      begin = true;
-    }
-    if (!begin) {
-      return;
-    }
-
     const componentDescriptionPath: string = join(
       designSystemsDir,
       componentDescriptionFile,

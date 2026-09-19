@@ -21,7 +21,7 @@ From this package's root directory, execute:
 
 ```sh
 # If there is no screenshot,
-bun ./scripts/create-design-system.ts "$SLUG" "$DESCRIPTION";
+bun ./scripts/create-design-system.ts terra "$SLUG" "$DESCRIPTION";
 
 # If there is a screenshot,
 bun ./scripts/create-design-system.ts \

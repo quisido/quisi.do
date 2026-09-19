@@ -19,7 +19,7 @@
 - Each article element has `aria-setsize` set to a value that represents either
   the total number of articles that have been loaded or the total number in the
   feed, depending on which value is deemed more helpful to users. If the total
-  number in the feed is undetermined, it can be represented by a `aria-setsize`
+  number in the feed is undetermined, it can be represented by an `aria-setsize`
   value of `-1`[^1].
 - When article elements are being added to or removed from the feed container,
   and if the operation requires multiple DOM operations, the feed element has

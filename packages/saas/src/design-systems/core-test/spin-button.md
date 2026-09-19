@@ -7,7 +7,7 @@
   element if one is present, and on the spin button itself otherwise[^1].
 - The up and down arrows on a keyboard perform the increment and decrement
   functions[^1].
-- The increment and decrement button elements are mpt included in the primary
+- The increment and decrement button elements are not included in the primary
   navigation ring, e.g., the Tab ring in HTML[^1].
 - Set the `aria-valuenow` attribute when the spin button has a value[^1].
 - Set the `aria-valuemin` attribute when there is a minimum value, and the

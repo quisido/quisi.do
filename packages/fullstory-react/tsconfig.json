@@ -11,16 +11,9 @@
     "rootDir": ".",
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "exclude": [
-    ".cache/",
-    ".tests/",
-    "dist/",
-    "node_modules/"
-  ],
   "extends": "quisido/tsconfig.json",
   "include": [
-    "**/*.ts",
-    "**/*.tsx"
+    "src/"
   ],
   "references": [
     {

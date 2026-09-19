@@ -2,7 +2,7 @@
 - When the button is focused, the Space key should activate it[^1].
 - When the button is focused, the Enter key should activate it[^1].
 - If activating the button does not dismiss the current context, then focus
-  should remains on the button after activation[^1].
+  should remain on the button after activation[^1].
 - The button has role of `button`[^1].
 - The button has an accessible label. If it has no text content, it must have an
   `aria-label` or `aria-labelledby` attribute[^1].

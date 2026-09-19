@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "declarationDir": "dist",
-    "lib": ["DOM"],
+    "lib": [
+      "DOM"
+    ],
     "module": "esnext",
     "moduleResolution": "bundler",
     "outDir": "dist",
@@ -9,16 +11,8 @@
     "sourceRoot": "src",
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "exclude": [
-    ".cache/",
-    ".tests/",
-    ".wrangler/",
-    "dist/",
-    "node_modules/"
-  ],
   "extends": "quisido/tsconfig.json",
   "include": [
-    "**/*.json",
-    "**/*.ts"
+    "src/"
   ]
 }
