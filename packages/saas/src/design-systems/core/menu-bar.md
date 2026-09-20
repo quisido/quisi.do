@@ -8,4 +8,4 @@ menu bar is used to create a consistent set of frequently used commands[^1].
 
 [^1]: https://w3c.github.io/aria/#menubar
 [^2]: https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
+[^3]: https://www.w3.org/WAI/ARIA/apg/patterns/menubar/

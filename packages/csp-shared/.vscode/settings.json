@@ -1,4 +1,8 @@
 {
+  "eslint.options": {
+    "cache": true,
+    "cacheLocation": "./.cache/"
+  },
   "files.exclude": {
     ".cache/": true,
     ".tests/": true,

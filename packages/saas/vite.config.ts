@@ -52,8 +52,8 @@ const USER_CONFIG: UserConfig = {
   /**
    * Disabled because "Both esbuild and oxc options were set. oxc options will
    * be used and esbuild options will be ignored."
-  esbuild: ESBUILD_OPTIONS,
-   */
+  */
+  // esbuild: ESBUILD_OPTIONS,
   publicDir: '../public',
   root: 'src',
 };

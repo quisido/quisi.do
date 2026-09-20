@@ -5,8 +5,8 @@ discrete choices[^1].
 
 A spin button typically allows users to change its displayed value by activating
 increment and decrement buttons that step through a set of allowed values. Some
-implementations display the value in an text field that allows editing and
-typing but typically limits input in ways that help prevent invalid values[^1].
+implementations display the value in a text field that allows editing and typing
+but typically limits input in ways that help prevent invalid values[^1].
 
 Although a spin button is similar in appearance to many presentations of select,
 it is advisable to use spin button when working with known ranges (especially in

@@ -28,7 +28,7 @@ describe('Application', (): void => {
 
   it('should support a banner', (): void => {
     const { getByRole } = render(
-      <Application banner="Application banner" label="Bannered Application">
+      <Application  label="Bannered Application">
         Content
       </Application>,
     );
@@ -90,7 +90,6 @@ describe('Application', (): void => {
   it('should support content info', (): void => {
     const { getByRole } = render(
       <Application
-        contentInfo="Test content info"
         heading="Application with content info"
       >
         Content

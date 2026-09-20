@@ -13,7 +13,7 @@ currently active tab in the tab list. Tab lists, which contain a set of
 associated tab elements, are typically placed near a series of tab panels,
 usually preceding it[^1].
 
-A tan panel is a container for the resources associated with a tab, where each
+A tab panel is a container for the resources associated with a tab, where each
 tab is contained in a tablist[^3].
 
 [^1]: https://w3c.github.io/aria/#tab

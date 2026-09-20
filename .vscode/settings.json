@@ -41,6 +41,10 @@
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
   "eslint.lintTask.options": "--config eslint.config.js .",
+  "eslint.options": {
+    "cache": true,
+    "cacheLocation": "./.cache/"
+  },
   "eslint.probe": [
     "html",
     "javascript",

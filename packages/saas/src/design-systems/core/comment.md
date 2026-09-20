@@ -16,7 +16,7 @@ the commented content, as follows[^1]:
     `aria-posinset` and `aria-setsize`.
 - Otherwise, if the comment relates to other content in the page:
   - Provide `aria-details` on the element containing the commented content with
-    a value refering to the element with role `comment`.
+    a value referring to the element with role `comment`.
   - If there are multiple comments related to the same commented content, either
     provide a value for `aria-details` on the commented content that refers to
     each individual comment, or use `aria-details` to refer to a parent

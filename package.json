@@ -60,8 +60,8 @@
     "@datadog/native-metrics@*": true,
     "@datadog/pprof@*": true,
     "@github/keytar@*": true,
-    "@parcel/watcher@2.6.0": true,
-    "@tsparticles/engine@3.9.1": true,
+    "@parcel/watcher": true,
+    "@tsparticles/engine": true,
     "canvas@*": true,
     "core-js@*": true,
     "esbuild": true,
@@ -116,7 +116,7 @@
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
     "vite": "^8.3.0",
-    "vitest": "^5.0.0",
+    "vitest": "^5.0.1",
     "zod-validation-error": "^5.0.0"
   },
   "overrides": {

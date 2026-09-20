@@ -2,7 +2,8 @@
   "compilerOptions": {
     "declarationDir": "dist",
     "lib": [
-      "DOM"
+      "DOM",
+      "ESNext"
     ],
     "module": "esnext",
     "moduleResolution": "bundler",

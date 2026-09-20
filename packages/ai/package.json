@@ -34,14 +34,14 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260915.1",
     "@types/node": "^26.6.1",
-    "@vitest/coverage-istanbul": "^5.0.0",
+    "@vitest/coverage-istanbul": "^5.0.1",
     "bun-types": "^1.4.2",
     "eslint": "^10.10.0",
     "quisido": "^0.0.5",
     "rimraf": "^6.1.0",
     "typescript": "^6.0.3",
     "vite": "^8.2.1",
-    "vitest": "^5.0.0",
+    "vitest": "^5.0.1",
     "wrangler": "^4.132.0"
   }
 }

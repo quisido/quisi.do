@@ -13,8 +13,8 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
 
   // Game Engine
   {
-    files: ['src/modules/game/*.ts'],
-    ignores: ['src/modules/game/*.test.ts'],
+    files: ['src/modules/game/**/*.ts'],
+    ignores: ['src/modules/game/**/*.test.ts'],
     rules: {
       'no-restricted-properties': [
         'error',

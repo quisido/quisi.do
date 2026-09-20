@@ -1,4 +1,8 @@
 {
+  "eslint.options": {
+    "cache": true,
+    "cacheLocation": "./.cache/"
+  },
   "files.associations": {
     "**/config/api-extractor.json": "jsonc"
   },
