@@ -30,6 +30,7 @@ describe('MenuBar', (): void => {
     );
   });
 
+  // [citation needed]
   it('should preserve keyboard focus for interactive descendants', async (): Promise<void> => {
     const { getByName, tab } = render(
       <MenuBar>
@@ -38,6 +39,7 @@ describe('MenuBar', (): void => {
       </MenuBar>,
     );
 
+    await tab();
     expect(getByName('button', 'First command')).toHaveFocus();
     await tab();
     expect(getByName('button', 'Second command')).toHaveFocus();

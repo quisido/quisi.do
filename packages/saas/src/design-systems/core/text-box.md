@@ -1,6 +1,6 @@
 # Text box
 
-A text box is type of input that allows free-form text as its value[^1].
+A text box is a type of input that allows free-form text as its value[^1].
 
 If the `multiline` prop is `true`, the widget accepts line breaks within the
 input, as in an HTML textarea. Otherwise, this is a simple text box. The
