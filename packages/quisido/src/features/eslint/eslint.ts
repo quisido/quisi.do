@@ -9,7 +9,7 @@ import withDuration from '../../utils/with-duration.js';
 import getDisposableTempDir from '../../utils/get-disposable-temp-dir.js';
 import npx from '../npx/npx.js';
 import writeTemporaryFile from '../../utils/write-temporary-file.js';
-import type { CompilerOptions } from 'typescript';
+import type { CompilerOptions } from '../../types/tsconfig.js';
 // import { cpus } from 'node:os';
 
 const MAX_CONCURRENCY = 1; // : number = cpus().length;
