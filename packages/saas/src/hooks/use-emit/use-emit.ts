@@ -1,11 +1,10 @@
-import { type Event as SentryEvent, type EventHint } from '@sentry/core';
+import { captureEvent, type Event as SentryEvent, type EventHint } from '@sentry/core';
 import { mapObjectToEntries } from 'fmrs';
 import { type FSApi, useFullstory } from 'fullstory-react';
 import mixpanelBrowser from 'mixpanel-browser';
 import { usePostHog } from 'posthog-js/react';
 import { useCallback } from 'react';
 import { useDatadogRum } from 'react-datadog';
-import { useSentrySdk } from 'sentry-react';
 import EMPTY_OBJECT from '../../modules/react-google-analytics/constants/empty-object.js';
 import { useNewRelicBrowserAgent } from '../../modules/react-new-relic/index.js';
 import type { Dimensions } from '../../types/dimensions.js';
@@ -103,7 +102,6 @@ export default function useEmit(): EventEmitter {
   const newRelicBrowserAgent = useNewRelicBrowserAgent();
   const pathname: string = usePathname();
   const posthog = usePostHog();
-  const { captureEvent } = useSentrySdk();
 
   // States
   return useCallback(
@@ -144,7 +142,6 @@ export default function useEmit(): EventEmitter {
     [
       LogRocket,
       addAction,
-      captureEvent,
       fullstory,
       hostname,
       newRelicBrowserAgent,

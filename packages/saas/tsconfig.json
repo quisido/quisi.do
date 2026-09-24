@@ -16,11 +16,18 @@
   },
   "extends": "quisido/tsconfig.json",
   "include": [
-    ".vscode/",
-    "public/",
+    ".vscode/*.json",
+    "public/*.webmanifest",
     "scripts/",
     "src/",
-    "test/"
+    "src/**/*.json",
+    "test/",
+    ".*.json",
+    ".*.ts",
+    "*.cjs",
+    "*.js",
+    "*.json",
+    "*.ts"
   ],
   "references": [
     {
