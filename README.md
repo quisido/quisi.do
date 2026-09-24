@@ -40,8 +40,8 @@ As a monorepo, it composes three types of packages:
     preconfigures emitting errors, logs, and metrics; and it allows type-safe
     access to your bindings through a simplified API.
   - `worker-test/` contains utilities for testing the aforementioned workers.
-  - `fullstory-react/`, `react-datadog/`, and `sentry-react/` integrate React
-    applications with Fullstory, Datadog, and Sentry respectively.
+  - `fullstory-react/` and `react-datadog/` integrate React applications with
+    Fullstory and Datadog respectively.
 
 By keeping these technologies bleeding-edge, the monorepo serves as an
 educational and reusable tool both during development and as an open-source

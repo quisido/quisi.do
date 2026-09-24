@@ -4,7 +4,7 @@ import type GameEntity from './types/game-entity.js';
 import { type Selector } from './types/selector.js';
 import ActionListeners from './utils/action-listeners.js';
 
-export interface GameOptions<GameState, A extends GameAction> {
+export interface GameOptions<GameState, Action extends GameAction> {
   readonly initialState: GameState;
   readonly lastTick?: number | undefined;
 
@@ -17,11 +17,11 @@ export interface GameOptions<GameState, A extends GameAction> {
   readonly maxLag?: number | undefined;
   readonly now?: (() => number) | undefined;
   readonly random?: (() => number) | undefined;
-  readonly world: GameComponent<GameState, A>;
+  readonly world: GameComponent<GameState, Action>;
 }
 
 export default class Game<GameState, Action extends GameAction> {
-  readonly #entities: GameEntity<unknown>[] = [];
+  readonly #entities: GameEntity<unknown, Action>[] = [];
   #lastTick: number;
   #listeners = new ActionListeners<Action>();
   #nextEntityId: number = 1;
@@ -57,10 +57,10 @@ export default class Game<GameState, Action extends GameAction> {
         return value;
       },
       register: <U>(
-        component: GameComponent<U, A>,
+        component: GameComponent<U, Action>,
         selector: Selector<GameState, U>,
       ): void => {
-        const entity: GameEntity<U, A> = {
+        const entity: GameEntity<U, Action> = {
           component,
           id: this.#createEntityId(),
           subentities: new Set(),

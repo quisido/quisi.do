@@ -6,7 +6,6 @@ import sentryTracingPackage from '@sentry/tracing/package.json' with { type: 'js
 import sentryTypesPackage from '@sentry/types/package.json' with { type: 'json' };
 import reactDomPackage from 'react-dom/package.json' with { type: 'json' };
 import reactPackage from 'react/package.json' with { type: 'json' };
-// import sentryReactPackage2 from 'sentry-react/package.json';
 import VERSION from '../../../constants/version.js';
 import validateString from '../../../utils/validate-string.js';
 
@@ -95,7 +94,6 @@ export const SENTRY_EVENT: Event = {
     '@sentry/types': sentryTypesPackage.version,
     react: reactPackage.version,
     'react-dom': reactDomPackage.version,
-    // 'sentry-react': sentryReactPackage2.version,
   },
   platform: 'javascript',
   release: `quisi.do@${VERSION}`,

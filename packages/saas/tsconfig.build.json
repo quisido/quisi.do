@@ -45,9 +45,6 @@
       "path": "../react-datadog/tsconfig.build.json"
     },
     {
-      "path": "../sentry-react/tsconfig.build.json"
-    },
-    {
       "path": "../use-force-update/tsconfig.build.json"
     },
     {

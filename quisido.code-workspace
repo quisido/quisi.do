@@ -73,10 +73,6 @@
       "path": "packages/react-datadog"
     },
     {
-      "name": "📦 sentry-react",
-      "path": "packages/sentry-react"
-    },
-    {
       "name": "📦 use-force-update",
       "path": "packages/use-force-update"
     },
