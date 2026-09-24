@@ -25,7 +25,13 @@
   ],
   "extends": "quisido/tsconfig.json",
   "include": [
-    "src/"
+    ".vscode/*.json",
+    "src/",
+    "types/",
+    ".*.json",
+    "*.json",
+    "*.jsonc",
+    "*.ts"
   ],
   "references": [
     {
