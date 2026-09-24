@@ -134,7 +134,7 @@
     "concurrently": "^10.0.5",
     "console-table-printer": "^2.16.1",
     "dd-trace": "^6.16.0",
-    "dotenv": "^18.0.1",
+    "dotenv": "^18.0.2",
     "esbuild": "^0.28.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
