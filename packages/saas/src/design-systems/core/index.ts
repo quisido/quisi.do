@@ -27,6 +27,7 @@ export { type FormProps } from './form-props.js';
 export { type GridProps } from './grid-props.js';
 export { type HeadingProps } from './heading-props.js';
 export { type ImageProps } from './image-props.js';
+export { setInertSiblings, unsetInertSiblings } from './inert.js';
 export { type LinkProps } from './link-props.js';
 export { type ListBoxProps } from './list-box-props.js';
 export { type ListProps } from './list-props.js';

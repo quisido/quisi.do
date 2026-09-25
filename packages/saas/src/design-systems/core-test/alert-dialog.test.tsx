@@ -59,12 +59,6 @@ describe('AlertDialog', (): void => {
     getByName('alertdialog', 'Heading label');
   });
 
-  it('should be modal', (): void => {
-    const { getByName } = renderAlertDialog({ heading: 'Modal' });
-    const modal: HTMLElement = getByName('alertdialog', 'Modal');
-    expect(modal).toHaveAttribute('aria-modal', 'true');
-  });
-
   // This test is the behavioral implications of being modal.
   it('should capture keyboard navigation', async (): Promise<void> => {
     const { getByName, shiftTab, tab } = render(

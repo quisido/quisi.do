@@ -133,43 +133,6 @@ describe('Dialog', (): void => {
     expect(childButton).toHaveFocus();
   });
 
-  it('should constrain keyboard focus while modal', async (): Promise<void> => {
-    const { getByName, shiftTab, tab } = render(
-      <>
-        <button type="button">Before button</button>
-        <Dialog
-          description="Modal description"
-          heading="Modal"
-          modal
-          onDismiss={noop}
-        >
-          <button type="button">Child button</button>
-        </Dialog>
-        <button type="button">After button</button>
-      </>,
-    );
-
-    const dialog: HTMLElement = getByName('dialog', 'Modal');
-    const closeButton: HTMLElement = getByName('button', 'Close');
-
-    const expectFocusInDialog = (): void => {
-      const focusedElement: Element | null = document.activeElement;
-      expect(focusedElement).toBeInstanceOf(HTMLElement);
-      expect(dialog).toContainElement(focusedElement as HTMLElement);
-    };
-
-    const childButton: HTMLElement = getByName('button', 'Child button');
-    expect(childButton).toHaveFocus();
-    await tab();
-    expect(closeButton).toHaveFocus();
-    await tab();
-    expectFocusInDialog();
-    await shiftTab();
-    expectFocusInDialog();
-    await shiftTab();
-    expectFocusInDialog();
-  });
-
   it('should be dismissible', async (): Promise<void> => {
     const handleDismiss = vi.fn();
     const { clickButton } = renderDialog({ onDismiss: handleDismiss });
