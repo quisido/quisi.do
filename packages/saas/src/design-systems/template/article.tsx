@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
 import type { ArticleProps } from '../core/article-props.js';
-import useArticle from '../core/use-article.js';
 import Heading from './heading.js';
 import classes from './article.module.scss';
+import useId from '../core/use-id.js';
 
 /**
  * An article is a section of a page that consists of a composition that forms
@@ -28,19 +28,15 @@ import classes from './article.module.scss';
 export default function Article({
   children,
   heading,
-  labelledBy: labelledByProp,
+  labelledBy,
   tabbable = false,
 }: ArticleProps): ReactElement {
-  const { headingId, labelledBy, tabIndex } = useArticle({
-    labelledBy: labelledByProp,
-    tabbable,
-  });
-
+  const headingId: string = useId();
   return (
     <article
-      aria-labelledby={labelledBy}
+      aria-labelledby={labelledBy ?? headingId}
       className={classes['article']}
-      tabIndex={tabIndex}
+      tabIndex={tabbable ? 0 : -1}
     >
       <Heading id={headingId}>{heading}</Heading>
       {children}

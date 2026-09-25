@@ -18,8 +18,8 @@ describe('List', (): void => {
 
     const list: HTMLElement = getByName('list', 'Items');
     expect(getRoleCount('listitem')).toBe(2);
-    expect(list).toHaveTextContent('First item');
-    expect(list).toHaveTextContent('Second item');
+    expect(list.firstElementChild).toHaveTextContent('First item');
+    expect(list.lastElementChild).toHaveTextContent('Second item');
   });
 
   it('should default to unordered', (): void => {

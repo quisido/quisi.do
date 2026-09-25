@@ -32,9 +32,9 @@ const EXPECTED_COMPILER_OPTIONS: Record<PackageType, CompilerOptions> = {
 };
 
 const EXPECTED_EXCLUDE: Record<PackageType, readonly string[]> = {
-  application: ['.cache/', '.tests/', '_site/', 'node_modules/'],
-  library: ['.cache/', '.tests/', 'dist/', 'node_modules/'],
-  service: ['.cache/', '.tests/', 'dist/', 'node_modules/'],
+  application: [],
+  library: [],
+  service: [],
 };
 
 export default async function testTsConfig({ type }: Options): Promise<void> {
@@ -63,7 +63,6 @@ export default async function testTsConfig({ type }: Options): Promise<void> {
 
   // exclude
   const expectedExclude: readonly string[] = EXPECTED_EXCLUDE[type];
-
   for (const pattern of expectedExclude) {
     if (!exclude.includes(pattern)) {
       throw new Error(

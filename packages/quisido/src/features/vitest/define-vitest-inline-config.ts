@@ -12,8 +12,8 @@ const MAX_WORKERS: number = cpus().length;
 
 const DEFAULT_REPORTERS: readonly Reporter[] = [
   ['default', { summary: true }],
-  // 'hanging-process',
-  ['html', { outputFile: '.tests/vitest/report.html' }],
+  ['hanging-process', {}],
+  ['html', { outputDir: '.tests/vitest' }],
   ['json', { outputFile: '.tests/vitest/report.json' }],
   ['junit', { outputFile: '.tests/vitest/report.junit.xml' }],
 ];

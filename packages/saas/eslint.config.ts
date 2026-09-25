@@ -52,6 +52,7 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
       'max-lines': 'off',
       'max-lines-per-function': 'off',
       'max-statements': 'off',
+      'no-ternary': 'off',
     },
   },
 
