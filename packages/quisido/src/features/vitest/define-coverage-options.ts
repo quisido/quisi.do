@@ -45,11 +45,21 @@ export default function defineCoverageOptions({
         },
       ],
       ['teamcity', { file: 'teamcity.txt' }],
+      // text -> stdout
+      [
+        'text',
+        {
+          maxCols: 120,
+          skipEmpty: true,
+          skipFull: true,
+        },
+      ],
+      // text -> file
       [
         'text',
         {
           file: 'text.txt',
-          maxCols: 80,
+          maxCols: 1024,
           skipEmpty: true,
           skipFull: true,
         },

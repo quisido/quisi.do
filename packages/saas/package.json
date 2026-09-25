@@ -80,11 +80,6 @@
     "use-shallow-memo": "^1.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^8.0.6",
-    "@babel/preset-env": "^8.0.6",
-    "@babel/preset-react": "^8.0.1",
-    "@babel/preset-typescript": "^8.0.1",
-    "@babel/register": "^8.0.6",
     "@builder.io/partytown": "^0.10.3",
     "@datadog/datadog-ci": "^5.24.1",
     "@hint/connector-puppeteer": "^2.5.25",
@@ -127,9 +122,6 @@
     "@vitest/ui": "^5.0.1",
     "aria-query": "^5.3.2",
     "autoprefixer": "^10.6.1",
-    "babel-plugin-istanbul": "^8.0.0",
-    "babel-plugin-react-compiler": "^1.0.0",
-    "babel-plugin-replace-import-extension": "^1.1.5",
     "cjs-ts": "^2.0.1",
     "concurrently": "^10.0.5",
     "console-table-printer": "^2.16.1",

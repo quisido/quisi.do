@@ -13,7 +13,7 @@
     "start": "tsc --project tsconfig.json --watch",
     "test": "quisido test",
     "clean": "rm -rf .cache .tests dist node_modules",
-    "eslint": "quisido eslint",
+    "eslint": "eslint . --cache --cache-location ./.cache/",
     "knip": "quisido knip",
     "publint": "quisido publint",
     "vitest": "vitest",

@@ -16,7 +16,7 @@
     "api-extractor": "node --experimental-strip-types scripts/api-extractor.ts",
     "attw": "quisido attw",
     "clean": "rimraf .cache .tests dist node_modules",
-    "eslint": "quisido eslint",
+    "eslint": "eslint . --cache --cache-location ./.cache/",
     "publint": "quisido publint",
     "start:dependencies": "node --experimental-strip-types scripts/start.ts",
     "vitest": "vitest",

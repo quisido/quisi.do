@@ -12,7 +12,7 @@
     "start": "vite",
     "test": "quisido test",
     "clean": "rimraf .cache .tests dist node_modules",
-    "eslint": "quisido eslint",
+    "eslint": "eslint . --cache --cache-location ./.cache/",
     "serve": "serve dist",
     "tsc": "tsc --skipLibCheck",
     "vitest": "quisido vitest",

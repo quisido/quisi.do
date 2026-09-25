@@ -11,7 +11,7 @@
     "start": "vite",
     "test": "exit 0",
     "clean": "rimraf .cache .tests node_modules",
-    "eslint": "quisido eslint",
+    "eslint": "eslint . --cache --cache-location ./.cache/",
     "serve": "serve dist",
     "tsc": "tsc --skipLibCheck",
     "vite:build": "vite build",

@@ -18,7 +18,7 @@
     "codex": "codex --ask-for-approval untrusted --sandbox workspace-write --search",
     "csp": "npm --workspace=packages/csp start",
     "dashboard": "npm --workspace=packages/dashboard start",
-    "eslint": "quisido eslint",
+    "eslint": "eslint . --cache --cache-location ./.cache/",
     "eslint-config": "npm --workspace=packages/eslint-config start",
     "fmrs": "npm --workspace=packages/fmrs start",
     "game": "npm --workspace=packages/game start",
