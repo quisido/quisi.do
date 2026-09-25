@@ -3,6 +3,7 @@ import render, { type RenderTest } from './render.js';
 import type { DialogProps } from '../core/dialog-props.js';
 import noop from '../../utils/noop.js';
 import importTestedDesignSystem from './import-tested-design-system.js';
+import itShouldBeModal from './modal-test-suite.jsx';
 
 const { Dialog } = await importTestedDesignSystem();
 
@@ -21,7 +22,6 @@ const renderDialog = ({
 describe('Dialog', (): void => {
   it('should support a heading', (): void => {
     const { getByName } = renderDialog();
-
     getByName('dialog', 'Test heading');
   });
 
@@ -106,16 +106,20 @@ describe('Dialog', (): void => {
     expect(afterButton).toHaveFocus();
   });
 
-  it('should be modal when requested', (): void => {
-    const { getByName } = renderDialog({
-      heading: 'Modal',
-      modal: true,
-      onDismiss: noop,
-    });
-
-    const dialog: HTMLElement = getByName('dialog', 'Modal');
-    expect(dialog).toHaveAttribute('aria-modal', 'true');
-  });
+  itShouldBeModal(
+    <Dialog
+      description="Modal description"
+      heading="Modal"
+      modal
+      onDismiss={noop}
+    >
+      Modal content
+    </Dialog>,
+    {
+      getElement: ({ getByName }: RenderTest): HTMLElement =>
+        getByName('dialog', 'Modal'),
+    },
+  );
 
   it('should focus a descendant when displayed as modal', (): void => {
     const { getByName } = renderDialog({
@@ -127,43 +131,6 @@ describe('Dialog', (): void => {
 
     const childButton: HTMLElement = getByName('button', 'Child button');
     expect(childButton).toHaveFocus();
-  });
-
-  it('should constrain keyboard focus while modal', async (): Promise<void> => {
-    const { getByName, shiftTab, tab } = render(
-      <>
-        <button type="button">Before button</button>
-        <Dialog
-          description="Modal description"
-          heading="Modal"
-          modal
-          onDismiss={noop}
-        >
-          <button type="button">Child button</button>
-        </Dialog>
-        <button type="button">After button</button>
-      </>,
-    );
-
-    const dialog: HTMLElement = getByName('dialog', 'Modal');
-    const closeButton: HTMLElement = getByName('button', 'Close');
-
-    const expectFocusInDialog = (): void => {
-      const focusedElement: Element | null = document.activeElement;
-      expect(focusedElement).toBeInstanceOf(HTMLElement);
-      expect(dialog).toContainElement(focusedElement as HTMLElement);
-    };
-
-    const childButton: HTMLElement = getByName('button', 'Child button');
-    expect(childButton).toHaveFocus();
-    await tab();
-    expect(closeButton).toHaveFocus();
-    await tab();
-    expectFocusInDialog();
-    await shiftTab();
-    expectFocusInDialog();
-    await shiftTab();
-    expectFocusInDialog();
   });
 
   it('should be dismissible', async (): Promise<void> => {

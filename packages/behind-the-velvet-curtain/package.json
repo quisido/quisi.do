@@ -12,7 +12,7 @@
     "start": "vite",
     "test": "quisido test",
     "clean": "rimraf .cache .tests dist node_modules",
-    "eslint": "quisido eslint",
+    "eslint": "eslint . --cache --cache-location ./.cache/",
     "serve": "serve dist",
     "tsc": "tsc --skipLibCheck",
     "vitest": "quisido vitest",
@@ -44,19 +44,19 @@
   "devDependencies": {
     "@types/node": "^26.6.2",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
-    "@vitest/browser": "^5.0.0",
-    "@vitest/browser-playwright": "^5.0.0",
+    "@vitest/browser": "^5.0.1",
+    "@vitest/browser-playwright": "^5.0.1",
     "autoprefixer": "^10.6.1",
     "jsdom": "^30.1.0",
     "playwright": "^1.63.0",
     "postcss": "^8.5.28",
-    "quisido": "^0.0.4",
+    "quisido": "^0.0.5",
     "rimraf": "^6.1.3",
     "serve": "^14.2.6",
     "typescript": "^6.0.3",
     "vite": "^8.3.0",
     "vite-plugin-pwa": "^1.3.0",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.1"
   },
   "overrides": {
     "@monogatari/core": {

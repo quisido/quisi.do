@@ -44,6 +44,18 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
     },
   },
 
+  // Design Systems
+  {
+    files: ['src/design-systems/**'],
+    rules: {
+      complexity: 'off',
+      'max-lines': 'off',
+      'max-lines-per-function': 'off',
+      'max-statements': 'off',
+      'no-ternary': 'off',
+    },
+  },
+
   // Temporary rules
   {
     rules: {

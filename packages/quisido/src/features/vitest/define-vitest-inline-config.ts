@@ -1,18 +1,50 @@
 /* eslint-disable sort-keys-custom-order/object-keys */
+import type { ResolvedConfig } from 'vitest/node';
 import defineCoverageOptions from './define-coverage-options.js';
-import definePool from './define-pool.js';
 import { EXCLUDE } from './exclude.js';
 import type QuisidoVitestInlineConfig from './quisido-vitest-inline-config.js';
 import { cpus } from 'node:os';
 
+interface Options extends QuisidoVitestInlineConfig {
+  readonly disableReports: boolean;
+}
+
+type Reporter = ResolvedConfig['reporters'][number];
+
 const MAX_WORKERS: number = cpus().length;
 
-export default async function defineVitestInlineConfig({
+const DEFAULT_REPORTERS: readonly Reporter[] = [
+  ['agent', { silent: 'passed-only', summary: true }],
+  ['default', { silent: 'passed-only', summary: true }],
+  ['hanging-process', {}],
+  ['html', { outputDir: '.tests/vitest' }],
+  ['json', { outputFile: '.tests/vitest/report.json' }],
+  ['junit', { outputFile: '.tests/vitest/report.junit.xml' }],
+];
+
+export default function defineVitestInlineConfig({
   coverage = {},
+  disableReports,
   exclude = [],
+  reporters = [],
   setupFiles = [],
+  typecheck,
   ...vitestInlineConfig
-}: QuisidoVitestInlineConfig): Promise<QuisidoVitestInlineConfig> {
+}: Options): QuisidoVitestInlineConfig {
+  const getReporters = (): NonNullable<
+    QuisidoVitestInlineConfig['reporters']
+  > => {
+    if (disableReports) {
+      return [];
+    }
+
+    if (Array.isArray(reporters)) {
+      return [...DEFAULT_REPORTERS, ...reporters];
+    }
+
+    return [...DEFAULT_REPORTERS, reporters];
+  };
+
   const getSetupFiles = (): readonly string[] => {
     if (typeof setupFiles === 'string') {
       return [setupFiles];
@@ -33,22 +65,13 @@ export default async function defineVitestInlineConfig({
     mockReset: true,
     name: 'Vitest',
     restoreMocks: true,
-    ...vitestInlineConfig,
-
-    ...(await definePool()),
-
-    reporters: [
-      ['default', { summary: true }],
-      'hanging-process',
-      ['html', { outputDir: '.tests/vitest' }],
-      ['json', { outputFile: '.tests/vitest/report.json' }],
-      ['junit', { outputFile: '.tests/vitest/report.junit.xml' }],
-    ],
-
+    // pool: 'typescript',
+    reporters: getReporters(),
     setupFiles: ['quisido/vitest-setup-file.js', ...getSetupFiles()],
-
     typecheck: {
+      ...typecheck,
       enabled: false,
     },
+    ...vitestInlineConfig,
   };
 }

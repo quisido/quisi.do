@@ -33,17 +33,12 @@ const JS_CONFIG: Config = defineConfig({
     ...js.configs.recommended.rules,
     ...prettierConfig.rules,
     ...prettierPluginRecommended.rules,
-
     camelcase: ['error', { properties: 'never' }],
-
     // Commented out code may be lowercase.
     'capitalized-comments': 'off',
-
     complexity: 'warn',
-
     // Too many false positives.
     'consistent-return': 'off',
-
     'func-name-matching': 'off',
     'id-length': [
       'error',
@@ -63,20 +58,15 @@ const JS_CONFIG: Config = defineConfig({
     'no-bitwise': 'off',
     'no-continue': 'off',
     'no-global-assign': 'error',
-
     // This is better handled by `@stylistic/max-len` or Prettier.
     'no-inline-comments': 'off',
-
     'no-magic-numbers': ['error', { ignore: [-1, 0, 1] }],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'no-shadow-restricted-names': 'error',
-
     // This rule is a good goal, but some ternaries are better than their alternatives.
     'no-ternary': 'warn',
-
     // This is safe due to `no-global-assign` and `no-shadow-restricted-names`.
     'no-undefined': 'off',
-
     'one-var': 'off',
     'sort-imports': 'off',
     'sort-keys': 'off',

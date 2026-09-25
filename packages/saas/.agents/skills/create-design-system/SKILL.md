@@ -1,74 +1,31 @@
 ---
 name: create-design-system
-description: Use this skill to create a new design system.
+description: Use this skill to create every component in a design system. Do not use it for single components.
 ---
 
 # Instructions for creating a design system
 
+This skill is for creating every component in a design system.
+**Do not use this skill to create only a single component.**
+
 Before getting started, you need to know:
-- The "description" of the design system. It should be a few sentences long and
-  packed with artistic keywords that inspire the design system's aesthetic.
 - The "slug" for the design system. It should be short, alphanumeric, lowercase,
   and use hyphens instead of spaces.
+- The "description" of the design system. It should be a few sentences long and
+  packed with artistic keywords that inspire the design system's aesthetic.
 - (Optional) A screenshot to use as a visual reference.
 
-## Copy the template files
+## Execute
 
-From this package's root directory, execute the `design-system:copy-template`
-script, passing the _slug_ as an argument.
+From this package's root directory, execute:
 
-```bash
-npm run design-system:copy-template -- my-example-slug
-```
+```sh
+# If there is no screenshot,
+bun ./scripts/create-design-system.ts terra "$SLUG" "$DESCRIPTION";
 
-## Test-driven development
-
-From this package's root directory, execute
-`VITE_TESTED_DESIGN_SYSTEM=$slug npx vitest run src/design-systems/core-test/`
-to verify the new design system files accurately pass the test suite. If the
-test suite is failing on this step, stop and notify the user that something is
-wrong with the design system template or test suite.
-
-## Design decisions
-
-Use the provided description and screenshot to determine useful _semantic_
-design tokens and their values. Create as many or as few as you need.
-
-**Considerations:**
-- _Primary colors_ for calls to action
-- _Accent colors_ for highlights and emphasis
-- _Font families_ for sans-serif display text (headings) and serif base text
-  (body); only use font families from Google Fonts
-- Should the _border radius_ be soft or sharp?
-- Should the _border widths_ be thick or thin?
-- Should the _box shadows_ be elevated low or high?
-- Should the _padding_ be spacious or dense?
-
-## Implementation
-
-Components in the design system are located at `src/design-systems/$slug/*.tsx`
-and their CSS files are co-located at `src/design-systems/$slug/*.module.scss`.
-
-_Do not_ look at other design systems in the repository, and **do not** create a
-shared theme file for each component to use. That would lead to each component
-looking identical.
-
-To prevent context bloat, use a separate subagent to implement each component.
-Give the subagent the design system's slug, description, optional screenshot,
-design decisions, its specific component's TSX and SCSS, and the instructions
-listed in this skill's sibling `SUBAGENT_INSTRUCTIONS.md` file.
-
-## Validate
-
-Once all components are implemented, review them holistically. Does the design
-system align with the original description? Do the components look visually
-cohesive when used together? If not, make any necessary adjustments.
-
-## Test
-
-As a final check, run the design system's test suite. If any tests are failing,
-adjust the implementation until all tests pass.
-
-```bash
-npx vitest run src/design-systems/$slug.test.ts
+# If there is a screenshot,
+bun ./scripts/create-design-system.ts \
+  "$SLUG" \
+  "$DESCRIPTION" \
+  "./path/to/screenshot.png";
 ```

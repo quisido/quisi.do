@@ -1,5 +1,5 @@
 import render from './render.js';
-import { describe, expect, it } from 'vitest';
+import { assert, describe, expect, it } from 'vitest';
 import importTestedDesignSystem from './import-tested-design-system.js';
 
 const { Suggestion } = await importTestedDesignSystem();
@@ -136,15 +136,28 @@ describe('Suggestion', (): void => {
     });
   });
 
-  /**
-   * TODO: Authors MAY use aria-details to associate the suggestion with
-   * related information such as comments, authoring info, and time stamps.
-   * @see {@link https://w3c.github.io/aria/#aria-details}
-   */
+  it('should associate related structured details', (): void => {
+    const { getByRole } = render(
+      <>
+        <Suggestion detailsId="suggestion-details" insertion="dog" />
+        <aside id="suggestion-details">Suggested by Alex today</aside>
+      </>,
+    );
 
-  /**
-   * TODO: Authors MAY use aria-description to associate the suggestion with
-   * related information such as comments, authoring info, and time stamps.
-   * @see {@link https://w3c.github.io/aria/#aria-description}
-   */
+    const suggestion: HTMLElement = getByRole('suggestion');
+    const { ariaDetailsElements } = suggestion;
+    assert(ariaDetailsElements !== null);
+    expect(ariaDetailsElements[0]).toHaveTextContent('Suggested by Alex today');
+  });
+
+  it('should expose a concise related description', (): void => {
+    const { getByRole } = render(
+      <Suggestion description="Suggested by Alex today" insertion="dog" />,
+    );
+
+    expect(getByRole('suggestion')).toHaveAttribute(
+      'aria-description',
+      'Suggested by Alex today',
+    );
+  });
 });

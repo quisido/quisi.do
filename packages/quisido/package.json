@@ -1,6 +1,6 @@
 {
   "name": "quisido",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "quisi.do <quisido@quisi.do>",
   "description": "all-in-one",
   "homepage": "https://github.com/quisido/quisi.do/tree/main/packages/quisido#readme",
@@ -13,7 +13,7 @@
     "start": "tsc --project tsconfig.json --watch",
     "test": "quisido test",
     "clean": "rm -rf .cache .tests dist node_modules",
-    "eslint": "quisido eslint",
+    "eslint": "eslint . --cache --cache-location ./.cache/",
     "knip": "quisido knip",
     "publint": "quisido publint",
     "vitest": "vitest",
@@ -92,10 +92,10 @@
   },
   "devDependencies": {
     "@types/node": "^26.6.2",
-    "@vitest/coverage-istanbul": "^5.0.0",
+    "@vitest/coverage-istanbul": "^5.0.1",
     "eslint": "^10.11.0",
     "typescript": "^6.0.3",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.1"
   },
   "peerDependencies": {
     "@vitest/coverage-istanbul": ">=4.0.0",

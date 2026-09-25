@@ -5,6 +5,8 @@ import { PARSER_OPTIONS } from './parser-options.js';
 
 export const TYPESCRIPT_PARSER_OPTIONS: Required<Linter.ParserOptions> = {
   ...PARSER_OPTIONS,
-  projectService: true,
+  projectService: {
+    allowDefaultProject: [],
+  },
   tsconfigRootDir: cwd(),
 };

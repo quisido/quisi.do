@@ -6,12 +6,6 @@
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/saas/src/",
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
-  "extends": "./tsconfig.json",
-  "include": [
-    "src/**/*.json",
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ],
   "exclude": [
     "src/**/*.e2e.ts",
     "src/**/*.test.ts",
@@ -20,6 +14,11 @@
     "src/*.test.ts",
     "src/*.test.tsx",
     "src/test/"
+  ],
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/",
+    "src/**/*.json"
   ],
   "references": [
     {
@@ -45,9 +44,6 @@
     },
     {
       "path": "../react-datadog/tsconfig.build.json"
-    },
-    {
-      "path": "../sentry-react/tsconfig.build.json"
     },
     {
       "path": "../use-force-update/tsconfig.build.json"

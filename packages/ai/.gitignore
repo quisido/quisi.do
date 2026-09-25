@@ -1,4 +1,6 @@
+/_site/
 /.cache/
+/_site/
 /.tests/
 /.wrangler/
 /node_modules/

@@ -18,12 +18,6 @@ updates:
   # Dependabot should automatically discover workspaces in `packages/`.
   directory: /
   groups:
-    babel:
-      patterns:
-      - "@babel/*"
-      - babel-loader
-      - babel-plugin-*
-
     eslint:
       patterns:
       - "@*/eslint-plugin"

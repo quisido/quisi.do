@@ -1,6 +1,7 @@
 import { useOverlay, usePreventScroll } from '@react-aria/overlays';
 import useId from './use-id.js';
 import { type HTMLAttributes, type RefObject, useRef } from 'react';
+import useModal from './use-modal.js';
 
 export interface AlertDialogState<T extends HTMLElement> {
   readonly descriptionId: string;
@@ -33,6 +34,8 @@ export default function useAlertDialog<T extends HTMLElement>({
     },
     ref,
   );
+
+  useModal(ref);
 
   return {
     descriptionId,

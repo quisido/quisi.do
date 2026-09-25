@@ -14,21 +14,20 @@
     "sourceRoot": "src",
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "exclude": [
-    ".cache/",
-    ".tests/",
-    ".wrangler/",
-    "_site/",
-    "node_modules/"
-  ],
   "extends": "quisido/tsconfig.json",
   "include": [
-    "**/.*.json",
-    "**/.*.ts",
-    "**/*.json",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.webmanifest"
+    ".vscode/*.json",
+    "public/*.webmanifest",
+    "scripts/",
+    "src/",
+    "src/**/*.json",
+    "test/",
+    ".*.json",
+    ".*.ts",
+    "*.cjs",
+    "*.js",
+    "*.json",
+    "*.ts"
   ],
   "references": [
     {
@@ -54,9 +53,6 @@
     },
     {
       "path": "../react-datadog/tsconfig.build.json"
-    },
-    {
-      "path": "../sentry-react/tsconfig.build.json"
     },
     {
       "path": "../use-force-update/tsconfig.build.json"

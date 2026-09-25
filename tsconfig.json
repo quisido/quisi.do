@@ -7,24 +7,14 @@
     "rootDir": ".",
     "skipLibCheck": true
   },
-  "exclude": [
-    ".cache/",
-    ".git/",
-    ".idea/",
-    ".tests/",
-    ".wrangler/",
-    "dist/",
-    "node_modules/",
-    "packages/"
-  ],
   "extends": "quisido/tsconfig.json",
   "include": [
-    "**/.*/**/*.ts",
-    "**/.*/**/.*.json",
-    "**/.*/**/*.json",
-    "**/.*.json",
-    "**/*.json",
-    "**/*.ts"
+    "scripts/",
+    "types/",
+    "utils/",
+    "*.code-workspace",
+    "*.json",
+    "*.ts"
   ],
   "references": [
     {

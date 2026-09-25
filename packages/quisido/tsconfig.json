@@ -11,17 +11,11 @@
     "rootDir": ".",
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "exclude": [
-    ".cache/",
-    ".tests/",
-    "dist/",
-    "node_modules/"
-  ],
+  "exclude": [],
   "extends": "./src/tsconfig.json",
   "include": [
-    "**/*",
-    "**/*.json",
-    "**/.*",
-    "**/.*.json"
+    "src/",
+    "*.json",
+    "*.ts"
   ]
 }

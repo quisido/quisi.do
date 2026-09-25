@@ -1,0 +1,18 @@
+import { type GameComponent } from '../../../game/src/index.js';
+import type { BrowserGameAction } from './browser-game-action.js';
+
+export interface BrowserGameComponent<State> extends GameComponent<
+  State,
+  BrowserGameAction
+> {
+  readonly draw: (
+    value: State,
+  ) =>
+    | HTMLCanvasElement
+    | HTMLImageElement
+    | HTMLVideoElement
+    | ImageBitmap
+    | OffscreenCanvas
+    | SVGImageElement
+    | VideoFrame;
+}

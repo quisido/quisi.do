@@ -47,10 +47,10 @@ describe('useShallowMemo', (): void => {
   });
 
   it('should update when object keys change but values remain equal', (): void => {
-    const INITIAL_KEY_OBJECT = {
+    const INITIAL_KEY_OBJECT: object = {
       first: 'shared value',
     };
-    const CHANGED_KEY_OBJECT = {
+    const CHANGED_KEY_OBJECT: object = {
       second: 'shared value',
     };
     const { rerender, result } = renderHook(useShallowMemo, {

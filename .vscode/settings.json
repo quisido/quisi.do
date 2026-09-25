@@ -41,6 +41,10 @@
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
   "eslint.lintTask.options": "--config eslint.config.js .",
+  "eslint.options": {
+    "cache": true,
+    "cacheLocation": "./.cache/"
+  },
   "eslint.probe": [
     "html",
     "javascript",
@@ -53,7 +57,6 @@
     "typescriptreact",
     "yaml"
   ],
-  "eslint.useFlatConfig": true,
   "eslint.validate": [
     "html",
     "javascript",
@@ -99,6 +102,23 @@
   "js/ts.tsdk.path": "./node_modules/typescript/lib",
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "npm.packageManager": "npm",
+  "remote.portsAttributes": {
+    "378": {
+      "protocol": "https"
+    },
+    "3000": {
+      "protocol": "https"
+    },
+    "5882": {
+      "protocol": "https"
+    },
+    "6586": {
+      "protocol": "https"
+    },
+    "9778": {
+      "protocol": "https"
+    }
+  },
   "scss.completion.completePropertyWithSemicolon": true,
   "scss.format.braceStyle": "collapse",
   "scss.format.enable": true,

@@ -11,6 +11,7 @@
     "moduleResolution": "bundler",
     "outDir": "_site",
     "rootDir": ".",
+    "skipLibCheck": true,
     "sourceRoot": "src",
     "types": [
       "@types/node"
@@ -24,10 +25,13 @@
   ],
   "extends": "quisido/tsconfig.json",
   "include": [
-    "**/*.json",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.webmanifest"
+    ".vscode/*.json",
+    "src/",
+    "types/",
+    ".*.json",
+    "*.json",
+    "*.jsonc",
+    "*.ts"
   ],
   "references": [
     {

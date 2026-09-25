@@ -34,6 +34,13 @@ interface OptionalInsertionProps {
   readonly insertion?: ReactNode | undefined;
 }
 
-export type SuggestionProps =
-  | (DeletionProps & OptionalInsertionProps)
-  | (InsertionProps & OptionalDeletionProps);
+interface Props {
+  readonly description?: string | undefined;
+  readonly detailsId?: string | undefined;
+}
+
+export type SuggestionProps = Props &
+  (
+    | (DeletionProps & OptionalInsertionProps)
+    | (InsertionProps & OptionalDeletionProps)
+  );

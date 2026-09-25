@@ -1,6 +1,7 @@
 import { type Ref, type RefObject, useLayoutEffect, useRef } from 'react';
 import useId from './use-id.js';
 import validateNonNull from '../../utils/validate-non-null.js';
+import { setInertSiblings, unsetInertSiblings } from './inert.js';
 
 interface Props {
   readonly labelledBy?: string | undefined;
@@ -28,6 +29,7 @@ export default function useDialog({
   const handleDismiss = (): void => {
     const dialog: HTMLDialogElement = validateNonNull(ref.current);
     dialog.close();
+    unsetInertSiblings(dialog);
 
     if (onDismiss !== undefined) {
       onDismiss();
@@ -41,9 +43,11 @@ export default function useDialog({
 
     const dialog: HTMLDialogElement = validateNonNull(ref.current);
     dialog.showModal();
+    setInertSiblings(dialog);
 
     return (): void => {
       dialog.close();
+      unsetInertSiblings(dialog);
     };
   }, [modal]);
 

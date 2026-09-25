@@ -5,7 +5,7 @@
       "path": "."
     },
     {
-      "name": "📱 quisi.do",
+      "name": "📱 quisi.do (SaaS)",
       "path": "packages/saas"
     },
     {
@@ -65,16 +65,12 @@
       "path": "packages/number-format-react"
     },
     {
-      "name": "📦 quisido",
+      "name": "📦 quisido (CLI)",
       "path": "packages/quisido"
     },
     {
       "name": "📦 react-datadog",
       "path": "packages/react-datadog"
-    },
-    {
-      "name": "📦 sentry-react",
-      "path": "packages/sentry-react"
     },
     {
       "name": "📦 use-force-update",
@@ -106,6 +102,23 @@
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
     "js/ts.tsdk.path": "./node_modules/typescript/lib",
     "js/ts.tsdk.promptToUseWorkspaceVersion": true,
+    "remote.portsAttributes": {
+      "378": {
+        "protocol": "https"
+      },
+      "3000": {
+        "protocol": "https"
+      },
+      "5882": {
+        "protocol": "https"
+      },
+      "6586": {
+        "protocol": "https"
+      },
+      "9778": {
+        "protocol": "https"
+      }
+    },
     "scss.format.enable": true,
     "terminal.integrated.shellIntegration.enabled": true,
     "yaml.keyOrdering": false

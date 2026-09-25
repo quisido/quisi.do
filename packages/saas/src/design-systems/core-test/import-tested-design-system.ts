@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import type { DesignSystem } from '../core/index.js';
 
 export default async function importTestedDesignSystem(): Promise<DesignSystem> {
@@ -9,12 +10,28 @@ export default async function importTestedDesignSystem(): Promise<DesignSystem> 
     );
   }
 
-  switch (VITE_TESTED_DESIGN_SYSTEM) {
-    case 'template': {
-      return await import('../template/index.js');
-    }
-
-    default:
-      throw new Error(`Unknown design system: ${VITE_TESTED_DESIGN_SYSTEM}`);
+  if (
+    VITE_TESTED_DESIGN_SYSTEM.includes('.') ||
+    VITE_TESTED_DESIGN_SYSTEM.includes('/') ||
+    VITE_TESTED_DESIGN_SYSTEM.includes('\\')
+  ) {
+    throw new Error('Invalid VITE_TESTED_DESIGN_SYSTEM environment variable.', {
+      cause: VITE_TESTED_DESIGN_SYSTEM,
+    });
   }
+
+  const modules: Record<string, () => Promise<unknown>> = import.meta.glob(
+    '../*/index.ts',
+  );
+
+  const designSystemModule: (() => Promise<unknown>) | undefined =
+    modules[`../${VITE_TESTED_DESIGN_SYSTEM}/index.ts`];
+
+  if (designSystemModule === undefined) {
+    throw new Error(`Design system not found: ${VITE_TESTED_DESIGN_SYSTEM}`, {
+      cause: modules,
+    });
+  }
+
+  return (await designSystemModule()) as DesignSystem;
 }
