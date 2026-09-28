@@ -10,6 +10,8 @@ export const TEST_SPAN: Span = {
   recordException: vi.fn(),
   setAttribute: vi.fn(),
   setAttributes: vi.fn(),
+  setStatus: vi.fn().mockReturnThis(),
+  updateName: vi.fn().mockReturnThis(),
 };
 export const TEST_SPAN_CONSTRUCTOR: typeof Span = vi.fn();
 export const TEST_TRACING: Tracing = {

@@ -10,19 +10,20 @@ export default function useMockFullstoryBrowser(
 ): Omit<typeof fullstoryBrowser, 'default'> {
   // States
   const [initialized, setInitialized] = useState(false);
+  const partialFullstory = partial.FullStory ?? partial.Fullstory;
 
   const FullStory = useMemo((): FSApi => {
     return merge(
       function MockFullstory(...args: Parameters<FSApi>) {
-        if (typeof partial.FullStory === 'undefined') {
+        if (typeof partialFullstory === 'undefined') {
           return;
         }
 
-        partial.FullStory.apply(FullStory, args);
+        partialFullstory.apply(FullStory, args);
       } as Omit<FSApi, keyof ApiV1>,
       FullStoryBrowserFSApi,
     );
-  }, [partial.FullStory]);
+  }, [partialFullstory]);
 
   // Callbacks
   const init = useCallback((): void => {
@@ -38,6 +39,7 @@ export default function useMockFullstoryBrowser(
     // Sorted keys should not move between before/after object spread.
     // eslint-disable-next-line sort-keys-custom-order/object-keys
     FullStory,
+    Fullstory: FullStory,
     isInitialized,
   });
 }
