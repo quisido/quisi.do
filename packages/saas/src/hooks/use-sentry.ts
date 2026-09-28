@@ -27,8 +27,8 @@ const DATA_COLLECTION: DataCollection = {
     request: true,
     response: true,
   },
-  queryParams: true,
   stackFrameVariables: true,
+  urlQueryParams: true,
   userInfo: true,
 };
 
