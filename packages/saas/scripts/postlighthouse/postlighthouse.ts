@@ -6,7 +6,7 @@ import { type Result } from 'lighthouse';
 import mapAuditResultToString from './utils/map-audit-result-to-string.js';
 import mapResultToDashboard from './utils/map-result-to-dashboard.js';
 
-const CWD = process.cwd();
+const CWD: string = process.cwd();
 const DASHBOARD_PATH = `${CWD}/public/dashboard.json`;
 const EMPTY = 0;
 const PERFECT = 1;

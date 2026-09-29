@@ -21,6 +21,7 @@ export default function Link({
   className,
   href,
   onClick,
+  preventDefault = false,
   title,
 }: LinkProps): ReactElement {
   const isExternal: boolean = /^(?:https?:)?\/\//u.test(href);
@@ -31,7 +32,10 @@ export default function Link({
     }
 
     return (ev: MouseEvent): void => {
-      onClick(ev);
+      if (preventDefault) {
+        ev.preventDefault();
+      }
+      onClick();
     };
   })();
 

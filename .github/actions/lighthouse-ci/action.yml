@@ -13,10 +13,8 @@ runs:
       run: >-
         chmod +x ./scripts/lighthouse-serve.sh;
         ./scripts/lighthouse-serve.sh;
-        npx esbuild --bundle --format=cjs --platform=node
-        --outfile=./.tests/postlighthouse.cjs
-        ./scripts/postlighthouse/index.ts &&
-        node ./.tests/postlighthouse.cjs;
+        chmod +x ./scripts/postlighthouse.sh;
+        ./scripts/postlighthouse.sh;
     - name: Upload
       if: always()
       uses: actions/upload-artifact@v6

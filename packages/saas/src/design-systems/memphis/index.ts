@@ -132,3 +132,5 @@ export { default as Toolbar } from './toolbar.js';
 export { default as Tooltip } from './tooltip.js';
 export { default as Tree } from './tree.js';
 export { default as TreeGrid } from './tree-grid.js';
+
+export const name = 'Memphis';

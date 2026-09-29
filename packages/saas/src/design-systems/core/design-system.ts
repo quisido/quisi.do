@@ -100,6 +100,7 @@ export default interface DesignSystem {
   readonly Menu: ComponentType<MenuProps>;
   readonly MenuBar: ComponentType<MenuBarProps>;
   readonly Meter: ComponentType<MeterProps>;
+  readonly name: string;
   readonly Navigation: ComponentType<NavigationProps>;
   readonly Note: ComponentType<NoteProps>;
   readonly Paragraph: ComponentType<ParagraphProps>;
