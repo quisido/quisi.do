@@ -6,10 +6,11 @@ import { type AliasOptions } from 'vite';
 const CURRENT_DIRECTORY = dirname(fileURLToPath(import.meta.url));
 const MONOGATARI_CORE_DIRECTORY = resolve(
   CURRENT_DIRECTORY,
-  '../../node_modules/@monogatari/core',
+  '../../../node_modules/@monogatari/core',
 );
 
 export const MONOGATARI_ALIASES: AliasOptions = [
+  // Fix for "monogatari.css is not exported from package @monogatari/core".
   {
     find: '@monogatari/core/dist/engine/core/monogatari.css',
     replacement: resolve(
@@ -17,6 +18,8 @@ export const MONOGATARI_ALIASES: AliasOptions = [
       'dist/engine/core/monogatari.css',
     ),
   },
+
+  // Fix for "default is not exported by monogatari.js".
   {
     find: '@monogatari/core',
     replacement: resolve(MONOGATARI_CORE_DIRECTORY, 'src/index.ts'),

@@ -1,7 +1,6 @@
-import { type ReactElement, useEffect, useState } from 'react';
+import { type ReactElement } from 'react';
 
 import { Main, Marquee, Region } from '../components/design-system.js';
-import increment from '../utils/increment.js';
 import Page from './page.js';
 
 const QUOTES = [
