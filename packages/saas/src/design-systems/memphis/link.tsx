@@ -1,5 +1,6 @@
 import {
   type HTMLAttributeAnchorTarget,
+  type MouseEvent,
   type MouseEventHandler,
   type ReactElement,
 } from 'react';
@@ -32,8 +33,8 @@ export default function Link({
       return;
     }
 
-    return (): void => {
-      onClick();
+    return (ev: MouseEvent): void => {
+      onClick(ev);
     };
   })();
 

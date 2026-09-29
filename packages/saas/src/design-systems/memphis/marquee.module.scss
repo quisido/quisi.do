@@ -30,6 +30,10 @@
   padding: clamp(1rem, 3vw, 1.6rem) clamp(3.8rem, 10vw, 8rem);
   position: relative;
   transform: rotate(-0.45deg);
+  transition-duration: 1s;
+  transition-property: height, width;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
 }
 
 .marquee::before,
