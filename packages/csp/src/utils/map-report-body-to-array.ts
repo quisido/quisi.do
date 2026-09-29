@@ -1,5 +1,5 @@
-import type { ReportBodyArray } from '../types/report-body-array.js';
 import type ReportBody from '../types/report-body.js';
+import { type ReportBodyArray } from '../types/report-body-array.js';
 
 export default function mapReportBodyToArray({
   blockedURL,

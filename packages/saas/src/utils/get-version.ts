@@ -1,11 +1,11 @@
-import mapGitHubShaToVersion from '../utils/map-github-sha-to-version.js';
+import mapGitHubShaToVersion from './map-github-sha-to-version.js';
 
 export default function getVersion(): string {
   /**
    * If this build relates to a specific GitHub SHA, then the SHA should be
    * used to generate the version ID.
    */
-  const githubSha: string | undefined = import.meta.env.GITHUB_SHA;
+  const githubSha: string | undefined = import.meta.env['GITHUB_SHA'];
   if (typeof githubSha === 'string') {
     return mapGitHubShaToVersion(githubSha);
   }

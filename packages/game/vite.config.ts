@@ -6,6 +6,7 @@ import {
   type UserConfig,
   type UserConfigFnObject,
 } from 'vite';
+
 import buildTSConfig from './tsconfig.build.json' with { type: 'json' };
 
 const ESBUILD_OPTIONS: ESBuildOptions = {

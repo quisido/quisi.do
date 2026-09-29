@@ -1,5 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 import { expect } from 'vitest';
+
 import createNotImplementedThrower from './create-not-implemented-thrower.js';
 
 interface Options {

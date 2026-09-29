@@ -1,11 +1,12 @@
-import type {
-  HTMLAttributeAnchorTarget,
-  MouseEventHandler,
-  ReactElement,
+import {
+  type HTMLAttributeAnchorTarget,
+  type MouseEventHandler,
+  type ReactElement,
 } from 'react';
-import type { LinkProps } from '../core/link-props.js';
-import classes from './link.module.scss';
+
 import validateString from '../../utils/validate-string.js';
+import { type LinkProps } from '../core/link-props.js';
+import classes from './link.module.scss';
 
 const linkClassName: string = validateString(classes['link']);
 

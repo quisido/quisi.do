@@ -1,11 +1,12 @@
-import { assert, describe, expect, it } from 'vitest';
-import config, { defineESLintConfig } from './index.js';
 import { ESLint } from 'eslint';
+import { assert, describe, expect, it } from 'vitest';
 
-describe('@quisido/eslint-config', (): void => {
+import { DEFAULT_CONFIGS, defineESLintConfig } from './index.js';
+
+describe('ESLint config', (): void => {
   it('should be a valid ESLint configuration', async (): Promise<void> => {
     const linter = new ESLint({
-      overrideConfig: config,
+      overrideConfig: DEFAULT_CONFIGS,
     });
     await linter.lintText('{}');
   });
@@ -14,7 +15,7 @@ describe('@quisido/eslint-config', (): void => {
   // This test asserts that the Schema Store is functional.
   it('should use the Schema Store catalog', async (): Promise<void> => {
     const linter = new ESLint({
-      overrideConfig: config,
+      overrideConfig: DEFAULT_CONFIGS,
     });
     const [firstResult] = await linter.lintText('abcdefg: hijkl\n', {
       filePath: '.github/workflows/test.yml',
@@ -25,7 +26,7 @@ describe('@quisido/eslint-config', (): void => {
 
   it('should lint GitHub workflows', async (): Promise<void> => {
     const linter = new ESLint({
-      overrideConfig: config,
+      overrideConfig: DEFAULT_CONFIGS,
     });
 
     const configForFile: unknown = await linter.calculateConfigForFile(

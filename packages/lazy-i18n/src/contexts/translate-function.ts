@@ -1,4 +1,5 @@
 import { type Context, createContext } from 'react';
+
 import type TranslateFunctionType from '../types/translate-function.js';
 import defaultTranslateFunction from '../utils/default-translate-function.js';
 

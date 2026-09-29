@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { TimeProps } from '../core/time-props.js';
+import { type ReactElement } from 'react';
+
+import { type TimeProps } from '../core/time-props.js';
 import classes from './time.module.scss';
 
 /**

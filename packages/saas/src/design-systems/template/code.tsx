@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { CodeProps } from '../core/code-props.js';
+import { type ReactElement } from 'react';
+
+import { type CodeProps } from '../core/code-props.js';
 import classes from './code.module.scss';
 
 /**

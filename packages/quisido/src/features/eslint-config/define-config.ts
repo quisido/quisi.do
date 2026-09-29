@@ -1,5 +1,6 @@
 import { type ConfigWithExtends } from '@eslint/config-helpers';
 import { defineConfig as eslintDefineConfig } from 'eslint/config';
+
 import { LINTER_OPTIONS } from './linter-options.js';
 import { type PickPartial } from './pick-partial.js';
 

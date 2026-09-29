@@ -1,4 +1,3 @@
-import { VitePWA as vitePWA } from 'vite-plugin-pwa';
 import {
   type ConfigEnv,
   defineConfig,
@@ -6,7 +5,9 @@ import {
   type UserConfig,
   type UserConfigFnObject,
 } from 'vite';
-import { MONOGATARI_ALIASES } from './monogatari-aliases.js';
+import { VitePWA as vitePWA } from 'vite-plugin-pwa';
+
+import { MONOGATARI_ALIASES } from './utils/monogatari-aliases.js';
 
 const USER_CONFIG: UserConfig = {
   base: './',

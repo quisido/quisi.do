@@ -1,13 +1,14 @@
+import { type Plugin } from '@eslint/config-helpers';
 import jsonc from 'eslint-plugin-jsonc';
 import { meta, parseForESLint } from 'jsonc-eslint-parser';
-import defineConfig, { type Config } from './define-config.js';
-import JSON from './json.js';
-import mapFlatConfigToRulesRecord from './map-flat-config-to-rules-record.js';
-import fileGlobsByExtension from './file-globs-by-extension.js';
-import type { Plugin } from '@eslint/config-helpers';
 
-const JSONC_CONFIG: Config = defineConfig({
-  ...JSON,
+import defineConfig, { type Config } from './define-config.js';
+import fileGlobsByExtension from './file-globs-by-extension.js';
+import { JSON_CONFIG } from './json.js';
+import mapFlatConfigToRulesRecord from './map-flat-config-to-rules-record.js';
+
+export const JSONC_CONFIG: Config = defineConfig({
+  ...JSON_CONFIG,
   files: [
     ...fileGlobsByExtension('code-workspace', 'json5', 'jsonc'),
 
@@ -33,7 +34,7 @@ const JSONC_CONFIG: Config = defineConfig({
   },
   name: '@quisido/jsonc',
   plugins: {
-    ...JSON.plugins,
+    ...JSON_CONFIG.plugins,
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     jsonc: jsonc as Plugin,
   },
@@ -67,5 +68,3 @@ const JSONC_CONFIG: Config = defineConfig({
     ...mapFlatConfigToRulesRecord(jsonc.configs['flat/prettier']),
   },
 });
-
-export default JSONC_CONFIG;

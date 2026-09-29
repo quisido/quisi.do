@@ -1,5 +1,6 @@
-import process from 'node:process';
 import { join } from 'node:path';
+import process from 'node:process';
+
 import isDirectory from '../../../utils/is-directory.js';
 
 export default async function testFilesWatcherExclude(

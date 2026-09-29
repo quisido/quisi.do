@@ -1,23 +1,6 @@
 import isRecord from './is-record.js';
 
-export enum Model {
-  Luna = 'luna',
-  Sol = 'sol',
-  Terra = 'terra',
-}
-
 type ModelCommand = (options: ModelCommandOptions) => readonly string[];
-
-export interface ModelCommandOptions {
-  readonly workingDirectory: string;
-  readonly writeDirectories: readonly string[];
-}
-
-export interface ModelOptions {
-  readonly command: ModelCommand;
-  readonly format: (message: string) => string | undefined;
-  readonly parallel: boolean;
-}
 
 const codex =
   (model: string): ModelCommand =>
@@ -145,6 +128,23 @@ const codexJson = (jsonl: string): string | undefined => {
 {"type":"turn.completed","usage":{"input_tokens":24763,"cached_input_tokens":24448,"output_tokens":122,"reasoning_output_tokens":0}}
 */
 };
+
+export enum Model {
+  Luna = 'luna',
+  Sol = 'sol',
+  Terra = 'terra',
+}
+
+export interface ModelCommandOptions {
+  readonly workingDirectory: string;
+  readonly writeDirectories: readonly string[];
+}
+
+export interface ModelOptions {
+  readonly command: ModelCommand;
+  readonly format: (message: string) => string | undefined;
+  readonly parallel: boolean;
+}
 
 export const MODEL_OPTIONS: Record<Model, ModelOptions> = {
   [Model.Luna]: {

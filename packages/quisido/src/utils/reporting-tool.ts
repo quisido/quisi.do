@@ -7,16 +7,16 @@ import {
 import getKey from './get-key.js';
 import toString from './to-string.js';
 
-export type ReportingToolResult =
-  | Omit<FailureReport, 'tool'>
-  | Omit<SkippedReport, 'tool'>
-  | Omit<SuccessReport, 'tool'>;
-
 // Press F to FIX with AI.
 const WATCH_MODE_INSTRUCTIONS = `
 Press R to RETRY.
 Press any other key to SKIP this tool.
 `;
+
+export type ReportingToolResult =
+  | Omit<FailureReport, 'tool'>
+  | Omit<SkippedReport, 'tool'>
+  | Omit<SuccessReport, 'tool'>;
 
 /**
  * This class will execute a tool call, but handle any unexpected errors that

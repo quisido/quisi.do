@@ -1,4 +1,3 @@
-/// <reference types="bun-types" />
 import ollama, { type AbortableAsyncIterator, type ChatResponse } from 'ollama';
 
 enum Model {
@@ -47,7 +46,7 @@ Always follow these steps:
 6. Provide the exact code patch to fix the failure.`,
 };
 
-export default async function chat(
+const chat = async function chat(
   model: Model,
   prompt: string,
 ): Promise<string> {
@@ -85,7 +84,7 @@ export default async function chat(
   };
 
   return chatImpl(1);
-}
+};
 
 const [, , prompt] = process.argv;
 if (prompt === undefined) {

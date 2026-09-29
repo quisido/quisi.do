@@ -5,7 +5,8 @@ import {
   useRef,
   useState,
 } from 'react';
-import type { MenuItem, MenuProps } from '../core/menu-props.js';
+
+import { type MenuItem, type MenuProps } from '../core/menu-props.js';
 import classes from './menu.module.scss';
 
 /**

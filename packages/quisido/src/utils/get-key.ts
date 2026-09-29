@@ -1,4 +1,4 @@
-import type { ReadStream } from 'node:tty';
+import { type ReadStream } from 'node:tty';
 
 /**
  * We actually pass `NodeJS.ReadStream` to this function; but as long as it's

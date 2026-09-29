@@ -1,9 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
-import render, { type RenderTest } from './render.js';
-import type { DialogProps } from '../core/dialog-props.js';
+
 import noop from '../../utils/noop.js';
+import { type DialogProps } from '../core/dialog-props.js';
 import importTestedDesignSystem from './import-tested-design-system.js';
 import itShouldBeModal from './modal-test-suite.jsx';
+import render, { type RenderTest } from './render.js';
 
 const { Dialog } = await importTestedDesignSystem();
 

@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    // Necessary for importing `.code-workspace` files.
+    "allowArbitraryExtensions": true,
     "declarationDir": "dist",
     "module": "NodeNext",
     "moduleResolution": "nodenext",
@@ -9,6 +11,7 @@
   },
   "extends": "quisido/tsconfig.json",
   "include": [
+    ".gemini/*.ts",
     "scripts/",
     "types/",
     "utils/",

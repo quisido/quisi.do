@@ -1,0 +1,165 @@
+.canvas {
+  --ink: #111318;
+  --blue: #153bc5;
+  --yellow: #ffd51e;
+  --pink: #f83d8c;
+  --coral: #ff6049;
+  --mint: #83dfb4;
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  width: min(100%, 44rem);
+  min-height: 36rem;
+  overflow: hidden;
+  padding: clamp(2.2rem, 7vw, 4.5rem) clamp(1rem, 5vw, 3.25rem);
+  background: #fff3d6;
+  color: var(--ink);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.canvas::before,
+.canvas::after {
+  position: absolute;
+  z-index: -1;
+  content: '';
+}
+
+.canvas::before {
+  inset: 5% 8% 5% 10%;
+  background: var(--ink);
+  clip-path: polygon(4% 0, 83% 5%, 100% 25%, 96% 83%, 77% 100%, 12% 96%, 0 78%, 2% 18%);
+  transform: translate(0.65rem, 0.7rem) rotate(-1deg);
+}
+
+.canvas::after {
+  inset: 4% 9% 7% 9%;
+  background: var(--blue);
+  background-image: radial-gradient(#fff6 0.7px, transparent 0.8px);
+  background-size: 6px 6px;
+  clip-path: polygon(4% 0, 83% 5%, 100% 25%, 96% 83%, 77% 100%, 12% 96%, 0 78%, 2% 18%);
+}
+
+.tree {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 0.72rem;
+  padding: 0.75rem 0;
+  outline: none;
+}
+
+.group {
+  position: relative;
+  display: grid;
+  gap: 0.58rem;
+  margin: 0.65rem 0 0 2.4rem;
+  padding: 0.15rem 0 0.1rem 1.25rem;
+  border-left: 0.42rem solid var(--yellow);
+}
+
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.15rem 2.7rem minmax(0, 1fr);
+  align-items: center;
+  width: fit-content;
+  min-width: min(25rem, calc(100vw - 7rem));
+  min-height: 2.7rem;
+  outline: none;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+
+.item:hover { transform: translateX(0.28rem) rotate(-0.35deg); }
+.item:focus-visible { filter: drop-shadow(0.38rem 0.38rem 0 var(--ink)); }
+.item:focus-visible .label { outline: 0.2rem solid #fff3d6; outline-offset: 0.16rem; }
+.item[aria-selected='true'] .label,
+.item[aria-checked='true'] .label { background: var(--yellow); color: var(--ink); }
+
+.branch {
+  position: absolute;
+  right: calc(100% - 1rem);
+  width: 1.55rem;
+  height: 0.42rem;
+  background: var(--yellow);
+}
+
+.toggle {
+  z-index: 2;
+  display: grid;
+  width: 2.15rem;
+  height: 2.15rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--yellow);
+  font-family: Arial, sans-serif;
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.orb {
+  z-index: 1;
+  display: grid;
+  width: 2.7rem;
+  height: 2.7rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--mint);
+}
+
+.folder {
+  position: relative;
+  width: 1.2rem;
+  height: 0.82rem;
+  border-radius: 0.08rem;
+  background: var(--ink);
+  transform: rotate(1deg);
+}
+
+.folder::before {
+  position: absolute;
+  bottom: 100%;
+  left: 0.08rem;
+  width: 0.52rem;
+  height: 0.2rem;
+  border-radius: 0.08rem 0.08rem 0 0;
+  background: var(--ink);
+  content: '';
+}
+
+.label {
+  box-sizing: border-box;
+  min-height: 2.25rem;
+  padding: 0.48rem 1.15rem 0.4rem 0.9rem;
+  border-radius: 0 999px 999px 0;
+  background: var(--pink);
+  color: var(--ink);
+  font-size: clamp(0.78rem, 2.1vw, 1.12rem);
+  letter-spacing: 0.055em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.tree > .item:nth-child(3n + 1) > .label { background: var(--coral); }
+.tree > .item:nth-child(3n) > .label { background: var(--pink); }
+.group > .item:nth-child(even) > .label { background: var(--yellow); }
+
+.dots,
+.mint,
+.coral { position: absolute; z-index: 1; pointer-events: none; }
+.dots { top: 0.6rem; left: 0.8rem; width: 5rem; height: 3.5rem; background: radial-gradient(circle, var(--ink) 0 2px, transparent 2.5px) 0 0 / 14px 14px; transform: rotate(-8deg); }
+.mint { top: -3.5rem; right: -3.5rem; width: 9rem; height: 9rem; border-radius: 50%; background: var(--mint); }
+.mint::after { position: absolute; inset: 45% 15%; background: repeating-linear-gradient(45deg, var(--ink) 0 0.45rem, transparent 0.45rem 1rem); content: ''; }
+.coral { right: -1.5rem; bottom: -2rem; width: 8rem; height: 9rem; background: var(--pink); clip-path: polygon(50% 0, 100% 100%, 0 85%); transform: rotate(12deg); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .toggle { animation: bob 3s ease-in-out infinite; }
+  @keyframes bob { 50% { transform: translateY(-0.12rem) rotate(3deg); } }
+}
+
+@media (max-width: 34rem) {
+  .canvas { padding-inline: 1.2rem; }
+  .item { min-width: 0; width: 100%; grid-template-columns: 1.8rem 2.25rem minmax(0, 1fr); }
+  .toggle { width: 1.8rem; height: 1.8rem; }
+  .orb { width: 2.25rem; height: 2.25rem; }
+  .group { margin-left: 1.1rem; padding-left: 0.75rem; }
+}

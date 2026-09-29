@@ -1,5 +1,5 @@
-import toString from './to-string.js';
 import sortNumbers from './sort-numbers.js';
+import toString from './to-string.js';
 
 /**
  * Sorts values by number when both are numeric, otherwise by their string form.

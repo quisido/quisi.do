@@ -1,4 +1,5 @@
 import { mkdir, writeFile } from 'node:fs/promises';
+
 import joinCwdPath from './join-path.js';
 
 // Writes a test output file to the `.tests` directory.

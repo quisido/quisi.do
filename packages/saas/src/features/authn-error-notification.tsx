@@ -1,5 +1,6 @@
 import { type ErrorCode } from '@quisido/authn-shared';
 import { type ComponentType, type ReactElement } from 'react';
+
 import UnknownErrorMessage from '../components/unknown-error-message.js';
 import { type NoActionNotification } from '../types/notification.js';
 import mapAuthnErrorCodeToNotification from '../utils/map-authn-error-code-to-notification.js';

@@ -1,5 +1,6 @@
-import type { ChangeEvent, ReactElement } from 'react';
-import type { SliderProps } from '../core/slider-props.js';
+import { type ChangeEvent, type ReactElement } from 'react';
+
+import { type SliderProps } from '../core/slider-props.js';
 import classes from './slider.module.scss';
 
 const DEFAULT_MAX = 100;

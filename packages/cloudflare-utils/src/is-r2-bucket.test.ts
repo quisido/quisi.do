@@ -1,5 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 import { describe, expect, it, vi } from 'vitest';
+
 import { isR2Bucket } from './index.js';
 
 describe('isR2Bucket', (): void => {

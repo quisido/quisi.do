@@ -1,6 +1,7 @@
 import { playwright } from '@vitest/browser-playwright';
 import { defineVitestConfig, type VitestConfig } from 'quisido';
-import { MONOGATARI_ALIASES } from './monogatari-aliases.js';
+
+import { MONOGATARI_ALIASES } from './utils/monogatari-aliases.js';
 
 const RESOLVE_CONFIG = {
   alias: MONOGATARI_ALIASES,

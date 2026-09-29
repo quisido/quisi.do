@@ -1,4 +1,4 @@
-import type { MetricDimensions } from '@quisido/worker';
+import { type MetricDimensions } from '@quisido/worker';
 
 const mapEntryToString = ([key, value]: readonly [
   string,

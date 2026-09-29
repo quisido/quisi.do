@@ -6,6 +6,7 @@ import {
 import { isAnalyticsEngineDataset } from 'cloudflare-utils';
 import { is } from 'fmrs';
 import { assert, expect, type Mock, vi } from 'vitest';
+
 import isEqual from './is-equal.js';
 import mapMockedResponseToUrl from './map-mocked-response-to-url.js';
 import mapRequestInfoToString from './map-request-info-to-string.js';

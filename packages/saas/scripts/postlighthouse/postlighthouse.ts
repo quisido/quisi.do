@@ -1,6 +1,8 @@
 /// <reference types="node" />
-import type { Result } from 'lighthouse';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+
+import { type Result } from 'lighthouse';
+
 import mapAuditResultToString from './utils/map-audit-result-to-string.js';
 import mapResultToDashboard from './utils/map-result-to-dashboard.js';
 

@@ -1,6 +1,7 @@
 import { assert, describe, expect, it } from 'vitest';
-import render from './render.js';
+
 import importTestedDesignSystem from './import-tested-design-system.js';
+import render from './render.js';
 
 const { Link, Navigation } = await importTestedDesignSystem();
 

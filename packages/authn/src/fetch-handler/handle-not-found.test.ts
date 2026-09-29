@@ -1,5 +1,6 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { describe, it } from 'vitest';
+
 import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { EnvironmentName } from '../constants/environment-name.js';
 import { MetricName } from '../constants/metric-name.js';

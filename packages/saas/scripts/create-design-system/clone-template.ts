@@ -1,6 +1,7 @@
 /// <reference types="bun-types" />
-import { type Subprocess } from 'bun';
 import { join } from 'node:path';
+
+import { type Subprocess } from 'bun';
 
 interface Options {
   readonly dir: string;

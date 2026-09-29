@@ -1,11 +1,12 @@
 import { ExportedHandler } from '@quisido/worker';
+
 import AuthnFetchHandler from './authn-fetch-handler.js';
 import handleError from './handle-error.js';
+import handleFinally from './handle-finally.js';
 import handleLog from './handle-log.js';
 import handleMetric from './handle-metric.js';
-import handleFinally from './handle-finally.js';
 
-export default new ExportedHandler({
+const exportedHandler: ExportedHandler = new ExportedHandler({
   console,
   fetch,
   FetchHandler: AuthnFetchHandler,
@@ -14,3 +15,5 @@ export default new ExportedHandler({
   onLog: handleLog,
   onMetric: handleMetric,
 });
+
+export default exportedHandler;

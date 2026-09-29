@@ -1,4 +1,5 @@
 import { isNumber, isString } from 'fmrs';
+
 import type ReportBody from '../types/report-body.js';
 import optional from './optional.js';
 

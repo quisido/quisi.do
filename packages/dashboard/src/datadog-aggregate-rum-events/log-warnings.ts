@@ -1,4 +1,5 @@
-import type { RUMWarning } from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2/index.js';
+import { type RUMWarning } from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2/index.js';
+
 import type DashboardFetchHandler from '../dashboard-fetch-handler.js';
 
 const DEFAULT_WARNING_CODE = 0;

@@ -1,5 +1,6 @@
 import { isNumber, sort } from 'fmrs';
 import { describe, expect, it } from 'vitest';
+
 import createAscendingArray from '../test/create-ascending-array.js';
 import { ErrorCode } from './index.js';
 

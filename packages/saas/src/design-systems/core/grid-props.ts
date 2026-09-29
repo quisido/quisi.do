@@ -1,4 +1,4 @@
-import type { Key, ReactNode } from 'react';
+import { type Key, type ReactNode } from 'react';
 
 export interface GridCell {
   readonly content: ReactNode;

@@ -1,0 +1,200 @@
+.marquee {
+  --ink: #111020;
+  --paper: #fff8da;
+  --electric-blue: #2148ff;
+  --hot-pink: #ff318c;
+  --acid-yellow: #ffe600;
+  --mint: #50e5b1;
+
+  align-items: center;
+  background:
+    linear-gradient(115deg, transparent 0 8%, rgb(255 255 255 / 18%) 8.2% 9%, transparent 9.2% 100%),
+    var(--electric-blue);
+  border: 0.18rem solid var(--ink);
+  box-shadow:
+    0.55rem 0.65rem 0 var(--ink),
+    inset 0 0 0 0.25rem rgb(255 255 255 / 14%);
+  box-sizing: border-box;
+  color: var(--ink);
+  display: grid;
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: clamp(1rem, 2.2vw, 1.45rem);
+  font-weight: 900;
+  inline-size: min(100%, 70rem);
+  isolation: isolate;
+  letter-spacing: 0.045em;
+  line-height: 1.2;
+  margin: 1.2rem 0.7rem 1.7rem 0;
+  min-block-size: 6.5rem;
+  overflow: hidden;
+  padding: clamp(1rem, 3vw, 1.6rem) clamp(3.8rem, 10vw, 8rem);
+  position: relative;
+  transform: rotate(-0.45deg);
+}
+
+.marquee::before,
+.marquee::after {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+}
+
+.marquee::before {
+  background: var(--hot-pink);
+  block-size: 140%;
+  clip-path: polygon(0 10%, 92% 0, 78% 48%, 100% 80%, 7% 100%, 20% 55%);
+  inline-size: 24%;
+  inset: -20% auto auto -3%;
+  z-index: -1;
+}
+
+.marquee::after {
+  background: repeating-linear-gradient(135deg, var(--acid-yellow) 0 0.55rem, var(--ink) 0.58rem 0.85rem);
+  block-size: 0.8rem;
+  inset: auto 0 0;
+  z-index: 4;
+}
+
+.content {
+  background: var(--paper);
+  box-shadow:
+    0.35rem 0.38rem 0 var(--ink),
+    inset 0 0 0 0.12rem var(--ink);
+  clip-path: polygon(2% 14%, 19% 2%, 53% 8%, 72% 0, 98% 13%, 100% 72%, 90% 94%, 61% 89%, 38% 100%, 5% 91%, 0 54%);
+  display: block;
+  padding: 1rem clamp(1.3rem, 4vw, 3rem);
+  position: relative;
+  text-align: center;
+  text-shadow: 0.1em 0.1em 0 rgb(255 49 140 / 45%);
+  z-index: 3;
+}
+
+.sun,
+.checkerboard,
+.triangle,
+.squiggle,
+.dots,
+.spark {
+  display: block;
+  pointer-events: none;
+  position: absolute;
+}
+
+.sun {
+  aspect-ratio: 1;
+  background: var(--acid-yellow);
+  border: 0.18rem solid var(--ink);
+  border-radius: 50%;
+  box-shadow: 0.35rem 0.35rem 0 var(--hot-pink);
+  inline-size: 4.2rem;
+  inset: -1.4rem auto auto 1.3rem;
+  z-index: 2;
+}
+
+.checkerboard {
+  background-color: var(--mint);
+  background-image:
+    linear-gradient(45deg, var(--ink) 25%, transparent 25%, transparent 75%, var(--ink) 75%),
+    linear-gradient(45deg, var(--ink) 25%, transparent 25%, transparent 75%, var(--ink) 75%);
+  background-position: 0 0, 0.65rem 0.65rem;
+  background-size: 1.3rem 1.3rem;
+  block-size: 4.3rem;
+  clip-path: polygon(0 20%, 100% 0, 88% 100%, 8% 88%);
+  inline-size: 5.7rem;
+  inset: auto -0.7rem -0.35rem auto;
+  rotate: -8deg;
+  z-index: 2;
+}
+
+.triangle {
+  background: var(--hot-pink);
+  block-size: 3rem;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(0.2rem 0.24rem 0 var(--ink));
+  inline-size: 3.2rem;
+  inset: 0.2rem 7% auto auto;
+  rotate: 16deg;
+  z-index: 2;
+}
+
+.squiggle {
+  border: 0.35rem solid var(--mint);
+  border-inline-color: transparent;
+  border-radius: 50%;
+  block-size: 2.6rem;
+  inline-size: 6.3rem;
+  inset: auto auto -0.4rem 9%;
+  rotate: -10deg;
+  z-index: 2;
+}
+
+.dots {
+  background: radial-gradient(circle, var(--paper) 0 28%, transparent 31%) 0 0 / 1rem 1rem;
+  block-size: 3rem;
+  inline-size: 5rem;
+  inset: 0.25rem auto auto 18%;
+  rotate: 8deg;
+  z-index: 1;
+}
+
+.spark {
+  background: var(--acid-yellow);
+  block-size: 2.4rem;
+  clip-path: polygon(44% 0, 58% 35%, 100% 22%, 68% 52%, 100% 77%, 60% 67%, 45% 100%, 36% 66%, 0 78%, 27% 51%, 0 28%, 36% 36%);
+  filter: drop-shadow(0.16rem 0.2rem 0 var(--ink));
+  inline-size: 2.4rem;
+  inset: auto 17% 0.35rem auto;
+  z-index: 5;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun { animation: sun-drift 5s ease-in-out infinite alternate; }
+  .spark { animation: spark-pulse 2.8s ease-in-out infinite alternate; }
+}
+
+@keyframes sun-drift {
+  to { transform: translate(0.4rem, 0.25rem) rotate(14deg); }
+}
+
+@keyframes spark-pulse {
+  to { transform: rotate(12deg) scale(1.12); }
+}
+
+@media (max-width: 34rem) {
+  .marquee {
+    min-block-size: 7rem;
+    padding-inline: 2.2rem;
+  }
+
+  .dots { display: none; }
+  .triangle { right: 2%; }
+  .content { padding-inline: 1rem; }
+}
+
+@media (forced-colors: active) {
+  .marquee {
+    background: Canvas;
+    border-color: CanvasText;
+    box-shadow: none;
+    color: CanvasText;
+    transform: none;
+  }
+
+  .marquee::before,
+  .marquee::after,
+  .sun,
+  .checkerboard,
+  .triangle,
+  .squiggle,
+  .dots,
+  .spark {
+    display: none;
+  }
+
+  .content {
+    background: Canvas;
+    box-shadow: none;
+    clip-path: none;
+    text-shadow: none;
+  }
+}

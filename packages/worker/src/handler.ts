@@ -9,6 +9,7 @@ import {
 } from 'cloudflare-utils';
 import { EventEmitter } from 'eventemitter3';
 import { isRecord, toError } from 'fmrs';
+
 import createTtl from './create-ttl.js';
 import mapKVNamespaceValueToBytes from './map-kv-namespace-value-to-bytes.js';
 import mapMetricDimensionsToDataPoint from './map-metric-dimensions-to-datapoint.js';
@@ -27,13 +28,6 @@ interface EventTypes {
   readonly metric: [string, MetricDimensions];
 }
 
-export interface HandlerOptions<Env> {
-  readonly console: Console;
-  readonly env: Env;
-  readonly fetch: Fetcher['fetch'];
-  readonly now?: (() => number) | undefined;
-}
-
 type HandlerParameters<
   K extends keyof Required<ExportedHandler>,
   Env,
@@ -45,20 +39,6 @@ type HandlerParameters<
     Required<ExportedHandler<Env, QueueHandlerMessage, CfHostMetadata>>[K]
   >,
 ];
-
-export interface HandlerD1Response {
-  readonly changedDb: boolean;
-  readonly changes: number;
-  readonly duration: number;
-  readonly lastRowId: number;
-  readonly rowsRead: number;
-  readonly rowsWritten: number;
-  readonly sizeAfter: number;
-}
-
-export interface HandlerD1Results extends HandlerD1Response {
-  readonly results: readonly Record<string, unknown>[];
-}
 
 type HandlerReturnType<
   K extends keyof Required<ExportedHandler>,
@@ -75,6 +55,27 @@ const KV_PUT_OPTIONS_INDEX = 2;
 const KV_PUT_VALUE_INDEX = 1;
 const R2_PUT_VALUE_INDEX = 1;
 const SINGLE = 1;
+
+export interface HandlerOptions<Env> {
+  readonly console: Console;
+  readonly env: Env;
+  readonly fetch: Fetcher['fetch'];
+  readonly now?: (() => number) | undefined;
+}
+
+export interface HandlerD1Response {
+  readonly changedDb: boolean;
+  readonly changes: number;
+  readonly duration: number;
+  readonly lastRowId: number;
+  readonly rowsRead: number;
+  readonly rowsWritten: number;
+  readonly sizeAfter: number;
+}
+
+export interface HandlerD1Results extends HandlerD1Response {
+  readonly results: readonly Record<string, unknown>[];
+}
 
 export default class Handler<
   K extends keyof Required<ExportedHandler> = keyof Required<ExportedHandler>,

@@ -1,4 +1,5 @@
 import { type PropsWithChildren, type ReactElement } from 'react';
+
 import { LocalStorageWindowContext } from './local-storage-window-context.js';
 
 interface Props {

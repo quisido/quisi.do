@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { isObject } from './index.js';
 
 describe('isObject', (): void => {

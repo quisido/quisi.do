@@ -1,5 +1,6 @@
 import '@monogatari/core/dist/engine/core/monogatari.css';
 import './styles/index.css';
+
 import { bootGame } from './game/boot.js';
 
 try {

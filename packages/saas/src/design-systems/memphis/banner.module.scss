@@ -1,0 +1,151 @@
+.banner {
+  --cobalt: #1544dd;
+  --ink: #101936;
+  --cream: #fff4d2;
+
+  align-items: center;
+  background:
+    radial-gradient(circle at 38% 24%, #ffd018 0 0.36rem, transparent 0.42rem),
+    radial-gradient(circle at 94% 77%, #ffca0a 0 0.48rem, transparent 0.55rem),
+    radial-gradient(circle at 28% 84%, #f2409c 0 0.22rem, transparent 0.28rem),
+    linear-gradient(112deg, #0d31bd, var(--cobalt) 47%, #1761ea);
+  box-shadow:
+    0 1.15rem 2.4rem rgb(16 25 54 / 22%),
+    inset 0 -0.25rem 0 rgb(6 20 89 / 22%);
+  color: var(--cream);
+  display: flex;
+  isolation: isolate;
+  min-block-size: clamp(8rem, 17vw, 13rem);
+  overflow: hidden;
+  padding: clamp(1.4rem, 4vw, 3.2rem) clamp(2rem, 10vw, 9rem);
+  position: relative;
+}
+
+.banner::after {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E");
+  content: '';
+  inset: 0;
+  mix-blend-mode: soft-light;
+  opacity: 0.26;
+  pointer-events: none;
+  position: absolute;
+  z-index: 8;
+}
+
+.content {
+  background: var(--ink);
+  clip-path: polygon(5% 18%, 45% 0, 56% 13%, 94% 5%, 100% 52%, 91% 90%, 54% 82%, 43% 100%, 4% 83%, 0 43%);
+  filter: drop-shadow(0.65rem 0.8rem 0 rgb(5 12 41 / 24%));
+  inline-size: min(100%, 74rem);
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 4rem) clamp(2.4rem, 8vw, 7rem);
+  position: relative;
+  text-shadow: 0.13em 0.13em 0 #9b2a9e;
+  z-index: 5;
+}
+
+.sun,
+.loop,
+.zigzag,
+.triangle,
+.checker,
+.orbit {
+  display: block;
+  pointer-events: none;
+  position: absolute;
+}
+
+.sun {
+  aspect-ratio: 1;
+  background: #ff493c;
+  border-radius: 50%;
+  box-shadow: 0.5rem 0.65rem 0 rgb(9 21 74 / 32%);
+  inline-size: clamp(8rem, 20vw, 18rem);
+  inset: -45% auto auto -4%;
+  z-index: 3;
+}
+
+.loop {
+  border: clamp(0.42rem, 0.7vw, 0.72rem) solid var(--cream);
+  border-block-end-color: transparent;
+  border-radius: 50%;
+  block-size: 4rem;
+  inline-size: 12rem;
+  inset: -1.8rem auto auto 25%;
+  rotate: -8deg;
+  z-index: 4;
+}
+
+.zigzag {
+  background: repeating-linear-gradient(135deg, var(--cream) 0 1.2rem, #111 1.2rem 2.4rem);
+  block-size: 5.5rem;
+  clip-path: polygon(0 10%, 14% 35%, 27% 0, 42% 35%, 56% 0, 70% 35%, 84% 0, 100% 25%, 100% 100%, 85% 75%, 70% 100%, 56% 67%, 42% 100%, 27% 67%, 13% 100%, 0 72%);
+  inline-size: 29rem;
+  inset: -0.6rem 8% auto auto;
+  rotate: 5deg;
+  z-index: 2;
+}
+
+.triangle {
+  background: #ff3cac;
+  block-size: 9rem;
+  clip-path: polygon(100% 0, 100% 100%, 0 56%);
+  inline-size: 13rem;
+  inset: 22% -2rem auto auto;
+  filter: drop-shadow(-0.45rem 0.55rem 0 rgb(8 20 69 / 25%));
+  z-index: 6;
+}
+
+.checker {
+  background-color: #5fe0c2;
+  background-image:
+    linear-gradient(45deg, #101010 25%, transparent 25%, transparent 75%, #101010 75%),
+    linear-gradient(45deg, #101010 25%, transparent 25%, transparent 75%, #101010 75%);
+  background-position: 0 0, 1.5rem 1.5rem;
+  background-size: 3rem 3rem;
+  block-size: 8rem;
+  clip-path: polygon(8% 15%, 100% 0, 89% 100%, 0 83%);
+  inline-size: 21rem;
+  inset: auto 5% -3.8rem auto;
+  rotate: -9deg;
+  z-index: 6;
+}
+
+.orbit {
+  aspect-ratio: 1;
+  background: #ffd018;
+  border-radius: 50%;
+  box-shadow: 0.5rem 0.45rem 0 #f1459f;
+  inline-size: clamp(7rem, 17vw, 15rem);
+  inset: auto auto -55% -2%;
+  z-index: 6;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun,
+  .orbit {
+    animation: float 7s ease-in-out infinite alternate;
+  }
+
+  .orbit {
+    animation-delay: -3.5s;
+  }
+}
+
+@keyframes float {
+  to {
+    transform: translate3d(0, 0.45rem, 0) rotate(2deg);
+  }
+}
+
+@media (max-width: 36rem) {
+  .zigzag {
+    opacity: 0.7;
+    right: -12rem;
+  }
+
+  .content {
+    clip-path: polygon(3% 10%, 90% 0, 100% 33%, 94% 92%, 9% 100%, 0 72%);
+    padding-inline: 2rem;
+  }
+}

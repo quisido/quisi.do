@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { NavigationProps } from '../core/navigation-props.js';
+import { type ReactElement } from 'react';
+
+import { type NavigationProps } from '../core/navigation-props.js';
 import classes from './navigation.module.scss';
 
 /**

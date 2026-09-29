@@ -1,4 +1,5 @@
 import { expect } from 'vitest';
+
 import expectStringifiedToBe from './expect-stringified-to-be.js';
 import mapHeadersToRecord from './map-headers-to-record.js';
 

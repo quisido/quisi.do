@@ -6,6 +6,7 @@ import {
   type ATTR_WEBENGINE_NAME,
   type ATTR_WEBENGINE_VERSION,
 } from '@opentelemetry/semantic-conventions/incubating';
+
 import mapOscpuToName from './map-oscpu-to-name.js';
 import mapOscpuToType from './map-oscpu-to-type.js';
 import validateString from './validate-string.js';

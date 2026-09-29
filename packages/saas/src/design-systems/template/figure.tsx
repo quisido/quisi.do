@@ -1,6 +1,7 @@
-import type { ReactElement, ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
+
+import { type FigureProps } from '../core/figure-props.js';
 import useFigure from '../core/use-figure.js';
-import type { FigureProps } from '../core/figure-props.js';
 import classes from './figure.module.scss';
 
 interface FigureCaptionProps {

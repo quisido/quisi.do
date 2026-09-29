@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { SuperscriptProps } from '../core/superscript-props.js';
+import { type ReactElement } from 'react';
+
+import { type SuperscriptProps } from '../core/superscript-props.js';
 import classes from './superscript.module.scss';
 
 /**

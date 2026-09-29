@@ -1,5 +1,10 @@
-import type { ChangeEvent, InputHTMLAttributes, ReactElement } from 'react';
-import type { TextBoxProps } from '../core/text-box-props.js';
+import {
+  type ChangeEvent,
+  type InputHTMLAttributes,
+  type ReactElement,
+} from 'react';
+
+import { type TextBoxProps } from '../core/text-box-props.js';
 import classes from './text-box.module.scss';
 
 /**

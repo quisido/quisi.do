@@ -1,0 +1,201 @@
+.document {
+  --acid: #eaff32;
+  --blue: #2148f5;
+  --cream: #fff6d5;
+  --ink: #171127;
+  --orange: #ff6038;
+  --pink: #ff48a5;
+  --turquoise: #42e4c5;
+
+  background:
+    radial-gradient(circle at 15% 17%, rgb(255 255 255 / 18%) 0 2px, transparent 3px) 0 0 / 24px 24px,
+    linear-gradient(135deg, #183fd9 0 47%, #2e55ff 47% 100%);
+  box-sizing: border-box;
+  color: var(--ink);
+  display: grid;
+  font-family: Arial, Helvetica, sans-serif;
+  isolation: isolate;
+  min-block-size: 30rem;
+  overflow: hidden;
+  padding: clamp(3rem, 8vw, 7rem) clamp(1.1rem, 7vw, 6rem);
+  position: relative;
+}
+
+.document::after {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  content: '';
+  inset: 0;
+  mix-blend-mode: soft-light;
+  opacity: 0.2;
+  pointer-events: none;
+  position: absolute;
+  z-index: 8;
+}
+
+.reading-plane {
+  background: var(--cream);
+  box-shadow:
+    0.75rem 0.75rem 0 var(--pink),
+    1.15rem 1.15rem 0 var(--ink),
+    1.75rem 1.75rem 0 var(--turquoise);
+  box-sizing: border-box;
+  clip-path: polygon(2% 3%, 24% 0, 43% 3%, 65% 0.5%, 84% 3%, 98% 1%, 100% 25%, 98% 49%, 100% 74%, 97% 98%, 74% 96%, 51% 100%, 29% 97%, 3% 100%, 0 77%, 2% 53%, 0 27%);
+  inline-size: min(100%, 62rem);
+  justify-self: center;
+  margin-block: clamp(1.5rem, 4vw, 3.5rem);
+  padding: clamp(3.5rem, 9vw, 7rem) clamp(1.8rem, 8vw, 6.5rem);
+  position: relative;
+  rotate: -0.7deg;
+  z-index: 4;
+}
+
+.reading-plane::before {
+  background: repeating-linear-gradient(90deg, var(--orange) 0 1.1rem, var(--ink) 1.1rem 1.35rem, var(--acid) 1.35rem 2.45rem, var(--ink) 2.45rem 2.7rem);
+  block-size: 1.05rem;
+  content: '';
+  inset: 1.55rem 12% auto;
+  position: absolute;
+  transform: skewX(-18deg);
+}
+
+.content {
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  font-weight: 620;
+  line-height: 1.72;
+  position: relative;
+  z-index: 2;
+}
+
+.content > :first-child { margin-block-start: 0; }
+.content > :last-child { margin-block-end: 0; }
+
+.content :where(h1, h2, h3) {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  letter-spacing: 0.015em;
+  line-height: 0.92;
+  text-shadow: 0.09em 0.09em 0 var(--pink);
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.content :where(a) {
+  color: #163fd4;
+  font-weight: 900;
+  text-decoration-color: var(--pink);
+  text-decoration-thickness: 0.2em;
+  text-underline-offset: 0.22em;
+}
+
+.binding {
+  background: var(--ink);
+  block-size: 1.1rem;
+  box-shadow: 0 2.1rem 0 var(--ink), 0 4.2rem 0 var(--ink), 0 6.3rem 0 var(--ink);
+  inline-size: 2.8rem;
+  inset: 28% auto auto -1rem;
+  position: absolute;
+}
+
+.page-mark {
+  background: conic-gradient(var(--pink) 25%, var(--acid) 0 50%, var(--pink) 0 75%, var(--acid) 0) 0 0 / 1.5rem 1.5rem;
+  block-size: 5rem;
+  clip-path: polygon(9% 5%, 100% 0, 91% 100%, 0 89%);
+  inline-size: 6rem;
+  inset: auto 2% 3% auto;
+  opacity: 0.85;
+  position: absolute;
+  rotate: 7deg;
+}
+
+.sunburst,
+.checker,
+.orbit,
+.zigzag,
+.confetti {
+  pointer-events: none;
+  position: absolute;
+}
+
+.sunburst {
+  aspect-ratio: 1;
+  background: repeating-conic-gradient(var(--acid) 0 8deg, transparent 8deg 16deg);
+  border-radius: 50%;
+  inline-size: clamp(15rem, 33vw, 30rem);
+  inset: -8rem auto auto -8rem;
+}
+
+.sunburst::after {
+  background: var(--orange);
+  border: 0.4rem solid var(--ink);
+  border-radius: 50%;
+  content: '';
+  inset: 33%;
+  position: absolute;
+}
+
+.checker {
+  background: conic-gradient(var(--ink) 25%, var(--turquoise) 0 50%, var(--ink) 0 75%, var(--turquoise) 0) 0 0 / 2.6rem 2.6rem;
+  block-size: 10rem;
+  clip-path: polygon(7% 12%, 100% 0, 91% 100%, 0 86%);
+  inline-size: 17rem;
+  right: -4rem;
+  rotate: 11deg;
+  top: 18%;
+  z-index: 1;
+}
+
+.orbit {
+  aspect-ratio: 1;
+  border: 1rem solid var(--pink);
+  border-block-end-color: var(--acid);
+  border-radius: 50%;
+  bottom: -6rem;
+  inline-size: 15rem;
+  left: -5rem;
+  z-index: 2;
+}
+
+.zigzag {
+  background: repeating-linear-gradient(135deg, var(--orange) 0 1.2rem, var(--cream) 1.2rem 2.4rem);
+  block-size: 5rem;
+  clip-path: polygon(0 0, 14% 35%, 28% 0, 42% 35%, 56% 0, 70% 35%, 84% 0, 100% 35%, 100% 100%, 84% 65%, 70% 100%, 56% 65%, 42% 100%, 28% 65%, 14% 100%, 0 65%);
+  inline-size: 23rem;
+  inset: auto -5rem 6% auto;
+  rotate: -8deg;
+  z-index: 3;
+}
+
+.confetti {
+  background: var(--acid);
+  block-size: 1.4rem;
+  box-shadow: 3rem 2rem var(--pink), 7rem -1rem var(--cream), 11rem 2.5rem var(--orange), 15rem -0.5rem var(--turquoise);
+  inline-size: 0.45rem;
+  left: 15%;
+  rotate: 26deg;
+  top: 3rem;
+  z-index: 3;
+}
+
+.document:focus-visible {
+  outline: 0.4rem dashed var(--acid);
+  outline-offset: -0.8rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sunburst { animation: spin 34s linear infinite; }
+  .orbit { animation: bob 7s ease-in-out infinite alternate; }
+  .page-mark { animation: flutter 6s ease-in-out infinite alternate; }
+}
+
+@keyframes spin { to { rotate: 1turn; } }
+@keyframes bob { to { translate: 0 -0.8rem; rotate: 8deg; } }
+@keyframes flutter { to { rotate: -3deg; translate: 0 -0.25rem; } }
+
+@media (max-width: 38rem) {
+  .document { padding-inline: 0.9rem; }
+  .reading-plane {
+    box-shadow: 0.45rem 0.45rem 0 var(--pink), 0.75rem 0.75rem 0 var(--ink), 1rem 1rem 0 var(--turquoise);
+    padding-inline: 1.5rem;
+  }
+  .checker { opacity: 0.55; right: -9rem; }
+  .binding { display: none; }
+}

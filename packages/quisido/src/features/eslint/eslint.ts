@@ -1,15 +1,17 @@
-import { ESLint } from 'eslint';
 import { join, resolve } from 'node:path';
+
+import { ESLint } from 'eslint';
+import { type CompilerOptions } from 'typescript';
+
+import getDisposableTempDir from '../../utils/get-disposable-temp-dir.js';
+import randomInt from '../../utils/random-int.js';
 import ReportingTool, {
   type ReportingToolResult,
 } from '../../utils/reporting-tool.js';
 import toString from '../../utils/to-string.js';
-import randomInt from '../../utils/random-int.js';
 import withDuration from '../../utils/with-duration.js';
-import getDisposableTempDir from '../../utils/get-disposable-temp-dir.js';
-import npx from '../npx/npx.js';
 import writeTemporaryFile from '../../utils/write-temporary-file.js';
-import type { CompilerOptions } from 'typescript';
+import npx from '../npx/npx.js';
 // import { cpus } from 'node:os';
 
 const MAX_CONCURRENCY = 1; // : number = cpus().length;

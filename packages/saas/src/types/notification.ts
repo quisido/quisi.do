@@ -8,6 +8,8 @@ interface BaseNotification {
   readonly type: 'error' | 'info' | 'success' | 'warning';
 }
 
+type Notification = ActionNotification | NoActionNotification;
+
 export interface ActionNotification extends BaseNotification {
   readonly CallToAction: ComponentType;
   readonly onAction: VoidFunction;
@@ -17,7 +19,5 @@ export interface NoActionNotification extends BaseNotification {
   readonly CallToAction?: undefined;
   readonly onAction?: undefined;
 }
-
-type Notification = ActionNotification | NoActionNotification;
 
 export type { Notification as default };

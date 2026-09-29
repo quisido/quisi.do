@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import noop from '../test/noop.js';
 import { isKVNamespace } from './index.js';
 

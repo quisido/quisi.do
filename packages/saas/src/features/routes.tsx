@@ -1,13 +1,14 @@
 import { type ReactElement } from 'react';
 import { Route, Routes } from 'react-router';
+
 import CookiePolicy from './cookie-policy.js';
 import DataRetentionPolicy from './data-retention-policy.js';
+import DesignSystemDemo from './design-system-demo.js';
 import Home from './home.js';
 import NotFound from './not-found.js';
 import PrivacyPolicy from './privacy-policy.js';
 import Support from './support.js';
 import TermsOfService from './terms-of-service.js';
-import DesignSystemDemo from './design-system-demo.js';
 
 export default function RoutesFeature(): ReactElement {
   return (

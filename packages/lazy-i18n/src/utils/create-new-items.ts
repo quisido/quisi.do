@@ -1,5 +1,6 @@
-import type { ReactNode } from 'react';
-import type { ReactNodeTranslationValue } from '../types/react-node-translation-value.js';
+import { type ReactNode } from 'react';
+
+import { type ReactNodeTranslationValue } from '../types/react-node-translation-value.js';
 
 const ARRAY_INDEX_OFFSET = 1;
 const LAST_ITEM = 1;

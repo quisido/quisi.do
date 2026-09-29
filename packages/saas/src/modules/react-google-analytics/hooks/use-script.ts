@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import mapTrackingIdToScriptElement from '../utils/map-tracking-id-to-script-element.js';
 
 export default function useScript(trackingId: string): void {

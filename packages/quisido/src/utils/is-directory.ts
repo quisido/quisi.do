@@ -1,4 +1,4 @@
-import type { Stats } from 'node:fs';
+import { type Stats } from 'node:fs';
 import { stat } from 'node:fs/promises';
 
 export default async function isDirectory(path: string): Promise<boolean> {

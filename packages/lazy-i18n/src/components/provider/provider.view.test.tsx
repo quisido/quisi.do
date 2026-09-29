@@ -1,6 +1,5 @@
 /// <reference types="node" />
 import { render } from '@testing-library/react';
-import assert from 'node:assert';
 import {
   type ComponentType,
   type PropsWithChildren,
@@ -8,13 +7,14 @@ import {
   useContext,
   useEffect,
 } from 'react';
-import { describe, expect, it, vi } from 'vitest';
-import Loading from '../../components/loading/index.js';
+import { assert, describe, expect, it, vi } from 'vitest';
+
 import LoadingComponentContext from '../../contexts/loading-component.js';
 import TranslateFunctionContext from '../../contexts/translate-function.js';
 import { I18nProvider } from '../../index.js';
 import type TranslateFunctionType from '../../types/translate-function.js';
-import type { Translations } from '../../types/translations.js';
+import { type Translations } from '../../types/translations.js';
+import Loading from '../loading/index.js';
 
 const TEST_TRANSLATIONS: Record<string, Translations> = {
   es_ES: {

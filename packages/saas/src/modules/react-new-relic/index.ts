@@ -1,5 +1,6 @@
 import { type BrowserAgent } from '@newrelic/browser-agent/src/loaders/browser-agent.js';
 import { useContext } from 'react';
+
 import { BrowserAgentContext } from './browser-agent-context.js';
 
 export { default } from './new-relic.js';

@@ -1,7 +1,8 @@
-import render from './render.js';
-import { describe, expect, it } from 'vitest';
-import importTestedDesignSystem from './import-tested-design-system.js';
 import userEvent from '@testing-library/user-event';
+import { describe, expect, it } from 'vitest';
+
+import importTestedDesignSystem from './import-tested-design-system.js';
+import render from './render.js';
 
 const { Grid } = await importTestedDesignSystem();
 

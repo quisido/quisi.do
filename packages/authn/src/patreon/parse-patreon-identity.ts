@@ -1,4 +1,5 @@
 import { isRecord } from 'fmrs';
+
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { OAuthProvider } from '../constants/oauth-provider.js';
 import mapToOptionalBoolean from '../utils/map-to-optional-boolean.js';

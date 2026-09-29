@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { BlockQuoteProps } from '../core/block-quote-props.js';
+import { type ReactElement } from 'react';
+
+import { type BlockQuoteProps } from '../core/block-quote-props.js';
 import classes from './block-quote.module.scss';
 
 /**

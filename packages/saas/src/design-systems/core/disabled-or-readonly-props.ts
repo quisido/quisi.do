@@ -6,8 +6,6 @@ interface DisabledProps {
   readonly readOnly?: false | undefined;
 }
 
-export type DisabledOrReadOnlyProps = DisabledProps | ReadOnlyProps;
-
 interface ReadOnlyProps {
   readonly disabled?: false | undefined;
   /**
@@ -15,3 +13,5 @@ interface ReadOnlyProps {
    */
   readonly readOnly?: boolean | undefined;
 }
+
+export type DisabledOrReadOnlyProps = DisabledProps | ReadOnlyProps;

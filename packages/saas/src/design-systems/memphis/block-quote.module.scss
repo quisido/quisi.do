@@ -1,0 +1,146 @@
+.block-quote {
+  --ink: #14111f;
+  --paper: #fff8dc;
+  background:
+    linear-gradient(90deg, transparent 48%, rgb(20 17 31 / 7%) 49% 51%, transparent 52%) 0 0 / 2.2rem 100%,
+    linear-gradient(0deg, transparent 48%, rgb(20 17 31 / 7%) 49% 51%, transparent 52%) 0 0 / 100% 2.2rem,
+    var(--paper);
+  border: 0.25rem solid var(--ink);
+  box-shadow:
+    0.7rem 0.7rem 0 #ff3d9a,
+    1.4rem 1.4rem 0 var(--ink),
+    2.05rem 2.05rem 0 #00d8e8;
+  box-sizing: border-box;
+  color: var(--ink);
+  display: block;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: clamp(1.65rem, 5vw, 3.8rem);
+  font-style: normal;
+  font-weight: 900;
+  isolation: isolate;
+  letter-spacing: 0.015em;
+  line-height: 1.05;
+  margin: clamp(2.5rem, 8vw, 5rem) clamp(2.3rem, 7vw, 4rem);
+  max-width: 54rem;
+  min-height: 14rem;
+  padding: clamp(4.6rem, 11vw, 7.5rem) clamp(1.5rem, 7vw, 5rem) clamp(3.8rem, 9vw, 6rem);
+  position: relative;
+  text-transform: uppercase;
+  transform: rotate(-1deg);
+}
+
+.content {
+  display: block;
+  filter: drop-shadow(0.16rem 0.18rem 0 #fff);
+  position: relative;
+  text-wrap: balance;
+  transform: rotate(1deg);
+  z-index: 4;
+}
+
+.content::after {
+  background: #ffd91f;
+  bottom: -1rem;
+  content: '';
+  height: 0.55rem;
+  left: 8%;
+  position: absolute;
+  transform: rotate(-2deg) skewX(-20deg);
+  width: 58%;
+  z-index: -1;
+}
+
+.quote-mark {
+  color: #7448ff;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(8rem, 23vw, 14rem);
+  font-weight: 900;
+  left: clamp(0.6rem, 3vw, 1.8rem);
+  line-height: 0.65;
+  position: absolute;
+  text-shadow: 0.3rem 0.3rem 0 var(--ink);
+  top: 1.15rem;
+  transform: rotate(-8deg);
+  z-index: 3;
+}
+
+.sun {
+  background: repeating-conic-gradient(#ff6b20 0 10deg, #ffd91f 10deg 20deg);
+  border: 0.25rem solid var(--ink);
+  border-radius: 50%;
+  height: clamp(6rem, 17vw, 10rem);
+  position: absolute;
+  right: clamp(-2.7rem, -4vw, -1.5rem);
+  top: clamp(-3rem, -5vw, -1.6rem);
+  width: clamp(6rem, 17vw, 10rem);
+  z-index: -1;
+}
+
+.triangle {
+  background: #24e082;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(0.28rem 0.32rem 0 var(--ink));
+  height: 5.2rem;
+  left: -2.2rem;
+  position: absolute;
+  top: 48%;
+  transform: rotate(-23deg);
+  width: 5.8rem;
+  z-index: 2;
+}
+
+.dot-field {
+  background: radial-gradient(circle, var(--ink) 0 0.18rem, transparent 0.2rem) 0 0 / 1rem 1rem;
+  bottom: 0.8rem;
+  height: 3.6rem;
+  position: absolute;
+  right: 1rem;
+  transform: rotate(5deg);
+  width: 6.2rem;
+  z-index: 2;
+}
+
+.scribble {
+  background: repeating-linear-gradient(135deg, #ff3d9a 0 0.5rem, transparent 0.5rem 1rem);
+  border-bottom: 0.25rem solid var(--ink);
+  border-top: 0.25rem solid var(--ink);
+  bottom: -1.2rem;
+  height: 1.1rem;
+  left: 14%;
+  position: absolute;
+  transform: rotate(2deg);
+  width: 36%;
+  z-index: 5;
+}
+
+@media (max-width: 32rem) {
+  .block-quote {
+    box-shadow: 0.45rem 0.45rem 0 #ff3d9a, 0.9rem 0.9rem 0 var(--ink), 1.3rem 1.3rem 0 #00d8e8;
+    margin-inline: 1.5rem;
+    padding-inline: 1.2rem;
+  }
+
+  .triangle {
+    left: -1.2rem;
+    transform: rotate(-23deg) scale(0.72);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun {
+    animation: orbit 18s linear infinite;
+  }
+
+  .triangle {
+    animation: float 5s ease-in-out infinite;
+  }
+}
+
+@keyframes orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: rotate(-23deg) translateY(0); }
+  50% { transform: rotate(-17deg) translateY(-0.45rem); }
+}

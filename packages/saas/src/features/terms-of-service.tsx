@@ -1,8 +1,9 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
+
 import { Main, Paragraph, Region } from '../design-systems/template/index.js';
-import Page from './page.js';
 import useLocale from '../hooks/use-locale.js';
+import Page from './page.js';
 
 const LAST_UPDATED: Date = new Date('2024-03-21');
 

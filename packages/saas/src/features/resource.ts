@@ -21,6 +21,7 @@ import {
   ATTR_SERVICE_INSTANCE_ID,
 } from '@opentelemetry/semantic-conventions/incubating';
 import vitePackageJson from 'vite/package.json' with { type: 'json' };
+
 import packageJson from '../../package.json' with { type: 'json' };
 import { GITHUB_SHA } from '../constants/github-sha.js';
 import getSemanticResourceNavigatorAttributes from '../utils/get-semantic-resource-navigator-attributes.js';
@@ -34,16 +35,22 @@ const {
   version: packageVersion,
 } = packageJson;
 
-const CLOUD_PLATFORM: string = validateString(import.meta.env.CLOUD_PLATFORM);
-const CLOUD_PROVIDER: string = validateString(import.meta.env.CLOUD_PROVIDER);
 const TELEMETRY_SDK_NAME = '@opentelemetry/sdk-trace-web';
 
 const CLOUD_ACCOUNT_ID: string = validateString(
-  import.meta.env.CLOUD_ACCOUNT_ID,
+  import.meta.env['CLOUD_ACCOUNT_ID'],
+);
+
+const CLOUD_PLATFORM: string = validateString(
+  import.meta.env['CLOUD_PLATFORM'],
+);
+
+const CLOUD_PROVIDER: string = validateString(
+  import.meta.env['CLOUD_PROVIDER'],
 );
 
 const DEPLOYMENT_ENVIRONMENT: string = validateString(
-  import.meta.env.DEPLOYMENT_ENVIRONMENT,
+  import.meta.env['DEPLOYMENT_ENVIRONMENT'],
 );
 
 export default class Resource implements ResourceType {

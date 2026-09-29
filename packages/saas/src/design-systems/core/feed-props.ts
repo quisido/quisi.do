@@ -1,6 +1,12 @@
-import type { ReactNode } from 'react';
-import type { OneOf } from './one-of.js';
-import type { RequiredReactNode } from './required-react-node.js';
+import { type ReactNode } from 'react';
+
+import { type OneOf } from './one-of.js';
+import { type RequiredReactNode } from './required-react-node.js';
+
+interface OneOfFeedArticleProps {
+  readonly heading: RequiredReactNode;
+  readonly labelledBy: string;
+}
 
 export type FeedArticle = OneOf<OneOfFeedArticleProps> & {
   readonly children: ReactNode;
@@ -22,9 +28,4 @@ export interface FeedProps {
   /** Callback when more articles need to be prepended. */
   readonly onPrepend?: (() => Promise<void>) | undefined;
   readonly setSize?: number | undefined;
-}
-
-interface OneOfFeedArticleProps {
-  readonly heading: RequiredReactNode;
-  readonly labelledBy: string;
 }

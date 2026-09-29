@@ -1,0 +1,173 @@
+.heading {
+  --ink: #15120f;
+  --paper: #fff20a;
+  --pink: #ff2c91;
+  --blue: #164bff;
+  --mint: #61e8a5;
+  --aqua: #00c6cc;
+
+  box-sizing: border-box;
+  color: var(--ink);
+  display: block;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(2.1rem, 8vw, 6.75rem);
+  font-stretch: condensed;
+  font-weight: 900;
+  isolation: isolate;
+  letter-spacing: -0.055em;
+  line-height: 0.82;
+  margin-block: 0.55em;
+  max-width: 15ch;
+  padding: 0.32em 0.44em 0.38em;
+  position: relative;
+  text-transform: none;
+  transform: rotate(-1.2deg);
+  width: fit-content;
+}
+
+.label {
+  display: block;
+  filter: drop-shadow(0.035em 0.045em 0 rgb(255 255 255 / 88%));
+  position: relative;
+  text-wrap: balance;
+  z-index: 5;
+}
+
+.label::before,
+.label::after {
+  content: "";
+  inset: -0.19em -0.3em -0.23em;
+  position: absolute;
+  z-index: -1;
+}
+
+.label::before {
+  background: var(--pink);
+  clip-path: polygon(3% 13%, 93% 2%, 100% 48%, 96% 91%, 22% 100%, 0 76%);
+  transform: translate(0.08em, 0.1em) rotate(1.5deg);
+}
+
+.label::after {
+  background: var(--paper);
+  clip-path: polygon(4% 8%, 96% 0, 100% 49%, 94% 95%, 20% 98%, 0 72%);
+}
+
+.orbit,
+.sunburst,
+.confetti,
+.zigzag,
+.squiggle,
+.triangle {
+  pointer-events: none;
+  position: absolute;
+}
+
+.orbit {
+  aspect-ratio: 1;
+  background: var(--blue);
+  border-radius: 50%;
+  box-shadow: 0.05em 0.06em 0 var(--ink);
+  left: -0.2em;
+  top: -0.5em;
+  width: 1.25em;
+  z-index: -3;
+}
+
+.sunburst {
+  aspect-ratio: 2 / 1;
+  background: repeating-conic-gradient(from 265deg at 50% 100%, var(--ink) 0 5deg, transparent 5deg 15deg), var(--mint);
+  border-radius: 10em 10em 0 0;
+  right: -0.34em;
+  top: -0.47em;
+  width: 1.35em;
+  z-index: -3;
+}
+
+.confetti {
+  background: radial-gradient(circle, var(--ink) 0 21%, transparent 23%) 0 0 / 0.22em 0.22em;
+  height: 0.72em;
+  left: 0.85em;
+  opacity: 0.9;
+  top: -0.48em;
+  transform: rotate(7deg);
+  width: 1.4em;
+  z-index: -2;
+}
+
+.zigzag {
+  background: linear-gradient(135deg, transparent 0 38%, #fff 39% 59%, transparent 60%) 0 0 / 0.38em 0.38em repeat-x;
+  filter: drop-shadow(0.045em 0.055em 0 var(--ink));
+  height: 0.55em;
+  left: -0.45em;
+  top: 48%;
+  transform: rotate(2deg);
+  width: 1.25em;
+  z-index: 7;
+}
+
+.squiggle {
+  border: 0.09em solid var(--aqua);
+  border-left-color: transparent;
+  border-radius: 50%;
+  bottom: -0.55em;
+  height: 0.42em;
+  right: -0.28em;
+  transform: rotate(-7deg) skewX(-24deg);
+  width: 2.1em;
+  z-index: 6;
+}
+
+.squiggle::after {
+  border: inherit;
+  border-right-color: transparent;
+  border-radius: inherit;
+  content: "";
+  height: 100%;
+  position: absolute;
+  right: 78%;
+  top: -0.08em;
+  width: 70%;
+}
+
+.triangle {
+  background: #ff3b30;
+  bottom: -0.42em;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(0.045em 0.055em 0 var(--ink));
+  height: 0.62em;
+  right: -0.16em;
+  transform: rotate(9deg);
+  width: 0.65em;
+  z-index: 7;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .orbit {
+    animation: orbit-drift 7s ease-in-out infinite alternate;
+  }
+
+  .squiggle {
+    animation: squiggle-breathe 5s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes orbit-drift {
+  to { transform: translate(0.08em, -0.05em) rotate(8deg); }
+}
+
+@keyframes squiggle-breathe {
+  to { transform: rotate(-4deg) skewX(-18deg) scaleX(1.04); }
+}
+
+@media (forced-colors: active) {
+  .label::before,
+  .label::after,
+  .orbit,
+  .sunburst,
+  .confetti,
+  .zigzag,
+  .squiggle,
+  .triangle {
+    display: none;
+  }
+}

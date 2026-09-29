@@ -1,0 +1,180 @@
+.complementary {
+  --acid: #dfff00;
+  --blue: #2647ff;
+  --cream: #fff8d6;
+  --ink: #191622;
+  --orange: #ff6433;
+  --pink: #ff4eb8;
+
+  background:
+    radial-gradient(circle at 74% 17%, rgb(255 255 255 / 28%) 0 0.22rem, transparent 0.28rem) 0 0 / 1.7rem 1.7rem,
+    linear-gradient(128deg, var(--pink) 0 48%, #ff78c7 48% 54%, var(--orange) 54% 100%);
+  border: 0.28rem solid var(--ink);
+  box-shadow:
+    0.65rem 0.65rem 0 var(--acid),
+    0.92rem 0.92rem 0 var(--ink);
+  box-sizing: border-box;
+  color: var(--ink);
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  isolation: isolate;
+  margin: clamp(1.5rem, 5vw, 4rem);
+  min-block-size: 20rem;
+  overflow: hidden;
+  padding: clamp(3.6rem, 9vw, 6.5rem) clamp(1.4rem, 7vw, 5.5rem) clamp(3rem, 8vw, 5rem);
+  position: relative;
+  transform: rotate(0.7deg);
+}
+
+.complementary::before {
+  background: repeating-linear-gradient(90deg, var(--ink) 0 0.75rem, var(--cream) 0.75rem 1.5rem);
+  block-size: 1.15rem;
+  content: '';
+  inset: 0 0 auto;
+  position: absolute;
+  z-index: 5;
+}
+
+.complementary::after {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+  content: '';
+  inset: 0;
+  mix-blend-mode: soft-light;
+  opacity: 0.18;
+  pointer-events: none;
+  position: absolute;
+  z-index: 8;
+}
+
+.content {
+  background: var(--cream);
+  border: 0.28rem solid var(--ink);
+  box-shadow: 0.8rem 0.8rem 0 var(--blue);
+  clip-path: polygon(0 7%, 8% 0, 94% 4%, 100% 22%, 96% 92%, 82% 100%, 7% 96%, 2% 77%);
+  font-size: clamp(1rem, 2.4vw, 1.22rem);
+  font-weight: 650;
+  line-height: 1.55;
+  margin-inline: auto;
+  max-inline-size: 42rem;
+  padding: clamp(2rem, 6vw, 4rem);
+  position: relative;
+  z-index: 4;
+}
+
+.content > :first-child { margin-block-start: 0; }
+.content > :last-child { margin-block-end: 0; }
+
+.content :is(h1, h2, h3, h4) {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: clamp(2rem, 7vw, 4.6rem);
+  letter-spacing: 0.025em;
+  line-height: 0.9;
+  text-shadow: 0.13em 0.13em 0 var(--acid);
+  text-transform: uppercase;
+}
+
+.content ::marker { color: var(--pink); }
+
+.sun,
+.stairs,
+.portal,
+.confetti,
+.scribble {
+  pointer-events: none;
+  position: absolute;
+}
+
+.sun {
+  aspect-ratio: 1;
+  background: repeating-conic-gradient(var(--acid) 0 8deg, transparent 8deg 16deg);
+  inline-size: clamp(11rem, 29vw, 22rem);
+  inset: -5rem auto auto -5rem;
+  z-index: 1;
+}
+
+.sun::after {
+  background: var(--blue);
+  border: 0.28rem solid var(--ink);
+  border-radius: 50%;
+  content: '';
+  inset: 31%;
+  position: absolute;
+}
+
+.stairs {
+  background: repeating-linear-gradient(90deg, var(--ink) 0 1.1rem, var(--cream) 1.1rem 2.2rem);
+  block-size: 5rem;
+  clip-path: polygon(0 0, 18% 0, 18% 22%, 38% 22%, 38% 45%, 59% 45%, 59% 68%, 79% 68%, 79% 88%, 100% 88%, 100% 100%, 0 100%);
+  inline-size: 17rem;
+  inset: auto -2rem -0.2rem auto;
+  rotate: -4deg;
+  z-index: 5;
+}
+
+.portal {
+  background: var(--blue);
+  border: 0.3rem solid var(--ink);
+  border-radius: 50% 50% 8% 8%;
+  block-size: 11rem;
+  box-shadow: inset 0 0 0 1.25rem var(--acid), inset 0 0 0 1.55rem var(--ink);
+  inline-size: 8rem;
+  inset: 17% -3.1rem auto auto;
+  rotate: 12deg;
+  z-index: 3;
+}
+
+.confetti {
+  background: var(--ink);
+  block-size: 0.65rem;
+  box-shadow:
+    3rem 2rem 0 var(--acid),
+    6rem -1rem 0 var(--blue),
+    8rem 3.3rem 0 var(--cream),
+    12rem 0.5rem 0 var(--ink);
+  inline-size: 1.8rem;
+  inset: 2.5rem auto auto 31%;
+  rotate: -18deg;
+  z-index: 3;
+}
+
+.scribble {
+  align-items: center;
+  display: flex;
+  inset: auto auto -1.4rem 7%;
+  z-index: 5;
+}
+
+.scribble i {
+  border: 0.55rem solid var(--cream);
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+  block-size: 3.2rem;
+  display: block;
+  inline-size: 3.2rem;
+  margin-inline-end: -0.65rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun { animation: spin 32s linear infinite; }
+  .portal { animation: hover 5s ease-in-out infinite alternate; }
+  .confetti { animation: shimmy 4s steps(2, jump-none) infinite; }
+}
+
+@keyframes spin { to { transform: rotate(1turn); } }
+@keyframes hover { to { translate: -0.35rem 0.7rem; } }
+@keyframes shimmy { 50% { translate: 0.35rem -0.2rem; } }
+
+@media (max-width: 36rem) {
+  .complementary {
+    margin: 1.25rem;
+    padding-inline: 1rem;
+  }
+
+  .content {
+    box-shadow: 0.55rem 0.55rem 0 var(--blue);
+    clip-path: polygon(0 4%, 9% 0, 97% 3%, 100% 93%, 87% 100%, 4% 96%);
+    padding: 2.5rem 1.4rem;
+  }
+
+  .portal { opacity: 0.55; }
+}

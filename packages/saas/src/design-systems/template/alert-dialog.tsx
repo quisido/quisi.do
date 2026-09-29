@@ -1,12 +1,13 @@
+import { type ReactElement } from 'react';
 import { FocusScope } from 'react-aria';
-import type { ReactElement } from 'react';
-import Heading from './heading.js';
-import useAlertDialog from '../core/use-alert-dialog.js';
-import type {
-  AlertDialogProps,
-  AlertDialogType,
+
+import {
+  type AlertDialogProps,
+  type AlertDialogType,
 } from '../core/alert-dialog-props.js';
+import useAlertDialog from '../core/use-alert-dialog.js';
 import classes from './alert-dialog.module.scss';
+import Heading from './heading.js';
 
 const toIcon = (type: AlertDialogType): string => {
   switch (type) {

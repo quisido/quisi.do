@@ -1,4 +1,4 @@
-import type { ErrorCode } from '@quisido/authn-shared';
+import { type ErrorCode } from '@quisido/authn-shared';
 import { ResponseInitImpl, StatusCode } from 'cloudflare-utils';
 
 interface Options {

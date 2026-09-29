@@ -3,12 +3,12 @@ import toString from './to-string.js';
 
 const EXIT_HANDLERS = new Set<() => Promise<void> | void>();
 
-export const onExit = (callback: () => Promise<void> | void): void => {
-  EXIT_HANDLERS.add(callback);
-};
-
 const handleExitError = (err: unknown): void => {
   debug(`An error occurred while exiting: ${toString(err)}`);
+};
+
+export const onExit = (callback: () => Promise<void> | void): void => {
+  EXIT_HANDLERS.add(callback);
 };
 
 export const handleExit = async (): Promise<void> => {

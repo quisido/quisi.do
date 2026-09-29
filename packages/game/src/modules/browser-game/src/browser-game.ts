@@ -1,7 +1,10 @@
 import { Game, type GameOptions } from '../../game/src/index.js';
-import type { BrowserGameAction } from './types/browser-game-action.js';
+import { type BrowserGameAction } from './types/browser-game-action.js';
 
-export interface BrowserGameOptions<State> extends GameOptions<State, BrowserGameAction> {
+export interface BrowserGameOptions<State> extends GameOptions<
+  State,
+  BrowserGameAction
+> {
   readonly canvas: HTMLCanvasElement;
 }
 
@@ -19,14 +22,19 @@ export default class BrowserGame<State> extends Game<State, BrowserGameAction> {
     this.#draw();
   }
 
-
   #draw(): void {
     window.requestAnimationFrame((): void => {
+      this.#canvasRenderingContext2D.clearRect(
+        0,
+        0,
+        this.#canvasRenderingContext2D.canvas.width,
+        this.#canvasRenderingContext2D.canvas.height,
+      );
       this.#draw();
     });
 
     // const drawable = this.getEntities(isDrawable);
     // loop over each drawable entity
     // draw it if it has changed
-  };
+  }
 }

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import TestKVNamespace from './test-kv-namespace.js';
 
 describe('TestKVNamespace', (): void => {

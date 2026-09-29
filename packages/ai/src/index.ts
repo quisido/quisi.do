@@ -1,3 +1,5 @@
+import isEnglish from './utils/is-english.js';
+
 /*
 onvoiceschanged: ((this: SpeechSynthesis, ev: Event) => any) | null;
 readonly paused: boolean;
@@ -16,6 +18,5 @@ removeEventListener(type: string, listener: EventListenerOrEventListenerObject, 
 const voices: readonly SpeechSynthesisVoice[] =
   window.speechSynthesis.getVoices();
 
-const isEnglish = (voice: SpeechSynthesisVoice) => voice.lang.startsWith('en');
-
+// eslint-disable-next-line no-console
 console.log(voices.filter(isEnglish));

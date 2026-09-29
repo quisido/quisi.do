@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from 'react';
+
 import INTERCOM_WINDOW from '../../constants/intercom-window.js';
 import type IntercomFunction from '../../types/intercom-function.js';
 import createIntercomFunction from '../../utils/create-intercom.js';

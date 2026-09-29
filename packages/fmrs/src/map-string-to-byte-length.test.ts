@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { mapStringToByteLength } from './index.js';
 
 describe('mapStringToByteLength', (): void => {

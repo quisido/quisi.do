@@ -1,5 +1,6 @@
 import { TEST_EXECUTION_CONTEXT } from 'cloudflare-test-utils';
 import { assert, describe, expect, it, vi } from 'vitest';
+
 import { TestExportedHandler } from '../test/test-exported-handler.js';
 import { FetchHandler } from './index.js';
 

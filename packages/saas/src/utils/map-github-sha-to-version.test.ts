@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import mapGitHubShaToVersion from './map-github-sha-to-version.js';
 
 describe('mapGitHubShaToVersion', (): void => {

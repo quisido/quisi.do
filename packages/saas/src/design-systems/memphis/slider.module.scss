@@ -1,0 +1,250 @@
+.root {
+  --ink: #11100e;
+  --cream: #fff8e8;
+  --coral: #ff4f58;
+  --blue: #2948ff;
+  --cyan: #2ccce4;
+  --yellow: #ffdc18;
+
+  background: var(--cream);
+  border: 8px solid var(--ink);
+  box-shadow: 12px 12px 0 var(--coral);
+  box-sizing: border-box;
+  color: var(--ink);
+  display: inline-flex;
+  flex-direction: column;
+  font-family: Arial Black, Arial, sans-serif;
+  min-height: 310px;
+  overflow: hidden;
+  padding: 54px 44px 38px;
+  position: relative;
+  width: min(100%, 680px);
+}
+
+.header {
+  align-items: flex-start;
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.label {
+  font-size: clamp(1.75rem, 6vw, 3.9rem);
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  line-height: 0.85;
+  max-width: 72%;
+  text-transform: uppercase;
+}
+
+.value {
+  background: #78e0c0;
+  box-shadow: 7px 7px 0 var(--ink);
+  font-size: clamp(2rem, 6vw, 4.25rem);
+  line-height: 0.85;
+  padding: 6px 10px 4px;
+  transform: rotate(2deg);
+}
+
+.stage {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 142px;
+  position: relative;
+  z-index: 3;
+}
+
+.slider {
+  appearance: none;
+  background: linear-gradient(
+    to right,
+    var(--coral) 0 var(--slider-progress),
+    var(--blue) var(--slider-progress) 100%
+  );
+  border: 0;
+  box-shadow: 0 9px 0 var(--ink);
+  cursor: grab;
+  height: 38px;
+  margin: 0;
+  position: relative;
+  width: 100%;
+
+  &::-webkit-slider-runnable-track {
+    background: transparent;
+    border: 0;
+    height: 38px;
+  }
+
+  &::-moz-range-track {
+    background: transparent;
+    border: 0;
+    height: 38px;
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    background: var(--yellow);
+    border: 6px solid var(--ink);
+    border-radius: 50%;
+    box-shadow: 8px 9px 0 var(--ink);
+    height: 78px;
+    margin-top: -20px;
+    width: 78px;
+  }
+
+  &::-moz-range-thumb {
+    background: var(--yellow);
+    border: 6px solid var(--ink);
+    border-radius: 50%;
+    box-shadow: 8px 9px 0 var(--ink);
+    height: 66px;
+    width: 66px;
+  }
+
+  &:focus-visible {
+    outline: 5px dashed var(--cyan);
+    outline-offset: 15px;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.ticks {
+  background: repeating-linear-gradient(
+    to right,
+    var(--ink) 0 6px,
+    transparent 6px 42px
+  );
+  height: 20px;
+  margin-top: 26px;
+  width: 100%;
+}
+
+.piano {
+  background: repeating-linear-gradient(
+    to right,
+    var(--ink) 0 14px,
+    transparent 14px 23px
+  );
+  height: 34px;
+  left: 24px;
+  position: absolute;
+  top: 0;
+  width: 185px;
+}
+
+.sun {
+  background: var(--cyan);
+  border: 5px solid var(--ink);
+  border-radius: 50%;
+  height: 50px;
+  position: absolute;
+  right: 36px;
+  top: 26px;
+  width: 50px;
+}
+
+.triangle {
+  background: var(--coral);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  height: 45px;
+  position: absolute;
+  right: 120px;
+  top: 16px;
+  transform: rotate(19deg);
+  width: 48px;
+}
+
+.squiggle {
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0 9px,
+    var(--ink) 9px 17px,
+    transparent 17px 26px
+  );
+  height: 18px;
+  left: 5%;
+  position: absolute;
+  top: 30px;
+  transform: skewX(-18deg);
+  width: 120px;
+}
+
+.checker {
+  background: conic-gradient(
+    from 90deg,
+    var(--ink) 25%,
+    transparent 0 50%,
+    var(--ink) 0 75%,
+    transparent 0
+  );
+  background-size: 24px 24px;
+  bottom: 0;
+  height: 48px;
+  position: absolute;
+  right: 0;
+  width: 96px;
+}
+
+.root[data-orientation='vertical'] {
+  min-height: 500px;
+  width: min(100%, 360px);
+
+  .label {
+    max-width: 68%;
+  }
+
+  .stage {
+    align-items: center;
+    justify-content: center;
+    min-height: 330px;
+  }
+
+  .slider {
+    box-shadow: 9px 0 0 var(--ink);
+    transform: rotate(-90deg);
+    width: 280px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun {
+    animation: drift 5s ease-in-out infinite alternate;
+  }
+
+  .triangle {
+    animation: tilt 4s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes drift {
+  to {
+    transform: translateY(7px) rotate(8deg);
+  }
+}
+
+@keyframes tilt {
+  to {
+    transform: rotate(32deg) translateY(4px);
+  }
+}
+
+@media (max-width: 480px) {
+  .root {
+    border-width: 6px;
+    box-shadow: 8px 8px 0 var(--coral);
+    min-height: 260px;
+    padding: 48px 24px 26px;
+  }
+
+  .slider::-webkit-slider-thumb {
+    height: 62px;
+    width: 62px;
+  }
+}

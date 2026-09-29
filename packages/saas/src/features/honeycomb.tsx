@@ -1,9 +1,10 @@
 import { type PropsWithChildren, type ReactElement } from 'react';
+
 import Honeycomb from '../components/honeycomb.js';
 import validateString from '../utils/validate-string.js';
 
 const HONEYCOMB_API_KEY: string = validateString(
-  import.meta.env.HONEYCOMB_API_KEY,
+  import.meta.env['HONEYCOMB_API_KEY'],
 );
 
 export default function HoneycombFeature({

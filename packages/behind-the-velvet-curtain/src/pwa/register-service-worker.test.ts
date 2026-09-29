@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { isRegisterableServiceWorkerLocation } from './register-service-worker.js';
 
 describe('isRegisterableServiceWorkerLocation', (): void => {

@@ -1,6 +1,10 @@
-import type { ChangeEvent, ReactElement } from 'react';
-import type { ListBoxOption, ListBoxProps } from '../core/list-box-props.js';
+import { type ChangeEvent, type ReactElement } from 'react';
+
 import useElementId from '../../hooks/use-element-id.js';
+import {
+  type ListBoxOption,
+  type ListBoxProps,
+} from '../core/list-box-props.js';
 import classes from './list-box.module.scss';
 
 const reduceOptionsToValues = (

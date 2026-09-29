@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises';
+
 import debug from './debug.js';
 import toString from './to-string.js';
 

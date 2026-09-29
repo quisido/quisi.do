@@ -1,0 +1,190 @@
+.root {
+  --ink: #111018;
+  --paper: #fff7db;
+  --coral: #ff646c;
+  --yellow: #ffda00;
+  --blue: #124ed8;
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  width: min(32rem, calc(100vw - 3rem));
+  padding: 2.75rem 2rem 2rem;
+  color: var(--ink);
+  font-family: "Arial Black", "Trebuchet MS", sans-serif;
+  isolation: isolate;
+}
+
+.root::before {
+  position: absolute;
+  z-index: -3;
+  inset: 0;
+  border: 3px solid var(--ink);
+  background-color: var(--paper);
+  background-image: radial-gradient(#f6c94a 1.1px, transparent 1.1px);
+  background-size: 11px 11px;
+  box-shadow: 10px 12px 0 var(--ink);
+  content: "";
+  transform: rotate(-0.8deg);
+}
+
+.label {
+  display: inline-block;
+  margin: 0 0 0.55rem 1.5rem;
+  font-size: clamp(1.15rem, 4vw, 1.75rem);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+}
+
+.field {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 4.4rem;
+  min-height: 4.5rem;
+  border: 5px solid var(--ink);
+  border-radius: 2.25rem;
+  background: var(--coral);
+  box-shadow: 7px 8px 0 #ef3340;
+}
+
+.combobox {
+  min-width: 0;
+  border: 0;
+  border-radius: 2rem 0 0 2rem;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 900 clamp(1.25rem, 5vw, 2rem)/1 "Arial Black", "Trebuchet MS", sans-serif;
+  padding: 0.75rem 0.5rem 0.75rem 1.65rem;
+  text-transform: uppercase;
+}
+
+.combobox:focus-visible {
+  box-shadow: inset 0 0 0 4px var(--paper);
+}
+
+.combobox::selection {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+.button {
+  position: relative;
+  align-self: center;
+  width: 3.55rem;
+  height: 3.55rem;
+  margin-right: 0.35rem;
+  border: 4px solid var(--ink);
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.button:hover:not(:disabled) { transform: rotate(8deg) scale(1.06); }
+.button:active:not(:disabled) { box-shadow: 1px 1px 0 var(--ink); transform: translate(2px, 2px); }
+.button:focus-visible { outline: 4px solid #00bdd0; outline-offset: 4px; }
+.button:disabled, .combobox:disabled { cursor: not-allowed; filter: grayscale(0.7); opacity: 0.62; }
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  height: 1rem;
+  border-right: 5px solid currentcolor;
+  border-bottom: 5px solid currentcolor;
+  transform: translate(-50%, -68%) rotate(45deg);
+}
+
+.listbox {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 1.35rem 0 0 1.1rem;
+  padding: 1.25rem 1.15rem 1.45rem;
+  border: 5px solid var(--ink);
+  background: var(--blue);
+  box-shadow: 10px 11px 0 var(--ink);
+  color: var(--paper);
+  list-style: none;
+  clip-path: polygon(0 4%, 38% 7%, 44% 0, 51% 7%, 100% 4%, 96% 56%, 100% 69%, 94% 100%, 5% 94%);
+  transform: rotate(0.6deg);
+}
+
+.listbox[hidden] { display: none; }
+
+.option {
+  position: relative;
+  display: block;
+  padding: 0.75rem 1rem 0.75rem 2.7rem;
+  font-size: clamp(1rem, 4vw, 1.45rem);
+  font-weight: 900;
+  letter-spacing: 0.035em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.option[aria-selected="true"], .option:hover {
+  background: var(--yellow);
+  color: var(--ink);
+  transform: rotate(-1deg) scale(1.015);
+}
+
+.option[aria-selected="true"]::before {
+  position: absolute;
+  top: 50%;
+  left: 0.9rem;
+  border-top: 0.55rem solid transparent;
+  border-bottom: 0.55rem solid transparent;
+  border-left: 0.85rem solid var(--ink);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.dots, .triangle, .squiggle { position: absolute; z-index: -1; pointer-events: none; }
+
+.dots {
+  top: 0.8rem;
+  left: 0.55rem;
+  width: 4.2rem;
+  height: 2rem;
+  background: radial-gradient(circle, #00bdd0 0 4px, transparent 5px) 0 0 / 22px 18px;
+}
+
+.triangle {
+  top: 0.6rem;
+  right: 0.7rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  background: #f0343e;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(4px 4px 0 var(--ink));
+  transform: rotate(17deg);
+}
+
+.squiggle {
+  right: -0.5rem;
+  bottom: 0.35rem;
+  width: 4rem;
+  height: 1.2rem;
+  border-top: 8px solid #ae5be6;
+  border-radius: 50%;
+  transform: rotate(-18deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .triangle { animation: float 4s ease-in-out infinite; }
+  @keyframes float { 50% { transform: rotate(10deg) translateY(-5px); } }
+}
+
+@media (forced-colors: active) {
+  .root::before, .field, .button, .listbox { forced-color-adjust: auto; }
+}

@@ -1,4 +1,5 @@
 import { EOL } from 'node:os';
+
 import debug from '../../utils/debug.js';
 import { ExitCode } from '../../utils/exit-code.js';
 import npx from '../npx/npx.js';

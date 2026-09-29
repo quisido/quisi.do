@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { ComplementaryProps } from '../core/complementary-props.js';
+import { type ReactElement } from 'react';
+
+import { type ComplementaryProps } from '../core/complementary-props.js';
 import classes from './complementary.module.scss';
 
 /**

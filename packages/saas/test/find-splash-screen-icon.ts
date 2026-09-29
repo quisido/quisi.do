@@ -1,4 +1,5 @@
 import { assert } from 'vitest';
+
 import type Image from '../src/types/web-manifest/image.js';
 
 const BASE = 10;

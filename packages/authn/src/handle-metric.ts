@@ -3,6 +3,7 @@ import {
   type MetricDimensions,
   MetricName as WorkerMetricName,
 } from '@quisido/worker';
+
 import { PUBLIC } from './constants/metric-dimensions.js';
 import { MetricName } from './constants/metric-name.js';
 import isWorkerMetricName from './utils/is-worker-metric-name.js';

@@ -1,4 +1,5 @@
 import monogatari from '@monogatari/core';
+
 import { DEFAULT_STORAGE } from './storage.js';
 import {
   canChooseTrustedGuide,

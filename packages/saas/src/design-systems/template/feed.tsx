@@ -1,10 +1,11 @@
 import { type FocusEvent, type KeyboardEvent, type ReactElement } from 'react';
-import type { FeedArticle, FeedProps } from '../core/feed-props.js';
+
+import { type FeedArticle, type FeedProps } from '../core/feed-props.js';
+import { FOCUSABLE_SELECTORS } from '../core/focusable-selectors.js';
 import useFeed from '../core/use-feed.js';
 import useId from '../core/use-id.js';
-import Heading from './heading.js';
 import classes from './feed.module.scss';
-import { FOCUSABLE_SELECTORS } from '../core/focusable-selectors.js';
+import Heading from './heading.js';
 
 interface FeedArticleProps {
   readonly onFocus: VoidFunction;
@@ -243,7 +244,7 @@ export default function Feed({
             }
 
             // At the second-to-last article, append more.
-            // eslint-disable-next-line no-magic-numbers
+
             if (index >= articles.length - 2 && handleAppend) {
               handleAppend();
             }

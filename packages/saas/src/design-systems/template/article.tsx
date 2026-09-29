@@ -1,8 +1,9 @@
-import type { ReactElement } from 'react';
-import type { ArticleProps } from '../core/article-props.js';
-import Heading from './heading.js';
-import classes from './article.module.scss';
+import { type ReactElement } from 'react';
+
+import { type ArticleProps } from '../core/article-props.js';
 import useId from '../core/use-id.js';
+import classes from './article.module.scss';
+import Heading from './heading.js';
 
 /**
  * An article is a section of a page that consists of a composition that forms
@@ -32,6 +33,7 @@ export default function Article({
   tabbable = false,
 }: ArticleProps): ReactElement {
   const headingId: string = useId();
+
   return (
     <article
       aria-labelledby={labelledBy ?? headingId}

@@ -1,16 +1,16 @@
 const LOCALHOST_NAMES = new Set(['127.0.0.1', '::1', 'localhost']);
 const PWA_REGISTER_MODULE = 'virtual:pwa-register';
 
-export interface RegisterableLocation {
-  hostname: string;
-  protocol: string;
-}
-
 interface PWARegisterModule {
   readonly registerSW: (options: {
     immediate: boolean;
     onRegisterError(error: unknown): void;
   }) => void;
+}
+
+export interface RegisterableLocation {
+  hostname: string;
+  protocol: string;
 }
 
 export const isRegisterableServiceWorkerLocation = (
@@ -49,7 +49,7 @@ export const registerServiceWorker = async (): Promise<void> => {
   }
 
   const pwaRegisterModule = (await import(
-    /* @vite-ignore */ PWA_REGISTER_MODULE
+    PWA_REGISTER_MODULE
   )) as PWARegisterModule;
 
   pwaRegisterModule.registerSW({

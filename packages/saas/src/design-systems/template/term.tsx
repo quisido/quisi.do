@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { TermProps } from '../core/term-props.js';
+import { type ReactElement } from 'react';
+
+import { type TermProps } from '../core/term-props.js';
 import classes from './term.module.scss';
 
 /**

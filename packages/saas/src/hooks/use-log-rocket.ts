@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import useForceUpdate from 'use-force-update';
-import type { LogRocket as ILogRocket } from '../types/log-rocket.js';
+
+import { type LogRocket as ILogRocket } from '../types/log-rocket.js';
 import getDefault from '../utils/get-default.js';
 import noop from '../utils/noop.js';
 

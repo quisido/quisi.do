@@ -1,5 +1,6 @@
 import { type ReactElement, type ReactNode } from 'react';
-import type { NotificationProps } from '../contexts/notifications.js';
+
+import { type NotificationProps } from '../contexts/notifications.js';
 import { Dialog } from '../design-systems/template/index.js';
 
 export default function Notification({

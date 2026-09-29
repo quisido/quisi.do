@@ -1,6 +1,6 @@
 import type ExternalApplication from './external-application.js';
 import type Image from './image.js';
-import type { Orientation } from './orientation.js';
+import { type Orientation } from './orientation.js';
 import type Shortcut from './shortcut.js';
 
 // https://github.com/SchemaStore/schemastore/blob/master/src/schemas/json/web-manifest.json

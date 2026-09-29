@@ -1,11 +1,12 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement, type RefObject, useEffect, useState } from 'react';
+
+import { type NotificationProps } from '../contexts/notifications.js';
 import useMountedRef from '../hooks/use-mounted-ref.js';
-import mapErrorToNotification from '../utils/map-error-to-notification.js';
-import Notification from './notification.js';
 import type NotificationType from '../types/notification.js';
-import type { NotificationProps } from '../contexts/notifications.js';
+import mapErrorToNotification from '../utils/map-error-to-notification.js';
 import noop from '../utils/noop.js';
+import Notification from './notification.js';
 
 interface LazyNotificationProps {
   readonly children: Promise<NotificationProps>;

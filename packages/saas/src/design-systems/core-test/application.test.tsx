@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import render from './render.js';
+
 import importTestedDesignSystem from './import-tested-design-system.js';
+import render from './render.js';
 
 /**
  * Since applications use "focus mode" which removes the screen reader's access

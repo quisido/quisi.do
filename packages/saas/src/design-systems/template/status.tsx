@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { StatusProps } from '../core/status-props.js';
+import { type ReactElement } from 'react';
+
+import { type StatusProps } from '../core/status-props.js';
 import classes from './status.module.scss';
 
 /**

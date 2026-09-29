@@ -1,9 +1,3 @@
-export interface Component {
-  readonly descriptionFile: string;
-  readonly instructions: string;
-  readonly slug: string;
-}
-
 const canvas = (slug: string): Component => ({
   descriptionFile: `core/${slug}.md`,
   instructions:
@@ -34,6 +28,12 @@ const widget = (slug: string): Component => ({
   instructions: 'This element represents a widget. Visually enclose it.',
   slug,
 });
+
+export interface Component {
+  readonly descriptionFile: string;
+  readonly instructions: string;
+  readonly slug: string;
+}
 
 export const COMPONENTS: Component[] = [
   floating('alert'),

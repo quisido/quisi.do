@@ -1,9 +1,10 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
+
+import { type DocumentProps } from '../core/document-props.js';
+import { useDocument } from '../core/index.js';
 import Banner from './banner.js';
-import type { DocumentProps } from '../core/document-props.js';
 import ContentInfo from './content-info.js';
 import classes from './document.module.scss';
-import { useDocument } from '../core/index.js';
 
 /**
  * A document contains content that users may want to browse in a reading

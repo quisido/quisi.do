@@ -1,4 +1,4 @@
-import type { Purpose } from './purpose.js';
+import { type Purpose } from './purpose.js';
 
 export default interface Image {
   readonly purpose?: Purpose | undefined;

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { mapMapToEntries } from './index.js';
 
 const TEST_ENTRIES: readonly [string, string][] = [
