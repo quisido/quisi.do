@@ -134,8 +134,8 @@
   block-size: 6rem;
   inline-size: 15rem;
   left: 8%;
-  rotate: -17deg;
   top: 63%;
+  transform: rotate(-17deg);
   z-index: 3;
 }
 
@@ -158,7 +158,7 @@
     15rem 0.5rem 0 var(--blue);
   inline-size: 0.45rem;
   right: 12%;
-  rotate: 28deg;
+  transform: rotate(28deg);
   top: 10%;
   z-index: 3;
 }
@@ -182,9 +182,9 @@
 
 @keyframes spin { to { transform: rotate(1turn); } }
 
-@keyframes bob { to { translate: 0 -1rem; rotate: 4deg; } }
+@keyframes bob { to { transform: translateY(-1rem) rotate(4deg); } }
 
-@keyframes drift { to { translate: 0.7rem -0.45rem; } }
+@keyframes drift { to { transform: translate(0.7rem, -0.45rem) rotate(-17deg); } }
 
 @media (max-width: 38rem) {
   .content-info {

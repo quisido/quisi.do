@@ -106,7 +106,7 @@
   clip-path: polygon(0 20%, 100% 0, 88% 100%, 8% 88%);
   inline-size: 5.7rem;
   inset: auto -0.7rem -0.35rem auto;
-  rotate: -8deg;
+  transform: rotate(-8deg);
   z-index: 2;
 }
 
@@ -117,7 +117,7 @@
   filter: drop-shadow(0.2rem 0.24rem 0 var(--ink));
   inline-size: 3.2rem;
   inset: 0.2rem 7% auto auto;
-  rotate: 16deg;
+  transform: rotate(16deg);
   z-index: 2;
 }
 
@@ -128,7 +128,7 @@
   block-size: 2.6rem;
   inline-size: 6.3rem;
   inset: auto auto -0.4rem 9%;
-  rotate: -10deg;
+  transform: rotate(-10deg);
   z-index: 2;
 }
 
@@ -137,7 +137,7 @@
   block-size: 3rem;
   inline-size: 5rem;
   inset: 0.25rem auto auto 18%;
-  rotate: 8deg;
+  transform: rotate(8deg);
   z-index: 1;
 }
 

@@ -72,7 +72,7 @@
   block-size: 4rem;
   inline-size: 12rem;
   inset: -1.8rem auto auto 25%;
-  rotate: -8deg;
+  transform: rotate(-8deg);
   z-index: 4;
 }
 
@@ -82,7 +82,7 @@
   clip-path: polygon(0 10%, 14% 35%, 27% 0, 42% 35%, 56% 0, 70% 35%, 84% 0, 100% 25%, 100% 100%, 85% 75%, 70% 100%, 56% 67%, 42% 100%, 27% 67%, 13% 100%, 0 72%);
   inline-size: 29rem;
   inset: -0.6rem 8% auto auto;
-  rotate: 5deg;
+  transform: rotate(5deg);
   z-index: 2;
 }
 
@@ -107,7 +107,7 @@
   clip-path: polygon(8% 15%, 100% 0, 89% 100%, 0 83%);
   inline-size: 21rem;
   inset: auto 5% -3.8rem auto;
-  rotate: -9deg;
+  transform: rotate(-9deg);
   z-index: 6;
 }
 

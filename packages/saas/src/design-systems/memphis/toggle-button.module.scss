@@ -137,7 +137,7 @@
 }
 
 @keyframes wobble { 50% { transform: translate(0.35rem, 0.2rem) rotate(7deg); } }
-@keyframes sparkle { to { translate: 0 -0.3rem; } }
+@keyframes sparkle { to { transform: translate(0, -0.3rem); } }
 
 @media (forced-colors: active) {
   .canvas,

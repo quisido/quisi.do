@@ -45,7 +45,7 @@
   margin-block: clamp(1.5rem, 4vw, 3.5rem);
   padding: clamp(3.5rem, 9vw, 7rem) clamp(1.8rem, 8vw, 6.5rem);
   position: relative;
-  rotate: -0.7deg;
+  transform: rotate(-0.7deg);
   z-index: 4;
 }
 
@@ -103,7 +103,7 @@
   inset: auto 2% 3% auto;
   opacity: 0.85;
   position: absolute;
-  rotate: 7deg;
+  transform: rotate(7deg);
 }
 
 .sunburst,
@@ -138,7 +138,7 @@
   clip-path: polygon(7% 12%, 100% 0, 91% 100%, 0 86%);
   inline-size: 17rem;
   right: -4rem;
-  rotate: 11deg;
+  transform: rotate(11deg);
   top: 18%;
   z-index: 1;
 }
@@ -160,7 +160,7 @@
   clip-path: polygon(0 0, 14% 35%, 28% 0, 42% 35%, 56% 0, 70% 35%, 84% 0, 100% 35%, 100% 100%, 84% 65%, 70% 100%, 56% 65%, 42% 100%, 28% 65%, 14% 100%, 0 65%);
   inline-size: 23rem;
   inset: auto -5rem 6% auto;
-  rotate: -8deg;
+  transform: rotate(-8deg);
   z-index: 3;
 }
 
@@ -170,7 +170,7 @@
   box-shadow: 3rem 2rem var(--pink), 7rem -1rem var(--cream), 11rem 2.5rem var(--orange), 15rem -0.5rem var(--turquoise);
   inline-size: 0.45rem;
   left: 15%;
-  rotate: 26deg;
+  transform: rotate(26deg);
   top: 3rem;
   z-index: 3;
 }
@@ -186,9 +186,9 @@
   .page-mark { animation: flutter 6s ease-in-out infinite alternate; }
 }
 
-@keyframes spin { to { rotate: 1turn; } }
-@keyframes bob { to { translate: 0 -0.8rem; rotate: 8deg; } }
-@keyframes flutter { to { rotate: -3deg; translate: 0 -0.25rem; } }
+@keyframes spin { to { transform: rotate(1turn); } }
+@keyframes bob { to { transform: translateY(-0.8rem) rotate(8deg); } }
+@keyframes flutter { to { transform: translateY(-0.25rem) rotate(-3deg); } }
 
 @media (max-width: 38rem) {
   .document { padding-inline: 0.9rem; }

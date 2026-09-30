@@ -107,7 +107,7 @@
   clip-path: polygon(0 0, 18% 0, 18% 22%, 38% 22%, 38% 45%, 59% 45%, 59% 68%, 79% 68%, 79% 88%, 100% 88%, 100% 100%, 0 100%);
   inline-size: 17rem;
   inset: auto -2rem -0.2rem auto;
-  rotate: -4deg;
+  transform: rotate(-4deg);
   z-index: 5;
 }
 
@@ -119,7 +119,7 @@
   box-shadow: inset 0 0 0 1.25rem var(--acid), inset 0 0 0 1.55rem var(--ink);
   inline-size: 8rem;
   inset: 17% -3.1rem auto auto;
-  rotate: 12deg;
+  transform: rotate(12deg);
   z-index: 3;
 }
 
@@ -133,7 +133,7 @@
     12rem 0.5rem 0 var(--ink);
   inline-size: 1.8rem;
   inset: 2.5rem auto auto 31%;
-  rotate: -18deg;
+  transform: rotate(-18deg);
   z-index: 3;
 }
 
@@ -161,8 +161,8 @@
 }
 
 @keyframes spin { to { transform: rotate(1turn); } }
-@keyframes hover { to { translate: -0.35rem 0.7rem; } }
-@keyframes shimmy { 50% { translate: 0.35rem -0.2rem; } }
+@keyframes hover { to { transform: translate(-0.35rem, 0.7rem); } }
+@keyframes shimmy { 50% { transform: translate(0.35rem, -0.2rem); } }
 
 @media (max-width: 36rem) {
   .complementary {

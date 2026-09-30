@@ -150,8 +150,8 @@
 }
 
 @keyframes orbit { to { transform: rotate(1turn); } }
-@keyframes bob { to { translate: 0 -0.8rem; rotate: 8deg; } }
-@keyframes shimmy { to { translate: 0.8rem -0.25rem; } }
+@keyframes bob { to { transform: translateY(-0.8rem) rotate(-10deg); } }
+@keyframes shimmy { to { transform: translate(0.8rem, -0.25rem) rotate(-8deg); } }
 
 @media (max-width: 36rem) {
   .region {

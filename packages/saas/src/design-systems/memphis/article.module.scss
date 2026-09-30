@@ -185,6 +185,6 @@
 @keyframes orbit { to { transform: rotate(1turn); } }
 
 @keyframes float {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -0.6rem; }
+  0%, 100% { transform: translateY(0) rotate(21deg); }
+  50% { transform: translateY(-0.6rem) rotate(21deg); }
 }

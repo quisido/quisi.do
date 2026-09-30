@@ -41,7 +41,7 @@
   inline-size: 4rem;
   inset: auto -1rem 1.25rem auto;
   position: absolute;
-  rotate: 12deg;
+  transform: rotate(12deg);
   aspect-ratio: 1;
 }
 
@@ -54,7 +54,7 @@
   min-block-size: 9rem;
   padding: clamp(1.8rem, 6vw, 4rem);
   position: relative;
-  rotate: -1deg;
+  transform: rotate(-1deg);
   z-index: 3;
 }
 
@@ -86,7 +86,7 @@
   block-size: 7rem;
   inline-size: 8rem;
   inset: 18% -2.5rem auto auto;
-  rotate: 18deg;
+  transform: rotate(18deg);
   z-index: 2;
 }
 
@@ -97,7 +97,7 @@
   block-size: 6rem;
   inline-size: 11rem;
   inset: auto auto -2rem -3rem;
-  rotate: -18deg;
+  transform: rotate(-18deg);
   z-index: 4;
 }
 
@@ -118,14 +118,14 @@
   block-size: 4rem;
   inline-size: 8rem;
   inset: 1rem 4% auto auto;
-  rotate: -8deg;
+  transform: rotate(-8deg);
 }
 
 .stitches {
   border-block-start: 0.35rem dashed var(--main-cream);
   inline-size: 26%;
   inset: auto 12% 1.8rem auto;
-  rotate: -5deg;
+  transform: rotate(-5deg);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -134,9 +134,9 @@
   .triangle { animation: main-wobble 7s ease-in-out infinite alternate; }
 }
 
-@keyframes main-spin { to { rotate: 1turn; } }
-@keyframes main-float { to { translate: 0 -0.65rem; rotate: -8deg; } }
-@keyframes main-wobble { to { translate: -0.4rem 0.45rem; rotate: 25deg; } }
+@keyframes main-spin { to { transform: rotate(1turn); } }
+@keyframes main-float { to { transform: translateY(-0.65rem) rotate(-8deg); } }
+@keyframes main-wobble { to { transform: translate(-0.4rem, 0.45rem) rotate(25deg); } }
 
 @media (max-width: 38rem) {
   .main {

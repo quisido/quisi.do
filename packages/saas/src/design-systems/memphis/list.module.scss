@@ -127,4 +127,4 @@
   .list-item:nth-child(3n + 1) .confetti { animation: orbit 5s ease-in-out infinite; }
 }
 
-@keyframes orbit { 50% { translate: 0.2rem -0.35rem; rotate: 18deg; } }
+@keyframes orbit { 50% { transform: translate(0.2rem, -0.35rem) rotate(18deg); } }
