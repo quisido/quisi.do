@@ -1,7 +1,8 @@
-import type { ReactElement } from 'react';
-import Heading from './heading.js';
-import type { RegionProps } from '../core/region-props.js';
+import { type ReactElement } from 'react';
+
+import { type RegionProps } from '../core/region-props.js';
 import useRegion from '../core/use-region.js';
+import Heading from './heading.js';
 import classes from './region.module.scss';
 
 /**

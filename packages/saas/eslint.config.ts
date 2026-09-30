@@ -1,9 +1,17 @@
-import { defineESLintConfig, type ESLintConfig } from 'quisido';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
+import reactRefreshPlugin from 'eslint-plugin-react-refresh';
+import { defineESLintConfig, type ESLintConfig } from 'quisido';
 
 const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
+  // Configuration files
+  {
+    files: ['*.config.ts'],
+    rules: {
+      'import-x/no-nodejs-modules': 'off',
+    },
+  },
+
   // NodeJS
   {
     files: ['scripts/**/*.js'],
@@ -23,7 +31,7 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
         ...reactHooks,
         configs: {},
       },
-      'react-refresh': reactRefresh,
+      'react-refresh': reactRefreshPlugin,
     },
     rules: {
       'react-compiler/react-compiler': 'error',
@@ -44,14 +52,26 @@ const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
     },
   },
 
+  // Scripts
+  {
+    files: ['scripts/**'],
+    rules: {
+      'import-x/no-nodejs-modules': 'off',
+    },
+  },
+
   // Design Systems
   {
     files: ['src/design-systems/**'],
     rules: {
       complexity: 'off',
+      'import-x/exports-last': 'off',
+      'import-x/no-relative-parent-imports': 'off',
       'max-lines': 'off',
       'max-lines-per-function': 'off',
       'max-statements': 'off',
+      'no-magic-numbers': 'off',
+      'no-nested-ternary': 'off',
       'no-ternary': 'off',
     },
   },

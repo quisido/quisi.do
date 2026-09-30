@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 set -Eeuo pipefail;
 
 npx wait-on http://localhost:3000/ \

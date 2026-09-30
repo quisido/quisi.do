@@ -1,5 +1,6 @@
 import { type Translations } from 'lazy-i18n';
-import Locale from '../constants/locale.js';
+
+import Locale from './locale.js';
 
 export const AUTHN_ERRORS_TRANSLATIONS: Record<Locale, Translations> = {
   [Locale.English]: async (): Promise<{ default: Record<string, string> }> =>

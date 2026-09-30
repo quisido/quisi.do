@@ -1,5 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+
 import getDisposableTempDir from './get-disposable-temp-dir.js';
 
 export default async function writeTemporaryFile(

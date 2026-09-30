@@ -1,11 +1,14 @@
-import concurrently, {
+import { type Dirent } from 'node:fs';
+
+import {
   type CloseEvent,
+  concurrently,
   type ConcurrentlyCommandInput,
 } from 'concurrently';
-import type { Dirent } from 'node:fs';
+
+import createPrefixColors from './utils/create-prefix-colors.js';
 import getWorkspaceDirectories from './utils/get-workspace-directories.js';
 import mapDirentToPackageJson from './utils/map-dirent-to-package-json.js';
-import createPrefixColors from './utils/create-prefix-colors.js';
 
 const workspaces = new Set<string>();
 
@@ -17,7 +20,7 @@ for (const workspaceDirectory of workspaceDirectories) {
     continue;
   }
 
-  if (typeof packageJson.scripts?.['start'] === 'undefined') {
+  if (packageJson.scripts?.['start'] === undefined) {
     throw new Error(
       `Expected a start script for workspace: ${workspaceDirectory.name}`,
     );

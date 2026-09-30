@@ -1,5 +1,6 @@
-import type { KeyboardEvent, ReactElement } from 'react';
-import type { ScrollbarProps } from '../core/scrollbar-props.js';
+import { type KeyboardEvent, type ReactElement } from 'react';
+
+import { type ScrollbarProps } from '../core/scrollbar-props.js';
 import classes from './scrollbar.module.scss';
 
 const DEFAULT_MAX = 100;

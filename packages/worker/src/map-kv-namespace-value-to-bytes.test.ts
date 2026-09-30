@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import mapKVNamespaceValueToBytes from './map-kv-namespace-value-to-bytes.js';
 
 describe('mapKVNamespaceValueToBytes', (): void => {

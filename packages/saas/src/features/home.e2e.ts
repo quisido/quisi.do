@@ -1,6 +1,7 @@
 import { expect, type Locator } from '@playwright/test';
+
 import { test } from '../../test/e2e.js';
-import type { TestArgs, WorkerArgs } from '../../test/playwright.js';
+import { type TestArgs, type WorkerArgs } from '../../test/playwright.js';
 
 test.describe('Home', (): void => {
   test('should show an About section', async ({

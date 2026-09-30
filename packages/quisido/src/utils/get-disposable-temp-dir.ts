@@ -1,4 +1,5 @@
-import type { DisposableTempDir } from 'node:fs/promises';
+import { type DisposableTempDir } from 'node:fs/promises';
+
 import makeDisposableTempDir from './make-disposable-temp-dir.js';
 
 let disposableTempDir: DisposableTempDir | Promise<DisposableTempDir> | null =

@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+
 import type VSCodeExtensionsJson from '../types/vs-code-extensions-json.js';
 import isString from './is-string.js';
 

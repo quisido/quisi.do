@@ -1,13 +1,23 @@
-import { browserProfilingIntegration, init,  replayIntegration, type User } from "@sentry/browser";
-import { type DataCollection,  setUser } from "@sentry/core";
-import {   useEffect, useMemo } from "react";
-import { type AuthenticationState, useAuthentication } from "../contexts/authentication.js";
-import validateString from "../utils/validate-string.js";
-import { GITHUB_SHA } from "../constants/github-sha.js";
+import {
+  browserProfilingIntegration,
+  init,
+  replayIntegration,
+  type User,
+} from '@sentry/browser';
+import { type DataCollection, setUser } from '@sentry/core';
+import { useEffect, useMemo } from 'react';
 
+import { GITHUB_SHA } from '../constants/github-sha.js';
+import {
+  type AuthenticationState,
+  useAuthentication,
+} from '../contexts/authentication.js';
+import validateString from '../utils/validate-string.js';
 
 const BROWSER_PROFILING_INTEGRATION = browserProfilingIntegration();
-const ENVIRONMENT: string = validateString(import.meta.env.SENTRY_ENVIRONMENT);
+const ENVIRONMENT: string = validateString(
+  import.meta.env['SENTRY_ENVIRONMENT'],
+);
 const RELEASE: string = GITHUB_SHA ?? 'unknown';
 
 const DATA_COLLECTION: DataCollection = {
@@ -53,7 +63,6 @@ export default function useSentry(): void {
   // Contexts
   const authn: AuthenticationState = useAuthentication();
 
-
   // States
   const user = useMemo((): User | undefined => {
     if (typeof authn.data === 'undefined') {
@@ -89,7 +98,7 @@ export default function useSentry(): void {
       sendClientReports: true,
       tracePropagationTargets: TRACE_PROPAGATION_TARGETS,
       tracesSampleRate: 1,
-    }  );
+    });
   }, []);
 
   useEffect((): void => {

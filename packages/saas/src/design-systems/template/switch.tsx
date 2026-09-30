@@ -1,5 +1,6 @@
-import type { ChangeEvent, ReactElement } from 'react';
-import type { SwitchProps } from '../core/switch-props.js';
+import { type ChangeEvent, type ReactElement } from 'react';
+
+import { type SwitchProps } from '../core/switch-props.js';
 import classes from './switch.module.scss';
 
 /**

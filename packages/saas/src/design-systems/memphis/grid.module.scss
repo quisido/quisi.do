@@ -1,0 +1,149 @@
+.grid {
+  --ink: #111018;
+  --paper: #fff7dc;
+  background:
+    radial-gradient(circle at 8% 14%, #ff3d91 0 1.2rem, transparent 1.25rem),
+    radial-gradient(circle at 93% 82%, #7447ff 0 1.5rem, transparent 1.55rem),
+    linear-gradient(135deg, transparent 0 48%, rgb(17 16 24 / 7%) 49% 51%, transparent 52%) 0 0 / 2rem 2rem,
+    var(--paper);
+  border: 4px solid var(--ink);
+  border-collapse: separate;
+  border-radius: 0.35rem;
+  border-spacing: 0.75rem;
+  box-shadow: 0.8rem 0.8rem 0 #ff3d91, 1.05rem 1.05rem 0 var(--ink);
+  color: var(--ink);
+  font-family: 'Arial Black', Impact, sans-serif;
+  isolation: isolate;
+  margin: 1.25rem 1.5rem 2.5rem 0.5rem;
+  max-width: calc(100% - 2rem);
+  overflow: visible;
+  position: relative;
+  transform: rotate(-0.45deg);
+}
+
+.grid::before,
+.grid::after {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+}
+
+.grid::before {
+  background: repeating-conic-gradient(#14d7e5 0 12deg, transparent 12deg 24deg);
+  border: 4px solid var(--ink);
+  border-radius: 50%;
+  height: 4.5rem;
+  right: -2.4rem;
+  top: -2.1rem;
+  width: 4.5rem;
+}
+
+.grid::after {
+  background: #ffe31a;
+  border: 4px solid var(--ink);
+  bottom: -1.8rem;
+  clip-path: polygon(50% 0, 61% 34%, 96% 19%, 72% 50%, 100% 72%, 63% 68%, 51% 100%, 40% 68%, 2% 82%, 29% 51%, 5% 28%, 40% 35%);
+  height: 4.2rem;
+  left: -1.65rem;
+  transform: rotate(-13deg);
+  width: 4.2rem;
+}
+
+.grid caption {
+  background:
+    linear-gradient(112deg, #ffe31a 0 67%, #ff785b 67% 100%);
+  border: 4px solid var(--ink);
+  box-shadow: 0.45rem 0.45rem 0 #14d7e5, 0.65rem 0.65rem 0 var(--ink);
+  caption-side: top;
+  color: var(--ink);
+  font-size: clamp(1.25rem, 4vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: 0.055em;
+  line-height: 1;
+  margin: 0 12% 1.15rem -0.85rem;
+  padding: 0.75rem 1.25rem;
+  text-align: left;
+  text-transform: uppercase;
+  transform: rotate(-1.5deg) skewX(-3deg);
+}
+
+.grid tbody {
+  position: relative;
+}
+
+.grid tr {
+  filter: drop-shadow(0.25rem 0.3rem 0 var(--ink));
+}
+
+.grid tr:nth-child(even) {
+  transform: translateX(0.3rem);
+}
+
+.grid td {
+  background: #fdf9ed;
+  border: 3px solid var(--ink);
+  font-family: ui-monospace, 'Cascadia Mono', monospace;
+  font-size: clamp(0.82rem, 2vw, 1rem);
+  font-weight: 800;
+  line-height: 1.3;
+  min-width: 5.5rem;
+  padding: 1rem 1.15rem;
+  position: relative;
+  transition: background-color 150ms ease, color 150ms ease, transform 150ms ease;
+}
+
+.grid tr:nth-child(4n + 1) td:nth-child(3n + 1) { background: #14d7e5; }
+.grid tr:nth-child(4n + 2) td:nth-child(3n + 2) { background: #ff785b; }
+.grid tr:nth-child(4n + 3) td:nth-child(3n) { background: #ffe31a; }
+.grid tr:nth-child(4n) td:nth-child(odd) { background: #b7f25b; }
+
+.grid td:nth-child(even)::after {
+  background: radial-gradient(circle, var(--ink) 0 2px, transparent 2.5px) 0 0 / 0.7rem 0.7rem;
+  content: '';
+  height: 1.4rem;
+  opacity: 0.16;
+  pointer-events: none;
+  position: absolute;
+  right: 0.25rem;
+  top: 0.2rem;
+  width: 1.8rem;
+}
+
+.grid td:hover {
+  background: #fff;
+  transform: translate(-0.15rem, -0.15rem) rotate(0.5deg);
+}
+
+.grid td[aria-selected='true'] {
+  background: #7447ff;
+  box-shadow: inset 0 0 0 4px #ffe31a;
+  color: #fff;
+  text-shadow: 2px 2px 0 var(--ink);
+  transform: rotate(-1deg) scale(1.035);
+  z-index: 2;
+}
+
+.grid td:focus-visible {
+  background: #ff3d91;
+  color: #fff;
+  outline: 5px solid #7447ff;
+  outline-offset: 4px;
+  text-shadow: 2px 2px 0 var(--ink);
+  transform: translateY(-0.2rem) rotate(1deg);
+  z-index: 3;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .grid::before { animation: orbit 8s linear infinite; }
+  .grid::after { animation: shimmy 3.5s ease-in-out infinite; }
+}
+
+@media (max-width: 42rem) {
+  .grid { border-spacing: 0.4rem; }
+  .grid td { min-width: 4.25rem; padding: 0.75rem; }
+  .grid::before { right: -1.35rem; }
+}
+
+@keyframes orbit { to { transform: rotate(360deg); } }
+@keyframes shimmy { 50% { transform: translateY(-0.35rem) rotate(4deg) scale(1.06); } }

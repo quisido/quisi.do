@@ -1,5 +1,8 @@
 import '../modules/react-mixpanel/img.css';
-import useMixpanelModule, { type Config } from '../modules/react-mixpanel/index.js';
+
+import useMixpanelModule, {
+  type Config,
+} from '../modules/react-mixpanel/index.js';
 
 /**
  * @see https://github.com/mixpanel/mixpanel-js/blob/master/doc/readme.io/javascript-full-api-reference.md#mixpanelset_config
@@ -25,6 +28,5 @@ export default function useMixpanel(token: string): void {
   useMixpanelModule({
     ...CONFIG,
     token,
-  }
-  );
+  });
 }

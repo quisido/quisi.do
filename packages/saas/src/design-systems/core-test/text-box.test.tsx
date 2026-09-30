@@ -1,7 +1,8 @@
 import { fireEvent } from '@testing-library/react';
-import render from './render.js';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import importTestedDesignSystem from './import-tested-design-system.js';
+import render from './render.js';
 
 const { Form, TextBox } = await importTestedDesignSystem();
 

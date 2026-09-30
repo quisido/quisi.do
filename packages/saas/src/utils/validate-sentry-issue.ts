@@ -1,4 +1,5 @@
 import { isNumber } from 'fmrs';
+
 import EMPTY_ARRAY from '../constants/empty-array.js';
 import type SentryIssue from '../types/sentry-issue.js';
 import assert from './assert.js';

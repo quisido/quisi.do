@@ -1,5 +1,5 @@
 import type GameAction from './game-action.js';
-import type { Selector } from './selector.js';
+import { type Selector } from './selector.js';
 
 export type GameComponent<T, A extends GameAction = never> = (
   // ESLint is wrong here; `this: void` is a valid first argument.
@@ -9,8 +9,12 @@ export type GameComponent<T, A extends GameAction = never> = (
 ) => void;
 
 export interface GameComponentProps<T, Action extends GameAction = never> {
-  readonly listen: <A extends Action>(action: A['type'], callback: (value: T, action: A) => T) => void;
+  readonly listen: <A extends Action>(
+    action: A['type'],
+    callback: (value: T, action: A) => T,
+  ) => void;
   readonly onTick: (dt: number, value: T) => T;
+  readonly random: () => number;
   readonly register: <U>(
     component: GameComponent<U, Action>,
     selector: Selector<T, U>,

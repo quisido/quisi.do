@@ -1,4 +1,5 @@
 import { isNumber, isRecord, isString } from 'fmrs';
+
 import type AnalyticsEngineRow from './analytics-engine-row.js';
 import getValues from './get-values.js';
 

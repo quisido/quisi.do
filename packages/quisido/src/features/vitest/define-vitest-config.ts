@@ -2,6 +2,9 @@ import defineVitestInlineConfig from './define-vitest-inline-config.js';
 import { PLUGIN_OPTIONS } from './plugin-options.js';
 import type QuisidoUserConfig from './quisido-user-config.js';
 
+const getDisableReports = (): boolean =>
+  process.env['VITEST_VSCODE'] === 'true';
+
 export { type default as QuisidoUserConfig } from './quisido-user-config.js';
 
 export interface Options extends QuisidoUserConfig {
@@ -12,9 +15,6 @@ export interface Options extends QuisidoUserConfig {
    */
   readonly disableReports?: boolean | undefined;
 }
-
-const getDisableReports = (): boolean =>
-  process.env['VITEST_VSCODE'] === 'true';
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export default async function defineVitestConfig({

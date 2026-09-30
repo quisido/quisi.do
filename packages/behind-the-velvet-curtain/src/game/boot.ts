@@ -1,11 +1,12 @@
 import monogatari from '@monogatari/core';
+
+import { registerServiceWorker } from '../pwa/register-service-worker.js';
 import { CHARACTERS } from './characters.js';
 import { SCENES } from './scenes.js';
 import { SCRIPT } from './script.js';
 import { SETTINGS } from './settings.js';
 import { MONOGATARI_SHELL_HTML } from './shell.js';
 import { DEFAULT_STORAGE } from './storage.js';
-import { registerServiceWorker } from '../pwa/register-service-worker.js';
 
 let configured = false;
 let bootPromise: Promise<typeof monogatari> | null = null;

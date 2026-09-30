@@ -1,5 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 import { isRecord } from 'fmrs';
+
 import hasMethods from './has-methods.js';
 
 const REQUIRED_METHODS: readonly (keyof KVNamespace)[] = [

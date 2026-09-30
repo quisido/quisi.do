@@ -1,4 +1,5 @@
 import { afterEach, assert, beforeEach, describe, expect, it } from 'vitest';
+
 import { defineVitestConfig } from '../../index.js';
 
 describe('defineVitestConfig', (): void => {

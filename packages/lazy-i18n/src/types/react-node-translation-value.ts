@@ -1,4 +1,4 @@
-import type { ComponentType, ReactNode } from 'react';
+import { type ComponentType, type ReactNode } from 'react';
 
 type NumberFunction = () => number;
 type StringFunction = () => string;

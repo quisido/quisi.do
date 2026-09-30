@@ -1,26 +1,5 @@
 import { hasKeys, isObject } from 'fmrs';
 
-export interface Options {
-  readonly fetch: Window['fetch'];
-  readonly id: string;
-  readonly token: string;
-}
-
-export interface UptimeChecksResult {
-  readonly id: string;
-  readonly lastQueued: string;
-  readonly name: string;
-  readonly status: 'ONLINE';
-  readonly url: string;
-}
-
-export interface UptimeChecks {
-  readonly errors: unknown[];
-  readonly messages: unknown[];
-  readonly result: UptimeChecksResult;
-  readonly success: boolean;
-}
-
 const findUptimeChecks = (value: unknown): value is UptimeChecks =>
   isObject(value) &&
   hasKeys(value, ['errors', 'messages', 'result']) &&
@@ -46,6 +25,27 @@ const validateUptimeChecks = (value: unknown): UptimeChecks => {
 
   return value;
 };
+
+export interface Options {
+  readonly fetch: Window['fetch'];
+  readonly id: string;
+  readonly token: string;
+}
+
+export interface UptimeChecksResult {
+  readonly id: string;
+  readonly lastQueued: string;
+  readonly name: string;
+  readonly status: 'ONLINE';
+  readonly url: string;
+}
+
+export interface UptimeChecks {
+  readonly errors: unknown[];
+  readonly messages: unknown[];
+  readonly result: UptimeChecksResult;
+  readonly success: boolean;
+}
 
 export default class OnlineOrNot {
   readonly #fetch: Window['fetch'];

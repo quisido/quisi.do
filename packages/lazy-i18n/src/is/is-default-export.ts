@@ -1,5 +1,6 @@
 import { isRecord } from 'fmrs';
-import type { DefaultExport } from '../types/default-export.js';
+
+import { type DefaultExport } from '../types/default-export.js';
 
 const FIRST = 0;
 const SINGLE = 1;

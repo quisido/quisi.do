@@ -1,5 +1,5 @@
 import PuppeteerConnector from '@hint/connector-puppeteer';
-import type { IConnector } from 'hint';
+import { type IConnector } from 'hint';
 import { type Page } from 'puppeteer-core';
 
 // Patch `PuppeteerConnector` to use the `off` method from v13.

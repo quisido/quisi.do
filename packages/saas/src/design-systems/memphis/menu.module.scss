@@ -1,0 +1,231 @@
+.menu {
+  --ink: #17120f;
+  --cream: #fff9e9;
+
+  align-items: stretch;
+  background: #1754e8;
+  border: 4px solid var(--ink);
+  box-shadow:
+    12px 12px 0 #f23a91,
+    16px 16px 0 var(--ink);
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 10px;
+  isolation: isolate;
+  list-style: none;
+  margin: 18px 22px 22px 10px;
+  min-width: min(23rem, calc(100vw - 3rem));
+  padding: 24px 20px 22px;
+  position: relative;
+  transform: rotate(-0.7deg);
+
+  &[aria-orientation='horizontal'] {
+    flex-direction: row;
+    min-width: 0;
+
+    .menu-item {
+      min-width: 7.5rem;
+    }
+  }
+
+  &::before {
+    background: var(--cream);
+    border: 3px solid var(--ink);
+    clip-path: polygon(0 0, 100% 8%, 94% 100%, 6% 92%);
+    content: '';
+    height: 32px;
+    left: -15px;
+    position: absolute;
+    top: -17px;
+    transform: rotate(-6deg);
+    width: 88px;
+    z-index: 2;
+  }
+
+  &::after {
+    background: repeating-linear-gradient(
+      135deg,
+      var(--ink) 0 8px,
+      transparent 8px 16px
+    );
+    content: '';
+    height: 18px;
+    position: absolute;
+    right: 24px;
+    top: -12px;
+    transform: skewX(-15deg);
+    width: 74px;
+  }
+}
+
+.menu-item {
+  align-items: stretch;
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 rgb(23 18 15 / 28%);
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  font-family: 'Arial Black', 'Trebuchet MS', sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.045em;
+  line-height: 1.2;
+  min-height: 48px;
+  position: relative;
+  text-transform: uppercase;
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    background-color 140ms ease;
+
+  &:nth-of-type(4n + 1) .item-mark {
+    background: #16c9b7;
+  }
+
+  &:nth-of-type(4n + 2) .item-mark {
+    background: #f23a91;
+
+    &::after {
+      border-radius: 0;
+      transform: rotate(12deg);
+    }
+  }
+
+  &:nth-of-type(4n + 3) .item-mark {
+    background: #ffd128;
+
+    &::after {
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+  }
+
+  &:nth-of-type(4n) .item-mark {
+    background: #ff6448;
+  }
+
+  &:hover:not([aria-disabled='true']) {
+    background: #ffd128;
+    box-shadow: 7px 7px 0 var(--ink);
+    transform: translate(-3px, -3px) rotate(0.5deg);
+  }
+
+  &:focus-visible {
+    background: #ffd128;
+    box-shadow: 7px 7px 0 var(--ink);
+    outline: 4px solid #fff;
+    outline-offset: 3px;
+    transform: translate(-3px, -3px);
+    z-index: 3;
+  }
+
+  &[aria-disabled='true'] {
+    cursor: not-allowed;
+    filter: grayscale(0.65);
+    opacity: 0.58;
+
+    .item-label {
+      text-decoration: line-through 3px #f23a91;
+    }
+  }
+}
+
+.item-mark {
+  align-items: center;
+  border-right: 3px solid var(--ink);
+  display: flex;
+  flex: 0 0 52px;
+  justify-content: center;
+
+  &::after {
+    background: var(--ink);
+    border: 2px solid var(--cream);
+    border-radius: 50%;
+    box-shadow: 2px 2px 0 var(--cream);
+    content: '';
+    height: 19px;
+    width: 19px;
+  }
+}
+
+.item-label {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  padding: 11px 16px;
+}
+
+.submenu-mark {
+  align-items: center;
+  display: flex;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 0 13px 4px 4px;
+  transform: scaleX(1.4);
+}
+
+.sun,
+.spark,
+.squiggle {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+}
+
+.sun {
+  background:
+    radial-gradient(circle, var(--ink) 1.5px, transparent 2px) 0 0 / 10px 10px,
+    #ffd128;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  height: 84px;
+  right: -53px;
+  top: -45px;
+  width: 84px;
+}
+
+.spark {
+  background: #ff6448;
+  bottom: -29px;
+  clip-path: polygon(50% 0, 61% 38%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 38%);
+  height: 54px;
+  left: -34px;
+  transform: rotate(13deg);
+  width: 54px;
+}
+
+.squiggle {
+  border: 8px solid #16c9b7;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-radius: 50%;
+  height: 42px;
+  right: -38px;
+  top: 48%;
+  transform: rotate(30deg);
+  width: 42px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spark {
+    animation: orbit 5s ease-in-out infinite;
+  }
+}
+
+@keyframes orbit {
+  50% {
+    transform: rotate(35deg) translateY(-4px);
+  }
+}
+
+@media (max-width: 480px) {
+  .menu {
+    min-width: calc(100vw - 3.5rem);
+    padding: 20px 14px;
+  }
+
+  .menu-item {
+    font-size: 0.875rem;
+  }
+}

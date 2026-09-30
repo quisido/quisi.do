@@ -7,6 +7,7 @@ import {
   type UserConfig,
   type UserConfigFnObject,
 } from 'vite';
+
 import reduceEnvironmentVariableNamesToRecord from './src/utils/reduce-environment-variable-names-to-record.js';
 
 /**
@@ -52,7 +53,7 @@ const USER_CONFIG: UserConfig = {
   /**
    * Disabled because "Both esbuild and oxc options were set. oxc options will
    * be used and esbuild options will be ignored."
-  */
+   */
   // esbuild: ESBUILD_OPTIONS,
   publicDir: '../public',
   root: 'src',
@@ -65,7 +66,7 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
   },
   /**
    * Disabled because "Both esbuild and oxc options were set. oxc options will
-   * be used and esbuild options will be ignored." 
+   * be used and esbuild options will be ignored."
   esbuild: {
     ...ESBUILD_OPTIONS,
     jsxDev: true,
@@ -84,6 +85,7 @@ const DEVELOPMENT_USER_CONFIG: UserConfig = {
     },
     port: 3000,
   },
+  tsconfig: '../tsconfig.json', // relative to `root` ('src/')
 };
 
 const PRODUCTION_USER_CONFIG: UserConfig = {
@@ -110,6 +112,7 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
     cspNonce: 'nonce-quisido',
   },
   plugins: [ddPlugin, react()],
+  tsconfig: '../tsconfig.build.json', // relative to `root` ('src/')
 };
 
 const CONFIG: UserConfigFnObject = defineConfig(

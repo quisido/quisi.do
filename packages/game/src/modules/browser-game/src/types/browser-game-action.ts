@@ -1,4 +1,4 @@
-import type { GameAction } from "../../../game/src/index.js";
+import { type GameAction } from '../../../game/src/index.js';
 
 export type BrowserGameAction =
   | GameAction<'axes', readonly number[]>

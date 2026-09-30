@@ -1,0 +1,185 @@
+.composition {
+  --ink: #071b32;
+  --cream: #fff4d8;
+  --pink: #ff3d8d;
+  --cyan: #28d8d0;
+  --yellow: #ffe21c;
+  --blue: #1455c0;
+
+  display: inline-grid;
+  isolation: isolate;
+  margin: 0.7em 1.25em;
+  position: relative;
+  vertical-align: middle;
+}
+
+.composition::before {
+  background: var(--yellow);
+  box-shadow: 0.32em 0.32em 0 var(--ink);
+  clip-path: polygon(0 0, 100% 48%, 12% 100%);
+  content: '';
+  height: 2.6em;
+  left: -1.05em;
+  position: absolute;
+  top: 45%;
+  transform: rotate(-12deg);
+  width: 2.3em;
+  z-index: -1;
+}
+
+.composition::after {
+  background: var(--pink);
+  border-radius: 50%;
+  box-shadow: inset -0.18em -0.18em 0 rgb(7 27 50 / 16%);
+  content: '';
+  height: 2.8em;
+  position: absolute;
+  right: -1.15em;
+  top: -0.78em;
+  width: 2.8em;
+  z-index: -2;
+}
+
+.code {
+  background:
+    linear-gradient(112deg, transparent 78%, rgb(40 216 208 / 9%)),
+    var(--ink);
+  box-shadow:
+    0.35em 0.38em 0 #ff5a24,
+    0.67em 0.68em 0 var(--yellow);
+  box-decoration-break: clone;
+  color: var(--cream);
+  display: inline-flex;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1em;
+  font-weight: 800;
+  gap: 0.35em;
+  letter-spacing: 0.035em;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  padding: 0.62em 1.15em 0.58em;
+  position: relative;
+  transform: rotate(-1.2deg) skewX(-3deg);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  z-index: 2;
+}
+
+.code:hover {
+  box-shadow:
+    0.5em 0.52em 0 #ff5a24,
+    0.9em 0.88em 0 var(--yellow);
+  transform: rotate(0.4deg) skewX(-1deg) translateY(-0.14em);
+}
+
+.content {
+  text-shadow: 0.07em 0 var(--pink), -0.04em 0 var(--cyan);
+}
+
+.prompt {
+  color: var(--cyan);
+  font-size: 1.15em;
+  line-height: 1.2;
+}
+
+.cursor {
+  align-self: center;
+  animation: blink 1.2s steps(2, jump-none) infinite;
+  background: var(--pink);
+  height: 1.05em;
+  transform: rotate(7deg);
+  width: 0.22em;
+}
+
+.sun {
+  background: var(--pink);
+  border-radius: 50%;
+  height: 2.7em;
+  left: -0.75em;
+  position: absolute;
+  top: -0.75em;
+  width: 2.7em;
+  z-index: -2;
+}
+
+.triangle {
+  background: var(--blue);
+  bottom: -1.12em;
+  clip-path: polygon(0 8%, 100% 50%, 17% 100%);
+  height: 1.45em;
+  left: 12%;
+  position: absolute;
+  transform: rotate(13deg);
+  width: 1.7em;
+}
+
+.zigzag {
+  background: var(--blue);
+  clip-path: polygon(0 36%, 18% 0, 36% 48%, 54% 7%, 73% 54%, 100% 11%, 100% 42%, 72% 87%, 54% 41%, 36% 84%, 18% 37%, 0 70%);
+  height: 1.25em;
+  left: 37%;
+  position: absolute;
+  top: -1.12em;
+  transform: rotate(2deg);
+  width: 4.3em;
+}
+
+.dots {
+  background-image: radial-gradient(circle, var(--ink) 0.12em, transparent 0.14em);
+  background-size: 0.5em 0.5em;
+  bottom: -1.25em;
+  height: 1em;
+  position: absolute;
+  right: 12%;
+  width: 2.55em;
+}
+
+.squiggle {
+  border-top: 0.35em solid var(--cyan);
+  border-radius: 50%;
+  bottom: -0.82em;
+  height: 0.8em;
+  position: absolute;
+  right: -0.75em;
+  transform: rotate(-10deg);
+  width: 2.6em;
+  z-index: 3;
+}
+
+.squiggle::after {
+  border-bottom: 0.35em solid var(--cyan);
+  border-radius: 50%;
+  content: '';
+  height: 0.75em;
+  left: 1.25em;
+  position: absolute;
+  top: -0.25em;
+  width: 1.45em;
+}
+
+.confetti {
+  background: var(--yellow);
+  box-shadow: 1.1em -0.25em 0 var(--cyan), 2em 0.15em 0 var(--pink);
+  height: 0.22em;
+  position: absolute;
+  right: 9%;
+  top: -0.5em;
+  transform: rotate(65deg);
+  width: 0.65em;
+}
+
+@keyframes blink {
+  50% { opacity: 0.15; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor { animation: none; }
+  .code { transition: none; }
+}
+
+@media (forced-colors: active) {
+  .code {
+    border: 2px solid CanvasText;
+    box-shadow: none;
+    color: CanvasText;
+  }
+}

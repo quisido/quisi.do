@@ -1,4 +1,5 @@
 import { type MockInstance, vi } from 'vitest';
+
 import toString from '../../utils/to-string.js';
 
 type Procedure<

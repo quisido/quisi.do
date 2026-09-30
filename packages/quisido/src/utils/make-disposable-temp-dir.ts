@@ -4,6 +4,7 @@ import {
   mkdtempDisposable,
 } from 'node:fs/promises';
 import { join } from 'node:path';
+
 import { onExit } from './exit.js';
 
 const QUISIDO_ROOT_DIR: string = join(import.meta.dirname, '..', '..');

@@ -1,6 +1,6 @@
 import { TRACEPARENT } from '../constants/traceparent.js';
-import { type TraceParentGroups } from '../types/trace-parent-groups.js';
 import type TraceParent from '../types/trace-parent.js';
+import { type TraceParentGroups } from '../types/trace-parent-groups.js';
 import parseTraceParentGroups from './parse-trace-parent-groups.js';
 
 export default function parseTraceParent(traceParent: string): TraceParent {

@@ -1,5 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 import { describe, expect, it, vi } from 'vitest';
+
 import { isD1Database } from './index.js';
 
 describe('isD1Database', (): void => {

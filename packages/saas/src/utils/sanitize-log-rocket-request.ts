@@ -1,4 +1,4 @@
-import type { LogRocketRequest } from '../types/log-rocket.js';
+import { type LogRocketRequest } from '../types/log-rocket.js';
 
 export default function sanitizeLogRocketRequest(
   request: LogRocketRequest,

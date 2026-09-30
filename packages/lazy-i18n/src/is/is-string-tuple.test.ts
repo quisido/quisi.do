@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import isStringTuple from './is-string-tuple.js';
 
 const TEST_NUMBER = 1234;

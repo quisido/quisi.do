@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { toIndex } from './index.js';
 
 const FIRST = 0;

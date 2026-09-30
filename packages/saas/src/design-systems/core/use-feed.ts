@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
-import useId from './use-id.js';
 import { toString } from 'fmrs';
+import { useMemo, useState } from 'react';
+
+import useId from './use-id.js';
 
 interface Props {
   readonly onAppend?: (() => Promise<void>) | undefined;

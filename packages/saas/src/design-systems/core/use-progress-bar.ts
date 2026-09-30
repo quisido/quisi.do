@@ -1,7 +1,8 @@
-import { useLayoutEffect } from 'react';
-import useId from './use-id.js';
-import appendDescribedBy from './append-described-by.js';
 import { toString } from 'fmrs';
+import { useLayoutEffect } from 'react';
+
+import appendDescribedBy from './append-described-by.js';
+import useId from './use-id.js';
 
 interface Props {
   readonly busy: boolean;

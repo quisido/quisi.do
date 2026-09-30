@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { MainProps } from '../core/main-props.js';
+import { type ReactElement } from 'react';
+
+import { type MainProps } from '../core/main-props.js';
 import classes from './main.module.scss';
 
 /**

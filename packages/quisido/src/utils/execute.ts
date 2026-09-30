@@ -5,13 +5,8 @@ import {
 } from 'node:child_process';
 import { EOL } from 'node:os';
 import process from 'node:process';
-import hasToStringMethod from './has-to-string-method.js';
 
-export interface ExecutionResult {
-  readonly exitCode: number;
-  readonly stderr: string;
-  readonly stdout: string;
-}
+import hasToStringMethod from './has-to-string-method.js';
 
 interface Options {
   readonly env?: Partial<Record<string, string | undefined>> | undefined;
@@ -22,6 +17,12 @@ interface Options {
 const ERROR_STATUS_CODE = 1;
 const DEFAULT_ENV: Partial<Record<string, string | undefined>> = {};
 const SUCCESS_STATUS_CODE = 0;
+
+export interface ExecutionResult {
+  readonly exitCode: number;
+  readonly stderr: string;
+  readonly stdout: string;
+}
 
 export default function execute(
   command: string,

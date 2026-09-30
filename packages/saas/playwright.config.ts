@@ -1,12 +1,14 @@
+import { cpus } from 'node:os';
+import process from 'node:process';
+
 import {
   defineConfig,
   devices,
   type PlaywrightTestConfig,
   type ReporterDescription,
 } from '@playwright/test';
-import type { TestArgs, WorkerArgs } from './test/playwright.js';
-import { cpus } from 'node:os';
-import process from 'node:process';
+
+import { type TestArgs, type WorkerArgs } from './test/playwright.js';
 
 const {
   BASE_URL = 'http://localhost:3000',
@@ -42,24 +44,23 @@ const REPORTERS: readonly ReporterDescription[] = [
 ];
 
 const CI_REPORTERS: readonly ReporterDescription[] = [
-    ['blob', { fileName: 'blob.zip', outputDir: '.tests/playwright' }],
-    ['dot'],
-    ['github'],
-    [
-      'junit',
-      {
-        includeProjectInTestName: true,
-        includeRetries: true,
-        outputFile: '.tests/playwright/junit.xml',
-        stripANSIControlSequences: true,
-      },
-    ],
-  ];
-
-const LOCAL_REPORTERS: readonly ReporterDescription[] = [
-  ['list', { printFailuresInline: true, printSteps: true }]
+  ['blob', { fileName: 'blob.zip', outputDir: '.tests/playwright' }],
+  ['dot'],
+  ['github'],
+  [
+    'junit',
+    {
+      includeProjectInTestName: true,
+      includeRetries: true,
+      outputFile: '.tests/playwright/junit.xml',
+      stripANSIControlSequences: true,
+    },
+  ],
 ];
 
+const LOCAL_REPORTERS: readonly ReporterDescription[] = [
+  ['list', { printFailuresInline: true, printSteps: true }],
+];
 
 const CONFIG: PlaywrightTestConfig<TestArgs, WorkerArgs> = defineConfig<
   TestArgs,

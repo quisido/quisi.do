@@ -12,7 +12,8 @@
     "outDir": "_site",
     "rootDir": ".",
     "sourceRoot": "src",
-    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
+    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo",
+    "types": []
   },
   "extends": "quisido/tsconfig.json",
   "include": [
@@ -40,9 +41,6 @@
       "path": "../fmrs/tsconfig.build.json"
     },
     {
-      "path": "../fullstory-react/tsconfig.build.json"
-    },
-    {
       "path": "../lazy-i18n/tsconfig.build.json"
     },
     {
@@ -50,9 +48,6 @@
     },
     {
       "path": "../quisido/tsconfig.build.json"
-    },
-    {
-      "path": "../react-datadog/tsconfig.build.json"
     },
     {
       "path": "../use-force-update/tsconfig.build.json"

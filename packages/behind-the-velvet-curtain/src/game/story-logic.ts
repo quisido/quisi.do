@@ -12,30 +12,6 @@ import {
 const STORY_LABEL_SET: ReadonlySet<string> = new Set(STORY_LABELS);
 const JUMP_PREFIX = 'jump ';
 
-export const canRevealInvitationPath = (storage: StoryStorage): boolean => {
-  return storage.foundInvitation;
-};
-
-export const canChooseTrustedGuide = (storage: StoryStorage): boolean => {
-  return storage.trustedStagehand;
-};
-
-export const resolveEndingBranch = (storage: StoryStorage): StoryLabel => {
-  if (
-    storage.role === 'investigator' &&
-    storage.foundInvitation &&
-    storage.acceptedMask
-  ) {
-    return 'SecretEnding';
-  }
-
-  if (storage.trustedStagehand) {
-    return 'ReconciliationEnding';
-  }
-
-  return 'SoloEnding';
-};
-
 const isChoiceStatement = (
   statement: unknown,
 ): statement is StoryChoiceStatement => {
@@ -102,6 +78,30 @@ const collectStatementTargets = (statement: StoryStatement): StoryLabel[] => {
   }
 
   return [];
+};
+
+export const canRevealInvitationPath = (storage: StoryStorage): boolean => {
+  return storage.foundInvitation;
+};
+
+export const canChooseTrustedGuide = (storage: StoryStorage): boolean => {
+  return storage.trustedStagehand;
+};
+
+export const resolveEndingBranch = (storage: StoryStorage): StoryLabel => {
+  if (
+    storage.role === 'investigator' &&
+    storage.foundInvitation &&
+    storage.acceptedMask
+  ) {
+    return 'SecretEnding';
+  }
+
+  if (storage.trustedStagehand) {
+    return 'ReconciliationEnding';
+  }
+
+  return 'SoloEnding';
 };
 
 export const collectReferencedLabels = (script: StoryScript): StoryLabel[] => {

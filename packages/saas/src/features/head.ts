@@ -1,13 +1,15 @@
+/* eslint-disable import-x/no-unassigned-import */
 import './rocket-loader-hotfix.js';
 import './trusted-types.js';
-import appendCloudflareInsights from '../utils/append-cloudflare-insights.js';
+
 import { FontWeight } from '../constants/font-weight.js';
+import appendCloudflareInsights from '../utils/append-cloudflare-insights.js';
 import appendGoogleFonts from '../utils/append-google-fonts.js';
 import validateString from '../utils/validate-string.js';
 
 if (import.meta.env.PROD) {
   appendCloudflareInsights(
-    validateString(import.meta.env.CLOUDFLARE_INSIGHTS_TOKEN),
+    validateString(import.meta.env['CLOUDFLARE_INSIGHTS_TOKEN']),
     'nonce-quisido',
   );
 }

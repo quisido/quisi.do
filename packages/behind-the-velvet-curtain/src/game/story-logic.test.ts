@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { SCRIPT } from './script.js';
 import { DEFAULT_STORAGE } from './storage.js';
 import {

@@ -1,8 +1,9 @@
-import type { ReactElement, SubmitEvent } from 'react';
-import type { FormProps } from '../core/form-props.js';
+import { type ReactElement, type SubmitEvent } from 'react';
+
+import { type FormProps } from '../core/form-props.js';
 import useForm from '../core/use-form.js';
-import Heading from './heading.js';
 import classes from './form.module.scss';
+import Heading from './heading.js';
 
 /**
  * A form is a landmark region containing items and objects that, as a whole,

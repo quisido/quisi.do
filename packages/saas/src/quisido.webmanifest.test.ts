@@ -1,8 +1,9 @@
 import { assert, describe, expect, it } from 'vitest';
-import type WebManifest from './types/web-manifest/web-manifest.js';
+
 import findSplashScreenIcon from '../test/find-splash-screen-icon.js';
-import mapRgbToHex from './utils/map-rgb-to-hex.js';
 import { THEME } from './constants/theme.js';
+import type WebManifest from './types/web-manifest/web-manifest.js';
+import mapRgbToHex from './utils/map-rgb-to-hex.js';
 
 /**
  * TypeScript cannot read JSON from non-JSON file extensions.

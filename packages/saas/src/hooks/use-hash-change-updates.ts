@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import useForceUpdate from 'use-force-update';
+
 import useWindow from './use-window.js';
 
 // Hash changes occur after hash change events.

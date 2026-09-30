@@ -1,16 +1,17 @@
 import { type RefCallback, useLayoutEffect, useState } from 'react';
-import mapElementToLevel from './map-element-to-level.js';
 
-export interface HeadingState<T> {
-  readonly level: number | undefined;
-  readonly ref: RefCallback<T>;
-}
+import mapElementToLevel from './map-element-to-level.js';
 
 interface Props {
   readonly level: number | undefined;
 }
 
 const FIFO_REF_LAYOUT_EFFECTS: VoidFunction[] = [];
+
+export interface HeadingState<T> {
+  readonly level: number | undefined;
+  readonly ref: RefCallback<T>;
+}
 
 export default function useHeading<T extends HTMLElement>({
   level: explicitLevel,

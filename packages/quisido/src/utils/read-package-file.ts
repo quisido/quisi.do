@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises';
+
 import joinCwdPath from './join-path.js';
 
 export default async function readPackageFile(

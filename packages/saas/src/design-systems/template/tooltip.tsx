@@ -1,6 +1,7 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
+
+import { type TooltipProps } from '../core/tooltip-props.js';
 import useTooltip from '../core/use-tooltip.js';
-import type { TooltipProps } from '../core/tooltip-props.js';
 import classes from './tooltip.module.scss';
 
 /**

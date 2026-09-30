@@ -1,0 +1,110 @@
+.subscript {
+  --subscript-ink: #20113f;
+  --subscript-pink: #ff3d91;
+  --subscript-cyan: #35e4d4;
+  --subscript-yellow: #ffe539;
+
+  background:
+    radial-gradient(circle at 18% 25%, rgb(255 255 255 / 75%) 0 0.08em, transparent 0.09em),
+    repeating-linear-gradient(135deg, transparent 0 0.22em, rgb(32 17 63 / 12%) 0.23em 0.3em),
+    var(--subscript-yellow);
+  border: 0.1em solid var(--subscript-ink);
+  border-radius: 42% 16% 46% 20% / 25% 45% 22% 48%;
+  box-shadow:
+    0.12em 0.12em 0 var(--subscript-pink),
+    0.22em 0.22em 0 var(--subscript-ink);
+  box-decoration-break: clone;
+  color: var(--subscript-ink);
+  display: inline-grid;
+  font-size: 0.68em;
+  font-weight: 900;
+  line-height: 1.05;
+  margin-inline: 0.13em 0.28em;
+  min-width: 0.8em;
+  padding: 0.17em 0.3em 0.13em;
+  place-items: center;
+  position: relative;
+  text-shadow: 0.055em 0.055em 0 rgb(255 255 255 / 80%);
+  transform: translateY(0.38em) rotate(-3deg);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  vertical-align: baseline;
+  -webkit-box-decoration-break: clone;
+
+  &:hover {
+    box-shadow:
+      -0.12em 0.14em 0 var(--subscript-cyan),
+      0.2em 0.22em 0 var(--subscript-ink);
+    transform: translateY(0.32em) rotate(2deg) scale(1.07);
+  }
+
+  &::selection,
+  *::selection {
+    background: var(--subscript-pink);
+    color: #fff;
+    text-shadow: none;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+.orbit {
+  border: 0.09em solid var(--subscript-cyan);
+  border-radius: 50%;
+  height: 130%;
+  left: -0.24em;
+  position: absolute;
+  top: -0.13em;
+  transform: rotate(24deg);
+  width: calc(100% + 0.48em);
+  z-index: -1;
+
+  &::after {
+    background: var(--subscript-pink);
+    border: 0.07em solid var(--subscript-ink);
+    border-radius: 50%;
+    content: '';
+    height: 0.24em;
+    position: absolute;
+    right: -0.08em;
+    top: 0.02em;
+    width: 0.24em;
+  }
+}
+
+.spark {
+  background: var(--subscript-pink);
+  clip-path: polygon(50% 0, 62% 36%, 100% 50%, 62% 63%, 50% 100%, 38% 63%, 0 50%, 38% 36%);
+  height: 0.48em;
+  position: absolute;
+  right: -0.42em;
+  top: -0.35em;
+  width: 0.48em;
+  z-index: 3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .subscript {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .subscript {
+    background: Canvas;
+    border-color: CanvasText;
+    box-shadow: none;
+    color: CanvasText;
+    text-shadow: none;
+  }
+
+  .orbit {
+    border-color: CanvasText;
+  }
+
+  .spark {
+    background: CanvasText;
+  }
+}

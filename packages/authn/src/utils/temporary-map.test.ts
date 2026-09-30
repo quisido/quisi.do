@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import TemporaryMap from './temporary-map.js';
 
 const TEST_EXPIRATION = 3600;

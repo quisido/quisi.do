@@ -3,6 +3,7 @@ import { MetricName as WorkerMetricName } from '@quisido/worker';
 import { EXPECT_ANY_NUMBER } from 'cloudflare-test-utils';
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
+
 import { PATREON_IDENTITY_URL } from '../../test/patreon-identity-url.js';
 import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { MetricName } from '../constants/metric-name.js';

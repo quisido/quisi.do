@@ -1,7 +1,8 @@
 import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-import Page from './page.js';
+
 import { Link, Main, Region } from '../design-systems/template/index.js';
+import Page from './page.js';
 
 /**
  * A "customer support" page is a feature of Stripe.

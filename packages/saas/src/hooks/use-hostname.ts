@@ -1,4 +1,4 @@
-import useWindow from '../hooks/use-window.js';
+import useWindow from './use-window.js';
 
 export default function useHostname(): string {
   const wndw: Window | null = useWindow();

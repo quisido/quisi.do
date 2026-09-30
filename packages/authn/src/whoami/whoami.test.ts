@@ -1,6 +1,7 @@
 import { WhoAmIResponseCode } from '@quisido/authn-shared';
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
+
 import mapStringToIp from '../../test/map-string-to-ip.js';
 import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { MetricName } from '../constants/metric-name.js';

@@ -1,5 +1,6 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { isRecord } from 'fmrs';
+
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import FatalError from '../utils/fatal-error.js';

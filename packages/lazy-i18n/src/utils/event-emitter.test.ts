@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+
 import EventEmitter from './event-emitter.js';
 
 describe('EventEmitter', (): void => {

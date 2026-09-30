@@ -1,4 +1,5 @@
 import { StatusCode } from 'cloudflare-utils';
+
 import { MetricName } from '../constants/metric-name.js';
 import { SELECT_ORIGINS_USER_ID_FROM_PROJECTS } from '../constants/queries.js';
 import type CspFetchHandler from '../csp-fetch-handler.js';

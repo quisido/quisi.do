@@ -1,6 +1,7 @@
-import render from './render.js';
 import { describe, expect, it } from 'vitest';
+
 import importTestedDesignSystem from './import-tested-design-system.js';
+import render from './render.js';
 
 const { MenuBar } = await importTestedDesignSystem();
 
@@ -34,7 +35,9 @@ describe('MenuBar', (): void => {
   it('should preserve keyboard focus for interactive descendants', async (): Promise<void> => {
     const { getByName, tab } = render(
       <MenuBar>
-        <button autoFocus type="button">First command</button>
+        <button autoFocus type="button">
+          First command
+        </button>
         <button type="button">Second command</button>
       </MenuBar>,
     );

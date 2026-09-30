@@ -1,0 +1,151 @@
+.suggestion {
+  --suggestion-ink: #17102f;
+  --suggestion-pink: #ff3f9b;
+  --suggestion-yellow: #ffe83d;
+  --suggestion-cyan: #25d9df;
+  --suggestion-violet: #7137ef;
+
+  display: inline;
+  line-height: 1.9;
+
+  > ins,
+  > del {
+    border: 0.1em solid var(--suggestion-ink);
+    box-decoration-break: clone;
+    color: var(--suggestion-ink);
+    display: inline;
+    font-weight: 850;
+    isolation: isolate;
+    padding: 0.1em 0.42em 0.14em;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 0.035em 0.035em 0 rgb(255 255 255 / 80%);
+    transition: filter 180ms ease, transform 180ms ease;
+    -webkit-box-decoration-break: clone;
+  }
+
+  > ins {
+    background:
+      radial-gradient(circle at 12% 22%, var(--suggestion-pink) 0 0.08em, transparent 0.09em),
+      radial-gradient(circle at 89% 72%, var(--suggestion-violet) 0 0.07em, transparent 0.08em),
+      repeating-linear-gradient(-38deg, transparent 0 0.48em, rgb(255 255 255 / 42%) 0.49em 0.57em),
+      var(--suggestion-yellow);
+    border-radius: 0.55em 0.12em 0.46em 0.16em;
+    box-shadow:
+      0.16em 0.17em 0 var(--suggestion-cyan),
+      0.25em 0.27em 0 var(--suggestion-ink);
+    margin-inline: 0.22em 0.42em;
+
+    &::before {
+      color: var(--suggestion-violet);
+      content: '+';
+      font-size: 0.72em;
+      font-weight: 1000;
+      left: -0.52em;
+      line-height: 1;
+      position: absolute;
+      text-shadow: 0.08em 0.08em 0 var(--suggestion-cyan);
+      top: -0.42em;
+      transform: rotate(-12deg);
+    }
+
+    &::after {
+      background: var(--suggestion-pink);
+      clip-path: polygon(50% 0, 61% 35%, 100% 26%, 70% 51%, 96% 81%, 59% 68%, 47% 100%, 39% 67%, 0 78%, 28% 49%, 2% 24%, 39% 34%);
+      content: '';
+      height: 0.55em;
+      position: absolute;
+      right: -0.42em;
+      top: -0.34em;
+      transform: rotate(10deg);
+      width: 0.55em;
+    }
+  }
+
+  > del {
+    background:
+      repeating-linear-gradient(45deg, transparent 0 0.24em, rgb(23 16 47 / 13%) 0.25em 0.31em),
+      #ff735f;
+    border-radius: 0.12em 0.5em 0.14em 0.42em;
+    box-shadow:
+      0.15em 0.17em 0 var(--suggestion-pink),
+      0.24em 0.27em 0 var(--suggestion-ink);
+    margin-inline: 0.22em 0.4em;
+
+    &::before {
+      background: var(--suggestion-ink);
+      content: '';
+      height: 0.12em;
+      left: 0.18em;
+      position: absolute;
+      right: 0.14em;
+      top: 52%;
+      transform: rotate(-5deg);
+    }
+
+    &::after {
+      background: var(--suggestion-cyan);
+      border: 0.07em solid var(--suggestion-ink);
+      border-radius: 50%;
+      box-shadow: 0.25em 0.18em 0 -0.07em var(--suggestion-yellow);
+      content: '';
+      height: 0.24em;
+      left: -0.3em;
+      position: absolute;
+      top: -0.27em;
+      width: 0.24em;
+    }
+  }
+
+  > ins:hover,
+  > del:hover {
+    filter: saturate(1.18) contrast(1.04);
+  }
+
+  > ins::selection,
+  > del::selection {
+    background: var(--suggestion-violet);
+    color: #fff;
+    text-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .suggestion > ins::after {
+    animation: suggestion-twinkle 3.2s ease-in-out infinite;
+  }
+
+  .suggestion > del::after {
+    animation: suggestion-bob 3.8s ease-in-out infinite;
+  }
+}
+
+@keyframes suggestion-twinkle {
+  50% { transform: rotate(28deg) scale(1.14); }
+}
+
+@keyframes suggestion-bob {
+  50% { transform: translateY(-0.12em) rotate(14deg); }
+}
+
+@media (forced-colors: active) {
+  .suggestion > ins,
+  .suggestion > del {
+    background: Canvas;
+    border-color: CanvasText;
+    box-shadow: none;
+    color: CanvasText;
+    forced-color-adjust: auto;
+    text-shadow: none;
+  }
+
+  .suggestion > ins { text-decoration: underline; }
+  .suggestion > del { text-decoration: line-through; }
+
+  .suggestion > ins::before,
+  .suggestion > ins::after,
+  .suggestion > del::before,
+  .suggestion > del::after {
+    display: none;
+  }
+}

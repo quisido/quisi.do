@@ -1,5 +1,6 @@
 import { FaviconIcoResponse, RobotsTxtResponse } from 'cloudflare-utils';
 import { toError } from 'fmrs';
+
 import type DashboardFetchHandler from '../dashboard-fetch-handler.js';
 import getDatadogAggregateRumEvents from '../datadog-aggregate-rum-events/get-datadog-aggregate-rum-events.js';
 import InternalServerErrorResponse from './internal-server-error-response.js';

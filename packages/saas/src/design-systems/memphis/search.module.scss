@@ -1,0 +1,203 @@
+.search {
+  --ink: #161126;
+  --cream: #fff8dc;
+  align-items: center;
+  background:
+    radial-gradient(circle at 87% 24%, #ffe34d 0 5px, transparent 6px),
+    linear-gradient(118deg, transparent 0 64%, rgb(255 255 255 / 24%) 64% 68%, transparent 68%),
+    #ff4b9b;
+  border: 4px solid var(--ink);
+  border-radius: 3.2rem 0.7rem 4rem 1.1rem;
+  box-shadow: 10px 11px 0 #20d8cf, 15px 16px 0 var(--ink);
+  box-sizing: border-box;
+  color: var(--ink);
+  display: flex;
+  isolation: isolate;
+  margin: 2.5rem 2rem 3rem;
+  max-width: 58rem;
+  min-height: 13rem;
+  overflow: hidden;
+  padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 7vw, 5rem);
+  position: relative;
+  transform: rotate(-0.45deg);
+
+  &::before {
+    background: repeating-linear-gradient(90deg, var(--ink) 0 12px, transparent 12px 24px);
+    content: '';
+    height: 8px;
+    left: 15%;
+    position: absolute;
+    top: 1.1rem;
+    transform: rotate(-3deg);
+    width: 10rem;
+  }
+
+  &::after {
+    background: #723cff;
+    border: 4px solid var(--ink);
+    border-radius: 50%;
+    bottom: -3rem;
+    content: '';
+    height: 8rem;
+    left: 8%;
+    position: absolute;
+    width: 8rem;
+    z-index: -1;
+  }
+
+  :global(label) {
+    background: var(--cream);
+    border: 4px solid var(--ink);
+    box-shadow: 7px 7px 0 #ffe34d;
+    box-sizing: border-box;
+    display: grid;
+    font-family: 'Arial Black', 'Trebuchet MS', sans-serif;
+    font-weight: 900;
+    gap: 0.45rem;
+    padding: 0.85rem 1rem 1rem;
+    transform: rotate(0.8deg);
+  }
+
+  :global(input),
+  :global(select) {
+    background: #fff;
+    border: 3px solid var(--ink);
+    border-radius: 1.4rem 0.25rem 1.4rem 0.35rem;
+    box-sizing: border-box;
+    color: var(--ink);
+    font: 700 1.05rem/1.2 'Trebuchet MS', sans-serif;
+    min-height: 3.1rem;
+    min-width: 0;
+    padding: 0.65rem 1rem;
+    width: 100%;
+  }
+
+  :global(input:focus-visible),
+  :global(select:focus-visible) {
+    outline: 4px solid #16cfd0;
+    outline-offset: 4px;
+  }
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  position: relative;
+  width: 100%;
+  z-index: 3;
+}
+
+.orbit,
+.sun,
+.kite,
+.squiggle,
+.sprinkles,
+.lens {
+  display: block;
+  pointer-events: none;
+  position: absolute;
+}
+
+.orbit {
+  border: 8px solid #16d8d0;
+  border-left-color: transparent;
+  border-radius: 50%;
+  height: 15rem;
+  right: -5rem;
+  top: -7rem;
+  transform: rotate(-25deg);
+  width: 22rem;
+}
+
+.sun {
+  background: repeating-conic-gradient(#ffe34d 0 10deg, transparent 10deg 20deg);
+  border-radius: 50%;
+  height: 9rem;
+  right: -1.7rem;
+  top: -2.8rem;
+  width: 9rem;
+}
+
+.sun::after {
+  background: #ff7a21;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  content: '';
+  inset: 31%;
+  position: absolute;
+}
+
+.kite {
+  background: #753df2;
+  border: 4px solid var(--ink);
+  clip-path: polygon(50% 0, 100% 48%, 57% 100%, 0 62%);
+  height: 5.5rem;
+  left: -1.3rem;
+  top: 34%;
+  transform: rotate(-11deg);
+  width: 5rem;
+}
+
+.squiggle {
+  border-top: 9px dotted #ffe34d;
+  bottom: 1.2rem;
+  height: 1.2rem;
+  right: 4rem;
+  transform: rotate(-7deg);
+  width: 9rem;
+}
+
+.sprinkles {
+  background: repeating-linear-gradient(105deg, transparent 0 13px, var(--ink) 14px 19px, transparent 20px 30px);
+  height: 2rem;
+  left: 35%;
+  top: 0.8rem;
+  transform: rotate(4deg);
+  width: 9rem;
+}
+
+.lens {
+  border: 8px solid var(--ink);
+  border-radius: 50%;
+  bottom: -2.2rem;
+  height: 4rem;
+  right: -0.8rem;
+  transform: rotate(-35deg);
+  width: 4rem;
+}
+
+.lens::after {
+  background: var(--ink);
+  content: '';
+  height: 3.4rem;
+  left: 3.6rem;
+  position: absolute;
+  top: 3.3rem;
+  width: 0.65rem;
+}
+
+@media (max-width: 38rem) {
+  .search { margin: 2rem 0.8rem 2.5rem; padding-inline: 1.25rem; }
+  .content { align-items: stretch; flex-direction: column; }
+  .content > * { max-width: 100%; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun { animation: spin 18s linear infinite; }
+  .kite { animation: float 4s ease-in-out infinite; }
+  .lens { animation: peer 5s ease-in-out infinite; }
+}
+
+@media (forced-colors: active) {
+  .search,
+  .search::after,
+  .sun::after,
+  .kite { border-color: CanvasText; }
+  .search { box-shadow: 10px 11px 0 CanvasText; }
+}
+
+@keyframes spin { to { transform: rotate(1turn); } }
+@keyframes float { 50% { transform: translateY(-0.55rem) rotate(-4deg); } }
+@keyframes peer { 50% { transform: translate(-0.4rem, -0.35rem) rotate(-27deg); } }

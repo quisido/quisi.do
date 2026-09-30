@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { FaviconIcoResponse, TransparentIcoResponse } from './index.js';
 
 describe('FaviconIcoResponse', (): void => {

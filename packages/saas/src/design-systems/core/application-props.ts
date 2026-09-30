@@ -1,7 +1,6 @@
-import type { ReactNode } from 'react';
-import type { OneOf } from './one-of.js';
+import { type ReactNode } from 'react';
 
-export type ApplicationProps = OneOf<OneOfProps> & Props;
+import { type OneOf } from './one-of.js';
 
 interface OneOfProps {
   readonly label: string;
@@ -13,3 +12,5 @@ interface Props {
   readonly describedBy?: string | undefined;
   readonly roleDescription?: string | undefined;
 }
+
+export type ApplicationProps = OneOf<OneOfProps> & Props;

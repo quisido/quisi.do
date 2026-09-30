@@ -1,8 +1,9 @@
 import { type RefObject, useCallback, useMemo, useRef, useState } from 'react';
+
 import mapTranslationsRecordToLoadedTranslationsRecord from '../../map/map-translations-record-to-loaded-translations-record.js';
 import RunnableTranslateFunction from '../../runnables/runnable-translate-function.js';
 import type TranslateFunction from '../../types/translate-function.js';
-import type { Translations } from '../../types/translations.js';
+import { type Translations } from '../../types/translations.js';
 import handleNotFound from '../../utils/handle-not-found.js';
 import useLoadTranslations from './hooks/use-load-translations.js';
 

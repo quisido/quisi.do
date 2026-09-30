@@ -1,10 +1,11 @@
-import type { ReactElement } from 'react';
-import type { DialogProps } from '../core/dialog-props.js';
+import { type ReactElement } from 'react';
 import { FocusScope } from 'react-aria';
+
+import { type DialogProps } from '../core/dialog-props.js';
 import useDialog from '../core/use-dialog.js';
-import Paragraph from './paragraph.js';
-import Heading from './heading.js';
 import classes from './dialog.module.scss';
+import Heading from './heading.js';
+import Paragraph from './paragraph.js';
 
 /**
  * A dialog is a descendant window of the primary window of a web application.

@@ -1,4 +1,4 @@
-import type { Tuple } from '../types/type.js';
+import { type Tuple } from '../types/type.js';
 
 const mapResultToResults = ({
   results,

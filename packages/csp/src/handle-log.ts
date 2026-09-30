@@ -1,4 +1,4 @@
-import type { Handler } from '@quisido/worker';
+import { type Handler } from '@quisido/worker';
 
 export default function handleLog(
   this: Handler,

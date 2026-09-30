@@ -1,6 +1,7 @@
 import { type RefObject, useLayoutEffect } from 'react';
-import { setInertSiblings, unsetInertSiblings } from './inert.js';
+
 import validateNonNull from '../../utils/validate-non-null.js';
+import { setInertSiblings, unsetInertSiblings } from './inert.js';
 
 export default function useModal(
   elementRef: RefObject<HTMLElement | null>,

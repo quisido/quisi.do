@@ -53,10 +53,6 @@
       "path": "packages/fmrs"
     },
     {
-      "name": "📦 fullstory-react",
-      "path": "packages/fullstory-react"
-    },
-    {
       "name": "📦 lazy-i18n",
       "path": "packages/lazy-i18n"
     },
@@ -67,10 +63,6 @@
     {
       "name": "📦 quisido (CLI)",
       "path": "packages/quisido"
-    },
-    {
-      "name": "📦 react-datadog",
-      "path": "packages/react-datadog"
     },
     {
       "name": "📦 use-force-update",
@@ -90,10 +82,6 @@
     }
   ],
   "settings": {
-    "eslint.workingDirectories": [
-      ".",
-      { "pattern": "packages/*" }
-    ],
     "files.associations": {
       "**/.aiexclude": "ignore",
       "**/config/api-extractor.json": "jsonc",

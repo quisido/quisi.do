@@ -1,5 +1,6 @@
-import type { WhoAmIResponseCode } from '@quisido/authn-shared';
+import { type WhoAmIResponseCode } from '@quisido/authn-shared';
 import { StatusCode } from 'cloudflare-utils';
+
 import WhoAmIResponseInit from './whoami-response-init.js';
 
 interface Options {

@@ -1,4 +1,4 @@
-import type { LighthouseRunResult } from './lighthouse-run-result.js';
+import { type LighthouseRunResult } from './lighthouse-run-result.js';
 import mapAuditsToDashboard from './map-audits-to-dashboard.js';
 import reduceResultEntriesToDashboard, {
   type DashboardResult,

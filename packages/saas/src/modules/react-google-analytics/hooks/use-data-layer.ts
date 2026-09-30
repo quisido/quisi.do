@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import type GoogleAnalyticsWindow from '../types/google-analytics-window.js';
 
 export default function useDataLayer(): void {

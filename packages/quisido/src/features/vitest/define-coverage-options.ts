@@ -1,8 +1,10 @@
 /* eslint-disable sort-keys-custom-order/object-keys */
-import type { CoverageOptions } from 'vitest/node';
+import { join } from 'node:path';
+
+import { type CoverageOptions } from 'vitest/node';
+
 import defineThresholds from './define-thresholds.js';
 import { EXCLUDE } from './exclude.js';
-import { join } from 'node:path';
 
 export { type CoverageOptions } from 'vitest/node';
 

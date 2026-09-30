@@ -1,7 +1,8 @@
 import { type Ref, type RefObject, useLayoutEffect, useRef } from 'react';
-import useId from './use-id.js';
+
 import validateNonNull from '../../utils/validate-non-null.js';
 import { setInertSiblings, unsetInertSiblings } from './inert.js';
+import useId from './use-id.js';
 
 interface Props {
   readonly labelledBy?: string | undefined;

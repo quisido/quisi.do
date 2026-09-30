@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import isStringRecord from './is-string-record.js';
 
 const TEST_NUMBER = 1234;

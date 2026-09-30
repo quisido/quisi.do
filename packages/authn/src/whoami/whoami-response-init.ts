@@ -1,4 +1,5 @@
 import { ResponseInitImpl, type StatusCode } from 'cloudflare-utils';
+
 import { ACCESS_CONTROL_HEADERS_INIT } from '../constants/access-control-headers-init.js';
 
 interface Options {

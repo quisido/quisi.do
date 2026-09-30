@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { toError } from './index.js';
 
 describe('toError', (): void => {

@@ -1,4 +1,5 @@
 import { type Linter } from 'eslint';
+
 import reduceConfigsToRules from './reduce-configs-to-rules.js';
 
 export default function mapConfigsToRules(

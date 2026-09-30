@@ -1,5 +1,6 @@
 import { isRecord } from 'fmrs';
-import isStringTuple from '../is/is-string-tuple.js';
+
+import isStringTuple from './is-string-tuple.js';
 
 export default function isStringRecord(
   value: unknown,

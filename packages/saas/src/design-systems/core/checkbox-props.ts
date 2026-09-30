@@ -1,6 +1,4 @@
-import type { DisabledOrReadOnlyProps } from './disabled-or-readonly-props.js';
-
-export type CheckboxProps = DisabledOrReadOnlyProps & Props;
+import { type DisabledOrReadOnlyProps } from './disabled-or-readonly-props.js';
 
 interface Props {
   readonly label: string;
@@ -12,3 +10,5 @@ interface Props {
   readonly required?: boolean | undefined;
   readonly value: boolean | 'mixed';
 }
+
+export type CheckboxProps = DisabledOrReadOnlyProps & Props;

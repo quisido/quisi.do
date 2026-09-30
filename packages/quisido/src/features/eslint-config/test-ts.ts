@@ -1,14 +1,14 @@
 import defineConfig, { type Config } from './define-config.js';
 import fileGlobsByExtension from './file-globs-by-extension.js';
-import TS from './ts.js';
+import { TS_CONFIG } from './ts.js';
 
-const TEST_TS_CONFIG: Config = defineConfig({
-  ...TS,
+export const TEST_TS_CONFIG: Config = defineConfig({
+  ...TS_CONFIG,
   files: fileGlobsByExtension('test.ts', 'test.tsx'),
   ignores: [],
   name: '@quisido/test-ts',
   rules: {
-    ...TS.rules,
+    ...TS_CONFIG.rules,
     /**
      * This rule is incompatible with TypeScript when setting a variable in a
      * callback.
@@ -26,5 +26,3 @@ const TEST_TS_CONFIG: Config = defineConfig({
     'no-undefined': 'off',
   },
 });
-
-export default TEST_TS_CONFIG;

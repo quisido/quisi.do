@@ -1,8 +1,9 @@
-import type { ReactElement, ReactNode } from 'react';
-import Heading from './heading.js';
-import type { AlertProps } from '../core/alert-props.js';
-import classes from './alert.module.scss';
+import { type ReactElement, type ReactNode } from 'react';
+
+import { type AlertProps } from '../core/alert-props.js';
 import useAlert from '../core/use-alert.js';
+import classes from './alert.module.scss';
+import Heading from './heading.js';
 
 /**
  * An alert is a live region with important, and usually time-sensitive,

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { mapEntriesToRecord } from './index.js';
 
 const TEST_RECORD: Record<string, unknown> = {

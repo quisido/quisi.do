@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import noop from './noop.js';
+
 import { Handler } from './index.js';
+import noop from './noop.js';
 
 describe('Handler', (): void => {
   it('should throw an error when accessing a binding outside an operation', (): void => {

@@ -1,9 +1,10 @@
-import type { ChangeEvent, ReactElement } from 'react';
-import render from './render.js';
-import { describe, expect, it, vi } from 'vitest';
-import noop from '../../utils/noop.js';
 import { userEvent } from '@testing-library/user-event';
+import { type ChangeEvent, type ReactElement } from 'react';
+import { describe, expect, it, vi } from 'vitest';
+
+import noop from '../../utils/noop.js';
 import importTestedDesignSystem from './import-tested-design-system.js';
+import render from './render.js';
 
 const ScriptSubmittedSelect = (): ReactElement => {
   const handleChange = (event: ChangeEvent<HTMLSelectElement>): void => {

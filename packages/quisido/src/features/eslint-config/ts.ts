@@ -1,40 +1,44 @@
+import { type Plugin } from '@eslint/config-helpers';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
-import { type ESLint } from 'eslint';
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
+import {
+  flatConfigs as importXFlatConfigs,
+  importX,
+} from 'eslint-plugin-import-x';
 import sortKeysCustomOrder from 'eslint-plugin-sort-keys-custom-order';
-import ts from 'typescript-eslint';
+import { configs as tsConfigs } from 'typescript-eslint';
+
+import validateArray from '../../utils/validate-array.js';
 import defineConfig, { type Config } from './define-config.js';
-import JS from './js.js';
+import fileGlobsByExtension from './file-globs-by-extension.js';
+import { JS_CONFIG } from './js.js';
 import mapConfigsToRules from './map-configs-to-rules.js';
 import { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
-import fileGlobsByExtension from './file-globs-by-extension.js';
-import type { Plugin } from '@eslint/config-helpers';
 
 export { TYPESCRIPT_LANGUAGE_OPTIONS } from './typescript-language-options.js';
 
-const SORT_KEYS_CUSTOM_ORDER_PLUGIN =
-  sortKeysCustomOrder as unknown as ESLint.Plugin;
-
-const TS_CONFIG: Config = defineConfig({
-  ...JS,
+export const TS_CONFIG: Config = defineConfig({
+  ...JS_CONFIG,
   files: fileGlobsByExtension('ts', 'tsx'),
   ignores: fileGlobsByExtension('d.ts', 'test.ts', 'test.tsx'),
   languageOptions: TYPESCRIPT_LANGUAGE_OPTIONS,
   name: '@quisido/ts',
 
   plugins: {
-    ...JS.plugins,
+    ...JS_CONFIG.plugins,
     '@typescript-eslint': tsPlugin as unknown as Plugin,
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-    'sort-keys-custom-order': SORT_KEYS_CUSTOM_ORDER_PLUGIN as Plugin,
+    'import-x': importX,
+    'sort-keys-custom-order': sortKeysCustomOrder as unknown as Plugin,
   },
 
   rules: {
-    ...JS.rules,
-    ...ts.configs.base.rules,
-    ...ts.configs.eslintRecommended.rules,
-    ...mapConfigsToRules(ts.configs.stylisticTypeChecked),
-    ...mapConfigsToRules(ts.configs.recommendedTypeChecked),
-    ...mapConfigsToRules(ts.configs.strictTypeChecked),
+    ...JS_CONFIG.rules,
+    ...importXFlatConfigs.typescript.rules,
+    ...tsConfigs.base.rules,
+    ...tsConfigs.eslintRecommended.rules,
+    ...mapConfigsToRules(tsConfigs.stylisticTypeChecked),
+    ...mapConfigsToRules(tsConfigs.recommendedTypeChecked),
+    ...mapConfigsToRules(tsConfigs.strictTypeChecked),
 
     '@typescript-eslint/consistent-type-imports': [
       'error',
@@ -99,6 +103,19 @@ const TS_CONFIG: Config = defineConfig({
     'prefer-destructuring': 'off',
     'sort-keys-custom-order/type-keys': ['error', { sorting: 'asc' }],
   },
-});
 
-export default TS_CONFIG;
+  settings: {
+    'import-x/extensions': [
+      '.ts',
+      '.tsx',
+      ...validateArray(JS_CONFIG.settings['import-x/extensions']),
+    ],
+    'import-x/resolver-next': [
+      createTypeScriptImportResolver({
+        alwaysTryTypes: false,
+        bun: true,
+        enforceExtension: 1,
+      }),
+    ],
+  },
+});

@@ -1,0 +1,190 @@
+.menu-bar {
+  --ink: #17120f;
+  --paper: #fff9e9;
+  --pink: #f23a91;
+  --blue: #1754e8;
+  --yellow: #ffd128;
+  --mint: #16c9b7;
+
+  align-items: center;
+  background:
+    radial-gradient(circle at 8px 8px, rgb(255 255 255 / 38%) 0 2px, transparent 2.5px) 0 0 / 17px 17px,
+    var(--blue);
+  border: 4px solid var(--ink);
+  box-shadow:
+    7px 7px 0 var(--yellow),
+    11px 11px 0 var(--ink);
+  box-sizing: border-box;
+  color: var(--paper);
+  display: flex;
+  font-family: 'Arial Black', 'Trebuchet MS', sans-serif;
+  font-weight: 900;
+  isolation: isolate;
+  margin: 20px 24px 24px 16px;
+  min-height: 68px;
+  padding: 10px 72px 10px 76px;
+  position: relative;
+  transform: rotate(-0.45deg);
+
+  &::before {
+    background: var(--pink);
+    border: 4px solid var(--ink);
+    clip-path: polygon(50% 0, 61% 34%, 96% 24%, 73% 52%, 100% 74%, 63% 68%, 50% 100%, 38% 68%, 0 76%, 27% 51%, 4% 24%, 39% 34%);
+    content: '';
+    height: 62px;
+    left: -27px;
+    position: absolute;
+    top: -19px;
+    transform: rotate(-9deg);
+    width: 62px;
+    z-index: -1;
+  }
+
+  &::after {
+    background: repeating-linear-gradient(135deg, var(--ink) 0 5px, var(--yellow) 5px 10px);
+    border: 3px solid var(--ink);
+    bottom: -18px;
+    content: '';
+    height: 18px;
+    left: 21%;
+    position: absolute;
+    transform: skewX(-24deg) rotate(1deg);
+    width: 86px;
+    z-index: -1;
+  }
+
+  &[aria-orientation='vertical'] {
+    align-items: stretch;
+    flex-direction: column;
+    min-height: 18rem;
+    padding: 68px 16px 56px;
+    width: min(17rem, calc(100vw - 3rem));
+
+    .content {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .confetti {
+      bottom: auto;
+      left: 18px;
+      right: 18px;
+      top: 12px;
+      width: auto;
+    }
+
+    .orbit {
+      bottom: -21px;
+      right: -18px;
+      top: auto;
+    }
+  }
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: 8px;
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.confetti {
+  bottom: 8px;
+  display: block;
+  left: 12px;
+  pointer-events: none;
+  position: absolute;
+  top: 8px;
+  width: 52px;
+}
+
+.dot {
+  background: var(--yellow);
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  height: 22px;
+  left: 4px;
+  position: absolute;
+  top: 1px;
+  width: 22px;
+}
+
+.triangle {
+  background: var(--mint);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  height: 25px;
+  position: absolute;
+  right: 0;
+  top: 25px;
+  transform: rotate(13deg);
+  width: 27px;
+}
+
+.zigzag {
+  border-left: 5px solid var(--paper);
+  border-top: 5px solid var(--paper);
+  height: 13px;
+  left: 1px;
+  position: absolute;
+  top: 36px;
+  transform: rotate(45deg) skew(-8deg, -8deg);
+  width: 13px;
+}
+
+.orbit {
+  background:
+    radial-gradient(circle at center, var(--pink) 0 7px, var(--ink) 8px 11px, transparent 12px),
+    conic-gradient(from 12deg, var(--yellow) 0 14%, transparent 14% 25%, var(--mint) 25% 39%, transparent 39% 50%, var(--yellow) 50% 64%, transparent 64% 75%, var(--mint) 75% 89%, transparent 89%);
+  border-radius: 50%;
+  height: 54px;
+  pointer-events: none;
+  position: absolute;
+  right: -25px;
+  top: -18px;
+  width: 54px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .orbit {
+    animation: slow-spin 9s linear infinite;
+  }
+
+  .triangle {
+    animation: tiny-dance 3.6s ease-in-out infinite;
+  }
+}
+
+@keyframes slow-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes tiny-dance {
+  50% {
+    transform: rotate(22deg) translateY(-3px);
+  }
+}
+
+@media (max-width: 520px) {
+  .menu-bar:not([aria-orientation='vertical']) {
+    align-items: stretch;
+    padding: 54px 14px 16px;
+
+    .content {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .confetti {
+      bottom: auto;
+      height: 42px;
+      right: 28px;
+      top: 5px;
+      width: auto;
+    }
+  }
+}

@@ -1,0 +1,65 @@
+.mark {
+  --memphis-ink: #17102f;
+  --memphis-yellow: #fff04a;
+  --memphis-pink: #ff4fa3;
+  --memphis-cyan: #28dbe0;
+
+  background:
+    radial-gradient(circle at 8% 24%, var(--memphis-pink) 0 0.13em, transparent 0.15em),
+    linear-gradient(118deg, transparent 0 12%, rgb(255 255 255 / 48%) 12% 18%, transparent 18% 100%),
+    repeating-linear-gradient(-34deg, transparent 0 0.42em, rgb(255 79 163 / 24%) 0.44em 0.53em),
+    var(--memphis-yellow);
+  border: 0.09em solid var(--memphis-ink);
+  border-radius: 0.12em 0.52em 0.16em 0.38em;
+  box-decoration-break: clone;
+  box-shadow:
+    0.14em 0.14em 0 -0.02em var(--memphis-cyan),
+    0.22em 0.22em 0 -0.02em var(--memphis-ink);
+  color: var(--memphis-ink);
+  display: inline;
+  font-weight: 750;
+  line-height: 1.65;
+  padding: 0.04em 0.3em 0.08em;
+  text-decoration: underline;
+  text-decoration-color: var(--memphis-pink);
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.13em;
+  text-shadow: 0.035em 0.035em 0 rgb(255 255 255 / 75%);
+  transition:
+    background-position 260ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+  -webkit-box-decoration-break: clone;
+
+  &:hover {
+    background-position: 0 0, 0.55em 0, 0 0, 0 0;
+    box-shadow:
+      -0.12em 0.16em 0 -0.02em var(--memphis-pink),
+      0.18em 0.24em 0 -0.02em var(--memphis-ink);
+    filter: saturate(1.15);
+  }
+
+  &::selection {
+    background: var(--memphis-pink);
+    color: #fff;
+    text-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .mark {
+    background: Mark;
+    border-color: MarkText;
+    box-shadow: none;
+    color: MarkText;
+    forced-color-adjust: auto;
+    text-decoration-color: MarkText;
+    text-shadow: none;
+  }
+}

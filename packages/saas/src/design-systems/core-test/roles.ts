@@ -1,14 +1,5 @@
-import type { ARIARole } from 'aria-query';
+import { type ARIARole } from 'aria-query';
 import { mapObjectToKeys } from 'fmrs';
-
-export type DesignSystemRole =
-  | Exclude<ARIARole, 'img'>
-  | 'comment'
-  | 'image'
-  | 'mark'
-  | 'sectionfooter'
-  | 'sectionheader'
-  | 'suggestion';
 
 const RECORD: Readonly<Record<DesignSystemRole, boolean>> = {
   alert: true,
@@ -99,6 +90,15 @@ const RECORD: Readonly<Record<DesignSystemRole, boolean>> = {
   treegrid: true,
   treeitem: true,
 };
+
+export type DesignSystemRole =
+  | Exclude<ARIARole, 'img'>
+  | 'comment'
+  | 'image'
+  | 'mark'
+  | 'sectionfooter'
+  | 'sectionheader'
+  | 'suggestion';
 
 export const ROLES: ReadonlySet<DesignSystemRole> = new Set(
   mapObjectToKeys(RECORD),

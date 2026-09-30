@@ -1,7 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
-import render from './render.js';
+
 import noop from '../../utils/noop.js';
 import importTestedDesignSystem from './import-tested-design-system.js';
+import render from './render.js';
 
 const { Button } = await importTestedDesignSystem();
 

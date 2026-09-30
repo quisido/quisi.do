@@ -1,10 +1,11 @@
 import { v2 } from '@datadog/datadog-api-client';
-import type { RUMWarning } from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2/index.js';
+import { type RUMWarning } from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2/index.js';
+
 import mapToOptionalNumber from '../utils/map-to-optional-number.js';
 import createConfiguration from './create-configuration.js';
 import mapToOptionalTimeSeries from './map-to-optional-time-series.js';
 import sanitizeStatus from './sanitize-status.js';
-import type { Status } from './status.js';
+import { type Status } from './status.js';
 
 interface AggregateRumEvents {
   readonly cumulativeLayoutShiftP50?: number | undefined;

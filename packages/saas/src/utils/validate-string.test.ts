@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import validateString from './validate-string.js';
 
 describe('validateString', (): void => {

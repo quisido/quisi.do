@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { EmphasisProps } from '../core/emphasis-props.js';
+import { type ReactElement } from 'react';
+
+import { type EmphasisProps } from '../core/emphasis-props.js';
 import classes from './emphasis.module.scss';
 
 /**

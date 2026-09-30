@@ -1,16 +1,17 @@
+import { type Plugin } from '@eslint/config-helpers';
 import jsonPlugin from '@eslint/json';
 import jsonc from 'eslint-plugin-jsonc';
+
 import defineConfig, { type Config } from './define-config.js';
-import { LINTER_OPTIONS } from './linter-options.js';
 import fileGlobsByExtension from './file-globs-by-extension.js';
-import type { Plugin } from '@eslint/config-helpers';
+import { LINTER_OPTIONS } from './linter-options.js';
 
 /**
  * We don't use Prettier here, because Prettier does not support empty lines
  * in JSON files.
  */
 
-const JSON_CONFIG: Config = defineConfig({
+export const JSON_CONFIG: Config = defineConfig({
   extends: [],
 
   files: [
@@ -74,5 +75,3 @@ const JSON_CONFIG: Config = defineConfig({
 
   settings: {},
 });
-
-export default JSON_CONFIG;

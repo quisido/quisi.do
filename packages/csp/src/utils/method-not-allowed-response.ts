@@ -1,4 +1,5 @@
 import { StatusCode } from 'cloudflare-utils';
+
 import CspResponse from './csp-response.js';
 
 export default class MethodNotAllowedResponse extends CspResponse {

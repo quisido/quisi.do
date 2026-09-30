@@ -1,6 +1,7 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { MetricName as WorkerMetricName } from '@quisido/worker';
 import { describe, it } from 'vitest';
+
 import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 

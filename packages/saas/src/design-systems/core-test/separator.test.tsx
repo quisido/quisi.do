@@ -1,7 +1,8 @@
-import { userEvent } from 'vitest/browser';
-import render from './render.js';
 import { describe, expect, it, vi } from 'vitest';
+import { userEvent } from 'vitest/browser';
+
 import importTestedDesignSystem from './import-tested-design-system.js';
+import render from './render.js';
 
 const { Separator, SeparatorWidget } = await importTestedDesignSystem();
 

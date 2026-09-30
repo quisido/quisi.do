@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { isRecord } from './index.js';
 
 describe('isRecord', (): void => {

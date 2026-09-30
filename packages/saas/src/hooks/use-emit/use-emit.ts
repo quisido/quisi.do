@@ -1,13 +1,16 @@
-import { captureEvent, type Event as SentryEvent, type EventHint } from '@sentry/core';
+import {
+  captureEvent,
+  type Event as SentryEvent,
+  type EventHint,
+} from '@sentry/core';
 import { mapObjectToEntries } from 'fmrs';
-import { type FSApi, useFullstory } from 'fullstory-react';
-import mixpanelBrowser from 'mixpanel-browser';
+import { track as mixpanelBrowserTrack } from 'mixpanel-browser';
 import { usePostHog } from 'posthog-js/react';
 import { useCallback } from 'react';
-import { useDatadogRum } from 'react-datadog';
+
 import EMPTY_OBJECT from '../../modules/react-google-analytics/constants/empty-object.js';
 import { useNewRelicBrowserAgent } from '../../modules/react-new-relic/index.js';
-import type { Dimensions } from '../../types/dimensions.js';
+import { type Dimensions } from '../../types/dimensions.js';
 import zarazTrack from '../../utils/zaraz-track.js';
 import useHostname from '../use-hostname.js';
 import useLogRocket from '../use-log-rocket.js';
@@ -60,7 +63,7 @@ const safeMixpanelBrowserTrack = (
   dimensions: Readonly<Dimensions>,
 ): void => {
   try {
-    mixpanelBrowser.track(name, dimensions);
+    mixpanelBrowserTrack(name, dimensions);
   } catch (_err: unknown) {
     /**
      * Mixpanel has not finished loading yet.
@@ -95,8 +98,6 @@ const safeMixpanelBrowserTrack = (
  */
 export default function useEmit(): EventEmitter {
   // Context
-  const { addAction } = useDatadogRum();
-  const fullstory: FSApi = useFullstory();
   const hostname: string = useHostname();
   const LogRocket = useLogRocket();
   const newRelicBrowserAgent = useNewRelicBrowserAgent();
@@ -107,13 +108,15 @@ export default function useEmit(): EventEmitter {
   return useCallback(
     (name: string, dimensions: Readonly<Dimensions> = EMPTY_OBJECT): void => {
       // Datadog
-      addAction(name, dimensions);
+      // addAction(name, dimensions);
 
       // Fullstory
+      /*
       fullstory('trackEvent', {
         name,
         properties: dimensions,
       });
+      */
 
       // LogRocket
       LogRocket.track(name, removeNullValues(dimensions));
@@ -139,14 +142,6 @@ export default function useEmit(): EventEmitter {
       // Zaraz
       zarazTrack(name, dimensions);
     },
-    [
-      LogRocket,
-      addAction,
-      fullstory,
-      hostname,
-      newRelicBrowserAgent,
-      pathname,
-      posthog,
-    ],
+    [LogRocket, hostname, newRelicBrowserAgent, pathname, posthog],
   );
 }

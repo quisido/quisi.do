@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { ExportedHandler } from './index.js';
 
 describe('ExportedHandler', (): void => {

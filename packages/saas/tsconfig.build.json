@@ -3,6 +3,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "rootDir": "src",
+    "skipLibCheck": true,
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/packages/saas/src/",
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
@@ -31,9 +32,6 @@
       "path": "../fmrs/tsconfig.build.json"
     },
     {
-      "path": "../fullstory-react/tsconfig.build.json"
-    },
-    {
       "path": "../lazy-i18n/tsconfig.build.json"
     },
     {
@@ -41,9 +39,6 @@
     },
     {
       "path": "../quisido/tsconfig.build.json"
-    },
-    {
-      "path": "../react-datadog/tsconfig.build.json"
     },
     {
       "path": "../use-force-update/tsconfig.build.json"

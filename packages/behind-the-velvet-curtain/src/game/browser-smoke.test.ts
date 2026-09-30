@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+
 import { bootGame } from './boot.js';
 
 const captureWindowErrors = (): unknown[] => {

@@ -1,4 +1,4 @@
-import type { Attributes, ComponentType, ReactElement } from 'react';
+import { type Attributes, type ComponentType, type ReactElement } from 'react';
 
 export default function mapPropsToElement<P>(
   Component: ComponentType<P>,

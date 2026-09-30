@@ -2,13 +2,13 @@ import assertCompilerOptions, {
   type CompilerOptions,
 } from './assert-compiler-options.js';
 
+const isNotString = (value: unknown): value is string =>
+  typeof value !== 'string';
+
 export interface TSConfig {
   readonly compilerOptions: CompilerOptions;
   readonly exclude?: readonly string[] | undefined;
 }
-
-const isNotString = (value: unknown): value is string =>
-  typeof value !== 'string';
 
 export default function assertTSConfig(
   tsConfig: unknown,

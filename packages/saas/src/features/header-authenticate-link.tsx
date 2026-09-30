@@ -1,15 +1,16 @@
 import I18n, { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { type ReactElement, useMemo } from 'react';
+
 import {
   PATREON_OAUTH_CLIENT_ID,
   PATREON_OAUTH_REDIRECT_URI,
 } from '../constants/patreon-oauth.js';
 import { useSessionId } from '../contexts/session-id.js';
+import { Link } from '../design-systems/template/index.js';
 import usePathname from '../hooks/use-pathname.js';
 import useSearch from '../hooks/use-search.js';
 import validateString from '../utils/validate-string.js';
 import styles from './header-authenticate-link.module.scss';
-import { Link } from '../design-systems/template/index.js';
 
 interface State {
   readonly href: string;

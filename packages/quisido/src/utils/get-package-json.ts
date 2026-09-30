@@ -1,4 +1,5 @@
 import { join } from 'node:path';
+
 import parseJsonFile from './parse-json-file.js';
 
 export default async function getPackageJson(): Promise<

@@ -3,10 +3,13 @@
     "declarationDir": "dist",
     "outDir": "dist",
     "rootDir": ".",
+    // `@cloudflare/workers-types` is incompatible with `@types/node`.
+    "skipLibCheck": true,
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "extends": "quisido/tsconfig.json",
   "include": [
+    "scripts/",
     "src/",
     "test/",
     "*.json",

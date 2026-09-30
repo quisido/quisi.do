@@ -1,10 +1,11 @@
 'use client';
 
 import { type ComponentType, type ReactElement, type ReactNode } from 'react';
-import Loading from '../../components/loading/index.js';
+
 import LoadingComponentContext from '../../contexts/loading-component.js';
 import TranslateFunctionContext from '../../contexts/translate-function.js';
-import type { Translations } from '../../types/translations.js';
+import { type Translations } from '../../types/translations.js';
+import Loading from '../loading/index.js';
 import useProvider from './provider.hook.js';
 
 interface Props<T extends Record<string, Translations | undefined>> {

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import mapRequestInitToTestHeaders from './map-request-init-to-test-headers.js';
 
 describe('mapRequestInitToTestHeaders', (): void => {

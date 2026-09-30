@@ -1,12 +1,13 @@
-import type { PropsWithChildren, ReactElement } from 'react';
-import Document from '../design-systems/template/document.js';
+import { type PropsWithChildren, type ReactElement } from 'react';
+
+import { Document, Link } from '../components/design-system.js';
 
 const YEAR: number = new Date().getFullYear();
 
 export default function Page({ children }: PropsWithChildren): ReactElement {
   return (
     <Document
-      banner={<a href="/">quisi.do</a>}
+      banner={<Link href="/">quisi.do</Link>}
       contentInfo={<>&copy; {YEAR} quisi.do</>}
     >
       {children}

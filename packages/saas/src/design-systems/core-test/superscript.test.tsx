@@ -1,6 +1,7 @@
-import render from './render.js';
 import { describe, it } from 'vitest';
+
 import importTestedDesignSystem from './import-tested-design-system.js';
+import render from './render.js';
 
 const { Superscript } = await importTestedDesignSystem();
 

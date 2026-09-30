@@ -1,19 +1,19 @@
+import reactCompilerPlugin from 'eslint-plugin-react-compiler';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 import { defineESLintConfig, type ESLintConfig } from 'quisido';
-import reactCompiler from 'eslint-plugin-react-compiler';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
 
 const CONFIG: readonly ESLintConfig[] = defineESLintConfig(
   // Plugins: react-compiler, react-hooks, react-refresh
   {
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
-      'react-compiler': reactCompiler,
+      'react-compiler': reactCompilerPlugin,
       'react-hooks': {
-        ...reactHooks,
+        ...reactHooksPlugin,
         configs: {},
       },
-      'react-refresh': reactRefresh,
+      'react-refresh': reactRefreshPlugin,
     },
     rules: {
       'react-compiler/react-compiler': 'error',

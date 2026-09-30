@@ -1,8 +1,9 @@
 import { StatusCode } from 'cloudflare-utils';
-import AnalyticsResponseInit from './analytics-response-init.js';
-import FatalError from '../utils/fatal-error.js';
-import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { toError } from 'fmrs';
+
+import type AuthnFetchHandler from '../authn-fetch-handler.js';
+import FatalError from '../utils/fatal-error.js';
+import AnalyticsResponseInit from './analytics-response-init.js';
 import UnknownAnalyticsErrorResponse from './unknown-analytics-error-response.js';
 
 export default function handleAnalyticsError(

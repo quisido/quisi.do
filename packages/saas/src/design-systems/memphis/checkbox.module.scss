@@ -1,0 +1,155 @@
+.root {
+  --ink: #111018;
+  align-items: center;
+  color: var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  gap: 1.15rem;
+  isolation: isolate;
+  margin: 2rem;
+  min-height: 5.5rem;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+
+  &:has(> .checkbox:focus-visible) {
+    outline: 4px solid #7027e8;
+    outline-offset: 9px;
+  }
+
+  &:has(> .checkbox:disabled) { cursor: not-allowed; filter: grayscale(0.72); opacity: 0.58; }
+  &:hover:not(:has(> .checkbox:disabled)) .art { transform: rotate(3deg) scale(1.06); }
+  &:active:not(:has(> .checkbox:disabled)) .art { transform: translate(5px, 6px) rotate(0); }
+}
+
+.checkbox {
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
+.label {
+  background: #ffe72e;
+  border: 3px solid var(--ink);
+  box-shadow: 7px 7px 0 #ff4e91;
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.045em;
+  line-height: 1;
+  max-width: 13rem;
+  padding: 0.58rem 0.8rem 0.48rem;
+  position: relative;
+  text-transform: uppercase;
+  transform: rotate(1.5deg);
+}
+
+.art {
+  display: block;
+  flex: 0 0 5.25rem;
+  height: 5.25rem;
+  position: relative;
+  transform: rotate(-4deg);
+  transition: transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.shadow,
+.tile {
+  border: 4px solid var(--ink);
+  clip-path: polygon(8% 3%, 87% 0, 100% 20%, 93% 88%, 69% 100%, 9% 92%, 0 66%);
+  inset: 0.25rem;
+  position: absolute;
+}
+
+.shadow { background: #ff4b42; transform: translate(9px, 10px); z-index: -2; }
+.tile { background: #16d9ee; overflow: hidden; z-index: 1; }
+.tile::before {
+  background: repeating-linear-gradient(135deg, transparent 0 8px, rgb(255 255 255 / 32%) 9px 13px, transparent 14px 22px);
+  content: '';
+  inset: 0;
+  position: absolute;
+}
+
+.mark {
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  transform: scale(0.2) rotate(-25deg);
+  transition: transform 180ms cubic-bezier(0.2, 1.5, 0.5, 1);
+  width: 100%;
+}
+
+.mark::before,
+.mark::after { background: var(--ink); content: ''; position: absolute; }
+.mark::before { height: 1rem; left: 0.8rem; top: 2.35rem; transform: rotate(42deg); width: 2rem; }
+.mark::after { height: 1rem; left: 1.75rem; top: 1.75rem; transform: rotate(-48deg); width: 3rem; }
+
+.sun {
+  background: #ffe52d;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  height: 1.45rem;
+  left: -0.35rem;
+  position: absolute;
+  top: -0.45rem;
+  width: 1.45rem;
+  z-index: 3;
+}
+
+.triangle {
+  background: #7b2df2;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  height: 1.8rem;
+  position: absolute;
+  right: -0.55rem;
+  top: -0.3rem;
+  transform: rotate(20deg);
+  width: 2rem;
+  z-index: 3;
+}
+
+.sprinkles {
+  background: radial-gradient(circle, var(--ink) 0 2px, transparent 2.5px) 0 0 / 11px 11px;
+  bottom: -0.45rem;
+  height: 1.5rem;
+  left: -0.4rem;
+  position: absolute;
+  transform: rotate(-8deg);
+  width: 2.8rem;
+  z-index: -3;
+}
+
+.checkbox:checked + .art .tile { background: #ff3c91; }
+.checkbox:checked + .art .mark { transform: scale(1) rotate(0); }
+.checkbox:checked + .art .sun { background: #68ed43; transform: scale(1.15); }
+
+.checkbox:indeterminate + .art .tile { background: #ff783d; }
+.checkbox:indeterminate + .art .mark { transform: scale(1) rotate(0); }
+.checkbox:indeterminate + .art .mark::before {
+  background: #fff34a;
+  border: 4px solid var(--ink);
+  height: 0.85rem;
+  left: 0.65rem;
+  top: 1.65rem;
+  transform: rotate(-3deg);
+  width: 3.25rem;
+}
+.checkbox:indeterminate + .art .mark::after { display: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun { animation: orbit 3.6s ease-in-out infinite; }
+  .sprinkles { animation: shimmy 2.8s ease-in-out infinite; }
+}
+
+@keyframes orbit { 50% { transform: translateY(-0.25rem) rotate(12deg); } }
+@keyframes shimmy { 50% { transform: translateX(0.25rem) rotate(2deg); } }
+
+@media (forced-colors: active) {
+  .tile,
+  .shadow,
+  .label,
+  .sun { forced-color-adjust: none; }
+}

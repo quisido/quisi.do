@@ -1,0 +1,141 @@
+.paragraph {
+  --ink: #17131f;
+  --paper: #fff7dc;
+
+  background:
+    radial-gradient(circle at 87% 18%, rgb(255 255 255 / 82%) 0 0.18rem, transparent 0.2rem) 0 0 / 1.25rem 1.25rem,
+    linear-gradient(112deg, transparent 0 68%, rgb(255 62 146 / 16%) 68% 72%, transparent 72%),
+    var(--paper);
+  border: 0.2rem solid var(--ink);
+  border-radius: 1.1rem 0.35rem 1.65rem 0.5rem;
+  box-shadow:
+    0.48rem 0.48rem 0 #ff3e92,
+    0.82rem 0.82rem 0 var(--ink),
+    1.12rem 1.12rem 0 #18d8c2;
+  box-sizing: border-box;
+  color: var(--ink);
+  display: block;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: clamp(1.05rem, 2.3vw, 1.35rem);
+  font-weight: 650;
+  isolation: isolate;
+  letter-spacing: 0.012em;
+  line-height: 1.65;
+  margin: clamp(2.8rem, 7vw, 5rem) clamp(1.5rem, 6vw, 4rem);
+  max-width: 48rem;
+  padding: clamp(2.4rem, 7vw, 4.5rem) clamp(1.35rem, 6vw, 4rem);
+  position: relative;
+  transform: rotate(-0.65deg);
+}
+
+.content {
+  background: linear-gradient(transparent 68%, #ffe42e 68% 91%, transparent 91%) 0 0 / 100% 1.65em;
+  box-decoration-break: clone;
+  display: inline;
+  filter: drop-shadow(0.06rem 0.08rem 0 rgb(255 255 255 / 90%));
+  position: relative;
+  z-index: 4;
+}
+
+.sun,
+.triangle,
+.confetti,
+.squiggle {
+  pointer-events: none;
+  position: absolute;
+}
+
+.sun {
+  background: repeating-conic-gradient(#ff6b24 0 12deg, #ffe42e 12deg 24deg);
+  border: 0.2rem solid var(--ink);
+  border-radius: 50%;
+  height: clamp(4.8rem, 15vw, 7rem);
+  right: -2.2rem;
+  top: -2.8rem;
+  width: clamp(4.8rem, 15vw, 7rem);
+  z-index: -1;
+}
+
+.triangle {
+  background: #7851ff;
+  bottom: -2.35rem;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(0.22rem 0.26rem 0 var(--ink));
+  height: 4.8rem;
+  left: -1.65rem;
+  transform: rotate(-18deg);
+  width: 5.1rem;
+  z-index: 2;
+}
+
+.confetti {
+  background:
+    radial-gradient(circle, #ff3e92 0 0.22rem, transparent 0.24rem) 0 0 / 1.35rem 1.35rem,
+    radial-gradient(circle, #176cff 0 0.14rem, transparent 0.16rem) 0.68rem 0.68rem / 1.35rem 1.35rem;
+  height: 3.6rem;
+  left: 1rem;
+  top: -1.65rem;
+  transform: rotate(-7deg);
+  width: 6.3rem;
+  z-index: 3;
+}
+
+.squiggle {
+  border: 0.32rem solid #176cff;
+  border-left-color: transparent;
+  border-radius: 50%;
+  bottom: -1.15rem;
+  height: 1.25rem;
+  right: 12%;
+  transform: rotate(4deg) skewX(-22deg);
+  width: 5.2rem;
+  z-index: 5;
+}
+
+.squiggle::after {
+  border: inherit;
+  border-right-color: transparent;
+  border-radius: inherit;
+  content: "";
+  height: 100%;
+  position: absolute;
+  right: 82%;
+  top: -0.32rem;
+  width: 72%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun { animation: slow-spin 22s linear infinite; }
+  .squiggle { animation: wiggle 5s ease-in-out infinite alternate; }
+}
+
+@keyframes slow-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes wiggle {
+  to { transform: rotate(1deg) skewX(-16deg) scaleX(1.06); }
+}
+
+@media (max-width: 30rem) {
+  .paragraph {
+    box-shadow: 0.35rem 0.35rem 0 #ff3e92, 0.62rem 0.62rem 0 var(--ink), 0.88rem 0.88rem 0 #18d8c2;
+    margin-inline: 1.15rem;
+  }
+
+  .triangle { transform: rotate(-18deg) scale(0.78); }
+}
+
+@media (forced-colors: active) {
+  .sun,
+  .triangle,
+  .confetti,
+  .squiggle {
+    display: none;
+  }
+
+  .paragraph {
+    border: 0.2rem solid CanvasText;
+    box-shadow: none;
+  }
+}

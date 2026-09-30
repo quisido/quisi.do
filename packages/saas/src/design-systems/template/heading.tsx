@@ -1,10 +1,10 @@
-/* eslint-disable no-magic-numbers */
-import type { ReactElement } from 'react';
-import type { HeadingProps } from '../core/heading-props.js';
-import classes from './heading.module.scss';
+import { type ReactElement } from 'react';
+
 import isDefined from '../../utils/is-defined.js';
-import isRequiredReactNode from './is-required-react-node.js';
+import { type HeadingProps } from '../core/heading-props.js';
 import useHeading from '../core/use-heading.js';
+import classes from './heading.module.scss';
+import isRequiredReactNode from './is-required-react-node.js';
 
 /**
  * A heading is a heading for a section of the page.

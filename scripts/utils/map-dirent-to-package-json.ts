@@ -1,6 +1,7 @@
 import { type Dirent } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+
 import type PackageJson from '../../types/package-json.js';
 
 export default async function mapDirentToPackageJson(

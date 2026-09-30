@@ -1,4 +1,4 @@
-import type { Key, ReactNode } from 'react';
+import { type Key, type ReactNode } from 'react';
 
 interface Props<T extends string | number = string | number> {
   readonly children?: ReactNode | undefined;

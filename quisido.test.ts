@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import codeWorkspace from './quisido.code-workspace' with { type: 'json' };
+
 import vsCodeSettings from './.vscode/settings.json' with { type: 'json' };
+import codeWorkspace from './quisido.code-workspace' with { type: 'json' };
 
 describe('VS Code workspace', (): void => {
   describe('settings', (): void => {

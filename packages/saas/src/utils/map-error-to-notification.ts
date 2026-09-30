@@ -1,5 +1,6 @@
 import { toString } from 'fmrs';
-import type { NoActionNotification } from '../types/notification.js';
+
+import { type NoActionNotification } from '../types/notification.js';
 
 export default function mapErrorToNotification(
   err: unknown,

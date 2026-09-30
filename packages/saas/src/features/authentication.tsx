@@ -1,6 +1,7 @@
 import { WhoAmIResponseCode } from '@quisido/authn-shared';
 import { isObject } from 'fmrs';
 import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
+
 import { WHOAMI } from '../constants/whoami.js';
 import { AuthenticationProvider } from '../contexts/authentication.js';
 import useEffectEvent from '../hooks/use-effect-event.js';

@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { ParagraphProps } from '../core/paragraph-props.js';
+import { type ReactElement } from 'react';
+
+import { type ParagraphProps } from '../core/paragraph-props.js';
 import classes from './paragraph.module.scss';
 
 /**
@@ -8,10 +9,15 @@ import classes from './paragraph.module.scss';
  */
 export default function Paragraph({
   children,
+  className: classNameProp,
   id,
 }: ParagraphProps): ReactElement {
+  const className: string = [classes['paragraph'], classNameProp]
+    .filter(Boolean)
+    .join(' ');
+
   return (
-    <p className={classes['paragraph']} id={id}>
+    <p className={className} id={id}>
       {children}
     </p>
   );

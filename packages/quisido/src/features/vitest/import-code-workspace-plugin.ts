@@ -1,4 +1,4 @@
-import type { Plugin } from 'vitest/config';
+import { type Plugin } from 'vitest/config';
 
 export const IMPORT_CODE_WORKSPACE_PLUGIN: Plugin = {
   enforce: 'pre',

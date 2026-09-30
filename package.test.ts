@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import packageJson from './package.json' with { type: 'json' };
 import type PackageJson from './types/package-json.js';
 import mapDirectoryToPackageJson from './utils/map-directory-to-package-json.js';

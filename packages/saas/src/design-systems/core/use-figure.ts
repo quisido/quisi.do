@@ -1,4 +1,4 @@
-import type { FigureProps } from './figure-props.js';
+import { type FigureProps } from './figure-props.js';
 import useId from './use-id.js';
 
 export interface FigureState {

@@ -1,6 +1,7 @@
 import { config } from 'dotenv';
-import validateString from './validate-string.js';
+
 import mapNodeEnvToEnvPath from './map-node-env-to-env-path.js';
+import validateString from './validate-string.js';
 
 // ESLint prefers dot notation, because it is using bun types.
 // TypeScript prefers bracket notation, because it is using Node types.

@@ -1,5 +1,7 @@
 import autoprefixer from 'autoprefixer';
 
-export default {
+const POSTCSS_CONFIG = {
   plugins: [autoprefixer()],
 };
+
+export default POSTCSS_CONFIG;

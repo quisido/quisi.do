@@ -1,0 +1,140 @@
+.log {
+  --acid: #d9ff43;
+  --blue: #32c9ff;
+  --coral: #ff5a5f;
+  --ink: #18151f;
+  --paper: #fff7dc;
+  --pink: #ff8bd4;
+  background:
+    radial-gradient(circle at 14% 12%, var(--pink) 0 0.55rem, transparent 0.6rem),
+    radial-gradient(circle at 88% 82%, var(--blue) 0 0.4rem, transparent 0.45rem),
+    linear-gradient(115deg, transparent 0 73%, #ffd429 73% 78%, transparent 78%),
+    repeating-linear-gradient(0deg, transparent 0 2.35rem, #18151f0f 2.35rem 2.45rem),
+    var(--paper);
+  border: 0.3rem solid var(--ink);
+  box-shadow:
+    0.65rem 0.65rem 0 var(--blue),
+    1rem 1rem 0 var(--ink),
+    1.5rem 1.5rem 0 var(--coral);
+  box-sizing: border-box;
+  color: var(--ink);
+  counter-reset: signal;
+  display: grid;
+  font-family: Arial, Helvetica, sans-serif;
+  gap: 1.1rem;
+  isolation: isolate;
+  margin: clamp(1.5rem, 5vw, 3.5rem);
+  max-height: min(42rem, 78vh);
+  max-width: 46rem;
+  overflow: auto;
+  padding: clamp(4.7rem, 11vw, 7rem) clamp(1rem, 5vw, 3.2rem) clamp(2rem, 6vw, 3.5rem);
+  position: relative;
+  scrollbar-color: var(--coral) var(--ink);
+  scrollbar-width: auto;
+}
+
+.log::before {
+  background:
+    linear-gradient(135deg, var(--ink) 0 47%, transparent 48%) 0 0 / 1.2rem 1.2rem,
+    linear-gradient(315deg, var(--ink) 0 47%, transparent 48%) 0.6rem 0 / 1.2rem 1.2rem,
+    var(--acid);
+  border-bottom: 0.3rem solid var(--ink);
+  content: 'LIVE  /  SIGNAL ARCHIVE';
+  font: 900 clamp(0.72rem, 2vw, 1rem)/1 Arial, sans-serif;
+  inset: 0 0 auto;
+  letter-spacing: 0.13em;
+  padding: 1rem clamp(1rem, 4vw, 2rem);
+  position: absolute;
+  text-shadow: 2px 2px 0 var(--paper);
+}
+
+.log::after {
+  background: conic-gradient(from 45deg, var(--coral) 0 25%, var(--ink) 0 50%, var(--pink) 0 75%, var(--blue) 0);
+  border: 0.25rem solid var(--ink);
+  border-radius: 50%;
+  box-shadow: 0.35rem 0.35rem 0 var(--ink);
+  content: '';
+  height: 3.3rem;
+  position: absolute;
+  right: clamp(0.8rem, 4vw, 2rem);
+  top: 2.55rem;
+  transform: rotate(12deg);
+  width: 3.3rem;
+}
+
+.log > * {
+  background: #ffffffd9;
+  border: 0.2rem solid var(--ink);
+  box-shadow: 0.38rem 0.38rem 0 var(--ink);
+  box-sizing: border-box;
+  counter-increment: signal;
+  font-size: clamp(0.95rem, 2.5vw, 1.12rem);
+  font-weight: 700;
+  line-height: 1.45;
+  margin: 0;
+  min-width: 0;
+  padding: 1.1rem 1.15rem 1.1rem clamp(3.5rem, 10vw, 5rem);
+  position: relative;
+  transform: rotate(-0.7deg);
+}
+
+.log > *::before {
+  align-items: center;
+  background: var(--coral);
+  border-right: 0.2rem solid var(--ink);
+  content: counter(signal, decimal-leading-zero);
+  display: flex;
+  font: 900 1rem/1 Arial, sans-serif;
+  inset: 0 auto 0 0;
+  justify-content: center;
+  position: absolute;
+  width: clamp(2.7rem, 8vw, 4rem);
+}
+
+.log > *:nth-child(even) {
+  background: var(--blue);
+  transform: rotate(0.7deg) translateX(clamp(0rem, 2vw, 0.8rem));
+}
+
+.log > *:nth-child(3n)::before { background: var(--pink); }
+.log > *:nth-child(4n)::before { background: var(--acid); }
+
+.log > *:last-child {
+  box-shadow: 0.38rem 0.38rem 0 var(--ink), 0.72rem 0.72rem 0 var(--acid);
+}
+
+.log > *:last-child::after {
+  background: var(--coral);
+  border: 0.15rem solid var(--ink);
+  border-radius: 50%;
+  content: '';
+  height: 0.7rem;
+  position: absolute;
+  right: 0.8rem;
+  top: 0.8rem;
+  width: 0.7rem;
+}
+
+@media (max-width: 32rem) {
+  .log {
+    box-shadow: 0.45rem 0.45rem 0 var(--blue), 0.75rem 0.75rem 0 var(--ink), 1.05rem 1.05rem 0 var(--coral);
+    margin: 1rem;
+    padding-inline: 0.85rem;
+  }
+
+  .log::before { letter-spacing: 0.06em; }
+  .log::after { opacity: 0.55; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .log::after { animation: signal-orbit 12s linear infinite; }
+  .log > *:last-child::after { animation: signal-pulse 1.8s ease-in-out infinite; }
+}
+
+@keyframes signal-orbit {
+  to { transform: rotate(372deg); }
+}
+
+@keyframes signal-pulse {
+  50% { box-shadow: 0 0 0 0.45rem #ff5a5f4d; transform: scale(0.75); }
+}

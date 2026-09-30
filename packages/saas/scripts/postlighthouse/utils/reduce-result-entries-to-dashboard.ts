@@ -1,4 +1,4 @@
-import type { LighthouseRunResult } from './lighthouse-run-result.js';
+import { type LighthouseRunResult } from './lighthouse-run-result.js';
 
 type DashboardResultKey = keyof Omit<LighthouseRunResult, 'audits'>;
 type DashboardResultValue = Omit<

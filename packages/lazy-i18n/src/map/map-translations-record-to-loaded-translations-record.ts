@@ -1,6 +1,6 @@
 import isDefaultStringRecordExport from '../is/is-default-string-record-export.js';
 import isStringRecord from '../is/is-string-record.js';
-import type { Translations } from '../types/translations.js';
+import { type Translations } from '../types/translations.js';
 
 const DEFAULT_LOADED_TRANSLATIONS_RECORD: Readonly<
   Record<number | string | symbol, undefined>

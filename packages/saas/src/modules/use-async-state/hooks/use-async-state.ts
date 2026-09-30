@@ -1,5 +1,6 @@
 import { toString } from 'fmrs';
 import { type RefObject, useCallback, useRef, useState } from 'react';
+
 import type AsyncState from '../types/async-state.js';
 import useGetState from './use-get-state.js';
 
@@ -15,14 +16,14 @@ interface Props {
   readonly onError?: ((error: unknown) => void) | undefined;
 }
 
-export type State<T> = AsyncState<T> & BaseState<T>;
-
 const DEFAULT_ASYNC_STATE = {
   data: undefined,
   error: undefined,
   initiated: false,
   loading: false,
 } satisfies AsyncState<unknown>;
+
+export type State<T> = AsyncState<T> & BaseState<T>;
 
 export default function useAsyncState<T = unknown>({
   onError,

@@ -1,4 +1,5 @@
 import { toIndex } from 'fmrs';
+
 import increment from './increment.js';
 
 export default function createAscendingArray(length: number): number[] {

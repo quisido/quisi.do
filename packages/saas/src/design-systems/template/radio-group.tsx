@@ -1,5 +1,6 @@
-import type { ChangeEvent, ReactElement } from 'react';
-import type { Radio, RadioGroupProps } from '../core/radio-group-props.js';
+import { type ChangeEvent, type ReactElement } from 'react';
+
+import { type Radio, type RadioGroupProps } from '../core/radio-group-props.js';
 import useRadioGroup from '../core/use-radio-group.js';
 import classes from './radio-group.module.scss';
 

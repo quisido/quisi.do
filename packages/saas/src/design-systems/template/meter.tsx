@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { MeterProps } from '../core/meter-props.js';
+import { type ReactElement } from 'react';
+
+import { type MeterProps } from '../core/meter-props.js';
 import useMeter from '../core/use-meter.js';
 import classes from './meter.module.scss';
 

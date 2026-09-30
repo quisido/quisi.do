@@ -1,13 +1,7 @@
-import type { ReactNode } from 'react';
-import type { OneOf } from './one-of.js';
-import type { RequiredReactNode } from './required-react-node.js';
+import { type ReactNode } from 'react';
 
-export interface ListBoxOption {
-  readonly children: ReactNode;
-  readonly value: string;
-}
-
-export type ListBoxProps = OneOf<OneOfProps> & Props;
+import { type OneOf } from './one-of.js';
+import { type RequiredReactNode } from './required-react-node.js';
 
 interface OneOfProps {
   readonly label: RequiredReactNode;
@@ -23,3 +17,10 @@ interface Props {
   readonly orientation?: 'horizontal' | 'vertical' | undefined;
   readonly values: ReadonlySet<string>;
 }
+
+export interface ListBoxOption {
+  readonly children: ReactNode;
+  readonly value: string;
+}
+
+export type ListBoxProps = OneOf<OneOfProps> & Props;
