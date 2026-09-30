@@ -1,3 +1,4 @@
 export default function isEnglish(voice: SpeechSynthesisVoice): boolean {
-  return voice.lang.startsWith('en');
+  const lang: string = voice.lang.toLowerCase();
+  return lang === 'en' || lang.startsWith('en-');
 }

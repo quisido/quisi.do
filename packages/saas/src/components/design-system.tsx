@@ -1,4 +1,4 @@
-import { type MouseEvent, type ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { useNavigate } from 'react-router';
 
 import {
@@ -77,9 +77,9 @@ export const Link = (props: LinkProps): ReactElement => {
 
   return (
     <DesignSystemLink
+      preventDefault
       {...props}
-      onClick={(ev: MouseEvent) => {
-        ev.preventDefault();
+      onClick={(): void => {
         const promise = navigate(props.href);
         if (promise instanceof Promise) {
           void promise.catch(noop);
