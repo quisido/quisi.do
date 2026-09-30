@@ -1,0 +1,76 @@
+.separator {
+  --ink: #17151c;
+  --paper: #fff9e9;
+  --cyan: #00c8f8;
+  --pink: #f20a73;
+  --yellow: #ffd21a;
+
+  position: relative;
+  display: block;
+  width: min(100%, 72rem);
+  height: 5.75rem;
+  margin: 2rem auto;
+  overflow: visible;
+  border: 0;
+  background:
+    radial-gradient(circle at 4% 26%, var(--yellow) 0 0.68rem, transparent 0.72rem),
+    radial-gradient(circle at 8% 74%, var(--ink) 0 0.19rem, transparent 0.23rem),
+    radial-gradient(circle at 23% 20%, #2748f4 0 0.32rem, transparent 0.36rem),
+    radial-gradient(circle at 72% 22%, var(--yellow) 0 0.55rem, transparent 0.6rem),
+    radial-gradient(circle at 89% 72%, var(--ink) 0 0.22rem, transparent 0.26rem),
+    linear-gradient(165deg, transparent 0 42%, var(--cyan) 42.5% 48%, transparent 48.5%),
+    linear-gradient(168deg, transparent 0 48%, var(--ink) 48.5% 57%, transparent 57.5%),
+    linear-gradient(171deg, transparent 0 56%, var(--pink) 56.5% 62%, transparent 62.5%);
+  filter: drop-shadow(0 0.3rem 0 rgb(23 21 28 / 12%));
+  isolation: isolate;
+  transform: rotate(-0.35deg);
+
+  &::before {
+    position: absolute;
+    z-index: 2;
+    inset: 1.65rem 5% auto;
+    height: 2.55rem;
+    background: var(--ink);
+    clip-path: polygon(0 45%, 8% 8%, 12% 68%, 20% 27%, 28% 61%, 37% 15%, 45% 70%, 54% 31%, 63% 80%, 72% 24%, 78% 63%, 88% 14%, 91% 69%, 100% 21%, 92% 90%, 87% 47%, 78% 96%, 72% 55%, 63% 100%, 54% 58%, 45% 94%, 37% 43%, 28% 91%, 20% 54%, 12% 100%, 8% 38%);
+    content: '';
+  }
+
+  &::after {
+    position: absolute;
+    z-index: 3;
+    top: 0.7rem;
+    left: 16%;
+    width: 1.15rem;
+    height: 1.15rem;
+    background: #2748f4;
+    box-shadow:
+      12rem 3.7rem 0 -0.28rem var(--yellow),
+      27rem 0.4rem 0 -0.12rem var(--pink),
+      41rem 3.85rem 0 -0.28rem var(--ink),
+      52rem 0.65rem 0 -0.18rem #2748f4;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    content: '';
+    transform: rotate(-7deg);
+  }
+
+  &[data-orientation='vertical'] {
+    width: 5.75rem;
+    height: min(72vh, 42rem);
+    margin: 1rem 2rem;
+    background-size: 100% 100%;
+    transform: rotate(89.65deg) scaleX(calc(min(72vh, 42rem) / 72rem));
+    transform-origin: 2.875rem 2.875rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .separator::after {
+    animation: confetti-drift 5s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes confetti-drift {
+  to {
+    transform: translateY(-0.22rem) rotate(5deg);
+  }
+}

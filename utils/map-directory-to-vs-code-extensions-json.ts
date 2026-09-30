@@ -1,6 +1,7 @@
 import { type Dirent } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+
 import type VSCodeExtensionsJson from '../types/vs-code-extensions-json.js';
 import validateVSCodeExtensions from './validate-vs-code-extensions-json.js';
 

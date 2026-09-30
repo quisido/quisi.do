@@ -3,6 +3,7 @@ import {
   TestAnalyticsEngineDataset,
 } from 'cloudflare-test-utils';
 import { assert, describe, it } from 'vitest';
+
 import { TestExportedHandler } from '../test/test-exported-handler.js';
 import { FetchHandler } from './index.js';
 

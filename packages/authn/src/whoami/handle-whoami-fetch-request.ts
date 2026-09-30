@@ -1,11 +1,12 @@
 import { ErrorCode, WhoAmIResponseCode } from '@quisido/authn-shared';
 import { StatusCode } from 'cloudflare-utils';
 import { toError } from 'fmrs';
+
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import FatalError from '../utils/fatal-error.js';
-import WhoAmIResponseInit from './whoami-response-init.js';
 import WhoAmIResponse from './whoami-response.js';
+import WhoAmIResponseInit from './whoami-response-init.js';
 
 const BASE = 10;
 

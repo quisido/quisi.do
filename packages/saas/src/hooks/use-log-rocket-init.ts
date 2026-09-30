@@ -1,31 +1,13 @@
 import { identity } from 'fmrs';
 import { useEffect } from 'react';
-import useLogRocket from '../hooks/use-log-rocket.js';
-import type { Compulsory } from '../types/compulsory.js';
+
+import { type Compulsory } from '../types/compulsory.js';
 import {
   type LogRocketOptions,
   type LogRocketRequest,
   type LogRocketResponse,
 } from '../types/log-rocket.js';
-
-export interface User extends Record<string, number | string> {
-  readonly id: string;
-}
-
-export interface Props {
-  readonly appId: string;
-  readonly release?: string | undefined;
-  readonly rootHostname?: string | undefined;
-  readonly sanitizeRequest?:
-    ((request: LogRocketRequest) => LogRocketRequest | null) | undefined;
-  readonly sanitizeResponse?:
-    | ((
-        request: LogRocketRequest | undefined,
-        response: LogRocketResponse,
-      ) => LogRocketResponse | null)
-    | undefined;
-  readonly user?: User | undefined;
-}
+import useLogRocket from './use-log-rocket.js';
 
 const BROWSER: Required<Compulsory<LogRocketOptions['browser']>> = {
   urlSanitizer(): string | null {
@@ -100,6 +82,25 @@ const defaultResponseSanitizer = (
   _request: LogRocketRequest | undefined,
   response: LogRocketResponse,
 ): LogRocketResponse => response;
+
+export interface User extends Record<string, number | string> {
+  readonly id: string;
+}
+
+export interface Props {
+  readonly appId: string;
+  readonly release?: string | undefined;
+  readonly rootHostname?: string | undefined;
+  readonly sanitizeRequest?:
+    ((request: LogRocketRequest) => LogRocketRequest | null) | undefined;
+  readonly sanitizeResponse?:
+    | ((
+        request: LogRocketRequest | undefined,
+        response: LogRocketResponse,
+      ) => LogRocketResponse | null)
+    | undefined;
+  readonly user?: User | undefined;
+}
 
 export default function useLogRocketInit({
   appId,

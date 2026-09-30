@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { StatusCode, TransparentIcoResponse } from './index.js';
 
 describe('TransparentIcoResponse', (): void => {

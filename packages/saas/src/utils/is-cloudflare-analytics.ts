@@ -1,6 +1,7 @@
 import { isRecord } from 'fmrs';
-import type CloudflareAnalyticsDatasets from '../types/cloudflare-analytics-datasets.js';
+
 import type CloudflareAnalytics from '../types/cloudflare-analytics.js';
+import type CloudflareAnalyticsDatasets from '../types/cloudflare-analytics-datasets.js';
 
 const hasNumericKeys = <K extends string>(
   record: Record<string, unknown>,

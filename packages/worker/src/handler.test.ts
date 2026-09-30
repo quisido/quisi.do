@@ -1,11 +1,12 @@
-import { describe, expect, it, vi } from 'vitest';
-import Handler from './handler.js';
 import {
   TEST_CONSOLE,
   TEST_EXECUTION_CONTEXT,
   TestKVNamespace,
 } from 'cloudflare-test-utils';
 import { Pricing } from 'cloudflare-utils';
+import { describe, expect, it, vi } from 'vitest';
+
+import Handler from './handler.js';
 import { SECONDS_PER_YEAR } from './time.js';
 
 describe('Handler', (): void => {

@@ -1,6 +1,7 @@
-import render from './render.js';
 import { describe, it } from 'vitest';
+
 import importTestedDesignSystem from './import-tested-design-system.js';
+import render from './render.js';
 
 // Note: The image role in ARIA 1.3 is `image` instead of `img`.
 

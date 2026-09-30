@@ -1,4 +1,4 @@
-import type { Dimensions } from '../types/dimensions.js';
+import { type Dimensions } from '../types/dimensions.js';
 
 interface Zaraz {
   readonly track: (

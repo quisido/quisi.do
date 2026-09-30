@@ -4,6 +4,7 @@ import {
   useEffect,
   useMemo,
 } from 'react';
+
 import useHostname from '../hooks/use-hostname.js';
 import useTelemetrySdkLanguage from '../hooks/use-telemetry-sdk-language.js';
 import TracerProviderProvider from '../modules/react-tracer/index.js';

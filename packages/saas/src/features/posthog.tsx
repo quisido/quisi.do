@@ -6,14 +6,15 @@ import {
   useEffect,
   useLayoutEffect,
 } from 'react';
+
 import {
   type AuthenticationState,
   useAuthentication,
 } from '../contexts/authentication.js';
 import validateString from '../utils/validate-string.js';
 
-const API_HOST: string = validateString(import.meta.env.POSTHOG_HOST);
-const TOKEN: string = validateString(import.meta.env.POSTHOG_KEY);
+const API_HOST: string = validateString(import.meta.env['POSTHOG_HOST']);
+const TOKEN: string = validateString(import.meta.env['POSTHOG_KEY']);
 
 export default function PostHog({ children }: PropsWithChildren): ReactElement {
   // Contexts

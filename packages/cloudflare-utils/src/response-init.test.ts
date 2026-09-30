@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import ResponseInitImpl from './response-init.js';
 
 const TEST_HEADERS = new Headers();

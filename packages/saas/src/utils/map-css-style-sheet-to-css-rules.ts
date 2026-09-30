@@ -1,4 +1,4 @@
-import mapCssRuleListToCssRules from '../utils/map-css-rule-list-to-css-rules.js';
+import mapCssRuleListToCssRules from './map-css-rule-list-to-css-rules.js';
 
 const EMPTY_CSS_RULES = new Set<CSSRule>();
 

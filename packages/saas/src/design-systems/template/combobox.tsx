@@ -8,7 +8,8 @@ import {
   useRef,
   useState,
 } from 'react';
-import type { ComboboxProps } from '../core/combobox-props.js';
+
+import { type ComboboxProps } from '../core/combobox-props.js';
 import useId from '../core/use-id.js';
 import classes from './combobox.module.scss';
 

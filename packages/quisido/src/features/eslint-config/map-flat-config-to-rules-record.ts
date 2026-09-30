@@ -1,14 +1,11 @@
-import type { Config, RuleConfig } from '@eslint/config-helpers';
+import { type Config, type RuleConfig } from '@eslint/config-helpers';
 
-export type RulesRecord = Partial<Record<string, RuleConfig>>;
-
-const reduceToRecord = (
-  record: RulesRecord,
-  config: Config,
-): RulesRecord => ({
+const reduceToRecord = (record: RulesRecord, config: Config): RulesRecord => ({
   ...record,
   ...config.rules,
 });
+
+export type RulesRecord = Partial<Record<string, RuleConfig>>;
 
 export default function mapFlatConfigToRulesRecord(
   configs: readonly Partial<Record<'rules', RulesRecord>>[],

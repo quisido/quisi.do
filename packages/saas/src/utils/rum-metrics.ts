@@ -1,5 +1,5 @@
-import type RumMetricsError from '../types/rum-metrics-error.js';
 import type RumMetricsType from '../types/rum-metrics.js';
+import type RumMetricsError from '../types/rum-metrics-error.js';
 
 interface Options {
   readonly accessKey: string;

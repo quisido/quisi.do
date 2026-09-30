@@ -1,4 +1,4 @@
-import type { ErrorCode } from '@quisido/authn-shared';
+import { type ErrorCode } from '@quisido/authn-shared';
 import { type TestResponse } from '@quisido/worker-test';
 import { expectStringMatching } from 'cloudflare-test-utils';
 import { StatusCode } from 'cloudflare-utils';

@@ -1,7 +1,8 @@
 import { FetchHandler, type MetricDimensions } from '@quisido/worker';
 import { isString } from 'fmrs';
+
 import { PUBLIC } from './constants/metric-dimensions.js';
-import type { MetricName } from './constants/metric-name.js';
+import { type MetricName } from './constants/metric-name.js';
 import handleFetch from './features/handle-fetch.js';
 
 export default class DashboardFetchHandler extends FetchHandler {

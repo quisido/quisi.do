@@ -1,0 +1,194 @@
+.figure {
+  --ink: #15131d;
+  --cream: #fff9df;
+  --cyan: #11d8e8;
+  --pink: #ff4d9b;
+  --yellow: #ffe229;
+  background:
+    linear-gradient(135deg, transparent 0 72%, rgb(21 19 29 / 8%) 72% 74%, transparent 74%) 0 0 / 2rem 2rem,
+    var(--cream);
+  border: 0.28rem solid var(--ink);
+  box-shadow:
+    0.7rem 0.7rem 0 var(--pink),
+    1.05rem 1.05rem 0 var(--ink),
+    1.65rem 1.65rem 0 var(--cyan);
+  box-sizing: border-box;
+  color: var(--ink);
+  display: grid;
+  font-family: Arial, Helvetica, sans-serif;
+  isolation: isolate;
+  margin: clamp(3rem, 8vw, 5rem) clamp(2rem, 7vw, 4.5rem);
+  max-width: 54rem;
+  min-height: 18rem;
+  overflow: visible;
+  padding: clamp(1.2rem, 4vw, 2.25rem);
+  position: relative;
+  transform: rotate(-0.8deg);
+}
+
+.figure::before {
+  background: conic-gradient(from 10deg, var(--yellow), var(--yellow) 12.5%, var(--pink) 0 25%, var(--cyan) 0 37.5%, var(--ink) 0 50%, var(--yellow) 0 62.5%, var(--pink) 0 75%, var(--cyan) 0 87.5%, var(--ink) 0);
+  border: 0.25rem solid var(--ink);
+  border-radius: 50%;
+  content: '';
+  height: clamp(4rem, 12vw, 7rem);
+  position: absolute;
+  right: clamp(-2.5rem, -4vw, -1.4rem);
+  top: clamp(-2.8rem, -5vw, -1.6rem);
+  width: clamp(4rem, 12vw, 7rem);
+  z-index: -2;
+}
+
+.figure::after {
+  background: repeating-linear-gradient(90deg, var(--ink) 0 0.55rem, transparent 0.55rem 1.1rem);
+  bottom: -1.45rem;
+  content: '';
+  height: 0.8rem;
+  left: 25%;
+  position: absolute;
+  transform: skewX(-25deg);
+  width: 42%;
+}
+
+.content {
+  align-items: center;
+  background:
+    radial-gradient(circle at 88% 15%, var(--pink) 0 0.35rem, transparent 0.4rem) 0 0 / 1.3rem 1.3rem,
+    linear-gradient(112deg, #fff 0 67%, #bdf6f4 67%);
+  border: 0.22rem solid var(--ink);
+  box-shadow: inset 0 0 0 0.45rem #ffffffa6;
+  display: grid;
+  min-height: clamp(11rem, 30vw, 20rem);
+  overflow: auto;
+  padding: clamp(1.2rem, 5vw, 3rem);
+  position: relative;
+  z-index: 2;
+}
+
+.content > :first-child { margin-top: 0; }
+.content > :last-child { margin-bottom: 0; }
+
+.content img,
+.content video,
+.content canvas,
+.content svg {
+  height: auto;
+  max-width: 100%;
+}
+
+.content pre {
+  max-width: 100%;
+  overflow: auto;
+}
+
+.caption {
+  align-items: center;
+  background: var(--yellow);
+  border: 0.22rem solid var(--ink);
+  box-shadow: 0.4rem 0.4rem 0 var(--ink);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: clamp(0.82rem, 2vw, 1rem);
+  font-weight: 800;
+  gap: 0.35rem 1.4rem;
+  letter-spacing: 0.08em;
+  margin: 0 0 1.25rem;
+  max-width: 82%;
+  padding: 0.75rem 1rem;
+  position: relative;
+  text-transform: uppercase;
+  transform: rotate(1.8deg) translateX(-0.7rem);
+  z-index: 4;
+}
+
+.content + .caption {
+  margin: 1.25rem 0 0 auto;
+  transform: rotate(-1.8deg) translateX(0.7rem);
+}
+
+.orbit {
+  border: 0.45rem solid var(--cyan);
+  border-radius: 50%;
+  height: 7rem;
+  left: -2.8rem;
+  position: absolute;
+  top: 38%;
+  width: 7rem;
+  z-index: -1;
+}
+
+.orbit::after {
+  background: var(--pink);
+  border: 0.22rem solid var(--ink);
+  border-radius: 50%;
+  content: '';
+  height: 1.5rem;
+  position: absolute;
+  right: -0.4rem;
+  top: 0.2rem;
+  width: 1.5rem;
+}
+
+.confetti {
+  background: radial-gradient(circle, var(--ink) 0 0.16rem, transparent 0.19rem) 0 0 / 0.85rem 0.85rem;
+  height: 4.4rem;
+  position: absolute;
+  right: -1.4rem;
+  top: 46%;
+  transform: rotate(9deg);
+  width: 4.8rem;
+  z-index: 3;
+}
+
+.triangle {
+  background: #7b43f6;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(0.25rem 0.28rem 0 var(--ink));
+  height: 4rem;
+  left: 5%;
+  position: absolute;
+  top: -2.1rem;
+  transform: rotate(-17deg);
+  width: 4.5rem;
+  z-index: 3;
+}
+
+.squiggle {
+  border: solid var(--pink);
+  border-radius: 50%;
+  border-width: 0.65rem 0.65rem 0 0;
+  bottom: -2.5rem;
+  height: 4.5rem;
+  position: absolute;
+  right: 8%;
+  transform: rotate(18deg);
+  width: 7rem;
+  z-index: 3;
+}
+
+@media (max-width: 34rem) {
+  .figure {
+    box-shadow: 0.45rem 0.45rem 0 var(--pink), 0.75rem 0.75rem 0 var(--ink), 1.1rem 1.1rem 0 var(--cyan);
+    margin-inline: 1.4rem;
+    padding: 0.8rem;
+  }
+
+  .caption { max-width: 92%; }
+  .confetti { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .figure::before { animation: spin 24s linear infinite; }
+  .orbit::after { animation: orbit 5s ease-in-out infinite; }
+  .triangle { animation: hover 5.5s ease-in-out infinite; }
+}
+
+@keyframes spin { to { transform: rotate(1turn); } }
+
+@keyframes orbit {
+  50% { transform: translate(-1.4rem, 4.8rem); }
+}
+
+@keyframes hover {
+  50% { transform: rotate(-9deg) translateY(-0.5rem); }
+}

@@ -1,9 +1,10 @@
 import { isNumber } from 'fmrs';
+
 import type AuthnFetchHandler from './authn-fetch-handler.js';
-import { MILLISECONDS_PER_SECOND } from './constants/time.js';
 import { MetricName } from './constants/metric-name.js';
-import parseJson from './utils/parse-json.js';
+import { MILLISECONDS_PER_SECOND } from './constants/time.js';
 import putBudget from './features/put-budget.js';
+import parseJson from './utils/parse-json.js';
 
 /**
  * WARNING: If this method emits events (expenses, logs, or metrics), it will

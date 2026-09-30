@@ -3,11 +3,14 @@
     "declarationDir": "dist",
     "outDir": "dist",
     "rootDir": ".",
+    // `@vitest/browser` requires `"lib": ["DOM"]`.
+    "skipLibCheck": true,
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
   "extends": "quisido/tsconfig.json",
   "include": [
     "src/",
+    "test/",
     "*.json",
     "*.ts"
   ],

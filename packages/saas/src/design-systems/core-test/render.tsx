@@ -2,13 +2,14 @@ import {
   fireEvent,
   render as testingLibraryRender,
 } from '@testing-library/react';
+import { type UserEvent, userEvent } from '@testing-library/user-event';
 import { type ReactNode } from 'react';
 import { expect } from 'vitest';
+
 import noop from '../../utils/noop.js';
-import RenderWrapper from './render-wrapper.js';
 import createContainer from './create-container.js';
-import { userEvent, type UserEvent } from '@testing-library/user-event';
-import type { DesignSystemRole } from './roles.js';
+import RenderWrapper from './render-wrapper.js';
+import { type DesignSystemRole } from './roles.js';
 
 export interface RenderTest {
   /** clicks on an element */

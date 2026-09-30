@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 set -Eeuo pipefail;
 
 npx lighthouse https://quisi.do/ \

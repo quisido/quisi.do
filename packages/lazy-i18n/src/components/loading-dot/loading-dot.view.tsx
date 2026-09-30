@@ -1,4 +1,5 @@
-import type { CSSProperties, ReactElement } from 'react';
+import { type CSSProperties, type ReactElement } from 'react';
+
 import styles from './loading-dot.module.scss';
 
 interface Props {

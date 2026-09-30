@@ -17,12 +17,6 @@
       "@types/node"
     ]
   },
-  "exclude": [
-    ".cache/",
-    ".tests/",
-    "_site/",
-    "node_modules/"
-  ],
   "extends": "quisido/tsconfig.json",
   "include": [
     ".vscode/*.json",

@@ -1,12 +1,12 @@
-import toString from '../../utils/to-string.js';
+import getPackageJson from '../../utils/get-package-json.js';
+import { type PackageType } from '../../utils/package-type.js';
 import ReportingTool, {
   type ReportingToolResult,
 } from '../../utils/reporting-tool.js';
+import toString from '../../utils/to-string.js';
 import testTSBuildConfig from './test-ts-build-config.js';
 import testTSConfig from './test-tsconfig.js';
 import testVsCodeSettings from './test-vscode-settings.js';
-import getPackageJson from '../../utils/get-package-json.js';
-import type { PackageType } from '../../utils/package-type.js';
 
 const getType = ({
   homepage,

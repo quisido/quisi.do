@@ -4,6 +4,7 @@ import {
   useLayoutEffect,
   useState,
 } from 'react';
+
 import { SessionIdProvider } from '../contexts/session-id.js';
 import getSessionId from '../utils/get-session-id.js';
 

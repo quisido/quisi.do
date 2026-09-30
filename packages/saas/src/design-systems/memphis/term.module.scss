@@ -1,0 +1,100 @@
+.term {
+  --memphis-ink: #17113f;
+  --memphis-pink: #ff3cac;
+  --memphis-yellow: #ffe53b;
+  --memphis-cyan: #00e5ff;
+
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  margin-inline: 0.2em;
+  padding: 0.12em 0.52em 0.18em;
+  color: var(--memphis-ink);
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: 0.035em;
+  text-decoration: none;
+  text-shadow: 0.045em 0.045em 0 #fff;
+  isolation: isolate;
+  transform: rotate(-1.5deg);
+
+  &::before {
+    position: absolute;
+    z-index: -2;
+    inset: -0.18em -0.32em -0.12em;
+    background:
+      radial-gradient(circle at 13% 28%, var(--memphis-yellow) 0 0.12em, transparent 0.13em),
+      repeating-linear-gradient(135deg, transparent 0 0.16em, rgb(23 17 63 / 22%) 0.17em 0.21em),
+      var(--memphis-cyan);
+    border: 0.09em solid var(--memphis-ink);
+    border-radius: 42% 20% 38% 18% / 24% 42% 20% 38%;
+    box-shadow: 0.13em 0.14em 0 var(--memphis-pink), 0.2em 0.21em 0 var(--memphis-ink);
+    content: '';
+    transform: skewX(-5deg);
+  }
+
+  &::after {
+    position: absolute;
+    z-index: -1;
+    right: -0.18em;
+    bottom: -0.22em;
+    width: 42%;
+    height: 0.22em;
+    background: var(--memphis-yellow);
+    border: 0.07em solid var(--memphis-ink);
+    content: '';
+    transform: rotate(-6deg);
+  }
+}
+
+.label {
+  position: relative;
+  z-index: 1;
+}
+
+.orbit,
+.spark {
+  position: absolute;
+  z-index: -1;
+  display: block;
+  pointer-events: none;
+}
+
+.orbit {
+  top: -0.42em;
+  left: -0.46em;
+  width: 0.54em;
+  height: 0.54em;
+  background: var(--memphis-pink);
+  border: 0.08em solid var(--memphis-ink);
+  border-radius: 50%;
+  box-shadow: inset 0.1em -0.08em 0 rgb(255 229 59 / 80%);
+  animation: memphis-bob 3.8s ease-in-out infinite;
+}
+
+.spark {
+  top: -0.32em;
+  right: -0.42em;
+  width: 0.48em;
+  height: 0.58em;
+  background: var(--memphis-yellow);
+  filter: drop-shadow(0.06em 0.06em 0 var(--memphis-ink));
+  clip-path: polygon(50% 0, 61% 36%, 100% 50%, 63% 61%, 50% 100%, 38% 63%, 0 50%, 37% 38%);
+  animation: memphis-twinkle 4.6s ease-in-out infinite;
+}
+
+@keyframes memphis-bob {
+  50% { transform: translateY(-0.1em) rotate(12deg); }
+}
+
+@keyframes memphis-twinkle {
+  50% { transform: rotate(20deg) scale(1.12); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit,
+  .spark {
+    animation: none;
+  }
+}

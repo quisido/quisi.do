@@ -1,8 +1,9 @@
 import { AnalyticsResponseCode } from '@quisido/authn-shared';
+import { StatusCode } from 'cloudflare-utils';
+
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import AnalyticsResponseInit from './analytics-response-init.js';
-import { StatusCode } from 'cloudflare-utils';
 
 export default function handleInvalidAnalyticsResponse(
   this: AuthnFetchHandler,

@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { ListItem, ListProps } from '../core/list-props.js';
+import { type ReactElement } from 'react';
+
+import { type ListItem, type ListProps } from '../core/list-props.js';
 import classes from './list.module.scss';
 
 /**

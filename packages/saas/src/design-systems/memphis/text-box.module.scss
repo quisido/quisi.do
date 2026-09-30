@@ -1,0 +1,137 @@
+@keyframes float {
+  50% { transform: translateY(-6px) rotate(4deg); }
+}
+
+.root {
+  --ink: #171626;
+  --cream: #fff8e7;
+  box-sizing: border-box;
+  display: inline-block;
+  isolation: isolate;
+  max-width: 100%;
+  min-width: min(32rem, 90vw);
+  padding: 3.25rem 2.75rem 3rem;
+  position: relative;
+}
+
+.stage {
+  background: linear-gradient(145deg, #315fff 0%, #1645e9 75%);
+  box-shadow: 14px 16px 0 var(--ink);
+  box-sizing: border-box;
+  clip-path: polygon(9% 5%, 88% 0, 100% 24%, 94% 88%, 43% 100%, 0 83%, 3% 26%);
+  display: block;
+  padding: 3.9rem 3.4rem 4.25rem;
+  position: relative;
+  width: min(42rem, 82vw);
+}
+
+.label {
+  color: var(--ink);
+  display: block;
+  font-family: Arial Black, Impact, sans-serif;
+  font-size: clamp(1rem, 3vw, 1.65rem);
+  font-weight: 900;
+  letter-spacing: .07em;
+  line-height: 1;
+  margin: 0 0 1.2rem .5rem;
+  max-width: 72%;
+  text-transform: uppercase;
+}
+
+.text-box {
+  appearance: none;
+  background: var(--cream);
+  border: 4px solid var(--ink);
+  border-radius: 1.15rem;
+  box-shadow: 0 0 0 7px #42e8e0, 8px 9px 0 rgb(23 22 38 / 32%);
+  box-sizing: border-box;
+  color: #101d42;
+  display: block;
+  font: 700 clamp(1rem, 2.5vw, 1.35rem)/1.45 Arial, sans-serif;
+  min-width: 0;
+  padding: 1.05rem 1.3rem;
+  transition: box-shadow 180ms ease, transform 180ms ease;
+  width: 100%;
+
+  &:hover { transform: translate(-2px, -2px); }
+  &:focus-visible {
+    box-shadow: 0 0 0 7px #f5ef38, 0 0 0 12px #ff3cac, 10px 12px 0 var(--ink);
+    outline: 3px dashed var(--cream);
+    outline-offset: 15px;
+  }
+}
+
+.input { height: 4.5rem; }
+.textarea { min-height: 10rem; resize: vertical; }
+
+.squiggle {
+  background: repeating-radial-gradient(ellipse at 50% 100%, transparent 0 8px, #ff3cac 9px 13px, transparent 14px 22px);
+  height: 1.5rem;
+  position: absolute;
+  right: 15%;
+  top: 2.25rem;
+  width: 7rem;
+}
+
+.confetti {
+  background: radial-gradient(circle, #42e8e0 0 5px, transparent 6px) 0 0 / 25px 22px;
+  bottom: 1rem;
+  height: 2.2rem;
+  left: 23%;
+  position: absolute;
+  width: 9rem;
+}
+
+.sun, .triangle, .zigzag, .dot-grid { pointer-events: none; position: absolute; z-index: 2; }
+.sun {
+  animation: float 4s ease-in-out infinite;
+  background: repeating-radial-gradient(circle at 30% 30%, #f5ef38 0 3px, #ffe314 4px 7px);
+  border-radius: 50%;
+  box-shadow: 8px 10px 0 var(--ink);
+  height: 5.5rem;
+  right: .2rem;
+  top: .1rem;
+  width: 5.5rem;
+}
+.triangle {
+  background: #ff644d;
+  bottom: .2rem;
+  clip-path: polygon(0 0, 100% 45%, 18% 100%);
+  filter: drop-shadow(7px 8px 0 var(--ink));
+  height: 6.5rem;
+  left: .1rem;
+  transform: rotate(6deg);
+  width: 7rem;
+}
+.dot-grid {
+  background: radial-gradient(circle, var(--ink) 0 4px, transparent 5px) 0 0 / 22px 22px;
+  height: 6rem;
+  left: .6rem;
+  top: 1.7rem;
+  width: 5.5rem;
+  z-index: -1;
+}
+.zigzag {
+  background: linear-gradient(135deg, var(--ink) 25%, transparent 25%) 0 0 / 24px 24px,
+    linear-gradient(315deg, var(--ink) 25%, var(--cream) 25%) 0 0 / 24px 24px;
+  bottom: .5rem;
+  box-shadow: 7px 8px 0 var(--ink);
+  height: 2.7rem;
+  right: 0;
+  transform: rotate(-7deg);
+  width: 9rem;
+}
+
+.root[data-multiline='true'] .stage { padding-bottom: 4.75rem; }
+
+@media (max-width: 520px) {
+  .root { min-width: 0; padding: 2.5rem 1.4rem; width: 100%; }
+  .stage { padding: 3.4rem 2rem 4rem; width: 100%; }
+  .sun { height: 4rem; width: 4rem; }
+  .triangle { height: 5rem; width: 5.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sun { animation: none; }
+  .text-box { transition: none; }
+}

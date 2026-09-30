@@ -1,0 +1,203 @@
+.root {
+  --ink: #17130f;
+  --paper: #fff7df;
+  --hot-pink: #ff237d;
+  --acid: #dfff20;
+  --blue: #1648e8;
+  --orange: #ff5c24;
+  position: relative;
+  display: inline-grid;
+  width: min(42rem, calc(100vw - 4rem));
+  margin: 3.5rem 2rem;
+  color: var(--ink);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  isolation: isolate;
+}
+
+.heading {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 1.4rem -.35rem 2.3rem;
+}
+
+.label,
+.readout {
+  display: inline-block;
+  padding: .35rem .75rem;
+  border: .25rem solid var(--ink);
+  box-shadow: .3rem .35rem 0 var(--ink);
+  letter-spacing: .055em;
+  line-height: 1;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+}
+
+.label {
+  max-width: 75%;
+  background: var(--acid);
+  font-size: clamp(1.2rem, 4vw, 2.05rem);
+}
+
+.readout {
+  z-index: 2;
+  background: var(--hot-pink);
+  color: white;
+  font-size: clamp(.8rem, 2.5vw, 1.2rem);
+  transform: rotate(3deg);
+}
+
+.machine {
+  position: relative;
+  z-index: 2;
+  display: block;
+  min-height: 7.5rem;
+  padding: 2.1rem 2.35rem;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 11% 78%, var(--orange) 0 .55rem, transparent .6rem),
+    radial-gradient(circle at 91% 20%, var(--hot-pink) 0 .4rem, transparent .45rem),
+    var(--paper);
+  border: .6rem solid var(--ink);
+  box-shadow: .85rem .95rem 0 var(--blue), 1.2rem 1.35rem 0 var(--ink);
+  clip-path: polygon(0 12%, 8% 0, 54% 5%, 78% 0, 100% 16%, 97% 85%, 87% 100%, 45% 94%, 17% 100%, 2% 83%);
+  transform: rotate(-1deg);
+}
+
+.track {
+  position: relative;
+  display: block;
+  height: 3.3rem;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(135deg, rgb(23 19 15 / 13%) 0 .45rem, transparent .45rem .9rem),
+    #19cde0;
+  border: .42rem solid var(--ink);
+  border-radius: 40% 12% 35% 15% / 35% 45% 30% 55%;
+  box-shadow: inset 0 -.45rem 0 rgb(0 0 0 / 12%);
+  transform: skewX(-7deg);
+}
+
+.fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--progress-value);
+  background:
+    radial-gradient(circle at 1rem 50%, var(--paper) 0 .22rem, transparent .25rem) 0 0 / 2rem 100%,
+    linear-gradient(90deg, var(--orange), var(--hot-pink) 58%, #9128ff);
+  border-right: .35rem solid var(--ink);
+  transition: width 650ms cubic-bezier(.22, .8, .3, 1);
+}
+
+.comet {
+  position: absolute;
+  top: 50%;
+  left: var(--progress-value);
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--acid);
+  border: .28rem solid var(--ink);
+  clip-path: polygon(50% 0, 63% 30%, 100% 18%, 78% 50%, 100% 82%, 63% 70%, 50% 100%, 37% 70%, 0 82%, 22% 50%, 0 18%, 37% 30%);
+  transform: translate(-50%, -50%) rotate(12deg);
+  transition: left 650ms cubic-bezier(.22, .8, .3, 1);
+}
+
+.progress-bar {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.orbit {
+  position: absolute;
+  z-index: 0;
+  top: -2.7rem;
+  right: 3rem;
+  width: 6rem;
+  height: 6rem;
+  background: var(--orange);
+  border: .45rem solid var(--ink);
+  border-radius: 50%;
+  box-shadow: .45rem .45rem 0 var(--ink);
+}
+
+.orbit::after {
+  position: absolute;
+  inset: 1rem;
+  border: .45rem solid var(--paper);
+  border-radius: 50%;
+  content: '';
+}
+
+.triangle {
+  position: absolute;
+  z-index: 4;
+  top: 1.8rem;
+  left: -.9rem;
+  width: 4.2rem;
+  height: 4.5rem;
+  background: var(--blue);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(.35rem .4rem 0 var(--ink));
+  transform: rotate(-18deg);
+}
+
+.zigzag {
+  position: absolute;
+  z-index: 4;
+  right: -1.1rem;
+  bottom: -2rem;
+  width: 8rem;
+  height: 3.3rem;
+  background: var(--acid);
+  clip-path: polygon(0 40%, 18% 0, 35% 48%, 53% 8%, 70% 55%, 100% 15%, 78% 100%, 58% 58%, 40% 100%, 22% 55%, 0 82%);
+  filter: drop-shadow(.28rem .32rem 0 var(--ink));
+}
+
+.dots {
+  position: absolute;
+  z-index: 4;
+  bottom: -2.15rem;
+  left: 3.5rem;
+  width: 6rem;
+  height: 2.2rem;
+  background: radial-gradient(circle, var(--hot-pink) 0 34%, transparent 38%) 0 0 / 1.45rem 1.45rem;
+  transform: rotate(5deg);
+}
+
+.root[data-indeterminate='true'] .fill {
+  width: 38%;
+  animation: wander 1.7s ease-in-out infinite alternate;
+}
+
+.root[data-indeterminate='true'] .comet {
+  left: 38%;
+  animation: comet-wander 1.7s ease-in-out infinite alternate;
+}
+
+@keyframes wander {
+  from { width: 26%; transform: translateX(-80%); }
+  to { width: 62%; transform: translateX(150%); }
+}
+
+@keyframes comet-wander {
+  from { left: 18%; transform: translate(-50%, -50%) rotate(0); }
+  to { left: 82%; transform: translate(-50%, -50%) rotate(160deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fill,
+  .comet { animation: none !important; transition: none; }
+}
+
+@media (max-width: 32rem) {
+  .root { width: calc(100vw - 2rem); margin-inline: 1rem; }
+  .heading { margin-left: 1rem; }
+  .machine { padding-inline: 1.25rem; }
+  .triangle { left: -.2rem; }
+}

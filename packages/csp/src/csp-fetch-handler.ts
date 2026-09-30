@@ -1,8 +1,9 @@
 import { FetchHandler, type MetricDimensions } from '@quisido/worker';
+
 import { PUBLIC } from './constants/metric-dimensions.js';
-import type { MetricName } from './constants/metric-name.js';
+import { type MetricName } from './constants/metric-name.js';
 import handleFetchRequest from './features/handle-fetch-request.js';
-import type { Tuple } from './types/type.js';
+import { type Tuple } from './types/type.js';
 import queriesFn from './utils/queries.js';
 
 export default class CspFetchHandler extends FetchHandler {

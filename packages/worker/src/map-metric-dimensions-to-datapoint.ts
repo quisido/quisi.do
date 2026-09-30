@@ -1,4 +1,5 @@
 import { mapEntryToValue, sortEntriesByKey } from 'fmrs';
+
 import { type MetricDimensions } from './metric-dimensions.js';
 import reduceMetricDimensionValuesToDataPoint from './reduce-metric-dimension-values-to-data-point.js';
 

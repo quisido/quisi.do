@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import type { Dirent } from 'node:fs';
+import { type Dirent } from 'node:fs';
+
 import getWorkspaceDirectories from './utils/get-workspace-directories.js';
 import isPublicWorkspaceDirectory from './utils/is-public-workspace-directory.js';
 import npmExecWorkspace from './utils/npm-exec-workspace.js';

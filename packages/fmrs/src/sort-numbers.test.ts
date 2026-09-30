@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { sortNumbers } from './index.js';
 
 const FIFTH = 5;

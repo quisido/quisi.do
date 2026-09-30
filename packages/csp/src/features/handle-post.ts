@@ -1,5 +1,6 @@
 import { StatusCode } from 'cloudflare-utils';
 import { toError, toString } from 'fmrs';
+
 import { MetricName } from '../constants/metric-name.js';
 import { Permission } from '../constants/permission.js';
 import {
@@ -7,8 +8,8 @@ import {
   SELECT_USER_ID_FROM_PROJECTS,
 } from '../constants/queries.js';
 import type CspFetchHandler from '../csp-fetch-handler.js';
-import type { ReportBodyArray } from '../types/report-body-array.js';
 import type ReportBody from '../types/report-body.js';
+import { type ReportBodyArray } from '../types/report-body-array.js';
 import CspResponse from '../utils/csp-response.js';
 import mapReportBodyToArray from '../utils/map-report-body-to-array.js';
 import parseReport from '../utils/parse-report.js';

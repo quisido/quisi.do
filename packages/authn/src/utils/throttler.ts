@@ -1,4 +1,4 @@
-import type { Runnable } from '@quisido/worker';
+import { type Runnable } from '@quisido/worker';
 
 interface Options {
   readonly now?: (() => number) | undefined;

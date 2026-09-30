@@ -1,6 +1,7 @@
-import render from './render.js';
 import { assert, describe, expect, it } from 'vitest';
+
 import importTestedDesignSystem from './import-tested-design-system.js';
+import render from './render.js';
 
 const { Definition, Term } = await importTestedDesignSystem();
 
@@ -18,6 +19,5 @@ describe('Term', (): void => {
     const { ariaDetailsElements } = term;
     assert(ariaDetailsElements !== null);
     expect(ariaDetailsElements[0]).toHaveTextContent('Test definition');
-
   });
 });

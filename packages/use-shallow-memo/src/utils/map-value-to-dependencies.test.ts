@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import mapValueToDependencies from './map-value-to-dependencies.js';
 
 const TEST_NUMBER = 1234;

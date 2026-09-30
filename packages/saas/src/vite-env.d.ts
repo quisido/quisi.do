@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+import { type Env as BunEnv } from 'bun';
 
 interface ImportMetaEnv {
   readonly CLARITY_TAG?: string | undefined;
@@ -30,7 +31,7 @@ interface ImportMetaEnv {
 }
 
 interface ImportMeta {
-  readonly env: ImportMetaEnv;
+  readonly env: BunEnv & NodeJS.ProcessEnv & ImportMetaEnv;
 }
 
 // This line makes the type of ImportMetaEnv strict to disallow unknown keys.

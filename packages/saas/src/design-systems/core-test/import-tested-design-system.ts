@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import type { DesignSystem } from '../core/index.js';
+import { type DesignSystem } from '../core/index.js';
 
 export default async function importTestedDesignSystem(): Promise<DesignSystem> {
   const { VITE_TESTED_DESIGN_SYSTEM } = import.meta.env;

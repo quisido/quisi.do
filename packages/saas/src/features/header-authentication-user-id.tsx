@@ -1,7 +1,8 @@
 import { type ReactElement } from 'react';
+
 import { useAuthentication } from '../contexts/authentication.js';
-import setCookie from '../utils/set-cookie.js';
 import { Link } from '../design-systems/template/index.js';
+import setCookie from '../utils/set-cookie.js';
 
 interface Props {
   readonly children: number;

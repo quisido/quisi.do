@@ -1,7 +1,7 @@
 import { WHOAMI } from '../constants/whoami.js';
-import type {
-  LogRocketRequest,
-  LogRocketResponse,
+import {
+  type LogRocketRequest,
+  type LogRocketResponse,
 } from '../types/log-rocket.js';
 
 /**

@@ -1,6 +1,6 @@
 import { MetricName } from '../constants/metric-name.js';
 import type DashboardFetchHandler from '../dashboard-fetch-handler.js';
-import type { Status } from './status.js';
+import { type Status } from './status.js';
 
 interface Options {
   readonly elapsed: number;

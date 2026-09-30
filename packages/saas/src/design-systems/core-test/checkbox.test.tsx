@@ -1,10 +1,11 @@
-import { describe, expect, it, vi } from 'vitest';
-import type { CheckboxProps } from '../core/checkbox-props.js';
-import validateChecked from '../../../test/validate-checked.js';
-import render, { type RenderTest } from './render.js';
 import { userEvent } from '@testing-library/user-event';
+import { describe, expect, it, vi } from 'vitest';
+
 import expectToBeReadOnly from '../../../test/expect-to-be-readonly.js';
+import validateChecked from '../../../test/validate-checked.js';
+import { type CheckboxProps } from '../core/checkbox-props.js';
 import importTestedDesignSystem from './import-tested-design-system.js';
+import render, { type RenderTest } from './render.js';
 
 interface CheckboxTest extends RenderTest {
   readonly checkbox: HTMLInputElement;

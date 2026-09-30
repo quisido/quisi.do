@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+
 import type GoogleAnalyticsWindow from '../types/google-analytics-window.js';
 import gtag from './gtag.js';
 

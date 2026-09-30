@@ -1,5 +1,6 @@
 import { OS_TYPE_VALUE_WINDOWS } from '@opentelemetry/semantic-conventions/incubating';
 import { describe, expect, it } from 'vitest';
+
 import mapOscpuToType from './map-oscpu-to-type.js';
 
 describe('mapOscpuToType', (): void => {

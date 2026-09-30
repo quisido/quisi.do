@@ -1,0 +1,151 @@
+.main {
+  --main-acid: var(--acid, #eaff32);
+  --main-blue: var(--blue, #2148f5);
+  --main-cream: var(--cream, #fff6d5);
+  --main-ink: var(--ink, #171127);
+  --main-orange: var(--orange, #ff6038);
+  --main-pink: var(--pink, #ff48a5);
+  --main-turquoise: var(--turquoise, #42e4c5);
+
+  background:
+    linear-gradient(90deg, transparent 48%, rgb(255 255 255 / 10%) 48% 52%, transparent 52%),
+    var(--main-ink);
+  box-shadow:
+    0.65rem 0.65rem 0 var(--main-orange),
+    -0.55rem -0.55rem 0 var(--main-turquoise);
+  box-sizing: border-box;
+  clip-path: polygon(0 5%, 7% 3%, 12% 0, 22% 4%, 35% 1%, 48% 4%, 61% 0, 74% 3%, 87% 1%, 100% 6%, 97% 20%, 100% 35%, 98% 51%, 100% 67%, 97% 83%, 100% 96%, 89% 100%, 76% 97%, 63% 100%, 49% 97%, 34% 100%, 20% 97%, 5% 100%, 1% 88%, 3% 72%, 0 56%, 3% 40%);
+  color: var(--main-cream);
+  display: block;
+  isolation: isolate;
+  margin-block: clamp(1.5rem, 5vw, 4rem);
+  min-block-size: 18rem;
+  overflow: hidden;
+  padding: clamp(3.8rem, 10vw, 7rem) clamp(1.2rem, 7vw, 5.5rem);
+  position: relative;
+}
+
+.main::before {
+  background: repeating-linear-gradient(135deg, var(--main-pink) 0 0.7rem, transparent 0.7rem 1.4rem);
+  block-size: 1.3rem;
+  content: '';
+  inset: 1.25rem 7% auto 18%;
+  position: absolute;
+  transform: skewX(-22deg);
+}
+
+.main::after {
+  background: conic-gradient(from 45deg, var(--main-acid) 25%, var(--main-blue) 0 50%, var(--main-orange) 0 75%, var(--main-pink) 0);
+  border: 0.35rem solid var(--main-cream);
+  content: '';
+  inline-size: 4rem;
+  inset: auto -1rem 1.25rem auto;
+  position: absolute;
+  transform: rotate(12deg);
+  aspect-ratio: 1;
+}
+
+.stage {
+  background: var(--main-cream);
+  box-shadow: 0.75rem 0.75rem 0 var(--main-pink), -0.38rem -0.38rem 0 var(--main-acid);
+  box-sizing: border-box;
+  clip-path: polygon(3% 0, 95% 3%, 100% 93%, 91% 100%, 4% 96%, 0 12%);
+  color: var(--main-ink);
+  min-block-size: 9rem;
+  padding: clamp(1.8rem, 6vw, 4rem);
+  position: relative;
+  transform: rotate(-1deg);
+  z-index: 3;
+}
+
+.stage > :first-child { margin-block-start: 0; }
+.stage > :last-child { margin-block-end: 0; }
+
+.halo,
+.triangle,
+.orbit,
+.scribble,
+.stitches {
+  pointer-events: none;
+  position: absolute;
+}
+
+.halo {
+  aspect-ratio: 1;
+  background: repeating-conic-gradient(var(--main-acid) 0 10deg, transparent 10deg 20deg);
+  border-radius: 50%;
+  inline-size: 12rem;
+  inset: -5rem auto auto -4rem;
+  opacity: 0.9;
+}
+
+.triangle {
+  background: var(--main-orange);
+  clip-path: polygon(50% 0, 100% 100%, 0 72%);
+  filter: drop-shadow(0.45rem 0.45rem 0 var(--main-blue));
+  block-size: 7rem;
+  inline-size: 8rem;
+  inset: 18% -2.5rem auto auto;
+  transform: rotate(18deg);
+  z-index: 2;
+}
+
+.orbit {
+  border: 0.65rem solid var(--main-turquoise);
+  border-inline-end-color: var(--main-pink);
+  border-radius: 50%;
+  block-size: 6rem;
+  inline-size: 11rem;
+  inset: auto auto -2rem -3rem;
+  transform: rotate(-18deg);
+  z-index: 4;
+}
+
+.orbit span {
+  background: var(--main-acid);
+  border: 0.25rem solid var(--main-ink);
+  border-radius: 50%;
+  display: block;
+  inline-size: 1.7rem;
+  position: absolute;
+  right: 0.5rem;
+  top: -0.85rem;
+  aspect-ratio: 1;
+}
+
+.scribble {
+  background: repeating-radial-gradient(ellipse at center, transparent 0 0.5rem, var(--main-pink) 0.55rem 0.8rem, transparent 0.85rem 1.15rem);
+  block-size: 4rem;
+  inline-size: 8rem;
+  inset: 1rem 4% auto auto;
+  transform: rotate(-8deg);
+}
+
+.stitches {
+  border-block-start: 0.35rem dashed var(--main-cream);
+  inline-size: 26%;
+  inset: auto 12% 1.8rem auto;
+  transform: rotate(-5deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .halo { animation: main-spin 28s linear infinite; }
+  .orbit { animation: main-float 5s ease-in-out infinite alternate; }
+  .triangle { animation: main-wobble 7s ease-in-out infinite alternate; }
+}
+
+@keyframes main-spin { to { transform: rotate(1turn); } }
+@keyframes main-float { to { transform: translateY(-0.65rem) rotate(-8deg); } }
+@keyframes main-wobble { to { transform: translate(-0.4rem, 0.45rem) rotate(25deg); } }
+
+@media (max-width: 38rem) {
+  .main {
+    box-shadow: 0.4rem 0.4rem 0 var(--main-orange), -0.3rem -0.3rem 0 var(--main-turquoise);
+    padding-inline: 1rem;
+  }
+
+  .stage {
+    box-shadow: 0.45rem 0.45rem 0 var(--main-pink), -0.25rem -0.25rem 0 var(--main-acid);
+    padding-inline: 1.4rem;
+  }
+}

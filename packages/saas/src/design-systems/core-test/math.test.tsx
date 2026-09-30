@@ -1,7 +1,8 @@
-import { describe, expect, it } from 'vitest';
 import { createElement, type ReactElement, type ReactNode } from 'react';
-import render from './render.js';
+import { describe, expect, it } from 'vitest';
+
 import importTestedDesignSystem from './import-tested-design-system.js';
+import render from './render.js';
 
 const { Math } = await importTestedDesignSystem();
 

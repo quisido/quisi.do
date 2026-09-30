@@ -5,11 +5,11 @@ import { knip } from './features/knip/knip.js';
 import { publint } from './features/publint/publint.js';
 import { quisidoTest } from './features/quisido-test/quisido-test.js';
 import { tsc } from './features/tsc/tsc.js';
+import { vitest } from './features/vitest/vitest.js';
 import { type Report } from './types/report.js';
 import { handleExit } from './utils/exit.js';
-import { vitest } from './features/vitest/vitest.js';
-import writeTestsFile from './utils/write-tests-file.js';
 import logFailureReport from './utils/log-failure-report.js';
+import writeTestsFile from './utils/write-tests-file.js';
 
 const [, , command] = process.argv;
 

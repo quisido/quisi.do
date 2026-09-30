@@ -1,17 +1,23 @@
+/// <reference types="../../../vite-env.d.ts" />
 import sentryBrowserPackage from '@sentry/browser/package.json' with { type: 'json' };
 import { type Event } from '@sentry/core';
 import sentryCorePackage from '@sentry/core/package.json' with { type: 'json' };
 import sentryReactPackage from '@sentry/react/package.json' with { type: 'json' };
 import sentryTracingPackage from '@sentry/tracing/package.json' with { type: 'json' };
 import sentryTypesPackage from '@sentry/types/package.json' with { type: 'json' };
-import reactDomPackage from 'react-dom/package.json' with { type: 'json' };
 import reactPackage from 'react/package.json' with { type: 'json' };
+import reactDomPackage from 'react-dom/package.json' with { type: 'json' };
+
 import VERSION from '../../../constants/version.js';
 import validateString from '../../../utils/validate-string.js';
 
 const APP_START_TIME: string = new Date().toUTCString();
-const NODE_ENV: string = validateString(import.meta.env.NODE_ENV);
 const START_TIMESTAMP: number = Date.now();
+
+// ESLint prefers dot notation, because it is using bun types.
+// TypeScript prefers bracket notation, because it is using Node types.
+// eslint-disable-next-line @typescript-eslint/dot-notation
+const NODE_ENV: string = validateString(import.meta.env['NODE_ENV']);
 
 export const SENTRY_EVENT: Event = {
   contexts: {

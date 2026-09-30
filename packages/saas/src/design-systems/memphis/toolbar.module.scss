@@ -1,0 +1,138 @@
+.toolbar {
+  --ink: #111018;
+  --paper: #fff9dc;
+  align-items: center;
+  background:
+    radial-gradient(circle at 12% 82%, #f7338b 0 0.45rem, transparent 0.5rem) 0 0 / 2.2rem 2.2rem,
+    linear-gradient(112deg, #ffe522 0 18%, #ff725e 18% 20%, var(--paper) 20% 76%, #15d5da 76%);
+  border: 0.32rem solid var(--ink);
+  box-shadow: 0.75rem 0.75rem 0 #7044ef, 1rem 1rem 0 var(--ink);
+  box-sizing: border-box;
+  display: inline-flex;
+  isolation: isolate;
+  margin: 1.75rem;
+  max-width: calc(100% - 3.5rem);
+  min-height: 8rem;
+  padding: 0.65rem 1.35rem;
+  position: relative;
+  transform: rotate(-0.7deg);
+
+  &::before {
+    background: repeating-linear-gradient(135deg, var(--ink) 0 0.28rem, transparent 0.28rem 0.72rem);
+    content: '';
+    height: 1.15rem;
+    left: 22%;
+    position: absolute;
+    top: -1.35rem;
+    transform: skewX(-18deg);
+    width: 7rem;
+  }
+
+  &::after {
+    background: #ff725e;
+    border: 0.28rem solid var(--ink);
+    border-radius: 50%;
+    content: '';
+    height: 1.7rem;
+    position: absolute;
+    right: 13%;
+    top: -1.05rem;
+    width: 1.7rem;
+    z-index: 3;
+  }
+
+  &[aria-orientation='vertical'] {
+    align-items: stretch;
+    background:
+      radial-gradient(circle, #f7338b 0 0.35rem, transparent 0.4rem) 0 0 / 1.8rem 1.8rem,
+      linear-gradient(160deg, #ffe522 0 16%, var(--paper) 16% 78%, #15d5da 78%);
+    flex-direction: column;
+
+    .controls { flex-direction: column; }
+    .sun { left: -1.7rem; top: 12%; }
+    .orb { bottom: 5%; right: -1.45rem; top: auto; }
+  }
+}
+
+.controls {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.sun {
+  background: repeating-conic-gradient(#f7338b 0 10deg, transparent 10deg 22deg);
+  border-radius: 50%;
+  height: 5.4rem;
+  left: -2.6rem;
+  position: absolute;
+  top: -2.8rem;
+  width: 5.4rem;
+  z-index: -1;
+}
+
+.confetti {
+  background:
+    linear-gradient(35deg, transparent 43%, var(--ink) 44% 56%, transparent 57%) 0 0 / 1.35rem 1.35rem,
+    linear-gradient(145deg, transparent 43%, var(--ink) 44% 56%, transparent 57%) 0 0.65rem / 1.35rem 1.35rem;
+  bottom: -1.8rem;
+  height: 2.6rem;
+  left: 18%;
+  position: absolute;
+  transform: rotate(4deg);
+  width: 8.5rem;
+}
+
+.squiggle {
+  border: 0.35rem solid #f7338b;
+  border-left-color: transparent;
+  border-radius: 50%;
+  height: 2rem;
+  position: absolute;
+  right: 23%;
+  top: -1.4rem;
+  transform: rotate(12deg);
+  width: 4.7rem;
+  z-index: -1;
+}
+
+.orb {
+  background: #15d5da;
+  border: 0.3rem solid var(--ink);
+  border-radius: 50%;
+  box-shadow: inset 0.45rem -0.35rem 0 #7044ef;
+  height: 2.8rem;
+  position: absolute;
+  right: -1.45rem;
+  top: 31%;
+  width: 2.8rem;
+  z-index: 3;
+}
+
+.triangle {
+  background: #ffe522;
+  border: 0.3rem solid var(--ink);
+  bottom: -1.8rem;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  height: 3.4rem;
+  position: absolute;
+  right: 6%;
+  transform: rotate(13deg);
+  width: 4rem;
+  z-index: 3;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun { animation: spin 18s linear infinite; }
+  .orb { animation: float 3.4s ease-in-out infinite; }
+}
+
+@media (max-width: 40rem) {
+  .toolbar { margin-inline: 1rem; max-width: calc(100% - 2rem); }
+}
+
+@keyframes spin { to { transform: rotate(1turn); } }
+@keyframes float { 50% { transform: translateY(-0.45rem) rotate(8deg); } }

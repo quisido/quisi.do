@@ -1,9 +1,9 @@
-export interface DocumentState {
-  readonly tabIndex: 0 | -1;
-}
-
 interface Props {
   readonly tabbable: boolean;
+}
+
+export interface DocumentState {
+  readonly tabIndex: 0 | -1;
 }
 
 export default function useDocument({ tabbable }: Props): DocumentState {

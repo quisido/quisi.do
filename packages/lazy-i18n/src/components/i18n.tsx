@@ -6,9 +6,10 @@ import {
   type ReactNode,
   useContext,
 } from 'react';
+
 import loadingComponentContext from '../contexts/loading-component.js';
 import useTranslate from '../hooks/use-translate.js';
-import type { ReactNodeTranslationValue } from '../types/react-node-translation-value.js';
+import { type ReactNodeTranslationValue } from '../types/react-node-translation-value.js';
 import type TranslateFunction from '../types/translate-function.js';
 import mapChildrenToTranslationKey from '../utils/map-children-to-translation-key.js';
 

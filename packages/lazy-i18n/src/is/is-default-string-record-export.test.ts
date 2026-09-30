@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import isDefaultStringRecordExport from './is-default-string-record-export.js';
 
 describe('isDefaultStringRecordExport', (): void => {

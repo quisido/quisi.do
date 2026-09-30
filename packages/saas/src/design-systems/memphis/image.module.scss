@@ -1,0 +1,169 @@
+.composition {
+  --ink: #17131f;
+  --cream: #fff8dc;
+  --pink: #ff3e9d;
+  --cyan: #00d9e8;
+  --yellow: #ffe331;
+  --violet: #7651ff;
+  display: inline-grid;
+  isolation: isolate;
+  margin: clamp(2.4rem, 7vw, 5.5rem);
+  max-width: calc(100% - clamp(4.8rem, 14vw, 11rem));
+  perspective: 60rem;
+  place-items: center;
+  position: relative;
+  vertical-align: middle;
+}
+
+.frame {
+  background: var(--cream);
+  border: clamp(0.2rem, 0.55vw, 0.35rem) solid var(--ink);
+  box-shadow: clamp(0.55rem, 1.7vw, 1rem) clamp(0.55rem, 1.7vw, 1rem) 0 var(--pink), clamp(0.85rem, 2.6vw, 1.5rem) clamp(0.85rem, 2.6vw, 1.5rem) 0 var(--ink), clamp(1.25rem, 3.8vw, 2.2rem) clamp(1.25rem, 3.8vw, 2.2rem) 0 var(--cyan);
+  display: block;
+  overflow: hidden;
+  padding: clamp(0.45rem, 1.3vw, 0.8rem);
+  position: relative;
+  transform: rotate(-2.2deg) skewY(-0.5deg);
+  transform-origin: center;
+  z-index: 3;
+}
+
+.image {
+  background: linear-gradient(135deg, #fff 25%, transparent 25%) 0 0 / 1rem 1rem, linear-gradient(315deg, #fff 25%, transparent 25%) 0 0 / 1rem 1rem, var(--yellow);
+  display: block;
+  height: auto;
+  max-width: 100%;
+  min-height: 4rem;
+  object-fit: cover;
+  position: relative;
+}
+
+.glaze {
+  background: linear-gradient(115deg, transparent 0 38%, rgb(255 255 255 / 38%) 39% 48%, transparent 49%), radial-gradient(circle at 82% 16%, var(--yellow) 0 0.38rem, transparent 0.42rem) 0 0 / 1.35rem 1.35rem;
+  inset: clamp(0.45rem, 1.3vw, 0.8rem);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.sunburst {
+  animation: spin 30s linear infinite;
+  background: repeating-conic-gradient(var(--yellow) 0 9deg, transparent 9deg 18deg);
+  border-radius: 50%;
+  height: clamp(6rem, 24vw, 14rem);
+  left: clamp(-4.4rem, -8vw, -2.8rem);
+  position: absolute;
+  top: clamp(-4.5rem, -9vw, -2.5rem);
+  width: clamp(6rem, 24vw, 14rem);
+  z-index: -2;
+}
+
+.sunburst::after {
+  background: var(--pink);
+  border: 0.25rem solid var(--ink);
+  border-radius: 50%;
+  content: '';
+  inset: 31%;
+  position: absolute;
+}
+
+.checker {
+  background: conic-gradient(from 90deg, var(--ink) 25%, var(--cream) 0 50%, var(--ink) 0 75%, var(--cream) 0) 0 0 / 1.45rem 1.45rem;
+  border: 0.22rem solid var(--ink);
+  bottom: clamp(-3.2rem, -5vw, -1.8rem);
+  height: clamp(3.8rem, 11vw, 6.5rem);
+  position: absolute;
+  right: clamp(-3.8rem, -7vw, -2.1rem);
+  transform: rotate(8deg);
+  width: clamp(4rem, 13vw, 7.5rem);
+  z-index: 2;
+}
+
+.orbit {
+  border: clamp(0.35rem, 1vw, 0.65rem) solid var(--violet);
+  border-radius: 50%;
+  height: clamp(5rem, 19vw, 11rem);
+  position: absolute;
+  right: clamp(-4.8rem, -9vw, -2.5rem);
+  top: 14%;
+  transform: rotate(-14deg);
+  width: clamp(3.4rem, 13vw, 7.5rem);
+  z-index: 1;
+}
+
+.orbit::after {
+  background: var(--cyan);
+  border: 0.2rem solid var(--ink);
+  border-radius: 50%;
+  content: '';
+  height: 1.25rem;
+  left: -0.4rem;
+  position: absolute;
+  top: 18%;
+  width: 1.25rem;
+}
+
+.zigzag {
+  background: linear-gradient(135deg, transparent 38%, var(--ink) 39% 52%, transparent 53%) 0 0 / 1.5rem 1.5rem;
+  bottom: -2.1rem;
+  height: 2.5rem;
+  left: 4%;
+  position: absolute;
+  transform: rotate(-5deg);
+  width: 42%;
+  z-index: 5;
+}
+
+.confetti {
+  background: radial-gradient(circle, var(--ink) 0 0.15rem, transparent 0.2rem) 0 0 / 0.85rem 0.85rem;
+  height: 5rem;
+  left: -2rem;
+  position: absolute;
+  top: 45%;
+  transform: rotate(12deg);
+  width: 4.5rem;
+  z-index: 4;
+}
+
+.triangle {
+  background: var(--cyan);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(0.28rem 0.32rem 0 var(--ink));
+  height: clamp(2.8rem, 8vw, 4.5rem);
+  position: absolute;
+  right: 9%;
+  top: clamp(-2.3rem, -4vw, -1.5rem);
+  transform: rotate(17deg);
+  width: clamp(3rem, 9vw, 5rem);
+  z-index: 5;
+}
+
+.squiggle {
+  border: solid var(--pink);
+  border-color: var(--pink) transparent var(--pink) var(--pink);
+  border-radius: 50%;
+  border-width: 0.65rem;
+  bottom: 5%;
+  height: 3.7rem;
+  left: -2.4rem;
+  position: absolute;
+  transform: rotate(-35deg);
+  width: 5.5rem;
+  z-index: 5;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .frame { animation: breathe 7s ease-in-out infinite; }
+  .triangle { animation: float 5s ease-in-out infinite; }
+  .orbit::after { animation: satellite 4.5s ease-in-out infinite; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sunburst { animation: none; }
+}
+
+@keyframes spin { to { transform: rotate(1turn); } }
+@keyframes breathe { 50% { transform: rotate(-1.2deg) skewY(-0.5deg) translateY(-0.28rem); } }
+@keyframes float { 50% { transform: rotate(10deg) translateY(-0.5rem); } }
+@keyframes satellite { 50% { transform: translate(0.4rem, 4.5rem); } }

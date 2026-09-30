@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { SubscriptProps } from '../core/subscript-props.js';
+import { type ReactElement } from 'react';
+
+import { type SubscriptProps } from '../core/subscript-props.js';
 import classes from './subscript.module.scss';
 
 /**

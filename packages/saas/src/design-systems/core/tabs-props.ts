@@ -1,5 +1,6 @@
-import type { ReactNode } from 'react';
-import type { OneOf } from './one-of.js';
+import { type ReactNode } from 'react';
+
+import { type OneOf } from './one-of.js';
 
 interface OneOfProps {
   readonly label: string;

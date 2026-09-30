@@ -1,4 +1,5 @@
 import { describe, it } from 'vitest';
+
 import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 
 describe('getAccessControlAllowOrigin', (): void => {

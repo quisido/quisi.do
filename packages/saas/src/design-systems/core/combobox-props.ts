@@ -1,6 +1,4 @@
-import type { DisabledOrReadOnlyProps } from './disabled-or-readonly-props.js';
-
-export type ComboboxProps = DisabledOrReadOnlyProps & Props;
+import { type DisabledOrReadOnlyProps } from './disabled-or-readonly-props.js';
 
 interface Props {
   readonly label: string;
@@ -8,3 +6,5 @@ interface Props {
   readonly options: readonly string[];
   readonly value: string;
 }
+
+export type ComboboxProps = DisabledOrReadOnlyProps & Props;

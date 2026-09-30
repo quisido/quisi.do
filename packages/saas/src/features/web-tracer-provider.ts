@@ -1,6 +1,7 @@
 import { type ContextManager } from '@opentelemetry/api';
 import { ZoneContextManager } from '@opentelemetry/context-zone';
 import { WebTracerProvider } from '@opentelemetry/sdk-trace-web';
+
 import BatchSpanProcessor from './batch-span-processor.js';
 import CompositePropagator from './composite-propagator.js';
 import Resource from './resource.js';

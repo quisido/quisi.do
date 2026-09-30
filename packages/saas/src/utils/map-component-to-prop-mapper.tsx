@@ -1,4 +1,5 @@
 import { type ComponentType, type ReactElement } from 'react';
+
 import { type WithKey } from '../types/with-key.js';
 
 export default function mapComponentToPropMapper<P>(

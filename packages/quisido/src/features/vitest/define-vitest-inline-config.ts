@@ -1,9 +1,11 @@
 /* eslint-disable sort-keys-custom-order/object-keys */
-import type { ResolvedConfig } from 'vitest/node';
+import { cpus } from 'node:os';
+
+import { type ResolvedConfig } from 'vitest/node';
+
 import defineCoverageOptions from './define-coverage-options.js';
 import { EXCLUDE } from './exclude.js';
 import type QuisidoVitestInlineConfig from './quisido-vitest-inline-config.js';
-import { cpus } from 'node:os';
 
 interface Options extends QuisidoVitestInlineConfig {
   readonly disableReports: boolean;

@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { SearchProps } from '../core/search-props.js';
+import { type ReactElement } from 'react';
+
+import { type SearchProps } from '../core/search-props.js';
 import classes from './search.module.scss';
 
 /**

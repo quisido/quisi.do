@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { TEST_EXECUTION_CONTEXT, TEST_SPAN } from './test-execution-context.js';
 
 describe('TEST_EXECUTION_CONTEXT', (): void => {

@@ -1,7 +1,7 @@
+import getPackageJson from '../../utils/get-package-json.js';
 import ReportingTool, {
   type ReportingToolResult,
 } from '../../utils/reporting-tool.js';
-import getPackageJson from '../../utils/get-package-json.js';
 import requireResolve from '../../utils/require-resolve.js';
 import writeTestsFile from '../../utils/write-tests-file.js';
 import npx from '../npx/npx.js';

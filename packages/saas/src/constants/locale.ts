@@ -8,10 +8,10 @@ enum Locale {
   Japanese = 'ja-JP',
 }
 
-export default Locale;
-
 const { isType, validateType } = createEnumUtils(Locale, 'a locale');
 
 export const isLocale: (value: unknown) => value is Locale = isType;
 
 export const validateLocale: (value: unknown) => Locale = validateType;
+
+export default Locale;

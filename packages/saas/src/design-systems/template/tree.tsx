@@ -5,13 +5,14 @@ import {
   useRef,
   useState,
 } from 'react';
-import classes from './tree.module.scss';
+
 import {
   type TreeGroup,
   type TreeItem,
   type TreeItemKey,
   type TreeProps,
 } from '../core/index.js';
+import classes from './tree.module.scss';
 
 interface VisibleTreeItem {
   readonly item: TreeGroup | TreeItem;

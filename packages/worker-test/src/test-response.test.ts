@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { TestResponse } from './index.js';
 
 describe('TestResponse', (): void => {
@@ -13,11 +14,15 @@ describe('TestResponse', (): void => {
     testResponse.expectStatusCodeToBe(201);
     testResponse.expectHeaderToBe('x-test', 'value');
     testResponse.expectHeadersToBe({ 'x-test': 'value' });
-    expect((): void => testResponse.expectStatusCodeToBe(200)).toThrow();
-    expect((): void =>
-      testResponse.expectHeaderToBe('x-test', 'other'),
-    ).toThrow();
-    expect((): void => testResponse.expectHeadersToBe({})).toThrow();
+    expect((): void => {
+      testResponse.expectStatusCodeToBe(200);
+    }).toThrow();
+    expect((): void => {
+      testResponse.expectHeaderToBe('x-test', 'other');
+    }).toThrow();
+    expect((): void => {
+      testResponse.expectHeadersToBe({});
+    }).toThrow();
   });
 
   it('checks a text body after reading the response', async (): Promise<void> => {
@@ -27,7 +32,9 @@ describe('TestResponse', (): void => {
 
     testResponse.expectBodyToBe('example');
     testResponse.expectBodyToBe('example');
-    expect((): void => testResponse.expectBodyToBe('other')).toThrow();
+    expect((): void => {
+      testResponse.expectBodyToBe('other');
+    }).toThrow();
     expect(testResponse.expectNoBody).toThrow();
   });
 
@@ -37,9 +44,9 @@ describe('TestResponse', (): void => {
     const testResponse: TestResponse = await TestResponse.from(response);
 
     testResponse.expectBodyToBe({ count: 2, enabled: true });
-    expect((): void =>
-      testResponse.expectBodyToBe({ count: 3, enabled: true }),
-    ).toThrow();
+    expect((): void => {
+      testResponse.expectBodyToBe({ count: 3, enabled: true });
+    }).toThrow();
   });
 
   it('checks that an empty response has no body', async (): Promise<void> => {
@@ -48,6 +55,8 @@ describe('TestResponse', (): void => {
     const testResponse: TestResponse = await TestResponse.from(response);
 
     testResponse.expectNoBody();
-    expect((): void => testResponse.expectBodyToBe('example')).toThrow();
+    expect((): void => {
+      testResponse.expectBodyToBe('example');
+    }).toThrow();
   });
 });

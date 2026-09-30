@@ -8,6 +8,7 @@ import {
   TestKVNamespace,
   TestR2Bucket,
 } from 'cloudflare-test-utils';
+
 import AuthnFetchHandler from '../src/authn-fetch-handler.js';
 import {
   INSERT_INTO_EMAILS_QUERY,

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 set -Eeuo pipefail;
 
 chmod +x ./scripts/lighthouse-localhost.sh &&

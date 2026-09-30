@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import createNotImplementedThrower from './create-not-implemented-thrower.js';
 
 describe('createNotImplementedThrower', (): void => {

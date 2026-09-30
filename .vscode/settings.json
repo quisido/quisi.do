@@ -38,6 +38,9 @@
   "editor.rulers": [80],
   "editor.tabSize": 2,
   "eslint.enable": true,
+  "eslint.execArgv": [
+    "--max-old-space-size=8192"
+  ],
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
   "eslint.lintTask.options": "--config eslint.config.js .",

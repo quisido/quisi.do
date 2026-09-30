@@ -1,7 +1,10 @@
-import type { InlineConfig } from 'vitest/node';
-import type { QuisidoCoverageOptions } from './define-coverage-options.js';
+import { type InlineConfig } from 'vitest/node';
 
-export default interface QuisidoVitestInlineConfig
-  extends Omit<InlineConfig, 'coverage'> {
+import { type QuisidoCoverageOptions } from './define-coverage-options.js';
+
+export default interface QuisidoVitestInlineConfig extends Omit<
+  InlineConfig,
+  'coverage'
+> {
   readonly coverage?: QuisidoCoverageOptions | undefined;
 }

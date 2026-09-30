@@ -5,10 +5,11 @@ import {
   useMemo,
   useRef,
 } from 'react';
-import type {
-  TreeGridCell,
-  TreeGridProps,
-  TreeGridRow,
+
+import {
+  type TreeGridCell,
+  type TreeGridProps,
+  type TreeGridRow,
 } from '../core/tree-grid-props.js';
 import classes from './tree-grid.module.scss';
 

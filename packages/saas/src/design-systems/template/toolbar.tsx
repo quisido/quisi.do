@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { ToolbarProps } from '../core/toolbar-props.js';
+import { type ReactElement } from 'react';
+
+import { type ToolbarProps } from '../core/toolbar-props.js';
 import classes from './toolbar.module.scss';
 
 /**

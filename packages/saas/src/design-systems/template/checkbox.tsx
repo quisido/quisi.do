@@ -1,7 +1,8 @@
 import { type ChangeEvent, type ReactElement, type Ref } from 'react';
-import useIndeterminate from '../core/use-indeterminate.js';
+
+import { type CheckboxProps } from '../core/checkbox-props.js';
 import toChecked from '../core/to-checked.js';
-import type { CheckboxProps } from '../core/checkbox-props.js';
+import useIndeterminate from '../core/use-indeterminate.js';
 import classes from './checkbox.module.scss';
 
 /**

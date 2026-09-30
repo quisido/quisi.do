@@ -1,4 +1,4 @@
-import type { RefObject } from 'react';
+import { type RefObject } from 'react';
 
 export default function getRefValue<T>({ current }: RefObject<T | null>): T {
   if (current === null) {

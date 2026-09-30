@@ -72,12 +72,6 @@ interface BreadcrumbsEntryData {
 }
 */
 
-export interface BrowserContext extends Context {
-  readonly name: string;
-  // readonly type: 'browser';
-  readonly version: string;
-}
-
 /*
 interface ClockDriftData {
   // readonly name: 'timestamp';
@@ -85,10 +79,6 @@ interface ClockDriftData {
   readonly server_time: string;
 }
 */
-
-export interface Contexts extends SentryContexts {
-  readonly browser: BrowserContext;
-}
 
 /*
 interface ExceptionEntryData {
@@ -117,12 +107,6 @@ interface RequestEntryData {
 }
 */
 
-export type Entry =
-  // | SentryEntry<'breadcrumbs', BreadcrumbsEntryData>
-  // | SentryEntry<'exception', ExceptionEntryData>
-  // | SentryEntry<'request', RequestEntryData>
-  SentryEntry<string, unknown>;
-
 interface SentryError<T extends string, D> {
   readonly data: D;
   readonly message: string;
@@ -137,16 +121,32 @@ interface JsInvalidSourcemapLocationData {
 }
 */
 
+interface MetadataBase {
+  readonly display_title_with_tree_label: boolean;
+  readonly value: string;
+}
+
+export interface BrowserContext extends Context {
+  readonly name: string;
+  // readonly type: 'browser';
+  readonly version: string;
+}
+
+export interface Contexts extends SentryContexts {
+  readonly browser: BrowserContext;
+}
+
+export type Entry =
+  // | SentryEntry<'breadcrumbs', BreadcrumbsEntryData>
+  // | SentryEntry<'exception', ExceptionEntryData>
+  // | SentryEntry<'request', RequestEntryData>
+  SentryEntry<string, unknown>;
+
 export type Error =
   // | SentryError<'clock_drift', ClockDriftData>
   // | SentryError<'fetch_invalid_http_code', FetchInvalidHttpCodeData>
   // | SentryError<'js_invalid_sourcemap_location', JsInvalidSourcemapLocationData>
   SentryError<string, unknown>;
-
-interface MetadataBase {
-  readonly display_title_with_tree_label: boolean;
-  readonly value: string;
-}
 
 export interface Metadata extends MetadataBase {
   readonly filename: string;

@@ -1,6 +1,6 @@
 export {
   defineESLintConfig,
-  default as ESLINT_CONFIG,
+  DEFAULT_CONFIGS as ESLINT_CONFIG,
   type Config as ESLintConfig,
 } from './features/eslint-config/index.js';
 export {

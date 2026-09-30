@@ -5,9 +5,10 @@ import {
   useRef,
   useState,
 } from 'react';
-import type { Tab, TabsProps } from '../core/tabs-props.js';
-import classes from './tabs.module.scss';
+
+import { type Tab, type TabsProps } from '../core/tabs-props.js';
 import useTabs from '../core/use-tabs.js';
+import classes from './tabs.module.scss';
 
 type TabKey = Tab['key'];
 

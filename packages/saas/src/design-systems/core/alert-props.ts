@@ -1,5 +1,6 @@
-import type { ReactNode } from 'react';
-import type { RequiredReactNode } from './required-react-node.js';
+import { type ReactNode } from 'react';
+
+import { type RequiredReactNode } from './required-react-node.js';
 
 export interface AlertProps {
   /**

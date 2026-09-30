@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+
 import RunnableTranslateFunction from './runnable-translate-function.js';
 
 describe('RunnableTranslateFunction', (): void => {

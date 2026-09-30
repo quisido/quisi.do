@@ -1,4 +1,4 @@
-import type { server } from 'typescript';
+import { type server } from 'typescript';
 
 export interface Reference {
   readonly path: string;

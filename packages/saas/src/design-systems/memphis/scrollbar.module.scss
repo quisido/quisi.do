@@ -1,0 +1,148 @@
+.scrollbar {
+  --ink: #19152d;
+  --cream: #fff8d9;
+  --pink: #ff3e91;
+  --cyan: #15d9dc;
+  --yellow: #ffe44f;
+  --travel: 12rem;
+
+  display: inline-block;
+  position: relative;
+  padding: 0.85rem;
+  border-radius: 2rem 0.55rem 2.2rem 0.7rem;
+  background: var(--yellow);
+  box-shadow:
+    0.4rem 0.45rem 0 var(--ink),
+    0.75rem 0.82rem 0 rgb(255 62 145 / 32%);
+  cursor: ns-resize;
+  isolation: isolate;
+  transition: filter 180ms ease, transform 180ms ease;
+
+  &::before,
+  &::after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    pointer-events: none;
+  }
+
+  &::before {
+    width: 1.35rem;
+    height: 1.35rem;
+    border: 0.24rem solid var(--ink);
+    border-radius: 50%;
+    background: var(--cyan);
+    inset: -0.75rem -0.65rem auto auto;
+    box-shadow: -0.3rem 0.25rem 0 var(--pink);
+  }
+
+  &::after {
+    width: 1.7rem;
+    height: 1.35rem;
+    background: var(--pink);
+    clip-path: polygon(0 70%, 25% 15%, 48% 72%, 72% 15%, 100% 70%, 100% 100%, 0 100%);
+    inset: auto auto -0.85rem -0.45rem;
+    filter: drop-shadow(0.12rem 0.16rem 0 var(--ink));
+  }
+
+  &:hover {
+    transform: rotate(-1deg) translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 0.25rem dashed var(--pink);
+    outline-offset: 0.42rem;
+    filter: saturate(1.2);
+  }
+
+  &[aria-disabled='true'] {
+    cursor: not-allowed;
+    filter: grayscale(0.78) contrast(0.82);
+    opacity: 0.62;
+  }
+
+  &[data-orientation='horizontal'] {
+    --travel: 12rem;
+
+    cursor: ew-resize;
+
+    .track {
+      width: 15.2rem;
+      height: 2.55rem;
+    }
+
+    .thumb {
+      top: 50%;
+      left: calc(0.2rem + var(--scroll-progress) * var(--travel));
+      transform: translateY(-50%) rotate(7deg);
+    }
+
+    .confetti {
+      inset: 0.24rem 2rem auto auto;
+      transform: rotate(90deg);
+    }
+  }
+
+  &[data-value-position='end'] .thumb {
+    border-radius: 35% 65% 40% 60%;
+  }
+}
+
+.track {
+  display: block;
+  position: relative;
+  width: 2.55rem;
+  height: 15.2rem;
+  overflow: hidden;
+  border: 0.22rem solid var(--ink);
+  border-radius: 1.7rem 0.8rem 1.5rem 0.95rem;
+  background:
+    radial-gradient(circle at center, var(--pink) 0 0.17rem, transparent 0.19rem) 0 0 / 1.15rem 1.15rem,
+    repeating-linear-gradient(135deg, transparent 0 0.45rem, rgb(25 21 45 / 18%) 0.47rem 0.6rem),
+    var(--cream);
+  box-shadow: inset 0.25rem 0.25rem 0 rgb(21 217 220 / 50%);
+}
+
+.confetti {
+  position: absolute;
+  width: 0.55rem;
+  height: 2.8rem;
+  border-radius: 1rem;
+  background: repeating-linear-gradient(to bottom, var(--cyan) 0 0.55rem, transparent 0.55rem 0.85rem);
+  inset: auto 0.28rem 1.2rem auto;
+  transform: rotate(13deg);
+}
+
+.thumb {
+  display: grid;
+  position: absolute;
+  top: calc(0.2rem + var(--scroll-progress) * var(--travel));
+  left: 50%;
+  width: 2.65rem;
+  height: 2.65rem;
+  place-items: center;
+  border: 0.22rem solid var(--ink);
+  border-radius: 62% 38% 66% 34%;
+  background: conic-gradient(from 20deg, var(--pink) 0 25%, var(--cyan) 25% 50%, var(--yellow) 50% 75%, var(--pink) 75%);
+  box-shadow:
+    0.22rem 0.28rem 0 var(--ink),
+    0 0 0 0.28rem var(--cream);
+  transform: translateX(-50%) rotate(7deg);
+  transition: top 180ms cubic-bezier(0.2, 0.8, 0.2, 1), left 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.thumb-core {
+  width: 0.72rem;
+  height: 0.72rem;
+  border: 0.15rem solid var(--ink);
+  border-radius: 50%;
+  background: var(--cream);
+  box-shadow: 0.58rem -0.4rem 0 -0.18rem var(--ink), -0.5rem 0.42rem 0 -0.2rem var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollbar,
+  .thumb {
+    transition: none;
+  }
+}

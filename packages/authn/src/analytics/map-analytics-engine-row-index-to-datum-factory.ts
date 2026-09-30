@@ -1,4 +1,5 @@
-import type { AnalyticsEngineRow } from 'cloudflare-utils';
+import { type AnalyticsEngineRow } from 'cloudflare-utils';
+
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import { MILLISECONDS_PER_SECOND } from '../constants/time.js';

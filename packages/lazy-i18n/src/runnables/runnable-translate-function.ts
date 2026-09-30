@@ -1,6 +1,7 @@
-import type { ReactNode } from 'react';
-import type { ReactNodeTranslationValue } from '../types/react-node-translation-value.js';
-import type { StringTranslationValue } from '../types/string-translation-value.js';
+import { type ReactNode } from 'react';
+
+import { type ReactNodeTranslationValue } from '../types/react-node-translation-value.js';
+import { type StringTranslationValue } from '../types/string-translation-value.js';
 import type TranslateFunction from '../types/translate-function.js';
 import EventEmitter from '../utils/event-emitter.js';
 import replaceVariables from '../utils/replace-variables.js';

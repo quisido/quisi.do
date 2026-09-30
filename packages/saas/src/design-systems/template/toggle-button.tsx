@@ -1,6 +1,7 @@
-import type { ReactElement } from 'react';
-import classes from './toggle-button.module.scss';
+import { type ReactElement } from 'react';
+
 import { type ToggleButtonProps } from '../core/index.js';
+import classes from './toggle-button.module.scss';
 
 export default function ToggleButton({
   children,

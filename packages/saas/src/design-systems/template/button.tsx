@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react';
-import type { ButtonProps } from '../core/button-props.js';
+import { type ReactElement } from 'react';
+
+import { type ButtonProps } from '../core/button-props.js';
 import classes from './button.module.scss';
 
 /**

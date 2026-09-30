@@ -50,6 +50,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.3.3",
     "@vitest/ui": "^5.0.2",
     "concurrently": "^10.0.5",
     "eslint-plugin-jsx-a11y": "^6.10.2",

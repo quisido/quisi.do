@@ -1,11 +1,12 @@
-import { assert, describe, expect, it, vi } from 'vitest';
-import type { AlertDialogProps } from '../core/alert-dialog-props.js';
-import render, { type RenderTest } from './render.js';
-import noop from '../../utils/noop.js';
-import importTestedDesignSystem from './import-tested-design-system.js';
-import itShouldBeModal from './modal-test-suite.jsx';
 import { within } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
+import { assert, describe, expect, it, vi } from 'vitest';
+
+import noop from '../../utils/noop.js';
+import { type AlertDialogProps } from '../core/alert-dialog-props.js';
+import importTestedDesignSystem from './import-tested-design-system.js';
+import itShouldBeModal from './modal-test-suite.jsx';
+import render, { type RenderTest } from './render.js';
 
 const { AlertDialog } = await importTestedDesignSystem();
 

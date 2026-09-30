@@ -1,8 +1,9 @@
 import { type ReactElement } from 'react';
+
 import LazyNotification from '../components/lazy-notification.js';
 import Notification from '../components/notification.js';
-import type { WithKey } from '../types/with-key.js';
-import type { NotificationProps } from '../contexts/notifications.js';
+import { type NotificationProps } from '../contexts/notifications.js';
+import { type WithKey } from '../types/with-key.js';
 
 export default function mapNotificationToElement(
   notification:

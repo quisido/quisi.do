@@ -1,6 +1,0 @@
-*
-!dist/**
-!src/**
-!!src/**/*.test.ts
-!!src/**/*.test.tsx
-!!src/test/**

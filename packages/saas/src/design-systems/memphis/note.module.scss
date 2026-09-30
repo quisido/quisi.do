@@ -1,0 +1,158 @@
+.note {
+  --blue: #3c5cff;
+  --cyan: #19dbe5;
+  --ink: #17131f;
+  --paper: #fff9df;
+  --pink: #ff4a9d;
+  --yellow: #ffe033;
+  background:
+    linear-gradient(105deg, transparent 0 68%, rgb(255 74 157 / 13%) 68%),
+    radial-gradient(circle, rgb(23 19 31 / 12%) 0 0.1rem, transparent 0.12rem) 0 0 / 1rem 1rem,
+    var(--paper);
+  border: 0.25rem solid var(--ink);
+  box-shadow:
+    0.65rem 0.65rem 0 var(--yellow),
+    0.9rem 0.9rem 0 var(--ink),
+    1.3rem 1.3rem 0 var(--blue);
+  box-sizing: border-box;
+  color: var(--ink);
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  font-weight: 650;
+  isolation: isolate;
+  line-height: 1.6;
+  margin: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 6vw, 3.5rem);
+  max-width: 48rem;
+  min-height: 9rem;
+  padding: clamp(2.7rem, 7vw, 4.4rem) clamp(1.4rem, 6vw, 3.8rem) clamp(2rem, 5vw, 3rem);
+  position: relative;
+  transform: rotate(0.65deg);
+}
+
+.note::before {
+  background: repeating-linear-gradient(135deg, var(--pink) 0 0.65rem, var(--ink) 0.65rem 0.85rem, var(--cyan) 0.85rem 1.5rem, var(--ink) 1.5rem 1.7rem);
+  border: 0.22rem solid var(--ink);
+  content: '';
+  height: 1.05rem;
+  left: clamp(1rem, 6vw, 3.5rem);
+  position: absolute;
+  top: -0.72rem;
+  transform: rotate(-2deg);
+  width: min(13rem, 58%);
+  z-index: 4;
+}
+
+.note::after {
+  background: var(--cyan);
+  border: 0.24rem solid var(--ink);
+  bottom: -1.45rem;
+  clip-path: polygon(0 35%, 25% 0, 50% 35%, 75% 0, 100% 35%, 75% 70%, 50% 35%, 25% 70%);
+  content: '';
+  height: 3.1rem;
+  left: 14%;
+  position: absolute;
+  transform: rotate(-5deg);
+  width: 8rem;
+}
+
+.content {
+  display: block;
+  position: relative;
+  text-wrap: pretty;
+  z-index: 3;
+}
+
+.content > :first-child { margin-top: 0; }
+.content > :last-child { margin-bottom: 0; }
+
+.sun {
+  background: repeating-conic-gradient(var(--yellow) 0 10deg, transparent 10deg 20deg);
+  border-radius: 50%;
+  height: 7rem;
+  position: absolute;
+  right: -3.1rem;
+  top: -3.2rem;
+  width: 7rem;
+  z-index: -1;
+}
+
+.sun::after {
+  background: var(--pink);
+  border: 0.25rem solid var(--ink);
+  border-radius: 50%;
+  content: '';
+  inset: 1.65rem;
+  position: absolute;
+}
+
+.triangle {
+  background: var(--blue);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(0.24rem 0.28rem 0 var(--ink));
+  height: 4.6rem;
+  left: -2.3rem;
+  position: absolute;
+  top: 35%;
+  transform: rotate(-20deg);
+  width: 4.8rem;
+  z-index: 2;
+}
+
+.squiggle {
+  border-bottom: 0.55rem dotted var(--pink);
+  border-radius: 50%;
+  height: 2rem;
+  position: absolute;
+  right: 2rem;
+  top: 0.5rem;
+  transform: rotate(-7deg);
+  width: 28%;
+}
+
+.dots {
+  background: radial-gradient(circle, var(--ink) 0 0.14rem, transparent 0.17rem) 0 0 / 0.85rem 0.85rem;
+  bottom: 0.65rem;
+  height: 2.4rem;
+  opacity: 0.85;
+  position: absolute;
+  right: 0.8rem;
+  transform: rotate(-3deg);
+  width: 4.8rem;
+}
+
+.spark {
+  bottom: -1.35rem;
+  color: var(--pink);
+  font-size: 3.4rem;
+  line-height: 1;
+  position: absolute;
+  right: 10%;
+  text-shadow: 0.18rem 0.18rem 0 var(--ink);
+  z-index: 4;
+}
+
+@media (max-width: 34rem) {
+  .note {
+    box-shadow: 0.45rem 0.45rem 0 var(--yellow), 0.7rem 0.7rem 0 var(--ink), 1rem 1rem 0 var(--blue);
+    margin-inline: 1.35rem;
+    padding-inline: 1.25rem;
+  }
+
+  .sun { right: -1.65rem; transform: scale(0.75); }
+  .triangle { left: -1.3rem; transform: rotate(-20deg) scale(0.72); }
+  .squiggle { opacity: 0.55; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun { animation: turn 24s linear infinite; }
+  .spark { animation: glint 3.2s ease-in-out infinite; }
+}
+
+@keyframes turn {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glint {
+  50% { transform: rotate(16deg) scale(1.18); }
+}

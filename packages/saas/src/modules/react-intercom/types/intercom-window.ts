@@ -1,4 +1,4 @@
-import type IntercomFunction from '../types/intercom-function.js';
+import type IntercomFunction from './intercom-function.js';
 
 export default interface IntercomWindow extends Window {
   Intercom?: IntercomFunction;

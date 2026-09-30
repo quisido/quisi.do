@@ -1,4 +1,5 @@
 import { FaviconIcoResponse, RobotsTxtResponse } from 'cloudflare-utils';
+
 import { MetricName } from '../constants/metric-name.js';
 import { StaticPathname } from '../constants/static-pathname.js';
 import type CspFetchHandler from '../csp-fetch-handler.js';

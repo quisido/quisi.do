@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import sanitizeExpenseTtl from './sanitize-expense-ttl.js';
 import { SECONDS_PER_YEAR } from './time.js';
 

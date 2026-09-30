@@ -3,6 +3,7 @@
  * script and before any other scripts that may add unload event listeners.
  */
 
+// eslint-disable-next-line import-x/unambiguous
 const addWindowEventListener: Window['addEventListener'] =
   Window.prototype.addEventListener.bind(window);
 

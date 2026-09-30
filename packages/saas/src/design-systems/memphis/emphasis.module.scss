@@ -1,0 +1,113 @@
+.emphasis {
+  --emphasis-ink: #101018;
+  --emphasis-pink: #ff3e9d;
+  --emphasis-yellow: #ffe53b;
+  color: var(--emphasis-ink);
+  display: inline-block;
+  font-style: italic;
+  font-weight: 800;
+  isolation: isolate;
+  margin-inline: 0.22em;
+  padding: 0.08em 0.38em 0.12em 0.28em;
+  position: relative;
+  text-decoration: none;
+  transform: rotate(-1.5deg);
+  transition: transform 180ms ease;
+  vertical-align: 0.02em;
+
+  &::before {
+    background:
+      radial-gradient(circle, var(--emphasis-ink) 0 1.5px, transparent 1.8px)
+      0 0 / 7px 7px;
+    content: '';
+    height: 0.72em;
+    left: -0.42em;
+    opacity: 0.9;
+    position: absolute;
+    top: -0.3em;
+    transform: rotate(-13deg);
+    width: 0.72em;
+    z-index: -3;
+  }
+
+  &::after {
+    background: #6d27ee;
+    clip-path: polygon(50% 0, 62% 34%, 100% 27%, 71% 51%, 96% 80%, 60% 67%, 48% 100%, 40% 66%, 0 77%, 28% 49%, 2% 25%, 39% 34%);
+    content: '';
+    height: 0.65em;
+    position: absolute;
+    right: -0.42em;
+    top: -0.32em;
+    transform: rotate(12deg);
+    width: 0.65em;
+    z-index: 3;
+  }
+
+  &:hover {
+    transform: rotate(0.5deg) scale(1.035);
+  }
+}
+
+.content {
+  position: relative;
+  text-shadow: 0.04em 0.04em 0 rgb(255 255 255 / 72%);
+  z-index: 2;
+}
+
+.ribbon,
+.shadow {
+  inset: -0.08em -0.12em -0.1em -0.14em;
+  position: absolute;
+}
+
+.ribbon {
+  background:
+    linear-gradient(105deg, transparent 0 4%, var(--emphasis-yellow) 4% 70%, #ffca28 100%),
+    var(--emphasis-yellow);
+  clip-path: polygon(0 17%, 8% 7%, 39% 13%, 53% 0, 76% 13%, 100% 5%, 95% 48%, 100% 90%, 69% 82%, 54% 100%, 27% 84%, 3% 96%, 7% 56%);
+  z-index: -1;
+}
+
+.shadow {
+  background: #09d7e5;
+  clip-path: polygon(0 17%, 8% 7%, 39% 13%, 53% 0, 76% 13%, 100% 5%, 95% 48%, 100% 90%, 69% 82%, 54% 100%, 27% 84%, 3% 96%, 7% 56%);
+  transform: translate(0.13em, 0.18em) rotate(1deg);
+  z-index: -2;
+}
+
+.spark {
+  background: var(--emphasis-pink);
+  border: 0.08em solid var(--emphasis-ink);
+  border-radius: 50%;
+  bottom: -0.36em;
+  box-shadow:
+    0.25em 0.13em 0 -0.09em #6d27ee,
+    -0.18em 0.15em 0 -0.1em #ff654b;
+  height: 0.3em;
+  left: -0.28em;
+  position: absolute;
+  width: 0.3em;
+  z-index: 3;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spark {
+    animation: emphasis-orbit 3.8s ease-in-out infinite;
+  }
+
+  .emphasis::after {
+    animation: emphasis-twinkle 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes emphasis-orbit {
+  50% {
+    transform: translate(0.18em, -0.1em) rotate(12deg);
+  }
+}
+
+@keyframes emphasis-twinkle {
+  50% {
+    transform: rotate(32deg) scale(1.14);
+  }
+}

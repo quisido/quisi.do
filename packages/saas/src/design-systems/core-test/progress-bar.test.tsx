@@ -1,6 +1,7 @@
-import render from './render.js';
 import { describe, expect, it } from 'vitest';
+
 import importTestedDesignSystem from './import-tested-design-system.js';
+import render from './render.js';
 
 const { ProgressBar } = await importTestedDesignSystem();
 

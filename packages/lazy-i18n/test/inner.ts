@@ -1,4 +1,5 @@
-import type { MatcherFunction } from '@testing-library/react';
+import { type MatcherFunction } from '@testing-library/react';
+
 import isElement from './is-element.js';
 import negate from './negate.js';
 

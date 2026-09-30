@@ -1,4 +1,4 @@
-import type { OneOf } from './one-of.js';
+import { type OneOf } from './one-of.js';
 
 interface Test {
   readonly bool: boolean;

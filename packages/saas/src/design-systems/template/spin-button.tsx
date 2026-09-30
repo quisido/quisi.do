@@ -1,5 +1,6 @@
-import type { ChangeEvent, ReactElement } from 'react';
-import type { SpinButtonProps } from '../core/spin-button-props.js';
+import { type ChangeEvent, type ReactElement } from 'react';
+
+import { type SpinButtonProps } from '../core/spin-button-props.js';
 import classes from './spin-button.module.scss';
 
 /**

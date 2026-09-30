@@ -42,6 +42,26 @@ interface SpeechRecognitionWindow extends Window {
     BrowserSpeechRecognitionConstructor | undefined;
 }
 
+const getSpeechRecognitionConstructor = ():
+  BrowserSpeechRecognitionConstructor | undefined => {
+  if (typeof window === 'undefined') {
+    return undefined;
+  }
+
+  const speechRecognitionWindow = window as SpeechRecognitionWindow;
+
+  // The Web Speech API has uneven browser support and may use the browser
+  // vendor's servers. For predictable cross-browser transcription, replace
+  // this with MediaRecorder plus a service such as OpenAI Whisper or Deepgram.
+  return (
+    speechRecognitionWindow.SpeechRecognition ??
+    speechRecognitionWindow.webkitSpeechRecognition
+  );
+};
+
+export const isVoiceToTextSupported = (): boolean =>
+  getSpeechRecognitionConstructor() !== undefined;
+
 export interface VoiceToTextError {
   readonly code: string;
   readonly message: string;
@@ -66,26 +86,6 @@ export interface VoiceToText {
   start(): void;
   stop(): void;
 }
-
-const getSpeechRecognitionConstructor = ():
-  BrowserSpeechRecognitionConstructor | undefined => {
-  if (typeof window === 'undefined') {
-    return undefined;
-  }
-
-  const speechRecognitionWindow = window as SpeechRecognitionWindow;
-
-  // The Web Speech API has uneven browser support and may use the browser
-  // vendor's servers. For predictable cross-browser transcription, replace
-  // this with MediaRecorder plus a service such as OpenAI Whisper or Deepgram.
-  return (
-    speechRecognitionWindow.SpeechRecognition ??
-    speechRecognitionWindow.webkitSpeechRecognition
-  );
-};
-
-export const isVoiceToTextSupported = (): boolean =>
-  getSpeechRecognitionConstructor() !== undefined;
 
 export default function createVoiceToText({
   continuous = true,

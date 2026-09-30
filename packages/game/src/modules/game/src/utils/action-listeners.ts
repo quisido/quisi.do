@@ -1,4 +1,4 @@
-import type GameAction from "../types/game-action.js";
+import type GameAction from '../types/game-action.js';
 
 type ActionListenersRecord<Action extends GameAction> = {
   readonly [A in Action as A['type']]?: Set<(action: A) => void> | undefined;
@@ -9,7 +9,10 @@ const EMPTY_SET: ReadonlySet<never> = new Set();
 export default class ActionListeners<Action extends GameAction> {
   readonly #record: ActionListenersRecord<Action> = {};
 
-  public add<A extends Action>(type: A['type'], callback: (action: A) => void): void {
+  public add<A extends Action>(
+    type: A['type'],
+    callback: (action: A) => void,
+  ): void {
     // @ts-expect-error TypeScript seems wrong here.
     const callbacks: Set<(action: A) => void> | undefined = this.#record[type];
     if (callbacks === undefined) {
@@ -18,15 +21,21 @@ export default class ActionListeners<Action extends GameAction> {
     } else {
       callbacks.add(callback);
     }
-  };
+  }
 
-  public get<A extends Action>(type: A['type']): ReadonlySet<(action: A) => void> {
+  public get<A extends Action>(
+    type: A['type'],
+  ): ReadonlySet<(action: A) => void> {
     // @ts-expect-error TypeScript seems wrong here.
     return this.#record[type] ?? EMPTY_SET;
-  };
+  }
 
-  public remove<A extends Action>(type: A['type'], callback: (action: A) => void): void {
+  public remove<A extends Action>(
+    type: A['type'],
+    callback: (action: A) => void,
+  ): void {
     // @ts-expect-error TypeScript seems wrong here.
-    this.#record[type]?.delete(callback);
-  };
-};
+    const callbacks: Set<(action: A) => void> | undefined = this.#record[type];
+    callbacks?.delete(callback);
+  }
+}

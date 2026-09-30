@@ -1,6 +1,6 @@
 import HTMLFormatter from '@hint/formatter-html';
-import type { Problem } from '@hint/utils-types';
-import type { FormatterOptions } from 'hint';
+import { type Problem } from '@hint/utils-types';
+import { type FormatterOptions } from 'hint';
 
 export default class PatchedHTMLFormatter extends HTMLFormatter.default {
   override format(

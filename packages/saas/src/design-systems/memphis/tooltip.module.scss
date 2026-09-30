@@ -1,0 +1,135 @@
+.tooltip {
+  --cyan: #09d9ef;
+  --pink: #ff1aa8;
+  --yellow: #fff20d;
+
+  background: #121014;
+  border: 3px solid #121014;
+  box-shadow:
+    -7px 6px 0 var(--cyan),
+    7px 9px 0 var(--pink),
+    0 14px 0 -3px #121014;
+  color: #fff;
+  display: inline-grid;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  isolation: isolate;
+  letter-spacing: 0.025em;
+  line-height: 1.15;
+  margin: 1.5rem;
+  min-inline-size: 9rem;
+  padding: 0.9rem 2.6rem 1rem 1.3rem;
+  position: relative;
+  text-align: center;
+  transform: rotate(-1deg);
+
+  &::after {
+    background: #121014;
+    block-size: 1.1rem;
+    clip-path: polygon(0 0, 100% 0, 44% 100%);
+    content: '';
+    inline-size: 1.5rem;
+    inset-block-start: calc(100% + 2px);
+    inset-inline-start: 46%;
+    position: absolute;
+  }
+
+  &::before {
+    background: var(--cyan);
+    block-size: 1.25rem;
+    clip-path: polygon(0 0, 100% 0, 48% 100%);
+    content: '';
+    inline-size: 1.65rem;
+    inset-block-start: calc(100% + 7px);
+    inset-inline-start: calc(46% - 7px);
+    position: absolute;
+    z-index: -1;
+  }
+}
+
+.label {
+  filter: drop-shadow(2px 2px 0 rgb(255 26 168 / 45%));
+  position: relative;
+  z-index: 2;
+}
+
+.confetti,
+.dots {
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.triangle {
+  background: var(--yellow);
+  block-size: 1.65rem;
+  clip-path: polygon(0 0, 100% 45%, 12% 100%);
+  filter: drop-shadow(3px 3px 0 #121014);
+  inline-size: 1.5rem;
+  inset-block-start: -0.8rem;
+  inset-inline-start: -0.65rem;
+  position: absolute;
+  transform: rotate(16deg);
+}
+
+.orb {
+  background: var(--pink);
+  border: 3px solid #121014;
+  border-radius: 50%;
+  block-size: 1rem;
+  box-shadow: 2px 2px 0 var(--cyan);
+  inline-size: 1rem;
+  inset-block-start: -0.65rem;
+  inset-inline-start: 32%;
+  position: absolute;
+}
+
+.bolt {
+  background: var(--yellow);
+  block-size: 1.35rem;
+  clip-path: polygon(0 35%, 28% 0, 48% 38%, 67% 5%, 100% 45%, 75% 100%, 55% 58%, 35% 94%);
+  filter: drop-shadow(2px 3px 0 #121014);
+  inline-size: 2.6rem;
+  inset-block-start: -0.75rem;
+  inset-inline-end: 0.5rem;
+  position: absolute;
+  transform: rotate(5deg);
+}
+
+.dots {
+  background-image: radial-gradient(circle, var(--yellow) 0 2px, transparent 2.5px);
+  background-size: 9px 9px;
+  block-size: 2rem;
+  clip-path: polygon(0 20%, 100% 65%, 10% 100%);
+  inline-size: 3rem;
+  inset-block: auto -0.15rem;
+  inset-inline: auto 0.3rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tooltip {
+    animation: memphis-float 3.4s ease-in-out infinite;
+  }
+
+  .bolt {
+    animation: bolt-pulse 2.2s steps(2, jump-none) infinite;
+  }
+}
+
+@keyframes memphis-float {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(0, -3px);
+  }
+}
+
+@keyframes bolt-pulse {
+  50% {
+    transform: rotate(8deg) scale(1.08);
+  }
+}

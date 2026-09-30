@@ -2,6 +2,7 @@
 import { FetchHandler } from '@quisido/worker';
 import { TestAnalyticsEngineDataset } from 'cloudflare-test-utils';
 import { describe, it } from 'vitest';
+
 import { TestExportedHandler } from './index.js';
 
 describe('TestExportedHandler', (): void => {

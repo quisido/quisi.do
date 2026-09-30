@@ -1,7 +1,12 @@
-import type { ReactElement } from 'react';
-import type { TableCell, TableProps, TableRow } from '../core/table-props.js';
-import classes from './table.module.scss';
+import { type ReactElement } from 'react';
+
+import {
+  type TableCell,
+  type TableProps,
+  type TableRow,
+} from '../core/table-props.js';
 import useTable from '../core/use-table.js';
+import classes from './table.module.scss';
 
 /**
  * A table is a section containing data arranged in rows and columns. See

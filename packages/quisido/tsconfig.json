@@ -9,9 +9,10 @@
       ]
     },
     "rootDir": ".",
+    // `@vitest/browser` requires `"lib": ["DOM"]`.
+    "skipLibCheck": true,
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "exclude": [],
   "extends": "./src/tsconfig.json",
   "include": [
     "src/",

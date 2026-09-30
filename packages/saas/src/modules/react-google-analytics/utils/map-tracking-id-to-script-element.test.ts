@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import mapTrackingIdToScriptElement from './map-tracking-id-to-script-element.js';
 
 const TEST_TRACKING_ID = 'UA-123456789-1';
