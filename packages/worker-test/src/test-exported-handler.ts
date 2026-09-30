@@ -38,6 +38,8 @@ const TEST_SPAN: Span = {
   recordException: vi.fn(),
   setAttribute: vi.fn(),
   setAttributes: vi.fn(),
+  setStatus: vi.fn(),
+  updateName: vi.fn(),
 };
 const TEST_SPAN_CONSTRUCTOR: typeof Span = vi.fn();
 const TEST_TRACING: Tracing = {
