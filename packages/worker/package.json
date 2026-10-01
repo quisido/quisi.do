@@ -61,13 +61,14 @@
   "devDependencies": {
     "@microsoft/api-extractor": "^7.59.2",
     "@types/cookie": "^1.0.0",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "@vitest/ui": "^5.0.2",
     "cloudflare-test-utils": "^1.0.2",
     "concurrently": "^10.0.5",
     "quisido": "^0.0.5",
     "rimraf": "^6.1.0",
     "tslib": "^2.8.1",
-    "typescript": "^7.0.2",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vitest": "^5.0.1"
   }
 }

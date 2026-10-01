@@ -55,6 +55,7 @@ updates:
 
     typescript:
       patterns:
+      - "@typescript/native"
       - tslib
       - typescript
 

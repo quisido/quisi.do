@@ -66,6 +66,13 @@ publication.
   [`workspace`](https://github.com/quisido/quisi.do/blob/main/quisido.code-workspace).
 - **Wrangler** powers the services on Cloudflare Workers.
 
+TypeScript is installed side-by-side: `@typescript/native` aliases TypeScript 7
+and supplies `tsc` for builds, while `typescript` aliases
+`@typescript/typescript6` to provide the compiler API required by
+`typescript-eslint`. Keep both aliases in workspace development dependencies;
+the compatibility package supplies `tsc6`, so it does not replace TypeScript 7's
+`tsc` executable.
+
 ## Commands
 
 - `npm run build` builds all packages in topological order.
