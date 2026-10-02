@@ -34,7 +34,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "@datadog/browser-rum": "^7.14.0",
+    "@datadog/browser-rum": "^7.15.0",
     "@datadog/datadog-api-client": "^1.64.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
@@ -67,7 +67,7 @@
     "lazy-i18n": "^3.0.4",
     "mixpanel-browser": "^2.83.0",
     "number-format-react": "^2.0.1",
-    "posthog-js": "^1.434.17",
+    "posthog-js": "^1.435.0",
     "react": "^19.3.0",
     "react-aria": "^3.52.1",
     "react-dom": "^19.3.0",
