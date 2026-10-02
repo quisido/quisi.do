@@ -29,7 +29,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "ollama": "^0.6.3"
+    "ollama": "^0.6.4"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260922.1",
