@@ -103,6 +103,7 @@
     "@playwright/mcp": "^0.0.82",
     "@types/eslint": "^9.6.1",
     "@types/node": "^26.6.3",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "@vitest/ui": "^5.0.2",
     "browserslist": "^4.29.1",
     "chrome-devtools-mcp": "^1.10.1",
@@ -113,7 +114,7 @@
     "puppeteer-core": "^25.12.0",
     "quisido": "^0.0.5",
     "rimraf": "^6.1.0",
-    "typescript": "^6.0.3",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vite": "^8.3.1",
     "vitest": "^5.0.1",
     "zod-validation-error": "^5.0.0"

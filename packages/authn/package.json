@@ -67,13 +67,14 @@
     "@quisido/worker-test": "^1.0.1",
     "@types/cookie": "^1.0.0",
     "@types/eslint": "^9.6.1",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "@vitest/ui": "^5.0.2",
     "cloudflare-test-utils": "^1.0.2",
     "concurrently": "^10.0.5",
     "cookie": "^2.0.1",
     "quisido": "^0.0.5",
     "rimraf": "^6.1.0",
-    "typescript": "^6.0.3",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vitest": "^5.0.1",
     "wrangler": "^4.141.0"
   }
