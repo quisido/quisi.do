@@ -1,6 +1,6 @@
 import { join, resolve } from 'node:path';
 
-import type { CompilerOptions } from '@typescript/native/unstable/proto';
+import { type CompilerOptions } from '@typescript/native/unstable/proto';
 import { ESLint } from 'eslint';
 
 import getDisposableTempDir from '../../utils/get-disposable-temp-dir.js';

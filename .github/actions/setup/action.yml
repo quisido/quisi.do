@@ -5,7 +5,7 @@ description: Sets up Node and installs dependencies
 inputs:
   continue-on-error:
     default: 'false'
-    description: Continue the workflow even if the build fails?
+    description: Continue the workflow even if the setup fails?
     required: false
   download-build:
     default: 'true'
