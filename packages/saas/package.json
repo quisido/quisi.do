@@ -118,7 +118,7 @@
     "@vitejs/plugin-react": "^6.1.1",
     "@vitest/browser-playwright": "^5.0.1",
     "@vitest/coverage-istanbul": "^5.0.1",
-    "@vitest/ui": "^5.0.2",
+    "@vitest/ui": "^5.0.3",
     "aria-query": "^5.3.2",
     "autoprefixer": "^10.6.1",
     "cjs-ts": "^2.0.1",

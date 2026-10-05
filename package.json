@@ -104,7 +104,7 @@
     "@types/eslint": "^9.6.1",
     "@types/node": "^26.6.3",
     "@typescript/native": "npm:typescript@^7.0.2",
-    "@vitest/ui": "^5.0.2",
+    "@vitest/ui": "^5.0.3",
     "browserslist": "^4.29.1",
     "chrome-devtools-mcp": "^1.10.1",
     "concurrently": "^10.0.5",
