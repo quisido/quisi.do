@@ -7,12 +7,15 @@ runs:
   steps:
     - name: Setup
       uses: ./.github/actions/setup
+    - name: Install Lighthouse browser
+      shell: bash
+      working-directory: packages/saas
+      run: npx playwright install chromium
     - name: Audit
       shell: bash
       working-directory: packages/saas
       run: >-
-        chmod +x ./scripts/lighthouse-serve.sh;
-        ./scripts/lighthouse-serve.sh;
+        node ./scripts/lighthouse-ci.ts;
         chmod +x ./scripts/postlighthouse.sh;
         ./scripts/postlighthouse.sh;
     - name: Upload
