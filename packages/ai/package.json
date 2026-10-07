@@ -32,7 +32,7 @@
     "ollama": "^0.6.4"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20261003.1",
+    "@cloudflare/workers-types": "^5.20261004.1",
     "@types/node": "^26.6.4",
     "@typescript/native": "npm:typescript@^7.0.2",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
