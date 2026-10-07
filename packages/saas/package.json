@@ -8,7 +8,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc --build tsconfig.build.json && vite build",
+    "build": "tsc --build tsconfig.build.json --generateCpuProfile .cache/tsc-output.build.cpuprofile && vite build",
     "start": "vite",
     "test": "quisido test",
     "attw": "quisido attw",

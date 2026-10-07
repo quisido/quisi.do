@@ -32,7 +32,7 @@
     "quisido:build": "npm --workspace=packages/quisido run build",
     "quisido:link": "npm --workspace=packages/quisido link || exit 0",
     "saas": "npm --workspace=packages/saas start",
-    "tsc:build": "tsc --build tsconfig.build.json",
+    "tsc:build": "tsc --build tsconfig.build.json --generateCpuProfile .cache/tsc-output.build.cpuprofile",
     "tsc:version": "tsc --version",
     "update": "node ./dist/scripts/update.js",
     "vitest": "vitest run",
