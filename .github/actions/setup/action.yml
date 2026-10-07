@@ -111,9 +111,7 @@ runs:
       shell: bash
       run: |-
         sudo apt-get install --yes \
-          libicudata \
-          libicui18n \
-          libicuuc \
+          libicu-dev \
           libxml2 \
           xvfb;
         npx playwright install-deps \
