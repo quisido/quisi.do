@@ -7,6 +7,7 @@ npx lighthouse https://quisi.do/ \
   --chrome-flags="--headless --no-sandbox" \
   --config-path=lighthouse.config.js \
   --enable-error-reporting \
+  --output=html.json \
   --output-path=lighthouse \
   --preset=experimental \
   --save-assets;

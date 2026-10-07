@@ -12,6 +12,7 @@ runs:
   steps:
     - name: Setup
       uses: ./.github/actions/setup
+
     - name: Publish
       shell: bash
       env:

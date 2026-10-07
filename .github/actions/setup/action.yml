@@ -109,10 +109,17 @@ runs:
     - name: Install Playwright dependencies
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       shell: bash
-      run: >-
-        sudo apt-get install --yes xvfb;
-        npx playwright install-deps
-        chromium-headless-shell firefox webkit;
+      run: |-
+        sudo apt-get install --yes \
+          libicudata \
+          libicui18n \
+          libicuuc \
+          libxml2 \
+          xvfb;
+        npx playwright install-deps \
+          chromium-headless-shell \
+          firefox \
+          webkit;
 
     - name: Install Playwright browsers
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
@@ -120,9 +127,11 @@ runs:
       shell: bash
       env:
         DEBIAN_FRONTEND: noninteractive
-      run: >-
-        npx playwright install --only-shell
-        chromium-headless-shell firefox webkit;
+      run: |-
+        npx playwright install --only-shell \
+          chromium-headless-shell \
+          firefox \
+          webkit;
 
     - name: Save Playwright cache
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}

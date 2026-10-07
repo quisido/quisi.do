@@ -16,10 +16,10 @@ runs:
     - name: Setup
       uses: ./.github/actions/setup
     - name: Deploy
-      run: >-
-        chmod +x ./.github/actions/wrangler-deploy/wrangler-deploy.sh;
-        ./.github/actions/wrangler-deploy/wrangler-deploy.sh;
       shell: bash
       env:
         CLOUDFLARE_API_TOKEN: ${{ inputs.api-token }}
         WORKSPACE: ${{ inputs.workspace }}
+      run: >-
+        chmod +x ./.github/actions/wrangler-deploy/wrangler-deploy.sh;
+        ./.github/actions/wrangler-deploy/wrangler-deploy.sh;

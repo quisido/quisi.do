@@ -84,7 +84,7 @@ const CONFIG: Config = {
     ],
     channel: 'msedge-canary',
     locale: 'en-US',
-    output: ['html', 'json'],
+    output: [], // This value is ignored and must be set via CLI.
     skipAudits: [
       /**
        * The `aria-roles` audit is based on the
