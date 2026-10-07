@@ -43,7 +43,7 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
     target: 'esnext',
   },
   plugins: [
-    ...(vitePWA({
+    ...vitePWA({
       includeAssets: [
         'apple-touch-icon.png',
         'favicon.svg',
@@ -61,7 +61,7 @@ const PRODUCTION_USER_CONFIG: UserConfig = {
         maximumFileSizeToCacheInBytes: 3_000_000,
         sourcemap: true,
       },
-    }) as unknown as readonly PluginOption[]),
+    }),
   ],
 };
 

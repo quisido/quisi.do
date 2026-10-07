@@ -115,7 +115,7 @@ export const JS_CONFIG: Config = defineConfig({
       {
         amd: false,
         commonjs: false,
-        ignore: [`\\.(?:${IGNORED_EXTENSIONS.join('|')})$`],
+        ignore: ['^virtual:', `\\.(?:${IGNORED_EXTENSIONS.join('|')})$`],
       },
     ],
     'import-x/no-unused-modules': [
@@ -142,7 +142,6 @@ export const JS_CONFIG: Config = defineConfig({
     'import/first': 'off',
     'import/newline-after-import': 'off',
     'import/no-duplicates': 'off',
-    'import/no-unresolved': ['error', { ignore: ['^virtual:'] }],
     // Disable in favor of `simple-import-sort/imports`.
     'import/order': 'off',
     'max-lines': 'warn',
