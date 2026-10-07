@@ -1,5 +1,4 @@
 const LOCALHOST_NAMES = new Set(['127.0.0.1', '::1', 'localhost']);
-const PWA_REGISTER_MODULE = 'virtual:pwa-register';
 
 interface PWARegisterModule {
   readonly registerSW: (options: {
@@ -48,9 +47,8 @@ export const registerServiceWorker = async (): Promise<void> => {
     return;
   }
 
-  const pwaRegisterModule = (await import(
-    PWA_REGISTER_MODULE
-  )) as PWARegisterModule;
+  const pwaRegisterModule =
+    (await import('virtual:pwa-register')) as PWARegisterModule;
 
   pwaRegisterModule.registerSW({
     immediate: true,
