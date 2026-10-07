@@ -6,7 +6,7 @@ const CONFIG: Config = {
     /**
      * CLI settings missing from the `Config` type definition.
      * budgetPath: 'lighthouse.budget.json',
-     * chromeFlags: '--headless',
+     * chromeFlags: '--headless --no-sandbox',
      * enableErrorReporting: true,
      * outputPath: 'lighthouse',
      * preset: 'experimental',
