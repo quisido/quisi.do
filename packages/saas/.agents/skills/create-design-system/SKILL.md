@@ -33,11 +33,14 @@ bun ./scripts/create-design-system.ts \
   "./path/to/screenshot.png";
 ```
 
-Once the `create-design-system.ts` script has finished creating each component,
-update `./src/design-systems/${SLUG}/index.ts` to set the design system's name
-to a title case variant of the slug, capitalizing each word and replacing
-hyphens with spaces:
+Once the `create-design-system.ts` script has finished creating each component:
 
-```ts
-export const name = "Title Case Name";
-```
+- Update `./src/design-systems/${SLUG}/index.ts` to set the design system's name
+  to a title case variant of the slug, capitalizing each word and replacing
+  hyphens with spaces:
+
+  ```ts
+  export const name = "Title Case Name";
+  ```
+- Update `./src/design-systems/${SLUG}/README.md` with the design system's
+  description and test script.

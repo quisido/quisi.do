@@ -52,8 +52,12 @@ runs:
       env:
         CODEX_HOME: ${{ runner.temp }}/.codex
         GITHUB_TOKEN: ${{ inputs.codex-token }}
+        NODE_ENV: staging
+        VITE_TESTED_DESIGN_SYSTEM: template
         PROMPT: |-
           # Instructions for Codex GitHub Action
+
+          You are a Codex agent running via a GitHub Action.
 
           ## Operating Rules
 

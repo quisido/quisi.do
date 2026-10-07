@@ -21,13 +21,10 @@ runs:
         cache: npm
         cache-dependency-path: package-lock.json
         check-latest: true
-        # Playwright fails to install on Node >=24.15.0.
-        # https://github.com/microsoft/playwright/pull/40747
-        node-version: 24.15.0
         node-version-file: .nvmrc
 
     - name: Restore ESLint cache
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v6
       with:
         key: >-
           eslint-
@@ -45,7 +42,7 @@ runs:
           ${{ github.event.repository.default_branch }}-
 
     - name: Restore TypeScript cache
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v6
       with:
         key: >-
           typescript-
@@ -100,7 +97,7 @@ runs:
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       id: restore-browser-cache
       if: steps.playwright-version.outcome == 'success'
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v6
       with:
         path: ~/.cache/ms-playwright
         restore-keys: playwright-${{ runner.os }}-
@@ -113,6 +110,7 @@ runs:
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       shell: bash
       run: >-
+        sudo apt-get install --yes xvfb;
         npx playwright install-deps
         chromium-headless-shell firefox webkit;
 
@@ -128,7 +126,7 @@ runs:
 
     - name: Save Playwright cache
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v6
       # Only save the browser cache from the main branch. Don't allow pull
       # requests to cache arbitrary files placed into the cached directory.
       if: >-

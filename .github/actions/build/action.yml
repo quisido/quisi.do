@@ -44,7 +44,7 @@ runs:
           inputs.upload == 'true' &&
           steps.build.outcome == 'success'
         }}
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v6
       with:
         key: >-
           typescript-

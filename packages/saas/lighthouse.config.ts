@@ -8,7 +8,6 @@ const CONFIG: Config = {
      * budgetPath: 'lighthouse.budget.json',
      * chromeFlags: '--headless',
      * enableErrorReporting: true,
-     * output: ['html', 'json'],
      * outputPath: 'lighthouse',
      * preset: 'experimental',
      * saveAssets: true,
@@ -83,7 +82,9 @@ const CONFIG: Config = {
       'https://localhost:6586/*',
       'https://localhost:9778/*',
     ],
+    channel: 'msedge-canary',
     locale: 'en-US',
+    output: ['html', 'json'],
     skipAudits: [
       /**
        * The `aria-roles` audit is based on the

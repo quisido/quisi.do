@@ -22,7 +22,7 @@ jobs:
   dependabot-pull-request-failure:
     name: Dependabot pull request failure
     environment: codex
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     if: >-
       (
         github.actor == 'Copilot' ||
@@ -105,6 +105,7 @@ jobs:
           fetch-depth: 9
           persist-credentials: true
           ref: ${{ steps.ref.outputs.result }}
+          show-progress: false
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Limit retries
@@ -135,7 +136,7 @@ jobs:
             echo "::warning title=Codex is retrying::Codex will attempt to resolve this. ($attempt/$MAX_CODEX_ATTEMPTS)"
             exit 0;
           fi
-          echo "::error title=Codex quits::Codex appears unable to resolve this failure after $attempts attempts."
+          echo "::error title=Codex quits::Codex was unable to resolve this failure after $attempts attempts."
           exit 1
 
       - name: Build
