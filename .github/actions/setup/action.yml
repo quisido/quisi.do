@@ -112,7 +112,7 @@ runs:
       run: |-
         sudo apt-get install --yes \
           libicu-dev \
-          libxml2 \
+          libxml2-16 \
           xvfb;
         npx playwright install-deps \
           chromium-headless-shell \
