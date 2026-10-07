@@ -1,0 +1,22 @@
+@use "./dream";
+
+.form {
+  background-color: rgb(0 0 0 / 5%);
+  display: block;
+  font-family: "Trebuchet MS", sans-serif;
+  padding: 1em;
+}
+
+.heading {
+  display: block;
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.form,
+.heading {
+  @include dream.ink;
+}
+
+.form {
+  @include dream.canvas;
+}

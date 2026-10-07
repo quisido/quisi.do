@@ -1,0 +1,16 @@
+@use "./dream";
+
+.separator {
+  display: block;
+}
+
+.separator {
+  @include dream.ink;
+}
+
+.separator {
+  border: 0;
+  background: linear-gradient(90deg, transparent, dream.$edge, dream.$cyan, transparent);
+  height: 1px;
+  margin-block: 1.5rem;
+}

@@ -1,0 +1,74 @@
+// Moonlight, mist, and interference shared by every component.
+$ink: #e3eafa;
+$muted: #b8c5df;
+$cyan: #9de9ed;
+$lavender: #c5b5ff;
+$edge: #697aa0;
+$night: #10172c;
+
+@mixin ink {
+  color: $ink;
+  font-family: "Trebuchet MS", sans-serif;
+  line-height: 1.65;
+  accent-color: $cyan;
+  box-sizing: border-box;
+
+  &:focus-visible {
+    outline: 2px solid $cyan;
+    outline-offset: 4px;
+  }
+
+  &[aria-disabled="true"], &:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  @media (forced-colors: active) {
+    border-color: CanvasText;
+    box-shadow: none;
+    text-shadow: none;
+  }
+}
+
+@mixin surface {
+  @include ink;
+
+  background: radial-gradient(ellipse at 5% 0%, #35426966, transparent 65%),
+    repeating-linear-gradient(113deg, #b8c5df03 0 1px, transparent 1px 5px),
+    $night;
+  border: 1px solid $edge;
+  border-radius: 1.25rem 0.5rem;
+  box-shadow: inset 0 1px 0 #d6e6ff18, 0 12px 36px #05081955,
+    0 0 22px #9295ff0b;
+  padding: 1.25rem;
+}
+
+@mixin control {
+  @include surface;
+
+  border-radius: 0.75rem 0.25rem;
+  padding: 0.55rem 1rem;
+  font-size: 1rem;
+
+  &:hover:not(:disabled, [aria-disabled="true"]) {
+    border-color: $cyan;
+    box-shadow: inset 0 0 16px #9de9ed12, 0 0 18px #9de9ed1c;
+  }
+
+  &[aria-pressed="true"], &[aria-selected="true"], &[aria-checked="true"] {
+    background: linear-gradient(125deg, #334468, #353254);
+    border-color: $cyan;
+    color: #edffff;
+  }
+}
+
+@mixin canvas {
+  @include ink;
+
+  background: radial-gradient(ellipse at 0% 0%, #30495b66, transparent 55%),
+    radial-gradient(ellipse at 100% 80%, #433b6666, transparent 60%),
+    repeating-radial-gradient(ellipse at 80% -20%, transparent 0 29px, #b8c5df06 30px 31px),
+    #0c1224;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  color-scheme: dark;
+}

@@ -1,0 +1,17 @@
+@use "./dream";
+
+.mark {
+  background-color: rgb(255 255 0 / 5%);
+  display: inline;
+}
+
+.mark {
+  @include dream.ink;
+}
+
+.mark {
+  color: #0c1224;
+  background: dream.$lavender;
+  padding: 0.1em 0.25em;
+  border-radius: 0.2em;
+}

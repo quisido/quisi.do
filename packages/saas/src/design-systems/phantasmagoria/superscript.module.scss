@@ -1,0 +1,9 @@
+@use "./dream";
+
+.superscript {
+  display: inline;
+}
+
+.superscript {
+  @include dream.ink;
+}

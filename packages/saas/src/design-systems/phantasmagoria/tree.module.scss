@@ -1,0 +1,41 @@
+@use "./dream";
+
+.tree {
+  display: table;
+}
+
+.caption {
+  // This is the tree caption.
+}
+
+.group {
+  > .item {
+    // This tree item is nested in a group.
+
+  }
+}
+
+.item {
+  // This is all tree items, nested or not.
+}
+
+.tree,
+.caption,
+.group,
+.item {
+  @include dream.ink;
+}
+
+.item {
+  padding: 0.5rem;
+
+  &[aria-selected="true"] {
+    background: #334468;
+    color: dream.$cyan;
+  }
+}
+
+.group {
+  border-inline-start: 1px solid #697aa055;
+  margin-inline-start: 1rem;
+}

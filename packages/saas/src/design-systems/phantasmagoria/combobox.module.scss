@@ -1,0 +1,71 @@
+@use "./dream";
+
+.root {
+  display: inline-block;
+}
+
+.button {
+  display: inline-block;
+}
+
+.combobox {
+  background-color: transparent;
+  border-width: 0;
+  height: 1px;
+  outline-width: 0;
+  width: 1px;
+}
+
+.label {
+  display: inline;
+}
+
+.listbox {
+  display: flex;
+  flex-direction: column;
+
+  &:focus-visible {
+    outline: dream.$cyan solid 2px;
+    outline-offset: 2px;
+
+  }
+}
+
+.option {
+  display: block;
+
+  &:focus-visible {
+    outline: dream.$cyan solid 2px;
+    outline-offset: 2px;
+
+  }
+}
+
+.root,
+.button,
+.combobox,
+.label,
+.listbox,
+.option {
+  @include dream.ink;
+}
+
+.button,
+.listbox {
+  @include dream.control;
+}
+
+.listbox {
+  margin-block-start: 0.5rem;
+  gap: 0.25rem;
+}
+
+.option {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+
+  &[aria-selected="true"], &:hover {
+    background: #334468;
+    color: dream.$cyan;
+  }
+}

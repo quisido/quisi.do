@@ -1,0 +1,19 @@
+@use "./dream";
+
+.scrollbar {
+  display: inline-block;
+
+  &:focus-visible {
+    outline: dream.$cyan solid 2px;
+    outline-offset: 2px;
+
+  }
+}
+
+.scrollbar {
+  @include dream.ink;
+}
+
+.scrollbar {
+  @include dream.control;
+}

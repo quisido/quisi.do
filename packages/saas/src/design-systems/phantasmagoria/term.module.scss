@@ -1,0 +1,14 @@
+@use "./dream";
+
+.term {
+  display: inline;
+}
+
+.term {
+  @include dream.ink;
+}
+
+.term {
+  color: dream.$cyan;
+  font-weight: 600;
+}

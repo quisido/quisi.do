@@ -1,0 +1,19 @@
+@use "./dream";
+
+.navigation {
+  backdrop-filter: blur();
+  display: block;
+}
+
+.navigation {
+  @include dream.ink;
+}
+
+.navigation {
+  @include dream.canvas;
+}
+
+.navigation {
+  border-block-end: 1px solid #697aa066;
+  backdrop-filter: blur(16px);
+}

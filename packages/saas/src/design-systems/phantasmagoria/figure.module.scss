@@ -1,0 +1,18 @@
+@use "./dream";
+
+.figure {
+  display: block;
+}
+
+.caption {
+  display: block;
+}
+
+.figure,
+.caption {
+  @include dream.ink;
+}
+
+.figure {
+  margin-block: 2rem;
+}

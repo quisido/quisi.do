@@ -1,0 +1,13 @@
+@use "./dream";
+
+.search {
+  display: block;
+}
+
+.search {
+  @include dream.ink;
+}
+
+.search {
+  @include dream.canvas;
+}

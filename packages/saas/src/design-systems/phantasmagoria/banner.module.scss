@@ -1,0 +1,19 @@
+@use "./dream";
+
+.banner {
+  background-color: dream.$night;
+  display: block;
+  padding: 1em;
+}
+
+.banner {
+  @include dream.ink;
+}
+
+.banner {
+  @include dream.canvas;
+}
+
+.banner {
+  border-block-end: 1px solid #9de9ed44;
+}

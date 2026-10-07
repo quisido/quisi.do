@@ -1,0 +1,13 @@
+@use "./dream";
+
+.emphasis {
+  display: inline;
+}
+
+.emphasis {
+  @include dream.ink;
+}
+
+.emphasis {
+  color: dream.$lavender;
+}

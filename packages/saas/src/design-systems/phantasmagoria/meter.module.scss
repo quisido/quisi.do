@@ -1,0 +1,14 @@
+@use "./dream";
+
+.meter {
+  display: inline-block;
+}
+
+.meter {
+  @include dream.ink;
+}
+
+.meter {
+  accent-color: dream.$lavender;
+  height: 1rem;
+}

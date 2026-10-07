@@ -1,0 +1,13 @@
+@use "./dream";
+
+.toggle-button {
+  display: inline-block;
+}
+
+.toggle-button {
+  @include dream.ink;
+}
+
+.toggle-button {
+  @include dream.control;
+}

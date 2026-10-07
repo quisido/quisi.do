@@ -1,0 +1,66 @@
+@use "./dream";
+
+.alert-dialog {
+  background-color: dream.$night;
+  border-color: dream.$edge;
+  border-style: solid;
+  border-width: 1px;
+  display: block;
+}
+
+.dismiss-button {
+  display: inline-block;
+}
+
+.heading {
+  display: block;
+}
+
+.icon {
+  display: inline-block;
+}
+
+.underlay {
+  background: #00000020;
+  inset: 0;
+  position: fixed;
+  z-index: 1;
+}
+
+.alert-dialog,
+.dismiss-button,
+.heading,
+.icon,
+.underlay {
+  @include dream.ink;
+}
+
+.alert-dialog {
+  @include dream.surface;
+}
+
+.alert-dialog {
+  max-width: min(36rem, 90vw);
+}
+
+.dismiss-button {
+  @include dream.control;
+
+  cursor: pointer;
+}
+
+.underlay {
+  background: #050819cc;
+  backdrop-filter: blur(12px);
+}
+
+.alert-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: min(36rem, 90vw);
+  max-height: 85vh;
+  overflow-y: auto;
+}

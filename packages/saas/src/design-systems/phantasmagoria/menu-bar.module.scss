@@ -1,0 +1,13 @@
+@use "./dream";
+
+.menu-bar {
+  display: block;
+}
+
+.menu-bar {
+  @include dream.ink;
+}
+
+.menu-bar {
+  @include dream.surface;
+}

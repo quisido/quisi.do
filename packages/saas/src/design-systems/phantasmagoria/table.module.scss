@@ -1,0 +1,33 @@
+@use "./dream";
+
+.table {
+  display: table;
+}
+
+.cell {
+  display: table-cell;
+}
+
+.row {
+  display: table-row;
+}
+
+.table,
+.cell,
+.row {
+  @include dream.ink;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cell {
+  padding: 0.85rem 1rem;
+  border-block-end: 1px solid #697aa055;
+}
+
+.row:nth-child(even) {
+  background: #c5b5ff08;
+}

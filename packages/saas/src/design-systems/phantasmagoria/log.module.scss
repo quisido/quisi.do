@@ -1,0 +1,16 @@
+@use "./dream";
+
+.log {
+  background-color: transparent;
+  display: inline;
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.log {
+  @include dream.ink;
+}
+
+.log {
+  color: dream.$muted;
+  font-family: monospace;
+}

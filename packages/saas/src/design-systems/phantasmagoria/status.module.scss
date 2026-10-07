@@ -1,0 +1,13 @@
+@use "./dream";
+
+.status {
+  display: inline;
+}
+
+.status {
+  @include dream.ink;
+}
+
+.status {
+  @include dream.surface;
+}

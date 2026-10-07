@@ -1,0 +1,14 @@
+@use "./dream";
+
+.timer {
+  display: inline;
+  font-family: monospace;
+}
+
+.timer {
+  @include dream.ink;
+}
+
+.timer {
+  @include dream.surface;
+}

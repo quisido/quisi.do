@@ -1,0 +1,16 @@
+@use "./dream";
+
+.complementary {
+  background-color: transparent;
+  display: block;
+  font-family: "Trebuchet MS", sans-serif;
+  padding: 1em;
+}
+
+.complementary {
+  @include dream.ink;
+}
+
+.complementary {
+  @include dream.canvas;
+}

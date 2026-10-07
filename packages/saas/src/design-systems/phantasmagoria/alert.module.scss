@@ -1,0 +1,32 @@
+@use "./dream";
+
+.alert {
+  background-color: dream.$night;
+  border-color: dream.$edge;
+  border-style: solid;
+  border-width: 1px;
+  display: block;
+}
+
+.description {
+  display: block;
+}
+
+.heading {
+  display: block;
+}
+
+.icon {
+  display: inline-block;
+}
+
+.alert,
+.description,
+.heading,
+.icon {
+  @include dream.ink;
+}
+
+.alert {
+  @include dream.surface;
+}

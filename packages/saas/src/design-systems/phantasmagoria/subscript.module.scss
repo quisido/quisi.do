@@ -1,0 +1,9 @@
+@use "./dream";
+
+.subscript {
+  display: inline;
+}
+
+.subscript {
+  @include dream.ink;
+}

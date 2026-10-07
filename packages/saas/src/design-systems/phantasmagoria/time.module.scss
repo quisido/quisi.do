@@ -1,0 +1,14 @@
+@use "./dream";
+
+.time {
+  display: inline;
+}
+
+.time {
+  @include dream.ink;
+}
+
+.time {
+  color: dream.$muted;
+  font-variant-numeric: tabular-nums;
+}
