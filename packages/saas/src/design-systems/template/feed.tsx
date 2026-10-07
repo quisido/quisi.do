@@ -138,9 +138,9 @@ const FeedControlArticle = ({
  * content as the user browses the page.
  * For example, a feed could be used to present a stream of news stories where
  * each article contains a story with text, links, images, and comments as well
- * as widgets for sharing and commenting. As a reads and interacts with each
- * story and moves the reading cursor from story to story, each story scrolls
- * into view and, as needed, new stories are loaded.
+ * as widgets for sharing and commenting. As a user reads and interacts with
+ * each story and moves the reading cursor from story to story, each story
+ * scrolls into view and, as needed, new stories are loaded.
  * A feed is a container element whose children are articles.
  * Avoid inserting or removing articles in the middle of a feed. These
  * requirements help assistive technologies gracefully respond to changes in the
