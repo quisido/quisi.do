@@ -108,7 +108,7 @@
     "browserslist": "^4.29.1",
     "chrome-devtools-mcp": "^1.10.1",
     "concurrently": "^10.0.5",
-    "eslint": "^10.11.0",
+    "eslint": "^10.12.0",
     "hint": "^7.1.13",
     "playwright": "^1.63.0",
     "puppeteer-core": "^25.12.0",
