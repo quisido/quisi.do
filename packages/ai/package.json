@@ -44,6 +44,6 @@
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vite": "^8.3.2",
     "vitest": "^5.0.1",
-    "wrangler": "^4.147.0"
+    "wrangler": "^4.148.0"
   }
 }
