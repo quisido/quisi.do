@@ -51,7 +51,7 @@
     "url": "git+https://github.com/quisido/quisi.do.git"
   },
   "dependencies": {
-    "@cloudflare/workers-types": "^5.20260922.1",
+    "@cloudflare/workers-types": "^5.20261005.1",
     "@quisido/worker": "^1.0.8",
     "cloudflare-test-utils": "^1.0.2",
     "cloudflare-utils": "^1.0.4",
@@ -61,7 +61,7 @@
     "@microsoft/api-extractor": "^7.59.3",
     "@types/cookie": "^1.0.0",
     "@typescript/native": "npm:typescript@^7.0.2",
-    "@vitest/ui": "^5.0.2",
+    "@vitest/ui": "^5.0.3",
     "concurrently": "^10.0.5",
     "quisido": "^0.0.5",
     "rimraf": "^6.1.0",

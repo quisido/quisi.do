@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@typescript/native": "npm:typescript@^7.0.2",
-    "@vitest/ui": "^5.0.2",
+    "@vitest/ui": "^5.0.3",
     "concurrently": "^10.0.5",
     "fmrs": "^3.0.0",
     "quisido": "^0.0.5",
