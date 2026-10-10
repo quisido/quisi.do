@@ -1,6 +1,5 @@
 import monogatari from '@monogatari/core';
 
-import { registerServiceWorker } from '../pwa/register-service-worker.js';
 import { CHARACTERS } from './characters.js';
 import { SCENES } from './scenes.js';
 import { SCRIPT } from './script.js';
@@ -49,7 +48,7 @@ export const bootGame = (
   bootPromise = engine
     .init(selector)
     .then(async (): Promise<typeof monogatari> => {
-      await registerServiceWorker();
+      // await registerServiceWorker();
       return engine;
     });
 

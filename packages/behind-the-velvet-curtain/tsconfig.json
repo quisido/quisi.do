@@ -23,7 +23,6 @@
   "extends": "quisido/tsconfig.json",
   "include": [
     "src/",
-    "test/",
     "utils/",
     "*.json",
     "*.ts"

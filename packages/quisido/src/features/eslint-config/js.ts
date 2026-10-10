@@ -115,7 +115,7 @@ export const JS_CONFIG: Config = defineConfig({
       {
         amd: false,
         commonjs: false,
-        ignore: ['^virtual:', `\\.(?:${IGNORED_EXTENSIONS.join('|')})$`],
+        ignore: [`\\.(?:${IGNORED_EXTENSIONS.join('|')})$`],
       },
     ],
     'import-x/no-unused-modules': [

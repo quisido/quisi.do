@@ -41,7 +41,6 @@ const CONFIG: VitestConfig = await defineVitestConfig({
         },
       },
     ],
-    setupFiles: ['./test/setup-file.ts'],
   },
 });
 
