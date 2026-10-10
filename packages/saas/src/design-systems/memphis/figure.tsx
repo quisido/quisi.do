@@ -35,7 +35,7 @@ const FigureCaption = ({
 };
 
 /**
- * A figure is a a perceivable section of content that typically contains a
+ * A figure is a perceivable section of content that typically contains a
  * graphical document, images, media player, code snippets, or example text. The
  * parts of a figure may be user-navigable.
  * A figure should be referenced by the main text, but does not have to be

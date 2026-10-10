@@ -6,9 +6,8 @@ const CONFIG: Config = {
     /**
      * CLI settings missing from the `Config` type definition.
      * budgetPath: 'lighthouse.budget.json',
-     * chromeFlags: '--headless',
+     * chromeFlags: '--headless --no-sandbox',
      * enableErrorReporting: true,
-     * output: ['html', 'json'],
      * outputPath: 'lighthouse',
      * preset: 'experimental',
      * saveAssets: true,
@@ -84,6 +83,7 @@ const CONFIG: Config = {
       'https://localhost:9778/*',
     ],
     locale: 'en-US',
+    output: [], // This value is ignored and must be set via CLI.
     skipAudits: [
       /**
        * The `aria-roles` audit is based on the

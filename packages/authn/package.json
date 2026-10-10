@@ -60,6 +60,7 @@
     "cloudflare-utils": "^1.0.4",
     "fmrs": "^3.0.0",
     "form-urlencoded": "^6.1.8",
+    "jose": "^6.2.12",
     "tslib": "^2.8.1"
   },
   "devDependencies": {

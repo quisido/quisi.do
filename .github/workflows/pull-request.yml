@@ -15,13 +15,14 @@ jobs:
   # Stage 1: actionlint, auto-merge, build, dependency-review
   actionlint:
     name: Actionlint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Install
         env:
           ACTIONLINT_VERSION: 1.7.12
@@ -35,7 +36,7 @@ jobs:
   auto-merge:
     name: Auto-merge
     if: github.event.pull_request.user.login == 'dependabot[bot]'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       contents: write      # gh pr merge
       pull-requests: write # gh pr merge
@@ -66,7 +67,7 @@ jobs:
     name: Build
     if: github.event.pull_request.head.repo.full_name == github.repository
     environment: continuous-integration
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     services:
       datadog-agent: &datadog-agent
         image: datadog/agent:latest
@@ -83,6 +84,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Build
         uses: ./.github/actions/build
         with:
@@ -93,7 +95,7 @@ jobs:
     name: Dependency review
     if: github.event.pull_request.head.repo.full_name == github.repository
     environment: continuous-integration
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       contents: read       # git checkout
       pull-requests: write # status checks
@@ -103,6 +105,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Review
         uses: actions/dependency-review-action@v5
 
@@ -112,7 +115,7 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == github.repository
     environment: continuous-integration
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     services:
       datadog-agent: *datadog-agent
     steps:
@@ -121,6 +124,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Lighthouse
         uses: ./.github/actions/lighthouse-ci
 
@@ -129,7 +133,7 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == github.repository
     environment: continuous-integration
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     services:
       datadog-agent: *datadog-agent
     steps:
@@ -138,6 +142,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Test
         uses: ./.github/actions/test
 
@@ -146,7 +151,7 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == github.repository
     environment: continuous-integration
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     services:
       datadog-agent: *datadog-agent
     steps:
@@ -155,6 +160,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Audit
         uses: ./.github/actions/webhint-ci
 
@@ -164,7 +170,7 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == github.repository
     environment: continuous-integration
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       contents: read # git checkout
     steps:
@@ -173,6 +179,7 @@ jobs:
         with:
           fetch-depth: 2
           persist-credentials: false
+          show-progress: false
       - name: Upload
         uses: ./.github/actions/codecov
         with:

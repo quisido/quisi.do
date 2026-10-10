@@ -22,7 +22,7 @@ jobs:
   codex:
     name: Codex
     environment: codex
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     if: >-
       github.actor != 'quisido-codex[bot]' &&
       github.event.action != 'deleted' &&
@@ -90,6 +90,7 @@ jobs:
           fetch-depth: 9
           persist-credentials: true
           ref: ${{ steps.ref.outputs.result }}
+          show-progress: false
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Build

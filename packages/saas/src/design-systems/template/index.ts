@@ -1,5 +1,6 @@
 export {
   type AlertDialogProps,
+  type AlertProps,
   type ApplicationProps,
   type ArticleProps,
   type BannerProps,

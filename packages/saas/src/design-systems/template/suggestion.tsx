@@ -29,8 +29,8 @@ export default function Suggestion({
       className={classes['suggestion']}
       role="suggestion"
     >
-      {insertion && <ins role="insertion">{insertion}</ins>}
-      {deletion && <del role="deletion">{deletion}</del>}
+      {insertion !== undefined && <ins role="insertion">{insertion}</ins>}
+      {deletion !== undefined && <del role="deletion">{deletion}</del>}
     </span>
   );
 }

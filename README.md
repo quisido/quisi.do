@@ -8,9 +8,8 @@ As a monorepo, it composes three types of packages:
 - **Applications** are bundled into static assets (HTML, JS, etc.) and deployed
   with aggressive caching. They serve as the primary entry point for users to
   interface with the final products. For example, **quisi.do**
-  (`packages/saas/`) is a not-for-profit software-as-a-service,
-  **Behind the Velvet Curtain** (`packages/behind-the-velvet-curtain/`) is a
-  game, and there is an untitled game engine.
+  (`packages/saas/`) is a not-for-profit software-as-a-service, and there is an
+  untitled game engine.
 - **Services** are the Cloudflare Worker serverless functions handling
   application features that cannot securely run on the client's device.
   - `authn/` handles the "login with Patreon" workflow, registering users to the

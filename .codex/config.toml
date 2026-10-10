@@ -46,3 +46,6 @@ network_access = true
 
 [shell_environment_policy]
 inherit = "core"
+
+[windows]
+sandbox = "unelevated"

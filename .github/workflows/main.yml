@@ -18,13 +18,14 @@ jobs:
   # Stage 1: actionlint, build
   actionlint:
     name: Actionlint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Download
         env:
           ACTIONLINT_VERSION: 1.7.12
@@ -38,7 +39,7 @@ jobs:
   build:
     name: Build
     environment: continuous-deployment
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     services:
       datadog-agent: &datadog-agent
         image: datadog/agent:latest
@@ -55,6 +56,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Build
         uses: ./.github/actions/build
         with:
@@ -66,13 +68,14 @@ jobs:
     name: Datadog sourcemaps
     environment: continuous-deployment
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Upload
         uses: ./.github/actions/datadog-sourcemaps
         with:
@@ -82,7 +85,7 @@ jobs:
     name: Lighthouse (continuous integration)
     environment: continuous-deployment
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     services:
       datadog-agent: *datadog-agent
     steps:
@@ -91,6 +94,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Lighthouse
         uses: ./.github/actions/lighthouse-ci
 
@@ -98,13 +102,14 @@ jobs:
     name: Sentry release
     environment: continuous-deployment
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Release
         uses: ./.github/actions/sentry-release
         with:
@@ -114,7 +119,7 @@ jobs:
     name: Test
     environment: continuous-deployment
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     services:
       datadog-agent: *datadog-agent
     steps:
@@ -123,6 +128,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Test
         uses: ./.github/actions/test
 
@@ -130,7 +136,7 @@ jobs:
     name: Webhint (continuous integration)
     environment: continuous-deployment
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     services:
       datadog-agent: *datadog-agent
     steps:
@@ -139,6 +145,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Audit
         uses: ./.github/actions/webhint-ci
 
@@ -147,7 +154,7 @@ jobs:
     name: Codecov
     environment: continuous-deployment
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       contents: read # git checkout
     steps:
@@ -156,6 +163,7 @@ jobs:
         with:
           fetch-depth: 2
           persist-credentials: false
+          show-progress: false
       - name: Upload
         uses: ./.github/actions/codecov
         with:
@@ -164,7 +172,7 @@ jobs:
   github-pages:
     name: GitHub Pages
     environment: production
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs:
       - lighthouse-ci
       - test
@@ -179,6 +187,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: true
+          show-progress: false
       - name: Download
         uses: actions/download-artifact@v8
         with:
@@ -194,7 +203,7 @@ jobs:
   npm-publish:
     name: NPM
     environment: production
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs:
       - build
       - test
@@ -209,6 +218,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Setup
         uses: ./.github/actions/setup
       - name: Publish
@@ -219,7 +229,7 @@ jobs:
     name: Cloudflare
     environment: production
     needs: github-pages
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     services:
       datadog-agent: *datadog-agent
     steps:
@@ -228,6 +238,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Purge cache
         uses: ./.github/actions/cloudflare-purge
         with:
@@ -239,7 +250,7 @@ jobs:
     name: GitHub Packages
     environment: production
     needs: npm-publish
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       contents: read  # git checkout
       id-token: write # npm publish
@@ -252,6 +263,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: true
+          show-progress: false
       - name: Publish
         uses: ./.github/actions/github-packages
         with:
@@ -260,7 +272,7 @@ jobs:
   wrangler-deploy:
     name: Wrangler deploy (${{ matrix.service }})
     environment: production
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs:
       - lighthouse-ci
       - npm-publish
@@ -273,6 +285,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Deploy
         uses: ./.github/actions/wrangler-deploy
         with:
@@ -292,7 +305,7 @@ jobs:
   lighthouse-production:
     name: Lighthouse (production)
     environment: continuous-deployment
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs:
       - cloudflare-purge
       - wrangler-deploy
@@ -304,13 +317,14 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Audit
         uses: ./.github/actions/lighthouse-production
 
   webhint-production:
     name: Webhint (production)
     environment: continuous-deployment
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs:
       - cloudflare-purge
       - wrangler-deploy
@@ -322,6 +336,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+          show-progress: false
       - name: Setup
         uses: ./.github/actions/setup
       - name: Run

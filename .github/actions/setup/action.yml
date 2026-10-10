@@ -5,7 +5,7 @@ description: Sets up Node and installs dependencies
 inputs:
   continue-on-error:
     default: 'false'
-    description: Continue the workflow even if the build fails?
+    description: Continue the workflow even if the setup fails?
     required: false
   download-build:
     default: 'true'
@@ -21,13 +21,10 @@ runs:
         cache: npm
         cache-dependency-path: package-lock.json
         check-latest: true
-        # Playwright fails to install on Node >=24.15.0.
-        # https://github.com/microsoft/playwright/pull/40747
-        node-version: 24.15.0
         node-version-file: .nvmrc
 
     - name: Restore ESLint cache
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v6
       with:
         key: >-
           eslint-
@@ -45,7 +42,7 @@ runs:
           ${{ github.event.repository.default_branch }}-
 
     - name: Restore TypeScript cache
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v6
       with:
         key: >-
           typescript-
@@ -100,7 +97,7 @@ runs:
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       id: restore-browser-cache
       if: steps.playwright-version.outcome == 'success'
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v6
       with:
         path: ~/.cache/ms-playwright
         restore-keys: playwright-${{ runner.os }}-
@@ -112,9 +109,15 @@ runs:
     - name: Install Playwright dependencies
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
       shell: bash
-      run: >-
-        npx playwright install-deps
-        chromium-headless-shell firefox webkit;
+      run: |-
+        sudo apt-get install --yes \
+          libicu-dev \
+          libxml2-16 \
+          xvfb;
+        npx playwright install-deps \
+          chromium-headless-shell \
+          firefox \
+          webkit;
 
     - name: Install Playwright browsers
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
@@ -122,13 +125,15 @@ runs:
       shell: bash
       env:
         DEBIAN_FRONTEND: noninteractive
-      run: >-
-        npx playwright install --only-shell
-        chromium-headless-shell firefox webkit;
+      run: |-
+        npx playwright install --only-shell \
+          chromium-headless-shell \
+          firefox \
+          webkit;
 
     - name: Save Playwright cache
       continue-on-error: ${{ inputs.continue-on-error == 'true' }}
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v6
       # Only save the browser cache from the main branch. Don't allow pull
       # requests to cache arbitrary files placed into the cached directory.
       if: >-

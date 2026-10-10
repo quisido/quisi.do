@@ -1,8 +1,0 @@
-{
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "kravets.vscode-publint",
-    "stylelint.vscode-stylelint",
-    "vitest.explorer"
-  ]
-}

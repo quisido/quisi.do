@@ -7,6 +7,7 @@ runs:
   steps:
     - name: Setup
       uses: ./.github/actions/setup
+
     - name: Audit
       shell: bash
       working-directory: packages/saas
@@ -15,13 +16,14 @@ runs:
         ./scripts/lighthouse-production.sh;
         chmod +x ./scripts/postlighthouse.sh;
         ./scripts/postlighthouse.sh;
+
     - name: Upload
       if: always()
       uses: actions/upload-artifact@v6
       with:
         name: lighthouse-production
         if-no-files-found: error
-        path: |
+        path: |-
           packages/saas/lighthouse.report.*
           packages/saas/lighthouse-*.devtoolslog.json
           packages/saas/lighthouse-*.trace.json
