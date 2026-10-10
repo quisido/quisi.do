@@ -82,7 +82,6 @@ const CONFIG: Config = {
       'https://localhost:6586/*',
       'https://localhost:9778/*',
     ],
-    channel: 'msedge-canary',
     locale: 'en-US',
     output: [], // This value is ignored and must be set via CLI.
     skipAudits: [
