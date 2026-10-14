@@ -11,6 +11,11 @@ export const TEST_SPAN: Span = {
   setAttribute: vi.fn(),
   setAttributes: vi.fn(),
   setStatus: vi.fn(),
+  spanContext: vi.fn((): TracingSpanContext => ({
+    spanId: '0000000000000000',
+    traceFlags: 0,
+    traceId: '00000000000000000000000000000000',
+  })),
   updateName: vi.fn(),
 };
 export const TEST_SPAN_CONSTRUCTOR: typeof Span = vi.fn();
