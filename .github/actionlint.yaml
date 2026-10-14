@@ -1,0 +1,4 @@
+# Actionlint 1.7.12 does not yet recognize the Ubuntu runner used by this repository.
+self-hosted-runner:
+  labels:
+    - ubuntu-26.04

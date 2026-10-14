@@ -39,6 +39,7 @@ updates:
     playwright:
       patterns:
       - "@playwright/mcp"
+      - "@playwright/test"
       - playwright
 
     react:
