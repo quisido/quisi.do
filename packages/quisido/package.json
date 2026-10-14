@@ -94,7 +94,7 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
-    "@types/node": "^26.6.4",
+    "@types/node": "^26.6.5",
     "@typescript/native": "npm:typescript@^7.0.2",
     "@vitest/coverage-istanbul": "^5.0.1",
     "eslint": "^10.12.0",
