@@ -1,0 +1,5 @@
+# Actionlint 1.7.12 predates this GitHub-hosted runner label.
+# Remove this entry when the pinned Actionlint version recognizes it.
+self-hosted-runner:
+  labels:
+    - ubuntu-26.04
