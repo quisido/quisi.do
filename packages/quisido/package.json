@@ -85,13 +85,13 @@
     "jiti": "^2.7.0",
     "jsonc-eslint-parser": "^3.3.0",
     "jsonc-parser": "^3.3.1",
-    "knip": "^6.40.0",
-    "prettier": "^3.9.9",
+    "knip": "^6.41.0",
+    "prettier": "^3.9.10",
     "publint": "^0.3.25",
     "typescript-eslint": "^8.71.1",
     "vite": "^8.3.4",
     "yaml-eslint-parser": "^2.1.0",
-    "zod": "^4.6.5"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
