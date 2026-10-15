@@ -45,18 +45,21 @@ runs:
       uses: actions/cache/restore@v6
       with:
         key: >-
-          typescript-
+          typescript-build-
           ${{ runner.os }}-
           ${{ hashFiles('package-lock.json') }}-
           ${{ hashFiles('tsconfig.json', 'packages/*/tsconfig.json') }}-
           ${{ hashFiles('tsconfig.build.json', 'packages/*/tsconfig.build.json') }}-
           ${{ github.event.repository.default_branch }}-
           ${{ github.sha }}
+        # Incremental build records require their corresponding emitted files.
         path: |
           .cache/*.tsbuildinfo
           packages/*/.cache/*.tsbuildinfo
+          dist/
+          packages/*/dist/
         restore-keys: >-
-          typescript-
+          typescript-build-
           ${{ runner.os }}-
           ${{ hashFiles('package-lock.json') }}-
           ${{ hashFiles('tsconfig.json', 'packages/*/tsconfig.json') }}-

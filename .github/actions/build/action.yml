@@ -47,7 +47,7 @@ runs:
       uses: actions/cache/save@v6
       with:
         key: >-
-          typescript-
+          typescript-build-
           ${{ runner.os }}-
           ${{ hashFiles('package-lock.json') }}-
           ${{ hashFiles('tsconfig.json', 'packages/*/tsconfig.json') }}-
@@ -57,6 +57,8 @@ runs:
         path: |-
           .cache/*.tsbuildinfo
           packages/*/.cache/*.tsbuildinfo
+          dist/
+          packages/*/dist/
 
     - name: Upload
       if: ${{ inputs.upload == 'true' && steps.build.outcome == 'success' }}
