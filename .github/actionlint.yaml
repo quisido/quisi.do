@@ -1,0 +1,6 @@
+# GitHub supports this hosted runner, but Actionlint 1.7.12 predates its release.
+# Remove this entry when Actionlint recognizes the label by default.
+# https://docs.github.com/en/actions/reference/runners/github-hosted-runners
+self-hosted-runner:
+  labels:
+    - ubuntu-26.04
