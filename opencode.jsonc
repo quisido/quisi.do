@@ -1,0 +1,16 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "experimental": {},
+  "formatter": true,
+  "lsp": true,
+  "mcp": {},
+  "watcher": {
+    "ignore": [
+      "**/_site/**",
+      "**/.cache/**",
+      "**/.test/**",
+      "**/node_modules/**",
+      "**/dist/**",
+    ],
+  },
+}
