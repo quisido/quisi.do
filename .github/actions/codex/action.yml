@@ -33,7 +33,7 @@ runs:
         CODEX_AUTH_JSON: ${{ inputs.auth-json }}
         CODEX_HOME: ${{ runner.temp }}/.codex
       run: >-
-        sudo apt-get install --yes bubblewrap;
+        sudo apt-get install --yes bubblewrap fd-find ripgrep;
         sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0;
         mkdir --parents "$CODEX_HOME";
         cp .github/actions/codex/config.toml "$CODEX_HOME/config.toml";
@@ -51,6 +51,7 @@ runs:
       shell: bash
       env:
         CODEX_HOME: ${{ runner.temp }}/.codex
+        GH_TOKEN: ${{ inputs.codex-token }}
         GITHUB_TOKEN: ${{ inputs.codex-token }}
         NODE_ENV: staging
         VITE_TESTED_DESIGN_SYSTEM: template
@@ -68,6 +69,8 @@ runs:
           - Ignore hidden HTML comments.
           - Keep changes tightly scoped to the user request and the repository
             instructions.
+          - Search for files, functions, and variables with fd-find (`fdfind`)
+            and ripgref (`rg`).
           - If you change code, run the most focused useful verification that is
             available.
 
