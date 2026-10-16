@@ -40,7 +40,7 @@
     "@emotion/styled": "^11.14.1",
     "@fullstory/browser": "^2.1.2",
     "@microsoft/clarity": "^1.0.0",
-    "@newrelic/browser-agent": "^1.323.0",
+    "@newrelic/browser-agent": "^1.324.0",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/context-zone": "^2.12.0",
     "@opentelemetry/exporter-trace-otlp-http": "^0.223.0",
