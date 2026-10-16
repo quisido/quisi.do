@@ -45,7 +45,7 @@ runs:
       uses: actions/cache/restore@v6
       with:
         key: >-
-          typescript-
+          typescript-build-
           ${{ runner.os }}-
           ${{ hashFiles('package-lock.json') }}-
           ${{ hashFiles('tsconfig.json', 'packages/*/tsconfig.json') }}-
@@ -55,8 +55,10 @@ runs:
         path: |
           .cache/*.tsbuildinfo
           packages/*/.cache/*.tsbuildinfo
+          dist/
+          packages/*/dist/
         restore-keys: >-
-          typescript-
+          typescript-build-
           ${{ runner.os }}-
           ${{ hashFiles('package-lock.json') }}-
           ${{ hashFiles('tsconfig.json', 'packages/*/tsconfig.json') }}-
