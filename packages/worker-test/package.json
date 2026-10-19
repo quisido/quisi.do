@@ -61,7 +61,7 @@
     "@microsoft/api-extractor": "^7.59.4",
     "@types/cookie": "^1.0.0",
     "@typescript/native": "npm:typescript@^7.0.2",
-    "@vitest/ui": "^5.0.4",
+    "@vitest/ui": "^5.0.5",
     "concurrently": "^10.0.6",
     "quisido": "^0.0.5",
     "rimraf": "^6.1.0",
