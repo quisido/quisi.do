@@ -79,7 +79,7 @@
     "concurrently": "^10.0.6",
     "dompurify": "^3.4.17",
     "hint": "^7.1.13",
-    "jsdom": "^30.1.2",
+    "jsdom": "^30.1.3",
     "lighthouse": "^13.5.0",
     "quisido": "^0.0.5",
     "rimraf": "^6.1.0",
