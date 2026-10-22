@@ -85,7 +85,7 @@
     "jiti": "^2.7.0",
     "jsonc-eslint-parser": "^3.3.0",
     "jsonc-parser": "^3.3.1",
-    "knip": "^6.42.0",
+    "knip": "^6.42.1",
     "prettier": "^3.9.10",
     "publint": "^0.3.25",
     "typescript-eslint": "^8.71.2",
