@@ -1,8 +1,4 @@
-import { type Attributes, type AttributeValue } from '@opentelemetry/api';
-import {
-  type RawResourceAttribute,
-  type Resource as ResourceType,
-} from '@opentelemetry/resources';
+import { type Resource as ResourceType } from '@opentelemetry/resources';
 import {
   ATTR_TELEMETRY_SDK_LANGUAGE,
   ATTR_TELEMETRY_SDK_NAME,
@@ -54,19 +50,17 @@ const DEPLOYMENT_ENVIRONMENT: string = validateString(
 );
 
 export default class Resource implements ResourceType {
-  #hostName: AttributeValue;
-  #telemetrySdkLanguage: AttributeValue;
+  #hostName: string;
+  #telemetrySdkLanguage: string;
 
-  public constructor(
-    hostName: AttributeValue,
-    telemetrySdkLanguage: AttributeValue,
-  ) {
+  public constructor(hostName: string, telemetrySdkLanguage: string) {
     this.#hostName = hostName;
     this.#telemetrySdkLanguage = telemetrySdkLanguage;
     this.merge = this.merge.bind(this);
   }
 
-  public get attributes(): Attributes {
+  // Keep string attributes compatible with SDKs using the pre-1.10 API.
+  public get attributes(): Record<string, string | undefined> {
     return {
       [ATTR_CLOUD_ACCOUNT_ID]: CLOUD_ACCOUNT_ID,
       [ATTR_CLOUD_PLATFORM]: CLOUD_PLATFORM,
@@ -92,15 +86,19 @@ export default class Resource implements ResourceType {
     };
   }
 
-  public merge(other: ResourceType | null): ResourceType {
+  public merge(other: ResourceType | null): Resource {
+    const hostName = other?.attributes[ATTR_HOST_NAME];
+    const telemetrySdkLanguage = other?.attributes[ATTR_TELEMETRY_SDK_LANGUAGE];
+
     return new Resource(
-      other?.attributes[ATTR_HOST_NAME] ?? this.#hostName,
-      other?.attributes[ATTR_TELEMETRY_SDK_LANGUAGE] ??
-        this.#telemetrySdkLanguage,
+      typeof hostName === 'string' ? hostName : this.#hostName,
+      typeof telemetrySdkLanguage === 'string'
+        ? telemetrySdkLanguage
+        : this.#telemetrySdkLanguage,
     );
   }
 
-  public getRawAttributes(): RawResourceAttribute[] {
+  public getRawAttributes(): [string, string | undefined][] {
     return Object.entries(this.attributes);
   }
 }
