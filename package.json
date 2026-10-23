@@ -74,7 +74,7 @@
     "fmrs": "^3.0.0"
   },
   "devDependencies": {
-    "@google/gemini-cli": "^0.64.0",
+    "@google/gemini-cli": "^0.65.0",
     "@hint/connector-puppeteer": "^2.5.25",
     "@hint/formatter-codeframe": "^3.1.36",
     "@hint/formatter-html": "^4.3.17",
@@ -112,7 +112,7 @@
     "eslint": "^10.13.0",
     "hint": "^7.1.13",
     "playwright": "^1.64.1",
-    "puppeteer-core": "^25.14.0",
+    "puppeteer-core": "^25.15.0",
     "quisido": "^0.0.5",
     "rimraf": "^6.1.0",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
