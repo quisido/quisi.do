@@ -67,7 +67,7 @@
     "lazy-i18n": "^3.0.4",
     "mixpanel-browser": "^2.84.0",
     "number-format-react": "^2.0.1",
-    "posthog-js": "^1.438.12",
+    "posthog-js": "^1.438.13",
     "react": "^19.3.1",
     "react-aria": "^3.53.1",
     "react-dom": "^19.3.1",
