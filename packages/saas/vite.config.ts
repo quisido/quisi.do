@@ -56,6 +56,10 @@ const USER_CONFIG: UserConfig = {
    */
   // esbuild: ESBUILD_OPTIONS,
   publicDir: '../public',
+  resolve: {
+    // Upgraded exporters require the application's OpenTelemetry API 1.10.
+    dedupe: ['@opentelemetry/api'],
+  },
   root: 'src',
 };
 
