@@ -4,6 +4,7 @@ import { expectStringMatching } from 'cloudflare-test-utils';
 import { StatusCode } from 'cloudflare-utils';
 
 export default class AuthnTestResponse implements TestResponse {
+  public readonly headers: Headers;
   public readonly expectBodyToBe: TestResponse['expectBodyToBe'];
   public readonly expectHeaderToBe: TestResponse['expectHeaderToBe'];
   public readonly expectHeadersToBe: TestResponse['expectHeadersToBe'];
@@ -18,6 +19,7 @@ export default class AuthnTestResponse implements TestResponse {
   ) => void;
 
   public constructor(testResponse: TestResponse) {
+    this.headers = testResponse.headers;
     this.expectBodyToBe = testResponse.expectBodyToBe.bind(testResponse);
     this.expectHeaderToBe = testResponse.expectHeaderToBe.bind(testResponse);
     this.expectHeadersToBe = testResponse.expectHeadersToBe.bind(testResponse);
@@ -49,10 +51,11 @@ export default class AuthnTestResponse implements TestResponse {
       testResponse.expectNoBody();
       testResponse.expectStatusCodeToBe(StatusCode.SeeOther);
       testResponse.expectHeadersToBe({
+        'cache-control': 'no-store',
         'content-location': `https://host.test.quisi.do/test-return-path/`,
         location: `https://host.test.quisi.do/test-return-path/`,
         'set-cookie': expectStringMatching(
-          /^__Secure-Authentication-ID=.{64}; Domain=quisi.do; Max-Age=86400; Partitioned; Path=\/; SameSite=Lax; Secure$/u,
+          /^__Secure-Authentication-ID=[A-Za-z0-9_-]+\.\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+; Domain=quisi.do; Max-Age=86400; HttpOnly; Partitioned; Path=\/; SameSite=Lax; Secure$/u,
         ),
       });
     };

@@ -13,6 +13,7 @@ describe('TestResponse', (): void => {
 
     testResponse.expectStatusCodeToBe(201);
     testResponse.expectHeaderToBe('x-test', 'value');
+    expect(testResponse.headers.get('x-test')).toBe('value');
     testResponse.expectHeadersToBe({ 'x-test': 'value' });
     expect((): void => {
       testResponse.expectStatusCodeToBe(200);

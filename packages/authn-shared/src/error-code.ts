@@ -1,6 +1,9 @@
 /* eslint-disable no-magic-numbers */
 
 export enum ErrorCode {
+  InvalidJwtConfiguration = 57,
+  AuthenticationTokenIssuanceFailed = 58,
+
   // OAuth
   InvalidReturnPath = 11,
   InvalidStateSessionId = 51,

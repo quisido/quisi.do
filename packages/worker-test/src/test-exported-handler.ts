@@ -1,6 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 import {
   ExportedHandler,
+  type ExportedHandlerOptions,
   type FetchHandler as IFetchHandler,
 } from '@quisido/worker';
 import { isAnalyticsEngineDataset } from 'cloudflare-utils';
@@ -13,9 +14,10 @@ import mapRequestInfoToString from './map-request-info-to-string.js';
 import noop from './noop.js';
 import TestResponse from './test-response.js';
 
-interface Options {
+interface Options<Env> {
   readonly env?: Readonly<Record<string, unknown>> | undefined;
-  readonly FetchHandler: new () => IFetchHandler;
+  readonly FetchHandler: new () => IFetchHandler<Env>;
+  readonly finally?: ExportedHandlerOptions<Env, unknown, unknown>['finally'];
   readonly now?: (() => number) | undefined;
   readonly onError?: ((error: Error) => void) | undefined;
   readonly onLog?: ((message: string) => void) | undefined;
@@ -63,11 +65,11 @@ const TEST_TRACING: Tracing = {
   startSpan: (_name: string): Span => TEST_SPAN,
 };
 
-export default class TestExportedHandler {
+export default class TestExportedHandler<Env = unknown> {
   readonly #consoleError: Console['error'] = vi.fn();
   readonly #consoleLog: Console['log'] = vi.fn();
   readonly #env: Readonly<Record<string, unknown>>;
-  readonly #exportedHandler: ExportedHandler;
+  readonly #exportedHandler: ExportedHandler<Env>;
   readonly #fetchErrors: Error[] = [];
   readonly #mockedResponses: (readonly [RequestInfo, unknown, Response])[] = [];
   #now: () => number = Date.now.bind(Date);
@@ -75,11 +77,12 @@ export default class TestExportedHandler {
   public constructor({
     env = {},
     FetchHandler,
+    finally: onFinally,
     now = this.getNow.bind(this),
     onError = noop,
     onLog = noop,
     onMetric = noop,
-  }: Options) {
+  }: Options<Env>) {
     this.#env = env;
     this.expectMetric = this.expectMetric.bind(this);
     this.fetch = this.fetch.bind(this);
@@ -94,7 +97,7 @@ export default class TestExportedHandler {
       this.expectToHaveWrittenDataPoint.bind(this);
 
     this.#handleMetric.mockImplementation(onMetric);
-    this.#exportedHandler = new ExportedHandler({
+    this.#exportedHandler = new ExportedHandler<Env>({
       console: {
         ...console,
         error: this.#consoleError,
@@ -102,6 +105,7 @@ export default class TestExportedHandler {
       },
       fetch: this.#mockedFetch,
       FetchHandler,
+      finally: onFinally,
       now,
       onError,
       onLog,
@@ -150,7 +154,8 @@ export default class TestExportedHandler {
 
     const promises: Promise<void>[] = [];
 
-    const response: Response = await fetch(request, this.#env, {
+    // Tests intentionally allow missing and invalid bindings.
+    const response: Response = await fetch(request, this.#env as Env, {
       abort: vi.fn(),
       exports: {},
       passThroughOnException: TEST_PASS_THROUGH_ON_EXCEPTION,

@@ -34,7 +34,7 @@ export default async function handlePatreonFetchRequest(
   // Existing user
   if (userId !== null) {
     this.setFiscalResponsibility(userId);
-    return createOAuthResponse.call(this, { returnPath, userId });
+    return await createOAuthResponse.call(this, { returnPath, userId });
   }
 
   const newUserId: number = await insertIntoOAuth.call(
@@ -45,5 +45,8 @@ export default async function handlePatreonFetchRequest(
   );
 
   this.setFiscalResponsibility(newUserId);
-  return createOAuthResponse.call(this, { returnPath, userId: newUserId });
+  return await createOAuthResponse.call(this, {
+    returnPath,
+    userId: newUserId,
+  });
 }

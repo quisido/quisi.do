@@ -1,40 +1,69 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import { MetricName as WorkerMetricName } from '@quisido/worker';
-import { describe, it } from 'vitest';
+import { TestAnalyticsEngineDataset } from 'cloudflare-test-utils';
+import { StatusCode } from 'cloudflare-utils';
+import { describe, expect, it, vi } from 'vitest';
 
+import createTestAuthenticationToken from '../../test/authentication-token.js';
+import createIp from '../../test/create-ip.js';
 import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 
-describe('handleWhoAmIFetchRequest', (): void => {
-  it('should emit and respond when the KV namespace is invalid', async (): Promise<void> => {
-    // Assemble
-    const {
-      expectToHaveEmitPrivateMetric,
-      expectToHaveEmitPublicMetric,
-      fetch,
-    } = new TestAuthnExportedHandler({
-      env: {
-        AUTHN_USER_IDS: true,
-      },
-    });
+const INVALID_SECRETS: readonly unknown[] = [
+  undefined,
+  true,
+  '',
+  'sensitive-invalid-secret',
+  'A'.repeat(42),
+  `${'A'.repeat(42)}B`,
+];
 
-    // Act
-    const { expectJsonErrorResponse } = await fetch('/whoami/', {
-      headers: new Headers({
-        cookie: '__Secure-Authentication-ID=abcdef',
-      }),
-    });
+describe('JWT configuration failures', (): void => {
+  it.each(INVALID_SECRETS)(
+    'fails closed for an invalid secret (%s)',
+    async (secret): Promise<void> => {
+      const publicDataset = new TestAnalyticsEngineDataset();
+      const privateDataset = new TestAnalyticsEngineDataset();
+      const publicWrites = vi.spyOn(publicDataset, 'writeDataPoint');
+      const privateWrites = vi.spyOn(privateDataset, 'writeDataPoint');
+      const handler = new TestAuthnExportedHandler({
+        env: {
+          JWT_ENCRYPTION_SECRET: secret,
+          PRIVATE_DATASET: privateDataset,
+          PUBLIC_DATASET: publicDataset,
+        },
+      });
+      const token: string = await createTestAuthenticationToken();
+      const response = await handler.fetch('/whoami/', {
+        headers: {
+          'cf-connecting-ip': createIp(),
+          cookie: `__Secure-Authentication-ID=${token}`,
+        },
+      });
+      response.expectStatusCodeToBe(StatusCode.InternalServerError);
+      response.expectJsonErrorResponse(ErrorCode.InvalidJwtConfiguration);
+      const telemetry: string = JSON.stringify([
+        publicWrites.mock.calls,
+        privateWrites.mock.calls,
+      ]);
+      expect(telemetry).not.toContain(token);
+      expect(telemetry).not.toContain('sensitive-invalid-secret');
+    },
+  );
 
-    // Assert
-    expectJsonErrorResponse(ErrorCode.InvalidAuthnUserIdsNamespace);
-
-    expectToHaveEmitPrivateMetric(WorkerMetricName.InvalidBinding, {
-      key: 'AUTHN_USER_IDS',
-      value: 'true',
-    });
-
-    expectToHaveEmitPublicMetric(WorkerMetricName.InvalidBinding, {
-      key: 'AUTHN_USER_IDS',
-      type: 'boolean',
-    });
-  });
+  it.each(['JWT_ISSUER', 'JWT_AUDIENCE'])(
+    'fails closed when %s is missing',
+    async (key): Promise<void> => {
+      const handler = new TestAuthnExportedHandler({
+        env: { [key]: undefined },
+      });
+      const token: string = await createTestAuthenticationToken();
+      const response = await handler.fetch('/whoami/', {
+        headers: {
+          'cf-connecting-ip': createIp(),
+          cookie: `__Secure-Authentication-ID=${token}`,
+        },
+      });
+      response.expectStatusCodeToBe(StatusCode.InternalServerError);
+      response.expectJsonErrorResponse(ErrorCode.InvalidJwtConfiguration);
+    },
+  );
 });

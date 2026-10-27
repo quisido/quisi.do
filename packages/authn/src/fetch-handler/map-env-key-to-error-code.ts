@@ -15,8 +15,10 @@ export default function mapEnvKeyToErrorCode(key: string): ErrorCode {
     case 'AUTHN_DB':
       return ErrorCode.InvalidDatabase;
 
-    case 'AUTHN_USER_IDS':
-      return ErrorCode.InvalidAuthnUserIdsNamespace;
+    case 'JWT_AUDIENCE':
+    case 'JWT_ENCRYPTION_SECRET':
+    case 'JWT_ISSUER':
+      return ErrorCode.InvalidJwtConfiguration;
 
     case 'PATREON_OAUTH_CLIENT_ID':
       return ErrorCode.InvalidPatreonOAuthClientId;

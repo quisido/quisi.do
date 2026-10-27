@@ -6,7 +6,7 @@ import handleFinally from './handle-finally.js';
 import handleLog from './handle-log.js';
 import handleMetric from './handle-metric.js';
 
-const exportedHandler: ExportedHandler = new ExportedHandler({
+const exportedHandler: ExportedHandler<Env> = new ExportedHandler<Env>({
   console,
   fetch,
   FetchHandler: AuthnFetchHandler,

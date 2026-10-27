@@ -8,4 +8,4 @@ const TEST_PATREON_SEARCH: string = new URLSearchParams({
   state: TEST_PATREON_STATE,
 }).toString();
 
-export const TEST_PATREON_URL = `/patreon/?${TEST_PATREON_SEARCH}`;
+export const TEST_PATREON_URL: string = `/patreon/?${TEST_PATREON_SEARCH}`;

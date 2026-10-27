@@ -10,10 +10,6 @@ export default function getSessionIdCookie(this: AuthnFetchHandler): string {
     return sessionId;
   }
 
-  this.emitPrivateMetric(MetricName.MissingSessionIdCookie, {
-    value: JSON.stringify(this.cookies),
-  });
-
   this.emitPublicMetric(MetricName.MissingSessionIdCookie, {
     keys: Object.keys(this.cookies).join(', '),
   });

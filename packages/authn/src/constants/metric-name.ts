@@ -1,4 +1,9 @@
 export enum MetricName {
+  AuthenticationTokenIssued = 'authentication.token.issued',
+  AuthenticationTokenIssuanceFailed = 'authentication.token.issuance.failed',
+  AuthenticationTokenValidated = 'authentication.token.validated',
+  AuthenticationTokenRejected = 'authentication.token.rejected',
+  InvalidJwtConfiguration = 'authentication.jwt.configuration.invalid',
   MissingIP = 'ip.missing',
 
   // OAuth

@@ -226,7 +226,10 @@ export default async function handleMetric(
           return;
         }
 
-        emitPrivately({ key, value });
+        emitPrivately({
+          key,
+          value: key === 'JWT_ENCRYPTION_SECRET' ? '[REDACTED]' : value,
+        });
         emitPublicly({ key, type });
         return;
       }

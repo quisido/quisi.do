@@ -1,6 +1,7 @@
 import { type TestResponse } from '@quisido/worker-test';
 
 export default class CspTestResponse implements TestResponse {
+  public readonly headers: Headers;
   public readonly expectBodyToBe: TestResponse['expectBodyToBe'];
   public readonly expectHeaderToBe: TestResponse['expectHeaderToBe'];
   public readonly expectHeadersToBe: TestResponse['expectHeadersToBe'];
@@ -8,6 +9,7 @@ export default class CspTestResponse implements TestResponse {
   public readonly expectStatusCodeToBe: TestResponse['expectStatusCodeToBe'];
 
   public constructor(testResponse: TestResponse) {
+    this.headers = testResponse.headers;
     this.expectBodyToBe = testResponse.expectBodyToBe.bind(testResponse);
     this.expectHeaderToBe = testResponse.expectHeaderToBe.bind(testResponse);
     this.expectHeadersToBe = testResponse.expectHeadersToBe.bind(testResponse);

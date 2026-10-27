@@ -22,7 +22,9 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
   }
 
   switch (index) {
+    // Single data points
     case MetricName.AuthenticationCreated:
+    case MetricName.AuthenticationTokenIssuanceFailed:
     case MetricName.CSRF:
     case MetricName.ExpiredAuthnId:
     case MetricName.ForbiddenPatreonIdentityResponse:
@@ -36,6 +38,7 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
     case MetricName.InvalidAuthnUserIdsNamespace:
     case MetricName.InvalidBudget:
     case MetricName.InvalidDatabase:
+    case MetricName.InvalidJwtConfiguration:
     case MetricName.InvalidOAuthUserId:
     case MetricName.InvalidPatreonAccessToken:
     case MetricName.InvalidPatreonClientId:
@@ -88,6 +91,10 @@ export default function mapAnalyticsEngineRowIndexToDatumFactory(
     case MetricName.WhoAmIThrottled:
       return mapRowToDatum;
 
+    // Timestamps
+    case MetricName.AuthenticationTokenIssued:
+    case MetricName.AuthenticationTokenValidated:
+    case MetricName.AuthenticationTokenRejected:
     case MetricName.AuthenticationRead:
     case MetricName.CachedAuthnId:
     case MetricName.FaviconIco:

@@ -69,11 +69,8 @@ describe('handleOAuthPathname', (): void => {
     });
 
     // Assemble
-    const {
-      expectToHaveEmitPrivateMetric,
-      expectToHaveEmitPublicMetric,
-      fetch,
-    } = new TestAuthnExportedHandler();
+    const { expectToHaveEmitPublicMetric, fetch } =
+      new TestAuthnExportedHandler();
 
     // Act
     const search: string = new URLSearchParams({ state: testState }).toString();
@@ -85,14 +82,6 @@ describe('handleOAuthPathname', (): void => {
 
     // Assert
     expectOAuthErrorResponse(ErrorCode.MissingSessionIdCookie);
-
-    expectToHaveEmitPrivateMetric(MetricName.MissingSessionIdCookie, {
-      value: JSON.stringify({
-        ab: 'cd',
-        ef: 'gh',
-        ij: 'kl',
-      }),
-    });
 
     expectToHaveEmitPublicMetric(MetricName.MissingSessionIdCookie, {
       keys: 'ab, ef, ij',

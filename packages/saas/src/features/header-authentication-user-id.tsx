@@ -1,48 +1,56 @@
-import { type ReactElement } from 'react';
+import { type ReactElement, useState } from 'react';
 
+import { WHOAMI } from '../constants/whoami.js';
 import { useAuthentication } from '../contexts/authentication.js';
-import { Link } from '../design-systems/template/index.js';
-import setCookie from '../utils/set-cookie.js';
+import { Button } from '../design-systems/template/index.js';
 
 interface Props {
   readonly children: number;
+  readonly fetch?: typeof globalThis.fetch | undefined;
 }
 
-interface State {
-  readonly handleUnauthenticateClick: () => false;
-}
-
-const useHeaderAuthenticationUserId = (): State => {
-  const { set } = useAuthentication();
-
-  return {
-    handleUnauthenticateClick(): false {
-      setCookie('Authentication-ID', '', {
-        expiresMs: 1,
-        partitioned: true,
-        path: '/',
-        subdomains: true,
-      });
-
-      set({
-        id: null,
-      });
-
-      return false;
-    },
-  };
-};
+const NO_CONTENT = 204;
 
 export default function HeaderAuthenticationUserId({
   children,
+  fetch = globalThis.fetch,
 }: Props): ReactElement {
-  const { handleUnauthenticateClick } = useHeaderAuthenticationUserId();
+  const { set } = useAuthentication();
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string>();
+
+  const onUnauthenticate = async (): Promise<void> => {
+    setPending(true);
+    setError(undefined);
+    try {
+      const response: Response = await fetch(WHOAMI, {
+        credentials: 'include',
+        method: 'DELETE',
+        redirect: 'error',
+      });
+      if (response.status !== NO_CONTENT) {
+        throw new Error('Logout request failed');
+      }
+      set({ id: null });
+    } catch (_error: unknown) {
+      setError('Unable to sign out. Please try again.');
+    } finally {
+      setPending(false);
+    }
+  };
+
   return (
     <div>
       <div>User #{children}</div>
-      <Link href="/" onClick={handleUnauthenticateClick} title="">
+      <Button
+        disabled={pending}
+        onClick={(): void => {
+          void onUnauthenticate();
+        }}
+      >
         Unauthenticate
-      </Link>
+      </Button>
+      {typeof error === 'string' && <p role="alert">{error}</p>}
     </div>
   );
 }
