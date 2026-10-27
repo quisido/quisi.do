@@ -81,7 +81,7 @@
     "eslint-plugin-jsonc": "^3.4.2",
     "eslint-plugin-prettier": "^5.5.7",
     "eslint-plugin-simple-import-sort": "^14.0.0",
-    "eslint-plugin-sort-keys-custom-order": "^4.2.0",
+    "eslint-plugin-sort-keys-custom-order": "^4.3.0",
     "jiti": "^2.7.0",
     "jsonc-eslint-parser": "^3.3.0",
     "jsonc-parser": "^3.3.1",
