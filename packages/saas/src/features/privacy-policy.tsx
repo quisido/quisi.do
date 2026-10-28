@@ -1,6 +1,6 @@
-import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 
+import I18n from '../components/i18n.js';
 import {
   Link,
   Main,

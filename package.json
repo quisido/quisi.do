@@ -24,7 +24,6 @@
     "game": "npm --workspace=packages/game start",
     "knip": "knip",
     "playwright-mcp": "npx @playwright/mcp --caps devtools,vision --console-level warning --headless --isolated --sandbox --storage-state=.cache/playwright-mcp/storage-state.json",
-    "prompt": "quisido-ai",
     "publint": "quisido publint",
     "publish": "node ./dist/scripts/publish.js",
     "quisido": "npm --workspace=packages/quisido start",

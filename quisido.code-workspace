@@ -45,10 +45,6 @@
       "path": "packages/fmrs"
     },
     {
-      "name": "📦 lazy-i18n",
-      "path": "packages/lazy-i18n"
-    },
-    {
       "name": "📦 number-format-react",
       "path": "packages/number-format-react"
     },

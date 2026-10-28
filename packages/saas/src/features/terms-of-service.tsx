@@ -1,6 +1,6 @@
-import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 
+import I18n from '../components/i18n.js';
 import { Main, Paragraph, Region } from '../design-systems/template/index.js';
 import useLocale from '../hooks/use-locale.js';
 import Page from './page.js';

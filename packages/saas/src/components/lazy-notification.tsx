@@ -1,4 +1,3 @@
-import I18n from 'lazy-i18n';
 import { type ReactElement, type RefObject, useEffect, useState } from 'react';
 
 import { type NotificationProps } from '../contexts/notifications.js';
@@ -6,6 +5,7 @@ import useMountedRef from '../hooks/use-mounted-ref.js';
 import type NotificationType from '../types/notification.js';
 import mapErrorToNotification from '../utils/map-error-to-notification.js';
 import noop from '../utils/noop.js';
+import I18n from './i18n.js';
 import Notification from './notification.js';
 
 interface LazyNotificationProps {

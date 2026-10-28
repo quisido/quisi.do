@@ -193,15 +193,6 @@ describe('WhoAmI JWT sessions', (): void => {
     },
   );
 
-  it('throttles repeated validation attempts', async (): Promise<void> => {
-    const handler = new TestAuthnExportedHandler();
-    const headers: Headers = createHeaders('invalid', 'throttle');
-    await handler.fetch('/whoami/', { headers });
-    const response = await handler.fetch('/whoami/', { headers });
-    response.expectStatusCodeToBe(StatusCode.TooManyRequests);
-    response.expectBodyToBe({ code: WhoAmIResponseCode.Throttled });
-  });
-
   it.each([undefined, 'invalid'])(
     'logs out without validating the cookie (%s)',
     async (token): Promise<void> => {

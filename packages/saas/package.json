@@ -58,7 +58,6 @@
     "@sentry/tracing": "^7.120.4",
     "fmrs": "^3.0.0",
     "i18next": "^26.5.3",
-    "lazy-i18n": "^3.0.4",
     "mixpanel-browser": "^2.84.0",
     "number-format-react": "^2.0.1",
     "posthog-js": "^1.438.13",

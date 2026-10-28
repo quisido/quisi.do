@@ -1,7 +1,7 @@
-import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
 
 import { Link } from '../design-systems/template/index.js';
+import I18n from './i18n.js';
 
 export default function CsrfLink(): ReactElement {
   return (

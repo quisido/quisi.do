@@ -32,9 +32,6 @@
       "path": "../fmrs/tsconfig.build.json"
     },
     {
-      "path": "../lazy-i18n/tsconfig.build.json"
-    },
-    {
       "path": "../number-format-react/tsconfig.build.json"
     },
     {
