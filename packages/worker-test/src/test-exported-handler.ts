@@ -158,6 +158,7 @@ export default class TestExportedHandler<Env = unknown> {
     const response: Response = await fetch(request, this.#env as Env, {
       abort: vi.fn(),
       exports: {},
+      mapVirtualHost: vi.fn(),
       passThroughOnException: TEST_PASS_THROUGH_ON_EXCEPTION,
       props: null,
       tracing: TEST_TRACING,
