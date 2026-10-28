@@ -6,11 +6,11 @@
   "mcp": {},
   "permissions": [
     { "action": "shell", "resource": "npm --workspace=* pack", "effect": "allow" },
-    { "action": "shell", "resource": "npm --workspace=* run *", "effect": "allow" },
+    { "action": "shell", "resource": "npm --workspace=* run build", "effect": "allow" },
     { "action": "shell", "resource": "npm --workspace=* start", "effect": "allow" },
     { "action": "shell", "resource": "npm --workspace=* test", "effect": "allow" },
     { "action": "shell", "resource": "npm pack", "effect": "allow" },
-    { "action": "shell", "resource": "npm run *", "effect": "allow" },
+    { "action": "shell", "resource": "npm run build", "effect": "allow" },
     { "action": "shell", "resource": "npm start", "effect": "allow" },
     { "action": "shell", "resource": "npm test", "effect": "allow" },
     { "action": "shell", "resource": "npx --workspace=* eslint *", "effect": "allow" },

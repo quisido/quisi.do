@@ -49,17 +49,6 @@ export default async function handleWhoAmIFetchRequest(
     });
   }
 
-  // Throttle
-  if (this.shouldThrottleWhoAmIByIp()) {
-    this.emitPublicMetric(MetricName.WhoAmIThrottled);
-
-    return new WhoAmIResponse({
-      accessControlAllowOrigin: this.accessControlAllowOrigin,
-      code: WhoAmIResponseCode.Throttled,
-      status: StatusCode.TooManyRequests,
-    });
-  }
-
   try {
     const userId: number | null = await validateAuthenticationToken.call(
       this,

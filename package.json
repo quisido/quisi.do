@@ -22,8 +22,7 @@
     "eslint-config": "npm --workspace=packages/eslint-config start",
     "fmrs": "npm --workspace=packages/fmrs start",
     "game": "npm --workspace=packages/game start",
-    "gemini": "gemini --approval-mode auto_edit --sandbox",
-    "knip": "quisido knip",
+    "knip": "knip",
     "playwright-mcp": "npx @playwright/mcp --caps devtools,vision --console-level warning --headless --isolated --sandbox --storage-state=.cache/playwright-mcp/storage-state.json",
     "prompt": "quisido-ai",
     "publint": "quisido publint",
@@ -70,11 +69,7 @@
     "unrs-resolver@1.12.2": true,
     "workerd@*": true
   },
-  "dependencies": {
-    "fmrs": "^3.0.0"
-  },
   "devDependencies": {
-    "@google/gemini-cli": "^0.65.0",
     "@hint/connector-puppeteer": "^2.5.25",
     "@hint/formatter-codeframe": "^3.1.36",
     "@hint/formatter-html": "^4.3.17",
@@ -108,7 +103,6 @@
     "@vitest/ui": "^5.0.5",
     "browserslist": "^4.29.4",
     "chrome-devtools-mcp": "^1.11.0",
-    "concurrently": "^10.0.6",
     "eslint": "^10.13.0",
     "hint": "^7.1.13",
     "playwright": "^1.64.1",
@@ -117,8 +111,7 @@
     "rimraf": "^6.1.0",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vite": "^8.3.4",
-    "vitest": "^5.0.1",
-    "zod-validation-error": "^5.0.0"
+    "vitest": "^5.0.1"
   },
   "overrides": {
     "@hint/connector-puppeteer": {

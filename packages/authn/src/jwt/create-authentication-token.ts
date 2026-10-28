@@ -9,6 +9,14 @@ import getAuthenticationTokenKey from './get-authentication-token-key.js';
 
 const MINIMUM_USER_ID = 1;
 
+const toName = (error: unknown): string => {
+  if (error instanceof Error) {
+    return error.name;
+  }
+
+  return typeof error;
+};
+
 export default async function createAuthenticationToken(
   this: AuthnFetchHandler,
   userId: number,
@@ -34,9 +42,11 @@ export default async function createAuthenticationToken(
 
     this.emitPublicMetric(MetricName.AuthenticationTokenIssued);
     return token;
-  } catch (_error: unknown) {
+  } catch (error: unknown) {
     this.emitPublicMetric(MetricName.AuthenticationTokenIssuanceFailed);
-    this.logError(new Error('Authentication token issuance failed'));
+    this.logError(
+      new Error(`Authentication token issuance failed: ${toName(error)}`),
+    );
     throw new FatalError(ErrorCode.AuthenticationTokenIssuanceFailed);
   }
 }

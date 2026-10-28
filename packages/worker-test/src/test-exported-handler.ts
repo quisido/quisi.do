@@ -166,7 +166,11 @@ export default class TestExportedHandler<Env = unknown> {
       },
     });
 
-    await Promise.all(promises);
+    // If `waitUntil` calls `waitUntil`, a new item will appear in the array.
+    while (promises.length > 0) {
+      // eslint-disable-next-line no-await-in-loop
+      await Promise.all(promises.splice(0));
+    }
 
     const [firstFetchError] = this.#fetchErrors;
     if (typeof firstFetchError !== 'undefined') {

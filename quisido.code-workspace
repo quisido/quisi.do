@@ -13,10 +13,6 @@
       "path": "packages/game"
     },
     {
-      "name": "⚙️ AI",
-      "path": "packages/ai"
-    },
-    {
       "name": "⚙️ Authentication",
       "path": "packages/authn"
     },

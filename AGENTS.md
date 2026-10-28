@@ -29,7 +29,7 @@ typescript-eslint). Keep both.
 ## Commands
 
 - Scope everything with workspaces:
-  `npm --workspace=packages/<name> <script>`.
+  `npm --workspace=packages/<name> run <script>`.
 - Root shortcuts run a package's dev server: `npm run authn`, `npm run csp`,
   `npm run dashboard`, `npm run game`, `npm run saas`, `npm run worker`, ...
   Root `npm start` (via `scripts/start.ts`) only starts the published,

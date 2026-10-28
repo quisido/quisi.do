@@ -21,12 +21,10 @@ import Throttler from './utils/throttler.js';
 
 const DEFAULT_FISCAL_USER_ID = 0;
 const NONE = 0;
-const OAUTH_IP_THROTTLE_LIMIT = 10000;
-const WHOAMI_IP_THROTTLE_LIMIT = 1000;
+const OAUTH_IP_THROTTLE_LIMIT = 10_000;
 
 export default class AuthnFetchHandler extends FetchHandler<Env> {
   static #OAUTH_IP_THROTTLER = new Throttler();
-  static #WHOAMI_IP_THROTTLER = new Throttler();
 
   #fiscalUserId: number | undefined;
   #totalExpense = NONE;
@@ -133,14 +131,6 @@ export default class AuthnFetchHandler extends FetchHandler<Env> {
     return AuthnFetchHandler.#OAUTH_IP_THROTTLER.run(
       this.ip,
       OAUTH_IP_THROTTLE_LIMIT,
-      { now: this.now.bind(this) },
-    );
-  }
-
-  public shouldThrottleWhoAmIByIp(): boolean {
-    return AuthnFetchHandler.#WHOAMI_IP_THROTTLER.run(
-      this.ip,
-      WHOAMI_IP_THROTTLE_LIMIT,
       { now: this.now.bind(this) },
     );
   }

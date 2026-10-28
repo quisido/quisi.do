@@ -16,7 +16,9 @@ export default async function validateAuthenticationToken(
   const audience: string = this.jwtAudience;
 
   try {
-    const { payload } = await jwtDecrypt(token, key, {
+    const {
+      payload: { exp: expiresAt, iat: issuedAt, sub: subject },
+    } = await jwtDecrypt(token, key, {
       audience,
       contentEncryptionAlgorithms: ['A256GCM'],
       currentDate: new Date(this.now()),
@@ -27,7 +29,6 @@ export default async function validateAuthenticationToken(
       typ: 'JWT',
     });
 
-    const { exp: expiresAt, iat: issuedAt, sub: subject } = payload;
     if (
       typeof subject !== 'string' ||
       !SUBJECT_PATTERN.test(subject) ||

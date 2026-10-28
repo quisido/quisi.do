@@ -14,7 +14,7 @@
     "test": "quisido test",
     "clean": "rm -rf .cache .tests dist node_modules",
     "eslint": "eslint . --cache --cache-location ./.cache/",
-    "knip": "quisido knip",
+    "knip": "knip",
     "publint": "quisido publint",
     "vitest": "vitest",
     "vitest:run": "vitest run",
@@ -90,8 +90,7 @@
     "publint": "^0.3.25",
     "typescript-eslint": "^8.72.0",
     "vite": "^8.3.4",
-    "yaml-eslint-parser": "^2.1.0",
-    "zod": "^4.6.7"
+    "yaml-eslint-parser": "^2.1.0"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
