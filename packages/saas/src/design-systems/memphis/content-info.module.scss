@@ -15,9 +15,8 @@
   color: var(--cream);
   display: grid;
   isolation: isolate;
-  min-block-size: clamp(22rem, 40vw, 34rem);
   overflow: hidden;
-  padding: clamp(5rem, 11vw, 9rem) clamp(1.5rem, 9vw, 8rem);
+  padding: clamp(2.5rem, 4vw, 4rem) clamp(1rem, 2vw, 2rem);
   place-items: center;
   position: relative;
 }
@@ -26,7 +25,7 @@
   background: var(--ink);
   clip-path: polygon(0 12%, 11% 2%, 27% 9%, 43% 0, 57% 8%, 72% 2%, 88% 11%, 100% 4%, 100% 88%, 89% 100%, 74% 92%, 61% 100%, 46% 91%, 29% 98%, 14% 90%, 0 97%);
   content: '';
-  inset: clamp(2rem, 5vw, 4rem) clamp(1rem, 6vw, 5rem);
+  inset: 1.25rem 0.75rem;
   position: absolute;
   transform: rotate(-1deg);
   z-index: -1;
@@ -52,7 +51,7 @@
   box-sizing: border-box;
   inline-size: min(100%, 52rem);
   line-height: 1.7;
-  padding: clamp(1.4rem, 4vw, 2.7rem) clamp(1.5rem, 6vw, 4.5rem);
+  padding: clamp(1rem, 2vw, 1.5rem) clamp(0.75rem, 2vw, 1.5rem);
   position: relative;
   transform: rotate(1deg);
   z-index: 4;
@@ -187,10 +186,6 @@
 @keyframes drift { to { transform: translate(0.7rem, -0.45rem) rotate(-17deg); } }
 
 @media (max-width: 38rem) {
-  .content-info {
-    padding-block: 6rem;
-  }
-
   .content-info::before {
     inset-inline: 0.8rem;
   }

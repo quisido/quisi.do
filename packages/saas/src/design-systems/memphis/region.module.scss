@@ -17,10 +17,9 @@
   display: block;
   font-family: Arial, Helvetica, sans-serif;
   isolation: isolate;
-  margin: clamp(1.75rem, 5vw, 4rem);
-  min-block-size: 24rem;
+  margin: clamp(1.25rem, 2vw, 2rem) 0;
   overflow: hidden;
-  padding: clamp(3.3rem, 8vw, 6rem) clamp(1.25rem, 7vw, 5rem) clamp(3rem, 7vw, 5rem);
+  padding: clamp(2.5rem, 4vw, 3.5rem) clamp(0.5rem, 1.5vw, 1rem) clamp(2rem, 3vw, 3rem);
   position: relative;
   transform: rotate(-0.45deg);
 }
@@ -39,7 +38,7 @@
   border: 0.3rem solid var(--ink);
   clip-path: polygon(3% 5%, 94% 0, 100% 14%, 97% 91%, 86% 100%, 7% 96%, 0 78%);
   content: '';
-  inset: clamp(2.7rem, 6vw, 4.5rem) clamp(1rem, 5vw, 4rem) clamp(2rem, 5vw, 3.5rem);
+  inset: 1.75rem 0.25rem 1rem;
   position: absolute;
   transform: rotate(0.7deg);
   z-index: -1;
@@ -76,8 +75,8 @@
   font-size: clamp(1rem, 2.2vw, 1.2rem);
   font-weight: 650;
   line-height: 1.6;
-  margin-inline-start: max(0rem, 7%);
-  padding: clamp(1.1rem, 4vw, 2rem);
+  box-sizing: border-box;
+  padding: clamp(0.5rem, 1.5vw, 1rem);
 }
 
 .content > :first-child { margin-block-start: 0; }
@@ -156,12 +155,8 @@
 @media (max-width: 36rem) {
   .region {
     box-shadow: 0.55rem 0.55rem 0 var(--coral), 0.8rem 0.8rem 0 var(--ink);
-    margin: 1.25rem;
-    padding-inline: 1rem;
   }
 
-  .region::after { inset-inline: 0.65rem; }
-  .content { margin-inline: 0.5rem; }
   .triangle { opacity: 0.65; }
 }
 
