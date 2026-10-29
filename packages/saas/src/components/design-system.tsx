@@ -72,15 +72,16 @@ export {
   TreeGrid,
 } from '../design-systems/memphis/index.js';
 
-export const Link = (props: LinkProps): ReactElement => {
+export const Link = ({ href, ...props }: LinkProps): ReactElement => {
   const navigate = useNavigate();
 
   return (
     <DesignSystemLink
-      preventDefault
+      href={href}
+      preventDefault={!href.startsWith('https://')}
       {...props}
       onClick={(): void => {
-        const promise = navigate(props.href);
+        const promise = navigate(href);
         if (promise instanceof Promise) {
           void promise.catch(noop);
         }

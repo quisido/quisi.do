@@ -1,12 +1,7 @@
 import { type ReactElement } from 'react';
 
+import { Link, Main, Paragraph, Region } from '../components/design-system.js';
 import I18n from '../components/i18n.js';
-import {
-  Link,
-  Main,
-  Paragraph,
-  Region,
-} from '../design-systems/template/index.js';
 import Page from './page.js';
 
 /**

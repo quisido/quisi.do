@@ -1,4 +1,4 @@
-$font-size: 14px;
+$font-size: 16px;
 $line-height: 20px;
 
 @view-transition {
@@ -28,7 +28,7 @@ body {
   font-variant-numeric: proportional-nums;
   justify-content: stretch;
   letter-spacing: 0;
-  line-height: 1rem;
+  line-height: $line-height;
   margin: 0;
   min-height: 100%;
   overflow-y: scroll;
@@ -49,8 +49,9 @@ body {
 }
 
 html {
-  font-size: $line-height;
+  font-size: $font-size;
   height: 100%;
+  line-height: $line-height;
   max-height: 100%;
   min-height: 100%;
 }

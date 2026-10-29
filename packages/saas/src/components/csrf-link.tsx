@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
 
-import { Link } from '../design-systems/template/index.js';
+import { Link } from './design-system.js';
 import I18n from './i18n.js';
 
 export default function CsrfLink(): ReactElement {

@@ -1,5 +1,9 @@
+/* Mixpanel appears as a dead image when blocked by an ad blocker. */
 img[src^="https://api-js.mixpanel.com/track/"] {
   bottom: 0;
+  height: 1px;
   left: 0;
+  opacity: 0.01;
   position: absolute;
+  width: 1px;
 }

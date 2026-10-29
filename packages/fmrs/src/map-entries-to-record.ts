@@ -1,10 +1,17 @@
-// A mutable reducer significantly improves performance. This is a safe
-// operation, because we control the record end-to-end.
+/**
+ * A mutable reducer significantly improves performance. This is a safe
+ * operation, because we control the record end-to-end.
+ */
 const reduceEntriesToRecord = <K extends number | string | symbol, V>(
   record: Record<K, V>,
   [key, value]: readonly [K, V],
 ): Record<K, V> => {
-  record[key] = value;
+  Object.defineProperty(record, key, {
+    configurable: true,
+    enumerable: true,
+    value,
+    writable: true,
+  });
   return record;
 };
 
