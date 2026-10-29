@@ -1,6 +1,5 @@
 import { ESLint } from 'eslint';
 import { assert, describe, expect, it } from 'vitest';
-
 import { DEFAULT_CONFIGS, defineESLintConfig } from './index.js';
 
 describe('ESLint config', (): void => {

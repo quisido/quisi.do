@@ -1,5 +1,4 @@
 import { type ErrorCode } from '@quisido/authn-shared';
-
 import FatalOAuthErrorResponseInit from './fatal-oauth-error-response-init.js';
 
 interface Options {

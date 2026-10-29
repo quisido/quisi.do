@@ -1,1 +1,1 @@
-export const PUBLIC = Symbol('Public');
+export const PUBLIC: unique symbol = Symbol('Public');

@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type StrongProps } from '../core/strong-props.js';
 import classes from './strong.module.scss';
 

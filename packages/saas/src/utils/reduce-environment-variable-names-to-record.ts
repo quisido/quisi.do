@@ -1,5 +1,4 @@
 import { config } from 'dotenv';
-
 import mapNodeEnvToEnvPath from './map-node-env-to-env-path.js';
 import validateString from './validate-string.js';
 

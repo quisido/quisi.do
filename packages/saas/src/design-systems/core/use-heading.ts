@@ -1,5 +1,4 @@
 import { type RefCallback, useLayoutEffect, useState } from 'react';
-
 import mapElementToLevel from './map-element-to-level.js';
 
 interface Props {

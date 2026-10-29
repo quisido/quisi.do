@@ -25,8 +25,8 @@
     "production:init:emails": "wrangler d1 execute authn --env production --file=./sql/emails.sql --remote",
     "production:init:oauth": "wrangler d1 execute authn --env production --file=./sql/oauth.sql --remote",
     "production:init:users": "wrangler d1 execute authn --env production --file=./sql/users.sql --remote",
-    "staging:deploy": "wrangler deploy src/index.ts --env staging --outdir dist --remote",
-    "staging:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env staging --outdir dist --remote",
+    "staging:deploy": "wrangler deploy src/index.ts --env staging --outdir dist",
+    "staging:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env staging --outdir dist",
     "staging:init": "npm run staging:init:emails && npm run staging:init:oauth && npm run staging:init:users",
     "staging:init:emails": "wrangler d1 execute authn-staging --env staging --file=./sql/emails.sql --remote",
     "staging:init:oauth": "wrangler d1 execute authn-staging --env staging --file=./sql/oauth.sql --remote",
@@ -60,8 +60,7 @@
     "cloudflare-utils": "^1.0.4",
     "fmrs": "^3.0.0",
     "form-urlencoded": "^6.1.8",
-    "jose": "^6.2.13",
-    "tslib": "^2.8.1"
+    "jose": "^6.2.13"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261025.1",

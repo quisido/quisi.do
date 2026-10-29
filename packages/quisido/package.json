@@ -14,7 +14,7 @@
     "test": "quisido test",
     "clean": "rm -rf .cache .tests dist node_modules",
     "eslint": "eslint . --cache --cache-location ./.cache/",
-    "knip": "quisido knip",
+    "knip": "knip",
     "publint": "quisido publint",
     "vitest": "vitest",
     "vitest:run": "vitest run",

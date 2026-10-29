@@ -1,5 +1,4 @@
 import { type ReactElement, type SubmitEvent } from 'react';
-
 import { type FormProps } from '../core/form-props.js';
 import useForm from '../core/use-form.js';
 import classes from './form.module.scss';

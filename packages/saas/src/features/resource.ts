@@ -17,7 +17,6 @@ import {
   ATTR_SERVICE_INSTANCE_ID,
 } from '@opentelemetry/semantic-conventions/incubating';
 import vitePackageJson from 'vite/package.json' with { type: 'json' };
-
 import packageJson from '../../package.json' with { type: 'json' };
 import { GITHUB_SHA } from '../constants/github-sha.js';
 import getSemanticResourceNavigatorAttributes from '../utils/get-semantic-resource-navigator-attributes.js';

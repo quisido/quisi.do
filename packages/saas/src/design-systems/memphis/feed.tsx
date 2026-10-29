@@ -1,5 +1,4 @@
 import { type FocusEvent, type ReactElement } from 'react';
-
 import { type FeedArticle, type FeedProps } from '../core/feed-props.js';
 import useFeed from '../core/use-feed.js';
 import useId from '../core/use-id.js';

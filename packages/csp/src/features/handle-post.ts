@@ -1,6 +1,5 @@
 import { StatusCode } from 'cloudflare-utils';
 import { toError, toString } from 'fmrs';
-
 import { MetricName } from '../constants/metric-name.js';
 import { Permission } from '../constants/permission.js';
 import {

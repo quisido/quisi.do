@@ -6,7 +6,6 @@ import {
   useMemo,
   useRef,
 } from 'react';
-
 import useElementId from '../../hooks/use-element-id.js';
 import {
   type GridCell,

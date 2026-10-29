@@ -1,6 +1,4 @@
-import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-
 import round from '../utils/round.js';
 
 interface Props {
@@ -25,10 +23,10 @@ export default function PercentDifference({
   if (to >= from) {
     const diff: number = to - from;
     const percent: number = round((diff / from) * PERCENT, decimals);
-    return <I18n n={percent.toLocaleString()}>+$n%</I18n>;
+    return <>+{percent.toLocaleString()}%</>;
   }
 
   const diff: number = from - to;
   const percent: number = round((diff / from) * PERCENT, decimals);
-  return <I18n n={percent.toLocaleString()}>-$n%</I18n>;
+  return <>-{percent.toLocaleString()}%</>;
 }

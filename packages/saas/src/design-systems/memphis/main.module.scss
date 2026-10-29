@@ -18,10 +18,9 @@
   color: var(--main-cream);
   display: block;
   isolation: isolate;
-  margin-block: clamp(1.5rem, 5vw, 4rem);
-  min-block-size: 18rem;
+  margin-block: clamp(1.25rem, 2vw, 2rem);
   overflow: hidden;
-  padding: clamp(3.8rem, 10vw, 7rem) clamp(1.2rem, 7vw, 5.5rem);
+  padding: clamp(2.75rem, 4vw, 4rem) clamp(0.75rem, 2vw, 2rem);
   position: relative;
 }
 
@@ -29,7 +28,7 @@
   background: repeating-linear-gradient(135deg, var(--main-pink) 0 0.7rem, transparent 0.7rem 1.4rem);
   block-size: 1.3rem;
   content: '';
-  inset: 1.25rem 7% auto 18%;
+  inset: 0.875rem 7% auto 18%;
   position: absolute;
   transform: skewX(-22deg);
 }
@@ -49,10 +48,8 @@
   background: var(--main-cream);
   box-shadow: 0.75rem 0.75rem 0 var(--main-pink), -0.38rem -0.38rem 0 var(--main-acid);
   box-sizing: border-box;
-  clip-path: polygon(3% 0, 95% 3%, 100% 93%, 91% 100%, 4% 96%, 0 12%);
   color: var(--main-ink);
-  min-block-size: 9rem;
-  padding: clamp(1.8rem, 6vw, 4rem);
+  padding: clamp(1.25rem, 2vw, 2rem) clamp(0.5rem, 1.5vw, 1rem);
   position: relative;
   transform: rotate(-1deg);
   z-index: 3;
@@ -124,7 +121,7 @@
 .stitches {
   border-block-start: 0.35rem dashed var(--main-cream);
   inline-size: 26%;
-  inset: auto 12% 1.8rem auto;
+  inset: auto 12% 1rem auto;
   transform: rotate(-5deg);
 }
 
@@ -141,11 +138,11 @@
 @media (max-width: 38rem) {
   .main {
     box-shadow: 0.4rem 0.4rem 0 var(--main-orange), -0.3rem -0.3rem 0 var(--main-turquoise);
-    padding-inline: 1rem;
+    padding-inline: 0.75rem;
   }
 
   .stage {
     box-shadow: 0.45rem 0.45rem 0 var(--main-pink), -0.25rem -0.25rem 0 var(--main-acid);
-    padding-inline: 1.4rem;
+    padding-inline: 0.5rem;
   }
 }

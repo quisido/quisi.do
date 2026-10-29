@@ -7,7 +7,6 @@ import {
 } from 'eslint-plugin-import-x';
 import sortKeysCustomOrder from 'eslint-plugin-sort-keys-custom-order';
 import { configs as tsConfigs } from 'typescript-eslint';
-
 import validateArray from '../../utils/validate-array.js';
 import defineConfig, { type Config } from './define-config.js';
 import fileGlobsByExtension from './file-globs-by-extension.js';
@@ -28,7 +27,7 @@ export const TS_CONFIG: Config = defineConfig({
     ...JS_CONFIG.plugins,
     '@typescript-eslint': tsPlugin as unknown as Plugin,
     'import-x': importX,
-    'sort-keys-custom-order': sortKeysCustomOrder as unknown as Plugin,
+    'sort-keys-custom-order': sortKeysCustomOrder,
   },
 
   rules: {
@@ -114,6 +113,11 @@ export const TS_CONFIG: Config = defineConfig({
       createTypeScriptImportResolver({
         alwaysTryTypes: false,
         bun: true,
+        /**
+         * `EnforceExtension` is defined by `unrs-resolver` but not re-exported
+         * by eslint-import-resolver-typescript.
+         */
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-assignment
         enforceExtension: 1,
       }),
     ],

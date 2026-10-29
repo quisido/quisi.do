@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { isArray } from './index.js';
 
 describe('isArray', (): void => {

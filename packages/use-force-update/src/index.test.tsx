@@ -1,6 +1,5 @@
 import { act, render } from '@testing-library/react';
 import { assert, beforeEach, describe, expect, it } from 'vitest';
-
 import useForceUpdate from './index.js';
 
 const FIRST = 0;

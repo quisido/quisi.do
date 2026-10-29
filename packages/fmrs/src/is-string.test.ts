@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { isString } from './index.js';
 
 const TEST_NUMBER = 1234;

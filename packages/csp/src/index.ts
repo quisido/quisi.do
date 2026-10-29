@@ -1,7 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 
 import { ExportedHandler } from '@quisido/worker';
-
 import CspFetchHandler from './csp-fetch-handler.js';
 import handleError from './handle-error.js';
 import handleLog from './handle-log.js';

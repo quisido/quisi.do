@@ -1,5 +1,4 @@
 import type LR from 'logrocket';
-
 import { type Compulsory } from './compulsory.js';
 
 export type LogRocket = typeof LR;

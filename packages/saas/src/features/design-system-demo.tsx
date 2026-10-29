@@ -1,5 +1,4 @@
 import { type ReactElement, useState } from 'react';
-
 import {
   AlertDialog,
   Article,

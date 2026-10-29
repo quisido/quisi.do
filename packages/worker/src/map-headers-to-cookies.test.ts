@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import mapHeadersToCookies from './map-headers-to-cookies.js';
 
 describe('mapHeadersToCookies', (): void => {

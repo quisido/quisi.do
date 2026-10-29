@@ -5,7 +5,6 @@ import {
 } from '@opentelemetry/api';
 import { useContext, useMemo } from 'react';
 import useShallowMemo from 'use-shallow-memo';
-
 import TracerProvider from '../contexts/tracer-provider.js';
 
 const DEFAULT_OPTIONS: TracerOptions = {};

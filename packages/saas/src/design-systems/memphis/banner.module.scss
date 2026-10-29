@@ -15,9 +15,9 @@
   color: var(--cream);
   display: flex;
   isolation: isolate;
-  min-block-size: clamp(8rem, 17vw, 13rem);
+  box-sizing: border-box;
   overflow: hidden;
-  padding: clamp(1.4rem, 4vw, 3.2rem) clamp(2rem, 10vw, 9rem);
+  padding: clamp(1rem, 2vw, 2rem) clamp(0.75rem, 2vw, 2rem);
   position: relative;
 }
 
@@ -38,10 +38,11 @@
   filter: drop-shadow(0.65rem 0.8rem 0 rgb(5 12 41 / 24%));
   inline-size: min(100%, 74rem);
   margin-inline: auto;
-  padding: clamp(2rem, 5vw, 4rem) clamp(2.4rem, 8vw, 7rem);
+  box-sizing: border-box;
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2rem);
   position: relative;
   text-shadow: 0.13em 0.13em 0 #9b2a9e;
-  z-index: 5;
+  z-index: 7;
 }
 
 .sun,

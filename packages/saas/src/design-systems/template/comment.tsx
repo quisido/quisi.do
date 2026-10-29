@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type CommentProps } from '../core/comment-props.js';
 import classes from './comment.module.scss';
 

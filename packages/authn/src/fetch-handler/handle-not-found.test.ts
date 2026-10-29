@@ -1,6 +1,6 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { describe, it } from 'vitest';
-
+import createTestAuthenticationToken from '../../test/authentication-token.js';
 import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { EnvironmentName } from '../constants/environment-name.js';
 import { MetricName } from '../constants/metric-name.js';
@@ -31,9 +31,10 @@ describe('handleNotFound', (): void => {
       });
 
     // Act
+    const token: string = await createTestAuthenticationToken();
     await fetch('/whoami/', {
       headers: new Headers({
-        cookie: '__Secure-Authentication-ID=abcdef',
+        cookie: `__Secure-Authentication-ID=${token}`,
       }),
     });
 

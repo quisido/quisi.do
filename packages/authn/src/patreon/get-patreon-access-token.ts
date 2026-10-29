@@ -1,6 +1,5 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import formUrlEncoded from 'form-urlencoded';
-
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import { PATREON_USER_AGENT } from '../constants/patreon-user-agent.js';

@@ -1,5 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import type Theme from '../types/theme.js';
+import { FontWeight } from './font-weight.js';
 
 /**
  * Cairo Play title: #e53a35
@@ -15,10 +16,10 @@ import type Theme from '../types/theme.js';
 export const THEME: Theme = {
   background: [0xf8, 0xf4, 0xf0],
   displayFontFamily: '"Noto Sans Display", "Noto Sans", Helvetica, sans-serif',
-  displayFontWeight: 700,
+  displayFontWeight: FontWeight.Bold,
   foreground: [0x00, 0x00, 0x00],
   lines: false,
   primary: [0xe5, 0x3a, 0x35],
-  primaryFontWeight: 700,
+  primaryFontWeight: FontWeight.Bold,
   secondary: [0x72, 0xbf, 0x80],
 };

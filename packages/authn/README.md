@@ -1,50 +1,65 @@
 # Authentication
 
-The authentication service is a Cloudflare worker for authenticating `quisi.do`
+The authentication service is a Cloudflare Worker for authenticating `quisi.do`
 users.
 
-## JWT migration
+## JWT sessions
 
-`jose` is installed as a runtime dependency for an incremental migration from KV
-sessions to encrypted JWTs. This initial step keeps authentication on the existing
-KV path and requires no new secrets or bindings.
+OAuth completion creates an encrypted JWT (JWE) using `jose` `EncryptJWT`.
+`/whoami/` authenticates and decrypts it using `jwtDecrypt`, without reading or
+writing the former `AUTHN_USER_IDS` KV namespace or caching session identities.
+D1 remains the source of accounts and OAuth associations.
 
-Use [`EncryptJWT` and `jwtDecrypt`](https://github.com/panva/jose#encrypted-json-web-tokens)
-for user claims such as ID and email. Signed JWT payloads are readable; encryption
-(JWE) is needed to keep these claims confidential.
+The `__Secure-Authentication-ID` cookie contains the token and uses `HttpOnly`,
+`Secure`, `SameSite=Lax`, `Partitioned`, the configured `COOKIE_DOMAIN`, and
+`Path=/`. Both the cookie and token expire after 24 hours. Claims contain only
+the internal user ID (`sub`), issuer (`iss`), audience (`aud`), issuance time
+(`iat`), and expiration (`exp`). Email and provider credentials are not included.
+The token uses `alg=dir` and `enc=A256GCM`; validation permits only those
+algorithms and checks required claims, subject, issuer, audience, and lifetime.
 
-Follow-up commits will configure an environment-specific encryption secret,
-implement token issuance and validation (including allowed algorithms, issuer,
-audience, and expiration), then support encrypted tokens alongside legacy KV
-sessions. Remove the KV path only after legacy sessions have expired.
+This is a direct cutover. Existing KV session IDs are rejected and users must
+sign in again. There is no dual issuance or KV fallback. Authentication and
+logout responses use `Cache-Control: no-store`.
 
-- Add an optional JWT encryption secret to the typed Worker bindings.
-- Define the encrypted token’s claims for user ID, optional email, issuer,
-  audience, issued-at time, and expiration, with runtime validation and focused
-  tests.
-- Implement a small `jose` token creation helper using authenticated encryption,
-  the configured secret, and the existing session lifetime, with round-trip
-  tests.
-- Implement token decryption and validation with explicit allowed algorithms and
-  required claims, testing expired, tampered, malformed, wrong-key,
-  wrong-issuer, and wrong-audience tokens.
-- Add JWT cookie parsing and serialization using a separate cookie name with
-  `HttpOnly`, `Secure`, and the existing domain, path, and same-site settings.
-- Update OAuth completion to issue the encrypted JWT when enabled while
-  continuing to issue the legacy cookie and write its KV session.
-- Update `/whoami/` to validate an available JWT before accessing session memory
-  or KV, preserve its response contract, and use legacy authentication only when
-  the JWT cookie is absent.
-- Add integration tests proving JWT authentication performs no `AUTHN_USER_IDS`
-  reads, legacy sessions still work, and invalid JWTs cannot fall back to legacy
-  authentication.
-- Add aggregate metrics for JWT issuance, successful validation, rejected
-  tokens, and legacy authentication without recording tokens, email addresses,
-  or other personal data.
-- Document and enable the staged rollout after validation, including the change
-  in revocation behavior caused by tokens remaining valid until expiration.
-- Stop issuing legacy cookies and writing new KV sessions after JWT
-  authentication is established, while retaining legacy reads until the final
-  legacy session expires.
-- Remove legacy cookie handling, session caching, and `AUTHN_USER_IDS` reads and
-  bindings after that expiry window, retaining unrelated KV usage.
+## Configuration and deployment
+
+- `JWT_ENCRYPTION_SECRET`: a base64url-encoded, cryptographically random 32-byte
+  key (43 characters without padding). Use different keys for local development,
+  staging, and production. Keep it in uncommitted `.dev.vars` locally and a
+  Cloudflare Worker secret for each deployed environment. Never put it in
+  `wrangler.jsonc`, source code, logs, or analytics.
+- `JWT_ISSUER` and `JWT_AUDIENCE`: environment-specific values in
+  `wrangler.jsonc`. They must match exactly when issuing and validating tokens.
+- Provision `JWT_ENCRYPTION_SECRET` in staging and production before deploying
+  through CI/CD. The Worker fails closed when configuration is invalid or absent.
+  Existing Patreon and analytics secrets remain required for their features.
+- Regenerate bindings with `npx wrangler types --include-runtime false` after
+  configuration changes. Validate with the package's staging and production
+  deployment dry-run commands, then verify OAuth, `/whoami/`, and logout in
+  staging before the production cutover.
+
+Monitor aggregate `authentication.token.issued`, `.validated`, `.rejected`, and
+`.issuance.failed` metrics, plus `authentication.jwt.configuration.invalid`.
+Metrics never include token values or decrypted claims. Historical session
+metrics remain readable by the analytics endpoint.
+
+## Logout and revocation
+
+The frontend calls `DELETE /whoami/` with credentials. A successful request from
+an allowed origin returns `204` and expires the authentication cookie. Missing
+or invalid cookies can still be cleared. Browser JavaScript cannot directly
+clear this `HttpOnly` cookie. Preflight advertises `GET, DELETE, OPTIONS`.
+
+Clearing the cookie ends the browser session; it does not revoke copies of the
+token. Tokens remain valid until their 24-hour expiration. Replacing the
+configured key invalidates all outstanding tokens and requires everyone to sign
+in again. There is no per-session revocation store or refresh-token flow.
+
+## Remaining KV usage
+
+`BUDGET` remains in use. The production finalizer reads and updates it after
+requests, including JWT-authenticated requests. This migration removes
+session-related KV operations only; budget accounting can still reach the daily
+KV operation limit. The old session namespace can expire naturally and is no
+longer bound to the Worker.

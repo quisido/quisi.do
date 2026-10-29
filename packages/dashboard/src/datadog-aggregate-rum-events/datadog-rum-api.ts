@@ -1,6 +1,5 @@
 import { v2 } from '@datadog/datadog-api-client';
 import { type RUMWarning } from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2/index.js';
-
 import mapToOptionalNumber from '../utils/map-to-optional-number.js';
 import createConfiguration from './create-configuration.js';
 import mapToOptionalTimeSeries from './map-to-optional-time-series.js';

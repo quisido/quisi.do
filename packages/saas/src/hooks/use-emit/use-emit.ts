@@ -7,7 +7,6 @@ import { mapObjectToEntries } from 'fmrs';
 import { track as mixpanelBrowserTrack } from 'mixpanel-browser';
 import { usePostHog } from 'posthog-js/react';
 import { useCallback } from 'react';
-
 import EMPTY_OBJECT from '../../modules/react-google-analytics/constants/empty-object.js';
 import { useNewRelicBrowserAgent } from '../../modules/react-new-relic/index.js';
 import { type Dimensions } from '../../types/dimensions.js';

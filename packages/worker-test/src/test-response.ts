@@ -1,9 +1,9 @@
 import { expect } from 'vitest';
-
 import expectStringifiedToBe from './expect-stringified-to-be.js';
 import mapHeadersToRecord from './map-headers-to-record.js';
 
 export default class TestResponse {
+  public readonly headers: Headers;
   public static async from(response: Response): Promise<TestResponse> {
     const text: string = await response.text();
     return new TestResponse(response, text);
@@ -19,6 +19,7 @@ export default class TestResponse {
   ) => void;
 
   private constructor(response: Response, text: string) {
+    this.headers = new Headers(response.headers);
     this.expectBodyToBe = expectStringifiedToBe.bind(null, text);
 
     this.expectHeaderToBe = (header: string, expected: string): void => {

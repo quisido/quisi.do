@@ -1,10 +1,7 @@
 import i18next, { type i18n, type ResourceLanguage } from 'i18next';
-import { I18nProvider as LazyI18nProvider } from 'lazy-i18n';
 import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
-
 import Locale from '../constants/locale.js';
-import { TRANSLATIONS } from '../constants/translations.js';
 import useLocale from '../hooks/use-locale.js';
 import enUs from '../translations/index--en-US.json' with { type: 'json' };
 
@@ -59,15 +56,5 @@ export default function I18nProvider({
     }
   }, [locale, setLocale]);
 
-  return (
-    <I18nextProvider i18n={REACT_I18N}>
-      <LazyI18nProvider
-        fallbackLocale={Locale.English}
-        locale={locale}
-        translations={TRANSLATIONS}
-      >
-        {children}
-      </LazyI18nProvider>
-    </I18nextProvider>
-  );
+  return <I18nextProvider i18n={REACT_I18N}>{children}</I18nextProvider>;
 }

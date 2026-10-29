@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { mapMetricDimensionsToDataPoint } from './index.js';
 
 describe('mapMetricDimensionsToDataPoint', (): void => {

@@ -1,5 +1,4 @@
 import { useCallback, useMemo } from 'react';
-
 import Locale from '../constants/locale.js';
 import useNavigation from './use-navigation.js';
 import usePathname from './use-pathname.js';

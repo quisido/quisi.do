@@ -1,6 +1,5 @@
 import { type ReactElement } from 'react';
 import { FocusScope } from 'react-aria';
-
 import { type DialogProps } from '../core/dialog-props.js';
 import useDialog from '../core/use-dialog.js';
 import classes from './dialog.module.scss';

@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { toString } from './index.js';
 import type Stringifiable from './stringifiable.js';
 

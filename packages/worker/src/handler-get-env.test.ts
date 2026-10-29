@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { Handler } from './index.js';
 import noop from './noop.js';
 

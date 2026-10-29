@@ -1,6 +1,5 @@
 import { userEvent } from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
-
 import expectToBeReadOnly from '../../../test/expect-to-be-readonly.js';
 import validateChecked from '../../../test/validate-checked.js';
 import { type CheckboxProps } from '../core/checkbox-props.js';

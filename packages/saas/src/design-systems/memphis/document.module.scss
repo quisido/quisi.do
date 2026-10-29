@@ -1,3 +1,10 @@
+// Let the page artwork reach the viewport edges instead of inheriting the
+// application's centered, padded body layout.
+:global(body):has(.document) {
+  align-items: stretch;
+  padding-inline: 0;
+}
+
 .document {
   --acid: #eaff32;
   --blue: #2148f5;
@@ -13,11 +20,13 @@
   box-sizing: border-box;
   color: var(--ink);
   display: grid;
+  align-content: start;
   font-family: Arial, Helvetica, sans-serif;
   isolation: isolate;
-  min-block-size: 30rem;
+  inline-size: 100%;
+  min-block-size: 100dvh;
   overflow: hidden;
-  padding: clamp(3rem, 8vw, 7rem) clamp(1.1rem, 7vw, 6rem);
+  padding: clamp(1.5rem, 3vw, 3rem) clamp(0.75rem, 2vw, 2rem);
   position: relative;
 }
 
@@ -42,8 +51,8 @@
   clip-path: polygon(2% 3%, 24% 0, 43% 3%, 65% 0.5%, 84% 3%, 98% 1%, 100% 25%, 98% 49%, 100% 74%, 97% 98%, 74% 96%, 51% 100%, 29% 97%, 3% 100%, 0 77%, 2% 53%, 0 27%);
   inline-size: min(100%, 62rem);
   justify-self: center;
-  margin-block: clamp(1.5rem, 4vw, 3.5rem);
-  padding: clamp(3.5rem, 9vw, 7rem) clamp(1.8rem, 8vw, 6.5rem);
+  margin-block: clamp(1.25rem, 2vw, 2rem);
+  padding: clamp(2.5rem, 4vw, 4rem) clamp(0.75rem, 2vw, 1.5rem);
   position: relative;
   transform: rotate(-0.7deg);
   z-index: 4;
@@ -53,7 +62,7 @@
   background: repeating-linear-gradient(90deg, var(--orange) 0 1.1rem, var(--ink) 1.1rem 1.35rem, var(--acid) 1.35rem 2.45rem, var(--ink) 2.45rem 2.7rem);
   block-size: 1.05rem;
   content: '';
-  inset: 1.55rem 12% auto;
+  inset: 1rem 12% auto;
   position: absolute;
   transform: skewX(-18deg);
 }
@@ -194,7 +203,7 @@
   .document { padding-inline: 0.9rem; }
   .reading-plane {
     box-shadow: 0.45rem 0.45rem 0 var(--pink), 0.75rem 0.75rem 0 var(--ink), 1rem 1rem 0 var(--turquoise);
-    padding-inline: 1.5rem;
+    padding-inline: 0.75rem;
   }
   .checker { opacity: 0.55; right: -9rem; }
   .binding { display: none; }

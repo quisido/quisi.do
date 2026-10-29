@@ -1,5 +1,4 @@
 import { FaviconIcoResponse, RobotsTxtResponse } from 'cloudflare-utils';
-
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import RootResponse from './root-response.js';

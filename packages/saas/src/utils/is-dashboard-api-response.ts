@@ -1,5 +1,4 @@
 import { isNumber, isObject } from 'fmrs';
-
 import type DashboardApiResponse from '../types/dashboard-api-response.js';
 
 const DOUBLE = 2;

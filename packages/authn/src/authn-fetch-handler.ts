@@ -1,16 +1,12 @@
-import { type ErrorCode } from '@quisido/authn-shared';
+import { ErrorCode } from '@quisido/authn-shared';
 import { FetchHandler, type MetricDimensions } from '@quisido/worker';
 import { type Pricing } from 'cloudflare-utils';
 import { isString } from 'fmrs';
-
 import { EnvironmentName } from './constants/environment-name.js';
 import { PUBLIC } from './constants/metric-dimensions.js';
-import { type MetricName } from './constants/metric-name.js';
+import { MetricName } from './constants/metric-name.js';
 import { type OAuthProvider } from './constants/oauth-provider.js';
-import {
-  MILLISECONDS_PER_DAY,
-  MILLISECONDS_PER_SECOND,
-} from './constants/time.js';
+import { MILLISECONDS_PER_SECOND } from './constants/time.js';
 import getAccessControlAllowOrigin from './fetch-handler/get-access-control-allow-origin.js';
 import getIp from './fetch-handler/get-ip.js';
 import getSessionIdCookie from './fetch-handler/get-session-id-cookie.js';
@@ -20,18 +16,14 @@ import mapEnvKeyToErrorCode from './fetch-handler/map-env-key-to-error-code.js';
 import FatalError from './utils/fatal-error.js';
 import isEnvironmentName from './utils/is-environment-name.js';
 import isNonEmptyString from './utils/is-non-empty-string.js';
-import TemporaryMap from './utils/temporary-map.js';
 import Throttler from './utils/throttler.js';
 
 const DEFAULT_FISCAL_USER_ID = 0;
 const NONE = 0;
-const OAUTH_IP_THROTTLE_LIMIT = 10000;
-const WHOAMI_IP_THROTTLE_LIMIT = 1000;
+const OAUTH_IP_THROTTLE_LIMIT = 10_000;
 
-export default class AuthnFetchHandler extends FetchHandler {
-  static #AUTHN_USER_ID_MAP = new TemporaryMap<number>();
+export default class AuthnFetchHandler extends FetchHandler<Env> {
   static #OAUTH_IP_THROTTLER = new Throttler();
-  static #WHOAMI_IP_THROTTLER = new Throttler();
 
   #fiscalUserId: number | undefined;
   #totalExpense = NONE;
@@ -90,18 +82,20 @@ export default class AuthnFetchHandler extends FetchHandler {
     return this.#fiscalUserId ?? DEFAULT_FISCAL_USER_ID;
   }
 
-  public getAuthnUserIdFromMemory(authnId: string): number | undefined {
-    return AuthnFetchHandler.#AUTHN_USER_ID_MAP.get(authnId, {
-      now: this.now.bind(this),
-    });
-  }
-
   public get host(): string {
     return this.validateBinding('HOST', isNonEmptyString, 'quisi.do');
   }
 
   public get ip(): string {
     return getIp.call(this);
+  }
+
+  public get jwtIssuer(): string {
+    return this.validateBinding('JWT_ISSUER', isNonEmptyString);
+  }
+
+  public get jwtAudience(): string {
+    return this.validateBinding('JWT_AUDIENCE', isNonEmptyString);
   }
 
   public nowSeconds(): number {
@@ -128,15 +122,6 @@ export default class AuthnFetchHandler extends FetchHandler {
     return getSessionIdCookie.call(this);
   }
 
-  public setAuthnUserIdInMemory(authnId: string, userId: number): void {
-    AuthnFetchHandler.#AUTHN_USER_ID_MAP.set(
-      authnId,
-      userId,
-      MILLISECONDS_PER_DAY,
-      { now: this.now.bind(this) },
-    );
-  }
-
   public setFiscalResponsibility(userId: number): void {
     this.#fiscalUserId = userId;
   }
@@ -145,14 +130,6 @@ export default class AuthnFetchHandler extends FetchHandler {
     return AuthnFetchHandler.#OAUTH_IP_THROTTLER.run(
       this.ip,
       OAUTH_IP_THROTTLE_LIMIT,
-      { now: this.now.bind(this) },
-    );
-  }
-
-  public shouldThrottleWhoAmIByIp(): boolean {
-    return AuthnFetchHandler.#WHOAMI_IP_THROTTLER.run(
-      this.ip,
-      WHOAMI_IP_THROTTLE_LIMIT,
       { now: this.now.bind(this) },
     );
   }
@@ -166,6 +143,17 @@ export default class AuthnFetchHandler extends FetchHandler {
     isValid: (value: unknown) => value is T,
     defaultValue?: T,
   ): T {
+    // The framework includes invalid binding values in metrics. Validate this
+    // secret here so its value never enters an event or a log.
+    if (key === 'JWT_ENCRYPTION_SECRET') {
+      const value: unknown = this.getBinding(key);
+      if (isValid(value)) {
+        return value;
+      }
+      this.emitPublicMetric(MetricName.InvalidJwtConfiguration);
+      throw new FatalError(ErrorCode.InvalidJwtConfiguration);
+    }
+
     try {
       return super.validateBinding(key, isValid, defaultValue);
     } catch (_err: unknown) {

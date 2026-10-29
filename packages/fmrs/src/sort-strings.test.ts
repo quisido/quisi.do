@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import sortStrings from './sort-strings.js';
 
 describe('sortStrings', (): void => {

@@ -1,5 +1,4 @@
 import { type ReactNode } from 'react';
-
 import { type OneOf } from './one-of.js';
 
 interface OneOfProps {

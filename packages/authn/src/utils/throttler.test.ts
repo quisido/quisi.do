@@ -1,5 +1,4 @@
 import { describe, it } from 'vitest';
-
 import Throttler from './throttler.js';
 
 const TEST_LIMIT = 3600;

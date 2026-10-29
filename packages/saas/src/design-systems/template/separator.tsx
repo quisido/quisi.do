@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type SeparatorProps } from '../core/separator-props.js';
 import classes from './separator.module.scss';
 

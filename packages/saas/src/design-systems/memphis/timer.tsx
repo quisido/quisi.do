@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type TimerProps } from '../core/timer-props.js';
 import classes from './timer.module.scss';
 

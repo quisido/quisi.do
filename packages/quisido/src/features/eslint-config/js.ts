@@ -1,4 +1,3 @@
-import { type Plugin } from '@eslint/config-helpers';
 import js from '@eslint/js';
 import prettierConfig from 'eslint-config-prettier';
 import {
@@ -9,7 +8,6 @@ import prettierPlugin from 'eslint-plugin-prettier';
 import prettierPluginRecommended from 'eslint-plugin-prettier/recommended';
 import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort';
 import sortKeysCustomOrder from 'eslint-plugin-sort-keys-custom-order';
-
 import defineConfig, { type Config } from './define-config.js';
 import fileGlobsByExtension from './file-globs-by-extension.js';
 import { LANGUAGE_OPTIONS } from './language-options.js';
@@ -40,7 +38,7 @@ export const JS_CONFIG: Config = defineConfig({
     'import-x': importXPlugin,
     prettier: prettierPlugin,
     'simple-import-sort': simpleImportSortPlugin,
-    'sort-keys-custom-order': sortKeysCustomOrder as unknown as Plugin,
+    'sort-keys-custom-order': sortKeysCustomOrder,
   },
 
   rules: {
@@ -169,10 +167,9 @@ export const JS_CONFIG: Config = defineConfig({
       'error',
       {
         groups: [
-          ['^\\u0000'],
-          ['^node:'],
-          ['^@?\\w'],
+          ['^bun:', '^node:'],
           [
+            '^@?\\w',
             '^\\.\\./\\.\\./\\.\\./\\.\\./\\.\\./',
             '^\\.\\./\\.\\./\\.\\./\\.\\./',
             '^\\.\\./\\.\\./\\.\\./',
@@ -180,6 +177,7 @@ export const JS_CONFIG: Config = defineConfig({
             '^\\.\\./',
             '^\\./',
           ],
+          ['^\\u0000'],
         ],
       },
     ],

@@ -1,5 +1,4 @@
 import { isDefined } from 'fmrs';
-
 import type ReportBody from '../types/report-body.js';
 import mapObjectToValues from './map-object-to-values.js';
 

@@ -1,5 +1,4 @@
 import { type ChangeEvent, type ReactElement, type Ref } from 'react';
-
 import { type CheckboxProps } from '../core/checkbox-props.js';
 import toChecked from '../core/to-checked.js';
 import useIndeterminate from '../core/use-indeterminate.js';

@@ -1,6 +1,5 @@
 import { type ReactNode } from 'react';
 import { expect, it } from 'vitest';
-
 import render, { type RenderTest } from './render.js';
 
 interface Options {

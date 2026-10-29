@@ -13,10 +13,6 @@
       "path": "packages/game"
     },
     {
-      "name": "⚙️ AI",
-      "path": "packages/ai"
-    },
-    {
       "name": "⚙️ Authentication",
       "path": "packages/authn"
     },
@@ -47,10 +43,6 @@
     {
       "name": "📦 fmrs",
       "path": "packages/fmrs"
-    },
-    {
-      "name": "📦 lazy-i18n",
-      "path": "packages/lazy-i18n"
     },
     {
       "name": "📦 number-format-react",

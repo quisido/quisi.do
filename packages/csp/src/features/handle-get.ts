@@ -1,6 +1,5 @@
 import { GetErrorCode } from '@quisido/csp-shared';
 import { StatusCode } from 'cloudflare-utils';
-
 import { MetricName } from '../constants/metric-name.js';
 import type CspFetchHandler from '../csp-fetch-handler.js';
 import CspResponse from '../utils/csp-response.js';

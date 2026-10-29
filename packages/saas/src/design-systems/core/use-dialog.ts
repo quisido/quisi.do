@@ -1,5 +1,4 @@
 import { type Ref, type RefObject, useLayoutEffect, useRef } from 'react';
-
 import validateNonNull from '../../utils/validate-non-null.js';
 import { setInertSiblings, unsetInertSiblings } from './inert.js';
 import useId from './use-id.js';

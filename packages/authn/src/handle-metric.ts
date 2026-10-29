@@ -3,7 +3,6 @@ import {
   type MetricDimensions,
   MetricName as WorkerMetricName,
 } from '@quisido/worker';
-
 import { PUBLIC } from './constants/metric-dimensions.js';
 import { MetricName } from './constants/metric-name.js';
 import isWorkerMetricName from './utils/is-worker-metric-name.js';
@@ -226,7 +225,10 @@ export default async function handleMetric(
           return;
         }
 
-        emitPrivately({ key, value });
+        emitPrivately({
+          key,
+          value: key === 'JWT_ENCRYPTION_SECRET' ? '[REDACTED]' : value,
+        });
         emitPublicly({ key, type });
         return;
       }

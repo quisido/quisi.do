@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import getContainer from './get-container.js';
 
 describe('getContainer', (): void => {

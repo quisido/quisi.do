@@ -1,5 +1,4 @@
 import { type Event } from '@sentry/core';
-
 import { SENTRY_EVENT } from '../constants/sentry-event.js';
 import mapDimensionsToFingerprints from './map-dimensions-to-fingerprints.js';
 import mapNumberToSentryEventId from './map-number-to-sentry-event-id.js';

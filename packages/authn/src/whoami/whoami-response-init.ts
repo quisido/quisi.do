@@ -1,5 +1,4 @@
 import { ResponseInitImpl, type StatusCode } from 'cloudflare-utils';
-
 import { ACCESS_CONTROL_HEADERS_INIT } from '../constants/access-control-headers-init.js';
 
 interface Options {
@@ -14,7 +13,9 @@ export default class WhoAmIResponseInit extends ResponseInitImpl {
     super({
       headers: new Headers({
         ...ACCESS_CONTROL_HEADERS_INIT,
+        'access-control-allow-methods': 'GET, DELETE, OPTIONS',
         'access-control-allow-origin': accessControlAllowOrigin,
+        'cache-control': 'no-store',
         'content-type': 'text/json; charset=utf-8',
       }),
       status,

@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type DefinitionProps } from '../core/definition-props.js';
 import classes from './definition.module.scss';
 

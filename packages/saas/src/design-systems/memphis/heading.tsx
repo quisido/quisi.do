@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import isDefined from '../../utils/is-defined.js';
 import { type HeadingProps } from '../core/heading-props.js';
 import useHeading from '../core/use-heading.js';

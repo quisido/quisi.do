@@ -1,5 +1,4 @@
 import { type PropsWithChildren, type ReactElement } from 'react';
-
 import Honeycomb from '../components/honeycomb.js';
 import validateString from '../utils/validate-string.js';
 

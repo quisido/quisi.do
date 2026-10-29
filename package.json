@@ -22,10 +22,8 @@
     "eslint-config": "npm --workspace=packages/eslint-config start",
     "fmrs": "npm --workspace=packages/fmrs start",
     "game": "npm --workspace=packages/game start",
-    "gemini": "gemini --approval-mode auto_edit --sandbox",
-    "knip": "quisido knip",
+    "knip": "knip",
     "playwright-mcp": "npx @playwright/mcp --caps devtools,vision --console-level warning --headless --isolated --sandbox --storage-state=.cache/playwright-mcp/storage-state.json",
-    "prompt": "quisido-ai",
     "publint": "quisido publint",
     "publish": "node ./dist/scripts/publish.js",
     "quisido": "npm --workspace=packages/quisido start",
@@ -70,11 +68,7 @@
     "unrs-resolver@1.12.2": true,
     "workerd@*": true
   },
-  "dependencies": {
-    "fmrs": "^3.0.0"
-  },
   "devDependencies": {
-    "@google/gemini-cli": "^0.65.0",
     "@hint/connector-puppeteer": "^2.5.25",
     "@hint/formatter-codeframe": "^3.1.36",
     "@hint/formatter-html": "^4.3.17",

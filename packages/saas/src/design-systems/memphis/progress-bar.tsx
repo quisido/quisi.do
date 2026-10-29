@@ -1,5 +1,4 @@
 import { type CSSProperties, type ReactElement } from 'react';
-
 import { type ProgressBarProps } from '../core/progress-bar-props.js';
 import useProgressBar from '../core/use-progress-bar.js';
 import classes from './progress-bar.module.scss';

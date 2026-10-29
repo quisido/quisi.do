@@ -1,5 +1,4 @@
 import { isRecord } from 'fmrs';
-
 import { type AuditDetails } from './audit-details.js';
 import mapNodeToString from './map-node-to-string.js';
 import mapSourceLocationToString from './map-source-location-to-string.js';

@@ -24,10 +24,9 @@
   isolation: isolate;
   letter-spacing: 0.045em;
   line-height: 1.2;
-  margin: 1.2rem 0.7rem 1.7rem 0;
-  min-block-size: 6.5rem;
+  margin: 1rem 0.7rem 1.25rem 0;
   overflow: hidden;
-  padding: clamp(1rem, 3vw, 1.6rem) clamp(3.8rem, 10vw, 8rem);
+  padding: 1rem clamp(0.5rem, 1.5vw, 1rem);
   position: relative;
   transform: rotate(-0.45deg);
   transition-duration: 1s;
@@ -64,9 +63,10 @@
   box-shadow:
     0.35rem 0.38rem 0 var(--ink),
     inset 0 0 0 0.12rem var(--ink);
-  clip-path: polygon(2% 14%, 19% 2%, 53% 8%, 72% 0, 98% 13%, 100% 72%, 90% 94%, 61% 89%, 38% 100%, 5% 91%, 0 54%);
   display: block;
-  padding: 1rem clamp(1.3rem, 4vw, 3rem);
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  padding: 0.75rem clamp(0.5rem, 1.5vw, 1rem);
   position: relative;
   text-align: center;
   text-shadow: 0.1em 0.1em 0 rgb(255 49 140 / 45%);
@@ -165,14 +165,8 @@
 }
 
 @media (max-width: 34rem) {
-  .marquee {
-    min-block-size: 7rem;
-    padding-inline: 2.2rem;
-  }
-
   .dots { display: none; }
   .triangle { right: 2%; }
-  .content { padding-inline: 1rem; }
 }
 
 @media (forced-colors: active) {

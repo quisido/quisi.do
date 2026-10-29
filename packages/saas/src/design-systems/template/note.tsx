@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type NoteProps } from '../core/note-props.js';
 import classes from './note.module.scss';
 

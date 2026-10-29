@@ -6,7 +6,6 @@ import {
   useEffect,
   useLayoutEffect,
 } from 'react';
-
 import {
   type AuthenticationState,
   useAuthentication,

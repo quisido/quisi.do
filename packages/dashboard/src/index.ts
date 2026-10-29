@@ -1,6 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
 import { ExportedHandler } from '@quisido/worker';
-
 import DashboardFetchHandler from './dashboard-fetch-handler.js';
 import handleError from './handle-error.js';
 import handleLog from './handle-log.js';

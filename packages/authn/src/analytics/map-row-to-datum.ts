@@ -1,9 +1,8 @@
 import { type AnalyticsEngineRow } from 'cloudflare-utils';
 import { not } from 'fmrs';
-
 import { type Datum } from './datum.js';
-import { findEmptyString } from './is-empty-string.js';
-import { findZero } from './is-zero.js';
+import isEmptyString from './is-empty-string.js';
+import isZero from './is-zero.js';
 
 const ARRAY_INDEX_OFFSET = 1;
 const FIRST = 0;
@@ -55,8 +54,8 @@ export default function mapRowToDatum(row: AnalyticsEngineRow): Datum {
     row.double20,
   ];
 
-  const lastBlobIndex: number = blobs.findLastIndex(not(findEmptyString));
-  const lastDoubleIndex: number = doubles.findLastIndex(not(findZero));
+  const lastBlobIndex: number = blobs.findLastIndex(not(isEmptyString));
+  const lastDoubleIndex: number = doubles.findLastIndex(not(isZero));
   return {
     numbers: doubles.slice(FIRST, lastDoubleIndex + ARRAY_INDEX_OFFSET),
     strings: blobs.slice(FIRST, lastBlobIndex + ARRAY_INDEX_OFFSET),

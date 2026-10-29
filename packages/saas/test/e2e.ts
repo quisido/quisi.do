@@ -6,7 +6,6 @@ import {
   test as base,
   type TestType,
 } from '@playwright/test';
-
 import { type TestArgs, type WorkerArgs } from './playwright.js';
 import QuisidoPageObject from './quisido-page-object.js';
 

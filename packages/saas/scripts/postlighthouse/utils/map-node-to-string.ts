@@ -1,5 +1,4 @@
 import { isDefined } from 'fmrs';
-
 import { type AuditDetails } from './audit-details.js';
 
 export default function mapNodeToString({

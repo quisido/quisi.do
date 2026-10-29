@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { mapObjectToEntries } from './index.js';
 
 const TEST_NUMBER = 123;

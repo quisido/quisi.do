@@ -1,5 +1,4 @@
 import { type AnalyticsEngineRow } from 'cloudflare-utils';
-
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { type Datum } from './datum.js';
 import mapAnalyticsEngineRowIndexToDatumFactory from './map-analytics-engine-row-index-to-datum-factory.js';

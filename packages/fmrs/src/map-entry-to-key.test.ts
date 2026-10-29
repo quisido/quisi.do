@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { mapEntryToKey } from './index.js';
 
 describe('mapEntryToKey', (): void => {

@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { RobotsTxtResponse } from './index.js';
 
 describe('RobotsTxtResponse', (): void => {

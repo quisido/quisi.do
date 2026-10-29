@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { isDefined } from './index.js';
 
 describe('isDefined', (): void => {

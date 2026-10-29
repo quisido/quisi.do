@@ -8,24 +8,31 @@ import {
   TestKVNamespace,
   TestR2Bucket,
 } from 'cloudflare-test-utils';
-
 import AuthnFetchHandler from '../src/authn-fetch-handler.js';
 import {
   INSERT_INTO_EMAILS_QUERY,
+  INSERT_INTO_OAUTH_QUERY,
   INSERT_INTO_USERS_QUERY,
   SELECT_USERID_FROM_OAUTH_QUERY,
 } from '../src/constants/queries.js';
 import handleError from '../src/handle-error.js';
+import handleFinally from '../src/handle-finally.js';
 import handleLog from '../src/handle-log.js';
 import handleMetric from '../src/handle-metric.js';
+import {
+  TEST_ENCRYPTION_SECRET,
+  TEST_JWT_AUDIENCE,
+  TEST_JWT_ISSUER,
+  TEST_NOW,
+} from './authentication-token.js';
 import AuthnTestResponse from './authn-test-response.js';
 import mapStringToIp from './map-string-to-ip.js';
 import { PATREON_IDENTITY_URL } from './patreon-identity-url.js';
 import { TEST_PATREON_URL } from './test-patreon-url.js';
 
 interface Options {
-  readonly authnUserIds?: Readonly<Partial<Record<string, string>>>;
   readonly env?: Readonly<Record<string, unknown>> | undefined;
+  readonly includeFinally?: boolean | undefined;
   readonly lastUsersRowId?: number | undefined;
   readonly now?: (() => number) | undefined;
   readonly oAuthResults?: readonly unknown[] | undefined;
@@ -33,27 +40,29 @@ interface Options {
 
 const DEFAULT_LAST_USERS_ROW_ID = 1;
 
-export default class TestAuthnExportedHandler extends TestExportedHandler {
+export default class TestAuthnExportedHandler extends TestExportedHandler<Env> {
   #authnData: TestR2Bucket;
   #authnDb: TestD1Database;
-  public override mockResponse = super.mockResponse.bind(this);
+  public override mockResponse: TestExportedHandler['mockResponse'] =
+    super.mockResponse.bind(this);
 
-  public override expectNotToHaveWrittenDataPoint =
+  public override expectNotToHaveWrittenDataPoint: TestExportedHandler['expectNotToHaveWrittenDataPoint'] =
     super.expectNotToHaveWrittenDataPoint.bind(this);
 
-  public override expectToHaveWrittenDataPoint =
+  public override expectToHaveWrittenDataPoint: TestExportedHandler['expectToHaveWrittenDataPoint'] =
     super.expectToHaveWrittenDataPoint.bind(this);
 
   public constructor({
-    authnUserIds = {},
     env = {},
+    includeFinally = false,
     lastUsersRowId = DEFAULT_LAST_USERS_ROW_ID,
-    now,
+    now = (): number => TEST_NOW,
     oAuthResults = [{ userId: 1 }],
   }: Options = {}) {
     const authnData = new TestR2Bucket();
     const authnDb = new TestD1Database({
       [INSERT_INTO_EMAILS_QUERY]: {},
+      [INSERT_INTO_OAUTH_QUERY]: {},
 
       [INSERT_INTO_USERS_QUERY]: {
         lastRowId: lastUsersRowId,
@@ -68,8 +77,11 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
       env: {
         AUTHN_DATA: authnData,
         AUTHN_DB: authnDb,
-        AUTHN_USER_IDS: new TestKVNamespace(authnUserIds),
+        BUDGET: new TestKVNamespace(),
         HOST: 'host.test.quisi.do',
+        JWT_AUDIENCE: TEST_JWT_AUDIENCE,
+        JWT_ENCRYPTION_SECRET: TEST_ENCRYPTION_SECRET,
+        JWT_ISSUER: TEST_JWT_ISSUER,
         PATREON_OAUTH_CLIENT_ID: 'test-client-id',
         PATREON_OAUTH_CLIENT_SECRET: 'test-client-secret',
         PATREON_OAUTH_HOST: 'https://host.test.patreon.com',
@@ -79,6 +91,7 @@ export default class TestAuthnExportedHandler extends TestExportedHandler {
         ...env,
       },
       FetchHandler: AuthnFetchHandler,
+      finally: includeFinally ? handleFinally : undefined,
       now,
       onError: handleError,
       onLog: handleLog,

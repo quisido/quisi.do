@@ -1,5 +1,4 @@
 import { type ChangeEvent, type ReactElement } from 'react';
-
 import { type SearchBoxProps } from '../core/search-box-props.js';
 import classes from './search-box.module.scss';
 

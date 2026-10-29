@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-
 import Intercom from '../contexts/intercom.js';
 import type IntercomFunction from '../types/intercom-function.js';
 

@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type MarkProps } from '../core/mark-props.js';
 import classes from './mark.module.scss';
 

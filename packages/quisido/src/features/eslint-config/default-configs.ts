@@ -1,5 +1,4 @@
 import { type Config, defineConfig } from 'eslint/config';
-
 import { CJS_CONFIG } from './cjs.js';
 import { D_TS_CONFIG } from './d-ts.js';
 import { GITHUB_WORKFLOW_CONFIG } from './github-workflow.js';

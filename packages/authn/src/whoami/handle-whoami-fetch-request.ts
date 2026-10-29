@@ -1,14 +1,12 @@
 import { ErrorCode, WhoAmIResponseCode } from '@quisido/authn-shared';
 import { StatusCode } from 'cloudflare-utils';
-import { toError } from 'fmrs';
-
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
+import createAuthenticationCookie from '../fetch-handler/create-authentication-cookie.js';
+import validateAuthenticationToken from '../jwt/validate-authentication-token.js';
 import FatalError from '../utils/fatal-error.js';
 import WhoAmIResponse from './whoami-response.js';
 import WhoAmIResponseInit from './whoami-response-init.js';
-
-const BASE = 10;
 
 export default async function handleWhoAmIFetchRequest(
   this: AuthnFetchHandler,
@@ -23,6 +21,24 @@ export default async function handleWhoAmIFetchRequest(
     );
   }
 
+  // Clearing a cookie must work even when its token is missing or expired.
+  if (this.requestMethod === 'DELETE') {
+    const responseInit = new WhoAmIResponseInit(StatusCode.NoContent, {
+      accessControlAllowOrigin: this.accessControlAllowOrigin,
+    });
+    if (this.origin === null || this.origin !== this.accessControlAllowOrigin) {
+      return new Response(
+        null,
+        new WhoAmIResponseInit(StatusCode.Forbidden, {
+          accessControlAllowOrigin: this.accessControlAllowOrigin,
+        }),
+      );
+    }
+    const headers = new Headers(responseInit.headers);
+    headers.set('set-cookie', createAuthenticationCookie.call(this, ''));
+    return new Response(null, { headers, status: StatusCode.NoContent });
+  }
+
   // If the user is not authenticated,
   if (typeof this.authnIdCookie === 'undefined') {
     this.emitPublicMetric(MetricName.MissingAuthnId);
@@ -32,54 +48,14 @@ export default async function handleWhoAmIFetchRequest(
     });
   }
 
-  // If the authentication ID is cached in memory,
-  const userIdFromMemory: number | undefined = this.getAuthnUserIdFromMemory(
-    this.authnIdCookie,
-  );
-
-  if (typeof userIdFromMemory !== 'undefined') {
-    this.setFiscalResponsibility(userIdFromMemory);
-    this.emitPublicMetric(MetricName.CachedAuthnId);
-    this.emitPrivateMetric(MetricName.CachedAuthnId, {
-      userId: userIdFromMemory,
-    });
-
-    return new WhoAmIResponse({
-      accessControlAllowOrigin: this.accessControlAllowOrigin,
-      code: WhoAmIResponseCode.Cached,
-      id: userIdFromMemory,
-    });
-  }
-
-  // Throttle
-  if (this.shouldThrottleWhoAmIByIp()) {
-    this.emitPublicMetric(MetricName.WhoAmIThrottled);
-    this.emitPrivateMetric(MetricName.WhoAmIThrottled, {
-      ip: this.ip,
-    });
-
-    return new WhoAmIResponse({
-      accessControlAllowOrigin: this.accessControlAllowOrigin,
-      code: WhoAmIResponseCode.Throttled,
-      status: StatusCode.TooManyRequests,
-    });
-  }
-
   try {
-    const userIdStr: string | null = await this.getKVNamespaceText(
-      'AUTHN_USER_IDS',
+    const userId: number | null = await validateAuthenticationToken.call(
+      this,
       this.authnIdCookie,
     );
 
-    /**
-     * Authentication is eventually consistent. We don't want to delete the
-     * invalid authentication cookie in case the ID exists in the future.
-     */
-    if (userIdStr === null) {
-      this.emitPublicMetric(MetricName.InvalidAuthnId);
-      this.emitPrivateMetric(MetricName.InvalidAuthnId, {
-        authnId: this.authnIdCookie,
-      });
+    if (userId === null) {
+      this.emitPublicMetric(MetricName.AuthenticationTokenRejected);
 
       return new WhoAmIResponse({
         accessControlAllowOrigin: this.accessControlAllowOrigin,
@@ -87,15 +63,8 @@ export default async function handleWhoAmIFetchRequest(
       });
     }
 
-    // User found! 🎉
-    const userId: number = parseInt(userIdStr, BASE);
     this.setFiscalResponsibility(userId);
-    this.setAuthnUserIdInMemory(this.authnIdCookie, userId);
-
-    this.emitPublicMetric(MetricName.UncachedAuthnId);
-    this.emitPrivateMetric(MetricName.UncachedAuthnId, {
-      userId,
-    });
+    this.emitPublicMetric(MetricName.AuthenticationTokenValidated);
 
     return new WhoAmIResponse({
       accessControlAllowOrigin: this.accessControlAllowOrigin,
@@ -116,7 +85,7 @@ export default async function handleWhoAmIFetchRequest(
       );
     }
 
-    const error: Error = toError(err);
+    const error = new Error('Authentication request failed');
     this.logError(error);
     return new Response(
       JSON.stringify({

@@ -5,7 +5,6 @@ import {
   useRef,
   useState,
 } from 'react';
-
 import { type Tab, type TabsProps } from '../core/tabs-props.js';
 import useTabs from '../core/use-tabs.js';
 import classes from './tabs.module.scss';

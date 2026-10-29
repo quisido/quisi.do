@@ -1,7 +1,6 @@
 import { type ReactElement } from 'react';
-
-import { Link } from '../design-systems/template/index.js';
 import useBrowserBrand from '../hooks/use-browser-brand.js';
+import { Link } from './design-system.js';
 
 export default function CertificateManagerLink(): ReactElement {
   const browserBrand: string | null = useBrowserBrand();

@@ -1,9 +1,8 @@
 import { ErrorCode } from '@quisido/authn-shared';
-import I18n from 'lazy-i18n';
 import { type ReactElement } from 'react';
-
 import AlarmExistsMessage from '../components/alarm-exists-message.js';
 import CsrfLink from '../components/csrf-link.js';
+import I18n from '../components/i18n.js';
 import MisconfiguredPatreonClientMessage from '../components/misconfigured-patreon-client-message.js';
 import UnknownErrorMessage from '../components/unknown-error-message.js';
 import type Notification from '../types/notification.js';
@@ -336,10 +335,10 @@ export default function mapAuthnErrorCodeToNotification(
 
         Message(): ReactElement {
           return (
-            <I18n csrf={<CsrfLink />}>
-              Ensure cookies are enabled. To prevent $csrf, authentication
-              requires visiting this website first.
-            </I18n>
+            <>
+              Ensure cookies are enabled. To prevent <CsrfLink />,
+              authentication requires visiting this website first.
+            </>
           );
         },
       };
@@ -352,9 +351,10 @@ export default function mapAuthnErrorCodeToNotification(
 
         Message(): ReactElement {
           return (
-            <I18n csrf={<CsrfLink />}>
-              To prevent $csrf, authentication must originate from this website.
-            </I18n>
+            <>
+              To prevent <CsrfLink />, authentication must originate from this
+              website.
+            </>
           );
         },
       };
@@ -367,9 +367,10 @@ export default function mapAuthnErrorCodeToNotification(
 
         Message(): ReactElement {
           return (
-            <I18n csrf={<CsrfLink />}>
-              To prevent $csrf, authentication must originate from this website.
-            </I18n>
+            <>
+              To prevent <CsrfLink />, authentication must originate from this
+              website.
+            </>
           );
         },
       };

@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import validateArray from './validate-array.js';
 
 describe('validateArray', (): void => {

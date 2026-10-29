@@ -1,6 +1,5 @@
 import { within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-
 import importTestedDesignSystem from './import-tested-design-system.js';
 import render from './render.js';
 

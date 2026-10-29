@@ -3,6 +3,9 @@ import { playwright } from '@vitest/browser-playwright';
 import { defineVitestConfig, type VitestConfig } from 'quisido';
 
 const CONFIG: VitestConfig = await defineVitestConfig({
+  define: {
+    'import.meta.env.WHOAMI': JSON.stringify('https://authn.test/whoami/'),
+  },
   plugins: [react()],
   test: {
     attachmentsDir: '.tests/vitest/attachments',

@@ -1,12 +1,11 @@
-import I18n, { type TranslateFunction, useTranslate } from 'lazy-i18n';
 import { type ReactElement, useMemo } from 'react';
-
+import { Link } from '../components/design-system.js';
+import I18n from '../components/i18n.jsx';
 import {
   PATREON_OAUTH_CLIENT_ID,
   PATREON_OAUTH_REDIRECT_URI,
 } from '../constants/patreon-oauth.js';
 import { useSessionId } from '../contexts/session-id.js';
-import { Link } from '../design-systems/template/index.js';
 import usePathname from '../hooks/use-pathname.js';
 import useSearch from '../hooks/use-search.js';
 import validateString from '../utils/validate-string.js';
@@ -35,7 +34,6 @@ const useAuthenticateLink = (): State => {
   const pathname: string = usePathname();
   const search: string = useSearch();
   const sessionId: string | undefined = useSessionId();
-  const translate: TranslateFunction = useTranslate();
 
   // States
   return {
@@ -53,7 +51,7 @@ const useAuthenticateLink = (): State => {
 
       return `https://www.patreon.com/oauth2/authorize?${authSearch}`;
     }, [pathname, search, sessionId]),
-    title: translate('Authenticate') ?? 'Authenticate',
+    title: 'Authenticate',
   };
 };
 

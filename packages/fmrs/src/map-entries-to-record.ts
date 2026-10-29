@@ -1,4 +1,19 @@
-import reduceEntriesToRecord from './reduce-entries-to-record.js';
+/**
+ * A mutable reducer significantly improves performance. This is a safe
+ * operation, because we control the record end-to-end.
+ */
+const reduceEntriesToRecord = <K extends number | string | symbol, V>(
+  record: Record<K, V>,
+  [key, value]: readonly [K, V],
+): Record<K, V> => {
+  Object.defineProperty(record, key, {
+    configurable: true,
+    enumerable: true,
+    value,
+    writable: true,
+  });
+  return record;
+};
 
 /**
  * Converts an array of `[key, value]` entries into a record.

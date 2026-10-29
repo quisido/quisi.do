@@ -1,5 +1,4 @@
 import { StatusCode } from 'cloudflare-utils';
-
 import RootResponseHeaders from './root-response-headers.js';
 
 export default class RootResponse extends Response {

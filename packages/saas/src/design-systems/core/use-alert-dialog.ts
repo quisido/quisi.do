@@ -1,6 +1,5 @@
 import { useOverlay, usePreventScroll } from '@react-aria/overlays';
 import { type HTMLAttributes, type RefObject, useRef } from 'react';
-
 import useId from './use-id.js';
 import useModal from './use-modal.js';
 

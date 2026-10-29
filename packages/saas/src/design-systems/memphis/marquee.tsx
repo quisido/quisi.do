@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type MarqueeProps } from '../core/marquee-props.js';
 import classes from './marquee.module.scss';
 

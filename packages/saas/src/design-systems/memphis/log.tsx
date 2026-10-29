@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type LogProps } from '../core/log-props.js';
 import classes from './log.module.scss';
 
