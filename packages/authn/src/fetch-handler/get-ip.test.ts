@@ -1,20 +1,21 @@
 import { describe, it } from 'vitest';
-import createTestAuthenticationToken from '../../test/authentication-token.js';
+import { TEST_NOW } from '../../test/authentication-token.js';
 import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
+import { TEST_PATREON_URL } from '../../test/test-patreon-url.js';
 import { EnvironmentName } from '../constants/environment-name.js';
 import { MetricName } from '../constants/metric-name.js';
 
 describe('getIp', (): void => {
   it('should emit a metric', async (): Promise<void> => {
     // Assemble
-    const { expectToHaveEmitPublicMetric, fetch } =
+    const { expectToHaveEmitPublicMetric, fetch, mockPatreonToken } =
       new TestAuthnExportedHandler();
+    mockPatreonToken(new Response(null, { status: 400 }));
 
     // Act
-    const token: string = await createTestAuthenticationToken();
-    await fetch('/whoami/', {
+    await fetch(TEST_PATREON_URL, {
       headers: new Headers({
-        cookie: `__Secure-Authentication-ID=${token}`,
+        cookie: '__Secure-Session-ID=test-session-id',
       }),
     });
 
@@ -24,18 +25,19 @@ describe('getIp', (): void => {
 
   it('should not emit a metric in development', async (): Promise<void> => {
     // Assemble
-    const { expectNotToHaveEmitPublicMetric, fetch } =
+    const { expectNotToHaveEmitPublicMetric, fetch, mockPatreonToken } =
       new TestAuthnExportedHandler({
         env: {
           ENVIRONMENT_NAME: EnvironmentName.Development,
         },
+        now: (): number => TEST_NOW + 10_000,
       });
+    mockPatreonToken(new Response(null, { status: 400 }));
 
     // Act
-    const token: string = await createTestAuthenticationToken();
-    await fetch('/whoami/', {
+    await fetch(TEST_PATREON_URL, {
       headers: new Headers({
-        cookie: `__Secure-Authentication-ID=${token}`,
+        cookie: '__Secure-Session-ID=test-session-id',
       }),
     });
 
