@@ -1,0 +1,13 @@
+{
+  "headers": [
+    {
+      "headers": [
+        {
+          "key": "Document-Policy",
+          "value": "js-profiling"
+        }
+      ],
+      "source": "index.html"
+    }
+  ]
+}
