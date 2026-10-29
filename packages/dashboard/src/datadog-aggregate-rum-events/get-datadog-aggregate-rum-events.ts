@@ -1,5 +1,4 @@
 import { toError } from 'fmrs';
-
 import { MetricName } from '../constants/metric-name.js';
 import {
   MILLISECONDS_PER_MINUTE,

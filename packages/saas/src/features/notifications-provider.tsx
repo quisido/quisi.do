@@ -8,7 +8,6 @@ import {
   useRef,
   useState,
 } from 'react';
-
 import {
   type NotificationProps,
   NotificationsProvider,

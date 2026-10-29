@@ -1,5 +1,4 @@
 import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-web';
-
 import OTLPTraceExporter from './otlp-trace-exporter.js';
 
 export default class BatchSpanProcessorImpl extends BatchSpanProcessor {

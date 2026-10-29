@@ -1,6 +1,5 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { EncryptJWT } from 'jose';
-
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 import { SECONDS_PER_DAY } from '../constants/time.js';

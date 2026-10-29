@@ -1,5 +1,4 @@
 import { assert, describe, expect, it } from 'vitest';
-
 import findSplashScreenIcon from '../test/find-splash-screen-icon.js';
 import { THEME } from './constants/theme.js';
 import type WebManifest from './types/web-manifest/web-manifest.js';

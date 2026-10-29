@@ -1,6 +1,5 @@
 import { type ReactElement } from 'react';
 import { FocusScope } from 'react-aria';
-
 import {
   type AlertDialogProps,
   type AlertDialogType,

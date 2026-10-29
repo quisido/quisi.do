@@ -1,7 +1,6 @@
 import { type Plugin } from '@eslint/config-helpers';
 import jsonPlugin from '@eslint/json';
 import jsonc from 'eslint-plugin-jsonc';
-
 import defineConfig, { type Config } from './define-config.js';
 import fileGlobsByExtension from './file-globs-by-extension.js';
 import { LINTER_OPTIONS } from './linter-options.js';

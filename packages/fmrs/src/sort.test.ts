@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { sort } from './index.js';
 
 describe('sort', (): void => {

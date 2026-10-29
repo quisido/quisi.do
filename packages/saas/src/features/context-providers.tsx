@@ -1,6 +1,5 @@
 import { type ComponentType, Fragment, type PropsWithChildren } from 'react';
 import { BrowserRouter } from 'react-router';
-
 import withWrappers from '../hocs/with-wrappers/index.js';
 import Authentication from './authentication.js';
 import CustomThemeProvider from './custom-theme-provider.js';

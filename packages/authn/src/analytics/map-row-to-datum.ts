@@ -1,6 +1,5 @@
 import { type AnalyticsEngineRow } from 'cloudflare-utils';
 import { not } from 'fmrs';
-
 import { type Datum } from './datum.js';
 import isEmptyString from './is-empty-string.js';
 import isZero from './is-zero.js';

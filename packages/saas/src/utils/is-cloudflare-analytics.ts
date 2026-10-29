@@ -1,5 +1,4 @@
 import { isRecord } from 'fmrs';
-
 import type CloudflareAnalytics from '../types/cloudflare-analytics.js';
 import type CloudflareAnalyticsDatasets from '../types/cloudflare-analytics-datasets.js';
 

@@ -1,6 +1,5 @@
 import jsonSchemaValidator from 'eslint-plugin-json-schema-validator';
 import * as yamlParser from 'yaml-eslint-parser';
-
 import defineConfig, { type Config } from './define-config.js';
 import { LINTER_OPTIONS } from './linter-options.js';
 

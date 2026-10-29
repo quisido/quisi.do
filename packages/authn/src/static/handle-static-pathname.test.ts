@@ -1,6 +1,5 @@
 import { StatusCode } from 'cloudflare-utils';
 import { describe, it } from 'vitest';
-
 import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';
 import { MetricName } from '../constants/metric-name.js';
 

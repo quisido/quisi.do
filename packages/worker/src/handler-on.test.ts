@@ -4,7 +4,6 @@ import {
   TEST_EXECUTION_CONTEXT,
 } from 'cloudflare-test-utils';
 import { assert, describe, expect, it } from 'vitest';
-
 import asyncSetTimeout from '../test/async-set-timeout.js';
 import { TestExportedHandler } from '../test/test-exported-handler.js';
 import throwy from '../test/throwy.js';

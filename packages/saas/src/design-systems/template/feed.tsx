@@ -1,5 +1,4 @@
 import { type FocusEvent, type KeyboardEvent, type ReactElement } from 'react';
-
 import { type FeedArticle, type FeedProps } from '../core/feed-props.js';
 import { FOCUSABLE_SELECTORS } from '../core/focusable-selectors.js';
 import useFeed from '../core/use-feed.js';

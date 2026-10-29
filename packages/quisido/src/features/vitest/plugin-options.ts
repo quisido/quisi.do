@@ -1,5 +1,4 @@
 import { type Plugin } from 'vitest/config';
-
 import { IMPORT_CODE_WORKSPACE_PLUGIN } from './import-code-workspace-plugin.js';
 
 export type PluginOptions = readonly Plugin[];

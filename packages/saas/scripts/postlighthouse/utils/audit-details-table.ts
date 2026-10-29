@@ -1,5 +1,4 @@
 import { Table } from 'console-table-printer';
-
 import { type AuditDetails } from './audit-details.js';
 import HeadingsToRowReducer from './audit-details-table-headings-to-row-reducer.js';
 import mapHeadingToColumn from './map-audit-details-table-heading-to-column.js';

@@ -1,5 +1,4 @@
 import { type ReactElement, useMemo } from 'react';
-
 import { Link } from '../components/design-system.js';
 import I18n from '../components/i18n.jsx';
 import {

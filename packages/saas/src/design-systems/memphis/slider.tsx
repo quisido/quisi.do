@@ -1,5 +1,4 @@
 import { type ChangeEvent, type CSSProperties, type ReactElement } from 'react';
-
 import { type SliderProps } from '../core/slider-props.js';
 import classes from './slider.module.scss';
 

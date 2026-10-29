@@ -1,5 +1,4 @@
 import { errors, jwtDecrypt } from 'jose';
-
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import { SECONDS_PER_DAY } from '../constants/time.js';
 import getAuthenticationTokenKey from './get-authentication-token-key.js';

@@ -1,5 +1,4 @@
 import { type ReactNode } from 'react';
-
 import { type RequiredReactNode } from './required-react-node.js';
 
 export interface RegionProps {

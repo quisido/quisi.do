@@ -7,7 +7,6 @@ import {
   type PlaywrightTestConfig,
   type ReporterDescription,
 } from '@playwright/test';
-
 import { type TestArgs, type WorkerArgs } from './test/playwright.js';
 
 const {

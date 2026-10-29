@@ -1,5 +1,4 @@
 import { type Dispatch, type SetStateAction } from 'react';
-
 import { useLocalStorage } from '../modules/use-local-storage/index.js';
 
 export default function useColorScheme(): readonly [

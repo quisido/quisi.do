@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import mapHeadersInitToRecord from './map-headers-init-to-record.js';
 import unimplementedMethod from './unimplemented-method.js';
 

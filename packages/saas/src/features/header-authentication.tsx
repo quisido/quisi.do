@@ -1,5 +1,4 @@
 import { type ReactElement, useEffect, useState } from 'react';
-
 import LoadingIcon from '../components/loading-icon.js';
 import { useAuthentication } from '../contexts/authentication.js';
 import AuthenticateLink from './header-authenticate-link.js';

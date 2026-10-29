@@ -7,7 +7,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-
 import { BrowserAgentContext } from './browser-agent-context.js';
 
 interface Props {

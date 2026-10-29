@@ -1,5 +1,4 @@
 import { isAnalyticsEngineResponse, StatusCode } from 'cloudflare-utils';
-
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import AnalyticsResponseInit from './analytics-response-init.js';
 import fetchAnalytics from './fetch-analytics.js';

@@ -4,21 +4,54 @@ import ddPlugin from 'dd-trace/esbuild';
 import {
   type ConfigEnv,
   defineConfig,
+  type OxcOptions,
   type UserConfig,
   type UserConfigFnObject,
 } from 'vite';
-
 import reduceEnvironmentVariableNamesToRecord from './src/utils/reduce-environment-variable-names-to-record.js';
 
+// `IsolatedDeclarationsOptions` is typed by `rolldown` but not re-exported by `vite`.
+type IsolatedDeclarationsOptions = Exclude<
+  TypeScriptOptions['declaration'],
+  undefined
+>;
+
+// `JsxOptions` is typed by `rolldown` but not re-exported by `vite`.
+type JsxOptions = Exclude<OxcOptions['jsx'], string | undefined>;
+
+// `TypeScriptOptions` is typed by `rolldown` but not re-exported by `vite`.
+type TypeScriptOptions = Exclude<OxcOptions['typescript'], undefined>;
+
 /**
- * Disabled because "Both esbuild and oxc options were set. oxc options will
- * be used and esbuild options will be ignored."
-const ESBUILD_OPTIONS: ESBuildOptions = {
-  color: true,
-  jsx: 'preserve',
-  sourcesContent: true,
-};
+ * @see {@link https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define}
  */
+const DEFINE_PLUGIN: Record<string, string> = {};
+
+const ISOLATED_DECLARATIONS_OPTIONS: IsolatedDeclarationsOptions = {
+  sourcemap: true,
+};
+
+/** @see {@link https://oxc.rs/docs/guide/usage/transformer/jsx} */
+const JSX_OPTIONS: JsxOptions = {
+  refresh: true,
+  runtime: 'automatic',
+};
+
+/** @see {@link https://oxc.rs/docs/guide/usage/transformer/typescript} */
+const TYPESCRIPT_OPTIONS: TypeScriptOptions = {
+  allowNamespaces: false,
+  declaration: ISOLATED_DECLARATIONS_OPTIONS,
+  onlyRemoveTypeImports: true,
+  optimizeConstEnums: true,
+  optimizeEnums: true,
+  rewriteImportExtensions: 'rewrite',
+};
+
+const OXC_OPTIONS: OxcOptions = {
+  define: DEFINE_PLUGIN,
+  jsx: JSX_OPTIONS,
+  typescript: TYPESCRIPT_OPTIONS,
+};
 
 const USER_CONFIG: UserConfig = {
   base: '/',
@@ -49,12 +82,8 @@ const USER_CONFIG: UserConfig = {
     'SENTRY_ENVIRONMENT',
     'WHOAMI',
   ].reduce(reduceEnvironmentVariableNamesToRecord, {}),
-  envDir: '../',
-  /**
-   * Disabled because "Both esbuild and oxc options were set. oxc options will
-   * be used and esbuild options will be ignored."
-   */
-  // esbuild: ESBUILD_OPTIONS,
+  envDir: '..',
+  oxc: OXC_OPTIONS,
   publicDir: '../public',
   resolve: {
     // Upgraded exporters require the application's OpenTelemetry API 1.10.
@@ -63,69 +92,45 @@ const USER_CONFIG: UserConfig = {
   root: 'src',
 };
 
-const DEVELOPMENT_USER_CONFIG: UserConfig = {
-  ...USER_CONFIG,
-  css: {
-    preprocessorMaxWorkers: true,
-  },
-  /**
-   * Disabled because "Both esbuild and oxc options were set. oxc options will
-   * be used and esbuild options will be ignored."
-  esbuild: {
-    ...ESBUILD_OPTIONS,
-    jsxDev: true,
-    lineLimit: 80,
-    minifyIdentifiers: false,
-    minifySyntax: false,
-    minifyWhitespace: false,
-    sourcemap: 'both',
-    sourceRoot: tsconfig.compilerOptions.sourceRoot,
-  },
-   */
-  plugins: [basicSsl(), ddPlugin, react()],
-  server: {
-    headers: {
-      'document-policy': 'js-profiling',
-    },
-    port: 3000,
-  },
-  tsconfig: '../tsconfig.json', // relative to `root` ('src/')
-};
-
-const PRODUCTION_USER_CONFIG: UserConfig = {
-  ...USER_CONFIG,
-  build: {
-    emptyOutDir: true,
-    outDir: '../_site', // relative to `root` ('src/')
-    sourcemap: true,
-  },
-  /**
-   * Disabled because "Both esbuild and oxc options were set. oxc options will
-   * be used and esbuild options will be ignored."
-  esbuild: {
-    ...ESBUILD_OPTIONS,
-    jsxDev: false,
-    minifyIdentifiers: true,
-    minifySyntax: true,
-    minifyWhitespace: true,
-    sourceRoot: buildTSConfig.compilerOptions.sourceRoot,
-    tsconfigRaw: buildTSConfig as Compulsory<ESBuildOptions['tsconfigRaw']>,
-  },
-   */
-  html: {
-    cspNonce: 'nonce-quisido',
-  },
-  plugins: [ddPlugin, react()],
-  tsconfig: '../tsconfig.build.json', // relative to `root` ('src/')
-};
-
 const CONFIG: UserConfigFnObject = defineConfig(
   ({ mode }: ConfigEnv): UserConfig => {
     if (mode !== 'production') {
-      return DEVELOPMENT_USER_CONFIG;
+      return {
+        ...USER_CONFIG,
+        css: {
+          preprocessorMaxWorkers: true,
+        },
+        oxc: {
+          ...OXC_OPTIONS,
+          jsx: {
+            ...JSX_OPTIONS,
+            development: true,
+          },
+        },
+        plugins: [basicSsl(), ddPlugin, react()],
+        server: {
+          headers: {
+            'document-policy': 'js-profiling',
+          },
+          port: 3000,
+        },
+        tsconfig: '../tsconfig.json', // relative to `root` ('src/')
+      };
     }
 
-    return PRODUCTION_USER_CONFIG;
+    return {
+      ...USER_CONFIG,
+      build: {
+        emptyOutDir: true,
+        outDir: '../_site', // relative to `root` ('src/')
+        sourcemap: true,
+      },
+      html: {
+        cspNonce: 'nonce-quisido',
+      },
+      plugins: [ddPlugin, react()],
+      tsconfig: '../tsconfig.build.json', // relative to `root` ('src/')
+    };
   },
 );
 

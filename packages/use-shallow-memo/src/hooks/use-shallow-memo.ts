@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-
 import mapValueToDependencies from '../utils/map-value-to-dependencies.js';
 
 export default function useShallowMemo<

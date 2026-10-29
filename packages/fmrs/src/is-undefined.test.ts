@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { isUndefined } from './index.js';
 
 describe('isUndefined', (): void => {

@@ -1,5 +1,4 @@
 import { type ChangeEvent, type ReactElement } from 'react';
-
 import { type TextBoxProps } from '../core/text-box-props.js';
 import classes from './text-box.module.scss';
 

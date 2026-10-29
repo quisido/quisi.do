@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { TestResponse } from './index.js';
 
 describe('TestResponse', (): void => {

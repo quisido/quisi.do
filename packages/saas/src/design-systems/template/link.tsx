@@ -4,7 +4,6 @@ import {
   type MouseEventHandler,
   type ReactElement,
 } from 'react';
-
 import validateString from '../../utils/validate-string.js';
 import { type LinkProps } from '../core/link-props.js';
 import classes from './link.module.scss';

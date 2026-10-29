@@ -1,6 +1,5 @@
 import { identity } from 'fmrs';
 import { useEffect } from 'react';
-
 import { type Compulsory } from '../types/compulsory.js';
 import {
   type LogRocketOptions,
@@ -30,7 +29,7 @@ const CONSOLE: Required<Compulsory<LogRocketOptions['console']>> = {
   shouldAggregateConsoleErrors: true,
 };
 
-const DOM: Required<Omit<Compulsory<LogRocketOptions['dom']>, 'baseHref'>> = {
+const DOM: Omit<Compulsory<LogRocketOptions['dom']>, 'baseHref'> = {
   disableHistoryPatching: false,
   disablePageTitles: false,
   disableVisibleElement: false,
@@ -40,8 +39,6 @@ const DOM: Required<Omit<Compulsory<LogRocketOptions['dom']>, 'baseHref'>> = {
   imageSanitizer: false,
   inputSanitizer: false,
   isEnabled: true,
-  privateAttributeBlocklist: [],
-  privateClassNameBlocklist: [],
   redactSelectors: [],
   shouldLogDroppedStyleDiagnostics: false,
   snapshotEventDelta: 2_500,

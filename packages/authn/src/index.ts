@@ -1,5 +1,4 @@
 import { ExportedHandler } from '@quisido/worker';
-
 import AuthnFetchHandler from './authn-fetch-handler.js';
 import handleError from './handle-error.js';
 import handleFinally from './handle-finally.js';

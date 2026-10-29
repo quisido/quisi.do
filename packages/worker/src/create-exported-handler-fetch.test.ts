@@ -8,7 +8,6 @@ import {
 import { type IncomingRequest, StatusCode } from 'cloudflare-utils';
 import { EventEmitter } from 'eventemitter3';
 import { assert, describe, expect, it, vi } from 'vitest';
-
 import { ExportedHandler, FetchHandler } from './index.js';
 
 const TEST_ENV: unknown = {};

@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type BannerProps } from '../core/banner-props.js';
 import classes from './banner.module.scss';
 

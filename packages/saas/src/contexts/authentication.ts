@@ -1,5 +1,4 @@
 import { type Provider } from 'react';
-
 import createContextUtils from '../modules/create-context-utils/index.js';
 import { type AsyncState } from '../modules/use-async-state/index.js';
 import type Authentication from '../types/authentication.js';

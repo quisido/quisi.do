@@ -1,5 +1,4 @@
 import { type ComponentType } from 'react';
-
 import { type AlertDialogProps } from './alert-dialog-props.js';
 import { type AlertProps } from './alert-props.js';
 import { type ApplicationProps } from './application-props.js';

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-
 import type GoogleAnalyticsUserData from '../types/google-analytics-user-data.js';
 import type UserData from '../types/user-data.js';
 import gtag from '../utils/gtag.js';

@@ -4,7 +4,6 @@ import {
   type PlaywrightWorkerArgs,
   type PlaywrightWorkerOptions,
 } from '@playwright/test';
-
 import type QuisidoPageObject from './quisido-page-object.js';
 
 interface QuisidoTestArgs {

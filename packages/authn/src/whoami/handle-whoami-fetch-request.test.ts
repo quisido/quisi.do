@@ -2,7 +2,6 @@ import { ErrorCode } from '@quisido/authn-shared';
 import { TestAnalyticsEngineDataset } from 'cloudflare-test-utils';
 import { StatusCode } from 'cloudflare-utils';
 import { describe, expect, it, vi } from 'vitest';
-
 import createTestAuthenticationToken from '../../test/authentication-token.js';
 import createIp from '../../test/create-ip.js';
 import TestAuthnExportedHandler from '../../test/test-authn-exported-handler.js';

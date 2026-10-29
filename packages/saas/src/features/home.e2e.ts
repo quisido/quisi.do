@@ -1,5 +1,4 @@
 import { expect, type Locator } from '@playwright/test';
-
 import { test } from '../../test/e2e.js';
 import { type TestArgs, type WorkerArgs } from '../../test/playwright.js';
 

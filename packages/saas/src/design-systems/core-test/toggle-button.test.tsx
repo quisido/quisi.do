@@ -1,5 +1,4 @@
 import { describe, expect, it, vi } from 'vitest';
-
 import noop from '../../utils/noop.js';
 import importTestedDesignSystem from './import-tested-design-system.js';
 import render from './render.jsx';

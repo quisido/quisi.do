@@ -1,6 +1,5 @@
 import { isUndefined } from 'fmrs';
 import { useMemo } from 'react';
-
 import EMPTY_OBJECT from '../constants/empty-object.js';
 import type GoogleAnalyticsUserData from '../types/google-analytics-user-data.js';
 import type GoogleAnalyticsUserDataAddress from '../types/google-analytics-user-data-address.js';

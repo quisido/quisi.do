@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { isBoolean } from './index.js';
 
 describe('isBoolean', (): void => {

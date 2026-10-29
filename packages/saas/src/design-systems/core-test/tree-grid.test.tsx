@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { userEvent } from 'vitest/browser';
-
 import importTestedDesignSystem from './import-tested-design-system.js';
 import render from './render.js';
 

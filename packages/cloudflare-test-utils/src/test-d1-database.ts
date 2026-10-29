@@ -1,6 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
 import { expect } from 'vitest';
-
 import createNotImplementedThrower from './create-not-implemented-thrower.js';
 import TestD1PreparedStatement from './test-d1-prepared-statement.js';
 

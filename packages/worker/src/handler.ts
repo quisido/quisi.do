@@ -9,7 +9,6 @@ import {
 } from 'cloudflare-utils';
 import { EventEmitter } from 'eventemitter3';
 import { isRecord, toError } from 'fmrs';
-
 import createTtl from './create-ttl.js';
 import mapKVNamespaceValueToBytes from './map-kv-namespace-value-to-bytes.js';
 import mapMetricDimensionsToDataPoint from './map-metric-dimensions-to-datapoint.js';

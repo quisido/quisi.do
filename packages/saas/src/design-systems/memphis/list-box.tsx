@@ -1,5 +1,4 @@
 import { type ChangeEvent, type ReactElement } from 'react';
-
 import useElementId from '../../hooks/use-element-id.js';
 import {
   type ListBoxOption,

@@ -1,6 +1,5 @@
 import { type ReactElement } from 'react';
 import { Route, Routes } from 'react-router';
-
 import CookiePolicy from './cookie-policy.js';
 import DataRetentionPolicy from './data-retention-policy.js';
 import DesignSystemDemo from './design-system-demo.js';

@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type ApplicationProps } from '../core/application-props.js';
 import classes from './application.module.scss';
 

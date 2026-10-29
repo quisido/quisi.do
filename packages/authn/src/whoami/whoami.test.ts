@@ -3,7 +3,6 @@ import { TestKVNamespace } from 'cloudflare-test-utils';
 import { StatusCode } from 'cloudflare-utils';
 import { base64url, EncryptJWT, type JWTPayload } from 'jose';
 import { describe, expect, it, vi } from 'vitest';
-
 import createTestAuthenticationToken, {
   TEST_ENCRYPTION_SECRET,
   TEST_EXPIRES_AT,

@@ -5,7 +5,6 @@ import {
   useMemo,
   useRef,
 } from 'react';
-
 import {
   type TreeGridCell,
   type TreeGridProps,

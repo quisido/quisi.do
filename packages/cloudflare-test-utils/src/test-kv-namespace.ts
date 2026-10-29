@@ -1,6 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
 import { expect, vi } from 'vitest';
-
 import createNotImplementedThrower from './create-not-implemented-thrower.js';
 
 const TEST_PUT = (): Promise<void> => Promise.resolve();

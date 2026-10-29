@@ -5,7 +5,6 @@ import {
 import { type UserEvent, userEvent } from '@testing-library/user-event';
 import { type ReactNode } from 'react';
 import { expect } from 'vitest';
-
 import noop from '../../utils/noop.js';
 import createContainer from './create-container.js';
 import RenderWrapper from './render-wrapper.js';

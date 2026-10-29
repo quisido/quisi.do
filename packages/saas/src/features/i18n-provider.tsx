@@ -1,7 +1,6 @@
 import i18next, { type i18n, type ResourceLanguage } from 'i18next';
 import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
-
 import Locale from '../constants/locale.js';
 import useLocale from '../hooks/use-locale.js';
 import enUs from '../translations/index--en-US.json' with { type: 'json' };

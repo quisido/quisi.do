@@ -3,7 +3,6 @@ import {
   ATTR_SERVICE_VERSION,
 } from '@opentelemetry/semantic-conventions';
 import { ATTR_SERVICE_NAMESPACE } from '@opentelemetry/semantic-conventions/incubating';
-
 import split from './split.js';
 
 interface Package {

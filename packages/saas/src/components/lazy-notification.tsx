@@ -1,5 +1,4 @@
 import { type ReactElement, type RefObject, useEffect, useState } from 'react';
-
 import { type NotificationProps } from '../contexts/notifications.js';
 import useMountedRef from '../hooks/use-mounted-ref.js';
 import type NotificationType from '../types/notification.js';

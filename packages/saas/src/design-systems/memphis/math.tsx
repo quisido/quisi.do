@@ -1,5 +1,4 @@
 import { createElement, type ReactElement } from 'react';
-
 import { type MathProps } from '../core/math-props.js';
 import classes from './math.module.scss';
 

@@ -1,5 +1,4 @@
 import { toError } from 'fmrs';
-
 import type Handler from './handler.js';
 import InternalServerErrorResponse from './internal-server-error-response.js';
 

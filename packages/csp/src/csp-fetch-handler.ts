@@ -1,5 +1,4 @@
 import { FetchHandler, type MetricDimensions } from '@quisido/worker';
-
 import { PUBLIC } from './constants/metric-dimensions.js';
 import { type MetricName } from './constants/metric-name.js';
 import handleFetchRequest from './features/handle-fetch-request.js';

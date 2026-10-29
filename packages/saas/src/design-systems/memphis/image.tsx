@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type ImageProps } from '../core/image-props.js';
 import classes from './image.module.scss';
 

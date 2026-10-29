@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { Main, Paragraph, Region } from '../components/design-system.js';
 import I18n from '../components/i18n.js';
 import useLocale from '../hooks/use-locale.js';

@@ -1,5 +1,4 @@
 import { type ReactElement, type ReactNode } from 'react';
-
 import { type AlertProps } from '../core/alert-props.js';
 import useAlert from '../core/use-alert.js';
 import classes from './alert.module.scss';

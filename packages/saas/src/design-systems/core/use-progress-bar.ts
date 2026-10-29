@@ -1,6 +1,5 @@
 import { toString } from 'fmrs';
 import { useLayoutEffect } from 'react';
-
 import appendDescribedBy from './append-described-by.js';
 import useId from './use-id.js';
 

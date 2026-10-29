@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type ParagraphProps } from '../core/paragraph-props.js';
 import classes from './paragraph.module.scss';
 

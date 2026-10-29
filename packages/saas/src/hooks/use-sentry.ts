@@ -6,7 +6,6 @@ import {
 } from '@sentry/browser';
 import { type DataCollection, setUser } from '@sentry/core';
 import { useEffect, useMemo } from 'react';
-
 import { GITHUB_SHA } from '../constants/github-sha.js';
 import {
   type AuthenticationState,

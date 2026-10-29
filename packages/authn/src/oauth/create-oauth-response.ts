@@ -1,5 +1,4 @@
 import { StatusCode } from 'cloudflare-utils';
-
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import createAuthenticationCookie from '../fetch-handler/create-authentication-cookie.js';
 import createAuthenticationToken from '../jwt/create-authentication-token.js';

@@ -7,7 +7,6 @@ import sentryTracingPackage from '@sentry/tracing/package.json' with { type: 'js
 import sentryTypesPackage from '@sentry/types/package.json' with { type: 'json' };
 import reactPackage from 'react/package.json' with { type: 'json' };
 import reactDomPackage from 'react-dom/package.json' with { type: 'json' };
-
 import VERSION from '../../../constants/version.js';
 import validateString from '../../../utils/validate-string.js';
 

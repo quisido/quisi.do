@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import { mapBooleanToNumber } from './index.js';
 
 const FALSE = 0;

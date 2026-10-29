@@ -6,7 +6,6 @@ import {
   useEffect,
   useMemo,
 } from 'react';
-
 import { HoneycombProvider } from '../contexts/honeycomb.js';
 import Resource from '../features/resource.js';
 import useHostname from '../hooks/use-hostname.js';

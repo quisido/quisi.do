@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type ArticleProps } from '../core/article-props.js';
 import useId from '../core/use-id.js';
 import classes from './article.module.scss';

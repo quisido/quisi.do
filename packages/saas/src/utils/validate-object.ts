@@ -1,5 +1,4 @@
 import { isRecord, mapObjectToKeys } from 'fmrs';
-
 import EMPTY_ARRAY from '../constants/empty-array.js';
 import assert from './assert.js';
 

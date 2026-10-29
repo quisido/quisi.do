@@ -1,6 +1,5 @@
 import NumberFormat from 'number-format-react';
 import { type ReactElement } from 'react';
-
 import type Locale from '../constants/locale.js';
 import useLocale from '../hooks/use-locale.js';
 

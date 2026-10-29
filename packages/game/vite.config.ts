@@ -1,81 +1,106 @@
 import basicSsl from '@vitejs/plugin-basic-ssl';
+import ddPlugin from 'dd-trace/esbuild';
 import {
   type ConfigEnv,
   defineConfig,
-  type ESBuildOptions,
+  type OxcOptions,
   type UserConfig,
   type UserConfigFnObject,
 } from 'vite';
 
-import buildTSConfig from './tsconfig.build.json' with { type: 'json' };
+// `IsolatedDeclarationsOptions` is typed by `rolldown` but not re-exported by `vite`.
+type IsolatedDeclarationsOptions = Exclude<
+  TypeScriptOptions['declaration'],
+  undefined
+>;
 
-const ESBUILD_OPTIONS: ESBuildOptions = {
-  color: true,
-  jsx: 'automatic',
-  sourcesContent: true,
+// `JsxOptions` is typed by `rolldown` but not re-exported by `vite`.
+type JsxOptions = Exclude<OxcOptions['jsx'], string | undefined>;
+
+// `TypeScriptOptions` is typed by `rolldown` but not re-exported by `vite`.
+type TypeScriptOptions = Exclude<OxcOptions['typescript'], undefined>;
+
+/**
+ * @see {@link https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define}
+ */
+const DEFINE_PLUGIN: Record<string, string> = {};
+
+const ISOLATED_DECLARATIONS_OPTIONS: IsolatedDeclarationsOptions = {
+  sourcemap: true,
+};
+
+/** @see {@link https://oxc.rs/docs/guide/usage/transformer/jsx} */
+const JSX_OPTIONS: JsxOptions = {
+  refresh: true,
+  runtime: 'automatic',
+};
+
+/** @see {@link https://oxc.rs/docs/guide/usage/transformer/typescript} */
+const TYPESCRIPT_OPTIONS: TypeScriptOptions = {
+  allowNamespaces: false,
+  declaration: ISOLATED_DECLARATIONS_OPTIONS,
+  onlyRemoveTypeImports: true,
+  optimizeConstEnums: true,
+  optimizeEnums: true,
+  rewriteImportExtensions: 'rewrite',
+};
+
+const OXC_OPTIONS: OxcOptions = {
+  define: DEFINE_PLUGIN,
+  jsx: JSX_OPTIONS,
+  typescript: TYPESCRIPT_OPTIONS,
 };
 
 const USER_CONFIG: UserConfig = {
   base: '/',
-  envDir: '../',
-  esbuild: ESBUILD_OPTIONS,
-  publicDir: '../public/',
-  root: './src/',
-};
-
-const DEVELOPMENT_USER_CONFIG: UserConfig = {
-  ...USER_CONFIG,
-  css: {
-    preprocessorMaxWorkers: true,
-  },
-  esbuild: {
-    ...ESBUILD_OPTIONS,
-    jsxDev: true,
-    lineLimit: 80,
-    minifyIdentifiers: false,
-    minifySyntax: false,
-    minifyWhitespace: false,
-    sourcemap: 'both',
-    sourceRoot: './src/',
-  },
-  plugins: [basicSsl()],
-  server: {
-    headers: {
-      'document-policy': 'js-profiling',
-    },
-    port: 3000,
-  },
-};
-
-const PRODUCTION_USER_CONFIG: UserConfig = {
-  ...USER_CONFIG,
-  build: {
-    emptyOutDir: true,
-    outDir: '../dist/',
-    sourcemap: true,
-  },
-  esbuild: {
-    ...ESBUILD_OPTIONS,
-    jsxDev: false,
-    minifyIdentifiers: true,
-    minifySyntax: true,
-    minifyWhitespace: true,
-    sourceRoot: buildTSConfig.compilerOptions.sourceRoot,
-    tsconfigRaw: buildTSConfig as Exclude<
-      ESBuildOptions['tsconfigRaw'],
-      undefined
-    >,
-  },
-  plugins: [],
+  envDir: '..',
+  oxc: OXC_OPTIONS,
+  publicDir: '../public',
+  root: 'src',
 };
 
 const CONFIG: UserConfigFnObject = defineConfig(
   (env: ConfigEnv): UserConfig => {
     if (env.mode !== 'production') {
-      return DEVELOPMENT_USER_CONFIG;
+      return {
+        ...USER_CONFIG,
+        css: {
+          preprocessorMaxWorkers: true,
+        },
+        oxc: {
+          ...OXC_OPTIONS,
+          jsx: {
+            ...JSX_OPTIONS,
+            development: true,
+          },
+        },
+        plugins: [basicSsl(), ddPlugin],
+        server: {
+          headers: {
+            'document-policy': 'js-profiling',
+          },
+          port: 3000,
+        },
+        tsconfig: '../tsconfig.json', // relative to `root` ('src/')
+      };
     }
 
-    return PRODUCTION_USER_CONFIG;
+    return {
+      ...USER_CONFIG,
+      build: {
+        emptyOutDir: true,
+        outDir: '../dist/', // relative to `root` ('src/')
+        sourcemap: true,
+      },
+      oxc: {
+        ...OXC_OPTIONS,
+        jsx: {
+          ...JSX_OPTIONS,
+          development: false,
+        },
+      },
+      plugins: [],
+    };
   },
 );
 

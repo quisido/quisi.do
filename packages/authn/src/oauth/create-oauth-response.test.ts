@@ -3,7 +3,6 @@ import { TestKVNamespace } from 'cloudflare-test-utils';
 import { parseCookie } from 'cookie';
 import { base64url, jwtDecrypt } from 'jose';
 import { assert, describe, expect, it, vi } from 'vitest';
-
 import {
   TEST_ENCRYPTION_SECRET,
   TEST_EXPIRES_AT,

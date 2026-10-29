@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import LazyNotification from '../components/lazy-notification.js';
 import Notification from '../components/notification.js';
 import { type NotificationProps } from '../contexts/notifications.js';

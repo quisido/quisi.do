@@ -1,5 +1,4 @@
 import { useLayoutEffect } from 'react';
-
 import setColorScheme from '../utils/set-color-scheme.js';
 import useColorScheme from './use-color-scheme.js';
 

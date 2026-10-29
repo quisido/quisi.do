@@ -1,6 +1,5 @@
 import { not } from 'fmrs';
 import { assert, describe, expect, it } from 'vitest';
-
 import isGenericRole from '../../../test/is-generic.js';
 import importTestedDesignSystem from './import-tested-design-system.js';
 import render from './render.js';

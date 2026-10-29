@@ -1,5 +1,4 @@
 import { StrictMode } from 'react';
-
 import { ROOT } from './constants/root.js';
 import { ContextProviders } from './features/context-providers.js';
 import Effects from './features/effects.js';

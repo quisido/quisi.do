@@ -1,6 +1,5 @@
 import { TEST_CONSOLE } from 'cloudflare-test-utils';
 import { vi } from 'vitest';
-
 import { ExportedHandler, type ExportedHandlerOptions } from '../src/index.js';
 
 const TEST_FETCH = vi.fn();

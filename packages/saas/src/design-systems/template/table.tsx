@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import {
   type TableCell,
   type TableProps,

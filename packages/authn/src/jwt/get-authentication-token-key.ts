@@ -1,5 +1,4 @@
 import { base64url } from 'jose';
-
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 
 const KEY_BYTES = 32;

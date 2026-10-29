@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import sortArraysByIndex from './sort-arrays-by-index.js';
 
 const FIRST = 0;

@@ -1,5 +1,4 @@
 import { type KeyboardEvent, type ReactElement } from 'react';
-
 import { type SeparatorWidgetProps } from '../core/separator-widget-props.js';
 import classes from './separator-widget.module.scss';
 

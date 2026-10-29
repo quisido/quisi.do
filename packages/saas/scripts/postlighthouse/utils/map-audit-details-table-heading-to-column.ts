@@ -1,6 +1,5 @@
 import { type Table } from 'console-table-printer';
 import { type IcuMessage } from 'lighthouse';
-
 import { type AuditDetails } from './audit-details.js';
 
 type ColumnOptionsRaw = Exclude<Parameters<Table['addColumn']>[0], string>;

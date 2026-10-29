@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import AlarmExistsMessage from './alarm-exists-message.js';
 import I18n from './i18n.js';
 

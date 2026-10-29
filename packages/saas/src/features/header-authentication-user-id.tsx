@@ -1,5 +1,4 @@
 import { type ReactElement, useState } from 'react';
-
 import { Button } from '../components/design-system.js';
 import { WHOAMI } from '../constants/whoami.js';
 import { useAuthentication } from '../contexts/authentication.js';

@@ -5,7 +5,6 @@ import {
   useRef,
   useState,
 } from 'react';
-
 import {
   type TreeGroup,
   type TreeItem,

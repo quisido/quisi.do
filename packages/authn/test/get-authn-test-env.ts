@@ -1,5 +1,4 @@
 import { TestAnalyticsEngineDataset } from 'cloudflare-test-utils';
-
 import { EnvironmentName } from '../src/constants/environment-name.js';
 
 export default function getAuthnTestEnv(

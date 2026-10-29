@@ -1,8 +1,8 @@
-import '../modules/react-mixpanel/img.css';
-
 import useMixpanelModule, {
   type Config,
 } from '../modules/react-mixpanel/index.js';
+
+import '../modules/react-mixpanel/img.css';
 
 /**
  * @see https://github.com/mixpanel/mixpanel-js/blob/master/doc/readme.io/javascript-full-api-reference.md#mixpanelset_config

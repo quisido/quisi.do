@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-
 import { GITHUB_SHA } from '../constants/github-sha.js';
 import {
   type AuthenticationState,

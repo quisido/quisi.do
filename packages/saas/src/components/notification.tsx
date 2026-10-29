@@ -1,5 +1,4 @@
 import { type ReactElement, type ReactNode } from 'react';
-
 import { type NotificationProps } from '../contexts/notifications.js';
 import { Dialog } from './design-system.js';
 

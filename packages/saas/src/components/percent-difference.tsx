@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import round from '../utils/round.js';
 
 interface Props {

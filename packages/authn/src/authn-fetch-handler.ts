@@ -2,7 +2,6 @@ import { ErrorCode } from '@quisido/authn-shared';
 import { FetchHandler, type MetricDimensions } from '@quisido/worker';
 import { type Pricing } from 'cloudflare-utils';
 import { isString } from 'fmrs';
-
 import { EnvironmentName } from './constants/environment-name.js';
 import { PUBLIC } from './constants/metric-dimensions.js';
 import { MetricName } from './constants/metric-name.js';

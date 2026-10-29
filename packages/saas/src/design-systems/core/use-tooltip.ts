@@ -1,5 +1,4 @@
 import { useLayoutEffect } from 'react';
-
 import useId from './use-id.js';
 
 const setProperty = (

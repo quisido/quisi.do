@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type SuggestionProps } from '../core/suggestion-props.js';
 import classes from './suggestion.module.scss';
 

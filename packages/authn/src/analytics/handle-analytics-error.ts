@@ -1,6 +1,5 @@
 import { StatusCode } from 'cloudflare-utils';
 import { toError } from 'fmrs';
-
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import FatalError from '../utils/fatal-error.js';
 import AnalyticsResponseInit from './analytics-response-init.js';

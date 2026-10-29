@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type ContentInfoProps } from '../core/content-info-props.js';
 import classes from './content-info.module.scss';
 

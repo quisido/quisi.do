@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-
 import mapHashToHref from '../utils/map-hash-to-href.js';
 import useNavigation from './use-navigation.js';
 

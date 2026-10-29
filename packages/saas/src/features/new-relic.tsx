@@ -1,5 +1,4 @@
 import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
-
 import { GITHUB_SHA } from '../constants/github-sha.js';
 import NewRelic, {
   type BrowserAgent,

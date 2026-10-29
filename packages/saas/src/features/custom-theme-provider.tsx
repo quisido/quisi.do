@@ -4,7 +4,6 @@ import {
   useMemo,
   useState,
 } from 'react';
-
 import { THEME } from '../constants/theme.js';
 import { CustomThemeProvider } from '../contexts/custom-theme.js';
 import type CustomTheme from '../types/custom-theme.js';

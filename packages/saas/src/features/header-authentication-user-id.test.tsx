@@ -1,7 +1,6 @@
 import { act } from '@testing-library/react';
 import { type ReactElement } from 'react';
 import { describe, expect, it, vi } from 'vitest';
-
 import { WHOAMI } from '../constants/whoami.js';
 import { AuthenticationProvider } from '../contexts/authentication.js';
 import render from '../design-systems/core-test/render.js';

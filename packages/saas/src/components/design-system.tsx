@@ -1,6 +1,5 @@
 import { type ReactElement } from 'react';
 import { useNavigate } from 'react-router';
-
 import {
   Link as DesignSystemLink,
   type LinkProps,

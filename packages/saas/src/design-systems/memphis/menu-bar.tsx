@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-
 import { type MenuBarProps } from '../core/menu-bar-props.js';
 import classes from './menu-bar.module.scss';
 

@@ -1,5 +1,4 @@
 import { isArray } from 'fmrs';
-
 import { type AuditDetails } from './audit-details.js';
 import mapItemToString from './map-audit-details-debug-data-item-to-string.js';
 
