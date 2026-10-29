@@ -63,7 +63,7 @@
     "jose": "^6.2.13"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20261024.1",
+    "@cloudflare/workers-types": "^5.20261025.1",
     "@quisido/worker-test": "^1.0.1",
     "@types/cookie": "^1.0.0",
     "@types/eslint": "^9.6.1",
