@@ -131,7 +131,7 @@
     "identity-obj-proxy": "^3.0.0",
     "immutable": "^5.1.9",
     "istanbul-lib-coverage": "^3.2.2",
-    "lighthouse": "^13.5.0",
+    "lighthouse": "^13.6.0",
     "logrocket": "^12.4.0",
     "nyc": "^18.0.0",
     "postcss": "^8.5.32",
