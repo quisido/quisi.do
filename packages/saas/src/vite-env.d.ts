@@ -10,7 +10,6 @@ interface ImportMetaEnv {
   readonly CLOUDFLARE_INSIGHTS_TOKEN?: string | undefined;
   readonly CSP_ORIGIN?: string | undefined;
   readonly CYPRESS_SCREENSHOTS_SUBFOLDER?: string | undefined;
-  readonly DASHBOARD_ENDPOINT?: string | undefined;
   readonly DD_APPLICATION_ID?: string | undefined;
   readonly DD_CLIENT_TOKEN?: string | undefined;
   readonly DEPLOYMENT_ENVIRONMENT?: string | undefined;

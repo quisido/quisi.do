@@ -21,10 +21,6 @@
       "path": "packages/csp"
     },
     {
-      "name": "⚙️ Dashboard",
-      "path": "packages/dashboard"
-    },
-    {
       "name": "📦 authn-shared",
       "path": "packages/authn-shared"
     },

@@ -17,7 +17,6 @@
     "cloudflare-utils": "npm --workspace=packages/cloudflare-utils start",
     "codex": "codex --ask-for-approval untrusted --sandbox workspace-write --search",
     "csp": "npm --workspace=packages/csp start",
-    "dashboard": "npm --workspace=packages/dashboard start",
     "eslint": "eslint . --cache --cache-location ./.cache/",
     "eslint-config": "npm --workspace=packages/eslint-config start",
     "fmrs": "npm --workspace=packages/fmrs start",

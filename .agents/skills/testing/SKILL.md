@@ -50,8 +50,8 @@ helpers exist to enforce it, so prefer them over ad-hoc setup.
   against any implementation selected by `VITE_TESTED_DESIGN_SYSTEM`; a new
   design system is correct iff it passes the shared suite. See also
   `packages/saas/src/design-systems/AGENTS.md`.
-- **Services** (e.g. `ai`, `authn`, `csp`, `dashboard`): drive the Worker
-  through `TestExportedHandler` from `worker-test` with bindings mocked via
+- **Services** (e.g. `authn`, `csp`): drive the Worker through
+  `TestExportedHandler` from `worker-test` with bindings mocked via
   `cloudflare-test-utils`. Assert the `Response`, emitted metrics
   (`expectMetric`), and written data points (`expectToHaveWrittenDataPoint`).
   Mock every outbound `fetch` (an unmocked or unused mock fails the test) and

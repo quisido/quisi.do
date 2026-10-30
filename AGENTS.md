@@ -11,7 +11,7 @@ npm workspaces under `packages/*` with three package types, distinguished by
 `package.json`:
 
 - **Applications** are `private` with a non-GitHub homepage (`saas/`, `game/`).
-- **Services** are private Cloudflare Workers (`authn/`, `csp/`, `dashboard/`).
+- **Services** are private Cloudflare Workers (`authn/`, `csp/`).
 - **Libraries** are public npm packages (everything else) and are the build
   dependencies consumed by the apps and services.
 
@@ -31,9 +31,9 @@ typescript-eslint). Keep both.
 - Scope everything with workspaces:
   `npm --workspace=packages/<name> run <script>`.
 - Root shortcuts run a package's dev server: `npm run authn`, `npm run csp`,
-  `npm run dashboard`, `npm run game`, `npm run saas`, `npm run worker`, ...
-  Root `npm start` (via `scripts/start.ts`) only starts the published,
-  non-private workspaces, so use the shortcuts for apps and services.
+  `npm run game`, `npm run saas`, `npm run worker`, ... Root `npm start` (via
+  `scripts/start.ts`) only starts the published, non-private workspaces, so use
+  the shortcuts for apps and services.
 - `quisido test` runs ATTW, ESLint, publint, built-in tsconfig/VS Code checks,
   and Vitest concurrently, and writes JSON reports to `.tests/` in the package.
 - Run a focused test with Vitest directly:
@@ -52,10 +52,10 @@ the root `package.json` `overrides`; and `.vscode/` plus
 
 ## Cloudflare services
 
-`authn/`, `csp/`, and `dashboard/` run locally with `wrangler dev` sharing state
-at the repo root via `--persist-to ../../.wrangler/state`. Seed their D1
-databases from `sql/` with the `local:init` / `local:reinit` scripts. Secrets
-belong in uncommitted `.dev.vars` (`authn` requires `JWT_ENCRYPTION_SECRET`);
+`authn/` and `csp/` run locally with `wrangler dev` sharing state at the repo
+root via `--persist-to ../../.wrangler/state`. Seed their D1 databases from
+`sql/` with the `local:init` / `local:reinit` scripts. Secrets belong in
+uncommitted `.dev.vars` (`authn` requires `JWT_ENCRYPTION_SECRET`);
 staging/production deploys use `wrangler deploy --env` scripts. Worker code
 uses Web `Request`/`Response` APIs and typed bindings, not Node APIs.
 
