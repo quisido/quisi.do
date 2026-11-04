@@ -1,7 +1,7 @@
 /// <reference types="bun-types" />
 import { join } from 'node:path';
 
-import { type Subprocess } from 'bun';
+import { spawn, type Subprocess } from 'bun';
 
 interface Options {
   readonly dir: string;
@@ -14,7 +14,7 @@ export default async function cloneTemplate({
 }: Options): Promise<string> {
   const newDir: string = join(dir, slug);
 
-  const cp: Subprocess = Bun.spawn(
+  const cp: Subprocess = spawn(
     [
       'cp',
       '--no-clobber',

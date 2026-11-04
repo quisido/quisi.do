@@ -1,15 +1,15 @@
 /// <reference types="bun-types" />
 import { join } from 'node:path';
 
-import createDesignSystem from './create-design-system/index.js';
-import { isModel } from './create-design-system/models.js';
+import { argv } from 'bun';
+import createDesignSystem, { isModel } from './create-design-system/index.js';
 
 const ARGV_PREFIX_LENGTH = 2;
 const RELATIVE_DESIGN_SYSTEMS_DIR = '../src/design-systems';
 const VALID_SLUG = /^[a-z0-9][a-z0-9-]+[a-z0-9]$/u;
 
 const [model = '', designSystemSlug = '', description = '', screenshotPath] =
-  Bun.argv.slice(ARGV_PREFIX_LENGTH);
+  argv.slice(ARGV_PREFIX_LENGTH);
 
 if (!isModel(model)) {
   throw new Error('Expected a valid model as the first argument.', {

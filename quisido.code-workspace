@@ -2,97 +2,105 @@
   "folders": [
     {
       "name": "~",
-      "path": "."
+      "path": ".",
     },
     {
       "name": "📱 quisi.do (SaaS)",
-      "path": "packages/saas"
+      "path": "packages/saas",
     },
     {
       "name": "📱 Untitled Game",
-      "path": "packages/game"
+      "path": "packages/game",
     },
     {
       "name": "⚙️ Authentication",
-      "path": "packages/authn"
+      "path": "packages/authn",
     },
     {
       "name": "⚙️ Content Security Policy reporting endpoint",
-      "path": "packages/csp"
+      "path": "packages/csp",
     },
     {
       "name": "📦 authn-shared",
-      "path": "packages/authn-shared"
+      "path": "packages/authn-shared",
     },
     {
       "name": "📦 cloudflare-test-utils",
-      "path": "packages/cloudflare-test-utils"
+      "path": "packages/cloudflare-test-utils",
     },
     {
       "name": "📦 cloudflare-utils",
-      "path": "packages/cloudflare-utils"
+      "path": "packages/cloudflare-utils",
     },
     {
       "name": "📦 csp-shared",
-      "path": "packages/csp-shared"
+      "path": "packages/csp-shared",
     },
     {
       "name": "📦 fmrs",
-      "path": "packages/fmrs"
+      "path": "packages/fmrs",
     },
     {
       "name": "📦 number-format-react",
-      "path": "packages/number-format-react"
+      "path": "packages/number-format-react",
     },
     {
       "name": "📦 quisido (CLI)",
-      "path": "packages/quisido"
+      "path": "packages/quisido",
     },
     {
       "name": "📦 use-force-update",
-      "path": "packages/use-force-update"
+      "path": "packages/use-force-update",
     },
     {
       "name": "📦 use-shallow-memo",
-      "path": "packages/use-shallow-memo"
+      "path": "packages/use-shallow-memo",
     },
     {
       "name": "📦 worker",
-      "path": "packages/worker"
+      "path": "packages/worker",
     },
     {
       "name": "📦 worker-test",
-      "path": "packages/worker-test"
-    }
+      "path": "packages/worker-test",
+    },
   ],
   "settings": {
     "files.associations": {
       "**/.aiexclude": "ignore",
+      "**/.vscode/settings.json": "jsonc",
+      "**/*.code-workspace": "jsonc",
       "**/config/api-extractor.json": "jsonc",
-      "**/hintrc.*.json": "jsonc"
+      "**/hintrc.*.json": "jsonc",
     },
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
-    "js/ts.tsdk.path": "./node_modules/typescript/lib",
+    /**
+    * This value is normally `./node_modules/typescript/lib`, but the TypeScript
+    * library is located at `@typescript/old` as long as `typescript` is
+    * installed as a shim (`npm:@typescript/typescript6@^6`). It is currently a
+    * shim until TypeScript 7.1 adds support for ESLint.
+    */
+    "js/ts.tsdk.path": "./node_modules/@typescript/old/lib",
     "js/ts.tsdk.promptToUseWorkspaceVersion": true,
     "remote.portsAttributes": {
       "378": {
-        "protocol": "https"
+        "protocol": "https",
       },
       "3000": {
-        "protocol": "https"
+        "protocol": "https",
       },
       "5882": {
-        "protocol": "https"
+        "protocol": "https",
       },
       "6586": {
-        "protocol": "https"
+        "protocol": "https",
       },
       "9778": {
-        "protocol": "https"
+        "protocol": "https",
       }
     },
     "scss.format.enable": true,
     "terminal.integrated.shellIntegration.enabled": true,
-    "yaml.keyOrdering": false
+    "yaml.keyOrdering": false,
   }
 }
