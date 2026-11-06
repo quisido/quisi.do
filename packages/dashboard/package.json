@@ -51,9 +51,9 @@
     "@vitest/ui": "^5.1.0",
     "concurrently": "^10.0.6",
     "quisido": "^0.0.5",
-    "rimraf": "^6.1.0",
+    "rimraf": "^6.1.4",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vitest": "^5.0.1",
-    "wrangler": "^4.156.2"
+    "wrangler": "^4.157.0"
   }
 }
