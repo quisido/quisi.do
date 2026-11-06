@@ -12,7 +12,7 @@
     "start": "vite",
     "test": "quisido test",
     "attw": "quisido attw",
-    "clean": "rimraf .cache .tests .wrangler _site node_modules",
+    "clean": "rimraf _site .cache .tests .wrangler graphify-out node_modules",
     "eslint": "eslint . --cache --cache-location ./.cache/",
     "playwright": "playwright test --config playwright.config.ts",
     "vite:build": "vite build",

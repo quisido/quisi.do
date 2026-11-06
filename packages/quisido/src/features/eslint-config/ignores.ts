@@ -13,6 +13,9 @@ const IGNORES_CONFIG: readonly Config[] = defineConfig({
     // GitHub Pages
     '**/_site/**',
 
+    // graphify
+    '**/graphify-out/**',
+
     // Jest
     '**/jest/**',
 

@@ -32,6 +32,7 @@
       "**/.cache/**",
       "**/.tests/**",
       "**/.wrangler/**",
+      "**/graphify-out/**",
       "**/node_modules/**",
       "**/dist/**",
     ],

@@ -54,7 +54,8 @@ VITE_TESTED_DESIGN_SYSTEM=$_DESIGN_SYSTEM_SLUG_$ npx vitest run \
 
 If the test suite is failing, adjust your implementation until it passes.
 
-If you need to take a screenshot, you can use `vitest/browser`:
+Prefer to limit your use of screenshots, because they are time-consuming. If you
+**need** to take a screenshot, you can use `vitest/browser`:
 
 ```ts
 import { createRoot } from 'react-dom/client';
@@ -77,6 +78,11 @@ it('screenshot', async (): Promise<void> => {
   await page.screenshot({ path: './$_COMPONENT_SLUG_$.png' });
 });
 ```
+
+## Troubleshooting
+
+- If a provider timeout or compaction failure occurs, stop the queue and report
+  the component and session instead of claiming completion.
 
 ## Constraints
 

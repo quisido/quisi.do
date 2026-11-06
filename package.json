@@ -13,7 +13,7 @@
     "test": "npm --workspaces run test",
     "authn": "npm --workspace=packages/authn start",
     "browserslist:update-db": "browserslist --update-db",
-    "clean": "rimraf .cache .tests dist && npm run clean --if-present --workspaces && rimraf node_modules",
+    "clean": "rimraf .cache .tests dist graphify-out && npm run clean --if-present --workspaces && rimraf node_modules",
     "cloudflare-utils": "npm --workspace=packages/cloudflare-utils start",
     "codex": "codex --ask-for-approval untrusted --sandbox workspace-write --search",
     "csp": "npm --workspace=packages/csp start",
