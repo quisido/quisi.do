@@ -5,6 +5,33 @@ import { describe, it } from 'vitest';
 import { TestExportedHandler } from './index.js';
 
 describe('TestExportedHandler', (): void => {
+  it('should run tracing callbacks with an active span during fetch', async (): Promise<void> => {
+    // eslint-disable-next-line func-style
+    function testFetchHandler(this: FetchHandler): Response {
+      const { tracing } = this.executionContext;
+      return tracing.withActiveSpan(
+        tracing.startSpan('test'),
+        (body: string, status: number): Response =>
+          new Response(body, { status }),
+        'traced response',
+        201,
+      );
+    }
+
+    const handler = new TestExportedHandler({
+      FetchHandler: class TestFetchHandler extends FetchHandler {
+        public constructor() {
+          super(testFetchHandler);
+        }
+      },
+    });
+
+    const response = await handler.fetch('/test/');
+
+    response.expectStatusCodeToBe(201);
+    response.expectBodyToBe('traced response');
+  });
+
   describe('expectMetric', (): void => {
     it('should spy on the metric handler', async (): Promise<void> => {
       /**
