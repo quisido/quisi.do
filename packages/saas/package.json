@@ -92,7 +92,7 @@
     "@opentelemetry/auto-instrumentations-web": "^0.70.0",
     "@opentelemetry/core": "^3.1.0",
     "@opentelemetry/sdk-metrics": "^3.0.0",
-    "@playwright/test": "^1.64.1",
+    "@playwright/test": "^1.65.0",
     "@react-aria/link": "^3.9.1",
     "@sentry/types": "^10.75.2",
     "@stylistic/eslint-plugin-ts": "^4.4.1",
