@@ -1,4 +1,3 @@
-/// <reference types="@types/node" />
 import { cwd } from 'node:process';
 
 import { type Linter } from 'eslint';

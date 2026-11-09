@@ -1,4 +1,5 @@
 import { join, resolve } from 'node:path';
+import process from 'node:process';
 
 import { type CompilerOptions } from '@typescript/native/unstable/proto';
 import { ESLint } from 'eslint';
