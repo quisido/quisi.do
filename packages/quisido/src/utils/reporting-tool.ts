@@ -43,6 +43,16 @@ export default class ReportingTool<
     this.#toolName = toolName;
   }
 
+  #clearLine(): void {
+    // `clearLine` is only supported in TTY environments.
+    if (!this.#isTTY) {
+      return;
+    }
+
+    this.#stdout.clearLine(0);
+    this.#stdout.cursorTo(0);
+  }
+
   get #isCI(): boolean {
     return this.#env['CI'] !== undefined && this.#env['CI'] !== '';
   }
@@ -63,8 +73,7 @@ export default class ReportingTool<
 
   #progress(message: string): void {
     if (this.#isProgressLog) {
-      this.#stdout.clearLine(0);
-      this.#stdout.cursorTo(0);
+      this.#clearLine();
     }
 
     this.#isProgressLog = true;
