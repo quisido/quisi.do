@@ -110,7 +110,7 @@
     "quisido": "^0.0.5",
     "rimraf": "^6.1.4",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "vite": "^8.3.5",
+    "vite": "^8.3.6",
     "vitest": "^5.0.1",
     "zod-validation-error": "^5.0.0"
   },
