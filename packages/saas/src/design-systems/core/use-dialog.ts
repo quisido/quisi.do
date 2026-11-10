@@ -1,4 +1,4 @@
-import { type Ref, type RefObject, useLayoutEffect, useRef } from 'react';
+import { type Ref, type RefObject, useEffect, useRef } from 'react';
 import validateNonNull from '../../utils/validate-non-null.js';
 import { setInertSiblings, unsetInertSiblings } from './inert.js';
 import useId from './use-id.js';
@@ -36,7 +36,8 @@ export default function useDialog({
     }
   };
 
-  useLayoutEffect((): VoidFunction | undefined => {
+  // Initialize focus-management effects before showModal moves focus.
+  useEffect((): VoidFunction | undefined => {
     if (!modal) {
       return;
     }
