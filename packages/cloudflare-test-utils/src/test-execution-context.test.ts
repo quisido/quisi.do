@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { TEST_EXECUTION_CONTEXT, TEST_SPAN } from './test-execution-context.js';
+import { TEST_EXECUTION_CONTEXT, TEST_SPAN } from './index.js';
 
 describe('TEST_EXECUTION_CONTEXT', (): void => {
   it('should start with the test span', (): void => {
@@ -14,6 +14,22 @@ describe('TEST_EXECUTION_CONTEXT', (): void => {
         return value;
       },
       'result',
+    );
+
+    expect(result).toBe('result');
+  });
+
+  it('should forward arguments and return values with an active span', (): void => {
+    const callback = (...args: [string, boolean]): string => {
+      expect(args).toEqual(['result', true]);
+      return args[0];
+    };
+
+    const result = TEST_EXECUTION_CONTEXT.tracing.withActiveSpan(
+      TEST_SPAN,
+      callback,
+      'result',
+      true,
     );
 
     expect(result).toBe('result');
