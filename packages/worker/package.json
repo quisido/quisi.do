@@ -64,7 +64,7 @@
     "@typescript/native": "npm:typescript@^7.0.2",
     "@vitest/ui": "^5.1.0",
     "cloudflare-test-utils": "^1.0.2",
-    "concurrently": "^10.0.6",
+    "concurrently": "^10.0.7",
     "quisido": "^0.0.5",
     "rimraf": "^6.1.4",
     "tslib": "^2.9.1",
