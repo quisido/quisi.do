@@ -60,10 +60,10 @@
     "cloudflare-utils": "^1.0.4",
     "fmrs": "^3.0.0",
     "form-urlencoded": "^6.1.8",
-    "jose": "^6.2.15"
+    "jose": "^6.2.16"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20261102.1",
+    "@cloudflare/workers-types": "^5.20261108.1",
     "@quisido/worker-test": "^1.0.1",
     "@types/cookie": "^1.0.0",
     "@types/eslint": "^9.6.1",
@@ -71,7 +71,7 @@
     "@vitest/ui": "^5.1.0",
     "cloudflare-test-utils": "^1.0.2",
     "concurrently": "^10.0.6",
-    "cookie": "^2.0.1",
+    "cookie": "^2.0.2",
     "quisido": "^0.0.5",
     "rimraf": "^6.1.4",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
