@@ -5,6 +5,29 @@ import { describe, it } from 'vitest';
 import { TestExportedHandler } from './index.js';
 
 describe('TestExportedHandler', (): void => {
+  it('should support callbacks with an active span during fetch', async (): Promise<void> => {
+    const handler = new TestExportedHandler({
+      FetchHandler: class TestFetchHandler extends FetchHandler {
+        public constructor() {
+          super((_request, _env, context): Response => {
+            const span = context.tracing.startSpan('test');
+            return context.tracing.withActiveSpan(
+              span,
+              (value: string, suffix: string): Response =>
+                new Response(`${value}${suffix}`),
+              'test',
+              ' result',
+            );
+          });
+        }
+      },
+    });
+
+    const response = await handler.fetch('/test/');
+
+    response.expectBodyToBe('test result');
+  });
+
   describe('expectMetric', (): void => {
     it('should spy on the metric handler', async (): Promise<void> => {
       /**

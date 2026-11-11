@@ -62,6 +62,11 @@ const TEST_TRACING: Tracing = {
     ...args: A
   ): T => callback(TEST_SPAN, ...args),
   startSpan: (_name: string): Span => TEST_SPAN,
+  withActiveSpan: <T, A extends unknown[]>(
+    _span: Span,
+    callback: (...args: A) => T,
+    ...args: A
+  ): T => callback(...args),
 };
 
 export default class TestExportedHandler<Env = unknown> {
