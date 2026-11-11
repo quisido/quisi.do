@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import vsCodeSettings from './.vscode/settings.json' with { type: 'json' };
 import codeWorkspace from './quisido.code-workspace' with { type: 'json' };
 

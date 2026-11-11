@@ -1,7 +1,6 @@
 import { type Dirent } from 'node:fs';
 
 import { describe } from 'vitest';
-
 import { WORKSPACES } from './workspaces.js';
 
 export default function describeWorkspaces(

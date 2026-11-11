@@ -11,7 +11,9 @@
   },
   "extends": "quisido/tsconfig.json",
   "include": [
+    ".gemini/*.json",
     ".gemini/*.ts",
+    ".vscode/*.json",
     "scripts/",
     "types/",
     "utils/",
