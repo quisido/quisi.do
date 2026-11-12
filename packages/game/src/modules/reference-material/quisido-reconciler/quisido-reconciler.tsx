@@ -11,7 +11,10 @@ import createReactReconciler, {
   type SuspenseHydrationCallbacks,
   type TransitionTracingCallbacks,
 } from 'react-reconciler';
-
+import {
+  DefaultEventPriority,
+  NoEventPriority,
+} from 'react-reconciler/constants.js';
 import { VERSION } from './constants.js';
 import type Container from './container.js';
 import type Instance from './instance.js';
@@ -23,8 +26,6 @@ import { TransitionStatus } from './transition-status.js';
 interface HostContext<Root> {
   readonly rootContainer: Root;
 }
-
-const SHOULD_CALL_COMMIT_MOUNT_METHOD = false;
 
 const defaultMaySuspendCommit = (): boolean => false;
 
@@ -68,8 +69,10 @@ export default class QuisidoReconciler<
   FormInstance,
   Family | Txt
 > {
+  #currentEventPriority: EventPriority = NoEventPriority;
   #initialChildrenFinalized = new WeakMap<Family, number>();
   #instanceCreated = new WeakMap<WeakKey, number>();
+  readonly #removedInstances = new WeakSet<Family | Txt>();
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-arguments
   readonly #opaqueRoots = new WeakMap<Root, OpaqueRoot>();
   #reconciler: Reconciler<
@@ -256,6 +259,10 @@ export default class QuisidoReconciler<
         container.clear();
       },
 
+      commitMount(instance: Family, _type: Type, props: Props[Type]): void {
+        instance.mount?.(props);
+      },
+
       commitTextUpdate(
         textInstance: Txt,
         oldText: string,
@@ -290,16 +297,15 @@ export default class QuisidoReconciler<
 
       createTextInstance,
 
-      detachDeletedInstance(_node: Family): void {
-        // Do nothing.
-        // _node.detach(); // ?
+      detachDeletedInstance: (node: Family): void => {
+        this.#removeInstance(node);
       },
 
       extraDevToolsConfig: {},
 
       finalizeInitialChildren: (instance: Family): boolean => {
         this.#initialChildrenFinalized.set(instance, Date.now());
-        return SHOULD_CALL_COMMIT_MOUNT_METHOD;
+        return typeof instance.mount === 'function';
       },
 
       getChildHostContext(
@@ -309,8 +315,8 @@ export default class QuisidoReconciler<
         return parentHostContext;
       },
 
-      getCurrentUpdatePriority(): EventPriority {
-        return 0;
+      getCurrentUpdatePriority: (): EventPriority => {
+        return this.#currentEventPriority;
       },
 
       getInstanceFromNode(_node: unknown): Fiber | null | undefined {
@@ -403,20 +409,20 @@ export default class QuisidoReconciler<
         // Do nothing.
       },
 
-      removeChild(
+      removeChild: (
         parentInstance: Family,
         child: Family | Txt, // | SuspenseInstance,
-      ): void {
+      ): void => {
         parentInstance.removeChild(child);
-        child.remove?.();
+        this.#removeInstance(child);
       },
 
-      removeChildFromContainer(
+      removeChildFromContainer: (
         container: Root,
         child: Family | Txt, // | SuspenseInstance,
-      ): void {
+      ): void => {
         container.removeChild(child);
-        child.remove?.();
+        this.#removeInstance(child);
       },
 
       rendererPackageName: RENDERER_PACKAGE_NAME,
@@ -446,15 +452,19 @@ export default class QuisidoReconciler<
         return null;
       },
 
-      resolveUpdatePriority(): EventPriority {
-        return 0;
+      resolveUpdatePriority: (): EventPriority => {
+        if (this.#currentEventPriority === NoEventPriority) {
+          return DefaultEventPriority;
+        }
+
+        return this.#currentEventPriority;
       },
 
       scheduleMicrotask,
       scheduleTimeout,
 
-      setCurrentUpdatePriority(_newPriority: EventPriority): void {
-        // Do nothing.
+      setCurrentUpdatePriority: (priority: EventPriority): void => {
+        this.#currentEventPriority = priority;
       },
 
       shouldAttemptEagerTransition(): boolean {
@@ -525,8 +535,8 @@ export default class QuisidoReconciler<
 
     this.#reconciler = reconciler;
 
-    // Since react-reconciler 0.34, the renderer metadata above (
-    // `rendererVersion`, `rendererPackageName`, `extraDevToolsConfig`) is
+    // Since react-reconciler 0.34, the renderer metadata above
+    // (`rendererVersion`, `rendererPackageName`, `extraDevToolsConfig`) is
     // registered with React DevTools automatically.
     reconciler.injectIntoDevTools();
   }
@@ -565,6 +575,17 @@ export default class QuisidoReconciler<
     );
     this.#opaqueRoots.set(container, newOpaqueRoot);
     return newOpaqueRoot;
+  }
+
+  #removeInstance(instance: Family | Txt): void {
+    // Deletion visits descendants after effects and may revisit an instance
+    // through its alternate fiber or after a direct host removal.
+    if (this.#removedInstances.has(instance)) {
+      return;
+    }
+
+    this.#removedInstances.add(instance);
+    instance.remove?.();
   }
 
   public update(
@@ -612,68 +633,307 @@ export default class QuisidoReconciler<
     };
   }
 
-  public readonly attemptContinuousHydration = this.#method(
-    'attemptContinuousHydration',
-  );
-  public readonly attemptHydrationAtCurrentPriority = this.#method(
-    'attemptHydrationAtCurrentPriority',
-  );
-  public readonly attemptSynchronousHydration = this.#method(
-    'attemptSynchronousHydration',
-  );
-  public readonly batchedUpdates = this.#method('batchedUpdates');
-  public readonly createComponentSelector = this.#method(
-    'createComponentSelector',
-  );
-  public readonly createContainer = this.#method('createContainer');
-  public readonly createHasPseudoClassSelector = this.#method(
+  public readonly attemptContinuousHydration: (fiber: Fiber) => void =
+    this.#method('attemptContinuousHydration');
+
+  public readonly attemptHydrationAtCurrentPriority: (fiber: Fiber) => void =
+    this.#method('attemptHydrationAtCurrentPriority');
+
+  public readonly attemptSynchronousHydration: (fiber: Fiber) => void =
+    this.#method('attemptSynchronousHydration');
+
+  public readonly batchedUpdates: <A, R>(fn: (a: A) => R, a: A) => R =
+    this.#method('batchedUpdates');
+
+  public readonly createComponentSelector: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['createComponentSelector'] = this.#method('createComponentSelector');
+
+  public readonly createContainer: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['createContainer'] = this.#method('createContainer');
+
+  public readonly createHasPseudoClassSelector: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['createHasPseudoClassSelector'] = this.#method(
     'createHasPseudoClassSelector',
   );
-  public readonly createHydrationContainer = this.#method(
-    'createHydrationContainer',
-  );
-  public readonly createPortal = this.#method('createPortal');
-  public readonly createRoleSelector = this.#method('createRoleSelector');
-  public readonly createTestNameSelector = this.#method(
-    'createTestNameSelector',
-  );
-  public readonly createTextSelector = this.#method('createTextSelector');
-  public readonly defaultOnCaughtError = this.#method('defaultOnCaughtError');
-  public readonly defaultOnRecoverableError = this.#method(
-    'defaultOnRecoverableError',
-  );
-  public readonly defaultOnUncaughtError = this.#method(
-    'defaultOnUncaughtError',
-  );
-  public readonly deferredUpdates = this.#method('deferredUpdates');
-  public readonly discreteUpdates = this.#method('discreteUpdates');
-  public readonly findAllNodes = this.#method('findAllNodes');
-  public readonly findBoundingRects = this.#method('findBoundingRects');
-  public readonly findHostInstance = this.#method('findHostInstance');
-  public readonly findHostInstanceWithNoPortals = this.#method(
+
+  public readonly createHydrationContainer: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['createHydrationContainer'] = this.#method('createHydrationContainer');
+
+  public readonly createPortal: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['createPortal'] = this.#method('createPortal');
+
+  public readonly createRoleSelector: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['createRoleSelector'] = this.#method('createRoleSelector');
+
+  public readonly createTestNameSelector: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['createTestNameSelector'] = this.#method('createTestNameSelector');
+
+  public readonly createTextSelector: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['createTextSelector'] = this.#method('createTextSelector');
+
+  public readonly defaultOnCaughtError: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['defaultOnCaughtError'] = this.#method('defaultOnCaughtError');
+
+  public readonly defaultOnRecoverableError: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['defaultOnRecoverableError'] = this.#method('defaultOnRecoverableError');
+
+  public readonly defaultOnUncaughtError: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['defaultOnUncaughtError'] = this.#method('defaultOnUncaughtError');
+
+  public readonly deferredUpdates: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['deferredUpdates'] = this.#method('deferredUpdates');
+
+  public readonly discreteUpdates: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['discreteUpdates'] = this.#method('discreteUpdates');
+
+  public readonly findAllNodes: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['findAllNodes'] = this.#method('findAllNodes');
+
+  public readonly findBoundingRects: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['findBoundingRects'] = this.#method('findBoundingRects');
+
+  public readonly findHostInstance: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['findHostInstance'] = this.#method('findHostInstance');
+
+  public readonly findHostInstanceWithNoPortals: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['findHostInstanceWithNoPortals'] = this.#method(
     'findHostInstanceWithNoPortals',
   );
-  public readonly findHostInstanceWithWarning = this.#method(
+
+  public readonly findHostInstanceWithWarning: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['findHostInstanceWithWarning'] = this.#method(
     'findHostInstanceWithWarning',
   );
-  public readonly flushPassiveEffects = this.#method('flushPassiveEffects');
-  public readonly flushSyncFromReconciler = this.#method(
-    'flushSyncFromReconciler',
-  );
-  public readonly flushSyncWork = this.#method('flushSyncWork');
-  public readonly focusWithin = this.#method('focusWithin');
-  public readonly getFindAllNodesFailureDescription = this.#method(
+
+  public readonly flushPassiveEffects: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['flushPassiveEffects'] = this.#method('flushPassiveEffects');
+
+  public readonly flushSyncFromReconciler: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['flushSyncFromReconciler'] = this.#method('flushSyncFromReconciler');
+
+  public readonly flushSyncWork: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['flushSyncWork'] = this.#method('flushSyncWork');
+
+  public readonly focusWithin: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['focusWithin'] = this.#method('focusWithin');
+
+  public readonly getFindAllNodesFailureDescription: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['getFindAllNodesFailureDescription'] = this.#method(
     'getFindAllNodesFailureDescription',
   );
-  public readonly getPublicRootInstance = this.#method('getPublicRootInstance');
-  public readonly injectIntoDevTools = this.#method('injectIntoDevTools');
-  public readonly isAlreadyRendering = this.#method('isAlreadyRendering');
-  public readonly observeVisibleRects = this.#method('observeVisibleRects');
-  public readonly shouldError = this.#method('shouldError');
-  public readonly shouldSuspend = this.#method('shouldSuspend');
-  public readonly startHostTransition = this.#method('startHostTransition');
-  public readonly updateContainer = this.#method('updateContainer');
-  public readonly updateContainerSync = this.#method('updateContainerSync');
+
+  public readonly getPublicRootInstance: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['getPublicRootInstance'] = this.#method('getPublicRootInstance');
+
+  public readonly injectIntoDevTools: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['injectIntoDevTools'] = this.#method('injectIntoDevTools');
+
+  public readonly isAlreadyRendering: () => boolean =
+    this.#method('isAlreadyRendering');
+
+  public readonly observeVisibleRects: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['observeVisibleRects'] = this.#method('observeVisibleRects');
+
+  public readonly shouldError: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['shouldError'] = this.#method('shouldError');
+
+  public readonly shouldSuspend: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['shouldSuspend'] = this.#method('shouldSuspend');
+
+  public readonly startHostTransition: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['startHostTransition'] = this.#method('startHostTransition');
+
+  public readonly updateContainer: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['updateContainer'] = this.#method('updateContainer');
+
+  public readonly updateContainerSync: Reconciler<
+    Root,
+    Family,
+    Txt,
+    SuspenseInstance,
+    FormInstance,
+    Family | Txt
+  >['updateContainerSync'] = this.#method('updateContainerSync');
 }
 
 export type FormInstance = never;

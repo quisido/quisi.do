@@ -1,5 +1,4 @@
 import { type ReactNode } from 'react';
-
 import QuisidoReconciler from '../quisido-reconciler/index.js';
 import AudioInstance from './audio-instance.js';
 import BrowserContainer from './browser-container.js';
@@ -8,7 +7,6 @@ import BrowserTextInstance from './browser-text-instance.js';
 import DrawImageInstance from './draw-image-instance.js';
 import LayerInstance from './layer-instance.js';
 import {
-  type AudioProps,
   type DrawImageProps,
   type LayerProps,
   type Props,
@@ -27,7 +25,7 @@ const createInstance = <T extends Type>(
 ): BrowserFamily => {
   switch (type) {
     case Type.Audio:
-      return new AudioInstance(props as AudioProps);
+      return new AudioInstance();
     case Type.DrawImage:
       return new DrawImageInstance(props as DrawImageProps);
     case Type.Layer:

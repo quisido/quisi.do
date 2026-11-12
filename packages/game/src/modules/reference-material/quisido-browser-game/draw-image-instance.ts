@@ -3,12 +3,32 @@ import { type BrowserFamily } from './browser-family.js';
 import type BrowserTextInstance from './browser-text-instance.js';
 import { EMPTY_OFFSCREEN_CANVAS } from './empty-offscreen-canvas.js';
 import { getImage } from './image-preloader.js';
-import { type DrawImageProps } from './props.js';
+import { type DrawImageProps, type DrawImageSource } from './props.js';
 
 const HEIGHT_DIMENSION_INDEX = 1;
 const WIDTH_DIMENSION_INDEX = 0;
 const X_COORDINATE_INDEX = 0;
 const Y_COORDINATE_INDEX = 1;
+
+const isDiffSource = (
+  first: DrawImageSource | undefined,
+  second: DrawImageSource | undefined,
+): boolean => {
+  if (first === undefined && second === undefined) {
+    return false;
+  }
+
+  if (first === undefined || second === undefined) {
+    return true;
+  }
+
+  return (
+    first.height !== second.height ||
+    first.width !== second.width ||
+    first.x !== second.x ||
+    first.y !== second.y
+  );
+};
 
 const resizeCanvasImageSource = (
   canvasImageSource: CanvasImageSource,
@@ -79,13 +99,13 @@ export default class DrawImageInstance implements Instance<
   BrowserTextInstance,
   BrowserFamily
 > {
-  public readonly appendChild = throwChildMethodError;
+  public readonly appendChild: () => never = throwChildMethodError;
   #canvasImageSource: CanvasImageSource | Promise<CanvasImageSource>;
   #coordinates: readonly [number, number];
   #dimensions: readonly [number, number];
   #hidden = false;
-  public readonly insertBefore = throwChildMethodError;
-  public readonly removeChild = throwChildMethodError;
+  public readonly insertBefore: () => never = throwChildMethodError;
+  public readonly removeChild: () => never = throwChildMethodError;
   readonly #renderCallbacks = new Set<VoidFunction>();
 
   public constructor({
@@ -143,8 +163,21 @@ export default class DrawImageInstance implements Instance<
     const canvasImageSource: Promise<CanvasImageSource> =
       mapPropsToCanvasImageSource(props);
     void canvasImageSource
-      .then(this.#setCanvasImageSource)
-      .catch(this.#handleCanvasImageSourceError)
+      .then((resolvedCanvasImageSource: CanvasImageSource): void => {
+        // If the canvas image changed since this Promise was initialized, bail.
+        if (this.#canvasImageSource !== canvasImageSource) {
+          return;
+        }
+
+        this.#canvasImageSource = resolvedCanvasImageSource;
+      })
+      .catch((): void => {
+        // If the canvas image changed since this Promise was initialized, bail.
+        if (this.#canvasImageSource !== canvasImageSource) {
+          return;
+        }
+        this.#handleCanvasImageSourceError();
+      })
       .finally(this.#render);
     return canvasImageSource;
   }
@@ -163,10 +196,6 @@ export default class DrawImageInstance implements Instance<
     }
   };
 
-  #setCanvasImageSource = (canvasImageSource: CanvasImageSource): void => {
-    this.#canvasImageSource = canvasImageSource;
-  };
-
   public unhide(): void {
     this.#hidden = false;
     this.#render();
@@ -174,16 +203,25 @@ export default class DrawImageInstance implements Instance<
 
   // Delay the commit via `maySuspendCommit` until the image has loaded.
   public update(
-    _prevProps: DrawImageProps,
+    prevProps: DrawImageProps,
     { height, quality, source, src, width, x, y }: DrawImageProps,
   ): void {
-    this.#canvasImageSource = this.#mapPropsToCanvasImageSource({
-      height,
-      quality,
-      source,
-      src,
-      width,
-    });
+    if (
+      prevProps.height !== height ||
+      prevProps.quality !== quality ||
+      prevProps.source !== source ||
+      prevProps.src !== src ||
+      prevProps.width !== width ||
+      isDiffSource(prevProps.source, source)
+    ) {
+      this.#canvasImageSource = this.#mapPropsToCanvasImageSource({
+        height,
+        quality,
+        source,
+        src,
+        width,
+      });
+    }
     this.#coordinates = [x, y];
     this.#dimensions = [width, height];
 

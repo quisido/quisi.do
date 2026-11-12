@@ -1,5 +1,4 @@
 import { type FunctionComponent } from 'react';
-
 import QuisidoStore, {
   type Export,
   type Reducer,

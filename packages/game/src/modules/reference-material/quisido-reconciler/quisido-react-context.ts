@@ -1,5 +1,4 @@
 import { type ReactContext } from 'react-reconciler';
-
 import QuisidoReactConsumerType from './quisido-react-consumer-type.js';
 
 interface Options<T> {

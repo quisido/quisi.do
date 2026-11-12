@@ -13,30 +13,39 @@ export default class AudioInstance implements Instance<
   BrowserTextInstance,
   BrowserFamily
 > {
-  public readonly appendChild = throwChildMethodError;
-  public readonly insertBefore = throwChildMethodError;
-  public readonly removeChild = throwChildMethodError;
-  public readonly resetTextContent = throwChildMethodError;
-  #stopAudio: VoidFunction;
-
-  public constructor(props: AudioProps) {
-    this.#stopAudio = playAudio(props);
-  }
+  public readonly appendChild: () => never = throwChildMethodError;
+  public readonly insertBefore: () => never = throwChildMethodError;
+  public readonly removeChild: () => never = throwChildMethodError;
+  public readonly resetTextContent: () => never = throwChildMethodError;
+  #stopAudio: VoidFunction | undefined;
 
   public hide(): void {
-    this.#stopAudio();
+    this.remove();
+  }
+
+  public mount(props: AudioProps): void {
+    this.#stopAudio ??= playAudio(props);
   }
 
   public remove(): void {
-    this.#stopAudio();
+    this.#stopAudio?.();
+    this.#stopAudio = undefined;
   }
 
   public unhide(props: AudioProps): void {
-    this.#stopAudio = playAudio(props);
+    this.mount(props);
   }
 
-  public update(_prevProps: AudioProps, nextProps: AudioProps): void {
-    this.#stopAudio();
-    this.#stopAudio = playAudio(nextProps);
+  public update(prevProps: AudioProps, nextProps: AudioProps): void {
+    if (
+      prevProps.loop === nextProps.loop &&
+      prevProps.src === nextProps.src &&
+      prevProps.volume === nextProps.volume
+    ) {
+      return;
+    }
+
+    this.remove();
+    this.mount(nextProps);
   }
 }

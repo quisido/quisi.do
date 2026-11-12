@@ -1,6 +1,6 @@
 import { type Type } from './type.js';
 
-interface DrawImageSource {
+export interface DrawImageSource {
   readonly height: number;
   readonly width: number;
   readonly x: number;

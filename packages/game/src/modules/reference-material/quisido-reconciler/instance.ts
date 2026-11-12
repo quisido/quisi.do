@@ -5,6 +5,8 @@ export default interface Instance<Props extends object, Txt, Child> {
     child: Child | Txt,
     beforeChild: Child | Txt, // | SuspenseInstance,
   ) => void;
+  /** Runs after the instance is committed to the tree. */
+  readonly mount?: ((props: Props) => void) | undefined;
   readonly remove?: (() => void) | undefined;
   readonly removeChild: (child: Child | Txt) => void;
   readonly resetTextContent?: (() => void) | undefined;

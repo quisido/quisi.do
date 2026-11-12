@@ -3,6 +3,7 @@ import { type BrowserFamily } from './browser-family.js';
 import type BrowserTextInstance from './browser-text-instance.js';
 import type DrawImageInstance from './draw-image-instance.js';
 import { EMPTY_OFFSCREEN_CANVAS } from './empty-offscreen-canvas.js';
+import insertChild from './insert-child.js';
 import isRenderableInstance from './is-renderable-instance.js';
 import mapOffscreenCanvasTo2DRenderingContext from './map-offscreen-canvas-to-2d-rendering-context.js';
 import noop from './noop.js';
@@ -19,13 +20,14 @@ export default class LayerInstance implements Instance<
   BrowserTextInstance,
   BrowserFamily
 > {
+  // Non-rendering siblings can still be insertion anchors.
+  readonly #children: (BrowserFamily | BrowserTextInstance)[] = [];
   readonly #coordinates: Tuple<number>;
   readonly #dimensions: Tuple<number>;
   readonly #handleError: (error: Error) => void;
   #hidden = false;
   readonly #offscreenCanvas: OffscreenCanvas;
   readonly #renderCallbacks = new Set<VoidFunction>();
-  readonly #renderableChildren = new Set<DrawImageInstance | LayerInstance>();
   readonly #renderingContext: OffscreenCanvasRenderingContext2D;
   readonly #renderUnsubscriptions = new WeakMap<
     DrawImageInstance | LayerInstance,
@@ -47,12 +49,13 @@ export default class LayerInstance implements Instance<
   }
 
   public appendChild(instance: BrowserFamily | BrowserTextInstance): void {
+    insertChild(this.#children, instance);
     if (!isRenderableInstance(instance)) {
       return;
     }
 
-    this.#renderableChildren.add(instance);
     this.#subscribeToRender(instance);
+    this.#renderOffscreen();
   }
 
   public get canvasImageSource(): CanvasImageSource {
@@ -91,10 +94,20 @@ export default class LayerInstance implements Instance<
 
   public hide(): void {
     this.#hidden = true;
+    this.#renderOffscreen();
   }
 
-  public insertBefore(instance: BrowserFamily | BrowserTextInstance): void {
-    this.appendChild(instance);
+  public insertBefore(
+    instance: BrowserFamily | BrowserTextInstance,
+    beforeChild: BrowserFamily | BrowserTextInstance,
+  ): void {
+    insertChild(this.#children, instance, beforeChild);
+    if (!isRenderableInstance(instance)) {
+      return;
+    }
+
+    this.#subscribeToRender(instance);
+    this.#renderOffscreen();
   }
 
   public onRender(callback: VoidFunction): VoidFunction {
@@ -106,12 +119,17 @@ export default class LayerInstance implements Instance<
   }
 
   public removeChild(instance: BrowserFamily | BrowserTextInstance): void {
+    const index = this.#children.indexOf(instance);
+    if (index !== -1) {
+      this.#children.splice(index, 1);
+    }
+
     if (!isRenderableInstance(instance)) {
       return;
     }
 
-    this.#renderableChildren.delete(instance);
     this.#unsubscribeFromRender(instance);
+    this.#renderOffscreen();
   }
 
   #renderOffscreen = (): void => {
@@ -121,8 +139,12 @@ export default class LayerInstance implements Instance<
     this.#offscreenCanvas.height = height;
     this.#offscreenCanvas.width = width;
 
-    for (const { canvasImageSource, height, width, x, y } of this
-      .#renderableChildren) {
+    for (const child of this.#children) {
+      if (!isRenderableInstance(child)) {
+        continue;
+      }
+
+      const { canvasImageSource, height, width, x, y } = child;
       this.#drawImage(canvasImageSource, x, y, width, height);
     }
 
@@ -132,12 +154,17 @@ export default class LayerInstance implements Instance<
   };
 
   #subscribeToRender(instance: DrawImageInstance | LayerInstance): void {
+    if (this.#renderUnsubscriptions.has(instance)) {
+      return;
+    }
+
     const unsubscribe = instance.onRender(this.#renderOffscreen);
     this.#renderUnsubscriptions.set(instance, unsubscribe);
   }
 
   public unhide(): void {
     this.#hidden = false;
+    this.#renderOffscreen();
   }
 
   #unsubscribeFromRender(instance: DrawImageInstance | LayerInstance): void {
@@ -154,6 +181,7 @@ export default class LayerInstance implements Instance<
       return;
     }
 
+    this.#renderUnsubscriptions.delete(instance);
     unsubscribe();
   }
 
