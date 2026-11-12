@@ -1,10 +1,17 @@
-/// <reference types="bun-types" />
 import { join } from 'node:path';
 
-import { type Subprocess } from 'bun';
+import {
+  file,
+  resolveSync,
+  type Spawn,
+  spawn,
+  stdout,
+  type Subprocess,
+  write,
+} from 'bun';
 import cloneTemplate from './clone-template.js';
 import { type Component, COMPONENTS } from './components.js';
-import { type Model, MODEL_OPTIONS } from './models.js';
+import { type Model, MODEL_OPTIONS } from './models/index.js';
 
 interface Options {
   readonly description: string;
@@ -14,14 +21,8 @@ interface Options {
   readonly slug: string;
 }
 
-const WRITE_DIRECTORIES: readonly string[] = [
-  join(import.meta.dir, '..', '..', '..', '..', 'node_modules', '.vite'),
-  join(import.meta.dir, '..', '..', '..', '..', 'node_modules', '.vite-temp'),
-  join(import.meta.dir, '..', '..', '.cache'),
-  join(import.meta.dir, '..', '..', '.tests'),
-  join(import.meta.dir, '..', '..', 'node_modules', '.vite'),
-  join(import.meta.dir, '..', '..', 'node_modules', '.vite-temp'),
-];
+export const isModel = (value: string): value is Model =>
+  Object.hasOwn(MODEL_OPTIONS, value);
 
 export default async function createDesignSystem({
   description: designSystemDescription,
@@ -37,14 +38,54 @@ export default async function createDesignSystem({
     slug: designSystemSlug,
   });
 
-  const promptTemplate: string = await Bun.file(
+  const promptTemplate: string = await file(
     join(import.meta.dir, 'PROMPT.md'),
   ).text();
+
+  const spawnOptions: Spawn.SpawnOptions<'pipe', 'pipe', 'pipe'> = {
+    cwd: designSystemDir,
+    env: {
+      ...process.env,
+      // OpenCode uses the PWD environment variable.
+      PWD: designSystemDir,
+    },
+    stderr: 'pipe',
+    stdin: 'pipe',
+    stdout: 'pipe',
+  };
+
+  /**
+   * For serial (non-parallel) execution:
+   * - If this component was created before the previous one, assume it's a
+   *   template file: overwrite it.
+   * - If this component was created after the previous one, assume this step
+   *   completed during a previous crashed run: skip it.
+   */
+  let lastModifiedTimestamp = Number.POSITIVE_INFINITY;
+  const shouldSkip = async (componentSlug: string): Promise<boolean> => {
+    if (parallel) {
+      return false;
+    }
+
+    const componentPath: string = join(designSystemDir, `${componentSlug}.tsx`);
+    const { mtimeMs } = await file(componentPath).stat();
+    try {
+      return mtimeMs > lastModifiedTimestamp;
+    } finally {
+      lastModifiedTimestamp = mtimeMs;
+    }
+  };
 
   const toSubprocess = async ({
     descriptionFile: componentDescriptionFile,
     slug: componentSlug,
   }: Component): Promise<void> => {
+    if (await shouldSkip(componentSlug)) {
+      // eslint-disable-next-line no-console
+      console.log(`---------- Skipping component: ${componentSlug} ----------`);
+      return;
+    }
+
     const componentDescriptionPath: string = join(
       designSystemsDir,
       componentDescriptionFile,
@@ -52,10 +93,10 @@ export default async function createDesignSystem({
 
     // Replaces a relative [link](./path/) with an absolute [link](/to/path/).
     const toAbsoluteLink = (_: string, name: string, path: string): string =>
-      `[${name}](${join(componentDescriptionPath, path)})`;
+      `[${name}](${resolveSync(path, componentDescriptionPath)})`;
 
     const componentDescription: string = (
-      await Bun.file(componentDescriptionPath).text()
+      await file(componentDescriptionPath).text()
     ).replaceAll(/\[(?<name>[^\]]+)\]\((?<path>[^)]+)\)/gu, toAbsoluteLink);
 
     const componentScreenshotPath: string = join(
@@ -77,7 +118,7 @@ export default async function createDesignSystem({
       .replaceAll('$_DESIGN_SYSTEM_SLUG_$', designSystemSlug)
       .replaceAll(
         '$_INSTRUCTIONS_$',
-        (await Bun.file(componentScreenshotPath).exists())
+        (await file(componentScreenshotPath).exists())
           ? `
 Use the design system's description to **replace** the placeholder example
 screenshot located at \`${componentScreenshotPath}\` with an artistic variation.
@@ -89,14 +130,9 @@ Implement the JSX and SCSS to match the image variant.
     // eslint-disable-next-line no-console
     console.log(`---------- Generating component: ${componentSlug} ----------`);
 
-    const execution: Subprocess<'pipe', 'pipe', 'pipe'> = Bun.spawn(
-      [
-        ...command({
-          workingDirectory: designSystemDir,
-          writeDirectories: WRITE_DIRECTORIES,
-        }),
-      ],
-      { stderr: 'pipe', stdin: 'pipe', stdout: 'pipe' },
+    const execution: Subprocess<'pipe', 'pipe', 'pipe'> = spawn(
+      [...command],
+      spawnOptions,
     );
 
     await execution.stdin.write(prompt);
@@ -112,16 +148,18 @@ Implement the JSX and SCSS to match the image variant.
 
       // Skip new lines if we're already on one.
       if (newLine && text.startsWith('\n')) {
-        await Bun.write(Bun.stdout, text.slice(1));
+        await write(stdout, text.slice(1));
       } else {
-        await Bun.write(Bun.stdout, text);
+        await write(stdout, text);
       }
 
       newLine = text.endsWith('\n');
     }
 
     const exitCode: number = await execution.exited;
-    await Bun.write(Bun.stdout, '\n');
+
+    lastModifiedTimestamp = Date.now();
+    await write(stdout, '\n');
     if (exitCode === 0) {
       return;
     }

@@ -54,6 +54,7 @@
         "content-type",
         "http-cache",
         "http-compression",
+        "no-bom",
         "no-disallowed-headers",
         "no-html-only-headers",
         "no-http-redirects",

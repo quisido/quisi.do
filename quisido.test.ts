@@ -1,15 +1,21 @@
-import { describe, expect, it } from 'vitest';
+import { readFile } from 'node:fs/promises';
 
-import vsCodeSettings from './.vscode/settings.json' with { type: 'json' };
-import codeWorkspace from './quisido.code-workspace' with { type: 'json' };
+import { assert, describe, expect, it } from 'vitest';
+import parseJsonc from './utils/parse-jsonc.js';
+
+const codeWorkspaceBuffer: Buffer = await readFile('quisido.code-workspace');
+const codeWorkspace: unknown = parseJsonc(codeWorkspaceBuffer.toString());
+const vsCodeSettingsBuffer: Buffer = await readFile('.vscode/settings.json');
+const vsCodeSettings: unknown = parseJsonc(vsCodeSettingsBuffer.toString());
 
 describe('VS Code workspace', (): void => {
   describe('settings', (): void => {
+    assert(typeof codeWorkspace === 'object' && codeWorkspace !== null);
+    assert('settings' in codeWorkspace);
     const { settings } = codeWorkspace;
+    assert(typeof settings === 'object' && settings !== null);
 
-    const settingsEntries: readonly [string, unknown][] =
-      Object.entries(settings);
-    it.each(settingsEntries)(
+    it.each(Object.entries(settings))(
       'should match the VS Code root directory "%s" setting',
       (key: string, value: unknown): void => {
         expect(vsCodeSettings).toHaveProperty([key], value);

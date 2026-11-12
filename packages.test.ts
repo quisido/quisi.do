@@ -2,7 +2,6 @@ import { type Dirent, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
-
 import type PackageJson from './types/package-json.js';
 import type VSCodeExtensionsJson from './types/vs-code-extensions-json.js';
 import describeWorkspaces from './utils/describe-workspaces.js';

@@ -15,6 +15,8 @@ Before getting started, you need to know:
 - The "description" of the design system. You should know at least a few
   sentences packed with artistic keywords that inspire the design system's
   aesthetic. If you do not have enough information, prompt for more details.
+- The model to use to generate the design system. See `enum Model` in
+  `scripts/create-design-system/models.ts`.
 - (Optional) A screenshot to use as a visual reference.
 
 ## Execute
@@ -23,11 +25,11 @@ From this package's root directory, execute:
 
 ```sh
 # If there is no screenshot,
-bun ./scripts/create-design-system.ts terra "$SLUG" "$DESCRIPTION";
+bun ./scripts/create-design-system.ts "$MODEL" "$SLUG" "$DESCRIPTION";
 
 # If there is a screenshot,
 bun ./scripts/create-design-system.ts \
-  terra \
+  "$MODEL" \
   "$SLUG" \
   "$DESCRIPTION" \
   "./path/to/screenshot.png";

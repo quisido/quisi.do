@@ -7,16 +7,18 @@
     "hintrc.*.json": "jsonc"
   },
   "files.exclude": {
+    "_site/": true,
     ".cache/": true,
     ".tests/": true,
-    "_site/": true,
+    "graphify-out/": true,
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   },
   "files.watcherExclude": {
+    "_site/": true,
     ".cache/": true,
     ".tests/": true,
-    "_site/": true,
+    "graphify-out/": true,
     "lighthouse.report.html": true,
     "lighthouse.report.json": true,
     "lighthouse-0.devtoolslog.json": true,
@@ -26,9 +28,10 @@
   },
   "scss.validate": false,
   "search.exclude": {
+    "_site": true,
     ".cache/": true,
     ".tests/": true,
-    "_site": true,
+    "graphify-out/": true,
     "lighthouse.report.html": true,
     "lighthouse.report.json": true,
     "lighthouse-0.devtoolslog.json": true,

@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import process from 'node:process';
+
 import { attw } from './features/attw/attw.js';
 import { eslint } from './features/eslint/eslint.js';
 import { knip } from './features/knip/knip.js';

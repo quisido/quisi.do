@@ -2,6 +2,7 @@
 /.tests/
 /.wrangler/
 /_site/
+/graphify-out/
 /node_modules/
 /playwright/storage-state.json
 /.env.*.local

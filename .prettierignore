@@ -3,5 +3,6 @@
 /.pnp.*
 /LICENSE
 /package-lock.json
+graphify-out/
 node_modules/
 *.gz

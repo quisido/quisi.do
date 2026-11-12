@@ -1,5 +1,7 @@
+/_site/
 /.cache/
 /.tests/
 /dist/
+/graphify-out/
 /node_modules/
 /.env.local

@@ -1,3 +1,5 @@
+import process from 'node:process';
+
 import {
   type FailureReport,
   type Report,
@@ -9,6 +11,7 @@ import toString from './to-string.js';
 
 // Press F to FIX with AI.
 const WATCH_MODE_INSTRUCTIONS = `
+Press F to FIX with AI.
 Press R to RETRY.
 Press any other key to SKIP this tool.
 `;
@@ -27,7 +30,9 @@ export default class ReportingTool<
 > {
   #callTool: (...options: Options) => Promise<ReportingToolResult>;
   #env: NodeJS.ProcessEnv = process.env;
+  #isProgressLog = false;
   #stdin: NodeJS.ReadStream = process.stdin;
+  #stdout: NodeJS.WriteStream = process.stdout;
   #toolName: string;
 
   public constructor(
@@ -36,6 +41,16 @@ export default class ReportingTool<
   ) {
     this.#callTool = callTool;
     this.#toolName = toolName;
+  }
+
+  #clearLine(): void {
+    // `clearLine` is only supported in TTY environments.
+    if (!this.#stdout.isTTY) {
+      return;
+    }
+
+    this.#stdout.clearLine(0);
+    this.#stdout.cursorTo(0);
   }
 
   get #isCI(): boolean {
@@ -47,40 +62,61 @@ export default class ReportingTool<
   }
 
   public logError(message: string): void {
-    globalThis.console.error(`[${this.#toolName}] ${message}`);
+    this.#isProgressLog = false;
+    this.#stdout.write(`[${this.#toolName}] ${message}`);
   }
 
   public logInfo(message: string): void {
-    globalThis.console.info(`[${this.#toolName}] ${message}`);
+    this.#isProgressLog = false;
+    this.#stdout.write(`[${this.#toolName}] ${message}`);
+  }
+
+  #progress(message: string): void {
+    if (this.#isProgressLog) {
+      this.#clearLine();
+    }
+
+    this.#isProgressLog = true;
+    this.#stdout.write(`[${this.#toolName}] ${message}`);
   }
 
   public async run(...options: Options): Promise<Report> {
-    this.logInfo('⏳');
+    this.#progress('⏳');
 
     try {
       const result: ReportingToolResult = await this.#callTool(...options);
 
       switch (result.status) {
-        case 'failure':
-          this.logInfo('❌');
-          if (this.#isTTY) {
-            this.logError([result.context, result.message].join('\n'));
-            process.stdout.write(WATCH_MODE_INSTRUCTIONS);
-            process.stdout.unref();
+        case 'failure': {
+          this.#progress('❌');
+          if (!this.#isTTY) {
+            break;
+          }
 
-            const key: string = await getKey(this.#stdin);
-            if (key.toLowerCase() === 'r') {
-              return await this.run(...options);
+          this.logError([result.context, result.message].join('\n'));
+          this.#stdout.write(WATCH_MODE_INSTRUCTIONS);
+          this.#stdout.unref();
+
+          const key: string = await getKey(this.#stdin);
+          switch (key.toLowerCase()) {
+            case 'f': {
+              this.logInfo('This feature is not yet implemented.');
+              break;
             }
+
+            case 'r':
+              return await this.run(...options);
           }
           break;
+        }
 
         case 'skipped':
-          this.logInfo(`⏭️  Skipped: ${result.message}`);
+          this.#progress(`⏭️  Skipped: ${result.message}`);
           break;
 
         case 'success':
-          this.logInfo('✔️');
+          this.#progress('✔️');
+          this.#stdout.write('\n');
           break;
       }
 
@@ -89,7 +125,7 @@ export default class ReportingTool<
         tool: this.#toolName,
       };
     } catch (err: unknown) {
-      this.logInfo('❌');
+      this.#progress('❌');
       return {
         context: `An unexpected error occurred while executing the "${this.#toolName}" tool. This likely indicates an issue with the tool itself or the environment in which the tool is being executed, rather than with the package being analyzed.`,
         message: toString(err),

@@ -224,7 +224,7 @@ jobs:
       - name: Publish
         run: npm run publish
 
-  # Stage 4: cloudflare-purge, github-packages, wrangler-deploy
+  # Stage 4: cloudflare-purge, wrangler-deploy
   cloudflare-purge:
     name: Cloudflare
     environment: production
@@ -245,29 +245,6 @@ jobs:
           api-token: ${{ secrets.CLOUDFLARE_PURGE_TOKEN }}
           quisi-do-zone-id: ${{ secrets.CLOUDFLARE_QUISI_DO_ZONE_ID }}
           quisido-dev-zone-id: ${{ secrets.CLOUDFLARE_QUISIDO_DEV_ZONE_ID }}
-
-  github-packages:
-    name: GitHub Packages
-    environment: production
-    needs: npm-publish
-    runs-on: ubuntu-26.04
-    permissions:
-      contents: read  # git checkout
-      id-token: write # npm publish
-      packages: write # npm publish
-    services:
-      datadog-agent: *datadog-agent
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 1
-          persist-credentials: true
-          show-progress: false
-      - name: Publish
-        uses: ./.github/actions/github-packages
-        with:
-          auth-token: ${{ secrets.GITHUB_TOKEN }}
 
   wrangler-deploy:
     name: Wrangler deploy (${{ matrix.service }})
@@ -298,8 +275,6 @@ jobs:
             workspace: authn
           - service: Content Security Policy
             workspace: csp
-          - service: Dashboard
-            workspace: dashboard
 
   # Stage 5: lighthouse-production, webhint-production
   lighthouse-production:

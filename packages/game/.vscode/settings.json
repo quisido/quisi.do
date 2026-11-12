@@ -4,23 +4,26 @@
     "cacheLocation": "./.cache/"
   },
   "files.exclude": {
+    "_site/": true,
     ".cache/": true,
     ".tests/": true,
-    "_site/": true,
+    "graphify-out/": true,
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   },
   "files.watcherExclude": {
+    "_site/": true,
     ".cache/": true,
     ".tests/": true,
-    "_site/": true,
+    "graphify-out/": true,
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   },
   "search.exclude": {
+    "_site/": true,
     ".cache/": true,
     ".tests/": true,
-    "_site/": true,
+    "graphify-out/": true,
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   }
