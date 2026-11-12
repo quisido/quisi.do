@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "build": "sh ./scripts/build.sh",
-    "start": "npm run tsc:build && node ./dist/scripts/start.js",
+    "start": "node ----experimental-strip-types ./scripts/start.ts",
     "test": "sh ./scripts/test.sh",
     "authn": "npm --workspace=packages/authn start",
     "browserslist:update-db": "browserslist --update-db",
@@ -23,11 +23,10 @@
     "knip": "knip",
     "playwright-mcp": "npx @playwright/mcp --caps devtools,vision --console-level warning --headless --isolated --sandbox --storage-state=.cache/playwright-mcp/storage-state.json",
     "publint": "quisido publint",
-    "publish": "node ./dist/scripts/publish.js",
+    "publish": "node --experimental-strip-types ./scripts/publish.ts",
     "quisido": "npm --workspace=packages/quisido start",
     "saas": "npm --workspace=packages/saas start",
-    "tsc:build": "tsc --build tsconfig.build.json --generateCpuProfile .cache/tsc-output.build.cpuprofile",
-    "update": "node ./dist/scripts/update.js",
+    "update": "node --experimental-strip-types ./scripts/update.ts",
     "worker": "npm --workspace=packages/worker start"
   },
   "bugs": {

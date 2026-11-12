@@ -18,8 +18,7 @@ npm workspaces under `packages/*` with three package types, distinguished by
 `packages/quisido/` is the shared build/lint/test CLI used by every package.
 Other packages' scripts (`quisido build`, `quisido test`, ...) depend on it
 being built and linked first, which is why root `npm run build` runs in the
-fixed order `tsc:build` → `quisido:build` → `quisido:link` →
-`npm --workspaces run build`.
+fixed order: build `quisido`, link `quisido`, then `npm --workspaces run build`.
 
 TypeScript is aliased twice on purpose: `@typescript/native` is TypeScript 7
 and supplies the `tsc` used for builds, while `typescript` aliases
