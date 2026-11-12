@@ -4,6 +4,7 @@
 /.tests/
 /.vscode/
 /.wrangler/
+/graphify-out/
 /node_modules/
 /packages/
 /.*.json

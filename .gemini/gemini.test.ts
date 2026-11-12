@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-
 import vsCodeMcp from '../.vscode/mcp.json' with { type: 'json' };
 import settings from './settings.json' with { type: 'json' };
 

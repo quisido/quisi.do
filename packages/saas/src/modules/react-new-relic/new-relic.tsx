@@ -52,12 +52,7 @@ export default function NewRelic({
             capture_measures: true,
             resources: {
               enabled: true,
-              first_party_domains: [
-                'a.quisi.do',
-                'dashboard.quisi.do',
-                'localhost',
-                'quisi.do',
-              ],
+              first_party_domains: ['a.quisi.do', 'localhost', 'quisi.do'],
             },
           },
 

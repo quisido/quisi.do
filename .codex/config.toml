@@ -43,6 +43,7 @@ enabled = true
 
 [sandbox_workspace_write]
 network_access = true
+writable_roots = ["~/.local/share/opencode/log"]
 
 [shell_environment_policy]
 inherit = "core"

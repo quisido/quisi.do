@@ -57,6 +57,12 @@
 
   "ignoredUrls": [
     {
+      "domain": "^(?!o592283.ingest.sentry.io$).*",
+      "hints": [
+        "no-bom"
+      ]
+    },
+    {
       "domain": "^(?!localhost:3000$).*",
       "hints": [
         "content-type",

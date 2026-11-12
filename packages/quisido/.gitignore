@@ -1,5 +1,6 @@
 /.cache/
 /.tests/
 /dist/
+/graphify-out/
 /node_modules/
 /*-*.*.*.tgz

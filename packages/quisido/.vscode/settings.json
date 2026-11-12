@@ -7,6 +7,7 @@
     ".cache/": true,
     ".tests/": true,
     "dist/": true,
+    "graphify-out/": true,
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   },
@@ -14,6 +15,7 @@
     ".cache/": true,
     ".tests/": true,
     "dist/": true,
+    "graphify-out/": true,
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   },
@@ -21,6 +23,7 @@
     ".cache/": true,
     ".tests/": true,
     "dist/": true,
+    "graphify-out/": true,
     "node_modules/": true,
     "vitest.config.ts.timestamp-*-*.mjs": true
   }

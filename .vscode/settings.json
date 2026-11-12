@@ -1,30 +1,30 @@
 {
   "[css]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   },
   "[html]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   },
   "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   },
   "[json]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   },
   "[scss]": {
-    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   },
   "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   },
   "[yaml]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   },
   "editor.codeActionsOnSave": {
     "source.fixAll": "never",
@@ -32,21 +32,21 @@
     "source.organizeImports": "never",
     "source.removeUnused.ts": "never",
     "source.sort.json": "never",
-    "source.sortImports": "never"
+    "source.sortImports": "never",
   },
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.rulers": [80],
   "editor.tabSize": 2,
   "eslint.enable": true,
   "eslint.execArgv": [
-    "--max-old-space-size=8192"
+    "--max-old-space-size=8192",
   ],
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
   "eslint.lintTask.options": "--config eslint.config.js .",
   "eslint.options": {
     "cache": true,
-    "cacheLocation": "./.cache/"
+    "cacheLocation": "./.cache/",
   },
   "eslint.probe": [
     "html",
@@ -58,7 +58,7 @@
     "mdx",
     "typescript",
     "typescriptreact",
-    "yaml"
+    "yaml",
   ],
   "eslint.validate": [
     "html",
@@ -70,16 +70,18 @@
     "mdx",
     "typescript",
     "typescriptreact",
-    "yaml"
+    "yaml",
   ],
   "eslint.workingDirectories": [
     ".",
-    { "pattern": "packages/*" }
+    { "pattern": "packages/*" },
   ],
   "files.associations": {
     "**/.aiexclude": "ignore",
+    "**/.vscode/settings.json": "jsonc",
+    "**/*.code-workspace": "jsonc",
     "**/config/api-extractor.json": "jsonc",
-    "**/hintrc.*.json": "jsonc"
+    "**/hintrc.*.json": "jsonc",
   },
   "files.eol": "\n",
   "files.exclude": {
@@ -89,37 +91,44 @@
     "CLAUDE.md": true,
     "debug.log": true,
     "dist/": true,
-    "packages/": true
+    "packages/": true,
   },
   "files.watcherExclude": {
+    "**/_site/": true,
     "**/.cache/": true,
     "**/.git/": true,
     "**/.tests/": true,
     "**/.wrangler/": true,
-    "**/_site/": true,
     "**/dist/": true,
+    "**/graphify-out/": true,
     "**/node_modules/": true,
-    "packages/": true
+    "packages/": true,
   },
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
-  "js/ts.tsdk.path": "./node_modules/typescript/lib",
+  /**
+   * This value is normally `./node_modules/typescript/lib`, but the TypeScript
+   * library is located at `@typescript/old` as long as `typescript` is
+   * installed as a shim (`npm:@typescript/typescript6@^6`). It is currently a
+   * shim until TypeScript 7.1 adds support for ESLint.
+   */
+  "js/ts.tsdk.path": "./node_modules/@typescript/old/lib",
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "npm.packageManager": "npm",
   "remote.portsAttributes": {
     "378": {
-      "protocol": "https"
+      "protocol": "https",
     },
     "3000": {
-      "protocol": "https"
+      "protocol": "https",
     },
     "5882": {
-      "protocol": "https"
+      "protocol": "https",
     },
     "6586": {
-      "protocol": "https"
+      "protocol": "https",
     },
     "9778": {
-      "protocol": "https"
+      "protocol": "https",
     }
   },
   "scss.completion.completePropertyWithSemicolon": true,
@@ -128,6 +137,7 @@
   "scss.format.newlineBetweenRules": true,
   "scss.format.spaceAroundSelectorSeparator": true,
   "search.exclude": {
+    "**/_site/": true,
     "**/.attach_pid*": true,
     "**/.cache/": true,
     "**/.git/": true,
@@ -135,15 +145,15 @@
     "**/.nyc_output/": true,
     "**/.tests/": true,
     "**/.wrangler/": true,
-    "**/_site/": true,
     "**/dist/": true,
+    "**/graphify-out/": true,
     "**/lighthouse.report.*": true,
     "**/node_modules/": true,
-    "**/package-lock.json": true
+    "**/package-lock.json": true,
   },
   "stylelint.configFile": "./packages/saas/.stylelintrc.ts",
   "terminal.integrated.shellIntegration.enabled": true,
   "testExplorer.useNativeTesting": true,
   "vitest.shellType": "terminal",
-  "yaml.keyOrdering": false
+  "yaml.keyOrdering": false,
 }

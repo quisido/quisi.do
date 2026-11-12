@@ -5,7 +5,6 @@ import {
   concurrently,
   type ConcurrentlyCommandInput,
 } from 'concurrently';
-
 import createPrefixColors from './utils/create-prefix-colors.js';
 import getWorkspaceDirectories from './utils/get-workspace-directories.js';
 import mapDirentToPackageJson from './utils/map-dirent-to-package-json.js';

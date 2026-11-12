@@ -8,32 +8,25 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "npm run tsc:build && npm run quisido:build && npm run quisido:link && npm --workspaces run build",
-    "start": "npm run tsc:build && node ./dist/scripts/start.js",
-    "test": "npm --workspaces run test",
+    "build": "bash ./scripts/build.sh",
+    "start": "bash ./scripts/start.sh",
+    "test": "bash ./scripts/test.sh",
     "authn": "npm --workspace=packages/authn start",
     "browserslist:update-db": "browserslist --update-db",
-    "clean": "rimraf .cache .tests dist && npm run clean --if-present --workspaces && rimraf node_modules",
+    "clean": "rimraf .cache .tests dist graphify-out && npm run clean --if-present --workspaces && rimraf node_modules",
     "cloudflare-utils": "npm --workspace=packages/cloudflare-utils start",
     "codex": "codex --ask-for-approval untrusted --sandbox workspace-write --search",
     "csp": "npm --workspace=packages/csp start",
-    "dashboard": "npm --workspace=packages/dashboard start",
-    "eslint": "eslint . --cache --cache-location ./.cache/",
     "eslint-config": "npm --workspace=packages/eslint-config start",
     "fmrs": "npm --workspace=packages/fmrs start",
     "game": "npm --workspace=packages/game start",
     "knip": "knip",
     "playwright-mcp": "npx @playwright/mcp --caps devtools,vision --console-level warning --headless --isolated --sandbox --storage-state=.cache/playwright-mcp/storage-state.json",
     "publint": "quisido publint",
-    "publish": "node ./dist/scripts/publish.js",
+    "publish": "bash ./scripts/publish.sh",
     "quisido": "npm --workspace=packages/quisido start",
-    "quisido:build": "npm --workspace=packages/quisido run build",
-    "quisido:link": "npm --workspace=packages/quisido link || exit 0",
     "saas": "npm --workspace=packages/saas start",
-    "tsc:build": "tsc --build tsconfig.build.json --generateCpuProfile .cache/tsc-output.build.cpuprofile",
-    "tsc:version": "tsc --version",
-    "update": "node ./dist/scripts/update.js",
-    "vitest": "vitest run",
+    "update": "bash ./scripts/update.sh",
     "worker": "npm --workspace=packages/worker start"
   },
   "bugs": {
@@ -105,6 +98,7 @@
     "concurrently": "^10.0.6",
     "eslint": "^10.14.0",
     "hint": "^7.1.13",
+    "jsonc-parser": "^3.3.1",
     "playwright": "^1.64.1",
     "puppeteer-core": "^25.16.0",
     "quisido": "^0.0.5",
@@ -117,9 +111,6 @@
   "overrides": {
     "@hint/connector-puppeteer": {
       "puppeteer-core": ">=22.11.1"
-    },
-    "@monogatari/core": {
-      "random-js": "^2.1.0"
     },
     "eslint-plugin-react-hooks": {
       "zod-validation-error": "^4.0.2"

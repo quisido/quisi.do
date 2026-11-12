@@ -41,6 +41,9 @@ JSX and CSS in _any way_ to achieve your goal. For example:
 Prefer pure CSS where possible. Create image files for textures and shapes only
 when they are too difficult to create with pure CSS.
 
+You cannot write more than 1536 bytes to a file at once. Write large files in
+chunks.
+
 Test the component for behavioral accuracy, feature completeness, and
 accessibility compliance by executing:
 
@@ -50,6 +53,36 @@ VITE_TESTED_DESIGN_SYSTEM=$_DESIGN_SYSTEM_SLUG_$ npx vitest run \
 ```
 
 If the test suite is failing, adjust your implementation until it passes.
+
+Prefer to limit your use of screenshots, because they are time-consuming. If you
+**need** to take a screenshot, you can use `vitest/browser`:
+
+```ts
+import { createRoot } from 'react-dom/client';
+import { page } from 'vitest/browser';
+import { it } from 'vitest';
+
+import Component from './$_COMPONENT_SLUG_$.js';
+
+it('screenshot', async (): Promise<void> => {
+  await page.viewport(1160, 900);
+
+  const container: HTMLElement = document.createElement('div');
+  document.body.append(container);
+  createRoot(container).render(<Component {/* YOUR DESIRED PROPS */} />);
+
+  await page.evaluate(async (): Promise<void> => {
+    await document.fonts.ready;
+  });
+
+  await page.screenshot({ path: './$_COMPONENT_SLUG_$.png' });
+});
+```
+
+## Troubleshooting
+
+- If a provider timeout or compaction failure occurs, stop the queue and report
+  the component and session instead of claiming completion.
 
 ## Constraints
 

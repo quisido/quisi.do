@@ -8,10 +8,10 @@ Dialogs are often used to prompt the user to enter or respond to information, or
 can represent content related to understanding or modifying the content of the
 primary application window. A dialog that is designed to interrupt workflow and
 prevent users from interacting with the primary web application is usually
-[modal](./modal.md). See related [alert dialog](./alert-dialog.md). A dialog
-that allows for the user to switch between interacting with the content of the
-primary web application and the content the dialog is usually modeless (i.e.
-non-modal). Use the `aria-modal` attribute, and constrain focus to dialogs[^1].
+modal. See related [alert dialog](./alert-dialog.md). A dialog that allows for
+the user to switch between interacting with the content of the primary web
+application and the content the dialog is usually modeless (i.e. non-modal). Use
+the `aria-modal` attribute, and constrain focus to dialogs[^1].
 
 Provide an accessible name for a dialog with the `aria-label` or
 `aria-labelledby` attribute[^1].

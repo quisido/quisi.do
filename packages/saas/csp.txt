@@ -14,7 +14,6 @@ connect-src
   https://browser-intake-datadoghq.com/api/v2/rum
   https://cloudflareinsights.com/
   https://csp.quisi.do/1/
-  https://dashboard.quisi.do/
   https://edge.fullstory.com/s/settings/o-1X4ZHB-na1/v1/web
   https://localhost:5882/whoami/
   https://localhost:6586/1/

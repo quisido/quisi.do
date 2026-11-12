@@ -1,4 +1,5 @@
 import { dirname, join } from 'node:path';
+import process from 'node:process';
 
 export const NPX_COMMAND: readonly [string, ...(readonly string[])] = (() => {
   switch (process.platform) {

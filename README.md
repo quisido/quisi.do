@@ -16,9 +16,6 @@ As a monorepo, it composes three types of packages:
     database and managing their sessions.
   - `csp/` contains the Content Security Policy reporting endpoint. It logs CSP
     violations so that they may be monitored and queried.
-  - `dashboard/` consolidates all monitoring for the SaaS application that is
-    safe to share publicly. It includes error logs, performance metrics,
-    security policy violations, etc. in a single API request.
 - **Libraries** are reusable code shared by the applications and services. They
   offer value outside the `quisi.do` ecosystem and are published publicly to NPM
   for any developer to use.

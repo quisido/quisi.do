@@ -10,7 +10,7 @@
     "build": "exit 0",
     "start": "vite",
     "test": "exit 0",
-    "clean": "rimraf .cache .tests node_modules",
+    "clean": "rimraf _site .cache .tests graphify-out node_modules",
     "eslint": "eslint . --cache --cache-location ./.cache/",
     "serve": "serve dist",
     "tsc": "tsc --skipLibCheck",
