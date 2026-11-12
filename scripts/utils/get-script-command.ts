@@ -7,10 +7,6 @@ export default function getScriptCommand(): readonly [
   string,
   ...(readonly string[]),
 ] {
-  if (/bun(?:\.exe)?$/iu.test(EXEC_PATH)) {
-    return ['bun'];
-  }
-
   // NPM on Windows is actually `node .../npm-cli.js`.
   if (PLATFORM === 'win32') {
     const execDir: string = dirname(EXEC_PATH);

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines, max-lines-per-function */
 import { type Component, type ReactNode } from 'react';
 import createReactReconciler, {
   type BaseErrorInfo,
@@ -31,7 +32,6 @@ const defaultMaySuspendCommit = (): boolean => false;
 
 // React looks console methods up by name through the `bindToConsole` host
 // config method, so the console is indexed dynamically.
-/* eslint-disable no-console -- The console API is selected by method name. */
 const pickConsoleMethod = (
   methodName: string,
 ): ((...args: unknown[]) => unknown) => {
@@ -39,11 +39,11 @@ const pickConsoleMethod = (
     string,
     undefined | ((...args: unknown[]) => unknown)
   >;
+  // eslint-disable-next-line no-console
   const logMethod = consoleMethods[methodName] ?? console.error;
 
   return logMethod.bind(console);
 };
-/* eslint-enable no-console */
 
 const CONCURRENT_UPDATES_BY_DEFAULT_OVERRIDE: null | boolean = null;
 const DEFAULT_PARENT_COMPONENT: Component<unknown, unknown> | null = null;
@@ -115,112 +115,6 @@ export default class QuisidoReconciler<
       never, // HoistableRoot
       never // Resource
     >({
-      /*
-      canHydrateInstance(
-        instance: HydratableInstance,
-        type: Type,
-        props: Props,
-      ): null | Instance {},
-
-      canHydrateSuspenseInstance(
-        instance: HydratableInstance,
-      ): null | SuspenseInstance {},
-
-      canHydrateTextInstance(
-        instance: HydratableInstance,
-        text: string,
-      ): null | TextInstance {},
-
-      getFirstHydratableChild(
-        parentInstance: Container | Instance,
-      ): null | HydratableInstance {},
-
-      getNextHydratableSibling(
-        instance: HydratableInstance,
-      ): null | HydratableInstance {},
-
-      hydrateInstance(
-        instance: Instance,
-        type: Type,
-        props: Props,
-        rootContainerInstance: Container,
-        hostContext: HostContext,
-        internalInstanceHandle: any,
-      ): null | any[] {},
-
-      getNextHydratableInstanceAfterSuspenseInstance(
-        suspenseInstance: SuspenseInstance,
-      ): null | HydratableInstance {},
-
-      hydrateTextInstance(textInstance: TextInstance, text: string, internalInstanceHandle: any): boolean {},
-
-      hydrateSuspenseInstance(
-        suspenseInstance: SuspenseInstance,
-        internalInstanceHandle: any,
-      ): void {},
-
-      registerSuspenseInstanceRetry(
-        instance: SuspenseInstance,
-        callback: () => void,
-      ): void {},
-
-      isSuspenseInstanceFallback(instance: SuspenseInstance): boolean {},
-
-      isSuspenseInstancePending(instance: SuspenseInstance): boolean {},
-
-      commitHydratedContainer?(container: Container): void;
-
-      commitHydratedSuspenseInstance?(suspenseInstance: SuspenseInstance): void;
-
-      didNotMatchHydratedContainerTextInstance?(
-        parentContainer: Container,
-        textInstance: TextInstance,
-        text: string,
-      ): void;
-
-      didNotMatchHydratedTextInstance?(
-        parentType: Type,
-        parentProps: Props,
-        parentInstance: Instance,
-        textInstance: TextInstance,
-        text: string,
-      ): void;
-
-      didNotHydrateContainerInstance?(parentContainer: Container, instance: HydratableInstance): void;
-
-      didNotHydrateInstance?(
-        parentType: Type,
-        parentProps: Props,
-        parentInstance: Instance,
-        instance: HydratableInstance,
-      ): void;
-
-      didNotFindHydratableContainerInstance?(parentContainer: Container, type: Type, props: Props): void;
-
-      didNotFindHydratableContainerTextInstance?(parentContainer: Container, text: string): void;
-
-      didNotFindHydratableContainerSuspenseInstance?(parentContainer: Container): void;
-
-      didNotFindHydratableInstance?(
-        parentType: Type,
-        parentProps: Props,
-        parentInstance: Instance,
-        type: Type,
-        props: Props,
-      ): void;
-
-      didNotFindHydratableTextInstance?(
-        parentType: Type,
-        parentProps: Props,
-        parentInstance: Instance,
-        text: string,
-      ): void;
-
-      didNotFindHydratableSuspenseInstance?(parentType: Type, parentProps: Props, parentInstance: Instance): void;
-
-      errorHydratingContainer?(parentContainer: Container): void;
-      */
-
       afterActiveInstanceBlur(): void {
         // Do nothing.
       },
@@ -253,11 +147,33 @@ export default class QuisidoReconciler<
         return (...boundArgs: unknown[]): unknown => log(...args, ...boundArgs);
       },
 
+      /*
+      canHydrateInstance(
+        instance: HydratableInstance,
+        type: Type,
+        props: Props,
+      ): null | Instance {},
+
+      canHydrateSuspenseInstance(
+        instance: HydratableInstance,
+      ): null | SuspenseInstance {},
+
+      canHydrateTextInstance(
+        instance: HydratableInstance,
+        text: string,
+      ): null | TextInstance {},
+      */
+
       cancelTimeout,
 
       clearContainer(container: Root): void {
         container.clear();
       },
+
+      /*
+      commitHydratedContainer?(container: Container): void;
+      commitHydratedSuspenseInstance?(suspenseInstance: SuspenseInstance): void;
+      */
 
       commitMount(instance: Family, _type: Type, props: Props[Type]): void {
         instance.mount?.(props);
@@ -271,6 +187,7 @@ export default class QuisidoReconciler<
         textInstance.update(oldText, newText);
       },
 
+      // eslint-disable-next-line max-params
       commitUpdate: (
         instance: Family,
         _type: Type,
@@ -283,6 +200,7 @@ export default class QuisidoReconciler<
         instance.update(prevProps, nextProps);
       },
 
+      // eslint-disable-next-line max-params
       createInstance: (
         type: Type,
         props: Props[Type],
@@ -300,6 +218,69 @@ export default class QuisidoReconciler<
       detachDeletedInstance: (node: Family): void => {
         this.#removeInstance(node);
       },
+
+      /*
+      didNotMatchHydratedContainerTextInstance?(
+        parentContainer: Container,
+        textInstance: TextInstance,
+        text: string,
+      ): void;
+
+      didNotMatchHydratedTextInstance?(
+        parentType: Type,
+        parentProps: Props,
+        parentInstance: Instance,
+        textInstance: TextInstance,
+        text: string,
+      ): void;
+
+      didNotHydrateContainerInstance?(parentContainer: Container, instance: HydratableInstance): void;
+
+      didNotHydrateInstance?(
+        parentType: Type,
+        parentProps: Props,
+        parentInstance: Instance,
+        instance: HydratableInstance,
+      ): void;
+
+      didNotFindHydratableContainerInstance?(
+        parentContainer: Container,
+        type: Type,
+        props: Props,
+      ): void;
+
+      didNotFindHydratableContainerTextInstance?(
+        parentContainer: Container,
+        text: string,
+      ): void;
+
+      didNotFindHydratableContainerSuspenseInstance?(
+        parentContainer: Container,
+      ): void;
+
+      didNotFindHydratableInstance?(
+        parentType: Type,
+        parentProps: Props,
+        parentInstance: Instance,
+        type: Type,
+        props: Props,
+      ): void;
+
+      didNotFindHydratableTextInstance?(
+        parentType: Type,
+        parentProps: Props,
+        parentInstance: Instance,
+        text: string,
+      ): void;
+
+      didNotFindHydratableSuspenseInstance?(
+        parentType: Type,
+        parentProps: Props,
+        parentInstance: Instance,
+      ): void;
+
+      errorHydratingContainer?(parentContainer: Container): void;
+      */
 
       extraDevToolsConfig: {},
 
@@ -319,6 +300,12 @@ export default class QuisidoReconciler<
         return this.#currentEventPriority;
       },
 
+      /*
+      getFirstHydratableChild(
+        parentInstance: Container | Instance,
+      ): null | HydratableInstance {},
+      */
+
       getInstanceFromNode(_node: unknown): Fiber | null | undefined {
         return null;
       },
@@ -326,6 +313,16 @@ export default class QuisidoReconciler<
       getInstanceFromScope(_scopeInstance: unknown): Family | null {
         return null;
       },
+
+      /*
+      getNextHydratableInstanceAfterSuspenseInstance(
+        suspenseInstance: SuspenseInstance,
+      ): null | HydratableInstance {},
+
+      getNextHydratableSibling(
+        instance: HydratableInstance,
+      ): null | HydratableInstance {},
+      */
 
       getPublicInstance(instance: Family | Txt): Family | Txt {
         return instance;
@@ -358,6 +355,28 @@ export default class QuisidoReconciler<
         value: TransitionStatus.NotPendingTransition,
       }),
 
+      /*
+      hydrateInstance(
+        instance: Instance,
+        type: Type,
+        props: Props,
+        rootContainerInstance: Container,
+        hostContext: HostContext,
+        internalInstanceHandle: any,
+      ): null | any[] {},
+
+      hydrateSuspenseInstance(
+        suspenseInstance: SuspenseInstance,
+        internalInstanceHandle: any,
+      ): void {},
+
+      hydrateTextInstance(
+        textInstance: TextInstance,
+        text: string,
+        internalInstanceHandle: any,
+      ): boolean {},
+      */
+
       insertBefore(
         parentInstance: Family,
         child: Family | Txt,
@@ -375,6 +394,12 @@ export default class QuisidoReconciler<
       },
 
       isPrimaryRenderer: true,
+
+      /*
+      isSuspenseInstanceFallback(instance: SuspenseInstance): boolean {},
+      isSuspenseInstancePending(instance: SuspenseInstance): boolean {},
+      */
+
       maySuspendCommit: (type: Type, props: Props[Type]): boolean =>
         maySuspendCommit(type, props),
       maySuspendCommitInSyncRender: (type: Type, props: Props[Type]): boolean =>
@@ -408,6 +433,13 @@ export default class QuisidoReconciler<
       prepareScopeUpdate(_scopeInstance: unknown, _instance: unknown): void {
         // Do nothing.
       },
+
+      /*
+      registerSuspenseInstanceRetry(
+        instance: SuspenseInstance,
+        callback: () => void,
+      ): void {},
+      */
 
       removeChild: (
         parentInstance: Family,
@@ -486,6 +518,7 @@ export default class QuisidoReconciler<
       supportsMutation: true,
       supportsPersistence: false,
 
+      // eslint-disable-next-line max-params
       suspendInstance(
         _state: null,
         _instance: Family,
@@ -542,7 +575,7 @@ export default class QuisidoReconciler<
   }
 
   #getOpaqueRoot(container: Root, onError: (error: Error) => void): OpaqueRoot {
-    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents, @typescript-eslint/no-unsafe-assignment
     const opaqueRoot: OpaqueRoot | undefined = this.#opaqueRoots.get(container);
     if (typeof opaqueRoot !== 'undefined') {
       return opaqueRoot;
@@ -552,6 +585,7 @@ export default class QuisidoReconciler<
       onError(error instanceof Error ? error : new Error(String(error)));
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const newOpaqueRoot: OpaqueRoot = this.#reconciler.createContainer(
       container,
       TAG,
@@ -588,6 +622,7 @@ export default class QuisidoReconciler<
     instance.remove?.();
   }
 
+  // eslint-disable-next-line max-params
   public update(
     element: ReactNode,
     container: Root,

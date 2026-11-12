@@ -45,7 +45,7 @@ export default class ReportingTool<
 
   #clearLine(): void {
     // `clearLine` is only supported in TTY environments.
-    if (!this.#isTTY) {
+    if (!this.#stdout.isTTY) {
       return;
     }
 

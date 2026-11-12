@@ -8,9 +8,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "sh ./scripts/build.sh",
-    "start": "node ----experimental-strip-types ./scripts/start.ts",
-    "test": "sh ./scripts/test.sh",
+    "build": "bash ./scripts/build.sh",
+    "start": "bash ./scripts/start.sh",
+    "test": "bash ./scripts/test.sh",
     "authn": "npm --workspace=packages/authn start",
     "browserslist:update-db": "browserslist --update-db",
     "clean": "rimraf .cache .tests dist graphify-out && npm run clean --if-present --workspaces && rimraf node_modules",
@@ -23,10 +23,10 @@
     "knip": "knip",
     "playwright-mcp": "npx @playwright/mcp --caps devtools,vision --console-level warning --headless --isolated --sandbox --storage-state=.cache/playwright-mcp/storage-state.json",
     "publint": "quisido publint",
-    "publish": "node --experimental-strip-types ./scripts/publish.ts",
+    "publish": "bash ./scripts/publish.sh",
     "quisido": "npm --workspace=packages/quisido start",
     "saas": "npm --workspace=packages/saas start",
-    "update": "node --experimental-strip-types ./scripts/update.ts",
+    "update": "bash ./scripts/update.sh",
     "worker": "npm --workspace=packages/worker start"
   },
   "bugs": {

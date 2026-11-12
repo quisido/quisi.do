@@ -25,13 +25,13 @@ const mapSrcToCanvasImageSource = async (
   src: string,
 ): Promise<CanvasImageSource> => {
   const element: HTMLImageElement = HtmlImageElements.get(src);
-  await loadImage(element);
-  return window
-    .createImageBitmap(element)
-    .catch((err: unknown): CanvasImageSource => {
-      window.console.error('Failed to load image:', src, err);
-      return EMPTY_OFFSCREEN_CANVAS;
-    });
+  try {
+    await loadImage(element);
+    return await window.createImageBitmap(element);
+  } catch (err: unknown) {
+    window.console.error('Failed to load image:', src, err);
+    return EMPTY_OFFSCREEN_CANVAS;
+  }
 };
 
 const IMAGE_PRELOADER = new AsyncMap(mapSrcToCanvasImageSource);

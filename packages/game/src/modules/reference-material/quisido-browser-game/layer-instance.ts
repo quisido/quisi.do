@@ -174,9 +174,7 @@ export default class LayerInstance implements Instance<
     // This should never happen, so we emit an error for monitoring.
     if (typeof unsubscribe === 'undefined') {
       this.#handleError(
-        new Error('Container is not subscribed to instance', {
-          cause: instance,
-        }),
+        new Error('Layer is not subscribed to instance', { cause: instance }),
       );
       return;
     }
