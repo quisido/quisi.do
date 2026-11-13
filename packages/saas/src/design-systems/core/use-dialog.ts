@@ -28,8 +28,9 @@ export default function useDialog({
 
   const handleDismiss = (): void => {
     const dialog: HTMLDialogElement = validateNonNull(ref.current);
-    dialog.close();
+    // Re-enable the opener before close() restores focus to it.
     unsetInertSiblings(dialog);
+    dialog.close();
 
     if (onDismiss !== undefined) {
       onDismiss();
@@ -46,8 +47,8 @@ export default function useDialog({
     setInertSiblings(dialog);
 
     return (): void => {
-      dialog.close();
       unsetInertSiblings(dialog);
+      dialog.close();
     };
   }, [modal]);
 
