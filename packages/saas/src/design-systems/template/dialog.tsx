@@ -1,5 +1,4 @@
 import { type ReactElement } from 'react';
-import { FocusScope } from 'react-aria';
 import { type DialogProps } from '../core/dialog-props.js';
 import useDialog from '../core/use-dialog.js';
 import classes from './dialog.module.scss';
@@ -50,20 +49,18 @@ export default function Dialog({
       open={open}
       ref={ref}
     >
-      <FocusScope autoFocus={modal} contain={modal} restoreFocus>
-        <div>
-          <Heading id={headingId}>{heading}</Heading>
-          {children}
-          <Paragraph id={descriptionId}>{description}</Paragraph>
-        </div>
-        <button
-          className={classes['close-button']}
-          onClick={handleDismiss}
-          type="button"
-        >
-          Close
-        </button>
-      </FocusScope>
+      <div>
+        <Heading id={headingId}>{heading}</Heading>
+        {children}
+        <Paragraph id={descriptionId}>{description}</Paragraph>
+      </div>
+      <button
+        className={classes['close-button']}
+        onClick={handleDismiss}
+        type="button"
+      >
+        Close
+      </button>
     </dialog>
   );
 }

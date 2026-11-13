@@ -140,4 +140,33 @@ describe('Dialog', (): void => {
     await clickButton('Close');
     expect(handleDismiss).toHaveBeenCalledExactlyOnceWith();
   });
+
+  it('should restore focus when a modal dialog is dismissed', async (): Promise<void> => {
+    const { clickButton, getByName, rerender } = render(
+      <>
+        <button type="button">Open dialog</button>
+        <button type="button">Other action</button>
+      </>,
+    );
+    await clickButton('Open dialog');
+    expect(getByName('button', 'Open dialog')).toHaveFocus();
+
+    rerender(
+      <>
+        <button type="button">Open dialog</button>
+        <button type="button">Other action</button>
+        <Dialog
+          description="Modal description"
+          heading="Modal"
+          modal
+          onDismiss={noop}
+        >
+          Modal content
+        </Dialog>
+      </>,
+    );
+    await clickButton('Close');
+
+    expect(getByName('button', 'Open dialog')).toHaveFocus();
+  });
 });
