@@ -6,6 +6,21 @@ const CONFIG: VitestConfig = await defineVitestConfig({
       enabled: false,
     },
     environment: 'jsdom',
+    projects: [
+      {
+        test: {
+          exclude: ['./src/modules/reference-material/'],
+          name: 'Game',
+        },
+      },
+      {
+        test: {
+          include: ['./src/modules/reference-material/'],
+          name: 'Reconciler',
+        },
+      },
+    ],
+    setupFiles: ['./tests/setup-file.ts'],
   },
 });
 

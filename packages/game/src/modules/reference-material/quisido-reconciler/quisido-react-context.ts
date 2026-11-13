@@ -1,52 +1,32 @@
+import { type Context, createContext } from 'react';
 import { type ReactContext } from 'react-reconciler';
-import QuisidoReactConsumerType from './quisido-react-consumer-type.js';
 
-interface Options<T> {
-  readonly threadCount: number;
-  readonly typeOf: symbol;
+interface QuisidoReactContextOptions<T> {
+  readonly threadCount?: number | undefined;
+  readonly typeOf?: symbol | number | undefined;
   readonly value: T;
 }
 
-export default class QuisidoReactContext<T> implements ReactContext<T> {
-  #consumer: QuisidoReactConsumerType<T>;
-  #currentValue: T;
-  #currentValue2: T;
-  #threadCount: number;
-  #typeof: symbol | number;
+type QuisidoReactContextInstance<T> = Context<T> & ReactContext<T>;
 
-  public constructor({ threadCount, typeOf, value }: Options<T>) {
-    this.#consumer = new QuisidoReactConsumerType({
-      context: this,
-      typeOf,
-    });
-    this.#currentValue = value;
-    this.#currentValue2 = value;
-    this.#threadCount = threadCount;
-    this.#typeof = typeOf;
-  }
+type QuisidoReactContextConstructor = new <T>(
+  options: QuisidoReactContextOptions<T>,
+) => QuisidoReactContextInstance<T>;
 
-  public get $$typeof(): symbol | number {
-    return this.#typeof;
-  }
+const QuisidoReactContext: QuisidoReactContextConstructor =
+  function createQuisidoReactContext<T>({
+    threadCount = 0,
+    value,
+  }: QuisidoReactContextOptions<T>): QuisidoReactContextInstance<T> {
+    const context = createContext(value) as QuisidoReactContextInstance<T>;
+    Object.assign(context, { _threadCount: threadCount });
+    return context;
+  } as unknown as QuisidoReactContextConstructor;
 
-  public get _currentValue(): T {
-    return this.#currentValue;
-  }
+export type {
+  QuisidoReactContextConstructor,
+  QuisidoReactContextInstance,
+  QuisidoReactContextOptions,
+};
 
-  public get _currentValue2(): T {
-    return this.#currentValue2;
-  }
-
-  public get _threadCount(): number {
-    return this.#threadCount;
-  }
-
-  public get Consumer(): QuisidoReactConsumerType<T> {
-    return this.#consumer;
-  }
-
-  // Since React 19, the Context is its own Provider.
-  public get Provider(): this {
-    return this;
-  }
-}
+export default QuisidoReactContext;

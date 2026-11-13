@@ -58,12 +58,17 @@ export default class BrowserGame<State extends StringifiableRecord, Action> {
   };
 
   public start(): void {
+    if (this.#unsubscribe !== undefined) {
+      return;
+    }
+
     this.#unsubscribe = this.#store.onChange(this.#render);
     this.#render(this.#store.state);
   }
 
   public stop(): void {
     this.#unsubscribe?.();
+    this.#unsubscribe = undefined;
   }
 
   public toJSON(): Export<State> {

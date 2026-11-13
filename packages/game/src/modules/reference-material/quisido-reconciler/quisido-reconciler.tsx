@@ -351,7 +351,6 @@ export default class QuisidoReconciler<
 
       HostTransitionContext: new QuisidoReactContext({
         threadCount: 1,
-        typeOf: Symbol.for('@quisido/reconciler'),
         value: TransitionStatus.NotPendingTransition,
       }),
 
@@ -582,7 +581,11 @@ export default class QuisidoReconciler<
     }
 
     const reportError = (error: unknown): void => {
-      onError(error instanceof Error ? error : new Error(String(error)));
+      if (error instanceof Error) {
+        onError(error);
+      } else {
+        onError(new Error(String(error)));
+      }
     };
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

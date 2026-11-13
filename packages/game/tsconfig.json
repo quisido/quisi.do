@@ -21,6 +21,7 @@
   "include": [
     ".vscode/*.json",
     "src/",
+    "tests/",
     "types/",
     ".*.json",
     "*.json",
