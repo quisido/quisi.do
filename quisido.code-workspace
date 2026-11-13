@@ -17,6 +17,10 @@
       "path": "packages/authn",
     },
     {
+      "name": "⚙️ Authentication (legacy)",
+      "path": "packages/authn.bak",
+    },
+    {
       "name": "⚙️ Content Security Policy reporting endpoint",
       "path": "packages/csp",
     },

@@ -11,7 +11,7 @@
     "build": "bash ./scripts/build.sh",
     "start": "bash ./scripts/start.sh",
     "test": "bash ./scripts/test.sh",
-    "authn": "npm --workspace=packages/authn start",
+    "authn": "npm --workspace=packages/authn.bak start",
     "browserslist:update-db": "browserslist --update-db",
     "clean": "rimraf .cache .tests dist graphify-out && npm run clean --if-present --workspaces && rimraf node_modules",
     "cloudflare-utils": "npm --workspace=packages/cloudflare-utils start",
