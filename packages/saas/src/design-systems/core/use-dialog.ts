@@ -1,4 +1,4 @@
-import { type Ref, type RefObject, useLayoutEffect, useRef } from 'react';
+import { type Ref, type RefObject, useEffect, useRef } from 'react';
 import validateNonNull from '../../utils/validate-non-null.js';
 import { setInertSiblings, unsetInertSiblings } from './inert.js';
 import useId from './use-id.js';
@@ -36,12 +36,13 @@ export default function useDialog({
     }
   };
 
-  useLayoutEffect((): VoidFunction | undefined => {
+  useEffect((): VoidFunction | undefined => {
     if (!modal) {
       return;
     }
 
     const dialog: HTMLDialogElement = validateNonNull(ref.current);
+    // Let parent focus scopes register before showModal moves focus.
     dialog.showModal();
     setInertSiblings(dialog);
 
