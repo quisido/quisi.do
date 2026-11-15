@@ -36,13 +36,16 @@ export default function useDialog({
     }
   };
 
+  /**
+   * This cannot be a layouat effect, because focus scopes need to
+   * register before `showModal` moves focus.
+   */
   useEffect((): VoidFunction | undefined => {
     if (!modal) {
       return;
     }
 
     const dialog: HTMLDialogElement = validateNonNull(ref.current);
-    // Let parent focus scopes register before showModal moves focus.
     dialog.showModal();
     setInertSiblings(dialog);
 
