@@ -2,7 +2,10 @@ import type { RuleDefinition, RulesConfig } from "@eslint/core";
 
 type PluginRules = Record<string, RuleDefinition>;
 
-const toRulesConfig = (rulesConfig: RulesConfig, ruleId: string): RulesConfig => {
+const toRulesConfig = (
+  rulesConfig: RulesConfig,
+  ruleId: string,
+): RulesConfig => {
 
   // Auto-fix applies to `warn` without blocking if auto-fix fails.
   rulesConfig[ruleId] = "warn";
@@ -38,9 +41,6 @@ export const toFixable = (rules: PluginRules, prefix?: string): RulesConfig => {
 
   }
 
-  return [...fixableRules].reduce(
-    toRulesConfig,
-    {},
-  );
+  return [...fixableRules].reduce(toRulesConfig, {});
 
 };

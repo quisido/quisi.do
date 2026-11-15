@@ -5,7 +5,7 @@ import { cloudflareTest } from "@cloudflare/vitest-plugin";
 import { cpus } from "node:os";
 
 const CPU_COUNT: number = cpus().length;
-const REPORTERS: InlineConfig["reporters"] = [["agent", { "summary": true }]];
+const REPORTERS: InlineConfig["reporters"] = [["agent", { "summary": false }]];
 
 if (process.env["GITHUB_ACTIONS"] === "true") {
 
@@ -35,7 +35,7 @@ const CONFIG: UserConfig = defineConfig({
       "skipFull": true,
       "thresholds": { "100": true },
     },
-    "forceRerunTriggers": [...configDefaults.forceRerunTriggers, "src/**/*.ts"],
+    "forceRerunTriggers": [...configDefaults.forceRerunTriggers, "src/"],
     "include": ["app/**/*.test.ts"],
     "isolate": false,
     "maxWorkers": CPU_COUNT,

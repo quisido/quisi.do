@@ -9,4 +9,7 @@ export const DISABLED_BUILTIN_RULES: RulesConfig = {
 
   // Replaced by `@stylistic/indent`.
   "indent-legacy": "off",
+
+  // Replaced by `@stylistic/max-len`.
+  "max-len": "off",
 };

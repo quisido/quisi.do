@@ -29,7 +29,11 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "@stylistic/padded-blocks": ["warn", "never"],
       "no-global-assign": "error",
       "no-shadow-restricted-names": "error",
-      // This is safe due to `no-global-assign` and `no-shadow-restricted-names`.
+
+      /**
+       * This is safe due to `no-global-assign` and
+       * `no-shadow-restricted-names`.
+       */
       "no-undefined": "off",
     },
   },

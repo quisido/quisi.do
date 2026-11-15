@@ -129,10 +129,24 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       ...DISABLED_TYPESCRIPT_RULES,
       "@stylistic/comma-dangle": ["error", "always-multiline"],
       "@stylistic/indent": ["error", 2],
+      "@stylistic/max-len": ["error", {
+        "code": 80,
+        "ignoreComments": false,
+        "ignorePattern": "^\\s*\\/\\/ @ts-expect-error[^\d\w]",
+        "ignoreRegExpLiterals": true,
+        "ignoreStrings": true,
+        "ignoreTrailingComments": false,
+        "ignoreUrls": true,
+        "ignoreTemplateLiterals": true,
+        "tabWidth": 2,
+      }],
       "no-global-assign": "error",
       "no-shadow-restricted-names": "error",
 
-      // This is safe due to `no-global-assign` and `no-shadow-restricted-names`.
+      /**
+       * This is safe due to `no-global-assign` and
+       * `no-shadow-restricted-names`.
+       */
       "no-undefined": "off",
 
       "one-var": "off",

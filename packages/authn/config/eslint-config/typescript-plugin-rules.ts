@@ -13,7 +13,7 @@ const reduceTypeScriptRulesToPluginRules = (rules: PluginRules, [
     ...rule,
     create (context: RuleContext): RuleVisitor {
 
-      // @ts-expect-error `value.create` uses the wrong parameters and return type.
+      // @ts-expect-error: `value.create` uses the wrong parameters and return type.
       return rule.create(context);
 
     },
@@ -23,7 +23,5 @@ const reduceTypeScriptRulesToPluginRules = (rules: PluginRules, [
 
 };
 
-export const TYPESCRIPT_PLUGIN_RULES: PluginRules = Object.entries(tsPlugin.rules).reduce(
-  reduceTypeScriptRulesToPluginRules,
-  {},
-);
+export const TYPESCRIPT_PLUGIN_RULES: PluginRules =
+  Object.entries(tsPlugin.rules).reduce(reduceTypeScriptRulesToPluginRules, {});
