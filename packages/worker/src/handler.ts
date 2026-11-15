@@ -325,7 +325,7 @@ export default class Handler<
         startTime,
       });
 
-      // https://github.com/quisido/quisi.do/issues/273
+      /** @see https://github.com/quisido/quisi.do/issues/273 */
       this.expense(Pricing.D1RowsRead, rowsRead);
       this.expense(Pricing.D1RowsWritten, rowsWritten);
 
@@ -392,7 +392,7 @@ export default class Handler<
         startTime,
       });
 
-      // https://github.com/quisido/quisi.do/issues/273
+      /** @see https://github.com/quisido/quisi.do/issues/273 */
       this.expense(Pricing.D1RowsRead, rowsRead);
       this.expense(Pricing.D1RowsWritten, rowsWritten);
 

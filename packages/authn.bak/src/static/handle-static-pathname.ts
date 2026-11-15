@@ -7,10 +7,7 @@ import { StaticPathname } from './static-pathname.js';
 /**
  * You can only construct a `Response` during a request, so we must keep these
  * parameters deconstructed for now.
- *
- * https://dev.to/kleeut/
- *   cloudflare-workers-some-functionality-can-only-
- *   be-performed-while-handling-a-request-3bne
+ * @see https://dev.to/kleeut/cloudflare-workers-some-functionality-can-only-be-performed-while-handling-a-request-3bne
  */
 
 export default function handleStaticPathname(

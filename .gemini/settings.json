@@ -2,8 +2,7 @@
   "mcp": {
     "allowed": [
       "chrome-devtools",
-      "cloudflare",
-      "context7",
+      "cloudflare-api",
       "github",
       "playwright",
       "sentry"
@@ -14,13 +13,9 @@
       "args": ["chrome-devtools-mcp"],
       "command": "npx"
     },
-    "cloudflare": {
+    "cloudflare-api": {
       "type": "http",
-      "url": "https://mcp.cloudflare.com/sse"
-    },
-    "context7": {
-      "type": "http",
-      "url": "https://mcp.context7.com/mcp"
+      "url": "https://mcp.cloudflare.com/mcp"
     },
     "github": {
       "type": "http",

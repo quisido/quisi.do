@@ -1,0 +1,6 @@
+/.wrangler/
+/coverage/
+/node_modules/
+/.dev.vars
+/npm-debug.log
+/worker-configuration.d.ts

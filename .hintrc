@@ -1,6 +1,6 @@
 /**
  * Webhint does not support workspaces; the configuration file must be in root.
- * https://github.com/webhintio/hint/issues/3651
+ * @see https://github.com/webhintio/hint/issues/3651
  */
 {
   // "$schema": "https://raw.githubusercontent.com/webhintio/hint/main/packages/hint/src/lib/config/config-schema.json",
@@ -37,14 +37,14 @@
     "axe/aria": "off",
     "axe/color": [
       "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/color/
+      /** @see https://webhint.io/docs/user-guide/hints/hint-axe/color/ */
       [
         "link-in-text-block"
       ]
     ],
     "axe/forms": [
       "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/forms/#additional-rules-off-by-default
+      /** @see https://webhint.io/docs/user-guide/hints/hint-axe/forms/#additional-rules-off-by-default */
       [
         "label-title-only"
       ]
@@ -53,7 +53,7 @@
     "axe/language": "error",
     "axe/name-role-value": [
       "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/name-role-value/#additional-rules-off-by-default
+      /** @see https://webhint.io/docs/user-guide/hints/hint-axe/name-role-value/#additional-rules-off-by-default */
       [
         "empty-heading"
       ]
@@ -61,7 +61,7 @@
     "axe/parsing": "error",
     "axe/semantics": [
       "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/semantics/#additional-rules-off-by-default
+      /** @see https://webhint.io/docs/user-guide/hints/hint-axe/semantics/#additional-rules-off-by-default */
       [
         "heading-order",
         "label-content-name-mismatch",
@@ -80,7 +80,7 @@
     ],
     "axe/sensory-and-visual-cues": [
       "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/sensory-and-visual-cues/#additional-rules-off-by-default
+      /** @see https://webhint.io/docs/user-guide/hints/hint-axe/sensory-and-visual-cues/#additional-rules-off-by-default */
       [
         "meta-viewport",
         "meta-viewport-large"
@@ -88,7 +88,7 @@
     ],
     "axe/structure": [
       "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/structure/#additional-rules-off-by-default
+      /** @see https://webhint.io/docs/user-guide/hints/hint-axe/structure/#additional-rules-off-by-default */
       [
         "css-orientation-lock",
         "frame-tested",
@@ -97,7 +97,7 @@
     ],
     "axe/tables": [
       "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/tables/#additional-rules-off-by-default
+      /** @see https://webhint.io/docs/user-guide/hints/hint-axe/tables/#additional-rules-off-by-default */
       [
         "scope-attr-valid",
         "table-duplicate-name",
@@ -107,7 +107,7 @@
     ],
     "axe/text-alternatives": [
       "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/text-alternatives/#additional-rules-off-by-default
+      /** @see https://webhint.io/docs/user-guide/hints/hint-axe/text-alternatives/#additional-rules-off-by-default */
       [
         "frame-title-unique",
         "image-redundant-alt",
@@ -116,7 +116,7 @@
     ],
     "axe/time-and-media": [
       "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/time-and-media/#additional-rules-off-by-default
+      /** @see https://webhint.io/docs/user-guide/hints/hint-axe/time-and-media/#additional-rules-off-by-default */
       [
         "no-autoplay-audio"
       ]
@@ -165,7 +165,7 @@
     "meta-charset-utf-8": "error",
     /**
      * Webhint incorrectly flags multiple theme colors.
-     * https://github.com/webhintio/hint/issues/6001
+     * @see https://github.com/webhintio/hint/issues/6001
      */
     "meta-theme-color": "off",
     "meta-viewport": "error",

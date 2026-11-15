@@ -3,7 +3,7 @@
 
   "analytics_engine_datasets": [
     { "binding": "PRIVATE_DATASET", "dataset": "AUTHN_PRIVATE_DEV" },
-    { "binding": "PUBLIC_DATASET", "dataset": "AUTHN_PUBLIC_DEV" }
+    { "binding": "PUBLIC_DATASET", "dataset": "AUTHN_PUBLIC_DEV" },
   ],
 
   "compatibility_date": "2025-05-05",
@@ -12,39 +12,44 @@
     {
       "binding": "AUTHN_DB",
       "database_id": "AUTHN",
-      "database_name": "authn-dev"
+      "database_name": "authn-dev",
     }
   ],
 
   "dev": {
     "local_protocol": "https",
-    "port": 5882 // parseInt('authn', 36) % 9999
+    "port": 5882, // parseInt('authn', 36) % 9999
   },
 
   "env": {
     "development": {
       "secrets": {
-        "required": ["JWT_ENCRYPTION_SECRET", "PATREON_OAUTH_CLIENT_SECRET", "ANALYTICS_ID", "ANALYTICS_SECRET"]
+        "required": [
+          "ANALYTICS_ID",
+          "ANALYTICS_SECRET",
+          "JWT_ENCRYPTION_SECRET",
+          "PATREON_OAUTH_CLIENT_SECRET",
+        ],
       },
       "vars": {
         "ENVIRONMENT_NAME": "development",
+        "JWT_AUDIENCE": "urn:quisi.do:saas:development",
         "JWT_ISSUER": "urn:quisi.do:authn:development",
-        "JWT_AUDIENCE": "urn:quisi.do:saas:development"
       }
     },
 
     "production": {
       "analytics_engine_datasets": [
         { "binding": "PRIVATE_DATASET", "dataset": "AUTHN_PRIVATE" },
-        { "binding": "PUBLIC_DATASET", "dataset": "AUTHN_PUBLIC" }
+        { "binding": "PUBLIC_DATASET", "dataset": "AUTHN_PUBLIC" },
       ],
       "d1_databases": [
         {
           "binding": "AUTHN_DB",
           "database_id": "d0e825fc-b58d-49b3-a86c-a9d967278d80",
           "database_name": "authn",
-          "preview_database_id": "d546119e-036c-4c3d-a684-953418657a8d"
-        }
+          "preview_database_id": "d546119e-036c-4c3d-a684-953418657a8d",
+        },
       ],
       "kv_namespaces": [
         {
@@ -123,9 +128,17 @@
 
   "observability": {
     "enabled": true,
+    "issues": {
+      "enabled": true,
+    },
     "logs": {
-      "enabled": true
-    }
+      "enabled": true,
+      "persist": true,
+    },
+    "traces": {
+      "enabled": true,
+      "persist": true,
+    },
   },
 
   "placement": {

@@ -12,7 +12,7 @@
     /*
     [
       "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default
+      /** @see https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default */
       {
         "accesskeys": "error",
         "focus-order-semantics": "error",

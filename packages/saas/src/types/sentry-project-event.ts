@@ -1,6 +1,6 @@
 import { type Context, type Contexts as SentryContexts } from '@sentry/core';
 
-// https://docs.sentry.io/api/events/list-a-projects-events/
+/** @see https://docs.sentry.io/api/events/list-a-projects-events/ */
 
 /*
 interface FetchInvalidHttpCodeData {

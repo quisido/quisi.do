@@ -25,6 +25,9 @@ prevent_idle_sleep = true
 [feedback]
 enabled = false
 
+[mcp_servers.cloudflare]
+url = "https://mcp.cloudflare.com/mcp"
+
 [mcp_servers.mdn]
 url = "https://mcp.mdn.mozilla.net/"
 
