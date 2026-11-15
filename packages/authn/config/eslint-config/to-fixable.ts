@@ -4,7 +4,8 @@ type PluginRules = Record<string, RuleDefinition>;
 
 const toRulesConfig = (rulesConfig: RulesConfig, ruleId: string): RulesConfig => {
 
-  rulesConfig[ruleId] = "error";
+  // Auto-fix applies to `warn` without blocking if auto-fix fails.
+  rulesConfig[ruleId] = "warn";
 
   return rulesConfig;
 
@@ -16,7 +17,7 @@ export const toFixable = (rules: PluginRules, prefix?: string): RulesConfig => {
 
   for (const [
     ruleId,
-    { "meta": { deprecated = false, fixable = false } = {} }
+    { "meta": { deprecated = false, fixable = false } = {} },
   ] of Object.entries(rules)) {
 
     if (deprecated || !fixable) {
@@ -39,7 +40,7 @@ export const toFixable = (rules: PluginRules, prefix?: string): RulesConfig => {
 
   return [...fixableRules].reduce(
     toRulesConfig,
-    {}
+    {},
   );
 
 };

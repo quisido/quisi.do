@@ -9,9 +9,9 @@ export const TYPESCRIPT_LANGUAGE_OPTIONS: LanguageOptions = {
     "allowReserved": false,
     "ecmaVersion": "latest",
     "projectService": {
-      "allowDefaultProject": []
+      "allowDefaultProject": [],
     },
-    "sourceType": "module"
+    "sourceType": "module",
   },
-  "sourceType": "module"
+  "sourceType": "module",
 };

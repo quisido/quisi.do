@@ -6,5 +6,5 @@ export const TYPESCRIPT_PLUGIN: Plugin = {
   "name": "@typescript-eslint",
   ...tsPlugin,
   "configs": {},
-  "rules": TYPESCRIPT_PLUGIN_RULES
+  "rules": TYPESCRIPT_PLUGIN_RULES,
 };

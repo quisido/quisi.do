@@ -12,6 +12,12 @@ export const DISABLED_TYPESCRIPT_RULES: RulesConfig = {
   "default-case": "off",
 
   /**
+   * TypeScript requirement: Property 'X' comes from an index signature, so
+   * it must be accessed with ['X'].
+   */
+  "dot-notation": "off",
+
+  /**
    * ESLint incorrectly flags shadowing in TypeScript: (1) `enum`s and (2)
    * functions with `this` inside other functions with `this`.
    */
@@ -24,5 +30,5 @@ export const DISABLED_TYPESCRIPT_RULES: RulesConfig = {
    * Until this rule can be disabled for exports, it is incompatible with
    * `isolatedDeclarations`, e.g. `export const { property } = object;`.
    */
-  "prefer-destructuring": "off"
+  "prefer-destructuring": "off",
 };

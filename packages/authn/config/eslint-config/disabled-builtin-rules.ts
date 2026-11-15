@@ -8,5 +8,5 @@ export const DISABLED_BUILTIN_RULES: RulesConfig = {
   "indent": "off",
 
   // Replaced by `@stylistic/indent`.
-  "indent-legacy": "off"
+  "indent-legacy": "off",
 };

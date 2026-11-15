@@ -7,7 +7,7 @@ describe("Who Am I?", (): void => {
 
     it("supports unknown origins", async (): Promise<void> => {
 
-      const response = await exports.default.fetch("/whoami/", { "method": "OPTIONS" });
+      const response = await exports.default.fetch("https://localhost:3000/whoami/", { "method": "OPTIONS" });
       expect(response.status).toBe(200);
       expect(response.headers.get("access-control-allow-origin")).toBe("*");
 
@@ -15,7 +15,7 @@ describe("Who Am I?", (): void => {
 
     it("supports insecure localhost", async (): Promise<void> => {
 
-      const response = await exports.default.fetch("/whoami/", { "headers": { "Origin": "http://localhost:3000" }, "method": "OPTIONS" });
+      const response = await exports.default.fetch("http://localhost:3000/whoami/", { "headers": { "Origin": "http://localhost:3000" }, "method": "OPTIONS" });
       expect(response.status).toBe(200);
       expect(response.headers.get("access-control-allow-origin")).toBe("http://localhost:3000");
 
@@ -23,7 +23,7 @@ describe("Who Am I?", (): void => {
 
     it("supports secure localhost", async (): Promise<void> => {
 
-      const response = await exports.default.fetch("/whoami/", { "headers": { "Origin": "https://localhost:3000" }, "method": "OPTIONS" });
+      const response = await exports.default.fetch("https://localhost:3000/whoami/", { "headers": { "Origin": "https://localhost:3000" }, "method": "OPTIONS" });
       expect(response.status).toBe(200);
       expect(response.headers.get("access-control-allow-origin")).toBe("https://localhost:3000");
 
@@ -31,7 +31,7 @@ describe("Who Am I?", (): void => {
 
     it("falls back to the cookie domain var", async (): Promise<void> => {
 
-      const response = await exports.default.fetch("/whoami/", { "headers": { "Origin": "https://unknown.origin" }, "method": "OPTIONS" });
+      const response = await exports.default.fetch("https://unknown.origin/whoami/", { "headers": { "Origin": "https://unknown.origin" }, "method": "OPTIONS" });
       expect(response.status).toBe(200);
       expect(response.headers.get("access-control-allow-origin")).toBe("https://cookie.domain");
 
@@ -41,7 +41,7 @@ describe("Who Am I?", (): void => {
 
   it("identifies unauthenticated users", async (): Promise<void> => {
 
-    const response = await exports.default.fetch("/whoami/");
+    const response = await exports.default.fetch("https://localhost:3000/whoami/");
     expect(response.status).toBe(200);
     expect(await response.json()).toStrictEqual({ "code": 1 });
 

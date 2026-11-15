@@ -2,7 +2,7 @@
 
 const EXPORTED_HANDLER: Pick<ExportedHandler<Env>, 'fetch'> = {
 	async fetch(request, env, ctx): Promise<Response> {
-		return new Response("Hello World!");
+		return new Response(JSON.stringify({code: 1}), { "headers": { "Content-Type": "application/json" } });
 	},
 };
 

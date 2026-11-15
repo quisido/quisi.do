@@ -97,7 +97,7 @@
     "*.jsonc",
     "*.ts",
     "app/",
+    "config/",
     "src/",
-    "test/",
   ],
 }
