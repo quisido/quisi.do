@@ -1,8 +1,8 @@
+import { cpus } from "node:os";
 import { configDefaults, defineConfig } from "vitest/config";
 import type { InlineConfig } from "vitest/node";
 import type { UserConfig } from "vite";
 import { cloudflareTest } from "@cloudflare/vitest-plugin";
-import { cpus } from "node:os";
 
 const CPU_COUNT: number = cpus().length;
 const REPORTERS: InlineConfig["reporters"] = [["agent", { "summary": false }]];

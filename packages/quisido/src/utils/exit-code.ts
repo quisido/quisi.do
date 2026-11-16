@@ -1,5 +1,3 @@
-/* eslint-disable no-magic-numbers */
-
 export enum ExitCode {
   AccessViolation = 3221226505, // 0xC0000005
   HeapCorruption = 3221226356,

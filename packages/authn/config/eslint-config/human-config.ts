@@ -1,17 +1,24 @@
 import * as jsoncParser from "jsonc-eslint-parser";
 import type { ConfigObject } from "eslint/config";
-import { DISABLED_BUILTIN_RULES } from "./disabled-builtin-rules.js";
-import { DISABLED_TYPESCRIPT_RULES } from "./disabled-typescript-rules.js";
-import { FIXABLE_BUILTIN_RULES } from "./fixable-builtin-rules.js";
-import { LINTER_OPTIONS } from "./linter-options.js";
 import type { RulesConfig } from "@eslint/core";
-import { TYPESCRIPT_LANGUAGE_OPTIONS } from "./typescript-language-option.js";
-import { TYPESCRIPT_PLUGIN } from "./typescript-plugin.js";
-import { TYPESCRIPT_PLUGIN_RULES } from "./typescript-plugin-rules.js";
+import ecmaScriptSyntaxPlugin from "eslint-plugin-es-x";
+import eslintCommentsPlugin from "@eslint-community/eslint-plugin-eslint-comments";
+import { importX } from "eslint-plugin-import-x";
 import jsonPlugin from "@eslint/json";
 import jsoncPlugin from "eslint-plugin-jsonc";
+import promisePlugin from "eslint-plugin-promise";
+import securityPlugin from "eslint-plugin-security";
 import stylisticPlugin from "@stylistic/eslint-plugin";
+import { TYPESCRIPT_PLUGIN_RULES } from "./typescript-plugin-rules.js";
+import { TYPESCRIPT_PLUGIN } from "./typescript-plugin.js";
+import { TYPESCRIPT_LANGUAGE_OPTIONS } from "./typescript-language-option.js";
+import { LINTER_OPTIONS } from "./linter-options.js";
+import { FIXABLE_BUILTIN_RULES } from "./fixable-builtin-rules.js";
+import { ES_X_NONSTANDARD_RULES_CONFIG } from "./es-x-nonstandard-rules-config.js";
+import { DISABLED_TYPESCRIPT_RULES } from "./disabled-typescript-rules.js";
+import { DISABLED_BUILTIN_RULES } from "./disabled-builtin-rules.js";
 import { toFixable } from "./to-fixable.js";
+import { TYPESCRIPT_IMPORT_RESOLVER } from "./typescript-import-resolver.js";
 
 const JSON_RULES: RulesConfig = {
   ...toFixable(jsonPlugin.rules, "json"),
@@ -118,21 +125,38 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
     "linterOptions": LINTER_OPTIONS,
     "name": "@quisido/ts",
     "plugins": {
+      ...promisePlugin.configs["flat/recommended"].plugins,
+      ...securityPlugin.configs.recommended.plugins,
       "@stylistic": stylisticPlugin,
       "@typescript-eslint": TYPESCRIPT_PLUGIN,
+      "es-x": ecmaScriptSyntaxPlugin,
+      "eslint-comments": eslintCommentsPlugin,
+      "import-x": importX,
     },
     "rules": {
+      // Default rules
+      ...ES_X_NONSTANDARD_RULES_CONFIG,
+      ...securityPlugin.configs.recommended.rules,
+
+      // Fixable rules
       ...FIXABLE_BUILTIN_RULES,
+      ...toFixable(importX.rules, "import-x"),
+      ...toFixable(promisePlugin.rules, "promise"),
+      ...toFixable(securityPlugin.rules, "security"),
       ...toFixable(stylisticPlugin.rules, "@stylistic"),
       ...toFixable(TYPESCRIPT_PLUGIN_RULES, "@typescript-eslint"),
+
+      // Superceded rules
       ...DISABLED_BUILTIN_RULES,
       ...DISABLED_TYPESCRIPT_RULES,
+
+      // Custom rules
       "@stylistic/comma-dangle": ["error", "always-multiline"],
       "@stylistic/indent": ["error", 2],
       "@stylistic/max-len": ["error", {
         "code": 80,
         "ignoreComments": false,
-        "ignorePattern": "^\\s*\\/\\/ @ts-expect-error[^\d\w]",
+        "ignorePattern": "^\\s*\\/\\/ (?:@ts-expect-error|eslint-disable-next-line (?:@[\\d\\w][-\\d\\w]*\\/)?[\\d\\w][-\\d\\w]*)[^-\\d\\w]",
         "ignoreRegExpLiterals": true,
         "ignoreStrings": true,
         "ignoreTrailingComments": false,
@@ -140,6 +164,39 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
         "ignoreTemplateLiterals": true,
         "tabWidth": 2,
       }],
+      "eslint-comments/no-aggregating-enable": "error",
+      "eslint-comments/no-duplicate-disable": "error",
+      "eslint-comments/no-unlimited-disable": "error",
+      "eslint-comments/no-unused-disable": "error",
+      "eslint-comments/no-unused-enable": "error",
+      "eslint-comments/require-description": ["error", { "ignore": [] }],
+      "import-x/avoid-barrel-files": "error",
+      // Some dependencies are vended as namespaces.
+      "import-x/avoid-namespace-import": "off",
+      "import-x/avoid-re-export-all": "error",
+      "import-x/default": "error",
+      "import-x/export": "error",
+      "import-x/group-exports": "error",
+      "import-x/named": "error",
+      "import-x/no-absolute-path": "error",
+      "import-x/no-amd": "error",
+      "import-x/no-anonymous-default-export": "error",
+      "import-x/no-commonjs": "error",
+      "import-x/no-cycle": "error",
+      "import-x/no-deprecated": "warn",
+      "import-x/no-dynamic-require": "error",
+      "import-x/no-extraneous-dependencies": "error",
+      "import-x/no-import-module-exports": "error",
+      "import-x/no-mutable-exports": "error",
+      "import-x/no-named-as-default": "error",
+      "import-x/no-named-as-default-member": "error",
+      "import-x/no-nodejs-modules": "warn",
+      "import-x/no-relative-packages": "error",
+      "import-x/no-self-import": "error",
+      "import-x/no-unused-modules": "error",
+      "import-x/no-useless-path-segments": "error",
+      "import-x/no-webpack-loader-syntax": "error",
+      "import-x/unambiguous": "error",
       "no-global-assign": "error",
       "no-shadow-restricted-names": "error",
 
@@ -148,8 +205,22 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
        * `no-shadow-restricted-names`.
        */
       "no-undefined": "off",
-
       "one-var": "off",
+      "promise/catch-or-return": "error",
+      "promise/no-return-wrap": "error",
+      "promise/prefer-await-to-callbacks": "error",
+      "promise/prefer-await-to-then": "error",
+      "promise/prefer-catch": "error",
+      "promise/spec-only": "error",
+      "promise/valid-params": "error",
+    },
+
+    "settings": {
+      "es-x": {
+        "aggressive": true,
+      },
+      "import-x/extensions": [".js", ".json", ".jsonc"],
+      "import-x/resolver-next": [TYPESCRIPT_IMPORT_RESOLVER],
     },
   },
 ];

@@ -12,4 +12,7 @@ export const DISABLED_BUILTIN_RULES: RulesConfig = {
 
   // Replaced by `@stylistic/max-len`.
   "max-len": "off",
+
+  // Replaced by `import-x'.
+  "sort-imports": "off",
 };

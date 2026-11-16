@@ -1,6 +1,6 @@
 import type { Plugin } from "@eslint/core";
-import { TYPESCRIPT_PLUGIN_RULES } from "./typescript-plugin-rules.js";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
+import { TYPESCRIPT_PLUGIN_RULES } from "./typescript-plugin-rules.js";
 
 export const TYPESCRIPT_PLUGIN: Plugin = {
   "name": "@typescript-eslint",

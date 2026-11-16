@@ -6,7 +6,7 @@
  */
 
 declare module "@stylistic/eslint-plugin" {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports -- import() is required for modules aren't included in their `package.json`'s `exports`.
   const plugin: typeof import("../../../node_modules/@stylistic/eslint-plugin/dist/dts/index.d.mts")["default"];
   export default plugin;
 }

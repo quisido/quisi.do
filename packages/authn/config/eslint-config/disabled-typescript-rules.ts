@@ -17,6 +17,12 @@ export const DISABLED_TYPESCRIPT_RULES: RulesConfig = {
    */
   "dot-notation": "off",
 
+  // `import-x/extensions` throws an error when importing files with `.d.ts`.
+  "import-x/extensions": "off",
+
+  // Some dependencies are vended as namespaces.
+  "import-x/no-namespace": "off",
+
   /**
    * ESLint incorrectly flags shadowing in TypeScript: (1) `enum`s and (2)
    * functions with `this` inside other functions with `this`.
