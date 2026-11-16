@@ -30,13 +30,17 @@ const CONFIG: UserConfig = defineConfig({
   "test": {
     "coverage": {
       "enabled": true,
-      "exclude": ["node_modules/**", "worker-configuration.d.ts"],
+      "exclude": [
+        "coverage/**",
+        "node_modules/**",
+        "worker-configuration.d.ts",
+      ],
       "include": ["**/*.ts"],
       "skipFull": true,
       "thresholds": { "100": true },
     },
     "forceRerunTriggers": [...configDefaults.forceRerunTriggers, "src/"],
-    "include": ["app/**/*.test.ts"],
+    "include": ["app/**/*.test.ts", "*.test.ts"],
     "isolate": false,
     "maxWorkers": CPU_COUNT,
     "mockReset": true,
