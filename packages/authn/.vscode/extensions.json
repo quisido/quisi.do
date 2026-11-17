@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "alexcvzz.vscode-sqlite",
+    "dbaeumer.vscode-eslint",
+    "kravets.vscode-publint",
+    "vitest.explorer"
+  ]
+}
