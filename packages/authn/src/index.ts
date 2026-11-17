@@ -12,11 +12,10 @@ const getAllowedOrigin = (
 	return isLocalhostOrigin(origin) ? origin : `https://${cookieDomain}`;
 };
 
-const EXPORTED_HANDLER: Pick<ExportedHandler<Env>, "fetch"> = {
-	async fetch(
+export default {
+	fetch(
 		request: Request,
 		env: Env,
-		_ctx: ExecutionContext,
 	): Promise<Response> {
 		const allowedOrigin: string = getAllowedOrigin(
 			request.headers.get("Origin"),
@@ -26,13 +25,11 @@ const EXPORTED_HANDLER: Pick<ExportedHandler<Env>, "fetch"> = {
 		const body: string | null =
 			request.method === "OPTIONS" ? null : JSON.stringify({ code: 1 });
 
-		return new Response(body, {
+		return Promise.resolve(new Response(body, {
 			headers: {
 				"access-control-allow-origin": allowedOrigin,
 				"content-type": "application/json",
 			},
-		});
+		}));
 	},
 };
-
-export default EXPORTED_HANDLER;

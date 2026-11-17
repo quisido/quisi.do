@@ -19,6 +19,7 @@ import { DISABLED_TYPESCRIPT_RULES } from "./disabled-typescript-rules.js";
 import { DISABLED_BUILTIN_RULES } from "./disabled-builtin-rules.js";
 import { toFixable } from "./to-fixable.js";
 import { TYPESCRIPT_IMPORT_RESOLVER } from "./typescript-import-resolver.js";
+import { STRICT_TYPE_CHECKED_RULES_CONFIG } from "./strict-type-checked-rules-config.js";
 
 const JSON_RULES: RulesConfig = {
   ...toFixable(jsonPlugin.rules, "json"),
@@ -137,6 +138,7 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       // Default rules
       ...ES_X_NONSTANDARD_RULES_CONFIG,
       ...securityPlugin.configs.recommended.rules,
+      ...STRICT_TYPE_CHECKED_RULES_CONFIG,
 
       // Fixable rules
       ...FIXABLE_BUILTIN_RULES,
@@ -164,6 +166,33 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
         "ignoreTemplateLiterals": true,
         "tabWidth": 2,
       }],
+      "@typescript-eslint/consistent-type-assertions": ["error", { "assertionStyle": "never" }],
+
+      /**
+       * The ESLint rule is incorrect here when it throws "Explicit undefined is
+       * unnecessary on an optional parameter." The rule does not allow for
+       * `f(x?: X | undefined)` to be called with `f(undefined)`.
+       */
+      "@typescript-eslint/no-duplicate-type-constituents": [
+        "error",
+        { "ignoreUnions": true },
+      ],
+      "@typescript-eslint/no-invalid-this": "error",
+      "@typescript-eslint/no-shadow": "error",
+      "@typescript-eslint/no-unsafe-type-assertion": "error",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "args": "all",
+          "argsIgnorePattern": "^_",
+          "caughtErrors": "all",
+          "caughtErrorsIgnorePattern": "^_",
+          "ignoreRestSiblings": false,
+        },
+      ],
+      "@typescript-eslint/prefer-readonly": "error",
+      "@typescript-eslint/strict-boolean-expressions": "error",
+      "@typescript-eslint/switch-exhaustiveness-check": "error",
       "eslint-comments/no-aggregating-enable": "error",
       "eslint-comments/no-duplicate-disable": "error",
       "eslint-comments/no-unlimited-disable": "error",
@@ -205,6 +234,15 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
        * `no-shadow-restricted-names`.
        */
       "no-undefined": "off",
+      "no-use-before-define": ["error", {
+        "allowNamedExports": false,
+        "classes": true,
+        "enums": true,
+        "ignoreTypeReferences": true,
+        "functions": true,
+        "typedefs": false,
+        "variables": true,
+      }],
       "one-var": "off",
       "promise/catch-or-return": "error",
       "promise/no-return-wrap": "error",

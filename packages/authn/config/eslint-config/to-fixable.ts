@@ -20,10 +20,10 @@ export const toFixable = (rules: PluginRules, prefix?: string): RulesConfig => {
 
   for (const [
     ruleId,
-    { "meta": { deprecated = false, fixable = false } = {} },
+    { "meta": { deprecated = false, fixable } = {} },
   ] of Object.entries(rules)) {
 
-    if (deprecated || !fixable) {
+    if (deprecated !== false || fixable === undefined) {
 
       continue;
 

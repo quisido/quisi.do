@@ -1,5 +1,6 @@
+// eslint-disable-next-line import-x/no-nodejs-modules -- `@cloudflare/vitest-plugin` already depends on `node:os`.
 import { cpus } from "node:os";
-import { configDefaults, defineConfig } from "vitest/config";
+import { defineConfig } from "vitest/config";
 import type { InlineConfig } from "vitest/node";
 import type { UserConfig } from "vite";
 import { cloudflareTest } from "@cloudflare/vitest-plugin";
@@ -16,14 +17,9 @@ if (process.env["GITHUB_ACTIONS"] === "true") {
 const CONFIG: UserConfig = defineConfig({
   "plugins": [
     cloudflareTest({
-      "miniflare": {
-        "bindings": {
-          "COOKIE_DOMAIN": "cookie.domain",
-        },
-      },
       "wrangler": {
         "configPath": "./wrangler.jsonc",
-        "environment": "development",
+        "environment": "test",
       },
     }),
   ],
@@ -39,7 +35,7 @@ const CONFIG: UserConfig = defineConfig({
       "skipFull": true,
       "thresholds": { "100": true },
     },
-    "forceRerunTriggers": [...configDefaults.forceRerunTriggers, "src/"],
+    "forceRerunTriggers": ["config/", "src/", "package.json", "vitest.config.ts"],
     "include": ["app/**/*.test.ts", "*.test.ts"],
     "isolate": false,
     "maxWorkers": CPU_COUNT,

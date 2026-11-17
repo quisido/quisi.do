@@ -6,7 +6,7 @@
     { "binding": "PUBLIC_DATASET", "dataset": "AUTHN_PUBLIC_DEV" },
   ],
 
-  "compatibility_date": "2025-05-05",
+  "compatibility_date": "2026-11-14",
 
   "d1_databases": [
     {

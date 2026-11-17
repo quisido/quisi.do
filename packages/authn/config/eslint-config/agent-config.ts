@@ -13,6 +13,7 @@ import { LINTER_OPTIONS } from "./linter-options.js";
 import { TYPESCRIPT_LANGUAGE_OPTIONS } from "./typescript-language-option.js";
 import { TYPESCRIPT_PLUGIN } from "./typescript-plugin.js";
 import { TYPESCRIPT_IMPORT_RESOLVER } from "./typescript-import-resolver.js";
+import { STRICT_TYPE_CHECKED_RULES_CONFIG } from "./strict-type-checked-rules-config.js";
 
 /**
  * The "agent config" is an ESLint configuration for files owned by coding
@@ -41,6 +42,7 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       // Default rules
       ...ES_X_NONSTANDARD_RULES_CONFIG,
       ...securityPlugin.configs.recommended.rules,
+      ...STRICT_TYPE_CHECKED_RULES_CONFIG,
 
       // Superceded rules
       ...DISABLED_BUILTIN_RULES,
@@ -48,8 +50,22 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
 
       // Custom rules
       "@stylistic/padded-blocks": ["warn", "never"],
-      "@typescript-eslint/no-floating-promises": "error",
-      "@typescript-eslint/prefer-nullish-coalescing": "error",
+      "@typescript-eslint/consistent-type-assertions": ["error", { "assertionStyle": "never" }],
+
+      /**
+       * The ESLint rule is incorrect here when it throws "Explicit undefined is
+       * unnecessary on an optional parameter." The rule does not allow for
+       * `f(x?: X | undefined)` to be called with `f(undefined)`.
+       */
+      "@typescript-eslint/no-duplicate-type-constituents": [
+        "error",
+        { "ignoreUnions": true },
+      ],
+      "@typescript-eslint/no-invalid-this": "error",
+      "@typescript-eslint/no-shadow": "error",
+      "@typescript-eslint/no-unsafe-type-assertion": "error",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/strict-boolean-expressions": "error",
       "@typescript-eslint/switch-exhaustiveness-check": "error",
       "complexity": "error",
       "eslint-comments/no-aggregating-enable": "error",
@@ -114,6 +130,15 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
        * `no-shadow-restricted-names`.
        */
       "no-undefined": "off",
+      "no-use-before-define": ["error", {
+        "allowNamedExports": false,
+        "classes": true,
+        "enums": true,
+        "ignoreTypeReferences": true,
+        "functions": true,
+        "typedefs": false,
+        "variables": true,
+      }],
       "prefer-const": "error",
       "promise/catch-or-return": "error",
       "promise/no-return-wrap": "error",

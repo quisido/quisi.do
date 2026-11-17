@@ -1,6 +1,6 @@
 {
 	"$schema": "../../node_modules/wrangler/config-schema.json",
-  "compatibility_date": "2025-05-05",
+  "compatibility_date": "2026-11-14",
   "dev": {
     "local_protocol": "https",
     "port": 5882, // parseInt('authn', 36) % 9999
@@ -157,6 +157,25 @@
       },
       "workers_dev": true,
     },
+    "test": {
+      "compatibility_flags": ["nodejs_compat"],
+      "secrets": {
+        "required": [
+          "JWT_ENCRYPTION_SECRET",
+          "PATREON_OAUTH_CLIENT_SECRET",
+        ],
+      },
+      "vars": {
+        "COOKIE_DOMAIN": "cookie.domain",
+        "ENVIRONMENT_NAME": "test",
+        "HOST": "localhost:3000",
+        "JWT_AUDIENCE": "urn:quisi.do:saas:test",
+        "JWT_ISSUER": "urn:quisi.do:authn:test",
+        "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
+        "PATREON_OAUTH_HOST": "https://www.patreon.com",
+        "PATREON_OAUTH_REDIRECT_URI": "https://localhost:5882/patreon/",
+      },
+    },
   },
   "main": "src/index.ts",
   "name": "quisido-authn",
@@ -181,7 +200,14 @@
   "tsconfig": "./tsconfig.build.json",
   "upload_source_maps": true,
   "vars": {
+    "COOKIE_DOMAIN": "localhost",
     "ENVIRONMENT_NAME": "unknown",
-  },
+    "HOST": "localhost:3000",
+    "JWT_AUDIENCE": "urn:quisi.do:saas:development",
+    "JWT_ISSUER": "urn:quisi.do:authn:development",
+    "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
+    "PATREON_OAUTH_HOST": "https://www.patreon.com",
+    "PATREON_OAUTH_REDIRECT_URI": "https://localhost:5882/patreon/",
+},
 }
 
