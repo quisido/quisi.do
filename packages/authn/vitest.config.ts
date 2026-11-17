@@ -15,14 +15,6 @@ if (process.env["GITHUB_ACTIONS"] === "true") {
 }
 
 const CONFIG: UserConfig = defineConfig({
-  "plugins": [
-    cloudflareTest({
-      "wrangler": {
-        "configPath": "./wrangler.jsonc",
-        "environment": "test",
-      },
-    }),
-  ],
   "test": {
     "coverage": {
       "enabled": true,
@@ -36,11 +28,34 @@ const CONFIG: UserConfig = defineConfig({
       "thresholds": { "100": true },
     },
     "forceRerunTriggers": ["config/", "src/", "package.json", "vitest.config.ts"],
-    "include": ["app/**/*.test.ts", "*.test.ts"],
     "isolate": false,
     "maxWorkers": CPU_COUNT,
     "mockReset": true,
     "name": "Authentication",
+    "projects": [
+      {
+        "extends": true,
+        "plugins": [
+          cloudflareTest({
+            "wrangler": {
+              "configPath": "./wrangler.jsonc",
+              "environment": "test",
+            },
+          }),
+        ],
+        "test": {
+          "include": ["app/**/*.test.ts"],
+          "name": "Cloudflare Worker",
+        },
+      },
+      {
+        "test": {
+          "environment": "node",
+          "include": ["eslint-config.test.ts", "vitest-config.test.ts"],
+          "name": "Node",
+        },
+      },
+    ],
     "reporters": REPORTERS,
     "restoreMocks": true,
     "unstubEnvs": true,

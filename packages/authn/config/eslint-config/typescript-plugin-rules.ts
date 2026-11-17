@@ -1,4 +1,4 @@
-import type { RuleContext, RuleDefinition, RuleVisitor } from "@eslint/core";
+import type { RuleDefinition } from "@eslint/core";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 
 type PluginRules = Record<string, RuleDefinition>;
@@ -9,15 +9,8 @@ const reduceTypeScriptRulesToPluginRules = (rules: PluginRules, [
   rule,
 ]: readonly [string, TypeScriptPluginRule]): PluginRules => {
 
-  rules[ruleId] = {
-    ...rule,
-    create (context: RuleContext): RuleVisitor {
-
-      // @ts-expect-error: `value.create` uses the wrong parameters and return type.
-      return rule.create(context);
-
-    },
-  };
+  // @ts-expect-error: `rule.create` uses the wrong parameters and return type.
+  rules[ruleId] = rule;
 
   return rules;
 
