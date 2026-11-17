@@ -86,7 +86,7 @@
     "rimraf": "^6.1.4",
     "serve": "^14.2.8",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "vite": "^8.3.6",
+    "vite": "^8.3.8",
     "vitest": "^5.0.1",
     "wait-on": "^9.5.1"
   },
