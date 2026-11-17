@@ -15,7 +15,6 @@
     "browserslist:update-db": "browserslist --update-db",
     "clean": "rimraf .cache .tests dist graphify-out && npm run clean --if-present --workspaces && rimraf node_modules",
     "cloudflare-utils": "npm --workspace=packages/cloudflare-utils start",
-    "codex": "codex --ask-for-approval untrusted --sandbox workspace-write --search",
     "csp": "npm --workspace=packages/csp start",
     "eslint-config": "npm --workspace=packages/eslint-config start",
     "fmrs": "npm --workspace=packages/fmrs start",
@@ -114,6 +113,9 @@
       "puppeteer-core": ">=22.11.1"
     },
     "canvas": "$canvas",
+    "eslint-plugin-react": {
+      "eslint": "^10"
+    },
     "eslint-plugin-react-hooks": {
       "zod-validation-error": "^4.0.2"
     }

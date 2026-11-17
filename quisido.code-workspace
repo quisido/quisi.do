@@ -29,14 +29,6 @@
       "path": "packages/authn-shared",
     },
     {
-      "name": "📦 cloudflare-test-utils",
-      "path": "packages/cloudflare-test-utils",
-    },
-    {
-      "name": "📦 cloudflare-utils",
-      "path": "packages/cloudflare-utils",
-    },
-    {
       "name": "📦 csp-shared",
       "path": "packages/csp-shared",
     },
@@ -59,14 +51,6 @@
     {
       "name": "📦 use-shallow-memo",
       "path": "packages/use-shallow-memo",
-    },
-    {
-      "name": "📦 worker",
-      "path": "packages/worker",
-    },
-    {
-      "name": "📦 worker-test",
-      "path": "packages/worker-test",
     },
   ],
   "settings": {
