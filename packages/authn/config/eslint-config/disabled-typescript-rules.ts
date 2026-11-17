@@ -32,11 +32,17 @@ export const DISABLED_TYPESCRIPT_RULES: RulesConfig = {
   // Some dependencies are vended as namespaces.
   "import-x/no-namespace": "off",
 
+  /** @see https://eslint.org/docs/latest/rules/no-const-assign#handled_by_typescript */
+  "no-const-assign": "off",
+
   // Replaced by `@typescript-eslint/no-shadow`.
   "no-shadow": "off",
 
   /** @see https://eslint.org/docs/latest/rules/no-undef#handled_by_typescript */
   "no-undef": "off",
+
+  /** @see https://eslint.org/docs/latest/rules/no-unreachable#handled_by_typescript */
+  "no-unreachable": "off",
 
   /**
    * Until this rule can be disabled for exports, it is incompatible with

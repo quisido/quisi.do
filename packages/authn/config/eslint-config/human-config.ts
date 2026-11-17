@@ -190,9 +190,13 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
           "ignoreRestSiblings": false,
         },
       ],
+      "@typescript-eslint/prefer-nullish-coalescing": "error",
+      "@typescript-eslint/prefer-optional-chain": "error",
       "@typescript-eslint/prefer-readonly": "error",
       "@typescript-eslint/strict-boolean-expressions": "error",
       "@typescript-eslint/switch-exhaustiveness-check": "error",
+      "curly": ["error", "all"],
+      "eqeqeq": "error",
       "eslint-comments/no-aggregating-enable": "error",
       "eslint-comments/no-duplicate-disable": "error",
       "eslint-comments/no-unlimited-disable": "error",
@@ -222,10 +226,19 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       "import-x/no-nodejs-modules": "warn",
       "import-x/no-relative-packages": "error",
       "import-x/no-self-import": "error",
-      "import-x/no-unused-modules": "error",
+      "import-x/no-unused-modules": [
+        "error",
+        {
+          "ignoreUnusedTypeExports": false,
+          "missingExports": true,
+          "suppressMissingFileEnumeratorAPIWarning": true,
+          "unusedExports": true,
+        },
+      ],
       "import-x/no-useless-path-segments": "error",
       "import-x/no-webpack-loader-syntax": "error",
       "import-x/unambiguous": "error",
+      "no-constant-binary-expression": ["error", { "checkRelationalComparisons": true }],
       "no-global-assign": "error",
       "no-shadow-restricted-names": "error",
 
@@ -251,6 +264,7 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       "promise/prefer-catch": "error",
       "promise/spec-only": "error",
       "promise/valid-params": "error",
+      "use-isnan": ["error", { "enforceForIndexOf": true }],
     },
 
     "settings": {

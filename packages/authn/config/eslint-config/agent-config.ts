@@ -65,9 +65,13 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "@typescript-eslint/no-shadow": "error",
       "@typescript-eslint/no-unsafe-type-assertion": "error",
       "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/prefer-nullish-coalescing": "error",
+      "@typescript-eslint/prefer-optional-chain": "error",
       "@typescript-eslint/strict-boolean-expressions": "error",
       "@typescript-eslint/switch-exhaustiveness-check": "error",
       "complexity": "error",
+      "curly": ["error", "all"],
+      "eqeqeq": "error",
       "eslint-comments/no-aggregating-enable": "error",
       "eslint-comments/no-duplicate-disable": "error",
       "eslint-comments/no-restricted-disable": ["error", "*"],
@@ -75,14 +79,6 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "eslint-comments/no-unused-disable": "error",
       "eslint-comments/no-unused-enable": "error",
       "eslint-comments/no-use": "error",
-      "max-depth": "error", // 4
-      "max-lines": "error", // 300
-      "max-lines-per-function": "error", // 50
-      "max-nested-callbacks": "error", // 10
-      "max-params": ["error", { "countThis": "never" }], // 3
-      // "max-statements": "error", // 10
-      "no-inline-comments": "error",
-      "eqeqeq": "error",
       "import-x/avoid-barrel-files": "error",
       // Some dependencies are vended as namespaces.
       "import-x/avoid-namespace-import": "off",
@@ -103,13 +99,29 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "import-x/no-named-as-default-member": "error",
       "import-x/no-relative-packages": "error",
       "import-x/no-self-import": "error",
-      "import-x/no-unused-modules": "error",
+      "import-x/no-unused-modules": [
+        "error",
+        {
+          "ignoreUnusedTypeExports": false,
+          "missingExports": true,
+          "suppressMissingFileEnumeratorAPIWarning": true,
+          "unusedExports": true,
+        },
+      ],
       "import-x/no-useless-path-segments": "error",
       "import-x/no-webpack-loader-syntax": "error",
       "import-x/unambiguous": "error",
+      "max-depth": "error", // 4
+      "max-lines": "error", // 300
+      "max-lines-per-function": "error", // 50
+      "max-nested-callbacks": "error", // 10
+      "max-params": ["error", { "countThis": "never" }], // 3
+      // "max-statements": "error", // 10
+      "no-inline-comments": "error",
       "no-await-in-loop": "error",
       "no-comments/disallowComments": ["error", { "allow": [] }],
       "no-console": "error",
+      "no-constant-binary-expression": ["error", { "checkRelationalComparisons": true }],
       "no-global-assign": "error",
       "no-magic-numbers": [
         "error",
@@ -146,6 +158,7 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "promise/valid-params": "error",
       "security/detect-eval-with-expression": "error",
       "security/detect-unsafe-regex": "error",
+      "use-isnan": ["error", { "enforceForIndexOf": true }],
     },
 
     "settings": {
