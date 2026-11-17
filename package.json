@@ -96,7 +96,7 @@
     "browserslist": "^4.29.5",
     "chrome-devtools-mcp": "^1.13.0",
     "concurrently": "^10.0.7",
-    "eslint": "^10.14.0",
+    "eslint": "^10.15.0",
     "hint": "^7.1.13",
     "jsonc-parser": "^3.3.1",
     "playwright": "^1.64.1",
