@@ -32,10 +32,6 @@ updates:
       - jsonc-eslint-parser
       - typescript-eslint
 
-    opentelemetry:
-      patterns:
-      - "@opentelemetry/*"
-
     playwright:
       patterns:
       - "@playwright/mcp"

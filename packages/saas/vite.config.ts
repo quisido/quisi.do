@@ -70,7 +70,6 @@ const USER_CONFIG: UserConfig = {
     'GITHUB_REPOSITORY',
     'GITHUB_SHA',
     'GOOGLE_ANALYTICS_TRACKING_ID',
-    'HONEYCOMB_API_KEY',
     'MIXPANEL_TOKEN',
     'NEW_RELIC_LICENSE_KEY',
     'NODE_ENV',
@@ -84,10 +83,6 @@ const USER_CONFIG: UserConfig = {
   envDir: '..',
   oxc: OXC_OPTIONS,
   publicDir: '../public',
-  resolve: {
-    // Upgraded exporters require the application's OpenTelemetry API 1.10.
-    dedupe: ['@opentelemetry/api'],
-  },
   root: 'src',
 };
 

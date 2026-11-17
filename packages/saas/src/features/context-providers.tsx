@@ -24,6 +24,5 @@ export const ContextProviders: ComponentType<PropsWithChildren> = withWrappers(
   PostHog,
 
   // Consumes `WindowProvider`.
-  // Honeycomb, // "Critical dependency: the request of a dependency is an expression"
   TracerProviderProvider,
 )(Fragment);

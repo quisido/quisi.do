@@ -16,7 +16,6 @@ const CONFIG: Config = {
     blockedUrlPatterns: [
       'https://ajax.cloudflare.com/*',
       'https://analytics.google.com/*',
-      'https://api.honeycomb.io/*',
       'https://api-js.mixpanel.com/*',
       'https://browser-intake-datadoghq.com/*',
       'https://c.bing.com/*',
