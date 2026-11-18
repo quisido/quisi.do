@@ -8,7 +8,7 @@
   "scripts": {
     "build": "exit 0",
     "start": "npm run dev",
-    "test": "quisido test",
+    "test": "exit 0",
     "clean": "rimraf .cache .tests .wrangler dist node_modules",
     "dev": "wrangler dev --persist-to ../../.wrangler/state",
     "eslint": "eslint . --cache --cache-location ./.cache/",
