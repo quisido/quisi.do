@@ -113,9 +113,6 @@
       "puppeteer-core": ">=22.11.1"
     },
     "canvas": "$canvas",
-    "eslint-plugin-react": {
-      "eslint": "^10"
-    },
     "eslint-plugin-react-hooks": {
       "zod-validation-error": "^4.0.2"
     }
