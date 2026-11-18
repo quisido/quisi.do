@@ -278,7 +278,9 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       "promise/spec-only": "error",
       "promise/valid-params": "error",
       "use-isnan": ["error", { "enforceForIndexOf": true }],
+      "vitest/no-importing-vitest-globals": "off",
       "vitest/no-test-return-statement": "error",
+      "vitest/prefer-lowercase-title": "off",
       "vitest/require-to-throw-message": "error",
     },
 
