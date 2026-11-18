@@ -1,3 +1,5 @@
+import type { DeepReadonly } from "./deep-readonly.js";
+
 const isLocalhostOrigin = (origin: string): boolean =>
 	new URL(origin).hostname === "localhost";
 
@@ -14,9 +16,9 @@ const getAllowedOrigin = (
 
 export default {
 	fetch(
-		request: Request,
-		env: Env,
-	): Promise<Response> {
+		request: DeepReadonly<Request>,
+		env: DeepReadonly<Env>,
+	): DeepReadonly<Promise<Response>> {
 		const allowedOrigin: string = getAllowedOrigin(
 			request.headers.get("Origin"),
 			env.COOKIE_DOMAIN,
