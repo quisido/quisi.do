@@ -2,6 +2,22 @@ import { exports as worker } from "cloudflare:workers";
 
 export async function fetch (...params: Parameters<Fetcher["fetch"]>): Promise<Response> {
 
-  return worker.default.fetch(...params);
+  const response: Response = await worker.default.fetch(...params);
+
+  /**
+   * TODO:
+   * Assert status code is expected
+   * Assert security headers
+   * Assert CORS
+   * Assert body matches schema for given route (recommended: OpenAPI or JSON)
+   * Assert no stack traces
+   * Assert no secrets (e.g. `JWT_ENCRYPTION_SECRET` or
+   * `PATREON_OAUTH_CLIENT_SECRET`) are present in the body, headers (e.g.
+   * Set-Cookie), analytics write calls, or console output.
+   * Assert expected D1/KV call counts.
+   * Assert all fetch requests are to allowlisted hosts.
+   */
+
+  return response;
 
 }

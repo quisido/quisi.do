@@ -9,6 +9,8 @@ import jsoncPlugin from "eslint-plugin-jsonc";
 import promisePlugin from "eslint-plugin-promise";
 import securityPlugin from "eslint-plugin-security";
 import stylisticPlugin from "@stylistic/eslint-plugin";
+import functionalPlugin from "eslint-plugin-functional";
+import vitestPlugin from "@vitest/eslint-plugin";
 import { TYPESCRIPT_PLUGIN_RULES } from "./typescript-plugin-rules.js";
 import { TYPESCRIPT_PLUGIN } from "./typescript-plugin.js";
 import { TYPESCRIPT_LANGUAGE_OPTIONS } from "./typescript-language-option.js";
@@ -20,6 +22,7 @@ import { DISABLED_BUILTIN_RULES } from "./disabled-builtin-rules.js";
 import { toFixable } from "./to-fixable.js";
 import { TYPESCRIPT_IMPORT_RESOLVER } from "./typescript-import-resolver.js";
 import { STRICT_TYPE_CHECKED_RULES_CONFIG } from "./strict-type-checked-rules-config.js";
+import { NO_UNSAFE_TYPESCRIPT_RULES_CONFIG } from "./no-unsafe-typescript-rules-config.js";
 
 const JSON_RULES: RulesConfig = {
   ...toFixable(jsonPlugin.rules, "json"),
@@ -132,21 +135,26 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       "@typescript-eslint": TYPESCRIPT_PLUGIN,
       "es-x": ecmaScriptSyntaxPlugin,
       "eslint-comments": eslintCommentsPlugin,
+      "functional": functionalPlugin,
       "import-x": importX,
+      "vitest": vitestPlugin,
     },
     "rules": {
       // Default rules
       ...ES_X_NONSTANDARD_RULES_CONFIG,
+      ...NO_UNSAFE_TYPESCRIPT_RULES_CONFIG,
       ...securityPlugin.configs.recommended.rules,
       ...STRICT_TYPE_CHECKED_RULES_CONFIG,
 
       // Fixable rules
       ...FIXABLE_BUILTIN_RULES,
+      ...toFixable(functionalPlugin.rules, "functional"),
       ...toFixable(importX.rules, "import-x"),
       ...toFixable(promisePlugin.rules, "promise"),
       ...toFixable(securityPlugin.rules, "security"),
       ...toFixable(stylisticPlugin.rules, "@stylistic"),
       ...toFixable(TYPESCRIPT_PLUGIN_RULES, "@typescript-eslint"),
+      ...toFixable(vitestPlugin.rules, "vitest"),
 
       // Superceded rules
       ...DISABLED_BUILTIN_RULES,
@@ -179,7 +187,6 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       ],
       "@typescript-eslint/no-invalid-this": "error",
       "@typescript-eslint/no-shadow": "error",
-      "@typescript-eslint/no-unsafe-type-assertion": "error",
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
@@ -203,6 +210,7 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       "eslint-comments/no-unused-disable": "error",
       "eslint-comments/no-unused-enable": "error",
       "eslint-comments/require-description": ["error", { "ignore": [] }],
+      "functional/prefer-property-signatures": "error",
       "import-x/avoid-barrel-files": "error",
       // Some dependencies are vended as namespaces.
       "import-x/avoid-namespace-import": "off",
@@ -239,7 +247,9 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       "import-x/no-webpack-loader-syntax": "error",
       "import-x/unambiguous": "error",
       "no-constant-binary-expression": ["error", { "checkRelationalComparisons": true }],
+      "no-extend-native": "error",
       "no-global-assign": "error",
+      "no-param-reassign": "error",
       "no-shadow-restricted-names": "error",
 
       /**
@@ -256,7 +266,9 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
         "typedefs": false,
         "variables": true,
       }],
+      "no-var": "error",
       "one-var": "off",
+      "prefer-const": "error",
       "promise/catch-or-return": "error",
       "promise/no-return-wrap": "error",
       "promise/prefer-await-to-callbacks": "error",
@@ -273,6 +285,9 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       },
       "import-x/extensions": [".js", ".json", ".jsonc"],
       "import-x/resolver-next": [TYPESCRIPT_IMPORT_RESOLVER],
+      "vitest": {
+        "typecheck": true,
+      },
     },
   },
 ];

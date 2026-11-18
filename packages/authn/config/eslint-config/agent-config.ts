@@ -3,6 +3,7 @@ import ecmaScriptSyntaxPlugin from "eslint-plugin-es-x";
 import eslintCommentsPlugin from "@eslint-community/eslint-plugin-eslint-comments";
 import noCommentsPlugin from "eslint-plugin-no-comments";
 import promisePlugin from "eslint-plugin-promise";
+import functionalPlugin from "eslint-plugin-functional";
 import securityPlugin from "eslint-plugin-security";
 import stylisticPlugin from "@stylistic/eslint-plugin";
 import { importX } from "eslint-plugin-import-x";
@@ -14,6 +15,7 @@ import { TYPESCRIPT_LANGUAGE_OPTIONS } from "./typescript-language-option.js";
 import { TYPESCRIPT_PLUGIN } from "./typescript-plugin.js";
 import { TYPESCRIPT_IMPORT_RESOLVER } from "./typescript-import-resolver.js";
 import { STRICT_TYPE_CHECKED_RULES_CONFIG } from "./strict-type-checked-rules-config.js";
+import { NO_UNSAFE_TYPESCRIPT_RULES_CONFIG } from "./no-unsafe-typescript-rules-config.js";
 
 /**
  * The "agent config" is an ESLint configuration for files owned by coding
@@ -35,12 +37,14 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "@typescript-eslint": TYPESCRIPT_PLUGIN,
       "es-x": ecmaScriptSyntaxPlugin,
       "eslint-comments": eslintCommentsPlugin,
+      "functional": functionalPlugin,
       "import-x": importX,
       "no-comments": noCommentsPlugin,
     },
     "rules": {
       // Default rules
       ...ES_X_NONSTANDARD_RULES_CONFIG,
+      ...NO_UNSAFE_TYPESCRIPT_RULES_CONFIG,
       ...securityPlugin.configs.recommended.rules,
       ...STRICT_TYPE_CHECKED_RULES_CONFIG,
 
@@ -49,6 +53,8 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       ...DISABLED_TYPESCRIPT_RULES,
 
       // Custom rules
+
+      // This is only a warning, because it is fixable but should not block.
       "@stylistic/padded-blocks": ["warn", "never"],
       "@typescript-eslint/consistent-type-assertions": ["error", { "assertionStyle": "never" }],
 
@@ -63,10 +69,11 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       ],
       "@typescript-eslint/no-invalid-this": "error",
       "@typescript-eslint/no-shadow": "error",
-      "@typescript-eslint/no-unsafe-type-assertion": "error",
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/prefer-nullish-coalescing": "error",
       "@typescript-eslint/prefer-optional-chain": "error",
+      // This is only a warning, because it is fixable but should not block.
+      "@typescript-eslint/prefer-readonly": "warn",
       "@typescript-eslint/strict-boolean-expressions": "error",
       "@typescript-eslint/switch-exhaustiveness-check": "error",
       "complexity": "error",
@@ -79,6 +86,11 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "eslint-comments/no-unused-disable": "error",
       "eslint-comments/no-unused-enable": "error",
       "eslint-comments/no-use": "error",
+      "functional/immutable-data": "error",
+      "functional/no-let": "error",
+      "functional/prefer-immutable-types": "error",
+      "functional/readonly-type": "error",
+      "functional/type-declaration-immutability": "error",
       "import-x/avoid-barrel-files": "error",
       // Some dependencies are vended as namespaces.
       "import-x/avoid-namespace-import": "off",
@@ -92,12 +104,22 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "import-x/no-cycle": "error",
       "import-x/no-deprecated": "error",
       "import-x/no-dynamic-require": "error",
-      "import-x/no-extraneous-dependencies": "error",
+      "import-x/no-extraneous-dependencies": ["error", { "devDependencies": false }],
       "import-x/no-import-module-exports": "error",
       "import-x/no-mutable-exports": "error",
       "import-x/no-named-as-default": "error",
       "import-x/no-named-as-default-member": "error",
       "import-x/no-relative-packages": "error",
+      "import-x/no-restricted-paths": ["error", {
+        "zones": [
+          {
+            "except": ["./src/"],
+            "from": ".",
+            "message": "You may only import files from `src/`.",
+            "target": "./src/",
+          },
+        ],
+      }],
       "import-x/no-self-import": "error",
       "import-x/no-unused-modules": [
         "error",
@@ -122,6 +144,7 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "no-comments/disallowComments": ["error", { "allow": [] }],
       "no-console": "error",
       "no-constant-binary-expression": ["error", { "checkRelationalComparisons": true }],
+      "no-extend-native": "error",
       "no-global-assign": "error",
       "no-magic-numbers": [
         "error",
@@ -135,6 +158,29 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       ],
       "no-param-reassign": "error",
       "no-promise-executor-return": "error",
+      "no-restricted-syntax": [
+        "error",
+
+        {
+          "message": "No prototype assignment.",
+          "selector": "AssignmentExpression > MemberExpression.left[property.name='prototype']",
+        },
+        {
+          "message": "SQL must be a literal.",
+          "selector": "CallExpression[callee.property.name='prepare'][arguments.0.type!='Literal']",
+        },
+
+        /*
+         * {
+         *   "message": "Use lib/respond.",
+         *   "selector": "NewExpression[callee.name='Response']",
+         * },
+         */
+        {
+          "message": "No cross-request state.",
+          "selector": "Program > VariableDeclaration[kind='let']",
+        },
+      ],
       "no-shadow-restricted-names": "error",
 
       /**
@@ -151,6 +197,7 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
         "typedefs": false,
         "variables": true,
       }],
+      "no-var": "error",
       "prefer-const": "error",
       "promise/catch-or-return": "error",
       "promise/no-return-wrap": "error",

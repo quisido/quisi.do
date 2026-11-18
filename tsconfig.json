@@ -15,6 +15,7 @@
     ".gemini/*.ts",
     ".vscode/*.json",
     "scripts/",
+    "test/",
     "types/",
     "utils/",
     "*.code-workspace",
