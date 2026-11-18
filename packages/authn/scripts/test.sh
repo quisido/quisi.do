@@ -2,6 +2,6 @@
 
 set -Eeuo pipefail;
 
-npx eslint .;
+npx eslint --quiet .;
 npx tsc --skipLibCheck;
 npx vitest run;

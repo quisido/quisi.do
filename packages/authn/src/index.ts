@@ -1,4 +1,4 @@
-import type { DeepReadonly } from "./deep-readonly.js";
+import type { DeepReadonly } from "@lib/deep-readonly.js";
 
 const isLocalhostOrigin = (origin: string): boolean =>
 	new URL(origin).hostname === "localhost";

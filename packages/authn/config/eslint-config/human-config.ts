@@ -23,8 +23,9 @@ import { toFixable } from "./to-fixable.js";
 import { TYPESCRIPT_IMPORT_RESOLVER } from "./typescript-import-resolver.js";
 import { STRICT_TYPE_CHECKED_RULES_CONFIG } from "./strict-type-checked-rules-config.js";
 import { NO_UNSAFE_TYPESCRIPT_RULES_CONFIG } from "./no-unsafe-typescript-rules-config.js";
+import type { DeepReadonly } from "@lib/deep-readonly.js";
 
-const JSON_RULES: RulesConfig = {
+const JSON_RULES: DeepReadonly<RulesConfig> = {
   ...toFixable(jsonPlugin.rules, "json"),
   "json/no-duplicate-keys": "error",
   "json/no-empty-keys": "error",
@@ -95,12 +96,11 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
     "rules": {
       ...toFixable(jsoncPlugin.rules, "jsonc"),
       ...JSON_RULES,
-      "@stylistic/indent": ["error", 2],
+      // Replaced by `jsonc/indent`.
+      "@stylistic/indent": "off",
       "jsonc/comma-dangle": ["error", "always-multiline"],
-
-      // Replaced by `@stylistic/indent`.
-      "jsonc/indent": "off",
-
+      "jsonc/indent": ["error", 2],
+      "jsonc/object-curly-newline": ["error", { "consistent": true }],
       "jsonc/sort-array-values": [
         "error",
         {
@@ -108,7 +108,6 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
           "pathPattern": ".*",
         },
       ],
-
       "no-unused-expressions": "off",
       "no-unused-vars": "off",
       "strict": "off",
@@ -122,6 +121,9 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       "app/*.ts",
       "config/**/*.ts",
       "config/*.ts",
+      "config/**/*.ts",
+      "lib/**/*.ts",
+      "lib/*.ts",
       "*.ts",
     ],
     "ignores": ["worker-configuration.d.ts"],

@@ -14,7 +14,7 @@ if (process.env["GITHUB_ACTIONS"] === "true") {
 
 }
 
-const CONFIG: UserConfig = defineConfig({
+const CONFIG: Readonly<UserConfig> = defineConfig({
   "test": {
     "coverage": {
       "enabled": true,
@@ -27,8 +27,10 @@ const CONFIG: UserConfig = defineConfig({
       "skipFull": true,
       "thresholds": { "100": true },
     },
-    "forceRerunTriggers": ["config/", "src/", "package.json", "vitest.config.ts"],
+    "forceRerunTriggers": ["config/", "lib/", "src/", "package.json", "vitest.config.ts", "wrangler.jsonc"],
+    "hideSkippedTests": true,
     "isolate": true,
+    "logHeapUsage": true,
     "maxWorkers": CPU_COUNT,
     "mockReset": true,
     "name": "Authentication",
@@ -44,6 +46,7 @@ const CONFIG: UserConfig = defineConfig({
           }),
         ],
         "test": {
+          "detectAsyncLeaks": true,
           "include": ["app/**/*.test.ts"],
           "name": "Cloudflare Worker",
         },
@@ -58,7 +61,19 @@ const CONFIG: UserConfig = defineConfig({
     ],
     "reporters": REPORTERS,
     "restoreMocks": true,
+    "sequence": {
+      "concurrent": true,
+      "shuffle": {
+        "files": true,
+        "tests": true,
+      },
+    },
     "setupFiles": ["./config/vitest-config/setup-file.ts"],
+    "typecheck": {
+      "build": false,
+      "enabled": true,
+      "only": false,
+    },
     "unstubEnvs": true,
     "unstubGlobals": true,
   },

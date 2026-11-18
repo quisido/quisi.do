@@ -113,7 +113,7 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "import-x/no-restricted-paths": ["error", {
         "zones": [
           {
-            "except": ["./src/"],
+            "except": ["./lib/", "./src/"],
             "from": ".",
             "message": "You may only import files from `src/`.",
             "target": "./src/",

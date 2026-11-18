@@ -1,5 +1,5 @@
 {
-	"$schema": "../../node_modules/wrangler/config-schema.json",
+  "$schema": "../../node_modules/wrangler/config-schema.json",
   "compatibility_date": "2026-11-14",
   "dev": {
     "local_protocol": "https",
@@ -208,6 +208,6 @@
     "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
     "PATREON_OAUTH_HOST": "https://www.patreon.com",
     "PATREON_OAUTH_REDIRECT_URI": "https://localhost:5882/patreon/",
-},
+  },
 }
 

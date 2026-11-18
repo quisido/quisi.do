@@ -1,6 +1,9 @@
 import type { RulesConfig } from "@eslint/core";
 
-export const DISABLED_TYPESCRIPT_RULES: RulesConfig = {
+export const DISABLED_TYPESCRIPT_RULES: Readonly<RulesConfig> = {
+
+  // "array" (default) is incompatible with `@stylistic/no-extra-parens`.
+  "@typescript-eslint/array-type": ["error", { "default": "array-simple" }],
 
   // Replaced by `max-params`.
   "@typescript-eslint/max-params": "off",

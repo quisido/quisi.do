@@ -1,0 +1,263 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "compaction": {
+    "auto": true,
+  },
+  "experimental": {
+    "subagent_depth": 2,
+  },
+  "formatter": true,
+  "lsp": true,
+  "mcp": {
+    "servers": {
+      "cloudflare": {
+        "disabled": false,
+        "type": "remote",
+        "url": "https://mcp.cloudflare.com/mcp",
+      },
+    },
+  },
+  "permissions": [
+    {
+      "action": "*",
+      "effect": "ask",
+      "resource": "*",
+    },
+    // Access
+    {
+      "action": "external_directory",
+      "effect": "deny",
+      "resource": "*",
+    },
+    {
+      "action": "external_directory",
+      "effect": "allow",
+      "resource": "~/.config/opencode",
+    },
+    {
+      "action": "external_directory",
+      "effect": "allow",
+      "resource": "~/.local/share/opencode/log",
+    },
+    {
+      "action": "external_directory",
+      "effect": "allow",
+      "resource": "/tmp",
+    },
+    // Find
+    {
+      "action": "glob",
+      "effect": "allow",
+      "resource": "lib/",
+    },
+    {
+      "action": "glob",
+      "effect": "allow",
+      "resource": "src/",
+    },
+    {
+      "action": "grep",
+      "effect": "allow",
+      "resource": "lib/",
+    },
+    {
+      "action": "grep",
+      "effect": "allow",
+      "resource": "src/",
+    },
+    // Read
+    {
+      "action": "read",
+      "effect": "deny",
+      "resource": "*",
+    },
+    {
+      "action": "read",
+      "effect": "allow",
+      "resource": "lib/",
+    },
+    {
+      "action": "read",
+      "effect": "allow",
+      "resource": "scripts/",
+    },
+    {
+      "action": "read",
+      "effect": "allow",
+      "resource": "src/",
+    },
+    {
+      "action": "read",
+      "effect": "allow",
+      "resource": "AGENTS.md",
+    },
+    {
+      "action": "read",
+      "effect": "allow",
+      "resource": "opencode.jsonc",
+    },
+    {
+      "action": "read",
+      "effect": "allow",
+      "resource": "package.json",
+    },
+    {
+      "action": "read",
+      "effect": "allow",
+      "resource": "README.md",
+    },
+    {
+      "action": "read",
+      "effect": "allow",
+      "resource": "tsconfig.json",
+    },
+    {
+      "action": "read",
+      "effect": "allow",
+      "resource": "worker-configuration.d.ts",
+    },
+    {
+      "action": "read",
+      "effect": "allow",
+      "resource": "wrangler.jsonc",
+    },
+    // Write
+    {
+      "action": "edit",
+      "effect": "deny",
+      "resource": "*",
+    },
+    {
+      "action": "edit",
+      "effect": "allow",
+      "resource": "~/.local/share/opencode/log/**",
+    },
+    {
+      "action": "edit",
+      "effect": "allow",
+      "resource": "/tmp/**",
+    },
+    {
+      "action": "edit",
+      "effect": "allow",
+      "resource": "src/**",
+    },
+    // Execute
+    {
+      "action": "shell",
+      "effect": "ask",
+      "resource": "*",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "echo *",
+    },
+    {
+      "action": "shell",
+      "effect": "deny",
+      "resource": "git *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "git diff *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "git grep *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "git log *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "git ls-tree *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "git status *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "npm ls *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "npm run fix",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "npm test",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "npx eslint src --fix",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "npx tsc --skipLibCheck",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "npx vitest run",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "npx wrangler types",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "printf *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "which *",
+    },
+    {
+      "action": "skill",
+      "effect": "allow",
+      "resource": "*",
+    },
+    {
+      "action": "subagent",
+      "effect": "allow",
+      "resource": "*",
+    },
+    {"action": "webfetch",
+      "effect": "ask",
+      "resource": "*"},
+    {"action": "webfetch",
+      "effect": "allow",
+      "resource": "opencode.ai"},
+    {"action": "websearch",
+      "effect": "allow",
+      "resource": "*"},
+  ],
+  "policies": [
+    {"action": "tool.use",
+      "effect": "deny",
+      "resource": "shell:sudo *"},
+  ],
+  "share": "disabled",
+  "watcher": {
+    "ignore": [
+      "coverage/**",
+      "node_modules/**",
+    ],
+  },
+}

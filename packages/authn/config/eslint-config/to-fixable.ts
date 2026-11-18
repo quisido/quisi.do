@@ -1,20 +1,21 @@
 import type { RuleDefinition, RulesConfig } from "@eslint/core";
+import type { DeepReadonly } from "@lib/deep-readonly.js";
 
-type PluginRules = Record<string, RuleDefinition>;
+type PluginRules = Readonly<Record<string, Readonly<RuleDefinition>>>;
 
 const toRulesConfig = (
-  rulesConfig: RulesConfig,
+  rulesConfig: DeepReadonly<RulesConfig>,
   ruleId: string,
-): RulesConfig => {
-
+): DeepReadonly<RulesConfig> => ({
+  ...rulesConfig,
   // Auto-fix applies to `warn` without blocking if auto-fix fails.
-  rulesConfig[ruleId] = "warn";
+  [ruleId]: "warn",
+});
 
-  return rulesConfig;
-
-};
-
-export const toFixable = (rules: PluginRules, prefix?: string): RulesConfig => {
+export const toFixable = (
+  rules: PluginRules,
+  prefix?: string,
+): DeepReadonly<RulesConfig> => {
 
   const fixableRules = new Set<string>();
 

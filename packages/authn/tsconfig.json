@@ -63,7 +63,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": null,
-    "paths": {},
+    "paths": {
+      "@lib/*": ["./lib/*"],
+    },
     "plugins": [],
     "preserveConstEnums": true,
     "preserveSymlinks": true,
@@ -98,6 +100,7 @@
     "*.ts",
     "app/",
     "config/",
+    "lib/",
     "src/",
   ],
 }

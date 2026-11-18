@@ -1,8 +1,8 @@
 import { exports as worker } from "cloudflare:workers";
 
-export async function fetch (...params: Parameters<Fetcher["fetch"]>): Promise<Response> {
+export async function fetch (...params: Readonly<Parameters<Fetcher["fetch"]>>): Promise<Response> {
 
-  const response: Response = await worker.default.fetch(...params);
+  const response: Readonly<Response> = await worker.default.fetch(...params);
 
   /**
    * TODO:

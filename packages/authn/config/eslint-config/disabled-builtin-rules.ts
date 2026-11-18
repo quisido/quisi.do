@@ -1,6 +1,6 @@
 import type { RulesConfig } from "@eslint/core";
 
-export const DISABLED_BUILTIN_RULES: RulesConfig = {
+export const DISABLED_BUILTIN_RULES: Readonly<RulesConfig> = {
   // Commented out code may be lowercase.
   "capitalized-comments": "off",
 
