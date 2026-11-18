@@ -107,7 +107,7 @@ jobs:
           persist-credentials: false
           show-progress: false
       - name: Review
-        uses: actions/dependency-review-action@v501
+        uses: actions/dependency-review-action@v5.0.1
 
   # Stage 2: lighthouse, test, webhint
   lighthouse:
