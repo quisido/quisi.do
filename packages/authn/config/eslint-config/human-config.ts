@@ -145,6 +145,7 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       ...NO_UNSAFE_TYPESCRIPT_RULES_CONFIG,
       ...securityPlugin.configs.recommended.rules,
       ...STRICT_TYPE_CHECKED_RULES_CONFIG,
+      ...vitestPlugin.configs.recommended.rules,
 
       // Fixable rules
       ...FIXABLE_BUILTIN_RULES,
@@ -277,6 +278,8 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       "promise/spec-only": "error",
       "promise/valid-params": "error",
       "use-isnan": ["error", { "enforceForIndexOf": true }],
+      "vitest/no-test-return-statement": "error",
+      "vitest/require-to-throw-message": "error",
     },
 
     "settings": {
