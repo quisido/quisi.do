@@ -5,7 +5,7 @@
 {
   // "$schema": "https://raw.githubusercontent.com/webhintio/hint/main/packages/hint/src/lib/config/config-schema.json",
   "connector": {
-    "name": "./dist/utils/webhint-puppeteer-connector.js"
+    "name": "./dist/test/webhint-puppeteer-connector.js"
     /*
     Enable and configure options when they're confirmed not to crash.
     "options": {
@@ -27,8 +27,8 @@
   ],
   "formatters": [
     "codeframe",
-    "./dist/utils/webhint-html-formatter.js",
-    "./dist/utils/webhint-json-formatter.js",
+    "./dist/test/webhint-html-formatter.js",
+    "./dist/test/webhint-json-formatter.js",
     // "stylish", // This is just a worse version of `codeframe`.
     "summary"
   ],
