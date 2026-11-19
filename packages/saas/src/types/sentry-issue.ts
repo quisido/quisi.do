@@ -1,4 +1,4 @@
-// https://docs.sentry.io/api/events/list-a-projects-issues/
+/** @see https://docs.sentry.io/api/events/list-a-projects-issues/ */
 // /api/0/projects/{organization_slug}/{project_slug}/issues/
 
 export interface Metadata {

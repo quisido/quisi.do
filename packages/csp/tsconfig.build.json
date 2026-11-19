@@ -14,12 +14,6 @@
   ],
   "references": [
     {
-      "path": "../cloudflare-test-utils/tsconfig.build.json"
-    },
-    {
-      "path": "../cloudflare-utils/tsconfig.build.json"
-    },
-    {
       "path": "../csp-shared/tsconfig.build.json"
     },
     {
@@ -28,11 +22,5 @@
     {
       "path": "../quisido/tsconfig.build.json"
     },
-    {
-      "path": "../worker/tsconfig.build.json"
-    },
-    {
-      "path": "../worker-test/tsconfig.build.json"
-    }
   ]
 }

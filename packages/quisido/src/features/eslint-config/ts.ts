@@ -89,7 +89,7 @@ export const TS_CONFIG: Config = defineConfig({
      */
     'no-shadow': 'off',
 
-    // https://eslint.org/docs/latest/rules/no-undef#handled_by_typescript
+    /** @see https://eslint.org/docs/latest/rules/no-undef#handled_by_typescript */
     'no-undef': 'off',
 
     // Required for `@typescript-eslint/no-floating-promises`.

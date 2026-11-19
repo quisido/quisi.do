@@ -3,7 +3,15 @@
   "experimental": {},
   "formatter": true,
   "lsp": true,
-  "mcp": {},
+  "mcp": {
+    "servers": {
+      "cloudflare": {
+        "disabled": false,
+        "type": "remote",
+        "url": "https://mcp.cloudflare.com/mcp",
+      },
+    },
+  },
   "permissions": [
     { "action": "external_directory", "effect": "allow", "resource": "~/.local/share/opencode/log" },
     { "action": "edit", "effect": "allow", "resource": "~/.local/share/opencode/log/**" },

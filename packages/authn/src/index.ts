@@ -1,18 +1,37 @@
-import { ExportedHandler } from '@quisido/worker';
-import AuthnFetchHandler from './authn-fetch-handler.js';
-import handleError from './handle-error.js';
-import handleFinally from './handle-finally.js';
-import handleLog from './handle-log.js';
-import handleMetric from './handle-metric.js';
+import type { DeepReadonly } from "@lib/deep-readonly.js";
 
-const exportedHandler: ExportedHandler<Env> = new ExportedHandler<Env>({
-  console,
-  fetch,
-  FetchHandler: AuthnFetchHandler,
-  finally: handleFinally,
-  onError: handleError,
-  onLog: handleLog,
-  onMetric: handleMetric,
-});
+const isLocalhostOrigin = (origin: string): boolean =>
+	new URL(origin).hostname === "localhost";
 
-export default exportedHandler;
+const getAllowedOrigin = (
+	origin: string | null,
+	cookieDomain: Env["COOKIE_DOMAIN"],
+): string => {
+	if (origin === null) {
+		return "*";
+	}
+
+	return isLocalhostOrigin(origin) ? origin : `https://${cookieDomain}`;
+};
+
+export default {
+	fetch(
+		request: DeepReadonly<Request>,
+		env: DeepReadonly<Env>,
+	): DeepReadonly<Promise<Response>> {
+		const allowedOrigin: string = getAllowedOrigin(
+			request.headers.get("Origin"),
+			env.COOKIE_DOMAIN,
+		);
+
+		const body: string | null =
+			request.method === "OPTIONS" ? null : JSON.stringify({ code: 1 });
+
+		return Promise.resolve(new Response(body, {
+			headers: {
+				"access-control-allow-origin": allowedOrigin,
+				"content-type": "application/json",
+			},
+		}));
+	},
+};

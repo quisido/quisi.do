@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
 import type VSCodeExtensionsJson from '../types/vs-code-extensions-json.js';
+import parseJsonc from './parse-jsonc.js';
 import validateVSCodeExtensions from './validate-vs-code-extensions-json.js';
 
 export default async function mapDirectoryToVsCodeExtensionsJson(
@@ -13,6 +14,6 @@ export default async function mapDirectoryToVsCodeExtensionsJson(
     'utf8',
   );
 
-  const json: unknown = JSON.parse(contents);
+  const json: unknown = parseJsonc(contents);
   return validateVSCodeExtensions(json);
 }

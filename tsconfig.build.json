@@ -4,13 +4,8 @@
     "sourceRoot": "https://github.com/quisido/quisi.do/raw/main/",
     "tsBuildInfoFile": ".cache/tsconfig.build.tsbuildinfo"
   },
-  "exclude": ["**/*.test.ts"],
   "extends": "./tsconfig.json",
-  "include": [
-    "scripts/",
-    "types/",
-    "utils/"
-  ],
+  "include": ["test/"],
   "references": [
     {
       "path": "./packages/quisido/tsconfig.build.json"

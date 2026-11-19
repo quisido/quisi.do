@@ -5,7 +5,7 @@ import Page from './page.js';
 
 /**
  * A "customer support" page is a feature of Stripe.
- * https://dashboard.stripe.com/settings/update/public/support-details
+ * @see https://dashboard.stripe.com/settings/update/public/support-details
  */
 
 export default function Support(): ReactElement {

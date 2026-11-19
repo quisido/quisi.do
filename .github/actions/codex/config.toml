@@ -24,6 +24,9 @@ enabled = false
 [history]
 persistence = "none"
 
+[mcp_servers.cloudflare]
+url = "https://mcp.cloudflare.com/mcp"
+
 [mcp_servers.mdn]
 url = "https://mcp.mdn.mozilla.net/"
 

@@ -1,0 +1,81 @@
+{
+  "name": "@quisido/authn.bak",
+  "version": "1.0.0",
+  "author": "quisi.do <authn@quisi.do>",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "exit 0",
+    "start": "npm run dev",
+    "test": "exit 0",
+    "clean": "rimraf .cache .tests .wrangler dist node_modules",
+    "dev": "wrangler dev --persist-to ../../.wrangler/state",
+    "eslint": "eslint . --cache --cache-location ./.cache/",
+    "local:delete": "wrangler d1 execute authn-dev --file=./sql/delete.sql --local --persist-to ../../.wrangler/state",
+    "local:drop": "wrangler d1 execute authn-dev --file=./sql/drop.sql --local --persist-to ../../.wrangler/state",
+    "local:init": "npm run local:init:emails && npm run local:init:oauth && npm run local:init:users && npm run local:delete",
+    "local:init:emails": "wrangler d1 execute authn-dev --file=./sql/emails.sql --local --persist-to ../../.wrangler/state",
+    "local:init:oauth": "wrangler d1 execute authn-dev --file=./sql/oauth.sql --local --persist-to ../../.wrangler/state",
+    "local:init:users": "wrangler d1 execute authn-dev --file=./sql/users.sql --local --persist-to ../../.wrangler/state",
+    "local:reinit": "npm run local:drop && npm run local:init",
+    "login": "wrangler login",
+    "production:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env production --outdir dist",
+    "production:init": "npm run production:init:emails && npm run production:init:oauth && npm run production:init:users",
+    "production:init:emails": "wrangler d1 execute authn --env production --file=./sql/emails.sql --remote",
+    "production:init:oauth": "wrangler d1 execute authn --env production --file=./sql/oauth.sql --remote",
+    "production:init:users": "wrangler d1 execute authn --env production --file=./sql/users.sql --remote",
+    "staging:deploy": "wrangler deploy src/index.ts --env staging --outdir dist",
+    "staging:deploy:dry-run": "wrangler deploy src/index.ts --dry-run --env staging --outdir dist",
+    "staging:init": "npm run staging:init:emails && npm run staging:init:oauth && npm run staging:init:users",
+    "staging:init:emails": "wrangler d1 execute authn-staging --env staging --file=./sql/emails.sql --remote",
+    "staging:init:oauth": "wrangler d1 execute authn-staging --env staging --file=./sql/oauth.sql --remote",
+    "staging:init:users": "wrangler d1 execute authn-staging --env staging --file=./sql/users.sql --remote",
+    "tsc": "tsc --skipLibCheck",
+    "tsc:no-emit": "tsc --noEmit --skipLibCheck",
+    "vitest": "vitest",
+    "vitest:run": "vitest run",
+    "whoami": "wrangler whoami"
+  },
+  "keywords": [
+    "authentication",
+    "cloudflare-workers",
+    "d1",
+    "oauth",
+    "patreon",
+    "serverless"
+  ],
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quisido"
+  },
+  "repository": {
+    "directory": "packages/authn",
+    "type": "git",
+    "url": "git+https://github.com/quisido/quisi.do.git"
+  },
+  "dependencies": {
+    "@quisido/authn-shared": "^1.1.5",
+    "@quisido/worker": "^1.0.8",
+    "cloudflare-utils": "^1.0.4",
+    "fmrs": "^3.0.0",
+    "form-urlencoded": "^6.1.8",
+    "jose": "^6.2.16"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261108.1",
+    "@quisido/worker-test": "^1.0.1",
+    "@types/cookie": "^1.0.0",
+    "@types/eslint": "^9.6.1",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "@vitest/ui": "^5.1.0",
+    "cloudflare-test-utils": "^1.0.2",
+    "concurrently": "^10.0.6",
+    "cookie": "^2.0.2",
+    "quisido": "^0.0.5",
+    "rimraf": "^6.1.4",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "vitest": "^5.0.1",
+    "wrangler": "^4.157.0"
+  }
+}

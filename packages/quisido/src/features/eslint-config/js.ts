@@ -154,7 +154,16 @@ export const JS_CONFIG: Config = defineConfig({
     'no-global-assign': 'error',
     // This is better handled by `@stylistic/max-len` or Prettier.
     'no-inline-comments': 'off',
-    'no-magic-numbers': ['error', { ignore: [-1, 0, 1] }],
+    'no-magic-numbers': [
+      'error',
+      {
+        ignore: [-1, 0, 1],
+        ignoreEnums: true,
+        ignoreNumericLiteralTypes: true,
+        ignoreReadonlyClassProperties: true,
+        ignoreTypeIndexes: true,
+      },
+    ],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'no-shadow-restricted-names': 'error',
     // This rule is a good goal, but some ternaries are better than their alternatives.

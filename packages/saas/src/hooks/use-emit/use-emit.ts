@@ -73,8 +73,8 @@ const safeMixpanelBrowserTrack = (
 
 /**
  * Common e-commerce events:
- * https://developers.cloudflare.com/zaraz/web-api/ecommerce/#list-of-supported-events
- * https://developers.cloudflare.com/zaraz/web-api/ecommerce/#list-of-supported-parameters
+ * @see https://developers.cloudflare.com/zaraz/web-api/ecommerce/#list-of-supported-events
+ * @see https://developers.cloudflare.com/zaraz/web-api/ecommerce/#list-of-supported-parameters
  *   Product List Viewed
  *   Products Searched
  *   Product Clicked

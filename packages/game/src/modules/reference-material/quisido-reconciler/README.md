@@ -82,9 +82,10 @@ resource is loading. It defaults to `false`.
 
 ### React context
 
-`QuisidoReactContext` and `QuisidoReactConsumerType` implement the minimal
-context shape React expects for `HostTransitionContext`. They exist so the host
-config can provide a valid transition context without importing React DOM.
+`QuisidoReactContext` creates a standard React context for
+`HostTransitionContext`, so the host config can provide a valid transition
+context without importing React DOM. `QuisidoReactConsumerType` remains a
+minimal `ReactConsumerType` for callers that need the legacy consumer shape.
 
 ## Usage
 
@@ -188,8 +189,8 @@ Do not use this module when:
 | `container.ts`                   | `Container` interface for the root render target.                                      |
 | `instance.ts`                    | `Instance` interface for host elements.                                                |
 | `text-instance.ts`               | `TextInstance` interface for text nodes.                                               |
-| `quisido-react-context.ts`       | Minimal `ReactContext` implementation for `HostTransitionContext`.                     |
-| `quisido-react-consumer-type.ts` | Minimal `ReactConsumerType` used by the context.                                       |
+| `quisido-react-context.ts`       | `React.createContext` factory used for `HostTransitionContext`.                        |
+| `quisido-react-consumer-type.ts` | Minimal `ReactConsumerType` for callers that need a standalone consumer type.          |
 | `constants.ts`                   | Version and bundle-type constants.                                                     |
 | `method-keys.ts`                 | Type helper for delegating the upstream `Reconciler` methods.                          |
 | `transition-status.ts`           | `TransitionStatus` enum required by the host config.                                   |

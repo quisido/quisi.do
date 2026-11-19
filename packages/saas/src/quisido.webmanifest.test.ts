@@ -27,7 +27,7 @@ describe('web manifest', async (): Promise<void> => {
     expect(backgroundColor).toBe(mapRgbToHex(THEME.background));
   });
 
-  // https://developer.chrome.com/docs/lighthouse/pwa/splash-screen/#recommendations
+  /** @see https://developer.chrome.com/docs/lighthouse/pwa/splash-screen/#recommendations */
   it('should support a splash screen', (): void => {
     expect(typeof backgroundColor).toBe('string');
     expect(typeof name).toBe('string');

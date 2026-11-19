@@ -3,7 +3,7 @@
   "hints": {
     "axe/aria": [
       "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/aria/#additional-rules-off-by-default
+      /** @see https://webhint.io/docs/user-guide/hints/hint-axe/aria/#additional-rules-off-by-default */
       [
         "aria-allowed-role",
         "aria-dialog-name",
@@ -14,7 +14,7 @@
     ],
     "axe/keyboard": [
       "error",
-      // https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default
+      /** @see https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default */
       {
         "accesskeys": "error",
         "focus-order-semantics": "error",

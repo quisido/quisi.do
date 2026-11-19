@@ -39,19 +39,18 @@ runs:
 
     - name: Save cache
       if: >-
-        ${{
-          github.ref_name == github.event.repository.default_branch &&
-          inputs.upload == 'true' &&
-          steps.build.outcome == 'success'
-        }}
+        github.ref_name == github.event.repository.default_branch &&
+        inputs.upload == 'true' &&
+        steps.build.outcome == 'success'
       uses: actions/cache/save@v6
       with:
         key: >-
-          typescript-build-
+          build-
           ${{ runner.os }}-
           ${{ hashFiles('package-lock.json') }}-
           ${{ hashFiles('tsconfig.json', 'packages/*/tsconfig.json') }}-
           ${{ hashFiles('tsconfig.build.json', 'packages/*/tsconfig.build.json') }}-
+          ${{ hashFiles('packages/*/wrangler.jsonc') }}-
           ${{ github.event.repository.default_branch }}-
           ${{ github.sha }}
         path: |-
@@ -59,9 +58,11 @@ runs:
           packages/*/.cache/*.tsbuildinfo
           dist/
           packages/*/dist/
+          packages/*/tsconfig.tsbuildinfo
+          packages/*/worker-configuration.d.ts
 
     - name: Upload
-      if: ${{ inputs.upload == 'true' && steps.build.outcome == 'success' }}
+      if: inputs.upload == 'true' && steps.build.outcome == 'success'
       uses: actions/upload-artifact@v6
       with:
         name: build
@@ -70,3 +71,4 @@ runs:
           dist/
           packages/*/_site/
           packages/*/dist/
+          packages/*/worker-configuration.d.ts

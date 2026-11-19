@@ -17,17 +17,15 @@ runs:
 
     - name: Save cache
       if: >-
-        ${{
-          github.ref_name == github.event.repository.default_branch &&
-          steps.test.outcome == 'success'
-        }}
+        github.ref_name == github.event.repository.default_branch &&
+        steps.test.outcome == 'success'
       uses: actions/cache/save@v6
       with:
         path: |
           .cache/eslint.json
           packages/*/.cache/eslint.json
         key: >-
-          eslint-
+          test-
           ${{ runner.os }}-
           ${{ hashFiles('package-lock.json') }}-
           ${{ github.event.repository.default_branch }}-

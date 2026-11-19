@@ -1,6 +1,7 @@
-/.cache/
-/.tests/
 /.wrangler/
-/dist/
+/coverage/
 /node_modules/
 /.dev.vars
+/npm-debug.log
+/tsconfig.tsbuildinfo
+/worker-configuration.d.ts

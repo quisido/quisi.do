@@ -36,7 +36,7 @@ export default function useDialog({
     }
   };
 
-  // Register nested focus scopes before showModal moves focus into the dialog.
+  // `showModal` cannot fire as a layout effect; nested focus scopes must register first.
   useEffect((): VoidFunction | undefined => {
     if (!modal) {
       return;

@@ -2,32 +2,6 @@
 
 ## High-impact bugs
 
-1. QuisidoReactContext is not a usable React context.
-   `quisido-reconciler/quisido-react-context.ts:32-38` defines `_currentValue`
-   and `_currentValue2` as getter-only properties, but React assigns to those
-   fields in `pushProvider`, `popProvider`, and `pushHostContext`. Assignment
-   throws:
-   ```
-   TypeError: Cannot set property _currentValue of #<QuisidoReactContext> which
-   has only a getter
-   ```
-   Additionally, `typeOf` is a custom symbol
-   (`Symbol.for('@quisido/reconciler')` in `quisido-reconciler.tsx:352-356`),
-   not React’s context symbol. Rendering `context.Provider` fails with “Element
-   type is invalid.” The Consumer type has the same issue.
-   **Impact:** `HostTransitionContext` can throw when React updates
-   host-transition state, and the class cannot actually be used as a context.
-   Fix by using `React.createContext`, or by adding setters and the correct
-   React context/consumer symbols.
-2. `BrowserGame.start()` creates duplicate subscriptions.
-   `browser-game.tsx:41` calls `start()` in the constructor. `start()` at
-   `:60-63` subscribes without checking whether it is already subscribed.
-   Calling `start()` again adds another listener, so each `dispatch()` renders
-   multiple times. My test observed 4 renders after one `start()` and one
-   `dispatch()`.
-   **Fix:** guard with `if (this.#unsubscribe !== undefined) return;`, or
-   unsubscribe before resubscribing. Also set `#unsubscribe = undefined` in
-   `stop()`.
 3. Audio instances share one `HTMLAudioElement` per `src`.
    `play-audio.ts:9-11,27` caches `HTMLAudioElement` instances in a `SyncMap`
    keyed only by `src`. Two `<audio>` instances with the same source therefore

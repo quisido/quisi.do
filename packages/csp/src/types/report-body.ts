@@ -1,4 +1,4 @@
-// https://w3c.github.io/webappsec-csp/#reporting
+/** @see https://w3c.github.io/webappsec-csp/#reporting */
 export default interface ReportBody {
   readonly blockedURL?: string | undefined;
   readonly columnNumber?: number | undefined;

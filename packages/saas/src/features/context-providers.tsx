@@ -7,7 +7,6 @@ import I18nProvider from './i18n-provider.js';
 import NotificationsProvider from './notifications-provider.js';
 import PostHog from './posthog.js';
 import SessionIdProvider from './session-id-provider.js';
-import TracerProviderProvider from './tracer-provider-provider.js';
 import WindowProvider from './window-provider.js';
 
 export const ContextProviders: ComponentType<PropsWithChildren> = withWrappers(
@@ -22,8 +21,4 @@ export const ContextProviders: ComponentType<PropsWithChildren> = withWrappers(
 
   // Consumes `Authentication`.
   PostHog,
-
-  // Consumes `WindowProvider`.
-  // Honeycomb, // "Critical dependency: the request of a dependency is an expression"
-  TracerProviderProvider,
 )(Fragment);

@@ -17,20 +17,16 @@
       "path": "packages/authn",
     },
     {
+      "name": "⚙️ Authentication (legacy)",
+      "path": "packages/authn.bak",
+    },
+    {
       "name": "⚙️ Content Security Policy reporting endpoint",
       "path": "packages/csp",
     },
     {
       "name": "📦 authn-shared",
       "path": "packages/authn-shared",
-    },
-    {
-      "name": "📦 cloudflare-test-utils",
-      "path": "packages/cloudflare-test-utils",
-    },
-    {
-      "name": "📦 cloudflare-utils",
-      "path": "packages/cloudflare-utils",
     },
     {
       "name": "📦 csp-shared",
@@ -55,14 +51,6 @@
     {
       "name": "📦 use-shallow-memo",
       "path": "packages/use-shallow-memo",
-    },
-    {
-      "name": "📦 worker",
-      "path": "packages/worker",
-    },
-    {
-      "name": "📦 worker-test",
-      "path": "packages/worker-test",
     },
   ],
   "settings": {

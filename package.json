@@ -11,11 +11,10 @@
     "build": "bash ./scripts/build.sh",
     "start": "bash ./scripts/start.sh",
     "test": "bash ./scripts/test.sh",
-    "authn": "npm --workspace=packages/authn start",
+    "authn": "npm --workspace=packages/authn.bak start",
     "browserslist:update-db": "browserslist --update-db",
     "clean": "rimraf .cache .tests dist graphify-out && npm run clean --if-present --workspaces && rimraf node_modules",
     "cloudflare-utils": "npm --workspace=packages/cloudflare-utils start",
-    "codex": "codex --ask-for-approval untrusted --sandbox workspace-write --search",
     "csp": "npm --workspace=packages/csp start",
     "eslint-config": "npm --workspace=packages/eslint-config start",
     "fmrs": "npm --workspace=packages/fmrs start",
@@ -94,6 +93,7 @@
     "@typescript/native": "npm:typescript@^7.0.2",
     "@vitest/ui": "^5.1.0",
     "browserslist": "^4.29.5",
+    "canvas": "^4.0.0-rc3",
     "chrome-devtools-mcp": "^1.13.0",
     "concurrently": "^10.0.7",
     "eslint": "^10.15.0",
@@ -112,6 +112,7 @@
     "@hint/connector-puppeteer": {
       "puppeteer-core": ">=22.11.1"
     },
+    "canvas": "$canvas",
     "eslint-plugin-react-hooks": {
       "zod-validation-error": "^4.0.2"
     }

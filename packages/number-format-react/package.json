@@ -54,7 +54,6 @@
     "@vitejs/plugin-react": "^6.3.0",
     "@vitest/ui": "^5.1.0",
     "concurrently": "^10.0.7",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-compiler": "^19.1.0-rc.2",
     "eslint-plugin-react-hooks": "^7.1.1",
