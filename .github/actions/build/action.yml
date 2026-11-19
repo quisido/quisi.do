@@ -71,3 +71,4 @@ runs:
           dist/
           packages/*/_site/
           packages/*/dist/
+          packages/*/worker-configuration.d.ts
