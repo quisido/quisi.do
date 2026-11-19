@@ -23,11 +23,11 @@ runs:
         check-latest: true
         node-version-file: .nvmrc
 
-    - name: Restore ESLint cache
+    - name: Restore test cache
       uses: actions/cache/restore@v6
       with:
         key: >-
-          eslint-
+          test-
           ${{ runner.os }}-
           ${{ hashFiles('package-lock.json') }}-
           ${{ github.event.repository.default_branch }}-
@@ -36,20 +36,21 @@ runs:
           .cache/eslint.json
           packages/*/.cache/eslint.json
         restore-keys: >-
-          eslint-
+          test-
           ${{ runner.os }}-
           ${{ hashFiles('package-lock.json') }}-
           ${{ github.event.repository.default_branch }}-
 
-    - name: Restore TypeScript cache
+    - name: Restore build cache
       uses: actions/cache/restore@v6
       with:
         key: >-
-          typescript-build-
+          build-
           ${{ runner.os }}-
           ${{ hashFiles('package-lock.json') }}-
           ${{ hashFiles('tsconfig.json', 'packages/*/tsconfig.json') }}-
           ${{ hashFiles('tsconfig.build.json', 'packages/*/tsconfig.build.json') }}-
+          ${{ hashFiles('packages/*/wrangler.jsonc') }}-
           ${{ github.event.repository.default_branch }}-
           ${{ github.sha }}
         path: |
@@ -57,16 +58,19 @@ runs:
           packages/*/.cache/*.tsbuildinfo
           dist/
           packages/*/dist/
+          packages/*/tsconfig.tsbuildinfo
+          packages/*/worker-configuration.d.ts
         restore-keys: >-
-          typescript-build-
+          build-
           ${{ runner.os }}-
           ${{ hashFiles('package-lock.json') }}-
           ${{ hashFiles('tsconfig.json', 'packages/*/tsconfig.json') }}-
           ${{ hashFiles('tsconfig.build.json', 'packages/*/tsconfig.build.json') }}-
+          ${{ hashFiles('packages/*/wrangler.jsonc') }}-
           ${{ github.event.repository.default_branch }}-
 
     - name: Download build
-      if: ${{ inputs.download-build == 'true' }}
+      if: inputs.download-build == 'true'
       uses: actions/download-artifact@v7
       with:
         name: build
