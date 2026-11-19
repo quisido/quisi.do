@@ -29,6 +29,9 @@ export const DISABLED_TYPESCRIPT_RULES: Readonly<RulesConfig> = {
    */
   "dot-notation": "off",
 
+  // This rule is incompatible with numeric TypeScript enums.
+  "es-x/no-nonstandard-number-prototype-properties": "off",
+
   // `import-x/extensions` throws an error when importing files with `.d.ts`.
   "import-x/extensions": "off",
 

@@ -20,6 +20,7 @@ const CONFIG: Readonly<UserConfig> = defineConfig({
       "enabled": true,
       "exclude": [
         "coverage/**",
+        "lib/**",
         "node_modules/**",
         "worker-configuration.d.ts",
       ],

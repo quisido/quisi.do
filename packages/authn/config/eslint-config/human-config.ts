@@ -8,9 +8,11 @@ import jsonPlugin from "@eslint/json";
 import jsoncPlugin from "eslint-plugin-jsonc";
 import promisePlugin from "eslint-plugin-promise";
 import securityPlugin from "eslint-plugin-security";
+import sonarjsPlugin from "eslint-plugin-sonarjs";
 import stylisticPlugin from "@stylistic/eslint-plugin";
 import functionalPlugin from "eslint-plugin-functional";
 import vitestPlugin from "@vitest/eslint-plugin";
+import assert from "../../lib/assert.js";
 import { TYPESCRIPT_PLUGIN_RULES } from "./typescript-plugin-rules.js";
 import { TYPESCRIPT_PLUGIN } from "./typescript-plugin.js";
 import { TYPESCRIPT_LANGUAGE_OPTIONS } from "./typescript-language-option.js";
@@ -24,6 +26,11 @@ import { TYPESCRIPT_IMPORT_RESOLVER } from "./typescript-import-resolver.js";
 import { STRICT_TYPE_CHECKED_RULES_CONFIG } from "./strict-type-checked-rules-config.js";
 import { NO_UNSAFE_TYPESCRIPT_RULES_CONFIG } from "./no-unsafe-typescript-rules-config.js";
 import type { DeepReadonly } from "@lib/deep-readonly.js";
+
+assert(
+  sonarjsPlugin.rules !== undefined,
+  "Expected SonarJS plugin to have rules.",
+);
 
 const JSON_RULES: DeepReadonly<RulesConfig> = {
   ...toFixable(jsonPlugin.rules, "json"),
@@ -139,6 +146,7 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       "eslint-comments": eslintCommentsPlugin,
       "functional": functionalPlugin,
       "import-x": importX,
+      "sonarjs": sonarjsPlugin,
       "vitest": vitestPlugin,
     },
     "rules": {
@@ -155,6 +163,7 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       ...toFixable(importX.rules, "import-x"),
       ...toFixable(promisePlugin.rules, "promise"),
       ...toFixable(securityPlugin.rules, "security"),
+      ...toFixable(sonarjsPlugin.rules, "sonarjs"),
       ...toFixable(stylisticPlugin.rules, "@stylistic"),
       ...toFixable(TYPESCRIPT_PLUGIN_RULES, "@typescript-eslint"),
       ...toFixable(vitestPlugin.rules, "vitest"),
@@ -282,6 +291,13 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       "use-isnan": ["error", { "enforceForIndexOf": true }],
       "vitest/no-importing-vitest-globals": "off",
       "vitest/no-test-return-statement": "error",
+
+      /**
+       * This rule is unnecessary since this package does not import Vitest
+       * types globally. It also prevents similarly-named functions, like
+       * `assert`, from being imported.
+       */
+      "vitest/prefer-importing-vitest-globals": "off",
       "vitest/prefer-lowercase-title": "off",
       "vitest/require-to-throw-message": "error",
     },

@@ -5,6 +5,7 @@ import noCommentsPlugin from "eslint-plugin-no-comments";
 import promisePlugin from "eslint-plugin-promise";
 import functionalPlugin from "eslint-plugin-functional";
 import securityPlugin from "eslint-plugin-security";
+import sonarjsPlugin, { configs as sonarjsPluginConfigs } from "eslint-plugin-sonarjs";
 import stylisticPlugin from "@stylistic/eslint-plugin";
 import { importX } from "eslint-plugin-import-x";
 import { DISABLED_BUILTIN_RULES } from "./disabled-builtin-rules.js";
@@ -40,12 +41,14 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "functional": functionalPlugin,
       "import-x": importX,
       "no-comments": noCommentsPlugin,
+      "sonarjs": sonarjsPlugin,
     },
     "rules": {
       // Default rules
       ...ES_X_NONSTANDARD_RULES_CONFIG,
       ...NO_UNSAFE_TYPESCRIPT_RULES_CONFIG,
       ...securityPlugin.configs.recommended.rules,
+      ...sonarjsPluginConfigs.recommended.rules,
       ...STRICT_TYPE_CHECKED_RULES_CONFIG,
 
       // Superceded rules
@@ -138,14 +141,14 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "max-lines-per-function": "error", // 50
       "max-nested-callbacks": "error", // 10
       "max-params": ["error", { "countThis": "never" }], // 3
-      // "max-statements": "error", // 10
-      "no-inline-comments": "error",
+      "max-statements": "error", // 10
       "no-await-in-loop": "error",
       "no-comments/disallowComments": ["error", { "allow": [] }],
       "no-console": "error",
       "no-constant-binary-expression": ["error", { "checkRelationalComparisons": true }],
       "no-extend-native": "error",
       "no-global-assign": "error",
+      "no-inline-comments": "error",
       "no-magic-numbers": [
         "error",
         {
@@ -158,6 +161,51 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       ],
       "no-param-reassign": "error",
       "no-promise-executor-return": "error",
+      "no-restricted-globals": ["error", {
+        "checkGlobalObject": true,
+        "globals": [
+          "crypto",
+          {
+            "message": "Import `{ logError, logInfo }` from `@lib/log.js` instead.",
+            "name": "console",
+          },
+          {
+            "message": "Import `fetch` from `@lib/fetch.js` instead.",
+            "name": "fetch",
+          },
+        ],
+      }],
+      "no-restricted-properties": [
+        "error",
+        {
+          "object": "console",
+          "message": "Import `{ logError }` from `@lib/log.js` instead.",
+          "property": "error",
+        },
+        {
+          "object": "console",
+          "message": "Import `{ logInfo }` from `@lib/log.js` instead.",
+          "property": "log",
+        },
+        {
+          "object": "Date",
+          "message": "Import `now` from `@lib/now.js` instead.",
+          "property": "now",
+        },
+        {
+          "object": "Math",
+          "message": "Import `random` from `@lib/random.js` instead.",
+          "property": "random",
+        },
+        {
+          "object": "Object",
+          "property": "defineProperties",
+        },
+        {
+          "object": "Object",
+          "property": "defineProperty",
+        },
+      ],
       "no-restricted-syntax": [
         "error",
 
@@ -205,6 +253,27 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "promise/valid-params": "error",
       "security/detect-eval-with-expression": "error",
       "security/detect-unsafe-regex": "error",
+      "sonarjs/cyclomatic-complexity": "error",
+      "sonarjs/declarations-in-global-scope": "error",
+      "sonarjs/expression-complexity": "error",
+      "sonarjs/max-lines": "error",
+      "sonarjs/max-lines-per-function": "error",
+      "sonarjs/max-union-size": "error",
+      "sonarjs/nested-control-flow": "error",
+      "sonarjs/no-built-in-override": "error",
+      "sonarjs/no-collapsible-if": "error",
+      "sonarjs/no-commented-code": "error",
+      "sonarjs/no-for-in-iterable": "error",
+      "sonarjs/no-implicit-dependencies": "error",
+      "sonarjs/no-return-type-any": "error",
+      "sonarjs/no-sonar-comments": "error",
+      "sonarjs/no-undefined-assignment": "error",
+      "sonarjs/no-variable-usage-before-declaration": "error",
+      "sonarjs/no-wildcard-import": "error",
+      "sonarjs/operation-returning-nan": "error",
+      "sonarjs/prefer-immediate-return": "error",
+      "sonarjs/prefer-object-literal": "error",
+      "sonarjs/unicode-aware-regex": "error",
       "use-isnan": ["error", { "enforceForIndexOf": true }],
     },
 
