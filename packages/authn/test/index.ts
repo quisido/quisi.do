@@ -1,4 +1,5 @@
 import { exports as worker } from "cloudflare:workers";
+import { expect } from "vitest";
 
 export async function fetch (...params: Readonly<Parameters<Fetcher["fetch"]>>): Promise<Response> {
 
@@ -17,6 +18,9 @@ export async function fetch (...params: Readonly<Parameters<Fetcher["fetch"]>>):
    * Assert expected D1/KV call counts.
    * Assert all fetch requests are to allowlisted hosts.
    */
+
+  expect(response.headers.get("X-Content-Type-Options")).toBe("nosniff");
+  expect(response.headers.get("X-Frame-Options")).toBe("SAMEORIGIN");
 
   return response;
 

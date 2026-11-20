@@ -221,6 +221,9 @@ jobs:
           show-progress: false
       - name: Setup
         uses: ./.github/actions/setup
+      # `scripts/publish.sh` uses `bun` to run TypeScript natively.
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
       - name: Publish
         run: npm run publish
 

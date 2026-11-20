@@ -124,13 +124,13 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
   // TypeScript for humans
   {
     "files": [
-      "app/**/*.ts",
-      "app/*.ts",
       "config/**/*.ts",
       "config/*.ts",
       "config/**/*.ts",
       "lib/**/*.ts",
       "lib/*.ts",
+      "test/**/*.ts",
+      "test/*.ts",
       "*.ts",
     ],
     "ignores": ["worker-configuration.d.ts"],

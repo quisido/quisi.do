@@ -31,6 +31,8 @@ export default {
 			headers: {
 				"access-control-allow-origin": allowedOrigin,
 				"content-type": "application/json",
+				"x-content-type-options": "nosniff",
+				"x-frame-options": "SAMEORIGIN",
 			},
 		}));
 	},

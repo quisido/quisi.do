@@ -48,7 +48,7 @@ const CONFIG: Readonly<UserConfig> = defineConfig({
         ],
         "test": {
           "detectAsyncLeaks": true,
-          "include": ["app/**/*.test.ts"],
+          "include": ["test/**/*.test.ts"],
           "name": "Cloudflare Worker",
         },
       },

@@ -238,20 +238,28 @@
       "effect": "allow",
       "resource": "*",
     },
-    {"action": "webfetch",
+    {
+      "action": "webfetch",
       "effect": "ask",
-      "resource": "*"},
-    {"action": "webfetch",
+      "resource": "*",
+    },
+    {
+      "action": "webfetch",
       "effect": "allow",
-      "resource": "opencode.ai"},
-    {"action": "websearch",
+      "resource": "opencode.ai",
+    },
+    {
+      "action": "websearch",
       "effect": "allow",
-      "resource": "*"},
+      "resource": "*",
+    },
   ],
   "policies": [
-    {"action": "tool.use",
+    {
+      "action": "tool.use",
       "effect": "deny",
-      "resource": "shell:sudo *"},
+      "resource": "shell:sudo *",
+    },
   ],
   "share": "disabled",
   "watcher": {

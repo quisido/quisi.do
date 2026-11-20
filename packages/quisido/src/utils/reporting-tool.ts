@@ -63,12 +63,12 @@ export default class ReportingTool<
 
   public logError(message: string): void {
     this.#isProgressLog = false;
-    this.#stdout.write(`[${this.#toolName}] ${message}`);
+    this.#stdout.write(`[${this.#toolName}] ${message}\n`);
   }
 
   public logInfo(message: string): void {
     this.#isProgressLog = false;
-    this.#stdout.write(`[${this.#toolName}] ${message}`);
+    this.#stdout.write(`[${this.#toolName}] ${message}\n`);
   }
 
   #progress(message: string): void {

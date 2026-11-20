@@ -8,9 +8,10 @@ confidently deploying an entirely agent-authored application source.
 
 ## Structure
 
-- `app/` contains behavior-driven test suites.
 - `config/` contains package configuration files.
-- `src/` contains service's implementation code.
+- `lib/` contains strictly-managed utility functions for unsafe built-ins.
+- `src/` contains the service's implementation code.
+- `test/` contains behavior-driven test suites.
 
 ## Commands
 
@@ -19,7 +20,7 @@ confidently deploying an entirely agent-authored application source.
 - `npm test` executes `scripts/test.sh`, which executes `eslint`, `tsc`, and
   `vitest`.
 - `npx eslint .` lints the package.
-- `npx vitest run` runs the behavior-driven test suite in `app/`.
+- `npx vitest run` runs the behavior-driven test suite in `test/`.
 - `npx wrangler types` saves a `.d.ts` to `worker-configuration.d.ts`, including
   `Env` types based on the `wrangler.jsonc` bindings, compatibility date, and
   compatibility flags.

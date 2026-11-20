@@ -98,9 +98,9 @@
     "*.json",
     "*.jsonc",
     "*.ts",
-    "app/",
     "config/",
     "lib/",
     "src/",
+    "test/",
   ],
 }
