@@ -4,7 +4,7 @@
     "jose": "^6.2.16"
   },
   "devDependencies": {
-    "@cloudflare/vitest-plugin": "^1.8.2",
+    "@cloudflare/vitest-plugin": "^1.8.4",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.8.1",
     "@eslint/config-helpers": "^0.7.0",
     "@eslint/core": "^1.2.1",
