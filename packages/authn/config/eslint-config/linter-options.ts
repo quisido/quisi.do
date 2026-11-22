@@ -1,7 +1,7 @@
 import type { LinterOptionsConfig } from "@eslint/core";
-import type { DeepReadonly } from "@lib/deep-readonly.js";
+import type { ReadonlyDeep } from "@lib/readonly-deep.js";
 
-export const LINTER_OPTIONS: DeepReadonly<LinterOptionsConfig> = {
+export const LINTER_OPTIONS: ReadonlyDeep<LinterOptionsConfig> = {
   "reportUnusedDisableDirectives": "error",
   "reportUnusedInlineConfigs": "error",
 };

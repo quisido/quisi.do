@@ -53,6 +53,7 @@
   },
   "scripts": {
     "build": "wrangler types",
+    "eslint": "eslint .",
     "fix": "eslint . --fix",
     "start": "wrangler dev",
     "test": "bash ./scripts/test.sh"

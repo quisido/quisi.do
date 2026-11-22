@@ -1,4 +1,5 @@
-import type { DeepReadonly } from "@lib/deep-readonly.js";
+import type { ReadonlyDeep } from "@lib/readonly-deep.js";
+import getFaviconIcoResponse from "./favicon-ico-response.js";
 
 const isLocalhostOrigin = (origin: string): boolean =>
 	new URL(origin).hostname === "localhost";
@@ -16,9 +17,13 @@ const getAllowedOrigin = (
 
 export default {
 	fetch(
-		request: DeepReadonly<Request>,
-		env: DeepReadonly<Env>,
-	): DeepReadonly<Promise<Response>> {
+		request: ReadonlyDeep<Request>,
+		env: ReadonlyDeep<Env>,
+	): ReadonlyDeep<Promise<Response>> {
+		if (new URL(request.url).pathname === "/favicon.ico") {
+			return Promise.resolve(getFaviconIcoResponse());
+		}
+
 		const allowedOrigin: string = getAllowedOrigin(
 			request.headers.get("Origin"),
 			env.COOKIE_DOMAIN,

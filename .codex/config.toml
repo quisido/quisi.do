@@ -19,7 +19,7 @@ skill_approval = true
 
 [features]
 js_repl = true
-multi_agent = true
+multi_agent_v2 = true
 prevent_idle_sleep = true
 
 [feedback]

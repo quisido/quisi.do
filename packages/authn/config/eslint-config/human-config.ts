@@ -25,14 +25,14 @@ import { toFixable } from "./to-fixable.js";
 import { TYPESCRIPT_IMPORT_RESOLVER } from "./typescript-import-resolver.js";
 import { STRICT_TYPE_CHECKED_RULES_CONFIG } from "./strict-type-checked-rules-config.js";
 import { NO_UNSAFE_TYPESCRIPT_RULES_CONFIG } from "./no-unsafe-typescript-rules-config.js";
-import type { DeepReadonly } from "@lib/deep-readonly.js";
+import type { ReadonlyDeep } from "@lib/readonly-deep.js";
 
 assert(
   sonarjsPlugin.rules !== undefined,
   "Expected SonarJS plugin to have rules.",
 );
 
-const JSON_RULES: DeepReadonly<RulesConfig> = {
+const JSON_RULES: ReadonlyDeep<RulesConfig> = {
   ...toFixable(jsonPlugin.rules, "json"),
   "json/no-duplicate-keys": "error",
   "json/no-empty-keys": "error",

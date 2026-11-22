@@ -1,8 +1,8 @@
 import typescriptRawPlugin from "@typescript-eslint/eslint-plugin/use-at-your-own-risk/raw-plugin";
 import type { RulesConfig } from "@eslint/core";
-import type { DeepReadonly } from "@lib/deep-readonly.js";
+import type { ReadonlyDeep } from "@lib/readonly-deep.js";
 
-type TypeScriptRawPlugin = DeepReadonly<typeof typescriptRawPlugin>;
+type TypeScriptRawPlugin = ReadonlyDeep<typeof typescriptRawPlugin>;
 type TypeScriptConfig = Exclude<TypeScriptRawPlugin["flatConfigs"][keyof TypeScriptRawPlugin["flatConfigs"]], readonly unknown[]>;
 
 const toRulesConfig = (
@@ -15,4 +15,4 @@ const toRulesConfig = (
 
 };
 
-export const STRICT_TYPE_CHECKED_RULES_CONFIG: DeepReadonly<RulesConfig> = typescriptRawPlugin.flatConfigs["flat/strict-type-checked"].reduce(toRulesConfig, {});
+export const STRICT_TYPE_CHECKED_RULES_CONFIG: ReadonlyDeep<RulesConfig> = typescriptRawPlugin.flatConfigs["flat/strict-type-checked"].reduce(toRulesConfig, {});

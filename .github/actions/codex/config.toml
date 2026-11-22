@@ -15,7 +15,7 @@ web_search = "live"
 
 [features]
 js_repl = true
-multi_agent = true
+multi_agent_v2 = true
 prevent_idle_sleep = true
 
 [feedback]
