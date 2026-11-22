@@ -12,7 +12,8 @@ This package uses test-driven-development and contains failing tests. Run
 `npm test` to identify what is failing, then change `src/` to correct it.
 
 If you believe the test is wrong, **stop implementation** and confirm with the
-user.
+user. If you think the test is incompatible with the appropriate solution,
+**stop implementation** and confirm with the user.
 
 If you need clarification, ask instead of assuming.
 

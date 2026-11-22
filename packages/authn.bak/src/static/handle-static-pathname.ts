@@ -15,20 +15,6 @@ export default function handleStaticPathname(
   pathname: StaticPathname,
 ): Response {
   switch (pathname) {
-    case StaticPathname.Favicon: {
-      this.emitPublicMetric(MetricName.FaviconIco);
-      return new FaviconIcoResponse({
-        headers: new Headers(),
-      });
-    }
-
-    case StaticPathname.Robots: {
-      this.emitPublicMetric(MetricName.RobotsTxt);
-      return new RobotsTxtResponse({
-        headers: new Headers(),
-      });
-    }
-
     case StaticPathname.Root: {
       this.emitPublicMetric(MetricName.RootPathname);
       return new RootResponse(this.host);
