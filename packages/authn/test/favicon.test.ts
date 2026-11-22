@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import faviconArrayBuffer from "./favicon.ico";
 import { fetch } from "./index.js";
-import type { ReadonlyDeep } from "@lib/readonly-deep.js";
+import { FAVICON } from "#lib/favicon.js";
+import type { ReadonlyDeep } from "#lib/readonly-deep.js";
 
-const FAVICON_BUFFER: Buffer = Buffer.from(faviconArrayBuffer);
+const FAVICON_BUFFER: ReadonlyDeep<Buffer> = Buffer.from(FAVICON);
 
 describe("favicon.ico", (): void => {
 
@@ -19,7 +19,8 @@ describe("favicon.ico", (): void => {
       "x-frame-options": "SAMEORIGIN",
     });
 
-    const responseBuffer: Buffer = Buffer.from(await response.arrayBuffer());
+    const responseBuffer: ReadonlyDeep<Buffer> =
+      Buffer.from(await response.arrayBuffer());
 
     expect(responseBuffer).toEqual(FAVICON_BUFFER);
 

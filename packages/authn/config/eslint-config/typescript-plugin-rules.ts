@@ -1,6 +1,6 @@
 import type { RuleDefinition } from "@eslint/core";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
-import type { ReadonlyDeep } from "@lib/readonly-deep.js";
+import type { ReadonlyDeep } from "#lib/readonly-deep.js";
 
 type PluginRules = Readonly<Record<string, Readonly<RuleDefinition>>>;
 type TypeScriptPluginRule = ReadonlyDeep<typeof tsPlugin["rules"][string]>;

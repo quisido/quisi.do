@@ -1,6 +1,6 @@
 import typescriptRawPlugin from "@typescript-eslint/eslint-plugin/use-at-your-own-risk/raw-plugin";
 import type { RulesConfig } from "@eslint/core";
-import type { ReadonlyDeep } from "@lib/readonly-deep.js";
+import type { ReadonlyDeep } from "#lib/readonly-deep.js";
 
 type TypeScriptRawPlugin = ReadonlyDeep<typeof typescriptRawPlugin>;
 type TypeScriptConfig = Exclude<TypeScriptRawPlugin["flatConfigs"][keyof TypeScriptRawPlugin["flatConfigs"]], readonly unknown[]>;

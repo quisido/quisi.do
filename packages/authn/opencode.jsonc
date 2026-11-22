@@ -47,23 +47,48 @@
     // Find
     {
       "action": "glob",
-      "effect": "allow",
-      "resource": "lib/",
+      "effect": "deny",
+      "resource": "*",
     },
     {
       "action": "glob",
       "effect": "allow",
-      "resource": "src/",
+      "resource": "lib/*",
+    },
+    {
+      "action": "glob",
+      "effect": "allow",
+      "resource": "src/*",
+    },
+    {
+      "action": "grep",
+      "effect": "deny",
+      "resource": "*",
     },
     {
       "action": "grep",
       "effect": "allow",
-      "resource": "lib/",
+      "resource": "lib/*",
     },
     {
       "action": "grep",
       "effect": "allow",
-      "resource": "src/",
+      "resource": "src/*",
+    },
+    {
+      "action": "list",
+      "effect": "deny",
+      "resource": "*",
+    },
+    {
+      "action": "list",
+      "effect": "allow",
+      "resource": "lib/*",
+    },
+    {
+      "action": "list",
+      "effect": "allow",
+      "resource": "src/*",
     },
     // Read
     {
@@ -74,17 +99,17 @@
     {
       "action": "read",
       "effect": "allow",
-      "resource": "lib/",
+      "resource": "lib/*",
     },
     {
       "action": "read",
       "effect": "allow",
-      "resource": "scripts/",
+      "resource": "scripts/*",
     },
     {
       "action": "read",
       "effect": "allow",
-      "resource": "src/",
+      "resource": "src/*",
     },
     {
       "action": "read",
@@ -130,17 +155,17 @@
     {
       "action": "edit",
       "effect": "allow",
-      "resource": "~/.local/share/opencode/log/**",
+      "resource": "~/.local/share/opencode/log/*",
     },
     {
       "action": "edit",
       "effect": "allow",
-      "resource": "/tmp/**",
+      "resource": "/tmp/*",
     },
     {
       "action": "edit",
       "effect": "allow",
-      "resource": "src/**",
+      "resource": "src/*",
     },
     // Execute
     {

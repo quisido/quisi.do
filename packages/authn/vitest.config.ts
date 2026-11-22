@@ -4,7 +4,6 @@ import { defineConfig } from "vitest/config";
 import type { InlineConfig } from "vitest/node";
 import type { UserConfig } from "vite";
 import { cloudflareTest } from "@cloudflare/vitest-plugin";
-import { vitePluginIco } from "./config/vitest-config/vite-plugin-ico.js";
 
 const CPU_COUNT: number = cpus().length;
 const REPORTERS: InlineConfig["reporters"] = [["agent", { "summary": false }]];
@@ -15,8 +14,8 @@ if (process.env["GITHUB_ACTIONS"] === "true") {
 
 }
 
-const CONFIG: Readonly<UserConfig> = defineConfig({
-  "plugins": [vitePluginIco()],
+const CONFIG: UserConfig = defineConfig({
+  "plugins": [],
   "test": {
     "coverage": {
       "enabled": true,

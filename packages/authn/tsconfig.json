@@ -64,7 +64,7 @@
     "noUnusedParameters": true,
     "outDir": null,
     "paths": {
-      "@lib/*": ["./lib/*"],
+      "#lib/*": ["./lib/*"],
     },
     "plugins": [],
     "preserveConstEnums": true,

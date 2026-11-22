@@ -166,11 +166,11 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
         "globals": [
           "crypto",
           {
-            "message": "Import `{ logError, logInfo }` from `@lib/log.js` instead.",
+            "message": "Import `{ logError, logInfo }` from `#lib/log.js` instead.",
             "name": "console",
           },
           {
-            "message": "Import `fetch` from `@lib/fetch.js` instead.",
+            "message": "Import `fetch` from `#lib/fetch.js` instead.",
             "name": "fetch",
           },
         ],
@@ -179,22 +179,22 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
         "error",
         {
           "object": "console",
-          "message": "Import `{ logError }` from `@lib/log.js` instead.",
+          "message": "Import `{ logError }` from `#lib/log.js` instead.",
           "property": "error",
         },
         {
           "object": "console",
-          "message": "Import `{ logInfo }` from `@lib/log.js` instead.",
+          "message": "Import `{ logInfo }` from `#lib/log.js` instead.",
           "property": "log",
         },
         {
           "object": "Date",
-          "message": "Import `now` from `@lib/now.js` instead.",
+          "message": "Import `now` from `#lib/now.js` instead.",
           "property": "now",
         },
         {
           "object": "Math",
-          "message": "Import `random` from `@lib/random.js` instead.",
+          "message": "Import `random` from `#lib/random.js` instead.",
           "property": "random",
         },
         {
@@ -264,7 +264,12 @@ export const AGENT_CONFIG: readonly ConfigObject[] = [
       "sonarjs/no-collapsible-if": "error",
       "sonarjs/no-commented-code": "error",
       "sonarjs/no-for-in-iterable": "error",
-      "sonarjs/no-implicit-dependencies": "error",
+
+      /**
+       * `package.json`'s `imports` prefixed with `#` are erroneously identified
+       * as "" by SonarJS.
+       */
+      "sonarjs/no-implicit-dependencies": ["error", { "whitelist": [""] }],
       "sonarjs/no-return-type-any": "error",
       "sonarjs/no-sonar-comments": "error",
       "sonarjs/no-undefined-assignment": "error",

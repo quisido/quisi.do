@@ -1,4 +1,4 @@
-import type { ReadonlyDeep } from "@lib/readonly-deep.js";
+import type { ReadonlyDeep } from "#lib/readonly-deep.js";
 import getFaviconIcoResponse from "./favicon-ico-response.js";
 
 const isLocalhostOrigin = (origin: string): boolean =>

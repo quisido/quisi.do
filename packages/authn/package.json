@@ -37,6 +37,9 @@
     "type": "individual",
     "url": "https://github.com/sponsors/quisido"
   },
+  "imports": {
+    "#lib/*": "./lib/*"
+  },
   "keywords": [
     "authentication",
     "cloudflare-workers",

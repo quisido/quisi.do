@@ -1,6 +1,6 @@
 import type { RulesConfig } from "@eslint/core";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
-import type { ReadonlyDeep } from "@lib/readonly-deep.js";
+import type { ReadonlyDeep } from "#lib/readonly-deep.js";
 
 const isUnsafeRule = (ruleId: string): boolean => ruleId.startsWith("no-unsafe-");
 

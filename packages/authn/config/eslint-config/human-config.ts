@@ -12,7 +12,6 @@ import sonarjsPlugin from "eslint-plugin-sonarjs";
 import stylisticPlugin from "@stylistic/eslint-plugin";
 import functionalPlugin from "eslint-plugin-functional";
 import vitestPlugin from "@vitest/eslint-plugin";
-import assert from "../../lib/assert.js";
 import { TYPESCRIPT_PLUGIN_RULES } from "./typescript-plugin-rules.js";
 import { TYPESCRIPT_PLUGIN } from "./typescript-plugin.js";
 import { TYPESCRIPT_LANGUAGE_OPTIONS } from "./typescript-language-option.js";
@@ -25,7 +24,8 @@ import { toFixable } from "./to-fixable.js";
 import { TYPESCRIPT_IMPORT_RESOLVER } from "./typescript-import-resolver.js";
 import { STRICT_TYPE_CHECKED_RULES_CONFIG } from "./strict-type-checked-rules-config.js";
 import { NO_UNSAFE_TYPESCRIPT_RULES_CONFIG } from "./no-unsafe-typescript-rules-config.js";
-import type { ReadonlyDeep } from "@lib/readonly-deep.js";
+import assert from "#lib/assert.js";
+import type { ReadonlyDeep } from "#lib/readonly-deep.js";
 
 assert(
   sonarjsPlugin.rules !== undefined,

@@ -1,7 +1,9 @@
 # Instructions for Agents
 
+Instructions apply to **this directory**. Ignore the repository root.
+
 You may read/import from and write to `src/`.
-You may read/import from `@lib/` (`./lib/`).
+You may read/import from `#lib/` (`./lib/`).
 You may not read from nor write to `config/` and `test/`.
 
 ## Goal
@@ -32,28 +34,34 @@ The only third party modules you may import are:
 
 - `jose`
 
+## Library
+
+- `#lib/error-code.js` contains an `ErrorCode` `enum` for response bodies.
+- `#lib/favicon.js` contains a `Uint8Array` for a transparent 32x32 icon.
+
 ## Restrictions
 
 | Instead of...      | Use...           |
 |--------------------|------------------|
-| `node:assert`      | `@lib/assert.js` |
-| `globalThis.fetch` | `@lib/fetch.js`  |
-| `Date.now()`       | `@lib/now.js`    |
-| `Math.random()`    | `@lib/random.js` |
+| `node:assert`      | `#lib/assert.js` |
+| `globalThis.fetch` | `#lib/fetch.js`  |
+| `console.error`    | `#lib/log.js`    |
+| `console.log`      | `#lib/log.js`    |
+| `Date.now()`       | `#lib/now.js`    |
+| `Math.random()`    | `#lib/random.js` |
 
 ## Rules
 
-- Test coverage must be 100%. To narrow TypeScript types against impossible
-  states without creating untestable branches, use `@lib/assert.js`.
+- Test coverage must be 100% for `src/`. To narrow TypeScript types against
+  impossible states without creating untestable branches, use `#lib/assert.js`.
 - `functional/immutable-data` requires values be deeply immutable. You can use
-  `@lib/readonly-deep.js`'s utility TypeScript generic `ReadonlyDeep<T>` to make
+  `#lib/readonly-deep.js`'s utility TypeScript generic `ReadonlyDeep<T>` to make
   `T`'s deeply-nested properties `readonly`.
 
 ## Response
 
-Do not explain why tests were failing.
-
-
-
-
-because I also want to know how to update AGENTS.md to make instructions more clear with less tokens. i.e. If you need to assume something, tell me what answer should have been present in AGENTS.md so that you wouldn't have had to ask/assume/research.
+- Do not explain why tests _were_ failing or what the fix is. This is test
+  driven development, so the user already knows both.
+- If you had to assume something, state what answer could have been present in
+  `AGENTS.md` so that you wouldn't have had to ask/assume/research. We want
+  future sessions to use less tokens.

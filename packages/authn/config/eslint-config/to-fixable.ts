@@ -1,5 +1,5 @@
 import type { RuleDefinition, RulesConfig } from "@eslint/core";
-import type { ReadonlyDeep } from "@lib/readonly-deep.js";
+import type { ReadonlyDeep } from "#lib/readonly-deep.js";
 
 type PluginRules = Readonly<Record<string, Readonly<RuleDefinition>>>;
 

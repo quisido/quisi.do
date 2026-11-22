@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import ErrorCode from "../lib/error-code.js";
 import { fetch } from "./index.js";
+import ErrorCode from "#lib/error-code.js";
 
 describe("Who Am I?", (): void => {
 
