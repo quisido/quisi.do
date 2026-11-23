@@ -1,9 +1,35 @@
 import { exports as worker } from "cloudflare:workers";
 import { expect } from "vitest";
 
-export async function fetch (...params: Readonly<Parameters<Fetcher["fetch"]>>): Promise<Response> {
+interface Options {
+  readonly "headers"?: Record<string, string> | undefined;
+  readonly "method"?: string | undefined;
+}
 
-  const response: Readonly<Response> = await worker.default.fetch(...params);
+export async function fetch (
+  url: string,
+  { headers = {}, method = "GET" }: Options = {},
+): Promise<Response> {
+
+  const input = ((): Readonly<URL> => {
+
+    try {
+
+      return new URL(url);
+
+    } catch {
+
+      return new URL(`https://test.origin:3000${url}`);
+
+    }
+
+  })();
+
+  const response: Readonly<Response> = await worker.default.fetch(input, {
+    headers,
+    method,
+    "redirect": "manual",
+  });
 
   /**
    * TODO:
@@ -19,8 +45,8 @@ export async function fetch (...params: Readonly<Parameters<Fetcher["fetch"]>>):
    * Assert all fetch requests are to allowlisted hosts.
    */
 
-  expect(response.headers.get("X-Content-Type-Options")).toBe("nosniff");
-  expect(response.headers.get("X-Frame-Options")).toBe("SAMEORIGIN");
+  expect(response.headers.get("content-security-policy")).toBe("frame-ancestors 'none';");
+  expect(response.headers.get("x-frame-options")).toBe("DENY");
 
   return response;
 

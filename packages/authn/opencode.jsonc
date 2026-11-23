@@ -23,7 +23,28 @@
       "effect": "ask",
       "resource": "*",
     },
-    // Access
+    // Edit
+    {
+      "action": "edit",
+      "effect": "deny",
+      "resource": "*",
+    },
+    {
+      "action": "edit",
+      "effect": "allow",
+      "resource": "~/.local/share/opencode/log/*",
+    },
+    {
+      "action": "edit",
+      "effect": "allow",
+      "resource": "/tmp/*",
+    },
+    {
+      "action": "edit",
+      "effect": "allow",
+      "resource": "src/*",
+    },
+    // External Directory
     {
       "action": "external_directory",
       "effect": "deny",
@@ -44,51 +65,16 @@
       "effect": "allow",
       "resource": "/tmp",
     },
-    // Find
-    {
-      "action": "glob",
-      "effect": "deny",
-      "resource": "*",
-    },
+    // Glob/Grep
     {
       "action": "glob",
       "effect": "allow",
-      "resource": "lib/*",
-    },
-    {
-      "action": "glob",
-      "effect": "allow",
-      "resource": "src/*",
-    },
-    {
-      "action": "grep",
-      "effect": "deny",
       "resource": "*",
     },
     {
       "action": "grep",
       "effect": "allow",
-      "resource": "lib/*",
-    },
-    {
-      "action": "grep",
-      "effect": "allow",
-      "resource": "src/*",
-    },
-    {
-      "action": "list",
-      "effect": "deny",
       "resource": "*",
-    },
-    {
-      "action": "list",
-      "effect": "allow",
-      "resource": "lib/*",
-    },
-    {
-      "action": "list",
-      "effect": "allow",
-      "resource": "src/*",
     },
     // Read
     {
@@ -146,28 +132,7 @@
       "effect": "allow",
       "resource": "wrangler.jsonc",
     },
-    // Write
-    {
-      "action": "edit",
-      "effect": "deny",
-      "resource": "*",
-    },
-    {
-      "action": "edit",
-      "effect": "allow",
-      "resource": "~/.local/share/opencode/log/*",
-    },
-    {
-      "action": "edit",
-      "effect": "allow",
-      "resource": "/tmp/*",
-    },
-    {
-      "action": "edit",
-      "effect": "allow",
-      "resource": "src/*",
-    },
-    // Execute
+    // Shell
     {
       "action": "shell",
       "effect": "ask",
@@ -176,7 +141,42 @@
     {
       "action": "shell",
       "effect": "allow",
+      "resource": "awk *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "cat *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "cp *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "cut *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "du *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
       "resource": "echo *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "fdfind *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "find *", // Technical debt: Restrict config/ and test/.
     },
     {
       "action": "shell",
@@ -186,7 +186,22 @@
     {
       "action": "shell",
       "effect": "allow",
+      "resource": "git branch --show-current",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "git config --get *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
       "resource": "git diff *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "git fetch *",
     },
     {
       "action": "shell",
@@ -206,12 +221,67 @@
     {
       "action": "shell",
       "effect": "allow",
+      "resource": "git pull *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "git rm *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "git show *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "git stash *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
       "resource": "git status *",
     },
     {
       "action": "shell",
       "effect": "allow",
+      "resource": "grep *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "head *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "ls *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "mkdir *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "mv *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "npm install",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
       "resource": "npm ls *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "npm rebuild *",
     },
     {
       "action": "shell",
@@ -251,8 +321,69 @@
     {
       "action": "shell",
       "effect": "allow",
+      "resource": "pwd",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "rg *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "rm *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "rmdir *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "sed *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "shellcheck *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "sort *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "stat *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "deny",
+      "resource": "sudo *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "tail *", // Technical debt: Restrict config/ and test/.
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "uniq *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
+      "resource": "wc *",
+    },
+    {
+      "action": "shell",
+      "effect": "allow",
       "resource": "which *",
     },
+    // Skill/Subagent
     {
       "action": "skill",
       "effect": "allow",
@@ -263,6 +394,7 @@
       "effect": "allow",
       "resource": "*",
     },
+    // Web Fetch
     {
       "action": "webfetch",
       "effect": "ask",
@@ -273,6 +405,7 @@
       "effect": "allow",
       "resource": "opencode.ai",
     },
+    // Web Search
     {
       "action": "websearch",
       "effect": "allow",
@@ -289,6 +422,7 @@
   "share": "disabled",
   "watcher": {
     "ignore": [
+      ".wrangler/**",
       "coverage/**",
       "node_modules/**",
     ],

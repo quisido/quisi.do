@@ -42,9 +42,9 @@
       "vars": {
         "COOKIE_DOMAIN": "localhost",
         "ENVIRONMENT_NAME": "development",
-        "HOST": "localhost:3000",
         "JWT_AUDIENCE": "urn:quisi.do:saas:development",
         "JWT_ISSUER": "urn:quisi.do:authn:development",
+        "ORIGIN": "https://localhost:3000",
         "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
         "PATREON_OAUTH_HOST": "https://www.patreon.com",
         "PATREON_OAUTH_REDIRECT_URI": "https://localhost:5882/patreon/",
@@ -94,9 +94,9 @@
       "vars": {
         "COOKIE_DOMAIN": "quisi.do",
         "ENVIRONMENT_NAME": "production",
-        "HOST": "quisi.do",
         "JWT_AUDIENCE": "urn:quisi.do:saas:production",
         "JWT_ISSUER": "urn:quisi.do:authn:production",
+        "ORIGIN": "https://www.quisi.do",
         "PATREON_OAUTH_CLIENT_ID": "J_6jrNJZNibHylSF83UVl9I4OHZYf67RAsU0s7_LnH1N5BKF-vgOyweF3KQLOKm1",
         "PATREON_OAUTH_HOST": "https://www.patreon.com",
         "PATREON_OAUTH_REDIRECT_URI": "https://a.quisi.do/patreon/",
@@ -136,7 +136,7 @@
       "routes": [
         {
           "custom_domain": true,
-          "pattern": "staging.a.quisi.do",
+          "pattern": "a.staging.quisi.do",
         },
       ],
       "secrets": {
@@ -146,14 +146,14 @@
         ],
       },
       "vars": {
-        "COOKIE_DOMAIN": "localhost",
+        "COOKIE_DOMAIN": "staging.quisi.do",
         "ENVIRONMENT_NAME": "staging",
-        "HOST": "localhost:3000",
         "JWT_AUDIENCE": "urn:quisi.do:saas:staging",
         "JWT_ISSUER": "urn:quisi.do:authn:staging",
+        "ORIGIN": "https://www.staging.quisi.do",
         "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
         "PATREON_OAUTH_HOST": "https://www.patreon.com",
-        "PATREON_OAUTH_REDIRECT_URI": "https://localhost:5882/patreon/",
+        "PATREON_OAUTH_REDIRECT_URI": "https://a.staging.quisi.do/patreon/",
       },
       "workers_dev": true,
     },
@@ -168,9 +168,9 @@
       "vars": {
         "COOKIE_DOMAIN": "cookie.domain",
         "ENVIRONMENT_NAME": "test",
-        "HOST": "localhost:3000",
         "JWT_AUDIENCE": "urn:quisi.do:saas:test",
         "JWT_ISSUER": "urn:quisi.do:authn:test",
+        "ORIGIN": "https://test.origin:3000",
         "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
         "PATREON_OAUTH_HOST": "https://www.patreon.com",
         "PATREON_OAUTH_REDIRECT_URI": "https://localhost:5882/patreon/",
@@ -202,9 +202,9 @@
   "vars": {
     "COOKIE_DOMAIN": "localhost",
     "ENVIRONMENT_NAME": "unknown",
-    "HOST": "localhost:3000",
     "JWT_AUDIENCE": "urn:quisi.do:saas:development",
     "JWT_ISSUER": "urn:quisi.do:authn:development",
+    "ORIGIN": "http://localhost:3000",
     "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
     "PATREON_OAUTH_HOST": "https://www.patreon.com",
     "PATREON_OAUTH_REDIRECT_URI": "https://localhost:5882/patreon/",

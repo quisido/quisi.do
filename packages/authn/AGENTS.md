@@ -39,6 +39,7 @@ The only third party modules you may import are:
 
 - `#lib/error-code.js` contains an `ErrorCode` `enum` for response bodies.
 - `#lib/favicon.js` contains a `Uint8Array` for a transparent 32x32 icon.
+- `#lib/status-code.js` contains a `StatusCode` `enum` for response `status`es.
 
 ## Restrictions
 

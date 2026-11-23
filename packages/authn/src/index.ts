@@ -1,6 +1,7 @@
 import type { ReadonlyDeep } from "#lib/readonly-deep.js";
 import getFaviconIcoResponse from "./favicon-ico-response.js";
 import getRobotsTxtResponse from "./robots-txt-response.js";
+import getRootResponse from "./root-response.js";
 
 const isLocalhostOrigin = (origin: string): boolean =>
 	new URL(origin).hostname === "localhost";
@@ -22,6 +23,10 @@ export default {
 		env: ReadonlyDeep<Env>,
 	): ReadonlyDeep<Promise<Response>> {
 		const pathname: string = new URL(request.url).pathname;
+
+		if (pathname === "/") {
+			return Promise.resolve(getRootResponse(env.HOST));
+		}
 
 		if (pathname === "/favicon.ico") {
 			return Promise.resolve(getFaviconIcoResponse());
