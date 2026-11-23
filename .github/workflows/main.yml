@@ -274,8 +274,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - service: Authentication
-            workspace: authn.bak
           - service: Content Security Policy
             workspace: csp
 
