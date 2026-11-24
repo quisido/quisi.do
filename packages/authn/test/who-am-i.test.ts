@@ -32,7 +32,15 @@ describe("Who Am I?", (): void => {
         const response: Response = await fetch("/whoami/", { "method": "OPTIONS" });
 
         expect(response.status).toBe(StatusCode.OK);
-        expect(response.headers.get("access-control-allow-origin")).toBe("https://test.origin:3000");
+        expect(Object.fromEntries(response.headers.entries())).toMatchObject({
+          "access-control-allow-credentials": "true",
+          "access-control-allow-headers": "Baggage, Sentry-Trace",
+          "access-control-allow-methods": "GET",
+          "access-control-allow-origin": "https://test.origin:3000",
+          "cache-control": "no-store",
+          "content-security-policy": "frame-ancestors 'none';",
+          "x-frame-options": "DENY",
+        });
 
       });
 
@@ -54,6 +62,16 @@ describe("Who Am I?", (): void => {
     const response: Response = await fetch("/whoami/");
 
     expect(response.status).toBe(StatusCode.OK);
+    expect(Object.fromEntries(response.headers.entries())).toMatchObject({
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://test.origin:3000",
+      "cache-control": "no-store",
+      "content-security-policy": "frame-ancestors 'none';",
+      "content-type": "application/json",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY",
+    });
+
     await expect(response.json()).resolves.toStrictEqual({ "code": ErrorCode.Unauthenticated });
 
   });

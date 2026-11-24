@@ -2,20 +2,7 @@ import type { ReadonlyDeep } from "#lib/readonly-deep.js";
 import getFaviconIcoResponse from "./favicon-ico-response.js";
 import getRobotsTxtResponse from "./robots-txt-response.js";
 import getRootResponse from "./root-response.js";
-
-const isLocalhostOrigin = (origin: string): boolean =>
-	new URL(origin).hostname === "localhost";
-
-const getAllowedOrigin = (
-	origin: string | null,
-	cookieDomain: Env["COOKIE_DOMAIN"],
-): string => {
-	if (origin === null) {
-		return "*";
-	}
-
-	return isLocalhostOrigin(origin) ? origin : `https://${cookieDomain}`;
-};
+import getWhoAmIResponse from "./who-am-i-response.js";
 
 export default {
 	fetch(
@@ -23,34 +10,28 @@ export default {
 		env: ReadonlyDeep<Env>,
 	): ReadonlyDeep<Promise<Response>> {
 		const pathname: string = new URL(request.url).pathname;
+		const isPreflight: boolean = request.method === "OPTIONS";
 
 		if (pathname === "/") {
-			return Promise.resolve(getRootResponse(env.HOST));
+			return Promise.resolve(getRootResponse(env.ORIGIN, isPreflight));
 		}
 
 		if (pathname === "/favicon.ico") {
-			return Promise.resolve(getFaviconIcoResponse());
+			return Promise.resolve(
+				getFaviconIcoResponse(env.ORIGIN, isPreflight),
+			);
 		}
 
 		if (pathname === "/robots.txt") {
-			return Promise.resolve(getRobotsTxtResponse());
+			return Promise.resolve(
+				getRobotsTxtResponse(env.ORIGIN, isPreflight),
+			);
 		}
 
-		const allowedOrigin: string = getAllowedOrigin(
+		return Promise.resolve(getWhoAmIResponse(
 			request.headers.get("Origin"),
-			env.COOKIE_DOMAIN,
-		);
-
-		const body: string | null =
-			request.method === "OPTIONS" ? null : JSON.stringify({ code: 1 });
-
-		return Promise.resolve(new Response(body, {
-			headers: {
-				"access-control-allow-origin": allowedOrigin,
-				"content-type": "application/json",
-				"x-content-type-options": "nosniff",
-				"x-frame-options": "SAMEORIGIN",
-			},
-		}));
+			env.ORIGIN,
+			isPreflight,
+		));
 	},
 };
