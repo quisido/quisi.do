@@ -44,6 +44,11 @@
       "effect": "allow",
       "resource": "src/*",
     },
+    {
+      "action": "edit",
+      "effect": "deny",
+      "resource": "src/instrument.server.ts",
+    },
     // External Directory
     {
       "action": "external_directory",

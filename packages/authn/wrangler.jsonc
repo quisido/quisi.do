@@ -1,6 +1,7 @@
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
-  "compatibility_date": "2026-11-14",
+  "compatibility_date": "2026-11-24",
+  "compatibility_flags": ["nodejs_compat"],
   "dev": {
     "local_protocol": "https",
     "port": 5882, // parseInt('authn', 36) % 9999
@@ -48,6 +49,7 @@
         "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
         "PATREON_OAUTH_HOST": "https://www.patreon.com",
         "PATREON_OAUTH_REDIRECT_URI": "https://localhost:5882/patreon/",
+        "VERSION": "unknown",
       },
     },
     "production": {
@@ -100,6 +102,7 @@
         "PATREON_OAUTH_CLIENT_ID": "J_6jrNJZNibHylSF83UVl9I4OHZYf67RAsU0s7_LnH1N5BKF-vgOyweF3KQLOKm1",
         "PATREON_OAUTH_HOST": "https://www.patreon.com",
         "PATREON_OAUTH_REDIRECT_URI": "https://a.quisi.do/patreon/",
+        "VERSION": "unknown",
       },
     },
     "staging": {
@@ -154,6 +157,7 @@
         "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
         "PATREON_OAUTH_HOST": "https://www.patreon.com",
         "PATREON_OAUTH_REDIRECT_URI": "https://a.staging.quisi.do/patreon/",
+        "VERSION": "unknown",
       },
       "workers_dev": true,
     },
@@ -174,6 +178,7 @@
         "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
         "PATREON_OAUTH_HOST": "https://www.patreon.com",
         "PATREON_OAUTH_REDIRECT_URI": "https://localhost:5882/patreon/",
+        "VERSION": "unknown",
       },
     },
   },
@@ -208,6 +213,7 @@
     "PATREON_OAUTH_CLIENT_ID": "4kCae2AHZdKyyuonaPzhGillxJ2HyyLQEDu8StvMtixBHmWmN4KVG0QVP6R45tjG",
     "PATREON_OAUTH_HOST": "https://www.patreon.com",
     "PATREON_OAUTH_REDIRECT_URI": "https://localhost:5882/patreon/",
+    "VERSION": "unknown",
   },
 }
 

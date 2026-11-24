@@ -22,7 +22,8 @@ adversarial review of the `src` directory's uncommitted changes. Since you
 already confirmed the tests as passing, the subagent does not need to run them
 and should only focus its review on identifying bugs, maintainability,
 performance issues, and security flaws. If the review agent requests changes
-with which you agree, make those changes then repeat this review process.
+with which you agree, make those changes, re-run the tests, and repeat this
+review process.
 
 ## Commands
 
