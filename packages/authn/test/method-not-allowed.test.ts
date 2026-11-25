@@ -1,25 +1,16 @@
-import { describe, expect, it } from "vitest";
+import { describe, it } from "vitest";
 import { fetch } from "./index.js";
-import type { ReadonlyDeep } from "#lib/readonly-deep.js";
 import { StatusCode } from "#lib/status-code.js";
 
 describe("Method Not Allowed", (): void => {
 
   describe.each(["/", "/whoami/", "/favicon.ico", "/robots.txt"])("%s", (pathname: string): void => {
 
-    it("rejects POST", async (): Promise<void> => {
+    it.each(["DELETE", "HEAD", "PATCH", "POST", "PUT", "QUERY", "TRACE"])("rejects %s", async (method: string): Promise<void> => {
 
-      const response: ReadonlyDeep<Response> = await fetch(pathname, { "method": "POST" });
+      const { expectStatus } = await fetch(pathname, { method });
 
-      expect(response.status).toBe(StatusCode.MethodNotAllowed);
-
-    });
-
-    it("rejects PUT", async (): Promise<void> => {
-
-      const response: ReadonlyDeep<Response> = await fetch(pathname, { "method": "PUT" });
-
-      expect(response.status).toBe(StatusCode.MethodNotAllowed);
+      expectStatus(StatusCode.MethodNotAllowed);
 
     });
 

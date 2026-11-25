@@ -1,6 +1,5 @@
 import type { ReadonlyDeep } from "#lib/readonly-deep.js";
-import { CREDENTIALS_HEADERS, PREFLIGHT_HEADERS } from "./cors-headers.js";
-import SECURITY_HEADERS from "./security-headers.js";
+import getBaseHeaders from "./base-headers.js";
 
 export default function getRobotsTxtResponse(
 	origin: Env["ORIGIN"],
@@ -10,13 +9,15 @@ export default function getRobotsTxtResponse(
 		isPreflight ? null : "User-agent: *\nDisallow: /\n",
 		{
 			"headers": {
-				...SECURITY_HEADERS,
-				...CREDENTIALS_HEADERS,
-				...(isPreflight ? PREFLIGHT_HEADERS : {}),
+				...getBaseHeaders(isPreflight),
 				"access-control-allow-origin": origin,
 				"access-control-max-age": "31536000",
-				"cache-control": "immutable, max-age=31536000, public",
-				"content-type": "text/plain; charset=utf-8",
+				...(isPreflight
+					? {}
+					: {
+							"cache-control": "immutable, max-age=31536000, public",
+							"content-type": "text/plain; charset=utf-8",
+						}),
 			},
 		},
 	);

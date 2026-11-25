@@ -1,36 +1,32 @@
 import type { ConfigObject } from "eslint/config";
-import { importX } from "eslint-plugin-import-x";
+import vitestPlugin from "@vitest/eslint-plugin";
 import { AGENT_CONFIG } from "./config/eslint-config/agent-config.js";
 import { HUMAN_CONFIG } from "./config/eslint-config/human-config.js";
-import { TYPESCRIPT_IMPORT_RESOLVER } from "./config/eslint-config/typescript-import-resolver.js";
-import { LINTER_OPTIONS } from "./config/eslint-config/linter-options.js";
 import { TYPESCRIPT_LANGUAGE_OPTIONS } from "./config/eslint-config/typescript-language-option.js";
+import { LINTER_OPTIONS } from "./config/eslint-config/linter-options.js";
 
 const CONFIG: readonly ConfigObject[] = [
-  { "ignores": ["coverage/", "node_modules/", "worker-configuration.d.ts"] },
+  { "ignores": [".wrangler/", "coverage/", "node_modules/", "tsconfig.tsb;uildinfo", "worker-configuration.d.ts"] },
 
   ...HUMAN_CONFIG,
   ...AGENT_CONFIG,
 
+  // Package-specific rules
   {
-    "files": ["**/*.d.ts", "*.d.ts"],
-    "ignores": ["coverage/", "node_modules/", "worker-configuration.d.ts"],
+    "files": ["test/**/*.test.ts"],
     "languageOptions": TYPESCRIPT_LANGUAGE_OPTIONS,
     "linterOptions": LINTER_OPTIONS,
-    "name": "@quisido/d-ts",
-
+    "name": "@quisido/authn",
     "plugins": {
-      "import-x": importX,
+      "vitest": vitestPlugin,
     },
-
     "rules": {
-      "import-x/unambiguous": "off",
-      "init-declarations": "off",
+      "vitest/expect-expect": ["error", { "assertFunctionNames": ["assert", "expect", "expectContentType", "expectHeaders", "expectPermanentCache", "expectStatus", "expectUncacheable"] }],
     },
-
     "settings": {
-      "import-x/extensions": [".js", ".json", ".jsonc"],
-      "import-x/resolver-next": [TYPESCRIPT_IMPORT_RESOLVER],
+      "vitest": {
+        "typecheck": true,
+      },
     },
   },
 ];

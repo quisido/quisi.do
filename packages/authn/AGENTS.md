@@ -1,6 +1,7 @@
 # Instructions for Agents
 
-Instructions apply to **this directory**. Ignore the repository root.
+Instructions apply to **this directory**. Ignore the repository root and sibling
+directories.
 
 You may read/import from and write to `src/`.
 You may read/import from `#lib/` (`./lib/`).
@@ -11,11 +12,8 @@ You may not read from nor write to `config/` and `test/`.
 This package uses test-driven-development and contains failing tests. Run
 `npm test` to identify what is failing, then change `src/` to correct it.
 
-If you believe the test is wrong, **stop implementation** and confirm with the
-user. If you think the test is incompatible with the appropriate solution,
+If you believe the test is wrong or incompatible with the appropriate solution,
 **stop implementation** and confirm with the user.
-
-If you need clarification, ask instead of assuming.
 
 Once tests are passing, use a high-effort review subagent to perform an
 adversarial review of the `src` directory's uncommitted changes. Since you
@@ -23,7 +21,7 @@ already confirmed the tests as passing, the subagent does not need to run them
 and should only focus its review on identifying bugs, maintainability,
 performance issues, and security flaws. If the review agent requests changes
 with which you agree, make those changes, re-run the tests, and repeat this
-review process.
+process.
 
 ## Commands
 
@@ -55,16 +53,17 @@ The only third party modules you may import are:
 
 ## Rules
 
-- Test coverage must be 100% for `src/`. To narrow TypeScript types against
+- 100% test coverage is required for `src/`. To narrow TypeScript types against
   impossible states without creating untestable branches, use `#lib/assert.js`.
-- `functional/immutable-data` requires values be deeply immutable. You can use
-  `#lib/readonly-deep.js`'s utility TypeScript generic `ReadonlyDeep<T>` to make
-  `T`'s deeply-nested properties `readonly`.
+- ESLint's `functional/immutable-data` requires values be deeply immutable. You
+  can use `#lib/readonly-deep.js`'s utility TypeScript generic `ReadonlyDeep<T>`
+  to make `T`'s deeply-nested properties `readonly`.
 
 ## Response
 
 - Do not explain why tests _were_ failing or what the fix is. This is test
   driven development, so the user already knows both.
-- If you had to assume something, state what answer could have been present in
-  `AGENTS.md` so that you wouldn't have had to ask/assume/research. We want
-  future sessions to use less tokens.
+- Do not summarize changes to `src/`. You own the files in `src/`; the user does
+  not know and does not need to know its contents.
+- If you had to assume or research, state what could have been present in
+  `AGENTS.md` to use less tokens in future sessions.

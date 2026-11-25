@@ -10,37 +10,19 @@ describe("favicon.ico", (): void => {
 
   it("supports OPTIONS", async (): Promise<void> => {
 
-    const response: ReadonlyDeep<Response> = await fetch("/favicon.ico", { "method": "OPTIONS" });
+    const { expectStatus } = await fetch("/favicon.ico", { "method": "OPTIONS" });
 
-    expect(response.status).toBe(StatusCode.OK);
-    expect(Object.fromEntries(response.headers.entries())).toMatchObject({
-      "access-control-allow-credentials": "true",
-      "access-control-allow-headers": "Baggage, Sentry-Trace",
-      "access-control-allow-methods": "GET",
-      "access-control-allow-origin": "https://test.origin:3000",
-      "access-control-max-age": "31536000",
-      "cache-control": "immutable, max-age=31536000, public",
-      "content-security-policy": "frame-ancestors 'none';",
-      "x-content-type-options": "nosniff",
-      "x-frame-options": "DENY",
-    });
+    expectStatus(StatusCode.OK);
 
   });
 
   it("is a transparent icon", async (): Promise<void> => {
 
-    const response: ReadonlyDeep<Response> = await fetch("/favicon.ico");
+    const { expectContentType, expectPermanentCache, expectStatus, response } = await fetch("/favicon.ico");
 
-    expect(response.status).toBe(StatusCode.OK);
-    expect(Object.fromEntries(response.headers.entries())).toMatchObject({
-      "access-control-allow-credentials": "true",
-      "access-control-allow-origin": "https://test.origin:3000",
-      "cache-control": "immutable, max-age=31536000, public",
-      "content-security-policy": "frame-ancestors 'none';",
-      "content-type": "image/vnd.microsoft.icon",
-      "x-content-type-options": "nosniff",
-      "x-frame-options": "DENY",
-    });
+    expectContentType("image/vnd.microsoft.icon");
+    expectPermanentCache();
+    expectStatus(StatusCode.OK);
 
     const responseBuffer: ReadonlyDeep<Buffer> =
       Buffer.from(await response.arrayBuffer());
