@@ -2,11 +2,11 @@
   "author": "quisi.do <authn@quisi.do>",
   "dependencies": {
     "@sentry/cloudflare": "^11.17.0",
-    "jose": "^6.2.16"
+    "jose": "^6.2.18"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.70.1",
-    "@cloudflare/vitest-plugin": "^1.8.4",
+    "@cloudflare/vitest-plugin": "^1.9.0",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.8.1",
     "@eslint/config-helpers": "^0.7.0",
     "@eslint/core": "^1.2.1",
@@ -35,7 +35,7 @@
     "typescript-eslint": "^8.72.2",
     "vite": "^8.3.8",
     "vitest": "^5.0.1",
-    "wrangler": "^4.157.0"
+    "wrangler": "^4.166.0"
   },
   "funding": {
     "type": "individual",
