@@ -5,8 +5,11 @@ import {
 } from '@quisido/worker';
 import { PUBLIC } from './constants/metric-dimensions.js';
 import { MetricName } from './constants/metric-name.js';
+import WORKER_METRIC_DIMENSION_SPECS from './constants/worker-metric-dimension-specs.js';
+import hasValidDimensionTypes from './utils/has-valid-dimension-types.js';
 import isWorkerMetricName from './utils/is-worker-metric-name.js';
 import mapDimensionsToString from './utils/map-dimensions-to-string.js';
+import pickDimensions from './utils/pick-dimensions.js';
 
 export default function handleMetric(
   this: Handler,
@@ -37,289 +40,33 @@ export default function handleMetric(
       });
     };
 
-    switch (name) {
-      case WorkerMetricName.D1PreparedStatementAll: {
-        const {
-          changedDb,
-          changes,
-          duration,
-          endTime,
-          env,
-          lastRowId,
-          query,
-          results,
-          rowsRead,
-          rowsWritten,
-          sizeAfter,
-          startTime,
-        } = dimensions;
-        if (
-          typeof changedDb !== 'boolean' ||
-          typeof changes !== 'number' ||
-          typeof duration !== 'number' ||
-          typeof endTime !== 'number' ||
-          typeof env !== 'string' ||
-          typeof lastRowId !== 'number' ||
-          typeof query !== 'string' ||
-          typeof results !== 'number' ||
-          typeof rowsRead !== 'number' ||
-          typeof rowsWritten !== 'number' ||
-          typeof sizeAfter !== 'number' ||
-          typeof startTime !== 'number'
-        ) {
-          emitInvalidWorkerMetric();
-          return;
-        }
-
-        emitPrivately({
-          changedDb,
-          changes,
-          duration,
-          endTime,
-          env,
-          lastRowId,
-          query,
-          results,
-          rowsRead,
-          rowsWritten,
-          sizeAfter,
-          startTime,
-        });
-
-        emitPublicly({
-          changedDb,
-          changes,
-          duration,
-          endTime,
-          env,
-          results,
-          rowsRead,
-          rowsWritten,
-          sizeAfter,
-          startTime,
-        });
+    const spec = WORKER_METRIC_DIMENSION_SPECS[name];
+    if (spec !== undefined) {
+      if (!hasValidDimensionTypes(dimensions, spec.required)) {
+        emitInvalidWorkerMetric();
         return;
       }
 
-      case WorkerMetricName.D1PreparedStatementAllError:
-      case WorkerMetricName.D1PreparedStatementRunError: {
-        const { endTime, env, query, startTime } = dimensions;
-        if (
-          typeof endTime !== 'number' ||
-          typeof env !== 'string' ||
-          typeof query !== 'string' ||
-          typeof startTime !== 'number'
-        ) {
-          emitInvalidWorkerMetric();
-          return;
-        }
-
-        emitPrivately({
-          endTime,
-          env,
-          query,
-          startTime,
-        });
-
-        emitPublicly({
-          endTime,
-          env,
-          startTime,
-        });
-        return;
-      }
-
-      case WorkerMetricName.D1PreparedStatementRun: {
-        const {
-          changedDb,
-          changes,
-          duration,
-          endTime,
-          env,
-          lastRowId,
-          query,
-          rowsRead,
-          rowsWritten,
-          sizeAfter,
-          startTime,
-        } = dimensions;
-        if (
-          typeof changedDb !== 'boolean' ||
-          typeof changes !== 'number' ||
-          typeof duration !== 'number' ||
-          typeof endTime !== 'number' ||
-          typeof env !== 'string' ||
-          typeof lastRowId !== 'number' ||
-          typeof query !== 'string' ||
-          typeof rowsRead !== 'number' ||
-          typeof rowsWritten !== 'number' ||
-          typeof sizeAfter !== 'number' ||
-          typeof startTime !== 'number'
-        ) {
-          emitInvalidWorkerMetric();
-          return;
-        }
-
-        emitPrivately({
-          changedDb,
-          changes,
-          duration,
-          endTime,
-          env,
-          lastRowId,
-          query,
-          rowsRead,
-          rowsWritten,
-          sizeAfter,
-          startTime,
-        });
-
-        emitPublicly({
-          changedDb,
-          changes,
-          duration,
-          endTime,
-          env,
-          rowsRead,
-          rowsWritten,
-          sizeAfter,
-          startTime,
-        });
-        return;
-      }
-
-      case WorkerMetricName.Fetch: {
+      if (name === WorkerMetricName.Fetch) {
         const { endTime, startTime, url } = dimensions;
-        if (
-          typeof endTime !== 'number' ||
-          typeof startTime !== 'number' ||
-          typeof url !== 'string'
-        ) {
-          emitInvalidWorkerMetric();
-          return;
-        }
-
         try {
-          const { origin } = new URL(url);
+          const { origin } = new URL(url as string);
           emitPrivately({ endTime, startTime, url });
           emitPublicly({ endTime, origin, startTime });
-          return;
         } catch (_err: unknown) {
           emitInvalidWorkerMetric();
-          return;
         }
-      }
-
-      case WorkerMetricName.InvalidBinding: {
-        const { key, type, value } = dimensions;
-        if (
-          typeof key !== 'string' ||
-          typeof type !== 'string' ||
-          typeof value !== 'string'
-        ) {
-          emitInvalidWorkerMetric();
-          return;
-        }
-
-        emitPrivately({ key, value });
-        emitPublicly({ key, type });
         return;
       }
 
-      case WorkerMetricName.KVNamespaceGet: {
-        const { endTime, env, key, startTime } = dimensions;
-        if (
-          typeof endTime !== 'number' ||
-          typeof env !== 'string' ||
-          typeof key !== 'string' ||
-          typeof startTime !== 'number'
-        ) {
-          emitInvalidWorkerMetric();
-          return;
-        }
-
-        emitPrivately({ endTime, env, key, startTime });
-        emitPublicly({ endTime, env, startTime });
-        return;
+      if (spec.privateKeys !== undefined) {
+        emitPrivately(pickDimensions(dimensions, spec.privateKeys));
       }
 
-      case WorkerMetricName.KVNamespaceGetError: {
-        const { endTime, env, startTime } = dimensions;
-        if (
-          typeof endTime !== 'number' ||
-          typeof env !== 'string' ||
-          typeof startTime !== 'number'
-        ) {
-          emitInvalidWorkerMetric();
-          return;
-        }
-
-        emitPublicly({ endTime, env, startTime });
-        return;
+      if (spec.publicKeys !== undefined) {
+        emitPublicly(pickDimensions(dimensions, spec.publicKeys));
       }
-
-      case WorkerMetricName.KVNamespacePut: {
-        const { bytes, endTime, env, startTime, ttl } = dimensions;
-        if (
-          typeof bytes !== 'number' ||
-          typeof endTime !== 'number' ||
-          typeof env !== 'string' ||
-          typeof startTime !== 'number' ||
-          typeof ttl !== 'number'
-        ) {
-          emitInvalidWorkerMetric();
-          return;
-        }
-
-        emitPublicly({ bytes, endTime, env, startTime, ttl });
-        return;
-      }
-
-      case WorkerMetricName.KVNamespacePutError: {
-        const { endTime, env, startTime } = dimensions;
-        if (
-          typeof endTime !== 'number' ||
-          typeof env !== 'string' ||
-          typeof startTime !== 'number'
-        ) {
-          emitInvalidWorkerMetric();
-          return;
-        }
-
-        emitPublicly({ endTime, env, startTime });
-        return;
-      }
-
-      case WorkerMetricName.R2BucketPut: {
-        const { bytes, endTime, env, startTime } = dimensions;
-        if (
-          typeof bytes !== 'number' ||
-          typeof endTime !== 'number' ||
-          typeof env !== 'string' ||
-          typeof startTime !== 'number'
-        ) {
-          emitInvalidWorkerMetric();
-          return;
-        }
-
-        emitPublicly({ bytes, endTime, env, startTime });
-        return;
-      }
-
-      case WorkerMetricName.R2BucketPutError: {
-        const { endTime, env, startTime } = dimensions;
-        if (
-          typeof endTime !== 'number' ||
-          typeof env !== 'string' ||
-          typeof startTime !== 'number'
-        ) {
-          emitInvalidWorkerMetric();
-          return;
-        }
-
-        emitPublicly({ endTime, env, startTime });
-        return;
-      }
+      return;
     }
   }
 

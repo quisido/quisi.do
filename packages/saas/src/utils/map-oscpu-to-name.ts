@@ -1,3 +1,25 @@
+const NAMES_BY_OSCPU: Readonly<Record<string, string>> = {
+  Mac_PowerPC: 'Mac OS',
+  Macintosh: 'Mac OS',
+  Win16: 'Windows 3.11',
+  Win95: 'Windows NT 4.0',
+  Win98: 'Windows 98',
+  WinNT: 'Windows NT 4.0',
+  'WinNT4.0': 'Windows NT 4.0',
+  Windows_95: 'Windows 95',
+  'Windows 10.0': 'Windows 10',
+  'Windows NT': 'Windows NT 4.0',
+  'Windows NT 10.0': 'Windows 10',
+  'Windows NT 5.0': 'Windows 2000',
+  'Windows NT 5.1': 'Windows XP',
+  'Windows NT 5.2': 'Windows Server 2003',
+  'Windows NT 6.0': 'Windows Vista',
+  'Windows NT 6.1': 'Windows 7',
+  'Windows NT 6.2': 'Windows 8',
+  WOW64: 'Windows 8',
+  X11: 'Linux',
+};
+
 export default function mapOscpuToName(
   oscpu: string | undefined,
 ): string | undefined {
@@ -5,52 +27,5 @@ export default function mapOscpuToName(
     return;
   }
 
-  switch (oscpu) {
-    case 'Mac_PowerPC':
-    case 'Macintosh':
-      return 'Mac OS';
-
-    case 'Win16':
-      return 'Windows 3.11';
-
-    case 'Win95':
-    case 'WinNT':
-    case 'WinNT4.0':
-    case 'Windows NT':
-      return 'Windows NT 4.0';
-
-    case 'Windows_95':
-      return 'Windows 95';
-
-    case 'Win98':
-      return 'Windows 98';
-
-    case 'Windows 10.0':
-    case 'Windows NT 10.0':
-      return 'Windows 10';
-
-    case 'Windows NT 5.0':
-      return 'Windows 2000';
-
-    case 'Windows NT 5.1':
-      return 'Windows XP';
-
-    case 'Windows NT 5.2':
-      return 'Windows Server 2003';
-
-    case 'Windows NT 6.0':
-      return 'Windows Vista';
-
-    case 'Windows NT 6.1':
-      return 'Windows 7';
-
-    case 'Windows NT 6.2':
-    case 'WOW64':
-      return 'Windows 8';
-
-    case 'X11':
-      return 'Linux';
-  }
-
-  return oscpu;
+  return NAMES_BY_OSCPU[oscpu] ?? oscpu;
 }
