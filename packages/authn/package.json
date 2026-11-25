@@ -62,7 +62,7 @@
     "build": "wrangler types",
     "eslint": "eslint .",
     "fix": "eslint . --fix",
-    "start": "wrangler dev",
+    "start": "wrangler dev --env development",
     "test": "bash ./scripts/test.sh"
   },
   "type": "module",
