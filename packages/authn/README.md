@@ -11,7 +11,7 @@ confidently deploying an entirely agent-authored application source.
 - `config/` contains package configuration files.
 - `lib/` contains strictly-managed utility functions for unsafe built-ins.
 - `src/` contains the service's implementation code.
-- `test/` contains behavior-driven test suites.
+- `test/` contains read-only behavior-driven test suites.
 
 ## Commands
 

@@ -1,0 +1,9 @@
+{
+  "search.exclude": {
+    ".wrangler/": true,
+    "coverage/": true,
+    "node_modules/": true,
+    "src/": true,
+    "tsconfig.tsbuildinfo": true,
+  },
+}

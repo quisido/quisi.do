@@ -1,4 +1,3 @@
-import handleAnalyticsFetchRequest from '../analytics/handle-analytics-fetch-request.js';
 import type AuthnFetchHandler from '../authn-fetch-handler.js';
 import handleOAuthPathname from '../oauth/handle-oauth-pathname.js';
 import isOAuthPathname from '../oauth/is-oauth-pathname.js';
@@ -10,11 +9,6 @@ import handleNotFound from './handle-not-found.js';
 export default async function handleFetchRequest(
   this: AuthnFetchHandler,
 ): Promise<Response> {
-  // Analytics
-  if (this.requestPathname === '/analytics/') {
-    return await handleAnalyticsFetchRequest.call(this);
-  }
-
   // Who am I?
   if (this.requestPathname === '/whoami/') {
     return await handleWhoAmIFetchRequest.call(this);

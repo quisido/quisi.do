@@ -14,7 +14,8 @@ if (process.env["GITHUB_ACTIONS"] === "true") {
 
 }
 
-const CONFIG: Readonly<UserConfig> = defineConfig({
+const CONFIG: UserConfig = defineConfig({
+  "plugins": [],
   "test": {
     "coverage": {
       "enabled": true,
@@ -40,6 +41,11 @@ const CONFIG: Readonly<UserConfig> = defineConfig({
         "extends": true,
         "plugins": [
           cloudflareTest({
+            "miniflare": {
+              "modulesRules": [
+                { "type": "Data", "include": ["**/*.ico"] },
+              ],
+            },
             "wrangler": {
               "configPath": "./wrangler.jsonc",
               "environment": "test",
@@ -55,7 +61,7 @@ const CONFIG: Readonly<UserConfig> = defineConfig({
       {
         "test": {
           "environment": "node",
-          "include": ["eslint-config.test.ts", "vitest-config.test.ts"],
+          "include": ["eslint-config.test.ts", "vite-config.test.ts", "vitest-config.test.ts"],
           "name": "Node",
         },
       },

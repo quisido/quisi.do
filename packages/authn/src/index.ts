@@ -1,39 +1,47 @@
-import type { DeepReadonly } from "@lib/deep-readonly.js";
+import type { ReadonlyDeep } from "#lib/readonly-deep.js";
+import ALLOWED_METHODS from "./allowed-methods.js";
+import getFaviconIcoResponse from "./favicon-ico-response.js";
+import getMethodNotAllowedResponse from "./method-not-allowed-response.js";
+import getNotFoundResponse from "./not-found-response.js";
+import getRobotsTxtResponse from "./robots-txt-response.js";
+import getRootResponse from "./root-response.js";
+import getWhoAmIResponse from "./who-am-i-response.js";
 
-const isLocalhostOrigin = (origin: string): boolean =>
-	new URL(origin).hostname === "localhost";
+type Route = (
+	origin: Env["ORIGIN"],
+	isPreflight: boolean,
+) => ReadonlyDeep<Response>;
 
-const getAllowedOrigin = (
-	origin: string | null,
-	cookieDomain: Env["COOKIE_DOMAIN"],
-): string => {
-	if (origin === null) {
-		return "*";
-	}
-
-	return isLocalhostOrigin(origin) ? origin : `https://${cookieDomain}`;
+const ROUTES: ReadonlyDeep<Record<string, Route>> = {
+	"/": getRootResponse,
+	"/favicon.ico": getFaviconIcoResponse,
+	"/robots.txt": getRobotsTxtResponse,
+	"/whoami/": getWhoAmIResponse,
 };
+
+function getRoute(pathname: string): ReadonlyDeep<Route | undefined> {
+	return Object.hasOwn(ROUTES, pathname) ? ROUTES[pathname] : undefined;
+}
 
 export default {
 	fetch(
-		request: DeepReadonly<Request>,
-		env: DeepReadonly<Env>,
-	): DeepReadonly<Promise<Response>> {
-		const allowedOrigin: string = getAllowedOrigin(
-			request.headers.get("Origin"),
-			env.COOKIE_DOMAIN,
-		);
+		request: ReadonlyDeep<Request>,
+		env: ReadonlyDeep<Env>,
+	): ReadonlyDeep<Promise<Response>> {
+		const pathname: string = new URL(request.url).pathname;
+		const isPreflight: boolean = request.method === "OPTIONS";
+		const route: ReadonlyDeep<Route | undefined> = getRoute(pathname);
 
-		const body: string | null =
-			request.method === "OPTIONS" ? null : JSON.stringify({ code: 1 });
+		if (route === undefined) {
+			return Promise.resolve(getNotFoundResponse(env.ORIGIN, isPreflight));
+		}
 
-		return Promise.resolve(new Response(body, {
-			headers: {
-				"access-control-allow-origin": allowedOrigin,
-				"content-type": "application/json",
-				"x-content-type-options": "nosniff",
-				"x-frame-options": "SAMEORIGIN",
-			},
-		}));
+		if (!Object.hasOwn(ALLOWED_METHODS, request.method)) {
+			return Promise.resolve(
+				getMethodNotAllowedResponse(env.ORIGIN, request.method),
+			);
+		}
+
+		return Promise.resolve(route(env.ORIGIN, isPreflight));
 	},
 };

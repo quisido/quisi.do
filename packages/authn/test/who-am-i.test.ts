@@ -1,54 +1,25 @@
 import { describe, expect, it } from "vitest";
-import ErrorCode from "../lib/error-code.js";
 import { fetch } from "./index.js";
+import ErrorCode from "#lib/error-code.js";
+import { StatusCode } from "#lib/status-code.js";
 
 describe("Who Am I?", (): void => {
 
-  describe("OPTIONS", (): void => {
+  it("supports OPTIONS", async (): Promise<void> => {
 
-    it("supports unknown origins", async (): Promise<void> => {
-
-      const response: Response = await fetch("https://localhost:3000/whoami/", { "method": "OPTIONS" });
-
-      expect(response.status).toBe(200);
-      expect(response.headers.get("access-control-allow-origin")).toBe("*");
-
-    });
-
-    it("supports insecure localhost", async (): Promise<void> => {
-
-      const response: Response = await fetch("http://localhost:3000/whoami/", { "headers": { "Origin": "http://localhost:3000" }, "method": "OPTIONS" });
-
-      expect(response.status).toBe(200);
-      expect(response.headers.get("access-control-allow-origin")).toBe("http://localhost:3000");
-
-    });
-
-    it("supports secure localhost", async (): Promise<void> => {
-
-      const response: Response = await fetch("https://localhost:3000/whoami/", { "headers": { "Origin": "https://localhost:3000" }, "method": "OPTIONS" });
-
-      expect(response.status).toBe(200);
-      expect(response.headers.get("access-control-allow-origin")).toBe("https://localhost:3000");
-
-    });
-
-    it("falls back to the cookie domain var", async (): Promise<void> => {
-
-      const response: Response = await fetch("https://unknown.origin/whoami/", { "headers": { "Origin": "https://unknown.origin" }, "method": "OPTIONS" });
-
-      expect(response.status).toBe(200);
-      expect(response.headers.get("access-control-allow-origin")).toBe("https://cookie.domain");
-
-    });
+    const { expectStatus } = await fetch("/whoami/", { "method": "OPTIONS" });
+    expectStatus(StatusCode.OK);
 
   });
 
   it("identifies unauthenticated users", async (): Promise<void> => {
 
-    const response: Response = await fetch("https://localhost:3000/whoami/");
+    const { expectContentType, expectStatus, expectUncacheable, response } = await fetch("/whoami/");
 
-    expect(response.status).toBe(200);
+    expectStatus(StatusCode.OK);
+    expectContentType("application/json");
+    expectUncacheable();
+
     await expect(response.json()).resolves.toStrictEqual({ "code": ErrorCode.Unauthenticated });
 
   });

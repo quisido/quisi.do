@@ -12,27 +12,27 @@ import sonarjsPlugin from "eslint-plugin-sonarjs";
 import stylisticPlugin from "@stylistic/eslint-plugin";
 import functionalPlugin from "eslint-plugin-functional";
 import vitestPlugin from "@vitest/eslint-plugin";
-import assert from "../../lib/assert.js";
 import { TYPESCRIPT_PLUGIN_RULES } from "./typescript-plugin-rules.js";
 import { TYPESCRIPT_PLUGIN } from "./typescript-plugin.js";
 import { TYPESCRIPT_LANGUAGE_OPTIONS } from "./typescript-language-option.js";
 import { LINTER_OPTIONS } from "./linter-options.js";
 import { FIXABLE_BUILTIN_RULES } from "./fixable-builtin-rules.js";
 import { ES_X_NONSTANDARD_RULES_CONFIG } from "./es-x-nonstandard-rules-config.js";
-import { DISABLED_TYPESCRIPT_RULES } from "./disabled-typescript-rules.js";
-import { DISABLED_BUILTIN_RULES } from "./disabled-builtin-rules.js";
 import { toFixable } from "./to-fixable.js";
 import { TYPESCRIPT_IMPORT_RESOLVER } from "./typescript-import-resolver.js";
 import { STRICT_TYPE_CHECKED_RULES_CONFIG } from "./strict-type-checked-rules-config.js";
 import { NO_UNSAFE_TYPESCRIPT_RULES_CONFIG } from "./no-unsafe-typescript-rules-config.js";
-import type { DeepReadonly } from "@lib/deep-readonly.js";
+import { SHARED_TYPESCRIPT_RULES_CONFIG } from "./shared-typescript-rules-config.js";
+import assert from "#lib/assert.js";
+import type { ReadonlyDeep } from "#lib/readonly-deep.js";
+import { SHARED_BUILTIN_RULES_CONFIG } from "./shared-builtin-rules-config.js";
 
 assert(
   sonarjsPlugin.rules !== undefined,
   "Expected SonarJS plugin to have rules.",
 );
 
-const JSON_RULES: DeepReadonly<RulesConfig> = {
+const JSON_RULES: ReadonlyDeep<RulesConfig> = {
   ...toFixable(jsonPlugin.rules, "json"),
   "json/no-duplicate-keys": "error",
   "json/no-empty-keys": "error",
@@ -54,7 +54,7 @@ const JSON_RULES: DeepReadonly<RulesConfig> = {
 
 /**
  * The "human config" is an ESLint configuration for files owned by humans. It
- * should optimize for readability, making it more strict than the agent config.
+ * should optimize for readability above all else.
  */
 export const HUMAN_CONFIG: readonly ConfigObject[] = [
   // JSON for humans
@@ -75,6 +75,11 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
     },
     "rules": {
       ...JSON_RULES,
+
+      // Universal rules
+      ...SHARED_BUILTIN_RULES_CONFIG,
+
+      // Custom rules
       "@stylistic/indent": ["error", 2],
       "max-lines-per-function": "off",
     },
@@ -103,6 +108,11 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
     "rules": {
       ...toFixable(jsoncPlugin.rules, "jsonc"),
       ...JSON_RULES,
+
+      // Universal rules
+      ...SHARED_BUILTIN_RULES_CONFIG,
+
+      // Custom rules
       // Replaced by `jsonc/indent`.
       "@stylistic/indent": "off",
       "jsonc/comma-dangle": ["error", "always-multiline"],
@@ -168,9 +178,9 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       ...toFixable(TYPESCRIPT_PLUGIN_RULES, "@typescript-eslint"),
       ...toFixable(vitestPlugin.rules, "vitest"),
 
-      // Superceded rules
-      ...DISABLED_BUILTIN_RULES,
-      ...DISABLED_TYPESCRIPT_RULES,
+      // Universal rules
+      ...SHARED_BUILTIN_RULES_CONFIG,
+      ...SHARED_TYPESCRIPT_RULES_CONFIG,
 
       // Custom rules
       "@stylistic/comma-dangle": ["error", "always-multiline"],
@@ -186,19 +196,6 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
         "ignoreTemplateLiterals": true,
         "tabWidth": 2,
       }],
-      "@typescript-eslint/consistent-type-assertions": ["error", { "assertionStyle": "never" }],
-
-      /**
-       * The ESLint rule is incorrect here when it throws "Explicit undefined is
-       * unnecessary on an optional parameter." The rule does not allow for
-       * `f(x?: X | undefined)` to be called with `f(undefined)`.
-       */
-      "@typescript-eslint/no-duplicate-type-constituents": [
-        "error",
-        { "ignoreUnions": true },
-      ],
-      "@typescript-eslint/no-invalid-this": "error",
-      "@typescript-eslint/no-shadow": "error",
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
@@ -209,86 +206,17 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
           "ignoreRestSiblings": false,
         },
       ],
-      "@typescript-eslint/prefer-nullish-coalescing": "error",
-      "@typescript-eslint/prefer-optional-chain": "error",
       "@typescript-eslint/prefer-readonly": "error",
-      "@typescript-eslint/strict-boolean-expressions": "error",
-      "@typescript-eslint/switch-exhaustiveness-check": "error",
-      "curly": ["error", "all"],
-      "eqeqeq": "error",
-      "eslint-comments/no-aggregating-enable": "error",
-      "eslint-comments/no-duplicate-disable": "error",
-      "eslint-comments/no-unlimited-disable": "error",
-      "eslint-comments/no-unused-disable": "error",
-      "eslint-comments/no-unused-enable": "error",
       "eslint-comments/require-description": ["error", { "ignore": [] }],
       "functional/prefer-property-signatures": "error",
-      "import-x/avoid-barrel-files": "error",
-      // Some dependencies are vended as namespaces.
-      "import-x/avoid-namespace-import": "off",
-      "import-x/avoid-re-export-all": "error",
-      "import-x/default": "error",
-      "import-x/export": "error",
       "import-x/group-exports": "error",
-      "import-x/named": "error",
-      "import-x/no-absolute-path": "error",
-      "import-x/no-amd": "error",
       "import-x/no-anonymous-default-export": "error",
-      "import-x/no-commonjs": "error",
-      "import-x/no-cycle": "error",
-      "import-x/no-deprecated": "warn",
-      "import-x/no-dynamic-require": "error",
       "import-x/no-extraneous-dependencies": "error",
-      "import-x/no-import-module-exports": "error",
-      "import-x/no-mutable-exports": "error",
-      "import-x/no-named-as-default": "error",
-      "import-x/no-named-as-default-member": "error",
       "import-x/no-nodejs-modules": "warn",
-      "import-x/no-relative-packages": "error",
-      "import-x/no-self-import": "error",
-      "import-x/no-unused-modules": [
-        "error",
-        {
-          "ignoreUnusedTypeExports": false,
-          "missingExports": true,
-          "suppressMissingFileEnumeratorAPIWarning": true,
-          "unusedExports": true,
-        },
-      ],
-      "import-x/no-useless-path-segments": "error",
-      "import-x/no-webpack-loader-syntax": "error",
-      "import-x/unambiguous": "error",
-      "no-constant-binary-expression": ["error", { "checkRelationalComparisons": true }],
-      "no-extend-native": "error",
-      "no-global-assign": "error",
-      "no-param-reassign": "error",
-      "no-shadow-restricted-names": "error",
-
-      /**
-       * This is safe due to `no-global-assign` and
-       * `no-shadow-restricted-names`.
-       */
-      "no-undefined": "off",
-      "no-use-before-define": ["error", {
-        "allowNamedExports": false,
-        "classes": true,
-        "enums": true,
-        "ignoreTypeReferences": true,
-        "functions": true,
-        "typedefs": false,
-        "variables": true,
-      }],
-      "no-var": "error",
       "one-var": "off",
-      "prefer-const": "error",
-      "promise/catch-or-return": "error",
-      "promise/no-return-wrap": "error",
       "promise/prefer-await-to-callbacks": "error",
       "promise/prefer-await-to-then": "error",
       "promise/prefer-catch": "error",
-      "promise/spec-only": "error",
-      "promise/valid-params": "error",
-      "use-isnan": ["error", { "enforceForIndexOf": true }],
       "vitest/no-importing-vitest-globals": "off",
       "vitest/no-test-return-statement": "error",
 
@@ -311,6 +239,42 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       "vitest": {
         "typecheck": true,
       },
+    },
+  },
+
+  // TypeScript definition files
+  {
+    "files": [
+      "config/**/*.d.ts",
+      "config/*.d.ts",
+      "config/**/*.d.ts",
+      "lib/**/*.d.ts",
+      "lib/*.d.ts",
+      "test/**/*.d.ts",
+      "test/*.d.ts",
+      "*.d.ts",
+    ],
+    "ignores": [".wrangler/", "coverage/", "node_modules/", "worker-configuration.d.ts"],
+    "languageOptions": TYPESCRIPT_LANGUAGE_OPTIONS,
+    "linterOptions": LINTER_OPTIONS,
+    "name": "@quisido/d-ts",
+
+    "plugins": {
+      "import-x": importX,
+    },
+
+    "rules": {
+      // Universal rules
+      ...SHARED_BUILTIN_RULES_CONFIG,
+
+      // Custom rules
+      "import-x/unambiguous": "off",
+      "init-declarations": "off",
+    },
+
+    "settings": {
+      "import-x/extensions": [".js", ".json", ".jsonc"],
+      "import-x/resolver-next": [TYPESCRIPT_IMPORT_RESOLVER],
     },
   },
 ];

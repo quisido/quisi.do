@@ -1,33 +1,6 @@
 {
   "mcp": {
-    "allowed": [
-      "chrome-devtools",
-      "cloudflare-api",
-      "github",
-      "playwright",
-      "sentry"
-    ]
+    "allowed": []
   },
-  "mcpServers": {
-    "chrome-devtools": {
-      "args": ["chrome-devtools-mcp"],
-      "command": "npx"
-    },
-    "cloudflare-api": {
-      "type": "http",
-      "url": "https://mcp.cloudflare.com/mcp"
-    },
-    "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/"
-    },
-    "playwright": {
-      "args": ["run", "playwright-mcp"],
-      "command": "npm"
-    },
-		"sentry": {
-			"type": "http",
-			"url": "https://mcp.sentry.dev/mcp"
-		}
-  }
+  "mcpServers": {}
 }
