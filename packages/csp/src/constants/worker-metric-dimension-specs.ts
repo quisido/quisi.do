@@ -1,16 +1,5 @@
 import { MetricName as WorkerMetricName } from '@quisido/worker';
 
-export type DimensionType = 'boolean' | 'number' | 'string';
-
-export interface WorkerMetricDimensionSpec {
-  /** Dimension keys and their required types for the metric to be valid. */
-  readonly required: Readonly<Record<string, DimensionType>>;
-  /** Dimension keys to emit to the private dataset, or undefined to skip the private emit. */
-  readonly privateKeys?: readonly string[];
-  /** Dimension keys to emit to the public dataset, or undefined to skip the public emit. */
-  readonly publicKeys?: readonly string[];
-}
-
 const WORKER_METRIC_DIMENSION_SPECS: Readonly<
   Partial<Record<WorkerMetricName, WorkerMetricDimensionSpec>>
 > = {
@@ -185,5 +174,16 @@ const WORKER_METRIC_DIMENSION_SPECS: Readonly<
     },
   },
 };
+
+export type DimensionType = 'boolean' | 'number' | 'string';
+
+export interface WorkerMetricDimensionSpec {
+  /** Dimension keys to emit to the private dataset, or undefined to skip the private emit. */
+  readonly privateKeys?: readonly string[] | undefined;
+  /** Dimension keys to emit to the public dataset, or undefined to skip the public emit. */
+  readonly publicKeys?: readonly string[] | undefined;
+  /** Dimension keys and their required types for the metric to be valid. */
+  readonly required: Readonly<Record<string, DimensionType>>;
+}
 
 export default WORKER_METRIC_DIMENSION_SPECS;

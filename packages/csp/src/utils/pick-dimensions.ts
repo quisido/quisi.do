@@ -6,7 +6,10 @@ export default function pickDimensions(
 ): MetricDimensions {
   const picked: MetricDimensions = {};
   for (const key of keys) {
-    picked[key] = dimensions[key];
+    const value: string | number | boolean | undefined = dimensions[key];
+    if (typeof value !== 'undefined') {
+      picked[key] = value;
+    }
   }
   return picked;
 }

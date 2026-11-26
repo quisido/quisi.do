@@ -29,7 +29,13 @@ interface HostContext<Root> {
   readonly rootContainer: Root;
 }
 
-type QuisidoHostConfig<Type, Props, Txt, Family, Root> = HostConfig<
+type QuisidoHostConfig<
+  Type extends string,
+  Props extends Record<Type, object>,
+  Txt,
+  Family,
+  Root,
+> = HostConfig<
   Type,
   Props[Type],
   Root,

@@ -13,4 +13,5 @@ npx lighthouse http://localhost:3000/ \
   --output=html,json \
   --output-path=lighthouse \
   --preset=experimental \
+  --quiet \
   --save-assets;

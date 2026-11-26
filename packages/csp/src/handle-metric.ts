@@ -49,8 +49,16 @@ export default function handleMetric(
 
       if (name === WorkerMetricName.Fetch) {
         const { endTime, startTime, url } = dimensions;
+        if (
+          typeof endTime !== 'number' ||
+          typeof startTime !== 'number' ||
+          typeof url !== 'string'
+        ) {
+          emitInvalidWorkerMetric();
+          return;
+        }
         try {
-          const { origin } = new URL(url as string);
+          const { origin } = new URL(url);
           emitPrivately({ endTime, startTime, url });
           emitPublicly({ endTime, origin, startTime });
         } catch (_err: unknown) {
