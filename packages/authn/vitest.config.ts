@@ -61,7 +61,7 @@ const CONFIG: UserConfig = defineConfig({
       {
         "test": {
           "environment": "node",
-          "include": ["eslint-config.test.ts", "vite-config.test.ts", "vitest-config.test.ts"],
+          "include": ["*.test.ts"],
           "name": "Node",
         },
       },
