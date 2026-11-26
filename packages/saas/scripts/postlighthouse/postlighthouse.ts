@@ -16,9 +16,6 @@ const IGNORED_AUDITS = new Set([
   'crawlable-anchors',
   'image-size-responsive',
   'service-worker',
-
-  // Mixpanel tracks events with an `img` element that lacks an `alt` attribute.
-  'image-alt',
 ]);
 
 if (!existsSync(REPORT_PATH)) {
