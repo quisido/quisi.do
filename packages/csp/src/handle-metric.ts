@@ -47,8 +47,13 @@ export default function handleMetric(
         return;
       }
 
+      const capturedRequired = pickDimensions(
+        dimensions,
+        Object.keys(spec.required),
+      );
+
       if (name === WorkerMetricName.Fetch) {
-        const { endTime, startTime, url } = dimensions;
+        const { endTime, startTime, url } = capturedRequired;
         if (
           typeof endTime !== 'number' ||
           typeof startTime !== 'number' ||
@@ -68,11 +73,11 @@ export default function handleMetric(
       }
 
       if (spec.privateKeys !== undefined) {
-        emitPrivately(pickDimensions(dimensions, spec.privateKeys));
+        emitPrivately(pickDimensions(capturedRequired, spec.privateKeys));
       }
 
       if (spec.publicKeys !== undefined) {
-        emitPublicly(pickDimensions(dimensions, spec.publicKeys));
+        emitPublicly(pickDimensions(capturedRequired, spec.publicKeys));
       }
       return;
     }
@@ -98,9 +103,10 @@ export default function handleMetric(
     return;
   }
 
+  const capturedDimensions = newDimensions;
   if (isPublic) {
-    emitPublicly(newDimensions);
+    emitPublicly(capturedDimensions);
   } else {
-    emitPrivately(newDimensions);
+    emitPrivately(capturedDimensions);
   }
 }

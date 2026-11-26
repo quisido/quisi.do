@@ -3,5 +3,7 @@
 `quisi.do` is a playground for boundary-pushing, browser-oriented, open-source
 front-end software.
 
-[Read more.](https://github.com/quisido/quisi.do/)
+## References
+
+[GitHub repository](https://github.com/quisido/quisi.do/)
 
