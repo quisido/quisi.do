@@ -6,7 +6,6 @@
   "hints": {
     // Technical debt: Re-enable this when the theme is finalized.
     "axe/color": "off",
-
     "axe/keyboard": [
       "error",
       /** @see https://webhint.io/docs/user-guide/hints/hint-axe/keyboard/#additional-rules-off-by-default */
@@ -18,33 +17,43 @@
         "tabindex": "error"
       }
     ],
-
-    /**
-     * Technical debt: Re-enable this when `api-js.mixpanel.com` is blocked.
-     * axe/text-alternatives: Element has no title attribute
-     * <img src="https://api-js.mixpanel.com/track/..." />
-     */
-    "axe/text-alternatives": "off",
-
+    "axe/text-alternatives": "error",
+    // Not supported for websites.
+    "babel-config/is-valid": "off",
     /**
      * Technical debt: Re-enable this after debugging why the hint options in
      * `~/.hintrc` are ignored.
      */
     "compat-api/css": "off",
-
     // Technical debt: Re-enable these when the animation is optimized.
     "detect-css-reflows/composite": "off",
     "detect-css-reflows/paint": "off",
     "doctype": "error",
-    "html-checker": [
-      "error",
-      {
-        "details": true
-      }
-    ],
-
+    /**
+     * Technical debt: Could not get results from HTML checker for
+     * 'https://quisi.do/'. Error: 'Unexpected token '<', "<!DOCTYPE "... is not
+     * valid JSON'. (html-checker) at https://quisi.do/
+     * "html-checker": ["error", { "details": true }],
+     */
+    "html-checker": "off",
     // "No valid configuration for Cloudinary found. Hint could not run."
-    "image-optimization-cloudinary": "off"
+    "image-optimization-cloudinary": "off",
+    // Not supported for websites.
+    "typescript-config/consistent-casing": "off",
+    // Not supported for websites.
+    "typescript-config/import-helpers": "off",
+    // Not supported for websites.
+    "typescript-config/strict": "off",
+    // Not supported for websites.
+    "typescript-config/target": "off",
+    // Not supported for websites.
+    "webpack-config/is-valid": "off",
+    // Not supported for websites.
+    "webpack-config/module-esnext-typescript": "off",
+    // Not supported for websites.
+    "webpack-config/modules-false-babel": "off",
+    // Not supported for websites.
+    "webpack-config/no-devtool-in-prod": "off"
   },
 
   "ignoredUrls": [

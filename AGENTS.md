@@ -1,8 +1,9 @@
 # Instructions for agents
 
 - When authoring scripts, use TypeScript exclusively.
-- When running build and test scripts, write the output to a temporary file then
-  search that file with `rg` or `tail`, e.g. `npm test > /tmp/test.log 2>&1` and
+- When running build and test scripts, write the output to a temporary file, e.g.
+  `npm test > /tmp/test.log 2>&1`.
+- Then search that file with `rg` or `tail`, e.g.
   `rg --context 3 --max-count 5 'FAIL' /tmp/test.log`.
 
 ## Monorepo layout
@@ -30,11 +31,12 @@ typescript-eslint). Keep both.
 - Scope everything with workspaces:
   `npm --workspace=packages/<name> run <script>`.
 - Root shortcuts run a package's dev server: `npm run authn`, `npm run csp`,
-  `npm run game`, `npm run saas`, `npm run worker`, ... Root `npm start` (via
-  `scripts/start.ts`) only starts the published, non-private workspaces, so use
-  the shortcuts for apps and services.
-- `quisido test` runs ATTW, ESLint, publint, built-in tsconfig/VS Code checks,
-  and Vitest concurrently, and writes JSON reports to `.tests/` in the package.
+  `npm run game`, `npm run saas`, `npm run worker`, ...
+- Root `npm start` (via `scripts/start.ts`) only starts the published, non-private
+  workspaces, so use the shortcuts for apps and services.
+- `quisido test` runs attw (are-the-types-wrong), ESLint, publint, built-in
+  tsconfig/VS Code checks, and Vitest concurrently, and writes JSON reports to
+  `.tests/` in the package.
 - Run a focused test with Vitest directly:
   `npm --workspace=packages/<name> run vitest:run -- <file>` (each package also
   has `vitest` / `vitest:watch`).

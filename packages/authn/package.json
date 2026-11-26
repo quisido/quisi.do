@@ -5,6 +5,7 @@
     "jose": "^6.2.18"
   },
   "devDependencies": {
+    "@cloudflare/oxlint-config": "^0.2.0",
     "@cloudflare/vite-plugin": "^1.70.1",
     "@cloudflare/vitest-plugin": "^1.9.0",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.8.1",
@@ -31,6 +32,8 @@
     "eslint-plugin-sonarjs": "^4.2.2",
     "jiti": "^2.7.0",
     "jsonc-eslint-parser": "^3.3.0",
+    "oxlint": "^1.95.0",
+    "tsrs": "^7.1.0-beta.tsrs5",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "typescript-eslint": "^8.72.2",
     "vite": "^8.3.8",

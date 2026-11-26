@@ -16,7 +16,6 @@ interface ImportMetaEnv {
   readonly GITHUB_REPOSITORY?: string | undefined;
   readonly GITHUB_SHA?: string | undefined;
   readonly GOOGLE_ANALYTICS_TRACKING_ID?: string | undefined;
-  readonly MIXPANEL_TOKEN?: string | undefined;
   readonly NEW_RELIC_LICENSE_KEY?: string | undefined;
   readonly NODE_ENV?: NodeJS.ProcessEnv['NODE_ENV'];
   readonly PATREON_OAUTH_CLIENT_ID?: string | undefined;

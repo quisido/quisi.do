@@ -5,6 +5,7 @@ import createReactReconciler, {
   type CaughtErrorInfo,
   type EventPriority,
   type Fiber,
+  type HostConfig,
   type OpaqueHandle,
   type OpaqueRoot,
   type Reconciler,
@@ -27,6 +28,35 @@ import { TransitionStatus } from './transition-status.js';
 interface HostContext<Root> {
   readonly rootContainer: Root;
 }
+
+type QuisidoHostConfig<
+  Type extends string,
+  Props extends Record<Type, object>,
+  Txt,
+  Family,
+  Root,
+> = HostConfig<
+  Type,
+  Props[Type],
+  Root,
+  Family,
+  Txt,
+  never, // ActivityInstance
+  SuspenseInstance,
+  never, // HydratableInstance
+  FormInstance,
+  Family | Txt,
+  HostContext<Root>,
+  never, // ChildSet
+  number, // TimeoutHandle
+  number, // NoTimeout
+  TransitionStatus,
+  null, // SuspendedState
+  Record<string, unknown>, // RendererInspectionConfig
+  never, // FormStateMarkerInstance
+  never, // HoistableRoot
+  never // Resource
+>;
 
 const defaultMaySuspendCommit = (): boolean => false;
 
@@ -84,15 +114,9 @@ export default class QuisidoReconciler<
     Family | Txt
   >;
 
-  public constructor({
-    cancelTimeout,
-    createInstance,
-    createTextInstance,
-    maySuspendCommit = defaultMaySuspendCommit,
-    scheduleMicrotask,
-    scheduleTimeout,
-    shouldSetTextContent,
-  }: QuisidoReconcilerOptions<Type, Props, Txt, Family, Root>) {
+  public constructor(
+    options: QuisidoReconcilerOptions<Type, Props, Txt, Family, Root>,
+  ) {
     const reconciler = createReactReconciler<
       Type,
       Props[Type],
@@ -114,7 +138,32 @@ export default class QuisidoReconciler<
       never, // FormStateMarkerInstance
       never, // HoistableRoot
       never // Resource
-    >({
+    >(this.#createHostConfig(options));
+
+    this.#reconciler = reconciler;
+
+    // Since react-reconciler 0.34, the renderer metadata above
+    // (`rendererVersion`, `rendererPackageName`, `extraDevToolsConfig`) is
+    // registered with React DevTools automatically.
+    reconciler.injectIntoDevTools();
+  }
+
+  #createHostConfig({
+    cancelTimeout,
+    createInstance,
+    createTextInstance,
+    maySuspendCommit = defaultMaySuspendCommit,
+    scheduleMicrotask,
+    scheduleTimeout,
+    shouldSetTextContent,
+  }: QuisidoReconcilerOptions<
+    Type,
+    Props,
+    Txt,
+    Family,
+    Root
+  >): QuisidoHostConfig<Type, Props, Txt, Family, Root> {
+    return {
       afterActiveInstanceBlur(): void {
         // Do nothing.
       },
@@ -563,14 +612,7 @@ export default class QuisidoReconciler<
       },
 
       warnsIfNotActing: true,
-    });
-
-    this.#reconciler = reconciler;
-
-    // Since react-reconciler 0.34, the renderer metadata above
-    // (`rendererVersion`, `rendererPackageName`, `extraDevToolsConfig`) is
-    // registered with React DevTools automatically.
-    reconciler.injectIntoDevTools();
+    };
   }
 
   #getOpaqueRoot(container: Root, onError: (error: Error) => void): OpaqueRoot {

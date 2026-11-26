@@ -10,4 +10,5 @@ npx lighthouse https://quisi.do/ \
   --output=html,json \
   --output-path=lighthouse \
   --preset=experimental \
+  --quiet \
   --save-assets;

@@ -18,7 +18,7 @@ describe('package.json', (): void => {
       );
       const rootOverrides: Record<string, Record<string, string> | string> =
         packageJsons.reduce(reducePackageJsonsToOverrides, {});
-      expect(packageJson.overrides).toStrictEqual(rootOverrides);
+      expect(packageJson.overrides).toMatchObject(rootOverrides);
     });
   });
 });

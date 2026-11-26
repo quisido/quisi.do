@@ -4,7 +4,6 @@ import {
   type EventHint,
 } from '@sentry/core';
 import { mapObjectToEntries } from 'fmrs';
-import { track as mixpanelBrowserTrack } from 'mixpanel-browser';
 import { usePostHog } from 'posthog-js/react';
 import { useCallback } from 'react';
 import EMPTY_OBJECT from '../../modules/react-google-analytics/constants/empty-object.js';
@@ -57,20 +56,6 @@ const removeNullValues = <K extends number | string | symbol, V>(
   return newRecord;
 };
 
-const safeMixpanelBrowserTrack = (
-  name: string,
-  dimensions: Readonly<Dimensions>,
-): void => {
-  try {
-    mixpanelBrowserTrack(name, dimensions);
-  } catch (_err: unknown) {
-    /**
-     * Mixpanel has not finished loading yet.
-     * Cannot read properties of undefined (reading '_event_is_disabled')
-     */
-  }
-};
-
 /**
  * Common e-commerce events:
  * @see https://developers.cloudflare.com/zaraz/web-api/ecommerce/#list-of-supported-events
@@ -119,9 +104,6 @@ export default function useEmit(): EventEmitter {
 
       // LogRocket
       LogRocket.track(name, removeNullValues(dimensions));
-
-      // Mixpanel
-      safeMixpanelBrowserTrack(name, dimensions);
 
       // New Relic
       newRelicBrowserAgent?.recordCustomEvent(name, dimensions);

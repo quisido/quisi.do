@@ -1,6 +1,6 @@
 import { type ReactElement, useMemo } from 'react';
 import { Link } from '../components/design-system.js';
-import I18n from '../components/i18n.jsx';
+import I18n from '../components/i18n.js';
 import {
   PATREON_OAUTH_CLIENT_ID,
   PATREON_OAUTH_REDIRECT_URI,

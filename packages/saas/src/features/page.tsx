@@ -1,6 +1,6 @@
 import { type PropsWithChildren, type ReactElement } from 'react';
 import { Document, Link } from '../components/design-system.js';
-import Authentication from './header-authentication.jsx';
+import Authentication from './header-authentication.js';
 import classes from './page.module.scss';
 
 const YEAR: number = new Date().getFullYear();
