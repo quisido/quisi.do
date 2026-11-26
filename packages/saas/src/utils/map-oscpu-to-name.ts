@@ -27,5 +27,9 @@ export default function mapOscpuToName(
     return;
   }
 
+  if (!Object.hasOwn(NAMES_BY_OSCPU, oscpu)) {
+    return oscpu;
+  }
+
   return NAMES_BY_OSCPU[oscpu] ?? oscpu;
 }
