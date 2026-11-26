@@ -1,7 +1,7 @@
 import { ErrorCode } from '@quisido/authn-shared';
 import { type ReactElement } from 'react';
 import AlarmExistsMessage from '../components/alarm-exists-message.js';
-import CsrfLink from '../components/csrf-link.jsx';
+import CsrfLink from '../components/csrf-link.js';
 import I18n from '../components/i18n.js';
 import MisconfiguredPatreonClientMessage from '../components/misconfigured-patreon-client-message.js';
 import UnknownErrorMessage from '../components/unknown-error-message.js';

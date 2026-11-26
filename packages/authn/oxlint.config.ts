@@ -3,8 +3,8 @@ import { defineConfig } from "oxlint";
 import type { OxlintConfig } from "oxlint";
 
 const CONFIG: Readonly<OxlintConfig> = defineConfig({
-  "extends": [cloudflare],
   "env": cloudflare.env,
+  "extends": [cloudflare],
   "ignorePatterns": [...cloudflare.ignorePatterns, ".wrangler/", "coverage/", "node_modules/", "worker-configuration.d.ts"],
 });
 
