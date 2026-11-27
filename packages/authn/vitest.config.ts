@@ -26,6 +26,8 @@ const CONFIG: UserConfig = defineConfig({
         "worker-configuration.d.ts",
       ],
       "include": ["**/*.ts"],
+      "provider": "istanbul",
+      "reporter": ["html-spa", "text"],
       "skipFull": true,
       "thresholds": { "100": true },
     },
@@ -41,11 +43,6 @@ const CONFIG: UserConfig = defineConfig({
         "extends": true,
         "plugins": [
           cloudflareTest({
-            "miniflare": {
-              "modulesRules": [
-                { "type": "Data", "include": ["**/*.ico"] },
-              ],
-            },
             "wrangler": {
               "configPath": "./wrangler.jsonc",
               "environment": "test",
@@ -61,7 +58,7 @@ const CONFIG: UserConfig = defineConfig({
       {
         "test": {
           "environment": "node",
-          "include": ["*.test.ts"],
+          "include": ["config/**/*.test.ts", "*.test.ts"],
           "name": "Node",
         },
       },

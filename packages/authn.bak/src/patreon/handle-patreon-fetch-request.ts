@@ -17,8 +17,6 @@ export default async function handlePatreonFetchRequest(
   this: AuthnFetchHandler,
   { returnPath }: Options,
 ): Promise<Response> {
-  this.emitPublicMetric(MetricName.PatreonRequest);
-
   const accessToken: string = await getPatreonAccessToken.call(this);
   const identity: PatreonIdentity = await fetchPatreonIdentity.call(
     this,

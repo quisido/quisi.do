@@ -11,7 +11,7 @@ const OPTIONS: OptionsFn =
     (env: ReadonlyDeep<Env>): CloudflareOptions => ({
       "dataCollection": {
         "cookies": {
-          "deny": ["__Secure-Authentication-ID"],
+          "deny": ["__Secure-Authentication-ID", "__Secure-Session-ID"],
         },
       },
       "dsn": "https://cbf35b377ced590510b13dec4ec3a0d5@o592283.ingest.us.sentry.io/4512484768153600",

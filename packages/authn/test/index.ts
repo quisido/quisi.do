@@ -1,7 +1,8 @@
 import { env, exports as worker } from "cloudflare:workers";
 import { expect } from "vitest";
 import type { ReadonlyDeep } from "../lib/readonly-deep.js";
-import type { StatusCode } from "../lib/status-code.js";
+import { StatusCode } from "../lib/status-code.js";
+import type ErrorCode from "../lib/error-code.js";
 
 interface Options {
   readonly "headers"?: Record<string, string> | undefined;
@@ -10,6 +11,7 @@ interface Options {
 
 interface TestUtils {
   readonly "expectContentType": (type: string) => void;
+  readonly "expectErrorRedirect": (code: ErrorCode, returnPath?: string | undefined) => void;
   readonly "expectHeaders": (headers: Readonly<Record<string, string>>) => void;
   readonly "expectPermanentCache": () => void;
   readonly "expectStatus": (code: StatusCode) => void;
@@ -86,6 +88,21 @@ export async function fetch (
 
   }
 
+  const expectStatus = (code: StatusCode): void => {
+
+    expect(response.status).toBe(code);
+
+  };
+
+  const expectUncacheable = (): void => {
+
+    expect(responseHeaders).toMatchObject({
+      "cache-control": "no-store",
+      "vary": "*",
+    });
+
+  };
+
   return {
     "expectContentType": (contentType: string): void => {
 
@@ -93,6 +110,16 @@ export async function fetch (
         "content-type": contentType,
         "x-content-type-options": "nosniff",
       });
+
+    },
+    "expectErrorRedirect": (code: ErrorCode, returnPath = "/"): void => {
+
+      const errorUrl = `${env.ORIGIN}${returnPath}#authn:error=${code.toString()}`;
+
+      expect(response.headers.get("location")).toBe(errorUrl);
+
+      expectStatus(StatusCode.SeeOther);
+      expectUncacheable();
 
     },
     "expectHeaders": (expectedHeaders: Readonly<Record<string, string>>): void => {
@@ -108,19 +135,8 @@ export async function fetch (
       expect(responseHeaders).not.toHaveProperty("vary");
 
     },
-    "expectStatus": (code: StatusCode): void => {
-
-      expect(response.status).toBe(code);
-
-    },
-    "expectUncacheable": (): void => {
-
-      expect(responseHeaders).toMatchObject({
-        "cache-control": "no-store",
-        "vary": "*",
-      });
-
-    },
+    expectStatus,
+    expectUncacheable,
     response,
   };
 

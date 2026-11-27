@@ -21,7 +21,7 @@ const CONFIG: readonly ConfigObject[] = [
       "vitest": vitestPlugin,
     },
     "rules": {
-      "vitest/expect-expect": ["error", { "assertFunctionNames": ["assert", "expect", "expectContentType", "expectHeaders", "expectPermanentCache", "expectStatus", "expectUncacheable"] }],
+      "vitest/expect-expect": ["error", { "assertFunctionNames": ["assert", "expect", "expectContentType", "expectErrorRedirect", "expectHeaders", "expectPermanentCache", "expectStatus", "expectUncacheable"] }],
     },
     "settings": {
       "vitest": {
