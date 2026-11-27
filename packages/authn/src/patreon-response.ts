@@ -72,7 +72,7 @@ function isPatreonStateFieldValue(
 		value.length > 0 &&
 		value.length <= MAX_PATREON_STATE_FIELD_LENGTH &&
 		(field !== "returnPath" ||
-			/^\/[\x21\x22\x24-\x2e\x30-\x5b\x5d-\x7e][\x21\x22\x24-\x5b\x5d-\x7e]*$/.test(
+			/^\/(?:[\x21\x22\x24-\x2e\x30-\x5b\x5d-\x7e][\x21\x22\x24-\x5b\x5d-\x7e]*)?$/.test(
 				value,
 			))
 	);
