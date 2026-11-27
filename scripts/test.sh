@@ -8,7 +8,6 @@ npx eslint . \
 
 npx markdownlint \
   --dot \
-  --fix \
   --ignore-path ".gitignore" \
   "**/*.md";
 
