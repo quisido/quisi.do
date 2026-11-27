@@ -16,6 +16,9 @@ inputs:
   prompt:
     description: additional prompt context
     required: true
+  secrets-client-id:
+    description: GitHub App client ID for writing secrets
+    required: true
   secrets-private-key:
     description: GitHub App private key for writing secrets
     required: true
