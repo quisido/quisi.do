@@ -30,7 +30,7 @@ process.
 
 ## Dependencies
 
-The only third party modules you may import are:
+The only third party modules that may be imported in `src/` are:
 
 - `jose`
 
