@@ -127,5 +127,6 @@ export const SHARED_TYPESCRIPT_RULES_CONFIG: RulesConfig = {
   "promise/no-return-wrap": "error",
   "promise/spec-only": "error",
   "promise/valid-params": "error",
+  "require-unicode-regexp": "error",
   "use-isnan": ["error", { "enforceForIndexOf": true }],
 };

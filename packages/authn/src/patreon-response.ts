@@ -72,7 +72,7 @@ function isPatreonStateFieldValue(
 		value.length > 0 &&
 		value.length <= MAX_PATREON_STATE_FIELD_LENGTH &&
 		(field !== "returnPath" ||
-			/^\/(?:[\x21\x22\x24-\x2e\x30-\x5b\x5d-\x7e][\x21\x22\x24-\x5b\x5d-\x7e]*)?$/.test(
+			/^\/(?:[\x21\x22\x24-\x2e\x30-\x5b\x5d-\x7e][\x21\x22\x24-\x5b\x5d-\x7e]*)?$/u.test(
 				value,
 			))
 	);
@@ -166,28 +166,38 @@ function getPatreonStateValidation(
 	return validatePatreonState(parse.state);
 }
 
-function getSessionIdCookieValue(
-	cookieHeader: null | string,
-): string | undefined {
-	return cookieHeader
-		?.split(";")
-		.map((cookiePair: string): string => cookiePair.trim())
-		.find((cookiePair: string): boolean =>
-			cookiePair.startsWith(`${SESSION_ID_COOKIE_NAME}=`),
-		)
-		?.slice(SESSION_ID_COOKIE_NAME.length + 1);
-}
-
 function getCsrfErrorCode(
 	sessionId: string,
-	sessionIdCookieValue: string | undefined,
+	cookieHeader: null | string,
 ): ErrorCode | null {
-	if (sessionIdCookieValue === undefined) {
+	const sessionIdCookieValues: string =
+		cookieHeader
+			?.split(";")
+			.map((cookiePair: string): string => cookiePair.trim())
+			.filter((cookiePair: string): boolean =>
+				cookiePair.startsWith(`${SESSION_ID_COOKIE_NAME}=`),
+			)
+			.map(
+				(cookiePair: string): string =>
+					cookiePair.slice(SESSION_ID_COOKIE_NAME.length + 1),
+			)
+			.filter((cookieValue: string): boolean => cookieValue.length > 0)
+			.join(";") ?? "";
+
+	if (sessionIdCookieValues.length === 0) {
 		return ErrorCode.PatreonCsrfMissing;
 	}
 
 	const csrfErrorCode: ErrorCode | null | undefined =
-		PATREON_CSRF_ERROR_CODES[String(sessionIdCookieValue === sessionId)];
+		PATREON_CSRF_ERROR_CODES[
+			String(
+				sessionIdCookieValues
+					.split(";")
+					.every(
+						(cookieValue: string): boolean => cookieValue === sessionId,
+					),
+			)
+		];
 
 	assert(csrfErrorCode !== undefined);
 
@@ -217,7 +227,7 @@ export default function getPatreonResponse(
 			? validation.errorCode
 			: getCsrfErrorCode(
 					validation.sessionId,
-					getSessionIdCookieValue(request.headers.get("cookie")),
+					request.headers.get("cookie"),
 				);
 
 	return new Response(null, {

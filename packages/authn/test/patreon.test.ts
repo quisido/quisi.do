@@ -56,22 +56,33 @@ describe("Who Am I?", (): void => {
 
   it("handles missing session IDs", async (): Promise<void> => {
 
-    const { expectErrorRedirect } = await fetch(toPath({ "returnPath": "/return-path/" }));
-    expectErrorRedirect(ErrorCode.PatreonStateSessionIdMissing, "/return-path/");
+    const { expectErrorRedirect } = await fetch(toPath({ "returnPath": "/" }));
+    expectErrorRedirect(ErrorCode.PatreonStateSessionIdMissing, "/");
 
   });
 
   it("handles non-string session IDs", async (): Promise<void> => {
 
-    const { expectErrorRedirect } = await fetch(toPath({ "returnPath": "/return-path/", "sessionId": 123 }));
-    expectErrorRedirect(ErrorCode.PatreonStateSessionIdInvalid, "/return-path/");
+    const { expectErrorRedirect } = await fetch(toPath({ "returnPath": "/return-path", "sessionId": 123 }));
+    expectErrorRedirect(ErrorCode.PatreonStateSessionIdInvalid, "/return-path");
 
   });
 
   it("handles CSRF with no session ID", async (): Promise<void> => {
 
-    const { expectErrorRedirect } = await fetch(toPath({ "returnPath": "/return-path/", "sessionId": "test-session-id" }));
-    expectErrorRedirect(ErrorCode.PatreonCsrfMissing, "/return-path/");
+    const { expectErrorRedirect } = await fetch(toPath({ "returnPath": "/return-path.html", "sessionId": "test-session-id" }));
+    expectErrorRedirect(ErrorCode.PatreonCsrfMissing, "/return-path.html");
+
+  });
+
+  it("handles CSRF with empty session ID", async (): Promise<void> => {
+
+    const { expectErrorRedirect } = await fetch(toPath({ "returnPath": "/", "sessionId": "test-session-id" }), {
+      "headers": {
+        "Cookie": "__Secure-Session-ID=",
+      },
+    });
+    expectErrorRedirect(ErrorCode.PatreonCsrfMissing, "/");
 
   });
 
