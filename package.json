@@ -99,6 +99,8 @@
     "eslint": "^10.15.0",
     "hint": "^7.1.13",
     "jsonc-parser": "^3.3.1",
+    "markdownlint": "^0.42.2",
+    "markdownlint-cli": "^0.50.1",
     "playwright": "^1.64.1",
     "puppeteer-core": "^25.18.1",
     "quisido": "^0.0.5",
