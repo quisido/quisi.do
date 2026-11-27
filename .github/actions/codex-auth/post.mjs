@@ -32,9 +32,8 @@ try {
   // If the auth token has changed,
   else {
     process.stdout.write('Authentication token has changed.\n');
-    const env = getState('secrets-environment');
     const repo = getState('repository');
-    const flags = ['--app', 'actions', '--env', env, '--repo', repo];
+    const flags = ['--app', 'actions', '--env', 'codex', '--repo', repo];
     const args = ['secret', 'set', 'CODEX_AUTH_JSON', ...flags];
     const { status: exitCode } = spawnSync('gh', args, {
       env: {

@@ -41,12 +41,10 @@ try {
     .digest('hex');
   const githubToken = getInput('github-token');
   const repository = getInput('repository');
-  const secretsEnvironment = getInput('secrets-environment');
   await saveState('auth-json-hash', authJsonHash);
   await saveState('codex-home', codexHome);
   await saveState('github-token', githubToken);
   await saveState('repository', repository);
-  await saveState('secrets-environment', secretsEnvironment);
 } catch (err) {
   if (err instanceof Error) {
     setFailed(err.message);

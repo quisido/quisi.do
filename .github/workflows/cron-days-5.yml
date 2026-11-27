@@ -45,5 +45,4 @@ jobs:
           codex-token: ${{ github.token }}
           prompt: "Reply with exactly: ok"
           secrets-client-id: ${{ vars.WRITE_SECRETS_CLIENT_ID }}
-          secrets-environment: codex
           secrets-private-key: ${{ secrets.WRITE_SECRETS_PRIVATE_KEY }}
