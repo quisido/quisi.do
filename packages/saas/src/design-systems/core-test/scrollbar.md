@@ -7,4 +7,4 @@
 - Set the `aria-valuenow` attribute to indicate the current thumb position[^1].
 - Scrollbars have an implicit `aria-orientation` value of `'vertical'`[^1].
 
-[^1]: https://w3c.github.io/aria/#scrollbar
+[^1]: <https://w3c.github.io/aria/#scrollbar>

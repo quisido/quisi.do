@@ -7,4 +7,4 @@
 - A role description, accessible description, banner, and content information
   remain programmatically available when provided[^1].
 
-[^1]: https://w3c.github.io/aria/#application
+[^1]: <https://w3c.github.io/aria/#application>

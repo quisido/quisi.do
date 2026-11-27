@@ -20,5 +20,4 @@ creating a radio group with other arbitrary content, consider if the non-radio
 content could be just as impactful if it was presented as an immediate sibling
 after the radiogroup[^1].
 
-[^1]: https://w3c.github.io/aria/#radiogroup
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/radiogroup/
+[^1]: <https://w3c.github.io/aria/#radiogroup>

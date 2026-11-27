@@ -14,5 +14,4 @@ similar to a popup menu. For instance, a menu could be used to represent a
 context menu for its invoking element, or it would be used to render sub-menus
 for items of a menubar or another menu popup[^1].
 
-[^1]: https://w3c.github.io/aria/#menu
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
+[^1]: <https://w3c.github.io/aria/#menu>

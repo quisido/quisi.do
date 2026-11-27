@@ -35,6 +35,7 @@ metadata:
     // ...
   }
   ```
+
 - Use function components with hooks.
 - Use `ReactElement` as the return type for components that return JSX.
 

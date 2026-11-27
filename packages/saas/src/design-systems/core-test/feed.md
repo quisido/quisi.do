@@ -28,4 +28,4 @@
   complete or the changes may not become visible to some assistive technology
   users[^1].
 
-[^1]: https://www.w3.org/WAI/ARIA/apg/patterns/feed/
+[^1]: <https://www.w3.org/WAI/ARIA/apg/patterns/feed/>

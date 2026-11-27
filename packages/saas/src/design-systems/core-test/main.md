@@ -3,4 +3,4 @@
 - A page has no more than one main landmark for each containing `document` or
   `application`[^1].
 
-[^1]: https://w3c.github.io/aria/#main
+[^1]: <https://w3c.github.io/aria/#main>

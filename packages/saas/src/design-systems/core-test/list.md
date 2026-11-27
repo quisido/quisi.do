@@ -3,4 +3,4 @@
 - Unordered lists use native `ul` semantics and ordered lists use native `ol`
   semantics[^1].
 
-[^1]: https://w3c.github.io/aria/#list
+[^1]: <https://w3c.github.io/aria/#list>

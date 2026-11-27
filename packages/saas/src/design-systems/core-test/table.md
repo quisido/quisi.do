@@ -3,4 +3,4 @@
 - Prefer the use of the host language's semantics for table whenever possible,
   such as the <table> element in HTML[^1].
 
-[^1]: https://w3c.github.io/aria/#table
+[^1]: <https://w3c.github.io/aria/#table>

@@ -7,4 +7,4 @@
 - When hierarchy metadata is not supplied, the component does not invent
   inaccurate relationship values[^1].
 
-[^1]: https://w3c.github.io/aria/#comment
+[^1]: <https://w3c.github.io/aria/#comment>

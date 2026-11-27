@@ -24,4 +24,4 @@ the commented content, as follows[^1]:
     comments rather than comment elements, assign a role of `group` or `region`
     to the referenced container.
 
-[^1]: https://w3c.github.io/aria/#comment
+[^1]: <https://w3c.github.io/aria/#comment>

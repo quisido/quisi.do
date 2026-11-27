@@ -16,4 +16,4 @@
   `aria-describedby` set to the ID of the element containing the
   description[^1].
 
-[^1]: https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/
+[^1]: <https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/>

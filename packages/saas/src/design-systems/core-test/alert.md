@@ -4,4 +4,4 @@
 - Alerts default to `aria-live="assertive"` and `aria-atomic="true"`[^1].
 - Alerts should not disappear automatically[^1].
 
-[^1]: https://aria-at.w3.org/report/163670
+[^1]: <https://aria-at.w3.org/report/163670>

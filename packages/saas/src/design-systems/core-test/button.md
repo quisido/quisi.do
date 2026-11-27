@@ -10,6 +10,4 @@
 - When the action associated with a button is unavailable, it should have
   `aria-disabled` set to `true`[^1].
 
-[^1]: https://www.w3.org/WAI/ARIA/apg/patterns/button/
-
-[^2]: https://aria-at.w3.org/report/163671
+[^1]: <https://www.w3.org/WAI/ARIA/apg/patterns/button/>

@@ -13,6 +13,4 @@ fixed separator widget supports only two discrete positions. Typically, a fixed
 separator widget is used to toggle one of the sections between expanded and
 collapsed states[^1].
 
-[^1]: https://w3c.github.io/aria/#separator
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
-[^3]: https://www.w3.org/WAI/ARIA/apg/practices/range-related-properties/
+[^1]: <https://w3c.github.io/aria/#separator>

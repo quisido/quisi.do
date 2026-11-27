@@ -9,5 +9,4 @@ agent[^1].
 
 Typical tooltip delays last from one to five seconds[^1].
 
-[^1]: https://w3c.github.io/aria/#tooltip
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
+[^1]: <https://w3c.github.io/aria/#tooltip>

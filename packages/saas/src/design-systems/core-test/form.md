@@ -3,6 +3,5 @@
   present[^1].
 - Include the label inside of a heading[^1].
 
-
-[^1]: https://w3c.github.io/aria/#form
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/form.html
+[^1]: <https://w3c.github.io/aria/#form>
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/form.html>

@@ -44,5 +44,6 @@ Once the `create-design-system.ts` script has finished creating each component:
   ```ts
   export const name = "Title Case Name";
   ```
+
 - Update `./src/design-systems/${SLUG}/README.md` with the design system's
   description and test script.

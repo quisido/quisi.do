@@ -27,5 +27,5 @@ typically through the use of `iframe` and `frame` elements), each `document` or
 If a page includes more than one `contentinfo` landmark, each should have a
 unique label[^2].
 
-[^1]: https://w3c.github.io/aria/#contentinfo
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/contentinfo.html
+[^1]: <https://w3c.github.io/aria/#contentinfo>
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/contentinfo.html>

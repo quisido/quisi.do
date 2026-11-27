@@ -10,5 +10,4 @@ Limit the use of regions to sections containing content with a purpose that is
 not accurately described by one of the other landmarks, such as main,
 complementary, or navigation[^1].
 
-[^1]: https://w3c.github.io/aria/#region
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/region.html
+[^1]: <https://w3c.github.io/aria/#region>

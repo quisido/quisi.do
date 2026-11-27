@@ -51,5 +51,5 @@ An [alert dialog](./alert-dialog.md) is a special-case dialog role designed
 specifically for dialogs that divert users' attention to a brief, important
 message[^2].
 
-[^1]: https://w3c.github.io/aria/#dialog
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+[^1]: <https://w3c.github.io/aria/#dialog>
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/>

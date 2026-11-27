@@ -17,4 +17,4 @@ user-submitted comments could represent the comments as articles nested within
 the article for the web log entry. Author, heading, date, or other information
 associated with an article does not apply to nested articles.
 
-[^1]: https://w3c.github.io/aria/#article
+[^1]: <https://w3c.github.io/aria/#article>

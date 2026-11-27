@@ -19,4 +19,4 @@ exposed in an accessible manner[^1]. Examples include:
   remaining, which represents dynamically updating text available outside of the
   text box.
 
-[^1]: https://w3c.github.io/aria/#textbox
+[^1]: <https://w3c.github.io/aria/#textbox>

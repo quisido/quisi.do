@@ -20,5 +20,5 @@ For buttons with a "pressed" state, see [toggle button](./toggle-button.md).
 
 See related [link](./link.md).
 
-[^1]: https://w3c.github.io/aria/#button
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/button/
+[^1]: <https://w3c.github.io/aria/#button>
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/button/>

@@ -3,4 +3,4 @@
 - List boxes have an implicit `aria-orientation` value of `'vertical'` and can
   expose a horizontal orientation[^1].
 
-[^1]: https://w3c.github.io/aria/#listbox
+[^1]: <https://w3c.github.io/aria/#listbox>

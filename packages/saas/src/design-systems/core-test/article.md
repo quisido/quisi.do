@@ -7,4 +7,4 @@
 - Nested articles retain distinct accessible names so information associated
   with an ancestor article is not incorrectly applied to its descendants[^1].
 
-[^1]: https://w3c.github.io/aria/#article
+[^1]: <https://w3c.github.io/aria/#article>

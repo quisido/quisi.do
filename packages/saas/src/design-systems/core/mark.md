@@ -13,4 +13,4 @@ Example uses for mark include:
 
 Do not use mark for purely decorative styling such as syntax highlighting[^1].
 
-[^1]: https://w3c.github.io/aria/#mark
+[^1]: <https://w3c.github.io/aria/#mark>

@@ -5,4 +5,4 @@
 - When native math is unavailable, a spoken label or image text alternative
   provides an accessible fallback[^1].
 
-[^1]: https://w3c.github.io/aria/#math
+[^1]: <https://w3c.github.io/aria/#math>

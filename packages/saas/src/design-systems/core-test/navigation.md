@@ -4,6 +4,6 @@
   order[^2].
 - Multiple navigation landmarks have distinct accessible names[^2].
 
-[^1]: https://w3c.github.io/aria/#navigation
+[^1]: <https://w3c.github.io/aria/#navigation>
 
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/navigation.html
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/navigation.html>

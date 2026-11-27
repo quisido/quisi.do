@@ -36,4 +36,4 @@ associate the elements[^1]:
   button, list, table, etc.) use `aria-details`.
 - If the note is brief and consists of static text, use `aria-describedby`.
 
-[^1]: https://w3c.github.io/aria/#note
+[^1]: <https://w3c.github.io/aria/#note>

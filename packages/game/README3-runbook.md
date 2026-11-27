@@ -1162,6 +1162,7 @@ suite and the public `index.ts`.
 through `index.ts` — all per the repo instruction files.
 
 **Review fixes applied:**
+
 - `Event` → `GameEvent` everywhere (DOM-global clash; was a real type error).
 - Story 6 "reaches the wall" was vacuous (one event never integrated → object at
   x=0, asserting `0 ≤ 20`). Rewritten to launch + a later `noop` that drives
@@ -1183,6 +1184,7 @@ through `index.ts` — all per the repo instruction files.
   world.tick`) so a mis-sorted log fails loudly instead of silently wrong-stating.
 
 **Known scope limits (deferred to the right layer, not bugs in this plan):**
+
 - True cross-JS-engine bit-identity is asserted by construction (the math ban +
   IEEE-754's per-operator rounding guarantee) and proven *within* one engine by
   replay-equality; a CI matrix across engines is a later hardening task.

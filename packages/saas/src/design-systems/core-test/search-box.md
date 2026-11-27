@@ -6,4 +6,4 @@
   applicable[^1].
 - A search box can serve as the criteria field inside a `search` landmark[^1].
 
-[^1]: https://w3c.github.io/aria/#searchbox
+[^1]: <https://w3c.github.io/aria/#searchbox>

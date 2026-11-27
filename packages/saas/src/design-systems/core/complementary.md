@@ -28,5 +28,5 @@ When only one complementary landmark on a page, a label is optional. When there
 is more than one complementary landmark on a page, each should have a unique
 label[^2].
 
-[^1]: https://w3c.github.io/aria/#complementary
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/complementary.html
+[^1]: <https://w3c.github.io/aria/#complementary>
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/complementary.html>

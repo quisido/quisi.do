@@ -11,4 +11,4 @@
 - It is not possible for the user to alter the value of a progress bar because
   it is always read-only[^1].
 
-[^1]: https://w3c.github.io/aria/#progressbar
+[^1]: <https://w3c.github.io/aria/#progressbar>

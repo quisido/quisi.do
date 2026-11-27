@@ -11,4 +11,4 @@ elements[^1].
 
 See related [definition](./definition.md).
 
-[^1]: https://w3c.github.io/aria/#term
+[^1]: <https://w3c.github.io/aria/#term>

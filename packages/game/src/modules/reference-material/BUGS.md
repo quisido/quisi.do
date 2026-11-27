@@ -2,14 +2,14 @@
 
 ## High-impact bugs
 
-3. Audio instances share one `HTMLAudioElement` per `src`.
+1. Audio instances share one `HTMLAudioElement` per `src`.
    `play-audio.ts:9-11,27` caches `HTMLAudioElement` instances in a `SyncMap`
    keyed only by `src`. Two `<audio>` instances with the same source therefore
    control the same element: stopping or updating one pauses/restarts all of
    them. Overlapping copies of the same sound effect are impossible.
    **Fix:** create one element per `AudioInstance`, or clone/pool elements per
    playback. Cache the decoded source or URL, not the mutable element.
-4. `<text>` renders nothing.
+2. `<text>` renders nothing.
    `browser-reconciler.tsx:33-34` maps `Type.Text` to `TextInstance`, but
    `text-instance.ts:11-36` is a stub: `update()` is a no-op and most other
    methods throw. `shouldSetTextContent()` returns `true` for `Type.Text`
@@ -20,7 +20,7 @@
    also never notifies a parent.
    **Fix:** implement text rendering (for example, draw into an offscreen canvas
    and expose it as a `CanvasImageSource`).
-5. `clearContainer` does not clear host children.
+3. `clearContainer` does not clear host children.
    `quisido-reconciler.tsx:169-171` maps React’s `clearContainer` host-config
    method to `container.clear()`. `browser-container.ts:42-52` only calls
    `clearRect`; it leaves `#children` and `#renderUnsubscriptions` intact.
@@ -31,34 +31,40 @@
 
 ## Medium-impact bugs
 
-6. The first `onError` handler is cached forever.
+1. The first `onError` handler is cached forever.
    `quisido-reconciler.tsx:577-612` creates the opaque root once per container
    and captures the `onError` passed to that first `update()` call. Later
    renders with a different handler still report errors to the original handler.
    **Fix:** keep a mutable error handler per root, or create the root with a
    dispatcher that reads the current handler field.
-7. `StringifiableRecord` rejects interface-based state.
+2. `StringifiableRecord` rejects interface-based state.
    `quisido-store/stringifiable.ts:6-8` uses an index-signature-like mapped
    type. `BrowserGame` requires `State extends StringifiableRecord`
    (`browser-game.tsx:17`), so this fails:
+
    ```ts
    interface State {
      readonly x: number;
    }
    ```
+
    with:
+
    ```
    TS2344: Type 'State' does not satisfy the constraint 'StringifiableRecord'.
      Index signature for type 'string' is missing in type 'State'.
    ```
+
    Type aliases work, interfaces do not. Fix with a mapped constraint over
    `keyof State`, for example:
+
    ```ts
    type JsonRecord<T extends object> = {
      readonly [K in keyof T]: Stringifiable;
    };
    ```
-8. `maySuspendCommit` contradicts the image implementation.
+
+3. `maySuspendCommit` contradicts the image implementation.
    `draw-image-instance.ts:204` says the commit is delayed via
    `maySuspendCommit` until the image loads, but `browser-reconciler.tsx:41-54`
    always returns `false` for `DrawImage`. The generic reconciler also returns
@@ -67,44 +73,44 @@
    **Result:** an image update commits immediately and draws the empty
    placeholder until loading finishes. Implement the suspension hooks or
    remove the comment and document the placeholder behavior.
-9. Layers reallocate their offscreen canvas on every render.
+4. Layers reallocate their offscreen canvas on every render.
    `layer-instance.ts:135-140` sets `offscreenCanvas.height` and `.width` on
    every `#renderOffscreen()` call, even when dimensions are unchanged. That
    clears the backing store and resets context state every frame, and the
    preceding `clear()` is redundant.
    **Fix:** only resize when width or height actually changed.
-10. Each child update causes a full parent redraw.
+5. Each child update causes a full parent redraw.
     `browser-container.ts:91-102` and `layer-instance.ts:135-154` redraw the
     entire parent surface whenever any renderable child notifies them. A commit
     updating N sprites therefore performs N full clears and redraws. For a game
     loop this is a significant performance bug.
     **Fix:** batch render notifications per commit (for example, via a microtask
     or `resetAfterCommit`), or implement dirty-rectangle tracking.
-11. Container/layer error handlers are never wired.
+6. Container/layer error handlers are never wired.
     `browser-reconciler.tsx:95` constructs `new BrowserContainer(canvas)` without
     an `onError`, and `:32` constructs `new LayerInstance(props)` without one.
     Both classes fall back to `noop` (`browser-container.ts:28`,
     `layer-instance.ts:45`), so internal invariant errors are silently swallowed.
     **Fix:** pass a handler into the container/layer factories, ideally the
     current render call’s `onError`.
-12. Image failures and caches are permanent.
+7. Image failures and caches are permanent.
     `image-preloader.ts:22,37` caches both HTMLImageElements and decoded bitmaps
     forever. A transient load failure resolves to `EMPTY_OFFSCREEN_CANVAS` and is
     cached, so that `src` never retries. Unique dynamic srcs also grow both maps
     without bound.
     **Fix:** evict failed entries, allow explicit retry, and consider a
     bounded/LRU cache for decoded images.
-13. `BrowserGame.stop()` does not stop the game.
+8. `BrowserGame.stop()` does not stop the game.
     `browser-game.tsx:65-67` only unsubscribes from the store. The current canvas
     frame remains visible and audio already playing continues.
     **Fix:** Unmount/clear the renderer and stop audio.
-14. Unknown element types return `undefined`.
+9. Unknown element types return `undefined`.
     `browser-reconciler.tsx:22-36` has no default case. Rendering an unsupported
     string tag makes `createInstance()` return `undefined`, producing a confusing
     downstream React error.
     **Fix:** add a default case that throws a descriptive error naming the
     unsupported element type.
-15. Jsx omits the text element
+10. Jsx omits the text element
     `jsx.ts:8-11` unions audio, draw-image, and layer but not text, even though
     `Type.Text` and `TextProps` exist. Add `ReactElement<TextProps, 'text'>` for
     consistency.

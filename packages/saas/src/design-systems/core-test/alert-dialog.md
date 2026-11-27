@@ -19,6 +19,6 @@
 - The dialog element is not a descendant of any element that has `aria-hidden`
   set to `true`[^1].
 
-[^1]: https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
+[^1]: <https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/>
 
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/examples/alertdialog/
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/examples/alertdialog/>

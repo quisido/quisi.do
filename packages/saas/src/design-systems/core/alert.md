@@ -41,5 +41,5 @@ arrival of information that is important in the context of the user's task[^2].
 For situations where interrupting work flow is necessary, see
 [alert dialog](./alert-dialog.md).
 
-[^1]: https://w3c.github.io/aria/#alert
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/alert/
+[^1]: <https://w3c.github.io/aria/#alert>
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/alert/>

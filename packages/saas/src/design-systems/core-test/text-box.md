@@ -7,4 +7,4 @@
 - Children of a text box must be non-interactive, entirely presentational
   elements[^1].
 
-[^1]: https://w3c.github.io/aria/#textbox
+[^1]: <https://w3c.github.io/aria/#textbox>

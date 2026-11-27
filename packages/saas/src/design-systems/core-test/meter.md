@@ -5,4 +5,4 @@
 - `aria-valuenow` must not fall below or exceed the computed values of
   `aria-valuemin` and `aria-valuemax`, respectively[^1].
 
-[^1]: https://w3c.github.io/aria/#meter
+[^1]: <https://w3c.github.io/aria/#meter>

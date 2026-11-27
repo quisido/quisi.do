@@ -4,4 +4,4 @@
 - Banner and content-information landmarks remain programmatically available
   when provided as document content[^1].
 
-[^1]: https://w3c.github.io/aria/#document
+[^1]: <https://w3c.github.io/aria/#document>
