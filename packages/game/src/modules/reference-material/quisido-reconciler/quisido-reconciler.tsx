@@ -618,7 +618,7 @@ export default class QuisidoReconciler<
   #getOpaqueRoot(container: Root, onError: (error: Error) => void): OpaqueRoot {
     // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents, @typescript-eslint/no-unsafe-assignment
     const opaqueRoot: OpaqueRoot | undefined = this.#opaqueRoots.get(container);
-    if (typeof opaqueRoot !== 'undefined') {
+    if (opaqueRoot !== undefined) {
       return opaqueRoot;
     }
 

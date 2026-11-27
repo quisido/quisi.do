@@ -7,10 +7,11 @@
 *.asf              binary
 *.asx              binary
 *.avi              binary
-*.bat              text eol=crlf
+*.bat              eol=crlf
 *.bmp              binary
-*.cmd              text eol=crlf
-*.css              text diff=css eol=lf
+*.cmd              eol=crlf
+*.code-workspace   linguist-language=JSON-with-Comments
+*.css              diff=css
 *.eot              binary
 *.eps              binary
 *.exe              binary
@@ -19,8 +20,8 @@
 *.gif              binary
 *.gifv             binary
 *.gz               binary
-*.htm              text diff=html eol=lf
-*.html             text diff=html eol=lf
+*.htm              diff=html
+*.html             diff=html
 *.ico              binary
 *.jar              binary
 *.jng              binary
@@ -28,20 +29,22 @@
 *.jpg              binary
 *.jpeg             binary
 *.jpx              binary
+*.json5            linguist-language=JSON-with-Comments
+*.jsonc            linguist-language=JSON-with-Comments
 *.jxr              binary
 *.kar              binary
-*.lock             text -diff eol=lf
+*.lock             -diff
 *.m4a              binary
 *.m4v              binary
-*.map              text -diff eol=lf
-*.markdown         text diff=markdown eol=lf
-*.md               text diff=markdown eol=lf
-*.mdown            text diff=markdown eol=lf
-*.mdwn             text diff=markdown eol=lf
+*.map              -diff
+*.markdown         diff=markdown
+*.md               diff=markdown
+*.mdown            diff=markdown
+*.mdwn             diff=markdown
 *.mid              binary
 *.midi             binary
-*.mkd              text diff=markdown eol=lf
-*.mkdn             text diff=markdown eol=lf
+*.mkd              diff=markdown
+*.mkdn             diff=markdown
 *.mng              binary
 *.mov              binary
 *.mp3              binary
@@ -52,17 +55,17 @@
 *.ogv              binary
 *.otf              binary
 *.pdf              binary
-*.php              text diff=php eol=lf
+*.php              diff=php
 *.png              binary
-*.ps1              text eol=crlf
+*.ps1              eol=crlf
 *.psb              binary
 *.psd              binary
-*.py               text diff=python eol=lf
+*.py               diff=python
 *.pyc              binary
 *.ra               binary
 *.rar              binary
-*.rb               text diff=ruby eol=lf
-*.scss             text diff=css eol=lf
+*.rb               diff=ruby
+*.scss             diff=css
 *.svgz             binary
 *.swc              binary
 *.swf              binary
@@ -70,17 +73,25 @@
 *.tif              binary
 *.tiff             binary
 *.ttf              binary
-*.xhtml            text diff=html eol=lf
+*.xhtml            diff=html
 *.wbmp             binary
 *.webp             binary
 *.webm             binary
 *.woff             binary
 *.woff2            binary
 *.zip              binary
-.pnp.cjs           text -diff eol=lf
-.pnp.js            text -diff eol=lf
-.pnp.loader.mjs    text -diff eol=lf
+.vscode/*.json     linguist-language=JSON-with-Comments
+.hintrc            linguist-language=JSON-with-Comments
+.pnp.cjs           -diff
+.pnp.js            -diff
+.pnp.loader.mjs    -diff
 api-extractor.json linguist-language=JSON-with-Comments
-package-lock.json  text -diff eol=lf
-pnpm-lock.yaml     text -diff eol=lf
-yarn.lock          text -diff eol=lf
+package-lock.json  -diff
+pnpm-lock.yaml     -diff
+tsconfig.json      linguist-language=JSON-with-Comments
+wrangler.json      linguist-language=JSON-with-Comments
+yarn.lock          -diff
+
+# This repository's file naming conventions:
+hintrc.*.json      linguist-language=JSON-with-Comments
+tsconfig.*.json    linguist-language=JSON-with-Comments
