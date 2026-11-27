@@ -1,24 +1,21 @@
 # yaml-language-server: $schema=../../../schemas/github-action.jsonc
 name: Codex
-description: agentic action
+description: Execute a prompt with Codex.
 
 inputs:
   auth-json:
     description: base64-encoded Codex auth.json
     required: true
+  codex-home:
+    default: ${{ runner.temp }}/.codex
+    description: Codex home directory
+    required: false
   codex-token:
     description: GitHub token for Codex to use
     required: true
   prompt:
     description: additional prompt context
     required: true
-  secrets-client-id:
-    description: GitHub App client ID for writing secrets
-    required: true
-  secrets-environment:
-    description: GitHub environment in which to store secrets
-    default: codex
-    required: false
   secrets-private-key:
     description: GitHub App private key for writing secrets
     required: true
@@ -31,26 +28,33 @@ runs:
       shell: bash
       env:
         CODEX_AUTH_JSON: ${{ inputs.auth-json }}
-        CODEX_HOME: ${{ runner.temp }}/.codex
+        CODEX_HOME: ${{ inputs.codex-home }}
       run: >-
         sudo apt-get install --yes bubblewrap fd-find ripgrep;
         sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0;
         mkdir --parents "$CODEX_HOME";
         cp .github/actions/codex/config.toml "$CODEX_HOME/config.toml";
 
+    # Use a GitHub App dedicated to writing secrets.
+    - name: Create GitHub App token
+      id: app-token
+      uses: actions/create-github-app-token@v3.2.0
+      with:
+        client-id: ${{ inputs.secrets-client-id }}
+        private-key: ${{ inputs.secrets-private-key }}
+
     - name: Authenticate
       uses: ./.github/actions/codex-auth
       with:
         auth-json: ${{ inputs.auth-json }}
-        codex-home: ${{ runner.temp }}/.codex
-        secrets-client-id: ${{ inputs.secrets-client-id }}
-        secrets-environment: ${{ inputs.secrets-environment }}
-        secrets-private-key: ${{ inputs.secrets-private-key }}
+        codex-home: ${{ inputs.codex-home }}
+        github-token: ${{ steps.app-token.outputs.token }}
+        repository: ${{ github.repository }}
 
     - name: Execute
       shell: bash
       env:
-        CODEX_HOME: ${{ runner.temp }}/.codex
+        CODEX_HOME: ${{ inputs.codex-home }}
         GH_TOKEN: ${{ inputs.codex-token }}
         GITHUB_TOKEN: ${{ inputs.codex-token }}
         NODE_ENV: staging
