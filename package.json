@@ -113,10 +113,6 @@
     "@hint/connector-puppeteer": {
       "puppeteer-core": ">=22.11.1"
     },
-    "@hint/utils": {
-      "file-type": "^21.3.4",
-      "is-svg": "^6.1.0"
-    },
     "@sentry/wizard": {
       "glob": "^14.0.6",
       "minimatch": "^11.0.9"

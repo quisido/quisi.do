@@ -4,8 +4,10 @@ description: Fix issues and security findings for this repository.
 ---
 # Fix Codacy Issues and Security Findings
 
-Run `npx codacy findings gh quisido quisi.do` to see Codacy's security findings
-and `npx codacy issues gh quisido quisi.do` to see Codacy issues.
+Run `npx @codacy/codacy-cloud-cli findings gh quisido quisi.do --limit 1000` to
+see Codacy's security findings and
+`npx @codacy/codacy-cloud-cli issues gh quisido quisi.do --limit 1000` to see
+Codacy issues.
 
 Correct these findings and issues.
 
