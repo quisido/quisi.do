@@ -7,7 +7,7 @@
 /debug.log
 /dist/
 /graphify-out/
-/node_modules/
+node_modules/
 /playwright/storage-state.json
 .DS_Store
 .env.*.local
