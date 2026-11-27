@@ -10,8 +10,9 @@ description: Fix findings from an NPM security audit.
    logged errors. Keep each override inside the API its consumer uses: an
    override outside the range the consumer declares can clear an audit finding
    while breaking that package at runtime (see *Accepted findings*).
-3. Run `npm ci` to validate the lock file.
-4. Run `npm run build` and `npm test` to verify that changes were not breaking.
+3. Run `npm install --package-lock-only` to update the lock file.
+4. Run `npm ci` to validate the lock file.
+5. Run `npm run build` and `npm test` to verify that changes were not breaking.
 
 ## Constraints
 
