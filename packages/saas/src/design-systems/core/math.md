@@ -10,4 +10,4 @@ polyfill library[^1].
 Use native MathML wherever possible. Use a polyfill library or provide a
 fallback image with a text alternative approximation if necessary[^1].
 
-[^1]: https://w3c.github.io/aria/#math
+[^1]: <https://w3c.github.io/aria/#math>

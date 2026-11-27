@@ -16,7 +16,6 @@ usually preceding it[^1].
 A tab panel is a container for the resources associated with a tab, where each
 tab is contained in a tablist[^3].
 
-[^1]: https://w3c.github.io/aria/#tab
-[^2]: https://w3c.github.io/aria/#tablist
-[^3]: https://w3c.github.io/aria/#tabpanel
-[^4]: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
+[^1]: <https://w3c.github.io/aria/#tab>
+[^2]: <https://w3c.github.io/aria/#tablist>
+[^3]: <https://w3c.github.io/aria/#tabpanel>

@@ -28,6 +28,4 @@
 - Provide an accessible name for a grid, which can be done with the `aria-label`
   or `aria-labelledby` attribute[^1].
 
-[^1]: https://w3c.github.io/aria/#grid
-
-[^2]: https://aria-at.w3.org/report/163680
+[^1]: <https://w3c.github.io/aria/#grid>

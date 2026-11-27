@@ -5,4 +5,4 @@
 - Use `aria-details` or `aria-description` to associate the suggestion with
   related information such as comments, authoring info, and time stamps[^1].
 
-[^1]: https://w3c.github.io/aria/#suggestion
+[^1]: <https://w3c.github.io/aria/#suggestion>

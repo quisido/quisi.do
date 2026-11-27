@@ -8,4 +8,4 @@ respect to synthesized speech. More specifically, screen readers and other tools
 which provide text-to-speech presentation of content prefer full punctuation
 verbosity to ensure common symbols (e.g. `-`) are spoken[^1].
 
-[^1]: https://w3c.github.io/aria/#code
+[^1]: <https://w3c.github.io/aria/#code>

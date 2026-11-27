@@ -12,4 +12,4 @@
   - Four or more ASCII digits, at least one of which is not U+0030 DIGIT ZERO (0): 0001
   - Duration: 4h 18m 3s
 
-[^1]: https://w3c.github.io/aria/#time
+[^1]: <https://w3c.github.io/aria/#time>

@@ -16,5 +16,5 @@ as a whole, combine to create a form when no other named landmark is appropriate
 Use a Search component instead of a form when the form is used for search
 functionality[^2].
 
-[^1]: https://w3c.github.io/aria/#form
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/form.html
+[^1]: <https://w3c.github.io/aria/#form>
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/form.html>

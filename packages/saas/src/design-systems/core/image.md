@@ -7,4 +7,4 @@ files that when viewed together give the impression of a single image. An image
 represents a single graphic within a document, whether or not it is formed by a
 collection of drawing objects[^1].
 
-[^1]: https://w3c.github.io/aria/#image
+[^1]: <https://w3c.github.io/aria/#image>

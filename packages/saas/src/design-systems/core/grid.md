@@ -43,6 +43,4 @@ elements that are not editable, such as a collection of link elements
 representing dates in a date picker, it is not necessary for the author to
 specify a value for `aria-readonly`[^1].
 
-[^1]: https://w3c.github.io/aria/#grid
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/grid/
-[^3]: https://www.w3.org/WAI/ARIA/apg/practices/grid-and-table-properties/
+[^1]: <https://w3c.github.io/aria/#grid>

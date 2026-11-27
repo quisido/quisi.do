@@ -3,4 +3,4 @@
 - The widget defaults to a horizontal orientation and a range from 0 through
   100 when no orientation or bounds are provided[^1].
 
-[^1]: https://w3c.github.io/aria/#separator
+[^1]: <https://w3c.github.io/aria/#separator>

@@ -7,4 +7,4 @@
 - Timer updates do not interrupt the user; the role's implicit `aria-live`
   value is `off`[^1].
 
-[^1]: https://w3c.github.io/aria/#timer
+[^1]: <https://w3c.github.io/aria/#timer>

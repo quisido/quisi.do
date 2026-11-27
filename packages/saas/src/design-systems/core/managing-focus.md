@@ -60,4 +60,4 @@ More information on managing focus can be found in the
 [Developing a Keyboard Interface](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/)
 section of the WAI-ARIA Authoring Practices.
 
-[^1]: https://w3c.github.io/aria/#managingfocus
+[^1]: <https://w3c.github.io/aria/#managingfocus>

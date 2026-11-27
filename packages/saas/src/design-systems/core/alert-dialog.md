@@ -22,5 +22,5 @@ confirmation prompts and error message confirmations[^2].
 
 See related [alert](./alert.md) and [dialog](./dialog.md).
 
-[^1]: https://w3c.github.io/aria/#alertdialog
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
+[^1]: <https://w3c.github.io/aria/#alertdialog>
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/>

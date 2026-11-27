@@ -9,4 +9,4 @@ arrival of new items in the log and the reading order. The log contains a
 meaningful sequence and new information is added only to the end of the log, not
 at arbitrary points[^1].
 
-[^1]: https://w3c.github.io/aria/#log
+[^1]: <https://w3c.github.io/aria/#log>

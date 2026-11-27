@@ -9,7 +9,3 @@ or the display thereof, use [grid](./grid.md) or [tree grid](./tree-grid.md)
 instead.
 
 See related [grid](./grid.md).
-
-[^1]: https://w3c.github.io/aria/#table
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/table/
-[^3]: https://www.w3.org/WAI/ARIA/apg/practices/grid-and-table-properties/

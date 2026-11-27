@@ -138,5 +138,5 @@ collapsed state[^2].
 Selection follows focus in the listbox; the listbox allows only one suggested
 value to be selected at a time for the combobox value[^2].
 
-[^1]: https://w3c.github.io/aria/#combobox
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
+[^1]: <https://w3c.github.io/aria/#combobox>
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/combobox/>

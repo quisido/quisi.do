@@ -8,4 +8,4 @@
   content through `aria-details` without making the note itself
   interactive[^1].
 
-[^1]: https://w3c.github.io/aria/#note
+[^1]: <https://w3c.github.io/aria/#note>

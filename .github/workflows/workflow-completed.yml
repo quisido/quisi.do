@@ -147,8 +147,11 @@ jobs:
           upload: false
 
       - name: Get error logs
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: >-
-          gh run view ${{ github.run_id }} --log-failed >
+          gh run view ${{ github.event.workflow_run.id }} --log-failed >
           failed-steps.txt;
 
       - name: Execute
@@ -162,12 +165,12 @@ jobs:
             Dependabot opened pull request
             #${{ github.event.workflow_run.pull_requests[0].number }}, and it
             failed this repository's continuous integration workflow (run
-            #${{ github.run_id }}).
+            #${{ github.event.workflow_run.id }}).
 
-            The pull request branch is checked out locally. Failed workflow
-            steps (`gh run view ${{ github.run_id }} --log-failed`) have been
-            saved to the @failed-steps.txt file. You may search these logs with
-            `rg --context=# --max-count=# "PATTERN" failed-steps.txt`.
+            The pull request branch is checked out locally. Failed steps
+            (`gh run view ${{ github.event.workflow_run.id }} --log-failed`)
+            have been saved to the @failed-steps.txt file. You may search these
+            logs with `rg --context=# --max-count=# "PATTERN" failed-steps.txt`.
 
             ### Tasks
 

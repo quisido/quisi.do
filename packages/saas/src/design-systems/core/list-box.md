@@ -9,5 +9,4 @@ options[^1].
 
 See related [combobox](./combobox.md) and [list](./list.md).
 
-[^1]: https://w3c.github.io/aria/#listbox
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
+[^1]: <https://w3c.github.io/aria/#listbox>

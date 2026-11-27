@@ -8,4 +8,4 @@ not focusable. For example, a static separator can be used to help visually
 divide two groups of menu items in a menu or to provide a horizontal rule
 between two sections of a page[^1].
 
-[^1]: https://w3c.github.io/aria/#separator
+[^1]: <https://w3c.github.io/aria/#separator>

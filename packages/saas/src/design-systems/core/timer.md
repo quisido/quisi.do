@@ -11,4 +11,4 @@ parsable[^1].
 Update the text contents at fixed intervals, except when the timer is paused or
 reaches an end-point[^1].
 
-[^1]: https://w3c.github.io/aria/#timer
+[^1]: <https://w3c.github.io/aria/#timer>

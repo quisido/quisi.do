@@ -10,5 +10,4 @@ screen reader would say something like "Mute toggle button pressed". If the
 design calls for the button label to change from "Mute" to "Unmute," do not use
 a toggle button or the `aria-pressed` attribute.
 
-[^1]: https://w3c.github.io/aria/#togglebutton
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/button/
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/button/>

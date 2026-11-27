@@ -5,12 +5,6 @@
 - Pointer activation and `Space` toggle the switch, and the switch participates
   in the page `Tab` sequence[^2].
 
-[^1]: https://w3c.github.io/aria/#switch
+[^1]: <https://w3c.github.io/aria/#switch>
 
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/switch/
-
-[^3]: https://aria-at.w3.org/report/163660
-
-[^4]: https://aria-at.w3.org/report/163661
-
-[^5]: https://aria-at.w3.org/report/163677
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/switch/>

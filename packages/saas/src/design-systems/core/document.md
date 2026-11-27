@@ -13,4 +13,4 @@ When a screen reader user presses the Tab key and places focus on the document,
 the user will be able to read the text with the screen reader's reading
 cursor[^1].
 
-[^1]: https://w3c.github.io/aria/#document
+[^1]: <https://w3c.github.io/aria/#document>

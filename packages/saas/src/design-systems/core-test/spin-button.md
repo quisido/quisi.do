@@ -13,5 +13,4 @@
 - Set the `aria-valuemin` attribute when there is a minimum value, and the
   `aria-valuemax` attribute when there is a maximum value[^1].
 
-[^1]: https://w3c.github.io/aria/#spinbutton
-[^2]: https://aria-at.w3.org/report/163676
+[^1]: <https://w3c.github.io/aria/#spinbutton>

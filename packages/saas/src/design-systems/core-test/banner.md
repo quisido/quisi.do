@@ -2,4 +2,4 @@
 - A page has no more than one banner for each containing `document` or
   `application`[^1].
 
-[^1]: https://w3c.github.io/aria/#banner
+[^1]: <https://w3c.github.io/aria/#banner>

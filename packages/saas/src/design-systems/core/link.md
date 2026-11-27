@@ -8,5 +8,4 @@ button instead[^1].
 
 See related [button](./button.md).
 
-[^1]: https://w3c.github.io/aria/#link
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/link/
+[^1]: <https://w3c.github.io/aria/#link>

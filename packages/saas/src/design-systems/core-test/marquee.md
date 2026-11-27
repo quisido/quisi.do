@@ -3,4 +3,4 @@
 - A marquee does not interrupt the user when its content changes; its implicit
   `aria-live` value is `off`[^1].
 
-[^1]: https://w3c.github.io/aria/#marquee
+[^1]: <https://w3c.github.io/aria/#marquee>

@@ -5,12 +5,6 @@
 - Running a click handler does not remove the link's native navigation
   behavior[^1].
 
-[^1]: https://w3c.github.io/aria/#link
+[^1]: <https://w3c.github.io/aria/#link>
 
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/link/
-
-[^3]: https://aria-at.w3.org/report/163633
-
-[^4]: https://aria-at.w3.org/report/163634
-
-[^5]: https://aria-at.w3.org/report/163672
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/link/>

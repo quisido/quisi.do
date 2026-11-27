@@ -12,5 +12,4 @@ viewing area controlled by the scrollbar. It is typically possible to add to or
 subtract from the current value by using directional keys such as arrow
 keys[^1].
 
-[^1]: https://w3c.github.io/aria/#scrollbar
-[^2]: https://www.w3.org/WAI/ARIA/apg/practices/range-related-properties/
+[^1]: <https://w3c.github.io/aria/#scrollbar>

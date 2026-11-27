@@ -12,5 +12,4 @@ in a fashion consistent with its on-screen appearance[^1].
 
 See related [checkbox](./checkbox.md).
 
-[^1]: https://w3c.github.io/aria/#switch
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/switch/
+[^1]: <https://w3c.github.io/aria/#switch>

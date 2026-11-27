@@ -27,4 +27,4 @@ inside an application is accessible:
   `aria-activedescendant` to reference the element containing the focused
   content.
 
-[^1]: https://w3c.github.io/aria/#application
+[^1]: <https://w3c.github.io/aria/#application>

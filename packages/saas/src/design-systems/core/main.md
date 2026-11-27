@@ -16,5 +16,4 @@ multiple main elements as DOM descendants, assuming each of those is associated
 with different documents, either by a DOM nesting (e.g. document within
 document) or by use of the `aria-owns` attribute.
 
-[^1]: https://w3c.github.io/aria/#main
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/main.html
+[^1]: <https://w3c.github.io/aria/#main>

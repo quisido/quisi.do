@@ -8,4 +8,4 @@ Status is a form of live region. If another part of the page controls what
 appears in the status, make the relationship explicit with the `aria-controls`
 attribute[^1].
 
-[^1]: https://w3c.github.io/aria/#status
+[^1]: <https://w3c.github.io/aria/#status>

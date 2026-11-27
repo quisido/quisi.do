@@ -14,6 +14,4 @@ the case of large ranges) as opposed to distinct options. For example, a spin
 button representing a range from 1 to 1,000,000 would provide much better
 performance than a select widget representing the same values[^1].
 
-[^1]: https://w3c.github.io/aria/#spinbutton
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/
-[^3]: https://www.w3.org/WAI/ARIA/apg/practices/range-related-properties/
+[^1]: <https://w3c.github.io/aria/#spinbutton>

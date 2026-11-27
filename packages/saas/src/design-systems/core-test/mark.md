@@ -5,4 +5,4 @@
 - Marked content is not made interactive or focusable merely because it is
   highlighted[^1].
 
-[^1]: https://w3c.github.io/aria/#mark
+[^1]: <https://w3c.github.io/aria/#mark>

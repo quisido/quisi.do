@@ -7,4 +7,4 @@
 - An accessible description remains programmatically associated when
   provided[^1].
 
-[^1]: https://w3c.github.io/aria/#code
+[^1]: <https://w3c.github.io/aria/#code>

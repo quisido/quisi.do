@@ -41,6 +41,7 @@ sync, and multiplayer). Replayability is the load-bearing property:
 Everything below is downstream of that sentence.
 
 ### Non-goals (this spec)
+
 - No Durable Object / concrete server implementation. The engine exposes the
   *ports* a server needs; the backend is chosen per project later.
 - No form-element input (input/button DOM events). Canvas input only: touch,
@@ -581,6 +582,7 @@ Each becomes its own plan → review → build increment (human- or agent-execut
 10. Dirty-rectangle renderer (separate spec).
 
 ### Constants to pin empirically
+
 `TRUST_WINDOW`, `ADJUST_WINDOW` (= rollback depth = `snapshot` floor horizon;
 must satisfy `estimatedPing < ADJUST_WINDOW`), `CATCHUP_WINDOW` (≥ `ADJUST_WINDOW`;
 = `log` retention horizon), `BOOT_WINDOW` (≥ `CATCHUP_WINDOW`); `MS_PER_TICK = 1`.

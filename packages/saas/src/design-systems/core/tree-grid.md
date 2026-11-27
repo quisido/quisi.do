@@ -15,5 +15,4 @@ the grid cell. However, if a tree grid presents a collection of elements that do
 not support `aria-readonly`, such as a collection of links, it is not necessary
 for the author to specify a value for `aria-readonly`[^1].
 
-[^1]: https://w3c.github.io/aria/#treegrid
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/treegrid/
+[^1]: <https://w3c.github.io/aria/#treegrid>

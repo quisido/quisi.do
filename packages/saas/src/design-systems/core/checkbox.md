@@ -42,6 +42,5 @@ a single action[^2]:
 When the checkbox has focus, pressing the Space key changes the state of the
 checkbox[^2].
 
-[^1]: https://w3c.github.io/aria/#checkbox
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/
-[^3]: https://aria-at.w3.org/report/163678
+[^1]: <https://w3c.github.io/aria/#checkbox>
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/>

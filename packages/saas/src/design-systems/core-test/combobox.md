@@ -139,6 +139,6 @@
   - Horizontal key navigation may wrap from one row to another.
   - Vertical arrow key navigation does not wrap from one column to another.
 
-[^1]: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
+[^1]: <https://www.w3.org/WAI/ARIA/apg/patterns/combobox/>
 
-[^2]: https://w3c.github.io/aria/#combobox
+[^2]: <https://w3c.github.io/aria/#combobox>

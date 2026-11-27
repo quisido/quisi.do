@@ -4,6 +4,6 @@
   focus order[^2].
 - Multiple search landmarks can be distinguished by accessible name[^2].
 
-[^1]: https://w3c.github.io/aria/#search
+[^1]: <https://w3c.github.io/aria/#search>
 
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/search.html
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/search.html>

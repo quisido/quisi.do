@@ -11,6 +11,6 @@
 - A disabled separator widget exposes its disabled state, leaves the page
   `Tab` sequence, and does not change value[^2].
 
-[^1]: https://w3c.github.io/aria/#separator
+[^1]: <https://w3c.github.io/aria/#separator>
 
-[^2]: https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
+[^2]: <https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/>

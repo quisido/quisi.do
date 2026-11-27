@@ -5,4 +5,4 @@
 - When the caption contains the description, use `aria-details`[^1].
 - It should support `aria-label` and `aria-labelledby`[^1].
 
-[^1]: https://w3c.github.io/aria/#figure
+[^1]: <https://w3c.github.io/aria/#figure>
