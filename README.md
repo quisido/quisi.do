@@ -83,3 +83,5 @@ the compatibility package supplies `tsc6`, so it does not replace TypeScript 7's
 - `npx --workspace=packages/<PATH> eslint . --cache --cache-location ./.cache/`
   lints a specific package.
 - `npx --workspace=packages/<PATH> vitest run` unit tests a specific package.
+- `npx codacy findings gh quisido quisi.do` shows Codacy's security findings.
+- `npx codacy issues gh quisido quisi.do` shows Codacy issues.
