@@ -8,6 +8,7 @@ npx eslint . \
 
 npx markdownlint \
   --dot \
+  --ignore "**/node_modules/**" \
   --ignore-path ".gitignore" \
   "**/*.md";
 

@@ -23,9 +23,9 @@ import { TYPESCRIPT_IMPORT_RESOLVER } from "./typescript-import-resolver.js";
 import { STRICT_TYPE_CHECKED_RULES_CONFIG } from "./strict-type-checked-rules-config.js";
 import { NO_UNSAFE_TYPESCRIPT_RULES_CONFIG } from "./no-unsafe-typescript-rules-config.js";
 import { SHARED_TYPESCRIPT_RULES_CONFIG } from "./shared-typescript-rules-config.js";
+import { SHARED_BUILTIN_RULES_CONFIG } from "./shared-builtin-rules-config.js";
 import assert from "#lib/assert.js";
 import type { ReadonlyDeep } from "#lib/readonly-deep.js";
-import { SHARED_BUILTIN_RULES_CONFIG } from "./shared-builtin-rules-config.js";
 
 assert(
   sonarjsPlugin.rules !== undefined,
@@ -112,8 +112,10 @@ export const HUMAN_CONFIG: readonly ConfigObject[] = [
       // Universal rules
       ...SHARED_BUILTIN_RULES_CONFIG,
 
-      // Custom rules
-      // Replaced by `jsonc/indent`.
+      /*
+       * Custom rules
+       * Replaced by `jsonc/indent`.
+       */
       "@stylistic/indent": "off",
       "jsonc/comma-dangle": ["error", "always-multiline"],
       "jsonc/indent": ["error", 2],
