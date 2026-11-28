@@ -41,3 +41,4 @@ runs:
         path: |
           .tests/
           packages/*/.tests/
+          packages/*/coverage/

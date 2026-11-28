@@ -14,7 +14,7 @@ runs:
       uses: actions/download-artifact@v7
       with:
         name: test
-        path: packages
+        path: .
 
     - name: Upload
       if: ${{ !cancelled() }}

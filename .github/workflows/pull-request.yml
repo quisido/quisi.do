@@ -192,6 +192,7 @@ jobs:
     needs: test
     runs-on: ubuntu-26.04
     permissions:
+      code-quality: write
       contents: read # git checkout
     steps:
       - name: Checkout
@@ -204,7 +205,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: test
-          path: packages
+          path: .
       - name: Upload
         uses: actions/upload-code-coverage@v1
         with:

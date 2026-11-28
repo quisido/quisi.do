@@ -175,6 +175,7 @@ jobs:
     needs: test
     runs-on: ubuntu-26.04
     permissions:
+      code-quality: write
       contents: read # git checkout
     steps:
       - name: Checkout
@@ -187,11 +188,11 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: test
-          path: packages
+          path: .
       - name: Upload
         uses: actions/upload-code-coverage@v1
         with:
-          file: ${{ matrix.file }}
+          file: ${{ matrix.workspace }}/${{ matrix.file }}
           language: ${{ matrix.language }}
           label: ${{ matrix.workspace }}
     strategy:
@@ -199,7 +200,7 @@ jobs:
         include:
           - file: .tests/vitest-coverage/cobertura.xml
             language: TypeScript
-            workspace: ""
+            workspace: .
           - file: .tests/vitest-coverage/cobertura.xml
             language: TypeScript
             workspace: packages/saas

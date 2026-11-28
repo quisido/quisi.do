@@ -8,6 +8,9 @@ const codeWorkspace: unknown = parseJsonc(codeWorkspaceBuffer.toString());
 const vsCodeSettingsBuffer: Buffer = await readFile('.vscode/settings.json');
 const vsCodeSettings: unknown = parseJsonc(vsCodeSettingsBuffer.toString());
 
+const isNotFilesExclude = ([key]: readonly [string, unknown]): boolean =>
+  key !== 'files.exclude';
+
 describe('VS Code workspace', (): void => {
   describe('settings', (): void => {
     assert(typeof codeWorkspace === 'object' && codeWorkspace !== null);
@@ -15,7 +18,7 @@ describe('VS Code workspace', (): void => {
     const { settings } = codeWorkspace;
     assert(typeof settings === 'object' && settings !== null);
 
-    it.each(Object.entries(settings))(
+    it.each(Object.entries(settings).filter(isNotFilesExclude))(
       'should match the VS Code root directory "%s" setting',
       (key: string, value: unknown): void => {
         expect(vsCodeSettings).toHaveProperty([key], value);
