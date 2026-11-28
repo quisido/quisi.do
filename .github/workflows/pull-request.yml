@@ -164,7 +164,7 @@ jobs:
       - name: Audit
         uses: ./.github/actions/webhint-ci
 
-  # Stage 3: codecov
+  # Stage 3: codecov, github-code-coverage
   codecov:
     name: Codecov
     if: github.event.pull_request.head.repo.full_name == github.repository
@@ -184,3 +184,57 @@ jobs:
         uses: ./.github/actions/codecov
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+  github-code-coverage:
+    name: GitHub Code Coverage
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    environment: continuous-integration
+    needs: test
+    runs-on: ubuntu-26.04
+    permissions:
+      contents: read # git checkout
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+          show-progress: false
+      - name: Download
+        uses: actions/download-artifact@v7
+        with:
+          name: test
+          path: packages
+      - name: Upload
+        uses: actions/upload-code-coverage@v1
+        with:
+          file: ${{ matrix.file }}
+          language: ${{ matrix.language }}
+          label: ${{ matrix.workspace }}
+    strategy:
+      matrix:
+        include:
+          - file: .tests/vitest-coverage/cobertura.xml
+            language: TypeScript
+            workspace: ""
+          - file: .tests/vitest-coverage/cobertura.xml
+            language: TypeScript
+            workspace: packages/saas
+          - file: coverage/cobertura-coverage.xml
+            language: TypeScript
+            workspace: packages/authn
+          - file: .tests/vitest-coverage/cobertura.xml
+            language: TypeScript
+            workspace: packages/fmrs
+          - file: .tests/vitest-coverage/cobertura.xml
+            language: TypeScript
+            workspace: packages/number-format-react
+          - file: .tests/vitest-coverage/cobertura.xml
+            language: TypeScript
+            workspace: packages/quisido
+          - file: .tests/vitest-coverage/cobertura.xml
+            language: TypeScript
+            workspace: packages/use-force-update
+          - file: .tests/vitest-coverage/cobertura.xml
+            language: TypeScript
+            workspace: packages/use-shallow-memo

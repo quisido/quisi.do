@@ -84,11 +84,6 @@
     "**/hintrc.*.json": "jsonc",
   },
   "files.eol": "\n",
-  "files.exclude": {
-    "CLAUDE.md": true,
-    "debug.log": true,
-    "packages/": true,
-  },
   "files.watcherExclude": {
     "**/_site/": true,
     "**/.cache/": true,

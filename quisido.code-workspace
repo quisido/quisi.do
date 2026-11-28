@@ -61,6 +61,9 @@
       "**/config/api-extractor.json": "jsonc",
       "**/hintrc.*.json": "jsonc",
     },
+    "files.exclude": {
+      "packages/": true,
+    },
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
     /**
     * This value is normally `./node_modules/typescript/lib`, but the TypeScript
@@ -90,5 +93,5 @@
     "scss.format.enable": true,
     "terminal.integrated.shellIntegration.enabled": true,
     "yaml.keyOrdering": false,
-  }
+  },
 }

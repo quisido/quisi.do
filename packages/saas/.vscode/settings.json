@@ -6,14 +6,6 @@
   "files.associations": {
     "hintrc.*.json": "jsonc"
   },
-  "files.exclude": {
-    "_site/": true,
-    ".cache/": true,
-    ".tests/": true,
-    "graphify-out/": true,
-    "node_modules/": true,
-    "vitest.config.ts.timestamp-*-*.mjs": true
-  },
   "files.watcherExclude": {
     "_site/": true,
     ".cache/": true,

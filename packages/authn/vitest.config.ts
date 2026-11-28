@@ -27,7 +27,7 @@ const CONFIG: UserConfig = defineConfig({
       ],
       "include": ["**/*.ts"],
       "provider": "istanbul",
-      "reporter": ["html-spa", "text"],
+      "reporter": ["cobertura", "html-spa", "text"],
       "skipFull": true,
       "thresholds": { "100": true },
     },

@@ -1,15 +1,7 @@
 {
   "eslint.options": {
     "cache": true,
-    "cacheLocation": "./.cache/"
-  },
-  "files.exclude": {
-    ".cache/": true,
-    ".tests/": true,
-    ".wrangler/": true,
-    "dist/": true,
-    "node_modules/": true,
-    "vitest.config.ts.timestamp-*-*.mjs": true
+    "cacheLocation": "./.cache/",
   },
   "files.watcherExclude": {
     ".cache/": true,
@@ -17,7 +9,7 @@
     ".wrangler/": true,
     "dist/": true,
     "node_modules/": true,
-    "vitest.config.ts.timestamp-*-*.mjs": true
+    "vitest.config.ts.timestamp-*-*.mjs": true,
   },
   "search.exclude": {
     ".cache/": true,
@@ -25,6 +17,6 @@
     ".wrangler/": true,
     "dist/": true,
     "node_modules/": true,
-    "vitest.config.ts.timestamp-*-*.mjs": true
-  }
+    "vitest.config.ts.timestamp-*-*.mjs": true,
+  },
 }
