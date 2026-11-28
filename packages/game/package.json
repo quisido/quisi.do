@@ -64,7 +64,7 @@
     "@vitest/ui": "^5.1.1",
     "canvas": "^4.0.0-rc3",
     "concurrently": "^10.0.7",
-    "dd-trace": "^6.26.0",
+    "dd-trace": "^6.27.0",
     "dompurify": "^3.5.0",
     "hint": "^7.1.13",
     "jsdom": "^31.0.1",
