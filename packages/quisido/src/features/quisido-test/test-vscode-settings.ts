@@ -1,4 +1,4 @@
-import parseJson from '../../utils/parse-json.js';
+import parseJsonC from '../../utils/parse-jsonc.js';
 import readPackageFile from '../../utils/read-package-file.js';
 import testFilesWatcherExclude from './test-vscode-settings/test-files-watcher-exclude.js';
 import testSearchExclude from './test-vscode-settings/test-search-exclude.js';
@@ -12,7 +12,7 @@ export default async function testVsCodeSettings(): Promise<void> {
     );
   }
 
-  const settings: unknown = parseJson(vsCodeSettings);
+  const settings: unknown = parseJsonC(vsCodeSettings);
   if (typeof settings !== 'object' || settings === null) {
     throw new Error('Expected .vscode/settings.json to contain JSON.');
   }

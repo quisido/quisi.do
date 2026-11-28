@@ -19,7 +19,12 @@ const CONFIG: VitestConfig = await defineVitestConfig({
       ui: false,
     },
     coverage: {
-      enabled: false,
+      thresholds: {
+        branches: 0,
+        functions: 0,
+        lines: 0,
+        statements: 0,
+      },
     },
     env: {
       CLARITY_TAG: 'test-clarity-tag',
